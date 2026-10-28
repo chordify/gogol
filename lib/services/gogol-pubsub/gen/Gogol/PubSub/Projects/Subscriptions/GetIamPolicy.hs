@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Subscriptions.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Subscriptions.GetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.getIamPolicy@ method which the
@@ -50,9 +48,7 @@ type PubSubProjectsSubscriptionsGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "options.requestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "options.requestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -95,33 +91,26 @@ newPubSubProjectsSubscriptionsGetIamPolicy resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSubscriptionsGetIamPolicy
-  where
-  type
-    Rs PubSubProjectsSubscriptionsGetIamPolicy =
-      Policy
+instance Core.GoogleRequest PubSubProjectsSubscriptionsGetIamPolicy where
+  type Rs PubSubProjectsSubscriptionsGetIamPolicy = Policy
   type
     Scopes PubSubProjectsSubscriptionsGetIamPolicy =
       '[CloudPlatform'FullControl, Pubsub'FullControl]
-  requestClient
-    PubSubProjectsSubscriptionsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        optionsRequestedPolicyVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        pubSubService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PubSubProjectsSubscriptionsGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient PubSubProjectsSubscriptionsGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      optionsRequestedPolicyVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      pubSubService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PubSubProjectsSubscriptionsGetIamPolicyResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Memberships.GetMembershipGraph
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Groups.Memberships.GetMembershipGraph
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.memberships.getMembershipGraph@ method which the
 -- 'CloudIdentityGroupsMembershipsGetMembershipGraph' request conforms to.
@@ -85,7 +83,8 @@ newCloudIdentityGroupsMembershipsGetMembershipGraph ::
   CloudIdentityGroupsMembershipsGetMembershipGraph
 newCloudIdentityGroupsMembershipsGetMembershipGraph parent =
   CloudIdentityGroupsMembershipsGetMembershipGraph
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -99,33 +98,30 @@ instance
     CloudIdentityGroupsMembershipsGetMembershipGraph
   where
   type
-    Rs
-      CloudIdentityGroupsMembershipsGetMembershipGraph =
+    Rs CloudIdentityGroupsMembershipsGetMembershipGraph =
       Operation
   type
-    Scopes
-      CloudIdentityGroupsMembershipsGetMembershipGraph =
+    Scopes CloudIdentityGroupsMembershipsGetMembershipGraph =
       '[ CloudIdentity'Groups,
          CloudIdentity'Groups'Readonly,
          CloudPlatform'FullControl
        ]
-  requestClient
-    CloudIdentityGroupsMembershipsGetMembershipGraph {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        query
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudIdentityService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIdentityGroupsMembershipsGetMembershipGraphResource
-            )
-            Core.mempty
+  requestClient CloudIdentityGroupsMembershipsGetMembershipGraph {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      query
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudIdentityService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                CloudIdentityGroupsMembershipsGetMembershipGraphResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networkFirewallPolicies.testIamPermissions@ method which the
 -- 'ComputeNetworkFirewallPoliciesTestIamPermissions' request conforms to.
@@ -59,12 +57,8 @@ type ComputeNetworkFirewallPoliciesTestIamPermissionsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TestPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              TestPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] TestPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] TestPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
@@ -98,51 +92,49 @@ newComputeNetworkFirewallPoliciesTestIamPermissions ::
   -- |  Name or id of the resource for this request. See 'resource'.
   Core.Text ->
   ComputeNetworkFirewallPoliciesTestIamPermissions
-newComputeNetworkFirewallPoliciesTestIamPermissions payload project resource =
-  ComputeNetworkFirewallPoliciesTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeNetworkFirewallPoliciesTestIamPermissions
+  payload
+  project
+  resource =
+    ComputeNetworkFirewallPoliciesTestIamPermissions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeNetworkFirewallPoliciesTestIamPermissions
   where
   type
-    Rs
-      ComputeNetworkFirewallPoliciesTestIamPermissions =
+    Rs ComputeNetworkFirewallPoliciesTestIamPermissions =
       TestPermissionsResponse
   type
-    Scopes
-      ComputeNetworkFirewallPoliciesTestIamPermissions =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient
-    ComputeNetworkFirewallPoliciesTestIamPermissions {..} =
-      go
-        project
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworkFirewallPoliciesTestIamPermissionsResource
-            )
-            Core.mempty
+    Scopes ComputeNetworkFirewallPoliciesTestIamPermissions =
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
+  requestClient ComputeNetworkFirewallPoliciesTestIamPermissions {..} =
+    go
+      project
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ComputeNetworkFirewallPoliciesTestIamPermissionsResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Surveys.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ConsumerSurveys.Surveys.List
 where
 
 import Gogol.ConsumerSurveys.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @consumersurveys.surveys.list@ method which the
 -- 'ConsumerSurveysSurveysList' request conforms to.
@@ -58,11 +56,8 @@ type ConsumerSurveysSurveysListResource =
 --
 -- /See:/ 'newConsumerSurveysSurveysList' smart constructor.
 data ConsumerSurveysSurveysList = ConsumerSurveysSurveysList
-  { -- |
-    maxResults :: (Core.Maybe Core.Word32),
-    -- |
+  { maxResults :: (Core.Maybe Core.Word32),
     startIndex :: (Core.Maybe Core.Word32),
-    -- |
     token :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -77,13 +72,8 @@ newConsumerSurveysSurveysList =
       token = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ConsumerSurveysSurveysList
-  where
-  type
-    Rs ConsumerSurveysSurveysList =
-      SurveysListResponse
+instance Core.GoogleRequest ConsumerSurveysSurveysList where
+  type Rs ConsumerSurveysSurveysList = SurveysListResponse
   type
     Scopes ConsumerSurveysSurveysList =
       '[ Consumersurveys'FullControl,
@@ -100,7 +90,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysListResource
-          )
+          (Core.Proxy :: Core.Proxy ConsumerSurveysSurveysListResource)
           Core.mempty

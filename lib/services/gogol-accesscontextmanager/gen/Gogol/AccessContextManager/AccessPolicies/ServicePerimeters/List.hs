@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.List
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.list@ method which the
 -- 'AccessContextManagerAccessPoliciesServicePerimetersList' request conforms to.
@@ -88,7 +86,8 @@ newAccessContextManagerAccessPoliciesServicePerimetersList ::
   AccessContextManagerAccessPoliciesServicePerimetersList
 newAccessContextManagerAccessPoliciesServicePerimetersList parent =
   AccessContextManagerAccessPoliciesServicePerimetersList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -103,12 +102,10 @@ instance
     AccessContextManagerAccessPoliciesServicePerimetersList
   where
   type
-    Rs
-      AccessContextManagerAccessPoliciesServicePerimetersList =
+    Rs AccessContextManagerAccessPoliciesServicePerimetersList =
       ListServicePerimetersResponse
   type
-    Scopes
-      AccessContextManagerAccessPoliciesServicePerimetersList =
+    Scopes AccessContextManagerAccessPoliciesServicePerimetersList =
       '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesServicePerimetersList {..} =

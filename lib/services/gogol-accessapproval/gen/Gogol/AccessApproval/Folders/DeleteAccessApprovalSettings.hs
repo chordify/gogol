@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the settings associated with a project, folder, or organization. This will have the effect of disabling Access Approval for the project, folder, or organization, but only if all ancestors also have Access Approval disabled. If Access Approval is enabled at a higher level of the hierarchy, then Access Approval will still be enabled at this level as the settings are inherited.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference> for @accessapproval.folders.deleteAccessApprovalSettings@.
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference> for @accessapproval.folders.deleteAccessApprovalSettings@.
 module Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
   ( -- * Resource
     AccessApprovalFoldersDeleteAccessApprovalSettingsResource,
@@ -40,7 +38,7 @@ module Gogol.AccessApproval.Folders.DeleteAccessApprovalSettings
 where
 
 import Gogol.AccessApproval.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accessapproval.folders.deleteAccessApprovalSettings@ method which the
 -- 'AccessApprovalFoldersDeleteAccessApprovalSettings' request conforms to.
@@ -81,7 +79,8 @@ newAccessApprovalFoldersDeleteAccessApprovalSettings ::
   AccessApprovalFoldersDeleteAccessApprovalSettings
 newAccessApprovalFoldersDeleteAccessApprovalSettings name =
   AccessApprovalFoldersDeleteAccessApprovalSettings
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,30 +92,25 @@ instance
   Core.GoogleRequest
     AccessApprovalFoldersDeleteAccessApprovalSettings
   where
+  type Rs AccessApprovalFoldersDeleteAccessApprovalSettings = Empty
   type
-    Rs
-      AccessApprovalFoldersDeleteAccessApprovalSettings =
-      Empty
-  type
-    Scopes
-      AccessApprovalFoldersDeleteAccessApprovalSettings =
+    Scopes AccessApprovalFoldersDeleteAccessApprovalSettings =
       '[CloudPlatform'FullControl]
-  requestClient
-    AccessApprovalFoldersDeleteAccessApprovalSettings {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        accessApprovalService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessApprovalFoldersDeleteAccessApprovalSettingsResource
-            )
-            Core.mempty
+  requestClient AccessApprovalFoldersDeleteAccessApprovalSettings {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      accessApprovalService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AccessApprovalFoldersDeleteAccessApprovalSettingsResource
+          )
+          Core.mempty

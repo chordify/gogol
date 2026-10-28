@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Reject
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Rejec
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.consents.reject@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject' request conforms to.
@@ -84,16 +82,19 @@ newHealthcareProjectsLocationsDatasetsConsentStoresConsentsReject ::
   -- |  Multipart request metadata. See 'payload'.
   RejectConsentRequest ->
   HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject
-newHealthcareProjectsLocationsDatasetsConsentStoresConsentsReject name payload =
-  HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsConsentStoresConsentsReject
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -106,7 +107,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject {..} =
       go

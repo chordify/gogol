@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQueryDataTransfer.Projects.Locations.EnrollDataSources
 where
 
 import Gogol.BigQueryDataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.enrollDataSources@ method which the
 -- 'BigQueryDataTransferProjectsLocationsEnrollDataSources' request conforms to.
@@ -66,7 +64,7 @@ data BigQueryDataTransferProjectsLocationsEnrollDataSources = BigQueryDataTransf
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the project resource in the form: @projects\/{project_id}@
+    -- | Required. The name of the project resource in the form: @projects\/{project_id}@
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: EnrollDataSourcesRequest,
@@ -79,33 +77,34 @@ data BigQueryDataTransferProjectsLocationsEnrollDataSources = BigQueryDataTransf
 
 -- | Creates a value of 'BigQueryDataTransferProjectsLocationsEnrollDataSources' with the minimum fields required to make a request.
 newBigQueryDataTransferProjectsLocationsEnrollDataSources ::
-  -- |  The name of the project resource in the form: @projects\/{project_id}@ See 'name'.
+  -- |  Required. The name of the project resource in the form: @projects\/{project_id}@ See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   EnrollDataSourcesRequest ->
   BigQueryDataTransferProjectsLocationsEnrollDataSources
-newBigQueryDataTransferProjectsLocationsEnrollDataSources name payload =
-  BigQueryDataTransferProjectsLocationsEnrollDataSources
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBigQueryDataTransferProjectsLocationsEnrollDataSources
+  name
+  payload =
+    BigQueryDataTransferProjectsLocationsEnrollDataSources
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BigQueryDataTransferProjectsLocationsEnrollDataSources
   where
   type
-    Rs
-      BigQueryDataTransferProjectsLocationsEnrollDataSources =
+    Rs BigQueryDataTransferProjectsLocationsEnrollDataSources =
       Empty
   type
-    Scopes
-      BigQueryDataTransferProjectsLocationsEnrollDataSources =
+    Scopes BigQueryDataTransferProjectsLocationsEnrollDataSources =
       '[Bigquery'FullControl, CloudPlatform'FullControl]
   requestClient
     BigQueryDataTransferProjectsLocationsEnrollDataSources {..} =

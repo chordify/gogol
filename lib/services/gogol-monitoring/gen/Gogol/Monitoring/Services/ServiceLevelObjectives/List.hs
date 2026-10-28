@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Services.ServiceLevelObjectives.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.services.serviceLevelObjectives.list@ method which the
 -- 'MonitoringServicesServiceLevelObjectivesList' request conforms to.
@@ -56,13 +54,9 @@ type MonitoringServicesServiceLevelObjectivesListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ServicesServiceLevelObjectivesListView
+    Core.:> Core.QueryParam "view" ServicesServiceLevelObjectivesListView
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListServiceLevelObjectivesResponse
+    Core.:> Core.Get '[Core.JSON] ListServiceLevelObjectivesResponse
 
 -- | List the ServiceLevelObjectives for the given Service.
 --
@@ -98,7 +92,8 @@ newMonitoringServicesServiceLevelObjectivesList ::
   MonitoringServicesServiceLevelObjectivesList
 newMonitoringServicesServiceLevelObjectivesList parent =
   MonitoringServicesServiceLevelObjectivesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -118,32 +113,29 @@ instance
     Rs MonitoringServicesServiceLevelObjectivesList =
       ListServiceLevelObjectivesResponse
   type
-    Scopes
-      MonitoringServicesServiceLevelObjectivesList =
+    Scopes MonitoringServicesServiceLevelObjectivesList =
       '[ CloudPlatform'FullControl,
          Monitoring'FullControl,
          Monitoring'Read
        ]
-  requestClient
-    MonitoringServicesServiceLevelObjectivesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringServicesServiceLevelObjectivesListResource
-            )
-            Core.mempty
+  requestClient MonitoringServicesServiceLevelObjectivesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringServicesServiceLevelObjectivesListResource
+          )
+          Core.mempty

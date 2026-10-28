@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.projects.instances.getDiskShrinkConfig@ method which the
@@ -57,9 +55,7 @@ type SqlProjectsInstancesGetDiskShrinkConfigResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SqlInstancesGetDiskShrinkConfigResponse
+    Core.:> Core.Get '[Core.JSON] SqlInstancesGetDiskShrinkConfigResponse
 
 -- | Get Disk Shrink Config for a given instance.
 --
@@ -100,33 +96,28 @@ newSqlProjectsInstancesGetDiskShrinkConfig instance' project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SqlProjectsInstancesGetDiskShrinkConfig
-  where
+instance Core.GoogleRequest SqlProjectsInstancesGetDiskShrinkConfig where
   type
     Rs SqlProjectsInstancesGetDiskShrinkConfig =
       SqlInstancesGetDiskShrinkConfigResponse
   type
     Scopes SqlProjectsInstancesGetDiskShrinkConfig =
       '[CloudPlatform'FullControl, Sqlservice'Admin]
-  requestClient
-    SqlProjectsInstancesGetDiskShrinkConfig {..} =
-      go
-        project
-        instance'
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        sQLAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SqlProjectsInstancesGetDiskShrinkConfigResource
-            )
-            Core.mempty
+  requestClient SqlProjectsInstancesGetDiskShrinkConfig {..} =
+    go
+      project
+      instance'
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      sQLAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SqlProjectsInstancesGetDiskShrinkConfigResource
+          )
+          Core.mempty

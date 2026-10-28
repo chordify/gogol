@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Users.Watch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Users.Watch
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.users.watch@ method which the
 -- 'DirectoryUsersWatch' request conforms to.
@@ -60,32 +58,16 @@ type DirectoryUsersWatchResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "orderBy" UsersWatchOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "projection"
-              UsersWatchProjection
+    Core.:> Core.QueryParam "projection" UsersWatchProjection
     Core.:> Core.QueryParam "query" Core.Text
     Core.:> Core.QueryParam "showDeleted" Core.Text
-    Core.:> Core.QueryParam
-              "sortOrder"
-              UsersWatchSortOrder
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "viewType"
-              UsersWatchViewType
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              Channel
-    Core.:> Core.Post
-              '[Core.JSON]
-              Channel
+    Core.:> Core.QueryParam "sortOrder" UsersWatchSortOrder
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "viewType" UsersWatchViewType
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Channel
+    Core.:> Core.Post '[Core.JSON] Channel
 
 -- | Watches for changes in users list.
 --
@@ -190,7 +172,5 @@ instance Core.GoogleRequest DirectoryUsersWatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryUsersWatchResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryUsersWatchResource)
           Core.mempty

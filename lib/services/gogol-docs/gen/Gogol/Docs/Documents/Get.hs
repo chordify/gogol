@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Docs.Documents.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Docs.Documents.Get
 where
 
 import Gogol.Docs.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @docs.documents.get@ method which the
 -- 'DocsDocumentsGet' request conforms to.
@@ -51,6 +49,7 @@ type DocsDocumentsGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "includeTabsContent" Core.Bool
     Core.:> Core.QueryParam
               "suggestionsViewMode"
               DocumentsGetSuggestionsViewMode
@@ -71,6 +70,8 @@ data DocsDocumentsGet = DocsDocumentsGet
     callback :: (Core.Maybe Core.Text),
     -- | The ID of the document to retrieve.
     documentId :: Core.Text,
+    -- | Whether to populate the Document.tabs field instead of the text content fields like @body@ and @documentStyle@ on Document. - When @True@: Document content populates in the Document.tabs field instead of the text content fields in Document. - When @False@: The content of the document\'s first tab populates the content fields in Document excluding Document.tabs. If a document has only one tab, then that tab is used to populate the document content. Document.tabs will be empty.
+    includeTabsContent :: (Core.Maybe Core.Bool),
     -- | The suggestions view mode to apply to the document. This allows viewing the document with all suggestions inline, accepted or rejected. If one is not specified, DEFAULT/FOR/CURRENT_ACCESS is used.
     suggestionsViewMode :: (Core.Maybe DocumentsGetSuggestionsViewMode),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -91,6 +92,7 @@ newDocsDocumentsGet documentId =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       documentId = documentId,
+      includeTabsContent = Core.Nothing,
       suggestionsViewMode = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -112,6 +114,7 @@ instance Core.GoogleRequest DocsDocumentsGet where
       xgafv
       accessToken
       callback
+      includeTabsContent
       suggestionsViewMode
       uploadType
       uploadProtocol

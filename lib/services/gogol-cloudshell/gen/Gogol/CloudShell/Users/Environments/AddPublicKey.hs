@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudShell.Users.Environments.AddPublicKey
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.CloudShell.Users.Environments.AddPublicKey
 where
 
 import Gogol.CloudShell.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudshell.users.environments.addPublicKey@ method which the
 -- 'CloudShellUsersEnvironmentsAddPublicKey' request conforms to.
 type CloudShellUsersEnvironmentsAddPublicKeyResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "environment"
-              "addPublicKey"
-              Core.Text
+    Core.:> Core.CaptureMode "environment" "addPublicKey" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -98,33 +93,26 @@ newCloudShellUsersEnvironmentsAddPublicKey environment payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudShellUsersEnvironmentsAddPublicKey
-  where
-  type
-    Rs CloudShellUsersEnvironmentsAddPublicKey =
-      Operation
+instance Core.GoogleRequest CloudShellUsersEnvironmentsAddPublicKey where
+  type Rs CloudShellUsersEnvironmentsAddPublicKey = Operation
   type
     Scopes CloudShellUsersEnvironmentsAddPublicKey =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudShellUsersEnvironmentsAddPublicKey {..} =
-      go
-        environment
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudShellService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudShellUsersEnvironmentsAddPublicKeyResource
-            )
-            Core.mempty
+  requestClient CloudShellUsersEnvironmentsAddPublicKey {..} =
+    go
+      environment
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudShellService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudShellUsersEnvironmentsAddPublicKeyResource
+          )
+          Core.mempty

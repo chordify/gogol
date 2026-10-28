@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidDeviceProvisioning.Internal.Sum
@@ -90,6 +88,15 @@ module Gogol.AndroidDeviceProvisioning.Internal.Sum
         ..
       ),
 
+    -- * GetDeviceSimLockStateResponse_SimLockState
+    GetDeviceSimLockStateResponse_SimLockState
+      ( GetDeviceSimLockStateResponse_SimLockState_SIMLOCKSTATEUNSPECIFIED,
+        GetDeviceSimLockStateResponse_SimLockState_Unlocked,
+        GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOPARTNER,
+        GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOOTHERPARTNER,
+        ..
+      ),
+
     -- * PartnerClaim_SectionType
     PartnerClaim_SectionType
       ( PartnerClaim_SectionType_SECTIONTYPEUNSPECIFIED,
@@ -118,6 +125,7 @@ module Gogol.AndroidDeviceProvisioning.Internal.Sum
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS,
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN,
         PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN,
+        PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSDEVICELIMITEXCEEDED,
         ..
       ),
 
@@ -131,7 +139,7 @@ module Gogol.AndroidDeviceProvisioning.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -389,6 +397,42 @@ pattern FindDevicesByOwnerRequest_SectionType_SECTIONTYPEZEROTOUCH = FindDevices
   FindDevicesByOwnerRequest_SectionType
   #-}
 
+newtype GetDeviceSimLockStateResponse_SimLockState = GetDeviceSimLockStateResponse_SimLockState {fromGetDeviceSimLockStateResponse_SimLockState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Invalid code. Shouldn\'t be used.
+pattern GetDeviceSimLockStateResponse_SimLockState_SIMLOCKSTATEUNSPECIFIED :: GetDeviceSimLockStateResponse_SimLockState
+pattern GetDeviceSimLockStateResponse_SimLockState_SIMLOCKSTATEUNSPECIFIED = GetDeviceSimLockStateResponse_SimLockState "SIM_LOCK_STATE_UNSPECIFIED"
+
+-- | Device is not SIM locked.
+pattern GetDeviceSimLockStateResponse_SimLockState_Unlocked :: GetDeviceSimLockStateResponse_SimLockState
+pattern GetDeviceSimLockStateResponse_SimLockState_Unlocked = GetDeviceSimLockStateResponse_SimLockState "UNLOCKED"
+
+-- | Device is SIM locked to the partner querying SIM lock state.
+pattern GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOPARTNER :: GetDeviceSimLockStateResponse_SimLockState
+pattern GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOPARTNER = GetDeviceSimLockStateResponse_SimLockState "LOCKED_TO_PARTNER"
+
+-- | Device is SIM locked to a different partner.
+pattern GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOOTHERPARTNER :: GetDeviceSimLockStateResponse_SimLockState
+pattern GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOOTHERPARTNER = GetDeviceSimLockStateResponse_SimLockState "LOCKED_TO_OTHER_PARTNER"
+
+{-# COMPLETE
+  GetDeviceSimLockStateResponse_SimLockState_SIMLOCKSTATEUNSPECIFIED,
+  GetDeviceSimLockStateResponse_SimLockState_Unlocked,
+  GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOPARTNER,
+  GetDeviceSimLockStateResponse_SimLockState_LOCKEDTOOTHERPARTNER,
+  GetDeviceSimLockStateResponse_SimLockState
+  #-}
+
 -- | Required. The section type of the device\'s provisioning record.
 newtype PartnerClaim_SectionType = PartnerClaim_SectionType {fromPartnerClaim_SectionType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -506,6 +550,10 @@ pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN = PerDevice
 pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN :: PerDeviceStatusInBatch_Status
 pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN = PerDeviceStatusInBatch_Status "SINGLE_DEVICE_STATUS_REVOKED_TOKEN"
 
+-- | Status used to indicate a failure due to a device limit being exceeded
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSDEVICELIMITEXCEEDED :: PerDeviceStatusInBatch_Status
+pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSDEVICELIMITEXCEEDED = PerDeviceStatusInBatch_Status "SINGLE_DEVICE_STATUS_DEVICE_LIMIT_EXCEEDED"
+
 {-# COMPLETE
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSUNSPECIFIED,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSUNKNOWNERROR,
@@ -517,6 +565,7 @@ pattern PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN = PerDevice
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSSECTIONNOTYOURS,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSINVALIDTOKEN,
   PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSREVOKEDTOKEN,
+  PerDeviceStatusInBatch_Status_SINGLEDEVICESTATUSDEVICELIMITEXCEEDED,
   PerDeviceStatusInBatch_Status
   #-}
 

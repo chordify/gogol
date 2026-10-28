@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Indexing.Datasources.Items.Index
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Index
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.index@ method which the
 -- 'CloudSearchIndexingDatasourcesItemsIndex' request conforms to.
@@ -100,29 +98,25 @@ instance
   Core.GoogleRequest
     CloudSearchIndexingDatasourcesItemsIndex
   where
-  type
-    Rs CloudSearchIndexingDatasourcesItemsIndex =
-      Operation
+  type Rs CloudSearchIndexingDatasourcesItemsIndex = Operation
   type
     Scopes CloudSearchIndexingDatasourcesItemsIndex =
       '[CloudSearch'FullControl, CloudSearch'Indexing]
-  requestClient
-    CloudSearchIndexingDatasourcesItemsIndex {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchIndexingDatasourcesItemsIndexResource
-            )
-            Core.mempty
+  requestClient CloudSearchIndexingDatasourcesItemsIndex {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchIndexingDatasourcesItemsIndexResource
+          )
+          Core.mempty

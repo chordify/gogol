@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Docs.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Docs.Internal.Sum
@@ -317,7 +315,7 @@ module Gogol.Docs.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -860,7 +858,7 @@ pattern NestingLevel_BulletAlignment_End = NestingLevel_BulletAlignment "END"
   NestingLevel_BulletAlignment
   #-}
 
--- | The type of glyph used by bullets when paragraphs at this level of nesting are ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to list item\'s order within the list.
+-- | The type of glyph used by bullets when paragraphs at this level of nesting is ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to the list item\'s order within the list.
 newtype NestingLevel_GlyphType = NestingLevel_GlyphType {fromNestingLevel_GlyphType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

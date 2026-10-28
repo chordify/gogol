@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsReseller.Internal.Product
@@ -85,7 +83,7 @@ module Gogol.AppsReseller.Internal.Product
 where
 
 import Gogol.AppsReseller.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | JSON template for address of a customer.
 --
@@ -160,8 +158,7 @@ instance Core.ToJSON Address where
             ("countryCode" Core..=) Core.<$> countryCode,
             Core.Just ("kind" Core..= kind),
             ("locality" Core..=) Core.<$> locality,
-            ("organizationName" Core..=)
-              Core.<$> organizationName,
+            ("organizationName" Core..=) Core.<$> organizationName,
             ("postalCode" Core..=) Core.<$> postalCode,
             ("region" Core..=) Core.<$> region
           ]
@@ -203,9 +200,7 @@ instance Core.FromJSON ChangePlanRequest where
       ( \o ->
           ChangePlanRequest
             Core.<$> (o Core..:? "dealCode")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "subscriptions#changePlanRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "subscriptions#changePlanRequest")
             Core.<*> (o Core..:? "planName")
             Core.<*> (o Core..:? "purchaseOrderId")
             Core.<*> (o Core..:? "seats")
@@ -291,8 +286,7 @@ instance Core.ToJSON Customer where
       ( Core.catMaybes
           [ ("alternateEmail" Core..=) Core.<$> alternateEmail,
             ("customerDomain" Core..=) Core.<$> customerDomain,
-            ("customerDomainVerified" Core..=)
-              Core.<$> customerDomainVerified,
+            ("customerDomainVerified" Core..=) Core.<$> customerDomainVerified,
             ("customerId" Core..=) Core.<$> customerId,
             ("customerType" Core..=) Core.<$> customerType,
             Core.Just ("kind" Core..= kind),
@@ -321,16 +315,12 @@ instance Core.FromJSON PrimaryAdmin where
   parseJSON =
     Core.withObject
       "PrimaryAdmin"
-      ( \o ->
-          PrimaryAdmin Core.<$> (o Core..:? "primaryEmail")
-      )
+      (\o -> PrimaryAdmin Core.<$> (o Core..:? "primaryEmail"))
 
 instance Core.ToJSON PrimaryAdmin where
   toJSON PrimaryAdmin {..} =
     Core.object
-      ( Core.catMaybes
-          [("primaryEmail" Core..=) Core.<$> primaryEmail]
-      )
+      (Core.catMaybes [("primaryEmail" Core..=) Core.<$> primaryEmail])
 
 -- | JSON template for a subscription renewal settings.
 --
@@ -358,9 +348,7 @@ instance Core.FromJSON RenewalSettings where
       "RenewalSettings"
       ( \o ->
           RenewalSettings
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "subscriptions#renewalSettings"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "subscriptions#renewalSettings")
             Core.<*> (o Core..:? "renewalType")
       )
 
@@ -389,14 +377,12 @@ newResellernotifyGetwatchdetailsResponse ::
   ResellernotifyGetwatchdetailsResponse
 newResellernotifyGetwatchdetailsResponse =
   ResellernotifyGetwatchdetailsResponse
-    { serviceAccountEmailAddresses = Core.Nothing,
+    { serviceAccountEmailAddresses =
+        Core.Nothing,
       topicName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ResellernotifyGetwatchdetailsResponse
-  where
+instance Core.FromJSON ResellernotifyGetwatchdetailsResponse where
   parseJSON =
     Core.withObject
       "ResellernotifyGetwatchdetailsResponse"
@@ -406,10 +392,7 @@ instance
             Core.<*> (o Core..:? "topicName")
       )
 
-instance
-  Core.ToJSON
-    ResellernotifyGetwatchdetailsResponse
-  where
+instance Core.ToJSON ResellernotifyGetwatchdetailsResponse where
   toJSON ResellernotifyGetwatchdetailsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -431,23 +414,19 @@ newtype ResellernotifyResource = ResellernotifyResource
 -- | Creates a value of 'ResellernotifyResource' with the minimum fields required to make a request.
 newResellernotifyResource ::
   ResellernotifyResource
-newResellernotifyResource = ResellernotifyResource {topicName = Core.Nothing}
+newResellernotifyResource =
+  ResellernotifyResource {topicName = Core.Nothing}
 
 instance Core.FromJSON ResellernotifyResource where
   parseJSON =
     Core.withObject
       "ResellernotifyResource"
-      ( \o ->
-          ResellernotifyResource
-            Core.<$> (o Core..:? "topicName")
-      )
+      (\o -> ResellernotifyResource Core.<$> (o Core..:? "topicName"))
 
 instance Core.ToJSON ResellernotifyResource where
   toJSON ResellernotifyResource {..} =
     Core.object
-      ( Core.catMaybes
-          [("topicName" Core..=) Core.<$> topicName]
-      )
+      (Core.catMaybes [("topicName" Core..=) Core.<$> topicName])
 
 -- | JSON template for subscription seats.
 --
@@ -492,10 +471,8 @@ instance Core.ToJSON Seats where
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
-            ("licensedNumberOfSeats" Core..=)
-              Core.<$> licensedNumberOfSeats,
-            ("maximumNumberOfSeats" Core..=)
-              Core.<$> maximumNumberOfSeats,
+            ("licensedNumberOfSeats" Core..=) Core.<$> licensedNumberOfSeats,
+            ("maximumNumberOfSeats" Core..=) Core.<$> maximumNumberOfSeats,
             ("numberOfSeats" Core..=) Core.<$> numberOfSeats
           ]
       )
@@ -575,9 +552,7 @@ instance Core.FromJSON Subscription where
       ( \o ->
           Subscription
             Core.<$> (o Core..:? "billingMethod")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "customerDomain")
             Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "dealCode")
@@ -601,8 +576,7 @@ instance Core.ToJSON Subscription where
     Core.object
       ( Core.catMaybes
           [ ("billingMethod" Core..=) Core.<$> billingMethod,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("customerDomain" Core..=) Core.<$> customerDomain,
             ("customerId" Core..=) Core.<$> customerId,
             ("dealCode" Core..=) Core.<$> dealCode,
@@ -616,8 +590,7 @@ instance Core.ToJSON Subscription where
             ("skuName" Core..=) Core.<$> skuName,
             ("status" Core..=) Core.<$> status,
             ("subscriptionId" Core..=) Core.<$> subscriptionId,
-            ("suspensionReasons" Core..=)
-              Core.<$> suspensionReasons,
+            ("suspensionReasons" Core..=) Core.<$> suspensionReasons,
             ("transferInfo" Core..=) Core.<$> transferInfo,
             ("trialSettings" Core..=) Core.<$> trialSettings
           ]
@@ -661,10 +634,8 @@ instance Core.ToJSON Subscription_Plan where
   toJSON Subscription_Plan {..} =
     Core.object
       ( Core.catMaybes
-          [ ("commitmentInterval" Core..=)
-              Core.<$> commitmentInterval,
-            ("isCommitmentPlan" Core..=)
-              Core.<$> isCommitmentPlan,
+          [ ("commitmentInterval" Core..=) Core.<$> commitmentInterval,
+            ("isCommitmentPlan" Core..=) Core.<$> isCommitmentPlan,
             ("planName" Core..=) Core.<$> planName
           ]
       )
@@ -689,34 +660,22 @@ newSubscription_Plan_CommitmentInterval =
       startTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Subscription_Plan_CommitmentInterval
-  where
+instance Core.FromJSON Subscription_Plan_CommitmentInterval where
   parseJSON =
     Core.withObject
       "Subscription_Plan_CommitmentInterval"
       ( \o ->
           Subscription_Plan_CommitmentInterval
-            Core.<$> ( o Core..:? "endTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "startTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "endTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "startTime" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    Subscription_Plan_CommitmentInterval
-  where
+instance Core.ToJSON Subscription_Plan_CommitmentInterval where
   toJSON Subscription_Plan_CommitmentInterval {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endTime" Core..=) Core.. Core.AsText
-              Core.<$> endTime,
-            ("startTime" Core..=) Core.. Core.AsText
-              Core.<$> startTime
+          [ ("endTime" Core..=) Core.. Core.AsText Core.<$> endTime,
+            ("startTime" Core..=) Core.. Core.AsText Core.<$> startTime
           ]
       )
 
@@ -751,7 +710,8 @@ instance Core.FromJSON Subscription_TransferInfo where
           Subscription_TransferInfo
             Core.<$> (o Core..:? "currentLegacySkuId")
             Core.<*> (o Core..:? "minimumTransferableSeats")
-            Core.<*> ( o Core..:? "transferabilityExpirationTime"
+            Core.<*> ( o
+                         Core..:? "transferabilityExpirationTime"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -760,8 +720,7 @@ instance Core.ToJSON Subscription_TransferInfo where
   toJSON Subscription_TransferInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentLegacySkuId" Core..=)
-              Core.<$> currentLegacySkuId,
+          [ ("currentLegacySkuId" Core..=) Core.<$> currentLegacySkuId,
             ("minimumTransferableSeats" Core..=)
               Core.<$> minimumTransferableSeats,
             ("transferabilityExpirationTime" Core..=)
@@ -797,9 +756,7 @@ instance Core.FromJSON Subscription_TrialSettings where
       ( \o ->
           Subscription_TrialSettings
             Core.<$> (o Core..:? "isInTrial")
-            Core.<*> ( o Core..:? "trialEndTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "trialEndTime" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Subscription_TrialSettings where
@@ -807,8 +764,7 @@ instance Core.ToJSON Subscription_TrialSettings where
     Core.object
       ( Core.catMaybes
           [ ("isInTrial" Core..=) Core.<$> isInTrial,
-            ("trialEndTime" Core..=) Core.. Core.AsText
-              Core.<$> trialEndTime
+            ("trialEndTime" Core..=) Core.. Core.AsText Core.<$> trialEndTime
           ]
       )
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Jobs.Executions.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Run.Projects.Locations.Jobs.Executions.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.jobs.executions.get@ method which the
@@ -65,7 +63,7 @@ data RunProjectsLocationsJobsExecutionsGet = RunProjectsLocationsJobsExecutionsG
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The full name of the Execution. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}, where {project} can be project id or number.
+    -- | Required. The full name of the Execution. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}@, where @{project}@ can be project id or number.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +74,7 @@ data RunProjectsLocationsJobsExecutionsGet = RunProjectsLocationsJobsExecutionsG
 
 -- | Creates a value of 'RunProjectsLocationsJobsExecutionsGet' with the minimum fields required to make a request.
 newRunProjectsLocationsJobsExecutionsGet ::
-  -- |  Required. The full name of the Execution. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}, where {project} can be project id or number. See 'name'.
+  -- |  Required. The full name of the Execution. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}@, where @{project}@ can be project id or number. See 'name'.
   Core.Text ->
   RunProjectsLocationsJobsExecutionsGet
 newRunProjectsLocationsJobsExecutionsGet name =
@@ -89,32 +87,27 @@ newRunProjectsLocationsJobsExecutionsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RunProjectsLocationsJobsExecutionsGet
-  where
+instance Core.GoogleRequest RunProjectsLocationsJobsExecutionsGet where
   type
     Rs RunProjectsLocationsJobsExecutionsGet =
       GoogleCloudRunV2Execution
   type
     Scopes RunProjectsLocationsJobsExecutionsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    RunProjectsLocationsJobsExecutionsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        runService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RunProjectsLocationsJobsExecutionsGetResource
-            )
-            Core.mempty
+  requestClient RunProjectsLocationsJobsExecutionsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      runService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RunProjectsLocationsJobsExecutionsGetResource
+          )
+          Core.mempty

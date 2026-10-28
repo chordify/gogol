@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.PlacementGroups.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.PlacementGroups.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.placementGroups.patch@ method which the
 -- 'DFAReportingPlacementGroupsPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingPlacementGroupsPatch = DFAReportingPlacementGroupsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | PlacementGroup ID.
+    -- | Required. Placement ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: PlacementGroup,
@@ -85,7 +83,7 @@ data DFAReportingPlacementGroupsPatch = DFAReportingPlacementGroupsPatch
 
 -- | Creates a value of 'DFAReportingPlacementGroupsPatch' with the minimum fields required to make a request.
 newDFAReportingPlacementGroupsPatch ::
-  -- |  PlacementGroup ID. See 'id'.
+  -- |  Required. Placement ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   PlacementGroup ->
@@ -104,13 +102,8 @@ newDFAReportingPlacementGroupsPatch id payload profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingPlacementGroupsPatch
-  where
-  type
-    Rs DFAReportingPlacementGroupsPatch =
-      PlacementGroup
+instance Core.GoogleRequest DFAReportingPlacementGroupsPatch where
+  type Rs DFAReportingPlacementGroupsPatch = PlacementGroup
   type
     Scopes DFAReportingPlacementGroupsPatch =
       '[Dfatrafficking'FullControl]
@@ -129,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingPlacementGroupsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingPlacementGroupsPatchResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Pause
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.pause@ method which the
@@ -86,29 +84,22 @@ newReplicaPoolUpdaterRollingUpdatesPause project rollingUpdate zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ReplicaPoolUpdaterRollingUpdatesPause
-  where
-  type
-    Rs ReplicaPoolUpdaterRollingUpdatesPause =
-      Operation
+instance Core.GoogleRequest ReplicaPoolUpdaterRollingUpdatesPause where
+  type Rs ReplicaPoolUpdaterRollingUpdatesPause = Operation
   type
     Scopes ReplicaPoolUpdaterRollingUpdatesPause =
       '[CloudPlatform'FullControl, Replicapool'FullControl]
-  requestClient
-    ReplicaPoolUpdaterRollingUpdatesPause {..} =
-      go
-        project
-        zone
-        rollingUpdate
-        (Core.Just Core.AltJSON)
-        replicaPoolUpdaterService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ReplicaPoolUpdaterRollingUpdatesPauseResource
-            )
-            Core.mempty
+  requestClient ReplicaPoolUpdaterRollingUpdatesPause {..} =
+    go
+      project
+      zone
+      rollingUpdate
+      (Core.Just Core.AltJSON)
+      replicaPoolUpdaterService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ReplicaPoolUpdaterRollingUpdatesPauseResource
+          )
+          Core.mempty

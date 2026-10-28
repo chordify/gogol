@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudFunctions.Internal.Sum
@@ -74,6 +72,39 @@ module Gogol.CloudFunctions.Internal.Sum
         Function_State_Deploying,
         Function_State_Deleting,
         Function_State_Unknown,
+        Function_State_Detaching,
+        Function_State_DETACHFAILED,
+        ..
+      ),
+
+    -- * GenerateUploadUrlRequest_Environment
+    GenerateUploadUrlRequest_Environment
+      ( GenerateUploadUrlRequest_Environment_ENVIRONMENTUNSPECIFIED,
+        GenerateUploadUrlRequest_Environment_GEN_1,
+        GenerateUploadUrlRequest_Environment_GEN_2,
+        ..
+      ),
+
+    -- * GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+    GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+      ( GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_ENVIRONMENTUNSPECIFIED,
+        GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_1,
+        GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_2,
+        ..
+      ),
+
+    -- * GoogleCloudFunctionsV2OperationMetadata_OperationType
+    GoogleCloudFunctionsV2OperationMetadata_OperationType
+      ( GoogleCloudFunctionsV2OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_CREATEFUNCTION,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_UPDATEFUNCTION,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_DELETEFUNCTION,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_REDIRECTFUNCTIONUPGRADETRAFFIC,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_ROLLBACKFUNCTIONUPGRADETRAFFIC,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_SETUPFUNCTIONUPGRADECONFIG,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_ABORTFUNCTIONUPGRADE,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_COMMITFUNCTIONUPGRADE,
+        GoogleCloudFunctionsV2OperationMetadata_OperationType_DETACHFUNCTION,
         ..
       ),
 
@@ -104,66 +135,6 @@ module Gogol.CloudFunctions.Internal.Sum
         GoogleCloudFunctionsV2StateMessage_Severity_Error',
         GoogleCloudFunctionsV2StateMessage_Severity_Warning,
         GoogleCloudFunctionsV2StateMessage_Severity_Info,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2alphaStage_Name
-    GoogleCloudFunctionsV2alphaStage_Name
-      ( GoogleCloudFunctionsV2alphaStage_Name_NAMEUNSPECIFIED,
-        GoogleCloudFunctionsV2alphaStage_Name_ARTIFACTREGISTRY,
-        GoogleCloudFunctionsV2alphaStage_Name_Build,
-        GoogleCloudFunctionsV2alphaStage_Name_Service,
-        GoogleCloudFunctionsV2alphaStage_Name_Trigger,
-        GoogleCloudFunctionsV2alphaStage_Name_SERVICEROLLBACK,
-        GoogleCloudFunctionsV2alphaStage_Name_TRIGGERROLLBACK,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2alphaStage_State
-    GoogleCloudFunctionsV2alphaStage_State
-      ( GoogleCloudFunctionsV2alphaStage_State_STATEUNSPECIFIED,
-        GoogleCloudFunctionsV2alphaStage_State_NOTSTARTED,
-        GoogleCloudFunctionsV2alphaStage_State_INPROGRESS,
-        GoogleCloudFunctionsV2alphaStage_State_Complete,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2alphaStateMessage_Severity
-    GoogleCloudFunctionsV2alphaStateMessage_Severity
-      ( GoogleCloudFunctionsV2alphaStateMessage_Severity_SEVERITYUNSPECIFIED,
-        GoogleCloudFunctionsV2alphaStateMessage_Severity_Error',
-        GoogleCloudFunctionsV2alphaStateMessage_Severity_Warning,
-        GoogleCloudFunctionsV2alphaStateMessage_Severity_Info,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2betaStage_Name
-    GoogleCloudFunctionsV2betaStage_Name
-      ( GoogleCloudFunctionsV2betaStage_Name_NAMEUNSPECIFIED,
-        GoogleCloudFunctionsV2betaStage_Name_ARTIFACTREGISTRY,
-        GoogleCloudFunctionsV2betaStage_Name_Build,
-        GoogleCloudFunctionsV2betaStage_Name_Service,
-        GoogleCloudFunctionsV2betaStage_Name_Trigger,
-        GoogleCloudFunctionsV2betaStage_Name_SERVICEROLLBACK,
-        GoogleCloudFunctionsV2betaStage_Name_TRIGGERROLLBACK,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2betaStage_State
-    GoogleCloudFunctionsV2betaStage_State
-      ( GoogleCloudFunctionsV2betaStage_State_STATEUNSPECIFIED,
-        GoogleCloudFunctionsV2betaStage_State_NOTSTARTED,
-        GoogleCloudFunctionsV2betaStage_State_INPROGRESS,
-        GoogleCloudFunctionsV2betaStage_State_Complete,
-        ..
-      ),
-
-    -- * GoogleCloudFunctionsV2betaStateMessage_Severity
-    GoogleCloudFunctionsV2betaStateMessage_Severity
-      ( GoogleCloudFunctionsV2betaStateMessage_Severity_SEVERITYUNSPECIFIED,
-        GoogleCloudFunctionsV2betaStateMessage_Severity_Error',
-        GoogleCloudFunctionsV2betaStateMessage_Severity_Warning,
-        GoogleCloudFunctionsV2betaStateMessage_Severity_Info,
         ..
       ),
 
@@ -220,10 +191,25 @@ module Gogol.CloudFunctions.Internal.Sum
         ServiceConfig_VpcConnectorEgressSettings_ALLTRAFFIC,
         ..
       ),
+
+    -- * UpgradeInfo_UpgradeState
+    UpgradeInfo_UpgradeState
+      ( UpgradeInfo_UpgradeState_UPGRADESTATEUNSPECIFIED,
+        UpgradeInfo_UpgradeState_ELIGIBLEFOR2NDGENUPGRADE,
+        UpgradeInfo_UpgradeState_UPGRADEOPERATIONINPROGRESS,
+        UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGSUCCESSFUL,
+        UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGERROR,
+        UpgradeInfo_UpgradeState_ABORTFUNCTIONUPGRADEERROR,
+        UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICSUCCESSFUL,
+        UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR,
+        UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR,
+        UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR,
+        ..
+      ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -289,7 +275,7 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType
   #-}
 
--- | Optional. Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If @docker_repository@ field is specified, this field will be automatically set as @ARTIFACT_REGISTRY@. If unspecified, it currently defaults to @CONTAINER_REGISTRY@. This field may be overridden by the backend for eligible deployments.
+-- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. Deprecated: Container Registry option will no longer be available after March 2025: https:\/\/cloud.google.com\/artifact-registry\/docs\/transition\/transition-from-gcr Please use Artifact Registry instead, which is the default choice. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
 newtype BuildConfig_DockerRegistry = BuildConfig_DockerRegistry {fromBuildConfig_DockerRegistry :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -422,6 +408,14 @@ pattern Function_State_Deleting = Function_State "DELETING"
 pattern Function_State_Unknown :: Function_State
 pattern Function_State_Unknown = Function_State "UNKNOWN"
 
+-- | Function is being detached.
+pattern Function_State_Detaching :: Function_State
+pattern Function_State_Detaching = Function_State "DETACHING"
+
+-- | Function detach failed and the function is still serving.
+pattern Function_State_DETACHFAILED :: Function_State
+pattern Function_State_DETACHFAILED = Function_State "DETACH_FAILED"
+
 {-# COMPLETE
   Function_State_STATEUNSPECIFIED,
   Function_State_Active,
@@ -429,7 +423,139 @@ pattern Function_State_Unknown = Function_State "UNKNOWN"
   Function_State_Deploying,
   Function_State_Deleting,
   Function_State_Unknown,
+  Function_State_Detaching,
+  Function_State_DETACHFAILED,
   Function_State
+  #-}
+
+-- | The function environment the generated upload url will be used for. The upload url for 2nd Gen functions can also be used for 1st gen functions, but not vice versa. If not specified, 2nd generation-style upload URLs are generated.
+newtype GenerateUploadUrlRequest_Environment = GenerateUploadUrlRequest_Environment {fromGenerateUploadUrlRequest_Environment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified
+pattern GenerateUploadUrlRequest_Environment_ENVIRONMENTUNSPECIFIED :: GenerateUploadUrlRequest_Environment
+pattern GenerateUploadUrlRequest_Environment_ENVIRONMENTUNSPECIFIED = GenerateUploadUrlRequest_Environment "ENVIRONMENT_UNSPECIFIED"
+
+-- | Gen 1
+pattern GenerateUploadUrlRequest_Environment_GEN_1 :: GenerateUploadUrlRequest_Environment
+pattern GenerateUploadUrlRequest_Environment_GEN_1 = GenerateUploadUrlRequest_Environment "GEN_1"
+
+-- | Gen 2
+pattern GenerateUploadUrlRequest_Environment_GEN_2 :: GenerateUploadUrlRequest_Environment
+pattern GenerateUploadUrlRequest_Environment_GEN_2 = GenerateUploadUrlRequest_Environment "GEN_2"
+
+{-# COMPLETE
+  GenerateUploadUrlRequest_Environment_ENVIRONMENTUNSPECIFIED,
+  GenerateUploadUrlRequest_Environment_GEN_1,
+  GenerateUploadUrlRequest_Environment_GEN_2,
+  GenerateUploadUrlRequest_Environment
+  #-}
+
+newtype GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem = GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem {fromGoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_ENVIRONMENTUNSPECIFIED :: GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_ENVIRONMENTUNSPECIFIED = GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem "ENVIRONMENT_UNSPECIFIED"
+
+-- | Gen 1
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_1 :: GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_1 = GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem "GEN_1"
+
+-- | Gen 2
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_2 :: GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+pattern GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_2 = GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem "GEN_2"
+
+{-# COMPLETE
+  GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_ENVIRONMENTUNSPECIFIED,
+  GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_1,
+  GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem_GEN_2,
+  GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+  #-}
+
+-- | The operation type.
+newtype GoogleCloudFunctionsV2OperationMetadata_OperationType = GoogleCloudFunctionsV2OperationMetadata_OperationType {fromGoogleCloudFunctionsV2OperationMetadata_OperationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED = GoogleCloudFunctionsV2OperationMetadata_OperationType "OPERATIONTYPE_UNSPECIFIED"
+
+-- | CreateFunction
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_CREATEFUNCTION :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_CREATEFUNCTION = GoogleCloudFunctionsV2OperationMetadata_OperationType "CREATE_FUNCTION"
+
+-- | UpdateFunction
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_UPDATEFUNCTION :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_UPDATEFUNCTION = GoogleCloudFunctionsV2OperationMetadata_OperationType "UPDATE_FUNCTION"
+
+-- | DeleteFunction
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_DELETEFUNCTION :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_DELETEFUNCTION = GoogleCloudFunctionsV2OperationMetadata_OperationType "DELETE_FUNCTION"
+
+-- | RedirectFunctionUpgradeTraffic
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_REDIRECTFUNCTIONUPGRADETRAFFIC :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_REDIRECTFUNCTIONUPGRADETRAFFIC = GoogleCloudFunctionsV2OperationMetadata_OperationType "REDIRECT_FUNCTION_UPGRADE_TRAFFIC"
+
+-- | RollbackFunctionUpgradeTraffic
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_ROLLBACKFUNCTIONUPGRADETRAFFIC :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_ROLLBACKFUNCTIONUPGRADETRAFFIC = GoogleCloudFunctionsV2OperationMetadata_OperationType "ROLLBACK_FUNCTION_UPGRADE_TRAFFIC"
+
+-- | SetupFunctionUpgradeConfig
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_SETUPFUNCTIONUPGRADECONFIG :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_SETUPFUNCTIONUPGRADECONFIG = GoogleCloudFunctionsV2OperationMetadata_OperationType "SETUP_FUNCTION_UPGRADE_CONFIG"
+
+-- | AbortFunctionUpgrade
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_ABORTFUNCTIONUPGRADE :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_ABORTFUNCTIONUPGRADE = GoogleCloudFunctionsV2OperationMetadata_OperationType "ABORT_FUNCTION_UPGRADE"
+
+-- | CommitFunctionUpgrade
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_COMMITFUNCTIONUPGRADE :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_COMMITFUNCTIONUPGRADE = GoogleCloudFunctionsV2OperationMetadata_OperationType "COMMIT_FUNCTION_UPGRADE"
+
+-- | DetachFunction
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_DETACHFUNCTION :: GoogleCloudFunctionsV2OperationMetadata_OperationType
+pattern GoogleCloudFunctionsV2OperationMetadata_OperationType_DETACHFUNCTION = GoogleCloudFunctionsV2OperationMetadata_OperationType "DETACH_FUNCTION"
+
+{-# COMPLETE
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_OPERATIONTYPEUNSPECIFIED,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_CREATEFUNCTION,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_UPDATEFUNCTION,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_DELETEFUNCTION,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_REDIRECTFUNCTIONUPGRADETRAFFIC,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_ROLLBACKFUNCTIONUPGRADETRAFFIC,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_SETUPFUNCTIONUPGRADECONFIG,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_ABORTFUNCTIONUPGRADE,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_COMMITFUNCTIONUPGRADE,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType_DETACHFUNCTION,
+  GoogleCloudFunctionsV2OperationMetadata_OperationType
   #-}
 
 -- | Name of the Stage. This will be unique for each Stage.
@@ -449,7 +575,7 @@ newtype GoogleCloudFunctionsV2Stage_Name = GoogleCloudFunctionsV2Stage_Name {fro
 pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED :: GoogleCloudFunctionsV2Stage_Name
 pattern GoogleCloudFunctionsV2Stage_Name_NAMEUNSPECIFIED = GoogleCloudFunctionsV2Stage_Name "NAME_UNSPECIFIED"
 
--- | Artifact Regsitry Stage
+-- | Artifact Registry Stage
 pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY :: GoogleCloudFunctionsV2Stage_Name
 pattern GoogleCloudFunctionsV2Stage_Name_ARTIFACTREGISTRY = GoogleCloudFunctionsV2Stage_Name "ARTIFACT_REGISTRY"
 
@@ -556,258 +682,6 @@ pattern GoogleCloudFunctionsV2StateMessage_Severity_Info = GoogleCloudFunctionsV
   GoogleCloudFunctionsV2StateMessage_Severity_Warning,
   GoogleCloudFunctionsV2StateMessage_Severity_Info,
   GoogleCloudFunctionsV2StateMessage_Severity
-  #-}
-
--- | Name of the Stage. This will be unique for each Stage.
-newtype GoogleCloudFunctionsV2alphaStage_Name = GoogleCloudFunctionsV2alphaStage_Name {fromGoogleCloudFunctionsV2alphaStage_Name :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid name.
-pattern GoogleCloudFunctionsV2alphaStage_Name_NAMEUNSPECIFIED :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_NAMEUNSPECIFIED = GoogleCloudFunctionsV2alphaStage_Name "NAME_UNSPECIFIED"
-
--- | Artifact Regsitry Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_ARTIFACTREGISTRY :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_ARTIFACTREGISTRY = GoogleCloudFunctionsV2alphaStage_Name "ARTIFACT_REGISTRY"
-
--- | Build Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_Build :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_Build = GoogleCloudFunctionsV2alphaStage_Name "BUILD"
-
--- | Service Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_Service :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_Service = GoogleCloudFunctionsV2alphaStage_Name "SERVICE"
-
--- | Trigger Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_Trigger :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_Trigger = GoogleCloudFunctionsV2alphaStage_Name "TRIGGER"
-
--- | Service Rollback Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_SERVICEROLLBACK :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_SERVICEROLLBACK = GoogleCloudFunctionsV2alphaStage_Name "SERVICE_ROLLBACK"
-
--- | Trigger Rollback Stage
-pattern GoogleCloudFunctionsV2alphaStage_Name_TRIGGERROLLBACK :: GoogleCloudFunctionsV2alphaStage_Name
-pattern GoogleCloudFunctionsV2alphaStage_Name_TRIGGERROLLBACK = GoogleCloudFunctionsV2alphaStage_Name "TRIGGER_ROLLBACK"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2alphaStage_Name_NAMEUNSPECIFIED,
-  GoogleCloudFunctionsV2alphaStage_Name_ARTIFACTREGISTRY,
-  GoogleCloudFunctionsV2alphaStage_Name_Build,
-  GoogleCloudFunctionsV2alphaStage_Name_Service,
-  GoogleCloudFunctionsV2alphaStage_Name_Trigger,
-  GoogleCloudFunctionsV2alphaStage_Name_SERVICEROLLBACK,
-  GoogleCloudFunctionsV2alphaStage_Name_TRIGGERROLLBACK,
-  GoogleCloudFunctionsV2alphaStage_Name
-  #-}
-
--- | Current state of the Stage
-newtype GoogleCloudFunctionsV2alphaStage_State = GoogleCloudFunctionsV2alphaStage_State {fromGoogleCloudFunctionsV2alphaStage_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid state.
-pattern GoogleCloudFunctionsV2alphaStage_State_STATEUNSPECIFIED :: GoogleCloudFunctionsV2alphaStage_State
-pattern GoogleCloudFunctionsV2alphaStage_State_STATEUNSPECIFIED = GoogleCloudFunctionsV2alphaStage_State "STATE_UNSPECIFIED"
-
--- | Stage has not started.
-pattern GoogleCloudFunctionsV2alphaStage_State_NOTSTARTED :: GoogleCloudFunctionsV2alphaStage_State
-pattern GoogleCloudFunctionsV2alphaStage_State_NOTSTARTED = GoogleCloudFunctionsV2alphaStage_State "NOT_STARTED"
-
--- | Stage is in progress.
-pattern GoogleCloudFunctionsV2alphaStage_State_INPROGRESS :: GoogleCloudFunctionsV2alphaStage_State
-pattern GoogleCloudFunctionsV2alphaStage_State_INPROGRESS = GoogleCloudFunctionsV2alphaStage_State "IN_PROGRESS"
-
--- | Stage has completed.
-pattern GoogleCloudFunctionsV2alphaStage_State_Complete :: GoogleCloudFunctionsV2alphaStage_State
-pattern GoogleCloudFunctionsV2alphaStage_State_Complete = GoogleCloudFunctionsV2alphaStage_State "COMPLETE"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2alphaStage_State_STATEUNSPECIFIED,
-  GoogleCloudFunctionsV2alphaStage_State_NOTSTARTED,
-  GoogleCloudFunctionsV2alphaStage_State_INPROGRESS,
-  GoogleCloudFunctionsV2alphaStage_State_Complete,
-  GoogleCloudFunctionsV2alphaStage_State
-  #-}
-
--- | Severity of the state message.
-newtype GoogleCloudFunctionsV2alphaStateMessage_Severity = GoogleCloudFunctionsV2alphaStateMessage_Severity {fromGoogleCloudFunctionsV2alphaStateMessage_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid severity.
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_SEVERITYUNSPECIFIED :: GoogleCloudFunctionsV2alphaStateMessage_Severity
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_SEVERITYUNSPECIFIED = GoogleCloudFunctionsV2alphaStateMessage_Severity "SEVERITY_UNSPECIFIED"
-
--- | ERROR-level severity.
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Error' :: GoogleCloudFunctionsV2alphaStateMessage_Severity
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Error' = GoogleCloudFunctionsV2alphaStateMessage_Severity "ERROR"
-
--- | WARNING-level severity.
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Warning :: GoogleCloudFunctionsV2alphaStateMessage_Severity
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Warning = GoogleCloudFunctionsV2alphaStateMessage_Severity "WARNING"
-
--- | INFO-level severity.
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Info :: GoogleCloudFunctionsV2alphaStateMessage_Severity
-pattern GoogleCloudFunctionsV2alphaStateMessage_Severity_Info = GoogleCloudFunctionsV2alphaStateMessage_Severity "INFO"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2alphaStateMessage_Severity_SEVERITYUNSPECIFIED,
-  GoogleCloudFunctionsV2alphaStateMessage_Severity_Error',
-  GoogleCloudFunctionsV2alphaStateMessage_Severity_Warning,
-  GoogleCloudFunctionsV2alphaStateMessage_Severity_Info,
-  GoogleCloudFunctionsV2alphaStateMessage_Severity
-  #-}
-
--- | Name of the Stage. This will be unique for each Stage.
-newtype GoogleCloudFunctionsV2betaStage_Name = GoogleCloudFunctionsV2betaStage_Name {fromGoogleCloudFunctionsV2betaStage_Name :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid name.
-pattern GoogleCloudFunctionsV2betaStage_Name_NAMEUNSPECIFIED :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_NAMEUNSPECIFIED = GoogleCloudFunctionsV2betaStage_Name "NAME_UNSPECIFIED"
-
--- | Artifact Regsitry Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_ARTIFACTREGISTRY :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_ARTIFACTREGISTRY = GoogleCloudFunctionsV2betaStage_Name "ARTIFACT_REGISTRY"
-
--- | Build Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_Build :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_Build = GoogleCloudFunctionsV2betaStage_Name "BUILD"
-
--- | Service Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_Service :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_Service = GoogleCloudFunctionsV2betaStage_Name "SERVICE"
-
--- | Trigger Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_Trigger :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_Trigger = GoogleCloudFunctionsV2betaStage_Name "TRIGGER"
-
--- | Service Rollback Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_SERVICEROLLBACK :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_SERVICEROLLBACK = GoogleCloudFunctionsV2betaStage_Name "SERVICE_ROLLBACK"
-
--- | Trigger Rollback Stage
-pattern GoogleCloudFunctionsV2betaStage_Name_TRIGGERROLLBACK :: GoogleCloudFunctionsV2betaStage_Name
-pattern GoogleCloudFunctionsV2betaStage_Name_TRIGGERROLLBACK = GoogleCloudFunctionsV2betaStage_Name "TRIGGER_ROLLBACK"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2betaStage_Name_NAMEUNSPECIFIED,
-  GoogleCloudFunctionsV2betaStage_Name_ARTIFACTREGISTRY,
-  GoogleCloudFunctionsV2betaStage_Name_Build,
-  GoogleCloudFunctionsV2betaStage_Name_Service,
-  GoogleCloudFunctionsV2betaStage_Name_Trigger,
-  GoogleCloudFunctionsV2betaStage_Name_SERVICEROLLBACK,
-  GoogleCloudFunctionsV2betaStage_Name_TRIGGERROLLBACK,
-  GoogleCloudFunctionsV2betaStage_Name
-  #-}
-
--- | Current state of the Stage
-newtype GoogleCloudFunctionsV2betaStage_State = GoogleCloudFunctionsV2betaStage_State {fromGoogleCloudFunctionsV2betaStage_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid state.
-pattern GoogleCloudFunctionsV2betaStage_State_STATEUNSPECIFIED :: GoogleCloudFunctionsV2betaStage_State
-pattern GoogleCloudFunctionsV2betaStage_State_STATEUNSPECIFIED = GoogleCloudFunctionsV2betaStage_State "STATE_UNSPECIFIED"
-
--- | Stage has not started.
-pattern GoogleCloudFunctionsV2betaStage_State_NOTSTARTED :: GoogleCloudFunctionsV2betaStage_State
-pattern GoogleCloudFunctionsV2betaStage_State_NOTSTARTED = GoogleCloudFunctionsV2betaStage_State "NOT_STARTED"
-
--- | Stage is in progress.
-pattern GoogleCloudFunctionsV2betaStage_State_INPROGRESS :: GoogleCloudFunctionsV2betaStage_State
-pattern GoogleCloudFunctionsV2betaStage_State_INPROGRESS = GoogleCloudFunctionsV2betaStage_State "IN_PROGRESS"
-
--- | Stage has completed.
-pattern GoogleCloudFunctionsV2betaStage_State_Complete :: GoogleCloudFunctionsV2betaStage_State
-pattern GoogleCloudFunctionsV2betaStage_State_Complete = GoogleCloudFunctionsV2betaStage_State "COMPLETE"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2betaStage_State_STATEUNSPECIFIED,
-  GoogleCloudFunctionsV2betaStage_State_NOTSTARTED,
-  GoogleCloudFunctionsV2betaStage_State_INPROGRESS,
-  GoogleCloudFunctionsV2betaStage_State_Complete,
-  GoogleCloudFunctionsV2betaStage_State
-  #-}
-
--- | Severity of the state message.
-newtype GoogleCloudFunctionsV2betaStateMessage_Severity = GoogleCloudFunctionsV2betaStateMessage_Severity {fromGoogleCloudFunctionsV2betaStateMessage_Severity :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Not specified. Invalid severity.
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_SEVERITYUNSPECIFIED :: GoogleCloudFunctionsV2betaStateMessage_Severity
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_SEVERITYUNSPECIFIED = GoogleCloudFunctionsV2betaStateMessage_Severity "SEVERITY_UNSPECIFIED"
-
--- | ERROR-level severity.
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Error' :: GoogleCloudFunctionsV2betaStateMessage_Severity
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Error' = GoogleCloudFunctionsV2betaStateMessage_Severity "ERROR"
-
--- | WARNING-level severity.
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Warning :: GoogleCloudFunctionsV2betaStateMessage_Severity
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Warning = GoogleCloudFunctionsV2betaStateMessage_Severity "WARNING"
-
--- | INFO-level severity.
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Info :: GoogleCloudFunctionsV2betaStateMessage_Severity
-pattern GoogleCloudFunctionsV2betaStateMessage_Severity_Info = GoogleCloudFunctionsV2betaStateMessage_Severity "INFO"
-
-{-# COMPLETE
-  GoogleCloudFunctionsV2betaStateMessage_Severity_SEVERITYUNSPECIFIED,
-  GoogleCloudFunctionsV2betaStateMessage_Severity_Error',
-  GoogleCloudFunctionsV2betaStateMessage_Severity_Warning,
-  GoogleCloudFunctionsV2betaStateMessage_Severity_Info,
-  GoogleCloudFunctionsV2betaStateMessage_Severity
   #-}
 
 -- | Type of operation.
@@ -1030,4 +904,71 @@ pattern ServiceConfig_VpcConnectorEgressSettings_ALLTRAFFIC = ServiceConfig_VpcC
   ServiceConfig_VpcConnectorEgressSettings_PRIVATERANGESONLY,
   ServiceConfig_VpcConnectorEgressSettings_ALLTRAFFIC,
   ServiceConfig_VpcConnectorEgressSettings
+  #-}
+
+-- | UpgradeState of the function
+newtype UpgradeInfo_UpgradeState = UpgradeInfo_UpgradeState {fromUpgradeInfo_UpgradeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified state. Most functions are in this upgrade state.
+pattern UpgradeInfo_UpgradeState_UPGRADESTATEUNSPECIFIED :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_UPGRADESTATEUNSPECIFIED = UpgradeInfo_UpgradeState "UPGRADE_STATE_UNSPECIFIED"
+
+-- | Functions in this state are eligible for 1st Gen -> 2nd Gen upgrade.
+pattern UpgradeInfo_UpgradeState_ELIGIBLEFOR2NDGENUPGRADE :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_ELIGIBLEFOR2NDGENUPGRADE = UpgradeInfo_UpgradeState "ELIGIBLE_FOR_2ND_GEN_UPGRADE"
+
+-- | An upgrade related operation is in progress.
+pattern UpgradeInfo_UpgradeState_UPGRADEOPERATIONINPROGRESS :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_UPGRADEOPERATIONINPROGRESS = UpgradeInfo_UpgradeState "UPGRADE_OPERATION_IN_PROGRESS"
+
+-- | SetupFunctionUpgradeConfig API was successful and a 2nd Gen function has been created based on 1st Gen function instance.
+pattern UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGSUCCESSFUL :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGSUCCESSFUL = UpgradeInfo_UpgradeState "SETUP_FUNCTION_UPGRADE_CONFIG_SUCCESSFUL"
+
+-- | SetupFunctionUpgradeConfig API was un-successful.
+pattern UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGERROR :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGERROR = UpgradeInfo_UpgradeState "SETUP_FUNCTION_UPGRADE_CONFIG_ERROR"
+
+-- | AbortFunctionUpgrade API was un-successful.
+pattern UpgradeInfo_UpgradeState_ABORTFUNCTIONUPGRADEERROR :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_ABORTFUNCTIONUPGRADEERROR = UpgradeInfo_UpgradeState "ABORT_FUNCTION_UPGRADE_ERROR"
+
+-- | RedirectFunctionUpgradeTraffic API was successful and traffic is served by 2nd Gen function stack.
+pattern UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICSUCCESSFUL :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICSUCCESSFUL = UpgradeInfo_UpgradeState "REDIRECT_FUNCTION_UPGRADE_TRAFFIC_SUCCESSFUL"
+
+-- | RedirectFunctionUpgradeTraffic API was un-successful.
+pattern UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR = UpgradeInfo_UpgradeState "REDIRECT_FUNCTION_UPGRADE_TRAFFIC_ERROR"
+
+-- | RollbackFunctionUpgradeTraffic API was un-successful.
+pattern UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR = UpgradeInfo_UpgradeState "ROLLBACK_FUNCTION_UPGRADE_TRAFFIC_ERROR"
+
+-- | CommitFunctionUpgrade API was un-successful.
+pattern UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR :: UpgradeInfo_UpgradeState
+pattern UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR = UpgradeInfo_UpgradeState "COMMIT_FUNCTION_UPGRADE_ERROR"
+
+{-# COMPLETE
+  UpgradeInfo_UpgradeState_UPGRADESTATEUNSPECIFIED,
+  UpgradeInfo_UpgradeState_ELIGIBLEFOR2NDGENUPGRADE,
+  UpgradeInfo_UpgradeState_UPGRADEOPERATIONINPROGRESS,
+  UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGSUCCESSFUL,
+  UpgradeInfo_UpgradeState_SETUPFUNCTIONUPGRADECONFIGERROR,
+  UpgradeInfo_UpgradeState_ABORTFUNCTIONUPGRADEERROR,
+  UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICSUCCESSFUL,
+  UpgradeInfo_UpgradeState_REDIRECTFUNCTIONUPGRADETRAFFICERROR,
+  UpgradeInfo_UpgradeState_ROLLBACKFUNCTIONUPGRADETRAFFICERROR,
+  UpgradeInfo_UpgradeState_COMMITFUNCTIONUPGRADEERROR,
+  UpgradeInfo_UpgradeState
   #-}

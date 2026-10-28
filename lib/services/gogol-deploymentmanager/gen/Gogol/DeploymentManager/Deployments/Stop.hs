@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DeploymentManager.Deployments.Stop
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DeploymentManager.Deployments.Stop
 where
 
 import Gogol.DeploymentManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @deploymentmanager.deployments.stop@ method which the
 -- 'DeploymentManagerDeploymentsStop' request conforms to.
@@ -59,9 +57,7 @@ type DeploymentManagerDeploymentsStopResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DeploymentsStopRequest
+    Core.:> Core.ReqBody '[Core.JSON] DeploymentsStopRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Stops an ongoing operation. This does not roll back any work that has already been completed, but prevents any new work from being started.
@@ -108,10 +104,7 @@ newDeploymentManagerDeploymentsStop deployment payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DeploymentManagerDeploymentsStop
-  where
+instance Core.GoogleRequest DeploymentManagerDeploymentsStop where
   type Rs DeploymentManagerDeploymentsStop = Operation
   type
     Scopes DeploymentManagerDeploymentsStop =
@@ -131,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DeploymentManagerDeploymentsStopResource
-          )
+          (Core.Proxy :: Core.Proxy DeploymentManagerDeploymentsStopResource)
           Core.mempty

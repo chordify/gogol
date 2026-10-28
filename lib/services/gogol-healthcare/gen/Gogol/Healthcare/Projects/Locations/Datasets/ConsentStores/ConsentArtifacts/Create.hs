@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifacts.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.ConsentArtifac
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.consentArtifacts.create@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate' request conforms to.
@@ -85,16 +83,22 @@ newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   ConsentArtifact ->
   HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate
-newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate parent payload =
-  HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken =
+          Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType =
+          Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -107,7 +111,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreate {..} =
       go

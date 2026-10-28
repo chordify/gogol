@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Images.Deleteall
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Images.Deleteall
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.images.deleteall@ method which the
 -- 'AndroidPublisherEditsImagesDeleteall' request conforms to.
@@ -53,18 +51,14 @@ type AndroidPublisherEditsImagesDeleteallResource =
     Core.:> Core.Capture "editId" Core.Text
     Core.:> "listings"
     Core.:> Core.Capture "language" Core.Text
-    Core.:> Core.Capture
-              "imageType"
-              EditsImagesDeleteallImageType
+    Core.:> Core.Capture "imageType" EditsImagesDeleteallImageType
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Delete
-              '[Core.JSON]
-              ImagesDeleteAllResponse
+    Core.:> Core.Delete '[Core.JSON] ImagesDeleteAllResponse
 
 -- | Deletes all images for the specified language and image type. Returns an empty response if no images are found.
 --
@@ -102,48 +96,47 @@ newAndroidPublisherEditsImagesDeleteall ::
   -- |  Package name of the app. See 'packageName'.
   Core.Text ->
   AndroidPublisherEditsImagesDeleteall
-newAndroidPublisherEditsImagesDeleteall editId imageType language packageName =
-  AndroidPublisherEditsImagesDeleteall
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      editId = editId,
-      imageType = imageType,
-      language = language,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidPublisherEditsImagesDeleteall
+  editId
+  imageType
+  language
+  packageName =
     AndroidPublisherEditsImagesDeleteall
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        editId = editId,
+        imageType = imageType,
+        language = language,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest AndroidPublisherEditsImagesDeleteall where
   type
     Rs AndroidPublisherEditsImagesDeleteall =
       ImagesDeleteAllResponse
   type
     Scopes AndroidPublisherEditsImagesDeleteall =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherEditsImagesDeleteall {..} =
-      go
-        packageName
-        editId
-        language
-        imageType
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsImagesDeleteallResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherEditsImagesDeleteall {..} =
+    go
+      packageName
+      editId
+      language
+      imageType
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherEditsImagesDeleteallResource
+          )
+          Core.mempty

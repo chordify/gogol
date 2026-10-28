@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ProfileUserLinks.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ProfileUserLinks.Insert
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profileUserLinks.insert@ method which the
 -- 'AnalyticsManagementProfileUserLinksInsert' request conforms to.
@@ -85,38 +83,38 @@ newAnalyticsManagementProfileUserLinksInsert ::
   -- |  Web Property ID to create the user link for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfileUserLinksInsert
-newAnalyticsManagementProfileUserLinksInsert accountId payload profileId webPropertyId =
-  AnalyticsManagementProfileUserLinksInsert
-    { accountId = accountId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementProfileUserLinksInsert
+  accountId
+  payload
+  profileId
+  webPropertyId =
+    AnalyticsManagementProfileUserLinksInsert
+      { accountId = accountId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementProfileUserLinksInsert
   where
-  type
-    Rs AnalyticsManagementProfileUserLinksInsert =
-      EntityUserLink
+  type Rs AnalyticsManagementProfileUserLinksInsert = EntityUserLink
   type
     Scopes AnalyticsManagementProfileUserLinksInsert =
       '[Analytics'Manage'Users]
-  requestClient
-    AnalyticsManagementProfileUserLinksInsert {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementProfileUserLinksInsertResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementProfileUserLinksInsert {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementProfileUserLinksInsertResource
+          )
+          Core.mempty

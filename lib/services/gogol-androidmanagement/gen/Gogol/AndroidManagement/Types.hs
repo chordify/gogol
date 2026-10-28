@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidManagement.Types
@@ -52,11 +50,17 @@ module Gogol.AndroidManagement.Types
     -- ** AdvancedSecurityOverrides_CommonCriteriaMode
     AdvancedSecurityOverrides_CommonCriteriaMode (..),
 
+    -- ** AdvancedSecurityOverrides_ContentProtectionPolicy
+    AdvancedSecurityOverrides_ContentProtectionPolicy (..),
+
     -- ** AdvancedSecurityOverrides_DeveloperSettings
     AdvancedSecurityOverrides_DeveloperSettings (..),
 
     -- ** AdvancedSecurityOverrides_GooglePlayProtectVerifyApps
     AdvancedSecurityOverrides_GooglePlayProtectVerifyApps (..),
+
+    -- ** AdvancedSecurityOverrides_MtePolicy
+    AdvancedSecurityOverrides_MtePolicy (..),
 
     -- ** AdvancedSecurityOverrides_UntrustedAppsPolicy
     AdvancedSecurityOverrides_UntrustedAppsPolicy (..),
@@ -125,6 +129,9 @@ module Gogol.AndroidManagement.Types
     -- ** ApplicationPolicy_ConnectedWorkAndPersonalApp
     ApplicationPolicy_ConnectedWorkAndPersonalApp (..),
 
+    -- ** ApplicationPolicy_CredentialProviderPolicy
+    ApplicationPolicy_CredentialProviderPolicy (..),
+
     -- ** ApplicationPolicy_DefaultPermissionPolicy
     ApplicationPolicy_DefaultPermissionPolicy (..),
 
@@ -138,6 +145,9 @@ module Gogol.AndroidManagement.Types
     ApplicationPolicy_ManagedConfiguration (..),
     newApplicationPolicy_ManagedConfiguration,
 
+    -- ** ApplicationPolicy_UserControlSettings
+    ApplicationPolicy_UserControlSettings (..),
+
     -- ** ApplicationPolicy_WorkProfileWidgets
     ApplicationPolicy_WorkProfileWidgets (..),
 
@@ -150,6 +160,9 @@ module Gogol.AndroidManagement.Types
 
     -- ** ApplicationReport_State
     ApplicationReport_State (..),
+
+    -- ** ApplicationReport_UserFacingType
+    ApplicationReport_UserFacingType (..),
 
     -- ** ApplicationReportingSettings
     ApplicationReportingSettings (..),
@@ -214,6 +227,9 @@ module Gogol.AndroidManagement.Types
     -- ** CommonCriteriaModeInfo_CommonCriteriaModeStatus
     CommonCriteriaModeInfo_CommonCriteriaModeStatus (..),
 
+    -- ** CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+    CommonCriteriaModeInfo_PolicySignatureVerificationStatus (..),
+
     -- ** ComplianceRule
     ComplianceRule (..),
     newComplianceRule,
@@ -274,6 +290,41 @@ module Gogol.AndroidManagement.Types
     Device_SystemProperties (..),
     newDevice_SystemProperties,
 
+    -- ** DeviceConnectivityManagement
+    DeviceConnectivityManagement (..),
+    newDeviceConnectivityManagement,
+
+    -- ** DeviceConnectivityManagement_ConfigureWifi
+    DeviceConnectivityManagement_ConfigureWifi (..),
+
+    -- ** DeviceConnectivityManagement_TetheringSettings
+    DeviceConnectivityManagement_TetheringSettings (..),
+
+    -- ** DeviceConnectivityManagement_UsbDataAccess
+    DeviceConnectivityManagement_UsbDataAccess (..),
+
+    -- ** DeviceConnectivityManagement_WifiDirectSettings
+    DeviceConnectivityManagement_WifiDirectSettings (..),
+
+    -- ** DeviceRadioState
+    DeviceRadioState (..),
+    newDeviceRadioState,
+
+    -- ** DeviceRadioState_AirplaneModeState
+    DeviceRadioState_AirplaneModeState (..),
+
+    -- ** DeviceRadioState_CellularTwoGState
+    DeviceRadioState_CellularTwoGState (..),
+
+    -- ** DeviceRadioState_MinimumWifiSecurityLevel
+    DeviceRadioState_MinimumWifiSecurityLevel (..),
+
+    -- ** DeviceRadioState_UltraWidebandState
+    DeviceRadioState_UltraWidebandState (..),
+
+    -- ** DeviceRadioState_WifiState
+    DeviceRadioState_WifiState (..),
+
     -- ** DeviceSettings
     DeviceSettings (..),
     newDeviceSettings,
@@ -288,13 +339,25 @@ module Gogol.AndroidManagement.Types
     -- ** Display_State
     Display_State (..),
 
+    -- ** DisplaySettings
+    DisplaySettings (..),
+    newDisplaySettings,
+
     -- ** DnsEvent
     DnsEvent (..),
     newDnsEvent,
 
+    -- ** DpcMigrationInfo
+    DpcMigrationInfo (..),
+    newDpcMigrationInfo,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EnrollmentCompleteEvent
+    EnrollmentCompleteEvent (..),
+    newEnrollmentCompleteEvent,
 
     -- ** EnrollmentToken
     EnrollmentToken (..),
@@ -309,6 +372,15 @@ module Gogol.AndroidManagement.Types
 
     -- ** Enterprise_EnabledNotificationTypesItem
     Enterprise_EnabledNotificationTypesItem (..),
+
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
+
+    -- ** Enterprise_ManagedGooglePlayAccountsEnterpriseType
+    Enterprise_ManagedGooglePlayAccountsEnterpriseType (..),
 
     -- ** ExtensionConfig
     ExtensionConfig (..),
@@ -330,6 +402,21 @@ module Gogol.AndroidManagement.Types
     FreezePeriod (..),
     newFreezePeriod,
 
+    -- ** GenerateEnterpriseUpgradeUrlRequest
+    GenerateEnterpriseUpgradeUrlRequest (..),
+    newGenerateEnterpriseUpgradeUrlRequest,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
+
+    -- ** GoogleAuthenticationSettings
+    GoogleAuthenticationSettings (..),
+    newGoogleAuthenticationSettings,
+
+    -- ** GoogleAuthenticationSettings_GoogleAuthenticationRequired
+    GoogleAuthenticationSettings_GoogleAuthenticationRequired (..),
+
     -- ** HardwareInfo
     HardwareInfo (..),
     newHardwareInfo,
@@ -337,6 +424,19 @@ module Gogol.AndroidManagement.Types
     -- ** HardwareStatus
     HardwareStatus (..),
     newHardwareStatus,
+
+    -- ** InstallConstraint
+    InstallConstraint (..),
+    newInstallConstraint,
+
+    -- ** InstallConstraint_ChargingConstraint
+    InstallConstraint_ChargingConstraint (..),
+
+    -- ** InstallConstraint_DeviceIdleConstraint
+    InstallConstraint_DeviceIdleConstraint (..),
+
+    -- ** InstallConstraint_NetworkTypeConstraint
+    InstallConstraint_NetworkTypeConstraint (..),
 
     -- ** IssueCommandResponse
     IssueCommandResponse (..),
@@ -412,6 +512,10 @@ module Gogol.AndroidManagement.Types
     ListEnterprisesResponse (..),
     newListEnterprisesResponse,
 
+    -- ** ListMigrationTokensResponse
+    ListMigrationTokensResponse (..),
+    newListMigrationTokensResponse,
+
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
@@ -424,6 +528,10 @@ module Gogol.AndroidManagement.Types
     ListWebAppsResponse (..),
     newListWebAppsResponse,
 
+    -- ** Location
+    Location (..),
+    newLocation,
+
     -- ** LogBufferSizeCriticalEvent
     LogBufferSizeCriticalEvent (..),
     newLogBufferSizeCriticalEvent,
@@ -435,6 +543,14 @@ module Gogol.AndroidManagement.Types
     -- ** LoggingStoppedEvent
     LoggingStoppedEvent (..),
     newLoggingStoppedEvent,
+
+    -- ** LostModeLocationEvent
+    LostModeLocationEvent (..),
+    newLostModeLocationEvent,
+
+    -- ** LostModeOutgoingPhoneCallEvent
+    LostModeOutgoingPhoneCallEvent (..),
+    newLostModeOutgoingPhoneCallEvent,
 
     -- ** ManagedConfigurationTemplate
     ManagedConfigurationTemplate (..),
@@ -473,6 +589,13 @@ module Gogol.AndroidManagement.Types
     -- ** MemoryInfo
     MemoryInfo (..),
     newMemoryInfo,
+
+    -- ** MigrationToken
+    MigrationToken (..),
+    newMigrationToken,
+
+    -- ** MigrationToken_ManagementMode
+    MigrationToken_ManagementMode (..),
 
     -- ** NetworkInfo
     NetworkInfo (..),
@@ -591,6 +714,9 @@ module Gogol.AndroidManagement.Types
     -- ** PersonalUsagePolicies_PersonalPlayStoreMode
     PersonalUsagePolicies_PersonalPlayStoreMode (..),
 
+    -- ** PersonalUsagePolicies_PrivateSpacePolicy
+    PersonalUsagePolicies_PrivateSpacePolicy (..),
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -601,11 +727,17 @@ module Gogol.AndroidManagement.Types
     -- ** Policy_AppAutoUpdatePolicy
     Policy_AppAutoUpdatePolicy (..),
 
+    -- ** Policy_AssistContentPolicy
+    Policy_AssistContentPolicy (..),
+
     -- ** Policy_AutoDateAndTimeZone
     Policy_AutoDateAndTimeZone (..),
 
     -- ** Policy_CameraAccess
     Policy_CameraAccess (..),
+
+    -- ** Policy_CredentialProviderPolicyDefault
+    Policy_CredentialProviderPolicyDefault (..),
 
     -- ** Policy_DefaultPermissionPolicy
     Policy_DefaultPermissionPolicy (..),
@@ -632,6 +764,9 @@ module Gogol.AndroidManagement.Types
     -- ** Policy_PreferentialNetworkService
     Policy_PreferentialNetworkService (..),
 
+    -- ** Policy_PrintingPolicy
+    Policy_PrintingPolicy (..),
+
     -- ** Policy_StayOnPluggedModesItem
     Policy_StayOnPluggedModesItem (..),
 
@@ -653,6 +788,16 @@ module Gogol.AndroidManagement.Types
     -- ** PowerManagementEvent_EventType
     PowerManagementEvent_EventType (..),
 
+    -- ** ProvisioningInfo
+    ProvisioningInfo (..),
+    newProvisioningInfo,
+
+    -- ** ProvisioningInfo_ManagementMode
+    ProvisioningInfo_ManagementMode (..),
+
+    -- ** ProvisioningInfo_Ownership
+    ProvisioningInfo_Ownership (..),
+
     -- ** ProxyInfo
     ProxyInfo (..),
     newProxyInfo,
@@ -660,6 +805,20 @@ module Gogol.AndroidManagement.Types
     -- ** RemoteLockEvent
     RemoteLockEvent (..),
     newRemoteLockEvent,
+
+    -- ** ScreenBrightnessSettings
+    ScreenBrightnessSettings (..),
+    newScreenBrightnessSettings,
+
+    -- ** ScreenBrightnessSettings_ScreenBrightnessMode
+    ScreenBrightnessSettings_ScreenBrightnessMode (..),
+
+    -- ** ScreenTimeoutSettings
+    ScreenTimeoutSettings (..),
+    newScreenTimeoutSettings,
+
+    -- ** ScreenTimeoutSettings_ScreenTimeoutMode
+    ScreenTimeoutSettings_ScreenTimeoutMode (..),
 
     -- ** SecurityPosture
     SecurityPosture (..),
@@ -679,6 +838,9 @@ module Gogol.AndroidManagement.Types
     -- ** SigninDetail_AllowPersonalUsage
     SigninDetail_AllowPersonalUsage (..),
 
+    -- ** SigninDetail_DefaultStatus
+    SigninDetail_DefaultStatus (..),
+
     -- ** SignupUrl
     SignupUrl (..),
     newSignupUrl,
@@ -691,6 +853,17 @@ module Gogol.AndroidManagement.Types
     SpecificNonComplianceContext (..),
     newSpecificNonComplianceContext,
 
+    -- ** StartLostModeParams
+    StartLostModeParams (..),
+    newStartLostModeParams,
+
+    -- ** StartLostModeStatus
+    StartLostModeStatus (..),
+    newStartLostModeStatus,
+
+    -- ** StartLostModeStatus_Status
+    StartLostModeStatus_Status (..),
+
     -- ** Status
     Status (..),
     newStatus,
@@ -702,6 +875,24 @@ module Gogol.AndroidManagement.Types
     -- ** StatusReportingSettings
     StatusReportingSettings (..),
     newStatusReportingSettings,
+
+    -- ** StopLostModeParams
+    StopLostModeParams (..),
+    newStopLostModeParams,
+
+    -- ** StopLostModeStatus
+    StopLostModeStatus (..),
+    newStopLostModeStatus,
+
+    -- ** StopLostModeStatus_Status
+    StopLostModeStatus_Status (..),
+
+    -- ** StopLostModeUserAttemptEvent
+    StopLostModeUserAttemptEvent (..),
+    newStopLostModeUserAttemptEvent,
+
+    -- ** StopLostModeUserAttemptEvent_Status
+    StopLostModeUserAttemptEvent_Status (..),
 
     -- ** SystemUpdate
     SystemUpdate (..),
@@ -775,6 +966,28 @@ module Gogol.AndroidManagement.Types
     -- ** WebToken_PermissionsItem
     WebToken_PermissionsItem (..),
 
+    -- ** WifiRoamingPolicy
+    WifiRoamingPolicy (..),
+    newWifiRoamingPolicy,
+
+    -- ** WifiRoamingSetting
+    WifiRoamingSetting (..),
+    newWifiRoamingSetting,
+
+    -- ** WifiRoamingSetting_WifiRoamingMode
+    WifiRoamingSetting_WifiRoamingMode (..),
+
+    -- ** WifiSsid
+    WifiSsid (..),
+    newWifiSsid,
+
+    -- ** WifiSsidPolicy
+    WifiSsidPolicy (..),
+    newWifiSsidPolicy,
+
+    -- ** WifiSsidPolicy_WifiSsidPolicyType
+    WifiSsidPolicy_WifiSsidPolicyType (..),
+
     -- ** WipeAction
     WipeAction (..),
     newWipeAction,
@@ -793,7 +1006,7 @@ where
 
 import Gogol.AndroidManagement.Internal.Product
 import Gogol.AndroidManagement.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Android Management API. This contains the host and root path used as a starting point for constructing service requests.
 androidManagementService :: Core.ServiceConfig
@@ -803,4 +1016,5 @@ androidManagementService =
     "androidmanagement.googleapis.com"
 
 -- | Manage Android devices and apps for your customers
-type Androidmanagement'FullControl = "https://www.googleapis.com/auth/androidmanagement"
+type Androidmanagement'FullControl =
+  "https://www.googleapis.com/auth/androidmanagement"

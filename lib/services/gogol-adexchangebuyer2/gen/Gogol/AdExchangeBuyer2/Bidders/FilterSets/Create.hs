@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Bidders.FilterSets.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.Create
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.create@ method which the
 -- 'AdExchangeBuyer2BiddersFilterSetsCreate' request conforms to.
@@ -100,34 +98,27 @@ newAdExchangeBuyer2BiddersFilterSetsCreate ownerName payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyer2BiddersFilterSetsCreate
-  where
-  type
-    Rs AdExchangeBuyer2BiddersFilterSetsCreate =
-      FilterSet
+instance Core.GoogleRequest AdExchangeBuyer2BiddersFilterSetsCreate where
+  type Rs AdExchangeBuyer2BiddersFilterSetsCreate = FilterSet
   type
     Scopes AdExchangeBuyer2BiddersFilterSetsCreate =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2BiddersFilterSetsCreate {..} =
-      go
-        ownerName
-        xgafv
-        accessToken
-        callback
-        isTransient
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2BiddersFilterSetsCreateResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2BiddersFilterSetsCreate {..} =
+    go
+      ownerName
+      xgafv
+      accessToken
+      callback
+      isTransient
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2BiddersFilterSetsCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the projects associated with a billing account. The current authenticated user must have the @billing.resourceAssociations.list@ IAM permission, which is often given to billing account <https://cloud.google.com/billing/docs/how-to/billing-access viewers>.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.billingAccounts.projects.list@.
 module Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
   ( -- * Resource
     CloudbillingBillingAccountsProjectsListResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.projects.list@ method which the
 -- 'CloudbillingBillingAccountsProjectsList' request conforms to.
@@ -98,10 +96,7 @@ newCloudbillingBillingAccountsProjectsList name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingBillingAccountsProjectsList
-  where
+instance Core.GoogleRequest CloudbillingBillingAccountsProjectsList where
   type
     Rs CloudbillingBillingAccountsProjectsList =
       ListProjectBillingInfoResponse
@@ -111,24 +106,22 @@ instance
          CloudBilling'Readonly,
          CloudPlatform'FullControl
        ]
-  requestClient
-    CloudbillingBillingAccountsProjectsList {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        billingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudbillingBillingAccountsProjectsListResource
-            )
-            Core.mempty
+  requestClient CloudbillingBillingAccountsProjectsList {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      billingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudbillingBillingAccountsProjectsListResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Services.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,29 +37,22 @@ module Gogol.Run.Projects.Locations.Services.TestIamPermissions
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.services.testIamPermissions@ method which the
 -- 'RunProjectsLocationsServicesTestIamPermissions' request conforms to.
 type RunProjectsLocationsServicesTestIamPermissionsResource =
   "v2"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "testIamPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleIamV1TestIamPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleIamV1TestIamPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] GoogleIamV1TestIamPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] GoogleIamV1TestIamPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified Project. There are no permissions required for making this API call.
 --
@@ -93,7 +84,8 @@ newRunProjectsLocationsServicesTestIamPermissions ::
   RunProjectsLocationsServicesTestIamPermissions
 newRunProjectsLocationsServicesTestIamPermissions payload resource =
   RunProjectsLocationsServicesTestIamPermissions
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -107,30 +99,26 @@ instance
     RunProjectsLocationsServicesTestIamPermissions
   where
   type
-    Rs
-      RunProjectsLocationsServicesTestIamPermissions =
+    Rs RunProjectsLocationsServicesTestIamPermissions =
       GoogleIamV1TestIamPermissionsResponse
   type
-    Scopes
-      RunProjectsLocationsServicesTestIamPermissions =
+    Scopes RunProjectsLocationsServicesTestIamPermissions =
       '[CloudPlatform'FullControl]
-  requestClient
-    RunProjectsLocationsServicesTestIamPermissions {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        runService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RunProjectsLocationsServicesTestIamPermissionsResource
-            )
-            Core.mempty
+  requestClient RunProjectsLocationsServicesTestIamPermissions {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      runService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RunProjectsLocationsServicesTestIamPermissionsResource
+          )
+          Core.mempty

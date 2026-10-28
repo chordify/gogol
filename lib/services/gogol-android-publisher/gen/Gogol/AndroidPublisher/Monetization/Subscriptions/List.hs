@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.List
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.list@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsList' request conforms to.
@@ -77,7 +75,7 @@ data AndroidPublisherMonetizationSubscriptionsList = AndroidPublisherMonetizatio
     pageSize :: (Core.Maybe Core.Int32),
     -- | A page token, received from a previous @ListSubscriptions@ call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to @ListSubscriptions@ must match the call that provided the page token.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Whether archived subscriptions should be included in the response. Defaults to false.
+    -- | Deprecated: subscription archiving is not supported.
     showArchived :: (Core.Maybe Core.Bool),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,7 +91,8 @@ newAndroidPublisherMonetizationSubscriptionsList ::
   AndroidPublisherMonetizationSubscriptionsList
 newAndroidPublisherMonetizationSubscriptionsList packageName =
   AndroidPublisherMonetizationSubscriptionsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       packageName = packageName,
@@ -112,28 +111,25 @@ instance
     Rs AndroidPublisherMonetizationSubscriptionsList =
       ListSubscriptionsResponse
   type
-    Scopes
-      AndroidPublisherMonetizationSubscriptionsList =
+    Scopes AndroidPublisherMonetizationSubscriptionsList =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherMonetizationSubscriptionsList {..} =
-      go
-        packageName
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        showArchived
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherMonetizationSubscriptionsListResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherMonetizationSubscriptionsList {..} =
+    go
+      packageName
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      showArchived
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherMonetizationSubscriptionsListResource
+          )
+          Core.mempty

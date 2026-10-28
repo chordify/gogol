@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppState.States.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppState.States.List
 where
 
 import Gogol.AppState.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appstate.states.list@ method which the
 -- 'AppStateStatesList' request conforms to.
@@ -64,13 +62,12 @@ newtype AppStateStatesList = AppStateStatesList
 -- | Creates a value of 'AppStateStatesList' with the minimum fields required to make a request.
 newAppStateStatesList ::
   AppStateStatesList
-newAppStateStatesList = AppStateStatesList {includeData = Core.False}
+newAppStateStatesList =
+  AppStateStatesList {includeData = Core.False}
 
 instance Core.GoogleRequest AppStateStatesList where
   type Rs AppStateStatesList = ListResponse
-  type
-    Scopes AppStateStatesList =
-      '[Appstate'FullControl]
+  type Scopes AppStateStatesList = '[Appstate'FullControl]
   requestClient AppStateStatesList {..} =
     go
       (Core.Just includeData)

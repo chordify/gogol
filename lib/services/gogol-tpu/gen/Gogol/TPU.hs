@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TPU
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -123,6 +121,31 @@ module Gogol.TPU
     TPUProjectsLocationsOperationsList (..),
     newTPUProjectsLocationsOperationsList,
 
+    -- ** tpu.projects.locations.queuedResources.create
+    TPUProjectsLocationsQueuedResourcesCreateResource,
+    TPUProjectsLocationsQueuedResourcesCreate (..),
+    newTPUProjectsLocationsQueuedResourcesCreate,
+
+    -- ** tpu.projects.locations.queuedResources.delete
+    TPUProjectsLocationsQueuedResourcesDeleteResource,
+    TPUProjectsLocationsQueuedResourcesDelete (..),
+    newTPUProjectsLocationsQueuedResourcesDelete,
+
+    -- ** tpu.projects.locations.queuedResources.get
+    TPUProjectsLocationsQueuedResourcesGetResource,
+    TPUProjectsLocationsQueuedResourcesGet (..),
+    newTPUProjectsLocationsQueuedResourcesGet,
+
+    -- ** tpu.projects.locations.queuedResources.list
+    TPUProjectsLocationsQueuedResourcesListResource,
+    TPUProjectsLocationsQueuedResourcesList (..),
+    newTPUProjectsLocationsQueuedResourcesList,
+
+    -- ** tpu.projects.locations.queuedResources.reset
+    TPUProjectsLocationsQueuedResourcesResetResource,
+    TPUProjectsLocationsQueuedResourcesReset (..),
+    newTPUProjectsLocationsQueuedResourcesReset,
+
     -- ** tpu.projects.locations.runtimeVersions.get
     TPUProjectsLocationsRuntimeVersionsGetResource,
     TPUProjectsLocationsRuntimeVersionsGet (..),
@@ -149,9 +172,17 @@ module Gogol.TPU
     AcceleratorType (..),
     newAcceleratorType,
 
+    -- ** AcceptedData
+    AcceptedData (..),
+    newAcceptedData,
+
     -- ** AccessConfig
     AccessConfig (..),
     newAccessConfig,
+
+    -- ** ActiveData
+    ActiveData (..),
+    newActiveData,
 
     -- ** AttachedDisk
     AttachedDisk (..),
@@ -160,9 +191,21 @@ module Gogol.TPU
     -- ** AttachedDisk_Mode
     AttachedDisk_Mode (..),
 
+    -- ** CreatingData
+    CreatingData (..),
+    newCreatingData,
+
+    -- ** DeletingData
+    DeletingData (..),
+    newDeletingData,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** FailedData
+    FailedData (..),
+    newFailedData,
 
     -- ** GenerateServiceIdentityRequest
     GenerateServiceIdentityRequest (..),
@@ -180,6 +223,10 @@ module Gogol.TPU
     GetGuestAttributesResponse (..),
     newGetGuestAttributesResponse,
 
+    -- ** Guaranteed
+    Guaranteed (..),
+    newGuaranteed,
+
     -- ** GuestAttributes
     GuestAttributes (..),
     newGuestAttributes,
@@ -191,6 +238,10 @@ module Gogol.TPU
     -- ** GuestAttributesValue
     GuestAttributesValue (..),
     newGuestAttributesValue,
+
+    -- ** Interval
+    Interval (..),
+    newInterval,
 
     -- ** ListAcceleratorTypesResponse
     ListAcceleratorTypesResponse (..),
@@ -208,6 +259,10 @@ module Gogol.TPU
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- ** ListQueuedResourcesResponse
+    ListQueuedResourcesResponse (..),
+    newListQueuedResourcesResponse,
+
     -- ** ListRuntimeVersionsResponse
     ListRuntimeVersionsResponse (..),
     newListRuntimeVersionsResponse,
@@ -223,6 +278,10 @@ module Gogol.TPU
     -- ** Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- ** MultisliceParams
+    MultisliceParams (..),
+    newMultisliceParams,
 
     -- ** NetworkConfig
     NetworkConfig (..),
@@ -253,6 +312,10 @@ module Gogol.TPU
     -- ** Node_State
     Node_State (..),
 
+    -- ** NodeSpec
+    NodeSpec (..),
+    newNodeSpec,
+
     -- ** Operation
     Operation (..),
     newOperation,
@@ -268,6 +331,32 @@ module Gogol.TPU
     -- ** OperationMetadata
     OperationMetadata (..),
     newOperationMetadata,
+
+    -- ** ProvisioningData
+    ProvisioningData (..),
+    newProvisioningData,
+
+    -- ** QueuedResource
+    QueuedResource (..),
+    newQueuedResource,
+
+    -- ** QueuedResourceState
+    QueuedResourceState (..),
+    newQueuedResourceState,
+
+    -- ** QueuedResourceState_State
+    QueuedResourceState_State (..),
+
+    -- ** QueuedResourceState_StateInitiator
+    QueuedResourceState_StateInitiator (..),
+
+    -- ** QueueingPolicy
+    QueueingPolicy (..),
+    newQueueingPolicy,
+
+    -- ** ResetQueuedResourceRequest
+    ResetQueuedResourceRequest (..),
+    newResetQueuedResourceRequest,
 
     -- ** RuntimeVersion
     RuntimeVersion (..),
@@ -289,6 +378,10 @@ module Gogol.TPU
     ShieldedInstanceConfig (..),
     newShieldedInstanceConfig,
 
+    -- ** Spot
+    Spot (..),
+    newSpot,
+
     -- ** StartNodeRequest
     StartNodeRequest (..),
     newStartNodeRequest,
@@ -305,12 +398,24 @@ module Gogol.TPU
     StopNodeRequest (..),
     newStopNodeRequest,
 
+    -- ** SuspendedData
+    SuspendedData (..),
+    newSuspendedData,
+
+    -- ** SuspendingData
+    SuspendingData (..),
+    newSuspendingData,
+
     -- ** Symptom
     Symptom (..),
     newSymptom,
 
     -- ** Symptom_SymptomType
     Symptom_SymptomType (..),
+
+    -- ** Tpu
+    Tpu (..),
+    newTpu,
   )
 where
 
@@ -331,6 +436,11 @@ import Gogol.TPU.Projects.Locations.Operations.Cancel
 import Gogol.TPU.Projects.Locations.Operations.Delete
 import Gogol.TPU.Projects.Locations.Operations.Get
 import Gogol.TPU.Projects.Locations.Operations.List
+import Gogol.TPU.Projects.Locations.QueuedResources.Create
+import Gogol.TPU.Projects.Locations.QueuedResources.Delete
+import Gogol.TPU.Projects.Locations.QueuedResources.Get
+import Gogol.TPU.Projects.Locations.QueuedResources.List
+import Gogol.TPU.Projects.Locations.QueuedResources.Reset
 import Gogol.TPU.Projects.Locations.RuntimeVersions.Get
 import Gogol.TPU.Projects.Locations.RuntimeVersions.List
 import Gogol.TPU.Types

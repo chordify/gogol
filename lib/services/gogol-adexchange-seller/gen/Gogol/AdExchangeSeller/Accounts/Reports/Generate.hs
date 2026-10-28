@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeSeller.Accounts.Reports.Generate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeSeller.Accounts.Reports.Generate
 where
 
 import Gogol.AdExchangeSeller.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangeseller.accounts.reports.generate@ method which the
 -- 'AdExchangeSellerAccountsReportsGenerate' request conforms to.
@@ -62,21 +60,21 @@ type AdExchangeSellerAccountsReportsGenerateResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Report
     Core.:<|> "adexchangeseller"
-      Core.:> "v2.0"
-      Core.:> "accounts"
-      Core.:> Core.Capture "accountId" Core.Text
-      Core.:> "reports"
-      Core.:> Core.QueryParam "startDate" Core.Text
-      Core.:> Core.QueryParam "endDate" Core.Text
-      Core.:> Core.QueryParams "dimension" Core.Text
-      Core.:> Core.QueryParams "filter" Core.Text
-      Core.:> Core.QueryParam "locale" Core.Text
-      Core.:> Core.QueryParam "maxResults" Core.Word32
-      Core.:> Core.QueryParams "metric" Core.Text
-      Core.:> Core.QueryParams "sort" Core.Text
-      Core.:> Core.QueryParam "startIndex" Core.Word32
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v2.0"
+    Core.:> "accounts"
+    Core.:> Core.Capture "accountId" Core.Text
+    Core.:> "reports"
+    Core.:> Core.QueryParam "startDate" Core.Text
+    Core.:> Core.QueryParam "endDate" Core.Text
+    Core.:> Core.QueryParams "dimension" Core.Text
+    Core.:> Core.QueryParams "filter" Core.Text
+    Core.:> Core.QueryParam "locale" Core.Text
+    Core.:> Core.QueryParam "maxResults" Core.Word32
+    Core.:> Core.QueryParams "metric" Core.Text
+    Core.:> Core.QueryParams "sort" Core.Text
+    Core.:> Core.QueryParam "startIndex" Core.Word32
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.
 --
@@ -114,76 +112,64 @@ newAdExchangeSellerAccountsReportsGenerate ::
   -- |  Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive. See 'startDate'.
   Core.Text ->
   AdExchangeSellerAccountsReportsGenerate
-newAdExchangeSellerAccountsReportsGenerate accountId endDate startDate =
-  AdExchangeSellerAccountsReportsGenerate
-    { accountId = accountId,
-      dimension = Core.Nothing,
-      endDate = endDate,
-      filter = Core.Nothing,
-      locale = Core.Nothing,
-      maxResults = Core.Nothing,
-      metric = Core.Nothing,
-      sort = Core.Nothing,
-      startDate = startDate,
-      startIndex = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAdExchangeSellerAccountsReportsGenerate
+  accountId
+  endDate
+  startDate =
     AdExchangeSellerAccountsReportsGenerate
-  where
-  type
-    Rs AdExchangeSellerAccountsReportsGenerate =
-      Report
+      { accountId = accountId,
+        dimension = Core.Nothing,
+        endDate = endDate,
+        filter = Core.Nothing,
+        locale = Core.Nothing,
+        maxResults = Core.Nothing,
+        metric = Core.Nothing,
+        sort = Core.Nothing,
+        startDate = startDate,
+        startIndex = Core.Nothing
+      }
+
+instance Core.GoogleRequest AdExchangeSellerAccountsReportsGenerate where
+  type Rs AdExchangeSellerAccountsReportsGenerate = Report
   type
     Scopes AdExchangeSellerAccountsReportsGenerate =
       '[Adexchange'Seller, Adexchange'Seller'Readonly]
-  requestClient
-    AdExchangeSellerAccountsReportsGenerate {..} =
-      go
-        accountId
-        (Core.Just startDate)
-        (Core.Just endDate)
-        (dimension Core.^. Core._Default)
-        (filter Core.^. Core._Default)
-        locale
-        maxResults
-        (metric Core.^. Core._Default)
-        (sort Core.^. Core._Default)
-        startIndex
-        (Core.Just Core.AltJSON)
-        adExchangeSellerService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeSellerAccountsReportsGenerateResource
-            )
-            Core.mempty
+  requestClient AdExchangeSellerAccountsReportsGenerate {..} =
+    go
+      accountId
+      (Core.Just startDate)
+      (Core.Just endDate)
+      (dimension Core.^. Core._Default)
+      (filter Core.^. Core._Default)
+      locale
+      maxResults
+      (metric Core.^. Core._Default)
+      (sort Core.^. Core._Default)
+      startIndex
+      (Core.Just Core.AltJSON)
+      adExchangeSellerService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeSellerAccountsReportsGenerateResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaDownload
-        AdExchangeSellerAccountsReportsGenerate
-    )
+    (Core.MediaDownload AdExchangeSellerAccountsReportsGenerate)
   where
   type
     Rs
-      ( Core.MediaDownload
-          AdExchangeSellerAccountsReportsGenerate
-      ) =
+      (Core.MediaDownload AdExchangeSellerAccountsReportsGenerate) =
       Core.Stream
   type
     Scopes
-      ( Core.MediaDownload
-          AdExchangeSellerAccountsReportsGenerate
-      ) =
+      (Core.MediaDownload AdExchangeSellerAccountsReportsGenerate) =
       Core.Scopes AdExchangeSellerAccountsReportsGenerate
   requestClient
-    ( Core.MediaDownload
-        AdExchangeSellerAccountsReportsGenerate {..}
-      ) =
+    (Core.MediaDownload AdExchangeSellerAccountsReportsGenerate {..}) =
       go
         accountId
         (Core.Just startDate)
@@ -201,7 +187,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeSellerAccountsReportsGenerateResource
+                Core.Proxy AdExchangeSellerAccountsReportsGenerateResource
             )
             Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,22 @@
 
 -- |
 -- Module      : Gogol.ServiceUsage.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceUsage.Internal.Product
-  ( -- * AdminQuotaPolicy
+  ( -- * AddEnableRulesMetadata
+    AddEnableRulesMetadata (..),
+    newAddEnableRulesMetadata,
+
+    -- * AddEnableRulesResponse
+    AddEnableRulesResponse (..),
+    newAddEnableRulesResponse,
+
+    -- * AdminQuotaPolicy
     AdminQuotaPolicy (..),
     newAdminQuotaPolicy,
 
@@ -34,9 +40,33 @@ module Gogol.ServiceUsage.Internal.Product
     AdminQuotaPolicy_Dimensions (..),
     newAdminQuotaPolicy_Dimensions,
 
+    -- * Analysis
+    Analysis (..),
+    newAnalysis,
+
+    -- * AnalysisResult
+    AnalysisResult (..),
+    newAnalysisResult,
+
+    -- * AnalyzeConsumerPolicyMetadata
+    AnalyzeConsumerPolicyMetadata (..),
+    newAnalyzeConsumerPolicyMetadata,
+
+    -- * AnalyzeConsumerPolicyResponse
+    AnalyzeConsumerPolicyResponse (..),
+    newAnalyzeConsumerPolicyResponse,
+
     -- * Api
     Api (..),
     newApi,
+
+    -- * Aspect
+    Aspect (..),
+    newAspect,
+
+    -- * Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- * AuthProvider
     AuthProvider (..),
@@ -105,6 +135,14 @@ module Gogol.ServiceUsage.Internal.Product
     -- * CommonLanguageSettings
     CommonLanguageSettings (..),
     newCommonLanguageSettings,
+
+    -- * ConsumerPolicy
+    ConsumerPolicy (..),
+    newConsumerPolicy,
+
+    -- * ConsumerPolicy_Annotations
+    ConsumerPolicy_Annotations (..),
+    newConsumerPolicy_Annotations,
 
     -- * Context
     Context (..),
@@ -178,6 +216,10 @@ module Gogol.ServiceUsage.Internal.Product
     EnableFailure (..),
     newEnableFailure,
 
+    -- * EnableRule
+    EnableRule (..),
+    newEnableRule,
+
     -- * EnableServiceRequest
     EnableServiceRequest (..),
     newEnableServiceRequest,
@@ -198,9 +240,17 @@ module Gogol.ServiceUsage.Internal.Product
     EnumValue (..),
     newEnumValue,
 
+    -- * ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- * Field
     Field (..),
     newField,
+
+    -- * FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
 
     -- * GetServiceIdentityMetadata
     GetServiceIdentityMetadata (..),
@@ -213,6 +263,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- * GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- * GoogleApiService
     GoogleApiService (..),
@@ -238,6 +292,58 @@ module Gogol.ServiceUsage.Internal.Product
     GoogleApiServiceusageV1beta1ServiceIdentity (..),
     newGoogleApiServiceusageV1beta1ServiceIdentity,
 
+    -- * GoogleApiServiceusageV2alphaConsumerPolicy
+    GoogleApiServiceusageV2alphaConsumerPolicy (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy,
+
+    -- * GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations,
+
+    -- * GoogleApiServiceusageV2alphaEnableRule
+    GoogleApiServiceusageV2alphaEnableRule (..),
+    newGoogleApiServiceusageV2alphaEnableRule,
+
+    -- * GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata,
+
+    -- * GoogleApiServiceusageV2betaAnalysis
+    GoogleApiServiceusageV2betaAnalysis (..),
+    newGoogleApiServiceusageV2betaAnalysis,
+
+    -- * GoogleApiServiceusageV2betaAnalysisResult
+    GoogleApiServiceusageV2betaAnalysisResult (..),
+    newGoogleApiServiceusageV2betaAnalysisResult,
+
+    -- * GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata,
+
+    -- * GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse,
+
+    -- * GoogleApiServiceusageV2betaConsumerPolicy
+    GoogleApiServiceusageV2betaConsumerPolicy (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy,
+
+    -- * GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2betaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy_Annotations,
+
+    -- * GoogleApiServiceusageV2betaEnableRule
+    GoogleApiServiceusageV2betaEnableRule (..),
+    newGoogleApiServiceusageV2betaEnableRule,
+
+    -- * GoogleApiServiceusageV2betaImpact
+    GoogleApiServiceusageV2betaImpact (..),
+    newGoogleApiServiceusageV2betaImpact,
+
+    -- * GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata,
+
     -- * Http
     Http (..),
     newHttp,
@@ -245,6 +351,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- * Impact
+    Impact (..),
+    newImpact,
 
     -- * ImportAdminOverridesMetadata
     ImportAdminOverridesMetadata (..),
@@ -313,6 +423,10 @@ module Gogol.ServiceUsage.Internal.Product
     -- * Method
     Method (..),
     newMethod,
+
+    -- * MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
 
     -- * MethodSettings
     MethodSettings (..),
@@ -418,9 +532,21 @@ module Gogol.ServiceUsage.Internal.Product
     QuotaOverride_Dimensions (..),
     newQuotaOverride_Dimensions,
 
+    -- * RemoveEnableRulesMetadata
+    RemoveEnableRulesMetadata (..),
+    newRemoveEnableRulesMetadata,
+
+    -- * RemoveEnableRulesResponse
+    RemoveEnableRulesResponse (..),
+    newRemoveEnableRulesResponse,
+
     -- * RubySettings
     RubySettings (..),
     newRubySettings,
+
+    -- * SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
 
     -- * ServiceIdentity
     ServiceIdentity (..),
@@ -466,6 +592,10 @@ module Gogol.ServiceUsage.Internal.Product
     UpdateAdminQuotaPolicyMetadata (..),
     newUpdateAdminQuotaPolicyMetadata,
 
+    -- * UpdateConsumerPolicyMetadata
+    UpdateConsumerPolicyMetadata (..),
+    newUpdateConsumerPolicyMetadata,
+
     -- * Usage
     Usage (..),
     newUsage,
@@ -476,8 +606,67 @@ module Gogol.ServiceUsage.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceUsage.Internal.Sum
+
+-- | Metadata for the @AddEnableRules@ method.
+--
+-- /See:/ 'newAddEnableRulesMetadata' smart constructor.
+data AddEnableRulesMetadata = AddEnableRulesMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddEnableRulesMetadata' with the minimum fields required to make a request.
+newAddEnableRulesMetadata ::
+  AddEnableRulesMetadata
+newAddEnableRulesMetadata = AddEnableRulesMetadata
+
+instance Core.FromJSON AddEnableRulesMetadata where
+  parseJSON =
+    Core.withObject
+      "AddEnableRulesMetadata"
+      (\o -> Core.pure AddEnableRulesMetadata)
+
+instance Core.ToJSON AddEnableRulesMetadata where
+  toJSON = Core.const Core.emptyObject
+
+-- | The response message of @AddEnableRules@ method.
+--
+-- /See:/ 'newAddEnableRulesResponse' smart constructor.
+data AddEnableRulesResponse = AddEnableRulesResponse
+  { -- | The values added to the parent consumer policy.
+    addedValues :: (Core.Maybe [Core.Text]),
+    -- | The parent consumer policy. It can be @projects\/12345\/consumerPolicies\/default@, or @folders\/12345\/consumerPolicies\/default@, or @organizations\/12345\/consumerPolicies\/default@.
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddEnableRulesResponse' with the minimum fields required to make a request.
+newAddEnableRulesResponse ::
+  AddEnableRulesResponse
+newAddEnableRulesResponse =
+  AddEnableRulesResponse
+    { addedValues = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance Core.FromJSON AddEnableRulesResponse where
+  parseJSON =
+    Core.withObject
+      "AddEnableRulesResponse"
+      ( \o ->
+          AddEnableRulesResponse
+            Core.<$> (o Core..:? "addedValues")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance Core.ToJSON AddEnableRulesResponse where
+  toJSON AddEnableRulesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("addedValues" Core..=) Core.<$> addedValues,
+            ("parent" Core..=) Core.<$> parent
+          ]
+      )
 
 -- | Quota policy created by quota administrator.
 --
@@ -485,7 +674,7 @@ import Gogol.ServiceUsage.Internal.Sum
 data AdminQuotaPolicy = AdminQuotaPolicy
   { -- | The cloud resource container at which the quota policy is created. The format is @{container_type}\/{container_number}@
     container :: (Core.Maybe Core.Text),
-    -- | If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, an policy on a limit with the unit @1\/{project}\/{region}@ could contain an entry with the key @region@ and the value @us-east-1@; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If @region@ appears as a key, its value must be a valid Cloud region. * If @zone@ appears as a key, its value must be a valid Cloud zone. * Keys other than @region@ or @zone@ are not valid.
+    -- | If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, a policy on a limit with the unit @1\/{project}\/{region}@ could contain an entry with the key @region@ and the value @us-east-1@; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If @region@ appears as a key, its value must be a valid Cloud region. * If @zone@ appears as a key, its value must be a valid Cloud zone. * Keys other than @region@ or @zone@ are not valid.
     dimensions :: (Core.Maybe AdminQuotaPolicy_Dimensions),
     -- | The name of the metric to which this policy applies. An example name would be: @compute.googleapis.com\/cpus@
     metric :: (Core.Maybe Core.Text),
@@ -521,9 +710,7 @@ instance Core.FromJSON AdminQuotaPolicy where
             Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "policyValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "policyValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "unit")
       )
 
@@ -535,18 +722,16 @@ instance Core.ToJSON AdminQuotaPolicy where
             ("dimensions" Core..=) Core.<$> dimensions,
             ("metric" Core..=) Core.<$> metric,
             ("name" Core..=) Core.<$> name,
-            ("policyValue" Core..=) Core.. Core.AsText
-              Core.<$> policyValue,
+            ("policyValue" Core..=) Core.. Core.AsText Core.<$> policyValue,
             ("unit" Core..=) Core.<$> unit
           ]
       )
 
--- | If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, an policy on a limit with the unit @1\/{project}\/{region}@ could contain an entry with the key @region@ and the value @us-east-1@; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If @region@ appears as a key, its value must be a valid Cloud region. * If @zone@ appears as a key, its value must be a valid Cloud zone. * Keys other than @region@ or @zone@ are not valid.
+-- | If this map is nonempty, then this policy applies only to specific values for dimensions defined in the limit unit. For example, a policy on a limit with the unit @1\/{project}\/{region}@ could contain an entry with the key @region@ and the value @us-east-1@; the policy is only applied to quota consumed in that region. This map has the following restrictions: * If @region@ appears as a key, its value must be a valid Cloud region. * If @zone@ appears as a key, its value must be a valid Cloud zone. * Keys other than @region@ or @zone@ are not valid.
 --
 -- /See:/ 'newAdminQuotaPolicy_Dimensions' smart constructor.
 newtype AdminQuotaPolicy_Dimensions = AdminQuotaPolicy_Dimensions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -563,13 +748,144 @@ instance Core.FromJSON AdminQuotaPolicy_Dimensions where
     Core.withObject
       "AdminQuotaPolicy_Dimensions"
       ( \o ->
-          AdminQuotaPolicy_Dimensions
-            Core.<$> (Core.parseJSONObject o)
+          AdminQuotaPolicy_Dimensions Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON AdminQuotaPolicy_Dimensions where
-  toJSON AdminQuotaPolicy_Dimensions {..} =
-    Core.toJSON additional
+  toJSON AdminQuotaPolicy_Dimensions {..} = Core.toJSON additional
+
+-- | A message to group the analysis information.
+--
+-- /See:/ 'newAnalysis' smart constructor.
+data Analysis = Analysis
+  { -- | Output only. Analysis result of updating a policy.
+    analysis :: (Core.Maybe AnalysisResult),
+    -- | Output only. The type of analysis.
+    analysisType :: (Core.Maybe Analysis_AnalysisType),
+    -- | Output only. The user friendly display name of the analysis type. E.g. service dependency analysis, service resource usage analysis, etc.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The names of the service that has analysis result of warnings or blockers. Example: @services\/storage.googleapis.com@.
+    service :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Analysis' with the minimum fields required to make a request.
+newAnalysis ::
+  Analysis
+newAnalysis =
+  Analysis
+    { analysis = Core.Nothing,
+      analysisType = Core.Nothing,
+      displayName = Core.Nothing,
+      service = Core.Nothing
+    }
+
+instance Core.FromJSON Analysis where
+  parseJSON =
+    Core.withObject
+      "Analysis"
+      ( \o ->
+          Analysis
+            Core.<$> (o Core..:? "analysis")
+            Core.<*> (o Core..:? "analysisType")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "service")
+      )
+
+instance Core.ToJSON Analysis where
+  toJSON Analysis {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("analysis" Core..=) Core.<$> analysis,
+            ("analysisType" Core..=) Core.<$> analysisType,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("service" Core..=) Core.<$> service
+          ]
+      )
+
+-- | An analysis result including blockers and warnings.
+--
+-- /See:/ 'newAnalysisResult' smart constructor.
+data AnalysisResult = AnalysisResult
+  { -- | Blocking information that would prevent the policy changes at runtime.
+    blockers :: (Core.Maybe [Impact]),
+    -- | Warning information indicating that the policy changes might be unsafe, but will not block the changes at runtime.
+    warnings :: (Core.Maybe [Impact])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AnalysisResult' with the minimum fields required to make a request.
+newAnalysisResult ::
+  AnalysisResult
+newAnalysisResult =
+  AnalysisResult {blockers = Core.Nothing, warnings = Core.Nothing}
+
+instance Core.FromJSON AnalysisResult where
+  parseJSON =
+    Core.withObject
+      "AnalysisResult"
+      ( \o ->
+          AnalysisResult
+            Core.<$> (o Core..:? "blockers")
+            Core.<*> (o Core..:? "warnings")
+      )
+
+instance Core.ToJSON AnalysisResult where
+  toJSON AnalysisResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blockers" Core..=) Core.<$> blockers,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
+
+-- | Metadata for the @AnalyzeConsumerPolicy@ method.
+--
+-- /See:/ 'newAnalyzeConsumerPolicyMetadata' smart constructor.
+data AnalyzeConsumerPolicyMetadata = AnalyzeConsumerPolicyMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AnalyzeConsumerPolicyMetadata' with the minimum fields required to make a request.
+newAnalyzeConsumerPolicyMetadata ::
+  AnalyzeConsumerPolicyMetadata
+newAnalyzeConsumerPolicyMetadata = AnalyzeConsumerPolicyMetadata
+
+instance Core.FromJSON AnalyzeConsumerPolicyMetadata where
+  parseJSON =
+    Core.withObject
+      "AnalyzeConsumerPolicyMetadata"
+      (\o -> Core.pure AnalyzeConsumerPolicyMetadata)
+
+instance Core.ToJSON AnalyzeConsumerPolicyMetadata where
+  toJSON = Core.const Core.emptyObject
+
+-- | The response of analyzing a consumer policy update.
+--
+-- /See:/ 'newAnalyzeConsumerPolicyResponse' smart constructor.
+newtype AnalyzeConsumerPolicyResponse = AnalyzeConsumerPolicyResponse
+  { -- | The list of analyses returned from performing the intended policy update analysis. The analysis is grouped by service name and different analysis types. The empty analysis list means that the consumer policy can be updated without any warnings or blockers.
+    analysis :: (Core.Maybe [Analysis])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AnalyzeConsumerPolicyResponse' with the minimum fields required to make a request.
+newAnalyzeConsumerPolicyResponse ::
+  AnalyzeConsumerPolicyResponse
+newAnalyzeConsumerPolicyResponse =
+  AnalyzeConsumerPolicyResponse {analysis = Core.Nothing}
+
+instance Core.FromJSON AnalyzeConsumerPolicyResponse where
+  parseJSON =
+    Core.withObject
+      "AnalyzeConsumerPolicyResponse"
+      ( \o ->
+          AnalyzeConsumerPolicyResponse Core.<$> (o Core..:? "analysis")
+      )
+
+instance Core.ToJSON AnalyzeConsumerPolicyResponse where
+  toJSON AnalyzeConsumerPolicyResponse {..} =
+    Core.object
+      (Core.catMaybes [("analysis" Core..=) Core.<$> analysis])
 
 -- | Api is a light-weight descriptor for an API Interface. Interfaces are also described as \"protocol buffer services\" in some contexts, such as by the \"service\" keyword in a .proto file, but they are different from API Services, which represent a concrete implementation of an interface as opposed to simply a description of methods and bindings. They are also sometimes simply referred to as \"APIs\" in other contexts, such as the name of this message itself. See https:\/\/cloud.google.com\/apis\/design\/glossary for detailed terminology.
 --
@@ -635,6 +951,62 @@ instance Core.ToJSON Api where
           ]
       )
 
+-- | Aspect represents Generic aspect. It is used to configure an aspect without making direct changes to service.proto
+--
+-- /See:/ 'newAspect' smart constructor.
+data Aspect = Aspect
+  { -- | The type of this aspect configuration.
+    kind :: (Core.Maybe Core.Text),
+    -- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+    spec :: (Core.Maybe Aspect_Spec)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect' with the minimum fields required to make a request.
+newAspect ::
+  Aspect
+newAspect = Aspect {kind = Core.Nothing, spec = Core.Nothing}
+
+instance Core.FromJSON Aspect where
+  parseJSON =
+    Core.withObject
+      "Aspect"
+      ( \o ->
+          Aspect Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "spec")
+      )
+
+instance Core.ToJSON Aspect where
+  toJSON Aspect {..} =
+    Core.object
+      ( Core.catMaybes
+          [("kind" Core..=) Core.<$> kind, ("spec" Core..=) Core.<$> spec]
+      )
+
+-- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+--
+-- /See:/ 'newAspect_Spec' smart constructor.
+newtype Aspect_Spec = Aspect_Spec
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect_Spec' with the minimum fields required to make a request.
+newAspect_Spec ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Aspect_Spec
+newAspect_Spec additional = Aspect_Spec {additional = additional}
+
+instance Core.FromJSON Aspect_Spec where
+  parseJSON =
+    Core.withObject
+      "Aspect_Spec"
+      (\o -> Aspect_Spec Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Aspect_Spec where
+  toJSON Aspect_Spec {..} = Core.toJSON additional
+
 -- | Configuration for an authentication provider, including support for <https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32 JSON Web Token (JWT)>.
 --
 -- /See:/ 'newAuthProvider' smart constructor.
@@ -686,8 +1058,7 @@ instance Core.ToJSON AuthProvider where
     Core.object
       ( Core.catMaybes
           [ ("audiences" Core..=) Core.<$> audiences,
-            ("authorizationUrl" Core..=)
-              Core.<$> authorizationUrl,
+            ("authorizationUrl" Core..=) Core.<$> authorizationUrl,
             ("id" Core..=) Core.<$> id,
             ("issuer" Core..=) Core.<$> issuer,
             ("jwksUri" Core..=) Core.<$> jwksUri,
@@ -710,7 +1081,10 @@ data AuthRequirement = AuthRequirement
 newAuthRequirement ::
   AuthRequirement
 newAuthRequirement =
-  AuthRequirement {audiences = Core.Nothing, providerId = Core.Nothing}
+  AuthRequirement
+    { audiences = Core.Nothing,
+      providerId = Core.Nothing
+    }
 
 instance Core.FromJSON AuthRequirement where
   parseJSON =
@@ -839,8 +1213,7 @@ instance Core.FromJSON Backend where
 
 instance Core.ToJSON Backend where
   toJSON Backend {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A backend rule provides configuration for an individual API element.
 --
@@ -854,13 +1227,14 @@ data BackendRule = BackendRule
     disableAuth :: (Core.Maybe Core.Bool),
     -- | The JWT audience is used when generating a JWT ID token for the backend. This ID token will be added in the HTTP \"authorization\" header, and sent to the backend.
     jwtAudience :: (Core.Maybe Core.Text),
+    -- | The load balancing policy used for connection to the application backend. Defined as an arbitrary string to accomondate custom load balancing policies supported by the underlying channel, but suggest most users use one of the standard policies, such as the default, \"RoundRobin\".
+    loadBalancingPolicy :: (Core.Maybe Core.Text),
     -- | Deprecated, do not use.
     minDeadline :: (Core.Maybe Core.Double),
     -- | The number of seconds to wait for the completion of a long running operation. The default is no deadline.
     operationDeadline :: (Core.Maybe Core.Double),
     -- | The map between request protocol and the backend address.
     overridesByRequestProtocol :: (Core.Maybe BackendRule_OverridesByRequestProtocol),
-    -- |
     pathTranslation :: (Core.Maybe BackendRule_PathTranslation),
     -- | The protocol used for sending a request to the backend. The supported values are \"http\/1.1\" and \"h2\". The default value is inferred from the scheme in the address field: SCHEME PROTOCOL http:\/\/ http\/1.1 https:\/\/ http\/1.1 grpc:\/\/ h2 grpcs:\/\/ h2 For secure HTTP backends (https:\/\/) that support HTTP\/2, set this field to \"h2\" for improved performance. Configuring this field to non-default values is only supported for secure HTTP backends. This field will be ignored for all other backends. See https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids for more details on the supported values.
     protocol :: (Core.Maybe Core.Text),
@@ -878,6 +1252,7 @@ newBackendRule =
       deadline = Core.Nothing,
       disableAuth = Core.Nothing,
       jwtAudience = Core.Nothing,
+      loadBalancingPolicy = Core.Nothing,
       minDeadline = Core.Nothing,
       operationDeadline = Core.Nothing,
       overridesByRequestProtocol = Core.Nothing,
@@ -896,6 +1271,7 @@ instance Core.FromJSON BackendRule where
             Core.<*> (o Core..:? "deadline")
             Core.<*> (o Core..:? "disableAuth")
             Core.<*> (o Core..:? "jwtAudience")
+            Core.<*> (o Core..:? "loadBalancingPolicy")
             Core.<*> (o Core..:? "minDeadline")
             Core.<*> (o Core..:? "operationDeadline")
             Core.<*> (o Core..:? "overridesByRequestProtocol")
@@ -912,9 +1288,9 @@ instance Core.ToJSON BackendRule where
             ("deadline" Core..=) Core.<$> deadline,
             ("disableAuth" Core..=) Core.<$> disableAuth,
             ("jwtAudience" Core..=) Core.<$> jwtAudience,
+            ("loadBalancingPolicy" Core..=) Core.<$> loadBalancingPolicy,
             ("minDeadline" Core..=) Core.<$> minDeadline,
-            ("operationDeadline" Core..=)
-              Core.<$> operationDeadline,
+            ("operationDeadline" Core..=) Core.<$> operationDeadline,
             ("overridesByRequestProtocol" Core..=)
               Core.<$> overridesByRequestProtocol,
             ("pathTranslation" Core..=) Core.<$> pathTranslation,
@@ -927,8 +1303,7 @@ instance Core.ToJSON BackendRule where
 --
 -- /See:/ 'newBackendRule_OverridesByRequestProtocol' smart constructor.
 newtype BackendRule_OverridesByRequestProtocol = BackendRule_OverridesByRequestProtocol
-  { -- |
-    additional :: (Core.HashMap Core.Text BackendRule)
+  { additional :: (Core.HashMap Core.Text BackendRule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -940,10 +1315,7 @@ newBackendRule_OverridesByRequestProtocol ::
 newBackendRule_OverridesByRequestProtocol additional =
   BackendRule_OverridesByRequestProtocol {additional = additional}
 
-instance
-  Core.FromJSON
-    BackendRule_OverridesByRequestProtocol
-  where
+instance Core.FromJSON BackendRule_OverridesByRequestProtocol where
   parseJSON =
     Core.withObject
       "BackendRule_OverridesByRequestProtocol"
@@ -952,10 +1324,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BackendRule_OverridesByRequestProtocol
-  where
+instance Core.ToJSON BackendRule_OverridesByRequestProtocol where
   toJSON BackendRule_OverridesByRequestProtocol {..} =
     Core.toJSON additional
 
@@ -974,10 +1343,7 @@ newBatchCreateAdminOverridesResponse ::
 newBatchCreateAdminOverridesResponse =
   BatchCreateAdminOverridesResponse {overrides = Core.Nothing}
 
-instance
-  Core.FromJSON
-    BatchCreateAdminOverridesResponse
-  where
+instance Core.FromJSON BatchCreateAdminOverridesResponse where
   parseJSON =
     Core.withObject
       "BatchCreateAdminOverridesResponse"
@@ -986,15 +1352,10 @@ instance
             Core.<$> (o Core..:? "overrides")
       )
 
-instance
-  Core.ToJSON
-    BatchCreateAdminOverridesResponse
-  where
+instance Core.ToJSON BatchCreateAdminOverridesResponse where
   toJSON BatchCreateAdminOverridesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("overrides" Core..=) Core.<$> overrides]
-      )
+      (Core.catMaybes [("overrides" Core..=) Core.<$> overrides])
 
 -- | Response message for BatchCreateConsumerOverrides
 --
@@ -1011,10 +1372,7 @@ newBatchCreateConsumerOverridesResponse ::
 newBatchCreateConsumerOverridesResponse =
   BatchCreateConsumerOverridesResponse {overrides = Core.Nothing}
 
-instance
-  Core.FromJSON
-    BatchCreateConsumerOverridesResponse
-  where
+instance Core.FromJSON BatchCreateConsumerOverridesResponse where
   parseJSON =
     Core.withObject
       "BatchCreateConsumerOverridesResponse"
@@ -1023,15 +1381,10 @@ instance
             Core.<$> (o Core..:? "overrides")
       )
 
-instance
-  Core.ToJSON
-    BatchCreateConsumerOverridesResponse
-  where
+instance Core.ToJSON BatchCreateConsumerOverridesResponse where
   toJSON BatchCreateConsumerOverridesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("overrides" Core..=) Core.<$> overrides]
-      )
+      (Core.catMaybes [("overrides" Core..=) Core.<$> overrides])
 
 -- | Request message for the @BatchEnableServices@ method.
 --
@@ -1053,16 +1406,13 @@ instance Core.FromJSON BatchEnableServicesRequest where
     Core.withObject
       "BatchEnableServicesRequest"
       ( \o ->
-          BatchEnableServicesRequest
-            Core.<$> (o Core..:? "serviceIds")
+          BatchEnableServicesRequest Core.<$> (o Core..:? "serviceIds")
       )
 
 instance Core.ToJSON BatchEnableServicesRequest where
   toJSON BatchEnableServicesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("serviceIds" Core..=) Core.<$> serviceIds]
-      )
+      (Core.catMaybes [("serviceIds" Core..=) Core.<$> serviceIds])
 
 -- | Response message for the @BatchEnableServices@ method. This response message is assigned to the @response@ field of the returned Operation when that operation is done.
 --
@@ -1079,7 +1429,10 @@ data BatchEnableServicesResponse = BatchEnableServicesResponse
 newBatchEnableServicesResponse ::
   BatchEnableServicesResponse
 newBatchEnableServicesResponse =
-  BatchEnableServicesResponse {failures = Core.Nothing, services = Core.Nothing}
+  BatchEnableServicesResponse
+    { failures = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON BatchEnableServicesResponse where
   parseJSON =
@@ -1112,23 +1465,19 @@ newtype BatchGetServicesResponse = BatchGetServicesResponse
 -- | Creates a value of 'BatchGetServicesResponse' with the minimum fields required to make a request.
 newBatchGetServicesResponse ::
   BatchGetServicesResponse
-newBatchGetServicesResponse = BatchGetServicesResponse {services = Core.Nothing}
+newBatchGetServicesResponse =
+  BatchGetServicesResponse {services = Core.Nothing}
 
 instance Core.FromJSON BatchGetServicesResponse where
   parseJSON =
     Core.withObject
       "BatchGetServicesResponse"
-      ( \o ->
-          BatchGetServicesResponse
-            Core.<$> (o Core..:? "services")
-      )
+      (\o -> BatchGetServicesResponse Core.<$> (o Core..:? "services"))
 
 instance Core.ToJSON BatchGetServicesResponse where
   toJSON BatchGetServicesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("services" Core..=) Core.<$> services]
-      )
+      (Core.catMaybes [("services" Core..=) Core.<$> services])
 
 -- | Billing related configuration of the service. The following example shows how to configure monitored resources and metrics for billing, @consumer_destinations@ is the only supported destination and the monitored resources need at least one label key @cloud.googleapis.com\/location@ to indicate the location of the billing usage, using different monitored resources between monitoring and billing is recommended so they can be evolved independently: monitored/resources: - type: library.googleapis.com\/billing/branch labels: - key: cloud.googleapis.com\/location description: | Predefined label to support billing location restriction. - key: city description: | Custom label to define the city where the library branch is located in. - key: name description: Custom label to define the name of the library branch. metrics: - name: library.googleapis.com\/book\/borrowed/count metric/kind: DELTA value/type: INT64 unit: \"1\" billing: consumer/destinations: - monitored/resource: library.googleapis.com\/billing/branch
 -- metrics: - library.googleapis.com\/book\/borrowed_count
@@ -1149,17 +1498,13 @@ instance Core.FromJSON Billing where
   parseJSON =
     Core.withObject
       "Billing"
-      ( \o ->
-          Billing Core.<$> (o Core..:? "consumerDestinations")
-      )
+      (\o -> Billing Core.<$> (o Core..:? "consumerDestinations"))
 
 instance Core.ToJSON Billing where
   toJSON Billing {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations
-          ]
+          [("consumerDestinations" Core..=) Core.<$> consumerDestinations]
       )
 
 -- | Configuration of a specific billing destination (Currently only support bill against consumer project).
@@ -1177,7 +1522,10 @@ data BillingDestination = BillingDestination
 newBillingDestination ::
   BillingDestination
 newBillingDestination =
-  BillingDestination {metrics = Core.Nothing, monitoredResource = Core.Nothing}
+  BillingDestination
+    { metrics = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON BillingDestination where
   parseJSON =
@@ -1194,8 +1542,7 @@ instance Core.ToJSON BillingDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -1297,8 +1644,7 @@ instance Core.ToJSON ClientLibrarySettings where
             ("nodeSettings" Core..=) Core.<$> nodeSettings,
             ("phpSettings" Core..=) Core.<$> phpSettings,
             ("pythonSettings" Core..=) Core.<$> pythonSettings,
-            ("restNumericEnums" Core..=)
-              Core.<$> restNumericEnums,
+            ("restNumericEnums" Core..=) Core.<$> restNumericEnums,
             ("rubySettings" Core..=) Core.<$> rubySettings,
             ("version" Core..=) Core.<$> version
           ]
@@ -1311,7 +1657,9 @@ data CommonLanguageSettings = CommonLanguageSettings
   { -- | The destination where API teams want this client library to be published.
     destinations :: (Core.Maybe [CommonLanguageSettings_DestinationsItem]),
     -- | Link to automatically generated reference documentation. Example: https:\/\/cloud.google.com\/nodejs\/docs\/reference\/asset\/latest
-    referenceDocsUri :: (Core.Maybe Core.Text)
+    referenceDocsUri :: (Core.Maybe Core.Text),
+    -- | Configuration for which RPCs should be generated in the GAPIC client.
+    selectiveGapicGeneration :: (Core.Maybe SelectiveGapicGeneration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1321,7 +1669,8 @@ newCommonLanguageSettings ::
 newCommonLanguageSettings =
   CommonLanguageSettings
     { destinations = Core.Nothing,
-      referenceDocsUri = Core.Nothing
+      referenceDocsUri = Core.Nothing,
+      selectiveGapicGeneration = Core.Nothing
     }
 
 instance Core.FromJSON CommonLanguageSettings where
@@ -1332,6 +1681,7 @@ instance Core.FromJSON CommonLanguageSettings where
           CommonLanguageSettings
             Core.<$> (o Core..:? "destinations")
             Core.<*> (o Core..:? "referenceDocsUri")
+            Core.<*> (o Core..:? "selectiveGapicGeneration")
       )
 
 instance Core.ToJSON CommonLanguageSettings where
@@ -1339,10 +1689,92 @@ instance Core.ToJSON CommonLanguageSettings where
     Core.object
       ( Core.catMaybes
           [ ("destinations" Core..=) Core.<$> destinations,
-            ("referenceDocsUri" Core..=)
-              Core.<$> referenceDocsUri
+            ("referenceDocsUri" Core..=) Core.<$> referenceDocsUri,
+            ("selectiveGapicGeneration" Core..=)
+              Core.<$> selectiveGapicGeneration
           ]
       )
+
+-- | Consumer Policy is a set of rules that define what services or service groups can be used for a cloud resource hierarchy.
+--
+-- /See:/ 'newConsumerPolicy' smart constructor.
+data ConsumerPolicy = ConsumerPolicy
+  { -- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+    annotations :: (Core.Maybe ConsumerPolicy_Annotations),
+    -- | Enable rules define usable services and service groups.
+    enableRules :: (Core.Maybe [EnableRule]),
+    -- | An opaque tag indicating the current version of the policy, used for concurrency control.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. The resource name of the policy. We only allow consumer policy name as @default@ for now: @projects\/12345\/consumerPolicies\/default@, @folders\/12345\/consumerPolicies\/default@, @organizations\/12345\/consumerPolicies\/default@.
+    name :: (Core.Maybe Core.Text),
+    -- | The last-modified time.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsumerPolicy' with the minimum fields required to make a request.
+newConsumerPolicy ::
+  ConsumerPolicy
+newConsumerPolicy =
+  ConsumerPolicy
+    { annotations = Core.Nothing,
+      enableRules = Core.Nothing,
+      etag = Core.Nothing,
+      name = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON ConsumerPolicy where
+  parseJSON =
+    Core.withObject
+      "ConsumerPolicy"
+      ( \o ->
+          ConsumerPolicy
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "enableRules")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON ConsumerPolicy where
+  toJSON ConsumerPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("enableRules" Core..=) Core.<$> enableRules,
+            ("etag" Core..=) Core.<$> etag,
+            ("name" Core..=) Core.<$> name,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+--
+-- /See:/ 'newConsumerPolicy_Annotations' smart constructor.
+newtype ConsumerPolicy_Annotations = ConsumerPolicy_Annotations
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsumerPolicy_Annotations' with the minimum fields required to make a request.
+newConsumerPolicy_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  ConsumerPolicy_Annotations
+newConsumerPolicy_Annotations additional =
+  ConsumerPolicy_Annotations {additional = additional}
+
+instance Core.FromJSON ConsumerPolicy_Annotations where
+  parseJSON =
+    Core.withObject
+      "ConsumerPolicy_Annotations"
+      ( \o ->
+          ConsumerPolicy_Annotations Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ConsumerPolicy_Annotations where
+  toJSON ConsumerPolicy_Annotations {..} = Core.toJSON additional
 
 -- | @Context@ defines which contexts an API requests. Example: context: rules: - selector: \"*\" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request @google.rpc.context.ProjectContext@ and @google.rpc.context.OriginContext@. Available context types are defined in package @google.rpc.context@. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allowed/request/extensions: - google.foo.v1.NewExtension allowed/response/extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.
 --
@@ -1366,8 +1798,7 @@ instance Core.FromJSON Context where
 
 instance Core.ToJSON Context where
   toJSON Context {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A context rule provides information about the context for an individual API element.
 --
@@ -1377,9 +1808,9 @@ data ContextRule = ContextRule
     allowedRequestExtensions :: (Core.Maybe [Core.Text]),
     -- | A list of full type names or extension IDs of extensions allowed in grpc side channel from backend to client.
     allowedResponseExtensions :: (Core.Maybe [Core.Text]),
-    -- | A list of full type names of provided contexts.
+    -- | A list of full type names of provided contexts. It is used to support propagating HTTP headers and ETags from the response extension.
     provided :: (Core.Maybe [Core.Text]),
-    -- | A list of full type names of requested contexts.
+    -- | A list of full type names of requested contexts, only the requested context will be made available to the backend.
     requested :: (Core.Maybe [Core.Text]),
     -- | Selects the methods to which this rule applies. Refer to selector for syntax details.
     selector :: (Core.Maybe Core.Text)
@@ -1428,28 +1859,40 @@ instance Core.ToJSON ContextRule where
 -- | Selects and configures the service controller used by the service. Example: control: environment: servicecontrol.googleapis.com
 --
 -- /See:/ 'newControl' smart constructor.
-newtype Control = Control
+data Control = Control
   { -- | The service controller environment to use. If empty, no control plane feature (like quota and billing) will be enabled. The recommended value for most services is servicecontrol.googleapis.com
-    environment :: (Core.Maybe Core.Text)
+    environment :: (Core.Maybe Core.Text),
+    -- | Defines policies applying to the API methods of the service.
+    methodPolicies :: (Core.Maybe [MethodPolicy])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 newControl ::
   Control
-newControl = Control {environment = Core.Nothing}
+newControl =
+  Control
+    { environment = Core.Nothing,
+      methodPolicies = Core.Nothing
+    }
 
 instance Core.FromJSON Control where
   parseJSON =
     Core.withObject
       "Control"
-      (\o -> Control Core.<$> (o Core..:? "environment"))
+      ( \o ->
+          Control
+            Core.<$> (o Core..:? "environment")
+            Core.<*> (o Core..:? "methodPolicies")
+      )
 
 instance Core.ToJSON Control where
   toJSON Control {..} =
     Core.object
       ( Core.catMaybes
-          [("environment" Core..=) Core.<$> environment]
+          [ ("environment" Core..=) Core.<$> environment,
+            ("methodPolicies" Core..=) Core.<$> methodPolicies
+          ]
       )
 
 -- | Settings for C++ client libraries.
@@ -1474,8 +1917,7 @@ instance Core.FromJSON CppSettings where
 
 instance Core.ToJSON CppSettings where
   toJSON CppSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by CreateAdminQuotaPolicy.
 --
@@ -1511,7 +1953,8 @@ data CustomError = CustomError
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 newCustomError ::
   CustomError
-newCustomError = CustomError {rules = Core.Nothing, types = Core.Nothing}
+newCustomError =
+  CustomError {rules = Core.Nothing, types = Core.Nothing}
 
 instance Core.FromJSON CustomError where
   parseJSON =
@@ -1519,7 +1962,8 @@ instance Core.FromJSON CustomError where
       "CustomError"
       ( \o ->
           CustomError
-            Core.<$> (o Core..:? "rules") Core.<*> (o Core..:? "types")
+            Core.<$> (o Core..:? "rules")
+            Core.<*> (o Core..:? "types")
       )
 
 instance Core.ToJSON CustomError where
@@ -1546,7 +1990,10 @@ data CustomErrorRule = CustomErrorRule
 newCustomErrorRule ::
   CustomErrorRule
 newCustomErrorRule =
-  CustomErrorRule {isErrorType = Core.Nothing, selector = Core.Nothing}
+  CustomErrorRule
+    { isErrorType = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON CustomErrorRule where
   parseJSON =
@@ -1590,16 +2037,15 @@ instance Core.FromJSON CustomHttpPattern where
       "CustomHttpPattern"
       ( \o ->
           CustomHttpPattern
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "path")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "path")
       )
 
 instance Core.ToJSON CustomHttpPattern where
   toJSON CustomHttpPattern {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("path" Core..=) Core.<$> path
-          ]
+          [("kind" Core..=) Core.<$> kind, ("path" Core..=) Core.<$> path]
       )
 
 -- | Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by DeleteAdminQuotaPolicy.
@@ -1675,30 +2121,28 @@ newtype DisableServiceResponse = DisableServiceResponse
 -- | Creates a value of 'DisableServiceResponse' with the minimum fields required to make a request.
 newDisableServiceResponse ::
   DisableServiceResponse
-newDisableServiceResponse = DisableServiceResponse {service = Core.Nothing}
+newDisableServiceResponse =
+  DisableServiceResponse {service = Core.Nothing}
 
 instance Core.FromJSON DisableServiceResponse where
   parseJSON =
     Core.withObject
       "DisableServiceResponse"
-      ( \o ->
-          DisableServiceResponse
-            Core.<$> (o Core..:? "service")
-      )
+      (\o -> DisableServiceResponse Core.<$> (o Core..:? "service"))
 
 instance Core.ToJSON DisableServiceResponse where
   toJSON DisableServiceResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("service" Core..=) Core.<$> service]
-      )
+      (Core.catMaybes [("service" Core..=) Core.<$> service])
 
--- | @Documentation@ provides the information for describing a service. Example: documentation: summary: > The Google Calendar API gives access to most calendar features. pages: - name: Overview content: (== include google\/foo\/overview.md ==) - name: Tutorial content: (== include google\/foo\/tutorial.md ==) subpages; - name: Java content: (== include google\/foo\/tutorial/java.md ==) rules: - selector: google.calendar.Calendar.Get description: > ... - selector: google.calendar.Calendar.Put description: > ... Documentation is provided in markdown syntax. In addition to standard markdown features, definition lists, tables and fenced code blocks are supported. Section headers can be provided and are interpreted relative to the section nesting of the context where a documentation fragment is embedded. Documentation from the IDL is merged with documentation defined via the config at normalization time, where documentation provided by config rules overrides IDL provided. A number of constructs specific to the API
+-- | @Documentation@ provides the information for describing a service. Example: documentation: summary: > The Google Calendar API gives access to most calendar features. pages: - name: Overview content: (== include google\/foo\/overview.md ==) - name: Tutorial content: (== include google\/foo\/tutorial.md ==) subpages: - name: Java content: (== include google\/foo\/tutorial/java.md ==) rules: - selector: google.calendar.Calendar.Get description: > ... - selector: google.calendar.Calendar.Put description: > ... Documentation is provided in markdown syntax. In addition to standard markdown features, definition lists, tables and fenced code blocks are supported. Section headers can be provided and are interpreted relative to the section nesting of the context where a documentation fragment is embedded. Documentation from the IDL is merged with documentation defined via the config at normalization time, where documentation provided by config rules overrides IDL provided. A number of constructs specific to the API
 -- platform are supported in documentation text. In order to reference a proto element, the following notation can be used: [fully.qualified.proto.name][] To override the display text used for the link, this can be used: [display text][fully.qualified.proto.name] Text can be excluded from doc using the following notation: (-- internal comment --) A few directives are available in documentation. Note that directives must appear on a single line to be properly identified. The @include@ directive includes a markdown file from an external source: (== include path\/to\/file ==) The @resource_for@ directive marks a message to be the resource of a collection in REST view. If it is not specified, tools attempt to infer the resource from the operations in a collection: (== resource/for v1.shelves.books ==) The directive @suppress_warning@ does not directly affect documentation and is documented together with service config validation.
 --
 -- /See:/ 'newDocumentation' smart constructor.
 data Documentation = Documentation
-  { -- | The URL to the root of documentation.
+  { -- | Optional information about the IAM configuration. This is typically used to link to documentation about a product\'s IAM roles and permissions.
+    additionalIamInfo :: (Core.Maybe Core.Text),
+    -- | The URL to the root of documentation.
     documentationRootUrl :: (Core.Maybe Core.Text),
     -- | Declares a single overview page. For example: documentation: summary: ... overview: (== include overview.md ==) This is a shortcut for the following declaration (using pages style): documentation: summary: ... pages: - name: Overview content: (== include overview.md ==) Note: you cannot specify both @overview@ field and @pages@ field.
     overview :: (Core.Maybe Core.Text),
@@ -1706,6 +2150,8 @@ data Documentation = Documentation
     pages :: (Core.Maybe [Page]),
     -- | A list of documentation rules that apply to individual API elements. __NOTE:__ All service configuration rules follow \"last one wins\" order.
     rules :: (Core.Maybe [DocumentationRule]),
+    -- | Specifies section and content to override the boilerplate content. Currently overrides following sections: 1. rest.service.client_libraries
+    sectionOverrides :: (Core.Maybe [Page]),
     -- | Specifies the service root url if the default one (the service name from the yaml file) is not suitable. This can be seen in any fully specified service urls as well as sections that show a base that other urls are relative to.
     serviceRootUrl :: (Core.Maybe Core.Text),
     -- | A short description of what the service does. The summary must be plain text. It becomes the overview of the service displayed in Google Cloud Console. NOTE: This field is equivalent to the standard field @description@.
@@ -1718,10 +2164,12 @@ newDocumentation ::
   Documentation
 newDocumentation =
   Documentation
-    { documentationRootUrl = Core.Nothing,
+    { additionalIamInfo = Core.Nothing,
+      documentationRootUrl = Core.Nothing,
       overview = Core.Nothing,
       pages = Core.Nothing,
       rules = Core.Nothing,
+      sectionOverrides = Core.Nothing,
       serviceRootUrl = Core.Nothing,
       summary = Core.Nothing
     }
@@ -1732,10 +2180,12 @@ instance Core.FromJSON Documentation where
       "Documentation"
       ( \o ->
           Documentation
-            Core.<$> (o Core..:? "documentationRootUrl")
+            Core.<$> (o Core..:? "additionalIamInfo")
+            Core.<*> (o Core..:? "documentationRootUrl")
             Core.<*> (o Core..:? "overview")
             Core.<*> (o Core..:? "pages")
             Core.<*> (o Core..:? "rules")
+            Core.<*> (o Core..:? "sectionOverrides")
             Core.<*> (o Core..:? "serviceRootUrl")
             Core.<*> (o Core..:? "summary")
       )
@@ -1744,11 +2194,12 @@ instance Core.ToJSON Documentation where
   toJSON Documentation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentationRootUrl" Core..=)
-              Core.<$> documentationRootUrl,
+          [ ("additionalIamInfo" Core..=) Core.<$> additionalIamInfo,
+            ("documentationRootUrl" Core..=) Core.<$> documentationRootUrl,
             ("overview" Core..=) Core.<$> overview,
             ("pages" Core..=) Core.<$> pages,
             ("rules" Core..=) Core.<$> rules,
+            ("sectionOverrides" Core..=) Core.<$> sectionOverrides,
             ("serviceRootUrl" Core..=) Core.<$> serviceRootUrl,
             ("summary" Core..=) Core.<$> summary
           ]
@@ -1762,6 +2213,8 @@ data DocumentationRule = DocumentationRule
     deprecationDescription :: (Core.Maybe Core.Text),
     -- | Description of the selected proto element (e.g. a message, a method, a \'service\' definition, or a field). Defaults to leading & trailing comments taken from the proto source definition of the proto element.
     description :: (Core.Maybe Core.Text),
+    -- | String of comma or space separated case-sensitive words for which method\/field name replacement will be disabled.
+    disableReplacementWords :: (Core.Maybe Core.Text),
     -- | The selector is a comma-separated list of patterns for any element such as a method, a field, an enum value. Each pattern is a qualified name of the element which may end in \"/\", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. \"foo./\" is ok, but not \"foo.b/\" or \"foo./.bar\". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern \"*\" is used.
     selector :: (Core.Maybe Core.Text)
   }
@@ -1774,6 +2227,7 @@ newDocumentationRule =
   DocumentationRule
     { deprecationDescription = Core.Nothing,
       description = Core.Nothing,
+      disableReplacementWords = Core.Nothing,
       selector = Core.Nothing
     }
 
@@ -1785,6 +2239,7 @@ instance Core.FromJSON DocumentationRule where
           DocumentationRule
             Core.<$> (o Core..:? "deprecationDescription")
             Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "disableReplacementWords")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -1795,6 +2250,8 @@ instance Core.ToJSON DocumentationRule where
           [ ("deprecationDescription" Core..=)
               Core.<$> deprecationDescription,
             ("description" Core..=) Core.<$> description,
+            ("disableReplacementWords" Core..=)
+              Core.<$> disableReplacementWords,
             ("selector" Core..=) Core.<$> selector
           ]
       )
@@ -1850,16 +2307,11 @@ instance Core.ToJSON DotnetSettings where
     Core.object
       ( Core.catMaybes
           [ ("common" Core..=) Core.<$> common,
-            ("forcedNamespaceAliases" Core..=)
-              Core.<$> forcedNamespaceAliases,
-            ("handwrittenSignatures" Core..=)
-              Core.<$> handwrittenSignatures,
-            ("ignoredResources" Core..=)
-              Core.<$> ignoredResources,
-            ("renamedResources" Core..=)
-              Core.<$> renamedResources,
-            ("renamedServices" Core..=)
-              Core.<$> renamedServices
+            ("forcedNamespaceAliases" Core..=) Core.<$> forcedNamespaceAliases,
+            ("handwrittenSignatures" Core..=) Core.<$> handwrittenSignatures,
+            ("ignoredResources" Core..=) Core.<$> ignoredResources,
+            ("renamedResources" Core..=) Core.<$> renamedResources,
+            ("renamedServices" Core..=) Core.<$> renamedServices
           ]
       )
 
@@ -1867,8 +2319,7 @@ instance Core.ToJSON DotnetSettings where
 --
 -- /See:/ 'newDotnetSettings_RenamedResources' smart constructor.
 newtype DotnetSettings_RenamedResources = DotnetSettings_RenamedResources
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1880,28 +2331,22 @@ newDotnetSettings_RenamedResources ::
 newDotnetSettings_RenamedResources additional =
   DotnetSettings_RenamedResources {additional = additional}
 
-instance
-  Core.FromJSON
-    DotnetSettings_RenamedResources
-  where
+instance Core.FromJSON DotnetSettings_RenamedResources where
   parseJSON =
     Core.withObject
       "DotnetSettings_RenamedResources"
       ( \o ->
-          DotnetSettings_RenamedResources
-            Core.<$> (Core.parseJSONObject o)
+          DotnetSettings_RenamedResources Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DotnetSettings_RenamedResources where
-  toJSON DotnetSettings_RenamedResources {..} =
-    Core.toJSON additional
+  toJSON DotnetSettings_RenamedResources {..} = Core.toJSON additional
 
 -- | Map from original service names to renamed versions. This is used when the default generated types would cause a naming conflict. (Neither name is fully-qualified.) Example: Subscriber to SubscriberServiceApi.
 --
 -- /See:/ 'newDotnetSettings_RenamedServices' smart constructor.
 newtype DotnetSettings_RenamedServices = DotnetSettings_RenamedServices
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1918,13 +2363,11 @@ instance Core.FromJSON DotnetSettings_RenamedServices where
     Core.withObject
       "DotnetSettings_RenamedServices"
       ( \o ->
-          DotnetSettings_RenamedServices
-            Core.<$> (Core.parseJSONObject o)
+          DotnetSettings_RenamedServices Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DotnetSettings_RenamedServices where
-  toJSON DotnetSettings_RenamedServices {..} =
-    Core.toJSON additional
+  toJSON DotnetSettings_RenamedServices {..} = Core.toJSON additional
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -1938,8 +2381,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1959,7 +2401,10 @@ data EnableFailure = EnableFailure
 newEnableFailure ::
   EnableFailure
 newEnableFailure =
-  EnableFailure {errorMessage = Core.Nothing, serviceId = Core.Nothing}
+  EnableFailure
+    { errorMessage = Core.Nothing,
+      serviceId = Core.Nothing
+    }
 
 instance Core.FromJSON EnableFailure where
   parseJSON =
@@ -1977,6 +2422,55 @@ instance Core.ToJSON EnableFailure where
       ( Core.catMaybes
           [ ("errorMessage" Core..=) Core.<$> errorMessage,
             ("serviceId" Core..=) Core.<$> serviceId
+          ]
+      )
+
+-- | The consumer policy rule that defines usable services and service groups.
+--
+-- /See:/ 'newEnableRule' smart constructor.
+data EnableRule = EnableRule
+  { -- | Client and resource project enable type.
+    enableType :: (Core.Maybe EnableRule_EnableType),
+    -- | DEPRECATED: Please use field @values@. Service group should have prefix @groups\/@. The names of the service groups that are enabled (Not Implemented). Example: @groups\/googleServices@.
+    groups :: (Core.Maybe [Core.Text]),
+    -- | DEPRECATED: Please use field @values@. Service should have prefix @services\/@. The names of the services that are enabled. Example: @storage.googleapis.com@.
+    services :: (Core.Maybe [Core.Text]),
+    -- | The names of the services or service groups that are enabled. Example: @services\/storage.googleapis.com@, @groups\/googleServices@, @groups\/allServices@.
+    values :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnableRule' with the minimum fields required to make a request.
+newEnableRule ::
+  EnableRule
+newEnableRule =
+  EnableRule
+    { enableType = Core.Nothing,
+      groups = Core.Nothing,
+      services = Core.Nothing,
+      values = Core.Nothing
+    }
+
+instance Core.FromJSON EnableRule where
+  parseJSON =
+    Core.withObject
+      "EnableRule"
+      ( \o ->
+          EnableRule
+            Core.<$> (o Core..:? "enableType")
+            Core.<*> (o Core..:? "groups")
+            Core.<*> (o Core..:? "services")
+            Core.<*> (o Core..:? "values")
+      )
+
+instance Core.ToJSON EnableRule where
+  toJSON EnableRule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enableType" Core..=) Core.<$> enableType,
+            ("groups" Core..=) Core.<$> groups,
+            ("services" Core..=) Core.<$> services,
+            ("values" Core..=) Core.<$> values
           ]
       )
 
@@ -2012,29 +2506,25 @@ newtype EnableServiceResponse = EnableServiceResponse
 -- | Creates a value of 'EnableServiceResponse' with the minimum fields required to make a request.
 newEnableServiceResponse ::
   EnableServiceResponse
-newEnableServiceResponse = EnableServiceResponse {service = Core.Nothing}
+newEnableServiceResponse =
+  EnableServiceResponse {service = Core.Nothing}
 
 instance Core.FromJSON EnableServiceResponse where
   parseJSON =
     Core.withObject
       "EnableServiceResponse"
-      ( \o ->
-          EnableServiceResponse
-            Core.<$> (o Core..:? "service")
-      )
+      (\o -> EnableServiceResponse Core.<$> (o Core..:? "service"))
 
 instance Core.ToJSON EnableServiceResponse where
   toJSON EnableServiceResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("service" Core..=) Core.<$> service]
-      )
+      (Core.catMaybes [("service" Core..=) Core.<$> service])
 
 -- | @Endpoint@ describes a network address of a service that serves a set of APIs. It is commonly known as a service endpoint. A service may expose any number of service endpoints, and all service endpoints share the same service definition, such as quota limits and monitoring metrics. Example: type: google.api.Service name: library-example.googleapis.com endpoints: # Declares network address @https:\/\/library-example.googleapis.com@ # for service @library-example.googleapis.com@. The @https@ scheme # is implicit for all service endpoints. Other schemes may be # supported in the future. - name: library-example.googleapis.com allow/cors: false - name: content-staging-library-example.googleapis.com # Allows HTTP OPTIONS calls to be passed to the API frontend, for it # to decide whether the subsequent cross-origin request is allowed # to proceed. allow/cors: true
 --
 -- /See:/ 'newEndpoint' smart constructor.
 data Endpoint = Endpoint
-  { -- | Unimplemented. Dot not use. DEPRECATED: This field is no longer supported. Instead of using aliases, please specify multiple google.api.Endpoint for each of the intended aliases. Additional names that this endpoint will be hosted on.
+  { -- | Aliases for this endpoint, these will be served by the same UrlMap as the parent endpoint, and will be provisioned in the GCP stack for the Regional Endpoints.
     aliases :: (Core.Maybe [Core.Text]),
     -- | Allowing <https://en.wikipedia.org/wiki/Cross-origin_resource_sharing CORS>, aka cross-domain traffic, would allow the backends served from this endpoint to receive and respond to HTTP OPTIONS requests. The response will be used by the browser to determine whether the subsequent cross-origin request is allowed to proceed.
     allowCors :: (Core.Maybe Core.Bool),
@@ -2155,7 +2645,11 @@ data EnumValue = EnumValue
 newEnumValue ::
   EnumValue
 newEnumValue =
-  EnumValue {name = Core.Nothing, number = Core.Nothing, options = Core.Nothing}
+  EnumValue
+    { name = Core.Nothing,
+      number = Core.Nothing,
+      options = Core.Nothing
+    }
 
 instance Core.FromJSON EnumValue where
   parseJSON =
@@ -2175,6 +2669,52 @@ instance Core.ToJSON EnumValue where
           [ ("name" Core..=) Core.<$> name,
             ("number" Core..=) Core.<$> number,
             ("options" Core..=) Core.<$> options
+          ]
+      )
+
+-- | Experimental features to be included during client library generation. These fields will be deprecated once the feature graduates and is enabled by default.
+--
+-- /See:/ 'newExperimentalFeatures' smart constructor.
+data ExperimentalFeatures = ExperimentalFeatures
+  { -- | Enables generation of protobuf code using new types that are more Pythonic which are included in @protobuf>=5.29.x@. This feature will be enabled by default 1 month after launching the feature in preview packages.
+    protobufPythonicTypesEnabled :: (Core.Maybe Core.Bool),
+    -- | Enables generation of asynchronous REST clients if @rest@ transport is enabled. By default, asynchronous REST clients will not be generated. This feature will be enabled by default 1 month after launching the feature in preview packages.
+    restAsyncIoEnabled :: (Core.Maybe Core.Bool),
+    -- | Disables generation of an unversioned Python package for this client library. This means that the module names will need to be versioned in import statements. For example @import google.cloud.library_v2@ instead of @import google.cloud.library@.
+    unversionedPackageDisabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExperimentalFeatures' with the minimum fields required to make a request.
+newExperimentalFeatures ::
+  ExperimentalFeatures
+newExperimentalFeatures =
+  ExperimentalFeatures
+    { protobufPythonicTypesEnabled = Core.Nothing,
+      restAsyncIoEnabled = Core.Nothing,
+      unversionedPackageDisabled = Core.Nothing
+    }
+
+instance Core.FromJSON ExperimentalFeatures where
+  parseJSON =
+    Core.withObject
+      "ExperimentalFeatures"
+      ( \o ->
+          ExperimentalFeatures
+            Core.<$> (o Core..:? "protobufPythonicTypesEnabled")
+            Core.<*> (o Core..:? "restAsyncIoEnabled")
+            Core.<*> (o Core..:? "unversionedPackageDisabled")
+      )
+
+instance Core.ToJSON ExperimentalFeatures where
+  toJSON ExperimentalFeatures {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("protobufPythonicTypesEnabled" Core..=)
+              Core.<$> protobufPythonicTypesEnabled,
+            ("restAsyncIoEnabled" Core..=) Core.<$> restAsyncIoEnabled,
+            ("unversionedPackageDisabled" Core..=)
+              Core.<$> unversionedPackageDisabled
           ]
       )
 
@@ -2257,6 +2797,50 @@ instance Core.ToJSON Field where
           ]
       )
 
+-- | Google API Policy Annotation This message defines a simple API policy annotation that can be used to annotate API request and response message fields with applicable policies. One field may have multiple applicable policies that must all be satisfied before a request can be processed. This policy annotation is used to generate the overall policy that will be used for automatic runtime policy enforcement and documentation generation.
+--
+-- /See:/ 'newFieldPolicy' smart constructor.
+data FieldPolicy = FieldPolicy
+  { -- | Specifies the required permission(s) for the resource referred to by the field. It requires the field contains a valid resource reference, and the request must pass the permission checks to proceed. For example, \"resourcemanager.projects.get\".
+    resourcePermission :: (Core.Maybe Core.Text),
+    -- | Specifies the resource type for the resource referred to by the field.
+    resourceType :: (Core.Maybe Core.Text),
+    -- | Selects one or more request or response message fields to apply this @FieldPolicy@. When a @FieldPolicy@ is used in proto annotation, the selector must be left as empty. The service config generator will automatically fill the correct value. When a @FieldPolicy@ is used in service config, the selector must be a comma-separated string with valid request or response field paths, such as \"foo.bar\" or \"foo.bar,foo.baz\".
+    selector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FieldPolicy' with the minimum fields required to make a request.
+newFieldPolicy ::
+  FieldPolicy
+newFieldPolicy =
+  FieldPolicy
+    { resourcePermission = Core.Nothing,
+      resourceType = Core.Nothing,
+      selector = Core.Nothing
+    }
+
+instance Core.FromJSON FieldPolicy where
+  parseJSON =
+    Core.withObject
+      "FieldPolicy"
+      ( \o ->
+          FieldPolicy
+            Core.<$> (o Core..:? "resourcePermission")
+            Core.<*> (o Core..:? "resourceType")
+            Core.<*> (o Core..:? "selector")
+      )
+
+instance Core.ToJSON FieldPolicy where
+  toJSON FieldPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("resourcePermission" Core..=) Core.<$> resourcePermission,
+            ("resourceType" Core..=) Core.<$> resourceType,
+            ("selector" Core..=) Core.<$> selector
+          ]
+      )
+
 -- | Metadata for the @GetServiceIdentity@ method.
 --
 -- /See:/ 'newGetServiceIdentityMetadata' smart constructor.
@@ -2292,7 +2876,10 @@ data GetServiceIdentityResponse = GetServiceIdentityResponse
 newGetServiceIdentityResponse ::
   GetServiceIdentityResponse
 newGetServiceIdentityResponse =
-  GetServiceIdentityResponse {identity = Core.Nothing, state = Core.Nothing}
+  GetServiceIdentityResponse
+    { identity = Core.Nothing,
+      state = Core.Nothing
+    }
 
 instance Core.FromJSON GetServiceIdentityResponse where
   parseJSON =
@@ -2316,27 +2903,65 @@ instance Core.ToJSON GetServiceIdentityResponse where
 -- | Settings for Go client libraries.
 --
 -- /See:/ 'newGoSettings' smart constructor.
-newtype GoSettings = GoSettings
+data GoSettings = GoSettings
   { -- | Some settings.
-    common :: (Core.Maybe CommonLanguageSettings)
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | Map of service names to renamed services. Keys are the package relative service names and values are the name to be used for the service client and call options. publishing: go/settings: renamed/services: Publisher: TopicAdmin
+    renamedServices :: (Core.Maybe GoSettings_RenamedServices)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoSettings' with the minimum fields required to make a request.
 newGoSettings ::
   GoSettings
-newGoSettings = GoSettings {common = Core.Nothing}
+newGoSettings =
+  GoSettings {common = Core.Nothing, renamedServices = Core.Nothing}
 
 instance Core.FromJSON GoSettings where
   parseJSON =
     Core.withObject
       "GoSettings"
-      (\o -> GoSettings Core.<$> (o Core..:? "common"))
+      ( \o ->
+          GoSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "renamedServices")
+      )
 
 instance Core.ToJSON GoSettings where
   toJSON GoSettings {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("renamedServices" Core..=) Core.<$> renamedServices
+          ]
+      )
+
+-- | Map of service names to renamed services. Keys are the package relative service names and values are the name to be used for the service client and call options. publishing: go/settings: renamed/services: Publisher: TopicAdmin
+--
+-- /See:/ 'newGoSettings_RenamedServices' smart constructor.
+newtype GoSettings_RenamedServices = GoSettings_RenamedServices
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoSettings_RenamedServices' with the minimum fields required to make a request.
+newGoSettings_RenamedServices ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoSettings_RenamedServices
+newGoSettings_RenamedServices additional =
+  GoSettings_RenamedServices {additional = additional}
+
+instance Core.FromJSON GoSettings_RenamedServices where
+  parseJSON =
+    Core.withObject
+      "GoSettings_RenamedServices"
+      ( \o ->
+          GoSettings_RenamedServices Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoSettings_RenamedServices where
+  toJSON GoSettings_RenamedServices {..} = Core.toJSON additional
 
 -- | @Service@ is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: \"google.calendar.v3./\" restriction: PREVIEW backend: rules: - selector: \"google.calendar.v3./\" address: calendar.example.com authentication: providers: - id: google/calendar/auth jwks_uri: https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer: https:\/\/securetoken.google.com rules: - selector: \"*\" requirements: provider/id: google/calendar_auth
 --
@@ -2344,6 +2969,8 @@ instance Core.ToJSON GoSettings where
 data GoogleApiService = GoogleApiService
   { -- | A list of API interfaces exported by this service. Only the @name@ field of the google.protobuf.Api needs to be provided by the configuration author, as the remaining fields will be derived from the IDL during the normalization process. It is an error to specify an API interface here which cannot be resolved against the associated IDL files.
     apis :: (Core.Maybe [Api]),
+    -- | Configuration aspects. This is a repeated field to allow multiple aspects to be configured. The kind field in each ConfigAspect specifies the type of aspect. The spec field contains the configuration for that aspect. The schema for the spec field is defined by the backend service owners.
+    aspects :: (Core.Maybe [Aspect]),
     -- | Auth configuration.
     authentication :: (Core.Maybe Authentication),
     -- | API backend configuration.
@@ -2407,6 +3034,7 @@ newGoogleApiService ::
 newGoogleApiService =
   GoogleApiService
     { apis = Core.Nothing,
+      aspects = Core.Nothing,
       authentication = Core.Nothing,
       backend = Core.Nothing,
       billing = Core.Nothing,
@@ -2443,6 +3071,7 @@ instance Core.FromJSON GoogleApiService where
       ( \o ->
           GoogleApiService
             Core.<$> (o Core..:? "apis")
+            Core.<*> (o Core..:? "aspects")
             Core.<*> (o Core..:? "authentication")
             Core.<*> (o Core..:? "backend")
             Core.<*> (o Core..:? "billing")
@@ -2477,6 +3106,7 @@ instance Core.ToJSON GoogleApiService where
     Core.object
       ( Core.catMaybes
           [ ("apis" Core..=) Core.<$> apis,
+            ("aspects" Core..=) Core.<$> aspects,
             ("authentication" Core..=) Core.<$> authentication,
             ("backend" Core..=) Core.<$> backend,
             ("billing" Core..=) Core.<$> billing,
@@ -2492,17 +3122,14 @@ instance Core.ToJSON GoogleApiService where
             ("logging" Core..=) Core.<$> logging,
             ("logs" Core..=) Core.<$> logs,
             ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResources" Core..=)
-              Core.<$> monitoredResources,
+            ("monitoredResources" Core..=) Core.<$> monitoredResources,
             ("monitoring" Core..=) Core.<$> monitoring,
             ("name" Core..=) Core.<$> name,
-            ("producerProjectId" Core..=)
-              Core.<$> producerProjectId,
+            ("producerProjectId" Core..=) Core.<$> producerProjectId,
             ("publishing" Core..=) Core.<$> publishing,
             ("quota" Core..=) Core.<$> quota,
             ("sourceInfo" Core..=) Core.<$> sourceInfo,
-            ("systemParameters" Core..=)
-              Core.<$> systemParameters,
+            ("systemParameters" Core..=) Core.<$> systemParameters,
             ("systemTypes" Core..=) Core.<$> systemTypes,
             ("title" Core..=) Core.<$> title,
             ("types" Core..=) Core.<$> types,
@@ -2523,12 +3150,12 @@ newtype GoogleApiServiceusageV1OperationMetadata = GoogleApiServiceusageV1Operat
 newGoogleApiServiceusageV1OperationMetadata ::
   GoogleApiServiceusageV1OperationMetadata
 newGoogleApiServiceusageV1OperationMetadata =
-  GoogleApiServiceusageV1OperationMetadata {resourceNames = Core.Nothing}
+  GoogleApiServiceusageV1OperationMetadata
+    { resourceNames =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleApiServiceusageV1OperationMetadata
-  where
+instance Core.FromJSON GoogleApiServiceusageV1OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleApiServiceusageV1OperationMetadata"
@@ -2537,15 +3164,10 @@ instance
             Core.<$> (o Core..:? "resourceNames")
       )
 
-instance
-  Core.ToJSON
-    GoogleApiServiceusageV1OperationMetadata
-  where
+instance Core.ToJSON GoogleApiServiceusageV1OperationMetadata where
   toJSON GoogleApiServiceusageV1OperationMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceNames" Core..=) Core.<$> resourceNames]
-      )
+      (Core.catMaybes [("resourceNames" Core..=) Core.<$> resourceNames])
 
 -- | A service that is available for use by the consumer.
 --
@@ -2640,10 +3262,7 @@ newGoogleApiServiceusageV1ServiceConfig =
       usage = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleApiServiceusageV1ServiceConfig
-  where
+instance Core.FromJSON GoogleApiServiceusageV1ServiceConfig where
   parseJSON =
     Core.withObject
       "GoogleApiServiceusageV1ServiceConfig"
@@ -2661,10 +3280,7 @@ instance
             Core.<*> (o Core..:? "usage")
       )
 
-instance
-  Core.ToJSON
-    GoogleApiServiceusageV1ServiceConfig
-  where
+instance Core.ToJSON GoogleApiServiceusageV1ServiceConfig where
   toJSON GoogleApiServiceusageV1ServiceConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -2672,8 +3288,7 @@ instance
             ("authentication" Core..=) Core.<$> authentication,
             ("documentation" Core..=) Core.<$> documentation,
             ("endpoints" Core..=) Core.<$> endpoints,
-            ("monitoredResources" Core..=)
-              Core.<$> monitoredResources,
+            ("monitoredResources" Core..=) Core.<$> monitoredResources,
             ("monitoring" Core..=) Core.<$> monitoring,
             ("name" Core..=) Core.<$> name,
             ("quota" Core..=) Core.<$> quota,
@@ -2701,7 +3316,8 @@ newGoogleApiServiceusageV1beta1GetServiceIdentityResponse ::
   GoogleApiServiceusageV1beta1GetServiceIdentityResponse
 newGoogleApiServiceusageV1beta1GetServiceIdentityResponse =
   GoogleApiServiceusageV1beta1GetServiceIdentityResponse
-    { identity = Core.Nothing,
+    { identity =
+        Core.Nothing,
       state = Core.Nothing
     }
 
@@ -2715,21 +3331,20 @@ instance
       ( \o ->
           GoogleApiServiceusageV1beta1GetServiceIdentityResponse
             Core.<$> (o Core..:? "identity")
-              Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "state")
       )
 
 instance
   Core.ToJSON
     GoogleApiServiceusageV1beta1GetServiceIdentityResponse
   where
-  toJSON
-    GoogleApiServiceusageV1beta1GetServiceIdentityResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("identity" Core..=) Core.<$> identity,
-              ("state" Core..=) Core.<$> state
-            ]
-        )
+  toJSON GoogleApiServiceusageV1beta1GetServiceIdentityResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("identity" Core..=) Core.<$> identity,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
 
 -- | Service identity for a service. This is the identity that service producer should use to access consumer resources.
 --
@@ -2751,10 +3366,7 @@ newGoogleApiServiceusageV1beta1ServiceIdentity =
       uniqueId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleApiServiceusageV1beta1ServiceIdentity
-  where
+instance Core.FromJSON GoogleApiServiceusageV1beta1ServiceIdentity where
   parseJSON =
     Core.withObject
       "GoogleApiServiceusageV1beta1ServiceIdentity"
@@ -2764,18 +3376,523 @@ instance
             Core.<*> (o Core..:? "uniqueId")
       )
 
+instance Core.ToJSON GoogleApiServiceusageV1beta1ServiceIdentity where
+  toJSON GoogleApiServiceusageV1beta1ServiceIdentity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("email" Core..=) Core.<$> email,
+            ("uniqueId" Core..=) Core.<$> uniqueId
+          ]
+      )
+
+-- | Consumer Policy is a set of rules that define what services or service groups can be used for a cloud resource hierarchy.
+--
+-- /See:/ 'newGoogleApiServiceusageV2alphaConsumerPolicy' smart constructor.
+data GoogleApiServiceusageV2alphaConsumerPolicy = GoogleApiServiceusageV2alphaConsumerPolicy
+  { -- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+    annotations :: (Core.Maybe GoogleApiServiceusageV2alphaConsumerPolicy_Annotations),
+    -- | Output only. The time the policy was created. For singleton policies, this is the first touch of the policy.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Enable rules define usable services, groups, and categories. There can currently be at most one @EnableRule@. This restriction will be lifted in later releases.
+    enableRules :: (Core.Maybe [GoogleApiServiceusageV2alphaEnableRule]),
+    -- | Output only. An opaque tag indicating the current version of the policy, used for concurrency control.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. The resource name of the policy. Only the @default@ policy is supported: @projects\/12345\/consumerPolicies\/default@, @folders\/12345\/consumerPolicies\/default@, @organizations\/12345\/consumerPolicies\/default@.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The time the policy was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2alphaConsumerPolicy' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2alphaConsumerPolicy ::
+  GoogleApiServiceusageV2alphaConsumerPolicy
+newGoogleApiServiceusageV2alphaConsumerPolicy =
+  GoogleApiServiceusageV2alphaConsumerPolicy
+    { annotations =
+        Core.Nothing,
+      createTime = Core.Nothing,
+      enableRules = Core.Nothing,
+      etag = Core.Nothing,
+      name = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleApiServiceusageV2alphaConsumerPolicy where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2alphaConsumerPolicy"
+      ( \o ->
+          GoogleApiServiceusageV2alphaConsumerPolicy
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "enableRules")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2alphaConsumerPolicy where
+  toJSON GoogleApiServiceusageV2alphaConsumerPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("enableRules" Core..=) Core.<$> enableRules,
+            ("etag" Core..=) Core.<$> etag,
+            ("name" Core..=) Core.<$> name,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+--
+-- /See:/ 'newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations' smart constructor.
+newtype GoogleApiServiceusageV2alphaConsumerPolicy_Annotations = GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2alphaConsumerPolicy_Annotations' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+  additional =
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2alphaConsumerPolicy_Annotations"
+      ( \o ->
+          GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
 instance
   Core.ToJSON
-    GoogleApiServiceusageV1beta1ServiceIdentity
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
   where
-  toJSON
-    GoogleApiServiceusageV1beta1ServiceIdentity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("email" Core..=) Core.<$> email,
-              ("uniqueId" Core..=) Core.<$> uniqueId
-            ]
-        )
+  toJSON GoogleApiServiceusageV2alphaConsumerPolicy_Annotations {..} =
+    Core.toJSON additional
+
+-- | The consumer policy rule that defines enabled services, groups, and categories.
+--
+-- /See:/ 'newGoogleApiServiceusageV2alphaEnableRule' smart constructor.
+newtype GoogleApiServiceusageV2alphaEnableRule = GoogleApiServiceusageV2alphaEnableRule
+  { -- | The names of the services that are enabled. Example: @services\/storage.googleapis.com@.
+    services :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2alphaEnableRule' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2alphaEnableRule ::
+  GoogleApiServiceusageV2alphaEnableRule
+newGoogleApiServiceusageV2alphaEnableRule =
+  GoogleApiServiceusageV2alphaEnableRule {services = Core.Nothing}
+
+instance Core.FromJSON GoogleApiServiceusageV2alphaEnableRule where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2alphaEnableRule"
+      ( \o ->
+          GoogleApiServiceusageV2alphaEnableRule
+            Core.<$> (o Core..:? "services")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2alphaEnableRule where
+  toJSON GoogleApiServiceusageV2alphaEnableRule {..} =
+    Core.object
+      (Core.catMaybes [("services" Core..=) Core.<$> services])
+
+-- | Metadata for the @UpdateConsumerPolicy@ method.
+--
+-- /See:/ 'newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata' smart constructor.
+data GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata = GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata ::
+  GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata =
+  GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata"
+      ( \o ->
+          Core.pure GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+      )
+
+instance
+  Core.ToJSON
+    GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | A message to group the analysis information.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaAnalysis' smart constructor.
+data GoogleApiServiceusageV2betaAnalysis = GoogleApiServiceusageV2betaAnalysis
+  { -- | Output only. Analysis result of updating a policy.
+    analysisResult :: (Core.Maybe GoogleApiServiceusageV2betaAnalysisResult),
+    -- | Output only. The type of analysis.
+    analysisType :: (Core.Maybe GoogleApiServiceusageV2betaAnalysis_AnalysisType),
+    -- | Output only. The user friendly display name of the analysis type. E.g. service dependency analysis, service resource usage analysis, etc.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The names of the service that has analysis result of warnings or blockers. Example: @services\/storage.googleapis.com@.
+    service :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaAnalysis' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaAnalysis ::
+  GoogleApiServiceusageV2betaAnalysis
+newGoogleApiServiceusageV2betaAnalysis =
+  GoogleApiServiceusageV2betaAnalysis
+    { analysisResult =
+        Core.Nothing,
+      analysisType = Core.Nothing,
+      displayName = Core.Nothing,
+      service = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleApiServiceusageV2betaAnalysis where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaAnalysis"
+      ( \o ->
+          GoogleApiServiceusageV2betaAnalysis
+            Core.<$> (o Core..:? "analysisResult")
+            Core.<*> (o Core..:? "analysisType")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "service")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2betaAnalysis where
+  toJSON GoogleApiServiceusageV2betaAnalysis {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("analysisResult" Core..=) Core.<$> analysisResult,
+            ("analysisType" Core..=) Core.<$> analysisType,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("service" Core..=) Core.<$> service
+          ]
+      )
+
+-- | An analysis result including blockers and warnings.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaAnalysisResult' smart constructor.
+data GoogleApiServiceusageV2betaAnalysisResult = GoogleApiServiceusageV2betaAnalysisResult
+  { -- | Blocking information that would prevent the policy changes at runtime.
+    blockers :: (Core.Maybe [GoogleApiServiceusageV2betaImpact]),
+    -- | Warning information indicating that the policy changes might be unsafe, but will not block the changes at runtime.
+    warnings :: (Core.Maybe [GoogleApiServiceusageV2betaImpact])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaAnalysisResult' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaAnalysisResult ::
+  GoogleApiServiceusageV2betaAnalysisResult
+newGoogleApiServiceusageV2betaAnalysisResult =
+  GoogleApiServiceusageV2betaAnalysisResult
+    { blockers =
+        Core.Nothing,
+      warnings = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleApiServiceusageV2betaAnalysisResult where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaAnalysisResult"
+      ( \o ->
+          GoogleApiServiceusageV2betaAnalysisResult
+            Core.<$> (o Core..:? "blockers")
+            Core.<*> (o Core..:? "warnings")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2betaAnalysisResult where
+  toJSON GoogleApiServiceusageV2betaAnalysisResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blockers" Core..=) Core.<$> blockers,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
+
+-- | Metadata for the @AnalyzeConsumerPolicy@ method.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata' smart constructor.
+data GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata = GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata ::
+  GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata =
+  GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata"
+      ( \o ->
+          Core.pure GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+      )
+
+instance
+  Core.ToJSON
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+  where
+  toJSON = Core.const Core.emptyObject
+
+-- | The response of analyzing a consumer policy update.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse' smart constructor.
+newtype GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse = GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+  { -- | The list of analyses returned from performing the intended policy update analysis. The analysis is grouped by service name and different analysis types. The empty analysis list means that the consumer policy can be updated without any warnings or blockers.
+    analysis :: (Core.Maybe [GoogleApiServiceusageV2betaAnalysis])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse ::
+  GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse =
+  GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+    { analysis =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse"
+      ( \o ->
+          GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+            Core.<$> (o Core..:? "analysis")
+      )
+
+instance
+  Core.ToJSON
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+  where
+  toJSON GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse {..} =
+    Core.object
+      (Core.catMaybes [("analysis" Core..=) Core.<$> analysis])
+
+-- | Consumer Policy is a set of rules that define what services or service groups can be used for a cloud resource hierarchy.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaConsumerPolicy' smart constructor.
+data GoogleApiServiceusageV2betaConsumerPolicy = GoogleApiServiceusageV2betaConsumerPolicy
+  { -- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+    annotations :: (Core.Maybe GoogleApiServiceusageV2betaConsumerPolicy_Annotations),
+    -- | Output only. The time the policy was created. For singleton policies, this is the first touch of the policy.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Enable rules define usable services, groups, and categories. There can currently be at most one @EnableRule@. This restriction will be lifted in later releases.
+    enableRules :: (Core.Maybe [GoogleApiServiceusageV2betaEnableRule]),
+    -- | Output only. An opaque tag indicating the current version of the policy, used for concurrency control.
+    etag :: (Core.Maybe Core.Text),
+    -- | Output only. The resource name of the policy. Only the @default@ policy is supported: @projects\/12345\/consumerPolicies\/default@, @folders\/12345\/consumerPolicies\/default@, @organizations\/12345\/consumerPolicies\/default@.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The time the policy was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaConsumerPolicy' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaConsumerPolicy ::
+  GoogleApiServiceusageV2betaConsumerPolicy
+newGoogleApiServiceusageV2betaConsumerPolicy =
+  GoogleApiServiceusageV2betaConsumerPolicy
+    { annotations =
+        Core.Nothing,
+      createTime = Core.Nothing,
+      enableRules = Core.Nothing,
+      etag = Core.Nothing,
+      name = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleApiServiceusageV2betaConsumerPolicy where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaConsumerPolicy"
+      ( \o ->
+          GoogleApiServiceusageV2betaConsumerPolicy
+            Core.<$> (o Core..:? "annotations")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "enableRules")
+            Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2betaConsumerPolicy where
+  toJSON GoogleApiServiceusageV2betaConsumerPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("annotations" Core..=) Core.<$> annotations,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("enableRules" Core..=) Core.<$> enableRules,
+            ("etag" Core..=) Core.<$> etag,
+            ("name" Core..=) Core.<$> name,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | Optional. Annotations is an unstructured key-value map stored with a policy that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. <https://google.aip.dev/128#annotations AIP-128>
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaConsumerPolicy_Annotations' smart constructor.
+newtype GoogleApiServiceusageV2betaConsumerPolicy_Annotations = GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaConsumerPolicy_Annotations' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaConsumerPolicy_Annotations ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+newGoogleApiServiceusageV2betaConsumerPolicy_Annotations additional =
+  GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+    { additional =
+        additional
+    }
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaConsumerPolicy_Annotations"
+      ( \o ->
+          GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+  where
+  toJSON GoogleApiServiceusageV2betaConsumerPolicy_Annotations {..} =
+    Core.toJSON additional
+
+-- | The consumer policy rule that defines enabled services, groups, and categories.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaEnableRule' smart constructor.
+newtype GoogleApiServiceusageV2betaEnableRule = GoogleApiServiceusageV2betaEnableRule
+  { -- | The names of the services that are enabled. Example: @services\/storage.googleapis.com@.
+    services :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaEnableRule' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaEnableRule ::
+  GoogleApiServiceusageV2betaEnableRule
+newGoogleApiServiceusageV2betaEnableRule =
+  GoogleApiServiceusageV2betaEnableRule {services = Core.Nothing}
+
+instance Core.FromJSON GoogleApiServiceusageV2betaEnableRule where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaEnableRule"
+      ( \o ->
+          GoogleApiServiceusageV2betaEnableRule
+            Core.<$> (o Core..:? "services")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2betaEnableRule where
+  toJSON GoogleApiServiceusageV2betaEnableRule {..} =
+    Core.object
+      (Core.catMaybes [("services" Core..=) Core.<$> services])
+
+-- | A message to group impacts of updating a policy.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaImpact' smart constructor.
+data GoogleApiServiceusageV2betaImpact = GoogleApiServiceusageV2betaImpact
+  { -- | Output only. User friendly impact detail in a free form message.
+    detail :: (Core.Maybe Core.Text),
+    -- | Output only. The type of impact.
+    impactType :: (Core.Maybe GoogleApiServiceusageV2betaImpact_ImpactType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaImpact' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaImpact ::
+  GoogleApiServiceusageV2betaImpact
+newGoogleApiServiceusageV2betaImpact =
+  GoogleApiServiceusageV2betaImpact
+    { detail = Core.Nothing,
+      impactType = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleApiServiceusageV2betaImpact where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaImpact"
+      ( \o ->
+          GoogleApiServiceusageV2betaImpact
+            Core.<$> (o Core..:? "detail")
+            Core.<*> (o Core..:? "impactType")
+      )
+
+instance Core.ToJSON GoogleApiServiceusageV2betaImpact where
+  toJSON GoogleApiServiceusageV2betaImpact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detail" Core..=) Core.<$> detail,
+            ("impactType" Core..=) Core.<$> impactType
+          ]
+      )
+
+-- | Metadata for the @UpdateConsumerPolicy@ method.
+--
+-- /See:/ 'newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata' smart constructor.
+data GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata = GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata' with the minimum fields required to make a request.
+newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata ::
+  GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata =
+  GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+
+instance
+  Core.FromJSON
+    GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata"
+      ( \o ->
+          Core.pure GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+      )
+
+instance
+  Core.ToJSON
+    GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+  where
+  toJSON = Core.const Core.emptyObject
 
 -- | Defines the HTTP configuration for an API service. It contains a list of HttpRule, each specifying the mapping of an RPC method to one or more HTTP REST API methods.
 --
@@ -2792,7 +3909,10 @@ data Http = Http
 newHttp ::
   Http
 newHttp =
-  Http {fullyDecodeReservedExpansion = Core.Nothing, rules = Core.Nothing}
+  Http
+    { fullyDecodeReservedExpansion = Core.Nothing,
+      rules = Core.Nothing
+    }
 
 instance Core.FromJSON Http where
   parseJSON =
@@ -2814,7 +3934,16 @@ instance Core.ToJSON Http where
           ]
       )
 
--- | = gRPC Transcoding gRPC Transcoding is a feature for mapping between a gRPC method and one or more HTTP REST endpoints. It allows developers to build a single API service that supports both gRPC APIs and REST APIs. Many systems, including <https://github.com/googleapis/googleapis Google APIs>, <https://cloud.google.com/endpoints Cloud Endpoints>, <https://github.com/grpc-ecosystem/grpc-gateway gRPC Gateway>, and <https://github.com/envoyproxy/envoy Envoy> proxy support this feature and use it for large scale production services. @HttpRule@ defines the schema of the gRPC\/REST mapping. The mapping specifies how different portions of the gRPC request message are mapped to the URL path, URL query parameters, and HTTP request body. It also controls how the gRPC response message is mapped to the HTTP response body. @HttpRule@ is typically specified as an @google.api.http@ annotation on the gRPC method. Each mapping specifies a URL path template and an HTTP method. The path template may refer to one or more fields in the gRPC request message, as long as each field is a non-repeated field with a primitive (non-message) type. The path template controls how fields of the request message are mapped to the URL path. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message Message { string text = 1; \/\/ The resource content. } This enables an HTTP REST to gRPC mapping as below: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456@ | @GetMessage(name: \"messages\/123456\")@ Any fields in the request message which are not bound by the path template automatically become HTTP query parameters if there is no HTTP request body. For example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get:\"\/v1\/messages\/{message/id}\" }; } } message GetMessageRequest { message SubMessage { string subfield = 1; } string message/id = 1; \/\/ Mapped to URL path. int64 revision = 2; \/\/ Mapped to URL query parameter @revision@. SubMessage sub = 3; \/\/ Mapped to URL query parameter @sub.subfield@. } This enables a HTTP JSON to RPC mapping as below: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456?revision=2&sub.subfield=foo@ | @GetMessage(message_id: \"123456\" revision: 2 sub: SubMessage(subfield: \"foo\"))@ Note that fields which are mapped to URL query parameters must have a primitive type or a repeated primitive type or a non-repeated message type. In the case of a repeated type, the parameter can be repeated in the URL as @...?param=A&param=B@. In the case of a message type, each field of the message is mapped to a separate parameter, such as @...?foo.a=A&foo.b=B&foo.c=C@. For HTTP methods that allow a request body, the @body@ field specifies the mapping. Consider a REST update method on the message resource collection: service Messaging { rpc UpdateMessage(UpdateMessageRequest) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message/id}\" body: \"message\" }; } } message UpdateMessageRequest { string message/id = 1; \/\/ mapped to the URL Message message = 2; \/\/ mapped to the body } The following HTTP JSON to RPC mapping is enabled, where the representation of the JSON in the request body is determined by protos JSON encoding: HTTP | gRPC -----|----- @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ | @UpdateMessage(message_id: \"123456\" message { text: \"Hi!\" })@ The special name @*@ can be used in the body mapping to define that every field not bound by the path template should be mapped to the request body. This enables the following alternative definition of the update method: service Messaging { rpc UpdateMessage(Message) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message_id}\" body: \"*\" }; } } message Message { string message/id = 1; string text = 2; } The following HTTP JSON to RPC mapping is enabled: HTTP | gRPC -----|----- @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ | @UpdateMessage(message_id: \"123456\" text: \"Hi!\")@ Note that when using @*@ in the body mapping, it is not possible to have HTTP parameters, as all fields not bound by the path end in the body. This makes this option more rarely used in practice when defining REST APIs. The common usage of @*@ is in custom methods which don\'t use the URL at all for transferring data. It is possible to define multiple HTTP methods for one RPC by using the @additional_bindings@ option. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/messages\/{message/id}\" additional/bindings { get: \"\/v1\/users\/{user/id}\/messages\/{message/id}\" } }; } } message GetMessageRequest { string message/id = 1; string user_id = 2; } This enables the following two alternative HTTP JSON to RPC mappings: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456@ | @GetMessage(message_id: \"123456\")@ @GET \/v1\/users\/me\/messages\/123456@ | @GetMessage(user_id: \"me\" message_id: \"123456\")@ ## Rules for HTTP mapping 1. Leaf request fields (recursive expansion nested messages in the request message) are classified into three categories: - Fields referred by the path template. They are passed via the URL path. - Fields referred by the HttpRule.body. They are passed via the HTTP request body. - All other fields are passed via the URL query parameters, and the parameter name is the field path in the request message. A repeated field can be represented as multiple query parameters under the same name. 2. If HttpRule.body is \"/\", there is no URL query parameter, all fields are passed via URL path and HTTP request body. 3. If HttpRule.body is omitted, there is no HTTP request body, all fields are passed via URL path and URL query parameters. ### Path template syntax Template = \"\/\" Segments [ Verb ] ; Segments = Segment { \"\/\" Segment } ; Segment = \"/\" | \"**\" | LITERAL | Variable ; Variable = \"{\" FieldPath [ \"=\" Segments ] \"}\" ; FieldPath = IDENT { \".\" IDENT } ; Verb = \":\" LITERAL ; The syntax @*@ matches a single URL path segment. The syntax @**@ matches zero or more URL path segments, which must be the last part of the URL path except the @Verb@. The syntax @Variable@ matches part of the URL path as specified by its template. A variable template must not contain other variables. If a variable matches a single path segment, its template may be omitted, e.g. @{var}@ is equivalent to @{var=*}@. The syntax @LITERAL@ matches literal text in the URL path. If the @LITERAL@ contains any reserved character, such characters should be percent-encoded before the matching. If a variable contains exactly one path segment, such as @\"{var}\"@ or @\"{var=*}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{var}@. If a variable contains multiple path segments, such as @\"{var=foo\/*}\"@ or @\"{var=**}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~\/0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding, except \"%2F\" and \"%2f\" are left unchanged. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{+var}@. ## Using gRPC API Service Configuration gRPC API Service Configuration (service config) is a configuration language for configuring a gRPC service to become a user-facing product. The service config is simply the YAML representation of the @google.api.Service@ proto message. As an alternative to annotating your proto file, you can configure gRPC transcoding in your service config YAML files. You do this by specifying a @HttpRule@ that maps the gRPC method to a REST endpoint, achieving the same effect as the proto annotation. This can be particularly useful if you have a proto that is reused in multiple services. Note that any transcoding specified in the service config will override any matching transcoding configuration in the proto. Example: http: rules: # Selects a gRPC method and applies HttpRule to it. - selector: example.v1.Messaging.GetMessage get: \/v1\/messages\/{message_id}\/{sub.subfield} ## Special notes When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the proto to JSON conversion must follow the <https://developers.google.com/protocol-buffers/docs/proto3#json proto3 specification>. While the single segment variable follows the semantics of <https://tools.ietf.org/html/rfc6570 RFC 6570> Section 3.2.2 Simple String Expansion, the multi segment variable __does not__ follow RFC 6570 Section 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion does not expand special characters like @?@ and @#@, which would lead to invalid URLs. As the result, gRPC Transcoding uses a custom encoding for multi segment variables. The path variables __must not__ refer to any repeated or mapped field, because client libraries are not capable of handling such variable expansion. The path variables __must not__ capture the leading \"\/\" character. The reason is that the most common use case \"{var}\" does not capture the leading \"\/\" character. For consistency, all path variables must share the same behavior. Repeated message fields must not be mapped to URL query parameters, because no client library can support such complicated mapping. If an API needs to use a JSON array for request or response body, it can map the request or response body to a repeated field. However, some gRPC Transcoding implementations may not support this feature.
+-- | gRPC Transcoding gRPC Transcoding is a feature for mapping between a gRPC method and one or more HTTP REST endpoints. It allows developers to build a single API service that supports both gRPC APIs and REST APIs. Many systems, including <https://github.com/googleapis/googleapis Google APIs>, <https://cloud.google.com/endpoints Cloud Endpoints>, <https://github.com/grpc-ecosystem/grpc-gateway gRPC Gateway>, and <https://github.com/envoyproxy/envoy Envoy> proxy support this feature and use it for large scale production services. @HttpRule@ defines the schema of the gRPC\/REST mapping. The mapping specifies how different portions of the gRPC request message are mapped to the URL path, URL query parameters, and HTTP request body. It also controls how the gRPC response message is mapped to the HTTP response body. @HttpRule@ is typically specified as an @google.api.http@ annotation on the gRPC method. Each mapping specifies a URL path template and an HTTP method. The path template may refer to one or more fields in
+-- the gRPC request message, as long as each field is a non-repeated field with a primitive (non-message) type. The path template controls how fields of the request message are mapped to the URL path. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message Message { string text = 1; \/\/ The resource content. } This enables an HTTP REST to gRPC mapping as below: - HTTP: @GET \/v1\/messages\/123456@ - gRPC: @GetMessage(name: \"messages\/123456\")@ Any fields in the request message which are not bound by the path template automatically become HTTP query parameters if there is no HTTP request body. For example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get:\"\/v1\/messages\/{message/id}\" }; } } message GetMessageRequest { message SubMessage { string subfield = 1; } string
+-- message/id = 1; \/\/ Mapped to URL path. int64 revision = 2; \/\/ Mapped to URL query parameter @revision@. SubMessage sub = 3; \/\/ Mapped to URL query parameter @sub.subfield@. } This enables a HTTP JSON to RPC mapping as below: - HTTP: @GET \/v1\/messages\/123456?revision=2&sub.subfield=foo@ - gRPC: @GetMessage(message_id: \"123456\" revision: 2 sub: SubMessage(subfield: \"foo\"))@ Note that fields which are mapped to URL query parameters must have a primitive type or a repeated primitive type or a non-repeated message type. In the case of a repeated type, the parameter can be repeated in the URL as @...?param=A&param=B@. In the case of a message type, each field of the message is mapped to a separate parameter, such as @...?foo.a=A&foo.b=B&foo.c=C@. For HTTP methods that allow a request body, the @body@ field specifies the mapping. Consider a REST update method on the message resource collection: service Messaging { rpc UpdateMessage(UpdateMessageRequest) returns (Message) { option (google.api.http) = {
+-- patch: \"\/v1\/messages\/{message/id}\" body: \"message\" }; } } message UpdateMessageRequest { string message/id = 1; \/\/ mapped to the URL Message message = 2; \/\/ mapped to the body } The following HTTP JSON to RPC mapping is enabled, where the representation of the JSON in the request body is determined by protos JSON encoding: - HTTP: @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ - gRPC: @UpdateMessage(message_id: \"123456\" message { text: \"Hi!\" })@ The special name @*@ can be used in the body mapping to define that every field not bound by the path template should be mapped to the request body. This enables the following alternative definition of the update method: service Messaging { rpc UpdateMessage(Message) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message_id}\" body: \"*\" }; } } message Message { string message/id = 1; string text = 2; } The following HTTP JSON to RPC mapping is enabled: - HTTP: @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ -
+-- gRPC: @UpdateMessage(message_id: \"123456\" text: \"Hi!\")@ Note that when using @*@ in the body mapping, it is not possible to have HTTP parameters, as all fields not bound by the path end in the body. This makes this option more rarely used in practice when defining REST APIs. The common usage of @*@ is in custom methods which don\'t use the URL at all for transferring data. It is possible to define multiple HTTP methods for one RPC by using the @additional_bindings@ option. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/messages\/{message/id}\" additional/bindings { get: \"\/v1\/users\/{user/id}\/messages\/{message/id}\" } }; } } message GetMessageRequest { string message/id = 1; string user_id = 2; } This enables the following two alternative HTTP JSON to RPC mappings: - HTTP: @GET \/v1\/messages\/123456@ - gRPC: @GetMessage(message_id: \"123456\")@ - HTTP: @GET \/v1\/users\/me\/messages\/123456@ - gRPC:
+-- @GetMessage(user_id: \"me\" message_id: \"123456\")@ Rules for HTTP mapping 1. Leaf request fields (recursive expansion nested messages in the request message) are classified into three categories: - Fields referred by the path template. They are passed via the URL path. - Fields referred by the HttpRule.body. They are passed via the HTTP request body. - All other fields are passed via the URL query parameters, and the parameter name is the field path in the request message. A repeated field can be represented as multiple query parameters under the same name. 2. If HttpRule.body is \"/\", there is no URL query parameter, all fields are passed via URL path and HTTP request body. 3. If HttpRule.body is omitted, there is no HTTP request body, all fields are passed via URL path and URL query parameters. Path template syntax Template = \"\/\" Segments [ Verb ] ; Segments = Segment { \"\/\" Segment } ; Segment = \"/\" | \"**\" | LITERAL | Variable ; Variable = \"{\" FieldPath [ \"=\" Segments ] \"}\" ; FieldPath =
+-- IDENT { \".\" IDENT } ; Verb = \":\" LITERAL ; The syntax @*@ matches a single URL path segment. The syntax @**@ matches zero or more URL path segments, which must be the last part of the URL path except the @Verb@. The syntax @Variable@ matches part of the URL path as specified by its template. A variable template must not contain other variables. If a variable matches a single path segment, its template may be omitted, e.g. @{var}@ is equivalent to @{var=*}@. The syntax @LITERAL@ matches literal text in the URL path. If the @LITERAL@ contains any reserved character, such characters should be percent-encoded before the matching. If a variable contains exactly one path segment, such as @\"{var}\"@ or @\"{var=*}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{var}@. If a
+-- variable contains multiple path segments, such as @\"{var=foo\/*}\"@ or @\"{var=**}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~\/0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding, except \"%2F\" and \"%2f\" are left unchanged. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{+var}@. Using gRPC API Service Configuration gRPC API Service Configuration (service config) is a configuration language for configuring a gRPC service to become a user-facing product. The service config is simply the YAML representation of the @google.api.Service@ proto message. As an alternative to annotating your proto file, you can configure gRPC transcoding in your service config YAML files. You do this by specifying a @HttpRule@ that maps the gRPC method to a REST endpoint, achieving the same effect as the proto annotation. This can be particularly useful if you have a proto that is
+-- reused in multiple services. Note that any transcoding specified in the service config will override any matching transcoding configuration in the proto. The following example selects a gRPC method and applies an @HttpRule@ to it: http: rules: - selector: example.v1.Messaging.GetMessage get: \/v1\/messages\/{message_id}\/{sub.subfield} Special notes When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the proto to JSON conversion must follow the <https://developers.google.com/protocol-buffers/docs/proto3#json proto3 specification>. While the single segment variable follows the semantics of <https://tools.ietf.org/html/rfc6570 RFC 6570> Section 3.2.2 Simple String Expansion, the multi segment variable __does not__ follow RFC 6570 Section 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion does not expand special characters like @?@ and @#@, which would lead to invalid URLs. As the result, gRPC Transcoding uses a custom encoding for multi segment variables. The path variables
+-- __must not__ refer to any repeated or mapped field, because client libraries are not capable of handling such variable expansion. The path variables __must not__ capture the leading \"\/\" character. The reason is that the most common use case \"{var}\" does not capture the leading \"\/\" character. For consistency, all path variables must share the same behavior. Repeated message fields must not be mapped to URL query parameters, because no client library can support such complicated mapping. If an API needs to use a JSON array for request or response body, it can map the request or response body to a repeated field. However, some gRPC Transcoding implementations may not support this feature.
 --
 -- /See:/ 'newHttpRule' smart constructor.
 data HttpRule = HttpRule
@@ -2880,8 +4009,7 @@ instance Core.ToJSON HttpRule where
   toJSON HttpRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalBindings" Core..=)
-              Core.<$> additionalBindings,
+          [ ("additionalBindings" Core..=) Core.<$> additionalBindings,
             ("body" Core..=) Core.<$> body,
             ("custom" Core..=) Core.<$> custom,
             ("delete" Core..=) Core.<$> delete,
@@ -2891,6 +4019,50 @@ instance Core.ToJSON HttpRule where
             ("put" Core..=) Core.<$> put,
             ("responseBody" Core..=) Core.<$> responseBody,
             ("selector" Core..=) Core.<$> selector
+          ]
+      )
+
+-- | A message to group impacts of updating a policy.
+--
+-- /See:/ 'newImpact' smart constructor.
+data Impact = Impact
+  { -- | Output only. User friendly impact detail in a free form message.
+    detail :: (Core.Maybe Core.Text),
+    -- | Output only. The type of impact.
+    impactType :: (Core.Maybe Impact_ImpactType),
+    -- | The parent resource that the analysis is based on and the service name that the analysis is for. Example: @projects\/100\/services\/compute.googleapis.com@, folders\/101\/services\/compute.googleapis.com@and@organizations\/102\/services\/compute.googleapis.com\`. Usually, the parent resource here is same as the parent resource of the analyzed policy. However, for some analysis types, the parent can be different. For example, for resource existence analysis, if the parent resource of the analyzed policy is a folder or an organization, the parent resource here can still be the project that contains the resources.
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Impact' with the minimum fields required to make a request.
+newImpact ::
+  Impact
+newImpact =
+  Impact
+    { detail = Core.Nothing,
+      impactType = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance Core.FromJSON Impact where
+  parseJSON =
+    Core.withObject
+      "Impact"
+      ( \o ->
+          Impact
+            Core.<$> (o Core..:? "detail")
+            Core.<*> (o Core..:? "impactType")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance Core.ToJSON Impact where
+  toJSON Impact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detail" Core..=) Core.<$> detail,
+            ("impactType" Core..=) Core.<$> impactType,
+            ("parent" Core..=) Core.<$> parent
           ]
       )
 
@@ -2934,16 +4106,13 @@ instance Core.FromJSON ImportAdminOverridesResponse where
     Core.withObject
       "ImportAdminOverridesResponse"
       ( \o ->
-          ImportAdminOverridesResponse
-            Core.<$> (o Core..:? "overrides")
+          ImportAdminOverridesResponse Core.<$> (o Core..:? "overrides")
       )
 
 instance Core.ToJSON ImportAdminOverridesResponse where
   toJSON ImportAdminOverridesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("overrides" Core..=) Core.<$> overrides]
-      )
+      (Core.catMaybes [("overrides" Core..=) Core.<$> overrides])
 
 -- | Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportAdminQuotaPolicies.
 --
@@ -2954,12 +4123,10 @@ data ImportAdminQuotaPoliciesMetadata = ImportAdminQuotaPoliciesMetadata
 -- | Creates a value of 'ImportAdminQuotaPoliciesMetadata' with the minimum fields required to make a request.
 newImportAdminQuotaPoliciesMetadata ::
   ImportAdminQuotaPoliciesMetadata
-newImportAdminQuotaPoliciesMetadata = ImportAdminQuotaPoliciesMetadata
+newImportAdminQuotaPoliciesMetadata =
+  ImportAdminQuotaPoliciesMetadata
 
-instance
-  Core.FromJSON
-    ImportAdminQuotaPoliciesMetadata
-  where
+instance Core.FromJSON ImportAdminQuotaPoliciesMetadata where
   parseJSON =
     Core.withObject
       "ImportAdminQuotaPoliciesMetadata"
@@ -2983,24 +4150,18 @@ newImportAdminQuotaPoliciesResponse ::
 newImportAdminQuotaPoliciesResponse =
   ImportAdminQuotaPoliciesResponse {policies = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ImportAdminQuotaPoliciesResponse
-  where
+instance Core.FromJSON ImportAdminQuotaPoliciesResponse where
   parseJSON =
     Core.withObject
       "ImportAdminQuotaPoliciesResponse"
       ( \o ->
-          ImportAdminQuotaPoliciesResponse
-            Core.<$> (o Core..:? "policies")
+          ImportAdminQuotaPoliciesResponse Core.<$> (o Core..:? "policies")
       )
 
 instance Core.ToJSON ImportAdminQuotaPoliciesResponse where
   toJSON ImportAdminQuotaPoliciesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("policies" Core..=) Core.<$> policies]
-      )
+      (Core.catMaybes [("policies" Core..=) Core.<$> policies])
 
 -- | Metadata message that provides information such as progress, partial failures, and similar information on each GetOperation call of LRO returned by ImportConsumerOverrides.
 --
@@ -3011,12 +4172,10 @@ data ImportConsumerOverridesMetadata = ImportConsumerOverridesMetadata
 -- | Creates a value of 'ImportConsumerOverridesMetadata' with the minimum fields required to make a request.
 newImportConsumerOverridesMetadata ::
   ImportConsumerOverridesMetadata
-newImportConsumerOverridesMetadata = ImportConsumerOverridesMetadata
+newImportConsumerOverridesMetadata =
+  ImportConsumerOverridesMetadata
 
-instance
-  Core.FromJSON
-    ImportConsumerOverridesMetadata
-  where
+instance Core.FromJSON ImportConsumerOverridesMetadata where
   parseJSON =
     Core.withObject
       "ImportConsumerOverridesMetadata"
@@ -3040,24 +4199,18 @@ newImportConsumerOverridesResponse ::
 newImportConsumerOverridesResponse =
   ImportConsumerOverridesResponse {overrides = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ImportConsumerOverridesResponse
-  where
+instance Core.FromJSON ImportConsumerOverridesResponse where
   parseJSON =
     Core.withObject
       "ImportConsumerOverridesResponse"
       ( \o ->
-          ImportConsumerOverridesResponse
-            Core.<$> (o Core..:? "overrides")
+          ImportConsumerOverridesResponse Core.<$> (o Core..:? "overrides")
       )
 
 instance Core.ToJSON ImportConsumerOverridesResponse where
   toJSON ImportConsumerOverridesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("overrides" Core..=) Core.<$> overrides]
-      )
+      (Core.catMaybes [("overrides" Core..=) Core.<$> overrides])
 
 -- | Settings for Java client libraries.
 --
@@ -3099,8 +4252,7 @@ instance Core.ToJSON JavaSettings where
       ( Core.catMaybes
           [ ("common" Core..=) Core.<$> common,
             ("libraryPackage" Core..=) Core.<$> libraryPackage,
-            ("serviceClassNames" Core..=)
-              Core.<$> serviceClassNames
+            ("serviceClassNames" Core..=) Core.<$> serviceClassNames
           ]
       )
 
@@ -3108,8 +4260,7 @@ instance Core.ToJSON JavaSettings where
 --
 -- /See:/ 'newJavaSettings_ServiceClassNames' smart constructor.
 newtype JavaSettings_ServiceClassNames = JavaSettings_ServiceClassNames
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3126,13 +4277,11 @@ instance Core.FromJSON JavaSettings_ServiceClassNames where
     Core.withObject
       "JavaSettings_ServiceClassNames"
       ( \o ->
-          JavaSettings_ServiceClassNames
-            Core.<$> (Core.parseJSONObject o)
+          JavaSettings_ServiceClassNames Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON JavaSettings_ServiceClassNames where
-  toJSON JavaSettings_ServiceClassNames {..} =
-    Core.toJSON additional
+  toJSON JavaSettings_ServiceClassNames {..} = Core.toJSON additional
 
 -- | Specifies a location to extract JWT from an API request.
 --
@@ -3281,7 +4430,10 @@ data ListServicesResponse = ListServicesResponse
 newListServicesResponse ::
   ListServicesResponse
 newListServicesResponse =
-  ListServicesResponse {nextPageToken = Core.Nothing, services = Core.Nothing}
+  ListServicesResponse
+    { nextPageToken = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON ListServicesResponse where
   parseJSON =
@@ -3385,10 +4537,8 @@ instance Core.ToJSON Logging where
   toJSON Logging {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -3407,7 +4557,10 @@ data LoggingDestination = LoggingDestination
 newLoggingDestination ::
   LoggingDestination
 newLoggingDestination =
-  LoggingDestination {logs = Core.Nothing, monitoredResource = Core.Nothing}
+  LoggingDestination
+    { logs = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON LoggingDestination where
   parseJSON =
@@ -3424,8 +4577,7 @@ instance Core.ToJSON LoggingDestination where
     Core.object
       ( Core.catMaybes
           [ ("logs" Core..=) Core.<$> logs,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -3471,13 +4623,10 @@ instance Core.ToJSON LongRunning where
   toJSON LongRunning {..} =
     Core.object
       ( Core.catMaybes
-          [ ("initialPollDelay" Core..=)
-              Core.<$> initialPollDelay,
+          [ ("initialPollDelay" Core..=) Core.<$> initialPollDelay,
             ("maxPollDelay" Core..=) Core.<$> maxPollDelay,
-            ("pollDelayMultiplier" Core..=)
-              Core.<$> pollDelayMultiplier,
-            ("totalPollTimeout" Core..=)
-              Core.<$> totalPollTimeout
+            ("pollDelayMultiplier" Core..=) Core.<$> pollDelayMultiplier,
+            ("totalPollTimeout" Core..=) Core.<$> totalPollTimeout
           ]
       )
 
@@ -3537,13 +4686,50 @@ instance Core.ToJSON Method where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("options" Core..=) Core.<$> options,
-            ("requestStreaming" Core..=)
-              Core.<$> requestStreaming,
+            ("requestStreaming" Core..=) Core.<$> requestStreaming,
             ("requestTypeUrl" Core..=) Core.<$> requestTypeUrl,
-            ("responseStreaming" Core..=)
-              Core.<$> responseStreaming,
+            ("responseStreaming" Core..=) Core.<$> responseStreaming,
             ("responseTypeUrl" Core..=) Core.<$> responseTypeUrl,
             ("syntax" Core..=) Core.<$> syntax
+          ]
+      )
+
+-- | Defines policies applying to an RPC method.
+--
+-- /See:/ 'newMethodPolicy' smart constructor.
+data MethodPolicy = MethodPolicy
+  { -- | Policies that are applicable to the request message.
+    requestPolicies :: (Core.Maybe [FieldPolicy]),
+    -- | Selects a method to which these policies should be enforced, for example, \"google.pubsub.v1.Subscriber.CreateSubscription\". Refer to selector for syntax details. NOTE: This field must not be set in the proto annotation. It will be automatically filled by the service config compiler .
+    selector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MethodPolicy' with the minimum fields required to make a request.
+newMethodPolicy ::
+  MethodPolicy
+newMethodPolicy =
+  MethodPolicy
+    { requestPolicies = Core.Nothing,
+      selector = Core.Nothing
+    }
+
+instance Core.FromJSON MethodPolicy where
+  parseJSON =
+    Core.withObject
+      "MethodPolicy"
+      ( \o ->
+          MethodPolicy
+            Core.<$> (o Core..:? "requestPolicies")
+            Core.<*> (o Core..:? "selector")
+      )
+
+instance Core.ToJSON MethodPolicy where
+  toJSON MethodPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("requestPolicies" Core..=) Core.<$> requestPolicies,
+            ("selector" Core..=) Core.<$> selector
           ]
       )
 
@@ -3551,9 +4737,11 @@ instance Core.ToJSON Method where
 --
 -- /See:/ 'newMethodSettings' smart constructor.
 data MethodSettings = MethodSettings
-  { -- | Describes settings to use for long-running operations when generating API methods for RPCs. Complements RPCs that use the annotations in google\/longrunning\/operations.proto. Example of a YAML configuration:: publishing: method/settings: - selector: google.cloud.speech.v2.Speech.BatchRecognize long/running: initial/poll/delay: seconds: 60 # 1 minute poll/delay/multiplier: 1.5 max/poll/delay: seconds: 360 # 6 minutes total/poll/timeout: seconds: 54000 # 90 minutes
+  { -- | List of top-level fields of the request message, that should be automatically populated by the client libraries based on their (google.api.field/info).format. Currently supported format: UUID4. Example of a YAML configuration: publishing: method/settings: - selector: google.example.v1.ExampleService.CreateExample auto/populated/fields: - request_id
+    autoPopulatedFields :: (Core.Maybe [Core.Text]),
+    -- | Describes settings to use for long-running operations when generating API methods for RPCs. Complements RPCs that use the annotations in google\/longrunning\/operations.proto. Example of a YAML configuration:: publishing: method/settings: - selector: google.cloud.speech.v2.Speech.BatchRecognize long/running: initial/poll/delay: 60s # 1 minute poll/delay/multiplier: 1.5 max/poll/delay: 360s # 6 minutes total/poll/timeout: 54000s # 90 minutes
     longRunning :: (Core.Maybe LongRunning),
-    -- | The fully qualified name of the method, for which the options below apply. This is used to find the method to apply the options.
+    -- | The fully qualified name of the method, for which the options below apply. This is used to find the method to apply the options. Example: publishing: method_settings: - selector: google.storage.control.v2.StorageControl.CreateFolder # method settings for CreateFolder...
     selector :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3562,7 +4750,11 @@ data MethodSettings = MethodSettings
 newMethodSettings ::
   MethodSettings
 newMethodSettings =
-  MethodSettings {longRunning = Core.Nothing, selector = Core.Nothing}
+  MethodSettings
+    { autoPopulatedFields = Core.Nothing,
+      longRunning = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON MethodSettings where
   parseJSON =
@@ -3570,7 +4762,8 @@ instance Core.FromJSON MethodSettings where
       "MethodSettings"
       ( \o ->
           MethodSettings
-            Core.<$> (o Core..:? "longRunning")
+            Core.<$> (o Core..:? "autoPopulatedFields")
+            Core.<*> (o Core..:? "longRunning")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -3578,7 +4771,8 @@ instance Core.ToJSON MethodSettings where
   toJSON MethodSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("longRunning" Core..=) Core.<$> longRunning,
+          [ ("autoPopulatedFields" Core..=) Core.<$> autoPopulatedFields,
+            ("longRunning" Core..=) Core.<$> longRunning,
             ("selector" Core..=) Core.<$> selector
           ]
       )
@@ -3662,8 +4856,7 @@ instance Core.ToJSON MetricDescriptor where
             ("launchStage" Core..=) Core.<$> launchStage,
             ("metadata" Core..=) Core.<$> metadata,
             ("metricKind" Core..=) Core.<$> metricKind,
-            ("monitoredResourceTypes" Core..=)
-              Core.<$> monitoredResourceTypes,
+            ("monitoredResourceTypes" Core..=) Core.<$> monitoredResourceTypes,
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type',
             ("unit" Core..=) Core.<$> unit,
@@ -3680,7 +4873,12 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.Duration)
+    samplePeriod :: (Core.Maybe Core.Duration),
+    -- | The scope of the timeseries data of the metric.
+    timeSeriesResourceHierarchyLevel ::
+      ( Core.Maybe
+          [MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem]
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3691,7 +4889,8 @@ newMetricDescriptorMetadata =
   MetricDescriptorMetadata
     { ingestDelay = Core.Nothing,
       launchStage = Core.Nothing,
-      samplePeriod = Core.Nothing
+      samplePeriod = Core.Nothing,
+      timeSeriesResourceHierarchyLevel = Core.Nothing
     }
 
 instance Core.FromJSON MetricDescriptorMetadata where
@@ -3703,6 +4902,7 @@ instance Core.FromJSON MetricDescriptorMetadata where
             Core.<$> (o Core..:? "ingestDelay")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "samplePeriod")
+            Core.<*> (o Core..:? "timeSeriesResourceHierarchyLevel")
       )
 
 instance Core.ToJSON MetricDescriptorMetadata where
@@ -3711,7 +4911,9 @@ instance Core.ToJSON MetricDescriptorMetadata where
       ( Core.catMaybes
           [ ("ingestDelay" Core..=) Core.<$> ingestDelay,
             ("launchStage" Core..=) Core.<$> launchStage,
-            ("samplePeriod" Core..=) Core.<$> samplePeriod
+            ("samplePeriod" Core..=) Core.<$> samplePeriod,
+            ("timeSeriesResourceHierarchyLevel" Core..=)
+              Core.<$> timeSeriesResourceHierarchyLevel
           ]
       )
 
@@ -3729,7 +4931,8 @@ data MetricRule = MetricRule
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 newMetricRule ::
   MetricRule
-newMetricRule = MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
+newMetricRule =
+  MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
 
 instance Core.FromJSON MetricRule where
   parseJSON =
@@ -3754,8 +4957,7 @@ instance Core.ToJSON MetricRule where
 --
 -- /See:/ 'newMetricRule_MetricCosts' smart constructor.
 newtype MetricRule_MetricCosts = MetricRule_MetricCosts
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3771,17 +4973,13 @@ instance Core.FromJSON MetricRule_MetricCosts where
   parseJSON =
     Core.withObject
       "MetricRule_MetricCosts"
-      ( \o ->
-          MetricRule_MetricCosts
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> MetricRule_MetricCosts Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON MetricRule_MetricCosts where
-  toJSON MetricRule_MetricCosts {..} =
-    Core.toJSON additional
+  toJSON MetricRule_MetricCosts {..} = Core.toJSON additional
 
 -- | Declares an API Interface to be included in this interface. The including interface must redeclare all the methods from the included interface, but documentation and options are inherited as follows: - If after comment and whitespace stripping, the documentation string of the redeclared method is empty, it will be inherited from the original method. - Each annotation belonging to the service config (http, visibility) which is not set in the redeclared method will be inherited. - If an http annotation is inherited, the path pattern will be modified as follows. Any version prefix will be replaced by the version of the including interface plus the root path if specified. Example of a simple mixin: package google.acl.v1; service AccessControl { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v1\/{resource=__}:getAcl\"; } } package google.storage.v2; service Storage { \/\/ rpc GetAcl(GetAclRequest) returns (Acl); \/\/ Get a data record. rpc
--- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inherting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
+-- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inheriting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
 -- annotation: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/acls\/{resource=__}:getAcl\"; } ... }
 --
 -- /See:/ 'newMixin' smart constructor.
@@ -3803,17 +5001,14 @@ instance Core.FromJSON Mixin where
     Core.withObject
       "Mixin"
       ( \o ->
-          Mixin
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
+          Mixin Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
       )
 
 instance Core.ToJSON Mixin where
   toJSON Mixin {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("root" Core..=) Core.<$> root
-          ]
+          [("name" Core..=) Core.<$> name, ("root" Core..=) Core.<$> root]
       )
 
 -- | An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of @\"gce_instance\"@ and specifies the use of the labels @\"instance_id\"@ and @\"zone\"@ to identify particular VM instances. Different APIs can support different monitored resource types. APIs generally provide a @list@ method that returns the monitored resource descriptors used by the API.
@@ -3830,7 +5025,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor
     launchStage :: (Core.Maybe MonitoredResourceDescriptor_LaunchStage),
     -- | Optional. The resource name of the monitored resource descriptor: @\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"@ where {type} is the value of the @type@ field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format @\"monitoredResourceDescriptors\/{type}\"@.
     name :: (Core.Maybe Core.Text),
-    -- | Required. The monitored resource type. For example, the type @\"cloudsql_database\"@ represents databases in Google Cloud SQL. For a list of types, see <https://cloud.google.com/monitoring/api/resources Monitoring resource types> and <https://cloud.google.com/logging/docs/api/v2/resource-list Logging resource types>.
+    -- | Required. The monitored resource type. For example, the type @\"cloudsql_database\"@ represents databases in Google Cloud SQL. For a list of types, see <https://cloud.google.com/monitoring/api/resources Monitored resource types> and <https://cloud.google.com/logging/docs/api/v2/resource-list Logging resource types>.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3910,10 +5105,8 @@ instance Core.ToJSON Monitoring where
   toJSON Monitoring {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -3952,8 +5145,7 @@ instance Core.ToJSON MonitoringDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -3979,8 +5171,7 @@ instance Core.FromJSON NodeSettings where
 
 instance Core.ToJSON NodeSettings where
   toJSON NodeSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | OAuth scopes are a way to define data and permissions on data. For example, there are scopes defined for \"Read-only access to Google Calendar\" and \"Access to Cloud Platform\". Users can consent to a scope for an application, giving it permission to access that data on their behalf. OAuth scope specifications should be fairly coarse grained; a user will need to see and understand the text description of what your scope means. In most cases: use one or at most two OAuth scopes for an entire family of products. If your product has multiple APIs, you should probably be sharing the OAuth scope across all of those APIs. When you need finer grained OAuth consent screens: talk with your product management about how developers will use them in practice. Please note that even though each of the canonical scopes is enough for a request to be accepted and passed to the backend, a request can still fail due to the backend requiring additional scopes or permissions.
 --
@@ -3994,24 +5185,20 @@ newtype OAuthRequirements = OAuthRequirements
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 newOAuthRequirements ::
   OAuthRequirements
-newOAuthRequirements = OAuthRequirements {canonicalScopes = Core.Nothing}
+newOAuthRequirements =
+  OAuthRequirements {canonicalScopes = Core.Nothing}
 
 instance Core.FromJSON OAuthRequirements where
   parseJSON =
     Core.withObject
       "OAuthRequirements"
-      ( \o ->
-          OAuthRequirements
-            Core.<$> (o Core..:? "canonicalScopes")
-      )
+      (\o -> OAuthRequirements Core.<$> (o Core..:? "canonicalScopes"))
 
 instance Core.ToJSON OAuthRequirements where
   toJSON OAuthRequirements {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canonicalScopes" Core..=)
-              Core.<$> canonicalScopes
-          ]
+          [("canonicalScopes" Core..=) Core.<$> canonicalScopes]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -4026,7 +5213,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4082,21 +5269,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -4110,19 +5295,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | The operation metadata returned for the batchend services operation.
 --
@@ -4136,23 +5319,19 @@ newtype OperationMetadata = OperationMetadata
 -- | Creates a value of 'OperationMetadata' with the minimum fields required to make a request.
 newOperationMetadata ::
   OperationMetadata
-newOperationMetadata = OperationMetadata {resourceNames = Core.Nothing}
+newOperationMetadata =
+  OperationMetadata {resourceNames = Core.Nothing}
 
 instance Core.FromJSON OperationMetadata where
   parseJSON =
     Core.withObject
       "OperationMetadata"
-      ( \o ->
-          OperationMetadata
-            Core.<$> (o Core..:? "resourceNames")
-      )
+      (\o -> OperationMetadata Core.<$> (o Core..:? "resourceNames"))
 
 instance Core.ToJSON OperationMetadata where
   toJSON OperationMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceNames" Core..=) Core.<$> resourceNames]
-      )
+      (Core.catMaybes [("resourceNames" Core..=) Core.<$> resourceNames])
 
 -- | A protocol buffer option, which can be attached to a message, field, enumeration, etc.
 --
@@ -4175,17 +5354,14 @@ instance Core.FromJSON Option where
     Core.withObject
       "Option"
       ( \o ->
-          Option
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+          Option Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Option where
   toJSON Option {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | The option\'s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google\/protobuf\/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
@@ -4208,9 +5384,7 @@ instance Core.FromJSON Option_Value where
   parseJSON =
     Core.withObject
       "Option_Value"
-      ( \o ->
-          Option_Value Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Option_Value Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Option_Value where
   toJSON Option_Value {..} = Core.toJSON additional
@@ -4219,7 +5393,7 @@ instance Core.ToJSON Option_Value where
 --
 -- /See:/ 'newPage' smart constructor.
 data Page = Page
-  { -- | The Markdown content of the page. You can use (== include {path} ==) to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
+  { -- | The Markdown content of the page. You can use @(== include {path} ==)@ to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
     content :: (Core.Maybe Core.Text),
     -- | The name of the page. It will be used as an identity of the page to generate URI of the page, text of the link to this page in navigation, etc. The full page name (start from the root page name to this page concatenated with @.@) can be used as reference to the page in your documentation. For example: pages: - name: Tutorial content: (== include tutorial.md ==) subpages: - name: Java content: (== include tutorial_java.md ==) You can reference @Java@ page using Markdown reference link syntax: @Java@.
     name :: (Core.Maybe Core.Text),
@@ -4232,7 +5406,11 @@ data Page = Page
 newPage ::
   Page
 newPage =
-  Page {content = Core.Nothing, name = Core.Nothing, subpages = Core.Nothing}
+  Page
+    { content = Core.Nothing,
+      name = Core.Nothing,
+      subpages = Core.Nothing
+    }
 
 instance Core.FromJSON Page where
   parseJSON =
@@ -4277,8 +5455,7 @@ instance Core.FromJSON PhpSettings where
 
 instance Core.ToJSON PhpSettings where
   toJSON PhpSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | This message configures the settings for publishing <https://cloud.google.com/apis/docs/cloud-client-libraries Google Cloud Client libraries> generated from the service config.
 --
@@ -4298,12 +5475,14 @@ data Publishing = Publishing
     librarySettings :: (Core.Maybe [ClientLibrarySettings]),
     -- | A list of API method settings, e.g. the behavior for methods that use the long-running operation pattern.
     methodSettings :: (Core.Maybe [MethodSettings]),
-    -- | Link to a place that API users can report issues. Example: https:\/\/issuetracker.google.com\/issues\/new?component=190865&template=1161103
+    -- | Link to a /public/ URI where users can report issues. Example: https:\/\/issuetracker.google.com\/issues\/new?component=190865&template=1161103
     newIssueUri' :: (Core.Maybe Core.Text),
     -- | For whom the client library is being published.
     organization :: (Core.Maybe Publishing_Organization),
     -- | Optional link to proto reference documentation. Example: https:\/\/cloud.google.com\/pubsub\/lite\/docs\/reference\/rpc
-    protoReferenceDocumentationUri :: (Core.Maybe Core.Text)
+    protoReferenceDocumentationUri :: (Core.Maybe Core.Text),
+    -- | Optional link to REST reference documentation. Example: https:\/\/cloud.google.com\/pubsub\/lite\/docs\/reference\/rest
+    restReferenceDocumentationUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4321,7 +5500,8 @@ newPublishing =
       methodSettings = Core.Nothing,
       newIssueUri' = Core.Nothing,
       organization = Core.Nothing,
-      protoReferenceDocumentationUri = Core.Nothing
+      protoReferenceDocumentationUri = Core.Nothing,
+      restReferenceDocumentationUri = Core.Nothing
     }
 
 instance Core.FromJSON Publishing where
@@ -4340,6 +5520,7 @@ instance Core.FromJSON Publishing where
             Core.<*> (o Core..:? "newIssueUri")
             Core.<*> (o Core..:? "organization")
             Core.<*> (o Core..:? "protoReferenceDocumentationUri")
+            Core.<*> (o Core..:? "restReferenceDocumentationUri")
       )
 
 instance Core.ToJSON Publishing where
@@ -4347,47 +5528,59 @@ instance Core.ToJSON Publishing where
     Core.object
       ( Core.catMaybes
           [ ("apiShortName" Core..=) Core.<$> apiShortName,
-            ("codeownerGithubTeams" Core..=)
-              Core.<$> codeownerGithubTeams,
+            ("codeownerGithubTeams" Core..=) Core.<$> codeownerGithubTeams,
             ("docTagPrefix" Core..=) Core.<$> docTagPrefix,
-            ("documentationUri" Core..=)
-              Core.<$> documentationUri,
+            ("documentationUri" Core..=) Core.<$> documentationUri,
             ("githubLabel" Core..=) Core.<$> githubLabel,
             ("librarySettings" Core..=) Core.<$> librarySettings,
             ("methodSettings" Core..=) Core.<$> methodSettings,
             ("newIssueUri" Core..=) Core.<$> newIssueUri',
             ("organization" Core..=) Core.<$> organization,
             ("protoReferenceDocumentationUri" Core..=)
-              Core.<$> protoReferenceDocumentationUri
+              Core.<$> protoReferenceDocumentationUri,
+            ("restReferenceDocumentationUri" Core..=)
+              Core.<$> restReferenceDocumentationUri
           ]
       )
 
 -- | Settings for Python client libraries.
 --
 -- /See:/ 'newPythonSettings' smart constructor.
-newtype PythonSettings = PythonSettings
+data PythonSettings = PythonSettings
   { -- | Some settings.
-    common :: (Core.Maybe CommonLanguageSettings)
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | Experimental features to be included during client library generation.
+    experimentalFeatures :: (Core.Maybe ExperimentalFeatures)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PythonSettings' with the minimum fields required to make a request.
 newPythonSettings ::
   PythonSettings
-newPythonSettings = PythonSettings {common = Core.Nothing}
+newPythonSettings =
+  PythonSettings
+    { common = Core.Nothing,
+      experimentalFeatures = Core.Nothing
+    }
 
 instance Core.FromJSON PythonSettings where
   parseJSON =
     Core.withObject
       "PythonSettings"
       ( \o ->
-          PythonSettings Core.<$> (o Core..:? "common")
+          PythonSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "experimentalFeatures")
       )
 
 instance Core.ToJSON PythonSettings where
   toJSON PythonSettings {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("experimentalFeatures" Core..=) Core.<$> experimentalFeatures
+          ]
+      )
 
 -- | Quota configuration helps to achieve fairness and budgeting in service usage. The metric based quota configuration works this way: - The service configuration defines a set of metrics. - For API calls, the quota.metric/rules maps methods to metrics with corresponding costs. - The quota.limits defines limits on the metrics, which will be used for quota checks at runtime. An example quota configuration in yaml format: quota: limits: - name: apiWriteQpsPerProject metric: library.googleapis.com\/write/calls unit: \"1\/min\/{project}\" # rate limit for consumer projects values: STANDARD: 10000 (The metric rules bind all methods to the read/calls metric, except for the UpdateBook and DeleteBook methods. These two methods are mapped to the write/calls metric, with the UpdateBook method consuming at twice rate as the DeleteBook method.) metric_rules: - selector: \"*\" metric/costs: library.googleapis.com\/read/calls: 1 - selector: google.example.library.v1.LibraryService.UpdateBook metric/costs:
 -- library.googleapis.com\/write/calls: 2 - selector: google.example.library.v1.LibraryService.DeleteBook metric/costs: library.googleapis.com\/write/calls: 1 Corresponding Metric definition: metrics: - name: library.googleapis.com\/read/calls display/name: Read requests metric/kind: DELTA value/type: INT64 - name: library.googleapis.com\/write/calls display/name: Write requests metric/kind: DELTA value/type: INT64
@@ -4445,7 +5638,7 @@ data QuotaLimit = QuotaLimit
     metric :: (Core.Maybe Core.Text),
     -- | Name of the quota limit. The name must be provided, and it must be unique within the service. The name can only include alphanumeric characters as well as \'-\'. The maximum length of the limit name is 64 characters.
     name :: (Core.Maybe Core.Text),
-    -- | Specify the unit of the quota limit. It uses the same syntax as Metric.unit. The supported unit kinds are determined by the quota backend system. Here are some examples: * \"1\/min\/{project}\" for quota per minute per project. Note: the order of unit components is insignificant. The \"1\" at the beginning is required to follow the metric unit syntax.
+    -- | Specify the unit of the quota limit. It uses the same syntax as MetricDescriptor.unit. The supported unit kinds are determined by the quota backend system. Here are some examples: * \"1\/min\/{project}\" for quota per minute per project. Note: the order of unit components is insignificant. The \"1\" at the beginning is required to follow the metric unit syntax.
     unit :: (Core.Maybe Core.Text),
     -- | Tiered limit values. You must specify this as a key:value pair, with an integer value that is the maximum number of requests allowed for the specified unit. Currently only STANDARD is supported.
     values :: (Core.Maybe QuotaLimit_Values)
@@ -4475,18 +5668,12 @@ instance Core.FromJSON QuotaLimit where
       "QuotaLimit"
       ( \o ->
           QuotaLimit
-            Core.<$> ( o Core..:? "defaultLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "defaultLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "duration")
-            Core.<*> ( o Core..:? "freeTier"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "freeTier" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "unit")
@@ -4497,15 +5684,12 @@ instance Core.ToJSON QuotaLimit where
   toJSON QuotaLimit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultLimit" Core..=) Core.. Core.AsText
-              Core.<$> defaultLimit,
+          [ ("defaultLimit" Core..=) Core.. Core.AsText Core.<$> defaultLimit,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
             ("duration" Core..=) Core.<$> duration,
-            ("freeTier" Core..=) Core.. Core.AsText
-              Core.<$> freeTier,
-            ("maxLimit" Core..=) Core.. Core.AsText
-              Core.<$> maxLimit,
+            ("freeTier" Core..=) Core.. Core.AsText Core.<$> freeTier,
+            ("maxLimit" Core..=) Core.. Core.AsText Core.<$> maxLimit,
             ("metric" Core..=) Core.<$> metric,
             ("name" Core..=) Core.<$> name,
             ("unit" Core..=) Core.<$> unit,
@@ -4517,8 +5701,7 @@ instance Core.ToJSON QuotaLimit where
 --
 -- /See:/ 'newQuotaLimit_Values' smart constructor.
 newtype QuotaLimit_Values = QuotaLimit_Values
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4527,15 +5710,14 @@ newQuotaLimit_Values ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Int64 ->
   QuotaLimit_Values
-newQuotaLimit_Values additional = QuotaLimit_Values {additional = additional}
+newQuotaLimit_Values additional =
+  QuotaLimit_Values {additional = additional}
 
 instance Core.FromJSON QuotaLimit_Values where
   parseJSON =
     Core.withObject
       "QuotaLimit_Values"
-      ( \o ->
-          QuotaLimit_Values Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> QuotaLimit_Values Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON QuotaLimit_Values where
   toJSON QuotaLimit_Values {..} = Core.toJSON additional
@@ -4583,9 +5765,7 @@ instance Core.FromJSON QuotaOverride where
             Core.<*> (o Core..:? "dimensions")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "overrideValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "overrideValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "unit")
       )
 
@@ -4593,12 +5773,12 @@ instance Core.ToJSON QuotaOverride where
   toJSON QuotaOverride {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adminOverrideAncestor" Core..=)
-              Core.<$> adminOverrideAncestor,
+          [ ("adminOverrideAncestor" Core..=) Core.<$> adminOverrideAncestor,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("metric" Core..=) Core.<$> metric,
             ("name" Core..=) Core.<$> name,
-            ("overrideValue" Core..=) Core.. Core.AsText
+            ("overrideValue" Core..=)
+              Core.. Core.AsText
               Core.<$> overrideValue,
             ("unit" Core..=) Core.<$> unit
           ]
@@ -4609,8 +5789,7 @@ instance Core.ToJSON QuotaOverride where
 --
 -- /See:/ 'newQuotaOverride_Dimensions' smart constructor.
 newtype QuotaOverride_Dimensions = QuotaOverride_Dimensions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4626,14 +5805,69 @@ instance Core.FromJSON QuotaOverride_Dimensions where
   parseJSON =
     Core.withObject
       "QuotaOverride_Dimensions"
-      ( \o ->
-          QuotaOverride_Dimensions
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> QuotaOverride_Dimensions Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON QuotaOverride_Dimensions where
-  toJSON QuotaOverride_Dimensions {..} =
-    Core.toJSON additional
+  toJSON QuotaOverride_Dimensions {..} = Core.toJSON additional
+
+-- | Metadata for the @RemoveEnableRules@ method.
+--
+-- /See:/ 'newRemoveEnableRulesMetadata' smart constructor.
+data RemoveEnableRulesMetadata = RemoveEnableRulesMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RemoveEnableRulesMetadata' with the minimum fields required to make a request.
+newRemoveEnableRulesMetadata ::
+  RemoveEnableRulesMetadata
+newRemoveEnableRulesMetadata = RemoveEnableRulesMetadata
+
+instance Core.FromJSON RemoveEnableRulesMetadata where
+  parseJSON =
+    Core.withObject
+      "RemoveEnableRulesMetadata"
+      (\o -> Core.pure RemoveEnableRulesMetadata)
+
+instance Core.ToJSON RemoveEnableRulesMetadata where
+  toJSON = Core.const Core.emptyObject
+
+-- | The response message of @RemoveEnableRules@ method.
+--
+-- /See:/ 'newRemoveEnableRulesResponse' smart constructor.
+data RemoveEnableRulesResponse = RemoveEnableRulesResponse
+  { -- | The parent consumer policy. It can be @projects\/12345\/consumerPolicies\/default@, or @folders\/12345\/consumerPolicies\/default@, or @organizations\/12345\/consumerPolicies\/default@.
+    parent :: (Core.Maybe Core.Text),
+    -- | The values removed from the parent consumer policy.
+    removedValues :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RemoveEnableRulesResponse' with the minimum fields required to make a request.
+newRemoveEnableRulesResponse ::
+  RemoveEnableRulesResponse
+newRemoveEnableRulesResponse =
+  RemoveEnableRulesResponse
+    { parent = Core.Nothing,
+      removedValues = Core.Nothing
+    }
+
+instance Core.FromJSON RemoveEnableRulesResponse where
+  parseJSON =
+    Core.withObject
+      "RemoveEnableRulesResponse"
+      ( \o ->
+          RemoveEnableRulesResponse
+            Core.<$> (o Core..:? "parent")
+            Core.<*> (o Core..:? "removedValues")
+      )
+
+instance Core.ToJSON RemoveEnableRulesResponse where
+  toJSON RemoveEnableRulesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("parent" Core..=) Core.<$> parent,
+            ("removedValues" Core..=) Core.<$> removedValues
+          ]
+      )
 
 -- | Settings for Ruby client libraries.
 --
@@ -4657,8 +5891,48 @@ instance Core.FromJSON RubySettings where
 
 instance Core.ToJSON RubySettings where
   toJSON RubySettings {..} =
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
+
+-- | This message is used to configure the generation of a subset of the RPCs in a service for client libraries.
+--
+-- /See:/ 'newSelectiveGapicGeneration' smart constructor.
+data SelectiveGapicGeneration = SelectiveGapicGeneration
+  { -- | Setting this to true indicates to the client generators that methods that would be excluded from the generation should instead be generated in a way that indicates these methods should not be consumed by end users. How this is expressed is up to individual language implementations to decide. Some examples may be: added annotations, obfuscated identifiers, or other language idiomatic patterns.
+    generateOmittedAsInternal :: (Core.Maybe Core.Bool),
+    -- | An allowlist of the fully qualified names of RPCs that should be included on public client surfaces.
+    methods :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SelectiveGapicGeneration' with the minimum fields required to make a request.
+newSelectiveGapicGeneration ::
+  SelectiveGapicGeneration
+newSelectiveGapicGeneration =
+  SelectiveGapicGeneration
+    { generateOmittedAsInternal =
+        Core.Nothing,
+      methods = Core.Nothing
+    }
+
+instance Core.FromJSON SelectiveGapicGeneration where
+  parseJSON =
+    Core.withObject
+      "SelectiveGapicGeneration"
+      ( \o ->
+          SelectiveGapicGeneration
+            Core.<$> (o Core..:? "generateOmittedAsInternal")
+            Core.<*> (o Core..:? "methods")
+      )
+
+instance Core.ToJSON SelectiveGapicGeneration where
+  toJSON SelectiveGapicGeneration {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("generateOmittedAsInternal" Core..=)
+              Core.<$> generateOmittedAsInternal,
+            ("methods" Core..=) Core.<$> methods
+          ]
+      )
 
 -- | Service identity for a service. This is the identity that service producer should use to access consumer resources.
 --
@@ -4714,16 +5988,12 @@ instance Core.FromJSON SourceContext where
   parseJSON =
     Core.withObject
       "SourceContext"
-      ( \o ->
-          SourceContext Core.<$> (o Core..:? "fileName")
-      )
+      (\o -> SourceContext Core.<$> (o Core..:? "fileName"))
 
 instance Core.ToJSON SourceContext where
   toJSON SourceContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("fileName" Core..=) Core.<$> fileName]
-      )
+      (Core.catMaybes [("fileName" Core..=) Core.<$> fileName])
 
 -- | Source information used to create a Service Config
 --
@@ -4743,16 +6013,12 @@ instance Core.FromJSON SourceInfo where
   parseJSON =
     Core.withObject
       "SourceInfo"
-      ( \o ->
-          SourceInfo Core.<$> (o Core..:? "sourceFiles")
-      )
+      (\o -> SourceInfo Core.<$> (o Core..:? "sourceFiles"))
 
 instance Core.ToJSON SourceInfo where
   toJSON SourceInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("sourceFiles" Core..=) Core.<$> sourceFiles]
-      )
+      (Core.catMaybes [("sourceFiles" Core..=) Core.<$> sourceFiles])
 
 --
 -- /See:/ 'newSourceInfo_SourceFilesItem' smart constructor.
@@ -4775,13 +6041,11 @@ instance Core.FromJSON SourceInfo_SourceFilesItem where
     Core.withObject
       "SourceInfo_SourceFilesItem"
       ( \o ->
-          SourceInfo_SourceFilesItem
-            Core.<$> (Core.parseJSONObject o)
+          SourceInfo_SourceFilesItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SourceInfo_SourceFilesItem where
-  toJSON SourceInfo_SourceFilesItem {..} =
-    Core.toJSON additional
+  toJSON SourceInfo_SourceFilesItem {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -4800,7 +6064,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -4836,19 +6104,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Define a parameter\'s name and location. The parameter may be passed as either an HTTP header or a URL query parameter, and if both are passed the behavior is implementation-dependent.
 --
@@ -4890,8 +6156,7 @@ instance Core.ToJSON SystemParameter where
       ( Core.catMaybes
           [ ("httpHeader" Core..=) Core.<$> httpHeader,
             ("name" Core..=) Core.<$> name,
-            ("urlQueryParameter" Core..=)
-              Core.<$> urlQueryParameter
+            ("urlQueryParameter" Core..=) Core.<$> urlQueryParameter
           ]
       )
 
@@ -4910,7 +6175,10 @@ data SystemParameterRule = SystemParameterRule
 newSystemParameterRule ::
   SystemParameterRule
 newSystemParameterRule =
-  SystemParameterRule {parameters = Core.Nothing, selector = Core.Nothing}
+  SystemParameterRule
+    { parameters = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON SystemParameterRule where
   parseJSON =
@@ -4949,14 +6217,11 @@ instance Core.FromJSON SystemParameters where
   parseJSON =
     Core.withObject
       "SystemParameters"
-      ( \o ->
-          SystemParameters Core.<$> (o Core..:? "rules")
-      )
+      (\o -> SystemParameters Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON SystemParameters where
   toJSON SystemParameters {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A protocol buffer message type.
 --
@@ -5042,6 +6307,26 @@ instance Core.FromJSON UpdateAdminQuotaPolicyMetadata where
 instance Core.ToJSON UpdateAdminQuotaPolicyMetadata where
   toJSON = Core.const Core.emptyObject
 
+-- | Metadata for the @UpdateConsumerPolicy@ method.
+--
+-- /See:/ 'newUpdateConsumerPolicyMetadata' smart constructor.
+data UpdateConsumerPolicyMetadata = UpdateConsumerPolicyMetadata
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpdateConsumerPolicyMetadata' with the minimum fields required to make a request.
+newUpdateConsumerPolicyMetadata ::
+  UpdateConsumerPolicyMetadata
+newUpdateConsumerPolicyMetadata = UpdateConsumerPolicyMetadata
+
+instance Core.FromJSON UpdateConsumerPolicyMetadata where
+  parseJSON =
+    Core.withObject
+      "UpdateConsumerPolicyMetadata"
+      (\o -> Core.pure UpdateConsumerPolicyMetadata)
+
+instance Core.ToJSON UpdateConsumerPolicyMetadata where
+  toJSON = Core.const Core.emptyObject
+
 -- | Configuration controlling usage of a service.
 --
 -- /See:/ 'newUsage' smart constructor.
@@ -5087,11 +6372,11 @@ instance Core.ToJSON Usage where
           ]
       )
 
--- | Usage configuration rules for the service. NOTE: Under development. Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity. Use this rule to allow\/disallow unregistered calls. Example of an API that wants to allow unregistered calls for entire service. usage: rules: - selector: \"*\" allow/unregistered/calls: true Example of a method that wants to allow unregistered calls. usage: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allow/unregistered/calls: true
+-- | Usage configuration rules for the service.
 --
 -- /See:/ 'newUsageRule' smart constructor.
 data UsageRule = UsageRule
-  { -- | If true, the selected method allows unregistered calls, e.g. calls that don\'t identify any user or application.
+  { -- | Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). WARNING: By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity.
     allowUnregisteredCalls :: (Core.Maybe Core.Bool),
     -- | Selects the methods to which this rule applies. Use \'*\' to indicate all methods in all APIs. Refer to selector for syntax details.
     selector :: (Core.Maybe Core.Text),
@@ -5128,7 +6413,6 @@ instance Core.ToJSON UsageRule where
           [ ("allowUnregisteredCalls" Core..=)
               Core.<$> allowUnregisteredCalls,
             ("selector" Core..=) Core.<$> selector,
-            ("skipServiceControl" Core..=)
-              Core.<$> skipServiceControl
+            ("skipServiceControl" Core..=) Core.<$> skipServiceControl
           ]
       )

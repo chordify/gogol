@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Services.Versions.Instances.Debug
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Services.Versions.Instances.Debug
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.services.versions.instances.debug@ method which the
 -- 'AppEngineAppsServicesVersionsInstancesDebug' request conforms to.
@@ -60,9 +58,7 @@ type AppEngineAppsServicesVersionsInstancesDebugResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DebugInstanceRequest
+    Core.:> Core.ReqBody '[Core.JSON] DebugInstanceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in \"debug mode\", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started.Only applicable for instances in App Engine flexible environment.
@@ -105,51 +101,51 @@ newAppEngineAppsServicesVersionsInstancesDebug ::
   -- |  Part of @name@. See documentation of @appsId@. See 'versionsId'.
   Core.Text ->
   AppEngineAppsServicesVersionsInstancesDebug
-newAppEngineAppsServicesVersionsInstancesDebug appsId instancesId payload servicesId versionsId =
-  AppEngineAppsServicesVersionsInstancesDebug
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      callback = Core.Nothing,
-      instancesId = instancesId,
-      payload = payload,
-      servicesId = servicesId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      versionsId = versionsId
-    }
+newAppEngineAppsServicesVersionsInstancesDebug
+  appsId
+  instancesId
+  payload
+  servicesId
+  versionsId =
+    AppEngineAppsServicesVersionsInstancesDebug
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        callback = Core.Nothing,
+        instancesId = instancesId,
+        payload = payload,
+        servicesId = servicesId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        versionsId = versionsId
+      }
 
 instance
   Core.GoogleRequest
     AppEngineAppsServicesVersionsInstancesDebug
   where
+  type Rs AppEngineAppsServicesVersionsInstancesDebug = Operation
   type
-    Rs AppEngineAppsServicesVersionsInstancesDebug =
-      Operation
-  type
-    Scopes
-      AppEngineAppsServicesVersionsInstancesDebug =
+    Scopes AppEngineAppsServicesVersionsInstancesDebug =
       '[CloudPlatform'FullControl]
-  requestClient
-    AppEngineAppsServicesVersionsInstancesDebug {..} =
-      go
-        appsId
-        servicesId
-        versionsId
-        instancesId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsServicesVersionsInstancesDebugResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsServicesVersionsInstancesDebug {..} =
+    go
+      appsId
+      servicesId
+      versionsId
+      instancesId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsServicesVersionsInstancesDebugResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vault.Matters.AddPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Vault.Matters.AddPermissions
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vault.Types
 
 -- | A resource alias for @vault.matters.addPermissions@ method which the
@@ -47,10 +45,7 @@ import Gogol.Vault.Types
 type VaultMattersAddPermissionsResource =
   "v1"
     Core.:> "matters"
-    Core.:> Core.CaptureMode
-              "matterId"
-              "addPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "matterId" "addPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -99,14 +94,9 @@ newVaultMattersAddPermissions matterId payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    VaultMattersAddPermissions
-  where
+instance Core.GoogleRequest VaultMattersAddPermissions where
   type Rs VaultMattersAddPermissions = MatterPermission
-  type
-    Scopes VaultMattersAddPermissions =
-      '[Ediscovery'FullControl]
+  type Scopes VaultMattersAddPermissions = '[Ediscovery'FullControl]
   requestClient VaultMattersAddPermissions {..} =
     go
       matterId
@@ -121,7 +111,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy VaultMattersAddPermissionsResource
-          )
+          (Core.Proxy :: Core.Proxy VaultMattersAddPermissionsResource)
           Core.mempty

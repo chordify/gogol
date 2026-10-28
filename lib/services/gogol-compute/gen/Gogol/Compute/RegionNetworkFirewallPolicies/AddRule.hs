@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionNetworkFirewallPolicies.AddRule
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.AddRule
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionNetworkFirewallPolicies.addRule@ method which the
 -- 'ComputeRegionNetworkFirewallPoliciesAddRule' request conforms to.
@@ -63,9 +61,7 @@ type ComputeRegionNetworkFirewallPoliciesAddRuleResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              FirewallPolicyRule
+    Core.:> Core.ReqBody '[Core.JSON] FirewallPolicyRule
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Inserts a rule into a network firewall policy.
@@ -110,55 +106,54 @@ newComputeRegionNetworkFirewallPoliciesAddRule ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionNetworkFirewallPoliciesAddRule
-newComputeRegionNetworkFirewallPoliciesAddRule firewallPolicy payload project region =
-  ComputeRegionNetworkFirewallPoliciesAddRule
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      firewallPolicy = firewallPolicy,
-      maxPriority = Core.Nothing,
-      minPriority = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionNetworkFirewallPoliciesAddRule
+  firewallPolicy
+  payload
+  project
+  region =
+    ComputeRegionNetworkFirewallPoliciesAddRule
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        firewallPolicy = firewallPolicy,
+        maxPriority = Core.Nothing,
+        minPriority = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionNetworkFirewallPoliciesAddRule
   where
+  type Rs ComputeRegionNetworkFirewallPoliciesAddRule = Operation
   type
-    Rs ComputeRegionNetworkFirewallPoliciesAddRule =
-      Operation
-  type
-    Scopes
-      ComputeRegionNetworkFirewallPoliciesAddRule =
+    Scopes ComputeRegionNetworkFirewallPoliciesAddRule =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionNetworkFirewallPoliciesAddRule {..} =
-      go
-        project
-        region
-        firewallPolicy
-        xgafv
-        accessToken
-        callback
-        maxPriority
-        minPriority
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionNetworkFirewallPoliciesAddRuleResource
-            )
-            Core.mempty
+  requestClient ComputeRegionNetworkFirewallPoliciesAddRule {..} =
+    go
+      project
+      region
+      firewallPolicy
+      xgafv
+      accessToken
+      callback
+      maxPriority
+      minPriority
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionNetworkFirewallPoliciesAddRuleResource
+          )
+          Core.mempty

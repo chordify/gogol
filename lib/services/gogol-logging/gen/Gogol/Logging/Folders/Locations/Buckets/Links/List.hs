@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Folders.Locations.Buckets.Links.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.Folders.Locations.Buckets.Links.List
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.folders.locations.buckets.links.list@ method which the
 -- 'LoggingFoldersLocationsBucketsLinksList' request conforms to.
@@ -72,7 +70,7 @@ data LoggingFoldersLocationsBucketsLinksList = LoggingFoldersLocationsBucketsLin
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/
+    -- | Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\"
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +81,7 @@ data LoggingFoldersLocationsBucketsLinksList = LoggingFoldersLocationsBucketsLin
 
 -- | Creates a value of 'LoggingFoldersLocationsBucketsLinksList' with the minimum fields required to make a request.
 newLoggingFoldersLocationsBucketsLinksList ::
-  -- |  Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/ See 'parent'.
+  -- |  Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\" See 'parent'.
   Core.Text ->
   LoggingFoldersLocationsBucketsLinksList
 newLoggingFoldersLocationsBucketsLinksList parent =
@@ -98,13 +96,8 @@ newLoggingFoldersLocationsBucketsLinksList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingFoldersLocationsBucketsLinksList
-  where
-  type
-    Rs LoggingFoldersLocationsBucketsLinksList =
-      ListLinksResponse
+instance Core.GoogleRequest LoggingFoldersLocationsBucketsLinksList where
+  type Rs LoggingFoldersLocationsBucketsLinksList = ListLinksResponse
   type
     Scopes LoggingFoldersLocationsBucketsLinksList =
       '[ CloudPlatform'FullControl,
@@ -112,24 +105,22 @@ instance
          Logging'Admin,
          Logging'Read
        ]
-  requestClient
-    LoggingFoldersLocationsBucketsLinksList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingFoldersLocationsBucketsLinksListResource
-            )
-            Core.mempty
+  requestClient LoggingFoldersLocationsBucketsLinksList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingFoldersLocationsBucketsLinksListResource
+          )
+          Core.mempty

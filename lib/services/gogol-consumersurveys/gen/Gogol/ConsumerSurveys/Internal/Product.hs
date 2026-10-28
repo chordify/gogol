@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ConsumerSurveys.Internal.Product
@@ -105,14 +103,12 @@ module Gogol.ConsumerSurveys.Internal.Product
 where
 
 import Gogol.ConsumerSurveys.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newFieldMask' smart constructor.
 data FieldMask = FieldMask
-  { -- |
-    fields :: (Core.Maybe [FieldMask]),
-    -- |
+  { fields :: (Core.Maybe [FieldMask]),
     id :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -128,32 +124,25 @@ instance Core.FromJSON FieldMask where
       "FieldMask"
       ( \o ->
           FieldMask
-            Core.<$> (o Core..:? "fields") Core.<*> (o Core..:? "id")
+            Core.<$> (o Core..:? "fields")
+            Core.<*> (o Core..:? "id")
       )
 
 instance Core.ToJSON FieldMask where
   toJSON FieldMask {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fields" Core..=) Core.<$> fields,
-            ("id" Core..=) Core.<$> id
-          ]
+          [("fields" Core..=) Core.<$> fields, ("id" Core..=) Core.<$> id]
       )
 
 --
 -- /See:/ 'newMobileAppPanel' smart constructor.
 data MobileAppPanel = MobileAppPanel
-  { -- |
-    country :: (Core.Maybe Core.Text),
-    -- |
+  { country :: (Core.Maybe Core.Text),
     isPublicPanel :: (Core.Maybe Core.Bool),
-    -- |
     language :: (Core.Maybe Core.Text),
-    -- |
     mobileAppPanelId :: (Core.Maybe Core.Text),
-    -- |
     name :: (Core.Maybe Core.Text),
-    -- |
     owners :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -192,8 +181,7 @@ instance Core.ToJSON MobileAppPanel where
           [ ("country" Core..=) Core.<$> country,
             ("isPublicPanel" Core..=) Core.<$> isPublicPanel,
             ("language" Core..=) Core.<$> language,
-            ("mobileAppPanelId" Core..=)
-              Core.<$> mobileAppPanelId,
+            ("mobileAppPanelId" Core..=) Core.<$> mobileAppPanelId,
             ("name" Core..=) Core.<$> name,
             ("owners" Core..=) Core.<$> owners
           ]
@@ -202,13 +190,11 @@ instance Core.ToJSON MobileAppPanel where
 --
 -- /See:/ 'newMobileAppPanelsListResponse' smart constructor.
 data MobileAppPanelsListResponse = MobileAppPanelsListResponse
-  { -- |
-    pageInfo :: (Core.Maybe PageInfo),
+  { pageInfo :: (Core.Maybe PageInfo),
     -- | Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
     requestId :: (Core.Maybe Core.Text),
     -- | An individual predefined panel of Opinion Rewards mobile users.
     resources :: (Core.Maybe [MobileAppPanel]),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -243,19 +229,15 @@ instance Core.ToJSON MobileAppPanelsListResponse where
           [ ("pageInfo" Core..=) Core.<$> pageInfo,
             ("requestId" Core..=) Core.<$> requestId,
             ("resources" Core..=) Core.<$> resources,
-            ("tokenPagination" Core..=)
-              Core.<$> tokenPagination
+            ("tokenPagination" Core..=) Core.<$> tokenPagination
           ]
       )
 
 --
 -- /See:/ 'newPageInfo' smart constructor.
 data PageInfo = PageInfo
-  { -- |
-    resultPerPage :: (Core.Maybe Core.Int32),
-    -- |
+  { resultPerPage :: (Core.Maybe Core.Int32),
     startIndex :: (Core.Maybe Core.Int32),
-    -- |
     totalResults :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -294,8 +276,7 @@ instance Core.ToJSON PageInfo where
 --
 -- /See:/ 'newResultsGetRequest' smart constructor.
 newtype ResultsGetRequest = ResultsGetRequest
-  { -- |
-    resultMask :: (Core.Maybe ResultsMask)
+  { resultMask :: (Core.Maybe ResultsMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -308,23 +289,17 @@ instance Core.FromJSON ResultsGetRequest where
   parseJSON =
     Core.withObject
       "ResultsGetRequest"
-      ( \o ->
-          ResultsGetRequest Core.<$> (o Core..:? "resultMask")
-      )
+      (\o -> ResultsGetRequest Core.<$> (o Core..:? "resultMask"))
 
 instance Core.ToJSON ResultsGetRequest where
   toJSON ResultsGetRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("resultMask" Core..=) Core.<$> resultMask]
-      )
+      (Core.catMaybes [("resultMask" Core..=) Core.<$> resultMask])
 
 --
 -- /See:/ 'newResultsMask' smart constructor.
 data ResultsMask = ResultsMask
-  { -- |
-    fields :: (Core.Maybe [FieldMask]),
-    -- |
+  { fields :: (Core.Maybe [FieldMask]),
     projection :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -332,7 +307,8 @@ data ResultsMask = ResultsMask
 -- | Creates a value of 'ResultsMask' with the minimum fields required to make a request.
 newResultsMask ::
   ResultsMask
-newResultsMask = ResultsMask {fields = Core.Nothing, projection = Core.Nothing}
+newResultsMask =
+  ResultsMask {fields = Core.Nothing, projection = Core.Nothing}
 
 instance Core.FromJSON ResultsMask where
   parseJSON =
@@ -356,27 +332,16 @@ instance Core.ToJSON ResultsMask where
 --
 -- /See:/ 'newSurvey' smart constructor.
 data Survey = Survey
-  { -- |
-    audience :: (Core.Maybe SurveyAudience),
-    -- |
+  { audience :: (Core.Maybe SurveyAudience),
     cost :: (Core.Maybe SurveyCost),
-    -- |
     customerData :: (Core.Maybe Core.Base64),
-    -- |
     description :: (Core.Maybe Core.Text),
-    -- |
     owners :: (Core.Maybe [Core.Text]),
-    -- |
     questions :: (Core.Maybe [SurveyQuestion]),
-    -- |
     rejectionReason :: (Core.Maybe SurveyRejection),
-    -- |
     state :: (Core.Maybe Core.Text),
-    -- |
     surveyUrlId :: (Core.Maybe Core.Text),
-    -- |
     title :: (Core.Maybe Core.Text),
-    -- |
     wantedResponseCount :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -432,27 +397,19 @@ instance Core.ToJSON Survey where
             ("state" Core..=) Core.<$> state,
             ("surveyUrlId" Core..=) Core.<$> surveyUrlId,
             ("title" Core..=) Core.<$> title,
-            ("wantedResponseCount" Core..=)
-              Core.<$> wantedResponseCount
+            ("wantedResponseCount" Core..=) Core.<$> wantedResponseCount
           ]
       )
 
 --
 -- /See:/ 'newSurveyAudience' smart constructor.
 data SurveyAudience = SurveyAudience
-  { -- |
-    ages :: (Core.Maybe [Core.Text]),
-    -- |
+  { ages :: (Core.Maybe [Core.Text]),
     country :: (Core.Maybe Core.Text),
-    -- |
     countrySubdivision :: (Core.Maybe Core.Text),
-    -- |
     gender :: (Core.Maybe Core.Text),
-    -- |
     languages :: (Core.Maybe [Core.Text]),
-    -- |
     mobileAppPanelId :: (Core.Maybe Core.Text),
-    -- |
     populationSource :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -492,27 +449,20 @@ instance Core.ToJSON SurveyAudience where
       ( Core.catMaybes
           [ ("ages" Core..=) Core.<$> ages,
             ("country" Core..=) Core.<$> country,
-            ("countrySubdivision" Core..=)
-              Core.<$> countrySubdivision,
+            ("countrySubdivision" Core..=) Core.<$> countrySubdivision,
             ("gender" Core..=) Core.<$> gender,
             ("languages" Core..=) Core.<$> languages,
-            ("mobileAppPanelId" Core..=)
-              Core.<$> mobileAppPanelId,
-            ("populationSource" Core..=)
-              Core.<$> populationSource
+            ("mobileAppPanelId" Core..=) Core.<$> mobileAppPanelId,
+            ("populationSource" Core..=) Core.<$> populationSource
           ]
       )
 
 --
 -- /See:/ 'newSurveyCost' smart constructor.
 data SurveyCost = SurveyCost
-  { -- |
-    costPerResponseNanos :: (Core.Maybe Core.Int64),
-    -- |
+  { costPerResponseNanos :: (Core.Maybe Core.Int64),
     currencyCode :: (Core.Maybe Core.Text),
-    -- |
     maxCostPerResponseNanos :: (Core.Maybe Core.Int64),
-    -- |
     nanos :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -534,23 +484,24 @@ instance Core.FromJSON SurveyCost where
       "SurveyCost"
       ( \o ->
           SurveyCost
-            Core.<$> ( o Core..:? "costPerResponseNanos"
+            Core.<$> ( o
+                         Core..:? "costPerResponseNanos"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "currencyCode")
-            Core.<*> ( o Core..:? "maxCostPerResponseNanos"
+            Core.<*> ( o
+                         Core..:? "maxCostPerResponseNanos"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "nanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "nanos" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON SurveyCost where
   toJSON SurveyCost {..} =
     Core.object
       ( Core.catMaybes
-          [ ("costPerResponseNanos" Core..=) Core.. Core.AsText
+          [ ("costPerResponseNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> costPerResponseNanos,
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("maxCostPerResponseNanos" Core..=)
@@ -563,41 +514,23 @@ instance Core.ToJSON SurveyCost where
 --
 -- /See:/ 'newSurveyQuestion' smart constructor.
 data SurveyQuestion = SurveyQuestion
-  { -- |
-    answerOrder :: (Core.Maybe Core.Text),
-    -- |
+  { answerOrder :: (Core.Maybe Core.Text),
     answers :: (Core.Maybe [Core.Text]),
-    -- |
     hasOther :: (Core.Maybe Core.Bool),
-    -- |
     highValueLabel :: (Core.Maybe Core.Text),
-    -- |
     images :: (Core.Maybe [SurveyQuestionImage]),
-    -- |
     lastAnswerPositionPinned :: (Core.Maybe Core.Bool),
-    -- |
     lowValueLabel :: (Core.Maybe Core.Text),
-    -- |
     mustPickSuggestion :: (Core.Maybe Core.Bool),
-    -- |
     numStars :: (Core.Maybe Core.Text),
-    -- |
     openTextPlaceholder :: (Core.Maybe Core.Text),
-    -- |
     openTextSuggestions :: (Core.Maybe [Core.Text]),
-    -- |
     question :: (Core.Maybe Core.Text),
-    -- |
     sentimentText :: (Core.Maybe Core.Text),
-    -- |
     singleLineResponse :: (Core.Maybe Core.Bool),
-    -- |
     thresholdAnswers :: (Core.Maybe [Core.Text]),
-    -- |
     type' :: (Core.Maybe Core.Text),
-    -- |
     unitOfMeasurementLabel :: (Core.Maybe Core.Text),
-    -- |
     videoId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -665,22 +598,16 @@ instance Core.ToJSON SurveyQuestion where
             ("lastAnswerPositionPinned" Core..=)
               Core.<$> lastAnswerPositionPinned,
             ("lowValueLabel" Core..=) Core.<$> lowValueLabel,
-            ("mustPickSuggestion" Core..=)
-              Core.<$> mustPickSuggestion,
+            ("mustPickSuggestion" Core..=) Core.<$> mustPickSuggestion,
             ("numStars" Core..=) Core.<$> numStars,
-            ("openTextPlaceholder" Core..=)
-              Core.<$> openTextPlaceholder,
-            ("openTextSuggestions" Core..=)
-              Core.<$> openTextSuggestions,
+            ("openTextPlaceholder" Core..=) Core.<$> openTextPlaceholder,
+            ("openTextSuggestions" Core..=) Core.<$> openTextSuggestions,
             ("question" Core..=) Core.<$> question,
             ("sentimentText" Core..=) Core.<$> sentimentText,
-            ("singleLineResponse" Core..=)
-              Core.<$> singleLineResponse,
-            ("thresholdAnswers" Core..=)
-              Core.<$> thresholdAnswers,
+            ("singleLineResponse" Core..=) Core.<$> singleLineResponse,
+            ("thresholdAnswers" Core..=) Core.<$> thresholdAnswers,
             ("type" Core..=) Core.<$> type',
-            ("unitOfMeasurementLabel" Core..=)
-              Core.<$> unitOfMeasurementLabel,
+            ("unitOfMeasurementLabel" Core..=) Core.<$> unitOfMeasurementLabel,
             ("videoId" Core..=) Core.<$> videoId
           ]
       )
@@ -688,11 +615,8 @@ instance Core.ToJSON SurveyQuestion where
 --
 -- /See:/ 'newSurveyQuestionImage' smart constructor.
 data SurveyQuestionImage = SurveyQuestionImage
-  { -- |
-    altText :: (Core.Maybe Core.Text),
-    -- |
+  { altText :: (Core.Maybe Core.Text),
     data' :: (Core.Maybe Core.Base64),
-    -- |
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -731,9 +655,7 @@ instance Core.ToJSON SurveyQuestionImage where
 --
 -- /See:/ 'newSurveyRejection' smart constructor.
 data SurveyRejection = SurveyRejection
-  { -- |
-    explanation :: (Core.Maybe Core.Text),
-    -- |
+  { explanation :: (Core.Maybe Core.Text),
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -766,9 +688,7 @@ instance Core.ToJSON SurveyRejection where
 --
 -- /See:/ 'newSurveyResults' smart constructor.
 data SurveyResults = SurveyResults
-  { -- |
-    status :: (Core.Maybe Core.Text),
-    -- |
+  { status :: (Core.Maybe Core.Text),
     surveyUrlId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -809,34 +729,28 @@ newtype SurveysDeleteResponse = SurveysDeleteResponse
 -- | Creates a value of 'SurveysDeleteResponse' with the minimum fields required to make a request.
 newSurveysDeleteResponse ::
   SurveysDeleteResponse
-newSurveysDeleteResponse = SurveysDeleteResponse {requestId = Core.Nothing}
+newSurveysDeleteResponse =
+  SurveysDeleteResponse {requestId = Core.Nothing}
 
 instance Core.FromJSON SurveysDeleteResponse where
   parseJSON =
     Core.withObject
       "SurveysDeleteResponse"
-      ( \o ->
-          SurveysDeleteResponse
-            Core.<$> (o Core..:? "requestId")
-      )
+      (\o -> SurveysDeleteResponse Core.<$> (o Core..:? "requestId"))
 
 instance Core.ToJSON SurveysDeleteResponse where
   toJSON SurveysDeleteResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("requestId" Core..=) Core.<$> requestId]
-      )
+      (Core.catMaybes [("requestId" Core..=) Core.<$> requestId])
 
 --
 -- /See:/ 'newSurveysListResponse' smart constructor.
 data SurveysListResponse = SurveysListResponse
-  { -- |
-    pageInfo :: (Core.Maybe PageInfo),
+  { pageInfo :: (Core.Maybe PageInfo),
     -- | Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
     requestId :: (Core.Maybe Core.Text),
     -- | An individual survey resource.
     resources :: (Core.Maybe [Survey]),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -871,8 +785,7 @@ instance Core.ToJSON SurveysListResponse where
           [ ("pageInfo" Core..=) Core.<$> pageInfo,
             ("requestId" Core..=) Core.<$> requestId,
             ("resources" Core..=) Core.<$> resources,
-            ("tokenPagination" Core..=)
-              Core.<$> tokenPagination
+            ("tokenPagination" Core..=) Core.<$> tokenPagination
           ]
       )
 
@@ -896,7 +809,8 @@ instance Core.FromJSON SurveysStartRequest where
       "SurveysStartRequest"
       ( \o ->
           SurveysStartRequest
-            Core.<$> ( o Core..:? "maxCostPerResponseNanos"
+            Core.<$> ( o
+                         Core..:? "maxCostPerResponseNanos"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -922,23 +836,19 @@ newtype SurveysStartResponse = SurveysStartResponse
 -- | Creates a value of 'SurveysStartResponse' with the minimum fields required to make a request.
 newSurveysStartResponse ::
   SurveysStartResponse
-newSurveysStartResponse = SurveysStartResponse {requestId = Core.Nothing}
+newSurveysStartResponse =
+  SurveysStartResponse {requestId = Core.Nothing}
 
 instance Core.FromJSON SurveysStartResponse where
   parseJSON =
     Core.withObject
       "SurveysStartResponse"
-      ( \o ->
-          SurveysStartResponse
-            Core.<$> (o Core..:? "requestId")
-      )
+      (\o -> SurveysStartResponse Core.<$> (o Core..:? "requestId"))
 
 instance Core.ToJSON SurveysStartResponse where
   toJSON SurveysStartResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("requestId" Core..=) Core.<$> requestId]
-      )
+      (Core.catMaybes [("requestId" Core..=) Core.<$> requestId])
 
 --
 -- /See:/ 'newSurveysStopResponse' smart constructor.
@@ -951,30 +861,24 @@ newtype SurveysStopResponse = SurveysStopResponse
 -- | Creates a value of 'SurveysStopResponse' with the minimum fields required to make a request.
 newSurveysStopResponse ::
   SurveysStopResponse
-newSurveysStopResponse = SurveysStopResponse {requestId = Core.Nothing}
+newSurveysStopResponse =
+  SurveysStopResponse {requestId = Core.Nothing}
 
 instance Core.FromJSON SurveysStopResponse where
   parseJSON =
     Core.withObject
       "SurveysStopResponse"
-      ( \o ->
-          SurveysStopResponse
-            Core.<$> (o Core..:? "requestId")
-      )
+      (\o -> SurveysStopResponse Core.<$> (o Core..:? "requestId"))
 
 instance Core.ToJSON SurveysStopResponse where
   toJSON SurveysStopResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("requestId" Core..=) Core.<$> requestId]
-      )
+      (Core.catMaybes [("requestId" Core..=) Core.<$> requestId])
 
 --
 -- /See:/ 'newTokenPagination' smart constructor.
 data TokenPagination = TokenPagination
-  { -- |
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
+  { nextPageToken :: (Core.Maybe Core.Text),
     previousPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1003,7 +907,6 @@ instance Core.ToJSON TokenPagination where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("previousPageToken" Core..=)
-              Core.<$> previousPageToken
+            ("previousPageToken" Core..=) Core.<$> previousPageToken
           ]
       )

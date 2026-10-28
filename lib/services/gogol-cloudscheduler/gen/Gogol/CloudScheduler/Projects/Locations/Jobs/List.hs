@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudScheduler.Projects.Locations.Jobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudScheduler.Projects.Locations.Jobs.List
 where
 
 import Gogol.CloudScheduler.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudscheduler.projects.locations.jobs.list@ method which the
 -- 'CloudSchedulerProjectsLocationsJobsList' request conforms to.
@@ -70,7 +68,7 @@ data CloudSchedulerProjectsLocationsJobsList = CloudSchedulerProjectsLocationsJo
     callback :: (Core.Maybe Core.Text),
     -- | Requested page size. The maximum page size is 500. If unspecified, the page size will be the maximum. Fewer jobs than requested might be returned, even if more jobs exist; use next/page/token to determine if more jobs exist.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A token identifying a page of results the server will return. To request the first page results, page/token must be empty. To request the next page of results, page/token must be the value of next/page/token returned from the previous call to ListJobs. It is an error to switch the value of filter or order_by while iterating through pages.
+    -- | A token identifying a page of results the server will return. To request the first page results, page/token must be empty. To request the next page of results, page/token must be the value of next/page/token returned from the previous call to ListJobs.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The location name. For example: @projects\/PROJECT_ID\/locations\/LOCATION_ID@.
     parent :: Core.Text,
@@ -98,34 +96,27 @@ newCloudSchedulerProjectsLocationsJobsList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudSchedulerProjectsLocationsJobsList
-  where
-  type
-    Rs CloudSchedulerProjectsLocationsJobsList =
-      ListJobsResponse
+instance Core.GoogleRequest CloudSchedulerProjectsLocationsJobsList where
+  type Rs CloudSchedulerProjectsLocationsJobsList = ListJobsResponse
   type
     Scopes CloudSchedulerProjectsLocationsJobsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudSchedulerProjectsLocationsJobsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudSchedulerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSchedulerProjectsLocationsJobsListResource
-            )
-            Core.mempty
+  requestClient CloudSchedulerProjectsLocationsJobsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudSchedulerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSchedulerProjectsLocationsJobsListResource
+          )
+          Core.mempty

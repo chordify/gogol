@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.DataTransfer.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.DataTransfer.Types
@@ -66,7 +64,7 @@ where
 
 import Gogol.Admin.DataTransfer.Internal.Product
 import Gogol.Admin.DataTransfer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @datatransfer_v1@ of the Admin SDK API. This contains the host and root path used as a starting point for constructing service requests.
 adminDataTransferService :: Core.ServiceConfig
@@ -76,7 +74,9 @@ adminDataTransferService =
     "admin.googleapis.com"
 
 -- | View and manage data transfers between users in your organization
-type Admin'Datatransfer = "https://www.googleapis.com/auth/admin.datatransfer"
+type Admin'Datatransfer =
+  "https://www.googleapis.com/auth/admin.datatransfer"
 
 -- | View data transfers between users in your organization
-type Admin'Datatransfer'Readonly = "https://www.googleapis.com/auth/admin.datatransfer.readonly"
+type Admin'Datatransfer'Readonly =
+  "https://www.googleapis.com/auth/admin.datatransfer.readonly"

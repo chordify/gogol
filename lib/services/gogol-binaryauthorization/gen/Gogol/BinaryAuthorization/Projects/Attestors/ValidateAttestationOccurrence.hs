@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns whether the given Attestation for the given image URI was signed by the given Attestor
+-- Returns whether the given @Attestation@ for the given image URI was signed by the given @Attestor@
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.validateAttestationOccurrence@.
 module Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
@@ -40,7 +38,7 @@ module Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrenc
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.validateAttestationOccurrence@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence' request conforms to.
@@ -56,14 +54,10 @@ type BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrenceResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ValidateAttestationOccurrenceRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              ValidateAttestationOccurrenceResponse
+    Core.:> Core.ReqBody '[Core.JSON] ValidateAttestationOccurrenceRequest
+    Core.:> Core.Post '[Core.JSON] ValidateAttestationOccurrenceResponse
 
--- | Returns whether the given Attestation for the given image URI was signed by the given Attestor
+-- | Returns whether the given @Attestation@ for the given image URI was signed by the given @Attestor@
 --
 -- /See:/ 'newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence' smart constructor.
 data BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence = BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
@@ -91,16 +85,19 @@ newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence ::
   -- |  Multipart request metadata. See 'payload'.
   ValidateAttestationOccurrenceRequest ->
   BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
-newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence attestor payload =
-  BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      attestor = attestor,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
+  attestor
+  payload =
+    BinaryAuthorizationProjectsAttestorsValidateAttestationOccurrence
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        attestor = attestor,
+        callback = Core.Nothing,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

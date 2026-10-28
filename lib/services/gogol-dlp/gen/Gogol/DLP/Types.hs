@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DLP.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DLP.Types
@@ -53,9 +51,39 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2AllInfoTypes (..),
     newGooglePrivacyDlpV2AllInfoTypes,
 
+    -- ** GooglePrivacyDlpV2AllOtherBigQueryTables
+    GooglePrivacyDlpV2AllOtherBigQueryTables (..),
+    newGooglePrivacyDlpV2AllOtherBigQueryTables,
+
+    -- ** GooglePrivacyDlpV2AllOtherDatabaseResources
+    GooglePrivacyDlpV2AllOtherDatabaseResources (..),
+    newGooglePrivacyDlpV2AllOtherDatabaseResources,
+
+    -- ** GooglePrivacyDlpV2AllOtherResources
+    GooglePrivacyDlpV2AllOtherResources (..),
+    newGooglePrivacyDlpV2AllOtherResources,
+
     -- ** GooglePrivacyDlpV2AllText
     GooglePrivacyDlpV2AllText (..),
     newGooglePrivacyDlpV2AllText,
+
+    -- ** GooglePrivacyDlpV2AmazonS3Bucket
+    GooglePrivacyDlpV2AmazonS3Bucket (..),
+    newGooglePrivacyDlpV2AmazonS3Bucket,
+
+    -- ** GooglePrivacyDlpV2AmazonS3BucketConditions
+    GooglePrivacyDlpV2AmazonS3BucketConditions (..),
+    newGooglePrivacyDlpV2AmazonS3BucketConditions,
+
+    -- ** GooglePrivacyDlpV2AmazonS3BucketConditions_BucketTypesItem
+    GooglePrivacyDlpV2AmazonS3BucketConditions_BucketTypesItem (..),
+
+    -- ** GooglePrivacyDlpV2AmazonS3BucketConditions_ObjectStorageClassesItem
+    GooglePrivacyDlpV2AmazonS3BucketConditions_ObjectStorageClassesItem (..),
+
+    -- ** GooglePrivacyDlpV2AmazonS3BucketRegex
+    GooglePrivacyDlpV2AmazonS3BucketRegex (..),
+    newGooglePrivacyDlpV2AmazonS3BucketRegex,
 
     -- ** GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails
     GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails (..),
@@ -64,6 +92,22 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2AuxiliaryTable
     GooglePrivacyDlpV2AuxiliaryTable (..),
     newGooglePrivacyDlpV2AuxiliaryTable,
+
+    -- ** GooglePrivacyDlpV2AwsAccount
+    GooglePrivacyDlpV2AwsAccount (..),
+    newGooglePrivacyDlpV2AwsAccount,
+
+    -- ** GooglePrivacyDlpV2AwsAccountRegex
+    GooglePrivacyDlpV2AwsAccountRegex (..),
+    newGooglePrivacyDlpV2AwsAccountRegex,
+
+    -- ** GooglePrivacyDlpV2AwsDiscoveryStartingLocation
+    GooglePrivacyDlpV2AwsDiscoveryStartingLocation (..),
+    newGooglePrivacyDlpV2AwsDiscoveryStartingLocation,
+
+    -- ** GooglePrivacyDlpV2BigQueryDiscoveryTarget
+    GooglePrivacyDlpV2BigQueryDiscoveryTarget (..),
+    newGooglePrivacyDlpV2BigQueryDiscoveryTarget,
 
     -- ** GooglePrivacyDlpV2BigQueryField
     GooglePrivacyDlpV2BigQueryField (..),
@@ -80,9 +124,28 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2BigQueryOptions_SampleMethod
     GooglePrivacyDlpV2BigQueryOptions_SampleMethod (..),
 
+    -- ** GooglePrivacyDlpV2BigQueryRegex
+    GooglePrivacyDlpV2BigQueryRegex (..),
+    newGooglePrivacyDlpV2BigQueryRegex,
+
+    -- ** GooglePrivacyDlpV2BigQueryRegexes
+    GooglePrivacyDlpV2BigQueryRegexes (..),
+    newGooglePrivacyDlpV2BigQueryRegexes,
+
     -- ** GooglePrivacyDlpV2BigQueryTable
     GooglePrivacyDlpV2BigQueryTable (..),
     newGooglePrivacyDlpV2BigQueryTable,
+
+    -- ** GooglePrivacyDlpV2BigQueryTableCollection
+    GooglePrivacyDlpV2BigQueryTableCollection (..),
+    newGooglePrivacyDlpV2BigQueryTableCollection,
+
+    -- ** GooglePrivacyDlpV2BigQueryTableTypes
+    GooglePrivacyDlpV2BigQueryTableTypes (..),
+    newGooglePrivacyDlpV2BigQueryTableTypes,
+
+    -- ** GooglePrivacyDlpV2BigQueryTableTypes_TypesItem
+    GooglePrivacyDlpV2BigQueryTableTypes_TypesItem (..),
 
     -- ** GooglePrivacyDlpV2BoundingBox
     GooglePrivacyDlpV2BoundingBox (..),
@@ -130,6 +193,25 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2CharsToIgnore_CommonCharactersToIgnore
     GooglePrivacyDlpV2CharsToIgnore_CommonCharactersToIgnore (..),
 
+    -- ** GooglePrivacyDlpV2CloudSqlDiscoveryTarget
+    GooglePrivacyDlpV2CloudSqlDiscoveryTarget (..),
+    newGooglePrivacyDlpV2CloudSqlDiscoveryTarget,
+
+    -- ** GooglePrivacyDlpV2CloudSqlIamCredential
+    GooglePrivacyDlpV2CloudSqlIamCredential (..),
+    newGooglePrivacyDlpV2CloudSqlIamCredential,
+
+    -- ** GooglePrivacyDlpV2CloudSqlProperties
+    GooglePrivacyDlpV2CloudSqlProperties (..),
+    newGooglePrivacyDlpV2CloudSqlProperties,
+
+    -- ** GooglePrivacyDlpV2CloudSqlProperties_DatabaseEngine
+    GooglePrivacyDlpV2CloudSqlProperties_DatabaseEngine (..),
+
+    -- ** GooglePrivacyDlpV2CloudStorageDiscoveryTarget
+    GooglePrivacyDlpV2CloudStorageDiscoveryTarget (..),
+    newGooglePrivacyDlpV2CloudStorageDiscoveryTarget,
+
     -- ** GooglePrivacyDlpV2CloudStorageFileSet
     GooglePrivacyDlpV2CloudStorageFileSet (..),
     newGooglePrivacyDlpV2CloudStorageFileSet,
@@ -148,13 +230,40 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2CloudStoragePath (..),
     newGooglePrivacyDlpV2CloudStoragePath,
 
+    -- ** GooglePrivacyDlpV2CloudStorageRegex
+    GooglePrivacyDlpV2CloudStorageRegex (..),
+    newGooglePrivacyDlpV2CloudStorageRegex,
+
     -- ** GooglePrivacyDlpV2CloudStorageRegexFileSet
     GooglePrivacyDlpV2CloudStorageRegexFileSet (..),
     newGooglePrivacyDlpV2CloudStorageRegexFileSet,
 
+    -- ** GooglePrivacyDlpV2CloudStorageResourceReference
+    GooglePrivacyDlpV2CloudStorageResourceReference (..),
+    newGooglePrivacyDlpV2CloudStorageResourceReference,
+
     -- ** GooglePrivacyDlpV2Color
     GooglePrivacyDlpV2Color (..),
     newGooglePrivacyDlpV2Color,
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile
+    GooglePrivacyDlpV2ColumnDataProfile (..),
+    newGooglePrivacyDlpV2ColumnDataProfile,
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile_ColumnType
+    GooglePrivacyDlpV2ColumnDataProfile_ColumnType (..),
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile_EstimatedNullPercentage
+    GooglePrivacyDlpV2ColumnDataProfile_EstimatedNullPercentage (..),
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile_EstimatedUniquenessScore
+    GooglePrivacyDlpV2ColumnDataProfile_EstimatedUniquenessScore (..),
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile_PolicyState
+    GooglePrivacyDlpV2ColumnDataProfile_PolicyState (..),
+
+    -- ** GooglePrivacyDlpV2ColumnDataProfile_State
+    GooglePrivacyDlpV2ColumnDataProfile_State (..),
 
     -- ** GooglePrivacyDlpV2Condition
     GooglePrivacyDlpV2Condition (..),
@@ -166,6 +275,13 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2Conditions
     GooglePrivacyDlpV2Conditions (..),
     newGooglePrivacyDlpV2Conditions,
+
+    -- ** GooglePrivacyDlpV2Connection
+    GooglePrivacyDlpV2Connection (..),
+    newGooglePrivacyDlpV2Connection,
+
+    -- ** GooglePrivacyDlpV2Connection_State
+    GooglePrivacyDlpV2Connection_State (..),
 
     -- ** GooglePrivacyDlpV2Container
     GooglePrivacyDlpV2Container (..),
@@ -179,9 +295,17 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2ContentLocation (..),
     newGooglePrivacyDlpV2ContentLocation,
 
+    -- ** GooglePrivacyDlpV2CreateConnectionRequest
+    GooglePrivacyDlpV2CreateConnectionRequest (..),
+    newGooglePrivacyDlpV2CreateConnectionRequest,
+
     -- ** GooglePrivacyDlpV2CreateDeidentifyTemplateRequest
     GooglePrivacyDlpV2CreateDeidentifyTemplateRequest (..),
     newGooglePrivacyDlpV2CreateDeidentifyTemplateRequest,
+
+    -- ** GooglePrivacyDlpV2CreateDiscoveryConfigRequest
+    GooglePrivacyDlpV2CreateDiscoveryConfigRequest (..),
+    newGooglePrivacyDlpV2CreateDiscoveryConfigRequest,
 
     -- ** GooglePrivacyDlpV2CreateDlpJobRequest
     GooglePrivacyDlpV2CreateDlpJobRequest (..),
@@ -232,9 +356,28 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2DataProfileAction (..),
     newGooglePrivacyDlpV2DataProfileAction,
 
+    -- ** GooglePrivacyDlpV2DataProfileBigQueryRowSchema
+    GooglePrivacyDlpV2DataProfileBigQueryRowSchema (..),
+    newGooglePrivacyDlpV2DataProfileBigQueryRowSchema,
+
     -- ** GooglePrivacyDlpV2DataProfileConfigSnapshot
     GooglePrivacyDlpV2DataProfileConfigSnapshot (..),
     newGooglePrivacyDlpV2DataProfileConfigSnapshot,
+
+    -- ** GooglePrivacyDlpV2DataProfileFinding
+    GooglePrivacyDlpV2DataProfileFinding (..),
+    newGooglePrivacyDlpV2DataProfileFinding,
+
+    -- ** GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility
+    GooglePrivacyDlpV2DataProfileFinding_ResourceVisibility (..),
+
+    -- ** GooglePrivacyDlpV2DataProfileFindingLocation
+    GooglePrivacyDlpV2DataProfileFindingLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingLocation,
+
+    -- ** GooglePrivacyDlpV2DataProfileFindingRecordLocation
+    GooglePrivacyDlpV2DataProfileFindingRecordLocation (..),
+    newGooglePrivacyDlpV2DataProfileFindingRecordLocation,
 
     -- ** GooglePrivacyDlpV2DataProfileJobConfig
     GooglePrivacyDlpV2DataProfileJobConfig (..),
@@ -261,6 +404,26 @@ module Gogol.DLP.Types
 
     -- ** GooglePrivacyDlpV2DataRiskLevel_Score
     GooglePrivacyDlpV2DataRiskLevel_Score (..),
+
+    -- ** GooglePrivacyDlpV2DataSourceType
+    GooglePrivacyDlpV2DataSourceType (..),
+    newGooglePrivacyDlpV2DataSourceType,
+
+    -- ** GooglePrivacyDlpV2DatabaseResourceCollection
+    GooglePrivacyDlpV2DatabaseResourceCollection (..),
+    newGooglePrivacyDlpV2DatabaseResourceCollection,
+
+    -- ** GooglePrivacyDlpV2DatabaseResourceReference
+    GooglePrivacyDlpV2DatabaseResourceReference (..),
+    newGooglePrivacyDlpV2DatabaseResourceReference,
+
+    -- ** GooglePrivacyDlpV2DatabaseResourceRegex
+    GooglePrivacyDlpV2DatabaseResourceRegex (..),
+    newGooglePrivacyDlpV2DatabaseResourceRegex,
+
+    -- ** GooglePrivacyDlpV2DatabaseResourceRegexes
+    GooglePrivacyDlpV2DatabaseResourceRegexes (..),
+    newGooglePrivacyDlpV2DatabaseResourceRegexes,
 
     -- ** GooglePrivacyDlpV2DatastoreKey
     GooglePrivacyDlpV2DatastoreKey (..),
@@ -336,6 +499,146 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2Dictionary (..),
     newGooglePrivacyDlpV2Dictionary,
 
+    -- ** GooglePrivacyDlpV2Disabled
+    GooglePrivacyDlpV2Disabled (..),
+    newGooglePrivacyDlpV2Disabled,
+
+    -- ** GooglePrivacyDlpV2DiscoveryBigQueryConditions
+    GooglePrivacyDlpV2DiscoveryBigQueryConditions (..),
+    newGooglePrivacyDlpV2DiscoveryBigQueryConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryBigQueryConditions_TypeCollection
+    GooglePrivacyDlpV2DiscoveryBigQueryConditions_TypeCollection (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryBigQueryFilter
+    GooglePrivacyDlpV2DiscoveryBigQueryFilter (..),
+    newGooglePrivacyDlpV2DiscoveryBigQueryFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlConditions
+    GooglePrivacyDlpV2DiscoveryCloudSqlConditions (..),
+    newGooglePrivacyDlpV2DiscoveryCloudSqlConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlConditions_DatabaseEnginesItem
+    GooglePrivacyDlpV2DiscoveryCloudSqlConditions_DatabaseEnginesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlConditions_TypesItem
+    GooglePrivacyDlpV2DiscoveryCloudSqlConditions_TypesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlFilter
+    GooglePrivacyDlpV2DiscoveryCloudSqlFilter (..),
+    newGooglePrivacyDlpV2DiscoveryCloudSqlFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlGenerationCadence
+    GooglePrivacyDlpV2DiscoveryCloudSqlGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryCloudSqlGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudSqlGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryCloudSqlGenerationCadence_RefreshFrequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageConditions
+    GooglePrivacyDlpV2DiscoveryCloudStorageConditions (..),
+    newGooglePrivacyDlpV2DiscoveryCloudStorageConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem
+    GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedBucketAttributesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedObjectAttributesItem
+    GooglePrivacyDlpV2DiscoveryCloudStorageConditions_IncludedObjectAttributesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageFilter
+    GooglePrivacyDlpV2DiscoveryCloudStorageFilter (..),
+    newGooglePrivacyDlpV2DiscoveryCloudStorageFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageGenerationCadence
+    GooglePrivacyDlpV2DiscoveryCloudStorageGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryCloudStorageGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryCloudStorageGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryCloudStorageGenerationCadence_RefreshFrequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryConfig
+    GooglePrivacyDlpV2DiscoveryConfig (..),
+    newGooglePrivacyDlpV2DiscoveryConfig,
+
+    -- ** GooglePrivacyDlpV2DiscoveryConfig_Status
+    GooglePrivacyDlpV2DiscoveryConfig_Status (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryFileStoreConditions
+    GooglePrivacyDlpV2DiscoveryFileStoreConditions (..),
+    newGooglePrivacyDlpV2DiscoveryFileStoreConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryGenerationCadence
+    GooglePrivacyDlpV2DiscoveryGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryGenerationCadence_RefreshFrequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence
+    GooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence (..),
+    newGooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence_Frequency
+    GooglePrivacyDlpV2DiscoveryInspectTemplateModifiedCadence_Frequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryOtherCloudConditions
+    GooglePrivacyDlpV2DiscoveryOtherCloudConditions (..),
+    newGooglePrivacyDlpV2DiscoveryOtherCloudConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryOtherCloudFilter
+    GooglePrivacyDlpV2DiscoveryOtherCloudFilter (..),
+    newGooglePrivacyDlpV2DiscoveryOtherCloudFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryOtherCloudGenerationCadence
+    GooglePrivacyDlpV2DiscoveryOtherCloudGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryOtherCloudGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryOtherCloudGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryOtherCloudGenerationCadence_RefreshFrequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoverySchemaModifiedCadence
+    GooglePrivacyDlpV2DiscoverySchemaModifiedCadence (..),
+    newGooglePrivacyDlpV2DiscoverySchemaModifiedCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoverySchemaModifiedCadence_Frequency
+    GooglePrivacyDlpV2DiscoverySchemaModifiedCadence_Frequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoverySchemaModifiedCadence_TypesItem
+    GooglePrivacyDlpV2DiscoverySchemaModifiedCadence_TypesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryStartingLocation
+    GooglePrivacyDlpV2DiscoveryStartingLocation (..),
+    newGooglePrivacyDlpV2DiscoveryStartingLocation,
+
+    -- ** GooglePrivacyDlpV2DiscoveryTableModifiedCadence
+    GooglePrivacyDlpV2DiscoveryTableModifiedCadence (..),
+    newGooglePrivacyDlpV2DiscoveryTableModifiedCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryTableModifiedCadence_Frequency
+    GooglePrivacyDlpV2DiscoveryTableModifiedCadence_Frequency (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem
+    GooglePrivacyDlpV2DiscoveryTableModifiedCadence_TypesItem (..),
+
+    -- ** GooglePrivacyDlpV2DiscoveryTarget
+    GooglePrivacyDlpV2DiscoveryTarget (..),
+    newGooglePrivacyDlpV2DiscoveryTarget,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetConditions
+    GooglePrivacyDlpV2DiscoveryVertexDatasetConditions (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetConditions,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetFilter
+    GooglePrivacyDlpV2DiscoveryVertexDatasetFilter (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetFilter,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence (..),
+    newGooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence,
+
+    -- ** GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency
+    GooglePrivacyDlpV2DiscoveryVertexDatasetGenerationCadence_RefreshFrequency (..),
+
     -- ** GooglePrivacyDlpV2DlpJob
     GooglePrivacyDlpV2DlpJob (..),
     newGooglePrivacyDlpV2DlpJob,
@@ -357,6 +660,9 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2Error
     GooglePrivacyDlpV2Error (..),
     newGooglePrivacyDlpV2Error,
+
+    -- ** GooglePrivacyDlpV2Error_ExtraInfo
+    GooglePrivacyDlpV2Error_ExtraInfo (..),
 
     -- ** GooglePrivacyDlpV2ExcludeByHotword
     GooglePrivacyDlpV2ExcludeByHotword (..),
@@ -392,9 +698,58 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2FieldTransformation (..),
     newGooglePrivacyDlpV2FieldTransformation,
 
+    -- ** GooglePrivacyDlpV2FileClusterSummary
+    GooglePrivacyDlpV2FileClusterSummary (..),
+    newGooglePrivacyDlpV2FileClusterSummary,
+
+    -- ** GooglePrivacyDlpV2FileClusterType
+    GooglePrivacyDlpV2FileClusterType (..),
+    newGooglePrivacyDlpV2FileClusterType,
+
+    -- ** GooglePrivacyDlpV2FileClusterType_Cluster
+    GooglePrivacyDlpV2FileClusterType_Cluster (..),
+
+    -- ** GooglePrivacyDlpV2FileExtensionInfo
+    GooglePrivacyDlpV2FileExtensionInfo (..),
+    newGooglePrivacyDlpV2FileExtensionInfo,
+
     -- ** GooglePrivacyDlpV2FileSet
     GooglePrivacyDlpV2FileSet (..),
     newGooglePrivacyDlpV2FileSet,
+
+    -- ** GooglePrivacyDlpV2FileStoreCollection
+    GooglePrivacyDlpV2FileStoreCollection (..),
+    newGooglePrivacyDlpV2FileStoreCollection,
+
+    -- ** GooglePrivacyDlpV2FileStoreDataProfile
+    GooglePrivacyDlpV2FileStoreDataProfile (..),
+    newGooglePrivacyDlpV2FileStoreDataProfile,
+
+    -- ** GooglePrivacyDlpV2FileStoreDataProfile_ResourceAttributes
+    GooglePrivacyDlpV2FileStoreDataProfile_ResourceAttributes (..),
+    newGooglePrivacyDlpV2FileStoreDataProfile_ResourceAttributes,
+
+    -- ** GooglePrivacyDlpV2FileStoreDataProfile_ResourceLabels
+    GooglePrivacyDlpV2FileStoreDataProfile_ResourceLabels (..),
+    newGooglePrivacyDlpV2FileStoreDataProfile_ResourceLabels,
+
+    -- ** GooglePrivacyDlpV2FileStoreDataProfile_ResourceVisibility
+    GooglePrivacyDlpV2FileStoreDataProfile_ResourceVisibility (..),
+
+    -- ** GooglePrivacyDlpV2FileStoreDataProfile_State
+    GooglePrivacyDlpV2FileStoreDataProfile_State (..),
+
+    -- ** GooglePrivacyDlpV2FileStoreInfoTypeSummary
+    GooglePrivacyDlpV2FileStoreInfoTypeSummary (..),
+    newGooglePrivacyDlpV2FileStoreInfoTypeSummary,
+
+    -- ** GooglePrivacyDlpV2FileStoreRegex
+    GooglePrivacyDlpV2FileStoreRegex (..),
+    newGooglePrivacyDlpV2FileStoreRegex,
+
+    -- ** GooglePrivacyDlpV2FileStoreRegexes
+    GooglePrivacyDlpV2FileStoreRegexes (..),
+    newGooglePrivacyDlpV2FileStoreRegexes,
 
     -- ** GooglePrivacyDlpV2Finding
     GooglePrivacyDlpV2Finding (..),
@@ -418,6 +773,10 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2FixedSizeBucketingConfig
     GooglePrivacyDlpV2FixedSizeBucketingConfig (..),
     newGooglePrivacyDlpV2FixedSizeBucketingConfig,
+
+    -- ** GooglePrivacyDlpV2GlobalProcessing
+    GooglePrivacyDlpV2GlobalProcessing (..),
+    newGooglePrivacyDlpV2GlobalProcessing,
 
     -- ** GooglePrivacyDlpV2HotwordRule
     GooglePrivacyDlpV2HotwordRule (..),
@@ -459,6 +818,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2HybridOptions_Labels (..),
     newGooglePrivacyDlpV2HybridOptions_Labels,
 
+    -- ** GooglePrivacyDlpV2ImageFallbackLocation
+    GooglePrivacyDlpV2ImageFallbackLocation (..),
+    newGooglePrivacyDlpV2ImageFallbackLocation,
+
     -- ** GooglePrivacyDlpV2ImageLocation
     GooglePrivacyDlpV2ImageLocation (..),
     newGooglePrivacyDlpV2ImageLocation,
@@ -498,6 +861,13 @@ module Gogol.DLP.Types
 
     -- ** GooglePrivacyDlpV2InfoTypeDescription_SupportedByItem
     GooglePrivacyDlpV2InfoTypeDescription_SupportedByItem (..),
+
+    -- ** GooglePrivacyDlpV2InfoTypeLikelihood
+    GooglePrivacyDlpV2InfoTypeLikelihood (..),
+    newGooglePrivacyDlpV2InfoTypeLikelihood,
+
+    -- ** GooglePrivacyDlpV2InfoTypeLikelihood_MinLikelihood
+    GooglePrivacyDlpV2InfoTypeLikelihood_MinLikelihood (..),
 
     -- ** GooglePrivacyDlpV2InfoTypeLimit
     GooglePrivacyDlpV2InfoTypeLimit (..),
@@ -651,13 +1021,29 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood
     GooglePrivacyDlpV2LikelihoodAdjustment_FixedLikelihood (..),
 
+    -- ** GooglePrivacyDlpV2ListColumnDataProfilesResponse
+    GooglePrivacyDlpV2ListColumnDataProfilesResponse (..),
+    newGooglePrivacyDlpV2ListColumnDataProfilesResponse,
+
+    -- ** GooglePrivacyDlpV2ListConnectionsResponse
+    GooglePrivacyDlpV2ListConnectionsResponse (..),
+    newGooglePrivacyDlpV2ListConnectionsResponse,
+
     -- ** GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
     GooglePrivacyDlpV2ListDeidentifyTemplatesResponse (..),
     newGooglePrivacyDlpV2ListDeidentifyTemplatesResponse,
 
+    -- ** GooglePrivacyDlpV2ListDiscoveryConfigsResponse
+    GooglePrivacyDlpV2ListDiscoveryConfigsResponse (..),
+    newGooglePrivacyDlpV2ListDiscoveryConfigsResponse,
+
     -- ** GooglePrivacyDlpV2ListDlpJobsResponse
     GooglePrivacyDlpV2ListDlpJobsResponse (..),
     newGooglePrivacyDlpV2ListDlpJobsResponse,
+
+    -- ** GooglePrivacyDlpV2ListFileStoreDataProfilesResponse
+    GooglePrivacyDlpV2ListFileStoreDataProfilesResponse (..),
+    newGooglePrivacyDlpV2ListFileStoreDataProfilesResponse,
 
     -- ** GooglePrivacyDlpV2ListInfoTypesResponse
     GooglePrivacyDlpV2ListInfoTypesResponse (..),
@@ -671,9 +1057,17 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2ListJobTriggersResponse (..),
     newGooglePrivacyDlpV2ListJobTriggersResponse,
 
+    -- ** GooglePrivacyDlpV2ListProjectDataProfilesResponse
+    GooglePrivacyDlpV2ListProjectDataProfilesResponse (..),
+    newGooglePrivacyDlpV2ListProjectDataProfilesResponse,
+
     -- ** GooglePrivacyDlpV2ListStoredInfoTypesResponse
     GooglePrivacyDlpV2ListStoredInfoTypesResponse (..),
     newGooglePrivacyDlpV2ListStoredInfoTypesResponse,
+
+    -- ** GooglePrivacyDlpV2ListTableDataProfilesResponse
+    GooglePrivacyDlpV2ListTableDataProfilesResponse (..),
+    newGooglePrivacyDlpV2ListTableDataProfilesResponse,
 
     -- ** GooglePrivacyDlpV2Location
     GooglePrivacyDlpV2Location (..),
@@ -690,6 +1084,10 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2MetadataLocation_Type
     GooglePrivacyDlpV2MetadataLocation_Type (..),
 
+    -- ** GooglePrivacyDlpV2MultiRegionProcessing
+    GooglePrivacyDlpV2MultiRegionProcessing (..),
+    newGooglePrivacyDlpV2MultiRegionProcessing,
+
     -- ** GooglePrivacyDlpV2NumericalStatsConfig
     GooglePrivacyDlpV2NumericalStatsConfig (..),
     newGooglePrivacyDlpV2NumericalStatsConfig,
@@ -697,6 +1095,38 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2NumericalStatsResult
     GooglePrivacyDlpV2NumericalStatsResult (..),
     newGooglePrivacyDlpV2NumericalStatsResult,
+
+    -- ** GooglePrivacyDlpV2OrConditions
+    GooglePrivacyDlpV2OrConditions (..),
+    newGooglePrivacyDlpV2OrConditions,
+
+    -- ** GooglePrivacyDlpV2OrgConfig
+    GooglePrivacyDlpV2OrgConfig (..),
+    newGooglePrivacyDlpV2OrgConfig,
+
+    -- ** GooglePrivacyDlpV2OtherCloudDiscoveryStartingLocation
+    GooglePrivacyDlpV2OtherCloudDiscoveryStartingLocation (..),
+    newGooglePrivacyDlpV2OtherCloudDiscoveryStartingLocation,
+
+    -- ** GooglePrivacyDlpV2OtherCloudDiscoveryTarget
+    GooglePrivacyDlpV2OtherCloudDiscoveryTarget (..),
+    newGooglePrivacyDlpV2OtherCloudDiscoveryTarget,
+
+    -- ** GooglePrivacyDlpV2OtherCloudResourceCollection
+    GooglePrivacyDlpV2OtherCloudResourceCollection (..),
+    newGooglePrivacyDlpV2OtherCloudResourceCollection,
+
+    -- ** GooglePrivacyDlpV2OtherCloudResourceRegex
+    GooglePrivacyDlpV2OtherCloudResourceRegex (..),
+    newGooglePrivacyDlpV2OtherCloudResourceRegex,
+
+    -- ** GooglePrivacyDlpV2OtherCloudResourceRegexes
+    GooglePrivacyDlpV2OtherCloudResourceRegexes (..),
+    newGooglePrivacyDlpV2OtherCloudResourceRegexes,
+
+    -- ** GooglePrivacyDlpV2OtherCloudSingleResourceReference
+    GooglePrivacyDlpV2OtherCloudSingleResourceReference (..),
+    newGooglePrivacyDlpV2OtherCloudSingleResourceReference,
 
     -- ** GooglePrivacyDlpV2OtherInfoTypeSummary
     GooglePrivacyDlpV2OtherInfoTypeSummary (..),
@@ -725,9 +1155,17 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2PrivacyMetric (..),
     newGooglePrivacyDlpV2PrivacyMetric,
 
+    -- ** GooglePrivacyDlpV2ProcessingLocation
+    GooglePrivacyDlpV2ProcessingLocation (..),
+    newGooglePrivacyDlpV2ProcessingLocation,
+
     -- ** GooglePrivacyDlpV2ProfileStatus
     GooglePrivacyDlpV2ProfileStatus (..),
     newGooglePrivacyDlpV2ProfileStatus,
+
+    -- ** GooglePrivacyDlpV2ProjectDataProfile
+    GooglePrivacyDlpV2ProjectDataProfile (..),
+    newGooglePrivacyDlpV2ProjectDataProfile,
 
     -- ** GooglePrivacyDlpV2Proximity
     GooglePrivacyDlpV2Proximity (..),
@@ -768,9 +1206,17 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2PublishSummaryToCscc (..),
     newGooglePrivacyDlpV2PublishSummaryToCscc,
 
+    -- ** GooglePrivacyDlpV2PublishToChronicle
+    GooglePrivacyDlpV2PublishToChronicle (..),
+    newGooglePrivacyDlpV2PublishToChronicle,
+
     -- ** GooglePrivacyDlpV2PublishToPubSub
     GooglePrivacyDlpV2PublishToPubSub (..),
     newGooglePrivacyDlpV2PublishToPubSub,
+
+    -- ** GooglePrivacyDlpV2PublishToSecurityCommandCenter
+    GooglePrivacyDlpV2PublishToSecurityCommandCenter (..),
+    newGooglePrivacyDlpV2PublishToSecurityCommandCenter,
 
     -- ** GooglePrivacyDlpV2PublishToStackdriver
     GooglePrivacyDlpV2PublishToStackdriver (..),
@@ -844,6 +1290,10 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2ReidentifyContentResponse (..),
     newGooglePrivacyDlpV2ReidentifyContentResponse,
 
+    -- ** GooglePrivacyDlpV2RelatedResource
+    GooglePrivacyDlpV2RelatedResource (..),
+    newGooglePrivacyDlpV2RelatedResource,
+
     -- ** GooglePrivacyDlpV2ReplaceDictionaryConfig
     GooglePrivacyDlpV2ReplaceDictionaryConfig (..),
     newGooglePrivacyDlpV2ReplaceDictionaryConfig,
@@ -887,6 +1337,28 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2Schedule
     GooglePrivacyDlpV2Schedule (..),
     newGooglePrivacyDlpV2Schedule,
+
+    -- ** GooglePrivacyDlpV2SchemaModifiedCadence
+    GooglePrivacyDlpV2SchemaModifiedCadence (..),
+    newGooglePrivacyDlpV2SchemaModifiedCadence,
+
+    -- ** GooglePrivacyDlpV2SchemaModifiedCadence_Frequency
+    GooglePrivacyDlpV2SchemaModifiedCadence_Frequency (..),
+
+    -- ** GooglePrivacyDlpV2SchemaModifiedCadence_TypesItem
+    GooglePrivacyDlpV2SchemaModifiedCadence_TypesItem (..),
+
+    -- ** GooglePrivacyDlpV2SearchConnectionsResponse
+    GooglePrivacyDlpV2SearchConnectionsResponse (..),
+    newGooglePrivacyDlpV2SearchConnectionsResponse,
+
+    -- ** GooglePrivacyDlpV2SecretManagerCredential
+    GooglePrivacyDlpV2SecretManagerCredential (..),
+    newGooglePrivacyDlpV2SecretManagerCredential,
+
+    -- ** GooglePrivacyDlpV2SecretsDiscoveryTarget
+    GooglePrivacyDlpV2SecretsDiscoveryTarget (..),
+    newGooglePrivacyDlpV2SecretsDiscoveryTarget,
 
     -- ** GooglePrivacyDlpV2SelectedInfoTypes
     GooglePrivacyDlpV2SelectedInfoTypes (..),
@@ -974,6 +1446,25 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2TableOptions (..),
     newGooglePrivacyDlpV2TableOptions,
 
+    -- ** GooglePrivacyDlpV2TableReference
+    GooglePrivacyDlpV2TableReference (..),
+    newGooglePrivacyDlpV2TableReference,
+
+    -- ** GooglePrivacyDlpV2TagCondition
+    GooglePrivacyDlpV2TagCondition (..),
+    newGooglePrivacyDlpV2TagCondition,
+
+    -- ** GooglePrivacyDlpV2TagResources
+    GooglePrivacyDlpV2TagResources (..),
+    newGooglePrivacyDlpV2TagResources,
+
+    -- ** GooglePrivacyDlpV2TagResources_ProfileGenerationsToTagItem
+    GooglePrivacyDlpV2TagResources_ProfileGenerationsToTagItem (..),
+
+    -- ** GooglePrivacyDlpV2TagValue
+    GooglePrivacyDlpV2TagValue (..),
+    newGooglePrivacyDlpV2TagValue,
+
     -- ** GooglePrivacyDlpV2TaggedField
     GooglePrivacyDlpV2TaggedField (..),
     newGooglePrivacyDlpV2TaggedField,
@@ -1054,9 +1545,17 @@ module Gogol.DLP.Types
     GooglePrivacyDlpV2UnwrappedCryptoKey (..),
     newGooglePrivacyDlpV2UnwrappedCryptoKey,
 
+    -- ** GooglePrivacyDlpV2UpdateConnectionRequest
+    GooglePrivacyDlpV2UpdateConnectionRequest (..),
+    newGooglePrivacyDlpV2UpdateConnectionRequest,
+
     -- ** GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
     GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest (..),
     newGooglePrivacyDlpV2UpdateDeidentifyTemplateRequest,
+
+    -- ** GooglePrivacyDlpV2UpdateDiscoveryConfigRequest
+    GooglePrivacyDlpV2UpdateDiscoveryConfigRequest (..),
+    newGooglePrivacyDlpV2UpdateDiscoveryConfigRequest,
 
     -- ** GooglePrivacyDlpV2UpdateInspectTemplateRequest
     GooglePrivacyDlpV2UpdateInspectTemplateRequest (..),
@@ -1084,6 +1583,26 @@ module Gogol.DLP.Types
     -- ** GooglePrivacyDlpV2VersionDescription
     GooglePrivacyDlpV2VersionDescription (..),
     newGooglePrivacyDlpV2VersionDescription,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetCollection
+    GooglePrivacyDlpV2VertexDatasetCollection (..),
+    newGooglePrivacyDlpV2VertexDatasetCollection,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetDiscoveryTarget
+    GooglePrivacyDlpV2VertexDatasetDiscoveryTarget (..),
+    newGooglePrivacyDlpV2VertexDatasetDiscoveryTarget,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetRegex
+    GooglePrivacyDlpV2VertexDatasetRegex (..),
+    newGooglePrivacyDlpV2VertexDatasetRegex,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetRegexes
+    GooglePrivacyDlpV2VertexDatasetRegexes (..),
+    newGooglePrivacyDlpV2VertexDatasetRegexes,
+
+    -- ** GooglePrivacyDlpV2VertexDatasetResourceReference
+    GooglePrivacyDlpV2VertexDatasetResourceReference (..),
+    newGooglePrivacyDlpV2VertexDatasetResourceReference,
 
     -- ** GooglePrivacyDlpV2WordList
     GooglePrivacyDlpV2WordList (..),
@@ -1131,9 +1650,9 @@ where
 
 import Gogol.DLP.Internal.Product
 import Gogol.DLP.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
--- | Default request referring to version @v2@ of the Cloud Data Loss Prevention (DLP) API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v2@ of the Sensitive Data Protection (DLP). This contains the host and root path used as a starting point for constructing service requests.
 dLPService :: Core.ServiceConfig
 dLPService =
   Core.defaultService
@@ -1141,4 +1660,5 @@ dLPService =
     "dlp.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

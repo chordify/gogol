@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Books.Internal.Sum
@@ -235,7 +233,7 @@ module Gogol.Books.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -277,7 +275,6 @@ newtype MyconfigRequestAccessLicenseTypes = MyconfigRequestAccessLicenseTypes {f
       Core.FromJSONKey
     )
 
--- |
 pattern MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED :: MyconfigRequestAccessLicenseTypes
 pattern MyconfigRequestAccessLicenseTypes_LICENSETYPESUNDEFINED = MyconfigRequestAccessLicenseTypes "LICENSE_TYPES_UNDEFINED"
 
@@ -314,7 +311,6 @@ newtype MyconfigSyncVolumeLicensesFeatures = MyconfigSyncVolumeLicensesFeatures 
       Core.FromJSONKey
     )
 
--- |
 pattern MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED :: MyconfigSyncVolumeLicensesFeatures
 pattern MyconfigSyncVolumeLicensesFeatures_FEATURESUNDEFINED = MyconfigSyncVolumeLicensesFeatures "FEATURES_UNDEFINED"
 
@@ -341,7 +337,6 @@ newtype MylibraryBookshelvesAddVolumeReason = MylibraryBookshelvesAddVolumeReaso
       Core.FromJSONKey
     )
 
--- |
 pattern MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED :: MylibraryBookshelvesAddVolumeReason
 pattern MylibraryBookshelvesAddVolumeReason_REASONUNDEFINED = MylibraryBookshelvesAddVolumeReason "REASON_UNDEFINED"
 
@@ -378,7 +373,6 @@ newtype MylibraryBookshelvesRemoveVolumeReason = MylibraryBookshelvesRemoveVolum
       Core.FromJSONKey
     )
 
--- |
 pattern MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED :: MylibraryBookshelvesRemoveVolumeReason
 pattern MylibraryBookshelvesRemoveVolumeReason_REASONUNDEFINED = MylibraryBookshelvesRemoveVolumeReason "REASON_UNDEFINED"
 
@@ -405,7 +399,6 @@ newtype MylibraryBookshelvesVolumesListProjection = MylibraryBookshelvesVolumesL
       Core.FromJSONKey
     )
 
--- |
 pattern MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED :: MylibraryBookshelvesVolumesListProjection
 pattern MylibraryBookshelvesVolumesListProjection_PROJECTIONUNDEFINED = MylibraryBookshelvesVolumesListProjection "PROJECTION_UNDEFINED"
 
@@ -437,7 +430,6 @@ newtype MylibraryReadingpositionsSetPositionAction = MylibraryReadingpositionsSe
       Core.FromJSONKey
     )
 
--- |
 pattern MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED :: MylibraryReadingpositionsSetPositionAction
 pattern MylibraryReadingpositionsSetPositionAction_ACTIONUNDEFINED = MylibraryReadingpositionsSetPositionAction "ACTION_UNDEFINED"
 
@@ -489,7 +481,6 @@ newtype OnboardingListCategoryVolumesMaxAllowedMaturityRating = OnboardingListCa
       Core.FromJSONKey
     )
 
--- |
 pattern OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: OnboardingListCategoryVolumesMaxAllowedMaturityRating
 pattern OnboardingListCategoryVolumesMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = OnboardingListCategoryVolumesMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -521,7 +512,6 @@ newtype PersonalizedstreamGetMaxAllowedMaturityRating = PersonalizedstreamGetMax
       Core.FromJSONKey
     )
 
--- |
 pattern PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: PersonalizedstreamGetMaxAllowedMaturityRating
 pattern PersonalizedstreamGetMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = PersonalizedstreamGetMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -553,7 +543,6 @@ newtype VolumesAssociatedListAssociation = VolumesAssociatedListAssociation {fro
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED :: VolumesAssociatedListAssociation
 pattern VolumesAssociatedListAssociation_ASSOCIATIONUNDEFINED = VolumesAssociatedListAssociation "ASSOCIATION_UNDEFINED"
 
@@ -590,7 +579,6 @@ newtype VolumesAssociatedListMaxAllowedMaturityRating = VolumesAssociatedListMax
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesAssociatedListMaxAllowedMaturityRating
 pattern VolumesAssociatedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesAssociatedListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -622,7 +610,6 @@ newtype VolumesGetProjection = VolumesGetProjection {fromVolumesGetProjection ::
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesGetProjection_PROJECTIONUNDEFINED :: VolumesGetProjection
 pattern VolumesGetProjection_PROJECTIONUNDEFINED = VolumesGetProjection "PROJECTION_UNDEFINED"
 
@@ -654,7 +641,6 @@ newtype VolumesListDownload = VolumesListDownload {fromVolumesListDownload :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListDownload_DOWNLOADUNDEFINED :: VolumesListDownload
 pattern VolumesListDownload_DOWNLOADUNDEFINED = VolumesListDownload "DOWNLOAD_UNDEFINED"
 
@@ -681,7 +667,6 @@ newtype VolumesListFilter = VolumesListFilter {fromVolumesListFilter :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListFilter_FILTERUNDEFINED :: VolumesListFilter
 pattern VolumesListFilter_FILTERUNDEFINED = VolumesListFilter "FILTER_UNDEFINED"
 
@@ -728,7 +713,6 @@ newtype VolumesListLibraryRestrict = VolumesListLibraryRestrict {fromVolumesList
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED :: VolumesListLibraryRestrict
 pattern VolumesListLibraryRestrict_LIBRARYRESTRICTUNDEFINED = VolumesListLibraryRestrict "LIBRARY_RESTRICT_UNDEFINED"
 
@@ -760,7 +744,6 @@ newtype VolumesListMaxAllowedMaturityRating = VolumesListMaxAllowedMaturityRatin
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesListMaxAllowedMaturityRating
 pattern VolumesListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -792,7 +775,6 @@ newtype VolumesListOrderBy = VolumesListOrderBy {fromVolumesListOrderBy :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListOrderBy_ORDERBYUNDEFINED :: VolumesListOrderBy
 pattern VolumesListOrderBy_ORDERBYUNDEFINED = VolumesListOrderBy "ORDER_BY_UNDEFINED"
 
@@ -824,7 +806,6 @@ newtype VolumesListPrintType = VolumesListPrintType {fromVolumesListPrintType ::
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListPrintType_PRINTTYPEUNDEFINED :: VolumesListPrintType
 pattern VolumesListPrintType_PRINTTYPEUNDEFINED = VolumesListPrintType "PRINT_TYPE_UNDEFINED"
 
@@ -861,7 +842,6 @@ newtype VolumesListProjection = VolumesListProjection {fromVolumesListProjection
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesListProjection_PROJECTIONUNDEFINED :: VolumesListProjection
 pattern VolumesListProjection_PROJECTIONUNDEFINED = VolumesListProjection "PROJECTION_UNDEFINED"
 
@@ -893,7 +873,6 @@ newtype VolumesMybooksListAcquireMethod = VolumesMybooksListAcquireMethod {fromV
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED :: VolumesMybooksListAcquireMethod
 pattern VolumesMybooksListAcquireMethod_ACQUIREMETHODUNDEFINED = VolumesMybooksListAcquireMethod "ACQUIRE_METHOD_UNDEFINED"
 
@@ -955,7 +934,6 @@ newtype VolumesMybooksListProcessingState = VolumesMybooksListProcessingState {f
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED :: VolumesMybooksListProcessingState
 pattern VolumesMybooksListProcessingState_PROCESSINGSTATEUNDEFINED = VolumesMybooksListProcessingState "PROCESSING_STATE_UNDEFINED"
 
@@ -992,7 +970,6 @@ newtype VolumesRecommendedListMaxAllowedMaturityRating = VolumesRecommendedListM
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED :: VolumesRecommendedListMaxAllowedMaturityRating
 pattern VolumesRecommendedListMaxAllowedMaturityRating_MAXALLOWEDMATURITYRATINGUNDEFINED = VolumesRecommendedListMaxAllowedMaturityRating "MAX_ALLOWED_MATURITY_RATING_UNDEFINED"
 
@@ -1024,7 +1001,6 @@ newtype VolumesRecommendedRateRating = VolumesRecommendedRateRating {fromVolumes
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesRecommendedRateRating_RATINGUNDEFINED :: VolumesRecommendedRateRating
 pattern VolumesRecommendedRateRating_RATINGUNDEFINED = VolumesRecommendedRateRating "RATING_UNDEFINED"
 
@@ -1056,7 +1032,6 @@ newtype VolumesUseruploadedListProcessingState = VolumesUseruploadedListProcessi
       Core.FromJSONKey
     )
 
--- |
 pattern VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED :: VolumesUseruploadedListProcessingState
 pattern VolumesUseruploadedListProcessingState_PROCESSINGSTATEUNDEFINED = VolumesUseruploadedListProcessingState "PROCESSING_STATE_UNDEFINED"
 

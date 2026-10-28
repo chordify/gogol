@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SiteVerification.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SiteVerification.Internal.Product
@@ -52,7 +50,7 @@ module Gogol.SiteVerification.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SiteVerification.Internal.Sum
 
 --
@@ -74,10 +72,7 @@ newSiteVerificationWebResourceGettokenRequest =
       verificationMethod = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SiteVerificationWebResourceGettokenRequest
-  where
+instance Core.FromJSON SiteVerificationWebResourceGettokenRequest where
   parseJSON =
     Core.withObject
       "SiteVerificationWebResourceGettokenRequest"
@@ -87,16 +82,12 @@ instance
             Core.<*> (o Core..:? "verificationMethod")
       )
 
-instance
-  Core.ToJSON
-    SiteVerificationWebResourceGettokenRequest
-  where
+instance Core.ToJSON SiteVerificationWebResourceGettokenRequest where
   toJSON SiteVerificationWebResourceGettokenRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("site" Core..=) Core.<$> site,
-            ("verificationMethod" Core..=)
-              Core.<$> verificationMethod
+            ("verificationMethod" Core..=) Core.<$> verificationMethod
           ]
       )
 
@@ -116,7 +107,8 @@ newSiteVerificationWebResourceGettokenRequest_Site ::
   SiteVerificationWebResourceGettokenRequest_Site
 newSiteVerificationWebResourceGettokenRequest_Site =
   SiteVerificationWebResourceGettokenRequest_Site
-    { identifier = Core.Nothing,
+    { identifier =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -130,21 +122,20 @@ instance
       ( \o ->
           SiteVerificationWebResourceGettokenRequest_Site
             Core.<$> (o Core..:? "identifier")
-              Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     SiteVerificationWebResourceGettokenRequest_Site
   where
-  toJSON
-    SiteVerificationWebResourceGettokenRequest_Site {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("identifier" Core..=) Core.<$> identifier,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON SiteVerificationWebResourceGettokenRequest_Site {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("identifier" Core..=) Core.<$> identifier,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 --
 -- /See:/ 'newSiteVerificationWebResourceGettokenResponse' smart constructor.
@@ -161,34 +152,29 @@ newSiteVerificationWebResourceGettokenResponse ::
   SiteVerificationWebResourceGettokenResponse
 newSiteVerificationWebResourceGettokenResponse =
   SiteVerificationWebResourceGettokenResponse
-    { method = Core.Nothing,
+    { method =
+        Core.Nothing,
       token = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SiteVerificationWebResourceGettokenResponse
-  where
+instance Core.FromJSON SiteVerificationWebResourceGettokenResponse where
   parseJSON =
     Core.withObject
       "SiteVerificationWebResourceGettokenResponse"
       ( \o ->
           SiteVerificationWebResourceGettokenResponse
-            Core.<$> (o Core..:? "method") Core.<*> (o Core..:? "token")
+            Core.<$> (o Core..:? "method")
+            Core.<*> (o Core..:? "token")
       )
 
-instance
-  Core.ToJSON
-    SiteVerificationWebResourceGettokenResponse
-  where
-  toJSON
-    SiteVerificationWebResourceGettokenResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("method" Core..=) Core.<$> method,
-              ("token" Core..=) Core.<$> token
-            ]
-        )
+instance Core.ToJSON SiteVerificationWebResourceGettokenResponse where
+  toJSON SiteVerificationWebResourceGettokenResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("method" Core..=) Core.<$> method,
+            ("token" Core..=) Core.<$> token
+          ]
+      )
 
 --
 -- /See:/ 'newSiteVerificationWebResourceListResponse' smart constructor.
@@ -204,10 +190,7 @@ newSiteVerificationWebResourceListResponse ::
 newSiteVerificationWebResourceListResponse =
   SiteVerificationWebResourceListResponse {items = Core.Nothing}
 
-instance
-  Core.FromJSON
-    SiteVerificationWebResourceListResponse
-  where
+instance Core.FromJSON SiteVerificationWebResourceListResponse where
   parseJSON =
     Core.withObject
       "SiteVerificationWebResourceListResponse"
@@ -216,13 +199,9 @@ instance
             Core.<$> (o Core..:? "items")
       )
 
-instance
-  Core.ToJSON
-    SiteVerificationWebResourceListResponse
-  where
+instance Core.ToJSON SiteVerificationWebResourceListResponse where
   toJSON SiteVerificationWebResourceListResponse {..} =
-    Core.object
-      (Core.catMaybes [("items" Core..=) Core.<$> items])
+    Core.object (Core.catMaybes [("items" Core..=) Core.<$> items])
 
 --
 -- /See:/ 'newSiteVerificationWebResourceResource' smart constructor.
@@ -246,10 +225,7 @@ newSiteVerificationWebResourceResource =
       site = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SiteVerificationWebResourceResource
-  where
+instance Core.FromJSON SiteVerificationWebResourceResource where
   parseJSON =
     Core.withObject
       "SiteVerificationWebResourceResource"
@@ -260,10 +236,7 @@ instance
             Core.<*> (o Core..:? "site")
       )
 
-instance
-  Core.ToJSON
-    SiteVerificationWebResourceResource
-  where
+instance Core.ToJSON SiteVerificationWebResourceResource where
   toJSON SiteVerificationWebResourceResource {..} =
     Core.object
       ( Core.catMaybes
@@ -289,14 +262,12 @@ newSiteVerificationWebResourceResource_Site ::
   SiteVerificationWebResourceResource_Site
 newSiteVerificationWebResourceResource_Site =
   SiteVerificationWebResourceResource_Site
-    { identifier = Core.Nothing,
+    { identifier =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SiteVerificationWebResourceResource_Site
-  where
+instance Core.FromJSON SiteVerificationWebResourceResource_Site where
   parseJSON =
     Core.withObject
       "SiteVerificationWebResourceResource_Site"
@@ -306,10 +277,7 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    SiteVerificationWebResourceResource_Site
-  where
+instance Core.ToJSON SiteVerificationWebResourceResource_Site where
   toJSON SiteVerificationWebResourceResource_Site {..} =
     Core.object
       ( Core.catMaybes

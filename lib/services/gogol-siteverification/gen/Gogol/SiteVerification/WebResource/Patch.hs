@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SiteVerification.WebResource.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SiteVerification.WebResource.Patch
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.patch@ method which the
@@ -50,12 +48,8 @@ type SiteVerificationWebResourcePatchResource =
     Core.:> "webResource"
     Core.:> Core.Capture "id" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
-    Core.:> Core.Patch
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
+    Core.:> Core.ReqBody '[Core.JSON] SiteVerificationWebResourceResource
+    Core.:> Core.Patch '[Core.JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain. This method supports patch semantics.
 --
@@ -78,10 +72,7 @@ newSiteVerificationWebResourcePatch ::
 newSiteVerificationWebResourcePatch id payload =
   SiteVerificationWebResourcePatch {id = id, payload = payload}
 
-instance
-  Core.GoogleRequest
-    SiteVerificationWebResourcePatch
-  where
+instance Core.GoogleRequest SiteVerificationWebResourcePatch where
   type
     Rs SiteVerificationWebResourcePatch =
       SiteVerificationWebResourceResource
@@ -89,15 +80,9 @@ instance
     Scopes SiteVerificationWebResourcePatch =
       '[Siteverification'FullControl]
   requestClient SiteVerificationWebResourcePatch {..} =
-    go
-      id
-      (Core.Just Core.AltJSON)
-      payload
-      siteVerificationService
+    go id (Core.Just Core.AltJSON) payload siteVerificationService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SiteVerificationWebResourcePatchResource
-          )
+          (Core.Proxy :: Core.Proxy SiteVerificationWebResourcePatchResource)
           Core.mempty

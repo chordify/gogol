@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.ModifyAssignees
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.ModifyAssignees
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.modifyAssignees@ method which the
 -- 'ClassroomCoursesCourseWorkModifyAssignees' request conforms to.
@@ -56,9 +54,7 @@ type ClassroomCoursesCourseWorkModifyAssigneesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ModifyCourseWorkAssigneesRequest
+    Core.:> Core.ReqBody '[Core.JSON] ModifyCourseWorkAssigneesRequest
     Core.:> Core.Post '[Core.JSON] CourseWork
 
 -- | Modifies assignee mode and options of a coursework. Only a teacher of the course that contains the coursework may call this method. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or course work or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or course work does not exist.
@@ -109,30 +105,26 @@ instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkModifyAssignees
   where
-  type
-    Rs ClassroomCoursesCourseWorkModifyAssignees =
-      CourseWork
+  type Rs ClassroomCoursesCourseWorkModifyAssignees = CourseWork
   type
     Scopes ClassroomCoursesCourseWorkModifyAssignees =
       '[Classroom'Coursework'Students]
-  requestClient
-    ClassroomCoursesCourseWorkModifyAssignees {..} =
-      go
-        courseId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkModifyAssigneesResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesCourseWorkModifyAssignees {..} =
+    go
+      courseId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomCoursesCourseWorkModifyAssigneesResource
+          )
+          Core.mempty

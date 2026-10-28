@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.EntityUsageReports.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Reports.EntityUsageReports.Get
 where
 
 import Gogol.Admin.Reports.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reports.entityUsageReports.get@ method which the
 -- 'ReportsEntityUsageReportsGet' request conforms to.
@@ -49,9 +47,7 @@ type ReportsEntityUsageReportsGetResource =
     Core.:> "reports"
     Core.:> "v1"
     Core.:> "usage"
-    Core.:> Core.Capture
-              "entityType"
-              EntityUsageReportsGetEntityType
+    Core.:> Core.Capture "entityType" EntityUsageReportsGetEntityType
     Core.:> Core.Capture "entityKey" Core.Text
     Core.:> "dates"
     Core.:> Core.Capture "date" Core.Text
@@ -64,9 +60,7 @@ type ReportsEntityUsageReportsGetResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "parameters" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] UsageReports
 
@@ -82,7 +76,7 @@ data ReportsEntityUsageReportsGet = ReportsEntityUsageReportsGet
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
     customerId :: (Core.Maybe Core.Text),
-    -- | Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this.
+    -- | Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
     date :: Core.Text,
     -- | Represents the key of the object to filter the data with. It is a string which can take the value @all@ to get activity events for all users, or any other value for an app-specific entity. For details on how to obtain the @entityKey@ for a particular @entityType@, see the Entities Usage parameters reference guides.
     entityKey :: Core.Text,
@@ -106,7 +100,7 @@ data ReportsEntityUsageReportsGet = ReportsEntityUsageReportsGet
 
 -- | Creates a value of 'ReportsEntityUsageReportsGet' with the minimum fields required to make a request.
 newReportsEntityUsageReportsGet ::
-  -- |  Represents the date the usage occurred. The timestamp is in the ISO 8601 format, yyyy-mm-dd. We recommend you use your account\'s time zone for this. See 'date'.
+  -- |  Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
   Core.Text ->
   -- |  Represents the key of the object to filter the data with. It is a string which can take the value @all@ to get activity events for all users, or any other value for an app-specific entity. For details on how to obtain the @entityKey@ for a particular @entityType@, see the Entities Usage parameters reference guides. See 'entityKey'.
   Core.Text ->
@@ -130,10 +124,7 @@ newReportsEntityUsageReportsGet date entityKey entityType =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ReportsEntityUsageReportsGet
-  where
+instance Core.GoogleRequest ReportsEntityUsageReportsGet where
   type Rs ReportsEntityUsageReportsGet = UsageReports
   type
     Scopes ReportsEntityUsageReportsGet =
@@ -158,7 +149,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ReportsEntityUsageReportsGetResource
-          )
+          (Core.Proxy :: Core.Proxy ReportsEntityUsageReportsGetResource)
           Core.mempty

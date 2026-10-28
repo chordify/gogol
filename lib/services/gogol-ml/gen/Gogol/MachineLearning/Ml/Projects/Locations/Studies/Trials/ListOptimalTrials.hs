@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.ListOptimalTrials
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.ListOptimalTri
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.locations.studies.trials.listOptimalTrials@ method which the
 -- 'MlProjectsLocationsStudiesTrialsListOptimalTrials' request conforms to.
@@ -54,12 +52,8 @@ type MlProjectsLocationsStudiesTrialsListOptimalTrialsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__ListOptimalTrialsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudMlV1__ListOptimalTrialsResponse
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudMlV1__ListOptimalTrialsRequest
+    Core.:> Core.Post '[Core.JSON] GoogleCloudMlV1__ListOptimalTrialsResponse
 
 -- | Lists the pareto-optimal trials for multi-objective study or the optimal trials for single-objective study. The definition of pareto-optimal can be checked in wiki page. https:\/\/en.wikipedia.org\/wiki\/Pareto_efficiency
 --
@@ -91,7 +85,8 @@ newMlProjectsLocationsStudiesTrialsListOptimalTrials ::
   MlProjectsLocationsStudiesTrialsListOptimalTrials
 newMlProjectsLocationsStudiesTrialsListOptimalTrials parent payload =
   MlProjectsLocationsStudiesTrialsListOptimalTrials
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -105,30 +100,27 @@ instance
     MlProjectsLocationsStudiesTrialsListOptimalTrials
   where
   type
-    Rs
-      MlProjectsLocationsStudiesTrialsListOptimalTrials =
+    Rs MlProjectsLocationsStudiesTrialsListOptimalTrials =
       GoogleCloudMlV1__ListOptimalTrialsResponse
   type
-    Scopes
-      MlProjectsLocationsStudiesTrialsListOptimalTrials =
+    Scopes MlProjectsLocationsStudiesTrialsListOptimalTrials =
       '[CloudPlatform'FullControl]
-  requestClient
-    MlProjectsLocationsStudiesTrialsListOptimalTrials {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsListOptimalTrialsResource
-            )
-            Core.mempty
+  requestClient MlProjectsLocationsStudiesTrialsListOptimalTrials {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      machineLearningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                MlProjectsLocationsStudiesTrialsListOptimalTrialsResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Productstatuses.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Productstatuses.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.productstatuses.list@ method which the
@@ -72,7 +70,7 @@ data ContentProductstatusesList = ContentProductstatusesList
     callback :: (Core.Maybe Core.Text),
     -- | If set, only issues for the specified destinations are returned, otherwise only issues for the Shopping destination.
     destinations :: (Core.Maybe [Core.Text]),
-    -- | The maximum number of product statuses to return in the response, used for paging.
+    -- | The maximum number of product statuses to return in the response, used for paging. The default value is 25. The maximum value is 250.
     maxResults :: (Core.Maybe Core.Word32),
     -- | The ID of the account that contains the products. This account cannot be a multi-client account.
     merchantId :: Core.Word64,
@@ -103,16 +101,9 @@ newContentProductstatusesList merchantId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentProductstatusesList
-  where
-  type
-    Rs ContentProductstatusesList =
-      ProductstatusesListResponse
-  type
-    Scopes ContentProductstatusesList =
-      '[Content'FullControl]
+instance Core.GoogleRequest ContentProductstatusesList where
+  type Rs ContentProductstatusesList = ProductstatusesListResponse
+  type Scopes ContentProductstatusesList = '[Content'FullControl]
   requestClient ContentProductstatusesList {..} =
     go
       merchantId
@@ -129,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentProductstatusesListResource
-          )
+          (Core.Proxy :: Core.Proxy ContentProductstatusesListResource)
           Core.mempty

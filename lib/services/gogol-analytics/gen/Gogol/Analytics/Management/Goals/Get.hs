@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Goals.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Goals.Get
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.goals.get@ method which the
 -- 'AnalyticsManagementGoalsGet' request conforms to.
@@ -85,18 +83,19 @@ newAnalyticsManagementGoalsGet ::
   -- |  Web property ID to retrieve the goal for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementGoalsGet
-newAnalyticsManagementGoalsGet accountId goalId profileId webPropertyId =
-  AnalyticsManagementGoalsGet
-    { accountId = accountId,
-      goalId = goalId,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementGoalsGet
+  accountId
+  goalId
+  profileId
+  webPropertyId =
     AnalyticsManagementGoalsGet
-  where
+      { accountId = accountId,
+        goalId = goalId,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementGoalsGet where
   type Rs AnalyticsManagementGoalsGet = Goal
   type
     Scopes AnalyticsManagementGoalsGet =
@@ -112,7 +111,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementGoalsGetResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementGoalsGetResource)
           Core.mempty

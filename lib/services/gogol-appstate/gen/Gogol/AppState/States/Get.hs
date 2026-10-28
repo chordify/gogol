@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppState.States.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppState.States.Get
 where
 
 import Gogol.AppState.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appstate.states.get@ method which the
 -- 'AppStateStatesGet' request conforms to.
@@ -66,18 +64,14 @@ newAppStateStatesGet ::
   -- |  The key for the data to be retrieved. See 'stateKey'.
   Core.Int32 ->
   AppStateStatesGet
-newAppStateStatesGet stateKey = AppStateStatesGet {stateKey = stateKey}
+newAppStateStatesGet stateKey =
+  AppStateStatesGet {stateKey = stateKey}
 
 instance Core.GoogleRequest AppStateStatesGet where
   type Rs AppStateStatesGet = GetResponse
-  type
-    Scopes AppStateStatesGet =
-      '[Appstate'FullControl]
+  type Scopes AppStateStatesGet = '[Appstate'FullControl]
   requestClient AppStateStatesGet {..} =
-    go
-      stateKey
-      (Core.Just Core.AltJSON)
-      appStateService
+    go stateKey (Core.Just Core.AltJSON) appStateService
     where
       go =
         Core.buildClient

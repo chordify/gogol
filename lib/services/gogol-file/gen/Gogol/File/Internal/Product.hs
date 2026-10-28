@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.File.Internal.Product
@@ -33,6 +31,10 @@ module Gogol.File.Internal.Product
     -- * Backup_Labels
     Backup_Labels (..),
     newBackup_Labels,
+
+    -- * Backup_Tags
+    Backup_Tags (..),
+    newBackup_Tags,
 
     -- * CancelOperationRequest
     CancelOperationRequest (..),
@@ -57,6 +59,10 @@ module Gogol.File.Internal.Product
     -- * FileShareConfig
     FileShareConfig (..),
     newFileShareConfig,
+
+    -- * FixedIOPS
+    FixedIOPS (..),
+    newFixedIOPS,
 
     -- * GoogleCloudSaasacceleratorManagementProvidersV1Instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance (..),
@@ -126,6 +132,10 @@ module Gogol.File.Internal.Product
     GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata,
 
+    -- * IOPSPerTB
+    IOPSPerTB (..),
+    newIOPSPerTB,
+
     -- * Instance
     Instance (..),
     newInstance,
@@ -133,6 +143,10 @@ module Gogol.File.Internal.Product
     -- * Instance_Labels
     Instance_Labels (..),
     newInstance_Labels,
+
+    -- * Instance_Tags
+    Instance_Tags (..),
+    newInstance_Tags,
 
     -- * ListBackupsResponse
     ListBackupsResponse (..),
@@ -202,9 +216,33 @@ module Gogol.File.Internal.Product
     OperationMetadata (..),
     newOperationMetadata,
 
+    -- * PerformanceConfig
+    PerformanceConfig (..),
+    newPerformanceConfig,
+
+    -- * PerformanceLimits
+    PerformanceLimits (..),
+    newPerformanceLimits,
+
+    -- * PromoteReplicaRequest
+    PromoteReplicaRequest (..),
+    newPromoteReplicaRequest,
+
+    -- * ReplicaConfig
+    ReplicaConfig (..),
+    newReplicaConfig,
+
+    -- * Replication
+    Replication (..),
+    newReplication,
+
     -- * RestoreInstanceRequest
     RestoreInstanceRequest (..),
     newRestoreInstanceRequest,
+
+    -- * RevertInstanceRequest
+    RevertInstanceRequest (..),
+    newRevertInstanceRequest,
 
     -- * Schedule
     Schedule (..),
@@ -217,6 +255,10 @@ module Gogol.File.Internal.Product
     -- * Snapshot_Labels
     Snapshot_Labels (..),
     newSnapshot_Labels,
+
+    -- * Snapshot_Tags
+    Snapshot_Tags (..),
+    newSnapshot_Tags,
 
     -- * Status
     Status (..),
@@ -241,7 +283,7 @@ module Gogol.File.Internal.Product
 where
 
 import Gogol.File.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A Filestore backup.
 --
@@ -255,12 +297,16 @@ data Backup = Backup
     description :: (Core.Maybe Core.Text),
     -- | Output only. Amount of bytes that will be downloaded if the backup is restored. This may be different than storage bytes, since sequential backups of the same disk will share storage.
     downloadBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. The file system protocol of the source Filestore instance that this backup is created from.
+    fileSystemProtocol :: (Core.Maybe Backup_FileSystemProtocol),
     -- | Immutable. KMS key name used for data encryption.
     kmsKey :: (Core.Maybe Core.Text),
     -- | Resource labels to represent user provided metadata.
     labels :: (Core.Maybe Backup_Labels),
     -- | Output only. The resource name of the backup, in the format @projects\/{project_number}\/locations\/{location_id}\/backups\/{backup_id}@.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
     -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Name of the file share in the source Filestore instance that the backup is created from.
@@ -272,7 +318,9 @@ data Backup = Backup
     -- | Output only. The backup state.
     state :: (Core.Maybe Backup_State),
     -- | Output only. The size of the storage used by the backup. As backups share storage, this number is expected to change with backup creation\/deletion.
-    storageBytes :: (Core.Maybe Core.Int64)
+    storageBytes :: (Core.Maybe Core.Int64),
+    -- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+    tags :: (Core.Maybe Backup_Tags)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -285,15 +333,18 @@ newBackup =
       createTime = Core.Nothing,
       description = Core.Nothing,
       downloadBytes = Core.Nothing,
+      fileSystemProtocol = Core.Nothing,
       kmsKey = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       sourceFileShare = Core.Nothing,
       sourceInstance = Core.Nothing,
       sourceInstanceTier = Core.Nothing,
       state = Core.Nothing,
-      storageBytes = Core.Nothing
+      storageBytes = Core.Nothing,
+      tags = Core.Nothing
     }
 
 instance Core.FromJSON Backup where
@@ -302,48 +353,46 @@ instance Core.FromJSON Backup where
       "Backup"
       ( \o ->
           Backup
-            Core.<$> ( o Core..:? "capacityGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "capacityGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "downloadBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "downloadBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "fileSystemProtocol")
             Core.<*> (o Core..:? "kmsKey")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "sourceFileShare")
             Core.<*> (o Core..:? "sourceInstance")
             Core.<*> (o Core..:? "sourceInstanceTier")
             Core.<*> (o Core..:? "state")
-            Core.<*> ( o Core..:? "storageBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "storageBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Backup where
   toJSON Backup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("capacityGb" Core..=) Core.. Core.AsText
-              Core.<$> capacityGb,
+          [ ("capacityGb" Core..=) Core.. Core.AsText Core.<$> capacityGb,
             ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
-            ("downloadBytes" Core..=) Core.. Core.AsText
+            ("downloadBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> downloadBytes,
+            ("fileSystemProtocol" Core..=) Core.<$> fileSystemProtocol,
             ("kmsKey" Core..=) Core.<$> kmsKey,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("sourceFileShare" Core..=) Core.<$> sourceFileShare,
             ("sourceInstance" Core..=) Core.<$> sourceInstance,
-            ("sourceInstanceTier" Core..=)
-              Core.<$> sourceInstanceTier,
+            ("sourceInstanceTier" Core..=) Core.<$> sourceInstanceTier,
             ("state" Core..=) Core.<$> state,
-            ("storageBytes" Core..=) Core.. Core.AsText
-              Core.<$> storageBytes
+            ("storageBytes" Core..=) Core.. Core.AsText Core.<$> storageBytes,
+            ("tags" Core..=) Core.<$> tags
           ]
       )
 
@@ -351,8 +400,7 @@ instance Core.ToJSON Backup where
 --
 -- /See:/ 'newBackup_Labels' smart constructor.
 newtype Backup_Labels = Backup_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -361,18 +409,41 @@ newBackup_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Backup_Labels
-newBackup_Labels additional = Backup_Labels {additional = additional}
+newBackup_Labels additional =
+  Backup_Labels {additional = additional}
 
 instance Core.FromJSON Backup_Labels where
   parseJSON =
     Core.withObject
       "Backup_Labels"
-      ( \o ->
-          Backup_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Backup_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Backup_Labels where
   toJSON Backup_Labels {..} = Core.toJSON additional
+
+-- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+--
+-- /See:/ 'newBackup_Tags' smart constructor.
+newtype Backup_Tags = Backup_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Backup_Tags' with the minimum fields required to make a request.
+newBackup_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Backup_Tags
+newBackup_Tags additional = Backup_Tags {additional = additional}
+
+instance Core.FromJSON Backup_Tags where
+  parseJSON =
+    Core.withObject
+      "Backup_Tags"
+      (\o -> Backup_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Backup_Tags where
+  toJSON Backup_Tags {..} = Core.toJSON additional
 
 -- | The request message for Operations.CancelOperation.
 --
@@ -408,7 +479,8 @@ data DailyCycle = DailyCycle
 -- | Creates a value of 'DailyCycle' with the minimum fields required to make a request.
 newDailyCycle ::
   DailyCycle
-newDailyCycle = DailyCycle {duration = Core.Nothing, startTime = Core.Nothing}
+newDailyCycle =
+  DailyCycle {duration = Core.Nothing, startTime = Core.Nothing}
 
 instance Core.FromJSON DailyCycle where
   parseJSON =
@@ -445,7 +517,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -524,8 +601,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -536,7 +612,7 @@ instance Core.ToJSON Empty where
 data FileShareConfig = FileShareConfig
   { -- | File share capacity in gigabytes (GB). Filestore defines 1 GB as 1024^3 bytes.
     capacityGb :: (Core.Maybe Core.Int64),
-    -- | The name of the file share (must be 16 characters or less).
+    -- | Required. The name of the file share. Must use 1-16 characters for the basic service tier and 1-63 characters for all other service tiers. Must use lowercase letters, numbers, or underscores @[a-z0-9_]@. Must start with a letter. Immutable.
     name :: (Core.Maybe Core.Text),
     -- | Nfs Export Options. There is a limit of 10 export options per file share.
     nfsExportOptions :: (Core.Maybe [NfsExportOptions]),
@@ -562,9 +638,7 @@ instance Core.FromJSON FileShareConfig where
       "FileShareConfig"
       ( \o ->
           FileShareConfig
-            Core.<$> ( o Core..:? "capacityGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "capacityGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nfsExportOptions")
             Core.<*> (o Core..:? "sourceBackup")
@@ -574,13 +648,41 @@ instance Core.ToJSON FileShareConfig where
   toJSON FileShareConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("capacityGb" Core..=) Core.. Core.AsText
-              Core.<$> capacityGb,
+          [ ("capacityGb" Core..=) Core.. Core.AsText Core.<$> capacityGb,
             ("name" Core..=) Core.<$> name,
-            ("nfsExportOptions" Core..=)
-              Core.<$> nfsExportOptions,
+            ("nfsExportOptions" Core..=) Core.<$> nfsExportOptions,
             ("sourceBackup" Core..=) Core.<$> sourceBackup
           ]
+      )
+
+-- | Fixed IOPS (input\/output operations per second) parameters.
+--
+-- /See:/ 'newFixedIOPS' smart constructor.
+newtype FixedIOPS = FixedIOPS
+  { -- | Required. Maximum IOPS.
+    maxIops :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FixedIOPS' with the minimum fields required to make a request.
+newFixedIOPS ::
+  FixedIOPS
+newFixedIOPS = FixedIOPS {maxIops = Core.Nothing}
+
+instance Core.FromJSON FixedIOPS where
+  parseJSON =
+    Core.withObject
+      "FixedIOPS"
+      ( \o ->
+          FixedIOPS
+            Core.<$> (o Core..:? "maxIops" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON FixedIOPS where
+  toJSON FixedIOPS {..} =
+    Core.object
+      ( Core.catMaybes
+          [("maxIops" Core..=) Core.. Core.AsText Core.<$> maxIops]
       )
 
 -- | Instance represents the interface for SLM services to actuate the state of control plane resources. Example Instance in JSON, where consumer-project-number=123456, producer-project-id=cloud-sql:
@@ -600,7 +702,7 @@ data GoogleCloudSaasacceleratorManagementProvidersV1Instance = GoogleCloudSaasac
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
       ),
-    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/settings.maintenance/policies is set.
+    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/mr-user-guide. Should not be set if maintenance/settings.maintenance/policies is set.
     maintenancePolicyNames ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
@@ -661,7 +763,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1Instance ::
   GoogleCloudSaasacceleratorManagementProvidersV1Instance
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance =
   GoogleCloudSaasacceleratorManagementProvidersV1Instance
-    { consumerDefinedName = Core.Nothing,
+    { consumerDefinedName =
+        Core.Nothing,
       createTime = Core.Nothing,
       instanceType = Core.Nothing,
       labels = Core.Nothing,
@@ -690,67 +793,56 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1Instance
             Core.<$> (o Core..:? "consumerDefinedName")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "instanceType")
-              Core.<*> (o Core..:? "labels")
-              Core.<*> (o Core..:? "maintenancePolicyNames")
-              Core.<*> (o Core..:? "maintenanceSchedules")
-              Core.<*> (o Core..:? "maintenanceSettings")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "notificationParameters")
-              Core.<*> (o Core..:? "producerMetadata")
-              Core.<*> (o Core..:? "provisionedResources")
-              Core.<*> (o Core..:? "slmInstanceTemplate")
-              Core.<*> (o Core..:? "sloMetadata")
-              Core.<*> (o Core..:? "softwareVersions")
-              Core.<*> (o Core..:? "state")
-              Core.<*> (o Core..:? "tenantProjectId")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "instanceType")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "maintenancePolicyNames")
+            Core.<*> (o Core..:? "maintenanceSchedules")
+            Core.<*> (o Core..:? "maintenanceSettings")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "notificationParameters")
+            Core.<*> (o Core..:? "producerMetadata")
+            Core.<*> (o Core..:? "provisionedResources")
+            Core.<*> (o Core..:? "slmInstanceTemplate")
+            Core.<*> (o Core..:? "sloMetadata")
+            Core.<*> (o Core..:? "softwareVersions")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "tenantProjectId")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudSaasacceleratorManagementProvidersV1Instance
   where
-  toJSON
-    GoogleCloudSaasacceleratorManagementProvidersV1Instance {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("consumerDefinedName" Core..=)
-                Core.<$> consumerDefinedName,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("instanceType" Core..=) Core.<$> instanceType,
-              ("labels" Core..=) Core.<$> labels,
-              ("maintenancePolicyNames" Core..=)
-                Core.<$> maintenancePolicyNames,
-              ("maintenanceSchedules" Core..=)
-                Core.<$> maintenanceSchedules,
-              ("maintenanceSettings" Core..=)
-                Core.<$> maintenanceSettings,
-              ("name" Core..=) Core.<$> name,
-              ("notificationParameters" Core..=)
-                Core.<$> notificationParameters,
-              ("producerMetadata" Core..=)
-                Core.<$> producerMetadata,
-              ("provisionedResources" Core..=)
-                Core.<$> provisionedResources,
-              ("slmInstanceTemplate" Core..=)
-                Core.<$> slmInstanceTemplate,
-              ("sloMetadata" Core..=) Core.<$> sloMetadata,
-              ("softwareVersions" Core..=)
-                Core.<$> softwareVersions,
-              ("state" Core..=) Core.<$> state,
-              ("tenantProjectId" Core..=) Core.<$> tenantProjectId,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+  toJSON GoogleCloudSaasacceleratorManagementProvidersV1Instance {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consumerDefinedName" Core..=) Core.<$> consumerDefinedName,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("instanceType" Core..=) Core.<$> instanceType,
+            ("labels" Core..=) Core.<$> labels,
+            ("maintenancePolicyNames" Core..=) Core.<$> maintenancePolicyNames,
+            ("maintenanceSchedules" Core..=) Core.<$> maintenanceSchedules,
+            ("maintenanceSettings" Core..=) Core.<$> maintenanceSettings,
+            ("name" Core..=) Core.<$> name,
+            ("notificationParameters" Core..=) Core.<$> notificationParameters,
+            ("producerMetadata" Core..=) Core.<$> producerMetadata,
+            ("provisionedResources" Core..=) Core.<$> provisionedResources,
+            ("slmInstanceTemplate" Core..=) Core.<$> slmInstanceTemplate,
+            ("sloMetadata" Core..=) Core.<$> sloMetadata,
+            ("softwareVersions" Core..=) Core.<$> softwareVersions,
+            ("state" Core..=) Core.<$> state,
+            ("tenantProjectId" Core..=) Core.<$> tenantProjectId,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | Optional. Resource labels to represent user provided metadata. Each label is a key-value pair, where both the key and the value are arbitrary strings provided by the user.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels = GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -759,10 +851,12 @@ newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -784,24 +878,27 @@ instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance_Labels {..} =
       Core.toJSON additional
 
--- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/settings.maintenance/policies is set.
+-- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the referenced policy must define the same policy type. For details, please refer to go\/mr-user-guide. Should not be set if maintenance/settings.maintenance/policies is set.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames = GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
+  Core.HashMap
+    Core.Text
+    Core.Text ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenancePolicyNames
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -827,8 +924,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules = GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
-  { -- |
-    additional ::
+  { additional ::
       ( Core.HashMap
           Core.Text
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
@@ -839,12 +935,16 @@ newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSched
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule ->
+  Core.HashMap
+    Core.Text
+    GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_MaintenanceSchedules
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -870,8 +970,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters = GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
-  { -- |
-    additional ::
+  { additional ::
       ( Core.HashMap
           Core.Text
           GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
@@ -882,12 +981,16 @@ newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationPara
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter ->
+  Core.HashMap
+    Core.Text
+    GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_NotificationParameters
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -913,20 +1016,23 @@ instance
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata = GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
+  Core.HashMap
+    Core.Text
+    Core.Text ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_ProducerMetadata
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -952,20 +1058,23 @@ instance
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions = GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
+  Core.HashMap
+    Core.Text
+    Core.Text ->
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
-newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1Instance_SoftwareVersions
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1009,10 +1118,13 @@ newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule ::
   GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
 newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule =
   GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
-    { canReschedule = Core.Nothing,
+    { canReschedule =
+        Core.Nothing,
       endTime = Core.Nothing,
-      rolloutManagementPolicy = Core.Nothing,
-      scheduleDeadlineTime = Core.Nothing,
+      rolloutManagementPolicy =
+        Core.Nothing,
+      scheduleDeadlineTime =
+        Core.Nothing,
       startTime = Core.Nothing
     }
 
@@ -1026,10 +1138,10 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule
             Core.<$> (o Core..:? "canReschedule")
-              Core.<*> (o Core..:? "endTime")
-              Core.<*> (o Core..:? "rolloutManagementPolicy")
-              Core.<*> (o Core..:? "scheduleDeadlineTime")
-              Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "rolloutManagementPolicy")
+            Core.<*> (o Core..:? "scheduleDeadlineTime")
+            Core.<*> (o Core..:? "startTime")
       )
 
 instance
@@ -1044,8 +1156,7 @@ instance
               ("endTime" Core..=) Core.<$> endTime,
               ("rolloutManagementPolicy" Core..=)
                 Core.<$> rolloutManagementPolicy,
-              ("scheduleDeadlineTime" Core..=)
-                Core.<$> scheduleDeadlineTime,
+              ("scheduleDeadlineTime" Core..=) Core.<$> scheduleDeadlineTime,
               ("startTime" Core..=) Core.<$> startTime
             ]
         )
@@ -1058,7 +1169,7 @@ data GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings = Google
     exclude :: (Core.Maybe Core.Bool),
     -- | Optional. If the update call is triggered from rollback, set the value as true.
     isRollback :: (Core.Maybe Core.Bool),
-    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
+    -- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/mr-user-guide. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
     maintenancePolicies ::
       ( Core.Maybe
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
@@ -1071,9 +1182,11 @@ newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings ::
   GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
 newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings =
   GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
-    { exclude = Core.Nothing,
+    { exclude =
+        Core.Nothing,
       isRollback = Core.Nothing,
-      maintenancePolicies = Core.Nothing
+      maintenancePolicies =
+        Core.Nothing
     }
 
 instance
@@ -1086,8 +1199,8 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings
             Core.<$> (o Core..:? "exclude")
-              Core.<*> (o Core..:? "isRollback")
-              Core.<*> (o Core..:? "maintenancePolicies")
+            Core.<*> (o Core..:? "isRollback")
+            Core.<*> (o Core..:? "maintenancePolicies")
       )
 
 instance
@@ -1100,29 +1213,31 @@ instance
         ( Core.catMaybes
             [ ("exclude" Core..=) Core.<$> exclude,
               ("isRollback" Core..=) Core.<$> isRollback,
-              ("maintenancePolicies" Core..=)
-                Core.<$> maintenancePolicies
+              ("maintenancePolicies" Core..=) Core.<$> maintenancePolicies
             ]
         )
 
--- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/cloud-saas-mw-ug. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
+-- | Optional. The MaintenancePolicies that have been attached to the instance. The key must be of the type name of the oneof policy name defined in MaintenancePolicy, and the embedded policy must define the same policy type. For details, please refer to go\/mr-user-guide. Should not be set if maintenance/policy/names is set. If only the name is needed, then only populate MaintenancePolicy.name.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies = GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
-  { -- |
-    additional :: (Core.HashMap Core.Text MaintenancePolicy)
+  { additional :: (Core.HashMap Core.Text MaintenancePolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text MaintenancePolicy ->
+  Core.HashMap
+    Core.Text
+    MaintenancePolicy ->
   GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
-newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings_MaintenancePolicies
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1165,7 +1280,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata ::
   GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
 newGoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata =
   GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
-    { location = Core.Nothing,
+    { location =
+        Core.Nothing,
       nodeId = Core.Nothing,
       perSliEligibility = Core.Nothing
     }
@@ -1180,8 +1296,8 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1NodeSloMetadata
             Core.<$> (o Core..:? "location")
-              Core.<*> (o Core..:? "nodeId")
-              Core.<*> (o Core..:? "perSliEligibility")
+            Core.<*> (o Core..:? "nodeId")
+            Core.<*> (o Core..:? "perSliEligibility")
       )
 
 instance
@@ -1194,8 +1310,7 @@ instance
         ( Core.catMaybes
             [ ("location" Core..=) Core.<$> location,
               ("nodeId" Core..=) Core.<$> nodeId,
-              ("perSliEligibility" Core..=)
-                Core.<$> perSliEligibility
+              ("perSliEligibility" Core..=) Core.<$> perSliEligibility
             ]
         )
 
@@ -1213,7 +1328,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter ::
   GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
 newGoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter =
   GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -1234,8 +1350,7 @@ instance
   where
   toJSON
     GoogleCloudSaasacceleratorManagementProvidersV1NotificationParameter {..} =
-      Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+      Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | PerSliSloEligibility is a mapping from an SLI name to eligibility.
 --
@@ -1254,7 +1369,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility ::
   GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
 newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility =
   GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility
-    { eligibilities = Core.Nothing
+    { eligibilities =
+        Core.Nothing
     }
 
 instance
@@ -1276,16 +1392,13 @@ instance
   toJSON
     GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility {..} =
       Core.object
-        ( Core.catMaybes
-            [("eligibilities" Core..=) Core.<$> eligibilities]
-        )
+        (Core.catMaybes [("eligibilities" Core..=) Core.<$> eligibilities])
 
 -- | An entry in the eligibilities map specifies an eligibility for a particular SLI for the given instance. The SLI key in the name must be a valid SLI name specified in the Eligibility Exporter binary flags otherwise an error will be emitted by Eligibility Exporter and the oncaller will be alerted. If an SLI has been defined in the binary flags but the eligibilities map does not contain it, the corresponding SLI time series will not be emitted by the Eligibility Exporter. This ensures a smooth rollout and compatibility between the data produced by different versions of the Eligibility Exporters. If eligibilities map contains a key for an SLI which has not been declared in the binary flags, there will be an error message emitted in the Eligibility Exporter log and the metric for the SLI in question will not be emitted.
 --
 -- /See:/ 'newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities' smart constructor.
 newtype GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities = GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
-  { -- |
-    additional ::
+  { additional ::
       ( Core.HashMap
           Core.Text
           GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
@@ -1296,12 +1409,16 @@ newtype GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Elig
 -- | Creates a value of 'GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities' with the minimum fields required to make a request.
 newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility ->
+  Core.HashMap
+    Core.Text
+    GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility ->
   GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
-newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities additional =
-  GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
-    { additional = additional
-    }
+newGoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
+  additional =
+    GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility_Eligibilities
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1339,7 +1456,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource ::
   GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource
 newGoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource =
   GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource
-    { resourceType = Core.Nothing,
+    { resourceType =
+        Core.Nothing,
       resourceUrl = Core.Nothing
     }
 
@@ -1353,7 +1471,7 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1ProvisionedResource
             Core.<$> (o Core..:? "resourceType")
-              Core.<*> (o Core..:? "resourceUrl")
+            Core.<*> (o Core..:? "resourceUrl")
       )
 
 instance
@@ -1385,7 +1503,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1SloEligibility ::
   GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
 newGoogleCloudSaasacceleratorManagementProvidersV1SloEligibility =
   GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
-    { eligible = Core.Nothing,
+    { eligible =
+        Core.Nothing,
       reason = Core.Nothing
     }
 
@@ -1399,7 +1518,7 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1SloEligibility
             Core.<$> (o Core..:? "eligible")
-              Core.<*> (o Core..:? "reason")
+            Core.<*> (o Core..:? "reason")
       )
 
 instance
@@ -1439,7 +1558,8 @@ newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata ::
   GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
 newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata =
   GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
-    { nodes = Core.Nothing,
+    { nodes =
+        Core.Nothing,
       perSliEligibility = Core.Nothing,
       tier = Core.Nothing
     }
@@ -1454,8 +1574,8 @@ instance
       ( \o ->
           GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata
             Core.<$> (o Core..:? "nodes")
-              Core.<*> (o Core..:? "perSliEligibility")
-              Core.<*> (o Core..:? "tier")
+            Core.<*> (o Core..:? "perSliEligibility")
+            Core.<*> (o Core..:? "tier")
       )
 
 instance
@@ -1467,11 +1587,43 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("nodes" Core..=) Core.<$> nodes,
-              ("perSliEligibility" Core..=)
-                Core.<$> perSliEligibility,
+              ("perSliEligibility" Core..=) Core.<$> perSliEligibility,
               ("tier" Core..=) Core.<$> tier
             ]
         )
+
+-- | IOPS per TB. Filestore defines TB as 1024^4 bytes (TiB).
+--
+-- /See:/ 'newIOPSPerTB' smart constructor.
+newtype IOPSPerTB = IOPSPerTB
+  { -- | Required. Maximum IOPS per TiB.
+    maxIopsPerTb :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IOPSPerTB' with the minimum fields required to make a request.
+newIOPSPerTB ::
+  IOPSPerTB
+newIOPSPerTB = IOPSPerTB {maxIopsPerTb = Core.Nothing}
+
+instance Core.FromJSON IOPSPerTB where
+  parseJSON =
+    Core.withObject
+      "IOPSPerTB"
+      ( \o ->
+          IOPSPerTB
+            Core.<$> (o Core..:? "maxIopsPerTb" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON IOPSPerTB where
+  toJSON IOPSPerTB {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxIopsPerTb" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxIopsPerTb
+          ]
+      )
 
 -- | A Filestore instance.
 --
@@ -1479,6 +1631,12 @@ instance
 data Instance = Instance
   { -- | Output only. The time when the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Indicates whether this instance supports configuring its performance. If true, the user can configure the instance\'s performance by using the \'performance_config\' field.
+    customPerformanceSupported :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates whether the instance is protected against deletion.
+    deletionProtectionEnabled :: (Core.Maybe Core.Bool),
+    -- | Optional. The reason for enabling deletion protection.
+    deletionProtectionReason :: (Core.Maybe Core.Text),
     -- | The description of the instance (2048 characters or less).
     description :: (Core.Maybe Core.Text),
     -- | Server-specified ETag for the instance resource to prevent simultaneous updates from overwriting each other.
@@ -1493,6 +1651,16 @@ data Instance = Instance
     name :: (Core.Maybe Core.Text),
     -- | VPC networks to which the instance is connected. For this version, only a single network is supported.
     networks :: (Core.Maybe [NetworkConfig]),
+    -- | Optional. Used to configure performance.
+    performanceConfig :: (Core.Maybe PerformanceConfig),
+    -- | Output only. Used for getting performance limits.
+    performanceLimits :: (Core.Maybe PerformanceLimits),
+    -- | Immutable. The protocol indicates the access protocol for all shares in the instance. This field is immutable and it cannot be changed after the instance has been created. Default value: @NFS_V3@.
+    protocol :: (Core.Maybe Instance_Protocol),
+    -- | Optional. Replication configuration.
+    replication :: (Core.Maybe Replication),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
     -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Output only. The instance state.
@@ -1501,6 +1669,8 @@ data Instance = Instance
     statusMessage :: (Core.Maybe Core.Text),
     -- | Output only. Field indicates all the reasons the instance is in \"SUSPENDED\" state.
     suspensionReasons :: (Core.Maybe [Instance_SuspensionReasonsItem]),
+    -- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+    tags :: (Core.Maybe Instance_Tags),
     -- | The service tier of the instance.
     tier :: (Core.Maybe Instance_Tier)
   }
@@ -1512,6 +1682,9 @@ newInstance ::
 newInstance =
   Instance
     { createTime = Core.Nothing,
+      customPerformanceSupported = Core.Nothing,
+      deletionProtectionEnabled = Core.Nothing,
+      deletionProtectionReason = Core.Nothing,
       description = Core.Nothing,
       etag = Core.Nothing,
       fileShares = Core.Nothing,
@@ -1519,10 +1692,16 @@ newInstance =
       labels = Core.Nothing,
       name = Core.Nothing,
       networks = Core.Nothing,
+      performanceConfig = Core.Nothing,
+      performanceLimits = Core.Nothing,
+      protocol = Core.Nothing,
+      replication = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       state = Core.Nothing,
       statusMessage = Core.Nothing,
       suspensionReasons = Core.Nothing,
+      tags = Core.Nothing,
       tier = Core.Nothing
     }
 
@@ -1533,6 +1712,9 @@ instance Core.FromJSON Instance where
       ( \o ->
           Instance
             Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "customPerformanceSupported")
+            Core.<*> (o Core..:? "deletionProtectionEnabled")
+            Core.<*> (o Core..:? "deletionProtectionReason")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "fileShares")
@@ -1540,10 +1722,16 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networks")
+            Core.<*> (o Core..:? "performanceConfig")
+            Core.<*> (o Core..:? "performanceLimits")
+            Core.<*> (o Core..:? "protocol")
+            Core.<*> (o Core..:? "replication")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "statusMessage")
             Core.<*> (o Core..:? "suspensionReasons")
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "tier")
       )
 
@@ -1552,6 +1740,12 @@ instance Core.ToJSON Instance where
     Core.object
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
+            ("customPerformanceSupported" Core..=)
+              Core.<$> customPerformanceSupported,
+            ("deletionProtectionEnabled" Core..=)
+              Core.<$> deletionProtectionEnabled,
+            ("deletionProtectionReason" Core..=)
+              Core.<$> deletionProtectionReason,
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
             ("fileShares" Core..=) Core.<$> fileShares,
@@ -1559,11 +1753,16 @@ instance Core.ToJSON Instance where
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("networks" Core..=) Core.<$> networks,
+            ("performanceConfig" Core..=) Core.<$> performanceConfig,
+            ("performanceLimits" Core..=) Core.<$> performanceLimits,
+            ("protocol" Core..=) Core.<$> protocol,
+            ("replication" Core..=) Core.<$> replication,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("state" Core..=) Core.<$> state,
             ("statusMessage" Core..=) Core.<$> statusMessage,
-            ("suspensionReasons" Core..=)
-              Core.<$> suspensionReasons,
+            ("suspensionReasons" Core..=) Core.<$> suspensionReasons,
+            ("tags" Core..=) Core.<$> tags,
             ("tier" Core..=) Core.<$> tier
           ]
       )
@@ -1572,8 +1771,7 @@ instance Core.ToJSON Instance where
 --
 -- /See:/ 'newInstance_Labels' smart constructor.
 newtype Instance_Labels = Instance_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1582,18 +1780,42 @@ newInstance_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Instance_Labels
-newInstance_Labels additional = Instance_Labels {additional = additional}
+newInstance_Labels additional =
+  Instance_Labels {additional = additional}
 
 instance Core.FromJSON Instance_Labels where
   parseJSON =
     Core.withObject
       "Instance_Labels"
-      ( \o ->
-          Instance_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Instance_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Instance_Labels where
   toJSON Instance_Labels {..} = Core.toJSON additional
+
+-- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+--
+-- /See:/ 'newInstance_Tags' smart constructor.
+newtype Instance_Tags = Instance_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Instance_Tags' with the minimum fields required to make a request.
+newInstance_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Instance_Tags
+newInstance_Tags additional =
+  Instance_Tags {additional = additional}
+
+instance Core.FromJSON Instance_Tags where
+  parseJSON =
+    Core.withObject
+      "Instance_Tags"
+      (\o -> Instance_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Instance_Tags where
+  toJSON Instance_Tags {..} = Core.toJSON additional
 
 -- | ListBackupsResponse is the result of ListBackupsRequest.
 --
@@ -1603,7 +1825,7 @@ data ListBackupsResponse = ListBackupsResponse
     backups :: (Core.Maybe [Backup]),
     -- | The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | Locations that could not be reached.
+    -- | Unordered list. Locations that could not be reached.
     unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1647,7 +1869,7 @@ data ListInstancesResponse = ListInstancesResponse
     instances :: (Core.Maybe [Instance]),
     -- | The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | Locations that could not be reached.
+    -- | Unordered list. Locations that could not be reached.
     unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1698,7 +1920,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -1765,7 +1990,9 @@ data ListSnapshotsResponse = ListSnapshotsResponse
   { -- | The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | A list of snapshots in the project for the specified instance.
-    snapshots :: (Core.Maybe [Snapshot])
+    snapshots :: (Core.Maybe [Snapshot]),
+    -- | Unordered list. Locations that could not be reached.
+    unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1773,7 +2000,11 @@ data ListSnapshotsResponse = ListSnapshotsResponse
 newListSnapshotsResponse ::
   ListSnapshotsResponse
 newListSnapshotsResponse =
-  ListSnapshotsResponse {nextPageToken = Core.Nothing, snapshots = Core.Nothing}
+  ListSnapshotsResponse
+    { nextPageToken = Core.Nothing,
+      snapshots = Core.Nothing,
+      unreachable = Core.Nothing
+    }
 
 instance Core.FromJSON ListSnapshotsResponse where
   parseJSON =
@@ -1783,6 +2014,7 @@ instance Core.FromJSON ListSnapshotsResponse where
           ListSnapshotsResponse
             Core.<$> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "snapshots")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON ListSnapshotsResponse where
@@ -1790,11 +2022,12 @@ instance Core.ToJSON ListSnapshotsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("snapshots" Core..=) Core.<$> snapshots
+            ("snapshots" Core..=) Core.<$> snapshots,
+            ("unreachable" Core..=) Core.<$> unreachable
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -1852,8 +2085,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1862,15 +2094,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -1889,20 +2120,19 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
 
--- | LINT.IfChange Defines policies to service maintenance events.
+-- | Defines policies to service maintenance events.
 --
 -- /See:/ 'newMaintenancePolicy' smart constructor.
 data MaintenancePolicy = MaintenancePolicy
@@ -1970,8 +2200,7 @@ instance Core.ToJSON MaintenancePolicy where
 --
 -- /See:/ 'newMaintenancePolicy_Labels' smart constructor.
 newtype MaintenancePolicy_Labels = MaintenancePolicy_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1987,14 +2216,10 @@ instance Core.FromJSON MaintenancePolicy_Labels where
   parseJSON =
     Core.withObject
       "MaintenancePolicy_Labels"
-      ( \o ->
-          MaintenancePolicy_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> MaintenancePolicy_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON MaintenancePolicy_Labels where
-  toJSON MaintenancePolicy_Labels {..} =
-    Core.toJSON additional
+  toJSON MaintenancePolicy_Labels {..} = Core.toJSON additional
 
 -- | MaintenanceWindow definition.
 --
@@ -2011,7 +2236,10 @@ data MaintenanceWindow = MaintenanceWindow
 newMaintenanceWindow ::
   MaintenanceWindow
 newMaintenanceWindow =
-  MaintenanceWindow {dailyCycle = Core.Nothing, weeklyCycle = Core.Nothing}
+  MaintenanceWindow
+    { dailyCycle = Core.Nothing,
+      weeklyCycle = Core.Nothing
+    }
 
 instance Core.FromJSON MaintenanceWindow where
   parseJSON =
@@ -2082,8 +2310,7 @@ instance Core.ToJSON NetworkConfig where
             ("ipAddresses" Core..=) Core.<$> ipAddresses,
             ("modes" Core..=) Core.<$> modes,
             ("network" Core..=) Core.<$> network,
-            ("reservedIpRange" Core..=)
-              Core.<$> reservedIpRange
+            ("reservedIpRange" Core..=) Core.<$> reservedIpRange
           ]
       )
 
@@ -2123,12 +2350,8 @@ instance Core.FromJSON NfsExportOptions where
       ( \o ->
           NfsExportOptions
             Core.<$> (o Core..:? "accessMode")
-            Core.<*> ( o Core..:? "anonGid"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "anonUid"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "anonGid" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "anonUid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ipRanges")
             Core.<*> (o Core..:? "squashMode")
       )
@@ -2138,10 +2361,8 @@ instance Core.ToJSON NfsExportOptions where
     Core.object
       ( Core.catMaybes
           [ ("accessMode" Core..=) Core.<$> accessMode,
-            ("anonGid" Core..=) Core.. Core.AsText
-              Core.<$> anonGid,
-            ("anonUid" Core..=) Core.. Core.AsText
-              Core.<$> anonUid,
+            ("anonGid" Core..=) Core.. Core.AsText Core.<$> anonGid,
+            ("anonUid" Core..=) Core.. Core.AsText Core.<$> anonUid,
             ("ipRanges" Core..=) Core.<$> ipRanges,
             ("squashMode" Core..=) Core.<$> squashMode
           ]
@@ -2159,7 +2380,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2215,21 +2436,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -2243,19 +2462,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Represents the metadata of the long-running operation.
 --
@@ -2263,7 +2480,7 @@ instance Core.ToJSON Operation_Response where
 data OperationMetadata = OperationMetadata
   { -- | Output only. API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
-    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have google.longrunning.Operation.error value with a google.rpc.Status.code of @1@, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | Output only. The time the operation was created.
     createTime :: (Core.Maybe Core.DateTime),
@@ -2321,6 +2538,220 @@ instance Core.ToJSON OperationMetadata where
           ]
       )
 
+-- | Used for setting the performance configuration. If the user doesn\'t specify PerformanceConfig, automatically provision the default performance settings as described in https:\/\/cloud.google.com\/filestore\/docs\/performance. Larger instances will be linearly set to more IOPS. If the instance\'s capacity is increased or decreased, its performance will be automatically adjusted upwards or downwards accordingly (respectively).
+--
+-- /See:/ 'newPerformanceConfig' smart constructor.
+data PerformanceConfig = PerformanceConfig
+  { -- | Choose a fixed provisioned IOPS value for the instance, which will remain constant regardless of instance capacity. Value must be a multiple of 1000. If the chosen value is outside the supported range for the instance\'s capacity during instance creation, instance creation will fail with an @InvalidArgument@ error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an @InvalidArgument@ error.
+    fixedIops :: (Core.Maybe FixedIOPS),
+    -- | Provision IOPS dynamically based on the capacity of the instance. Provisioned IOPS will be calculated by multiplying the capacity of the instance in TiB by the @iops_per_tb@ value. For example, for a 2 TiB instance with an @iops_per_tb@ value of 17000 the provisioned IOPS will be 34000. If the calculated value is outside the supported range for the instance\'s capacity during instance creation, instance creation will fail with an @InvalidArgument@ error. Similarly, if an instance capacity update would result in a value outside the supported range, the update will fail with an @InvalidArgument@ error.
+    iopsPerTb :: (Core.Maybe IOPSPerTB)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerformanceConfig' with the minimum fields required to make a request.
+newPerformanceConfig ::
+  PerformanceConfig
+newPerformanceConfig =
+  PerformanceConfig
+    { fixedIops = Core.Nothing,
+      iopsPerTb = Core.Nothing
+    }
+
+instance Core.FromJSON PerformanceConfig where
+  parseJSON =
+    Core.withObject
+      "PerformanceConfig"
+      ( \o ->
+          PerformanceConfig
+            Core.<$> (o Core..:? "fixedIops")
+            Core.<*> (o Core..:? "iopsPerTb")
+      )
+
+instance Core.ToJSON PerformanceConfig where
+  toJSON PerformanceConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fixedIops" Core..=) Core.<$> fixedIops,
+            ("iopsPerTb" Core..=) Core.<$> iopsPerTb
+          ]
+      )
+
+-- | The enforced performance limits, calculated from the instance\'s performance configuration.
+--
+-- /See:/ 'newPerformanceLimits' smart constructor.
+data PerformanceLimits = PerformanceLimits
+  { -- | Output only. The max IOPS.
+    maxIops :: (Core.Maybe Core.Int64),
+    -- | Output only. The max read IOPS.
+    maxReadIops :: (Core.Maybe Core.Int64),
+    -- | Output only. The max read throughput in bytes per second.
+    maxReadThroughputBps :: (Core.Maybe Core.Int64),
+    -- | Output only. The max write IOPS.
+    maxWriteIops :: (Core.Maybe Core.Int64),
+    -- | Output only. The max write throughput in bytes per second.
+    maxWriteThroughputBps :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerformanceLimits' with the minimum fields required to make a request.
+newPerformanceLimits ::
+  PerformanceLimits
+newPerformanceLimits =
+  PerformanceLimits
+    { maxIops = Core.Nothing,
+      maxReadIops = Core.Nothing,
+      maxReadThroughputBps = Core.Nothing,
+      maxWriteIops = Core.Nothing,
+      maxWriteThroughputBps = Core.Nothing
+    }
+
+instance Core.FromJSON PerformanceLimits where
+  parseJSON =
+    Core.withObject
+      "PerformanceLimits"
+      ( \o ->
+          PerformanceLimits
+            Core.<$> (o Core..:? "maxIops" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxReadIops" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "maxReadThroughputBps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "maxWriteIops" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "maxWriteThroughputBps"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON PerformanceLimits where
+  toJSON PerformanceLimits {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxIops" Core..=) Core.. Core.AsText Core.<$> maxIops,
+            ("maxReadIops" Core..=) Core.. Core.AsText Core.<$> maxReadIops,
+            ("maxReadThroughputBps" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxReadThroughputBps,
+            ("maxWriteIops" Core..=) Core.. Core.AsText Core.<$> maxWriteIops,
+            ("maxWriteThroughputBps" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxWriteThroughputBps
+          ]
+      )
+
+-- | PromoteReplicaRequest promotes a Filestore standby instance (replica).
+--
+-- /See:/ 'newPromoteReplicaRequest' smart constructor.
+newtype PromoteReplicaRequest = PromoteReplicaRequest
+  { -- | Optional. The resource name of the peer instance to promote, in the format @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}@. The peer instance is required if the operation is called on an active instance.
+    peerInstance :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PromoteReplicaRequest' with the minimum fields required to make a request.
+newPromoteReplicaRequest ::
+  PromoteReplicaRequest
+newPromoteReplicaRequest =
+  PromoteReplicaRequest {peerInstance = Core.Nothing}
+
+instance Core.FromJSON PromoteReplicaRequest where
+  parseJSON =
+    Core.withObject
+      "PromoteReplicaRequest"
+      (\o -> PromoteReplicaRequest Core.<$> (o Core..:? "peerInstance"))
+
+instance Core.ToJSON PromoteReplicaRequest where
+  toJSON PromoteReplicaRequest {..} =
+    Core.object
+      (Core.catMaybes [("peerInstance" Core..=) Core.<$> peerInstance])
+
+-- | Replica configuration for the instance.
+--
+-- /See:/ 'newReplicaConfig' smart constructor.
+data ReplicaConfig = ReplicaConfig
+  { -- | Output only. The timestamp of the latest replication snapshot taken on the active instance and is already replicated safely.
+    lastActiveSyncTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. The peer instance.
+    peerInstance :: (Core.Maybe Core.Text),
+    -- | Output only. The replica state.
+    state :: (Core.Maybe ReplicaConfig_State),
+    -- | Output only. Additional information about the replication state, if available.
+    stateReasons :: (Core.Maybe [ReplicaConfig_StateReasonsItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReplicaConfig' with the minimum fields required to make a request.
+newReplicaConfig ::
+  ReplicaConfig
+newReplicaConfig =
+  ReplicaConfig
+    { lastActiveSyncTime = Core.Nothing,
+      peerInstance = Core.Nothing,
+      state = Core.Nothing,
+      stateReasons = Core.Nothing
+    }
+
+instance Core.FromJSON ReplicaConfig where
+  parseJSON =
+    Core.withObject
+      "ReplicaConfig"
+      ( \o ->
+          ReplicaConfig
+            Core.<$> (o Core..:? "lastActiveSyncTime")
+            Core.<*> (o Core..:? "peerInstance")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "stateReasons")
+      )
+
+instance Core.ToJSON ReplicaConfig where
+  toJSON ReplicaConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("lastActiveSyncTime" Core..=) Core.<$> lastActiveSyncTime,
+            ("peerInstance" Core..=) Core.<$> peerInstance,
+            ("state" Core..=) Core.<$> state,
+            ("stateReasons" Core..=) Core.<$> stateReasons
+          ]
+      )
+
+-- | Replication specifications.
+--
+-- /See:/ 'newReplication' smart constructor.
+data Replication = Replication
+  { -- | Optional. Replication configuration for the replica instance associated with this instance. Only a single replica is supported.
+    replicas :: (Core.Maybe [ReplicaConfig]),
+    -- | Optional. The replication role.
+    role' :: (Core.Maybe Replication_Role)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Replication' with the minimum fields required to make a request.
+newReplication ::
+  Replication
+newReplication =
+  Replication {replicas = Core.Nothing, role' = Core.Nothing}
+
+instance Core.FromJSON Replication where
+  parseJSON =
+    Core.withObject
+      "Replication"
+      ( \o ->
+          Replication
+            Core.<$> (o Core..:? "replicas")
+            Core.<*> (o Core..:? "role")
+      )
+
+instance Core.ToJSON Replication where
+  toJSON Replication {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("replicas" Core..=) Core.<$> replicas,
+            ("role" Core..=) Core.<$> role'
+          ]
+      )
+
 -- | RestoreInstanceRequest restores an existing instance\'s file share from a backup.
 --
 -- /See:/ 'newRestoreInstanceRequest' smart constructor.
@@ -2336,7 +2767,10 @@ data RestoreInstanceRequest = RestoreInstanceRequest
 newRestoreInstanceRequest ::
   RestoreInstanceRequest
 newRestoreInstanceRequest =
-  RestoreInstanceRequest {fileShare = Core.Nothing, sourceBackup = Core.Nothing}
+  RestoreInstanceRequest
+    { fileShare = Core.Nothing,
+      sourceBackup = Core.Nothing
+    }
 
 instance Core.FromJSON RestoreInstanceRequest where
   parseJSON =
@@ -2355,6 +2789,36 @@ instance Core.ToJSON RestoreInstanceRequest where
           [ ("fileShare" Core..=) Core.<$> fileShare,
             ("sourceBackup" Core..=) Core.<$> sourceBackup
           ]
+      )
+
+-- | RevertInstanceRequest reverts the given instance\'s file share to the specified snapshot.
+--
+-- /See:/ 'newRevertInstanceRequest' smart constructor.
+newtype RevertInstanceRequest = RevertInstanceRequest
+  { -- | Required. The snapshot resource ID, in the format \'my-snapshot\', where the specified ID is the {snapshot_id} of the fully qualified name like @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}\/snapshots\/{snapshot_id}@
+    targetSnapshotId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RevertInstanceRequest' with the minimum fields required to make a request.
+newRevertInstanceRequest ::
+  RevertInstanceRequest
+newRevertInstanceRequest =
+  RevertInstanceRequest {targetSnapshotId = Core.Nothing}
+
+instance Core.FromJSON RevertInstanceRequest where
+  parseJSON =
+    Core.withObject
+      "RevertInstanceRequest"
+      ( \o ->
+          RevertInstanceRequest Core.<$> (o Core..:? "targetSnapshotId")
+      )
+
+instance Core.ToJSON RevertInstanceRequest where
+  toJSON RevertInstanceRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("targetSnapshotId" Core..=) Core.<$> targetSnapshotId]
       )
 
 -- | Configure the schedule.
@@ -2416,7 +2880,9 @@ data Snapshot = Snapshot
     -- | Output only. The resource name of the snapshot, in the format @projects\/{project_id}\/locations\/{location_id}\/instances\/{instance_id}\/snapshots\/{snapshot_id}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The snapshot state.
-    state :: (Core.Maybe Snapshot_State)
+    state :: (Core.Maybe Snapshot_State),
+    -- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+    tags :: (Core.Maybe Snapshot_Tags)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2430,7 +2896,8 @@ newSnapshot =
       filesystemUsedBytes = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
-      state = Core.Nothing
+      state = Core.Nothing,
+      tags = Core.Nothing
     }
 
 instance Core.FromJSON Snapshot where
@@ -2441,12 +2908,14 @@ instance Core.FromJSON Snapshot where
           Snapshot
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "filesystemUsedBytes"
+            Core.<*> ( o
+                         Core..:? "filesystemUsedBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "tags")
       )
 
 instance Core.ToJSON Snapshot where
@@ -2455,11 +2924,13 @@ instance Core.ToJSON Snapshot where
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
-            ("filesystemUsedBytes" Core..=) Core.. Core.AsText
+            ("filesystemUsedBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> filesystemUsedBytes,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
-            ("state" Core..=) Core.<$> state
+            ("state" Core..=) Core.<$> state,
+            ("tags" Core..=) Core.<$> tags
           ]
       )
 
@@ -2467,8 +2938,7 @@ instance Core.ToJSON Snapshot where
 --
 -- /See:/ 'newSnapshot_Labels' smart constructor.
 newtype Snapshot_Labels = Snapshot_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2477,18 +2947,42 @@ newSnapshot_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Snapshot_Labels
-newSnapshot_Labels additional = Snapshot_Labels {additional = additional}
+newSnapshot_Labels additional =
+  Snapshot_Labels {additional = additional}
 
 instance Core.FromJSON Snapshot_Labels where
   parseJSON =
     Core.withObject
       "Snapshot_Labels"
-      ( \o ->
-          Snapshot_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Snapshot_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Snapshot_Labels where
   toJSON Snapshot_Labels {..} = Core.toJSON additional
+
+-- | Optional. Input only. Immutable. Tag key-value pairs bound to this resource. Each key must be a namespaced name and each value a short name. Example: \"123456789012\/environment\" : \"production\", \"123456789013\/costCenter\" : \"marketing\" See the documentation for more information: - Namespaced name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/key - Short name: https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-creating-and-managing#retrieving/tag/value
+--
+-- /See:/ 'newSnapshot_Tags' smart constructor.
+newtype Snapshot_Tags = Snapshot_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Snapshot_Tags' with the minimum fields required to make a request.
+newSnapshot_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Snapshot_Tags
+newSnapshot_Tags additional =
+  Snapshot_Tags {additional = additional}
+
+instance Core.FromJSON Snapshot_Tags where
+  parseJSON =
+    Core.withObject
+      "Snapshot_Tags"
+      (\o -> Snapshot_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Snapshot_Tags where
+  toJSON Snapshot_Tags {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -2507,7 +3001,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2543,31 +3041,29 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and @google.protobuf.Timestamp@.
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2612,7 +3108,7 @@ instance Core.ToJSON TimeOfDay' where
 data UpdatePolicy = UpdatePolicy
   { -- | Optional. Relative scheduling channel applied to resource.
     channel :: (Core.Maybe UpdatePolicy_Channel),
-    -- | Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. User can specify zero or more non-overlapping deny periods. Maximum number of deny/maintenance/periods expected is one.
+    -- | Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. The protocol supports zero-to-many such periods, but the current SLM Rollout implementation only supports zero-to-one.
     denyMaintenancePeriods :: (Core.Maybe [DenyMaintenancePeriod]),
     -- | Optional. Maintenance window that is applied to resources covered by this policy.
     window :: (Core.Maybe MaintenanceWindow)
@@ -2645,8 +3141,7 @@ instance Core.ToJSON UpdatePolicy where
     Core.object
       ( Core.catMaybes
           [ ("channel" Core..=) Core.<$> channel,
-            ("denyMaintenancePeriods" Core..=)
-              Core.<$> denyMaintenancePeriods,
+            ("denyMaintenancePeriods" Core..=) Core.<$> denyMaintenancePeriods,
             ("window" Core..=) Core.<$> window
           ]
       )
@@ -2674,6 +3169,4 @@ instance Core.FromJSON WeeklyCycle where
 instance Core.ToJSON WeeklyCycle where
   toJSON WeeklyCycle {..} =
     Core.object
-      ( Core.catMaybes
-          [("schedule" Core..=) Core.<$> schedule]
-      )
+      (Core.catMaybes [("schedule" Core..=) Core.<$> schedule])

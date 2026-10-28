@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.CustomDimensions.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.CustomDimensions.Get
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.customDimensions.get@ method which the
 -- 'AnalyticsManagementCustomDimensionsGet' request conforms to.
@@ -79,36 +77,32 @@ newAnalyticsManagementCustomDimensionsGet ::
   -- |  Web property ID for the custom dimension to retrieve. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementCustomDimensionsGet
-newAnalyticsManagementCustomDimensionsGet accountId customDimensionId webPropertyId =
-  AnalyticsManagementCustomDimensionsGet
-    { accountId = accountId,
-      customDimensionId = customDimensionId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementCustomDimensionsGet
+  accountId
+  customDimensionId
+  webPropertyId =
     AnalyticsManagementCustomDimensionsGet
-  where
-  type
-    Rs AnalyticsManagementCustomDimensionsGet =
-      CustomDimension
+      { accountId = accountId,
+        customDimensionId = customDimensionId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementCustomDimensionsGet where
+  type Rs AnalyticsManagementCustomDimensionsGet = CustomDimension
   type
     Scopes AnalyticsManagementCustomDimensionsGet =
       '[Analytics'Edit, Analytics'Readonly]
-  requestClient
-    AnalyticsManagementCustomDimensionsGet {..} =
-      go
-        accountId
-        webPropertyId
-        customDimensionId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementCustomDimensionsGetResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementCustomDimensionsGet {..} =
+    go
+      accountId
+      webPropertyId
+      customDimensionId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementCustomDimensionsGetResource
+          )
+          Core.mempty

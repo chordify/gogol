@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Dictionary.ListOfflineMetadata
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Dictionary.ListOfflineMetadata
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.dictionary.listOfflineMetadata@ method which the
 -- 'BooksDictionaryListOfflineMetadata' request conforms to.
@@ -92,10 +90,7 @@ newBooksDictionaryListOfflineMetadata cpksver =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksDictionaryListOfflineMetadata
-  where
+instance Core.GoogleRequest BooksDictionaryListOfflineMetadata where
   type Rs BooksDictionaryListOfflineMetadata = Metadata
   type
     Scopes BooksDictionaryListOfflineMetadata =
@@ -114,7 +109,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                BooksDictionaryListOfflineMetadataResource
+              Core.Proxy BooksDictionaryListOfflineMetadataResource
           )
           Core.mempty

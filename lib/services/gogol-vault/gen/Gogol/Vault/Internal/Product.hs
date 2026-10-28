@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vault.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vault.Internal.Product
@@ -53,6 +51,14 @@ module Gogol.Vault.Internal.Product
     -- * AddMatterPermissionsRequest
     AddMatterPermissionsRequest (..),
     newAddMatterPermissionsRequest,
+
+    -- * CalendarExportOptions
+    CalendarExportOptions (..),
+    newCalendarExportOptions,
+
+    -- * CalendarOptions
+    CalendarOptions (..),
+    newCalendarOptions,
 
     -- * CancelOperationRequest
     CancelOperationRequest (..),
@@ -90,6 +96,14 @@ module Gogol.Vault.Internal.Product
     CountArtifactsResponse (..),
     newCountArtifactsResponse,
 
+    -- * DriveDocumentIds
+    DriveDocumentIds (..),
+    newDriveDocumentIds,
+
+    -- * DriveDocumentInfo
+    DriveDocumentInfo (..),
+    newDriveDocumentInfo,
+
     -- * DriveExportOptions
     DriveExportOptions (..),
     newDriveExportOptions,
@@ -114,6 +128,14 @@ module Gogol.Vault.Internal.Product
     ExportStats (..),
     newExportStats,
 
+    -- * GeminiExportOptions
+    GeminiExportOptions (..),
+    newGeminiExportOptions,
+
+    -- * GeminiOptions
+    GeminiOptions (..),
+    newGeminiOptions,
+
     -- * GroupsCountResult
     GroupsCountResult (..),
     newGroupsCountResult,
@@ -137,6 +159,10 @@ module Gogol.Vault.Internal.Product
     -- * HeldAccount
     HeldAccount (..),
     newHeldAccount,
+
+    -- * HeldCalendarQuery
+    HeldCalendarQuery (..),
+    newHeldCalendarQuery,
 
     -- * HeldDriveQuery
     HeldDriveQuery (..),
@@ -292,7 +318,7 @@ module Gogol.Vault.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vault.Internal.Sum
 
 -- | The results count for each account.
@@ -309,7 +335,8 @@ data AccountCount = AccountCount
 -- | Creates a value of 'AccountCount' with the minimum fields required to make a request.
 newAccountCount ::
   AccountCount
-newAccountCount = AccountCount {account = Core.Nothing, count = Core.Nothing}
+newAccountCount =
+  AccountCount {account = Core.Nothing, count = Core.Nothing}
 
 instance Core.FromJSON AccountCount where
   parseJSON =
@@ -318,9 +345,7 @@ instance Core.FromJSON AccountCount where
       ( \o ->
           AccountCount
             Core.<$> (o Core..:? "account")
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AccountCount where
@@ -347,7 +372,10 @@ data AccountCountError = AccountCountError
 newAccountCountError ::
   AccountCountError
 newAccountCountError =
-  AccountCountError {account = Core.Nothing, errorType = Core.Nothing}
+  AccountCountError
+    { account = Core.Nothing,
+      errorType = Core.Nothing
+    }
 
 instance Core.FromJSON AccountCountError where
   parseJSON =
@@ -390,8 +418,7 @@ instance Core.FromJSON AccountInfo where
 
 instance Core.ToJSON AccountInfo where
   toJSON AccountInfo {..} =
-    Core.object
-      (Core.catMaybes [("emails" Core..=) Core.<$> emails])
+    Core.object (Core.catMaybes [("emails" Core..=) Core.<$> emails])
 
 -- | The status of each account creation, and the __HeldAccount__, if successful.
 --
@@ -408,7 +435,10 @@ data AddHeldAccountResult = AddHeldAccountResult
 newAddHeldAccountResult ::
   AddHeldAccountResult
 newAddHeldAccountResult =
-  AddHeldAccountResult {account = Core.Nothing, status = Core.Nothing}
+  AddHeldAccountResult
+    { account = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON AddHeldAccountResult where
   parseJSON =
@@ -444,7 +474,10 @@ data AddHeldAccountsRequest = AddHeldAccountsRequest
 newAddHeldAccountsRequest ::
   AddHeldAccountsRequest
 newAddHeldAccountsRequest =
-  AddHeldAccountsRequest {accountIds = Core.Nothing, emails = Core.Nothing}
+  AddHeldAccountsRequest
+    { accountIds = Core.Nothing,
+      emails = Core.Nothing
+    }
 
 instance Core.FromJSON AddHeldAccountsRequest where
   parseJSON =
@@ -477,23 +510,19 @@ newtype AddHeldAccountsResponse = AddHeldAccountsResponse
 -- | Creates a value of 'AddHeldAccountsResponse' with the minimum fields required to make a request.
 newAddHeldAccountsResponse ::
   AddHeldAccountsResponse
-newAddHeldAccountsResponse = AddHeldAccountsResponse {responses = Core.Nothing}
+newAddHeldAccountsResponse =
+  AddHeldAccountsResponse {responses = Core.Nothing}
 
 instance Core.FromJSON AddHeldAccountsResponse where
   parseJSON =
     Core.withObject
       "AddHeldAccountsResponse"
-      ( \o ->
-          AddHeldAccountsResponse
-            Core.<$> (o Core..:? "responses")
-      )
+      (\o -> AddHeldAccountsResponse Core.<$> (o Core..:? "responses"))
 
 instance Core.ToJSON AddHeldAccountsResponse where
   toJSON AddHeldAccountsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("responses" Core..=) Core.<$> responses]
-      )
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Add an account with the permission specified. The role cannot be owner. If an account already has a role in the matter, the existing role is overwritten.
 --
@@ -534,9 +563,88 @@ instance Core.ToJSON AddMatterPermissionsRequest where
     Core.object
       ( Core.catMaybes
           [ ("ccMe" Core..=) Core.<$> ccMe,
-            ("matterPermission" Core..=)
-              Core.<$> matterPermission,
+            ("matterPermission" Core..=) Core.<$> matterPermission,
             ("sendEmails" Core..=) Core.<$> sendEmails
+          ]
+      )
+
+-- | The options for Calendar exports.
+--
+-- /See:/ 'newCalendarExportOptions' smart constructor.
+newtype CalendarExportOptions = CalendarExportOptions
+  { -- | The file format for exported text messages.
+    exportFormat :: (Core.Maybe CalendarExportOptions_ExportFormat)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CalendarExportOptions' with the minimum fields required to make a request.
+newCalendarExportOptions ::
+  CalendarExportOptions
+newCalendarExportOptions =
+  CalendarExportOptions {exportFormat = Core.Nothing}
+
+instance Core.FromJSON CalendarExportOptions where
+  parseJSON =
+    Core.withObject
+      "CalendarExportOptions"
+      (\o -> CalendarExportOptions Core.<$> (o Core..:? "exportFormat"))
+
+instance Core.ToJSON CalendarExportOptions where
+  toJSON CalendarExportOptions {..} =
+    Core.object
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
+
+-- | Additional options for Calendar search
+--
+-- /See:/ 'newCalendarOptions' smart constructor.
+data CalendarOptions = CalendarOptions
+  { -- | Matches only those events whose location contains all of the words in the given set. If the string contains quoted phrases, this method only matches those events whose location contain the exact phrase. Entries in the set are considered in \"and\". Word splitting example: [\"New Zealand\"] vs [\"New\",\"Zealand\"] \"New Zealand\": matched by both \"New and better Zealand\": only matched by the later
+    locationQuery :: (Core.Maybe [Core.Text]),
+    -- | Matches only those events that do not contain any of the words in the given set in title, description, location, or attendees. Entries in the set are considered in \"or\".
+    minusWords :: (Core.Maybe [Core.Text]),
+    -- | Matches only those events whose attendees contain all of the words in the given set. Entries in the set are considered in \"and\".
+    peopleQuery :: (Core.Maybe [Core.Text]),
+    -- | Matches only events for which the custodian gave one of these responses. If the set is empty or contains ATTENDEE/RESPONSE/UNSPECIFIED there will be no filtering on responses.
+    responseStatuses :: (Core.Maybe [CalendarOptions_ResponseStatusesItem]),
+    -- | Search the current version of the Calendar event, but export the contents of the last version saved before 12:00 AM UTC on the specified date. Enter the date in UTC.
+    versionDate :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CalendarOptions' with the minimum fields required to make a request.
+newCalendarOptions ::
+  CalendarOptions
+newCalendarOptions =
+  CalendarOptions
+    { locationQuery = Core.Nothing,
+      minusWords = Core.Nothing,
+      peopleQuery = Core.Nothing,
+      responseStatuses = Core.Nothing,
+      versionDate = Core.Nothing
+    }
+
+instance Core.FromJSON CalendarOptions where
+  parseJSON =
+    Core.withObject
+      "CalendarOptions"
+      ( \o ->
+          CalendarOptions
+            Core.<$> (o Core..:? "locationQuery")
+            Core.<*> (o Core..:? "minusWords")
+            Core.<*> (o Core..:? "peopleQuery")
+            Core.<*> (o Core..:? "responseStatuses")
+            Core.<*> (o Core..:? "versionDate")
+      )
+
+instance Core.ToJSON CalendarOptions where
+  toJSON CalendarOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("locationQuery" Core..=) Core.<$> locationQuery,
+            ("minusWords" Core..=) Core.<$> minusWords,
+            ("peopleQuery" Core..=) Core.<$> peopleQuery,
+            ("responseStatuses" Core..=) Core.<$> responseStatuses,
+            ("versionDate" Core..=) Core.<$> versionDate
           ]
       )
 
@@ -598,24 +706,21 @@ instance Core.FromJSON CloseMatterResponse where
   parseJSON =
     Core.withObject
       "CloseMatterResponse"
-      ( \o ->
-          CloseMatterResponse Core.<$> (o Core..:? "matter")
-      )
+      (\o -> CloseMatterResponse Core.<$> (o Core..:? "matter"))
 
 instance Core.ToJSON CloseMatterResponse where
   toJSON CloseMatterResponse {..} =
-    Core.object
-      (Core.catMaybes [("matter" Core..=) Core.<$> matter])
+    Core.object (Core.catMaybes [("matter" Core..=) Core.<$> matter])
 
 -- | The export file in Cloud Storage
 --
 -- /See:/ 'newCloudStorageFile' smart constructor.
 data CloudStorageFile = CloudStorageFile
-  { -- | The name of the Cloud Storage bucket for the export file. You can use this value in the <https://cloud.google.com/storage/docs/apis Cloud Storage JSON or XML APIs>, but not to list the bucket contents. Instead, you can <https://cloud.google.com/storage/docs/json_api/v1/objects/get get individual export files> by object name.
+  { -- | The name of the Cloud Storage bucket for the export file. You can use this value in the Cloud Storage <https://cloud.google.com/storage/docs/json_api JSON API> or <https://cloud.google.com/storage/docs/xml-api XML API>, but not to list the bucket contents. Instead, you can <https://cloud.google.com/storage/docs/json_api/v1/objects/get get individual export files> by object name.
     bucketName :: (Core.Maybe Core.Text),
     -- | The md5 hash of the file.
     md5Hash :: (Core.Maybe Core.Text),
-    -- | The name of the Cloud Storage object for the export file. You can use this value in the <https://cloud.google.com/storage/docs/apis Cloud Storage JSON or XML APIs>.
+    -- | The name of the Cloud Storage object for the export file. You can use this value in the Cloud Storage <https://cloud.google.com/storage/docs/json_api JSON API> or <https://cloud.google.com/storage/docs/xml-api XML API>.
     objectName :: (Core.Maybe Core.Text),
     -- | The export file size.
     size :: (Core.Maybe Core.Int64)
@@ -642,9 +747,7 @@ instance Core.FromJSON CloudStorageFile where
             Core.<$> (o Core..:? "bucketName")
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "objectName")
-            Core.<*> ( o Core..:? "size"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "size" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CloudStorageFile where
@@ -676,20 +779,19 @@ instance Core.FromJSON CloudStorageSink where
   parseJSON =
     Core.withObject
       "CloudStorageSink"
-      ( \o ->
-          CloudStorageSink Core.<$> (o Core..:? "files")
-      )
+      (\o -> CloudStorageSink Core.<$> (o Core..:? "files"))
 
 instance Core.ToJSON CloudStorageSink where
   toJSON CloudStorageSink {..} =
-    Core.object
-      (Core.catMaybes [("files" Core..=) Core.<$> files])
+    Core.object (Core.catMaybes [("files" Core..=) Core.<$> files])
 
 -- | Service-specific options for holds.
 --
 -- /See:/ 'newCorpusQuery' smart constructor.
 data CorpusQuery = CorpusQuery
-  { -- | Service-specific options for Drive holds. If set, __CorpusType__ must be __DRIVE__.
+  { -- | Service-specific options for Calendar holds. If set, __CorpusType__ must be __CALENDAR__.
+    calendarQuery :: (Core.Maybe HeldCalendarQuery),
+    -- | Service-specific options for Drive holds. If set, __CorpusType__ must be __DRIVE__.
     driveQuery :: (Core.Maybe HeldDriveQuery),
     -- | Service-specific options for Groups holds. If set, __CorpusType__ must be __GROUPS__.
     groupsQuery :: (Core.Maybe HeldGroupsQuery),
@@ -707,7 +809,8 @@ newCorpusQuery ::
   CorpusQuery
 newCorpusQuery =
   CorpusQuery
-    { driveQuery = Core.Nothing,
+    { calendarQuery = Core.Nothing,
+      driveQuery = Core.Nothing,
       groupsQuery = Core.Nothing,
       hangoutsChatQuery = Core.Nothing,
       mailQuery = Core.Nothing,
@@ -720,7 +823,8 @@ instance Core.FromJSON CorpusQuery where
       "CorpusQuery"
       ( \o ->
           CorpusQuery
-            Core.<$> (o Core..:? "driveQuery")
+            Core.<$> (o Core..:? "calendarQuery")
+            Core.<*> (o Core..:? "driveQuery")
             Core.<*> (o Core..:? "groupsQuery")
             Core.<*> (o Core..:? "hangoutsChatQuery")
             Core.<*> (o Core..:? "mailQuery")
@@ -731,10 +835,10 @@ instance Core.ToJSON CorpusQuery where
   toJSON CorpusQuery {..} =
     Core.object
       ( Core.catMaybes
-          [ ("driveQuery" Core..=) Core.<$> driveQuery,
+          [ ("calendarQuery" Core..=) Core.<$> calendarQuery,
+            ("driveQuery" Core..=) Core.<$> driveQuery,
             ("groupsQuery" Core..=) Core.<$> groupsQuery,
-            ("hangoutsChatQuery" Core..=)
-              Core.<$> hangoutsChatQuery,
+            ("hangoutsChatQuery" Core..=) Core.<$> hangoutsChatQuery,
             ("mailQuery" Core..=) Core.<$> mailQuery,
             ("voiceQuery" Core..=) Core.<$> voiceQuery
           ]
@@ -812,16 +916,15 @@ instance Core.FromJSON CountArtifactsRequest where
       "CountArtifactsRequest"
       ( \o ->
           CountArtifactsRequest
-            Core.<$> (o Core..:? "query") Core.<*> (o Core..:? "view")
+            Core.<$> (o Core..:? "query")
+            Core.<*> (o Core..:? "view")
       )
 
 instance Core.ToJSON CountArtifactsRequest where
   toJSON CountArtifactsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("query" Core..=) Core.<$> query,
-            ("view" Core..=) Core.<$> view
-          ]
+          [("query" Core..=) Core.<$> query, ("view" Core..=) Core.<$> view]
       )
 
 -- | Definition of the response for method CountArtifacts.
@@ -855,22 +958,68 @@ instance Core.FromJSON CountArtifactsResponse where
           CountArtifactsResponse
             Core.<$> (o Core..:? "groupsCountResult")
             Core.<*> (o Core..:? "mailCountResult")
-            Core.<*> ( o Core..:? "totalCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CountArtifactsResponse where
   toJSON CountArtifactsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("groupsCountResult" Core..=)
-              Core.<$> groupsCountResult,
+          [ ("groupsCountResult" Core..=) Core.<$> groupsCountResult,
             ("mailCountResult" Core..=) Core.<$> mailCountResult,
-            ("totalCount" Core..=) Core.. Core.AsText
-              Core.<$> totalCount
+            ("totalCount" Core..=) Core.. Core.AsText Core.<$> totalCount
           ]
       )
+
+-- | Specify Drive documents by document ID.
+--
+-- /See:/ 'newDriveDocumentIds' smart constructor.
+newtype DriveDocumentIds = DriveDocumentIds
+  { -- | Required. A list of Drive document IDs.
+    ids :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DriveDocumentIds' with the minimum fields required to make a request.
+newDriveDocumentIds ::
+  DriveDocumentIds
+newDriveDocumentIds = DriveDocumentIds {ids = Core.Nothing}
+
+instance Core.FromJSON DriveDocumentIds where
+  parseJSON =
+    Core.withObject
+      "DriveDocumentIds"
+      (\o -> DriveDocumentIds Core.<$> (o Core..:? "ids"))
+
+instance Core.ToJSON DriveDocumentIds where
+  toJSON DriveDocumentIds {..} =
+    Core.object (Core.catMaybes [("ids" Core..=) Core.<$> ids])
+
+-- | The Drive documents to search.
+--
+-- /See:/ 'newDriveDocumentInfo' smart constructor.
+newtype DriveDocumentInfo = DriveDocumentInfo
+  { -- | Specify Drive documents by document ID.
+    documentIds :: (Core.Maybe DriveDocumentIds)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DriveDocumentInfo' with the minimum fields required to make a request.
+newDriveDocumentInfo ::
+  DriveDocumentInfo
+newDriveDocumentInfo =
+  DriveDocumentInfo {documentIds = Core.Nothing}
+
+instance Core.FromJSON DriveDocumentInfo where
+  parseJSON =
+    Core.withObject
+      "DriveDocumentInfo"
+      (\o -> DriveDocumentInfo Core.<$> (o Core..:? "documentIds"))
+
+instance Core.ToJSON DriveDocumentInfo where
+  toJSON DriveDocumentInfo {..} =
+    Core.object
+      (Core.catMaybes [("documentIds" Core..=) Core.<$> documentIds])
 
 -- | Options for Drive exports.
 --
@@ -884,27 +1033,25 @@ newtype DriveExportOptions = DriveExportOptions
 -- | Creates a value of 'DriveExportOptions' with the minimum fields required to make a request.
 newDriveExportOptions ::
   DriveExportOptions
-newDriveExportOptions = DriveExportOptions {includeAccessInfo = Core.Nothing}
+newDriveExportOptions =
+  DriveExportOptions {includeAccessInfo = Core.Nothing}
 
 instance Core.FromJSON DriveExportOptions where
   parseJSON =
     Core.withObject
       "DriveExportOptions"
       ( \o ->
-          DriveExportOptions
-            Core.<$> (o Core..:? "includeAccessInfo")
+          DriveExportOptions Core.<$> (o Core..:? "includeAccessInfo")
       )
 
 instance Core.ToJSON DriveExportOptions where
   toJSON DriveExportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("includeAccessInfo" Core..=)
-              Core.<$> includeAccessInfo
-          ]
+          [("includeAccessInfo" Core..=) Core.<$> includeAccessInfo]
       )
 
--- | Additional options for Drive search
+-- | Additional options for Drive search.
 --
 -- /See:/ 'newDriveOptions' smart constructor.
 data DriveOptions = DriveOptions
@@ -948,10 +1095,8 @@ instance Core.ToJSON DriveOptions where
       ( Core.catMaybes
           [ ("clientSideEncryptedOption" Core..=)
               Core.<$> clientSideEncryptedOption,
-            ("includeSharedDrives" Core..=)
-              Core.<$> includeSharedDrives,
-            ("includeTeamDrives" Core..=)
-              Core.<$> includeTeamDrives,
+            ("includeSharedDrives" Core..=) Core.<$> includeSharedDrives,
+            ("includeTeamDrives" Core..=) Core.<$> includeTeamDrives,
             ("versionDate" Core..=) Core.<$> versionDate
           ]
       )
@@ -968,8 +1113,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -990,6 +1134,8 @@ data Export = Export
     matterId :: (Core.Maybe Core.Text),
     -- | The export name. Don\'t use special characters (~!$\'(),;\@:\/?) in the name, they can prevent you from downloading exports.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Identifies the parent export that spawned this child export. This is only set on child exports.
+    parentExportId :: (Core.Maybe Core.Text),
     -- | The query parameters used to create the export.
     query :: (Core.Maybe Query),
     -- | Output only. The requester of the export.
@@ -1012,6 +1158,7 @@ newExport =
       id = Core.Nothing,
       matterId = Core.Nothing,
       name = Core.Nothing,
+      parentExportId = Core.Nothing,
       query = Core.Nothing,
       requester = Core.Nothing,
       stats = Core.Nothing,
@@ -1030,6 +1177,7 @@ instance Core.FromJSON Export where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "matterId")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "parentExportId")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "requester")
             Core.<*> (o Core..:? "stats")
@@ -1040,13 +1188,13 @@ instance Core.ToJSON Export where
   toJSON Export {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloudStorageSink" Core..=)
-              Core.<$> cloudStorageSink,
+          [ ("cloudStorageSink" Core..=) Core.<$> cloudStorageSink,
             ("createTime" Core..=) Core.<$> createTime,
             ("exportOptions" Core..=) Core.<$> exportOptions,
             ("id" Core..=) Core.<$> id,
             ("matterId" Core..=) Core.<$> matterId,
             ("name" Core..=) Core.<$> name,
+            ("parentExportId" Core..=) Core.<$> parentExportId,
             ("query" Core..=) Core.<$> query,
             ("requester" Core..=) Core.<$> requester,
             ("stats" Core..=) Core.<$> stats,
@@ -1058,8 +1206,12 @@ instance Core.ToJSON Export where
 --
 -- /See:/ 'newExportOptions' smart constructor.
 data ExportOptions = ExportOptions
-  { -- | Options for Drive exports.
+  { -- | Option available for Calendar export.
+    calendarOptions :: (Core.Maybe CalendarExportOptions),
+    -- | Options for Drive exports.
     driveOptions :: (Core.Maybe DriveExportOptions),
+    -- | Option available for Gemini export.
+    geminiOptions :: (Core.Maybe GeminiExportOptions),
     -- | Options for Groups exports.
     groupsOptions :: (Core.Maybe GroupsExportOptions),
     -- | Options for Chat exports.
@@ -1078,7 +1230,9 @@ newExportOptions ::
   ExportOptions
 newExportOptions =
   ExportOptions
-    { driveOptions = Core.Nothing,
+    { calendarOptions = Core.Nothing,
+      driveOptions = Core.Nothing,
+      geminiOptions = Core.Nothing,
       groupsOptions = Core.Nothing,
       hangoutsChatOptions = Core.Nothing,
       mailOptions = Core.Nothing,
@@ -1092,7 +1246,9 @@ instance Core.FromJSON ExportOptions where
       "ExportOptions"
       ( \o ->
           ExportOptions
-            Core.<$> (o Core..:? "driveOptions")
+            Core.<$> (o Core..:? "calendarOptions")
+            Core.<*> (o Core..:? "driveOptions")
+            Core.<*> (o Core..:? "geminiOptions")
             Core.<*> (o Core..:? "groupsOptions")
             Core.<*> (o Core..:? "hangoutsChatOptions")
             Core.<*> (o Core..:? "mailOptions")
@@ -1104,10 +1260,11 @@ instance Core.ToJSON ExportOptions where
   toJSON ExportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("driveOptions" Core..=) Core.<$> driveOptions,
+          [ ("calendarOptions" Core..=) Core.<$> calendarOptions,
+            ("driveOptions" Core..=) Core.<$> driveOptions,
+            ("geminiOptions" Core..=) Core.<$> geminiOptions,
             ("groupsOptions" Core..=) Core.<$> groupsOptions,
-            ("hangoutsChatOptions" Core..=)
-              Core.<$> hangoutsChatOptions,
+            ("hangoutsChatOptions" Core..=) Core.<$> hangoutsChatOptions,
             ("mailOptions" Core..=) Core.<$> mailOptions,
             ("region" Core..=) Core.<$> region,
             ("voiceOptions" Core..=) Core.<$> voiceOptions
@@ -1143,13 +1300,13 @@ instance Core.FromJSON ExportStats where
       "ExportStats"
       ( \o ->
           ExportStats
-            Core.<$> ( o Core..:? "exportedArtifactCount"
+            Core.<$> ( o
+                         Core..:? "exportedArtifactCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "sizeInBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalArtifactCount"
+            Core.<*> (o Core..:? "sizeInBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalArtifactCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1158,14 +1315,59 @@ instance Core.ToJSON ExportStats where
   toJSON ExportStats {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exportedArtifactCount" Core..=) Core.. Core.AsText
+          [ ("exportedArtifactCount" Core..=)
+              Core.. Core.AsText
               Core.<$> exportedArtifactCount,
-            ("sizeInBytes" Core..=) Core.. Core.AsText
-              Core.<$> sizeInBytes,
-            ("totalArtifactCount" Core..=) Core.. Core.AsText
+            ("sizeInBytes" Core..=) Core.. Core.AsText Core.<$> sizeInBytes,
+            ("totalArtifactCount" Core..=)
+              Core.. Core.AsText
               Core.<$> totalArtifactCount
           ]
       )
+
+-- | The options for Gemini exports.
+--
+-- /See:/ 'newGeminiExportOptions' smart constructor.
+newtype GeminiExportOptions = GeminiExportOptions
+  { -- | The file format for exported messages.
+    exportFormat :: (Core.Maybe GeminiExportOptions_ExportFormat)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeminiExportOptions' with the minimum fields required to make a request.
+newGeminiExportOptions ::
+  GeminiExportOptions
+newGeminiExportOptions =
+  GeminiExportOptions {exportFormat = Core.Nothing}
+
+instance Core.FromJSON GeminiExportOptions where
+  parseJSON =
+    Core.withObject
+      "GeminiExportOptions"
+      (\o -> GeminiExportOptions Core.<$> (o Core..:? "exportFormat"))
+
+instance Core.ToJSON GeminiExportOptions where
+  toJSON GeminiExportOptions {..} =
+    Core.object
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
+
+-- | Additional options for Gemini search
+--
+-- /See:/ 'newGeminiOptions' smart constructor.
+data GeminiOptions = GeminiOptions
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeminiOptions' with the minimum fields required to make a request.
+newGeminiOptions ::
+  GeminiOptions
+newGeminiOptions = GeminiOptions
+
+instance Core.FromJSON GeminiOptions where
+  parseJSON =
+    Core.withObject "GeminiOptions" (\o -> Core.pure GeminiOptions)
+
+instance Core.ToJSON GeminiOptions where
+  toJSON = Core.const Core.emptyObject
 
 -- | Groups specific count metrics.
 --
@@ -1204,11 +1406,13 @@ instance Core.FromJSON GroupsCountResult where
           GroupsCountResult
             Core.<$> (o Core..:? "accountCountErrors")
             Core.<*> (o Core..:? "accountCounts")
-            Core.<*> ( o Core..:? "matchingAccountsCount"
+            Core.<*> ( o
+                         Core..:? "matchingAccountsCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "nonQueryableAccounts")
-            Core.<*> ( o Core..:? "queriedAccountsCount"
+            Core.<*> ( o
+                         Core..:? "queriedAccountsCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1217,14 +1421,14 @@ instance Core.ToJSON GroupsCountResult where
   toJSON GroupsCountResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountCountErrors" Core..=)
-              Core.<$> accountCountErrors,
+          [ ("accountCountErrors" Core..=) Core.<$> accountCountErrors,
             ("accountCounts" Core..=) Core.<$> accountCounts,
-            ("matchingAccountsCount" Core..=) Core.. Core.AsText
+            ("matchingAccountsCount" Core..=)
+              Core.. Core.AsText
               Core.<$> matchingAccountsCount,
-            ("nonQueryableAccounts" Core..=)
-              Core.<$> nonQueryableAccounts,
-            ("queriedAccountsCount" Core..=) Core.. Core.AsText
+            ("nonQueryableAccounts" Core..=) Core.<$> nonQueryableAccounts,
+            ("queriedAccountsCount" Core..=)
+              Core.. Core.AsText
               Core.<$> queriedAccountsCount
           ]
       )
@@ -1241,23 +1445,19 @@ newtype GroupsExportOptions = GroupsExportOptions
 -- | Creates a value of 'GroupsExportOptions' with the minimum fields required to make a request.
 newGroupsExportOptions ::
   GroupsExportOptions
-newGroupsExportOptions = GroupsExportOptions {exportFormat = Core.Nothing}
+newGroupsExportOptions =
+  GroupsExportOptions {exportFormat = Core.Nothing}
 
 instance Core.FromJSON GroupsExportOptions where
   parseJSON =
     Core.withObject
       "GroupsExportOptions"
-      ( \o ->
-          GroupsExportOptions
-            Core.<$> (o Core..:? "exportFormat")
-      )
+      (\o -> GroupsExportOptions Core.<$> (o Core..:? "exportFormat"))
 
 instance Core.ToJSON GroupsExportOptions where
   toJSON GroupsExportOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("exportFormat" Core..=) Core.<$> exportFormat]
-      )
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
 
 -- | Options for Chat exports.
 --
@@ -1279,16 +1479,13 @@ instance Core.FromJSON HangoutsChatExportOptions where
     Core.withObject
       "HangoutsChatExportOptions"
       ( \o ->
-          HangoutsChatExportOptions
-            Core.<$> (o Core..:? "exportFormat")
+          HangoutsChatExportOptions Core.<$> (o Core..:? "exportFormat")
       )
 
 instance Core.ToJSON HangoutsChatExportOptions where
   toJSON HangoutsChatExportOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("exportFormat" Core..=) Core.<$> exportFormat]
-      )
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
 
 -- | The Chat spaces to search
 --
@@ -1308,14 +1505,11 @@ instance Core.FromJSON HangoutsChatInfo where
   parseJSON =
     Core.withObject
       "HangoutsChatInfo"
-      ( \o ->
-          HangoutsChatInfo Core.<$> (o Core..:? "roomId")
-      )
+      (\o -> HangoutsChatInfo Core.<$> (o Core..:? "roomId"))
 
 instance Core.ToJSON HangoutsChatInfo where
   toJSON HangoutsChatInfo {..} =
-    Core.object
-      (Core.catMaybes [("roomId" Core..=) Core.<$> roomId])
+    Core.object (Core.catMaybes [("roomId" Core..=) Core.<$> roomId])
 
 -- | Additional options for Google Chat search
 --
@@ -1329,23 +1523,19 @@ newtype HangoutsChatOptions = HangoutsChatOptions
 -- | Creates a value of 'HangoutsChatOptions' with the minimum fields required to make a request.
 newHangoutsChatOptions ::
   HangoutsChatOptions
-newHangoutsChatOptions = HangoutsChatOptions {includeRooms = Core.Nothing}
+newHangoutsChatOptions =
+  HangoutsChatOptions {includeRooms = Core.Nothing}
 
 instance Core.FromJSON HangoutsChatOptions where
   parseJSON =
     Core.withObject
       "HangoutsChatOptions"
-      ( \o ->
-          HangoutsChatOptions
-            Core.<$> (o Core..:? "includeRooms")
-      )
+      (\o -> HangoutsChatOptions Core.<$> (o Core..:? "includeRooms"))
 
 instance Core.ToJSON HangoutsChatOptions where
   toJSON HangoutsChatOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("includeRooms" Core..=) Core.<$> includeRooms]
-      )
+      (Core.catMaybes [("includeRooms" Core..=) Core.<$> includeRooms])
 
 -- | An account covered by a hold. This structure is immutable. It can be an individual account or a Google Group, depending on the service. To work with Vault resources, the account must have the [required Vault privileges] (https:\/\/support.google.com\/vault\/answer\/2799699) and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege.
 --
@@ -1401,6 +1591,26 @@ instance Core.ToJSON HeldAccount where
           ]
       )
 
+-- | Options for Calendar holds.
+--
+-- /See:/ 'newHeldCalendarQuery' smart constructor.
+data HeldCalendarQuery = HeldCalendarQuery
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HeldCalendarQuery' with the minimum fields required to make a request.
+newHeldCalendarQuery ::
+  HeldCalendarQuery
+newHeldCalendarQuery = HeldCalendarQuery
+
+instance Core.FromJSON HeldCalendarQuery where
+  parseJSON =
+    Core.withObject
+      "HeldCalendarQuery"
+      (\o -> Core.pure HeldCalendarQuery)
+
+instance Core.ToJSON HeldCalendarQuery where
+  toJSON = Core.const Core.emptyObject
+
 -- | Options for Drive holds.
 --
 -- /See:/ 'newHeldDriveQuery' smart constructor.
@@ -1437,8 +1647,7 @@ instance Core.ToJSON HeldDriveQuery where
       ( Core.catMaybes
           [ ("includeSharedDriveFiles" Core..=)
               Core.<$> includeSharedDriveFiles,
-            ("includeTeamDriveFiles" Core..=)
-              Core.<$> includeTeamDriveFiles
+            ("includeTeamDriveFiles" Core..=) Core.<$> includeTeamDriveFiles
           ]
       )
 
@@ -1498,23 +1707,19 @@ newtype HeldHangoutsChatQuery = HeldHangoutsChatQuery
 -- | Creates a value of 'HeldHangoutsChatQuery' with the minimum fields required to make a request.
 newHeldHangoutsChatQuery ::
   HeldHangoutsChatQuery
-newHeldHangoutsChatQuery = HeldHangoutsChatQuery {includeRooms = Core.Nothing}
+newHeldHangoutsChatQuery =
+  HeldHangoutsChatQuery {includeRooms = Core.Nothing}
 
 instance Core.FromJSON HeldHangoutsChatQuery where
   parseJSON =
     Core.withObject
       "HeldHangoutsChatQuery"
-      ( \o ->
-          HeldHangoutsChatQuery
-            Core.<$> (o Core..:? "includeRooms")
-      )
+      (\o -> HeldHangoutsChatQuery Core.<$> (o Core..:? "includeRooms"))
 
 instance Core.ToJSON HeldHangoutsChatQuery where
   toJSON HeldHangoutsChatQuery {..} =
     Core.object
-      ( Core.catMaybes
-          [("includeRooms" Core..=) Core.<$> includeRooms]
-      )
+      (Core.catMaybes [("includeRooms" Core..=) Core.<$> includeRooms])
 
 -- | Query options for Gmail holds.
 --
@@ -1574,7 +1779,8 @@ data HeldOrgUnit = HeldOrgUnit
 -- | Creates a value of 'HeldOrgUnit' with the minimum fields required to make a request.
 newHeldOrgUnit ::
   HeldOrgUnit
-newHeldOrgUnit = HeldOrgUnit {holdTime = Core.Nothing, orgUnitId = Core.Nothing}
+newHeldOrgUnit =
+  HeldOrgUnit {holdTime = Core.Nothing, orgUnitId = Core.Nothing}
 
 instance Core.FromJSON HeldOrgUnit where
   parseJSON =
@@ -1613,16 +1819,12 @@ instance Core.FromJSON HeldVoiceQuery where
   parseJSON =
     Core.withObject
       "HeldVoiceQuery"
-      ( \o ->
-          HeldVoiceQuery Core.<$> (o Core..:? "coveredData")
-      )
+      (\o -> HeldVoiceQuery Core.<$> (o Core..:? "coveredData"))
 
 instance Core.ToJSON HeldVoiceQuery where
   toJSON HeldVoiceQuery {..} =
     Core.object
-      ( Core.catMaybes
-          [("coveredData" Core..=) Core.<$> coveredData]
-      )
+      (Core.catMaybes [("coveredData" Core..=) Core.<$> coveredData])
 
 -- | A hold. A hold prevents the specified Google Workspace service from purging data for specific accounts or all members of an organizational unit. To work with Vault resources, the account must have the [required Vault privileges] (https:\/\/support.google.com\/vault\/answer\/2799699) and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege.
 --
@@ -1703,7 +1905,10 @@ data ListExportsResponse = ListExportsResponse
 newListExportsResponse ::
   ListExportsResponse
 newListExportsResponse =
-  ListExportsResponse {exports = Core.Nothing, nextPageToken = Core.Nothing}
+  ListExportsResponse
+    { exports = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListExportsResponse where
   parseJSON =
@@ -1736,23 +1941,19 @@ newtype ListHeldAccountsResponse = ListHeldAccountsResponse
 -- | Creates a value of 'ListHeldAccountsResponse' with the minimum fields required to make a request.
 newListHeldAccountsResponse ::
   ListHeldAccountsResponse
-newListHeldAccountsResponse = ListHeldAccountsResponse {accounts = Core.Nothing}
+newListHeldAccountsResponse =
+  ListHeldAccountsResponse {accounts = Core.Nothing}
 
 instance Core.FromJSON ListHeldAccountsResponse where
   parseJSON =
     Core.withObject
       "ListHeldAccountsResponse"
-      ( \o ->
-          ListHeldAccountsResponse
-            Core.<$> (o Core..:? "accounts")
-      )
+      (\o -> ListHeldAccountsResponse Core.<$> (o Core..:? "accounts"))
 
 instance Core.ToJSON ListHeldAccountsResponse where
   toJSON ListHeldAccountsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("accounts" Core..=) Core.<$> accounts]
-      )
+      (Core.catMaybes [("accounts" Core..=) Core.<$> accounts])
 
 -- | The holds for a matter.
 --
@@ -1769,7 +1970,10 @@ data ListHoldsResponse = ListHoldsResponse
 newListHoldsResponse ::
   ListHoldsResponse
 newListHoldsResponse =
-  ListHoldsResponse {holds = Core.Nothing, nextPageToken = Core.Nothing}
+  ListHoldsResponse
+    { holds = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListHoldsResponse where
   parseJSON =
@@ -1805,7 +2009,10 @@ data ListMattersResponse = ListMattersResponse
 newListMattersResponse ::
   ListMattersResponse
 newListMattersResponse =
-  ListMattersResponse {matters = Core.Nothing, nextPageToken = Core.Nothing}
+  ListMattersResponse
+    { matters = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListMattersResponse where
   parseJSON =
@@ -1941,11 +2148,13 @@ instance Core.FromJSON MailCountResult where
           MailCountResult
             Core.<$> (o Core..:? "accountCountErrors")
             Core.<*> (o Core..:? "accountCounts")
-            Core.<*> ( o Core..:? "matchingAccountsCount"
+            Core.<*> ( o
+                         Core..:? "matchingAccountsCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "nonQueryableAccounts")
-            Core.<*> ( o Core..:? "queriedAccountsCount"
+            Core.<*> ( o
+                         Core..:? "queriedAccountsCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1954,14 +2163,14 @@ instance Core.ToJSON MailCountResult where
   toJSON MailCountResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountCountErrors" Core..=)
-              Core.<$> accountCountErrors,
+          [ ("accountCountErrors" Core..=) Core.<$> accountCountErrors,
             ("accountCounts" Core..=) Core.<$> accountCounts,
-            ("matchingAccountsCount" Core..=) Core.. Core.AsText
+            ("matchingAccountsCount" Core..=)
+              Core.. Core.AsText
               Core.<$> matchingAccountsCount,
-            ("nonQueryableAccounts" Core..=)
-              Core.<$> nonQueryableAccounts,
-            ("queriedAccountsCount" Core..=) Core.. Core.AsText
+            ("nonQueryableAccounts" Core..=) Core.<$> nonQueryableAccounts,
+            ("queriedAccountsCount" Core..=)
+              Core.. Core.AsText
               Core.<$> queriedAccountsCount
           ]
       )
@@ -1972,6 +2181,8 @@ instance Core.ToJSON MailCountResult where
 data MailExportOptions = MailExportOptions
   { -- | The file format for exported messages.
     exportFormat :: (Core.Maybe MailExportOptions_ExportFormat),
+    -- | Optional. To enable exporting linked Drive files, set to __true__.
+    exportLinkedDriveFiles :: (Core.Maybe Core.Bool),
     -- | To export confidential mode content, set to __true__.
     showConfidentialModeContent :: (Core.Maybe Core.Bool),
     -- | To use the new export system, set to __true__.
@@ -1985,6 +2196,7 @@ newMailExportOptions ::
 newMailExportOptions =
   MailExportOptions
     { exportFormat = Core.Nothing,
+      exportLinkedDriveFiles = Core.Nothing,
       showConfidentialModeContent = Core.Nothing,
       useNewExport = Core.Nothing
     }
@@ -1996,6 +2208,7 @@ instance Core.FromJSON MailExportOptions where
       ( \o ->
           MailExportOptions
             Core.<$> (o Core..:? "exportFormat")
+            Core.<*> (o Core..:? "exportLinkedDriveFiles")
             Core.<*> (o Core..:? "showConfidentialModeContent")
             Core.<*> (o Core..:? "useNewExport")
       )
@@ -2005,6 +2218,7 @@ instance Core.ToJSON MailExportOptions where
     Core.object
       ( Core.catMaybes
           [ ("exportFormat" Core..=) Core.<$> exportFormat,
+            ("exportLinkedDriveFiles" Core..=) Core.<$> exportLinkedDriveFiles,
             ("showConfidentialModeContent" Core..=)
               Core.<$> showConfidentialModeContent,
             ("useNewExport" Core..=) Core.<$> useNewExport
@@ -2014,8 +2228,10 @@ instance Core.ToJSON MailExportOptions where
 -- | Additional options for Gmail search
 --
 -- /See:/ 'newMailOptions' smart constructor.
-newtype MailOptions = MailOptions
-  { -- | Set to __true__ to exclude drafts.
+data MailOptions = MailOptions
+  { -- | Specifies whether the results should include encrypted content, unencrypted content, or both. Defaults to including both.
+    clientSideEncryptedOption :: (Core.Maybe MailOptions_ClientSideEncryptedOption),
+    -- | Set to __true__ to exclude drafts.
     excludeDrafts :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2023,21 +2239,30 @@ newtype MailOptions = MailOptions
 -- | Creates a value of 'MailOptions' with the minimum fields required to make a request.
 newMailOptions ::
   MailOptions
-newMailOptions = MailOptions {excludeDrafts = Core.Nothing}
+newMailOptions =
+  MailOptions
+    { clientSideEncryptedOption = Core.Nothing,
+      excludeDrafts = Core.Nothing
+    }
 
 instance Core.FromJSON MailOptions where
   parseJSON =
     Core.withObject
       "MailOptions"
       ( \o ->
-          MailOptions Core.<$> (o Core..:? "excludeDrafts")
+          MailOptions
+            Core.<$> (o Core..:? "clientSideEncryptedOption")
+            Core.<*> (o Core..:? "excludeDrafts")
       )
 
 instance Core.ToJSON MailOptions where
   toJSON MailOptions {..} =
     Core.object
       ( Core.catMaybes
-          [("excludeDrafts" Core..=) Core.<$> excludeDrafts]
+          [ ("clientSideEncryptedOption" Core..=)
+              Core.<$> clientSideEncryptedOption,
+            ("excludeDrafts" Core..=) Core.<$> excludeDrafts
+          ]
       )
 
 -- | Represents a matter. To work with Vault resources, the account must have the [required Vault privileges] (https:\/\/support.google.com\/vault\/answer\/2799699) and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege.
@@ -2050,6 +2275,8 @@ data Matter = Matter
     matterId :: (Core.Maybe Core.Text),
     -- | Lists the users and their permission for the matter. Currently there is no programmer defined limit on the number of permissions a matter can have.
     matterPermissions :: (Core.Maybe [MatterPermission]),
+    -- | Optional. The requested data region for the matter.
+    matterRegion :: (Core.Maybe Matter_MatterRegion),
     -- | The name of the matter.
     name :: (Core.Maybe Core.Text),
     -- | The state of the matter.
@@ -2065,6 +2292,7 @@ newMatter =
     { description = Core.Nothing,
       matterId = Core.Nothing,
       matterPermissions = Core.Nothing,
+      matterRegion = Core.Nothing,
       name = Core.Nothing,
       state = Core.Nothing
     }
@@ -2078,6 +2306,7 @@ instance Core.FromJSON Matter where
             Core.<$> (o Core..:? "description")
             Core.<*> (o Core..:? "matterId")
             Core.<*> (o Core..:? "matterPermissions")
+            Core.<*> (o Core..:? "matterRegion")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "state")
       )
@@ -2088,8 +2317,8 @@ instance Core.ToJSON Matter where
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
             ("matterId" Core..=) Core.<$> matterId,
-            ("matterPermissions" Core..=)
-              Core.<$> matterPermissions,
+            ("matterPermissions" Core..=) Core.<$> matterPermissions,
+            ("matterRegion" Core..=) Core.<$> matterRegion,
             ("name" Core..=) Core.<$> name,
             ("state" Core..=) Core.<$> state
           ]
@@ -2143,7 +2372,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2199,21 +2428,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -2227,19 +2454,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | The organizational unit to search
 --
@@ -2259,16 +2484,12 @@ instance Core.FromJSON OrgUnitInfo where
   parseJSON =
     Core.withObject
       "OrgUnitInfo"
-      ( \o ->
-          OrgUnitInfo Core.<$> (o Core..:? "orgUnitId")
-      )
+      (\o -> OrgUnitInfo Core.<$> (o Core..:? "orgUnitId"))
 
 instance Core.ToJSON OrgUnitInfo where
   toJSON OrgUnitInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("orgUnitId" Core..=) Core.<$> orgUnitId]
-      )
+      (Core.catMaybes [("orgUnitId" Core..=) Core.<$> orgUnitId])
 
 -- | The query definition used for search and export.
 --
@@ -2276,14 +2497,20 @@ instance Core.ToJSON OrgUnitInfo where
 data Query = Query
   { -- | Required when __SearchMethod__ is __ACCOUNT__.
     accountInfo :: (Core.Maybe AccountInfo),
+    -- | Set Calendar search-specific options.
+    calendarOptions :: (Core.Maybe CalendarOptions),
     -- | The Google Workspace service to search.
     corpus :: (Core.Maybe Query_Corpus),
     -- | The data source to search.
     dataScope :: (Core.Maybe Query_DataScope),
+    -- | Required when __SearchMethod__ is **DRIVE_DOCUMENT**.
+    driveDocumentInfo :: (Core.Maybe DriveDocumentInfo),
     -- | Set Drive search-specific options.
     driveOptions :: (Core.Maybe DriveOptions),
     -- | The end time for the search query. Specify in GMT. The value is rounded to 12 AM on the specified date.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | Set Gemini search-specific options.
+    geminiOptions :: (Core.Maybe GeminiOptions),
     -- | Required when __SearchMethod__ is __ROOM__. (read-only)
     hangoutsChatInfo :: (Core.Maybe HangoutsChatInfo),
     -- | Set Chat search-specific options. (read-only)
@@ -2319,10 +2546,13 @@ newQuery ::
 newQuery =
   Query
     { accountInfo = Core.Nothing,
+      calendarOptions = Core.Nothing,
       corpus = Core.Nothing,
       dataScope = Core.Nothing,
+      driveDocumentInfo = Core.Nothing,
       driveOptions = Core.Nothing,
       endTime = Core.Nothing,
+      geminiOptions = Core.Nothing,
       hangoutsChatInfo = Core.Nothing,
       hangoutsChatOptions = Core.Nothing,
       mailOptions = Core.Nothing,
@@ -2345,10 +2575,13 @@ instance Core.FromJSON Query where
       ( \o ->
           Query
             Core.<$> (o Core..:? "accountInfo")
+            Core.<*> (o Core..:? "calendarOptions")
             Core.<*> (o Core..:? "corpus")
             Core.<*> (o Core..:? "dataScope")
+            Core.<*> (o Core..:? "driveDocumentInfo")
             Core.<*> (o Core..:? "driveOptions")
             Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "geminiOptions")
             Core.<*> (o Core..:? "hangoutsChatInfo")
             Core.<*> (o Core..:? "hangoutsChatOptions")
             Core.<*> (o Core..:? "mailOptions")
@@ -2369,14 +2602,15 @@ instance Core.ToJSON Query where
     Core.object
       ( Core.catMaybes
           [ ("accountInfo" Core..=) Core.<$> accountInfo,
+            ("calendarOptions" Core..=) Core.<$> calendarOptions,
             ("corpus" Core..=) Core.<$> corpus,
             ("dataScope" Core..=) Core.<$> dataScope,
+            ("driveDocumentInfo" Core..=) Core.<$> driveDocumentInfo,
             ("driveOptions" Core..=) Core.<$> driveOptions,
             ("endTime" Core..=) Core.<$> endTime,
-            ("hangoutsChatInfo" Core..=)
-              Core.<$> hangoutsChatInfo,
-            ("hangoutsChatOptions" Core..=)
-              Core.<$> hangoutsChatOptions,
+            ("geminiOptions" Core..=) Core.<$> geminiOptions,
+            ("hangoutsChatInfo" Core..=) Core.<$> hangoutsChatInfo,
+            ("hangoutsChatOptions" Core..=) Core.<$> hangoutsChatOptions,
             ("mailOptions" Core..=) Core.<$> mailOptions,
             ("method" Core..=) Core.<$> method,
             ("orgUnitInfo" Core..=) Core.<$> orgUnitInfo,
@@ -2411,16 +2645,13 @@ instance Core.FromJSON RemoveHeldAccountsRequest where
     Core.withObject
       "RemoveHeldAccountsRequest"
       ( \o ->
-          RemoveHeldAccountsRequest
-            Core.<$> (o Core..:? "accountIds")
+          RemoveHeldAccountsRequest Core.<$> (o Core..:? "accountIds")
       )
 
 instance Core.ToJSON RemoveHeldAccountsRequest where
   toJSON RemoveHeldAccountsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("accountIds" Core..=) Core.<$> accountIds]
-      )
+      (Core.catMaybes [("accountIds" Core..=) Core.<$> accountIds])
 
 -- | Response for batch delete held accounts.
 --
@@ -2442,16 +2673,13 @@ instance Core.FromJSON RemoveHeldAccountsResponse where
     Core.withObject
       "RemoveHeldAccountsResponse"
       ( \o ->
-          RemoveHeldAccountsResponse
-            Core.<$> (o Core..:? "statuses")
+          RemoveHeldAccountsResponse Core.<$> (o Core..:? "statuses")
       )
 
 instance Core.ToJSON RemoveHeldAccountsResponse where
   toJSON RemoveHeldAccountsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("statuses" Core..=) Core.<$> statuses]
-      )
+      (Core.catMaybes [("statuses" Core..=) Core.<$> statuses])
 
 -- | Remove an account as a matter collaborator.
 --
@@ -2473,16 +2701,13 @@ instance Core.FromJSON RemoveMatterPermissionsRequest where
     Core.withObject
       "RemoveMatterPermissionsRequest"
       ( \o ->
-          RemoveMatterPermissionsRequest
-            Core.<$> (o Core..:? "accountId")
+          RemoveMatterPermissionsRequest Core.<$> (o Core..:? "accountId")
       )
 
 instance Core.ToJSON RemoveMatterPermissionsRequest where
   toJSON RemoveMatterPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("accountId" Core..=) Core.<$> accountId]
-      )
+      (Core.catMaybes [("accountId" Core..=) Core.<$> accountId])
 
 -- | Reopen a matter by ID.
 --
@@ -2516,20 +2741,18 @@ newtype ReopenMatterResponse = ReopenMatterResponse
 -- | Creates a value of 'ReopenMatterResponse' with the minimum fields required to make a request.
 newReopenMatterResponse ::
   ReopenMatterResponse
-newReopenMatterResponse = ReopenMatterResponse {matter = Core.Nothing}
+newReopenMatterResponse =
+  ReopenMatterResponse {matter = Core.Nothing}
 
 instance Core.FromJSON ReopenMatterResponse where
   parseJSON =
     Core.withObject
       "ReopenMatterResponse"
-      ( \o ->
-          ReopenMatterResponse Core.<$> (o Core..:? "matter")
-      )
+      (\o -> ReopenMatterResponse Core.<$> (o Core..:? "matter"))
 
 instance Core.ToJSON ReopenMatterResponse where
   toJSON ReopenMatterResponse {..} =
-    Core.object
-      (Core.catMaybes [("matter" Core..=) Core.<$> matter])
+    Core.object (Core.catMaybes [("matter" Core..=) Core.<$> matter])
 
 -- | The definition of a saved query. To work with Vault resources, the account must have the <https://support.google.com/vault/answer/2799699 required Vault privileges> and access to the matter. To access a matter, the account must have created the matter, have the matter shared with them, or have the __View All Matters__ privilege.
 --
@@ -2603,10 +2826,7 @@ instance Core.FromJSON SharedDriveInfo where
   parseJSON =
     Core.withObject
       "SharedDriveInfo"
-      ( \o ->
-          SharedDriveInfo
-            Core.<$> (o Core..:? "sharedDriveIds")
-      )
+      (\o -> SharedDriveInfo Core.<$> (o Core..:? "sharedDriveIds"))
 
 instance Core.ToJSON SharedDriveInfo where
   toJSON SharedDriveInfo {..} =
@@ -2637,8 +2857,7 @@ instance Core.FromJSON SitesUrlInfo where
 
 instance Core.ToJSON SitesUrlInfo where
   toJSON SitesUrlInfo {..} =
-    Core.object
-      (Core.catMaybes [("urls" Core..=) Core.<$> urls])
+    Core.object (Core.catMaybes [("urls" Core..=) Core.<$> urls])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -2657,7 +2876,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2693,19 +2916,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Team Drives to search
 --
@@ -2725,16 +2946,12 @@ instance Core.FromJSON TeamDriveInfo where
   parseJSON =
     Core.withObject
       "TeamDriveInfo"
-      ( \o ->
-          TeamDriveInfo Core.<$> (o Core..:? "teamDriveIds")
-      )
+      (\o -> TeamDriveInfo Core.<$> (o Core..:? "teamDriveIds"))
 
 instance Core.ToJSON TeamDriveInfo where
   toJSON TeamDriveInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("teamDriveIds" Core..=) Core.<$> teamDriveIds]
-      )
+      (Core.catMaybes [("teamDriveIds" Core..=) Core.<$> teamDriveIds])
 
 -- | Undelete a matter by ID.
 --
@@ -2770,7 +2987,8 @@ data UserInfo = UserInfo
 -- | Creates a value of 'UserInfo' with the minimum fields required to make a request.
 newUserInfo ::
   UserInfo
-newUserInfo = UserInfo {displayName = Core.Nothing, email = Core.Nothing}
+newUserInfo =
+  UserInfo {displayName = Core.Nothing, email = Core.Nothing}
 
 instance Core.FromJSON UserInfo where
   parseJSON =
@@ -2803,23 +3021,19 @@ newtype VoiceExportOptions = VoiceExportOptions
 -- | Creates a value of 'VoiceExportOptions' with the minimum fields required to make a request.
 newVoiceExportOptions ::
   VoiceExportOptions
-newVoiceExportOptions = VoiceExportOptions {exportFormat = Core.Nothing}
+newVoiceExportOptions =
+  VoiceExportOptions {exportFormat = Core.Nothing}
 
 instance Core.FromJSON VoiceExportOptions where
   parseJSON =
     Core.withObject
       "VoiceExportOptions"
-      ( \o ->
-          VoiceExportOptions
-            Core.<$> (o Core..:? "exportFormat")
-      )
+      (\o -> VoiceExportOptions Core.<$> (o Core..:? "exportFormat"))
 
 instance Core.ToJSON VoiceExportOptions where
   toJSON VoiceExportOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("exportFormat" Core..=) Core.<$> exportFormat]
-      )
+      (Core.catMaybes [("exportFormat" Core..=) Core.<$> exportFormat])
 
 -- | Additional options for Voice search
 --
@@ -2839,13 +3053,9 @@ instance Core.FromJSON VoiceOptions where
   parseJSON =
     Core.withObject
       "VoiceOptions"
-      ( \o ->
-          VoiceOptions Core.<$> (o Core..:? "coveredData")
-      )
+      (\o -> VoiceOptions Core.<$> (o Core..:? "coveredData"))
 
 instance Core.ToJSON VoiceOptions where
   toJSON VoiceOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("coveredData" Core..=) Core.<$> coveredData]
-      )
+      (Core.catMaybes [("coveredData" Core..=) Core.<$> coveredData])

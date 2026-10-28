@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Accounts.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Accounts.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.accounts.patch@ method which the
 -- 'DFAReportingAccountsPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingAccountsPatch = DFAReportingAccountsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Account ID.
+    -- | Required. Account ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: Account,
@@ -85,7 +83,7 @@ data DFAReportingAccountsPatch = DFAReportingAccountsPatch
 
 -- | Creates a value of 'DFAReportingAccountsPatch' with the minimum fields required to make a request.
 newDFAReportingAccountsPatch ::
-  -- |  Account ID. See 'id'.
+  -- |  Required. Account ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   Account ->
@@ -124,7 +122,5 @@ instance Core.GoogleRequest DFAReportingAccountsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAccountsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAccountsPatchResource)
           Core.mempty

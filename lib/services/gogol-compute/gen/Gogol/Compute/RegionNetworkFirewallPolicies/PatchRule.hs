@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionNetworkFirewallPolicies.PatchRule
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.PatchRule
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionNetworkFirewallPolicies.patchRule@ method which the
 -- 'ComputeRegionNetworkFirewallPoliciesPatchRule' request conforms to.
@@ -62,9 +60,7 @@ type ComputeRegionNetworkFirewallPoliciesPatchRuleResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              FirewallPolicyRule
+    Core.:> Core.ReqBody '[Core.JSON] FirewallPolicyRule
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Patches a rule of the specified priority.
@@ -107,53 +103,53 @@ newComputeRegionNetworkFirewallPoliciesPatchRule ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionNetworkFirewallPoliciesPatchRule
-newComputeRegionNetworkFirewallPoliciesPatchRule firewallPolicy payload project region =
-  ComputeRegionNetworkFirewallPoliciesPatchRule
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      firewallPolicy = firewallPolicy,
-      payload = payload,
-      priority = Core.Nothing,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionNetworkFirewallPoliciesPatchRule
+  firewallPolicy
+  payload
+  project
+  region =
+    ComputeRegionNetworkFirewallPoliciesPatchRule
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        firewallPolicy = firewallPolicy,
+        payload = payload,
+        priority = Core.Nothing,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionNetworkFirewallPoliciesPatchRule
   where
+  type Rs ComputeRegionNetworkFirewallPoliciesPatchRule = Operation
   type
-    Rs ComputeRegionNetworkFirewallPoliciesPatchRule =
-      Operation
-  type
-    Scopes
-      ComputeRegionNetworkFirewallPoliciesPatchRule =
+    Scopes ComputeRegionNetworkFirewallPoliciesPatchRule =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionNetworkFirewallPoliciesPatchRule {..} =
-      go
-        project
-        region
-        firewallPolicy
-        xgafv
-        accessToken
-        callback
-        priority
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionNetworkFirewallPoliciesPatchRuleResource
-            )
-            Core.mempty
+  requestClient ComputeRegionNetworkFirewallPoliciesPatchRule {..} =
+    go
+      project
+      region
+      firewallPolicy
+      xgafv
+      accessToken
+      callback
+      priority
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionNetworkFirewallPoliciesPatchRuleResource
+          )
+          Core.mempty

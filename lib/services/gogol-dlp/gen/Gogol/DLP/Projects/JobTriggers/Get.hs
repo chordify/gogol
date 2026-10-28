@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.JobTriggers.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- Gets a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.jobTriggers.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.jobTriggers.get@.
 module Gogol.DLP.Projects.JobTriggers.Get
   ( -- * Resource
     DLPProjectsJobTriggersGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.JobTriggers.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.jobTriggers.get@ method which the
 -- 'DLPProjectsJobTriggersGet' request conforms to.
@@ -55,7 +53,7 @@ type DLPProjectsJobTriggersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2JobTrigger
 
--- | Gets a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- | Gets a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
 -- /See:/ 'newDLPProjectsJobTriggersGet' smart constructor.
 data DLPProjectsJobTriggersGet = DLPProjectsJobTriggersGet
@@ -90,9 +88,7 @@ newDLPProjectsJobTriggersGet name =
     }
 
 instance Core.GoogleRequest DLPProjectsJobTriggersGet where
-  type
-    Rs DLPProjectsJobTriggersGet =
-      GooglePrivacyDlpV2JobTrigger
+  type Rs DLPProjectsJobTriggersGet = GooglePrivacyDlpV2JobTrigger
   type
     Scopes DLPProjectsJobTriggersGet =
       '[CloudPlatform'FullControl]
@@ -109,7 +105,5 @@ instance Core.GoogleRequest DLPProjectsJobTriggersGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsJobTriggersGetResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsJobTriggersGetResource)
           Core.mempty

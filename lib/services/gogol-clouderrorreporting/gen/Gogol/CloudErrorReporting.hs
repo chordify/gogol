@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -67,6 +65,31 @@ module Gogol.CloudErrorReporting
     CloudErrorReportingProjectsGroupsUpdateResource,
     CloudErrorReportingProjectsGroupsUpdate (..),
     newCloudErrorReportingProjectsGroupsUpdate,
+
+    -- ** clouderrorreporting.projects.locations.deleteEvents
+    CloudErrorReportingProjectsLocationsDeleteEventsResource,
+    CloudErrorReportingProjectsLocationsDeleteEvents (..),
+    newCloudErrorReportingProjectsLocationsDeleteEvents,
+
+    -- ** clouderrorreporting.projects.locations.events.list
+    CloudErrorReportingProjectsLocationsEventsListResource,
+    CloudErrorReportingProjectsLocationsEventsList (..),
+    newCloudErrorReportingProjectsLocationsEventsList,
+
+    -- ** clouderrorreporting.projects.locations.groupStats.list
+    CloudErrorReportingProjectsLocationsGroupStatsListResource,
+    CloudErrorReportingProjectsLocationsGroupStatsList (..),
+    newCloudErrorReportingProjectsLocationsGroupStatsList,
+
+    -- ** clouderrorreporting.projects.locations.groups.get
+    CloudErrorReportingProjectsLocationsGroupsGetResource,
+    CloudErrorReportingProjectsLocationsGroupsGet (..),
+    newCloudErrorReportingProjectsLocationsGroupsGet,
+
+    -- ** clouderrorreporting.projects.locations.groups.update
+    CloudErrorReportingProjectsLocationsGroupsUpdateResource,
+    CloudErrorReportingProjectsLocationsGroupsUpdate (..),
+    newCloudErrorReportingProjectsLocationsGroupsUpdate,
 
     -- * Types
 
@@ -147,6 +170,18 @@ module Gogol.CloudErrorReporting
 
     -- ** ProjectsGroupStatsListTimeRangePeriod
     ProjectsGroupStatsListTimeRangePeriod (..),
+
+    -- ** ProjectsLocationsEventsListTimeRangePeriod
+    ProjectsLocationsEventsListTimeRangePeriod (..),
+
+    -- ** ProjectsLocationsGroupStatsListAlignment
+    ProjectsLocationsGroupStatsListAlignment (..),
+
+    -- ** ProjectsLocationsGroupStatsListOrder
+    ProjectsLocationsGroupStatsListOrder (..),
+
+    -- ** ProjectsLocationsGroupStatsListTimeRangePeriod
+    ProjectsLocationsGroupStatsListTimeRangePeriod (..),
   )
 where
 
@@ -156,4 +191,9 @@ import Gogol.CloudErrorReporting.Projects.Events.Report
 import Gogol.CloudErrorReporting.Projects.GroupStats.List
 import Gogol.CloudErrorReporting.Projects.Groups.Get
 import Gogol.CloudErrorReporting.Projects.Groups.Update
+import Gogol.CloudErrorReporting.Projects.Locations.DeleteEvents
+import Gogol.CloudErrorReporting.Projects.Locations.Events.List
+import Gogol.CloudErrorReporting.Projects.Locations.GroupStats.List
+import Gogol.CloudErrorReporting.Projects.Locations.Groups.Get
+import Gogol.CloudErrorReporting.Projects.Locations.Groups.Update
 import Gogol.CloudErrorReporting.Types

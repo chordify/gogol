@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the list of all active breakpoints for the debuggee. The breakpoint specification (@location@, @condition@, and @expressions@ fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn\'t change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.controller.debuggees.breakpoints.list@.
 module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
   ( -- * Resource
     ClouddebuggerControllerDebuggeesBreakpointsListResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.List
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.list@ method which the
 -- 'ClouddebuggerControllerDebuggeesBreakpointsList' request conforms to.
@@ -59,9 +57,7 @@ type ClouddebuggerControllerDebuggeesBreakpointsListResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "waitToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListActiveBreakpointsResponse
+    Core.:> Core.Get '[Core.JSON] ListActiveBreakpointsResponse
 
 -- | Returns the list of all active breakpoints for the debuggee. The breakpoint specification (@location@, @condition@, and @expressions@ fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn\'t change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
 --
@@ -95,7 +91,8 @@ newClouddebuggerControllerDebuggeesBreakpointsList ::
   ClouddebuggerControllerDebuggeesBreakpointsList
 newClouddebuggerControllerDebuggeesBreakpointsList debuggeeId =
   ClouddebuggerControllerDebuggeesBreakpointsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       agentId = Core.Nothing,
       callback = Core.Nothing,
@@ -111,34 +108,28 @@ instance
     ClouddebuggerControllerDebuggeesBreakpointsList
   where
   type
-    Rs
-      ClouddebuggerControllerDebuggeesBreakpointsList =
+    Rs ClouddebuggerControllerDebuggeesBreakpointsList =
       ListActiveBreakpointsResponse
   type
-    Scopes
-      ClouddebuggerControllerDebuggeesBreakpointsList =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerControllerDebuggeesBreakpointsList {..} =
-      go
-        debuggeeId
-        xgafv
-        accessToken
-        agentId
-        callback
-        successOnTimeout
-        uploadType
-        uploadProtocol
-        waitToken
-        (Core.Just Core.AltJSON)
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerControllerDebuggeesBreakpointsListResource
-            )
-            Core.mempty
+    Scopes ClouddebuggerControllerDebuggeesBreakpointsList =
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerControllerDebuggeesBreakpointsList {..} =
+    go
+      debuggeeId
+      xgafv
+      accessToken
+      agentId
+      callback
+      successOnTimeout
+      uploadType
+      uploadProtocol
+      waitToken
+      (Core.Just Core.AltJSON)
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClouddebuggerControllerDebuggeesBreakpointsListResource
+          )
+          Core.mempty

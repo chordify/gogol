@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.BillingAccounts.Locations.Buckets.Links.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.BillingAccounts.Locations.Buckets.Links.List
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.billingAccounts.locations.buckets.links.list@ method which the
 -- 'LoggingBillingAccountsLocationsBucketsLinksList' request conforms to.
@@ -72,7 +70,7 @@ data LoggingBillingAccountsLocationsBucketsLinksList = LoggingBillingAccountsLoc
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/
+    -- | Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\"
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,12 +81,13 @@ data LoggingBillingAccountsLocationsBucketsLinksList = LoggingBillingAccountsLoc
 
 -- | Creates a value of 'LoggingBillingAccountsLocationsBucketsLinksList' with the minimum fields required to make a request.
 newLoggingBillingAccountsLocationsBucketsLinksList ::
-  -- |  Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/ See 'parent'.
+  -- |  Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\" See 'parent'.
   Core.Text ->
   LoggingBillingAccountsLocationsBucketsLinksList
 newLoggingBillingAccountsLocationsBucketsLinksList parent =
   LoggingBillingAccountsLocationsBucketsLinksList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -103,35 +102,31 @@ instance
     LoggingBillingAccountsLocationsBucketsLinksList
   where
   type
-    Rs
-      LoggingBillingAccountsLocationsBucketsLinksList =
+    Rs LoggingBillingAccountsLocationsBucketsLinksList =
       ListLinksResponse
   type
-    Scopes
-      LoggingBillingAccountsLocationsBucketsLinksList =
+    Scopes LoggingBillingAccountsLocationsBucketsLinksList =
       '[ CloudPlatform'FullControl,
          CloudPlatform'ReadOnly,
          Logging'Admin,
          Logging'Read
        ]
-  requestClient
-    LoggingBillingAccountsLocationsBucketsLinksList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingBillingAccountsLocationsBucketsLinksListResource
-            )
-            Core.mempty
+  requestClient LoggingBillingAccountsLocationsBucketsLinksList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingBillingAccountsLocationsBucketsLinksListResource
+          )
+          Core.mempty

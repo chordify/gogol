@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AnalyticsReporting.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AnalyticsReporting.Types
@@ -299,7 +297,7 @@ where
 
 import Gogol.AnalyticsReporting.Internal.Product
 import Gogol.AnalyticsReporting.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v4@ of the Analytics Reporting API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsReportingService :: Core.ServiceConfig
@@ -309,7 +307,9 @@ analyticsReportingService =
     "analyticsreporting.googleapis.com"
 
 -- | View and manage your Google Analytics data
-type Analytics'FullControl = "https://www.googleapis.com/auth/analytics"
+type Analytics'FullControl =
+  "https://www.googleapis.com/auth/analytics"
 
 -- | See and download your Google Analytics data
-type Analytics'Readonly = "https://www.googleapis.com/auth/analytics.readonly"
+type Analytics'Readonly =
+  "https://www.googleapis.com/auth/analytics.readonly"

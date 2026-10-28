@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a Table resource. Returns an empty policy if the resource exists but does not have a policy set.
+-- Gets the access control policy for a Bigtable resource. Returns an empty policy if the resource exists but does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.getIamPolicy@.
 module Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.GetIamPolicy
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.getIamPolicy@ method which the
 -- 'BigtableAdminProjectsInstancesTablesGetIamPolicy' request conforms to.
@@ -56,7 +54,7 @@ type BigtableAdminProjectsInstancesTablesGetIamPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Gets the access control policy for a Table resource. Returns an empty policy if the resource exists but does not have a policy set.
+-- | Gets the access control policy for a Bigtable resource. Returns an empty policy if the resource exists but does not have a policy set.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesTablesGetIamPolicy' smart constructor.
 data BigtableAdminProjectsInstancesTablesGetIamPolicy = BigtableAdminProjectsInstancesTablesGetIamPolicy
@@ -84,51 +82,49 @@ newBigtableAdminProjectsInstancesTablesGetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   BigtableAdminProjectsInstancesTablesGetIamPolicy
-newBigtableAdminProjectsInstancesTablesGetIamPolicy payload resource =
-  BigtableAdminProjectsInstancesTablesGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBigtableAdminProjectsInstancesTablesGetIamPolicy
+  payload
+  resource =
+    BigtableAdminProjectsInstancesTablesGetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BigtableAdminProjectsInstancesTablesGetIamPolicy
   where
+  type Rs BigtableAdminProjectsInstancesTablesGetIamPolicy = Policy
   type
-    Rs
-      BigtableAdminProjectsInstancesTablesGetIamPolicy =
-      Policy
-  type
-    Scopes
-      BigtableAdminProjectsInstancesTablesGetIamPolicy =
+    Scopes BigtableAdminProjectsInstancesTablesGetIamPolicy =
       '[ Bigtable'Admin,
          Bigtable'Admin'Table,
          CloudBigtable'Admin,
          CloudBigtable'Admin'Table,
          CloudPlatform'FullControl
        ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient BigtableAdminProjectsInstancesTablesGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                BigtableAdminProjectsInstancesTablesGetIamPolicyResource
+          )
+          Core.mempty

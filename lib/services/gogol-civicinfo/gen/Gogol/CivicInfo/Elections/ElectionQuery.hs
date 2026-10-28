@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CivicInfo.Elections.ElectionQuery
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CivicInfo.Elections.ElectionQuery
 where
 
 import Gogol.CivicInfo.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @civicinfo.elections.electionQuery@ method which the
 -- 'CivicInfoElectionsElectionQuery' request conforms to.
@@ -51,6 +49,7 @@ type CivicInfoElectionsElectionQueryResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "productionDataOnly" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -66,6 +65,8 @@ data CivicInfoElectionsElectionQuery = CivicInfoElectionsElectionQuery
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Whether to include data that has not been allowlisted yet
+    productionDataOnly :: Core.Bool,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -81,23 +82,20 @@ newCivicInfoElectionsElectionQuery =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      productionDataOnly = Core.True,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CivicInfoElectionsElectionQuery
-  where
-  type
-    Rs CivicInfoElectionsElectionQuery =
-      ElectionsQueryResponse
+instance Core.GoogleRequest CivicInfoElectionsElectionQuery where
+  type Rs CivicInfoElectionsElectionQuery = ElectionsQueryResponse
   type Scopes CivicInfoElectionsElectionQuery = '[]
   requestClient CivicInfoElectionsElectionQuery {..} =
     go
       xgafv
       accessToken
       callback
+      (Core.Just productionDataOnly)
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -105,7 +103,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CivicInfoElectionsElectionQueryResource
-          )
+          (Core.Proxy :: Core.Proxy CivicInfoElectionsElectionQueryResource)
           Core.mempty

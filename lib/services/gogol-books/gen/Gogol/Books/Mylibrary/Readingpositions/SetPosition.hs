@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Readingpositions.SetPosition
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Mylibrary.Readingpositions.SetPosition
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.readingpositions.setPosition@ method which the
 -- 'BooksMylibraryReadingpositionsSetPosition' request conforms to.
@@ -55,9 +53,7 @@ type BooksMylibraryReadingpositionsSetPositionResource =
     Core.:> Core.QueryParam "timestamp" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "action"
-              MylibraryReadingpositionsSetPositionAction
+    Core.:> Core.QueryParam "action" MylibraryReadingpositionsSetPositionAction
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "contentVersion" Core.Text
     Core.:> Core.QueryParam "deviceCookie" Core.Text
@@ -107,54 +103,53 @@ newBooksMylibraryReadingpositionsSetPosition ::
   -- |  ID of volume for which to update the reading position. See 'volumeId'.
   Core.Text ->
   BooksMylibraryReadingpositionsSetPosition
-newBooksMylibraryReadingpositionsSetPosition position timestamp volumeId =
-  BooksMylibraryReadingpositionsSetPosition
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      action = Core.Nothing,
-      callback = Core.Nothing,
-      contentVersion = Core.Nothing,
-      deviceCookie = Core.Nothing,
-      position = position,
-      source = Core.Nothing,
-      timestamp = timestamp,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      volumeId = volumeId
-    }
+newBooksMylibraryReadingpositionsSetPosition
+  position
+  timestamp
+  volumeId =
+    BooksMylibraryReadingpositionsSetPosition
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        action = Core.Nothing,
+        callback = Core.Nothing,
+        contentVersion = Core.Nothing,
+        deviceCookie = Core.Nothing,
+        position = position,
+        source = Core.Nothing,
+        timestamp = timestamp,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        volumeId = volumeId
+      }
 
 instance
   Core.GoogleRequest
     BooksMylibraryReadingpositionsSetPosition
   where
-  type
-    Rs BooksMylibraryReadingpositionsSetPosition =
-      Empty
+  type Rs BooksMylibraryReadingpositionsSetPosition = Empty
   type
     Scopes BooksMylibraryReadingpositionsSetPosition =
       '[Books'FullControl]
-  requestClient
-    BooksMylibraryReadingpositionsSetPosition {..} =
-      go
-        volumeId
-        (Core.Just position)
-        (Core.Just timestamp)
-        xgafv
-        accessToken
-        action
-        callback
-        contentVersion
-        deviceCookie
-        source
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        booksService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BooksMylibraryReadingpositionsSetPositionResource
-            )
-            Core.mempty
+  requestClient BooksMylibraryReadingpositionsSetPosition {..} =
+    go
+      volumeId
+      (Core.Just position)
+      (Core.Just timestamp)
+      xgafv
+      accessToken
+      action
+      callback
+      contentVersion
+      deviceCookie
+      source
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      booksService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BooksMylibraryReadingpositionsSetPositionResource
+          )
+          Core.mempty

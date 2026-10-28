@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.gtag_config.delete@ method which the
@@ -82,7 +80,8 @@ newTagManagerAccountsContainersWorkspacesGtag_configDelete ::
   TagManagerAccountsContainersWorkspacesGtag_configDelete
 newTagManagerAccountsContainersWorkspacesGtag_configDelete path =
   TagManagerAccountsContainersWorkspacesGtag_configDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       path = path,
@@ -95,12 +94,10 @@ instance
     TagManagerAccountsContainersWorkspacesGtag_configDelete
   where
   type
-    Rs
-      TagManagerAccountsContainersWorkspacesGtag_configDelete =
+    Rs TagManagerAccountsContainersWorkspacesGtag_configDelete =
       ()
   type
-    Scopes
-      TagManagerAccountsContainersWorkspacesGtag_configDelete =
+    Scopes TagManagerAccountsContainersWorkspacesGtag_configDelete =
       '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersWorkspacesGtag_configDelete {..} =

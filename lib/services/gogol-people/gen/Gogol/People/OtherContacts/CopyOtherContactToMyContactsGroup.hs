@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.OtherContacts.CopyOtherContactToMyContactsGroup
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.People.OtherContacts.CopyOtherContactToMyContactsGroup
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.otherContacts.copyOtherContactToMyContactsGroup@ method which the
 -- 'PeopleOtherContactsCopyOtherContactToMyContactsGroup' request conforms to.
@@ -56,9 +54,7 @@ type PeopleOtherContactsCopyOtherContactToMyContactsGroupResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CopyOtherContactToMyContactsGroupRequest
+    Core.:> Core.ReqBody '[Core.JSON] CopyOtherContactToMyContactsGroupRequest
     Core.:> Core.Post '[Core.JSON] Person
 
 -- | Copies an \"Other contact\" to a new contact in the user\'s \"myContacts\" group Mutate requests for the same user should be sent sequentially to avoid increased latency and failures.
@@ -89,28 +85,29 @@ newPeopleOtherContactsCopyOtherContactToMyContactsGroup ::
   -- |  Required. The resource name of the \"Other contact\" to copy. See 'resourceName'.
   Core.Text ->
   PeopleOtherContactsCopyOtherContactToMyContactsGroup
-newPeopleOtherContactsCopyOtherContactToMyContactsGroup payload resourceName =
-  PeopleOtherContactsCopyOtherContactToMyContactsGroup
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resourceName = resourceName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newPeopleOtherContactsCopyOtherContactToMyContactsGroup
+  payload
+  resourceName =
+    PeopleOtherContactsCopyOtherContactToMyContactsGroup
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resourceName = resourceName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     PeopleOtherContactsCopyOtherContactToMyContactsGroup
   where
   type
-    Rs
-      PeopleOtherContactsCopyOtherContactToMyContactsGroup =
+    Rs PeopleOtherContactsCopyOtherContactToMyContactsGroup =
       Person
   type
-    Scopes
-      PeopleOtherContactsCopyOtherContactToMyContactsGroup =
+    Scopes PeopleOtherContactsCopyOtherContactToMyContactsGroup =
       '[Contacts'FullControl, Contacts'Other'Readonly]
   requestClient
     PeopleOtherContactsCopyOtherContactToMyContactsGroup {..} =

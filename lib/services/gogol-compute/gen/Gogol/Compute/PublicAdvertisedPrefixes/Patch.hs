@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.PublicAdvertisedPrefixes.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.PublicAdvertisedPrefixes.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.publicAdvertisedPrefixes.patch@ method which the
 -- 'ComputePublicAdvertisedPrefixesPatch' request conforms to.
@@ -59,9 +57,7 @@ type ComputePublicAdvertisedPrefixesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              PublicAdvertisedPrefix
+    Core.:> Core.ReqBody '[Core.JSON] PublicAdvertisedPrefix
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Patches the specified Router resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
@@ -98,48 +94,44 @@ newComputePublicAdvertisedPrefixesPatch ::
   -- |  Name of the PublicAdvertisedPrefix resource to patch. See 'publicAdvertisedPrefix'.
   Core.Text ->
   ComputePublicAdvertisedPrefixesPatch
-newComputePublicAdvertisedPrefixesPatch payload project publicAdvertisedPrefix =
-  ComputePublicAdvertisedPrefixesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      publicAdvertisedPrefix = publicAdvertisedPrefix,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputePublicAdvertisedPrefixesPatch
+  payload
+  project
+  publicAdvertisedPrefix =
     ComputePublicAdvertisedPrefixesPatch
-  where
-  type
-    Rs ComputePublicAdvertisedPrefixesPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        publicAdvertisedPrefix = publicAdvertisedPrefix,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputePublicAdvertisedPrefixesPatch where
+  type Rs ComputePublicAdvertisedPrefixesPatch = Operation
   type
     Scopes ComputePublicAdvertisedPrefixesPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputePublicAdvertisedPrefixesPatch {..} =
-      go
-        project
-        publicAdvertisedPrefix
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputePublicAdvertisedPrefixesPatchResource
-            )
-            Core.mempty
+  requestClient ComputePublicAdvertisedPrefixesPatch {..} =
+    go
+      project
+      publicAdvertisedPrefix
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputePublicAdvertisedPrefixesPatchResource
+          )
+          Core.mempty

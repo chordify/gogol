@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Tables.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Tables.Get
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.tables.get@ method which the
 -- 'BigQueryTablesGet' request conforms to.
@@ -53,7 +51,12 @@ type BigQueryTablesGetResource =
     Core.:> Core.Capture "datasetId" Core.Text
     Core.:> "tables"
     Core.:> Core.Capture "tableId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "selectedFields" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "view" TablesGetView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Table
@@ -62,34 +65,49 @@ type BigQueryTablesGetResource =
 --
 -- /See:/ 'newBigQueryTablesGet' smart constructor.
 data BigQueryTablesGet = BigQueryTablesGet
-  { -- | Dataset ID of the requested table
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Dataset ID of the requested table
     datasetId :: Core.Text,
-    -- | Project ID of the requested table
+    -- | Required. Project ID of the requested table
     projectId :: Core.Text,
-    -- | List of fields to return (comma-separated). If unspecified, all fields are returned
+    -- | List of table schema fields to return (comma-separated). If unspecified, all fields are returned. A fieldMask cannot be used here because the fields will automatically be converted from camelCase to snake_case and the conversion will fail if there are underscores. Since these are fields in BigQuery table schemas, underscores are allowed.
     selectedFields :: (Core.Maybe Core.Text),
-    -- | Table ID of the requested table
+    -- | Required. Table ID of the requested table
     tableId :: Core.Text,
-    -- | Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies the view that determines which table information is returned. By default, basic table information and storage statistics (STORAGE_STATS) are returned.
     view :: (Core.Maybe TablesGetView)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryTablesGet' with the minimum fields required to make a request.
 newBigQueryTablesGet ::
-  -- |  Dataset ID of the requested table See 'datasetId'.
+  -- |  Required. Dataset ID of the requested table See 'datasetId'.
   Core.Text ->
-  -- |  Project ID of the requested table See 'projectId'.
+  -- |  Required. Project ID of the requested table See 'projectId'.
   Core.Text ->
-  -- |  Table ID of the requested table See 'tableId'.
+  -- |  Required. Table ID of the requested table See 'tableId'.
   Core.Text ->
   BigQueryTablesGet
 newBigQueryTablesGet datasetId projectId tableId =
   BigQueryTablesGet
-    { datasetId = datasetId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      datasetId = datasetId,
       projectId = projectId,
       selectedFields = Core.Nothing,
       tableId = tableId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
       view = Core.Nothing
     }
 
@@ -106,7 +124,12 @@ instance Core.GoogleRequest BigQueryTablesGet where
       projectId
       datasetId
       tableId
+      xgafv
+      accessToken
+      callback
       selectedFields
+      uploadType
+      uploadProtocol
       view
       (Core.Just Core.AltJSON)
       bigQueryService

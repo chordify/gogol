@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -414,6 +412,18 @@ module Gogol.Sheets
 
     -- ** BubbleChartSpec_LegendPosition
     BubbleChartSpec_LegendPosition (..),
+
+    -- ** CancelDataSourceRefreshRequest
+    CancelDataSourceRefreshRequest (..),
+    newCancelDataSourceRefreshRequest,
+
+    -- ** CancelDataSourceRefreshResponse
+    CancelDataSourceRefreshResponse (..),
+    newCancelDataSourceRefreshResponse,
+
+    -- ** CancelDataSourceRefreshStatus
+    CancelDataSourceRefreshStatus (..),
+    newCancelDataSourceRefreshStatus,
 
     -- ** CandlestickChartSpec
     CandlestickChartSpec (..),
@@ -936,6 +946,10 @@ module Gogol.Sheets
     Link (..),
     newLink,
 
+    -- ** LookerDataSourceSpec
+    LookerDataSourceSpec (..),
+    newLookerDataSourceSpec,
+
     -- ** ManualRule
     ManualRule (..),
     newManualRule,
@@ -1069,6 +1083,16 @@ module Gogol.Sheets
     -- ** RandomizeRangeRequest
     RandomizeRangeRequest (..),
     newRandomizeRangeRequest,
+
+    -- ** RefreshCancellationStatus
+    RefreshCancellationStatus (..),
+    newRefreshCancellationStatus,
+
+    -- ** RefreshCancellationStatus_ErrorCode
+    RefreshCancellationStatus_ErrorCode (..),
+
+    -- ** RefreshCancellationStatus_State
+    RefreshCancellationStatus_State (..),
 
     -- ** RefreshDataSourceObjectExecutionStatus
     RefreshDataSourceObjectExecutionStatus (..),

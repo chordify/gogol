@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Installs.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
+-- Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed. A successful response indicates that a removal request has been sent to the device. The call will be considered successful even if the app is not present on the device (e.g. it was never installed, or was removed by the user).
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.installs.delete@.
 module Gogol.AndroidEnterprise.Installs.Delete
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Installs.Delete
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.installs.delete@ method which the
 -- 'AndroidEnterpriseInstallsDelete' request conforms to.
@@ -63,7 +61,7 @@ type AndroidEnterpriseInstallsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
--- | Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
+-- | Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed. A successful response indicates that a removal request has been sent to the device. The call will be considered successful even if the app is not present on the device (e.g. it was never installed, or was removed by the user).
 --
 -- /See:/ 'newAndroidEnterpriseInstallsDelete' smart constructor.
 data AndroidEnterpriseInstallsDelete = AndroidEnterpriseInstallsDelete
@@ -99,23 +97,24 @@ newAndroidEnterpriseInstallsDelete ::
   -- |  The ID of the user. See 'userId'.
   Core.Text ->
   AndroidEnterpriseInstallsDelete
-newAndroidEnterpriseInstallsDelete deviceId enterpriseId installId userId =
-  AndroidEnterpriseInstallsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      enterpriseId = enterpriseId,
-      installId = installId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidEnterpriseInstallsDelete
+  deviceId
+  enterpriseId
+  installId
+  userId =
     AndroidEnterpriseInstallsDelete
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        deviceId = deviceId,
+        enterpriseId = enterpriseId,
+        installId = installId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
+
+instance Core.GoogleRequest AndroidEnterpriseInstallsDelete where
   type Rs AndroidEnterpriseInstallsDelete = ()
   type
     Scopes AndroidEnterpriseInstallsDelete =
@@ -136,7 +135,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidEnterpriseInstallsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidEnterpriseInstallsDeleteResource)
           Core.mempty

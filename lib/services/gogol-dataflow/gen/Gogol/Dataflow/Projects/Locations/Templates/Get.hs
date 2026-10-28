@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Templates.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get the template associated with a template.
+-- Get the template associated with a template. To get the template, we recommend using @projects.locations.templates.get@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.get@ is not recommended, because only templates that are running in @us-central1@ are retrieved.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.locations.templates.get@.
 module Gogol.Dataflow.Projects.Locations.Templates.Get
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Templates.Get
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.templates.get@ method which the
 -- 'DataflowProjectsLocationsTemplatesGet' request conforms to.
@@ -57,13 +55,11 @@ type DataflowProjectsLocationsTemplatesGetResource =
     Core.:> Core.QueryParam "gcsPath" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ProjectsLocationsTemplatesGetView
+    Core.:> Core.QueryParam "view" ProjectsLocationsTemplatesGetView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GetTemplateResponse
 
--- | Get the template associated with a template.
+-- | Get the template associated with a template. To get the template, we recommend using @projects.locations.templates.get@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.get@ is not recommended, because only templates that are running in @us-central1@ are retrieved.
 --
 -- /See:/ 'newDataflowProjectsLocationsTemplatesGet' smart constructor.
 data DataflowProjectsLocationsTemplatesGet = DataflowProjectsLocationsTemplatesGet
@@ -108,39 +104,28 @@ newDataflowProjectsLocationsTemplatesGet location projectId =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataflowProjectsLocationsTemplatesGet
-  where
-  type
-    Rs DataflowProjectsLocationsTemplatesGet =
-      GetTemplateResponse
+instance Core.GoogleRequest DataflowProjectsLocationsTemplatesGet where
+  type Rs DataflowProjectsLocationsTemplatesGet = GetTemplateResponse
   type
     Scopes DataflowProjectsLocationsTemplatesGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsTemplatesGet {..} =
-      go
-        projectId
-        location
-        xgafv
-        accessToken
-        callback
-        gcsPath
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsTemplatesGetResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsTemplatesGet {..} =
+    go
+      projectId
+      location
+      xgafv
+      accessToken
+      callback
+      gcsPath
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataflowProjectsLocationsTemplatesGetResource
+          )
+          Core.mempty

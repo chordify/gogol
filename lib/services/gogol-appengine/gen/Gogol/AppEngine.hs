@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -135,6 +133,11 @@ module Gogol.AppEngine
     AppEngineAppsGet (..),
     newAppEngineAppsGet,
 
+    -- ** appengine.apps.listRuntimes
+    AppEngineAppsListRuntimesResource,
+    AppEngineAppsListRuntimes (..),
+    newAppEngineAppsListRuntimes,
+
     -- ** appengine.apps.locations.get
     AppEngineAppsLocationsGetResource,
     AppEngineAppsLocationsGet (..),
@@ -230,15 +233,20 @@ module Gogol.AppEngine
     AppEngineAppsServicesVersionsPatch (..),
     newAppEngineAppsServicesVersionsPatch,
 
-    -- ** appengine.projects.locations.applications.create
-    AppEngineProjectsLocationsApplicationsCreateResource,
-    AppEngineProjectsLocationsApplicationsCreate (..),
-    newAppEngineProjectsLocationsApplicationsCreate,
+    -- ** appengine.projects.locations.applications.authorizedDomains.list
+    AppEngineProjectsLocationsApplicationsAuthorizedDomainsListResource,
+    AppEngineProjectsLocationsApplicationsAuthorizedDomainsList (..),
+    newAppEngineProjectsLocationsApplicationsAuthorizedDomainsList,
 
-    -- ** appengine.projects.locations.applications.get
-    AppEngineProjectsLocationsApplicationsGetResource,
-    AppEngineProjectsLocationsApplicationsGet (..),
-    newAppEngineProjectsLocationsApplicationsGet,
+    -- ** appengine.projects.locations.applications.services.delete
+    AppEngineProjectsLocationsApplicationsServicesDeleteResource,
+    AppEngineProjectsLocationsApplicationsServicesDelete (..),
+    newAppEngineProjectsLocationsApplicationsServicesDelete,
+
+    -- ** appengine.projects.locations.applications.services.versions.delete
+    AppEngineProjectsLocationsApplicationsServicesVersionsDeleteResource,
+    AppEngineProjectsLocationsApplicationsServicesVersionsDelete (..),
+    newAppEngineProjectsLocationsApplicationsServicesVersionsDelete,
 
     -- * Types
 
@@ -269,8 +277,15 @@ module Gogol.AppEngine
     -- ** Application_DatabaseType
     Application_DatabaseType (..),
 
+    -- ** Application_GeneratedCustomerMetadata
+    Application_GeneratedCustomerMetadata (..),
+    newApplication_GeneratedCustomerMetadata,
+
     -- ** Application_ServingStatus
     Application_ServingStatus (..),
+
+    -- ** Application_SslPolicy
+    Application_SslPolicy (..),
 
     -- ** AuthorizedCertificate
     AuthorizedCertificate (..),
@@ -308,6 +323,13 @@ module Gogol.AppEngine
     ContainerInfo (..),
     newContainerInfo,
 
+    -- ** ContainerState
+    ContainerState (..),
+    newContainerState,
+
+    -- ** ContainerState_State
+    ContainerState_State (..),
+
     -- ** CpuUtilization
     CpuUtilization (..),
     newCpuUtilization,
@@ -323,6 +345,10 @@ module Gogol.AppEngine
     -- ** CreateVersionMetadataV1Beta
     CreateVersionMetadataV1Beta (..),
     newCreateVersionMetadataV1Beta,
+
+    -- ** Date
+    Date (..),
+    newDate,
 
     -- ** DebugInstanceRequest
     DebugInstanceRequest (..),
@@ -385,6 +411,10 @@ module Gogol.AppEngine
     FlexibleRuntimeSettings (..),
     newFlexibleRuntimeSettings,
 
+    -- ** GceTag
+    GceTag (..),
+    newGceTag,
+
     -- ** GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -438,6 +468,10 @@ module Gogol.AppEngine
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** ListRuntimesResponse
+    ListRuntimesResponse (..),
+    newListRuntimesResponse,
 
     -- ** ListServicesResponse
     ListServicesResponse (..),
@@ -527,13 +561,6 @@ module Gogol.AppEngine
     -- ** ProjectEvent_Phase
     ProjectEvent_Phase (..),
 
-    -- ** ProjectState
-    ProjectState (..),
-    newProjectState,
-
-    -- ** ProjectState_State
-    ProjectState_State (..),
-
     -- ** ProjectsMetadata
     ProjectsMetadata (..),
     newProjectsMetadata,
@@ -558,6 +585,9 @@ module Gogol.AppEngine
     -- ** Reasons_DataGovernance
     Reasons_DataGovernance (..),
 
+    -- ** Reasons_ServiceActivation
+    Reasons_ServiceActivation (..),
+
     -- ** Reasons_ServiceManagement
     Reasons_ServiceManagement (..),
 
@@ -568,6 +598,10 @@ module Gogol.AppEngine
     -- ** RequestUtilization
     RequestUtilization (..),
     newRequestUtilization,
+
+    -- ** ResourceEvent
+    ResourceEvent (..),
+    newResourceEvent,
 
     -- ** ResourceRecord
     ResourceRecord (..),
@@ -580,6 +614,16 @@ module Gogol.AppEngine
     Resources (..),
     newResources,
 
+    -- ** Runtime
+    Runtime (..),
+    newRuntime,
+
+    -- ** Runtime_Environment
+    Runtime_Environment (..),
+
+    -- ** Runtime_Stage
+    Runtime_Stage (..),
+
     -- ** ScriptHandler
     ScriptHandler (..),
     newScriptHandler,
@@ -587,6 +631,10 @@ module Gogol.AppEngine
     -- ** Service
     Service (..),
     newService,
+
+    -- ** Service_GeneratedCustomerMetadata
+    Service_GeneratedCustomerMetadata (..),
+    newService_GeneratedCustomerMetadata,
 
     -- ** Service_Labels
     Service_Labels (..),
@@ -666,6 +714,10 @@ module Gogol.AppEngine
     Version_EnvVariables (..),
     newVersion_EnvVariables,
 
+    -- ** Version_GeneratedCustomerMetadata
+    Version_GeneratedCustomerMetadata (..),
+    newVersion_GeneratedCustomerMetadata,
+
     -- ** Version_InboundServicesItem
     Version_InboundServicesItem (..),
 
@@ -696,6 +748,12 @@ module Gogol.AppEngine
     -- ** AppsDomainMappingsCreateOverrideStrategy
     AppsDomainMappingsCreateOverrideStrategy (..),
 
+    -- ** AppsGetIncludeExtraData
+    AppsGetIncludeExtraData (..),
+
+    -- ** AppsListRuntimesEnvironment
+    AppsListRuntimesEnvironment (..),
+
     -- ** AppsServicesVersionsGetView
     AppsServicesVersionsGetView (..),
 
@@ -723,6 +781,7 @@ import Gogol.AppEngine.Apps.Firewall.IngressRules.Get
 import Gogol.AppEngine.Apps.Firewall.IngressRules.List
 import Gogol.AppEngine.Apps.Firewall.IngressRules.Patch
 import Gogol.AppEngine.Apps.Get
+import Gogol.AppEngine.Apps.ListRuntimes
 import Gogol.AppEngine.Apps.Locations.Get
 import Gogol.AppEngine.Apps.Locations.List
 import Gogol.AppEngine.Apps.Operations.Get
@@ -742,6 +801,7 @@ import Gogol.AppEngine.Apps.Services.Versions.Instances.Get
 import Gogol.AppEngine.Apps.Services.Versions.Instances.List
 import Gogol.AppEngine.Apps.Services.Versions.List
 import Gogol.AppEngine.Apps.Services.Versions.Patch
-import Gogol.AppEngine.Projects.Locations.Applications.Create
-import Gogol.AppEngine.Projects.Locations.Applications.Get
+import Gogol.AppEngine.Projects.Locations.Applications.AuthorizedDomains.List
+import Gogol.AppEngine.Projects.Locations.Applications.Services.Delete
+import Gogol.AppEngine.Projects.Locations.Applications.Services.Versions.Delete
 import Gogol.AppEngine.Types

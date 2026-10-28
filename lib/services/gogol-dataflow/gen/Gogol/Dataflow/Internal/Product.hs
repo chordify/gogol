@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Dataflow.Internal.Product
@@ -46,6 +44,10 @@ module Gogol.Dataflow.Internal.Product
     AutoscalingSettings (..),
     newAutoscalingSettings,
 
+    -- * Base2Exponent
+    Base2Exponent (..),
+    newBase2Exponent,
+
     -- * BigQueryIODetails
     BigQueryIODetails (..),
     newBigQueryIODetails,
@@ -53,6 +55,22 @@ module Gogol.Dataflow.Internal.Product
     -- * BigTableIODetails
     BigTableIODetails (..),
     newBigTableIODetails,
+
+    -- * BoundedTrie
+    BoundedTrie (..),
+    newBoundedTrie,
+
+    -- * BoundedTrieNode
+    BoundedTrieNode (..),
+    newBoundedTrieNode,
+
+    -- * BoundedTrieNode_Children
+    BoundedTrieNode_Children (..),
+    newBoundedTrieNode_Children,
+
+    -- * BucketOptions
+    BucketOptions (..),
+    newBucketOptions,
 
     -- * CPUTime
     CPUTime (..),
@@ -109,6 +127,22 @@ module Gogol.Dataflow.Internal.Product
     -- * DataDiskAssignment
     DataDiskAssignment (..),
     newDataDiskAssignment,
+
+    -- * DataSamplingConfig
+    DataSamplingConfig (..),
+    newDataSamplingConfig,
+
+    -- * DataSamplingReport
+    DataSamplingReport (..),
+    newDataSamplingReport,
+
+    -- * DataflowGaugeValue
+    DataflowGaugeValue (..),
+    newDataflowGaugeValue,
+
+    -- * DataflowHistogramValue
+    DataflowHistogramValue (..),
+    newDataflowHistogramValue,
 
     -- * DatastoreIODetails
     DatastoreIODetails (..),
@@ -197,6 +231,14 @@ module Gogol.Dataflow.Internal.Product
     -- * FloatingPointMean
     FloatingPointMean (..),
     newFloatingPointMean,
+
+    -- * GPUUsage
+    GPUUsage (..),
+    newGPUUsage,
+
+    -- * GPUUtilization
+    GPUUtilization (..),
+    newGPUUtilization,
 
     -- * GetDebugConfigRequest
     GetDebugConfigRequest (..),
@@ -362,6 +404,10 @@ module Gogol.Dataflow.Internal.Product
     LeaseWorkItemResponse_UnifiedWorkerResponse (..),
     newLeaseWorkItemResponse_UnifiedWorkerResponse,
 
+    -- * Linear
+    Linear (..),
+    newLinear,
+
     -- * ListJobMessagesResponse
     ListJobMessagesResponse (..),
     newListJobMessagesResponse,
@@ -398,6 +444,14 @@ module Gogol.Dataflow.Internal.Product
     MetricUpdate (..),
     newMetricUpdate,
 
+    -- * MetricValue
+    MetricValue (..),
+    newMetricValue,
+
+    -- * MetricValue_MetricLabels
+    MetricValue_MetricLabels (..),
+    newMetricValue_MetricLabels,
+
     -- * MountedDataDisk
     MountedDataDisk (..),
     newMountedDataDisk,
@@ -409,6 +463,10 @@ module Gogol.Dataflow.Internal.Product
     -- * NameAndKind
     NameAndKind (..),
     newNameAndKind,
+
+    -- * OutlierStats
+    OutlierStats (..),
+    newOutlierStats,
 
     -- * Package
     Package (..),
@@ -438,6 +496,10 @@ module Gogol.Dataflow.Internal.Product
     ParameterMetadata_CustomMetadata (..),
     newParameterMetadata_CustomMetadata,
 
+    -- * ParameterMetadataEnumOption
+    ParameterMetadataEnumOption (..),
+    newParameterMetadataEnumOption,
+
     -- * PartialGroupByKeyInstruction
     PartialGroupByKeyInstruction (..),
     newPartialGroupByKeyInstruction,
@@ -449,6 +511,14 @@ module Gogol.Dataflow.Internal.Product
     -- * PartialGroupByKeyInstruction_ValueCombiningFn
     PartialGroupByKeyInstruction_ValueCombiningFn (..),
     newPartialGroupByKeyInstruction_ValueCombiningFn,
+
+    -- * PerStepNamespaceMetrics
+    PerStepNamespaceMetrics (..),
+    newPerStepNamespaceMetrics,
+
+    -- * PerWorkerMetrics
+    PerWorkerMetrics (..),
+    newPerWorkerMetrics,
 
     -- * PipelineDescription
     PipelineDescription (..),
@@ -526,9 +596,17 @@ module Gogol.Dataflow.Internal.Product
     RuntimeMetadata (..),
     newRuntimeMetadata,
 
+    -- * RuntimeUpdatableParams
+    RuntimeUpdatableParams (..),
+    newRuntimeUpdatableParams,
+
     -- * SDKInfo
     SDKInfo (..),
     newSDKInfo,
+
+    -- * SdkBug
+    SdkBug (..),
+    newSdkBug,
 
     -- * SdkHarnessContainerImage
     SdkHarnessContainerImage (..),
@@ -565,6 +643,10 @@ module Gogol.Dataflow.Internal.Product
     -- * SeqMapTaskOutputInfo
     SeqMapTaskOutputInfo (..),
     newSeqMapTaskOutputInfo,
+
+    -- * ServiceResources
+    ServiceResources (..),
+    newServiceResources,
 
     -- * ShellTask
     ShellTask (..),
@@ -750,6 +832,18 @@ module Gogol.Dataflow.Internal.Product
     StreamingConfigTask_UserStepToStateFamilyNameMap (..),
     newStreamingConfigTask_UserStepToStateFamilyNameMap,
 
+    -- * StreamingOperationalLimits
+    StreamingOperationalLimits (..),
+    newStreamingOperationalLimits,
+
+    -- * StreamingScalingReport
+    StreamingScalingReport (..),
+    newStreamingScalingReport,
+
+    -- * StreamingScalingReportResponse
+    StreamingScalingReportResponse (..),
+    newStreamingScalingReportResponse,
+
     -- * StreamingSetupTask
     StreamingSetupTask (..),
     newStreamingSetupTask,
@@ -897,7 +991,7 @@ module Gogol.Dataflow.Internal.Product
 where
 
 import Gogol.Dataflow.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Obsolete in favor of ApproximateReportedProgress and ApproximateSplitRequest.
 --
@@ -937,8 +1031,7 @@ instance Core.ToJSON ApproximateProgress where
   toJSON ApproximateProgress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("percentComplete" Core..=)
-              Core.<$> percentComplete,
+          [ ("percentComplete" Core..=) Core.<$> percentComplete,
             ("position" Core..=) Core.<$> position,
             ("remainingTime" Core..=) Core.<$> remainingTime
           ]
@@ -987,13 +1080,10 @@ instance Core.ToJSON ApproximateReportedProgress where
   toJSON ApproximateReportedProgress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumedParallelism" Core..=)
-              Core.<$> consumedParallelism,
-            ("fractionConsumed" Core..=)
-              Core.<$> fractionConsumed,
+          [ ("consumedParallelism" Core..=) Core.<$> consumedParallelism,
+            ("fractionConsumed" Core..=) Core.<$> fractionConsumed,
             ("position" Core..=) Core.<$> position,
-            ("remainingParallelism" Core..=)
-              Core.<$> remainingParallelism
+            ("remainingParallelism" Core..=) Core.<$> remainingParallelism
           ]
       )
 
@@ -1035,10 +1125,8 @@ instance Core.ToJSON ApproximateSplitRequest where
   toJSON ApproximateSplitRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fractionConsumed" Core..=)
-              Core.<$> fractionConsumed,
-            ("fractionOfRemainder" Core..=)
-              Core.<$> fractionOfRemainder,
+          [ ("fractionConsumed" Core..=) Core.<$> fractionConsumed,
+            ("fractionOfRemainder" Core..=) Core.<$> fractionOfRemainder,
             ("position" Core..=) Core.<$> position
           ]
       )
@@ -1081,14 +1169,10 @@ instance Core.FromJSON AutoscalingEvent where
       "AutoscalingEvent"
       ( \o ->
           AutoscalingEvent
-            Core.<$> ( o Core..:? "currentNumWorkers"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "currentNumWorkers" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "eventType")
-            Core.<*> ( o Core..:? "targetNumWorkers"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "targetNumWorkers" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "time")
             Core.<*> (o Core..:? "workerPool")
       )
@@ -1097,11 +1181,13 @@ instance Core.ToJSON AutoscalingEvent where
   toJSON AutoscalingEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentNumWorkers" Core..=) Core.. Core.AsText
+          [ ("currentNumWorkers" Core..=)
+              Core.. Core.AsText
               Core.<$> currentNumWorkers,
             ("description" Core..=) Core.<$> description,
             ("eventType" Core..=) Core.<$> eventType,
-            ("targetNumWorkers" Core..=) Core.. Core.AsText
+            ("targetNumWorkers" Core..=)
+              Core.. Core.AsText
               Core.<$> targetNumWorkers,
             ("time" Core..=) Core.<$> time,
             ("workerPool" Core..=) Core.<$> workerPool
@@ -1123,7 +1209,10 @@ data AutoscalingSettings = AutoscalingSettings
 newAutoscalingSettings ::
   AutoscalingSettings
 newAutoscalingSettings =
-  AutoscalingSettings {algorithm = Core.Nothing, maxNumWorkers = Core.Nothing}
+  AutoscalingSettings
+    { algorithm = Core.Nothing,
+      maxNumWorkers = Core.Nothing
+    }
 
 instance Core.FromJSON AutoscalingSettings where
   parseJSON =
@@ -1141,6 +1230,45 @@ instance Core.ToJSON AutoscalingSettings where
       ( Core.catMaybes
           [ ("algorithm" Core..=) Core.<$> algorithm,
             ("maxNumWorkers" Core..=) Core.<$> maxNumWorkers
+          ]
+      )
+
+-- | Exponential buckets where the growth factor between buckets is @2**(2**-scale)@. e.g. for @scale=1@ growth factor is @2**(2**(-1))=sqrt(2)@. @n@ buckets will have the following boundaries. - 0th: [0, gf) - i in [1, n-1]: [gf^(i), gf^(i+1))
+--
+-- /See:/ 'newBase2Exponent' smart constructor.
+data Base2Exponent = Base2Exponent
+  { -- | Must be greater than 0.
+    numberOfBuckets :: (Core.Maybe Core.Int32),
+    -- | Must be between -3 and 3. This forces the growth factor of the bucket boundaries to be between @2^(1\/8)@ and @256@.
+    scale :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Base2Exponent' with the minimum fields required to make a request.
+newBase2Exponent ::
+  Base2Exponent
+newBase2Exponent =
+  Base2Exponent
+    { numberOfBuckets = Core.Nothing,
+      scale = Core.Nothing
+    }
+
+instance Core.FromJSON Base2Exponent where
+  parseJSON =
+    Core.withObject
+      "Base2Exponent"
+      ( \o ->
+          Base2Exponent
+            Core.<$> (o Core..:? "numberOfBuckets")
+            Core.<*> (o Core..:? "scale")
+      )
+
+instance Core.ToJSON Base2Exponent where
+  toJSON Base2Exponent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("numberOfBuckets" Core..=) Core.<$> numberOfBuckets,
+            ("scale" Core..=) Core.<$> scale
           ]
       )
 
@@ -1237,6 +1365,150 @@ instance Core.ToJSON BigTableIODetails where
           ]
       )
 
+-- | The message type used for encoding metrics of type bounded trie.
+--
+-- /See:/ 'newBoundedTrie' smart constructor.
+data BoundedTrie = BoundedTrie
+  { -- | The maximum number of elements to store before truncation.
+    bound :: (Core.Maybe Core.Int32),
+    -- | A compact representation of all the elements in this trie.
+    root :: (Core.Maybe BoundedTrieNode),
+    -- | A more efficient representation for metrics consisting of a single value.
+    singleton :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrie' with the minimum fields required to make a request.
+newBoundedTrie ::
+  BoundedTrie
+newBoundedTrie =
+  BoundedTrie
+    { bound = Core.Nothing,
+      root = Core.Nothing,
+      singleton = Core.Nothing
+    }
+
+instance Core.FromJSON BoundedTrie where
+  parseJSON =
+    Core.withObject
+      "BoundedTrie"
+      ( \o ->
+          BoundedTrie
+            Core.<$> (o Core..:? "bound")
+            Core.<*> (o Core..:? "root")
+            Core.<*> (o Core..:? "singleton")
+      )
+
+instance Core.ToJSON BoundedTrie where
+  toJSON BoundedTrie {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bound" Core..=) Core.<$> bound,
+            ("root" Core..=) Core.<$> root,
+            ("singleton" Core..=) Core.<$> singleton
+          ]
+      )
+
+-- | A single node in a BoundedTrie.
+--
+-- /See:/ 'newBoundedTrieNode' smart constructor.
+data BoundedTrieNode = BoundedTrieNode
+  { -- | Children of this node. Must be empty if truncated is true.
+    children :: (Core.Maybe BoundedTrieNode_Children),
+    -- | Whether this node has been truncated. A truncated leaf represents possibly many children with the same prefix.
+    truncated :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrieNode' with the minimum fields required to make a request.
+newBoundedTrieNode ::
+  BoundedTrieNode
+newBoundedTrieNode =
+  BoundedTrieNode
+    { children = Core.Nothing,
+      truncated = Core.Nothing
+    }
+
+instance Core.FromJSON BoundedTrieNode where
+  parseJSON =
+    Core.withObject
+      "BoundedTrieNode"
+      ( \o ->
+          BoundedTrieNode
+            Core.<$> (o Core..:? "children")
+            Core.<*> (o Core..:? "truncated")
+      )
+
+instance Core.ToJSON BoundedTrieNode where
+  toJSON BoundedTrieNode {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("children" Core..=) Core.<$> children,
+            ("truncated" Core..=) Core.<$> truncated
+          ]
+      )
+
+-- | Children of this node. Must be empty if truncated is true.
+--
+-- /See:/ 'newBoundedTrieNode_Children' smart constructor.
+newtype BoundedTrieNode_Children = BoundedTrieNode_Children
+  { additional :: (Core.HashMap Core.Text BoundedTrieNode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BoundedTrieNode_Children' with the minimum fields required to make a request.
+newBoundedTrieNode_Children ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text BoundedTrieNode ->
+  BoundedTrieNode_Children
+newBoundedTrieNode_Children additional =
+  BoundedTrieNode_Children {additional = additional}
+
+instance Core.FromJSON BoundedTrieNode_Children where
+  parseJSON =
+    Core.withObject
+      "BoundedTrieNode_Children"
+      (\o -> BoundedTrieNode_Children Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON BoundedTrieNode_Children where
+  toJSON BoundedTrieNode_Children {..} = Core.toJSON additional
+
+-- | @BucketOptions@ describes the bucket boundaries used in the histogram.
+--
+-- /See:/ 'newBucketOptions' smart constructor.
+data BucketOptions = BucketOptions
+  { -- | Bucket boundaries grow exponentially.
+    exponential :: (Core.Maybe Base2Exponent),
+    -- | Bucket boundaries grow linearly.
+    linear :: (Core.Maybe Linear)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BucketOptions' with the minimum fields required to make a request.
+newBucketOptions ::
+  BucketOptions
+newBucketOptions =
+  BucketOptions {exponential = Core.Nothing, linear = Core.Nothing}
+
+instance Core.FromJSON BucketOptions where
+  parseJSON =
+    Core.withObject
+      "BucketOptions"
+      ( \o ->
+          BucketOptions
+            Core.<$> (o Core..:? "exponential")
+            Core.<*> (o Core..:? "linear")
+      )
+
+instance Core.ToJSON BucketOptions where
+  toJSON BucketOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("exponential" Core..=) Core.<$> exponential,
+            ("linear" Core..=) Core.<$> linear
+          ]
+      )
+
 -- | Modeled after information exposed by \/proc\/stat.
 --
 -- /See:/ 'newCPUTime' smart constructor.
@@ -1268,9 +1540,7 @@ instance Core.FromJSON CPUTime where
           CPUTime
             Core.<$> (o Core..:? "rate")
             Core.<*> (o Core..:? "timestamp")
-            Core.<*> ( o Core..:? "totalMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CPUTime where
@@ -1279,8 +1549,7 @@ instance Core.ToJSON CPUTime where
       ( Core.catMaybes
           [ ("rate" Core..=) Core.<$> rate,
             ("timestamp" Core..=) Core.<$> timestamp,
-            ("totalMs" Core..=) Core.. Core.AsText
-              Core.<$> totalMs
+            ("totalMs" Core..=) Core.. Core.AsText Core.<$> totalMs
           ]
       )
 
@@ -1368,8 +1637,7 @@ instance Core.ToJSON ComponentTransform where
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("originalTransform" Core..=)
-              Core.<$> originalTransform,
+            ("originalTransform" Core..=) Core.<$> originalTransform,
             ("userName" Core..=) Core.<$> userName
           ]
       )
@@ -1429,8 +1697,7 @@ instance Core.ToJSON ComputationTopology where
             ("keyRanges" Core..=) Core.<$> keyRanges,
             ("outputs" Core..=) Core.<$> outputs,
             ("stateFamilies" Core..=) Core.<$> stateFamilies,
-            ("systemStageName" Core..=)
-              Core.<$> systemStageName
+            ("systemStageName" Core..=) Core.<$> systemStageName
           ]
       )
 
@@ -1524,8 +1791,7 @@ instance Core.ToJSON ContainerSpec where
   toJSON ContainerSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultEnvironment" Core..=)
-              Core.<$> defaultEnvironment,
+          [ ("defaultEnvironment" Core..=) Core.<$> defaultEnvironment,
             ("image" Core..=) Core.<$> image,
             ("imageRepositoryCertPath" Core..=)
               Core.<$> imageRepositoryCertPath,
@@ -1653,18 +1919,15 @@ instance Core.ToJSON CounterStructuredName where
   toJSON CounterStructuredName {..} =
     Core.object
       ( Core.catMaybes
-          [ ("componentStepName" Core..=)
-              Core.<$> componentStepName,
-            ("executionStepName" Core..=)
-              Core.<$> executionStepName,
+          [ ("componentStepName" Core..=) Core.<$> componentStepName,
+            ("executionStepName" Core..=) Core.<$> executionStepName,
             ("inputIndex" Core..=) Core.<$> inputIndex,
             ("name" Core..=) Core.<$> name,
             ("origin" Core..=) Core.<$> origin,
             ("originNamespace" Core..=) Core.<$> originNamespace,
             ("originalRequestingStepName" Core..=)
               Core.<$> originalRequestingStepName,
-            ("originalStepName" Core..=)
-              Core.<$> originalStepName,
+            ("originalStepName" Core..=) Core.<$> originalStepName,
             ("portion" Core..=) Core.<$> portion,
             ("workerId" Core..=) Core.<$> workerId
           ]
@@ -1690,16 +1953,14 @@ newCounterStructuredNameAndMetadata =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CounterStructuredNameAndMetadata
-  where
+instance Core.FromJSON CounterStructuredNameAndMetadata where
   parseJSON =
     Core.withObject
       "CounterStructuredNameAndMetadata"
       ( \o ->
           CounterStructuredNameAndMetadata
-            Core.<$> (o Core..:? "metadata") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "metadata")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON CounterStructuredNameAndMetadata where
@@ -1711,12 +1972,14 @@ instance Core.ToJSON CounterStructuredNameAndMetadata where
           ]
       )
 
--- | An update to a Counter sent from a worker.
+-- | An update to a Counter sent from a worker. Next ID: 17
 --
 -- /See:/ 'newCounterUpdate' smart constructor.
 data CounterUpdate = CounterUpdate
   { -- | Boolean value for And, Or.
     boolean :: (Core.Maybe Core.Bool),
+    -- | Bounded trie data
+    boundedTrie :: (Core.Maybe BoundedTrie),
     -- | True if this counter is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this counter is reported as a delta.
     cumulative :: (Core.Maybe Core.Bool),
     -- | Distribution data
@@ -1754,6 +2017,7 @@ newCounterUpdate ::
 newCounterUpdate =
   CounterUpdate
     { boolean = Core.Nothing,
+      boundedTrie = Core.Nothing,
       cumulative = Core.Nothing,
       distribution = Core.Nothing,
       floatingPoint = Core.Nothing,
@@ -1777,6 +2041,7 @@ instance Core.FromJSON CounterUpdate where
       ( \o ->
           CounterUpdate
             Core.<$> (o Core..:? "boolean")
+            Core.<*> (o Core..:? "boundedTrie")
             Core.<*> (o Core..:? "cumulative")
             Core.<*> (o Core..:? "distribution")
             Core.<*> (o Core..:? "floatingPoint")
@@ -1788,9 +2053,7 @@ instance Core.FromJSON CounterUpdate where
             Core.<*> (o Core..:? "integerMean")
             Core.<*> (o Core..:? "internal")
             Core.<*> (o Core..:? "nameAndKind")
-            Core.<*> ( o Core..:? "shortId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "shortId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "stringList")
             Core.<*> (o Core..:? "structuredNameAndMetadata")
       )
@@ -1800,21 +2063,19 @@ instance Core.ToJSON CounterUpdate where
     Core.object
       ( Core.catMaybes
           [ ("boolean" Core..=) Core.<$> boolean,
+            ("boundedTrie" Core..=) Core.<$> boundedTrie,
             ("cumulative" Core..=) Core.<$> cumulative,
             ("distribution" Core..=) Core.<$> distribution,
             ("floatingPoint" Core..=) Core.<$> floatingPoint,
-            ("floatingPointList" Core..=)
-              Core.<$> floatingPointList,
-            ("floatingPointMean" Core..=)
-              Core.<$> floatingPointMean,
+            ("floatingPointList" Core..=) Core.<$> floatingPointList,
+            ("floatingPointMean" Core..=) Core.<$> floatingPointMean,
             ("integer" Core..=) Core.<$> integer,
             ("integerGauge" Core..=) Core.<$> integerGauge,
             ("integerList" Core..=) Core.<$> integerList,
             ("integerMean" Core..=) Core.<$> integerMean,
             ("internal" Core..=) Core.<$> internal,
             ("nameAndKind" Core..=) Core.<$> nameAndKind,
-            ("shortId" Core..=) Core.. Core.AsText
-              Core.<$> shortId,
+            ("shortId" Core..=) Core.. Core.AsText Core.<$> shortId,
             ("stringList" Core..=) Core.<$> stringList,
             ("structuredNameAndMetadata" Core..=)
               Core.<$> structuredNameAndMetadata
@@ -1879,8 +2140,7 @@ instance Core.ToJSON CreateJobFromTemplateRequest where
 --
 -- /See:/ 'newCreateJobFromTemplateRequest_Parameters' smart constructor.
 newtype CreateJobFromTemplateRequest_Parameters = CreateJobFromTemplateRequest_Parameters
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1892,10 +2152,7 @@ newCreateJobFromTemplateRequest_Parameters ::
 newCreateJobFromTemplateRequest_Parameters additional =
   CreateJobFromTemplateRequest_Parameters {additional = additional}
 
-instance
-  Core.FromJSON
-    CreateJobFromTemplateRequest_Parameters
-  where
+instance Core.FromJSON CreateJobFromTemplateRequest_Parameters where
   parseJSON =
     Core.withObject
       "CreateJobFromTemplateRequest_Parameters"
@@ -1904,10 +2161,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    CreateJobFromTemplateRequest_Parameters
-  where
+instance Core.ToJSON CreateJobFromTemplateRequest_Parameters where
   toJSON CreateJobFromTemplateRequest_Parameters {..} =
     Core.toJSON additional
 
@@ -1923,23 +2177,19 @@ newtype CustomSourceLocation = CustomSourceLocation
 -- | Creates a value of 'CustomSourceLocation' with the minimum fields required to make a request.
 newCustomSourceLocation ::
   CustomSourceLocation
-newCustomSourceLocation = CustomSourceLocation {stateful = Core.Nothing}
+newCustomSourceLocation =
+  CustomSourceLocation {stateful = Core.Nothing}
 
 instance Core.FromJSON CustomSourceLocation where
   parseJSON =
     Core.withObject
       "CustomSourceLocation"
-      ( \o ->
-          CustomSourceLocation
-            Core.<$> (o Core..:? "stateful")
-      )
+      (\o -> CustomSourceLocation Core.<$> (o Core..:? "stateful"))
 
 instance Core.ToJSON CustomSourceLocation where
   toJSON CustomSourceLocation {..} =
     Core.object
-      ( Core.catMaybes
-          [("stateful" Core..=) Core.<$> stateful]
-      )
+      (Core.catMaybes [("stateful" Core..=) Core.<$> stateful])
 
 -- | Data disk assignment for a given VM instance.
 --
@@ -1956,7 +2206,10 @@ data DataDiskAssignment = DataDiskAssignment
 newDataDiskAssignment ::
   DataDiskAssignment
 newDataDiskAssignment =
-  DataDiskAssignment {dataDisks = Core.Nothing, vmInstance = Core.Nothing}
+  DataDiskAssignment
+    { dataDisks = Core.Nothing,
+      vmInstance = Core.Nothing
+    }
 
 instance Core.FromJSON DataDiskAssignment where
   parseJSON =
@@ -1977,6 +2230,221 @@ instance Core.ToJSON DataDiskAssignment where
           ]
       )
 
+-- | Configuration options for sampling elements.
+--
+-- /See:/ 'newDataSamplingConfig' smart constructor.
+newtype DataSamplingConfig = DataSamplingConfig
+  { -- | List of given sampling behaviors to enable. For example, specifying behaviors = [ALWAYS/ON] samples in-flight elements but does not sample exceptions. Can be used to specify multiple behaviors like, behaviors = [ALWAYS/ON, EXCEPTIONS] for specifying periodic sampling and exception sampling. If DISABLED is in the list, then sampling will be disabled and ignore the other given behaviors. Ordering does not matter.
+    behaviors :: (Core.Maybe [DataSamplingConfig_BehaviorsItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataSamplingConfig' with the minimum fields required to make a request.
+newDataSamplingConfig ::
+  DataSamplingConfig
+newDataSamplingConfig =
+  DataSamplingConfig {behaviors = Core.Nothing}
+
+instance Core.FromJSON DataSamplingConfig where
+  parseJSON =
+    Core.withObject
+      "DataSamplingConfig"
+      (\o -> DataSamplingConfig Core.<$> (o Core..:? "behaviors"))
+
+instance Core.ToJSON DataSamplingConfig where
+  toJSON DataSamplingConfig {..} =
+    Core.object
+      (Core.catMaybes [("behaviors" Core..=) Core.<$> behaviors])
+
+-- | Contains per-worker telemetry about the data sampling feature.
+--
+-- /See:/ 'newDataSamplingReport' smart constructor.
+data DataSamplingReport = DataSamplingReport
+  { -- | Optional. Delta of bytes written to file from previous report.
+    bytesWrittenDelta :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of bytes sampled from previous report.
+    elementsSampledBytes :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of number of elements sampled from previous report.
+    elementsSampledCount :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of number of samples taken from user code exceptions from previous report.
+    exceptionsSampledCount :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of number of PCollections sampled from previous report.
+    pcollectionsSampledCount :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of errors counts from persisting the samples from previous report.
+    persistenceErrorsCount :: (Core.Maybe Core.Int64),
+    -- | Optional. Delta of errors counts from retrieving, or translating the samples from previous report.
+    translationErrorsCount :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataSamplingReport' with the minimum fields required to make a request.
+newDataSamplingReport ::
+  DataSamplingReport
+newDataSamplingReport =
+  DataSamplingReport
+    { bytesWrittenDelta = Core.Nothing,
+      elementsSampledBytes = Core.Nothing,
+      elementsSampledCount = Core.Nothing,
+      exceptionsSampledCount = Core.Nothing,
+      pcollectionsSampledCount = Core.Nothing,
+      persistenceErrorsCount = Core.Nothing,
+      translationErrorsCount = Core.Nothing
+    }
+
+instance Core.FromJSON DataSamplingReport where
+  parseJSON =
+    Core.withObject
+      "DataSamplingReport"
+      ( \o ->
+          DataSamplingReport
+            Core.<$> (o Core..:? "bytesWrittenDelta" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "elementsSampledBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "elementsSampledCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "exceptionsSampledCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "pcollectionsSampledCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "persistenceErrorsCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "translationErrorsCount"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON DataSamplingReport where
+  toJSON DataSamplingReport {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bytesWrittenDelta" Core..=)
+              Core.. Core.AsText
+              Core.<$> bytesWrittenDelta,
+            ("elementsSampledBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> elementsSampledBytes,
+            ("elementsSampledCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> elementsSampledCount,
+            ("exceptionsSampledCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> exceptionsSampledCount,
+            ("pcollectionsSampledCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> pcollectionsSampledCount,
+            ("persistenceErrorsCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> persistenceErrorsCount,
+            ("translationErrorsCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> translationErrorsCount
+          ]
+      )
+
+-- | The gauge value of a metric.
+--
+-- /See:/ 'newDataflowGaugeValue' smart constructor.
+data DataflowGaugeValue = DataflowGaugeValue
+  { -- | The timestamp when the gauge was recorded.
+    measuredTime :: (Core.Maybe Core.DateTime),
+    -- | The value of the gauge.
+    value :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataflowGaugeValue' with the minimum fields required to make a request.
+newDataflowGaugeValue ::
+  DataflowGaugeValue
+newDataflowGaugeValue =
+  DataflowGaugeValue
+    { measuredTime = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON DataflowGaugeValue where
+  parseJSON =
+    Core.withObject
+      "DataflowGaugeValue"
+      ( \o ->
+          DataflowGaugeValue
+            Core.<$> (o Core..:? "measuredTime")
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON DataflowGaugeValue where
+  toJSON DataflowGaugeValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("measuredTime" Core..=) Core.<$> measuredTime,
+            ("value" Core..=) Core.. Core.AsText Core.<$> value
+          ]
+      )
+
+-- | Summary statistics for a population of values. HistogramValue contains a sequence of buckets and gives a count of values that fall into each bucket. Bucket boundares are defined by a formula and bucket widths are either fixed or exponentially increasing.
+--
+-- /See:/ 'newDataflowHistogramValue' smart constructor.
+data DataflowHistogramValue = DataflowHistogramValue
+  { -- | Optional. The number of values in each bucket of the histogram, as described in @bucket_options@. @bucket_counts@ should contain N values, where N is the number of buckets specified in @bucket_options@. If @bucket_counts@ has fewer than N values, the remaining values are assumed to be 0.
+    bucketCounts :: (Core.Maybe [Core.Int64]),
+    -- | Describes the bucket boundaries used in the histogram.
+    bucketOptions :: (Core.Maybe BucketOptions),
+    -- | Number of values recorded in this histogram.
+    count :: (Core.Maybe Core.Int64),
+    -- | Statistics on the values recorded in the histogram that fall out of the bucket boundaries.
+    outlierStats :: (Core.Maybe OutlierStats)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataflowHistogramValue' with the minimum fields required to make a request.
+newDataflowHistogramValue ::
+  DataflowHistogramValue
+newDataflowHistogramValue =
+  DataflowHistogramValue
+    { bucketCounts = Core.Nothing,
+      bucketOptions = Core.Nothing,
+      count = Core.Nothing,
+      outlierStats = Core.Nothing
+    }
+
+instance Core.FromJSON DataflowHistogramValue where
+  parseJSON =
+    Core.withObject
+      "DataflowHistogramValue"
+      ( \o ->
+          DataflowHistogramValue
+            Core.<$> ( o
+                         Core..:? "bucketCounts"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> (o Core..:? "bucketOptions")
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outlierStats")
+      )
+
+instance Core.ToJSON DataflowHistogramValue where
+  toJSON DataflowHistogramValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bucketCounts" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> bucketCounts,
+            ("bucketOptions" Core..=) Core.<$> bucketOptions,
+            ("count" Core..=) Core.. Core.AsText Core.<$> count,
+            ("outlierStats" Core..=) Core.<$> outlierStats
+          ]
+      )
+
 -- | Metadata for a Datastore connector used by the job.
 --
 -- /See:/ 'newDatastoreIODetails' smart constructor.
@@ -1992,7 +2460,10 @@ data DatastoreIODetails = DatastoreIODetails
 newDatastoreIODetails ::
   DatastoreIODetails
 newDatastoreIODetails =
-  DatastoreIODetails {namespace = Core.Nothing, projectId = Core.Nothing}
+  DatastoreIODetails
+    { namespace = Core.Nothing,
+      projectId = Core.Nothing
+    }
 
 instance Core.FromJSON DatastoreIODetails where
   parseJSON =
@@ -2016,8 +2487,10 @@ instance Core.ToJSON DatastoreIODetails where
 -- | Describes any options that have an effect on the debugging of pipelines.
 --
 -- /See:/ 'newDebugOptions' smart constructor.
-newtype DebugOptions = DebugOptions
-  { -- | When true, enables the logging of the literal hot key to the user\'s Cloud Logging.
+data DebugOptions = DebugOptions
+  { -- | Configuration options for sampling elements from a running pipeline.
+    dataSampling :: (Core.Maybe DataSamplingConfig),
+    -- | Optional. When true, enables the logging of the literal hot key to the user\'s Cloud Logging.
     enableHotKeyLogging :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2025,7 +2498,11 @@ newtype DebugOptions = DebugOptions
 -- | Creates a value of 'DebugOptions' with the minimum fields required to make a request.
 newDebugOptions ::
   DebugOptions
-newDebugOptions = DebugOptions {enableHotKeyLogging = Core.Nothing}
+newDebugOptions =
+  DebugOptions
+    { dataSampling = Core.Nothing,
+      enableHotKeyLogging = Core.Nothing
+    }
 
 instance Core.FromJSON DebugOptions where
   parseJSON =
@@ -2033,15 +2510,16 @@ instance Core.FromJSON DebugOptions where
       "DebugOptions"
       ( \o ->
           DebugOptions
-            Core.<$> (o Core..:? "enableHotKeyLogging")
+            Core.<$> (o Core..:? "dataSampling")
+            Core.<*> (o Core..:? "enableHotKeyLogging")
       )
 
 instance Core.ToJSON DebugOptions where
   toJSON DebugOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableHotKeyLogging" Core..=)
-              Core.<$> enableHotKeyLogging
+          [ ("dataSampling" Core..=) Core.<$> dataSampling,
+            ("enableHotKeyLogging" Core..=) Core.<$> enableHotKeyLogging
           ]
       )
 
@@ -2080,7 +2558,10 @@ data DerivedSource = DerivedSource
 newDerivedSource ::
   DerivedSource
 newDerivedSource =
-  DerivedSource {derivationMode = Core.Nothing, source = Core.Nothing}
+  DerivedSource
+    { derivationMode = Core.Nothing,
+      source = Core.Nothing
+    }
 
 instance Core.FromJSON DerivedSource where
   parseJSON =
@@ -2204,9 +2685,7 @@ instance Core.FromJSON DisplayData where
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "durationValue")
             Core.<*> (o Core..:? "floatValue")
-            Core.<*> ( o Core..:? "int64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "int64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "javaClassValue")
             Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "label")
@@ -2224,8 +2703,7 @@ instance Core.ToJSON DisplayData where
           [ ("boolValue" Core..=) Core.<$> boolValue,
             ("durationValue" Core..=) Core.<$> durationValue,
             ("floatValue" Core..=) Core.<$> floatValue,
-            ("int64Value" Core..=) Core.. Core.AsText
-              Core.<$> int64Value,
+            ("int64Value" Core..=) Core.. Core.AsText Core.<$> int64Value,
             ("javaClassValue" Core..=) Core.<$> javaClassValue,
             ("key" Core..=) Core.<$> key,
             ("label" Core..=) Core.<$> label,
@@ -2311,7 +2789,10 @@ data DynamicSourceSplit = DynamicSourceSplit
 newDynamicSourceSplit ::
   DynamicSourceSplit
 newDynamicSourceSplit =
-  DynamicSourceSplit {primary = Core.Nothing, residual = Core.Nothing}
+  DynamicSourceSplit
+    { primary = Core.Nothing,
+      residual = Core.Nothing
+    }
 
 instance Core.FromJSON DynamicSourceSplit where
   parseJSON =
@@ -2338,37 +2819,41 @@ instance Core.ToJSON DynamicSourceSplit where
 data Environment = Environment
   { -- | The type of cluster manager API to use. If unknown or unspecified, the service will attempt to choose a reasonable default. This should be in the form of the API service name, e.g. \"compute.googleapis.com\".
     clusterManagerApiService :: (Core.Maybe Core.Text),
-    -- | The dataset for the current project where various workflow related tables are stored. The supported resource type is: Google BigQuery: bigquery.googleapis.com\/{dataset}
+    -- | Optional. The dataset for the current project where various workflow related tables are stored. The supported resource type is: Google BigQuery: bigquery.googleapis.com\/{dataset}
     dataset :: (Core.Maybe Core.Text),
-    -- | Any debugging options to be supplied to the job.
+    -- | Optional. Any debugging options to be supplied to the job.
     debugOptions :: (Core.Maybe DebugOptions),
     -- | The list of experiments to enable. This field should be used for SDK related experiments and not for service related experiments. The proper field for service related experiments is service_options.
     experiments :: (Core.Maybe [Core.Text]),
-    -- | Which Flexible Resource Scheduling mode to run in.
+    -- | Optional. Which Flexible Resource Scheduling mode to run in.
     flexResourceSchedulingGoal :: (Core.Maybe Environment_FlexResourceSchedulingGoal),
     -- | Experimental settings.
     internalExperiments :: (Core.Maybe Environment_InternalExperiments),
     -- | The Cloud Dataflow SDK pipeline options specified by the user. These options are passed through the service and are used to recreate the SDK pipeline options on the worker in a language agnostic and platform independent way.
     sdkPipelineOptions :: (Core.Maybe Environment_SdkPipelineOptions),
-    -- | Identity to run virtual machines as. Defaults to the default account.
+    -- | Optional. Identity to run virtual machines as. Defaults to the default account.
     serviceAccountEmail :: (Core.Maybe Core.Text),
-    -- | If set, contains the Cloud KMS key identifier used to encrypt data at rest, AKA a Customer Managed Encryption Key (CMEK). Format: projects\/PROJECT/ID\/locations\/LOCATION\/keyRings\/KEY/RING\/cryptoKeys\/KEY
+    -- | Optional. If set, contains the Cloud KMS key identifier used to encrypt data at rest, AKA a Customer Managed Encryption Key (CMEK). Format: projects\/PROJECT/ID\/locations\/LOCATION\/keyRings\/KEY/RING\/cryptoKeys\/KEY
     serviceKmsKeyName :: (Core.Maybe Core.Text),
-    -- | The list of service options to enable. This field should be used for service related experiments only. These experiments, when graduating to GA, should be replaced by dedicated fields or become default (i.e. always on).
+    -- | Optional. The list of service options to enable. This field should be used for service related experiments only. These experiments, when graduating to GA, should be replaced by dedicated fields or become default (i.e. always on).
     serviceOptions :: (Core.Maybe [Core.Text]),
     -- | Output only. The shuffle mode used for the job.
     shuffleMode :: (Core.Maybe Environment_ShuffleMode),
+    -- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+    streamingMode :: (Core.Maybe Environment_StreamingMode),
     -- | The prefix of the resources the system should use for temporary storage. The system will append the suffix \"\/temp-{JOBNAME} to this resource prefix, where {JOBNAME} is the value of the job/name field. The resulting bucket and object prefix is used as the prefix of the resources used to store temporary data needed during the job execution. NOTE: This will override the value in taskrunner/settings. The supported resource type is: Google Cloud Storage: storage.googleapis.com\/{bucket}\/{object} bucket.storage.googleapis.com\/{object}
     tempStoragePrefix :: (Core.Maybe Core.Text),
+    -- | Output only. Whether the job uses the Streaming Engine resource-based billing model.
+    useStreamingEngineResourceBasedBilling :: (Core.Maybe Core.Bool),
     -- | A description of the process that generated the request.
     userAgent :: (Core.Maybe Environment_UserAgent),
     -- | A structure describing which components and their versions of the service are required in order to run the job.
     version :: (Core.Maybe Environment_Version),
     -- | The worker pools. At least one \"harness\" worker pool must be specified in order for the job to have workers.
     workerPools :: (Core.Maybe [WorkerPool]),
-    -- | The Compute Engine region (https:\/\/cloud.google.com\/compute\/docs\/regions-zones\/regions-zones) in which worker processing should occur, e.g. \"us-west1\". Mutually exclusive with worker/zone. If neither worker/region nor worker_zone is specified, default to the control plane\'s region.
+    -- | Optional. The Compute Engine region (https:\/\/cloud.google.com\/compute\/docs\/regions-zones\/regions-zones) in which worker processing should occur, e.g. \"us-west1\". Mutually exclusive with worker/zone. If neither worker/region nor worker_zone is specified, default to the control plane\'s region.
     workerRegion :: (Core.Maybe Core.Text),
-    -- | The Compute Engine zone (https:\/\/cloud.google.com\/compute\/docs\/regions-zones\/regions-zones) in which worker processing should occur, e.g. \"us-west1-a\". Mutually exclusive with worker/region. If neither worker/region nor worker_zone is specified, a zone in the control plane\'s region is chosen based on available capacity.
+    -- | Optional. The Compute Engine zone (https:\/\/cloud.google.com\/compute\/docs\/regions-zones\/regions-zones) in which worker processing should occur, e.g. \"us-west1-a\". Mutually exclusive with worker/region. If neither worker/region nor worker_zone is specified, a zone in the control plane\'s region is chosen based on available capacity.
     workerZone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2389,7 +2874,9 @@ newEnvironment =
       serviceKmsKeyName = Core.Nothing,
       serviceOptions = Core.Nothing,
       shuffleMode = Core.Nothing,
+      streamingMode = Core.Nothing,
       tempStoragePrefix = Core.Nothing,
+      useStreamingEngineResourceBasedBilling = Core.Nothing,
       userAgent = Core.Nothing,
       version = Core.Nothing,
       workerPools = Core.Nothing,
@@ -2414,7 +2901,9 @@ instance Core.FromJSON Environment where
             Core.<*> (o Core..:? "serviceKmsKeyName")
             Core.<*> (o Core..:? "serviceOptions")
             Core.<*> (o Core..:? "shuffleMode")
+            Core.<*> (o Core..:? "streamingMode")
             Core.<*> (o Core..:? "tempStoragePrefix")
+            Core.<*> (o Core..:? "useStreamingEngineResourceBasedBilling")
             Core.<*> (o Core..:? "userAgent")
             Core.<*> (o Core..:? "version")
             Core.<*> (o Core..:? "workerPools")
@@ -2433,18 +2922,16 @@ instance Core.ToJSON Environment where
             ("experiments" Core..=) Core.<$> experiments,
             ("flexResourceSchedulingGoal" Core..=)
               Core.<$> flexResourceSchedulingGoal,
-            ("internalExperiments" Core..=)
-              Core.<$> internalExperiments,
-            ("sdkPipelineOptions" Core..=)
-              Core.<$> sdkPipelineOptions,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
-            ("serviceKmsKeyName" Core..=)
-              Core.<$> serviceKmsKeyName,
+            ("internalExperiments" Core..=) Core.<$> internalExperiments,
+            ("sdkPipelineOptions" Core..=) Core.<$> sdkPipelineOptions,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
+            ("serviceKmsKeyName" Core..=) Core.<$> serviceKmsKeyName,
             ("serviceOptions" Core..=) Core.<$> serviceOptions,
             ("shuffleMode" Core..=) Core.<$> shuffleMode,
-            ("tempStoragePrefix" Core..=)
-              Core.<$> tempStoragePrefix,
+            ("streamingMode" Core..=) Core.<$> streamingMode,
+            ("tempStoragePrefix" Core..=) Core.<$> tempStoragePrefix,
+            ("useStreamingEngineResourceBasedBilling" Core..=)
+              Core.<$> useStreamingEngineResourceBasedBilling,
             ("userAgent" Core..=) Core.<$> userAgent,
             ("version" Core..=) Core.<$> version,
             ("workerPools" Core..=) Core.<$> workerPools,
@@ -2470,21 +2957,16 @@ newEnvironment_InternalExperiments ::
 newEnvironment_InternalExperiments additional =
   Environment_InternalExperiments {additional = additional}
 
-instance
-  Core.FromJSON
-    Environment_InternalExperiments
-  where
+instance Core.FromJSON Environment_InternalExperiments where
   parseJSON =
     Core.withObject
       "Environment_InternalExperiments"
       ( \o ->
-          Environment_InternalExperiments
-            Core.<$> (Core.parseJSONObject o)
+          Environment_InternalExperiments Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Environment_InternalExperiments where
-  toJSON Environment_InternalExperiments {..} =
-    Core.toJSON additional
+  toJSON Environment_InternalExperiments {..} = Core.toJSON additional
 
 -- | The Cloud Dataflow SDK pipeline options specified by the user. These options are passed through the service and are used to recreate the SDK pipeline options on the worker in a language agnostic and platform independent way.
 --
@@ -2508,13 +2990,11 @@ instance Core.FromJSON Environment_SdkPipelineOptions where
     Core.withObject
       "Environment_SdkPipelineOptions"
       ( \o ->
-          Environment_SdkPipelineOptions
-            Core.<$> (Core.parseJSONObject o)
+          Environment_SdkPipelineOptions Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Environment_SdkPipelineOptions where
-  toJSON Environment_SdkPipelineOptions {..} =
-    Core.toJSON additional
+  toJSON Environment_SdkPipelineOptions {..} = Core.toJSON additional
 
 -- | A description of the process that generated the request.
 --
@@ -2537,14 +3017,10 @@ instance Core.FromJSON Environment_UserAgent where
   parseJSON =
     Core.withObject
       "Environment_UserAgent"
-      ( \o ->
-          Environment_UserAgent
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Environment_UserAgent Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Environment_UserAgent where
-  toJSON Environment_UserAgent {..} =
-    Core.toJSON additional
+  toJSON Environment_UserAgent {..} = Core.toJSON additional
 
 -- | A structure describing which components and their versions of the service are required in order to run the job.
 --
@@ -2567,14 +3043,10 @@ instance Core.FromJSON Environment_Version where
   parseJSON =
     Core.withObject
       "Environment_Version"
-      ( \o ->
-          Environment_Version
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Environment_Version Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Environment_Version where
-  toJSON Environment_Version {..} =
-    Core.toJSON additional
+  toJSON Environment_Version {..} = Core.toJSON additional
 
 -- | A message describing the state of a particular execution stage.
 --
@@ -2614,12 +3086,9 @@ instance Core.ToJSON ExecutionStageState where
   toJSON ExecutionStageState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentStateTime" Core..=)
-              Core.<$> currentStateTime,
-            ("executionStageName" Core..=)
-              Core.<$> executionStageName,
-            ("executionStageState" Core..=)
-              Core.<$> executionStageState
+          [ ("currentStateTime" Core..=) Core.<$> currentStateTime,
+            ("executionStageName" Core..=) Core.<$> executionStageName,
+            ("executionStageState" Core..=) Core.<$> executionStageState
           ]
       )
 
@@ -2681,17 +3150,14 @@ instance Core.ToJSON ExecutionStageSummary where
   toJSON ExecutionStageSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("componentSource" Core..=)
-              Core.<$> componentSource,
-            ("componentTransform" Core..=)
-              Core.<$> componentTransform,
+          [ ("componentSource" Core..=) Core.<$> componentSource,
+            ("componentTransform" Core..=) Core.<$> componentTransform,
             ("id" Core..=) Core.<$> id,
             ("inputSource" Core..=) Core.<$> inputSource,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("outputSource" Core..=) Core.<$> outputSource,
-            ("prerequisiteStage" Core..=)
-              Core.<$> prerequisiteStage
+            ("prerequisiteStage" Core..=) Core.<$> prerequisiteStage
           ]
       )
 
@@ -2717,8 +3183,7 @@ instance Core.FromJSON FailedLocation where
 
 instance Core.ToJSON FailedLocation where
   toJSON FailedLocation {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Metadata for a File connector used by the job.
 --
@@ -2738,16 +3203,12 @@ instance Core.FromJSON FileIODetails where
   parseJSON =
     Core.withObject
       "FileIODetails"
-      ( \o ->
-          FileIODetails Core.<$> (o Core..:? "filePattern")
-      )
+      (\o -> FileIODetails Core.<$> (o Core..:? "filePattern"))
 
 instance Core.ToJSON FileIODetails where
   toJSON FileIODetails {..} =
     Core.object
-      ( Core.catMaybes
-          [("filePattern" Core..=) Core.<$> filePattern]
-      )
+      (Core.catMaybes [("filePattern" Core..=) Core.<$> filePattern])
 
 -- | An instruction that copies its inputs (zero or more) to its (single) output.
 --
@@ -2767,14 +3228,11 @@ instance Core.FromJSON FlattenInstruction where
   parseJSON =
     Core.withObject
       "FlattenInstruction"
-      ( \o ->
-          FlattenInstruction Core.<$> (o Core..:? "inputs")
-      )
+      (\o -> FlattenInstruction Core.<$> (o Core..:? "inputs"))
 
 instance Core.ToJSON FlattenInstruction where
   toJSON FlattenInstruction {..} =
-    Core.object
-      (Core.catMaybes [("inputs" Core..=) Core.<$> inputs])
+    Core.object (Core.catMaybes [("inputs" Core..=) Core.<$> inputs])
 
 -- | The environment values to be set at runtime for flex template.
 --
@@ -2818,6 +3276,8 @@ data FlexTemplateRuntimeEnvironment = FlexTemplateRuntimeEnvironment
     serviceAccountEmail :: (Core.Maybe Core.Text),
     -- | The Cloud Storage path for staging local files. Must be a valid Cloud Storage URL, beginning with @gs:\/\/@.
     stagingLocation :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+    streamingMode :: (Core.Maybe FlexTemplateRuntimeEnvironment_StreamingMode),
     -- | Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form \"https:\/\/www.googleapis.com\/compute\/v1\/projects\/HOST/PROJECT/ID\/regions\/REGION\/subnetworks\/SUBNETWORK\" or \"regions\/REGION\/subnetworks\/SUBNETWORK\". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
     subnetwork :: (Core.Maybe Core.Text),
     -- | The Cloud Storage path to use for temporary files. Must be a valid Cloud Storage URL, beginning with @gs:\/\/@.
@@ -2836,7 +3296,8 @@ newFlexTemplateRuntimeEnvironment ::
   FlexTemplateRuntimeEnvironment
 newFlexTemplateRuntimeEnvironment =
   FlexTemplateRuntimeEnvironment
-    { additionalExperiments = Core.Nothing,
+    { additionalExperiments =
+        Core.Nothing,
       additionalUserLabels = Core.Nothing,
       autoscalingAlgorithm = Core.Nothing,
       diskSizeGb = Core.Nothing,
@@ -2855,6 +3316,7 @@ newFlexTemplateRuntimeEnvironment =
       sdkContainerImage = Core.Nothing,
       serviceAccountEmail = Core.Nothing,
       stagingLocation = Core.Nothing,
+      streamingMode = Core.Nothing,
       subnetwork = Core.Nothing,
       tempLocation = Core.Nothing,
       workerRegion = Core.Nothing,
@@ -2887,6 +3349,7 @@ instance Core.FromJSON FlexTemplateRuntimeEnvironment where
             Core.<*> (o Core..:? "sdkContainerImage")
             Core.<*> (o Core..:? "serviceAccountEmail")
             Core.<*> (o Core..:? "stagingLocation")
+            Core.<*> (o Core..:? "streamingMode")
             Core.<*> (o Core..:? "subnetwork")
             Core.<*> (o Core..:? "tempLocation")
             Core.<*> (o Core..:? "workerRegion")
@@ -2898,34 +3361,27 @@ instance Core.ToJSON FlexTemplateRuntimeEnvironment where
   toJSON FlexTemplateRuntimeEnvironment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalExperiments" Core..=)
-              Core.<$> additionalExperiments,
-            ("additionalUserLabels" Core..=)
-              Core.<$> additionalUserLabels,
-            ("autoscalingAlgorithm" Core..=)
-              Core.<$> autoscalingAlgorithm,
+          [ ("additionalExperiments" Core..=) Core.<$> additionalExperiments,
+            ("additionalUserLabels" Core..=) Core.<$> additionalUserLabels,
+            ("autoscalingAlgorithm" Core..=) Core.<$> autoscalingAlgorithm,
             ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
             ("dumpHeapOnOom" Core..=) Core.<$> dumpHeapOnOom,
             ("enableLauncherVmSerialPortLogging" Core..=)
               Core.<$> enableLauncherVmSerialPortLogging,
-            ("enableStreamingEngine" Core..=)
-              Core.<$> enableStreamingEngine,
+            ("enableStreamingEngine" Core..=) Core.<$> enableStreamingEngine,
             ("flexrsGoal" Core..=) Core.<$> flexrsGoal,
             ("ipConfiguration" Core..=) Core.<$> ipConfiguration,
             ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
-            ("launcherMachineType" Core..=)
-              Core.<$> launcherMachineType,
+            ("launcherMachineType" Core..=) Core.<$> launcherMachineType,
             ("machineType" Core..=) Core.<$> machineType,
             ("maxWorkers" Core..=) Core.<$> maxWorkers,
             ("network" Core..=) Core.<$> network,
             ("numWorkers" Core..=) Core.<$> numWorkers,
-            ("saveHeapDumpsToGcsPath" Core..=)
-              Core.<$> saveHeapDumpsToGcsPath,
-            ("sdkContainerImage" Core..=)
-              Core.<$> sdkContainerImage,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
+            ("saveHeapDumpsToGcsPath" Core..=) Core.<$> saveHeapDumpsToGcsPath,
+            ("sdkContainerImage" Core..=) Core.<$> sdkContainerImage,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
             ("stagingLocation" Core..=) Core.<$> stagingLocation,
+            ("streamingMode" Core..=) Core.<$> streamingMode,
             ("subnetwork" Core..=) Core.<$> subnetwork,
             ("tempLocation" Core..=) Core.<$> tempLocation,
             ("workerRegion" Core..=) Core.<$> workerRegion,
@@ -2938,8 +3394,7 @@ instance Core.ToJSON FlexTemplateRuntimeEnvironment where
 --
 -- /See:/ 'newFlexTemplateRuntimeEnvironment_AdditionalUserLabels' smart constructor.
 newtype FlexTemplateRuntimeEnvironment_AdditionalUserLabels = FlexTemplateRuntimeEnvironment_AdditionalUserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2949,7 +3404,10 @@ newFlexTemplateRuntimeEnvironment_AdditionalUserLabels ::
   Core.HashMap Core.Text Core.Text ->
   FlexTemplateRuntimeEnvironment_AdditionalUserLabels
 newFlexTemplateRuntimeEnvironment_AdditionalUserLabels additional =
-  FlexTemplateRuntimeEnvironment_AdditionalUserLabels {additional = additional}
+  FlexTemplateRuntimeEnvironment_AdditionalUserLabels
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -2967,9 +3425,8 @@ instance
   Core.ToJSON
     FlexTemplateRuntimeEnvironment_AdditionalUserLabels
   where
-  toJSON
-    FlexTemplateRuntimeEnvironment_AdditionalUserLabels {..} =
-      Core.toJSON additional
+  toJSON FlexTemplateRuntimeEnvironment_AdditionalUserLabels {..} =
+    Core.toJSON additional
 
 -- | A metric value representing a list of floating point numbers.
 --
@@ -2989,16 +3446,12 @@ instance Core.FromJSON FloatingPointList where
   parseJSON =
     Core.withObject
       "FloatingPointList"
-      ( \o ->
-          FloatingPointList Core.<$> (o Core..:? "elements")
-      )
+      (\o -> FloatingPointList Core.<$> (o Core..:? "elements"))
 
 instance Core.ToJSON FloatingPointList where
   toJSON FloatingPointList {..} =
     Core.object
-      ( Core.catMaybes
-          [("elements" Core..=) Core.<$> elements]
-      )
+      (Core.catMaybes [("elements" Core..=) Core.<$> elements])
 
 -- | A representation of a floating point mean metric contribution.
 --
@@ -3023,17 +3476,76 @@ instance Core.FromJSON FloatingPointMean where
       "FloatingPointMean"
       ( \o ->
           FloatingPointMean
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "sum")
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "sum")
       )
 
 instance Core.ToJSON FloatingPointMean where
   toJSON FloatingPointMean {..} =
     Core.object
       ( Core.catMaybes
-          [ ("count" Core..=) Core.<$> count,
-            ("sum" Core..=) Core.<$> sum
+          [("count" Core..=) Core.<$> count, ("sum" Core..=) Core.<$> sum]
+      )
+
+-- | Information about the GPU usage on the worker.
+--
+-- /See:/ 'newGPUUsage' smart constructor.
+data GPUUsage = GPUUsage
+  { -- | Required. Timestamp of the measurement.
+    timestamp :: (Core.Maybe Core.DateTime),
+    -- | Required. Utilization info about the GPU.
+    utilization :: (Core.Maybe GPUUtilization)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GPUUsage' with the minimum fields required to make a request.
+newGPUUsage ::
+  GPUUsage
+newGPUUsage =
+  GPUUsage {timestamp = Core.Nothing, utilization = Core.Nothing}
+
+instance Core.FromJSON GPUUsage where
+  parseJSON =
+    Core.withObject
+      "GPUUsage"
+      ( \o ->
+          GPUUsage
+            Core.<$> (o Core..:? "timestamp")
+            Core.<*> (o Core..:? "utilization")
+      )
+
+instance Core.ToJSON GPUUsage where
+  toJSON GPUUsage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("timestamp" Core..=) Core.<$> timestamp,
+            ("utilization" Core..=) Core.<$> utilization
           ]
       )
+
+-- | Utilization details about the GPU.
+--
+-- /See:/ 'newGPUUtilization' smart constructor.
+newtype GPUUtilization = GPUUtilization
+  { -- | Required. GPU utilization rate of any kernel over the last sample period in the range of [0, 1].
+    rate :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GPUUtilization' with the minimum fields required to make a request.
+newGPUUtilization ::
+  GPUUtilization
+newGPUUtilization = GPUUtilization {rate = Core.Nothing}
+
+instance Core.FromJSON GPUUtilization where
+  parseJSON =
+    Core.withObject
+      "GPUUtilization"
+      (\o -> GPUUtilization Core.<$> (o Core..:? "rate"))
+
+instance Core.ToJSON GPUUtilization where
+  toJSON GPUUtilization {..} =
+    Core.object (Core.catMaybes [("rate" Core..=) Core.<$> rate])
 
 -- | Request to get updated debug configuration for component.
 --
@@ -3091,21 +3603,18 @@ newtype GetDebugConfigResponse = GetDebugConfigResponse
 -- | Creates a value of 'GetDebugConfigResponse' with the minimum fields required to make a request.
 newGetDebugConfigResponse ::
   GetDebugConfigResponse
-newGetDebugConfigResponse = GetDebugConfigResponse {config = Core.Nothing}
+newGetDebugConfigResponse =
+  GetDebugConfigResponse {config = Core.Nothing}
 
 instance Core.FromJSON GetDebugConfigResponse where
   parseJSON =
     Core.withObject
       "GetDebugConfigResponse"
-      ( \o ->
-          GetDebugConfigResponse
-            Core.<$> (o Core..:? "config")
-      )
+      (\o -> GetDebugConfigResponse Core.<$> (o Core..:? "config"))
 
 instance Core.ToJSON GetDebugConfigResponse where
   toJSON GetDebugConfigResponse {..} =
-    Core.object
-      (Core.catMaybes [("config" Core..=) Core.<$> config])
+    Core.object (Core.catMaybes [("config" Core..=) Core.<$> config])
 
 -- | The response to a GetTemplate request.
 --
@@ -3171,7 +3680,10 @@ data Histogram = Histogram
 newHistogram ::
   Histogram
 newHistogram =
-  Histogram {bucketCounts = Core.Nothing, firstBucketOffset = Core.Nothing}
+  Histogram
+    { bucketCounts = Core.Nothing,
+      firstBucketOffset = Core.Nothing
+    }
 
 instance Core.FromJSON Histogram where
   parseJSON =
@@ -3179,7 +3691,8 @@ instance Core.FromJSON Histogram where
       "Histogram"
       ( \o ->
           Histogram
-            Core.<$> ( o Core..:? "bucketCounts"
+            Core.<$> ( o
+                         Core..:? "bucketCounts"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "firstBucketOffset")
@@ -3192,8 +3705,7 @@ instance Core.ToJSON Histogram where
           [ ("bucketCounts" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> bucketCounts,
-            ("firstBucketOffset" Core..=)
-              Core.<$> firstBucketOffset
+            ("firstBucketOffset" Core..=) Core.<$> firstBucketOffset
           ]
       )
 
@@ -3209,32 +3721,29 @@ newtype HotKeyDebuggingInfo = HotKeyDebuggingInfo
 -- | Creates a value of 'HotKeyDebuggingInfo' with the minimum fields required to make a request.
 newHotKeyDebuggingInfo ::
   HotKeyDebuggingInfo
-newHotKeyDebuggingInfo = HotKeyDebuggingInfo {detectedHotKeys = Core.Nothing}
+newHotKeyDebuggingInfo =
+  HotKeyDebuggingInfo {detectedHotKeys = Core.Nothing}
 
 instance Core.FromJSON HotKeyDebuggingInfo where
   parseJSON =
     Core.withObject
       "HotKeyDebuggingInfo"
       ( \o ->
-          HotKeyDebuggingInfo
-            Core.<$> (o Core..:? "detectedHotKeys")
+          HotKeyDebuggingInfo Core.<$> (o Core..:? "detectedHotKeys")
       )
 
 instance Core.ToJSON HotKeyDebuggingInfo where
   toJSON HotKeyDebuggingInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("detectedHotKeys" Core..=)
-              Core.<$> detectedHotKeys
-          ]
+          [("detectedHotKeys" Core..=) Core.<$> detectedHotKeys]
       )
 
 -- | Debugging information for each detected hot key. Keyed by a hash of the key.
 --
 -- /See:/ 'newHotKeyDebuggingInfo_DetectedHotKeys' smart constructor.
 newtype HotKeyDebuggingInfo_DetectedHotKeys = HotKeyDebuggingInfo_DetectedHotKeys
-  { -- |
-    additional :: (Core.HashMap Core.Text HotKeyInfo)
+  { additional :: (Core.HashMap Core.Text HotKeyInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3246,10 +3755,7 @@ newHotKeyDebuggingInfo_DetectedHotKeys ::
 newHotKeyDebuggingInfo_DetectedHotKeys additional =
   HotKeyDebuggingInfo_DetectedHotKeys {additional = additional}
 
-instance
-  Core.FromJSON
-    HotKeyDebuggingInfo_DetectedHotKeys
-  where
+instance Core.FromJSON HotKeyDebuggingInfo_DetectedHotKeys where
   parseJSON =
     Core.withObject
       "HotKeyDebuggingInfo_DetectedHotKeys"
@@ -3258,10 +3764,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    HotKeyDebuggingInfo_DetectedHotKeys
-  where
+instance Core.ToJSON HotKeyDebuggingInfo_DetectedHotKeys where
   toJSON HotKeyDebuggingInfo_DetectedHotKeys {..} =
     Core.toJSON additional
 
@@ -3445,10 +3948,8 @@ instance Core.ToJSON InstructionOutput where
       ( Core.catMaybes
           [ ("codec" Core..=) Core.<$> codec,
             ("name" Core..=) Core.<$> name,
-            ("onlyCountKeyBytes" Core..=)
-              Core.<$> onlyCountKeyBytes,
-            ("onlyCountValueBytes" Core..=)
-              Core.<$> onlyCountValueBytes,
+            ("onlyCountKeyBytes" Core..=) Core.<$> onlyCountKeyBytes,
+            ("onlyCountValueBytes" Core..=) Core.<$> onlyCountValueBytes,
             ("originalName" Core..=) Core.<$> originalName,
             ("systemName" Core..=) Core.<$> systemName
           ]
@@ -3475,14 +3976,10 @@ instance Core.FromJSON InstructionOutput_Codec where
   parseJSON =
     Core.withObject
       "InstructionOutput_Codec"
-      ( \o ->
-          InstructionOutput_Codec
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> InstructionOutput_Codec Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON InstructionOutput_Codec where
-  toJSON InstructionOutput_Codec {..} =
-    Core.toJSON additional
+  toJSON InstructionOutput_Codec {..} = Core.toJSON additional
 
 -- | A metric value representing temporal values of a variable.
 --
@@ -3498,7 +3995,8 @@ data IntegerGauge = IntegerGauge
 -- | Creates a value of 'IntegerGauge' with the minimum fields required to make a request.
 newIntegerGauge ::
   IntegerGauge
-newIntegerGauge = IntegerGauge {timestamp = Core.Nothing, value = Core.Nothing}
+newIntegerGauge =
+  IntegerGauge {timestamp = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON IntegerGauge where
   parseJSON =
@@ -3542,9 +4040,7 @@ instance Core.FromJSON IntegerList where
 instance Core.ToJSON IntegerList where
   toJSON IntegerList {..} =
     Core.object
-      ( Core.catMaybes
-          [("elements" Core..=) Core.<$> elements]
-      )
+      (Core.catMaybes [("elements" Core..=) Core.<$> elements])
 
 -- | A representation of an integer mean metric contribution.
 --
@@ -3560,7 +4056,8 @@ data IntegerMean = IntegerMean
 -- | Creates a value of 'IntegerMean' with the minimum fields required to make a request.
 newIntegerMean ::
   IntegerMean
-newIntegerMean = IntegerMean {count = Core.Nothing, sum = Core.Nothing}
+newIntegerMean =
+  IntegerMean {count = Core.Nothing, sum = Core.Nothing}
 
 instance Core.FromJSON IntegerMean where
   parseJSON =
@@ -3568,16 +4065,15 @@ instance Core.FromJSON IntegerMean where
       "IntegerMean"
       ( \o ->
           IntegerMean
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "sum")
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "sum")
       )
 
 instance Core.ToJSON IntegerMean where
   toJSON IntegerMean {..} =
     Core.object
       ( Core.catMaybes
-          [ ("count" Core..=) Core.<$> count,
-            ("sum" Core..=) Core.<$> sum
-          ]
+          [("count" Core..=) Core.<$> count, ("sum" Core..=) Core.<$> sum]
       )
 
 -- | Defines a job to be run by the Cloud Dataflow service. Do not enter confidential information when you supply string values using the API.
@@ -3590,36 +4086,42 @@ data Job = Job
     createTime :: (Core.Maybe Core.DateTime),
     -- | If this is specified, the job\'s initial state is populated from the given snapshot.
     createdFromSnapshotId :: (Core.Maybe Core.Text),
-    -- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
+    -- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field might be mutated by the Dataflow service; callers cannot mutate it.
     currentState :: (Core.Maybe Job_CurrentState),
     -- | The timestamp associated with the current state.
     currentStateTime :: (Core.Maybe Core.DateTime),
-    -- | The environment for the job.
+    -- | Optional. The environment for the job.
     environment :: (Core.Maybe Environment),
     -- | Deprecated.
     executionInfo :: (Core.Maybe JobExecutionInfo),
-    -- | The unique ID of this job. This field is set by the Cloud Dataflow service when the Job is created, and is immutable for the life of the job.
+    -- | The unique ID of this job. This field is set by the Dataflow service when the job is created, and is immutable for the life of the job.
     id :: (Core.Maybe Core.Text),
     -- | This field is populated by the Dataflow service to support filtering jobs by the metadata values provided here. Populated for ListJobs and all GetJob views SUMMARY and higher.
     jobMetadata :: (Core.Maybe JobMetadata),
     -- | User-defined labels for this job. The labels map can contain no more than 64 entries. Entries of the labels map are UTF8 strings that comply with the following restrictions: * Keys must conform to regexp: \\p{Ll}\\p{Lo}{0,62} * Values must conform to regexp: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} * Both keys and values are additionally constrained to be \<= 128 bytes in size.
     labels :: (Core.Maybe Job_Labels),
-    -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains this job.
+    -- | Optional. The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains this job.
     location :: (Core.Maybe Core.Text),
-    -- | The user-specified Cloud Dataflow job name. Only one Job with a given name can exist in a project within one region at any given time. Jobs in different regions can have the same name. If a caller attempts to create a Job with the same name as an already-existing Job, the attempt returns the existing Job. The name must match the regular expression @[a-z]([-a-z0-9]{0,1022}[a-z0-9])?@
+    -- | Optional. The user-specified Dataflow job name. Only one active job with a given name can exist in a project within one region at any given time. Jobs in different regions can have the same name. If a caller attempts to create a job with the same name as an active job that already exists, the attempt returns the existing job. The name must match the regular expression @[a-z]([-a-z0-9]{0,1022}[a-z0-9])?@
     name :: (Core.Maybe Core.Text),
     -- | Preliminary field: The format of this data may change at any time. A description of the user pipeline and stages through which it is executed. Created by Cloud Dataflow service. Only retrieved with JOB/VIEW/DESCRIPTION or JOB/VIEW/ALL.
     pipelineDescription :: (Core.Maybe PipelineDescription),
-    -- | The ID of the Cloud Platform project that the job belongs to.
+    -- | The ID of the Google Cloud project that the job belongs to.
     projectId :: (Core.Maybe Core.Text),
     -- | If this job is an update of an existing job, this field is the job ID of the job it replaced. When sending a @CreateJobRequest@, you can update a job by specifying it here. The job named here is stopped, and its intermediate state is transferred to this job.
     replaceJobId :: (Core.Maybe Core.Text),
     -- | If another job is an update of this job (and thus, this job is in @JOB_STATE_UPDATED@), this field contains the ID of that job.
     replacedByJobId :: (Core.Maybe Core.Text),
-    -- | The job\'s requested state. @UpdateJob@ may be used to switch between the @JOB_STATE_STOPPED@ and @JOB_STATE_RUNNING@ states, by setting requested_state. @UpdateJob@ may also be used to directly set a job\'s requested state to @JOB_STATE_CANCELLED@ or @JOB_STATE_DONE@, irrevocably terminating the job if it has not already reached a terminal state.
+    -- | The job\'s requested state. Applies to @UpdateJob@ requests. Set @requested_state@ with @UpdateJob@ requests to switch between the states @JOB_STATE_STOPPED@ and @JOB_STATE_RUNNING@. You can also use @UpdateJob@ requests to change a job\'s state from @JOB_STATE_RUNNING@ to @JOB_STATE_CANCELLED@, @JOB_STATE_DONE@, or @JOB_STATE_DRAINED@. These states irrevocably terminate the job if it hasn\'t already reached a terminal state. This field has no effect on @CreateJob@ requests.
     requestedState :: (Core.Maybe Job_RequestedState),
+    -- | This field may ONLY be modified at runtime using the projects.jobs.update method to adjust job behavior. This field has no effect when specified at job creation.
+    runtimeUpdatableParams :: (Core.Maybe RuntimeUpdatableParams),
+    -- | Output only. Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
     -- | Reserved for future use. This field is set only in responses from the server; it is ignored if it is set in any requests.
     satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Output only. Resources used by the Dataflow Service to run the job.
+    serviceResources :: (Core.Maybe ServiceResources),
     -- | This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
     stageStates :: (Core.Maybe [ExecutionStageState]),
     -- | The timestamp when the job was started (transitioned to JOB/STATE/PENDING). Flexible resource scheduling jobs are started with some delay after job creation, so start/time is unset before start and is updated when the job is started by the Cloud Dataflow service. For other jobs, start/time always equals to create_time and is immutable and set by the Cloud Dataflow service.
@@ -3630,9 +4132,9 @@ data Job = Job
     stepsLocation :: (Core.Maybe Core.Text),
     -- | A set of files the system should be aware of that are used for temporary storage. These temporary files will be removed on job completion. No duplicates are allowed. No file patterns are supported. The supported files are: Google Cloud Storage: storage.googleapis.com\/{bucket}\/{object} bucket.storage.googleapis.com\/{object}
     tempFiles :: (Core.Maybe [Core.Text]),
-    -- | The map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.
+    -- | Optional. The map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.
     transformNameMapping :: (Core.Maybe Job_TransformNameMapping),
-    -- | The type of Cloud Dataflow job.
+    -- | Optional. The type of Dataflow job.
     type' :: (Core.Maybe Job_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3659,7 +4161,10 @@ newJob =
       replaceJobId = Core.Nothing,
       replacedByJobId = Core.Nothing,
       requestedState = Core.Nothing,
+      runtimeUpdatableParams = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
+      serviceResources = Core.Nothing,
       stageStates = Core.Nothing,
       startTime = Core.Nothing,
       steps = Core.Nothing,
@@ -3692,7 +4197,10 @@ instance Core.FromJSON Job where
             Core.<*> (o Core..:? "replaceJobId")
             Core.<*> (o Core..:? "replacedByJobId")
             Core.<*> (o Core..:? "requestedState")
+            Core.<*> (o Core..:? "runtimeUpdatableParams")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "serviceResources")
             Core.<*> (o Core..:? "stageStates")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "steps")
@@ -3706,14 +4214,11 @@ instance Core.ToJSON Job where
   toJSON Job {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientRequestId" Core..=)
-              Core.<$> clientRequestId,
+          [ ("clientRequestId" Core..=) Core.<$> clientRequestId,
             ("createTime" Core..=) Core.<$> createTime,
-            ("createdFromSnapshotId" Core..=)
-              Core.<$> createdFromSnapshotId,
+            ("createdFromSnapshotId" Core..=) Core.<$> createdFromSnapshotId,
             ("currentState" Core..=) Core.<$> currentState,
-            ("currentStateTime" Core..=)
-              Core.<$> currentStateTime,
+            ("currentStateTime" Core..=) Core.<$> currentStateTime,
             ("environment" Core..=) Core.<$> environment,
             ("executionInfo" Core..=) Core.<$> executionInfo,
             ("id" Core..=) Core.<$> id,
@@ -3721,20 +4226,21 @@ instance Core.ToJSON Job where
             ("labels" Core..=) Core.<$> labels,
             ("location" Core..=) Core.<$> location,
             ("name" Core..=) Core.<$> name,
-            ("pipelineDescription" Core..=)
-              Core.<$> pipelineDescription,
+            ("pipelineDescription" Core..=) Core.<$> pipelineDescription,
             ("projectId" Core..=) Core.<$> projectId,
             ("replaceJobId" Core..=) Core.<$> replaceJobId,
             ("replacedByJobId" Core..=) Core.<$> replacedByJobId,
             ("requestedState" Core..=) Core.<$> requestedState,
+            ("runtimeUpdatableParams" Core..=) Core.<$> runtimeUpdatableParams,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("serviceResources" Core..=) Core.<$> serviceResources,
             ("stageStates" Core..=) Core.<$> stageStates,
             ("startTime" Core..=) Core.<$> startTime,
             ("steps" Core..=) Core.<$> steps,
             ("stepsLocation" Core..=) Core.<$> stepsLocation,
             ("tempFiles" Core..=) Core.<$> tempFiles,
-            ("transformNameMapping" Core..=)
-              Core.<$> transformNameMapping,
+            ("transformNameMapping" Core..=) Core.<$> transformNameMapping,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -3743,8 +4249,7 @@ instance Core.ToJSON Job where
 --
 -- /See:/ 'newJob_Labels' smart constructor.
 newtype Job_Labels = Job_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3764,12 +4269,11 @@ instance Core.FromJSON Job_Labels where
 instance Core.ToJSON Job_Labels where
   toJSON Job_Labels {..} = Core.toJSON additional
 
--- | The map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.
+-- | Optional. The map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.
 --
 -- /See:/ 'newJob_TransformNameMapping' smart constructor.
 newtype Job_TransformNameMapping = Job_TransformNameMapping
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3785,14 +4289,10 @@ instance Core.FromJSON Job_TransformNameMapping where
   parseJSON =
     Core.withObject
       "Job_TransformNameMapping"
-      ( \o ->
-          Job_TransformNameMapping
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Job_TransformNameMapping Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Job_TransformNameMapping where
-  toJSON Job_TransformNameMapping {..} =
-    Core.toJSON additional
+  toJSON Job_TransformNameMapping {..} = Core.toJSON additional
 
 -- | Information about the execution of a job.
 --
@@ -3809,7 +4309,10 @@ data JobExecutionDetails = JobExecutionDetails
 newJobExecutionDetails ::
   JobExecutionDetails
 newJobExecutionDetails =
-  JobExecutionDetails {nextPageToken = Core.Nothing, stages = Core.Nothing}
+  JobExecutionDetails
+    { nextPageToken = Core.Nothing,
+      stages = Core.Nothing
+    }
 
 instance Core.FromJSON JobExecutionDetails where
   parseJSON =
@@ -3848,21 +4351,17 @@ instance Core.FromJSON JobExecutionInfo where
   parseJSON =
     Core.withObject
       "JobExecutionInfo"
-      ( \o ->
-          JobExecutionInfo Core.<$> (o Core..:? "stages")
-      )
+      (\o -> JobExecutionInfo Core.<$> (o Core..:? "stages"))
 
 instance Core.ToJSON JobExecutionInfo where
   toJSON JobExecutionInfo {..} =
-    Core.object
-      (Core.catMaybes [("stages" Core..=) Core.<$> stages])
+    Core.object (Core.catMaybes [("stages" Core..=) Core.<$> stages])
 
 -- | A mapping from each stage to the information about that stage.
 --
 -- /See:/ 'newJobExecutionInfo_Stages' smart constructor.
 newtype JobExecutionInfo_Stages = JobExecutionInfo_Stages
-  { -- |
-    additional :: (Core.HashMap Core.Text JobExecutionStageInfo)
+  { additional :: (Core.HashMap Core.Text JobExecutionStageInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3878,14 +4377,10 @@ instance Core.FromJSON JobExecutionInfo_Stages where
   parseJSON =
     Core.withObject
       "JobExecutionInfo_Stages"
-      ( \o ->
-          JobExecutionInfo_Stages
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> JobExecutionInfo_Stages Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON JobExecutionInfo_Stages where
-  toJSON JobExecutionInfo_Stages {..} =
-    Core.toJSON additional
+  toJSON JobExecutionInfo_Stages {..} = Core.toJSON additional
 
 -- | Contains information about how a particular google.dataflow.v1beta3.Step will be executed.
 --
@@ -3899,23 +4394,19 @@ newtype JobExecutionStageInfo = JobExecutionStageInfo
 -- | Creates a value of 'JobExecutionStageInfo' with the minimum fields required to make a request.
 newJobExecutionStageInfo ::
   JobExecutionStageInfo
-newJobExecutionStageInfo = JobExecutionStageInfo {stepName = Core.Nothing}
+newJobExecutionStageInfo =
+  JobExecutionStageInfo {stepName = Core.Nothing}
 
 instance Core.FromJSON JobExecutionStageInfo where
   parseJSON =
     Core.withObject
       "JobExecutionStageInfo"
-      ( \o ->
-          JobExecutionStageInfo
-            Core.<$> (o Core..:? "stepName")
-      )
+      (\o -> JobExecutionStageInfo Core.<$> (o Core..:? "stepName"))
 
 instance Core.ToJSON JobExecutionStageInfo where
   toJSON JobExecutionStageInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("stepName" Core..=) Core.<$> stepName]
-      )
+      (Core.catMaybes [("stepName" Core..=) Core.<$> stepName])
 
 -- | A particular message pertaining to a Dataflow job.
 --
@@ -3960,8 +4451,7 @@ instance Core.ToJSON JobMessage where
     Core.object
       ( Core.catMaybes
           [ ("id" Core..=) Core.<$> id,
-            ("messageImportance" Core..=)
-              Core.<$> messageImportance,
+            ("messageImportance" Core..=) Core.<$> messageImportance,
             ("messageText" Core..=) Core.<$> messageText,
             ("time" Core..=) Core.<$> time
           ]
@@ -4025,17 +4515,14 @@ instance Core.ToJSON JobMetadata where
   toJSON JobMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bigTableDetails" Core..=)
-              Core.<$> bigTableDetails,
+          [ ("bigTableDetails" Core..=) Core.<$> bigTableDetails,
             ("bigqueryDetails" Core..=) Core.<$> bigqueryDetails,
-            ("datastoreDetails" Core..=)
-              Core.<$> datastoreDetails,
+            ("datastoreDetails" Core..=) Core.<$> datastoreDetails,
             ("fileDetails" Core..=) Core.<$> fileDetails,
             ("pubsubDetails" Core..=) Core.<$> pubsubDetails,
             ("sdkVersion" Core..=) Core.<$> sdkVersion,
             ("spannerDetails" Core..=) Core.<$> spannerDetails,
-            ("userDisplayProperties" Core..=)
-              Core.<$> userDisplayProperties
+            ("userDisplayProperties" Core..=) Core.<$> userDisplayProperties
           ]
       )
 
@@ -4043,8 +4530,7 @@ instance Core.ToJSON JobMetadata where
 --
 -- /See:/ 'newJobMetadata_UserDisplayProperties' smart constructor.
 newtype JobMetadata_UserDisplayProperties = JobMetadata_UserDisplayProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4056,10 +4542,7 @@ newJobMetadata_UserDisplayProperties ::
 newJobMetadata_UserDisplayProperties additional =
   JobMetadata_UserDisplayProperties {additional = additional}
 
-instance
-  Core.FromJSON
-    JobMetadata_UserDisplayProperties
-  where
+instance Core.FromJSON JobMetadata_UserDisplayProperties where
   parseJSON =
     Core.withObject
       "JobMetadata_UserDisplayProperties"
@@ -4068,10 +4551,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    JobMetadata_UserDisplayProperties
-  where
+instance Core.ToJSON JobMetadata_UserDisplayProperties where
   toJSON JobMetadata_UserDisplayProperties {..} =
     Core.toJSON additional
 
@@ -4089,7 +4569,8 @@ data JobMetrics = JobMetrics
 -- | Creates a value of 'JobMetrics' with the minimum fields required to make a request.
 newJobMetrics ::
   JobMetrics
-newJobMetrics = JobMetrics {metricTime = Core.Nothing, metrics = Core.Nothing}
+newJobMetrics =
+  JobMetrics {metricTime = Core.Nothing, metrics = Core.Nothing}
 
 instance Core.FromJSON JobMetrics where
   parseJSON =
@@ -4201,8 +4682,7 @@ instance Core.ToJSON KeyRangeLocation where
     Core.object
       ( Core.catMaybes
           [ ("dataDisk" Core..=) Core.<$> dataDisk,
-            ("deliveryEndpoint" Core..=)
-              Core.<$> deliveryEndpoint,
+            ("deliveryEndpoint" Core..=) Core.<$> deliveryEndpoint,
             ("deprecatedPersistentDirectory" Core..=)
               Core.<$> deprecatedPersistentDirectory,
             ("end" Core..=) Core.<$> end,
@@ -4269,14 +4749,12 @@ instance Core.ToJSON LaunchFlexTemplateParameter where
     Core.object
       ( Core.catMaybes
           [ ("containerSpec" Core..=) Core.<$> containerSpec,
-            ("containerSpecGcsPath" Core..=)
-              Core.<$> containerSpecGcsPath,
+            ("containerSpecGcsPath" Core..=) Core.<$> containerSpecGcsPath,
             ("environment" Core..=) Core.<$> environment,
             ("jobName" Core..=) Core.<$> jobName,
             ("launchOptions" Core..=) Core.<$> launchOptions,
             ("parameters" Core..=) Core.<$> parameters,
-            ("transformNameMappings" Core..=)
-              Core.<$> transformNameMappings,
+            ("transformNameMappings" Core..=) Core.<$> transformNameMappings,
             ("update" Core..=) Core.<$> update
           ]
       )
@@ -4285,8 +4763,7 @@ instance Core.ToJSON LaunchFlexTemplateParameter where
 --
 -- /See:/ 'newLaunchFlexTemplateParameter_LaunchOptions' smart constructor.
 newtype LaunchFlexTemplateParameter_LaunchOptions = LaunchFlexTemplateParameter_LaunchOptions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4296,12 +4773,12 @@ newLaunchFlexTemplateParameter_LaunchOptions ::
   Core.HashMap Core.Text Core.Text ->
   LaunchFlexTemplateParameter_LaunchOptions
 newLaunchFlexTemplateParameter_LaunchOptions additional =
-  LaunchFlexTemplateParameter_LaunchOptions {additional = additional}
+  LaunchFlexTemplateParameter_LaunchOptions
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    LaunchFlexTemplateParameter_LaunchOptions
-  where
+instance Core.FromJSON LaunchFlexTemplateParameter_LaunchOptions where
   parseJSON =
     Core.withObject
       "LaunchFlexTemplateParameter_LaunchOptions"
@@ -4310,10 +4787,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LaunchFlexTemplateParameter_LaunchOptions
-  where
+instance Core.ToJSON LaunchFlexTemplateParameter_LaunchOptions where
   toJSON LaunchFlexTemplateParameter_LaunchOptions {..} =
     Core.toJSON additional
 
@@ -4321,8 +4795,7 @@ instance
 --
 -- /See:/ 'newLaunchFlexTemplateParameter_Parameters' smart constructor.
 newtype LaunchFlexTemplateParameter_Parameters = LaunchFlexTemplateParameter_Parameters
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4334,10 +4807,7 @@ newLaunchFlexTemplateParameter_Parameters ::
 newLaunchFlexTemplateParameter_Parameters additional =
   LaunchFlexTemplateParameter_Parameters {additional = additional}
 
-instance
-  Core.FromJSON
-    LaunchFlexTemplateParameter_Parameters
-  where
+instance Core.FromJSON LaunchFlexTemplateParameter_Parameters where
   parseJSON =
     Core.withObject
       "LaunchFlexTemplateParameter_Parameters"
@@ -4346,10 +4816,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LaunchFlexTemplateParameter_Parameters
-  where
+instance Core.ToJSON LaunchFlexTemplateParameter_Parameters where
   toJSON LaunchFlexTemplateParameter_Parameters {..} =
     Core.toJSON additional
 
@@ -4357,8 +4824,7 @@ instance
 --
 -- /See:/ 'newLaunchFlexTemplateParameter_TransformNameMappings' smart constructor.
 newtype LaunchFlexTemplateParameter_TransformNameMappings = LaunchFlexTemplateParameter_TransformNameMappings
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4368,7 +4834,10 @@ newLaunchFlexTemplateParameter_TransformNameMappings ::
   Core.HashMap Core.Text Core.Text ->
   LaunchFlexTemplateParameter_TransformNameMappings
 newLaunchFlexTemplateParameter_TransformNameMappings additional =
-  LaunchFlexTemplateParameter_TransformNameMappings {additional = additional}
+  LaunchFlexTemplateParameter_TransformNameMappings
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -4386,9 +4855,8 @@ instance
   Core.ToJSON
     LaunchFlexTemplateParameter_TransformNameMappings
   where
-  toJSON
-    LaunchFlexTemplateParameter_TransformNameMappings {..} =
-      Core.toJSON additional
+  toJSON LaunchFlexTemplateParameter_TransformNameMappings {..} =
+    Core.toJSON additional
 
 -- | A request to launch a Cloud Dataflow job from a FlexTemplate.
 --
@@ -4424,8 +4892,7 @@ instance Core.ToJSON LaunchFlexTemplateRequest where
   toJSON LaunchFlexTemplateRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("launchParameter" Core..=)
-              Core.<$> launchParameter,
+          [ ("launchParameter" Core..=) Core.<$> launchParameter,
             ("validateOnly" Core..=) Core.<$> validateOnly
           ]
       )
@@ -4442,21 +4909,18 @@ newtype LaunchFlexTemplateResponse = LaunchFlexTemplateResponse
 -- | Creates a value of 'LaunchFlexTemplateResponse' with the minimum fields required to make a request.
 newLaunchFlexTemplateResponse ::
   LaunchFlexTemplateResponse
-newLaunchFlexTemplateResponse = LaunchFlexTemplateResponse {job = Core.Nothing}
+newLaunchFlexTemplateResponse =
+  LaunchFlexTemplateResponse {job = Core.Nothing}
 
 instance Core.FromJSON LaunchFlexTemplateResponse where
   parseJSON =
     Core.withObject
       "LaunchFlexTemplateResponse"
-      ( \o ->
-          LaunchFlexTemplateResponse
-            Core.<$> (o Core..:? "job")
-      )
+      (\o -> LaunchFlexTemplateResponse Core.<$> (o Core..:? "job"))
 
 instance Core.ToJSON LaunchFlexTemplateResponse where
   toJSON LaunchFlexTemplateResponse {..} =
-    Core.object
-      (Core.catMaybes [("job" Core..=) Core.<$> job])
+    Core.object (Core.catMaybes [("job" Core..=) Core.<$> job])
 
 -- | Parameters to provide to the template being launched. Note that the [metadata in the pipeline code] (https:\/\/cloud.google.com\/dataflow\/docs\/guides\/templates\/creating-templates#metadata) determines which runtime parameters are valid.
 --
@@ -4507,8 +4971,7 @@ instance Core.ToJSON LaunchTemplateParameters where
           [ ("environment" Core..=) Core.<$> environment,
             ("jobName" Core..=) Core.<$> jobName,
             ("parameters" Core..=) Core.<$> parameters,
-            ("transformNameMapping" Core..=)
-              Core.<$> transformNameMapping,
+            ("transformNameMapping" Core..=) Core.<$> transformNameMapping,
             ("update" Core..=) Core.<$> update
           ]
       )
@@ -4517,8 +4980,7 @@ instance Core.ToJSON LaunchTemplateParameters where
 --
 -- /See:/ 'newLaunchTemplateParameters_Parameters' smart constructor.
 newtype LaunchTemplateParameters_Parameters = LaunchTemplateParameters_Parameters
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4530,10 +4992,7 @@ newLaunchTemplateParameters_Parameters ::
 newLaunchTemplateParameters_Parameters additional =
   LaunchTemplateParameters_Parameters {additional = additional}
 
-instance
-  Core.FromJSON
-    LaunchTemplateParameters_Parameters
-  where
+instance Core.FromJSON LaunchTemplateParameters_Parameters where
   parseJSON =
     Core.withObject
       "LaunchTemplateParameters_Parameters"
@@ -4542,10 +5001,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LaunchTemplateParameters_Parameters
-  where
+instance Core.ToJSON LaunchTemplateParameters_Parameters where
   toJSON LaunchTemplateParameters_Parameters {..} =
     Core.toJSON additional
 
@@ -4553,8 +5009,7 @@ instance
 --
 -- /See:/ 'newLaunchTemplateParameters_TransformNameMapping' smart constructor.
 newtype LaunchTemplateParameters_TransformNameMapping = LaunchTemplateParameters_TransformNameMapping
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4564,7 +5019,10 @@ newLaunchTemplateParameters_TransformNameMapping ::
   Core.HashMap Core.Text Core.Text ->
   LaunchTemplateParameters_TransformNameMapping
 newLaunchTemplateParameters_TransformNameMapping additional =
-  LaunchTemplateParameters_TransformNameMapping {additional = additional}
+  LaunchTemplateParameters_TransformNameMapping
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -4578,13 +5036,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LaunchTemplateParameters_TransformNameMapping
-  where
-  toJSON
-    LaunchTemplateParameters_TransformNameMapping {..} =
-      Core.toJSON additional
+instance Core.ToJSON LaunchTemplateParameters_TransformNameMapping where
+  toJSON LaunchTemplateParameters_TransformNameMapping {..} =
+    Core.toJSON additional
 
 -- | Response to the request to launch a template.
 --
@@ -4598,20 +5052,18 @@ newtype LaunchTemplateResponse = LaunchTemplateResponse
 -- | Creates a value of 'LaunchTemplateResponse' with the minimum fields required to make a request.
 newLaunchTemplateResponse ::
   LaunchTemplateResponse
-newLaunchTemplateResponse = LaunchTemplateResponse {job = Core.Nothing}
+newLaunchTemplateResponse =
+  LaunchTemplateResponse {job = Core.Nothing}
 
 instance Core.FromJSON LaunchTemplateResponse where
   parseJSON =
     Core.withObject
       "LaunchTemplateResponse"
-      ( \o ->
-          LaunchTemplateResponse Core.<$> (o Core..:? "job")
-      )
+      (\o -> LaunchTemplateResponse Core.<$> (o Core..:? "job"))
 
 instance Core.ToJSON LaunchTemplateResponse where
   toJSON LaunchTemplateResponse {..} =
-    Core.object
-      (Core.catMaybes [("job" Core..=) Core.<$> job])
+    Core.object (Core.catMaybes [("job" Core..=) Core.<$> job])
 
 -- | Request to lease WorkItems.
 --
@@ -4621,6 +5073,8 @@ data LeaseWorkItemRequest = LeaseWorkItemRequest
     currentWorkerTime :: (Core.Maybe Core.DateTime),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the WorkItem\'s job.
     location :: (Core.Maybe Core.Text),
+    -- | Optional. The project number of the project this worker belongs to.
+    projectNumber :: (Core.Maybe Core.Int64),
     -- | The initial lease period.
     requestedLeaseDuration :: (Core.Maybe Core.Duration),
     -- | Untranslated bag-of-bytes WorkRequest from UnifiedWorker.
@@ -4641,6 +5095,7 @@ newLeaseWorkItemRequest =
   LeaseWorkItemRequest
     { currentWorkerTime = Core.Nothing,
       location = Core.Nothing,
+      projectNumber = Core.Nothing,
       requestedLeaseDuration = Core.Nothing,
       unifiedWorkerRequest = Core.Nothing,
       workItemTypes = Core.Nothing,
@@ -4656,6 +5111,7 @@ instance Core.FromJSON LeaseWorkItemRequest where
           LeaseWorkItemRequest
             Core.<$> (o Core..:? "currentWorkerTime")
             Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "projectNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "requestedLeaseDuration")
             Core.<*> (o Core..:? "unifiedWorkerRequest")
             Core.<*> (o Core..:? "workItemTypes")
@@ -4667,16 +5123,15 @@ instance Core.ToJSON LeaseWorkItemRequest where
   toJSON LeaseWorkItemRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentWorkerTime" Core..=)
-              Core.<$> currentWorkerTime,
+          [ ("currentWorkerTime" Core..=) Core.<$> currentWorkerTime,
             ("location" Core..=) Core.<$> location,
-            ("requestedLeaseDuration" Core..=)
-              Core.<$> requestedLeaseDuration,
-            ("unifiedWorkerRequest" Core..=)
-              Core.<$> unifiedWorkerRequest,
+            ("projectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> projectNumber,
+            ("requestedLeaseDuration" Core..=) Core.<$> requestedLeaseDuration,
+            ("unifiedWorkerRequest" Core..=) Core.<$> unifiedWorkerRequest,
             ("workItemTypes" Core..=) Core.<$> workItemTypes,
-            ("workerCapabilities" Core..=)
-              Core.<$> workerCapabilities,
+            ("workerCapabilities" Core..=) Core.<$> workerCapabilities,
             ("workerId" Core..=) Core.<$> workerId
           ]
       )
@@ -4696,12 +5151,12 @@ newLeaseWorkItemRequest_UnifiedWorkerRequest ::
   Core.HashMap Core.Text Core.Value ->
   LeaseWorkItemRequest_UnifiedWorkerRequest
 newLeaseWorkItemRequest_UnifiedWorkerRequest additional =
-  LeaseWorkItemRequest_UnifiedWorkerRequest {additional = additional}
+  LeaseWorkItemRequest_UnifiedWorkerRequest
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    LeaseWorkItemRequest_UnifiedWorkerRequest
-  where
+instance Core.FromJSON LeaseWorkItemRequest_UnifiedWorkerRequest where
   parseJSON =
     Core.withObject
       "LeaseWorkItemRequest_UnifiedWorkerRequest"
@@ -4710,10 +5165,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LeaseWorkItemRequest_UnifiedWorkerRequest
-  where
+instance Core.ToJSON LeaseWorkItemRequest_UnifiedWorkerRequest where
   toJSON LeaseWorkItemRequest_UnifiedWorkerRequest {..} =
     Core.toJSON additional
 
@@ -4751,8 +5203,7 @@ instance Core.ToJSON LeaseWorkItemResponse where
   toJSON LeaseWorkItemResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unifiedWorkerResponse" Core..=)
-              Core.<$> unifiedWorkerResponse,
+          [ ("unifiedWorkerResponse" Core..=) Core.<$> unifiedWorkerResponse,
             ("workItems" Core..=) Core.<$> workItems
           ]
       )
@@ -4772,12 +5223,12 @@ newLeaseWorkItemResponse_UnifiedWorkerResponse ::
   Core.HashMap Core.Text Core.Value ->
   LeaseWorkItemResponse_UnifiedWorkerResponse
 newLeaseWorkItemResponse_UnifiedWorkerResponse additional =
-  LeaseWorkItemResponse_UnifiedWorkerResponse {additional = additional}
+  LeaseWorkItemResponse_UnifiedWorkerResponse
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    LeaseWorkItemResponse_UnifiedWorkerResponse
-  where
+instance Core.FromJSON LeaseWorkItemResponse_UnifiedWorkerResponse where
   parseJSON =
     Core.withObject
       "LeaseWorkItemResponse_UnifiedWorkerResponse"
@@ -4786,13 +5237,53 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LeaseWorkItemResponse_UnifiedWorkerResponse
-  where
-  toJSON
-    LeaseWorkItemResponse_UnifiedWorkerResponse {..} =
-      Core.toJSON additional
+instance Core.ToJSON LeaseWorkItemResponse_UnifiedWorkerResponse where
+  toJSON LeaseWorkItemResponse_UnifiedWorkerResponse {..} =
+    Core.toJSON additional
+
+-- | Linear buckets with the following boundaries for indices in 0 to n-1. - i in [0, n-1]: [start + (i)/width, start + (i+1)/width)
+--
+-- /See:/ 'newLinear' smart constructor.
+data Linear = Linear
+  { -- | Must be greater than 0.
+    numberOfBuckets :: (Core.Maybe Core.Int32),
+    -- | Lower bound of the first bucket.
+    start :: (Core.Maybe Core.Double),
+    -- | Distance between bucket boundaries. Must be greater than 0.
+    width :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Linear' with the minimum fields required to make a request.
+newLinear ::
+  Linear
+newLinear =
+  Linear
+    { numberOfBuckets = Core.Nothing,
+      start = Core.Nothing,
+      width = Core.Nothing
+    }
+
+instance Core.FromJSON Linear where
+  parseJSON =
+    Core.withObject
+      "Linear"
+      ( \o ->
+          Linear
+            Core.<$> (o Core..:? "numberOfBuckets")
+            Core.<*> (o Core..:? "start")
+            Core.<*> (o Core..:? "width")
+      )
+
+instance Core.ToJSON Linear where
+  toJSON Linear {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("numberOfBuckets" Core..=) Core.<$> numberOfBuckets,
+            ("start" Core..=) Core.<$> start,
+            ("width" Core..=) Core.<$> width
+          ]
+      )
 
 -- | Response to a request to list job messages.
 --
@@ -4832,8 +5323,7 @@ instance Core.ToJSON ListJobMessagesResponse where
   toJSON ListJobMessagesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoscalingEvents" Core..=)
-              Core.<$> autoscalingEvents,
+          [ ("autoscalingEvents" Core..=) Core.<$> autoscalingEvents,
             ("jobMessages" Core..=) Core.<$> jobMessages,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -4895,23 +5385,19 @@ newtype ListSnapshotsResponse = ListSnapshotsResponse
 -- | Creates a value of 'ListSnapshotsResponse' with the minimum fields required to make a request.
 newListSnapshotsResponse ::
   ListSnapshotsResponse
-newListSnapshotsResponse = ListSnapshotsResponse {snapshots = Core.Nothing}
+newListSnapshotsResponse =
+  ListSnapshotsResponse {snapshots = Core.Nothing}
 
 instance Core.FromJSON ListSnapshotsResponse where
   parseJSON =
     Core.withObject
       "ListSnapshotsResponse"
-      ( \o ->
-          ListSnapshotsResponse
-            Core.<$> (o Core..:? "snapshots")
-      )
+      (\o -> ListSnapshotsResponse Core.<$> (o Core..:? "snapshots"))
 
 instance Core.ToJSON ListSnapshotsResponse where
   toJSON ListSnapshotsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("snapshots" Core..=) Core.<$> snapshots]
-      )
+      (Core.catMaybes [("snapshots" Core..=) Core.<$> snapshots])
 
 -- | MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask\'s WorkItem. Each instruction must appear in the list before any instructions which depends on its output.
 --
@@ -4997,34 +5483,26 @@ instance Core.FromJSON MemInfo where
       "MemInfo"
       ( \o ->
           MemInfo
-            Core.<$> ( o Core..:? "currentLimitBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "currentOoms"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "currentRssBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "currentLimitBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "currentOoms" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "currentRssBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "timestamp")
-            Core.<*> ( o Core..:? "totalGbMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalGbMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MemInfo where
   toJSON MemInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentLimitBytes" Core..=) Core.. Core.AsText
+          [ ("currentLimitBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> currentLimitBytes,
-            ("currentOoms" Core..=) Core.. Core.AsText
-              Core.<$> currentOoms,
-            ("currentRssBytes" Core..=) Core.. Core.AsText
+            ("currentOoms" Core..=) Core.. Core.AsText Core.<$> currentOoms,
+            ("currentRssBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> currentRssBytes,
             ("timestamp" Core..=) Core.<$> timestamp,
-            ("totalGbMs" Core..=) Core.. Core.AsText
-              Core.<$> totalGbMs
+            ("totalGbMs" Core..=) Core.. Core.AsText Core.<$> totalGbMs
           ]
       )
 
@@ -5052,9 +5530,7 @@ instance Core.FromJSON MetricShortId where
       ( \o ->
           MetricShortId
             Core.<$> (o Core..:? "metricIndex")
-            Core.<*> ( o Core..:? "shortId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "shortId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MetricShortId where
@@ -5062,8 +5538,7 @@ instance Core.ToJSON MetricShortId where
     Core.object
       ( Core.catMaybes
           [ ("metricIndex" Core..=) Core.<$> metricIndex,
-            ("shortId" Core..=) Core.. Core.AsText
-              Core.<$> shortId
+            ("shortId" Core..=) Core.. Core.AsText Core.<$> shortId
           ]
       )
 
@@ -5115,8 +5590,7 @@ instance Core.ToJSON MetricStructuredName where
 --
 -- /See:/ 'newMetricStructuredName_Context' smart constructor.
 newtype MetricStructuredName_Context = MetricStructuredName_Context
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5133,15 +5607,13 @@ instance Core.FromJSON MetricStructuredName_Context where
     Core.withObject
       "MetricStructuredName_Context"
       ( \o ->
-          MetricStructuredName_Context
-            Core.<$> (Core.parseJSONObject o)
+          MetricStructuredName_Context Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON MetricStructuredName_Context where
-  toJSON MetricStructuredName_Context {..} =
-    Core.toJSON additional
+  toJSON MetricStructuredName_Context {..} = Core.toJSON additional
 
--- | Describes the state of a metric.
+-- | Describes the state of a metric. Next ID: 14
 --
 -- /See:/ 'newMetricUpdate' smart constructor.
 data MetricUpdate = MetricUpdate
@@ -5163,8 +5635,10 @@ data MetricUpdate = MetricUpdate
     name :: (Core.Maybe MetricStructuredName),
     -- | Worker-computed aggregate value for aggregation kinds \"Sum\", \"Max\", \"Min\", \"And\", and \"Or\". The possible value types are Long, Double, and Boolean.
     scalar :: (Core.Maybe Core.Value),
-    -- | Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric\'s type. All Values in the list must be of the same type.
+    -- | Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, String, or BoundedTrie according to the metric\'s type. All Values in the list must be of the same type.
     set :: (Core.Maybe Core.Value),
+    -- | Worker-computed aggregate value for the \"Trie\" aggregation kind. The only possible value type is a BoundedTrieNode.
+    trie :: (Core.Maybe Core.Value),
     -- | Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
     updateTime :: (Core.Maybe Core.DateTime)
   }
@@ -5185,6 +5659,7 @@ newMetricUpdate =
       name = Core.Nothing,
       scalar = Core.Nothing,
       set = Core.Nothing,
+      trie = Core.Nothing,
       updateTime = Core.Nothing
     }
 
@@ -5204,6 +5679,7 @@ instance Core.FromJSON MetricUpdate where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "scalar")
             Core.<*> (o Core..:? "set")
+            Core.<*> (o Core..:? "trie")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -5221,9 +5697,89 @@ instance Core.ToJSON MetricUpdate where
             ("name" Core..=) Core.<$> name,
             ("scalar" Core..=) Core.<$> scalar,
             ("set" Core..=) Core.<$> set,
+            ("trie" Core..=) Core.<$> trie,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
+
+-- | The value of a metric along with its name and labels.
+--
+-- /See:/ 'newMetricValue' smart constructor.
+data MetricValue = MetricValue
+  { -- | Base name for this metric.
+    metric :: (Core.Maybe Core.Text),
+    -- | Optional. Set of metric labels for this metric.
+    metricLabels :: (Core.Maybe MetricValue_MetricLabels),
+    -- | Non-cumulative int64 value of this metric.
+    valueGauge64 :: (Core.Maybe DataflowGaugeValue),
+    -- | Histogram value of this metric.
+    valueHistogram :: (Core.Maybe DataflowHistogramValue),
+    -- | Integer value of this metric.
+    valueInt64 :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MetricValue' with the minimum fields required to make a request.
+newMetricValue ::
+  MetricValue
+newMetricValue =
+  MetricValue
+    { metric = Core.Nothing,
+      metricLabels = Core.Nothing,
+      valueGauge64 = Core.Nothing,
+      valueHistogram = Core.Nothing,
+      valueInt64 = Core.Nothing
+    }
+
+instance Core.FromJSON MetricValue where
+  parseJSON =
+    Core.withObject
+      "MetricValue"
+      ( \o ->
+          MetricValue
+            Core.<$> (o Core..:? "metric")
+            Core.<*> (o Core..:? "metricLabels")
+            Core.<*> (o Core..:? "valueGauge64")
+            Core.<*> (o Core..:? "valueHistogram")
+            Core.<*> (o Core..:? "valueInt64" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON MetricValue where
+  toJSON MetricValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metric" Core..=) Core.<$> metric,
+            ("metricLabels" Core..=) Core.<$> metricLabels,
+            ("valueGauge64" Core..=) Core.<$> valueGauge64,
+            ("valueHistogram" Core..=) Core.<$> valueHistogram,
+            ("valueInt64" Core..=) Core.. Core.AsText Core.<$> valueInt64
+          ]
+      )
+
+-- | Optional. Set of metric labels for this metric.
+--
+-- /See:/ 'newMetricValue_MetricLabels' smart constructor.
+newtype MetricValue_MetricLabels = MetricValue_MetricLabels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MetricValue_MetricLabels' with the minimum fields required to make a request.
+newMetricValue_MetricLabels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  MetricValue_MetricLabels
+newMetricValue_MetricLabels additional =
+  MetricValue_MetricLabels {additional = additional}
+
+instance Core.FromJSON MetricValue_MetricLabels where
+  parseJSON =
+    Core.withObject
+      "MetricValue_MetricLabels"
+      (\o -> MetricValue_MetricLabels Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON MetricValue_MetricLabels where
+  toJSON MetricValue_MetricLabels {..} = Core.toJSON additional
 
 -- | Describes mounted data disk.
 --
@@ -5243,16 +5799,12 @@ instance Core.FromJSON MountedDataDisk where
   parseJSON =
     Core.withObject
       "MountedDataDisk"
-      ( \o ->
-          MountedDataDisk Core.<$> (o Core..:? "dataDisk")
-      )
+      (\o -> MountedDataDisk Core.<$> (o Core..:? "dataDisk"))
 
 instance Core.ToJSON MountedDataDisk where
   toJSON MountedDataDisk {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataDisk" Core..=) Core.<$> dataDisk]
-      )
+      (Core.catMaybes [("dataDisk" Core..=) Core.<$> dataDisk])
 
 -- | Information about an output of a multi-output DoFn.
 --
@@ -5276,8 +5828,7 @@ instance Core.FromJSON MultiOutputInfo where
 
 instance Core.ToJSON MultiOutputInfo where
   toJSON MultiOutputInfo {..} =
-    Core.object
-      (Core.catMaybes [("tag" Core..=) Core.<$> tag])
+    Core.object (Core.catMaybes [("tag" Core..=) Core.<$> tag])
 
 -- | Basic metadata about a counter.
 --
@@ -5293,7 +5844,8 @@ data NameAndKind = NameAndKind
 -- | Creates a value of 'NameAndKind' with the minimum fields required to make a request.
 newNameAndKind ::
   NameAndKind
-newNameAndKind = NameAndKind {kind = Core.Nothing, name = Core.Nothing}
+newNameAndKind =
+  NameAndKind {kind = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON NameAndKind where
   parseJSON =
@@ -5301,15 +5853,67 @@ instance Core.FromJSON NameAndKind where
       "NameAndKind"
       ( \o ->
           NameAndKind
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON NameAndKind where
   toJSON NameAndKind {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name
+          [("kind" Core..=) Core.<$> kind, ("name" Core..=) Core.<$> name]
+      )
+
+-- | Statistics for the underflow and overflow bucket.
+--
+-- /See:/ 'newOutlierStats' smart constructor.
+data OutlierStats = OutlierStats
+  { -- | Number of values that are larger than the upper bound of the largest bucket.
+    overflowCount :: (Core.Maybe Core.Int64),
+    -- | Mean of values in the overflow bucket.
+    overflowMean :: (Core.Maybe Core.Double),
+    -- | Number of values that are smaller than the lower bound of the smallest bucket.
+    underflowCount :: (Core.Maybe Core.Int64),
+    -- | Mean of values in the undeflow bucket.
+    underflowMean :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OutlierStats' with the minimum fields required to make a request.
+newOutlierStats ::
+  OutlierStats
+newOutlierStats =
+  OutlierStats
+    { overflowCount = Core.Nothing,
+      overflowMean = Core.Nothing,
+      underflowCount = Core.Nothing,
+      underflowMean = Core.Nothing
+    }
+
+instance Core.FromJSON OutlierStats where
+  parseJSON =
+    Core.withObject
+      "OutlierStats"
+      ( \o ->
+          OutlierStats
+            Core.<$> (o Core..:? "overflowCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "overflowMean")
+            Core.<*> (o Core..:? "underflowCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "underflowMean")
+      )
+
+instance Core.ToJSON OutlierStats where
+  toJSON OutlierStats {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("overflowCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> overflowCount,
+            ("overflowMean" Core..=) Core.<$> overflowMean,
+            ("underflowCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> underflowCount,
+            ("underflowMean" Core..=) Core.<$> underflowMean
           ]
       )
 
@@ -5335,7 +5939,8 @@ instance Core.FromJSON Package where
       "Package"
       ( \o ->
           Package
-            Core.<$> (o Core..:? "location") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "location")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON Package where
@@ -5394,8 +5999,7 @@ instance Core.ToJSON ParDoInstruction where
     Core.object
       ( Core.catMaybes
           [ ("input" Core..=) Core.<$> input,
-            ("multiOutputInfos" Core..=)
-              Core.<$> multiOutputInfos,
+            ("multiOutputInfos" Core..=) Core.<$> multiOutputInfos,
             ("numOutputs" Core..=) Core.<$> numOutputs,
             ("sideInputs" Core..=) Core.<$> sideInputs,
             ("userFn" Core..=) Core.<$> userFn
@@ -5423,14 +6027,10 @@ instance Core.FromJSON ParDoInstruction_UserFn where
   parseJSON =
     Core.withObject
       "ParDoInstruction_UserFn"
-      ( \o ->
-          ParDoInstruction_UserFn
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> ParDoInstruction_UserFn Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON ParDoInstruction_UserFn where
-  toJSON ParDoInstruction_UserFn {..} =
-    Core.toJSON additional
+  toJSON ParDoInstruction_UserFn {..} = Core.toJSON additional
 
 -- | Describes a particular operation comprising a MapTask.
 --
@@ -5499,8 +6099,7 @@ instance Core.ToJSON ParallelInstruction where
             ("originalName" Core..=) Core.<$> originalName,
             ("outputs" Core..=) Core.<$> outputs,
             ("parDo" Core..=) Core.<$> parDo,
-            ("partialGroupByKey" Core..=)
-              Core.<$> partialGroupByKey,
+            ("partialGroupByKey" Core..=) Core.<$> partialGroupByKey,
             ("read" Core..=) Core.<$> read,
             ("systemName" Core..=) Core.<$> systemName,
             ("write" Core..=) Core.<$> write
@@ -5529,16 +6128,15 @@ instance Core.FromJSON Parameter where
       "Parameter"
       ( \o ->
           Parameter
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Parameter where
   toJSON Parameter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Metadata for a specific parameter.
@@ -5547,10 +6145,16 @@ instance Core.ToJSON Parameter where
 data ParameterMetadata = ParameterMetadata
   { -- | Optional. Additional metadata for describing this parameter.
     customMetadata :: (Core.Maybe ParameterMetadata_CustomMetadata),
+    -- | Optional. The default values will pre-populate the parameter with the given value from the proto. If default_value is left empty, the parameter will be populated with a default of the relevant type, e.g. false for a boolean.
+    defaultValue :: (Core.Maybe Core.Text),
+    -- | Optional. The options shown when ENUM ParameterType is specified.
+    enumOptions :: (Core.Maybe [ParameterMetadataEnumOption]),
     -- | Optional. Specifies a group name for this parameter to be rendered under. Group header text will be rendered exactly as specified in this field. Only considered when parent_name is NOT provided.
     groupName :: (Core.Maybe Core.Text),
     -- | Required. The help text to display for the parameter.
     helpText :: (Core.Maybe Core.Text),
+    -- | Optional. Whether the parameter should be hidden in the UI.
+    hiddenUi :: (Core.Maybe Core.Bool),
     -- | Optional. Whether the parameter is optional. Defaults to false.
     isOptional :: (Core.Maybe Core.Bool),
     -- | Required. The label to display for the parameter.
@@ -5574,8 +6178,11 @@ newParameterMetadata ::
 newParameterMetadata =
   ParameterMetadata
     { customMetadata = Core.Nothing,
+      defaultValue = Core.Nothing,
+      enumOptions = Core.Nothing,
       groupName = Core.Nothing,
       helpText = Core.Nothing,
+      hiddenUi = Core.Nothing,
       isOptional = Core.Nothing,
       label = Core.Nothing,
       name = Core.Nothing,
@@ -5592,8 +6199,11 @@ instance Core.FromJSON ParameterMetadata where
       ( \o ->
           ParameterMetadata
             Core.<$> (o Core..:? "customMetadata")
+            Core.<*> (o Core..:? "defaultValue")
+            Core.<*> (o Core..:? "enumOptions")
             Core.<*> (o Core..:? "groupName")
             Core.<*> (o Core..:? "helpText")
+            Core.<*> (o Core..:? "hiddenUi")
             Core.<*> (o Core..:? "isOptional")
             Core.<*> (o Core..:? "label")
             Core.<*> (o Core..:? "name")
@@ -5608,15 +6218,17 @@ instance Core.ToJSON ParameterMetadata where
     Core.object
       ( Core.catMaybes
           [ ("customMetadata" Core..=) Core.<$> customMetadata,
+            ("defaultValue" Core..=) Core.<$> defaultValue,
+            ("enumOptions" Core..=) Core.<$> enumOptions,
             ("groupName" Core..=) Core.<$> groupName,
             ("helpText" Core..=) Core.<$> helpText,
+            ("hiddenUi" Core..=) Core.<$> hiddenUi,
             ("isOptional" Core..=) Core.<$> isOptional,
             ("label" Core..=) Core.<$> label,
             ("name" Core..=) Core.<$> name,
             ("paramType" Core..=) Core.<$> paramType,
             ("parentName" Core..=) Core.<$> parentName,
-            ("parentTriggerValues" Core..=)
-              Core.<$> parentTriggerValues,
+            ("parentTriggerValues" Core..=) Core.<$> parentTriggerValues,
             ("regexes" Core..=) Core.<$> regexes
           ]
       )
@@ -5625,8 +6237,7 @@ instance Core.ToJSON ParameterMetadata where
 --
 -- /See:/ 'newParameterMetadata_CustomMetadata' smart constructor.
 newtype ParameterMetadata_CustomMetadata = ParameterMetadata_CustomMetadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5638,21 +6249,61 @@ newParameterMetadata_CustomMetadata ::
 newParameterMetadata_CustomMetadata additional =
   ParameterMetadata_CustomMetadata {additional = additional}
 
-instance
-  Core.FromJSON
-    ParameterMetadata_CustomMetadata
-  where
+instance Core.FromJSON ParameterMetadata_CustomMetadata where
   parseJSON =
     Core.withObject
       "ParameterMetadata_CustomMetadata"
       ( \o ->
-          ParameterMetadata_CustomMetadata
-            Core.<$> (Core.parseJSONObject o)
+          ParameterMetadata_CustomMetadata Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON ParameterMetadata_CustomMetadata where
   toJSON ParameterMetadata_CustomMetadata {..} =
     Core.toJSON additional
+
+-- | ParameterMetadataEnumOption specifies the option shown in the enum form.
+--
+-- /See:/ 'newParameterMetadataEnumOption' smart constructor.
+data ParameterMetadataEnumOption = ParameterMetadataEnumOption
+  { -- | Optional. The description to display for the enum option.
+    description :: (Core.Maybe Core.Text),
+    -- | Optional. The label to display for the enum option.
+    label :: (Core.Maybe Core.Text),
+    -- | Required. The value of the enum option.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ParameterMetadataEnumOption' with the minimum fields required to make a request.
+newParameterMetadataEnumOption ::
+  ParameterMetadataEnumOption
+newParameterMetadataEnumOption =
+  ParameterMetadataEnumOption
+    { description = Core.Nothing,
+      label = Core.Nothing,
+      value = Core.Nothing
+    }
+
+instance Core.FromJSON ParameterMetadataEnumOption where
+  parseJSON =
+    Core.withObject
+      "ParameterMetadataEnumOption"
+      ( \o ->
+          ParameterMetadataEnumOption
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "label")
+            Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON ParameterMetadataEnumOption where
+  toJSON ParameterMetadataEnumOption {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("label" Core..=) Core.<$> label,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | An instruction that does a partial group-by-key. One input and one output.
 --
@@ -5705,15 +6356,13 @@ instance Core.ToJSON PartialGroupByKeyInstruction where
     Core.object
       ( Core.catMaybes
           [ ("input" Core..=) Core.<$> input,
-            ("inputElementCodec" Core..=)
-              Core.<$> inputElementCodec,
+            ("inputElementCodec" Core..=) Core.<$> inputElementCodec,
             ("originalCombineValuesInputStoreName" Core..=)
               Core.<$> originalCombineValuesInputStoreName,
             ("originalCombineValuesStepName" Core..=)
               Core.<$> originalCombineValuesStepName,
             ("sideInputs" Core..=) Core.<$> sideInputs,
-            ("valueCombiningFn" Core..=)
-              Core.<$> valueCombiningFn
+            ("valueCombiningFn" Core..=) Core.<$> valueCombiningFn
           ]
       )
 
@@ -5732,7 +6381,10 @@ newPartialGroupByKeyInstruction_InputElementCodec ::
   Core.HashMap Core.Text Core.Value ->
   PartialGroupByKeyInstruction_InputElementCodec
 newPartialGroupByKeyInstruction_InputElementCodec additional =
-  PartialGroupByKeyInstruction_InputElementCodec {additional = additional}
+  PartialGroupByKeyInstruction_InputElementCodec
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -5746,13 +6398,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    PartialGroupByKeyInstruction_InputElementCodec
-  where
-  toJSON
-    PartialGroupByKeyInstruction_InputElementCodec {..} =
-      Core.toJSON additional
+instance Core.ToJSON PartialGroupByKeyInstruction_InputElementCodec where
+  toJSON PartialGroupByKeyInstruction_InputElementCodec {..} =
+    Core.toJSON additional
 
 -- | The value combining function to invoke.
 --
@@ -5769,7 +6417,10 @@ newPartialGroupByKeyInstruction_ValueCombiningFn ::
   Core.HashMap Core.Text Core.Value ->
   PartialGroupByKeyInstruction_ValueCombiningFn
 newPartialGroupByKeyInstruction_ValueCombiningFn additional =
-  PartialGroupByKeyInstruction_ValueCombiningFn {additional = additional}
+  PartialGroupByKeyInstruction_ValueCombiningFn
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -5783,13 +6434,85 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    PartialGroupByKeyInstruction_ValueCombiningFn
-  where
-  toJSON
-    PartialGroupByKeyInstruction_ValueCombiningFn {..} =
-      Core.toJSON additional
+instance Core.ToJSON PartialGroupByKeyInstruction_ValueCombiningFn where
+  toJSON PartialGroupByKeyInstruction_ValueCombiningFn {..} =
+    Core.toJSON additional
+
+-- | Metrics for a particular unfused step and namespace. A metric is uniquely identified by the @metrics_namespace@, @original_step@, @metric name@ and @metric_labels@.
+--
+-- /See:/ 'newPerStepNamespaceMetrics' smart constructor.
+data PerStepNamespaceMetrics = PerStepNamespaceMetrics
+  { -- | Optional. Metrics that are recorded for this namespace and unfused step.
+    metricValues :: (Core.Maybe [MetricValue]),
+    -- | The namespace of these metrics on the worker.
+    metricsNamespace :: (Core.Maybe Core.Text),
+    -- | The original system name of the unfused step that these metrics are reported from.
+    originalStep :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerStepNamespaceMetrics' with the minimum fields required to make a request.
+newPerStepNamespaceMetrics ::
+  PerStepNamespaceMetrics
+newPerStepNamespaceMetrics =
+  PerStepNamespaceMetrics
+    { metricValues = Core.Nothing,
+      metricsNamespace = Core.Nothing,
+      originalStep = Core.Nothing
+    }
+
+instance Core.FromJSON PerStepNamespaceMetrics where
+  parseJSON =
+    Core.withObject
+      "PerStepNamespaceMetrics"
+      ( \o ->
+          PerStepNamespaceMetrics
+            Core.<$> (o Core..:? "metricValues")
+            Core.<*> (o Core..:? "metricsNamespace")
+            Core.<*> (o Core..:? "originalStep")
+      )
+
+instance Core.ToJSON PerStepNamespaceMetrics where
+  toJSON PerStepNamespaceMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metricValues" Core..=) Core.<$> metricValues,
+            ("metricsNamespace" Core..=) Core.<$> metricsNamespace,
+            ("originalStep" Core..=) Core.<$> originalStep
+          ]
+      )
+
+-- | Per worker metrics.
+--
+-- /See:/ 'newPerWorkerMetrics' smart constructor.
+newtype PerWorkerMetrics = PerWorkerMetrics
+  { -- | Optional. Metrics for a particular unfused step and namespace.
+    perStepNamespaceMetrics :: (Core.Maybe [PerStepNamespaceMetrics])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerWorkerMetrics' with the minimum fields required to make a request.
+newPerWorkerMetrics ::
+  PerWorkerMetrics
+newPerWorkerMetrics =
+  PerWorkerMetrics {perStepNamespaceMetrics = Core.Nothing}
+
+instance Core.FromJSON PerWorkerMetrics where
+  parseJSON =
+    Core.withObject
+      "PerWorkerMetrics"
+      ( \o ->
+          PerWorkerMetrics Core.<$> (o Core..:? "perStepNamespaceMetrics")
+      )
+
+instance Core.ToJSON PerWorkerMetrics where
+  toJSON PerWorkerMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("perStepNamespaceMetrics" Core..=)
+              Core.<$> perStepNamespaceMetrics
+          ]
+      )
 
 -- | A descriptive representation of submitted pipeline as well as the executed form. This data is provided by the Dataflow service for ease of visualizing the pipeline and interpreting Dataflow provided metrics.
 --
@@ -5834,8 +6557,7 @@ instance Core.ToJSON PipelineDescription where
     Core.object
       ( Core.catMaybes
           [ ("displayData" Core..=) Core.<$> displayData,
-            ("executionPipelineStage" Core..=)
-              Core.<$> executionPipelineStage,
+            ("executionPipelineStage" Core..=) Core.<$> executionPipelineStage,
             ("originalPipelineTransform" Core..=)
               Core.<$> originalPipelineTransform,
             ("stepNamesHash" Core..=) Core.<$> stepNamesHash
@@ -5863,17 +6585,14 @@ instance Core.FromJSON Point where
     Core.withObject
       "Point"
       ( \o ->
-          Point
-            Core.<$> (o Core..:? "time") Core.<*> (o Core..:? "value")
+          Point Core.<$> (o Core..:? "time") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Point where
   toJSON Point {..} =
     Core.object
       ( Core.catMaybes
-          [ ("time" Core..=) Core.<$> time,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("time" Core..=) Core.<$> time, ("value" Core..=) Core.<$> value]
       )
 
 -- | Position defines a position within a collection of data. The value can be either the end position, a key (used with ordered collections), a byte offset, or a record index.
@@ -5914,15 +6633,11 @@ instance Core.FromJSON Position where
       "Position"
       ( \o ->
           Position
-            Core.<$> ( o Core..:? "byteOffset"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "byteOffset" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "concatPosition")
             Core.<*> (o Core..:? "end")
             Core.<*> (o Core..:? "key")
-            Core.<*> ( o Core..:? "recordIndex"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "recordIndex" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "shufflePosition")
       )
 
@@ -5930,15 +6645,12 @@ instance Core.ToJSON Position where
   toJSON Position {..} =
     Core.object
       ( Core.catMaybes
-          [ ("byteOffset" Core..=) Core.. Core.AsText
-              Core.<$> byteOffset,
+          [ ("byteOffset" Core..=) Core.. Core.AsText Core.<$> byteOffset,
             ("concatPosition" Core..=) Core.<$> concatPosition,
             ("end" Core..=) Core.<$> end,
             ("key" Core..=) Core.<$> key,
-            ("recordIndex" Core..=) Core.. Core.AsText
-              Core.<$> recordIndex,
-            ("shufflePosition" Core..=)
-              Core.<$> shufflePosition
+            ("recordIndex" Core..=) Core.. Core.AsText Core.<$> recordIndex,
+            ("shufflePosition" Core..=) Core.<$> shufflePosition
           ]
       )
 
@@ -5957,7 +6669,10 @@ data ProgressTimeseries = ProgressTimeseries
 newProgressTimeseries ::
   ProgressTimeseries
 newProgressTimeseries =
-  ProgressTimeseries {currentProgress = Core.Nothing, dataPoints = Core.Nothing}
+  ProgressTimeseries
+    { currentProgress = Core.Nothing,
+      dataPoints = Core.Nothing
+    }
 
 instance Core.FromJSON ProgressTimeseries where
   parseJSON =
@@ -5973,8 +6688,7 @@ instance Core.ToJSON ProgressTimeseries where
   toJSON ProgressTimeseries {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentProgress" Core..=)
-              Core.<$> currentProgress,
+          [ ("currentProgress" Core..=) Core.<$> currentProgress,
             ("dataPoints" Core..=) Core.<$> dataPoints
           ]
       )
@@ -5994,7 +6708,10 @@ data PubSubIODetails = PubSubIODetails
 newPubSubIODetails ::
   PubSubIODetails
 newPubSubIODetails =
-  PubSubIODetails {subscription = Core.Nothing, topic = Core.Nothing}
+  PubSubIODetails
+    { subscription = Core.Nothing,
+      topic = Core.Nothing
+    }
 
 instance Core.FromJSON PubSubIODetails where
   parseJSON =
@@ -6021,6 +6738,8 @@ instance Core.ToJSON PubSubIODetails where
 data PubsubLocation = PubsubLocation
   { -- | Indicates whether the pipeline allows late-arriving data.
     dropLateData :: (Core.Maybe Core.Bool),
+    -- | If true, then this location represents dynamic topics.
+    dynamicDestinations :: (Core.Maybe Core.Bool),
     -- | If set, contains a pubsub label from which to extract record ids. If left empty, record deduplication will be strictly best effort.
     idLabel :: (Core.Maybe Core.Text),
     -- | A pubsub subscription, in the form of \"pubsub.googleapis.com\/subscriptions\/\/\"
@@ -6042,6 +6761,7 @@ newPubsubLocation ::
 newPubsubLocation =
   PubsubLocation
     { dropLateData = Core.Nothing,
+      dynamicDestinations = Core.Nothing,
       idLabel = Core.Nothing,
       subscription = Core.Nothing,
       timestampLabel = Core.Nothing,
@@ -6057,6 +6777,7 @@ instance Core.FromJSON PubsubLocation where
       ( \o ->
           PubsubLocation
             Core.<$> (o Core..:? "dropLateData")
+            Core.<*> (o Core..:? "dynamicDestinations")
             Core.<*> (o Core..:? "idLabel")
             Core.<*> (o Core..:? "subscription")
             Core.<*> (o Core..:? "timestampLabel")
@@ -6070,12 +6791,12 @@ instance Core.ToJSON PubsubLocation where
     Core.object
       ( Core.catMaybes
           [ ("dropLateData" Core..=) Core.<$> dropLateData,
+            ("dynamicDestinations" Core..=) Core.<$> dynamicDestinations,
             ("idLabel" Core..=) Core.<$> idLabel,
             ("subscription" Core..=) Core.<$> subscription,
             ("timestampLabel" Core..=) Core.<$> timestampLabel,
             ("topic" Core..=) Core.<$> topic,
-            ("trackingSubscription" Core..=)
-              Core.<$> trackingSubscription,
+            ("trackingSubscription" Core..=) Core.<$> trackingSubscription,
             ("withAttributes" Core..=) Core.<$> withAttributes
           ]
       )
@@ -6142,14 +6863,11 @@ instance Core.FromJSON ReadInstruction where
   parseJSON =
     Core.withObject
       "ReadInstruction"
-      ( \o ->
-          ReadInstruction Core.<$> (o Core..:? "source")
-      )
+      (\o -> ReadInstruction Core.<$> (o Core..:? "source"))
 
 instance Core.ToJSON ReadInstruction where
   toJSON ReadInstruction {..} =
-    Core.object
-      (Core.catMaybes [("source" Core..=) Core.<$> source])
+    Core.object (Core.catMaybes [("source" Core..=) Core.<$> source])
 
 -- | Request to report the status of WorkItems.
 --
@@ -6159,6 +6877,8 @@ data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest
     currentWorkerTime :: (Core.Maybe Core.DateTime),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains the WorkItem\'s job.
     location :: (Core.Maybe Core.Text),
+    -- | Optional. The project number of the project which owns the WorkItem\'s job.
+    projectNumber :: (Core.Maybe Core.Int64),
     -- | Untranslated bag-of-bytes WorkProgressUpdateRequest from UnifiedWorker.
     unifiedWorkerRequest :: (Core.Maybe ReportWorkItemStatusRequest_UnifiedWorkerRequest),
     -- | The order is unimportant, except that the order of the WorkItemServiceState messages in the ReportWorkItemStatusResponse corresponds to the order of WorkItemStatus messages here.
@@ -6175,6 +6895,7 @@ newReportWorkItemStatusRequest =
   ReportWorkItemStatusRequest
     { currentWorkerTime = Core.Nothing,
       location = Core.Nothing,
+      projectNumber = Core.Nothing,
       unifiedWorkerRequest = Core.Nothing,
       workItemStatuses = Core.Nothing,
       workerId = Core.Nothing
@@ -6188,6 +6909,7 @@ instance Core.FromJSON ReportWorkItemStatusRequest where
           ReportWorkItemStatusRequest
             Core.<$> (o Core..:? "currentWorkerTime")
             Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "projectNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "unifiedWorkerRequest")
             Core.<*> (o Core..:? "workItemStatuses")
             Core.<*> (o Core..:? "workerId")
@@ -6197,13 +6919,13 @@ instance Core.ToJSON ReportWorkItemStatusRequest where
   toJSON ReportWorkItemStatusRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentWorkerTime" Core..=)
-              Core.<$> currentWorkerTime,
+          [ ("currentWorkerTime" Core..=) Core.<$> currentWorkerTime,
             ("location" Core..=) Core.<$> location,
-            ("unifiedWorkerRequest" Core..=)
-              Core.<$> unifiedWorkerRequest,
-            ("workItemStatuses" Core..=)
-              Core.<$> workItemStatuses,
+            ("projectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> projectNumber,
+            ("unifiedWorkerRequest" Core..=) Core.<$> unifiedWorkerRequest,
+            ("workItemStatuses" Core..=) Core.<$> workItemStatuses,
             ("workerId" Core..=) Core.<$> workerId
           ]
       )
@@ -6223,7 +6945,10 @@ newReportWorkItemStatusRequest_UnifiedWorkerRequest ::
   Core.HashMap Core.Text Core.Value ->
   ReportWorkItemStatusRequest_UnifiedWorkerRequest
 newReportWorkItemStatusRequest_UnifiedWorkerRequest additional =
-  ReportWorkItemStatusRequest_UnifiedWorkerRequest {additional = additional}
+  ReportWorkItemStatusRequest_UnifiedWorkerRequest
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -6241,9 +6966,8 @@ instance
   Core.ToJSON
     ReportWorkItemStatusRequest_UnifiedWorkerRequest
   where
-  toJSON
-    ReportWorkItemStatusRequest_UnifiedWorkerRequest {..} =
-      Core.toJSON additional
+  toJSON ReportWorkItemStatusRequest_UnifiedWorkerRequest {..} =
+    Core.toJSON additional
 
 -- | Response from a request to report the status of WorkItems.
 --
@@ -6261,7 +6985,8 @@ newReportWorkItemStatusResponse ::
   ReportWorkItemStatusResponse
 newReportWorkItemStatusResponse =
   ReportWorkItemStatusResponse
-    { unifiedWorkerResponse = Core.Nothing,
+    { unifiedWorkerResponse =
+        Core.Nothing,
       workItemServiceStates = Core.Nothing
     }
 
@@ -6279,10 +7004,8 @@ instance Core.ToJSON ReportWorkItemStatusResponse where
   toJSON ReportWorkItemStatusResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unifiedWorkerResponse" Core..=)
-              Core.<$> unifiedWorkerResponse,
-            ("workItemServiceStates" Core..=)
-              Core.<$> workItemServiceStates
+          [ ("unifiedWorkerResponse" Core..=) Core.<$> unifiedWorkerResponse,
+            ("workItemServiceStates" Core..=) Core.<$> workItemServiceStates
           ]
       )
 
@@ -6301,7 +7024,10 @@ newReportWorkItemStatusResponse_UnifiedWorkerResponse ::
   Core.HashMap Core.Text Core.Value ->
   ReportWorkItemStatusResponse_UnifiedWorkerResponse
 newReportWorkItemStatusResponse_UnifiedWorkerResponse additional =
-  ReportWorkItemStatusResponse_UnifiedWorkerResponse {additional = additional}
+  ReportWorkItemStatusResponse_UnifiedWorkerResponse
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -6319,9 +7045,8 @@ instance
   Core.ToJSON
     ReportWorkItemStatusResponse_UnifiedWorkerResponse
   where
-  toJSON
-    ReportWorkItemStatusResponse_UnifiedWorkerResponse {..} =
-      Core.toJSON additional
+  toJSON ReportWorkItemStatusResponse_UnifiedWorkerResponse {..} =
+    Core.toJSON additional
 
 -- | Represents the level of parallelism in a WorkItem\'s input, reported by the worker.
 --
@@ -6338,7 +7063,10 @@ data ReportedParallelism = ReportedParallelism
 newReportedParallelism ::
   ReportedParallelism
 newReportedParallelism =
-  ReportedParallelism {isInfinite = Core.Nothing, value = Core.Nothing}
+  ReportedParallelism
+    { isInfinite = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ReportedParallelism where
   parseJSON =
@@ -6367,6 +7095,8 @@ data ResourceUtilizationReport = ResourceUtilizationReport
     containers :: (Core.Maybe ResourceUtilizationReport_Containers),
     -- | CPU utilization samples.
     cpuTime :: (Core.Maybe [CPUTime]),
+    -- | Optional. GPU usage samples.
+    gpuUsage :: (Core.Maybe [GPUUsage]),
     -- | Memory utilization samples.
     memoryInfo :: (Core.Maybe [MemInfo])
   }
@@ -6379,6 +7109,7 @@ newResourceUtilizationReport =
   ResourceUtilizationReport
     { containers = Core.Nothing,
       cpuTime = Core.Nothing,
+      gpuUsage = Core.Nothing,
       memoryInfo = Core.Nothing
     }
 
@@ -6390,6 +7121,7 @@ instance Core.FromJSON ResourceUtilizationReport where
           ResourceUtilizationReport
             Core.<$> (o Core..:? "containers")
             Core.<*> (o Core..:? "cpuTime")
+            Core.<*> (o Core..:? "gpuUsage")
             Core.<*> (o Core..:? "memoryInfo")
       )
 
@@ -6399,6 +7131,7 @@ instance Core.ToJSON ResourceUtilizationReport where
       ( Core.catMaybes
           [ ("containers" Core..=) Core.<$> containers,
             ("cpuTime" Core..=) Core.<$> cpuTime,
+            ("gpuUsage" Core..=) Core.<$> gpuUsage,
             ("memoryInfo" Core..=) Core.<$> memoryInfo
           ]
       )
@@ -6407,8 +7140,7 @@ instance Core.ToJSON ResourceUtilizationReport where
 --
 -- /See:/ 'newResourceUtilizationReport_Containers' smart constructor.
 newtype ResourceUtilizationReport_Containers = ResourceUtilizationReport_Containers
-  { -- |
-    additional :: (Core.HashMap Core.Text ResourceUtilizationReport)
+  { additional :: (Core.HashMap Core.Text ResourceUtilizationReport)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6420,10 +7152,7 @@ newResourceUtilizationReport_Containers ::
 newResourceUtilizationReport_Containers additional =
   ResourceUtilizationReport_Containers {additional = additional}
 
-instance
-  Core.FromJSON
-    ResourceUtilizationReport_Containers
-  where
+instance Core.FromJSON ResourceUtilizationReport_Containers where
   parseJSON =
     Core.withObject
       "ResourceUtilizationReport_Containers"
@@ -6432,10 +7161,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ResourceUtilizationReport_Containers
-  where
+instance Core.ToJSON ResourceUtilizationReport_Containers where
   toJSON ResourceUtilizationReport_Containers {..} =
     Core.toJSON additional
 
@@ -6448,21 +7174,16 @@ data ResourceUtilizationReportResponse = ResourceUtilizationReportResponse
 -- | Creates a value of 'ResourceUtilizationReportResponse' with the minimum fields required to make a request.
 newResourceUtilizationReportResponse ::
   ResourceUtilizationReportResponse
-newResourceUtilizationReportResponse = ResourceUtilizationReportResponse
+newResourceUtilizationReportResponse =
+  ResourceUtilizationReportResponse
 
-instance
-  Core.FromJSON
-    ResourceUtilizationReportResponse
-  where
+instance Core.FromJSON ResourceUtilizationReportResponse where
   parseJSON =
     Core.withObject
       "ResourceUtilizationReportResponse"
       (\o -> Core.pure ResourceUtilizationReportResponse)
 
-instance
-  Core.ToJSON
-    ResourceUtilizationReportResponse
-  where
+instance Core.ToJSON ResourceUtilizationReportResponse where
   toJSON = Core.const Core.emptyObject
 
 -- | The environment values to set at runtime.
@@ -6475,6 +7196,8 @@ data RuntimeEnvironment = RuntimeEnvironment
     additionalUserLabels :: (Core.Maybe RuntimeEnvironment_AdditionalUserLabels),
     -- | Optional. Whether to bypass the safety checks for the job\'s temporary directory. Use with caution.
     bypassTempDirValidation :: (Core.Maybe Core.Bool),
+    -- | Optional. The disk size, in gigabytes, to use on each remote Compute Engine worker instance.
+    diskSizeGb :: (Core.Maybe Core.Int32),
     -- | Optional. Whether to enable Streaming Engine for the job.
     enableStreamingEngine :: (Core.Maybe Core.Bool),
     -- | Optional. Configuration for VM IPs.
@@ -6491,6 +7214,8 @@ data RuntimeEnvironment = RuntimeEnvironment
     numWorkers :: (Core.Maybe Core.Int32),
     -- | Optional. The email address of the service account to run the job as.
     serviceAccountEmail :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+    streamingMode :: (Core.Maybe RuntimeEnvironment_StreamingMode),
     -- | Optional. Subnetwork to which VMs will be assigned, if desired. You can specify a subnetwork using either a complete URL or an abbreviated path. Expected to be of the form \"https:\/\/www.googleapis.com\/compute\/v1\/projects\/HOST/PROJECT/ID\/regions\/REGION\/subnetworks\/SUBNETWORK\" or \"regions\/REGION\/subnetworks\/SUBNETWORK\". If the subnetwork is located in a Shared VPC network, you must use the complete URL.
     subnetwork :: (Core.Maybe Core.Text),
     -- | Required. The Cloud Storage path to use for temporary files. Must be a valid Cloud Storage URL, beginning with @gs:\/\/@.
@@ -6512,6 +7237,7 @@ newRuntimeEnvironment =
     { additionalExperiments = Core.Nothing,
       additionalUserLabels = Core.Nothing,
       bypassTempDirValidation = Core.Nothing,
+      diskSizeGb = Core.Nothing,
       enableStreamingEngine = Core.Nothing,
       ipConfiguration = Core.Nothing,
       kmsKeyName = Core.Nothing,
@@ -6520,6 +7246,7 @@ newRuntimeEnvironment =
       network = Core.Nothing,
       numWorkers = Core.Nothing,
       serviceAccountEmail = Core.Nothing,
+      streamingMode = Core.Nothing,
       subnetwork = Core.Nothing,
       tempLocation = Core.Nothing,
       workerRegion = Core.Nothing,
@@ -6536,6 +7263,7 @@ instance Core.FromJSON RuntimeEnvironment where
             Core.<$> (o Core..:? "additionalExperiments")
             Core.<*> (o Core..:? "additionalUserLabels")
             Core.<*> (o Core..:? "bypassTempDirValidation")
+            Core.<*> (o Core..:? "diskSizeGb")
             Core.<*> (o Core..:? "enableStreamingEngine")
             Core.<*> (o Core..:? "ipConfiguration")
             Core.<*> (o Core..:? "kmsKeyName")
@@ -6544,6 +7272,7 @@ instance Core.FromJSON RuntimeEnvironment where
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "numWorkers")
             Core.<*> (o Core..:? "serviceAccountEmail")
+            Core.<*> (o Core..:? "streamingMode")
             Core.<*> (o Core..:? "subnetwork")
             Core.<*> (o Core..:? "tempLocation")
             Core.<*> (o Core..:? "workerRegion")
@@ -6555,22 +7284,20 @@ instance Core.ToJSON RuntimeEnvironment where
   toJSON RuntimeEnvironment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalExperiments" Core..=)
-              Core.<$> additionalExperiments,
-            ("additionalUserLabels" Core..=)
-              Core.<$> additionalUserLabels,
+          [ ("additionalExperiments" Core..=) Core.<$> additionalExperiments,
+            ("additionalUserLabels" Core..=) Core.<$> additionalUserLabels,
             ("bypassTempDirValidation" Core..=)
               Core.<$> bypassTempDirValidation,
-            ("enableStreamingEngine" Core..=)
-              Core.<$> enableStreamingEngine,
+            ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
+            ("enableStreamingEngine" Core..=) Core.<$> enableStreamingEngine,
             ("ipConfiguration" Core..=) Core.<$> ipConfiguration,
             ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
             ("machineType" Core..=) Core.<$> machineType,
             ("maxWorkers" Core..=) Core.<$> maxWorkers,
             ("network" Core..=) Core.<$> network,
             ("numWorkers" Core..=) Core.<$> numWorkers,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
+            ("streamingMode" Core..=) Core.<$> streamingMode,
             ("subnetwork" Core..=) Core.<$> subnetwork,
             ("tempLocation" Core..=) Core.<$> tempLocation,
             ("workerRegion" Core..=) Core.<$> workerRegion,
@@ -6583,8 +7310,7 @@ instance Core.ToJSON RuntimeEnvironment where
 --
 -- /See:/ 'newRuntimeEnvironment_AdditionalUserLabels' smart constructor.
 newtype RuntimeEnvironment_AdditionalUserLabels = RuntimeEnvironment_AdditionalUserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6596,10 +7322,7 @@ newRuntimeEnvironment_AdditionalUserLabels ::
 newRuntimeEnvironment_AdditionalUserLabels additional =
   RuntimeEnvironment_AdditionalUserLabels {additional = additional}
 
-instance
-  Core.FromJSON
-    RuntimeEnvironment_AdditionalUserLabels
-  where
+instance Core.FromJSON RuntimeEnvironment_AdditionalUserLabels where
   parseJSON =
     Core.withObject
       "RuntimeEnvironment_AdditionalUserLabels"
@@ -6608,10 +7331,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RuntimeEnvironment_AdditionalUserLabels
-  where
+instance Core.ToJSON RuntimeEnvironment_AdditionalUserLabels where
   toJSON RuntimeEnvironment_AdditionalUserLabels {..} =
     Core.toJSON additional
 
@@ -6630,7 +7350,10 @@ data RuntimeMetadata = RuntimeMetadata
 newRuntimeMetadata ::
   RuntimeMetadata
 newRuntimeMetadata =
-  RuntimeMetadata {parameters = Core.Nothing, sdkInfo = Core.Nothing}
+  RuntimeMetadata
+    { parameters = Core.Nothing,
+      sdkInfo = Core.Nothing
+    }
 
 instance Core.FromJSON RuntimeMetadata where
   parseJSON =
@@ -6651,6 +7374,50 @@ instance Core.ToJSON RuntimeMetadata where
           ]
       )
 
+-- | Additional job parameters that can only be updated during runtime using the projects.jobs.update method. These fields have no effect when specified during job creation.
+--
+-- /See:/ 'newRuntimeUpdatableParams' smart constructor.
+data RuntimeUpdatableParams = RuntimeUpdatableParams
+  { -- | The maximum number of workers to cap autoscaling at. This field is currently only supported for Streaming Engine jobs.
+    maxNumWorkers :: (Core.Maybe Core.Int32),
+    -- | The minimum number of workers to scale down to. This field is currently only supported for Streaming Engine jobs.
+    minNumWorkers :: (Core.Maybe Core.Int32),
+    -- | Target worker utilization, compared against the aggregate utilization of the worker pool by autoscaler, to determine upscaling and downscaling when absent other constraints such as backlog. For more information, see <https://cloud.google.com/dataflow/docs/guides/updating-a-pipeline Update an existing pipeline>.
+    workerUtilizationHint :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RuntimeUpdatableParams' with the minimum fields required to make a request.
+newRuntimeUpdatableParams ::
+  RuntimeUpdatableParams
+newRuntimeUpdatableParams =
+  RuntimeUpdatableParams
+    { maxNumWorkers = Core.Nothing,
+      minNumWorkers = Core.Nothing,
+      workerUtilizationHint = Core.Nothing
+    }
+
+instance Core.FromJSON RuntimeUpdatableParams where
+  parseJSON =
+    Core.withObject
+      "RuntimeUpdatableParams"
+      ( \o ->
+          RuntimeUpdatableParams
+            Core.<$> (o Core..:? "maxNumWorkers")
+            Core.<*> (o Core..:? "minNumWorkers")
+            Core.<*> (o Core..:? "workerUtilizationHint")
+      )
+
+instance Core.ToJSON RuntimeUpdatableParams where
+  toJSON RuntimeUpdatableParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxNumWorkers" Core..=) Core.<$> maxNumWorkers,
+            ("minNumWorkers" Core..=) Core.<$> minNumWorkers,
+            ("workerUtilizationHint" Core..=) Core.<$> workerUtilizationHint
+          ]
+      )
+
 -- | SDK Information.
 --
 -- /See:/ 'newSDKInfo' smart constructor.
@@ -6665,7 +7432,8 @@ data SDKInfo = SDKInfo
 -- | Creates a value of 'SDKInfo' with the minimum fields required to make a request.
 newSDKInfo ::
   SDKInfo
-newSDKInfo = SDKInfo {language = Core.Nothing, version = Core.Nothing}
+newSDKInfo =
+  SDKInfo {language = Core.Nothing, version = Core.Nothing}
 
 instance Core.FromJSON SDKInfo where
   parseJSON =
@@ -6683,6 +7451,50 @@ instance Core.ToJSON SDKInfo where
       ( Core.catMaybes
           [ ("language" Core..=) Core.<$> language,
             ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | A bug found in the Dataflow SDK.
+--
+-- /See:/ 'newSdkBug' smart constructor.
+data SdkBug = SdkBug
+  { -- | Output only. How severe the SDK bug is.
+    severity :: (Core.Maybe SdkBug_Severity),
+    -- | Output only. Describes the impact of this SDK bug.
+    type' :: (Core.Maybe SdkBug_Type),
+    -- | Output only. Link to more information on the bug.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SdkBug' with the minimum fields required to make a request.
+newSdkBug ::
+  SdkBug
+newSdkBug =
+  SdkBug
+    { severity = Core.Nothing,
+      type' = Core.Nothing,
+      uri = Core.Nothing
+    }
+
+instance Core.FromJSON SdkBug where
+  parseJSON =
+    Core.withObject
+      "SdkBug"
+      ( \o ->
+          SdkBug
+            Core.<$> (o Core..:? "severity")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON SdkBug where
+  toJSON SdkBug {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("severity" Core..=) Core.<$> severity,
+            ("type" Core..=) Core.<$> type',
+            ("uri" Core..=) Core.<$> uri
           ]
       )
 
@@ -6740,7 +7552,9 @@ instance Core.ToJSON SdkHarnessContainerImage where
 --
 -- /See:/ 'newSdkVersion' smart constructor.
 data SdkVersion = SdkVersion
-  { -- | The support status for this SDK version.
+  { -- | Output only. Known bugs found in this SDK version.
+    bugs :: (Core.Maybe [SdkBug]),
+    -- | The support status for this SDK version.
     sdkSupportStatus :: (Core.Maybe SdkVersion_SdkSupportStatus),
     -- | The version of the SDK used to run the job.
     version :: (Core.Maybe Core.Text),
@@ -6754,7 +7568,8 @@ newSdkVersion ::
   SdkVersion
 newSdkVersion =
   SdkVersion
-    { sdkSupportStatus = Core.Nothing,
+    { bugs = Core.Nothing,
+      sdkSupportStatus = Core.Nothing,
       version = Core.Nothing,
       versionDisplayName = Core.Nothing
     }
@@ -6765,7 +7580,8 @@ instance Core.FromJSON SdkVersion where
       "SdkVersion"
       ( \o ->
           SdkVersion
-            Core.<$> (o Core..:? "sdkSupportStatus")
+            Core.<$> (o Core..:? "bugs")
+            Core.<*> (o Core..:? "sdkSupportStatus")
             Core.<*> (o Core..:? "version")
             Core.<*> (o Core..:? "versionDisplayName")
       )
@@ -6774,11 +7590,10 @@ instance Core.ToJSON SdkVersion where
   toJSON SdkVersion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sdkSupportStatus" Core..=)
-              Core.<$> sdkSupportStatus,
+          [ ("bugs" Core..=) Core.<$> bugs,
+            ("sdkSupportStatus" Core..=) Core.<$> sdkSupportStatus,
             ("version" Core..=) Core.<$> version,
-            ("versionDisplayName" Core..=)
-              Core.<$> versionDisplayName
+            ("versionDisplayName" Core..=) Core.<$> versionDisplayName
           ]
       )
 
@@ -7001,15 +7816,14 @@ newSeqMapTask_UserFn ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   SeqMapTask_UserFn
-newSeqMapTask_UserFn additional = SeqMapTask_UserFn {additional = additional}
+newSeqMapTask_UserFn additional =
+  SeqMapTask_UserFn {additional = additional}
 
 instance Core.FromJSON SeqMapTask_UserFn where
   parseJSON =
     Core.withObject
       "SeqMapTask_UserFn"
-      ( \o ->
-          SeqMapTask_UserFn Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> SeqMapTask_UserFn Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON SeqMapTask_UserFn where
   toJSON SeqMapTask_UserFn {..} = Core.toJSON additional
@@ -7037,17 +7851,40 @@ instance Core.FromJSON SeqMapTaskOutputInfo where
       "SeqMapTaskOutputInfo"
       ( \o ->
           SeqMapTaskOutputInfo
-            Core.<$> (o Core..:? "sink") Core.<*> (o Core..:? "tag")
+            Core.<$> (o Core..:? "sink")
+            Core.<*> (o Core..:? "tag")
       )
 
 instance Core.ToJSON SeqMapTaskOutputInfo where
   toJSON SeqMapTaskOutputInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sink" Core..=) Core.<$> sink,
-            ("tag" Core..=) Core.<$> tag
-          ]
+          [("sink" Core..=) Core.<$> sink, ("tag" Core..=) Core.<$> tag]
       )
+
+-- | Resources used by the Dataflow Service to run the job.
+--
+-- /See:/ 'newServiceResources' smart constructor.
+newtype ServiceResources = ServiceResources
+  { -- | Output only. List of Cloud Zones being used by the Dataflow Service for this job. Example: us-central1-c
+    zones :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceResources' with the minimum fields required to make a request.
+newServiceResources ::
+  ServiceResources
+newServiceResources = ServiceResources {zones = Core.Nothing}
+
+instance Core.FromJSON ServiceResources where
+  parseJSON =
+    Core.withObject
+      "ServiceResources"
+      (\o -> ServiceResources Core.<$> (o Core..:? "zones"))
+
+instance Core.ToJSON ServiceResources where
+  toJSON ServiceResources {..} =
+    Core.object (Core.catMaybes [("zones" Core..=) Core.<$> zones])
 
 -- | A task which consists of a shell command for the worker to execute.
 --
@@ -7063,7 +7900,8 @@ data ShellTask = ShellTask
 -- | Creates a value of 'ShellTask' with the minimum fields required to make a request.
 newShellTask ::
   ShellTask
-newShellTask = ShellTask {command = Core.Nothing, exitCode = Core.Nothing}
+newShellTask =
+  ShellTask {command = Core.Nothing, exitCode = Core.Nothing}
 
 instance Core.FromJSON ShellTask where
   parseJSON =
@@ -7142,19 +7980,17 @@ newSideInputInfo_Kind ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   SideInputInfo_Kind
-newSideInputInfo_Kind additional = SideInputInfo_Kind {additional = additional}
+newSideInputInfo_Kind additional =
+  SideInputInfo_Kind {additional = additional}
 
 instance Core.FromJSON SideInputInfo_Kind where
   parseJSON =
     Core.withObject
       "SideInputInfo_Kind"
-      ( \o ->
-          SideInputInfo_Kind Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> SideInputInfo_Kind Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON SideInputInfo_Kind where
-  toJSON SideInputInfo_Kind {..} =
-    Core.toJSON additional
+  toJSON SideInputInfo_Kind {..} = Core.toJSON additional
 
 -- | A sink that records can be encoded and written to.
 --
@@ -7177,17 +8013,14 @@ instance Core.FromJSON Sink where
     Core.withObject
       "Sink"
       ( \o ->
-          Sink
-            Core.<$> (o Core..:? "codec") Core.<*> (o Core..:? "spec")
+          Sink Core.<$> (o Core..:? "codec") Core.<*> (o Core..:? "spec")
       )
 
 instance Core.ToJSON Sink where
   toJSON Sink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("codec" Core..=) Core.<$> codec,
-            ("spec" Core..=) Core.<$> spec
-          ]
+          [("codec" Core..=) Core.<$> codec, ("spec" Core..=) Core.<$> spec]
       )
 
 -- | The codec to use to encode data written to the sink.
@@ -7292,9 +8125,7 @@ instance Core.FromJSON Snapshot where
           Snapshot
             Core.<$> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "diskSizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "diskSizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "pubsubMetadata")
@@ -7310,7 +8141,8 @@ instance Core.ToJSON Snapshot where
       ( Core.catMaybes
           [ ("creationTime" Core..=) Core.<$> creationTime,
             ("description" Core..=) Core.<$> description,
-            ("diskSizeBytes" Core..=) Core.. Core.AsText
+            ("diskSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> diskSizeBytes,
             ("id" Core..=) Core.<$> id,
             ("projectId" Core..=) Core.<$> projectId,
@@ -7419,8 +8251,7 @@ instance Core.ToJSON Source where
       ( Core.catMaybes
           [ ("baseSpecs" Core..=) Core.<$> baseSpecs,
             ("codec" Core..=) Core.<$> codec,
-            ("doesNotNeedSplitting" Core..=)
-              Core.<$> doesNotNeedSplitting,
+            ("doesNotNeedSplitting" Core..=) Core.<$> doesNotNeedSplitting,
             ("metadata" Core..=) Core.<$> metadata,
             ("spec" Core..=) Core.<$> spec
           ]
@@ -7446,14 +8277,10 @@ instance Core.FromJSON Source_BaseSpecsItem where
   parseJSON =
     Core.withObject
       "Source_BaseSpecsItem"
-      ( \o ->
-          Source_BaseSpecsItem
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Source_BaseSpecsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Source_BaseSpecsItem where
-  toJSON Source_BaseSpecsItem {..} =
-    Core.toJSON additional
+  toJSON Source_BaseSpecsItem {..} = Core.toJSON additional
 
 -- | The codec to use to decode data read from the source.
 --
@@ -7475,9 +8302,7 @@ instance Core.FromJSON Source_Codec where
   parseJSON =
     Core.withObject
       "Source_Codec"
-      ( \o ->
-          Source_Codec Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Source_Codec Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Source_Codec where
   toJSON Source_Codec {..} = Core.toJSON additional
@@ -7502,9 +8327,7 @@ instance Core.FromJSON Source_Spec where
   parseJSON =
     Core.withObject
       "Source_Spec"
-      ( \o ->
-          Source_Spec Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Source_Spec Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Source_Spec where
   toJSON Source_Spec {..} = Core.toJSON additional
@@ -7570,21 +8393,18 @@ newtype SourceGetMetadataRequest = SourceGetMetadataRequest
 -- | Creates a value of 'SourceGetMetadataRequest' with the minimum fields required to make a request.
 newSourceGetMetadataRequest ::
   SourceGetMetadataRequest
-newSourceGetMetadataRequest = SourceGetMetadataRequest {source = Core.Nothing}
+newSourceGetMetadataRequest =
+  SourceGetMetadataRequest {source = Core.Nothing}
 
 instance Core.FromJSON SourceGetMetadataRequest where
   parseJSON =
     Core.withObject
       "SourceGetMetadataRequest"
-      ( \o ->
-          SourceGetMetadataRequest
-            Core.<$> (o Core..:? "source")
-      )
+      (\o -> SourceGetMetadataRequest Core.<$> (o Core..:? "source"))
 
 instance Core.ToJSON SourceGetMetadataRequest where
   toJSON SourceGetMetadataRequest {..} =
-    Core.object
-      (Core.catMaybes [("source" Core..=) Core.<$> source])
+    Core.object (Core.catMaybes [("source" Core..=) Core.<$> source])
 
 -- | The result of a SourceGetMetadataOperation.
 --
@@ -7605,17 +8425,12 @@ instance Core.FromJSON SourceGetMetadataResponse where
   parseJSON =
     Core.withObject
       "SourceGetMetadataResponse"
-      ( \o ->
-          SourceGetMetadataResponse
-            Core.<$> (o Core..:? "metadata")
-      )
+      (\o -> SourceGetMetadataResponse Core.<$> (o Core..:? "metadata"))
 
 instance Core.ToJSON SourceGetMetadataResponse where
   toJSON SourceGetMetadataResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("metadata" Core..=) Core.<$> metadata]
-      )
+      (Core.catMaybes [("metadata" Core..=) Core.<$> metadata])
 
 -- | Metadata about a Source useful for automatically optimizing and tuning the pipeline, etc.
 --
@@ -7646,7 +8461,8 @@ instance Core.FromJSON SourceMetadata where
       "SourceMetadata"
       ( \o ->
           SourceMetadata
-            Core.<$> ( o Core..:? "estimatedSizeBytes"
+            Core.<$> ( o
+                         Core..:? "estimatedSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "infinite")
@@ -7657,11 +8473,11 @@ instance Core.ToJSON SourceMetadata where
   toJSON SourceMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("estimatedSizeBytes" Core..=) Core.. Core.AsText
+          [ ("estimatedSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> estimatedSizeBytes,
             ("infinite" Core..=) Core.<$> infinite,
-            ("producesSortedKeys" Core..=)
-              Core.<$> producesSortedKeys
+            ("producesSortedKeys" Core..=) Core.<$> producesSortedKeys
           ]
       )
 
@@ -7739,7 +8555,10 @@ data SourceOperationResponse = SourceOperationResponse
 newSourceOperationResponse ::
   SourceOperationResponse
 newSourceOperationResponse =
-  SourceOperationResponse {getMetadata = Core.Nothing, split = Core.Nothing}
+  SourceOperationResponse
+    { getMetadata = Core.Nothing,
+      split = Core.Nothing
+    }
 
 instance Core.FromJSON SourceOperationResponse where
   parseJSON =
@@ -7786,10 +8605,12 @@ instance Core.FromJSON SourceSplitOptions where
       "SourceSplitOptions"
       ( \o ->
           SourceSplitOptions
-            Core.<$> ( o Core..:? "desiredBundleSizeBytes"
+            Core.<$> ( o
+                         Core..:? "desiredBundleSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "desiredShardSizeBytes"
+            Core.<*> ( o
+                         Core..:? "desiredShardSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -7801,7 +8622,8 @@ instance Core.ToJSON SourceSplitOptions where
           [ ("desiredBundleSizeBytes" Core..=)
               Core.. Core.AsText
               Core.<$> desiredBundleSizeBytes,
-            ("desiredShardSizeBytes" Core..=) Core.. Core.AsText
+            ("desiredShardSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> desiredShardSizeBytes
           ]
       )
@@ -7901,7 +8723,10 @@ data SourceSplitShard = SourceSplitShard
 newSourceSplitShard ::
   SourceSplitShard
 newSourceSplitShard =
-  SourceSplitShard {derivationMode = Core.Nothing, source = Core.Nothing}
+  SourceSplitShard
+    { derivationMode = Core.Nothing,
+      source = Core.Nothing
+    }
 
 instance Core.FromJSON SourceSplitShard where
   parseJSON =
@@ -7980,7 +8805,8 @@ data SplitInt64 = SplitInt64
 -- | Creates a value of 'SplitInt64' with the minimum fields required to make a request.
 newSplitInt64 ::
   SplitInt64
-newSplitInt64 = SplitInt64 {highBits = Core.Nothing, lowBits = Core.Nothing}
+newSplitInt64 =
+  SplitInt64 {highBits = Core.Nothing, lowBits = Core.Nothing}
 
 instance Core.FromJSON SplitInt64 where
   parseJSON =
@@ -8016,7 +8842,10 @@ data StageExecutionDetails = StageExecutionDetails
 newStageExecutionDetails ::
   StageExecutionDetails
 newStageExecutionDetails =
-  StageExecutionDetails {nextPageToken = Core.Nothing, workers = Core.Nothing}
+  StageExecutionDetails
+    { nextPageToken = Core.Nothing,
+      workers = Core.Nothing
+    }
 
 instance Core.FromJSON StageExecutionDetails where
   parseJSON =
@@ -8071,9 +8900,7 @@ instance Core.FromJSON StageSource where
           StageSource
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "originalTransformOrCollection")
-            Core.<*> ( o Core..:? "sizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "userName")
       )
 
@@ -8084,8 +8911,7 @@ instance Core.ToJSON StageSource where
           [ ("name" Core..=) Core.<$> name,
             ("originalTransformOrCollection" Core..=)
               Core.<$> originalTransformOrCollection,
-            ("sizeBytes" Core..=) Core.. Core.AsText
-              Core.<$> sizeBytes,
+            ("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes,
             ("userName" Core..=) Core.<$> userName
           ]
       )
@@ -8150,8 +8976,7 @@ instance Core.ToJSON StageSummary where
             ("stageId" Core..=) Core.<$> stageId,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
-            ("stragglerSummary" Core..=)
-              Core.<$> stragglerSummary
+            ("stragglerSummary" Core..=) Core.<$> stragglerSummary
           ]
       )
 
@@ -8170,7 +8995,10 @@ data StateFamilyConfig = StateFamilyConfig
 newStateFamilyConfig ::
   StateFamilyConfig
 newStateFamilyConfig =
-  StateFamilyConfig {isRead = Core.Nothing, stateFamily = Core.Nothing}
+  StateFamilyConfig
+    { isRead = Core.Nothing,
+      stateFamily = Core.Nothing
+    }
 
 instance Core.FromJSON StateFamilyConfig where
   parseJSON =
@@ -8208,7 +9036,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -8244,19 +9076,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Defines a particular step within a Cloud Dataflow job. A job consists of multiple steps, each of which performs some specific operation as part of the overall job. Data is typically passed from one step to another as part of the job. __Note:__ The properties of this object are not stable and might change. Here\'s an example of a sequence of steps which together implement a Map-Reduce job: * Read a collection of data from some source, parsing the collection\'s elements. * Validate the elements. * Apply a user-defined function to map each element to some value and extract an element-specific key value. * Group elements with the same key into a single element with that key, transforming a multiply-keyed collection into a uniquely-keyed collection. * Write the elements out to some data sink. Note that the Cloud Dataflow service may be used to run many different types of jobs, not just Map-Reduce.
 --
@@ -8275,7 +9105,11 @@ data Step = Step
 newStep ::
   Step
 newStep =
-  Step {kind = Core.Nothing, name = Core.Nothing, properties = Core.Nothing}
+  Step
+    { kind = Core.Nothing,
+      name = Core.Nothing,
+      properties = Core.Nothing
+    }
 
 instance Core.FromJSON Step where
   parseJSON =
@@ -8312,15 +9146,14 @@ newStep_Properties ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Step_Properties
-newStep_Properties additional = Step_Properties {additional = additional}
+newStep_Properties additional =
+  Step_Properties {additional = additional}
 
 instance Core.FromJSON Step_Properties where
   parseJSON =
     Core.withObject
       "Step_Properties"
-      ( \o ->
-          Step_Properties Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Step_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Step_Properties where
   toJSON Step_Properties {..} = Core.toJSON additional
@@ -8340,7 +9173,10 @@ data Straggler = Straggler
 newStraggler ::
   Straggler
 newStraggler =
-  Straggler {batchStraggler = Core.Nothing, streamingStraggler = Core.Nothing}
+  Straggler
+    { batchStraggler = Core.Nothing,
+      streamingStraggler = Core.Nothing
+    }
 
 instance Core.FromJSON Straggler where
   parseJSON =
@@ -8357,8 +9193,7 @@ instance Core.ToJSON Straggler where
     Core.object
       ( Core.catMaybes
           [ ("batchStraggler" Core..=) Core.<$> batchStraggler,
-            ("streamingStraggler" Core..=)
-              Core.<$> streamingStraggler
+            ("streamingStraggler" Core..=) Core.<$> streamingStraggler
           ]
       )
 
@@ -8374,21 +9209,18 @@ newtype StragglerDebuggingInfo = StragglerDebuggingInfo
 -- | Creates a value of 'StragglerDebuggingInfo' with the minimum fields required to make a request.
 newStragglerDebuggingInfo ::
   StragglerDebuggingInfo
-newStragglerDebuggingInfo = StragglerDebuggingInfo {hotKey = Core.Nothing}
+newStragglerDebuggingInfo =
+  StragglerDebuggingInfo {hotKey = Core.Nothing}
 
 instance Core.FromJSON StragglerDebuggingInfo where
   parseJSON =
     Core.withObject
       "StragglerDebuggingInfo"
-      ( \o ->
-          StragglerDebuggingInfo
-            Core.<$> (o Core..:? "hotKey")
-      )
+      (\o -> StragglerDebuggingInfo Core.<$> (o Core..:? "hotKey"))
 
 instance Core.ToJSON StragglerDebuggingInfo where
   toJSON StragglerDebuggingInfo {..} =
-    Core.object
-      (Core.catMaybes [("hotKey" Core..=) Core.<$> hotKey])
+    Core.object (Core.catMaybes [("hotKey" Core..=) Core.<$> hotKey])
 
 -- | Information useful for straggler identification and debugging.
 --
@@ -8430,8 +9262,7 @@ instance Core.ToJSON StragglerInfo where
 --
 -- /See:/ 'newStragglerInfo_Causes' smart constructor.
 newtype StragglerInfo_Causes = StragglerInfo_Causes
-  { -- |
-    additional :: (Core.HashMap Core.Text StragglerDebuggingInfo)
+  { additional :: (Core.HashMap Core.Text StragglerDebuggingInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8447,14 +9278,10 @@ instance Core.FromJSON StragglerInfo_Causes where
   parseJSON =
     Core.withObject
       "StragglerInfo_Causes"
-      ( \o ->
-          StragglerInfo_Causes
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> StragglerInfo_Causes Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON StragglerInfo_Causes where
-  toJSON StragglerInfo_Causes {..} =
-    Core.toJSON additional
+  toJSON StragglerInfo_Causes {..} = Core.toJSON additional
 
 -- | Summarized straggler identification details.
 --
@@ -8487,7 +9314,8 @@ instance Core.FromJSON StragglerSummary where
           StragglerSummary
             Core.<$> (o Core..:? "recentStragglers")
             Core.<*> (o Core..:? "stragglerCauseCount")
-            Core.<*> ( o Core..:? "totalStragglerCount"
+            Core.<*> ( o
+                         Core..:? "totalStragglerCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -8496,11 +9324,10 @@ instance Core.ToJSON StragglerSummary where
   toJSON StragglerSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("recentStragglers" Core..=)
-              Core.<$> recentStragglers,
-            ("stragglerCauseCount" Core..=)
-              Core.<$> stragglerCauseCount,
-            ("totalStragglerCount" Core..=) Core.. Core.AsText
+          [ ("recentStragglers" Core..=) Core.<$> recentStragglers,
+            ("stragglerCauseCount" Core..=) Core.<$> stragglerCauseCount,
+            ("totalStragglerCount" Core..=)
+              Core.. Core.AsText
               Core.<$> totalStragglerCount
           ]
       )
@@ -8509,8 +9336,7 @@ instance Core.ToJSON StragglerSummary where
 --
 -- /See:/ 'newStragglerSummary_StragglerCauseCount' smart constructor.
 newtype StragglerSummary_StragglerCauseCount = StragglerSummary_StragglerCauseCount
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8522,10 +9348,7 @@ newStragglerSummary_StragglerCauseCount ::
 newStragglerSummary_StragglerCauseCount additional =
   StragglerSummary_StragglerCauseCount {additional = additional}
 
-instance
-  Core.FromJSON
-    StragglerSummary_StragglerCauseCount
-  where
+instance Core.FromJSON StragglerSummary_StragglerCauseCount where
   parseJSON =
     Core.withObject
       "StragglerSummary_StragglerCauseCount"
@@ -8534,10 +9357,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    StragglerSummary_StragglerCauseCount
-  where
+instance Core.ToJSON StragglerSummary_StragglerCauseCount where
   toJSON StragglerSummary_StragglerCauseCount {..} =
     Core.toJSON additional
 
@@ -8583,11 +9403,9 @@ instance Core.ToJSON StreamLocation where
   toJSON StreamLocation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customSourceLocation" Core..=)
-              Core.<$> customSourceLocation,
+          [ ("customSourceLocation" Core..=) Core.<$> customSourceLocation,
             ("pubsubLocation" Core..=) Core.<$> pubsubLocation,
-            ("sideInputLocation" Core..=)
-              Core.<$> sideInputLocation,
+            ("sideInputLocation" Core..=) Core.<$> sideInputLocation,
             ("streamingStageLocation" Core..=)
               Core.<$> streamingStageLocation
           ]
@@ -8609,14 +9427,12 @@ newStreamingApplianceSnapshotConfig ::
   StreamingApplianceSnapshotConfig
 newStreamingApplianceSnapshotConfig =
   StreamingApplianceSnapshotConfig
-    { importStateEndpoint = Core.Nothing,
+    { importStateEndpoint =
+        Core.Nothing,
       snapshotId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    StreamingApplianceSnapshotConfig
-  where
+instance Core.FromJSON StreamingApplianceSnapshotConfig where
   parseJSON =
     Core.withObject
       "StreamingApplianceSnapshotConfig"
@@ -8630,8 +9446,7 @@ instance Core.ToJSON StreamingApplianceSnapshotConfig where
   toJSON StreamingApplianceSnapshotConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("importStateEndpoint" Core..=)
-              Core.<$> importStateEndpoint,
+          [ ("importStateEndpoint" Core..=) Core.<$> importStateEndpoint,
             ("snapshotId" Core..=) Core.<$> snapshotId
           ]
       )
@@ -8698,8 +9513,7 @@ instance Core.ToJSON StreamingComputationConfig where
 --
 -- /See:/ 'newStreamingComputationConfig_TransformUserNameToStateFamily' smart constructor.
 newtype StreamingComputationConfig_TransformUserNameToStateFamily = StreamingComputationConfig_TransformUserNameToStateFamily
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8708,10 +9522,12 @@ newStreamingComputationConfig_TransformUserNameToStateFamily ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   StreamingComputationConfig_TransformUserNameToStateFamily
-newStreamingComputationConfig_TransformUserNameToStateFamily additional =
-  StreamingComputationConfig_TransformUserNameToStateFamily
-    { additional = additional
-    }
+newStreamingComputationConfig_TransformUserNameToStateFamily
+  additional =
+    StreamingComputationConfig_TransformUserNameToStateFamily
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -8768,8 +9584,7 @@ instance Core.ToJSON StreamingComputationRanges where
     Core.object
       ( Core.catMaybes
           [ ("computationId" Core..=) Core.<$> computationId,
-            ("rangeAssignments" Core..=)
-              Core.<$> rangeAssignments
+            ("rangeAssignments" Core..=) Core.<$> rangeAssignments
           ]
       )
 
@@ -8811,8 +9626,7 @@ instance Core.ToJSON StreamingComputationTask where
   toJSON StreamingComputationTask {..} =
     Core.object
       ( Core.catMaybes
-          [ ("computationRanges" Core..=)
-              Core.<$> computationRanges,
+          [ ("computationRanges" Core..=) Core.<$> computationRanges,
             ("dataDisks" Core..=) Core.<$> dataDisks,
             ("taskType" Core..=) Core.<$> taskType
           ]
@@ -8828,10 +9642,16 @@ data StreamingConfigTask = StreamingConfigTask
     getDataStreamChunkSizeBytes :: (Core.Maybe Core.Int64),
     -- | Maximum size for work item commit supported windmill storage layer.
     maxWorkItemCommitBytes :: (Core.Maybe Core.Int64),
+    -- | Operational limits for the streaming job. Can be used by the worker to validate outputs sent to the backend.
+    operationalLimits :: (Core.Maybe StreamingOperationalLimits),
     -- | Set of computation configuration information.
     streamingComputationConfigs :: (Core.Maybe [StreamingComputationConfig]),
     -- | Map from user step names to state families.
     userStepToStateFamilyNameMap :: (Core.Maybe StreamingConfigTask_UserStepToStateFamilyNameMap),
+    -- | Binary encoded proto to control runtime behavior of the java runner v1 user worker.
+    userWorkerRunnerV1Settings :: (Core.Maybe Core.Base64),
+    -- | Binary encoded proto to control runtime behavior of the runner v2 user worker.
+    userWorkerRunnerV2Settings :: (Core.Maybe Core.Base64),
     -- | If present, the worker must use this endpoint to communicate with Windmill Service dispatchers, otherwise the worker must continue to use whatever endpoint it had been using.
     windmillServiceEndpoint :: (Core.Maybe Core.Text),
     -- | If present, the worker must use this port to communicate with Windmill Service dispatchers. Only applicable when windmill/service/endpoint is specified.
@@ -8847,8 +9667,11 @@ newStreamingConfigTask =
     { commitStreamChunkSizeBytes = Core.Nothing,
       getDataStreamChunkSizeBytes = Core.Nothing,
       maxWorkItemCommitBytes = Core.Nothing,
+      operationalLimits = Core.Nothing,
       streamingComputationConfigs = Core.Nothing,
       userStepToStateFamilyNameMap = Core.Nothing,
+      userWorkerRunnerV1Settings = Core.Nothing,
+      userWorkerRunnerV2Settings = Core.Nothing,
       windmillServiceEndpoint = Core.Nothing,
       windmillServicePort = Core.Nothing
     }
@@ -8859,19 +9682,26 @@ instance Core.FromJSON StreamingConfigTask where
       "StreamingConfigTask"
       ( \o ->
           StreamingConfigTask
-            Core.<$> ( o Core..:? "commitStreamChunkSizeBytes"
+            Core.<$> ( o
+                         Core..:? "commitStreamChunkSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "getDataStreamChunkSizeBytes"
+            Core.<*> ( o
+                         Core..:? "getDataStreamChunkSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "maxWorkItemCommitBytes"
+            Core.<*> ( o
+                         Core..:? "maxWorkItemCommitBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "operationalLimits")
             Core.<*> (o Core..:? "streamingComputationConfigs")
             Core.<*> (o Core..:? "userStepToStateFamilyNameMap")
+            Core.<*> (o Core..:? "userWorkerRunnerV1Settings")
+            Core.<*> (o Core..:? "userWorkerRunnerV2Settings")
             Core.<*> (o Core..:? "windmillServiceEndpoint")
-            Core.<*> ( o Core..:? "windmillServicePort"
+            Core.<*> ( o
+                         Core..:? "windmillServicePort"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -8886,15 +9716,22 @@ instance Core.ToJSON StreamingConfigTask where
             ("getDataStreamChunkSizeBytes" Core..=)
               Core.. Core.AsText
               Core.<$> getDataStreamChunkSizeBytes,
-            ("maxWorkItemCommitBytes" Core..=) Core.. Core.AsText
+            ("maxWorkItemCommitBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> maxWorkItemCommitBytes,
+            ("operationalLimits" Core..=) Core.<$> operationalLimits,
             ("streamingComputationConfigs" Core..=)
               Core.<$> streamingComputationConfigs,
             ("userStepToStateFamilyNameMap" Core..=)
               Core.<$> userStepToStateFamilyNameMap,
+            ("userWorkerRunnerV1Settings" Core..=)
+              Core.<$> userWorkerRunnerV1Settings,
+            ("userWorkerRunnerV2Settings" Core..=)
+              Core.<$> userWorkerRunnerV2Settings,
             ("windmillServiceEndpoint" Core..=)
               Core.<$> windmillServiceEndpoint,
-            ("windmillServicePort" Core..=) Core.. Core.AsText
+            ("windmillServicePort" Core..=)
+              Core.. Core.AsText
               Core.<$> windmillServicePort
           ]
       )
@@ -8903,8 +9740,7 @@ instance Core.ToJSON StreamingConfigTask where
 --
 -- /See:/ 'newStreamingConfigTask_UserStepToStateFamilyNameMap' smart constructor.
 newtype StreamingConfigTask_UserStepToStateFamilyNameMap = StreamingConfigTask_UserStepToStateFamilyNameMap
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8914,7 +9750,10 @@ newStreamingConfigTask_UserStepToStateFamilyNameMap ::
   Core.HashMap Core.Text Core.Text ->
   StreamingConfigTask_UserStepToStateFamilyNameMap
 newStreamingConfigTask_UserStepToStateFamilyNameMap additional =
-  StreamingConfigTask_UserStepToStateFamilyNameMap {additional = additional}
+  StreamingConfigTask_UserStepToStateFamilyNameMap
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -8932,9 +9771,208 @@ instance
   Core.ToJSON
     StreamingConfigTask_UserStepToStateFamilyNameMap
   where
-  toJSON
-    StreamingConfigTask_UserStepToStateFamilyNameMap {..} =
-      Core.toJSON additional
+  toJSON StreamingConfigTask_UserStepToStateFamilyNameMap {..} =
+    Core.toJSON additional
+
+-- | Operational limits imposed on streaming jobs by the backend.
+--
+-- /See:/ 'newStreamingOperationalLimits' smart constructor.
+data StreamingOperationalLimits = StreamingOperationalLimits
+  { -- | The maximum size for an element in bag state.
+    maxBagElementBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for an element in global data.
+    maxGlobalDataBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size allowed for a key.
+    maxKeyBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for a single output element.
+    maxProductionOutputBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for an element in sorted list state.
+    maxSortedListElementBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for a source state update.
+    maxSourceStateBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for a state tag.
+    maxTagBytes :: (Core.Maybe Core.Int64),
+    -- | The maximum size for a value state field.
+    maxValueBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StreamingOperationalLimits' with the minimum fields required to make a request.
+newStreamingOperationalLimits ::
+  StreamingOperationalLimits
+newStreamingOperationalLimits =
+  StreamingOperationalLimits
+    { maxBagElementBytes = Core.Nothing,
+      maxGlobalDataBytes = Core.Nothing,
+      maxKeyBytes = Core.Nothing,
+      maxProductionOutputBytes = Core.Nothing,
+      maxSortedListElementBytes = Core.Nothing,
+      maxSourceStateBytes = Core.Nothing,
+      maxTagBytes = Core.Nothing,
+      maxValueBytes = Core.Nothing
+    }
+
+instance Core.FromJSON StreamingOperationalLimits where
+  parseJSON =
+    Core.withObject
+      "StreamingOperationalLimits"
+      ( \o ->
+          StreamingOperationalLimits
+            Core.<$> ( o
+                         Core..:? "maxBagElementBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "maxGlobalDataBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "maxKeyBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "maxProductionOutputBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "maxSortedListElementBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "maxSourceStateBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "maxTagBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxValueBytes" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON StreamingOperationalLimits where
+  toJSON StreamingOperationalLimits {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxBagElementBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxBagElementBytes,
+            ("maxGlobalDataBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxGlobalDataBytes,
+            ("maxKeyBytes" Core..=) Core.. Core.AsText Core.<$> maxKeyBytes,
+            ("maxProductionOutputBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxProductionOutputBytes,
+            ("maxSortedListElementBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxSortedListElementBytes,
+            ("maxSourceStateBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxSourceStateBytes,
+            ("maxTagBytes" Core..=) Core.. Core.AsText Core.<$> maxTagBytes,
+            ("maxValueBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxValueBytes
+          ]
+      )
+
+-- | Contains per-user worker telemetry used in streaming autoscaling.
+--
+-- /See:/ 'newStreamingScalingReport' smart constructor.
+data StreamingScalingReport = StreamingScalingReport
+  { activeBundleCount :: (Core.Maybe Core.Int32),
+    -- | Current acive thread count.
+    activeThreadCount :: (Core.Maybe Core.Int32),
+    -- | Maximum bundle count.
+    maximumBundleCount :: (Core.Maybe Core.Int32),
+    -- | Maximum bytes.
+    maximumBytes :: (Core.Maybe Core.Int64),
+    maximumBytesCount :: (Core.Maybe Core.Int32),
+    -- | Maximum thread count limit.
+    maximumThreadCount :: (Core.Maybe Core.Int32),
+    -- | Current outstanding bundle count.
+    outstandingBundleCount :: (Core.Maybe Core.Int32),
+    -- | Current outstanding bytes.
+    outstandingBytes :: (Core.Maybe Core.Int64),
+    outstandingBytesCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StreamingScalingReport' with the minimum fields required to make a request.
+newStreamingScalingReport ::
+  StreamingScalingReport
+newStreamingScalingReport =
+  StreamingScalingReport
+    { activeBundleCount = Core.Nothing,
+      activeThreadCount = Core.Nothing,
+      maximumBundleCount = Core.Nothing,
+      maximumBytes = Core.Nothing,
+      maximumBytesCount = Core.Nothing,
+      maximumThreadCount = Core.Nothing,
+      outstandingBundleCount = Core.Nothing,
+      outstandingBytes = Core.Nothing,
+      outstandingBytesCount = Core.Nothing
+    }
+
+instance Core.FromJSON StreamingScalingReport where
+  parseJSON =
+    Core.withObject
+      "StreamingScalingReport"
+      ( \o ->
+          StreamingScalingReport
+            Core.<$> (o Core..:? "activeBundleCount")
+            Core.<*> (o Core..:? "activeThreadCount")
+            Core.<*> (o Core..:? "maximumBundleCount")
+            Core.<*> (o Core..:? "maximumBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maximumBytesCount")
+            Core.<*> (o Core..:? "maximumThreadCount")
+            Core.<*> (o Core..:? "outstandingBundleCount")
+            Core.<*> (o Core..:? "outstandingBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outstandingBytesCount")
+      )
+
+instance Core.ToJSON StreamingScalingReport where
+  toJSON StreamingScalingReport {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("activeBundleCount" Core..=) Core.<$> activeBundleCount,
+            ("activeThreadCount" Core..=) Core.<$> activeThreadCount,
+            ("maximumBundleCount" Core..=) Core.<$> maximumBundleCount,
+            ("maximumBytes" Core..=) Core.. Core.AsText Core.<$> maximumBytes,
+            ("maximumBytesCount" Core..=) Core.<$> maximumBytesCount,
+            ("maximumThreadCount" Core..=) Core.<$> maximumThreadCount,
+            ("outstandingBundleCount" Core..=) Core.<$> outstandingBundleCount,
+            ("outstandingBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> outstandingBytes,
+            ("outstandingBytesCount" Core..=) Core.<$> outstandingBytesCount
+          ]
+      )
+
+-- | Contains per-user-worker streaming scaling recommendation from the backend.
+--
+-- /See:/ 'newStreamingScalingReportResponse' smart constructor.
+newtype StreamingScalingReportResponse = StreamingScalingReportResponse
+  { -- | Maximum thread count limit;
+    maximumThreadCount :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StreamingScalingReportResponse' with the minimum fields required to make a request.
+newStreamingScalingReportResponse ::
+  StreamingScalingReportResponse
+newStreamingScalingReportResponse =
+  StreamingScalingReportResponse {maximumThreadCount = Core.Nothing}
+
+instance Core.FromJSON StreamingScalingReportResponse where
+  parseJSON =
+    Core.withObject
+      "StreamingScalingReportResponse"
+      ( \o ->
+          StreamingScalingReportResponse
+            Core.<$> (o Core..:? "maximumThreadCount")
+      )
+
+instance Core.ToJSON StreamingScalingReportResponse where
+  toJSON StreamingScalingReportResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("maximumThreadCount" Core..=) Core.<$> maximumThreadCount]
+      )
 
 -- | A task which initializes part of a streaming Dataflow job.
 --
@@ -8987,8 +10025,7 @@ instance Core.ToJSON StreamingSetupTask where
             ("snapshotConfig" Core..=) Core.<$> snapshotConfig,
             ("streamingComputationTopology" Core..=)
               Core.<$> streamingComputationTopology,
-            ("workerHarnessPort" Core..=)
-              Core.<$> workerHarnessPort
+            ("workerHarnessPort" Core..=) Core.<$> workerHarnessPort
           ]
       )
 
@@ -9007,7 +10044,10 @@ data StreamingSideInputLocation = StreamingSideInputLocation
 newStreamingSideInputLocation ::
   StreamingSideInputLocation
 newStreamingSideInputLocation =
-  StreamingSideInputLocation {stateFamily = Core.Nothing, tag = Core.Nothing}
+  StreamingSideInputLocation
+    { stateFamily = Core.Nothing,
+      tag = Core.Nothing
+    }
 
 instance Core.FromJSON StreamingSideInputLocation where
   parseJSON =
@@ -9040,23 +10080,19 @@ newtype StreamingStageLocation = StreamingStageLocation
 -- | Creates a value of 'StreamingStageLocation' with the minimum fields required to make a request.
 newStreamingStageLocation ::
   StreamingStageLocation
-newStreamingStageLocation = StreamingStageLocation {streamId = Core.Nothing}
+newStreamingStageLocation =
+  StreamingStageLocation {streamId = Core.Nothing}
 
 instance Core.FromJSON StreamingStageLocation where
   parseJSON =
     Core.withObject
       "StreamingStageLocation"
-      ( \o ->
-          StreamingStageLocation
-            Core.<$> (o Core..:? "streamId")
-      )
+      (\o -> StreamingStageLocation Core.<$> (o Core..:? "streamId"))
 
 instance Core.ToJSON StreamingStageLocation where
   toJSON StreamingStageLocation {..} =
     Core.object
-      ( Core.catMaybes
-          [("streamId" Core..=) Core.<$> streamId]
-      )
+      (Core.catMaybes [("streamId" Core..=) Core.<$> streamId])
 
 -- | Information useful for streaming straggler identification and debugging.
 --
@@ -9104,12 +10140,10 @@ instance Core.ToJSON StreamingStragglerInfo where
   toJSON StreamingStragglerInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataWatermarkLag" Core..=)
-              Core.<$> dataWatermarkLag,
+          [ ("dataWatermarkLag" Core..=) Core.<$> dataWatermarkLag,
             ("endTime" Core..=) Core.<$> endTime,
             ("startTime" Core..=) Core.<$> startTime,
-            ("systemWatermarkLag" Core..=)
-              Core.<$> systemWatermarkLag,
+            ("systemWatermarkLag" Core..=) Core.<$> systemWatermarkLag,
             ("workerName" Core..=) Core.<$> workerName
           ]
       )
@@ -9137,9 +10171,7 @@ instance Core.FromJSON StringList where
 instance Core.ToJSON StringList where
   toJSON StringList {..} =
     Core.object
-      ( Core.catMaybes
-          [("elements" Core..=) Core.<$> elements]
-      )
+      (Core.catMaybes [("elements" Core..=) Core.<$> elements])
 
 -- | A rich message format, including a human readable string, a key for identifying the message, and structured data associated with the message for programmatic consumption.
 --
@@ -9287,35 +10319,26 @@ instance Core.ToJSON TaskRunnerSettings where
   toJSON TaskRunnerSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("alsologtostderr" Core..=)
-              Core.<$> alsologtostderr,
+          [ ("alsologtostderr" Core..=) Core.<$> alsologtostderr,
             ("baseTaskDir" Core..=) Core.<$> baseTaskDir,
             ("baseUrl" Core..=) Core.<$> baseUrl,
-            ("commandlinesFileName" Core..=)
-              Core.<$> commandlinesFileName,
-            ("continueOnException" Core..=)
-              Core.<$> continueOnException,
-            ("dataflowApiVersion" Core..=)
-              Core.<$> dataflowApiVersion,
+            ("commandlinesFileName" Core..=) Core.<$> commandlinesFileName,
+            ("continueOnException" Core..=) Core.<$> continueOnException,
+            ("dataflowApiVersion" Core..=) Core.<$> dataflowApiVersion,
             ("harnessCommand" Core..=) Core.<$> harnessCommand,
             ("languageHint" Core..=) Core.<$> languageHint,
             ("logDir" Core..=) Core.<$> logDir,
-            ("logToSerialconsole" Core..=)
-              Core.<$> logToSerialconsole,
-            ("logUploadLocation" Core..=)
-              Core.<$> logUploadLocation,
+            ("logToSerialconsole" Core..=) Core.<$> logToSerialconsole,
+            ("logUploadLocation" Core..=) Core.<$> logUploadLocation,
             ("oauthScopes" Core..=) Core.<$> oauthScopes,
-            ("parallelWorkerSettings" Core..=)
-              Core.<$> parallelWorkerSettings,
+            ("parallelWorkerSettings" Core..=) Core.<$> parallelWorkerSettings,
             ("streamingWorkerMainClass" Core..=)
               Core.<$> streamingWorkerMainClass,
             ("taskGroup" Core..=) Core.<$> taskGroup,
             ("taskUser" Core..=) Core.<$> taskUser,
-            ("tempStoragePrefix" Core..=)
-              Core.<$> tempStoragePrefix,
+            ("tempStoragePrefix" Core..=) Core.<$> tempStoragePrefix,
             ("vmId" Core..=) Core.<$> vmId,
-            ("workflowFileName" Core..=)
-              Core.<$> workflowFileName
+            ("workflowFileName" Core..=) Core.<$> workflowFileName
           ]
       )
 
@@ -9323,12 +10346,22 @@ instance Core.ToJSON TaskRunnerSettings where
 --
 -- /See:/ 'newTemplateMetadata' smart constructor.
 data TemplateMetadata = TemplateMetadata
-  { -- | Optional. A description of the template.
+  { -- | Optional. Indicates the default streaming mode for a streaming template. Only valid if both supports/at/least/once and supports/exactly/once are true. Possible values: UNSPECIFIED, EXACTLY/ONCE and AT/LEAST/ONCE
+    defaultStreamingMode :: (Core.Maybe Core.Text),
+    -- | Optional. A description of the template.
     description :: (Core.Maybe Core.Text),
     -- | Required. The name of the template.
     name :: (Core.Maybe Core.Text),
     -- | The parameters for the template.
-    parameters :: (Core.Maybe [ParameterMetadata])
+    parameters :: (Core.Maybe [ParameterMetadata]),
+    -- | Optional. Indicates if the template is streaming or not.
+    streaming :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates if the streaming template supports at least once mode.
+    supportsAtLeastOnce :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates if the streaming template supports exactly once mode.
+    supportsExactlyOnce :: (Core.Maybe Core.Bool),
+    -- | Optional. For future use.
+    yamlDefinition :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9337,9 +10370,14 @@ newTemplateMetadata ::
   TemplateMetadata
 newTemplateMetadata =
   TemplateMetadata
-    { description = Core.Nothing,
+    { defaultStreamingMode = Core.Nothing,
+      description = Core.Nothing,
       name = Core.Nothing,
-      parameters = Core.Nothing
+      parameters = Core.Nothing,
+      streaming = Core.Nothing,
+      supportsAtLeastOnce = Core.Nothing,
+      supportsExactlyOnce = Core.Nothing,
+      yamlDefinition = Core.Nothing
     }
 
 instance Core.FromJSON TemplateMetadata where
@@ -9348,18 +10386,28 @@ instance Core.FromJSON TemplateMetadata where
       "TemplateMetadata"
       ( \o ->
           TemplateMetadata
-            Core.<$> (o Core..:? "description")
+            Core.<$> (o Core..:? "defaultStreamingMode")
+            Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parameters")
+            Core.<*> (o Core..:? "streaming")
+            Core.<*> (o Core..:? "supportsAtLeastOnce")
+            Core.<*> (o Core..:? "supportsExactlyOnce")
+            Core.<*> (o Core..:? "yamlDefinition")
       )
 
 instance Core.ToJSON TemplateMetadata where
   toJSON TemplateMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("description" Core..=) Core.<$> description,
+          [ ("defaultStreamingMode" Core..=) Core.<$> defaultStreamingMode,
+            ("description" Core..=) Core.<$> description,
             ("name" Core..=) Core.<$> name,
-            ("parameters" Core..=) Core.<$> parameters
+            ("parameters" Core..=) Core.<$> parameters,
+            ("streaming" Core..=) Core.<$> streaming,
+            ("supportsAtLeastOnce" Core..=) Core.<$> supportsAtLeastOnce,
+            ("supportsExactlyOnce" Core..=) Core.<$> supportsExactlyOnce,
+            ("yamlDefinition" Core..=) Core.<$> yamlDefinition
           ]
       )
 
@@ -9410,12 +10458,9 @@ instance Core.ToJSON TopologyConfig where
     Core.object
       ( Core.catMaybes
           [ ("computations" Core..=) Core.<$> computations,
-            ("dataDiskAssignments" Core..=)
-              Core.<$> dataDiskAssignments,
-            ("forwardingKeyBits" Core..=)
-              Core.<$> forwardingKeyBits,
-            ("persistentStateVersion" Core..=)
-              Core.<$> persistentStateVersion,
+            ("dataDiskAssignments" Core..=) Core.<$> dataDiskAssignments,
+            ("forwardingKeyBits" Core..=) Core.<$> forwardingKeyBits,
+            ("persistentStateVersion" Core..=) Core.<$> persistentStateVersion,
             ("userStageToComputationNameMap" Core..=)
               Core.<$> userStageToComputationNameMap
           ]
@@ -9425,8 +10470,7 @@ instance Core.ToJSON TopologyConfig where
 --
 -- /See:/ 'newTopologyConfig_UserStageToComputationNameMap' smart constructor.
 newtype TopologyConfig_UserStageToComputationNameMap = TopologyConfig_UserStageToComputationNameMap
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9436,12 +10480,12 @@ newTopologyConfig_UserStageToComputationNameMap ::
   Core.HashMap Core.Text Core.Text ->
   TopologyConfig_UserStageToComputationNameMap
 newTopologyConfig_UserStageToComputationNameMap additional =
-  TopologyConfig_UserStageToComputationNameMap {additional = additional}
+  TopologyConfig_UserStageToComputationNameMap
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    TopologyConfig_UserStageToComputationNameMap
-  where
+instance Core.FromJSON TopologyConfig_UserStageToComputationNameMap where
   parseJSON =
     Core.withObject
       "TopologyConfig_UserStageToComputationNameMap"
@@ -9450,13 +10494,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TopologyConfig_UserStageToComputationNameMap
-  where
-  toJSON
-    TopologyConfig_UserStageToComputationNameMap {..} =
-      Core.toJSON additional
+instance Core.ToJSON TopologyConfig_UserStageToComputationNameMap where
+  toJSON TopologyConfig_UserStageToComputationNameMap {..} =
+    Core.toJSON additional
 
 -- | Description of the type, names\/ids, and input\/outputs for a transform.
 --
@@ -9510,12 +10550,10 @@ instance Core.ToJSON TransformSummary where
       ( Core.catMaybes
           [ ("displayData" Core..=) Core.<$> displayData,
             ("id" Core..=) Core.<$> id,
-            ("inputCollectionName" Core..=)
-              Core.<$> inputCollectionName,
+            ("inputCollectionName" Core..=) Core.<$> inputCollectionName,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("outputCollectionName" Core..=)
-              Core.<$> outputCollectionName
+            ("outputCollectionName" Core..=) Core.<$> outputCollectionName
           ]
       )
 
@@ -9586,7 +10624,8 @@ instance Core.FromJSON WorkItem where
           WorkItem
             Core.<$> (o Core..:? "configuration")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> ( o Core..:? "initialReportIndex"
+            Core.<*> ( o
+                         Core..:? "initialReportIndex"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "jobId")
@@ -9609,25 +10648,22 @@ instance Core.ToJSON WorkItem where
       ( Core.catMaybes
           [ ("configuration" Core..=) Core.<$> configuration,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("initialReportIndex" Core..=) Core.. Core.AsText
+            ("initialReportIndex" Core..=)
+              Core.. Core.AsText
               Core.<$> initialReportIndex,
             ("jobId" Core..=) Core.<$> jobId,
             ("leaseExpireTime" Core..=) Core.<$> leaseExpireTime,
             ("mapTask" Core..=) Core.<$> mapTask,
             ("packages" Core..=) Core.<$> packages,
             ("projectId" Core..=) Core.<$> projectId,
-            ("reportStatusInterval" Core..=)
-              Core.<$> reportStatusInterval,
+            ("reportStatusInterval" Core..=) Core.<$> reportStatusInterval,
             ("seqMapTask" Core..=) Core.<$> seqMapTask,
             ("shellTask" Core..=) Core.<$> shellTask,
-            ("sourceOperationTask" Core..=)
-              Core.<$> sourceOperationTask,
+            ("sourceOperationTask" Core..=) Core.<$> sourceOperationTask,
             ("streamingComputationTask" Core..=)
               Core.<$> streamingComputationTask,
-            ("streamingConfigTask" Core..=)
-              Core.<$> streamingConfigTask,
-            ("streamingSetupTask" Core..=)
-              Core.<$> streamingSetupTask
+            ("streamingConfigTask" Core..=) Core.<$> streamingConfigTask,
+            ("streamingSetupTask" Core..=) Core.<$> streamingSetupTask
           ]
       )
 
@@ -9755,9 +10791,7 @@ instance Core.FromJSON WorkItemServiceState where
             Core.<*> (o Core..:? "hotKeyDetection")
             Core.<*> (o Core..:? "leaseExpireTime")
             Core.<*> (o Core..:? "metricShortId")
-            Core.<*> ( o Core..:? "nextReportIndex"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "nextReportIndex" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "reportStatusInterval")
             Core.<*> (o Core..:? "splitRequest")
             Core.<*> (o Core..:? "suggestedStopPoint")
@@ -9768,21 +10802,18 @@ instance Core.ToJSON WorkItemServiceState where
   toJSON WorkItemServiceState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("completeWorkStatus" Core..=)
-              Core.<$> completeWorkStatus,
+          [ ("completeWorkStatus" Core..=) Core.<$> completeWorkStatus,
             ("harnessData" Core..=) Core.<$> harnessData,
             ("hotKeyDetection" Core..=) Core.<$> hotKeyDetection,
             ("leaseExpireTime" Core..=) Core.<$> leaseExpireTime,
             ("metricShortId" Core..=) Core.<$> metricShortId,
-            ("nextReportIndex" Core..=) Core.. Core.AsText
+            ("nextReportIndex" Core..=)
+              Core.. Core.AsText
               Core.<$> nextReportIndex,
-            ("reportStatusInterval" Core..=)
-              Core.<$> reportStatusInterval,
+            ("reportStatusInterval" Core..=) Core.<$> reportStatusInterval,
             ("splitRequest" Core..=) Core.<$> splitRequest,
-            ("suggestedStopPoint" Core..=)
-              Core.<$> suggestedStopPoint,
-            ("suggestedStopPosition" Core..=)
-              Core.<$> suggestedStopPosition
+            ("suggestedStopPoint" Core..=) Core.<$> suggestedStopPoint,
+            ("suggestedStopPosition" Core..=) Core.<$> suggestedStopPosition
           ]
       )
 
@@ -9803,16 +10834,12 @@ newWorkItemServiceState_HarnessData ::
 newWorkItemServiceState_HarnessData additional =
   WorkItemServiceState_HarnessData {additional = additional}
 
-instance
-  Core.FromJSON
-    WorkItemServiceState_HarnessData
-  where
+instance Core.FromJSON WorkItemServiceState_HarnessData where
   parseJSON =
     Core.withObject
       "WorkItemServiceState_HarnessData"
       ( \o ->
-          WorkItemServiceState_HarnessData
-            Core.<$> (Core.parseJSONObject o)
+          WorkItemServiceState_HarnessData Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON WorkItemServiceState_HarnessData where
@@ -9888,9 +10915,7 @@ instance Core.FromJSON WorkItemStatus where
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "metricUpdates")
             Core.<*> (o Core..:? "progress")
-            Core.<*> ( o Core..:? "reportIndex"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "reportIndex" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "reportedProgress")
             Core.<*> (o Core..:? "requestedLeaseDuration")
             Core.<*> (o Core..:? "sourceFork")
@@ -9906,17 +10931,13 @@ instance Core.ToJSON WorkItemStatus where
       ( Core.catMaybes
           [ ("completed" Core..=) Core.<$> completed,
             ("counterUpdates" Core..=) Core.<$> counterUpdates,
-            ("dynamicSourceSplit" Core..=)
-              Core.<$> dynamicSourceSplit,
+            ("dynamicSourceSplit" Core..=) Core.<$> dynamicSourceSplit,
             ("errors" Core..=) Core.<$> errors,
             ("metricUpdates" Core..=) Core.<$> metricUpdates,
             ("progress" Core..=) Core.<$> progress,
-            ("reportIndex" Core..=) Core.. Core.AsText
-              Core.<$> reportIndex,
-            ("reportedProgress" Core..=)
-              Core.<$> reportedProgress,
-            ("requestedLeaseDuration" Core..=)
-              Core.<$> requestedLeaseDuration,
+            ("reportIndex" Core..=) Core.. Core.AsText Core.<$> reportIndex,
+            ("reportedProgress" Core..=) Core.<$> reportedProgress,
+            ("requestedLeaseDuration" Core..=) Core.<$> requestedLeaseDuration,
             ("sourceFork" Core..=) Core.<$> sourceFork,
             ("sourceOperationResponse" Core..=)
               Core.<$> sourceOperationResponse,
@@ -9942,7 +10963,10 @@ data WorkerDetails = WorkerDetails
 newWorkerDetails ::
   WorkerDetails
 newWorkerDetails =
-  WorkerDetails {workItems = Core.Nothing, workerName = Core.Nothing}
+  WorkerDetails
+    { workItems = Core.Nothing,
+      workerName = Core.Nothing
+    }
 
 instance Core.FromJSON WorkerDetails where
   parseJSON =
@@ -10048,13 +11072,11 @@ instance Core.FromJSON WorkerHealthReport_PodsItem where
     Core.withObject
       "WorkerHealthReport_PodsItem"
       ( \o ->
-          WorkerHealthReport_PodsItem
-            Core.<$> (Core.parseJSONObject o)
+          WorkerHealthReport_PodsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON WorkerHealthReport_PodsItem where
-  toJSON WorkerHealthReport_PodsItem {..} =
-    Core.toJSON additional
+  toJSON WorkerHealthReport_PodsItem {..} = Core.toJSON additional
 
 -- | WorkerHealthReportResponse contains information returned to the worker in response to a health ping.
 --
@@ -10076,8 +11098,7 @@ instance Core.FromJSON WorkerHealthReportResponse where
     Core.withObject
       "WorkerHealthReportResponse"
       ( \o ->
-          WorkerHealthReportResponse
-            Core.<$> (o Core..:? "reportInterval")
+          WorkerHealthReportResponse Core.<$> (o Core..:? "reportInterval")
       )
 
 instance Core.ToJSON WorkerHealthReportResponse where
@@ -10125,8 +11146,7 @@ instance Core.ToJSON WorkerLifecycleEvent where
   toJSON WorkerLifecycleEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("containerStartTime" Core..=)
-              Core.<$> containerStartTime,
+          [ ("containerStartTime" Core..=) Core.<$> containerStartTime,
             ("event" Core..=) Core.<$> event,
             ("metadata" Core..=) Core.<$> metadata
           ]
@@ -10136,8 +11156,7 @@ instance Core.ToJSON WorkerLifecycleEvent where
 --
 -- /See:/ 'newWorkerLifecycleEvent_Metadata' smart constructor.
 newtype WorkerLifecycleEvent_Metadata = WorkerLifecycleEvent_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10154,20 +11173,24 @@ instance Core.FromJSON WorkerLifecycleEvent_Metadata where
     Core.withObject
       "WorkerLifecycleEvent_Metadata"
       ( \o ->
-          WorkerLifecycleEvent_Metadata
-            Core.<$> (Core.parseJSONObject o)
+          WorkerLifecycleEvent_Metadata Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON WorkerLifecycleEvent_Metadata where
-  toJSON WorkerLifecycleEvent_Metadata {..} =
-    Core.toJSON additional
+  toJSON WorkerLifecycleEvent_Metadata {..} = Core.toJSON additional
 
 -- | WorkerMessage provides information to the backend about a worker.
 --
 -- /See:/ 'newWorkerMessage' smart constructor.
 data WorkerMessage = WorkerMessage
-  { -- | Labels are used to group WorkerMessages. For example, a worker/message about a particular container might have the labels: { \"JOB/ID\": \"2015-04-22\", \"WORKER/ID\": \"wordcount-vm-2015…\" \"CONTAINER/TYPE\": \"worker\", \"CONTAINER/ID\": \"ac1234def\"} Label tags typically correspond to Label enum values. However, for ease of development other strings can be used as tags. LABEL/UNSPECIFIED should not be used here.
+  { -- | Optional. Contains metrics related to go\/dataflow-data-sampling-telemetry.
+    dataSamplingReport :: (Core.Maybe DataSamplingReport),
+    -- | Labels are used to group WorkerMessages. For example, a worker/message about a particular container might have the labels: { \"JOB/ID\": \"2015-04-22\", \"WORKER/ID\": \"wordcount-vm-2015…\" \"CONTAINER/TYPE\": \"worker\", \"CONTAINER/ID\": \"ac1234def\"} Label tags typically correspond to Label enum values. However, for ease of development other strings can be used as tags. LABEL/UNSPECIFIED should not be used here.
     labels :: (Core.Maybe WorkerMessage_Labels),
+    -- | System defined metrics for this worker.
+    perWorkerMetrics :: (Core.Maybe PerWorkerMetrics),
+    -- | Contains per-user worker telemetry used in streaming autoscaling.
+    streamingScalingReport :: (Core.Maybe StreamingScalingReport),
     -- | The timestamp of the worker_message.
     time :: (Core.Maybe Core.DateTime),
     -- | The health of a worker.
@@ -10190,7 +11213,10 @@ newWorkerMessage ::
   WorkerMessage
 newWorkerMessage =
   WorkerMessage
-    { labels = Core.Nothing,
+    { dataSamplingReport = Core.Nothing,
+      labels = Core.Nothing,
+      perWorkerMetrics = Core.Nothing,
+      streamingScalingReport = Core.Nothing,
       time = Core.Nothing,
       workerHealthReport = Core.Nothing,
       workerLifecycleEvent = Core.Nothing,
@@ -10206,7 +11232,10 @@ instance Core.FromJSON WorkerMessage where
       "WorkerMessage"
       ( \o ->
           WorkerMessage
-            Core.<$> (o Core..:? "labels")
+            Core.<$> (o Core..:? "dataSamplingReport")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "perWorkerMetrics")
+            Core.<*> (o Core..:? "streamingScalingReport")
             Core.<*> (o Core..:? "time")
             Core.<*> (o Core..:? "workerHealthReport")
             Core.<*> (o Core..:? "workerLifecycleEvent")
@@ -10220,17 +11249,16 @@ instance Core.ToJSON WorkerMessage where
   toJSON WorkerMessage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("labels" Core..=) Core.<$> labels,
+          [ ("dataSamplingReport" Core..=) Core.<$> dataSamplingReport,
+            ("labels" Core..=) Core.<$> labels,
+            ("perWorkerMetrics" Core..=) Core.<$> perWorkerMetrics,
+            ("streamingScalingReport" Core..=) Core.<$> streamingScalingReport,
             ("time" Core..=) Core.<$> time,
-            ("workerHealthReport" Core..=)
-              Core.<$> workerHealthReport,
-            ("workerLifecycleEvent" Core..=)
-              Core.<$> workerLifecycleEvent,
-            ("workerMessageCode" Core..=)
-              Core.<$> workerMessageCode,
+            ("workerHealthReport" Core..=) Core.<$> workerHealthReport,
+            ("workerLifecycleEvent" Core..=) Core.<$> workerLifecycleEvent,
+            ("workerMessageCode" Core..=) Core.<$> workerMessageCode,
             ("workerMetrics" Core..=) Core.<$> workerMetrics,
-            ("workerShutdownNotice" Core..=)
-              Core.<$> workerShutdownNotice,
+            ("workerShutdownNotice" Core..=) Core.<$> workerShutdownNotice,
             ("workerThreadScalingReport" Core..=)
               Core.<$> workerThreadScalingReport
           ]
@@ -10240,8 +11268,7 @@ instance Core.ToJSON WorkerMessage where
 --
 -- /See:/ 'newWorkerMessage_Labels' smart constructor.
 newtype WorkerMessage_Labels = WorkerMessage_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10257,14 +11284,10 @@ instance Core.FromJSON WorkerMessage_Labels where
   parseJSON =
     Core.withObject
       "WorkerMessage_Labels"
-      ( \o ->
-          WorkerMessage_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> WorkerMessage_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON WorkerMessage_Labels where
-  toJSON WorkerMessage_Labels {..} =
-    Core.toJSON additional
+  toJSON WorkerMessage_Labels {..} = Core.toJSON additional
 
 -- | A message code is used to report status and error messages to the service. The message codes are intended to be machine readable. The service will take care of translating these into user understandable messages if necessary. Example use cases: 1. Worker processes reporting successful startup. 2. Worker processes reporting specific errors (e.g. package staging failure).
 --
@@ -10324,19 +11347,19 @@ instance Core.FromJSON WorkerMessageCode_Parameters where
     Core.withObject
       "WorkerMessageCode_Parameters"
       ( \o ->
-          WorkerMessageCode_Parameters
-            Core.<$> (Core.parseJSONObject o)
+          WorkerMessageCode_Parameters Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON WorkerMessageCode_Parameters where
-  toJSON WorkerMessageCode_Parameters {..} =
-    Core.toJSON additional
+  toJSON WorkerMessageCode_Parameters {..} = Core.toJSON additional
 
 -- | A worker_message response allows the server to pass information to the sender.
 --
 -- /See:/ 'newWorkerMessageResponse' smart constructor.
 data WorkerMessageResponse = WorkerMessageResponse
-  { -- | The service\'s response to a worker\'s health report.
+  { -- | Service\'s streaming scaling response for workers.
+    streamingScalingReportResponse :: (Core.Maybe StreamingScalingReportResponse),
+    -- | The service\'s response to a worker\'s health report.
     workerHealthReportResponse :: (Core.Maybe WorkerHealthReportResponse),
     -- | Service\'s response to reporting worker metrics (currently empty).
     workerMetricsResponse :: (Core.Maybe ResourceUtilizationReportResponse),
@@ -10352,7 +11375,9 @@ newWorkerMessageResponse ::
   WorkerMessageResponse
 newWorkerMessageResponse =
   WorkerMessageResponse
-    { workerHealthReportResponse = Core.Nothing,
+    { streamingScalingReportResponse =
+        Core.Nothing,
+      workerHealthReportResponse = Core.Nothing,
       workerMetricsResponse = Core.Nothing,
       workerShutdownNoticeResponse = Core.Nothing,
       workerThreadScalingReportResponse = Core.Nothing
@@ -10364,7 +11389,8 @@ instance Core.FromJSON WorkerMessageResponse where
       "WorkerMessageResponse"
       ( \o ->
           WorkerMessageResponse
-            Core.<$> (o Core..:? "workerHealthReportResponse")
+            Core.<$> (o Core..:? "streamingScalingReportResponse")
+            Core.<*> (o Core..:? "workerHealthReportResponse")
             Core.<*> (o Core..:? "workerMetricsResponse")
             Core.<*> (o Core..:? "workerShutdownNoticeResponse")
             Core.<*> (o Core..:? "workerThreadScalingReportResponse")
@@ -10374,10 +11400,11 @@ instance Core.ToJSON WorkerMessageResponse where
   toJSON WorkerMessageResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("workerHealthReportResponse" Core..=)
+          [ ("streamingScalingReportResponse" Core..=)
+              Core.<$> streamingScalingReportResponse,
+            ("workerHealthReportResponse" Core..=)
               Core.<$> workerHealthReportResponse,
-            ("workerMetricsResponse" Core..=)
-              Core.<$> workerMetricsResponse,
+            ("workerMetricsResponse" Core..=) Core.<$> workerMetricsResponse,
             ("workerShutdownNoticeResponse" Core..=)
               Core.<$> workerShutdownNoticeResponse,
             ("workerThreadScalingReportResponse" Core..=)
@@ -10499,11 +11526,9 @@ instance Core.ToJSON WorkerPool where
   toJSON WorkerPool {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoscalingSettings" Core..=)
-              Core.<$> autoscalingSettings,
+          [ ("autoscalingSettings" Core..=) Core.<$> autoscalingSettings,
             ("dataDisks" Core..=) Core.<$> dataDisks,
-            ("defaultPackageSet" Core..=)
-              Core.<$> defaultPackageSet,
+            ("defaultPackageSet" Core..=) Core.<$> defaultPackageSet,
             ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
             ("diskSourceImage" Core..=) Core.<$> diskSourceImage,
             ("diskType" Core..=) Core.<$> diskType,
@@ -10512,18 +11537,15 @@ instance Core.ToJSON WorkerPool where
             ("machineType" Core..=) Core.<$> machineType,
             ("metadata" Core..=) Core.<$> metadata,
             ("network" Core..=) Core.<$> network,
-            ("numThreadsPerWorker" Core..=)
-              Core.<$> numThreadsPerWorker,
+            ("numThreadsPerWorker" Core..=) Core.<$> numThreadsPerWorker,
             ("numWorkers" Core..=) Core.<$> numWorkers,
-            ("onHostMaintenance" Core..=)
-              Core.<$> onHostMaintenance,
+            ("onHostMaintenance" Core..=) Core.<$> onHostMaintenance,
             ("packages" Core..=) Core.<$> packages,
             ("poolArgs" Core..=) Core.<$> poolArgs,
             ("sdkHarnessContainerImages" Core..=)
               Core.<$> sdkHarnessContainerImages,
             ("subnetwork" Core..=) Core.<$> subnetwork,
-            ("taskrunnerSettings" Core..=)
-              Core.<$> taskrunnerSettings,
+            ("taskrunnerSettings" Core..=) Core.<$> taskrunnerSettings,
             ("teardownPolicy" Core..=) Core.<$> teardownPolicy,
             ("workerHarnessContainerImage" Core..=)
               Core.<$> workerHarnessContainerImage,
@@ -10535,8 +11557,7 @@ instance Core.ToJSON WorkerPool where
 --
 -- /See:/ 'newWorkerPool_Metadata' smart constructor.
 newtype WorkerPool_Metadata = WorkerPool_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10552,14 +11573,10 @@ instance Core.FromJSON WorkerPool_Metadata where
   parseJSON =
     Core.withObject
       "WorkerPool_Metadata"
-      ( \o ->
-          WorkerPool_Metadata
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> WorkerPool_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON WorkerPool_Metadata where
-  toJSON WorkerPool_Metadata {..} =
-    Core.toJSON additional
+  toJSON WorkerPool_Metadata {..} = Core.toJSON additional
 
 -- | Extra arguments for this worker pool.
 --
@@ -10582,14 +11599,10 @@ instance Core.FromJSON WorkerPool_PoolArgs where
   parseJSON =
     Core.withObject
       "WorkerPool_PoolArgs"
-      ( \o ->
-          WorkerPool_PoolArgs
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> WorkerPool_PoolArgs Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON WorkerPool_PoolArgs where
-  toJSON WorkerPool_PoolArgs {..} =
-    Core.toJSON additional
+  toJSON WorkerPool_PoolArgs {..} = Core.toJSON additional
 
 -- | Provides data to pass through to the worker harness.
 --
@@ -10642,13 +11655,10 @@ instance Core.ToJSON WorkerSettings where
     Core.object
       ( Core.catMaybes
           [ ("baseUrl" Core..=) Core.<$> baseUrl,
-            ("reportingEnabled" Core..=)
-              Core.<$> reportingEnabled,
+            ("reportingEnabled" Core..=) Core.<$> reportingEnabled,
             ("servicePath" Core..=) Core.<$> servicePath,
-            ("shuffleServicePath" Core..=)
-              Core.<$> shuffleServicePath,
-            ("tempStoragePrefix" Core..=)
-              Core.<$> tempStoragePrefix,
+            ("shuffleServicePath" Core..=) Core.<$> shuffleServicePath,
+            ("tempStoragePrefix" Core..=) Core.<$> tempStoragePrefix,
             ("workerId" Core..=) Core.<$> workerId
           ]
       )
@@ -10665,20 +11675,18 @@ newtype WorkerShutdownNotice = WorkerShutdownNotice
 -- | Creates a value of 'WorkerShutdownNotice' with the minimum fields required to make a request.
 newWorkerShutdownNotice ::
   WorkerShutdownNotice
-newWorkerShutdownNotice = WorkerShutdownNotice {reason = Core.Nothing}
+newWorkerShutdownNotice =
+  WorkerShutdownNotice {reason = Core.Nothing}
 
 instance Core.FromJSON WorkerShutdownNotice where
   parseJSON =
     Core.withObject
       "WorkerShutdownNotice"
-      ( \o ->
-          WorkerShutdownNotice Core.<$> (o Core..:? "reason")
-      )
+      (\o -> WorkerShutdownNotice Core.<$> (o Core..:? "reason"))
 
 instance Core.ToJSON WorkerShutdownNotice where
   toJSON WorkerShutdownNotice {..} =
-    Core.object
-      (Core.catMaybes [("reason" Core..=) Core.<$> reason])
+    Core.object (Core.catMaybes [("reason" Core..=) Core.<$> reason])
 
 -- | Service-side response to WorkerMessage issuing shutdown notice.
 --
@@ -10728,9 +11736,7 @@ instance Core.ToJSON WorkerThreadScalingReport where
   toJSON WorkerThreadScalingReport {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentThreadCount" Core..=)
-              Core.<$> currentThreadCount
-          ]
+          [("currentThreadCount" Core..=) Core.<$> currentThreadCount]
       )
 
 -- | Contains the thread scaling recommendation for a worker from the backend.
@@ -10746,12 +11752,12 @@ newtype WorkerThreadScalingReportResponse = WorkerThreadScalingReportResponse
 newWorkerThreadScalingReportResponse ::
   WorkerThreadScalingReportResponse
 newWorkerThreadScalingReportResponse =
-  WorkerThreadScalingReportResponse {recommendedThreadCount = Core.Nothing}
+  WorkerThreadScalingReportResponse
+    { recommendedThreadCount =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    WorkerThreadScalingReportResponse
-  where
+instance Core.FromJSON WorkerThreadScalingReportResponse where
   parseJSON =
     Core.withObject
       "WorkerThreadScalingReportResponse"
@@ -10760,10 +11766,7 @@ instance
             Core.<$> (o Core..:? "recommendedThreadCount")
       )
 
-instance
-  Core.ToJSON
-    WorkerThreadScalingReportResponse
-  where
+instance Core.ToJSON WorkerThreadScalingReportResponse where
   toJSON WorkerThreadScalingReportResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -10795,14 +11798,13 @@ instance Core.FromJSON WriteInstruction where
       "WriteInstruction"
       ( \o ->
           WriteInstruction
-            Core.<$> (o Core..:? "input") Core.<*> (o Core..:? "sink")
+            Core.<$> (o Core..:? "input")
+            Core.<*> (o Core..:? "sink")
       )
 
 instance Core.ToJSON WriteInstruction where
   toJSON WriteInstruction {..} =
     Core.object
       ( Core.catMaybes
-          [ ("input" Core..=) Core.<$> input,
-            ("sink" Core..=) Core.<$> sink
-          ]
+          [("input" Core..=) Core.<$> input, ("sink" Core..=) Core.<$> sink]
       )

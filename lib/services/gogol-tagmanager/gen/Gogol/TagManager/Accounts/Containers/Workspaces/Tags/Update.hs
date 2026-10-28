@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Tags.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.tags.update@ method which the
@@ -90,7 +88,8 @@ newTagManagerAccountsContainersWorkspacesTagsUpdate ::
   TagManagerAccountsContainersWorkspacesTagsUpdate
 newTagManagerAccountsContainersWorkspacesTagsUpdate path payload =
   TagManagerAccountsContainersWorkspacesTagsUpdate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       fingerprint = Core.Nothing,
@@ -104,32 +103,27 @@ instance
   Core.GoogleRequest
     TagManagerAccountsContainersWorkspacesTagsUpdate
   where
+  type Rs TagManagerAccountsContainersWorkspacesTagsUpdate = Tag
   type
-    Rs
-      TagManagerAccountsContainersWorkspacesTagsUpdate =
-      Tag
-  type
-    Scopes
-      TagManagerAccountsContainersWorkspacesTagsUpdate =
+    Scopes TagManagerAccountsContainersWorkspacesTagsUpdate =
       '[Tagmanager'Edit'Containers]
-  requestClient
-    TagManagerAccountsContainersWorkspacesTagsUpdate {..} =
-      go
-        path
-        xgafv
-        accessToken
-        callback
-        fingerprint
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        tagManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TagManagerAccountsContainersWorkspacesTagsUpdateResource
-            )
-            Core.mempty
+  requestClient TagManagerAccountsContainersWorkspacesTagsUpdate {..} =
+    go
+      path
+      xgafv
+      accessToken
+      callback
+      fingerprint
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      tagManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                TagManagerAccountsContainersWorkspacesTagsUpdateResource
+          )
+          Core.mempty

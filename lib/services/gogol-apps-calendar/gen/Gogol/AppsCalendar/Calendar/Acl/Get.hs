@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Acl.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Acl.Get
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.acl.get@ method which the
 -- 'CalendarAclGet' request conforms to.
@@ -79,13 +77,13 @@ instance Core.GoogleRequest CalendarAclGet where
   type Rs CalendarAclGet = AclRule
   type
     Scopes CalendarAclGet =
-      '[Calendar'FullControl, Calendar'Readonly]
+      '[ Calendar'FullControl,
+         Calendar'Acls,
+         Calendar'Acls'Readonly,
+         Calendar'Readonly
+       ]
   requestClient CalendarAclGet {..} =
-    go
-      calendarId
-      ruleId
-      (Core.Just Core.AltJSON)
-      appsCalendarService
+    go calendarId ruleId (Core.Just Core.AltJSON) appsCalendarService
     where
       go =
         Core.buildClient

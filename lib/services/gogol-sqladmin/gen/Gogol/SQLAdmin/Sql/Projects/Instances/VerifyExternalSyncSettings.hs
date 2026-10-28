@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.VerifyExternalSyncSettings
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.projects.instances.verifyExternalSyncSettings@ method which the
@@ -96,48 +94,48 @@ newSqlProjectsInstancesVerifyExternalSyncSettings ::
   -- |  Project ID of the project that contains the instance. See 'project'.
   Core.Text ->
   SqlProjectsInstancesVerifyExternalSyncSettings
-newSqlProjectsInstancesVerifyExternalSyncSettings instance' payload project =
-  SqlProjectsInstancesVerifyExternalSyncSettings
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instance' = instance',
-      payload = payload,
-      project = project,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSqlProjectsInstancesVerifyExternalSyncSettings
+  instance'
+  payload
+  project =
+    SqlProjectsInstancesVerifyExternalSyncSettings
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instance' = instance',
+        payload = payload,
+        project = project,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SqlProjectsInstancesVerifyExternalSyncSettings
   where
   type
-    Rs
-      SqlProjectsInstancesVerifyExternalSyncSettings =
+    Rs SqlProjectsInstancesVerifyExternalSyncSettings =
       SqlInstancesVerifyExternalSyncSettingsResponse
   type
-    Scopes
-      SqlProjectsInstancesVerifyExternalSyncSettings =
+    Scopes SqlProjectsInstancesVerifyExternalSyncSettings =
       '[CloudPlatform'FullControl, Sqlservice'Admin]
-  requestClient
-    SqlProjectsInstancesVerifyExternalSyncSettings {..} =
-      go
-        project
-        instance'
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sQLAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SqlProjectsInstancesVerifyExternalSyncSettingsResource
-            )
-            Core.mempty
+  requestClient SqlProjectsInstancesVerifyExternalSyncSettings {..} =
+    go
+      project
+      instance'
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sQLAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SqlProjectsInstancesVerifyExternalSyncSettingsResource
+          )
+          Core.mempty

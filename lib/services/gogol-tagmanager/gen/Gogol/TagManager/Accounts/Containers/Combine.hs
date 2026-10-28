@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Combine
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Combine
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.combine@ method which the
@@ -50,9 +48,7 @@ type TagManagerAccountsContainersCombineResource =
     Core.:> Core.CaptureMode "path" "combine" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "allowUserPermissionFeatureUpdate"
-              Core.Bool
+    Core.:> Core.QueryParam "allowUserPermissionFeatureUpdate" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "containerId" Core.Text
     Core.:> Core.QueryParam
@@ -106,13 +102,8 @@ newTagManagerAccountsContainersCombine path =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TagManagerAccountsContainersCombine
-  where
-  type
-    Rs TagManagerAccountsContainersCombine =
-      Container
+instance Core.GoogleRequest TagManagerAccountsContainersCombine where
+  type Rs TagManagerAccountsContainersCombine = Container
   type
     Scopes TagManagerAccountsContainersCombine =
       '[Tagmanager'Edit'Containers]
@@ -133,7 +124,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                TagManagerAccountsContainersCombineResource
+              Core.Proxy TagManagerAccountsContainersCombineResource
           )
           Core.mempty

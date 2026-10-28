@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Partners.Offers.History.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Partners.Offers.History.List
 where
 
 import Gogol.Partners.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @partners.offers.history.list@ method which the
 -- 'PartnersOffersHistoryList' request conforms to.
@@ -55,13 +53,9 @@ type PartnersOffersHistoryListResource =
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParams
-              "requestMetadata.experimentIds"
-              Core.Text
+    Core.:> Core.QueryParams "requestMetadata.experimentIds" Core.Text
     Core.:> Core.QueryParam "requestMetadata.locale" Core.Text
-    Core.:> Core.QueryParam
-              "requestMetadata.partnersSessionId"
-              Core.Text
+    Core.:> Core.QueryParam "requestMetadata.partnersSessionId" Core.Text
     Core.:> Core.QueryParam
               "requestMetadata.trafficSource.trafficSourceId"
               Core.Text
@@ -75,13 +69,9 @@ type PartnersOffersHistoryListResource =
               "requestMetadata.userOverrides.userId"
               Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListOffersHistoryResponse
+    Core.:> Core.Get '[Core.JSON] ListOffersHistoryResponse
 
 -- | Lists the Historical Offers for the current user (or user\'s entire company)
 --
@@ -146,9 +136,7 @@ newPartnersOffersHistoryList =
     }
 
 instance Core.GoogleRequest PartnersOffersHistoryList where
-  type
-    Rs PartnersOffersHistoryList =
-      ListOffersHistoryResponse
+  type Rs PartnersOffersHistoryList = ListOffersHistoryResponse
   type Scopes PartnersOffersHistoryList = '[]
   requestClient PartnersOffersHistoryList {..} =
     go
@@ -173,7 +161,5 @@ instance Core.GoogleRequest PartnersOffersHistoryList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PartnersOffersHistoryListResource
-          )
+          (Core.Proxy :: Core.Proxy PartnersOffersHistoryListResource)
           Core.mempty

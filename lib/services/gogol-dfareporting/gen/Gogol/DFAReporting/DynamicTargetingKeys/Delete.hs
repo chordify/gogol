@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.DynamicTargetingKeys.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.DynamicTargetingKeys.Delete
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.dynamicTargetingKeys.delete@ method which the
 -- 'DFAReportingDynamicTargetingKeysDelete' request conforms to.
@@ -52,9 +50,7 @@ type DFAReportingDynamicTargetingKeysDeleteResource =
     Core.:> "dynamicTargetingKeys"
     Core.:> Core.Capture "objectId" Core.Int64
     Core.:> Core.QueryParam "name" Core.Text
-    Core.:> Core.QueryParam
-              "objectType"
-              DynamicTargetingKeysDeleteObjectType
+    Core.:> Core.QueryParam "objectType" DynamicTargetingKeysDeleteObjectType
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -73,11 +69,11 @@ data DFAReportingDynamicTargetingKeysDelete = DFAReportingDynamicTargetingKeysDe
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+    -- | Required. Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
     name :: Core.Text,
     -- | ID of the object of this dynamic targeting key. This is a required field.
     objectId :: Core.Int64,
-    -- | Type of the object of this dynamic targeting key. This is a required field.
+    -- | Required. Type of the object of this dynamic targeting key. This is a required field.
     objectType :: DynamicTargetingKeysDeleteObjectType,
     -- | User profile ID associated with this request.
     profileId :: Core.Int64,
@@ -90,55 +86,54 @@ data DFAReportingDynamicTargetingKeysDelete = DFAReportingDynamicTargetingKeysDe
 
 -- | Creates a value of 'DFAReportingDynamicTargetingKeysDelete' with the minimum fields required to make a request.
 newDFAReportingDynamicTargetingKeysDelete ::
-  -- |  Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase. See 'name'.
+  -- |  Required. Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase. See 'name'.
   Core.Text ->
   -- |  ID of the object of this dynamic targeting key. This is a required field. See 'objectId'.
   Core.Int64 ->
-  -- |  Type of the object of this dynamic targeting key. This is a required field. See 'objectType'.
+  -- |  Required. Type of the object of this dynamic targeting key. This is a required field. See 'objectType'.
   DynamicTargetingKeysDeleteObjectType ->
   -- |  User profile ID associated with this request. See 'profileId'.
   Core.Int64 ->
   DFAReportingDynamicTargetingKeysDelete
-newDFAReportingDynamicTargetingKeysDelete name objectId objectType profileId =
-  DFAReportingDynamicTargetingKeysDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      objectId = objectId,
-      objectType = objectType,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDFAReportingDynamicTargetingKeysDelete
+  name
+  objectId
+  objectType
+  profileId =
     DFAReportingDynamicTargetingKeysDelete
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        objectId = objectId,
+        objectType = objectType,
+        profileId = profileId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DFAReportingDynamicTargetingKeysDelete where
   type Rs DFAReportingDynamicTargetingKeysDelete = ()
   type
     Scopes DFAReportingDynamicTargetingKeysDelete =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingDynamicTargetingKeysDelete {..} =
-      go
-        profileId
-        objectId
-        (Core.Just name)
-        (Core.Just objectType)
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingDynamicTargetingKeysDeleteResource
-            )
-            Core.mempty
+  requestClient DFAReportingDynamicTargetingKeysDelete {..} =
+    go
+      profileId
+      objectId
+      (Core.Just name)
+      (Core.Just objectType)
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingDynamicTargetingKeysDeleteResource
+          )
+          Core.mempty

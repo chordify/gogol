@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a database or backup resource. Returns an empty policy if a database or backup exists but does not have a policy set. Authorization requires @spanner.databases.getIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.getIamPolicy@ permission on resource.
+-- Gets the access control policy for a database or backup resource. Returns an empty policy if a database or backup exists but does not have a policy set. Authorization requires @spanner.databases.getIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.getIamPolicy@ permission on resource. For backup schedules, authorization requires @spanner.backupSchedules.getIamPolicy@ permission on resource.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.getIamPolicy@.
 module Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.GetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.getIamPolicy@ method which the
@@ -56,7 +54,7 @@ type SpannerProjectsInstancesDatabasesGetIamPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] GetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Gets the access control policy for a database or backup resource. Returns an empty policy if a database or backup exists but does not have a policy set. Authorization requires @spanner.databases.getIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.getIamPolicy@ permission on resource.
+-- | Gets the access control policy for a database or backup resource. Returns an empty policy if a database or backup exists but does not have a policy set. Authorization requires @spanner.databases.getIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.getIamPolicy@ permission on resource. For backup schedules, authorization requires @spanner.backupSchedules.getIamPolicy@ permission on resource.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesGetIamPolicy' smart constructor.
 data SpannerProjectsInstancesDatabasesGetIamPolicy = SpannerProjectsInstancesDatabasesGetIamPolicy
@@ -86,7 +84,8 @@ newSpannerProjectsInstancesDatabasesGetIamPolicy ::
   SpannerProjectsInstancesDatabasesGetIamPolicy
 newSpannerProjectsInstancesDatabasesGetIamPolicy payload resource =
   SpannerProjectsInstancesDatabasesGetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -99,30 +98,25 @@ instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesGetIamPolicy
   where
+  type Rs SpannerProjectsInstancesDatabasesGetIamPolicy = Policy
   type
-    Rs SpannerProjectsInstancesDatabasesGetIamPolicy =
-      Policy
-  type
-    Scopes
-      SpannerProjectsInstancesDatabasesGetIamPolicy =
+    Scopes SpannerProjectsInstancesDatabasesGetIamPolicy =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesDatabasesGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesGetIamPolicyResource
+          )
+          Core.mempty

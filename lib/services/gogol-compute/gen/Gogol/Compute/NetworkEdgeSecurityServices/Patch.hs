@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.NetworkEdgeSecurityServices.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.NetworkEdgeSecurityServices.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networkEdgeSecurityServices.patch@ method which the
 -- 'ComputeNetworkEdgeSecurityServicesPatch' request conforms to.
@@ -62,9 +60,7 @@ type ComputeNetworkEdgeSecurityServicesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              NetworkEdgeSecurityService
+    Core.:> Core.ReqBody '[Core.JSON] NetworkEdgeSecurityService
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Patches the specified policy with the data included in the request.
@@ -79,7 +75,6 @@ data ComputeNetworkEdgeSecurityServicesPatch = ComputeNetworkEdgeSecurityService
     callback :: (Core.Maybe Core.Text),
     -- | Name of the network edge security service to update.
     networkEdgeSecurityService :: Core.Text,
-    -- |
     paths :: (Core.Maybe [Core.Text]),
     -- | Multipart request metadata.
     payload :: NetworkEdgeSecurityService,
@@ -109,54 +104,51 @@ newComputeNetworkEdgeSecurityServicesPatch ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeNetworkEdgeSecurityServicesPatch
-newComputeNetworkEdgeSecurityServicesPatch networkEdgeSecurityService payload project region =
-  ComputeNetworkEdgeSecurityServicesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      networkEdgeSecurityService = networkEdgeSecurityService,
-      paths = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeNetworkEdgeSecurityServicesPatch
+  networkEdgeSecurityService
+  payload
+  project
+  region =
     ComputeNetworkEdgeSecurityServicesPatch
-  where
-  type
-    Rs ComputeNetworkEdgeSecurityServicesPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        networkEdgeSecurityService = networkEdgeSecurityService,
+        paths = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeNetworkEdgeSecurityServicesPatch where
+  type Rs ComputeNetworkEdgeSecurityServicesPatch = Operation
   type
     Scopes ComputeNetworkEdgeSecurityServicesPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeNetworkEdgeSecurityServicesPatch {..} =
-      go
-        project
-        region
-        networkEdgeSecurityService
-        xgafv
-        accessToken
-        callback
-        (paths Core.^. Core._Default)
-        requestId
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworkEdgeSecurityServicesPatchResource
-            )
-            Core.mempty
+  requestClient ComputeNetworkEdgeSecurityServicesPatch {..} =
+    go
+      project
+      region
+      networkEdgeSecurityService
+      xgafv
+      accessToken
+      callback
+      (paths Core.^. Core._Default)
+      requestId
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeNetworkEdgeSecurityServicesPatchResource
+          )
+          Core.mempty

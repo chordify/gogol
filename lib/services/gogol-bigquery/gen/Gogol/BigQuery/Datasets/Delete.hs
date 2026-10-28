@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Datasets.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Datasets.Delete
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.datasets.delete@ method which the
 -- 'BigQueryDatasetsDelete' request conforms to.
@@ -51,7 +49,12 @@ type BigQueryDatasetsDeleteResource =
     Core.:> Core.Capture "projectId" Core.Text
     Core.:> "datasets"
     Core.:> Core.Capture "datasetId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "deleteContents" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
@@ -59,27 +62,42 @@ type BigQueryDatasetsDeleteResource =
 --
 -- /See:/ 'newBigQueryDatasetsDelete' smart constructor.
 data BigQueryDatasetsDelete = BigQueryDatasetsDelete
-  { -- | Dataset ID of dataset being deleted
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Dataset ID of dataset being deleted
     datasetId :: Core.Text,
     -- | If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False
     deleteContents :: (Core.Maybe Core.Bool),
-    -- | Project ID of the dataset being deleted
-    projectId :: Core.Text
+    -- | Required. Project ID of the dataset being deleted
+    projectId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryDatasetsDelete' with the minimum fields required to make a request.
 newBigQueryDatasetsDelete ::
-  -- |  Dataset ID of dataset being deleted See 'datasetId'.
+  -- |  Required. Dataset ID of dataset being deleted See 'datasetId'.
   Core.Text ->
-  -- |  Project ID of the dataset being deleted See 'projectId'.
+  -- |  Required. Project ID of the dataset being deleted See 'projectId'.
   Core.Text ->
   BigQueryDatasetsDelete
 newBigQueryDatasetsDelete datasetId projectId =
   BigQueryDatasetsDelete
-    { datasetId = datasetId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      datasetId = datasetId,
       deleteContents = Core.Nothing,
-      projectId = projectId
+      projectId = projectId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryDatasetsDelete where
@@ -91,13 +109,16 @@ instance Core.GoogleRequest BigQueryDatasetsDelete where
     go
       projectId
       datasetId
+      xgafv
+      accessToken
+      callback
       deleteContents
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryDatasetsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy BigQueryDatasetsDeleteResource)
           Core.mempty

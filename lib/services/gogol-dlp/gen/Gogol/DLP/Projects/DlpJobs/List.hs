@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.DlpJobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists DlpJobs that match the specified filter in the request. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- Lists DlpJobs that match the specified filter in the request. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.dlpJobs.list@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.dlpJobs.list@.
 module Gogol.DLP.Projects.DlpJobs.List
   ( -- * Resource
     DLPProjectsDlpJobsListResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.DlpJobs.List
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.dlpJobs.list@ method which the
 -- 'DLPProjectsDlpJobsList' request conforms to.
@@ -60,11 +58,9 @@ type DLPProjectsDlpJobsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2ListDlpJobsResponse
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2ListDlpJobsResponse
 
--- | Lists DlpJobs that match the specified filter in the request. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- | Lists DlpJobs that match the specified filter in the request. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
 -- /See:/ 'newDLPProjectsDlpJobsList' smart constructor.
 data DLPProjectsDlpJobsList = DLPProjectsDlpJobsList
@@ -75,17 +71,17 @@ data DLPProjectsDlpJobsList = DLPProjectsDlpJobsList
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Allows filtering. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by @AND@ or @OR@ logical operators. A sequence of restrictions implicitly uses @AND@. * A restriction has the form of @{field} {operator} {value}@. * Supported fields\/values for inspect jobs: - @state@ - PENDING|RUNNING|CANCELED|FINISHED|FAILED - @inspected_storage@ - DATASTORE|CLOUD/STORAGE|BIGQUERY - @trigger_name@ - The name of the trigger that created the job. - \'end/time@- Corresponds to the time the job finished. - \'start_time@ - Corresponds to the time the job finished. * Supported fields for risk analysis jobs: - @state@ - RUNNING|CANCELED|FINISHED|FAILED - \'end/time@- Corresponds to the time the job finished. - \'start_time@ - Corresponds to the time the job finished. * The operator must be @=@ or @!=@. Examples: * inspected/storage = cloud/storage AND state = done * inspected/storage = cloud/storage OR inspected/storage = bigquery * inspected/storage = cloud/storage
-    -- AND (state = done OR state = canceled) * end_time > \"2017-12-12T00:00:00+00:00\" The length of this field should be no more than 500 characters.
+    -- AND (state = done OR state = canceled) * end_time > \\\"2017-12-12T00:00:00+00:00\\\" The length of this field should be no more than 500 characters.
     filter :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | Comma separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc, end_time asc, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the job was created. - @end_time@: corresponds to the time the job ended. - @name@: corresponds to the job\'s name. - @state@: corresponds to @state@
+    -- | Comma-separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: @name asc, end_time asc, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the job was created. - @end_time@: corresponds to the time the job ended. - @name@: corresponds to the job\'s name. - @state@: corresponds to @state@
     orderBy :: (Core.Maybe Core.Text),
     -- | The standard list page size.
     pageSize :: (Core.Maybe Core.Int32),
     -- | The standard list page token.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | The type of job. Defaults to @DlpJobType.INSPECT@
     type' :: (Core.Maybe ProjectsDlpJobsListType),
@@ -98,7 +94,7 @@ data DLPProjectsDlpJobsList = DLPProjectsDlpJobsList
 
 -- | Creates a value of 'DLPProjectsDlpJobsList' with the minimum fields required to make a request.
 newDLPProjectsDlpJobsList ::
-  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   DLPProjectsDlpJobsList
 newDLPProjectsDlpJobsList parent =
@@ -121,9 +117,7 @@ instance Core.GoogleRequest DLPProjectsDlpJobsList where
   type
     Rs DLPProjectsDlpJobsList =
       GooglePrivacyDlpV2ListDlpJobsResponse
-  type
-    Scopes DLPProjectsDlpJobsList =
-      '[CloudPlatform'FullControl]
+  type Scopes DLPProjectsDlpJobsList = '[CloudPlatform'FullControl]
   requestClient DLPProjectsDlpJobsList {..} =
     go
       parent
@@ -143,7 +137,5 @@ instance Core.GoogleRequest DLPProjectsDlpJobsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsDlpJobsListResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsDlpJobsListResource)
           Core.mempty

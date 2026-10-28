@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.UserProfiles.GuardianInvitations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.UserProfiles.GuardianInvitations.List
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.list@ method which the
 -- 'ClassroomUserProfilesGuardianInvitationsList' request conforms to.
@@ -55,15 +53,11 @@ type ClassroomUserProfilesGuardianInvitationsListResource =
     Core.:> Core.QueryParam "invitedEmailAddress" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParams
-              "states"
-              UserProfilesGuardianInvitationsListStates
+    Core.:> Core.QueryParams "states" UserProfilesGuardianInvitationsListStates
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListGuardianInvitationsResponse
+    Core.:> Core.Get '[Core.JSON] ListGuardianInvitationsResponse
 
 -- | Returns a list of guardian invitations that the requesting user is permitted to view, filtered by the parameters provided. This method returns the following error codes: * @PERMISSION_DENIED@ if a @student_id@ is specified, and the requesting user is not permitted to view guardian invitations for that student, if @\"-\"@ is specified as the @student_id@ and the user is not a domain administrator, if guardians are not enabled for the domain in question, or for other access errors. * @INVALID_ARGUMENT@ if a @student_id@ is specified, but its format cannot be recognized (it is not an email address, nor a @student_id@ from the API, nor the literal string @me@). May also be returned if an invalid @page_token@ or @state@ is provided. * @NOT_FOUND@ if a @student_id@ is specified, and its format can be recognized, but Classroom has no record of that student.
 --
@@ -99,7 +93,8 @@ newClassroomUserProfilesGuardianInvitationsList ::
   ClassroomUserProfilesGuardianInvitationsList
 newClassroomUserProfilesGuardianInvitationsList studentId =
   ClassroomUserProfilesGuardianInvitationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       invitedEmailAddress = Core.Nothing,
@@ -119,31 +114,28 @@ instance
     Rs ClassroomUserProfilesGuardianInvitationsList =
       ListGuardianInvitationsResponse
   type
-    Scopes
-      ClassroomUserProfilesGuardianInvitationsList =
+    Scopes ClassroomUserProfilesGuardianInvitationsList =
       '[ Classroom'Guardianlinks'Students,
          Classroom'Guardianlinks'Students'Readonly
        ]
-  requestClient
-    ClassroomUserProfilesGuardianInvitationsList {..} =
-      go
-        studentId
-        xgafv
-        accessToken
-        callback
-        invitedEmailAddress
-        pageSize
-        pageToken
-        (states Core.^. Core._Default)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomUserProfilesGuardianInvitationsListResource
-            )
-            Core.mempty
+  requestClient ClassroomUserProfilesGuardianInvitationsList {..} =
+    go
+      studentId
+      xgafv
+      accessToken
+      callback
+      invitedEmailAddress
+      pageSize
+      pageToken
+      (states Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomUserProfilesGuardianInvitationsListResource
+          )
+          Core.mempty

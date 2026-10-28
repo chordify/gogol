@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.AlertPolicies.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.AlertPolicies.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.alertPolicies.list@ method which the
 -- 'MonitoringProjectsAlertPoliciesList' request conforms to.
@@ -70,15 +68,15 @@ data MonitoringProjectsAlertPoliciesList = MonitoringProjectsAlertPoliciesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
+    -- | Optional. If provided, this field specifies the criteria that must be met by alert policies to be included in the response.For more details, see sorting and filtering (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
     filter :: (Core.Maybe Core.Text),
     -- | Required. The project (https:\/\/cloud.google.com\/monitoring\/api\/v3#project/name) whose alert policies are to be listed. The format is: projects\/[PROJECT/ID/OR/NUMBER] Note that this field names the parent container in which the alerting policies to be listed are stored. To retrieve a single alerting policy by name, use the GetAlertPolicy operation, instead.
     name :: Core.Text,
-    -- | A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
+    -- | Optional. A comma-separated list of fields by which to sort the result. Supports the same set of field references as the filter field. Entries can be prefixed with a minus sign to sort by the field in descending order.For more details, see sorting and filtering (https:\/\/cloud.google.com\/monitoring\/api\/v3\/sorting-and-filtering).
     orderBy :: (Core.Maybe Core.Text),
-    -- | The maximum number of results to return in a single response.
+    -- | Optional. The maximum number of results to return in a single response.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call.
+    -- | Optional. If this field is not empty then it must contain the nextPageToken value returned by a previous call to this method. Using this field causes the method to return more results from the previous method call.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -106,10 +104,7 @@ newMonitoringProjectsAlertPoliciesList name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsAlertPoliciesList
-  where
+instance Core.GoogleRequest MonitoringProjectsAlertPoliciesList where
   type
     Rs MonitoringProjectsAlertPoliciesList =
       ListAlertPoliciesResponse
@@ -137,7 +132,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                MonitoringProjectsAlertPoliciesListResource
+              Core.Proxy MonitoringProjectsAlertPoliciesListResource
           )
           Core.mempty

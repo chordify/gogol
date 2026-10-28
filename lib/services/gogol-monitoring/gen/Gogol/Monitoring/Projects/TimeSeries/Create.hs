@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.TimeSeries.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
+-- Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response. This method does not support resource locations constraint of an organization policy (https:\/\/cloud.google.com\/resource-manager\/docs\/organization-policy\/defining-locations#setting/the/organization_policy).
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.timeSeries.create@.
 module Gogol.Monitoring.Projects.TimeSeries.Create
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.TimeSeries.Create
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.timeSeries.create@ method which the
 -- 'MonitoringProjectsTimeSeriesCreate' request conforms to.
@@ -57,7 +55,7 @@ type MonitoringProjectsTimeSeriesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] CreateTimeSeriesRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.
+-- | Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response. This method does not support resource locations constraint of an organization policy (https:\/\/cloud.google.com\/resource-manager\/docs\/organization-policy\/defining-locations#setting/the/organization_policy).
 --
 -- /See:/ 'newMonitoringProjectsTimeSeriesCreate' smart constructor.
 data MonitoringProjectsTimeSeriesCreate = MonitoringProjectsTimeSeriesCreate
@@ -96,10 +94,7 @@ newMonitoringProjectsTimeSeriesCreate name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsTimeSeriesCreate
-  where
+instance Core.GoogleRequest MonitoringProjectsTimeSeriesCreate where
   type Rs MonitoringProjectsTimeSeriesCreate = Empty
   type
     Scopes MonitoringProjectsTimeSeriesCreate =
@@ -122,7 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                MonitoringProjectsTimeSeriesCreateResource
+              Core.Proxy MonitoringProjectsTimeSeriesCreateResource
           )
           Core.mempty

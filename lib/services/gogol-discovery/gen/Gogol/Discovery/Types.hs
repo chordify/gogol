@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Discovery.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Discovery.Types
@@ -82,6 +80,10 @@ module Gogol.Discovery.Types
     -- ** RestDescription_Auth_Oauth2_ScopesAdditional
     RestDescription_Auth_Oauth2_ScopesAdditional (..),
     newRestDescription_Auth_Oauth2_ScopesAdditional,
+
+    -- ** RestDescription_EndpointsItem
+    RestDescription_EndpointsItem (..),
+    newRestDescription_EndpointsItem,
 
     -- ** RestDescription_Icons
     RestDescription_Icons (..),
@@ -151,7 +153,7 @@ where
 
 import Gogol.Discovery.Internal.Product
 import Gogol.Discovery.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the API Discovery Service. This contains the host and root path used as a starting point for constructing service requests.
 discoveryService :: Core.ServiceConfig

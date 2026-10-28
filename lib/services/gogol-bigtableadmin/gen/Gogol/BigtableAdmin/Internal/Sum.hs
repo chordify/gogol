@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BigtableAdmin.Internal.Sum
@@ -33,12 +31,29 @@ module Gogol.BigtableAdmin.Internal.Sum
         ..
       ),
 
+    -- * AppProfile_Priority
+    AppProfile_Priority
+      ( AppProfile_Priority_PRIORITYUNSPECIFIED,
+        AppProfile_Priority_PRIORITYLOW,
+        AppProfile_Priority_PRIORITYMEDIUM,
+        AppProfile_Priority_PRIORITYHIGH,
+        ..
+      ),
+
     -- * AuditLogConfig_LogType
     AuditLogConfig_LogType
       ( AuditLogConfig_LogType_LOGTYPEUNSPECIFIED,
         AuditLogConfig_LogType_ADMINREAD,
         AuditLogConfig_LogType_DATAWRITE,
         AuditLogConfig_LogType_DATAREAD,
+        ..
+      ),
+
+    -- * Backup_BackupType
+    Backup_BackupType
+      ( Backup_BackupType_BACKUPTYPEUNSPECIFIED,
+        Backup_BackupType_Standard,
+        Backup_BackupType_Hot,
         ..
       ),
 
@@ -55,6 +70,14 @@ module Gogol.BigtableAdmin.Internal.Sum
       ( Cluster_DefaultStorageType_STORAGETYPEUNSPECIFIED,
         Cluster_DefaultStorageType_Ssd,
         Cluster_DefaultStorageType_Hdd,
+        ..
+      ),
+
+    -- * Cluster_NodeScalingFactor
+    Cluster_NodeScalingFactor
+      ( Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED,
+        Cluster_NodeScalingFactor_NODESCALINGFACTOR1X,
+        Cluster_NodeScalingFactor_NODESCALINGFACTOR2X,
         ..
       ),
 
@@ -76,6 +99,13 @@ module Gogol.BigtableAdmin.Internal.Sum
         ClusterState_ReplicationState_UNPLANNEDMAINTENANCE,
         ClusterState_ReplicationState_Ready,
         ClusterState_ReplicationState_READYOPTIMIZING,
+        ..
+      ),
+
+    -- * DataBoostIsolationReadOnly_ComputeBillingOwner
+    DataBoostIsolationReadOnly_ComputeBillingOwner
+      ( DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED,
+        DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS,
         ..
       ),
 
@@ -117,6 +147,15 @@ module Gogol.BigtableAdmin.Internal.Sum
         ..
       ),
 
+    -- * StandardIsolation_Priority
+    StandardIsolation_Priority
+      ( StandardIsolation_Priority_PRIORITYUNSPECIFIED,
+        StandardIsolation_Priority_PRIORITYLOW,
+        StandardIsolation_Priority_PRIORITYMEDIUM,
+        StandardIsolation_Priority_PRIORITYHIGH,
+        ..
+      ),
+
     -- * Table_Granularity
     Table_Granularity
       ( Table_Granularity_TIMESTAMPGRANULARITYUNSPECIFIED,
@@ -131,6 +170,24 @@ module Gogol.BigtableAdmin.Internal.Sum
         TableProgress_State_Copying,
         TableProgress_State_Completed,
         TableProgress_State_Cancelled,
+        ..
+      ),
+
+    -- * ProjectsInstancesTablesAuthorizedViewsGetView
+    ProjectsInstancesTablesAuthorizedViewsGetView
+      ( ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED,
+        ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY,
+        ProjectsInstancesTablesAuthorizedViewsGetView_Basic,
+        ProjectsInstancesTablesAuthorizedViewsGetView_Full,
+        ..
+      ),
+
+    -- * ProjectsInstancesTablesAuthorizedViewsListView
+    ProjectsInstancesTablesAuthorizedViewsListView
+      ( ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED,
+        ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY,
+        ProjectsInstancesTablesAuthorizedViewsListView_Basic,
+        ProjectsInstancesTablesAuthorizedViewsListView_Full,
         ..
       ),
 
@@ -160,7 +217,7 @@ module Gogol.BigtableAdmin.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -187,6 +244,40 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | This field has been deprecated in favor of @standard_isolation.priority@. If you set this field, @standard_isolation.priority@ will be set instead. The priority of requests sent using this app profile.
+newtype AppProfile_Priority = AppProfile_Priority {fromAppProfile_Priority :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Mapped to PRIORITY_HIGH (the legacy behavior) on creation.
+pattern AppProfile_Priority_PRIORITYUNSPECIFIED :: AppProfile_Priority
+pattern AppProfile_Priority_PRIORITYUNSPECIFIED = AppProfile_Priority "PRIORITY_UNSPECIFIED"
+
+pattern AppProfile_Priority_PRIORITYLOW :: AppProfile_Priority
+pattern AppProfile_Priority_PRIORITYLOW = AppProfile_Priority "PRIORITY_LOW"
+
+pattern AppProfile_Priority_PRIORITYMEDIUM :: AppProfile_Priority
+pattern AppProfile_Priority_PRIORITYMEDIUM = AppProfile_Priority "PRIORITY_MEDIUM"
+
+pattern AppProfile_Priority_PRIORITYHIGH :: AppProfile_Priority
+pattern AppProfile_Priority_PRIORITYHIGH = AppProfile_Priority "PRIORITY_HIGH"
+
+{-# COMPLETE
+  AppProfile_Priority_PRIORITYUNSPECIFIED,
+  AppProfile_Priority_PRIORITYLOW,
+  AppProfile_Priority_PRIORITYMEDIUM,
+  AppProfile_Priority_PRIORITYHIGH,
+  AppProfile_Priority
   #-}
 
 -- | The log type that this config enables.
@@ -224,6 +315,38 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType_DATAWRITE,
   AuditLogConfig_LogType_DATAREAD,
   AuditLogConfig_LogType
+  #-}
+
+-- | Indicates the backup type of the backup.
+newtype Backup_BackupType = Backup_BackupType {fromBackup_BackupType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern Backup_BackupType_BACKUPTYPEUNSPECIFIED :: Backup_BackupType
+pattern Backup_BackupType_BACKUPTYPEUNSPECIFIED = Backup_BackupType "BACKUP_TYPE_UNSPECIFIED"
+
+-- | The default type for Cloud Bigtable managed backups. Supported for backups created in both HDD and SSD instances. Requires optimization when restored to a table in an SSD instance.
+pattern Backup_BackupType_Standard :: Backup_BackupType
+pattern Backup_BackupType_Standard = Backup_BackupType "STANDARD"
+
+-- | A backup type with faster restore to SSD performance. Only supported for backups created in SSD instances. A new SSD table restored from a hot backup reaches production performance more quickly than a standard backup.
+pattern Backup_BackupType_Hot :: Backup_BackupType
+pattern Backup_BackupType_Hot = Backup_BackupType "HOT"
+
+{-# COMPLETE
+  Backup_BackupType_BACKUPTYPEUNSPECIFIED,
+  Backup_BackupType_Standard,
+  Backup_BackupType_Hot,
+  Backup_BackupType
   #-}
 
 -- | Output only. The current state of the backup.
@@ -288,6 +411,38 @@ pattern Cluster_DefaultStorageType_Hdd = Cluster_DefaultStorageType "HDD"
   Cluster_DefaultStorageType_Ssd,
   Cluster_DefaultStorageType_Hdd,
   Cluster_DefaultStorageType
+  #-}
+
+-- | Immutable. The node scaling factor of this cluster.
+newtype Cluster_NodeScalingFactor = Cluster_NodeScalingFactor {fromCluster_NodeScalingFactor :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No node scaling specified. Defaults to NODE/SCALING/FACTOR_1X.
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED :: Cluster_NodeScalingFactor
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED = Cluster_NodeScalingFactor "NODE_SCALING_FACTOR_UNSPECIFIED"
+
+-- | The cluster is running with a scaling factor of 1.
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTOR1X :: Cluster_NodeScalingFactor
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTOR1X = Cluster_NodeScalingFactor "NODE_SCALING_FACTOR_1X"
+
+-- | The cluster is running with a scaling factor of 2. All node count values must be in increments of 2 with this scaling factor enabled, otherwise an INVALID_ARGUMENT error will be returned.
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTOR2X :: Cluster_NodeScalingFactor
+pattern Cluster_NodeScalingFactor_NODESCALINGFACTOR2X = Cluster_NodeScalingFactor "NODE_SCALING_FACTOR_2X"
+
+{-# COMPLETE
+  Cluster_NodeScalingFactor_NODESCALINGFACTORUNSPECIFIED,
+  Cluster_NodeScalingFactor_NODESCALINGFACTOR1X,
+  Cluster_NodeScalingFactor_NODESCALINGFACTOR2X,
+  Cluster_NodeScalingFactor
   #-}
 
 -- | Output only. The current state of the cluster.
@@ -377,6 +532,33 @@ pattern ClusterState_ReplicationState_READYOPTIMIZING = ClusterState_Replication
   ClusterState_ReplicationState_Ready,
   ClusterState_ReplicationState_READYOPTIMIZING,
   ClusterState_ReplicationState
+  #-}
+
+-- | The Compute Billing Owner for this Data Boost App Profile.
+newtype DataBoostIsolationReadOnly_ComputeBillingOwner = DataBoostIsolationReadOnly_ComputeBillingOwner {fromDataBoostIsolationReadOnly_ComputeBillingOwner :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified value.
+pattern DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED :: DataBoostIsolationReadOnly_ComputeBillingOwner
+pattern DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED = DataBoostIsolationReadOnly_ComputeBillingOwner "COMPUTE_BILLING_OWNER_UNSPECIFIED"
+
+-- | The host Cloud Project containing the targeted Bigtable Instance \/ Table pays for compute.
+pattern DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS :: DataBoostIsolationReadOnly_ComputeBillingOwner
+pattern DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS = DataBoostIsolationReadOnly_ComputeBillingOwner "HOST_PAYS"
+
+{-# COMPLETE
+  DataBoostIsolationReadOnly_ComputeBillingOwner_COMPUTEBILLINGOWNERUNSPECIFIED,
+  DataBoostIsolationReadOnly_ComputeBillingOwner_HOSTPAYS,
+  DataBoostIsolationReadOnly_ComputeBillingOwner
   #-}
 
 -- | Output only. The type of encryption used to protect this resource.
@@ -529,6 +711,40 @@ pattern RestoreTableMetadata_SourceType_Backup = RestoreTableMetadata_SourceType
   RestoreTableMetadata_SourceType
   #-}
 
+-- | The priority of requests sent using this app profile.
+newtype StandardIsolation_Priority = StandardIsolation_Priority {fromStandardIsolation_Priority :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Mapped to PRIORITY_HIGH (the legacy behavior) on creation.
+pattern StandardIsolation_Priority_PRIORITYUNSPECIFIED :: StandardIsolation_Priority
+pattern StandardIsolation_Priority_PRIORITYUNSPECIFIED = StandardIsolation_Priority "PRIORITY_UNSPECIFIED"
+
+pattern StandardIsolation_Priority_PRIORITYLOW :: StandardIsolation_Priority
+pattern StandardIsolation_Priority_PRIORITYLOW = StandardIsolation_Priority "PRIORITY_LOW"
+
+pattern StandardIsolation_Priority_PRIORITYMEDIUM :: StandardIsolation_Priority
+pattern StandardIsolation_Priority_PRIORITYMEDIUM = StandardIsolation_Priority "PRIORITY_MEDIUM"
+
+pattern StandardIsolation_Priority_PRIORITYHIGH :: StandardIsolation_Priority
+pattern StandardIsolation_Priority_PRIORITYHIGH = StandardIsolation_Priority "PRIORITY_HIGH"
+
+{-# COMPLETE
+  StandardIsolation_Priority_PRIORITYUNSPECIFIED,
+  StandardIsolation_Priority_PRIORITYLOW,
+  StandardIsolation_Priority_PRIORITYMEDIUM,
+  StandardIsolation_Priority_PRIORITYHIGH,
+  StandardIsolation_Priority
+  #-}
+
 -- | Immutable. The granularity (i.e. @MILLIS@) at which timestamps are stored in this table. Timestamps not matching the granularity will be rejected. If unspecified at creation time, the value will be set to @MILLIS@. Views: @SCHEMA_VIEW@, @FULL@.
 newtype Table_Granularity = Table_Granularity {fromTable_Granularity :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -568,7 +784,6 @@ newtype TableProgress_State = TableProgress_State {fromTableProgress_State :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern TableProgress_State_STATEUNSPECIFIED :: TableProgress_State
 pattern TableProgress_State_STATEUNSPECIFIED = TableProgress_State "STATE_UNSPECIFIED"
 
@@ -595,6 +810,80 @@ pattern TableProgress_State_Cancelled = TableProgress_State "CANCELLED"
   TableProgress_State_Completed,
   TableProgress_State_Cancelled,
   TableProgress_State
+  #-}
+
+-- | Optional. The resource_view to be applied to the returned AuthorizedView\'s fields. Default to BASIC.
+newtype ProjectsInstancesTablesAuthorizedViewsGetView = ProjectsInstancesTablesAuthorizedViewsGetView {fromProjectsInstancesTablesAuthorizedViewsGetView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Uses the default view for each method as documented in the request.
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED :: ProjectsInstancesTablesAuthorizedViewsGetView
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED = ProjectsInstancesTablesAuthorizedViewsGetView "RESPONSE_VIEW_UNSPECIFIED"
+
+-- | Only populates @name@.
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY :: ProjectsInstancesTablesAuthorizedViewsGetView
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY = ProjectsInstancesTablesAuthorizedViewsGetView "NAME_ONLY"
+
+-- | Only populates the AuthorizedView\'s basic metadata. This includes: name, deletion_protection, etag.
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_Basic :: ProjectsInstancesTablesAuthorizedViewsGetView
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_Basic = ProjectsInstancesTablesAuthorizedViewsGetView "BASIC"
+
+-- | Populates every fields.
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_Full :: ProjectsInstancesTablesAuthorizedViewsGetView
+pattern ProjectsInstancesTablesAuthorizedViewsGetView_Full = ProjectsInstancesTablesAuthorizedViewsGetView "FULL"
+
+{-# COMPLETE
+  ProjectsInstancesTablesAuthorizedViewsGetView_RESPONSEVIEWUNSPECIFIED,
+  ProjectsInstancesTablesAuthorizedViewsGetView_NAMEONLY,
+  ProjectsInstancesTablesAuthorizedViewsGetView_Basic,
+  ProjectsInstancesTablesAuthorizedViewsGetView_Full,
+  ProjectsInstancesTablesAuthorizedViewsGetView
+  #-}
+
+-- | Optional. The resource/view to be applied to the returned AuthorizedViews\' fields. Default to NAME/ONLY.
+newtype ProjectsInstancesTablesAuthorizedViewsListView = ProjectsInstancesTablesAuthorizedViewsListView {fromProjectsInstancesTablesAuthorizedViewsListView :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Uses the default view for each method as documented in the request.
+pattern ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED :: ProjectsInstancesTablesAuthorizedViewsListView
+pattern ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED = ProjectsInstancesTablesAuthorizedViewsListView "RESPONSE_VIEW_UNSPECIFIED"
+
+-- | Only populates @name@.
+pattern ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY :: ProjectsInstancesTablesAuthorizedViewsListView
+pattern ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY = ProjectsInstancesTablesAuthorizedViewsListView "NAME_ONLY"
+
+-- | Only populates the AuthorizedView\'s basic metadata. This includes: name, deletion_protection, etag.
+pattern ProjectsInstancesTablesAuthorizedViewsListView_Basic :: ProjectsInstancesTablesAuthorizedViewsListView
+pattern ProjectsInstancesTablesAuthorizedViewsListView_Basic = ProjectsInstancesTablesAuthorizedViewsListView "BASIC"
+
+-- | Populates every fields.
+pattern ProjectsInstancesTablesAuthorizedViewsListView_Full :: ProjectsInstancesTablesAuthorizedViewsListView
+pattern ProjectsInstancesTablesAuthorizedViewsListView_Full = ProjectsInstancesTablesAuthorizedViewsListView "FULL"
+
+{-# COMPLETE
+  ProjectsInstancesTablesAuthorizedViewsListView_RESPONSEVIEWUNSPECIFIED,
+  ProjectsInstancesTablesAuthorizedViewsListView_NAMEONLY,
+  ProjectsInstancesTablesAuthorizedViewsListView_Basic,
+  ProjectsInstancesTablesAuthorizedViewsListView_Full,
+  ProjectsInstancesTablesAuthorizedViewsListView
   #-}
 
 -- | The view to be applied to the returned table\'s fields. Defaults to @SCHEMA_VIEW@ if unspecified.

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Devices.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Devices.Get
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.devices.get@ method which the
 -- 'CloudIdentityDevicesGet' request conforms to.
@@ -54,9 +52,7 @@ type CloudIdentityDevicesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleAppsCloudidentityDevicesV1Device
+    Core.:> Core.Get '[Core.JSON] GoogleAppsCloudidentityDevicesV1Device
 
 -- | Retrieves the specified device.
 --
@@ -101,9 +97,7 @@ instance Core.GoogleRequest CloudIdentityDevicesGet where
       GoogleAppsCloudidentityDevicesV1Device
   type
     Scopes CloudIdentityDevicesGet =
-      '[ CloudIdentity'Devices,
-         CloudIdentity'Devices'Readonly
-       ]
+      '[CloudIdentity'Devices, CloudIdentity'Devices'Readonly]
   requestClient CloudIdentityDevicesGet {..} =
     go
       name
@@ -118,7 +112,5 @@ instance Core.GoogleRequest CloudIdentityDevicesGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudIdentityDevicesGetResource
-          )
+          (Core.Proxy :: Core.Proxy CloudIdentityDevicesGetResource)
           Core.mempty

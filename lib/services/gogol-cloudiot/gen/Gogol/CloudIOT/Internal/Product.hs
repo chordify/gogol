@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIOT.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudIOT.Internal.Product
@@ -177,7 +175,7 @@ module Gogol.CloudIOT.Internal.Product
 where
 
 import Gogol.CloudIOT.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Request for @BindDeviceToGateway@.
 --
@@ -194,7 +192,10 @@ data BindDeviceToGatewayRequest = BindDeviceToGatewayRequest
 newBindDeviceToGatewayRequest ::
   BindDeviceToGatewayRequest
 newBindDeviceToGatewayRequest =
-  BindDeviceToGatewayRequest {deviceId = Core.Nothing, gatewayId = Core.Nothing}
+  BindDeviceToGatewayRequest
+    { deviceId = Core.Nothing,
+      gatewayId = Core.Nothing
+    }
 
 instance Core.FromJSON BindDeviceToGatewayRequest where
   parseJSON =
@@ -367,9 +368,7 @@ instance Core.FromJSON Device where
             Core.<*> (o Core..:? "logLevel")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "numId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "state")
       )
 
@@ -382,15 +381,12 @@ instance Core.ToJSON Device where
             ("credentials" Core..=) Core.<$> credentials,
             ("gatewayConfig" Core..=) Core.<$> gatewayConfig,
             ("id" Core..=) Core.<$> id,
-            ("lastConfigAckTime" Core..=)
-              Core.<$> lastConfigAckTime,
-            ("lastConfigSendTime" Core..=)
-              Core.<$> lastConfigSendTime,
+            ("lastConfigAckTime" Core..=) Core.<$> lastConfigAckTime,
+            ("lastConfigSendTime" Core..=) Core.<$> lastConfigSendTime,
             ("lastErrorStatus" Core..=) Core.<$> lastErrorStatus,
             ("lastErrorTime" Core..=) Core.<$> lastErrorTime,
             ("lastEventTime" Core..=) Core.<$> lastEventTime,
-            ("lastHeartbeatTime" Core..=)
-              Core.<$> lastHeartbeatTime,
+            ("lastHeartbeatTime" Core..=) Core.<$> lastHeartbeatTime,
             ("lastStateTime" Core..=) Core.<$> lastStateTime,
             ("logLevel" Core..=) Core.<$> logLevel,
             ("metadata" Core..=) Core.<$> metadata,
@@ -404,8 +400,7 @@ instance Core.ToJSON Device where
 --
 -- /See:/ 'newDevice_Metadata' smart constructor.
 newtype Device_Metadata = Device_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -414,15 +409,14 @@ newDevice_Metadata ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Device_Metadata
-newDevice_Metadata additional = Device_Metadata {additional = additional}
+newDevice_Metadata additional =
+  Device_Metadata {additional = additional}
 
 instance Core.FromJSON Device_Metadata where
   parseJSON =
     Core.withObject
       "Device_Metadata"
-      ( \o ->
-          Device_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Device_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Device_Metadata where
   toJSON Device_Metadata {..} = Core.toJSON additional
@@ -462,9 +456,7 @@ instance Core.FromJSON DeviceConfig where
             Core.<$> (o Core..:? "binaryData")
             Core.<*> (o Core..:? "cloudUpdateTime")
             Core.<*> (o Core..:? "deviceAckTime")
-            Core.<*> ( o Core..:? "version"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "version" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON DeviceConfig where
@@ -474,8 +466,7 @@ instance Core.ToJSON DeviceConfig where
           [ ("binaryData" Core..=) Core.<$> binaryData,
             ("cloudUpdateTime" Core..=) Core.<$> cloudUpdateTime,
             ("deviceAckTime" Core..=) Core.<$> deviceAckTime,
-            ("version" Core..=) Core.. Core.AsText
-              Core.<$> version
+            ("version" Core..=) Core.. Core.AsText Core.<$> version
           ]
       )
 
@@ -494,7 +485,10 @@ data DeviceCredential = DeviceCredential
 newDeviceCredential ::
   DeviceCredential
 newDeviceCredential =
-  DeviceCredential {expirationTime = Core.Nothing, publicKey = Core.Nothing}
+  DeviceCredential
+    { expirationTime = Core.Nothing,
+      publicKey = Core.Nothing
+    }
 
 instance Core.FromJSON DeviceCredential where
   parseJSON =
@@ -634,8 +628,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -674,10 +667,8 @@ instance Core.ToJSON EventNotificationConfig where
   toJSON EventNotificationConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pubsubTopicName" Core..=)
-              Core.<$> pubsubTopicName,
-            ("subfolderMatches" Core..=)
-              Core.<$> subfolderMatches
+          [ ("pubsubTopicName" Core..=) Core.<$> pubsubTopicName,
+            ("subfolderMatches" Core..=) Core.<$> subfolderMatches
           ]
       )
 
@@ -773,11 +764,9 @@ instance Core.ToJSON GatewayConfig where
   toJSON GatewayConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("gatewayAuthMethod" Core..=)
-              Core.<$> gatewayAuthMethod,
+          [ ("gatewayAuthMethod" Core..=) Core.<$> gatewayAuthMethod,
             ("gatewayType" Core..=) Core.<$> gatewayType,
-            ("lastAccessedGatewayId" Core..=)
-              Core.<$> lastAccessedGatewayId,
+            ("lastAccessedGatewayId" Core..=) Core.<$> lastAccessedGatewayId,
             ("lastAccessedGatewayTime" Core..=)
               Core.<$> lastAccessedGatewayTime
           ]
@@ -795,22 +784,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -824,15 +810,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -862,17 +848,13 @@ instance Core.FromJSON HttpConfig where
   parseJSON =
     Core.withObject
       "HttpConfig"
-      ( \o ->
-          HttpConfig Core.<$> (o Core..:? "httpEnabledState")
-      )
+      (\o -> HttpConfig Core.<$> (o Core..:? "httpEnabledState"))
 
 instance Core.ToJSON HttpConfig where
   toJSON HttpConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("httpEnabledState" Core..=)
-              Core.<$> httpEnabledState
-          ]
+          [("httpEnabledState" Core..=) Core.<$> httpEnabledState]
       )
 
 -- | Response for @ListDeviceConfigVersions@.
@@ -890,10 +872,7 @@ newListDeviceConfigVersionsResponse ::
 newListDeviceConfigVersionsResponse =
   ListDeviceConfigVersionsResponse {deviceConfigs = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ListDeviceConfigVersionsResponse
-  where
+instance Core.FromJSON ListDeviceConfigVersionsResponse where
   parseJSON =
     Core.withObject
       "ListDeviceConfigVersionsResponse"
@@ -905,9 +884,7 @@ instance
 instance Core.ToJSON ListDeviceConfigVersionsResponse where
   toJSON ListDeviceConfigVersionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("deviceConfigs" Core..=) Core.<$> deviceConfigs]
-      )
+      (Core.catMaybes [("deviceConfigs" Core..=) Core.<$> deviceConfigs])
 
 -- | Response for @ListDeviceRegistries@.
 --
@@ -943,8 +920,7 @@ instance Core.ToJSON ListDeviceRegistriesResponse where
   toJSON ListDeviceRegistriesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceRegistries" Core..=)
-              Core.<$> deviceRegistries,
+          [ ("deviceRegistries" Core..=) Core.<$> deviceRegistries,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -969,16 +945,13 @@ instance Core.FromJSON ListDeviceStatesResponse where
     Core.withObject
       "ListDeviceStatesResponse"
       ( \o ->
-          ListDeviceStatesResponse
-            Core.<$> (o Core..:? "deviceStates")
+          ListDeviceStatesResponse Core.<$> (o Core..:? "deviceStates")
       )
 
 instance Core.ToJSON ListDeviceStatesResponse where
   toJSON ListDeviceStatesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("deviceStates" Core..=) Core.<$> deviceStates]
-      )
+      (Core.catMaybes [("deviceStates" Core..=) Core.<$> deviceStates])
 
 -- | Response for @ListDevices@.
 --
@@ -995,7 +968,10 @@ data ListDevicesResponse = ListDevicesResponse
 newListDevicesResponse ::
   ListDevicesResponse
 newListDevicesResponse =
-  ListDevicesResponse {devices = Core.Nothing, nextPageToken = Core.Nothing}
+  ListDevicesResponse
+    { devices = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListDevicesResponse where
   parseJSON =
@@ -1036,19 +1012,14 @@ newModifyCloudToDeviceConfigRequest =
       versionToUpdate = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyCloudToDeviceConfigRequest
-  where
+instance Core.FromJSON ModifyCloudToDeviceConfigRequest where
   parseJSON =
     Core.withObject
       "ModifyCloudToDeviceConfigRequest"
       ( \o ->
           ModifyCloudToDeviceConfigRequest
             Core.<$> (o Core..:? "binaryData")
-            Core.<*> ( o Core..:? "versionToUpdate"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "versionToUpdate" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ModifyCloudToDeviceConfigRequest where
@@ -1056,7 +1027,8 @@ instance Core.ToJSON ModifyCloudToDeviceConfigRequest where
     Core.object
       ( Core.catMaybes
           [ ("binaryData" Core..=) Core.<$> binaryData,
-            ("versionToUpdate" Core..=) Core.. Core.AsText
+            ("versionToUpdate" Core..=)
+              Core.. Core.AsText
               Core.<$> versionToUpdate
           ]
       )
@@ -1079,17 +1051,13 @@ instance Core.FromJSON MqttConfig where
   parseJSON =
     Core.withObject
       "MqttConfig"
-      ( \o ->
-          MqttConfig Core.<$> (o Core..:? "mqttEnabledState")
-      )
+      (\o -> MqttConfig Core.<$> (o Core..:? "mqttEnabledState"))
 
 instance Core.ToJSON MqttConfig where
   toJSON MqttConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mqttEnabledState" Core..=)
-              Core.<$> mqttEnabledState
-          ]
+          [("mqttEnabledState" Core..=) Core.<$> mqttEnabledState]
       )
 
 -- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
@@ -1112,7 +1080,11 @@ data Policy = Policy
 newPolicy ::
   Policy
 newPolicy =
-  Policy {bindings = Core.Nothing, etag = Core.Nothing, version = Core.Nothing}
+  Policy
+    { bindings = Core.Nothing,
+      etag = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON Policy where
   parseJSON =
@@ -1202,16 +1174,15 @@ instance Core.FromJSON PublicKeyCredential where
       "PublicKeyCredential"
       ( \o ->
           PublicKeyCredential
-            Core.<$> (o Core..:? "format") Core.<*> (o Core..:? "key")
+            Core.<$> (o Core..:? "format")
+            Core.<*> (o Core..:? "key")
       )
 
 instance Core.ToJSON PublicKeyCredential where
   toJSON PublicKeyCredential {..} =
     Core.object
       ( Core.catMaybes
-          [ ("format" Core..=) Core.<$> format,
-            ("key" Core..=) Core.<$> key
-          ]
+          [("format" Core..=) Core.<$> format, ("key" Core..=) Core.<$> key]
       )
 
 -- | A server-stored registry credential used to validate device credentials.
@@ -1226,24 +1197,22 @@ newtype RegistryCredential = RegistryCredential
 -- | Creates a value of 'RegistryCredential' with the minimum fields required to make a request.
 newRegistryCredential ::
   RegistryCredential
-newRegistryCredential = RegistryCredential {publicKeyCertificate = Core.Nothing}
+newRegistryCredential =
+  RegistryCredential {publicKeyCertificate = Core.Nothing}
 
 instance Core.FromJSON RegistryCredential where
   parseJSON =
     Core.withObject
       "RegistryCredential"
       ( \o ->
-          RegistryCredential
-            Core.<$> (o Core..:? "publicKeyCertificate")
+          RegistryCredential Core.<$> (o Core..:? "publicKeyCertificate")
       )
 
 instance Core.ToJSON RegistryCredential where
   toJSON RegistryCredential {..} =
     Core.object
       ( Core.catMaybes
-          [ ("publicKeyCertificate" Core..=)
-              Core.<$> publicKeyCertificate
-          ]
+          [("publicKeyCertificate" Core..=) Core.<$> publicKeyCertificate]
       )
 
 -- | Request for @SendCommandToDevice@.
@@ -1323,14 +1292,11 @@ instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "SetIamPolicyRequest"
-      ( \o ->
-          SetIamPolicyRequest Core.<$> (o Core..:? "policy")
-      )
+      (\o -> SetIamPolicyRequest Core.<$> (o Core..:? "policy"))
 
 instance Core.ToJSON SetIamPolicyRequest where
   toJSON SetIamPolicyRequest {..} =
-    Core.object
-      (Core.catMaybes [("policy" Core..=) Core.<$> policy])
+    Core.object (Core.catMaybes [("policy" Core..=) Core.<$> policy])
 
 -- | The configuration for notification of new states received from the device.
 --
@@ -1352,17 +1318,14 @@ instance Core.FromJSON StateNotificationConfig where
     Core.withObject
       "StateNotificationConfig"
       ( \o ->
-          StateNotificationConfig
-            Core.<$> (o Core..:? "pubsubTopicName")
+          StateNotificationConfig Core.<$> (o Core..:? "pubsubTopicName")
       )
 
 instance Core.ToJSON StateNotificationConfig where
   toJSON StateNotificationConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pubsubTopicName" Core..=)
-              Core.<$> pubsubTopicName
-          ]
+          [("pubsubTopicName" Core..=) Core.<$> pubsubTopicName]
       )
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
@@ -1382,7 +1345,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1418,19 +1385,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -1452,16 +1417,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -1483,16 +1445,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Request for @UnbindDeviceFromGateway@.
 --
@@ -1542,12 +1501,10 @@ data UnbindDeviceFromGatewayResponse = UnbindDeviceFromGatewayResponse
 -- | Creates a value of 'UnbindDeviceFromGatewayResponse' with the minimum fields required to make a request.
 newUnbindDeviceFromGatewayResponse ::
   UnbindDeviceFromGatewayResponse
-newUnbindDeviceFromGatewayResponse = UnbindDeviceFromGatewayResponse
+newUnbindDeviceFromGatewayResponse =
+  UnbindDeviceFromGatewayResponse
 
-instance
-  Core.FromJSON
-    UnbindDeviceFromGatewayResponse
-  where
+instance Core.FromJSON UnbindDeviceFromGatewayResponse where
   parseJSON =
     Core.withObject
       "UnbindDeviceFromGatewayResponse"
@@ -1609,8 +1566,7 @@ instance Core.ToJSON X509CertificateDetails where
           [ ("expiryTime" Core..=) Core.<$> expiryTime,
             ("issuer" Core..=) Core.<$> issuer,
             ("publicKeyType" Core..=) Core.<$> publicKeyType,
-            ("signatureAlgorithm" Core..=)
-              Core.<$> signatureAlgorithm,
+            ("signatureAlgorithm" Core..=) Core.<$> signatureAlgorithm,
             ("startTime" Core..=) Core.<$> startTime,
             ("subject" Core..=) Core.<$> subject
           ]

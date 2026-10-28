@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AlertCenter.Alerts.BatchUndelete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AlertCenter.Alerts.BatchUndelete
 where
 
 import Gogol.AlertCenter.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @alertcenter.alerts.batchUndelete@ method which the
 -- 'AlertCenterAlertsBatchUndelete' request conforms to.
@@ -90,16 +88,11 @@ newAlertCenterAlertsBatchUndelete payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AlertCenterAlertsBatchUndelete
-  where
+instance Core.GoogleRequest AlertCenterAlertsBatchUndelete where
   type
     Rs AlertCenterAlertsBatchUndelete =
       BatchUndeleteAlertsResponse
-  type
-    Scopes AlertCenterAlertsBatchUndelete =
-      '[Apps'Alerts]
+  type Scopes AlertCenterAlertsBatchUndelete = '[Apps'Alerts]
   requestClient AlertCenterAlertsBatchUndelete {..} =
     go
       xgafv
@@ -113,7 +106,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AlertCenterAlertsBatchUndeleteResource
-          )
+          (Core.Proxy :: Core.Proxy AlertCenterAlertsBatchUndeleteResource)
           Core.mempty

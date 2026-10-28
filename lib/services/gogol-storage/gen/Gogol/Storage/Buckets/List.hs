@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Buckets.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Buckets.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.buckets.list@ method which the
@@ -53,6 +51,7 @@ type StorageBucketsListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "prefix" Core.Text
     Core.:> Core.QueryParam "projection" BucketsListProjection
+    Core.:> Core.QueryParam "softDeleted" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -72,6 +71,8 @@ data StorageBucketsList = StorageBucketsList
     project :: Core.Text,
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe BucketsListProjection),
+    -- | If true, only soft-deleted bucket versions will be returned. The default is false. For more information, see <https://cloud.google.com/storage/docs/soft-delete Soft Delete>.
+    softDeleted :: (Core.Maybe Core.Bool),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request.
@@ -91,6 +92,7 @@ newStorageBucketsList project =
       prefix = Core.Nothing,
       project = project,
       projection = Core.Nothing,
+      softDeleted = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -112,6 +114,7 @@ instance Core.GoogleRequest StorageBucketsList where
       pageToken
       prefix
       projection
+      softDeleted
       uploadType
       userProject
       (Core.Just Core.AltJSON)

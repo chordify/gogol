@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.Locations.StoredInfoTypes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists stored infoTypes. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Lists stored infoTypes. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.locations.storedInfoTypes.list@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.locations.storedInfoTypes.list@.
 module Gogol.DLP.Organizations.Locations.StoredInfoTypes.List
   ( -- * Resource
     DLPOrganizationsLocationsStoredInfoTypesListResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.Locations.StoredInfoTypes.List
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.locations.storedInfoTypes.list@ method which the
 -- 'DLPOrganizationsLocationsStoredInfoTypesList' request conforms to.
@@ -58,11 +56,9 @@ type DLPOrganizationsLocationsStoredInfoTypesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2ListStoredInfoTypesResponse
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2ListStoredInfoTypesResponse
 
--- | Lists stored infoTypes. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Lists stored infoTypes. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPOrganizationsLocationsStoredInfoTypesList' smart constructor.
 data DLPOrganizationsLocationsStoredInfoTypesList = DLPOrganizationsLocationsStoredInfoTypesList
@@ -74,13 +70,13 @@ data DLPOrganizationsLocationsStoredInfoTypesList = DLPOrganizationsLocationsSto
     callback :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | Comma separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc, display_name, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the most recent version of the resource was created. - @state@: corresponds to the state of the resource. - @name@: corresponds to resource name. - @display_name@: corresponds to info type\'s display name.
+    -- | Comma-separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: @name asc, display_name, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the most recent version of the resource was created. - @state@: corresponds to the state of the resource. - @name@: corresponds to resource name. - @display_name@: corresponds to info type\'s display name.
     orderBy :: (Core.Maybe Core.Text),
-    -- | Size of the page, can be limited by the server. If zero server returns a page of max size 100.
+    -- | Size of the page. This value can be limited by the server. If zero server returns a page of max size 100.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Page token to continue retrieval. Comes from previous call to @ListStoredInfoTypes@.
+    -- | Page token to continue retrieval. Comes from the previous call to @ListStoredInfoTypes@.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -91,12 +87,13 @@ data DLPOrganizationsLocationsStoredInfoTypesList = DLPOrganizationsLocationsSto
 
 -- | Creates a value of 'DLPOrganizationsLocationsStoredInfoTypesList' with the minimum fields required to make a request.
 newDLPOrganizationsLocationsStoredInfoTypesList ::
-  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   DLPOrganizationsLocationsStoredInfoTypesList
 newDLPOrganizationsLocationsStoredInfoTypesList parent =
   DLPOrganizationsLocationsStoredInfoTypesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       locationId = Core.Nothing,
@@ -116,29 +113,26 @@ instance
     Rs DLPOrganizationsLocationsStoredInfoTypesList =
       GooglePrivacyDlpV2ListStoredInfoTypesResponse
   type
-    Scopes
-      DLPOrganizationsLocationsStoredInfoTypesList =
+    Scopes DLPOrganizationsLocationsStoredInfoTypesList =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsLocationsStoredInfoTypesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        locationId
-        orderBy
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsLocationsStoredInfoTypesListResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsLocationsStoredInfoTypesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      locationId
+      orderBy
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsLocationsStoredInfoTypesListResource
+          )
+          Core.mempty

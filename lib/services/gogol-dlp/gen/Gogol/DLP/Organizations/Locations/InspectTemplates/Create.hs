@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.Locations.InspectTemplates.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.locations.inspectTemplates.create@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.locations.inspectTemplates.create@.
 module Gogol.DLP.Organizations.Locations.InspectTemplates.Create
   ( -- * Resource
     DLPOrganizationsLocationsInspectTemplatesCreateResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.Locations.InspectTemplates.Create
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.locations.inspectTemplates.create@ method which the
 -- 'DLPOrganizationsLocationsInspectTemplatesCreate' request conforms to.
@@ -57,11 +55,9 @@ type DLPOrganizationsLocationsInspectTemplatesCreateResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2CreateInspectTemplateRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GooglePrivacyDlpV2InspectTemplate
+    Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2InspectTemplate
 
--- | Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- | Creates an InspectTemplate for reusing frequently used configuration for inspecting content, images, and storage. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'newDLPOrganizationsLocationsInspectTemplatesCreate' smart constructor.
 data DLPOrganizationsLocationsInspectTemplatesCreate = DLPOrganizationsLocationsInspectTemplatesCreate
@@ -71,7 +67,7 @@ data DLPOrganizationsLocationsInspectTemplatesCreate = DLPOrganizationsLocations
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT/ID + Organizations scope, location specified: @organizations\/@ORG/ID@\/locations\/@LOCATION/ID + Organizations scope, no location specified (defaults to global): @organizations\/@ORG/ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ + Organizations scope, location specified: @organizations\/{org_id}\/locations\/{location_id}@ + Organizations scope, no location specified (defaults to global): @organizations\/{org_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GooglePrivacyDlpV2CreateInspectTemplateRequest,
@@ -84,14 +80,15 @@ data DLPOrganizationsLocationsInspectTemplatesCreate = DLPOrganizationsLocations
 
 -- | Creates a value of 'DLPOrganizationsLocationsInspectTemplatesCreate' with the minimum fields required to make a request.
 newDLPOrganizationsLocationsInspectTemplatesCreate ::
-  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT/ID + Organizations scope, location specified: @organizations\/@ORG/ID@\/locations\/@LOCATION/ID + Organizations scope, no location specified (defaults to global): @organizations\/@ORG/ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ + Organizations scope, location specified: @organizations\/{org_id}\/locations\/{location_id}@ + Organizations scope, no location specified (defaults to global): @organizations\/{org_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GooglePrivacyDlpV2CreateInspectTemplateRequest ->
   DLPOrganizationsLocationsInspectTemplatesCreate
 newDLPOrganizationsLocationsInspectTemplatesCreate parent payload =
   DLPOrganizationsLocationsInspectTemplatesCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -105,30 +102,26 @@ instance
     DLPOrganizationsLocationsInspectTemplatesCreate
   where
   type
-    Rs
-      DLPOrganizationsLocationsInspectTemplatesCreate =
+    Rs DLPOrganizationsLocationsInspectTemplatesCreate =
       GooglePrivacyDlpV2InspectTemplate
   type
-    Scopes
-      DLPOrganizationsLocationsInspectTemplatesCreate =
+    Scopes DLPOrganizationsLocationsInspectTemplatesCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsLocationsInspectTemplatesCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsLocationsInspectTemplatesCreateResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsLocationsInspectTemplatesCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsLocationsInspectTemplatesCreateResource
+          )
+          Core.mempty

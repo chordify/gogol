@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.Photos.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StreetViewPublish.Photos.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photos.list@ method which the
@@ -70,7 +68,7 @@ data StreetViewPublishPhotosList = StreetViewPublishPhotosList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The filter expression. For example: @placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw@. The filters supported are: @placeId@, @min_latitude@, @max_latitude@, @min_longitude@, and @max_longitude@. See https:\/\/google.aip.dev\/160 for more information.
+    -- | Optional. The filter expression. For example: @placeId=ChIJj61dQgK6j4AR4GeTYWZsKWw@. The filters supported are: @placeId@, @min_latitude@, @max_latitude@, @min_longitude@, @max_longitude@. See https:\/\/google.aip.dev\/160 for more information.
     filter :: (Core.Maybe Core.Text),
     -- | Optional. The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more information, see http:\/\/www.unicode.org\/reports\/tr35\/#Unicode/locale/identifier. If language_code is unspecified, the user\'s language preference for Google services is used.
     languageCode :: (Core.Maybe Core.Text),
@@ -104,13 +102,8 @@ newStreetViewPublishPhotosList =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StreetViewPublishPhotosList
-  where
-  type
-    Rs StreetViewPublishPhotosList =
-      ListPhotosResponse
+instance Core.GoogleRequest StreetViewPublishPhotosList where
+  type Rs StreetViewPublishPhotosList = ListPhotosResponse
   type
     Scopes StreetViewPublishPhotosList =
       '[Streetviewpublish'FullControl]
@@ -131,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StreetViewPublishPhotosListResource
-          )
+          (Core.Proxy :: Core.Proxy StreetViewPublishPhotosListResource)
           Core.mempty

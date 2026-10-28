@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseDynamicLinks.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FirebaseDynamicLinks.Internal.Sum
@@ -85,6 +83,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
         DynamicLinkWarning_WarningCode_LINKLENGTHTOOLONG,
         DynamicLinkWarning_WarningCode_LINKWITHFRAGMENTS,
         DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID,
+        DynamicLinkWarning_WarningCode_APIDEPRECATED,
         ..
       ),
 
@@ -149,7 +148,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -360,11 +359,11 @@ pattern DynamicLinkWarning_WarningCode_BADADPARAM = DynamicLinkWarning_WarningCo
 pattern DynamicLinkWarning_WarningCode_DEPRECATEDPARAM :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_DEPRECATEDPARAM = DynamicLinkWarning_WarningCode "DEPRECATED_PARAM"
 
--- | Indicates certain paramater is not recognized.
+-- | Indicates certain parameter is not recognized.
 pattern DynamicLinkWarning_WarningCode_UNRECOGNIZEDPARAM :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_UNRECOGNIZEDPARAM = DynamicLinkWarning_WarningCode "UNRECOGNIZED_PARAM"
 
--- | Indicates certain paramater is too long.
+-- | Indicates certain parameter is too long.
 pattern DynamicLinkWarning_WarningCode_TOOLONGPARAM :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_TOOLONGPARAM = DynamicLinkWarning_WarningCode "TOO_LONG_PARAM"
 
@@ -376,11 +375,9 @@ pattern DynamicLinkWarning_WarningCode_NOTURISOCIALIMAGELINK = DynamicLinkWarnin
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALIMAGELINK :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALIMAGELINK = DynamicLinkWarning_WarningCode "BAD_URI_SCHEME_SOCIAL_IMAGE_LINK"
 
--- |
 pattern DynamicLinkWarning_WarningCode_NOTURISOCIALURL :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_NOTURISOCIALURL = DynamicLinkWarning_WarningCode "NOT_URI_SOCIAL_URL"
 
--- |
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALURL :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_BADURISCHEMESOCIALURL = DynamicLinkWarning_WarningCode "BAD_URI_SCHEME_SOCIAL_URL"
 
@@ -395,6 +392,10 @@ pattern DynamicLinkWarning_WarningCode_LINKWITHFRAGMENTS = DynamicLinkWarning_Wa
 -- | The iOS bundle ID does not match with the given iOS store ID.
 pattern DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID :: DynamicLinkWarning_WarningCode
 pattern DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID = DynamicLinkWarning_WarningCode "NOT_MATCHING_IOS_BUNDLE_ID_AND_STORE_ID"
+
+-- | The API is deprecated.
+pattern DynamicLinkWarning_WarningCode_APIDEPRECATED :: DynamicLinkWarning_WarningCode
+pattern DynamicLinkWarning_WarningCode_APIDEPRECATED = DynamicLinkWarning_WarningCode "API_DEPRECATED"
 
 {-# COMPLETE
   DynamicLinkWarning_WarningCode_CODEUNSPECIFIED,
@@ -426,6 +427,7 @@ pattern DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID = Dynami
   DynamicLinkWarning_WarningCode_LINKLENGTHTOOLONG,
   DynamicLinkWarning_WarningCode_LINKWITHFRAGMENTS,
   DynamicLinkWarning_WarningCode_NOTMATCHINGIOSBUNDLEIDANDSTOREID,
+  DynamicLinkWarning_WarningCode_APIDEPRECATED,
   DynamicLinkWarning_WarningCode
   #-}
 
@@ -446,11 +448,11 @@ newtype GetIosPostInstallAttributionRequest_RetrievalMethod = GetIosPostInstallA
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_UNKNOWNPAYLOADRETRIEVALMETHOD :: GetIosPostInstallAttributionRequest_RetrievalMethod
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_UNKNOWNPAYLOADRETRIEVALMETHOD = GetIosPostInstallAttributionRequest_RetrievalMethod "UNKNOWN_PAYLOAD_RETRIEVAL_METHOD"
 
--- | iSDK performs a server lookup by device fingerprint in the background when app is first-opened; no API called by developer.
+-- | iSDK performs a server lookup by device heuristics in the background when app is first-opened; no API called by developer.
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_IMPLICITWEAKMATCH :: GetIosPostInstallAttributionRequest_RetrievalMethod
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_IMPLICITWEAKMATCH = GetIosPostInstallAttributionRequest_RetrievalMethod "IMPLICIT_WEAK_MATCH"
 
--- | iSDK performs a server lookup by device fingerprint upon a dev API call.
+-- | iSDK performs a server lookup by device heuristics upon a dev API call.
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITWEAKMATCH :: GetIosPostInstallAttributionRequest_RetrievalMethod
 pattern GetIosPostInstallAttributionRequest_RetrievalMethod_EXPLICITWEAKMATCH = GetIosPostInstallAttributionRequest_RetrievalMethod "EXPLICIT_WEAK_MATCH"
 
@@ -515,15 +517,15 @@ newtype GetIosPostInstallAttributionResponse_AttributionConfidence = GetIosPostI
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_UNKNOWNATTRIBUTIONCONFIDENCE :: GetIosPostInstallAttributionResponse_AttributionConfidence
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_UNKNOWNATTRIBUTIONCONFIDENCE = GetIosPostInstallAttributionResponse_AttributionConfidence "UNKNOWN_ATTRIBUTION_CONFIDENCE"
 
--- | Weak confidence, more than one matching link found or link suspected to be false positive
+-- | Weak confidence, more than one matching link found or link suspected to be false positive.
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Weak :: GetIosPostInstallAttributionResponse_AttributionConfidence
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Weak = GetIosPostInstallAttributionResponse_AttributionConfidence "WEAK"
 
--- | Default confidence, match based on fingerprint
+-- | Default confidence, match based on device heuristics.
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Default :: GetIosPostInstallAttributionResponse_AttributionConfidence
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Default = GetIosPostInstallAttributionResponse_AttributionConfidence "DEFAULT"
 
--- | Unique confidence, match based on \"unique match link to check\" or other means
+-- | Unique confidence, match based on \"unique match link to check\" or other means.
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Unique :: GetIosPostInstallAttributionResponse_AttributionConfidence
 pattern GetIosPostInstallAttributionResponse_AttributionConfidence_Unique = GetIosPostInstallAttributionResponse_AttributionConfidence "UNIQUE"
 
@@ -583,7 +585,7 @@ newtype ManagedShortLink_FlaggedAttributeItem = ManagedShortLink_FlaggedAttribut
 pattern ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE :: ManagedShortLink_FlaggedAttributeItem
 pattern ManagedShortLink_FlaggedAttributeItem_UNSPECIFIEDATTRIBUTE = ManagedShortLink_FlaggedAttributeItem "UNSPECIFIED_ATTRIBUTE"
 
--- | Indicates that short url has been flagged by AbuseIAm team as spam.
+-- | Indicates that short url has been flagged as spam.
 pattern ManagedShortLink_FlaggedAttributeItem_Spam :: ManagedShortLink_FlaggedAttributeItem
 pattern ManagedShortLink_FlaggedAttributeItem_Spam = ManagedShortLink_FlaggedAttributeItem "SPAM"
 

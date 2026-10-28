@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.BackendServices.SetSecurityPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.BackendServices.SetSecurityPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.backendServices.setSecurityPolicy@ method which the
 -- 'ComputeBackendServicesSetSecurityPolicy' request conforms to.
@@ -60,9 +58,7 @@ type ComputeBackendServicesSetSecurityPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SecurityPolicyReference
+    Core.:> Core.ReqBody '[Core.JSON] SecurityPolicyReference
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview
@@ -99,48 +95,44 @@ newComputeBackendServicesSetSecurityPolicy ::
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
   ComputeBackendServicesSetSecurityPolicy
-newComputeBackendServicesSetSecurityPolicy backendService payload project =
-  ComputeBackendServicesSetSecurityPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      backendService = backendService,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeBackendServicesSetSecurityPolicy
+  backendService
+  payload
+  project =
     ComputeBackendServicesSetSecurityPolicy
-  where
-  type
-    Rs ComputeBackendServicesSetSecurityPolicy =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        backendService = backendService,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeBackendServicesSetSecurityPolicy where
+  type Rs ComputeBackendServicesSetSecurityPolicy = Operation
   type
     Scopes ComputeBackendServicesSetSecurityPolicy =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeBackendServicesSetSecurityPolicy {..} =
-      go
-        project
-        backendService
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeBackendServicesSetSecurityPolicyResource
-            )
-            Core.mempty
+  requestClient ComputeBackendServicesSetSecurityPolicy {..} =
+    go
+      project
+      backendService
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeBackendServicesSetSecurityPolicyResource
+          )
+          Core.mempty

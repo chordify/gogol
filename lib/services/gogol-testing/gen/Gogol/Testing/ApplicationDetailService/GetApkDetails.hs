@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing.ApplicationDetailService.GetApkDetails
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the details of an Android application APK.
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.applicationDetailService.getApkDetails@.
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference> for @testing.applicationDetailService.getApkDetails@.
 module Gogol.Testing.ApplicationDetailService.GetApkDetails
   ( -- * Resource
     TestingApplicationDetailServiceGetApkDetailsResource,
@@ -39,7 +37,7 @@ module Gogol.Testing.ApplicationDetailService.GetApkDetails
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Types
 
 -- | A resource alias for @testing.applicationDetailService.getApkDetails@ method which the
@@ -50,6 +48,7 @@ type TestingApplicationDetailServiceGetApkDetailsResource =
     Core.:> "getApkDetails"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "bundleLocation.gcsPath" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -65,6 +64,8 @@ data TestingApplicationDetailServiceGetApkDetails = TestingApplicationDetailServ
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | A path to a file in Google Cloud Storage. Example: gs:\/\/build-app-1414623860166\/app%40debug-unaligned.apk These paths are expected to be url encoded (percent encoding)
+    bundleLocationGcsPath :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
@@ -83,8 +84,10 @@ newTestingApplicationDetailServiceGetApkDetails ::
   TestingApplicationDetailServiceGetApkDetails
 newTestingApplicationDetailServiceGetApkDetails payload =
   TestingApplicationDetailServiceGetApkDetails
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
+      bundleLocationGcsPath = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
       uploadType = Core.Nothing,
@@ -99,25 +102,23 @@ instance
     Rs TestingApplicationDetailServiceGetApkDetails =
       GetApkDetailsResponse
   type
-    Scopes
-      TestingApplicationDetailServiceGetApkDetails =
+    Scopes TestingApplicationDetailServiceGetApkDetails =
       '[CloudPlatform'FullControl]
-  requestClient
-    TestingApplicationDetailServiceGetApkDetails {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        testingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TestingApplicationDetailServiceGetApkDetailsResource
-            )
-            Core.mempty
+  requestClient TestingApplicationDetailServiceGetApkDetails {..} =
+    go
+      xgafv
+      accessToken
+      bundleLocationGcsPath
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      testingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy TestingApplicationDetailServiceGetApkDetailsResource
+          )
+          Core.mempty

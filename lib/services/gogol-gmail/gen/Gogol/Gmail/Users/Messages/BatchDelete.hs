@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Messages.BatchDelete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Messages.BatchDelete
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.messages.batchDelete@ method which the
 -- 'GmailUsersMessagesBatchDelete' request conforms to.
@@ -57,9 +55,7 @@ type GmailUsersMessagesBatchDeleteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchDeleteMessagesRequest
+    Core.:> Core.ReqBody '[Core.JSON] BatchDeleteMessagesRequest
     Core.:> Core.Post '[Core.JSON] ()
 
 -- | Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.
@@ -99,14 +95,9 @@ newGmailUsersMessagesBatchDelete payload =
       userId = "me"
     }
 
-instance
-  Core.GoogleRequest
-    GmailUsersMessagesBatchDelete
-  where
+instance Core.GoogleRequest GmailUsersMessagesBatchDelete where
   type Rs GmailUsersMessagesBatchDelete = ()
-  type
-    Scopes GmailUsersMessagesBatchDelete =
-      '[Gmail'FullControl]
+  type Scopes GmailUsersMessagesBatchDelete = '[Gmail'FullControl]
   requestClient GmailUsersMessagesBatchDelete {..} =
     go
       userId
@@ -121,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersMessagesBatchDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesBatchDeleteResource)
           Core.mempty

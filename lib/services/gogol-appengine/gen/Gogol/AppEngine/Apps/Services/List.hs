@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Services.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Services.List
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.services.list@ method which the
 -- 'AppEngineAppsServicesList' request conforms to.
@@ -100,9 +98,7 @@ newAppEngineAppsServicesList appsId =
     }
 
 instance Core.GoogleRequest AppEngineAppsServicesList where
-  type
-    Rs AppEngineAppsServicesList =
-      ListServicesResponse
+  type Rs AppEngineAppsServicesList = ListServicesResponse
   type
     Scopes AppEngineAppsServicesList =
       '[ Appengine'Admin,
@@ -124,7 +120,5 @@ instance Core.GoogleRequest AppEngineAppsServicesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AppEngineAppsServicesListResource
-          )
+          (Core.Proxy :: Core.Proxy AppEngineAppsServicesListResource)
           Core.mempty

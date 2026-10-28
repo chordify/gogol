@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Gmail.Internal.Sum
@@ -151,6 +149,13 @@ module Gogol.Gmail.Internal.Sum
         ..
       ),
 
+    -- * WatchRequest_LabelFilterBehavior
+    WatchRequest_LabelFilterBehavior
+      ( WatchRequest_LabelFilterBehavior_Include,
+        WatchRequest_LabelFilterBehavior_Exclude,
+        ..
+      ),
+
     -- * UsersDraftsGetFormat
     UsersDraftsGetFormat
       ( UsersDraftsGetFormat_Minimal,
@@ -202,7 +207,7 @@ module Gogol.Gmail.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -360,7 +365,6 @@ newtype FilterCriteria_SizeComparison = FilterCriteria_SizeComparison {fromFilte
       Core.FromJSONKey
     )
 
--- |
 pattern FilterCriteria_SizeComparison_Unspecified :: FilterCriteria_SizeComparison
 pattern FilterCriteria_SizeComparison_Unspecified = FilterCriteria_SizeComparison "unspecified"
 
@@ -682,7 +686,7 @@ pattern SmtpMsa_SecurityMode_Starttls = SmtpMsa_SecurityMode "starttls"
   SmtpMsa_SecurityMode
   #-}
 
--- | Filtering behavior of labelIds list specified.
+-- | Filtering behavior of @labelIds list@ specified. This field is deprecated because it caused incorrect behavior in some cases; use @label_filter_behavior@ instead.
 newtype WatchRequest_LabelFilterAction = WatchRequest_LabelFilterAction {fromWatchRequest_LabelFilterAction :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -707,6 +711,33 @@ pattern WatchRequest_LabelFilterAction_Exclude = WatchRequest_LabelFilterAction 
   WatchRequest_LabelFilterAction_Include,
   WatchRequest_LabelFilterAction_Exclude,
   WatchRequest_LabelFilterAction
+  #-}
+
+-- | Filtering behavior of @labelIds list@ specified. This field replaces @label_filter_action@; if set, @label_filter_action@ is ignored.
+newtype WatchRequest_LabelFilterBehavior = WatchRequest_LabelFilterBehavior {fromWatchRequest_LabelFilterBehavior :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Only get push notifications for message changes relating to labelIds specified.
+pattern WatchRequest_LabelFilterBehavior_Include :: WatchRequest_LabelFilterBehavior
+pattern WatchRequest_LabelFilterBehavior_Include = WatchRequest_LabelFilterBehavior "include"
+
+-- | Get push notifications for all message changes except those relating to labelIds specified.
+pattern WatchRequest_LabelFilterBehavior_Exclude :: WatchRequest_LabelFilterBehavior
+pattern WatchRequest_LabelFilterBehavior_Exclude = WatchRequest_LabelFilterBehavior "exclude"
+
+{-# COMPLETE
+  WatchRequest_LabelFilterBehavior_Include,
+  WatchRequest_LabelFilterBehavior_Exclude,
+  WatchRequest_LabelFilterBehavior
   #-}
 
 -- | The format to return the draft in.
@@ -759,19 +790,15 @@ newtype UsersHistoryListHistoryTypes = UsersHistoryListHistoryTypes {fromUsersHi
       Core.FromJSONKey
     )
 
--- |
 pattern UsersHistoryListHistoryTypes_MessageAdded :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_MessageAdded = UsersHistoryListHistoryTypes "messageAdded"
 
--- |
 pattern UsersHistoryListHistoryTypes_MessageDeleted :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_MessageDeleted = UsersHistoryListHistoryTypes "messageDeleted"
 
--- |
 pattern UsersHistoryListHistoryTypes_LabelAdded :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_LabelAdded = UsersHistoryListHistoryTypes "labelAdded"
 
--- |
 pattern UsersHistoryListHistoryTypes_LabelRemoved :: UsersHistoryListHistoryTypes
 pattern UsersHistoryListHistoryTypes_LabelRemoved = UsersHistoryListHistoryTypes "labelRemoved"
 

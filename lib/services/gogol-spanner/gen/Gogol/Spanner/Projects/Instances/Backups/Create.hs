@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Backups.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Backups.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.backups.create@ method which the
@@ -55,9 +53,8 @@ type SpannerProjectsInstancesBackupsCreateResource =
     Core.:> Core.QueryParam
               "encryptionConfig.encryptionType"
               ProjectsInstancesBackupsCreateEncryptionConfigEncryptionType
-    Core.:> Core.QueryParam
-              "encryptionConfig.kmsKeyName"
-              Core.Text
+    Core.:> Core.QueryParam "encryptionConfig.kmsKeyName" Core.Text
+    Core.:> Core.QueryParams "encryptionConfig.kmsKeyNames" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -83,6 +80,8 @@ data SpannerProjectsInstancesBackupsCreate = SpannerProjectsInstancesBackupsCrea
       ),
     -- | Optional. The Cloud KMS key that will be used to protect the backup. This field should be set only when encryption_type is @CUSTOMER_MANAGED_ENCRYPTION@. Values are of the form @projects\/\/locations\/\/keyRings\/\/cryptoKeys\/@.
     encryptionConfigKmsKeyName :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies the KMS configuration for the one or more keys used to protect the backup. Values are of the form @projects\/\/locations\/\/keyRings\/\/cryptoKeys\/@. The keys referenced by @kms_key_names@ must fully cover all regions of the backup\'s instance configuration. Some examples: * For regional (single-region) instance configurations, specify a regional location KMS key. * For multi-region instance configurations of type @GOOGLE_MANAGED@, either specify a multi-region location KMS key or multiple regional location KMS keys that cover all regions in the instance configuration. * For an instance configuration of type @USER_MANAGED@, specify only regional location KMS keys to cover each region in the instance configuration. Multi-region location KMS keys aren\'t supported for @USER_MANAGED@ type instance configurations.
+    encryptionConfigKmsKeyNames :: (Core.Maybe [Core.Text]),
     -- | Required. The name of the instance in which the backup will be created. This must be the same instance that contains the database the backup will be created from. The backup will be stored in the location(s) specified in the instance configuration of this instance. Values are of the form @projects\/\/instances\/@.
     parent :: Core.Text,
     -- | Multipart request metadata.
@@ -109,42 +108,37 @@ newSpannerProjectsInstancesBackupsCreate parent payload =
       callback = Core.Nothing,
       encryptionConfigEncryptionType = Core.Nothing,
       encryptionConfigKmsKeyName = Core.Nothing,
+      encryptionConfigKmsKeyNames = Core.Nothing,
       parent = parent,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstancesBackupsCreate
-  where
-  type
-    Rs SpannerProjectsInstancesBackupsCreate =
-      Operation
+instance Core.GoogleRequest SpannerProjectsInstancesBackupsCreate where
+  type Rs SpannerProjectsInstancesBackupsCreate = Operation
   type
     Scopes SpannerProjectsInstancesBackupsCreate =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesBackupsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        backupId
-        callback
-        encryptionConfigEncryptionType
-        encryptionConfigKmsKeyName
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesBackupsCreateResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesBackupsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      backupId
+      callback
+      encryptionConfigEncryptionType
+      encryptionConfigKmsKeyName
+      (encryptionConfigKmsKeyNames Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesBackupsCreateResource
+          )
+          Core.mempty

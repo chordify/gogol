@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ResourceManager.Cloudresourcemanager.Projects.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Search for projects that the caller has both @resourcemanager.projects.get@ permission on, and also satisfy the specified query. This method returns projects in an unspecified order. This method is eventually consistent with project mutations; this means that a newly created project may not appear in the results or recent updates to an existing project may not be reflected in the results. To retrieve the latest state of a project, use the GetProject method.
+-- Search for projects that the caller has the @resourcemanager.projects.get@ permission on, and also satisfy the specified query. This method returns projects in an unspecified order. This method is eventually consistent with project mutations; this means that a newly created project may not appear in the results or recent updates to an existing project may not be reflected in the results. To retrieve the latest state of a project, use the GetProject method.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.search@.
 module Gogol.ResourceManager.Cloudresourcemanager.Projects.Search
@@ -39,7 +37,7 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Search
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.search@ method which the
@@ -58,7 +56,7 @@ type CloudresourcemanagerProjectsSearchResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] SearchProjectsResponse
 
--- | Search for projects that the caller has both @resourcemanager.projects.get@ permission on, and also satisfy the specified query. This method returns projects in an unspecified order. This method is eventually consistent with project mutations; this means that a newly created project may not appear in the results or recent updates to an existing project may not be reflected in the results. To retrieve the latest state of a project, use the GetProject method.
+-- | Search for projects that the caller has the @resourcemanager.projects.get@ permission on, and also satisfy the specified query. This method returns projects in an unspecified order. This method is eventually consistent with project mutations; this means that a newly created project may not appear in the results or recent updates to an existing project may not be reflected in the results. To retrieve the latest state of a project, use the GetProject method.
 --
 -- /See:/ 'newCloudresourcemanagerProjectsSearch' smart constructor.
 data CloudresourcemanagerProjectsSearch = CloudresourcemanagerProjectsSearch
@@ -97,13 +95,8 @@ newCloudresourcemanagerProjectsSearch =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerProjectsSearch
-  where
-  type
-    Rs CloudresourcemanagerProjectsSearch =
-      SearchProjectsResponse
+instance Core.GoogleRequest CloudresourcemanagerProjectsSearch where
+  type Rs CloudresourcemanagerProjectsSearch = SearchProjectsResponse
   type
     Scopes CloudresourcemanagerProjectsSearch =
       '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
@@ -123,7 +116,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudresourcemanagerProjectsSearchResource
+              Core.Proxy CloudresourcemanagerProjectsSearchResource
           )
           Core.mempty

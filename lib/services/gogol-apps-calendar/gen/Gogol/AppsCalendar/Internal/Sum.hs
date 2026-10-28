@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsCalendar.Internal.Sum
@@ -57,6 +55,17 @@ module Gogol.AppsCalendar.Internal.Sum
       ( EventsInsertSendUpdates_All,
         EventsInsertSendUpdates_ExternalOnly,
         EventsInsertSendUpdates_None,
+        ..
+      ),
+
+    -- * EventsListEventTypes
+    EventsListEventTypes
+      ( EventsListEventTypes_Birthday,
+        EventsListEventTypes_Default,
+        EventsListEventTypes_FocusTime,
+        EventsListEventTypes_FromGmail,
+        EventsListEventTypes_OutOfOffice,
+        EventsListEventTypes_WorkingLocation,
         ..
       ),
 
@@ -99,6 +108,17 @@ module Gogol.AppsCalendar.Internal.Sum
         ..
       ),
 
+    -- * EventsWatchEventTypes
+    EventsWatchEventTypes
+      ( EventsWatchEventTypes_Birthday,
+        EventsWatchEventTypes_Default,
+        EventsWatchEventTypes_FocusTime,
+        EventsWatchEventTypes_FromGmail,
+        EventsWatchEventTypes_OutOfOffice,
+        EventsWatchEventTypes_WorkingLocation,
+        ..
+      ),
+
     -- * EventsWatchOrderBy
     EventsWatchOrderBy
       ( EventsWatchOrderBy_StartTime,
@@ -108,7 +128,7 @@ module Gogol.AppsCalendar.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | The minimum access role for the user in the returned entries. Optional. The default is no restriction.
 newtype CalendarListListMinAccessRole = CalendarListListMinAccessRole {fromCalendarListListMinAccessRole :: Core.Text}
@@ -246,6 +266,53 @@ pattern EventsInsertSendUpdates_None = EventsInsertSendUpdates "none"
   EventsInsertSendUpdates_ExternalOnly,
   EventsInsertSendUpdates_None,
   EventsInsertSendUpdates
+  #-}
+
+-- | Event types to return. Optional. This parameter can be repeated multiple times to return events of different types. If unset, returns all event types.
+newtype EventsListEventTypes = EventsListEventTypes {fromEventsListEventTypes :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Special all-day events with an annual recurrence.
+pattern EventsListEventTypes_Birthday :: EventsListEventTypes
+pattern EventsListEventTypes_Birthday = EventsListEventTypes "birthday"
+
+-- | Regular events.
+pattern EventsListEventTypes_Default :: EventsListEventTypes
+pattern EventsListEventTypes_Default = EventsListEventTypes "default"
+
+-- | Focus time events.
+pattern EventsListEventTypes_FocusTime :: EventsListEventTypes
+pattern EventsListEventTypes_FocusTime = EventsListEventTypes "focusTime"
+
+-- | Events from Gmail.
+pattern EventsListEventTypes_FromGmail :: EventsListEventTypes
+pattern EventsListEventTypes_FromGmail = EventsListEventTypes "fromGmail"
+
+-- | Out of office events.
+pattern EventsListEventTypes_OutOfOffice :: EventsListEventTypes
+pattern EventsListEventTypes_OutOfOffice = EventsListEventTypes "outOfOffice"
+
+-- | Working location events.
+pattern EventsListEventTypes_WorkingLocation :: EventsListEventTypes
+pattern EventsListEventTypes_WorkingLocation = EventsListEventTypes "workingLocation"
+
+{-# COMPLETE
+  EventsListEventTypes_Birthday,
+  EventsListEventTypes_Default,
+  EventsListEventTypes_FocusTime,
+  EventsListEventTypes_FromGmail,
+  EventsListEventTypes_OutOfOffice,
+  EventsListEventTypes_WorkingLocation,
+  EventsListEventTypes
   #-}
 
 -- | The order of the events returned in the result. Optional. The default is an unspecified, stable order.
@@ -401,6 +468,53 @@ pattern EventsUpdateSendUpdates_None = EventsUpdateSendUpdates "none"
   EventsUpdateSendUpdates_ExternalOnly,
   EventsUpdateSendUpdates_None,
   EventsUpdateSendUpdates
+  #-}
+
+-- | Event types to return. Optional. This parameter can be repeated multiple times to return events of different types. If unset, returns all event types.
+newtype EventsWatchEventTypes = EventsWatchEventTypes {fromEventsWatchEventTypes :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Special all-day events with an annual recurrence.
+pattern EventsWatchEventTypes_Birthday :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_Birthday = EventsWatchEventTypes "birthday"
+
+-- | Regular events.
+pattern EventsWatchEventTypes_Default :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_Default = EventsWatchEventTypes "default"
+
+-- | Focus time events.
+pattern EventsWatchEventTypes_FocusTime :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_FocusTime = EventsWatchEventTypes "focusTime"
+
+-- | Events from Gmail.
+pattern EventsWatchEventTypes_FromGmail :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_FromGmail = EventsWatchEventTypes "fromGmail"
+
+-- | Out of office events.
+pattern EventsWatchEventTypes_OutOfOffice :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_OutOfOffice = EventsWatchEventTypes "outOfOffice"
+
+-- | Working location events.
+pattern EventsWatchEventTypes_WorkingLocation :: EventsWatchEventTypes
+pattern EventsWatchEventTypes_WorkingLocation = EventsWatchEventTypes "workingLocation"
+
+{-# COMPLETE
+  EventsWatchEventTypes_Birthday,
+  EventsWatchEventTypes_Default,
+  EventsWatchEventTypes_FocusTime,
+  EventsWatchEventTypes_FromGmail,
+  EventsWatchEventTypes_OutOfOffice,
+  EventsWatchEventTypes_WorkingLocation,
+  EventsWatchEventTypes
   #-}
 
 -- | The order of the events returned in the result. Optional. The default is an unspecified, stable order.

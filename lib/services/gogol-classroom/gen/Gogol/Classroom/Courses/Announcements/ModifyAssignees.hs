@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.Announcements.ModifyAssignees
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.Announcements.ModifyAssignees
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.announcements.modifyAssignees@ method which the
 -- 'ClassroomCoursesAnnouncementsModifyAssignees' request conforms to.
@@ -56,9 +54,7 @@ type ClassroomCoursesAnnouncementsModifyAssigneesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ModifyAnnouncementAssigneesRequest
+    Core.:> Core.ReqBody '[Core.JSON] ModifyAnnouncementAssigneesRequest
     Core.:> Core.Post '[Core.JSON] Announcement
 
 -- | Modifies assignee mode and options of an announcement. Only a teacher of the course that contains the announcement may call this method. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or course work or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or course work does not exist.
@@ -95,7 +91,8 @@ newClassroomCoursesAnnouncementsModifyAssignees ::
   ClassroomCoursesAnnouncementsModifyAssignees
 newClassroomCoursesAnnouncementsModifyAssignees courseId id payload =
   ClassroomCoursesAnnouncementsModifyAssignees
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       courseId = courseId,
@@ -109,31 +106,26 @@ instance
   Core.GoogleRequest
     ClassroomCoursesAnnouncementsModifyAssignees
   where
+  type Rs ClassroomCoursesAnnouncementsModifyAssignees = Announcement
   type
-    Rs ClassroomCoursesAnnouncementsModifyAssignees =
-      Announcement
-  type
-    Scopes
-      ClassroomCoursesAnnouncementsModifyAssignees =
+    Scopes ClassroomCoursesAnnouncementsModifyAssignees =
       '[Classroom'Announcements]
-  requestClient
-    ClassroomCoursesAnnouncementsModifyAssignees {..} =
-      go
-        courseId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesAnnouncementsModifyAssigneesResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesAnnouncementsModifyAssignees {..} =
+    go
+      courseId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomCoursesAnnouncementsModifyAssigneesResource
+          )
+          Core.mempty

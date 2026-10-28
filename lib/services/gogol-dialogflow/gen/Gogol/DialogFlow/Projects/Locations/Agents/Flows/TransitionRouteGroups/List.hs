@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Li
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.transitionRouteGroups.list@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList' request conforms to.
@@ -77,7 +75,7 @@ data DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList = DialogFlo
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from a previous list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The flow to list all transition route groups for. Format: @projects\/\/locations\/\/agents\/\/flows\/@.
+    -- | Required. The flow to list all transition route groups for. Format: @projects\/\/locations\/\/agents\/\/flows\/@ or \`projects\/\/locations\/\/agents\/.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -88,21 +86,23 @@ data DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList = DialogFlo
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList ::
-  -- |  Required. The flow to list all transition route groups for. Format: @projects\/\/locations\/\/agents\/\/flows\/@. See 'parent'.
+  -- |  Required. The flow to list all transition route groups for. Format: @projects\/\/locations\/\/agents\/\/flows\/@ or \`projects\/\/locations\/\/agents\/. See 'parent'.
   Core.Text ->
   DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList
-newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList parent =
-  DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      languageCode = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList
+  parent =
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        languageCode = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

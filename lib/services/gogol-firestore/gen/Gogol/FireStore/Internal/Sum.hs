@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FireStore.Internal.Sum
@@ -64,6 +62,37 @@ module Gogol.FireStore.Internal.Sum
         ..
       ),
 
+    -- * FindNearest_DistanceMeasure
+    FindNearest_DistanceMeasure
+      ( FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
+        FindNearest_DistanceMeasure_Euclidean,
+        FindNearest_DistanceMeasure_Cosine,
+        FindNearest_DistanceMeasure_DOTPRODUCT,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1Backup_State
+    GoogleFirestoreAdminV1Backup_State
+      ( GoogleFirestoreAdminV1Backup_State_STATEUNSPECIFIED,
+        GoogleFirestoreAdminV1Backup_State_Creating,
+        GoogleFirestoreAdminV1Backup_State_Ready,
+        GoogleFirestoreAdminV1Backup_State_NOTAVAILABLE,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+    GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+      ( GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_OPERATIONSTATEUNSPECIFIED,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Initializing,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Processing,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelling,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Finalizing,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Successful,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Failed,
+        GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelled,
+        ..
+      ),
+
     -- * GoogleFirestoreAdminV1Database_AppEngineIntegrationMode
     GoogleFirestoreAdminV1Database_AppEngineIntegrationMode
       ( GoogleFirestoreAdminV1Database_AppEngineIntegrationMode_APPENGINEINTEGRATIONMODEUNSPECIFIED,
@@ -78,6 +107,22 @@ module Gogol.FireStore.Internal.Sum
         GoogleFirestoreAdminV1Database_ConcurrencyMode_Optimistic,
         GoogleFirestoreAdminV1Database_ConcurrencyMode_Pessimistic,
         GoogleFirestoreAdminV1Database_ConcurrencyMode_OPTIMISTICWITHENTITYGROUPS,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1Database_DeleteProtectionState
+    GoogleFirestoreAdminV1Database_DeleteProtectionState
+      ( GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONSTATEUNSPECIFIED,
+        GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONDISABLED,
+        GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONENABLED,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+    GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+      ( GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLEMENTUNSPECIFIED,
+        GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLED,
+        GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYDISABLED,
         ..
       ),
 
@@ -189,6 +234,19 @@ module Gogol.FireStore.Internal.Sum
         ..
       ),
 
+    -- * GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+      ( GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_OPERATIONSTATEUNSPECIFIED,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Initializing,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Processing,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelling,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Finalizing,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Successful,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Failed,
+        GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelled,
+        ..
+      ),
+
     -- * GoogleFirestoreAdminV1TtlConfig_State
     GoogleFirestoreAdminV1TtlConfig_State
       ( GoogleFirestoreAdminV1TtlConfig_State_STATEUNSPECIFIED,
@@ -203,6 +261,19 @@ module Gogol.FireStore.Internal.Sum
       ( GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_CHANGETYPEUNSPECIFIED,
         GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add,
         GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove,
+        ..
+      ),
+
+    -- * GoogleFirestoreAdminV1WeeklyRecurrence_Day
+    GoogleFirestoreAdminV1WeeklyRecurrence_Day
+      ( GoogleFirestoreAdminV1WeeklyRecurrence_Day_DAYOFWEEKUNSPECIFIED,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Monday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Tuesday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Wednesday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Thursday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Friday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Saturday,
+        GoogleFirestoreAdminV1WeeklyRecurrence_Day_Sunday,
         ..
       ),
 
@@ -242,7 +313,7 @@ module Gogol.FireStore.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -402,6 +473,137 @@ pattern FieldTransform_SetToServerValue_REQUESTTIME = FieldTransform_SetToServer
   FieldTransform_SetToServerValue
   #-}
 
+-- | Required. The distance measure to use, required.
+newtype FindNearest_DistanceMeasure = FindNearest_DistanceMeasure {fromFindNearest_DistanceMeasure :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Should not be set.
+pattern FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED = FindNearest_DistanceMeasure "DISTANCE_MEASURE_UNSPECIFIED"
+
+-- | Measures the EUCLIDEAN distance between the vectors. See <https://en.wikipedia.org/wiki/Euclidean_distance Euclidean> to learn more. The resulting distance decreases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_Euclidean :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_Euclidean = FindNearest_DistanceMeasure "EUCLIDEAN"
+
+-- | COSINE distance compares vectors based on the angle between them, which allows you to measure similarity that isn\'t based on the vectors magnitude. We recommend using DOT_PRODUCT with unit normalized vectors instead of COSINE distance, which is mathematically equivalent with better performance. See <https://en.wikipedia.org/wiki/Cosine_similarity Cosine Similarity> to learn more about COSINE similarity and COSINE distance. The resulting COSINE distance decreases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_Cosine :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_Cosine = FindNearest_DistanceMeasure "COSINE"
+
+-- | Similar to cosine but is affected by the magnitude of the vectors. See <https://en.wikipedia.org/wiki/Dot_product Dot Product> to learn more. The resulting distance increases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_DOTPRODUCT :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_DOTPRODUCT = FindNearest_DistanceMeasure "DOT_PRODUCT"
+
+{-# COMPLETE
+  FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
+  FindNearest_DistanceMeasure_Euclidean,
+  FindNearest_DistanceMeasure_Cosine,
+  FindNearest_DistanceMeasure_DOTPRODUCT,
+  FindNearest_DistanceMeasure
+  #-}
+
+-- | Output only. The current state of the backup.
+newtype GoogleFirestoreAdminV1Backup_State = GoogleFirestoreAdminV1Backup_State {fromGoogleFirestoreAdminV1Backup_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state is unspecified.
+pattern GoogleFirestoreAdminV1Backup_State_STATEUNSPECIFIED :: GoogleFirestoreAdminV1Backup_State
+pattern GoogleFirestoreAdminV1Backup_State_STATEUNSPECIFIED = GoogleFirestoreAdminV1Backup_State "STATE_UNSPECIFIED"
+
+-- | The pending backup is still being created. Operations on the backup will be rejected in this state.
+pattern GoogleFirestoreAdminV1Backup_State_Creating :: GoogleFirestoreAdminV1Backup_State
+pattern GoogleFirestoreAdminV1Backup_State_Creating = GoogleFirestoreAdminV1Backup_State "CREATING"
+
+-- | The backup is complete and ready to use.
+pattern GoogleFirestoreAdminV1Backup_State_Ready :: GoogleFirestoreAdminV1Backup_State
+pattern GoogleFirestoreAdminV1Backup_State_Ready = GoogleFirestoreAdminV1Backup_State "READY"
+
+-- | The backup is not available at this moment.
+pattern GoogleFirestoreAdminV1Backup_State_NOTAVAILABLE :: GoogleFirestoreAdminV1Backup_State
+pattern GoogleFirestoreAdminV1Backup_State_NOTAVAILABLE = GoogleFirestoreAdminV1Backup_State "NOT_AVAILABLE"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1Backup_State_STATEUNSPECIFIED,
+  GoogleFirestoreAdminV1Backup_State_Creating,
+  GoogleFirestoreAdminV1Backup_State_Ready,
+  GoogleFirestoreAdminV1Backup_State_NOTAVAILABLE,
+  GoogleFirestoreAdminV1Backup_State
+  #-}
+
+-- | The state of the operation.
+newtype GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState {fromGoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_OPERATIONSTATEUNSPECIFIED :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_OPERATIONSTATEUNSPECIFIED = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "OPERATION_STATE_UNSPECIFIED"
+
+-- | Request is being prepared for processing.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Initializing :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Initializing = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "INITIALIZING"
+
+-- | Request is actively being processed.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Processing :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Processing = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "PROCESSING"
+
+-- | Request is in the process of being cancelled after user called google.longrunning.Operations.CancelOperation on the operation.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelling :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelling = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "CANCELLING"
+
+-- | Request has been processed and is in its finalization stage.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Finalizing :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Finalizing = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "FINALIZING"
+
+-- | Request has completed successfully.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Successful :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Successful = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "SUCCESSFUL"
+
+-- | Request has finished being processed, but encountered an error.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Failed :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Failed = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "FAILED"
+
+-- | Request has finished being cancelled after user called google.longrunning.Operations.CancelOperation.
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelled :: GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+pattern GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelled = GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState "CANCELLED"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_OPERATIONSTATEUNSPECIFIED,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Initializing,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Processing,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelling,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Finalizing,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Successful,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Failed,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState_Cancelled,
+  GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+  #-}
+
 -- | The App Engine integration mode to use for this database.
 newtype GoogleFirestoreAdminV1Database_AppEngineIntegrationMode = GoogleFirestoreAdminV1Database_AppEngineIntegrationMode {fromGoogleFirestoreAdminV1Database_AppEngineIntegrationMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -471,6 +673,70 @@ pattern GoogleFirestoreAdminV1Database_ConcurrencyMode_OPTIMISTICWITHENTITYGROUP
   GoogleFirestoreAdminV1Database_ConcurrencyMode
   #-}
 
+-- | State of delete protection for the database.
+newtype GoogleFirestoreAdminV1Database_DeleteProtectionState = GoogleFirestoreAdminV1Database_DeleteProtectionState {fromGoogleFirestoreAdminV1Database_DeleteProtectionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The default value. Delete protection type is not specified
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONSTATEUNSPECIFIED :: GoogleFirestoreAdminV1Database_DeleteProtectionState
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONSTATEUNSPECIFIED = GoogleFirestoreAdminV1Database_DeleteProtectionState "DELETE_PROTECTION_STATE_UNSPECIFIED"
+
+-- | Delete protection is disabled
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONDISABLED :: GoogleFirestoreAdminV1Database_DeleteProtectionState
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONDISABLED = GoogleFirestoreAdminV1Database_DeleteProtectionState "DELETE_PROTECTION_DISABLED"
+
+-- | Delete protection is enabled
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONENABLED :: GoogleFirestoreAdminV1Database_DeleteProtectionState
+pattern GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONENABLED = GoogleFirestoreAdminV1Database_DeleteProtectionState "DELETE_PROTECTION_ENABLED"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONSTATEUNSPECIFIED,
+  GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONDISABLED,
+  GoogleFirestoreAdminV1Database_DeleteProtectionState_DELETEPROTECTIONENABLED,
+  GoogleFirestoreAdminV1Database_DeleteProtectionState
+  #-}
+
+-- | Whether to enable the PITR feature on this database.
+newtype GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement = GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement {fromGoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not used.
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLEMENTUNSPECIFIED :: GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLEMENTUNSPECIFIED = GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement "POINT_IN_TIME_RECOVERY_ENABLEMENT_UNSPECIFIED"
+
+-- | Reads are supported on selected versions of the data from within the past 7 days: * Reads against any timestamp within the past hour * Reads against 1-minute snapshots beyond 1 hour and within 7 days @version_retention_period@ and @earliest_version_time@ can be used to determine the supported versions.
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLED :: GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLED = GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement "POINT_IN_TIME_RECOVERY_ENABLED"
+
+-- | Reads are supported on any version of the data from within the past 1 hour.
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYDISABLED :: GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+pattern GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYDISABLED = GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement "POINT_IN_TIME_RECOVERY_DISABLED"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLEMENTUNSPECIFIED,
+  GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYENABLED,
+  GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement_POINTINTIMERECOVERYDISABLED,
+  GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+  #-}
+
 -- | The type of the database. See https:\/\/cloud.google.com\/datastore\/docs\/firestore-or-datastore for information about how to choose.
 newtype GoogleFirestoreAdminV1Database_Type = GoogleFirestoreAdminV1Database_Type {fromGoogleFirestoreAdminV1Database_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -484,7 +750,7 @@ newtype GoogleFirestoreAdminV1Database_Type = GoogleFirestoreAdminV1Database_Typ
       Core.FromJSONKey
     )
 
--- | The default value. This value is used if the database type is omitted.
+-- | Not used.
 pattern GoogleFirestoreAdminV1Database_Type_DATABASETYPEUNSPECIFIED :: GoogleFirestoreAdminV1Database_Type
 pattern GoogleFirestoreAdminV1Database_Type_DATABASETYPEUNSPECIFIED = GoogleFirestoreAdminV1Database_Type "DATABASE_TYPE_UNSPECIFIED"
 
@@ -687,7 +953,7 @@ newtype GoogleFirestoreAdminV1Index_ApiScope = GoogleFirestoreAdminV1Index_ApiSc
       Core.FromJSONKey
     )
 
--- | The index can be used by both Firestore Native and Firestore in Datastore Mode query API. This is the default.
+-- | The index can only be used by the Firestore Native query API. This is the default.
 pattern GoogleFirestoreAdminV1Index_ApiScope_ANYAPI :: GoogleFirestoreAdminV1Index_ApiScope
 pattern GoogleFirestoreAdminV1Index_ApiScope_ANYAPI = GoogleFirestoreAdminV1Index_ApiScope "ANY_API"
 
@@ -701,7 +967,7 @@ pattern GoogleFirestoreAdminV1Index_ApiScope_DATASTOREMODEAPI = GoogleFirestoreA
   GoogleFirestoreAdminV1Index_ApiScope
   #-}
 
--- | Indexes with a collection query scope specified allow queries against a collection that is the child of a specific document, specified at query time, and that has the same collection id. Indexes with a collection group query scope specified allow queries against all collections descended from a specific document, specified at query time, and that have the same collection id as this index.
+-- | Indexes with a collection query scope specified allow queries against a collection that is the child of a specific document, specified at query time, and that has the same collection ID. Indexes with a collection group query scope specified allow queries against all collections descended from a specific document, specified at query time, and that have the same collection ID as this index.
 newtype GoogleFirestoreAdminV1Index_QueryScope = GoogleFirestoreAdminV1Index_QueryScope {fromGoogleFirestoreAdminV1Index_QueryScope :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -718,11 +984,11 @@ newtype GoogleFirestoreAdminV1Index_QueryScope = GoogleFirestoreAdminV1Index_Que
 pattern GoogleFirestoreAdminV1Index_QueryScope_QUERYSCOPEUNSPECIFIED :: GoogleFirestoreAdminV1Index_QueryScope
 pattern GoogleFirestoreAdminV1Index_QueryScope_QUERYSCOPEUNSPECIFIED = GoogleFirestoreAdminV1Index_QueryScope "QUERY_SCOPE_UNSPECIFIED"
 
--- | Indexes with a collection query scope specified allow queries against a collection that is the child of a specific document, specified at query time, and that has the collection id specified by the index.
+-- | Indexes with a collection query scope specified allow queries against a collection that is the child of a specific document, specified at query time, and that has the collection ID specified by the index.
 pattern GoogleFirestoreAdminV1Index_QueryScope_Collection :: GoogleFirestoreAdminV1Index_QueryScope
 pattern GoogleFirestoreAdminV1Index_QueryScope_Collection = GoogleFirestoreAdminV1Index_QueryScope "COLLECTION"
 
--- | Indexes with a collection group query scope specified allow queries against all collections that has the collection id specified by the index.
+-- | Indexes with a collection group query scope specified allow queries against all collections that has the collection ID specified by the index.
 pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP :: GoogleFirestoreAdminV1Index_QueryScope
 pattern GoogleFirestoreAdminV1Index_QueryScope_COLLECTIONGROUP = GoogleFirestoreAdminV1Index_QueryScope "COLLECTION_GROUP"
 
@@ -923,6 +1189,63 @@ pattern GoogleFirestoreAdminV1IndexOperationMetadata_State_Cancelled = GoogleFir
   GoogleFirestoreAdminV1IndexOperationMetadata_State
   #-}
 
+-- | The operation state of the restore.
+newtype GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState {fromGoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_OPERATIONSTATEUNSPECIFIED :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_OPERATIONSTATEUNSPECIFIED = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "OPERATION_STATE_UNSPECIFIED"
+
+-- | Request is being prepared for processing.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Initializing :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Initializing = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "INITIALIZING"
+
+-- | Request is actively being processed.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Processing :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Processing = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "PROCESSING"
+
+-- | Request is in the process of being cancelled after user called google.longrunning.Operations.CancelOperation on the operation.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelling :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelling = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "CANCELLING"
+
+-- | Request has been processed and is in its finalization stage.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Finalizing :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Finalizing = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "FINALIZING"
+
+-- | Request has completed successfully.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Successful :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Successful = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "SUCCESSFUL"
+
+-- | Request has finished being processed, but encountered an error.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Failed :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Failed = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "FAILED"
+
+-- | Request has finished being cancelled after user called google.longrunning.Operations.CancelOperation.
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelled :: GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+pattern GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelled = GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState "CANCELLED"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_OPERATIONSTATEUNSPECIFIED,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Initializing,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Processing,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelling,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Finalizing,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Successful,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Failed,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState_Cancelled,
+  GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+  #-}
+
 -- | Output only. The state of the TTL configuration.
 newtype GoogleFirestoreAdminV1TtlConfig_State = GoogleFirestoreAdminV1TtlConfig_State {fromGoogleFirestoreAdminV1TtlConfig_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -990,6 +1313,63 @@ pattern GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove = GoogleFirestore
   GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Add,
   GoogleFirestoreAdminV1TtlConfigDelta_ChangeType_Remove,
   GoogleFirestoreAdminV1TtlConfigDelta_ChangeType
+  #-}
+
+-- | The day of week to run. DAY/OF/WEEK_UNSPECIFIED is not allowed.
+newtype GoogleFirestoreAdminV1WeeklyRecurrence_Day = GoogleFirestoreAdminV1WeeklyRecurrence_Day {fromGoogleFirestoreAdminV1WeeklyRecurrence_Day :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The day of the week is unspecified.
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_DAYOFWEEKUNSPECIFIED :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_DAYOFWEEKUNSPECIFIED = GoogleFirestoreAdminV1WeeklyRecurrence_Day "DAY_OF_WEEK_UNSPECIFIED"
+
+-- | Monday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Monday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Monday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "MONDAY"
+
+-- | Tuesday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Tuesday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Tuesday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "TUESDAY"
+
+-- | Wednesday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Wednesday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Wednesday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "WEDNESDAY"
+
+-- | Thursday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Thursday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Thursday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "THURSDAY"
+
+-- | Friday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Friday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Friday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "FRIDAY"
+
+-- | Saturday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Saturday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Saturday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "SATURDAY"
+
+-- | Sunday
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Sunday :: GoogleFirestoreAdminV1WeeklyRecurrence_Day
+pattern GoogleFirestoreAdminV1WeeklyRecurrence_Day_Sunday = GoogleFirestoreAdminV1WeeklyRecurrence_Day "SUNDAY"
+
+{-# COMPLETE
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_DAYOFWEEKUNSPECIFIED,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Monday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Tuesday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Wednesday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Thursday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Friday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Saturday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day_Sunday,
+  GoogleFirestoreAdminV1WeeklyRecurrence_Day
   #-}
 
 -- | The direction to order by. Defaults to @ASCENDING@.

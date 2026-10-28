@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Create
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.create@ method which the
 -- 'DialogFlowProjectsLocationsAgentsCreate' request conforms to.
@@ -54,9 +52,7 @@ type DialogFlowProjectsLocationsAgentsCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Agent
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3Agent
     Core.:> Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3Agent
 
 -- | Creates an agent in the specified location. Note: You should always train flows prior to sending them queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
@@ -98,33 +94,28 @@ newDialogFlowProjectsLocationsAgentsCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DialogFlowProjectsLocationsAgentsCreate
-  where
+instance Core.GoogleRequest DialogFlowProjectsLocationsAgentsCreate where
   type
     Rs DialogFlowProjectsLocationsAgentsCreate =
       GoogleCloudDialogflowCxV3Agent
   type
     Scopes DialogFlowProjectsLocationsAgentsCreate =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsCreateResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.ResponsePolicyRules.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DNS.ResponsePolicyRules.List
 where
 
 import Gogol.DNS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dns.responsePolicyRules.list@ method which the
 -- 'DNSResponsePolicyRulesList' request conforms to.
@@ -62,9 +60,7 @@ type DNSResponsePolicyRulesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ResponsePolicyRulesListResponse
+    Core.:> Core.Get '[Core.JSON] ResponsePolicyRulesListResponse
 
 -- | Enumerates all Response Policy Rules associated with a project.
 --
@@ -114,10 +110,7 @@ newDNSResponsePolicyRulesList project responsePolicy =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DNSResponsePolicyRulesList
-  where
+instance Core.GoogleRequest DNSResponsePolicyRulesList where
   type
     Rs DNSResponsePolicyRulesList =
       ResponsePolicyRulesListResponse
@@ -145,7 +138,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DNSResponsePolicyRulesListResource
-          )
+          (Core.Proxy :: Core.Proxy DNSResponsePolicyRulesListResource)
           Core.mempty

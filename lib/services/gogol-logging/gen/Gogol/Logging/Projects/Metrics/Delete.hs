@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Projects.Metrics.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.Projects.Metrics.Delete
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.projects.metrics.delete@ method which the
 -- 'LoggingProjectsMetricsDelete' request conforms to.
@@ -89,17 +87,11 @@ newLoggingProjectsMetricsDelete metricName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingProjectsMetricsDelete
-  where
+instance Core.GoogleRequest LoggingProjectsMetricsDelete where
   type Rs LoggingProjectsMetricsDelete = Empty
   type
     Scopes LoggingProjectsMetricsDelete =
-      '[ CloudPlatform'FullControl,
-         Logging'Admin,
-         Logging'Write
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin, Logging'Write]
   requestClient LoggingProjectsMetricsDelete {..} =
     go
       metricName
@@ -113,7 +105,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LoggingProjectsMetricsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy LoggingProjectsMetricsDeleteResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Schemas.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Schemas.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.schemas.create@ method which the
@@ -72,7 +70,7 @@ data PubSubProjectsSchemasCreate = PubSubProjectsSchemasCreate
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Schema,
-    -- | The ID to use for the schema, which will become the final component of the schema\'s resource name. See https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names for resource name constraints.
+    -- | The ID to use for the schema, which will become the final component of the schema\'s resource name. See https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource_names for resource name constraints.
     schemaId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -100,10 +98,7 @@ newPubSubProjectsSchemasCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSchemasCreate
-  where
+instance Core.GoogleRequest PubSubProjectsSchemasCreate where
   type Rs PubSubProjectsSchemasCreate = Schema
   type
     Scopes PubSubProjectsSchemasCreate =
@@ -123,7 +118,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsSchemasCreateResource
-          )
+          (Core.Proxy :: Core.Proxy PubSubProjectsSchemasCreateResource)
           Core.mempty

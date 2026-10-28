@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Snapshots.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Snapshots.TestIamPermissions
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.snapshots.testIamPermissions@ method which the
 -- 'ComputeSnapshotsTestIamPermissions' request conforms to.
@@ -59,12 +57,8 @@ type ComputeSnapshotsTestIamPermissionsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TestPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              TestPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] TestPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] TestPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
@@ -110,19 +104,13 @@ newComputeSnapshotsTestIamPermissions payload project resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeSnapshotsTestIamPermissions
-  where
+instance Core.GoogleRequest ComputeSnapshotsTestIamPermissions where
   type
     Rs ComputeSnapshotsTestIamPermissions =
       TestPermissionsResponse
   type
     Scopes ComputeSnapshotsTestIamPermissions =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeSnapshotsTestIamPermissions {..} =
     go
       project
@@ -139,7 +127,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeSnapshotsTestIamPermissionsResource
+              Core.Proxy ComputeSnapshotsTestIamPermissionsResource
           )
           Core.mempty

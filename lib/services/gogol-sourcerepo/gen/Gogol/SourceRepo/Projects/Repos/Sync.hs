@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SourceRepo.Projects.Repos.Sync
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Synchronize a connected repo. The response contains SyncRepoMetadata in the metadata field.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.sync@.
+-- /See:/ <https://cloud.google.com/source-repositories/docs Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.sync@.
 module Gogol.SourceRepo.Projects.Repos.Sync
   ( -- * Resource
     SourceRepoProjectsReposSyncResource,
@@ -39,7 +37,7 @@ module Gogol.SourceRepo.Projects.Repos.Sync
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.sync@ method which the
@@ -95,10 +93,7 @@ newSourceRepoProjectsReposSync name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SourceRepoProjectsReposSync
-  where
+instance Core.GoogleRequest SourceRepoProjectsReposSync where
   type Rs SourceRepoProjectsReposSync = Operation
   type
     Scopes SourceRepoProjectsReposSync =
@@ -117,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsReposSyncResource
-          )
+          (Core.Proxy :: Core.Proxy SourceRepoProjectsReposSyncResource)
           Core.mempty

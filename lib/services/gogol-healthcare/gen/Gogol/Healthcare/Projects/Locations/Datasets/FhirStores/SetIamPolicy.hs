@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.setIamPolicy@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy' request conforms to.
@@ -84,29 +82,31 @@ newHealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy
-newHealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy payload resource =
-  HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy
+  payload
+  resource =
+    HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy =
       Policy
   type
     Scopes
       HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicy {..} =
       go

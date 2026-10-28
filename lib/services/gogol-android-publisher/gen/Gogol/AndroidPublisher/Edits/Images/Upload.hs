@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Images.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Images.Upload
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.images.upload@ method which the
 -- 'AndroidPublisherEditsImagesUpload' request conforms to.
@@ -62,28 +60,24 @@ type AndroidPublisherEditsImagesUploadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ImagesUploadResponse
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "edits"
-      Core.:> Core.Capture "editId" Core.Text
-      Core.:> "listings"
-      Core.:> Core.Capture "language" Core.Text
-      Core.:> Core.Capture "imageType" EditsImagesUploadImageType
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post
-                '[Core.JSON]
-                ImagesUploadResponse
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "edits"
+    Core.:> Core.Capture "editId" Core.Text
+    Core.:> "listings"
+    Core.:> Core.Capture "language" Core.Text
+    Core.:> Core.Capture "imageType" EditsImagesUploadImageType
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] ImagesUploadResponse
 
 -- | Uploads an image of the specified language and image type, and adds to the edit.
 --
@@ -121,26 +115,25 @@ newAndroidPublisherEditsImagesUpload ::
   -- |  Package name of the app. See 'packageName'.
   Core.Text ->
   AndroidPublisherEditsImagesUpload
-newAndroidPublisherEditsImagesUpload editId imageType language packageName =
-  AndroidPublisherEditsImagesUpload
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      editId = editId,
-      imageType = imageType,
-      language = language,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidPublisherEditsImagesUpload
+  editId
+  imageType
+  language
+  packageName =
     AndroidPublisherEditsImagesUpload
-  where
-  type
-    Rs AndroidPublisherEditsImagesUpload =
-      ImagesUploadResponse
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        editId = editId,
+        imageType = imageType,
+        language = language,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest AndroidPublisherEditsImagesUpload where
+  type Rs AndroidPublisherEditsImagesUpload = ImagesUploadResponse
   type
     Scopes AndroidPublisherEditsImagesUpload =
       '[Androidpublisher'FullControl]
@@ -170,18 +163,13 @@ instance
     (Core.MediaUpload AndroidPublisherEditsImagesUpload)
   where
   type
-    Rs
-      (Core.MediaUpload AndroidPublisherEditsImagesUpload) =
+    Rs (Core.MediaUpload AndroidPublisherEditsImagesUpload) =
       ImagesUploadResponse
   type
-    Scopes
-      (Core.MediaUpload AndroidPublisherEditsImagesUpload) =
+    Scopes (Core.MediaUpload AndroidPublisherEditsImagesUpload) =
       Core.Scopes AndroidPublisherEditsImagesUpload
   requestClient
-    ( Core.MediaUpload
-        AndroidPublisherEditsImagesUpload {..}
-        body
-      ) =
+    (Core.MediaUpload AndroidPublisherEditsImagesUpload {..} body) =
       go
         packageName
         editId

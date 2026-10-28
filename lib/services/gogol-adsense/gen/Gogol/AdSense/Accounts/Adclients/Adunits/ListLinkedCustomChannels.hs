@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.AdSense.Accounts.Adclients.Adunits.ListLinkedCustomChannels
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.adclients.adunits.listLinkedCustomChannels@ method which the
 -- 'AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels' request conforms to.
 type AdSenseAccountsAdclientsAdunitsListLinkedCustomChannelsResource =
   "v2"
-    Core.:> Core.CaptureMode
-              "parent"
-              "listLinkedCustomChannels"
-              Core.Text
+    Core.:> Core.CaptureMode "parent" "listLinkedCustomChannels" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -58,9 +53,7 @@ type AdSenseAccountsAdclientsAdunitsListLinkedCustomChannelsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListLinkedCustomChannelsResponse
+    Core.:> Core.Get '[Core.JSON] ListLinkedCustomChannelsResponse
 
 -- | Lists all the custom channels available for an ad unit.
 --
@@ -92,7 +85,8 @@ newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels ::
   AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels
 newAdSenseAccountsAdclientsAdunitsListLinkedCustomChannels parent =
   AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -107,12 +101,10 @@ instance
     AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels
   where
   type
-    Rs
-      AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels =
+    Rs AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels =
       ListLinkedCustomChannelsResponse
   type
-    Scopes
-      AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels =
+    Scopes AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels =
       '[Adsense'FullControl, Adsense'Readonly]
   requestClient
     AdSenseAccountsAdclientsAdunitsListLinkedCustomChannels {..} =

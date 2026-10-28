@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.ekmConnections.setIamPolicy@ method which the
 -- 'CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy' request conforms to.
@@ -84,28 +82,29 @@ newCloudKMSProjectsLocationsEkmConnectionsSetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy
-newCloudKMSProjectsLocationsEkmConnectionsSetIamPolicy payload resource =
-  CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudKMSProjectsLocationsEkmConnectionsSetIamPolicy
+  payload
+  resource =
+    CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy
   where
   type
-    Rs
-      CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy =
+    Rs CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy =
       Policy
   type
-    Scopes
-      CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy =
+    Scopes CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
   requestClient
     CloudKMSProjectsLocationsEkmConnectionsSetIamPolicy {..} =

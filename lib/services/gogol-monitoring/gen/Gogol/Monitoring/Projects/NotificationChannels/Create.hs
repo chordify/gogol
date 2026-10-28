@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.NotificationChannels.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.NotificationChannels.Create
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.notificationChannels.create@ method which the
 -- 'MonitoringProjectsNotificationChannelsCreate' request conforms to.
@@ -87,7 +85,8 @@ newMonitoringProjectsNotificationChannelsCreate ::
   MonitoringProjectsNotificationChannelsCreate
 newMonitoringProjectsNotificationChannelsCreate name payload =
   MonitoringProjectsNotificationChannelsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -104,26 +103,23 @@ instance
     Rs MonitoringProjectsNotificationChannelsCreate =
       NotificationChannel
   type
-    Scopes
-      MonitoringProjectsNotificationChannelsCreate =
+    Scopes MonitoringProjectsNotificationChannelsCreate =
       '[CloudPlatform'FullControl, Monitoring'FullControl]
-  requestClient
-    MonitoringProjectsNotificationChannelsCreate {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsNotificationChannelsCreateResource
-            )
-            Core.mempty
+  requestClient MonitoringProjectsNotificationChannelsCreate {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringProjectsNotificationChannelsCreateResource
+          )
+          Core.mempty

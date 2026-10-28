@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.StudentSubmissions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.List
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.list@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsList' request conforms to.
@@ -54,9 +52,7 @@ type ClassroomCoursesCourseWorkStudentSubmissionsListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "late"
-              CoursesCourseWorkStudentSubmissionsListLate
+    Core.:> Core.QueryParam "late" CoursesCourseWorkStudentSubmissionsListLate
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParams
@@ -66,9 +62,7 @@ type ClassroomCoursesCourseWorkStudentSubmissionsListResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "userId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListStudentSubmissionsResponse
+    Core.:> Core.Get '[Core.JSON] ListStudentSubmissionsResponse
 
 -- | Returns a list of student submissions that the requester is permitted to view, factoring in the OAuth scopes of the request. @-@ may be specified as the @course_work_id@ to include student submissions for multiple course work items. Course students may only view their own work. Course teachers and domain administrators may view all student submissions. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or course work, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course does not exist.
 --
@@ -108,33 +102,34 @@ newClassroomCoursesCourseWorkStudentSubmissionsList ::
   -- |  Identifier of the student work to request. This may be set to the string literal @\"-\"@ to request student work for all course work in the specified course. See 'courseWorkId'.
   Core.Text ->
   ClassroomCoursesCourseWorkStudentSubmissionsList
-newClassroomCoursesCourseWorkStudentSubmissionsList courseId courseWorkId =
-  ClassroomCoursesCourseWorkStudentSubmissionsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      late = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      states = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = Core.Nothing
-    }
+newClassroomCoursesCourseWorkStudentSubmissionsList
+  courseId
+  courseWorkId =
+    ClassroomCoursesCourseWorkStudentSubmissionsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        courseId = courseId,
+        courseWorkId = courseWorkId,
+        late = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        states = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkStudentSubmissionsList
   where
   type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsList =
+    Rs ClassroomCoursesCourseWorkStudentSubmissionsList =
       ListStudentSubmissionsResponse
   type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsList =
+    Scopes ClassroomCoursesCourseWorkStudentSubmissionsList =
       '[ Classroom'Coursework'Me,
          Classroom'Coursework'Me'Readonly,
          Classroom'Coursework'Students,
@@ -142,28 +137,27 @@ instance
          Classroom'StudentSubmissions'Me'Readonly,
          Classroom'StudentSubmissions'Students'Readonly
        ]
-  requestClient
-    ClassroomCoursesCourseWorkStudentSubmissionsList {..} =
-      go
-        courseId
-        courseWorkId
-        xgafv
-        accessToken
-        callback
-        late
-        pageSize
-        pageToken
-        (states Core.^. Core._Default)
-        uploadType
-        uploadProtocol
-        userId
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkStudentSubmissionsListResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesCourseWorkStudentSubmissionsList {..} =
+    go
+      courseId
+      courseWorkId
+      xgafv
+      accessToken
+      callback
+      late
+      pageSize
+      pageToken
+      (states Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      userId
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ClassroomCoursesCourseWorkStudentSubmissionsListResource
+          )
+          Core.mempty

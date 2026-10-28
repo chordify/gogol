@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.ResourceRecordSets.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DNS.ResourceRecordSets.List
 where
 
 import Gogol.DNS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dns.resourceRecordSets.list@ method which the
 -- 'DNSResourceRecordSetsList' request conforms to.
@@ -62,13 +60,9 @@ type DNSResourceRecordSetsListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "type" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ResourceRecordSetsListResponse
+    Core.:> Core.Get '[Core.JSON] ResourceRecordSetsListResponse
 
 -- | Enumerates ResourceRecordSets that you have created but not yet deleted.
 --
@@ -125,9 +119,7 @@ newDNSResourceRecordSetsList managedZone project =
     }
 
 instance Core.GoogleRequest DNSResourceRecordSetsList where
-  type
-    Rs DNSResourceRecordSetsList =
-      ResourceRecordSetsListResponse
+  type Rs DNSResourceRecordSetsList = ResourceRecordSetsListResponse
   type
     Scopes DNSResourceRecordSetsList =
       '[ CloudPlatform'FullControl,
@@ -154,7 +146,5 @@ instance Core.GoogleRequest DNSResourceRecordSetsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DNSResourceRecordSetsListResource
-          )
+          (Core.Proxy :: Core.Proxy DNSResourceRecordSetsListResource)
           Core.mempty

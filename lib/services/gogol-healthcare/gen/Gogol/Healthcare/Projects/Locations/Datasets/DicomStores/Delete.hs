@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Delete
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.delete@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresDelete' request conforms to.
@@ -65,7 +63,7 @@ data HealthcareProjectsLocationsDatasetsDicomStoresDelete = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the DICOM store to delete.
+    -- | Required. The resource name of the DICOM store to delete.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,12 +74,13 @@ data HealthcareProjectsLocationsDatasetsDicomStoresDelete = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresDelete' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresDelete ::
-  -- |  The resource name of the DICOM store to delete. See 'name'.
+  -- |  Required. The resource name of the DICOM store to delete. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsDicomStoresDelete
 newHealthcareProjectsLocationsDatasetsDicomStoresDelete name =
   HealthcareProjectsLocationsDatasetsDicomStoresDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,13 +93,11 @@ instance
     HealthcareProjectsLocationsDatasetsDicomStoresDelete
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresDelete =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresDelete =
       Empty
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresDelete =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresDelete =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresDelete {..} =
       go

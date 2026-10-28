@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Indexing.UrlNotifications.GetMetadata
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets metadata about a Web Document. This method can /only/ be used to query URLs that were previously seen in successful Indexing API notifications. Includes the latest @UrlNotification@ received via this API.
 --
--- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference> for @indexing.urlNotifications.getMetadata@.
+-- /See:/ <https://developers.google.com/search/apis/indexing-api/ Web Search Indexing API Reference> for @indexing.urlNotifications.getMetadata@.
 module Gogol.Indexing.UrlNotifications.GetMetadata
   ( -- * Resource
     IndexingUrlNotificationsGetMetadataResource,
@@ -40,7 +38,7 @@ module Gogol.Indexing.UrlNotifications.GetMetadata
 where
 
 import Gogol.Indexing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @indexing.urlNotifications.getMetadata@ method which the
 -- 'IndexingUrlNotificationsGetMetadata' request conforms to.
@@ -89,10 +87,7 @@ newIndexingUrlNotificationsGetMetadata =
       url = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    IndexingUrlNotificationsGetMetadata
-  where
+instance Core.GoogleRequest IndexingUrlNotificationsGetMetadata where
   type
     Rs IndexingUrlNotificationsGetMetadata =
       UrlNotificationMetadata
@@ -113,7 +108,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                IndexingUrlNotificationsGetMetadataResource
+              Core.Proxy IndexingUrlNotificationsGetMetadataResource
           )
           Core.mempty

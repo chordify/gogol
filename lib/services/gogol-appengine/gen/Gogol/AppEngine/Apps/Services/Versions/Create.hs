@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Services.Versions.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Services.Versions.Create
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.services.versions.create@ method which the
 -- 'AppEngineAppsServicesVersionsCreate' request conforms to.
@@ -104,13 +102,8 @@ newAppEngineAppsServicesVersionsCreate appsId payload servicesId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AppEngineAppsServicesVersionsCreate
-  where
-  type
-    Rs AppEngineAppsServicesVersionsCreate =
-      Operation
+instance Core.GoogleRequest AppEngineAppsServicesVersionsCreate where
+  type Rs AppEngineAppsServicesVersionsCreate = Operation
   type
     Scopes AppEngineAppsServicesVersionsCreate =
       '[CloudPlatform'FullControl]
@@ -130,7 +123,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AppEngineAppsServicesVersionsCreateResource
+              Core.Proxy AppEngineAppsServicesVersionsCreateResource
           )
           Core.mempty

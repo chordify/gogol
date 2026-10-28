@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionUrlMaps.Validate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionUrlMaps.Validate
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionUrlMaps.validate@ method which the
 -- 'ComputeRegionUrlMapsValidate' request conforms to.
@@ -60,12 +58,8 @@ type ComputeRegionUrlMapsValidateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RegionUrlMapsValidateRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              UrlMapsValidateResponse
+    Core.:> Core.ReqBody '[Core.JSON] RegionUrlMapsValidateRequest
+    Core.:> Core.Post '[Core.JSON] UrlMapsValidateResponse
 
 -- | Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.
 --
@@ -116,13 +110,8 @@ newComputeRegionUrlMapsValidate payload project region urlMap =
       urlMap = urlMap
     }
 
-instance
-  Core.GoogleRequest
-    ComputeRegionUrlMapsValidate
-  where
-  type
-    Rs ComputeRegionUrlMapsValidate =
-      UrlMapsValidateResponse
+instance Core.GoogleRequest ComputeRegionUrlMapsValidate where
+  type Rs ComputeRegionUrlMapsValidate = UrlMapsValidateResponse
   type
     Scopes ComputeRegionUrlMapsValidate =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -142,7 +131,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeRegionUrlMapsValidateResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeRegionUrlMapsValidateResource)
           Core.mempty

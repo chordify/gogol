@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.EkmConnections.Get
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.ekmConnections.get@ method which the
 -- 'CloudKMSProjectsLocationsEkmConnectionsGet' request conforms to.
@@ -93,29 +91,24 @@ instance
   Core.GoogleRequest
     CloudKMSProjectsLocationsEkmConnectionsGet
   where
+  type Rs CloudKMSProjectsLocationsEkmConnectionsGet = EkmConnection
   type
-    Rs CloudKMSProjectsLocationsEkmConnectionsGet =
-      EkmConnection
-  type
-    Scopes
-      CloudKMSProjectsLocationsEkmConnectionsGet =
+    Scopes CloudKMSProjectsLocationsEkmConnectionsGet =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsEkmConnectionsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsEkmConnectionsGetResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsEkmConnectionsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudKMSProjectsLocationsEkmConnectionsGetResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Poly.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Poly.Internal.Product
@@ -89,7 +87,7 @@ module Gogol.Poly.Internal.Product
 where
 
 import Gogol.Poly.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Represents and describes an asset in the Poly library. An asset is a 3D model or scene created using <//www.tiltbrush.com Tilt Brush>, <//vr.google.com/blocks/ Blocks>, or any 3D program that produces a file that can be upload to Poly.
 --
@@ -182,8 +180,7 @@ instance Core.ToJSON Asset where
             ("license" Core..=) Core.<$> license,
             ("metadata" Core..=) Core.<$> metadata,
             ("name" Core..=) Core.<$> name,
-            ("presentationParams" Core..=)
-              Core.<$> presentationParams,
+            ("presentationParams" Core..=) Core.<$> presentationParams,
             ("remixInfo" Core..=) Core.<$> remixInfo,
             ("thumbnail" Core..=) Core.<$> thumbnail,
             ("updateTime" Core..=) Core.<$> updateTime,
@@ -326,8 +323,7 @@ instance Core.ToJSON Format where
   toJSON Format {..} =
     Core.object
       ( Core.catMaybes
-          [ ("formatComplexity" Core..=)
-              Core.<$> formatComplexity,
+          [ ("formatComplexity" Core..=) Core.<$> formatComplexity,
             ("formatType" Core..=) Core.<$> formatType,
             ("resources" Core..=) Core.<$> resources,
             ("root" Core..=) Core.<$> root
@@ -349,7 +345,10 @@ data FormatComplexity = FormatComplexity
 newFormatComplexity ::
   FormatComplexity
 newFormatComplexity =
-  FormatComplexity {lodHint = Core.Nothing, triangleCount = Core.Nothing}
+  FormatComplexity
+    { lodHint = Core.Nothing,
+      triangleCount = Core.Nothing
+    }
 
 instance Core.FromJSON FormatComplexity where
   parseJSON =
@@ -358,9 +357,7 @@ instance Core.FromJSON FormatComplexity where
       ( \o ->
           FormatComplexity
             Core.<$> (o Core..:? "lodHint")
-            Core.<*> ( o Core..:? "triangleCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "triangleCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON FormatComplexity where
@@ -368,7 +365,8 @@ instance Core.ToJSON FormatComplexity where
     Core.object
       ( Core.catMaybes
           [ ("lodHint" Core..=) Core.<$> lodHint,
-            ("triangleCount" Core..=) Core.. Core.AsText
+            ("triangleCount" Core..=)
+              Core.. Core.AsText
               Core.<$> triangleCount
           ]
       )
@@ -387,7 +385,8 @@ data ImageError = ImageError
 -- | Creates a value of 'ImageError' with the minimum fields required to make a request.
 newImageError ::
   ImageError
-newImageError = ImageError {code = Core.Nothing, filePath = Core.Nothing}
+newImageError =
+  ImageError {code = Core.Nothing, filePath = Core.Nothing}
 
 instance Core.FromJSON ImageError where
   parseJSON =
@@ -395,7 +394,8 @@ instance Core.FromJSON ImageError where
       "ImageError"
       ( \o ->
           ImageError
-            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "filePath")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "filePath")
       )
 
 instance Core.ToJSON ImageError where
@@ -636,11 +636,9 @@ instance Core.ToJSON PresentationParams where
   toJSON PresentationParams {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("colorSpace" Core..=) Core.<$> colorSpace,
-            ("orientingRotation" Core..=)
-              Core.<$> orientingRotation
+            ("orientingRotation" Core..=) Core.<$> orientingRotation
           ]
       )
 
@@ -711,16 +709,12 @@ instance Core.FromJSON RemixInfo where
   parseJSON =
     Core.withObject
       "RemixInfo"
-      ( \o ->
-          RemixInfo Core.<$> (o Core..:? "sourceAsset")
-      )
+      (\o -> RemixInfo Core.<$> (o Core..:? "sourceAsset"))
 
 instance Core.ToJSON RemixInfo where
   toJSON RemixInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("sourceAsset" Core..=) Core.<$> sourceAsset]
-      )
+      (Core.catMaybes [("sourceAsset" Core..=) Core.<$> sourceAsset])
 
 -- | A response message from a request to startImport. This is returned in the response field of the Operation.
 --
@@ -766,8 +760,7 @@ instance Core.ToJSON StartAssetImportResponse where
       ( Core.catMaybes
           [ ("assetId" Core..=) Core.<$> assetId,
             ("assetImportId" Core..=) Core.<$> assetImportId,
-            ("assetImportMessages" Core..=)
-              Core.<$> assetImportMessages,
+            ("assetImportMessages" Core..=) Core.<$> assetImportMessages,
             ("publishUrl" Core..=) Core.<$> publishUrl
           ]
       )
@@ -794,5 +787,4 @@ instance Core.FromJSON UserAsset where
 
 instance Core.ToJSON UserAsset where
   toJSON UserAsset {..} =
-    Core.object
-      (Core.catMaybes [("asset" Core..=) Core.<$> asset])
+    Core.object (Core.catMaybes [("asset" Core..=) Core.<$> asset])

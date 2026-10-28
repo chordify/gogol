@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Reseller.Subscriptions.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsReseller.Reseller.Subscriptions.Insert
 where
 
 import Gogol.AppsReseller.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reseller.subscriptions.insert@ method which the
 -- 'ResellerSubscriptionsInsert' request conforms to.
@@ -53,8 +51,10 @@ type ResellerSubscriptionsInsertResource =
     Core.:> "subscriptions"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "action" SubscriptionsInsertAction
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "customerAuthToken" Core.Text
+    Core.:> Core.QueryParam "sourceSkuId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -69,6 +69,8 @@ data ResellerSubscriptionsInsert = ResellerSubscriptionsInsert
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | The intented insert action. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
+    action :: (Core.Maybe SubscriptionsInsertAction),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | The @customerAuthToken@ query string is required when creating a resold account that transfers a direct customer\'s subscription or transfers another reseller customer\'s subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.
@@ -77,6 +79,8 @@ data ResellerSubscriptionsInsert = ResellerSubscriptionsInsert
     customerId :: Core.Text,
     -- | Multipart request metadata.
     payload :: Subscription,
+    -- | The sku_id of the existing subscription to be upgraded or downgraded. This is required when action is SWITCH. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
+    sourceSkuId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -95,29 +99,28 @@ newResellerSubscriptionsInsert customerId payload =
   ResellerSubscriptionsInsert
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
+      action = Core.Nothing,
       callback = Core.Nothing,
       customerAuthToken = Core.Nothing,
       customerId = customerId,
       payload = payload,
+      sourceSkuId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ResellerSubscriptionsInsert
-  where
+instance Core.GoogleRequest ResellerSubscriptionsInsert where
   type Rs ResellerSubscriptionsInsert = Subscription
-  type
-    Scopes ResellerSubscriptionsInsert =
-      '[Apps'Order]
+  type Scopes ResellerSubscriptionsInsert = '[Apps'Order]
   requestClient ResellerSubscriptionsInsert {..} =
     go
       customerId
       xgafv
       accessToken
+      action
       callback
       customerAuthToken
+      sourceSkuId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -126,7 +129,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ResellerSubscriptionsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy ResellerSubscriptionsInsertResource)
           Core.mempty

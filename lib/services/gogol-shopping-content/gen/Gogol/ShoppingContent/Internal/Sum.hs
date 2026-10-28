@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ShoppingContent.Internal.Sum
@@ -38,6 +36,15 @@ module Gogol.ShoppingContent.Internal.Sum
       ( AccountCredentials_Purpose_ACCOUNTCREDENTIALSPURPOSEUNSPECIFIED,
         AccountCredentials_Purpose_SHOPIFYORDERMANAGEMENT,
         AccountCredentials_Purpose_SHOPIFYINTEGRATION,
+        ..
+      ),
+
+    -- * AccountIssueImpact_Severity
+    AccountIssueImpact_Severity
+      ( AccountIssueImpact_Severity_SEVERITYUNSPECIFIED,
+        AccountIssueImpact_Severity_Error',
+        AccountIssueImpact_Severity_Warning,
+        AccountIssueImpact_Severity_Info,
         ..
       ),
 
@@ -109,43 +116,72 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
-    -- * BuyOnGoogleProgramStatus_BusinessModelItem
-    BuyOnGoogleProgramStatus_BusinessModelItem
-      ( BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED,
-        BuyOnGoogleProgramStatus_BusinessModelItem_Manufacturer,
-        BuyOnGoogleProgramStatus_BusinessModelItem_Importer,
-        BuyOnGoogleProgramStatus_BusinessModelItem_Reseller,
-        BuyOnGoogleProgramStatus_BusinessModelItem_Other,
+    -- * BuiltInSimpleAction_Type
+    BuiltInSimpleAction_Type
+      ( BuiltInSimpleAction_Type_BUILTINSIMPLEACTIONTYPEUNSPECIFIED,
+        BuiltInSimpleAction_Type_VERIFYPHONE,
+        BuiltInSimpleAction_Type_CLAIMWEBSITE,
+        BuiltInSimpleAction_Type_ADDPRODUCTS,
+        BuiltInSimpleAction_Type_ADDCONTACTINFO,
+        BuiltInSimpleAction_Type_LINKADSACCOUNT,
+        BuiltInSimpleAction_Type_ADDBUSINESSREGISTRATIONNUMBER,
+        BuiltInSimpleAction_Type_EDITITEMATTRIBUTE,
+        BuiltInSimpleAction_Type_FIXACCOUNTISSUE,
+        BuiltInSimpleAction_Type_SHOWADDITIONALCONTENT,
         ..
       ),
 
-    -- * BuyOnGoogleProgramStatus_OnlineSalesChannel
-    BuyOnGoogleProgramStatus_OnlineSalesChannel
-      ( BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED,
-        BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE,
-        BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES,
+    -- * Callout_StyleHint
+    Callout_StyleHint
+      ( Callout_StyleHint_CALLOUTSTYLEHINTUNSPECIFIED,
+        Callout_StyleHint_Error',
+        Callout_StyleHint_Warning,
+        Callout_StyleHint_Info,
         ..
       ),
 
-    -- * BuyOnGoogleProgramStatus_ParticipationStage
-    BuyOnGoogleProgramStatus_ParticipationStage
-      ( BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED,
-        BuyOnGoogleProgramStatus_ParticipationStage_NOTELIGIBLE,
-        BuyOnGoogleProgramStatus_ParticipationStage_Eligible,
-        BuyOnGoogleProgramStatus_ParticipationStage_Onboarding,
-        BuyOnGoogleProgramStatus_ParticipationStage_ELIGIBLEFORREVIEW,
-        BuyOnGoogleProgramStatus_ParticipationStage_PENDINGREVIEW,
-        BuyOnGoogleProgramStatus_ParticipationStage_REVIEWDISAPPROVED,
-        BuyOnGoogleProgramStatus_ParticipationStage_Active,
-        BuyOnGoogleProgramStatus_ParticipationStage_Paused,
+    -- * CheckoutSettings_EffectiveEnrollmentState
+    CheckoutSettings_EffectiveEnrollmentState
+      ( CheckoutSettings_EffectiveEnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED,
+        CheckoutSettings_EffectiveEnrollmentState_Inactive,
+        CheckoutSettings_EffectiveEnrollmentState_Enrolled,
+        CheckoutSettings_EffectiveEnrollmentState_OPTOUT,
         ..
       ),
 
-    -- * CaptureOrderResponse_ExecutionStatus
-    CaptureOrderResponse_ExecutionStatus
-      ( CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED,
-        CaptureOrderResponse_ExecutionStatus_Executed,
-        CaptureOrderResponse_ExecutionStatus_Duplicate,
+    -- * CheckoutSettings_EffectiveReviewState
+    CheckoutSettings_EffectiveReviewState
+      ( CheckoutSettings_EffectiveReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED,
+        CheckoutSettings_EffectiveReviewState_INREVIEW,
+        CheckoutSettings_EffectiveReviewState_Approved,
+        CheckoutSettings_EffectiveReviewState_Disapproved,
+        ..
+      ),
+
+    -- * CheckoutSettings_EnrollmentState
+    CheckoutSettings_EnrollmentState
+      ( CheckoutSettings_EnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED,
+        CheckoutSettings_EnrollmentState_Inactive,
+        CheckoutSettings_EnrollmentState_Enrolled,
+        CheckoutSettings_EnrollmentState_OPTOUT,
+        ..
+      ),
+
+    -- * CheckoutSettings_ReviewState
+    CheckoutSettings_ReviewState
+      ( CheckoutSettings_ReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED,
+        CheckoutSettings_ReviewState_INREVIEW,
+        CheckoutSettings_ReviewState_Approved,
+        CheckoutSettings_ReviewState_Disapproved,
+        ..
+      ),
+
+    -- * CompetitiveVisibility_TrafficSource
+    CompetitiveVisibility_TrafficSource
+      ( CompetitiveVisibility_TrafficSource_Unknown,
+        CompetitiveVisibility_TrafficSource_Organic,
+        CompetitiveVisibility_TrafficSource_Ads,
+        CompetitiveVisibility_TrafficSource_All,
         ..
       ),
 
@@ -155,6 +191,16 @@ module Gogol.ShoppingContent.Internal.Sum
         ConversionSource_State_Active,
         ConversionSource_State_Archived,
         ConversionSource_State_Pending,
+        ..
+      ),
+
+    -- * ExternalAction_Type
+    ExternalAction_Type
+      ( ExternalAction_Type_EXTERNALACTIONTYPEUNSPECIFIED,
+        ExternalAction_Type_REVIEWPRODUCTISSUEINMERCHANTCENTER,
+        ExternalAction_Type_REVIEWACCOUNTISSUEINMERCHANTCENTER,
+        ExternalAction_Type_LEGALAPPEALINHELPCENTER,
+        ExternalAction_Type_VERIFYIDENTITYINMERCHANTCENTER,
         ..
       ),
 
@@ -201,17 +247,11 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
-    -- * InapplicabilityDetails_InapplicableReason
-    InapplicabilityDetails_InapplicableReason
-      ( InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED,
-        InapplicabilityDetails_InapplicableReason_CANNOTBEATBUYBOXWINNER,
-        InapplicabilityDetails_InapplicableReason_ALREADYWINNINGBUYBOX,
-        InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYSAMETYPERULE,
-        InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYOTHERRULEONOFFER,
-        InapplicabilityDetails_InapplicableReason_RESTRICTIONSNOTMET,
-        InapplicabilityDetails_InapplicableReason_Uncategorized,
-        InapplicabilityDetails_InapplicableReason_INVALIDAUTOPRICEMIN,
-        InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG,
+    -- * InputFieldTextInput_Type
+    InputFieldTextInput_Type
+      ( InputFieldTextInput_Type_TEXTINPUTTYPEUNSPECIFIED,
+        InputFieldTextInput_Type_GENERICSHORTTEXT,
+        InputFieldTextInput_Type_GENERICLONGTEXT,
         ..
       ),
 
@@ -220,6 +260,15 @@ module Gogol.ShoppingContent.Internal.Sum
       ( OrderTrackingSignalShippingInfo_ShippingStatus_SHIPPINGSTATEUNSPECIFIED,
         OrderTrackingSignalShippingInfo_ShippingStatus_Shipped,
         OrderTrackingSignalShippingInfo_ShippingStatus_Delivered,
+        ..
+      ),
+
+    -- * PriceInsights_Effectiveness
+    PriceInsights_Effectiveness
+      ( PriceInsights_Effectiveness_EFFECTIVENESSUNSPECIFIED,
+        PriceInsights_Effectiveness_Low,
+        PriceInsights_Effectiveness_Medium,
+        PriceInsights_Effectiveness_High,
         ..
       ),
 
@@ -241,6 +290,23 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * ProductIssueImpact_Severity
+    ProductIssueImpact_Severity
+      ( ProductIssueImpact_Severity_SEVERITYUNSPECIFIED,
+        ProductIssueImpact_Severity_Error',
+        ProductIssueImpact_Severity_Warning,
+        ProductIssueImpact_Severity_Info,
+        ..
+      ),
+
+    -- * ProductSustainabilityIncentive_Type
+    ProductSustainabilityIncentive_Type
+      ( ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED,
+        ProductSustainabilityIncentive_Type_EVTAXCREDIT,
+        ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT,
+        ..
+      ),
+
     -- * ProductView_AggregatedDestinationStatus
     ProductView_AggregatedDestinationStatus
       ( ProductView_AggregatedDestinationStatus_AGGREGATEDSTATUSUNSPECIFIED,
@@ -256,6 +322,15 @@ module Gogol.ShoppingContent.Internal.Sum
       ( ProductView_Channel_CHANNELUNSPECIFIED,
         ProductView_Channel_Local,
         ProductView_Channel_Online,
+        ..
+      ),
+
+    -- * ProductView_ClickPotential
+    ProductView_ClickPotential
+      ( ProductView_ClickPotential_CLICKPOTENTIALUNSPECIFIED,
+        ProductView_ClickPotential_Low,
+        ProductView_ClickPotential_Medium,
+        ProductView_ClickPotential_High,
         ..
       ),
 
@@ -354,49 +429,41 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * RenderAccountIssuesRequestPayload_ContentOption
+    RenderAccountIssuesRequestPayload_ContentOption
+      ( RenderAccountIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED,
+        RenderAccountIssuesRequestPayload_ContentOption_PRERENDEREDHTML,
+        ..
+      ),
+
+    -- * RenderAccountIssuesRequestPayload_UserInputActionOption
+    RenderAccountIssuesRequestPayload_UserInputActionOption
+      ( RenderAccountIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED,
+        RenderAccountIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER,
+        RenderAccountIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS,
+        ..
+      ),
+
+    -- * RenderProductIssuesRequestPayload_ContentOption
+    RenderProductIssuesRequestPayload_ContentOption
+      ( RenderProductIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED,
+        RenderProductIssuesRequestPayload_ContentOption_PRERENDEREDHTML,
+        ..
+      ),
+
+    -- * RenderProductIssuesRequestPayload_UserInputActionOption
+    RenderProductIssuesRequestPayload_UserInputActionOption
+      ( RenderProductIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED,
+        RenderProductIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER,
+        RenderProductIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS,
+        ..
+      ),
+
     -- * ReportInteractionRequest_InteractionType
     ReportInteractionRequest_InteractionType
       ( ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED,
+        ReportInteractionRequest_InteractionType_INTERACTIONDISMISS,
         ReportInteractionRequest_InteractionType_INTERACTIONCLICK,
-        ..
-      ),
-
-    -- * RepricingProductReport_Type
-    RepricingProductReport_Type
-      ( RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED,
-        RepricingProductReport_Type_TYPESTATSBASED,
-        RepricingProductReport_Type_TYPECOGSBASED,
-        RepricingProductReport_Type_TYPESALESVOLUMEBASED,
-        RepricingProductReport_Type_TYPECOMPETITIVEPRICE,
-        ..
-      ),
-
-    -- * RepricingRule_Type
-    RepricingRule_Type
-      ( RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED,
-        RepricingRule_Type_TYPESTATSBASED,
-        RepricingRule_Type_TYPECOGSBASED,
-        RepricingRule_Type_TYPESALESVOLUMEBASED,
-        RepricingRule_Type_TYPECOMPETITIVEPRICE,
-        ..
-      ),
-
-    -- * RepricingRuleEligibleOfferMatcher_MatcherOption
-    RepricingRuleEligibleOfferMatcher_MatcherOption
-      ( RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED,
-        RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER,
-        RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE,
-        RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS,
-        ..
-      ),
-
-    -- * RepricingRuleReport_Type
-    RepricingRuleReport_Type
-      ( RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED,
-        RepricingRuleReport_Type_TYPESTATSBASED,
-        RepricingRuleReport_Type_TYPECOGSBASED,
-        RepricingRuleReport_Type_TYPESALESVOLUMEBASED,
-        RepricingRuleReport_Type_TYPECOMPETITIVEPRICE,
         ..
       ),
 
@@ -512,6 +579,14 @@ module Gogol.ShoppingContent.Internal.Sum
         ..
       ),
 
+    -- * TextWithTooltip_TooltipIconStyle
+    TextWithTooltip_TooltipIconStyle
+      ( TextWithTooltip_TooltipIconStyle_TOOLTIPICONSTYLEUNSPECIFIED,
+        TextWithTooltip_TooltipIconStyle_Info,
+        TextWithTooltip_TooltipIconStyle_Question,
+        ..
+      ),
+
     -- * VerifyPhoneNumberRequest_PhoneVerificationMethod
     VerifyPhoneNumberRequest_PhoneVerificationMethod
       ( VerifyPhoneNumberRequest_PhoneVerificationMethod_PHONEVERIFICATIONMETHODUNSPECIFIED,
@@ -533,70 +608,10 @@ module Gogol.ShoppingContent.Internal.Sum
         AccountsListView_Css,
         ..
       ),
-
-    -- * OrderreturnsListOrderBy
-    OrderreturnsListOrderBy
-      ( OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC,
-        OrderreturnsListOrderBy_RETURNCREATIONTIMEASC,
-        ..
-      ),
-
-    -- * OrderreturnsListShipmentStates
-    OrderreturnsListShipmentStates
-      ( OrderreturnsListShipmentStates_New,
-        OrderreturnsListShipmentStates_Shipped,
-        OrderreturnsListShipmentStates_Completed,
-        OrderreturnsListShipmentStates_Undeliverable,
-        OrderreturnsListShipmentStates_Pending,
-        ..
-      ),
-
-    -- * OrderreturnsListShipmentStatus
-    OrderreturnsListShipmentStatus
-      ( OrderreturnsListShipmentStatus_New,
-        OrderreturnsListShipmentStatus_INPROGRESS,
-        OrderreturnsListShipmentStatus_Processed,
-        ..
-      ),
-
-    -- * OrderreturnsListShipmentTypes
-    OrderreturnsListShipmentTypes
-      ( OrderreturnsListShipmentTypes_BYMAIL,
-        OrderreturnsListShipmentTypes_Returnless,
-        OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT,
-        ..
-      ),
-
-    -- * OrdersGettestordertemplateTemplateName
-    OrdersGettestordertemplateTemplateName
-      ( OrdersGettestordertemplateTemplateName_TEMPLATE1,
-        OrdersGettestordertemplateTemplateName_TEMPLATE2,
-        OrdersGettestordertemplateTemplateName_TEMPLATE1A,
-        OrdersGettestordertemplateTemplateName_TEMPLATE1B,
-        OrdersGettestordertemplateTemplateName_TEMPLATE3,
-        OrdersGettestordertemplateTemplateName_TEMPLATE4,
-        ..
-      ),
-
-    -- * OrdersListStatuses
-    OrdersListStatuses
-      ( OrdersListStatuses_Active,
-        OrdersListStatuses_Completed,
-        OrdersListStatuses_Canceled,
-        OrdersListStatuses_INPROGRESS,
-        OrdersListStatuses_PENDINGSHIPMENT,
-        OrdersListStatuses_PARTIALLYSHIPPED,
-        OrdersListStatuses_Shipped,
-        OrdersListStatuses_PARTIALLYDELIVERED,
-        OrdersListStatuses_Delivered,
-        OrdersListStatuses_PARTIALLYRETURNED,
-        OrdersListStatuses_Returned,
-        ..
-      ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -655,6 +670,43 @@ pattern AccountCredentials_Purpose_SHOPIFYINTEGRATION = AccountCredentials_Purpo
   AccountCredentials_Purpose_SHOPIFYORDERMANAGEMENT,
   AccountCredentials_Purpose_SHOPIFYINTEGRATION,
   AccountCredentials_Purpose
+  #-}
+
+-- | The severity of the issue.
+newtype AccountIssueImpact_Severity = AccountIssueImpact_Severity {fromAccountIssueImpact_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern AccountIssueImpact_Severity_SEVERITYUNSPECIFIED :: AccountIssueImpact_Severity
+pattern AccountIssueImpact_Severity_SEVERITYUNSPECIFIED = AccountIssueImpact_Severity "SEVERITY_UNSPECIFIED"
+
+-- | Causes either an account suspension or an item disapproval. Errors should be resolved as soon as possible to ensure items are eligible to appear in results again.
+pattern AccountIssueImpact_Severity_Error' :: AccountIssueImpact_Severity
+pattern AccountIssueImpact_Severity_Error' = AccountIssueImpact_Severity "ERROR"
+
+-- | Warnings can negatively impact the performance of ads and can lead to item or account suspensions in the future unless the issue is resolved.
+pattern AccountIssueImpact_Severity_Warning :: AccountIssueImpact_Severity
+pattern AccountIssueImpact_Severity_Warning = AccountIssueImpact_Severity "WARNING"
+
+-- | Infos are suggested optimizations to increase data quality. Resolving these issues is recommended, but not required.
+pattern AccountIssueImpact_Severity_Info :: AccountIssueImpact_Severity
+pattern AccountIssueImpact_Severity_Info = AccountIssueImpact_Severity "INFO"
+
+{-# COMPLETE
+  AccountIssueImpact_Severity_SEVERITYUNSPECIFIED,
+  AccountIssueImpact_Severity_Error',
+  AccountIssueImpact_Severity_Warning,
+  AccountIssueImpact_Severity_Info,
+  AccountIssueImpact_Severity
   #-}
 
 -- | Output only. The type of this label.
@@ -721,7 +773,6 @@ pattern AccountReturnCarrier_CarrierCode_Ups = AccountReturnCarrier_CarrierCode 
   AccountReturnCarrier_CarrierCode
   #-}
 
--- | Required. Attribution model.
 newtype AttributionSettings_AttributionModel = AttributionSettings_AttributionModel {fromAttributionSettings_AttributionModel :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -734,7 +785,6 @@ newtype AttributionSettings_AttributionModel = AttributionSettings_AttributionMo
       Core.FromJSONKey
     )
 
--- |
 pattern AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED :: AttributionSettings_AttributionModel
 pattern AttributionSettings_AttributionModel_ATTRIBUTIONMODELUNSPECIFIED = AttributionSettings_AttributionModel "ATTRIBUTION_MODEL_UNSPECIFIED"
 
@@ -750,7 +800,7 @@ pattern AttributionSettings_AttributionModel_ADSPREFERREDLASTCLICK = Attribution
 pattern AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN :: AttributionSettings_AttributionModel
 pattern AttributionSettings_AttributionModel_CROSSCHANNELDATADRIVEN = AttributionSettings_AttributionModel "CROSS_CHANNEL_DATA_DRIVEN"
 
--- | Cross-channel Frist Click model.
+-- | Cross-channel First Click model.
 pattern AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK :: AttributionSettings_AttributionModel
 pattern AttributionSettings_AttributionModel_CROSSCHANNELFIRSTCLICK = AttributionSettings_AttributionModel "CROSS_CHANNEL_FIRST_CLICK"
 
@@ -941,7 +991,8 @@ pattern BestSellers_ReportGranularity_Monthly = BestSellers_ReportGranularity "M
   BestSellers_ReportGranularity
   #-}
 
-newtype BuyOnGoogleProgramStatus_BusinessModelItem = BuyOnGoogleProgramStatus_BusinessModelItem {fromBuyOnGoogleProgramStatus_BusinessModelItem :: Core.Text}
+-- | The type of action that represents a functionality that is expected to be available in third-party application.
+newtype BuiltInSimpleAction_Type = BuiltInSimpleAction_Type {fromBuiltInSimpleAction_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
     ( Core.Hashable,
@@ -953,37 +1004,62 @@ newtype BuyOnGoogleProgramStatus_BusinessModelItem = BuyOnGoogleProgramStatus_Bu
       Core.FromJSONKey
     )
 
--- | Default value when business model is not set.
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED :: BuyOnGoogleProgramStatus_BusinessModelItem
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED = BuyOnGoogleProgramStatus_BusinessModelItem "BUSINESS_MODEL_UNSPECIFIED"
+-- | Default value. Will never be provided by the API.
+pattern BuiltInSimpleAction_Type_BUILTINSIMPLEACTIONTYPEUNSPECIFIED :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_BUILTINSIMPLEACTIONTYPEUNSPECIFIED = BuiltInSimpleAction_Type "BUILT_IN_SIMPLE_ACTION_TYPE_UNSPECIFIED"
 
--- | Merchant is a manufacturer.
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Manufacturer :: BuyOnGoogleProgramStatus_BusinessModelItem
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Manufacturer = BuyOnGoogleProgramStatus_BusinessModelItem "MANUFACTURER"
+-- | Redirect merchant to the part of your application where they can verify their phone.
+pattern BuiltInSimpleAction_Type_VERIFYPHONE :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_VERIFYPHONE = BuiltInSimpleAction_Type "VERIFY_PHONE"
 
--- | Merchant is an importer.
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Importer :: BuyOnGoogleProgramStatus_BusinessModelItem
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Importer = BuyOnGoogleProgramStatus_BusinessModelItem "IMPORTER"
+-- | Redirect merchant to the part of your application where they can claim their website.
+pattern BuiltInSimpleAction_Type_CLAIMWEBSITE :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_CLAIMWEBSITE = BuiltInSimpleAction_Type "CLAIM_WEBSITE"
 
--- | Merchant is a reseller.
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Reseller :: BuyOnGoogleProgramStatus_BusinessModelItem
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Reseller = BuyOnGoogleProgramStatus_BusinessModelItem "RESELLER"
+-- | Redirect merchant to the part of your application where they can add products.
+pattern BuiltInSimpleAction_Type_ADDPRODUCTS :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_ADDPRODUCTS = BuiltInSimpleAction_Type "ADD_PRODUCTS"
 
--- | Merchant has a different business model.
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Other :: BuyOnGoogleProgramStatus_BusinessModelItem
-pattern BuyOnGoogleProgramStatus_BusinessModelItem_Other = BuyOnGoogleProgramStatus_BusinessModelItem "OTHER"
+-- | Open a form where the merchant can edit their contact information.
+pattern BuiltInSimpleAction_Type_ADDCONTACTINFO :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_ADDCONTACTINFO = BuiltInSimpleAction_Type "ADD_CONTACT_INFO"
+
+-- | Redirect merchant to the part of your application where they can link ads account.
+pattern BuiltInSimpleAction_Type_LINKADSACCOUNT :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_LINKADSACCOUNT = BuiltInSimpleAction_Type "LINK_ADS_ACCOUNT"
+
+-- | Open a form where the merchant can add their business registration number.
+pattern BuiltInSimpleAction_Type_ADDBUSINESSREGISTRATIONNUMBER :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_ADDBUSINESSREGISTRATIONNUMBER = BuiltInSimpleAction_Type "ADD_BUSINESS_REGISTRATION_NUMBER"
+
+-- | Open a form where the merchant can edit an attribute. The attribute that needs to be updated is specified in attribute_code field of the action.
+pattern BuiltInSimpleAction_Type_EDITITEMATTRIBUTE :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_EDITITEMATTRIBUTE = BuiltInSimpleAction_Type "EDIT_ITEM_ATTRIBUTE"
+
+-- | Redirect merchant from the product issues to the diagnostic page with their account issues in your application. This action will be returned only for product issues that are caused by an account issue and thus merchant should resolve the problem on the account level.
+pattern BuiltInSimpleAction_Type_FIXACCOUNTISSUE :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_FIXACCOUNTISSUE = BuiltInSimpleAction_Type "FIX_ACCOUNT_ISSUE"
+
+-- | Show additional content to the merchant. This action will be used for example to deliver a justification from national authority.
+pattern BuiltInSimpleAction_Type_SHOWADDITIONALCONTENT :: BuiltInSimpleAction_Type
+pattern BuiltInSimpleAction_Type_SHOWADDITIONALCONTENT = BuiltInSimpleAction_Type "SHOW_ADDITIONAL_CONTENT"
 
 {-# COMPLETE
-  BuyOnGoogleProgramStatus_BusinessModelItem_BUSINESSMODELUNSPECIFIED,
-  BuyOnGoogleProgramStatus_BusinessModelItem_Manufacturer,
-  BuyOnGoogleProgramStatus_BusinessModelItem_Importer,
-  BuyOnGoogleProgramStatus_BusinessModelItem_Reseller,
-  BuyOnGoogleProgramStatus_BusinessModelItem_Other,
-  BuyOnGoogleProgramStatus_BusinessModelItem
+  BuiltInSimpleAction_Type_BUILTINSIMPLEACTIONTYPEUNSPECIFIED,
+  BuiltInSimpleAction_Type_VERIFYPHONE,
+  BuiltInSimpleAction_Type_CLAIMWEBSITE,
+  BuiltInSimpleAction_Type_ADDPRODUCTS,
+  BuiltInSimpleAction_Type_ADDCONTACTINFO,
+  BuiltInSimpleAction_Type_LINKADSACCOUNT,
+  BuiltInSimpleAction_Type_ADDBUSINESSREGISTRATIONNUMBER,
+  BuiltInSimpleAction_Type_EDITITEMATTRIBUTE,
+  BuiltInSimpleAction_Type_FIXACCOUNTISSUE,
+  BuiltInSimpleAction_Type_SHOWADDITIONALCONTENT,
+  BuiltInSimpleAction_Type
   #-}
 
--- | The channels through which the merchant is selling.
-newtype BuyOnGoogleProgramStatus_OnlineSalesChannel = BuyOnGoogleProgramStatus_OnlineSalesChannel {fromBuyOnGoogleProgramStatus_OnlineSalesChannel :: Core.Text}
+-- | Can be used to render messages with different severity in different styles. Snippets off all types contain important information that should be displayed to merchants.
+newtype Callout_StyleHint = Callout_StyleHint {fromCallout_StyleHint :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
     ( Core.Hashable,
@@ -995,27 +1071,32 @@ newtype BuyOnGoogleProgramStatus_OnlineSalesChannel = BuyOnGoogleProgramStatus_O
       Core.FromJSONKey
     )
 
--- | Default value when online sales channel is not set.
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED :: BuyOnGoogleProgramStatus_OnlineSalesChannel
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED = BuyOnGoogleProgramStatus_OnlineSalesChannel "ONLINE_SALES_CHANNEL_UNSPECIFIED"
+-- | Default value. Will never be provided by the API.
+pattern Callout_StyleHint_CALLOUTSTYLEHINTUNSPECIFIED :: Callout_StyleHint
+pattern Callout_StyleHint_CALLOUTSTYLEHINTUNSPECIFIED = Callout_StyleHint "CALLOUT_STYLE_HINT_UNSPECIFIED"
 
--- | Merchant is selling exclusively on Google.
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE :: BuyOnGoogleProgramStatus_OnlineSalesChannel
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE = BuyOnGoogleProgramStatus_OnlineSalesChannel "GOOGLE_EXCLUSIVE"
+-- | The most important type of information highlighting problems, like an unsuccessful outcome of previously requested actions.
+pattern Callout_StyleHint_Error' :: Callout_StyleHint
+pattern Callout_StyleHint_Error' = Callout_StyleHint "ERROR"
 
--- | Merchant is selling on Google and other websites.
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES :: BuyOnGoogleProgramStatus_OnlineSalesChannel
-pattern BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES = BuyOnGoogleProgramStatus_OnlineSalesChannel "GOOGLE_AND_OTHER_WEBSITES"
+-- | Information warning about pending problems, risks or deadlines.
+pattern Callout_StyleHint_Warning :: Callout_StyleHint
+pattern Callout_StyleHint_Warning = Callout_StyleHint "WARNING"
+
+-- | Default severity for important information like pending status of previously requested action or cooldown for re-review.
+pattern Callout_StyleHint_Info :: Callout_StyleHint
+pattern Callout_StyleHint_Info = Callout_StyleHint "INFO"
 
 {-# COMPLETE
-  BuyOnGoogleProgramStatus_OnlineSalesChannel_ONLINESALESCHANNELUNSPECIFIED,
-  BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEEXCLUSIVE,
-  BuyOnGoogleProgramStatus_OnlineSalesChannel_GOOGLEANDOTHERWEBSITES,
-  BuyOnGoogleProgramStatus_OnlineSalesChannel
+  Callout_StyleHint_CALLOUTSTYLEHINTUNSPECIFIED,
+  Callout_StyleHint_Error',
+  Callout_StyleHint_Warning,
+  Callout_StyleHint_Info,
+  Callout_StyleHint
   #-}
 
--- | Output only. The current participation stage for the program.
-newtype BuyOnGoogleProgramStatus_ParticipationStage = BuyOnGoogleProgramStatus_ParticipationStage {fromBuyOnGoogleProgramStatus_ParticipationStage :: Core.Text}
+-- | Output only. The effective value of enrollment state for a given merchant ID. If account level settings are present then this value will be a copy of the account level settings. Otherwise, it will have the value of the parent account.
+newtype CheckoutSettings_EffectiveEnrollmentState = CheckoutSettings_EffectiveEnrollmentState {fromCheckoutSettings_EffectiveEnrollmentState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
     ( Core.Hashable,
@@ -1027,57 +1108,32 @@ newtype BuyOnGoogleProgramStatus_ParticipationStage = BuyOnGoogleProgramStatus_P
       Core.FromJSONKey
     )
 
--- | Default value when participation stage is not set.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED = BuyOnGoogleProgramStatus_ParticipationStage "PROGRAM_PARTICIPATION_STAGE_UNSPECIFIED"
+-- | Default enrollment state when enrollment state is not specified.
+pattern CheckoutSettings_EffectiveEnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED :: CheckoutSettings_EffectiveEnrollmentState
+pattern CheckoutSettings_EffectiveEnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED = CheckoutSettings_EffectiveEnrollmentState "CHECKOUT_ON_MERCHANT_ENROLLMENT_STATE_UNSPECIFIED"
 
--- | Merchant is not eligible for onboarding to a given program in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_NOTELIGIBLE :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_NOTELIGIBLE = BuyOnGoogleProgramStatus_ParticipationStage "NOT_ELIGIBLE"
+-- | Merchant has not enrolled into the feature.
+pattern CheckoutSettings_EffectiveEnrollmentState_Inactive :: CheckoutSettings_EffectiveEnrollmentState
+pattern CheckoutSettings_EffectiveEnrollmentState_Inactive = CheckoutSettings_EffectiveEnrollmentState "INACTIVE"
 
--- | Merchant is eligible for onboarding to a given program in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Eligible :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Eligible = BuyOnGoogleProgramStatus_ParticipationStage "ELIGIBLE"
+-- | Merchant has enrolled into the feature by providing either an account level URL or checkout URLs as part of their feed.
+pattern CheckoutSettings_EffectiveEnrollmentState_Enrolled :: CheckoutSettings_EffectiveEnrollmentState
+pattern CheckoutSettings_EffectiveEnrollmentState_Enrolled = CheckoutSettings_EffectiveEnrollmentState "ENROLLED"
 
--- | Merchant is onboarding to a given program in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Onboarding :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Onboarding = BuyOnGoogleProgramStatus_ParticipationStage "ONBOARDING"
-
--- | Merchant fulfilled all the requirements and is ready to request review in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_ELIGIBLEFORREVIEW :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_ELIGIBLEFORREVIEW = BuyOnGoogleProgramStatus_ParticipationStage "ELIGIBLE_FOR_REVIEW"
-
--- | Merchant is waiting for the review to be completed in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_PENDINGREVIEW :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_PENDINGREVIEW = BuyOnGoogleProgramStatus_ParticipationStage "PENDING_REVIEW"
-
--- | The review for a merchant has been rejected in a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_REVIEWDISAPPROVED :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_REVIEWDISAPPROVED = BuyOnGoogleProgramStatus_ParticipationStage "REVIEW_DISAPPROVED"
-
--- | Merchant\'s program participation is active for a specific region code.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Active :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Active = BuyOnGoogleProgramStatus_ParticipationStage "ACTIVE"
-
--- | Participation has been paused.
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Paused :: BuyOnGoogleProgramStatus_ParticipationStage
-pattern BuyOnGoogleProgramStatus_ParticipationStage_Paused = BuyOnGoogleProgramStatus_ParticipationStage "PAUSED"
+-- | Merchant has previously enrolled but opted out of the feature.
+pattern CheckoutSettings_EffectiveEnrollmentState_OPTOUT :: CheckoutSettings_EffectiveEnrollmentState
+pattern CheckoutSettings_EffectiveEnrollmentState_OPTOUT = CheckoutSettings_EffectiveEnrollmentState "OPT_OUT"
 
 {-# COMPLETE
-  BuyOnGoogleProgramStatus_ParticipationStage_PROGRAMPARTICIPATIONSTAGEUNSPECIFIED,
-  BuyOnGoogleProgramStatus_ParticipationStage_NOTELIGIBLE,
-  BuyOnGoogleProgramStatus_ParticipationStage_Eligible,
-  BuyOnGoogleProgramStatus_ParticipationStage_Onboarding,
-  BuyOnGoogleProgramStatus_ParticipationStage_ELIGIBLEFORREVIEW,
-  BuyOnGoogleProgramStatus_ParticipationStage_PENDINGREVIEW,
-  BuyOnGoogleProgramStatus_ParticipationStage_REVIEWDISAPPROVED,
-  BuyOnGoogleProgramStatus_ParticipationStage_Active,
-  BuyOnGoogleProgramStatus_ParticipationStage_Paused,
-  BuyOnGoogleProgramStatus_ParticipationStage
+  CheckoutSettings_EffectiveEnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED,
+  CheckoutSettings_EffectiveEnrollmentState_Inactive,
+  CheckoutSettings_EffectiveEnrollmentState_Enrolled,
+  CheckoutSettings_EffectiveEnrollmentState_OPTOUT,
+  CheckoutSettings_EffectiveEnrollmentState
   #-}
 
--- | The status of the execution. Only defined if the request was successful. Acceptable values are: * \"duplicate\" * \"executed\"
-newtype CaptureOrderResponse_ExecutionStatus = CaptureOrderResponse_ExecutionStatus {fromCaptureOrderResponse_ExecutionStatus :: Core.Text}
+-- | Output only. The effective value of review state for a given merchant ID. If account level settings are present then this value will be a copy of the account level settings. Otherwise, it will have the value of the parent account.
+newtype CheckoutSettings_EffectiveReviewState = CheckoutSettings_EffectiveReviewState {fromCheckoutSettings_EffectiveReviewState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
     ( Core.Hashable,
@@ -1089,23 +1145,139 @@ newtype CaptureOrderResponse_ExecutionStatus = CaptureOrderResponse_ExecutionSta
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED :: CaptureOrderResponse_ExecutionStatus
-pattern CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED = CaptureOrderResponse_ExecutionStatus "EXECUTION_STATUS_UNSPECIFIED"
+-- | Default review state when review state is not specified.
+pattern CheckoutSettings_EffectiveReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED :: CheckoutSettings_EffectiveReviewState
+pattern CheckoutSettings_EffectiveReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED = CheckoutSettings_EffectiveReviewState "CHECKOUT_ON_MERCHANT_REVIEW_STATE_UNSPECIFIED"
 
--- | The request was completed successfully.
-pattern CaptureOrderResponse_ExecutionStatus_Executed :: CaptureOrderResponse_ExecutionStatus
-pattern CaptureOrderResponse_ExecutionStatus_Executed = CaptureOrderResponse_ExecutionStatus "EXECUTED"
+-- | Merchant provided URLs are being reviewed for data quality issues.
+pattern CheckoutSettings_EffectiveReviewState_INREVIEW :: CheckoutSettings_EffectiveReviewState
+pattern CheckoutSettings_EffectiveReviewState_INREVIEW = CheckoutSettings_EffectiveReviewState "IN_REVIEW"
 
--- | The request was not performed because it already executed once successfully.
-pattern CaptureOrderResponse_ExecutionStatus_Duplicate :: CaptureOrderResponse_ExecutionStatus
-pattern CaptureOrderResponse_ExecutionStatus_Duplicate = CaptureOrderResponse_ExecutionStatus "DUPLICATE"
+-- | Merchant account has been approved. Indicates the data quality checks have passed.
+pattern CheckoutSettings_EffectiveReviewState_Approved :: CheckoutSettings_EffectiveReviewState
+pattern CheckoutSettings_EffectiveReviewState_Approved = CheckoutSettings_EffectiveReviewState "APPROVED"
+
+-- | Merchant account has been disapproved due to data quality issues.
+pattern CheckoutSettings_EffectiveReviewState_Disapproved :: CheckoutSettings_EffectiveReviewState
+pattern CheckoutSettings_EffectiveReviewState_Disapproved = CheckoutSettings_EffectiveReviewState "DISAPPROVED"
 
 {-# COMPLETE
-  CaptureOrderResponse_ExecutionStatus_EXECUTIONSTATUSUNSPECIFIED,
-  CaptureOrderResponse_ExecutionStatus_Executed,
-  CaptureOrderResponse_ExecutionStatus_Duplicate,
-  CaptureOrderResponse_ExecutionStatus
+  CheckoutSettings_EffectiveReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED,
+  CheckoutSettings_EffectiveReviewState_INREVIEW,
+  CheckoutSettings_EffectiveReviewState_Approved,
+  CheckoutSettings_EffectiveReviewState_Disapproved,
+  CheckoutSettings_EffectiveReviewState
+  #-}
+
+-- | Output only. Reflects the merchant enrollment state in @Checkout@ feature.
+newtype CheckoutSettings_EnrollmentState = CheckoutSettings_EnrollmentState {fromCheckoutSettings_EnrollmentState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default enrollment state when enrollment state is not specified.
+pattern CheckoutSettings_EnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED :: CheckoutSettings_EnrollmentState
+pattern CheckoutSettings_EnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED = CheckoutSettings_EnrollmentState "CHECKOUT_ON_MERCHANT_ENROLLMENT_STATE_UNSPECIFIED"
+
+-- | Merchant has not enrolled into the feature.
+pattern CheckoutSettings_EnrollmentState_Inactive :: CheckoutSettings_EnrollmentState
+pattern CheckoutSettings_EnrollmentState_Inactive = CheckoutSettings_EnrollmentState "INACTIVE"
+
+-- | Merchant has enrolled into the feature by providing either an account level URL or checkout URLs as part of their feed.
+pattern CheckoutSettings_EnrollmentState_Enrolled :: CheckoutSettings_EnrollmentState
+pattern CheckoutSettings_EnrollmentState_Enrolled = CheckoutSettings_EnrollmentState "ENROLLED"
+
+-- | Merchant has previously enrolled but opted out of the feature.
+pattern CheckoutSettings_EnrollmentState_OPTOUT :: CheckoutSettings_EnrollmentState
+pattern CheckoutSettings_EnrollmentState_OPTOUT = CheckoutSettings_EnrollmentState "OPT_OUT"
+
+{-# COMPLETE
+  CheckoutSettings_EnrollmentState_CHECKOUTONMERCHANTENROLLMENTSTATEUNSPECIFIED,
+  CheckoutSettings_EnrollmentState_Inactive,
+  CheckoutSettings_EnrollmentState_Enrolled,
+  CheckoutSettings_EnrollmentState_OPTOUT,
+  CheckoutSettings_EnrollmentState
+  #-}
+
+-- | Output only. Reflects the merchant review state in @Checkout@ feature. This is set based on the data quality reviews of the URL provided by the merchant. A merchant with enrollment state as @ENROLLED@ can be in the following review states: @IN_REVIEW@, @APPROVED@ or @DISAPPROVED@. A merchant must be in an enrollment_state of @ENROLLED@ before a review can begin for the merchant.
+newtype CheckoutSettings_ReviewState = CheckoutSettings_ReviewState {fromCheckoutSettings_ReviewState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default review state when review state is not specified.
+pattern CheckoutSettings_ReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED :: CheckoutSettings_ReviewState
+pattern CheckoutSettings_ReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED = CheckoutSettings_ReviewState "CHECKOUT_ON_MERCHANT_REVIEW_STATE_UNSPECIFIED"
+
+-- | Merchant provided URLs are being reviewed for data quality issues.
+pattern CheckoutSettings_ReviewState_INREVIEW :: CheckoutSettings_ReviewState
+pattern CheckoutSettings_ReviewState_INREVIEW = CheckoutSettings_ReviewState "IN_REVIEW"
+
+-- | Merchant account has been approved. Indicates the data quality checks have passed.
+pattern CheckoutSettings_ReviewState_Approved :: CheckoutSettings_ReviewState
+pattern CheckoutSettings_ReviewState_Approved = CheckoutSettings_ReviewState "APPROVED"
+
+-- | Merchant account has been disapproved due to data quality issues.
+pattern CheckoutSettings_ReviewState_Disapproved :: CheckoutSettings_ReviewState
+pattern CheckoutSettings_ReviewState_Disapproved = CheckoutSettings_ReviewState "DISAPPROVED"
+
+{-# COMPLETE
+  CheckoutSettings_ReviewState_CHECKOUTONMERCHANTREVIEWSTATEUNSPECIFIED,
+  CheckoutSettings_ReviewState_INREVIEW,
+  CheckoutSettings_ReviewState_Approved,
+  CheckoutSettings_ReviewState_Disapproved,
+  CheckoutSettings_ReviewState
+  #-}
+
+-- | Type of impression listing. Required in the @SELECT@ clause. Cannot be filtered on in the \'WHERE\' clause.
+newtype CompetitiveVisibility_TrafficSource = CompetitiveVisibility_TrafficSource {fromCompetitiveVisibility_TrafficSource :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Traffic source is unknown.
+pattern CompetitiveVisibility_TrafficSource_Unknown :: CompetitiveVisibility_TrafficSource
+pattern CompetitiveVisibility_TrafficSource_Unknown = CompetitiveVisibility_TrafficSource "UNKNOWN"
+
+-- | Organic traffic.
+pattern CompetitiveVisibility_TrafficSource_Organic :: CompetitiveVisibility_TrafficSource
+pattern CompetitiveVisibility_TrafficSource_Organic = CompetitiveVisibility_TrafficSource "ORGANIC"
+
+-- | Traffic from Ads.
+pattern CompetitiveVisibility_TrafficSource_Ads :: CompetitiveVisibility_TrafficSource
+pattern CompetitiveVisibility_TrafficSource_Ads = CompetitiveVisibility_TrafficSource "ADS"
+
+-- | Organic and Ads traffic.
+pattern CompetitiveVisibility_TrafficSource_All :: CompetitiveVisibility_TrafficSource
+pattern CompetitiveVisibility_TrafficSource_All = CompetitiveVisibility_TrafficSource "ALL"
+
+{-# COMPLETE
+  CompetitiveVisibility_TrafficSource_Unknown,
+  CompetitiveVisibility_TrafficSource_Organic,
+  CompetitiveVisibility_TrafficSource_Ads,
+  CompetitiveVisibility_TrafficSource_All,
+  CompetitiveVisibility_TrafficSource
   #-}
 
 -- | Output only. Current state of this conversion source. Can\'t be edited through the API.
@@ -1121,7 +1293,6 @@ newtype ConversionSource_State = ConversionSource_State {fromConversionSource_St
       Core.FromJSONKey
     )
 
--- |
 pattern ConversionSource_State_STATEUNSPECIFIED :: ConversionSource_State
 pattern ConversionSource_State_STATEUNSPECIFIED = ConversionSource_State "STATE_UNSPECIFIED"
 
@@ -1143,6 +1314,48 @@ pattern ConversionSource_State_Pending = ConversionSource_State "PENDING"
   ConversionSource_State_Archived,
   ConversionSource_State_Pending,
   ConversionSource_State
+  #-}
+
+-- | The type of external action.
+newtype ExternalAction_Type = ExternalAction_Type {fromExternalAction_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern ExternalAction_Type_EXTERNALACTIONTYPEUNSPECIFIED :: ExternalAction_Type
+pattern ExternalAction_Type_EXTERNALACTIONTYPEUNSPECIFIED = ExternalAction_Type "EXTERNAL_ACTION_TYPE_UNSPECIFIED"
+
+-- | Redirect to Merchant Center where the merchant can request a review for issue related to their product.
+pattern ExternalAction_Type_REVIEWPRODUCTISSUEINMERCHANTCENTER :: ExternalAction_Type
+pattern ExternalAction_Type_REVIEWPRODUCTISSUEINMERCHANTCENTER = ExternalAction_Type "REVIEW_PRODUCT_ISSUE_IN_MERCHANT_CENTER"
+
+-- | Redirect to Merchant Center where the merchant can request a review for issue related to their account.
+pattern ExternalAction_Type_REVIEWACCOUNTISSUEINMERCHANTCENTER :: ExternalAction_Type
+pattern ExternalAction_Type_REVIEWACCOUNTISSUEINMERCHANTCENTER = ExternalAction_Type "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER"
+
+-- | Redirect to the form in Help Center where the merchant can request a legal appeal for the issue.
+pattern ExternalAction_Type_LEGALAPPEALINHELPCENTER :: ExternalAction_Type
+pattern ExternalAction_Type_LEGALAPPEALINHELPCENTER = ExternalAction_Type "LEGAL_APPEAL_IN_HELP_CENTER"
+
+-- | Redirect to Merchant Center where the merchant can perform identity verification.
+pattern ExternalAction_Type_VERIFYIDENTITYINMERCHANTCENTER :: ExternalAction_Type
+pattern ExternalAction_Type_VERIFYIDENTITYINMERCHANTCENTER = ExternalAction_Type "VERIFY_IDENTITY_IN_MERCHANT_CENTER"
+
+{-# COMPLETE
+  ExternalAction_Type_EXTERNALACTIONTYPEUNSPECIFIED,
+  ExternalAction_Type_REVIEWPRODUCTISSUEINMERCHANTCENTER,
+  ExternalAction_Type_REVIEWACCOUNTISSUEINMERCHANTCENTER,
+  ExternalAction_Type_LEGALAPPEALINHELPCENTER,
+  ExternalAction_Type_VERIFYIDENTITYINMERCHANTCENTER,
+  ExternalAction_Type
   #-}
 
 -- | State of the program. @ENABLED@ if there are offers for at least one region.
@@ -1311,7 +1524,7 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBERE
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "IS_RETIRED"
 
--- | Account was already reviewd.
+-- | Account has already been reviewed. You can\'t request further reviews.
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED :: FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED = FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason "ALREADY_REVIEWED"
 
@@ -1328,8 +1541,8 @@ pattern FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYR
   FreeListingsProgramStatusRegionStatus_ReviewIneligibilityReason
   #-}
 
--- | Reason code this rule was not applicable.
-newtype InapplicabilityDetails_InapplicableReason = InapplicabilityDetails_InapplicableReason {fromInapplicabilityDetails_InapplicableReason :: Core.Text}
+-- | Type of the text input
+newtype InputFieldTextInput_Type = InputFieldTextInput_Type {fromInputFieldTextInput_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
     ( Core.Hashable,
@@ -1341,53 +1554,23 @@ newtype InapplicabilityDetails_InapplicableReason = InapplicabilityDetails_Inapp
       Core.FromJSONKey
     )
 
--- | Default value. Should not be used.
-pattern InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED = InapplicabilityDetails_InapplicableReason "INAPPLICABLE_REASON_UNSPECIFIED"
+-- | Default value. Will never be provided by the API.
+pattern InputFieldTextInput_Type_TEXTINPUTTYPEUNSPECIFIED :: InputFieldTextInput_Type
+pattern InputFieldTextInput_Type_TEXTINPUTTYPEUNSPECIFIED = InputFieldTextInput_Type "TEXT_INPUT_TYPE_UNSPECIFIED"
 
--- | The rule set for this product cannot beat the buybox winner.
-pattern InapplicabilityDetails_InapplicableReason_CANNOTBEATBUYBOXWINNER :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_CANNOTBEATBUYBOXWINNER = InapplicabilityDetails_InapplicableReason "CANNOT_BEAT_BUYBOX_WINNER"
+-- | Used when a short text is expected. The field can be rendered as a <https://www.w3.org/TR/2012/WD-html-markup-20121025/input.text.html#input.text text field>.
+pattern InputFieldTextInput_Type_GENERICSHORTTEXT :: InputFieldTextInput_Type
+pattern InputFieldTextInput_Type_GENERICSHORTTEXT = InputFieldTextInput_Type "GENERIC_SHORT_TEXT"
 
--- | This product can already win the buybox without rule.
-pattern InapplicabilityDetails_InapplicableReason_ALREADYWINNINGBUYBOX :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_ALREADYWINNINGBUYBOX = InapplicabilityDetails_InapplicableReason "ALREADY_WINNING_BUYBOX"
-
--- | Another rule of the same type takes precedence over this one.
-pattern InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYSAMETYPERULE :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYSAMETYPERULE = InapplicabilityDetails_InapplicableReason "TRIUMPHED_OVER_BY_SAME_TYPE_RULE"
-
--- | Another rule of a different type takes precedence over this one.
-pattern InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYOTHERRULEONOFFER :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYOTHERRULEONOFFER = InapplicabilityDetails_InapplicableReason "TRIUMPHED_OVER_BY_OTHER_RULE_ON_OFFER"
-
--- | The rule restrictions are not met. For example, this may be the case if the calculated rule price is lower than floor price in the restriction.
-pattern InapplicabilityDetails_InapplicableReason_RESTRICTIONSNOTMET :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_RESTRICTIONSNOTMET = InapplicabilityDetails_InapplicableReason "RESTRICTIONS_NOT_MET"
-
--- | The reason is not categorized to any known reason.
-pattern InapplicabilityDetails_InapplicableReason_Uncategorized :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_Uncategorized = InapplicabilityDetails_InapplicableReason "UNCATEGORIZED"
-
--- | The auto/pricing/min_price is invalid. For example, it is missing or \< 0.
-pattern InapplicabilityDetails_InapplicableReason_INVALIDAUTOPRICEMIN :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_INVALIDAUTOPRICEMIN = InapplicabilityDetails_InapplicableReason "INVALID_AUTO_PRICE_MIN"
-
--- | The floor defined in the rule is invalid. For example, it has the wrong sign which results in a floor \< 0.
-pattern InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG :: InapplicabilityDetails_InapplicableReason
-pattern InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG = InapplicabilityDetails_InapplicableReason "INVALID_FLOOR_CONFIG"
+-- | Used when a longer text is expected. The field should be rendered as a <https://www.w3.org/TR/2012/WD-html-markup-20121025/textarea.html#textarea textarea>.
+pattern InputFieldTextInput_Type_GENERICLONGTEXT :: InputFieldTextInput_Type
+pattern InputFieldTextInput_Type_GENERICLONGTEXT = InputFieldTextInput_Type "GENERIC_LONG_TEXT"
 
 {-# COMPLETE
-  InapplicabilityDetails_InapplicableReason_INAPPLICABLEREASONUNSPECIFIED,
-  InapplicabilityDetails_InapplicableReason_CANNOTBEATBUYBOXWINNER,
-  InapplicabilityDetails_InapplicableReason_ALREADYWINNINGBUYBOX,
-  InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYSAMETYPERULE,
-  InapplicabilityDetails_InapplicableReason_TRIUMPHEDOVERBYOTHERRULEONOFFER,
-  InapplicabilityDetails_InapplicableReason_RESTRICTIONSNOTMET,
-  InapplicabilityDetails_InapplicableReason_Uncategorized,
-  InapplicabilityDetails_InapplicableReason_INVALIDAUTOPRICEMIN,
-  InapplicabilityDetails_InapplicableReason_INVALIDFLOORCONFIG,
-  InapplicabilityDetails_InapplicableReason
+  InputFieldTextInput_Type_TEXTINPUTTYPEUNSPECIFIED,
+  InputFieldTextInput_Type_GENERICSHORTTEXT,
+  InputFieldTextInput_Type_GENERICLONGTEXT,
+  InputFieldTextInput_Type
   #-}
 
 -- | The status of the shipment.
@@ -1420,6 +1603,43 @@ pattern OrderTrackingSignalShippingInfo_ShippingStatus_Delivered = OrderTracking
   OrderTrackingSignalShippingInfo_ShippingStatus_Shipped,
   OrderTrackingSignalShippingInfo_ShippingStatus_Delivered,
   OrderTrackingSignalShippingInfo_ShippingStatus
+  #-}
+
+-- | The predicted effectiveness of applying the price suggestion, bucketed.
+newtype PriceInsights_Effectiveness = PriceInsights_Effectiveness {fromPriceInsights_Effectiveness :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Effectiveness is unknown.
+pattern PriceInsights_Effectiveness_EFFECTIVENESSUNSPECIFIED :: PriceInsights_Effectiveness
+pattern PriceInsights_Effectiveness_EFFECTIVENESSUNSPECIFIED = PriceInsights_Effectiveness "EFFECTIVENESS_UNSPECIFIED"
+
+-- | Effectiveness is low.
+pattern PriceInsights_Effectiveness_Low :: PriceInsights_Effectiveness
+pattern PriceInsights_Effectiveness_Low = PriceInsights_Effectiveness "LOW"
+
+-- | Effectiveness is medium.
+pattern PriceInsights_Effectiveness_Medium :: PriceInsights_Effectiveness
+pattern PriceInsights_Effectiveness_Medium = PriceInsights_Effectiveness "MEDIUM"
+
+-- | Effectiveness is high.
+pattern PriceInsights_Effectiveness_High :: PriceInsights_Effectiveness
+pattern PriceInsights_Effectiveness_High = PriceInsights_Effectiveness "HIGH"
+
+{-# COMPLETE
+  PriceInsights_Effectiveness_EFFECTIVENESSUNSPECIFIED,
+  PriceInsights_Effectiveness_Low,
+  PriceInsights_Effectiveness_Medium,
+  PriceInsights_Effectiveness_High,
+  PriceInsights_Effectiveness
   #-}
 
 -- | Tells if there is at least one product of the brand currently @IN_STOCK@ in your product feed across multiple countries, all products are @OUT_OF_STOCK@ in your product feed, or @NOT_IN_INVENTORY@. The field doesn\'t take the Best Sellers report country filter into account.
@@ -1496,6 +1716,75 @@ pattern ProductCluster_InventoryStatus_NOTININVENTORY = ProductCluster_Inventory
   ProductCluster_InventoryStatus
   #-}
 
+-- | The severity of the issue.
+newtype ProductIssueImpact_Severity = ProductIssueImpact_Severity {fromProductIssueImpact_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern ProductIssueImpact_Severity_SEVERITYUNSPECIFIED :: ProductIssueImpact_Severity
+pattern ProductIssueImpact_Severity_SEVERITYUNSPECIFIED = ProductIssueImpact_Severity "SEVERITY_UNSPECIFIED"
+
+-- | Causes either an account suspension or an item disapproval. Errors should be resolved as soon as possible to ensure items are eligible to appear in results again.
+pattern ProductIssueImpact_Severity_Error' :: ProductIssueImpact_Severity
+pattern ProductIssueImpact_Severity_Error' = ProductIssueImpact_Severity "ERROR"
+
+-- | Warnings can negatively impact the performance of ads and can lead to item or account suspensions in the future unless the issue is resolved.
+pattern ProductIssueImpact_Severity_Warning :: ProductIssueImpact_Severity
+pattern ProductIssueImpact_Severity_Warning = ProductIssueImpact_Severity "WARNING"
+
+-- | Infos are suggested optimizations to increase data quality. Resolving these issues is recommended, but not required.
+pattern ProductIssueImpact_Severity_Info :: ProductIssueImpact_Severity
+pattern ProductIssueImpact_Severity_Info = ProductIssueImpact_Severity "INFO"
+
+{-# COMPLETE
+  ProductIssueImpact_Severity_SEVERITYUNSPECIFIED,
+  ProductIssueImpact_Severity_Error',
+  ProductIssueImpact_Severity_Warning,
+  ProductIssueImpact_Severity_Info,
+  ProductIssueImpact_Severity
+  #-}
+
+-- | Required. Sustainability incentive program.
+newtype ProductSustainabilityIncentive_Type = ProductSustainabilityIncentive_Type {fromProductSustainabilityIncentive_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified or unknown sustainability incentive type.
+pattern ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED = ProductSustainabilityIncentive_Type "TYPE_UNSPECIFIED"
+
+-- | Program offering tax liability reductions for electric vehicles and, in some countries, plug-in hybrids. These reductions can be based on a specific amount or a percentage of the sale price.
+pattern ProductSustainabilityIncentive_Type_EVTAXCREDIT :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_EVTAXCREDIT = ProductSustainabilityIncentive_Type "EV_TAX_CREDIT"
+
+-- | A subsidy program, often called an environmental bonus, provides a purchase grant for electric vehicles and, in some countries, plug-in hybrids. The grant amount may be a fixed sum or a percentage of the sale price.
+pattern ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT :: ProductSustainabilityIncentive_Type
+pattern ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT = ProductSustainabilityIncentive_Type "EV_PRICE_DISCOUNT"
+
+{-# COMPLETE
+  ProductSustainabilityIncentive_Type_TYPEUNSPECIFIED,
+  ProductSustainabilityIncentive_Type_EVTAXCREDIT,
+  ProductSustainabilityIncentive_Type_EVPRICEDISCOUNT,
+  ProductSustainabilityIncentive_Type
+  #-}
+
 -- | Aggregated destination status.
 newtype ProductView_AggregatedDestinationStatus = ProductView_AggregatedDestinationStatus {fromProductView_AggregatedDestinationStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1568,6 +1857,43 @@ pattern ProductView_Channel_Online = ProductView_Channel "ONLINE"
   ProductView_Channel_Local,
   ProductView_Channel_Online,
   ProductView_Channel
+  #-}
+
+-- | Estimated performance potential compared to highest performing products of the merchant.
+newtype ProductView_ClickPotential = ProductView_ClickPotential {fromProductView_ClickPotential :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown predicted clicks impact.
+pattern ProductView_ClickPotential_CLICKPOTENTIALUNSPECIFIED :: ProductView_ClickPotential
+pattern ProductView_ClickPotential_CLICKPOTENTIALUNSPECIFIED = ProductView_ClickPotential "CLICK_POTENTIAL_UNSPECIFIED"
+
+-- | Potential to receive a low number of clicks compared to the highest performing products of the merchant.
+pattern ProductView_ClickPotential_Low :: ProductView_ClickPotential
+pattern ProductView_ClickPotential_Low = ProductView_ClickPotential "LOW"
+
+-- | Potential to receive a moderate number of clicks compared to the highest performing products of the merchant.
+pattern ProductView_ClickPotential_Medium :: ProductView_ClickPotential
+pattern ProductView_ClickPotential_Medium = ProductView_ClickPotential "MEDIUM"
+
+-- | Potential to receive a similar number of clicks as the highest performing products of the merchant.
+pattern ProductView_ClickPotential_High :: ProductView_ClickPotential
+pattern ProductView_ClickPotential_High = ProductView_ClickPotential "HIGH"
+
+{-# COMPLETE
+  ProductView_ClickPotential_CLICKPOTENTIALUNSPECIFIED,
+  ProductView_ClickPotential_Low,
+  ProductView_ClickPotential_Medium,
+  ProductView_ClickPotential_High,
+  ProductView_ClickPotential
   #-}
 
 -- | Item issue resolution.
@@ -1964,6 +2290,124 @@ pattern RecommendationDescription_Type_Long = RecommendationDescription_Type "LO
   RecommendationDescription_Type
   #-}
 
+-- | Optional. How the detailed content should be returned. Default option is to return the content as a pre-rendered HTML text.
+newtype RenderAccountIssuesRequestPayload_ContentOption = RenderAccountIssuesRequestPayload_ContentOption {fromRenderAccountIssuesRequestPayload_ContentOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern RenderAccountIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED :: RenderAccountIssuesRequestPayload_ContentOption
+pattern RenderAccountIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED = RenderAccountIssuesRequestPayload_ContentOption "CONTENT_OPTION_UNSPECIFIED"
+
+-- | Returns the detail of the issue as a pre-rendered HTML text.
+pattern RenderAccountIssuesRequestPayload_ContentOption_PRERENDEREDHTML :: RenderAccountIssuesRequestPayload_ContentOption
+pattern RenderAccountIssuesRequestPayload_ContentOption_PRERENDEREDHTML = RenderAccountIssuesRequestPayload_ContentOption "PRE_RENDERED_HTML"
+
+{-# COMPLETE
+  RenderAccountIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED,
+  RenderAccountIssuesRequestPayload_ContentOption_PRERENDEREDHTML,
+  RenderAccountIssuesRequestPayload_ContentOption
+  #-}
+
+-- | Optional. How actions with user input form should be handled. If not provided, actions will be returned as links that points merchant to Merchant Center where they can request the action.
+newtype RenderAccountIssuesRequestPayload_UserInputActionOption = RenderAccountIssuesRequestPayload_UserInputActionOption {fromRenderAccountIssuesRequestPayload_UserInputActionOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED :: RenderAccountIssuesRequestPayload_UserInputActionOption
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED = RenderAccountIssuesRequestPayload_UserInputActionOption "USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED"
+
+-- | Actions that require user input are represented only as links that points merchant to Merchant Center where they can request the action. Provides easier to implement alternative to @BUILT_IN_USER_INPUT_ACTIONS@.
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER :: RenderAccountIssuesRequestPayload_UserInputActionOption
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER = RenderAccountIssuesRequestPayload_UserInputActionOption "REDIRECT_TO_MERCHANT_CENTER"
+
+-- | Returns content and input form definition for each complex action. Your application needs to display this content and input form to the merchant before they can request processing of the action. To start the action, your application needs to call the @triggeraction@ method.
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS :: RenderAccountIssuesRequestPayload_UserInputActionOption
+pattern RenderAccountIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS = RenderAccountIssuesRequestPayload_UserInputActionOption "BUILT_IN_USER_INPUT_ACTIONS"
+
+{-# COMPLETE
+  RenderAccountIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED,
+  RenderAccountIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER,
+  RenderAccountIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS,
+  RenderAccountIssuesRequestPayload_UserInputActionOption
+  #-}
+
+-- | Optional. How the detailed content should be returned. Default option is to return the content as a pre-rendered HTML text.
+newtype RenderProductIssuesRequestPayload_ContentOption = RenderProductIssuesRequestPayload_ContentOption {fromRenderProductIssuesRequestPayload_ContentOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern RenderProductIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED :: RenderProductIssuesRequestPayload_ContentOption
+pattern RenderProductIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED = RenderProductIssuesRequestPayload_ContentOption "CONTENT_OPTION_UNSPECIFIED"
+
+-- | Returns the detail of the issue as a pre-rendered HTML text.
+pattern RenderProductIssuesRequestPayload_ContentOption_PRERENDEREDHTML :: RenderProductIssuesRequestPayload_ContentOption
+pattern RenderProductIssuesRequestPayload_ContentOption_PRERENDEREDHTML = RenderProductIssuesRequestPayload_ContentOption "PRE_RENDERED_HTML"
+
+{-# COMPLETE
+  RenderProductIssuesRequestPayload_ContentOption_CONTENTOPTIONUNSPECIFIED,
+  RenderProductIssuesRequestPayload_ContentOption_PRERENDEREDHTML,
+  RenderProductIssuesRequestPayload_ContentOption
+  #-}
+
+-- | Optional. How actions with user input form should be handled. If not provided, actions will be returned as links that points merchant to Merchant Center where they can request the action.
+newtype RenderProductIssuesRequestPayload_UserInputActionOption = RenderProductIssuesRequestPayload_UserInputActionOption {fromRenderProductIssuesRequestPayload_UserInputActionOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED :: RenderProductIssuesRequestPayload_UserInputActionOption
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED = RenderProductIssuesRequestPayload_UserInputActionOption "USER_INPUT_ACTION_RENDERING_OPTION_UNSPECIFIED"
+
+-- | Actions that require user input are represented only as links that points merchant to Merchant Center where they can request the action. Provides easier to implement alternative to @BUILT_IN_USER_INPUT_ACTIONS@.
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER :: RenderProductIssuesRequestPayload_UserInputActionOption
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER = RenderProductIssuesRequestPayload_UserInputActionOption "REDIRECT_TO_MERCHANT_CENTER"
+
+-- | Returns content and input form definition for each complex action. Your application needs to display this content and input form to the merchant before they can request processing of the action. To start the action, your application needs to call the @triggeraction@ method.
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS :: RenderProductIssuesRequestPayload_UserInputActionOption
+pattern RenderProductIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS = RenderProductIssuesRequestPayload_UserInputActionOption "BUILT_IN_USER_INPUT_ACTIONS"
+
+{-# COMPLETE
+  RenderProductIssuesRequestPayload_UserInputActionOption_USERINPUTACTIONRENDERINGOPTIONUNSPECIFIED,
+  RenderProductIssuesRequestPayload_UserInputActionOption_REDIRECTTOMERCHANTCENTER,
+  RenderProductIssuesRequestPayload_UserInputActionOption_BUILTINUSERINPUTACTIONS,
+  RenderProductIssuesRequestPayload_UserInputActionOption
+  #-}
+
 -- | Required. Type of the interaction that is reported, for example INTERACTION_CLICK.
 newtype ReportInteractionRequest_InteractionType = ReportInteractionRequest_InteractionType {fromReportInteractionRequest_InteractionType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1981,177 +2425,19 @@ newtype ReportInteractionRequest_InteractionType = ReportInteractionRequest_Inte
 pattern ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED :: ReportInteractionRequest_InteractionType
 pattern ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED = ReportInteractionRequest_InteractionType "INTERACTION_TYPE_UNSPECIFIED"
 
+-- | When a recommendation is dismissed.
+pattern ReportInteractionRequest_InteractionType_INTERACTIONDISMISS :: ReportInteractionRequest_InteractionType
+pattern ReportInteractionRequest_InteractionType_INTERACTIONDISMISS = ReportInteractionRequest_InteractionType "INTERACTION_DISMISS"
+
 -- | When a recommendation is clicked.
 pattern ReportInteractionRequest_InteractionType_INTERACTIONCLICK :: ReportInteractionRequest_InteractionType
 pattern ReportInteractionRequest_InteractionType_INTERACTIONCLICK = ReportInteractionRequest_InteractionType "INTERACTION_CLICK"
 
 {-# COMPLETE
   ReportInteractionRequest_InteractionType_INTERACTIONTYPEUNSPECIFIED,
+  ReportInteractionRequest_InteractionType_INTERACTIONDISMISS,
   ReportInteractionRequest_InteractionType_INTERACTIONCLICK,
   ReportInteractionRequest_InteractionType
-  #-}
-
--- | Type of the rule.
-newtype RepricingProductReport_Type = RepricingProductReport_Type {fromRepricingProductReport_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unused.
-pattern RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingProductReport_Type
-pattern RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED = RepricingProductReport_Type "REPRICING_RULE_TYPE_UNSPECIFIED"
-
--- | Statistical measurement based rules among Google SA merchants. If this rule is chosen, repricer will adjust the offer price based on statistical metrics (currently only min is available) among other merchants who sell the same product. Details need to be provdided in the RuleDefinition.
-pattern RepricingProductReport_Type_TYPESTATSBASED :: RepricingProductReport_Type
-pattern RepricingProductReport_Type_TYPESTATSBASED = RepricingProductReport_Type "TYPE_STATS_BASED"
-
--- | Cost of goods sale based rule. Repricer will adjust the offer price based on the offer\'s sale cost which is provided by the merchant.
-pattern RepricingProductReport_Type_TYPECOGSBASED :: RepricingProductReport_Type
-pattern RepricingProductReport_Type_TYPECOGSBASED = RepricingProductReport_Type "TYPE_COGS_BASED"
-
--- | Sales volume based rule. Repricer will adjust the offer price based on the offer\'s sales volume in the past period of time defined within the rule.
-pattern RepricingProductReport_Type_TYPESALESVOLUMEBASED :: RepricingProductReport_Type
-pattern RepricingProductReport_Type_TYPESALESVOLUMEBASED = RepricingProductReport_Type "TYPE_SALES_VOLUME_BASED"
-
--- | Competitive price rule. Repricer will adjust the offer price based on the min price from a list of unnamed big competitors.
-pattern RepricingProductReport_Type_TYPECOMPETITIVEPRICE :: RepricingProductReport_Type
-pattern RepricingProductReport_Type_TYPECOMPETITIVEPRICE = RepricingProductReport_Type "TYPE_COMPETITIVE_PRICE"
-
-{-# COMPLETE
-  RepricingProductReport_Type_REPRICINGRULETYPEUNSPECIFIED,
-  RepricingProductReport_Type_TYPESTATSBASED,
-  RepricingProductReport_Type_TYPECOGSBASED,
-  RepricingProductReport_Type_TYPESALESVOLUMEBASED,
-  RepricingProductReport_Type_TYPECOMPETITIVEPRICE,
-  RepricingProductReport_Type
-  #-}
-
--- | Required. Immutable. The type of the rule.
-newtype RepricingRule_Type = RepricingRule_Type {fromRepricingRule_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unused.
-pattern RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingRule_Type
-pattern RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED = RepricingRule_Type "REPRICING_RULE_TYPE_UNSPECIFIED"
-
--- | Statistical measurement based rules among Google SA merchants. If this rule is chosen, repricer will adjust the offer price based on statistical metrics (currently only min is available) among other merchants who sell the same product. Details need to be provdided in the RuleDefinition.
-pattern RepricingRule_Type_TYPESTATSBASED :: RepricingRule_Type
-pattern RepricingRule_Type_TYPESTATSBASED = RepricingRule_Type "TYPE_STATS_BASED"
-
--- | Cost of goods sale based rule. Repricer will adjust the offer price based on the offer\'s sale cost which is provided by the merchant.
-pattern RepricingRule_Type_TYPECOGSBASED :: RepricingRule_Type
-pattern RepricingRule_Type_TYPECOGSBASED = RepricingRule_Type "TYPE_COGS_BASED"
-
--- | Sales volume based rule. Repricer will adjust the offer price based on the offer\'s sales volume in the past period of time defined within the rule.
-pattern RepricingRule_Type_TYPESALESVOLUMEBASED :: RepricingRule_Type
-pattern RepricingRule_Type_TYPESALESVOLUMEBASED = RepricingRule_Type "TYPE_SALES_VOLUME_BASED"
-
--- | Competitive price rule. Repricer will adjust the offer price based on the min price from a list of unnamed big competitors.
-pattern RepricingRule_Type_TYPECOMPETITIVEPRICE :: RepricingRule_Type
-pattern RepricingRule_Type_TYPECOMPETITIVEPRICE = RepricingRule_Type "TYPE_COMPETITIVE_PRICE"
-
-{-# COMPLETE
-  RepricingRule_Type_REPRICINGRULETYPEUNSPECIFIED,
-  RepricingRule_Type_TYPESTATSBASED,
-  RepricingRule_Type_TYPECOGSBASED,
-  RepricingRule_Type_TYPESALESVOLUMEBASED,
-  RepricingRule_Type_TYPECOMPETITIVEPRICE,
-  RepricingRule_Type
-  #-}
-
--- | Determines whether to use the custom matchers or the product feed attribute \"repricing/rule/id\" to specify offer-rule mapping.
-newtype RepricingRuleEligibleOfferMatcher_MatcherOption = RepricingRuleEligibleOfferMatcher_MatcherOption {fromRepricingRuleEligibleOfferMatcher_MatcherOption :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unused.
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED :: RepricingRuleEligibleOfferMatcher_MatcherOption
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED = RepricingRuleEligibleOfferMatcher_MatcherOption "MATCHER_OPTION_UNSPECIFIED"
-
--- | Use custom filters.
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER :: RepricingRuleEligibleOfferMatcher_MatcherOption
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER = RepricingRuleEligibleOfferMatcher_MatcherOption "MATCHER_OPTION_CUSTOM_FILTER"
-
--- | Use repricing/rule/id feed attribute on the product resource to specify offer-rule mapping.
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE :: RepricingRuleEligibleOfferMatcher_MatcherOption
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE = RepricingRuleEligibleOfferMatcher_MatcherOption "MATCHER_OPTION_USE_FEED_ATTRIBUTE"
-
--- | Matching all products.
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS :: RepricingRuleEligibleOfferMatcher_MatcherOption
-pattern RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS = RepricingRuleEligibleOfferMatcher_MatcherOption "MATCHER_OPTION_ALL_PRODUCTS"
-
-{-# COMPLETE
-  RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUNSPECIFIED,
-  RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONCUSTOMFILTER,
-  RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONUSEFEEDATTRIBUTE,
-  RepricingRuleEligibleOfferMatcher_MatcherOption_MATCHEROPTIONALLPRODUCTS,
-  RepricingRuleEligibleOfferMatcher_MatcherOption
-  #-}
-
--- | Type of the rule.
-newtype RepricingRuleReport_Type = RepricingRuleReport_Type {fromRepricingRuleReport_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Unused.
-pattern RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED :: RepricingRuleReport_Type
-pattern RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED = RepricingRuleReport_Type "REPRICING_RULE_TYPE_UNSPECIFIED"
-
--- | Statistical measurement based rules among Google SA merchants. If this rule is chosen, repricer will adjust the offer price based on statistical metrics (currently only min is available) among other merchants who sell the same product. Details need to be provdided in the RuleDefinition.
-pattern RepricingRuleReport_Type_TYPESTATSBASED :: RepricingRuleReport_Type
-pattern RepricingRuleReport_Type_TYPESTATSBASED = RepricingRuleReport_Type "TYPE_STATS_BASED"
-
--- | Cost of goods sale based rule. Repricer will adjust the offer price based on the offer\'s sale cost which is provided by the merchant.
-pattern RepricingRuleReport_Type_TYPECOGSBASED :: RepricingRuleReport_Type
-pattern RepricingRuleReport_Type_TYPECOGSBASED = RepricingRuleReport_Type "TYPE_COGS_BASED"
-
--- | Sales volume based rule. Repricer will adjust the offer price based on the offer\'s sales volume in the past period of time defined within the rule.
-pattern RepricingRuleReport_Type_TYPESALESVOLUMEBASED :: RepricingRuleReport_Type
-pattern RepricingRuleReport_Type_TYPESALESVOLUMEBASED = RepricingRuleReport_Type "TYPE_SALES_VOLUME_BASED"
-
--- | Competitive price rule. Repricer will adjust the offer price based on the min price from a list of unnamed big competitors.
-pattern RepricingRuleReport_Type_TYPECOMPETITIVEPRICE :: RepricingRuleReport_Type
-pattern RepricingRuleReport_Type_TYPECOMPETITIVEPRICE = RepricingRuleReport_Type "TYPE_COMPETITIVE_PRICE"
-
-{-# COMPLETE
-  RepricingRuleReport_Type_REPRICINGRULETYPEUNSPECIFIED,
-  RepricingRuleReport_Type_TYPESTATSBASED,
-  RepricingRuleReport_Type_TYPECOGSBASED,
-  RepricingRuleReport_Type_TYPESALESVOLUMEBASED,
-  RepricingRuleReport_Type_TYPECOMPETITIVEPRICE,
-  RepricingRuleReport_Type
   #-}
 
 -- | Verification method to receive verification code.
@@ -2290,7 +2576,7 @@ pattern ReturnPolicyOnlinePolicy_Type_LIFETIMERETURNS = ReturnPolicyOnlinePolicy
   ReturnPolicyOnlinePolicy_Type
   #-}
 
--- | The corresponding return label source.
+-- | The corresponding return label source. If the @ReturnMethod@ field includes @BY_MAIL@, it is required to specify @ReturnLabelSource@ for both @BUYER_REMORSE@ and @ITEM_DEFECT@ return reason categories.
 newtype ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource = ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource {fromReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -2420,7 +2706,7 @@ pattern Segments_Program_FREEPRODUCTLISTING = Segments_Program "FREE_PRODUCT_LIS
 pattern Segments_Program_FREELOCALPRODUCTLISTING :: Segments_Program
 pattern Segments_Program_FREELOCALPRODUCTLISTING = Segments_Program "FREE_LOCAL_PRODUCT_LISTING"
 
--- | Buy on Google Listing.
+-- | /Deprecated/: This value is no longer supported. Retrieving all metrics for the @BUY_ON_GOOGLE_LISTING@ program returns 0 starting from May 2024. Buy on Google Listing.
 pattern Segments_Program_BUYONGOOGLELISTING :: Segments_Program
 pattern Segments_Program_BUYONGOOGLELISTING = Segments_Program "BUY_ON_GOOGLE_LISTING"
 
@@ -2599,7 +2885,7 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_WILLBEREV
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "IS_RETIRED"
 
--- | Account was already reviewd.
+-- | Account has already been reviewed. You can\'t request further reviews.
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED :: ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
 pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED = ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason "ALREADY_REVIEWED"
 
@@ -2614,6 +2900,38 @@ pattern ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYRE
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ISRETIRED,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason_ALREADYREVIEWED,
   ShoppingAdsProgramStatusRegionStatus_ReviewIneligibilityReason
+  #-}
+
+-- | The suggested type of an icon for tooltip, if a tooltip is present.
+newtype TextWithTooltip_TooltipIconStyle = TextWithTooltip_TooltipIconStyle {fromTextWithTooltip_TooltipIconStyle :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Will never be provided by the API.
+pattern TextWithTooltip_TooltipIconStyle_TOOLTIPICONSTYLEUNSPECIFIED :: TextWithTooltip_TooltipIconStyle
+pattern TextWithTooltip_TooltipIconStyle_TOOLTIPICONSTYLEUNSPECIFIED = TextWithTooltip_TooltipIconStyle "TOOLTIP_ICON_STYLE_UNSPECIFIED"
+
+-- | Used when the tooltip adds additional information to the context, the \'i\' can be used as an icon.
+pattern TextWithTooltip_TooltipIconStyle_Info :: TextWithTooltip_TooltipIconStyle
+pattern TextWithTooltip_TooltipIconStyle_Info = TextWithTooltip_TooltipIconStyle "INFO"
+
+-- | Used when the tooltip shows helpful information, the \'?\' can be used as an icon.
+pattern TextWithTooltip_TooltipIconStyle_Question :: TextWithTooltip_TooltipIconStyle
+pattern TextWithTooltip_TooltipIconStyle_Question = TextWithTooltip_TooltipIconStyle "QUESTION"
+
+{-# COMPLETE
+  TextWithTooltip_TooltipIconStyle_TOOLTIPICONSTYLEUNSPECIFIED,
+  TextWithTooltip_TooltipIconStyle_Info,
+  TextWithTooltip_TooltipIconStyle_Question,
+  TextWithTooltip_TooltipIconStyle
   #-}
 
 -- | Verification method used to receive verification code.
@@ -2700,256 +3018,4 @@ pattern AccountsListView_Css = AccountsListView "CSS"
   AccountsListView_Merchant,
   AccountsListView_Css,
   AccountsListView
-  #-}
-
--- | Return the results in the specified order.
-newtype OrderreturnsListOrderBy = OrderreturnsListOrderBy {fromOrderreturnsListOrderBy :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Return results in descending order.
-pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC :: OrderreturnsListOrderBy
-pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC = OrderreturnsListOrderBy "RETURN_CREATION_TIME_DESC"
-
--- | Return results in ascending order.
-pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEASC :: OrderreturnsListOrderBy
-pattern OrderreturnsListOrderBy_RETURNCREATIONTIMEASC = OrderreturnsListOrderBy "RETURN_CREATION_TIME_ASC"
-
-{-# COMPLETE
-  OrderreturnsListOrderBy_RETURNCREATIONTIMEDESC,
-  OrderreturnsListOrderBy_RETURNCREATIONTIMEASC,
-  OrderreturnsListOrderBy
-  #-}
-
--- | Obtains order returns that match any shipment state provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment states.
-newtype OrderreturnsListShipmentStates = OrderreturnsListShipmentStates {fromOrderreturnsListShipmentStates :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Return shipments with @new@ state only.
-pattern OrderreturnsListShipmentStates_New :: OrderreturnsListShipmentStates
-pattern OrderreturnsListShipmentStates_New = OrderreturnsListShipmentStates "NEW"
-
--- | Return shipments with @shipped@ state only.
-pattern OrderreturnsListShipmentStates_Shipped :: OrderreturnsListShipmentStates
-pattern OrderreturnsListShipmentStates_Shipped = OrderreturnsListShipmentStates "SHIPPED"
-
--- | Return shipments with @completed@ state only.
-pattern OrderreturnsListShipmentStates_Completed :: OrderreturnsListShipmentStates
-pattern OrderreturnsListShipmentStates_Completed = OrderreturnsListShipmentStates "COMPLETED"
-
--- | Return shipments with @undeliverable@ state only.
-pattern OrderreturnsListShipmentStates_Undeliverable :: OrderreturnsListShipmentStates
-pattern OrderreturnsListShipmentStates_Undeliverable = OrderreturnsListShipmentStates "UNDELIVERABLE"
-
--- | Return shipments with @pending@ state only.
-pattern OrderreturnsListShipmentStates_Pending :: OrderreturnsListShipmentStates
-pattern OrderreturnsListShipmentStates_Pending = OrderreturnsListShipmentStates "PENDING"
-
-{-# COMPLETE
-  OrderreturnsListShipmentStates_New,
-  OrderreturnsListShipmentStates_Shipped,
-  OrderreturnsListShipmentStates_Completed,
-  OrderreturnsListShipmentStates_Undeliverable,
-  OrderreturnsListShipmentStates_Pending,
-  OrderreturnsListShipmentStates
-  #-}
-
--- | Obtains order returns that match any shipment status provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment statuses.
-newtype OrderreturnsListShipmentStatus = OrderreturnsListShipmentStatus {fromOrderreturnsListShipmentStatus :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Return shipments with @new@ status only.
-pattern OrderreturnsListShipmentStatus_New :: OrderreturnsListShipmentStatus
-pattern OrderreturnsListShipmentStatus_New = OrderreturnsListShipmentStatus "NEW"
-
--- | Return shipments with @inProgress@ status only.
-pattern OrderreturnsListShipmentStatus_INPROGRESS :: OrderreturnsListShipmentStatus
-pattern OrderreturnsListShipmentStatus_INPROGRESS = OrderreturnsListShipmentStatus "IN_PROGRESS"
-
--- | Return shipments with @processed@ status only.
-pattern OrderreturnsListShipmentStatus_Processed :: OrderreturnsListShipmentStatus
-pattern OrderreturnsListShipmentStatus_Processed = OrderreturnsListShipmentStatus "PROCESSED"
-
-{-# COMPLETE
-  OrderreturnsListShipmentStatus_New,
-  OrderreturnsListShipmentStatus_INPROGRESS,
-  OrderreturnsListShipmentStatus_Processed,
-  OrderreturnsListShipmentStatus
-  #-}
-
--- | Obtains order returns that match any shipment type provided in this parameter. When this parameter is not provided, order returns are obtained regardless of their shipment types.
-newtype OrderreturnsListShipmentTypes = OrderreturnsListShipmentTypes {fromOrderreturnsListShipmentTypes :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Return shipments with type @byMail@ only.
-pattern OrderreturnsListShipmentTypes_BYMAIL :: OrderreturnsListShipmentTypes
-pattern OrderreturnsListShipmentTypes_BYMAIL = OrderreturnsListShipmentTypes "BY_MAIL"
-
--- | Return shipments with type @returnless@ only.
-pattern OrderreturnsListShipmentTypes_Returnless :: OrderreturnsListShipmentTypes
-pattern OrderreturnsListShipmentTypes_Returnless = OrderreturnsListShipmentTypes "RETURNLESS"
-
--- | Return shipments with type @contactCustomerSupport@ only.
-pattern OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT :: OrderreturnsListShipmentTypes
-pattern OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT = OrderreturnsListShipmentTypes "CONTACT_CUSTOMER_SUPPORT"
-
-{-# COMPLETE
-  OrderreturnsListShipmentTypes_BYMAIL,
-  OrderreturnsListShipmentTypes_Returnless,
-  OrderreturnsListShipmentTypes_CONTACTCUSTOMERSUPPORT,
-  OrderreturnsListShipmentTypes
-  #-}
-
--- | The name of the template to retrieve.
-newtype OrdersGettestordertemplateTemplateName = OrdersGettestordertemplateTemplateName {fromOrdersGettestordertemplateTemplateName :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Get @template1@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1 :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1 = OrdersGettestordertemplateTemplateName "TEMPLATE1"
-
--- | Get @template2@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE2 :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE2 = OrdersGettestordertemplateTemplateName "TEMPLATE2"
-
--- | Get @template1A@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1A :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1A = OrdersGettestordertemplateTemplateName "TEMPLATE1A"
-
--- | Get @template1B@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1B :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE1B = OrdersGettestordertemplateTemplateName "TEMPLATE1B"
-
--- | Get @template3@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE3 :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE3 = OrdersGettestordertemplateTemplateName "TEMPLATE3"
-
--- | Get @template4@.
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE4 :: OrdersGettestordertemplateTemplateName
-pattern OrdersGettestordertemplateTemplateName_TEMPLATE4 = OrdersGettestordertemplateTemplateName "TEMPLATE4"
-
-{-# COMPLETE
-  OrdersGettestordertemplateTemplateName_TEMPLATE1,
-  OrdersGettestordertemplateTemplateName_TEMPLATE2,
-  OrdersGettestordertemplateTemplateName_TEMPLATE1A,
-  OrdersGettestordertemplateTemplateName_TEMPLATE1B,
-  OrdersGettestordertemplateTemplateName_TEMPLATE3,
-  OrdersGettestordertemplateTemplateName_TEMPLATE4,
-  OrdersGettestordertemplateTemplateName
-  #-}
-
--- | Obtains orders that match any of the specified statuses. Note that @active@ is a shortcut for @pendingShipment@ and @partiallyShipped@, and @completed@ is a shortcut for @shipped@, @partiallyDelivered@, @delivered@, @partiallyReturned@, @returned@, and @canceled@.
-newtype OrdersListStatuses = OrdersListStatuses {fromOrdersListStatuses :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | Return orders with status @active@. The @active@ status includes @pendingShipment@ and @partiallyShipped@ orders.
-pattern OrdersListStatuses_Active :: OrdersListStatuses
-pattern OrdersListStatuses_Active = OrdersListStatuses "ACTIVE"
-
--- | Return orders with status @completed@. The @completed@ status includes @shipped@, @partiallyDelivered@, @delivered@, @partiallyReturned@, @returned@, and @canceled@ orders.
-pattern OrdersListStatuses_Completed :: OrdersListStatuses
-pattern OrdersListStatuses_Completed = OrdersListStatuses "COMPLETED"
-
--- | Return orders with status @canceled@.
-pattern OrdersListStatuses_Canceled :: OrdersListStatuses
-pattern OrdersListStatuses_Canceled = OrdersListStatuses "CANCELED"
-
--- | Return orders with status @inProgress@.
-pattern OrdersListStatuses_INPROGRESS :: OrdersListStatuses
-pattern OrdersListStatuses_INPROGRESS = OrdersListStatuses "IN_PROGRESS"
-
--- | Return orders with status @pendingShipment@.
-pattern OrdersListStatuses_PENDINGSHIPMENT :: OrdersListStatuses
-pattern OrdersListStatuses_PENDINGSHIPMENT = OrdersListStatuses "PENDING_SHIPMENT"
-
--- | Return orders with status @partiallyShipped@.
-pattern OrdersListStatuses_PARTIALLYSHIPPED :: OrdersListStatuses
-pattern OrdersListStatuses_PARTIALLYSHIPPED = OrdersListStatuses "PARTIALLY_SHIPPED"
-
--- | Return orders with status @shipped@.
-pattern OrdersListStatuses_Shipped :: OrdersListStatuses
-pattern OrdersListStatuses_Shipped = OrdersListStatuses "SHIPPED"
-
--- | Return orders with status @partiallyDelivered@.
-pattern OrdersListStatuses_PARTIALLYDELIVERED :: OrdersListStatuses
-pattern OrdersListStatuses_PARTIALLYDELIVERED = OrdersListStatuses "PARTIALLY_DELIVERED"
-
--- | Return orders with status @delivered@.
-pattern OrdersListStatuses_Delivered :: OrdersListStatuses
-pattern OrdersListStatuses_Delivered = OrdersListStatuses "DELIVERED"
-
--- | Return orders with status @partiallyReturned@.
-pattern OrdersListStatuses_PARTIALLYRETURNED :: OrdersListStatuses
-pattern OrdersListStatuses_PARTIALLYRETURNED = OrdersListStatuses "PARTIALLY_RETURNED"
-
--- | Return orders with status @returned@.
-pattern OrdersListStatuses_Returned :: OrdersListStatuses
-pattern OrdersListStatuses_Returned = OrdersListStatuses "RETURNED"
-
-{-# COMPLETE
-  OrdersListStatuses_Active,
-  OrdersListStatuses_Completed,
-  OrdersListStatuses_Canceled,
-  OrdersListStatuses_INPROGRESS,
-  OrdersListStatuses_PENDINGSHIPMENT,
-  OrdersListStatuses_PARTIALLYSHIPPED,
-  OrdersListStatuses_Shipped,
-  OrdersListStatuses_PARTIALLYDELIVERED,
-  OrdersListStatuses_Delivered,
-  OrdersListStatuses_PARTIALLYRETURNED,
-  OrdersListStatuses_Returned,
-  OrdersListStatuses
   #-}

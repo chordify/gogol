@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRules.Projects.Rulesets.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FirebaseRules.Projects.Rulesets.List
 where
 
 import Gogol.FirebaseRules.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firebaserules.projects.rulesets.list@ method which the
 -- 'FirebaseRulesProjectsRulesetsList' request conforms to.
@@ -69,13 +67,13 @@ data FirebaseRulesProjectsRulesetsList = FirebaseRulesProjectsRulesetsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | @Ruleset@ filter. The list method supports filters with restrictions on @Ruleset.name@. Filters on @Ruleset.create_time@ should use the @date@ function which parses strings that conform to the RFC 3339 date\/time specifications. Example: @create_time > date(\"2017-01-01T00:00:00Z\") AND name=UUID-*@
+    -- | Optional. @Ruleset@ filter. The list method supports filters with restrictions on @Ruleset.name@. Filters on @Ruleset.create_time@ should use the @date@ function which parses strings that conform to the RFC 3339 date\/time specifications. Example: @create_time > date(\"2017-01-01T00:00:00Z\") AND name=UUID-*@
     filter :: (Core.Maybe Core.Text),
     -- | Required. Resource name for the project. Format: @projects\/{project_id}@
     name :: Core.Text,
-    -- | Page size to load. Maximum of 100. Defaults to 10. Note: @page_size@ is just a hint and the service may choose to load less than @page_size@ due to the size of the output. To traverse all of the releases, caller should iterate until the @page_token@ is empty.
+    -- | Optional. Page size to load. Maximum of 100. Defaults to 10. Note: @page_size@ is just a hint and the service may choose to load less than @page_size@ due to the size of the output. To traverse all of the releases, caller should iterate until the @page_token@ is empty.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Next page token for loading the next batch of @Ruleset@ instances.
+    -- | Optional. Next page token for loading the next batch of @Ruleset@ instances.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -102,13 +100,8 @@ newFirebaseRulesProjectsRulesetsList name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FirebaseRulesProjectsRulesetsList
-  where
-  type
-    Rs FirebaseRulesProjectsRulesetsList =
-      ListRulesetsResponse
+instance Core.GoogleRequest FirebaseRulesProjectsRulesetsList where
+  type Rs FirebaseRulesProjectsRulesetsList = ListRulesetsResponse
   type
     Scopes FirebaseRulesProjectsRulesetsList =
       '[ CloudPlatform'FullControl,

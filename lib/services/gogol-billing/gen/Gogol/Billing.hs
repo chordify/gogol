@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference>
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference>
 module Gogol.Billing
   ( -- * Configuration
     billingService,
@@ -60,6 +58,11 @@ module Gogol.Billing
     CloudbillingBillingAccountsList (..),
     newCloudbillingBillingAccountsList,
 
+    -- ** cloudbilling.billingAccounts.move
+    CloudbillingBillingAccountsMoveResource,
+    CloudbillingBillingAccountsMove (..),
+    newCloudbillingBillingAccountsMove,
+
     -- ** cloudbilling.billingAccounts.patch
     CloudbillingBillingAccountsPatchResource,
     CloudbillingBillingAccountsPatch (..),
@@ -75,10 +78,35 @@ module Gogol.Billing
     CloudbillingBillingAccountsSetIamPolicy (..),
     newCloudbillingBillingAccountsSetIamPolicy,
 
+    -- ** cloudbilling.billingAccounts.subAccounts.create
+    CloudbillingBillingAccountsSubAccountsCreateResource,
+    CloudbillingBillingAccountsSubAccountsCreate (..),
+    newCloudbillingBillingAccountsSubAccountsCreate,
+
+    -- ** cloudbilling.billingAccounts.subAccounts.list
+    CloudbillingBillingAccountsSubAccountsListResource,
+    CloudbillingBillingAccountsSubAccountsList (..),
+    newCloudbillingBillingAccountsSubAccountsList,
+
     -- ** cloudbilling.billingAccounts.testIamPermissions
     CloudbillingBillingAccountsTestIamPermissionsResource,
     CloudbillingBillingAccountsTestIamPermissions (..),
     newCloudbillingBillingAccountsTestIamPermissions,
+
+    -- ** cloudbilling.organizations.billingAccounts.create
+    CloudbillingOrganizationsBillingAccountsCreateResource,
+    CloudbillingOrganizationsBillingAccountsCreate (..),
+    newCloudbillingOrganizationsBillingAccountsCreate,
+
+    -- ** cloudbilling.organizations.billingAccounts.list
+    CloudbillingOrganizationsBillingAccountsListResource,
+    CloudbillingOrganizationsBillingAccountsList (..),
+    newCloudbillingOrganizationsBillingAccountsList,
+
+    -- ** cloudbilling.organizations.billingAccounts.move
+    CloudbillingOrganizationsBillingAccountsMoveResource,
+    CloudbillingOrganizationsBillingAccountsMove (..),
+    newCloudbillingOrganizationsBillingAccountsMove,
 
     -- ** cloudbilling.projects.getBillingInfo
     CloudbillingProjectsGetBillingInfoResource,
@@ -169,6 +197,10 @@ module Gogol.Billing
     Money (..),
     newMoney,
 
+    -- ** MoveBillingAccountRequest
+    MoveBillingAccountRequest (..),
+    newMoveBillingAccountRequest,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -215,10 +247,16 @@ import Gogol.Billing.Cloudbilling.BillingAccounts.Create
 import Gogol.Billing.Cloudbilling.BillingAccounts.Get
 import Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
 import Gogol.Billing.Cloudbilling.BillingAccounts.List
+import Gogol.Billing.Cloudbilling.BillingAccounts.Move
 import Gogol.Billing.Cloudbilling.BillingAccounts.Patch
 import Gogol.Billing.Cloudbilling.BillingAccounts.Projects.List
 import Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
+import Gogol.Billing.Cloudbilling.BillingAccounts.SubAccounts.Create
+import Gogol.Billing.Cloudbilling.BillingAccounts.SubAccounts.List
 import Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
+import Gogol.Billing.Cloudbilling.Organizations.BillingAccounts.Create
+import Gogol.Billing.Cloudbilling.Organizations.BillingAccounts.List
+import Gogol.Billing.Cloudbilling.Organizations.BillingAccounts.Move
 import Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
 import Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
 import Gogol.Billing.Cloudbilling.Services.List

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new task on the specified task list.
+-- Creates a new task on the specified task list. Tasks assigned from Docs or Chat Spaces cannot be inserted from Tasks Public API; they can only be created by assigning them from Docs or Chat Spaces. A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.insert@.
 module Gogol.AppsTasks.Tasks.Insert
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.Insert
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasks.insert@ method which the
 -- 'TasksTasksInsert' request conforms to.
@@ -61,7 +59,7 @@ type TasksTasksInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Task
     Core.:> Core.Post '[Core.JSON] Task
 
--- | Creates a new task on the specified task list.
+-- | Creates a new task on the specified task list. Tasks assigned from Docs or Chat Spaces cannot be inserted from Tasks Public API; they can only be created by assigning them from Docs or Chat Spaces. A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.
 --
 -- /See:/ 'newTasksTasksInsert' smart constructor.
 data TasksTasksInsert = TasksTasksInsert
@@ -71,7 +69,7 @@ data TasksTasksInsert = TasksTasksInsert
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.
+    -- | Parent task identifier. If the task is created at the top level, this parameter is omitted. An assigned task cannot be a parent task, nor can it have a parent. Setting the parent to an assigned task results in failure of the request. Optional.
     parent :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Task,

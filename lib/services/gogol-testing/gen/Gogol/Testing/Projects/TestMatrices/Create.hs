@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing.Projects.TestMatrices.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to write to project - INVALID/ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.
+-- Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. The returned matrix will not yet contain the executions that will be created for this matrix. Execution creation happens later on and will require a call to GetTestMatrix. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to write to project - INVALID/ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.create@.
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.create@.
 module Gogol.Testing.Projects.TestMatrices.Create
   ( -- * Resource
     TestingProjectsTestMatricesCreateResource,
@@ -39,7 +37,7 @@ module Gogol.Testing.Projects.TestMatrices.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.create@ method which the
@@ -59,7 +57,7 @@ type TestingProjectsTestMatricesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] TestMatrix
     Core.:> Core.Post '[Core.JSON] TestMatrix
 
--- | Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to write to project - INVALID/ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.
+-- | Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. The returned matrix will not yet contain the executions that will be created for this matrix. Execution creation happens later on and will require a call to GetTestMatrix. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to write to project - INVALID/ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices.
 --
 -- /See:/ 'newTestingProjectsTestMatricesCreate' smart constructor.
 data TestingProjectsTestMatricesCreate = TestingProjectsTestMatricesCreate
@@ -101,13 +99,8 @@ newTestingProjectsTestMatricesCreate payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TestingProjectsTestMatricesCreate
-  where
-  type
-    Rs TestingProjectsTestMatricesCreate =
-      TestMatrix
+instance Core.GoogleRequest TestingProjectsTestMatricesCreate where
+  type Rs TestingProjectsTestMatricesCreate = TestMatrix
   type
     Scopes TestingProjectsTestMatricesCreate =
       '[CloudPlatform'FullControl]

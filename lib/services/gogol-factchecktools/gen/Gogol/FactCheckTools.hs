@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FactCheckTools
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -34,9 +32,14 @@ module Gogol.FactCheckTools
     factCheckToolsService,
 
     -- * OAuth Scopes
-    Userinfo'Email,
+    Factchecktools'FullControl,
 
     -- * Resources
+
+    -- ** factchecktools.claims.imageSearch
+    FactCheckToolsClaimsImageSearchResource,
+    FactCheckToolsClaimsImageSearch (..),
+    newFactCheckToolsClaimsImageSearch,
 
     -- ** factchecktools.claims.search
     FactCheckToolsClaimsSearchResource,
@@ -101,6 +104,14 @@ module Gogol.FactCheckTools
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
 
+    -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse,
+
+    -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult,
+
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
     GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse,
@@ -119,6 +130,7 @@ module Gogol.FactCheckTools
   )
 where
 
+import Gogol.FactCheckTools.Claims.ImageSearch
 import Gogol.FactCheckTools.Claims.Search
 import Gogol.FactCheckTools.Pages.Create
 import Gogol.FactCheckTools.Pages.Delete

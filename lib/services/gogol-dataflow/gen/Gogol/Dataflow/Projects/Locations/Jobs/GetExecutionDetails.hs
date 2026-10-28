@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.GetExecutionDetails
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.getExecutionDetails@ method which the
 -- 'DataflowProjectsLocationsJobsGetExecutionDetails' request conforms to.
@@ -99,56 +97,53 @@ newDataflowProjectsLocationsJobsGetExecutionDetails ::
   -- |  A project id. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsJobsGetExecutionDetails
-newDataflowProjectsLocationsJobsGetExecutionDetails jobId location projectId =
-  DataflowProjectsLocationsJobsGetExecutionDetails
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsGetExecutionDetails
+  jobId
+  location
+  projectId =
+    DataflowProjectsLocationsJobsGetExecutionDetails
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DataflowProjectsLocationsJobsGetExecutionDetails
   where
   type
-    Rs
-      DataflowProjectsLocationsJobsGetExecutionDetails =
+    Rs DataflowProjectsLocationsJobsGetExecutionDetails =
       JobExecutionDetails
   type
-    Scopes
-      DataflowProjectsLocationsJobsGetExecutionDetails =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsJobsGetExecutionDetails {..} =
-      go
-        projectId
-        location
-        jobId
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsJobsGetExecutionDetailsResource
-            )
-            Core.mempty
+    Scopes DataflowProjectsLocationsJobsGetExecutionDetails =
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsJobsGetExecutionDetails {..} =
+    go
+      projectId
+      location
+      jobId
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                DataflowProjectsLocationsJobsGetExecutionDetailsResource
+          )
+          Core.mempty

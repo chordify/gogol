@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes a node pool from a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.delete@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.delete@.
 module Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
   ( -- * Resource
     ContainerProjectsLocationsClustersNodePoolsDeleteResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.Delete
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.delete@ method which the
 -- 'ContainerProjectsLocationsClustersNodePoolsDelete' request conforms to.
@@ -93,7 +91,8 @@ newContainerProjectsLocationsClustersNodePoolsDelete ::
   ContainerProjectsLocationsClustersNodePoolsDelete
 newContainerProjectsLocationsClustersNodePoolsDelete name =
   ContainerProjectsLocationsClustersNodePoolsDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       clusterId = Core.Nothing,
@@ -110,33 +109,30 @@ instance
     ContainerProjectsLocationsClustersNodePoolsDelete
   where
   type
-    Rs
-      ContainerProjectsLocationsClustersNodePoolsDelete =
+    Rs ContainerProjectsLocationsClustersNodePoolsDelete =
       Operation
   type
-    Scopes
-      ContainerProjectsLocationsClustersNodePoolsDelete =
+    Scopes ContainerProjectsLocationsClustersNodePoolsDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersNodePoolsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        clusterId
-        nodePoolId
-        projectId
-        uploadType
-        uploadProtocol
-        zone
-        (Core.Just Core.AltJSON)
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersNodePoolsDeleteResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsLocationsClustersNodePoolsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      clusterId
+      nodePoolId
+      projectId
+      uploadType
+      uploadProtocol
+      zone
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ContainerProjectsLocationsClustersNodePoolsDeleteResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -89,6 +87,26 @@ module Gogol.Spanner
     SpannerProjectsInstanceConfigsPatchResource,
     SpannerProjectsInstanceConfigsPatch (..),
     newSpannerProjectsInstanceConfigsPatch,
+
+    -- ** spanner.projects.instanceConfigs.ssdCaches.operations.cancel
+    SpannerProjectsInstanceConfigsSsdCachesOperationsCancelResource,
+    SpannerProjectsInstanceConfigsSsdCachesOperationsCancel (..),
+    newSpannerProjectsInstanceConfigsSsdCachesOperationsCancel,
+
+    -- ** spanner.projects.instanceConfigs.ssdCaches.operations.delete
+    SpannerProjectsInstanceConfigsSsdCachesOperationsDeleteResource,
+    SpannerProjectsInstanceConfigsSsdCachesOperationsDelete (..),
+    newSpannerProjectsInstanceConfigsSsdCachesOperationsDelete,
+
+    -- ** spanner.projects.instanceConfigs.ssdCaches.operations.get
+    SpannerProjectsInstanceConfigsSsdCachesOperationsGetResource,
+    SpannerProjectsInstanceConfigsSsdCachesOperationsGet (..),
+    newSpannerProjectsInstanceConfigsSsdCachesOperationsGet,
+
+    -- ** spanner.projects.instanceConfigs.ssdCaches.operations.list
+    SpannerProjectsInstanceConfigsSsdCachesOperationsListResource,
+    SpannerProjectsInstanceConfigsSsdCachesOperationsList (..),
+    newSpannerProjectsInstanceConfigsSsdCachesOperationsList,
 
     -- ** spanner.projects.instances.backupOperations.list
     SpannerProjectsInstancesBackupOperationsListResource,
@@ -170,6 +188,56 @@ module Gogol.Spanner
     SpannerProjectsInstancesDatabaseOperationsList (..),
     newSpannerProjectsInstancesDatabaseOperationsList,
 
+    -- ** spanner.projects.instances.databases.addSplitPoints
+    SpannerProjectsInstancesDatabasesAddSplitPointsResource,
+    SpannerProjectsInstancesDatabasesAddSplitPoints (..),
+    newSpannerProjectsInstancesDatabasesAddSplitPoints,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.create
+    SpannerProjectsInstancesDatabasesBackupSchedulesCreateResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesCreate (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesCreate,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.delete
+    SpannerProjectsInstancesDatabasesBackupSchedulesDeleteResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesDelete (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesDelete,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.get
+    SpannerProjectsInstancesDatabasesBackupSchedulesGetResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesGet (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesGet,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.getIamPolicy
+    SpannerProjectsInstancesDatabasesBackupSchedulesGetIamPolicyResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesGetIamPolicy (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesGetIamPolicy,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.list
+    SpannerProjectsInstancesDatabasesBackupSchedulesListResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesList (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesList,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.patch
+    SpannerProjectsInstancesDatabasesBackupSchedulesPatchResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesPatch (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesPatch,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.setIamPolicy
+    SpannerProjectsInstancesDatabasesBackupSchedulesSetIamPolicyResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesSetIamPolicy (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesSetIamPolicy,
+
+    -- ** spanner.projects.instances.databases.backupSchedules.testIamPermissions
+    SpannerProjectsInstancesDatabasesBackupSchedulesTestIamPermissionsResource,
+    SpannerProjectsInstancesDatabasesBackupSchedulesTestIamPermissions (..),
+    newSpannerProjectsInstancesDatabasesBackupSchedulesTestIamPermissions,
+
+    -- ** spanner.projects.instances.databases.changequorum
+    SpannerProjectsInstancesDatabasesChangequorumResource,
+    SpannerProjectsInstancesDatabasesChangequorum (..),
+    newSpannerProjectsInstancesDatabasesChangequorum,
+
     -- ** spanner.projects.instances.databases.create
     SpannerProjectsInstancesDatabasesCreateResource,
     SpannerProjectsInstancesDatabasesCreate (..),
@@ -235,15 +303,35 @@ module Gogol.Spanner
     SpannerProjectsInstancesDatabasesOperationsList (..),
     newSpannerProjectsInstancesDatabasesOperationsList,
 
+    -- ** spanner.projects.instances.databases.patch
+    SpannerProjectsInstancesDatabasesPatchResource,
+    SpannerProjectsInstancesDatabasesPatch (..),
+    newSpannerProjectsInstancesDatabasesPatch,
+
     -- ** spanner.projects.instances.databases.restore
     SpannerProjectsInstancesDatabasesRestoreResource,
     SpannerProjectsInstancesDatabasesRestore (..),
     newSpannerProjectsInstancesDatabasesRestore,
 
+    -- ** spanner.projects.instances.databases.sessions.adaptMessage
+    SpannerProjectsInstancesDatabasesSessionsAdaptMessageResource,
+    SpannerProjectsInstancesDatabasesSessionsAdaptMessage (..),
+    newSpannerProjectsInstancesDatabasesSessionsAdaptMessage,
+
+    -- ** spanner.projects.instances.databases.sessions.adapter
+    SpannerProjectsInstancesDatabasesSessionsAdapterResource,
+    SpannerProjectsInstancesDatabasesSessionsAdapter (..),
+    newSpannerProjectsInstancesDatabasesSessionsAdapter,
+
     -- ** spanner.projects.instances.databases.sessions.batchCreate
     SpannerProjectsInstancesDatabasesSessionsBatchCreateResource,
     SpannerProjectsInstancesDatabasesSessionsBatchCreate (..),
     newSpannerProjectsInstancesDatabasesSessionsBatchCreate,
+
+    -- ** spanner.projects.instances.databases.sessions.batchWrite
+    SpannerProjectsInstancesDatabasesSessionsBatchWriteResource,
+    SpannerProjectsInstancesDatabasesSessionsBatchWrite (..),
+    newSpannerProjectsInstancesDatabasesSessionsBatchWrite,
 
     -- ** spanner.projects.instances.databases.sessions.beginTransaction
     SpannerProjectsInstancesDatabasesSessionsBeginTransactionResource,
@@ -345,10 +433,65 @@ module Gogol.Spanner
     SpannerProjectsInstancesGetIamPolicy (..),
     newSpannerProjectsInstancesGetIamPolicy,
 
+    -- ** spanner.projects.instances.instancePartitionOperations.list
+    SpannerProjectsInstancesInstancePartitionOperationsListResource,
+    SpannerProjectsInstancesInstancePartitionOperationsList (..),
+    newSpannerProjectsInstancesInstancePartitionOperationsList,
+
+    -- ** spanner.projects.instances.instancePartitions.create
+    SpannerProjectsInstancesInstancePartitionsCreateResource,
+    SpannerProjectsInstancesInstancePartitionsCreate (..),
+    newSpannerProjectsInstancesInstancePartitionsCreate,
+
+    -- ** spanner.projects.instances.instancePartitions.delete
+    SpannerProjectsInstancesInstancePartitionsDeleteResource,
+    SpannerProjectsInstancesInstancePartitionsDelete (..),
+    newSpannerProjectsInstancesInstancePartitionsDelete,
+
+    -- ** spanner.projects.instances.instancePartitions.get
+    SpannerProjectsInstancesInstancePartitionsGetResource,
+    SpannerProjectsInstancesInstancePartitionsGet (..),
+    newSpannerProjectsInstancesInstancePartitionsGet,
+
+    -- ** spanner.projects.instances.instancePartitions.list
+    SpannerProjectsInstancesInstancePartitionsListResource,
+    SpannerProjectsInstancesInstancePartitionsList (..),
+    newSpannerProjectsInstancesInstancePartitionsList,
+
+    -- ** spanner.projects.instances.instancePartitions.operations.cancel
+    SpannerProjectsInstancesInstancePartitionsOperationsCancelResource,
+    SpannerProjectsInstancesInstancePartitionsOperationsCancel (..),
+    newSpannerProjectsInstancesInstancePartitionsOperationsCancel,
+
+    -- ** spanner.projects.instances.instancePartitions.operations.delete
+    SpannerProjectsInstancesInstancePartitionsOperationsDeleteResource,
+    SpannerProjectsInstancesInstancePartitionsOperationsDelete (..),
+    newSpannerProjectsInstancesInstancePartitionsOperationsDelete,
+
+    -- ** spanner.projects.instances.instancePartitions.operations.get
+    SpannerProjectsInstancesInstancePartitionsOperationsGetResource,
+    SpannerProjectsInstancesInstancePartitionsOperationsGet (..),
+    newSpannerProjectsInstancesInstancePartitionsOperationsGet,
+
+    -- ** spanner.projects.instances.instancePartitions.operations.list
+    SpannerProjectsInstancesInstancePartitionsOperationsListResource,
+    SpannerProjectsInstancesInstancePartitionsOperationsList (..),
+    newSpannerProjectsInstancesInstancePartitionsOperationsList,
+
+    -- ** spanner.projects.instances.instancePartitions.patch
+    SpannerProjectsInstancesInstancePartitionsPatchResource,
+    SpannerProjectsInstancesInstancePartitionsPatch (..),
+    newSpannerProjectsInstancesInstancePartitionsPatch,
+
     -- ** spanner.projects.instances.list
     SpannerProjectsInstancesListResource,
     SpannerProjectsInstancesList (..),
     newSpannerProjectsInstancesList,
+
+    -- ** spanner.projects.instances.move
+    SpannerProjectsInstancesMoveResource,
+    SpannerProjectsInstancesMove (..),
+    newSpannerProjectsInstancesMove,
 
     -- ** spanner.projects.instances.operations.cancel
     SpannerProjectsInstancesOperationsCancelResource,
@@ -395,6 +538,54 @@ module Gogol.Spanner
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AdaptMessageRequest
+    AdaptMessageRequest (..),
+    newAdaptMessageRequest,
+
+    -- ** AdaptMessageRequest_Attachments
+    AdaptMessageRequest_Attachments (..),
+    newAdaptMessageRequest_Attachments,
+
+    -- ** AdaptMessageResponse
+    AdaptMessageResponse (..),
+    newAdaptMessageResponse,
+
+    -- ** AdaptMessageResponse_StateUpdates
+    AdaptMessageResponse_StateUpdates (..),
+    newAdaptMessageResponse_StateUpdates,
+
+    -- ** AdapterSession
+    AdapterSession (..),
+    newAdapterSession,
+
+    -- ** AddSplitPointsRequest
+    AddSplitPointsRequest (..),
+    newAddSplitPointsRequest,
+
+    -- ** AddSplitPointsResponse
+    AddSplitPointsResponse (..),
+    newAddSplitPointsResponse,
+
+    -- ** AsymmetricAutoscalingOption
+    AsymmetricAutoscalingOption (..),
+    newAsymmetricAutoscalingOption,
+
+    -- ** AutoscalingConfig
+    AutoscalingConfig (..),
+    newAutoscalingConfig,
+
+    -- ** AutoscalingConfigOverrides
+    AutoscalingConfigOverrides (..),
+    newAutoscalingConfigOverrides,
+
+    -- ** AutoscalingLimits
+    AutoscalingLimits (..),
+    newAutoscalingLimits,
+
+    -- ** AutoscalingTargets
+    AutoscalingTargets (..),
+    newAutoscalingTargets,
+
     -- ** Backup
     Backup (..),
     newBackup,
@@ -409,6 +600,18 @@ module Gogol.Spanner
     BackupInfo (..),
     newBackupInfo,
 
+    -- ** BackupInstancePartition
+    BackupInstancePartition (..),
+    newBackupInstancePartition,
+
+    -- ** BackupSchedule
+    BackupSchedule (..),
+    newBackupSchedule,
+
+    -- ** BackupScheduleSpec
+    BackupScheduleSpec (..),
+    newBackupScheduleSpec,
+
     -- ** BatchCreateSessionsRequest
     BatchCreateSessionsRequest (..),
     newBatchCreateSessionsRequest,
@@ -417,6 +620,14 @@ module Gogol.Spanner
     BatchCreateSessionsResponse (..),
     newBatchCreateSessionsResponse,
 
+    -- ** BatchWriteRequest
+    BatchWriteRequest (..),
+    newBatchWriteRequest,
+
+    -- ** BatchWriteResponse
+    BatchWriteResponse (..),
+    newBatchWriteResponse,
+
     -- ** BeginTransactionRequest
     BeginTransactionRequest (..),
     newBeginTransactionRequest,
@@ -424,6 +635,14 @@ module Gogol.Spanner
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** ChangeQuorumMetadata
+    ChangeQuorumMetadata (..),
+    newChangeQuorumMetadata,
+
+    -- ** ChangeQuorumRequest
+    ChangeQuorumRequest (..),
+    newChangeQuorumRequest,
 
     -- ** ChildLink
     ChildLink (..),
@@ -463,6 +682,13 @@ module Gogol.Spanner
     CopyBackupRequest (..),
     newCopyBackupRequest,
 
+    -- ** CreateBackupEncryptionConfig
+    CreateBackupEncryptionConfig (..),
+    newCreateBackupEncryptionConfig,
+
+    -- ** CreateBackupEncryptionConfig_EncryptionType
+    CreateBackupEncryptionConfig_EncryptionType (..),
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -490,6 +716,17 @@ module Gogol.Spanner
     CreateInstanceMetadata (..),
     newCreateInstanceMetadata,
 
+    -- ** CreateInstanceMetadata_ExpectedFulfillmentPeriod
+    CreateInstanceMetadata_ExpectedFulfillmentPeriod (..),
+
+    -- ** CreateInstancePartitionMetadata
+    CreateInstancePartitionMetadata (..),
+    newCreateInstancePartitionMetadata,
+
+    -- ** CreateInstancePartitionRequest
+    CreateInstancePartitionRequest (..),
+    newCreateInstancePartitionRequest,
+
     -- ** CreateInstanceRequest
     CreateInstanceRequest (..),
     newCreateInstanceRequest,
@@ -497,6 +734,10 @@ module Gogol.Spanner
     -- ** CreateSessionRequest
     CreateSessionRequest (..),
     newCreateSessionRequest,
+
+    -- ** CrontabSpec
+    CrontabSpec (..),
+    newCrontabSpec,
 
     -- ** Database
     Database (..),
@@ -511,6 +752,10 @@ module Gogol.Spanner
     -- ** DatabaseRole
     DatabaseRole (..),
     newDatabaseRole,
+
+    -- ** DdlStatementActionInfo
+    DdlStatementActionInfo (..),
+    newDdlStatementActionInfo,
 
     -- ** Delete'
     Delete' (..),
@@ -527,6 +772,14 @@ module Gogol.Spanner
     -- ** DiagnosticMessage_Severity
     DiagnosticMessage_Severity (..),
 
+    -- ** DirectedReadOptions
+    DirectedReadOptions (..),
+    newDirectedReadOptions,
+
+    -- ** DualRegionQuorum
+    DualRegionQuorum (..),
+    newDualRegionQuorum,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -541,6 +794,10 @@ module Gogol.Spanner
 
     -- ** EncryptionInfo_EncryptionType
     EncryptionInfo_EncryptionType (..),
+
+    -- ** ExcludeReplicas
+    ExcludeReplicas (..),
+    newExcludeReplicas,
 
     -- ** ExecuteBatchDmlRequest
     ExecuteBatchDmlRequest (..),
@@ -580,6 +837,10 @@ module Gogol.Spanner
     -- ** FreeInstanceMetadata_ExpireBehavior
     FreeInstanceMetadata_ExpireBehavior (..),
 
+    -- ** FullBackupSpec
+    FullBackupSpec (..),
+    newFullBackupSpec,
+
     -- ** GetDatabaseDdlResponse
     GetDatabaseDdlResponse (..),
     newGetDatabaseDdlResponse,
@@ -591,6 +852,18 @@ module Gogol.Spanner
     -- ** GetPolicyOptions
     GetPolicyOptions (..),
     newGetPolicyOptions,
+
+    -- ** IncludeReplicas
+    IncludeReplicas (..),
+    newIncludeReplicas,
+
+    -- ** IncrementalBackupSpec
+    IncrementalBackupSpec (..),
+    newIncrementalBackupSpec,
+
+    -- ** IndexAdvice
+    IndexAdvice (..),
+    newIndexAdvice,
 
     -- ** IndexedHotKey
     IndexedHotKey (..),
@@ -611,6 +884,12 @@ module Gogol.Spanner
     -- ** Instance
     Instance (..),
     newInstance,
+
+    -- ** Instance_DefaultBackupScheduleType
+    Instance_DefaultBackupScheduleType (..),
+
+    -- ** Instance_Edition
+    Instance_Edition (..),
 
     -- ** Instance_InstanceType
     Instance_InstanceType (..),
@@ -636,12 +915,30 @@ module Gogol.Spanner
     InstanceConfig_Labels (..),
     newInstanceConfig_Labels,
 
+    -- ** InstanceConfig_QuorumType
+    InstanceConfig_QuorumType (..),
+
     -- ** InstanceConfig_State
     InstanceConfig_State (..),
 
     -- ** InstanceOperationProgress
     InstanceOperationProgress (..),
     newInstanceOperationProgress,
+
+    -- ** InstancePartition
+    InstancePartition (..),
+    newInstancePartition,
+
+    -- ** InstancePartition_State
+    InstancePartition_State (..),
+
+    -- ** InstanceReplicaSelection
+    InstanceReplicaSelection (..),
+    newInstanceReplicaSelection,
+
+    -- ** Key
+    Key (..),
+    newKey,
 
     -- ** KeyRange
     KeyRange (..),
@@ -662,6 +959,10 @@ module Gogol.Spanner
     -- ** ListBackupOperationsResponse
     ListBackupOperationsResponse (..),
     newListBackupOperationsResponse,
+
+    -- ** ListBackupSchedulesResponse
+    ListBackupSchedulesResponse (..),
+    newListBackupSchedulesResponse,
 
     -- ** ListBackupsResponse
     ListBackupsResponse (..),
@@ -686,6 +987,14 @@ module Gogol.Spanner
     -- ** ListInstanceConfigsResponse
     ListInstanceConfigsResponse (..),
     newListInstanceConfigsResponse,
+
+    -- ** ListInstancePartitionOperationsResponse
+    ListInstancePartitionOperationsResponse (..),
+    newListInstancePartitionOperationsResponse,
+
+    -- ** ListInstancePartitionsResponse
+    ListInstancePartitionsResponse (..),
+    newListInstancePartitionsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),
@@ -734,9 +1043,21 @@ module Gogol.Spanner
     MetricMatrixRow (..),
     newMetricMatrixRow,
 
+    -- ** MoveInstanceRequest
+    MoveInstanceRequest (..),
+    newMoveInstanceRequest,
+
+    -- ** MultiplexedSessionPrecommitToken
+    MultiplexedSessionPrecommitToken (..),
+    newMultiplexedSessionPrecommitToken,
+
     -- ** Mutation
     Mutation (..),
     newMutation,
+
+    -- ** MutationGroup
+    MutationGroup (..),
+    newMutationGroup,
 
     -- ** Operation
     Operation (..),
@@ -817,6 +1138,10 @@ module Gogol.Spanner
     PrefixNode (..),
     newPrefixNode,
 
+    -- ** QueryAdvisorResult
+    QueryAdvisorResult (..),
+    newQueryAdvisorResult,
+
     -- ** QueryOptions
     QueryOptions (..),
     newQueryOptions,
@@ -824,6 +1149,17 @@ module Gogol.Spanner
     -- ** QueryPlan
     QueryPlan (..),
     newQueryPlan,
+
+    -- ** QuorumInfo
+    QuorumInfo (..),
+    newQuorumInfo,
+
+    -- ** QuorumInfo_Initiator
+    QuorumInfo_Initiator (..),
+
+    -- ** QuorumType
+    QuorumType (..),
+    newQuorumType,
 
     -- ** ReadOnly
     ReadOnly (..),
@@ -833,6 +1169,12 @@ module Gogol.Spanner
     ReadRequest (..),
     newReadRequest,
 
+    -- ** ReadRequest_LockHint
+    ReadRequest_LockHint (..),
+
+    -- ** ReadRequest_OrderBy
+    ReadRequest_OrderBy (..),
+
     -- ** ReadWrite
     ReadWrite (..),
     newReadWrite,
@@ -840,12 +1182,23 @@ module Gogol.Spanner
     -- ** ReadWrite_ReadLockMode
     ReadWrite_ReadLockMode (..),
 
+    -- ** ReplicaComputeCapacity
+    ReplicaComputeCapacity (..),
+    newReplicaComputeCapacity,
+
     -- ** ReplicaInfo
     ReplicaInfo (..),
     newReplicaInfo,
 
     -- ** ReplicaInfo_Type
     ReplicaInfo_Type (..),
+
+    -- ** ReplicaSelection
+    ReplicaSelection (..),
+    newReplicaSelection,
+
+    -- ** ReplicaSelection_Type
+    ReplicaSelection_Type (..),
 
     -- ** RequestOptions
     RequestOptions (..),
@@ -931,6 +1284,14 @@ module Gogol.Spanner
     ShortRepresentation_Subqueries (..),
     newShortRepresentation_Subqueries,
 
+    -- ** SingleRegionQuorum
+    SingleRegionQuorum (..),
+    newSingleRegionQuorum,
+
+    -- ** SplitPoints
+    SplitPoints (..),
+    newSplitPoints,
+
     -- ** Statement
     Statement (..),
     newStatement,
@@ -993,6 +1354,14 @@ module Gogol.Spanner
     UpdateDatabaseDdlRequest (..),
     newUpdateDatabaseDdlRequest,
 
+    -- ** UpdateDatabaseMetadata
+    UpdateDatabaseMetadata (..),
+    newUpdateDatabaseMetadata,
+
+    -- ** UpdateDatabaseRequest
+    UpdateDatabaseRequest (..),
+    newUpdateDatabaseRequest,
+
     -- ** UpdateInstanceConfigMetadata
     UpdateInstanceConfigMetadata (..),
     newUpdateInstanceConfigMetadata,
@@ -1004,6 +1373,17 @@ module Gogol.Spanner
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
+
+    -- ** UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+    UpdateInstanceMetadata_ExpectedFulfillmentPeriod (..),
+
+    -- ** UpdateInstancePartitionMetadata
+    UpdateInstancePartitionMetadata (..),
+    newUpdateInstancePartitionMetadata,
+
+    -- ** UpdateInstancePartitionRequest
+    UpdateInstancePartitionRequest (..),
+    newUpdateInstancePartitionRequest,
 
     -- ** UpdateInstanceRequest
     UpdateInstanceRequest (..),
@@ -1041,6 +1421,10 @@ import Gogol.Spanner.Projects.InstanceConfigs.Operations.Delete
 import Gogol.Spanner.Projects.InstanceConfigs.Operations.Get
 import Gogol.Spanner.Projects.InstanceConfigs.Operations.List
 import Gogol.Spanner.Projects.InstanceConfigs.Patch
+import Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Cancel
+import Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Delete
+import Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.Get
+import Gogol.Spanner.Projects.InstanceConfigs.SsdCaches.Operations.List
 import Gogol.Spanner.Projects.Instances.BackupOperations.List
 import Gogol.Spanner.Projects.Instances.Backups.Copy
 import Gogol.Spanner.Projects.Instances.Backups.Create
@@ -1057,6 +1441,16 @@ import Gogol.Spanner.Projects.Instances.Backups.SetIamPolicy
 import Gogol.Spanner.Projects.Instances.Backups.TestIamPermissions
 import Gogol.Spanner.Projects.Instances.Create
 import Gogol.Spanner.Projects.Instances.DatabaseOperations.List
+import Gogol.Spanner.Projects.Instances.Databases.AddSplitPoints
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Create
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Delete
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Get
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.GetIamPolicy
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.List
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.Patch
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.SetIamPolicy
+import Gogol.Spanner.Projects.Instances.Databases.BackupSchedules.TestIamPermissions
+import Gogol.Spanner.Projects.Instances.Databases.Changequorum
 import Gogol.Spanner.Projects.Instances.Databases.Create
 import Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.List
 import Gogol.Spanner.Projects.Instances.Databases.DatabaseRoles.TestIamPermissions
@@ -1070,8 +1464,12 @@ import Gogol.Spanner.Projects.Instances.Databases.Operations.Cancel
 import Gogol.Spanner.Projects.Instances.Databases.Operations.Delete
 import Gogol.Spanner.Projects.Instances.Databases.Operations.Get
 import Gogol.Spanner.Projects.Instances.Databases.Operations.List
+import Gogol.Spanner.Projects.Instances.Databases.Patch
 import Gogol.Spanner.Projects.Instances.Databases.Restore
+import Gogol.Spanner.Projects.Instances.Databases.Sessions.AdaptMessage
+import Gogol.Spanner.Projects.Instances.Databases.Sessions.Adapter
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchCreate
+import Gogol.Spanner.Projects.Instances.Databases.Sessions.BatchWrite
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.BeginTransaction
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.Commit
 import Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
@@ -1092,7 +1490,18 @@ import Gogol.Spanner.Projects.Instances.Databases.UpdateDdl
 import Gogol.Spanner.Projects.Instances.Delete
 import Gogol.Spanner.Projects.Instances.Get
 import Gogol.Spanner.Projects.Instances.GetIamPolicy
+import Gogol.Spanner.Projects.Instances.InstancePartitionOperations.List
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Create
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Delete
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Get
+import Gogol.Spanner.Projects.Instances.InstancePartitions.List
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Cancel
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Delete
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.Get
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Operations.List
+import Gogol.Spanner.Projects.Instances.InstancePartitions.Patch
 import Gogol.Spanner.Projects.Instances.List
+import Gogol.Spanner.Projects.Instances.Move
 import Gogol.Spanner.Projects.Instances.Operations.Cancel
 import Gogol.Spanner.Projects.Instances.Operations.Delete
 import Gogol.Spanner.Projects.Instances.Operations.Get

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Debug.Identitysources.Items.ListForunmappedidentity
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.debug.identitysources.items.listForunmappedidentity@ method which the
 -- 'CloudSearchDebugIdentitysourcesItemsListForunmappedidentity' request conforms to.
@@ -52,9 +50,7 @@ type CloudSearchDebugIdentitysourcesItemsListForunmappedidentityResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "debugOptions.enableDebugging"
-              Core.Bool
+    Core.:> Core.QueryParam "debugOptions.enableDebugging" Core.Bool
     Core.:> Core.QueryParam "groupResourceName" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
@@ -62,9 +58,7 @@ type CloudSearchDebugIdentitysourcesItemsListForunmappedidentityResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "userResourceName" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListItemNamesForUnmappedIdentityResponse
+    Core.:> Core.Get '[Core.JSON] ListItemNamesForUnmappedIdentityResponse
 
 -- | Lists names of items associated with an unmapped identity. __Note:__ This API requires an admin account to execute.
 --
@@ -78,7 +72,6 @@ data CloudSearchDebugIdentitysourcesItemsListForunmappedidentity = CloudSearchDe
     callback :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     debugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- |
     groupResourceName :: (Core.Maybe Core.Text),
     -- | Maximum number of items to fetch in a request. Defaults to 100.
     pageSize :: (Core.Maybe Core.Int32),
@@ -90,7 +83,6 @@ data CloudSearchDebugIdentitysourcesItemsListForunmappedidentity = CloudSearchDe
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- |
     userResourceName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -100,28 +92,30 @@ newCloudSearchDebugIdentitysourcesItemsListForunmappedidentity ::
   -- |  The name of the identity source, in the following format: identitysources\/{source_id}} See 'parent'.
   Core.Text ->
   CloudSearchDebugIdentitysourcesItemsListForunmappedidentity
-newCloudSearchDebugIdentitysourcesItemsListForunmappedidentity parent =
-  CloudSearchDebugIdentitysourcesItemsListForunmappedidentity
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      debugOptionsEnableDebugging = Core.Nothing,
-      groupResourceName = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userResourceName = Core.Nothing
-    }
+newCloudSearchDebugIdentitysourcesItemsListForunmappedidentity
+  parent =
+    CloudSearchDebugIdentitysourcesItemsListForunmappedidentity
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        debugOptionsEnableDebugging =
+          Core.Nothing,
+        groupResourceName = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userResourceName = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudSearchDebugIdentitysourcesItemsListForunmappedidentity
   where
   type
-    Rs
-      CloudSearchDebugIdentitysourcesItemsListForunmappedidentity =
+    Rs CloudSearchDebugIdentitysourcesItemsListForunmappedidentity =
       ListItemNamesForUnmappedIdentityResponse
   type
     Scopes

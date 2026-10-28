@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceBroker.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.ServiceBroker.SetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.setIamPolicy@ method which the
@@ -55,9 +53,7 @@ type ServiceBrokerSetIamPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleIamV1__SetIamPolicyRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleIamV1__SetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] GoogleIamV1__Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy.
@@ -102,9 +98,7 @@ newServiceBrokerSetIamPolicy payload resource =
     }
 
 instance Core.GoogleRequest ServiceBrokerSetIamPolicy where
-  type
-    Rs ServiceBrokerSetIamPolicy =
-      GoogleIamV1__Policy
+  type Rs ServiceBrokerSetIamPolicy = GoogleIamV1__Policy
   type
     Scopes ServiceBrokerSetIamPolicy =
       '[CloudPlatform'FullControl]
@@ -122,7 +116,5 @@ instance Core.GoogleRequest ServiceBrokerSetIamPolicy where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ServiceBrokerSetIamPolicyResource
-          )
+          (Core.Proxy :: Core.Proxy ServiceBrokerSetIamPolicyResource)
           Core.mempty

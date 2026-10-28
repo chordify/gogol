@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.ActionResults.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.RemoteBuildExecution.ActionResults.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.get@ method which the
@@ -59,9 +57,7 @@ type RemoteBuildExecutionActionResultsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2ActionResult
+    Core.:> Core.Get '[Core.JSON] BuildBazelRemoteExecutionV2ActionResult
 
 -- | Retrieve a cached execution result. Implementations SHOULD ensure that any blobs referenced from the ContentAddressableStorage are available at the time of returning the ActionResult and will be for some period of time afterwards. The lifetimes of the referenced blobs SHOULD be increased if necessary and applicable. Errors: * @NOT_FOUND@: The requested @ActionResult@ is not in the cache.
 --
@@ -116,37 +112,32 @@ newRemoteBuildExecutionActionResultsGet hash instanceName sizeBytes =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RemoteBuildExecutionActionResultsGet
-  where
+instance Core.GoogleRequest RemoteBuildExecutionActionResultsGet where
   type
     Rs RemoteBuildExecutionActionResultsGet =
       BuildBazelRemoteExecutionV2ActionResult
   type
     Scopes RemoteBuildExecutionActionResultsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    RemoteBuildExecutionActionResultsGet {..} =
-      go
-        instanceName
-        hash
-        sizeBytes
-        xgafv
-        accessToken
-        callback
-        (inlineOutputFiles Core.^. Core._Default)
-        inlineStderr
-        inlineStdout
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        remoteBuildExecutionService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RemoteBuildExecutionActionResultsGetResource
-            )
-            Core.mempty
+  requestClient RemoteBuildExecutionActionResultsGet {..} =
+    go
+      instanceName
+      hash
+      sizeBytes
+      xgafv
+      accessToken
+      callback
+      (inlineOutputFiles Core.^. Core._Default)
+      inlineStderr
+      inlineStdout
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      remoteBuildExecutionService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RemoteBuildExecutionActionResultsGetResource
+          )
+          Core.mempty

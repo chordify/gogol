@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Listings.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Listings.List
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.listings.list@ method which the
 -- 'AndroidPublisherEditsListingsList' request conforms to.
@@ -99,13 +97,8 @@ newAndroidPublisherEditsListingsList editId packageName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherEditsListingsList
-  where
-  type
-    Rs AndroidPublisherEditsListingsList =
-      ListingsListResponse
+instance Core.GoogleRequest AndroidPublisherEditsListingsList where
+  type Rs AndroidPublisherEditsListingsList = ListingsListResponse
   type
     Scopes AndroidPublisherEditsListingsList =
       '[Androidpublisher'FullControl]

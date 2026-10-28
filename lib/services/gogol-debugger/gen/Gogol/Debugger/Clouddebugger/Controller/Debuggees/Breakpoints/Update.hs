@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the @location@, @condition@ and @expressions@ fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.controller.debuggees.breakpoints.update@.
 module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
   ( -- * Resource
     ClouddebuggerControllerDebuggeesBreakpointsUpdateResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Breakpoints.Update
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.breakpoints.update@ method which the
 -- 'ClouddebuggerControllerDebuggeesBreakpointsUpdate' request conforms to.
@@ -57,12 +55,8 @@ type ClouddebuggerControllerDebuggeesBreakpointsUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UpdateActiveBreakpointRequest
-    Core.:> Core.Put
-              '[Core.JSON]
-              UpdateActiveBreakpointResponse
+    Core.:> Core.ReqBody '[Core.JSON] UpdateActiveBreakpointRequest
+    Core.:> Core.Put '[Core.JSON] UpdateActiveBreakpointResponse
 
 -- | Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the @location@, @condition@ and @expressions@ fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.
 --
@@ -96,50 +90,49 @@ newClouddebuggerControllerDebuggeesBreakpointsUpdate ::
   -- |  Multipart request metadata. See 'payload'.
   UpdateActiveBreakpointRequest ->
   ClouddebuggerControllerDebuggeesBreakpointsUpdate
-newClouddebuggerControllerDebuggeesBreakpointsUpdate debuggeeId id payload =
-  ClouddebuggerControllerDebuggeesBreakpointsUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      debuggeeId = debuggeeId,
-      id = id,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClouddebuggerControllerDebuggeesBreakpointsUpdate
+  debuggeeId
+  id
+  payload =
+    ClouddebuggerControllerDebuggeesBreakpointsUpdate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        debuggeeId = debuggeeId,
+        id = id,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClouddebuggerControllerDebuggeesBreakpointsUpdate
   where
   type
-    Rs
-      ClouddebuggerControllerDebuggeesBreakpointsUpdate =
+    Rs ClouddebuggerControllerDebuggeesBreakpointsUpdate =
       UpdateActiveBreakpointResponse
   type
-    Scopes
-      ClouddebuggerControllerDebuggeesBreakpointsUpdate =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerControllerDebuggeesBreakpointsUpdate {..} =
-      go
-        debuggeeId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerControllerDebuggeesBreakpointsUpdateResource
-            )
-            Core.mempty
+    Scopes ClouddebuggerControllerDebuggeesBreakpointsUpdate =
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerControllerDebuggeesBreakpointsUpdate {..} =
+    go
+      debuggeeId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ClouddebuggerControllerDebuggeesBreakpointsUpdateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DialogFlow.Types
@@ -42,21 +40,76 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3AdvancedSettings (..),
     newGoogleCloudDialogflowCxV3AdvancedSettings,
 
+    -- ** GoogleCloudDialogflowCxV3AdvancedSettingsDtmfSettings
+    GoogleCloudDialogflowCxV3AdvancedSettingsDtmfSettings (..),
+    newGoogleCloudDialogflowCxV3AdvancedSettingsDtmfSettings,
+
     -- ** GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings
     GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings (..),
     newGoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings
+    GoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings (..),
+    newGoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings_Models
+    GoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings_Models (..),
+    newGoogleCloudDialogflowCxV3AdvancedSettingsSpeechSettings_Models,
 
     -- ** GoogleCloudDialogflowCxV3Agent
     GoogleCloudDialogflowCxV3Agent (..),
     newGoogleCloudDialogflowCxV3Agent,
 
+    -- ** GoogleCloudDialogflowCxV3AgentAnswerFeedbackSettings
+    GoogleCloudDialogflowCxV3AgentAnswerFeedbackSettings (..),
+    newGoogleCloudDialogflowCxV3AgentAnswerFeedbackSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentClientCertificateSettings
+    GoogleCloudDialogflowCxV3AgentClientCertificateSettings (..),
+    newGoogleCloudDialogflowCxV3AgentClientCertificateSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentGenAppBuilderSettings
+    GoogleCloudDialogflowCxV3AgentGenAppBuilderSettings (..),
+    newGoogleCloudDialogflowCxV3AgentGenAppBuilderSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentGitIntegrationSettings
+    GoogleCloudDialogflowCxV3AgentGitIntegrationSettings (..),
+    newGoogleCloudDialogflowCxV3AgentGitIntegrationSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentGitIntegrationSettingsGithubSettings
+    GoogleCloudDialogflowCxV3AgentGitIntegrationSettingsGithubSettings (..),
+    newGoogleCloudDialogflowCxV3AgentGitIntegrationSettingsGithubSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentPersonalizationSettings
+    GoogleCloudDialogflowCxV3AgentPersonalizationSettings (..),
+    newGoogleCloudDialogflowCxV3AgentPersonalizationSettings,
+
+    -- ** GoogleCloudDialogflowCxV3AgentPersonalizationSettings_DefaultEndUserMetadata
+    GoogleCloudDialogflowCxV3AgentPersonalizationSettings_DefaultEndUserMetadata (..),
+    newGoogleCloudDialogflowCxV3AgentPersonalizationSettings_DefaultEndUserMetadata,
+
     -- ** GoogleCloudDialogflowCxV3AgentValidationResult
     GoogleCloudDialogflowCxV3AgentValidationResult (..),
     newGoogleCloudDialogflowCxV3AgentValidationResult,
 
+    -- ** GoogleCloudDialogflowCxV3AnswerFeedback
+    GoogleCloudDialogflowCxV3AnswerFeedback (..),
+    newGoogleCloudDialogflowCxV3AnswerFeedback,
+
+    -- ** GoogleCloudDialogflowCxV3AnswerFeedback_Rating
+    GoogleCloudDialogflowCxV3AnswerFeedback_Rating (..),
+
+    -- ** GoogleCloudDialogflowCxV3AnswerFeedbackRatingReason
+    GoogleCloudDialogflowCxV3AnswerFeedbackRatingReason (..),
+    newGoogleCloudDialogflowCxV3AnswerFeedbackRatingReason,
+
     -- ** GoogleCloudDialogflowCxV3AudioInput
     GoogleCloudDialogflowCxV3AudioInput (..),
     newGoogleCloudDialogflowCxV3AudioInput,
+
+    -- ** GoogleCloudDialogflowCxV3BargeInConfig
+    GoogleCloudDialogflowCxV3BargeInConfig (..),
+    newGoogleCloudDialogflowCxV3BargeInConfig,
 
     -- ** GoogleCloudDialogflowCxV3BatchDeleteTestCasesRequest
     GoogleCloudDialogflowCxV3BatchDeleteTestCasesRequest (..),
@@ -73,6 +126,32 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3BatchRunTestCasesResponse
     GoogleCloudDialogflowCxV3BatchRunTestCasesResponse (..),
     newGoogleCloudDialogflowCxV3BatchRunTestCasesResponse,
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpec
+    GoogleCloudDialogflowCxV3BoostSpec (..),
+    newGoogleCloudDialogflowCxV3BoostSpec,
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpec
+    GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpec (..),
+    newGoogleCloudDialogflowCxV3BoostSpecConditionBoostSpec,
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec
+    GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec (..),
+    newGoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec,
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec_AttributeType
+    GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec_AttributeType (..),
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec_InterpolationType
+    GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpec_InterpolationType (..),
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpecControlPoint
+    GoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpecControlPoint (..),
+    newGoogleCloudDialogflowCxV3BoostSpecConditionBoostSpecBoostControlSpecControlPoint,
+
+    -- ** GoogleCloudDialogflowCxV3BoostSpecs
+    GoogleCloudDialogflowCxV3BoostSpecs (..),
+    newGoogleCloudDialogflowCxV3BoostSpecs,
 
     -- ** GoogleCloudDialogflowCxV3CalculateCoverageResponse
     GoogleCloudDialogflowCxV3CalculateCoverageResponse (..),
@@ -125,17 +204,63 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3ConversationTurnVirtualAgentOutput_SessionParameters (..),
     newGoogleCloudDialogflowCxV3ConversationTurnVirtualAgentOutput_SessionParameters,
 
-    -- ** GoogleCloudDialogflowCxV3CreateDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3CreateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3CreateDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3CreateVersionOperationMetadata
     GoogleCloudDialogflowCxV3CreateVersionOperationMetadata (..),
     newGoogleCloudDialogflowCxV3CreateVersionOperationMetadata,
 
-    -- ** GoogleCloudDialogflowCxV3DeleteDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3DeleteDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3DeleteDocumentOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnection
+    GoogleCloudDialogflowCxV3DataStoreConnection (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnection,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType
+    GoogleCloudDialogflowCxV3DataStoreConnection_DataStoreType (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3DataStoreConnection_DocumentProcessingMode (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignals
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignals (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignals,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerGenerationModelCallSignals
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerGenerationModelCallSignals (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerGenerationModelCallSignals,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerPart
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerPart (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsAnswerPart,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsCitedSnippet
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsCitedSnippet (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsCitedSnippet,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Decision
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Decision (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Score
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsGroundingSignals_Score (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsRewriterModelCallSignals
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsRewriterModelCallSignals (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsRewriterModelCallSignals,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals,
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals_BannedPhraseMatch
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals_BannedPhraseMatch (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals_Decision
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSafetySignals_Decision (..),
+
+    -- ** GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSearchSnippet
+    GoogleCloudDialogflowCxV3DataStoreConnectionSignalsSearchSnippet (..),
+    newGoogleCloudDialogflowCxV3DataStoreConnectionSignalsSearchSnippet,
 
     -- ** GoogleCloudDialogflowCxV3DeployFlowMetadata
     GoogleCloudDialogflowCxV3DeployFlowMetadata (..),
@@ -257,9 +382,28 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat
     GoogleCloudDialogflowCxV3ExportAgentRequest_DataFormat (..),
 
+    -- ** GoogleCloudDialogflowCxV3ExportAgentRequestGitDestination
+    GoogleCloudDialogflowCxV3ExportAgentRequestGitDestination (..),
+    newGoogleCloudDialogflowCxV3ExportAgentRequestGitDestination,
+
     -- ** GoogleCloudDialogflowCxV3ExportAgentResponse
     GoogleCloudDialogflowCxV3ExportAgentResponse (..),
     newGoogleCloudDialogflowCxV3ExportAgentResponse,
+
+    -- ** GoogleCloudDialogflowCxV3ExportEntityTypesMetadata
+    GoogleCloudDialogflowCxV3ExportEntityTypesMetadata (..),
+    newGoogleCloudDialogflowCxV3ExportEntityTypesMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3ExportEntityTypesRequest
+    GoogleCloudDialogflowCxV3ExportEntityTypesRequest (..),
+    newGoogleCloudDialogflowCxV3ExportEntityTypesRequest,
+
+    -- ** GoogleCloudDialogflowCxV3ExportEntityTypesRequest_DataFormat
+    GoogleCloudDialogflowCxV3ExportEntityTypesRequest_DataFormat (..),
+
+    -- ** GoogleCloudDialogflowCxV3ExportEntityTypesResponse
+    GoogleCloudDialogflowCxV3ExportEntityTypesResponse (..),
+    newGoogleCloudDialogflowCxV3ExportEntityTypesResponse,
 
     -- ** GoogleCloudDialogflowCxV3ExportFlowRequest
     GoogleCloudDialogflowCxV3ExportFlowRequest (..),
@@ -268,6 +412,21 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ExportFlowResponse
     GoogleCloudDialogflowCxV3ExportFlowResponse (..),
     newGoogleCloudDialogflowCxV3ExportFlowResponse,
+
+    -- ** GoogleCloudDialogflowCxV3ExportIntentsMetadata
+    GoogleCloudDialogflowCxV3ExportIntentsMetadata (..),
+    newGoogleCloudDialogflowCxV3ExportIntentsMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3ExportIntentsRequest
+    GoogleCloudDialogflowCxV3ExportIntentsRequest (..),
+    newGoogleCloudDialogflowCxV3ExportIntentsRequest,
+
+    -- ** GoogleCloudDialogflowCxV3ExportIntentsRequest_DataFormat
+    GoogleCloudDialogflowCxV3ExportIntentsRequest_DataFormat (..),
+
+    -- ** GoogleCloudDialogflowCxV3ExportIntentsResponse
+    GoogleCloudDialogflowCxV3ExportIntentsResponse (..),
+    newGoogleCloudDialogflowCxV3ExportIntentsResponse,
 
     -- ** GoogleCloudDialogflowCxV3ExportTestCasesMetadata
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata (..),
@@ -284,9 +443,24 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3ExportTestCasesResponse (..),
     newGoogleCloudDialogflowCxV3ExportTestCasesResponse,
 
+    -- ** GoogleCloudDialogflowCxV3FilterSpecs
+    GoogleCloudDialogflowCxV3FilterSpecs (..),
+    newGoogleCloudDialogflowCxV3FilterSpecs,
+
     -- ** GoogleCloudDialogflowCxV3Flow
     GoogleCloudDialogflowCxV3Flow (..),
     newGoogleCloudDialogflowCxV3Flow,
+
+    -- ** GoogleCloudDialogflowCxV3FlowImportStrategy
+    GoogleCloudDialogflowCxV3FlowImportStrategy (..),
+    newGoogleCloudDialogflowCxV3FlowImportStrategy,
+
+    -- ** GoogleCloudDialogflowCxV3FlowImportStrategy_GlobalImportStrategy
+    GoogleCloudDialogflowCxV3FlowImportStrategy_GlobalImportStrategy (..),
+
+    -- ** GoogleCloudDialogflowCxV3FlowMultiLanguageSettings
+    GoogleCloudDialogflowCxV3FlowMultiLanguageSettings (..),
+    newGoogleCloudDialogflowCxV3FlowMultiLanguageSettings,
 
     -- ** GoogleCloudDialogflowCxV3FlowValidationResult
     GoogleCloudDialogflowCxV3FlowValidationResult (..),
@@ -336,20 +510,52 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3GcsDestination (..),
     newGoogleCloudDialogflowCxV3GcsDestination,
 
-    -- ** GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata
-    GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3GenerativeSettings
+    GoogleCloudDialogflowCxV3GenerativeSettings (..),
+    newGoogleCloudDialogflowCxV3GenerativeSettings,
 
-    -- ** GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata_State
-    GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata_State (..),
+    -- ** GoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettings
+    GoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettings (..),
+    newGoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettings,
 
-    -- ** GoogleCloudDialogflowCxV3ImportDocumentsOperationMetadata
-    GoogleCloudDialogflowCxV3ImportDocumentsOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3ImportDocumentsOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettingsPromptTemplate
+    GoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettingsPromptTemplate (..),
+    newGoogleCloudDialogflowCxV3GenerativeSettingsFallbackSettingsPromptTemplate,
 
-    -- ** GoogleCloudDialogflowCxV3ImportDocumentsResponse
-    GoogleCloudDialogflowCxV3ImportDocumentsResponse (..),
-    newGoogleCloudDialogflowCxV3ImportDocumentsResponse,
+    -- ** GoogleCloudDialogflowCxV3GenerativeSettingsKnowledgeConnectorSettings
+    GoogleCloudDialogflowCxV3GenerativeSettingsKnowledgeConnectorSettings (..),
+    newGoogleCloudDialogflowCxV3GenerativeSettingsKnowledgeConnectorSettings,
+
+    -- ** GoogleCloudDialogflowCxV3Generator
+    GoogleCloudDialogflowCxV3Generator (..),
+    newGoogleCloudDialogflowCxV3Generator,
+
+    -- ** GoogleCloudDialogflowCxV3GeneratorModelParameter
+    GoogleCloudDialogflowCxV3GeneratorModelParameter (..),
+    newGoogleCloudDialogflowCxV3GeneratorModelParameter,
+
+    -- ** GoogleCloudDialogflowCxV3GeneratorPlaceholder
+    GoogleCloudDialogflowCxV3GeneratorPlaceholder (..),
+    newGoogleCloudDialogflowCxV3GeneratorPlaceholder,
+
+    -- ** GoogleCloudDialogflowCxV3ImportEntityTypesMetadata
+    GoogleCloudDialogflowCxV3ImportEntityTypesMetadata (..),
+    newGoogleCloudDialogflowCxV3ImportEntityTypesMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3ImportEntityTypesRequest
+    GoogleCloudDialogflowCxV3ImportEntityTypesRequest (..),
+    newGoogleCloudDialogflowCxV3ImportEntityTypesRequest,
+
+    -- ** GoogleCloudDialogflowCxV3ImportEntityTypesRequest_MergeOption
+    GoogleCloudDialogflowCxV3ImportEntityTypesRequest_MergeOption (..),
+
+    -- ** GoogleCloudDialogflowCxV3ImportEntityTypesResponse
+    GoogleCloudDialogflowCxV3ImportEntityTypesResponse (..),
+    newGoogleCloudDialogflowCxV3ImportEntityTypesResponse,
+
+    -- ** GoogleCloudDialogflowCxV3ImportEntityTypesResponseConflictingResources
+    GoogleCloudDialogflowCxV3ImportEntityTypesResponseConflictingResources (..),
+    newGoogleCloudDialogflowCxV3ImportEntityTypesResponseConflictingResources,
 
     -- ** GoogleCloudDialogflowCxV3ImportFlowRequest
     GoogleCloudDialogflowCxV3ImportFlowRequest (..),
@@ -362,6 +568,25 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3ImportFlowResponse (..),
     newGoogleCloudDialogflowCxV3ImportFlowResponse,
 
+    -- ** GoogleCloudDialogflowCxV3ImportIntentsMetadata
+    GoogleCloudDialogflowCxV3ImportIntentsMetadata (..),
+    newGoogleCloudDialogflowCxV3ImportIntentsMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3ImportIntentsRequest
+    GoogleCloudDialogflowCxV3ImportIntentsRequest (..),
+    newGoogleCloudDialogflowCxV3ImportIntentsRequest,
+
+    -- ** GoogleCloudDialogflowCxV3ImportIntentsRequest_MergeOption
+    GoogleCloudDialogflowCxV3ImportIntentsRequest_MergeOption (..),
+
+    -- ** GoogleCloudDialogflowCxV3ImportIntentsResponse
+    GoogleCloudDialogflowCxV3ImportIntentsResponse (..),
+    newGoogleCloudDialogflowCxV3ImportIntentsResponse,
+
+    -- ** GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources
+    GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources (..),
+    newGoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources,
+
     -- ** GoogleCloudDialogflowCxV3ImportTestCasesMetadata
     GoogleCloudDialogflowCxV3ImportTestCasesMetadata (..),
     newGoogleCloudDialogflowCxV3ImportTestCasesMetadata,
@@ -373,6 +598,14 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ImportTestCasesResponse
     GoogleCloudDialogflowCxV3ImportTestCasesResponse (..),
     newGoogleCloudDialogflowCxV3ImportTestCasesResponse,
+
+    -- ** GoogleCloudDialogflowCxV3InlineDestination
+    GoogleCloudDialogflowCxV3InlineDestination (..),
+    newGoogleCloudDialogflowCxV3InlineDestination,
+
+    -- ** GoogleCloudDialogflowCxV3InlineSource
+    GoogleCloudDialogflowCxV3InlineSource (..),
+    newGoogleCloudDialogflowCxV3InlineSource,
 
     -- ** GoogleCloudDialogflowCxV3InputAudioConfig
     GoogleCloudDialogflowCxV3InputAudioConfig (..),
@@ -416,6 +649,14 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3IntentTrainingPhrasePart (..),
     newGoogleCloudDialogflowCxV3IntentTrainingPhrasePart,
 
+    -- ** GoogleCloudDialogflowCxV3KnowledgeConnectorSettings
+    GoogleCloudDialogflowCxV3KnowledgeConnectorSettings (..),
+    newGoogleCloudDialogflowCxV3KnowledgeConnectorSettings,
+
+    -- ** GoogleCloudDialogflowCxV3LanguageInfo
+    GoogleCloudDialogflowCxV3LanguageInfo (..),
+    newGoogleCloudDialogflowCxV3LanguageInfo,
+
     -- ** GoogleCloudDialogflowCxV3ListAgentsResponse
     GoogleCloudDialogflowCxV3ListAgentsResponse (..),
     newGoogleCloudDialogflowCxV3ListAgentsResponse,
@@ -447,6 +688,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ListFlowsResponse
     GoogleCloudDialogflowCxV3ListFlowsResponse (..),
     newGoogleCloudDialogflowCxV3ListFlowsResponse,
+
+    -- ** GoogleCloudDialogflowCxV3ListGeneratorsResponse
+    GoogleCloudDialogflowCxV3ListGeneratorsResponse (..),
+    newGoogleCloudDialogflowCxV3ListGeneratorsResponse,
 
     -- ** GoogleCloudDialogflowCxV3ListIntentsResponse
     GoogleCloudDialogflowCxV3ListIntentsResponse (..),
@@ -547,6 +792,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3PageInfoFormInfoParameterInfo_State
     GoogleCloudDialogflowCxV3PageInfoFormInfoParameterInfo_State (..),
 
+    -- ** GoogleCloudDialogflowCxV3Phrase
+    GoogleCloudDialogflowCxV3Phrase (..),
+    newGoogleCloudDialogflowCxV3Phrase,
+
     -- ** GoogleCloudDialogflowCxV3QueryInput
     GoogleCloudDialogflowCxV3QueryInput (..),
     newGoogleCloudDialogflowCxV3QueryInput,
@@ -554,6 +803,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3QueryParameters
     GoogleCloudDialogflowCxV3QueryParameters (..),
     newGoogleCloudDialogflowCxV3QueryParameters,
+
+    -- ** GoogleCloudDialogflowCxV3QueryParameters_EndUserMetadata
+    GoogleCloudDialogflowCxV3QueryParameters_EndUserMetadata (..),
+    newGoogleCloudDialogflowCxV3QueryParameters_EndUserMetadata,
 
     -- ** GoogleCloudDialogflowCxV3QueryParameters_Parameters
     GoogleCloudDialogflowCxV3QueryParameters_Parameters (..),
@@ -583,10 +836,6 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3QueryResult_WebhookPayloadsItem (..),
     newGoogleCloudDialogflowCxV3QueryResult_WebhookPayloadsItem,
 
-    -- ** GoogleCloudDialogflowCxV3ReloadDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3ReloadDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3ReloadDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3ResourceName
     GoogleCloudDialogflowCxV3ResourceName (..),
     newGoogleCloudDialogflowCxV3ResourceName,
@@ -599,6 +848,9 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3ResponseMessage_Payload (..),
     newGoogleCloudDialogflowCxV3ResponseMessage_Payload,
 
+    -- ** GoogleCloudDialogflowCxV3ResponseMessage_ResponseType
+    GoogleCloudDialogflowCxV3ResponseMessage_ResponseType (..),
+
     -- ** GoogleCloudDialogflowCxV3ResponseMessageConversationSuccess
     GoogleCloudDialogflowCxV3ResponseMessageConversationSuccess (..),
     newGoogleCloudDialogflowCxV3ResponseMessageConversationSuccess,
@@ -610,6 +862,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3ResponseMessageEndInteraction
     GoogleCloudDialogflowCxV3ResponseMessageEndInteraction (..),
     newGoogleCloudDialogflowCxV3ResponseMessageEndInteraction,
+
+    -- ** GoogleCloudDialogflowCxV3ResponseMessageKnowledgeInfoCard
+    GoogleCloudDialogflowCxV3ResponseMessageKnowledgeInfoCard (..),
+    newGoogleCloudDialogflowCxV3ResponseMessageKnowledgeInfoCard,
 
     -- ** GoogleCloudDialogflowCxV3ResponseMessageLiveAgentHandoff
     GoogleCloudDialogflowCxV3ResponseMessageLiveAgentHandoff (..),
@@ -650,6 +906,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3RestoreAgentRequest_RestoreOption
     GoogleCloudDialogflowCxV3RestoreAgentRequest_RestoreOption (..),
 
+    -- ** GoogleCloudDialogflowCxV3RestoreAgentRequestGitSource
+    GoogleCloudDialogflowCxV3RestoreAgentRequestGitSource (..),
+    newGoogleCloudDialogflowCxV3RestoreAgentRequestGitSource,
+
     -- ** GoogleCloudDialogflowCxV3RolloutConfig
     GoogleCloudDialogflowCxV3RolloutConfig (..),
     newGoogleCloudDialogflowCxV3RolloutConfig,
@@ -686,6 +946,18 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3RunTestCaseResponse (..),
     newGoogleCloudDialogflowCxV3RunTestCaseResponse,
 
+    -- ** GoogleCloudDialogflowCxV3SafetySettings
+    GoogleCloudDialogflowCxV3SafetySettings (..),
+    newGoogleCloudDialogflowCxV3SafetySettings,
+
+    -- ** GoogleCloudDialogflowCxV3SafetySettingsPhrase
+    GoogleCloudDialogflowCxV3SafetySettingsPhrase (..),
+    newGoogleCloudDialogflowCxV3SafetySettingsPhrase,
+
+    -- ** GoogleCloudDialogflowCxV3SearchConfig
+    GoogleCloudDialogflowCxV3SearchConfig (..),
+    newGoogleCloudDialogflowCxV3SearchConfig,
+
     -- ** GoogleCloudDialogflowCxV3SecuritySettings
     GoogleCloudDialogflowCxV3SecuritySettings (..),
     newGoogleCloudDialogflowCxV3SecuritySettings,
@@ -698,6 +970,9 @@ module Gogol.DialogFlow.Types
 
     -- ** GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy
     GoogleCloudDialogflowCxV3SecuritySettings_RedactionStrategy (..),
+
+    -- ** GoogleCloudDialogflowCxV3SecuritySettings_RetentionStrategy
+    GoogleCloudDialogflowCxV3SecuritySettings_RetentionStrategy (..),
 
     -- ** GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings
     GoogleCloudDialogflowCxV3SecuritySettingsAudioExportSettings (..),
@@ -740,6 +1015,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3StopExperimentRequest
     GoogleCloudDialogflowCxV3StopExperimentRequest (..),
     newGoogleCloudDialogflowCxV3StopExperimentRequest,
+
+    -- ** GoogleCloudDialogflowCxV3SubmitAnswerFeedbackRequest
+    GoogleCloudDialogflowCxV3SubmitAnswerFeedbackRequest (..),
+    newGoogleCloudDialogflowCxV3SubmitAnswerFeedbackRequest,
 
     -- ** GoogleCloudDialogflowCxV3SynthesizeSpeechConfig
     GoogleCloudDialogflowCxV3SynthesizeSpeechConfig (..),
@@ -830,10 +1109,6 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem
     GoogleCloudDialogflowCxV3TurnSignals_FailureReasonsItem (..),
 
-    -- ** GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3ValidateAgentRequest
     GoogleCloudDialogflowCxV3ValidateAgentRequest (..),
     newGoogleCloudDialogflowCxV3ValidateAgentRequest,
@@ -886,9 +1161,26 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3WebhookGenericWebService (..),
     newGoogleCloudDialogflowCxV3WebhookGenericWebService,
 
+    -- ** GoogleCloudDialogflowCxV3WebhookGenericWebService_HttpMethod
+    GoogleCloudDialogflowCxV3WebhookGenericWebService_HttpMethod (..),
+
+    -- ** GoogleCloudDialogflowCxV3WebhookGenericWebService_ParameterMapping
+    GoogleCloudDialogflowCxV3WebhookGenericWebService_ParameterMapping (..),
+    newGoogleCloudDialogflowCxV3WebhookGenericWebService_ParameterMapping,
+
     -- ** GoogleCloudDialogflowCxV3WebhookGenericWebService_RequestHeaders
     GoogleCloudDialogflowCxV3WebhookGenericWebService_RequestHeaders (..),
     newGoogleCloudDialogflowCxV3WebhookGenericWebService_RequestHeaders,
+
+    -- ** GoogleCloudDialogflowCxV3WebhookGenericWebService_ServiceAgentAuth
+    GoogleCloudDialogflowCxV3WebhookGenericWebService_ServiceAgentAuth (..),
+
+    -- ** GoogleCloudDialogflowCxV3WebhookGenericWebService_WebhookType
+    GoogleCloudDialogflowCxV3WebhookGenericWebService_WebhookType (..),
+
+    -- ** GoogleCloudDialogflowCxV3WebhookGenericWebServiceOAuthConfig
+    GoogleCloudDialogflowCxV3WebhookGenericWebServiceOAuthConfig (..),
+    newGoogleCloudDialogflowCxV3WebhookGenericWebServiceOAuthConfig,
 
     -- ** GoogleCloudDialogflowCxV3WebhookRequest
     GoogleCloudDialogflowCxV3WebhookRequest (..),
@@ -937,9 +1229,33 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3WebhookServiceDirectoryConfig (..),
     newGoogleCloudDialogflowCxV3WebhookServiceDirectoryConfig,
 
+    -- ** GoogleCloudDialogflowCxV3beta1AdvancedSettings
+    GoogleCloudDialogflowCxV3beta1AdvancedSettings (..),
+    newGoogleCloudDialogflowCxV3beta1AdvancedSettings,
+
+    -- ** GoogleCloudDialogflowCxV3beta1AdvancedSettingsDtmfSettings
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsDtmfSettings (..),
+    newGoogleCloudDialogflowCxV3beta1AdvancedSettingsDtmfSettings,
+
+    -- ** GoogleCloudDialogflowCxV3beta1AdvancedSettingsLoggingSettings
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsLoggingSettings (..),
+    newGoogleCloudDialogflowCxV3beta1AdvancedSettingsLoggingSettings,
+
+    -- ** GoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings (..),
+    newGoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings,
+
+    -- ** GoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings_Models
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings_Models (..),
+    newGoogleCloudDialogflowCxV3beta1AdvancedSettingsSpeechSettings_Models,
+
     -- ** GoogleCloudDialogflowCxV3beta1AudioInput
     GoogleCloudDialogflowCxV3beta1AudioInput (..),
     newGoogleCloudDialogflowCxV3beta1AudioInput,
+
+    -- ** GoogleCloudDialogflowCxV3beta1BargeInConfig
+    GoogleCloudDialogflowCxV3beta1BargeInConfig (..),
+    newGoogleCloudDialogflowCxV3beta1BargeInConfig,
 
     -- ** GoogleCloudDialogflowCxV3beta1BatchRunTestCasesMetadata
     GoogleCloudDialogflowCxV3beta1BatchRunTestCasesMetadata (..),
@@ -984,17 +1300,19 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1ConversationTurnVirtualAgentOutput_SessionParameters (..),
     newGoogleCloudDialogflowCxV3beta1ConversationTurnVirtualAgentOutput_SessionParameters,
 
-    -- ** GoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3beta1CreateVersionOperationMetadata
     GoogleCloudDialogflowCxV3beta1CreateVersionOperationMetadata (..),
     newGoogleCloudDialogflowCxV3beta1CreateVersionOperationMetadata,
 
-    -- ** GoogleCloudDialogflowCxV3beta1DeleteDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3beta1DeleteDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1DeleteDocumentOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3beta1DataStoreConnection
+    GoogleCloudDialogflowCxV3beta1DataStoreConnection (..),
+    newGoogleCloudDialogflowCxV3beta1DataStoreConnection,
+
+    -- ** GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType
+    GoogleCloudDialogflowCxV3beta1DataStoreConnection_DataStoreType (..),
+
+    -- ** GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode
+    GoogleCloudDialogflowCxV3beta1DataStoreConnection_DocumentProcessingMode (..),
 
     -- ** GoogleCloudDialogflowCxV3beta1DeployFlowMetadata
     GoogleCloudDialogflowCxV3beta1DeployFlowMetadata (..),
@@ -1036,9 +1354,25 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1ExportAgentResponse (..),
     newGoogleCloudDialogflowCxV3beta1ExportAgentResponse,
 
+    -- ** GoogleCloudDialogflowCxV3beta1ExportEntityTypesMetadata
+    GoogleCloudDialogflowCxV3beta1ExportEntityTypesMetadata (..),
+    newGoogleCloudDialogflowCxV3beta1ExportEntityTypesMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ExportEntityTypesResponse
+    GoogleCloudDialogflowCxV3beta1ExportEntityTypesResponse (..),
+    newGoogleCloudDialogflowCxV3beta1ExportEntityTypesResponse,
+
     -- ** GoogleCloudDialogflowCxV3beta1ExportFlowResponse
     GoogleCloudDialogflowCxV3beta1ExportFlowResponse (..),
     newGoogleCloudDialogflowCxV3beta1ExportFlowResponse,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ExportIntentsMetadata
+    GoogleCloudDialogflowCxV3beta1ExportIntentsMetadata (..),
+    newGoogleCloudDialogflowCxV3beta1ExportIntentsMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ExportIntentsResponse
+    GoogleCloudDialogflowCxV3beta1ExportIntentsResponse (..),
+    newGoogleCloudDialogflowCxV3beta1ExportIntentsResponse,
 
     -- ** GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata (..),
@@ -1080,24 +1414,37 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction (..),
     newGoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction,
 
-    -- ** GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata
-    GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3beta1GcsDestination
+    GoogleCloudDialogflowCxV3beta1GcsDestination (..),
+    newGoogleCloudDialogflowCxV3beta1GcsDestination,
 
-    -- ** GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata_State
-    GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata_State (..),
+    -- ** GoogleCloudDialogflowCxV3beta1ImportEntityTypesMetadata
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesMetadata (..),
+    newGoogleCloudDialogflowCxV3beta1ImportEntityTypesMetadata,
 
-    -- ** GoogleCloudDialogflowCxV3beta1ImportDocumentsOperationMetadata
-    GoogleCloudDialogflowCxV3beta1ImportDocumentsOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1ImportDocumentsOperationMetadata,
+    -- ** GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponse
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponse (..),
+    newGoogleCloudDialogflowCxV3beta1ImportEntityTypesResponse,
 
-    -- ** GoogleCloudDialogflowCxV3beta1ImportDocumentsResponse
-    GoogleCloudDialogflowCxV3beta1ImportDocumentsResponse (..),
-    newGoogleCloudDialogflowCxV3beta1ImportDocumentsResponse,
+    -- ** GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponseConflictingResources
+    GoogleCloudDialogflowCxV3beta1ImportEntityTypesResponseConflictingResources (..),
+    newGoogleCloudDialogflowCxV3beta1ImportEntityTypesResponseConflictingResources,
 
     -- ** GoogleCloudDialogflowCxV3beta1ImportFlowResponse
     GoogleCloudDialogflowCxV3beta1ImportFlowResponse (..),
     newGoogleCloudDialogflowCxV3beta1ImportFlowResponse,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ImportIntentsMetadata
+    GoogleCloudDialogflowCxV3beta1ImportIntentsMetadata (..),
+    newGoogleCloudDialogflowCxV3beta1ImportIntentsMetadata,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ImportIntentsResponse
+    GoogleCloudDialogflowCxV3beta1ImportIntentsResponse (..),
+    newGoogleCloudDialogflowCxV3beta1ImportIntentsResponse,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources
+    GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources (..),
+    newGoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources,
 
     -- ** GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata
     GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata (..),
@@ -1106,6 +1453,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3beta1ImportTestCasesResponse
     GoogleCloudDialogflowCxV3beta1ImportTestCasesResponse (..),
     newGoogleCloudDialogflowCxV3beta1ImportTestCasesResponse,
+
+    -- ** GoogleCloudDialogflowCxV3beta1InlineDestination
+    GoogleCloudDialogflowCxV3beta1InlineDestination (..),
+    newGoogleCloudDialogflowCxV3beta1InlineDestination,
 
     -- ** GoogleCloudDialogflowCxV3beta1InputAudioConfig
     GoogleCloudDialogflowCxV3beta1InputAudioConfig (..),
@@ -1141,6 +1492,14 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1IntentTrainingPhrasePart (..),
     newGoogleCloudDialogflowCxV3beta1IntentTrainingPhrasePart,
 
+    -- ** GoogleCloudDialogflowCxV3beta1KnowledgeConnectorSettings
+    GoogleCloudDialogflowCxV3beta1KnowledgeConnectorSettings (..),
+    newGoogleCloudDialogflowCxV3beta1KnowledgeConnectorSettings,
+
+    -- ** GoogleCloudDialogflowCxV3beta1LanguageInfo
+    GoogleCloudDialogflowCxV3beta1LanguageInfo (..),
+    newGoogleCloudDialogflowCxV3beta1LanguageInfo,
+
     -- ** GoogleCloudDialogflowCxV3beta1Page
     GoogleCloudDialogflowCxV3beta1Page (..),
     newGoogleCloudDialogflowCxV3beta1Page,
@@ -1164,10 +1523,6 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1QueryInput (..),
     newGoogleCloudDialogflowCxV3beta1QueryInput,
 
-    -- ** GoogleCloudDialogflowCxV3beta1ReloadDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3beta1ReloadDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1ReloadDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3beta1ResponseMessage
     GoogleCloudDialogflowCxV3beta1ResponseMessage (..),
     newGoogleCloudDialogflowCxV3beta1ResponseMessage,
@@ -1187,6 +1542,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3beta1ResponseMessageEndInteraction
     GoogleCloudDialogflowCxV3beta1ResponseMessageEndInteraction (..),
     newGoogleCloudDialogflowCxV3beta1ResponseMessageEndInteraction,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ResponseMessageKnowledgeInfoCard
+    GoogleCloudDialogflowCxV3beta1ResponseMessageKnowledgeInfoCard (..),
+    newGoogleCloudDialogflowCxV3beta1ResponseMessageKnowledgeInfoCard,
 
     -- ** GoogleCloudDialogflowCxV3beta1ResponseMessageLiveAgentHandoff
     GoogleCloudDialogflowCxV3beta1ResponseMessageLiveAgentHandoff (..),
@@ -1278,6 +1637,26 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1TextInput (..),
     newGoogleCloudDialogflowCxV3beta1TextInput,
 
+    -- ** GoogleCloudDialogflowCxV3beta1ToolCall
+    GoogleCloudDialogflowCxV3beta1ToolCall (..),
+    newGoogleCloudDialogflowCxV3beta1ToolCall,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ToolCall_InputParameters
+    GoogleCloudDialogflowCxV3beta1ToolCall_InputParameters (..),
+    newGoogleCloudDialogflowCxV3beta1ToolCall_InputParameters,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ToolCallResult
+    GoogleCloudDialogflowCxV3beta1ToolCallResult (..),
+    newGoogleCloudDialogflowCxV3beta1ToolCallResult,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ToolCallResult_OutputParameters
+    GoogleCloudDialogflowCxV3beta1ToolCallResult_OutputParameters (..),
+    newGoogleCloudDialogflowCxV3beta1ToolCallResult_OutputParameters,
+
+    -- ** GoogleCloudDialogflowCxV3beta1ToolCallResultError
+    GoogleCloudDialogflowCxV3beta1ToolCallResultError (..),
+    newGoogleCloudDialogflowCxV3beta1ToolCallResultError,
+
     -- ** GoogleCloudDialogflowCxV3beta1TransitionRoute
     GoogleCloudDialogflowCxV3beta1TransitionRoute (..),
     newGoogleCloudDialogflowCxV3beta1TransitionRoute,
@@ -1289,10 +1668,6 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem
     GoogleCloudDialogflowCxV3beta1TurnSignals_FailureReasonsItem (..),
 
-    -- ** GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata
-    GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowCxV3beta1Webhook
     GoogleCloudDialogflowCxV3beta1Webhook (..),
     newGoogleCloudDialogflowCxV3beta1Webhook,
@@ -1301,9 +1676,26 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowCxV3beta1WebhookGenericWebService (..),
     newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService,
 
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_HttpMethod
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_HttpMethod (..),
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_ParameterMapping
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_ParameterMapping (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_ParameterMapping,
+
     -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders
     GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders (..),
     newGoogleCloudDialogflowCxV3beta1WebhookGenericWebService_RequestHeaders,
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_ServiceAgentAuth
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_ServiceAgentAuth (..),
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_WebhookType
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebService_WebhookType (..),
+
+    -- ** GoogleCloudDialogflowCxV3beta1WebhookGenericWebServiceOAuthConfig
+    GoogleCloudDialogflowCxV3beta1WebhookGenericWebServiceOAuthConfig (..),
+    newGoogleCloudDialogflowCxV3beta1WebhookGenericWebServiceOAuthConfig,
 
     -- ** GoogleCloudDialogflowCxV3beta1WebhookRequest
     GoogleCloudDialogflowCxV3beta1WebhookRequest (..),
@@ -1441,6 +1833,10 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2DeployConversationModelOperationMetadata (..),
     newGoogleCloudDialogflowV2DeployConversationModelOperationMetadata,
 
+    -- ** GoogleCloudDialogflowV2EncryptionSpec
+    GoogleCloudDialogflowV2EncryptionSpec (..),
+    newGoogleCloudDialogflowV2EncryptionSpec,
+
     -- ** GoogleCloudDialogflowV2EntityType
     GoogleCloudDialogflowV2EntityType (..),
     newGoogleCloudDialogflowV2EntityType,
@@ -1498,6 +1894,14 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2ImportDocumentsResponse
     GoogleCloudDialogflowV2ImportDocumentsResponse (..),
     newGoogleCloudDialogflowV2ImportDocumentsResponse,
+
+    -- ** GoogleCloudDialogflowV2InitializeEncryptionSpecMetadata
+    GoogleCloudDialogflowV2InitializeEncryptionSpecMetadata (..),
+    newGoogleCloudDialogflowV2InitializeEncryptionSpecMetadata,
+
+    -- ** GoogleCloudDialogflowV2InitializeEncryptionSpecRequest
+    GoogleCloudDialogflowV2InitializeEncryptionSpecRequest (..),
+    newGoogleCloudDialogflowV2InitializeEncryptionSpecRequest,
 
     -- ** GoogleCloudDialogflowV2InputDataset
     GoogleCloudDialogflowV2InputDataset (..),
@@ -1663,6 +2067,34 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2IntentTrainingPhrasePart (..),
     newGoogleCloudDialogflowV2IntentTrainingPhrasePart,
 
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswer
+    GoogleCloudDialogflowV2KnowledgeAssistAnswer (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswer,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswer
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswer (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswer,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerFaqSource
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerFaqSource (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerFaqSource,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata,
+
+    -- ** GoogleCloudDialogflowV2KnowledgeAssistAnswerSuggestedQuery
+    GoogleCloudDialogflowV2KnowledgeAssistAnswerSuggestedQuery (..),
+    newGoogleCloudDialogflowV2KnowledgeAssistAnswerSuggestedQuery,
+
     -- ** GoogleCloudDialogflowV2KnowledgeOperationMetadata
     GoogleCloudDialogflowV2KnowledgeOperationMetadata (..),
     newGoogleCloudDialogflowV2KnowledgeOperationMetadata,
@@ -1741,6 +2173,17 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType
     GoogleCloudDialogflowV2SmartReplyModelMetadata_TrainingModelType (..),
 
+    -- ** GoogleCloudDialogflowV2SpeechWordInfo
+    GoogleCloudDialogflowV2SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2SpeechWordInfo,
+
+    -- ** GoogleCloudDialogflowV2StreamingRecognitionResult
+    GoogleCloudDialogflowV2StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2StreamingRecognitionResult,
+
+    -- ** GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2StreamingRecognitionResult_MessageType (..),
+
     -- ** GoogleCloudDialogflowV2SuggestArticlesResponse
     GoogleCloudDialogflowV2SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2SuggestArticlesResponse,
@@ -1748,6 +2191,10 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2SuggestFaqAnswersResponse
     GoogleCloudDialogflowV2SuggestFaqAnswersResponse (..),
     newGoogleCloudDialogflowV2SuggestFaqAnswersResponse,
+
+    -- ** GoogleCloudDialogflowV2SuggestKnowledgeAssistResponse
+    GoogleCloudDialogflowV2SuggestKnowledgeAssistResponse (..),
+    newGoogleCloudDialogflowV2SuggestKnowledgeAssistResponse,
 
     -- ** GoogleCloudDialogflowV2SuggestSmartRepliesResponse
     GoogleCloudDialogflowV2SuggestSmartRepliesResponse (..),
@@ -1818,6 +2265,14 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2beta1ConversationEvent_Type
     GoogleCloudDialogflowV2beta1ConversationEvent_Type (..),
 
+    -- ** GoogleCloudDialogflowV2beta1DialogflowAssistAnswer
+    GoogleCloudDialogflowV2beta1DialogflowAssistAnswer (..),
+    newGoogleCloudDialogflowV2beta1DialogflowAssistAnswer,
+
+    -- ** GoogleCloudDialogflowV2beta1EncryptionSpec
+    GoogleCloudDialogflowV2beta1EncryptionSpec (..),
+    newGoogleCloudDialogflowV2beta1EncryptionSpec,
+
     -- ** GoogleCloudDialogflowV2beta1EntityType
     GoogleCloudDialogflowV2beta1EntityType (..),
     newGoogleCloudDialogflowV2beta1EntityType,
@@ -1867,6 +2322,14 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2beta1ImportDocumentsResponse
     GoogleCloudDialogflowV2beta1ImportDocumentsResponse (..),
     newGoogleCloudDialogflowV2beta1ImportDocumentsResponse,
+
+    -- ** GoogleCloudDialogflowV2beta1InitializeEncryptionSpecMetadata
+    GoogleCloudDialogflowV2beta1InitializeEncryptionSpecMetadata (..),
+    newGoogleCloudDialogflowV2beta1InitializeEncryptionSpecMetadata,
+
+    -- ** GoogleCloudDialogflowV2beta1InitializeEncryptionSpecRequest
+    GoogleCloudDialogflowV2beta1InitializeEncryptionSpecRequest (..),
+    newGoogleCloudDialogflowV2beta1InitializeEncryptionSpecRequest,
 
     -- ** GoogleCloudDialogflowV2beta1Intent
     GoogleCloudDialogflowV2beta1Intent (..),
@@ -2085,6 +2548,10 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2beta1IntentParameter (..),
     newGoogleCloudDialogflowV2beta1IntentParameter,
 
+    -- ** GoogleCloudDialogflowV2beta1IntentSuggestion
+    GoogleCloudDialogflowV2beta1IntentSuggestion (..),
+    newGoogleCloudDialogflowV2beta1IntentSuggestion,
+
     -- ** GoogleCloudDialogflowV2beta1IntentTrainingPhrase
     GoogleCloudDialogflowV2beta1IntentTrainingPhrase (..),
     newGoogleCloudDialogflowV2beta1IntentTrainingPhrase,
@@ -2106,6 +2573,34 @@ module Gogol.DialogFlow.Types
 
     -- ** GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer_MatchConfidenceLevel
     GoogleCloudDialogflowV2beta1KnowledgeAnswersAnswer_MatchConfidenceLevel (..),
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswer
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswer (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswer,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswer
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswer (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswer,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerFaqSource
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerFaqSource (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerFaqSource,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSource,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerKnowledgeAnswerGenerativeSourceSnippet_Metadata,
+
+    -- ** GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerSuggestedQuery
+    GoogleCloudDialogflowV2beta1KnowledgeAssistAnswerSuggestedQuery (..),
+    newGoogleCloudDialogflowV2beta1KnowledgeAssistAnswerSuggestedQuery,
 
     -- ** GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata
     GoogleCloudDialogflowV2beta1KnowledgeOperationMetadata (..),
@@ -2149,6 +2644,42 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2beta1QueryResult_WebhookPayload (..),
     newGoogleCloudDialogflowV2beta1QueryResult_WebhookPayload,
 
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessage
+    GoogleCloudDialogflowV2beta1ResponseMessage (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessage,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessage_Payload
+    GoogleCloudDialogflowV2beta1ResponseMessage_Payload (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessage_Payload,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageEndInteraction
+    GoogleCloudDialogflowV2beta1ResponseMessageEndInteraction (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageEndInteraction,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff
+    GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff_Metadata
+    GoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff_Metadata (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageLiveAgentHandoff_Metadata,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageMixedAudio
+    GoogleCloudDialogflowV2beta1ResponseMessageMixedAudio (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageMixedAudio,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment
+    GoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageMixedAudioSegment,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall
+    GoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageTelephonyTransferCall,
+
+    -- ** GoogleCloudDialogflowV2beta1ResponseMessageText
+    GoogleCloudDialogflowV2beta1ResponseMessageText (..),
+    newGoogleCloudDialogflowV2beta1ResponseMessageText,
+
     -- ** GoogleCloudDialogflowV2beta1Sentiment
     GoogleCloudDialogflowV2beta1Sentiment (..),
     newGoogleCloudDialogflowV2beta1Sentiment,
@@ -2178,13 +2709,32 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV2beta1SmartReplyAnswer (..),
     newGoogleCloudDialogflowV2beta1SmartReplyAnswer,
 
+    -- ** GoogleCloudDialogflowV2beta1SpeechWordInfo
+    GoogleCloudDialogflowV2beta1SpeechWordInfo (..),
+    newGoogleCloudDialogflowV2beta1SpeechWordInfo,
+
+    -- ** GoogleCloudDialogflowV2beta1StreamingRecognitionResult
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult (..),
+    newGoogleCloudDialogflowV2beta1StreamingRecognitionResult,
+
+    -- ** GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType
+    GoogleCloudDialogflowV2beta1StreamingRecognitionResult_MessageType (..),
+
     -- ** GoogleCloudDialogflowV2beta1SuggestArticlesResponse
     GoogleCloudDialogflowV2beta1SuggestArticlesResponse (..),
     newGoogleCloudDialogflowV2beta1SuggestArticlesResponse,
 
+    -- ** GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse
+    GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse (..),
+    newGoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse,
+
     -- ** GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse
     GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse (..),
     newGoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse,
+
+    -- ** GoogleCloudDialogflowV2beta1SuggestKnowledgeAssistResponse
+    GoogleCloudDialogflowV2beta1SuggestKnowledgeAssistResponse (..),
+    newGoogleCloudDialogflowV2beta1SuggestKnowledgeAssistResponse,
 
     -- ** GoogleCloudDialogflowV2beta1SuggestSmartRepliesResponse
     GoogleCloudDialogflowV2beta1SuggestSmartRepliesResponse (..),
@@ -2193,6 +2743,13 @@ module Gogol.DialogFlow.Types
     -- ** GoogleCloudDialogflowV2beta1SuggestionResult
     GoogleCloudDialogflowV2beta1SuggestionResult (..),
     newGoogleCloudDialogflowV2beta1SuggestionResult,
+
+    -- ** GoogleCloudDialogflowV2beta1TelephonyDtmfEvents
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents (..),
+    newGoogleCloudDialogflowV2beta1TelephonyDtmfEvents,
+
+    -- ** GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem
+    GoogleCloudDialogflowV2beta1TelephonyDtmfEvents_DtmfEventsItem (..),
 
     -- ** GoogleCloudDialogflowV2beta1WebhookRequest
     GoogleCloudDialogflowV2beta1WebhookRequest (..),
@@ -2210,43 +2767,12 @@ module Gogol.DialogFlow.Types
     GoogleCloudDialogflowV3alpha1ConversationSignals (..),
     newGoogleCloudDialogflowV3alpha1ConversationSignals,
 
-    -- ** GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata
-    GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata,
-
-    -- ** GoogleCloudDialogflowV3alpha1DeleteDocumentOperationMetadata
-    GoogleCloudDialogflowV3alpha1DeleteDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1DeleteDocumentOperationMetadata,
-
-    -- ** GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata
-    GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata,
-
-    -- ** GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State
-    GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata_State (..),
-
-    -- ** GoogleCloudDialogflowV3alpha1ImportDocumentsOperationMetadata
-    GoogleCloudDialogflowV3alpha1ImportDocumentsOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1ImportDocumentsOperationMetadata,
-
-    -- ** GoogleCloudDialogflowV3alpha1ImportDocumentsResponse
-    GoogleCloudDialogflowV3alpha1ImportDocumentsResponse (..),
-    newGoogleCloudDialogflowV3alpha1ImportDocumentsResponse,
-
-    -- ** GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata
-    GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata,
-
     -- ** GoogleCloudDialogflowV3alpha1TurnSignals
     GoogleCloudDialogflowV3alpha1TurnSignals (..),
     newGoogleCloudDialogflowV3alpha1TurnSignals,
 
     -- ** GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem
     GoogleCloudDialogflowV3alpha1TurnSignals_FailureReasonsItem (..),
-
-    -- ** GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata
-    GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata (..),
-    newGoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata,
 
     -- ** GoogleCloudLocationListLocationsResponse
     GoogleCloudLocationListLocationsResponse (..),
@@ -2309,7 +2835,7 @@ where
 
 import Gogol.DialogFlow.Internal.Product
 import Gogol.DialogFlow.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Dialogflow API. This contains the host and root path used as a starting point for constructing service requests.
 dialogFlowService :: Core.ServiceConfig
@@ -2319,7 +2845,9 @@ dialogFlowService =
     "dialogflow.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View, manage and query your Dialogflow agents
-type Dialogflow'FullControl = "https://www.googleapis.com/auth/dialogflow"
+type Dialogflow'FullControl =
+  "https://www.googleapis.com/auth/dialogflow"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Export
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Export
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.export@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresExport' request conforms to.
@@ -66,7 +64,7 @@ data HealthcareProjectsLocationsDatasetsDicomStoresExport = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The DICOM store resource name from which to export the data. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Required. The DICOM store resource name from which to export the data. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ExportDicomDataRequest,
@@ -79,34 +77,35 @@ data HealthcareProjectsLocationsDatasetsDicomStoresExport = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresExport' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresExport ::
-  -- |  The DICOM store resource name from which to export the data. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'name'.
+  -- |  Required. The DICOM store resource name from which to export the data. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ExportDicomDataRequest ->
   HealthcareProjectsLocationsDatasetsDicomStoresExport
-newHealthcareProjectsLocationsDatasetsDicomStoresExport name payload =
-  HealthcareProjectsLocationsDatasetsDicomStoresExport
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsDicomStoresExport
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsDicomStoresExport
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsDicomStoresExport
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresExport =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresExport =
       Operation
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresExport =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresExport =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresExport {..} =
       go

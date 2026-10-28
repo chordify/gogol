@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Creatives.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Creatives.Insert
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.creatives.insert@ method which the
 -- 'AdExchangeBuyerCreativesInsert' request conforms to.
@@ -69,23 +67,13 @@ newAdExchangeBuyerCreativesInsert ::
 newAdExchangeBuyerCreativesInsert payload =
   AdExchangeBuyerCreativesInsert {payload = payload}
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerCreativesInsert
-  where
+instance Core.GoogleRequest AdExchangeBuyerCreativesInsert where
   type Rs AdExchangeBuyerCreativesInsert = Creative
-  type
-    Scopes AdExchangeBuyerCreativesInsert =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerCreativesInsert = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesInsert {..} =
-    go
-      (Core.Just Core.AltJSON)
-      payload
-      adExchangeBuyerService
+    go (Core.Just Core.AltJSON) payload adExchangeBuyerService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerCreativesInsertResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerCreativesInsertResource)
           Core.mempty

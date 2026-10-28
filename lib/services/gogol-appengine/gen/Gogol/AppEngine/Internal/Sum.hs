@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppEngine.Internal.Sum
@@ -75,6 +73,23 @@ module Gogol.AppEngine.Internal.Sum
         Application_ServingStatus_Serving,
         Application_ServingStatus_USERDISABLED,
         Application_ServingStatus_SYSTEMDISABLED,
+        ..
+      ),
+
+    -- * Application_SslPolicy
+    Application_SslPolicy
+      ( Application_SslPolicy_SSLPOLICYUNSPECIFIED,
+        Application_SslPolicy_Default,
+        Application_SslPolicy_Modern,
+        ..
+      ),
+
+    -- * ContainerState_State
+    ContainerState_State
+      ( ContainerState_State_UNKNOWNSTATE,
+        ContainerState_State_ON,
+        ContainerState_State_Off,
+        ContainerState_State_Deleted,
         ..
       ),
 
@@ -154,18 +169,9 @@ module Gogol.AppEngine.Internal.Sum
 
     -- * ProjectEvent_Phase
     ProjectEvent_Phase
-      ( ProjectEvent_Phase_Unknown,
+      ( ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED,
         ProjectEvent_Phase_BEFORERESOURCEHANDLING,
         ProjectEvent_Phase_AFTERRESOURCEHANDLING,
-        ..
-      ),
-
-    -- * ProjectState_State
-    ProjectState_State
-      ( ProjectState_State_UNKNOWNSTATE,
-        ProjectState_State_ON,
-        ProjectState_State_Off,
-        ProjectState_State_Deleted,
         ..
       ),
 
@@ -207,6 +213,16 @@ module Gogol.AppEngine.Internal.Sum
         ..
       ),
 
+    -- * Reasons_ServiceActivation
+    Reasons_ServiceActivation
+      ( Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED,
+        Reasons_ServiceActivation_SERVICEACTIVATIONENABLED,
+        Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED,
+        Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL,
+        Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON,
+        ..
+      ),
+
     -- * Reasons_ServiceManagement
     Reasons_ServiceManagement
       ( Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON,
@@ -224,6 +240,27 @@ module Gogol.AppEngine.Internal.Sum
         ResourceRecord_Type_A,
         ResourceRecord_Type_Aaaa,
         ResourceRecord_Type_Cname,
+        ..
+      ),
+
+    -- * Runtime_Environment
+    Runtime_Environment
+      ( Runtime_Environment_ENVIRONMENTUNSPECIFIED,
+        Runtime_Environment_Standard,
+        Runtime_Environment_Flexible,
+        ..
+      ),
+
+    -- * Runtime_Stage
+    Runtime_Stage
+      ( Runtime_Stage_RUNTIMESTAGEUNSPECIFIED,
+        Runtime_Stage_Development,
+        Runtime_Stage_Alpha,
+        Runtime_Stage_Beta,
+        Runtime_Stage_GA,
+        Runtime_Stage_Deprecated,
+        Runtime_Stage_Decommissioned,
+        Runtime_Stage_ENDOFSUPPORT,
         ..
       ),
 
@@ -333,6 +370,22 @@ module Gogol.AppEngine.Internal.Sum
         ..
       ),
 
+    -- * AppsGetIncludeExtraData
+    AppsGetIncludeExtraData
+      ( AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED,
+        AppsGetIncludeExtraData_INCLUDEEXTRADATANONE,
+        AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA,
+        ..
+      ),
+
+    -- * AppsListRuntimesEnvironment
+    AppsListRuntimesEnvironment
+      ( AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED,
+        AppsListRuntimesEnvironment_Standard,
+        AppsListRuntimesEnvironment_Flexible,
+        ..
+      ),
+
     -- * AppsServicesVersionsGetView
     AppsServicesVersionsGetView
       ( AppsServicesVersionsGetView_Basic,
@@ -349,7 +402,7 @@ module Gogol.AppEngine.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -563,6 +616,75 @@ pattern Application_ServingStatus_SYSTEMDISABLED = Application_ServingStatus "SY
   Application_ServingStatus
   #-}
 
+-- | The SSL policy that will be applied to the application. If set to Modern it will restrict traffic with TLS \< 1.2 and allow only Modern Ciphers suite
+newtype Application_SslPolicy = Application_SslPolicy {fromApplication_SslPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Required by linter. Will work same as DEFAULT
+pattern Application_SslPolicy_SSLPOLICYUNSPECIFIED :: Application_SslPolicy
+pattern Application_SslPolicy_SSLPOLICYUNSPECIFIED = Application_SslPolicy "SSL_POLICY_UNSPECIFIED"
+
+-- | DEFAULT is to allow all TLS versions and cipher suites supported by App Engine
+pattern Application_SslPolicy_Default :: Application_SslPolicy
+pattern Application_SslPolicy_Default = Application_SslPolicy "DEFAULT"
+
+-- | MODERN is to allow only TLS 1.2 and TLS 1.3 along with Modern cipher suites only
+pattern Application_SslPolicy_Modern :: Application_SslPolicy
+pattern Application_SslPolicy_Modern = Application_SslPolicy "MODERN"
+
+{-# COMPLETE
+  Application_SslPolicy_SSLPOLICYUNSPECIFIED,
+  Application_SslPolicy_Default,
+  Application_SslPolicy_Modern,
+  Application_SslPolicy
+  #-}
+
+-- | The current state of the container. This state is the culmination of all of the opinions from external systems that CCFE knows about of the container.
+newtype ContainerState_State = ContainerState_State {fromContainerState_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | A container should never be in an unknown state. Receipt of a container with this state is an error.
+pattern ContainerState_State_UNKNOWNSTATE :: ContainerState_State
+pattern ContainerState_State_UNKNOWNSTATE = ContainerState_State "UNKNOWN_STATE"
+
+-- | CCFE considers the container to be serving or transitioning into serving.
+pattern ContainerState_State_ON :: ContainerState_State
+pattern ContainerState_State_ON = ContainerState_State "ON"
+
+-- | CCFE considers the container to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a container to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the container is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
+pattern ContainerState_State_Off :: ContainerState_State
+pattern ContainerState_State_Off = ContainerState_State "OFF"
+
+-- | This state indicates that the container has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
+pattern ContainerState_State_Deleted :: ContainerState_State
+pattern ContainerState_State_Deleted = ContainerState_State "DELETED"
+
+{-# COMPLETE
+  ContainerState_State_UNKNOWNSTATE,
+  ContainerState_State_ON,
+  ContainerState_State_Off,
+  ContainerState_State_Deleted,
+  ContainerState_State
+  #-}
+
 -- | Endpoints rollout strategy. If FIXED, config/id must be specified. If MANAGED, config/id must be omitted.
 newtype EndpointsApiService_RolloutStrategy = EndpointsApiService_RolloutStrategy {fromEndpointsApiService_RolloutStrategy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -650,7 +772,6 @@ newtype FirewallRule_Action = FirewallRule_Action {fromFirewallRule_Action :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern FirewallRule_Action_UNSPECIFIEDACTION :: FirewallRule_Action
 pattern FirewallRule_Action_UNSPECIFIEDACTION = FirewallRule_Action "UNSPECIFIED_ACTION"
 
@@ -682,15 +803,12 @@ newtype Instance_Availability = Instance_Availability {fromInstance_Availability
       Core.FromJSONKey
     )
 
--- |
 pattern Instance_Availability_Unspecified :: Instance_Availability
 pattern Instance_Availability_Unspecified = Instance_Availability "UNSPECIFIED"
 
--- |
 pattern Instance_Availability_Resident :: Instance_Availability
 pattern Instance_Availability_Resident = Instance_Availability "RESIDENT"
 
--- |
 pattern Instance_Availability_Dynamic :: Instance_Availability
 pattern Instance_Availability_Dynamic = Instance_Availability "DYNAMIC"
 
@@ -761,7 +879,6 @@ newtype ManagedCertificate_Status = ManagedCertificate_Status {fromManagedCertif
       Core.FromJSONKey
     )
 
--- |
 pattern ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED :: ManagedCertificate_Status
 pattern ManagedCertificate_Status_MANAGEMENTSTATUSUNSPECIFIED = ManagedCertificate_Status "MANAGEMENT_STATUS_UNSPECIFIED"
 
@@ -869,6 +986,7 @@ pattern NetworkSettings_IngressTrafficAllowed_INGRESSTRAFFICALLOWEDINTERNALANDLB
   NetworkSettings_IngressTrafficAllowed
   #-}
 
+-- | Phase indicates when in the container event propagation this event is being communicated. Events are sent before and after the per-resource events are propagated. required
 newtype ProjectEvent_Phase = ProjectEvent_Phase {fromProjectEvent_Phase :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -881,60 +999,20 @@ newtype ProjectEvent_Phase = ProjectEvent_Phase {fromProjectEvent_Phase :: Core.
       Core.FromJSONKey
     )
 
--- |
-pattern ProjectEvent_Phase_Unknown :: ProjectEvent_Phase
-pattern ProjectEvent_Phase_Unknown = ProjectEvent_Phase "UNKNOWN"
+pattern ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED :: ProjectEvent_Phase
+pattern ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED = ProjectEvent_Phase "CONTAINER_EVENT_PHASE_UNSPECIFIED"
 
--- |
 pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING :: ProjectEvent_Phase
 pattern ProjectEvent_Phase_BEFORERESOURCEHANDLING = ProjectEvent_Phase "BEFORE_RESOURCE_HANDLING"
 
--- |
 pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING :: ProjectEvent_Phase
 pattern ProjectEvent_Phase_AFTERRESOURCEHANDLING = ProjectEvent_Phase "AFTER_RESOURCE_HANDLING"
 
 {-# COMPLETE
-  ProjectEvent_Phase_Unknown,
+  ProjectEvent_Phase_CONTAINEREVENTPHASEUNSPECIFIED,
   ProjectEvent_Phase_BEFORERESOURCEHANDLING,
   ProjectEvent_Phase_AFTERRESOURCEHANDLING,
   ProjectEvent_Phase
-  #-}
-
--- | The current state of the project. This state is the culmination of all of the opinions from external systems that CCFE knows about of the project.
-newtype ProjectState_State = ProjectState_State {fromProjectState_State :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | A project should never be in an unknown state. Receipt of a project with this state is an error.
-pattern ProjectState_State_UNKNOWNSTATE :: ProjectState_State
-pattern ProjectState_State_UNKNOWNSTATE = ProjectState_State "UNKNOWN_STATE"
-
--- | CCFE considers the project to be serving or transitioning into serving.
-pattern ProjectState_State_ON :: ProjectState_State
-pattern ProjectState_State_ON = ProjectState_State "ON"
-
--- | CCFE considers the project to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a project to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the project is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
-pattern ProjectState_State_Off :: ProjectState_State
-pattern ProjectState_State_Off = ProjectState_State "OFF"
-
--- | This state indicates that the project has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
-pattern ProjectState_State_Deleted :: ProjectState_State
-pattern ProjectState_State_Deleted = ProjectState_State "DELETED"
-
-{-# COMPLETE
-  ProjectState_State_UNKNOWNSTATE,
-  ProjectState_State_ON,
-  ProjectState_State_Off,
-  ProjectState_State_Deleted,
-  ProjectState_State
   #-}
 
 -- | The CCFE state of the consumer project. It is the same state that is communicated to the CLH during project events. Notice that this field is not set in the DB, it is only set in this proto when communicated to CLH in the side channel.
@@ -950,19 +1028,19 @@ newtype ProjectsMetadata_ConsumerProjectState = ProjectsMetadata_ConsumerProject
       Core.FromJSONKey
     )
 
--- | A project should never be in an unknown state. Receipt of a project with this state is an error.
+-- | A container should never be in an unknown state. Receipt of a container with this state is an error.
 pattern ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE :: ProjectsMetadata_ConsumerProjectState
 pattern ProjectsMetadata_ConsumerProjectState_UNKNOWNSTATE = ProjectsMetadata_ConsumerProjectState "UNKNOWN_STATE"
 
--- | CCFE considers the project to be serving or transitioning into serving.
+-- | CCFE considers the container to be serving or transitioning into serving.
 pattern ProjectsMetadata_ConsumerProjectState_ON :: ProjectsMetadata_ConsumerProjectState
 pattern ProjectsMetadata_ConsumerProjectState_ON = ProjectsMetadata_ConsumerProjectState "ON"
 
--- | CCFE considers the project to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a project to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the project is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
+-- | CCFE considers the container to be in an OFF state. This could occur due to various factors. The state could be triggered by Google-internal audits (ex. abuse suspension, billing closed) or cleanups trigged by compliance systems (ex. data governance hide). User-initiated events such as service management deactivation trigger a container to an OFF state.CLHs might choose to do nothing in this case or to turn off costly resources. CLHs need to consider the customer experience if an ON\/OFF\/ON sequence of state transitions occurs vs. the cost of deleting resources, keeping metadata about resources, or even keeping resources live for a period of time.CCFE will not send any new customer requests to the CLH when the container is in an OFF state. However, CCFE will allow all previous customer requests relayed to CLH to complete.
 pattern ProjectsMetadata_ConsumerProjectState_Off :: ProjectsMetadata_ConsumerProjectState
 pattern ProjectsMetadata_ConsumerProjectState_Off = ProjectsMetadata_ConsumerProjectState "OFF"
 
--- | This state indicates that the project has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
+-- | This state indicates that the container has been (or is being) completely removed. This is often due to a data governance purge request and therefore resources should be deleted when this state is reached.
 pattern ProjectsMetadata_ConsumerProjectState_Deleted :: ProjectsMetadata_ConsumerProjectState
 pattern ProjectsMetadata_ConsumerProjectState_Deleted = ProjectsMetadata_ConsumerProjectState "DELETED"
 
@@ -986,19 +1064,19 @@ newtype Reasons_Abuse = Reasons_Abuse {fromReasons_Abuse :: Core.Text}
       Core.FromJSONKey
     )
 
--- | An unknown reason indicates that the abuse system has not sent a signal for this project.
+-- | An unknown reason indicates that the abuse system has not sent a signal for this container.
 pattern Reasons_Abuse_ABUSEUNKNOWNREASON :: Reasons_Abuse
 pattern Reasons_Abuse_ABUSEUNKNOWNREASON = Reasons_Abuse "ABUSE_UNKNOWN_REASON"
 
--- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+-- | Due to various reasons CCFE might proactively restate a container state to a CLH to ensure that the CLH and CCFE are both aware of the container state. This reason can be tied to any of the states.
 pattern Reasons_Abuse_ABUSECONTROLPLANESYNC :: Reasons_Abuse
 pattern Reasons_Abuse_ABUSECONTROLPLANESYNC = Reasons_Abuse "ABUSE_CONTROL_PLANE_SYNC"
 
--- | If a project is deemed abusive we receive a suspend signal. Suspend is a reason to put the project into an INTERNAL_OFF state.
+-- | If a container is deemed abusive we receive a suspend signal. Suspend is a reason to put the container into an INTERNAL_OFF state.
 pattern Reasons_Abuse_Suspend :: Reasons_Abuse
 pattern Reasons_Abuse_Suspend = Reasons_Abuse "SUSPEND"
 
--- | Projects that were once considered abusive can later be deemed non-abusive. When this happens we must reinstate the project. Reinstate is a reason to put the project into an ON state.
+-- | Containers that were once considered abusive can later be deemed non-abusive. When this happens we must reinstate the container. Reinstate is a reason to put the container into an ON state.
 pattern Reasons_Abuse_Reinstate :: Reasons_Abuse
 pattern Reasons_Abuse_Reinstate = Reasons_Abuse "REINSTATE"
 
@@ -1022,23 +1100,23 @@ newtype Reasons_Billing = Reasons_Billing {fromReasons_Billing :: Core.Text}
       Core.FromJSONKey
     )
 
--- | An unknown reason indicates that the billing system has not sent a signal for this project.
+-- | An unknown reason indicates that the billing system has not sent a signal for this container.
 pattern Reasons_Billing_BILLINGUNKNOWNREASON :: Reasons_Billing
 pattern Reasons_Billing_BILLINGUNKNOWNREASON = Reasons_Billing "BILLING_UNKNOWN_REASON"
 
--- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+-- | Due to various reasons CCFE might proactively restate a container state to a CLH to ensure that the CLH and CCFE are both aware of the container state. This reason can be tied to any of the states.
 pattern Reasons_Billing_BILLINGCONTROLPLANESYNC :: Reasons_Billing
 pattern Reasons_Billing_BILLINGCONTROLPLANESYNC = Reasons_Billing "BILLING_CONTROL_PLANE_SYNC"
 
--- | Minor infractions cause a probation signal to be sent. Probation is a reason to put the project into a ON state even though it is a negative signal. CCFE will block mutations for this project while it is on billing probation, but the CLH is expected to serve non-mutation requests.
+-- | Minor infractions cause a probation signal to be sent. Probation is a reason to put the container into a ON state even though it is a negative signal. CCFE will block mutations for this container while it is on billing probation, but the CLH is expected to serve non-mutation requests.
 pattern Reasons_Billing_Probation :: Reasons_Billing
 pattern Reasons_Billing_Probation = Reasons_Billing "PROBATION"
 
--- | When a billing account is closed, it is a stronger signal about non-payment. Close is a reason to put the project into an INTERNAL_OFF state.
+-- | When a billing account is closed, it is a stronger signal about non-payment. Close is a reason to put the container into an INTERNAL_OFF state.
 pattern Reasons_Billing_Close :: Reasons_Billing
 pattern Reasons_Billing_Close = Reasons_Billing "CLOSE"
 
--- | Consumers can re-open billing accounts and update accounts to pull them out of probation. When this happens, we get a signal that the account is open. Open is a reason to put the project into an ON state.
+-- | Consumers can re-open billing accounts and update accounts to pull them out of probation. When this happens, we get a signal that the account is open. Open is a reason to put the container into an ON state.
 pattern Reasons_Billing_Open :: Reasons_Billing
 pattern Reasons_Billing_Open = Reasons_Billing "OPEN"
 
@@ -1063,23 +1141,23 @@ newtype Reasons_DataGovernance = Reasons_DataGovernance {fromReasons_DataGoverna
       Core.FromJSONKey
     )
 
--- | An unknown reason indicates that data governance has not sent a signal for this project.
+-- | An unknown reason indicates that data governance has not sent a signal for this container.
 pattern Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON :: Reasons_DataGovernance
 pattern Reasons_DataGovernance_DATAGOVERNANCEUNKNOWNREASON = Reasons_DataGovernance "DATA_GOVERNANCE_UNKNOWN_REASON"
 
--- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+-- | Due to various reasons CCFE might proactively restate a container state to a CLH to ensure that the CLH and CCFE are both aware of the container state. This reason can be tied to any of the states.
 pattern Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC :: Reasons_DataGovernance
 pattern Reasons_DataGovernance_DATAGOVERNANCECONTROLPLANESYNC = Reasons_DataGovernance "DATA_GOVERNANCE_CONTROL_PLANE_SYNC"
 
--- | When a project is deleted we retain some data for a period of time to allow the consumer to change their mind. Data governance sends a signal to hide the data when this occurs. Hide is a reason to put the project in an INTERNAL_OFF state.
+-- | When a container is deleted we retain some data for a period of time to allow the consumer to change their mind. Data governance sends a signal to hide the data when this occurs. Hide is a reason to put the container in an INTERNAL_OFF state.
 pattern Reasons_DataGovernance_Hide :: Reasons_DataGovernance
 pattern Reasons_DataGovernance_Hide = Reasons_DataGovernance "HIDE"
 
--- | The decision to un-delete a project can be made. When this happens data governance tells us to unhide any hidden data. Unhide is a reason to put the project in an ON state.
+-- | The decision to un-delete a container can be made. When this happens data governance tells us to unhide any hidden data. Unhide is a reason to put the container in an ON state.
 pattern Reasons_DataGovernance_Unhide :: Reasons_DataGovernance
 pattern Reasons_DataGovernance_Unhide = Reasons_DataGovernance "UNHIDE"
 
--- | After a period of time data must be completely removed from our systems. When data governance sends a purge signal we need to remove data. Purge is a reason to put the project in a DELETED state. Purge is the only event that triggers a delete mutation. All other events have update semantics.
+-- | After a period of time data must be completely removed from our systems. When data governance sends a purge signal we need to remove data. Purge is a reason to put the container in a DELETED state. Purge is the only event that triggers a delete mutation. All other events have update semantics.
 pattern Reasons_DataGovernance_Purge :: Reasons_DataGovernance
 pattern Reasons_DataGovernance_Purge = Reasons_DataGovernance "PURGE"
 
@@ -1090,6 +1168,48 @@ pattern Reasons_DataGovernance_Purge = Reasons_DataGovernance "PURGE"
   Reasons_DataGovernance_Unhide,
   Reasons_DataGovernance_Purge,
   Reasons_DataGovernance
+  #-}
+
+-- | Consumer Container denotes if the service is active within a project or not. This information could be used to clean up resources in case service in DISABLED_FULL i.e. Service is inactive > 30 days.
+newtype Reasons_ServiceActivation = Reasons_ServiceActivation {fromReasons_ServiceActivation :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default Unspecified status
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED :: Reasons_ServiceActivation
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED = Reasons_ServiceActivation "SERVICE_ACTIVATION_STATUS_UNSPECIFIED"
+
+-- | Service is active in the project.
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONENABLED :: Reasons_ServiceActivation
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONENABLED = Reasons_ServiceActivation "SERVICE_ACTIVATION_ENABLED"
+
+-- | Service is disabled in the project recently i.e., within last 24 hours.
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED :: Reasons_ServiceActivation
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED = Reasons_ServiceActivation "SERVICE_ACTIVATION_DISABLED"
+
+-- | Service has been disabled for configured grace_period (default 30 days).
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL :: Reasons_ServiceActivation
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL = Reasons_ServiceActivation "SERVICE_ACTIVATION_DISABLED_FULL"
+
+-- | Happens when PSM cannot determine the status of service in a project Could happen due to variety of reasons like PERMISSION_DENIED or Project got deleted etc.
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON :: Reasons_ServiceActivation
+pattern Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON = Reasons_ServiceActivation "SERVICE_ACTIVATION_UNKNOWN_REASON"
+
+{-# COMPLETE
+  Reasons_ServiceActivation_SERVICEACTIVATIONSTATUSUNSPECIFIED,
+  Reasons_ServiceActivation_SERVICEACTIVATIONENABLED,
+  Reasons_ServiceActivation_SERVICEACTIVATIONDISABLED,
+  Reasons_ServiceActivation_SERVICEACTIVATIONDISABLEDFULL,
+  Reasons_ServiceActivation_SERVICEACTIVATIONUNKNOWNREASON,
+  Reasons_ServiceActivation
   #-}
 
 newtype Reasons_ServiceManagement = Reasons_ServiceManagement {fromReasons_ServiceManagement :: Core.Text}
@@ -1104,27 +1224,27 @@ newtype Reasons_ServiceManagement = Reasons_ServiceManagement {fromReasons_Servi
       Core.FromJSONKey
     )
 
--- | An unknown reason indicates that we have not received a signal from service management about this project. Since projects are created by request of service management, this reason should never be set.
+-- | An unknown reason indicates that we have not received a signal from service management about this container. Since containers are created by request of service management, this reason should never be set.
 pattern Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_SERVICEMANAGEMENTUNKNOWNREASON = Reasons_ServiceManagement "SERVICE_MANAGEMENT_UNKNOWN_REASON"
 
--- | Due to various reasons CCFE might proactively restate a project state to a CLH to ensure that the CLH and CCFE are both aware of the project state. This reason can be tied to any of the states.
+-- | Due to various reasons CCFE might proactively restate a container state to a CLH to ensure that the CLH and CCFE are both aware of the container state. This reason can be tied to any of the states.
 pattern Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_SERVICEMANAGEMENTCONTROLPLANESYNC = Reasons_ServiceManagement "SERVICE_MANAGEMENT_CONTROL_PLANE_SYNC"
 
--- | When a customer activates an API CCFE notifies the CLH and sets the project to the ON state.
+-- | When a customer activates an API CCFE notifies the CLH and sets the container to the ON state.
 pattern Reasons_ServiceManagement_Activation :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_Activation = Reasons_ServiceManagement "ACTIVATION"
 
--- | When a customer deactivates and API service management starts a two-step process to perform the deactivation. The first step is to prepare. Prepare is a reason to put the project in a EXTERNAL_OFF state.
+-- | When a customer deactivates and API service management starts a two-step process to perform the deactivation. The first step is to prepare. Prepare is a reason to put the container in a EXTERNAL_OFF state.
 pattern Reasons_ServiceManagement_PREPAREDEACTIVATION :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_PREPAREDEACTIVATION = Reasons_ServiceManagement "PREPARE_DEACTIVATION"
 
--- | If the deactivation is cancelled, service managed needs to abort the deactivation. Abort is a reason to put the project in an ON state.
+-- | If the deactivation is cancelled, service managed needs to abort the deactivation. Abort is a reason to put the container in an ON state.
 pattern Reasons_ServiceManagement_ABORTDEACTIVATION :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_ABORTDEACTIVATION = Reasons_ServiceManagement "ABORT_DEACTIVATION"
 
--- | If the deactivation is followed through with, service management needs to finish deactivation. Commit is a reason to put the project in a DELETED state.
+-- | If the deactivation is followed through with, service management needs to finish deactivation. Commit is a reason to put the container in a DELETED state.
 pattern Reasons_ServiceManagement_COMMITDEACTIVATION :: Reasons_ServiceManagement
 pattern Reasons_ServiceManagement_COMMITDEACTIVATION = Reasons_ServiceManagement "COMMIT_DEACTIVATION"
 
@@ -1175,6 +1295,95 @@ pattern ResourceRecord_Type_Cname = ResourceRecord_Type "CNAME"
   ResourceRecord_Type
   #-}
 
+-- | The environment of the runtime.
+newtype Runtime_Environment = Runtime_Environment {fromRuntime_Environment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern Runtime_Environment_ENVIRONMENTUNSPECIFIED :: Runtime_Environment
+pattern Runtime_Environment_ENVIRONMENTUNSPECIFIED = Runtime_Environment "ENVIRONMENT_UNSPECIFIED"
+
+-- | App Engine Standard.
+pattern Runtime_Environment_Standard :: Runtime_Environment
+pattern Runtime_Environment_Standard = Runtime_Environment "STANDARD"
+
+-- | App Engine Flexible
+pattern Runtime_Environment_Flexible :: Runtime_Environment
+pattern Runtime_Environment_Flexible = Runtime_Environment "FLEXIBLE"
+
+{-# COMPLETE
+  Runtime_Environment_ENVIRONMENTUNSPECIFIED,
+  Runtime_Environment_Standard,
+  Runtime_Environment_Flexible,
+  Runtime_Environment
+  #-}
+
+-- | The stage of life this runtime is in, e.g., BETA, GA, etc.
+newtype Runtime_Stage = Runtime_Stage {fromRuntime_Stage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern Runtime_Stage_RUNTIMESTAGEUNSPECIFIED :: Runtime_Stage
+pattern Runtime_Stage_RUNTIMESTAGEUNSPECIFIED = Runtime_Stage "RUNTIME_STAGE_UNSPECIFIED"
+
+-- | The runtime is in development.
+pattern Runtime_Stage_Development :: Runtime_Stage
+pattern Runtime_Stage_Development = Runtime_Stage "DEVELOPMENT"
+
+-- | The runtime is in the Alpha stage.
+pattern Runtime_Stage_Alpha :: Runtime_Stage
+pattern Runtime_Stage_Alpha = Runtime_Stage "ALPHA"
+
+-- | The runtime is in the Beta stage.
+pattern Runtime_Stage_Beta :: Runtime_Stage
+pattern Runtime_Stage_Beta = Runtime_Stage "BETA"
+
+-- | The runtime is generally available.
+pattern Runtime_Stage_GA :: Runtime_Stage
+pattern Runtime_Stage_GA = Runtime_Stage "GA"
+
+-- | The runtime is deprecated.
+pattern Runtime_Stage_Deprecated :: Runtime_Stage
+pattern Runtime_Stage_Deprecated = Runtime_Stage "DEPRECATED"
+
+-- | The runtime is no longer supported.
+pattern Runtime_Stage_Decommissioned :: Runtime_Stage
+pattern Runtime_Stage_Decommissioned = Runtime_Stage "DECOMMISSIONED"
+
+-- | The runtime is end of support.
+pattern Runtime_Stage_ENDOFSUPPORT :: Runtime_Stage
+pattern Runtime_Stage_ENDOFSUPPORT = Runtime_Stage "END_OF_SUPPORT"
+
+{-# COMPLETE
+  Runtime_Stage_RUNTIMESTAGEUNSPECIFIED,
+  Runtime_Stage_Development,
+  Runtime_Stage_Alpha,
+  Runtime_Stage_Beta,
+  Runtime_Stage_GA,
+  Runtime_Stage_Deprecated,
+  Runtime_Stage_Decommissioned,
+  Runtime_Stage_ENDOFSUPPORT,
+  Runtime_Stage
+  #-}
+
 -- | SSL management type for this domain. If AUTOMATIC, a managed certificate is automatically provisioned. If MANUAL, certificate_id must be manually specified in order to configure SSL for this domain.
 newtype SslSettings_SslManagementType = SslSettings_SslManagementType {fromSslSettings_SslManagementType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1196,7 +1405,7 @@ pattern SslSettings_SslManagementType_SSLMANAGEMENTTYPEUNSPECIFIED = SslSettings
 pattern SslSettings_SslManagementType_Automatic :: SslSettings_SslManagementType
 pattern SslSettings_SslManagementType_Automatic = SslSettings_SslManagementType "AUTOMATIC"
 
--- | SSL support for this domain is configured manually by the user. Either the domain has no SSL support or a user-obtained SSL certificate has been explictly mapped to this domain.
+-- | SSL support for this domain is configured manually by the user. Either the domain has no SSL support or a user-obtained SSL certificate has been explicitly mapped to this domain.
 pattern SslSettings_SslManagementType_Manual :: SslSettings_SslManagementType
 pattern SslSettings_SslManagementType_Manual = SslSettings_SslManagementType "MANUAL"
 
@@ -1503,7 +1712,6 @@ newtype VpcAccessConnector_EgressSetting = VpcAccessConnector_EgressSetting {fro
       Core.FromJSONKey
     )
 
--- |
 pattern VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED :: VpcAccessConnector_EgressSetting
 pattern VpcAccessConnector_EgressSetting_EGRESSSETTINGUNSPECIFIED = VpcAccessConnector_EgressSetting "EGRESS_SETTING_UNSPECIFIED"
 
@@ -1606,6 +1814,70 @@ pattern AppsDomainMappingsCreateOverrideStrategy_Override = AppsDomainMappingsCr
   AppsDomainMappingsCreateOverrideStrategy_Strict,
   AppsDomainMappingsCreateOverrideStrategy_Override,
   AppsDomainMappingsCreateOverrideStrategy
+  #-}
+
+-- | Options to include extra data
+newtype AppsGetIncludeExtraData = AppsGetIncludeExtraData {fromAppsGetIncludeExtraData :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified: No extra data will be returned
+pattern AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED :: AppsGetIncludeExtraData
+pattern AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED = AppsGetIncludeExtraData "INCLUDE_EXTRA_DATA_UNSPECIFIED"
+
+-- | Do not return any extra data
+pattern AppsGetIncludeExtraData_INCLUDEEXTRADATANONE :: AppsGetIncludeExtraData
+pattern AppsGetIncludeExtraData_INCLUDEEXTRADATANONE = AppsGetIncludeExtraData "INCLUDE_EXTRA_DATA_NONE"
+
+-- | Return GGCM associated with the resources
+pattern AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA :: AppsGetIncludeExtraData
+pattern AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA = AppsGetIncludeExtraData "INCLUDE_GOOGLE_GENERATED_METADATA"
+
+{-# COMPLETE
+  AppsGetIncludeExtraData_INCLUDEEXTRADATAUNSPECIFIED,
+  AppsGetIncludeExtraData_INCLUDEEXTRADATANONE,
+  AppsGetIncludeExtraData_INCLUDEGOOGLEGENERATEDMETADATA,
+  AppsGetIncludeExtraData
+  #-}
+
+-- | Optional. The environment of the Application.
+newtype AppsListRuntimesEnvironment = AppsListRuntimesEnvironment {fromAppsListRuntimesEnvironment :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED :: AppsListRuntimesEnvironment
+pattern AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED = AppsListRuntimesEnvironment "ENVIRONMENT_UNSPECIFIED"
+
+-- | App Engine Standard.
+pattern AppsListRuntimesEnvironment_Standard :: AppsListRuntimesEnvironment
+pattern AppsListRuntimesEnvironment_Standard = AppsListRuntimesEnvironment "STANDARD"
+
+-- | App Engine Flexible
+pattern AppsListRuntimesEnvironment_Flexible :: AppsListRuntimesEnvironment
+pattern AppsListRuntimesEnvironment_Flexible = AppsListRuntimesEnvironment "FLEXIBLE"
+
+{-# COMPLETE
+  AppsListRuntimesEnvironment_ENVIRONMENTUNSPECIFIED,
+  AppsListRuntimesEnvironment_Standard,
+  AppsListRuntimesEnvironment_Flexible,
+  AppsListRuntimesEnvironment
   #-}
 
 -- | Controls the set of fields returned in the Get response.

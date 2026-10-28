@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.CustomMetrics.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.CustomMetrics.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.customMetrics.patch@ method which the
 -- 'AnalyticsManagementCustomMetricsPatch' request conforms to.
@@ -54,9 +52,7 @@ type AnalyticsManagementCustomMetricsPatchResource =
     Core.:> Core.Capture "webPropertyId" Core.Text
     Core.:> "customMetrics"
     Core.:> Core.Capture "customMetricId" Core.Text
-    Core.:> Core.QueryParam
-              "ignoreCustomDataSourceLinks"
-              Core.Bool
+    Core.:> Core.QueryParam "ignoreCustomDataSourceLinks" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] CustomMetric
     Core.:> Core.Patch '[Core.JSON] CustomMetric
@@ -89,40 +85,37 @@ newAnalyticsManagementCustomMetricsPatch ::
   -- |  Web property ID for the custom metric to update. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementCustomMetricsPatch
-newAnalyticsManagementCustomMetricsPatch accountId customMetricId payload webPropertyId =
-  AnalyticsManagementCustomMetricsPatch
-    { accountId = accountId,
-      customMetricId = customMetricId,
-      ignoreCustomDataSourceLinks = Core.False,
-      payload = payload,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementCustomMetricsPatch
+  accountId
+  customMetricId
+  payload
+  webPropertyId =
     AnalyticsManagementCustomMetricsPatch
-  where
-  type
-    Rs AnalyticsManagementCustomMetricsPatch =
-      CustomMetric
+      { accountId = accountId,
+        customMetricId = customMetricId,
+        ignoreCustomDataSourceLinks = Core.False,
+        payload = payload,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementCustomMetricsPatch where
+  type Rs AnalyticsManagementCustomMetricsPatch = CustomMetric
   type
     Scopes AnalyticsManagementCustomMetricsPatch =
       '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementCustomMetricsPatch {..} =
-      go
-        accountId
-        webPropertyId
-        customMetricId
-        (Core.Just ignoreCustomDataSourceLinks)
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementCustomMetricsPatchResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementCustomMetricsPatch {..} =
+    go
+      accountId
+      webPropertyId
+      customMetricId
+      (Core.Just ignoreCustomDataSourceLinks)
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementCustomMetricsPatchResource
+          )
+          Core.mempty

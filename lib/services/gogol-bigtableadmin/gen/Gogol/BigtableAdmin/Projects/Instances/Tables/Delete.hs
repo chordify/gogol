@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Tables.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.Delete
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.delete@ method which the
 -- 'BigtableAdminProjectsInstancesTablesDelete' request conforms to.
@@ -93,34 +91,29 @@ instance
   Core.GoogleRequest
     BigtableAdminProjectsInstancesTablesDelete
   where
+  type Rs BigtableAdminProjectsInstancesTablesDelete = Empty
   type
-    Rs BigtableAdminProjectsInstancesTablesDelete =
-      Empty
-  type
-    Scopes
-      BigtableAdminProjectsInstancesTablesDelete =
+    Scopes BigtableAdminProjectsInstancesTablesDelete =
       '[ Bigtable'Admin,
          Bigtable'Admin'Table,
          CloudBigtable'Admin,
          CloudBigtable'Admin'Table,
          CloudPlatform'FullControl
        ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesDeleteResource
-            )
-            Core.mempty
+  requestClient BigtableAdminProjectsInstancesTablesDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BigtableAdminProjectsInstancesTablesDeleteResource
+          )
+          Core.mempty

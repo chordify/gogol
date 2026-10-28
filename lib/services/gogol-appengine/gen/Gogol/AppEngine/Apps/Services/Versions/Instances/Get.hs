@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Services.Versions.Instances.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Services.Versions.Instances.Get
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.services.versions.instances.get@ method which the
 -- 'AppEngineAppsServicesVersionsInstancesGet' request conforms to.
@@ -98,51 +96,51 @@ newAppEngineAppsServicesVersionsInstancesGet ::
   -- |  Part of @name@. See documentation of @appsId@. See 'versionsId'.
   Core.Text ->
   AppEngineAppsServicesVersionsInstancesGet
-newAppEngineAppsServicesVersionsInstancesGet appsId instancesId servicesId versionsId =
-  AppEngineAppsServicesVersionsInstancesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      callback = Core.Nothing,
-      instancesId = instancesId,
-      servicesId = servicesId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      versionsId = versionsId
-    }
+newAppEngineAppsServicesVersionsInstancesGet
+  appsId
+  instancesId
+  servicesId
+  versionsId =
+    AppEngineAppsServicesVersionsInstancesGet
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        callback = Core.Nothing,
+        instancesId = instancesId,
+        servicesId = servicesId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        versionsId = versionsId
+      }
 
 instance
   Core.GoogleRequest
     AppEngineAppsServicesVersionsInstancesGet
   where
-  type
-    Rs AppEngineAppsServicesVersionsInstancesGet =
-      Instance
+  type Rs AppEngineAppsServicesVersionsInstancesGet = Instance
   type
     Scopes AppEngineAppsServicesVersionsInstancesGet =
       '[ Appengine'Admin,
          CloudPlatform'FullControl,
          CloudPlatform'ReadOnly
        ]
-  requestClient
-    AppEngineAppsServicesVersionsInstancesGet {..} =
-      go
-        appsId
-        servicesId
-        versionsId
-        instancesId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsServicesVersionsInstancesGetResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsServicesVersionsInstancesGet {..} =
+    go
+      appsId
+      servicesId
+      versionsId
+      instancesId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsServicesVersionsInstancesGetResource
+          )
+          Core.mempty

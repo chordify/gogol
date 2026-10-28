@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.SecurityPolicies.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+-- Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.securityPolicies.patch@.
 module Gogol.Compute.SecurityPolicies.Patch
@@ -40,7 +38,7 @@ module Gogol.Compute.SecurityPolicies.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.securityPolicies.patch@ method which the
 -- 'ComputeSecurityPoliciesPatch' request conforms to.
@@ -56,13 +54,14 @@ type ComputeSecurityPoliciesPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "requestId" Core.Text
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] SecurityPolicy
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+-- | Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
 --
 -- /See:/ 'newComputeSecurityPoliciesPatch' smart constructor.
 data ComputeSecurityPoliciesPatch = ComputeSecurityPoliciesPatch
@@ -80,6 +79,8 @@ data ComputeSecurityPoliciesPatch = ComputeSecurityPoliciesPatch
     requestId :: (Core.Maybe Core.Text),
     -- | Name of the security policy to update.
     securityPolicy :: Core.Text,
+    -- | Indicates fields to be cleared as part of this request.
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -105,14 +106,12 @@ newComputeSecurityPoliciesPatch payload project securityPolicy =
       project = project,
       requestId = Core.Nothing,
       securityPolicy = securityPolicy,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeSecurityPoliciesPatch
-  where
+instance Core.GoogleRequest ComputeSecurityPoliciesPatch where
   type Rs ComputeSecurityPoliciesPatch = Operation
   type
     Scopes ComputeSecurityPoliciesPatch =
@@ -125,6 +124,7 @@ instance
       accessToken
       callback
       requestId
+      updateMask
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -133,7 +133,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeSecurityPoliciesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeSecurityPoliciesPatchResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Players.GetMultipleApplicationPlayerIds
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Players.GetMultipleApplicationPlayerIds
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.players.getMultipleApplicationPlayerIds@ method which the
 -- 'GamesPlayersGetMultipleApplicationPlayerIds' request conforms to.
@@ -57,9 +55,7 @@ type GamesPlayersGetMultipleApplicationPlayerIdsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GetMultipleApplicationPlayerIdsResponse
+    Core.:> Core.Get '[Core.JSON] GetMultipleApplicationPlayerIdsResponse
 
 -- | Get the application player ids for the currently authenticated player across all requested games by the same developer as the calling application. This will only return ids for players that actually have an id (scoped or otherwise) with that game.
 --
@@ -101,25 +97,22 @@ instance
     Rs GamesPlayersGetMultipleApplicationPlayerIds =
       GetMultipleApplicationPlayerIdsResponse
   type
-    Scopes
-      GamesPlayersGetMultipleApplicationPlayerIds =
+    Scopes GamesPlayersGetMultipleApplicationPlayerIds =
       '[Games'FullControl]
-  requestClient
-    GamesPlayersGetMultipleApplicationPlayerIds {..} =
-      go
-        xgafv
-        accessToken
-        (applicationIds Core.^. Core._Default)
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        gamesService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesPlayersGetMultipleApplicationPlayerIdsResource
-            )
-            Core.mempty
+  requestClient GamesPlayersGetMultipleApplicationPlayerIds {..} =
+    go
+      xgafv
+      accessToken
+      (applicationIds Core.^. Core._Default)
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gamesService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GamesPlayersGetMultipleApplicationPlayerIdsResource
+          )
+          Core.mempty

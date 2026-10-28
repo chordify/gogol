@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudScheduler
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -37,6 +35,26 @@ module Gogol.CloudScheduler
     CloudPlatform'FullControl,
 
     -- * Resources
+
+    -- ** cloudscheduler.operations.cancel
+    CloudSchedulerOperationsCancelResource,
+    CloudSchedulerOperationsCancel (..),
+    newCloudSchedulerOperationsCancel,
+
+    -- ** cloudscheduler.operations.delete
+    CloudSchedulerOperationsDeleteResource,
+    CloudSchedulerOperationsDelete (..),
+    newCloudSchedulerOperationsDelete,
+
+    -- ** cloudscheduler.operations.get
+    CloudSchedulerOperationsGetResource,
+    CloudSchedulerOperationsGet (..),
+    newCloudSchedulerOperationsGet,
+
+    -- ** cloudscheduler.operations.list
+    CloudSchedulerOperationsListResource,
+    CloudSchedulerOperationsList (..),
+    newCloudSchedulerOperationsList,
 
     -- ** cloudscheduler.projects.locations.get
     CloudSchedulerProjectsLocationsGetResource,
@@ -108,6 +126,10 @@ module Gogol.CloudScheduler
     AppEngineRouting (..),
     newAppEngineRouting,
 
+    -- ** CancelOperationRequest
+    CancelOperationRequest (..),
+    newCancelOperationRequest,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -138,6 +160,10 @@ module Gogol.CloudScheduler
     ListLocationsResponse (..),
     newListLocationsResponse,
 
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
     -- ** Location
     Location (..),
     newLocation,
@@ -157,6 +183,22 @@ module Gogol.CloudScheduler
     -- ** OidcToken
     OidcToken (..),
     newOidcToken,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
+    -- ** OperationMetadata
+    OperationMetadata (..),
+    newOperationMetadata,
 
     -- ** PauseJobRequest
     PauseJobRequest (..),
@@ -200,6 +242,10 @@ module Gogol.CloudScheduler
   )
 where
 
+import Gogol.CloudScheduler.Operations.Cancel
+import Gogol.CloudScheduler.Operations.Delete
+import Gogol.CloudScheduler.Operations.Get
+import Gogol.CloudScheduler.Operations.List
 import Gogol.CloudScheduler.Projects.Locations.Get
 import Gogol.CloudScheduler.Projects.Locations.Jobs.Create
 import Gogol.CloudScheduler.Projects.Locations.Jobs.Delete

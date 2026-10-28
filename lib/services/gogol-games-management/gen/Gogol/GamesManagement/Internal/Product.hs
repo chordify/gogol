@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesManagement.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.GamesManagement.Internal.Product
@@ -85,7 +83,7 @@ module Gogol.GamesManagement.Internal.Product
 where
 
 import Gogol.GamesManagement.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Achievement reset all response.
 --
@@ -102,7 +100,10 @@ data AchievementResetAllResponse = AchievementResetAllResponse
 newAchievementResetAllResponse ::
   AchievementResetAllResponse
 newAchievementResetAllResponse =
-  AchievementResetAllResponse {kind = Core.Nothing, results = Core.Nothing}
+  AchievementResetAllResponse
+    { kind = Core.Nothing,
+      results = Core.Nothing
+    }
 
 instance Core.FromJSON AchievementResetAllResponse where
   parseJSON =
@@ -110,7 +111,8 @@ instance Core.FromJSON AchievementResetAllResponse where
       "AchievementResetAllResponse"
       ( \o ->
           AchievementResetAllResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "results")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON AchievementResetAllResponse where
@@ -137,14 +139,12 @@ newAchievementResetMultipleForAllRequest ::
   AchievementResetMultipleForAllRequest
 newAchievementResetMultipleForAllRequest =
   AchievementResetMultipleForAllRequest
-    { achievementIds = Core.Nothing,
+    { achievementIds =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AchievementResetMultipleForAllRequest
-  where
+instance Core.FromJSON AchievementResetMultipleForAllRequest where
   parseJSON =
     Core.withObject
       "AchievementResetMultipleForAllRequest"
@@ -154,10 +154,7 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    AchievementResetMultipleForAllRequest
-  where
+instance Core.ToJSON AchievementResetMultipleForAllRequest where
   toJSON AchievementResetMultipleForAllRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -235,10 +232,7 @@ newEventsResetMultipleForAllRequest =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    EventsResetMultipleForAllRequest
-  where
+instance Core.FromJSON EventsResetMultipleForAllRequest where
   parseJSON =
     Core.withObject
       "EventsResetMultipleForAllRequest"
@@ -277,35 +271,32 @@ newGamesPlayerExperienceInfoResource ::
   GamesPlayerExperienceInfoResource
 newGamesPlayerExperienceInfoResource =
   GamesPlayerExperienceInfoResource
-    { currentExperiencePoints = Core.Nothing,
+    { currentExperiencePoints =
+        Core.Nothing,
       currentLevel = Core.Nothing,
       lastLevelUpTimestampMillis = Core.Nothing,
       nextLevel = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GamesPlayerExperienceInfoResource
-  where
+instance Core.FromJSON GamesPlayerExperienceInfoResource where
   parseJSON =
     Core.withObject
       "GamesPlayerExperienceInfoResource"
       ( \o ->
           GamesPlayerExperienceInfoResource
-            Core.<$> ( o Core..:? "currentExperiencePoints"
+            Core.<$> ( o
+                         Core..:? "currentExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "currentLevel")
-            Core.<*> ( o Core..:? "lastLevelUpTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "lastLevelUpTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "nextLevel")
       )
 
-instance
-  Core.ToJSON
-    GamesPlayerExperienceInfoResource
-  where
+instance Core.ToJSON GamesPlayerExperienceInfoResource where
   toJSON GamesPlayerExperienceInfoResource {..} =
     Core.object
       ( Core.catMaybes
@@ -350,10 +341,12 @@ instance Core.FromJSON GamesPlayerLevelResource where
       ( \o ->
           GamesPlayerLevelResource
             Core.<$> (o Core..:? "level")
-            Core.<*> ( o Core..:? "maxExperiencePoints"
+            Core.<*> ( o
+                         Core..:? "maxExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "minExperiencePoints"
+            Core.<*> ( o
+                         Core..:? "minExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -363,9 +356,11 @@ instance Core.ToJSON GamesPlayerLevelResource where
     Core.object
       ( Core.catMaybes
           [ ("level" Core..=) Core.<$> level,
-            ("maxExperiencePoints" Core..=) Core.. Core.AsText
+            ("maxExperiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> maxExperiencePoints,
-            ("minExperiencePoints" Core..=) Core.. Core.AsText
+            ("minExperiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> minExperiencePoints
           ]
       )
@@ -399,9 +394,7 @@ instance Core.FromJSON HiddenPlayer where
       "HiddenPlayer"
       ( \o ->
           HiddenPlayer
-            Core.<$> ( o Core..:? "hiddenTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "hiddenTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "player")
       )
@@ -410,7 +403,8 @@ instance Core.ToJSON HiddenPlayer where
   toJSON HiddenPlayer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("hiddenTimeMillis" Core..=) Core.. Core.AsText
+          [ ("hiddenTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> hiddenTimeMillis,
             ("kind" Core..=) Core.<$> kind,
             ("player" Core..=) Core.<$> player
@@ -532,16 +526,13 @@ instance Core.ToJSON Player where
     Core.object
       ( Core.catMaybes
           [ ("avatarImageUrl" Core..=) Core.<$> avatarImageUrl,
-            ("bannerUrlLandscape" Core..=)
-              Core.<$> bannerUrlLandscape,
-            ("bannerUrlPortrait" Core..=)
-              Core.<$> bannerUrlPortrait,
+            ("bannerUrlLandscape" Core..=) Core.<$> bannerUrlLandscape,
+            ("bannerUrlPortrait" Core..=) Core.<$> bannerUrlPortrait,
             ("displayName" Core..=) Core.<$> displayName,
             ("experienceInfo" Core..=) Core.<$> experienceInfo,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("originalPlayerId" Core..=)
-              Core.<$> originalPlayerId,
+            ("originalPlayerId" Core..=) Core.<$> originalPlayerId,
             ("playerId" Core..=) Core.<$> playerId,
             ("profileSettings" Core..=) Core.<$> profileSettings,
             ("title" Core..=) Core.<$> title
@@ -599,7 +590,10 @@ data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse
 newPlayerScoreResetAllResponse ::
   PlayerScoreResetAllResponse
 newPlayerScoreResetAllResponse =
-  PlayerScoreResetAllResponse {kind = Core.Nothing, results = Core.Nothing}
+  PlayerScoreResetAllResponse
+    { kind = Core.Nothing,
+      results = Core.Nothing
+    }
 
 instance Core.FromJSON PlayerScoreResetAllResponse where
   parseJSON =
@@ -607,7 +601,8 @@ instance Core.FromJSON PlayerScoreResetAllResponse where
       "PlayerScoreResetAllResponse"
       ( \o ->
           PlayerScoreResetAllResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "results")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "results")
       )
 
 instance Core.ToJSON PlayerScoreResetAllResponse where
@@ -659,8 +654,7 @@ instance Core.ToJSON PlayerScoreResetResponse where
       ( Core.catMaybes
           [ ("definitionId" Core..=) Core.<$> definitionId,
             ("kind" Core..=) Core.<$> kind,
-            ("resetScoreTimeSpans" Core..=)
-              Core.<$> resetScoreTimeSpans
+            ("resetScoreTimeSpans" Core..=) Core.<$> resetScoreTimeSpans
           ]
       )
 
@@ -670,7 +664,6 @@ instance Core.ToJSON PlayerScoreResetResponse where
 data ProfileSettings = ProfileSettings
   { -- | Uniquely identifies the type of this resource. Value is always the fixed string @gamesManagement#profileSettings@.
     kind :: (Core.Maybe Core.Text),
-    -- |
     profileVisible :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -679,7 +672,10 @@ data ProfileSettings = ProfileSettings
 newProfileSettings ::
   ProfileSettings
 newProfileSettings =
-  ProfileSettings {kind = Core.Nothing, profileVisible = Core.Nothing}
+  ProfileSettings
+    { kind = Core.Nothing,
+      profileVisible = Core.Nothing
+    }
 
 instance Core.FromJSON ProfileSettings where
   parseJSON =
@@ -719,10 +715,7 @@ newScoresResetMultipleForAllRequest =
       leaderboardIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ScoresResetMultipleForAllRequest
-  where
+instance Core.FromJSON ScoresResetMultipleForAllRequest where
   parseJSON =
     Core.withObject
       "ScoresResetMultipleForAllRequest"

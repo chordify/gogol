@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Plus.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Plus.Types
@@ -263,7 +261,7 @@ where
 
 import Gogol.Plus.Internal.Product
 import Gogol.Plus.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google+ API. This contains the host and root path used as a starting point for constructing service requests.
 plusService :: Core.ServiceConfig
@@ -279,7 +277,9 @@ type Plus'Login = "https://www.googleapis.com/auth/plus.login"
 type Plus'Me = "https://www.googleapis.com/auth/plus.me"
 
 -- | View your email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+type Userinfo'Email =
+  "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"
+type Userinfo'Profile =
+  "https://www.googleapis.com/auth/userinfo.profile"

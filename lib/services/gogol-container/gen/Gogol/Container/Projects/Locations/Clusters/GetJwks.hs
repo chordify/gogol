@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.GetJwks
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
+-- Gets the public component of the cluster signing keys in JSON Web Key format.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.getJwks@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.getJwks@.
 module Gogol.Container.Projects.Locations.Clusters.GetJwks
   ( -- * Resource
     ContainerProjectsLocationsClustersGetJwksResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.GetJwks
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.getJwks@ method which the
 -- 'ContainerProjectsLocationsClustersGetJwks' request conforms to.
@@ -56,7 +54,7 @@ type ContainerProjectsLocationsClustersGetJwksResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GetJSONWebKeysResponse
 
--- | Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
+-- | Gets the public component of the cluster signing keys in JSON Web Key format.
 --
 -- /See:/ 'newContainerProjectsLocationsClustersGetJwks' smart constructor.
 data ContainerProjectsLocationsClustersGetJwks = ContainerProjectsLocationsClustersGetJwks
@@ -97,25 +95,21 @@ instance
   type
     Rs ContainerProjectsLocationsClustersGetJwks =
       GetJSONWebKeysResponse
-  type
-    Scopes ContainerProjectsLocationsClustersGetJwks =
-      '[]
-  requestClient
-    ContainerProjectsLocationsClustersGetJwks {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersGetJwksResource
-            )
-            Core.mempty
+  type Scopes ContainerProjectsLocationsClustersGetJwks = '[]
+  requestClient ContainerProjectsLocationsClustersGetJwks {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsLocationsClustersGetJwksResource
+          )
+          Core.mempty

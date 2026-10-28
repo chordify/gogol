@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Folders.Locations.Buckets.CreateAsync
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.Folders.Locations.Buckets.CreateAsync
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.folders.locations.buckets.createAsync@ method which the
 -- 'LoggingFoldersLocationsBucketsCreateAsync' request conforms to.
@@ -66,7 +64,7 @@ data LoggingFoldersLocationsBucketsCreateAsync = LoggingFoldersLocationsBucketsC
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Required. A client-assigned identifier such as \"my-bucket\". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods.
+    -- | Required. A client-assigned identifier such as \"my-bucket\". Identifiers are limited to 100 characters and can include only letters, digits, underscores, hyphens, and periods. Bucket identifiers must start with an alphanumeric character.
     bucketId :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -104,30 +102,26 @@ instance
   Core.GoogleRequest
     LoggingFoldersLocationsBucketsCreateAsync
   where
-  type
-    Rs LoggingFoldersLocationsBucketsCreateAsync =
-      Operation
+  type Rs LoggingFoldersLocationsBucketsCreateAsync = Operation
   type
     Scopes LoggingFoldersLocationsBucketsCreateAsync =
       '[CloudPlatform'FullControl, Logging'Admin]
-  requestClient
-    LoggingFoldersLocationsBucketsCreateAsync {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        bucketId
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingFoldersLocationsBucketsCreateAsyncResource
-            )
-            Core.mempty
+  requestClient LoggingFoldersLocationsBucketsCreateAsync {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      bucketId
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingFoldersLocationsBucketsCreateAsyncResource
+          )
+          Core.mempty

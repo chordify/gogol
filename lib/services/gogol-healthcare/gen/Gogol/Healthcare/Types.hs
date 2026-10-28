@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Healthcare.Types
@@ -30,6 +28,7 @@ module Gogol.Healthcare.Types
     healthcareService,
 
     -- * OAuth Scopes
+    CloudHealthcare'FullControl,
     CloudPlatform'FullControl,
 
     -- * Types
@@ -37,13 +36,27 @@ module Gogol.Healthcare.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AccessDeterminationLogConfig
+    AccessDeterminationLogConfig (..),
+    newAccessDeterminationLogConfig,
+
+    -- ** AccessDeterminationLogConfig_LogLevel
+    AccessDeterminationLogConfig_LogLevel (..),
+
     -- ** ActivateConsentRequest
     ActivateConsentRequest (..),
     newActivateConsentRequest,
 
+    -- ** AdminConsents
+    AdminConsents (..),
+    newAdminConsents,
+
     -- ** AnalyzeEntitiesRequest
     AnalyzeEntitiesRequest (..),
     newAnalyzeEntitiesRequest,
+
+    -- ** AnalyzeEntitiesRequest_AlternativeOutputFormat
+    AnalyzeEntitiesRequest_AlternativeOutputFormat (..),
 
     -- ** AnalyzeEntitiesRequest_LicensedVocabulariesItem
     AnalyzeEntitiesRequest_LicensedVocabulariesItem (..),
@@ -51,6 +64,26 @@ module Gogol.Healthcare.Types
     -- ** AnalyzeEntitiesResponse
     AnalyzeEntitiesResponse (..),
     newAnalyzeEntitiesResponse,
+
+    -- ** ApplyAdminConsentsErrorDetail
+    ApplyAdminConsentsErrorDetail (..),
+    newApplyAdminConsentsErrorDetail,
+
+    -- ** ApplyAdminConsentsRequest
+    ApplyAdminConsentsRequest (..),
+    newApplyAdminConsentsRequest,
+
+    -- ** ApplyAdminConsentsResponse
+    ApplyAdminConsentsResponse (..),
+    newApplyAdminConsentsResponse,
+
+    -- ** ApplyConsentsRequest
+    ApplyConsentsRequest (..),
+    newApplyConsentsRequest,
+
+    -- ** ApplyConsentsResponse
+    ApplyConsentsResponse (..),
+    newApplyConsentsResponse,
 
     -- ** ArchiveUserDataMappingRequest
     ArchiveUserDataMappingRequest (..),
@@ -85,6 +118,24 @@ module Gogol.Healthcare.Types
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BlobStorageInfo
+    BlobStorageInfo (..),
+    newBlobStorageInfo,
+
+    -- ** BlobStorageInfo_StorageClass
+    BlobStorageInfo_StorageClass (..),
+
+    -- ** BlobStorageSettings
+    BlobStorageSettings (..),
+    newBlobStorageSettings,
+
+    -- ** BlobStorageSettings_BlobStorageClass
+    BlobStorageSettings_BlobStorageClass (..),
+
+    -- ** BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -124,6 +175,10 @@ module Gogol.Healthcare.Types
     -- ** Consent_State
     Consent_State (..),
 
+    -- ** ConsentAccessorScope
+    ConsentAccessorScope (..),
+    newConsentAccessorScope,
+
     -- ** ConsentArtifact
     ConsentArtifact (..),
     newConsentArtifact,
@@ -132,12 +187,30 @@ module Gogol.Healthcare.Types
     ConsentArtifact_Metadata (..),
     newConsentArtifact_Metadata,
 
+    -- ** ConsentConfig
+    ConsentConfig (..),
+    newConsentConfig,
+
+    -- ** ConsentConfig_Version
+    ConsentConfig_Version (..),
+
+    -- ** ConsentErrors
+    ConsentErrors (..),
+    newConsentErrors,
+
     -- ** ConsentEvaluation
     ConsentEvaluation (..),
     newConsentEvaluation,
 
     -- ** ConsentEvaluation_EvaluationResult
     ConsentEvaluation_EvaluationResult (..),
+
+    -- ** ConsentHeaderHandling
+    ConsentHeaderHandling (..),
+    newConsentHeaderHandling,
+
+    -- ** ConsentHeaderHandling_Profile
+    ConsentHeaderHandling_Profile (..),
 
     -- ** ConsentList
     ConsentList (..),
@@ -210,9 +283,17 @@ module Gogol.Healthcare.Types
     DicomStore_Labels (..),
     newDicomStore_Labels,
 
+    -- ** DicomStoreMetrics
+    DicomStoreMetrics (..),
+    newDicomStoreMetrics,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EncryptionSpec
+    EncryptionSpec (..),
+    newEncryptionSpec,
 
     -- ** Entity
     Entity (..),
@@ -244,6 +325,27 @@ module Gogol.Healthcare.Types
     -- ** EvaluateUserConsentsResponse
     EvaluateUserConsentsResponse (..),
     newEvaluateUserConsentsResponse,
+
+    -- ** ExplainDataAccessConsentInfo
+    ExplainDataAccessConsentInfo (..),
+    newExplainDataAccessConsentInfo,
+
+    -- ** ExplainDataAccessConsentInfo_Type
+    ExplainDataAccessConsentInfo_Type (..),
+
+    -- ** ExplainDataAccessConsentInfo_VariantsItem
+    ExplainDataAccessConsentInfo_VariantsItem (..),
+
+    -- ** ExplainDataAccessConsentScope
+    ExplainDataAccessConsentScope (..),
+    newExplainDataAccessConsentScope,
+
+    -- ** ExplainDataAccessConsentScope_Decision
+    ExplainDataAccessConsentScope_Decision (..),
+
+    -- ** ExplainDataAccessResponse
+    ExplainDataAccessResponse (..),
+    newExplainDataAccessResponse,
 
     -- ** ExportDicomDataRequest
     ExportDicomDataRequest (..),
@@ -284,6 +386,10 @@ module Gogol.Healthcare.Types
     -- ** FhirFilter
     FhirFilter (..),
     newFhirFilter,
+
+    -- ** FhirNotificationConfig
+    FhirNotificationConfig (..),
+    newFhirNotificationConfig,
 
     -- ** FhirStore
     FhirStore (..),
@@ -363,6 +469,10 @@ module Gogol.Healthcare.Types
     GoogleCloudHealthcareV1DicomGcsSource (..),
     newGoogleCloudHealthcareV1DicomGcsSource,
 
+    -- ** GoogleCloudHealthcareV1DicomStreamConfig
+    GoogleCloudHealthcareV1DicomStreamConfig (..),
+    newGoogleCloudHealthcareV1DicomStreamConfig,
+
     -- ** GoogleCloudHealthcareV1FhirBigQueryDestination
     GoogleCloudHealthcareV1FhirBigQueryDestination (..),
     newGoogleCloudHealthcareV1FhirBigQueryDestination,
@@ -405,6 +515,14 @@ module Gogol.Healthcare.Types
     -- ** Hl7V2Store_Labels
     Hl7V2Store_Labels (..),
     newHl7V2Store_Labels,
+
+    -- ** Hl7V2StoreMetric
+    Hl7V2StoreMetric (..),
+    newHl7V2StoreMetric,
+
+    -- ** Hl7V2StoreMetrics
+    Hl7V2StoreMetrics (..),
+    newHl7V2StoreMetrics,
 
     -- ** HttpBody
     HttpBody (..),
@@ -579,6 +697,10 @@ module Gogol.Healthcare.Types
     PatientId (..),
     newPatientId,
 
+    -- ** PatientScope
+    PatientScope (..),
+    newPatientScope,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -586,6 +708,10 @@ module Gogol.Healthcare.Types
     -- ** ProgressCounter
     ProgressCounter (..),
     newProgressCounter,
+
+    -- ** PubsubDestination
+    PubsubDestination (..),
+    newPubsubDestination,
 
     -- ** QueryAccessibleDataRequest
     QueryAccessibleDataRequest (..),
@@ -631,6 +757,36 @@ module Gogol.Healthcare.Types
     RevokeConsentRequest (..),
     newRevokeConsentRequest,
 
+    -- ** RollbackFhirResourceFilteringFields
+    RollbackFhirResourceFilteringFields (..),
+    newRollbackFhirResourceFilteringFields,
+
+    -- ** RollbackFhirResourcesRequest
+    RollbackFhirResourcesRequest (..),
+    newRollbackFhirResourcesRequest,
+
+    -- ** RollbackFhirResourcesRequest_ChangeType
+    RollbackFhirResourcesRequest_ChangeType (..),
+
+    -- ** RollbackFhirResourcesResponse
+    RollbackFhirResourcesResponse (..),
+    newRollbackFhirResourcesResponse,
+
+    -- ** RollbackHL7MessagesFilteringFields
+    RollbackHL7MessagesFilteringFields (..),
+    newRollbackHL7MessagesFilteringFields,
+
+    -- ** RollbackHl7V2MessagesRequest
+    RollbackHl7V2MessagesRequest (..),
+    newRollbackHl7V2MessagesRequest,
+
+    -- ** RollbackHl7V2MessagesRequest_ChangeType
+    RollbackHl7V2MessagesRequest_ChangeType (..),
+
+    -- ** RollbackHl7V2MessagesResponse
+    RollbackHl7V2MessagesResponse (..),
+    newRollbackHl7V2MessagesResponse,
+
     -- ** SchemaConfig
     SchemaConfig (..),
     newSchemaConfig,
@@ -672,6 +828,18 @@ module Gogol.Healthcare.Types
     Segment_Fields (..),
     newSegment_Fields,
 
+    -- ** SeriesMetrics
+    SeriesMetrics (..),
+    newSeriesMetrics,
+
+    -- ** SetBlobStorageSettingsRequest
+    SetBlobStorageSettingsRequest (..),
+    newSetBlobStorageSettingsRequest,
+
+    -- ** SetBlobStorageSettingsResponse
+    SetBlobStorageSettingsResponse (..),
+    newSetBlobStorageSettingsResponse,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -692,9 +860,21 @@ module Gogol.Healthcare.Types
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** StorageInfo
+    StorageInfo (..),
+    newStorageInfo,
+
     -- ** StreamConfig
     StreamConfig (..),
     newStreamConfig,
+
+    -- ** StructuredStorageInfo
+    StructuredStorageInfo (..),
+    newStructuredStorageInfo,
+
+    -- ** StudyMetrics
+    StudyMetrics (..),
+    newStudyMetrics,
 
     -- ** TagFilterList
     TagFilterList (..),
@@ -722,6 +902,10 @@ module Gogol.Healthcare.Types
 
     -- ** TimePartitioning_Type
     TimePartitioning_Type (..),
+
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** Type
     Type (..),
@@ -752,7 +936,7 @@ where
 
 import Gogol.Healthcare.Internal.Product
 import Gogol.Healthcare.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Healthcare API. This contains the host and root path used as a starting point for constructing service requests.
 healthcareService :: Core.ServiceConfig
@@ -761,5 +945,10 @@ healthcareService =
     (Core.ServiceId "healthcare:v1")
     "healthcare.googleapis.com"
 
+-- | Read, write and manage healthcare data
+type CloudHealthcare'FullControl =
+  "https://www.googleapis.com/auth/cloud-healthcare"
+
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

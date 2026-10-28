@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.File.Types
@@ -41,6 +39,9 @@ module Gogol.File.Types
     Backup (..),
     newBackup,
 
+    -- ** Backup_FileSystemProtocol
+    Backup_FileSystemProtocol (..),
+
     -- ** Backup_Labels
     Backup_Labels (..),
     newBackup_Labels,
@@ -50,6 +51,10 @@ module Gogol.File.Types
 
     -- ** Backup_State
     Backup_State (..),
+
+    -- ** Backup_Tags
+    Backup_Tags (..),
+    newBackup_Tags,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -74,6 +79,10 @@ module Gogol.File.Types
     -- ** FileShareConfig
     FileShareConfig (..),
     newFileShareConfig,
+
+    -- ** FixedIOPS
+    FixedIOPS (..),
+    newFixedIOPS,
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance (..),
@@ -146,6 +155,10 @@ module Gogol.File.Types
     GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata,
 
+    -- ** IOPSPerTB
+    IOPSPerTB (..),
+    newIOPSPerTB,
+
     -- ** Instance
     Instance (..),
     newInstance,
@@ -154,11 +167,18 @@ module Gogol.File.Types
     Instance_Labels (..),
     newInstance_Labels,
 
+    -- ** Instance_Protocol
+    Instance_Protocol (..),
+
     -- ** Instance_State
     Instance_State (..),
 
     -- ** Instance_SuspensionReasonsItem
     Instance_SuspensionReasonsItem (..),
+
+    -- ** Instance_Tags
+    Instance_Tags (..),
+    newInstance_Tags,
 
     -- ** Instance_Tier
     Instance_Tier (..),
@@ -246,9 +266,42 @@ module Gogol.File.Types
     OperationMetadata (..),
     newOperationMetadata,
 
+    -- ** PerformanceConfig
+    PerformanceConfig (..),
+    newPerformanceConfig,
+
+    -- ** PerformanceLimits
+    PerformanceLimits (..),
+    newPerformanceLimits,
+
+    -- ** PromoteReplicaRequest
+    PromoteReplicaRequest (..),
+    newPromoteReplicaRequest,
+
+    -- ** ReplicaConfig
+    ReplicaConfig (..),
+    newReplicaConfig,
+
+    -- ** ReplicaConfig_State
+    ReplicaConfig_State (..),
+
+    -- ** ReplicaConfig_StateReasonsItem
+    ReplicaConfig_StateReasonsItem (..),
+
+    -- ** Replication
+    Replication (..),
+    newReplication,
+
+    -- ** Replication_Role
+    Replication_Role (..),
+
     -- ** RestoreInstanceRequest
     RestoreInstanceRequest (..),
     newRestoreInstanceRequest,
+
+    -- ** RevertInstanceRequest
+    RevertInstanceRequest (..),
+    newRevertInstanceRequest,
 
     -- ** Schedule
     Schedule (..),
@@ -267,6 +320,10 @@ module Gogol.File.Types
 
     -- ** Snapshot_State
     Snapshot_State (..),
+
+    -- ** Snapshot_Tags
+    Snapshot_Tags (..),
+    newSnapshot_Tags,
 
     -- ** Status
     Status (..),
@@ -295,7 +352,7 @@ where
 
 import Gogol.File.Internal.Product
 import Gogol.File.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Filestore API. This contains the host and root path used as a starting point for constructing service requests.
 fileService :: Core.ServiceConfig
@@ -305,4 +362,5 @@ fileService =
     "file.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.FirewallPolicies.AddAssociation
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.FirewallPolicies.AddAssociation
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.firewallPolicies.addAssociation@ method which the
 -- 'ComputeFirewallPoliciesAddAssociation' request conforms to.
@@ -55,16 +53,12 @@ type ComputeFirewallPoliciesAddAssociationResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "replaceExistingAssociation"
-              Core.Bool
+    Core.:> Core.QueryParam "replaceExistingAssociation" Core.Bool
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              FirewallPolicyAssociation
+    Core.:> Core.ReqBody '[Core.JSON] FirewallPolicyAssociation
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Inserts an association for the specified firewall policy.
@@ -112,35 +106,28 @@ newComputeFirewallPoliciesAddAssociation firewallPolicy payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeFirewallPoliciesAddAssociation
-  where
-  type
-    Rs ComputeFirewallPoliciesAddAssociation =
-      Operation
+instance Core.GoogleRequest ComputeFirewallPoliciesAddAssociation where
+  type Rs ComputeFirewallPoliciesAddAssociation = Operation
   type
     Scopes ComputeFirewallPoliciesAddAssociation =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeFirewallPoliciesAddAssociation {..} =
-      go
-        firewallPolicy
-        xgafv
-        accessToken
-        callback
-        replaceExistingAssociation
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeFirewallPoliciesAddAssociationResource
-            )
-            Core.mempty
+  requestClient ComputeFirewallPoliciesAddAssociation {..} =
+    go
+      firewallPolicy
+      xgafv
+      accessToken
+      callback
+      replaceExistingAssociation
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeFirewallPoliciesAddAssociationResource
+          )
+          Core.mempty

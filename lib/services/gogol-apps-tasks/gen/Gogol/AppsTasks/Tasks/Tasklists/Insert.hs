@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.Tasklists.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new task list and adds it to the authenticated user\'s task lists.
+-- Creates a new task list and adds it to the authenticated user\'s task lists. A user can have up to 2000 lists at a time.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.insert@.
 module Gogol.AppsTasks.Tasks.Tasklists.Insert
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.Tasklists.Insert
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasklists.insert@ method which the
 -- 'TasksTasklistsInsert' request conforms to.
@@ -59,7 +57,7 @@ type TasksTasklistsInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] TaskList
     Core.:> Core.Post '[Core.JSON] TaskList
 
--- | Creates a new task list and adds it to the authenticated user\'s task lists.
+-- | Creates a new task list and adds it to the authenticated user\'s task lists. A user can have up to 2000 lists at a time.
 --
 -- /See:/ 'newTasksTasklistsInsert' smart constructor.
 data TasksTasklistsInsert = TasksTasklistsInsert
@@ -95,9 +93,7 @@ newTasksTasklistsInsert payload =
 
 instance Core.GoogleRequest TasksTasklistsInsert where
   type Rs TasksTasklistsInsert = TaskList
-  type
-    Scopes TasksTasklistsInsert =
-      '[Tasks'FullControl]
+  type Scopes TasksTasklistsInsert = '[Tasks'FullControl]
   requestClient TasksTasklistsInsert {..} =
     go
       xgafv
@@ -111,7 +107,5 @@ instance Core.GoogleRequest TasksTasklistsInsert where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy TasksTasklistsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy TasksTasklistsInsertResource)
           Core.mempty

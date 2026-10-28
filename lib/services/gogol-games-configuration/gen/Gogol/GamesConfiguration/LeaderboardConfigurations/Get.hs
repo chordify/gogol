@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesConfiguration.LeaderboardConfigurations.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GamesConfiguration.LeaderboardConfigurations.Get
 where
 
 import Gogol.GamesConfiguration.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.get@ method which the
 -- 'GamesConfigurationLeaderboardConfigurationsGet' request conforms to.
@@ -83,7 +81,8 @@ newGamesConfigurationLeaderboardConfigurationsGet ::
   GamesConfigurationLeaderboardConfigurationsGet
 newGamesConfigurationLeaderboardConfigurationsGet leaderboardId =
   GamesConfigurationLeaderboardConfigurationsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       leaderboardId = leaderboardId,
@@ -96,29 +95,25 @@ instance
     GamesConfigurationLeaderboardConfigurationsGet
   where
   type
-    Rs
-      GamesConfigurationLeaderboardConfigurationsGet =
+    Rs GamesConfigurationLeaderboardConfigurationsGet =
       LeaderboardConfiguration
   type
-    Scopes
-      GamesConfigurationLeaderboardConfigurationsGet =
+    Scopes GamesConfigurationLeaderboardConfigurationsGet =
       '[Androidpublisher'FullControl]
-  requestClient
-    GamesConfigurationLeaderboardConfigurationsGet {..} =
-      go
-        leaderboardId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        gamesConfigurationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesConfigurationLeaderboardConfigurationsGetResource
-            )
-            Core.mempty
+  requestClient GamesConfigurationLeaderboardConfigurationsGet {..} =
+    go
+      leaderboardId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gamesConfigurationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GamesConfigurationLeaderboardConfigurationsGetResource
+          )
+          Core.mempty

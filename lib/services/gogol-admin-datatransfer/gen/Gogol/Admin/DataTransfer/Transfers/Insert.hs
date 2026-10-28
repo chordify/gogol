@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.DataTransfer.Transfers.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.DataTransfer.Transfers.Insert
 where
 
 import Gogol.Admin.DataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datatransfer.transfers.insert@ method which the
 -- 'DatatransferTransfersInsert' request conforms to.
@@ -92,14 +90,9 @@ newDatatransferTransfersInsert payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DatatransferTransfersInsert
-  where
+instance Core.GoogleRequest DatatransferTransfersInsert where
   type Rs DatatransferTransfersInsert = DataTransfer
-  type
-    Scopes DatatransferTransfersInsert =
-      '[Admin'Datatransfer]
+  type Scopes DatatransferTransfersInsert = '[Admin'Datatransfer]
   requestClient DatatransferTransfersInsert {..} =
     go
       xgafv
@@ -113,7 +106,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DatatransferTransfersInsertResource
-          )
+          (Core.Proxy :: Core.Proxy DatatransferTransfersInsertResource)
           Core.mempty

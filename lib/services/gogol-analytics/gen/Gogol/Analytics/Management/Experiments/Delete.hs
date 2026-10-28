@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Experiments.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Experiments.Delete
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.experiments.delete@ method which the
 -- 'AnalyticsManagementExperimentsDelete' request conforms to.
@@ -85,36 +83,35 @@ newAnalyticsManagementExperimentsDelete ::
   -- |  Web property ID to which the experiment belongs See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementExperimentsDelete
-newAnalyticsManagementExperimentsDelete accountId experimentId profileId webPropertyId =
-  AnalyticsManagementExperimentsDelete
-    { accountId = accountId,
-      experimentId = experimentId,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementExperimentsDelete
+  accountId
+  experimentId
+  profileId
+  webPropertyId =
     AnalyticsManagementExperimentsDelete
-  where
+      { accountId = accountId,
+        experimentId = experimentId,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementExperimentsDelete where
   type Rs AnalyticsManagementExperimentsDelete = ()
   type
     Scopes AnalyticsManagementExperimentsDelete =
       '[Analytics'FullControl, Analytics'Edit]
-  requestClient
-    AnalyticsManagementExperimentsDelete {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        experimentId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementExperimentsDeleteResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementExperimentsDelete {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      experimentId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementExperimentsDeleteResource
+          )
+          Core.mempty

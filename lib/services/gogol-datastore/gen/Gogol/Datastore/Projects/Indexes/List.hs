@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Projects.Indexes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Datastore.Projects.Indexes.List
 where
 
 import Gogol.Datastore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datastore.projects.indexes.list@ method which the
 -- 'DatastoreProjectsIndexesList' request conforms to.
@@ -58,9 +56,7 @@ type DatastoreProjectsIndexesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleDatastoreAdminV1ListIndexesResponse
+    Core.:> Core.Get '[Core.JSON] GoogleDatastoreAdminV1ListIndexesResponse
 
 -- | Lists the indexes that match the specified filters. Datastore uses an eventually consistent query to fetch the list of indexes and may occasionally return stale results.
 --
@@ -72,7 +68,6 @@ data DatastoreProjectsIndexesList = DatastoreProjectsIndexesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     filter :: (Core.Maybe Core.Text),
     -- | The maximum number of items to return. If zero, then all results will be returned.
     pageSize :: (Core.Maybe Core.Int32),
@@ -105,10 +100,7 @@ newDatastoreProjectsIndexesList projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DatastoreProjectsIndexesList
-  where
+instance Core.GoogleRequest DatastoreProjectsIndexesList where
   type
     Rs DatastoreProjectsIndexesList =
       GoogleDatastoreAdminV1ListIndexesResponse
@@ -131,7 +123,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsIndexesListResource
-          )
+          (Core.Proxy :: Core.Proxy DatastoreProjectsIndexesListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.Delete
 where
 
 import Gogol.BigQueryDataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.runs.delete@ method which the
 -- 'BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete' request conforms to.
@@ -79,15 +77,17 @@ newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete ::
   -- |  Required. The field will contain name of the resource requested, for example: @projects\/{project_id}\/transferConfigs\/{config_id}\/runs\/{run_id}@ or @projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}\/runs\/{run_id}@ See 'name'.
   Core.Text ->
   BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
-newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete name =
-  BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
+  name =
+    BigQueryDataTransferProjectsLocationsTransferConfigsRunsDelete
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

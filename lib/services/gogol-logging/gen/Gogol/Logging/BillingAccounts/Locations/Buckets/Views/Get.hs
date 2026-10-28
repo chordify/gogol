@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a view on a log bucket..
+-- Gets a view on a log bucket.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.billingAccounts.locations.buckets.views.get@.
 module Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Get
@@ -40,7 +38,7 @@ module Gogol.Logging.BillingAccounts.Locations.Buckets.Views.Get
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.billingAccounts.locations.buckets.views.get@ method which the
 -- 'LoggingBillingAccountsLocationsBucketsViewsGet' request conforms to.
@@ -55,7 +53,7 @@ type LoggingBillingAccountsLocationsBucketsViewsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] LogView
 
--- | Gets a view on a log bucket..
+-- | Gets a view on a log bucket.
 --
 -- /See:/ 'newLoggingBillingAccountsLocationsBucketsViewsGet' smart constructor.
 data LoggingBillingAccountsLocationsBucketsViewsGet = LoggingBillingAccountsLocationsBucketsViewsGet
@@ -81,7 +79,8 @@ newLoggingBillingAccountsLocationsBucketsViewsGet ::
   LoggingBillingAccountsLocationsBucketsViewsGet
 newLoggingBillingAccountsLocationsBucketsViewsGet name =
   LoggingBillingAccountsLocationsBucketsViewsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,34 +92,28 @@ instance
   Core.GoogleRequest
     LoggingBillingAccountsLocationsBucketsViewsGet
   where
+  type Rs LoggingBillingAccountsLocationsBucketsViewsGet = LogView
   type
-    Rs
-      LoggingBillingAccountsLocationsBucketsViewsGet =
-      LogView
-  type
-    Scopes
-      LoggingBillingAccountsLocationsBucketsViewsGet =
+    Scopes LoggingBillingAccountsLocationsBucketsViewsGet =
       '[ CloudPlatform'FullControl,
          CloudPlatform'ReadOnly,
          Logging'Admin,
          Logging'Read
        ]
-  requestClient
-    LoggingBillingAccountsLocationsBucketsViewsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingBillingAccountsLocationsBucketsViewsGetResource
-            )
-            Core.mempty
+  requestClient LoggingBillingAccountsLocationsBucketsViewsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingBillingAccountsLocationsBucketsViewsGetResource
+          )
+          Core.mempty

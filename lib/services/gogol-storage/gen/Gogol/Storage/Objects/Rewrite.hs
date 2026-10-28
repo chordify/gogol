@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.Rewrite
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.Rewrite
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.rewrite@ method which the
@@ -61,51 +59,25 @@ type StorageObjectsRewriteResource =
               "destinationPredefinedAcl"
               ObjectsRewriteDestinationPredefinedAcl
     Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
-    Core.:> Core.QueryParam
-              "ifGenerationNotMatch"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "ifMetagenerationMatch"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "ifMetagenerationNotMatch"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "ifSourceGenerationMatch"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "ifSourceGenerationNotMatch"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "ifSourceMetagenerationMatch"
-              Core.Int64
+    Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
+    Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
+    Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
+    Core.:> Core.QueryParam "ifSourceGenerationMatch" Core.Int64
+    Core.:> Core.QueryParam "ifSourceGenerationNotMatch" Core.Int64
+    Core.:> Core.QueryParam "ifSourceMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam
               "ifSourceMetagenerationNotMatch"
               Core.Int64
-    Core.:> Core.QueryParam
-              "maxBytesRewrittenPerCall"
-              Core.Int64
+    Core.:> Core.QueryParam "maxBytesRewrittenPerCall" Core.Int64
     Core.:> Core.QueryParam
               "projection"
               ObjectsRewriteProjection
-    Core.:> Core.QueryParam
-              "rewriteToken"
-              Core.Text
-    Core.:> Core.QueryParam
-              "sourceGeneration"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "userProject"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              Object
+    Core.:> Core.QueryParam "rewriteToken" Core.Text
+    Core.:> Core.QueryParam "sourceGeneration" Core.Int64
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "userProject" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.ReqBody '[Core.JSON] Object
     Core.:> Core.Post
               '[Core.JSON]
               RewriteResponse
@@ -118,7 +90,7 @@ data StorageObjectsRewrite = StorageObjectsRewrite
     destinationBucket :: Core.Text,
     -- | Resource name of the Cloud KMS key, of the form projects\/my-project\/locations\/global\/keyRings\/my-kr\/cryptoKeys\/my-key, that will be used to encrypt the object. Overrides the object metadata\'s kms/key/name value, if any.
     destinationKmsKeyName :: (Core.Maybe Core.Text),
-    -- | Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     destinationObject :: Core.Text,
     -- | Apply a predefined set of access controls to the destination object.
     destinationPredefinedAcl :: (Core.Maybe ObjectsRewriteDestinationPredefinedAcl),
@@ -150,7 +122,7 @@ data StorageObjectsRewrite = StorageObjectsRewrite
     sourceBucket :: Core.Text,
     -- | If present, selects a specific revision of the source object (as opposed to the latest version, the default).
     sourceGeneration :: (Core.Maybe Core.Int64),
-    -- | Name of the source object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the source object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     sourceObject :: Core.Text,
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
@@ -163,39 +135,44 @@ data StorageObjectsRewrite = StorageObjectsRewrite
 newStorageObjectsRewrite ::
   -- |  Name of the bucket in which to store the new object. Overrides the provided object metadata\'s bucket value, if any. See 'destinationBucket'.
   Core.Text ->
-  -- |  Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'destinationObject'.
+  -- |  Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>. See 'destinationObject'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Object ->
   -- |  Name of the bucket in which to find the source object. See 'sourceBucket'.
   Core.Text ->
-  -- |  Name of the source object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'sourceObject'.
+  -- |  Name of the source object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>. See 'sourceObject'.
   Core.Text ->
   StorageObjectsRewrite
-newStorageObjectsRewrite destinationBucket destinationObject payload sourceBucket sourceObject =
-  StorageObjectsRewrite
-    { destinationBucket = destinationBucket,
-      destinationKmsKeyName = Core.Nothing,
-      destinationObject = destinationObject,
-      destinationPredefinedAcl = Core.Nothing,
-      ifGenerationMatch = Core.Nothing,
-      ifGenerationNotMatch = Core.Nothing,
-      ifMetagenerationMatch = Core.Nothing,
-      ifMetagenerationNotMatch = Core.Nothing,
-      ifSourceGenerationMatch = Core.Nothing,
-      ifSourceGenerationNotMatch = Core.Nothing,
-      ifSourceMetagenerationMatch = Core.Nothing,
-      ifSourceMetagenerationNotMatch = Core.Nothing,
-      maxBytesRewrittenPerCall = Core.Nothing,
-      payload = payload,
-      projection = Core.Nothing,
-      rewriteToken = Core.Nothing,
-      sourceBucket = sourceBucket,
-      sourceGeneration = Core.Nothing,
-      sourceObject = sourceObject,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
-    }
+newStorageObjectsRewrite
+  destinationBucket
+  destinationObject
+  payload
+  sourceBucket
+  sourceObject =
+    StorageObjectsRewrite
+      { destinationBucket = destinationBucket,
+        destinationKmsKeyName = Core.Nothing,
+        destinationObject = destinationObject,
+        destinationPredefinedAcl = Core.Nothing,
+        ifGenerationMatch = Core.Nothing,
+        ifGenerationNotMatch = Core.Nothing,
+        ifMetagenerationMatch = Core.Nothing,
+        ifMetagenerationNotMatch = Core.Nothing,
+        ifSourceGenerationMatch = Core.Nothing,
+        ifSourceGenerationNotMatch = Core.Nothing,
+        ifSourceMetagenerationMatch = Core.Nothing,
+        ifSourceMetagenerationNotMatch = Core.Nothing,
+        maxBytesRewrittenPerCall = Core.Nothing,
+        payload = payload,
+        projection = Core.Nothing,
+        rewriteToken = Core.Nothing,
+        sourceBucket = sourceBucket,
+        sourceGeneration = Core.Nothing,
+        sourceObject = sourceObject,
+        uploadType = Core.Nothing,
+        userProject = Core.Nothing
+      }
 
 instance Core.GoogleRequest StorageObjectsRewrite where
   type Rs StorageObjectsRewrite = RewriteResponse
@@ -233,7 +210,5 @@ instance Core.GoogleRequest StorageObjectsRewrite where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsRewriteResource
-          )
+          (Core.Proxy :: Core.Proxy StorageObjectsRewriteResource)
           Core.mempty

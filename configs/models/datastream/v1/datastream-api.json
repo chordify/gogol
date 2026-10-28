@@ -407,7 +407,7 @@
                       "type": "boolean"
                     },
                     "name": {
-                      "description": "Output only. The resource's name.",
+                      "description": "Output only. Identifier. The resource's name.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/connectionProfiles/[^/]+$",
                       "required": true,
@@ -446,7 +446,7 @@
             "operations": {
               "methods": {
                 "cancel": {
-                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+                  "description": "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of `1`, corresponding to `Code.CANCELLED`.",
                   "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}:cancel",
                   "httpMethod": "POST",
                   "id": "datastream.projects.locations.operations.cancel",
@@ -1030,7 +1030,7 @@
                       "type": "boolean"
                     },
                     "name": {
-                      "description": "Output only. The stream's name.",
+                      "description": "Output only. Identifier. The stream's name.",
                       "location": "path",
                       "pattern": "^projects/[^/]+/locations/[^/]+/streams/[^/]+$",
                       "required": true,
@@ -1056,6 +1056,34 @@
                   "path": "v1/{+name}",
                   "request": {
                     "$ref": "Stream"
+                  },
+                  "response": {
+                    "$ref": "Operation"
+                  },
+                  "scopes": [
+                    "https://www.googleapis.com/auth/cloud-platform"
+                  ]
+                },
+                "run": {
+                  "description": "Use this method to start, resume or recover a stream with a non default CDC strategy.",
+                  "flatPath": "v1/projects/{projectsId}/locations/{locationsId}/streams/{streamsId}:run",
+                  "httpMethod": "POST",
+                  "id": "datastream.projects.locations.streams.run",
+                  "parameterOrder": [
+                    "name"
+                  ],
+                  "parameters": {
+                    "name": {
+                      "description": "Required. Name of the stream resource to start, in the format: projects/{project_id}/locations/{location}/streams/{stream_name}",
+                      "location": "path",
+                      "pattern": "^projects/[^/]+/locations/[^/]+/streams/[^/]+$",
+                      "required": true,
+                      "type": "string"
+                    }
+                  },
+                  "path": "v1/{+name}:run",
+                  "request": {
+                    "$ref": "RunStreamRequest"
                   },
                   "response": {
                     "$ref": "Operation"
@@ -1222,9 +1250,15 @@
       }
     }
   },
-  "revision": "20230308",
+  "revision": "20250219",
   "rootUrl": "https://datastream.googleapis.com/",
   "schemas": {
+    "AppendOnly": {
+      "description": "AppendOnly mode defines that all changes to a table will be written to the destination table.",
+      "id": "AppendOnly",
+      "properties": {},
+      "type": "object"
+    },
     "AvroFileFormat": {
       "description": "AVRO file format configuration.",
       "id": "AvroFileFormat",
@@ -1246,6 +1280,14 @@
         "postgresqlExcludedObjects": {
           "$ref": "PostgresqlRdbms",
           "description": "PostgreSQL data source objects to avoid backfilling."
+        },
+        "salesforceExcludedObjects": {
+          "$ref": "SalesforceOrg",
+          "description": "Salesforce data source objects to avoid backfilling"
+        },
+        "sqlServerExcludedObjects": {
+          "$ref": "SqlServerRdbms",
+          "description": "SQLServer data source objects to avoid backfilling"
         }
       },
       "type": "object"
@@ -1275,7 +1317,7 @@
           "type": "string"
         },
         "state": {
-          "description": "Backfill job state.",
+          "description": "Output only. Backfill job state.",
           "enum": [
             "STATE_UNSPECIFIED",
             "NOT_STARTED",
@@ -1296,6 +1338,7 @@
             "Backfill completed successfully.",
             "Backfill job failed since the table structure is currently unsupported for backfill."
           ],
+          "readOnly": true,
           "type": "string"
         },
         "trigger": {
@@ -1325,10 +1368,22 @@
       "description": "BigQuery destination configuration",
       "id": "BigQueryDestinationConfig",
       "properties": {
+        "appendOnly": {
+          "$ref": "AppendOnly",
+          "description": "Append only mode"
+        },
+        "blmtConfig": {
+          "$ref": "BlmtConfig",
+          "description": "Optional. Big Lake Managed Tables (BLMT) configuration."
+        },
         "dataFreshness": {
           "description": "The guaranteed data freshness (in seconds) when querying tables created by the stream. Editing this field will only affect new tables created in the future, but existing tables will not be impacted. Lower values mean that queries will return fresher data, but may result in higher cost.",
           "format": "google-duration",
           "type": "string"
+        },
+        "merge": {
+          "$ref": "Merge",
+          "description": "The standard mode"
         },
         "singleTargetDataset": {
           "$ref": "SingleTargetDataset",
@@ -1347,10 +1402,93 @@
       "properties": {},
       "type": "object"
     },
+    "BinaryLogParser": {
+      "description": "Configuration to use Binary Log Parser CDC technique.",
+      "id": "BinaryLogParser",
+      "properties": {
+        "logFileDirectories": {
+          "$ref": "LogFileDirectories",
+          "description": "Use Oracle directories."
+        },
+        "oracleAsmLogFileAccess": {
+          "$ref": "OracleAsmLogFileAccess",
+          "description": "Use Oracle ASM."
+        }
+      },
+      "type": "object"
+    },
+    "BinaryLogPosition": {
+      "description": "Use Binary log position based replication.",
+      "id": "BinaryLogPosition",
+      "properties": {},
+      "type": "object"
+    },
+    "BlmtConfig": {
+      "description": "The configuration for BLMT.",
+      "id": "BlmtConfig",
+      "properties": {
+        "bucket": {
+          "description": "Required. The Cloud Storage bucket name.",
+          "type": "string"
+        },
+        "connectionName": {
+          "description": "Required. The bigquery connection. Format: `{project}.{location}.{name}`",
+          "type": "string"
+        },
+        "fileFormat": {
+          "description": "Required. The file format.",
+          "enum": [
+            "FILE_FORMAT_UNSPECIFIED",
+            "PARQUET"
+          ],
+          "enumDescriptions": [
+            "Default value.",
+            "Parquet file format."
+          ],
+          "type": "string"
+        },
+        "rootPath": {
+          "description": "The root path inside the Cloud Storage bucket.",
+          "type": "string"
+        },
+        "tableFormat": {
+          "description": "Required. The table format.",
+          "enum": [
+            "TABLE_FORMAT_UNSPECIFIED",
+            "ICEBERG"
+          ],
+          "enumDescriptions": [
+            "Default value.",
+            "Iceberg table format."
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "CancelOperationRequest": {
       "description": "The request message for Operations.CancelOperation.",
       "id": "CancelOperationRequest",
       "properties": {},
+      "type": "object"
+    },
+    "CdcStrategy": {
+      "description": "The strategy that the stream uses for CDC replication.",
+      "id": "CdcStrategy",
+      "properties": {
+        "mostRecentStartPosition": {
+          "$ref": "MostRecentStartPosition",
+          "description": "Optional. Start replicating from the most recent position in the source."
+        },
+        "nextAvailableStartPosition": {
+          "$ref": "NextAvailableStartPosition",
+          "description": "Optional. Resume replication from the next available position in the source."
+        },
+        "specificStartPosition": {
+          "$ref": "SpecificStartPosition",
+          "description": "Optional. Start replicating from a specific position in the source."
+        }
+      },
       "type": "object"
     },
     "ConnectionProfile": {
@@ -1391,7 +1529,7 @@
           "description": "MySQL ConnectionProfile configuration."
         },
         "name": {
-          "description": "Output only. The resource's name.",
+          "description": "Output only. Identifier. The resource's name.",
           "readOnly": true,
           "type": "string"
         },
@@ -1406,6 +1544,24 @@
         "privateConnectivity": {
           "$ref": "PrivateConnectivity",
           "description": "Private connectivity."
+        },
+        "salesforceProfile": {
+          "$ref": "SalesforceProfile",
+          "description": "Salesforce Connection Profile configuration."
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "sqlServerProfile": {
+          "$ref": "SqlServerProfile",
+          "description": "SQLServer Connection Profile configuration."
         },
         "staticServiceIpConnectivity": {
           "$ref": "StaticServiceIpConnectivity",
@@ -1490,6 +1646,10 @@
         "postgresqlRdbms": {
           "$ref": "PostgresqlRdbms",
           "description": "PostgreSQL RDBMS to enrich with child data objects and metadata."
+        },
+        "sqlServerRdbms": {
+          "$ref": "SqlServerRdbms",
+          "description": "SQLServer RDBMS to enrich with child data objects and metadata."
         }
       },
       "type": "object"
@@ -1509,6 +1669,10 @@
         "postgresqlRdbms": {
           "$ref": "PostgresqlRdbms",
           "description": "Enriched PostgreSQL RDBMS object."
+        },
+        "sqlServerRdbms": {
+          "$ref": "SqlServerRdbms",
+          "description": "Enriched SQLServer RDBMS object."
         }
       },
       "type": "object"
@@ -1611,7 +1775,7 @@
           "description": "AVRO file format configuration."
         },
         "fileRotationInterval": {
-          "description": "The maximum duration for which new events are added before a file is closed and a new file is created.",
+          "description": "The maximum duration for which new events are added before a file is closed and a new file is created. Values within the range of 15-60 seconds are allowed.",
           "format": "google-duration",
           "type": "string"
         },
@@ -1644,6 +1808,12 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "Gtid": {
+      "description": "Use GTID based replication.",
+      "id": "Gtid",
+      "properties": {},
       "type": "object"
     },
     "JsonFileFormat": {
@@ -1836,7 +2006,7 @@
       "type": "object"
     },
     "Location": {
-      "description": "A resource that represents Google Cloud Platform location.",
+      "description": "A resource that represents a Google Cloud location.",
       "id": "Location",
       "properties": {
         "displayName": {
@@ -1869,6 +2039,27 @@
       },
       "type": "object"
     },
+    "LogFileDirectories": {
+      "description": "Configuration to specify the Oracle directories to access the log files.",
+      "id": "LogFileDirectories",
+      "properties": {
+        "archivedLogDirectory": {
+          "description": "Required. Oracle directory for archived logs.",
+          "type": "string"
+        },
+        "onlineLogDirectory": {
+          "description": "Required. Oracle directory for online logs.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LogMiner": {
+      "description": "Configuration to use LogMiner CDC method.",
+      "id": "LogMiner",
+      "properties": {},
+      "type": "object"
+    },
     "LookupStreamObjectRequest": {
       "description": "Request for looking up a specific stream object by its source object identifier.",
       "id": "LookupStreamObjectRequest",
@@ -1878,6 +2069,18 @@
           "description": "Required. The source object identifier which maps to the stream object."
         }
       },
+      "type": "object"
+    },
+    "Merge": {
+      "description": "Merge mode defines that all changes to a table will be merged at the destination table.",
+      "id": "Merge",
+      "properties": {},
+      "type": "object"
+    },
+    "MostRecentStartPosition": {
+      "description": "CDC strategy to start replicating from the most recent position in the source.",
+      "id": "MostRecentStartPosition",
+      "properties": {},
       "type": "object"
     },
     "MysqlColumn": {
@@ -1910,9 +2113,19 @@
           "format": "int32",
           "type": "integer"
         },
+        "precision": {
+          "description": "Column precision.",
+          "format": "int32",
+          "type": "integer"
+        },
         "primaryKey": {
           "description": "Whether or not the column represents a primary key.",
           "type": "boolean"
+        },
+        "scale": {
+          "description": "Column scale.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -1931,6 +2144,33 @@
             "$ref": "MysqlTable"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "MysqlGtidPosition": {
+      "description": "MySQL GTID position",
+      "id": "MysqlGtidPosition",
+      "properties": {
+        "gtidSet": {
+          "description": "Required. The gtid set to start replication from.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MysqlLogPosition": {
+      "description": "MySQL log position",
+      "id": "MysqlLogPosition",
+      "properties": {
+        "logFile": {
+          "description": "Required. The binary log file name.",
+          "type": "string"
+        },
+        "logPosition": {
+          "description": "Optional. The position within the binary log file. Default is head of file.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -1959,7 +2199,7 @@
           "type": "string"
         },
         "password": {
-          "description": "Required. Input only. Password for the MySQL connection.",
+          "description": "Optional. Input only. Password for the MySQL connection. Mutually exclusive with the `secret_manager_stored_password` field.",
           "type": "string"
         },
         "port": {
@@ -1996,9 +2236,17 @@
       "description": "MySQL source configuration",
       "id": "MysqlSourceConfig",
       "properties": {
+        "binaryLogPosition": {
+          "$ref": "BinaryLogPosition",
+          "description": "Use Binary log position based replication."
+        },
         "excludeObjects": {
           "$ref": "MysqlRdbms",
           "description": "MySQL objects to exclude from the stream."
+        },
+        "gtid": {
+          "$ref": "Gtid",
+          "description": "Use GTID based replication."
         },
         "includeObjects": {
           "$ref": "MysqlRdbms",
@@ -2031,7 +2279,7 @@
           "type": "boolean"
         },
         "clientCertificate": {
-          "description": "Input only. PEM-encoded certificate that will be used by the replica to authenticate against the source database server. If this field is used then the 'client_key' and the 'ca_certificate' fields are mandatory.",
+          "description": "Optional. Input only. PEM-encoded certificate that will be used by the replica to authenticate against the source database server. If this field is used then the 'client_key' and the 'ca_certificate' fields are mandatory.",
           "type": "string"
         },
         "clientCertificateSet": {
@@ -2040,7 +2288,7 @@
           "type": "boolean"
         },
         "clientKey": {
-          "description": "Input only. PEM-encoded private key associated with the Client Certificate. If this field is used then the 'client_certificate' and the 'ca_certificate' fields are mandatory.",
+          "description": "Optional. Input only. PEM-encoded private key associated with the Client Certificate. If this field is used then the 'client_certificate' and the 'ca_certificate' fields are mandatory. Mutually exclusive with the `secret_manager_stored_client_key` field.",
           "type": "string"
         },
         "clientKeySet": {
@@ -2064,6 +2312,31 @@
         },
         "table": {
           "description": "Table name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NextAvailableStartPosition": {
+      "description": "CDC strategy to resume replication from the next available position in the source.",
+      "id": "NextAvailableStartPosition",
+      "properties": {},
+      "type": "object"
+    },
+    "Oauth2ClientCredentials": {
+      "description": "OAuth2 Client Credentials.",
+      "id": "Oauth2ClientCredentials",
+      "properties": {
+        "clientId": {
+          "description": "Required. Client ID for Salesforce OAuth2 Client Credentials.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Optional. Client secret for Salesforce OAuth2 Client Credentials. Mutually exclusive with the `secret_manager_stored_client_secret` field.",
+          "type": "string"
+        },
+        "secretManagerStoredClientSecret": {
+          "description": "Optional. A reference to a Secret Manager resource name storing the Salesforce OAuth2 client_secret. Mutually exclusive with the `client_secret` field.",
           "type": "string"
         }
       },
@@ -2098,7 +2371,7 @@
             "description": "Properties of the object. Contains field @type with type URL.",
             "type": "any"
           },
-          "description": "The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
+          "description": "The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.",
           "type": "object"
         }
       },
@@ -2126,7 +2399,7 @@
           "type": "string"
         },
         "requestedCancellation": {
-          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
+          "description": "Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.",
           "readOnly": true,
           "type": "boolean"
         },
@@ -2151,6 +2424,51 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "OracleAsmConfig": {
+      "description": "Configuration for Oracle Automatic Storage Management (ASM) connection.",
+      "id": "OracleAsmConfig",
+      "properties": {
+        "asmService": {
+          "description": "Required. ASM service name for the Oracle ASM connection.",
+          "type": "string"
+        },
+        "connectionAttributes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Optional. Connection string attributes",
+          "type": "object"
+        },
+        "hostname": {
+          "description": "Required. Hostname for the Oracle ASM connection.",
+          "type": "string"
+        },
+        "oracleSslConfig": {
+          "$ref": "OracleSslConfig",
+          "description": "Optional. SSL configuration for the Oracle connection."
+        },
+        "password": {
+          "description": "Optional. Password for the Oracle ASM connection.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Required. Port for the Oracle ASM connection.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "username": {
+          "description": "Required. Username for the Oracle ASM connection.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OracleAsmLogFileAccess": {
+      "description": "Configuration to use Oracle ASM to access the log files.",
+      "id": "OracleAsmLogFileAccess",
+      "properties": {},
       "type": "object"
     },
     "OracleColumn": {
@@ -2234,14 +2552,26 @@
           "description": "Required. Hostname for the Oracle connection.",
           "type": "string"
         },
+        "oracleAsmConfig": {
+          "$ref": "OracleAsmConfig",
+          "description": "Optional. Configuration for Oracle ASM connection."
+        },
+        "oracleSslConfig": {
+          "$ref": "OracleSslConfig",
+          "description": "Optional. SSL configuration for the Oracle connection."
+        },
         "password": {
-          "description": "Required. Password for the Oracle connection.",
+          "description": "Optional. Password for the Oracle connection. Mutually exclusive with the `secret_manager_stored_password` field.",
           "type": "string"
         },
         "port": {
           "description": "Port for the Oracle connection, default value is 1521.",
           "format": "int32",
           "type": "integer"
+        },
+        "secretManagerStoredPassword": {
+          "description": "Optional. A reference to a Secret Manager resource name storing the Oracle connection password. Mutually exclusive with the `password` field.",
+          "type": "string"
         },
         "username": {
           "description": "Required. Username for the Oracle connection.",
@@ -2282,10 +2612,26 @@
       },
       "type": "object"
     },
+    "OracleScnPosition": {
+      "description": "Oracle SCN position",
+      "id": "OracleScnPosition",
+      "properties": {
+        "scn": {
+          "description": "Required. SCN number from where Logs will be read",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "OracleSourceConfig": {
       "description": "Oracle data source configuration",
       "id": "OracleSourceConfig",
       "properties": {
+        "binaryLogParser": {
+          "$ref": "BinaryLogParser",
+          "description": "Use Binary Log Parser."
+        },
         "dropLargeObjects": {
           "$ref": "DropLargeObjects",
           "description": "Drop large object values."
@@ -2297,6 +2643,10 @@
         "includeObjects": {
           "$ref": "OracleRdbms",
           "description": "Oracle objects to include in the stream."
+        },
+        "logMiner": {
+          "$ref": "LogMiner",
+          "description": "Use LogMiner."
         },
         "maxConcurrentBackfillTasks": {
           "description": "Maximum number of concurrent backfill tasks. The number should be non-negative. If not set (or set to 0), the system's default value is used.",
@@ -2310,7 +2660,23 @@
         },
         "streamLargeObjects": {
           "$ref": "StreamLargeObjects",
-          "description": "Stream large object values. NOTE: This feature is currently experimental."
+          "description": "Stream large object values."
+        }
+      },
+      "type": "object"
+    },
+    "OracleSslConfig": {
+      "description": "Oracle SSL configuration information.",
+      "id": "OracleSslConfig",
+      "properties": {
+        "caCertificate": {
+          "description": "Input only. PEM-encoded certificate of the CA that signed the source database server's certificate.",
+          "type": "string"
+        },
+        "caCertificateSet": {
+          "description": "Output only. Indicates whether the ca_certificate field has been set for this Connection-Profile.",
+          "readOnly": true,
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -2404,13 +2770,17 @@
           "type": "string"
         },
         "password": {
-          "description": "Required. Password for the PostgreSQL connection.",
+          "description": "Optional. Password for the PostgreSQL connection. Mutually exclusive with the `secret_manager_stored_password` field.",
           "type": "string"
         },
         "port": {
           "description": "Port for the PostgreSQL connection, default value is 5432.",
           "format": "int32",
           "type": "integer"
+        },
+        "sslConfig": {
+          "$ref": "PostgresqlSslConfig",
+          "description": "Optional. SSL configuration for the PostgreSQL connection. In case PostgresqlSslConfig is not set, the connection will use the default SSL mode, which is `prefer` (i.e. this mode will only use encryption if enabled from database side, otherwise will use unencrypted communication)"
         },
         "username": {
           "description": "Required. Username for the PostgreSQL connection.",
@@ -2479,6 +2849,21 @@
       },
       "type": "object"
     },
+    "PostgresqlSslConfig": {
+      "description": "PostgreSQL SSL configuration information.",
+      "id": "PostgresqlSslConfig",
+      "properties": {
+        "serverAndClientVerification": {
+          "$ref": "ServerAndClientVerification",
+          "description": "If this field is set, the communication will be encrypted with TLS encryption and both the server identity and the client identity will be authenticated."
+        },
+        "serverVerification": {
+          "$ref": "ServerVerification",
+          "description": " If this field is set, the communication will be encrypted with TLS encryption and the server identity will be authenticated."
+        }
+      },
+      "type": "object"
+    },
     "PostgresqlTable": {
       "description": "PostgreSQL table.",
       "id": "PostgresqlTable",
@@ -2524,9 +2909,19 @@
           "type": "object"
         },
         "name": {
-          "description": "Output only. The resource's name.",
+          "description": "Output only. Identifier. The resource's name.",
           "readOnly": true,
           "type": "string"
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
         },
         "state": {
           "description": "Output only. The state of the Private Connection.",
@@ -2604,7 +2999,7 @@
           "type": "object"
         },
         "name": {
-          "description": "Output only. The resource's name.",
+          "description": "Output only. Identifier. The resource's name.",
           "readOnly": true,
           "type": "string"
         },
@@ -2617,12 +3012,158 @@
       },
       "type": "object"
     },
+    "RunStreamRequest": {
+      "description": "Request message for running a stream.",
+      "id": "RunStreamRequest",
+      "properties": {
+        "cdcStrategy": {
+          "$ref": "CdcStrategy",
+          "description": "Optional. The CDC strategy of the stream. If not set, the system's default value will be used."
+        },
+        "force": {
+          "description": "Optional. Update the stream without validating it.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceField": {
+      "description": "Salesforce field.",
+      "id": "SalesforceField",
+      "properties": {
+        "dataType": {
+          "description": "The data type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Field name.",
+          "type": "string"
+        },
+        "nillable": {
+          "description": "Indicates whether the field can accept nil values.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceObject": {
+      "description": "Salesforce object.",
+      "id": "SalesforceObject",
+      "properties": {
+        "fields": {
+          "description": "Salesforce fields. When unspecified as part of include objects, includes everything, when unspecified as part of exclude objects, excludes nothing.",
+          "items": {
+            "$ref": "SalesforceField"
+          },
+          "type": "array"
+        },
+        "objectName": {
+          "description": "Object name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceObjectIdentifier": {
+      "description": "Salesforce data source object identifier.",
+      "id": "SalesforceObjectIdentifier",
+      "properties": {
+        "objectName": {
+          "description": "Required. The object name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceOrg": {
+      "description": "Salesforce organization structure.",
+      "id": "SalesforceOrg",
+      "properties": {
+        "objects": {
+          "description": "Salesforce objects in the database server.",
+          "items": {
+            "$ref": "SalesforceObject"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceProfile": {
+      "description": "Salesforce profile",
+      "id": "SalesforceProfile",
+      "properties": {
+        "domain": {
+          "description": "Required. Domain endpoint for the Salesforce connection.",
+          "type": "string"
+        },
+        "oauth2ClientCredentials": {
+          "$ref": "Oauth2ClientCredentials",
+          "description": "Connected app authentication."
+        },
+        "userCredentials": {
+          "$ref": "UserCredentials",
+          "description": "User-password authentication."
+        }
+      },
+      "type": "object"
+    },
+    "SalesforceSourceConfig": {
+      "description": "Salesforce source configuration",
+      "id": "SalesforceSourceConfig",
+      "properties": {
+        "excludeObjects": {
+          "$ref": "SalesforceOrg",
+          "description": "Salesforce objects to exclude from the stream."
+        },
+        "includeObjects": {
+          "$ref": "SalesforceOrg",
+          "description": "Salesforce objects to retrieve from the source."
+        },
+        "pollingInterval": {
+          "description": "Required. Salesforce objects polling interval. The interval at which new changes will be polled for each object. The duration must be between 5 minutes and 24 hours.",
+          "format": "google-duration",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ServerAndClientVerification": {
+      "description": "Message represents the option where Datastream will enforce the encryption and authenticate the server identity as well as the client identity. ca_certificate, client_certificate and client_key must be set if user selects this option.",
+      "id": "ServerAndClientVerification",
+      "properties": {
+        "caCertificate": {
+          "description": "Required. Input only. PEM-encoded server root CA certificate.",
+          "type": "string"
+        },
+        "clientCertificate": {
+          "description": "Required. Input only. PEM-encoded certificate used by the source database to authenticate the client identity (i.e., the Datastream's identity). This certificate is signed by either a root certificate trusted by the server or one or more intermediate certificates (which is stored with the leaf certificate) to link the this certificate to the trusted root certificate.",
+          "type": "string"
+        },
+        "clientKey": {
+          "description": "Optional. Input only. PEM-encoded private key associated with the client certificate. This value will be used during the SSL/TLS handshake, allowing the PostgreSQL server to authenticate the client's identity, i.e. identity of the Datastream. Mutually exclusive with the `secret_manager_stored_client_key` field.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ServerVerification": {
+      "description": "Message represents the option where Datastream will enforce the encryption and authenticate the server identity. ca_certificate must be set if user selects this option.",
+      "id": "ServerVerification",
+      "properties": {
+        "caCertificate": {
+          "description": "Required. Input only. PEM-encoded server root CA certificate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SingleTargetDataset": {
       "description": "A single target dataset to which all data will be streamed.",
       "id": "SingleTargetDataset",
       "properties": {
         "datasetId": {
-          "description": "The dataset ID of the target dataset.",
+          "description": "The dataset ID of the target dataset. DatasetIds allowed characters: https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets#datasetreference.",
           "type": "string"
         }
       },
@@ -2644,9 +3185,17 @@
           "$ref": "PostgresqlSourceConfig",
           "description": "PostgreSQL data source configuration."
         },
+        "salesforceSourceConfig": {
+          "$ref": "SalesforceSourceConfig",
+          "description": "Salesforce data source configuration."
+        },
         "sourceConnectionProfile": {
-          "description": "Required. Source connection profile resoource. Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`",
+          "description": "Required. Source connection profile resource. Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`",
           "type": "string"
+        },
+        "sqlServerSourceConfig": {
+          "$ref": "SqlServerSourceConfig",
+          "description": "SQLServer data source configuration."
         }
       },
       "type": "object"
@@ -2677,8 +3226,231 @@
         "postgresqlIdentifier": {
           "$ref": "PostgresqlObjectIdentifier",
           "description": "PostgreSQL data source object identifier."
+        },
+        "salesforceIdentifier": {
+          "$ref": "SalesforceObjectIdentifier",
+          "description": "Salesforce data source object identifier."
+        },
+        "sqlServerIdentifier": {
+          "$ref": "SqlServerObjectIdentifier",
+          "description": "SQLServer data source object identifier."
         }
       },
+      "type": "object"
+    },
+    "SpecificStartPosition": {
+      "description": "CDC strategy to start replicating from a specific position in the source.",
+      "id": "SpecificStartPosition",
+      "properties": {
+        "mysqlGtidPosition": {
+          "$ref": "MysqlGtidPosition",
+          "description": "MySQL GTID set to start replicating from."
+        },
+        "mysqlLogPosition": {
+          "$ref": "MysqlLogPosition",
+          "description": "MySQL specific log position to start replicating from."
+        },
+        "oracleScnPosition": {
+          "$ref": "OracleScnPosition",
+          "description": "Oracle SCN to start replicating from."
+        },
+        "sqlServerLsnPosition": {
+          "$ref": "SqlServerLsnPosition",
+          "description": "SqlServer LSN to start replicating from."
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerChangeTables": {
+      "description": "Configuration to use Change Tables CDC read method.",
+      "id": "SqlServerChangeTables",
+      "properties": {},
+      "type": "object"
+    },
+    "SqlServerColumn": {
+      "description": "SQLServer Column.",
+      "id": "SqlServerColumn",
+      "properties": {
+        "column": {
+          "description": "Column name.",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "The SQLServer data type.",
+          "type": "string"
+        },
+        "length": {
+          "description": "Column length.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "nullable": {
+          "description": "Whether or not the column can accept a null value.",
+          "type": "boolean"
+        },
+        "ordinalPosition": {
+          "description": "The ordinal position of the column in the table.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "precision": {
+          "description": "Column precision.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "primaryKey": {
+          "description": "Whether or not the column represents a primary key.",
+          "type": "boolean"
+        },
+        "scale": {
+          "description": "Column scale.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerLsnPosition": {
+      "description": "SQL Server LSN position",
+      "id": "SqlServerLsnPosition",
+      "properties": {
+        "lsn": {
+          "description": "Required. Log sequence number (LSN) from where Logs will be read",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerObjectIdentifier": {
+      "description": "SQLServer data source object identifier.",
+      "id": "SqlServerObjectIdentifier",
+      "properties": {
+        "schema": {
+          "description": "Required. The schema name.",
+          "type": "string"
+        },
+        "table": {
+          "description": "Required. The table name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerProfile": {
+      "description": "SQLServer database profile.",
+      "id": "SqlServerProfile",
+      "properties": {
+        "database": {
+          "description": "Required. Database for the SQLServer connection.",
+          "type": "string"
+        },
+        "hostname": {
+          "description": "Required. Hostname for the SQLServer connection.",
+          "type": "string"
+        },
+        "password": {
+          "description": "Optional. Password for the SQLServer connection. Mutually exclusive with the `secret_manager_stored_password` field.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port for the SQLServer connection, default value is 1433.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "username": {
+          "description": "Required. Username for the SQLServer connection.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerRdbms": {
+      "description": "SQLServer database structure.",
+      "id": "SqlServerRdbms",
+      "properties": {
+        "schemas": {
+          "description": "SQLServer schemas in the database server.",
+          "items": {
+            "$ref": "SqlServerSchema"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerSchema": {
+      "description": "SQLServer schema.",
+      "id": "SqlServerSchema",
+      "properties": {
+        "schema": {
+          "description": "Schema name.",
+          "type": "string"
+        },
+        "tables": {
+          "description": "Tables in the schema.",
+          "items": {
+            "$ref": "SqlServerTable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerSourceConfig": {
+      "description": "SQLServer data source configuration",
+      "id": "SqlServerSourceConfig",
+      "properties": {
+        "changeTables": {
+          "$ref": "SqlServerChangeTables",
+          "description": "CDC reader reads from change tables."
+        },
+        "excludeObjects": {
+          "$ref": "SqlServerRdbms",
+          "description": "SQLServer objects to exclude from the stream."
+        },
+        "includeObjects": {
+          "$ref": "SqlServerRdbms",
+          "description": "SQLServer objects to include in the stream."
+        },
+        "maxConcurrentBackfillTasks": {
+          "description": "Max concurrent backfill tasks.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxConcurrentCdcTasks": {
+          "description": "Max concurrent CDC tasks.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "transactionLogs": {
+          "$ref": "SqlServerTransactionLogs",
+          "description": "CDC reader reads from transaction logs."
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerTable": {
+      "description": "SQLServer table.",
+      "id": "SqlServerTable",
+      "properties": {
+        "columns": {
+          "description": "SQLServer columns in the schema. When unspecified as part of include/exclude objects, includes/excludes everything.",
+          "items": {
+            "$ref": "SqlServerColumn"
+          },
+          "type": "array"
+        },
+        "table": {
+          "description": "Table name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SqlServerTransactionLogs": {
+      "description": "Configuration to use Transaction Logs CDC read method.",
+      "id": "SqlServerTransactionLogs",
+      "properties": {},
       "type": "object"
     },
     "StartBackfillJobRequest": {
@@ -2793,10 +3565,26 @@
           "description": "Labels.",
           "type": "object"
         },
-        "name": {
-          "description": "Output only. The stream's name.",
+        "lastRecoveryTime": {
+          "description": "Output only. If the stream was recovered, the time of the last recovery. Note: This field is currently experimental.",
+          "format": "google-datetime",
           "readOnly": true,
           "type": "string"
+        },
+        "name": {
+          "description": "Output only. Identifier. The stream's name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "satisfiesPzi": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "satisfiesPzs": {
+          "description": "Output only. Reserved for future use.",
+          "readOnly": true,
+          "type": "boolean"
         },
         "sourceConfig": {
           "$ref": "SourceConfig",
@@ -2870,7 +3658,7 @@
           "type": "array"
         },
         "name": {
-          "description": "Output only. The object resource's name.",
+          "description": "Output only. Identifier. The object resource's name.",
           "readOnly": true,
           "type": "string"
         },
@@ -2882,6 +3670,33 @@
           "description": "Output only. The last update time of the object.",
           "format": "google-datetime",
           "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UserCredentials": {
+      "description": "Username-password credentials.",
+      "id": "UserCredentials",
+      "properties": {
+        "password": {
+          "description": "Optional. Password for the Salesforce connection. Mutually exclusive with the `secret_manager_stored_password` field.",
+          "type": "string"
+        },
+        "secretManagerStoredPassword": {
+          "description": "Optional. A reference to a Secret Manager resource name storing the Salesforce connection's password. Mutually exclusive with the `password` field.",
+          "type": "string"
+        },
+        "secretManagerStoredSecurityToken": {
+          "description": "Optional. A reference to a Secret Manager resource name storing the Salesforce connection's security token. Mutually exclusive with the `security_token` field.",
+          "type": "string"
+        },
+        "securityToken": {
+          "description": "Optional. Security token for the Salesforce connection. Mutually exclusive with the `secret_manager_stored_security_token` field.",
+          "type": "string"
+        },
+        "username": {
+          "description": "Required. Username for the Salesforce connection.",
           "type": "string"
         }
       },
@@ -2907,19 +3722,22 @@
           "type": "array"
         },
         "state": {
-          "description": "Validation execution status.",
+          "description": "Output only. Validation execution status.",
           "enum": [
             "STATE_UNSPECIFIED",
             "NOT_EXECUTED",
             "FAILED",
-            "PASSED"
+            "PASSED",
+            "WARNING"
           ],
           "enumDescriptions": [
             "Unspecified state.",
             "Validation did not execute.",
             "Validation failed.",
-            "Validation passed."
+            "Validation passed.",
+            "Validation executed with warnings."
           ],
+          "readOnly": true,
           "type": "string"
         }
       },

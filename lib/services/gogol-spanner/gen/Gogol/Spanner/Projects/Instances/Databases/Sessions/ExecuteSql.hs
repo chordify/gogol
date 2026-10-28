@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead.
+-- Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.sessions.executeSql@.
 module Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.ExecuteSql
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.executeSql@ method which the
@@ -56,7 +54,7 @@ type SpannerProjectsInstancesDatabasesSessionsExecuteSqlResource =
     Core.:> Core.ReqBody '[Core.JSON] ExecuteSqlRequest
     Core.:> Core.Post '[Core.JSON] ResultSet
 
--- | Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead.
+-- | Executes an SQL statement, returning all results in a single reply. This method cannot be used to return a result set larger than 10 MiB; if the query yields more data than that, the query fails with a @FAILED_PRECONDITION@ error. Operations inside read-write transactions might return @ABORTED@. If this occurs, the application should restart the transaction from the beginning. See Transaction for more details. Larger result sets can be fetched in streaming fashion by calling ExecuteStreamingSql instead. The query string can be SQL or <https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro Graph Query Language (GQL)>.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesSessionsExecuteSql' smart constructor.
 data SpannerProjectsInstancesDatabasesSessionsExecuteSql = SpannerProjectsInstancesDatabasesSessionsExecuteSql
@@ -84,28 +82,29 @@ newSpannerProjectsInstancesDatabasesSessionsExecuteSql ::
   -- |  Required. The session in which the SQL query should be performed. See 'session'.
   Core.Text ->
   SpannerProjectsInstancesDatabasesSessionsExecuteSql
-newSpannerProjectsInstancesDatabasesSessionsExecuteSql payload session =
-  SpannerProjectsInstancesDatabasesSessionsExecuteSql
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      session = session,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSpannerProjectsInstancesDatabasesSessionsExecuteSql
+  payload
+  session =
+    SpannerProjectsInstancesDatabasesSessionsExecuteSql
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        session = session,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesSessionsExecuteSql
   where
   type
-    Rs
-      SpannerProjectsInstancesDatabasesSessionsExecuteSql =
+    Rs SpannerProjectsInstancesDatabasesSessionsExecuteSql =
       ResultSet
   type
-    Scopes
-      SpannerProjectsInstancesDatabasesSessionsExecuteSql =
+    Scopes SpannerProjectsInstancesDatabasesSessionsExecuteSql =
       '[CloudPlatform'FullControl, Spanner'Data]
   requestClient
     SpannerProjectsInstancesDatabasesSessionsExecuteSql {..} =

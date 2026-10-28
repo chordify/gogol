@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Locations.Buckets.Links.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Asynchronously creates linked dataset in BigQuery which makes it possible to use BugQuery to read the logs stored in the bucket. A bucket may currently only contain one link.
+-- Asynchronously creates a linked dataset in BigQuery which makes it possible to use BigQuery to read the logs stored in the log bucket. A log bucket may currently only contain one link.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.locations.buckets.links.create@.
 module Gogol.Logging.Locations.Buckets.Links.Create
@@ -40,7 +38,7 @@ module Gogol.Logging.Locations.Buckets.Links.Create
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.locations.buckets.links.create@ method which the
 -- 'LoggingLocationsBucketsLinksCreate' request conforms to.
@@ -58,7 +56,7 @@ type LoggingLocationsBucketsLinksCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Link
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Asynchronously creates linked dataset in BigQuery which makes it possible to use BugQuery to read the logs stored in the bucket. A bucket may currently only contain one link.
+-- | Asynchronously creates a linked dataset in BigQuery which makes it possible to use BigQuery to read the logs stored in the log bucket. A log bucket may currently only contain one link.
 --
 -- /See:/ 'newLoggingLocationsBucketsLinksCreate' smart constructor.
 data LoggingLocationsBucketsLinksCreate = LoggingLocationsBucketsLinksCreate
@@ -100,13 +98,8 @@ newLoggingLocationsBucketsLinksCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingLocationsBucketsLinksCreate
-  where
-  type
-    Rs LoggingLocationsBucketsLinksCreate =
-      Operation
+instance Core.GoogleRequest LoggingLocationsBucketsLinksCreate where
+  type Rs LoggingLocationsBucketsLinksCreate = Operation
   type
     Scopes LoggingLocationsBucketsLinksCreate =
       '[CloudPlatform'FullControl, Logging'Admin]
@@ -126,7 +119,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                LoggingLocationsBucketsLinksCreateResource
+              Core.Proxy LoggingLocationsBucketsLinksCreateResource
           )
           Core.mempty

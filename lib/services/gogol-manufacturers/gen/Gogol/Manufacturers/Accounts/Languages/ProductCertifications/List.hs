@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Manufacturers.Accounts.Languages.ProductCertifications.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Manufacturers.Accounts.Languages.ProductCertifications.List
 where
 
 import Gogol.Manufacturers.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @manufacturers.accounts.languages.productCertifications.list@ method which the
 -- 'ManufacturersAccountsLanguagesProductCertificationsList' request conforms to.
@@ -56,9 +54,7 @@ type ManufacturersAccountsLanguagesProductCertificationsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListProductCertificationsResponse
+    Core.:> Core.Get '[Core.JSON] ListProductCertificationsResponse
 
 -- | Lists product certifications from a specified certification body. This method can only be called by certification bodies.
 --
@@ -90,7 +86,8 @@ newManufacturersAccountsLanguagesProductCertificationsList ::
   ManufacturersAccountsLanguagesProductCertificationsList
 newManufacturersAccountsLanguagesProductCertificationsList parent =
   ManufacturersAccountsLanguagesProductCertificationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -105,12 +102,10 @@ instance
     ManufacturersAccountsLanguagesProductCertificationsList
   where
   type
-    Rs
-      ManufacturersAccountsLanguagesProductCertificationsList =
+    Rs ManufacturersAccountsLanguagesProductCertificationsList =
       ListProductCertificationsResponse
   type
-    Scopes
-      ManufacturersAccountsLanguagesProductCertificationsList =
+    Scopes ManufacturersAccountsLanguagesProductCertificationsList =
       '[Manufacturercenter'FullControl]
   requestClient
     ManufacturersAccountsLanguagesProductCertificationsList {..} =

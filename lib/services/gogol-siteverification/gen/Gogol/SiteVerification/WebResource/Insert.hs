@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SiteVerification.WebResource.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SiteVerification.WebResource.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.insert@ method which the
@@ -50,12 +48,8 @@ type SiteVerificationWebResourceInsertResource =
     Core.:> "webResource"
     Core.:> Core.QueryParam "verificationMethod" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
-    Core.:> Core.Post
-              '[Core.JSON]
-              SiteVerificationWebResourceResource
+    Core.:> Core.ReqBody '[Core.JSON] SiteVerificationWebResourceResource
+    Core.:> Core.Post '[Core.JSON] SiteVerificationWebResourceResource
 
 -- | Attempt verification of a website or domain.
 --
@@ -81,18 +75,13 @@ newSiteVerificationWebResourceInsert payload verificationMethod =
       verificationMethod = verificationMethod
     }
 
-instance
-  Core.GoogleRequest
-    SiteVerificationWebResourceInsert
-  where
+instance Core.GoogleRequest SiteVerificationWebResourceInsert where
   type
     Rs SiteVerificationWebResourceInsert =
       SiteVerificationWebResourceResource
   type
     Scopes SiteVerificationWebResourceInsert =
-      '[ Siteverification'FullControl,
-         Siteverification'VerifyOnly
-       ]
+      '[Siteverification'FullControl, Siteverification'VerifyOnly]
   requestClient SiteVerificationWebResourceInsert {..} =
     go
       (Core.Just verificationMethod)

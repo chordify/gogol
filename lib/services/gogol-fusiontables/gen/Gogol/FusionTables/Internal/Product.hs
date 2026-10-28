@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FusionTables.Internal.Product
@@ -125,7 +123,7 @@ module Gogol.FusionTables.Internal.Product
 where
 
 import Gogol.FusionTables.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Specifies the minimum and maximum values, the color, opacity, icon and weight of a bucket within a StyleSetting.
 --
@@ -263,10 +261,8 @@ instance Core.ToJSON Column where
       ( Core.catMaybes
           [ ("baseColumn" Core..=) Core.<$> baseColumn,
             ("columnId" Core..=) Core.<$> columnId,
-            ("columnJsonSchema" Core..=)
-              Core.<$> columnJsonSchema,
-            ("columnPropertiesJson" Core..=)
-              Core.<$> columnPropertiesJson,
+            ("columnJsonSchema" Core..=) Core.<$> columnJsonSchema,
+            ("columnPropertiesJson" Core..=) Core.<$> columnPropertiesJson,
             ("description" Core..=) Core.<$> description,
             ("formatPattern" Core..=) Core.<$> formatPattern,
             ("graphPredicate" Core..=) Core.<$> graphPredicate,
@@ -293,7 +289,10 @@ data Column_BaseColumn = Column_BaseColumn
 newColumn_BaseColumn ::
   Column_BaseColumn
 newColumn_BaseColumn =
-  Column_BaseColumn {columnId = Core.Nothing, tableIndex = Core.Nothing}
+  Column_BaseColumn
+    { columnId = Core.Nothing,
+      tableIndex = Core.Nothing
+    }
 
 instance Core.FromJSON Column_BaseColumn where
   parseJSON =
@@ -347,9 +346,7 @@ instance Core.FromJSON ColumnList where
       ( \o ->
           ColumnList
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "fusiontables#columnList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "fusiontables#columnList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
       )
@@ -371,7 +368,6 @@ instance Core.ToJSON ColumnList where
 data Geometry = Geometry
   { -- | The list of geometries in this geometry collection.
     geometries :: (Core.Maybe [Core.Value]),
-    -- |
     geometry :: (Core.Maybe Core.Value),
     -- | Type: A collection of geometries.
     type' :: Core.Text
@@ -424,7 +420,10 @@ data Import = Import
 newImport ::
   Import
 newImport =
-  Import {kind = "fusiontables#import", numRowsReceived = Core.Nothing}
+  Import
+    { kind = "fusiontables#import",
+      numRowsReceived = Core.Nothing
+    }
 
 instance Core.FromJSON Import where
   parseJSON =
@@ -433,9 +432,7 @@ instance Core.FromJSON Import where
       ( \o ->
           Import
             Core.<$> (o Core..:? "kind" Core..!= "fusiontables#import")
-            Core.<*> ( o Core..:? "numRowsReceived"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numRowsReceived" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Import where
@@ -443,7 +440,8 @@ instance Core.ToJSON Import where
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
-            ("numRowsReceived" Core..=) Core.. Core.AsText
+            ("numRowsReceived" Core..=)
+              Core.. Core.AsText
               Core.<$> numRowsReceived
           ]
       )
@@ -530,12 +528,10 @@ instance Core.ToJSON LineStyle where
     Core.object
       ( Core.catMaybes
           [ ("strokeColor" Core..=) Core.<$> strokeColor,
-            ("strokeColorStyler" Core..=)
-              Core.<$> strokeColorStyler,
+            ("strokeColorStyler" Core..=) Core.<$> strokeColorStyler,
             ("strokeOpacity" Core..=) Core.<$> strokeOpacity,
             ("strokeWeight" Core..=) Core.<$> strokeWeight,
-            ("strokeWeightStyler" Core..=)
-              Core.<$> strokeWeightStyler
+            ("strokeWeightStyler" Core..=) Core.<$> strokeWeightStyler
           ]
       )
 
@@ -588,7 +584,8 @@ data PointStyle = PointStyle
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
 newPointStyle ::
   PointStyle
-newPointStyle = PointStyle {iconName = Core.Nothing, iconStyler = Core.Nothing}
+newPointStyle =
+  PointStyle {iconName = Core.Nothing, iconStyler = Core.Nothing}
 
 instance Core.FromJSON PointStyle where
   parseJSON =
@@ -706,12 +703,10 @@ instance Core.ToJSON PolygonStyle where
             ("fillColorStyler" Core..=) Core.<$> fillColorStyler,
             ("fillOpacity" Core..=) Core.<$> fillOpacity,
             ("strokeColor" Core..=) Core.<$> strokeColor,
-            ("strokeColorStyler" Core..=)
-              Core.<$> strokeColorStyler,
+            ("strokeColorStyler" Core..=) Core.<$> strokeColorStyler,
             ("strokeOpacity" Core..=) Core.<$> strokeOpacity,
             ("strokeWeight" Core..=) Core.<$> strokeWeight,
-            ("strokeWeightStyler" Core..=)
-              Core.<$> strokeWeightStyler
+            ("strokeWeightStyler" Core..=) Core.<$> strokeWeightStyler
           ]
       )
 
@@ -745,9 +740,7 @@ instance Core.FromJSON Sqlresponse where
       ( \o ->
           Sqlresponse
             Core.<$> (o Core..:? "columns")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "fusiontables#sqlresponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "fusiontables#sqlresponse")
             Core.<*> (o Core..:? "rows")
       )
 
@@ -873,22 +866,17 @@ newStyleFunction_Gradient_ColorsItem =
       opacity = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    StyleFunction_Gradient_ColorsItem
-  where
+instance Core.FromJSON StyleFunction_Gradient_ColorsItem where
   parseJSON =
     Core.withObject
       "StyleFunction_Gradient_ColorsItem"
       ( \o ->
           StyleFunction_Gradient_ColorsItem
-            Core.<$> (o Core..:? "color") Core.<*> (o Core..:? "opacity")
+            Core.<$> (o Core..:? "color")
+            Core.<*> (o Core..:? "opacity")
       )
 
-instance
-  Core.ToJSON
-    StyleFunction_Gradient_ColorsItem
-  where
+instance Core.ToJSON StyleFunction_Gradient_ColorsItem where
   toJSON StyleFunction_Gradient_ColorsItem {..} =
     Core.object
       ( Core.catMaybes
@@ -938,9 +926,7 @@ instance Core.FromJSON StyleSetting where
       "StyleSetting"
       ( \o ->
           StyleSetting
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "fusiontables#styleSetting"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "fusiontables#styleSetting")
             Core.<*> (o Core..:? "markerOptions")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "polygonOptions")
@@ -996,9 +982,7 @@ instance Core.FromJSON StyleSettingList where
       ( \o ->
           StyleSettingList
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "fusiontables#styleSettingList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "fusiontables#styleSettingList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
       )
@@ -1104,8 +1088,7 @@ instance Core.ToJSON Table where
             ("name" Core..=) Core.<$> name,
             ("sql" Core..=) Core.<$> sql,
             ("tableId" Core..=) Core.<$> tableId,
-            ("tablePropertiesJson" Core..=)
-              Core.<$> tablePropertiesJson,
+            ("tablePropertiesJson" Core..=) Core.<$> tablePropertiesJson,
             ("tablePropertiesJsonSchema" Core..=)
               Core.<$> tablePropertiesJsonSchema
           ]
@@ -1193,9 +1176,7 @@ instance Core.FromJSON Task where
             Core.<$> (o Core..:? "kind" Core..!= "fusiontables#task")
             Core.<*> (o Core..:? "progress")
             Core.<*> (o Core..:? "started")
-            Core.<*> ( o Core..:? "taskId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "taskId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -1206,8 +1187,7 @@ instance Core.ToJSON Task where
           [ Core.Just ("kind" Core..= kind),
             ("progress" Core..=) Core.<$> progress,
             ("started" Core..=) Core.<$> started,
-            ("taskId" Core..=) Core.. Core.AsText
-              Core.<$> taskId,
+            ("taskId" Core..=) Core.. Core.AsText Core.<$> taskId,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -1311,8 +1291,7 @@ instance Core.ToJSON Template where
   toJSON Template {..} =
     Core.object
       ( Core.catMaybes
-          [ ("automaticColumnNames" Core..=)
-              Core.<$> automaticColumnNames,
+          [ ("automaticColumnNames" Core..=) Core.<$> automaticColumnNames,
             ("body" Core..=) Core.<$> body,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
@@ -1354,9 +1333,7 @@ instance Core.FromJSON TemplateList where
       ( \o ->
           TemplateList
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "fusiontables#templateList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "fusiontables#templateList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
       )

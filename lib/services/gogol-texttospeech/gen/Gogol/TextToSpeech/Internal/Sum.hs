@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TextToSpeech.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TextToSpeech.Internal.Sum
@@ -41,6 +39,15 @@ module Gogol.TextToSpeech.Internal.Sum
         AudioConfig_AudioEncoding_OGGOPUS,
         AudioConfig_AudioEncoding_Mulaw,
         AudioConfig_AudioEncoding_Alaw,
+        AudioConfig_AudioEncoding_Pcm,
+        ..
+      ),
+
+    -- * CustomPronunciationParams_PhoneticEncoding
+    CustomPronunciationParams_PhoneticEncoding
+      ( CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED,
+        CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA,
+        CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA,
         ..
       ),
 
@@ -72,7 +79,7 @@ module Gogol.TextToSpeech.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -126,7 +133,7 @@ pattern AudioConfig_AudioEncoding_LINEAR16 = AudioConfig_AudioEncoding "LINEAR16
 pattern AudioConfig_AudioEncoding_MP3 :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_MP3 = AudioConfig_AudioEncoding "MP3"
 
--- | Opus encoded audio wrapped in an ogg container. The result will be a file which can be played natively on Android, and in browsers (at least Chrome and Firefox). The quality of the encoding is considerably higher than MP3 while using approximately the same bitrate.
+-- | Opus encoded audio wrapped in an ogg container. The result is a file which can be played natively on Android, and in browsers (at least Chrome and Firefox). The quality of the encoding is considerably higher than MP3 while using approximately the same bitrate.
 pattern AudioConfig_AudioEncoding_OGGOPUS :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_OGGOPUS = AudioConfig_AudioEncoding "OGG_OPUS"
 
@@ -138,6 +145,10 @@ pattern AudioConfig_AudioEncoding_Mulaw = AudioConfig_AudioEncoding "MULAW"
 pattern AudioConfig_AudioEncoding_Alaw :: AudioConfig_AudioEncoding
 pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
 
+-- | Uncompressed 16-bit signed little-endian samples (Linear PCM). Note that as opposed to LINEAR16, audio won\'t be wrapped in a WAV (or any other) header.
+pattern AudioConfig_AudioEncoding_Pcm :: AudioConfig_AudioEncoding
+pattern AudioConfig_AudioEncoding_Pcm = AudioConfig_AudioEncoding "PCM"
+
 {-# COMPLETE
   AudioConfig_AudioEncoding_AUDIOENCODINGUNSPECIFIED,
   AudioConfig_AudioEncoding_LINEAR16,
@@ -145,10 +156,43 @@ pattern AudioConfig_AudioEncoding_Alaw = AudioConfig_AudioEncoding "ALAW"
   AudioConfig_AudioEncoding_OGGOPUS,
   AudioConfig_AudioEncoding_Mulaw,
   AudioConfig_AudioEncoding_Alaw,
+  AudioConfig_AudioEncoding_Pcm,
   AudioConfig_AudioEncoding
   #-}
 
--- | Optional. The usage of the synthesized audio to be reported.
+-- | The phonetic encoding of the phrase.
+newtype CustomPronunciationParams_PhoneticEncoding = CustomPronunciationParams_PhoneticEncoding {fromCustomPronunciationParams_PhoneticEncoding :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED :: CustomPronunciationParams_PhoneticEncoding
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_UNSPECIFIED"
+
+-- | IPA, such as apple -> ˈæpəl. https:\/\/en.wikipedia.org\/wiki\/International/Phonetic/Alphabet
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA :: CustomPronunciationParams_PhoneticEncoding
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_IPA"
+
+-- | X-SAMPA, such as apple -> \"{p\@l\". https:\/\/en.wikipedia.org\/wiki\/X-SAMPA
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA :: CustomPronunciationParams_PhoneticEncoding
+pattern CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA = CustomPronunciationParams_PhoneticEncoding "PHONETIC_ENCODING_X_SAMPA"
+
+{-# COMPLETE
+  CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGUNSPECIFIED,
+  CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGIPA,
+  CustomPronunciationParams_PhoneticEncoding_PHONETICENCODINGXSAMPA,
+  CustomPronunciationParams_PhoneticEncoding
+  #-}
+
+-- | Optional. Deprecated. The usage of the synthesized audio to be reported.
 newtype CustomVoiceParams_ReportedUsage = CustomVoiceParams_ReportedUsage {fromCustomVoiceParams_ReportedUsage :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

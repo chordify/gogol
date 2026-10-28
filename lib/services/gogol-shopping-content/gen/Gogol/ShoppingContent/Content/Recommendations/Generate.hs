@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Recommendations.Generate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Recommendations.Generate
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.recommendations.generate@ method which the
@@ -58,9 +56,7 @@ type ContentRecommendationsGenerateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GenerateRecommendationsResponse
+    Core.:> Core.Get '[Core.JSON] GenerateRecommendationsResponse
 
 -- | Generates recommendations for a merchant.
 --
@@ -70,7 +66,7 @@ data ContentRecommendationsGenerate = ContentRecommendationsGenerate
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Optional. List of allowed tags. Tags are a set of predefined strings that describe the category that individual recommendation types. User can specify zero or more tags in this field to indicate what group of recommendations they want to receive. Current list of supported tags: - TREND
+    -- | Optional. List of allowed tags. Tags are a set of predefined strings that describe the category that individual recommendation types belong to. User can specify zero or more tags in this field to indicate what categories of recommendations they want to receive. Current list of supported tags: - TREND
     allowedTag :: (Core.Maybe [Core.Text]),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -102,16 +98,11 @@ newContentRecommendationsGenerate merchantId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentRecommendationsGenerate
-  where
+instance Core.GoogleRequest ContentRecommendationsGenerate where
   type
     Rs ContentRecommendationsGenerate =
       GenerateRecommendationsResponse
-  type
-    Scopes ContentRecommendationsGenerate =
-      '[Content'FullControl]
+  type Scopes ContentRecommendationsGenerate = '[Content'FullControl]
   requestClient ContentRecommendationsGenerate {..} =
     go
       merchantId
@@ -127,7 +118,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentRecommendationsGenerateResource
-          )
+          (Core.Proxy :: Core.Proxy ContentRecommendationsGenerateResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AccessContextManager.Internal.Product
@@ -38,9 +36,21 @@ module Gogol.AccessContextManager.Internal.Product
     AccessPolicy (..),
     newAccessPolicy,
 
+    -- * AccessScope
+    AccessScope (..),
+    newAccessScope,
+
+    -- * AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
+
     -- * ApiOperation
     ApiOperation (..),
     newApiOperation,
+
+    -- * Application
+    Application (..),
+    newApplication,
 
     -- * AuditConfig
     AuditConfig (..),
@@ -65,6 +75,10 @@ module Gogol.AccessContextManager.Internal.Product
     -- * CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
+
+    -- * ClientScope
+    ClientScope (..),
+    newClientScope,
 
     -- * CommitServicePerimetersRequest
     CommitServicePerimetersRequest (..),
@@ -93,6 +107,10 @@ module Gogol.AccessContextManager.Internal.Product
     -- * EgressPolicy
     EgressPolicy (..),
     newEgressPolicy,
+
+    -- * EgressSource
+    EgressSource (..),
+    newEgressSource,
 
     -- * EgressTo
     EgressTo (..),
@@ -162,6 +180,10 @@ module Gogol.AccessContextManager.Internal.Product
     ListServicePerimetersResponse (..),
     newListServicePerimetersResponse,
 
+    -- * ListSupportedServicesResponse
+    ListSupportedServicesResponse (..),
+    newListSupportedServicesResponse,
+
     -- * MethodSelector
     MethodSelector (..),
     newMethodSelector,
@@ -202,6 +224,10 @@ module Gogol.AccessContextManager.Internal.Product
     ReplaceServicePerimetersResponse (..),
     newReplaceServicePerimetersResponse,
 
+    -- * ScopedAccessSettings
+    ScopedAccessSettings (..),
+    newScopedAccessSettings,
+
     -- * ServicePerimeter
     ServicePerimeter (..),
     newServicePerimeter,
@@ -209,6 +235,10 @@ module Gogol.AccessContextManager.Internal.Product
     -- * ServicePerimeterConfig
     ServicePerimeterConfig (..),
     newServicePerimeterConfig,
+
+    -- * SessionSettings
+    SessionSettings (..),
+    newSessionSettings,
 
     -- * SetIamPolicyRequest
     SetIamPolicyRequest (..),
@@ -222,6 +252,10 @@ module Gogol.AccessContextManager.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * SupportedService
+    SupportedService (..),
+    newSupportedService,
+
     -- * TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -233,11 +267,19 @@ module Gogol.AccessContextManager.Internal.Product
     -- * VpcAccessibleServices
     VpcAccessibleServices (..),
     newVpcAccessibleServices,
+
+    -- * VpcNetworkSource
+    VpcNetworkSource (..),
+    newVpcNetworkSource,
+
+    -- * VpcSubNetwork
+    VpcSubNetwork (..),
+    newVpcSubNetwork,
   )
 where
 
 import Gogol.AccessContextManager.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Metadata of Access Context Manager\'s Long Running Operations.
 --
@@ -248,23 +290,16 @@ data AccessContextManagerOperationMetadata = AccessContextManagerOperationMetada
 -- | Creates a value of 'AccessContextManagerOperationMetadata' with the minimum fields required to make a request.
 newAccessContextManagerOperationMetadata ::
   AccessContextManagerOperationMetadata
-newAccessContextManagerOperationMetadata = AccessContextManagerOperationMetadata
+newAccessContextManagerOperationMetadata =
+  AccessContextManagerOperationMetadata
 
-instance
-  Core.FromJSON
-    AccessContextManagerOperationMetadata
-  where
+instance Core.FromJSON AccessContextManagerOperationMetadata where
   parseJSON =
     Core.withObject
       "AccessContextManagerOperationMetadata"
-      ( \o ->
-          Core.pure AccessContextManagerOperationMetadata
-      )
+      (\o -> Core.pure AccessContextManagerOperationMetadata)
 
-instance
-  Core.ToJSON
-    AccessContextManagerOperationMetadata
-  where
+instance Core.ToJSON AccessContextManagerOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | An @AccessLevel@ is a label that can be applied to requests to Google Cloud services, along with a list of requirements necessary for the label to be applied.
@@ -277,7 +312,7 @@ data AccessLevel = AccessLevel
     custom :: (Core.Maybe CustomLevel),
     -- | Description of the @AccessLevel@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
+    -- | Identifier. Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
     -- | Human readable title. Must be unique within the Policy.
     title :: (Core.Maybe Core.Text)
@@ -325,13 +360,13 @@ instance Core.ToJSON AccessLevel where
 --
 -- /See:/ 'newAccessPolicy' smart constructor.
 data AccessPolicy = AccessPolicy
-  { -- | Output only. An opaque identifier for the current version of the @AccessPolicy@. This will always be a strongly validated etag, meaning that two Access Polices will be identical if and only if their etags are identical. Clients should not expect this to be in any specific format.
+  { -- | Output only. An opaque identifier for the current version of the @AccessPolicy@. This will always be a strongly validated etag, meaning that two Access Policies will be identical if and only if their etags are identical. Clients should not expect this to be in any specific format.
     etag :: (Core.Maybe Core.Text),
-    -- | Output only. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@
+    -- | Output only. Identifier. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@
     name :: (Core.Maybe Core.Text),
     -- | Required. The parent of this @AccessPolicy@ in the Cloud Resource Hierarchy. Currently immutable once created. Format: @organizations\/{organization_id}@
     parent :: (Core.Maybe Core.Text),
-    -- | The scopes of a policy define which resources an ACM policy can restrict, and where ACM resources can be referenced. For example, a policy with scopes=[\"folders\/123\"] has the following behavior: - vpcsc perimeters can only restrict projects within folders\/123 - access levels can only be referenced by resources within folders\/123. If empty, there are no limitations on which resources can be restricted by an ACM policy, and there are no limitations on where ACM resources can be referenced. Only one policy can include a given scope (attempting to create a second policy which includes \"folders\/123\" will result in an error). Currently, scopes cannot be modified after a policy is created. Currently, policies can only have a single scope. Format: list of @folders\/{folder_number}@ or @projects\/{project_number}@
+    -- | The scopes of the AccessPolicy. Scopes define which resources a policy can restrict and where its resources can be referenced. For example, policy A with @scopes=[\"folders\/123\"]@ has the following behavior: - ServicePerimeter can only restrict projects within @folders\/123@. - ServicePerimeter within policy A can only reference access levels defined within policy A. - Only one policy can include a given scope; thus, attempting to create a second policy which includes @folders\/123@ will result in an error. If no scopes are provided, then any resource within the organization can be restricted. Scopes cannot be modified after a policy is created. Policies can only have a single scope. Format: list of @folders\/{folder_number}@ or @projects\/{project_number}@
     scopes :: (Core.Maybe [Core.Text]),
     -- | Required. Human readable title. Does not affect behavior.
     title :: (Core.Maybe Core.Text)
@@ -375,6 +410,70 @@ instance Core.ToJSON AccessPolicy where
           ]
       )
 
+-- | Access scope represents the client scope, etc. to which the settings will be applied to.
+--
+-- /See:/ 'newAccessScope' smart constructor.
+newtype AccessScope = AccessScope
+  { -- | Optional. Client scope for this access scope.
+    clientScope :: (Core.Maybe ClientScope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccessScope' with the minimum fields required to make a request.
+newAccessScope ::
+  AccessScope
+newAccessScope = AccessScope {clientScope = Core.Nothing}
+
+instance Core.FromJSON AccessScope where
+  parseJSON =
+    Core.withObject
+      "AccessScope"
+      (\o -> AccessScope Core.<$> (o Core..:? "clientScope"))
+
+instance Core.ToJSON AccessScope where
+  toJSON AccessScope {..} =
+    Core.object
+      (Core.catMaybes [("clientScope" Core..=) Core.<$> clientScope])
+
+-- | Access settings represent the set of conditions that must be met for access to be granted. At least one of the fields must be set.
+--
+-- /See:/ 'newAccessSettings' smart constructor.
+data AccessSettings = AccessSettings
+  { -- | Optional. Access level that a user must have to be granted access. Only one access level is supported, not multiple. This repeated field must have exactly one element. Example: \"accessPolicies\/9522\/accessLevels\/device_trusted\"
+    accessLevels :: (Core.Maybe [Core.Text]),
+    -- | Optional. Session settings applied to user access on a given AccessScope.
+    sessionSettings :: (Core.Maybe SessionSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccessSettings' with the minimum fields required to make a request.
+newAccessSettings ::
+  AccessSettings
+newAccessSettings =
+  AccessSettings
+    { accessLevels = Core.Nothing,
+      sessionSettings = Core.Nothing
+    }
+
+instance Core.FromJSON AccessSettings where
+  parseJSON =
+    Core.withObject
+      "AccessSettings"
+      ( \o ->
+          AccessSettings
+            Core.<$> (o Core..:? "accessLevels")
+            Core.<*> (o Core..:? "sessionSettings")
+      )
+
+instance Core.ToJSON AccessSettings where
+  toJSON AccessSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accessLevels" Core..=) Core.<$> accessLevels,
+            ("sessionSettings" Core..=) Core.<$> sessionSettings
+          ]
+      )
+
 -- | Identification for an API Operation.
 --
 -- /See:/ 'newApiOperation' smart constructor.
@@ -390,7 +489,10 @@ data ApiOperation = ApiOperation
 newApiOperation ::
   ApiOperation
 newApiOperation =
-  ApiOperation {methodSelectors = Core.Nothing, serviceName = Core.Nothing}
+  ApiOperation
+    { methodSelectors = Core.Nothing,
+      serviceName = Core.Nothing
+    }
 
 instance Core.FromJSON ApiOperation where
   parseJSON =
@@ -406,9 +508,44 @@ instance Core.ToJSON ApiOperation where
   toJSON ApiOperation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("methodSelectors" Core..=)
-              Core.<$> methodSelectors,
+          [ ("methodSelectors" Core..=) Core.<$> methodSelectors,
             ("serviceName" Core..=) Core.<$> serviceName
+          ]
+      )
+
+-- | An application that accesses Google Cloud APIs.
+--
+-- /See:/ 'newApplication' smart constructor.
+data Application = Application
+  { -- | The OAuth client ID of the application.
+    clientId :: (Core.Maybe Core.Text),
+    -- | The name of the application. Example: \"Cloud Console\"
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Application' with the minimum fields required to make a request.
+newApplication ::
+  Application
+newApplication =
+  Application {clientId = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON Application where
+  parseJSON =
+    Core.withObject
+      "Application"
+      ( \o ->
+          Application
+            Core.<$> (o Core..:? "clientId")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Application where
+  toJSON Application {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clientId" Core..=) Core.<$> clientId,
+            ("name" Core..=) Core.<$> name
           ]
       )
 
@@ -428,7 +565,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -444,8 +584,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -465,7 +604,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -481,8 +623,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -497,7 +638,7 @@ data AuthorizedOrgsDesc = AuthorizedOrgsDesc
     authorizationDirection :: (Core.Maybe AuthorizedOrgsDesc_AuthorizationDirection),
     -- | A granular control type for authorization levels. Valid value is @AUTHORIZATION_TYPE_TRUST@.
     authorizationType :: (Core.Maybe AuthorizedOrgsDesc_AuthorizationType),
-    -- | Resource name for the @AuthorizedOrgsDesc@. Format: @accessPolicies\/{access_policy}\/authorizedOrgsDescs\/{authorized_orgs_desc}@. The @authorized_orgs_desc@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create an @AuthorizedOrgsDesc@, you cannot change its @name@.
+    -- | Identifier. Resource name for the @AuthorizedOrgsDesc@. Format: @accessPolicies\/{access_policy}\/authorizedOrgsDescs\/{authorized_orgs_desc}@. The @authorized_orgs_desc@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create an @AuthorizedOrgsDesc@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
     -- | The list of organization ids in this AuthorizedOrgsDesc. Format: @organizations\/@ Example: @organizations\/123456@
     orgs :: (Core.Maybe [Core.Text])
@@ -534,10 +675,8 @@ instance Core.ToJSON AuthorizedOrgsDesc where
     Core.object
       ( Core.catMaybes
           [ ("assetType" Core..=) Core.<$> assetType,
-            ("authorizationDirection" Core..=)
-              Core.<$> authorizationDirection,
-            ("authorizationType" Core..=)
-              Core.<$> authorizationType,
+            ("authorizationDirection" Core..=) Core.<$> authorizationDirection,
+            ("authorizationType" Core..=) Core.<$> authorizationType,
             ("name" Core..=) Core.<$> name,
             ("orgs" Core..=) Core.<$> orgs
           ]
@@ -558,7 +697,10 @@ data BasicLevel = BasicLevel
 newBasicLevel ::
   BasicLevel
 newBasicLevel =
-  BasicLevel {combiningFunction = Core.Nothing, conditions = Core.Nothing}
+  BasicLevel
+    { combiningFunction = Core.Nothing,
+      conditions = Core.Nothing
+    }
 
 instance Core.FromJSON BasicLevel where
   parseJSON =
@@ -574,8 +716,7 @@ instance Core.ToJSON BasicLevel where
   toJSON BasicLevel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("combiningFunction" Core..=)
-              Core.<$> combiningFunction,
+          [ ("combiningFunction" Core..=) Core.<$> combiningFunction,
             ("conditions" Core..=) Core.<$> conditions
           ]
       )
@@ -587,10 +728,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -646,6 +789,38 @@ instance Core.FromJSON CancelOperationRequest where
 instance Core.ToJSON CancelOperationRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | Client scope represents the application, etc. subject to this binding\'s restrictions.
+--
+-- /See:/ 'newClientScope' smart constructor.
+newtype ClientScope = ClientScope
+  { -- | Optional. The application that is subject to this binding\'s scope.
+    restrictedClientApplication :: (Core.Maybe Application)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ClientScope' with the minimum fields required to make a request.
+newClientScope ::
+  ClientScope
+newClientScope =
+  ClientScope {restrictedClientApplication = Core.Nothing}
+
+instance Core.FromJSON ClientScope where
+  parseJSON =
+    Core.withObject
+      "ClientScope"
+      ( \o ->
+          ClientScope Core.<$> (o Core..:? "restrictedClientApplication")
+      )
+
+instance Core.ToJSON ClientScope where
+  toJSON ClientScope {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("restrictedClientApplication" Core..=)
+              Core.<$> restrictedClientApplication
+          ]
+      )
+
 -- | A request to commit dry-run specs in all Service Perimeters belonging to an Access Policy.
 --
 -- /See:/ 'newCommitServicePerimetersRequest' smart constructor.
@@ -666,14 +841,12 @@ instance Core.FromJSON CommitServicePerimetersRequest where
     Core.withObject
       "CommitServicePerimetersRequest"
       ( \o ->
-          CommitServicePerimetersRequest
-            Core.<$> (o Core..:? "etag")
+          CommitServicePerimetersRequest Core.<$> (o Core..:? "etag")
       )
 
 instance Core.ToJSON CommitServicePerimetersRequest where
   toJSON CommitServicePerimetersRequest {..} =
-    Core.object
-      (Core.catMaybes [("etag" Core..=) Core.<$> etag])
+    Core.object (Core.catMaybes [("etag" Core..=) Core.<$> etag])
 
 -- | A response to CommitServicePerimetersRequest. This will be put inside of Operation.response field.
 --
@@ -690,10 +863,7 @@ newCommitServicePerimetersResponse ::
 newCommitServicePerimetersResponse =
   CommitServicePerimetersResponse {servicePerimeters = Core.Nothing}
 
-instance
-  Core.FromJSON
-    CommitServicePerimetersResponse
-  where
+instance Core.FromJSON CommitServicePerimetersResponse where
   parseJSON =
     Core.withObject
       "CommitServicePerimetersResponse"
@@ -706,9 +876,7 @@ instance Core.ToJSON CommitServicePerimetersResponse where
   toJSON CommitServicePerimetersResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("servicePerimeters" Core..=)
-              Core.<$> servicePerimeters
-          ]
+          [("servicePerimeters" Core..=) Core.<$> servicePerimeters]
       )
 
 -- | A condition necessary for an @AccessLevel@ to be granted. The Condition is an AND over its fields. So a Condition is true if: 1) the request IP is from one of the listed subnetworks AND 2) the originating device complies with the listed device policy AND 3) all listed access levels are granted AND 4) the request was sent at a time allowed by the DateTimeRestriction.
@@ -721,12 +889,14 @@ data Condition = Condition
     ipSubnetworks :: (Core.Maybe [Core.Text]),
     -- | The request must be made by one of the provided user or service accounts. Groups are not supported. Syntax: @user:{emailid}@ @serviceAccount:{emailid}@ If not specified, a request may come from any user.
     members :: (Core.Maybe [Core.Text]),
-    -- | Whether to negate the Condition. If true, the Condition becomes a NAND over its non-empty fields, each field must be false for the Condition overall to be satisfied. Defaults to false.
+    -- | Whether to negate the Condition. If true, the Condition becomes a NAND over its non-empty fields. Any non-empty field criteria evaluating to false will result in the Condition to be satisfied. Defaults to false.
     negate :: (Core.Maybe Core.Bool),
     -- | The request must originate from one of the provided countries\/regions. Must be valid ISO 3166-1 alpha-2 codes.
     regions :: (Core.Maybe [Core.Text]),
     -- | A list of other access levels defined in the same @Policy@, referenced by resource name. Referencing an @AccessLevel@ which does not exist is an error. All access levels listed must be granted for the Condition to be true. Example: \"@accessPolicies\/MY_POLICY\/accessLevels\/LEVEL_NAME\"@
-    requiredAccessLevels :: (Core.Maybe [Core.Text])
+    requiredAccessLevels :: (Core.Maybe [Core.Text]),
+    -- | The request must originate from one of the provided VPC networks in Google Cloud. Cannot specify this field together with @ip_subnetworks@.
+    vpcNetworkSources :: (Core.Maybe [VpcNetworkSource])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -740,7 +910,8 @@ newCondition =
       members = Core.Nothing,
       negate = Core.Nothing,
       regions = Core.Nothing,
-      requiredAccessLevels = Core.Nothing
+      requiredAccessLevels = Core.Nothing,
+      vpcNetworkSources = Core.Nothing
     }
 
 instance Core.FromJSON Condition where
@@ -755,6 +926,7 @@ instance Core.FromJSON Condition where
             Core.<*> (o Core..:? "negate")
             Core.<*> (o Core..:? "regions")
             Core.<*> (o Core..:? "requiredAccessLevels")
+            Core.<*> (o Core..:? "vpcNetworkSources")
       )
 
 instance Core.ToJSON Condition where
@@ -766,8 +938,8 @@ instance Core.ToJSON Condition where
             ("members" Core..=) Core.<$> members,
             ("negate" Core..=) Core.<$> negate,
             ("regions" Core..=) Core.<$> regions,
-            ("requiredAccessLevels" Core..=)
-              Core.<$> requiredAccessLevels
+            ("requiredAccessLevels" Core..=) Core.<$> requiredAccessLevels,
+            ("vpcNetworkSources" Core..=) Core.<$> vpcNetworkSources
           ]
       )
 
@@ -793,8 +965,7 @@ instance Core.FromJSON CustomLevel where
 
 instance Core.ToJSON CustomLevel where
   toJSON CustomLevel {..} =
-    Core.object
-      (Core.catMaybes [("expr" Core..=) Core.<$> expr])
+    Core.object (Core.catMaybes [("expr" Core..=) Core.<$> expr])
 
 -- | @DevicePolicy@ specifies device specific restrictions necessary to acquire a given access level. A @DevicePolicy@ specifies requirements for requests from devices to be granted access levels, it does not do any enforcement on the device. @DevicePolicy@ acts as an AND over all specified fields, and each repeated field is an OR over its elements. Any unset fields are ignored. For example, if the proto is { os/type : DESKTOP/WINDOWS, os/type : DESKTOP/LINUX, encryption_status: ENCRYPTED}, then the DevicePolicy will be true for requests originating from encrypted Linux desktops and encrypted Windows desktops.
 --
@@ -851,12 +1022,9 @@ instance Core.ToJSON DevicePolicy where
             ("allowedEncryptionStatuses" Core..=)
               Core.<$> allowedEncryptionStatuses,
             ("osConstraints" Core..=) Core.<$> osConstraints,
-            ("requireAdminApproval" Core..=)
-              Core.<$> requireAdminApproval,
-            ("requireCorpOwned" Core..=)
-              Core.<$> requireCorpOwned,
-            ("requireScreenlock" Core..=)
-              Core.<$> requireScreenlock
+            ("requireAdminApproval" Core..=) Core.<$> requireAdminApproval,
+            ("requireCorpOwned" Core..=) Core.<$> requireCorpOwned,
+            ("requireScreenlock" Core..=) Core.<$> requireScreenlock
           ]
       )
 
@@ -864,10 +1032,14 @@ instance Core.ToJSON DevicePolicy where
 --
 -- /See:/ 'newEgressFrom' smart constructor.
 data EgressFrom = EgressFrom
-  { -- | A list of identities that are allowed access through this [EgressPolicy]. Should be in the format of email address. The email address should represent individual user or service account only.
+  { -- | A list of identities that are allowed access through [EgressPolicy]. Identities can be an individual user, service account, Google group, or third-party identity. For third-party identity, only single identities are supported and other identity types are not supported. The @v1@ identities that have the prefix @user@, @group@, @serviceAccount@, and @principal@ in https:\/\/cloud.google.com\/iam\/docs\/principal-identifiers#v1 are supported.
     identities :: (Core.Maybe [Core.Text]),
     -- | Specifies the type of identities that are allowed access to outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
-    identityType :: (Core.Maybe EgressFrom_IdentityType)
+    identityType :: (Core.Maybe EgressFrom_IdentityType),
+    -- | Whether to enforce traffic restrictions based on @sources@ field. If the @sources@ fields is non-empty, then this field must be set to @SOURCE_RESTRICTION_ENABLED@.
+    sourceRestriction :: (Core.Maybe EgressFrom_SourceRestriction),
+    -- | Sources that this EgressPolicy authorizes access from. If this field is not empty, then @source_restriction@ must be set to @SOURCE_RESTRICTION_ENABLED@.
+    sources :: (Core.Maybe [EgressSource])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -875,7 +1047,12 @@ data EgressFrom = EgressFrom
 newEgressFrom ::
   EgressFrom
 newEgressFrom =
-  EgressFrom {identities = Core.Nothing, identityType = Core.Nothing}
+  EgressFrom
+    { identities = Core.Nothing,
+      identityType = Core.Nothing,
+      sourceRestriction = Core.Nothing,
+      sources = Core.Nothing
+    }
 
 instance Core.FromJSON EgressFrom where
   parseJSON =
@@ -885,6 +1062,8 @@ instance Core.FromJSON EgressFrom where
           EgressFrom
             Core.<$> (o Core..:? "identities")
             Core.<*> (o Core..:? "identityType")
+            Core.<*> (o Core..:? "sourceRestriction")
+            Core.<*> (o Core..:? "sources")
       )
 
 instance Core.ToJSON EgressFrom where
@@ -892,7 +1071,9 @@ instance Core.ToJSON EgressFrom where
     Core.object
       ( Core.catMaybes
           [ ("identities" Core..=) Core.<$> identities,
-            ("identityType" Core..=) Core.<$> identityType
+            ("identityType" Core..=) Core.<$> identityType,
+            ("sourceRestriction" Core..=) Core.<$> sourceRestriction,
+            ("sources" Core..=) Core.<$> sources
           ]
       )
 
@@ -903,7 +1084,9 @@ data EgressPolicy = EgressPolicy
   { -- | Defines conditions on the source of a request causing this EgressPolicy to apply.
     egressFrom :: (Core.Maybe EgressFrom),
     -- | Defines the conditions on the ApiOperation and destination resources that cause this EgressPolicy to apply.
-    egressTo :: (Core.Maybe EgressTo)
+    egressTo :: (Core.Maybe EgressTo),
+    -- | Optional. Human-readable title for the egress rule. The title must be unique within the perimeter and can not exceed 100 characters. Within the access policy, the combined length of all rule titles must not exceed 240,000 characters.
+    title :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -911,7 +1094,11 @@ data EgressPolicy = EgressPolicy
 newEgressPolicy ::
   EgressPolicy
 newEgressPolicy =
-  EgressPolicy {egressFrom = Core.Nothing, egressTo = Core.Nothing}
+  EgressPolicy
+    { egressFrom = Core.Nothing,
+      egressTo = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON EgressPolicy where
   parseJSON =
@@ -921,6 +1108,7 @@ instance Core.FromJSON EgressPolicy where
           EgressPolicy
             Core.<$> (o Core..:? "egressFrom")
             Core.<*> (o Core..:? "egressTo")
+            Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON EgressPolicy where
@@ -928,7 +1116,44 @@ instance Core.ToJSON EgressPolicy where
     Core.object
       ( Core.catMaybes
           [ ("egressFrom" Core..=) Core.<$> egressFrom,
-            ("egressTo" Core..=) Core.<$> egressTo
+            ("egressTo" Core..=) Core.<$> egressTo,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | The source that EgressPolicy authorizes access from inside the ServicePerimeter to somewhere outside the ServicePerimeter boundaries.
+--
+-- /See:/ 'newEgressSource' smart constructor.
+data EgressSource = EgressSource
+  { -- | An AccessLevel resource name that allows protected resources inside the ServicePerimeters to access outside the ServicePerimeter boundaries. AccessLevels listed must be in the same policy as this ServicePerimeter. Referencing a nonexistent AccessLevel will cause an error. If an AccessLevel name is not specified, only resources within the perimeter can be accessed through Google Cloud calls with request origins within the perimeter. Example: @accessPolicies\/MY_POLICY\/accessLevels\/MY_LEVEL@. If a single @*@ is specified for @access_level@, then all EgressSources will be allowed.
+    accessLevel :: (Core.Maybe Core.Text),
+    -- | A Google Cloud resource from the service perimeter that you want to allow to access data outside the perimeter. This field supports only projects. The project format is @projects\/{project_number}@. You can\'t use @*@ in this field to allow all Google Cloud resources.
+    resource :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EgressSource' with the minimum fields required to make a request.
+newEgressSource ::
+  EgressSource
+newEgressSource =
+  EgressSource {accessLevel = Core.Nothing, resource = Core.Nothing}
+
+instance Core.FromJSON EgressSource where
+  parseJSON =
+    Core.withObject
+      "EgressSource"
+      ( \o ->
+          EgressSource
+            Core.<$> (o Core..:? "accessLevel")
+            Core.<*> (o Core..:? "resource")
+      )
+
+instance Core.ToJSON EgressSource where
+  toJSON EgressSource {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accessLevel" Core..=) Core.<$> accessLevel,
+            ("resource" Core..=) Core.<$> resource
           ]
       )
 
@@ -936,7 +1161,7 @@ instance Core.ToJSON EgressPolicy where
 --
 -- /See:/ 'newEgressTo' smart constructor.
 data EgressTo = EgressTo
-  { -- | A list of external resources that are allowed to be accessed. Only AWS and Azure resources are supported. For Amazon S3, the supported format is s3:\/\/BUCKET/NAME. For Azure Storage, the supported format is azure:\/\/myaccount.blob.core.windows.net\/CONTAINER/NAME. A request matches if it contains an external resource in this list (Example: s3:\/\/bucket\/path). Currently \'*\' is not allowed.
+  { -- | A list of external resources that are allowed to be accessed. Only AWS and Azure resources are supported. For Amazon S3, the supported formats are s3:\/\/BUCKET/NAME, s3a:\/\/BUCKET/NAME, and s3n:\/\/BUCKET/NAME. For Azure Storage, the supported format is azure:\/\/myaccount.blob.core.windows.net\/CONTAINER/NAME. A request matches if it contains an external resource in this list (Example: s3:\/\/bucket\/path). Currently \'*\' is not allowed.
     externalResources :: (Core.Maybe [Core.Text]),
     -- | A list of ApiOperations allowed to be performed by the sources specified in the corresponding EgressFrom. A request matches if it uses an operation\/service in this list.
     operations :: (Core.Maybe [ApiOperation]),
@@ -970,8 +1195,7 @@ instance Core.ToJSON EgressTo where
   toJSON EgressTo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("externalResources" Core..=)
-              Core.<$> externalResources,
+          [ ("externalResources" Core..=) Core.<$> externalResources,
             ("operations" Core..=) Core.<$> operations,
             ("resources" Core..=) Core.<$> resources
           ]
@@ -989,8 +1213,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1056,7 +1279,13 @@ data GcpUserAccessBinding = GcpUserAccessBinding
     -- | Required. Immutable. Google Group id whose members are subject to this binding\'s restrictions. See \"id\" in the [G Suite Directory API\'s Groups resource] (https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/reference\/groups#resource). If a group\'s email address\/alias is changed, this resource will continue to point at the changed group. This field does not accept group email addresses or aliases. Example: \"01d520gv4vjcrht\"
     groupKey :: (Core.Maybe Core.Text),
     -- | Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
-    name :: (Core.Maybe Core.Text)
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. A list of applications that are subject to this binding\'s restrictions. If the list is empty, the binding restrictions will universally apply to all applications.
+    restrictedClientApplications :: (Core.Maybe [Application]),
+    -- | Optional. A list of scoped access settings that set this binding\'s restrictions on a subset of applications. This field cannot be set if restricted/client/applications is set.
+    scopedAccessSettings :: (Core.Maybe [ScopedAccessSettings]),
+    -- | Optional. The Google Cloud session length (GCSL) policy for the group key.
+    sessionSettings :: (Core.Maybe SessionSettings)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1068,7 +1297,10 @@ newGcpUserAccessBinding =
     { accessLevels = Core.Nothing,
       dryRunAccessLevels = Core.Nothing,
       groupKey = Core.Nothing,
-      name = Core.Nothing
+      name = Core.Nothing,
+      restrictedClientApplications = Core.Nothing,
+      scopedAccessSettings = Core.Nothing,
+      sessionSettings = Core.Nothing
     }
 
 instance Core.FromJSON GcpUserAccessBinding where
@@ -1081,6 +1313,9 @@ instance Core.FromJSON GcpUserAccessBinding where
             Core.<*> (o Core..:? "dryRunAccessLevels")
             Core.<*> (o Core..:? "groupKey")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "restrictedClientApplications")
+            Core.<*> (o Core..:? "scopedAccessSettings")
+            Core.<*> (o Core..:? "sessionSettings")
       )
 
 instance Core.ToJSON GcpUserAccessBinding where
@@ -1088,14 +1323,17 @@ instance Core.ToJSON GcpUserAccessBinding where
     Core.object
       ( Core.catMaybes
           [ ("accessLevels" Core..=) Core.<$> accessLevels,
-            ("dryRunAccessLevels" Core..=)
-              Core.<$> dryRunAccessLevels,
+            ("dryRunAccessLevels" Core..=) Core.<$> dryRunAccessLevels,
             ("groupKey" Core..=) Core.<$> groupKey,
-            ("name" Core..=) Core.<$> name
+            ("name" Core..=) Core.<$> name,
+            ("restrictedClientApplications" Core..=)
+              Core.<$> restrictedClientApplications,
+            ("scopedAccessSettings" Core..=) Core.<$> scopedAccessSettings,
+            ("sessionSettings" Core..=) Core.<$> sessionSettings
           ]
       )
 
--- | Currently, a completed operation means nothing. In the future, this metadata and a completed operation may indicate that the binding has taken effect and is affecting access decisions for all users.
+-- | Metadata of Google Cloud Access Binding Long Running Operations.
 --
 -- /See:/ 'newGcpUserAccessBindingOperationMetadata' smart constructor.
 data GcpUserAccessBindingOperationMetadata = GcpUserAccessBindingOperationMetadata
@@ -1104,23 +1342,16 @@ data GcpUserAccessBindingOperationMetadata = GcpUserAccessBindingOperationMetada
 -- | Creates a value of 'GcpUserAccessBindingOperationMetadata' with the minimum fields required to make a request.
 newGcpUserAccessBindingOperationMetadata ::
   GcpUserAccessBindingOperationMetadata
-newGcpUserAccessBindingOperationMetadata = GcpUserAccessBindingOperationMetadata
+newGcpUserAccessBindingOperationMetadata =
+  GcpUserAccessBindingOperationMetadata
 
-instance
-  Core.FromJSON
-    GcpUserAccessBindingOperationMetadata
-  where
+instance Core.FromJSON GcpUserAccessBindingOperationMetadata where
   parseJSON =
     Core.withObject
       "GcpUserAccessBindingOperationMetadata"
-      ( \o ->
-          Core.pure GcpUserAccessBindingOperationMetadata
-      )
+      (\o -> Core.pure GcpUserAccessBindingOperationMetadata)
 
-instance
-  Core.ToJSON
-    GcpUserAccessBindingOperationMetadata
-  where
+instance Core.ToJSON GcpUserAccessBindingOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | Request message for @GetIamPolicy@ method.
@@ -1135,22 +1366,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -1164,15 +1392,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -1188,7 +1416,7 @@ instance Core.ToJSON GetPolicyOptions where
 --
 -- /See:/ 'newIngressFrom' smart constructor.
 data IngressFrom = IngressFrom
-  { -- | A list of identities that are allowed access through this ingress policy. Should be in the format of email address. The email address should represent individual user or service account only.
+  { -- | A list of identities that are allowed access through [IngressPolicy]. Identities can be an individual user, service account, Google group, or third-party identity. For third-party identity, only single identities are supported and other identity types are not supported. The @v1@ identities that have the prefix @user@, @group@, @serviceAccount@, and @principal@ in https:\/\/cloud.google.com\/iam\/docs\/principal-identifiers#v1 are supported.
     identities :: (Core.Maybe [Core.Text]),
     -- | Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
     identityType :: (Core.Maybe IngressFrom_IdentityType),
@@ -1235,7 +1463,9 @@ data IngressPolicy = IngressPolicy
   { -- | Defines the conditions on the source of a request causing this IngressPolicy to apply.
     ingressFrom :: (Core.Maybe IngressFrom),
     -- | Defines the conditions on the ApiOperation and request destination that cause this IngressPolicy to apply.
-    ingressTo :: (Core.Maybe IngressTo)
+    ingressTo :: (Core.Maybe IngressTo),
+    -- | Optional. Human-readable title for the ingress rule. The title must be unique within the perimeter and can not exceed 100 characters. Within the access policy, the combined length of all rule titles must not exceed 240,000 characters.
+    title :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1243,7 +1473,11 @@ data IngressPolicy = IngressPolicy
 newIngressPolicy ::
   IngressPolicy
 newIngressPolicy =
-  IngressPolicy {ingressFrom = Core.Nothing, ingressTo = Core.Nothing}
+  IngressPolicy
+    { ingressFrom = Core.Nothing,
+      ingressTo = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON IngressPolicy where
   parseJSON =
@@ -1253,6 +1487,7 @@ instance Core.FromJSON IngressPolicy where
           IngressPolicy
             Core.<$> (o Core..:? "ingressFrom")
             Core.<*> (o Core..:? "ingressTo")
+            Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON IngressPolicy where
@@ -1260,7 +1495,8 @@ instance Core.ToJSON IngressPolicy where
     Core.object
       ( Core.catMaybes
           [ ("ingressFrom" Core..=) Core.<$> ingressFrom,
-            ("ingressTo" Core..=) Core.<$> ingressTo
+            ("ingressTo" Core..=) Core.<$> ingressTo,
+            ("title" Core..=) Core.<$> title
           ]
       )
 
@@ -1279,7 +1515,10 @@ data IngressSource = IngressSource
 newIngressSource ::
   IngressSource
 newIngressSource =
-  IngressSource {accessLevel = Core.Nothing, resource = Core.Nothing}
+  IngressSource
+    { accessLevel = Core.Nothing,
+      resource = Core.Nothing
+    }
 
 instance Core.FromJSON IngressSource where
   parseJSON =
@@ -1314,7 +1553,8 @@ data IngressTo = IngressTo
 -- | Creates a value of 'IngressTo' with the minimum fields required to make a request.
 newIngressTo ::
   IngressTo
-newIngressTo = IngressTo {operations = Core.Nothing, resources = Core.Nothing}
+newIngressTo =
+  IngressTo {operations = Core.Nothing, resources = Core.Nothing}
 
 instance Core.FromJSON IngressTo where
   parseJSON =
@@ -1429,14 +1669,12 @@ newListAuthorizedOrgsDescsResponse ::
   ListAuthorizedOrgsDescsResponse
 newListAuthorizedOrgsDescsResponse =
   ListAuthorizedOrgsDescsResponse
-    { authorizedOrgsDescs = Core.Nothing,
+    { authorizedOrgsDescs =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListAuthorizedOrgsDescsResponse
-  where
+instance Core.FromJSON ListAuthorizedOrgsDescsResponse where
   parseJSON =
     Core.withObject
       "ListAuthorizedOrgsDescsResponse"
@@ -1450,8 +1688,7 @@ instance Core.ToJSON ListAuthorizedOrgsDescsResponse where
   toJSON ListAuthorizedOrgsDescsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorizedOrgsDescs" Core..=)
-              Core.<$> authorizedOrgsDescs,
+          [ ("authorizedOrgsDescs" Core..=) Core.<$> authorizedOrgsDescs,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1472,14 +1709,12 @@ newListGcpUserAccessBindingsResponse ::
   ListGcpUserAccessBindingsResponse
 newListGcpUserAccessBindingsResponse =
   ListGcpUserAccessBindingsResponse
-    { gcpUserAccessBindings = Core.Nothing,
+    { gcpUserAccessBindings =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListGcpUserAccessBindingsResponse
-  where
+instance Core.FromJSON ListGcpUserAccessBindingsResponse where
   parseJSON =
     Core.withObject
       "ListGcpUserAccessBindingsResponse"
@@ -1489,15 +1724,11 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListGcpUserAccessBindingsResponse
-  where
+instance Core.ToJSON ListGcpUserAccessBindingsResponse where
   toJSON ListGcpUserAccessBindingsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("gcpUserAccessBindings" Core..=)
-              Core.<$> gcpUserAccessBindings,
+          [ ("gcpUserAccessBindings" Core..=) Core.<$> gcpUserAccessBindings,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1576,8 +1807,46 @@ instance Core.ToJSON ListServicePerimetersResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("servicePerimeters" Core..=)
-              Core.<$> servicePerimeters
+            ("servicePerimeters" Core..=) Core.<$> servicePerimeters
+          ]
+      )
+
+-- | A response to @ListSupportedServicesRequest@.
+--
+-- /See:/ 'newListSupportedServicesResponse' smart constructor.
+data ListSupportedServicesResponse = ListSupportedServicesResponse
+  { -- | The pagination token to retrieve the next page of results. If the value is empty, no further results remain.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | List of services supported by VPC Service Controls instances.
+    supportedServices :: (Core.Maybe [SupportedService])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListSupportedServicesResponse' with the minimum fields required to make a request.
+newListSupportedServicesResponse ::
+  ListSupportedServicesResponse
+newListSupportedServicesResponse =
+  ListSupportedServicesResponse
+    { nextPageToken = Core.Nothing,
+      supportedServices = Core.Nothing
+    }
+
+instance Core.FromJSON ListSupportedServicesResponse where
+  parseJSON =
+    Core.withObject
+      "ListSupportedServicesResponse"
+      ( \o ->
+          ListSupportedServicesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "supportedServices")
+      )
+
+instance Core.ToJSON ListSupportedServicesResponse where
+  toJSON ListSupportedServicesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("supportedServices" Core..=) Core.<$> supportedServices
           ]
       )
 
@@ -1585,9 +1854,9 @@ instance Core.ToJSON ListServicePerimetersResponse where
 --
 -- /See:/ 'newMethodSelector' smart constructor.
 data MethodSelector = MethodSelector
-  { -- | Value for @method@ should be a valid method name for the corresponding @service_name@ in ApiOperation. If @*@ used as value for @method@, then ALL methods and permissions are allowed.
+  { -- | A valid method name for the corresponding @service_name@ in ApiOperation. If @*@ is used as the value for the @method@, then ALL methods and permissions are allowed.
     method :: (Core.Maybe Core.Text),
-    -- | Value for @permission@ should be a valid Cloud IAM permission for the corresponding @service_name@ in ApiOperation.
+    -- | A valid Cloud IAM permission for the corresponding @service_name@ in ApiOperation.
     permission :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1629,7 +1898,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1685,21 +1954,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1713,19 +1980,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | A restriction on the OS type and version of devices making requests.
 --
@@ -1772,9 +2037,9 @@ instance Core.ToJSON OsConstraint where
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -1839,7 +2104,10 @@ data ReplaceAccessLevelsRequest = ReplaceAccessLevelsRequest
 newReplaceAccessLevelsRequest ::
   ReplaceAccessLevelsRequest
 newReplaceAccessLevelsRequest =
-  ReplaceAccessLevelsRequest {accessLevels = Core.Nothing, etag = Core.Nothing}
+  ReplaceAccessLevelsRequest
+    { accessLevels = Core.Nothing,
+      etag = Core.Nothing
+    }
 
 instance Core.FromJSON ReplaceAccessLevelsRequest where
   parseJSON =
@@ -1880,16 +2148,13 @@ instance Core.FromJSON ReplaceAccessLevelsResponse where
     Core.withObject
       "ReplaceAccessLevelsResponse"
       ( \o ->
-          ReplaceAccessLevelsResponse
-            Core.<$> (o Core..:? "accessLevels")
+          ReplaceAccessLevelsResponse Core.<$> (o Core..:? "accessLevels")
       )
 
 instance Core.ToJSON ReplaceAccessLevelsResponse where
   toJSON ReplaceAccessLevelsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("accessLevels" Core..=) Core.<$> accessLevels]
-      )
+      (Core.catMaybes [("accessLevels" Core..=) Core.<$> accessLevels])
 
 -- | A request to replace all existing Service Perimeters in an Access Policy with the Service Perimeters provided. This is done atomically.
 --
@@ -1911,10 +2176,7 @@ newReplaceServicePerimetersRequest =
       servicePerimeters = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReplaceServicePerimetersRequest
-  where
+instance Core.FromJSON ReplaceServicePerimetersRequest where
   parseJSON =
     Core.withObject
       "ReplaceServicePerimetersRequest"
@@ -1929,8 +2191,7 @@ instance Core.ToJSON ReplaceServicePerimetersRequest where
     Core.object
       ( Core.catMaybes
           [ ("etag" Core..=) Core.<$> etag,
-            ("servicePerimeters" Core..=)
-              Core.<$> servicePerimeters
+            ("servicePerimeters" Core..=) Core.<$> servicePerimeters
           ]
       )
 
@@ -1947,12 +2208,12 @@ newtype ReplaceServicePerimetersResponse = ReplaceServicePerimetersResponse
 newReplaceServicePerimetersResponse ::
   ReplaceServicePerimetersResponse
 newReplaceServicePerimetersResponse =
-  ReplaceServicePerimetersResponse {servicePerimeters = Core.Nothing}
+  ReplaceServicePerimetersResponse
+    { servicePerimeters =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ReplaceServicePerimetersResponse
-  where
+instance Core.FromJSON ReplaceServicePerimetersResponse where
   parseJSON =
     Core.withObject
       "ReplaceServicePerimetersResponse"
@@ -1965,8 +2226,50 @@ instance Core.ToJSON ReplaceServicePerimetersResponse where
   toJSON ReplaceServicePerimetersResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("servicePerimeters" Core..=)
-              Core.<$> servicePerimeters
+          [("servicePerimeters" Core..=) Core.<$> servicePerimeters]
+      )
+
+-- | A relationship between access settings and its scope.
+--
+-- /See:/ 'newScopedAccessSettings' smart constructor.
+data ScopedAccessSettings = ScopedAccessSettings
+  { -- | Optional. Access settings for this scoped access settings. This field may be empty if dry/run/settings is set.
+    activeSettings :: (Core.Maybe AccessSettings),
+    -- | Optional. Dry-run access settings for this scoped access settings. This field may be empty if active_settings is set.
+    dryRunSettings :: (Core.Maybe AccessSettings),
+    -- | Optional. Application, etc. to which the access settings will be applied to. Implicitly, this is the scoped access settings key; as such, it must be unique and non-empty.
+    scope :: (Core.Maybe AccessScope)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ScopedAccessSettings' with the minimum fields required to make a request.
+newScopedAccessSettings ::
+  ScopedAccessSettings
+newScopedAccessSettings =
+  ScopedAccessSettings
+    { activeSettings = Core.Nothing,
+      dryRunSettings = Core.Nothing,
+      scope = Core.Nothing
+    }
+
+instance Core.FromJSON ScopedAccessSettings where
+  parseJSON =
+    Core.withObject
+      "ScopedAccessSettings"
+      ( \o ->
+          ScopedAccessSettings
+            Core.<$> (o Core..:? "activeSettings")
+            Core.<*> (o Core..:? "dryRunSettings")
+            Core.<*> (o Core..:? "scope")
+      )
+
+instance Core.ToJSON ScopedAccessSettings where
+  toJSON ScopedAccessSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("activeSettings" Core..=) Core.<$> activeSettings,
+            ("dryRunSettings" Core..=) Core.<$> dryRunSettings,
+            ("scope" Core..=) Core.<$> scope
           ]
       )
 
@@ -1976,7 +2279,9 @@ instance Core.ToJSON ReplaceServicePerimetersResponse where
 data ServicePerimeter = ServicePerimeter
   { -- | Description of the @ServicePerimeter@ and its use. Does not affect behavior.
     description :: (Core.Maybe Core.Text),
-    -- | Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
+    -- | Optional. An opaque identifier for the current version of the @ServicePerimeter@. This identifier does not follow any specific format. If an etag is not provided, the operation will be performed as if a valid etag is provided.
+    etag :: (Core.Maybe Core.Text),
+    -- | Identifier. Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
     name :: (Core.Maybe Core.Text),
     -- | Perimeter type indicator. A single project or VPC network is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.
     perimeterType :: (Core.Maybe ServicePerimeter_PerimeterType),
@@ -1997,6 +2302,7 @@ newServicePerimeter ::
 newServicePerimeter =
   ServicePerimeter
     { description = Core.Nothing,
+      etag = Core.Nothing,
       name = Core.Nothing,
       perimeterType = Core.Nothing,
       spec = Core.Nothing,
@@ -2012,6 +2318,7 @@ instance Core.FromJSON ServicePerimeter where
       ( \o ->
           ServicePerimeter
             Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "perimeterType")
             Core.<*> (o Core..:? "spec")
@@ -2025,13 +2332,13 @@ instance Core.ToJSON ServicePerimeter where
     Core.object
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
+            ("etag" Core..=) Core.<$> etag,
             ("name" Core..=) Core.<$> name,
             ("perimeterType" Core..=) Core.<$> perimeterType,
             ("spec" Core..=) Core.<$> spec,
             ("status" Core..=) Core.<$> status,
             ("title" Core..=) Core.<$> title,
-            ("useExplicitDryRunSpec" Core..=)
-              Core.<$> useExplicitDryRunSpec
+            ("useExplicitDryRunSpec" Core..=) Core.<$> useExplicitDryRunSpec
           ]
       )
 
@@ -2089,10 +2396,62 @@ instance Core.ToJSON ServicePerimeterConfig where
             ("egressPolicies" Core..=) Core.<$> egressPolicies,
             ("ingressPolicies" Core..=) Core.<$> ingressPolicies,
             ("resources" Core..=) Core.<$> resources,
-            ("restrictedServices" Core..=)
-              Core.<$> restrictedServices,
-            ("vpcAccessibleServices" Core..=)
-              Core.<$> vpcAccessibleServices
+            ("restrictedServices" Core..=) Core.<$> restrictedServices,
+            ("vpcAccessibleServices" Core..=) Core.<$> vpcAccessibleServices
+          ]
+      )
+
+-- | Stores settings related to Google Cloud Session Length including session duration, the type of challenge (i.e. method) they should face when their session expires, and other related settings.
+--
+-- /See:/ 'newSessionSettings' smart constructor.
+data SessionSettings = SessionSettings
+  { -- | Optional. How long a user is allowed to take between actions before a new access token must be issued. Only set for Google Cloud apps.
+    maxInactivity :: (Core.Maybe Core.Duration),
+    -- | Optional. The session length. Setting this field to zero is equal to disabling session. Also can set infinite session by flipping the enabled bit to false below. If use/oidc/max/age is true, for OIDC apps, the session length will be the minimum of this field and OIDC max/age param.
+    sessionLength :: (Core.Maybe Core.Duration),
+    -- | Optional. This field enables or disables Google Cloud session length. When false, all fields set above will be disregarded and the session length is basically infinite.
+    sessionLengthEnabled :: (Core.Maybe Core.Bool),
+    -- | Optional. Session method when user\'s Google Cloud session is up.
+    sessionReauthMethod :: (Core.Maybe SessionSettings_SessionReauthMethod),
+    -- | Optional. Only useful for OIDC apps. When false, the OIDC max/age param, if passed in the authentication request will be ignored. When true, the re-auth period will be the minimum of the session/length field and the max_age OIDC param.
+    useOidcMaxAge :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SessionSettings' with the minimum fields required to make a request.
+newSessionSettings ::
+  SessionSettings
+newSessionSettings =
+  SessionSettings
+    { maxInactivity = Core.Nothing,
+      sessionLength = Core.Nothing,
+      sessionLengthEnabled = Core.Nothing,
+      sessionReauthMethod = Core.Nothing,
+      useOidcMaxAge = Core.Nothing
+    }
+
+instance Core.FromJSON SessionSettings where
+  parseJSON =
+    Core.withObject
+      "SessionSettings"
+      ( \o ->
+          SessionSettings
+            Core.<$> (o Core..:? "maxInactivity")
+            Core.<*> (o Core..:? "sessionLength")
+            Core.<*> (o Core..:? "sessionLengthEnabled")
+            Core.<*> (o Core..:? "sessionReauthMethod")
+            Core.<*> (o Core..:? "useOidcMaxAge")
+      )
+
+instance Core.ToJSON SessionSettings where
+  toJSON SessionSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxInactivity" Core..=) Core.<$> maxInactivity,
+            ("sessionLength" Core..=) Core.<$> sessionLength,
+            ("sessionLengthEnabled" Core..=) Core.<$> sessionLengthEnabled,
+            ("sessionReauthMethod" Core..=) Core.<$> sessionReauthMethod,
+            ("useOidcMaxAge" Core..=) Core.<$> useOidcMaxAge
           ]
       )
 
@@ -2111,7 +2470,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -2149,7 +2511,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2185,19 +2551,82 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | @SupportedService@ specifies the VPC Service Controls and its properties.
+--
+-- /See:/ 'newSupportedService' smart constructor.
+data SupportedService = SupportedService
+  { -- | True if the service is available on the restricted VIP. Services on the restricted VIP typically either support VPC Service Controls or are core infrastructure services required for the functioning of Google Cloud.
+    availableOnRestrictedVip :: (Core.Maybe Core.Bool),
+    -- | True if the service is supported with some limitations. Check <https://cloud.google.com/vpc-service-controls/docs/supported-products documentation> for details.
+    knownLimitations :: (Core.Maybe Core.Bool),
+    -- | The service name or address of the supported service, such as @service.googleapis.com@.
+    name :: (Core.Maybe Core.Text),
+    -- | The support stage of the service.
+    serviceSupportStage :: (Core.Maybe SupportedService_ServiceSupportStage),
+    -- | The support stage of the service.
+    supportStage :: (Core.Maybe SupportedService_SupportStage),
+    -- | The list of the supported methods. This field exists only in response to GetSupportedService
+    supportedMethods :: (Core.Maybe [MethodSelector]),
+    -- | The name of the supported product, such as \'Cloud Product API\'.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SupportedService' with the minimum fields required to make a request.
+newSupportedService ::
+  SupportedService
+newSupportedService =
+  SupportedService
+    { availableOnRestrictedVip = Core.Nothing,
+      knownLimitations = Core.Nothing,
+      name = Core.Nothing,
+      serviceSupportStage = Core.Nothing,
+      supportStage = Core.Nothing,
+      supportedMethods = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON SupportedService where
+  parseJSON =
+    Core.withObject
+      "SupportedService"
+      ( \o ->
+          SupportedService
+            Core.<$> (o Core..:? "availableOnRestrictedVip")
+            Core.<*> (o Core..:? "knownLimitations")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "serviceSupportStage")
+            Core.<*> (o Core..:? "supportStage")
+            Core.<*> (o Core..:? "supportedMethods")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON SupportedService where
+  toJSON SupportedService {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("availableOnRestrictedVip" Core..=)
+              Core.<$> availableOnRestrictedVip,
+            ("knownLimitations" Core..=) Core.<$> knownLimitations,
+            ("name" Core..=) Core.<$> name,
+            ("serviceSupportStage" Core..=) Core.<$> serviceSupportStage,
+            ("supportStage" Core..=) Core.<$> supportStage,
+            ("supportedMethods" Core..=) Core.<$> supportedMethods,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -2219,16 +2648,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -2250,16 +2676,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Specifies how APIs are allowed to communicate within the Service Perimeter.
 --
@@ -2295,9 +2718,72 @@ instance Core.ToJSON VpcAccessibleServices where
   toJSON VpcAccessibleServices {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedServices" Core..=)
-              Core.<$> allowedServices,
-            ("enableRestriction" Core..=)
-              Core.<$> enableRestriction
+          [ ("allowedServices" Core..=) Core.<$> allowedServices,
+            ("enableRestriction" Core..=) Core.<$> enableRestriction
+          ]
+      )
+
+-- | The originating network source in Google Cloud.
+--
+-- /See:/ 'newVpcNetworkSource' smart constructor.
+newtype VpcNetworkSource = VpcNetworkSource
+  { -- | Sub-segment ranges of a VPC network.
+    vpcSubnetwork :: (Core.Maybe VpcSubNetwork)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VpcNetworkSource' with the minimum fields required to make a request.
+newVpcNetworkSource ::
+  VpcNetworkSource
+newVpcNetworkSource =
+  VpcNetworkSource {vpcSubnetwork = Core.Nothing}
+
+instance Core.FromJSON VpcNetworkSource where
+  parseJSON =
+    Core.withObject
+      "VpcNetworkSource"
+      (\o -> VpcNetworkSource Core.<$> (o Core..:? "vpcSubnetwork"))
+
+instance Core.ToJSON VpcNetworkSource where
+  toJSON VpcNetworkSource {..} =
+    Core.object
+      (Core.catMaybes [("vpcSubnetwork" Core..=) Core.<$> vpcSubnetwork])
+
+-- | Sub-segment ranges inside of a VPC Network.
+--
+-- /See:/ 'newVpcSubNetwork' smart constructor.
+data VpcSubNetwork = VpcSubNetwork
+  { -- | Required. Network name. If the network is not part of the organization, the @compute.network.get@ permission must be granted to the caller. Format: @\/\/compute.googleapis.com\/projects\/{PROJECT_ID}\/global\/networks\/{NETWORK_NAME}@ Example: @\/\/compute.googleapis.com\/projects\/my-project\/global\/networks\/network-1@
+    network :: (Core.Maybe Core.Text),
+    -- | CIDR block IP subnetwork specification. The IP address must be an IPv4 address and can be a public or private IP address. Note that for a CIDR IP address block, the specified IP address portion must be properly truncated (i.e. all the host bits must be zero) or the input is considered malformed. For example, \"192.0.2.0\/24\" is accepted but \"192.0.2.1\/24\" is not. If empty, all IP addresses are allowed.
+    vpcIpSubnetworks :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VpcSubNetwork' with the minimum fields required to make a request.
+newVpcSubNetwork ::
+  VpcSubNetwork
+newVpcSubNetwork =
+  VpcSubNetwork
+    { network = Core.Nothing,
+      vpcIpSubnetworks = Core.Nothing
+    }
+
+instance Core.FromJSON VpcSubNetwork where
+  parseJSON =
+    Core.withObject
+      "VpcSubNetwork"
+      ( \o ->
+          VpcSubNetwork
+            Core.<$> (o Core..:? "network")
+            Core.<*> (o Core..:? "vpcIpSubnetworks")
+      )
+
+instance Core.ToJSON VpcSubNetwork where
+  toJSON VpcSubNetwork {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("network" Core..=) Core.<$> network,
+            ("vpcIpSubnetworks" Core..=) Core.<$> vpcIpSubnetworks
           ]
       )

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Archives a subscription. Can only be done if at least one base plan was active in the past, and no base plan is available for new or existing subscribers currently. This action is irreversible, and the subscription ID will remain reserved.
+-- Deprecated: subscription archiving is not supported.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.monetization.subscriptions.archive@.
 module Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.archive@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsArchive' request conforms to.
@@ -57,12 +55,10 @@ type AndroidPublisherMonetizationSubscriptionsArchiveResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ArchiveSubscriptionRequest
+    Core.:> Core.ReqBody '[Core.JSON] ArchiveSubscriptionRequest
     Core.:> Core.Post '[Core.JSON] Subscription
 
--- | Archives a subscription. Can only be done if at least one base plan was active in the past, and no base plan is available for new or existing subscribers currently. This action is irreversible, and the subscription ID will remain reserved.
+-- | Deprecated: subscription archiving is not supported.
 --
 -- /See:/ 'newAndroidPublisherMonetizationSubscriptionsArchive' smart constructor.
 data AndroidPublisherMonetizationSubscriptionsArchive = AndroidPublisherMonetizationSubscriptionsArchive
@@ -94,48 +90,49 @@ newAndroidPublisherMonetizationSubscriptionsArchive ::
   -- |  Required. The unique product ID of the subscription to delete. See 'productId'.
   Core.Text ->
   AndroidPublisherMonetizationSubscriptionsArchive
-newAndroidPublisherMonetizationSubscriptionsArchive packageName payload productId =
-  AndroidPublisherMonetizationSubscriptionsArchive
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      payload = payload,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsArchive
+  packageName
+  payload
+  productId =
+    AndroidPublisherMonetizationSubscriptionsArchive
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        payload = payload,
+        productId = productId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherMonetizationSubscriptionsArchive
   where
   type
-    Rs
-      AndroidPublisherMonetizationSubscriptionsArchive =
+    Rs AndroidPublisherMonetizationSubscriptionsArchive =
       Subscription
   type
-    Scopes
-      AndroidPublisherMonetizationSubscriptionsArchive =
+    Scopes AndroidPublisherMonetizationSubscriptionsArchive =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherMonetizationSubscriptionsArchive {..} =
-      go
-        packageName
-        productId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherMonetizationSubscriptionsArchiveResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherMonetizationSubscriptionsArchive {..} =
+    go
+      packageName
+      productId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AndroidPublisherMonetizationSubscriptionsArchiveResource
+          )
+          Core.mempty

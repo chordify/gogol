@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.Debug.SendCapture
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.debug.sendCapture@ method which the
 -- 'DataflowProjectsLocationsJobsDebugSendCapture' request conforms to.
@@ -60,12 +58,8 @@ type DataflowProjectsLocationsJobsDebugSendCaptureResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SendDebugCaptureRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              SendDebugCaptureResponse
+    Core.:> Core.ReqBody '[Core.JSON] SendDebugCaptureRequest
+    Core.:> Core.Post '[Core.JSON] SendDebugCaptureResponse
 
 -- | Send encoded debug capture data for component.
 --
@@ -103,18 +97,23 @@ newDataflowProjectsLocationsJobsDebugSendCapture ::
   -- |  The project id. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsJobsDebugSendCapture
-newDataflowProjectsLocationsJobsDebugSendCapture jobId location payload projectId =
-  DataflowProjectsLocationsJobsDebugSendCapture
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsDebugSendCapture
+  jobId
+  location
+  payload
+  projectId =
+    DataflowProjectsLocationsJobsDebugSendCapture
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -124,32 +123,25 @@ instance
     Rs DataflowProjectsLocationsJobsDebugSendCapture =
       SendDebugCaptureResponse
   type
-    Scopes
-      DataflowProjectsLocationsJobsDebugSendCapture =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsJobsDebugSendCapture {..} =
-      go
-        projectId
-        location
-        jobId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsJobsDebugSendCaptureResource
-            )
-            Core.mempty
+    Scopes DataflowProjectsLocationsJobsDebugSendCapture =
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsJobsDebugSendCapture {..} =
+    go
+      projectId
+      location
+      jobId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataflowProjectsLocationsJobsDebugSendCaptureResource
+          )
+          Core.mempty

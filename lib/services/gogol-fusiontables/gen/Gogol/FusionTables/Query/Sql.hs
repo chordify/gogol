@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Query.Sql
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Query.Sql
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.query.sql@ method which the
 -- 'FusionTablesQuerySql' request conforms to.
@@ -54,13 +52,13 @@ type FusionTablesQuerySqlResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Sqlresponse
     Core.:<|> "fusiontables"
-      Core.:> "v2"
-      Core.:> "query"
-      Core.:> Core.QueryParam "sql" Core.Text
-      Core.:> Core.QueryParam "hdrs" Core.Bool
-      Core.:> Core.QueryParam "typed" Core.Bool
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Post '[Core.OctetStream] Core.Stream
+    Core.:> "v2"
+    Core.:> "query"
+    Core.:> Core.QueryParam "sql" Core.Text
+    Core.:> Core.QueryParam "hdrs" Core.Bool
+    Core.:> Core.QueryParam "typed" Core.Bool
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Post '[Core.OctetStream] Core.Stream
 
 -- | Executes a Fusion Tables SQL statement, which can be any of - SELECT - INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
@@ -81,7 +79,11 @@ newFusionTablesQuerySql ::
   Core.Text ->
   FusionTablesQuerySql
 newFusionTablesQuerySql sql =
-  FusionTablesQuerySql {hdrs = Core.Nothing, sql = sql, typed = Core.Nothing}
+  FusionTablesQuerySql
+    { hdrs = Core.Nothing,
+      sql = sql,
+      typed = Core.Nothing
+    }
 
 instance Core.GoogleRequest FusionTablesQuerySql where
   type Rs FusionTablesQuerySql = Sqlresponse
@@ -98,33 +100,26 @@ instance Core.GoogleRequest FusionTablesQuerySql where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesQuerySqlResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesQuerySqlResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaDownload FusionTablesQuerySql)
   where
-  type
-    Rs (Core.MediaDownload FusionTablesQuerySql) =
-      Core.Stream
+  type Rs (Core.MediaDownload FusionTablesQuerySql) = Core.Stream
   type
     Scopes (Core.MediaDownload FusionTablesQuerySql) =
       Core.Scopes FusionTablesQuerySql
-  requestClient
-    (Core.MediaDownload FusionTablesQuerySql {..}) =
-      go
-        (Core.Just sql)
-        hdrs
-        typed
-        (Core.Just Core.AltMedia)
-        fusionTablesService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy FusionTablesQuerySqlResource
-            )
-            Core.mempty
+  requestClient (Core.MediaDownload FusionTablesQuerySql {..}) =
+    go
+      (Core.Just sql)
+      hdrs
+      typed
+      (Core.Just Core.AltMedia)
+      fusionTablesService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy FusionTablesQuerySqlResource)
+          Core.mempty

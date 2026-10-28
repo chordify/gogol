@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Jobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Jobs.List
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.jobs.list@ method which the
 -- 'DataprocProjectsRegionsJobsList' request conforms to.
@@ -120,13 +118,8 @@ newDataprocProjectsRegionsJobsList projectId region =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsRegionsJobsList
-  where
-  type
-    Rs DataprocProjectsRegionsJobsList =
-      ListJobsResponse
+instance Core.GoogleRequest DataprocProjectsRegionsJobsList where
+  type Rs DataprocProjectsRegionsJobsList = ListJobsResponse
   type
     Scopes DataprocProjectsRegionsJobsList =
       '[CloudPlatform'FullControl]
@@ -149,7 +142,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataprocProjectsRegionsJobsListResource
-          )
+          (Core.Proxy :: Core.Proxy DataprocProjectsRegionsJobsListResource)
           Core.mempty

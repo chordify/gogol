@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the access control policy for a billing account. The caller must have the @billing.accounts.getIamPolicy@ permission on the account, which is often given to billing account <https://cloud.google.com/billing/docs/how-to/billing-access viewers>.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.getIamPolicy@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.billingAccounts.getIamPolicy@.
 module Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
   ( -- * Resource
     CloudbillingBillingAccountsGetIamPolicyResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.GetIamPolicy
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.getIamPolicy@ method which the
 -- 'CloudbillingBillingAccountsGetIamPolicy' request conforms to.
@@ -50,9 +48,7 @@ type CloudbillingBillingAccountsGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "options.requestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "options.requestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -95,36 +91,29 @@ newCloudbillingBillingAccountsGetIamPolicy resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingBillingAccountsGetIamPolicy
-  where
-  type
-    Rs CloudbillingBillingAccountsGetIamPolicy =
-      Policy
+instance Core.GoogleRequest CloudbillingBillingAccountsGetIamPolicy where
+  type Rs CloudbillingBillingAccountsGetIamPolicy = Policy
   type
     Scopes CloudbillingBillingAccountsGetIamPolicy =
       '[ CloudBilling'FullControl,
          CloudBilling'Readonly,
          CloudPlatform'FullControl
        ]
-  requestClient
-    CloudbillingBillingAccountsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        optionsRequestedPolicyVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        billingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudbillingBillingAccountsGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient CloudbillingBillingAccountsGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      optionsRequestedPolicyVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      billingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudbillingBillingAccountsGetIamPolicyResource
+          )
+          Core.mempty

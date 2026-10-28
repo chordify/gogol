@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists spaces the caller is a member of. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope. Lists spaces visible to the caller or authenticated user. Group chats and DMs aren\'t listed until the first message is sent.
+-- Lists spaces the caller is a member of. Group chats and DMs aren\'t listed until the first message is sent. For an example, see <https://developers.google.com/workspace/chat/list-spaces List spaces>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> To list all named spaces by Google Workspace organization, use the <https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search spaces.search()> method using Workspace administrator privileges instead.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.list@.
 module Gogol.Chat.Spaces.List
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.List
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.list@ method which the
 -- 'ChatSpacesList' request conforms to.
@@ -50,6 +48,7 @@ type ChatSpacesListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "filter" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -57,7 +56,7 @@ type ChatSpacesListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListSpacesResponse
 
--- | Lists spaces the caller is a member of. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope. Lists spaces visible to the caller or authenticated user. Group chats and DMs aren\'t listed until the first message is sent.
+-- | Lists spaces the caller is a member of. Group chats and DMs aren\'t listed until the first message is sent. For an example, see <https://developers.google.com/workspace/chat/list-spaces List spaces>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> To list all named spaces by Google Workspace organization, use the <https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search spaces.search()> method using Workspace administrator privileges instead.
 --
 -- /See:/ 'newChatSpacesList' smart constructor.
 data ChatSpacesList = ChatSpacesList
@@ -67,9 +66,11 @@ data ChatSpacesList = ChatSpacesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The maximum number of spaces to return. The service may return fewer than this value. If unspecified, at most 100 spaces are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an @INVALID_ARGUMENT@ error.
+    -- | Optional. A query filter. You can filter spaces by the space type (<https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#spacetype space_type>). To filter by space type, you must specify valid enum value, such as @SPACE@ or @GROUP_CHAT@ (the @space_type@ can\'t be @SPACE_TYPE_UNSPECIFIED@). To query for multiple space types, use the @OR@ operator. For example, the following queries are valid: @space_type = \"SPACE\" spaceType = \"GROUP_CHAT\" OR spaceType = \"DIRECT_MESSAGE\"@ Invalid queries are rejected by the server with an @INVALID_ARGUMENT@ error.
+    filter :: (Core.Maybe Core.Text),
+    -- | Optional. The maximum number of spaces to return. The service might return fewer than this value. If unspecified, at most 100 spaces are returned. The maximum value is 1000. If you use a value more than 1000, it\'s automatically changed to 1000. Negative values return an @INVALID_ARGUMENT@ error.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Optional. A page token, received from a previous list spaces call. Provide this to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value may lead to unexpected results.
+    -- | Optional. A page token, received from a previous list spaces call. Provide this parameter to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value may lead to unexpected results.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,6 +87,7 @@ newChatSpacesList =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      filter = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       uploadType = Core.Nothing,
@@ -102,6 +104,7 @@ instance Core.GoogleRequest ChatSpacesList where
       xgafv
       accessToken
       callback
+      filter
       pageSize
       pageToken
       uploadType

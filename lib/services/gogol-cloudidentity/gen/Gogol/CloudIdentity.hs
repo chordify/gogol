@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,6 +37,10 @@ module Gogol.CloudIdentity
     CloudIdentity'Devices'Readonly,
     CloudIdentity'Groups,
     CloudIdentity'Groups'Readonly,
+    CloudIdentity'Inboundsso,
+    CloudIdentity'Inboundsso'Readonly,
+    CloudIdentity'Policies,
+    CloudIdentity'Policies'Readonly,
     CloudPlatform'FullControl,
 
     -- * Resources
@@ -323,6 +325,16 @@ module Gogol.CloudIdentity
     CloudIdentityInboundSsoAssignmentsPatch (..),
     newCloudIdentityInboundSsoAssignmentsPatch,
 
+    -- ** cloudidentity.policies.get
+    CloudIdentityPoliciesGetResource,
+    CloudIdentityPoliciesGet (..),
+    newCloudIdentityPoliciesGet,
+
+    -- ** cloudidentity.policies.list
+    CloudIdentityPoliciesListResource,
+    CloudIdentityPoliciesList (..),
+    newCloudIdentityPoliciesList,
+
     -- * Types
 
     -- ** Xgafv
@@ -449,6 +461,23 @@ module Gogol.CloudIdentity
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse,
 
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserAttributes
+    GoogleAppsCloudidentityDevicesV1BrowserAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo
+    GoogleAppsCloudidentityDevicesV1BrowserInfo (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserInfo,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel (..),
+
     -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata,
@@ -472,6 +501,17 @@ module Gogol.CloudIdentity
     -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateAttributes
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateTemplate
+    GoogleAppsCloudidentityDevicesV1CertificateTemplate (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateTemplate,
 
     -- ** GoogleAppsCloudidentityDevicesV1ClientState
     GoogleAppsCloudidentityDevicesV1ClientState (..),
@@ -540,6 +580,14 @@ module Gogol.CloudIdentity
 
     -- ** GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
     GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals,
 
     -- ** GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
     GoogleAppsCloudidentityDevicesV1ListClientStatesResponse (..),
@@ -655,6 +703,10 @@ module Gogol.CloudIdentity
     ListMembershipsResponse (..),
     newListMembershipsResponse,
 
+    -- ** ListPoliciesResponse
+    ListPoliciesResponse (..),
+    newListPoliciesResponse,
+
     -- ** ListUserInvitationsResponse
     ListUserInvitationsResponse (..),
     newListUserInvitationsResponse,
@@ -731,6 +783,17 @@ module Gogol.CloudIdentity
     Operation_Response (..),
     newOperation_Response,
 
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Policy_Type
+    Policy_Type (..),
+
+    -- ** PolicyQuery
+    PolicyQuery (..),
+    newPolicyQuery,
+
     -- ** RestrictionEvaluation
     RestrictionEvaluation (..),
     newRestrictionEvaluation,
@@ -781,6 +844,14 @@ module Gogol.CloudIdentity
     -- ** SendUserInvitationRequest
     SendUserInvitationRequest (..),
     newSendUserInvitationRequest,
+
+    -- ** Setting
+    Setting (..),
+    newSetting,
+
+    -- ** Setting_Value
+    Setting_Value (..),
+    newSetting_Value,
 
     -- ** SignInBehavior
     SignInBehavior (..),
@@ -901,4 +972,6 @@ import Gogol.CloudIdentity.InboundSsoAssignments.Delete
 import Gogol.CloudIdentity.InboundSsoAssignments.Get
 import Gogol.CloudIdentity.InboundSsoAssignments.List
 import Gogol.CloudIdentity.InboundSsoAssignments.Patch
+import Gogol.CloudIdentity.Policies.Get
+import Gogol.CloudIdentity.Policies.List
 import Gogol.CloudIdentity.Types

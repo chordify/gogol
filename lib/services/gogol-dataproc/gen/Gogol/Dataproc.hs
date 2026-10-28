@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -78,6 +76,11 @@ module Gogol.Dataproc
     DataprocProjectsLocationsAutoscalingPoliciesUpdate (..),
     newDataprocProjectsLocationsAutoscalingPoliciesUpdate,
 
+    -- ** dataproc.projects.locations.batches.analyze
+    DataprocProjectsLocationsBatchesAnalyzeResource,
+    DataprocProjectsLocationsBatchesAnalyze (..),
+    newDataprocProjectsLocationsBatchesAnalyze,
+
     -- ** dataproc.projects.locations.batches.create
     DataprocProjectsLocationsBatchesCreateResource,
     DataprocProjectsLocationsBatchesCreate (..),
@@ -98,6 +101,106 @@ module Gogol.Dataproc
     DataprocProjectsLocationsBatchesList (..),
     newDataprocProjectsLocationsBatchesList,
 
+    -- ** dataproc.projects.locations.batches.sparkApplications.access
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccess (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccess,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessEnvironmentInfo
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessEnvironmentInfoResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessEnvironmentInfo (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessEnvironmentInfo,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessJob
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessJobResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessJob (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessJob,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessSqlPlan
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessSqlPlanResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessSqlPlan (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessSqlPlan,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessSqlQuery
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessSqlQueryResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessSqlQuery (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessSqlQuery,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessStageAttempt
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessStageAttemptResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessStageAttempt (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessStageAttempt,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.accessStageRddGraph
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessStageRddGraphResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsAccessStageRddGraph (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsAccessStageRddGraph,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.search
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearch (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearch,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchExecutorStageSummary
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchExecutorStageSummaryResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchExecutorStageSummary (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchExecutorStageSummary,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchExecutors
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchExecutorsResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchExecutors (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchExecutors,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchJobs
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchJobsResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchJobs (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchJobs,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchSqlQueries
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchSqlQueriesResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchSqlQueries (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchSqlQueries,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchStageAttemptTasks
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasks (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasks,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchStageAttempts
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttemptsResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttempts (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchStageAttempts,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.searchStages
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStagesResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSearchStages (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSearchStages,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.summarizeExecutors
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeExecutorsResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeExecutors (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSummarizeExecutors,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.summarizeJobs
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeJobsResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeJobs (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSummarizeJobs,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.summarizeStageAttemptTasks
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeStageAttemptTasksResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeStageAttemptTasks (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSummarizeStageAttemptTasks,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.summarizeStages
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeStagesResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsSummarizeStages (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsSummarizeStages,
+
+    -- ** dataproc.projects.locations.batches.sparkApplications.write
+    DataprocProjectsLocationsBatchesSparkApplicationsWriteResource,
+    DataprocProjectsLocationsBatchesSparkApplicationsWrite (..),
+    newDataprocProjectsLocationsBatchesSparkApplicationsWrite,
+
     -- ** dataproc.projects.locations.operations.cancel
     DataprocProjectsLocationsOperationsCancelResource,
     DataprocProjectsLocationsOperationsCancel (..),
@@ -117,6 +220,156 @@ module Gogol.Dataproc
     DataprocProjectsLocationsOperationsListResource,
     DataprocProjectsLocationsOperationsList (..),
     newDataprocProjectsLocationsOperationsList,
+
+    -- ** dataproc.projects.locations.sessionTemplates.create
+    DataprocProjectsLocationsSessionTemplatesCreateResource,
+    DataprocProjectsLocationsSessionTemplatesCreate (..),
+    newDataprocProjectsLocationsSessionTemplatesCreate,
+
+    -- ** dataproc.projects.locations.sessionTemplates.delete
+    DataprocProjectsLocationsSessionTemplatesDeleteResource,
+    DataprocProjectsLocationsSessionTemplatesDelete (..),
+    newDataprocProjectsLocationsSessionTemplatesDelete,
+
+    -- ** dataproc.projects.locations.sessionTemplates.get
+    DataprocProjectsLocationsSessionTemplatesGetResource,
+    DataprocProjectsLocationsSessionTemplatesGet (..),
+    newDataprocProjectsLocationsSessionTemplatesGet,
+
+    -- ** dataproc.projects.locations.sessionTemplates.list
+    DataprocProjectsLocationsSessionTemplatesListResource,
+    DataprocProjectsLocationsSessionTemplatesList (..),
+    newDataprocProjectsLocationsSessionTemplatesList,
+
+    -- ** dataproc.projects.locations.sessionTemplates.patch
+    DataprocProjectsLocationsSessionTemplatesPatchResource,
+    DataprocProjectsLocationsSessionTemplatesPatch (..),
+    newDataprocProjectsLocationsSessionTemplatesPatch,
+
+    -- ** dataproc.projects.locations.sessions.create
+    DataprocProjectsLocationsSessionsCreateResource,
+    DataprocProjectsLocationsSessionsCreate (..),
+    newDataprocProjectsLocationsSessionsCreate,
+
+    -- ** dataproc.projects.locations.sessions.delete
+    DataprocProjectsLocationsSessionsDeleteResource,
+    DataprocProjectsLocationsSessionsDelete (..),
+    newDataprocProjectsLocationsSessionsDelete,
+
+    -- ** dataproc.projects.locations.sessions.get
+    DataprocProjectsLocationsSessionsGetResource,
+    DataprocProjectsLocationsSessionsGet (..),
+    newDataprocProjectsLocationsSessionsGet,
+
+    -- ** dataproc.projects.locations.sessions.list
+    DataprocProjectsLocationsSessionsListResource,
+    DataprocProjectsLocationsSessionsList (..),
+    newDataprocProjectsLocationsSessionsList,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.access
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccess (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccess,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessEnvironmentInfo
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessEnvironmentInfoResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessEnvironmentInfo (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessEnvironmentInfo,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessJob
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessJobResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessJob (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessJob,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessSqlPlan
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessSqlPlanResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessSqlPlan (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessSqlPlan,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessSqlQuery
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessSqlQueryResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessSqlQuery (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessSqlQuery,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessStageAttempt
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessStageAttemptResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessStageAttempt (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessStageAttempt,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.accessStageRddGraph
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessStageRddGraphResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsAccessStageRddGraph (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsAccessStageRddGraph,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.search
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearch (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearch,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchExecutorStageSummary
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchExecutorStageSummaryResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchExecutorStageSummary (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchExecutorStageSummary,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchExecutors
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchExecutorsResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchExecutors (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchExecutors,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchJobs
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchJobsResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchJobs (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchJobs,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchSqlQueries
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchSqlQueriesResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchSqlQueries (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchSqlQueries,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchStageAttemptTasks
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasks (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasks,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchStageAttempts
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttemptsResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttempts (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchStageAttempts,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.searchStages
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStagesResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSearchStages (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSearchStages,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.summarizeExecutors
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeExecutorsResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeExecutors (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSummarizeExecutors,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.summarizeJobs
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeJobsResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeJobs (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSummarizeJobs,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.summarizeStageAttemptTasks
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeStageAttemptTasksResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeStageAttemptTasks (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSummarizeStageAttemptTasks,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.summarizeStages
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeStagesResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsSummarizeStages (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsSummarizeStages,
+
+    -- ** dataproc.projects.locations.sessions.sparkApplications.write
+    DataprocProjectsLocationsSessionsSparkApplicationsWriteResource,
+    DataprocProjectsLocationsSessionsSparkApplicationsWrite (..),
+    newDataprocProjectsLocationsSessionsSparkApplicationsWrite,
+
+    -- ** dataproc.projects.locations.sessions.terminate
+    DataprocProjectsLocationsSessionsTerminateResource,
+    DataprocProjectsLocationsSessionsTerminate (..),
+    newDataprocProjectsLocationsSessionsTerminate,
 
     -- ** dataproc.projects.locations.workflowTemplates.create
     DataprocProjectsLocationsWorkflowTemplatesCreateResource,
@@ -252,6 +505,11 @@ module Gogol.Dataproc
     DataprocProjectsRegionsClustersNodeGroupsGetResource,
     DataprocProjectsRegionsClustersNodeGroupsGet (..),
     newDataprocProjectsRegionsClustersNodeGroupsGet,
+
+    -- ** dataproc.projects.regions.clusters.nodeGroups.repair
+    DataprocProjectsRegionsClustersNodeGroupsRepairResource,
+    DataprocProjectsRegionsClustersNodeGroupsRepair (..),
+    newDataprocProjectsRegionsClustersNodeGroupsRepair,
 
     -- ** dataproc.projects.regions.clusters.nodeGroups.resize
     DataprocProjectsRegionsClustersNodeGroupsResizeResource,
@@ -432,6 +690,123 @@ module Gogol.Dataproc
     AcceleratorConfig (..),
     newAcceleratorConfig,
 
+    -- ** AccessSessionSparkApplicationEnvironmentInfoResponse
+    AccessSessionSparkApplicationEnvironmentInfoResponse (..),
+    newAccessSessionSparkApplicationEnvironmentInfoResponse,
+
+    -- ** AccessSessionSparkApplicationJobResponse
+    AccessSessionSparkApplicationJobResponse (..),
+    newAccessSessionSparkApplicationJobResponse,
+
+    -- ** AccessSessionSparkApplicationResponse
+    AccessSessionSparkApplicationResponse (..),
+    newAccessSessionSparkApplicationResponse,
+
+    -- ** AccessSessionSparkApplicationSqlQueryResponse
+    AccessSessionSparkApplicationSqlQueryResponse (..),
+    newAccessSessionSparkApplicationSqlQueryResponse,
+
+    -- ** AccessSessionSparkApplicationSqlSparkPlanGraphResponse
+    AccessSessionSparkApplicationSqlSparkPlanGraphResponse (..),
+    newAccessSessionSparkApplicationSqlSparkPlanGraphResponse,
+
+    -- ** AccessSessionSparkApplicationStageAttemptResponse
+    AccessSessionSparkApplicationStageAttemptResponse (..),
+    newAccessSessionSparkApplicationStageAttemptResponse,
+
+    -- ** AccessSessionSparkApplicationStageRddOperationGraphResponse
+    AccessSessionSparkApplicationStageRddOperationGraphResponse (..),
+    newAccessSessionSparkApplicationStageRddOperationGraphResponse,
+
+    -- ** AccessSparkApplicationEnvironmentInfoResponse
+    AccessSparkApplicationEnvironmentInfoResponse (..),
+    newAccessSparkApplicationEnvironmentInfoResponse,
+
+    -- ** AccessSparkApplicationJobResponse
+    AccessSparkApplicationJobResponse (..),
+    newAccessSparkApplicationJobResponse,
+
+    -- ** AccessSparkApplicationResponse
+    AccessSparkApplicationResponse (..),
+    newAccessSparkApplicationResponse,
+
+    -- ** AccessSparkApplicationSqlQueryResponse
+    AccessSparkApplicationSqlQueryResponse (..),
+    newAccessSparkApplicationSqlQueryResponse,
+
+    -- ** AccessSparkApplicationSqlSparkPlanGraphResponse
+    AccessSparkApplicationSqlSparkPlanGraphResponse (..),
+    newAccessSparkApplicationSqlSparkPlanGraphResponse,
+
+    -- ** AccessSparkApplicationStageAttemptResponse
+    AccessSparkApplicationStageAttemptResponse (..),
+    newAccessSparkApplicationStageAttemptResponse,
+
+    -- ** AccessSparkApplicationStageRddOperationGraphResponse
+    AccessSparkApplicationStageRddOperationGraphResponse (..),
+    newAccessSparkApplicationStageRddOperationGraphResponse,
+
+    -- ** AccumulableInfo
+    AccumulableInfo (..),
+    newAccumulableInfo,
+
+    -- ** AnalyzeBatchRequest
+    AnalyzeBatchRequest (..),
+    newAnalyzeBatchRequest,
+
+    -- ** AnalyzeOperationMetadata
+    AnalyzeOperationMetadata (..),
+    newAnalyzeOperationMetadata,
+
+    -- ** AnalyzeOperationMetadata_AnalyzedWorkloadType
+    AnalyzeOperationMetadata_AnalyzedWorkloadType (..),
+
+    -- ** AnalyzeOperationMetadata_Labels
+    AnalyzeOperationMetadata_Labels (..),
+    newAnalyzeOperationMetadata_Labels,
+
+    -- ** AppSummary
+    AppSummary (..),
+    newAppSummary,
+
+    -- ** ApplicationAttemptInfo
+    ApplicationAttemptInfo (..),
+    newApplicationAttemptInfo,
+
+    -- ** ApplicationEnvironmentInfo
+    ApplicationEnvironmentInfo (..),
+    newApplicationEnvironmentInfo,
+
+    -- ** ApplicationEnvironmentInfo_ClasspathEntries
+    ApplicationEnvironmentInfo_ClasspathEntries (..),
+    newApplicationEnvironmentInfo_ClasspathEntries,
+
+    -- ** ApplicationEnvironmentInfo_HadoopProperties
+    ApplicationEnvironmentInfo_HadoopProperties (..),
+    newApplicationEnvironmentInfo_HadoopProperties,
+
+    -- ** ApplicationEnvironmentInfo_MetricsProperties
+    ApplicationEnvironmentInfo_MetricsProperties (..),
+    newApplicationEnvironmentInfo_MetricsProperties,
+
+    -- ** ApplicationEnvironmentInfo_SparkProperties
+    ApplicationEnvironmentInfo_SparkProperties (..),
+    newApplicationEnvironmentInfo_SparkProperties,
+
+    -- ** ApplicationEnvironmentInfo_SystemProperties
+    ApplicationEnvironmentInfo_SystemProperties (..),
+    newApplicationEnvironmentInfo_SystemProperties,
+
+    -- ** ApplicationInfo
+    ApplicationInfo (..),
+    newApplicationInfo,
+
+    -- ** ApplicationInfo_ApplicationContextIngestionStatus
+    ApplicationInfo_ApplicationContextIngestionStatus (..),
+
+    -- ** ApplicationInfo_QuantileDataStatus
+    ApplicationInfo_QuantileDataStatus (..),
+
     -- ** AutoscalingConfig
     AutoscalingConfig (..),
     newAutoscalingConfig,
@@ -443,6 +818,13 @@ module Gogol.Dataproc
     -- ** AutoscalingPolicy_Labels
     AutoscalingPolicy_Labels (..),
     newAutoscalingPolicy_Labels,
+
+    -- ** AutotuningConfig
+    AutotuningConfig (..),
+    newAutotuningConfig,
+
+    -- ** AutotuningConfig_ScenariosItem
+    AutotuningConfig_ScenariosItem (..),
 
     -- ** AuxiliaryNodeGroup
     AuxiliaryNodeGroup (..),
@@ -485,6 +867,10 @@ module Gogol.Dataproc
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BuildInfo
+    BuildInfo (..),
+    newBuildInfo,
 
     -- ** CancelJobRequest
     CancelJobRequest (..),
@@ -551,9 +937,20 @@ module Gogol.Dataproc
     -- ** ClusterStatus_Substate
     ClusterStatus_Substate (..),
 
+    -- ** ClusterToRepair
+    ClusterToRepair (..),
+    newClusterToRepair,
+
+    -- ** ClusterToRepair_ClusterRepairAction
+    ClusterToRepair_ClusterRepairAction (..),
+
     -- ** ConfidentialInstanceConfig
     ConfidentialInstanceConfig (..),
     newConfidentialInstanceConfig,
+
+    -- ** ConsolidatedExecutorSummary
+    ConsolidatedExecutorSummary (..),
+    newConsolidatedExecutorSummary,
 
     -- ** DataprocMetricConfig
     DataprocMetricConfig (..),
@@ -562,6 +959,9 @@ module Gogol.Dataproc
     -- ** DiagnoseClusterRequest
     DiagnoseClusterRequest (..),
     newDiagnoseClusterRequest,
+
+    -- ** DiagnoseClusterRequest_TarballAccess
+    DiagnoseClusterRequest_TarballAccess (..),
 
     -- ** DiagnoseClusterResults
     DiagnoseClusterResults (..),
@@ -599,9 +999,61 @@ module Gogol.Dataproc
     ExecutionConfig (..),
     newExecutionConfig,
 
+    -- ** ExecutorMetrics
+    ExecutorMetrics (..),
+    newExecutorMetrics,
+
+    -- ** ExecutorMetrics_Metrics
+    ExecutorMetrics_Metrics (..),
+    newExecutorMetrics_Metrics,
+
+    -- ** ExecutorMetricsDistributions
+    ExecutorMetricsDistributions (..),
+    newExecutorMetricsDistributions,
+
+    -- ** ExecutorPeakMetricsDistributions
+    ExecutorPeakMetricsDistributions (..),
+    newExecutorPeakMetricsDistributions,
+
+    -- ** ExecutorResourceRequest
+    ExecutorResourceRequest (..),
+    newExecutorResourceRequest,
+
+    -- ** ExecutorStageSummary
+    ExecutorStageSummary (..),
+    newExecutorStageSummary,
+
+    -- ** ExecutorSummary
+    ExecutorSummary (..),
+    newExecutorSummary,
+
+    -- ** ExecutorSummary_Attributes
+    ExecutorSummary_Attributes (..),
+    newExecutorSummary_Attributes,
+
+    -- ** ExecutorSummary_ExecutorLogs
+    ExecutorSummary_ExecutorLogs (..),
+    newExecutorSummary_ExecutorLogs,
+
+    -- ** ExecutorSummary_Resources
+    ExecutorSummary_Resources (..),
+    newExecutorSummary_Resources,
+
     -- ** Expr
     Expr (..),
     newExpr,
+
+    -- ** FallbackReason
+    FallbackReason (..),
+    newFallbackReason,
+
+    -- ** FlinkJob
+    FlinkJob (..),
+    newFlinkJob,
+
+    -- ** FlinkJob_Properties
+    FlinkJob_Properties (..),
+    newFlinkJob_Properties,
 
     -- ** GceClusterConfig
     GceClusterConfig (..),
@@ -613,6 +1065,10 @@ module Gogol.Dataproc
 
     -- ** GceClusterConfig_PrivateIpv6GoogleAccess
     GceClusterConfig_PrivateIpv6GoogleAccess (..),
+
+    -- ** GceClusterConfig_ResourceManagerTags
+    GceClusterConfig_ResourceManagerTags (..),
+    newGceClusterConfig_ResourceManagerTags,
 
     -- ** GetIamPolicyRequest
     GetIamPolicyRequest (..),
@@ -649,6 +1105,10 @@ module Gogol.Dataproc
     -- ** GkeNodePoolTarget_RolesItem
     GkeNodePoolTarget_RolesItem (..),
 
+    -- ** GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig
+    GoogleCloudDataprocV1WorkflowTemplateEncryptionConfig (..),
+    newGoogleCloudDataprocV1WorkflowTemplateEncryptionConfig,
+
     -- ** HadoopJob
     HadoopJob (..),
     newHadoopJob,
@@ -681,6 +1141,18 @@ module Gogol.Dataproc
     InjectCredentialsRequest (..),
     newInjectCredentialsRequest,
 
+    -- ** InputMetrics
+    InputMetrics (..),
+    newInputMetrics,
+
+    -- ** InputQuantileMetrics
+    InputQuantileMetrics (..),
+    newInputQuantileMetrics,
+
+    -- ** InstanceFlexibilityPolicy
+    InstanceFlexibilityPolicy (..),
+    newInstanceFlexibilityPolicy,
+
     -- ** InstanceGroupAutoscalingPolicyConfig
     InstanceGroupAutoscalingPolicyConfig (..),
     newInstanceGroupAutoscalingPolicyConfig,
@@ -695,6 +1167,14 @@ module Gogol.Dataproc
     -- ** InstanceReference
     InstanceReference (..),
     newInstanceReference,
+
+    -- ** InstanceSelection
+    InstanceSelection (..),
+    newInstanceSelection,
+
+    -- ** InstanceSelectionResult
+    InstanceSelectionResult (..),
+    newInstanceSelectionResult,
 
     -- ** InstantiateWorkflowTemplateRequest
     InstantiateWorkflowTemplateRequest (..),
@@ -715,6 +1195,17 @@ module Gogol.Dataproc
     -- ** Job_Labels
     Job_Labels (..),
     newJob_Labels,
+
+    -- ** JobData
+    JobData (..),
+    newJobData,
+
+    -- ** JobData_KillTasksSummary
+    JobData_KillTasksSummary (..),
+    newJobData_KillTasksSummary,
+
+    -- ** JobData_Status
+    JobData_Status (..),
 
     -- ** JobMetadata
     JobMetadata (..),
@@ -745,6 +1236,17 @@ module Gogol.Dataproc
 
     -- ** JobStatus_Substate
     JobStatus_Substate (..),
+
+    -- ** JobsSummary
+    JobsSummary (..),
+    newJobsSummary,
+
+    -- ** JupyterConfig
+    JupyterConfig (..),
+    newJupyterConfig,
+
+    -- ** JupyterConfig_Kernel
+    JupyterConfig_Kernel (..),
 
     -- ** KerberosConfig
     KerberosConfig (..),
@@ -790,6 +1292,14 @@ module Gogol.Dataproc
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- ** ListSessionTemplatesResponse
+    ListSessionTemplatesResponse (..),
+    newListSessionTemplatesResponse,
+
+    -- ** ListSessionsResponse
+    ListSessionsResponse (..),
+    newListSessionsResponse,
+
     -- ** ListWorkflowTemplatesResponse
     ListWorkflowTemplatesResponse (..),
     newListWorkflowTemplatesResponse,
@@ -817,6 +1327,10 @@ module Gogol.Dataproc
     ManagedGroupConfig (..),
     newManagedGroupConfig,
 
+    -- ** MemoryMetrics
+    MemoryMetrics (..),
+    newMemoryMetrics,
+
     -- ** MetastoreConfig
     MetastoreConfig (..),
     newMetastoreConfig,
@@ -831,6 +1345,14 @@ module Gogol.Dataproc
     -- ** NamespacedGkeDeploymentTarget
     NamespacedGkeDeploymentTarget (..),
     newNamespacedGkeDeploymentTarget,
+
+    -- ** NativeBuildInfoUiData
+    NativeBuildInfoUiData (..),
+    newNativeBuildInfoUiData,
+
+    -- ** NativeSqlExecutionUiData
+    NativeSqlExecutionUiData (..),
+    newNativeSqlExecutionUiData,
 
     -- ** NodeGroup
     NodeGroup (..),
@@ -889,6 +1411,14 @@ module Gogol.Dataproc
     OrderedJob_Labels (..),
     newOrderedJob_Labels,
 
+    -- ** OutputMetrics
+    OutputMetrics (..),
+    newOutputMetrics,
+
+    -- ** OutputQuantileMetrics
+    OutputQuantileMetrics (..),
+    newOutputQuantileMetrics,
+
     -- ** ParameterValidation
     ParameterValidation (..),
     newParameterValidation,
@@ -913,6 +1443,10 @@ module Gogol.Dataproc
     Policy (..),
     newPolicy,
 
+    -- ** PoolData
+    PoolData (..),
+    newPoolData,
+
     -- ** PrestoJob
     PrestoJob (..),
     newPrestoJob,
@@ -920,6 +1454,22 @@ module Gogol.Dataproc
     -- ** PrestoJob_Properties
     PrestoJob_Properties (..),
     newPrestoJob_Properties,
+
+    -- ** ProcessSummary
+    ProcessSummary (..),
+    newProcessSummary,
+
+    -- ** ProcessSummary_ProcessLogs
+    ProcessSummary_ProcessLogs (..),
+    newProcessSummary_ProcessLogs,
+
+    -- ** ProvisioningModelMix
+    ProvisioningModelMix (..),
+    newProvisioningModelMix,
+
+    -- ** PyPiRepositoryConfig
+    PyPiRepositoryConfig (..),
+    newPyPiRepositoryConfig,
 
     -- ** PySparkBatch
     PySparkBatch (..),
@@ -933,9 +1483,44 @@ module Gogol.Dataproc
     PySparkJob_Properties (..),
     newPySparkJob_Properties,
 
+    -- ** Quantiles
+    Quantiles (..),
+    newQuantiles,
+
     -- ** QueryList
     QueryList (..),
     newQueryList,
+
+    -- ** RddDataDistribution
+    RddDataDistribution (..),
+    newRddDataDistribution,
+
+    -- ** RddOperationCluster
+    RddOperationCluster (..),
+    newRddOperationCluster,
+
+    -- ** RddOperationEdge
+    RddOperationEdge (..),
+    newRddOperationEdge,
+
+    -- ** RddOperationGraph
+    RddOperationGraph (..),
+    newRddOperationGraph,
+
+    -- ** RddOperationNode
+    RddOperationNode (..),
+    newRddOperationNode,
+
+    -- ** RddOperationNode_OutputDeterministicLevel
+    RddOperationNode_OutputDeterministicLevel (..),
+
+    -- ** RddPartitionInfo
+    RddPartitionInfo (..),
+    newRddPartitionInfo,
+
+    -- ** RddStorageInfo
+    RddStorageInfo (..),
+    newRddStorageInfo,
 
     -- ** RegexValidation
     RegexValidation (..),
@@ -944,6 +1529,17 @@ module Gogol.Dataproc
     -- ** RepairClusterRequest
     RepairClusterRequest (..),
     newRepairClusterRequest,
+
+    -- ** RepairNodeGroupRequest
+    RepairNodeGroupRequest (..),
+    newRepairNodeGroupRequest,
+
+    -- ** RepairNodeGroupRequest_RepairAction
+    RepairNodeGroupRequest_RepairAction (..),
+
+    -- ** RepositoryConfig
+    RepositoryConfig (..),
+    newRepositoryConfig,
 
     -- ** ReservationAffinity
     ReservationAffinity (..),
@@ -955,6 +1551,22 @@ module Gogol.Dataproc
     -- ** ResizeNodeGroupRequest
     ResizeNodeGroupRequest (..),
     newResizeNodeGroupRequest,
+
+    -- ** ResourceInformation
+    ResourceInformation (..),
+    newResourceInformation,
+
+    -- ** ResourceProfileInfo
+    ResourceProfileInfo (..),
+    newResourceProfileInfo,
+
+    -- ** ResourceProfileInfo_ExecutorResources
+    ResourceProfileInfo_ExecutorResources (..),
+    newResourceProfileInfo_ExecutorResources,
+
+    -- ** ResourceProfileInfo_TaskResources
+    ResourceProfileInfo_TaskResources (..),
+    newResourceProfileInfo_TaskResources,
 
     -- ** RuntimeConfig
     RuntimeConfig (..),
@@ -972,9 +1584,84 @@ module Gogol.Dataproc
     RuntimeInfo_Endpoints (..),
     newRuntimeInfo_Endpoints,
 
+    -- ** SearchSessionSparkApplicationExecutorStageSummaryResponse
+    SearchSessionSparkApplicationExecutorStageSummaryResponse (..),
+    newSearchSessionSparkApplicationExecutorStageSummaryResponse,
+
+    -- ** SearchSessionSparkApplicationExecutorsResponse
+    SearchSessionSparkApplicationExecutorsResponse (..),
+    newSearchSessionSparkApplicationExecutorsResponse,
+
+    -- ** SearchSessionSparkApplicationJobsResponse
+    SearchSessionSparkApplicationJobsResponse (..),
+    newSearchSessionSparkApplicationJobsResponse,
+
+    -- ** SearchSessionSparkApplicationSqlQueriesResponse
+    SearchSessionSparkApplicationSqlQueriesResponse (..),
+    newSearchSessionSparkApplicationSqlQueriesResponse,
+
+    -- ** SearchSessionSparkApplicationStageAttemptTasksResponse
+    SearchSessionSparkApplicationStageAttemptTasksResponse (..),
+    newSearchSessionSparkApplicationStageAttemptTasksResponse,
+
+    -- ** SearchSessionSparkApplicationStageAttemptsResponse
+    SearchSessionSparkApplicationStageAttemptsResponse (..),
+    newSearchSessionSparkApplicationStageAttemptsResponse,
+
+    -- ** SearchSessionSparkApplicationStagesResponse
+    SearchSessionSparkApplicationStagesResponse (..),
+    newSearchSessionSparkApplicationStagesResponse,
+
+    -- ** SearchSessionSparkApplicationsResponse
+    SearchSessionSparkApplicationsResponse (..),
+    newSearchSessionSparkApplicationsResponse,
+
+    -- ** SearchSparkApplicationExecutorStageSummaryResponse
+    SearchSparkApplicationExecutorStageSummaryResponse (..),
+    newSearchSparkApplicationExecutorStageSummaryResponse,
+
+    -- ** SearchSparkApplicationExecutorsResponse
+    SearchSparkApplicationExecutorsResponse (..),
+    newSearchSparkApplicationExecutorsResponse,
+
+    -- ** SearchSparkApplicationJobsResponse
+    SearchSparkApplicationJobsResponse (..),
+    newSearchSparkApplicationJobsResponse,
+
+    -- ** SearchSparkApplicationSqlQueriesResponse
+    SearchSparkApplicationSqlQueriesResponse (..),
+    newSearchSparkApplicationSqlQueriesResponse,
+
+    -- ** SearchSparkApplicationStageAttemptTasksResponse
+    SearchSparkApplicationStageAttemptTasksResponse (..),
+    newSearchSparkApplicationStageAttemptTasksResponse,
+
+    -- ** SearchSparkApplicationStageAttemptsResponse
+    SearchSparkApplicationStageAttemptsResponse (..),
+    newSearchSparkApplicationStageAttemptsResponse,
+
+    -- ** SearchSparkApplicationStagesResponse
+    SearchSparkApplicationStagesResponse (..),
+    newSearchSparkApplicationStagesResponse,
+
+    -- ** SearchSparkApplicationsResponse
+    SearchSparkApplicationsResponse (..),
+    newSearchSparkApplicationsResponse,
+
     -- ** SecurityConfig
     SecurityConfig (..),
     newSecurityConfig,
+
+    -- ** Session
+    Session (..),
+    newSession,
+
+    -- ** Session_Labels
+    Session_Labels (..),
+    newSession_Labels,
+
+    -- ** Session_State
+    Session_State (..),
 
     -- ** SessionOperationMetadata
     SessionOperationMetadata (..),
@@ -987,6 +1674,21 @@ module Gogol.Dataproc
     -- ** SessionOperationMetadata_OperationType
     SessionOperationMetadata_OperationType (..),
 
+    -- ** SessionStateHistory
+    SessionStateHistory (..),
+    newSessionStateHistory,
+
+    -- ** SessionStateHistory_State
+    SessionStateHistory_State (..),
+
+    -- ** SessionTemplate
+    SessionTemplate (..),
+    newSessionTemplate,
+
+    -- ** SessionTemplate_Labels
+    SessionTemplate_Labels (..),
+    newSessionTemplate_Labels,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -994,6 +1696,38 @@ module Gogol.Dataproc
     -- ** ShieldedInstanceConfig
     ShieldedInstanceConfig (..),
     newShieldedInstanceConfig,
+
+    -- ** ShufflePushReadMetrics
+    ShufflePushReadMetrics (..),
+    newShufflePushReadMetrics,
+
+    -- ** ShufflePushReadQuantileMetrics
+    ShufflePushReadQuantileMetrics (..),
+    newShufflePushReadQuantileMetrics,
+
+    -- ** ShuffleReadMetrics
+    ShuffleReadMetrics (..),
+    newShuffleReadMetrics,
+
+    -- ** ShuffleReadQuantileMetrics
+    ShuffleReadQuantileMetrics (..),
+    newShuffleReadQuantileMetrics,
+
+    -- ** ShuffleWriteMetrics
+    ShuffleWriteMetrics (..),
+    newShuffleWriteMetrics,
+
+    -- ** ShuffleWriteQuantileMetrics
+    ShuffleWriteQuantileMetrics (..),
+    newShuffleWriteQuantileMetrics,
+
+    -- ** SinkProgress
+    SinkProgress (..),
+    newSinkProgress,
+
+    -- ** SinkProgress_Metrics
+    SinkProgress_Metrics (..),
+    newSinkProgress_Metrics,
 
     -- ** SoftwareConfig
     SoftwareConfig (..),
@@ -1006,9 +1740,25 @@ module Gogol.Dataproc
     SoftwareConfig_Properties (..),
     newSoftwareConfig_Properties,
 
+    -- ** SourceProgress
+    SourceProgress (..),
+    newSourceProgress,
+
+    -- ** SourceProgress_Metrics
+    SourceProgress_Metrics (..),
+    newSourceProgress_Metrics,
+
+    -- ** SparkApplication
+    SparkApplication (..),
+    newSparkApplication,
+
     -- ** SparkBatch
     SparkBatch (..),
     newSparkBatch,
+
+    -- ** SparkConnectConfig
+    SparkConnectConfig (..),
+    newSparkConnectConfig,
 
     -- ** SparkHistoryServerConfig
     SparkHistoryServerConfig (..),
@@ -1022,6 +1772,26 @@ module Gogol.Dataproc
     SparkJob_Properties (..),
     newSparkJob_Properties,
 
+    -- ** SparkPlanGraph
+    SparkPlanGraph (..),
+    newSparkPlanGraph,
+
+    -- ** SparkPlanGraphCluster
+    SparkPlanGraphCluster (..),
+    newSparkPlanGraphCluster,
+
+    -- ** SparkPlanGraphEdge
+    SparkPlanGraphEdge (..),
+    newSparkPlanGraphEdge,
+
+    -- ** SparkPlanGraphNode
+    SparkPlanGraphNode (..),
+    newSparkPlanGraphNode,
+
+    -- ** SparkPlanGraphNodeWrapper
+    SparkPlanGraphNodeWrapper (..),
+    newSparkPlanGraphNodeWrapper,
+
     -- ** SparkRBatch
     SparkRBatch (..),
     newSparkRBatch,
@@ -1033,6 +1803,10 @@ module Gogol.Dataproc
     -- ** SparkRJob_Properties
     SparkRJob_Properties (..),
     newSparkRJob_Properties,
+
+    -- ** SparkRuntimeInfo
+    SparkRuntimeInfo (..),
+    newSparkRuntimeInfo,
 
     -- ** SparkSqlBatch
     SparkSqlBatch (..),
@@ -1058,9 +1832,99 @@ module Gogol.Dataproc
     SparkStandaloneAutoscalingConfig (..),
     newSparkStandaloneAutoscalingConfig,
 
+    -- ** SparkWrapperObject
+    SparkWrapperObject (..),
+    newSparkWrapperObject,
+
+    -- ** SpeculationStageSummary
+    SpeculationStageSummary (..),
+    newSpeculationStageSummary,
+
+    -- ** SqlExecutionUiData
+    SqlExecutionUiData (..),
+    newSqlExecutionUiData,
+
+    -- ** SqlExecutionUiData_Jobs
+    SqlExecutionUiData_Jobs (..),
+    newSqlExecutionUiData_Jobs,
+
+    -- ** SqlExecutionUiData_JobsAdditional
+    SqlExecutionUiData_JobsAdditional (..),
+
+    -- ** SqlExecutionUiData_MetricValues
+    SqlExecutionUiData_MetricValues (..),
+    newSqlExecutionUiData_MetricValues,
+
+    -- ** SqlExecutionUiData_ModifiedConfigs
+    SqlExecutionUiData_ModifiedConfigs (..),
+    newSqlExecutionUiData_ModifiedConfigs,
+
+    -- ** SqlPlanMetric
+    SqlPlanMetric (..),
+    newSqlPlanMetric,
+
+    -- ** StageAttemptTasksSummary
+    StageAttemptTasksSummary (..),
+    newStageAttemptTasksSummary,
+
+    -- ** StageData
+    StageData (..),
+    newStageData,
+
+    -- ** StageData_ExecutorSummary
+    StageData_ExecutorSummary (..),
+    newStageData_ExecutorSummary,
+
+    -- ** StageData_KilledTasksSummary
+    StageData_KilledTasksSummary (..),
+    newStageData_KilledTasksSummary,
+
+    -- ** StageData_Locality
+    StageData_Locality (..),
+    newStageData_Locality,
+
+    -- ** StageData_Status
+    StageData_Status (..),
+
+    -- ** StageData_Tasks
+    StageData_Tasks (..),
+    newStageData_Tasks,
+
+    -- ** StageInputMetrics
+    StageInputMetrics (..),
+    newStageInputMetrics,
+
+    -- ** StageMetrics
+    StageMetrics (..),
+    newStageMetrics,
+
+    -- ** StageOutputMetrics
+    StageOutputMetrics (..),
+    newStageOutputMetrics,
+
+    -- ** StageShufflePushReadMetrics
+    StageShufflePushReadMetrics (..),
+    newStageShufflePushReadMetrics,
+
+    -- ** StageShuffleReadMetrics
+    StageShuffleReadMetrics (..),
+    newStageShuffleReadMetrics,
+
+    -- ** StageShuffleWriteMetrics
+    StageShuffleWriteMetrics (..),
+    newStageShuffleWriteMetrics,
+
+    -- ** StagesSummary
+    StagesSummary (..),
+    newStagesSummary,
+
     -- ** StartClusterRequest
     StartClusterRequest (..),
     newStartClusterRequest,
+
+    -- ** StartupConfig
+    StartupConfig (..),
+    newStartupConfig,
 
     -- ** StateHistory
     StateHistory (..),
@@ -1068,6 +1932,14 @@ module Gogol.Dataproc
 
     -- ** StateHistory_State
     StateHistory_State (..),
+
+    -- ** StateOperatorProgress
+    StateOperatorProgress (..),
+    newStateOperatorProgress,
+
+    -- ** StateOperatorProgress_CustomMetrics
+    StateOperatorProgress_CustomMetrics (..),
+    newStateOperatorProgress_CustomMetrics,
 
     -- ** Status
     Status (..),
@@ -1081,13 +1953,93 @@ module Gogol.Dataproc
     StopClusterRequest (..),
     newStopClusterRequest,
 
+    -- ** StreamBlockData
+    StreamBlockData (..),
+    newStreamBlockData,
+
+    -- ** StreamingQueryData
+    StreamingQueryData (..),
+    newStreamingQueryData,
+
+    -- ** StreamingQueryProgress
+    StreamingQueryProgress (..),
+    newStreamingQueryProgress,
+
+    -- ** StreamingQueryProgress_DurationMillis
+    StreamingQueryProgress_DurationMillis (..),
+    newStreamingQueryProgress_DurationMillis,
+
+    -- ** StreamingQueryProgress_EventTime
+    StreamingQueryProgress_EventTime (..),
+    newStreamingQueryProgress_EventTime,
+
+    -- ** StreamingQueryProgress_ObservedMetrics
+    StreamingQueryProgress_ObservedMetrics (..),
+    newStreamingQueryProgress_ObservedMetrics,
+
     -- ** SubmitJobRequest
     SubmitJobRequest (..),
     newSubmitJobRequest,
 
+    -- ** SummarizeSessionSparkApplicationExecutorsResponse
+    SummarizeSessionSparkApplicationExecutorsResponse (..),
+    newSummarizeSessionSparkApplicationExecutorsResponse,
+
+    -- ** SummarizeSessionSparkApplicationJobsResponse
+    SummarizeSessionSparkApplicationJobsResponse (..),
+    newSummarizeSessionSparkApplicationJobsResponse,
+
+    -- ** SummarizeSessionSparkApplicationStageAttemptTasksResponse
+    SummarizeSessionSparkApplicationStageAttemptTasksResponse (..),
+    newSummarizeSessionSparkApplicationStageAttemptTasksResponse,
+
+    -- ** SummarizeSessionSparkApplicationStagesResponse
+    SummarizeSessionSparkApplicationStagesResponse (..),
+    newSummarizeSessionSparkApplicationStagesResponse,
+
+    -- ** SummarizeSparkApplicationExecutorsResponse
+    SummarizeSparkApplicationExecutorsResponse (..),
+    newSummarizeSparkApplicationExecutorsResponse,
+
+    -- ** SummarizeSparkApplicationJobsResponse
+    SummarizeSparkApplicationJobsResponse (..),
+    newSummarizeSparkApplicationJobsResponse,
+
+    -- ** SummarizeSparkApplicationStageAttemptTasksResponse
+    SummarizeSparkApplicationStageAttemptTasksResponse (..),
+    newSummarizeSparkApplicationStageAttemptTasksResponse,
+
+    -- ** SummarizeSparkApplicationStagesResponse
+    SummarizeSparkApplicationStagesResponse (..),
+    newSummarizeSparkApplicationStagesResponse,
+
+    -- ** TaskData
+    TaskData (..),
+    newTaskData,
+
+    -- ** TaskData_ExecutorLogs
+    TaskData_ExecutorLogs (..),
+    newTaskData_ExecutorLogs,
+
+    -- ** TaskMetrics
+    TaskMetrics (..),
+    newTaskMetrics,
+
+    -- ** TaskQuantileMetrics
+    TaskQuantileMetrics (..),
+    newTaskQuantileMetrics,
+
+    -- ** TaskResourceRequest
+    TaskResourceRequest (..),
+    newTaskResourceRequest,
+
     -- ** TemplateParameter
     TemplateParameter (..),
     newTemplateParameter,
+
+    -- ** TerminateSessionRequest
+    TerminateSessionRequest (..),
+    newTerminateSessionRequest,
 
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
@@ -1155,12 +2107,58 @@ module Gogol.Dataproc
     WorkflowTemplatePlacement (..),
     newWorkflowTemplatePlacement,
 
+    -- ** WriteSessionSparkApplicationContextRequest
+    WriteSessionSparkApplicationContextRequest (..),
+    newWriteSessionSparkApplicationContextRequest,
+
+    -- ** WriteSessionSparkApplicationContextResponse
+    WriteSessionSparkApplicationContextResponse (..),
+    newWriteSessionSparkApplicationContextResponse,
+
+    -- ** WriteSparkApplicationContextRequest
+    WriteSparkApplicationContextRequest (..),
+    newWriteSparkApplicationContextRequest,
+
+    -- ** WriteSparkApplicationContextResponse
+    WriteSparkApplicationContextResponse (..),
+    newWriteSparkApplicationContextResponse,
+
     -- ** YarnApplication
     YarnApplication (..),
     newYarnApplication,
 
     -- ** YarnApplication_State
     YarnApplication_State (..),
+
+    -- ** ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus
+    ProjectsLocationsBatchesSparkApplicationsSearchApplicationStatus (..),
+
+    -- ** ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus
+    ProjectsLocationsBatchesSparkApplicationsSearchExecutorsExecutorStatus (..),
+
+    -- ** ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus
+    ProjectsLocationsBatchesSparkApplicationsSearchJobsJobStatus (..),
+
+    -- ** ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus
+    ProjectsLocationsBatchesSparkApplicationsSearchStageAttemptTasksTaskStatus (..),
+
+    -- ** ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus
+    ProjectsLocationsBatchesSparkApplicationsSearchStagesStageStatus (..),
+
+    -- ** ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus
+    ProjectsLocationsSessionsSparkApplicationsSearchApplicationStatus (..),
+
+    -- ** ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus
+    ProjectsLocationsSessionsSparkApplicationsSearchExecutorsExecutorStatus (..),
+
+    -- ** ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus
+    ProjectsLocationsSessionsSparkApplicationsSearchJobsJobStatus (..),
+
+    -- ** ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus
+    ProjectsLocationsSessionsSparkApplicationsSearchStageAttemptTasksTaskStatus (..),
+
+    -- ** ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus
+    ProjectsLocationsSessionsSparkApplicationsSearchStagesStageStatus (..),
 
     -- ** ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers
     ProjectsRegionsClustersCreateActionOnFailedPrimaryWorkers (..),
@@ -1178,14 +2176,65 @@ import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.List
 import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.SetIamPolicy
 import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
 import Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+import Gogol.Dataproc.Projects.Locations.Batches.Analyze
 import Gogol.Dataproc.Projects.Locations.Batches.Create
 import Gogol.Dataproc.Projects.Locations.Batches.Delete
 import Gogol.Dataproc.Projects.Locations.Batches.Get
 import Gogol.Dataproc.Projects.Locations.Batches.List
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Access
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessEnvironmentInfo
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessJob
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessSqlPlan
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessSqlQuery
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessStageAttempt
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessStageRddGraph
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Search
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchExecutorStageSummary
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchExecutors
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchJobs
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchSqlQueries
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStageAttemptTasks
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStageAttempts
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStages
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeExecutors
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeJobs
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeStageAttemptTasks
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeStages
+import Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Write
 import Gogol.Dataproc.Projects.Locations.Operations.Cancel
 import Gogol.Dataproc.Projects.Locations.Operations.Delete
 import Gogol.Dataproc.Projects.Locations.Operations.Get
 import Gogol.Dataproc.Projects.Locations.Operations.List
+import Gogol.Dataproc.Projects.Locations.SessionTemplates.Create
+import Gogol.Dataproc.Projects.Locations.SessionTemplates.Delete
+import Gogol.Dataproc.Projects.Locations.SessionTemplates.Get
+import Gogol.Dataproc.Projects.Locations.SessionTemplates.List
+import Gogol.Dataproc.Projects.Locations.SessionTemplates.Patch
+import Gogol.Dataproc.Projects.Locations.Sessions.Create
+import Gogol.Dataproc.Projects.Locations.Sessions.Delete
+import Gogol.Dataproc.Projects.Locations.Sessions.Get
+import Gogol.Dataproc.Projects.Locations.Sessions.List
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Access
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessEnvironmentInfo
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessJob
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessSqlPlan
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessSqlQuery
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessStageAttempt
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessStageRddGraph
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Search
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchExecutorStageSummary
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchExecutors
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchJobs
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchSqlQueries
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStageAttemptTasks
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStageAttempts
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStages
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeExecutors
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeJobs
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeStageAttemptTasks
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeStages
+import Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Write
+import Gogol.Dataproc.Projects.Locations.Sessions.Terminate
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
 import Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
@@ -1213,6 +2262,7 @@ import Gogol.Dataproc.Projects.Regions.Clusters.InjectCredentials
 import Gogol.Dataproc.Projects.Regions.Clusters.List
 import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
 import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Get
+import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Repair
 import Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Resize
 import Gogol.Dataproc.Projects.Regions.Clusters.Patch
 import Gogol.Dataproc.Projects.Regions.Clusters.Repair

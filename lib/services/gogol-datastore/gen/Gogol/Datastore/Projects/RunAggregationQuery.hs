@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Projects.RunAggregationQuery
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,17 +38,14 @@ module Gogol.Datastore.Projects.RunAggregationQuery
 where
 
 import Gogol.Datastore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datastore.projects.runAggregationQuery@ method which the
 -- 'DatastoreProjectsRunAggregationQuery' request conforms to.
 type DatastoreProjectsRunAggregationQueryResource =
   "v1"
     Core.:> "projects"
-    Core.:> Core.CaptureMode
-              "projectId"
-              "runAggregationQuery"
-              Core.Text
+    Core.:> Core.CaptureMode "projectId" "runAggregationQuery" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -99,33 +94,28 @@ newDatastoreProjectsRunAggregationQuery payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DatastoreProjectsRunAggregationQuery
-  where
+instance Core.GoogleRequest DatastoreProjectsRunAggregationQuery where
   type
     Rs DatastoreProjectsRunAggregationQuery =
       RunAggregationQueryResponse
   type
     Scopes DatastoreProjectsRunAggregationQuery =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    DatastoreProjectsRunAggregationQuery {..} =
-      go
-        projectId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        datastoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DatastoreProjectsRunAggregationQueryResource
-            )
-            Core.mempty
+  requestClient DatastoreProjectsRunAggregationQuery {..} =
+    go
+      projectId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      datastoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DatastoreProjectsRunAggregationQueryResource
+          )
+          Core.mempty

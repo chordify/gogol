@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InstanceGroupManagers.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InstanceGroupManagers.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instanceGroupManagers.patch@ method which the
 -- 'ComputeInstanceGroupManagersPatch' request conforms to.
@@ -60,9 +58,7 @@ type ComputeInstanceGroupManagersPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstanceGroupManager
+    Core.:> Core.ReqBody '[Core.JSON] InstanceGroupManager
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. If you update your group to specify a new template or instance configuration, it\'s possible that your intended specification for each VM in the group is different from the current state of that VM. To learn how to apply an updated configuration to the VMs in a MIG, see Updating instances in a MIG.
@@ -103,24 +99,25 @@ newComputeInstanceGroupManagersPatch ::
   -- |  The name of the zone where you want to create the managed instance group. See 'zone'.
   Core.Text ->
   ComputeInstanceGroupManagersPatch
-newComputeInstanceGroupManagersPatch instanceGroupManager payload project zone =
-  ComputeInstanceGroupManagersPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInstanceGroupManagersPatch
+  instanceGroupManager
+  payload
+  project
+  zone =
     ComputeInstanceGroupManagersPatch
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager = instanceGroupManager,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
+
+instance Core.GoogleRequest ComputeInstanceGroupManagersPatch where
   type Rs ComputeInstanceGroupManagersPatch = Operation
   type
     Scopes ComputeInstanceGroupManagersPatch =

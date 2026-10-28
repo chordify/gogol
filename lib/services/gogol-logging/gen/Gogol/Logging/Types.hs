@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Logging.Types
@@ -48,6 +46,10 @@ module Gogol.Logging.Types
     -- ** BigQueryOptions
     BigQueryOptions (..),
     newBigQueryOptions,
+
+    -- ** Binding
+    Binding (..),
+    newBinding,
 
     -- ** BucketMetadata
     BucketMetadata (..),
@@ -91,6 +93,13 @@ module Gogol.Logging.Types
     CreateLinkRequest (..),
     newCreateLinkRequest,
 
+    -- ** DefaultSinkConfig
+    DefaultSinkConfig (..),
+    newDefaultSinkConfig,
+
+    -- ** DefaultSinkConfig_Mode
+    DefaultSinkConfig_Mode (..),
+
     -- ** DeleteLinkRequest
     DeleteLinkRequest (..),
     newDeleteLinkRequest,
@@ -106,6 +115,18 @@ module Gogol.Logging.Types
     -- ** Exponential
     Exponential (..),
     newExponential,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** HttpRequest
     HttpRequest (..),
@@ -171,6 +192,10 @@ module Gogol.Logging.Types
     ListLogMetricsResponse (..),
     newListLogMetricsResponse,
 
+    -- ** ListLogScopesResponse
+    ListLogScopesResponse (..),
+    newListLogScopesResponse,
+
     -- ** ListLogsResponse
     ListLogsResponse (..),
     newListLogsResponse,
@@ -182,6 +207,14 @@ module Gogol.Logging.Types
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** ListRecentQueriesResponse
+    ListRecentQueriesResponse (..),
+    newListRecentQueriesResponse,
+
+    -- ** ListSavedQueriesResponse
+    ListSavedQueriesResponse (..),
+    newListSavedQueriesResponse,
 
     -- ** ListSinksResponse
     ListSinksResponse (..),
@@ -241,6 +274,10 @@ module Gogol.Logging.Types
     LogEntrySourceLocation (..),
     newLogEntrySourceLocation,
 
+    -- ** LogErrorGroup
+    LogErrorGroup (..),
+    newLogErrorGroup,
+
     -- ** LogExclusion
     LogExclusion (..),
     newLogExclusion,
@@ -263,6 +300,10 @@ module Gogol.Logging.Types
     -- ** LogMetric_Version
     LogMetric_Version (..),
 
+    -- ** LogScope
+    LogScope (..),
+    newLogScope,
+
     -- ** LogSink
     LogSink (..),
     newLogSink,
@@ -277,6 +318,10 @@ module Gogol.Logging.Types
     -- ** LogView
     LogView (..),
     newLogView,
+
+    -- ** LoggingQuery
+    LoggingQuery (..),
+    newLoggingQuery,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -297,6 +342,9 @@ module Gogol.Logging.Types
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MonitoredResource
     MonitoredResource (..),
@@ -337,9 +385,32 @@ module Gogol.Logging.Types
     Operation_Response (..),
     newOperation_Response,
 
+    -- ** OpsAnalyticsQuery
+    OpsAnalyticsQuery (..),
+    newOpsAnalyticsQuery,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** RecentQuery
+    RecentQuery (..),
+    newRecentQuery,
+
     -- ** RequestLog
     RequestLog (..),
     newRequestLog,
+
+    -- ** SavedQuery
+    SavedQuery (..),
+    newSavedQuery,
+
+    -- ** SavedQuery_Visibility
+    SavedQuery_Visibility (..),
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Settings
     Settings (..),
@@ -361,6 +432,10 @@ module Gogol.Logging.Types
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SummaryField
+    SummaryField (..),
+    newSummaryField,
+
     -- ** SuppressionInfo
     SuppressionInfo (..),
     newSuppressionInfo,
@@ -375,6 +450,14 @@ module Gogol.Logging.Types
     -- ** TailLogEntriesResponse
     TailLogEntriesResponse (..),
     newTailLogEntriesResponse,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** UndeleteBucketRequest
     UndeleteBucketRequest (..),
@@ -400,7 +483,7 @@ where
 
 import Gogol.Logging.Internal.Product
 import Gogol.Logging.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Cloud Logging API. This contains the host and root path used as a starting point for constructing service requests.
 loggingService :: Core.ServiceConfig
@@ -410,16 +493,20 @@ loggingService =
     "logging.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Administrate log data for your projects
-type Logging'Admin = "https://www.googleapis.com/auth/logging.admin"
+type Logging'Admin =
+  "https://www.googleapis.com/auth/logging.admin"
 
 -- | View log data for your projects
 type Logging'Read = "https://www.googleapis.com/auth/logging.read"
 
 -- | Submit log data for your projects
-type Logging'Write = "https://www.googleapis.com/auth/logging.write"
+type Logging'Write =
+  "https://www.googleapis.com/auth/logging.write"

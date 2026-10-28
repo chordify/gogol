@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.InspectTemplates.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- Updates the InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.inspectTemplates.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.inspectTemplates.patch@.
 module Gogol.DLP.Projects.InspectTemplates.Patch
   ( -- * Resource
     DLPProjectsInspectTemplatesPatchResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.InspectTemplates.Patch
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.inspectTemplates.patch@ method which the
 -- 'DLPProjectsInspectTemplatesPatch' request conforms to.
@@ -56,11 +54,9 @@ type DLPProjectsInspectTemplatesPatchResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2UpdateInspectTemplateRequest
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GooglePrivacyDlpV2InspectTemplate
+    Core.:> Core.Patch '[Core.JSON] GooglePrivacyDlpV2InspectTemplate
 
--- | Updates the InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- | Updates the InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'newDLPProjectsInspectTemplatesPatch' smart constructor.
 data DLPProjectsInspectTemplatesPatch = DLPProjectsInspectTemplatesPatch
@@ -99,10 +95,7 @@ newDLPProjectsInspectTemplatesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsInspectTemplatesPatch
-  where
+instance Core.GoogleRequest DLPProjectsInspectTemplatesPatch where
   type
     Rs DLPProjectsInspectTemplatesPatch =
       GooglePrivacyDlpV2InspectTemplate
@@ -123,7 +116,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsInspectTemplatesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsInspectTemplatesPatchResource)
           Core.mempty

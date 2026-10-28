@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Reports.CompatibleFields.Query
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Reports.CompatibleFields.Query
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.reports.compatibleFields.query@ method which the
 -- 'DFAReportingReportsCompatibleFieldsQuery' request conforms to.
@@ -104,29 +102,25 @@ instance
   Core.GoogleRequest
     DFAReportingReportsCompatibleFieldsQuery
   where
-  type
-    Rs DFAReportingReportsCompatibleFieldsQuery =
-      CompatibleFields
+  type Rs DFAReportingReportsCompatibleFieldsQuery = CompatibleFields
   type
     Scopes DFAReportingReportsCompatibleFieldsQuery =
       '[Dfareporting'FullControl]
-  requestClient
-    DFAReportingReportsCompatibleFieldsQuery {..} =
-      go
-        profileId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingReportsCompatibleFieldsQueryResource
-            )
-            Core.mempty
+  requestClient DFAReportingReportsCompatibleFieldsQuery {..} =
+    go
+      profileId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingReportsCompatibleFieldsQueryResource
+          )
+          Core.mempty

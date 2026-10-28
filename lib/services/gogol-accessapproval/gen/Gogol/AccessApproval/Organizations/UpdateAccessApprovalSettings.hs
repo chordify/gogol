@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates the settings associated with a project, folder, or organization. Settings to update are determined by the value of field_mask.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.updateAccessApprovalSettings@.
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.updateAccessApprovalSettings@.
 module Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
   ( -- * Resource
     AccessApprovalOrganizationsUpdateAccessApprovalSettingsResource,
@@ -40,7 +38,7 @@ module Gogol.AccessApproval.Organizations.UpdateAccessApprovalSettings
 where
 
 import Gogol.AccessApproval.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accessapproval.organizations.updateAccessApprovalSettings@ method which the
 -- 'AccessApprovalOrganizationsUpdateAccessApprovalSettings' request conforms to.
@@ -87,29 +85,30 @@ newAccessApprovalOrganizationsUpdateAccessApprovalSettings ::
   -- |  Multipart request metadata. See 'payload'.
   AccessApprovalSettings ->
   AccessApprovalOrganizationsUpdateAccessApprovalSettings
-newAccessApprovalOrganizationsUpdateAccessApprovalSettings name payload =
-  AccessApprovalOrganizationsUpdateAccessApprovalSettings
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAccessApprovalOrganizationsUpdateAccessApprovalSettings
+  name
+  payload =
+    AccessApprovalOrganizationsUpdateAccessApprovalSettings
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AccessApprovalOrganizationsUpdateAccessApprovalSettings
   where
   type
-    Rs
-      AccessApprovalOrganizationsUpdateAccessApprovalSettings =
+    Rs AccessApprovalOrganizationsUpdateAccessApprovalSettings =
       AccessApprovalSettings
   type
-    Scopes
-      AccessApprovalOrganizationsUpdateAccessApprovalSettings =
+    Scopes AccessApprovalOrganizationsUpdateAccessApprovalSettings =
       '[CloudPlatform'FullControl]
   requestClient
     AccessApprovalOrganizationsUpdateAccessApprovalSettings {..} =

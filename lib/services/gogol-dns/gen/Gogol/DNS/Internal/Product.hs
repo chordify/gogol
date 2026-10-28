@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DNS.Internal.Product
@@ -241,7 +239,7 @@ module Gogol.DNS.Internal.Product
 where
 
 import Gogol.DNS.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A Change represents a set of ResourceRecordSet additions and deletions applied atomically to a ManagedZone. ResourceRecordSets within a ManagedZone are modified by creating a new Change element in the Changes collection. In turn the Changes collection also records the past modifications to the ResourceRecordSets in a ManagedZone. The current state of the ManagedZone is the sum effect of applying all Change elements in the Changes collection in sequence.
 --
@@ -255,7 +253,6 @@ data Change = Change
     id :: (Core.Maybe Core.Text),
     -- | If the DNS queries for the zone will be served.
     isServing :: (Core.Maybe Core.Bool),
-    -- |
     kind :: Core.Text,
     -- | The time that this operation was started by the server (output only). This is in RFC3339 text format.
     startTime :: (Core.Maybe Core.Text),
@@ -313,7 +310,6 @@ instance Core.ToJSON Change where
 data ChangesListResponse = ChangesListResponse
   { -- | The requested changes.
     changes :: (Core.Maybe [Change]),
-    -- |
     header :: (Core.Maybe ResponseHeader),
     -- | Type of resource.
     kind :: Core.Text,
@@ -341,9 +337,7 @@ instance Core.FromJSON ChangesListResponse where
           ChangesListResponse
             Core.<$> (o Core..:? "changes")
             Core.<*> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#changesListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#changesListResponse")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -378,7 +372,6 @@ data DnsKey = DnsKey
     keyLength :: (Core.Maybe Core.Word32),
     -- | The key tag is a non-cryptographic hash of the a DNSKEY resource record associated with this DnsKey. The key tag can be used to identify a DNSKEY more quickly (but it is not a unique identifier). In particular, the key tag is used in a parent zone\'s DS record to point at the DNSKEY in this child ManagedZone. The key tag is a number in the range [0, 65535] and the algorithm to calculate it is specified in RFC4034 Appendix B. Output only.
     keyTag :: (Core.Maybe Core.Int32),
-    -- |
     kind :: Core.Text,
     -- | Base64 encoded public half of this key. Output only.
     publicKey :: (Core.Maybe Core.Text),
@@ -455,7 +448,8 @@ data DnsKeyDigest = DnsKeyDigest
 -- | Creates a value of 'DnsKeyDigest' with the minimum fields required to make a request.
 newDnsKeyDigest ::
   DnsKeyDigest
-newDnsKeyDigest = DnsKeyDigest {digest = Core.Nothing, type' = Core.Nothing}
+newDnsKeyDigest =
+  DnsKeyDigest {digest = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON DnsKeyDigest where
   parseJSON =
@@ -463,7 +457,8 @@ instance Core.FromJSON DnsKeyDigest where
       "DnsKeyDigest"
       ( \o ->
           DnsKeyDigest
-            Core.<$> (o Core..:? "digest") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "digest")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON DnsKeyDigest where
@@ -485,7 +480,6 @@ data DnsKeySpec = DnsKeySpec
     keyLength :: (Core.Maybe Core.Word32),
     -- | Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, are only used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and are used to sign all other types of resource record sets.
     keyType :: (Core.Maybe DnsKeySpec_KeyType),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -530,7 +524,6 @@ instance Core.ToJSON DnsKeySpec where
 data DnsKeysListResponse = DnsKeysListResponse
   { -- | The requested resources.
     dnsKeys :: (Core.Maybe [DnsKey]),
-    -- |
     header :: (Core.Maybe ResponseHeader),
     -- | Type of resource.
     kind :: Core.Text,
@@ -558,9 +551,7 @@ instance Core.FromJSON DnsKeysListResponse where
           DnsKeysListResponse
             Core.<$> (o Core..:? "dnsKeys")
             Core.<*> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#dnsKeysListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#dnsKeysListResponse")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -579,8 +570,7 @@ instance Core.ToJSON DnsKeysListResponse where
 --
 -- /See:/ 'newManagedZone' smart constructor.
 data ManagedZone = ManagedZone
-  { -- |
-    cloudLoggingConfig :: (Core.Maybe ManagedZoneCloudLoggingConfig),
+  { cloudLoggingConfig :: (Core.Maybe ManagedZoneCloudLoggingConfig),
     -- | The time that this resource was created on the server. This is in RFC3339 text format. Output only.
     creationTime :: (Core.Maybe Core.Text),
     -- | A mutable string of at most 1024 characters associated with this resource for the user\'s convenience. Has no effect on the managed zone\'s function.
@@ -593,7 +583,6 @@ data ManagedZone = ManagedZone
     forwardingConfig :: (Core.Maybe ManagedZoneForwardingConfig),
     -- | Unique identifier for the resource; defined by the server (output only)
     id :: (Core.Maybe Core.Word64),
-    -- |
     kind :: Core.Text,
     -- | User labels.
     labels :: (Core.Maybe ManagedZone_Labels),
@@ -669,14 +658,12 @@ instance Core.ToJSON ManagedZone where
   toJSON ManagedZone {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloudLoggingConfig" Core..=)
-              Core.<$> cloudLoggingConfig,
+          [ ("cloudLoggingConfig" Core..=) Core.<$> cloudLoggingConfig,
             ("creationTime" Core..=) Core.<$> creationTime,
             ("description" Core..=) Core.<$> description,
             ("dnsName" Core..=) Core.<$> dnsName,
             ("dnssecConfig" Core..=) Core.<$> dnssecConfig,
-            ("forwardingConfig" Core..=)
-              Core.<$> forwardingConfig,
+            ("forwardingConfig" Core..=) Core.<$> forwardingConfig,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("labels" Core..=) Core.<$> labels,
@@ -686,10 +673,8 @@ instance Core.ToJSON ManagedZone where
             ("peeringConfig" Core..=) Core.<$> peeringConfig,
             ("privateVisibilityConfig" Core..=)
               Core.<$> privateVisibilityConfig,
-            ("reverseLookupConfig" Core..=)
-              Core.<$> reverseLookupConfig,
-            ("serviceDirectoryConfig" Core..=)
-              Core.<$> serviceDirectoryConfig,
+            ("reverseLookupConfig" Core..=) Core.<$> reverseLookupConfig,
+            ("serviceDirectoryConfig" Core..=) Core.<$> serviceDirectoryConfig,
             ("visibility" Core..=) Core.<$> visibility
           ]
       )
@@ -698,8 +683,7 @@ instance Core.ToJSON ManagedZone where
 --
 -- /See:/ 'newManagedZone_Labels' smart constructor.
 newtype ManagedZone_Labels = ManagedZone_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -708,19 +692,17 @@ newManagedZone_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   ManagedZone_Labels
-newManagedZone_Labels additional = ManagedZone_Labels {additional = additional}
+newManagedZone_Labels additional =
+  ManagedZone_Labels {additional = additional}
 
 instance Core.FromJSON ManagedZone_Labels where
   parseJSON =
     Core.withObject
       "ManagedZone_Labels"
-      ( \o ->
-          ManagedZone_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> ManagedZone_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON ManagedZone_Labels where
-  toJSON ManagedZone_Labels {..} =
-    Core.toJSON additional
+  toJSON ManagedZone_Labels {..} = Core.toJSON additional
 
 -- | Cloud Logging configurations for publicly visible zones.
 --
@@ -728,7 +710,6 @@ instance Core.ToJSON ManagedZone_Labels where
 data ManagedZoneCloudLoggingConfig = ManagedZoneCloudLoggingConfig
   { -- | If set, enable query logging for this ManagedZone. False by default, making logging opt-in.
     enableLogging :: (Core.Maybe Core.Bool),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -749,9 +730,7 @@ instance Core.FromJSON ManagedZoneCloudLoggingConfig where
       ( \o ->
           ManagedZoneCloudLoggingConfig
             Core.<$> (o Core..:? "enableLogging")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#managedZoneCloudLoggingConfig"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#managedZoneCloudLoggingConfig")
       )
 
 instance Core.ToJSON ManagedZoneCloudLoggingConfig where
@@ -768,7 +747,6 @@ instance Core.ToJSON ManagedZoneCloudLoggingConfig where
 data ManagedZoneDnsSecConfig = ManagedZoneDnsSecConfig
   { -- | Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
     defaultKeySpecs :: (Core.Maybe [DnsKeySpec]),
-    -- |
     kind :: Core.Text,
     -- | Specifies the mechanism for authenticated denial-of-existence responses. Can only be changed while the state is OFF.
     nonExistence :: (Core.Maybe ManagedZoneDnsSecConfig_NonExistence),
@@ -795,9 +773,7 @@ instance Core.FromJSON ManagedZoneDnsSecConfig where
       ( \o ->
           ManagedZoneDnsSecConfig
             Core.<$> (o Core..:? "defaultKeySpecs")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#managedZoneDnsSecConfig"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#managedZoneDnsSecConfig")
             Core.<*> (o Core..:? "nonExistence")
             Core.<*> (o Core..:? "state")
       )
@@ -806,8 +782,7 @@ instance Core.ToJSON ManagedZoneDnsSecConfig where
   toJSON ManagedZoneDnsSecConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultKeySpecs" Core..=)
-              Core.<$> defaultKeySpecs,
+          [ ("defaultKeySpecs" Core..=) Core.<$> defaultKeySpecs,
             Core.Just ("kind" Core..= kind),
             ("nonExistence" Core..=) Core.<$> nonExistence,
             ("state" Core..=) Core.<$> state
@@ -817,8 +792,7 @@ instance Core.ToJSON ManagedZoneDnsSecConfig where
 --
 -- /See:/ 'newManagedZoneForwardingConfig' smart constructor.
 data ManagedZoneForwardingConfig = ManagedZoneForwardingConfig
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | List of target name servers to forward to. Cloud DNS selects the best available name server if more than one target is given.
     targetNameServers :: (Core.Maybe [ManagedZoneForwardingConfigNameServerTarget])
   }
@@ -829,7 +803,8 @@ newManagedZoneForwardingConfig ::
   ManagedZoneForwardingConfig
 newManagedZoneForwardingConfig =
   ManagedZoneForwardingConfig
-    { kind = "dns#managedZoneForwardingConfig",
+    { kind =
+        "dns#managedZoneForwardingConfig",
       targetNameServers = Core.Nothing
     }
 
@@ -839,9 +814,7 @@ instance Core.FromJSON ManagedZoneForwardingConfig where
       "ManagedZoneForwardingConfig"
       ( \o ->
           ManagedZoneForwardingConfig
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "dns#managedZoneForwardingConfig"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "dns#managedZoneForwardingConfig")
             Core.<*> (o Core..:? "targetNameServers")
       )
 
@@ -850,8 +823,7 @@ instance Core.ToJSON ManagedZoneForwardingConfig where
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
-            ("targetNameServers" Core..=)
-              Core.<$> targetNameServers
+            ("targetNameServers" Core..=) Core.<$> targetNameServers
           ]
       )
 
@@ -865,7 +837,6 @@ data ManagedZoneForwardingConfigNameServerTarget = ManagedZoneForwardingConfigNa
       ),
     -- | IPv4 address of a target name server.
     ipv4Address :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -875,15 +846,14 @@ newManagedZoneForwardingConfigNameServerTarget ::
   ManagedZoneForwardingConfigNameServerTarget
 newManagedZoneForwardingConfigNameServerTarget =
   ManagedZoneForwardingConfigNameServerTarget
-    { forwardingPath = Core.Nothing,
+    { forwardingPath =
+        Core.Nothing,
       ipv4Address = Core.Nothing,
-      kind = "dns#managedZoneForwardingConfigNameServerTarget"
+      kind =
+        "dns#managedZoneForwardingConfigNameServerTarget"
     }
 
-instance
-  Core.FromJSON
-    ManagedZoneForwardingConfigNameServerTarget
-  where
+instance Core.FromJSON ManagedZoneForwardingConfigNameServerTarget where
   parseJSON =
     Core.withObject
       "ManagedZoneForwardingConfigNameServerTarget"
@@ -891,31 +861,26 @@ instance
           ManagedZoneForwardingConfigNameServerTarget
             Core.<$> (o Core..:? "forwardingPath")
             Core.<*> (o Core..:? "ipv4Address")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZoneForwardingConfigNameServerTarget"
                      )
       )
 
-instance
-  Core.ToJSON
-    ManagedZoneForwardingConfigNameServerTarget
-  where
-  toJSON
-    ManagedZoneForwardingConfigNameServerTarget {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("forwardingPath" Core..=) Core.<$> forwardingPath,
-              ("ipv4Address" Core..=) Core.<$> ipv4Address,
-              Core.Just ("kind" Core..= kind)
-            ]
-        )
+instance Core.ToJSON ManagedZoneForwardingConfigNameServerTarget where
+  toJSON ManagedZoneForwardingConfigNameServerTarget {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("forwardingPath" Core..=) Core.<$> forwardingPath,
+            ("ipv4Address" Core..=) Core.<$> ipv4Address,
+            Core.Just ("kind" Core..= kind)
+          ]
+      )
 
 --
 -- /See:/ 'newManagedZoneOperationsListResponse' smart constructor.
 data ManagedZoneOperationsListResponse = ManagedZoneOperationsListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     kind :: Core.Text,
     -- | The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
     nextPageToken :: (Core.Maybe Core.Text),
@@ -935,27 +900,22 @@ newManagedZoneOperationsListResponse =
       operations = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZoneOperationsListResponse
-  where
+instance Core.FromJSON ManagedZoneOperationsListResponse where
   parseJSON =
     Core.withObject
       "ManagedZoneOperationsListResponse"
       ( \o ->
           ManagedZoneOperationsListResponse
             Core.<$> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZoneOperationsListResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "operations")
       )
 
-instance
-  Core.ToJSON
-    ManagedZoneOperationsListResponse
-  where
+instance Core.ToJSON ManagedZoneOperationsListResponse where
   toJSON ManagedZoneOperationsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -969,8 +929,7 @@ instance
 --
 -- /See:/ 'newManagedZonePeeringConfig' smart constructor.
 data ManagedZonePeeringConfig = ManagedZonePeeringConfig
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | The network with which to peer.
     targetNetwork :: (Core.Maybe ManagedZonePeeringConfigTargetNetwork)
   }
@@ -991,9 +950,7 @@ instance Core.FromJSON ManagedZonePeeringConfig where
       "ManagedZonePeeringConfig"
       ( \o ->
           ManagedZonePeeringConfig
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "dns#managedZonePeeringConfig"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "dns#managedZonePeeringConfig")
             Core.<*> (o Core..:? "targetNetwork")
       )
 
@@ -1011,7 +968,6 @@ instance Core.ToJSON ManagedZonePeeringConfig where
 data ManagedZonePeeringConfigTargetNetwork = ManagedZonePeeringConfigTargetNetwork
   { -- | The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.
     deactivateTime :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
     -- | The fully qualified URL of the VPC network to forward queries to. This should be formatted like https:\/\/www.googleapis.com\/compute\/v1\/projects\/{project}\/global\/networks\/{network}
     networkUrl :: (Core.Maybe Core.Text)
@@ -1023,31 +979,27 @@ newManagedZonePeeringConfigTargetNetwork ::
   ManagedZonePeeringConfigTargetNetwork
 newManagedZonePeeringConfigTargetNetwork =
   ManagedZonePeeringConfigTargetNetwork
-    { deactivateTime = Core.Nothing,
+    { deactivateTime =
+        Core.Nothing,
       kind = "dns#managedZonePeeringConfigTargetNetwork",
       networkUrl = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZonePeeringConfigTargetNetwork
-  where
+instance Core.FromJSON ManagedZonePeeringConfigTargetNetwork where
   parseJSON =
     Core.withObject
       "ManagedZonePeeringConfigTargetNetwork"
       ( \o ->
           ManagedZonePeeringConfigTargetNetwork
             Core.<$> (o Core..:? "deactivateTime")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZonePeeringConfigTargetNetwork"
                      )
             Core.<*> (o Core..:? "networkUrl")
       )
 
-instance
-  Core.ToJSON
-    ManagedZonePeeringConfigTargetNetwork
-  where
+instance Core.ToJSON ManagedZonePeeringConfigTargetNetwork where
   toJSON ManagedZonePeeringConfigTargetNetwork {..} =
     Core.object
       ( Core.catMaybes
@@ -1062,7 +1014,6 @@ instance
 data ManagedZonePrivateVisibilityConfig = ManagedZonePrivateVisibilityConfig
   { -- | The list of Google Kubernetes Engine clusters that can see this zone.
     gkeClusters :: (Core.Maybe [ManagedZonePrivateVisibilityConfigGKECluster]),
-    -- |
     kind :: Core.Text,
     -- | The list of VPC networks that can see this zone.
     networks :: (Core.Maybe [ManagedZonePrivateVisibilityConfigNetwork])
@@ -1079,26 +1030,21 @@ newManagedZonePrivateVisibilityConfig =
       networks = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZonePrivateVisibilityConfig
-  where
+instance Core.FromJSON ManagedZonePrivateVisibilityConfig where
   parseJSON =
     Core.withObject
       "ManagedZonePrivateVisibilityConfig"
       ( \o ->
           ManagedZonePrivateVisibilityConfig
             Core.<$> (o Core..:? "gkeClusters")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZonePrivateVisibilityConfig"
                      )
             Core.<*> (o Core..:? "networks")
       )
 
-instance
-  Core.ToJSON
-    ManagedZonePrivateVisibilityConfig
-  where
+instance Core.ToJSON ManagedZonePrivateVisibilityConfig where
   toJSON ManagedZonePrivateVisibilityConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -1113,7 +1059,6 @@ instance
 data ManagedZonePrivateVisibilityConfigGKECluster = ManagedZonePrivateVisibilityConfigGKECluster
   { -- | The resource name of the cluster to bind this ManagedZone to. This should be specified in the format like: projects\//\/locations\//\/clusters\/*. This is referenced from GKE projects.locations.clusters.get API: https:\/\/cloud.google.com\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.locations.clusters\/get
     gkeClusterName :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1123,43 +1068,38 @@ newManagedZonePrivateVisibilityConfigGKECluster ::
   ManagedZonePrivateVisibilityConfigGKECluster
 newManagedZonePrivateVisibilityConfigGKECluster =
   ManagedZonePrivateVisibilityConfigGKECluster
-    { gkeClusterName = Core.Nothing,
-      kind = "dns#managedZonePrivateVisibilityConfigGKECluster"
+    { gkeClusterName =
+        Core.Nothing,
+      kind =
+        "dns#managedZonePrivateVisibilityConfigGKECluster"
     }
 
-instance
-  Core.FromJSON
-    ManagedZonePrivateVisibilityConfigGKECluster
-  where
+instance Core.FromJSON ManagedZonePrivateVisibilityConfigGKECluster where
   parseJSON =
     Core.withObject
       "ManagedZonePrivateVisibilityConfigGKECluster"
       ( \o ->
           ManagedZonePrivateVisibilityConfigGKECluster
             Core.<$> (o Core..:? "gkeClusterName")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZonePrivateVisibilityConfigGKECluster"
                      )
       )
 
-instance
-  Core.ToJSON
-    ManagedZonePrivateVisibilityConfigGKECluster
-  where
-  toJSON
-    ManagedZonePrivateVisibilityConfigGKECluster {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("gkeClusterName" Core..=) Core.<$> gkeClusterName,
-              Core.Just ("kind" Core..= kind)
-            ]
-        )
+instance Core.ToJSON ManagedZonePrivateVisibilityConfigGKECluster where
+  toJSON ManagedZonePrivateVisibilityConfigGKECluster {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("gkeClusterName" Core..=) Core.<$> gkeClusterName,
+            Core.Just ("kind" Core..= kind)
+          ]
+      )
 
 --
 -- /See:/ 'newManagedZonePrivateVisibilityConfigNetwork' smart constructor.
 data ManagedZonePrivateVisibilityConfigNetwork = ManagedZonePrivateVisibilityConfigNetwork
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | The fully qualified URL of the VPC network to bind to. Format this URL like https:\/\/www.googleapis.com\/compute\/v1\/projects\/{project}\/global\/networks\/{network}
     networkUrl :: (Core.Maybe Core.Text)
   }
@@ -1170,29 +1110,25 @@ newManagedZonePrivateVisibilityConfigNetwork ::
   ManagedZonePrivateVisibilityConfigNetwork
 newManagedZonePrivateVisibilityConfigNetwork =
   ManagedZonePrivateVisibilityConfigNetwork
-    { kind = "dns#managedZonePrivateVisibilityConfigNetwork",
+    { kind =
+        "dns#managedZonePrivateVisibilityConfigNetwork",
       networkUrl = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZonePrivateVisibilityConfigNetwork
-  where
+instance Core.FromJSON ManagedZonePrivateVisibilityConfigNetwork where
   parseJSON =
     Core.withObject
       "ManagedZonePrivateVisibilityConfigNetwork"
       ( \o ->
           ManagedZonePrivateVisibilityConfigNetwork
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZonePrivateVisibilityConfigNetwork"
                      )
             Core.<*> (o Core..:? "networkUrl")
       )
 
-instance
-  Core.ToJSON
-    ManagedZonePrivateVisibilityConfigNetwork
-  where
+instance Core.ToJSON ManagedZonePrivateVisibilityConfigNetwork where
   toJSON ManagedZonePrivateVisibilityConfigNetwork {..} =
     Core.object
       ( Core.catMaybes
@@ -1204,8 +1140,7 @@ instance
 --
 -- /See:/ 'newManagedZoneReverseLookupConfig' smart constructor.
 newtype ManagedZoneReverseLookupConfig = ManagedZoneReverseLookupConfig
-  { -- |
-    kind :: Core.Text
+  { kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1213,7 +1148,10 @@ newtype ManagedZoneReverseLookupConfig = ManagedZoneReverseLookupConfig
 newManagedZoneReverseLookupConfig ::
   ManagedZoneReverseLookupConfig
 newManagedZoneReverseLookupConfig =
-  ManagedZoneReverseLookupConfig {kind = "dns#managedZoneReverseLookupConfig"}
+  ManagedZoneReverseLookupConfig
+    { kind =
+        "dns#managedZoneReverseLookupConfig"
+    }
 
 instance Core.FromJSON ManagedZoneReverseLookupConfig where
   parseJSON =
@@ -1221,22 +1159,18 @@ instance Core.FromJSON ManagedZoneReverseLookupConfig where
       "ManagedZoneReverseLookupConfig"
       ( \o ->
           ManagedZoneReverseLookupConfig
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "dns#managedZoneReverseLookupConfig"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "dns#managedZoneReverseLookupConfig")
       )
 
 instance Core.ToJSON ManagedZoneReverseLookupConfig where
   toJSON ManagedZoneReverseLookupConfig {..} =
-    Core.object
-      (Core.catMaybes [Core.Just ("kind" Core..= kind)])
+    Core.object (Core.catMaybes [Core.Just ("kind" Core..= kind)])
 
 -- | Contains information about Service Directory-backed zones.
 --
 -- /See:/ 'newManagedZoneServiceDirectoryConfig' smart constructor.
 data ManagedZoneServiceDirectoryConfig = ManagedZoneServiceDirectoryConfig
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | Contains information about the namespace associated with the zone.
     namespace :: (Core.Maybe ManagedZoneServiceDirectoryConfigNamespace)
   }
@@ -1247,29 +1181,25 @@ newManagedZoneServiceDirectoryConfig ::
   ManagedZoneServiceDirectoryConfig
 newManagedZoneServiceDirectoryConfig =
   ManagedZoneServiceDirectoryConfig
-    { kind = "dns#managedZoneServiceDirectoryConfig",
+    { kind =
+        "dns#managedZoneServiceDirectoryConfig",
       namespace = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZoneServiceDirectoryConfig
-  where
+instance Core.FromJSON ManagedZoneServiceDirectoryConfig where
   parseJSON =
     Core.withObject
       "ManagedZoneServiceDirectoryConfig"
       ( \o ->
           ManagedZoneServiceDirectoryConfig
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZoneServiceDirectoryConfig"
                      )
             Core.<*> (o Core..:? "namespace")
       )
 
-instance
-  Core.ToJSON
-    ManagedZoneServiceDirectoryConfig
-  where
+instance Core.ToJSON ManagedZoneServiceDirectoryConfig where
   toJSON ManagedZoneServiceDirectoryConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -1283,7 +1213,6 @@ instance
 data ManagedZoneServiceDirectoryConfigNamespace = ManagedZoneServiceDirectoryConfigNamespace
   { -- | The time that the namespace backing this zone was deleted; an empty string if it still exists. This is in RFC3339 text format. Output only.
     deletionTime :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
     -- | The fully qualified URL of the namespace associated with the zone. Format must be https:\/\/servicedirectory.googleapis.com\/v1\/projects\/{project}\/locations\/{location}\/namespaces\/{namespace}
     namespaceUrl :: (Core.Maybe Core.Text)
@@ -1295,31 +1224,28 @@ newManagedZoneServiceDirectoryConfigNamespace ::
   ManagedZoneServiceDirectoryConfigNamespace
 newManagedZoneServiceDirectoryConfigNamespace =
   ManagedZoneServiceDirectoryConfigNamespace
-    { deletionTime = Core.Nothing,
-      kind = "dns#managedZoneServiceDirectoryConfigNamespace",
+    { deletionTime =
+        Core.Nothing,
+      kind =
+        "dns#managedZoneServiceDirectoryConfigNamespace",
       namespaceUrl = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedZoneServiceDirectoryConfigNamespace
-  where
+instance Core.FromJSON ManagedZoneServiceDirectoryConfigNamespace where
   parseJSON =
     Core.withObject
       "ManagedZoneServiceDirectoryConfigNamespace"
       ( \o ->
           ManagedZoneServiceDirectoryConfigNamespace
             Core.<$> (o Core..:? "deletionTime")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "dns#managedZoneServiceDirectoryConfigNamespace"
                      )
             Core.<*> (o Core..:? "namespaceUrl")
       )
 
-instance
-  Core.ToJSON
-    ManagedZoneServiceDirectoryConfigNamespace
-  where
+instance Core.ToJSON ManagedZoneServiceDirectoryConfigNamespace where
   toJSON ManagedZoneServiceDirectoryConfigNamespace {..} =
     Core.object
       ( Core.catMaybes
@@ -1332,8 +1258,7 @@ instance
 --
 -- /See:/ 'newManagedZonesListResponse' smart constructor.
 data ManagedZonesListResponse = ManagedZonesListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
+  { header :: (Core.Maybe ResponseHeader),
     -- | Type of resource.
     kind :: Core.Text,
     -- | The managed zone resources.
@@ -1361,9 +1286,7 @@ instance Core.FromJSON ManagedZonesListResponse where
       ( \o ->
           ManagedZonesListResponse
             Core.<$> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#managedZonesListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#managedZonesListResponse")
             Core.<*> (o Core..:? "managedZones")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -1387,7 +1310,6 @@ data Operation = Operation
     dnsKeyContext :: (Core.Maybe OperationDnsKeyContext),
     -- | Unique identifier for the resource. This is the client/operation/id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)
     id :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
     -- | The time that this operation was started by the server. This is in RFC3339 text format (output only).
     startTime :: (Core.Maybe Core.Text),
@@ -1462,7 +1384,10 @@ data OperationDnsKeyContext = OperationDnsKeyContext
 newOperationDnsKeyContext ::
   OperationDnsKeyContext
 newOperationDnsKeyContext =
-  OperationDnsKeyContext {newValue' = Core.Nothing, oldValue = Core.Nothing}
+  OperationDnsKeyContext
+    { newValue' = Core.Nothing,
+      oldValue = Core.Nothing
+    }
 
 instance Core.FromJSON OperationDnsKeyContext where
   parseJSON =
@@ -1524,8 +1449,7 @@ instance Core.ToJSON OperationManagedZoneContext where
 --
 -- /See:/ 'newPoliciesListResponse' smart constructor.
 data PoliciesListResponse = PoliciesListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
+  { header :: (Core.Maybe ResponseHeader),
     -- | Type of resource.
     kind :: Core.Text,
     -- | The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
@@ -1553,9 +1477,7 @@ instance Core.FromJSON PoliciesListResponse where
       ( \o ->
           PoliciesListResponse
             Core.<$> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#policiesListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#policiesListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "policies")
       )
@@ -1574,9 +1496,7 @@ instance Core.ToJSON PoliciesListResponse where
 --
 -- /See:/ 'newPoliciesPatchResponse' smart constructor.
 data PoliciesPatchResponse = PoliciesPatchResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1585,7 +1505,10 @@ data PoliciesPatchResponse = PoliciesPatchResponse
 newPoliciesPatchResponse ::
   PoliciesPatchResponse
 newPoliciesPatchResponse =
-  PoliciesPatchResponse {header = Core.Nothing, policy = Core.Nothing}
+  PoliciesPatchResponse
+    { header = Core.Nothing,
+      policy = Core.Nothing
+    }
 
 instance Core.FromJSON PoliciesPatchResponse where
   parseJSON =
@@ -1593,7 +1516,8 @@ instance Core.FromJSON PoliciesPatchResponse where
       "PoliciesPatchResponse"
       ( \o ->
           PoliciesPatchResponse
-            Core.<$> (o Core..:? "header") Core.<*> (o Core..:? "policy")
+            Core.<$> (o Core..:? "header")
+            Core.<*> (o Core..:? "policy")
       )
 
 instance Core.ToJSON PoliciesPatchResponse where
@@ -1608,9 +1532,7 @@ instance Core.ToJSON PoliciesPatchResponse where
 --
 -- /See:/ 'newPoliciesUpdateResponse' smart constructor.
 data PoliciesUpdateResponse = PoliciesUpdateResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     policy :: (Core.Maybe Policy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1619,7 +1541,10 @@ data PoliciesUpdateResponse = PoliciesUpdateResponse
 newPoliciesUpdateResponse ::
   PoliciesUpdateResponse
 newPoliciesUpdateResponse =
-  PoliciesUpdateResponse {header = Core.Nothing, policy = Core.Nothing}
+  PoliciesUpdateResponse
+    { header = Core.Nothing,
+      policy = Core.Nothing
+    }
 
 instance Core.FromJSON PoliciesUpdateResponse where
   parseJSON =
@@ -1627,7 +1552,8 @@ instance Core.FromJSON PoliciesUpdateResponse where
       "PoliciesUpdateResponse"
       ( \o ->
           PoliciesUpdateResponse
-            Core.<$> (o Core..:? "header") Core.<*> (o Core..:? "policy")
+            Core.<$> (o Core..:? "header")
+            Core.<*> (o Core..:? "policy")
       )
 
 instance Core.ToJSON PoliciesUpdateResponse where
@@ -1653,7 +1579,6 @@ data Policy = Policy
     enableLogging :: (Core.Maybe Core.Bool),
     -- | Unique identifier for the resource; defined by the server (output only).
     id :: (Core.Maybe Core.Word64),
-    -- |
     kind :: Core.Text,
     -- | User-assigned name for this policy.
     name :: (Core.Maybe Core.Text),
@@ -1713,8 +1638,7 @@ instance Core.ToJSON Policy where
 --
 -- /See:/ 'newPolicyAlternativeNameServerConfig' smart constructor.
 data PolicyAlternativeNameServerConfig = PolicyAlternativeNameServerConfig
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
     targetNameServers :: (Core.Maybe [PolicyAlternativeNameServerConfigTargetNameServer])
   }
@@ -1725,35 +1649,30 @@ newPolicyAlternativeNameServerConfig ::
   PolicyAlternativeNameServerConfig
 newPolicyAlternativeNameServerConfig =
   PolicyAlternativeNameServerConfig
-    { kind = "dns#policyAlternativeNameServerConfig",
+    { kind =
+        "dns#policyAlternativeNameServerConfig",
       targetNameServers = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PolicyAlternativeNameServerConfig
-  where
+instance Core.FromJSON PolicyAlternativeNameServerConfig where
   parseJSON =
     Core.withObject
       "PolicyAlternativeNameServerConfig"
       ( \o ->
           PolicyAlternativeNameServerConfig
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "dns#policyAlternativeNameServerConfig"
                      )
             Core.<*> (o Core..:? "targetNameServers")
       )
 
-instance
-  Core.ToJSON
-    PolicyAlternativeNameServerConfig
-  where
+instance Core.ToJSON PolicyAlternativeNameServerConfig where
   toJSON PolicyAlternativeNameServerConfig {..} =
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
-            ("targetNameServers" Core..=)
-              Core.<$> targetNameServers
+            ("targetNameServers" Core..=) Core.<$> targetNameServers
           ]
       )
 
@@ -1767,7 +1686,6 @@ data PolicyAlternativeNameServerConfigTargetNameServer = PolicyAlternativeNameSe
       ),
     -- | IPv4 address to forward to.
     ipv4Address :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1777,9 +1695,11 @@ newPolicyAlternativeNameServerConfigTargetNameServer ::
   PolicyAlternativeNameServerConfigTargetNameServer
 newPolicyAlternativeNameServerConfigTargetNameServer =
   PolicyAlternativeNameServerConfigTargetNameServer
-    { forwardingPath = Core.Nothing,
+    { forwardingPath =
+        Core.Nothing,
       ipv4Address = Core.Nothing,
-      kind = "dns#policyAlternativeNameServerConfigTargetNameServer"
+      kind =
+        "dns#policyAlternativeNameServerConfigTargetNameServer"
     }
 
 instance
@@ -1792,31 +1712,30 @@ instance
       ( \o ->
           PolicyAlternativeNameServerConfigTargetNameServer
             Core.<$> (o Core..:? "forwardingPath")
-              Core.<*> (o Core..:? "ipv4Address")
-              Core.<*> ( o Core..:? "kind"
-                           Core..!= "dns#policyAlternativeNameServerConfigTargetNameServer"
-                       )
+            Core.<*> (o Core..:? "ipv4Address")
+            Core.<*> ( o
+                         Core..:? "kind"
+                         Core..!= "dns#policyAlternativeNameServerConfigTargetNameServer"
+                     )
       )
 
 instance
   Core.ToJSON
     PolicyAlternativeNameServerConfigTargetNameServer
   where
-  toJSON
-    PolicyAlternativeNameServerConfigTargetNameServer {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("forwardingPath" Core..=) Core.<$> forwardingPath,
-              ("ipv4Address" Core..=) Core.<$> ipv4Address,
-              Core.Just ("kind" Core..= kind)
-            ]
-        )
+  toJSON PolicyAlternativeNameServerConfigTargetNameServer {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("forwardingPath" Core..=) Core.<$> forwardingPath,
+            ("ipv4Address" Core..=) Core.<$> ipv4Address,
+            Core.Just ("kind" Core..= kind)
+          ]
+      )
 
 --
 -- /See:/ 'newPolicyNetwork' smart constructor.
 data PolicyNetwork = PolicyNetwork
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | The fully qualified URL of the VPC network to bind to. This should be formatted like https:\/\/www.googleapis.com\/compute\/v1\/projects\/{project}\/global\/networks\/{network}
     networkUrl :: (Core.Maybe Core.Text)
   }
@@ -1826,7 +1745,10 @@ data PolicyNetwork = PolicyNetwork
 newPolicyNetwork ::
   PolicyNetwork
 newPolicyNetwork =
-  PolicyNetwork {kind = "dns#policyNetwork", networkUrl = Core.Nothing}
+  PolicyNetwork
+    { kind = "dns#policyNetwork",
+      networkUrl = Core.Nothing
+    }
 
 instance Core.FromJSON PolicyNetwork where
   parseJSON =
@@ -1853,7 +1775,6 @@ instance Core.ToJSON PolicyNetwork where
 data Project = Project
   { -- | User assigned unique identifier for the resource (output only).
     id :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
     -- | Unique numeric identifier for the resource; defined by the server (output only).
     number :: (Core.Maybe Core.Word64),
@@ -1881,9 +1802,7 @@ instance Core.FromJSON Project where
           Project
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "dns#project")
-            Core.<*> ( o Core..:? "number"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "number" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "quota")
       )
 
@@ -1893,8 +1812,7 @@ instance Core.ToJSON Project where
       ( Core.catMaybes
           [ ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
-            ("number" Core..=) Core.. Core.AsText
-              Core.<$> number,
+            ("number" Core..=) Core.. Core.AsText Core.<$> number,
             ("quota" Core..=) Core.<$> quota
           ]
       )
@@ -1907,7 +1825,6 @@ data Quota = Quota
     dnsKeysPerManagedZone :: (Core.Maybe Core.Int32),
     -- | Maximum allowed number of items per routing policy.
     itemsPerRoutingPolicy :: (Core.Maybe Core.Int32),
-    -- |
     kind :: Core.Text,
     -- | Maximum allowed number of managed zones in the project.
     managedZones :: (Core.Maybe Core.Int32),
@@ -1993,18 +1910,13 @@ instance Core.ToJSON Quota where
   toJSON Quota {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dnsKeysPerManagedZone" Core..=)
-              Core.<$> dnsKeysPerManagedZone,
-            ("itemsPerRoutingPolicy" Core..=)
-              Core.<$> itemsPerRoutingPolicy,
+          [ ("dnsKeysPerManagedZone" Core..=) Core.<$> dnsKeysPerManagedZone,
+            ("itemsPerRoutingPolicy" Core..=) Core.<$> itemsPerRoutingPolicy,
             Core.Just ("kind" Core..= kind),
             ("managedZones" Core..=) Core.<$> managedZones,
-            ("managedZonesPerNetwork" Core..=)
-              Core.<$> managedZonesPerNetwork,
-            ("networksPerManagedZone" Core..=)
-              Core.<$> networksPerManagedZone,
-            ("networksPerPolicy" Core..=)
-              Core.<$> networksPerPolicy,
+            ("managedZonesPerNetwork" Core..=) Core.<$> managedZonesPerNetwork,
+            ("networksPerManagedZone" Core..=) Core.<$> networksPerManagedZone,
+            ("networksPerPolicy" Core..=) Core.<$> networksPerPolicy,
             ("peeringZonesPerTargetNetwork" Core..=)
               Core.<$> peeringZonesPerTargetNetwork,
             ("policies" Core..=) Core.<$> policies,
@@ -2014,16 +1926,14 @@ instance Core.ToJSON Quota where
               Core.<$> rrsetAdditionsPerChange,
             ("rrsetDeletionsPerChange" Core..=)
               Core.<$> rrsetDeletionsPerChange,
-            ("rrsetsPerManagedZone" Core..=)
-              Core.<$> rrsetsPerManagedZone,
+            ("rrsetsPerManagedZone" Core..=) Core.<$> rrsetsPerManagedZone,
             ("targetNameServersPerManagedZone" Core..=)
               Core.<$> targetNameServersPerManagedZone,
             ("targetNameServersPerPolicy" Core..=)
               Core.<$> targetNameServersPerPolicy,
             ("totalRrdataSizePerChange" Core..=)
               Core.<$> totalRrdataSizePerChange,
-            ("whitelistedKeySpecs" Core..=)
-              Core.<$> whitelistedKeySpecs
+            ("whitelistedKeySpecs" Core..=) Core.<$> whitelistedKeySpecs
           ]
       )
 
@@ -2031,11 +1941,8 @@ instance Core.ToJSON Quota where
 --
 -- /See:/ 'newRRSetRoutingPolicy' smart constructor.
 data RRSetRoutingPolicy = RRSetRoutingPolicy
-  { -- |
-    geo :: (Core.Maybe RRSetRoutingPolicyGeoPolicy),
-    -- |
+  { geo :: (Core.Maybe RRSetRoutingPolicyGeoPolicy),
     kind :: Core.Text,
-    -- |
     wrr :: (Core.Maybe RRSetRoutingPolicyWrrPolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2077,7 +1984,6 @@ instance Core.ToJSON RRSetRoutingPolicy where
 data RRSetRoutingPolicyGeoPolicy = RRSetRoutingPolicyGeoPolicy
   { -- | The primary geo routing configuration. If there are multiple items with the same location, an error is returned instead.
     items :: (Core.Maybe [RRSetRoutingPolicyGeoPolicyGeoPolicyItem]),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2098,9 +2004,7 @@ instance Core.FromJSON RRSetRoutingPolicyGeoPolicy where
       ( \o ->
           RRSetRoutingPolicyGeoPolicy
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#rRSetRoutingPolicyGeoPolicy"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#rRSetRoutingPolicyGeoPolicy")
       )
 
 instance Core.ToJSON RRSetRoutingPolicyGeoPolicy where
@@ -2116,11 +2020,9 @@ instance Core.ToJSON RRSetRoutingPolicyGeoPolicy where
 --
 -- /See:/ 'newRRSetRoutingPolicyGeoPolicyGeoPolicyItem' smart constructor.
 data RRSetRoutingPolicyGeoPolicyGeoPolicyItem = RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | The geo-location granularity is a GCP region. This location string should correspond to a GCP region. e.g. \"us-east1\", \"southamerica-east1\", \"asia-east1\", etc.
     location :: (Core.Maybe Core.Text),
-    -- |
     rrdatas :: (Core.Maybe [Core.Text]),
     -- | DNSSEC generated signatures for all the rrdata within this item. Note that if health checked targets are provided for DNSSEC enabled zones, there\'s a restriction of 1 ip per item. .
     signatureRrdatas :: (Core.Maybe [Core.Text])
@@ -2132,22 +2034,21 @@ newRRSetRoutingPolicyGeoPolicyGeoPolicyItem ::
   RRSetRoutingPolicyGeoPolicyGeoPolicyItem
 newRRSetRoutingPolicyGeoPolicyGeoPolicyItem =
   RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-    { kind = "dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem",
+    { kind =
+        "dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem",
       location = Core.Nothing,
       rrdatas = Core.Nothing,
       signatureRrdatas = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-  where
+instance Core.FromJSON RRSetRoutingPolicyGeoPolicyGeoPolicyItem where
   parseJSON =
     Core.withObject
       "RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
       ( \o ->
           RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem"
                      )
             Core.<*> (o Core..:? "location")
@@ -2155,18 +2056,14 @@ instance
             Core.<*> (o Core..:? "signatureRrdatas")
       )
 
-instance
-  Core.ToJSON
-    RRSetRoutingPolicyGeoPolicyGeoPolicyItem
-  where
+instance Core.ToJSON RRSetRoutingPolicyGeoPolicyGeoPolicyItem where
   toJSON RRSetRoutingPolicyGeoPolicyGeoPolicyItem {..} =
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
             ("location" Core..=) Core.<$> location,
             ("rrdatas" Core..=) Core.<$> rrdatas,
-            ("signatureRrdatas" Core..=)
-              Core.<$> signatureRrdatas
+            ("signatureRrdatas" Core..=) Core.<$> signatureRrdatas
           ]
       )
 
@@ -2174,9 +2071,7 @@ instance
 --
 -- /See:/ 'newRRSetRoutingPolicyWrrPolicy' smart constructor.
 data RRSetRoutingPolicyWrrPolicy = RRSetRoutingPolicyWrrPolicy
-  { -- |
-    items :: (Core.Maybe [RRSetRoutingPolicyWrrPolicyWrrPolicyItem]),
-    -- |
+  { items :: (Core.Maybe [RRSetRoutingPolicyWrrPolicyWrrPolicyItem]),
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2197,9 +2092,7 @@ instance Core.FromJSON RRSetRoutingPolicyWrrPolicy where
       ( \o ->
           RRSetRoutingPolicyWrrPolicy
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#rRSetRoutingPolicyWrrPolicy"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#rRSetRoutingPolicyWrrPolicy")
       )
 
 instance Core.ToJSON RRSetRoutingPolicyWrrPolicy where
@@ -2215,9 +2108,7 @@ instance Core.ToJSON RRSetRoutingPolicyWrrPolicy where
 --
 -- /See:/ 'newRRSetRoutingPolicyWrrPolicyWrrPolicyItem' smart constructor.
 data RRSetRoutingPolicyWrrPolicyWrrPolicyItem = RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-  { -- |
-    kind :: Core.Text,
-    -- |
+  { kind :: Core.Text,
     rrdatas :: (Core.Maybe [Core.Text]),
     -- | DNSSEC generated signatures for all the rrdata within this item. Note that if health checked targets are provided for DNSSEC enabled zones, there\'s a restriction of 1 ip per item. .
     signatureRrdatas :: (Core.Maybe [Core.Text]),
@@ -2231,22 +2122,21 @@ newRRSetRoutingPolicyWrrPolicyWrrPolicyItem ::
   RRSetRoutingPolicyWrrPolicyWrrPolicyItem
 newRRSetRoutingPolicyWrrPolicyWrrPolicyItem =
   RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-    { kind = "dns#rRSetRoutingPolicyWrrPolicyWrrPolicyItem",
+    { kind =
+        "dns#rRSetRoutingPolicyWrrPolicyWrrPolicyItem",
       rrdatas = Core.Nothing,
       signatureRrdatas = Core.Nothing,
       weight = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-  where
+instance Core.FromJSON RRSetRoutingPolicyWrrPolicyWrrPolicyItem where
   parseJSON =
     Core.withObject
       "RRSetRoutingPolicyWrrPolicyWrrPolicyItem"
       ( \o ->
           RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "dns#rRSetRoutingPolicyWrrPolicyWrrPolicyItem"
                      )
             Core.<*> (o Core..:? "rrdatas")
@@ -2254,17 +2144,13 @@ instance
             Core.<*> (o Core..:? "weight")
       )
 
-instance
-  Core.ToJSON
-    RRSetRoutingPolicyWrrPolicyWrrPolicyItem
-  where
+instance Core.ToJSON RRSetRoutingPolicyWrrPolicyWrrPolicyItem where
   toJSON RRSetRoutingPolicyWrrPolicyWrrPolicyItem {..} =
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
             ("rrdatas" Core..=) Core.<$> rrdatas,
-            ("signatureRrdatas" Core..=)
-              Core.<$> signatureRrdatas,
+            ("signatureRrdatas" Core..=) Core.<$> signatureRrdatas,
             ("weight" Core..=) Core.<$> weight
           ]
       )
@@ -2273,8 +2159,7 @@ instance
 --
 -- /See:/ 'newResourceRecordSet' smart constructor.
 data ResourceRecordSet = ResourceRecordSet
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | For example, www.example.com.
     name :: (Core.Maybe Core.Text),
     -- | Configures dynamic query responses based on geo location of querying user or a weighted round robin based routing policy. A ResourceRecordSet should only have either rrdata (static) or routing_policy (dynamic). An error is returned otherwise.
@@ -2327,8 +2212,7 @@ instance Core.ToJSON ResourceRecordSet where
             ("name" Core..=) Core.<$> name,
             ("routingPolicy" Core..=) Core.<$> routingPolicy,
             ("rrdatas" Core..=) Core.<$> rrdatas,
-            ("signatureRrdatas" Core..=)
-              Core.<$> signatureRrdatas,
+            ("signatureRrdatas" Core..=) Core.<$> signatureRrdatas,
             ("ttl" Core..=) Core.<$> ttl,
             ("type" Core..=) Core.<$> type'
           ]
@@ -2337,8 +2221,7 @@ instance Core.ToJSON ResourceRecordSet where
 --
 -- /See:/ 'newResourceRecordSetsListResponse' smart constructor.
 data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
+  { header :: (Core.Maybe ResponseHeader),
     -- | Type of resource.
     kind :: Core.Text,
     -- | The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. This lets you retrieve complete contents of even larger collections, one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
@@ -2366,9 +2249,7 @@ instance Core.FromJSON ResourceRecordSetsListResponse where
       ( \o ->
           ResourceRecordSetsListResponse
             Core.<$> (o Core..:? "header")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#resourceRecordSetsListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#resourceRecordSetsListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "rrsets")
       )
@@ -2402,22 +2283,17 @@ instance Core.FromJSON ResponseHeader where
   parseJSON =
     Core.withObject
       "ResponseHeader"
-      ( \o ->
-          ResponseHeader Core.<$> (o Core..:? "operationId")
-      )
+      (\o -> ResponseHeader Core.<$> (o Core..:? "operationId"))
 
 instance Core.ToJSON ResponseHeader where
   toJSON ResponseHeader {..} =
     Core.object
-      ( Core.catMaybes
-          [("operationId" Core..=) Core.<$> operationId]
-      )
+      (Core.catMaybes [("operationId" Core..=) Core.<$> operationId])
 
 --
 -- /See:/ 'newResponsePoliciesListResponse' smart constructor.
 data ResponsePoliciesListResponse = ResponsePoliciesListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
+  { header :: (Core.Maybe ResponseHeader),
     -- | The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The Response Policy resources.
@@ -2452,17 +2328,14 @@ instance Core.ToJSON ResponsePoliciesListResponse where
       ( Core.catMaybes
           [ ("header" Core..=) Core.<$> header,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("responsePolicies" Core..=)
-              Core.<$> responsePolicies
+            ("responsePolicies" Core..=) Core.<$> responsePolicies
           ]
       )
 
 --
 -- /See:/ 'newResponsePoliciesPatchResponse' smart constructor.
 data ResponsePoliciesPatchResponse = ResponsePoliciesPatchResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     responsePolicy :: (Core.Maybe ResponsePolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2498,9 +2371,7 @@ instance Core.ToJSON ResponsePoliciesPatchResponse where
 --
 -- /See:/ 'newResponsePoliciesUpdateResponse' smart constructor.
 data ResponsePoliciesUpdateResponse = ResponsePoliciesUpdateResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     responsePolicy :: (Core.Maybe ResponsePolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2543,7 +2414,6 @@ data ResponsePolicy = ResponsePolicy
     gkeClusters :: (Core.Maybe [ResponsePolicyGKECluster]),
     -- | Unique identifier for the resource; defined by the server (output only).
     id :: (Core.Maybe Core.Int64),
-    -- |
     kind :: Core.Text,
     -- | List of network names specifying networks to which this policy is applied.
     networks :: (Core.Maybe [ResponsePolicyNetwork]),
@@ -2588,8 +2458,7 @@ instance Core.ToJSON ResponsePolicy where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("networks" Core..=) Core.<$> networks,
-            ("responsePolicyName" Core..=)
-              Core.<$> responsePolicyName
+            ("responsePolicyName" Core..=) Core.<$> responsePolicyName
           ]
       )
 
@@ -2598,7 +2467,6 @@ instance Core.ToJSON ResponsePolicy where
 data ResponsePolicyGKECluster = ResponsePolicyGKECluster
   { -- | The resource name of the cluster to bind this response policy to. This should be specified in the format like: projects\//\/locations\//\/clusters\/*. This is referenced from GKE projects.locations.clusters.get API: https:\/\/cloud.google.com\/kubernetes-engine\/docs\/reference\/rest\/v1\/projects.locations.clusters\/get
     gkeClusterName :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2619,9 +2487,7 @@ instance Core.FromJSON ResponsePolicyGKECluster where
       ( \o ->
           ResponsePolicyGKECluster
             Core.<$> (o Core..:? "gkeClusterName")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "dns#responsePolicyGKECluster"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "dns#responsePolicyGKECluster")
       )
 
 instance Core.ToJSON ResponsePolicyGKECluster where
@@ -2636,8 +2502,7 @@ instance Core.ToJSON ResponsePolicyGKECluster where
 --
 -- /See:/ 'newResponsePolicyNetwork' smart constructor.
 data ResponsePolicyNetwork = ResponsePolicyNetwork
-  { -- |
-    kind :: Core.Text,
+  { kind :: Core.Text,
     -- | The fully qualified URL of the VPC network to bind to. This should be formatted like https:\/\/www.googleapis.com\/compute\/v1\/projects\/{project}\/global\/networks\/{network}
     networkUrl :: (Core.Maybe Core.Text)
   }
@@ -2658,9 +2523,7 @@ instance Core.FromJSON ResponsePolicyNetwork where
       "ResponsePolicyNetwork"
       ( \o ->
           ResponsePolicyNetwork
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "dns#responsePolicyNetwork"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "dns#responsePolicyNetwork")
             Core.<*> (o Core..:? "networkUrl")
       )
 
@@ -2681,7 +2544,6 @@ data ResponsePolicyRule = ResponsePolicyRule
     behavior :: (Core.Maybe ResponsePolicyRule_Behavior),
     -- | The DNS name (wildcard or exact) to apply this rule to. Must be unique within the Response Policy Rule.
     dnsName :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
     -- | Answer this query directly with DNS data. These ResourceRecordSets override any other DNS behavior for the matched name; in particular they override private zones, the public internet, and GCP internal DNS. No SOA nor NS types are allowed.
     localData :: (Core.Maybe ResponsePolicyRuleLocalData),
@@ -2746,22 +2608,18 @@ instance Core.FromJSON ResponsePolicyRuleLocalData where
     Core.withObject
       "ResponsePolicyRuleLocalData"
       ( \o ->
-          ResponsePolicyRuleLocalData
-            Core.<$> (o Core..:? "localDatas")
+          ResponsePolicyRuleLocalData Core.<$> (o Core..:? "localDatas")
       )
 
 instance Core.ToJSON ResponsePolicyRuleLocalData where
   toJSON ResponsePolicyRuleLocalData {..} =
     Core.object
-      ( Core.catMaybes
-          [("localDatas" Core..=) Core.<$> localDatas]
-      )
+      (Core.catMaybes [("localDatas" Core..=) Core.<$> localDatas])
 
 --
 -- /See:/ 'newResponsePolicyRulesListResponse' smart constructor.
 data ResponsePolicyRulesListResponse = ResponsePolicyRulesListResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
+  { header :: (Core.Maybe ResponseHeader),
     -- | The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The Response Policy Rule resources.
@@ -2779,10 +2637,7 @@ newResponsePolicyRulesListResponse =
       responsePolicyRules = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ResponsePolicyRulesListResponse
-  where
+instance Core.FromJSON ResponsePolicyRulesListResponse where
   parseJSON =
     Core.withObject
       "ResponsePolicyRulesListResponse"
@@ -2799,17 +2654,14 @@ instance Core.ToJSON ResponsePolicyRulesListResponse where
       ( Core.catMaybes
           [ ("header" Core..=) Core.<$> header,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("responsePolicyRules" Core..=)
-              Core.<$> responsePolicyRules
+            ("responsePolicyRules" Core..=) Core.<$> responsePolicyRules
           ]
       )
 
 --
 -- /See:/ 'newResponsePolicyRulesPatchResponse' smart constructor.
 data ResponsePolicyRulesPatchResponse = ResponsePolicyRulesPatchResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     responsePolicyRule :: (Core.Maybe ResponsePolicyRule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2823,10 +2675,7 @@ newResponsePolicyRulesPatchResponse =
       responsePolicyRule = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ResponsePolicyRulesPatchResponse
-  where
+instance Core.FromJSON ResponsePolicyRulesPatchResponse where
   parseJSON =
     Core.withObject
       "ResponsePolicyRulesPatchResponse"
@@ -2841,17 +2690,14 @@ instance Core.ToJSON ResponsePolicyRulesPatchResponse where
     Core.object
       ( Core.catMaybes
           [ ("header" Core..=) Core.<$> header,
-            ("responsePolicyRule" Core..=)
-              Core.<$> responsePolicyRule
+            ("responsePolicyRule" Core..=) Core.<$> responsePolicyRule
           ]
       )
 
 --
 -- /See:/ 'newResponsePolicyRulesUpdateResponse' smart constructor.
 data ResponsePolicyRulesUpdateResponse = ResponsePolicyRulesUpdateResponse
-  { -- |
-    header :: (Core.Maybe ResponseHeader),
-    -- |
+  { header :: (Core.Maybe ResponseHeader),
     responsePolicyRule :: (Core.Maybe ResponsePolicyRule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2865,10 +2711,7 @@ newResponsePolicyRulesUpdateResponse =
       responsePolicyRule = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ResponsePolicyRulesUpdateResponse
-  where
+instance Core.FromJSON ResponsePolicyRulesUpdateResponse where
   parseJSON =
     Core.withObject
       "ResponsePolicyRulesUpdateResponse"
@@ -2878,15 +2721,11 @@ instance
             Core.<*> (o Core..:? "responsePolicyRule")
       )
 
-instance
-  Core.ToJSON
-    ResponsePolicyRulesUpdateResponse
-  where
+instance Core.ToJSON ResponsePolicyRulesUpdateResponse where
   toJSON ResponsePolicyRulesUpdateResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("header" Core..=) Core.<$> header,
-            ("responsePolicyRule" Core..=)
-              Core.<$> responsePolicyRule
+            ("responsePolicyRule" Core..=) Core.<$> responsePolicyRule
           ]
       )

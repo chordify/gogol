@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Instances.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Instances.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.delete@ method which the
@@ -53,6 +51,10 @@ type SqlInstancesDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "enableFinalBackup" Core.Bool
+    Core.:> Core.QueryParam "finalBackupDescription" Core.Text
+    Core.:> Core.QueryParam "finalBackupExpiryTime" Core.DateTime
+    Core.:> Core.QueryParam "finalBackupTtlDays" Core.Int64
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -68,6 +70,14 @@ data SqlInstancesDelete = SqlInstancesDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Flag to opt-in for final backup. By default, it is turned off.
+    enableFinalBackup :: (Core.Maybe Core.Bool),
+    -- | Optional. The description of the final backup.
+    finalBackupDescription :: (Core.Maybe Core.Text),
+    -- | Optional. Final Backup expiration time. Timestamp in UTC of when this resource is considered expired.
+    finalBackupExpiryTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Retention period of the final backup.
+    finalBackupTtlDays :: (Core.Maybe Core.Int64),
     -- | Cloud SQL instance ID. This does not include the project ID.
     instance' :: Core.Text,
     -- | Project ID of the project that contains the instance to be deleted.
@@ -91,6 +101,10 @@ newSqlInstancesDelete instance' project =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      enableFinalBackup = Core.Nothing,
+      finalBackupDescription = Core.Nothing,
+      finalBackupExpiryTime = Core.Nothing,
+      finalBackupTtlDays = Core.Nothing,
       instance' = instance',
       project = project,
       uploadType = Core.Nothing,
@@ -109,6 +123,10 @@ instance Core.GoogleRequest SqlInstancesDelete where
       xgafv
       accessToken
       callback
+      enableFinalBackup
+      finalBackupDescription
+      finalBackupExpiryTime
+      finalBackupTtlDays
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)

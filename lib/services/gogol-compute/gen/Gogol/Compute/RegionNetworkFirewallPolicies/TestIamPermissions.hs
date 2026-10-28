@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.TestIamPermissions
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionNetworkFirewallPolicies.testIamPermissions@ method which the
 -- 'ComputeRegionNetworkFirewallPoliciesTestIamPermissions' request conforms to.
@@ -60,12 +58,8 @@ type ComputeRegionNetworkFirewallPoliciesTestIamPermissionsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TestPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              TestPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] TestPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] TestPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
@@ -103,34 +97,34 @@ newComputeRegionNetworkFirewallPoliciesTestIamPermissions ::
   -- |  Name or id of the resource for this request. See 'resource'.
   Core.Text ->
   ComputeRegionNetworkFirewallPoliciesTestIamPermissions
-newComputeRegionNetworkFirewallPoliciesTestIamPermissions payload project region resource =
-  ComputeRegionNetworkFirewallPoliciesTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionNetworkFirewallPoliciesTestIamPermissions
+  payload
+  project
+  region
+  resource =
+    ComputeRegionNetworkFirewallPoliciesTestIamPermissions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionNetworkFirewallPoliciesTestIamPermissions
   where
   type
-    Rs
-      ComputeRegionNetworkFirewallPoliciesTestIamPermissions =
+    Rs ComputeRegionNetworkFirewallPoliciesTestIamPermissions =
       TestPermissionsResponse
   type
-    Scopes
-      ComputeRegionNetworkFirewallPoliciesTestIamPermissions =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+    Scopes ComputeRegionNetworkFirewallPoliciesTestIamPermissions =
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient
     ComputeRegionNetworkFirewallPoliciesTestIamPermissions {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.DlpJobs.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.dlpJobs.delete@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.dlpJobs.delete@.
 module Gogol.DLP.Projects.Locations.DlpJobs.Delete
   ( -- * Resource
     DLPProjectsLocationsDlpJobsDeleteResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.DlpJobs.Delete
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.dlpJobs.delete@ method which the
 -- 'DLPProjectsLocationsDlpJobsDelete' request conforms to.
@@ -55,7 +53,7 @@ type DLPProjectsLocationsDlpJobsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
--- | Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- | Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsDlpJobsDelete' smart constructor.
 data DLPProjectsLocationsDlpJobsDelete = DLPProjectsLocationsDlpJobsDelete
@@ -89,13 +87,8 @@ newDLPProjectsLocationsDlpJobsDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsDlpJobsDelete
-  where
-  type
-    Rs DLPProjectsLocationsDlpJobsDelete =
-      GoogleProtobufEmpty
+instance Core.GoogleRequest DLPProjectsLocationsDlpJobsDelete where
+  type Rs DLPProjectsLocationsDlpJobsDelete = GoogleProtobufEmpty
   type
     Scopes DLPProjectsLocationsDlpJobsDelete =
       '[CloudPlatform'FullControl]

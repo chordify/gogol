@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Chromeosdevices.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Chromeosdevices.List
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.chromeosdevices.list@ method which the
 -- 'DirectoryChromeosdevicesList' request conforms to.
@@ -57,26 +55,16 @@ type DirectoryChromeosdevicesListResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "includeChildOrgunits" Core.Bool
     Core.:> Core.QueryParam "maxResults" Core.Int32
-    Core.:> Core.QueryParam
-              "orderBy"
-              ChromeosdevicesListOrderBy
+    Core.:> Core.QueryParam "orderBy" ChromeosdevicesListOrderBy
     Core.:> Core.QueryParam "orgUnitPath" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "projection"
-              ChromeosdevicesListProjection
+    Core.:> Core.QueryParam "projection" ChromeosdevicesListProjection
     Core.:> Core.QueryParam "query" Core.Text
-    Core.:> Core.QueryParam
-              "sortOrder"
-              ChromeosdevicesListSortOrder
+    Core.:> Core.QueryParam "sortOrder" ChromeosdevicesListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ChromeOsDevices
+    Core.:> Core.Get '[Core.JSON] ChromeOsDevices
 
 -- | Retrieves a paginated list of Chrome OS devices within an account.
 --
@@ -92,7 +80,7 @@ data DirectoryChromeosdevicesList = DirectoryChromeosdevicesList
     customerId :: Core.Text,
     -- | Return devices from all child orgunits, as well as the specified org unit. If this is set to true, \'orgUnitPath\' must be provided.
     includeChildOrgunits :: (Core.Maybe Core.Bool),
-    -- | Maximum number of results to return.
+    -- | Maximum number of results to return. Value should not exceed 300.
     maxResults :: Core.Int32,
     -- | Device property to use for sorting results.
     orderBy :: (Core.Maybe ChromeosdevicesListOrderBy),
@@ -100,7 +88,7 @@ data DirectoryChromeosdevicesList = DirectoryChromeosdevicesList
     orgUnitPath :: (Core.Maybe Core.Text),
     -- | The @pageToken@ query parameter is used to request the next page of query results. The follow-on request\'s @pageToken@ query parameter is the @nextPageToken@ from your previous response.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Restrict information returned to a set of selected fields.
+    -- | Determines whether the response contains the full list of properties or only a subset.
     projection :: (Core.Maybe ChromeosdevicesListProjection),
     -- | Search string in the format given at https:\/\/developers.google.com\/admin-sdk\/directory\/v1\/list-query-operators
     query :: (Core.Maybe Core.Text),
@@ -136,13 +124,8 @@ newDirectoryChromeosdevicesList customerId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DirectoryChromeosdevicesList
-  where
-  type
-    Rs DirectoryChromeosdevicesList =
-      ChromeOsDevices
+instance Core.GoogleRequest DirectoryChromeosdevicesList where
+  type Rs DirectoryChromeosdevicesList = ChromeOsDevices
   type
     Scopes DirectoryChromeosdevicesList =
       '[ Admin'Directory'Device'Chromeos,
@@ -169,7 +152,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryChromeosdevicesListResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryChromeosdevicesListResource)
           Core.mempty

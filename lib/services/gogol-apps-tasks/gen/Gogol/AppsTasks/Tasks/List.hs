@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all tasks in the specified task list.
+-- Returns all tasks in the specified task list. Does not return assigned tasks be default (from Docs, Chat Spaces). A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.list@.
 module Gogol.AppsTasks.Tasks.List
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.List
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasks.list@ method which the
 -- 'TasksTasksList' request conforms to.
@@ -59,18 +57,17 @@ type TasksTasksListResource =
     Core.:> Core.QueryParam "dueMin" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "showAssigned" Core.Bool
     Core.:> Core.QueryParam "showCompleted" Core.Bool
     Core.:> Core.QueryParam "showDeleted" Core.Bool
     Core.:> Core.QueryParam "showHidden" Core.Bool
     Core.:> Core.QueryParam "updatedMin" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Tasks
 
--- | Returns all tasks in the specified task list.
+-- | Returns all tasks in the specified task list. Does not return assigned tasks be default (from Docs, Chat Spaces). A user can have up to 20,000 non-hidden tasks per list and up to 100,000 tasks in total at a time.
 --
 -- /See:/ 'newTasksTasksList' smart constructor.
 data TasksTasksList = TasksTasksList
@@ -88,11 +85,13 @@ data TasksTasksList = TasksTasksList
     dueMax :: (Core.Maybe Core.Text),
     -- | Lower bound for a task\'s due date (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by due date.
     dueMin :: (Core.Maybe Core.Text),
-    -- | Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).
+    -- | Maximum number of tasks returned on one page. Optional. The default is 20 (max allowed: 100).
     maxResults :: (Core.Maybe Core.Int32),
     -- | Token specifying the result page to return. Optional.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Flag indicating whether completed tasks are returned in the result. Optional. The default is True. Note that showHidden must also be True to show tasks completed in first party clients, such as the web UI and Google\'s mobile apps.
+    -- | Optional. Flag indicating whether tasks assigned to the current user are returned in the result. Optional. The default is False.
+    showAssigned :: (Core.Maybe Core.Bool),
+    -- | Flag indicating whether completed tasks are returned in the result. Note that showHidden must also be True to show tasks completed in first party clients, such as the web UI and Google\'s mobile apps. Optional. The default is True.
     showCompleted :: (Core.Maybe Core.Bool),
     -- | Flag indicating whether deleted tasks are returned in the result. Optional. The default is False.
     showDeleted :: (Core.Maybe Core.Bool),
@@ -125,6 +124,7 @@ newTasksTasksList tasklist =
       dueMin = Core.Nothing,
       maxResults = Core.Nothing,
       pageToken = Core.Nothing,
+      showAssigned = Core.Nothing,
       showCompleted = Core.Nothing,
       showDeleted = Core.Nothing,
       showHidden = Core.Nothing,
@@ -136,9 +136,7 @@ newTasksTasksList tasklist =
 
 instance Core.GoogleRequest TasksTasksList where
   type Rs TasksTasksList = Tasks
-  type
-    Scopes TasksTasksList =
-      '[Tasks'FullControl, Tasks'Readonly]
+  type Scopes TasksTasksList = '[Tasks'FullControl, Tasks'Readonly]
   requestClient TasksTasksList {..} =
     go
       tasklist
@@ -151,6 +149,7 @@ instance Core.GoogleRequest TasksTasksList where
       dueMin
       maxResults
       pageToken
+      showAssigned
       showCompleted
       showDeleted
       showHidden

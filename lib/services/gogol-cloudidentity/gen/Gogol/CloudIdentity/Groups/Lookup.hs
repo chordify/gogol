@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Lookup
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Groups.Lookup
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.lookup@ method which the
 -- 'CloudIdentityGroupsLookup' request conforms to.
@@ -67,7 +65,7 @@ data CloudIdentityGroupsLookup = CloudIdentityGroupsLookup
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the entity. For Google-managed entities, the @id@ should be the email address of an existing group or user. For external-identity-mapped entities, the @id@ must be a string conforming to the Identity Source\'s requirements. Must be unique within a @namespace@.
+    -- | The ID of the entity. For Google-managed entities, the @id@ should be the email address of an existing group or user. Email addresses need to adhere to <https://support.google.com/a/answer/9193374 name guidelines for users and groups>. For external-identity-mapped entities, the @id@ must be a string conforming to the Identity Source\'s requirements. Must be unique within a @namespace@.
     groupKeyId :: (Core.Maybe Core.Text),
     -- | The namespace in which the entity exists. If not specified, the @EntityKey@ represents a Google-managed entity such as a Google user or a Google Group. If specified, the @EntityKey@ represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of @identitysources\/{identity_source}@.
     groupKeyNamespace :: (Core.Maybe Core.Text),
@@ -93,9 +91,7 @@ newCloudIdentityGroupsLookup =
     }
 
 instance Core.GoogleRequest CloudIdentityGroupsLookup where
-  type
-    Rs CloudIdentityGroupsLookup =
-      LookupGroupNameResponse
+  type Rs CloudIdentityGroupsLookup = LookupGroupNameResponse
   type
     Scopes CloudIdentityGroupsLookup =
       '[ CloudIdentity'Groups,
@@ -116,7 +112,5 @@ instance Core.GoogleRequest CloudIdentityGroupsLookup where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudIdentityGroupsLookupResource
-          )
+          (Core.Proxy :: Core.Proxy CloudIdentityGroupsLookupResource)
           Core.mempty

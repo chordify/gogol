@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsLicensing.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsLicensing.Internal.Product
@@ -45,7 +43,7 @@ module Gogol.AppsLicensing.Internal.Product
 where
 
 import Gogol.AppsLicensing.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -59,8 +57,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -110,9 +107,7 @@ instance Core.FromJSON LicenseAssignment where
       ( \o ->
           LicenseAssignment
             Core.<$> (o Core..:? "etags")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "licensing#licenseAssignment"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "licensing#licenseAssignment")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productName")
             Core.<*> (o Core..:? "selfLink")
@@ -148,21 +143,18 @@ newtype LicenseAssignmentInsert = LicenseAssignmentInsert
 -- | Creates a value of 'LicenseAssignmentInsert' with the minimum fields required to make a request.
 newLicenseAssignmentInsert ::
   LicenseAssignmentInsert
-newLicenseAssignmentInsert = LicenseAssignmentInsert {userId = Core.Nothing}
+newLicenseAssignmentInsert =
+  LicenseAssignmentInsert {userId = Core.Nothing}
 
 instance Core.FromJSON LicenseAssignmentInsert where
   parseJSON =
     Core.withObject
       "LicenseAssignmentInsert"
-      ( \o ->
-          LicenseAssignmentInsert
-            Core.<$> (o Core..:? "userId")
-      )
+      (\o -> LicenseAssignmentInsert Core.<$> (o Core..:? "userId"))
 
 instance Core.ToJSON LicenseAssignmentInsert where
   toJSON LicenseAssignmentInsert {..} =
-    Core.object
-      (Core.catMaybes [("userId" Core..=) Core.<$> userId])
+    Core.object (Core.catMaybes [("userId" Core..=) Core.<$> userId])
 
 --
 -- /See:/ 'newLicenseAssignmentList' smart constructor.
@@ -197,9 +189,7 @@ instance Core.FromJSON LicenseAssignmentList where
           LicenseAssignmentList
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "licensing#licenseAssignmentList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "licensing#licenseAssignmentList")
             Core.<*> (o Core..:? "nextPageToken")
       )
 

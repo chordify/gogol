@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Surveys.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ConsumerSurveys.Surveys.Get
 where
 
 import Gogol.ConsumerSurveys.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @consumersurveys.surveys.get@ method which the
 -- 'ConsumerSurveysSurveysGet' request conforms to.
@@ -78,14 +76,9 @@ instance Core.GoogleRequest ConsumerSurveysSurveysGet where
          Userinfo'Email
        ]
   requestClient ConsumerSurveysSurveysGet {..} =
-    go
-      surveyUrlId
-      (Core.Just Core.AltJSON)
-      consumerSurveysService
+    go surveyUrlId (Core.Just Core.AltJSON) consumerSurveysService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysGetResource
-          )
+          (Core.Proxy :: Core.Proxy ConsumerSurveysSurveysGetResource)
           Core.mempty

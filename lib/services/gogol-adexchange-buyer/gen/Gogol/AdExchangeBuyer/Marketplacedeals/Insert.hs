@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Marketplacedeals.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Marketplacedeals.Insert
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.marketplacedeals.insert@ method which the
 -- 'AdExchangeBuyerMarketplacedealsInsert' request conforms to.
@@ -79,28 +77,23 @@ newAdExchangeBuyerMarketplacedealsInsert payload proposalId =
       proposalId = proposalId
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerMarketplacedealsInsert
-  where
+instance Core.GoogleRequest AdExchangeBuyerMarketplacedealsInsert where
   type
     Rs AdExchangeBuyerMarketplacedealsInsert =
       AddOrderDealsResponse
   type
     Scopes AdExchangeBuyerMarketplacedealsInsert =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyerMarketplacedealsInsert {..} =
-      go
-        proposalId
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyerMarketplacedealsInsertResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyerMarketplacedealsInsert {..} =
+    go
+      proposalId
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyerMarketplacedealsInsertResource
+          )
+          Core.mempty

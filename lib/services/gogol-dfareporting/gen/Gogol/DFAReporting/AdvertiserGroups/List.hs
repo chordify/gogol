@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.AdvertiserGroups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.AdvertiserGroups.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.advertiserGroups.list@ method which the
 -- 'DFAReportingAdvertiserGroupsList' request conforms to.
@@ -57,18 +55,12 @@ type DFAReportingAdvertiserGroupsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              AdvertiserGroupsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              AdvertiserGroupsListSortOrder
+    Core.:> Core.QueryParam "sortField" AdvertiserGroupsListSortField
+    Core.:> Core.QueryParam "sortOrder" AdvertiserGroupsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              AdvertiserGroupsListResponse
+    Core.:> Core.Get '[Core.JSON] AdvertiserGroupsListResponse
 
 -- | Retrieves a list of advertiser groups, possibly filtered. This method supports paging.
 --
@@ -122,10 +114,7 @@ newDFAReportingAdvertiserGroupsList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertiserGroupsList
-  where
+instance Core.GoogleRequest DFAReportingAdvertiserGroupsList where
   type
     Rs DFAReportingAdvertiserGroupsList =
       AdvertiserGroupsListResponse
@@ -151,7 +140,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdvertiserGroupsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAdvertiserGroupsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Associationsessions.Verify
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSenseHost.Associationsessions.Verify
 where
 
 import Gogol.AdSenseHost.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsensehost.associationsessions.verify@ method which the
 -- 'AdSenseHostAssociationsessionsVerify' request conforms to.
@@ -70,27 +68,17 @@ newAdSenseHostAssociationsessionsVerify ::
 newAdSenseHostAssociationsessionsVerify token =
   AdSenseHostAssociationsessionsVerify {token = token}
 
-instance
-  Core.GoogleRequest
-    AdSenseHostAssociationsessionsVerify
-  where
-  type
-    Rs AdSenseHostAssociationsessionsVerify =
-      AssociationSession
+instance Core.GoogleRequest AdSenseHostAssociationsessionsVerify where
+  type Rs AdSenseHostAssociationsessionsVerify = AssociationSession
   type
     Scopes AdSenseHostAssociationsessionsVerify =
       '[Adsensehost'FullControl]
-  requestClient
-    AdSenseHostAssociationsessionsVerify {..} =
-      go
-        (Core.Just token)
-        (Core.Just Core.AltJSON)
-        adSenseHostService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdSenseHostAssociationsessionsVerifyResource
-            )
-            Core.mempty
+  requestClient AdSenseHostAssociationsessionsVerify {..} =
+    go (Core.Just token) (Core.Just Core.AltJSON) adSenseHostService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseHostAssociationsessionsVerifyResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadapk
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadapk
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.internalappsharingartifacts.uploadapk@ method which the
 -- 'AndroidPublisherInternalappsharingartifactsUploadapk' request conforms to.
@@ -60,24 +58,22 @@ type AndroidPublisherInternalappsharingartifactsUploadapkResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] InternalAppSharingArtifact
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> "internalappsharing"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "artifacts"
-      Core.:> "apk"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post
-                '[Core.JSON]
-                InternalAppSharingArtifact
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> "internalappsharing"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "artifacts"
+    Core.:> "apk"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] InternalAppSharingArtifact
 
 -- | Uploads an APK to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See <https://developers.google.com/api-client-library/java/google-api-java-client/errors Timeouts and Errors> for an example in java.
 --
@@ -105,7 +101,8 @@ newAndroidPublisherInternalappsharingartifactsUploadapk ::
   AndroidPublisherInternalappsharingartifactsUploadapk
 newAndroidPublisherInternalappsharingartifactsUploadapk packageName =
   AndroidPublisherInternalappsharingartifactsUploadapk
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       packageName = packageName,
@@ -118,12 +115,10 @@ instance
     AndroidPublisherInternalappsharingartifactsUploadapk
   where
   type
-    Rs
-      AndroidPublisherInternalappsharingartifactsUploadapk =
+    Rs AndroidPublisherInternalappsharingartifactsUploadapk =
       InternalAppSharingArtifact
   type
-    Scopes
-      AndroidPublisherInternalappsharingartifactsUploadapk =
+    Scopes AndroidPublisherInternalappsharingartifactsUploadapk =
       '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherInternalappsharingartifactsUploadapk {..} =
@@ -162,8 +157,7 @@ instance
       ( Core.MediaUpload
           AndroidPublisherInternalappsharingartifactsUploadapk
       ) =
-      Core.Scopes
-        AndroidPublisherInternalappsharingartifactsUploadapk
+      Core.Scopes AndroidPublisherInternalappsharingartifactsUploadapk
   requestClient
     ( Core.MediaUpload
         AndroidPublisherInternalappsharingartifactsUploadapk {..}

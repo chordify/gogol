@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.AccessLevels.Patch
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.patch@ method which the
 -- 'AccessContextManagerAccessPoliciesAccessLevelsPatch' request conforms to.
@@ -67,7 +65,7 @@ data AccessContextManagerAccessPoliciesAccessLevelsPatch = AccessContextManagerA
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
+    -- | Identifier. Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: AccessLevel,
@@ -82,14 +80,15 @@ data AccessContextManagerAccessPoliciesAccessLevelsPatch = AccessContextManagerA
 
 -- | Creates a value of 'AccessContextManagerAccessPoliciesAccessLevelsPatch' with the minimum fields required to make a request.
 newAccessContextManagerAccessPoliciesAccessLevelsPatch ::
-  -- |  Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@. See 'name'.
+  -- |  Identifier. Resource name for the @AccessLevel@. Format: @accessPolicies\/{access_policy}\/accessLevels\/{access_level}@. The @access_level@ component must begin with a letter, followed by alphanumeric characters or @_@. Its maximum length is 50 characters. After you create an @AccessLevel@, you cannot change its @name@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   AccessLevel ->
   AccessContextManagerAccessPoliciesAccessLevelsPatch
 newAccessContextManagerAccessPoliciesAccessLevelsPatch name payload =
   AccessContextManagerAccessPoliciesAccessLevelsPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -104,12 +103,10 @@ instance
     AccessContextManagerAccessPoliciesAccessLevelsPatch
   where
   type
-    Rs
-      AccessContextManagerAccessPoliciesAccessLevelsPatch =
+    Rs AccessContextManagerAccessPoliciesAccessLevelsPatch =
       Operation
   type
-    Scopes
-      AccessContextManagerAccessPoliciesAccessLevelsPatch =
+    Scopes AccessContextManagerAccessPoliciesAccessLevelsPatch =
       '[CloudPlatform'FullControl]
   requestClient
     AccessContextManagerAccessPoliciesAccessLevelsPatch {..} =

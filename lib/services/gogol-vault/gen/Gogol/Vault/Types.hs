@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vault.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vault.Types
@@ -69,6 +67,20 @@ module Gogol.Vault.Types
     AddMatterPermissionsRequest (..),
     newAddMatterPermissionsRequest,
 
+    -- ** CalendarExportOptions
+    CalendarExportOptions (..),
+    newCalendarExportOptions,
+
+    -- ** CalendarExportOptions_ExportFormat
+    CalendarExportOptions_ExportFormat (..),
+
+    -- ** CalendarOptions
+    CalendarOptions (..),
+    newCalendarOptions,
+
+    -- ** CalendarOptions_ResponseStatusesItem
+    CalendarOptions_ResponseStatusesItem (..),
+
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
@@ -108,6 +120,14 @@ module Gogol.Vault.Types
     CountArtifactsResponse (..),
     newCountArtifactsResponse,
 
+    -- ** DriveDocumentIds
+    DriveDocumentIds (..),
+    newDriveDocumentIds,
+
+    -- ** DriveDocumentInfo
+    DriveDocumentInfo (..),
+    newDriveDocumentInfo,
+
     -- ** DriveExportOptions
     DriveExportOptions (..),
     newDriveExportOptions,
@@ -141,6 +161,17 @@ module Gogol.Vault.Types
     ExportStats (..),
     newExportStats,
 
+    -- ** GeminiExportOptions
+    GeminiExportOptions (..),
+    newGeminiExportOptions,
+
+    -- ** GeminiExportOptions_ExportFormat
+    GeminiExportOptions_ExportFormat (..),
+
+    -- ** GeminiOptions
+    GeminiOptions (..),
+    newGeminiOptions,
+
     -- ** GroupsCountResult
     GroupsCountResult (..),
     newGroupsCountResult,
@@ -170,6 +201,10 @@ module Gogol.Vault.Types
     -- ** HeldAccount
     HeldAccount (..),
     newHeldAccount,
+
+    -- ** HeldCalendarQuery
+    HeldCalendarQuery (..),
+    newHeldCalendarQuery,
 
     -- ** HeldDriveQuery
     HeldDriveQuery (..),
@@ -244,9 +279,15 @@ module Gogol.Vault.Types
     MailOptions (..),
     newMailOptions,
 
+    -- ** MailOptions_ClientSideEncryptedOption
+    MailOptions_ClientSideEncryptedOption (..),
+
     -- ** Matter
     Matter (..),
     newMatter,
+
+    -- ** Matter_MatterRegion
+    Matter_MatterRegion (..),
 
     -- ** Matter_State
     Matter_State (..),
@@ -373,7 +414,7 @@ module Gogol.Vault.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vault.Internal.Product
 import Gogol.Vault.Internal.Sum
 
@@ -385,7 +426,9 @@ vaultService =
     "vault.googleapis.com"
 
 -- | Manage your eDiscovery data
-type Ediscovery'FullControl = "https://www.googleapis.com/auth/ediscovery"
+type Ediscovery'FullControl =
+  "https://www.googleapis.com/auth/ediscovery"
 
 -- | View your eDiscovery data
-type Ediscovery'Readonly = "https://www.googleapis.com/auth/ediscovery.readonly"
+type Ediscovery'Readonly =
+  "https://www.googleapis.com/auth/ediscovery.readonly"

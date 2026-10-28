@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.Actions.Execute
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,7 +40,7 @@ module Gogol.RemoteBuildExecution.Actions.Execute
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actions.execute@ method which the
@@ -57,9 +55,7 @@ type RemoteBuildExecutionActionsExecuteResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2ExecuteRequest
+    Core.:> Core.ReqBody '[Core.JSON] BuildBazelRemoteExecutionV2ExecuteRequest
     Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Execute an action remotely. In order to execute an action, the client must first upload all of the inputs, the Command to run, and the Action into the ContentAddressableStorage. It then calls @Execute@ with an @action_digest@ referring to them. The server will run the action and eventually return the result. The input @Action@\'s fields MUST meet the various canonicalization requirements specified in the documentation for their types so that it has the same digest as other logically equivalent @Action@s. The server MAY enforce the requirements and return errors if a non-canonical input is received. It MAY also proceed without verifying some or all of the requirements, such as for performance reasons. If the server does not verify the requirement, then it will treat the @Action@ as distinct from another logically equivalent action if they hash differently. Returns a stream of google.longrunning.Operation messages describing the resulting execution, with eventual @response@ ExecuteResponse. The @metadata@ on
@@ -104,10 +100,7 @@ newRemoteBuildExecutionActionsExecute instanceName payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RemoteBuildExecutionActionsExecute
-  where
+instance Core.GoogleRequest RemoteBuildExecutionActionsExecute where
   type
     Rs RemoteBuildExecutionActionsExecute =
       GoogleLongrunningOperation
@@ -129,7 +122,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                RemoteBuildExecutionActionsExecuteResource
+              Core.Proxy RemoteBuildExecutionActionsExecuteResource
           )
           Core.mempty

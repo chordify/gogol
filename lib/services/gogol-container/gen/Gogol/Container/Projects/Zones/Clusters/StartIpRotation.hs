@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Zones.Clusters.StartIpRotation
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Starts master IP rotation.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.startIpRotation@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.startIpRotation@.
 module Gogol.Container.Projects.Zones.Clusters.StartIpRotation
   ( -- * Resource
     ContainerProjectsZonesClustersStartIpRotationResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Zones.Clusters.StartIpRotation
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.zones.clusters.startIpRotation@ method which the
 -- 'ContainerProjectsZonesClustersStartIpRotation' request conforms to.
@@ -51,10 +49,7 @@ type ContainerProjectsZonesClustersStartIpRotationResource =
     Core.:> "zones"
     Core.:> Core.Capture "zone" Core.Text
     Core.:> "clusters"
-    Core.:> Core.CaptureMode
-              "clusterId"
-              "startIpRotation"
-              Core.Text
+    Core.:> Core.CaptureMode "clusterId" "startIpRotation" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -100,49 +95,49 @@ newContainerProjectsZonesClustersStartIpRotation ::
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field. See 'zone'.
   Core.Text ->
   ContainerProjectsZonesClustersStartIpRotation
-newContainerProjectsZonesClustersStartIpRotation clusterId payload projectId zone =
-  ContainerProjectsZonesClustersStartIpRotation
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newContainerProjectsZonesClustersStartIpRotation
+  clusterId
+  payload
+  projectId
+  zone =
+    ContainerProjectsZonesClustersStartIpRotation
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ContainerProjectsZonesClustersStartIpRotation
   where
+  type Rs ContainerProjectsZonesClustersStartIpRotation = Operation
   type
-    Rs ContainerProjectsZonesClustersStartIpRotation =
-      Operation
-  type
-    Scopes
-      ContainerProjectsZonesClustersStartIpRotation =
+    Scopes ContainerProjectsZonesClustersStartIpRotation =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsZonesClustersStartIpRotation {..} =
-      go
-        projectId
-        zone
-        clusterId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsZonesClustersStartIpRotationResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsZonesClustersStartIpRotation {..} =
+    go
+      projectId
+      zone
+      clusterId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsZonesClustersStartIpRotationResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.StoredInfoTypes.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the stored infoType by creating a new version. The existing version will continue to be used until the new version is ready. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Updates the stored infoType by creating a new version. The existing version will continue to be used until the new version is ready. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.storedInfoTypes.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.storedInfoTypes.patch@.
 module Gogol.DLP.Organizations.StoredInfoTypes.Patch
   ( -- * Resource
     DLPOrganizationsStoredInfoTypesPatchResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.StoredInfoTypes.Patch
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.patch@ method which the
 -- 'DLPOrganizationsStoredInfoTypesPatch' request conforms to.
@@ -56,11 +54,9 @@ type DLPOrganizationsStoredInfoTypesPatchResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2UpdateStoredInfoTypeRequest
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GooglePrivacyDlpV2StoredInfoType
+    Core.:> Core.Patch '[Core.JSON] GooglePrivacyDlpV2StoredInfoType
 
--- | Updates the stored infoType by creating a new version. The existing version will continue to be used until the new version is ready. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Updates the stored infoType by creating a new version. The existing version will continue to be used until the new version is ready. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPOrganizationsStoredInfoTypesPatch' smart constructor.
 data DLPOrganizationsStoredInfoTypesPatch = DLPOrganizationsStoredInfoTypesPatch
@@ -99,33 +95,28 @@ newDLPOrganizationsStoredInfoTypesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsStoredInfoTypesPatch
-  where
+instance Core.GoogleRequest DLPOrganizationsStoredInfoTypesPatch where
   type
     Rs DLPOrganizationsStoredInfoTypesPatch =
       GooglePrivacyDlpV2StoredInfoType
   type
     Scopes DLPOrganizationsStoredInfoTypesPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsStoredInfoTypesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsStoredInfoTypesPatchResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsStoredInfoTypesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsStoredInfoTypesPatchResource
+          )
+          Core.mempty

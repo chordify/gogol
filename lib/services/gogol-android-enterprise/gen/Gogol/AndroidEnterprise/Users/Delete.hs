@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Users.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Users.Delete
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.users.delete@ method which the
 -- 'AndroidEnterpriseUsersDelete' request conforms to.
@@ -98,10 +96,7 @@ newAndroidEnterpriseUsersDelete enterpriseId userId =
       userId = userId
     }
 
-instance
-  Core.GoogleRequest
-    AndroidEnterpriseUsersDelete
-  where
+instance Core.GoogleRequest AndroidEnterpriseUsersDelete where
   type Rs AndroidEnterpriseUsersDelete = ()
   type
     Scopes AndroidEnterpriseUsersDelete =
@@ -120,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidEnterpriseUsersDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidEnterpriseUsersDeleteResource)
           Core.mempty

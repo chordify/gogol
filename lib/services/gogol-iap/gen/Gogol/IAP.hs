@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -128,6 +126,11 @@ module Gogol.IAP
     IAPUpdateIapSettings (..),
     newIAPUpdateIapSettings,
 
+    -- ** iap.validateAttributeExpression
+    IAPValidateAttributeExpressionResource,
+    IAPValidateAttributeExpression (..),
+    newIAPValidateAttributeExpression,
+
     -- * Types
 
     -- ** Xgafv
@@ -140,6 +143,9 @@ module Gogol.IAP
     -- ** AccessSettings
     AccessSettings (..),
     newAccessSettings,
+
+    -- ** AccessSettings_IdentitySourcesItem
+    AccessSettings_IdentitySourcesItem (..),
 
     -- ** AllowedDomainsSettings
     AllowedDomainsSettings (..),
@@ -212,6 +218,14 @@ module Gogol.IAP
     ListTunnelDestGroupsResponse (..),
     newListTunnelDestGroupsResponse,
 
+    -- ** NextStateOfTags
+    NextStateOfTags (..),
+    newNextStateOfTags,
+
+    -- ** OAuth2
+    OAuth2 (..),
+    newOAuth2,
+
     -- ** OAuthSettings
     OAuthSettings (..),
     newOAuthSettings,
@@ -246,6 +260,10 @@ module Gogol.IAP
     Resource (..),
     newResource,
 
+    -- ** Resource_ExpectedNextState
+    Resource_ExpectedNextState (..),
+    newResource_ExpectedNextState,
+
     -- ** Resource_Labels
     Resource_Labels (..),
     newResource_Labels,
@@ -253,6 +271,30 @@ module Gogol.IAP
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
+
+    -- ** TagsFullState
+    TagsFullState (..),
+    newTagsFullState,
+
+    -- ** TagsFullState_Tags
+    TagsFullState_Tags (..),
+    newTagsFullState_Tags,
+
+    -- ** TagsFullStateForChildResource
+    TagsFullStateForChildResource (..),
+    newTagsFullStateForChildResource,
+
+    -- ** TagsFullStateForChildResource_Tags
+    TagsFullStateForChildResource_Tags (..),
+    newTagsFullStateForChildResource_Tags,
+
+    -- ** TagsPartialState
+    TagsPartialState (..),
+    newTagsPartialState,
+
+    -- ** TagsPartialState_TagsToUpsert
+    TagsPartialState_TagsToUpsert (..),
+    newTagsPartialState_TagsToUpsert,
 
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
@@ -265,6 +307,14 @@ module Gogol.IAP
     -- ** TunnelDestGroup
     TunnelDestGroup (..),
     newTunnelDestGroup,
+
+    -- ** ValidateIapAttributeExpressionResponse
+    ValidateIapAttributeExpressionResponse (..),
+    newValidateIapAttributeExpressionResponse,
+
+    -- ** WorkforceIdentitySettings
+    WorkforceIdentitySettings (..),
+    newWorkforceIdentitySettings,
   )
 where
 
@@ -287,3 +337,4 @@ import Gogol.IAP.SetIamPolicy
 import Gogol.IAP.TestIamPermissions
 import Gogol.IAP.Types
 import Gogol.IAP.UpdateIapSettings
+import Gogol.IAP.ValidateAttributeExpression

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Adclients.Adunits.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Adclients.Adunits.List
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.adclients.adunits.list@ method which the
 -- 'AdSenseAccountsAdclientsAdunitsList' request conforms to.
@@ -98,13 +96,8 @@ newAdSenseAccountsAdclientsAdunitsList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseAccountsAdclientsAdunitsList
-  where
-  type
-    Rs AdSenseAccountsAdclientsAdunitsList =
-      ListAdUnitsResponse
+instance Core.GoogleRequest AdSenseAccountsAdclientsAdunitsList where
+  type Rs AdSenseAccountsAdclientsAdunitsList = ListAdUnitsResponse
   type
     Scopes AdSenseAccountsAdclientsAdunitsList =
       '[Adsense'FullControl, Adsense'Readonly]
@@ -124,7 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AdSenseAccountsAdclientsAdunitsListResource
+              Core.Proxy AdSenseAccountsAdclientsAdunitsListResource
           )
           Core.mempty

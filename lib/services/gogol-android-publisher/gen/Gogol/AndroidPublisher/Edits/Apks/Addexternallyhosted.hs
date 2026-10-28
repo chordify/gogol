@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.apks.addexternallyhosted@ method which the
 -- 'AndroidPublisherEditsApksAddexternallyhosted' request conforms to.
@@ -59,12 +57,8 @@ type AndroidPublisherEditsApksAddexternallyhostedResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ApksAddExternallyHostedRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              ApksAddExternallyHostedResponse
+    Core.:> Core.ReqBody '[Core.JSON] ApksAddExternallyHostedRequest
+    Core.:> Core.Post '[Core.JSON] ApksAddExternallyHostedResponse
 
 -- | Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to organizations using Managed Play whose application is configured to restrict distribution to the organizations.
 --
@@ -98,17 +92,21 @@ newAndroidPublisherEditsApksAddexternallyhosted ::
   -- |  Multipart request metadata. See 'payload'.
   ApksAddExternallyHostedRequest ->
   AndroidPublisherEditsApksAddexternallyhosted
-newAndroidPublisherEditsApksAddexternallyhosted editId packageName payload =
-  AndroidPublisherEditsApksAddexternallyhosted
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      editId = editId,
-      packageName = packageName,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherEditsApksAddexternallyhosted
+  editId
+  packageName
+  payload =
+    AndroidPublisherEditsApksAddexternallyhosted
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        editId = editId,
+        packageName = packageName,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -118,27 +116,24 @@ instance
     Rs AndroidPublisherEditsApksAddexternallyhosted =
       ApksAddExternallyHostedResponse
   type
-    Scopes
-      AndroidPublisherEditsApksAddexternallyhosted =
+    Scopes AndroidPublisherEditsApksAddexternallyhosted =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherEditsApksAddexternallyhosted {..} =
-      go
-        packageName
-        editId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsApksAddexternallyhostedResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherEditsApksAddexternallyhosted {..} =
+    go
+      packageName
+      editId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherEditsApksAddexternallyhostedResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Get
 where
 
 import Gogol.IAP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @iap.projects.iap_tunnel.locations.destGroups.get@ method which the
 -- 'IAPProjectsIap_tunnelLocationsDestGroupsGet' request conforms to.
@@ -97,25 +95,22 @@ instance
     Rs IAPProjectsIap_tunnelLocationsDestGroupsGet =
       TunnelDestGroup
   type
-    Scopes
-      IAPProjectsIap_tunnelLocationsDestGroupsGet =
+    Scopes IAPProjectsIap_tunnelLocationsDestGroupsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    IAPProjectsIap_tunnelLocationsDestGroupsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        iAPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAPProjectsIap_tunnelLocationsDestGroupsGetResource
-            )
-            Core.mempty
+  requestClient IAPProjectsIap_tunnelLocationsDestGroupsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAPProjectsIap_tunnelLocationsDestGroupsGetResource
+          )
+          Core.mempty

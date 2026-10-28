@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.ResourceRecordSets.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DNS.ResourceRecordSets.Delete
 where
 
 import Gogol.DNS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dns.resourceRecordSets.delete@ method which the
 -- 'DNSResourceRecordSetsDelete' request conforms to.
@@ -120,10 +118,7 @@ newDNSResourceRecordSetsDelete managedZone name project type' =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DNSResourceRecordSetsDelete
-  where
+instance Core.GoogleRequest DNSResourceRecordSetsDelete where
   type Rs DNSResourceRecordSetsDelete = ()
   type
     Scopes DNSResourceRecordSetsDelete =
@@ -146,7 +141,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DNSResourceRecordSetsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy DNSResourceRecordSetsDeleteResource)
           Core.mempty

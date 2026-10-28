@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Onboarding.ListCategoryVolumes
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Onboarding.ListCategoryVolumes
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.onboarding.listCategoryVolumes@ method which the
 -- 'BooksOnboardingListCategoryVolumes' request conforms to.
@@ -108,10 +106,7 @@ newBooksOnboardingListCategoryVolumes =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksOnboardingListCategoryVolumes
-  where
+instance Core.GoogleRequest BooksOnboardingListCategoryVolumes where
   type Rs BooksOnboardingListCategoryVolumes = Volume2
   type
     Scopes BooksOnboardingListCategoryVolumes =
@@ -134,7 +129,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                BooksOnboardingListCategoryVolumesResource
+              Core.Proxy BooksOnboardingListCategoryVolumesResource
           )
           Core.mempty

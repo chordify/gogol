@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Mirror.Timeline.Attachments.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Mirror.Timeline.Attachments.Get
 where
 
 import Gogol.Mirror.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @mirror.timeline.attachments.get@ method which the
 -- 'MirrorTimelineAttachmentsGet' request conforms to.
@@ -54,13 +52,13 @@ type MirrorTimelineAttachmentsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Attachment
     Core.:<|> "mirror"
-      Core.:> "v1"
-      Core.:> "timeline"
-      Core.:> Core.Capture "itemId" Core.Text
-      Core.:> "attachments"
-      Core.:> Core.Capture "attachmentId" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v1"
+    Core.:> "timeline"
+    Core.:> Core.Capture "itemId" Core.Text
+    Core.:> "attachments"
+    Core.:> Core.Capture "attachmentId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
@@ -81,28 +79,20 @@ newMirrorTimelineAttachmentsGet ::
   Core.Text ->
   MirrorTimelineAttachmentsGet
 newMirrorTimelineAttachmentsGet attachmentId itemId =
-  MirrorTimelineAttachmentsGet {attachmentId = attachmentId, itemId = itemId}
+  MirrorTimelineAttachmentsGet
+    { attachmentId = attachmentId,
+      itemId = itemId
+    }
 
-instance
-  Core.GoogleRequest
-    MirrorTimelineAttachmentsGet
-  where
+instance Core.GoogleRequest MirrorTimelineAttachmentsGet where
   type Rs MirrorTimelineAttachmentsGet = Attachment
-  type
-    Scopes MirrorTimelineAttachmentsGet =
-      '[Glass'Timeline]
+  type Scopes MirrorTimelineAttachmentsGet = '[Glass'Timeline]
   requestClient MirrorTimelineAttachmentsGet {..} =
-    go
-      itemId
-      attachmentId
-      (Core.Just Core.AltJSON)
-      mirrorService
+    go itemId attachmentId (Core.Just Core.AltJSON) mirrorService
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorTimelineAttachmentsGetResource
-          )
+          (Core.Proxy :: Core.Proxy MirrorTimelineAttachmentsGetResource)
           Core.mempty
 
 instance
@@ -110,24 +100,15 @@ instance
     (Core.MediaDownload MirrorTimelineAttachmentsGet)
   where
   type
-    Rs
-      (Core.MediaDownload MirrorTimelineAttachmentsGet) =
+    Rs (Core.MediaDownload MirrorTimelineAttachmentsGet) =
       Core.Stream
   type
-    Scopes
-      (Core.MediaDownload MirrorTimelineAttachmentsGet) =
+    Scopes (Core.MediaDownload MirrorTimelineAttachmentsGet) =
       Core.Scopes MirrorTimelineAttachmentsGet
-  requestClient
-    (Core.MediaDownload MirrorTimelineAttachmentsGet {..}) =
-      go
-        itemId
-        attachmentId
-        (Core.Just Core.AltMedia)
-        mirrorService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy MirrorTimelineAttachmentsGetResource
-            )
-            Core.mempty
+  requestClient (Core.MediaDownload MirrorTimelineAttachmentsGet {..}) =
+    go itemId attachmentId (Core.Just Core.AltMedia) mirrorService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy MirrorTimelineAttachmentsGetResource)
+          Core.mempty

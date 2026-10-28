@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GroupsSettings.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.GroupsSettings.Internal.Product
@@ -33,7 +31,7 @@ module Gogol.GroupsSettings.Internal.Product
 where
 
 import Gogol.GroupsSettings.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | JSON template for Group resource
 --
@@ -164,7 +162,7 @@ data Groups = Groups
     -- - ALL/MEMBERS/CAN/INVITE: Managers and members can invite a new member candidate. - ALL/MANAGERS/CAN/INVITE: Only managers can invite a new member. This includes the group\'s owner. - ALL/OWNERS/CAN/INVITE: Only owners can invite a new member. - NONE/CAN_INVITE: No one can invite a new member candidate.
     whoCanInvite :: (Core.Maybe Core.Text),
     -- | Permission to join group. Possible values are:
-    -- - ANYONE/CAN/JOIN: Anyone in the account domain can join. This includes accounts with multiple domains. - ALL/IN/DOMAIN/CAN/JOIN: Any Internet user who is outside your domain can access your Google Groups service and view the list of groups in your Groups directory. Warning: Group owners can add external addresses, outside of the domain to their groups. They can also allow people outside your domain to join their groups. If you later disable this option, any external addresses already added to users\' groups remain in those groups. - INVITED/CAN/JOIN: Candidates for membership can be invited to join.
+    -- - ANYONE/CAN/JOIN: Any Internet user who is outside your domain can access your Google Groups service and view the list of groups in your Groups directory. Warning: Group owners can add external addresses, outside of the domain to their groups. They can also allow people outside your domain to join their groups. If you later disable this option, any external addresses already added to users\' groups remain in those groups. - ALL/IN/DOMAIN/CAN/JOIN: Anyone in the account domain can join. This includes accounts with multiple domains. - INVITED/CAN/JOIN: Candidates for membership can be invited to join.
     -- - CAN/REQUEST/TO_JOIN: Non members can request an invitation to join.
     whoCanJoin :: (Core.Maybe Core.Text),
     -- | Permission to leave the group. Possible values are:
@@ -318,9 +316,7 @@ instance Core.FromJSON Groups where
             Core.<*> (o Core..:? "archiveOnly")
             Core.<*> (o Core..:? "customFooterText")
             Core.<*> (o Core..:? "customReplyTo")
-            Core.<*> ( o
-                         Core..:? "customRolesEnabledForSettingsToBeMerged"
-                     )
+            Core.<*> (o Core..:? "customRolesEnabledForSettingsToBeMerged")
             Core.<*> (o Core..:? "defaultMessageDenyNotificationText")
             Core.<*> (o Core..:? "default_sender")
             Core.<*> (o Core..:? "description")
@@ -382,14 +378,12 @@ instance Core.ToJSON Groups where
   toJSON Groups {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowExternalMembers" Core..=)
-              Core.<$> allowExternalMembers,
+          [ ("allowExternalMembers" Core..=) Core.<$> allowExternalMembers,
             ("allowGoogleCommunication" Core..=)
               Core.<$> allowGoogleCommunication,
             ("allowWebPosting" Core..=) Core.<$> allowWebPosting,
             ("archiveOnly" Core..=) Core.<$> archiveOnly,
-            ("customFooterText" Core..=)
-              Core.<$> customFooterText,
+            ("customFooterText" Core..=) Core.<$> customFooterText,
             ("customReplyTo" Core..=) Core.<$> customReplyTo,
             ("customRolesEnabledForSettingsToBeMerged" Core..=)
               Core.<$> customRolesEnabledForSettingsToBeMerged,
@@ -400,10 +394,8 @@ instance Core.ToJSON Groups where
             ("email" Core..=) Core.<$> email,
             ("enableCollaborativeInbox" Core..=)
               Core.<$> enableCollaborativeInbox,
-            ("favoriteRepliesOnTop" Core..=)
-              Core.<$> favoriteRepliesOnTop,
-            ("includeCustomFooter" Core..=)
-              Core.<$> includeCustomFooter,
+            ("favoriteRepliesOnTop" Core..=) Core.<$> favoriteRepliesOnTop,
+            ("includeCustomFooter" Core..=) Core.<$> includeCustomFooter,
             ("includeInGlobalAddressList" Core..=)
               Core.<$> includeInGlobalAddressList,
             ("isArchived" Core..=) Core.<$> isArchived,
@@ -411,82 +403,56 @@ instance Core.ToJSON Groups where
             ("maxMessageBytes" Core..=) Core.<$> maxMessageBytes,
             ("membersCanPostAsTheGroup" Core..=)
               Core.<$> membersCanPostAsTheGroup,
-            ("messageDisplayFont" Core..=)
-              Core.<$> messageDisplayFont,
-            ("messageModerationLevel" Core..=)
-              Core.<$> messageModerationLevel,
+            ("messageDisplayFont" Core..=) Core.<$> messageDisplayFont,
+            ("messageModerationLevel" Core..=) Core.<$> messageModerationLevel,
             ("name" Core..=) Core.<$> name,
             ("primaryLanguage" Core..=) Core.<$> primaryLanguage,
             ("replyTo" Core..=) Core.<$> replyTo,
             ("sendMessageDenyNotification" Core..=)
               Core.<$> sendMessageDenyNotification,
-            ("showInGroupDirectory" Core..=)
-              Core.<$> showInGroupDirectory,
-            ("spamModerationLevel" Core..=)
-              Core.<$> spamModerationLevel,
+            ("showInGroupDirectory" Core..=) Core.<$> showInGroupDirectory,
+            ("spamModerationLevel" Core..=) Core.<$> spamModerationLevel,
             ("whoCanAdd" Core..=) Core.<$> whoCanAdd,
-            ("whoCanAddReferences" Core..=)
-              Core.<$> whoCanAddReferences,
-            ("whoCanApproveMembers" Core..=)
-              Core.<$> whoCanApproveMembers,
-            ("whoCanApproveMessages" Core..=)
-              Core.<$> whoCanApproveMessages,
-            ("whoCanAssignTopics" Core..=)
-              Core.<$> whoCanAssignTopics,
-            ("whoCanAssistContent" Core..=)
-              Core.<$> whoCanAssistContent,
+            ("whoCanAddReferences" Core..=) Core.<$> whoCanAddReferences,
+            ("whoCanApproveMembers" Core..=) Core.<$> whoCanApproveMembers,
+            ("whoCanApproveMessages" Core..=) Core.<$> whoCanApproveMessages,
+            ("whoCanAssignTopics" Core..=) Core.<$> whoCanAssignTopics,
+            ("whoCanAssistContent" Core..=) Core.<$> whoCanAssistContent,
             ("whoCanBanUsers" Core..=) Core.<$> whoCanBanUsers,
-            ("whoCanContactOwner" Core..=)
-              Core.<$> whoCanContactOwner,
-            ("whoCanDeleteAnyPost" Core..=)
-              Core.<$> whoCanDeleteAnyPost,
-            ("whoCanDeleteTopics" Core..=)
-              Core.<$> whoCanDeleteTopics,
-            ("whoCanDiscoverGroup" Core..=)
-              Core.<$> whoCanDiscoverGroup,
+            ("whoCanContactOwner" Core..=) Core.<$> whoCanContactOwner,
+            ("whoCanDeleteAnyPost" Core..=) Core.<$> whoCanDeleteAnyPost,
+            ("whoCanDeleteTopics" Core..=) Core.<$> whoCanDeleteTopics,
+            ("whoCanDiscoverGroup" Core..=) Core.<$> whoCanDiscoverGroup,
             ("whoCanEnterFreeFormTags" Core..=)
               Core.<$> whoCanEnterFreeFormTags,
             ("whoCanHideAbuse" Core..=) Core.<$> whoCanHideAbuse,
             ("whoCanInvite" Core..=) Core.<$> whoCanInvite,
             ("whoCanJoin" Core..=) Core.<$> whoCanJoin,
-            ("whoCanLeaveGroup" Core..=)
-              Core.<$> whoCanLeaveGroup,
-            ("whoCanLockTopics" Core..=)
-              Core.<$> whoCanLockTopics,
-            ("whoCanMakeTopicsSticky" Core..=)
-              Core.<$> whoCanMakeTopicsSticky,
-            ("whoCanMarkDuplicate" Core..=)
-              Core.<$> whoCanMarkDuplicate,
+            ("whoCanLeaveGroup" Core..=) Core.<$> whoCanLeaveGroup,
+            ("whoCanLockTopics" Core..=) Core.<$> whoCanLockTopics,
+            ("whoCanMakeTopicsSticky" Core..=) Core.<$> whoCanMakeTopicsSticky,
+            ("whoCanMarkDuplicate" Core..=) Core.<$> whoCanMarkDuplicate,
             ("whoCanMarkFavoriteReplyOnAnyTopic" Core..=)
               Core.<$> whoCanMarkFavoriteReplyOnAnyTopic,
             ("whoCanMarkFavoriteReplyOnOwnTopic" Core..=)
               Core.<$> whoCanMarkFavoriteReplyOnOwnTopic,
             ("whoCanMarkNoResponseNeeded" Core..=)
               Core.<$> whoCanMarkNoResponseNeeded,
-            ("whoCanModerateContent" Core..=)
-              Core.<$> whoCanModerateContent,
-            ("whoCanModerateMembers" Core..=)
-              Core.<$> whoCanModerateMembers,
-            ("whoCanModifyMembers" Core..=)
-              Core.<$> whoCanModifyMembers,
+            ("whoCanModerateContent" Core..=) Core.<$> whoCanModerateContent,
+            ("whoCanModerateMembers" Core..=) Core.<$> whoCanModerateMembers,
+            ("whoCanModifyMembers" Core..=) Core.<$> whoCanModifyMembers,
             ("whoCanModifyTagsAndCategories" Core..=)
               Core.<$> whoCanModifyTagsAndCategories,
-            ("whoCanMoveTopicsIn" Core..=)
-              Core.<$> whoCanMoveTopicsIn,
-            ("whoCanMoveTopicsOut" Core..=)
-              Core.<$> whoCanMoveTopicsOut,
+            ("whoCanMoveTopicsIn" Core..=) Core.<$> whoCanMoveTopicsIn,
+            ("whoCanMoveTopicsOut" Core..=) Core.<$> whoCanMoveTopicsOut,
             ("whoCanPostAnnouncements" Core..=)
               Core.<$> whoCanPostAnnouncements,
-            ("whoCanPostMessage" Core..=)
-              Core.<$> whoCanPostMessage,
-            ("whoCanTakeTopics" Core..=)
-              Core.<$> whoCanTakeTopics,
-            ("whoCanUnassignTopic" Core..=)
-              Core.<$> whoCanUnassignTopic,
+            ("whoCanPostMessage" Core..=) Core.<$> whoCanPostMessage,
+            ("whoCanTakeTopics" Core..=) Core.<$> whoCanTakeTopics,
+            ("whoCanUnassignTopic" Core..=) Core.<$> whoCanUnassignTopic,
             ("whoCanUnmarkFavoriteReplyOnAnyTopic" Core..=)
               Core.<$> whoCanUnmarkFavoriteReplyOnAnyTopic,
             ("whoCanViewGroup" Core..=) Core.<$> whoCanViewGroup,
-            ("whoCanViewMembership" Core..=)
-              Core.<$> whoCanViewMembership
+            ("whoCanViewMembership" Core..=) Core.<$> whoCanViewMembership
           ]
       )

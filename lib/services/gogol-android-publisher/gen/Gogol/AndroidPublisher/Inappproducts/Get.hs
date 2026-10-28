@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets an in-app product, which can be a managed product or a subscription.
+-- Gets an in-app product, which can be a managed product or a subscription. This method should no longer be used to retrieve subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.get@.
 module Gogol.AndroidPublisher.Inappproducts.Get
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Inappproducts.Get
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.inappproducts.get@ method which the
 -- 'AndroidPublisherInappproductsGet' request conforms to.
@@ -59,7 +57,7 @@ type AndroidPublisherInappproductsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] InAppProduct
 
--- | Gets an in-app product, which can be a managed product or a subscription.
+-- | Gets an in-app product, which can be a managed product or a subscription. This method should no longer be used to retrieve subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ 'newAndroidPublisherInappproductsGet' smart constructor.
 data AndroidPublisherInappproductsGet = AndroidPublisherInappproductsGet
@@ -98,13 +96,8 @@ newAndroidPublisherInappproductsGet packageName sku =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsGet
-  where
-  type
-    Rs AndroidPublisherInappproductsGet =
-      InAppProduct
+instance Core.GoogleRequest AndroidPublisherInappproductsGet where
+  type Rs AndroidPublisherInappproductsGet = InAppProduct
   type
     Scopes AndroidPublisherInappproductsGet =
       '[Androidpublisher'FullControl]
@@ -122,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherInappproductsGetResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidPublisherInappproductsGetResource)
           Core.mempty

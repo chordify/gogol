@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its RateLimits or is PAUSED. This command is meant to be used for manual debugging. For example, RunTask can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. The dispatched task is returned. That is, the task that is returned contains the status after the task is dispatched but before the task is received by its target. If Cloud Tasks receives a successful response from the task\'s target, then the task will be deleted; otherwise the task\'s schedule/time will be reset to the time that RunTask was called plus the retry delay specified in the queue\'s RetryConfig. RunTask returns NOT/FOUND when it is called on a task that has already succeeded or permanently failed.
+-- Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its RateLimits or is PAUSED. This command is meant to be used for manual debugging. For example, RunTask can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. If Cloud Tasks receives a successful response from the task\'s target, then the task will be deleted; otherwise the task\'s schedule/time will be reset to the time that RunTask was called plus the retry delay specified in the queue\'s RetryConfig. RunTask returns NOT/FOUND when it is called on a task that has already succeeded or permanently failed.
 --
 -- /See:/ <https://cloud.google.com/tasks/ Cloud Tasks API Reference> for @cloudtasks.projects.locations.queues.tasks.run@.
 module Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
@@ -40,7 +38,7 @@ module Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
 where
 
 import Gogol.CloudTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudtasks.projects.locations.queues.tasks.run@ method which the
 -- 'CloudTasksProjectsLocationsQueuesTasksRun' request conforms to.
@@ -56,7 +54,7 @@ type CloudTasksProjectsLocationsQueuesTasksRunResource =
     Core.:> Core.ReqBody '[Core.JSON] RunTaskRequest
     Core.:> Core.Post '[Core.JSON] Task
 
--- | Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its RateLimits or is PAUSED. This command is meant to be used for manual debugging. For example, RunTask can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. The dispatched task is returned. That is, the task that is returned contains the status after the task is dispatched but before the task is received by its target. If Cloud Tasks receives a successful response from the task\'s target, then the task will be deleted; otherwise the task\'s schedule/time will be reset to the time that RunTask was called plus the retry delay specified in the queue\'s RetryConfig. RunTask returns NOT/FOUND when it is called on a task that has already succeeded or permanently failed.
+-- | Forces a task to run now. When this method is called, Cloud Tasks will dispatch the task, even if the task is already running, the queue has reached its RateLimits or is PAUSED. This command is meant to be used for manual debugging. For example, RunTask can be used to retry a failed task after a fix has been made or to manually force a task to be dispatched now. If Cloud Tasks receives a successful response from the task\'s target, then the task will be deleted; otherwise the task\'s schedule/time will be reset to the time that RunTask was called plus the retry delay specified in the queue\'s RetryConfig. RunTask returns NOT/FOUND when it is called on a task that has already succeeded or permanently failed.
 --
 -- /See:/ 'newCloudTasksProjectsLocationsQueuesTasksRun' smart constructor.
 data CloudTasksProjectsLocationsQueuesTasksRun = CloudTasksProjectsLocationsQueuesTasksRun
@@ -99,29 +97,25 @@ instance
   Core.GoogleRequest
     CloudTasksProjectsLocationsQueuesTasksRun
   where
-  type
-    Rs CloudTasksProjectsLocationsQueuesTasksRun =
-      Task
+  type Rs CloudTasksProjectsLocationsQueuesTasksRun = Task
   type
     Scopes CloudTasksProjectsLocationsQueuesTasksRun =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudTasksProjectsLocationsQueuesTasksRun {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudTasksService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudTasksProjectsLocationsQueuesTasksRunResource
-            )
-            Core.mempty
+  requestClient CloudTasksProjectsLocationsQueuesTasksRun {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudTasksService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudTasksProjectsLocationsQueuesTasksRunResource
+          )
+          Core.mempty

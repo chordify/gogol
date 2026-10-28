@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Annotations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Mylibrary.Annotations.List
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.annotations.list@ method which the
 -- 'BooksMylibraryAnnotationsList' request conforms to.
@@ -62,9 +60,7 @@ type BooksMylibraryAnnotationsListResource =
     Core.:> Core.QueryParam "updatedMax" Core.Text
     Core.:> Core.QueryParam "updatedMin" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "volumeId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Annotations
@@ -128,14 +124,9 @@ newBooksMylibraryAnnotationsList =
       volumeId = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMylibraryAnnotationsList
-  where
+instance Core.GoogleRequest BooksMylibraryAnnotationsList where
   type Rs BooksMylibraryAnnotationsList = Annotations
-  type
-    Scopes BooksMylibraryAnnotationsList =
-      '[Books'FullControl]
+  type Scopes BooksMylibraryAnnotationsList = '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsList {..} =
     go
       xgafv
@@ -158,7 +149,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksMylibraryAnnotationsListResource
-          )
+          (Core.Proxy :: Core.Proxy BooksMylibraryAnnotationsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Instances.RotateServerCa
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method.
+-- Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method. For instances that have enabled Certificate Authority Service (CAS) based server CA, use RotateServerCertificate to rotate the server certificate.
 --
 -- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.instances.rotateServerCa@.
 module Gogol.SQLAdmin.Sql.Instances.RotateServerCa
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Instances.RotateServerCa
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.rotateServerCa@ method which the
@@ -57,12 +55,10 @@ type SqlInstancesRotateServerCaResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstancesRotateServerCaRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstancesRotateServerCaRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method.
+-- | Rotates the server certificate to one signed by the Certificate Authority (CA) version previously added with the addServerCA method. For instances that have enabled Certificate Authority Service (CAS) based server CA, use RotateServerCertificate to rotate the server certificate.
 --
 -- /See:/ 'newSqlInstancesRotateServerCa' smart constructor.
 data SqlInstancesRotateServerCa = SqlInstancesRotateServerCa
@@ -106,10 +102,7 @@ newSqlInstancesRotateServerCa instance' payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SqlInstancesRotateServerCa
-  where
+instance Core.GoogleRequest SqlInstancesRotateServerCa where
   type Rs SqlInstancesRotateServerCa = Operation
   type
     Scopes SqlInstancesRotateServerCa =
@@ -129,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SqlInstancesRotateServerCaResource
-          )
+          (Core.Proxy :: Core.Proxy SqlInstancesRotateServerCaResource)
           Core.mempty

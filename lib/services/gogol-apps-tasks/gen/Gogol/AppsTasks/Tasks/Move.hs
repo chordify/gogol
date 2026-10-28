@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.Move
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and\/or move it to a different position among its sibling tasks.
+-- Moves the specified task to another position in the destination task list. If the destination list is not specified, the task is moved within its current list. This can include putting it as a child task under a new parent and\/or move it to a different position among its sibling tasks. A user can have up to 2,000 subtasks per task.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasks.move@.
 module Gogol.AppsTasks.Tasks.Move
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.Move
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasks.move@ method which the
 -- 'TasksTasksMove' request conforms to.
@@ -55,6 +53,7 @@ type TasksTasksMoveResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "destinationTasklist" Core.Text
     Core.:> Core.QueryParam "parent" Core.Text
     Core.:> Core.QueryParam "previous" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -62,7 +61,7 @@ type TasksTasksMoveResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Task
 
--- | Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and\/or move it to a different position among its sibling tasks.
+-- | Moves the specified task to another position in the destination task list. If the destination list is not specified, the task is moved within its current list. This can include putting it as a child task under a new parent and\/or move it to a different position among its sibling tasks. A user can have up to 2,000 subtasks per task.
 --
 -- /See:/ 'newTasksTasksMove' smart constructor.
 data TasksTasksMove = TasksTasksMove
@@ -72,9 +71,11 @@ data TasksTasksMove = TasksTasksMove
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | New parent task identifier. If the task is moved to the top level, this parameter is omitted. Optional.
+    -- | Optional. Destination task list identifier. If set, the task is moved from tasklist to the destinationTasklist list. Otherwise the task is moved within its current list. Recurrent tasks cannot currently be moved between lists.
+    destinationTasklist :: (Core.Maybe Core.Text),
+    -- | Optional. New parent task identifier. If the task is moved to the top level, this parameter is omitted. The task set as parent must exist in the task list and can not be hidden. Exceptions: 1. Assigned tasks can not be set as parent task (have subtasks) or be moved under a parent task (become subtasks). 2. Tasks that are both completed and hidden cannot be nested, so the parent field must be empty.
     parent :: (Core.Maybe Core.Text),
-    -- | New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted. Optional.
+    -- | Optional. New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted. The task set as previous must exist in the task list and can not be hidden. Exceptions: 1. Tasks that are both completed and hidden can only be moved to position 0, so the previous field must be empty.
     previous :: (Core.Maybe Core.Text),
     -- | Task identifier.
     task :: Core.Text,
@@ -99,6 +100,7 @@ newTasksTasksMove task tasklist =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      destinationTasklist = Core.Nothing,
       parent = Core.Nothing,
       previous = Core.Nothing,
       task = task,
@@ -117,6 +119,7 @@ instance Core.GoogleRequest TasksTasksMove where
       xgafv
       accessToken
       callback
+      destinationTasklist
       parent
       previous
       uploadType

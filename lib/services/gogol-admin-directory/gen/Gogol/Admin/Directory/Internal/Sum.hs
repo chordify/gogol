@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.Directory.Internal.Sum
@@ -42,19 +40,63 @@ module Gogol.Admin.Directory.Internal.Sum
         ..
       ),
 
+    -- * BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+    BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+      ( BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE,
+        BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE,
+        ..
+      ),
+
+    -- * BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+    BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+      ( BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+        BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+        ..
+      ),
+
+    -- * ChromeOsDevice_ChromeOsType
+    ChromeOsDevice_ChromeOsType
+      ( ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified,
+        ChromeOsDevice_ChromeOsType_ChromeOsFlex,
+        ChromeOsDevice_ChromeOsType_ChromeOs,
+        ..
+      ),
+
     -- * ChromeOsDevice_DeprovisionReason
     ChromeOsDevice_DeprovisionReason
-      ( ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
-        ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
+      ( ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+        ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+        ..
+      ),
+
+    -- * ChromeOsDevice_DeviceLicenseType
+    ChromeOsDevice_DeviceLicenseType
+      ( ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified,
+        ChromeOsDevice_DeviceLicenseType_Enterprise,
+        ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade,
+        ChromeOsDevice_DeviceLicenseType_EducationUpgrade,
+        ChromeOsDevice_DeviceLicenseType_Education,
+        ChromeOsDevice_DeviceLicenseType_KioskUpgrade,
         ..
       ),
 
@@ -80,6 +122,7 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
         DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
         DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
+        DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET,
         ..
       ),
 
@@ -102,6 +145,7 @@ module Gogol.Admin.Directory.Internal.Sum
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
         DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
+        DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET,
         ..
       ),
 
@@ -262,6 +306,7 @@ module Gogol.Admin.Directory.Internal.Sum
     OrgunitsListType
       ( OrgunitsListType_All,
         OrgunitsListType_Children,
+        OrgunitsListType_AllIncludingParent,
         ..
       ),
 
@@ -400,7 +445,7 @@ module Gogol.Admin.Directory.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -466,6 +511,147 @@ pattern AuxiliaryMessage_Severity_SEVERITYERROR = AuxiliaryMessage_Severity "SEV
   AuxiliaryMessage_Severity
   #-}
 
+-- | Required. The action to take on the ChromeOS device in order to change its status.
+newtype BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction {fromBatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. Value is unused.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_UNSPECIFIED"
+
+-- | Deprovisions a ChromeOS device. If you have ChromeOS devices that are no longer being used in your organization, you should deprovision them so that you’re no longer managing them. Deprovisioning the device removes all policies that were on the device as well as device-level printers and the ability to use the device as a kiosk. Depending on the upgrade that’s associated with the device this action might release the license back into the license pool; which allows you to use the license on a different device.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DEPROVISION"
+
+-- | Disables a ChromeOS device. Use this action if a user loses their device or it’s stolen, this makes it such that the device is still managed, so it will still receive policies, but no one can use it. Depending on the upgrade that’s associated with the device this action might release the license back into the license pool; which allows you to use the license on a different device.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_DISABLE"
+
+-- | Reenables a ChromeOS device to be used after being disabled. Reenables the device once it\'s no longer lost or it\'s been recovered. This allows the device to be used again. Depending on the upgrade associated with the device this might consume one license from the license pool, meaning that if there aren\'t enough licenses available the operation will fail.
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE :: BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+pattern BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE = BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction "CHANGE_CHROME_OS_DEVICE_STATUS_ACTION_REENABLE"
+
+{-# COMPLETE
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONUNSPECIFIED,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDEPROVISION,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONDISABLE,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction_CHANGECHROMEOSDEVICESTATUSACTIONREENABLE,
+  BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+  #-}
+
+-- | Optional. The reason behind a device deprovision. Must be provided if \'changeChromeOsDeviceStatusAction\' is set to \'CHANGE/CHROME/OS/DEVICE/STATUS/ACTION/DEPROVISION\'. Otherwise, omit this field.
+newtype BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason {fromBatchChangeChromeOsDeviceStatusRequest_DeprovisionReason :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The deprovision reason is unknown.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UNSPECIFIED"
+
+-- | Same model replacement. You have return materials authorization (RMA) or you are replacing a malfunctioning device under warranty with the same device model.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_SAME_MODEL_REPLACEMENT"
+
+-- | The device was upgraded.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UPGRADE"
+
+-- | The device\'s domain was changed.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_DOMAIN_MOVE"
+
+-- | Service expired for the device.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_SERVICE_EXPIRATION"
+
+-- | The device was deprovisioned for a legacy reason that is no longer supported.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_OTHER"
+
+-- | Different model replacement. You are replacing this device with an upgraded or newer device model.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_DIFFERENT_MODEL_REPLACEMENT"
+
+-- | Retiring from fleet. You are donating, discarding, or otherwise removing the device from use.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_RETIRING_DEVICE"
+
+-- | ChromeOS Flex upgrade transfer. This is a ChromeOS Flex device that you are replacing with a Chromebook within a year.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_UPGRADE_TRANSFER"
+
+-- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_NOT_REQUIRED"
+
+-- | The device was deprovisioned by the Repair Service Center. Can only be set by Repair Service Center during RMA.
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER :: BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+pattern BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER = BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason "DEPROVISION_REASON_REPAIR_CENTER"
+
+{-# COMPLETE
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONOTHER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
+  BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+  #-}
+
+-- | Output only. Chrome OS type of the device.
+newtype ChromeOsDevice_ChromeOsType = ChromeOsDevice_ChromeOsType {fromChromeOsDevice_ChromeOsType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Chrome OS Type unspecified.
+pattern ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified = ChromeOsDevice_ChromeOsType "chromeOsTypeUnspecified"
+
+-- | Chrome OS Type Chrome OS Flex.
+pattern ChromeOsDevice_ChromeOsType_ChromeOsFlex :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOsFlex = ChromeOsDevice_ChromeOsType "chromeOsFlex"
+
+-- | Chrome OS Type Chrome OS.
+pattern ChromeOsDevice_ChromeOsType_ChromeOs :: ChromeOsDevice_ChromeOsType
+pattern ChromeOsDevice_ChromeOsType_ChromeOs = ChromeOsDevice_ChromeOsType "chromeOs"
+
+{-# COMPLETE
+  ChromeOsDevice_ChromeOsType_ChromeOsTypeUnspecified,
+  ChromeOsDevice_ChromeOsType_ChromeOsFlex,
+  ChromeOsDevice_ChromeOsType_ChromeOs,
+  ChromeOsDevice_ChromeOsType
+  #-}
+
 -- | (Read-only) Deprovision reason.
 newtype ChromeOsDevice_DeprovisionReason = ChromeOsDevice_DeprovisionReason {fromChromeOsDevice_DeprovisionReason :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -480,62 +666,109 @@ newtype ChromeOsDevice_DeprovisionReason = ChromeOsDevice_DeprovisionReason {fro
     )
 
 -- | The deprovision reason is unknown.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified = ChromeOsDevice_DeprovisionReason "deprovisionReasonUnspecified"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UNSPECIFIED"
 
--- | The device was replaced by a device with the same model.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonSameModelReplacement"
+-- | Same model replacement. You have return materials authorization (RMA) or you are replacing a malfunctioning device under warranty with the same device model.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_SAME_MODEL_REPLACEMENT"
 
 -- | The device was upgraded.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgrade"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UPGRADE"
 
 -- | The device\'s domain was changed.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove = ChromeOsDevice_DeprovisionReason "deprovisionReasonDomainMove"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_DOMAIN_MOVE"
 
 -- | Service expired for the device.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration = ChromeOsDevice_DeprovisionReason "deprovisionReasonServiceExpiration"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_SERVICE_EXPIRATION"
 
 -- | The device was deprovisioned for a legacy reason that is no longer supported.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther = ChromeOsDevice_DeprovisionReason "deprovisionReasonOther"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_OTHER"
 
--- | The device was replaced by a device with a different model.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement = ChromeOsDevice_DeprovisionReason "deprovisionReasonDifferentModelReplacement"
+-- | Different model replacement. You are replacing this device with an upgraded or newer device model.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_DIFFERENT_MODEL_REPLACEMENT"
 
--- | The device was retired.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice = ChromeOsDevice_DeprovisionReason "deprovisionReasonRetiringDevice"
+-- | Retiring from fleet. You are donating, discarding, or otherwise removing the device from use.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_RETIRING_DEVICE"
 
--- | The device\'s perpetual upgrade was transferred to a new device.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer = ChromeOsDevice_DeprovisionReason "deprovisionReasonUpgradeTransfer"
+-- | ChromeOS Flex upgrade transfer. This is a ChromeOS Flex device that you are replacing with a Chromebook within a year.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_UPGRADE_TRANSFER"
 
 -- | A reason was not required. For example, the licenses were returned to the customer\'s license pool.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired = ChromeOsDevice_DeprovisionReason "deprovisionReasonNotRequired"
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_NOT_REQUIRED"
 
--- | The device was deprovisioned by a repair service center.
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter :: ChromeOsDevice_DeprovisionReason
-pattern ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter = ChromeOsDevice_DeprovisionReason "deprovisionReasonRepairCenter"
+-- | The device was deprovisioned by the Repair Service Center. Can only be set by Repair Service Center during RMA.
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER :: ChromeOsDevice_DeprovisionReason
+pattern ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER = ChromeOsDevice_DeprovisionReason "DEPROVISION_REASON_REPAIR_CENTER"
 
 {-# COMPLETE
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUnspecified,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonSameModelReplacement,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgrade,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDomainMove,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonServiceExpiration,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonOther,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonDifferentModelReplacement,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRetiringDevice,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonUpgradeTransfer,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonNotRequired,
-  ChromeOsDevice_DeprovisionReason_DeprovisionReasonRepairCenter,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUNSPECIFIED,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSAMEMODELREPLACEMENT,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDOMAINMOVE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONSERVICEEXPIRATION,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONOTHER,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONDIFFERENTMODELREPLACEMENT,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONRETIRINGDEVICE,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONUPGRADETRANSFER,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONNOTREQUIRED,
+  ChromeOsDevice_DeprovisionReason_DEPROVISIONREASONREPAIRCENTER,
   ChromeOsDevice_DeprovisionReason
+  #-}
+
+-- | Output only. Device license type.
+newtype ChromeOsDevice_DeviceLicenseType = ChromeOsDevice_DeviceLicenseType {fromChromeOsDevice_DeviceLicenseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The license type is unknown.
+pattern ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified = ChromeOsDevice_DeviceLicenseType "deviceLicenseTypeUnspecified"
+
+-- | The device is bundled with a perpetual Chrome Enterprise Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_Enterprise :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_Enterprise = ChromeOsDevice_DeviceLicenseType "enterprise"
+
+-- | The device has an annual standalone Chrome Enterprise Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade = ChromeOsDevice_DeviceLicenseType "enterpriseUpgrade"
+
+-- | The device has a perpetual standalone Chrome Education Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_EducationUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_EducationUpgrade = ChromeOsDevice_DeviceLicenseType "educationUpgrade"
+
+-- | The device is bundled with a perpetual Chrome Education Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_Education :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_Education = ChromeOsDevice_DeviceLicenseType "education"
+
+-- | The device has an annual Kiosk Upgrade.
+pattern ChromeOsDevice_DeviceLicenseType_KioskUpgrade :: ChromeOsDevice_DeviceLicenseType
+pattern ChromeOsDevice_DeviceLicenseType_KioskUpgrade = ChromeOsDevice_DeviceLicenseType "kioskUpgrade"
+
+{-# COMPLETE
+  ChromeOsDevice_DeviceLicenseType_DeviceLicenseTypeUnspecified,
+  ChromeOsDevice_DeviceLicenseType_Enterprise,
+  ChromeOsDevice_DeviceLicenseType_EnterpriseUpgrade,
+  ChromeOsDevice_DeviceLicenseType_EducationUpgrade,
+  ChromeOsDevice_DeviceLicenseType_Education,
+  ChromeOsDevice_DeviceLicenseType_KioskUpgrade,
+  ChromeOsDevice_DeviceLicenseType
   #-}
 
 -- | Indicates the command state.
@@ -607,7 +840,7 @@ newtype DirectoryChromeosdevicesCommand_Type = DirectoryChromeosdevicesCommand_T
 pattern DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED = DirectoryChromeosdevicesCommand_Type "COMMAND_TYPE_UNSPECIFIED"
 
--- | Reboot the device. Can only be issued to Kiosk and managed guest session devices.
+-- | Reboot the device. Can be issued to Kiosk and managed guest session devices, and regular devices running ChromeOS version 113 or later.
 pattern DirectoryChromeosdevicesCommand_Type_Reboot :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_Reboot = DirectoryChromeosdevicesCommand_Type "REBOOT"
 
@@ -631,9 +864,13 @@ pattern DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH = DirectoryChromeos
 pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesCommand_Type "DEVICE_START_CRD_SESSION"
 
--- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
 pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS :: DirectoryChromeosdevicesCommand_Type
 pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS = DirectoryChromeosdevicesCommand_Type "CAPTURE_LOGS"
+
+-- | Fetch support packet from a device remotely. Support packet is a zip archive that contains various system logs and debug data from a ChromeOS device. The support packet can be downloaded from the downloadURL link present in the @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET :: DirectoryChromeosdevicesCommand_Type
+pattern DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET = DirectoryChromeosdevicesCommand_Type "FETCH_SUPPORT_PACKET"
 
 {-# COMPLETE
   DirectoryChromeosdevicesCommand_Type_COMMANDTYPEUNSPECIFIED,
@@ -644,6 +881,7 @@ pattern DirectoryChromeosdevicesCommand_Type_CAPTURELOGS = DirectoryChromeosdevi
   DirectoryChromeosdevicesCommand_Type_REMOTEPOWERWASH,
   DirectoryChromeosdevicesCommand_Type_DEVICESTARTCRDSESSION,
   DirectoryChromeosdevicesCommand_Type_CAPTURELOGS,
+  DirectoryChromeosdevicesCommand_Type_FETCHSUPPORTPACKET,
   DirectoryChromeosdevicesCommand_Type
   #-}
 
@@ -701,7 +939,7 @@ newtype DirectoryChromeosdevicesIssueCommandRequest_CommandType = DirectoryChrom
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED = DirectoryChromeosdevicesIssueCommandRequest_CommandType "COMMAND_TYPE_UNSPECIFIED"
 
--- | Reboot the device. Can only be issued to Kiosk and managed guest session devices.
+-- | Reboot the device. Can be issued to Kiosk and managed guest session devices, and regular devices running ChromeOS version 113 or later.
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_Reboot = DirectoryChromeosdevicesIssueCommandRequest_CommandType "REBOOT"
 
@@ -725,9 +963,13 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH 
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION = DirectoryChromeosdevicesIssueCommandRequest_CommandType "DEVICE_START_CRD_SESSION"
 
--- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in deviceFiles field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+-- | Capture the system logs of a kiosk device. The logs can be downloaded from the downloadUrl link present in @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
 pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS = DirectoryChromeosdevicesIssueCommandRequest_CommandType "CAPTURE_LOGS"
+
+-- | Fetch support packet from a device remotely. Support packet is a zip archive that contains various system logs and debug data from a ChromeOS device. The support packet can be downloaded from the downloadURL link present in the @deviceFiles@ field of <https://developers.google.com/admin-sdk/directory/reference/rest/v1/chromeosdevices chromeosdevices>
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET :: DirectoryChromeosdevicesIssueCommandRequest_CommandType
+pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET = DirectoryChromeosdevicesIssueCommandRequest_CommandType "FETCH_SUPPORT_PACKET"
 
 {-# COMPLETE
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_COMMANDTYPEUNSPECIFIED,
@@ -738,6 +980,7 @@ pattern DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS = Di
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_REMOTEPOWERWASH,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_DEVICESTARTCRDSESSION,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType_CAPTURELOGS,
+  DirectoryChromeosdevicesIssueCommandRequest_CommandType_FETCHSUPPORTPACKET,
   DirectoryChromeosdevicesIssueCommandRequest_CommandType
   #-}
 
@@ -1083,7 +1326,7 @@ pattern ChromeosdevicesListOrderBy_Status = ChromeosdevicesListOrderBy "status"
   ChromeosdevicesListOrderBy
   #-}
 
--- | Restrict information returned to a set of selected fields.
+-- | Determines whether the response contains the full list of properties or only a subset.
 newtype ChromeosdevicesListProjection = ChromeosdevicesListProjection {fromChromeosdevicesListProjection :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1137,7 +1380,7 @@ pattern ChromeosdevicesListSortOrder_Descending = ChromeosdevicesListSortOrder "
   ChromeosdevicesListSortOrder
   #-}
 
--- | Restrict information returned to a set of selected fields.
+-- | Determines whether the response contains the full list of properties or only a subset.
 newtype ChromeosdevicesPatchProjection = ChromeosdevicesPatchProjection {fromChromeosdevicesPatchProjection :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1164,7 +1407,7 @@ pattern ChromeosdevicesPatchProjection_Full = ChromeosdevicesPatchProjection "FU
   ChromeosdevicesPatchProjection
   #-}
 
--- | Restrict information returned to a set of selected fields.
+-- | Determines whether the response contains the full list of properties or only a subset.
 newtype ChromeosdevicesUpdateProjection = ChromeosdevicesUpdateProjection {fromChromeosdevicesUpdateProjection :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1399,9 +1642,14 @@ pattern OrgunitsListType_All = OrgunitsListType "all"
 pattern OrgunitsListType_Children :: OrgunitsListType
 pattern OrgunitsListType_Children = OrgunitsListType "children"
 
+-- | All sub-organizational units and the specified organizational unit (root if not specified).
+pattern OrgunitsListType_AllIncludingParent :: OrgunitsListType
+pattern OrgunitsListType_AllIncludingParent = OrgunitsListType "allIncludingParent"
+
 {-# COMPLETE
   OrgunitsListType_All,
   OrgunitsListType_Children,
+  OrgunitsListType_AllIncludingParent,
   OrgunitsListType
   #-}
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Accounts.Avails.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,7 +40,7 @@ module Gogol.PlayMoviesPartner.Accounts.Avails.List
 where
 
 import Gogol.PlayMoviesPartner.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @playmoviespartner.accounts.avails.list@ method which the
 -- 'PlayMoviesPartnerAccountsAvailsList' request conforms to.
@@ -65,14 +63,10 @@ type PlayMoviesPartnerAccountsAvailsListResource =
     Core.:> Core.QueryParams "territories" Core.Text
     Core.:> Core.QueryParam "title" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParams "videoIds" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListAvailsResponse
+    Core.:> Core.Get '[Core.JSON] ListAvailsResponse
 
 -- | List Avails owned or managed by the partner.
 --
@@ -143,13 +137,8 @@ newPlayMoviesPartnerAccountsAvailsList accountId =
       videoIds = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PlayMoviesPartnerAccountsAvailsList
-  where
-  type
-    Rs PlayMoviesPartnerAccountsAvailsList =
-      ListAvailsResponse
+instance Core.GoogleRequest PlayMoviesPartnerAccountsAvailsList where
+  type Rs PlayMoviesPartnerAccountsAvailsList = ListAvailsResponse
   type
     Scopes PlayMoviesPartnerAccountsAvailsList =
       '[PlaymoviesPartner'Readonly]
@@ -178,7 +167,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                PlayMoviesPartnerAccountsAvailsListResource
+              Core.Proxy PlayMoviesPartnerAccountsAvailsListResource
           )
           Core.mempty

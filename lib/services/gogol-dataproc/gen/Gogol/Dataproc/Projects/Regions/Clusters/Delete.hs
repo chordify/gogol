@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Delete
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.delete@ method which the
 -- 'DataprocProjectsRegionsClustersDelete' request conforms to.
@@ -56,6 +54,7 @@ type DataprocProjectsRegionsClustersDeleteResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "clusterUuid" Core.Text
+    Core.:> Core.QueryParam "gracefulTerminationTimeout" Core.Duration
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -76,6 +75,8 @@ data DataprocProjectsRegionsClustersDelete = DataprocProjectsRegionsClustersDele
     clusterName :: Core.Text,
     -- | Optional. Specifying the cluster/uuid means the RPC should fail (with error NOT/FOUND) if cluster with specified UUID does not exist.
     clusterUuid :: (Core.Maybe Core.Text),
+    -- | Optional. The graceful termination timeout for the deletion of the cluster. Indicate the time the request will wait to complete the running jobs on the cluster before its forceful deletion. Default value is 0 indicating that the user has not enabled the graceful termination. Value can be between 60 second and 6 Hours, in case the graceful termination is enabled. (There is no separate flag to check the enabling or disabling of graceful termination, it can be checked by the values in the field).
+    gracefulTerminationTimeout :: (Core.Maybe Core.Duration),
     -- | Required. The ID of the Google Cloud Platform project that the cluster belongs to.
     projectId :: Core.Text,
     -- | Required. The Dataproc region in which to handle the request.
@@ -98,50 +99,48 @@ newDataprocProjectsRegionsClustersDelete ::
   -- |  Required. The Dataproc region in which to handle the request. See 'region'.
   Core.Text ->
   DataprocProjectsRegionsClustersDelete
-newDataprocProjectsRegionsClustersDelete clusterName projectId region =
-  DataprocProjectsRegionsClustersDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterName = clusterName,
-      clusterUuid = Core.Nothing,
-      projectId = projectId,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDataprocProjectsRegionsClustersDelete
+  clusterName
+  projectId
+  region =
     DataprocProjectsRegionsClustersDelete
-  where
-  type
-    Rs DataprocProjectsRegionsClustersDelete =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterName = clusterName,
+        clusterUuid = Core.Nothing,
+        gracefulTerminationTimeout = Core.Nothing,
+        projectId = projectId,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DataprocProjectsRegionsClustersDelete where
+  type Rs DataprocProjectsRegionsClustersDelete = Operation
   type
     Scopes DataprocProjectsRegionsClustersDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersDelete {..} =
-      go
-        projectId
-        region
-        clusterName
-        xgafv
-        accessToken
-        callback
-        clusterUuid
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersDeleteResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsClustersDelete {..} =
+    go
+      projectId
+      region
+      clusterName
+      xgafv
+      accessToken
+      callback
+      clusterUuid
+      gracefulTerminationTimeout
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsClustersDeleteResource
+          )
+          Core.mempty

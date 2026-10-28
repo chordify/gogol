@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TagManager.Types
@@ -204,6 +202,10 @@ module Gogol.TagManager.Types
     ListTemplatesResponse (..),
     newListTemplatesResponse,
 
+    -- ** ListTransformationsResponse
+    ListTransformationsResponse (..),
+    newListTransformationsResponse,
+
     -- ** ListTriggersResponse
     ListTriggersResponse (..),
     newListTriggersResponse,
@@ -263,6 +265,10 @@ module Gogol.TagManager.Types
     RevertTemplateResponse (..),
     newRevertTemplateResponse,
 
+    -- ** RevertTransformationResponse
+    RevertTransformationResponse (..),
+    newRevertTransformationResponse,
+
     -- ** RevertTriggerResponse
     RevertTriggerResponse (..),
     newRevertTriggerResponse,
@@ -304,6 +310,10 @@ module Gogol.TagManager.Types
     -- ** TeardownTag
     TeardownTag (..),
     newTeardownTag,
+
+    -- ** Transformation
+    Transformation (..),
+    newTransformation,
 
     -- ** Trigger
     Trigger (..),
@@ -361,7 +371,7 @@ module Gogol.TagManager.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Internal.Product
 import Gogol.TagManager.Internal.Sum
 
@@ -373,22 +383,29 @@ tagManagerService =
     "tagmanager.googleapis.com"
 
 -- | Delete your Google Tag Manager containers
-type Tagmanager'Delete'Containers = "https://www.googleapis.com/auth/tagmanager.delete.containers"
+type Tagmanager'Delete'Containers =
+  "https://www.googleapis.com/auth/tagmanager.delete.containers"
 
 -- | Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing
-type Tagmanager'Edit'Containers = "https://www.googleapis.com/auth/tagmanager.edit.containers"
+type Tagmanager'Edit'Containers =
+  "https://www.googleapis.com/auth/tagmanager.edit.containers"
 
 -- | Manage your Google Tag Manager container versions
-type Tagmanager'Edit'Containerversions = "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
+type Tagmanager'Edit'Containerversions =
+  "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
 
 -- | View and manage your Google Tag Manager accounts
-type Tagmanager'Manage'Accounts = "https://www.googleapis.com/auth/tagmanager.manage.accounts"
+type Tagmanager'Manage'Accounts =
+  "https://www.googleapis.com/auth/tagmanager.manage.accounts"
 
 -- | Manage user permissions of your Google Tag Manager account and container
-type Tagmanager'Manage'Users = "https://www.googleapis.com/auth/tagmanager.manage.users"
+type Tagmanager'Manage'Users =
+  "https://www.googleapis.com/auth/tagmanager.manage.users"
 
 -- | Publish your Google Tag Manager container versions
-type Tagmanager'Publish = "https://www.googleapis.com/auth/tagmanager.publish"
+type Tagmanager'Publish =
+  "https://www.googleapis.com/auth/tagmanager.publish"
 
 -- | View your Google Tag Manager container and its subcomponents
-type Tagmanager'Readonly = "https://www.googleapis.com/auth/tagmanager.readonly"
+type Tagmanager'Readonly =
+  "https://www.googleapis.com/auth/tagmanager.readonly"

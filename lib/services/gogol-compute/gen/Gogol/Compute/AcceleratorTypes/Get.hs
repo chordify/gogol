@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.AcceleratorTypes.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.AcceleratorTypes.Get
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.acceleratorTypes.get@ method which the
 -- 'ComputeAcceleratorTypesGet' request conforms to.
@@ -105,17 +103,11 @@ newComputeAcceleratorTypesGet acceleratorType project zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeAcceleratorTypesGet
-  where
+instance Core.GoogleRequest ComputeAcceleratorTypesGet where
   type Rs ComputeAcceleratorTypesGet = AcceleratorType
   type
     Scopes ComputeAcceleratorTypesGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeAcceleratorTypesGet {..} =
     go
       project
@@ -131,7 +123,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeAcceleratorTypesGetResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeAcceleratorTypesGetResource)
           Core.mempty

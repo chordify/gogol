@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Datastore.Internal.Sum
@@ -56,6 +54,15 @@ module Gogol.Datastore.Internal.Sum
       ( CompositeFilter_Op_OPERATORUNSPECIFIED,
         CompositeFilter_Op_And,
         CompositeFilter_Op_OR,
+        ..
+      ),
+
+    -- * FindNearest_DistanceMeasure
+    FindNearest_DistanceMeasure
+      ( FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
+        FindNearest_DistanceMeasure_Euclidean,
+        FindNearest_DistanceMeasure_Cosine,
+        FindNearest_DistanceMeasure_DOTPRODUCT,
         ..
       ),
 
@@ -191,6 +198,14 @@ module Gogol.Datastore.Internal.Sum
         ..
       ),
 
+    -- * Mutation_ConflictResolutionStrategy
+    Mutation_ConflictResolutionStrategy
+      ( Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED,
+        Mutation_ConflictResolutionStrategy_SERVERVALUE,
+        Mutation_ConflictResolutionStrategy_Fail,
+        ..
+      ),
+
     -- * PropertyFilter_Op
     PropertyFilter_Op
       ( PropertyFilter_Op_OPERATORUNSPECIFIED,
@@ -211,6 +226,13 @@ module Gogol.Datastore.Internal.Sum
       ( PropertyOrder_Direction_DIRECTIONUNSPECIFIED,
         PropertyOrder_Direction_Ascending,
         PropertyOrder_Direction_Descending,
+        ..
+      ),
+
+    -- * PropertyTransform_SetToServerValue
+    PropertyTransform_SetToServerValue
+      ( PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED,
+        PropertyTransform_SetToServerValue_REQUESTTIME,
         ..
       ),
 
@@ -249,7 +271,7 @@ module Gogol.Datastore.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -382,6 +404,43 @@ pattern CompositeFilter_Op_OR = CompositeFilter_Op "OR"
   CompositeFilter_Op_And,
   CompositeFilter_Op_OR,
   CompositeFilter_Op
+  #-}
+
+-- | Required. The Distance Measure to use, required.
+newtype FindNearest_DistanceMeasure = FindNearest_DistanceMeasure {fromFindNearest_DistanceMeasure :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Should not be set.
+pattern FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED = FindNearest_DistanceMeasure "DISTANCE_MEASURE_UNSPECIFIED"
+
+-- | Measures the EUCLIDEAN distance between the vectors. See <https://en.wikipedia.org/wiki/Euclidean_distance Euclidean> to learn more. The resulting distance decreases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_Euclidean :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_Euclidean = FindNearest_DistanceMeasure "EUCLIDEAN"
+
+-- | COSINE distance compares vectors based on the angle between them, which allows you to measure similarity that isn\'t based on the vectors magnitude. We recommend using DOT_PRODUCT with unit normalized vectors instead of COSINE distance, which is mathematically equivalent with better performance. See <https://en.wikipedia.org/wiki/Cosine_similarity Cosine Similarity> to learn more about COSINE similarity and COSINE distance. The resulting COSINE distance decreases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_Cosine :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_Cosine = FindNearest_DistanceMeasure "COSINE"
+
+-- | Similar to cosine but is affected by the magnitude of the vectors. See <https://en.wikipedia.org/wiki/Dot_product Dot Product> to learn more. The resulting distance increases the more similar two vectors are.
+pattern FindNearest_DistanceMeasure_DOTPRODUCT :: FindNearest_DistanceMeasure
+pattern FindNearest_DistanceMeasure_DOTPRODUCT = FindNearest_DistanceMeasure "DOT_PRODUCT"
+
+{-# COMPLETE
+  FindNearest_DistanceMeasure_DISTANCEMEASUREUNSPECIFIED,
+  FindNearest_DistanceMeasure_Euclidean,
+  FindNearest_DistanceMeasure_Cosine,
+  FindNearest_DistanceMeasure_DOTPRODUCT,
+  FindNearest_DistanceMeasure
   #-}
 
 -- | The type of the operation. Can be used as a filter in ListOperationsRequest.
@@ -814,7 +873,7 @@ pattern GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode_OPTIMISTICWITHE
   GoogleDatastoreAdminV1PrepareStepDetails_ConcurrencyMode
   #-}
 
--- | Ths concurrency mode for this database.
+-- | The concurrency mode for this database.
 newtype GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode = GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode {fromGoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -940,6 +999,38 @@ pattern GoogleDatastoreAdminV1beta1CommonMetadata_State_Cancelled = GoogleDatast
   GoogleDatastoreAdminV1beta1CommonMetadata_State
   #-}
 
+-- | The strategy to use when a conflict is detected. Defaults to @SERVER_VALUE@. If this is set, then @conflict_detection_strategy@ must also be set.
+newtype Mutation_ConflictResolutionStrategy = Mutation_ConflictResolutionStrategy {fromMutation_ConflictResolutionStrategy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to @SERVER_VALUE@.
+pattern Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED :: Mutation_ConflictResolutionStrategy
+pattern Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED = Mutation_ConflictResolutionStrategy "STRATEGY_UNSPECIFIED"
+
+-- | The server entity is kept.
+pattern Mutation_ConflictResolutionStrategy_SERVERVALUE :: Mutation_ConflictResolutionStrategy
+pattern Mutation_ConflictResolutionStrategy_SERVERVALUE = Mutation_ConflictResolutionStrategy "SERVER_VALUE"
+
+-- | The whole commit request fails.
+pattern Mutation_ConflictResolutionStrategy_Fail :: Mutation_ConflictResolutionStrategy
+pattern Mutation_ConflictResolutionStrategy_Fail = Mutation_ConflictResolutionStrategy "FAIL"
+
+{-# COMPLETE
+  Mutation_ConflictResolutionStrategy_STRATEGYUNSPECIFIED,
+  Mutation_ConflictResolutionStrategy_SERVERVALUE,
+  Mutation_ConflictResolutionStrategy_Fail,
+  Mutation_ConflictResolutionStrategy
+  #-}
+
 -- | The operator to filter by.
 newtype PropertyFilter_Op = PropertyFilter_Op {fromPropertyFilter_Op :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1037,6 +1128,33 @@ pattern PropertyOrder_Direction_Descending = PropertyOrder_Direction "DESCENDING
   PropertyOrder_Direction_Ascending,
   PropertyOrder_Direction_Descending,
   PropertyOrder_Direction
+  #-}
+
+-- | Sets the property to the given server value.
+newtype PropertyTransform_SetToServerValue = PropertyTransform_SetToServerValue {fromPropertyTransform_SetToServerValue :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value must not be used.
+pattern PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED :: PropertyTransform_SetToServerValue
+pattern PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED = PropertyTransform_SetToServerValue "SERVER_VALUE_UNSPECIFIED"
+
+-- | The time at which the server processed the request, with millisecond precision. If used on multiple properties (same or different entities) in a transaction, all the properties will get the same server timestamp.
+pattern PropertyTransform_SetToServerValue_REQUESTTIME :: PropertyTransform_SetToServerValue
+pattern PropertyTransform_SetToServerValue_REQUESTTIME = PropertyTransform_SetToServerValue "REQUEST_TIME"
+
+{-# COMPLETE
+  PropertyTransform_SetToServerValue_SERVERVALUEUNSPECIFIED,
+  PropertyTransform_SetToServerValue_REQUESTTIME,
+  PropertyTransform_SetToServerValue
   #-}
 
 -- | The result type for every entity in @entity_results@.

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Revisions.Check
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Revisions.Check
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.revisions.check@ method which the
 -- 'GamesRevisionsCheck' request conforms to.
@@ -68,7 +66,7 @@ data GamesRevisionsCheck = GamesRevisionsCheck
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The revision of the client SDK used by your application. Format: @[PLATFORM_TYPE]:[VERSION_NUMBER]@. Possible values of @PLATFORM_TYPE@ are: * @ANDROID@ - Client is running the Android SDK. * @IOS@ - Client is running the iOS SDK. * @WEB_APP@ - Client is running as a Web App.
+    -- | Required. The revision of the client SDK used by your application. Format: @[PLATFORM_TYPE]:[VERSION_NUMBER]@. Possible values of @PLATFORM_TYPE@ are: * @ANDROID@ - Client is running the Android SDK. * @IOS@ - Client is running the iOS SDK. * @WEB_APP@ - Client is running as a Web App.
     clientRevision :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -79,7 +77,7 @@ data GamesRevisionsCheck = GamesRevisionsCheck
 
 -- | Creates a value of 'GamesRevisionsCheck' with the minimum fields required to make a request.
 newGamesRevisionsCheck ::
-  -- |  The revision of the client SDK used by your application. Format: @[PLATFORM_TYPE]:[VERSION_NUMBER]@. Possible values of @PLATFORM_TYPE@ are: * @ANDROID@ - Client is running the Android SDK. * @IOS@ - Client is running the iOS SDK. * @WEB_APP@ - Client is running as a Web App. See 'clientRevision'.
+  -- |  Required. The revision of the client SDK used by your application. Format: @[PLATFORM_TYPE]:[VERSION_NUMBER]@. Possible values of @PLATFORM_TYPE@ are: * @ANDROID@ - Client is running the Android SDK. * @IOS@ - Client is running the iOS SDK. * @WEB_APP@ - Client is running as a Web App. See 'clientRevision'.
   Core.Text ->
   GamesRevisionsCheck
 newGamesRevisionsCheck clientRevision =
@@ -94,9 +92,7 @@ newGamesRevisionsCheck clientRevision =
 
 instance Core.GoogleRequest GamesRevisionsCheck where
   type Rs GamesRevisionsCheck = RevisionCheckResponse
-  type
-    Scopes GamesRevisionsCheck =
-      '[Games'FullControl]
+  type Scopes GamesRevisionsCheck = '[Games'FullControl]
   requestClient GamesRevisionsCheck {..} =
     go
       (Core.Just clientRevision)
@@ -110,7 +106,5 @@ instance Core.GoogleRequest GamesRevisionsCheck where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesRevisionsCheckResource
-          )
+          (Core.Proxy :: Core.Proxy GamesRevisionsCheckResource)
           Core.mempty

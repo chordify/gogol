@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the size for a specific node pool. The new size will be used for all replicas, including future replicas created by modifying NodePool.locations.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.setSize@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.setSize@.
 module Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
   ( -- * Resource
     ContainerProjectsZonesClustersNodePoolsSetSizeResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Zones.Clusters.NodePools.SetSize
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.setSize@ method which the
 -- 'ContainerProjectsZonesClustersNodePoolsSetSize' request conforms to.
@@ -61,9 +59,7 @@ type ContainerProjectsZonesClustersNodePoolsSetSizeResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SetNodePoolSizeRequest
+    Core.:> Core.ReqBody '[Core.JSON] SetNodePoolSizeRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Sets the size for a specific node pool. The new size will be used for all replicas, including future replicas created by modifying NodePool.locations.
@@ -106,52 +102,52 @@ newContainerProjectsZonesClustersNodePoolsSetSize ::
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field. See 'zone'.
   Core.Text ->
   ContainerProjectsZonesClustersNodePoolsSetSize
-newContainerProjectsZonesClustersNodePoolsSetSize clusterId nodePoolId payload projectId zone =
-  ContainerProjectsZonesClustersNodePoolsSetSize
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      nodePoolId = nodePoolId,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newContainerProjectsZonesClustersNodePoolsSetSize
+  clusterId
+  nodePoolId
+  payload
+  projectId
+  zone =
+    ContainerProjectsZonesClustersNodePoolsSetSize
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        nodePoolId = nodePoolId,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ContainerProjectsZonesClustersNodePoolsSetSize
   where
+  type Rs ContainerProjectsZonesClustersNodePoolsSetSize = Operation
   type
-    Rs
-      ContainerProjectsZonesClustersNodePoolsSetSize =
-      Operation
-  type
-    Scopes
-      ContainerProjectsZonesClustersNodePoolsSetSize =
+    Scopes ContainerProjectsZonesClustersNodePoolsSetSize =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsZonesClustersNodePoolsSetSize {..} =
-      go
-        projectId
-        zone
-        clusterId
-        nodePoolId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsZonesClustersNodePoolsSetSizeResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsZonesClustersNodePoolsSetSize {..} =
+    go
+      projectId
+      zone
+      clusterId
+      nodePoolId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsZonesClustersNodePoolsSetSizeResource
+          )
+          Core.mempty

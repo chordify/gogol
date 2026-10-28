@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore. Once an enrollment token has been created, it\'s not possible to retrieve the token\'s content anymore using AM API. It is recommended for EMMs to securely store the token if it\'s intended to be reused.
+-- Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.enrollmentTokens.create@.
 module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
@@ -40,7 +38,7 @@ module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.Create
 where
 
 import Gogol.AndroidManagement.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidmanagement.enterprises.enrollmentTokens.create@ method which the
 -- 'AndroidManagementEnterprisesEnrollmentTokensCreate' request conforms to.
@@ -57,7 +55,7 @@ type AndroidManagementEnterprisesEnrollmentTokensCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] EnrollmentToken
     Core.:> Core.Post '[Core.JSON] EnrollmentToken
 
--- | Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore. Once an enrollment token has been created, it\'s not possible to retrieve the token\'s content anymore using AM API. It is recommended for EMMs to securely store the token if it\'s intended to be reused.
+-- | Creates an enrollment token for a given enterprise. It\'s up to the caller\'s responsibility to manage the lifecycle of newly created tokens and deleting them when they\'re not intended to be used anymore.
 --
 -- /See:/ 'newAndroidManagementEnterprisesEnrollmentTokensCreate' smart constructor.
 data AndroidManagementEnterprisesEnrollmentTokensCreate = AndroidManagementEnterprisesEnrollmentTokensCreate
@@ -85,28 +83,29 @@ newAndroidManagementEnterprisesEnrollmentTokensCreate ::
   -- |  Multipart request metadata. See 'payload'.
   EnrollmentToken ->
   AndroidManagementEnterprisesEnrollmentTokensCreate
-newAndroidManagementEnterprisesEnrollmentTokensCreate parent payload =
-  AndroidManagementEnterprisesEnrollmentTokensCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidManagementEnterprisesEnrollmentTokensCreate
+  parent
+  payload =
+    AndroidManagementEnterprisesEnrollmentTokensCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidManagementEnterprisesEnrollmentTokensCreate
   where
   type
-    Rs
-      AndroidManagementEnterprisesEnrollmentTokensCreate =
+    Rs AndroidManagementEnterprisesEnrollmentTokensCreate =
       EnrollmentToken
   type
-    Scopes
-      AndroidManagementEnterprisesEnrollmentTokensCreate =
+    Scopes AndroidManagementEnterprisesEnrollmentTokensCreate =
       '[Androidmanagement'FullControl]
   requestClient
     AndroidManagementEnterprisesEnrollmentTokensCreate {..} =

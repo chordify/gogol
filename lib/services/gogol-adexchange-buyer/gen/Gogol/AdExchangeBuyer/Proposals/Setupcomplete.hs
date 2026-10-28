@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Proposals.Setupcomplete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Proposals.Setupcomplete
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.proposals.setupcomplete@ method which the
 -- 'AdExchangeBuyerProposalsSetupcomplete' request conforms to.
@@ -70,25 +68,17 @@ newAdExchangeBuyerProposalsSetupcomplete ::
 newAdExchangeBuyerProposalsSetupcomplete proposalId =
   AdExchangeBuyerProposalsSetupcomplete {proposalId = proposalId}
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerProposalsSetupcomplete
-  where
+instance Core.GoogleRequest AdExchangeBuyerProposalsSetupcomplete where
   type Rs AdExchangeBuyerProposalsSetupcomplete = ()
   type
     Scopes AdExchangeBuyerProposalsSetupcomplete =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyerProposalsSetupcomplete {..} =
-      go
-        proposalId
-        (Core.Just Core.AltJSON)
-        adExchangeBuyerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyerProposalsSetupcompleteResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyerProposalsSetupcomplete {..} =
+    go proposalId (Core.Just Core.AltJSON) adExchangeBuyerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyerProposalsSetupcompleteResource
+          )
+          Core.mempty

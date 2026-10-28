@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionInstanceGroupManagers.DeletePerInstanceConfigs
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.deletePerInstanceConfigs@ method which the
 -- 'ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs' request conforms to.
@@ -101,26 +99,31 @@ newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs ::
   -- |  Name of the region scoping this request, should conform to RFC1035. See 'region'.
   Core.Text ->
   ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs
-newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs instanceGroupManager payload project region =
-  ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      region = region,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionInstanceGroupManagersDeletePerInstanceConfigs
+  instanceGroupManager
+  payload
+  project
+  region =
+    ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager =
+          instanceGroupManager,
+        payload = payload,
+        project = project,
+        region = region,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs
   where
   type
-    Rs
-      ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs =
+    Rs ComputeRegionInstanceGroupManagersDeletePerInstanceConfigs =
       Operation
   type
     Scopes

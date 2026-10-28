@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Cloudloading.AddBook
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Cloudloading.AddBook
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.cloudloading.addBook@ method which the
 -- 'BooksCloudloadingAddBook' request conforms to.
@@ -59,9 +57,7 @@ type BooksCloudloadingAddBookResource =
     Core.:> Core.QueryParam "upload_client_token" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              BooksCloudloadingResource
+    Core.:> Core.Post '[Core.JSON] BooksCloudloadingResource
 
 -- | Add a user-upload volume and triggers processing.
 --
@@ -105,12 +101,8 @@ newBooksCloudloadingAddBook =
     }
 
 instance Core.GoogleRequest BooksCloudloadingAddBook where
-  type
-    Rs BooksCloudloadingAddBook =
-      BooksCloudloadingResource
-  type
-    Scopes BooksCloudloadingAddBook =
-      '[Books'FullControl]
+  type Rs BooksCloudloadingAddBook = BooksCloudloadingResource
+  type Scopes BooksCloudloadingAddBook = '[Books'FullControl]
   requestClient BooksCloudloadingAddBook {..} =
     go
       xgafv
@@ -127,7 +119,5 @@ instance Core.GoogleRequest BooksCloudloadingAddBook where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksCloudloadingAddBookResource
-          )
+          (Core.Proxy :: Core.Proxy BooksCloudloadingAddBookResource)
           Core.mempty

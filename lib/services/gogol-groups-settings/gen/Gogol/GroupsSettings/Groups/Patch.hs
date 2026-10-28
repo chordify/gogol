@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GroupsSettings.Groups.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GroupsSettings.Groups.Patch
 where
 
 import Gogol.GroupsSettings.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @groupsSettings.groups.patch@ method which the
 -- 'GroupsSettingsGroupsPatch' request conforms to.
@@ -72,13 +70,14 @@ newGroupsSettingsGroupsPatch ::
   Groups ->
   GroupsSettingsGroupsPatch
 newGroupsSettingsGroupsPatch groupUniqueId payload =
-  GroupsSettingsGroupsPatch {groupUniqueId = groupUniqueId, payload = payload}
+  GroupsSettingsGroupsPatch
+    { groupUniqueId = groupUniqueId,
+      payload = payload
+    }
 
 instance Core.GoogleRequest GroupsSettingsGroupsPatch where
   type Rs GroupsSettingsGroupsPatch = Groups
-  type
-    Scopes GroupsSettingsGroupsPatch =
-      '[Apps'Groups'Settings]
+  type Scopes GroupsSettingsGroupsPatch = '[Apps'Groups'Settings]
   requestClient GroupsSettingsGroupsPatch {..} =
     go
       groupUniqueId
@@ -88,7 +87,5 @@ instance Core.GoogleRequest GroupsSettingsGroupsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GroupsSettingsGroupsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy GroupsSettingsGroupsPatchResource)
           Core.mempty

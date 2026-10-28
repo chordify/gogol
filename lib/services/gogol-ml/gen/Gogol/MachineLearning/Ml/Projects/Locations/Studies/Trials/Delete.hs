@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Delete
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.locations.studies.trials.delete@ method which the
 -- 'MlProjectsLocationsStudiesTrialsDelete' request conforms to.
@@ -89,32 +87,27 @@ newMlProjectsLocationsStudiesTrialsDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsLocationsStudiesTrialsDelete
-  where
+instance Core.GoogleRequest MlProjectsLocationsStudiesTrialsDelete where
   type
     Rs MlProjectsLocationsStudiesTrialsDelete =
       GoogleProtobuf__Empty
   type
     Scopes MlProjectsLocationsStudiesTrialsDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    MlProjectsLocationsStudiesTrialsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsDeleteResource
-            )
-            Core.mempty
+  requestClient MlProjectsLocationsStudiesTrialsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      machineLearningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MlProjectsLocationsStudiesTrialsDeleteResource
+          )
+          Core.mempty

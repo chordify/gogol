@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Classroom.Types
@@ -30,6 +28,8 @@ module Gogol.Classroom.Types
     classroomService,
 
     -- * OAuth Scopes
+    Classroom'Addons'Student,
+    Classroom'Addons'Teacher,
     Classroom'Announcements,
     Classroom'Announcements'Readonly,
     Classroom'Courses,
@@ -58,6 +58,21 @@ module Gogol.Classroom.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AddOnAttachment
+    AddOnAttachment (..),
+    newAddOnAttachment,
+
+    -- ** AddOnAttachmentStudentSubmission
+    AddOnAttachmentStudentSubmission (..),
+    newAddOnAttachmentStudentSubmission,
+
+    -- ** AddOnAttachmentStudentSubmission_PostSubmissionState
+    AddOnAttachmentStudentSubmission_PostSubmissionState (..),
+
+    -- ** AddOnContext
+    AddOnContext (..),
+    newAddOnContext,
+
     -- ** Announcement
     Announcement (..),
     newAnnouncement,
@@ -83,6 +98,10 @@ module Gogol.Classroom.Types
     -- ** CloudPubsubTopic
     CloudPubsubTopic (..),
     newCloudPubsubTopic,
+
+    -- ** CopyHistory
+    CopyHistory (..),
+    newCopyHistory,
 
     -- ** Course
     Course (..),
@@ -137,6 +156,10 @@ module Gogol.Classroom.Types
     -- ** CourseWorkMaterial_State
     CourseWorkMaterial_State (..),
 
+    -- ** Criterion
+    Criterion (..),
+    newCriterion,
+
     -- ** Date
     Date (..),
     newDate,
@@ -148,6 +171,10 @@ module Gogol.Classroom.Types
     -- ** DriveFolder
     DriveFolder (..),
     newDriveFolder,
+
+    -- ** EmbedUri
+    EmbedUri (..),
+    newEmbedUri,
 
     -- ** Empty
     Empty (..),
@@ -214,9 +241,17 @@ module Gogol.Classroom.Types
     -- ** Invitation_Role
     Invitation_Role (..),
 
+    -- ** Level
+    Level (..),
+    newLevel,
+
     -- ** Link
     Link (..),
     newLink,
+
+    -- ** ListAddOnAttachmentsResponse
+    ListAddOnAttachmentsResponse (..),
+    newListAddOnAttachmentsResponse,
 
     -- ** ListAnnouncementsResponse
     ListAnnouncementsResponse (..),
@@ -249,6 +284,10 @@ module Gogol.Classroom.Types
     -- ** ListInvitationsResponse
     ListInvitationsResponse (..),
     newListInvitationsResponse,
+
+    -- ** ListRubricsResponse
+    ListRubricsResponse (..),
+    newListRubricsResponse,
 
     -- ** ListStudentSubmissionsResponse
     ListStudentSubmissionsResponse (..),
@@ -316,6 +355,14 @@ module Gogol.Classroom.Types
     ReturnStudentSubmissionRequest (..),
     newReturnStudentSubmissionRequest,
 
+    -- ** Rubric
+    Rubric (..),
+    newRubric,
+
+    -- ** RubricGrade
+    RubricGrade (..),
+    newRubricGrade,
+
     -- ** SharedDriveFile
     SharedDriveFile (..),
     newSharedDriveFile,
@@ -338,12 +385,24 @@ module Gogol.Classroom.Types
     Student (..),
     newStudent,
 
+    -- ** StudentContext
+    StudentContext (..),
+    newStudentContext,
+
     -- ** StudentSubmission
     StudentSubmission (..),
     newStudentSubmission,
 
+    -- ** StudentSubmission_AssignedRubricGrades
+    StudentSubmission_AssignedRubricGrades (..),
+    newStudentSubmission_AssignedRubricGrades,
+
     -- ** StudentSubmission_CourseWorkType
     StudentSubmission_CourseWorkType (..),
+
+    -- ** StudentSubmission_DraftRubricGrades
+    StudentSubmission_DraftRubricGrades (..),
+    newStudentSubmission_DraftRubricGrades,
 
     -- ** StudentSubmission_State
     StudentSubmission_State (..),
@@ -355,6 +414,10 @@ module Gogol.Classroom.Types
     -- ** Teacher
     Teacher (..),
     newTeacher,
+
+    -- ** TeacherContext
+    TeacherContext (..),
+    newTeacherContext,
 
     -- ** TimeOfDay'
     TimeOfDay' (..),
@@ -401,7 +464,7 @@ where
 
 import Gogol.Classroom.Internal.Product
 import Gogol.Classroom.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Classroom API. This contains the host and root path used as a starting point for constructing service requests.
 classroomService :: Core.ServiceConfig
@@ -410,68 +473,98 @@ classroomService =
     (Core.ServiceId "classroom:v1")
     "classroom.googleapis.com"
 
+-- | See and update its own attachments to posts in Google Classroom
+type Classroom'Addons'Student =
+  "https://www.googleapis.com/auth/classroom.addons.student"
+
+-- | See, create, and update its own attachments to posts in classes you teach in Google Classroom
+type Classroom'Addons'Teacher =
+  "https://www.googleapis.com/auth/classroom.addons.teacher"
+
 -- | View and manage announcements in Google Classroom
-type Classroom'Announcements = "https://www.googleapis.com/auth/classroom.announcements"
+type Classroom'Announcements =
+  "https://www.googleapis.com/auth/classroom.announcements"
 
 -- | View announcements in Google Classroom
-type Classroom'Announcements'Readonly = "https://www.googleapis.com/auth/classroom.announcements.readonly"
+type Classroom'Announcements'Readonly =
+  "https://www.googleapis.com/auth/classroom.announcements.readonly"
 
 -- | See, edit, create, and permanently delete your Google Classroom classes
-type Classroom'Courses = "https://www.googleapis.com/auth/classroom.courses"
+type Classroom'Courses =
+  "https://www.googleapis.com/auth/classroom.courses"
 
 -- | View your Google Classroom classes
-type Classroom'Courses'Readonly = "https://www.googleapis.com/auth/classroom.courses.readonly"
+type Classroom'Courses'Readonly =
+  "https://www.googleapis.com/auth/classroom.courses.readonly"
 
 -- | See, create and edit coursework items including assignments, questions, and grades
-type Classroom'Coursework'Me = "https://www.googleapis.com/auth/classroom.coursework.me"
+type Classroom'Coursework'Me =
+  "https://www.googleapis.com/auth/classroom.coursework.me"
 
 -- | View your course work and grades in Google Classroom
-type Classroom'Coursework'Me'Readonly = "https://www.googleapis.com/auth/classroom.coursework.me.readonly"
+type Classroom'Coursework'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.coursework.me.readonly"
 
 -- | Manage course work and grades for students in the Google Classroom classes you teach and view the course work and grades for classes you administer
-type Classroom'Coursework'Students = "https://www.googleapis.com/auth/classroom.coursework.students"
+type Classroom'Coursework'Students =
+  "https://www.googleapis.com/auth/classroom.coursework.students"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-type Classroom'Coursework'Students'Readonly = "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
+type Classroom'Coursework'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.coursework.students.readonly"
 
 -- | See, edit, and create classwork materials in Google Classroom
-type Classroom'Courseworkmaterials = "https://www.googleapis.com/auth/classroom.courseworkmaterials"
+type Classroom'Courseworkmaterials =
+  "https://www.googleapis.com/auth/classroom.courseworkmaterials"
 
 -- | See all classwork materials for your Google Classroom classes
-type Classroom'Courseworkmaterials'Readonly = "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
+type Classroom'Courseworkmaterials'Readonly =
+  "https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly"
 
 -- | View your Google Classroom guardians
-type Classroom'Guardianlinks'Me'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
+type Classroom'Guardianlinks'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.me.readonly"
 
 -- | View and manage guardians for students in your Google Classroom classes
-type Classroom'Guardianlinks'Students = "https://www.googleapis.com/auth/classroom.guardianlinks.students"
+type Classroom'Guardianlinks'Students =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.students"
 
 -- | View guardians for students in your Google Classroom classes
-type Classroom'Guardianlinks'Students'Readonly = "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
+type Classroom'Guardianlinks'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly"
 
 -- | View the email addresses of people in your classes
-type Classroom'Profile'Emails = "https://www.googleapis.com/auth/classroom.profile.emails"
+type Classroom'Profile'Emails =
+  "https://www.googleapis.com/auth/classroom.profile.emails"
 
 -- | View the profile photos of people in your classes
-type Classroom'Profile'Photos = "https://www.googleapis.com/auth/classroom.profile.photos"
+type Classroom'Profile'Photos =
+  "https://www.googleapis.com/auth/classroom.profile.photos"
 
 -- | Receive notifications about your Google Classroom data
-type Classroom'PushNotifications = "https://www.googleapis.com/auth/classroom.push-notifications"
+type Classroom'PushNotifications =
+  "https://www.googleapis.com/auth/classroom.push-notifications"
 
 -- | Manage your Google Classroom class rosters
-type Classroom'Rosters = "https://www.googleapis.com/auth/classroom.rosters"
+type Classroom'Rosters =
+  "https://www.googleapis.com/auth/classroom.rosters"
 
 -- | View your Google Classroom class rosters
-type Classroom'Rosters'Readonly = "https://www.googleapis.com/auth/classroom.rosters.readonly"
+type Classroom'Rosters'Readonly =
+  "https://www.googleapis.com/auth/classroom.rosters.readonly"
 
 -- | View your course work and grades in Google Classroom
-type Classroom'StudentSubmissions'Me'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
+type Classroom'StudentSubmissions'Me'Readonly =
+  "https://www.googleapis.com/auth/classroom.student-submissions.me.readonly"
 
 -- | View course work and grades for students in the Google Classroom classes you teach or administer
-type Classroom'StudentSubmissions'Students'Readonly = "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
+type Classroom'StudentSubmissions'Students'Readonly =
+  "https://www.googleapis.com/auth/classroom.student-submissions.students.readonly"
 
 -- | See, create, and edit topics in Google Classroom
-type Classroom'Topics = "https://www.googleapis.com/auth/classroom.topics"
+type Classroom'Topics =
+  "https://www.googleapis.com/auth/classroom.topics"
 
 -- | View topics in Google Classroom
-type Classroom'Topics'Readonly = "https://www.googleapis.com/auth/classroom.topics.readonly"
+type Classroom'Topics'Readonly =
+  "https://www.googleapis.com/auth/classroom.topics.readonly"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Subaccounts.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Subaccounts.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.subaccounts.list@ method which the
 -- 'DFAReportingSubaccountsList' request conforms to.
@@ -57,18 +55,12 @@ type DFAReportingSubaccountsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              SubaccountsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              SubaccountsListSortOrder
+    Core.:> Core.QueryParam "sortField" SubaccountsListSortField
+    Core.:> Core.QueryParam "sortOrder" SubaccountsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SubaccountsListResponse
+    Core.:> Core.Get '[Core.JSON] SubaccountsListResponse
 
 -- | Gets a list of subaccounts, possibly filtered. This method supports paging.
 --
@@ -122,13 +114,8 @@ newDFAReportingSubaccountsList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingSubaccountsList
-  where
-  type
-    Rs DFAReportingSubaccountsList =
-      SubaccountsListResponse
+instance Core.GoogleRequest DFAReportingSubaccountsList where
+  type Rs DFAReportingSubaccountsList = SubaccountsListResponse
   type
     Scopes DFAReportingSubaccountsList =
       '[Dfatrafficking'FullControl]
@@ -151,7 +138,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingSubaccountsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingSubaccountsListResource)
           Core.mempty

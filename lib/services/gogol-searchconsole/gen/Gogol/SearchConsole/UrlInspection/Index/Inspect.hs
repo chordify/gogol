@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.UrlInspection.Index.Inspect
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Index inspection.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @searchconsole.urlInspection.index.inspect@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @searchconsole.urlInspection.index.inspect@.
 module Gogol.SearchConsole.UrlInspection.Index.Inspect
   ( -- * Resource
     SearchConsoleUrlInspectionIndexInspectResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.UrlInspection.Index.Inspect
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @searchconsole.urlInspection.index.inspect@ method which the
@@ -91,32 +89,27 @@ newSearchConsoleUrlInspectionIndexInspect payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SearchConsoleUrlInspectionIndexInspect
-  where
+instance Core.GoogleRequest SearchConsoleUrlInspectionIndexInspect where
   type
     Rs SearchConsoleUrlInspectionIndexInspect =
       InspectUrlIndexResponse
   type
     Scopes SearchConsoleUrlInspectionIndexInspect =
       '[Webmasters'FullControl, Webmasters'Readonly]
-  requestClient
-    SearchConsoleUrlInspectionIndexInspect {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        searchConsoleService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SearchConsoleUrlInspectionIndexInspectResource
-            )
-            Core.mempty
+  requestClient SearchConsoleUrlInspectionIndexInspect {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      searchConsoleService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SearchConsoleUrlInspectionIndexInspectResource
+          )
+          Core.mempty

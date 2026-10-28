@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsActivity.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsActivity.Internal.Product
@@ -73,7 +71,7 @@ module Gogol.AppsActivity.Internal.Product
 where
 
 import Gogol.AppsActivity.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An Activity resource is a combined view of multiple events. An activity has a list of individual events and a combined view of the common fields among all events.
 --
@@ -90,7 +88,10 @@ data Activity = Activity
 newActivity ::
   Activity
 newActivity =
-  Activity {combinedEvent = Core.Nothing, singleEvents = Core.Nothing}
+  Activity
+    { combinedEvent = Core.Nothing,
+      singleEvents = Core.Nothing
+    }
 
 instance Core.FromJSON Activity where
   parseJSON =
@@ -159,9 +160,7 @@ instance Core.FromJSON Event where
       ( \o ->
           Event
             Core.<$> (o Core..:? "additionalEventTypes")
-            Core.<*> ( o Core..:? "eventTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "eventTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "fromUserDeletion")
             Core.<*> (o Core..:? "move")
             Core.<*> (o Core..:? "permissionChanges")
@@ -175,17 +174,14 @@ instance Core.ToJSON Event where
   toJSON Event {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalEventTypes" Core..=)
-              Core.<$> additionalEventTypes,
-            ("eventTimeMillis" Core..=) Core.. Core.AsText
+          [ ("additionalEventTypes" Core..=) Core.<$> additionalEventTypes,
+            ("eventTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> eventTimeMillis,
-            ("fromUserDeletion" Core..=)
-              Core.<$> fromUserDeletion,
+            ("fromUserDeletion" Core..=) Core.<$> fromUserDeletion,
             ("move" Core..=) Core.<$> move,
-            ("permissionChanges" Core..=)
-              Core.<$> permissionChanges,
-            ("primaryEventType" Core..=)
-              Core.<$> primaryEventType,
+            ("permissionChanges" Core..=) Core.<$> permissionChanges,
+            ("primaryEventType" Core..=) Core.<$> primaryEventType,
             ("rename" Core..=) Core.<$> rename,
             ("target" Core..=) Core.<$> target,
             ("user" Core..=) Core.<$> user
@@ -245,7 +241,8 @@ data Move = Move
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 newMove ::
   Move
-newMove = Move {addedParents = Core.Nothing, removedParents = Core.Nothing}
+newMove =
+  Move {addedParents = Core.Nothing, removedParents = Core.Nothing}
 
 instance Core.FromJSON Move where
   parseJSON =
@@ -283,7 +280,11 @@ data Parent = Parent
 newParent ::
   Parent
 newParent =
-  Parent {id = Core.Nothing, isRoot = Core.Nothing, title = Core.Nothing}
+  Parent
+    { id = Core.Nothing,
+      isRoot = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON Parent where
   parseJSON =
@@ -399,10 +400,8 @@ instance Core.ToJSON PermissionChange where
   toJSON PermissionChange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("addedPermissions" Core..=)
-              Core.<$> addedPermissions,
-            ("removedPermissions" Core..=)
-              Core.<$> removedPermissions
+          [ ("addedPermissions" Core..=) Core.<$> addedPermissions,
+            ("removedPermissions" Core..=) Core.<$> removedPermissions
           ]
       )
 
@@ -428,8 +427,7 @@ instance Core.FromJSON Photo where
 
 instance Core.ToJSON Photo where
   toJSON Photo {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Contains information about a renametype event.
 --
@@ -445,7 +443,8 @@ data Rename = Rename
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 newRename ::
   Rename
-newRename = Rename {newTitle' = Core.Nothing, oldTitle = Core.Nothing}
+newRename =
+  Rename {newTitle' = Core.Nothing, oldTitle = Core.Nothing}
 
 instance Core.FromJSON Rename where
   parseJSON =
@@ -483,7 +482,11 @@ data Target = Target
 newTarget ::
   Target
 newTarget =
-  Target {id = Core.Nothing, mimeType = Core.Nothing, name = Core.Nothing}
+  Target
+    { id = Core.Nothing,
+      mimeType = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON Target where
   parseJSON =

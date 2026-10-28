@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CustomSearch.Search.Cse.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CustomSearch.Search.Cse.List
 where
 
 import Gogol.CustomSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @search.cse.list@ method which the
 -- 'SearchCseList' request conforms to.
@@ -54,6 +52,7 @@ type SearchCseListResource =
     Core.:> Core.QueryParam "cr" Core.Text
     Core.:> Core.QueryParam "cx" Core.Text
     Core.:> Core.QueryParam "dateRestrict" Core.Text
+    Core.:> Core.QueryParam "enableAlternateSearchHandler" Core.Bool
     Core.:> Core.QueryParam "exactTerms" Core.Text
     Core.:> Core.QueryParam "excludeTerms" Core.Text
     Core.:> Core.QueryParam "fileType" Core.Text
@@ -63,42 +62,22 @@ type SearchCseListResource =
     Core.:> Core.QueryParam "highRange" Core.Text
     Core.:> Core.QueryParam "hl" Core.Text
     Core.:> Core.QueryParam "hq" Core.Text
-    Core.:> Core.QueryParam
-              "imgColorType"
-              CseListImgColorType
+    Core.:> Core.QueryParam "imgColorType" CseListImgColorType
     Core.:> Core.QueryParam
               "imgDominantColor"
               CseListImgDominantColor
-    Core.:> Core.QueryParam
-              "imgSize"
-              CseListImgSize
-    Core.:> Core.QueryParam
-              "imgType"
-              CseListImgType
-    Core.:> Core.QueryParam
-              "linkSite"
-              Core.Text
-    Core.:> Core.QueryParam
-              "lowRange"
-              Core.Text
-    Core.:> Core.QueryParam
-              "lr"
-              Core.Text
-    Core.:> Core.QueryParam
-              "num"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "orTerms"
-              Core.Text
-    Core.:> Core.QueryParam
-              "q"
-              Core.Text
+    Core.:> Core.QueryParam "imgSize" CseListImgSize
+    Core.:> Core.QueryParam "imgType" CseListImgType
+    Core.:> Core.QueryParam "linkSite" Core.Text
+    Core.:> Core.QueryParam "lowRange" Core.Text
+    Core.:> Core.QueryParam "lr" Core.Text
+    Core.:> Core.QueryParam "num" Core.Int32
+    Core.:> Core.QueryParam "orTerms" Core.Text
+    Core.:> Core.QueryParam "q" Core.Text
     Core.:> Core.QueryParam
               "relatedSite"
               Core.Text
-    Core.:> Core.QueryParam
-              "rights"
-              Core.Text
+    Core.:> Core.QueryParam "rights" Core.Text
     Core.:> Core.QueryParam
               "safe"
               CseListSafe
@@ -111,6 +90,9 @@ type SearchCseListResource =
     Core.:> Core.QueryParam
               "siteSearchFilter"
               CseListSiteSearchFilter
+    Core.:> Core.QueryParam
+              "snippetLength"
+              Core.Int32
     Core.:> Core.QueryParam
               "sort"
               Core.Text
@@ -148,6 +130,8 @@ data SearchCseList = SearchCseList
     cx :: (Core.Maybe Core.Text),
     -- | Restricts results to URLs based on date. Supported values include: * @d[number]@: requests results from the specified number of past days. * @w[number]@: requests results from the specified number of past weeks. * @m[number]@: requests results from the specified number of past months. * @y[number]@: requests results from the specified number of past years.
     dateRestrict :: (Core.Maybe Core.Text),
+    -- | Optional. Enables routing of Programmable Search Engine requests to an alternate search handler.
+    enableAlternateSearchHandler :: (Core.Maybe Core.Bool),
     -- | Identifies a phrase that all documents in the search results must contain.
     exactTerms :: (Core.Maybe Core.Text),
     -- | Identifies a word or phrase that should not appear in any documents in the search results.
@@ -187,7 +171,7 @@ data SearchCseList = SearchCseList
     orTerms :: (Core.Maybe Core.Text),
     -- | Query
     q :: (Core.Maybe Core.Text),
-    -- | Specifies that all search results should be pages that are related to the specified URL.
+    -- | Deprecated.
     relatedSite :: (Core.Maybe Core.Text),
     -- | Filters based on licensing. Supported values include: @cc_publicdomain@, @cc_attribute@, @cc_sharealike@, @cc_noncommercial@, @cc_nonderived@ and combinations of these. See <https://wiki.creativecommons.org/wiki/CC_Search_integration typical combinations>.
     rights :: (Core.Maybe Core.Text),
@@ -199,6 +183,8 @@ data SearchCseList = SearchCseList
     siteSearch :: (Core.Maybe Core.Text),
     -- | Controls whether to include or exclude results from the site named in the @siteSearch@ parameter. Acceptable values are: * @\"e\"@: exclude * @\"i\"@: include
     siteSearchFilter :: (Core.Maybe CseListSiteSearchFilter),
+    -- | Optional. Maximum length of snippet text, in characters, to be returned with results. Note: this feature is limited to specific engines. * Valid values are integers between 161 and 1000, inclusive.
+    snippetLength :: (Core.Maybe Core.Int32),
     -- | The sort expression to apply to the results. The sort parameter specifies that the results be sorted according to the specified expression i.e. sort by date. <https://developers.google.com/custom-search/docs/structured_search#sort-by-attribute Example: sort=date>.
     sort :: (Core.Maybe Core.Text),
     -- | The index of the first result to return. The default number of results per page is 10, so @&start=11@ would start at the top of the second page of results. __Note__: The JSON API will never return more than 100 results, even if more than 100 documents match the query, so setting the sum of @start + num@ to a number greater than 100 will produce an error. Also note that the maximum value for @num@ is 10.
@@ -222,6 +208,7 @@ newSearchCseList =
       cr = Core.Nothing,
       cx = Core.Nothing,
       dateRestrict = Core.Nothing,
+      enableAlternateSearchHandler = Core.Nothing,
       exactTerms = Core.Nothing,
       excludeTerms = Core.Nothing,
       fileType = Core.Nothing,
@@ -247,6 +234,7 @@ newSearchCseList =
       searchType = Core.Nothing,
       siteSearch = Core.Nothing,
       siteSearchFilter = Core.Nothing,
+      snippetLength = Core.Nothing,
       sort = Core.Nothing,
       start = Core.Nothing,
       uploadType = Core.Nothing,
@@ -265,6 +253,7 @@ instance Core.GoogleRequest SearchCseList where
       cr
       cx
       dateRestrict
+      enableAlternateSearchHandler
       exactTerms
       excludeTerms
       fileType
@@ -290,6 +279,7 @@ instance Core.GoogleRequest SearchCseList where
       searchType
       siteSearch
       siteSearchFilter
+      snippetLength
       sort
       start
       uploadType

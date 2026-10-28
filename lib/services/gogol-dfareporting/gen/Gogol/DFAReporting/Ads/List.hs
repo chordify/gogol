@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Ads.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Ads.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.ads.list@ method which the
 -- 'DFAReportingAdsList' request conforms to.
@@ -58,41 +56,21 @@ type DFAReportingAdsListResource =
     Core.:> Core.QueryParams "audienceSegmentIds" Core.Int64
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "campaignIds" Core.Int64
-    Core.:> Core.QueryParam
-              "compatibility"
-              AdsListCompatibility
+    Core.:> Core.QueryParam "compatibility" AdsListCompatibility
     Core.:> Core.QueryParams "creativeIds" Core.Int64
     Core.:> Core.QueryParams
               "creativeOptimizationConfigurationIds"
               Core.Int64
-    Core.:> Core.QueryParam
-              "dynamicClickTracker"
-              Core.Bool
+    Core.:> Core.QueryParam "dynamicClickTracker" Core.Bool
     Core.:> Core.QueryParams "ids" Core.Int64
-    Core.:> Core.QueryParams
-              "landingPageIds"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "maxResults"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "overriddenEventTagId"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "pageToken"
-              Core.Text
-    Core.:> Core.QueryParams
-              "placementIds"
-              Core.Int64
-    Core.:> Core.QueryParams
-              "remarketingListIds"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "searchString"
-              Core.Text
-    Core.:> Core.QueryParams
-              "sizeIds"
-              Core.Int64
+    Core.:> Core.QueryParams "landingPageIds" Core.Int64
+    Core.:> Core.QueryParam "maxResults" Core.Int32
+    Core.:> Core.QueryParam "overriddenEventTagId" Core.Int64
+    Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParams "placementIds" Core.Int64
+    Core.:> Core.QueryParams "remarketingListIds" Core.Int64
+    Core.:> Core.QueryParam "searchString" Core.Text
+    Core.:> Core.QueryParams "sizeIds" Core.Int64
     Core.:> Core.QueryParam
               "sortField"
               AdsListSortField
@@ -105,9 +83,7 @@ type DFAReportingAdsListResource =
     Core.:> Core.QueryParam
               "sslRequired"
               Core.Bool
-    Core.:> Core.QueryParams
-              "type"
-              AdsListType
+    Core.:> Core.QueryParams "type" AdsListType
     Core.:> Core.QueryParam
               "uploadType"
               Core.Text
@@ -226,9 +202,7 @@ newDFAReportingAdsList profileId =
 
 instance Core.GoogleRequest DFAReportingAdsList where
   type Rs DFAReportingAdsList = AdsListResponse
-  type
-    Scopes DFAReportingAdsList =
-      '[Dfatrafficking'FullControl]
+  type Scopes DFAReportingAdsList = '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdsList {..} =
     go
       profileId
@@ -242,9 +216,7 @@ instance Core.GoogleRequest DFAReportingAdsList where
       (campaignIds Core.^. Core._Default)
       compatibility
       (creativeIds Core.^. Core._Default)
-      ( creativeOptimizationConfigurationIds
-          Core.^. Core._Default
-      )
+      (creativeOptimizationConfigurationIds Core.^. Core._Default)
       dynamicClickTracker
       (ids Core.^. Core._Default)
       (landingPageIds Core.^. Core._Default)
@@ -267,7 +239,5 @@ instance Core.GoogleRequest DFAReportingAdsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAdsListResource)
           Core.mempty

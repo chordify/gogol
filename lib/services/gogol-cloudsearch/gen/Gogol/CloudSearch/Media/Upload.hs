@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Media.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Media.Upload
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.media.upload@ method which the
 -- 'CloudSearchMediaUpload' request conforms to.
@@ -57,18 +55,18 @@ type CloudSearchMediaUploadResource =
     Core.:> Core.ReqBody '[Core.JSON] Media
     Core.:> Core.Post '[Core.JSON] Media
     Core.:<|> "upload"
-      Core.:> "v1"
-      Core.:> "media"
-      Core.:> Core.Capture "resourceName" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Media
-      Core.:> Core.Post '[Core.JSON] Media
+    Core.:> "v1"
+    Core.:> "media"
+    Core.:> Core.Capture "resourceName" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Media
+    Core.:> Core.Post '[Core.JSON] Media
 
 -- | Uploads media for indexing. The upload endpoint supports direct and resumable upload protocols and is intended for large items that can not be <https://developers.google.com/cloud-search/docs/reference/rest/v1/indexing.datasources.items#itemcontent inlined during index requests>. To index large content: 1. Call indexing.datasources.items.upload with the item name to begin an upload session and retrieve the UploadItemRef. 1. Call media.upload to upload the content, as a streaming request, using the same resource name from the UploadItemRef from step 1. 1. Call indexing.datasources.items.index to index the item. Populate the </cloud-search/docs/reference/rest/v1/indexing.datasources.items#ItemContent ItemContent> with the UploadItemRef from step 1. For additional information, see <https://developers.google.com/cloud-search/docs/guides/content-connector#rest Create a content connector using the REST API>. __Note:__ This API requires a service account to execute.
 --
@@ -128,39 +126,32 @@ instance Core.GoogleRequest CloudSearchMediaUpload where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudSearchMediaUploadResource
-          )
+          (Core.Proxy :: Core.Proxy CloudSearchMediaUploadResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload CloudSearchMediaUpload)
   where
-  type
-    Rs (Core.MediaUpload CloudSearchMediaUpload) =
-      Media
+  type Rs (Core.MediaUpload CloudSearchMediaUpload) = Media
   type
     Scopes (Core.MediaUpload CloudSearchMediaUpload) =
       Core.Scopes CloudSearchMediaUpload
-  requestClient
-    (Core.MediaUpload CloudSearchMediaUpload {..} body) =
-      go
-        resourceName
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        cloudSearchService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy CloudSearchMediaUploadResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload CloudSearchMediaUpload {..} body) =
+    go
+      resourceName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      cloudSearchService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy CloudSearchMediaUploadResource)
+          Core.mempty

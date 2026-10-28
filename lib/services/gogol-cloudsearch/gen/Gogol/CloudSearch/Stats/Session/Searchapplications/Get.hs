@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Stats.Session.Searchapplications.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Stats.Session.Searchapplications.Get
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.stats.session.searchapplications.get@ method which the
 -- 'CloudSearchStatsSessionSearchapplicationsGet' request conforms to.
@@ -61,9 +59,7 @@ type CloudSearchStatsSessionSearchapplicationsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GetSearchApplicationSessionStatsResponse
+    Core.:> Core.Get '[Core.JSON] GetSearchApplicationSessionStatsResponse
 
 -- | Get the # of search sessions, % of successful sessions with a click query statistics for search application. __Note:__ This API requires a standard end user account to execute.
 --
@@ -103,7 +99,8 @@ newCloudSearchStatsSessionSearchapplicationsGet ::
   CloudSearchStatsSessionSearchapplicationsGet
 newCloudSearchStatsSessionSearchapplicationsGet name =
   CloudSearchStatsSessionSearchapplicationsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       fromDateDay = Core.Nothing,
@@ -125,34 +122,31 @@ instance
     Rs CloudSearchStatsSessionSearchapplicationsGet =
       GetSearchApplicationSessionStatsResponse
   type
-    Scopes
-      CloudSearchStatsSessionSearchapplicationsGet =
+    Scopes CloudSearchStatsSessionSearchapplicationsGet =
       '[ CloudSearch'FullControl,
          CloudSearch'Stats,
          CloudSearch'Stats'Indexing
        ]
-  requestClient
-    CloudSearchStatsSessionSearchapplicationsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        fromDateDay
-        fromDateMonth
-        fromDateYear
-        toDateDay
-        toDateMonth
-        toDateYear
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchStatsSessionSearchapplicationsGetResource
-            )
-            Core.mempty
+  requestClient CloudSearchStatsSessionSearchapplicationsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      fromDateDay
+      fromDateMonth
+      fromDateYear
+      toDateDay
+      toDateMonth
+      toDateYear
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchStatsSessionSearchapplicationsGetResource
+          )
+          Core.mempty

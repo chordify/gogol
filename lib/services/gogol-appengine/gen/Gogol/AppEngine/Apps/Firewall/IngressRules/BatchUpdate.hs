@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Firewall.IngressRules.BatchUpdate
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.batchUpdate@ method which the
 -- 'AppEngineAppsFirewallIngressRulesBatchUpdate' request conforms to.
@@ -56,12 +54,8 @@ type AppEngineAppsFirewallIngressRulesBatchUpdateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchUpdateIngressRulesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchUpdateIngressRulesResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchUpdateIngressRulesRequest
+    Core.:> Core.Post '[Core.JSON] BatchUpdateIngressRulesResponse
 
 -- | Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules.If the final rule does not match traffic with the \'*\' wildcard IP range, then an \"allow all\" rule is explicitly added to the end of the list.
 --
@@ -93,7 +87,8 @@ newAppEngineAppsFirewallIngressRulesBatchUpdate ::
   AppEngineAppsFirewallIngressRulesBatchUpdate
 newAppEngineAppsFirewallIngressRulesBatchUpdate appsId payload =
   AppEngineAppsFirewallIngressRulesBatchUpdate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       appsId = appsId,
       callback = Core.Nothing,
@@ -110,26 +105,23 @@ instance
     Rs AppEngineAppsFirewallIngressRulesBatchUpdate =
       BatchUpdateIngressRulesResponse
   type
-    Scopes
-      AppEngineAppsFirewallIngressRulesBatchUpdate =
+    Scopes AppEngineAppsFirewallIngressRulesBatchUpdate =
       '[CloudPlatform'FullControl]
-  requestClient
-    AppEngineAppsFirewallIngressRulesBatchUpdate {..} =
-      go
-        appsId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsFirewallIngressRulesBatchUpdateResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsFirewallIngressRulesBatchUpdate {..} =
+    go
+      appsId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsFirewallIngressRulesBatchUpdateResource
+          )
+          Core.mempty

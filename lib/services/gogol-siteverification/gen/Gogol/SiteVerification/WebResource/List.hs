@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SiteVerification.WebResource.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SiteVerification.WebResource.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.list@ method which the
@@ -49,9 +47,7 @@ type SiteVerificationWebResourceListResource =
     Core.:> "v1"
     Core.:> "webResource"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SiteVerificationWebResourceListResponse
+    Core.:> Core.Get '[Core.JSON] SiteVerificationWebResourceListResponse
 
 -- | Get the list of your verified websites and domains.
 --
@@ -62,12 +58,10 @@ data SiteVerificationWebResourceList = SiteVerificationWebResourceList
 -- | Creates a value of 'SiteVerificationWebResourceList' with the minimum fields required to make a request.
 newSiteVerificationWebResourceList ::
   SiteVerificationWebResourceList
-newSiteVerificationWebResourceList = SiteVerificationWebResourceList
+newSiteVerificationWebResourceList =
+  SiteVerificationWebResourceList
 
-instance
-  Core.GoogleRequest
-    SiteVerificationWebResourceList
-  where
+instance Core.GoogleRequest SiteVerificationWebResourceList where
   type
     Rs SiteVerificationWebResourceList =
       SiteVerificationWebResourceListResponse
@@ -79,7 +73,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SiteVerificationWebResourceListResource
-          )
+          (Core.Proxy :: Core.Proxy SiteVerificationWebResourceListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdSense.Internal.Sum
@@ -91,6 +89,35 @@ module Gogol.AdSense.Internal.Sum
         ..
       ),
 
+    -- * PolicyIssue_Action
+    PolicyIssue_Action
+      ( PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED,
+        PolicyIssue_Action_Warned,
+        PolicyIssue_Action_ADSERVINGRESTRICTED,
+        PolicyIssue_Action_ADSERVINGDISABLED,
+        PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION,
+        PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED,
+        ..
+      ),
+
+    -- * PolicyIssue_EntityType
+    PolicyIssue_EntityType
+      ( PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED,
+        PolicyIssue_EntityType_Site,
+        PolicyIssue_EntityType_SITESECTION,
+        PolicyIssue_EntityType_Page,
+        ..
+      ),
+
+    -- * PolicyTopic_Type
+    PolicyTopic_Type
+      ( PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED,
+        PolicyTopic_Type_Policy,
+        PolicyTopic_Type_ADVERTISERPREFERENCE,
+        PolicyTopic_Type_Regulatory,
+        ..
+      ),
+
     -- * Site_State
     Site_State
       ( Site_State_STATEUNSPECIFIED,
@@ -131,6 +158,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateDimensions_ADUNITSIZECODE,
         AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME,
         AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
+        AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID,
         AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateDimensions_OWNEDSITEID,
         AccountsReportsGenerateDimensions_PAGEURL,
@@ -202,6 +230,10 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateMetrics_ADSPERIMPRESSION,
         AccountsReportsGenerateMetrics_TOTALEARNINGS,
         AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES,
+        AccountsReportsGenerateMetrics_FUNNELREQUESTS,
+        AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS,
+        AccountsReportsGenerateMetrics_FUNNELCLICKS,
+        AccountsReportsGenerateMetrics_FUNNELRPM,
         ..
       ),
 
@@ -243,6 +275,7 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvDimensions_ADUNITSIZECODE,
         AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME,
         AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
+        AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
         AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
         AccountsReportsGenerateCsvDimensions_PAGEURL,
@@ -314,6 +347,10 @@ module Gogol.AdSense.Internal.Sum
         AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION,
         AccountsReportsGenerateCsvMetrics_TOTALEARNINGS,
         AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES,
+        AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS,
+        AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS,
+        AccountsReportsGenerateCsvMetrics_FUNNELCLICKS,
+        AccountsReportsGenerateCsvMetrics_FUNNELRPM,
         ..
       ),
 
@@ -369,7 +406,7 @@ module Gogol.AdSense.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -472,7 +509,7 @@ pattern AdClient_State_REQUIRESREVIEW = AdClient_State "REQUIRES_REVIEW"
   AdClient_State
   #-}
 
--- | State of the ad unit.
+-- | Required. State of the ad unit.
 newtype AdUnit_State = AdUnit_State {fromAdUnit_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -638,6 +675,127 @@ pattern Header_Type_METRICDECIMAL = Header_Type "METRIC_DECIMAL"
   Header_Type_METRICMILLISECONDS,
   Header_Type_METRICDECIMAL,
   Header_Type
+  #-}
+
+-- | Required. The most severe action taken on the entity over the past seven days.
+newtype PolicyIssue_Action = PolicyIssue_Action {fromPolicyIssue_Action :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The action is unspecified.
+pattern PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED = PolicyIssue_Action "ENFORCEMENT_ACTION_UNSPECIFIED"
+
+-- | No ad serving enforcement is currently present, but enforcement will start on the @warning_escalation_date@ if the issue is not resolved.
+pattern PolicyIssue_Action_Warned :: PolicyIssue_Action
+pattern PolicyIssue_Action_Warned = PolicyIssue_Action "WARNED"
+
+-- | Ad serving demand has been restricted on the entity.
+pattern PolicyIssue_Action_ADSERVINGRESTRICTED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVINGRESTRICTED = PolicyIssue_Action "AD_SERVING_RESTRICTED"
+
+-- | Ad serving has been disabled on the entity.
+pattern PolicyIssue_Action_ADSERVINGDISABLED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVINGDISABLED = PolicyIssue_Action "AD_SERVING_DISABLED"
+
+-- | Ads are being served for the entity but Confirmed Click is being applied to the ads. See https:\/\/support.google.com\/adsense\/answer\/10025624.
+pattern PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION = PolicyIssue_Action "AD_SERVED_WITH_CLICK_CONFIRMATION"
+
+-- | Ad personalization is restricted because the ad requests coming from the EEA and UK do not have a TCF string or the Consent Management Platform (CMP) indicated by the TCF string is not Google certified. As a result, basic\/limited ads will be served. See https:\/\/support.google.com\/adsense\/answer\/13554116
+pattern PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED :: PolicyIssue_Action
+pattern PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED = PolicyIssue_Action "AD_PERSONALIZATION_RESTRICTED"
+
+{-# COMPLETE
+  PolicyIssue_Action_ENFORCEMENTACTIONUNSPECIFIED,
+  PolicyIssue_Action_Warned,
+  PolicyIssue_Action_ADSERVINGRESTRICTED,
+  PolicyIssue_Action_ADSERVINGDISABLED,
+  PolicyIssue_Action_ADSERVEDWITHCLICKCONFIRMATION,
+  PolicyIssue_Action_ADPERSONALIZATIONRESTRICTED,
+  PolicyIssue_Action
+  #-}
+
+-- | Required. Type of the entity indicating if the entity is a site, site-section, or page.
+newtype PolicyIssue_EntityType = PolicyIssue_EntityType {fromPolicyIssue_EntityType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The entity type is unspecified.
+pattern PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED = PolicyIssue_EntityType "ENTITY_TYPE_UNSPECIFIED"
+
+-- | The enforced entity is an entire website.
+pattern PolicyIssue_EntityType_Site :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_Site = PolicyIssue_EntityType "SITE"
+
+-- | The enforced entity is a particular section of a website. All the pages with this prefix are enforced.
+pattern PolicyIssue_EntityType_SITESECTION :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_SITESECTION = PolicyIssue_EntityType "SITE_SECTION"
+
+-- | The enforced entity is a single web page.
+pattern PolicyIssue_EntityType_Page :: PolicyIssue_EntityType
+pattern PolicyIssue_EntityType_Page = PolicyIssue_EntityType "PAGE"
+
+{-# COMPLETE
+  PolicyIssue_EntityType_ENTITYTYPEUNSPECIFIED,
+  PolicyIssue_EntityType_Site,
+  PolicyIssue_EntityType_SITESECTION,
+  PolicyIssue_EntityType_Page,
+  PolicyIssue_EntityType
+  #-}
+
+-- | Optional. The type of policy topic. For example, \"POLICY\" represents all the policy topics that are related to the Google Publisher Policy (GPP). See https:\/\/support.google.com\/adsense\/answer\/15689616.
+newtype PolicyTopic_Type = PolicyTopic_Type {fromPolicyTopic_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The type is unspecified.
+pattern PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED :: PolicyTopic_Type
+pattern PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED = PolicyTopic_Type "POLICY_TOPIC_TYPE_UNSPECIFIED"
+
+-- | Topics that are primarily related to the Google Publisher Policy (GPP) https:\/\/support.google.com\/publisherpolicies\/answer\/10502938 or the Google Publisher Restrictions (GPR) policies https:\/\/support.google.com\/publisherpolicies\/answer\/10437795.
+pattern PolicyTopic_Type_Policy :: PolicyTopic_Type
+pattern PolicyTopic_Type_Policy = PolicyTopic_Type "POLICY"
+
+-- | Topics that are related to advertiser preferences. Certain advertisers may choose not to bid on content that are labeled with certain policies.
+pattern PolicyTopic_Type_ADVERTISERPREFERENCE :: PolicyTopic_Type
+pattern PolicyTopic_Type_ADVERTISERPREFERENCE = PolicyTopic_Type "ADVERTISER_PREFERENCE"
+
+-- | Any topics that are a result of a country or regional regulatory requirement body.
+pattern PolicyTopic_Type_Regulatory :: PolicyTopic_Type
+pattern PolicyTopic_Type_Regulatory = PolicyTopic_Type "REGULATORY"
+
+{-# COMPLETE
+  PolicyTopic_Type_POLICYTOPICTYPEUNSPECIFIED,
+  PolicyTopic_Type_Policy,
+  PolicyTopic_Type_ADVERTISERPREFERENCE,
+  PolicyTopic_Type_Regulatory,
+  PolicyTopic_Type
   #-}
 
 -- | Output only. State of a site.
@@ -812,6 +970,10 @@ pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME = AccountsReportsGen
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_CUSTOMCHANNELID = AccountsReportsGenerateDimensions "CUSTOM_CHANNEL_ID"
 
+-- | Not supported.
+pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateDimensions
+pattern AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateDimensions "HOSTED_CUSTOM_CHANNEL_ID"
+
 -- | Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.
 pattern AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME :: AccountsReportsGenerateDimensions
 pattern AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME = AccountsReportsGenerateDimensions "OWNED_SITE_DOMAIN_NAME"
@@ -960,6 +1122,7 @@ pattern AccountsReportsGenerateDimensions_WEBSEARCHQUERYSTRING = AccountsReports
   AccountsReportsGenerateDimensions_ADUNITSIZECODE,
   AccountsReportsGenerateDimensions_CUSTOMCHANNELNAME,
   AccountsReportsGenerateDimensions_CUSTOMCHANNELID,
+  AccountsReportsGenerateDimensions_HOSTEDCUSTOMCHANNELID,
   AccountsReportsGenerateDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateDimensions_OWNEDSITEID,
   AccountsReportsGenerateDimensions_PAGEURL,
@@ -1141,6 +1304,22 @@ pattern AccountsReportsGenerateMetrics_TOTALEARNINGS = AccountsReportsGenerateMe
 pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES :: AccountsReportsGenerateMetrics
 pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGenerateMetrics "WEBSEARCH_RESULT_PAGES"
 
+-- | Number of requests for non-ad units (for example a related search unit). For more information, see <https://support.google.com/adsense/answer/11586959 Funnel requests>.
+pattern AccountsReportsGenerateMetrics_FUNNELREQUESTS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELREQUESTS = AccountsReportsGenerateMetrics "FUNNEL_REQUESTS"
+
+-- | Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see <https://support.google.com/adsense/answer/11585767 Funnel impressions>.
+pattern AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS = AccountsReportsGenerateMetrics "FUNNEL_IMPRESSIONS"
+
+-- | Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see <https://support.google.com/adsense/answer/11586382 Funnel clicks>.
+pattern AccountsReportsGenerateMetrics_FUNNELCLICKS :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELCLICKS = AccountsReportsGenerateMetrics "FUNNEL_CLICKS"
+
+-- | Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see <https://support.google.com/adsense/answer/11585979 Funnel RPM>.
+pattern AccountsReportsGenerateMetrics_FUNNELRPM :: AccountsReportsGenerateMetrics
+pattern AccountsReportsGenerateMetrics_FUNNELRPM = AccountsReportsGenerateMetrics "FUNNEL_RPM"
+
 {-# COMPLETE
   AccountsReportsGenerateMetrics_METRICUNSPECIFIED,
   AccountsReportsGenerateMetrics_PAGEVIEWS,
@@ -1175,6 +1354,10 @@ pattern AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGen
   AccountsReportsGenerateMetrics_ADSPERIMPRESSION,
   AccountsReportsGenerateMetrics_TOTALEARNINGS,
   AccountsReportsGenerateMetrics_WEBSEARCHRESULTPAGES,
+  AccountsReportsGenerateMetrics_FUNNELREQUESTS,
+  AccountsReportsGenerateMetrics_FUNNELIMPRESSIONS,
+  AccountsReportsGenerateMetrics_FUNNELCLICKS,
+  AccountsReportsGenerateMetrics_FUNNELRPM,
   AccountsReportsGenerateMetrics
   #-}
 
@@ -1340,6 +1523,10 @@ pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME = AccountsReports
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "CUSTOM_CHANNEL_ID"
 
+-- | Not supported.
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID :: AccountsReportsGenerateCsvDimensions
+pattern AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID = AccountsReportsGenerateCsvDimensions "HOSTED_CUSTOM_CHANNEL_ID"
+
 -- | Domain name of a verified site (e.g. \"example.com\"). The members of this dimension match the values from Site.domain.
 pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME :: AccountsReportsGenerateCsvDimensions
 pattern AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME = AccountsReportsGenerateCsvDimensions "OWNED_SITE_DOMAIN_NAME"
@@ -1488,6 +1675,7 @@ pattern AccountsReportsGenerateCsvDimensions_WEBSEARCHQUERYSTRING = AccountsRepo
   AccountsReportsGenerateCsvDimensions_ADUNITSIZECODE,
   AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELNAME,
   AccountsReportsGenerateCsvDimensions_CUSTOMCHANNELID,
+  AccountsReportsGenerateCsvDimensions_HOSTEDCUSTOMCHANNELID,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEDOMAINNAME,
   AccountsReportsGenerateCsvDimensions_OWNEDSITEID,
   AccountsReportsGenerateCsvDimensions_PAGEURL,
@@ -1669,6 +1857,22 @@ pattern AccountsReportsGenerateCsvMetrics_TOTALEARNINGS = AccountsReportsGenerat
 pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES :: AccountsReportsGenerateCsvMetrics
 pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES = AccountsReportsGenerateCsvMetrics "WEBSEARCH_RESULT_PAGES"
 
+-- | Number of requests for non-ad units (for example a related search unit). For more information, see <https://support.google.com/adsense/answer/11586959 Funnel requests>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS = AccountsReportsGenerateCsvMetrics "FUNNEL_REQUESTS"
+
+-- | Number of requests for non-ad units ads that returned content that was shown to the user. For more information, see <https://support.google.com/adsense/answer/11585767 Funnel impressions>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS = AccountsReportsGenerateCsvMetrics "FUNNEL_IMPRESSIONS"
+
+-- | Number of times a user clicked on a non-ad unit, triggering further ad requests. For more information, see <https://support.google.com/adsense/answer/11586382 Funnel clicks>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELCLICKS :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELCLICKS = AccountsReportsGenerateCsvMetrics "FUNNEL_CLICKS"
+
+-- | Revenue per thousand funnel impressions. This is calculated by dividing estimated revenue by the number of funnel impressions multiplied by 1000. For more information, see <https://support.google.com/adsense/answer/11585979 Funnel RPM>.
+pattern AccountsReportsGenerateCsvMetrics_FUNNELRPM :: AccountsReportsGenerateCsvMetrics
+pattern AccountsReportsGenerateCsvMetrics_FUNNELRPM = AccountsReportsGenerateCsvMetrics "FUNNEL_RPM"
+
 {-# COMPLETE
   AccountsReportsGenerateCsvMetrics_METRICUNSPECIFIED,
   AccountsReportsGenerateCsvMetrics_PAGEVIEWS,
@@ -1703,6 +1907,10 @@ pattern AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES = AccountsReports
   AccountsReportsGenerateCsvMetrics_ADSPERIMPRESSION,
   AccountsReportsGenerateCsvMetrics_TOTALEARNINGS,
   AccountsReportsGenerateCsvMetrics_WEBSEARCHRESULTPAGES,
+  AccountsReportsGenerateCsvMetrics_FUNNELREQUESTS,
+  AccountsReportsGenerateCsvMetrics_FUNNELIMPRESSIONS,
+  AccountsReportsGenerateCsvMetrics_FUNNELCLICKS,
+  AccountsReportsGenerateCsvMetrics_FUNNELRPM,
   AccountsReportsGenerateCsvMetrics
   #-}
 

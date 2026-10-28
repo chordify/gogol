@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.GlobalOrganizationOperations.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.GlobalOrganizationOperations.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.globalOrganizationOperations.delete@ method which the
 -- 'ComputeGlobalOrganizationOperationsDelete' request conforms to.
@@ -70,7 +68,7 @@ data ComputeGlobalOrganizationOperationsDelete = ComputeGlobalOrganizationOperat
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Operations resource to delete.
+    -- | Name of the Operations resource to delete, or its unique numeric identifier.
     operation :: Core.Text,
     -- | Parent ID for this request.
     parentId :: (Core.Maybe Core.Text),
@@ -83,7 +81,7 @@ data ComputeGlobalOrganizationOperationsDelete = ComputeGlobalOrganizationOperat
 
 -- | Creates a value of 'ComputeGlobalOrganizationOperationsDelete' with the minimum fields required to make a request.
 newComputeGlobalOrganizationOperationsDelete ::
-  -- |  Name of the Operations resource to delete. See 'operation'.
+  -- |  Name of the Operations resource to delete, or its unique numeric identifier. See 'operation'.
   Core.Text ->
   ComputeGlobalOrganizationOperationsDelete
 newComputeGlobalOrganizationOperationsDelete operation =
@@ -101,29 +99,25 @@ instance
   Core.GoogleRequest
     ComputeGlobalOrganizationOperationsDelete
   where
-  type
-    Rs ComputeGlobalOrganizationOperationsDelete =
-      ()
+  type Rs ComputeGlobalOrganizationOperationsDelete = ()
   type
     Scopes ComputeGlobalOrganizationOperationsDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeGlobalOrganizationOperationsDelete {..} =
-      go
-        operation
-        xgafv
-        accessToken
-        callback
-        parentId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeGlobalOrganizationOperationsDeleteResource
-            )
-            Core.mempty
+  requestClient ComputeGlobalOrganizationOperationsDelete {..} =
+    go
+      operation
+      xgafv
+      accessToken
+      callback
+      parentId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeGlobalOrganizationOperationsDeleteResource
+          )
+          Core.mempty

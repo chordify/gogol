@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Files.Watch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won\'t create a notification.
+-- Subscribes to changes to a file.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.watch@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.files.watch@.
 module Gogol.Drive.Files.Watch
   ( -- * Resource
     DriveFilesWatchResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Files.Watch
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.files.watch@ method which the
 -- 'DriveFilesWatch' request conforms to.
@@ -50,36 +48,35 @@ type DriveFilesWatchResource =
     Core.:> "files"
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> "watch"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "includeLabels" Core.Text
     Core.:> Core.QueryParam "includePermissionsForView" Core.Text
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Channel
     Core.:> Core.Post '[Core.JSON] Channel
-    Core.:<|> "drive"
-      Core.:> "v3"
-      Core.:> "files"
-      Core.:> Core.Capture "fileId" Core.Text
-      Core.:> "watch"
-      Core.:> Core.QueryParam "acknowledgeAbuse" Core.Bool
-      Core.:> Core.QueryParam "includeLabels" Core.Text
-      Core.:> Core.QueryParam "includePermissionsForView" Core.Text
-      Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
-      Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Post '[Core.OctetStream] Core.Stream
 
--- | Subscribes to changes to a file. While you can establish a channel for changes to a file on a shared drive, a change to a shared drive file won\'t create a notification.
+-- | Subscribes to changes to a file.
 --
 -- /See:/ 'newDriveFilesWatch' smart constructor.
 data DriveFilesWatch = DriveFilesWatch
-  { -- | Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when the @alt@ parameter is set to @media@ and the user is the owner of the file or an organizer of the shared drive in which the file resides.
     acknowledgeAbuse :: Core.Bool,
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
     -- | The ID of the file.
     fileId :: Core.Text,
-    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    -- | A comma-separated list of IDs of labels to include in the @labelInfo@ part of the response.
     includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
@@ -87,8 +84,12 @@ data DriveFilesWatch = DriveFilesWatch
     payload :: Channel,
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
-    -- | Deprecated use supportsAllDrives instead.
-    supportsTeamDrives :: Core.Bool
+    -- | Deprecated: Use @supportsAllDrives@ instead.
+    supportsTeamDrives :: Core.Bool,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -101,13 +102,18 @@ newDriveFilesWatch ::
   DriveFilesWatch
 newDriveFilesWatch fileId payload =
   DriveFilesWatch
-    { acknowledgeAbuse = Core.False,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      acknowledgeAbuse = Core.False,
+      callback = Core.Nothing,
       fileId = fileId,
       includeLabels = Core.Nothing,
       includePermissionsForView = Core.Nothing,
       payload = payload,
       supportsAllDrives = Core.False,
-      supportsTeamDrives = Core.False
+      supportsTeamDrives = Core.False,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest DriveFilesWatch where
@@ -117,6 +123,7 @@ instance Core.GoogleRequest DriveFilesWatch where
       '[ Drive'FullControl,
          Drive'Appdata,
          Drive'File,
+         Drive'Meet'Readonly,
          Drive'Metadata,
          Drive'Metadata'Readonly,
          Drive'Photos'Readonly,
@@ -125,43 +132,21 @@ instance Core.GoogleRequest DriveFilesWatch where
   requestClient DriveFilesWatch {..} =
     go
       fileId
+      xgafv
+      accessToken
       (Core.Just acknowledgeAbuse)
+      callback
       includeLabels
       includePermissionsForView
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       payload
       driveService
     where
-      go Core.:<|> _ =
+      go =
         Core.buildClient
           (Core.Proxy :: Core.Proxy DriveFilesWatchResource)
           Core.mempty
-
-instance
-  Core.GoogleRequest
-    (Core.MediaDownload DriveFilesWatch)
-  where
-  type
-    Rs (Core.MediaDownload DriveFilesWatch) =
-      Core.Stream
-  type
-    Scopes (Core.MediaDownload DriveFilesWatch) =
-      Core.Scopes DriveFilesWatch
-  requestClient
-    (Core.MediaDownload DriveFilesWatch {..}) =
-      go
-        fileId
-        (Core.Just acknowledgeAbuse)
-        includeLabels
-        includePermissionsForView
-        (Core.Just supportsAllDrives)
-        (Core.Just supportsTeamDrives)
-        (Core.Just Core.AltMedia)
-        driveService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            (Core.Proxy :: Core.Proxy DriveFilesWatchResource)
-            Core.mempty

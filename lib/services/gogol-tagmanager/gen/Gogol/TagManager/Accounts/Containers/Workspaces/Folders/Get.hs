@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Folders.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.folders.get@ method which the
@@ -82,7 +80,8 @@ newTagManagerAccountsContainersWorkspacesFoldersGet ::
   TagManagerAccountsContainersWorkspacesFoldersGet
 newTagManagerAccountsContainersWorkspacesFoldersGet path =
   TagManagerAccountsContainersWorkspacesFoldersGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       path = path,
@@ -94,30 +93,25 @@ instance
   Core.GoogleRequest
     TagManagerAccountsContainersWorkspacesFoldersGet
   where
+  type Rs TagManagerAccountsContainersWorkspacesFoldersGet = Folder
   type
-    Rs
-      TagManagerAccountsContainersWorkspacesFoldersGet =
-      Folder
-  type
-    Scopes
-      TagManagerAccountsContainersWorkspacesFoldersGet =
+    Scopes TagManagerAccountsContainersWorkspacesFoldersGet =
       '[Tagmanager'Edit'Containers, Tagmanager'Readonly]
-  requestClient
-    TagManagerAccountsContainersWorkspacesFoldersGet {..} =
-      go
-        path
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        tagManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TagManagerAccountsContainersWorkspacesFoldersGetResource
-            )
-            Core.mempty
+  requestClient TagManagerAccountsContainersWorkspacesFoldersGet {..} =
+    go
+      path
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      tagManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                TagManagerAccountsContainersWorkspacesFoldersGetResource
+          )
+          Core.mempty

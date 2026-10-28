@@ -34,13 +34,13 @@ where
 import Control.Applicative
 import Control.Monad
 import Data.Aeson hiding (Bool, String)
-import qualified Data.Attoparsec.Text as A
-import qualified Data.CaseInsensitive as CI
+import Data.Attoparsec.Text qualified as A
+import Data.CaseInsensitive qualified as CI
 import Data.List (elemIndex, intersperse, nub, sortOn)
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy.Builder as Build
+import Data.Text qualified as Text
+import Data.Text.Lazy.Builder qualified as Build
 import Data.Text.Manipulate
 import Formatting
 import GHC.Generics (Generic)
@@ -189,12 +189,14 @@ extractPath x = either (error . err) id $ A.parseOnly path x
 
     rep = fmap Right $ do
       void $ A.string "{/"
-      (,Nothing) <$> fmap Local (A.takeWhile1 (/= '*'))
+      (,Nothing)
+        <$> fmap Local (A.takeWhile1 (/= '*'))
         <* A.string "*}"
 
     var' = fmap Right $ do
       void $ optional (A.char '/') *> A.char '{' *> optional (A.char '+')
-      (,) <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
+      (,)
+        <$> fmap Local (A.takeWhile1 (A.notInClass "/{+*}:"))
         <* A.char '}'
         <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
 
@@ -217,5 +219,5 @@ orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
         "alt"
       ]
 
-orderBy :: Eq b => (a -> b) -> [a] -> [b] -> [a]
+orderBy :: (Eq b) => (a -> b) -> [a] -> [b] -> [a]
 orderBy g xs ys = sortOn (flip elemIndex ys . g) xs

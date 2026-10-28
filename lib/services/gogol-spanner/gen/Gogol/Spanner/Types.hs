@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Spanner.Types
@@ -39,6 +37,54 @@ module Gogol.Spanner.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AdaptMessageRequest
+    AdaptMessageRequest (..),
+    newAdaptMessageRequest,
+
+    -- ** AdaptMessageRequest_Attachments
+    AdaptMessageRequest_Attachments (..),
+    newAdaptMessageRequest_Attachments,
+
+    -- ** AdaptMessageResponse
+    AdaptMessageResponse (..),
+    newAdaptMessageResponse,
+
+    -- ** AdaptMessageResponse_StateUpdates
+    AdaptMessageResponse_StateUpdates (..),
+    newAdaptMessageResponse_StateUpdates,
+
+    -- ** AdapterSession
+    AdapterSession (..),
+    newAdapterSession,
+
+    -- ** AddSplitPointsRequest
+    AddSplitPointsRequest (..),
+    newAddSplitPointsRequest,
+
+    -- ** AddSplitPointsResponse
+    AddSplitPointsResponse (..),
+    newAddSplitPointsResponse,
+
+    -- ** AsymmetricAutoscalingOption
+    AsymmetricAutoscalingOption (..),
+    newAsymmetricAutoscalingOption,
+
+    -- ** AutoscalingConfig
+    AutoscalingConfig (..),
+    newAutoscalingConfig,
+
+    -- ** AutoscalingConfigOverrides
+    AutoscalingConfigOverrides (..),
+    newAutoscalingConfigOverrides,
+
+    -- ** AutoscalingLimits
+    AutoscalingLimits (..),
+    newAutoscalingLimits,
+
+    -- ** AutoscalingTargets
+    AutoscalingTargets (..),
+    newAutoscalingTargets,
+
     -- ** Backup
     Backup (..),
     newBackup,
@@ -53,6 +99,18 @@ module Gogol.Spanner.Types
     BackupInfo (..),
     newBackupInfo,
 
+    -- ** BackupInstancePartition
+    BackupInstancePartition (..),
+    newBackupInstancePartition,
+
+    -- ** BackupSchedule
+    BackupSchedule (..),
+    newBackupSchedule,
+
+    -- ** BackupScheduleSpec
+    BackupScheduleSpec (..),
+    newBackupScheduleSpec,
+
     -- ** BatchCreateSessionsRequest
     BatchCreateSessionsRequest (..),
     newBatchCreateSessionsRequest,
@@ -61,6 +119,14 @@ module Gogol.Spanner.Types
     BatchCreateSessionsResponse (..),
     newBatchCreateSessionsResponse,
 
+    -- ** BatchWriteRequest
+    BatchWriteRequest (..),
+    newBatchWriteRequest,
+
+    -- ** BatchWriteResponse
+    BatchWriteResponse (..),
+    newBatchWriteResponse,
+
     -- ** BeginTransactionRequest
     BeginTransactionRequest (..),
     newBeginTransactionRequest,
@@ -68,6 +134,14 @@ module Gogol.Spanner.Types
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** ChangeQuorumMetadata
+    ChangeQuorumMetadata (..),
+    newChangeQuorumMetadata,
+
+    -- ** ChangeQuorumRequest
+    ChangeQuorumRequest (..),
+    newChangeQuorumRequest,
 
     -- ** ChildLink
     ChildLink (..),
@@ -107,6 +181,13 @@ module Gogol.Spanner.Types
     CopyBackupRequest (..),
     newCopyBackupRequest,
 
+    -- ** CreateBackupEncryptionConfig
+    CreateBackupEncryptionConfig (..),
+    newCreateBackupEncryptionConfig,
+
+    -- ** CreateBackupEncryptionConfig_EncryptionType
+    CreateBackupEncryptionConfig_EncryptionType (..),
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -134,6 +215,17 @@ module Gogol.Spanner.Types
     CreateInstanceMetadata (..),
     newCreateInstanceMetadata,
 
+    -- ** CreateInstanceMetadata_ExpectedFulfillmentPeriod
+    CreateInstanceMetadata_ExpectedFulfillmentPeriod (..),
+
+    -- ** CreateInstancePartitionMetadata
+    CreateInstancePartitionMetadata (..),
+    newCreateInstancePartitionMetadata,
+
+    -- ** CreateInstancePartitionRequest
+    CreateInstancePartitionRequest (..),
+    newCreateInstancePartitionRequest,
+
     -- ** CreateInstanceRequest
     CreateInstanceRequest (..),
     newCreateInstanceRequest,
@@ -141,6 +233,10 @@ module Gogol.Spanner.Types
     -- ** CreateSessionRequest
     CreateSessionRequest (..),
     newCreateSessionRequest,
+
+    -- ** CrontabSpec
+    CrontabSpec (..),
+    newCrontabSpec,
 
     -- ** Database
     Database (..),
@@ -155,6 +251,10 @@ module Gogol.Spanner.Types
     -- ** DatabaseRole
     DatabaseRole (..),
     newDatabaseRole,
+
+    -- ** DdlStatementActionInfo
+    DdlStatementActionInfo (..),
+    newDdlStatementActionInfo,
 
     -- ** Delete'
     Delete' (..),
@@ -171,6 +271,14 @@ module Gogol.Spanner.Types
     -- ** DiagnosticMessage_Severity
     DiagnosticMessage_Severity (..),
 
+    -- ** DirectedReadOptions
+    DirectedReadOptions (..),
+    newDirectedReadOptions,
+
+    -- ** DualRegionQuorum
+    DualRegionQuorum (..),
+    newDualRegionQuorum,
+
     -- ** Empty
     Empty (..),
     newEmpty,
@@ -185,6 +293,10 @@ module Gogol.Spanner.Types
 
     -- ** EncryptionInfo_EncryptionType
     EncryptionInfo_EncryptionType (..),
+
+    -- ** ExcludeReplicas
+    ExcludeReplicas (..),
+    newExcludeReplicas,
 
     -- ** ExecuteBatchDmlRequest
     ExecuteBatchDmlRequest (..),
@@ -224,6 +336,10 @@ module Gogol.Spanner.Types
     -- ** FreeInstanceMetadata_ExpireBehavior
     FreeInstanceMetadata_ExpireBehavior (..),
 
+    -- ** FullBackupSpec
+    FullBackupSpec (..),
+    newFullBackupSpec,
+
     -- ** GetDatabaseDdlResponse
     GetDatabaseDdlResponse (..),
     newGetDatabaseDdlResponse,
@@ -235,6 +351,18 @@ module Gogol.Spanner.Types
     -- ** GetPolicyOptions
     GetPolicyOptions (..),
     newGetPolicyOptions,
+
+    -- ** IncludeReplicas
+    IncludeReplicas (..),
+    newIncludeReplicas,
+
+    -- ** IncrementalBackupSpec
+    IncrementalBackupSpec (..),
+    newIncrementalBackupSpec,
+
+    -- ** IndexAdvice
+    IndexAdvice (..),
+    newIndexAdvice,
 
     -- ** IndexedHotKey
     IndexedHotKey (..),
@@ -255,6 +383,12 @@ module Gogol.Spanner.Types
     -- ** Instance
     Instance (..),
     newInstance,
+
+    -- ** Instance_DefaultBackupScheduleType
+    Instance_DefaultBackupScheduleType (..),
+
+    -- ** Instance_Edition
+    Instance_Edition (..),
 
     -- ** Instance_InstanceType
     Instance_InstanceType (..),
@@ -280,12 +414,30 @@ module Gogol.Spanner.Types
     InstanceConfig_Labels (..),
     newInstanceConfig_Labels,
 
+    -- ** InstanceConfig_QuorumType
+    InstanceConfig_QuorumType (..),
+
     -- ** InstanceConfig_State
     InstanceConfig_State (..),
 
     -- ** InstanceOperationProgress
     InstanceOperationProgress (..),
     newInstanceOperationProgress,
+
+    -- ** InstancePartition
+    InstancePartition (..),
+    newInstancePartition,
+
+    -- ** InstancePartition_State
+    InstancePartition_State (..),
+
+    -- ** InstanceReplicaSelection
+    InstanceReplicaSelection (..),
+    newInstanceReplicaSelection,
+
+    -- ** Key
+    Key (..),
+    newKey,
 
     -- ** KeyRange
     KeyRange (..),
@@ -306,6 +458,10 @@ module Gogol.Spanner.Types
     -- ** ListBackupOperationsResponse
     ListBackupOperationsResponse (..),
     newListBackupOperationsResponse,
+
+    -- ** ListBackupSchedulesResponse
+    ListBackupSchedulesResponse (..),
+    newListBackupSchedulesResponse,
 
     -- ** ListBackupsResponse
     ListBackupsResponse (..),
@@ -330,6 +486,14 @@ module Gogol.Spanner.Types
     -- ** ListInstanceConfigsResponse
     ListInstanceConfigsResponse (..),
     newListInstanceConfigsResponse,
+
+    -- ** ListInstancePartitionOperationsResponse
+    ListInstancePartitionOperationsResponse (..),
+    newListInstancePartitionOperationsResponse,
+
+    -- ** ListInstancePartitionsResponse
+    ListInstancePartitionsResponse (..),
+    newListInstancePartitionsResponse,
 
     -- ** ListInstancesResponse
     ListInstancesResponse (..),
@@ -378,9 +542,21 @@ module Gogol.Spanner.Types
     MetricMatrixRow (..),
     newMetricMatrixRow,
 
+    -- ** MoveInstanceRequest
+    MoveInstanceRequest (..),
+    newMoveInstanceRequest,
+
+    -- ** MultiplexedSessionPrecommitToken
+    MultiplexedSessionPrecommitToken (..),
+    newMultiplexedSessionPrecommitToken,
+
     -- ** Mutation
     Mutation (..),
     newMutation,
+
+    -- ** MutationGroup
+    MutationGroup (..),
+    newMutationGroup,
 
     -- ** Operation
     Operation (..),
@@ -461,6 +637,10 @@ module Gogol.Spanner.Types
     PrefixNode (..),
     newPrefixNode,
 
+    -- ** QueryAdvisorResult
+    QueryAdvisorResult (..),
+    newQueryAdvisorResult,
+
     -- ** QueryOptions
     QueryOptions (..),
     newQueryOptions,
@@ -468,6 +648,17 @@ module Gogol.Spanner.Types
     -- ** QueryPlan
     QueryPlan (..),
     newQueryPlan,
+
+    -- ** QuorumInfo
+    QuorumInfo (..),
+    newQuorumInfo,
+
+    -- ** QuorumInfo_Initiator
+    QuorumInfo_Initiator (..),
+
+    -- ** QuorumType
+    QuorumType (..),
+    newQuorumType,
 
     -- ** ReadOnly
     ReadOnly (..),
@@ -477,6 +668,12 @@ module Gogol.Spanner.Types
     ReadRequest (..),
     newReadRequest,
 
+    -- ** ReadRequest_LockHint
+    ReadRequest_LockHint (..),
+
+    -- ** ReadRequest_OrderBy
+    ReadRequest_OrderBy (..),
+
     -- ** ReadWrite
     ReadWrite (..),
     newReadWrite,
@@ -484,12 +681,23 @@ module Gogol.Spanner.Types
     -- ** ReadWrite_ReadLockMode
     ReadWrite_ReadLockMode (..),
 
+    -- ** ReplicaComputeCapacity
+    ReplicaComputeCapacity (..),
+    newReplicaComputeCapacity,
+
     -- ** ReplicaInfo
     ReplicaInfo (..),
     newReplicaInfo,
 
     -- ** ReplicaInfo_Type
     ReplicaInfo_Type (..),
+
+    -- ** ReplicaSelection
+    ReplicaSelection (..),
+    newReplicaSelection,
+
+    -- ** ReplicaSelection_Type
+    ReplicaSelection_Type (..),
 
     -- ** RequestOptions
     RequestOptions (..),
@@ -575,6 +783,14 @@ module Gogol.Spanner.Types
     ShortRepresentation_Subqueries (..),
     newShortRepresentation_Subqueries,
 
+    -- ** SingleRegionQuorum
+    SingleRegionQuorum (..),
+    newSingleRegionQuorum,
+
+    -- ** SplitPoints
+    SplitPoints (..),
+    newSplitPoints,
+
     -- ** Statement
     Statement (..),
     newStatement,
@@ -637,6 +853,14 @@ module Gogol.Spanner.Types
     UpdateDatabaseDdlRequest (..),
     newUpdateDatabaseDdlRequest,
 
+    -- ** UpdateDatabaseMetadata
+    UpdateDatabaseMetadata (..),
+    newUpdateDatabaseMetadata,
+
+    -- ** UpdateDatabaseRequest
+    UpdateDatabaseRequest (..),
+    newUpdateDatabaseRequest,
+
     -- ** UpdateInstanceConfigMetadata
     UpdateInstanceConfigMetadata (..),
     newUpdateInstanceConfigMetadata,
@@ -648,6 +872,17 @@ module Gogol.Spanner.Types
     -- ** UpdateInstanceMetadata
     UpdateInstanceMetadata (..),
     newUpdateInstanceMetadata,
+
+    -- ** UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+    UpdateInstanceMetadata_ExpectedFulfillmentPeriod (..),
+
+    -- ** UpdateInstancePartitionMetadata
+    UpdateInstancePartitionMetadata (..),
+    newUpdateInstancePartitionMetadata,
+
+    -- ** UpdateInstancePartitionRequest
+    UpdateInstancePartitionRequest (..),
+    newUpdateInstancePartitionRequest,
 
     -- ** UpdateInstanceRequest
     UpdateInstanceRequest (..),
@@ -675,7 +910,7 @@ module Gogol.Spanner.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Internal.Product
 import Gogol.Spanner.Internal.Sum
 
@@ -687,10 +922,12 @@ spannerService =
     "spanner.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Administer your Spanner databases
-type Spanner'Admin = "https://www.googleapis.com/auth/spanner.admin"
+type Spanner'Admin =
+  "https://www.googleapis.com/auth/spanner.admin"
 
 -- | View and manage the contents of your Spanner databases
 type Spanner'Data = "https://www.googleapis.com/auth/spanner.data"

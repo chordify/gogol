@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Enterprises.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an enterprise. Only available for EMM-managed enterprises.
+-- Permanently deletes an enterprise and all accounts and data associated with it. Warning: this will result in a cascaded deletion of all AM API devices associated with the deleted enterprise. Only available for EMM-managed enterprises.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.delete@.
 module Gogol.AndroidManagement.Enterprises.Delete
@@ -40,7 +38,7 @@ module Gogol.AndroidManagement.Enterprises.Delete
 where
 
 import Gogol.AndroidManagement.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidmanagement.enterprises.delete@ method which the
 -- 'AndroidManagementEnterprisesDelete' request conforms to.
@@ -55,7 +53,7 @@ type AndroidManagementEnterprisesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes an enterprise. Only available for EMM-managed enterprises.
+-- | Permanently deletes an enterprise and all accounts and data associated with it. Warning: this will result in a cascaded deletion of all AM API devices associated with the deleted enterprise. Only available for EMM-managed enterprises.
 --
 -- /See:/ 'newAndroidManagementEnterprisesDelete' smart constructor.
 data AndroidManagementEnterprisesDelete = AndroidManagementEnterprisesDelete
@@ -89,10 +87,7 @@ newAndroidManagementEnterprisesDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidManagementEnterprisesDelete
-  where
+instance Core.GoogleRequest AndroidManagementEnterprisesDelete where
   type Rs AndroidManagementEnterprisesDelete = Empty
   type
     Scopes AndroidManagementEnterprisesDelete =
@@ -111,7 +106,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AndroidManagementEnterprisesDeleteResource
+              Core.Proxy AndroidManagementEnterprisesDeleteResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing.TestEnvironmentCatalog.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the catalog of supported test environments. May return any of the following canonical error codes: - INVALID/ARGUMENT - if the request is malformed - NOT/FOUND - if the environment type does not exist - INTERNAL - if an internal error occurred
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.testEnvironmentCatalog.get@.
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference> for @testing.testEnvironmentCatalog.get@.
 module Gogol.Testing.TestEnvironmentCatalog.Get
   ( -- * Resource
     TestingTestEnvironmentCatalogGetResource,
@@ -39,7 +37,7 @@ module Gogol.Testing.TestEnvironmentCatalog.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Types
 
 -- | A resource alias for @testing.testEnvironmentCatalog.get@ method which the
@@ -96,13 +94,8 @@ newTestingTestEnvironmentCatalogGet environmentType =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TestingTestEnvironmentCatalogGet
-  where
-  type
-    Rs TestingTestEnvironmentCatalogGet =
-      TestEnvironmentCatalog
+instance Core.GoogleRequest TestingTestEnvironmentCatalogGet where
+  type Rs TestingTestEnvironmentCatalogGet = TestEnvironmentCatalog
   type
     Scopes TestingTestEnvironmentCatalogGet =
       '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
@@ -120,7 +113,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy TestingTestEnvironmentCatalogGetResource
-          )
+          (Core.Proxy :: Core.Proxy TestingTestEnvironmentCatalogGetResource)
           Core.mempty

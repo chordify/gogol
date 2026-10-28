@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.GlobalPublicDelegatedPrefixes.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.GlobalPublicDelegatedPrefixes.Insert
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.globalPublicDelegatedPrefixes.insert@ method which the
 -- 'ComputeGlobalPublicDelegatedPrefixesInsert' request conforms to.
@@ -107,31 +105,26 @@ instance
   Core.GoogleRequest
     ComputeGlobalPublicDelegatedPrefixesInsert
   where
+  type Rs ComputeGlobalPublicDelegatedPrefixesInsert = Operation
   type
-    Rs ComputeGlobalPublicDelegatedPrefixesInsert =
-      Operation
-  type
-    Scopes
-      ComputeGlobalPublicDelegatedPrefixesInsert =
+    Scopes ComputeGlobalPublicDelegatedPrefixesInsert =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeGlobalPublicDelegatedPrefixesInsert {..} =
-      go
-        project
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeGlobalPublicDelegatedPrefixesInsertResource
-            )
-            Core.mempty
+  requestClient ComputeGlobalPublicDelegatedPrefixesInsert {..} =
+    go
+      project
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeGlobalPublicDelegatedPrefixesInsertResource
+          )
+          Core.mempty

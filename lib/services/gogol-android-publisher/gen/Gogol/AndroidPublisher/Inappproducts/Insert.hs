@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an in-app product (i.e. a managed product or a subscriptions).
+-- Creates an in-app product (a managed product or a subscription). This method should no longer be used to create subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.insert@.
 module Gogol.AndroidPublisher.Inappproducts.Insert
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Inappproducts.Insert
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.inappproducts.insert@ method which the
 -- 'AndroidPublisherInappproductsInsert' request conforms to.
@@ -60,7 +58,7 @@ type AndroidPublisherInappproductsInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] InAppProduct
     Core.:> Core.Post '[Core.JSON] InAppProduct
 
--- | Creates an in-app product (i.e. a managed product or a subscriptions).
+-- | Creates an in-app product (a managed product or a subscription). This method should no longer be used to create subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ 'newAndroidPublisherInappproductsInsert' smart constructor.
 data AndroidPublisherInappproductsInsert = AndroidPublisherInappproductsInsert
@@ -102,13 +100,8 @@ newAndroidPublisherInappproductsInsert packageName payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsInsert
-  where
-  type
-    Rs AndroidPublisherInappproductsInsert =
-      InAppProduct
+instance Core.GoogleRequest AndroidPublisherInappproductsInsert where
+  type Rs AndroidPublisherInappproductsInsert = InAppProduct
   type
     Scopes AndroidPublisherInappproductsInsert =
       '[Androidpublisher'FullControl]
@@ -128,7 +121,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AndroidPublisherInappproductsInsertResource
+              Core.Proxy AndroidPublisherInappproductsInsertResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSenseHost.Accounts.Adunits.GetAdCode
 where
 
 import Gogol.AdSenseHost.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsensehost.accounts.adunits.getAdCode@ method which the
 -- 'AdSenseHostAccountsAdunitsGetAdCode' request conforms to.
@@ -82,18 +80,18 @@ newAdSenseHostAccountsAdunitsGetAdCode ::
   -- |  Ad unit to get the code for. See 'adUnitId'.
   Core.Text ->
   AdSenseHostAccountsAdunitsGetAdCode
-newAdSenseHostAccountsAdunitsGetAdCode accountId adClientId adUnitId =
-  AdSenseHostAccountsAdunitsGetAdCode
-    { accountId = accountId,
-      adClientId = adClientId,
-      adUnitId = adUnitId,
-      hostCustomChannelId = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAdSenseHostAccountsAdunitsGetAdCode
+  accountId
+  adClientId
+  adUnitId =
     AdSenseHostAccountsAdunitsGetAdCode
-  where
+      { accountId = accountId,
+        adClientId = adClientId,
+        adUnitId = adUnitId,
+        hostCustomChannelId = Core.Nothing
+      }
+
+instance Core.GoogleRequest AdSenseHostAccountsAdunitsGetAdCode where
   type Rs AdSenseHostAccountsAdunitsGetAdCode = AdCode
   type
     Scopes AdSenseHostAccountsAdunitsGetAdCode =
@@ -110,7 +108,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AdSenseHostAccountsAdunitsGetAdCodeResource
+              Core.Proxy AdSenseHostAccountsAdunitsGetAdCodeResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppState.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppState.Internal.Product
@@ -45,7 +43,7 @@ module Gogol.AppState.Internal.Product
 where
 
 import Gogol.AppState.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | This is a JSON template for an app state resource.
 --
@@ -89,8 +87,7 @@ instance Core.ToJSON GetResponse where
   toJSON GetResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentStateVersion" Core..=)
-              Core.<$> currentStateVersion,
+          [ ("currentStateVersion" Core..=) Core.<$> currentStateVersion,
             ("data" Core..=) Core.<$> data',
             Core.Just ("kind" Core..= kind),
             ("stateKey" Core..=) Core.<$> stateKey
@@ -137,8 +134,7 @@ instance Core.ToJSON ListResponse where
       ( Core.catMaybes
           [ ("items" Core..=) Core.<$> items,
             Core.Just ("kind" Core..= kind),
-            ("maximumKeyCount" Core..=)
-              Core.<$> maximumKeyCount
+            ("maximumKeyCount" Core..=) Core.<$> maximumKeyCount
           ]
       )
 
@@ -157,7 +153,10 @@ data UpdateRequest = UpdateRequest
 newUpdateRequest ::
   UpdateRequest
 newUpdateRequest =
-  UpdateRequest {data' = Core.Nothing, kind = "appstate#updateRequest"}
+  UpdateRequest
+    { data' = Core.Nothing,
+      kind = "appstate#updateRequest"
+    }
 
 instance Core.FromJSON UpdateRequest where
   parseJSON =
@@ -166,18 +165,14 @@ instance Core.FromJSON UpdateRequest where
       ( \o ->
           UpdateRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "appstate#updateRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "appstate#updateRequest")
       )
 
 instance Core.ToJSON UpdateRequest where
   toJSON UpdateRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("data" Core..=) Core.<$> data',
-            Core.Just ("kind" Core..= kind)
-          ]
+          [("data" Core..=) Core.<$> data', Core.Just ("kind" Core..= kind)]
       )
 
 -- | This is a JSON template for an app state write result.
@@ -218,8 +213,7 @@ instance Core.ToJSON WriteResult where
   toJSON WriteResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentStateVersion" Core..=)
-              Core.<$> currentStateVersion,
+          [ ("currentStateVersion" Core..=) Core.<$> currentStateVersion,
             Core.Just ("kind" Core..= kind),
             ("stateKey" Core..=) Core.<$> stateKey
           ]

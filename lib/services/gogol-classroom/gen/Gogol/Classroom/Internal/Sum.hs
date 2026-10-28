@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Classroom.Internal.Sum
@@ -30,6 +28,17 @@ module Gogol.Classroom.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * AddOnAttachmentStudentSubmission_PostSubmissionState
+    AddOnAttachmentStudentSubmission_PostSubmissionState
+      ( AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED,
+        AddOnAttachmentStudentSubmission_PostSubmissionState_New,
+        AddOnAttachmentStudentSubmission_PostSubmissionState_Created,
+        AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN,
+        AddOnAttachmentStudentSubmission_PostSubmissionState_Returned,
+        AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT,
         ..
       ),
 
@@ -294,7 +303,7 @@ module Gogol.Classroom.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -321,6 +330,53 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Submission state of add-on attachment\'s parent post (i.e. assignment).
+newtype AddOnAttachmentStudentSubmission_PostSubmissionState = AddOnAttachmentStudentSubmission_PostSubmissionState {fromAddOnAttachmentStudentSubmission_PostSubmissionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No state specified. This should never be returned.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED = AddOnAttachmentStudentSubmission_PostSubmissionState "SUBMISSION_STATE_UNSPECIFIED"
+
+-- | The student has never accessed this submission. Attachments are not returned and timestamps is not set.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_New :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_New = AddOnAttachmentStudentSubmission_PostSubmissionState "NEW"
+
+-- | Has been created.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_Created :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_Created = AddOnAttachmentStudentSubmission_PostSubmissionState "CREATED"
+
+-- | Has been turned in to the teacher.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN = AddOnAttachmentStudentSubmission_PostSubmissionState "TURNED_IN"
+
+-- | Has been returned to the student.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_Returned :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_Returned = AddOnAttachmentStudentSubmission_PostSubmissionState "RETURNED"
+
+-- | Student chose to \"unsubmit\" the assignment.
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT :: AddOnAttachmentStudentSubmission_PostSubmissionState
+pattern AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT = AddOnAttachmentStudentSubmission_PostSubmissionState "RECLAIMED_BY_STUDENT"
+
+{-# COMPLETE
+  AddOnAttachmentStudentSubmission_PostSubmissionState_SUBMISSIONSTATEUNSPECIFIED,
+  AddOnAttachmentStudentSubmission_PostSubmissionState_New,
+  AddOnAttachmentStudentSubmission_PostSubmissionState_Created,
+  AddOnAttachmentStudentSubmission_PostSubmissionState_TURNEDIN,
+  AddOnAttachmentStudentSubmission_PostSubmissionState_Returned,
+  AddOnAttachmentStudentSubmission_PostSubmissionState_RECLAIMEDBYSTUDENT,
+  AddOnAttachmentStudentSubmission_PostSubmissionState
   #-}
 
 -- | Assignee mode of the announcement. If unspecified, the default value is @ALL_STUDENTS@.
@@ -630,7 +686,7 @@ pattern CourseWorkMaterial_State_COURSEWORKMATERIALSTATEUNSPECIFIED = CourseWork
 pattern CourseWorkMaterial_State_Published :: CourseWorkMaterial_State
 pattern CourseWorkMaterial_State_Published = CourseWorkMaterial_State "PUBLISHED"
 
--- | Status for an course work material that is not yet published. Course work material in this state is visible only to course teachers and domain administrators.
+-- | Status for a course work material that is not yet published. Course work material in this state is visible only to course teachers and domain administrators.
 pattern CourseWorkMaterial_State_Draft :: CourseWorkMaterial_State
 pattern CourseWorkMaterial_State_Draft = CourseWorkMaterial_State "DRAFT"
 
@@ -1291,7 +1347,7 @@ pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_COURSEWORKMATERIA
 pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Published :: CoursesCourseWorkMaterialsListCourseWorkMaterialStates
 pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Published = CoursesCourseWorkMaterialsListCourseWorkMaterialStates "PUBLISHED"
 
--- | Status for an course work material that is not yet published. Course work material in this state is visible only to course teachers and domain administrators.
+-- | Status for a course work material that is not yet published. Course work material in this state is visible only to course teachers and domain administrators.
 pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Draft :: CoursesCourseWorkMaterialsListCourseWorkMaterialStates
 pattern CoursesCourseWorkMaterialsListCourseWorkMaterialStates_Draft = CoursesCourseWorkMaterialsListCourseWorkMaterialStates "DRAFT"
 

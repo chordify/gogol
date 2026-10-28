@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Reports.Generate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSenseHost.Reports.Generate
 where
 
 import Gogol.AdSenseHost.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsensehost.reports.generate@ method which the
 -- 'AdSenseHostReportsGenerate' request conforms to.
@@ -105,14 +103,9 @@ newAdSenseHostReportsGenerate endDate startDate =
       startIndex = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseHostReportsGenerate
-  where
+instance Core.GoogleRequest AdSenseHostReportsGenerate where
   type Rs AdSenseHostReportsGenerate = Report
-  type
-    Scopes AdSenseHostReportsGenerate =
-      '[Adsensehost'FullControl]
+  type Scopes AdSenseHostReportsGenerate = '[Adsensehost'FullControl]
   requestClient AdSenseHostReportsGenerate {..} =
     go
       (Core.Just startDate)
@@ -129,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdSenseHostReportsGenerateResource
-          )
+          (Core.Proxy :: Core.Proxy AdSenseHostReportsGenerateResource)
           Core.mempty

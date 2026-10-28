@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Projects.GetAccessApprovalSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the settings associated with a project, folder, or organization.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference> for @accessapproval.projects.getAccessApprovalSettings@.
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference> for @accessapproval.projects.getAccessApprovalSettings@.
 module Gogol.AccessApproval.Projects.GetAccessApprovalSettings
   ( -- * Resource
     AccessApprovalProjectsGetAccessApprovalSettingsResource,
@@ -40,7 +38,7 @@ module Gogol.AccessApproval.Projects.GetAccessApprovalSettings
 where
 
 import Gogol.AccessApproval.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accessapproval.projects.getAccessApprovalSettings@ method which the
 -- 'AccessApprovalProjectsGetAccessApprovalSettings' request conforms to.
@@ -81,7 +79,8 @@ newAccessApprovalProjectsGetAccessApprovalSettings ::
   AccessApprovalProjectsGetAccessApprovalSettings
 newAccessApprovalProjectsGetAccessApprovalSettings name =
   AccessApprovalProjectsGetAccessApprovalSettings
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,29 +93,25 @@ instance
     AccessApprovalProjectsGetAccessApprovalSettings
   where
   type
-    Rs
-      AccessApprovalProjectsGetAccessApprovalSettings =
+    Rs AccessApprovalProjectsGetAccessApprovalSettings =
       AccessApprovalSettings
   type
-    Scopes
-      AccessApprovalProjectsGetAccessApprovalSettings =
+    Scopes AccessApprovalProjectsGetAccessApprovalSettings =
       '[CloudPlatform'FullControl]
-  requestClient
-    AccessApprovalProjectsGetAccessApprovalSettings {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        accessApprovalService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessApprovalProjectsGetAccessApprovalSettingsResource
-            )
-            Core.mempty
+  requestClient AccessApprovalProjectsGetAccessApprovalSettings {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      accessApprovalService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AccessApprovalProjectsGetAccessApprovalSettingsResource
+          )
+          Core.mempty

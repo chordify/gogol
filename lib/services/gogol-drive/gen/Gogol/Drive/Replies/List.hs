@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Replies.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists a comment\'s replies.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.replies.list@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.replies.list@.
 module Gogol.Drive.Replies.List
   ( -- * Resource
     DriveRepliesListResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Replies.List
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.replies.list@ method which the
 -- 'DriveRepliesList' request conforms to.
@@ -52,9 +50,14 @@ type DriveRepliesListResource =
     Core.:> "comments"
     Core.:> Core.Capture "commentId" Core.Text
     Core.:> "replies"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "includeDeleted" Core.Bool
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ReplyList
 
@@ -62,7 +65,13 @@ type DriveRepliesListResource =
 --
 -- /See:/ 'newDriveRepliesList' smart constructor.
 data DriveRepliesList = DriveRepliesList
-  { -- | The ID of the comment.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The ID of the comment.
     commentId :: Core.Text,
     -- | The ID of the file.
     fileId :: Core.Text,
@@ -71,7 +80,11 @@ data DriveRepliesList = DriveRepliesList
     -- | The maximum number of replies to return per page.
     pageSize :: Core.Int32,
     -- | The token for continuing a previous list request on the next page. This should be set to the value of \'nextPageToken\' from the previous response.
-    pageToken :: (Core.Maybe Core.Text)
+    pageToken :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -84,25 +97,39 @@ newDriveRepliesList ::
   DriveRepliesList
 newDriveRepliesList commentId fileId =
   DriveRepliesList
-    { commentId = commentId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      commentId = commentId,
       fileId = fileId,
       includeDeleted = Core.False,
       pageSize = 20,
-      pageToken = Core.Nothing
+      pageToken = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest DriveRepliesList where
   type Rs DriveRepliesList = ReplyList
   type
     Scopes DriveRepliesList =
-      '[Drive'FullControl, Drive'File, Drive'Readonly]
+      '[ Drive'FullControl,
+         Drive'File,
+         Drive'Meet'Readonly,
+         Drive'Readonly
+       ]
   requestClient DriveRepliesList {..} =
     go
       fileId
       commentId
+      xgafv
+      accessToken
+      callback
       (Core.Just includeDeleted)
       (Core.Just pageSize)
       pageToken
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       driveService
     where

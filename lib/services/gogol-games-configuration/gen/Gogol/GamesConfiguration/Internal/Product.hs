@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesConfiguration.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.GamesConfiguration.Internal.Product
@@ -69,7 +67,7 @@ module Gogol.GamesConfiguration.Internal.Product
 where
 
 import Gogol.GamesConfiguration.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An achievement configuration resource.
 --
@@ -129,8 +127,7 @@ instance Core.ToJSON AchievementConfiguration where
   toJSON AchievementConfiguration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("achievementType" Core..=)
-              Core.<$> achievementType,
+          [ ("achievementType" Core..=) Core.<$> achievementType,
             ("draft" Core..=) Core.<$> draft,
             ("id" Core..=) Core.<$> id,
             ("initialState" Core..=) Core.<$> initialState,
@@ -223,10 +220,7 @@ newAchievementConfigurationListResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AchievementConfigurationListResponse
-  where
+instance Core.FromJSON AchievementConfigurationListResponse where
   parseJSON =
     Core.withObject
       "AchievementConfigurationListResponse"
@@ -237,10 +231,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    AchievementConfigurationListResponse
-  where
+instance Core.ToJSON AchievementConfigurationListResponse where
   toJSON AchievementConfigurationListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -352,10 +343,8 @@ instance Core.ToJSON GamesNumberFormatConfiguration where
     Core.object
       ( Core.catMaybes
           [ ("currencyCode" Core..=) Core.<$> currencyCode,
-            ("numDecimalPlaces" Core..=)
-              Core.<$> numDecimalPlaces,
-            ("numberFormatType" Core..=)
-              Core.<$> numberFormatType,
+            ("numDecimalPlaces" Core..=) Core.<$> numDecimalPlaces,
+            ("numberFormatType" Core..=) Core.<$> numberFormatType,
             ("suffix" Core..=) Core.<$> suffix
           ]
       )
@@ -376,7 +365,6 @@ data LeaderboardConfiguration = LeaderboardConfiguration
     scoreMax :: (Core.Maybe Core.Int64),
     -- | Minimum score that can be posted to this leaderboard.
     scoreMin :: (Core.Maybe Core.Int64),
-    -- |
     scoreOrder :: (Core.Maybe LeaderboardConfiguration_ScoreOrder),
     -- | The token for this resource.
     token :: (Core.Maybe Core.Text)
@@ -408,12 +396,8 @@ instance Core.FromJSON LeaderboardConfiguration where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "published")
-            Core.<*> ( o Core..:? "scoreMax"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "scoreMin"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scoreMax" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "scoreMin" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scoreOrder")
             Core.<*> (o Core..:? "token")
       )
@@ -426,10 +410,8 @@ instance Core.ToJSON LeaderboardConfiguration where
             ("id" Core..=) Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("published" Core..=) Core.<$> published,
-            ("scoreMax" Core..=) Core.. Core.AsText
-              Core.<$> scoreMax,
-            ("scoreMin" Core..=) Core.. Core.AsText
-              Core.<$> scoreMin,
+            ("scoreMax" Core..=) Core.. Core.AsText Core.<$> scoreMax,
+            ("scoreMin" Core..=) Core.. Core.AsText Core.<$> scoreMin,
             ("scoreOrder" Core..=) Core.<$> scoreOrder,
             ("token" Core..=) Core.<$> token
           ]
@@ -512,10 +494,7 @@ newLeaderboardConfigurationListResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LeaderboardConfigurationListResponse
-  where
+instance Core.FromJSON LeaderboardConfigurationListResponse where
   parseJSON =
     Core.withObject
       "LeaderboardConfigurationListResponse"
@@ -526,10 +505,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    LeaderboardConfigurationListResponse
-  where
+instance Core.ToJSON LeaderboardConfigurationListResponse where
   toJSON LeaderboardConfigurationListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -598,7 +574,10 @@ data LocalizedStringBundle = LocalizedStringBundle
 newLocalizedStringBundle ::
   LocalizedStringBundle
 newLocalizedStringBundle =
-  LocalizedStringBundle {kind = Core.Nothing, translations = Core.Nothing}
+  LocalizedStringBundle
+    { kind = Core.Nothing,
+      translations = Core.Nothing
+    }
 
 instance Core.FromJSON LocalizedStringBundle where
   parseJSON =

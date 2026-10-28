@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRules.Projects.Releases.GetExecutable
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FirebaseRules.Projects.Releases.GetExecutable
 where
 
 import Gogol.FirebaseRules.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firebaserules.projects.releases.getExecutable@ method which the
 -- 'FirebaseRulesProjectsReleasesGetExecutable' request conforms to.
@@ -68,7 +66,7 @@ data FirebaseRulesProjectsReleasesGetExecutable = FirebaseRulesProjectsReleasesG
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The requested runtime executable version. Defaults to FIREBASE/RULES/EXECUTABLE_V1.
+    -- | Optional. The requested runtime executable version. Defaults to FIREBASE/RULES/EXECUTABLE_V1.
     executableVersion :: (Core.Maybe ProjectsReleasesGetExecutableExecutableVersion),
     -- | Required. Resource name of the @Release@. Format: @projects\/{project_id}\/releases\/{release_id}@
     name :: Core.Text,
@@ -103,29 +101,26 @@ instance
     Rs FirebaseRulesProjectsReleasesGetExecutable =
       GetReleaseExecutableResponse
   type
-    Scopes
-      FirebaseRulesProjectsReleasesGetExecutable =
+    Scopes FirebaseRulesProjectsReleasesGetExecutable =
       '[ CloudPlatform'FullControl,
          Firebase'FullControl,
          Firebase'Readonly
        ]
-  requestClient
-    FirebaseRulesProjectsReleasesGetExecutable {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        executableVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        firebaseRulesService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FirebaseRulesProjectsReleasesGetExecutableResource
-            )
-            Core.mempty
+  requestClient FirebaseRulesProjectsReleasesGetExecutable {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      executableVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      firebaseRulesService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FirebaseRulesProjectsReleasesGetExecutableResource
+          )
+          Core.mempty

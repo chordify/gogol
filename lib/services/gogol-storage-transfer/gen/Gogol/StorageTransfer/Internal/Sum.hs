@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.StorageTransfer.Internal.Sum
@@ -239,7 +237,7 @@ module Gogol.StorageTransfer.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -285,7 +283,7 @@ newtype AgentPool_State = AgentPool_State {fromAgentPool_State :: Core.Text}
 pattern AgentPool_State_STATEUNSPECIFIED :: AgentPool_State
 pattern AgentPool_State_STATEUNSPECIFIED = AgentPool_State "STATE_UNSPECIFIED"
 
--- | This is an initialization state. During this stage, the resources such as Pub\/Sub topics are allocated for the AgentPool.
+-- | This is an initialization state. During this stage, resources are allocated for the AgentPool.
 pattern AgentPool_State_Creating :: AgentPool_State
 pattern AgentPool_State_Creating = AgentPool_State "CREATING"
 
@@ -462,7 +460,7 @@ pattern LoggingConfig_LogActionsItem_Find = LoggingConfig_LogActionsItem "FIND"
 pattern LoggingConfig_LogActionsItem_Delete' :: LoggingConfig_LogActionsItem
 pattern LoggingConfig_LogActionsItem_Delete' = LoggingConfig_LogActionsItem "DELETE"
 
--- | Copying objects to Google Cloud Storage.
+-- | Copying objects to the destination.
 pattern LoggingConfig_LogActionsItem_Copy :: LoggingConfig_LogActionsItem
 pattern LoggingConfig_LogActionsItem_Copy = LoggingConfig_LogActionsItem "COPY"
 
@@ -623,7 +621,7 @@ pattern MetadataOptions_StorageClass_STORAGECLASSUNSPECIFIED = MetadataOptions_S
 pattern MetadataOptions_StorageClass_STORAGECLASSDESTINATIONBUCKETDEFAULT :: MetadataOptions_StorageClass
 pattern MetadataOptions_StorageClass_STORAGECLASSDESTINATIONBUCKETDEFAULT = MetadataOptions_StorageClass "STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT"
 
--- | Preserve the object\'s original storage class. This is only supported for transfers from Google Cloud Storage buckets.
+-- | Preserve the object\'s original storage class. This is only supported for transfers from Google Cloud Storage buckets. REGIONAL and MULTI_REGIONAL storage classes will be mapped to STANDARD to ensure they can be written to the destination bucket.
 pattern MetadataOptions_StorageClass_STORAGECLASSPRESERVE :: MetadataOptions_StorageClass
 pattern MetadataOptions_StorageClass_STORAGECLASSPRESERVE = MetadataOptions_StorageClass "STORAGE_CLASS_PRESERVE"
 
@@ -718,7 +716,7 @@ pattern MetadataOptions_TemporaryHold_TEMPORARYHOLDPRESERVE = MetadataOptions_Te
   MetadataOptions_TemporaryHold
   #-}
 
--- | Specifies how each object\'s @timeCreated@ metadata is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TIME/CREATED/SKIP.
+-- | Specifies how each object\'s @timeCreated@ metadata is preserved for transfers. If unspecified, the default behavior is the same as TIME/CREATED/SKIP. This behavior is supported for transfers to Cloud Storage buckets from Cloud Storage, Amazon S3, S3-compatible storage, and Azure sources.
 newtype MetadataOptions_TimeCreated = MetadataOptions_TimeCreated {fromMetadataOptions_TimeCreated :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -739,7 +737,7 @@ pattern MetadataOptions_TimeCreated_TIMECREATEDUNSPECIFIED = MetadataOptions_Tim
 pattern MetadataOptions_TimeCreated_TIMECREATEDSKIP :: MetadataOptions_TimeCreated
 pattern MetadataOptions_TimeCreated_TIMECREATEDSKIP = MetadataOptions_TimeCreated "TIME_CREATED_SKIP"
 
--- | Preserves the source object\'s @timeCreated@ metadata in the @customTime@ field in the destination object. Note that any value stored in the source object\'s @customTime@ field will not be propagated to the destination object.
+-- | Preserves the source object\'s @timeCreated@ or @lastModified@ metadata in the @customTime@ field in the destination object. Note that any value stored in the source object\'s @customTime@ field will not be propagated to the destination object.
 pattern MetadataOptions_TimeCreated_TIMECREATEDPRESERVEASCUSTOMTIME :: MetadataOptions_TimeCreated
 pattern MetadataOptions_TimeCreated_TIMECREATEDPRESERVEASCUSTOMTIME = MetadataOptions_TimeCreated "TIME_CREATED_PRESERVE_AS_CUSTOM_TIME"
 

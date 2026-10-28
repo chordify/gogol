@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vision.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vision.Types
@@ -408,6 +406,10 @@ module Gogol.Vision.Types
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest,
 
+    -- ** GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels,
+
     -- ** GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse,
@@ -416,9 +418,17 @@ module Gogol.Vision.Types
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest,
 
+    -- ** GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels,
+
     -- ** GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest (..),
     newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest,
+
+    -- ** GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels,
 
     -- ** GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse (..),
@@ -427,6 +437,10 @@ module Gogol.Vision.Types
     -- ** GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest (..),
     newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest,
+
+    -- ** GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels,
 
     -- ** GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse (..),
@@ -1372,7 +1386,7 @@ module Gogol.Vision.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vision.Internal.Product
 import Gogol.Vision.Internal.Sum
 
@@ -1384,7 +1398,9 @@ visionService =
     "vision.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Apply machine learning models to understand and label images
-type CloudVision'FullControl = "https://www.googleapis.com/auth/cloud-vision"
+type CloudVision'FullControl =
+  "https://www.googleapis.com/auth/cloud-vision"

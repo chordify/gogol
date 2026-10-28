@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Runs Mobile-Friendly Test for a given URL.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @searchconsole.urlTestingTools.mobileFriendlyTest.run@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @searchconsole.urlTestingTools.mobileFriendlyTest.run@.
 module Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
   ( -- * Resource
     SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.UrlTestingTools.MobileFriendlyTest.Run
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @searchconsole.urlTestingTools.mobileFriendlyTest.run@ method which the
@@ -54,9 +52,7 @@ type SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RunMobileFriendlyTestRequest
+    Core.:> Core.ReqBody '[Core.JSON] RunMobileFriendlyTestRequest
     Core.:> Core.Post '[Core.JSON] RunMobileFriendlyTestResponse
 
 -- | Runs Mobile-Friendly Test for a given URL.
@@ -85,7 +81,8 @@ newSearchConsoleUrlTestingToolsMobileFriendlyTestRun ::
   SearchConsoleUrlTestingToolsMobileFriendlyTestRun
 newSearchConsoleUrlTestingToolsMobileFriendlyTestRun payload =
   SearchConsoleUrlTestingToolsMobileFriendlyTestRun
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -98,29 +95,24 @@ instance
     SearchConsoleUrlTestingToolsMobileFriendlyTestRun
   where
   type
-    Rs
-      SearchConsoleUrlTestingToolsMobileFriendlyTestRun =
+    Rs SearchConsoleUrlTestingToolsMobileFriendlyTestRun =
       RunMobileFriendlyTestResponse
-  type
-    Scopes
-      SearchConsoleUrlTestingToolsMobileFriendlyTestRun =
-      '[]
-  requestClient
-    SearchConsoleUrlTestingToolsMobileFriendlyTestRun {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        searchConsoleService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource
-            )
-            Core.mempty
+  type Scopes SearchConsoleUrlTestingToolsMobileFriendlyTestRun = '[]
+  requestClient SearchConsoleUrlTestingToolsMobileFriendlyTestRun {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      searchConsoleService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                SearchConsoleUrlTestingToolsMobileFriendlyTestRunResource
+          )
+          Core.mempty

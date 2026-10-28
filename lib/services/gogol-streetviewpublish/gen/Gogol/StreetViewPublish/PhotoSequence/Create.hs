@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.PhotoSequence.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StreetViewPublish.PhotoSequence.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photoSequence.create@ method which the
@@ -50,9 +48,7 @@ type StreetViewPublishPhotoSequenceCreateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "inputType"
-              PhotoSequenceCreateInputType
+    Core.:> Core.QueryParam "inputType" PhotoSequenceCreateInputType
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -96,33 +92,26 @@ newStreetViewPublishPhotoSequenceCreate payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StreetViewPublishPhotoSequenceCreate
-  where
-  type
-    Rs StreetViewPublishPhotoSequenceCreate =
-      Operation
+instance Core.GoogleRequest StreetViewPublishPhotoSequenceCreate where
+  type Rs StreetViewPublishPhotoSequenceCreate = Operation
   type
     Scopes StreetViewPublishPhotoSequenceCreate =
       '[Streetviewpublish'FullControl]
-  requestClient
-    StreetViewPublishPhotoSequenceCreate {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        inputType
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        streetViewPublishService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StreetViewPublishPhotoSequenceCreateResource
-            )
-            Core.mempty
+  requestClient StreetViewPublishPhotoSequenceCreate {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      inputType
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      streetViewPublishService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StreetViewPublishPhotoSequenceCreateResource
+          )
+          Core.mempty

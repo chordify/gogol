@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ReplicaPool.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ReplicaPool.Internal.Product
@@ -120,7 +118,7 @@ module Gogol.ReplicaPool.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ReplicaPool.Internal.Sum
 
 -- | A Compute Engine network accessConfig. Identical to the accessConfig on corresponding Compute Engine resource.
@@ -140,7 +138,11 @@ data AccessConfig = AccessConfig
 newAccessConfig ::
   AccessConfig
 newAccessConfig =
-  AccessConfig {name = Core.Nothing, natIp = Core.Nothing, type' = Core.Nothing}
+  AccessConfig
+    { name = Core.Nothing,
+      natIp = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON AccessConfig where
   parseJSON =
@@ -203,8 +205,7 @@ instance Core.ToJSON Action where
       ( Core.catMaybes
           [ ("commands" Core..=) Core.<$> commands,
             ("envVariables" Core..=) Core.<$> envVariables,
-            ("timeoutMilliSeconds" Core..=)
-              Core.<$> timeoutMilliSeconds
+            ("timeoutMilliSeconds" Core..=) Core.<$> timeoutMilliSeconds
           ]
       )
 
@@ -261,7 +262,11 @@ data EnvVariable = EnvVariable
 newEnvVariable ::
   EnvVariable
 newEnvVariable =
-  EnvVariable {hidden = Core.Nothing, name = Core.Nothing, value = Core.Nothing}
+  EnvVariable
+    { hidden = Core.Nothing,
+      name = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON EnvVariable where
   parseJSON =
@@ -381,18 +386,15 @@ instance Core.ToJSON HealthCheck where
   toJSON HealthCheck {..} =
     Core.object
       ( Core.catMaybes
-          [ ("checkIntervalSec" Core..=)
-              Core.<$> checkIntervalSec,
+          [ ("checkIntervalSec" Core..=) Core.<$> checkIntervalSec,
             ("description" Core..=) Core.<$> description,
-            ("healthyThreshold" Core..=)
-              Core.<$> healthyThreshold,
+            ("healthyThreshold" Core..=) Core.<$> healthyThreshold,
             ("host" Core..=) Core.<$> host,
             ("name" Core..=) Core.<$> name,
             ("path" Core..=) Core.<$> path,
             ("port" Core..=) Core.<$> port,
             ("timeoutSec" Core..=) Core.<$> timeoutSec,
-            ("unhealthyThreshold" Core..=)
-              Core.<$> unhealthyThreshold
+            ("unhealthyThreshold" Core..=) Core.<$> unhealthyThreshold
           ]
       )
 
@@ -417,17 +419,14 @@ instance Core.FromJSON Label where
     Core.withObject
       "Label"
       ( \o ->
-          Label
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+          Label Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Label where
   toJSON Label {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | A Compute Engine metadata entry. Identical to the metadata on the corresponding Compute Engine resource.
@@ -444,7 +443,8 @@ data Metadata = Metadata
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
 newMetadata ::
   Metadata
-newMetadata = Metadata {fingerPrint = Core.Nothing, items = Core.Nothing}
+newMetadata =
+  Metadata {fingerPrint = Core.Nothing, items = Core.Nothing}
 
 instance Core.FromJSON Metadata where
   parseJSON =
@@ -479,7 +479,8 @@ data MetadataItem = MetadataItem
 -- | Creates a value of 'MetadataItem' with the minimum fields required to make a request.
 newMetadataItem ::
   MetadataItem
-newMetadataItem = MetadataItem {key = Core.Nothing, value = Core.Nothing}
+newMetadataItem =
+  MetadataItem {key = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON MetadataItem where
   parseJSON =
@@ -487,16 +488,15 @@ instance Core.FromJSON MetadataItem where
       "MetadataItem"
       ( \o ->
           MetadataItem
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON MetadataItem where
   toJSON MetadataItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | A Compute Engine NetworkInterface resource. Identical to the NetworkInterface on the corresponding Compute Engine resource.
@@ -588,8 +588,7 @@ instance Core.ToJSON NewDisk where
           [ ("attachment" Core..=) Core.<$> attachment,
             ("autoDelete" Core..=) Core.<$> autoDelete,
             ("boot" Core..=) Core.<$> boot,
-            ("initializeParams" Core..=)
-              Core.<$> initializeParams
+            ("initializeParams" Core..=) Core.<$> initializeParams
           ]
       )
 
@@ -622,9 +621,7 @@ instance Core.FromJSON NewDiskInitializeParams where
       "NewDiskInitializeParams"
       ( \o ->
           NewDiskInitializeParams
-            Core.<$> ( o Core..:? "diskSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "diskSizeGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "diskType")
             Core.<*> (o Core..:? "sourceImage")
       )
@@ -633,8 +630,7 @@ instance Core.ToJSON NewDiskInitializeParams where
   toJSON NewDiskInitializeParams {..} =
     Core.object
       ( Core.catMaybes
-          [ ("diskSizeGb" Core..=) Core.. Core.AsText
-              Core.<$> diskSizeGb,
+          [ ("diskSizeGb" Core..=) Core.. Core.AsText Core.<$> diskSizeGb,
             ("diskType" Core..=) Core.<$> diskType,
             ("sourceImage" Core..=) Core.<$> sourceImage
           ]
@@ -728,14 +724,11 @@ instance Core.ToJSON Pool where
     Core.object
       ( Core.catMaybes
           [ ("autoRestart" Core..=) Core.<$> autoRestart,
-            ("baseInstanceName" Core..=)
-              Core.<$> baseInstanceName,
-            ("currentNumReplicas" Core..=)
-              Core.<$> currentNumReplicas,
+            ("baseInstanceName" Core..=) Core.<$> baseInstanceName,
+            ("currentNumReplicas" Core..=) Core.<$> currentNumReplicas,
             ("description" Core..=) Core.<$> description,
             ("healthChecks" Core..=) Core.<$> healthChecks,
-            ("initialNumReplicas" Core..=)
-              Core.<$> initialNumReplicas,
+            ("initialNumReplicas" Core..=) Core.<$> initialNumReplicas,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("numReplicas" Core..=) Core.<$> numReplicas,
@@ -759,32 +752,28 @@ newtype PoolsDeleteRequest = PoolsDeleteRequest
 -- | Creates a value of 'PoolsDeleteRequest' with the minimum fields required to make a request.
 newPoolsDeleteRequest ::
   PoolsDeleteRequest
-newPoolsDeleteRequest = PoolsDeleteRequest {abandonInstances = Core.Nothing}
+newPoolsDeleteRequest =
+  PoolsDeleteRequest {abandonInstances = Core.Nothing}
 
 instance Core.FromJSON PoolsDeleteRequest where
   parseJSON =
     Core.withObject
       "PoolsDeleteRequest"
       ( \o ->
-          PoolsDeleteRequest
-            Core.<$> (o Core..:? "abandonInstances")
+          PoolsDeleteRequest Core.<$> (o Core..:? "abandonInstances")
       )
 
 instance Core.ToJSON PoolsDeleteRequest where
   toJSON PoolsDeleteRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("abandonInstances" Core..=)
-              Core.<$> abandonInstances
-          ]
+          [("abandonInstances" Core..=) Core.<$> abandonInstances]
       )
 
 --
 -- /See:/ 'newPoolsListResponse' smart constructor.
 data PoolsListResponse = PoolsListResponse
-  { -- |
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
+  { nextPageToken :: (Core.Maybe Core.Text),
     resources :: (Core.Maybe [Pool])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -793,7 +782,10 @@ data PoolsListResponse = PoolsListResponse
 newPoolsListResponse ::
   PoolsListResponse
 newPoolsListResponse =
-  PoolsListResponse {nextPageToken = Core.Nothing, resources = Core.Nothing}
+  PoolsListResponse
+    { nextPageToken = Core.Nothing,
+      resources = Core.Nothing
+    }
 
 instance Core.FromJSON PoolsListResponse where
   parseJSON =
@@ -831,7 +823,11 @@ data Replica = Replica
 newReplica ::
   Replica
 newReplica =
-  Replica {name = Core.Nothing, selfLink = Core.Nothing, status = Core.Nothing}
+  Replica
+    { name = Core.Nothing,
+      selfLink = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON Replica where
   parseJSON =
@@ -927,25 +923,20 @@ instance Core.FromJSON ReplicasDeleteRequest where
     Core.withObject
       "ReplicasDeleteRequest"
       ( \o ->
-          ReplicasDeleteRequest
-            Core.<$> (o Core..:? "abandonInstance")
+          ReplicasDeleteRequest Core.<$> (o Core..:? "abandonInstance")
       )
 
 instance Core.ToJSON ReplicasDeleteRequest where
   toJSON ReplicasDeleteRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("abandonInstance" Core..=)
-              Core.<$> abandonInstance
-          ]
+          [("abandonInstance" Core..=) Core.<$> abandonInstance]
       )
 
 --
 -- /See:/ 'newReplicasListResponse' smart constructor.
 data ReplicasListResponse = ReplicasListResponse
-  { -- |
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
+  { nextPageToken :: (Core.Maybe Core.Text),
     resources :: (Core.Maybe [Replica])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -954,7 +945,10 @@ data ReplicasListResponse = ReplicasListResponse
 newReplicasListResponse ::
   ReplicasListResponse
 newReplicasListResponse =
-  ReplicasListResponse {nextPageToken = Core.Nothing, resources = Core.Nothing}
+  ReplicasListResponse
+    { nextPageToken = Core.Nothing,
+      resources = Core.Nothing
+    }
 
 instance Core.FromJSON ReplicasListResponse where
   parseJSON =
@@ -989,7 +983,8 @@ data ServiceAccount = ServiceAccount
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 newServiceAccount ::
   ServiceAccount
-newServiceAccount = ServiceAccount {email = Core.Nothing, scopes = Core.Nothing}
+newServiceAccount =
+  ServiceAccount {email = Core.Nothing, scopes = Core.Nothing}
 
 instance Core.FromJSON ServiceAccount where
   parseJSON =
@@ -997,7 +992,8 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "scopes")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1113,7 +1109,6 @@ data VmParams = VmParams
     metadata :: (Core.Maybe Metadata),
     -- | A list of network interfaces for the instance. Currently only one interface is supported by Google Compute Engine, ONE/TO/ONE_NAT.
     networkInterfaces :: (Core.Maybe [NetworkInterface]),
-    -- |
     onHostMaintenance :: (Core.Maybe Core.Text),
     -- | A list of Service Accounts to enable for this instance.
     serviceAccounts :: (Core.Maybe [ServiceAccount]),
@@ -1163,18 +1158,15 @@ instance Core.ToJSON VmParams where
   toJSON VmParams {..} =
     Core.object
       ( Core.catMaybes
-          [ ("baseInstanceName" Core..=)
-              Core.<$> baseInstanceName,
+          [ ("baseInstanceName" Core..=) Core.<$> baseInstanceName,
             ("canIpForward" Core..=) Core.<$> canIpForward,
             ("description" Core..=) Core.<$> description,
             ("disksToAttach" Core..=) Core.<$> disksToAttach,
             ("disksToCreate" Core..=) Core.<$> disksToCreate,
             ("machineType" Core..=) Core.<$> machineType,
             ("metadata" Core..=) Core.<$> metadata,
-            ("networkInterfaces" Core..=)
-              Core.<$> networkInterfaces,
-            ("onHostMaintenance" Core..=)
-              Core.<$> onHostMaintenance,
+            ("networkInterfaces" Core..=) Core.<$> networkInterfaces,
+            ("onHostMaintenance" Core..=) Core.<$> onHostMaintenance,
             ("serviceAccounts" Core..=) Core.<$> serviceAccounts,
             ("tags" Core..=) Core.<$> tags
           ]

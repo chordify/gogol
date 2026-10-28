@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fitness.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Fitness.Internal.Sum
@@ -115,7 +113,7 @@ module Gogol.Fitness.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -157,7 +155,6 @@ newtype AggregateBucket_Type = AggregateBucket_Type {fromAggregateBucket_Type ::
       Core.FromJSONKey
     )
 
--- |
 pattern AggregateBucket_Type_Unknown :: AggregateBucket_Type
 pattern AggregateBucket_Type_Unknown = AggregateBucket_Type "unknown"
 
@@ -198,43 +195,33 @@ newtype AggregateRequest_FilteredDataQualityStandardItem = AggregateRequest_Filt
       Core.FromJSONKey
     )
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityUnknown :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityUnknown = AggregateRequest_FilteredDataQualityStandardItem "dataQualityUnknown"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2002 :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2002 = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureEsh2002"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2010 :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2010 = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureEsh2010"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureAami :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureAami = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureAami"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsAA :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsAA = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureBhsAA"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsAB :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsAB = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureBhsAB"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsBA :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsBA = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureBhsBA"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsBB :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DataQualityBloodPressureBhsBB = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodPressureBhsBB"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972003 :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972003 = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodGlucoseIso151972003"
 
--- |
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972013 :: AggregateRequest_FilteredDataQualityStandardItem
 pattern AggregateRequest_FilteredDataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972013 = AggregateRequest_FilteredDataQualityStandardItem "dataQualityBloodGlucoseIso151972013"
 
@@ -264,15 +251,12 @@ newtype BucketByTimePeriod_Type = BucketByTimePeriod_Type {fromBucketByTimePerio
       Core.FromJSONKey
     )
 
--- |
 pattern BucketByTimePeriod_Type_Day :: BucketByTimePeriod_Type
 pattern BucketByTimePeriod_Type_Day = BucketByTimePeriod_Type "day"
 
--- |
 pattern BucketByTimePeriod_Type_Week :: BucketByTimePeriod_Type
 pattern BucketByTimePeriod_Type_Week = BucketByTimePeriod_Type "week"
 
--- |
 pattern BucketByTimePeriod_Type_Month :: BucketByTimePeriod_Type
 pattern BucketByTimePeriod_Type_Month = BucketByTimePeriod_Type "month"
 
@@ -295,43 +279,33 @@ newtype DataSource_DataQualityStandardItem = DataSource_DataQualityStandardItem 
       Core.FromJSONKey
     )
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityUnknown :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityUnknown = DataSource_DataQualityStandardItem "dataQualityUnknown"
 
--- |
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2002 :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2002 = DataSource_DataQualityStandardItem "dataQualityBloodPressureEsh2002"
 
--- |
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2010 :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODPRESSUREESH2010 = DataSource_DataQualityStandardItem "dataQualityBloodPressureEsh2010"
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureAami :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureAami = DataSource_DataQualityStandardItem "dataQualityBloodPressureAami"
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsAA :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsAA = DataSource_DataQualityStandardItem "dataQualityBloodPressureBhsAA"
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsAB :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsAB = DataSource_DataQualityStandardItem "dataQualityBloodPressureBhsAB"
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsBA :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsBA = DataSource_DataQualityStandardItem "dataQualityBloodPressureBhsBA"
 
--- |
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsBB :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DataQualityBloodPressureBhsBB = DataSource_DataQualityStandardItem "dataQualityBloodPressureBhsBB"
 
--- |
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972003 :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972003 = DataSource_DataQualityStandardItem "dataQualityBloodGlucoseIso151972003"
 
--- |
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972013 :: DataSource_DataQualityStandardItem
 pattern DataSource_DataQualityStandardItem_DATAQUALITYBLOODGLUCOSEISO151972013 = DataSource_DataQualityStandardItem "dataQualityBloodGlucoseIso151972013"
 
@@ -362,11 +336,9 @@ newtype DataSource_Type = DataSource_Type {fromDataSource_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern DataSource_Type_Raw :: DataSource_Type
 pattern DataSource_Type_Raw = DataSource_Type "raw"
 
--- |
 pattern DataSource_Type_Derived :: DataSource_Type
 pattern DataSource_Type_Derived = DataSource_Type "derived"
 
@@ -389,31 +361,24 @@ newtype DataTypeField_Format = DataTypeField_Format {fromDataTypeField_Format ::
       Core.FromJSONKey
     )
 
--- |
 pattern DataTypeField_Format_Integer :: DataTypeField_Format
 pattern DataTypeField_Format_Integer = DataTypeField_Format "integer"
 
--- |
 pattern DataTypeField_Format_FloatPoint :: DataTypeField_Format
 pattern DataTypeField_Format_FloatPoint = DataTypeField_Format "floatPoint"
 
--- |
 pattern DataTypeField_Format_String :: DataTypeField_Format
 pattern DataTypeField_Format_String = DataTypeField_Format "string"
 
--- |
 pattern DataTypeField_Format_Map :: DataTypeField_Format
 pattern DataTypeField_Format_Map = DataTypeField_Format "map"
 
--- |
 pattern DataTypeField_Format_IntegerList :: DataTypeField_Format
 pattern DataTypeField_Format_IntegerList = DataTypeField_Format "integerList"
 
--- |
 pattern DataTypeField_Format_FloatList :: DataTypeField_Format
 pattern DataTypeField_Format_FloatList = DataTypeField_Format "floatList"
 
--- |
 pattern DataTypeField_Format_Blob :: DataTypeField_Format
 pattern DataTypeField_Format_Blob = DataTypeField_Format "blob"
 

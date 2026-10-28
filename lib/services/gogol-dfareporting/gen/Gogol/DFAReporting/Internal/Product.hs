@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DFAReporting.Internal.Product
@@ -170,6 +168,14 @@ module Gogol.DFAReporting.Internal.Product
     CampaignsListResponse (..),
     newCampaignsListResponse,
 
+    -- * CartData
+    CartData (..),
+    newCartData,
+
+    -- * CartDataItem
+    CartDataItem (..),
+    newCartDataItem,
+
     -- * ChangeLog
     ChangeLog (..),
     newChangeLog,
@@ -177,14 +183,6 @@ module Gogol.DFAReporting.Internal.Product
     -- * ChangeLogsListResponse
     ChangeLogsListResponse (..),
     newChangeLogsListResponse,
-
-    -- * ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
-
-    -- * ChannelGroupingRule
-    ChannelGroupingRule (..),
-    newChannelGroupingRule,
 
     -- * CitiesListResponse
     CitiesListResponse (..),
@@ -350,6 +348,10 @@ module Gogol.DFAReporting.Internal.Product
     CrossDimensionReachReportCompatibleFields (..),
     newCrossDimensionReachReportCompatibleFields,
 
+    -- * CrossMediaReachReportCompatibleFields
+    CrossMediaReachReportCompatibleFields (..),
+    newCrossMediaReachReportCompatibleFields,
+
     -- * CustomFloodlightVariable
     CustomFloodlightVariable (..),
     newCustomFloodlightVariable,
@@ -422,10 +424,6 @@ module Gogol.DFAReporting.Internal.Product
     DirectorySitesListResponse (..),
     newDirectorySitesListResponse,
 
-    -- * DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
     -- * DynamicTargetingKey
     DynamicTargetingKey (..),
     newDynamicTargetingKey,
@@ -437,10 +435,6 @@ module Gogol.DFAReporting.Internal.Product
     -- * EncryptionInfo
     EncryptionInfo (..),
     newEncryptionInfo,
-
-    -- * EventFilter
-    EventFilter (..),
-    newEventFilter,
 
     -- * EventTag
     EventTag (..),
@@ -626,6 +620,10 @@ module Gogol.DFAReporting.Internal.Product
     ObjectFilter (..),
     newObjectFilter,
 
+    -- * OfflineUserAddressInfo
+    OfflineUserAddressInfo (..),
+    newOfflineUserAddressInfo,
+
     -- * OffsetPosition
     OffsetPosition (..),
     newOffsetPosition,
@@ -662,29 +660,9 @@ module Gogol.DFAReporting.Internal.Product
     OrderContact (..),
     newOrderContact,
 
-    -- * OrderDocument
-    OrderDocument (..),
-    newOrderDocument,
-
-    -- * OrderDocumentsListResponse
-    OrderDocumentsListResponse (..),
-    newOrderDocumentsListResponse,
-
     -- * OrdersListResponse
     OrdersListResponse (..),
     newOrdersListResponse,
-
-    -- * PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- * PathReportCompatibleFields
-    PathReportCompatibleFields (..),
-    newPathReportCompatibleFields,
-
-    -- * PathReportDimensionValue
-    PathReportDimensionValue (..),
-    newPathReportDimensionValue,
 
     -- * PathToConversionReportCompatibleFields
     PathToConversionReportCompatibleFields (..),
@@ -698,6 +676,10 @@ module Gogol.DFAReporting.Internal.Product
     PlacementAssignment (..),
     newPlacementAssignment,
 
+    -- * PlacementConversionDomainOverride
+    PlacementConversionDomainOverride (..),
+    newPlacementConversionDomainOverride,
+
     -- * PlacementGroup
     PlacementGroup (..),
     newPlacementGroup,
@@ -705,6 +687,10 @@ module Gogol.DFAReporting.Internal.Product
     -- * PlacementGroupsListResponse
     PlacementGroupsListResponse (..),
     newPlacementGroupsListResponse,
+
+    -- * PlacementSingleConversionDomain
+    PlacementSingleConversionDomain (..),
+    newPlacementSingleConversionDomain,
 
     -- * PlacementStrategiesListResponse
     PlacementStrategiesListResponse (..),
@@ -806,6 +792,10 @@ module Gogol.DFAReporting.Internal.Product
     Report_CrossDimensionReachCriteria (..),
     newReport_CrossDimensionReachCriteria,
 
+    -- * Report_CrossMediaReachCriteria
+    Report_CrossMediaReachCriteria (..),
+    newReport_CrossMediaReachCriteria,
+
     -- * Report_Delivery
     Report_Delivery (..),
     newReport_Delivery,
@@ -817,14 +807,6 @@ module Gogol.DFAReporting.Internal.Product
     -- * Report_FloodlightCriteria_ReportProperties
     Report_FloodlightCriteria_ReportProperties (..),
     newReport_FloodlightCriteria_ReportProperties,
-
-    -- * Report_PathAttributionCriteria
-    Report_PathAttributionCriteria (..),
-    newReport_PathAttributionCriteria,
-
-    -- * Report_PathCriteria
-    Report_PathCriteria (..),
-    newReport_PathCriteria,
 
     -- * Report_PathToConversionCriteria
     Report_PathToConversionCriteria (..),
@@ -966,6 +948,22 @@ module Gogol.DFAReporting.Internal.Product
     TranscodeSetting (..),
     newTranscodeSetting,
 
+    -- * TvCampaignDetail
+    TvCampaignDetail (..),
+    newTvCampaignDetail,
+
+    -- * TvCampaignSummariesListResponse
+    TvCampaignSummariesListResponse (..),
+    newTvCampaignSummariesListResponse,
+
+    -- * TvCampaignSummary
+    TvCampaignSummary (..),
+    newTvCampaignSummary,
+
+    -- * TvCampaignTimepoint
+    TvCampaignTimepoint (..),
+    newTvCampaignTimepoint,
+
     -- * UniversalAdId
     UniversalAdId (..),
     newUniversalAdId,
@@ -973,6 +971,10 @@ module Gogol.DFAReporting.Internal.Product
     -- * UserDefinedVariableConfiguration
     UserDefinedVariableConfiguration (..),
     newUserDefinedVariableConfiguration,
+
+    -- * UserIdentifier
+    UserIdentifier (..),
+    newUserIdentifier,
 
     -- * UserProfile
     UserProfile (..),
@@ -1006,10 +1008,6 @@ module Gogol.DFAReporting.Internal.Product
     UserRolesListResponse (..),
     newUserRolesListResponse,
 
-    -- * UvarFilter
-    UvarFilter (..),
-    newUvarFilter,
-
     -- * VideoFormat
     VideoFormat (..),
     newVideoFormat,
@@ -1029,7 +1027,7 @@ module Gogol.DFAReporting.Internal.Product
 where
 
 import Gogol.DFAReporting.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Contains properties of a Campaign Manager account.
 --
@@ -1108,39 +1106,34 @@ instance Core.FromJSON Account where
       "Account"
       ( \o ->
           Account
-            Core.<$> ( o Core..:? "accountPermissionIds"
+            Core.<$> ( o
+                         Core..:? "accountPermissionIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "accountProfile")
             Core.<*> (o Core..:? "active")
             Core.<*> (o Core..:? "activeAdsLimitTier")
             Core.<*> (o Core..:? "activeViewOptOut")
-            Core.<*> ( o Core..:? "availablePermissionIds"
+            Core.<*> ( o
+                         Core..:? "availablePermissionIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
-            Core.<*> ( o Core..:? "countryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "currencyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "defaultCreativeSizeId"
+            Core.<*> (o Core..:? "countryId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "currencyId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "defaultCreativeSizeId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "locale")
-            Core.<*> ( o Core..:? "maximumImageSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maximumImageSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nielsenOcrEnabled")
             Core.<*> (o Core..:? "reportsConfiguration")
             Core.<*> (o Core..:? "shareReportsWithTwitter")
-            Core.<*> ( o Core..:? "teaserSizeLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "teaserSizeLimit" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Account where
@@ -1152,33 +1145,30 @@ instance Core.ToJSON Account where
               Core.<$> accountPermissionIds,
             ("accountProfile" Core..=) Core.<$> accountProfile,
             ("active" Core..=) Core.<$> active,
-            ("activeAdsLimitTier" Core..=)
-              Core.<$> activeAdsLimitTier,
-            ("activeViewOptOut" Core..=)
-              Core.<$> activeViewOptOut,
+            ("activeAdsLimitTier" Core..=) Core.<$> activeAdsLimitTier,
+            ("activeViewOptOut" Core..=) Core.<$> activeViewOptOut,
             ("availablePermissionIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> availablePermissionIds,
-            ("countryId" Core..=) Core.. Core.AsText
-              Core.<$> countryId,
-            ("currencyId" Core..=) Core.. Core.AsText
-              Core.<$> currencyId,
-            ("defaultCreativeSizeId" Core..=) Core.. Core.AsText
+            ("countryId" Core..=) Core.. Core.AsText Core.<$> countryId,
+            ("currencyId" Core..=) Core.. Core.AsText Core.<$> currencyId,
+            ("defaultCreativeSizeId" Core..=)
+              Core.. Core.AsText
               Core.<$> defaultCreativeSizeId,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("locale" Core..=) Core.<$> locale,
-            ("maximumImageSize" Core..=) Core.. Core.AsText
+            ("maximumImageSize" Core..=)
+              Core.. Core.AsText
               Core.<$> maximumImageSize,
             ("name" Core..=) Core.<$> name,
-            ("nielsenOcrEnabled" Core..=)
-              Core.<$> nielsenOcrEnabled,
-            ("reportsConfiguration" Core..=)
-              Core.<$> reportsConfiguration,
+            ("nielsenOcrEnabled" Core..=) Core.<$> nielsenOcrEnabled,
+            ("reportsConfiguration" Core..=) Core.<$> reportsConfiguration,
             ("shareReportsWithTwitter" Core..=)
               Core.<$> shareReportsWithTwitter,
-            ("teaserSizeLimit" Core..=) Core.. Core.AsText
+            ("teaserSizeLimit" Core..=)
+              Core.. Core.AsText
               Core.<$> teaserSizeLimit
           ]
       )
@@ -1218,16 +1208,10 @@ instance Core.FromJSON AccountActiveAdSummary where
       "AccountActiveAdSummary"
       ( \o ->
           AccountActiveAdSummary
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "activeAds"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "activeAds" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "activeAdsLimitTier")
-            Core.<*> ( o Core..:? "availableAds"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "availableAds" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
       )
 
@@ -1235,14 +1219,10 @@ instance Core.ToJSON AccountActiveAdSummary where
   toJSON AccountActiveAdSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("activeAds" Core..=) Core.. Core.AsText
-              Core.<$> activeAds,
-            ("activeAdsLimitTier" Core..=)
-              Core.<$> activeAdsLimitTier,
-            ("availableAds" Core..=) Core.. Core.AsText
-              Core.<$> availableAds,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("activeAds" Core..=) Core.. Core.AsText Core.<$> activeAds,
+            ("activeAdsLimitTier" Core..=) Core.<$> activeAdsLimitTier,
+            ("availableAds" Core..=) Core.. Core.AsText Core.<$> availableAds,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -1290,7 +1270,8 @@ instance Core.FromJSON AccountPermission where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "level")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "permissionGroupId"
+            Core.<*> ( o
+                         Core..:? "permissionGroupId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1299,13 +1280,13 @@ instance Core.ToJSON AccountPermission where
   toJSON AccountPermission {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountProfiles" Core..=)
-              Core.<$> accountProfiles,
+          [ ("accountProfiles" Core..=) Core.<$> accountProfiles,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("level" Core..=) Core.<$> level,
             ("name" Core..=) Core.<$> name,
-            ("permissionGroupId" Core..=) Core.. Core.AsText
+            ("permissionGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> permissionGroupId
           ]
       )
@@ -1360,7 +1341,7 @@ instance Core.ToJSON AccountPermissionGroup where
 data AccountPermissionGroupsListResponse = AccountPermissionGroupsListResponse
   { -- | Account permission group collection.
     accountPermissionGroups :: (Core.Maybe [AccountPermissionGroup]),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#accountPermissionGroupsListResponse\".
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#accountPermissionGroupGroupsListResponse\".
     kind :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1370,14 +1351,12 @@ newAccountPermissionGroupsListResponse ::
   AccountPermissionGroupsListResponse
 newAccountPermissionGroupsListResponse =
   AccountPermissionGroupsListResponse
-    { accountPermissionGroups = Core.Nothing,
+    { accountPermissionGroups =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountPermissionGroupsListResponse
-  where
+instance Core.FromJSON AccountPermissionGroupsListResponse where
   parseJSON =
     Core.withObject
       "AccountPermissionGroupsListResponse"
@@ -1387,10 +1366,7 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    AccountPermissionGroupsListResponse
-  where
+instance Core.ToJSON AccountPermissionGroupsListResponse where
   toJSON AccountPermissionGroupsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1434,8 +1410,7 @@ instance Core.ToJSON AccountPermissionsListResponse where
   toJSON AccountPermissionsListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountPermissions" Core..=)
-              Core.<$> accountPermissions,
+          [ ("accountPermissions" Core..=) Core.<$> accountPermissions,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -1454,7 +1429,7 @@ data AccountUserProfile = AccountUserProfile
     campaignFilter :: (Core.Maybe ObjectFilter),
     -- | Comments for this user profile.
     comments :: (Core.Maybe Core.Text),
-    -- | Email of the user profile. The email addresss must be linked to a Google Account. This field is required on insertion and is read-only after insertion.
+    -- | Email of the user profile. The email address must be linked to a Google Account. This field is required on insertion and is read-only after insertion.
     email :: (Core.Maybe Core.Text),
     -- | ID of the user profile. This is a read-only, auto-generated field.
     id :: (Core.Maybe Core.Int64),
@@ -1508,9 +1483,7 @@ instance Core.FromJSON AccountUserProfile where
       "AccountUserProfile"
       ( \o ->
           AccountUserProfile
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "active")
             Core.<*> (o Core..:? "advertiserFilter")
             Core.<*> (o Core..:? "campaignFilter")
@@ -1521,26 +1494,20 @@ instance Core.FromJSON AccountUserProfile where
             Core.<*> (o Core..:? "locale")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "siteFilter")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "traffickerType")
             Core.<*> (o Core..:? "userAccessType")
             Core.<*> (o Core..:? "userRoleFilter")
-            Core.<*> ( o Core..:? "userRoleId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "userRoleId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AccountUserProfile where
   toJSON AccountUserProfile {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("active" Core..=) Core.<$> active,
-            ("advertiserFilter" Core..=)
-              Core.<$> advertiserFilter,
+            ("advertiserFilter" Core..=) Core.<$> advertiserFilter,
             ("campaignFilter" Core..=) Core.<$> campaignFilter,
             ("comments" Core..=) Core.<$> comments,
             ("email" Core..=) Core.<$> email,
@@ -1549,13 +1516,11 @@ instance Core.ToJSON AccountUserProfile where
             ("locale" Core..=) Core.<$> locale,
             ("name" Core..=) Core.<$> name,
             ("siteFilter" Core..=) Core.<$> siteFilter,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("traffickerType" Core..=) Core.<$> traffickerType,
             ("userAccessType" Core..=) Core.<$> userAccessType,
             ("userRoleFilter" Core..=) Core.<$> userRoleFilter,
-            ("userRoleId" Core..=) Core.. Core.AsText
-              Core.<$> userRoleId
+            ("userRoleId" Core..=) Core.. Core.AsText Core.<$> userRoleId
           ]
       )
 
@@ -1577,15 +1542,13 @@ newAccountUserProfilesListResponse ::
   AccountUserProfilesListResponse
 newAccountUserProfilesListResponse =
   AccountUserProfilesListResponse
-    { accountUserProfiles = Core.Nothing,
+    { accountUserProfiles =
+        Core.Nothing,
       kind = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountUserProfilesListResponse
-  where
+instance Core.FromJSON AccountUserProfilesListResponse where
   parseJSON =
     Core.withObject
       "AccountUserProfilesListResponse"
@@ -1600,8 +1563,7 @@ instance Core.ToJSON AccountUserProfilesListResponse where
   toJSON AccountUserProfilesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountUserProfiles" Core..=)
-              Core.<$> accountUserProfiles,
+          [ ("accountUserProfiles" Core..=) Core.<$> accountUserProfiles,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -1737,7 +1699,6 @@ data Ad = Ad
     deliverySchedule :: (Core.Maybe DeliverySchedule),
     -- | Whether this ad is a dynamic click tracker. Applicable when type is AD/SERVING/CLICK_TRACKER. This is a required field on insert, and is read-only after insert.
     dynamicClickTracker :: (Core.Maybe Core.Bool),
-    -- |
     endTime :: (Core.Maybe Core.DateTime),
     -- | Event tag overrides for this ad.
     eventTagOverrides :: (Core.Maybe [EventTagOverride]),
@@ -1767,7 +1728,6 @@ data Ad = Ad
     sslCompliant :: (Core.Maybe Core.Bool),
     -- | Whether this ad requires ssl. This is a read-only field that is auto-generated when the ad is inserted or updated.
     sslRequired :: (Core.Maybe Core.Bool),
-    -- |
     startTime :: (Core.Maybe Core.DateTime),
     -- | Subaccount ID of this ad. This is a read-only field that can be left blank.
     subaccountId :: (Core.Maybe Core.Int64),
@@ -1832,21 +1792,13 @@ instance Core.FromJSON Ad where
       "Ad"
       ( \o ->
           Ad
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "active")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "archived")
-            Core.<*> ( o Core..:? "audienceSegmentId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "audienceSegmentId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "campaignIdDimensionValue")
             Core.<*> (o Core..:? "clickThroughUrl")
             Core.<*> (o Core..:? "clickThroughUrlSuffixProperties")
@@ -1875,10 +1827,9 @@ instance Core.FromJSON Ad where
             Core.<*> (o Core..:? "sslCompliant")
             Core.<*> (o Core..:? "sslRequired")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetingTemplateId"
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "targetingTemplateId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "technologyTargeting")
@@ -1889,18 +1840,16 @@ instance Core.ToJSON Ad where
   toJSON Ad {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("active" Core..=) Core.<$> active,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("archived" Core..=) Core.<$> archived,
-            ("audienceSegmentId" Core..=) Core.. Core.AsText
+            ("audienceSegmentId" Core..=)
+              Core.. Core.AsText
               Core.<$> audienceSegmentId,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
               Core.<$> campaignIdDimensionValue,
             ("clickThroughUrl" Core..=) Core.<$> clickThroughUrl,
@@ -1911,45 +1860,35 @@ instance Core.ToJSON Ad where
             ("createInfo" Core..=) Core.<$> createInfo,
             ("creativeGroupAssignments" Core..=)
               Core.<$> creativeGroupAssignments,
-            ("creativeRotation" Core..=)
-              Core.<$> creativeRotation,
-            ("dayPartTargeting" Core..=)
-              Core.<$> dayPartTargeting,
+            ("creativeRotation" Core..=) Core.<$> creativeRotation,
+            ("dayPartTargeting" Core..=) Core.<$> dayPartTargeting,
             ("defaultClickThroughEventTagProperties" Core..=)
               Core.<$> defaultClickThroughEventTagProperties,
-            ("deliverySchedule" Core..=)
-              Core.<$> deliverySchedule,
-            ("dynamicClickTracker" Core..=)
-              Core.<$> dynamicClickTracker,
+            ("deliverySchedule" Core..=) Core.<$> deliverySchedule,
+            ("dynamicClickTracker" Core..=) Core.<$> dynamicClickTracker,
             ("endTime" Core..=) Core.<$> endTime,
-            ("eventTagOverrides" Core..=)
-              Core.<$> eventTagOverrides,
+            ("eventTagOverrides" Core..=) Core.<$> eventTagOverrides,
             ("geoTargeting" Core..=) Core.<$> geoTargeting,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("keyValueTargetingExpression" Core..=)
               Core.<$> keyValueTargetingExpression,
             ("kind" Core..=) Core.<$> kind,
-            ("languageTargeting" Core..=)
-              Core.<$> languageTargeting,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("languageTargeting" Core..=) Core.<$> languageTargeting,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("name" Core..=) Core.<$> name,
-            ("placementAssignments" Core..=)
-              Core.<$> placementAssignments,
+            ("placementAssignments" Core..=) Core.<$> placementAssignments,
             ("remarketingListExpression" Core..=)
               Core.<$> remarketingListExpression,
             ("size" Core..=) Core.<$> size,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("sslRequired" Core..=) Core.<$> sslRequired,
             ("startTime" Core..=) Core.<$> startTime,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("targetingTemplateId" Core..=) Core.. Core.AsText
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
+            ("targetingTemplateId" Core..=)
+              Core.. Core.AsText
               Core.<$> targetingTemplateId,
-            ("technologyTargeting" Core..=)
-              Core.<$> technologyTargeting,
+            ("technologyTargeting" Core..=) Core.<$> technologyTargeting,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -1966,23 +1905,19 @@ newtype AdBlockingConfiguration = AdBlockingConfiguration
 -- | Creates a value of 'AdBlockingConfiguration' with the minimum fields required to make a request.
 newAdBlockingConfiguration ::
   AdBlockingConfiguration
-newAdBlockingConfiguration = AdBlockingConfiguration {enabled = Core.Nothing}
+newAdBlockingConfiguration =
+  AdBlockingConfiguration {enabled = Core.Nothing}
 
 instance Core.FromJSON AdBlockingConfiguration where
   parseJSON =
     Core.withObject
       "AdBlockingConfiguration"
-      ( \o ->
-          AdBlockingConfiguration
-            Core.<$> (o Core..:? "enabled")
-      )
+      (\o -> AdBlockingConfiguration Core.<$> (o Core..:? "enabled"))
 
 instance Core.ToJSON AdBlockingConfiguration where
   toJSON AdBlockingConfiguration {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 -- | Ad Slot
 --
@@ -2030,18 +1965,12 @@ instance Core.FromJSON AdSlot where
           AdSlot
             Core.<$> (o Core..:? "comment")
             Core.<*> (o Core..:? "compatibility")
-            Core.<*> ( o Core..:? "height"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "linkedPlacementId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "height" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "linkedPlacementId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "paymentSourceType")
             Core.<*> (o Core..:? "primary")
-            Core.<*> ( o Core..:? "width"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "width" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AdSlot where
@@ -2050,13 +1979,12 @@ instance Core.ToJSON AdSlot where
       ( Core.catMaybes
           [ ("comment" Core..=) Core.<$> comment,
             ("compatibility" Core..=) Core.<$> compatibility,
-            ("height" Core..=) Core.. Core.AsText
-              Core.<$> height,
-            ("linkedPlacementId" Core..=) Core.. Core.AsText
+            ("height" Core..=) Core.. Core.AsText Core.<$> height,
+            ("linkedPlacementId" Core..=)
+              Core.. Core.AsText
               Core.<$> linkedPlacementId,
             ("name" Core..=) Core.<$> name,
-            ("paymentSourceType" Core..=)
-              Core.<$> paymentSourceType,
+            ("paymentSourceType" Core..=) Core.<$> paymentSourceType,
             ("primary" Core..=) Core.<$> primary,
             ("width" Core..=) Core.. Core.AsText Core.<$> width
           ]
@@ -2174,35 +2102,30 @@ instance Core.FromJSON Advertiser where
       "Advertiser"
       ( \o ->
           Advertiser
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserGroupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clickThroughUrlSuffix")
-            Core.<*> ( o Core..:? "defaultClickThroughEventTagId"
+            Core.<*> ( o
+                         Core..:? "defaultClickThroughEventTagId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "defaultEmail")
-            Core.<*> ( o Core..:? "floodlightConfigurationId"
+            Core.<*> ( o
+                         Core..:? "floodlightConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o
-                         Core..:? "floodlightConfigurationIdDimensionValue"
-                     )
+            Core.<*> (o Core..:? "floodlightConfigurationIdDimensionValue")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idDimensionValue")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "measurementPartnerLink")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "originalFloodlightConfigurationId"
+            Core.<*> ( o
+                         Core..:? "originalFloodlightConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "status")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "suspended")
       )
 
@@ -2210,12 +2133,11 @@ instance Core.ToJSON Advertiser where
   toJSON Advertiser {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserGroupId" Core..=) Core.. Core.AsText
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> advertiserGroupId,
-            ("clickThroughUrlSuffix" Core..=)
-              Core.<$> clickThroughUrlSuffix,
+            ("clickThroughUrlSuffix" Core..=) Core.<$> clickThroughUrlSuffix,
             ("defaultClickThroughEventTagId" Core..=)
               Core.. Core.AsText
               Core.<$> defaultClickThroughEventTagId,
@@ -2226,18 +2148,15 @@ instance Core.ToJSON Advertiser where
             ("floodlightConfigurationIdDimensionValue" Core..=)
               Core.<$> floodlightConfigurationIdDimensionValue,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
-            ("measurementPartnerLink" Core..=)
-              Core.<$> measurementPartnerLink,
+            ("measurementPartnerLink" Core..=) Core.<$> measurementPartnerLink,
             ("name" Core..=) Core.<$> name,
             ("originalFloodlightConfigurationId" Core..=)
               Core.. Core.AsText
               Core.<$> originalFloodlightConfigurationId,
             ("status" Core..=) Core.<$> status,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("suspended" Core..=) Core.<$> suspended
           ]
       )
@@ -2274,9 +2193,7 @@ instance Core.FromJSON AdvertiserGroup where
       "AdvertiserGroup"
       ( \o ->
           AdvertiserGroup
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
@@ -2286,8 +2203,7 @@ instance Core.ToJSON AdvertiserGroup where
   toJSON AdvertiserGroup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name
@@ -2332,8 +2248,7 @@ instance Core.ToJSON AdvertiserGroupsListResponse where
   toJSON AdvertiserGroupsListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("advertiserGroups" Core..=)
-              Core.<$> advertiserGroups,
+          [ ("advertiserGroups" Core..=) Core.<$> advertiserGroups,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -2406,10 +2321,7 @@ newAdvertiserLandingPagesListResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AdvertiserLandingPagesListResponse
-  where
+instance Core.FromJSON AdvertiserLandingPagesListResponse where
   parseJSON =
     Core.withObject
       "AdvertiserLandingPagesListResponse"
@@ -2420,10 +2332,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    AdvertiserLandingPagesListResponse
-  where
+instance Core.ToJSON AdvertiserLandingPagesListResponse where
   toJSON AdvertiserLandingPagesListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2559,8 +2468,7 @@ instance Core.ToJSON AudienceSegmentGroup where
   toJSON AudienceSegmentGroup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("audienceSegments" Core..=)
-              Core.<$> audienceSegments,
+          [ ("audienceSegments" Core..=) Core.<$> audienceSegments,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("name" Core..=) Core.<$> name
           ]
@@ -2654,8 +2562,7 @@ instance Core.ToJSON BillingAssignmentsListResponse where
   toJSON BillingAssignmentsListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("billingAssignments" Core..=)
-              Core.<$> billingAssignments,
+          [ ("billingAssignments" Core..=) Core.<$> billingAssignments,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -2738,8 +2645,7 @@ instance Core.ToJSON BillingProfile where
   toJSON BillingProfile {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consolidatedInvoice" Core..=)
-              Core.<$> consolidatedInvoice,
+          [ ("consolidatedInvoice" Core..=) Core.<$> consolidatedInvoice,
             ("countryCode" Core..=) Core.<$> countryCode,
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
@@ -2747,10 +2653,8 @@ instance Core.ToJSON BillingProfile where
             ("isDefault" Core..=) Core.<$> isDefault,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("paymentsAccountId" Core..=)
-              Core.<$> paymentsAccountId,
-            ("paymentsCustomerId" Core..=)
-              Core.<$> paymentsCustomerId,
+            ("paymentsAccountId" Core..=) Core.<$> paymentsAccountId,
+            ("paymentsCustomerId" Core..=) Core.<$> paymentsCustomerId,
             ("purchaseOrder" Core..=) Core.<$> purchaseOrder,
             ("secondaryPaymentsCustomerId" Core..=)
               Core.<$> secondaryPaymentsCustomerId,
@@ -2796,8 +2700,7 @@ instance Core.ToJSON BillingProfilesListResponse where
   toJSON BillingProfilesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("billingProfiles" Core..=)
-              Core.<$> billingProfiles,
+          [ ("billingProfiles" Core..=) Core.<$> billingProfiles,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -2853,9 +2756,7 @@ instance Core.FromJSON BillingRate where
             Core.<*> (o Core..:? "endDate")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "rateInMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "rateInMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "startDate")
             Core.<*> (o Core..:? "tieredRates")
             Core.<*> (o Core..:? "type")
@@ -2870,8 +2771,7 @@ instance Core.ToJSON BillingRate where
             ("endDate" Core..=) Core.<$> endDate,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("name" Core..=) Core.<$> name,
-            ("rateInMicros" Core..=) Core.. Core.AsText
-              Core.<$> rateInMicros,
+            ("rateInMicros" Core..=) Core.. Core.AsText Core.<$> rateInMicros,
             ("startDate" Core..=) Core.<$> startDate,
             ("tieredRates" Core..=) Core.<$> tieredRates,
             ("type" Core..=) Core.<$> type',
@@ -2907,27 +2807,18 @@ instance Core.FromJSON BillingRateTieredRate where
       "BillingRateTieredRate"
       ( \o ->
           BillingRateTieredRate
-            Core.<$> ( o Core..:? "highValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "lowValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "rateInMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "highValue" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "lowValue" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rateInMicros" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON BillingRateTieredRate where
   toJSON BillingRateTieredRate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("highValue" Core..=) Core.. Core.AsText
-              Core.<$> highValue,
-            ("lowValue" Core..=) Core.. Core.AsText
-              Core.<$> lowValue,
-            ("rateInMicros" Core..=) Core.. Core.AsText
-              Core.<$> rateInMicros
+          [ ("highValue" Core..=) Core.. Core.AsText Core.<$> highValue,
+            ("lowValue" Core..=) Core.. Core.AsText Core.<$> lowValue,
+            ("rateInMicros" Core..=) Core.. Core.AsText Core.<$> rateInMicros
           ]
       )
 
@@ -3013,12 +2904,8 @@ instance Core.FromJSON Browser where
       "Browser"
       ( \o ->
           Browser
-            Core.<$> ( o Core..:? "browserVersionId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "browserVersionId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "majorVersion")
             Core.<*> (o Core..:? "minorVersion")
@@ -3029,10 +2916,10 @@ instance Core.ToJSON Browser where
   toJSON Browser {..} =
     Core.object
       ( Core.catMaybes
-          [ ("browserVersionId" Core..=) Core.. Core.AsText
+          [ ("browserVersionId" Core..=)
+              Core.. Core.AsText
               Core.<$> browserVersionId,
-            ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+            ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("kind" Core..=) Core.<$> kind,
             ("majorVersion" Core..=) Core.<$> majorVersion,
             ("minorVersion" Core..=) Core.<$> minorVersion,
@@ -3055,7 +2942,10 @@ data BrowsersListResponse = BrowsersListResponse
 newBrowsersListResponse ::
   BrowsersListResponse
 newBrowsersListResponse =
-  BrowsersListResponse {browsers = Core.Nothing, kind = Core.Nothing}
+  BrowsersListResponse
+    { browsers = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON BrowsersListResponse where
   parseJSON =
@@ -3063,7 +2953,8 @@ instance Core.FromJSON BrowsersListResponse where
       "BrowsersListResponse"
       ( \o ->
           BrowsersListResponse
-            Core.<$> (o Core..:? "browsers") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "browsers")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON BrowsersListResponse where
@@ -3111,7 +3002,6 @@ data Campaign = Campaign
     defaultClickThroughEventTagProperties :: (Core.Maybe DefaultClickThroughEventTagProperties),
     -- | The default landing page ID for this campaign.
     defaultLandingPageId :: (Core.Maybe Core.Int64),
-    -- |
     endDate :: (Core.Maybe Core.Date),
     -- | Overrides that can be used to activate or deactivate advertiser event tags.
     eventTagOverrides :: (Core.Maybe [EventTagOverride]),
@@ -3129,7 +3019,6 @@ data Campaign = Campaign
     measurementPartnerLink :: (Core.Maybe MeasurementPartnerCampaignLink),
     -- | Name of this campaign. This is a required field and must be less than 512 characters long and unique among campaigns of the same advertiser.
     name :: (Core.Maybe Core.Text),
-    -- |
     startDate :: (Core.Maybe Core.Date),
     -- | Subaccount ID of this campaign. This is a read-only field that can be left blank.
     subaccountId :: (Core.Maybe Core.Int64)
@@ -3176,19 +3065,11 @@ instance Core.FromJSON Campaign where
       "Campaign"
       ( \o ->
           Campaign
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "adBlockingConfiguration")
-            Core.<*> ( o
-                         Core..:? "additionalCreativeOptimizationConfigurations"
-                     )
-            Core.<*> ( o Core..:? "advertiserGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "additionalCreativeOptimizationConfigurations")
+            Core.<*> (o Core..:? "advertiserGroupId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "archived")
             Core.<*> (o Core..:? "audienceSegmentGroups")
@@ -3196,12 +3077,14 @@ instance Core.FromJSON Campaign where
             Core.<*> (o Core..:? "clickThroughUrlSuffixProperties")
             Core.<*> (o Core..:? "comment")
             Core.<*> (o Core..:? "createInfo")
-            Core.<*> ( o Core..:? "creativeGroupIds"
+            Core.<*> ( o
+                         Core..:? "creativeGroupIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "creativeOptimizationConfiguration")
             Core.<*> (o Core..:? "defaultClickThroughEventTagProperties")
-            Core.<*> ( o Core..:? "defaultLandingPageId"
+            Core.<*> ( o
+                         Core..:? "defaultLandingPageId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "endDate")
@@ -3214,34 +3097,27 @@ instance Core.FromJSON Campaign where
             Core.<*> (o Core..:? "measurementPartnerLink")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "startDate")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Campaign where
   toJSON Campaign {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("adBlockingConfiguration" Core..=)
               Core.<$> adBlockingConfiguration,
-            ( "additionalCreativeOptimizationConfigurations"
-                Core..=
-            )
+            ("additionalCreativeOptimizationConfigurations" Core..=)
               Core.<$> additionalCreativeOptimizationConfigurations,
-            ("advertiserGroupId" Core..=) Core.. Core.AsText
+            ("advertiserGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> advertiserGroupId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("archived" Core..=) Core.<$> archived,
-            ("audienceSegmentGroups" Core..=)
-              Core.<$> audienceSegmentGroups,
-            ("billingInvoiceCode" Core..=)
-              Core.<$> billingInvoiceCode,
+            ("audienceSegmentGroups" Core..=) Core.<$> audienceSegmentGroups,
+            ("billingInvoiceCode" Core..=) Core.<$> billingInvoiceCode,
             ("clickThroughUrlSuffixProperties" Core..=)
               Core.<$> clickThroughUrlSuffixProperties,
             ("comment" Core..=) Core.<$> comment,
@@ -3253,24 +3129,20 @@ instance Core.ToJSON Campaign where
               Core.<$> creativeOptimizationConfiguration,
             ("defaultClickThroughEventTagProperties" Core..=)
               Core.<$> defaultClickThroughEventTagProperties,
-            ("defaultLandingPageId" Core..=) Core.. Core.AsText
+            ("defaultLandingPageId" Core..=)
+              Core.. Core.AsText
               Core.<$> defaultLandingPageId,
             ("endDate" Core..=) Core.<$> endDate,
-            ("eventTagOverrides" Core..=)
-              Core.<$> eventTagOverrides,
+            ("eventTagOverrides" Core..=) Core.<$> eventTagOverrides,
             ("externalId" Core..=) Core.<$> externalId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
-            ("measurementPartnerLink" Core..=)
-              Core.<$> measurementPartnerLink,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
+            ("measurementPartnerLink" Core..=) Core.<$> measurementPartnerLink,
             ("name" Core..=) Core.<$> name,
             ("startDate" Core..=) Core.<$> startDate,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -3289,7 +3161,10 @@ data CampaignCreativeAssociation = CampaignCreativeAssociation
 newCampaignCreativeAssociation ::
   CampaignCreativeAssociation
 newCampaignCreativeAssociation =
-  CampaignCreativeAssociation {creativeId = Core.Nothing, kind = Core.Nothing}
+  CampaignCreativeAssociation
+    { creativeId = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON CampaignCreativeAssociation where
   parseJSON =
@@ -3297,9 +3172,7 @@ instance Core.FromJSON CampaignCreativeAssociation where
       "CampaignCreativeAssociation"
       ( \o ->
           CampaignCreativeAssociation
-            Core.<$> ( o Core..:? "creativeId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "creativeId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
       )
 
@@ -3307,8 +3180,7 @@ instance Core.ToJSON CampaignCreativeAssociation where
   toJSON CampaignCreativeAssociation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeId" Core..=) Core.. Core.AsText
-              Core.<$> creativeId,
+          [ ("creativeId" Core..=) Core.. Core.AsText Core.<$> creativeId,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -3331,15 +3203,13 @@ newCampaignCreativeAssociationsListResponse ::
   CampaignCreativeAssociationsListResponse
 newCampaignCreativeAssociationsListResponse =
   CampaignCreativeAssociationsListResponse
-    { campaignCreativeAssociations = Core.Nothing,
+    { campaignCreativeAssociations =
+        Core.Nothing,
       kind = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CampaignCreativeAssociationsListResponse
-  where
+instance Core.FromJSON CampaignCreativeAssociationsListResponse where
   parseJSON =
     Core.withObject
       "CampaignCreativeAssociationsListResponse"
@@ -3350,10 +3220,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    CampaignCreativeAssociationsListResponse
-  where
+instance Core.ToJSON CampaignCreativeAssociationsListResponse where
   toJSON CampaignCreativeAssociationsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -3400,16 +3267,14 @@ instance Core.FromJSON CampaignSummary where
       ( \o ->
           CampaignSummary
             Core.<$> (o Core..:? "billingInvoiceCode")
-            Core.<*> ( o Core..:? "campaignId"
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "preTaxAmountMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "preTaxAmountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "taxAmountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalAmountMicros"
+            Core.<*> (o Core..:? "taxAmountMicros" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalAmountMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -3418,15 +3283,16 @@ instance Core.ToJSON CampaignSummary where
   toJSON CampaignSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("billingInvoiceCode" Core..=)
-              Core.<$> billingInvoiceCode,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
-            ("preTaxAmountMicros" Core..=) Core.. Core.AsText
+          [ ("billingInvoiceCode" Core..=) Core.<$> billingInvoiceCode,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
+            ("preTaxAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> preTaxAmountMicros,
-            ("taxAmountMicros" Core..=) Core.. Core.AsText
+            ("taxAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> taxAmountMicros,
-            ("totalAmountMicros" Core..=) Core.. Core.AsText
+            ("totalAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> totalAmountMicros
           ]
       )
@@ -3475,6 +3341,99 @@ instance Core.ToJSON CampaignsListResponse where
           ]
       )
 
+-- | Contains additional information about cart data. This field may only be used when calling batchinsert; it is not supported by batchupdate.
+--
+-- /See:/ 'newCartData' smart constructor.
+data CartData = CartData
+  { -- | Data of the items purchased.
+    items :: (Core.Maybe [CartDataItem]),
+    -- | The feed labels associated with the feed where your items are uploaded. For more information, please refer to ​​ https:\/\/support.google.com\/merchants\/answer\/12453549. Providing the feed label reduces ambiguity in identifying the right offer details.
+    merchantFeedLabel :: (Core.Maybe Core.Text),
+    -- | The language associated with the feed where your items are uploaded. Use ISO 639-1 language codes. Providing the feed language reduces ambiguity in identifying the right offer details.
+    merchantFeedLanguage :: (Core.Maybe Core.Text),
+    -- | The Merchant Center ID where the items are uploaded. Providing Merchant Center ID reduces ambiguity in identifying the right offer details.
+    merchantId :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CartData' with the minimum fields required to make a request.
+newCartData ::
+  CartData
+newCartData =
+  CartData
+    { items = Core.Nothing,
+      merchantFeedLabel = Core.Nothing,
+      merchantFeedLanguage = Core.Nothing,
+      merchantId = Core.Nothing
+    }
+
+instance Core.FromJSON CartData where
+  parseJSON =
+    Core.withObject
+      "CartData"
+      ( \o ->
+          CartData
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "merchantFeedLabel")
+            Core.<*> (o Core..:? "merchantFeedLanguage")
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON CartData where
+  toJSON CartData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("items" Core..=) Core.<$> items,
+            ("merchantFeedLabel" Core..=) Core.<$> merchantFeedLabel,
+            ("merchantFeedLanguage" Core..=) Core.<$> merchantFeedLanguage,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId
+          ]
+      )
+
+-- | Contains data of the items purchased.
+--
+-- /See:/ 'newCartDataItem' smart constructor.
+data CartDataItem = CartDataItem
+  { -- | The shopping id of the item. Must be equal to the Merchant Center product identifier. This is a required field.
+    itemId :: (Core.Maybe Core.Text),
+    -- | Number of items sold. This is a required field.
+    quantity :: (Core.Maybe Core.Int32),
+    -- | Unit price excluding tax, shipping, and any transaction level discounts. Interpreted in CM360 Floodlight config parent advertiser\'s currency code. This is a required field.
+    unitPrice :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CartDataItem' with the minimum fields required to make a request.
+newCartDataItem ::
+  CartDataItem
+newCartDataItem =
+  CartDataItem
+    { itemId = Core.Nothing,
+      quantity = Core.Nothing,
+      unitPrice = Core.Nothing
+    }
+
+instance Core.FromJSON CartDataItem where
+  parseJSON =
+    Core.withObject
+      "CartDataItem"
+      ( \o ->
+          CartDataItem
+            Core.<$> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "quantity")
+            Core.<*> (o Core..:? "unitPrice")
+      )
+
+instance Core.ToJSON CartDataItem where
+  toJSON CartDataItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("itemId" Core..=) Core.<$> itemId,
+            ("quantity" Core..=) Core.<$> quantity,
+            ("unitPrice" Core..=) Core.<$> unitPrice
+          ]
+      )
+
 -- | Describes a change that a user has made to a resource.
 --
 -- /See:/ 'newChangeLog' smart constructor.
@@ -3483,7 +3442,6 @@ data ChangeLog = ChangeLog
     accountId :: (Core.Maybe Core.Int64),
     -- | Action which caused the change.
     action :: (Core.Maybe Core.Text),
-    -- |
     changeTime :: (Core.Maybe Core.DateTime),
     -- | Field name of the object which changed.
     fieldName :: (Core.Maybe Core.Text),
@@ -3537,29 +3495,19 @@ instance Core.FromJSON ChangeLog where
       "ChangeLog"
       ( \o ->
           ChangeLog
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "action")
             Core.<*> (o Core..:? "changeTime")
             Core.<*> (o Core..:? "fieldName")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "newValue")
-            Core.<*> ( o Core..:? "objectId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "objectId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectType")
             Core.<*> (o Core..:? "oldValue")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "transactionId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "userProfileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "transactionId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "userProfileId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "userProfileName")
       )
 
@@ -3567,26 +3515,24 @@ instance Core.ToJSON ChangeLog where
   toJSON ChangeLog {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("action" Core..=) Core.<$> action,
             ("changeTime" Core..=) Core.<$> changeTime,
             ("fieldName" Core..=) Core.<$> fieldName,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("newValue" Core..=) Core.<$> newValue',
-            ("objectId" Core..=) Core.. Core.AsText
-              Core.<$> objectId,
+            ("objectId" Core..=) Core.. Core.AsText Core.<$> objectId,
             ("objectType" Core..=) Core.<$> objectType,
             ("oldValue" Core..=) Core.<$> oldValue,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("transactionId" Core..=) Core.. Core.AsText
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
+            ("transactionId" Core..=)
+              Core.. Core.AsText
               Core.<$> transactionId,
-            ("userProfileId" Core..=) Core.. Core.AsText
+            ("userProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> userProfileId,
-            ("userProfileName" Core..=)
-              Core.<$> userProfileName
+            ("userProfileName" Core..=) Core.<$> userProfileName
           ]
       )
 
@@ -3634,100 +3580,6 @@ instance Core.ToJSON ChangeLogsListResponse where
           ]
       )
 
--- | Represents a DfaReporting channel grouping.
---
--- /See:/ 'newChannelGrouping' smart constructor.
-data ChannelGrouping = ChannelGrouping
-  { -- | ChannelGrouping fallback name.
-    fallbackName :: (Core.Maybe Core.Text),
-    -- | The kind of resource this is, in this case dfareporting#channelGrouping.
-    kind :: (Core.Maybe Core.Text),
-    -- | ChannelGrouping name.
-    name :: (Core.Maybe Core.Text),
-    -- | The rules contained within this channel grouping.
-    rules :: (Core.Maybe [ChannelGroupingRule])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ChannelGrouping' with the minimum fields required to make a request.
-newChannelGrouping ::
-  ChannelGrouping
-newChannelGrouping =
-  ChannelGrouping
-    { fallbackName = Core.Nothing,
-      kind = Core.Nothing,
-      name = Core.Nothing,
-      rules = Core.Nothing
-    }
-
-instance Core.FromJSON ChannelGrouping where
-  parseJSON =
-    Core.withObject
-      "ChannelGrouping"
-      ( \o ->
-          ChannelGrouping
-            Core.<$> (o Core..:? "fallbackName")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "rules")
-      )
-
-instance Core.ToJSON ChannelGrouping where
-  toJSON ChannelGrouping {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fallbackName" Core..=) Core.<$> fallbackName,
-            ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name,
-            ("rules" Core..=) Core.<$> rules
-          ]
-      )
-
--- | Represents a DfaReporting channel grouping rule.
---
--- /See:/ 'newChannelGroupingRule' smart constructor.
-data ChannelGroupingRule = ChannelGroupingRule
-  { -- | The disjunctive match statements contained within this rule.
-    disjunctiveMatchStatements :: (Core.Maybe [DisjunctiveMatchStatement]),
-    -- | The kind of resource this is, in this case dfareporting#channelGroupingRule.
-    kind :: (Core.Maybe Core.Text),
-    -- | Rule name.
-    name :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ChannelGroupingRule' with the minimum fields required to make a request.
-newChannelGroupingRule ::
-  ChannelGroupingRule
-newChannelGroupingRule =
-  ChannelGroupingRule
-    { disjunctiveMatchStatements = Core.Nothing,
-      kind = Core.Nothing,
-      name = Core.Nothing
-    }
-
-instance Core.FromJSON ChannelGroupingRule where
-  parseJSON =
-    Core.withObject
-      "ChannelGroupingRule"
-      ( \o ->
-          ChannelGroupingRule
-            Core.<$> (o Core..:? "disjunctiveMatchStatements")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "name")
-      )
-
-instance Core.ToJSON ChannelGroupingRule where
-  toJSON ChannelGroupingRule {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("disjunctiveMatchStatements" Core..=)
-              Core.<$> disjunctiveMatchStatements,
-            ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name
-          ]
-      )
-
 -- | City List Response
 --
 -- /See:/ 'newCitiesListResponse' smart constructor.
@@ -3751,7 +3603,8 @@ instance Core.FromJSON CitiesListResponse where
       "CitiesListResponse"
       ( \o ->
           CitiesListResponse
-            Core.<$> (o Core..:? "cities") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "cities")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON CitiesListResponse where
@@ -3811,22 +3664,14 @@ instance Core.FromJSON City where
       ( \o ->
           City
             Core.<$> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "countryDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countryDartId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "metroCode")
-            Core.<*> ( o Core..:? "metroDmaId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "metroDmaId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "regionCode")
-            Core.<*> ( o Core..:? "regionDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "regionDartId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON City where
@@ -3834,18 +3679,16 @@ instance Core.ToJSON City where
     Core.object
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
-            ("countryDartId" Core..=) Core.. Core.AsText
+            ("countryDartId" Core..=)
+              Core.. Core.AsText
               Core.<$> countryDartId,
-            ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+            ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("kind" Core..=) Core.<$> kind,
             ("metroCode" Core..=) Core.<$> metroCode,
-            ("metroDmaId" Core..=) Core.. Core.AsText
-              Core.<$> metroDmaId,
+            ("metroDmaId" Core..=) Core.. Core.AsText Core.<$> metroDmaId,
             ("name" Core..=) Core.<$> name,
             ("regionCode" Core..=) Core.<$> regionCode,
-            ("regionDartId" Core..=) Core.. Core.AsText
-              Core.<$> regionDartId
+            ("regionDartId" Core..=) Core.. Core.AsText Core.<$> regionDartId
           ]
       )
 
@@ -3887,8 +3730,7 @@ instance Core.ToJSON ClickTag where
   toJSON ClickTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clickThroughUrl" Core..=)
-              Core.<$> clickThroughUrl,
+          [ ("clickThroughUrl" Core..=) Core.<$> clickThroughUrl,
             ("eventName" Core..=) Core.<$> eventName,
             ("name" Core..=) Core.<$> name
           ]
@@ -3929,9 +3771,7 @@ instance Core.FromJSON ClickThroughUrl where
             Core.<$> (o Core..:? "computedClickThroughUrl")
             Core.<*> (o Core..:? "customClickThroughUrl")
             Core.<*> (o Core..:? "defaultLandingPage")
-            Core.<*> ( o Core..:? "landingPageId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "landingPageId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ClickThroughUrl where
@@ -3940,11 +3780,10 @@ instance Core.ToJSON ClickThroughUrl where
       ( Core.catMaybes
           [ ("computedClickThroughUrl" Core..=)
               Core.<$> computedClickThroughUrl,
-            ("customClickThroughUrl" Core..=)
-              Core.<$> customClickThroughUrl,
-            ("defaultLandingPage" Core..=)
-              Core.<$> defaultLandingPage,
-            ("landingPageId" Core..=) Core.. Core.AsText
+            ("customClickThroughUrl" Core..=) Core.<$> customClickThroughUrl,
+            ("defaultLandingPage" Core..=) Core.<$> defaultLandingPage,
+            ("landingPageId" Core..=)
+              Core.. Core.AsText
               Core.<$> landingPageId
           ]
       )
@@ -3965,14 +3804,12 @@ newClickThroughUrlSuffixProperties ::
   ClickThroughUrlSuffixProperties
 newClickThroughUrlSuffixProperties =
   ClickThroughUrlSuffixProperties
-    { clickThroughUrlSuffix = Core.Nothing,
+    { clickThroughUrlSuffix =
+        Core.Nothing,
       overrideInheritedSuffix = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ClickThroughUrlSuffixProperties
-  where
+instance Core.FromJSON ClickThroughUrlSuffixProperties where
   parseJSON =
     Core.withObject
       "ClickThroughUrlSuffixProperties"
@@ -3986,8 +3823,7 @@ instance Core.ToJSON ClickThroughUrlSuffixProperties where
   toJSON ClickThroughUrlSuffixProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clickThroughUrlSuffix" Core..=)
-              Core.<$> clickThroughUrlSuffix,
+          [ ("clickThroughUrlSuffix" Core..=) Core.<$> clickThroughUrlSuffix,
             ("overrideInheritedSuffix" Core..=)
               Core.<$> overrideInheritedSuffix
           ]
@@ -4020,19 +3856,15 @@ instance Core.FromJSON CompanionClickThroughOverride where
       ( \o ->
           CompanionClickThroughOverride
             Core.<$> (o Core..:? "clickThroughUrl")
-            Core.<*> ( o Core..:? "creativeId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creativeId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CompanionClickThroughOverride where
   toJSON CompanionClickThroughOverride {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clickThroughUrl" Core..=)
-              Core.<$> clickThroughUrl,
-            ("creativeId" Core..=) Core.. Core.AsText
-              Core.<$> creativeId
+          [ ("clickThroughUrl" Core..=) Core.<$> clickThroughUrl,
+            ("creativeId" Core..=) Core.. Core.AsText Core.<$> creativeId
           ]
       )
 
@@ -4078,28 +3910,25 @@ instance Core.ToJSON CompanionSetting where
   toJSON CompanionSetting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("companionsDisabled" Core..=)
-              Core.<$> companionsDisabled,
+          [ ("companionsDisabled" Core..=) Core.<$> companionsDisabled,
             ("enabledSizes" Core..=) Core.<$> enabledSizes,
             ("imageOnly" Core..=) Core.<$> imageOnly,
             ("kind" Core..=) Core.<$> kind
           ]
       )
 
--- | Represents a response to the queryCompatibleFields method.
+-- | Represents a response to the queryCompatibleFields method. Next ID: 10
 --
 -- /See:/ 'newCompatibleFields' smart constructor.
 data CompatibleFields = CompatibleFields
   { -- | Contains items that are compatible to be selected for a report of type \"CROSS/DIMENSION/REACH\".
     crossDimensionReachReportCompatibleFields :: (Core.Maybe CrossDimensionReachReportCompatibleFields),
+    -- | Contains items that are compatible to be selected for a report of type \"CROSS/MEDIA/REACH\".
+    crossMediaReachReportCompatibleFields :: (Core.Maybe CrossMediaReachReportCompatibleFields),
     -- | Contains items that are compatible to be selected for a report of type \"FLOODLIGHT\".
     floodlightReportCompatibleFields :: (Core.Maybe FloodlightReportCompatibleFields),
     -- | The kind of resource this is, in this case dfareporting#compatibleFields.
     kind :: (Core.Maybe Core.Text),
-    -- | Contains items that are compatible to be selected for a report of type \"PATH_ATTRIBUTION\".
-    pathAttributionReportCompatibleFields :: (Core.Maybe PathReportCompatibleFields),
-    -- | Contains items that are compatible to be selected for a report of type \"PATH\".
-    pathReportCompatibleFields :: (Core.Maybe PathReportCompatibleFields),
     -- | Contains items that are compatible to be selected for a report of type \"PATH/TO/CONVERSION\".
     pathToConversionReportCompatibleFields :: (Core.Maybe PathToConversionReportCompatibleFields),
     -- | Contains items that are compatible to be selected for a report of type \"REACH\".
@@ -4114,11 +3943,11 @@ newCompatibleFields ::
   CompatibleFields
 newCompatibleFields =
   CompatibleFields
-    { crossDimensionReachReportCompatibleFields = Core.Nothing,
+    { crossDimensionReachReportCompatibleFields =
+        Core.Nothing,
+      crossMediaReachReportCompatibleFields = Core.Nothing,
       floodlightReportCompatibleFields = Core.Nothing,
       kind = Core.Nothing,
-      pathAttributionReportCompatibleFields = Core.Nothing,
-      pathReportCompatibleFields = Core.Nothing,
       pathToConversionReportCompatibleFields = Core.Nothing,
       reachReportCompatibleFields = Core.Nothing,
       reportCompatibleFields = Core.Nothing
@@ -4130,13 +3959,10 @@ instance Core.FromJSON CompatibleFields where
       "CompatibleFields"
       ( \o ->
           CompatibleFields
-            Core.<$> ( o
-                         Core..:? "crossDimensionReachReportCompatibleFields"
-                     )
+            Core.<$> (o Core..:? "crossDimensionReachReportCompatibleFields")
+            Core.<*> (o Core..:? "crossMediaReachReportCompatibleFields")
             Core.<*> (o Core..:? "floodlightReportCompatibleFields")
             Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "pathAttributionReportCompatibleFields")
-            Core.<*> (o Core..:? "pathReportCompatibleFields")
             Core.<*> (o Core..:? "pathToConversionReportCompatibleFields")
             Core.<*> (o Core..:? "reachReportCompatibleFields")
             Core.<*> (o Core..:? "reportCompatibleFields")
@@ -4146,17 +3972,13 @@ instance Core.ToJSON CompatibleFields where
   toJSON CompatibleFields {..} =
     Core.object
       ( Core.catMaybes
-          [ ( "crossDimensionReachReportCompatibleFields"
-                Core..=
-            )
+          [ ("crossDimensionReachReportCompatibleFields" Core..=)
               Core.<$> crossDimensionReachReportCompatibleFields,
+            ("crossMediaReachReportCompatibleFields" Core..=)
+              Core.<$> crossMediaReachReportCompatibleFields,
             ("floodlightReportCompatibleFields" Core..=)
               Core.<$> floodlightReportCompatibleFields,
             ("kind" Core..=) Core.<$> kind,
-            ("pathAttributionReportCompatibleFields" Core..=)
-              Core.<$> pathAttributionReportCompatibleFields,
-            ("pathReportCompatibleFields" Core..=)
-              Core.<$> pathReportCompatibleFields,
             ("pathToConversionReportCompatibleFields" Core..=)
               Core.<$> pathToConversionReportCompatibleFields,
             ("reachReportCompatibleFields" Core..=)
@@ -4183,7 +4005,11 @@ data ConnectionType = ConnectionType
 newConnectionType ::
   ConnectionType
 newConnectionType =
-  ConnectionType {id = Core.Nothing, kind = Core.Nothing, name = Core.Nothing}
+  ConnectionType
+    { id = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON ConnectionType where
   parseJSON =
@@ -4240,8 +4066,7 @@ instance Core.ToJSON ConnectionTypesListResponse where
   toJSON ConnectionTypesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("connectionTypes" Core..=)
-              Core.<$> connectionTypes,
+          [ ("connectionTypes" Core..=) Core.<$> connectionTypes,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -4284,14 +4109,12 @@ instance Core.ToJSON ContentCategoriesListResponse where
   toJSON ContentCategoriesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentCategories" Core..=)
-              Core.<$> contentCategories,
+          [ ("contentCategories" Core..=) Core.<$> contentCategories,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
 
--- | Organizes placements according to the contents of their associated webpages.
 --
 -- /See:/ 'newContentCategory' smart constructor.
 data ContentCategory = ContentCategory
@@ -4323,9 +4146,7 @@ instance Core.FromJSON ContentCategory where
       "ContentCategory"
       ( \o ->
           ContentCategory
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
@@ -4335,8 +4156,7 @@ instance Core.ToJSON ContentCategory where
   toJSON ContentCategory {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name
@@ -4347,9 +4167,13 @@ instance Core.ToJSON ContentCategory where
 --
 -- /See:/ 'newConversion' smart constructor.
 data Conversion = Conversion
-  { -- | Whether this particular request may come from a user under the age of 13, under COPPA compliance.
+  { -- | This represents consent for ad user data.
+    adUserDataConsent :: (Core.Maybe Conversion_AdUserDataConsent),
+    -- | The cart data associated with this conversion.
+    cartData :: (Core.Maybe CartData),
+    -- | Whether this particular request may come from a user under the age of 13, under COPPA compliance.
     childDirectedTreatment :: (Core.Maybe Core.Bool),
-    -- | Custom floodlight variables. This field may only be used when calling batchinsert; it is not supported by batchupdate.
+    -- | Custom floodlight variables.
     customVariables :: (Core.Maybe [CustomFloodlightVariable]),
     -- | The display click ID. This field is mutually exclusive with encryptedUserId, encryptedUserIdCandidates[], matchId, mobileDeviceId, gclid, and impressionId. This or encryptedUserId or encryptedUserIdCandidates[] or matchId or mobileDeviceId or gclid or impressionId is a required field.
     dclid :: (Core.Maybe Core.Text),
@@ -4377,13 +4201,15 @@ data Conversion = Conversion
     nonPersonalizedAd :: (Core.Maybe Core.Bool),
     -- | The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
     ordinal :: (Core.Maybe Core.Text),
-    -- | The quantity of the conversion.
+    -- | The quantity of the conversion. This is a required field.
     quantity :: (Core.Maybe Core.Int64),
     -- | The timestamp of conversion, in Unix epoch micros. This is a required field.
     timestampMicros :: (Core.Maybe Core.Int64),
     -- | Whether this particular request may come from a user under the age of 16 (may differ by country), under compliance with the European Union\'s General Data Protection Regulation (GDPR).
     treatmentForUnderage :: (Core.Maybe Core.Bool),
-    -- | The value of the conversion.
+    -- | The user identifiers to enhance the conversion. The maximum number of user identifiers for each conversion is 5.
+    userIdentifiers :: (Core.Maybe [UserIdentifier]),
+    -- | The value of the conversion. Interpreted in CM360 Floodlight config parent advertiser\'s currency code. This is a required field.
     value :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4393,7 +4219,9 @@ newConversion ::
   Conversion
 newConversion =
   Conversion
-    { childDirectedTreatment = Core.Nothing,
+    { adUserDataConsent = Core.Nothing,
+      cartData = Core.Nothing,
+      childDirectedTreatment = Core.Nothing,
       customVariables = Core.Nothing,
       dclid = Core.Nothing,
       encryptedUserId = Core.Nothing,
@@ -4411,6 +4239,7 @@ newConversion =
       quantity = Core.Nothing,
       timestampMicros = Core.Nothing,
       treatmentForUnderage = Core.Nothing,
+      userIdentifiers = Core.Nothing,
       value = Core.Nothing
     }
 
@@ -4420,15 +4249,19 @@ instance Core.FromJSON Conversion where
       "Conversion"
       ( \o ->
           Conversion
-            Core.<$> (o Core..:? "childDirectedTreatment")
+            Core.<$> (o Core..:? "adUserDataConsent")
+            Core.<*> (o Core..:? "cartData")
+            Core.<*> (o Core..:? "childDirectedTreatment")
             Core.<*> (o Core..:? "customVariables")
             Core.<*> (o Core..:? "dclid")
             Core.<*> (o Core..:? "encryptedUserId")
             Core.<*> (o Core..:? "encryptedUserIdCandidates")
-            Core.<*> ( o Core..:? "floodlightActivityId"
+            Core.<*> ( o
+                         Core..:? "floodlightActivityId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "floodlightConfigurationId"
+            Core.<*> ( o
+                         Core..:? "floodlightConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "gclid")
@@ -4439,13 +4272,10 @@ instance Core.FromJSON Conversion where
             Core.<*> (o Core..:? "mobileDeviceId")
             Core.<*> (o Core..:? "nonPersonalizedAd")
             Core.<*> (o Core..:? "ordinal")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "timestampMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "timestampMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "treatmentForUnderage")
+            Core.<*> (o Core..:? "userIdentifiers")
             Core.<*> (o Core..:? "value")
       )
 
@@ -4453,14 +4283,16 @@ instance Core.ToJSON Conversion where
   toJSON Conversion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("childDirectedTreatment" Core..=)
-              Core.<$> childDirectedTreatment,
+          [ ("adUserDataConsent" Core..=) Core.<$> adUserDataConsent,
+            ("cartData" Core..=) Core.<$> cartData,
+            ("childDirectedTreatment" Core..=) Core.<$> childDirectedTreatment,
             ("customVariables" Core..=) Core.<$> customVariables,
             ("dclid" Core..=) Core.<$> dclid,
             ("encryptedUserId" Core..=) Core.<$> encryptedUserId,
             ("encryptedUserIdCandidates" Core..=)
               Core.<$> encryptedUserIdCandidates,
-            ("floodlightActivityId" Core..=) Core.. Core.AsText
+            ("floodlightActivityId" Core..=)
+              Core.. Core.AsText
               Core.<$> floodlightActivityId,
             ("floodlightConfigurationId" Core..=)
               Core.. Core.AsText
@@ -4471,15 +4303,14 @@ instance Core.ToJSON Conversion where
             ("limitAdTracking" Core..=) Core.<$> limitAdTracking,
             ("matchId" Core..=) Core.<$> matchId,
             ("mobileDeviceId" Core..=) Core.<$> mobileDeviceId,
-            ("nonPersonalizedAd" Core..=)
-              Core.<$> nonPersonalizedAd,
+            ("nonPersonalizedAd" Core..=) Core.<$> nonPersonalizedAd,
             ("ordinal" Core..=) Core.<$> ordinal,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
-            ("timestampMicros" Core..=) Core.. Core.AsText
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
+            ("timestampMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> timestampMicros,
-            ("treatmentForUnderage" Core..=)
-              Core.<$> treatmentForUnderage,
+            ("treatmentForUnderage" Core..=) Core.<$> treatmentForUnderage,
+            ("userIdentifiers" Core..=) Core.<$> userIdentifiers,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -4763,7 +4594,10 @@ data CountriesListResponse = CountriesListResponse
 newCountriesListResponse ::
   CountriesListResponse
 newCountriesListResponse =
-  CountriesListResponse {countries = Core.Nothing, kind = Core.Nothing}
+  CountriesListResponse
+    { countries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON CountriesListResponse where
   parseJSON =
@@ -4820,9 +4654,7 @@ instance Core.FromJSON Country where
       ( \o ->
           Country
             Core.<$> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "sslEnabled")
@@ -4833,8 +4665,7 @@ instance Core.ToJSON Country where
     Core.object
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
-            ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+            ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("sslEnabled" Core..=) Core.<$> sslEnabled
@@ -4855,7 +4686,7 @@ data Creative = Creative
     adTagKeys :: (Core.Maybe [Core.Text]),
     -- | Additional sizes associated with a responsive creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. Applicable to DISPLAY creatives when the primary asset type is HTML_IMAGE.
     additionalSizes :: (Core.Maybe [Size]),
-    -- | Advertiser ID of this creative. This is a required field. Applicable to all creative types.
+    -- | Required. Advertiser ID of this creative. This is a required field. Applicable to all creative types.
     advertiserId :: (Core.Maybe Core.Int64),
     -- | Whether script access is allowed for this creative. This is a read-only and deprecated field which will automatically be set to true on update. Applicable to the following creative types: FLASH_INPAGE.
     allowScriptAccess :: (Core.Maybe Core.Bool),
@@ -4923,7 +4754,7 @@ data Creative = Creative
     mediaDescription :: (Core.Maybe Core.Text),
     -- | Creative audio or video duration in seconds. This is a read-only field. Applicable to the following creative types: INSTREAM/VIDEO, INSTREAM/AUDIO, all RICH_MEDIA, and all VPAID.
     mediaDuration :: (Core.Maybe Core.Double),
-    -- | Name of the creative. This is a required field and must be less than 256 characters long. Applicable to all creative types.
+    -- | Required. Name of the creative. This must be less than 256 characters long. Applicable to all creative types.
     name :: (Core.Maybe Core.Text),
     -- | Online behavioral advertising icon to be added to the creative. Applicable to the following creative types: all INSTREAM_VIDEO.
     obaIcon :: (Core.Maybe ObaIcon),
@@ -4969,7 +4800,7 @@ data Creative = Creative
     timerCustomEvents :: (Core.Maybe [CreativeCustomEvent]),
     -- | Combined size of all creative assets. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.
     totalFileSize :: (Core.Maybe Core.Int64),
-    -- | Type of this creative. This is a required field. Applicable to all creative types. /Note:/ FLASH/INPAGE, HTML5/BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
+    -- | Required. Type of this creative. Applicable to all creative types. /Note:/ FLASH/INPAGE, HTML5/BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
     type' :: (Core.Maybe Creative_Type),
     -- | A Universal Ad ID as per the VAST 4.0 spec. Applicable to the following creative types: INSTREAM/AUDIO and INSTREAM/VIDEO and VPAID.
     universalAdId :: (Core.Maybe UniversalAdId),
@@ -5056,16 +4887,12 @@ instance Core.FromJSON Creative where
       "Creative"
       ( \o ->
           Creative
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "active")
             Core.<*> (o Core..:? "adParameters")
             Core.<*> (o Core..:? "adTagKeys")
             Core.<*> (o Core..:? "additionalSizes")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "allowScriptAccess")
             Core.<*> (o Core..:? "archived")
             Core.<*> (o Core..:? "artworkType")
@@ -5079,7 +4906,8 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "backupImageTargetWindow")
             Core.<*> (o Core..:? "clickTags")
             Core.<*> (o Core..:? "commercialId")
-            Core.<*> ( o Core..:? "companionCreatives"
+            Core.<*> ( o
+                         Core..:? "companionCreatives"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "compatibility")
@@ -5098,7 +4926,8 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "idDimensionValue")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lastModifiedInfo")
-            Core.<*> ( o Core..:? "latestTraffickedCreativeId"
+            Core.<*> ( o
+                         Core..:? "latestTraffickedCreativeId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "mediaDescription")
@@ -5108,9 +4937,7 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "overrideCss")
             Core.<*> (o Core..:? "progressOffset")
             Core.<*> (o Core..:? "redirectUrl")
-            Core.<*> ( o Core..:? "renderingId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "renderingId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "renderingIdDimensionValue")
             Core.<*> (o Core..:? "requiredFlashPluginVersion")
             Core.<*> (o Core..:? "requiredFlashVersion")
@@ -5119,25 +4946,21 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "skippable")
             Core.<*> (o Core..:? "sslCompliant")
             Core.<*> (o Core..:? "sslOverride")
-            Core.<*> ( o Core..:? "studioAdvertiserId"
+            Core.<*> ( o
+                         Core..:? "studioAdvertiserId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "studioCreativeId"
+            Core.<*> (o Core..:? "studioCreativeId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "studioTraffickedCreativeId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "studioTraffickedCreativeId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "thirdPartyBackupImageImpressionsUrl")
             Core.<*> (o Core..:? "thirdPartyRichMediaImpressionsUrl")
             Core.<*> (o Core..:? "thirdPartyUrls")
             Core.<*> (o Core..:? "timerCustomEvents")
-            Core.<*> ( o Core..:? "totalFileSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalFileSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "universalAdId")
             Core.<*> (o Core..:? "version")
@@ -5147,27 +4970,22 @@ instance Core.ToJSON Creative where
   toJSON Creative {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("active" Core..=) Core.<$> active,
             ("adParameters" Core..=) Core.<$> adParameters,
             ("adTagKeys" Core..=) Core.<$> adTagKeys,
             ("additionalSizes" Core..=) Core.<$> additionalSizes,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("allowScriptAccess" Core..=)
-              Core.<$> allowScriptAccess,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("allowScriptAccess" Core..=) Core.<$> allowScriptAccess,
             ("archived" Core..=) Core.<$> archived,
             ("artworkType" Core..=) Core.<$> artworkType,
             ("authoringSource" Core..=) Core.<$> authoringSource,
             ("authoringTool" Core..=) Core.<$> authoringTool,
-            ("autoAdvanceImages" Core..=)
-              Core.<$> autoAdvanceImages,
+            ("autoAdvanceImages" Core..=) Core.<$> autoAdvanceImages,
             ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("backupImageClickThroughUrl" Core..=)
               Core.<$> backupImageClickThroughUrl,
-            ("backupImageFeatures" Core..=)
-              Core.<$> backupImageFeatures,
+            ("backupImageFeatures" Core..=) Core.<$> backupImageFeatures,
             ("backupImageReportingLabel" Core..=)
               Core.<$> backupImageReportingLabel,
             ("backupImageTargetWindow" Core..=)
@@ -5178,70 +4996,61 @@ instance Core.ToJSON Creative where
               Core.. Core.fmap Core.AsText
               Core.<$> companionCreatives,
             ("compatibility" Core..=) Core.<$> compatibility,
-            ("convertFlashToHtml5" Core..=)
-              Core.<$> convertFlashToHtml5,
-            ("counterCustomEvents" Core..=)
-              Core.<$> counterCustomEvents,
-            ("creativeAssetSelection" Core..=)
-              Core.<$> creativeAssetSelection,
+            ("convertFlashToHtml5" Core..=) Core.<$> convertFlashToHtml5,
+            ("counterCustomEvents" Core..=) Core.<$> counterCustomEvents,
+            ("creativeAssetSelection" Core..=) Core.<$> creativeAssetSelection,
             ("creativeAssets" Core..=) Core.<$> creativeAssets,
             ("creativeFieldAssignments" Core..=)
               Core.<$> creativeFieldAssignments,
             ("customKeyValues" Core..=) Core.<$> customKeyValues,
-            ("dynamicAssetSelection" Core..=)
-              Core.<$> dynamicAssetSelection,
-            ("exitCustomEvents" Core..=)
-              Core.<$> exitCustomEvents,
+            ("dynamicAssetSelection" Core..=) Core.<$> dynamicAssetSelection,
+            ("exitCustomEvents" Core..=) Core.<$> exitCustomEvents,
             ("fsCommand" Core..=) Core.<$> fsCommand,
             ("htmlCode" Core..=) Core.<$> htmlCode,
             ("htmlCodeLocked" Core..=) Core.<$> htmlCodeLocked,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("latestTraffickedCreativeId" Core..=)
               Core.. Core.AsText
               Core.<$> latestTraffickedCreativeId,
-            ("mediaDescription" Core..=)
-              Core.<$> mediaDescription,
+            ("mediaDescription" Core..=) Core.<$> mediaDescription,
             ("mediaDuration" Core..=) Core.<$> mediaDuration,
             ("name" Core..=) Core.<$> name,
             ("obaIcon" Core..=) Core.<$> obaIcon,
             ("overrideCss" Core..=) Core.<$> overrideCss,
             ("progressOffset" Core..=) Core.<$> progressOffset,
             ("redirectUrl" Core..=) Core.<$> redirectUrl,
-            ("renderingId" Core..=) Core.. Core.AsText
-              Core.<$> renderingId,
+            ("renderingId" Core..=) Core.. Core.AsText Core.<$> renderingId,
             ("renderingIdDimensionValue" Core..=)
               Core.<$> renderingIdDimensionValue,
             ("requiredFlashPluginVersion" Core..=)
               Core.<$> requiredFlashPluginVersion,
-            ("requiredFlashVersion" Core..=)
-              Core.<$> requiredFlashVersion,
+            ("requiredFlashVersion" Core..=) Core.<$> requiredFlashVersion,
             ("size" Core..=) Core.<$> size,
             ("skipOffset" Core..=) Core.<$> skipOffset,
             ("skippable" Core..=) Core.<$> skippable,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("sslOverride" Core..=) Core.<$> sslOverride,
-            ("studioAdvertiserId" Core..=) Core.. Core.AsText
+            ("studioAdvertiserId" Core..=)
+              Core.. Core.AsText
               Core.<$> studioAdvertiserId,
-            ("studioCreativeId" Core..=) Core.. Core.AsText
+            ("studioCreativeId" Core..=)
+              Core.. Core.AsText
               Core.<$> studioCreativeId,
             ("studioTraffickedCreativeId" Core..=)
               Core.. Core.AsText
               Core.<$> studioTraffickedCreativeId,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("thirdPartyBackupImageImpressionsUrl" Core..=)
               Core.<$> thirdPartyBackupImageImpressionsUrl,
             ("thirdPartyRichMediaImpressionsUrl" Core..=)
               Core.<$> thirdPartyRichMediaImpressionsUrl,
             ("thirdPartyUrls" Core..=) Core.<$> thirdPartyUrls,
-            ("timerCustomEvents" Core..=)
-              Core.<$> timerCustomEvents,
-            ("totalFileSize" Core..=) Core.. Core.AsText
+            ("timerCustomEvents" Core..=) Core.<$> timerCustomEvents,
+            ("totalFileSize" Core..=)
+              Core.. Core.AsText
               Core.<$> totalFileSize,
             ("type" Core..=) Core.<$> type',
             ("universalAdId" Core..=) Core.<$> universalAdId,
@@ -5432,7 +5241,8 @@ instance Core.FromJSON CreativeAsset where
             Core.<*> (o Core..:? "bitRate")
             Core.<*> (o Core..:? "childAssetType")
             Core.<*> (o Core..:? "collapsedSize")
-            Core.<*> ( o Core..:? "companionCreativeIds"
+            Core.<*> ( o
+                         Core..:? "companionCreativeIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "customStartTimeValue")
@@ -5441,9 +5251,7 @@ instance Core.FromJSON CreativeAsset where
             Core.<*> (o Core..:? "duration")
             Core.<*> (o Core..:? "durationType")
             Core.<*> (o Core..:? "expandedDimension")
-            Core.<*> ( o Core..:? "fileSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "fileSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "flashVersion")
             Core.<*> (o Core..:? "frameRate")
             Core.<*> (o Core..:? "hideFlashObjects")
@@ -5495,28 +5303,20 @@ instance Core.ToJSON CreativeAsset where
             ("companionCreativeIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> companionCreativeIds,
-            ("customStartTimeValue" Core..=)
-              Core.<$> customStartTimeValue,
-            ("detectedFeatures" Core..=)
-              Core.<$> detectedFeatures,
+            ("customStartTimeValue" Core..=) Core.<$> customStartTimeValue,
+            ("detectedFeatures" Core..=) Core.<$> detectedFeatures,
             ("displayType" Core..=) Core.<$> displayType,
             ("duration" Core..=) Core.<$> duration,
             ("durationType" Core..=) Core.<$> durationType,
-            ("expandedDimension" Core..=)
-              Core.<$> expandedDimension,
-            ("fileSize" Core..=) Core.. Core.AsText
-              Core.<$> fileSize,
+            ("expandedDimension" Core..=) Core.<$> expandedDimension,
+            ("fileSize" Core..=) Core.. Core.AsText Core.<$> fileSize,
             ("flashVersion" Core..=) Core.<$> flashVersion,
             ("frameRate" Core..=) Core.<$> frameRate,
-            ("hideFlashObjects" Core..=)
-              Core.<$> hideFlashObjects,
-            ("hideSelectionBoxes" Core..=)
-              Core.<$> hideSelectionBoxes,
-            ("horizontallyLocked" Core..=)
-              Core.<$> horizontallyLocked,
+            ("hideFlashObjects" Core..=) Core.<$> hideFlashObjects,
+            ("hideSelectionBoxes" Core..=) Core.<$> hideSelectionBoxes,
+            ("horizontallyLocked" Core..=) Core.<$> horizontallyLocked,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("mediaDuration" Core..=) Core.<$> mediaDuration,
             ("mimeType" Core..=) Core.<$> mimeType,
             ("offset" Core..=) Core.<$> offset,
@@ -5524,23 +5324,18 @@ instance Core.ToJSON CreativeAsset where
             ("originalBackup" Core..=) Core.<$> originalBackup,
             ("politeLoad" Core..=) Core.<$> politeLoad,
             ("position" Core..=) Core.<$> position,
-            ("positionLeftUnit" Core..=)
-              Core.<$> positionLeftUnit,
+            ("positionLeftUnit" Core..=) Core.<$> positionLeftUnit,
             ("positionTopUnit" Core..=) Core.<$> positionTopUnit,
-            ("progressiveServingUrl" Core..=)
-              Core.<$> progressiveServingUrl,
+            ("progressiveServingUrl" Core..=) Core.<$> progressiveServingUrl,
             ("pushdown" Core..=) Core.<$> pushdown,
-            ("pushdownDuration" Core..=)
-              Core.<$> pushdownDuration,
+            ("pushdownDuration" Core..=) Core.<$> pushdownDuration,
             ("role" Core..=) Core.<$> role',
             ("size" Core..=) Core.<$> size,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("startTimeType" Core..=) Core.<$> startTimeType,
-            ("streamingServingUrl" Core..=)
-              Core.<$> streamingServingUrl,
+            ("streamingServingUrl" Core..=) Core.<$> streamingServingUrl,
             ("transparency" Core..=) Core.<$> transparency,
-            ("verticallyLocked" Core..=)
-              Core.<$> verticallyLocked,
+            ("verticallyLocked" Core..=) Core.<$> verticallyLocked,
             ("windowMode" Core..=) Core.<$> windowMode,
             ("zIndex" Core..=) Core.<$> zIndex,
             ("zipFilename" Core..=) Core.<$> zipFilename,
@@ -5562,7 +5357,8 @@ data CreativeAssetId = CreativeAssetId
 -- | Creates a value of 'CreativeAssetId' with the minimum fields required to make a request.
 newCreativeAssetId ::
   CreativeAssetId
-newCreativeAssetId = CreativeAssetId {name = Core.Nothing, type' = Core.Nothing}
+newCreativeAssetId =
+  CreativeAssetId {name = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON CreativeAssetId where
   parseJSON =
@@ -5570,16 +5366,15 @@ instance Core.FromJSON CreativeAssetId where
       "CreativeAssetId"
       ( \o ->
           CreativeAssetId
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON CreativeAssetId where
   toJSON CreativeAssetId {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("name" Core..=) Core.<$> name, ("type" Core..=) Core.<$> type']
       )
 
 -- | CreativeAssets contains properties of a creative asset file which will be uploaded or has already been uploaded. Refer to the creative sample code for how to upload assets and insert a creative.
@@ -5652,24 +5447,17 @@ instance Core.ToJSON CreativeAssetMetadata where
   toJSON CreativeAssetMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("assetIdentifier" Core..=)
-              Core.<$> assetIdentifier,
+          [ ("assetIdentifier" Core..=) Core.<$> assetIdentifier,
             ("clickTags" Core..=) Core.<$> clickTags,
-            ("counterCustomEvents" Core..=)
-              Core.<$> counterCustomEvents,
-            ("detectedFeatures" Core..=)
-              Core.<$> detectedFeatures,
-            ("exitCustomEvents" Core..=)
-              Core.<$> exitCustomEvents,
+            ("counterCustomEvents" Core..=) Core.<$> counterCustomEvents,
+            ("detectedFeatures" Core..=) Core.<$> detectedFeatures,
+            ("exitCustomEvents" Core..=) Core.<$> exitCustomEvents,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
             ("richMedia" Core..=) Core.<$> richMedia,
-            ("timerCustomEvents" Core..=)
-              Core.<$> timerCustomEvents,
-            ("warnedValidationRules" Core..=)
-              Core.<$> warnedValidationRules
+            ("timerCustomEvents" Core..=) Core.<$> timerCustomEvents,
+            ("warnedValidationRules" Core..=) Core.<$> warnedValidationRules
           ]
       )
 
@@ -5688,7 +5476,10 @@ data CreativeAssetSelection = CreativeAssetSelection
 newCreativeAssetSelection ::
   CreativeAssetSelection
 newCreativeAssetSelection =
-  CreativeAssetSelection {defaultAssetId = Core.Nothing, rules = Core.Nothing}
+  CreativeAssetSelection
+    { defaultAssetId = Core.Nothing,
+      rules = Core.Nothing
+    }
 
 instance Core.FromJSON CreativeAssetSelection where
   parseJSON =
@@ -5696,9 +5487,7 @@ instance Core.FromJSON CreativeAssetSelection where
       "CreativeAssetSelection"
       ( \o ->
           CreativeAssetSelection
-            Core.<$> ( o Core..:? "defaultAssetId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "defaultAssetId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "rules")
       )
 
@@ -5706,7 +5495,8 @@ instance Core.ToJSON CreativeAssetSelection where
   toJSON CreativeAssetSelection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultAssetId" Core..=) Core.. Core.AsText
+          [ ("defaultAssetId" Core..=)
+              Core.. Core.AsText
               Core.<$> defaultAssetId,
             ("rules" Core..=) Core.<$> rules
           ]
@@ -5730,7 +5520,6 @@ data CreativeAssignment = CreativeAssignment
     creativeId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the creative. This is a read-only, auto-generated field.
     creativeIdDimensionValue :: (Core.Maybe DimensionValue),
-    -- |
     endTime :: (Core.Maybe Core.DateTime),
     -- | Rich media exit overrides for this creative assignment. Applicable when the creative type is any of the following: - DISPLAY - RICH/MEDIA/INPAGE - RICH/MEDIA/INPAGE/FLOATING - RICH/MEDIA/IM/EXPAND - RICH/MEDIA/EXPANDING - RICH/MEDIA/INTERSTITIAL/FLOAT - RICH/MEDIA/MOBILE/IN/APP - RICH/MEDIA/MULTI/FLOATING - RICH/MEDIA/PEEL/DOWN - VPAID/LINEAR - VPAID/NON/LINEAR
     richMediaExitOverrides :: (Core.Maybe [RichMediaExitOverride]),
@@ -5738,7 +5527,6 @@ data CreativeAssignment = CreativeAssignment
     sequence :: (Core.Maybe Core.Int32),
     -- | Whether the creative to be assigned is SSL-compliant. This is a read-only field that is auto-generated when the ad is inserted or updated.
     sslCompliant :: (Core.Maybe Core.Bool),
-    -- |
     startTime :: (Core.Maybe Core.DateTime),
     -- | Weight of the creative assignment, applicable when the rotation type is CREATIVE/ROTATION/TYPE_RANDOM. Value must be greater than or equal to 1.
     weight :: (Core.Maybe Core.Int32)
@@ -5776,9 +5564,7 @@ instance Core.FromJSON CreativeAssignment where
             Core.<*> (o Core..:? "clickThroughUrl")
             Core.<*> (o Core..:? "companionCreativeOverrides")
             Core.<*> (o Core..:? "creativeGroupAssignments")
-            Core.<*> ( o Core..:? "creativeId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creativeId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "creativeIdDimensionValue")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "richMediaExitOverrides")
@@ -5799,13 +5585,11 @@ instance Core.ToJSON CreativeAssignment where
               Core.<$> companionCreativeOverrides,
             ("creativeGroupAssignments" Core..=)
               Core.<$> creativeGroupAssignments,
-            ("creativeId" Core..=) Core.. Core.AsText
-              Core.<$> creativeId,
+            ("creativeId" Core..=) Core.. Core.AsText Core.<$> creativeId,
             ("creativeIdDimensionValue" Core..=)
               Core.<$> creativeIdDimensionValue,
             ("endTime" Core..=) Core.<$> endTime,
-            ("richMediaExitOverrides" Core..=)
-              Core.<$> richMediaExitOverrides,
+            ("richMediaExitOverrides" Core..=) Core.<$> richMediaExitOverrides,
             ("sequence" Core..=) Core.<$> sequence,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("startTime" Core..=) Core.<$> startTime,
@@ -5844,9 +5628,7 @@ instance Core.FromJSON CreativeClickThroughUrl where
           CreativeClickThroughUrl
             Core.<$> (o Core..:? "computedClickThroughUrl")
             Core.<*> (o Core..:? "customClickThroughUrl")
-            Core.<*> ( o Core..:? "landingPageId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "landingPageId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CreativeClickThroughUrl where
@@ -5855,9 +5637,9 @@ instance Core.ToJSON CreativeClickThroughUrl where
       ( Core.catMaybes
           [ ("computedClickThroughUrl" Core..=)
               Core.<$> computedClickThroughUrl,
-            ("customClickThroughUrl" Core..=)
-              Core.<$> customClickThroughUrl,
-            ("landingPageId" Core..=) Core.. Core.AsText
+            ("customClickThroughUrl" Core..=) Core.<$> customClickThroughUrl,
+            ("landingPageId" Core..=)
+              Core.. Core.AsText
               Core.<$> landingPageId
           ]
       )
@@ -5912,7 +5694,8 @@ instance Core.FromJSON CreativeCustomEvent where
       "CreativeCustomEvent"
       ( \o ->
           CreativeCustomEvent
-            Core.<$> ( o Core..:? "advertiserCustomEventId"
+            Core.<$> ( o
+                         Core..:? "advertiserCustomEventId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "advertiserCustomEventName")
@@ -5939,14 +5722,11 @@ instance Core.ToJSON CreativeCustomEvent where
               Core.<$> advertiserCustomEventType,
             ("artworkLabel" Core..=) Core.<$> artworkLabel,
             ("artworkType" Core..=) Core.<$> artworkType,
-            ("exitClickThroughUrl" Core..=)
-              Core.<$> exitClickThroughUrl,
+            ("exitClickThroughUrl" Core..=) Core.<$> exitClickThroughUrl,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("popupWindowProperties" Core..=)
-              Core.<$> popupWindowProperties,
+            ("popupWindowProperties" Core..=) Core.<$> popupWindowProperties,
             ("targetType" Core..=) Core.<$> targetType,
-            ("videoReportingId" Core..=)
-              Core.<$> videoReportingId
+            ("videoReportingId" Core..=) Core.<$> videoReportingId
           ]
       )
 
@@ -5991,36 +5771,27 @@ instance Core.FromJSON CreativeField where
       "CreativeField"
       ( \o ->
           CreativeField
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CreativeField where
   toJSON CreativeField {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -6050,10 +5821,9 @@ instance Core.FromJSON CreativeFieldAssignment where
       "CreativeFieldAssignment"
       ( \o ->
           CreativeFieldAssignment
-            Core.<$> ( o Core..:? "creativeFieldId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "creativeFieldValueId"
+            Core.<$> (o Core..:? "creativeFieldId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "creativeFieldValueId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -6062,9 +5832,11 @@ instance Core.ToJSON CreativeFieldAssignment where
   toJSON CreativeFieldAssignment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeFieldId" Core..=) Core.. Core.AsText
+          [ ("creativeFieldId" Core..=)
+              Core.. Core.AsText
               Core.<$> creativeFieldId,
-            ("creativeFieldValueId" Core..=) Core.. Core.AsText
+            ("creativeFieldValueId" Core..=)
+              Core.. Core.AsText
               Core.<$> creativeFieldValueId
           ]
       )
@@ -6131,15 +5903,13 @@ newCreativeFieldValuesListResponse ::
   CreativeFieldValuesListResponse
 newCreativeFieldValuesListResponse =
   CreativeFieldValuesListResponse
-    { creativeFieldValues = Core.Nothing,
+    { creativeFieldValues =
+        Core.Nothing,
       kind = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreativeFieldValuesListResponse
-  where
+instance Core.FromJSON CreativeFieldValuesListResponse where
   parseJSON =
     Core.withObject
       "CreativeFieldValuesListResponse"
@@ -6154,8 +5924,7 @@ instance Core.ToJSON CreativeFieldValuesListResponse where
   toJSON CreativeFieldValuesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeFieldValues" Core..=)
-              Core.<$> creativeFieldValues,
+          [ ("creativeFieldValues" Core..=) Core.<$> creativeFieldValues,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -6249,38 +6018,29 @@ instance Core.FromJSON CreativeGroup where
       "CreativeGroup"
       ( \o ->
           CreativeGroup
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "groupNumber")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CreativeGroup where
   toJSON CreativeGroup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("groupNumber" Core..=) Core.<$> groupNumber,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -6310,9 +6070,7 @@ instance Core.FromJSON CreativeGroupAssignment where
       "CreativeGroupAssignment"
       ( \o ->
           CreativeGroupAssignment
-            Core.<$> ( o Core..:? "creativeGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "creativeGroupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "creativeGroupNumber")
       )
 
@@ -6320,10 +6078,10 @@ instance Core.ToJSON CreativeGroupAssignment where
   toJSON CreativeGroupAssignment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeGroupId" Core..=) Core.. Core.AsText
+          [ ("creativeGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> creativeGroupId,
-            ("creativeGroupNumber" Core..=)
-              Core.<$> creativeGroupNumber
+            ("creativeGroupNumber" Core..=) Core.<$> creativeGroupNumber
           ]
       )
 
@@ -6397,10 +6155,7 @@ newCreativeOptimizationConfiguration =
       optimizationModel = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreativeOptimizationConfiguration
-  where
+instance Core.FromJSON CreativeOptimizationConfiguration where
   parseJSON =
     Core.withObject
       "CreativeOptimizationConfiguration"
@@ -6412,19 +6167,14 @@ instance
             Core.<*> (o Core..:? "optimizationModel")
       )
 
-instance
-  Core.ToJSON
-    CreativeOptimizationConfiguration
-  where
+instance Core.ToJSON CreativeOptimizationConfiguration where
   toJSON CreativeOptimizationConfiguration {..} =
     Core.object
       ( Core.catMaybes
           [ ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("name" Core..=) Core.<$> name,
-            ("optimizationActivitys" Core..=)
-              Core.<$> optimizationActivitys,
-            ("optimizationModel" Core..=)
-              Core.<$> optimizationModel
+            ("optimizationActivitys" Core..=) Core.<$> optimizationActivitys,
+            ("optimizationModel" Core..=) Core.<$> optimizationModel
           ]
       )
 
@@ -6461,7 +6211,8 @@ instance Core.FromJSON CreativeRotation where
       ( \o ->
           CreativeRotation
             Core.<$> (o Core..:? "creativeAssignments")
-            Core.<*> ( o Core..:? "creativeOptimizationConfigurationId"
+            Core.<*> ( o
+                         Core..:? "creativeOptimizationConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "type")
@@ -6472,8 +6223,7 @@ instance Core.ToJSON CreativeRotation where
   toJSON CreativeRotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeAssignments" Core..=)
-              Core.<$> creativeAssignments,
+          [ ("creativeAssignments" Core..=) Core.<$> creativeAssignments,
             ("creativeOptimizationConfigurationId" Core..=)
               Core.. Core.AsText
               Core.<$> creativeOptimizationConfigurationId,
@@ -6549,17 +6299,15 @@ newCrossDimensionReachReportCompatibleFields ::
   CrossDimensionReachReportCompatibleFields
 newCrossDimensionReachReportCompatibleFields =
   CrossDimensionReachReportCompatibleFields
-    { breakdown = Core.Nothing,
+    { breakdown =
+        Core.Nothing,
       dimensionFilters = Core.Nothing,
       kind = Core.Nothing,
       metrics = Core.Nothing,
       overlapMetrics = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CrossDimensionReachReportCompatibleFields
-  where
+instance Core.FromJSON CrossDimensionReachReportCompatibleFields where
   parseJSON =
     Core.withObject
       "CrossDimensionReachReportCompatibleFields"
@@ -6572,19 +6320,65 @@ instance
             Core.<*> (o Core..:? "overlapMetrics")
       )
 
-instance
-  Core.ToJSON
-    CrossDimensionReachReportCompatibleFields
-  where
+instance Core.ToJSON CrossDimensionReachReportCompatibleFields where
   toJSON CrossDimensionReachReportCompatibleFields {..} =
     Core.object
       ( Core.catMaybes
           [ ("breakdown" Core..=) Core.<$> breakdown,
-            ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("kind" Core..=) Core.<$> kind,
             ("metrics" Core..=) Core.<$> metrics,
             ("overlapMetrics" Core..=) Core.<$> overlapMetrics
+          ]
+      )
+
+-- | Represents fields that are compatible to be selected for a report of type \"CROSS/MEDIA/REACH\".
+--
+-- /See:/ 'newCrossMediaReachReportCompatibleFields' smart constructor.
+data CrossMediaReachReportCompatibleFields = CrossMediaReachReportCompatibleFields
+  { -- | Dimensions which are compatible to be selected in the \"dimensionFilters\" section of the report.
+    dimensionFilters :: (Core.Maybe [Dimension]),
+    -- | Dimensions which are compatible to be selected in the \"dimensions\" section of the report.
+    dimensions :: (Core.Maybe [Dimension]),
+    -- | The kind of resource this is, in this case dfareporting#crossMediaReachReportCompatibleFields.
+    kind :: (Core.Maybe Core.Text),
+    -- | Metrics which are compatible to be selected in the \"metricNames\" section of the report.
+    metrics :: (Core.Maybe [Metric])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CrossMediaReachReportCompatibleFields' with the minimum fields required to make a request.
+newCrossMediaReachReportCompatibleFields ::
+  CrossMediaReachReportCompatibleFields
+newCrossMediaReachReportCompatibleFields =
+  CrossMediaReachReportCompatibleFields
+    { dimensionFilters =
+        Core.Nothing,
+      dimensions = Core.Nothing,
+      kind = Core.Nothing,
+      metrics = Core.Nothing
+    }
+
+instance Core.FromJSON CrossMediaReachReportCompatibleFields where
+  parseJSON =
+    Core.withObject
+      "CrossMediaReachReportCompatibleFields"
+      ( \o ->
+          CrossMediaReachReportCompatibleFields
+            Core.<$> (o Core..:? "dimensionFilters")
+            Core.<*> (o Core..:? "dimensions")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "metrics")
+      )
+
+instance Core.ToJSON CrossMediaReachReportCompatibleFields where
+  toJSON CrossMediaReachReportCompatibleFields {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
+            ("dimensions" Core..=) Core.<$> dimensions,
+            ("kind" Core..=) Core.<$> kind,
+            ("metrics" Core..=) Core.<$> metrics
           ]
       )
 
@@ -6594,7 +6388,7 @@ instance
 data CustomFloodlightVariable = CustomFloodlightVariable
   { -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#customFloodlightVariable\".
     kind :: (Core.Maybe Core.Text),
-    -- | The type of custom floodlight variable to supply a value for. These map to the \"u[1-20]=\" in the tags.
+    -- | The type of custom floodlight variable to supply a value for. These map to the \"u[1-100]=\" in the tags.
     type' :: (Core.Maybe CustomFloodlightVariable_Type),
     -- | The value of the custom floodlight variable. The length of string must not exceed 100 characters.
     value :: (Core.Maybe Core.Text)
@@ -6647,7 +6441,10 @@ data CustomRichMediaEvents = CustomRichMediaEvents
 newCustomRichMediaEvents ::
   CustomRichMediaEvents
 newCustomRichMediaEvents =
-  CustomRichMediaEvents {filteredEventIds = Core.Nothing, kind = Core.Nothing}
+  CustomRichMediaEvents
+    { filteredEventIds = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON CustomRichMediaEvents where
   parseJSON =
@@ -6663,8 +6460,7 @@ instance Core.ToJSON CustomRichMediaEvents where
   toJSON CustomRichMediaEvents {..} =
     Core.object
       ( Core.catMaybes
-          [ ("filteredEventIds" Core..=)
-              Core.<$> filteredEventIds,
+          [ ("filteredEventIds" Core..=) Core.<$> filteredEventIds,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -6739,10 +6535,7 @@ newCustomViewabilityMetricConfiguration =
       viewabilityPercent = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CustomViewabilityMetricConfiguration
-  where
+instance Core.FromJSON CustomViewabilityMetricConfiguration where
   parseJSON =
     Core.withObject
       "CustomViewabilityMetricConfiguration"
@@ -6754,18 +6547,14 @@ instance
             Core.<*> (o Core..:? "viewabilityPercent")
       )
 
-instance
-  Core.ToJSON
-    CustomViewabilityMetricConfiguration
-  where
+instance Core.ToJSON CustomViewabilityMetricConfiguration where
   toJSON CustomViewabilityMetricConfiguration {..} =
     Core.object
       ( Core.catMaybes
           [ ("audible" Core..=) Core.<$> audible,
             ("timeMillis" Core..=) Core.<$> timeMillis,
             ("timePercent" Core..=) Core.<$> timePercent,
-            ("viewabilityPercent" Core..=)
-              Core.<$> viewabilityPercent
+            ("viewabilityPercent" Core..=) Core.<$> viewabilityPercent
           ]
       )
 
@@ -6773,13 +6562,11 @@ instance
 --
 -- /See:/ 'newDateRange' smart constructor.
 data DateRange = DateRange
-  { -- |
-    endDate :: (Core.Maybe Core.Date),
+  { endDate :: (Core.Maybe Core.Date),
     -- | The kind of resource this is, in this case dfareporting#dateRange.
     kind :: (Core.Maybe Core.Text),
     -- | The date range relative to the date of when the report is run.
     relativeDateRange :: (Core.Maybe DateRange_RelativeDateRange),
-    -- |
     startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6813,8 +6600,7 @@ instance Core.ToJSON DateRange where
       ( Core.catMaybes
           [ ("endDate" Core..=) Core.<$> endDate,
             ("kind" Core..=) Core.<$> kind,
-            ("relativeDateRange" Core..=)
-              Core.<$> relativeDateRange,
+            ("relativeDateRange" Core..=) Core.<$> relativeDateRange,
             ("startDate" Core..=) Core.<$> startDate
           ]
       )
@@ -6902,7 +6688,8 @@ instance Core.FromJSON DeepLink where
             Core.<*> (o Core..:? "fallbackUrl")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "mobileApp")
-            Core.<*> ( o Core..:? "remarketingListIds"
+            Core.<*> ( o
+                         Core..:? "remarketingListIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -6937,29 +6724,25 @@ newDefaultClickThroughEventTagProperties ::
   DefaultClickThroughEventTagProperties
 newDefaultClickThroughEventTagProperties =
   DefaultClickThroughEventTagProperties
-    { defaultClickThroughEventTagId = Core.Nothing,
+    { defaultClickThroughEventTagId =
+        Core.Nothing,
       overrideInheritedEventTag = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DefaultClickThroughEventTagProperties
-  where
+instance Core.FromJSON DefaultClickThroughEventTagProperties where
   parseJSON =
     Core.withObject
       "DefaultClickThroughEventTagProperties"
       ( \o ->
           DefaultClickThroughEventTagProperties
-            Core.<$> ( o Core..:? "defaultClickThroughEventTagId"
+            Core.<$> ( o
+                         Core..:? "defaultClickThroughEventTagId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "overrideInheritedEventTag")
       )
 
-instance
-  Core.ToJSON
-    DefaultClickThroughEventTagProperties
-  where
+instance Core.ToJSON DefaultClickThroughEventTagProperties where
   toJSON DefaultClickThroughEventTagProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -7005,9 +6788,7 @@ instance Core.FromJSON DeliverySchedule where
           DeliverySchedule
             Core.<$> (o Core..:? "frequencyCap")
             Core.<*> (o Core..:? "hardCutoff")
-            Core.<*> ( o Core..:? "impressionRatio"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "impressionRatio" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "priority")
       )
 
@@ -7017,7 +6798,8 @@ instance Core.ToJSON DeliverySchedule where
       ( Core.catMaybes
           [ ("frequencyCap" Core..=) Core.<$> frequencyCap,
             ("hardCutoff" Core..=) Core.<$> hardCutoff,
-            ("impressionRatio" Core..=) Core.. Core.AsText
+            ("impressionRatio" Core..=)
+              Core.. Core.AsText
               Core.<$> impressionRatio,
             ("priority" Core..=) Core.<$> priority
           ]
@@ -7075,8 +6857,7 @@ instance Core.ToJSON DfpSettings where
               Core.<$> programmaticPlacementAccepted,
             ("pubPaidPlacementAccepted" Core..=)
               Core.<$> pubPaidPlacementAccepted,
-            ("publisherPortalOnly" Core..=)
-              Core.<$> publisherPortalOnly
+            ("publisherPortalOnly" Core..=) Core.<$> publisherPortalOnly
           ]
       )
 
@@ -7102,16 +6883,15 @@ instance Core.FromJSON Dimension where
       "Dimension"
       ( \o ->
           Dimension
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON Dimension where
   toJSON Dimension {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("kind" Core..=) Core.<$> kind, ("name" Core..=) Core.<$> name]
       )
 
 -- | Represents a dimension filter.
@@ -7272,13 +7052,11 @@ instance Core.ToJSON DimensionValueList where
 data DimensionValueRequest = DimensionValueRequest
   { -- | The name of the dimension for which values should be requested.
     dimensionName :: (Core.Maybe Core.Text),
-    -- |
     endDate :: (Core.Maybe Core.Date),
     -- | The list of filters by which to filter values. The filters are ANDed.
     filters :: (Core.Maybe [DimensionFilter]),
     -- | The kind of request this is, in this case dfareporting#dimensionValueRequest .
     kind :: (Core.Maybe Core.Text),
-    -- |
     startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7336,6 +7114,8 @@ data DirectorySite = DirectorySite
     kind :: (Core.Maybe Core.Text),
     -- | Name of this directory site.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Default publisher specification ID of video placements under this directory site. Possible values are: * @1@, Hulu * @2@, NBC * @3@, CBS * @4@, CBS Desktop * @5@, Discovery * @6@, VEVO HD * @7@, VEVO Vertical * @8@, Fox * @9@, CW Network * @10@, Disney * @11@, IGN * @12@, NFL.com * @13@, Turner Broadcasting * @14@, Tubi on Fox * @15@, Hearst Corporation * @16@, Twitch Desktop * @17@, ABC * @18@, Univision * @19@, MLB.com * @20@, MLB.com Mobile * @21@, MLB.com OTT * @22@, Polsat * @23@, TVN * @24@, Mediaset * @25@, Antena 3 * @26@, Mediamond * @27@, Sky Italia * @28@, Tubi on CBS * @29@, Spotify * @30@, Paramount * @31@, Max
+    publisherSpecificationId :: (Core.Maybe Core.Int64),
     -- | Directory site settings.
     settings :: (Core.Maybe DirectorySiteSettings),
     -- | URL of this directory site.
@@ -7354,6 +7134,7 @@ newDirectorySite =
       interstitialTagFormats = Core.Nothing,
       kind = Core.Nothing,
       name = Core.Nothing,
+      publisherSpecificationId = Core.Nothing,
       settings = Core.Nothing,
       url = Core.Nothing
     }
@@ -7370,6 +7151,10 @@ instance Core.FromJSON DirectorySite where
             Core.<*> (o Core..:? "interstitialTagFormats")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
+            Core.<*> ( o
+                         Core..:? "publisherSpecificationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "settings")
             Core.<*> (o Core..:? "url")
       )
@@ -7379,14 +7164,14 @@ instance Core.ToJSON DirectorySite where
     Core.object
       ( Core.catMaybes
           [ ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
-            ("inpageTagFormats" Core..=)
-              Core.<$> inpageTagFormats,
-            ("interstitialTagFormats" Core..=)
-              Core.<$> interstitialTagFormats,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
+            ("inpageTagFormats" Core..=) Core.<$> inpageTagFormats,
+            ("interstitialTagFormats" Core..=) Core.<$> interstitialTagFormats,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
+            ("publisherSpecificationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> publisherSpecificationId,
             ("settings" Core..=) Core.<$> settings,
             ("url" Core..=) Core.<$> url
           ]
@@ -7434,8 +7219,7 @@ instance Core.ToJSON DirectorySiteSettings where
   toJSON DirectorySiteSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeViewOptOut" Core..=)
-              Core.<$> activeViewOptOut,
+          [ ("activeViewOptOut" Core..=) Core.<$> activeViewOptOut,
             ("dfpSettings" Core..=) Core.<$> dfpSettings,
             ("instreamVideoPlacementAccepted" Core..=)
               Core.<$> instreamVideoPlacementAccepted,
@@ -7488,42 +7272,6 @@ instance Core.ToJSON DirectorySitesListResponse where
           ]
       )
 
--- | Represents a Disjunctive Match Statement resource, which is a conjunction (and) of disjunctive (or) boolean statements.
---
--- /See:/ 'newDisjunctiveMatchStatement' smart constructor.
-data DisjunctiveMatchStatement = DisjunctiveMatchStatement
-  { -- | The event filters contained within this disjunctive match statement.
-    eventFilters :: (Core.Maybe [EventFilter]),
-    -- | The kind of resource this is, in this case dfareporting#disjunctiveMatchStatement.
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DisjunctiveMatchStatement' with the minimum fields required to make a request.
-newDisjunctiveMatchStatement ::
-  DisjunctiveMatchStatement
-newDisjunctiveMatchStatement =
-  DisjunctiveMatchStatement {eventFilters = Core.Nothing, kind = Core.Nothing}
-
-instance Core.FromJSON DisjunctiveMatchStatement where
-  parseJSON =
-    Core.withObject
-      "DisjunctiveMatchStatement"
-      ( \o ->
-          DisjunctiveMatchStatement
-            Core.<$> (o Core..:? "eventFilters")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON DisjunctiveMatchStatement where
-  toJSON DisjunctiveMatchStatement {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("eventFilters" Core..=) Core.<$> eventFilters,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
 -- | Contains properties of a dynamic targeting key. Dynamic targeting keys are unique, user-friendly labels, created at the advertiser level in DCM, that can be assigned to ads, creatives, and placements and used for targeting with Studio dynamic creatives. Use these labels instead of numeric Campaign Manager IDs (such as placement IDs) to save time and avoid errors in your dynamic feeds.
 --
 -- /See:/ 'newDynamicTargetingKey' smart constructor.
@@ -7558,9 +7306,7 @@ instance Core.FromJSON DynamicTargetingKey where
           DynamicTargetingKey
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "objectId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "objectId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectType")
       )
 
@@ -7570,8 +7316,7 @@ instance Core.ToJSON DynamicTargetingKey where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("objectId" Core..=) Core.. Core.AsText
-              Core.<$> objectId,
+            ("objectId" Core..=) Core.. Core.AsText Core.<$> objectId,
             ("objectType" Core..=) Core.<$> objectType
           ]
       )
@@ -7592,14 +7337,12 @@ newDynamicTargetingKeysListResponse ::
   DynamicTargetingKeysListResponse
 newDynamicTargetingKeysListResponse =
   DynamicTargetingKeysListResponse
-    { dynamicTargetingKeys = Core.Nothing,
+    { dynamicTargetingKeys =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DynamicTargetingKeysListResponse
-  where
+instance Core.FromJSON DynamicTargetingKeysListResponse where
   parseJSON =
     Core.withObject
       "DynamicTargetingKeysListResponse"
@@ -7613,8 +7356,7 @@ instance Core.ToJSON DynamicTargetingKeysListResponse where
   toJSON DynamicTargetingKeysListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dynamicTargetingKeys" Core..=)
-              Core.<$> dynamicTargetingKeys,
+          [ ("dynamicTargetingKeys" Core..=) Core.<$> dynamicTargetingKeys,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -7651,7 +7393,8 @@ instance Core.FromJSON EncryptionInfo where
       "EncryptionInfo"
       ( \o ->
           EncryptionInfo
-            Core.<$> ( o Core..:? "encryptionEntityId"
+            Core.<$> ( o
+                         Core..:? "encryptionEntityId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "encryptionEntityType")
@@ -7663,58 +7406,12 @@ instance Core.ToJSON EncryptionInfo where
   toJSON EncryptionInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("encryptionEntityId" Core..=) Core.. Core.AsText
+          [ ("encryptionEntityId" Core..=)
+              Core.. Core.AsText
               Core.<$> encryptionEntityId,
-            ("encryptionEntityType" Core..=)
-              Core.<$> encryptionEntityType,
-            ("encryptionSource" Core..=)
-              Core.<$> encryptionSource,
+            ("encryptionEntityType" Core..=) Core.<$> encryptionEntityType,
+            ("encryptionSource" Core..=) Core.<$> encryptionSource,
             ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
--- | Represents a DfaReporting event filter.
---
--- /See:/ 'newEventFilter' smart constructor.
-data EventFilter = EventFilter
-  { -- | The dimension filter contained within this EventFilter.
-    dimensionFilter :: (Core.Maybe PathReportDimensionValue),
-    -- | The kind of resource this is, in this case dfareporting#eventFilter.
-    kind :: (Core.Maybe Core.Text),
-    -- | Filter on a custom variable.
-    uvarFilter :: (Core.Maybe UvarFilter)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'EventFilter' with the minimum fields required to make a request.
-newEventFilter ::
-  EventFilter
-newEventFilter =
-  EventFilter
-    { dimensionFilter = Core.Nothing,
-      kind = Core.Nothing,
-      uvarFilter = Core.Nothing
-    }
-
-instance Core.FromJSON EventFilter where
-  parseJSON =
-    Core.withObject
-      "EventFilter"
-      ( \o ->
-          EventFilter
-            Core.<$> (o Core..:? "dimensionFilter")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "uvarFilter")
-      )
-
-instance Core.ToJSON EventFilter where
-  toJSON EventFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("dimensionFilter" Core..=)
-              Core.<$> dimensionFilter,
-            ("kind" Core..=) Core.<$> kind,
-            ("uvarFilter" Core..=) Core.<$> uvarFilter
           ]
       )
 
@@ -7792,16 +7489,10 @@ instance Core.FromJSON EventTag where
       "EventTag"
       ( \o ->
           EventTag
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "campaignIdDimensionValue")
             Core.<*> (o Core..:? "enabledByDefault")
             Core.<*> (o Core..:? "excludeFromAdxRequests")
@@ -7809,14 +7500,13 @@ instance Core.FromJSON EventTag where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "siteFilterType")
-            Core.<*> ( o Core..:? "siteIds"
+            Core.<*> ( o
+                         Core..:? "siteIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "sslCompliant")
             Core.<*> (o Core..:? "status")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "url")
             Core.<*> (o Core..:? "urlEscapeLevels")
@@ -7826,34 +7516,26 @@ instance Core.ToJSON EventTag where
   toJSON EventTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
               Core.<$> campaignIdDimensionValue,
-            ("enabledByDefault" Core..=)
-              Core.<$> enabledByDefault,
-            ("excludeFromAdxRequests" Core..=)
-              Core.<$> excludeFromAdxRequests,
+            ("enabledByDefault" Core..=) Core.<$> enabledByDefault,
+            ("excludeFromAdxRequests" Core..=) Core.<$> excludeFromAdxRequests,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("siteFilterType" Core..=) Core.<$> siteFilterType,
-            ("siteIds" Core..=) Core.. Core.fmap Core.AsText
-              Core.<$> siteIds,
+            ("siteIds" Core..=) Core.. Core.fmap Core.AsText Core.<$> siteIds,
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("status" Core..=) Core.<$> status,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("type" Core..=) Core.<$> type',
             ("url" Core..=) Core.<$> url,
-            ("urlEscapeLevels" Core..=)
-              Core.<$> urlEscapeLevels
+            ("urlEscapeLevels" Core..=) Core.<$> urlEscapeLevels
           ]
       )
 
@@ -7908,7 +7590,10 @@ data EventTagsListResponse = EventTagsListResponse
 newEventTagsListResponse ::
   EventTagsListResponse
 newEventTagsListResponse =
-  EventTagsListResponse {eventTags = Core.Nothing, kind = Core.Nothing}
+  EventTagsListResponse
+    { eventTags = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON EventTagsListResponse where
   parseJSON =
@@ -7985,12 +7670,8 @@ instance Core.FromJSON File where
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "reportId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "reportId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "urls")
       )
@@ -8005,10 +7686,10 @@ instance Core.ToJSON File where
             ("format" Core..=) Core.<$> format,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
-            ("reportId" Core..=) Core.. Core.AsText
-              Core.<$> reportId,
+            ("reportId" Core..=) Core.. Core.AsText Core.<$> reportId,
             ("status" Core..=) Core.<$> status,
             ("urls" Core..=) Core.<$> urls
           ]
@@ -8028,7 +7709,8 @@ data File_Urls = File_Urls
 -- | Creates a value of 'File_Urls' with the minimum fields required to make a request.
 newFile_Urls ::
   File_Urls
-newFile_Urls = File_Urls {apiUrl = Core.Nothing, browserUrl = Core.Nothing}
+newFile_Urls =
+  File_Urls {apiUrl = Core.Nothing, browserUrl = Core.Nothing}
 
 instance Core.FromJSON File_Urls where
   parseJSON =
@@ -8102,11 +7784,9 @@ instance Core.ToJSON FileList where
 --
 -- /See:/ 'newFlight' smart constructor.
 data Flight = Flight
-  { -- |
-    endDate :: (Core.Maybe Core.Date),
+  { endDate :: (Core.Maybe Core.Date),
     -- | Rate or cost of this flight.
     rateOrCost :: (Core.Maybe Core.Int64),
-    -- |
     startDate :: (Core.Maybe Core.Date),
     -- | Units of this flight.
     units :: (Core.Maybe Core.Int64)
@@ -8131,13 +7811,9 @@ instance Core.FromJSON Flight where
       ( \o ->
           Flight
             Core.<$> (o Core..:? "endDate")
-            Core.<*> ( o Core..:? "rateOrCost"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "rateOrCost" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "startDate")
-            Core.<*> ( o Core..:? "units"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "units" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Flight where
@@ -8145,8 +7821,7 @@ instance Core.ToJSON Flight where
     Core.object
       ( Core.catMaybes
           [ ("endDate" Core..=) Core.<$> endDate,
-            ("rateOrCost" Core..=) Core.. Core.AsText
-              Core.<$> rateOrCost,
+            ("rateOrCost" Core..=) Core.. Core.AsText Core.<$> rateOrCost,
             ("startDate" Core..=) Core.<$> startDate,
             ("units" Core..=) Core.. Core.AsText Core.<$> units
           ]
@@ -8156,9 +7831,9 @@ instance Core.ToJSON Flight where
 --
 -- /See:/ 'newFloodlightActivitiesGenerateTagResponse' smart constructor.
 data FloodlightActivitiesGenerateTagResponse = FloodlightActivitiesGenerateTagResponse
-  { -- | Generated tag for this Floodlight activity. For global site tags, this is the event snippet.
+  { -- | Generated tag for this Floodlight activity. For Google tags, this is the event snippet.
     floodlightActivityTag :: (Core.Maybe Core.Text),
-    -- | The global snippet section of a global site tag. The global site tag sets new cookies on your domain, which will store a unique identifier for a user or the ad click that brought the user to your site. Learn more.
+    -- | The global snippet section of a Google tag. The Google tag sets new cookies on your domain, which will store a unique identifier for a user or the ad click that brought the user to your site. Learn more.
     globalSiteTagGlobalSnippet :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#floodlightActivitiesGenerateTagResponse\".
     kind :: (Core.Maybe Core.Text)
@@ -8170,15 +7845,13 @@ newFloodlightActivitiesGenerateTagResponse ::
   FloodlightActivitiesGenerateTagResponse
 newFloodlightActivitiesGenerateTagResponse =
   FloodlightActivitiesGenerateTagResponse
-    { floodlightActivityTag = Core.Nothing,
+    { floodlightActivityTag =
+        Core.Nothing,
       globalSiteTagGlobalSnippet = Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightActivitiesGenerateTagResponse
-  where
+instance Core.FromJSON FloodlightActivitiesGenerateTagResponse where
   parseJSON =
     Core.withObject
       "FloodlightActivitiesGenerateTagResponse"
@@ -8189,15 +7862,11 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    FloodlightActivitiesGenerateTagResponse
-  where
+instance Core.ToJSON FloodlightActivitiesGenerateTagResponse where
   toJSON FloodlightActivitiesGenerateTagResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("floodlightActivityTag" Core..=)
-              Core.<$> floodlightActivityTag,
+          [ ("floodlightActivityTag" Core..=) Core.<$> floodlightActivityTag,
             ("globalSiteTagGlobalSnippet" Core..=)
               Core.<$> globalSiteTagGlobalSnippet,
             ("kind" Core..=) Core.<$> kind
@@ -8222,15 +7891,13 @@ newFloodlightActivitiesListResponse ::
   FloodlightActivitiesListResponse
 newFloodlightActivitiesListResponse =
   FloodlightActivitiesListResponse
-    { floodlightActivities = Core.Nothing,
+    { floodlightActivities =
+        Core.Nothing,
       kind = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightActivitiesListResponse
-  where
+instance Core.FromJSON FloodlightActivitiesListResponse where
   parseJSON =
     Core.withObject
       "FloodlightActivitiesListResponse"
@@ -8245,8 +7912,7 @@ instance Core.ToJSON FloodlightActivitiesListResponse where
   toJSON FloodlightActivitiesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("floodlightActivities" Core..=)
-              Core.<$> floodlightActivities,
+          [ ("floodlightActivities" Core..=) Core.<$> floodlightActivities,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
@@ -8359,30 +8025,26 @@ instance Core.FromJSON FloodlightActivity where
       "FloodlightActivity"
       ( \o ->
           FloodlightActivity
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "attributionEnabled")
             Core.<*> (o Core..:? "cacheBustingType")
             Core.<*> (o Core..:? "countingMethod")
             Core.<*> (o Core..:? "defaultTags")
             Core.<*> (o Core..:? "expectedUrl")
-            Core.<*> ( o Core..:? "floodlightActivityGroupId"
+            Core.<*> ( o
+                         Core..:? "floodlightActivityGroupId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "floodlightActivityGroupName")
             Core.<*> (o Core..:? "floodlightActivityGroupTagString")
             Core.<*> (o Core..:? "floodlightActivityGroupType")
-            Core.<*> ( o Core..:? "floodlightConfigurationId"
+            Core.<*> ( o
+                         Core..:? "floodlightConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o
-                         Core..:? "floodlightConfigurationIdDimensionValue"
-                     )
+            Core.<*> (o Core..:? "floodlightConfigurationIdDimensionValue")
             Core.<*> (o Core..:? "floodlightTagType")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idDimensionValue")
@@ -8394,9 +8056,7 @@ instance Core.FromJSON FloodlightActivity where
             Core.<*> (o Core..:? "sslCompliant")
             Core.<*> (o Core..:? "sslRequired")
             Core.<*> (o Core..:? "status")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagFormat")
             Core.<*> (o Core..:? "tagString")
             Core.<*> (o Core..:? "userDefinedVariableTypes")
@@ -8406,16 +8066,12 @@ instance Core.ToJSON FloodlightActivity where
   toJSON FloodlightActivity {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("attributionEnabled" Core..=)
-              Core.<$> attributionEnabled,
-            ("cacheBustingType" Core..=)
-              Core.<$> cacheBustingType,
+            ("attributionEnabled" Core..=) Core.<$> attributionEnabled,
+            ("cacheBustingType" Core..=) Core.<$> cacheBustingType,
             ("countingMethod" Core..=) Core.<$> countingMethod,
             ("defaultTags" Core..=) Core.<$> defaultTags,
             ("expectedUrl" Core..=) Core.<$> expectedUrl,
@@ -8433,11 +8089,9 @@ instance Core.ToJSON FloodlightActivity where
               Core.<$> floodlightConfigurationId,
             ("floodlightConfigurationIdDimensionValue" Core..=)
               Core.<$> floodlightConfigurationIdDimensionValue,
-            ("floodlightTagType" Core..=)
-              Core.<$> floodlightTagType,
+            ("floodlightTagType" Core..=) Core.<$> floodlightTagType,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("notes" Core..=) Core.<$> notes,
@@ -8446,8 +8100,7 @@ instance Core.ToJSON FloodlightActivity where
             ("sslCompliant" Core..=) Core.<$> sslCompliant,
             ("sslRequired" Core..=) Core.<$> sslRequired,
             ("status" Core..=) Core.<$> status,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("tagFormat" Core..=) Core.<$> tagFormat,
             ("tagString" Core..=) Core.<$> tagString,
             ("userDefinedVariableTypes" Core..=)
@@ -8555,26 +8208,19 @@ instance Core.FromJSON FloodlightActivityGroup where
       "FloodlightActivityGroup"
       ( \o ->
           FloodlightActivityGroup
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> ( o Core..:? "floodlightConfigurationId"
+            Core.<*> ( o
+                         Core..:? "floodlightConfigurationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o
-                         Core..:? "floodlightConfigurationIdDimensionValue"
-                     )
+            Core.<*> (o Core..:? "floodlightConfigurationIdDimensionValue")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idDimensionValue")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagString")
             Core.<*> (o Core..:? "type")
       )
@@ -8583,10 +8229,8 @@ instance Core.ToJSON FloodlightActivityGroup where
   toJSON FloodlightActivityGroup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("floodlightConfigurationId" Core..=)
@@ -8595,12 +8239,10 @@ instance Core.ToJSON FloodlightActivityGroup where
             ("floodlightConfigurationIdDimensionValue" Core..=)
               Core.<$> floodlightConfigurationIdDimensionValue,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("tagString" Core..=) Core.<$> tagString,
             ("type" Core..=) Core.<$> type'
           ]
@@ -8624,15 +8266,13 @@ newFloodlightActivityGroupsListResponse ::
   FloodlightActivityGroupsListResponse
 newFloodlightActivityGroupsListResponse =
   FloodlightActivityGroupsListResponse
-    { floodlightActivityGroups = Core.Nothing,
+    { floodlightActivityGroups =
+        Core.Nothing,
       kind = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightActivityGroupsListResponse
-  where
+instance Core.FromJSON FloodlightActivityGroupsListResponse where
   parseJSON =
     Core.withObject
       "FloodlightActivityGroupsListResponse"
@@ -8643,10 +8283,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    FloodlightActivityGroupsListResponse
-  where
+instance Core.ToJSON FloodlightActivityGroupsListResponse where
   toJSON FloodlightActivityGroupsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -8681,7 +8318,8 @@ newFloodlightActivityPublisherDynamicTag ::
   FloodlightActivityPublisherDynamicTag
 newFloodlightActivityPublisherDynamicTag =
   FloodlightActivityPublisherDynamicTag
-    { clickThrough = Core.Nothing,
+    { clickThrough =
+        Core.Nothing,
       directorySiteId = Core.Nothing,
       dynamicTag = Core.Nothing,
       siteId = Core.Nothing,
@@ -8689,42 +8327,31 @@ newFloodlightActivityPublisherDynamicTag =
       viewThrough = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightActivityPublisherDynamicTag
-  where
+instance Core.FromJSON FloodlightActivityPublisherDynamicTag where
   parseJSON =
     Core.withObject
       "FloodlightActivityPublisherDynamicTag"
       ( \o ->
           FloodlightActivityPublisherDynamicTag
             Core.<$> (o Core..:? "clickThrough")
-            Core.<*> ( o Core..:? "directorySiteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "directorySiteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dynamicTag")
-            Core.<*> ( o Core..:? "siteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "siteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "siteIdDimensionValue")
             Core.<*> (o Core..:? "viewThrough")
       )
 
-instance
-  Core.ToJSON
-    FloodlightActivityPublisherDynamicTag
-  where
+instance Core.ToJSON FloodlightActivityPublisherDynamicTag where
   toJSON FloodlightActivityPublisherDynamicTag {..} =
     Core.object
       ( Core.catMaybes
           [ ("clickThrough" Core..=) Core.<$> clickThrough,
-            ("directorySiteId" Core..=) Core.. Core.AsText
+            ("directorySiteId" Core..=)
+              Core.. Core.AsText
               Core.<$> directorySiteId,
             ("dynamicTag" Core..=) Core.<$> dynamicTag,
-            ("siteId" Core..=) Core.. Core.AsText
-              Core.<$> siteId,
-            ("siteIdDimensionValue" Core..=)
-              Core.<$> siteIdDimensionValue,
+            ("siteId" Core..=) Core.. Core.AsText Core.<$> siteId,
+            ("siteIdDimensionValue" Core..=) Core.<$> siteIdDimensionValue,
             ("viewThrough" Core..=) Core.<$> viewThrough
           ]
       )
@@ -8745,7 +8372,6 @@ data FloodlightConfiguration = FloodlightConfiguration
     customViewabilityMetric :: (Core.Maybe CustomViewabilityMetric),
     -- | Whether the exposure-to-conversion report is enabled. This report shows detailed pathway information on up to 10 of the most recent ad exposures seen by a user before converting.
     exposureToConversionEnabled :: (Core.Maybe Core.Bool),
-    -- | Day that will be counted as the first day of the week in reports. This is a required field.
     firstDayOfWeek :: (Core.Maybe FloodlightConfiguration_FirstDayOfWeek),
     -- | ID of this floodlight configuration. This is a read-only, auto-generated field.
     id :: (Core.Maybe Core.Int64),
@@ -8806,12 +8432,8 @@ instance Core.FromJSON FloodlightConfiguration where
       "FloodlightConfiguration"
       ( \o ->
           FloodlightConfiguration
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "analyticsDataSharingEnabled")
             Core.<*> (o Core..:? "customViewabilityMetric")
@@ -8822,13 +8444,9 @@ instance Core.FromJSON FloodlightConfiguration where
             Core.<*> (o Core..:? "inAppAttributionTrackingEnabled")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lookbackConfiguration")
-            Core.<*> ( o
-                         Core..:? "naturalSearchConversionAttributionOption"
-                     )
+            Core.<*> (o Core..:? "naturalSearchConversionAttributionOption")
             Core.<*> (o Core..:? "omnitureSettings")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagSettings")
             Core.<*> (o Core..:? "thirdPartyAuthenticationTokens")
             Core.<*> (o Core..:? "userDefinedVariableConfigurations")
@@ -8838,10 +8456,8 @@ instance Core.ToJSON FloodlightConfiguration where
   toJSON FloodlightConfiguration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("analyticsDataSharingEnabled" Core..=)
@@ -8852,19 +8468,15 @@ instance Core.ToJSON FloodlightConfiguration where
               Core.<$> exposureToConversionEnabled,
             ("firstDayOfWeek" Core..=) Core.<$> firstDayOfWeek,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("inAppAttributionTrackingEnabled" Core..=)
               Core.<$> inAppAttributionTrackingEnabled,
             ("kind" Core..=) Core.<$> kind,
-            ("lookbackConfiguration" Core..=)
-              Core.<$> lookbackConfiguration,
+            ("lookbackConfiguration" Core..=) Core.<$> lookbackConfiguration,
             ("naturalSearchConversionAttributionOption" Core..=)
               Core.<$> naturalSearchConversionAttributionOption,
-            ("omnitureSettings" Core..=)
-              Core.<$> omnitureSettings,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("omnitureSettings" Core..=) Core.<$> omnitureSettings,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("tagSettings" Core..=) Core.<$> tagSettings,
             ("thirdPartyAuthenticationTokens" Core..=)
               Core.<$> thirdPartyAuthenticationTokens,
@@ -8889,14 +8501,12 @@ newFloodlightConfigurationsListResponse ::
   FloodlightConfigurationsListResponse
 newFloodlightConfigurationsListResponse =
   FloodlightConfigurationsListResponse
-    { floodlightConfigurations = Core.Nothing,
+    { floodlightConfigurations =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightConfigurationsListResponse
-  where
+instance Core.FromJSON FloodlightConfigurationsListResponse where
   parseJSON =
     Core.withObject
       "FloodlightConfigurationsListResponse"
@@ -8906,10 +8516,7 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    FloodlightConfigurationsListResponse
-  where
+instance Core.ToJSON FloodlightConfigurationsListResponse where
   toJSON FloodlightConfigurationsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -8945,10 +8552,7 @@ newFloodlightReportCompatibleFields =
       metrics = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FloodlightReportCompatibleFields
-  where
+instance Core.FromJSON FloodlightReportCompatibleFields where
   parseJSON =
     Core.withObject
       "FloodlightReportCompatibleFields"
@@ -8964,8 +8568,7 @@ instance Core.ToJSON FloodlightReportCompatibleFields where
   toJSON FloodlightReportCompatibleFields {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+          [ ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("kind" Core..=) Core.<$> kind,
             ("metrics" Core..=) Core.<$> metrics
@@ -8995,22 +8598,16 @@ instance Core.FromJSON FrequencyCap where
       "FrequencyCap"
       ( \o ->
           FrequencyCap
-            Core.<$> ( o Core..:? "duration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "impressions"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "duration" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "impressions" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON FrequencyCap where
   toJSON FrequencyCap {..} =
     Core.object
       ( Core.catMaybes
-          [ ("duration" Core..=) Core.. Core.AsText
-              Core.<$> duration,
-            ("impressions" Core..=) Core.. Core.AsText
-              Core.<$> impressions
+          [ ("duration" Core..=) Core.. Core.AsText Core.<$> duration,
+            ("impressions" Core..=) Core.. Core.AsText Core.<$> impressions
           ]
       )
 
@@ -9120,8 +8717,7 @@ instance Core.ToJSON GeoTargeting where
       ( Core.catMaybes
           [ ("cities" Core..=) Core.<$> cities,
             ("countries" Core..=) Core.<$> countries,
-            ("excludeCountries" Core..=)
-              Core.<$> excludeCountries,
+            ("excludeCountries" Core..=) Core.<$> excludeCountries,
             ("metros" Core..=) Core.<$> metros,
             ("postalCodes" Core..=) Core.<$> postalCodes,
             ("regions" Core..=) Core.<$> regions
@@ -9208,20 +8804,16 @@ instance Core.FromJSON InventoryItem where
       "InventoryItem"
       ( \o ->
           InventoryItem
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "adSlots")
-            Core.<*> ( o Core..:? "advertiserId"
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "contentCategoryId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "estimatedClickThroughRate"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "contentCategoryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "estimatedClickThroughRate"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "estimatedConversionRate"
+            Core.<*> ( o
+                         Core..:? "estimatedConversionRate"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
@@ -9229,28 +8821,20 @@ instance Core.FromJSON InventoryItem where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lastModifiedInfo")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "negotiationChannelId"
+            Core.<*> ( o
+                         Core..:? "negotiationChannelId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "orderId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "placementStrategyId"
+            Core.<*> (o Core..:? "orderId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "placementStrategyId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pricing")
-            Core.<*> ( o Core..:? "projectId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "rfpId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "siteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "projectId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rfpId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "siteId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -9258,12 +8842,11 @@ instance Core.ToJSON InventoryItem where
   toJSON InventoryItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("adSlots" Core..=) Core.<$> adSlots,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("contentCategoryId" Core..=) Core.. Core.AsText
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("contentCategoryId" Core..=)
+              Core.. Core.AsText
               Core.<$> contentCategoryId,
             ("estimatedClickThroughRate" Core..=)
               Core.. Core.AsText
@@ -9274,23 +8857,20 @@ instance Core.ToJSON InventoryItem where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("inPlan" Core..=) Core.<$> inPlan,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("name" Core..=) Core.<$> name,
-            ("negotiationChannelId" Core..=) Core.. Core.AsText
+            ("negotiationChannelId" Core..=)
+              Core.. Core.AsText
               Core.<$> negotiationChannelId,
-            ("orderId" Core..=) Core.. Core.AsText
-              Core.<$> orderId,
-            ("placementStrategyId" Core..=) Core.. Core.AsText
+            ("orderId" Core..=) Core.. Core.AsText Core.<$> orderId,
+            ("placementStrategyId" Core..=)
+              Core.. Core.AsText
               Core.<$> placementStrategyId,
             ("pricing" Core..=) Core.<$> pricing,
-            ("projectId" Core..=) Core.. Core.AsText
-              Core.<$> projectId,
+            ("projectId" Core..=) Core.. Core.AsText Core.<$> projectId,
             ("rfpId" Core..=) Core.. Core.AsText Core.<$> rfpId,
-            ("siteId" Core..=) Core.. Core.AsText
-              Core.<$> siteId,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("siteId" Core..=) Core.. Core.AsText Core.<$> siteId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -9428,13 +9008,13 @@ instance Core.FromJSON Invoice where
             Core.<*> (o Core..:? "replacedInvoiceIds")
             Core.<*> (o Core..:? "serviceEndDate")
             Core.<*> (o Core..:? "serviceStartDate")
-            Core.<*> ( o Core..:? "subtotalAmountMicros"
+            Core.<*> ( o
+                         Core..:? "subtotalAmountMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "totalAmountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalTaxAmountMicros"
+            Core.<*> (o Core..:? "totalAmountMicros" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalTaxAmountMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -9443,33 +9023,29 @@ instance Core.ToJSON Invoice where
   toJSON Invoice {..} =
     Core.object
       ( Core.catMaybes
-          [ ("campaign_summaries" Core..=)
-              Core.<$> campaignSummaries,
-            ("correctedInvoiceId" Core..=)
-              Core.<$> correctedInvoiceId,
+          [ ("campaign_summaries" Core..=) Core.<$> campaignSummaries,
+            ("correctedInvoiceId" Core..=) Core.<$> correctedInvoiceId,
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("dueDate" Core..=) Core.<$> dueDate,
             ("id" Core..=) Core.<$> id,
             ("invoiceType" Core..=) Core.<$> invoiceType,
             ("issueDate" Core..=) Core.<$> issueDate,
             ("kind" Core..=) Core.<$> kind,
-            ("paymentsAccountId" Core..=)
-              Core.<$> paymentsAccountId,
-            ("paymentsProfileId" Core..=)
-              Core.<$> paymentsProfileId,
+            ("paymentsAccountId" Core..=) Core.<$> paymentsAccountId,
+            ("paymentsProfileId" Core..=) Core.<$> paymentsProfileId,
             ("pdfUrl" Core..=) Core.<$> pdfUrl,
-            ("purchaseOrderNumber" Core..=)
-              Core.<$> purchaseOrderNumber,
-            ("replacedInvoiceIds" Core..=)
-              Core.<$> replacedInvoiceIds,
+            ("purchaseOrderNumber" Core..=) Core.<$> purchaseOrderNumber,
+            ("replacedInvoiceIds" Core..=) Core.<$> replacedInvoiceIds,
             ("serviceEndDate" Core..=) Core.<$> serviceEndDate,
-            ("serviceStartDate" Core..=)
-              Core.<$> serviceStartDate,
-            ("subtotalAmountMicros" Core..=) Core.. Core.AsText
+            ("serviceStartDate" Core..=) Core.<$> serviceStartDate,
+            ("subtotalAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> subtotalAmountMicros,
-            ("totalAmountMicros" Core..=) Core.. Core.AsText
+            ("totalAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> totalAmountMicros,
-            ("totalTaxAmountMicros" Core..=) Core.. Core.AsText
+            ("totalTaxAmountMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> totalTaxAmountMicros
           ]
       )
@@ -9494,16 +9070,13 @@ instance Core.FromJSON KeyValueTargetingExpression where
     Core.withObject
       "KeyValueTargetingExpression"
       ( \o ->
-          KeyValueTargetingExpression
-            Core.<$> (o Core..:? "expression")
+          KeyValueTargetingExpression Core.<$> (o Core..:? "expression")
       )
 
 instance Core.ToJSON KeyValueTargetingExpression where
   toJSON KeyValueTargetingExpression {..} =
     Core.object
-      ( Core.catMaybes
-          [("expression" Core..=) Core.<$> expression]
-      )
+      (Core.catMaybes [("expression" Core..=) Core.<$> expression])
 
 -- | Contains information about where a user\'s browser is taken after the user clicks an ad.
 --
@@ -9546,9 +9119,7 @@ instance Core.FromJSON LandingPage where
       "LandingPage"
       ( \o ->
           LandingPage
-            Core.<$> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "archived")
             Core.<*> (o Core..:? "deepLinks")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
@@ -9561,8 +9132,7 @@ instance Core.ToJSON LandingPage where
   toJSON LandingPage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("archived" Core..=) Core.<$> archived,
             ("deepLinks" Core..=) Core.<$> deepLinks,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
@@ -9639,16 +9209,12 @@ instance Core.FromJSON LanguageTargeting where
   parseJSON =
     Core.withObject
       "LanguageTargeting"
-      ( \o ->
-          LanguageTargeting Core.<$> (o Core..:? "languages")
-      )
+      (\o -> LanguageTargeting Core.<$> (o Core..:? "languages"))
 
 instance Core.ToJSON LanguageTargeting where
   toJSON LanguageTargeting {..} =
     Core.object
-      ( Core.catMaybes
-          [("languages" Core..=) Core.<$> languages]
-      )
+      (Core.catMaybes [("languages" Core..=) Core.<$> languages])
 
 -- | Language List Response
 --
@@ -9665,7 +9231,10 @@ data LanguagesListResponse = LanguagesListResponse
 newLanguagesListResponse ::
   LanguagesListResponse
 newLanguagesListResponse =
-  LanguagesListResponse {kind = Core.Nothing, languages = Core.Nothing}
+  LanguagesListResponse
+    { kind = Core.Nothing,
+      languages = Core.Nothing
+    }
 
 instance Core.FromJSON LanguagesListResponse where
   parseJSON =
@@ -9706,9 +9275,7 @@ instance Core.FromJSON LastModifiedInfo where
       "LastModifiedInfo"
       ( \o ->
           LastModifiedInfo
-            Core.<$> ( o Core..:? "time"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "time" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON LastModifiedInfo where
@@ -9730,20 +9297,18 @@ newtype ListPopulationClause = ListPopulationClause
 -- | Creates a value of 'ListPopulationClause' with the minimum fields required to make a request.
 newListPopulationClause ::
   ListPopulationClause
-newListPopulationClause = ListPopulationClause {terms = Core.Nothing}
+newListPopulationClause =
+  ListPopulationClause {terms = Core.Nothing}
 
 instance Core.FromJSON ListPopulationClause where
   parseJSON =
     Core.withObject
       "ListPopulationClause"
-      ( \o ->
-          ListPopulationClause Core.<$> (o Core..:? "terms")
-      )
+      (\o -> ListPopulationClause Core.<$> (o Core..:? "terms"))
 
 instance Core.ToJSON ListPopulationClause where
   toJSON ListPopulationClause {..} =
-    Core.object
-      (Core.catMaybes [("terms" Core..=) Core.<$> terms])
+    Core.object (Core.catMaybes [("terms" Core..=) Core.<$> terms])
 
 -- | Remarketing List Population Rule.
 --
@@ -9774,7 +9339,8 @@ instance Core.FromJSON ListPopulationRule where
       "ListPopulationRule"
       ( \o ->
           ListPopulationRule
-            Core.<$> ( o Core..:? "floodlightActivityId"
+            Core.<$> ( o
+                         Core..:? "floodlightActivityId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "floodlightActivityName")
@@ -9785,12 +9351,11 @@ instance Core.ToJSON ListPopulationRule where
   toJSON ListPopulationRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("floodlightActivityId" Core..=) Core.. Core.AsText
+          [ ("floodlightActivityId" Core..=)
+              Core.. Core.AsText
               Core.<$> floodlightActivityId,
-            ("floodlightActivityName" Core..=)
-              Core.<$> floodlightActivityName,
-            ("listPopulationClauses" Core..=)
-              Core.<$> listPopulationClauses
+            ("floodlightActivityName" Core..=) Core.<$> floodlightActivityName,
+            ("listPopulationClauses" Core..=) Core.<$> listPopulationClauses
           ]
       )
 
@@ -9841,9 +9406,7 @@ instance Core.FromJSON ListPopulationTerm where
             Core.<$> (o Core..:? "contains")
             Core.<*> (o Core..:? "negation")
             Core.<*> (o Core..:? "operator")
-            Core.<*> ( o Core..:? "remarketingListId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "remarketingListId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "value")
             Core.<*> (o Core..:? "variableFriendlyName")
@@ -9857,12 +9420,12 @@ instance Core.ToJSON ListPopulationTerm where
           [ ("contains" Core..=) Core.<$> contains,
             ("negation" Core..=) Core.<$> negation,
             ("operator" Core..=) Core.<$> operator,
-            ("remarketingListId" Core..=) Core.. Core.AsText
+            ("remarketingListId" Core..=)
+              Core.. Core.AsText
               Core.<$> remarketingListId,
             ("type" Core..=) Core.<$> type',
             ("value" Core..=) Core.<$> value,
-            ("variableFriendlyName" Core..=)
-              Core.<$> variableFriendlyName,
+            ("variableFriendlyName" Core..=) Core.<$> variableFriendlyName,
             ("variableName" Core..=) Core.<$> variableName
           ]
       )
@@ -9879,23 +9442,19 @@ newtype ListTargetingExpression = ListTargetingExpression
 -- | Creates a value of 'ListTargetingExpression' with the minimum fields required to make a request.
 newListTargetingExpression ::
   ListTargetingExpression
-newListTargetingExpression = ListTargetingExpression {expression = Core.Nothing}
+newListTargetingExpression =
+  ListTargetingExpression {expression = Core.Nothing}
 
 instance Core.FromJSON ListTargetingExpression where
   parseJSON =
     Core.withObject
       "ListTargetingExpression"
-      ( \o ->
-          ListTargetingExpression
-            Core.<$> (o Core..:? "expression")
-      )
+      (\o -> ListTargetingExpression Core.<$> (o Core..:? "expression"))
 
 instance Core.ToJSON ListTargetingExpression where
   toJSON ListTargetingExpression {..} =
     Core.object
-      ( Core.catMaybes
-          [("expression" Core..=) Core.<$> expression]
-      )
+      (Core.catMaybes [("expression" Core..=) Core.<$> expression])
 
 -- | Lookback configuration settings.
 --
@@ -9940,11 +9499,11 @@ instance Core.ToJSON LookbackConfiguration where
 --
 -- /See:/ 'newMeasurementPartnerAdvertiserLink' smart constructor.
 data MeasurementPartnerAdvertiserLink = MeasurementPartnerAdvertiserLink
-  { -- | .
+  { -- | Status of the partner link.
     linkStatus :: (Core.Maybe MeasurementPartnerAdvertiserLink_LinkStatus),
     -- | Measurement partner used for tag wrapping.
     measurementPartner :: (Core.Maybe MeasurementPartnerAdvertiserLink_MeasurementPartner),
-    -- | .
+    -- | partner Advertiser Id.
     partnerAdvertiserId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9959,10 +9518,7 @@ newMeasurementPartnerAdvertiserLink =
       partnerAdvertiserId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    MeasurementPartnerAdvertiserLink
-  where
+instance Core.FromJSON MeasurementPartnerAdvertiserLink where
   parseJSON =
     Core.withObject
       "MeasurementPartnerAdvertiserLink"
@@ -9978,10 +9534,8 @@ instance Core.ToJSON MeasurementPartnerAdvertiserLink where
     Core.object
       ( Core.catMaybes
           [ ("linkStatus" Core..=) Core.<$> linkStatus,
-            ("measurementPartner" Core..=)
-              Core.<$> measurementPartner,
-            ("partnerAdvertiserId" Core..=)
-              Core.<$> partnerAdvertiserId
+            ("measurementPartner" Core..=) Core.<$> measurementPartner,
+            ("partnerAdvertiserId" Core..=) Core.<$> partnerAdvertiserId
           ]
       )
 
@@ -10023,10 +9577,8 @@ instance Core.ToJSON MeasurementPartnerCampaignLink where
     Core.object
       ( Core.catMaybes
           [ ("linkStatus" Core..=) Core.<$> linkStatus,
-            ("measurementPartner" Core..=)
-              Core.<$> measurementPartner,
-            ("partnerCampaignId" Core..=)
-              Core.<$> partnerCampaignId
+            ("measurementPartner" Core..=) Core.<$> measurementPartner,
+            ("partnerCampaignId" Core..=) Core.<$> partnerCampaignId
           ]
       )
 
@@ -10073,8 +9625,7 @@ instance Core.ToJSON MeasurementPartnerWrappingData where
     Core.object
       ( Core.catMaybes
           [ ("linkStatus" Core..=) Core.<$> linkStatus,
-            ("measurementPartner" Core..=)
-              Core.<$> measurementPartner,
+            ("measurementPartner" Core..=) Core.<$> measurementPartner,
             ("tagWrappingMode" Core..=) Core.<$> tagWrappingMode,
             ("wrappedTag" Core..=) Core.<$> wrappedTag
           ]
@@ -10086,7 +9637,7 @@ instance Core.ToJSON MeasurementPartnerWrappingData where
 data Metric = Metric
   { -- | The kind of resource this is, in this case dfareporting#metric.
     kind :: (Core.Maybe Core.Text),
-    -- | The metric name, e.g. dfa:impressions
+    -- | The metric name, e.g. impressions
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10101,17 +9652,14 @@ instance Core.FromJSON Metric where
     Core.withObject
       "Metric"
       ( \o ->
-          Metric
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "name")
+          Metric Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON Metric where
   toJSON Metric {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("kind" Core..=) Core.<$> kind, ("name" Core..=) Core.<$> name]
       )
 
 -- | Contains information about a metro region that can be targeted by ads.
@@ -10156,15 +9704,9 @@ instance Core.FromJSON Metro where
       ( \o ->
           Metro
             Core.<$> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "countryDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dmaId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countryDartId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dmaId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "metroCode")
             Core.<*> (o Core..:? "name")
@@ -10175,10 +9717,10 @@ instance Core.ToJSON Metro where
     Core.object
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
-            ("countryDartId" Core..=) Core.. Core.AsText
+            ("countryDartId" Core..=)
+              Core.. Core.AsText
               Core.<$> countryDartId,
-            ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+            ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("dmaId" Core..=) Core.. Core.AsText Core.<$> dmaId,
             ("kind" Core..=) Core.<$> kind,
             ("metroCode" Core..=) Core.<$> metroCode,
@@ -10209,7 +9751,8 @@ instance Core.FromJSON MetrosListResponse where
       "MetrosListResponse"
       ( \o ->
           MetrosListResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "metros")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "metros")
       )
 
 instance Core.ToJSON MetrosListResponse where
@@ -10355,9 +9898,7 @@ instance Core.FromJSON MobileCarrier where
       ( \o ->
           MobileCarrier
             Core.<$> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "countryDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countryDartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
@@ -10368,7 +9909,8 @@ instance Core.ToJSON MobileCarrier where
     Core.object
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
-            ("countryDartId" Core..=) Core.. Core.AsText
+            ("countryDartId" Core..=)
+              Core.. Core.AsText
               Core.<$> countryDartId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
@@ -10473,12 +10015,9 @@ instance Core.ToJSON ObaIcon where
   toJSON ObaIcon {..} =
     Core.object
       ( Core.catMaybes
-          [ ("iconClickThroughUrl" Core..=)
-              Core.<$> iconClickThroughUrl,
-            ("iconClickTrackingUrl" Core..=)
-              Core.<$> iconClickTrackingUrl,
-            ("iconViewTrackingUrl" Core..=)
-              Core.<$> iconViewTrackingUrl,
+          [ ("iconClickThroughUrl" Core..=) Core.<$> iconClickThroughUrl,
+            ("iconClickTrackingUrl" Core..=) Core.<$> iconClickTrackingUrl,
+            ("iconViewTrackingUrl" Core..=) Core.<$> iconViewTrackingUrl,
             ("program" Core..=) Core.<$> program,
             ("resourceUrl" Core..=) Core.<$> resourceUrl,
             ("size" Core..=) Core.<$> size,
@@ -10517,7 +10056,8 @@ instance Core.FromJSON ObjectFilter where
       ( \o ->
           ObjectFilter
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "objectIds"
+            Core.<*> ( o
+                         Core..:? "objectIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "status")
@@ -10528,9 +10068,74 @@ instance Core.ToJSON ObjectFilter where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("objectIds" Core..=) Core.. Core.fmap Core.AsText
+            ("objectIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> objectIds,
             ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | Identify a user by name and address.
+--
+-- /See:/ 'newOfflineUserAddressInfo' smart constructor.
+data OfflineUserAddressInfo = OfflineUserAddressInfo
+  { -- | City of the address.
+    city :: (Core.Maybe Core.Text),
+    -- | 2-letter country code in ISO-3166-1 alpha-2 of the user\'s address.
+    countryCode :: (Core.Maybe Core.Text),
+    -- | First name of the user, which is hashed as SHA-256 after normalized (Lowercase all characters; Remove any extra spaces before, after, and in between).
+    hashedFirstName :: (Core.Maybe Core.Text),
+    -- | Last name of the user, which is hashed as SHA-256 after normalized (lower case only and no punctuation).
+    hashedLastName :: (Core.Maybe Core.Text),
+    -- | The street address of the user hashed using SHA-256 hash function after normalization (lower case only).
+    hashedStreetAddress :: (Core.Maybe Core.Text),
+    -- | Postal code of the user\'s address.
+    postalCode :: (Core.Maybe Core.Text),
+    -- | State code of the address.
+    state :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OfflineUserAddressInfo' with the minimum fields required to make a request.
+newOfflineUserAddressInfo ::
+  OfflineUserAddressInfo
+newOfflineUserAddressInfo =
+  OfflineUserAddressInfo
+    { city = Core.Nothing,
+      countryCode = Core.Nothing,
+      hashedFirstName = Core.Nothing,
+      hashedLastName = Core.Nothing,
+      hashedStreetAddress = Core.Nothing,
+      postalCode = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON OfflineUserAddressInfo where
+  parseJSON =
+    Core.withObject
+      "OfflineUserAddressInfo"
+      ( \o ->
+          OfflineUserAddressInfo
+            Core.<$> (o Core..:? "city")
+            Core.<*> (o Core..:? "countryCode")
+            Core.<*> (o Core..:? "hashedFirstName")
+            Core.<*> (o Core..:? "hashedLastName")
+            Core.<*> (o Core..:? "hashedStreetAddress")
+            Core.<*> (o Core..:? "postalCode")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON OfflineUserAddressInfo where
+  toJSON OfflineUserAddressInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("city" Core..=) Core.<$> city,
+            ("countryCode" Core..=) Core.<$> countryCode,
+            ("hashedFirstName" Core..=) Core.<$> hashedFirstName,
+            ("hashedLastName" Core..=) Core.<$> hashedLastName,
+            ("hashedStreetAddress" Core..=) Core.<$> hashedStreetAddress,
+            ("postalCode" Core..=) Core.<$> postalCode,
+            ("state" Core..=) Core.<$> state
           ]
       )
 
@@ -10548,7 +10153,8 @@ data OffsetPosition = OffsetPosition
 -- | Creates a value of 'OffsetPosition' with the minimum fields required to make a request.
 newOffsetPosition ::
   OffsetPosition
-newOffsetPosition = OffsetPosition {left = Core.Nothing, top = Core.Nothing}
+newOffsetPosition =
+  OffsetPosition {left = Core.Nothing, top = Core.Nothing}
 
 instance Core.FromJSON OffsetPosition where
   parseJSON =
@@ -10556,16 +10162,15 @@ instance Core.FromJSON OffsetPosition where
       "OffsetPosition"
       ( \o ->
           OffsetPosition
-            Core.<$> (o Core..:? "left") Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "left")
+            Core.<*> (o Core..:? "top")
       )
 
 instance Core.ToJSON OffsetPosition where
   toJSON OffsetPosition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("left" Core..=) Core.<$> left,
-            ("top" Core..=) Core.<$> top
-          ]
+          [("left" Core..=) Core.<$> left, ("top" Core..=) Core.<$> top]
       )
 
 -- | Omniture Integration Settings.
@@ -10644,9 +10249,7 @@ instance Core.FromJSON OperatingSystem where
       "OperatingSystem"
       ( \o ->
           OperatingSystem
-            Core.<$> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "desktop")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "mobile")
@@ -10657,8 +10260,7 @@ instance Core.ToJSON OperatingSystem where
   toJSON OperatingSystem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+          [ ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("desktop" Core..=) Core.<$> desktop,
             ("kind" Core..=) Core.<$> kind,
             ("mobile" Core..=) Core.<$> mobile,
@@ -10721,8 +10323,7 @@ instance Core.ToJSON OperatingSystemVersion where
             ("majorVersion" Core..=) Core.<$> majorVersion,
             ("minorVersion" Core..=) Core.<$> minorVersion,
             ("name" Core..=) Core.<$> name,
-            ("operatingSystem" Core..=)
-              Core.<$> operatingSystem
+            ("operatingSystem" Core..=) Core.<$> operatingSystem
           ]
       )
 
@@ -10746,10 +10347,7 @@ newOperatingSystemVersionsListResponse =
       operatingSystemVersions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    OperatingSystemVersionsListResponse
-  where
+instance Core.FromJSON OperatingSystemVersionsListResponse where
   parseJSON =
     Core.withObject
       "OperatingSystemVersionsListResponse"
@@ -10759,10 +10357,7 @@ instance
             Core.<*> (o Core..:? "operatingSystemVersions")
       )
 
-instance
-  Core.ToJSON
-    OperatingSystemVersionsListResponse
-  where
+instance Core.ToJSON OperatingSystemVersionsListResponse where
   toJSON OperatingSystemVersionsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -10807,8 +10402,7 @@ instance Core.ToJSON OperatingSystemsListResponse where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("operatingSystems" Core..=)
-              Core.<$> operatingSystems
+            ("operatingSystems" Core..=) Core.<$> operatingSystems
           ]
       )
 
@@ -10841,7 +10435,8 @@ instance Core.FromJSON OptimizationActivity where
       "OptimizationActivity"
       ( \o ->
           OptimizationActivity
-            Core.<$> ( o Core..:? "floodlightActivityId"
+            Core.<$> ( o
+                         Core..:? "floodlightActivityId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "floodlightActivityIdDimensionValue")
@@ -10852,7 +10447,8 @@ instance Core.ToJSON OptimizationActivity where
   toJSON OptimizationActivity {..} =
     Core.object
       ( Core.catMaybes
-          [ ("floodlightActivityId" Core..=) Core.. Core.AsText
+          [ ("floodlightActivityId" Core..=)
+              Core.. Core.AsText
               Core.<$> floodlightActivityId,
             ("floodlightActivityIdDimensionValue" Core..=)
               Core.<$> floodlightActivityIdDimensionValue,
@@ -10940,13 +10536,10 @@ instance Core.FromJSON Order where
       "Order"
       ( \o ->
           Order
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "approverUserProfileIds"
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "approverUserProfileIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "buyerInvoiceId")
@@ -10958,21 +10551,16 @@ instance Core.FromJSON Order where
             Core.<*> (o Core..:? "lastModifiedInfo")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notes")
-            Core.<*> ( o Core..:? "planningTermId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "projectId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "planningTermId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "projectId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "sellerOrderId")
             Core.<*> (o Core..:? "sellerOrganizationName")
-            Core.<*> ( o Core..:? "siteId"
+            Core.<*> ( o
+                         Core..:? "siteId"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "siteNames")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "termsAndConditions")
       )
 
@@ -10980,38 +10568,30 @@ instance Core.ToJSON Order where
   toJSON Order {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("approverUserProfileIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> approverUserProfileIds,
             ("buyerInvoiceId" Core..=) Core.<$> buyerInvoiceId,
-            ("buyerOrganizationName" Core..=)
-              Core.<$> buyerOrganizationName,
+            ("buyerOrganizationName" Core..=) Core.<$> buyerOrganizationName,
             ("comments" Core..=) Core.<$> comments,
             ("contacts" Core..=) Core.<$> contacts,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("name" Core..=) Core.<$> name,
             ("notes" Core..=) Core.<$> notes,
-            ("planningTermId" Core..=) Core.. Core.AsText
+            ("planningTermId" Core..=)
+              Core.. Core.AsText
               Core.<$> planningTermId,
-            ("projectId" Core..=) Core.. Core.AsText
-              Core.<$> projectId,
+            ("projectId" Core..=) Core.. Core.AsText Core.<$> projectId,
             ("sellerOrderId" Core..=) Core.<$> sellerOrderId,
-            ("sellerOrganizationName" Core..=)
-              Core.<$> sellerOrganizationName,
-            ("siteId" Core..=) Core.. Core.fmap Core.AsText
-              Core.<$> siteId,
+            ("sellerOrganizationName" Core..=) Core.<$> sellerOrganizationName,
+            ("siteId" Core..=) Core.. Core.fmap Core.AsText Core.<$> siteId,
             ("siteNames" Core..=) Core.<$> siteNames,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("termsAndConditions" Core..=)
-              Core.<$> termsAndConditions
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
+            ("termsAndConditions" Core..=) Core.<$> termsAndConditions
           ]
       )
 
@@ -11054,7 +10634,8 @@ instance Core.FromJSON OrderContact where
             Core.<*> (o Core..:? "contactName")
             Core.<*> (o Core..:? "contactTitle")
             Core.<*> (o Core..:? "contactType")
-            Core.<*> ( o Core..:? "signatureUserProfileId"
+            Core.<*> ( o
+                         Core..:? "signatureUserProfileId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -11067,189 +10648,9 @@ instance Core.ToJSON OrderContact where
             ("contactName" Core..=) Core.<$> contactName,
             ("contactTitle" Core..=) Core.<$> contactTitle,
             ("contactType" Core..=) Core.<$> contactType,
-            ("signatureUserProfileId" Core..=) Core.. Core.AsText
+            ("signatureUserProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> signatureUserProfileId
-          ]
-      )
-
--- | Contains properties of a Planning order document.
---
--- /See:/ 'newOrderDocument' smart constructor.
-data OrderDocument = OrderDocument
-  { -- | Account ID of this order document.
-    accountId :: (Core.Maybe Core.Int64),
-    -- | Advertiser ID of this order document.
-    advertiserId :: (Core.Maybe Core.Int64),
-    -- | The amended order document ID of this order document. An order document can be created by optionally amending another order document so that the change history can be preserved.
-    amendedOrderDocumentId :: (Core.Maybe Core.Int64),
-    -- | IDs of users who have approved this order document.
-    approvedByUserProfileIds :: (Core.Maybe [Core.Int64]),
-    -- | Whether this order document is cancelled.
-    cancelled :: (Core.Maybe Core.Bool),
-    -- | Information about the creation of this order document.
-    createdInfo :: (Core.Maybe LastModifiedInfo),
-    -- |
-    effectiveDate :: (Core.Maybe Core.Date),
-    -- | ID of this order document.
-    id :: (Core.Maybe Core.Int64),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#orderDocument\".
-    kind :: (Core.Maybe Core.Text),
-    -- | List of email addresses that received the last sent document.
-    lastSentRecipients :: (Core.Maybe [Core.Text]),
-    -- |
-    lastSentTime :: (Core.Maybe Core.DateTime),
-    -- | ID of the order from which this order document is created.
-    orderId :: (Core.Maybe Core.Int64),
-    -- | Project ID of this order document.
-    projectId :: (Core.Maybe Core.Int64),
-    -- | Whether this order document has been signed.
-    signed :: (Core.Maybe Core.Bool),
-    -- | Subaccount ID of this order document.
-    subaccountId :: (Core.Maybe Core.Int64),
-    -- | Title of this order document.
-    title :: (Core.Maybe Core.Text),
-    -- | Type of this order document
-    type' :: (Core.Maybe OrderDocument_Type)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderDocument' with the minimum fields required to make a request.
-newOrderDocument ::
-  OrderDocument
-newOrderDocument =
-  OrderDocument
-    { accountId = Core.Nothing,
-      advertiserId = Core.Nothing,
-      amendedOrderDocumentId = Core.Nothing,
-      approvedByUserProfileIds = Core.Nothing,
-      cancelled = Core.Nothing,
-      createdInfo = Core.Nothing,
-      effectiveDate = Core.Nothing,
-      id = Core.Nothing,
-      kind = Core.Nothing,
-      lastSentRecipients = Core.Nothing,
-      lastSentTime = Core.Nothing,
-      orderId = Core.Nothing,
-      projectId = Core.Nothing,
-      signed = Core.Nothing,
-      subaccountId = Core.Nothing,
-      title = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON OrderDocument where
-  parseJSON =
-    Core.withObject
-      "OrderDocument"
-      ( \o ->
-          OrderDocument
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "amendedOrderDocumentId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "approvedByUserProfileIds"
-                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
-                     )
-            Core.<*> (o Core..:? "cancelled")
-            Core.<*> (o Core..:? "createdInfo")
-            Core.<*> (o Core..:? "effectiveDate")
-            Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lastSentRecipients")
-            Core.<*> (o Core..:? "lastSentTime")
-            Core.<*> ( o Core..:? "orderId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "projectId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "signed")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON OrderDocument where
-  toJSON OrderDocument {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("amendedOrderDocumentId" Core..=) Core.. Core.AsText
-              Core.<$> amendedOrderDocumentId,
-            ("approvedByUserProfileIds" Core..=)
-              Core.. Core.fmap Core.AsText
-              Core.<$> approvedByUserProfileIds,
-            ("cancelled" Core..=) Core.<$> cancelled,
-            ("createdInfo" Core..=) Core.<$> createdInfo,
-            ("effectiveDate" Core..=) Core.<$> effectiveDate,
-            ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("kind" Core..=) Core.<$> kind,
-            ("lastSentRecipients" Core..=)
-              Core.<$> lastSentRecipients,
-            ("lastSentTime" Core..=) Core.<$> lastSentTime,
-            ("orderId" Core..=) Core.. Core.AsText
-              Core.<$> orderId,
-            ("projectId" Core..=) Core.. Core.AsText
-              Core.<$> projectId,
-            ("signed" Core..=) Core.<$> signed,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("title" Core..=) Core.<$> title,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | Order document List Response
---
--- /See:/ 'newOrderDocumentsListResponse' smart constructor.
-data OrderDocumentsListResponse = OrderDocumentsListResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#orderDocumentsListResponse\".
-    kind :: (Core.Maybe Core.Text),
-    -- | Pagination token to be used for the next list operation.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | Order document collection
-    orderDocuments :: (Core.Maybe [OrderDocument])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderDocumentsListResponse' with the minimum fields required to make a request.
-newOrderDocumentsListResponse ::
-  OrderDocumentsListResponse
-newOrderDocumentsListResponse =
-  OrderDocumentsListResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      orderDocuments = Core.Nothing
-    }
-
-instance Core.FromJSON OrderDocumentsListResponse where
-  parseJSON =
-    Core.withObject
-      "OrderDocumentsListResponse"
-      ( \o ->
-          OrderDocumentsListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "orderDocuments")
-      )
-
-instance Core.ToJSON OrderDocumentsListResponse where
-  toJSON OrderDocumentsListResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("orderDocuments" Core..=) Core.<$> orderDocuments
           ]
       )
 
@@ -11297,160 +10698,6 @@ instance Core.ToJSON OrdersListResponse where
           ]
       )
 
--- | Represents a DfaReporting path filter.
---
--- /See:/ 'newPathFilter' smart constructor.
-data PathFilter = PathFilter
-  { -- | Event filters in path report.
-    eventFilters :: (Core.Maybe [EventFilter]),
-    -- | The kind of resource this is, in this case dfareporting#pathFilter.
-    kind :: (Core.Maybe Core.Text),
-    -- | Determines how the \'value\' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'/\' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions (\'dfa:paidSearch/\') allow a matchType other than EXACT.
-    pathMatchPosition :: (Core.Maybe PathFilter_PathMatchPosition)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathFilter' with the minimum fields required to make a request.
-newPathFilter ::
-  PathFilter
-newPathFilter =
-  PathFilter
-    { eventFilters = Core.Nothing,
-      kind = Core.Nothing,
-      pathMatchPosition = Core.Nothing
-    }
-
-instance Core.FromJSON PathFilter where
-  parseJSON =
-    Core.withObject
-      "PathFilter"
-      ( \o ->
-          PathFilter
-            Core.<$> (o Core..:? "eventFilters")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "pathMatchPosition")
-      )
-
-instance Core.ToJSON PathFilter where
-  toJSON PathFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("eventFilters" Core..=) Core.<$> eventFilters,
-            ("kind" Core..=) Core.<$> kind,
-            ("pathMatchPosition" Core..=)
-              Core.<$> pathMatchPosition
-          ]
-      )
-
--- | Represents fields that are compatible to be selected for a report of type \"PATH\".
---
--- /See:/ 'newPathReportCompatibleFields' smart constructor.
-data PathReportCompatibleFields = PathReportCompatibleFields
-  { -- | Dimensions which are compatible to be selected in the \"channelGroupings\" section of the report.
-    channelGroupings :: (Core.Maybe [Dimension]),
-    -- | Dimensions which are compatible to be selected in the \"dimensions\" section of the report.
-    dimensions :: (Core.Maybe [Dimension]),
-    -- | The kind of resource this is, in this case dfareporting#pathReportCompatibleFields.
-    kind :: (Core.Maybe Core.Text),
-    -- | Metrics which are compatible to be selected in the \"metricNames\" section of the report.
-    metrics :: (Core.Maybe [Metric]),
-    -- | Dimensions which are compatible to be selected in the \"pathFilters\" section of the report.
-    pathFilters :: (Core.Maybe [Dimension])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathReportCompatibleFields' with the minimum fields required to make a request.
-newPathReportCompatibleFields ::
-  PathReportCompatibleFields
-newPathReportCompatibleFields =
-  PathReportCompatibleFields
-    { channelGroupings = Core.Nothing,
-      dimensions = Core.Nothing,
-      kind = Core.Nothing,
-      metrics = Core.Nothing,
-      pathFilters = Core.Nothing
-    }
-
-instance Core.FromJSON PathReportCompatibleFields where
-  parseJSON =
-    Core.withObject
-      "PathReportCompatibleFields"
-      ( \o ->
-          PathReportCompatibleFields
-            Core.<$> (o Core..:? "channelGroupings")
-            Core.<*> (o Core..:? "dimensions")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "metrics")
-            Core.<*> (o Core..:? "pathFilters")
-      )
-
-instance Core.ToJSON PathReportCompatibleFields where
-  toJSON PathReportCompatibleFields {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("channelGroupings" Core..=)
-              Core.<$> channelGroupings,
-            ("dimensions" Core..=) Core.<$> dimensions,
-            ("kind" Core..=) Core.<$> kind,
-            ("metrics" Core..=) Core.<$> metrics,
-            ("pathFilters" Core..=) Core.<$> pathFilters
-          ]
-      )
-
--- | Represents a PathReportDimensionValue resource.
---
--- /See:/ 'newPathReportDimensionValue' smart constructor.
-data PathReportDimensionValue = PathReportDimensionValue
-  { -- | The name of the dimension.
-    dimensionName :: (Core.Maybe Core.Text),
-    -- | The possible ID\'s associated with the value if available.
-    ids :: (Core.Maybe [Core.Text]),
-    -- | The kind of resource this is, in this case dfareporting#pathReportDimensionValue.
-    kind :: (Core.Maybe Core.Text),
-    -- | Determines how the \'value\' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'/\' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions (\'dfa:paidSearch/\') allow a matchType other than EXACT.
-    matchType :: (Core.Maybe PathReportDimensionValue_MatchType),
-    -- | The possible values of the dimension.
-    values :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathReportDimensionValue' with the minimum fields required to make a request.
-newPathReportDimensionValue ::
-  PathReportDimensionValue
-newPathReportDimensionValue =
-  PathReportDimensionValue
-    { dimensionName = Core.Nothing,
-      ids = Core.Nothing,
-      kind = Core.Nothing,
-      matchType = Core.Nothing,
-      values = Core.Nothing
-    }
-
-instance Core.FromJSON PathReportDimensionValue where
-  parseJSON =
-    Core.withObject
-      "PathReportDimensionValue"
-      ( \o ->
-          PathReportDimensionValue
-            Core.<$> (o Core..:? "dimensionName")
-            Core.<*> (o Core..:? "ids")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "matchType")
-            Core.<*> (o Core..:? "values")
-      )
-
-instance Core.ToJSON PathReportDimensionValue where
-  toJSON PathReportDimensionValue {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("dimensionName" Core..=) Core.<$> dimensionName,
-            ("ids" Core..=) Core.<$> ids,
-            ("kind" Core..=) Core.<$> kind,
-            ("matchType" Core..=) Core.<$> matchType,
-            ("values" Core..=) Core.<$> values
-          ]
-      )
-
 -- | Represents fields that are compatible to be selected for a report of type \"PATH/TO/CONVERSION\".
 --
 -- /See:/ 'newPathToConversionReportCompatibleFields' smart constructor.
@@ -11473,17 +10720,15 @@ newPathToConversionReportCompatibleFields ::
   PathToConversionReportCompatibleFields
 newPathToConversionReportCompatibleFields =
   PathToConversionReportCompatibleFields
-    { conversionDimensions = Core.Nothing,
+    { conversionDimensions =
+        Core.Nothing,
       customFloodlightVariables = Core.Nothing,
       kind = Core.Nothing,
       metrics = Core.Nothing,
       perInteractionDimensions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PathToConversionReportCompatibleFields
-  where
+instance Core.FromJSON PathToConversionReportCompatibleFields where
   parseJSON =
     Core.withObject
       "PathToConversionReportCompatibleFields"
@@ -11496,15 +10741,11 @@ instance
             Core.<*> (o Core..:? "perInteractionDimensions")
       )
 
-instance
-  Core.ToJSON
-    PathToConversionReportCompatibleFields
-  where
+instance Core.ToJSON PathToConversionReportCompatibleFields where
   toJSON PathToConversionReportCompatibleFields {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conversionDimensions" Core..=)
-              Core.<$> conversionDimensions,
+          [ ("conversionDimensions" Core..=) Core.<$> conversionDimensions,
             ("customFloodlightVariables" Core..=)
               Core.<$> customFloodlightVariables,
             ("kind" Core..=) Core.<$> kind,
@@ -11524,6 +10765,8 @@ data Placement = Placement
     activeStatus :: (Core.Maybe Placement_ActiveStatus),
     -- | Whether this placement opts out of ad blocking. When true, ad blocking is disabled for this placement. When false, the campaign and site settings take effect.
     adBlockingOptOut :: (Core.Maybe Core.Bool),
+    -- | Optional. Ad serving platform ID to identify the ad serving platform used by the placement. Measurement partners can use this field to add ad-server specific macros. Possible values are: * @1@, Adelphic * @2@, Adform * @3@, Adobe * @4@, Amobee * @5@, Basis (Centro) * @6@, Beeswax * @7@, Amazon * @8@, DV360 (DBM) * @9@, Innovid * @10@, MediaMath * @11@, Roku OneView DSP * @12@, TabMo Hawk * @13@, The Trade Desk * @14@, Xandr Invest DSP * @15@, Yahoo DSP * @16@, Zeta Global * @17@, Scaleout * @18@, Bidtellect * @19@, Unicorn * @20@, Teads * @21@, Quantcast * @22@, Cognitiv
+    adServingPlatformId :: (Core.Maybe Core.Int64),
     -- | Additional sizes associated with this placement. When inserting or updating a placement, only the size ID field is used.
     additionalSizes :: (Core.Maybe [Size]),
     -- | Advertiser ID of this placement. This field can be left blank.
@@ -11540,6 +10783,8 @@ data Placement = Placement
     compatibility :: (Core.Maybe Placement_Compatibility),
     -- | ID of the content category assigned to this placement.
     contentCategoryId :: (Core.Maybe Core.Int64),
+    -- | Optional. Conversion domain overrides for a placement.
+    conversionDomainOverride :: (Core.Maybe PlacementConversionDomainOverride),
     -- | Information about the creation of this placement. This is a read-only field.
     createInfo :: (Core.Maybe LastModifiedInfo),
     -- | Directory site ID of this placement. On insert, you must set either this field or the siteId field to specify the site associated with this placement. This is a required field that is read-only after insertion.
@@ -11584,6 +10829,8 @@ data Placement = Placement
     siteId :: (Core.Maybe Core.Int64),
     -- | Dimension value for the ID of the site. This is a read-only, auto-generated field.
     siteIdDimensionValue :: (Core.Maybe DimensionValue),
+    -- | Optional. Whether the ads in the placement are served by another platform and CM is only used for tracking or they are served by CM. A false value indicates the ad is served by CM.
+    siteServed :: (Core.Maybe Core.Bool),
     -- | Size associated with this placement. When inserting or updating a placement, only the size ID field is used. This field is required on insertion.
     size :: (Core.Maybe Size),
     -- | Whether creatives assigned to this placement must be SSL-compliant.
@@ -11615,6 +10862,7 @@ newPlacement =
     { accountId = Core.Nothing,
       activeStatus = Core.Nothing,
       adBlockingOptOut = Core.Nothing,
+      adServingPlatformId = Core.Nothing,
       additionalSizes = Core.Nothing,
       advertiserId = Core.Nothing,
       advertiserIdDimensionValue = Core.Nothing,
@@ -11623,6 +10871,7 @@ newPlacement =
       comment = Core.Nothing,
       compatibility = Core.Nothing,
       contentCategoryId = Core.Nothing,
+      conversionDomainOverride = Core.Nothing,
       createInfo = Core.Nothing,
       directorySiteId = Core.Nothing,
       directorySiteIdDimensionValue = Core.Nothing,
@@ -11645,6 +10894,7 @@ newPlacement =
       publisherUpdateInfo = Core.Nothing,
       siteId = Core.Nothing,
       siteIdDimensionValue = Core.Nothing,
+      siteServed = Core.Nothing,
       size = Core.Nothing,
       sslRequired = Core.Nothing,
       status = Core.Nothing,
@@ -11663,29 +10913,24 @@ instance Core.FromJSON Placement where
       "Placement"
       ( \o ->
           Placement
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "activeStatus")
             Core.<*> (o Core..:? "adBlockingOptOut")
+            Core.<*> ( o
+                         Core..:? "adServingPlatformId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "additionalSizes")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "campaignIdDimensionValue")
             Core.<*> (o Core..:? "comment")
             Core.<*> (o Core..:? "compatibility")
-            Core.<*> ( o Core..:? "contentCategoryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "contentCategoryId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "conversionDomainOverride")
             Core.<*> (o Core..:? "createInfo")
-            Core.<*> ( o Core..:? "directorySiteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "directorySiteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "directorySiteIdDimensionValue")
             Core.<*> (o Core..:? "externalId")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
@@ -11698,26 +10943,22 @@ instance Core.FromJSON Placement where
             Core.<*> (o Core..:? "partnerWrappingData")
             Core.<*> (o Core..:? "paymentApproved")
             Core.<*> (o Core..:? "paymentSource")
-            Core.<*> ( o Core..:? "placementGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "placementGroupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "placementGroupIdDimensionValue")
-            Core.<*> ( o Core..:? "placementStrategyId"
+            Core.<*> ( o
+                         Core..:? "placementStrategyId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pricingSchedule")
             Core.<*> (o Core..:? "primary")
             Core.<*> (o Core..:? "publisherUpdateInfo")
-            Core.<*> ( o Core..:? "siteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "siteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "siteIdDimensionValue")
+            Core.<*> (o Core..:? "siteServed")
             Core.<*> (o Core..:? "size")
             Core.<*> (o Core..:? "sslRequired")
             Core.<*> (o Core..:? "status")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagFormats")
             Core.<*> (o Core..:? "tagSetting")
             Core.<*> (o Core..:? "videoActiveViewOptOut")
@@ -11730,70 +10971,66 @@ instance Core.ToJSON Placement where
   toJSON Placement {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("activeStatus" Core..=) Core.<$> activeStatus,
-            ("adBlockingOptOut" Core..=)
-              Core.<$> adBlockingOptOut,
+            ("adBlockingOptOut" Core..=) Core.<$> adBlockingOptOut,
+            ("adServingPlatformId" Core..=)
+              Core.. Core.AsText
+              Core.<$> adServingPlatformId,
             ("additionalSizes" Core..=) Core.<$> additionalSizes,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
               Core.<$> campaignIdDimensionValue,
             ("comment" Core..=) Core.<$> comment,
             ("compatibility" Core..=) Core.<$> compatibility,
-            ("contentCategoryId" Core..=) Core.. Core.AsText
+            ("contentCategoryId" Core..=)
+              Core.. Core.AsText
               Core.<$> contentCategoryId,
+            ("conversionDomainOverride" Core..=)
+              Core.<$> conversionDomainOverride,
             ("createInfo" Core..=) Core.<$> createInfo,
-            ("directorySiteId" Core..=) Core.. Core.AsText
+            ("directorySiteId" Core..=)
+              Core.. Core.AsText
               Core.<$> directorySiteId,
             ("directorySiteIdDimensionValue" Core..=)
               Core.<$> directorySiteIdDimensionValue,
             ("externalId" Core..=) Core.<$> externalId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("keyName" Core..=) Core.<$> keyName,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
-            ("lookbackConfiguration" Core..=)
-              Core.<$> lookbackConfiguration,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
+            ("lookbackConfiguration" Core..=) Core.<$> lookbackConfiguration,
             ("name" Core..=) Core.<$> name,
-            ("partnerWrappingData" Core..=)
-              Core.<$> partnerWrappingData,
+            ("partnerWrappingData" Core..=) Core.<$> partnerWrappingData,
             ("paymentApproved" Core..=) Core.<$> paymentApproved,
             ("paymentSource" Core..=) Core.<$> paymentSource,
-            ("placementGroupId" Core..=) Core.. Core.AsText
+            ("placementGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> placementGroupId,
             ("placementGroupIdDimensionValue" Core..=)
               Core.<$> placementGroupIdDimensionValue,
-            ("placementStrategyId" Core..=) Core.. Core.AsText
+            ("placementStrategyId" Core..=)
+              Core.. Core.AsText
               Core.<$> placementStrategyId,
             ("pricingSchedule" Core..=) Core.<$> pricingSchedule,
             ("primary" Core..=) Core.<$> primary,
-            ("publisherUpdateInfo" Core..=)
-              Core.<$> publisherUpdateInfo,
-            ("siteId" Core..=) Core.. Core.AsText
-              Core.<$> siteId,
-            ("siteIdDimensionValue" Core..=)
-              Core.<$> siteIdDimensionValue,
+            ("publisherUpdateInfo" Core..=) Core.<$> publisherUpdateInfo,
+            ("siteId" Core..=) Core.. Core.AsText Core.<$> siteId,
+            ("siteIdDimensionValue" Core..=) Core.<$> siteIdDimensionValue,
+            ("siteServed" Core..=) Core.<$> siteServed,
             ("size" Core..=) Core.<$> size,
             ("sslRequired" Core..=) Core.<$> sslRequired,
             ("status" Core..=) Core.<$> status,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("tagFormats" Core..=) Core.<$> tagFormats,
             ("tagSetting" Core..=) Core.<$> tagSetting,
-            ("videoActiveViewOptOut" Core..=)
-              Core.<$> videoActiveViewOptOut,
+            ("videoActiveViewOptOut" Core..=) Core.<$> videoActiveViewOptOut,
             ("videoSettings" Core..=) Core.<$> videoSettings,
-            ("vpaidAdapterChoice" Core..=)
-              Core.<$> vpaidAdapterChoice,
+            ("vpaidAdapterChoice" Core..=) Core.<$> vpaidAdapterChoice,
             ("wrappingOptOut" Core..=) Core.<$> wrappingOptOut
           ]
       )
@@ -11831,9 +11068,7 @@ instance Core.FromJSON PlacementAssignment where
       ( \o ->
           PlacementAssignment
             Core.<$> (o Core..:? "active")
-            Core.<*> ( o Core..:? "placementId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "placementId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "placementIdDimensionValue")
             Core.<*> (o Core..:? "sslRequired")
       )
@@ -11843,12 +11078,43 @@ instance Core.ToJSON PlacementAssignment where
     Core.object
       ( Core.catMaybes
           [ ("active" Core..=) Core.<$> active,
-            ("placementId" Core..=) Core.. Core.AsText
-              Core.<$> placementId,
+            ("placementId" Core..=) Core.. Core.AsText Core.<$> placementId,
             ("placementIdDimensionValue" Core..=)
               Core.<$> placementIdDimensionValue,
             ("sslRequired" Core..=) Core.<$> sslRequired
           ]
+      )
+
+--
+-- /See:/ 'newPlacementConversionDomainOverride' smart constructor.
+newtype PlacementConversionDomainOverride = PlacementConversionDomainOverride
+  { conversionDomains :: (Core.Maybe [PlacementSingleConversionDomain])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlacementConversionDomainOverride' with the minimum fields required to make a request.
+newPlacementConversionDomainOverride ::
+  PlacementConversionDomainOverride
+newPlacementConversionDomainOverride =
+  PlacementConversionDomainOverride
+    { conversionDomains =
+        Core.Nothing
+    }
+
+instance Core.FromJSON PlacementConversionDomainOverride where
+  parseJSON =
+    Core.withObject
+      "PlacementConversionDomainOverride"
+      ( \o ->
+          PlacementConversionDomainOverride
+            Core.<$> (o Core..:? "conversionDomains")
+      )
+
+instance Core.ToJSON PlacementConversionDomainOverride where
+  toJSON PlacementConversionDomainOverride {..} =
+    Core.object
+      ( Core.catMaybes
+          [("conversionDomains" Core..=) Core.<$> conversionDomains]
       )
 
 -- | Contains properties of a package or roadblock.
@@ -11949,29 +11215,20 @@ instance Core.FromJSON PlacementGroup where
       "PlacementGroup"
       ( \o ->
           PlacementGroup
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "activeStatus")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "campaignIdDimensionValue")
-            Core.<*> ( o Core..:? "childPlacementIds"
+            Core.<*> ( o
+                         Core..:? "childPlacementIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "comment")
-            Core.<*> ( o Core..:? "contentCategoryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "contentCategoryId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "createInfo")
-            Core.<*> ( o Core..:? "directorySiteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "directorySiteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "directorySiteIdDimensionValue")
             Core.<*> (o Core..:? "externalId")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
@@ -11980,72 +11237,65 @@ instance Core.FromJSON PlacementGroup where
             Core.<*> (o Core..:? "lastModifiedInfo")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "placementGroupType")
-            Core.<*> ( o Core..:? "placementStrategyId"
+            Core.<*> ( o
+                         Core..:? "placementStrategyId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pricingSchedule")
-            Core.<*> ( o Core..:? "primaryPlacementId"
+            Core.<*> ( o
+                         Core..:? "primaryPlacementId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "primaryPlacementIdDimensionValue")
-            Core.<*> ( o Core..:? "siteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "siteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "siteIdDimensionValue")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PlacementGroup where
   toJSON PlacementGroup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("activeStatus" Core..=) Core.<$> activeStatus,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
             ("campaignIdDimensionValue" Core..=)
               Core.<$> campaignIdDimensionValue,
             ("childPlacementIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> childPlacementIds,
             ("comment" Core..=) Core.<$> comment,
-            ("contentCategoryId" Core..=) Core.. Core.AsText
+            ("contentCategoryId" Core..=)
+              Core.. Core.AsText
               Core.<$> contentCategoryId,
             ("createInfo" Core..=) Core.<$> createInfo,
-            ("directorySiteId" Core..=) Core.. Core.AsText
+            ("directorySiteId" Core..=)
+              Core.. Core.AsText
               Core.<$> directorySiteId,
             ("directorySiteIdDimensionValue" Core..=)
               Core.<$> directorySiteIdDimensionValue,
             ("externalId" Core..=) Core.<$> externalId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("name" Core..=) Core.<$> name,
-            ("placementGroupType" Core..=)
-              Core.<$> placementGroupType,
-            ("placementStrategyId" Core..=) Core.. Core.AsText
+            ("placementGroupType" Core..=) Core.<$> placementGroupType,
+            ("placementStrategyId" Core..=)
+              Core.. Core.AsText
               Core.<$> placementStrategyId,
             ("pricingSchedule" Core..=) Core.<$> pricingSchedule,
-            ("primaryPlacementId" Core..=) Core.. Core.AsText
+            ("primaryPlacementId" Core..=)
+              Core.. Core.AsText
               Core.<$> primaryPlacementId,
             ("primaryPlacementIdDimensionValue" Core..=)
               Core.<$> primaryPlacementIdDimensionValue,
-            ("siteId" Core..=) Core.. Core.AsText
-              Core.<$> siteId,
-            ("siteIdDimensionValue" Core..=)
-              Core.<$> siteIdDimensionValue,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("siteId" Core..=) Core.. Core.AsText Core.<$> siteId,
+            ("siteIdDimensionValue" Core..=) Core.<$> siteIdDimensionValue,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -12089,8 +11339,49 @@ instance Core.ToJSON PlacementGroupsListResponse where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("placementGroups" Core..=)
-              Core.<$> placementGroups
+            ("placementGroups" Core..=) Core.<$> placementGroups
+          ]
+      )
+
+--
+-- /See:/ 'newPlacementSingleConversionDomain' smart constructor.
+data PlacementSingleConversionDomain = PlacementSingleConversionDomain
+  { conversionDomainId :: (Core.Maybe Core.Int64),
+    conversionDomainValue :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlacementSingleConversionDomain' with the minimum fields required to make a request.
+newPlacementSingleConversionDomain ::
+  PlacementSingleConversionDomain
+newPlacementSingleConversionDomain =
+  PlacementSingleConversionDomain
+    { conversionDomainId =
+        Core.Nothing,
+      conversionDomainValue = Core.Nothing
+    }
+
+instance Core.FromJSON PlacementSingleConversionDomain where
+  parseJSON =
+    Core.withObject
+      "PlacementSingleConversionDomain"
+      ( \o ->
+          PlacementSingleConversionDomain
+            Core.<$> ( o
+                         Core..:? "conversionDomainId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "conversionDomainValue")
+      )
+
+instance Core.ToJSON PlacementSingleConversionDomain where
+  toJSON PlacementSingleConversionDomain {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("conversionDomainId" Core..=)
+              Core.. Core.AsText
+              Core.<$> conversionDomainId,
+            ("conversionDomainValue" Core..=) Core.<$> conversionDomainValue
           ]
       )
 
@@ -12117,10 +11408,7 @@ newPlacementStrategiesListResponse =
       placementStrategies = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PlacementStrategiesListResponse
-  where
+instance Core.FromJSON PlacementStrategiesListResponse where
   parseJSON =
     Core.withObject
       "PlacementStrategiesListResponse"
@@ -12137,8 +11425,7 @@ instance Core.ToJSON PlacementStrategiesListResponse where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("placementStrategies" Core..=)
-              Core.<$> placementStrategies
+            ("placementStrategies" Core..=) Core.<$> placementStrategies
           ]
       )
 
@@ -12174,9 +11461,7 @@ instance Core.FromJSON PlacementStrategy where
       "PlacementStrategy"
       ( \o ->
           PlacementStrategy
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
@@ -12186,8 +11471,7 @@ instance Core.ToJSON PlacementStrategy where
   toJSON PlacementStrategy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name
@@ -12217,9 +11501,7 @@ instance Core.FromJSON PlacementTag where
       "PlacementTag"
       ( \o ->
           PlacementTag
-            Core.<$> ( o Core..:? "placementId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "placementId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagDatas")
       )
 
@@ -12227,8 +11509,7 @@ instance Core.ToJSON PlacementTag where
   toJSON PlacementTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("placementId" Core..=) Core.. Core.AsText
-              Core.<$> placementId,
+          [ ("placementId" Core..=) Core.. Core.AsText Core.<$> placementId,
             ("tagDatas" Core..=) Core.<$> tagDatas
           ]
       )
@@ -12333,7 +11614,11 @@ data PlatformType = PlatformType
 newPlatformType ::
   PlatformType
 newPlatformType =
-  PlatformType {id = Core.Nothing, kind = Core.Nothing, name = Core.Nothing}
+  PlatformType
+    { id = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON PlatformType where
   parseJSON =
@@ -12371,7 +11656,10 @@ data PlatformTypesListResponse = PlatformTypesListResponse
 newPlatformTypesListResponse ::
   PlatformTypesListResponse
 newPlatformTypesListResponse =
-  PlatformTypesListResponse {kind = Core.Nothing, platformTypes = Core.Nothing}
+  PlatformTypesListResponse
+    { kind = Core.Nothing,
+      platformTypes = Core.Nothing
+    }
 
 instance Core.FromJSON PlatformTypesListResponse where
   parseJSON =
@@ -12503,9 +11791,7 @@ instance Core.FromJSON PostalCode where
           PostalCode
             Core.<$> (o Core..:? "code")
             Core.<*> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "countryDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countryDartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
       )
@@ -12516,7 +11802,8 @@ instance Core.ToJSON PostalCode where
       ( Core.catMaybes
           [ ("code" Core..=) Core.<$> code,
             ("countryCode" Core..=) Core.<$> countryCode,
-            ("countryDartId" Core..=) Core.. Core.AsText
+            ("countryDartId" Core..=)
+              Core.. Core.AsText
               Core.<$> countryDartId,
             ("id" Core..=) Core.<$> id,
             ("kind" Core..=) Core.<$> kind
@@ -12538,7 +11825,10 @@ data PostalCodesListResponse = PostalCodesListResponse
 newPostalCodesListResponse ::
   PostalCodesListResponse
 newPostalCodesListResponse =
-  PostalCodesListResponse {kind = Core.Nothing, postalCodes = Core.Nothing}
+  PostalCodesListResponse
+    { kind = Core.Nothing,
+      postalCodes = Core.Nothing
+    }
 
 instance Core.FromJSON PostalCodesListResponse where
   parseJSON =
@@ -12559,13 +11849,11 @@ instance Core.ToJSON PostalCodesListResponse where
           ]
       )
 
--- | Pricing Information
 --
 -- /See:/ 'newPricing' smart constructor.
 data Pricing = Pricing
   { -- | Cap cost type of this inventory item.
     capCostType :: (Core.Maybe Pricing_CapCostType),
-    -- |
     endDate :: (Core.Maybe Core.Date),
     -- | Flights of this inventory item. A flight (a.k.a. pricing period) represents the inventory item pricing information for a specific period of time.
     flights :: (Core.Maybe [Flight]),
@@ -12573,7 +11861,6 @@ data Pricing = Pricing
     groupType :: (Core.Maybe Pricing_GroupType),
     -- | Pricing type of this inventory item.
     pricingType :: (Core.Maybe Pricing_PricingType),
-    -- |
     startDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -12624,7 +11911,6 @@ instance Core.ToJSON Pricing where
 data PricingSchedule = PricingSchedule
   { -- | Placement cap cost option.
     capCostOption :: (Core.Maybe PricingSchedule_CapCostOption),
-    -- |
     endDate :: (Core.Maybe Core.Date),
     -- | Whether this placement is flighted. If true, pricing periods will be computed automatically.
     flighted :: (Core.Maybe Core.Bool),
@@ -12634,9 +11920,7 @@ data PricingSchedule = PricingSchedule
     pricingPeriods :: (Core.Maybe [PricingSchedulePricingPeriod]),
     -- | Placement pricing type. This field is required on insertion.
     pricingType :: (Core.Maybe PricingSchedule_PricingType),
-    -- |
     startDate :: (Core.Maybe Core.Date),
-    -- |
     testingStartDate :: (Core.Maybe Core.Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -12665,7 +11949,8 @@ instance Core.FromJSON PricingSchedule where
             Core.<$> (o Core..:? "capCostOption")
             Core.<*> (o Core..:? "endDate")
             Core.<*> (o Core..:? "flighted")
-            Core.<*> ( o Core..:? "floodlightActivityId"
+            Core.<*> ( o
+                         Core..:? "floodlightActivityId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pricingPeriods")
@@ -12681,13 +11966,13 @@ instance Core.ToJSON PricingSchedule where
           [ ("capCostOption" Core..=) Core.<$> capCostOption,
             ("endDate" Core..=) Core.<$> endDate,
             ("flighted" Core..=) Core.<$> flighted,
-            ("floodlightActivityId" Core..=) Core.. Core.AsText
+            ("floodlightActivityId" Core..=)
+              Core.. Core.AsText
               Core.<$> floodlightActivityId,
             ("pricingPeriods" Core..=) Core.<$> pricingPeriods,
             ("pricingType" Core..=) Core.<$> pricingType,
             ("startDate" Core..=) Core.<$> startDate,
-            ("testingStartDate" Core..=)
-              Core.<$> testingStartDate
+            ("testingStartDate" Core..=) Core.<$> testingStartDate
           ]
       )
 
@@ -12695,13 +11980,11 @@ instance Core.ToJSON PricingSchedule where
 --
 -- /See:/ 'newPricingSchedulePricingPeriod' smart constructor.
 data PricingSchedulePricingPeriod = PricingSchedulePricingPeriod
-  { -- |
-    endDate :: (Core.Maybe Core.Date),
+  { endDate :: (Core.Maybe Core.Date),
     -- | Comments for this pricing period.
     pricingComment :: (Core.Maybe Core.Text),
-    -- | Rate or cost of this pricing period in nanos (i.e., multipled by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
+    -- | Rate or cost of this pricing period in nanos (i.e., multiplied by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
     rateOrCostNanos :: (Core.Maybe Core.Int64),
-    -- |
     startDate :: (Core.Maybe Core.Date),
     -- | Units of this pricing period. Acceptable values are 0 to 10000000000, inclusive.
     units :: (Core.Maybe Core.Int64)
@@ -12728,13 +12011,9 @@ instance Core.FromJSON PricingSchedulePricingPeriod where
           PricingSchedulePricingPeriod
             Core.<$> (o Core..:? "endDate")
             Core.<*> (o Core..:? "pricingComment")
-            Core.<*> ( o Core..:? "rateOrCostNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "rateOrCostNanos" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "startDate")
-            Core.<*> ( o Core..:? "units"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "units" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PricingSchedulePricingPeriod where
@@ -12743,7 +12022,8 @@ instance Core.ToJSON PricingSchedulePricingPeriod where
       ( Core.catMaybes
           [ ("endDate" Core..=) Core.<$> endDate,
             ("pricingComment" Core..=) Core.<$> pricingComment,
-            ("rateOrCostNanos" Core..=) Core.. Core.AsText
+            ("rateOrCostNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> rateOrCostNanos,
             ("startDate" Core..=) Core.<$> startDate,
             ("units" Core..=) Core.. Core.AsText Core.<$> units
@@ -12768,7 +12048,6 @@ data Project = Project
     clientBillingCode :: (Core.Maybe Core.Text),
     -- | Name of the project client.
     clientName :: (Core.Maybe Core.Text),
-    -- |
     endDate :: (Core.Maybe Core.Date),
     -- | ID of this project. This is a read-only, auto-generated field.
     id :: (Core.Maybe Core.Int64),
@@ -12780,7 +12059,6 @@ data Project = Project
     name :: (Core.Maybe Core.Text),
     -- | Overview of this project.
     overview :: (Core.Maybe Core.Text),
-    -- |
     startDate :: (Core.Maybe Core.Date),
     -- | Subaccount ID of this project.
     subaccountId :: (Core.Maybe Core.Int64),
@@ -12836,17 +12114,11 @@ instance Core.FromJSON Project where
       "Project"
       ( \o ->
           Project
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "audienceAgeGroup")
             Core.<*> (o Core..:? "audienceGender")
-            Core.<*> ( o Core..:? "budget"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "budget" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clientBillingCode")
             Core.<*> (o Core..:? "clientName")
             Core.<*> (o Core..:? "endDate")
@@ -12856,28 +12128,18 @@ instance Core.FromJSON Project where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "overview")
             Core.<*> (o Core..:? "startDate")
-            Core.<*> ( o Core..:? "subaccountId"
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "targetClicks" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "targetConversions" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "targetCpaNanos" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "targetCpcNanos" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "targetCpmActiveViewNanos"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "targetClicks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetConversions"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetCpaNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetCpcNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetCpmActiveViewNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetCpmNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "targetImpressions"
+            Core.<*> (o Core..:? "targetCpmNanos" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "targetImpressions"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -12886,42 +12148,39 @@ instance Core.ToJSON Project where
   toJSON Project {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("audienceAgeGroup" Core..=)
-              Core.<$> audienceAgeGroup,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("audienceAgeGroup" Core..=) Core.<$> audienceAgeGroup,
             ("audienceGender" Core..=) Core.<$> audienceGender,
-            ("budget" Core..=) Core.. Core.AsText
-              Core.<$> budget,
-            ("clientBillingCode" Core..=)
-              Core.<$> clientBillingCode,
+            ("budget" Core..=) Core.. Core.AsText Core.<$> budget,
+            ("clientBillingCode" Core..=) Core.<$> clientBillingCode,
             ("clientName" Core..=) Core.<$> clientName,
             ("endDate" Core..=) Core.<$> endDate,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedInfo" Core..=)
-              Core.<$> lastModifiedInfo,
+            ("lastModifiedInfo" Core..=) Core.<$> lastModifiedInfo,
             ("name" Core..=) Core.<$> name,
             ("overview" Core..=) Core.<$> overview,
             ("startDate" Core..=) Core.<$> startDate,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("targetClicks" Core..=) Core.. Core.AsText
-              Core.<$> targetClicks,
-            ("targetConversions" Core..=) Core.. Core.AsText
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
+            ("targetClicks" Core..=) Core.. Core.AsText Core.<$> targetClicks,
+            ("targetConversions" Core..=)
+              Core.. Core.AsText
               Core.<$> targetConversions,
-            ("targetCpaNanos" Core..=) Core.. Core.AsText
+            ("targetCpaNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> targetCpaNanos,
-            ("targetCpcNanos" Core..=) Core.. Core.AsText
+            ("targetCpcNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> targetCpcNanos,
             ("targetCpmActiveViewNanos" Core..=)
               Core.. Core.AsText
               Core.<$> targetCpmActiveViewNanos,
-            ("targetCpmNanos" Core..=) Core.. Core.AsText
+            ("targetCpmNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> targetCpmNanos,
-            ("targetImpressions" Core..=) Core.. Core.AsText
+            ("targetImpressions" Core..=)
+              Core.. Core.AsText
               Core.<$> targetImpressions
           ]
       )
@@ -13020,13 +12279,11 @@ instance Core.ToJSON ReachReportCompatibleFields where
   toJSON ReachReportCompatibleFields {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+          [ ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("kind" Core..=) Core.<$> kind,
             ("metrics" Core..=) Core.<$> metrics,
-            ("pivotedActivityMetrics" Core..=)
-              Core.<$> pivotedActivityMetrics,
+            ("pivotedActivityMetrics" Core..=) Core.<$> pivotedActivityMetrics,
             ("reachByFrequencyMetrics" Core..=)
               Core.<$> reachByFrequencyMetrics
           ]
@@ -13115,12 +12372,8 @@ instance Core.FromJSON Region where
       ( \o ->
           Region
             Core.<$> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "countryDartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dartId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countryDartId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dartId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "regionCode")
@@ -13131,10 +12384,10 @@ instance Core.ToJSON Region where
     Core.object
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
-            ("countryDartId" Core..=) Core.. Core.AsText
+            ("countryDartId" Core..=)
+              Core.. Core.AsText
               Core.<$> countryDartId,
-            ("dartId" Core..=) Core.. Core.AsText
-              Core.<$> dartId,
+            ("dartId" Core..=) Core.. Core.AsText Core.<$> dartId,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("regionCode" Core..=) Core.<$> regionCode
@@ -13164,7 +12417,8 @@ instance Core.FromJSON RegionsListResponse where
       "RegionsListResponse"
       ( \o ->
           RegionsListResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "regions")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "regions")
       )
 
 instance Core.ToJSON RegionsListResponse where
@@ -13235,55 +12489,39 @@ instance Core.FromJSON RemarketingList where
       "RemarketingList"
       ( \o ->
           RemarketingList
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "active")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lifeSpan"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lifeSpan" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "listPopulationRule")
-            Core.<*> ( o Core..:? "listSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "listSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "listSource")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON RemarketingList where
   toJSON RemarketingList {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("active" Core..=) Core.<$> active,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lifeSpan" Core..=) Core.. Core.AsText
-              Core.<$> lifeSpan,
-            ("listPopulationRule" Core..=)
-              Core.<$> listPopulationRule,
-            ("listSize" Core..=) Core.. Core.AsText
-              Core.<$> listSize,
+            ("lifeSpan" Core..=) Core.. Core.AsText Core.<$> lifeSpan,
+            ("listPopulationRule" Core..=) Core.<$> listPopulationRule,
+            ("listSize" Core..=) Core.. Core.AsText Core.<$> listSize,
             ("listSource" Core..=) Core.<$> listSource,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -13320,13 +12558,13 @@ instance Core.FromJSON RemarketingListShare where
       ( \o ->
           RemarketingListShare
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "remarketingListId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "sharedAccountIds"
+            Core.<*> (o Core..:? "remarketingListId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "sharedAccountIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
-            Core.<*> ( o Core..:? "sharedAdvertiserIds"
+            Core.<*> ( o
+                         Core..:? "sharedAdvertiserIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -13336,7 +12574,8 @@ instance Core.ToJSON RemarketingListShare where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("remarketingListId" Core..=) Core.. Core.AsText
+            ("remarketingListId" Core..=)
+              Core.. Core.AsText
               Core.<$> remarketingListId,
             ("sharedAccountIds" Core..=)
               Core.. Core.fmap Core.AsText
@@ -13387,8 +12626,7 @@ instance Core.ToJSON RemarketingListsListResponse where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("remarketingLists" Core..=)
-              Core.<$> remarketingLists
+            ("remarketingLists" Core..=) Core.<$> remarketingLists
           ]
       )
 
@@ -13402,6 +12640,8 @@ data Report = Report
     criteria :: (Core.Maybe Report_Criteria),
     -- | The report criteria for a report of type \"CROSS/DIMENSION/REACH\".
     crossDimensionReachCriteria :: (Core.Maybe Report_CrossDimensionReachCriteria),
+    -- | Optional. The report criteria for a report of type \"CROSS/MEDIA/REACH\".
+    crossMediaReachCriteria :: (Core.Maybe Report_CrossMediaReachCriteria),
     -- | The report\'s email delivery settings.
     delivery :: (Core.Maybe Report_Delivery),
     -- | The eTag of this response for caching purposes.
@@ -13422,10 +12662,6 @@ data Report = Report
     name :: (Core.Maybe Core.Text),
     -- | The user profile id of the owner of this report.
     ownerProfileId :: (Core.Maybe Core.Int64),
-    -- | The report criteria for a report of type \"PATH_ATTRIBUTION\".
-    pathAttributionCriteria :: (Core.Maybe Report_PathAttributionCriteria),
-    -- | The report criteria for a report of type \"PATH\".
-    pathCriteria :: (Core.Maybe Report_PathCriteria),
     -- | The report criteria for a report of type \"PATH/TO/CONVERSION\".
     pathToConversionCriteria :: (Core.Maybe Report_PathToConversionCriteria),
     -- | The report criteria for a report of type \"REACH\".
@@ -13447,6 +12683,7 @@ newReport =
     { accountId = Core.Nothing,
       criteria = Core.Nothing,
       crossDimensionReachCriteria = Core.Nothing,
+      crossMediaReachCriteria = Core.Nothing,
       delivery = Core.Nothing,
       etag = Core.Nothing,
       fileName = Core.Nothing,
@@ -13457,8 +12694,6 @@ newReport =
       lastModifiedTime = Core.Nothing,
       name = Core.Nothing,
       ownerProfileId = Core.Nothing,
-      pathAttributionCriteria = Core.Nothing,
-      pathCriteria = Core.Nothing,
       pathToConversionCriteria = Core.Nothing,
       reachCriteria = Core.Nothing,
       schedule = Core.Nothing,
@@ -13472,11 +12707,10 @@ instance Core.FromJSON Report where
       "Report"
       ( \o ->
           Report
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "criteria")
             Core.<*> (o Core..:? "crossDimensionReachCriteria")
+            Core.<*> (o Core..:? "crossMediaReachCriteria")
             Core.<*> (o Core..:? "delivery")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "fileName")
@@ -13484,21 +12718,13 @@ instance Core.FromJSON Report where
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "ownerProfileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "pathAttributionCriteria")
-            Core.<*> (o Core..:? "pathCriteria")
+            Core.<*> (o Core..:? "ownerProfileId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "pathToConversionCriteria")
             Core.<*> (o Core..:? "reachCriteria")
             Core.<*> (o Core..:? "schedule")
-            Core.<*> ( o Core..:? "subAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -13506,33 +12732,31 @@ instance Core.ToJSON Report where
   toJSON Report {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("criteria" Core..=) Core.<$> criteria,
             ("crossDimensionReachCriteria" Core..=)
               Core.<$> crossDimensionReachCriteria,
+            ("crossMediaReachCriteria" Core..=)
+              Core.<$> crossMediaReachCriteria,
             ("delivery" Core..=) Core.<$> delivery,
             ("etag" Core..=) Core.<$> etag,
             ("fileName" Core..=) Core.<$> fileName,
-            ("floodlightCriteria" Core..=)
-              Core.<$> floodlightCriteria,
+            ("floodlightCriteria" Core..=) Core.<$> floodlightCriteria,
             ("format" Core..=) Core.<$> format,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
             ("name" Core..=) Core.<$> name,
-            ("ownerProfileId" Core..=) Core.. Core.AsText
+            ("ownerProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> ownerProfileId,
-            ("pathAttributionCriteria" Core..=)
-              Core.<$> pathAttributionCriteria,
-            ("pathCriteria" Core..=) Core.<$> pathCriteria,
             ("pathToConversionCriteria" Core..=)
               Core.<$> pathToConversionCriteria,
             ("reachCriteria" Core..=) Core.<$> reachCriteria,
             ("schedule" Core..=) Core.<$> schedule,
-            ("subAccountId" Core..=) Core.. Core.AsText
-              Core.<$> subAccountId,
+            ("subAccountId" Core..=) Core.. Core.AsText Core.<$> subAccountId,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -13588,11 +12812,9 @@ instance Core.ToJSON Report_Criteria where
     Core.object
       ( Core.catMaybes
           [ ("activities" Core..=) Core.<$> activities,
-            ("customRichMediaEvents" Core..=)
-              Core.<$> customRichMediaEvents,
+            ("customRichMediaEvents" Core..=) Core.<$> customRichMediaEvents,
             ("dateRange" Core..=) Core.<$> dateRange,
-            ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("metricNames" Core..=) Core.<$> metricNames
           ]
@@ -13633,10 +12855,7 @@ newReport_CrossDimensionReachCriteria =
       pivoted = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Report_CrossDimensionReachCriteria
-  where
+instance Core.FromJSON Report_CrossDimensionReachCriteria where
   parseJSON =
     Core.withObject
       "Report_CrossDimensionReachCriteria"
@@ -13651,22 +12870,66 @@ instance
             Core.<*> (o Core..:? "pivoted")
       )
 
-instance
-  Core.ToJSON
-    Report_CrossDimensionReachCriteria
-  where
+instance Core.ToJSON Report_CrossDimensionReachCriteria where
   toJSON Report_CrossDimensionReachCriteria {..} =
     Core.object
       ( Core.catMaybes
           [ ("breakdown" Core..=) Core.<$> breakdown,
             ("dateRange" Core..=) Core.<$> dateRange,
             ("dimension" Core..=) Core.<$> dimension,
-            ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("metricNames" Core..=) Core.<$> metricNames,
-            ("overlapMetricNames" Core..=)
-              Core.<$> overlapMetricNames,
+            ("overlapMetricNames" Core..=) Core.<$> overlapMetricNames,
             ("pivoted" Core..=) Core.<$> pivoted
+          ]
+      )
+
+-- | Optional. The report criteria for a report of type \"CROSS/MEDIA/REACH\".
+--
+-- /See:/ 'newReport_CrossMediaReachCriteria' smart constructor.
+data Report_CrossMediaReachCriteria = Report_CrossMediaReachCriteria
+  { -- | Required. The date range this report should be run for.
+    dateRange :: (Core.Maybe DateRange),
+    -- | Required. The list of filters on which dimensions are filtered. Filters for different dimensions are ANDed, filters for the same dimension are grouped together and ORed.
+    dimensionFilters :: (Core.Maybe [DimensionValue]),
+    -- | Required. The list of dimensions the report should include.
+    dimensions :: (Core.Maybe [SortedDimension]),
+    -- | Required. The list of names of metrics the report should include.
+    metricNames :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Report_CrossMediaReachCriteria' with the minimum fields required to make a request.
+newReport_CrossMediaReachCriteria ::
+  Report_CrossMediaReachCriteria
+newReport_CrossMediaReachCriteria =
+  Report_CrossMediaReachCriteria
+    { dateRange = Core.Nothing,
+      dimensionFilters = Core.Nothing,
+      dimensions = Core.Nothing,
+      metricNames = Core.Nothing
+    }
+
+instance Core.FromJSON Report_CrossMediaReachCriteria where
+  parseJSON =
+    Core.withObject
+      "Report_CrossMediaReachCriteria"
+      ( \o ->
+          Report_CrossMediaReachCriteria
+            Core.<$> (o Core..:? "dateRange")
+            Core.<*> (o Core..:? "dimensionFilters")
+            Core.<*> (o Core..:? "dimensions")
+            Core.<*> (o Core..:? "metricNames")
+      )
+
+instance Core.ToJSON Report_CrossMediaReachCriteria where
+  toJSON Report_CrossMediaReachCriteria {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dateRange" Core..=) Core.<$> dateRange,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
+            ("dimensions" Core..=) Core.<$> dimensions,
+            ("metricNames" Core..=) Core.<$> metricNames
           ]
       )
 
@@ -13713,8 +12976,7 @@ instance Core.ToJSON Report_Delivery where
     Core.object
       ( Core.catMaybes
           [ ("emailOwner" Core..=) Core.<$> emailOwner,
-            ("emailOwnerDeliveryType" Core..=)
-              Core.<$> emailOwnerDeliveryType,
+            ("emailOwnerDeliveryType" Core..=) Core.<$> emailOwnerDeliveryType,
             ("message" Core..=) Core.<$> message,
             ("recipients" Core..=) Core.<$> recipients
           ]
@@ -13774,17 +13036,13 @@ instance Core.ToJSON Report_FloodlightCriteria where
   toJSON Report_FloodlightCriteria {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customRichMediaEvents" Core..=)
-              Core.<$> customRichMediaEvents,
+          [ ("customRichMediaEvents" Core..=) Core.<$> customRichMediaEvents,
             ("dateRange" Core..=) Core.<$> dateRange,
-            ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
-            ("floodlightConfigId" Core..=)
-              Core.<$> floodlightConfigId,
+            ("floodlightConfigId" Core..=) Core.<$> floodlightConfigId,
             ("metricNames" Core..=) Core.<$> metricNames,
-            ("reportProperties" Core..=)
-              Core.<$> reportProperties
+            ("reportProperties" Core..=) Core.<$> reportProperties
           ]
       )
 
@@ -13806,15 +13064,13 @@ newReport_FloodlightCriteria_ReportProperties ::
   Report_FloodlightCriteria_ReportProperties
 newReport_FloodlightCriteria_ReportProperties =
   Report_FloodlightCriteria_ReportProperties
-    { includeAttributedIPConversions = Core.Nothing,
+    { includeAttributedIPConversions =
+        Core.Nothing,
       includeUnattributedCookieConversions = Core.Nothing,
       includeUnattributedIPConversions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Report_FloodlightCriteria_ReportProperties
-  where
+instance Core.FromJSON Report_FloodlightCriteria_ReportProperties where
   parseJSON =
     Core.withObject
       "Report_FloodlightCriteria_ReportProperties"
@@ -13825,10 +13081,7 @@ instance
             Core.<*> (o Core..:? "includeUnattributedIPConversions")
       )
 
-instance
-  Core.ToJSON
-    Report_FloodlightCriteria_ReportProperties
-  where
+instance Core.ToJSON Report_FloodlightCriteria_ReportProperties where
   toJSON Report_FloodlightCriteria_ReportProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -13838,140 +13091,6 @@ instance
               Core.<$> includeUnattributedCookieConversions,
             ("includeUnattributedIPConversions" Core..=)
               Core.<$> includeUnattributedIPConversions
-          ]
-      )
-
--- | The report criteria for a report of type \"PATH_ATTRIBUTION\".
---
--- /See:/ 'newReport_PathAttributionCriteria' smart constructor.
-data Report_PathAttributionCriteria = Report_PathAttributionCriteria
-  { -- | The list of \'dfa:activity\' values to filter on.
-    activityFilters :: (Core.Maybe [DimensionValue]),
-    -- | Channel Grouping.
-    customChannelGrouping :: (Core.Maybe ChannelGrouping),
-    -- | The date range this report should be run for.
-    dateRange :: (Core.Maybe DateRange),
-    -- | The list of dimensions the report should include.
-    dimensions :: (Core.Maybe [SortedDimension]),
-    -- | The floodlight ID for which to show data in this report. All advertisers associated with that ID will automatically be added. The dimension of the value needs to be \'dfa:floodlightConfigId\'.
-    floodlightConfigId :: (Core.Maybe DimensionValue),
-    -- | The list of names of metrics the report should include.
-    metricNames :: (Core.Maybe [Core.Text]),
-    -- | Path Filters.
-    pathFilters :: (Core.Maybe [PathFilter])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Report_PathAttributionCriteria' with the minimum fields required to make a request.
-newReport_PathAttributionCriteria ::
-  Report_PathAttributionCriteria
-newReport_PathAttributionCriteria =
-  Report_PathAttributionCriteria
-    { activityFilters = Core.Nothing,
-      customChannelGrouping = Core.Nothing,
-      dateRange = Core.Nothing,
-      dimensions = Core.Nothing,
-      floodlightConfigId = Core.Nothing,
-      metricNames = Core.Nothing,
-      pathFilters = Core.Nothing
-    }
-
-instance Core.FromJSON Report_PathAttributionCriteria where
-  parseJSON =
-    Core.withObject
-      "Report_PathAttributionCriteria"
-      ( \o ->
-          Report_PathAttributionCriteria
-            Core.<$> (o Core..:? "activityFilters")
-            Core.<*> (o Core..:? "customChannelGrouping")
-            Core.<*> (o Core..:? "dateRange")
-            Core.<*> (o Core..:? "dimensions")
-            Core.<*> (o Core..:? "floodlightConfigId")
-            Core.<*> (o Core..:? "metricNames")
-            Core.<*> (o Core..:? "pathFilters")
-      )
-
-instance Core.ToJSON Report_PathAttributionCriteria where
-  toJSON Report_PathAttributionCriteria {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("activityFilters" Core..=)
-              Core.<$> activityFilters,
-            ("customChannelGrouping" Core..=)
-              Core.<$> customChannelGrouping,
-            ("dateRange" Core..=) Core.<$> dateRange,
-            ("dimensions" Core..=) Core.<$> dimensions,
-            ("floodlightConfigId" Core..=)
-              Core.<$> floodlightConfigId,
-            ("metricNames" Core..=) Core.<$> metricNames,
-            ("pathFilters" Core..=) Core.<$> pathFilters
-          ]
-      )
-
--- | The report criteria for a report of type \"PATH\".
---
--- /See:/ 'newReport_PathCriteria' smart constructor.
-data Report_PathCriteria = Report_PathCriteria
-  { -- | The list of \'dfa:activity\' values to filter on.
-    activityFilters :: (Core.Maybe [DimensionValue]),
-    -- | Channel Grouping.
-    customChannelGrouping :: (Core.Maybe ChannelGrouping),
-    -- | The date range this report should be run for.
-    dateRange :: (Core.Maybe DateRange),
-    -- | The list of dimensions the report should include.
-    dimensions :: (Core.Maybe [SortedDimension]),
-    -- | The floodlight ID for which to show data in this report. All advertisers associated with that ID will automatically be added. The dimension of the value needs to be \'dfa:floodlightConfigId\'.
-    floodlightConfigId :: (Core.Maybe DimensionValue),
-    -- | The list of names of metrics the report should include.
-    metricNames :: (Core.Maybe [Core.Text]),
-    -- | Path Filters.
-    pathFilters :: (Core.Maybe [PathFilter])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Report_PathCriteria' with the minimum fields required to make a request.
-newReport_PathCriteria ::
-  Report_PathCriteria
-newReport_PathCriteria =
-  Report_PathCriteria
-    { activityFilters = Core.Nothing,
-      customChannelGrouping = Core.Nothing,
-      dateRange = Core.Nothing,
-      dimensions = Core.Nothing,
-      floodlightConfigId = Core.Nothing,
-      metricNames = Core.Nothing,
-      pathFilters = Core.Nothing
-    }
-
-instance Core.FromJSON Report_PathCriteria where
-  parseJSON =
-    Core.withObject
-      "Report_PathCriteria"
-      ( \o ->
-          Report_PathCriteria
-            Core.<$> (o Core..:? "activityFilters")
-            Core.<*> (o Core..:? "customChannelGrouping")
-            Core.<*> (o Core..:? "dateRange")
-            Core.<*> (o Core..:? "dimensions")
-            Core.<*> (o Core..:? "floodlightConfigId")
-            Core.<*> (o Core..:? "metricNames")
-            Core.<*> (o Core..:? "pathFilters")
-      )
-
-instance Core.ToJSON Report_PathCriteria where
-  toJSON Report_PathCriteria {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("activityFilters" Core..=)
-              Core.<$> activityFilters,
-            ("customChannelGrouping" Core..=)
-              Core.<$> customChannelGrouping,
-            ("dateRange" Core..=) Core.<$> dateRange,
-            ("dimensions" Core..=) Core.<$> dimensions,
-            ("floodlightConfigId" Core..=)
-              Core.<$> floodlightConfigId,
-            ("metricNames" Core..=) Core.<$> metricNames,
-            ("pathFilters" Core..=) Core.<$> pathFilters
           ]
       )
 
@@ -14016,10 +13135,7 @@ newReport_PathToConversionCriteria =
       reportProperties = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Report_PathToConversionCriteria
-  where
+instance Core.FromJSON Report_PathToConversionCriteria where
   parseJSON =
     Core.withObject
       "Report_PathToConversionCriteria"
@@ -14040,22 +13156,17 @@ instance Core.ToJSON Report_PathToConversionCriteria where
   toJSON Report_PathToConversionCriteria {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activityFilters" Core..=)
-              Core.<$> activityFilters,
-            ("conversionDimensions" Core..=)
-              Core.<$> conversionDimensions,
+          [ ("activityFilters" Core..=) Core.<$> activityFilters,
+            ("conversionDimensions" Core..=) Core.<$> conversionDimensions,
             ("customFloodlightVariables" Core..=)
               Core.<$> customFloodlightVariables,
-            ("customRichMediaEvents" Core..=)
-              Core.<$> customRichMediaEvents,
+            ("customRichMediaEvents" Core..=) Core.<$> customRichMediaEvents,
             ("dateRange" Core..=) Core.<$> dateRange,
-            ("floodlightConfigId" Core..=)
-              Core.<$> floodlightConfigId,
+            ("floodlightConfigId" Core..=) Core.<$> floodlightConfigId,
             ("metricNames" Core..=) Core.<$> metricNames,
             ("perInteractionDimensions" Core..=)
               Core.<$> perInteractionDimensions,
-            ("reportProperties" Core..=)
-              Core.<$> reportProperties
+            ("reportProperties" Core..=) Core.<$> reportProperties
           ]
       )
 
@@ -14089,11 +13200,14 @@ newReport_PathToConversionCriteria_ReportProperties ::
   Report_PathToConversionCriteria_ReportProperties
 newReport_PathToConversionCriteria_ReportProperties =
   Report_PathToConversionCriteria_ReportProperties
-    { clicksLookbackWindow = Core.Nothing,
+    { clicksLookbackWindow =
+        Core.Nothing,
       impressionsLookbackWindow = Core.Nothing,
       includeAttributedIPConversions = Core.Nothing,
-      includeUnattributedCookieConversions = Core.Nothing,
-      includeUnattributedIPConversions = Core.Nothing,
+      includeUnattributedCookieConversions =
+        Core.Nothing,
+      includeUnattributedIPConversions =
+        Core.Nothing,
       maximumClickInteractions = Core.Nothing,
       maximumImpressionInteractions = Core.Nothing,
       maximumInteractionGap = Core.Nothing,
@@ -14110,44 +13224,41 @@ instance
       ( \o ->
           Report_PathToConversionCriteria_ReportProperties
             Core.<$> (o Core..:? "clicksLookbackWindow")
-              Core.<*> (o Core..:? "impressionsLookbackWindow")
-              Core.<*> (o Core..:? "includeAttributedIPConversions")
-              Core.<*> (o Core..:? "includeUnattributedCookieConversions")
-              Core.<*> (o Core..:? "includeUnattributedIPConversions")
-              Core.<*> (o Core..:? "maximumClickInteractions")
-              Core.<*> (o Core..:? "maximumImpressionInteractions")
-              Core.<*> (o Core..:? "maximumInteractionGap")
-              Core.<*> (o Core..:? "pivotOnInteractionPath")
+            Core.<*> (o Core..:? "impressionsLookbackWindow")
+            Core.<*> (o Core..:? "includeAttributedIPConversions")
+            Core.<*> (o Core..:? "includeUnattributedCookieConversions")
+            Core.<*> (o Core..:? "includeUnattributedIPConversions")
+            Core.<*> (o Core..:? "maximumClickInteractions")
+            Core.<*> (o Core..:? "maximumImpressionInteractions")
+            Core.<*> (o Core..:? "maximumInteractionGap")
+            Core.<*> (o Core..:? "pivotOnInteractionPath")
       )
 
 instance
   Core.ToJSON
     Report_PathToConversionCriteria_ReportProperties
   where
-  toJSON
-    Report_PathToConversionCriteria_ReportProperties {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("clicksLookbackWindow" Core..=)
-                Core.<$> clicksLookbackWindow,
-              ("impressionsLookbackWindow" Core..=)
-                Core.<$> impressionsLookbackWindow,
-              ("includeAttributedIPConversions" Core..=)
-                Core.<$> includeAttributedIPConversions,
-              ("includeUnattributedCookieConversions" Core..=)
-                Core.<$> includeUnattributedCookieConversions,
-              ("includeUnattributedIPConversions" Core..=)
-                Core.<$> includeUnattributedIPConversions,
-              ("maximumClickInteractions" Core..=)
-                Core.<$> maximumClickInteractions,
-              ("maximumImpressionInteractions" Core..=)
-                Core.<$> maximumImpressionInteractions,
-              ("maximumInteractionGap" Core..=)
-                Core.<$> maximumInteractionGap,
-              ("pivotOnInteractionPath" Core..=)
-                Core.<$> pivotOnInteractionPath
-            ]
-        )
+  toJSON Report_PathToConversionCriteria_ReportProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clicksLookbackWindow" Core..=) Core.<$> clicksLookbackWindow,
+            ("impressionsLookbackWindow" Core..=)
+              Core.<$> impressionsLookbackWindow,
+            ("includeAttributedIPConversions" Core..=)
+              Core.<$> includeAttributedIPConversions,
+            ("includeUnattributedCookieConversions" Core..=)
+              Core.<$> includeUnattributedCookieConversions,
+            ("includeUnattributedIPConversions" Core..=)
+              Core.<$> includeUnattributedIPConversions,
+            ("maximumClickInteractions" Core..=)
+              Core.<$> maximumClickInteractions,
+            ("maximumImpressionInteractions" Core..=)
+              Core.<$> maximumImpressionInteractions,
+            ("maximumInteractionGap" Core..=) Core.<$> maximumInteractionGap,
+            ("pivotOnInteractionPath" Core..=)
+              Core.<$> pivotOnInteractionPath
+          ]
+      )
 
 -- | The report criteria for a report of type \"REACH\".
 --
@@ -14208,11 +13319,9 @@ instance Core.ToJSON Report_ReachCriteria where
     Core.object
       ( Core.catMaybes
           [ ("activities" Core..=) Core.<$> activities,
-            ("customRichMediaEvents" Core..=)
-              Core.<$> customRichMediaEvents,
+            ("customRichMediaEvents" Core..=) Core.<$> customRichMediaEvents,
             ("dateRange" Core..=) Core.<$> dateRange,
-            ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+            ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("enableAllDimensionCombinations" Core..=)
               Core.<$> enableAllDimensionCombinations,
@@ -14230,7 +13339,6 @@ data Report_Schedule = Report_Schedule
     active :: (Core.Maybe Core.Bool),
     -- | Defines every how many days, weeks or months the report should be run. Needs to be set when \"repeats\" is either \"DAILY\", \"WEEKLY\" or \"MONTHLY\".
     every :: (Core.Maybe Core.Int32),
-    -- |
     expirationDate :: (Core.Maybe Core.Date),
     -- | The interval for which the report is repeated. Note: - \"DAILY\" also requires field \"every\" to be set. - \"WEEKLY\" also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. - \"MONTHLY\" also requires fields \"every\" and \"runsOnDayOfMonth\" to be set.
     repeats :: (Core.Maybe Core.Text),
@@ -14238,7 +13346,6 @@ data Report_Schedule = Report_Schedule
     repeatsOnWeekDays :: (Core.Maybe [Report_Schedule_RepeatsOnWeekDaysItem]),
     -- | Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Example: If \'startDate\' is Monday, April 2nd 2012 (2012-04-02), \"DAY/OF/MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK/OF/MONTH\" would run subsequent reports on the first Monday of the month.
     runsOnDayOfMonth :: (Core.Maybe Report_Schedule_RunsOnDayOfMonth),
-    -- |
     startDate :: (Core.Maybe Core.Date),
     -- | The timezone when the report will run.
     timezone :: (Core.Maybe Core.Text)
@@ -14284,10 +13391,8 @@ instance Core.ToJSON Report_Schedule where
             ("every" Core..=) Core.<$> every,
             ("expirationDate" Core..=) Core.<$> expirationDate,
             ("repeats" Core..=) Core.<$> repeats,
-            ("repeatsOnWeekDays" Core..=)
-              Core.<$> repeatsOnWeekDays,
-            ("runsOnDayOfMonth" Core..=)
-              Core.<$> runsOnDayOfMonth,
+            ("repeatsOnWeekDays" Core..=) Core.<$> repeatsOnWeekDays,
+            ("runsOnDayOfMonth" Core..=) Core.<$> runsOnDayOfMonth,
             ("startDate" Core..=) Core.<$> startDate,
             ("timezone" Core..=) Core.<$> timezone
           ]
@@ -14339,8 +13444,7 @@ instance Core.ToJSON ReportCompatibleFields where
   toJSON ReportCompatibleFields {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionFilters" Core..=)
-              Core.<$> dimensionFilters,
+          [ ("dimensionFilters" Core..=) Core.<$> dimensionFilters,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("kind" Core..=) Core.<$> kind,
             ("metrics" Core..=) Core.<$> metrics,
@@ -14406,7 +13510,7 @@ data ReportsConfiguration = ReportsConfiguration
     exposureToConversionEnabled :: (Core.Maybe Core.Bool),
     -- | Default lookback windows for new advertisers in this account.
     lookbackConfiguration :: (Core.Maybe LookbackConfiguration),
-    -- | Report generation time zone ID of this account. This is a required field that can only be changed by a superuser. Acceptable values are: - \"1\" for \"America\/New/York\" - \"2\" for \"Europe\/London\" - \"3\" for \"Europe\/Paris\" - \"4\" for \"Africa\/Johannesburg\" - \"5\" for \"Asia\/Jerusalem\" - \"6\" for \"Asia\/Shanghai\" - \"7\" for \"Asia\/Hong/Kong\" - \"8\" for \"Asia\/Tokyo\" - \"9\" for \"Australia\/Sydney\" - \"10\" for \"Asia\/Dubai\" - \"11\" for \"America\/Los/Angeles\" - \"12\" for \"Pacific\/Auckland\" - \"13\" for \"America\/Sao/Paulo\" - \"16\" for \"America\/Asuncion\" - \"17\" for \"America\/Chicago\" - \"18\" for \"America\/Denver\" - \"19\" for \"America\/St/Johns\" - \"20\" for \"Asia\/Dhaka\" - \"21\" for \"Asia\/Jakarta\" - \"22\" for \"Asia\/Kabul\" - \"23\" for \"Asia\/Karachi\" - \"24\" for \"Asia\/Calcutta\" - \"25\" for \"Asia\/Pyongyang\" - \"26\" for \"Asia\/Rangoon\" - \"27\" for \"Atlantic\/Cape/Verde\" - \"28\" for \"Atlantic\/South/Georgia\" - \"29\" for
+    -- | Report generation time zone ID of this account. This is a required field that cannot be changed on update. Acceptable values are: - \"1\" for \"America\/New/York\" - \"2\" for \"Europe\/London\" - \"3\" for \"Europe\/Paris\" - \"4\" for \"Africa\/Johannesburg\" - \"5\" for \"Asia\/Jerusalem\" - \"6\" for \"Asia\/Shanghai\" - \"7\" for \"Asia\/Hong/Kong\" - \"8\" for \"Asia\/Tokyo\" - \"9\" for \"Australia\/Sydney\" - \"10\" for \"Asia\/Dubai\" - \"11\" for \"America\/Los/Angeles\" - \"12\" for \"Pacific\/Auckland\" - \"13\" for \"America\/Sao/Paulo\" - \"16\" for \"America\/Asuncion\" - \"17\" for \"America\/Chicago\" - \"18\" for \"America\/Denver\" - \"19\" for \"America\/St/Johns\" - \"20\" for \"Asia\/Dhaka\" - \"21\" for \"Asia\/Jakarta\" - \"22\" for \"Asia\/Kabul\" - \"23\" for \"Asia\/Karachi\" - \"24\" for \"Asia\/Calcutta\" - \"25\" for \"Asia\/Pyongyang\" - \"26\" for \"Asia\/Rangoon\" - \"27\" for \"Atlantic\/Cape/Verde\" - \"28\" for \"Atlantic\/South/Georgia\" - \"29\" for
     -- \"Australia\/Adelaide\" - \"30\" for \"Australia\/Lord/Howe\" - \"31\" for \"Europe\/Moscow\" - \"32\" for \"Pacific\/Kiritimati\" - \"35\" for \"Pacific\/Norfolk\" - \"36\" for \"Pacific\/Tongatapu\"
     reportGenerationTimeZoneId :: (Core.Maybe Core.Int64)
   }
@@ -14430,7 +13534,8 @@ instance Core.FromJSON ReportsConfiguration where
           ReportsConfiguration
             Core.<$> (o Core..:? "exposureToConversionEnabled")
             Core.<*> (o Core..:? "lookbackConfiguration")
-            Core.<*> ( o Core..:? "reportGenerationTimeZoneId"
+            Core.<*> ( o
+                         Core..:? "reportGenerationTimeZoneId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -14441,8 +13546,7 @@ instance Core.ToJSON ReportsConfiguration where
       ( Core.catMaybes
           [ ("exposureToConversionEnabled" Core..=)
               Core.<$> exposureToConversionEnabled,
-            ("lookbackConfiguration" Core..=)
-              Core.<$> lookbackConfiguration,
+            ("lookbackConfiguration" Core..=) Core.<$> lookbackConfiguration,
             ("reportGenerationTimeZoneId" Core..=)
               Core.. Core.AsText
               Core.<$> reportGenerationTimeZoneId
@@ -14480,20 +13584,16 @@ instance Core.FromJSON RichMediaExitOverride where
           RichMediaExitOverride
             Core.<$> (o Core..:? "clickThroughUrl")
             Core.<*> (o Core..:? "enabled")
-            Core.<*> ( o Core..:? "exitId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "exitId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON RichMediaExitOverride where
   toJSON RichMediaExitOverride {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clickThroughUrl" Core..=)
-              Core.<$> clickThroughUrl,
+          [ ("clickThroughUrl" Core..=) Core.<$> clickThroughUrl,
             ("enabled" Core..=) Core.<$> enabled,
-            ("exitId" Core..=) Core.. Core.AsText
-              Core.<$> exitId
+            ("exitId" Core..=) Core.. Core.AsText Core.<$> exitId
           ]
       )
 
@@ -14526,11 +13626,10 @@ instance Core.FromJSON Rule where
       "Rule"
       ( \o ->
           Rule
-            Core.<$> ( o Core..:? "assetId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "assetId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "targetingTemplateId"
+            Core.<*> ( o
+                         Core..:? "targetingTemplateId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -14539,10 +13638,10 @@ instance Core.ToJSON Rule where
   toJSON Rule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("assetId" Core..=) Core.. Core.AsText
-              Core.<$> assetId,
+          [ ("assetId" Core..=) Core.. Core.AsText Core.<$> assetId,
             ("name" Core..=) Core.<$> name,
-            ("targetingTemplateId" Core..=) Core.. Core.AsText
+            ("targetingTemplateId" Core..=)
+              Core.. Core.AsText
               Core.<$> targetingTemplateId
           ]
       )
@@ -14553,6 +13652,8 @@ instance Core.ToJSON Rule where
 data Site = Site
   { -- | Account ID of this site. This is a read-only field that can be left blank.
     accountId :: (Core.Maybe Core.Int64),
+    -- | Optional. Ad serving platform ID to identify the ad serving platform used by the site. Measurement partners can use this field to add ad-server specific macros. If set, this value acts as the default during placement creation. Possible values are: * @1@, Adelphic * @2@, Adform * @3@, Adobe * @4@, Amobee * @5@, Basis (Centro) * @6@, Beeswax * @7@, Amazon * @8@, DV360 (DBM) * @9@, Innovid * @10@, MediaMath * @11@, Roku OneView DSP * @12@, TabMo Hawk * @13@, The Trade Desk * @14@, Xandr Invest DSP * @15@, Yahoo DSP * @16@, Zeta Global * @17@, Scaleout * @18@, Bidtellect * @19@, Unicorn * @20@, Teads * @21@, Quantcast * @22@, Cognitiv
+    adServingPlatformId :: (Core.Maybe Core.Int64),
     -- | Whether this site is approved.
     approved :: (Core.Maybe Core.Bool),
     -- | Directory site associated with this site. This is a required field that is read-only after insertion.
@@ -14586,6 +13687,7 @@ newSite ::
 newSite =
   Site
     { accountId = Core.Nothing,
+      adServingPlatformId = Core.Nothing,
       approved = Core.Nothing,
       directorySiteId = Core.Nothing,
       directorySiteIdDimensionValue = Core.Nothing,
@@ -14606,13 +13708,13 @@ instance Core.FromJSON Site where
       "Site"
       ( \o ->
           Site
-            Core.<$> ( o Core..:? "accountId"
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "adServingPlatformId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "approved")
-            Core.<*> ( o Core..:? "directorySiteId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "directorySiteId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "directorySiteIdDimensionValue")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idDimensionValue")
@@ -14621,9 +13723,7 @@ instance Core.FromJSON Site where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "siteContacts")
             Core.<*> (o Core..:? "siteSettings")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "videoSettings")
       )
 
@@ -14631,23 +13731,24 @@ instance Core.ToJSON Site where
   toJSON Site {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("adServingPlatformId" Core..=)
+              Core.. Core.AsText
+              Core.<$> adServingPlatformId,
             ("approved" Core..=) Core.<$> approved,
-            ("directorySiteId" Core..=) Core.. Core.AsText
+            ("directorySiteId" Core..=)
+              Core.. Core.AsText
               Core.<$> directorySiteId,
             ("directorySiteIdDimensionValue" Core..=)
               Core.<$> directorySiteIdDimensionValue,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("idDimensionValue" Core..=)
-              Core.<$> idDimensionValue,
+            ("idDimensionValue" Core..=) Core.<$> idDimensionValue,
             ("keyName" Core..=) Core.<$> keyName,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("siteContacts" Core..=) Core.<$> siteContacts,
             ("siteSettings" Core..=) Core.<$> siteSettings,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
             ("videoSettings" Core..=) Core.<$> videoSettings
           ]
       )
@@ -14694,8 +13795,7 @@ instance Core.ToJSON SiteCompanionSetting where
   toJSON SiteCompanionSetting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("companionsDisabled" Core..=)
-              Core.<$> companionsDisabled,
+          [ ("companionsDisabled" Core..=) Core.<$> companionsDisabled,
             ("enabledSizes" Core..=) Core.<$> enabledSizes,
             ("imageOnly" Core..=) Core.<$> imageOnly,
             ("kind" Core..=) Core.<$> kind
@@ -14821,12 +13921,9 @@ instance Core.ToJSON SiteSettings where
   toJSON SiteSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeViewOptOut" Core..=)
-              Core.<$> activeViewOptOut,
-            ("adBlockingOptOut" Core..=)
-              Core.<$> adBlockingOptOut,
-            ("disableNewCookie" Core..=)
-              Core.<$> disableNewCookie,
+          [ ("activeViewOptOut" Core..=) Core.<$> activeViewOptOut,
+            ("adBlockingOptOut" Core..=) Core.<$> adBlockingOptOut,
+            ("disableNewCookie" Core..=) Core.<$> disableNewCookie,
             ("tagSetting" Core..=) Core.<$> tagSetting,
             ("videoActiveViewOptOutTemplate" Core..=)
               Core.<$> videoActiveViewOptOutTemplate,
@@ -14899,7 +13996,10 @@ data SiteTranscodeSetting = SiteTranscodeSetting
 newSiteTranscodeSetting ::
   SiteTranscodeSetting
 newSiteTranscodeSetting =
-  SiteTranscodeSetting {enabledVideoFormats = Core.Nothing, kind = Core.Nothing}
+  SiteTranscodeSetting
+    { enabledVideoFormats = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON SiteTranscodeSetting where
   parseJSON =
@@ -14915,8 +14015,7 @@ instance Core.ToJSON SiteTranscodeSetting where
   toJSON SiteTranscodeSetting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enabledVideoFormats" Core..=)
-              Core.<$> enabledVideoFormats,
+          [ ("enabledVideoFormats" Core..=) Core.<$> enabledVideoFormats,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -14935,7 +14034,7 @@ data SiteVideoSettings = SiteVideoSettings
     obaSettings :: (Core.Maybe ObaIcon),
     -- | Orientation of a site template used for video. This will act as default for new placements created under this site.
     orientation :: (Core.Maybe SiteVideoSettings_Orientation),
-    -- | Publisher specification ID used to identify site-associated publisher requirements and automatically populate transcode settings. If publisher specification ID is specified, it will take precedence over transcode settings.
+    -- | Publisher specification ID used to identify site-associated publisher requirements and automatically populate transcode settings. If publisher specification ID is specified, it will take precedence over transcode settings. Possible values are: * @1@, Hulu * @2@, NBC * @3@, CBS * @4@, CBS Desktop * @5@, Discovery * @6@, VEVO HD * @7@, VEVO Vertical * @8@, Fox * @9@, CW Network * @10@, Disney * @11@, IGN * @12@, NFL.com * @13@, Turner Broadcasting * @14@, Tubi on Fox * @15@, Hearst Corporation * @16@, Twitch Desktop * @17@, ABC * @18@, Univision * @19@, MLB.com * @20@, MLB.com Mobile * @21@, MLB.com OTT * @22@, Polsat * @23@, TVN * @24@, Mediaset * @25@, Antena 3 * @26@, Mediamond * @27@, Sky Italia * @28@, Tubi on CBS * @29@, Spotify * @30@, Paramount * @31@, Max
     publisherSpecificationId :: (Core.Maybe Core.Int64),
     -- | Settings for the skippability of video creatives served to this site. This will act as default for new placements created under this site.
     skippableSettings :: (Core.Maybe SiteSkippableSetting),
@@ -14970,7 +14069,8 @@ instance Core.FromJSON SiteVideoSettings where
             Core.<*> (o Core..:? "obaEnabled")
             Core.<*> (o Core..:? "obaSettings")
             Core.<*> (o Core..:? "orientation")
-            Core.<*> ( o Core..:? "publisherSpecificationId"
+            Core.<*> ( o
+                         Core..:? "publisherSpecificationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "skippableSettings")
@@ -14981,8 +14081,7 @@ instance Core.ToJSON SiteVideoSettings where
   toJSON SiteVideoSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("companionSettings" Core..=)
-              Core.<$> companionSettings,
+          [ ("companionSettings" Core..=) Core.<$> companionSettings,
             ("kind" Core..=) Core.<$> kind,
             ("obaEnabled" Core..=) Core.<$> obaEnabled,
             ("obaSettings" Core..=) Core.<$> obaSettings,
@@ -14990,10 +14089,8 @@ instance Core.ToJSON SiteVideoSettings where
             ("publisherSpecificationId" Core..=)
               Core.. Core.AsText
               Core.<$> publisherSpecificationId,
-            ("skippableSettings" Core..=)
-              Core.<$> skippableSettings,
-            ("transcodeSettings" Core..=)
-              Core.<$> transcodeSettings
+            ("skippableSettings" Core..=) Core.<$> skippableSettings,
+            ("transcodeSettings" Core..=) Core.<$> transcodeSettings
           ]
       )
 
@@ -15118,16 +14215,15 @@ instance Core.FromJSON SizesListResponse where
       "SizesListResponse"
       ( \o ->
           SizesListResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "sizes")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "sizes")
       )
 
 instance Core.ToJSON SizesListResponse where
   toJSON SizesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("sizes" Core..=) Core.<$> sizes
-          ]
+          [("kind" Core..=) Core.<$> kind, ("sizes" Core..=) Core.<$> sizes]
       )
 
 -- | Skippable Settings
@@ -15258,10 +14354,9 @@ instance Core.FromJSON Subaccount where
       "Subaccount"
       ( \o ->
           Subaccount
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "availablePermissionIds"
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "availablePermissionIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
@@ -15273,8 +14368,7 @@ instance Core.ToJSON Subaccount where
   toJSON Subaccount {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("availablePermissionIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> availablePermissionIds,
@@ -15363,13 +14457,9 @@ instance Core.FromJSON TagData where
       "TagData"
       ( \o ->
           TagData
-            Core.<$> ( o Core..:? "adId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "adId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clickTag")
-            Core.<*> ( o Core..:? "creativeId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creativeId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "impressionTag")
       )
@@ -15380,8 +14470,7 @@ instance Core.ToJSON TagData where
       ( Core.catMaybes
           [ ("adId" Core..=) Core.. Core.AsText Core.<$> adId,
             ("clickTag" Core..=) Core.<$> clickTag,
-            ("creativeId" Core..=) Core.. Core.AsText
-              Core.<$> creativeId,
+            ("creativeId" Core..=) Core.. Core.AsText Core.<$> creativeId,
             ("format" Core..=) Core.<$> format,
             ("impressionTag" Core..=) Core.<$> impressionTag
           ]
@@ -15393,10 +14482,12 @@ instance Core.ToJSON TagData where
 data TagSetting = TagSetting
   { -- | Additional key-values to be included in tags. Each key-value pair must be of the form key=value, and pairs must be separated by a semicolon (;). Keys and values must not contain commas. For example, id=2;color=red is a valid value for this field.
     additionalKeyValues :: (Core.Maybe Core.Text),
-    -- | Whether static landing page URLs should be included in the tags. This setting applies only to placements.
+    -- | Whether static landing page URLs should be included in the tags. New placements will default to the value set on their site.
     includeClickThroughUrls :: (Core.Maybe Core.Bool),
     -- | Whether click-tracking string should be included in the tags.
     includeClickTracking :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates that the unescapedlpurl macro should be included in the tag for the static landing page. New placements will default to the value set on their site.
+    includeUnescapedlpurlMacro :: (Core.Maybe Core.Bool),
     -- | Option specifying how keywords are embedded in ad tags. This setting can be used to specify whether keyword placeholders are inserted in placement tags for this site. Publishers can then add keywords to those placeholders.
     keywordOption :: (Core.Maybe TagSetting_KeywordOption)
   }
@@ -15410,6 +14501,7 @@ newTagSetting =
     { additionalKeyValues = Core.Nothing,
       includeClickThroughUrls = Core.Nothing,
       includeClickTracking = Core.Nothing,
+      includeUnescapedlpurlMacro = Core.Nothing,
       keywordOption = Core.Nothing
     }
 
@@ -15422,6 +14514,7 @@ instance Core.FromJSON TagSetting where
             Core.<$> (o Core..:? "additionalKeyValues")
             Core.<*> (o Core..:? "includeClickThroughUrls")
             Core.<*> (o Core..:? "includeClickTracking")
+            Core.<*> (o Core..:? "includeUnescapedlpurlMacro")
             Core.<*> (o Core..:? "keywordOption")
       )
 
@@ -15429,12 +14522,12 @@ instance Core.ToJSON TagSetting where
   toJSON TagSetting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalKeyValues" Core..=)
-              Core.<$> additionalKeyValues,
+          [ ("additionalKeyValues" Core..=) Core.<$> additionalKeyValues,
             ("includeClickThroughUrls" Core..=)
               Core.<$> includeClickThroughUrls,
-            ("includeClickTracking" Core..=)
-              Core.<$> includeClickTracking,
+            ("includeClickTracking" Core..=) Core.<$> includeClickTracking,
+            ("includeUnescapedlpurlMacro" Core..=)
+              Core.<$> includeUnescapedlpurlMacro,
             ("keywordOption" Core..=) Core.<$> keywordOption
           ]
       )
@@ -15454,7 +14547,10 @@ data TagSettings = TagSettings
 newTagSettings ::
   TagSettings
 newTagSettings =
-  TagSettings {dynamicTagEnabled = Core.Nothing, imageTagEnabled = Core.Nothing}
+  TagSettings
+    { dynamicTagEnabled = Core.Nothing,
+      imageTagEnabled = Core.Nothing
+    }
 
 instance Core.FromJSON TagSettings where
   parseJSON =
@@ -15470,10 +14566,8 @@ instance Core.ToJSON TagSettings where
   toJSON TagSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dynamicTagEnabled" Core..=)
-              Core.<$> dynamicTagEnabled,
-            ("imageTagEnabled" Core..=)
-              Core.<$> imageTagEnabled
+          [ ("dynamicTagEnabled" Core..=) Core.<$> dynamicTagEnabled,
+            ("imageTagEnabled" Core..=) Core.<$> imageTagEnabled
           ]
       )
 
@@ -15492,7 +14586,10 @@ data TargetWindow = TargetWindow
 newTargetWindow ::
   TargetWindow
 newTargetWindow =
-  TargetWindow {customHtml = Core.Nothing, targetWindowOption = Core.Nothing}
+  TargetWindow
+    { customHtml = Core.Nothing,
+      targetWindowOption = Core.Nothing
+    }
 
 instance Core.FromJSON TargetWindow where
   parseJSON =
@@ -15509,12 +14606,11 @@ instance Core.ToJSON TargetWindow where
     Core.object
       ( Core.catMaybes
           [ ("customHtml" Core..=) Core.<$> customHtml,
-            ("targetWindowOption" Core..=)
-              Core.<$> targetWindowOption
+            ("targetWindowOption" Core..=) Core.<$> targetWindowOption
           ]
       )
 
--- | Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to faciliate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.
+-- | Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to facilitate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.
 --
 -- /See:/ 'newTargetableRemarketingList' smart constructor.
 data TargetableRemarketingList = TargetableRemarketingList
@@ -15570,52 +14666,37 @@ instance Core.FromJSON TargetableRemarketingList where
       "TargetableRemarketingList"
       ( \o ->
           TargetableRemarketingList
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "active")
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lifeSpan"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "listSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lifeSpan" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "listSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "listSource")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON TargetableRemarketingList where
   toJSON TargetableRemarketingList {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("active" Core..=) Core.<$> active,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lifeSpan" Core..=) Core.. Core.AsText
-              Core.<$> lifeSpan,
-            ("listSize" Core..=) Core.. Core.AsText
-              Core.<$> listSize,
+            ("lifeSpan" Core..=) Core.. Core.AsText Core.<$> lifeSpan,
+            ("listSize" Core..=) Core.. Core.AsText Core.<$> listSize,
             ("listSource" Core..=) Core.<$> listSource,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -15642,10 +14723,7 @@ newTargetableRemarketingListsListResponse =
       targetableRemarketingLists = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    TargetableRemarketingListsListResponse
-  where
+instance Core.FromJSON TargetableRemarketingListsListResponse where
   parseJSON =
     Core.withObject
       "TargetableRemarketingListsListResponse"
@@ -15656,10 +14734,7 @@ instance
             Core.<*> (o Core..:? "targetableRemarketingLists")
       )
 
-instance
-  Core.ToJSON
-    TargetableRemarketingListsListResponse
-  where
+instance Core.ToJSON TargetableRemarketingListsListResponse where
   toJSON TargetableRemarketingListsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -15729,12 +14804,8 @@ instance Core.FromJSON TargetingTemplate where
       "TargetingTemplate"
       ( \o ->
           TargetingTemplate
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "advertiserIdDimensionValue")
             Core.<*> (o Core..:? "dayPartTargeting")
             Core.<*> (o Core..:? "geoTargeting")
@@ -15744,9 +14815,7 @@ instance Core.FromJSON TargetingTemplate where
             Core.<*> (o Core..:? "languageTargeting")
             Core.<*> (o Core..:? "listTargetingExpression")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "technologyTargeting")
       )
 
@@ -15754,28 +14823,22 @@ instance Core.ToJSON TargetingTemplate where
   toJSON TargetingTemplate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
             ("advertiserIdDimensionValue" Core..=)
               Core.<$> advertiserIdDimensionValue,
-            ("dayPartTargeting" Core..=)
-              Core.<$> dayPartTargeting,
+            ("dayPartTargeting" Core..=) Core.<$> dayPartTargeting,
             ("geoTargeting" Core..=) Core.<$> geoTargeting,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("keyValueTargetingExpression" Core..=)
               Core.<$> keyValueTargetingExpression,
             ("kind" Core..=) Core.<$> kind,
-            ("languageTargeting" Core..=)
-              Core.<$> languageTargeting,
+            ("languageTargeting" Core..=) Core.<$> languageTargeting,
             ("listTargetingExpression" Core..=)
               Core.<$> listTargetingExpression,
             ("name" Core..=) Core.<$> name,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId,
-            ("technologyTargeting" Core..=)
-              Core.<$> technologyTargeting
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId,
+            ("technologyTargeting" Core..=) Core.<$> technologyTargeting
           ]
       )
 
@@ -15819,8 +14882,7 @@ instance Core.ToJSON TargetingTemplatesListResponse where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("targetingTemplates" Core..=)
-              Core.<$> targetingTemplates
+            ("targetingTemplates" Core..=) Core.<$> targetingTemplates
           ]
       )
 
@@ -15879,8 +14941,7 @@ instance Core.ToJSON TechnologyTargeting where
             ("mobileCarriers" Core..=) Core.<$> mobileCarriers,
             ("operatingSystemVersions" Core..=)
               Core.<$> operatingSystemVersions,
-            ("operatingSystems" Core..=)
-              Core.<$> operatingSystems,
+            ("operatingSystems" Core..=) Core.<$> operatingSystems,
             ("platformTypes" Core..=) Core.<$> platformTypes
           ]
       )
@@ -15900,7 +14961,10 @@ data ThirdPartyAuthenticationToken = ThirdPartyAuthenticationToken
 newThirdPartyAuthenticationToken ::
   ThirdPartyAuthenticationToken
 newThirdPartyAuthenticationToken =
-  ThirdPartyAuthenticationToken {name = Core.Nothing, value = Core.Nothing}
+  ThirdPartyAuthenticationToken
+    { name = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ThirdPartyAuthenticationToken where
   parseJSON =
@@ -15908,16 +14972,15 @@ instance Core.FromJSON ThirdPartyAuthenticationToken where
       "ThirdPartyAuthenticationToken"
       ( \o ->
           ThirdPartyAuthenticationToken
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ThirdPartyAuthenticationToken where
   toJSON ThirdPartyAuthenticationToken {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | Third-party Tracking URL.
@@ -15935,7 +14998,10 @@ data ThirdPartyTrackingUrl = ThirdPartyTrackingUrl
 newThirdPartyTrackingUrl ::
   ThirdPartyTrackingUrl
 newThirdPartyTrackingUrl =
-  ThirdPartyTrackingUrl {thirdPartyUrlType = Core.Nothing, url = Core.Nothing}
+  ThirdPartyTrackingUrl
+    { thirdPartyUrlType = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON ThirdPartyTrackingUrl where
   parseJSON =
@@ -15951,8 +15017,7 @@ instance Core.ToJSON ThirdPartyTrackingUrl where
   toJSON ThirdPartyTrackingUrl {..} =
     Core.object
       ( Core.catMaybes
-          [ ("thirdPartyUrlType" Core..=)
-              Core.<$> thirdPartyUrlType,
+          [ ("thirdPartyUrlType" Core..=) Core.<$> thirdPartyUrlType,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -15972,7 +15037,10 @@ data TranscodeSetting = TranscodeSetting
 newTranscodeSetting ::
   TranscodeSetting
 newTranscodeSetting =
-  TranscodeSetting {enabledVideoFormats = Core.Nothing, kind = Core.Nothing}
+  TranscodeSetting
+    { enabledVideoFormats = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON TranscodeSetting where
   parseJSON =
@@ -15988,9 +15056,209 @@ instance Core.ToJSON TranscodeSetting where
   toJSON TranscodeSetting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enabledVideoFormats" Core..=)
-              Core.<$> enabledVideoFormats,
+          [ ("enabledVideoFormats" Core..=) Core.<$> enabledVideoFormats,
             ("kind" Core..=) Core.<$> kind
+          ]
+      )
+
+-- | TvCampaignDetail contains data from a TV campaign for specific start dates and date windows.
+--
+-- /See:/ 'newTvCampaignDetail' smart constructor.
+data TvCampaignDetail = TvCampaignDetail
+  { -- | ID of this TV campaign.
+    id :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#tvCampaignSummary\".
+    kind :: (Core.Maybe Core.Text),
+    -- | The timepoints of the TV campaign.
+    timepoints :: (Core.Maybe [TvCampaignTimepoint])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TvCampaignDetail' with the minimum fields required to make a request.
+newTvCampaignDetail ::
+  TvCampaignDetail
+newTvCampaignDetail =
+  TvCampaignDetail
+    { id = Core.Nothing,
+      kind = Core.Nothing,
+      timepoints = Core.Nothing
+    }
+
+instance Core.FromJSON TvCampaignDetail where
+  parseJSON =
+    Core.withObject
+      "TvCampaignDetail"
+      ( \o ->
+          TvCampaignDetail
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "timepoints")
+      )
+
+instance Core.ToJSON TvCampaignDetail where
+  toJSON TvCampaignDetail {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("id" Core..=) Core.<$> id,
+            ("kind" Core..=) Core.<$> kind,
+            ("timepoints" Core..=) Core.<$> timepoints
+          ]
+      )
+
+-- | Response message for TvCampaignSummariesService.List.
+--
+-- /See:/ 'newTvCampaignSummariesListResponse' smart constructor.
+data TvCampaignSummariesListResponse = TvCampaignSummariesListResponse
+  { -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#tvCampaignSummariesListResponse\".
+    kind :: (Core.Maybe Core.Text),
+    -- | List of TV campaign summaries.
+    tvCampaignSummaries :: (Core.Maybe [TvCampaignSummary])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TvCampaignSummariesListResponse' with the minimum fields required to make a request.
+newTvCampaignSummariesListResponse ::
+  TvCampaignSummariesListResponse
+newTvCampaignSummariesListResponse =
+  TvCampaignSummariesListResponse
+    { kind = Core.Nothing,
+      tvCampaignSummaries = Core.Nothing
+    }
+
+instance Core.FromJSON TvCampaignSummariesListResponse where
+  parseJSON =
+    Core.withObject
+      "TvCampaignSummariesListResponse"
+      ( \o ->
+          TvCampaignSummariesListResponse
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "tvCampaignSummaries")
+      )
+
+instance Core.ToJSON TvCampaignSummariesListResponse where
+  toJSON TvCampaignSummariesListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kind" Core..=) Core.<$> kind,
+            ("tvCampaignSummaries" Core..=) Core.<$> tvCampaignSummaries
+          ]
+      )
+
+-- | TvCampaignSummary contains aggregate data from a TV campaign.
+--
+-- /See:/ 'newTvCampaignSummary' smart constructor.
+data TvCampaignSummary = TvCampaignSummary
+  { -- | The end date of the TV campaign, inclusive. A string of the format: \"yyyy-MM-dd\".
+    endDate :: (Core.Maybe Core.Text),
+    -- | GRP of this TV campaign.
+    grp :: (Core.Maybe Core.Int64),
+    -- | ID of this TV campaign.
+    id :: (Core.Maybe Core.Text),
+    -- | Impressions across the entire TV campaign.
+    impressions :: (Core.Maybe Core.Int64),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"dfareporting#tvCampaignSummary\".
+    kind :: (Core.Maybe Core.Text),
+    -- | Identifier. Name of this TV campaign.
+    name :: (Core.Maybe Core.Text),
+    -- | Spend across the entire TV campaign.
+    spend :: (Core.Maybe Core.Double),
+    -- | The start date of the TV campaign, inclusive. A string of the format: \"yyyy-MM-dd\".
+    startDate :: (Core.Maybe Core.Text),
+    -- | \"CampaignComponentType\" of this TV campaign.
+    type' :: (Core.Maybe TvCampaignSummary_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TvCampaignSummary' with the minimum fields required to make a request.
+newTvCampaignSummary ::
+  TvCampaignSummary
+newTvCampaignSummary =
+  TvCampaignSummary
+    { endDate = Core.Nothing,
+      grp = Core.Nothing,
+      id = Core.Nothing,
+      impressions = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing,
+      spend = Core.Nothing,
+      startDate = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON TvCampaignSummary where
+  parseJSON =
+    Core.withObject
+      "TvCampaignSummary"
+      ( \o ->
+          TvCampaignSummary
+            Core.<$> (o Core..:? "endDate")
+            Core.<*> (o Core..:? "grp" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "impressions" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "spend")
+            Core.<*> (o Core..:? "startDate")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON TvCampaignSummary where
+  toJSON TvCampaignSummary {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endDate" Core..=) Core.<$> endDate,
+            ("grp" Core..=) Core.. Core.AsText Core.<$> grp,
+            ("id" Core..=) Core.<$> id,
+            ("impressions" Core..=) Core.. Core.AsText Core.<$> impressions,
+            ("kind" Core..=) Core.<$> kind,
+            ("name" Core..=) Core.<$> name,
+            ("spend" Core..=) Core.<$> spend,
+            ("startDate" Core..=) Core.<$> startDate,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | A single data point for TvCampaignDetail, which holds information about the TV campaign for a specific start date and date window.
+--
+-- /See:/ 'newTvCampaignTimepoint' smart constructor.
+data TvCampaignTimepoint = TvCampaignTimepoint
+  { -- | The date window of the timepoint.
+    dateWindow :: (Core.Maybe TvCampaignTimepoint_DateWindow),
+    -- | The spend within the time range of the timepoint.
+    spend :: (Core.Maybe Core.Double),
+    -- | The start date of the timepoint. A string in the format of \"yyyy-MM-dd\".
+    startDate :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TvCampaignTimepoint' with the minimum fields required to make a request.
+newTvCampaignTimepoint ::
+  TvCampaignTimepoint
+newTvCampaignTimepoint =
+  TvCampaignTimepoint
+    { dateWindow = Core.Nothing,
+      spend = Core.Nothing,
+      startDate = Core.Nothing
+    }
+
+instance Core.FromJSON TvCampaignTimepoint where
+  parseJSON =
+    Core.withObject
+      "TvCampaignTimepoint"
+      ( \o ->
+          TvCampaignTimepoint
+            Core.<$> (o Core..:? "dateWindow")
+            Core.<*> (o Core..:? "spend")
+            Core.<*> (o Core..:? "startDate")
+      )
+
+instance Core.ToJSON TvCampaignTimepoint where
+  toJSON TvCampaignTimepoint {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dateWindow" Core..=) Core.<$> dateWindow,
+            ("spend" Core..=) Core.<$> spend,
+            ("startDate" Core..=) Core.<$> startDate
           ]
       )
 
@@ -16008,7 +15276,8 @@ data UniversalAdId = UniversalAdId
 -- | Creates a value of 'UniversalAdId' with the minimum fields required to make a request.
 newUniversalAdId ::
   UniversalAdId
-newUniversalAdId = UniversalAdId {registry = Core.Nothing, value = Core.Nothing}
+newUniversalAdId =
+  UniversalAdId {registry = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON UniversalAdId where
   parseJSON =
@@ -16052,10 +15321,7 @@ newUserDefinedVariableConfiguration =
       variableType = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UserDefinedVariableConfiguration
-  where
+instance Core.FromJSON UserDefinedVariableConfiguration where
   parseJSON =
     Core.withObject
       "UserDefinedVariableConfiguration"
@@ -16073,6 +15339,50 @@ instance Core.ToJSON UserDefinedVariableConfiguration where
           [ ("dataType" Core..=) Core.<$> dataType,
             ("reportName" Core..=) Core.<$> reportName,
             ("variableType" Core..=) Core.<$> variableType
+          ]
+      )
+
+-- | User identifying information. Exactly one type of identifier must be specified.
+--
+-- /See:/ 'newUserIdentifier' smart constructor.
+data UserIdentifier = UserIdentifier
+  { -- | Address information.
+    addressInfo :: (Core.Maybe OfflineUserAddressInfo),
+    -- | Hashed email address using SHA-256 hash function after normalization.
+    hashedEmail :: (Core.Maybe Core.Text),
+    -- | Hashed phone number using SHA-256 hash function after normalization (E164 standard).
+    hashedPhoneNumber :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserIdentifier' with the minimum fields required to make a request.
+newUserIdentifier ::
+  UserIdentifier
+newUserIdentifier =
+  UserIdentifier
+    { addressInfo = Core.Nothing,
+      hashedEmail = Core.Nothing,
+      hashedPhoneNumber = Core.Nothing
+    }
+
+instance Core.FromJSON UserIdentifier where
+  parseJSON =
+    Core.withObject
+      "UserIdentifier"
+      ( \o ->
+          UserIdentifier
+            Core.<$> (o Core..:? "addressInfo")
+            Core.<*> (o Core..:? "hashedEmail")
+            Core.<*> (o Core..:? "hashedPhoneNumber")
+      )
+
+instance Core.ToJSON UserIdentifier where
+  toJSON UserIdentifier {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("addressInfo" Core..=) Core.<$> addressInfo,
+            ("hashedEmail" Core..=) Core.<$> hashedEmail,
+            ("hashedPhoneNumber" Core..=) Core.<$> hashedPhoneNumber
           ]
       )
 
@@ -16120,18 +15430,12 @@ instance Core.FromJSON UserProfile where
       "UserProfile"
       ( \o ->
           UserProfile
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "accountName")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "profileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "subAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "profileId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "subAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "subAccountName")
             Core.<*> (o Core..:? "userName")
       )
@@ -16140,15 +15444,12 @@ instance Core.ToJSON UserProfile where
   toJSON UserProfile {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("accountName" Core..=) Core.<$> accountName,
             ("etag" Core..=) Core.<$> etag,
             ("kind" Core..=) Core.<$> kind,
-            ("profileId" Core..=) Core.. Core.AsText
-              Core.<$> profileId,
-            ("subAccountId" Core..=) Core.. Core.AsText
-              Core.<$> subAccountId,
+            ("profileId" Core..=) Core.. Core.AsText Core.<$> profileId,
+            ("subAccountId" Core..=) Core.. Core.AsText Core.<$> subAccountId,
             ("subAccountName" Core..=) Core.<$> subAccountName,
             ("userName" Core..=) Core.<$> userName
           ]
@@ -16242,37 +15543,30 @@ instance Core.FromJSON UserRole where
       "UserRole"
       ( \o ->
           UserRole
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "defaultUserRole")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "parentUserRoleId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "parentUserRoleId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "permissions")
-            Core.<*> ( o Core..:? "subaccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subaccountId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON UserRole where
   toJSON UserRole {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("defaultUserRole" Core..=) Core.<$> defaultUserRole,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("parentUserRoleId" Core..=) Core.. Core.AsText
+            ("parentUserRoleId" Core..=)
+              Core.. Core.AsText
               Core.<$> parentUserRoleId,
             ("permissions" Core..=) Core.<$> permissions,
-            ("subaccountId" Core..=) Core.. Core.AsText
-              Core.<$> subaccountId
+            ("subaccountId" Core..=) Core.. Core.AsText Core.<$> subaccountId
           ]
       )
 
@@ -16315,7 +15609,8 @@ instance Core.FromJSON UserRolePermission where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "permissionGroupId"
+            Core.<*> ( o
+                         Core..:? "permissionGroupId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -16328,7 +15623,8 @@ instance Core.ToJSON UserRolePermission where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("permissionGroupId" Core..=) Core.. Core.AsText
+            ("permissionGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> permissionGroupId
           ]
       )
@@ -16397,10 +15693,7 @@ newUserRolePermissionGroupsListResponse =
       userRolePermissionGroups = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UserRolePermissionGroupsListResponse
-  where
+instance Core.FromJSON UserRolePermissionGroupsListResponse where
   parseJSON =
     Core.withObject
       "UserRolePermissionGroupsListResponse"
@@ -16410,10 +15703,7 @@ instance
             Core.<*> (o Core..:? "userRolePermissionGroups")
       )
 
-instance
-  Core.ToJSON
-    UserRolePermissionGroupsListResponse
-  where
+instance Core.ToJSON UserRolePermissionGroupsListResponse where
   toJSON UserRolePermissionGroupsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -16443,10 +15733,7 @@ newUserRolePermissionsListResponse =
       userRolePermissions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UserRolePermissionsListResponse
-  where
+instance Core.FromJSON UserRolePermissionsListResponse where
   parseJSON =
     Core.withObject
       "UserRolePermissionsListResponse"
@@ -16461,8 +15748,7 @@ instance Core.ToJSON UserRolePermissionsListResponse where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("userRolePermissions" Core..=)
-              Core.<$> userRolePermissions
+            ("userRolePermissions" Core..=) Core.<$> userRolePermissions
           ]
       )
 
@@ -16507,62 +15793,6 @@ instance Core.ToJSON UserRolesListResponse where
           [ ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("userRoles" Core..=) Core.<$> userRoles
-          ]
-      )
-
--- | Defines the filtering on a single uvar.
---
--- /See:/ 'newUvarFilter' smart constructor.
-data UvarFilter = UvarFilter
-  { -- | Return rows which don\'t match this filter.
-    complement :: (Core.Maybe Core.Bool),
-    -- | Custom variable index the filter is applied to.
-    index :: (Core.Maybe Core.Int64),
-    -- | The kind of resource this is, in this case dfareporting#uvarFilter.
-    kind :: (Core.Maybe Core.Text),
-    -- | Indicates how the filter should be matched to the values.
-    match :: (Core.Maybe UvarFilter_Match),
-    -- | Values to filter on.
-    values :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'UvarFilter' with the minimum fields required to make a request.
-newUvarFilter ::
-  UvarFilter
-newUvarFilter =
-  UvarFilter
-    { complement = Core.Nothing,
-      index = Core.Nothing,
-      kind = Core.Nothing,
-      match = Core.Nothing,
-      values = Core.Nothing
-    }
-
-instance Core.FromJSON UvarFilter where
-  parseJSON =
-    Core.withObject
-      "UvarFilter"
-      ( \o ->
-          UvarFilter
-            Core.<$> (o Core..:? "complement")
-            Core.<*> ( o Core..:? "index"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "match")
-            Core.<*> (o Core..:? "values")
-      )
-
-instance Core.ToJSON UvarFilter where
-  toJSON UvarFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("complement" Core..=) Core.<$> complement,
-            ("index" Core..=) Core.. Core.AsText Core.<$> index,
-            ("kind" Core..=) Core.<$> kind,
-            ("match" Core..=) Core.<$> match,
-            ("values" Core..=) Core.<$> values
           ]
       )
 
@@ -16635,7 +15865,10 @@ data VideoFormatsListResponse = VideoFormatsListResponse
 newVideoFormatsListResponse ::
   VideoFormatsListResponse
 newVideoFormatsListResponse =
-  VideoFormatsListResponse {kind = Core.Nothing, videoFormats = Core.Nothing}
+  VideoFormatsListResponse
+    { kind = Core.Nothing,
+      videoFormats = Core.Nothing
+    }
 
 instance Core.FromJSON VideoFormatsListResponse where
   parseJSON =
@@ -16671,7 +15904,10 @@ data VideoOffset = VideoOffset
 newVideoOffset ::
   VideoOffset
 newVideoOffset =
-  VideoOffset {offsetPercentage = Core.Nothing, offsetSeconds = Core.Nothing}
+  VideoOffset
+    { offsetPercentage = Core.Nothing,
+      offsetSeconds = Core.Nothing
+    }
 
 instance Core.FromJSON VideoOffset where
   parseJSON =
@@ -16687,8 +15923,7 @@ instance Core.ToJSON VideoOffset where
   toJSON VideoOffset {..} =
     Core.object
       ( Core.catMaybes
-          [ ("offsetPercentage" Core..=)
-              Core.<$> offsetPercentage,
+          [ ("offsetPercentage" Core..=) Core.<$> offsetPercentage,
             ("offsetSeconds" Core..=) Core.<$> offsetSeconds
           ]
       )
@@ -16709,7 +15944,7 @@ data VideoSettings = VideoSettings
     obaSettings :: (Core.Maybe ObaIcon),
     -- | Orientation of a video placement. If this value is set, placement will return assets matching the specified orientation.
     orientation :: (Core.Maybe VideoSettings_Orientation),
-    -- | Publisher specification ID of a video placement.
+    -- | Publisher specification ID of a video placement. Possible values are: * @1@, Hulu * @2@, NBC * @3@, CBS * @4@, CBS Desktop * @5@, Discovery * @6@, VEVO HD * @7@, VEVO Vertical * @8@, Fox * @9@, CW Network * @10@, Disney * @11@, IGN * @12@, NFL.com * @13@, Turner Broadcasting * @14@, Tubi on Fox * @15@, Hearst Corporation * @16@, Twitch Desktop * @17@, ABC * @18@, Univision * @19@, MLB.com * @20@, MLB.com Mobile * @21@, MLB.com OTT * @22@, Polsat * @23@, TVN * @24@, Mediaset * @25@, Antena 3 * @26@, Mediamond * @27@, Sky Italia * @28@, Tubi on CBS * @29@, Spotify * @30@, Paramount * @31@, Max
     publisherSpecificationId :: (Core.Maybe Core.Int64),
     -- | Settings for the skippability of video creatives served to this placement. If this object is provided, the creative-level skippable settings will be overridden.
     skippableSettings :: (Core.Maybe SkippableSetting),
@@ -16746,7 +15981,8 @@ instance Core.FromJSON VideoSettings where
             Core.<*> (o Core..:? "obaEnabled")
             Core.<*> (o Core..:? "obaSettings")
             Core.<*> (o Core..:? "orientation")
-            Core.<*> ( o Core..:? "publisherSpecificationId"
+            Core.<*> ( o
+                         Core..:? "publisherSpecificationId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "skippableSettings")
@@ -16757,8 +15993,7 @@ instance Core.ToJSON VideoSettings where
   toJSON VideoSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("companionSettings" Core..=)
-              Core.<$> companionSettings,
+          [ ("companionSettings" Core..=) Core.<$> companionSettings,
             ("durationSeconds" Core..=) Core.<$> durationSeconds,
             ("kind" Core..=) Core.<$> kind,
             ("obaEnabled" Core..=) Core.<$> obaEnabled,
@@ -16767,9 +16002,7 @@ instance Core.ToJSON VideoSettings where
             ("publisherSpecificationId" Core..=)
               Core.. Core.AsText
               Core.<$> publisherSpecificationId,
-            ("skippableSettings" Core..=)
-              Core.<$> skippableSettings,
-            ("transcodeSettings" Core..=)
-              Core.<$> transcodeSettings
+            ("skippableSettings" Core..=) Core.<$> skippableSettings,
+            ("transcodeSettings" Core..=) Core.<$> transcodeSettings
           ]
       )

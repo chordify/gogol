@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Disks.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Disks.GetIamPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.disks.getIamPolicy@ method which the
 -- 'ComputeDisksGetIamPolicy' request conforms to.
@@ -57,9 +55,7 @@ type ComputeDisksGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "optionsRequestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "optionsRequestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -116,10 +112,7 @@ instance Core.GoogleRequest ComputeDisksGetIamPolicy where
   type Rs ComputeDisksGetIamPolicy = Policy
   type
     Scopes ComputeDisksGetIamPolicy =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeDisksGetIamPolicy {..} =
     go
       project
@@ -136,7 +129,5 @@ instance Core.GoogleRequest ComputeDisksGetIamPolicy where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeDisksGetIamPolicyResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeDisksGetIamPolicyResource)
           Core.mempty

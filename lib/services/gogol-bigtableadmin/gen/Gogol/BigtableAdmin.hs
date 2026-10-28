@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -45,16 +43,6 @@ module Gogol.BigtableAdmin
     CloudPlatform'ReadOnly,
 
     -- * Resources
-
-    -- ** bigtableadmin.operations.cancel
-    BigtableAdminOperationsCancelResource,
-    BigtableAdminOperationsCancel (..),
-    newBigtableAdminOperationsCancel,
-
-    -- ** bigtableadmin.operations.delete
-    BigtableAdminOperationsDeleteResource,
-    BigtableAdminOperationsDelete (..),
-    newBigtableAdminOperationsDelete,
 
     -- ** bigtableadmin.operations.get
     BigtableAdminOperationsGetResource,
@@ -196,6 +184,36 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesList (..),
     newBigtableAdminProjectsInstancesList,
 
+    -- ** bigtableadmin.projects.instances.logicalViews.getIamPolicy
+    BigtableAdminProjectsInstancesLogicalViewsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesLogicalViewsGetIamPolicy (..),
+    newBigtableAdminProjectsInstancesLogicalViewsGetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.logicalViews.setIamPolicy
+    BigtableAdminProjectsInstancesLogicalViewsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesLogicalViewsSetIamPolicy (..),
+    newBigtableAdminProjectsInstancesLogicalViewsSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.logicalViews.testIamPermissions
+    BigtableAdminProjectsInstancesLogicalViewsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesLogicalViewsTestIamPermissions (..),
+    newBigtableAdminProjectsInstancesLogicalViewsTestIamPermissions,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.getIamPolicy
+    BigtableAdminProjectsInstancesMaterializedViewsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesMaterializedViewsGetIamPolicy (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsGetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.setIamPolicy
+    BigtableAdminProjectsInstancesMaterializedViewsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesMaterializedViewsSetIamPolicy (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.materializedViews.testIamPermissions
+    BigtableAdminProjectsInstancesMaterializedViewsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesMaterializedViewsTestIamPermissions (..),
+    newBigtableAdminProjectsInstancesMaterializedViewsTestIamPermissions,
+
     -- ** bigtableadmin.projects.instances.partialUpdateInstance
     BigtableAdminProjectsInstancesPartialUpdateInstanceResource,
     BigtableAdminProjectsInstancesPartialUpdateInstance (..),
@@ -205,6 +223,46 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesSetIamPolicyResource,
     BigtableAdminProjectsInstancesSetIamPolicy (..),
     newBigtableAdminProjectsInstancesSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.create
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsCreateResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsCreate (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsCreate,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.delete
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsDeleteResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsDelete (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsDelete,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.get
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsGetResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsGet (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsGet,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.getIamPolicy
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsGetIamPolicyResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsGetIamPolicy (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsGetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.list
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsListResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsList (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsList,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.patch
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsPatchResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsPatch (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsPatch,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.setIamPolicy
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsSetIamPolicyResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsSetIamPolicy (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsSetIamPolicy,
+
+    -- ** bigtableadmin.projects.instances.tables.authorizedViews.testIamPermissions
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsTestIamPermissionsResource,
+    BigtableAdminProjectsInstancesTablesAuthorizedViewsTestIamPermissions (..),
+    newBigtableAdminProjectsInstancesTablesAuthorizedViewsTestIamPermissions,
 
     -- ** bigtableadmin.projects.instances.tables.checkConsistency
     BigtableAdminProjectsInstancesTablesCheckConsistencyResource,
@@ -286,11 +344,6 @@ module Gogol.BigtableAdmin
     BigtableAdminProjectsInstancesUpdate (..),
     newBigtableAdminProjectsInstancesUpdate,
 
-    -- ** bigtableadmin.projects.locations.get
-    BigtableAdminProjectsLocationsGetResource,
-    BigtableAdminProjectsLocationsGet (..),
-    newBigtableAdminProjectsLocationsGet,
-
     -- ** bigtableadmin.projects.locations.list
     BigtableAdminProjectsLocationsListResource,
     BigtableAdminProjectsLocationsList (..),
@@ -305,6 +358,9 @@ module Gogol.BigtableAdmin
     AppProfile (..),
     newAppProfile,
 
+    -- ** AppProfile_Priority
+    AppProfile_Priority (..),
+
     -- ** AuditConfig
     AuditConfig (..),
     newAuditConfig,
@@ -315,6 +371,14 @@ module Gogol.BigtableAdmin
 
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
+
+    -- ** AuthorizedView
+    AuthorizedView (..),
+    newAuthorizedView,
+
+    -- ** AutomatedBackupPolicy
+    AutomatedBackupPolicy (..),
+    newAutomatedBackupPolicy,
 
     -- ** AutoscalingLimits
     AutoscalingLimits (..),
@@ -328,6 +392,9 @@ module Gogol.BigtableAdmin
     Backup (..),
     newBackup,
 
+    -- ** Backup_BackupType
+    Backup_BackupType (..),
+
     -- ** Backup_State
     Backup_State (..),
 
@@ -338,6 +405,10 @@ module Gogol.BigtableAdmin
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** ChangeStreamConfig
+    ChangeStreamConfig (..),
+    newChangeStreamConfig,
 
     -- ** CheckConsistencyRequest
     CheckConsistencyRequest (..),
@@ -353,6 +424,9 @@ module Gogol.BigtableAdmin
 
     -- ** Cluster_DefaultStorageType
     Cluster_DefaultStorageType (..),
+
+    -- ** Cluster_NodeScalingFactor
+    Cluster_NodeScalingFactor (..),
 
     -- ** Cluster_State
     Cluster_State (..),
@@ -388,6 +462,14 @@ module Gogol.BigtableAdmin
     CopyBackupRequest (..),
     newCopyBackupRequest,
 
+    -- ** CreateAuthorizedViewMetadata
+    CreateAuthorizedViewMetadata (..),
+    newCreateAuthorizedViewMetadata,
+
+    -- ** CreateAuthorizedViewRequest
+    CreateAuthorizedViewRequest (..),
+    newCreateAuthorizedViewRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -419,6 +501,17 @@ module Gogol.BigtableAdmin
     -- ** CreateTableRequest
     CreateTableRequest (..),
     newCreateTableRequest,
+
+    -- ** DataBoostIsolationReadOnly
+    DataBoostIsolationReadOnly (..),
+    newDataBoostIsolationReadOnly,
+
+    -- ** DataBoostIsolationReadOnly_ComputeBillingOwner
+    DataBoostIsolationReadOnly_ComputeBillingOwner (..),
+
+    -- ** DataBoostReadLocalWrites
+    DataBoostReadLocalWrites (..),
+    newDataBoostReadLocalWrites,
 
     -- ** DropRowRangeRequest
     DropRowRangeRequest (..),
@@ -463,6 +556,138 @@ module Gogol.BigtableAdmin
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** GoogleBigtableAdminV2AuthorizedViewFamilySubsets
+    GoogleBigtableAdminV2AuthorizedViewFamilySubsets (..),
+    newGoogleBigtableAdminV2AuthorizedViewFamilySubsets,
+
+    -- ** GoogleBigtableAdminV2AuthorizedViewSubsetView
+    GoogleBigtableAdminV2AuthorizedViewSubsetView (..),
+    newGoogleBigtableAdminV2AuthorizedViewSubsetView,
+
+    -- ** GoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets
+    GoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets (..),
+    newGoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets,
+
+    -- ** GoogleBigtableAdminV2TypeAggregate
+    GoogleBigtableAdminV2TypeAggregate (..),
+    newGoogleBigtableAdminV2TypeAggregate,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount
+    GoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount (..),
+    newGoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateMax
+    GoogleBigtableAdminV2TypeAggregateMax (..),
+    newGoogleBigtableAdminV2TypeAggregateMax,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateMin
+    GoogleBigtableAdminV2TypeAggregateMin (..),
+    newGoogleBigtableAdminV2TypeAggregateMin,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateSum
+    GoogleBigtableAdminV2TypeAggregateSum (..),
+    newGoogleBigtableAdminV2TypeAggregateSum,
+
+    -- ** GoogleBigtableAdminV2TypeArray
+    GoogleBigtableAdminV2TypeArray (..),
+    newGoogleBigtableAdminV2TypeArray,
+
+    -- ** GoogleBigtableAdminV2TypeBool
+    GoogleBigtableAdminV2TypeBool (..),
+    newGoogleBigtableAdminV2TypeBool,
+
+    -- ** GoogleBigtableAdminV2TypeBytes
+    GoogleBigtableAdminV2TypeBytes (..),
+    newGoogleBigtableAdminV2TypeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeBytesEncoding
+    GoogleBigtableAdminV2TypeBytesEncoding (..),
+    newGoogleBigtableAdminV2TypeBytesEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeBytesEncodingRaw
+    GoogleBigtableAdminV2TypeBytesEncodingRaw (..),
+    newGoogleBigtableAdminV2TypeBytesEncodingRaw,
+
+    -- ** GoogleBigtableAdminV2TypeDate
+    GoogleBigtableAdminV2TypeDate (..),
+    newGoogleBigtableAdminV2TypeDate,
+
+    -- ** GoogleBigtableAdminV2TypeFloat32
+    GoogleBigtableAdminV2TypeFloat32 (..),
+    newGoogleBigtableAdminV2TypeFloat32,
+
+    -- ** GoogleBigtableAdminV2TypeFloat64
+    GoogleBigtableAdminV2TypeFloat64 (..),
+    newGoogleBigtableAdminV2TypeFloat64,
+
+    -- ** GoogleBigtableAdminV2TypeInt64
+    GoogleBigtableAdminV2TypeInt64 (..),
+    newGoogleBigtableAdminV2TypeInt64,
+
+    -- ** GoogleBigtableAdminV2TypeInt64Encoding
+    GoogleBigtableAdminV2TypeInt64Encoding (..),
+    newGoogleBigtableAdminV2TypeInt64Encoding,
+
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes
+    GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes,
+
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeMap
+    GoogleBigtableAdminV2TypeMap (..),
+    newGoogleBigtableAdminV2TypeMap,
+
+    -- ** GoogleBigtableAdminV2TypeString
+    GoogleBigtableAdminV2TypeString (..),
+    newGoogleBigtableAdminV2TypeString,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncoding
+    GoogleBigtableAdminV2TypeStringEncoding (..),
+    newGoogleBigtableAdminV2TypeStringEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+    GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes (..),
+    newGoogleBigtableAdminV2TypeStringEncodingUtf8Bytes,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncodingUtf8Raw
+    GoogleBigtableAdminV2TypeStringEncodingUtf8Raw (..),
+    newGoogleBigtableAdminV2TypeStringEncodingUtf8Raw,
+
+    -- ** GoogleBigtableAdminV2TypeStruct
+    GoogleBigtableAdminV2TypeStruct (..),
+    newGoogleBigtableAdminV2TypeStruct,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncoding
+    GoogleBigtableAdminV2TypeStructEncoding (..),
+    newGoogleBigtableAdminV2TypeStructEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingSingleton
+    GoogleBigtableAdminV2TypeStructEncodingSingleton (..),
+    newGoogleBigtableAdminV2TypeStructEncodingSingleton,
+
+    -- ** GoogleBigtableAdminV2TypeStructField
+    GoogleBigtableAdminV2TypeStructField (..),
+    newGoogleBigtableAdminV2TypeStructField,
+
+    -- ** GoogleBigtableAdminV2TypeTimestamp
+    GoogleBigtableAdminV2TypeTimestamp (..),
+    newGoogleBigtableAdminV2TypeTimestamp,
+
+    -- ** GoogleBigtableAdminV2TypeTimestampEncoding
+    GoogleBigtableAdminV2TypeTimestampEncoding (..),
+    newGoogleBigtableAdminV2TypeTimestampEncoding,
+
     -- ** HotTablet
     HotTablet (..),
     newHotTablet,
@@ -488,6 +713,10 @@ module Gogol.BigtableAdmin
     -- ** ListAppProfilesResponse
     ListAppProfilesResponse (..),
     newListAppProfilesResponse,
+
+    -- ** ListAuthorizedViewsResponse
+    ListAuthorizedViewsResponse (..),
+    newListAuthorizedViewsResponse,
 
     -- ** ListBackupsResponse
     ListBackupsResponse (..),
@@ -595,6 +824,10 @@ module Gogol.BigtableAdmin
     RestoreTableRequest (..),
     newRestoreTableRequest,
 
+    -- ** RowAffinity
+    RowAffinity (..),
+    newRowAffinity,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -606,6 +839,17 @@ module Gogol.BigtableAdmin
     -- ** Split
     Split (..),
     newSplit,
+
+    -- ** StandardIsolation
+    StandardIsolation (..),
+    newStandardIsolation,
+
+    -- ** StandardIsolation_Priority
+    StandardIsolation_Priority (..),
+
+    -- ** StandardReadRemoteWrites
+    StandardReadRemoteWrites (..),
+    newStandardReadRemoteWrites,
 
     -- ** Status
     Status (..),
@@ -649,6 +893,10 @@ module Gogol.BigtableAdmin
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** Type
+    Type (..),
+    newType,
+
     -- ** UndeleteTableMetadata
     UndeleteTableMetadata (..),
     newUndeleteTableMetadata,
@@ -665,6 +913,14 @@ module Gogol.BigtableAdmin
     UpdateAppProfileMetadata (..),
     newUpdateAppProfileMetadata,
 
+    -- ** UpdateAuthorizedViewMetadata
+    UpdateAuthorizedViewMetadata (..),
+    newUpdateAuthorizedViewMetadata,
+
+    -- ** UpdateAuthorizedViewRequest
+    UpdateAuthorizedViewRequest (..),
+    newUpdateAuthorizedViewRequest,
+
     -- ** UpdateClusterMetadata
     UpdateClusterMetadata (..),
     newUpdateClusterMetadata,
@@ -677,6 +933,12 @@ module Gogol.BigtableAdmin
     UpdateTableMetadata (..),
     newUpdateTableMetadata,
 
+    -- ** ProjectsInstancesTablesAuthorizedViewsGetView
+    ProjectsInstancesTablesAuthorizedViewsGetView (..),
+
+    -- ** ProjectsInstancesTablesAuthorizedViewsListView
+    ProjectsInstancesTablesAuthorizedViewsListView (..),
+
     -- ** ProjectsInstancesTablesGetView
     ProjectsInstancesTablesGetView (..),
 
@@ -685,8 +947,6 @@ module Gogol.BigtableAdmin
   )
 where
 
-import Gogol.BigtableAdmin.Operations.Cancel
-import Gogol.BigtableAdmin.Operations.Delete
 import Gogol.BigtableAdmin.Operations.Get
 import Gogol.BigtableAdmin.Operations.Projects.Operations.List
 import Gogol.BigtableAdmin.Projects.Instances.AppProfiles.Create
@@ -715,8 +975,22 @@ import Gogol.BigtableAdmin.Projects.Instances.Delete
 import Gogol.BigtableAdmin.Projects.Instances.Get
 import Gogol.BigtableAdmin.Projects.Instances.GetIamPolicy
 import Gogol.BigtableAdmin.Projects.Instances.List
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.GetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.LogicalViews.TestIamPermissions
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.GetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.MaterializedViews.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.PartialUpdateInstance
 import Gogol.BigtableAdmin.Projects.Instances.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Create
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Delete
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Get
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.GetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.List
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.Patch
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.SetIamPolicy
+import Gogol.BigtableAdmin.Projects.Instances.Tables.AuthorizedViews.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.Tables.CheckConsistency
 import Gogol.BigtableAdmin.Projects.Instances.Tables.Create
 import Gogol.BigtableAdmin.Projects.Instances.Tables.Delete
@@ -733,6 +1007,5 @@ import Gogol.BigtableAdmin.Projects.Instances.Tables.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.Tables.Undelete
 import Gogol.BigtableAdmin.Projects.Instances.TestIamPermissions
 import Gogol.BigtableAdmin.Projects.Instances.Update
-import Gogol.BigtableAdmin.Projects.Locations.Get
 import Gogol.BigtableAdmin.Projects.Locations.List
 import Gogol.BigtableAdmin.Types

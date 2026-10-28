@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.CreativeGroups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.CreativeGroups.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.creativeGroups.list@ method which the
 -- 'DFAReportingCreativeGroupsList' request conforms to.
@@ -59,20 +57,12 @@ type DFAReportingCreativeGroupsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              CreativeGroupsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              CreativeGroupsListSortOrder
+    Core.:> Core.QueryParam "sortField" CreativeGroupsListSortField
+    Core.:> Core.QueryParam "sortOrder" CreativeGroupsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              CreativeGroupsListResponse
+    Core.:> Core.Get '[Core.JSON] CreativeGroupsListResponse
 
 -- | Retrieves a list of creative groups, possibly filtered. This method supports paging.
 --
@@ -132,13 +122,8 @@ newDFAReportingCreativeGroupsList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingCreativeGroupsList
-  where
-  type
-    Rs DFAReportingCreativeGroupsList =
-      CreativeGroupsListResponse
+instance Core.GoogleRequest DFAReportingCreativeGroupsList where
+  type Rs DFAReportingCreativeGroupsList = CreativeGroupsListResponse
   type
     Scopes DFAReportingCreativeGroupsList =
       '[Dfatrafficking'FullControl]
@@ -163,7 +148,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCreativeGroupsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCreativeGroupsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.DeleteContactPhoto
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,23 +38,18 @@ module Gogol.People.DeleteContactPhoto
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.deleteContactPhoto@ method which the
 -- 'PeoplePeopleDeleteContactPhoto' request conforms to.
 type PeoplePeopleDeleteContactPhotoResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resourceName"
-              "deleteContactPhoto"
-              Core.Text
+    Core.:> Core.CaptureMode "resourceName" "deleteContactPhoto" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "personFields" Core.FieldMask
-    Core.:> Core.QueryParams
-              "sources"
-              PeopleDeleteContactPhotoSources
+    Core.:> Core.QueryParams "sources" PeopleDeleteContactPhotoSources
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -102,13 +95,8 @@ newPeoplePeopleDeleteContactPhoto resourceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeoplePeopleDeleteContactPhoto
-  where
-  type
-    Rs PeoplePeopleDeleteContactPhoto =
-      DeleteContactPhotoResponse
+instance Core.GoogleRequest PeoplePeopleDeleteContactPhoto where
+  type Rs PeoplePeopleDeleteContactPhoto = DeleteContactPhotoResponse
   type
     Scopes PeoplePeopleDeleteContactPhoto =
       '[Contacts'FullControl]
@@ -127,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleDeleteContactPhotoResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleDeleteContactPhotoResource)
           Core.mempty

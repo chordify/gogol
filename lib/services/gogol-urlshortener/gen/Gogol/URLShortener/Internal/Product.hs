@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.URLShortener.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.URLShortener.Internal.Product
@@ -48,7 +46,7 @@ module Gogol.URLShortener.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.URLShortener.Internal.Sum
 
 --
@@ -90,14 +88,10 @@ instance Core.FromJSON AnalyticsSnapshot where
           AnalyticsSnapshot
             Core.<$> (o Core..:? "browsers")
             Core.<*> (o Core..:? "countries")
-            Core.<*> ( o Core..:? "longUrlClicks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "longUrlClicks" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "platforms")
             Core.<*> (o Core..:? "referrers")
-            Core.<*> ( o Core..:? "shortUrlClicks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "shortUrlClicks" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AnalyticsSnapshot where
@@ -106,11 +100,13 @@ instance Core.ToJSON AnalyticsSnapshot where
       ( Core.catMaybes
           [ ("browsers" Core..=) Core.<$> browsers,
             ("countries" Core..=) Core.<$> countries,
-            ("longUrlClicks" Core..=) Core.. Core.AsText
+            ("longUrlClicks" Core..=)
+              Core.. Core.AsText
               Core.<$> longUrlClicks,
             ("platforms" Core..=) Core.<$> platforms,
             ("referrers" Core..=) Core.<$> referrers,
-            ("shortUrlClicks" Core..=) Core.. Core.AsText
+            ("shortUrlClicks" Core..=)
+              Core.. Core.AsText
               Core.<$> shortUrlClicks
           ]
       )
@@ -181,7 +177,8 @@ data StringCount = StringCount
 -- | Creates a value of 'StringCount' with the minimum fields required to make a request.
 newStringCount ::
   StringCount
-newStringCount = StringCount {count = Core.Nothing, id = Core.Nothing}
+newStringCount =
+  StringCount {count = Core.Nothing, id = Core.Nothing}
 
 instance Core.FromJSON StringCount where
   parseJSON =
@@ -189,9 +186,7 @@ instance Core.FromJSON StringCount where
       "StringCount"
       ( \o ->
           StringCount
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
       )
 
@@ -298,9 +293,7 @@ instance Core.FromJSON UrlHistory where
           UrlHistory
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "urlshortener#urlHistory"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "urlshortener#urlHistory")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "totalItems")
       )

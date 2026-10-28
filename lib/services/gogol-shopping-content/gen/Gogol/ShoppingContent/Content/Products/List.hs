@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Products.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Products.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.products.list@ method which the
@@ -69,7 +67,7 @@ data ContentProductsList = ContentProductsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of products to return in the response, used for paging.
+    -- | The maximum number of products to return in the response, used for paging. The default value is 25. The maximum value is 250.
     maxResults :: (Core.Maybe Core.Word32),
     -- | The ID of the account that contains the products. This account cannot be a multi-client account.
     merchantId :: Core.Word64,
@@ -101,9 +99,7 @@ newContentProductsList merchantId =
 
 instance Core.GoogleRequest ContentProductsList where
   type Rs ContentProductsList = ProductsListResponse
-  type
-    Scopes ContentProductsList =
-      '[Content'FullControl]
+  type Scopes ContentProductsList = '[Content'FullControl]
   requestClient ContentProductsList {..} =
     go
       merchantId
@@ -119,7 +115,5 @@ instance Core.GoogleRequest ContentProductsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentProductsListResource
-          )
+          (Core.Proxy :: Core.Proxy ContentProductsListResource)
           Core.mempty

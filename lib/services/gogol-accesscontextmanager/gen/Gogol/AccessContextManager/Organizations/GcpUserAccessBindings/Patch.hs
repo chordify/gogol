@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.organizations.gcpUserAccessBindings.patch@ method which the
 -- 'AccessContextManagerOrganizationsGcpUserAccessBindingsPatch' request conforms to.
@@ -49,6 +47,7 @@ type AccessContextManagerOrganizationsGcpUserAccessBindingsPatchResource =
     Core.:> Core.Capture "name" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "append" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -65,13 +64,15 @@ data AccessContextManagerOrganizationsGcpUserAccessBindingsPatch = AccessContext
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
+    -- | Optional. This field controls whether or not certain repeated settings in the update request overwrite or append to existing settings on the binding. If true, then append. Otherwise overwrite. So far, only scoped/access/settings with reauth/settings supports appending. Global access/levels, access/levels in scoped/access/settings, dry/run/access/levels, reauth/settings, and session/settings are not compatible with append functionality, and the request will return an error if append=true when these settings are in the update/mask. The request will also return an error if append=true when \"scoped/access/settings\" is not set in the update/mask.
+    append :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
     -- | Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by <https://tools.ietf.org/html/rfc3986#section-2.3 RFC 3986 Section 2.3>). Should not be specified by the client during creation. Example: \"organizations\/256\/gcpUserAccessBindings\/b3-BhcX_Ud5N\"
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GcpUserAccessBinding,
-    -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and may only contain the following fields: @access_levels@, @dry_run_access_levels@. update/mask { paths: \"access/levels\" }
+    -- | Required. Only the fields specified in this mask are updated. Because name and group/key cannot be changed, update/mask is required and may only contain the following fields: @access_levels@, @dry_run_access_levels@, @reauth_settings@ @session_settings@, @scoped_access_settings@. update/mask { paths: \"access/levels\" }
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -87,25 +88,28 @@ newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch ::
   -- |  Multipart request metadata. See 'payload'.
   GcpUserAccessBinding ->
   AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch name payload =
-  AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+  name
+  payload =
+    AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        append = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AccessContextManagerOrganizationsGcpUserAccessBindingsPatch
   where
   type
-    Rs
-      AccessContextManagerOrganizationsGcpUserAccessBindingsPatch =
+    Rs AccessContextManagerOrganizationsGcpUserAccessBindingsPatch =
       Operation
   type
     Scopes
@@ -117,6 +121,7 @@ instance
         name
         xgafv
         accessToken
+        append
         callback
         updateMask
         uploadType

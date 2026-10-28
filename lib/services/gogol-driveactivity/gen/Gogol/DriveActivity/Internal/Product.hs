@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DriveActivity.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DriveActivity.Internal.Product
@@ -293,7 +291,7 @@ module Gogol.DriveActivity.Internal.Product
 where
 
 import Gogol.DriveActivity.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Information about the action.
 --
@@ -423,16 +421,14 @@ instance Core.ToJSON ActionDetail where
   toJSON ActionDetail {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appliedLabelChange" Core..=)
-              Core.<$> appliedLabelChange,
+          [ ("appliedLabelChange" Core..=) Core.<$> appliedLabelChange,
             ("comment" Core..=) Core.<$> comment,
             ("create" Core..=) Core.<$> create,
             ("delete" Core..=) Core.<$> delete,
             ("dlpChange" Core..=) Core.<$> dlpChange,
             ("edit" Core..=) Core.<$> edit,
             ("move" Core..=) Core.<$> move,
-            ("permissionChange" Core..=)
-              Core.<$> permissionChange,
+            ("permissionChange" Core..=) Core.<$> permissionChange,
             ("reference" Core..=) Core.<$> reference,
             ("rename" Core..=) Core.<$> rename,
             ("restore" Core..=) Core.<$> restore,
@@ -507,9 +503,7 @@ newAdministrator = Administrator
 
 instance Core.FromJSON Administrator where
   parseJSON =
-    Core.withObject
-      "Administrator"
-      (\o -> Core.pure Administrator)
+    Core.withObject "Administrator" (\o -> Core.pure Administrator)
 
 instance Core.ToJSON Administrator where
   toJSON = Core.const Core.emptyObject
@@ -527,9 +521,7 @@ newAnonymousUser = AnonymousUser
 
 instance Core.FromJSON AnonymousUser where
   parseJSON =
-    Core.withObject
-      "AnonymousUser"
-      (\o -> Core.pure AnonymousUser)
+    Core.withObject "AnonymousUser" (\o -> Core.pure AnonymousUser)
 
 instance Core.ToJSON AnonymousUser where
   toJSON = Core.const Core.emptyObject
@@ -546,8 +538,7 @@ newAnyone ::
 newAnyone = Anyone
 
 instance Core.FromJSON Anyone where
-  parseJSON =
-    Core.withObject "Anyone" (\o -> Core.pure Anyone)
+  parseJSON = Core.withObject "Anyone" (\o -> Core.pure Anyone)
 
 instance Core.ToJSON Anyone where
   toJSON = Core.const Core.emptyObject
@@ -564,20 +555,18 @@ newtype ApplicationReference = ApplicationReference
 -- | Creates a value of 'ApplicationReference' with the minimum fields required to make a request.
 newApplicationReference ::
   ApplicationReference
-newApplicationReference = ApplicationReference {type' = Core.Nothing}
+newApplicationReference =
+  ApplicationReference {type' = Core.Nothing}
 
 instance Core.FromJSON ApplicationReference where
   parseJSON =
     Core.withObject
       "ApplicationReference"
-      ( \o ->
-          ApplicationReference Core.<$> (o Core..:? "type")
-      )
+      (\o -> ApplicationReference Core.<$> (o Core..:? "type"))
 
 instance Core.ToJSON ApplicationReference where
   toJSON ApplicationReference {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Label changes that were made on the Target.
 --
@@ -597,16 +586,12 @@ instance Core.FromJSON AppliedLabelChange where
   parseJSON =
     Core.withObject
       "AppliedLabelChange"
-      ( \o ->
-          AppliedLabelChange Core.<$> (o Core..:? "changes")
-      )
+      (\o -> AppliedLabelChange Core.<$> (o Core..:? "changes"))
 
 instance Core.ToJSON AppliedLabelChange where
   toJSON AppliedLabelChange {..} =
     Core.object
-      ( Core.catMaybes
-          [("changes" Core..=) Core.<$> changes]
-      )
+      (Core.catMaybes [("changes" Core..=) Core.<$> changes])
 
 -- | A change made to a Label on the Target.
 --
@@ -671,7 +656,8 @@ data Assignment = Assignment
 -- | Creates a value of 'Assignment' with the minimum fields required to make a request.
 newAssignment ::
   Assignment
-newAssignment = Assignment {assignedUser = Core.Nothing, subtype = Core.Nothing}
+newAssignment =
+  Assignment {assignedUser = Core.Nothing, subtype = Core.Nothing}
 
 instance Core.FromJSON Assignment where
   parseJSON =
@@ -764,7 +750,8 @@ instance Core.FromJSON ConsolidationStrategy where
       "ConsolidationStrategy"
       ( \o ->
           ConsolidationStrategy
-            Core.<$> (o Core..:? "legacy") Core.<*> (o Core..:? "none")
+            Core.<$> (o Core..:? "legacy")
+            Core.<*> (o Core..:? "none")
       )
 
 instance Core.ToJSON ConsolidationStrategy where
@@ -820,7 +807,11 @@ data Create = Create
 newCreate ::
   Create
 newCreate =
-  Create {copy = Core.Nothing, new' = Core.Nothing, upload = Core.Nothing}
+  Create
+    { copy = Core.Nothing,
+      new' = Core.Nothing,
+      upload = Core.Nothing
+    }
 
 instance Core.FromJSON Create where
   parseJSON =
@@ -855,21 +846,18 @@ newtype DataLeakPreventionChange = DataLeakPreventionChange
 -- | Creates a value of 'DataLeakPreventionChange' with the minimum fields required to make a request.
 newDataLeakPreventionChange ::
   DataLeakPreventionChange
-newDataLeakPreventionChange = DataLeakPreventionChange {type' = Core.Nothing}
+newDataLeakPreventionChange =
+  DataLeakPreventionChange {type' = Core.Nothing}
 
 instance Core.FromJSON DataLeakPreventionChange where
   parseJSON =
     Core.withObject
       "DataLeakPreventionChange"
-      ( \o ->
-          DataLeakPreventionChange
-            Core.<$> (o Core..:? "type")
-      )
+      (\o -> DataLeakPreventionChange Core.<$> (o Core..:? "type"))
 
 instance Core.ToJSON DataLeakPreventionChange where
   toJSON DataLeakPreventionChange {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Wrapper for Date Field value.
 --
@@ -893,8 +881,7 @@ instance Core.FromJSON Date where
 
 instance Core.ToJSON Date where
   toJSON Date {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | An object was deleted.
 --
@@ -918,8 +905,7 @@ instance Core.FromJSON Delete' where
 
 instance Core.ToJSON Delete' where
   toJSON Delete' {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | A user whose account has since been deleted.
 --
@@ -934,9 +920,7 @@ newDeletedUser = DeletedUser
 
 instance Core.FromJSON DeletedUser where
   parseJSON =
-    Core.withObject
-      "DeletedUser"
-      (\o -> Core.pure DeletedUser)
+    Core.withObject "DeletedUser" (\o -> Core.pure DeletedUser)
 
 instance Core.ToJSON DeletedUser where
   toJSON = Core.const Core.emptyObject
@@ -963,7 +947,8 @@ instance Core.FromJSON Domain where
       "Domain"
       ( \o ->
           Domain
-            Core.<$> (o Core..:? "legacyId") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "legacyId")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON Domain where
@@ -992,7 +977,11 @@ data Drive = Drive
 newDrive ::
   Drive
 newDrive =
-  Drive {name = Core.Nothing, root = Core.Nothing, title = Core.Nothing}
+  Drive
+    { name = Core.Nothing,
+      root = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON Drive where
   parseJSON =
@@ -1067,8 +1056,7 @@ instance Core.ToJSON DriveActivity where
       ( Core.catMaybes
           [ ("actions" Core..=) Core.<$> actions,
             ("actors" Core..=) Core.<$> actors,
-            ("primaryActionDetail" Core..=)
-              Core.<$> primaryActionDetail,
+            ("primaryActionDetail" Core..=) Core.<$> primaryActionDetail,
             ("targets" Core..=) Core.<$> targets,
             ("timeRange" Core..=) Core.<$> timeRange,
             ("timestamp" Core..=) Core.<$> timestamp
@@ -1088,9 +1076,7 @@ newDriveFile = DriveFile
 
 instance Core.FromJSON DriveFile where
   parseJSON =
-    Core.withObject
-      "DriveFile"
-      (\o -> Core.pure DriveFile)
+    Core.withObject "DriveFile" (\o -> Core.pure DriveFile)
 
 instance Core.ToJSON DriveFile where
   toJSON = Core.const Core.emptyObject
@@ -1117,8 +1103,7 @@ instance Core.FromJSON DriveFolder where
 
 instance Core.ToJSON DriveFolder where
   toJSON DriveFolder {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | A Drive item, such as a file or folder.
 --
@@ -1262,7 +1247,8 @@ data DriveReference = DriveReference
 -- | Creates a value of 'DriveReference' with the minimum fields required to make a request.
 newDriveReference ::
   DriveReference
-newDriveReference = DriveReference {name = Core.Nothing, title = Core.Nothing}
+newDriveReference =
+  DriveReference {name = Core.Nothing, title = Core.Nothing}
 
 instance Core.FromJSON DriveReference where
   parseJSON =
@@ -1270,16 +1256,15 @@ instance Core.FromJSON DriveReference where
       "DriveReference"
       ( \o ->
           DriveReference
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "title")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON DriveReference where
   toJSON DriveReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("title" Core..=) Core.<$> title
-          ]
+          [("name" Core..=) Core.<$> name, ("title" Core..=) Core.<$> title]
       )
 
 -- | An empty message indicating an object was edited.
@@ -1294,8 +1279,7 @@ newEdit ::
 newEdit = Edit
 
 instance Core.FromJSON Edit where
-  parseJSON =
-    Core.withObject "Edit" (\o -> Core.pure Edit)
+  parseJSON = Core.withObject "Edit" (\o -> Core.pure Edit)
 
 instance Core.ToJSON Edit where
   toJSON = Core.const Core.emptyObject
@@ -1430,8 +1414,7 @@ newFile ::
 newFile = File
 
 instance Core.FromJSON File where
-  parseJSON =
-    Core.withObject "File" (\o -> Core.pure File)
+  parseJSON = Core.withObject "File" (\o -> Core.pure File)
 
 instance Core.ToJSON File where
   toJSON = Core.const Core.emptyObject
@@ -1478,12 +1461,9 @@ instance Core.ToJSON FileComment where
   toJSON FileComment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("legacyCommentId" Core..=)
-              Core.<$> legacyCommentId,
-            ("legacyDiscussionId" Core..=)
-              Core.<$> legacyDiscussionId,
-            ("linkToDiscussion" Core..=)
-              Core.<$> linkToDiscussion,
+          [ ("legacyCommentId" Core..=) Core.<$> legacyCommentId,
+            ("legacyDiscussionId" Core..=) Core.<$> legacyDiscussionId,
+            ("linkToDiscussion" Core..=) Core.<$> linkToDiscussion,
             ("parent" Core..=) Core.<$> parent
           ]
       )
@@ -1510,8 +1490,7 @@ instance Core.FromJSON Folder where
 
 instance Core.ToJSON Folder where
   toJSON Folder {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Information about a group.
 --
@@ -1534,8 +1513,7 @@ instance Core.FromJSON Group where
     Core.withObject
       "Group"
       ( \o ->
-          Group
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "title")
+          Group Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON Group where
@@ -1565,18 +1543,13 @@ instance Core.FromJSON Impersonation where
   parseJSON =
     Core.withObject
       "Impersonation"
-      ( \o ->
-          Impersonation
-            Core.<$> (o Core..:? "impersonatedUser")
-      )
+      (\o -> Impersonation Core.<$> (o Core..:? "impersonatedUser"))
 
 instance Core.ToJSON Impersonation where
   toJSON Impersonation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("impersonatedUser" Core..=)
-              Core.<$> impersonatedUser
-          ]
+          [("impersonatedUser" Core..=) Core.<$> impersonatedUser]
       )
 
 -- | Wrapper for Integer Field value.
@@ -1599,18 +1572,14 @@ instance Core.FromJSON Integer where
       "Integer"
       ( \o ->
           Integer
-            Core.<$> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Integer where
   toJSON Integer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("value" Core..=) Core.. Core.AsText
-              Core.<$> value
-          ]
+          [("value" Core..=) Core.. Core.AsText Core.<$> value]
       )
 
 -- | A known user.
@@ -1628,7 +1597,10 @@ data KnownUser = KnownUser
 newKnownUser ::
   KnownUser
 newKnownUser =
-  KnownUser {isCurrentUser = Core.Nothing, personName = Core.Nothing}
+  KnownUser
+    { isCurrentUser = Core.Nothing,
+      personName = Core.Nothing
+    }
 
 instance Core.FromJSON KnownUser where
   parseJSON =
@@ -1661,8 +1633,7 @@ newLegacy ::
 newLegacy = Legacy
 
 instance Core.FromJSON Legacy where
-  parseJSON =
-    Core.withObject "Legacy" (\o -> Core.pure Legacy)
+  parseJSON = Core.withObject "Legacy" (\o -> Core.pure Legacy)
 
 instance Core.ToJSON Legacy where
   toJSON = Core.const Core.emptyObject
@@ -1681,7 +1652,8 @@ data Move = Move
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
 newMove ::
   Move
-newMove = Move {addedParents = Core.Nothing, removedParents = Core.Nothing}
+newMove =
+  Move {addedParents = Core.Nothing, removedParents = Core.Nothing}
 
 instance Core.FromJSON Move where
   parseJSON =
@@ -1714,8 +1686,7 @@ newNew ::
 newNew = New
 
 instance Core.FromJSON New where
-  parseJSON =
-    Core.withObject "New" (\o -> Core.pure New)
+  parseJSON = Core.withObject "New" (\o -> Core.pure New)
 
 instance Core.ToJSON New where
   toJSON = Core.const Core.emptyObject
@@ -1882,10 +1853,8 @@ instance Core.ToJSON PermissionChange where
   toJSON PermissionChange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("addedPermissions" Core..=)
-              Core.<$> addedPermissions,
-            ("removedPermissions" Core..=)
-              Core.<$> removedPermissions
+          [ ("addedPermissions" Core..=) Core.<$> addedPermissions,
+            ("removedPermissions" Core..=) Core.<$> removedPermissions
           ]
       )
 
@@ -1912,9 +1881,7 @@ instance Core.FromJSON Post' where
 instance Core.ToJSON Post' where
   toJSON Post' {..} =
     Core.object
-      ( Core.catMaybes
-          [("subtype" Core..=) Core.<$> subtype]
-      )
+      (Core.catMaybes [("subtype" Core..=) Core.<$> subtype])
 
 -- | The request message for querying Drive activity.
 --
@@ -1967,8 +1934,7 @@ instance Core.ToJSON QueryDriveActivityRequest where
     Core.object
       ( Core.catMaybes
           [ ("ancestorName" Core..=) Core.<$> ancestorName,
-            ("consolidationStrategy" Core..=)
-              Core.<$> consolidationStrategy,
+            ("consolidationStrategy" Core..=) Core.<$> consolidationStrategy,
             ("filter" Core..=) Core.<$> filter,
             ("itemName" Core..=) Core.<$> itemName,
             ("pageSize" Core..=) Core.<$> pageSize,
@@ -2029,7 +1995,8 @@ data Rename = Rename
 -- | Creates a value of 'Rename' with the minimum fields required to make a request.
 newRename ::
   Rename
-newRename = Rename {newTitle' = Core.Nothing, oldTitle = Core.Nothing}
+newRename =
+  Rename {newTitle' = Core.Nothing, oldTitle = Core.Nothing}
 
 instance Core.FromJSON Rename where
   parseJSON =
@@ -2072,8 +2039,7 @@ instance Core.FromJSON Restore where
 
 instance Core.ToJSON Restore where
   toJSON Restore {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Information about restriction policy changes to a feature.
 --
@@ -2090,7 +2056,10 @@ data RestrictionChange = RestrictionChange
 newRestrictionChange ::
   RestrictionChange
 newRestrictionChange =
-  RestrictionChange {feature = Core.Nothing, newRestriction' = Core.Nothing}
+  RestrictionChange
+    { feature = Core.Nothing,
+      newRestriction' = Core.Nothing
+    }
 
 instance Core.FromJSON RestrictionChange where
   parseJSON =
@@ -2125,7 +2094,8 @@ data Selection = Selection
 -- | Creates a value of 'Selection' with the minimum fields required to make a request.
 newSelection ::
   Selection
-newSelection = Selection {displayName = Core.Nothing, value = Core.Nothing}
+newSelection =
+  Selection {displayName = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON Selection where
   parseJSON =
@@ -2168,8 +2138,7 @@ instance Core.FromJSON SelectionList where
 
 instance Core.ToJSON SelectionList where
   toJSON SelectionList {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Information about settings changes.
 --
@@ -2183,24 +2152,20 @@ newtype SettingsChange = SettingsChange
 -- | Creates a value of 'SettingsChange' with the minimum fields required to make a request.
 newSettingsChange ::
   SettingsChange
-newSettingsChange = SettingsChange {restrictionChanges = Core.Nothing}
+newSettingsChange =
+  SettingsChange {restrictionChanges = Core.Nothing}
 
 instance Core.FromJSON SettingsChange where
   parseJSON =
     Core.withObject
       "SettingsChange"
-      ( \o ->
-          SettingsChange
-            Core.<$> (o Core..:? "restrictionChanges")
-      )
+      (\o -> SettingsChange Core.<$> (o Core..:? "restrictionChanges"))
 
 instance Core.ToJSON SettingsChange where
   toJSON SettingsChange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("restrictionChanges" Core..=)
-              Core.<$> restrictionChanges
-          ]
+          [("restrictionChanges" Core..=) Core.<$> restrictionChanges]
       )
 
 -- | Wrapper for User Field value.
@@ -2225,8 +2190,7 @@ instance Core.FromJSON SingleUser where
 
 instance Core.ToJSON SingleUser where
   toJSON SingleUser {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | A suggestion.
 --
@@ -2251,9 +2215,7 @@ instance Core.FromJSON Suggestion where
 instance Core.ToJSON Suggestion where
   toJSON Suggestion {..} =
     Core.object
-      ( Core.catMaybes
-          [("subtype" Core..=) Core.<$> subtype]
-      )
+      (Core.catMaybes [("subtype" Core..=) Core.<$> subtype])
 
 -- | Event triggered by system operations instead of end users.
 --
@@ -2277,8 +2239,7 @@ instance Core.FromJSON SystemEvent where
 
 instance Core.ToJSON SystemEvent where
   toJSON SystemEvent {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Information about the target of activity. For more information on how activity history is shared with users, see <https://developers.google.com/drive/activity/v2#activityhistory Activity history visibility>.
 --
@@ -2390,7 +2351,11 @@ data TeamDrive = TeamDrive
 newTeamDrive ::
   TeamDrive
 newTeamDrive =
-  TeamDrive {name = Core.Nothing, root = Core.Nothing, title = Core.Nothing}
+  TeamDrive
+    { name = Core.Nothing,
+      root = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON TeamDrive where
   parseJSON =
@@ -2436,16 +2401,15 @@ instance Core.FromJSON TeamDriveReference where
       "TeamDriveReference"
       ( \o ->
           TeamDriveReference
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "title")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON TeamDriveReference where
   toJSON TeamDriveReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("title" Core..=) Core.<$> title
-          ]
+          [("name" Core..=) Core.<$> name, ("title" Core..=) Core.<$> title]
       )
 
 -- | Wrapper for Text Field value.
@@ -2470,8 +2434,7 @@ instance Core.FromJSON Text where
 
 instance Core.ToJSON Text where
   toJSON Text {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | Wrapper for Text List Field value.
 --
@@ -2495,8 +2458,7 @@ instance Core.FromJSON TextList where
 
 instance Core.ToJSON TextList where
   toJSON TextList {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Information about time ranges.
 --
@@ -2512,7 +2474,8 @@ data TimeRange = TimeRange
 -- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
 newTimeRange ::
   TimeRange
-newTimeRange = TimeRange {endTime = Core.Nothing, startTime = Core.Nothing}
+newTimeRange =
+  TimeRange {endTime = Core.Nothing, startTime = Core.Nothing}
 
 instance Core.FromJSON TimeRange where
   parseJSON =
@@ -2546,9 +2509,7 @@ newUnknownUser = UnknownUser
 
 instance Core.FromJSON UnknownUser where
   parseJSON =
-    Core.withObject
-      "UnknownUser"
-      (\o -> Core.pure UnknownUser)
+    Core.withObject "UnknownUser" (\o -> Core.pure UnknownUser)
 
 instance Core.ToJSON UnknownUser where
   toJSON = Core.const Core.emptyObject
@@ -2565,8 +2526,7 @@ newUpload ::
 newUpload = Upload
 
 instance Core.FromJSON Upload where
-  parseJSON =
-    Core.withObject "Upload" (\o -> Core.pure Upload)
+  parseJSON = Core.withObject "Upload" (\o -> Core.pure Upload)
 
 instance Core.ToJSON Upload where
   toJSON = Core.const Core.emptyObject
@@ -2637,5 +2597,4 @@ instance Core.FromJSON UserList where
 
 instance Core.ToJSON UserList where
   toJSON UserList {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])

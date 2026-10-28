@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,6 +39,41 @@ module Gogol.Storage
     Devstorage'ReadWrite,
 
     -- * Resources
+
+    -- ** storage.anywhereCaches.disable
+    StorageAnywhereCachesDisableResource,
+    StorageAnywhereCachesDisable (..),
+    newStorageAnywhereCachesDisable,
+
+    -- ** storage.anywhereCaches.get
+    StorageAnywhereCachesGetResource,
+    StorageAnywhereCachesGet (..),
+    newStorageAnywhereCachesGet,
+
+    -- ** storage.anywhereCaches.insert
+    StorageAnywhereCachesInsertResource,
+    StorageAnywhereCachesInsert (..),
+    newStorageAnywhereCachesInsert,
+
+    -- ** storage.anywhereCaches.list
+    StorageAnywhereCachesListResource,
+    StorageAnywhereCachesList (..),
+    newStorageAnywhereCachesList,
+
+    -- ** storage.anywhereCaches.pause
+    StorageAnywhereCachesPauseResource,
+    StorageAnywhereCachesPause (..),
+    newStorageAnywhereCachesPause,
+
+    -- ** storage.anywhereCaches.resume
+    StorageAnywhereCachesResumeResource,
+    StorageAnywhereCachesResume (..),
+    newStorageAnywhereCachesResume,
+
+    -- ** storage.anywhereCaches.update
+    StorageAnywhereCachesUpdateResource,
+    StorageAnywhereCachesUpdate (..),
+    newStorageAnywhereCachesUpdate,
 
     -- ** storage.bucketAccessControls.delete
     StorageBucketAccessControlsDeleteResource,
@@ -87,6 +120,11 @@ module Gogol.Storage
     StorageBucketsGetIamPolicy (..),
     newStorageBucketsGetIamPolicy,
 
+    -- ** storage.buckets.getStorageLayout
+    StorageBucketsGetStorageLayoutResource,
+    StorageBucketsGetStorageLayout (..),
+    newStorageBucketsGetStorageLayout,
+
     -- ** storage.buckets.insert
     StorageBucketsInsertResource,
     StorageBucketsInsert (..),
@@ -102,10 +140,40 @@ module Gogol.Storage
     StorageBucketsLockRetentionPolicy (..),
     newStorageBucketsLockRetentionPolicy,
 
+    -- ** storage.buckets.operations.advanceRelocateBucket
+    StorageBucketsOperationsAdvanceRelocateBucketResource,
+    StorageBucketsOperationsAdvanceRelocateBucket (..),
+    newStorageBucketsOperationsAdvanceRelocateBucket,
+
+    -- ** storage.buckets.operations.cancel
+    StorageBucketsOperationsCancelResource,
+    StorageBucketsOperationsCancel (..),
+    newStorageBucketsOperationsCancel,
+
+    -- ** storage.buckets.operations.get
+    StorageBucketsOperationsGetResource,
+    StorageBucketsOperationsGet (..),
+    newStorageBucketsOperationsGet,
+
+    -- ** storage.buckets.operations.list
+    StorageBucketsOperationsListResource,
+    StorageBucketsOperationsList (..),
+    newStorageBucketsOperationsList,
+
     -- ** storage.buckets.patch
     StorageBucketsPatchResource,
     StorageBucketsPatch (..),
     newStorageBucketsPatch,
+
+    -- ** storage.buckets.relocate
+    StorageBucketsRelocateResource,
+    StorageBucketsRelocate (..),
+    newStorageBucketsRelocate,
+
+    -- ** storage.buckets.restore
+    StorageBucketsRestoreResource,
+    StorageBucketsRestore (..),
+    newStorageBucketsRestore,
 
     -- ** storage.buckets.setIamPolicy
     StorageBucketsSetIamPolicyResource,
@@ -157,6 +225,66 @@ module Gogol.Storage
     StorageDefaultObjectAccessControlsUpdate (..),
     newStorageDefaultObjectAccessControlsUpdate,
 
+    -- ** storage.folders.delete
+    StorageFoldersDeleteResource,
+    StorageFoldersDelete (..),
+    newStorageFoldersDelete,
+
+    -- ** storage.folders.get
+    StorageFoldersGetResource,
+    StorageFoldersGet (..),
+    newStorageFoldersGet,
+
+    -- ** storage.folders.insert
+    StorageFoldersInsertResource,
+    StorageFoldersInsert (..),
+    newStorageFoldersInsert,
+
+    -- ** storage.folders.list
+    StorageFoldersListResource,
+    StorageFoldersList (..),
+    newStorageFoldersList,
+
+    -- ** storage.folders.rename
+    StorageFoldersRenameResource,
+    StorageFoldersRename (..),
+    newStorageFoldersRename,
+
+    -- ** storage.managedFolders.delete
+    StorageManagedFoldersDeleteResource,
+    StorageManagedFoldersDelete (..),
+    newStorageManagedFoldersDelete,
+
+    -- ** storage.managedFolders.get
+    StorageManagedFoldersGetResource,
+    StorageManagedFoldersGet (..),
+    newStorageManagedFoldersGet,
+
+    -- ** storage.managedFolders.getIamPolicy
+    StorageManagedFoldersGetIamPolicyResource,
+    StorageManagedFoldersGetIamPolicy (..),
+    newStorageManagedFoldersGetIamPolicy,
+
+    -- ** storage.managedFolders.insert
+    StorageManagedFoldersInsertResource,
+    StorageManagedFoldersInsert (..),
+    newStorageManagedFoldersInsert,
+
+    -- ** storage.managedFolders.list
+    StorageManagedFoldersListResource,
+    StorageManagedFoldersList (..),
+    newStorageManagedFoldersList,
+
+    -- ** storage.managedFolders.setIamPolicy
+    StorageManagedFoldersSetIamPolicyResource,
+    StorageManagedFoldersSetIamPolicy (..),
+    newStorageManagedFoldersSetIamPolicy,
+
+    -- ** storage.managedFolders.testIamPermissions
+    StorageManagedFoldersTestIamPermissionsResource,
+    StorageManagedFoldersTestIamPermissions (..),
+    newStorageManagedFoldersTestIamPermissions,
+
     -- ** storage.notifications.delete
     StorageNotificationsDeleteResource,
     StorageNotificationsDelete (..),
@@ -207,6 +335,11 @@ module Gogol.Storage
     StorageObjectAccessControlsUpdate (..),
     newStorageObjectAccessControlsUpdate,
 
+    -- ** storage.objects.bulkRestore
+    StorageObjectsBulkRestoreResource,
+    StorageObjectsBulkRestore (..),
+    newStorageObjectsBulkRestore,
+
     -- ** storage.objects.compose
     StorageObjectsComposeResource,
     StorageObjectsCompose (..),
@@ -242,10 +375,20 @@ module Gogol.Storage
     StorageObjectsList (..),
     newStorageObjectsList,
 
+    -- ** storage.objects.move
+    StorageObjectsMoveResource,
+    StorageObjectsMove (..),
+    newStorageObjectsMove,
+
     -- ** storage.objects.patch
     StorageObjectsPatchResource,
     StorageObjectsPatch (..),
     newStorageObjectsPatch,
+
+    -- ** storage.objects.restore
+    StorageObjectsRestoreResource,
+    StorageObjectsRestore (..),
+    newStorageObjectsRestore,
 
     -- ** storage.objects.rewrite
     StorageObjectsRewriteResource,
@@ -304,6 +447,18 @@ module Gogol.Storage
 
     -- * Types
 
+    -- ** AdvanceRelocateBucketOperationRequest
+    AdvanceRelocateBucketOperationRequest (..),
+    newAdvanceRelocateBucketOperationRequest,
+
+    -- ** AnywhereCache
+    AnywhereCache (..),
+    newAnywhereCache,
+
+    -- ** AnywhereCaches
+    AnywhereCaches (..),
+    newAnywhereCaches,
+
     -- ** Bucket
     Bucket (..),
     newBucket,
@@ -328,6 +483,10 @@ module Gogol.Storage
     Bucket_Encryption (..),
     newBucket_Encryption,
 
+    -- ** Bucket_HierarchicalNamespace
+    Bucket_HierarchicalNamespace (..),
+    newBucket_HierarchicalNamespace,
+
     -- ** Bucket_IamConfiguration
     Bucket_IamConfiguration (..),
     newBucket_IamConfiguration,
@@ -339,6 +498,18 @@ module Gogol.Storage
     -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
     Bucket_IamConfiguration_UniformBucketLevelAccess (..),
     newBucket_IamConfiguration_UniformBucketLevelAccess,
+
+    -- ** Bucket_IpFilter
+    Bucket_IpFilter (..),
+    newBucket_IpFilter,
+
+    -- ** Bucket_IpFilter_PublicNetworkSource
+    Bucket_IpFilter_PublicNetworkSource (..),
+    newBucket_IpFilter_PublicNetworkSource,
+
+    -- ** Bucket_IpFilter_VpcNetworkSourcesItem
+    Bucket_IpFilter_VpcNetworkSourcesItem (..),
+    newBucket_IpFilter_VpcNetworkSourcesItem,
 
     -- ** Bucket_Labels
     Bucket_Labels (..),
@@ -364,6 +535,10 @@ module Gogol.Storage
     Bucket_Logging (..),
     newBucket_Logging,
 
+    -- ** Bucket_ObjectRetention
+    Bucket_ObjectRetention (..),
+    newBucket_ObjectRetention,
+
     -- ** Bucket_Owner
     Bucket_Owner (..),
     newBucket_Owner,
@@ -371,6 +546,10 @@ module Gogol.Storage
     -- ** Bucket_RetentionPolicy
     Bucket_RetentionPolicy (..),
     newBucket_RetentionPolicy,
+
+    -- ** Bucket_SoftDeletePolicy
+    Bucket_SoftDeletePolicy (..),
+    newBucket_SoftDeletePolicy,
 
     -- ** Bucket_Versioning
     Bucket_Versioning (..),
@@ -392,9 +571,25 @@ module Gogol.Storage
     BucketAccessControls (..),
     newBucketAccessControls,
 
+    -- ** BucketStorageLayout
+    BucketStorageLayout (..),
+    newBucketStorageLayout,
+
+    -- ** BucketStorageLayout_CustomPlacementConfig
+    BucketStorageLayout_CustomPlacementConfig (..),
+    newBucketStorageLayout_CustomPlacementConfig,
+
+    -- ** BucketStorageLayout_HierarchicalNamespace
+    BucketStorageLayout_HierarchicalNamespace (..),
+    newBucketStorageLayout_HierarchicalNamespace,
+
     -- ** Buckets
     Buckets (..),
     newBuckets,
+
+    -- ** BulkRestoreObjectsRequest
+    BulkRestoreObjectsRequest (..),
+    newBulkRestoreObjectsRequest,
 
     -- ** Channel
     Channel (..),
@@ -420,6 +615,42 @@ module Gogol.Storage
     Expr (..),
     newExpr,
 
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** Folder_PendingRenameInfo
+    Folder_PendingRenameInfo (..),
+    newFolder_PendingRenameInfo,
+
+    -- ** Folders
+    Folders (..),
+    newFolders,
+
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
+
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
+
     -- ** HmacKey
     HmacKey (..),
     newHmacKey,
@@ -431,6 +662,14 @@ module Gogol.Storage
     -- ** HmacKeysMetadata
     HmacKeysMetadata (..),
     newHmacKeysMetadata,
+
+    -- ** ManagedFolder
+    ManagedFolder (..),
+    newManagedFolder,
+
+    -- ** ManagedFolders
+    ManagedFolders (..),
+    newManagedFolders,
 
     -- ** Notification
     Notification (..),
@@ -460,6 +699,10 @@ module Gogol.Storage
     Object_Owner (..),
     newObject_Owner,
 
+    -- ** Object_Retention
+    Object_Retention (..),
+    newObject_Retention,
+
     -- ** ObjectAccessControl
     ObjectAccessControl (..),
     newObjectAccessControl,
@@ -483,6 +726,14 @@ module Gogol.Storage
     -- ** Policy_BindingsItem
     Policy_BindingsItem (..),
     newPolicy_BindingsItem,
+
+    -- ** RelocateBucketRequest
+    RelocateBucketRequest (..),
+    newRelocateBucketRequest,
+
+    -- ** RelocateBucketRequest_DestinationCustomPlacementConfig
+    RelocateBucketRequest_DestinationCustomPlacementConfig (..),
+    newRelocateBucketRequest_DestinationCustomPlacementConfig,
 
     -- ** RewriteResponse
     RewriteResponse (..),
@@ -520,6 +771,9 @@ module Gogol.Storage
     -- ** BucketsPatchProjection
     BucketsPatchProjection (..),
 
+    -- ** BucketsRestoreProjection
+    BucketsRestoreProjection (..),
+
     -- ** BucketsUpdatePredefinedAcl
     BucketsUpdatePredefinedAcl (..),
 
@@ -556,6 +810,9 @@ module Gogol.Storage
     -- ** ObjectsPatchProjection
     ObjectsPatchProjection (..),
 
+    -- ** ObjectsRestoreProjection
+    ObjectsRestoreProjection (..),
+
     -- ** ObjectsRewriteDestinationPredefinedAcl
     ObjectsRewriteDestinationPredefinedAcl (..),
 
@@ -573,6 +830,13 @@ module Gogol.Storage
   )
 where
 
+import Gogol.Storage.AnywhereCaches.Disable
+import Gogol.Storage.AnywhereCaches.Get
+import Gogol.Storage.AnywhereCaches.Insert
+import Gogol.Storage.AnywhereCaches.List
+import Gogol.Storage.AnywhereCaches.Pause
+import Gogol.Storage.AnywhereCaches.Resume
+import Gogol.Storage.AnywhereCaches.Update
 import Gogol.Storage.BucketAccessControls.Delete
 import Gogol.Storage.BucketAccessControls.Get
 import Gogol.Storage.BucketAccessControls.Insert
@@ -582,10 +846,17 @@ import Gogol.Storage.BucketAccessControls.Update
 import Gogol.Storage.Buckets.Delete
 import Gogol.Storage.Buckets.Get
 import Gogol.Storage.Buckets.GetIamPolicy
+import Gogol.Storage.Buckets.GetStorageLayout
 import Gogol.Storage.Buckets.Insert
 import Gogol.Storage.Buckets.List
 import Gogol.Storage.Buckets.LockRetentionPolicy
+import Gogol.Storage.Buckets.Operations.AdvanceRelocateBucket
+import Gogol.Storage.Buckets.Operations.Cancel
+import Gogol.Storage.Buckets.Operations.Get
+import Gogol.Storage.Buckets.Operations.List
 import Gogol.Storage.Buckets.Patch
+import Gogol.Storage.Buckets.Relocate
+import Gogol.Storage.Buckets.Restore
 import Gogol.Storage.Buckets.SetIamPolicy
 import Gogol.Storage.Buckets.TestIamPermissions
 import Gogol.Storage.Buckets.Update
@@ -596,6 +867,18 @@ import Gogol.Storage.DefaultObjectAccessControls.Insert
 import Gogol.Storage.DefaultObjectAccessControls.List
 import Gogol.Storage.DefaultObjectAccessControls.Patch
 import Gogol.Storage.DefaultObjectAccessControls.Update
+import Gogol.Storage.Folders.Delete
+import Gogol.Storage.Folders.Get
+import Gogol.Storage.Folders.Insert
+import Gogol.Storage.Folders.List
+import Gogol.Storage.Folders.Rename
+import Gogol.Storage.ManagedFolders.Delete
+import Gogol.Storage.ManagedFolders.Get
+import Gogol.Storage.ManagedFolders.GetIamPolicy
+import Gogol.Storage.ManagedFolders.Insert
+import Gogol.Storage.ManagedFolders.List
+import Gogol.Storage.ManagedFolders.SetIamPolicy
+import Gogol.Storage.ManagedFolders.TestIamPermissions
 import Gogol.Storage.Notifications.Delete
 import Gogol.Storage.Notifications.Get
 import Gogol.Storage.Notifications.Insert
@@ -606,6 +889,7 @@ import Gogol.Storage.ObjectAccessControls.Insert
 import Gogol.Storage.ObjectAccessControls.List
 import Gogol.Storage.ObjectAccessControls.Patch
 import Gogol.Storage.ObjectAccessControls.Update
+import Gogol.Storage.Objects.BulkRestore
 import Gogol.Storage.Objects.Compose
 import Gogol.Storage.Objects.Copy
 import Gogol.Storage.Objects.Delete
@@ -613,7 +897,9 @@ import Gogol.Storage.Objects.Get
 import Gogol.Storage.Objects.GetIamPolicy
 import Gogol.Storage.Objects.Insert
 import Gogol.Storage.Objects.List
+import Gogol.Storage.Objects.Move
 import Gogol.Storage.Objects.Patch
+import Gogol.Storage.Objects.Restore
 import Gogol.Storage.Objects.Rewrite
 import Gogol.Storage.Objects.SetIamPolicy
 import Gogol.Storage.Objects.TestIamPermissions

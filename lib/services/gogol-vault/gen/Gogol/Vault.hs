@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vault
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -240,6 +238,20 @@ module Gogol.Vault
     AddMatterPermissionsRequest (..),
     newAddMatterPermissionsRequest,
 
+    -- ** CalendarExportOptions
+    CalendarExportOptions (..),
+    newCalendarExportOptions,
+
+    -- ** CalendarExportOptions_ExportFormat
+    CalendarExportOptions_ExportFormat (..),
+
+    -- ** CalendarOptions
+    CalendarOptions (..),
+    newCalendarOptions,
+
+    -- ** CalendarOptions_ResponseStatusesItem
+    CalendarOptions_ResponseStatusesItem (..),
+
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
@@ -279,6 +291,14 @@ module Gogol.Vault
     CountArtifactsResponse (..),
     newCountArtifactsResponse,
 
+    -- ** DriveDocumentIds
+    DriveDocumentIds (..),
+    newDriveDocumentIds,
+
+    -- ** DriveDocumentInfo
+    DriveDocumentInfo (..),
+    newDriveDocumentInfo,
+
     -- ** DriveExportOptions
     DriveExportOptions (..),
     newDriveExportOptions,
@@ -312,6 +332,17 @@ module Gogol.Vault
     ExportStats (..),
     newExportStats,
 
+    -- ** GeminiExportOptions
+    GeminiExportOptions (..),
+    newGeminiExportOptions,
+
+    -- ** GeminiExportOptions_ExportFormat
+    GeminiExportOptions_ExportFormat (..),
+
+    -- ** GeminiOptions
+    GeminiOptions (..),
+    newGeminiOptions,
+
     -- ** GroupsCountResult
     GroupsCountResult (..),
     newGroupsCountResult,
@@ -341,6 +372,10 @@ module Gogol.Vault
     -- ** HeldAccount
     HeldAccount (..),
     newHeldAccount,
+
+    -- ** HeldCalendarQuery
+    HeldCalendarQuery (..),
+    newHeldCalendarQuery,
 
     -- ** HeldDriveQuery
     HeldDriveQuery (..),
@@ -415,9 +450,15 @@ module Gogol.Vault
     MailOptions (..),
     newMailOptions,
 
+    -- ** MailOptions_ClientSideEncryptedOption
+    MailOptions_ClientSideEncryptedOption (..),
+
     -- ** Matter
     Matter (..),
     newMatter,
+
+    -- ** Matter_MatterRegion
+    Matter_MatterRegion (..),
 
     -- ** Matter_State
     Matter_State (..),

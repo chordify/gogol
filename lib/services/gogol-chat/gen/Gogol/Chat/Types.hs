@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Chat.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Chat.Types
@@ -30,19 +28,49 @@ module Gogol.Chat.Types
     chatService,
 
     -- * OAuth Scopes
+    Chat'Admin'Delete,
+    Chat'Admin'Memberships,
+    Chat'Admin'Memberships'Readonly,
+    Chat'Admin'Spaces,
+    Chat'Admin'Spaces'Readonly,
+    Chat'App'Delete,
+    Chat'App'Memberships,
+    Chat'App'Spaces,
+    Chat'App'Spaces'Create,
     Chat'Bot,
+    Chat'Delete,
+    Chat'Import,
     Chat'Memberships,
+    Chat'Memberships'App,
     Chat'Memberships'Readonly,
     Chat'Messages,
     Chat'Messages'Create,
+    Chat'Messages'Reactions,
+    Chat'Messages'Reactions'Create,
+    Chat'Messages'Reactions'Readonly,
     Chat'Messages'Readonly,
     Chat'Spaces,
+    Chat'Spaces'Create,
     Chat'Spaces'Readonly,
+    Chat'Users'Readstate,
+    Chat'Users'Readstate'Readonly,
+    Chat'Users'Spacesettings,
 
     -- * Types
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
+
+    -- ** AccessSettings_AccessState
+    AccessSettings_AccessState (..),
+
+    -- ** AccessoryWidget
+    AccessoryWidget (..),
+    newAccessoryWidget,
 
     -- ** ActionParameter
     ActionParameter (..),
@@ -68,6 +96,17 @@ module Gogol.Chat.Types
 
     -- ** Annotation_Type
     Annotation_Type (..),
+
+    -- ** AppCommandMetadata
+    AppCommandMetadata (..),
+    newAppCommandMetadata,
+
+    -- ** AppCommandMetadata_AppCommandType
+    AppCommandMetadata_AppCommandType (..),
+
+    -- ** AttachedGif
+    AttachedGif (..),
+    newAttachedGif,
 
     -- ** Attachment
     Attachment (..),
@@ -107,6 +146,14 @@ module Gogol.Chat.Types
     ChatAppLogEntry (..),
     newChatAppLogEntry,
 
+    -- ** ChatClientDataSourceMarkup
+    ChatClientDataSourceMarkup (..),
+    newChatClientDataSourceMarkup,
+
+    -- ** ChatSpaceLinkData
+    ChatSpaceLinkData (..),
+    newChatSpaceLinkData,
+
     -- ** Color
     Color (..),
     newColor,
@@ -129,6 +176,22 @@ module Gogol.Chat.Types
     -- ** CommonEventObject_Platform
     CommonEventObject_Platform (..),
 
+    -- ** CompleteImportSpaceRequest
+    CompleteImportSpaceRequest (..),
+    newCompleteImportSpaceRequest,
+
+    -- ** CompleteImportSpaceResponse
+    CompleteImportSpaceResponse (..),
+    newCompleteImportSpaceResponse,
+
+    -- ** CustomEmoji
+    CustomEmoji (..),
+    newCustomEmoji,
+
+    -- ** CustomEmojiMetadata
+    CustomEmojiMetadata (..),
+    newCustomEmojiMetadata,
+
     -- ** DateInput
     DateInput (..),
     newDateInput,
@@ -136,6 +199,13 @@ module Gogol.Chat.Types
     -- ** DateTimeInput
     DateTimeInput (..),
     newDateTimeInput,
+
+    -- ** DeletionMetadata
+    DeletionMetadata (..),
+    newDeletionMetadata,
+
+    -- ** DeletionMetadata_DeletionType
+    DeletionMetadata_DeletionType (..),
 
     -- ** DeprecatedEvent
     DeprecatedEvent (..),
@@ -158,6 +228,18 @@ module Gogol.Chat.Types
     -- ** DriveDataRef
     DriveDataRef (..),
     newDriveDataRef,
+
+    -- ** DriveLinkData
+    DriveLinkData (..),
+    newDriveLinkData,
+
+    -- ** Emoji
+    Emoji (..),
+    newEmoji,
+
+    -- ** EmojiReactionSummary
+    EmojiReactionSummary (..),
+    newEmojiReactionSummary,
 
     -- ** Empty
     Empty (..),
@@ -192,6 +274,9 @@ module Gogol.Chat.Types
     GoogleAppsCardV1Button (..),
     newGoogleAppsCardV1Button,
 
+    -- ** GoogleAppsCardV1Button_Type
+    GoogleAppsCardV1Button_Type (..),
+
     -- ** GoogleAppsCardV1ButtonList
     GoogleAppsCardV1ButtonList (..),
     newGoogleAppsCardV1ButtonList,
@@ -202,6 +287,9 @@ module Gogol.Chat.Types
 
     -- ** GoogleAppsCardV1Card_DisplayStyle
     GoogleAppsCardV1Card_DisplayStyle (..),
+
+    -- ** GoogleAppsCardV1Card_SectionDividerStyle
+    GoogleAppsCardV1Card_SectionDividerStyle (..),
 
     -- ** GoogleAppsCardV1CardAction
     GoogleAppsCardV1CardAction (..),
@@ -217,6 +305,49 @@ module Gogol.Chat.Types
 
     -- ** GoogleAppsCardV1CardHeader_ImageType
     GoogleAppsCardV1CardHeader_ImageType (..),
+
+    -- ** GoogleAppsCardV1Carousel
+    GoogleAppsCardV1Carousel (..),
+    newGoogleAppsCardV1Carousel,
+
+    -- ** GoogleAppsCardV1CarouselCard
+    GoogleAppsCardV1CarouselCard (..),
+    newGoogleAppsCardV1CarouselCard,
+
+    -- ** GoogleAppsCardV1Chip
+    GoogleAppsCardV1Chip (..),
+    newGoogleAppsCardV1Chip,
+
+    -- ** GoogleAppsCardV1ChipList
+    GoogleAppsCardV1ChipList (..),
+    newGoogleAppsCardV1ChipList,
+
+    -- ** GoogleAppsCardV1ChipList_Layout
+    GoogleAppsCardV1ChipList_Layout (..),
+
+    -- ** GoogleAppsCardV1CollapseControl
+    GoogleAppsCardV1CollapseControl (..),
+    newGoogleAppsCardV1CollapseControl,
+
+    -- ** GoogleAppsCardV1CollapseControl_HorizontalAlignment
+    GoogleAppsCardV1CollapseControl_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Column
+    GoogleAppsCardV1Column (..),
+    newGoogleAppsCardV1Column,
+
+    -- ** GoogleAppsCardV1Column_HorizontalAlignment
+    GoogleAppsCardV1Column_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Column_HorizontalSizeStyle
+    GoogleAppsCardV1Column_HorizontalSizeStyle (..),
+
+    -- ** GoogleAppsCardV1Column_VerticalAlignment
+    GoogleAppsCardV1Column_VerticalAlignment (..),
+
+    -- ** GoogleAppsCardV1Columns
+    GoogleAppsCardV1Columns (..),
+    newGoogleAppsCardV1Columns,
 
     -- ** GoogleAppsCardV1DateTimePicker
     GoogleAppsCardV1DateTimePicker (..),
@@ -266,6 +397,14 @@ module Gogol.Chat.Types
     -- ** GoogleAppsCardV1ImageCropStyle_Type
     GoogleAppsCardV1ImageCropStyle_Type (..),
 
+    -- ** GoogleAppsCardV1MaterialIcon
+    GoogleAppsCardV1MaterialIcon (..),
+    newGoogleAppsCardV1MaterialIcon,
+
+    -- ** GoogleAppsCardV1NestedWidget
+    GoogleAppsCardV1NestedWidget (..),
+    newGoogleAppsCardV1NestedWidget,
+
     -- ** GoogleAppsCardV1OnClick
     GoogleAppsCardV1OnClick (..),
     newGoogleAppsCardV1OnClick,
@@ -279,6 +418,21 @@ module Gogol.Chat.Types
 
     -- ** GoogleAppsCardV1OpenLink_OpenAs
     GoogleAppsCardV1OpenLink_OpenAs (..),
+
+    -- ** GoogleAppsCardV1OverflowMenu
+    GoogleAppsCardV1OverflowMenu (..),
+    newGoogleAppsCardV1OverflowMenu,
+
+    -- ** GoogleAppsCardV1OverflowMenuItem
+    GoogleAppsCardV1OverflowMenuItem (..),
+    newGoogleAppsCardV1OverflowMenuItem,
+
+    -- ** GoogleAppsCardV1PlatformDataSource
+    GoogleAppsCardV1PlatformDataSource (..),
+    newGoogleAppsCardV1PlatformDataSource,
+
+    -- ** GoogleAppsCardV1PlatformDataSource_CommonDataSource
+    GoogleAppsCardV1PlatformDataSource_CommonDataSource (..),
 
     -- ** GoogleAppsCardV1Section
     GoogleAppsCardV1Section (..),
@@ -321,9 +475,31 @@ module Gogol.Chat.Types
     GoogleAppsCardV1TextParagraph (..),
     newGoogleAppsCardV1TextParagraph,
 
+    -- ** GoogleAppsCardV1Validation
+    GoogleAppsCardV1Validation (..),
+    newGoogleAppsCardV1Validation,
+
+    -- ** GoogleAppsCardV1Validation_InputType
+    GoogleAppsCardV1Validation_InputType (..),
+
     -- ** GoogleAppsCardV1Widget
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
+
+    -- ** GoogleAppsCardV1Widget_HorizontalAlignment
+    GoogleAppsCardV1Widget_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Widgets
+    GoogleAppsCardV1Widgets (..),
+    newGoogleAppsCardV1Widgets,
+
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** HostAppDataSourceMarkup
+    HostAppDataSourceMarkup (..),
+    newHostAppDataSourceMarkup,
 
     -- ** Image
     Image (..),
@@ -351,6 +527,18 @@ module Gogol.Chat.Types
     ListMembershipsResponse (..),
     newListMembershipsResponse,
 
+    -- ** ListMessagesResponse
+    ListMessagesResponse (..),
+    newListMessagesResponse,
+
+    -- ** ListReactionsResponse
+    ListReactionsResponse (..),
+    newListReactionsResponse,
+
+    -- ** ListSpaceEventsResponse
+    ListSpaceEventsResponse (..),
+    newListSpaceEventsResponse,
+
     -- ** ListSpacesResponse
     ListSpacesResponse (..),
     newListSpacesResponse,
@@ -373,9 +561,61 @@ module Gogol.Chat.Types
     -- ** Membership_State
     Membership_State (..),
 
+    -- ** MembershipBatchCreatedEventData
+    MembershipBatchCreatedEventData (..),
+    newMembershipBatchCreatedEventData,
+
+    -- ** MembershipBatchDeletedEventData
+    MembershipBatchDeletedEventData (..),
+    newMembershipBatchDeletedEventData,
+
+    -- ** MembershipBatchUpdatedEventData
+    MembershipBatchUpdatedEventData (..),
+    newMembershipBatchUpdatedEventData,
+
+    -- ** MembershipCount
+    MembershipCount (..),
+    newMembershipCount,
+
+    -- ** MembershipCreatedEventData
+    MembershipCreatedEventData (..),
+    newMembershipCreatedEventData,
+
+    -- ** MembershipDeletedEventData
+    MembershipDeletedEventData (..),
+    newMembershipDeletedEventData,
+
+    -- ** MembershipUpdatedEventData
+    MembershipUpdatedEventData (..),
+    newMembershipUpdatedEventData,
+
     -- ** Message
     Message (..),
     newMessage,
+
+    -- ** MessageBatchCreatedEventData
+    MessageBatchCreatedEventData (..),
+    newMessageBatchCreatedEventData,
+
+    -- ** MessageBatchDeletedEventData
+    MessageBatchDeletedEventData (..),
+    newMessageBatchDeletedEventData,
+
+    -- ** MessageBatchUpdatedEventData
+    MessageBatchUpdatedEventData (..),
+    newMessageBatchUpdatedEventData,
+
+    -- ** MessageCreatedEventData
+    MessageCreatedEventData (..),
+    newMessageCreatedEventData,
+
+    -- ** MessageDeletedEventData
+    MessageDeletedEventData (..),
+    newMessageDeletedEventData,
+
+    -- ** MessageUpdatedEventData
+    MessageUpdatedEventData (..),
+    newMessageUpdatedEventData,
 
     -- ** OnClick
     OnClick (..),
@@ -385,9 +625,60 @@ module Gogol.Chat.Types
     OpenLink (..),
     newOpenLink,
 
+    -- ** PermissionSetting
+    PermissionSetting (..),
+    newPermissionSetting,
+
+    -- ** PermissionSettings
+    PermissionSettings (..),
+    newPermissionSettings,
+
+    -- ** QuotedMessageMetadata
+    QuotedMessageMetadata (..),
+    newQuotedMessageMetadata,
+
+    -- ** Reaction
+    Reaction (..),
+    newReaction,
+
+    -- ** ReactionBatchCreatedEventData
+    ReactionBatchCreatedEventData (..),
+    newReactionBatchCreatedEventData,
+
+    -- ** ReactionBatchDeletedEventData
+    ReactionBatchDeletedEventData (..),
+    newReactionBatchDeletedEventData,
+
+    -- ** ReactionCreatedEventData
+    ReactionCreatedEventData (..),
+    newReactionCreatedEventData,
+
+    -- ** ReactionDeletedEventData
+    ReactionDeletedEventData (..),
+    newReactionDeletedEventData,
+
+    -- ** RichLinkMetadata
+    RichLinkMetadata (..),
+    newRichLinkMetadata,
+
+    -- ** RichLinkMetadata_RichLinkType
+    RichLinkMetadata_RichLinkType (..),
+
+    -- ** SearchSpacesResponse
+    SearchSpacesResponse (..),
+    newSearchSpacesResponse,
+
     -- ** Section
     Section (..),
     newSection,
+
+    -- ** SelectionItems
+    SelectionItems (..),
+    newSelectionItems,
+
+    -- ** SetUpSpaceRequest
+    SetUpSpaceRequest (..),
+    newSetUpSpaceRequest,
 
     -- ** SlashCommand
     SlashCommand (..),
@@ -404,15 +695,54 @@ module Gogol.Chat.Types
     Space (..),
     newSpace,
 
+    -- ** Space_PredefinedPermissionSettings
+    Space_PredefinedPermissionSettings (..),
+
+    -- ** Space_SpaceHistoryState
+    Space_SpaceHistoryState (..),
+
     -- ** Space_SpaceThreadingState
     Space_SpaceThreadingState (..),
+
+    -- ** Space_SpaceType
+    Space_SpaceType (..),
 
     -- ** Space_Type
     Space_Type (..),
 
+    -- ** SpaceBatchUpdatedEventData
+    SpaceBatchUpdatedEventData (..),
+    newSpaceBatchUpdatedEventData,
+
+    -- ** SpaceDataSource
+    SpaceDataSource (..),
+    newSpaceDataSource,
+
     -- ** SpaceDetails
     SpaceDetails (..),
     newSpaceDetails,
+
+    -- ** SpaceEvent
+    SpaceEvent (..),
+    newSpaceEvent,
+
+    -- ** SpaceNotificationSetting
+    SpaceNotificationSetting (..),
+    newSpaceNotificationSetting,
+
+    -- ** SpaceNotificationSetting_MuteSetting
+    SpaceNotificationSetting_MuteSetting (..),
+
+    -- ** SpaceNotificationSetting_NotificationSetting
+    SpaceNotificationSetting_NotificationSetting (..),
+
+    -- ** SpaceReadState
+    SpaceReadState (..),
+    newSpaceReadState,
+
+    -- ** SpaceUpdatedEventData
+    SpaceUpdatedEventData (..),
+    newSpaceUpdatedEventData,
 
     -- ** Status
     Status (..),
@@ -438,6 +768,10 @@ module Gogol.Chat.Types
     Thread (..),
     newThread,
 
+    -- ** ThreadReadState
+    ThreadReadState (..),
+    newThreadReadState,
+
     -- ** TimeInput
     TimeInput (..),
     newTimeInput,
@@ -445,6 +779,18 @@ module Gogol.Chat.Types
     -- ** TimeZone
     TimeZone (..),
     newTimeZone,
+
+    -- ** UpdatedWidget
+    UpdatedWidget (..),
+    newUpdatedWidget,
+
+    -- ** UploadAttachmentRequest
+    UploadAttachmentRequest (..),
+    newUploadAttachmentRequest,
+
+    -- ** UploadAttachmentResponse
+    UploadAttachmentResponse (..),
+    newUploadAttachmentResponse,
 
     -- ** User
     User (..),
@@ -471,7 +817,7 @@ where
 
 import Gogol.Chat.Internal.Product
 import Gogol.Chat.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Chat API. This contains the host and root path used as a starting point for constructing service requests.
 chatService :: Core.ServiceConfig
@@ -480,26 +826,106 @@ chatService =
     (Core.ServiceId "chat:v1")
     "chat.googleapis.com"
 
+-- | Delete conversations and spaces owned by your organization and remove access to associated files in Google Chat
+type Chat'Admin'Delete =
+  "https://www.googleapis.com/auth/chat.admin.delete"
+
+-- | View, add, update and remove members and managers in conversations owned by your organization
+type Chat'Admin'Memberships =
+  "https://www.googleapis.com/auth/chat.admin.memberships"
+
+-- | View members and managers in conversations owned by your organization
+type Chat'Admin'Memberships'Readonly =
+  "https://www.googleapis.com/auth/chat.admin.memberships.readonly"
+
+-- | View or edit display name, description, and other metadata for all Google Chat conversations owned by your organization
+type Chat'Admin'Spaces =
+  "https://www.googleapis.com/auth/chat.admin.spaces"
+
+-- | View display name, description, and other metadata for all Google Chat conversations owned by your organization
+type Chat'Admin'Spaces'Readonly =
+  "https://www.googleapis.com/auth/chat.admin.spaces.readonly"
+
+-- | On their own behalf, apps in Google Chat can delete conversations and spaces and remove access to associated files
+type Chat'App'Delete =
+  "https://www.googleapis.com/auth/chat.app.delete"
+
+-- | On their own behalf, apps in Google Chat can see, add, update, and remove members from conversations and spaces
+type Chat'App'Memberships =
+  "https://www.googleapis.com/auth/chat.app.memberships"
+
+-- | On their own behalf, apps in Google Chat can create conversations and spaces and see or update their metadata (including history settings and access settings)
+type Chat'App'Spaces =
+  "https://www.googleapis.com/auth/chat.app.spaces"
+
+-- | On their own behalf, apps in Google Chat can create conversations and spaces
+type Chat'App'Spaces'Create =
+  "https://www.googleapis.com/auth/chat.app.spaces.create"
+
 -- | Private Service: https:\/\/www.googleapis.com\/auth\/chat.bot
 type Chat'Bot = "https://www.googleapis.com/auth/chat.bot"
 
--- | View, add, and remove members from conversations in Google Chat
-type Chat'Memberships = "https://www.googleapis.com/auth/chat.memberships"
+-- | Delete conversations and spaces and remove access to associated files in Google Chat
+type Chat'Delete = "https://www.googleapis.com/auth/chat.delete"
+
+-- | Import spaces, messages, and memberships into Google Chat.
+type Chat'Import = "https://www.googleapis.com/auth/chat.import"
+
+-- | See, add, update, and remove members from conversations and spaces in Google Chat
+type Chat'Memberships =
+  "https://www.googleapis.com/auth/chat.memberships"
+
+-- | Add and remove itself from conversations and spaces in Google Chat
+type Chat'Memberships'App =
+  "https://www.googleapis.com/auth/chat.memberships.app"
 
 -- | View members in Google Chat conversations.
-type Chat'Memberships'Readonly = "https://www.googleapis.com/auth/chat.memberships.readonly"
+type Chat'Memberships'Readonly =
+  "https://www.googleapis.com/auth/chat.memberships.readonly"
 
--- | View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
-type Chat'Messages = "https://www.googleapis.com/auth/chat.messages"
+-- | See, compose, send, update, and delete messages as well as their message content; add, see, and delete reactions to messages.
+type Chat'Messages =
+  "https://www.googleapis.com/auth/chat.messages"
 
 -- | Compose and send messages in Google Chat
-type Chat'Messages'Create = "https://www.googleapis.com/auth/chat.messages.create"
+type Chat'Messages'Create =
+  "https://www.googleapis.com/auth/chat.messages.create"
 
--- | View messages and reactions in Google Chat
-type Chat'Messages'Readonly = "https://www.googleapis.com/auth/chat.messages.readonly"
+-- | See, add, and delete reactions as well as their reaction content to messages in Google Chat
+type Chat'Messages'Reactions =
+  "https://www.googleapis.com/auth/chat.messages.reactions"
 
--- | Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+-- | Add reactions to messages in Google Chat
+type Chat'Messages'Reactions'Create =
+  "https://www.googleapis.com/auth/chat.messages.reactions.create"
+
+-- | View reactions as well as their reaction content to messages in Google Chat
+type Chat'Messages'Reactions'Readonly =
+  "https://www.googleapis.com/auth/chat.messages.reactions.readonly"
+
+-- | See messages as well as their reactions and message content in Google Chat
+type Chat'Messages'Readonly =
+  "https://www.googleapis.com/auth/chat.messages.readonly"
+
+-- | Create conversations and spaces and see or update metadata (including history settings and access settings) in Google Chat
 type Chat'Spaces = "https://www.googleapis.com/auth/chat.spaces"
 
+-- | Create new conversations and spaces in Google Chat
+type Chat'Spaces'Create =
+  "https://www.googleapis.com/auth/chat.spaces.create"
+
 -- | View chat and spaces in Google Chat
-type Chat'Spaces'Readonly = "https://www.googleapis.com/auth/chat.spaces.readonly"
+type Chat'Spaces'Readonly =
+  "https://www.googleapis.com/auth/chat.spaces.readonly"
+
+-- | View and modify last read time for Google Chat conversations
+type Chat'Users'Readstate =
+  "https://www.googleapis.com/auth/chat.users.readstate"
+
+-- | View last read time for Google Chat conversations
+type Chat'Users'Readstate'Readonly =
+  "https://www.googleapis.com/auth/chat.users.readstate.readonly"
+
+-- | Read and update your space settings
+type Chat'Users'Spacesettings =
+  "https://www.googleapis.com/auth/chat.users.spacesettings"

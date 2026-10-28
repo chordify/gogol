@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.DefaultObjectAccessControls.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.DefaultObjectAccessControls.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.defaultObjectAccessControls.get@ method which the
@@ -86,30 +84,23 @@ newStorageDefaultObjectAccessControlsGet bucket entity =
       userProject = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageDefaultObjectAccessControlsGet
-  where
-  type
-    Rs StorageDefaultObjectAccessControlsGet =
-      ObjectAccessControl
+instance Core.GoogleRequest StorageDefaultObjectAccessControlsGet where
+  type Rs StorageDefaultObjectAccessControlsGet = ObjectAccessControl
   type
     Scopes StorageDefaultObjectAccessControlsGet =
       '[CloudPlatform'FullControl, Devstorage'FullControl]
-  requestClient
-    StorageDefaultObjectAccessControlsGet {..} =
-      go
-        bucket
-        entity
-        uploadType
-        userProject
-        (Core.Just Core.AltJSON)
-        storageService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StorageDefaultObjectAccessControlsGetResource
-            )
-            Core.mempty
+  requestClient StorageDefaultObjectAccessControlsGet {..} =
+    go
+      bucket
+      entity
+      uploadType
+      userProject
+      (Core.Just Core.AltJSON)
+      storageService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StorageDefaultObjectAccessControlsGetResource
+          )
+          Core.mempty

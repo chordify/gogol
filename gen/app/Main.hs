@@ -4,18 +4,19 @@ module Main where
 
 import Control.Error
 import Control.Lens hiding ((<.>))
+import Control.Monad
 import Control.Monad.State
-import qualified Data.IORef as IORef
+import Data.IORef qualified as IORef
 import Data.List (nub, sort)
 import Data.String
-import qualified Data.Text as Text
-import qualified Filesystem as FS
+import Data.Text qualified as Text
+import Filesystem qualified as FS
 import Filesystem.Path.CurrentOS
 import Gen.AST
 import Gen.Formatting
 import Gen.IO
-import qualified Gen.JSON as JS
-import qualified Gen.Tree as Tree
+import Gen.JSON qualified as JS
+import Gen.Tree qualified as Tree
 import Gen.Types hiding (info)
 import Options.Applicative
 
@@ -82,7 +83,7 @@ version = eitherReader (Right . Version . Text.pack)
 options :: ParserInfo Opt
 options = info (helper <*> parser) fullDesc
 
-validate :: MonadIO m => Opt -> m Opt
+validate :: (MonadIO m) => Opt -> m Opt
 validate o = flip execStateT o $ do
   sequence_
     [ check optOutput,
@@ -95,7 +96,7 @@ validate o = flip execStateT o $ do
     check :: (MonadIO m, MonadState s m) => Lens' s Path -> m ()
     check l = gets (view l) >>= canon >>= assign l
 
-    canon :: MonadIO m => Path -> m Path
+    canon :: (MonadIO m) => Path -> m Path
     canon = liftIO . FS.canonicalizePath
 
 main :: IO ()

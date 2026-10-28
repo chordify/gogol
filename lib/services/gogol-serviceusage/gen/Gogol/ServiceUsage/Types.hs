@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceUsage.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceUsage.Types
@@ -39,6 +37,14 @@ module Gogol.ServiceUsage.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AddEnableRulesMetadata
+    AddEnableRulesMetadata (..),
+    newAddEnableRulesMetadata,
+
+    -- ** AddEnableRulesResponse
+    AddEnableRulesResponse (..),
+    newAddEnableRulesResponse,
+
     -- ** AdminQuotaPolicy
     AdminQuotaPolicy (..),
     newAdminQuotaPolicy,
@@ -47,12 +53,39 @@ module Gogol.ServiceUsage.Types
     AdminQuotaPolicy_Dimensions (..),
     newAdminQuotaPolicy_Dimensions,
 
+    -- ** Analysis
+    Analysis (..),
+    newAnalysis,
+
+    -- ** Analysis_AnalysisType
+    Analysis_AnalysisType (..),
+
+    -- ** AnalysisResult
+    AnalysisResult (..),
+    newAnalysisResult,
+
+    -- ** AnalyzeConsumerPolicyMetadata
+    AnalyzeConsumerPolicyMetadata (..),
+    newAnalyzeConsumerPolicyMetadata,
+
+    -- ** AnalyzeConsumerPolicyResponse
+    AnalyzeConsumerPolicyResponse (..),
+    newAnalyzeConsumerPolicyResponse,
+
     -- ** Api
     Api (..),
     newApi,
 
     -- ** Api_Syntax
     Api_Syntax (..),
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AuthProvider
     AuthProvider (..),
@@ -131,6 +164,14 @@ module Gogol.ServiceUsage.Types
     -- ** CommonLanguageSettings_DestinationsItem
     CommonLanguageSettings_DestinationsItem (..),
 
+    -- ** ConsumerPolicy
+    ConsumerPolicy (..),
+    newConsumerPolicy,
+
+    -- ** ConsumerPolicy_Annotations
+    ConsumerPolicy_Annotations (..),
+    newConsumerPolicy_Annotations,
+
     -- ** Context
     Context (..),
     newContext,
@@ -206,6 +247,13 @@ module Gogol.ServiceUsage.Types
     EnableFailure (..),
     newEnableFailure,
 
+    -- ** EnableRule
+    EnableRule (..),
+    newEnableRule,
+
+    -- ** EnableRule_EnableType
+    EnableRule_EnableType (..),
+
     -- ** EnableServiceRequest
     EnableServiceRequest (..),
     newEnableServiceRequest,
@@ -229,6 +277,10 @@ module Gogol.ServiceUsage.Types
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Field
     Field (..),
     newField,
@@ -238,6 +290,10 @@ module Gogol.ServiceUsage.Types
 
     -- ** Field_Kind
     Field_Kind (..),
+
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
 
     -- ** GetServiceIdentityMetadata
     GetServiceIdentityMetadata (..),
@@ -253,6 +309,10 @@ module Gogol.ServiceUsage.Types
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** GoogleApiService
     GoogleApiService (..),
@@ -284,6 +344,64 @@ module Gogol.ServiceUsage.Types
     GoogleApiServiceusageV1beta1ServiceIdentity (..),
     newGoogleApiServiceusageV1beta1ServiceIdentity,
 
+    -- ** GoogleApiServiceusageV2alphaConsumerPolicy
+    GoogleApiServiceusageV2alphaConsumerPolicy (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy,
+
+    -- ** GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations,
+
+    -- ** GoogleApiServiceusageV2alphaEnableRule
+    GoogleApiServiceusageV2alphaEnableRule (..),
+    newGoogleApiServiceusageV2alphaEnableRule,
+
+    -- ** GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata,
+
+    -- ** GoogleApiServiceusageV2betaAnalysis
+    GoogleApiServiceusageV2betaAnalysis (..),
+    newGoogleApiServiceusageV2betaAnalysis,
+
+    -- ** GoogleApiServiceusageV2betaAnalysis_AnalysisType
+    GoogleApiServiceusageV2betaAnalysis_AnalysisType (..),
+
+    -- ** GoogleApiServiceusageV2betaAnalysisResult
+    GoogleApiServiceusageV2betaAnalysisResult (..),
+    newGoogleApiServiceusageV2betaAnalysisResult,
+
+    -- ** GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata,
+
+    -- ** GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse,
+
+    -- ** GoogleApiServiceusageV2betaConsumerPolicy
+    GoogleApiServiceusageV2betaConsumerPolicy (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy,
+
+    -- ** GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2betaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy_Annotations,
+
+    -- ** GoogleApiServiceusageV2betaEnableRule
+    GoogleApiServiceusageV2betaEnableRule (..),
+    newGoogleApiServiceusageV2betaEnableRule,
+
+    -- ** GoogleApiServiceusageV2betaImpact
+    GoogleApiServiceusageV2betaImpact (..),
+    newGoogleApiServiceusageV2betaImpact,
+
+    -- ** GoogleApiServiceusageV2betaImpact_ImpactType
+    GoogleApiServiceusageV2betaImpact_ImpactType (..),
+
+    -- ** GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata,
+
     -- ** Http
     Http (..),
     newHttp,
@@ -291,6 +409,13 @@ module Gogol.ServiceUsage.Types
     -- ** HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- ** Impact
+    Impact (..),
+    newImpact,
+
+    -- ** Impact_ImpactType
+    Impact_ImpactType (..),
 
     -- ** ImportAdminOverridesMetadata
     ImportAdminOverridesMetadata (..),
@@ -366,6 +491,10 @@ module Gogol.ServiceUsage.Types
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -389,6 +518,9 @@ module Gogol.ServiceUsage.Types
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -488,9 +620,21 @@ module Gogol.ServiceUsage.Types
     QuotaOverride_Dimensions (..),
     newQuotaOverride_Dimensions,
 
+    -- ** RemoveEnableRulesMetadata
+    RemoveEnableRulesMetadata (..),
+    newRemoveEnableRulesMetadata,
+
+    -- ** RemoveEnableRulesResponse
+    RemoveEnableRulesResponse (..),
+    newRemoveEnableRulesResponse,
+
     -- ** RubySettings
     RubySettings (..),
     newRubySettings,
+
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
 
     -- ** ServiceIdentity
     ServiceIdentity (..),
@@ -539,6 +683,10 @@ module Gogol.ServiceUsage.Types
     UpdateAdminQuotaPolicyMetadata (..),
     newUpdateAdminQuotaPolicyMetadata,
 
+    -- ** UpdateConsumerPolicyMetadata
+    UpdateConsumerPolicyMetadata (..),
+    newUpdateConsumerPolicyMetadata,
+
     -- ** Usage
     Usage (..),
     newUsage,
@@ -549,7 +697,7 @@ module Gogol.ServiceUsage.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceUsage.Internal.Product
 import Gogol.ServiceUsage.Internal.Sum
 
@@ -561,10 +709,13 @@ serviceUsageService =
     "serviceusage.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your Google API service configuration
-type Service'Management = "https://www.googleapis.com/auth/service.management"
+type Service'Management =
+  "https://www.googleapis.com/auth/service.management"

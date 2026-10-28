@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Events.Import
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Imports an event. This operation is used to add a private copy of an existing event to a calendar.
+-- Imports an event. This operation is used to add a private copy of an existing event to a calendar. Only events with an eventType of default may be imported. Deprecated behavior: If a non-default event is imported, its type will be changed to default and any event-type-specific properties it may have will be dropped.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.import@.
 module Gogol.AppsCalendar.Calendar.Events.Import
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Events.Import
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.events.import@ method which the
 -- 'CalendarEventsImport' request conforms to.
@@ -57,7 +55,7 @@ type CalendarEventsImportResource =
     Core.:> Core.ReqBody '[Core.JSON] Event
     Core.:> Core.Post '[Core.JSON] Event
 
--- | Imports an event. This operation is used to add a private copy of an existing event to a calendar.
+-- | Imports an event. This operation is used to add a private copy of an existing event to a calendar. Only events with an eventType of default may be imported. Deprecated behavior: If a non-default event is imported, its type will be changed to default and any event-type-specific properties it may have will be dropped.
 --
 -- /See:/ 'newCalendarEventsImport' smart constructor.
 data CalendarEventsImport = CalendarEventsImport
@@ -91,7 +89,11 @@ instance Core.GoogleRequest CalendarEventsImport where
   type Rs CalendarEventsImport = Event
   type
     Scopes CalendarEventsImport =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsImport {..} =
     go
       calendarId
@@ -103,7 +105,5 @@ instance Core.GoogleRequest CalendarEventsImport where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarEventsImportResource
-          )
+          (Core.Proxy :: Core.Proxy CalendarEventsImportResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.DynamicTargetingKeys.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.DynamicTargetingKeys.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.dynamicTargetingKeys.list@ method which the
 -- 'DFAReportingDynamicTargetingKeysList' request conforms to.
@@ -56,15 +54,11 @@ type DFAReportingDynamicTargetingKeysListResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "names" Core.Text
     Core.:> Core.QueryParam "objectId" Core.Int64
-    Core.:> Core.QueryParam
-              "objectType"
-              DynamicTargetingKeysListObjectType
+    Core.:> Core.QueryParam "objectType" DynamicTargetingKeysListObjectType
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              DynamicTargetingKeysListResponse
+    Core.:> Core.Get '[Core.JSON] DynamicTargetingKeysListResponse
 
 -- | Retrieves a list of dynamic targeting keys.
 --
@@ -112,36 +106,31 @@ newDFAReportingDynamicTargetingKeysList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingDynamicTargetingKeysList
-  where
+instance Core.GoogleRequest DFAReportingDynamicTargetingKeysList where
   type
     Rs DFAReportingDynamicTargetingKeysList =
       DynamicTargetingKeysListResponse
   type
     Scopes DFAReportingDynamicTargetingKeysList =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingDynamicTargetingKeysList {..} =
-      go
-        profileId
-        xgafv
-        accessToken
-        advertiserId
-        callback
-        (names Core.^. Core._Default)
-        objectId
-        objectType
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingDynamicTargetingKeysListResource
-            )
-            Core.mempty
+  requestClient DFAReportingDynamicTargetingKeysList {..} =
+    go
+      profileId
+      xgafv
+      accessToken
+      advertiserId
+      callback
+      (names Core.^. Core._Default)
+      objectId
+      objectType
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingDynamicTargetingKeysListResource
+          )
+          Core.mempty

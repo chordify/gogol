@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DataFusion.Internal.Sum
@@ -93,17 +91,35 @@ module Gogol.DataFusion.Internal.Sum
         ..
       ),
 
+    -- * MaintenanceEvent_State
+    MaintenanceEvent_State
+      ( MaintenanceEvent_State_STATEUNSPECIFIED,
+        MaintenanceEvent_State_Scheduled,
+        MaintenanceEvent_State_Started,
+        MaintenanceEvent_State_Completed,
+        ..
+      ),
+
+    -- * NetworkConfig_ConnectionType
+    NetworkConfig_ConnectionType
+      ( NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+        NetworkConfig_ConnectionType_VPCPEERING,
+        NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES,
+        ..
+      ),
+
     -- * Version_Type
     Version_Type
       ( Version_Type_TYPEUNSPECIFIED,
         Version_Type_TYPEPREVIEW,
         Version_Type_TYPEGENERALAVAILABILITY,
+        Version_Type_TYPEDEPRECATED,
         ..
       ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -132,7 +148,7 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
--- | The type of an accelator for a CDF instance.
+-- | Optional. The type of an accelator for a Cloud Data Fusion instance.
 newtype Accelerator_AcceleratorType = Accelerator_AcceleratorType {fromAccelerator_AcceleratorType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -149,11 +165,11 @@ newtype Accelerator_AcceleratorType = Accelerator_AcceleratorType {fromAccelerat
 pattern Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_ACCELERATORTYPEUNSPECIFIED = Accelerator_AcceleratorType "ACCELERATOR_TYPE_UNSPECIFIED"
 
--- | Change Data Capture accelerator for CDF.
+-- | Change Data Capture accelerator for Cloud Data Fusion.
 pattern Accelerator_AcceleratorType_Cdc :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_Cdc = Accelerator_AcceleratorType "CDC"
 
--- | Cloud Healthcare accelerator for CDF. This accelerator is to enable Cloud Healthcare specific CDF plugins developed by Healthcare team.
+-- | Reserved for internal use.
 pattern Accelerator_AcceleratorType_Healthcare :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_Healthcare = Accelerator_AcceleratorType "HEALTHCARE"
 
@@ -161,7 +177,7 @@ pattern Accelerator_AcceleratorType_Healthcare = Accelerator_AcceleratorType "HE
 pattern Accelerator_AcceleratorType_CCAIINSIGHTS :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_CCAIINSIGHTS = Accelerator_AcceleratorType "CCAI_INSIGHTS"
 
--- | Cloud search accelerator for CDF. This accelerator is to enable Cloud search specific CDF plugins developed by Cloudsearch team.
+-- | Reserved for internal use.
 pattern Accelerator_AcceleratorType_Cloudsearch :: Accelerator_AcceleratorType
 pattern Accelerator_AcceleratorType_Cloudsearch = Accelerator_AcceleratorType "CLOUDSEARCH"
 
@@ -174,7 +190,7 @@ pattern Accelerator_AcceleratorType_Cloudsearch = Accelerator_AcceleratorType "C
   Accelerator_AcceleratorType
   #-}
 
--- | The state of the accelerator.
+-- | Output only. The state of the accelerator.
 newtype Accelerator_State = Accelerator_State {fromAccelerator_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -383,6 +399,75 @@ pattern Instance_Type_Developer = Instance_Type "DEVELOPER"
   Instance_Type
   #-}
 
+-- | Output only. The state of the maintenance event.
+newtype MaintenanceEvent_State = MaintenanceEvent_State {fromMaintenanceEvent_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state of the maintenance event is unspecified.
+pattern MaintenanceEvent_State_STATEUNSPECIFIED :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_STATEUNSPECIFIED = MaintenanceEvent_State "STATE_UNSPECIFIED"
+
+-- | The maintenance is scheduled but has not started.
+pattern MaintenanceEvent_State_Scheduled :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Scheduled = MaintenanceEvent_State "SCHEDULED"
+
+-- | The maintenance has been started.
+pattern MaintenanceEvent_State_Started :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Started = MaintenanceEvent_State "STARTED"
+
+-- | The maintenance has been completed.
+pattern MaintenanceEvent_State_Completed :: MaintenanceEvent_State
+pattern MaintenanceEvent_State_Completed = MaintenanceEvent_State "COMPLETED"
+
+{-# COMPLETE
+  MaintenanceEvent_State_STATEUNSPECIFIED,
+  MaintenanceEvent_State_Scheduled,
+  MaintenanceEvent_State_Started,
+  MaintenanceEvent_State_Completed,
+  MaintenanceEvent_State
+  #-}
+
+-- | Optional. Type of connection for establishing private IP connectivity between the Data Fusion customer project VPC and the corresponding tenant project from a predefined list of available connection modes. If this field is unspecified for a private instance, VPC peering is used.
+newtype NetworkConfig_ConnectionType = NetworkConfig_ConnectionType {fromNetworkConfig_ConnectionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No specific connection type was requested, the default value of VPC_PEERING is chosen.
+pattern NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED :: NetworkConfig_ConnectionType
+pattern NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED = NetworkConfig_ConnectionType "CONNECTION_TYPE_UNSPECIFIED"
+
+-- | Requests the use of VPC peerings for connecting the consumer and tenant projects.
+pattern NetworkConfig_ConnectionType_VPCPEERING :: NetworkConfig_ConnectionType
+pattern NetworkConfig_ConnectionType_VPCPEERING = NetworkConfig_ConnectionType "VPC_PEERING"
+
+-- | Requests the use of Private Service Connect Interfaces for connecting the consumer and tenant projects.
+pattern NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES :: NetworkConfig_ConnectionType
+pattern NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES = NetworkConfig_ConnectionType "PRIVATE_SERVICE_CONNECT_INTERFACES"
+
+{-# COMPLETE
+  NetworkConfig_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+  NetworkConfig_ConnectionType_VPCPEERING,
+  NetworkConfig_ConnectionType_PRIVATESERVICECONNECTINTERFACES,
+  NetworkConfig_ConnectionType
+  #-}
+
 -- | Type represents the release availability of the version
 newtype Version_Type = Version_Type {fromVersion_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -408,9 +493,14 @@ pattern Version_Type_TYPEPREVIEW = Version_Type "TYPE_PREVIEW"
 pattern Version_Type_TYPEGENERALAVAILABILITY :: Version_Type
 pattern Version_Type_TYPEGENERALAVAILABILITY = Version_Type "TYPE_GENERAL_AVAILABILITY"
 
+-- | Version is no longer supported.
+pattern Version_Type_TYPEDEPRECATED :: Version_Type
+pattern Version_Type_TYPEDEPRECATED = Version_Type "TYPE_DEPRECATED"
+
 {-# COMPLETE
   Version_Type_TYPEUNSPECIFIED,
   Version_Type_TYPEPREVIEW,
   Version_Type_TYPEGENERALAVAILABILITY,
+  Version_Type_TYPEDEPRECATED,
   Version_Type
   #-}

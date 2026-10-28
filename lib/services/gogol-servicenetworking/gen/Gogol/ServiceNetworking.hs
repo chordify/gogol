@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceNetworking
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -94,6 +92,16 @@ module Gogol.ServiceNetworking
     ServiceNetworkingServicesDnsRecordSetsAdd (..),
     newServiceNetworkingServicesDnsRecordSetsAdd,
 
+    -- ** servicenetworking.services.dnsRecordSets.get
+    ServiceNetworkingServicesDnsRecordSetsGetResource,
+    ServiceNetworkingServicesDnsRecordSetsGet (..),
+    newServiceNetworkingServicesDnsRecordSetsGet,
+
+    -- ** servicenetworking.services.dnsRecordSets.list
+    ServiceNetworkingServicesDnsRecordSetsListResource,
+    ServiceNetworkingServicesDnsRecordSetsList (..),
+    newServiceNetworkingServicesDnsRecordSetsList,
+
     -- ** servicenetworking.services.dnsRecordSets.remove
     ServiceNetworkingServicesDnsRecordSetsRemoveResource,
     ServiceNetworkingServicesDnsRecordSetsRemove (..),
@@ -119,10 +127,25 @@ module Gogol.ServiceNetworking
     ServiceNetworkingServicesEnableVpcServiceControls (..),
     newServiceNetworkingServicesEnableVpcServiceControls,
 
+    -- ** servicenetworking.services.projects.global.networks.dnsZones.get
+    ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGetResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet (..),
+    newServiceNetworkingServicesProjectsGlobalNetworksDnsZonesGet,
+
+    -- ** servicenetworking.services.projects.global.networks.dnsZones.list
+    ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesListResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksDnsZonesList (..),
+    newServiceNetworkingServicesProjectsGlobalNetworksDnsZonesList,
+
     -- ** servicenetworking.services.projects.global.networks.get
     ServiceNetworkingServicesProjectsGlobalNetworksGetResource,
     ServiceNetworkingServicesProjectsGlobalNetworksGet (..),
     newServiceNetworkingServicesProjectsGlobalNetworksGet,
+
+    -- ** servicenetworking.services.projects.global.networks.getVpcServiceControls
+    ServiceNetworkingServicesProjectsGlobalNetworksGetVpcServiceControlsResource,
+    ServiceNetworkingServicesProjectsGlobalNetworksGetVpcServiceControls (..),
+    newServiceNetworkingServicesProjectsGlobalNetworksGetVpcServiceControls,
 
     -- ** servicenetworking.services.projects.global.networks.peeredDnsDomains.create
     ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsCreateResource,
@@ -206,6 +229,14 @@ module Gogol.ServiceNetworking
 
     -- ** Api_Syntax
     Api_Syntax (..),
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AuthProvider
     AuthProvider (..),
@@ -336,6 +367,10 @@ module Gogol.ServiceNetworking
     DnsZone (..),
     newDnsZone,
 
+    -- ** DnsZonePair
+    DnsZonePair (..),
+    newDnsZonePair,
+
     -- ** Documentation
     Documentation (..),
     newDocumentation,
@@ -379,6 +414,10 @@ module Gogol.ServiceNetworking
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Field
     Field (..),
     newField,
@@ -389,9 +428,21 @@ module Gogol.ServiceNetworking
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
+
+    -- ** GetDnsZoneResponse
+    GetDnsZoneResponse (..),
+    newGetDnsZoneResponse,
+
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
     GoogleCloudServicenetworkingV1ConsumerConfigReservedRange (..),
@@ -436,6 +487,14 @@ module Gogol.ServiceNetworking
     ListConnectionsResponse (..),
     newListConnectionsResponse,
 
+    -- ** ListDnsRecordSetsResponse
+    ListDnsRecordSetsResponse (..),
+    newListDnsRecordSetsResponse,
+
+    -- ** ListDnsZonesResponse
+    ListDnsZonesResponse (..),
+    newListDnsZonesResponse,
+
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
@@ -467,6 +526,10 @@ module Gogol.ServiceNetworking
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -490,6 +553,9 @@ module Gogol.ServiceNetworking
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -645,6 +711,10 @@ module Gogol.ServiceNetworking
     SecondaryIpRangeSpec (..),
     newSecondaryIpRangeSpec,
 
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
+
     -- ** Service
     Service (..),
     newService,
@@ -722,6 +792,10 @@ module Gogol.ServiceNetworking
 
     -- ** ValidateConsumerConfigResponse_ValidationError
     ValidateConsumerConfigResponse_ValidationError (..),
+
+    -- ** VpcServiceControls
+    VpcServiceControls (..),
+    newVpcServiceControls,
   )
 where
 
@@ -736,12 +810,17 @@ import Gogol.ServiceNetworking.Services.Connections.List
 import Gogol.ServiceNetworking.Services.Connections.Patch
 import Gogol.ServiceNetworking.Services.DisableVpcServiceControls
 import Gogol.ServiceNetworking.Services.DnsRecordSets.Add
+import Gogol.ServiceNetworking.Services.DnsRecordSets.Get
+import Gogol.ServiceNetworking.Services.DnsRecordSets.List
 import Gogol.ServiceNetworking.Services.DnsRecordSets.Remove
 import Gogol.ServiceNetworking.Services.DnsRecordSets.Update
 import Gogol.ServiceNetworking.Services.DnsZones.Add
 import Gogol.ServiceNetworking.Services.DnsZones.Remove
 import Gogol.ServiceNetworking.Services.EnableVpcServiceControls
+import Gogol.ServiceNetworking.Services.Projects.Global.Networks.DnsZones.Get
+import Gogol.ServiceNetworking.Services.Projects.Global.Networks.DnsZones.List
 import Gogol.ServiceNetworking.Services.Projects.Global.Networks.Get
+import Gogol.ServiceNetworking.Services.Projects.Global.Networks.GetVpcServiceControls
 import Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Create
 import Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.Delete
 import Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.List

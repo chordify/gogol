@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all breakpoints for the debuggee.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.debugger.debuggees.breakpoints.list@.
 module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesBreakpointsListResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.List
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.list@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesBreakpointsList' request conforms to.
@@ -64,9 +62,7 @@ type ClouddebuggerDebuggerDebuggeesBreakpointsListResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "waitToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListBreakpointsResponse
+    Core.:> Core.Get '[Core.JSON] ListBreakpointsResponse
 
 -- | Lists all breakpoints for the debuggee.
 --
@@ -106,7 +102,8 @@ newClouddebuggerDebuggerDebuggeesBreakpointsList ::
   ClouddebuggerDebuggerDebuggeesBreakpointsList
 newClouddebuggerDebuggerDebuggeesBreakpointsList debuggeeId =
   ClouddebuggerDebuggerDebuggeesBreakpointsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       actionValue = Core.Nothing,
       callback = Core.Nothing,
@@ -128,33 +125,28 @@ instance
     Rs ClouddebuggerDebuggerDebuggeesBreakpointsList =
       ListBreakpointsResponse
   type
-    Scopes
-      ClouddebuggerDebuggerDebuggeesBreakpointsList =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerDebuggerDebuggeesBreakpointsList {..} =
-      go
-        debuggeeId
-        xgafv
-        accessToken
-        actionValue
-        callback
-        clientVersion
-        includeAllUsers
-        includeInactive
-        stripResults
-        uploadType
-        uploadProtocol
-        waitToken
-        (Core.Just Core.AltJSON)
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerDebuggerDebuggeesBreakpointsListResource
-            )
-            Core.mempty
+    Scopes ClouddebuggerDebuggerDebuggeesBreakpointsList =
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerDebuggerDebuggeesBreakpointsList {..} =
+    go
+      debuggeeId
+      xgafv
+      accessToken
+      actionValue
+      callback
+      clientVersion
+      includeAllUsers
+      includeInactive
+      stripResults
+      uploadType
+      uploadProtocol
+      waitToken
+      (Core.Just Core.AltJSON)
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClouddebuggerDebuggerDebuggeesBreakpointsListResource
+          )
+          Core.mempty

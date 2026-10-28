@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Suggest
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Suggest
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.locations.studies.trials.suggest@ method which the
 -- 'MlProjectsLocationsStudiesTrialsSuggest' request conforms to.
@@ -54,9 +52,7 @@ type MlProjectsLocationsStudiesTrialsSuggestResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__SuggestTrialsRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudMlV1__SuggestTrialsRequest
     Core.:> Core.Post '[Core.JSON] GoogleLongrunning__Operation
 
 -- | Adds one or more trials to a study, with parameter values suggested by AI Platform Vizier. Returns a long-running operation associated with the generation of trial suggestions. When this long-running operation succeeds, it will contain a SuggestTrialsResponse.
@@ -98,33 +94,28 @@ newMlProjectsLocationsStudiesTrialsSuggest parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsLocationsStudiesTrialsSuggest
-  where
+instance Core.GoogleRequest MlProjectsLocationsStudiesTrialsSuggest where
   type
     Rs MlProjectsLocationsStudiesTrialsSuggest =
       GoogleLongrunning__Operation
   type
     Scopes MlProjectsLocationsStudiesTrialsSuggest =
       '[CloudPlatform'FullControl]
-  requestClient
-    MlProjectsLocationsStudiesTrialsSuggest {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsSuggestResource
-            )
-            Core.mempty
+  requestClient MlProjectsLocationsStudiesTrialsSuggest {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      machineLearningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MlProjectsLocationsStudiesTrialsSuggestResource
+          )
+          Core.mempty

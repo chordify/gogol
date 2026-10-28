@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionNetworkEndpointGroups.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionNetworkEndpointGroups.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionNetworkEndpointGroups.delete@ method which the
 -- 'ComputeRegionNetworkEndpointGroupsDelete' request conforms to.
@@ -96,48 +94,47 @@ newComputeRegionNetworkEndpointGroupsDelete ::
   -- |  The name of the region where the network endpoint group is located. It should comply with RFC1035. See 'region'.
   Core.Text ->
   ComputeRegionNetworkEndpointGroupsDelete
-newComputeRegionNetworkEndpointGroupsDelete networkEndpointGroup project region =
-  ComputeRegionNetworkEndpointGroupsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      networkEndpointGroup = networkEndpointGroup,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionNetworkEndpointGroupsDelete
+  networkEndpointGroup
+  project
+  region =
+    ComputeRegionNetworkEndpointGroupsDelete
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        networkEndpointGroup = networkEndpointGroup,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionNetworkEndpointGroupsDelete
   where
-  type
-    Rs ComputeRegionNetworkEndpointGroupsDelete =
-      Operation
+  type Rs ComputeRegionNetworkEndpointGroupsDelete = Operation
   type
     Scopes ComputeRegionNetworkEndpointGroupsDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionNetworkEndpointGroupsDelete {..} =
-      go
-        project
-        region
-        networkEndpointGroup
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionNetworkEndpointGroupsDeleteResource
-            )
-            Core.mempty
+  requestClient ComputeRegionNetworkEndpointGroupsDelete {..} =
+    go
+      project
+      region
+      networkEndpointGroup
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionNetworkEndpointGroupsDeleteResource
+          )
+          Core.mempty

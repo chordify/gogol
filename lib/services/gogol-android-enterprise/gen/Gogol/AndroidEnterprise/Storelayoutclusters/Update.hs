@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Storelayoutclusters.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Storelayoutclusters.Update
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.storelayoutclusters.update@ method which the
 -- 'AndroidEnterpriseStorelayoutclustersUpdate' request conforms to.
@@ -99,49 +97,48 @@ newAndroidEnterpriseStorelayoutclustersUpdate ::
   -- |  Multipart request metadata. See 'payload'.
   StoreCluster ->
   AndroidEnterpriseStorelayoutclustersUpdate
-newAndroidEnterpriseStorelayoutclustersUpdate clusterId enterpriseId pageId payload =
-  AndroidEnterpriseStorelayoutclustersUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      enterpriseId = enterpriseId,
-      pageId = pageId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidEnterpriseStorelayoutclustersUpdate
+  clusterId
+  enterpriseId
+  pageId
+  payload =
+    AndroidEnterpriseStorelayoutclustersUpdate
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        enterpriseId = enterpriseId,
+        pageId = pageId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidEnterpriseStorelayoutclustersUpdate
   where
+  type Rs AndroidEnterpriseStorelayoutclustersUpdate = StoreCluster
   type
-    Rs AndroidEnterpriseStorelayoutclustersUpdate =
-      StoreCluster
-  type
-    Scopes
-      AndroidEnterpriseStorelayoutclustersUpdate =
+    Scopes AndroidEnterpriseStorelayoutclustersUpdate =
       '[Androidenterprise'FullControl]
-  requestClient
-    AndroidEnterpriseStorelayoutclustersUpdate {..} =
-      go
-        enterpriseId
-        pageId
-        clusterId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidEnterpriseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidEnterpriseStorelayoutclustersUpdateResource
-            )
-            Core.mempty
+  requestClient AndroidEnterpriseStorelayoutclustersUpdate {..} =
+    go
+      enterpriseId
+      pageId
+      clusterId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidEnterpriseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidEnterpriseStorelayoutclustersUpdateResource
+          )
+          Core.mempty

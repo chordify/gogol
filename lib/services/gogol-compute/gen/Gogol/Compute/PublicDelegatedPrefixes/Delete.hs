@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.PublicDelegatedPrefixes.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.PublicDelegatedPrefixes.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.publicDelegatedPrefixes.delete@ method which the
 -- 'ComputePublicDelegatedPrefixesDelete' request conforms to.
@@ -96,48 +94,44 @@ newComputePublicDelegatedPrefixesDelete ::
   -- |  Name of the region of this request. See 'region'.
   Core.Text ->
   ComputePublicDelegatedPrefixesDelete
-newComputePublicDelegatedPrefixesDelete project publicDelegatedPrefix region =
-  ComputePublicDelegatedPrefixesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      project = project,
-      publicDelegatedPrefix = publicDelegatedPrefix,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputePublicDelegatedPrefixesDelete
+  project
+  publicDelegatedPrefix
+  region =
     ComputePublicDelegatedPrefixesDelete
-  where
-  type
-    Rs ComputePublicDelegatedPrefixesDelete =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        project = project,
+        publicDelegatedPrefix = publicDelegatedPrefix,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputePublicDelegatedPrefixesDelete where
+  type Rs ComputePublicDelegatedPrefixesDelete = Operation
   type
     Scopes ComputePublicDelegatedPrefixesDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputePublicDelegatedPrefixesDelete {..} =
-      go
-        project
-        region
-        publicDelegatedPrefix
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputePublicDelegatedPrefixesDeleteResource
-            )
-            Core.mempty
+  requestClient ComputePublicDelegatedPrefixesDelete {..} =
+    go
+      project
+      region
+      publicDelegatedPrefix
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputePublicDelegatedPrefixesDeleteResource
+          )
+          Core.mempty

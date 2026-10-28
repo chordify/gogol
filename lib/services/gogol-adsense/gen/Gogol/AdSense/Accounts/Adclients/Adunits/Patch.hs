@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Adclients.Adunits.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an ad unit. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product. For now, this method can only be used to update @DISPLAY@ ad units. See: https:\/\/support.google.com\/adsense\/answer\/9183566
+-- Updates an ad unit. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method. For now, this method can only be used to update @DISPLAY@ ad units. See: https:\/\/support.google.com\/adsense\/answer\/9183566
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.adunits.patch@.
 module Gogol.AdSense.Accounts.Adclients.Adunits.Patch
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Adclients.Adunits.Patch
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.adclients.adunits.patch@ method which the
 -- 'AdSenseAccountsAdclientsAdunitsPatch' request conforms to.
@@ -57,7 +55,7 @@ type AdSenseAccountsAdclientsAdunitsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] AdUnit
     Core.:> Core.Patch '[Core.JSON] AdUnit
 
--- | Updates an ad unit. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product. For now, this method can only be used to update @DISPLAY@ ad units. See: https:\/\/support.google.com\/adsense\/answer\/9183566
+-- | Updates an ad unit. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method. For now, this method can only be used to update @DISPLAY@ ad units. See: https:\/\/support.google.com\/adsense\/answer\/9183566
 --
 -- /See:/ 'newAdSenseAccountsAdclientsAdunitsPatch' smart constructor.
 data AdSenseAccountsAdclientsAdunitsPatch = AdSenseAccountsAdclientsAdunitsPatch
@@ -99,32 +97,27 @@ newAdSenseAccountsAdclientsAdunitsPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseAccountsAdclientsAdunitsPatch
-  where
+instance Core.GoogleRequest AdSenseAccountsAdclientsAdunitsPatch where
   type Rs AdSenseAccountsAdclientsAdunitsPatch = AdUnit
   type
     Scopes AdSenseAccountsAdclientsAdunitsPatch =
       '[Adsense'FullControl]
-  requestClient
-    AdSenseAccountsAdclientsAdunitsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adSenseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdSenseAccountsAdclientsAdunitsPatchResource
-            )
-            Core.mempty
+  requestClient AdSenseAccountsAdclientsAdunitsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adSenseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseAccountsAdclientsAdunitsPatchResource
+          )
+          Core.mempty

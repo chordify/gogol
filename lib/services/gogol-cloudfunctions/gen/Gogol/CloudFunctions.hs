@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -38,6 +36,16 @@ module Gogol.CloudFunctions
 
     -- * Resources
 
+    -- ** cloudfunctions.projects.locations.functions.abortFunctionUpgrade
+    CloudFunctionsProjectsLocationsFunctionsAbortFunctionUpgradeResource,
+    CloudFunctionsProjectsLocationsFunctionsAbortFunctionUpgrade (..),
+    newCloudFunctionsProjectsLocationsFunctionsAbortFunctionUpgrade,
+
+    -- ** cloudfunctions.projects.locations.functions.commitFunctionUpgrade
+    CloudFunctionsProjectsLocationsFunctionsCommitFunctionUpgradeResource,
+    CloudFunctionsProjectsLocationsFunctionsCommitFunctionUpgrade (..),
+    newCloudFunctionsProjectsLocationsFunctionsCommitFunctionUpgrade,
+
     -- ** cloudfunctions.projects.locations.functions.create
     CloudFunctionsProjectsLocationsFunctionsCreateResource,
     CloudFunctionsProjectsLocationsFunctionsCreate (..),
@@ -47,6 +55,11 @@ module Gogol.CloudFunctions
     CloudFunctionsProjectsLocationsFunctionsDeleteResource,
     CloudFunctionsProjectsLocationsFunctionsDelete (..),
     newCloudFunctionsProjectsLocationsFunctionsDelete,
+
+    -- ** cloudfunctions.projects.locations.functions.detachFunction
+    CloudFunctionsProjectsLocationsFunctionsDetachFunctionResource,
+    CloudFunctionsProjectsLocationsFunctionsDetachFunction (..),
+    newCloudFunctionsProjectsLocationsFunctionsDetachFunction,
 
     -- ** cloudfunctions.projects.locations.functions.generateDownloadUrl
     CloudFunctionsProjectsLocationsFunctionsGenerateDownloadUrlResource,
@@ -78,10 +91,25 @@ module Gogol.CloudFunctions
     CloudFunctionsProjectsLocationsFunctionsPatch (..),
     newCloudFunctionsProjectsLocationsFunctionsPatch,
 
+    -- ** cloudfunctions.projects.locations.functions.redirectFunctionUpgradeTraffic
+    CloudFunctionsProjectsLocationsFunctionsRedirectFunctionUpgradeTrafficResource,
+    CloudFunctionsProjectsLocationsFunctionsRedirectFunctionUpgradeTraffic (..),
+    newCloudFunctionsProjectsLocationsFunctionsRedirectFunctionUpgradeTraffic,
+
+    -- ** cloudfunctions.projects.locations.functions.rollbackFunctionUpgradeTraffic
+    CloudFunctionsProjectsLocationsFunctionsRollbackFunctionUpgradeTrafficResource,
+    CloudFunctionsProjectsLocationsFunctionsRollbackFunctionUpgradeTraffic (..),
+    newCloudFunctionsProjectsLocationsFunctionsRollbackFunctionUpgradeTraffic,
+
     -- ** cloudfunctions.projects.locations.functions.setIamPolicy
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicyResource,
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicy (..),
     newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy,
+
+    -- ** cloudfunctions.projects.locations.functions.setupFunctionUpgradeConfig
+    CloudFunctionsProjectsLocationsFunctionsSetupFunctionUpgradeConfigResource,
+    CloudFunctionsProjectsLocationsFunctionsSetupFunctionUpgradeConfig (..),
+    newCloudFunctionsProjectsLocationsFunctionsSetupFunctionUpgradeConfig,
 
     -- ** cloudfunctions.projects.locations.functions.testIamPermissions
     CloudFunctionsProjectsLocationsFunctionsTestIamPermissionsResource,
@@ -113,6 +141,10 @@ module Gogol.CloudFunctions
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AbortFunctionUpgradeRequest
+    AbortFunctionUpgradeRequest (..),
+    newAbortFunctionUpgradeRequest,
+
     -- ** AuditConfig
     AuditConfig (..),
     newAuditConfig,
@@ -123,6 +155,10 @@ module Gogol.CloudFunctions
 
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
+
+    -- ** AutomaticUpdatePolicy
+    AutomaticUpdatePolicy (..),
+    newAutomaticUpdatePolicy,
 
     -- ** Binding
     Binding (..),
@@ -138,6 +174,18 @@ module Gogol.CloudFunctions
     -- ** BuildConfig_EnvironmentVariables
     BuildConfig_EnvironmentVariables (..),
     newBuildConfig_EnvironmentVariables,
+
+    -- ** CommitFunctionUpgradeRequest
+    CommitFunctionUpgradeRequest (..),
+    newCommitFunctionUpgradeRequest,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
 
     -- ** EventFilter
     EventFilter (..),
@@ -180,13 +228,26 @@ module Gogol.CloudFunctions
     GenerateUploadUrlRequest (..),
     newGenerateUploadUrlRequest,
 
+    -- ** GenerateUploadUrlRequest_Environment
+    GenerateUploadUrlRequest_Environment (..),
+
     -- ** GenerateUploadUrlResponse
     GenerateUploadUrlResponse (..),
     newGenerateUploadUrlResponse,
 
+    -- ** GoogleCloudFunctionsV2LocationMetadata
+    GoogleCloudFunctionsV2LocationMetadata (..),
+    newGoogleCloudFunctionsV2LocationMetadata,
+
+    -- ** GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+    GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem (..),
+
     -- ** GoogleCloudFunctionsV2OperationMetadata
     GoogleCloudFunctionsV2OperationMetadata (..),
     newGoogleCloudFunctionsV2OperationMetadata,
+
+    -- ** GoogleCloudFunctionsV2OperationMetadata_OperationType
+    GoogleCloudFunctionsV2OperationMetadata_OperationType (..),
 
     -- ** GoogleCloudFunctionsV2OperationMetadata_RequestResource
     GoogleCloudFunctionsV2OperationMetadata_RequestResource (..),
@@ -208,56 +269,6 @@ module Gogol.CloudFunctions
 
     -- ** GoogleCloudFunctionsV2StateMessage_Severity
     GoogleCloudFunctionsV2StateMessage_Severity (..),
-
-    -- ** GoogleCloudFunctionsV2alphaOperationMetadata
-    GoogleCloudFunctionsV2alphaOperationMetadata (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata,
-
-    -- ** GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource,
-
-    -- ** GoogleCloudFunctionsV2alphaStage
-    GoogleCloudFunctionsV2alphaStage (..),
-    newGoogleCloudFunctionsV2alphaStage,
-
-    -- ** GoogleCloudFunctionsV2alphaStage_Name
-    GoogleCloudFunctionsV2alphaStage_Name (..),
-
-    -- ** GoogleCloudFunctionsV2alphaStage_State
-    GoogleCloudFunctionsV2alphaStage_State (..),
-
-    -- ** GoogleCloudFunctionsV2alphaStateMessage
-    GoogleCloudFunctionsV2alphaStateMessage (..),
-    newGoogleCloudFunctionsV2alphaStateMessage,
-
-    -- ** GoogleCloudFunctionsV2alphaStateMessage_Severity
-    GoogleCloudFunctionsV2alphaStateMessage_Severity (..),
-
-    -- ** GoogleCloudFunctionsV2betaOperationMetadata
-    GoogleCloudFunctionsV2betaOperationMetadata (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata,
-
-    -- ** GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource,
-
-    -- ** GoogleCloudFunctionsV2betaStage
-    GoogleCloudFunctionsV2betaStage (..),
-    newGoogleCloudFunctionsV2betaStage,
-
-    -- ** GoogleCloudFunctionsV2betaStage_Name
-    GoogleCloudFunctionsV2betaStage_Name (..),
-
-    -- ** GoogleCloudFunctionsV2betaStage_State
-    GoogleCloudFunctionsV2betaStage_State (..),
-
-    -- ** GoogleCloudFunctionsV2betaStateMessage
-    GoogleCloudFunctionsV2betaStateMessage (..),
-    newGoogleCloudFunctionsV2betaStateMessage,
-
-    -- ** GoogleCloudFunctionsV2betaStateMessage_Severity
-    GoogleCloudFunctionsV2betaStateMessage_Severity (..),
 
     -- ** ListFunctionsResponse
     ListFunctionsResponse (..),
@@ -287,6 +298,10 @@ module Gogol.CloudFunctions
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** OnDeployUpdatePolicy
+    OnDeployUpdatePolicy (..),
+    newOnDeployUpdatePolicy,
+
     -- ** Operation
     Operation (..),
     newOperation,
@@ -314,9 +329,17 @@ module Gogol.CloudFunctions
     Policy (..),
     newPolicy,
 
+    -- ** RedirectFunctionUpgradeTrafficRequest
+    RedirectFunctionUpgradeTrafficRequest (..),
+    newRedirectFunctionUpgradeTrafficRequest,
+
     -- ** RepoSource
     RepoSource (..),
     newRepoSource,
+
+    -- ** RollbackFunctionUpgradeTrafficRequest
+    RollbackFunctionUpgradeTrafficRequest (..),
+    newRollbackFunctionUpgradeTrafficRequest,
 
     -- ** Runtime
     Runtime (..),
@@ -361,6 +384,10 @@ module Gogol.CloudFunctions
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
 
+    -- ** SetupFunctionUpgradeConfigRequest
+    SetupFunctionUpgradeConfigRequest (..),
+    newSetupFunctionUpgradeConfigRequest,
+
     -- ** Source
     Source (..),
     newSource,
@@ -388,18 +415,31 @@ module Gogol.CloudFunctions
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** UpgradeInfo
+    UpgradeInfo (..),
+    newUpgradeInfo,
+
+    -- ** UpgradeInfo_UpgradeState
+    UpgradeInfo_UpgradeState (..),
   )
 where
 
+import Gogol.CloudFunctions.Projects.Locations.Functions.AbortFunctionUpgrade
+import Gogol.CloudFunctions.Projects.Locations.Functions.CommitFunctionUpgrade
 import Gogol.CloudFunctions.Projects.Locations.Functions.Create
 import Gogol.CloudFunctions.Projects.Locations.Functions.Delete
+import Gogol.CloudFunctions.Projects.Locations.Functions.DetachFunction
 import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateDownloadUrl
 import Gogol.CloudFunctions.Projects.Locations.Functions.GenerateUploadUrl
 import Gogol.CloudFunctions.Projects.Locations.Functions.Get
 import Gogol.CloudFunctions.Projects.Locations.Functions.GetIamPolicy
 import Gogol.CloudFunctions.Projects.Locations.Functions.List
 import Gogol.CloudFunctions.Projects.Locations.Functions.Patch
+import Gogol.CloudFunctions.Projects.Locations.Functions.RedirectFunctionUpgradeTraffic
+import Gogol.CloudFunctions.Projects.Locations.Functions.RollbackFunctionUpgradeTraffic
 import Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
+import Gogol.CloudFunctions.Projects.Locations.Functions.SetupFunctionUpgradeConfig
 import Gogol.CloudFunctions.Projects.Locations.Functions.TestIamPermissions
 import Gogol.CloudFunctions.Projects.Locations.List
 import Gogol.CloudFunctions.Projects.Locations.Operations.Get

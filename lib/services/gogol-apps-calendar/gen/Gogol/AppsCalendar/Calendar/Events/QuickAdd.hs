@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Events.QuickAdd
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Events.QuickAdd
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.events.quickAdd@ method which the
 -- 'CalendarEventsQuickAdd' request conforms to.
@@ -53,9 +51,7 @@ type CalendarEventsQuickAddResource =
     Core.:> "quickAdd"
     Core.:> Core.QueryParam "text" Core.Text
     Core.:> Core.QueryParam "sendNotifications" Core.Bool
-    Core.:> Core.QueryParam
-              "sendUpdates"
-              EventsQuickAddSendUpdates
+    Core.:> Core.QueryParam "sendUpdates" EventsQuickAddSendUpdates
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Event
 
@@ -95,7 +91,11 @@ instance Core.GoogleRequest CalendarEventsQuickAdd where
   type Rs CalendarEventsQuickAdd = Event
   type
     Scopes CalendarEventsQuickAdd =
-      '[Calendar'FullControl, Calendar'Events]
+      '[ Calendar'FullControl,
+         Calendar'App'Created,
+         Calendar'Events,
+         Calendar'Events'Owned
+       ]
   requestClient CalendarEventsQuickAdd {..} =
     go
       calendarId
@@ -107,7 +107,5 @@ instance Core.GoogleRequest CalendarEventsQuickAdd where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarEventsQuickAddResource
-          )
+          (Core.Proxy :: Core.Proxy CalendarEventsQuickAddResource)
           Core.mempty

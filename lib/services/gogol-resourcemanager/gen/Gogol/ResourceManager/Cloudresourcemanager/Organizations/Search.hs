@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ResourceManager.Cloudresourcemanager.Organizations.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Searches organization resources that are visible to the user and satisfy the specified filter. This method returns organizations in an unspecified order. New organizations do not necessarily appear at the end of the results, and may take a small amount of time to appear. Search will only return organizations on which the user has the permission @resourcemanager.organizations.get@
+-- Searches organization resources that are visible to the user and satisfy the specified filter. This method returns organizations in an unspecified order. New organizations do not necessarily appear at the end of the results, and may take a small amount of time to appear. Search will only return organizations on which the user has the permission @resourcemanager.organizations.get@ or has super admin privileges.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.organizations.search@.
 module Gogol.ResourceManager.Cloudresourcemanager.Organizations.Search
@@ -39,7 +37,7 @@ module Gogol.ResourceManager.Cloudresourcemanager.Organizations.Search
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.organizations.search@ method which the
@@ -58,7 +56,7 @@ type CloudresourcemanagerOrganizationsSearchResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] SearchOrganizationsResponse
 
--- | Searches organization resources that are visible to the user and satisfy the specified filter. This method returns organizations in an unspecified order. New organizations do not necessarily appear at the end of the results, and may take a small amount of time to appear. Search will only return organizations on which the user has the permission @resourcemanager.organizations.get@
+-- | Searches organization resources that are visible to the user and satisfy the specified filter. This method returns organizations in an unspecified order. New organizations do not necessarily appear at the end of the results, and may take a small amount of time to appear. Search will only return organizations on which the user has the permission @resourcemanager.organizations.get@ or has super admin privileges.
 --
 -- /See:/ 'newCloudresourcemanagerOrganizationsSearch' smart constructor.
 data CloudresourcemanagerOrganizationsSearch = CloudresourcemanagerOrganizationsSearch
@@ -96,34 +94,29 @@ newCloudresourcemanagerOrganizationsSearch =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerOrganizationsSearch
-  where
+instance Core.GoogleRequest CloudresourcemanagerOrganizationsSearch where
   type
     Rs CloudresourcemanagerOrganizationsSearch =
       SearchOrganizationsResponse
   type
     Scopes CloudresourcemanagerOrganizationsSearch =
       '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
-  requestClient
-    CloudresourcemanagerOrganizationsSearch {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        query
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        resourceManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudresourcemanagerOrganizationsSearchResource
-            )
-            Core.mempty
+  requestClient CloudresourcemanagerOrganizationsSearch {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      query
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      resourceManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudresourcemanagerOrganizationsSearchResource
+          )
+          Core.mempty

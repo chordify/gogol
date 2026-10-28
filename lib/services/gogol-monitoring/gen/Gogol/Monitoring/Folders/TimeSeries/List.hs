@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Folders.TimeSeries.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Folders.TimeSeries.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.folders.timeSeries.list@ method which the
 -- 'MonitoringFoldersTimeSeriesList' request conforms to.
@@ -50,15 +48,11 @@ type MonitoringFoldersTimeSeriesListResource =
     Core.:> "timeSeries"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "aggregation.alignmentPeriod"
-              Core.Duration
+    Core.:> Core.QueryParam "aggregation.alignmentPeriod" Core.Duration
     Core.:> Core.QueryParam
               "aggregation.crossSeriesReducer"
               FoldersTimeSeriesListAggregationCrossSeriesReducer
-    Core.:> Core.QueryParams
-              "aggregation.groupByFields"
-              Core.Text
+    Core.:> Core.QueryParams "aggregation.groupByFields" Core.Text
     Core.:> Core.QueryParam
               "aggregation.perSeriesAligner"
               FoldersTimeSeriesListAggregationPerSeriesAligner
@@ -81,21 +75,11 @@ type MonitoringFoldersTimeSeriesListResource =
     Core.:> Core.QueryParam
               "secondaryAggregation.perSeriesAligner"
               FoldersTimeSeriesListSecondaryAggregationPerSeriesAligner
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              FoldersTimeSeriesListView
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListTimeSeriesResponse
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "view" FoldersTimeSeriesListView
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListTimeSeriesResponse
 
 -- | Lists time series that match a filter.
 --
@@ -182,13 +166,8 @@ newMonitoringFoldersTimeSeriesList name =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringFoldersTimeSeriesList
-  where
-  type
-    Rs MonitoringFoldersTimeSeriesList =
-      ListTimeSeriesResponse
+instance Core.GoogleRequest MonitoringFoldersTimeSeriesList where
+  type Rs MonitoringFoldersTimeSeriesList = ListTimeSeriesResponse
   type
     Scopes MonitoringFoldersTimeSeriesList =
       '[ CloudPlatform'FullControl,
@@ -213,9 +192,7 @@ instance
       pageToken
       secondaryAggregationAlignmentPeriod
       secondaryAggregationCrossSeriesReducer
-      ( secondaryAggregationGroupByFields
-          Core.^. Core._Default
-      )
+      (secondaryAggregationGroupByFields Core.^. Core._Default)
       secondaryAggregationPerSeriesAligner
       uploadType
       uploadProtocol
@@ -225,7 +202,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MonitoringFoldersTimeSeriesListResource
-          )
+          (Core.Proxy :: Core.Proxy MonitoringFoldersTimeSeriesListResource)
           Core.mempty

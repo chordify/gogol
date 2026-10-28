@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a custom channel. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product.
+-- Deletes a custom channel. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.customchannels.delete@.
 module Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Adclients.Customchannels.Delete
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.adclients.customchannels.delete@ method which the
 -- 'AdSenseAccountsAdclientsCustomchannelsDelete' request conforms to.
@@ -55,7 +53,7 @@ type AdSenseAccountsAdclientsCustomchannelsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a custom channel. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product.
+-- | Deletes a custom channel. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method.
 --
 -- /See:/ 'newAdSenseAccountsAdclientsCustomchannelsDelete' smart constructor.
 data AdSenseAccountsAdclientsCustomchannelsDelete = AdSenseAccountsAdclientsCustomchannelsDelete
@@ -81,7 +79,8 @@ newAdSenseAccountsAdclientsCustomchannelsDelete ::
   AdSenseAccountsAdclientsCustomchannelsDelete
 newAdSenseAccountsAdclientsCustomchannelsDelete name =
   AdSenseAccountsAdclientsCustomchannelsDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,29 +92,24 @@ instance
   Core.GoogleRequest
     AdSenseAccountsAdclientsCustomchannelsDelete
   where
+  type Rs AdSenseAccountsAdclientsCustomchannelsDelete = Empty
   type
-    Rs AdSenseAccountsAdclientsCustomchannelsDelete =
-      Empty
-  type
-    Scopes
-      AdSenseAccountsAdclientsCustomchannelsDelete =
+    Scopes AdSenseAccountsAdclientsCustomchannelsDelete =
       '[Adsense'FullControl]
-  requestClient
-    AdSenseAccountsAdclientsCustomchannelsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adSenseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdSenseAccountsAdclientsCustomchannelsDeleteResource
-            )
-            Core.mempty
+  requestClient AdSenseAccountsAdclientsCustomchannelsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adSenseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseAccountsAdclientsCustomchannelsDeleteResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Expansionfiles.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Expansionfiles.Update
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.expansionfiles.update@ method which the
 -- 'AndroidPublisherEditsExpansionfilesUpdate' request conforms to.
@@ -106,50 +104,51 @@ newAndroidPublisherEditsExpansionfilesUpdate ::
   -- |  Multipart request metadata. See 'payload'.
   ExpansionFile ->
   AndroidPublisherEditsExpansionfilesUpdate
-newAndroidPublisherEditsExpansionfilesUpdate apkVersionCode editId expansionFileType packageName payload =
-  AndroidPublisherEditsExpansionfilesUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      apkVersionCode = apkVersionCode,
-      callback = Core.Nothing,
-      editId = editId,
-      expansionFileType = expansionFileType,
-      packageName = packageName,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherEditsExpansionfilesUpdate
+  apkVersionCode
+  editId
+  expansionFileType
+  packageName
+  payload =
+    AndroidPublisherEditsExpansionfilesUpdate
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        apkVersionCode = apkVersionCode,
+        callback = Core.Nothing,
+        editId = editId,
+        expansionFileType = expansionFileType,
+        packageName = packageName,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherEditsExpansionfilesUpdate
   where
-  type
-    Rs AndroidPublisherEditsExpansionfilesUpdate =
-      ExpansionFile
+  type Rs AndroidPublisherEditsExpansionfilesUpdate = ExpansionFile
   type
     Scopes AndroidPublisherEditsExpansionfilesUpdate =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherEditsExpansionfilesUpdate {..} =
-      go
-        packageName
-        editId
-        apkVersionCode
-        expansionFileType
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsExpansionfilesUpdateResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherEditsExpansionfilesUpdate {..} =
+    go
+      packageName
+      editId
+      apkVersionCode
+      expansionFileType
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherEditsExpansionfilesUpdateResource
+          )
+          Core.mempty

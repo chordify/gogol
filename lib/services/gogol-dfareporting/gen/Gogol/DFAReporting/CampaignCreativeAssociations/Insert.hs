@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.CampaignCreativeAssociations.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.CampaignCreativeAssociations.Insert
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.campaignCreativeAssociations.insert@ method which the
 -- 'DFAReportingCampaignCreativeAssociationsInsert' request conforms to.
@@ -58,12 +56,8 @@ type DFAReportingCampaignCreativeAssociationsInsertResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CampaignCreativeAssociation
-    Core.:> Core.Post
-              '[Core.JSON]
-              CampaignCreativeAssociation
+    Core.:> Core.ReqBody '[Core.JSON] CampaignCreativeAssociation
+    Core.:> Core.Post '[Core.JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.
 --
@@ -97,48 +91,48 @@ newDFAReportingCampaignCreativeAssociationsInsert ::
   -- |  User profile ID associated with this request. See 'profileId'.
   Core.Int64 ->
   DFAReportingCampaignCreativeAssociationsInsert
-newDFAReportingCampaignCreativeAssociationsInsert campaignId payload profileId =
-  DFAReportingCampaignCreativeAssociationsInsert
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      campaignId = campaignId,
-      payload = payload,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDFAReportingCampaignCreativeAssociationsInsert
+  campaignId
+  payload
+  profileId =
+    DFAReportingCampaignCreativeAssociationsInsert
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        campaignId = campaignId,
+        payload = payload,
+        profileId = profileId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DFAReportingCampaignCreativeAssociationsInsert
   where
   type
-    Rs
-      DFAReportingCampaignCreativeAssociationsInsert =
+    Rs DFAReportingCampaignCreativeAssociationsInsert =
       CampaignCreativeAssociation
   type
-    Scopes
-      DFAReportingCampaignCreativeAssociationsInsert =
+    Scopes DFAReportingCampaignCreativeAssociationsInsert =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingCampaignCreativeAssociationsInsert {..} =
-      go
-        profileId
-        campaignId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingCampaignCreativeAssociationsInsertResource
-            )
-            Core.mempty
+  requestClient DFAReportingCampaignCreativeAssociationsInsert {..} =
+    go
+      profileId
+      campaignId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingCampaignCreativeAssociationsInsertResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a new Cloud Spanner database and starts to prepare it for serving. The returned long-running operation will have a name of the format @\/operations\/@ and can be used to track preparation of the database. The metadata field type is CreateDatabaseMetadata. The response field type is Database, if successful.
+-- Creates a new Spanner database and starts to prepare it for serving. The returned long-running operation will have a name of the format @\/operations\/@ and can be used to track preparation of the database. The metadata field type is CreateDatabaseMetadata. The response field type is Database, if successful.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.create@.
 module Gogol.Spanner.Projects.Instances.Databases.Create
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.create@ method which the
@@ -57,7 +55,7 @@ type SpannerProjectsInstancesDatabasesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] CreateDatabaseRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates a new Cloud Spanner database and starts to prepare it for serving. The returned long-running operation will have a name of the format @\/operations\/@ and can be used to track preparation of the database. The metadata field type is CreateDatabaseMetadata. The response field type is Database, if successful.
+-- | Creates a new Spanner database and starts to prepare it for serving. The returned long-running operation will have a name of the format @\/operations\/@ and can be used to track preparation of the database. The metadata field type is CreateDatabaseMetadata. The response field type is Database, if successful.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesCreate' smart constructor.
 data SpannerProjectsInstancesDatabasesCreate = SpannerProjectsInstancesDatabasesCreate
@@ -96,33 +94,26 @@ newSpannerProjectsInstancesDatabasesCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstancesDatabasesCreate
-  where
-  type
-    Rs SpannerProjectsInstancesDatabasesCreate =
-      Operation
+instance Core.GoogleRequest SpannerProjectsInstancesDatabasesCreate where
+  type Rs SpannerProjectsInstancesDatabasesCreate = Operation
   type
     Scopes SpannerProjectsInstancesDatabasesCreate =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesDatabasesCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesCreateResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.Teachers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.Teachers.List
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.teachers.list@ method which the
 -- 'ClassroomCoursesTeachersList' request conforms to.
@@ -99,13 +97,8 @@ newClassroomCoursesTeachersList courseId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesTeachersList
-  where
-  type
-    Rs ClassroomCoursesTeachersList =
-      ListTeachersResponse
+instance Core.GoogleRequest ClassroomCoursesTeachersList where
+  type Rs ClassroomCoursesTeachersList = ListTeachersResponse
   type
     Scopes ClassroomCoursesTeachersList =
       '[ Classroom'Profile'Emails,
@@ -128,7 +121,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ClassroomCoursesTeachersListResource
-          )
+          (Core.Proxy :: Core.Proxy ClassroomCoursesTeachersListResource)
           Core.mempty

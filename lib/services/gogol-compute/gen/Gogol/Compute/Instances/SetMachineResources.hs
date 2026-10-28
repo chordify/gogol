@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.SetMachineResources
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.SetMachineResources
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.setMachineResources@ method which the
 -- 'ComputeInstancesSetMachineResources' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstancesSetMachineResourcesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstancesSetMachineResourcesRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstancesSetMachineResourcesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Changes the number and\/or type of accelerator for a stopped instance to the values specified in the request.
@@ -104,27 +100,26 @@ newComputeInstancesSetMachineResources ::
   -- |  The name of the zone for this request. See 'zone'.
   Core.Text ->
   ComputeInstancesSetMachineResources
-newComputeInstancesSetMachineResources instance' payload project zone =
-  ComputeInstancesSetMachineResources
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instance' = instance',
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInstancesSetMachineResources
+  instance'
+  payload
+  project
+  zone =
     ComputeInstancesSetMachineResources
-  where
-  type
-    Rs ComputeInstancesSetMachineResources =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instance' = instance',
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
+
+instance Core.GoogleRequest ComputeInstancesSetMachineResources where
+  type Rs ComputeInstancesSetMachineResources = Operation
   type
     Scopes ComputeInstancesSetMachineResources =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -146,7 +141,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeInstancesSetMachineResourcesResource
+              Core.Proxy ComputeInstancesSetMachineResourcesResource
           )
           Core.mempty

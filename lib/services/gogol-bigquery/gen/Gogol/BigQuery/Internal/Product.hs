@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,20 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BigQuery.Internal.Product
   ( -- * AggregateClassificationMetrics
     AggregateClassificationMetrics (..),
     newAggregateClassificationMetrics,
+
+    -- * AggregationThresholdPolicy
+    AggregationThresholdPolicy (..),
+    newAggregationThresholdPolicy,
 
     -- * Argument
     Argument (..),
@@ -74,6 +76,10 @@ module Gogol.BigQuery.Internal.Product
     AvroOptions (..),
     newAvroOptions,
 
+    -- * BatchDeleteRowAccessPoliciesRequest
+    BatchDeleteRowAccessPoliciesRequest (..),
+    newBatchDeleteRowAccessPoliciesRequest,
+
     -- * BiEngineReason
     BiEngineReason (..),
     newBiEngineReason,
@@ -81,6 +87,10 @@ module Gogol.BigQuery.Internal.Product
     -- * BiEngineStatistics
     BiEngineStatistics (..),
     newBiEngineStatistics,
+
+    -- * BigLakeConfiguration
+    BigLakeConfiguration (..),
+    newBigLakeConfiguration,
 
     -- * BigQueryModelTraining
     BigQueryModelTraining (..),
@@ -162,9 +172,17 @@ module Gogol.BigQuery.Internal.Product
     CsvOptions (..),
     newCsvOptions,
 
+    -- * DataFormatOptions
+    DataFormatOptions (..),
+    newDataFormatOptions,
+
     -- * DataMaskingStatistics
     DataMaskingStatistics (..),
     newDataMaskingStatistics,
+
+    -- * DataPolicyOption
+    DataPolicyOption (..),
+    newDataPolicyOption,
 
     -- * DataSplitResult
     DataSplitResult (..),
@@ -181,6 +199,10 @@ module Gogol.BigQuery.Internal.Product
     -- * Dataset_Labels
     Dataset_Labels (..),
     newDataset_Labels,
+
+    -- * Dataset_ResourceTags
+    Dataset_ResourceTags (..),
+    newDataset_ResourceTags,
 
     -- * Dataset_TagsItem
     Dataset_TagsItem (..),
@@ -213,6 +235,10 @@ module Gogol.BigQuery.Internal.Product
     -- * DestinationTableProperties_Labels
     DestinationTableProperties_Labels (..),
     newDestinationTableProperties_Labels,
+
+    -- * DifferentialPrivacyPolicy
+    DifferentialPrivacyPolicy (..),
+    newDifferentialPrivacyPolicy,
 
     -- * DimensionalityReductionMetrics
     DimensionalityReductionMetrics (..),
@@ -262,17 +288,53 @@ module Gogol.BigQuery.Internal.Product
     Explanation (..),
     newExplanation,
 
+    -- * ExportDataStatistics
+    ExportDataStatistics (..),
+    newExportDataStatistics,
+
     -- * Expr
     Expr (..),
     newExpr,
+
+    -- * ExternalCatalogDatasetOptions
+    ExternalCatalogDatasetOptions (..),
+    newExternalCatalogDatasetOptions,
+
+    -- * ExternalCatalogDatasetOptions_Parameters
+    ExternalCatalogDatasetOptions_Parameters (..),
+    newExternalCatalogDatasetOptions_Parameters,
+
+    -- * ExternalCatalogTableOptions
+    ExternalCatalogTableOptions (..),
+    newExternalCatalogTableOptions,
+
+    -- * ExternalCatalogTableOptions_Parameters
+    ExternalCatalogTableOptions_Parameters (..),
+    newExternalCatalogTableOptions_Parameters,
 
     -- * ExternalDataConfiguration
     ExternalDataConfiguration (..),
     newExternalDataConfiguration,
 
+    -- * ExternalDatasetReference
+    ExternalDatasetReference (..),
+    newExternalDatasetReference,
+
+    -- * ExternalServiceCost
+    ExternalServiceCost (..),
+    newExternalServiceCost,
+
     -- * FeatureValue
     FeatureValue (..),
     newFeatureValue,
+
+    -- * ForeignTypeInfo
+    ForeignTypeInfo (..),
+    newForeignTypeInfo,
+
+    -- * ForeignViewDefinition
+    ForeignViewDefinition (..),
+    newForeignViewDefinition,
 
     -- * GetIamPolicyRequest
     GetIamPolicyRequest (..),
@@ -298,6 +360,10 @@ module Gogol.BigQuery.Internal.Product
     GoogleSheetsOptions (..),
     newGoogleSheetsOptions,
 
+    -- * HighCardinalityJoin
+    HighCardinalityJoin (..),
+    newHighCardinalityJoin,
+
     -- * HivePartitioningOptions
     HivePartitioningOptions (..),
     newHivePartitioningOptions,
@@ -313,6 +379,10 @@ module Gogol.BigQuery.Internal.Product
     -- * IndexUnusedReason
     IndexUnusedReason (..),
     newIndexUnusedReason,
+
+    -- * InputDataChange
+    InputDataChange (..),
+    newInputDataChange,
 
     -- * IntArray
     IntArray (..),
@@ -374,6 +444,10 @@ module Gogol.BigQuery.Internal.Product
     JobConfigurationTableCopy (..),
     newJobConfigurationTableCopy,
 
+    -- * JobCreationReason
+    JobCreationReason (..),
+    newJobCreationReason,
+
     -- * JobList
     JobList (..),
     newJobList,
@@ -418,9 +492,25 @@ module Gogol.BigQuery.Internal.Product
     JobStatus (..),
     newJobStatus,
 
+    -- * JoinRestrictionPolicy
+    JoinRestrictionPolicy (..),
+    newJoinRestrictionPolicy,
+
     -- * JsonObject
     JsonObject (..),
     newJsonObject,
+
+    -- * JsonOptions
+    JsonOptions (..),
+    newJsonOptions,
+
+    -- * LinkedDatasetMetadata
+    LinkedDatasetMetadata (..),
+    newLinkedDatasetMetadata,
+
+    -- * LinkedDatasetSource
+    LinkedDatasetSource (..),
+    newLinkedDatasetSource,
 
     -- * ListModelsResponse
     ListModelsResponse (..),
@@ -434,13 +524,33 @@ module Gogol.BigQuery.Internal.Product
     ListRowAccessPoliciesResponse (..),
     newListRowAccessPoliciesResponse,
 
+    -- * LoadQueryStatistics
+    LoadQueryStatistics (..),
+    newLoadQueryStatistics,
+
     -- * LocationMetadata
     LocationMetadata (..),
     newLocationMetadata,
 
+    -- * MaterializedView
+    MaterializedView (..),
+    newMaterializedView,
+
     -- * MaterializedViewDefinition
     MaterializedViewDefinition (..),
     newMaterializedViewDefinition,
+
+    -- * MaterializedViewStatistics
+    MaterializedViewStatistics (..),
+    newMaterializedViewStatistics,
+
+    -- * MaterializedViewStatus
+    MaterializedViewStatus (..),
+    newMaterializedViewStatus,
+
+    -- * MetadataCacheStatistics
+    MetadataCacheStatistics (..),
+    newMetadataCacheStatistics,
 
     -- * MlStatistics
     MlStatistics (..),
@@ -462,6 +572,10 @@ module Gogol.BigQuery.Internal.Product
     ModelDefinition_ModelOptions (..),
     newModelDefinition_ModelOptions,
 
+    -- * ModelExtractOptions
+    ModelExtractOptions (..),
+    newModelExtractOptions,
+
     -- * ModelReference
     ModelReference (..),
     newModelReference,
@@ -474,6 +588,22 @@ module Gogol.BigQuery.Internal.Product
     ParquetOptions (..),
     newParquetOptions,
 
+    -- * PartitionSkew
+    PartitionSkew (..),
+    newPartitionSkew,
+
+    -- * PartitionedColumn
+    PartitionedColumn (..),
+    newPartitionedColumn,
+
+    -- * PartitioningDefinition
+    PartitioningDefinition (..),
+    newPartitioningDefinition,
+
+    -- * PerformanceInsights
+    PerformanceInsights (..),
+    newPerformanceInsights,
+
     -- * Policy
     Policy (..),
     newPolicy,
@@ -481,6 +611,10 @@ module Gogol.BigQuery.Internal.Product
     -- * PrincipalComponentInfo
     PrincipalComponentInfo (..),
     newPrincipalComponentInfo,
+
+    -- * PrivacyPolicy
+    PrivacyPolicy (..),
+    newPrivacyPolicy,
 
     -- * ProjectList
     ProjectList (..),
@@ -493,6 +627,14 @@ module Gogol.BigQuery.Internal.Product
     -- * ProjectReference
     ProjectReference (..),
     newProjectReference,
+
+    -- * QueryInfo
+    QueryInfo (..),
+    newQueryInfo,
+
+    -- * QueryInfo_OptimizationDetails
+    QueryInfo_OptimizationDetails (..),
+    newQueryInfo_OptimizationDetails,
 
     -- * QueryParameter
     QueryParameter (..),
@@ -538,6 +680,10 @@ module Gogol.BigQuery.Internal.Product
     RangePartitioning_Range (..),
     newRangePartitioning_Range,
 
+    -- * RangeValue
+    RangeValue (..),
+    newRangeValue,
+
     -- * RankingMetrics
     RankingMetrics (..),
     newRankingMetrics,
@@ -553,6 +699,14 @@ module Gogol.BigQuery.Internal.Product
     -- * RemoteFunctionOptions_UserDefinedContext
     RemoteFunctionOptions_UserDefinedContext (..),
     newRemoteFunctionOptions_UserDefinedContext,
+
+    -- * RemoteModelInfo
+    RemoteModelInfo (..),
+    newRemoteModelInfo,
+
+    -- * RestrictionConfig
+    RestrictionConfig (..),
+    newRestrictionConfig,
 
     -- * Routine
     Routine (..),
@@ -578,6 +732,10 @@ module Gogol.BigQuery.Internal.Product
     RowLevelSecurityStatistics (..),
     newRowLevelSecurityStatistics,
 
+    -- * ScriptOptions
+    ScriptOptions (..),
+    newScriptOptions,
+
     -- * ScriptStackFrame
     ScriptStackFrame (..),
     newScriptStackFrame,
@@ -590,6 +748,14 @@ module Gogol.BigQuery.Internal.Product
     SearchStatistics (..),
     newSearchStatistics,
 
+    -- * SerDeInfo
+    SerDeInfo (..),
+    newSerDeInfo,
+
+    -- * SerDeInfo_Parameters
+    SerDeInfo_Parameters (..),
+    newSerDeInfo_Parameters,
+
     -- * SessionInfo
     SessionInfo (..),
     newSessionInfo,
@@ -597,6 +763,10 @@ module Gogol.BigQuery.Internal.Product
     -- * SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
+
+    -- * SkewSource
+    SkewSource (..),
+    newSkewSource,
 
     -- * SnapshotDefinition
     SnapshotDefinition (..),
@@ -622,6 +792,14 @@ module Gogol.BigQuery.Internal.Product
     SparkStatistics_Endpoints (..),
     newSparkStatistics_Endpoints,
 
+    -- * StagePerformanceChangeInsight
+    StagePerformanceChangeInsight (..),
+    newStagePerformanceChangeInsight,
+
+    -- * StagePerformanceStandaloneInsight
+    StagePerformanceStandaloneInsight (..),
+    newStagePerformanceStandaloneInsight,
+
     -- * StandardSqlDataType
     StandardSqlDataType (..),
     newStandardSqlDataType,
@@ -638,6 +816,18 @@ module Gogol.BigQuery.Internal.Product
     StandardSqlTableType (..),
     newStandardSqlTableType,
 
+    -- * StorageDescriptor
+    StorageDescriptor (..),
+    newStorageDescriptor,
+
+    -- * StoredColumnsUnusedReason
+    StoredColumnsUnusedReason (..),
+    newStoredColumnsUnusedReason,
+
+    -- * StoredColumnsUsage
+    StoredColumnsUsage (..),
+    newStoredColumnsUsage,
+
     -- * Streamingbuffer
     Streamingbuffer (..),
     newStreamingbuffer,
@@ -645,6 +835,18 @@ module Gogol.BigQuery.Internal.Product
     -- * StringHparamSearchSpace
     StringHparamSearchSpace (..),
     newStringHparamSearchSpace,
+
+    -- * SystemVariables
+    SystemVariables (..),
+    newSystemVariables,
+
+    -- * SystemVariables_Types
+    SystemVariables_Types (..),
+    newSystemVariables_Types,
+
+    -- * SystemVariables_Values
+    SystemVariables_Values (..),
+    newSystemVariables_Values,
 
     -- * Table
     Table (..),
@@ -654,9 +856,33 @@ module Gogol.BigQuery.Internal.Product
     Table_Labels (..),
     newTable_Labels,
 
+    -- * Table_ResourceTags
+    Table_ResourceTags (..),
+    newTable_ResourceTags,
+
     -- * TableCell
     TableCell (..),
     newTableCell,
+
+    -- * TableConstraints
+    TableConstraints (..),
+    newTableConstraints,
+
+    -- * TableConstraints_ForeignKeysItem
+    TableConstraints_ForeignKeysItem (..),
+    newTableConstraints_ForeignKeysItem,
+
+    -- * TableConstraints_ForeignKeysItem_ColumnReferencesItem
+    TableConstraints_ForeignKeysItem_ColumnReferencesItem (..),
+    newTableConstraints_ForeignKeysItem_ColumnReferencesItem,
+
+    -- * TableConstraints_ForeignKeysItem_ReferencedTable
+    TableConstraints_ForeignKeysItem_ReferencedTable (..),
+    newTableConstraints_ForeignKeysItem_ReferencedTable,
+
+    -- * TableConstraints_PrimaryKey
+    TableConstraints_PrimaryKey (..),
+    newTableConstraints_PrimaryKey,
 
     -- * TableDataInsertAllRequest
     TableDataInsertAllRequest (..),
@@ -690,6 +916,10 @@ module Gogol.BigQuery.Internal.Product
     TableFieldSchema_PolicyTags (..),
     newTableFieldSchema_PolicyTags,
 
+    -- * TableFieldSchema_RangeElementType
+    TableFieldSchema_RangeElementType (..),
+    newTableFieldSchema_RangeElementType,
+
     -- * TableList
     TableList (..),
     newTableList,
@@ -706,9 +936,17 @@ module Gogol.BigQuery.Internal.Product
     TableList_TablesItem_View (..),
     newTableList_TablesItem_View,
 
+    -- * TableMetadataCacheUsage
+    TableMetadataCacheUsage (..),
+    newTableMetadataCacheUsage,
+
     -- * TableReference
     TableReference (..),
     newTableReference,
+
+    -- * TableReplicationInfo
+    TableReplicationInfo (..),
+    newTableReplicationInfo,
 
     -- * TableRow
     TableRow (..),
@@ -746,9 +984,21 @@ module Gogol.BigQuery.Internal.Product
     TransactionInfo (..),
     newTransactionInfo,
 
+    -- * TransformColumn
+    TransformColumn (..),
+    newTransformColumn,
+
+    -- * UndeleteDatasetRequest
+    UndeleteDatasetRequest (..),
+    newUndeleteDatasetRequest,
+
     -- * UserDefinedFunctionResource
     UserDefinedFunctionResource (..),
     newUserDefinedFunctionResource,
+
+    -- * VectorSearchStatistics
+    VectorSearchStatistics (..),
+    newVectorSearchStatistics,
 
     -- * ViewDefinition
     ViewDefinition (..),
@@ -757,7 +1007,7 @@ module Gogol.BigQuery.Internal.Product
 where
 
 import Gogol.BigQuery.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Aggregate metrics for classification\/classifier models. For multi-class models, the metrics are either macro-averaged or micro-averaged. When macro-averaged, the metrics are calculated for each label and then an unweighted average is taken of those values. When micro-averaged, the metric is calculated globally by counting the total number of correctly predicted rows.
 --
@@ -775,7 +1025,7 @@ data AggregateClassificationMetrics = AggregateClassificationMetrics
     recall :: (Core.Maybe Core.Double),
     -- | Area Under a ROC Curve. For multiclass this is a macro-averaged metric.
     rocAuc :: (Core.Maybe Core.Double),
-    -- | Threshold at which the metrics are computed. For binary classification models this is the positive class threshold. For multi-class classfication models this is the confidence threshold.
+    -- | Threshold at which the metrics are computed. For binary classification models this is the positive class threshold. For multi-class classification models this is the confidence threshold.
     threshold :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -823,14 +1073,55 @@ instance Core.ToJSON AggregateClassificationMetrics where
           ]
       )
 
+-- | Represents privacy policy associated with \"aggregation threshold\" method.
+--
+-- /See:/ 'newAggregationThresholdPolicy' smart constructor.
+data AggregationThresholdPolicy = AggregationThresholdPolicy
+  { -- | Optional. The privacy unit column(s) associated with this policy. For now, only one column per data source object (table, view) is allowed as a privacy unit column. Representing as a repeated field in metadata for extensibility to multiple columns in future. Duplicates and Repeated struct fields are not allowed. For nested fields, use dot notation (\"outer.inner\")
+    privacyUnitColumns :: (Core.Maybe [Core.Text]),
+    -- | Optional. The threshold for the \"aggregation threshold\" policy.
+    threshold :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AggregationThresholdPolicy' with the minimum fields required to make a request.
+newAggregationThresholdPolicy ::
+  AggregationThresholdPolicy
+newAggregationThresholdPolicy =
+  AggregationThresholdPolicy
+    { privacyUnitColumns = Core.Nothing,
+      threshold = Core.Nothing
+    }
+
+instance Core.FromJSON AggregationThresholdPolicy where
+  parseJSON =
+    Core.withObject
+      "AggregationThresholdPolicy"
+      ( \o ->
+          AggregationThresholdPolicy
+            Core.<$> (o Core..:? "privacyUnitColumns")
+            Core.<*> (o Core..:? "threshold" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON AggregationThresholdPolicy where
+  toJSON AggregationThresholdPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("privacyUnitColumns" Core..=) Core.<$> privacyUnitColumns,
+            ("threshold" Core..=) Core.. Core.AsText Core.<$> threshold
+          ]
+      )
+
 -- | Input\/output argument of a function or a stored procedure.
 --
 -- /See:/ 'newArgument' smart constructor.
 data Argument = Argument
   { -- | Optional. Defaults to FIXED_TYPE.
     argumentKind :: (Core.Maybe Argument_ArgumentKind),
-    -- | Required unless argument/kind = ANY/TYPE.
+    -- | Set if argument/kind == FIXED/TYPE.
     dataType :: (Core.Maybe StandardSqlDataType),
+    -- | Optional. Whether the argument is an aggregate function parameter. Must be Unset for routine types other than AGGREGATE/FUNCTION. For AGGREGATE/FUNCTION, if set to false, it is equivalent to adding \"NOT AGGREGATE\" clause in DDL; Otherwise, it is equivalent to omitting \"NOT AGGREGATE\" clause in DDL.
+    isAggregate :: (Core.Maybe Core.Bool),
     -- | Optional. Specifies whether the argument is input or output. Can be set for procedures only.
     mode :: (Core.Maybe Argument_Mode),
     -- | Optional. The name of this argument. Can be absent for function return argument.
@@ -845,6 +1136,7 @@ newArgument =
   Argument
     { argumentKind = Core.Nothing,
       dataType = Core.Nothing,
+      isAggregate = Core.Nothing,
       mode = Core.Nothing,
       name = Core.Nothing
     }
@@ -857,6 +1149,7 @@ instance Core.FromJSON Argument where
           Argument
             Core.<$> (o Core..:? "argumentKind")
             Core.<*> (o Core..:? "dataType")
+            Core.<*> (o Core..:? "isAggregate")
             Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "name")
       )
@@ -867,6 +1160,7 @@ instance Core.ToJSON Argument where
       ( Core.catMaybes
           [ ("argumentKind" Core..=) Core.<$> argumentKind,
             ("dataType" Core..=) Core.<$> dataType,
+            ("isAggregate" Core..=) Core.<$> isAggregate,
             ("mode" Core..=) Core.<$> mode,
             ("name" Core..=) Core.<$> name
           ]
@@ -912,8 +1206,7 @@ instance Core.ToJSON ArimaCoefficients where
       ( Core.catMaybes
           [ ("autoRegressiveCoefficients" Core..=)
               Core.<$> autoRegressiveCoefficients,
-            ("interceptCoefficient" Core..=)
-              Core.<$> interceptCoefficient,
+            ("interceptCoefficient" Core..=) Core.<$> interceptCoefficient,
             ("movingAverageCoefficients" Core..=)
               Core.<$> movingAverageCoefficients
           ]
@@ -1013,13 +1306,11 @@ instance Core.ToJSON ArimaForecastingMetrics where
   toJSON ArimaForecastingMetrics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("arimaFittingMetrics" Core..=)
-              Core.<$> arimaFittingMetrics,
+          [ ("arimaFittingMetrics" Core..=) Core.<$> arimaFittingMetrics,
             ("arimaSingleModelForecastingMetrics" Core..=)
               Core.<$> arimaSingleModelForecastingMetrics,
             ("hasDrift" Core..=) Core.<$> hasDrift,
-            ("nonSeasonalOrder" Core..=)
-              Core.<$> nonSeasonalOrder,
+            ("nonSeasonalOrder" Core..=) Core.<$> nonSeasonalOrder,
             ("seasonalPeriods" Core..=) Core.<$> seasonalPeriods,
             ("timeSeriesId" Core..=) Core.<$> timeSeriesId
           ]
@@ -1091,18 +1382,13 @@ instance Core.ToJSON ArimaModelInfo where
   toJSON ArimaModelInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("arimaCoefficients" Core..=)
-              Core.<$> arimaCoefficients,
-            ("arimaFittingMetrics" Core..=)
-              Core.<$> arimaFittingMetrics,
+          [ ("arimaCoefficients" Core..=) Core.<$> arimaCoefficients,
+            ("arimaFittingMetrics" Core..=) Core.<$> arimaFittingMetrics,
             ("hasDrift" Core..=) Core.<$> hasDrift,
-            ("hasHolidayEffect" Core..=)
-              Core.<$> hasHolidayEffect,
-            ("hasSpikesAndDips" Core..=)
-              Core.<$> hasSpikesAndDips,
+            ("hasHolidayEffect" Core..=) Core.<$> hasHolidayEffect,
+            ("hasSpikesAndDips" Core..=) Core.<$> hasSpikesAndDips,
             ("hasStepChanges" Core..=) Core.<$> hasStepChanges,
-            ("nonSeasonalOrder" Core..=)
-              Core.<$> nonSeasonalOrder,
+            ("nonSeasonalOrder" Core..=) Core.<$> nonSeasonalOrder,
             ("seasonalPeriods" Core..=) Core.<$> seasonalPeriods,
             ("timeSeriesId" Core..=) Core.<$> timeSeriesId,
             ("timeSeriesIds" Core..=) Core.<$> timeSeriesIds
@@ -1164,7 +1450,10 @@ data ArimaResult = ArimaResult
 newArimaResult ::
   ArimaResult
 newArimaResult =
-  ArimaResult {arimaModelInfo = Core.Nothing, seasonalPeriods = Core.Nothing}
+  ArimaResult
+    { arimaModelInfo = Core.Nothing,
+      seasonalPeriods = Core.Nothing
+    }
 
 instance Core.FromJSON ArimaResult where
   parseJSON =
@@ -1181,8 +1470,7 @@ instance Core.ToJSON ArimaResult where
     Core.object
       ( Core.catMaybes
           [ ("arimaModelInfo" Core..=) Core.<$> arimaModelInfo,
-            ("seasonalPeriods" Core..=)
-              Core.<$> seasonalPeriods
+            ("seasonalPeriods" Core..=) Core.<$> seasonalPeriods
           ]
       )
 
@@ -1219,7 +1507,8 @@ newArimaSingleModelForecastingMetrics ::
   ArimaSingleModelForecastingMetrics
 newArimaSingleModelForecastingMetrics =
   ArimaSingleModelForecastingMetrics
-    { arimaFittingMetrics = Core.Nothing,
+    { arimaFittingMetrics =
+        Core.Nothing,
       hasDrift = Core.Nothing,
       hasHolidayEffect = Core.Nothing,
       hasSpikesAndDips = Core.Nothing,
@@ -1230,10 +1519,7 @@ newArimaSingleModelForecastingMetrics =
       timeSeriesIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ArimaSingleModelForecastingMetrics
-  where
+instance Core.FromJSON ArimaSingleModelForecastingMetrics where
   parseJSON =
     Core.withObject
       "ArimaSingleModelForecastingMetrics"
@@ -1250,23 +1536,16 @@ instance
             Core.<*> (o Core..:? "timeSeriesIds")
       )
 
-instance
-  Core.ToJSON
-    ArimaSingleModelForecastingMetrics
-  where
+instance Core.ToJSON ArimaSingleModelForecastingMetrics where
   toJSON ArimaSingleModelForecastingMetrics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("arimaFittingMetrics" Core..=)
-              Core.<$> arimaFittingMetrics,
+          [ ("arimaFittingMetrics" Core..=) Core.<$> arimaFittingMetrics,
             ("hasDrift" Core..=) Core.<$> hasDrift,
-            ("hasHolidayEffect" Core..=)
-              Core.<$> hasHolidayEffect,
-            ("hasSpikesAndDips" Core..=)
-              Core.<$> hasSpikesAndDips,
+            ("hasHolidayEffect" Core..=) Core.<$> hasHolidayEffect,
+            ("hasSpikesAndDips" Core..=) Core.<$> hasSpikesAndDips,
             ("hasStepChanges" Core..=) Core.<$> hasStepChanges,
-            ("nonSeasonalOrder" Core..=)
-              Core.<$> nonSeasonalOrder,
+            ("nonSeasonalOrder" Core..=) Core.<$> nonSeasonalOrder,
             ("seasonalPeriods" Core..=) Core.<$> seasonalPeriods,
             ("timeSeriesId" Core..=) Core.<$> timeSeriesId,
             ("timeSeriesIds" Core..=) Core.<$> timeSeriesIds
@@ -1289,7 +1568,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -1305,8 +1587,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -1326,7 +1607,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -1342,16 +1626,16 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
 
+-- | Options for external data sources.
 --
 -- /See:/ 'newAvroOptions' smart constructor.
 newtype AvroOptions = AvroOptions
-  { -- | [Optional] If sourceFormat is set to \"AVRO\", indicates whether to interpret logical types as the corresponding BigQuery data type (for example, TIMESTAMP), instead of using the raw type (for example, INTEGER).
+  { -- | Optional. If sourceFormat is set to \"AVRO\", indicates whether to interpret logical types as the corresponding BigQuery data type (for example, TIMESTAMP), instead of using the raw type (for example, INTEGER).
     useAvroLogicalTypes :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1365,34 +1649,70 @@ instance Core.FromJSON AvroOptions where
   parseJSON =
     Core.withObject
       "AvroOptions"
-      ( \o ->
-          AvroOptions
-            Core.<$> (o Core..:? "useAvroLogicalTypes")
-      )
+      (\o -> AvroOptions Core.<$> (o Core..:? "useAvroLogicalTypes"))
 
 instance Core.ToJSON AvroOptions where
   toJSON AvroOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("useAvroLogicalTypes" Core..=)
-              Core.<$> useAvroLogicalTypes
+          [("useAvroLogicalTypes" Core..=) Core.<$> useAvroLogicalTypes]
+      )
+
+-- | Request message for the BatchDeleteRowAccessPoliciesRequest method.
+--
+-- /See:/ 'newBatchDeleteRowAccessPoliciesRequest' smart constructor.
+data BatchDeleteRowAccessPoliciesRequest = BatchDeleteRowAccessPoliciesRequest
+  { -- | If set to true, it deletes the row access policy even if it\'s the last row access policy on the table and the deletion will widen the access rather narrowing it.
+    force :: (Core.Maybe Core.Bool),
+    -- | Required. Policy IDs of the row access policies.
+    policyIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchDeleteRowAccessPoliciesRequest' with the minimum fields required to make a request.
+newBatchDeleteRowAccessPoliciesRequest ::
+  BatchDeleteRowAccessPoliciesRequest
+newBatchDeleteRowAccessPoliciesRequest =
+  BatchDeleteRowAccessPoliciesRequest
+    { force = Core.Nothing,
+      policyIds = Core.Nothing
+    }
+
+instance Core.FromJSON BatchDeleteRowAccessPoliciesRequest where
+  parseJSON =
+    Core.withObject
+      "BatchDeleteRowAccessPoliciesRequest"
+      ( \o ->
+          BatchDeleteRowAccessPoliciesRequest
+            Core.<$> (o Core..:? "force")
+            Core.<*> (o Core..:? "policyIds")
+      )
+
+instance Core.ToJSON BatchDeleteRowAccessPoliciesRequest where
+  toJSON BatchDeleteRowAccessPoliciesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("force" Core..=) Core.<$> force,
+            ("policyIds" Core..=) Core.<$> policyIds
           ]
       )
 
+-- | Reason why BI Engine didn\'t accelerate the query (or sub-query).
 --
 -- /See:/ 'newBiEngineReason' smart constructor.
 data BiEngineReason = BiEngineReason
-  { -- | [Output-only] High-level BI Engine reason for partial or disabled acceleration.
-    code :: Core.Text,
-    -- | [Output-only] Free form human-readable reason for partial or disabled acceleration.
-    message :: Core.Text
+  { -- | Output only. High-level BI Engine reason for partial or disabled acceleration
+    code :: (Core.Maybe BiEngineReason_Code),
+    -- | Output only. Free form human-readable reason for partial or disabled acceleration.
+    message :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BiEngineReason' with the minimum fields required to make a request.
 newBiEngineReason ::
   BiEngineReason
-newBiEngineReason = BiEngineReason {code = "", message = ""}
+newBiEngineReason =
+  BiEngineReason {code = Core.Nothing, message = Core.Nothing}
 
 instance Core.FromJSON BiEngineReason where
   parseJSON =
@@ -1400,26 +1720,27 @@ instance Core.FromJSON BiEngineReason where
       "BiEngineReason"
       ( \o ->
           BiEngineReason
-            Core.<$> (o Core..:? "code" Core..!= "")
-            Core.<*> (o Core..:? "message" Core..!= "")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "message")
       )
 
 instance Core.ToJSON BiEngineReason where
   toJSON BiEngineReason {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just ("code" Core..= code),
-            Core.Just ("message" Core..= message)
+          [ ("code" Core..=) Core.<$> code,
+            ("message" Core..=) Core.<$> message
           ]
       )
 
+-- | Statistics for a BI Engine specific query. Populated as part of JobStatistics2
 --
 -- /See:/ 'newBiEngineStatistics' smart constructor.
 data BiEngineStatistics = BiEngineStatistics
-  { -- | [Output-only] Specifies which mode of BI Engine acceleration was performed (if any).
-    accelerationMode :: Core.Text,
-    -- | [Output-only] Specifies which mode of BI Engine acceleration was performed (if any).
-    biEngineMode :: Core.Text,
+  { -- | Output only. Specifies which mode of BI Engine acceleration was performed (if any).
+    accelerationMode :: (Core.Maybe BiEngineStatistics_AccelerationMode),
+    -- | Output only. Specifies which mode of BI Engine acceleration was performed (if any).
+    biEngineMode :: (Core.Maybe BiEngineStatistics_BiEngineMode),
     -- | In case of DISABLED or PARTIAL bi/engine/mode, these contain the explanatory reasons as to why BI Engine could not accelerate. In case the full query was accelerated, this field is not populated.
     biEngineReasons :: (Core.Maybe [BiEngineReason])
   }
@@ -1430,8 +1751,8 @@ newBiEngineStatistics ::
   BiEngineStatistics
 newBiEngineStatistics =
   BiEngineStatistics
-    { accelerationMode = "",
-      biEngineMode = "",
+    { accelerationMode = Core.Nothing,
+      biEngineMode = Core.Nothing,
       biEngineReasons = Core.Nothing
     }
 
@@ -1441,8 +1762,8 @@ instance Core.FromJSON BiEngineStatistics where
       "BiEngineStatistics"
       ( \o ->
           BiEngineStatistics
-            Core.<$> (o Core..:? "accelerationMode" Core..!= "")
-            Core.<*> (o Core..:? "biEngineMode" Core..!= "")
+            Core.<$> (o Core..:? "accelerationMode")
+            Core.<*> (o Core..:? "biEngineMode")
             Core.<*> (o Core..:? "biEngineReasons")
       )
 
@@ -1450,20 +1771,67 @@ instance Core.ToJSON BiEngineStatistics where
   toJSON BiEngineStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("accelerationMode" Core..= accelerationMode),
-            Core.Just ("biEngineMode" Core..= biEngineMode),
-            ("biEngineReasons" Core..=)
-              Core.<$> biEngineReasons
+          [ ("accelerationMode" Core..=) Core.<$> accelerationMode,
+            ("biEngineMode" Core..=) Core.<$> biEngineMode,
+            ("biEngineReasons" Core..=) Core.<$> biEngineReasons
+          ]
+      )
+
+-- | Configuration for BigLake managed tables.
+--
+-- /See:/ 'newBigLakeConfiguration' smart constructor.
+data BigLakeConfiguration = BigLakeConfiguration
+  { -- | Optional. The connection specifying the credentials to be used to read and write to external storage, such as Cloud Storage. The connection/id can have the form @{project}.{location}.{connection_id}@ or \`projects\/{project}\/locations\/{location}\/connections\/{connection/id}\".
+    connectionId :: (Core.Maybe Core.Text),
+    -- | Optional. The file format the table data is stored in.
+    fileFormat :: (Core.Maybe BigLakeConfiguration_FileFormat),
+    -- | Optional. The fully qualified location prefix of the external folder where table data is stored. The \'*\' wildcard character is not allowed. The URI should be in the format @gs:\/\/bucket\/path_to_table\/@
+    storageUri :: (Core.Maybe Core.Text),
+    -- | Optional. The table format the metadata only snapshots are stored in.
+    tableFormat :: (Core.Maybe BigLakeConfiguration_TableFormat)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BigLakeConfiguration' with the minimum fields required to make a request.
+newBigLakeConfiguration ::
+  BigLakeConfiguration
+newBigLakeConfiguration =
+  BigLakeConfiguration
+    { connectionId = Core.Nothing,
+      fileFormat = Core.Nothing,
+      storageUri = Core.Nothing,
+      tableFormat = Core.Nothing
+    }
+
+instance Core.FromJSON BigLakeConfiguration where
+  parseJSON =
+    Core.withObject
+      "BigLakeConfiguration"
+      ( \o ->
+          BigLakeConfiguration
+            Core.<$> (o Core..:? "connectionId")
+            Core.<*> (o Core..:? "fileFormat")
+            Core.<*> (o Core..:? "storageUri")
+            Core.<*> (o Core..:? "tableFormat")
+      )
+
+instance Core.ToJSON BigLakeConfiguration where
+  toJSON BigLakeConfiguration {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connectionId" Core..=) Core.<$> connectionId,
+            ("fileFormat" Core..=) Core.<$> fileFormat,
+            ("storageUri" Core..=) Core.<$> storageUri,
+            ("tableFormat" Core..=) Core.<$> tableFormat
           ]
       )
 
 --
 -- /See:/ 'newBigQueryModelTraining' smart constructor.
 data BigQueryModelTraining = BigQueryModelTraining
-  { -- | [Output-only, Beta] Index of current ML training iteration. Updated during create model query job to show job progress.
+  { -- | Deprecated.
     currentIteration :: (Core.Maybe Core.Int32),
-    -- | [Output-only, Beta] Expected number of iterations for the create model query job specified as num_iterations in the input query. The actual total number of iterations may be less than this number due to early stop.
+    -- | Deprecated.
     expectedTotalIterations :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1484,7 +1852,8 @@ instance Core.FromJSON BigQueryModelTraining where
       ( \o ->
           BigQueryModelTraining
             Core.<$> (o Core..:? "currentIteration")
-            Core.<*> ( o Core..:? "expectedTotalIterations"
+            Core.<*> ( o
+                         Core..:? "expectedTotalIterations"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1493,28 +1862,28 @@ instance Core.ToJSON BigQueryModelTraining where
   toJSON BigQueryModelTraining {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentIteration" Core..=)
-              Core.<$> currentIteration,
+          [ ("currentIteration" Core..=) Core.<$> currentIteration,
             ("expectedTotalIterations" Core..=)
               Core.. Core.AsText
               Core.<$> expectedTotalIterations
           ]
       )
 
+-- | Information related to a Bigtable column.
 --
 -- /See:/ 'newBigtableColumn' smart constructor.
 data BigtableColumn = BigtableColumn
-  { -- | [Optional] The encoding of the values when the type is not STRING. Acceptable encoding values are: TEXT - indicates values are alphanumeric text strings. BINARY - indicates values are encoded using HBase Bytes.toBytes family of functions. \'encoding\' can also be set at the column family level. However, the setting at this level takes precedence if \'encoding\' is set at both levels.
+  { -- | Optional. The encoding of the values when the type is not STRING. Acceptable encoding values are: TEXT - indicates values are alphanumeric text strings. BINARY - indicates values are encoded using HBase Bytes.toBytes family of functions. \'encoding\' can also be set at the column family level. However, the setting at this level takes precedence if \'encoding\' is set at both levels.
     encoding :: (Core.Maybe Core.Text),
-    -- | [Optional] If the qualifier is not a valid BigQuery field identifier i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be provided as the column field name and is used as field name in queries.
+    -- | Optional. If the qualifier is not a valid BigQuery field identifier i.e. does not match a-zA-Z*, a valid identifier must be provided as the column field name and is used as field name in queries.
     fieldName :: (Core.Maybe Core.Text),
-    -- | [Optional] If this is set, only the latest version of value in this column are exposed. \'onlyReadLatest\' can also be set at the column family level. However, the setting at this level takes precedence if \'onlyReadLatest\' is set at both levels.
+    -- | Optional. If this is set, only the latest version of value in this column are exposed. \'onlyReadLatest\' can also be set at the column family level. However, the setting at this level takes precedence if \'onlyReadLatest\' is set at both levels.
     onlyReadLatest :: (Core.Maybe Core.Bool),
-    -- | [Required] Qualifier of the column. Columns in the parent column family that has this exact qualifier are exposed as . field. If the qualifier is valid UTF-8 string, it can be specified in the qualifier/string field. Otherwise, a base-64 encoded value must be set to qualifier/encoded. The column field name is the same as the column qualifier. However, if the qualifier is not a valid BigQuery field identifier i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be provided as field_name.
+    -- | [Required] Qualifier of the column. Columns in the parent column family that has this exact qualifier are exposed as @.@ field. If the qualifier is valid UTF-8 string, it can be specified in the qualifier/string field. Otherwise, a base-64 encoded value must be set to qualifier/encoded. The column field name is the same as the column qualifier. However, if the qualifier is not a valid BigQuery field identifier i.e. does not match a-zA-Z*, a valid identifier must be provided as field_name.
     qualifierEncoded :: (Core.Maybe Core.Base64),
-    -- |
+    -- | Qualifier string.
     qualifierString :: (Core.Maybe Core.Text),
-    -- | [Optional] The type to convert the value in cells of this column. The values are expected to be encoded using HBase Bytes.toBytes function when using the BINARY encoding value. Following BigQuery types are allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Default type is BYTES. \'type\' can also be set at the column family level. However, the setting at this level takes precedence if \'type\' is set at both levels.
+    -- | Optional. The type to convert the value in cells of this column. The values are expected to be encoded using HBase Bytes.toBytes function when using the BINARY encoding value. Following BigQuery types are allowed (case-sensitive): * BYTES * STRING * INTEGER * FLOAT * BOOLEAN * JSON Default type is BYTES. \'type\' can also be set at the column family level. However, the setting at this level takes precedence if \'type\' is set at both levels.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1553,25 +1922,25 @@ instance Core.ToJSON BigtableColumn where
           [ ("encoding" Core..=) Core.<$> encoding,
             ("fieldName" Core..=) Core.<$> fieldName,
             ("onlyReadLatest" Core..=) Core.<$> onlyReadLatest,
-            ("qualifierEncoded" Core..=)
-              Core.<$> qualifierEncoded,
+            ("qualifierEncoded" Core..=) Core.<$> qualifierEncoded,
             ("qualifierString" Core..=) Core.<$> qualifierString,
             ("type" Core..=) Core.<$> type'
           ]
       )
 
+-- | Information related to a Bigtable column family.
 --
 -- /See:/ 'newBigtableColumnFamily' smart constructor.
 data BigtableColumnFamily = BigtableColumnFamily
-  { -- | [Optional] Lists of columns that should be exposed as individual fields as opposed to a list of (column name, value) pairs. All columns whose qualifier matches a qualifier in this list can be accessed as .. Other columns can be accessed as a list through .Column field.
+  { -- | Optional. Lists of columns that should be exposed as individual fields as opposed to a list of (column name, value) pairs. All columns whose qualifier matches a qualifier in this list can be accessed as @.@. Other columns can be accessed as a list through the @.Column@ field.
     columns :: (Core.Maybe [BigtableColumn]),
-    -- | [Optional] The encoding of the values when the type is not STRING. Acceptable encoding values are: TEXT - indicates values are alphanumeric text strings. BINARY - indicates values are encoded using HBase Bytes.toBytes family of functions. This can be overridden for a specific column by listing that column in \'columns\' and specifying an encoding for it.
+    -- | Optional. The encoding of the values when the type is not STRING. Acceptable encoding values are: TEXT - indicates values are alphanumeric text strings. BINARY - indicates values are encoded using HBase Bytes.toBytes family of functions. This can be overridden for a specific column by listing that column in \'columns\' and specifying an encoding for it.
     encoding :: (Core.Maybe Core.Text),
     -- | Identifier of the column family.
     familyId :: (Core.Maybe Core.Text),
-    -- | [Optional] If this is set only the latest version of value are exposed for all columns in this column family. This can be overridden for a specific column by listing that column in \'columns\' and specifying a different setting for that column.
+    -- | Optional. If this is set only the latest version of value are exposed for all columns in this column family. This can be overridden for a specific column by listing that column in \'columns\' and specifying a different setting for that column.
     onlyReadLatest :: (Core.Maybe Core.Bool),
-    -- | [Optional] The type to convert the value in cells of this column family. The values are expected to be encoded using HBase Bytes.toBytes function when using the BINARY encoding value. Following BigQuery types are allowed (case-sensitive) - BYTES STRING INTEGER FLOAT BOOLEAN Default type is BYTES. This can be overridden for a specific column by listing that column in \'columns\' and specifying a type for it.
+    -- | Optional. The type to convert the value in cells of this column family. The values are expected to be encoded using HBase Bytes.toBytes function when using the BINARY encoding value. Following BigQuery types are allowed (case-sensitive): * BYTES * STRING * INTEGER * FLOAT * BOOLEAN * JSON Default type is BYTES. This can be overridden for a specific column by listing that column in \'columns\' and specifying a type for it.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1613,14 +1982,17 @@ instance Core.ToJSON BigtableColumnFamily where
           ]
       )
 
+-- | Options specific to Google Cloud Bigtable data sources.
 --
 -- /See:/ 'newBigtableOptions' smart constructor.
 data BigtableOptions = BigtableOptions
-  { -- | [Optional] List of column families to expose in the table schema along with their types. This list restricts the column families that can be referenced in queries and specifies their value types. You can use this list to do type conversions - see the \'type\' field for more details. If you leave this list empty, all column families are present in the table schema and their values are read as BYTES. During a query only the column families referenced in that query are read from Bigtable.
+  { -- | Optional. List of column families to expose in the table schema along with their types. This list restricts the column families that can be referenced in queries and specifies their value types. You can use this list to do type conversions - see the \'type\' field for more details. If you leave this list empty, all column families are present in the table schema and their values are read as BYTES. During a query only the column families referenced in that query are read from Bigtable.
     columnFamilies :: (Core.Maybe [BigtableColumnFamily]),
-    -- | [Optional] If field is true, then the column families that are not specified in columnFamilies list are not exposed in the table schema. Otherwise, they are read with BYTES type values. The default value is false.
+    -- | Optional. If field is true, then the column families that are not specified in columnFamilies list are not exposed in the table schema. Otherwise, they are read with BYTES type values. The default value is false.
     ignoreUnspecifiedColumnFamilies :: (Core.Maybe Core.Bool),
-    -- | [Optional] If field is true, then the rowkey column families will be read and converted to string. Otherwise they are read with BYTES type values and users need to manually cast them with CAST if necessary. The default value is false.
+    -- | Optional. If field is true, then each column family will be read as a single JSON column. Otherwise they are read as a repeated cell structure containing timestamp\/value tuples. The default value is false.
+    outputColumnFamiliesAsJson :: (Core.Maybe Core.Bool),
+    -- | Optional. If field is true, then the rowkey column families will be read and converted to string. Otherwise they are read with BYTES type values and users need to manually cast them with CAST if necessary. The default value is false.
     readRowkeyAsString :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1632,6 +2004,7 @@ newBigtableOptions =
   BigtableOptions
     { columnFamilies = Core.Nothing,
       ignoreUnspecifiedColumnFamilies = Core.Nothing,
+      outputColumnFamiliesAsJson = Core.Nothing,
       readRowkeyAsString = Core.Nothing
     }
 
@@ -1643,6 +2016,7 @@ instance Core.FromJSON BigtableOptions where
           BigtableOptions
             Core.<$> (o Core..:? "columnFamilies")
             Core.<*> (o Core..:? "ignoreUnspecifiedColumnFamilies")
+            Core.<*> (o Core..:? "outputColumnFamiliesAsJson")
             Core.<*> (o Core..:? "readRowkeyAsString")
       )
 
@@ -1653,8 +2027,9 @@ instance Core.ToJSON BigtableOptions where
           [ ("columnFamilies" Core..=) Core.<$> columnFamilies,
             ("ignoreUnspecifiedColumnFamilies" Core..=)
               Core.<$> ignoreUnspecifiedColumnFamilies,
-            ("readRowkeyAsString" Core..=)
-              Core.<$> readRowkeyAsString
+            ("outputColumnFamiliesAsJson" Core..=)
+              Core.<$> outputColumnFamiliesAsJson,
+            ("readRowkeyAsString" Core..=) Core.<$> readRowkeyAsString
           ]
       )
 
@@ -1678,7 +2053,8 @@ newBinaryClassificationMetrics ::
   BinaryClassificationMetrics
 newBinaryClassificationMetrics =
   BinaryClassificationMetrics
-    { aggregateClassificationMetrics = Core.Nothing,
+    { aggregateClassificationMetrics =
+        Core.Nothing,
       binaryConfusionMatrixList = Core.Nothing,
       negativeLabel = Core.Nothing,
       positiveLabel = Core.Nothing
@@ -1758,21 +2134,13 @@ instance Core.FromJSON BinaryConfusionMatrix where
           BinaryConfusionMatrix
             Core.<$> (o Core..:? "accuracy")
             Core.<*> (o Core..:? "f1Score")
-            Core.<*> ( o Core..:? "falseNegatives"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "falsePositives"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "falseNegatives" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "falsePositives" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "positiveClassThreshold")
             Core.<*> (o Core..:? "precision")
             Core.<*> (o Core..:? "recall")
-            Core.<*> ( o Core..:? "trueNegatives"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "truePositives"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "trueNegatives" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "truePositives" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON BinaryConfusionMatrix where
@@ -1781,17 +2149,20 @@ instance Core.ToJSON BinaryConfusionMatrix where
       ( Core.catMaybes
           [ ("accuracy" Core..=) Core.<$> accuracy,
             ("f1Score" Core..=) Core.<$> f1Score,
-            ("falseNegatives" Core..=) Core.. Core.AsText
+            ("falseNegatives" Core..=)
+              Core.. Core.AsText
               Core.<$> falseNegatives,
-            ("falsePositives" Core..=) Core.. Core.AsText
+            ("falsePositives" Core..=)
+              Core.. Core.AsText
               Core.<$> falsePositives,
-            ("positiveClassThreshold" Core..=)
-              Core.<$> positiveClassThreshold,
+            ("positiveClassThreshold" Core..=) Core.<$> positiveClassThreshold,
             ("precision" Core..=) Core.<$> precision,
             ("recall" Core..=) Core.<$> recall,
-            ("trueNegatives" Core..=) Core.. Core.AsText
+            ("trueNegatives" Core..=)
+              Core.. Core.AsText
               Core.<$> trueNegatives,
-            ("truePositives" Core..=) Core.. Core.AsText
+            ("truePositives" Core..=)
+              Core.. Core.AsText
               Core.<$> truePositives
           ]
       )
@@ -1803,10 +2174,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1845,15 +2218,15 @@ instance Core.ToJSON Binding where
 --
 -- /See:/ 'newBqmlIterationResult' smart constructor.
 data BqmlIterationResult = BqmlIterationResult
-  { -- | [Output-only, Beta] Time taken to run the training iteration in milliseconds.
+  { -- | Deprecated.
     durationMs :: (Core.Maybe Core.Int64),
-    -- | [Output-only, Beta] Eval loss computed on the eval data at the end of the iteration. The eval loss is used for early stopping to avoid overfitting. No eval loss if eval/split/method option is specified as no/split or auto/split with input data size less than 500 rows.
+    -- | Deprecated.
     evalLoss :: (Core.Maybe Core.Double),
-    -- | [Output-only, Beta] Index of the ML training iteration, starting from zero for each training run.
+    -- | Deprecated.
     index :: (Core.Maybe Core.Int32),
-    -- | [Output-only, Beta] Learning rate used for this iteration, it varies for different training iterations if learn/rate/strategy option is not constant.
+    -- | Deprecated.
     learnRate :: (Core.Maybe Core.Double),
-    -- | [Output-only, Beta] Training loss computed on the training data at the end of the iteration. The training loss function is defined by model type.
+    -- | Deprecated.
     trainingLoss :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1876,9 +2249,7 @@ instance Core.FromJSON BqmlIterationResult where
       "BqmlIterationResult"
       ( \o ->
           BqmlIterationResult
-            Core.<$> ( o Core..:? "durationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "durationMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "learnRate")
@@ -1889,8 +2260,7 @@ instance Core.ToJSON BqmlIterationResult where
   toJSON BqmlIterationResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationMs" Core..=) Core.. Core.AsText
-              Core.<$> durationMs,
+          [ ("durationMs" Core..=) Core.. Core.AsText Core.<$> durationMs,
             ("evalLoss" Core..=) Core.<$> evalLoss,
             ("index" Core..=) Core.<$> index,
             ("learnRate" Core..=) Core.<$> learnRate,
@@ -1901,13 +2271,13 @@ instance Core.ToJSON BqmlIterationResult where
 --
 -- /See:/ 'newBqmlTrainingRun' smart constructor.
 data BqmlTrainingRun = BqmlTrainingRun
-  { -- | [Output-only, Beta] List of each iteration results.
+  { -- | Deprecated.
     iterationResults :: (Core.Maybe [BqmlIterationResult]),
-    -- | [Output-only, Beta] Training run start time in milliseconds since the epoch.
+    -- | Deprecated.
     startTime :: (Core.Maybe Core.DateTime),
-    -- | [Output-only, Beta] Different state applicable for a training run. IN PROGRESS: Training run is in progress. FAILED: Training run ended due to a non-retryable failure. SUCCEEDED: Training run successfully completed. CANCELLED: Training run cancelled by the user.
+    -- | Deprecated.
     state :: (Core.Maybe Core.Text),
-    -- | [Output-only, Beta] Training options used by this training run. These options are mutable for subsequent training runs. Default values are explicitly stored for options not specified in the input query of the first training run. For subsequent training runs, any option not explicitly specified in the input query will be copied from the previous training run.
+    -- | Deprecated.
     trainingOptions :: (Core.Maybe BqmlTrainingRun_TrainingOptions)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1939,36 +2309,25 @@ instance Core.ToJSON BqmlTrainingRun where
   toJSON BqmlTrainingRun {..} =
     Core.object
       ( Core.catMaybes
-          [ ("iterationResults" Core..=)
-              Core.<$> iterationResults,
+          [ ("iterationResults" Core..=) Core.<$> iterationResults,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
-            ("trainingOptions" Core..=)
-              Core.<$> trainingOptions
+            ("trainingOptions" Core..=) Core.<$> trainingOptions
           ]
       )
 
--- | [Output-only, Beta] Training options used by this training run. These options are mutable for subsequent training runs. Default values are explicitly stored for options not specified in the input query of the first training run. For subsequent training runs, any option not explicitly specified in the input query will be copied from the previous training run.
+-- | Deprecated.
 --
 -- /See:/ 'newBqmlTrainingRun_TrainingOptions' smart constructor.
 data BqmlTrainingRun_TrainingOptions = BqmlTrainingRun_TrainingOptions
-  { -- |
-    earlyStop :: (Core.Maybe Core.Bool),
-    -- |
+  { earlyStop :: (Core.Maybe Core.Bool),
     l1Reg :: (Core.Maybe Core.Double),
-    -- |
     l2Reg :: (Core.Maybe Core.Double),
-    -- |
     learnRate :: (Core.Maybe Core.Double),
-    -- |
     learnRateStrategy :: (Core.Maybe Core.Text),
-    -- |
     lineSearchInitLearnRate :: (Core.Maybe Core.Double),
-    -- |
     maxIteration :: (Core.Maybe Core.Int64),
-    -- |
     minRelProgress :: (Core.Maybe Core.Double),
-    -- |
     warmStart :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1989,10 +2348,7 @@ newBqmlTrainingRun_TrainingOptions =
       warmStart = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BqmlTrainingRun_TrainingOptions
-  where
+instance Core.FromJSON BqmlTrainingRun_TrainingOptions where
   parseJSON =
     Core.withObject
       "BqmlTrainingRun_TrainingOptions"
@@ -2004,9 +2360,7 @@ instance
             Core.<*> (o Core..:? "learnRate")
             Core.<*> (o Core..:? "learnRateStrategy")
             Core.<*> (o Core..:? "lineSearchInitLearnRate")
-            Core.<*> ( o Core..:? "maxIteration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxIteration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "minRelProgress")
             Core.<*> (o Core..:? "warmStart")
       )
@@ -2019,12 +2373,10 @@ instance Core.ToJSON BqmlTrainingRun_TrainingOptions where
             ("l1Reg" Core..=) Core.<$> l1Reg,
             ("l2Reg" Core..=) Core.<$> l2Reg,
             ("learnRate" Core..=) Core.<$> learnRate,
-            ("learnRateStrategy" Core..=)
-              Core.<$> learnRateStrategy,
+            ("learnRateStrategy" Core..=) Core.<$> learnRateStrategy,
             ("lineSearchInitLearnRate" Core..=)
               Core.<$> lineSearchInitLearnRate,
-            ("maxIteration" Core..=) Core.. Core.AsText
-              Core.<$> maxIteration,
+            ("maxIteration" Core..=) Core.. Core.AsText Core.<$> maxIteration,
             ("minRelProgress" Core..=) Core.<$> minRelProgress,
             ("warmStart" Core..=) Core.<$> warmStart
           ]
@@ -2042,16 +2394,14 @@ newtype CategoricalValue = CategoricalValue
 -- | Creates a value of 'CategoricalValue' with the minimum fields required to make a request.
 newCategoricalValue ::
   CategoricalValue
-newCategoricalValue = CategoricalValue {categoryCounts = Core.Nothing}
+newCategoricalValue =
+  CategoricalValue {categoryCounts = Core.Nothing}
 
 instance Core.FromJSON CategoricalValue where
   parseJSON =
     Core.withObject
       "CategoricalValue"
-      ( \o ->
-          CategoricalValue
-            Core.<$> (o Core..:? "categoryCounts")
-      )
+      (\o -> CategoricalValue Core.<$> (o Core..:? "categoryCounts"))
 
 instance Core.ToJSON CategoricalValue where
   toJSON CategoricalValue {..} =
@@ -2074,7 +2424,8 @@ data CategoryCount = CategoryCount
 -- | Creates a value of 'CategoryCount' with the minimum fields required to make a request.
 newCategoryCount ::
   CategoryCount
-newCategoryCount = CategoryCount {category = Core.Nothing, count = Core.Nothing}
+newCategoryCount =
+  CategoryCount {category = Core.Nothing, count = Core.Nothing}
 
 instance Core.FromJSON CategoryCount where
   parseJSON =
@@ -2083,9 +2434,7 @@ instance Core.FromJSON CategoryCount where
       ( \o ->
           CategoryCount
             Core.<$> (o Core..:? "category")
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CategoryCount where
@@ -2097,12 +2446,13 @@ instance Core.ToJSON CategoryCount where
           ]
       )
 
+-- | Information about base table and clone time of a table clone.
 --
 -- /See:/ 'newCloneDefinition' smart constructor.
 data CloneDefinition = CloneDefinition
-  { -- | [Required] Reference describing the ID of the table that was cloned.
+  { -- | Required. Reference describing the ID of the table that was cloned.
     baseTableReference :: (Core.Maybe TableReference),
-    -- | [Required] The time at which the base table was cloned. This value is reported in the JSON response using RFC3339 format.
+    -- | Required. The time at which the base table was cloned. This value is reported in the JSON response using RFC3339 format.
     cloneTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2111,7 +2461,10 @@ data CloneDefinition = CloneDefinition
 newCloneDefinition ::
   CloneDefinition
 newCloneDefinition =
-  CloneDefinition {baseTableReference = Core.Nothing, cloneTime = Core.Nothing}
+  CloneDefinition
+    { baseTableReference = Core.Nothing,
+      cloneTime = Core.Nothing
+    }
 
 instance Core.FromJSON CloneDefinition where
   parseJSON =
@@ -2127,8 +2480,7 @@ instance Core.ToJSON CloneDefinition where
   toJSON CloneDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("baseTableReference" Core..=)
-              Core.<$> baseTableReference,
+          [ ("baseTableReference" Core..=) Core.<$> baseTableReference,
             ("cloneTime" Core..=) Core.<$> cloneTime
           ]
       )
@@ -2162,12 +2514,8 @@ instance Core.FromJSON Cluster where
       "Cluster"
       ( \o ->
           Cluster
-            Core.<$> ( o Core..:? "centroidId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "centroidId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "featureValues")
       )
 
@@ -2175,8 +2523,7 @@ instance Core.ToJSON Cluster where
   toJSON Cluster {..} =
     Core.object
       ( Core.catMaybes
-          [ ("centroidId" Core..=) Core.. Core.AsText
-              Core.<$> centroidId,
+          [ ("centroidId" Core..=) Core.. Core.AsText Core.<$> centroidId,
             ("count" Core..=) Core.. Core.AsText Core.<$> count,
             ("featureValues" Core..=) Core.<$> featureValues
           ]
@@ -2211,31 +2558,26 @@ instance Core.FromJSON ClusterInfo where
       "ClusterInfo"
       ( \o ->
           ClusterInfo
-            Core.<$> ( o Core..:? "centroidId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "centroidId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clusterRadius")
-            Core.<*> ( o Core..:? "clusterSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "clusterSize" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ClusterInfo where
   toJSON ClusterInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("centroidId" Core..=) Core.. Core.AsText
-              Core.<$> centroidId,
+          [ ("centroidId" Core..=) Core.. Core.AsText Core.<$> centroidId,
             ("clusterRadius" Core..=) Core.<$> clusterRadius,
-            ("clusterSize" Core..=) Core.. Core.AsText
-              Core.<$> clusterSize
+            ("clusterSize" Core..=) Core.. Core.AsText Core.<$> clusterSize
           ]
       )
 
+-- | Configures table clustering.
 --
 -- /See:/ 'newClustering' smart constructor.
 newtype Clustering = Clustering
-  { -- | [Repeated] One or more fields on which data should be clustered. Only top-level, non-repeated, simple-type fields are supported. When you cluster a table using multiple columns, the order of columns you specify is important. The order of the specified columns determines the sort order of the data.
+  { -- | One or more fields on which data should be clustered. Only top-level, non-repeated, simple-type fields are supported. The ordering of the clustering fields should be prioritized from most to least important for filtering purposes. For additional information, see <https://cloud.google.com/bigquery/docs/clustered-tables#limitations Introduction to clustered tables>.
     fields :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2253,8 +2595,7 @@ instance Core.FromJSON Clustering where
 
 instance Core.ToJSON Clustering where
   toJSON Clustering {..} =
-    Core.object
-      (Core.catMaybes [("fields" Core..=) Core.<$> fields])
+    Core.object (Core.catMaybes [("fields" Core..=) Core.<$> fields])
 
 -- | Evaluation metrics for clustering models.
 --
@@ -2295,10 +2636,8 @@ instance Core.ToJSON ClusteringMetrics where
     Core.object
       ( Core.catMaybes
           [ ("clusters" Core..=) Core.<$> clusters,
-            ("daviesBouldinIndex" Core..=)
-              Core.<$> daviesBouldinIndex,
-            ("meanSquaredDistance" Core..=)
-              Core.<$> meanSquaredDistance
+            ("daviesBouldinIndex" Core..=) Core.<$> daviesBouldinIndex,
+            ("meanSquaredDistance" Core..=) Core.<$> meanSquaredDistance
           ]
       )
 
@@ -2317,7 +2656,10 @@ data ConfusionMatrix = ConfusionMatrix
 newConfusionMatrix ::
   ConfusionMatrix
 newConfusionMatrix =
-  ConfusionMatrix {confidenceThreshold = Core.Nothing, rows = Core.Nothing}
+  ConfusionMatrix
+    { confidenceThreshold = Core.Nothing,
+      rows = Core.Nothing
+    }
 
 instance Core.FromJSON ConfusionMatrix where
   parseJSON =
@@ -2333,18 +2675,19 @@ instance Core.ToJSON ConfusionMatrix where
   toJSON ConfusionMatrix {..} =
     Core.object
       ( Core.catMaybes
-          [ ("confidenceThreshold" Core..=)
-              Core.<$> confidenceThreshold,
+          [ ("confidenceThreshold" Core..=) Core.<$> confidenceThreshold,
             ("rows" Core..=) Core.<$> rows
           ]
       )
 
+-- | A connection-level property to customize query behavior. Under JDBC, these correspond directly to connection properties passed to the DriverManager. Under ODBC, these correspond to properties in the connection string. Currently supported connection properties: * __dataset/project/id__: represents the default project for datasets that are used in the query. Setting the system variable @\@\@dataset_project_id@ achieves the same behavior. For more information about system variables, see: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/system-variables * __time/zone__: represents the default timezone used to run the query. * __session/id__: associates the query with a given session. * __query/label__: associates the query with a given job label. If set, all subsequent queries in a script or session will have this label. For the format in which a you can specify a query label, see labels in the JobConfiguration resource type:
+-- https:\/\/cloud.google.com\/bigquery\/docs\/reference\/rest\/v2\/Job#jobconfiguration * __service/account__: indicates the service account to use to run a continuous query. If set, the query job uses the service account to access Google Cloud resources. Service account access is bounded by the IAM permissions that you have granted to the service account. Additional properties are allowed, but ignored. Specifying multiple connection properties with the same key returns an error.
 --
 -- /See:/ 'newConnectionProperty' smart constructor.
 data ConnectionProperty = ConnectionProperty
-  { -- | [Required] Name of the connection property to set.
+  { -- | The key of the property to set.
     key :: (Core.Maybe Core.Text),
-    -- | [Required] Value of the connection property.
+    -- | The value of the property to set.
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2361,36 +2704,36 @@ instance Core.FromJSON ConnectionProperty where
       "ConnectionProperty"
       ( \o ->
           ConnectionProperty
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ConnectionProperty where
   toJSON ConnectionProperty {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
+-- | Information related to a CSV data source.
 --
 -- /See:/ 'newCsvOptions' smart constructor.
 data CsvOptions = CsvOptions
-  { -- | [Optional] Indicates if BigQuery should accept rows that are missing trailing optional columns. If true, BigQuery treats missing trailing columns as null values. If false, records with missing trailing columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false.
+  { -- | Optional. Indicates if BigQuery should accept rows that are missing trailing optional columns. If true, BigQuery treats missing trailing columns as null values. If false, records with missing trailing columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false.
     allowJaggedRows :: (Core.Maybe Core.Bool),
-    -- | [Optional] Indicates if BigQuery should allow quoted data sections that contain newline characters in a CSV file. The default value is false.
+    -- | Optional. Indicates if BigQuery should allow quoted data sections that contain newline characters in a CSV file. The default value is false.
     allowQuotedNewlines :: (Core.Maybe Core.Bool),
-    -- | [Optional] The character encoding of the data. The supported values are UTF-8 or ISO-8859-1. The default value is UTF-8. BigQuery decodes the data after the raw, binary data has been split using the values of the quote and fieldDelimiter properties.
+    -- | Optional. The character encoding of the data. The supported values are UTF-8, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-32BE, and UTF-32LE. The default value is UTF-8. BigQuery decodes the data after the raw, binary data has been split using the values of the quote and fieldDelimiter properties.
     encoding :: (Core.Maybe Core.Text),
-    -- | [Optional] The separator for fields in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence \"\\t\" to specify a tab separator. The default value is a comma (\',\').
+    -- | Optional. The separator character for fields in a CSV file. The separator is interpreted as a single byte. For files encoded in ISO-8859-1, any single character can be used as a separator. For files encoded in UTF-8, characters represented in decimal range 1-127 (U+0001-U+007F) can be used without any modification. UTF-8 characters encoded with multiple bytes (i.e. U+0080 and above) will have only the first byte used for separating fields. The remaining bytes will be treated as a part of the field. BigQuery also supports the escape sequence \"\\t\" (U+0009) to specify a tab separator. The default value is comma (\",\", U+002C).
     fieldDelimiter :: (Core.Maybe Core.Text),
-    -- | [Optional] An custom string that will represent a NULL value in CSV import data.
+    -- | Optional. Specifies a string that represents a null value in a CSV file. For example, if you specify \"\\N\", BigQuery interprets \"\\N\" as a null value when querying a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery throws an error if an empty string is present for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.
     nullMarker :: (Core.Maybe Core.Text),
-    -- | [Optional] Preserves the embedded ASCII control characters (the first 32 characters in the ASCII-table, from \'\\x00\' to \'\\x1F\') when loading from CSV. Only applicable to CSV, ignored for other formats.
+    -- | Optional. Indicates if the embedded ASCII control characters (the first 32 characters in the ASCII-table, from \'\\x00\' to \'\\x1F\') are preserved.
     preserveAsciiControlCharacters :: (Core.Maybe Core.Bool),
-    -- | [Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote (\'\"\'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true.
+    -- | Optional. The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote (\"). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true. To include the specific quote character within a quoted value, precede it with an additional matching quote character. For example, if you want to escape the default character \' \" \', use \' \"\" \'.
     quote :: Core.Text,
-    -- | [Optional] The number of rows at the top of a CSV file that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped. When autodetect is on, the behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.
+    -- | Optional. The number of rows at the top of a CSV file that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped. When autodetect is on, the behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.
     skipLeadingRows :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2420,38 +2763,66 @@ instance Core.FromJSON CsvOptions where
             Core.<*> (o Core..:? "allowQuotedNewlines")
             Core.<*> (o Core..:? "encoding")
             Core.<*> (o Core..:? "fieldDelimiter")
-            Core.<*> (o Core..:? "null_marker")
+            Core.<*> (o Core..:? "nullMarker")
             Core.<*> (o Core..:? "preserveAsciiControlCharacters")
             Core.<*> (o Core..:? "quote" Core..!= "\"")
-            Core.<*> ( o Core..:? "skipLeadingRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "skipLeadingRows" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON CsvOptions where
   toJSON CsvOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowJaggedRows" Core..=)
-              Core.<$> allowJaggedRows,
-            ("allowQuotedNewlines" Core..=)
-              Core.<$> allowQuotedNewlines,
+          [ ("allowJaggedRows" Core..=) Core.<$> allowJaggedRows,
+            ("allowQuotedNewlines" Core..=) Core.<$> allowQuotedNewlines,
             ("encoding" Core..=) Core.<$> encoding,
             ("fieldDelimiter" Core..=) Core.<$> fieldDelimiter,
-            ("null_marker" Core..=) Core.<$> nullMarker,
+            ("nullMarker" Core..=) Core.<$> nullMarker,
             ("preserveAsciiControlCharacters" Core..=)
               Core.<$> preserveAsciiControlCharacters,
             Core.Just ("quote" Core..= quote),
-            ("skipLeadingRows" Core..=) Core.. Core.AsText
+            ("skipLeadingRows" Core..=)
+              Core.. Core.AsText
               Core.<$> skipLeadingRows
           ]
       )
 
+-- | Options for data format adjustments.
+--
+-- /See:/ 'newDataFormatOptions' smart constructor.
+newtype DataFormatOptions = DataFormatOptions
+  { -- | Optional. Output timestamp as usec int64. Default is false.
+    useInt64Timestamp :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataFormatOptions' with the minimum fields required to make a request.
+newDataFormatOptions ::
+  DataFormatOptions
+newDataFormatOptions =
+  DataFormatOptions {useInt64Timestamp = Core.Nothing}
+
+instance Core.FromJSON DataFormatOptions where
+  parseJSON =
+    Core.withObject
+      "DataFormatOptions"
+      ( \o ->
+          DataFormatOptions Core.<$> (o Core..:? "useInt64Timestamp")
+      )
+
+instance Core.ToJSON DataFormatOptions where
+  toJSON DataFormatOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [("useInt64Timestamp" Core..=) Core.<$> useInt64Timestamp]
+      )
+
+-- | Statistics for data-masking.
 --
 -- /See:/ 'newDataMaskingStatistics' smart constructor.
 newtype DataMaskingStatistics = DataMaskingStatistics
-  { -- | [Output-only] [Preview] Whether any accessed data was protected by data masking. The actual evaluation is done by accessStats.masked/field/count > 0. Since this is only used for the discovery_doc generation purpose, as long as the type (boolean) matches, client library can leverage this. The actual evaluation of the variable is done else-where.
-    dataMaskingApplied :: Core.Bool
+  { -- | Whether any accessed data was protected by the data masking.
+    dataMaskingApplied :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2459,27 +2830,46 @@ newtype DataMaskingStatistics = DataMaskingStatistics
 newDataMaskingStatistics ::
   DataMaskingStatistics
 newDataMaskingStatistics =
-  DataMaskingStatistics {dataMaskingApplied = Core.False}
+  DataMaskingStatistics {dataMaskingApplied = Core.Nothing}
 
 instance Core.FromJSON DataMaskingStatistics where
   parseJSON =
     Core.withObject
       "DataMaskingStatistics"
       ( \o ->
-          DataMaskingStatistics
-            Core.<$> ( o Core..:? "dataMaskingApplied"
-                         Core..!= Core.False
-                     )
+          DataMaskingStatistics Core.<$> (o Core..:? "dataMaskingApplied")
       )
 
 instance Core.ToJSON DataMaskingStatistics where
   toJSON DataMaskingStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("dataMaskingApplied" Core..= dataMaskingApplied)
-          ]
+          [("dataMaskingApplied" Core..=) Core.<$> dataMaskingApplied]
       )
+
+-- | Data policy option proto, it currently supports name only, will support precedence later.
+--
+-- /See:/ 'newDataPolicyOption' smart constructor.
+newtype DataPolicyOption = DataPolicyOption
+  { -- | Data policy resource name in the form of projects\/project/id\/locations\/location/id\/dataPolicies\/data/policy/id.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataPolicyOption' with the minimum fields required to make a request.
+newDataPolicyOption ::
+  DataPolicyOption
+newDataPolicyOption = DataPolicyOption {name = Core.Nothing}
+
+instance Core.FromJSON DataPolicyOption where
+  parseJSON =
+    Core.withObject
+      "DataPolicyOption"
+      (\o -> DataPolicyOption Core.<$> (o Core..:? "name"))
+
+instance Core.ToJSON DataPolicyOption where
+  toJSON DataPolicyOption {..} =
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Data split result. This contains references to the training and evaluation data tables that were used to train the model.
 --
@@ -2519,60 +2909,76 @@ instance Core.ToJSON DataSplitResult where
   toJSON DataSplitResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("evaluationTable" Core..=)
-              Core.<$> evaluationTable,
+          [ ("evaluationTable" Core..=) Core.<$> evaluationTable,
             ("testTable" Core..=) Core.<$> testTable,
             ("trainingTable" Core..=) Core.<$> trainingTable
           ]
       )
 
+-- | Represents a BigQuery dataset.
 --
 -- /See:/ 'newDataset' smart constructor.
 data Dataset = Dataset
-  { -- | [Optional] An array of objects that define dataset access for one or more entities. You can set this property when inserting or updating a dataset in order to control who is allowed to access the data. If unspecified at dataset creation time, BigQuery adds default dataset access for the following entities: access.specialGroup: projectReaders; access.role: READER; access.specialGroup: projectWriters; access.role: WRITER; access.specialGroup: projectOwners; access.role: OWNER; access.userByEmail: [dataset creator email]; access.role: OWNER;
+  { -- | Optional. An array of objects that define dataset access for one or more entities. You can set this property when inserting or updating a dataset in order to control who is allowed to access the data. If unspecified at dataset creation time, BigQuery adds default dataset access for the following entities: access.specialGroup: projectReaders; access.role: READER; access.specialGroup: projectWriters; access.role: WRITER; access.specialGroup: projectOwners; access.role: OWNER; access.userByEmail: [dataset creator email]; access.role: OWNER; If you patch a dataset, then this field is overwritten by the patched dataset\'s access field. To add entities, you must supply the entire existing access array in addition to any new entities that you want to add.
     access :: (Core.Maybe [Dataset_AccessItem]),
-    -- | [Output-only] The time when this dataset was created, in milliseconds since the epoch.
+    -- | Output only. The time when this dataset was created, in milliseconds since the epoch.
     creationTime :: (Core.Maybe Core.Int64),
-    -- | [Required] A reference that identifies the dataset.
+    -- | Required. A reference that identifies the dataset.
     datasetReference :: (Core.Maybe DatasetReference),
-    -- | [Output-only] The default collation of the dataset.
+    -- | Optional. Defines the default collation specification of future tables created in the dataset. If a table is created in this dataset without table-level default collation, then the table inherits the dataset default collation, which is applied to the string fields that do not have explicit collation specified. A change to this field affects only tables created afterwards, and does not alter the existing tables. The following values are supported: * \'und:ci\': undetermined locale, case insensitive. * \'\': empty string. Default to case-sensitive behavior.
     defaultCollation :: (Core.Maybe Core.Text),
-    -- |
+    -- | The default encryption key for all tables in the dataset. After this property is set, the encryption key of all newly-created tables in the dataset is set to this value unless the table creation request or query explicitly overrides the key.
     defaultEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
-    -- | [Optional] The default partition expiration for all partitioned tables in the dataset, in milliseconds. Once this property is set, all newly-created partitioned tables in the dataset will have an expirationMs property in the timePartitioning settings set to this value, and changing the value will only affect new tables, not existing ones. The storage in a partition will have an expiration time of its partition time plus this value. Setting this property overrides the use of defaultTableExpirationMs for partitioned tables: only one of defaultTableExpirationMs and defaultPartitionExpirationMs will be used for any new partitioned table. If you provide an explicit timePartitioning.expirationMs when creating or updating a partitioned table, that value takes precedence over the default partition expiration time indicated by this property.
+    -- | This default partition expiration, expressed in milliseconds. When new time-partitioned tables are created in a dataset where this property is set, the table will inherit this value, propagated as the @TimePartitioning.expirationMs@ property on the new table. If you set @TimePartitioning.expirationMs@ explicitly when creating a table, the @defaultPartitionExpirationMs@ of the containing dataset is ignored. When creating a partitioned table, if @defaultPartitionExpirationMs@ is set, the @defaultTableExpirationMs@ value is ignored and the table will not be inherit a table expiration deadline.
     defaultPartitionExpirationMs :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The default rounding mode of the dataset.
-    defaultRoundingMode :: (Core.Maybe Core.Text),
-    -- | [Optional] The default lifetime of all tables in the dataset, in milliseconds. The minimum value is 3600000 milliseconds (one hour). Once this property is set, all newly-created tables in the dataset will have an expirationTime property set to the creation time plus the value in this property, and changing the value will only affect new tables, not existing ones. When the expirationTime for a given table is reached, that table will be deleted automatically. If a table\'s expirationTime is modified or removed before the table expires, or if you provide an explicit expirationTime when creating a table, that value takes precedence over the default expiration time indicated by this property.
+    -- | Optional. Defines the default rounding mode specification of new tables created within this dataset. During table creation, if this field is specified, the table within this dataset will inherit the default rounding mode of the dataset. Setting the default rounding mode on a table overrides this option. Existing tables in the dataset are unaffected. If columns are defined during that table creation, they will immediately inherit the table\'s default rounding mode, unless otherwise specified.
+    defaultRoundingMode :: (Core.Maybe Dataset_DefaultRoundingMode),
+    -- | Optional. The default lifetime of all tables in the dataset, in milliseconds. The minimum lifetime value is 3600000 milliseconds (one hour). To clear an existing default expiration with a PATCH request, set to 0. Once this property is set, all newly-created tables in the dataset will have an expirationTime property set to the creation time plus the value in this property, and changing the value will only affect new tables, not existing ones. When the expirationTime for a given table is reached, that table will be deleted automatically. If a table\'s expirationTime is modified or removed before the table expires, or if you provide an explicit expirationTime when creating a table, that value takes precedence over the default expiration time indicated by this property.
     defaultTableExpirationMs :: (Core.Maybe Core.Int64),
-    -- | [Optional] A user-friendly description of the dataset.
+    -- | Optional. A user-friendly description of the dataset.
     description :: (Core.Maybe Core.Text),
-    -- | [Output-only] A hash of the resource.
+    -- | Output only. A hash of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | [Optional] A descriptive name for the dataset.
+    -- | Optional. Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema or namespace represented by the current dataset.
+    externalCatalogDatasetOptions :: (Core.Maybe ExternalCatalogDatasetOptions),
+    -- | Optional. Reference to a read-only external dataset defined in data catalogs outside of BigQuery. Filled out when the dataset type is EXTERNAL.
+    externalDatasetReference :: (Core.Maybe ExternalDatasetReference),
+    -- | Optional. A descriptive name for the dataset.
     friendlyName :: (Core.Maybe Core.Text),
-    -- | [Output-only] The fully-qualified unique name of the dataset in the format projectId:datasetId. The dataset name without the project name is given in the datasetId field. When creating a new dataset, leave this field blank, and instead specify the datasetId field.
+    -- | Output only. The fully-qualified unique name of the dataset in the format projectId:datasetId. The dataset name without the project name is given in the datasetId field. When creating a new dataset, leave this field blank, and instead specify the datasetId field.
     id :: (Core.Maybe Core.Text),
-    -- | [Optional] Indicates if table names are case insensitive in the dataset.
+    -- | Optional. TRUE if the dataset and its table names are case-insensitive, otherwise FALSE. By default, this is FALSE, which means the dataset and its table names are case-sensitive. This field does not affect routine references.
     isCaseInsensitive :: (Core.Maybe Core.Bool),
-    -- | [Output-only] The resource type.
+    -- | Output only. The resource type.
     kind :: Core.Text,
-    -- | The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See Creating and Updating Dataset Labels for more information.
+    -- | The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See <https://cloud.google.com/bigquery/docs/creating-managing-labels#creating_and_updating_dataset_labels Creating and Updating Dataset Labels> for more information.
     labels :: (Core.Maybe Dataset_Labels),
-    -- | [Output-only] The date when this dataset or any of its tables was last modified, in milliseconds since the epoch.
+    -- | Output only. The date when this dataset was last modified, in milliseconds since the epoch.
     lastModifiedTime :: (Core.Maybe Core.Int64),
-    -- | The geographic location where the dataset should reside. The default value is US. See details at https:\/\/cloud.google.com\/bigquery\/docs\/locations.
+    -- | Output only. Metadata about the LinkedDataset. Filled out when the dataset type is LINKED.
+    linkedDatasetMetadata :: (Core.Maybe LinkedDatasetMetadata),
+    -- | Optional. The source dataset reference when the dataset is of type LINKED. For all other dataset types it is not set. This field cannot be updated once it is set. Any attempt to update this field using Update and Patch API Operations will be ignored.
+    linkedDatasetSource :: (Core.Maybe LinkedDatasetSource),
+    -- | The geographic location where the dataset should reside. See https:\/\/cloud.google.com\/bigquery\/docs\/locations for supported locations.
     location :: (Core.Maybe Core.Text),
-    -- | [Optional] Number of hours for the max time travel for all tables in the dataset.
+    -- | Optional. Defines the time travel window in hours. The value can be from 48 to 168 hours (2 to 7 days). The default value is 168 hours if this is not set.
     maxTimeTravelHours :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Reserved for future use.
+    -- | Optional. The <https://cloud.google.com/bigquery/docs/tags tags> attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example \"123456789012\/environment\" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example \"Production\". See <https://cloud.google.com/iam/docs/tags-access-control#definitions Tag definitions> for more details.
+    resourceTags :: (Core.Maybe Dataset_ResourceTags),
+    -- | Optional. Output only. Restriction config for all tables and dataset. If set, restrict certain accesses on the dataset and all its tables based on the config. See <https://cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress Data egress> for more details.
+    restrictions :: (Core.Maybe RestrictionConfig),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
-    -- | [Output-only] A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource.
+    -- | Output only. A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource.
     selfLink :: (Core.Maybe Core.Text),
-    -- | [Optional] Storage billing model to be used for all tables in the dataset. Can be set to PHYSICAL. Default is LOGICAL.
-    storageBillingModel :: (Core.Maybe Core.Text),
-    -- | [Optional]The tags associated with this dataset. Tag keys are globally unique.
-    tags :: (Core.Maybe [Dataset_TagsItem])
+    -- | Optional. Updates storage/billing/model for the dataset.
+    storageBillingModel :: (Core.Maybe Dataset_StorageBillingModel),
+    -- | Output only. Tags for the dataset. To provide tags as inputs, use the @resourceTags@ field.
+    tags :: (Core.Maybe [Dataset_TagsItem]),
+    -- | Output only. Same as @type@ in @ListFormatDataset@. The type of the dataset, one of: * DEFAULT - only accessible by owner and authorized accounts, * PUBLIC - accessible by everyone, * LINKED - linked dataset, * EXTERNAL - dataset with definition in external metadata catalog.
+    type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2591,18 +2997,26 @@ newDataset =
       defaultTableExpirationMs = Core.Nothing,
       description = Core.Nothing,
       etag = Core.Nothing,
+      externalCatalogDatasetOptions = Core.Nothing,
+      externalDatasetReference = Core.Nothing,
       friendlyName = Core.Nothing,
       id = Core.Nothing,
       isCaseInsensitive = Core.Nothing,
       kind = "bigquery#dataset",
       labels = Core.Nothing,
       lastModifiedTime = Core.Nothing,
+      linkedDatasetMetadata = Core.Nothing,
+      linkedDatasetSource = Core.Nothing,
       location = Core.Nothing,
       maxTimeTravelHours = Core.Nothing,
+      resourceTags = Core.Nothing,
+      restrictions = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       selfLink = Core.Nothing,
       storageBillingModel = Core.Nothing,
-      tags = Core.Nothing
+      tags = Core.Nothing,
+      type' = Core.Nothing
     }
 
 instance Core.FromJSON Dataset where
@@ -2612,37 +3026,44 @@ instance Core.FromJSON Dataset where
       ( \o ->
           Dataset
             Core.<$> (o Core..:? "access")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "datasetReference")
             Core.<*> (o Core..:? "defaultCollation")
             Core.<*> (o Core..:? "defaultEncryptionConfiguration")
-            Core.<*> ( o Core..:? "defaultPartitionExpirationMs"
+            Core.<*> ( o
+                         Core..:? "defaultPartitionExpirationMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "defaultRoundingMode")
-            Core.<*> ( o Core..:? "defaultTableExpirationMs"
+            Core.<*> ( o
+                         Core..:? "defaultTableExpirationMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
+            Core.<*> (o Core..:? "externalCatalogDatasetOptions")
+            Core.<*> (o Core..:? "externalDatasetReference")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isCaseInsensitive")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#dataset")
             Core.<*> (o Core..:? "labels")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "linkedDatasetMetadata")
+            Core.<*> (o Core..:? "linkedDatasetSource")
             Core.<*> (o Core..:? "location")
-            Core.<*> ( o Core..:? "maxTimeTravelHours"
+            Core.<*> ( o
+                         Core..:? "maxTimeTravelHours"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "resourceTags")
+            Core.<*> (o Core..:? "restrictions")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "storageBillingModel")
             Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Dataset where
@@ -2650,47 +3071,56 @@ instance Core.ToJSON Dataset where
     Core.object
       ( Core.catMaybes
           [ ("access" Core..=) Core.<$> access,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
-            ("datasetReference" Core..=)
-              Core.<$> datasetReference,
-            ("defaultCollation" Core..=)
-              Core.<$> defaultCollation,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("datasetReference" Core..=) Core.<$> datasetReference,
+            ("defaultCollation" Core..=) Core.<$> defaultCollation,
             ("defaultEncryptionConfiguration" Core..=)
               Core.<$> defaultEncryptionConfiguration,
             ("defaultPartitionExpirationMs" Core..=)
               Core.. Core.AsText
               Core.<$> defaultPartitionExpirationMs,
-            ("defaultRoundingMode" Core..=)
-              Core.<$> defaultRoundingMode,
+            ("defaultRoundingMode" Core..=) Core.<$> defaultRoundingMode,
             ("defaultTableExpirationMs" Core..=)
               Core.. Core.AsText
               Core.<$> defaultTableExpirationMs,
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
+            ("externalCatalogDatasetOptions" Core..=)
+              Core.<$> externalCatalogDatasetOptions,
+            ("externalDatasetReference" Core..=)
+              Core.<$> externalDatasetReference,
             ("friendlyName" Core..=) Core.<$> friendlyName,
             ("id" Core..=) Core.<$> id,
-            ("isCaseInsensitive" Core..=)
-              Core.<$> isCaseInsensitive,
+            ("isCaseInsensitive" Core..=) Core.<$> isCaseInsensitive,
             Core.Just ("kind" Core..= kind),
             ("labels" Core..=) Core.<$> labels,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
+            ("linkedDatasetMetadata" Core..=) Core.<$> linkedDatasetMetadata,
+            ("linkedDatasetSource" Core..=) Core.<$> linkedDatasetSource,
             ("location" Core..=) Core.<$> location,
-            ("maxTimeTravelHours" Core..=) Core.. Core.AsText
+            ("maxTimeTravelHours" Core..=)
+              Core.. Core.AsText
               Core.<$> maxTimeTravelHours,
+            ("resourceTags" Core..=) Core.<$> resourceTags,
+            ("restrictions" Core..=) Core.<$> restrictions,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("storageBillingModel" Core..=)
-              Core.<$> storageBillingModel,
-            ("tags" Core..=) Core.<$> tags
+            ("storageBillingModel" Core..=) Core.<$> storageBillingModel,
+            ("tags" Core..=) Core.<$> tags,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
+-- | An object that defines dataset access for an entity.
 --
 -- /See:/ 'newDataset_AccessItem' smart constructor.
 data Dataset_AccessItem = Dataset_AccessItem
-  { -- | [Pick one] A grant authorizing all resources of a particular type in a particular dataset access to this dataset. Only views are supported for now. The role field is not required when this field is set. If that dataset is deleted and re-created, its access needs to be granted again via an update operation.
+  { -- | Optional. condition for the binding. If CEL expression in this field is true, this access binding will be considered
+    condition :: (Core.Maybe Expr),
+    -- | [Pick one] A grant authorizing all resources of a particular type in a particular dataset access to this dataset. Only views are supported for now. The role field is not required when this field is set. If that dataset is deleted and re-created, its access needs to be granted again via an update operation.
     dataset :: (Core.Maybe DatasetAccessEntry),
     -- | [Pick one] A domain to grant access to. Any users signed in with the domain specified will be granted the specified access. Example: \"example.com\". Maps to IAM policy member \"domain:DOMAIN\".
     domain :: (Core.Maybe Core.Text),
@@ -2698,15 +3128,15 @@ data Dataset_AccessItem = Dataset_AccessItem
     groupByEmail :: (Core.Maybe Core.Text),
     -- | [Pick one] Some other type of member that appears in the IAM Policy but isn\'t a user, group, domain, or special group.
     iamMember :: (Core.Maybe Core.Text),
-    -- | [Required] An IAM role ID that should be granted to the user, group, or domain specified in this access entry. The following legacy mappings will be applied: OWNER roles\/bigquery.dataOwner WRITER roles\/bigquery.dataEditor READER roles\/bigquery.dataViewer This field will accept any of the above formats, but will return only the legacy format. For example, if you set this field to \"roles\/bigquery.dataOwner\", it will be returned back as \"OWNER\".
+    -- | An IAM role ID that should be granted to the user, group, or domain specified in this access entry. The following legacy mappings will be applied: * @OWNER@: @roles\/bigquery.dataOwner@ * @WRITER@: @roles\/bigquery.dataEditor@ * @READER@: @roles\/bigquery.dataViewer@ This field will accept any of the above formats, but will return only the legacy format. For example, if you set this field to \"roles\/bigquery.dataOwner\", it will be returned back as \"OWNER\".
     role' :: (Core.Maybe Core.Text),
     -- | [Pick one] A routine from a different dataset to grant access to. Queries executed against that routine will have read access to views\/tables\/routines in this dataset. Only UDF is supported for now. The role field is not required when this field is set. If that routine is updated by any user, access to the routine needs to be granted again via an update operation.
     routine :: (Core.Maybe RoutineReference),
-    -- | [Pick one] A special group to grant access to. Possible values include: projectOwners: Owners of the enclosing project. projectReaders: Readers of the enclosing project. projectWriters: Writers of the enclosing project. allAuthenticatedUsers: All authenticated BigQuery users. Maps to similarly-named IAM members.
+    -- | [Pick one] A special group to grant access to. Possible values include: * projectOwners: Owners of the enclosing project. * projectReaders: Readers of the enclosing project. * projectWriters: Writers of the enclosing project. * allAuthenticatedUsers: All authenticated BigQuery users. Maps to similarly-named IAM members.
     specialGroup :: (Core.Maybe Core.Text),
     -- | [Pick one] An email address of a user to grant access to. For example: fred\@example.com. Maps to IAM policy member \"user:EMAIL\" or \"serviceAccount:EMAIL\".
     userByEmail :: (Core.Maybe Core.Text),
-    -- | [Pick one] A view from a different dataset to grant access to. Queries executed against that view will have read access to tables in this dataset. The role field is not required when this field is set. If that view is updated by any user, access to the view needs to be granted again via an update operation.
+    -- | [Pick one] A view from a different dataset to grant access to. Queries executed against that view will have read access to views\/tables\/routines in this dataset. The role field is not required when this field is set. If that view is updated by any user, access to the view needs to be granted again via an update operation.
     view :: (Core.Maybe TableReference)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2716,7 +3146,8 @@ newDataset_AccessItem ::
   Dataset_AccessItem
 newDataset_AccessItem =
   Dataset_AccessItem
-    { dataset = Core.Nothing,
+    { condition = Core.Nothing,
+      dataset = Core.Nothing,
       domain = Core.Nothing,
       groupByEmail = Core.Nothing,
       iamMember = Core.Nothing,
@@ -2733,7 +3164,8 @@ instance Core.FromJSON Dataset_AccessItem where
       "Dataset_AccessItem"
       ( \o ->
           Dataset_AccessItem
-            Core.<$> (o Core..:? "dataset")
+            Core.<$> (o Core..:? "condition")
+            Core.<*> (o Core..:? "dataset")
             Core.<*> (o Core..:? "domain")
             Core.<*> (o Core..:? "groupByEmail")
             Core.<*> (o Core..:? "iamMember")
@@ -2748,7 +3180,8 @@ instance Core.ToJSON Dataset_AccessItem where
   toJSON Dataset_AccessItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataset" Core..=) Core.<$> dataset,
+          [ ("condition" Core..=) Core.<$> condition,
+            ("dataset" Core..=) Core.<$> dataset,
             ("domain" Core..=) Core.<$> domain,
             ("groupByEmail" Core..=) Core.<$> groupByEmail,
             ("iamMember" Core..=) Core.<$> iamMember,
@@ -2760,12 +3193,11 @@ instance Core.ToJSON Dataset_AccessItem where
           ]
       )
 
--- | The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See Creating and Updating Dataset Labels for more information.
+-- | The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. See <https://cloud.google.com/bigquery/docs/creating-managing-labels#creating_and_updating_dataset_labels Creating and Updating Dataset Labels> for more information.
 --
 -- /See:/ 'newDataset_Labels' smart constructor.
 newtype Dataset_Labels = Dataset_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2774,25 +3206,50 @@ newDataset_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Dataset_Labels
-newDataset_Labels additional = Dataset_Labels {additional = additional}
+newDataset_Labels additional =
+  Dataset_Labels {additional = additional}
 
 instance Core.FromJSON Dataset_Labels where
   parseJSON =
     Core.withObject
       "Dataset_Labels"
-      ( \o ->
-          Dataset_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Dataset_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Dataset_Labels where
   toJSON Dataset_Labels {..} = Core.toJSON additional
 
+-- | Optional. The <https://cloud.google.com/bigquery/docs/tags tags> attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example \"123456789012\/environment\" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example \"Production\". See <https://cloud.google.com/iam/docs/tags-access-control#definitions Tag definitions> for more details.
+--
+-- /See:/ 'newDataset_ResourceTags' smart constructor.
+newtype Dataset_ResourceTags = Dataset_ResourceTags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Dataset_ResourceTags' with the minimum fields required to make a request.
+newDataset_ResourceTags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Dataset_ResourceTags
+newDataset_ResourceTags additional =
+  Dataset_ResourceTags {additional = additional}
+
+instance Core.FromJSON Dataset_ResourceTags where
+  parseJSON =
+    Core.withObject
+      "Dataset_ResourceTags"
+      (\o -> Dataset_ResourceTags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Dataset_ResourceTags where
+  toJSON Dataset_ResourceTags {..} = Core.toJSON additional
+
+-- | A global tag managed by Resource Manager. https:\/\/cloud.google.com\/iam\/docs\/tags-access-control#definitions
 --
 -- /See:/ 'newDataset_TagsItem' smart constructor.
 data Dataset_TagsItem = Dataset_TagsItem
-  { -- | [Required] The namespaced friendly name of the tag key, e.g. \"12345\/environment\" where 12345 is org id.
+  { -- | Required. The namespaced friendly name of the tag key, e.g. \"12345\/environment\" where 12345 is org id.
     tagKey :: (Core.Maybe Core.Text),
-    -- | [Required] Friendly short name of the tag value, e.g. \"production\".
+    -- | Required. The friendly short name of the tag value, e.g. \"production\".
     tagValue :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2822,12 +3279,13 @@ instance Core.ToJSON Dataset_TagsItem where
           ]
       )
 
+-- | Grants all resources of particular types in a particular dataset read access to the current dataset. Similar to how individually authorized views work, updates to any resource granted through its dataset (including creation of new resources) requires read permission to referenced resources, plus write permission to the authorizing dataset.
 --
 -- /See:/ 'newDatasetAccessEntry' smart constructor.
 data DatasetAccessEntry = DatasetAccessEntry
-  { -- | [Required] The dataset this entry applies to.
+  { -- | The dataset this entry applies to
     dataset :: (Core.Maybe DatasetReference),
-    -- |
+    -- | Which resources in the dataset this entry applies to. Currently, only views are supported, but additional target types may be added in the future.
     targetTypes :: (Core.Maybe [DatasetAccessEntry_TargetTypesItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2836,7 +3294,10 @@ data DatasetAccessEntry = DatasetAccessEntry
 newDatasetAccessEntry ::
   DatasetAccessEntry
 newDatasetAccessEntry =
-  DatasetAccessEntry {dataset = Core.Nothing, targetTypes = Core.Nothing}
+  DatasetAccessEntry
+    { dataset = Core.Nothing,
+      targetTypes = Core.Nothing
+    }
 
 instance Core.FromJSON DatasetAccessEntry where
   parseJSON =
@@ -2857,17 +3318,20 @@ instance Core.ToJSON DatasetAccessEntry where
           ]
       )
 
+-- | Response format for a page of results when listing datasets.
 --
 -- /See:/ 'newDatasetList' smart constructor.
 data DatasetList = DatasetList
   { -- | An array of the dataset resources in the project. Each resource contains basic information. For full information about a particular dataset resource, use the Datasets: get method. This property is omitted when there are no datasets in the project.
     datasets :: (Core.Maybe [DatasetList_DatasetsItem]),
-    -- | A hash value of the results page. You can use this property to determine if the page has changed since the last request.
+    -- | Output only. A hash value of the results page. You can use this property to determine if the page has changed since the last request.
     etag :: (Core.Maybe Core.Text),
-    -- | The list type. This property always returns the value \"bigquery#datasetList\".
+    -- | Output only. The resource type. This property always returns the value \"bigquery#datasetList\"
     kind :: Core.Text,
     -- | A token that can be used to request the next results page. This property is omitted on the final results page.
-    nextPageToken :: (Core.Maybe Core.Text)
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | A list of skipped locations that were unreachable. For more information about BigQuery locations, see: https:\/\/cloud.google.com\/bigquery\/docs\/locations. Example: \"europe-west5\"
+    unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2879,7 +3343,8 @@ newDatasetList =
     { datasets = Core.Nothing,
       etag = Core.Nothing,
       kind = "bigquery#datasetList",
-      nextPageToken = Core.Nothing
+      nextPageToken = Core.Nothing,
+      unreachable = Core.Nothing
     }
 
 instance Core.FromJSON DatasetList where
@@ -2892,6 +3357,7 @@ instance Core.FromJSON DatasetList where
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#datasetList")
             Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON DatasetList where
@@ -2901,24 +3367,26 @@ instance Core.ToJSON DatasetList where
           [ ("datasets" Core..=) Core.<$> datasets,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("unreachable" Core..=) Core.<$> unreachable
           ]
       )
 
+-- | A dataset resource with only a subset of fields, to be returned in a list of datasets.
 --
 -- /See:/ 'newDatasetList_DatasetsItem' smart constructor.
 data DatasetList_DatasetsItem = DatasetList_DatasetsItem
   { -- | The dataset reference. Use this property to access specific parts of the dataset\'s ID, such as project ID or dataset ID.
     datasetReference :: (Core.Maybe DatasetReference),
-    -- | A descriptive name for the dataset, if one exists.
+    -- | An alternate name for the dataset. The friendly name is purely decorative in nature.
     friendlyName :: (Core.Maybe Core.Text),
     -- | The fully-qualified, unique, opaque ID of the dataset.
     id :: (Core.Maybe Core.Text),
-    -- | The resource type. This property always returns the value \"bigquery#dataset\".
-    kind :: Core.Text,
+    -- | The resource type. This property always returns the value \"bigquery#dataset\"
+    kind :: (Core.Maybe Core.Text),
     -- | The labels associated with this dataset. You can use these to organize and group your datasets.
     labels :: (Core.Maybe DatasetList_DatasetsItem_Labels),
-    -- | The geographic location where the data resides.
+    -- | The geographic location where the dataset resides.
     location :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2931,7 +3399,7 @@ newDatasetList_DatasetsItem =
     { datasetReference = Core.Nothing,
       friendlyName = Core.Nothing,
       id = Core.Nothing,
-      kind = "bigquery#dataset",
+      kind = Core.Nothing,
       labels = Core.Nothing,
       location = Core.Nothing
     }
@@ -2945,7 +3413,7 @@ instance Core.FromJSON DatasetList_DatasetsItem where
             Core.<$> (o Core..:? "datasetReference")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "kind" Core..!= "bigquery#dataset")
+            Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "location")
       )
@@ -2954,11 +3422,10 @@ instance Core.ToJSON DatasetList_DatasetsItem where
   toJSON DatasetList_DatasetsItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("datasetReference" Core..=)
-              Core.<$> datasetReference,
+          [ ("datasetReference" Core..=) Core.<$> datasetReference,
             ("friendlyName" Core..=) Core.<$> friendlyName,
             ("id" Core..=) Core.<$> id,
-            Core.Just ("kind" Core..= kind),
+            ("kind" Core..=) Core.<$> kind,
             ("labels" Core..=) Core.<$> labels,
             ("location" Core..=) Core.<$> location
           ]
@@ -2968,8 +3435,7 @@ instance Core.ToJSON DatasetList_DatasetsItem where
 --
 -- /See:/ 'newDatasetList_DatasetsItem_Labels' smart constructor.
 newtype DatasetList_DatasetsItem_Labels = DatasetList_DatasetsItem_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2981,28 +3447,24 @@ newDatasetList_DatasetsItem_Labels ::
 newDatasetList_DatasetsItem_Labels additional =
   DatasetList_DatasetsItem_Labels {additional = additional}
 
-instance
-  Core.FromJSON
-    DatasetList_DatasetsItem_Labels
-  where
+instance Core.FromJSON DatasetList_DatasetsItem_Labels where
   parseJSON =
     Core.withObject
       "DatasetList_DatasetsItem_Labels"
       ( \o ->
-          DatasetList_DatasetsItem_Labels
-            Core.<$> (Core.parseJSONObject o)
+          DatasetList_DatasetsItem_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DatasetList_DatasetsItem_Labels where
-  toJSON DatasetList_DatasetsItem_Labels {..} =
-    Core.toJSON additional
+  toJSON DatasetList_DatasetsItem_Labels {..} = Core.toJSON additional
 
+-- | Identifier for a dataset.
 --
 -- /See:/ 'newDatasetReference' smart constructor.
 data DatasetReference = DatasetReference
-  { -- | [Required] A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
+  { -- | Required. A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
     datasetId :: (Core.Maybe Core.Text),
-    -- | [Optional] The ID of the project containing this dataset.
+    -- | Optional. The ID of the project containing this dataset.
     projectId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3011,7 +3473,10 @@ data DatasetReference = DatasetReference
 newDatasetReference ::
   DatasetReference
 newDatasetReference =
-  DatasetReference {datasetId = Core.Nothing, projectId = Core.Nothing}
+  DatasetReference
+    { datasetId = Core.Nothing,
+      projectId = Core.Nothing
+    }
 
 instance Core.FromJSON DatasetReference where
   parseJSON =
@@ -3032,16 +3497,17 @@ instance Core.ToJSON DatasetReference where
           ]
       )
 
+-- | Properties for the destination table.
 --
 -- /See:/ 'newDestinationTableProperties' smart constructor.
 data DestinationTableProperties = DestinationTableProperties
-  { -- | [Optional] The description for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current description is provided, the job will fail.
+  { -- | Optional. The description for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current description is provided, the job will fail.
     description :: (Core.Maybe Core.Text),
-    -- | [Internal] This field is for Google internal use only.
+    -- | Internal use only.
     expirationTime :: (Core.Maybe Core.DateTime),
-    -- | [Optional] The friendly name for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current friendly name is provided, the job will fail.
+    -- | Optional. Friendly name for the destination table. If the table already exists, it should be same as the existing friendly name.
     friendlyName :: (Core.Maybe Core.Text),
-    -- | [Optional] The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.
+    -- | Optional. The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.
     labels :: (Core.Maybe DestinationTableProperties_Labels)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3080,12 +3546,11 @@ instance Core.ToJSON DestinationTableProperties where
           ]
       )
 
--- | [Optional] The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.
+-- | Optional. The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.
 --
 -- /See:/ 'newDestinationTableProperties_Labels' smart constructor.
 newtype DestinationTableProperties_Labels = DestinationTableProperties_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3097,10 +3562,7 @@ newDestinationTableProperties_Labels ::
 newDestinationTableProperties_Labels additional =
   DestinationTableProperties_Labels {additional = additional}
 
-instance
-  Core.FromJSON
-    DestinationTableProperties_Labels
-  where
+instance Core.FromJSON DestinationTableProperties_Labels where
   parseJSON =
     Core.withObject
       "DestinationTableProperties_Labels"
@@ -3109,12 +3571,83 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    DestinationTableProperties_Labels
-  where
+instance Core.ToJSON DestinationTableProperties_Labels where
   toJSON DestinationTableProperties_Labels {..} =
     Core.toJSON additional
+
+-- | Represents privacy policy associated with \"differential privacy\" method.
+--
+-- /See:/ 'newDifferentialPrivacyPolicy' smart constructor.
+data DifferentialPrivacyPolicy = DifferentialPrivacyPolicy
+  { -- | Optional. The total delta budget for all queries against the privacy-protected view. Each subscriber query against this view charges the amount of delta that is pre-defined by the contributor through the privacy policy delta/per/query field. If there is sufficient budget, then the subscriber query attempts to complete. It might still fail due to other reasons, in which case the charge is refunded. If there is insufficient budget the query is rejected. There might be multiple charge attempts if a single query references multiple views. In this case there must be sufficient budget for all charges or the query is rejected and charges are refunded in best effort. The budget does not have a refresh policy and can only be updated via ALTER VIEW or circumvented by creating a new view that can be queried with a fresh budget.
+    deltaBudget :: (Core.Maybe Core.Double),
+    -- | Output only. The delta budget remaining. If budget is exhausted, no more queries are allowed. Note that the budget for queries that are in progress is deducted before the query executes. If the query fails or is cancelled then the budget is refunded. In this case the amount of budget remaining can increase.
+    deltaBudgetRemaining :: (Core.Maybe Core.Double),
+    -- | Optional. The delta value that is used per query. Delta represents the probability that any row will fail to be epsilon differentially private. Indicates the risk associated with exposing aggregate rows in the result of a query.
+    deltaPerQuery :: (Core.Maybe Core.Double),
+    -- | Optional. The total epsilon budget for all queries against the privacy-protected view. Each subscriber query against this view charges the amount of epsilon they request in their query. If there is sufficient budget, then the subscriber query attempts to complete. It might still fail due to other reasons, in which case the charge is refunded. If there is insufficient budget the query is rejected. There might be multiple charge attempts if a single query references multiple views. In this case there must be sufficient budget for all charges or the query is rejected and charges are refunded in best effort. The budget does not have a refresh policy and can only be updated via ALTER VIEW or circumvented by creating a new view that can be queried with a fresh budget.
+    epsilonBudget :: (Core.Maybe Core.Double),
+    -- | Output only. The epsilon budget remaining. If budget is exhausted, no more queries are allowed. Note that the budget for queries that are in progress is deducted before the query executes. If the query fails or is cancelled then the budget is refunded. In this case the amount of budget remaining can increase.
+    epsilonBudgetRemaining :: (Core.Maybe Core.Double),
+    -- | Optional. The maximum epsilon value that a query can consume. If the subscriber specifies epsilon as a parameter in a SELECT query, it must be less than or equal to this value. The epsilon parameter controls the amount of noise that is added to the groups — a higher epsilon means less noise.
+    maxEpsilonPerQuery :: (Core.Maybe Core.Double),
+    -- | Optional. The maximum groups contributed value that is used per query. Represents the maximum number of groups to which each protected entity can contribute. Changing this value does not improve or worsen privacy. The best value for accuracy and utility depends on the query and data.
+    maxGroupsContributed :: (Core.Maybe Core.Int64),
+    -- | Optional. The privacy unit column associated with this policy. Differential privacy policies can only have one privacy unit column per data source object (table, view).
+    privacyUnitColumn :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DifferentialPrivacyPolicy' with the minimum fields required to make a request.
+newDifferentialPrivacyPolicy ::
+  DifferentialPrivacyPolicy
+newDifferentialPrivacyPolicy =
+  DifferentialPrivacyPolicy
+    { deltaBudget = Core.Nothing,
+      deltaBudgetRemaining = Core.Nothing,
+      deltaPerQuery = Core.Nothing,
+      epsilonBudget = Core.Nothing,
+      epsilonBudgetRemaining = Core.Nothing,
+      maxEpsilonPerQuery = Core.Nothing,
+      maxGroupsContributed = Core.Nothing,
+      privacyUnitColumn = Core.Nothing
+    }
+
+instance Core.FromJSON DifferentialPrivacyPolicy where
+  parseJSON =
+    Core.withObject
+      "DifferentialPrivacyPolicy"
+      ( \o ->
+          DifferentialPrivacyPolicy
+            Core.<$> (o Core..:? "deltaBudget")
+            Core.<*> (o Core..:? "deltaBudgetRemaining")
+            Core.<*> (o Core..:? "deltaPerQuery")
+            Core.<*> (o Core..:? "epsilonBudget")
+            Core.<*> (o Core..:? "epsilonBudgetRemaining")
+            Core.<*> (o Core..:? "maxEpsilonPerQuery")
+            Core.<*> ( o
+                         Core..:? "maxGroupsContributed"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "privacyUnitColumn")
+      )
+
+instance Core.ToJSON DifferentialPrivacyPolicy where
+  toJSON DifferentialPrivacyPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deltaBudget" Core..=) Core.<$> deltaBudget,
+            ("deltaBudgetRemaining" Core..=) Core.<$> deltaBudgetRemaining,
+            ("deltaPerQuery" Core..=) Core.<$> deltaPerQuery,
+            ("epsilonBudget" Core..=) Core.<$> epsilonBudget,
+            ("epsilonBudgetRemaining" Core..=) Core.<$> epsilonBudgetRemaining,
+            ("maxEpsilonPerQuery" Core..=) Core.<$> maxEpsilonPerQuery,
+            ("maxGroupsContributed" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxGroupsContributed,
+            ("privacyUnitColumn" Core..=) Core.<$> privacyUnitColumn
+          ]
+      )
 
 -- | Model evaluation metrics for dimensionality reduction models.
 --
@@ -3129,7 +3662,10 @@ newtype DimensionalityReductionMetrics = DimensionalityReductionMetrics
 newDimensionalityReductionMetrics ::
   DimensionalityReductionMetrics
 newDimensionalityReductionMetrics =
-  DimensionalityReductionMetrics {totalExplainedVarianceRatio = Core.Nothing}
+  DimensionalityReductionMetrics
+    { totalExplainedVarianceRatio =
+        Core.Nothing
+    }
 
 instance Core.FromJSON DimensionalityReductionMetrics where
   parseJSON =
@@ -3149,14 +3685,15 @@ instance Core.ToJSON DimensionalityReductionMetrics where
           ]
       )
 
+-- | Detailed statistics for DML statements
 --
 -- /See:/ 'newDmlStatistics' smart constructor.
 data DmlStatistics = DmlStatistics
-  { -- | Number of deleted Rows. populated by DML DELETE, MERGE and TRUNCATE statements.
+  { -- | Output only. Number of deleted Rows. populated by DML DELETE, MERGE and TRUNCATE statements.
     deletedRowCount :: (Core.Maybe Core.Int64),
-    -- | Number of inserted Rows. Populated by DML INSERT and MERGE statements.
+    -- | Output only. Number of inserted Rows. Populated by DML INSERT and MERGE statements
     insertedRowCount :: (Core.Maybe Core.Int64),
-    -- | Number of updated Rows. Populated by DML UPDATE and MERGE statements.
+    -- | Output only. Number of updated Rows. Populated by DML UPDATE and MERGE statements.
     updatedRowCount :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3177,26 +3714,23 @@ instance Core.FromJSON DmlStatistics where
       "DmlStatistics"
       ( \o ->
           DmlStatistics
-            Core.<$> ( o Core..:? "deletedRowCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "insertedRowCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "updatedRowCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deletedRowCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "insertedRowCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "updatedRowCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON DmlStatistics where
   toJSON DmlStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deletedRowCount" Core..=) Core.. Core.AsText
+          [ ("deletedRowCount" Core..=)
+              Core.. Core.AsText
               Core.<$> deletedRowCount,
-            ("insertedRowCount" Core..=) Core.. Core.AsText
+            ("insertedRowCount" Core..=)
+              Core.. Core.AsText
               Core.<$> insertedRowCount,
-            ("updatedRowCount" Core..=) Core.. Core.AsText
+            ("updatedRowCount" Core..=)
+              Core.. Core.AsText
               Core.<$> updatedRowCount
           ]
       )
@@ -3219,16 +3753,12 @@ instance Core.FromJSON DoubleCandidates where
   parseJSON =
     Core.withObject
       "DoubleCandidates"
-      ( \o ->
-          DoubleCandidates Core.<$> (o Core..:? "candidates")
-      )
+      (\o -> DoubleCandidates Core.<$> (o Core..:? "candidates"))
 
 instance Core.ToJSON DoubleCandidates where
   toJSON DoubleCandidates {..} =
     Core.object
-      ( Core.catMaybes
-          [("candidates" Core..=) Core.<$> candidates]
-      )
+      (Core.catMaybes [("candidates" Core..=) Core.<$> candidates])
 
 -- | Search space for a double hyperparameter.
 --
@@ -3245,7 +3775,10 @@ data DoubleHparamSearchSpace = DoubleHparamSearchSpace
 newDoubleHparamSearchSpace ::
   DoubleHparamSearchSpace
 newDoubleHparamSearchSpace =
-  DoubleHparamSearchSpace {candidates = Core.Nothing, range = Core.Nothing}
+  DoubleHparamSearchSpace
+    { candidates = Core.Nothing,
+      range = Core.Nothing
+    }
 
 instance Core.FromJSON DoubleHparamSearchSpace where
   parseJSON =
@@ -3280,7 +3813,8 @@ data DoubleRange = DoubleRange
 -- | Creates a value of 'DoubleRange' with the minimum fields required to make a request.
 newDoubleRange ::
   DoubleRange
-newDoubleRange = DoubleRange {max = Core.Nothing, min = Core.Nothing}
+newDoubleRange =
+  DoubleRange {max = Core.Nothing, min = Core.Nothing}
 
 instance Core.FromJSON DoubleRange where
   parseJSON =
@@ -3288,22 +3822,22 @@ instance Core.FromJSON DoubleRange where
       "DoubleRange"
       ( \o ->
           DoubleRange
-            Core.<$> (o Core..:? "max") Core.<*> (o Core..:? "min")
+            Core.<$> (o Core..:? "max")
+            Core.<*> (o Core..:? "min")
       )
 
 instance Core.ToJSON DoubleRange where
   toJSON DoubleRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("max" Core..=) Core.<$> max,
-            ("min" Core..=) Core.<$> min
-          ]
+          [("max" Core..=) Core.<$> max, ("min" Core..=) Core.<$> min]
       )
 
+-- | Configuration for Cloud KMS encryption settings.
 --
 -- /See:/ 'newEncryptionConfiguration' smart constructor.
 newtype EncryptionConfiguration = EncryptionConfiguration
-  { -- | [Optional] Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key.
+  { -- | Optional. Describes the Cloud KMS encryption key that will be used to protect destination BigQuery table. The BigQuery Service Account associated with your project requires access to this encryption key.
     kmsKeyName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3311,23 +3845,19 @@ newtype EncryptionConfiguration = EncryptionConfiguration
 -- | Creates a value of 'EncryptionConfiguration' with the minimum fields required to make a request.
 newEncryptionConfiguration ::
   EncryptionConfiguration
-newEncryptionConfiguration = EncryptionConfiguration {kmsKeyName = Core.Nothing}
+newEncryptionConfiguration =
+  EncryptionConfiguration {kmsKeyName = Core.Nothing}
 
 instance Core.FromJSON EncryptionConfiguration where
   parseJSON =
     Core.withObject
       "EncryptionConfiguration"
-      ( \o ->
-          EncryptionConfiguration
-            Core.<$> (o Core..:? "kmsKeyName")
-      )
+      (\o -> EncryptionConfiguration Core.<$> (o Core..:? "kmsKeyName"))
 
 instance Core.ToJSON EncryptionConfiguration where
   toJSON EncryptionConfiguration {..} =
     Core.object
-      ( Core.catMaybes
-          [("kmsKeyName" Core..=) Core.<$> kmsKeyName]
-      )
+      (Core.catMaybes [("kmsKeyName" Core..=) Core.<$> kmsKeyName])
 
 -- | A single entry in the confusion matrix.
 --
@@ -3343,7 +3873,8 @@ data Entry = Entry
 -- | Creates a value of 'Entry' with the minimum fields required to make a request.
 newEntry ::
   Entry
-newEntry = Entry {itemCount = Core.Nothing, predictedLabel = Core.Nothing}
+newEntry =
+  Entry {itemCount = Core.Nothing, predictedLabel = Core.Nothing}
 
 instance Core.FromJSON Entry where
   parseJSON =
@@ -3351,9 +3882,7 @@ instance Core.FromJSON Entry where
       "Entry"
       ( \o ->
           Entry
-            Core.<$> ( o Core..:? "itemCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "itemCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "predictedLabel")
       )
 
@@ -3361,12 +3890,12 @@ instance Core.ToJSON Entry where
   toJSON Entry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("itemCount" Core..=) Core.. Core.AsText
-              Core.<$> itemCount,
+          [ ("itemCount" Core..=) Core.. Core.AsText Core.<$> itemCount,
             ("predictedLabel" Core..=) Core.<$> predictedLabel
           ]
       )
 
+-- | Error details.
 --
 -- /See:/ 'newErrorProto' smart constructor.
 data ErrorProto = ErrorProto
@@ -3473,23 +4002,24 @@ instance Core.ToJSON EvaluationMetrics where
               Core.<$> arimaForecastingMetrics,
             ("binaryClassificationMetrics" Core..=)
               Core.<$> binaryClassificationMetrics,
-            ("clusteringMetrics" Core..=)
-              Core.<$> clusteringMetrics,
+            ("clusteringMetrics" Core..=) Core.<$> clusteringMetrics,
             ("dimensionalityReductionMetrics" Core..=)
               Core.<$> dimensionalityReductionMetrics,
             ("multiClassClassificationMetrics" Core..=)
               Core.<$> multiClassClassificationMetrics,
             ("rankingMetrics" Core..=) Core.<$> rankingMetrics,
-            ("regressionMetrics" Core..=)
-              Core.<$> regressionMetrics
+            ("regressionMetrics" Core..=) Core.<$> regressionMetrics
           ]
       )
 
+-- | A single stage of query execution.
 --
 -- /See:/ 'newExplainQueryStage' smart constructor.
 data ExplainQueryStage = ExplainQueryStage
   { -- | Number of parallel input segments completed.
     completedParallelInputs :: (Core.Maybe Core.Int64),
+    -- | Output only. Compute mode for this stage.
+    computeMode :: (Core.Maybe ExplainQueryStage_ComputeMode),
     -- | Milliseconds the average shard spent on CPU-bound tasks.
     computeMsAvg :: (Core.Maybe Core.Int64),
     -- | Milliseconds the slowest shard spent on CPU-bound tasks.
@@ -3498,15 +4028,15 @@ data ExplainQueryStage = ExplainQueryStage
     computeRatioAvg :: (Core.Maybe Core.Double),
     -- | Relative amount of time the slowest shard spent on CPU-bound tasks.
     computeRatioMax :: (Core.Maybe Core.Double),
-    -- | Stage end time represented as milliseconds since epoch.
+    -- | Stage end time represented as milliseconds since the epoch.
     endMs :: (Core.Maybe Core.Int64),
-    -- | Unique ID for stage within plan.
+    -- | Unique ID for the stage within the plan.
     id :: (Core.Maybe Core.Int64),
     -- | IDs for stages that are inputs to this stage.
     inputStages :: (Core.Maybe [Core.Int64]),
-    -- | Human-readable name for stage.
+    -- | Human-readable name for the stage.
     name :: (Core.Maybe Core.Text),
-    -- | Number of parallel input segments to be processed.
+    -- | Number of parallel input segments to be processed
     parallelInputs :: (Core.Maybe Core.Int64),
     -- | Milliseconds the average shard spent reading input.
     readMsAvg :: (Core.Maybe Core.Int64),
@@ -3526,9 +4056,9 @@ data ExplainQueryStage = ExplainQueryStage
     shuffleOutputBytesSpilled :: (Core.Maybe Core.Int64),
     -- | Slot-milliseconds used by the stage.
     slotMs :: (Core.Maybe Core.Int64),
-    -- | Stage start time represented as milliseconds since epoch.
+    -- | Stage start time represented as milliseconds since the epoch.
     startMs :: (Core.Maybe Core.Int64),
-    -- | Current status for the stage.
+    -- | Current status for this stage.
     status :: (Core.Maybe Core.Text),
     -- | List of operations within the stage in dependency order (approximately chronological).
     steps :: (Core.Maybe [ExplainQueryStep]),
@@ -3557,6 +4087,7 @@ newExplainQueryStage ::
 newExplainQueryStage =
   ExplainQueryStage
     { completedParallelInputs = Core.Nothing,
+      computeMode = Core.Nothing,
       computeMsAvg = Core.Nothing,
       computeMsMax = Core.Nothing,
       computeRatioAvg = Core.Nothing,
@@ -3594,70 +4125,47 @@ instance Core.FromJSON ExplainQueryStage where
       "ExplainQueryStage"
       ( \o ->
           ExplainQueryStage
-            Core.<$> ( o Core..:? "completedParallelInputs"
+            Core.<$> ( o
+                         Core..:? "completedParallelInputs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "computeMsAvg"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "computeMsMax"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "computeMode")
+            Core.<*> (o Core..:? "computeMsAvg" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "computeMsMax" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "computeRatioAvg")
             Core.<*> (o Core..:? "computeRatioMax")
-            Core.<*> ( o Core..:? "endMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "endMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> ( o Core..:? "inputStages"
+            Core.<*> ( o
+                         Core..:? "inputStages"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "parallelInputs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "readMsAvg"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "readMsMax"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "parallelInputs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "readMsAvg" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "readMsMax" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "readRatioAvg")
             Core.<*> (o Core..:? "readRatioMax")
-            Core.<*> ( o Core..:? "recordsRead"
+            Core.<*> (o Core..:? "recordsRead" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "recordsWritten" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "shuffleOutputBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "recordsWritten"
+            Core.<*> ( o
+                         Core..:? "shuffleOutputBytesSpilled"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "shuffleOutputBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "shuffleOutputBytesSpilled"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "slotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "startMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "slotMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "startMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "steps")
-            Core.<*> ( o Core..:? "waitMsAvg"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "waitMsMax"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "waitMsAvg" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "waitMsMax" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "waitRatioAvg")
             Core.<*> (o Core..:? "waitRatioMax")
-            Core.<*> ( o Core..:? "writeMsAvg"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "writeMsMax"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "writeMsAvg" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "writeMsMax" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "writeRatioAvg")
             Core.<*> (o Core..:? "writeRatioMax")
       )
@@ -3669,61 +4177,56 @@ instance Core.ToJSON ExplainQueryStage where
           [ ("completedParallelInputs" Core..=)
               Core.. Core.AsText
               Core.<$> completedParallelInputs,
-            ("computeMsAvg" Core..=) Core.. Core.AsText
-              Core.<$> computeMsAvg,
-            ("computeMsMax" Core..=) Core.. Core.AsText
-              Core.<$> computeMsMax,
+            ("computeMode" Core..=) Core.<$> computeMode,
+            ("computeMsAvg" Core..=) Core.. Core.AsText Core.<$> computeMsAvg,
+            ("computeMsMax" Core..=) Core.. Core.AsText Core.<$> computeMsMax,
             ("computeRatioAvg" Core..=) Core.<$> computeRatioAvg,
             ("computeRatioMax" Core..=) Core.<$> computeRatioMax,
             ("endMs" Core..=) Core.. Core.AsText Core.<$> endMs,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
-            ("inputStages" Core..=) Core.. Core.fmap Core.AsText
+            ("inputStages" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> inputStages,
             ("name" Core..=) Core.<$> name,
-            ("parallelInputs" Core..=) Core.. Core.AsText
+            ("parallelInputs" Core..=)
+              Core.. Core.AsText
               Core.<$> parallelInputs,
-            ("readMsAvg" Core..=) Core.. Core.AsText
-              Core.<$> readMsAvg,
-            ("readMsMax" Core..=) Core.. Core.AsText
-              Core.<$> readMsMax,
+            ("readMsAvg" Core..=) Core.. Core.AsText Core.<$> readMsAvg,
+            ("readMsMax" Core..=) Core.. Core.AsText Core.<$> readMsMax,
             ("readRatioAvg" Core..=) Core.<$> readRatioAvg,
             ("readRatioMax" Core..=) Core.<$> readRatioMax,
-            ("recordsRead" Core..=) Core.. Core.AsText
-              Core.<$> recordsRead,
-            ("recordsWritten" Core..=) Core.. Core.AsText
+            ("recordsRead" Core..=) Core.. Core.AsText Core.<$> recordsRead,
+            ("recordsWritten" Core..=)
+              Core.. Core.AsText
               Core.<$> recordsWritten,
-            ("shuffleOutputBytes" Core..=) Core.. Core.AsText
+            ("shuffleOutputBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> shuffleOutputBytes,
             ("shuffleOutputBytesSpilled" Core..=)
               Core.. Core.AsText
               Core.<$> shuffleOutputBytesSpilled,
-            ("slotMs" Core..=) Core.. Core.AsText
-              Core.<$> slotMs,
-            ("startMs" Core..=) Core.. Core.AsText
-              Core.<$> startMs,
+            ("slotMs" Core..=) Core.. Core.AsText Core.<$> slotMs,
+            ("startMs" Core..=) Core.. Core.AsText Core.<$> startMs,
             ("status" Core..=) Core.<$> status,
             ("steps" Core..=) Core.<$> steps,
-            ("waitMsAvg" Core..=) Core.. Core.AsText
-              Core.<$> waitMsAvg,
-            ("waitMsMax" Core..=) Core.. Core.AsText
-              Core.<$> waitMsMax,
+            ("waitMsAvg" Core..=) Core.. Core.AsText Core.<$> waitMsAvg,
+            ("waitMsMax" Core..=) Core.. Core.AsText Core.<$> waitMsMax,
             ("waitRatioAvg" Core..=) Core.<$> waitRatioAvg,
             ("waitRatioMax" Core..=) Core.<$> waitRatioMax,
-            ("writeMsAvg" Core..=) Core.. Core.AsText
-              Core.<$> writeMsAvg,
-            ("writeMsMax" Core..=) Core.. Core.AsText
-              Core.<$> writeMsMax,
+            ("writeMsAvg" Core..=) Core.. Core.AsText Core.<$> writeMsAvg,
+            ("writeMsMax" Core..=) Core.. Core.AsText Core.<$> writeMsMax,
             ("writeRatioAvg" Core..=) Core.<$> writeRatioAvg,
             ("writeRatioMax" Core..=) Core.<$> writeRatioMax
           ]
       )
 
+-- | An operation within a stage.
 --
 -- /See:/ 'newExplainQueryStep' smart constructor.
 data ExplainQueryStep = ExplainQueryStep
   { -- | Machine-readable operation type.
     kind :: (Core.Maybe Core.Text),
-    -- | Human-readable stage descriptions.
+    -- | Human-readable description of the step(s).
     substeps :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3740,7 +4243,8 @@ instance Core.FromJSON ExplainQueryStep where
       "ExplainQueryStep"
       ( \o ->
           ExplainQueryStep
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "substeps")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "substeps")
       )
 
 instance Core.ToJSON ExplainQueryStep where
@@ -3767,7 +4271,10 @@ data Explanation = Explanation
 newExplanation ::
   Explanation
 newExplanation =
-  Explanation {attribution = Core.Nothing, featureName = Core.Nothing}
+  Explanation
+    { attribution = Core.Nothing,
+      featureName = Core.Nothing
+    }
 
 instance Core.FromJSON Explanation where
   parseJSON =
@@ -3785,6 +4292,45 @@ instance Core.ToJSON Explanation where
       ( Core.catMaybes
           [ ("attribution" Core..=) Core.<$> attribution,
             ("featureName" Core..=) Core.<$> featureName
+          ]
+      )
+
+-- | Statistics for the EXPORT DATA statement as part of Query Job. EXTRACT JOB statistics are populated in JobStatistics4.
+--
+-- /See:/ 'newExportDataStatistics' smart constructor.
+data ExportDataStatistics = ExportDataStatistics
+  { -- | Number of destination files generated in case of EXPORT DATA statement only.
+    fileCount :: (Core.Maybe Core.Int64),
+    -- | [Alpha] Number of destination rows generated in case of EXPORT DATA statement only.
+    rowCount :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExportDataStatistics' with the minimum fields required to make a request.
+newExportDataStatistics ::
+  ExportDataStatistics
+newExportDataStatistics =
+  ExportDataStatistics
+    { fileCount = Core.Nothing,
+      rowCount = Core.Nothing
+    }
+
+instance Core.FromJSON ExportDataStatistics where
+  parseJSON =
+    Core.withObject
+      "ExportDataStatistics"
+      ( \o ->
+          ExportDataStatistics
+            Core.<$> (o Core..:? "fileCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rowCount" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ExportDataStatistics where
+  toJSON ExportDataStatistics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fileCount" Core..=) Core.. Core.AsText Core.<$> fileCount,
+            ("rowCount" Core..=) Core.. Core.AsText Core.<$> rowCount
           ]
       )
 
@@ -3838,46 +4384,205 @@ instance Core.ToJSON Expr where
           ]
       )
 
+-- | Options defining open source compatible datasets living in the BigQuery catalog. Contains metadata of open source database, schema, or namespace represented by the current dataset.
+--
+-- /See:/ 'newExternalCatalogDatasetOptions' smart constructor.
+data ExternalCatalogDatasetOptions = ExternalCatalogDatasetOptions
+  { -- | Optional. The storage location URI for all tables in the dataset. Equivalent to hive metastore\'s database locationUri. Maximum length of 1024 characters.
+    defaultStorageLocationUri :: (Core.Maybe Core.Text),
+    -- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2MiB.
+    parameters :: (Core.Maybe ExternalCatalogDatasetOptions_Parameters)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalCatalogDatasetOptions' with the minimum fields required to make a request.
+newExternalCatalogDatasetOptions ::
+  ExternalCatalogDatasetOptions
+newExternalCatalogDatasetOptions =
+  ExternalCatalogDatasetOptions
+    { defaultStorageLocationUri =
+        Core.Nothing,
+      parameters = Core.Nothing
+    }
+
+instance Core.FromJSON ExternalCatalogDatasetOptions where
+  parseJSON =
+    Core.withObject
+      "ExternalCatalogDatasetOptions"
+      ( \o ->
+          ExternalCatalogDatasetOptions
+            Core.<$> (o Core..:? "defaultStorageLocationUri")
+            Core.<*> (o Core..:? "parameters")
+      )
+
+instance Core.ToJSON ExternalCatalogDatasetOptions where
+  toJSON ExternalCatalogDatasetOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("defaultStorageLocationUri" Core..=)
+              Core.<$> defaultStorageLocationUri,
+            ("parameters" Core..=) Core.<$> parameters
+          ]
+      )
+
+-- | Optional. A map of key value pairs defining the parameters and properties of the open source schema. Maximum size of 2MiB.
+--
+-- /See:/ 'newExternalCatalogDatasetOptions_Parameters' smart constructor.
+newtype ExternalCatalogDatasetOptions_Parameters = ExternalCatalogDatasetOptions_Parameters
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalCatalogDatasetOptions_Parameters' with the minimum fields required to make a request.
+newExternalCatalogDatasetOptions_Parameters ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  ExternalCatalogDatasetOptions_Parameters
+newExternalCatalogDatasetOptions_Parameters additional =
+  ExternalCatalogDatasetOptions_Parameters {additional = additional}
+
+instance Core.FromJSON ExternalCatalogDatasetOptions_Parameters where
+  parseJSON =
+    Core.withObject
+      "ExternalCatalogDatasetOptions_Parameters"
+      ( \o ->
+          ExternalCatalogDatasetOptions_Parameters
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ExternalCatalogDatasetOptions_Parameters where
+  toJSON ExternalCatalogDatasetOptions_Parameters {..} =
+    Core.toJSON additional
+
+-- | Metadata about open source compatible table. The fields contained in these options correspond to Hive metastore\'s table-level properties.
+--
+-- /See:/ 'newExternalCatalogTableOptions' smart constructor.
+data ExternalCatalogTableOptions = ExternalCatalogTableOptions
+  { -- | Optional. A connection ID that specifies the credentials to be used to read external storage, such as Azure Blob, Cloud Storage, or Amazon S3. This connection is needed to read the open source table from BigQuery. The connection_id format must be either @..@ or @projects\/\/locations\/\/connections\/@.
+    connectionId :: (Core.Maybe Core.Text),
+    -- | Optional. A map of the key-value pairs defining the parameters and properties of the open source table. Corresponds with Hive metastore table parameters. Maximum size of 4MiB.
+    parameters :: (Core.Maybe ExternalCatalogTableOptions_Parameters),
+    -- | Optional. A storage descriptor containing information about the physical storage of this table.
+    storageDescriptor :: (Core.Maybe StorageDescriptor)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalCatalogTableOptions' with the minimum fields required to make a request.
+newExternalCatalogTableOptions ::
+  ExternalCatalogTableOptions
+newExternalCatalogTableOptions =
+  ExternalCatalogTableOptions
+    { connectionId = Core.Nothing,
+      parameters = Core.Nothing,
+      storageDescriptor = Core.Nothing
+    }
+
+instance Core.FromJSON ExternalCatalogTableOptions where
+  parseJSON =
+    Core.withObject
+      "ExternalCatalogTableOptions"
+      ( \o ->
+          ExternalCatalogTableOptions
+            Core.<$> (o Core..:? "connectionId")
+            Core.<*> (o Core..:? "parameters")
+            Core.<*> (o Core..:? "storageDescriptor")
+      )
+
+instance Core.ToJSON ExternalCatalogTableOptions where
+  toJSON ExternalCatalogTableOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connectionId" Core..=) Core.<$> connectionId,
+            ("parameters" Core..=) Core.<$> parameters,
+            ("storageDescriptor" Core..=) Core.<$> storageDescriptor
+          ]
+      )
+
+-- | Optional. A map of the key-value pairs defining the parameters and properties of the open source table. Corresponds with Hive metastore table parameters. Maximum size of 4MiB.
+--
+-- /See:/ 'newExternalCatalogTableOptions_Parameters' smart constructor.
+newtype ExternalCatalogTableOptions_Parameters = ExternalCatalogTableOptions_Parameters
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalCatalogTableOptions_Parameters' with the minimum fields required to make a request.
+newExternalCatalogTableOptions_Parameters ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  ExternalCatalogTableOptions_Parameters
+newExternalCatalogTableOptions_Parameters additional =
+  ExternalCatalogTableOptions_Parameters {additional = additional}
+
+instance Core.FromJSON ExternalCatalogTableOptions_Parameters where
+  parseJSON =
+    Core.withObject
+      "ExternalCatalogTableOptions_Parameters"
+      ( \o ->
+          ExternalCatalogTableOptions_Parameters
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ExternalCatalogTableOptions_Parameters where
+  toJSON ExternalCatalogTableOptions_Parameters {..} =
+    Core.toJSON additional
+
 --
 -- /See:/ 'newExternalDataConfiguration' smart constructor.
 data ExternalDataConfiguration = ExternalDataConfiguration
   { -- | Try to detect schema and format options automatically. Any option specified explicitly will be honored.
     autodetect :: (Core.Maybe Core.Bool),
-    -- | Additional properties to set if sourceFormat is set to Avro.
+    -- | Optional. Additional properties to set if sourceFormat is set to AVRO.
     avroOptions :: (Core.Maybe AvroOptions),
-    -- | [Optional] Additional options if sourceFormat is set to BIGTABLE.
+    -- | Optional. Additional options if sourceFormat is set to BIGTABLE.
     bigtableOptions :: (Core.Maybe BigtableOptions),
-    -- | [Optional] The compression type of the data source. Possible values include GZIP and NONE. The default value is NONE. This setting is ignored for Google Cloud Bigtable, Google Cloud Datastore backups and Avro formats.
+    -- | Optional. The compression type of the data source. Possible values include GZIP and NONE. The default value is NONE. This setting is ignored for Google Cloud Bigtable, Google Cloud Datastore backups, Avro, ORC and Parquet formats. An empty string is an invalid value.
     compression :: (Core.Maybe Core.Text),
-    -- | [Optional, Trusted Tester] Connection for external data source.
+    -- | Optional. The connection specifying the credentials to be used to read external storage, such as Azure Blob, Cloud Storage, or S3. The connection_id can have the form @{project_id}.{location_id};{connection_id}@ or @projects\/{project_id}\/locations\/{location_id}\/connections\/{connection_id}@.
     connectionId :: (Core.Maybe Core.Text),
-    -- | Additional properties to set if sourceFormat is set to CSV.
+    -- | Optional. Additional properties to set if sourceFormat is set to CSV.
     csvOptions :: (Core.Maybe CsvOptions),
-    -- | [Optional] Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: (38,9) -> NUMERIC; (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); (76,38) -> BIGNUMERIC; (77,38) -> BIGNUMERIC (error if value exeeds supported range). This field cannot contain duplicate types. The order of the types
+    -- | Optional. Format used to parse DATE values. Supports C-style and SQL-style values.
+    dateFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Format used to parse DATETIME values. Supports C-style and SQL-style values.
+    datetimeFormat :: (Core.Maybe Core.Text),
+    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exceeds supported range). This field cannot contain duplicate types. The order of the types
     -- in this field is ignored. For example, [\"BIGNUMERIC\", \"NUMERIC\"] is the same as [\"NUMERIC\", \"BIGNUMERIC\"] and NUMERIC always takes precedence over BIGNUMERIC. Defaults to [\"NUMERIC\", \"STRING\"] for ORC and [\"NUMERIC\"] for the other file formats.
-    decimalTargetTypes :: (Core.Maybe [Core.Text]),
-    -- | [Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS.
+    decimalTargetTypes :: (Core.Maybe [ExternalDataConfiguration_DecimalTargetTypesItem]),
+    -- | Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default source URIs are expanded against the underlying storage. Other options include specifying manifest files. Only applicable to object storage systems.
+    fileSetSpecType :: (Core.Maybe ExternalDataConfiguration_FileSetSpecType),
+    -- | Optional. Additional options if sourceFormat is set to GOOGLE_SHEETS.
     googleSheetsOptions :: (Core.Maybe GoogleSheetsOptions),
-    -- | [Optional] Options to configure hive partitioning support.
+    -- | Optional. When set, configures hive partitioning support. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error, as will providing an invalid specification.
     hivePartitioningOptions :: (Core.Maybe HivePartitioningOptions),
-    -- | [Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don\'t match any column names Google Cloud Bigtable: This setting is ignored. Google Cloud Datastore backups: This setting is ignored. Avro: This setting is ignored.
+    -- | Optional. Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don\'t match any column names Google Cloud Bigtable: This setting is ignored. Google Cloud Datastore backups: This setting is ignored. Avro: This setting is ignored. ORC: This setting is ignored. Parquet: This setting is ignored.
     ignoreUnknownValues :: (Core.Maybe Core.Bool),
-    -- | [Optional] The maximum number of bad records that BigQuery can ignore when reading data. If the number of bad records exceeds this value, an invalid error is returned in the job result. This is only valid for CSV, JSON, and Google Sheets. The default value is 0, which requires that all records are valid. This setting is ignored for Google Cloud Bigtable, Google Cloud Datastore backups and Avro formats.
+    -- | Optional. Load option to be used together with source/format newline-delimited JSON to indicate that a variant of JSON is being loaded. To load newline-delimited GeoJSON, specify GEOJSON (and source/format must be set to NEWLINE/DELIMITED/JSON).
+    jsonExtension :: (Core.Maybe ExternalDataConfiguration_JsonExtension),
+    -- | Optional. Additional properties to set if sourceFormat is set to JSON.
+    jsonOptions :: (Core.Maybe JsonOptions),
+    -- | Optional. The maximum number of bad records that BigQuery can ignore when reading data. If the number of bad records exceeds this value, an invalid error is returned in the job result. The default value is 0, which requires that all records are valid. This setting is ignored for Google Cloud Bigtable, Google Cloud Datastore backups, Avro, ORC and Parquet formats.
     maxBadRecords :: (Core.Maybe Core.Int32),
-    -- | [Optional] Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
-    metadataCacheMode :: (Core.Maybe Core.Text),
-    -- | ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source/uris. If ObjectMetadata is set, source/format should be omitted. Currently SIMPLE is the only supported Object Metadata type.
-    objectMetadata :: (Core.Maybe Core.Text),
-    -- | Additional properties to set if sourceFormat is set to Parquet.
+    -- | Optional. Metadata Cache Mode for the table. Set this to enable caching of metadata from external data source.
+    metadataCacheMode :: (Core.Maybe ExternalDataConfiguration_MetadataCacheMode),
+    -- | Optional. ObjectMetadata is used to create Object Tables. Object Tables contain a listing of objects (with their metadata) found at the source/uris. If ObjectMetadata is set, source/format should be omitted. Currently SIMPLE is the only supported Object Metadata type.
+    objectMetadata :: (Core.Maybe ExternalDataConfiguration_ObjectMetadata),
+    -- | Optional. Additional properties to set if sourceFormat is set to PARQUET.
     parquetOptions :: (Core.Maybe ParquetOptions),
-    -- | [Optional] Provide a referencing file with the expected table schema. Enabled for the format: AVRO, PARQUET, ORC.
+    -- | Optional. When creating an external table, the user can provide a reference file with the table schema. This is enabled for the following formats: AVRO, PARQUET, ORC.
     referenceFileSchemaUri :: (Core.Maybe Core.Text),
-    -- | [Optional] The schema for the data. Schema is required for CSV and JSON formats. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore backups, and Avro formats.
+    -- | Optional. The schema for the data. Schema is required for CSV and JSON formats if autodetect is not on. Schema is disallowed for Google Cloud Bigtable, Cloud Datastore backups, Avro, ORC and Parquet formats.
     schema :: (Core.Maybe TableSchema),
-    -- | [Required] The data format. For CSV files, specify \"CSV\". For Google sheets, specify \"GOOGLE/SHEETS\". For newline-delimited JSON, specify \"NEWLINE/DELIMITED/JSON\". For Avro files, specify \"AVRO\". For Google Cloud Datastore backups, specify \"DATASTORE/BACKUP\". [Beta] For Google Cloud Bigtable, specify \"BIGTABLE\".
+    -- | [Required] The data format. For CSV files, specify \"CSV\". For Google sheets, specify \"GOOGLE/SHEETS\". For newline-delimited JSON, specify \"NEWLINE/DELIMITED/JSON\". For Avro files, specify \"AVRO\". For Google Cloud Datastore backups, specify \"DATASTORE/BACKUP\". For Apache Iceberg tables, specify \"ICEBERG\". For ORC files, specify \"ORC\". For Parquet files, specify \"PARQUET\". [Beta] For Google Cloud Bigtable, specify \"BIGTABLE\".
     sourceFormat :: (Core.Maybe Core.Text),
     -- | [Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one \'/\' wildcard character and it must come after the \'bucket\' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified. Also, the \'/\' wildcard character is not allowed.
-    sourceUris :: (Core.Maybe [Core.Text])
+    sourceUris :: (Core.Maybe [Core.Text]),
+    -- | Optional. Format used to parse TIME values. Supports C-style and SQL-style values.
+    timeFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Time zone used when parsing timestamp values that do not have specific time zone information (e.g. 2024-04-20 12:34:56). The expected format is a IANA timezone string (e.g. America\/Los_Angeles).
+    timeZone :: (Core.Maybe Core.Text),
+    -- | Optional. Format used to parse TIMESTAMP values. Supports C-style and SQL-style values.
+    timestampFormat :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3892,10 +4597,15 @@ newExternalDataConfiguration =
       compression = Core.Nothing,
       connectionId = Core.Nothing,
       csvOptions = Core.Nothing,
+      dateFormat = Core.Nothing,
+      datetimeFormat = Core.Nothing,
       decimalTargetTypes = Core.Nothing,
+      fileSetSpecType = Core.Nothing,
       googleSheetsOptions = Core.Nothing,
       hivePartitioningOptions = Core.Nothing,
       ignoreUnknownValues = Core.Nothing,
+      jsonExtension = Core.Nothing,
+      jsonOptions = Core.Nothing,
       maxBadRecords = Core.Nothing,
       metadataCacheMode = Core.Nothing,
       objectMetadata = Core.Nothing,
@@ -3903,7 +4613,10 @@ newExternalDataConfiguration =
       referenceFileSchemaUri = Core.Nothing,
       schema = Core.Nothing,
       sourceFormat = Core.Nothing,
-      sourceUris = Core.Nothing
+      sourceUris = Core.Nothing,
+      timeFormat = Core.Nothing,
+      timeZone = Core.Nothing,
+      timestampFormat = Core.Nothing
     }
 
 instance Core.FromJSON ExternalDataConfiguration where
@@ -3918,10 +4631,15 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "compression")
             Core.<*> (o Core..:? "connectionId")
             Core.<*> (o Core..:? "csvOptions")
+            Core.<*> (o Core..:? "dateFormat")
+            Core.<*> (o Core..:? "datetimeFormat")
             Core.<*> (o Core..:? "decimalTargetTypes")
+            Core.<*> (o Core..:? "fileSetSpecType")
             Core.<*> (o Core..:? "googleSheetsOptions")
             Core.<*> (o Core..:? "hivePartitioningOptions")
             Core.<*> (o Core..:? "ignoreUnknownValues")
+            Core.<*> (o Core..:? "jsonExtension")
+            Core.<*> (o Core..:? "jsonOptions")
             Core.<*> (o Core..:? "maxBadRecords")
             Core.<*> (o Core..:? "metadataCacheMode")
             Core.<*> (o Core..:? "objectMetadata")
@@ -3930,6 +4648,9 @@ instance Core.FromJSON ExternalDataConfiguration where
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sourceFormat")
             Core.<*> (o Core..:? "sourceUris")
+            Core.<*> (o Core..:? "timeFormat")
+            Core.<*> (o Core..:? "timeZone")
+            Core.<*> (o Core..:? "timestampFormat")
       )
 
 instance Core.ToJSON ExternalDataConfiguration where
@@ -3942,24 +4663,124 @@ instance Core.ToJSON ExternalDataConfiguration where
             ("compression" Core..=) Core.<$> compression,
             ("connectionId" Core..=) Core.<$> connectionId,
             ("csvOptions" Core..=) Core.<$> csvOptions,
-            ("decimalTargetTypes" Core..=)
-              Core.<$> decimalTargetTypes,
-            ("googleSheetsOptions" Core..=)
-              Core.<$> googleSheetsOptions,
+            ("dateFormat" Core..=) Core.<$> dateFormat,
+            ("datetimeFormat" Core..=) Core.<$> datetimeFormat,
+            ("decimalTargetTypes" Core..=) Core.<$> decimalTargetTypes,
+            ("fileSetSpecType" Core..=) Core.<$> fileSetSpecType,
+            ("googleSheetsOptions" Core..=) Core.<$> googleSheetsOptions,
             ("hivePartitioningOptions" Core..=)
               Core.<$> hivePartitioningOptions,
-            ("ignoreUnknownValues" Core..=)
-              Core.<$> ignoreUnknownValues,
+            ("ignoreUnknownValues" Core..=) Core.<$> ignoreUnknownValues,
+            ("jsonExtension" Core..=) Core.<$> jsonExtension,
+            ("jsonOptions" Core..=) Core.<$> jsonOptions,
             ("maxBadRecords" Core..=) Core.<$> maxBadRecords,
-            ("metadataCacheMode" Core..=)
-              Core.<$> metadataCacheMode,
+            ("metadataCacheMode" Core..=) Core.<$> metadataCacheMode,
             ("objectMetadata" Core..=) Core.<$> objectMetadata,
             ("parquetOptions" Core..=) Core.<$> parquetOptions,
-            ("referenceFileSchemaUri" Core..=)
-              Core.<$> referenceFileSchemaUri,
+            ("referenceFileSchemaUri" Core..=) Core.<$> referenceFileSchemaUri,
             ("schema" Core..=) Core.<$> schema,
             ("sourceFormat" Core..=) Core.<$> sourceFormat,
-            ("sourceUris" Core..=) Core.<$> sourceUris
+            ("sourceUris" Core..=) Core.<$> sourceUris,
+            ("timeFormat" Core..=) Core.<$> timeFormat,
+            ("timeZone" Core..=) Core.<$> timeZone,
+            ("timestampFormat" Core..=) Core.<$> timestampFormat
+          ]
+      )
+
+-- | Configures the access a dataset defined in an external metadata storage.
+--
+-- /See:/ 'newExternalDatasetReference' smart constructor.
+data ExternalDatasetReference = ExternalDatasetReference
+  { -- | Required. The connection id that is used to access the external/source. Format: projects\/{project/id}\/locations\/{location/id}\/connections\/{connection/id}
+    connection :: (Core.Maybe Core.Text),
+    -- | Required. External source that backs this dataset.
+    externalSource :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalDatasetReference' with the minimum fields required to make a request.
+newExternalDatasetReference ::
+  ExternalDatasetReference
+newExternalDatasetReference =
+  ExternalDatasetReference
+    { connection = Core.Nothing,
+      externalSource = Core.Nothing
+    }
+
+instance Core.FromJSON ExternalDatasetReference where
+  parseJSON =
+    Core.withObject
+      "ExternalDatasetReference"
+      ( \o ->
+          ExternalDatasetReference
+            Core.<$> (o Core..:? "connection")
+            Core.<*> (o Core..:? "externalSource")
+      )
+
+instance Core.ToJSON ExternalDatasetReference where
+  toJSON ExternalDatasetReference {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connection" Core..=) Core.<$> connection,
+            ("externalSource" Core..=) Core.<$> externalSource
+          ]
+      )
+
+-- | The external service cost is a portion of the total cost, these costs are not additive with total/bytes/billed. Moreover, this field only track external service costs that will show up as BigQuery costs (e.g. training BigQuery ML job with google cloud CAIP or Automl Tables services), not other costs which may be accrued by running the query (e.g. reading from Bigtable or Cloud Storage). The external service costs with different billing sku (e.g. CAIP job is charged based on VM usage) are converted to BigQuery billed/bytes and slot/ms with equivalent amount of US dollars. Services may not directly correlate to these metrics, but these are the equivalents for billing purposes. Output only.
+--
+-- /See:/ 'newExternalServiceCost' smart constructor.
+data ExternalServiceCost = ExternalServiceCost
+  { -- | External service cost in terms of bigquery bytes billed.
+    bytesBilled :: (Core.Maybe Core.Int64),
+    -- | External service cost in terms of bigquery bytes processed.
+    bytesProcessed :: (Core.Maybe Core.Int64),
+    -- | External service name.
+    externalService :: (Core.Maybe Core.Text),
+    -- | Non-preemptable reserved slots used for external job. For example, reserved slots for Cloua AI Platform job are the VM usages converted to BigQuery slot with equivalent mount of price.
+    reservedSlotCount :: (Core.Maybe Core.Int64),
+    -- | External service cost in terms of bigquery slot milliseconds.
+    slotMs :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalServiceCost' with the minimum fields required to make a request.
+newExternalServiceCost ::
+  ExternalServiceCost
+newExternalServiceCost =
+  ExternalServiceCost
+    { bytesBilled = Core.Nothing,
+      bytesProcessed = Core.Nothing,
+      externalService = Core.Nothing,
+      reservedSlotCount = Core.Nothing,
+      slotMs = Core.Nothing
+    }
+
+instance Core.FromJSON ExternalServiceCost where
+  parseJSON =
+    Core.withObject
+      "ExternalServiceCost"
+      ( \o ->
+          ExternalServiceCost
+            Core.<$> (o Core..:? "bytesBilled" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "bytesProcessed" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "externalService")
+            Core.<*> (o Core..:? "reservedSlotCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "slotMs" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ExternalServiceCost where
+  toJSON ExternalServiceCost {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bytesBilled" Core..=) Core.. Core.AsText Core.<$> bytesBilled,
+            ("bytesProcessed" Core..=)
+              Core.. Core.AsText
+              Core.<$> bytesProcessed,
+            ("externalService" Core..=) Core.<$> externalService,
+            ("reservedSlotCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> reservedSlotCount,
+            ("slotMs" Core..=) Core.. Core.AsText Core.<$> slotMs
           ]
       )
 
@@ -4001,10 +4822,73 @@ instance Core.ToJSON FeatureValue where
   toJSON FeatureValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("categoricalValue" Core..=)
-              Core.<$> categoricalValue,
+          [ ("categoricalValue" Core..=) Core.<$> categoricalValue,
             ("featureColumn" Core..=) Core.<$> featureColumn,
             ("numericalValue" Core..=) Core.<$> numericalValue
+          ]
+      )
+
+-- | Metadata about the foreign data type definition such as the system in which the type is defined.
+--
+-- /See:/ 'newForeignTypeInfo' smart constructor.
+newtype ForeignTypeInfo = ForeignTypeInfo
+  { -- | Required. Specifies the system which defines the foreign data type.
+    typeSystem :: (Core.Maybe ForeignTypeInfo_TypeSystem)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ForeignTypeInfo' with the minimum fields required to make a request.
+newForeignTypeInfo ::
+  ForeignTypeInfo
+newForeignTypeInfo = ForeignTypeInfo {typeSystem = Core.Nothing}
+
+instance Core.FromJSON ForeignTypeInfo where
+  parseJSON =
+    Core.withObject
+      "ForeignTypeInfo"
+      (\o -> ForeignTypeInfo Core.<$> (o Core..:? "typeSystem"))
+
+instance Core.ToJSON ForeignTypeInfo where
+  toJSON ForeignTypeInfo {..} =
+    Core.object
+      (Core.catMaybes [("typeSystem" Core..=) Core.<$> typeSystem])
+
+-- | A view can be represented in multiple ways. Each representation has its own dialect. This message stores the metadata required for these representations.
+--
+-- /See:/ 'newForeignViewDefinition' smart constructor.
+data ForeignViewDefinition = ForeignViewDefinition
+  { -- | Optional. Represents the dialect of the query.
+    dialect :: (Core.Maybe Core.Text),
+    -- | Required. The query that defines the view.
+    query :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ForeignViewDefinition' with the minimum fields required to make a request.
+newForeignViewDefinition ::
+  ForeignViewDefinition
+newForeignViewDefinition =
+  ForeignViewDefinition
+    { dialect = Core.Nothing,
+      query = Core.Nothing
+    }
+
+instance Core.FromJSON ForeignViewDefinition where
+  parseJSON =
+    Core.withObject
+      "ForeignViewDefinition"
+      ( \o ->
+          ForeignViewDefinition
+            Core.<$> (o Core..:? "dialect")
+            Core.<*> (o Core..:? "query")
+      )
+
+instance Core.ToJSON ForeignViewDefinition where
+  toJSON ForeignViewDefinition {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dialect" Core..=) Core.<$> dialect,
+            ("query" Core..=) Core.<$> query
           ]
       )
 
@@ -4020,22 +4904,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -4049,15 +4930,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -4069,12 +4950,13 @@ instance Core.ToJSON GetPolicyOptions where
           ]
       )
 
+-- | Response object of GetQueryResults.
 --
 -- /See:/ 'newGetQueryResultsResponse' smart constructor.
 data GetQueryResultsResponse = GetQueryResultsResponse
   { -- | Whether the query result was fetched from the query cache.
     cacheHit :: (Core.Maybe Core.Bool),
-    -- | [Output-only] The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.
+    -- | Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see <https://cloud.google.com/bigquery/docs/error-messages Error messages>.
     errors :: (Core.Maybe [ErrorProto]),
     -- | A hash of this response.
     etag :: (Core.Maybe Core.Text),
@@ -4084,11 +4966,11 @@ data GetQueryResultsResponse = GetQueryResultsResponse
     jobReference :: (Core.Maybe JobReference),
     -- | The resource type of the response.
     kind :: Core.Text,
-    -- | [Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
+    -- | Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
     numDmlAffectedRows :: (Core.Maybe Core.Int64),
-    -- | A token used for paging results.
+    -- | A token used for paging results. When this token is non-empty, it indicates additional results are available.
     pageToken :: (Core.Maybe Core.Text),
-    -- | An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above. Present only when the query completes successfully.
+    -- | An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above. Present only when the query completes successfully. The REST-based representation of this data leverages a series of JSON f,v objects for indicating fields and values.
     rows :: (Core.Maybe [TableRow]),
     -- | The schema of the results. Present only when the query completes successfully.
     schema :: (Core.Maybe TableSchema),
@@ -4129,21 +5011,19 @@ instance Core.FromJSON GetQueryResultsResponse where
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "jobComplete")
             Core.<*> (o Core..:? "jobReference")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "bigquery#getQueryResultsResponse"
-                     )
-            Core.<*> ( o Core..:? "numDmlAffectedRows"
+            Core.<*> (o Core..:? "kind" Core..!= "bigquery#getQueryResultsResponse")
+            Core.<*> ( o
+                         Core..:? "numDmlAffectedRows"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pageToken")
             Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "schema")
-            Core.<*> ( o Core..:? "totalBytesProcessed"
+            Core.<*> ( o
+                         Core..:? "totalBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "totalRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalRows" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON GetQueryResultsResponse where
@@ -4156,18 +5036,20 @@ instance Core.ToJSON GetQueryResultsResponse where
             ("jobComplete" Core..=) Core.<$> jobComplete,
             ("jobReference" Core..=) Core.<$> jobReference,
             Core.Just ("kind" Core..= kind),
-            ("numDmlAffectedRows" Core..=) Core.. Core.AsText
+            ("numDmlAffectedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> numDmlAffectedRows,
             ("pageToken" Core..=) Core.<$> pageToken,
             ("rows" Core..=) Core.<$> rows,
             ("schema" Core..=) Core.<$> schema,
-            ("totalBytesProcessed" Core..=) Core.. Core.AsText
+            ("totalBytesProcessed" Core..=)
+              Core.. Core.AsText
               Core.<$> totalBytesProcessed,
-            ("totalRows" Core..=) Core.. Core.AsText
-              Core.<$> totalRows
+            ("totalRows" Core..=) Core.. Core.AsText Core.<$> totalRows
           ]
       )
 
+-- | Response object of GetServiceAccount
 --
 -- /See:/ 'newGetServiceAccountResponse' smart constructor.
 data GetServiceAccountResponse = GetServiceAccountResponse
@@ -4194,9 +5076,7 @@ instance Core.FromJSON GetServiceAccountResponse where
       ( \o ->
           GetServiceAccountResponse
             Core.<$> (o Core..:? "email")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "bigquery#getServiceAccountResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "bigquery#getServiceAccountResponse")
       )
 
 instance Core.ToJSON GetServiceAccountResponse where
@@ -4223,7 +5103,10 @@ data GlobalExplanation = GlobalExplanation
 newGlobalExplanation ::
   GlobalExplanation
 newGlobalExplanation =
-  GlobalExplanation {classLabel = Core.Nothing, explanations = Core.Nothing}
+  GlobalExplanation
+    { classLabel = Core.Nothing,
+      explanations = Core.Nothing
+    }
 
 instance Core.FromJSON GlobalExplanation where
   parseJSON =
@@ -4244,12 +5127,13 @@ instance Core.ToJSON GlobalExplanation where
           ]
       )
 
+-- | Options specific to Google Sheets data sources.
 --
 -- /See:/ 'newGoogleSheetsOptions' smart constructor.
 data GoogleSheetsOptions = GoogleSheetsOptions
-  { -- | [Optional] Range of a sheet to query from. Only used when non-empty. Typical format: sheet/name!top/left/cell/id:bottom/right/cell_id For example: sheet1!A1:B20
+  { -- | Optional. Range of a sheet to query from. Only used when non-empty. Typical format: sheet/name!top/left/cell/id:bottom/right/cell_id For example: sheet1!A1:B20
     range :: (Core.Maybe Core.Text),
-    -- | [Optional] The number of rows at the top of a sheet that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows that should be skipped. When autodetect is on, behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.
+    -- | Optional. The number of rows at the top of a sheet that BigQuery will skip when reading the data. The default value is 0. This property is useful if you have header rows that should be skipped. When autodetect is on, the behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.
     skipLeadingRows :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4258,7 +5142,10 @@ data GoogleSheetsOptions = GoogleSheetsOptions
 newGoogleSheetsOptions ::
   GoogleSheetsOptions
 newGoogleSheetsOptions =
-  GoogleSheetsOptions {range = Core.Nothing, skipLeadingRows = Core.Nothing}
+  GoogleSheetsOptions
+    { range = Core.Nothing,
+      skipLeadingRows = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleSheetsOptions where
   parseJSON =
@@ -4267,9 +5154,7 @@ instance Core.FromJSON GoogleSheetsOptions where
       ( \o ->
           GoogleSheetsOptions
             Core.<$> (o Core..:? "range")
-            Core.<*> ( o Core..:? "skipLeadingRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "skipLeadingRows" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON GoogleSheetsOptions where
@@ -4277,19 +5162,72 @@ instance Core.ToJSON GoogleSheetsOptions where
     Core.object
       ( Core.catMaybes
           [ ("range" Core..=) Core.<$> range,
-            ("skipLeadingRows" Core..=) Core.. Core.AsText
+            ("skipLeadingRows" Core..=)
+              Core.. Core.AsText
               Core.<$> skipLeadingRows
           ]
       )
 
+-- | High cardinality join detailed information.
+--
+-- /See:/ 'newHighCardinalityJoin' smart constructor.
+data HighCardinalityJoin = HighCardinalityJoin
+  { -- | Output only. Count of left input rows.
+    leftRows :: (Core.Maybe Core.Int64),
+    -- | Output only. Count of the output rows.
+    outputRows :: (Core.Maybe Core.Int64),
+    -- | Output only. Count of right input rows.
+    rightRows :: (Core.Maybe Core.Int64),
+    -- | Output only. The index of the join operator in the ExplainQueryStep lists.
+    stepIndex :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HighCardinalityJoin' with the minimum fields required to make a request.
+newHighCardinalityJoin ::
+  HighCardinalityJoin
+newHighCardinalityJoin =
+  HighCardinalityJoin
+    { leftRows = Core.Nothing,
+      outputRows = Core.Nothing,
+      rightRows = Core.Nothing,
+      stepIndex = Core.Nothing
+    }
+
+instance Core.FromJSON HighCardinalityJoin where
+  parseJSON =
+    Core.withObject
+      "HighCardinalityJoin"
+      ( \o ->
+          HighCardinalityJoin
+            Core.<$> (o Core..:? "leftRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outputRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rightRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "stepIndex")
+      )
+
+instance Core.ToJSON HighCardinalityJoin where
+  toJSON HighCardinalityJoin {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("leftRows" Core..=) Core.. Core.AsText Core.<$> leftRows,
+            ("outputRows" Core..=) Core.. Core.AsText Core.<$> outputRows,
+            ("rightRows" Core..=) Core.. Core.AsText Core.<$> rightRows,
+            ("stepIndex" Core..=) Core.<$> stepIndex
+          ]
+      )
+
+-- | Options for configuring hive partitioning detect.
 --
 -- /See:/ 'newHivePartitioningOptions' smart constructor.
 data HivePartitioningOptions = HivePartitioningOptions
-  { -- | [Optional] When set, what mode of hive partitioning to use when reading data. The following modes are supported. (1) AUTO: automatically infer partition key name(s) and type(s). (2) STRINGS: automatically infer partition key name(s). All types are interpreted as strings. (3) CUSTOM: partition key schema is encoded in the source URI prefix. Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format will lead to an error. Currently supported types include: AVRO, CSV, JSON, ORC and Parquet.
+  { -- | Output only. For permanent external tables, this field is populated with the hive partition keys in the order they were inferred. The types of the partition keys can be deduced by checking the table schema (which will include the partition keys). Not every API will populate this field in the output. For example, Tables.Get will populate it, but Tables.List will not contain this field.
+    fields :: (Core.Maybe [Core.Text]),
+    -- | Optional. When set, what mode of hive partitioning to use when reading data. The following modes are supported: * AUTO: automatically infer partition key name(s) and type(s). * STRINGS: automatically infer partition key name(s). All types are strings. * CUSTOM: partition key schema is encoded in the source URI prefix. Not all storage formats support hive partitioning. Requesting hive partitioning on an unsupported format will lead to an error. Currently supported formats are: JSON, CSV, ORC, Avro and Parquet.
     mode :: (Core.Maybe Core.Text),
-    -- | [Optional] If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. Note that this field should only be true when creating a permanent external table or querying a temporary external table. Hive-partitioned loads with requirePartitionFilter explicitly set to true will fail.
-    requirePartitionFilter :: (Core.Maybe Core.Bool),
-    -- | [Optional] When hive partition detection is requested, a common prefix for all source uris should be supplied. The prefix must end immediately before the partition key encoding begins. For example, consider files following this data layout. gs:\/\/bucket\/path/to/table\/dt=2019-01-01\/country=BR\/id=7\/file.avro gs:\/\/bucket\/path/to/table\/dt=2018-12-31\/country=CA\/id=3\/file.avro When hive partitioning is requested with either AUTO or STRINGS detection, the common prefix can be either of gs:\/\/bucket\/path/to/table or gs:\/\/bucket\/path/to/table\/ (trailing slash does not matter).
+    -- | Optional. If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. Note that this field should only be true when creating a permanent external table or querying a temporary external table. Hive-partitioned loads with require/partition/filter explicitly set to true will fail.
+    requirePartitionFilter :: Core.Bool,
+    -- | Optional. When hive partition detection is requested, a common prefix for all source uris must be required. The prefix must end immediately before the partition key encoding begins. For example, consider files following this data layout: gs:\/\/bucket\/path/to/table\/dt=2019-06-01\/country=USA\/id=7\/file.avro gs:\/\/bucket\/path/to/table\/dt=2019-05-31\/country=CA\/id=3\/file.avro When hive partitioning is requested with either AUTO or STRINGS detection, the common prefix can be either of gs:\/\/bucket\/path/to/table or gs:\/\/bucket\/path/to/table\/. CUSTOM detection requires encoding the partitioning schema immediately after the common prefix. For CUSTOM, any of * gs:\/\/bucket\/path/to/table\/{dt:DATE}\/{country:STRING}\/{id:INTEGER} * gs:\/\/bucket\/path/to/table\/{dt:STRING}\/{country:STRING}\/{id:INTEGER} * gs:\/\/bucket\/path/to/table\/{dt:DATE}\/{country:STRING}\/{id:STRING} would all be valid source URI prefixes.
     sourceUriPrefix :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4299,8 +5237,9 @@ newHivePartitioningOptions ::
   HivePartitioningOptions
 newHivePartitioningOptions =
   HivePartitioningOptions
-    { mode = Core.Nothing,
-      requirePartitionFilter = Core.Nothing,
+    { fields = Core.Nothing,
+      mode = Core.Nothing,
+      requirePartitionFilter = Core.False,
       sourceUriPrefix = Core.Nothing
     }
 
@@ -4310,8 +5249,9 @@ instance Core.FromJSON HivePartitioningOptions where
       "HivePartitioningOptions"
       ( \o ->
           HivePartitioningOptions
-            Core.<$> (o Core..:? "mode")
-            Core.<*> (o Core..:? "requirePartitionFilter")
+            Core.<$> (o Core..:? "fields")
+            Core.<*> (o Core..:? "mode")
+            Core.<*> (o Core..:? "requirePartitionFilter" Core..!= Core.False)
             Core.<*> (o Core..:? "sourceUriPrefix")
       )
 
@@ -4319,11 +5259,11 @@ instance Core.ToJSON HivePartitioningOptions where
   toJSON HivePartitioningOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mode" Core..=) Core.<$> mode,
-            ("requirePartitionFilter" Core..=)
-              Core.<$> requirePartitionFilter,
-            ("sourceUriPrefix" Core..=)
-              Core.<$> sourceUriPrefix
+          [ ("fields" Core..=) Core.<$> fields,
+            ("mode" Core..=) Core.<$> mode,
+            Core.Just
+              ("requirePartitionFilter" Core..= requirePartitionFilter),
+            ("sourceUriPrefix" Core..=) Core.<$> sourceUriPrefix
           ]
       )
 
@@ -4444,12 +5384,10 @@ instance Core.ToJSON HparamSearchSpaces where
           [ ("activationFn" Core..=) Core.<$> activationFn,
             ("batchSize" Core..=) Core.<$> batchSize,
             ("boosterType" Core..=) Core.<$> boosterType,
-            ("colsampleBylevel" Core..=)
-              Core.<$> colsampleBylevel,
+            ("colsampleBylevel" Core..=) Core.<$> colsampleBylevel,
             ("colsampleBynode" Core..=) Core.<$> colsampleBynode,
             ("colsampleBytree" Core..=) Core.<$> colsampleBytree,
-            ("dartNormalizeType" Core..=)
-              Core.<$> dartNormalizeType,
+            ("dartNormalizeType" Core..=) Core.<$> dartNormalizeType,
             ("dropout" Core..=) Core.<$> dropout,
             ("hiddenUnits" Core..=) Core.<$> hiddenUnits,
             ("l1Reg" Core..=) Core.<$> l1Reg,
@@ -4457,8 +5395,7 @@ instance Core.ToJSON HparamSearchSpaces where
             ("learnRate" Core..=) Core.<$> learnRate,
             ("maxTreeDepth" Core..=) Core.<$> maxTreeDepth,
             ("minSplitLoss" Core..=) Core.<$> minSplitLoss,
-            ("minTreeChildWeight" Core..=)
-              Core.<$> minTreeChildWeight,
+            ("minTreeChildWeight" Core..=) Core.<$> minTreeChildWeight,
             ("numClusters" Core..=) Core.<$> numClusters,
             ("numFactors" Core..=) Core.<$> numFactors,
             ("numParallelTree" Core..=) Core.<$> numParallelTree,
@@ -4469,7 +5406,7 @@ instance Core.ToJSON HparamSearchSpaces where
           ]
       )
 
--- | Training info of a trial in </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models.
+-- | Training info of a trial in <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models.
 --
 -- /See:/ 'newHparamTuningTrial' smart constructor.
 data HparamTuningTrial = HparamTuningTrial
@@ -4519,57 +5456,48 @@ instance Core.FromJSON HparamTuningTrial where
       "HparamTuningTrial"
       ( \o ->
           HparamTuningTrial
-            Core.<$> ( o Core..:? "endTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "endTimeMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "evaluationMetrics")
             Core.<*> (o Core..:? "hparamTuningEvaluationMetrics")
             Core.<*> (o Core..:? "hparams")
-            Core.<*> ( o Core..:? "startTimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startTimeMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "trainingLoss")
-            Core.<*> ( o Core..:? "trialId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "trialId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON HparamTuningTrial where
   toJSON HparamTuningTrial {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> endTimeMs,
+          [ ("endTimeMs" Core..=) Core.. Core.AsText Core.<$> endTimeMs,
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("evalLoss" Core..=) Core.<$> evalLoss,
-            ("evaluationMetrics" Core..=)
-              Core.<$> evaluationMetrics,
+            ("evaluationMetrics" Core..=) Core.<$> evaluationMetrics,
             ("hparamTuningEvaluationMetrics" Core..=)
               Core.<$> hparamTuningEvaluationMetrics,
             ("hparams" Core..=) Core.<$> hparams,
-            ("startTimeMs" Core..=) Core.. Core.AsText
-              Core.<$> startTimeMs,
+            ("startTimeMs" Core..=) Core.. Core.AsText Core.<$> startTimeMs,
             ("status" Core..=) Core.<$> status,
             ("trainingLoss" Core..=) Core.<$> trainingLoss,
-            ("trialId" Core..=) Core.. Core.AsText
-              Core.<$> trialId
+            ("trialId" Core..=) Core.. Core.AsText Core.<$> trialId
           ]
       )
 
+-- | Reason about why no search index was used in the search query (or sub-query).
 --
 -- /See:/ 'newIndexUnusedReason' smart constructor.
 data IndexUnusedReason = IndexUnusedReason
-  { -- | [Output-only] Specifies the base table involved in the reason that no search index was used.
+  { -- | Specifies the base table involved in the reason that no search index was used.
     baseTable :: (Core.Maybe TableReference),
-    -- | [Output-only] Specifies the high-level reason for the scenario when no search index was used.
-    code :: Core.Text,
-    -- | [Output-only] Specifies the name of the unused search index, if available.
-    indexName :: Core.Text,
-    -- | [Output-only] Free form human-readable reason for the scenario when no search index was used.
-    message :: Core.Text
+    -- | Specifies the high-level reason for the scenario when no search index was used.
+    code :: (Core.Maybe IndexUnusedReason_Code),
+    -- | Specifies the name of the unused search index, if available.
+    indexName :: (Core.Maybe Core.Text),
+    -- | Free form human-readable reason for the scenario when no search index was used.
+    message :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4579,9 +5507,9 @@ newIndexUnusedReason ::
 newIndexUnusedReason =
   IndexUnusedReason
     { baseTable = Core.Nothing,
-      code = "$(reason.code)",
-      indexName = "$(reason.index_name)",
-      message = "$(reason.message)"
+      code = Core.Nothing,
+      indexName = Core.Nothing,
+      message = Core.Nothing
     }
 
 instance Core.FromJSON IndexUnusedReason where
@@ -4590,22 +5518,52 @@ instance Core.FromJSON IndexUnusedReason where
       "IndexUnusedReason"
       ( \o ->
           IndexUnusedReason
-            Core.<$> (o Core..:? "base_table")
-            Core.<*> (o Core..:? "code" Core..!= "$(reason.code)")
-            Core.<*> ( o Core..:? "index_name"
-                         Core..!= "$(reason.index_name)"
-                     )
-            Core.<*> (o Core..:? "message" Core..!= "$(reason.message)")
+            Core.<$> (o Core..:? "baseTable")
+            Core.<*> (o Core..:? "code")
+            Core.<*> (o Core..:? "indexName")
+            Core.<*> (o Core..:? "message")
       )
 
 instance Core.ToJSON IndexUnusedReason where
   toJSON IndexUnusedReason {..} =
     Core.object
       ( Core.catMaybes
-          [ ("base_table" Core..=) Core.<$> baseTable,
-            Core.Just ("code" Core..= code),
-            Core.Just ("index_name" Core..= indexName),
-            Core.Just ("message" Core..= message)
+          [ ("baseTable" Core..=) Core.<$> baseTable,
+            ("code" Core..=) Core.<$> code,
+            ("indexName" Core..=) Core.<$> indexName,
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+-- | Details about the input data change insight.
+--
+-- /See:/ 'newInputDataChange' smart constructor.
+newtype InputDataChange = InputDataChange
+  { -- | Output only. Records read difference percentage compared to a previous run.
+    recordsReadDiffPercentage :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputDataChange' with the minimum fields required to make a request.
+newInputDataChange ::
+  InputDataChange
+newInputDataChange =
+  InputDataChange {recordsReadDiffPercentage = Core.Nothing}
+
+instance Core.FromJSON InputDataChange where
+  parseJSON =
+    Core.withObject
+      "InputDataChange"
+      ( \o ->
+          InputDataChange Core.<$> (o Core..:? "recordsReadDiffPercentage")
+      )
+
+instance Core.ToJSON InputDataChange where
+  toJSON InputDataChange {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("recordsReadDiffPercentage" Core..=)
+              Core.<$> recordsReadDiffPercentage
           ]
       )
 
@@ -4629,7 +5587,8 @@ instance Core.FromJSON IntArray where
       "IntArray"
       ( \o ->
           IntArray
-            Core.<$> ( o Core..:? "elements"
+            Core.<$> ( o
+                         Core..:? "elements"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -4638,7 +5597,8 @@ instance Core.ToJSON IntArray where
   toJSON IntArray {..} =
     Core.object
       ( Core.catMaybes
-          [ ("elements" Core..=) Core.. Core.fmap Core.AsText
+          [ ("elements" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> elements
           ]
       )
@@ -4663,16 +5623,13 @@ instance Core.FromJSON IntArrayHparamSearchSpace where
     Core.withObject
       "IntArrayHparamSearchSpace"
       ( \o ->
-          IntArrayHparamSearchSpace
-            Core.<$> (o Core..:? "candidates")
+          IntArrayHparamSearchSpace Core.<$> (o Core..:? "candidates")
       )
 
 instance Core.ToJSON IntArrayHparamSearchSpace where
   toJSON IntArrayHparamSearchSpace {..} =
     Core.object
-      ( Core.catMaybes
-          [("candidates" Core..=) Core.<$> candidates]
-      )
+      (Core.catMaybes [("candidates" Core..=) Core.<$> candidates])
 
 -- | Discrete candidates of an int hyperparameter.
 --
@@ -4694,7 +5651,8 @@ instance Core.FromJSON IntCandidates where
       "IntCandidates"
       ( \o ->
           IntCandidates
-            Core.<$> ( o Core..:? "candidates"
+            Core.<$> ( o
+                         Core..:? "candidates"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -4703,7 +5661,8 @@ instance Core.ToJSON IntCandidates where
   toJSON IntCandidates {..} =
     Core.object
       ( Core.catMaybes
-          [ ("candidates" Core..=) Core.. Core.fmap Core.AsText
+          [ ("candidates" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> candidates
           ]
       )
@@ -4723,7 +5682,10 @@ data IntHparamSearchSpace = IntHparamSearchSpace
 newIntHparamSearchSpace ::
   IntHparamSearchSpace
 newIntHparamSearchSpace =
-  IntHparamSearchSpace {candidates = Core.Nothing, range = Core.Nothing}
+  IntHparamSearchSpace
+    { candidates = Core.Nothing,
+      range = Core.Nothing
+    }
 
 instance Core.FromJSON IntHparamSearchSpace where
   parseJSON =
@@ -4767,9 +5729,7 @@ instance Core.FromJSON IntRange where
       ( \o ->
           IntRange
             Core.<$> (o Core..:? "max" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> ( o Core..:? "min"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "min" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON IntRange where
@@ -4781,10 +5741,15 @@ instance Core.ToJSON IntRange where
           ]
       )
 
+-- | Information about a single iteration of the training run.
 --
 -- /See:/ 'newIterationResult' smart constructor.
 data IterationResult = IterationResult
-  { -- | Time taken to run the iteration in milliseconds.
+  { -- | Arima result.
+    arimaResult :: (Core.Maybe ArimaResult),
+    -- | Information about top clusters for clustering models.
+    clusterInfos :: (Core.Maybe [ClusterInfo]),
+    -- | Time taken to run the iteration in milliseconds.
     durationMs :: (Core.Maybe Core.Int64),
     -- | Loss computed on the eval data at the end of iteration.
     evalLoss :: (Core.Maybe Core.Double),
@@ -4792,6 +5757,8 @@ data IterationResult = IterationResult
     index :: (Core.Maybe Core.Int32),
     -- | Learn rate used for this iteration.
     learnRate :: (Core.Maybe Core.Double),
+    -- | The information of the principal components.
+    principalComponentInfos :: (Core.Maybe [PrincipalComponentInfo]),
     -- | Loss computed on the training data at the end of iteration.
     trainingLoss :: (Core.Maybe Core.Double)
   }
@@ -4802,10 +5769,13 @@ newIterationResult ::
   IterationResult
 newIterationResult =
   IterationResult
-    { durationMs = Core.Nothing,
+    { arimaResult = Core.Nothing,
+      clusterInfos = Core.Nothing,
+      durationMs = Core.Nothing,
       evalLoss = Core.Nothing,
       index = Core.Nothing,
       learnRate = Core.Nothing,
+      principalComponentInfos = Core.Nothing,
       trainingLoss = Core.Nothing
     }
 
@@ -4815,12 +5785,13 @@ instance Core.FromJSON IterationResult where
       "IterationResult"
       ( \o ->
           IterationResult
-            Core.<$> ( o Core..:? "durationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "arimaResult")
+            Core.<*> (o Core..:? "clusterInfos")
+            Core.<*> (o Core..:? "durationMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "evalLoss")
             Core.<*> (o Core..:? "index")
             Core.<*> (o Core..:? "learnRate")
+            Core.<*> (o Core..:? "principalComponentInfos")
             Core.<*> (o Core..:? "trainingLoss")
       )
 
@@ -4828,11 +5799,14 @@ instance Core.ToJSON IterationResult where
   toJSON IterationResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationMs" Core..=) Core.. Core.AsText
-              Core.<$> durationMs,
+          [ ("arimaResult" Core..=) Core.<$> arimaResult,
+            ("clusterInfos" Core..=) Core.<$> clusterInfos,
+            ("durationMs" Core..=) Core.. Core.AsText Core.<$> durationMs,
             ("evalLoss" Core..=) Core.<$> evalLoss,
             ("index" Core..=) Core.<$> index,
             ("learnRate" Core..=) Core.<$> learnRate,
+            ("principalComponentInfos" Core..=)
+              Core.<$> principalComponentInfos,
             ("trainingLoss" Core..=) Core.<$> trainingLoss
           ]
       )
@@ -4840,23 +5814,27 @@ instance Core.ToJSON IterationResult where
 --
 -- /See:/ 'newJob' smart constructor.
 data Job = Job
-  { -- | [Required] Describes the job configuration.
+  { -- | Required. Describes the job configuration.
     configuration :: (Core.Maybe JobConfiguration),
-    -- | [Output-only] A hash of this resource.
+    -- | Output only. A hash of this resource.
     etag :: (Core.Maybe Core.Text),
-    -- | [Output-only] Opaque ID field of the job
+    -- | Output only. Opaque ID field of the job.
     id :: (Core.Maybe Core.Text),
-    -- | [Optional] Reference describing the unique-per-user name of the job.
+    -- | Output only. The reason why a Job was created. <https://cloud.google.com/products/#product-launch-stages Preview>
+    jobCreationReason :: (Core.Maybe JobCreationReason),
+    -- | Optional. Reference describing the unique-per-user name of the job.
     jobReference :: (Core.Maybe JobReference),
-    -- | [Output-only] The type of the resource.
+    -- | Output only. The type of the resource.
     kind :: Core.Text,
-    -- | [Output-only] A URL that can be used to access this resource again.
+    -- | Output only. [Full-projection-only] String representation of identity of requesting party. Populated for both first- and third-party identities. Only present for APIs that support third-party identities.
+    principalSubject :: (Core.Maybe Core.Text),
+    -- | Output only. A URL that can be used to access the resource again.
     selfLink :: (Core.Maybe Core.Text),
-    -- | [Output-only] Information about the job, including starting time and ending time of the job.
+    -- | Output only. Information about the job, including starting time and ending time of the job.
     statistics :: (Core.Maybe JobStatistics),
-    -- | [Output-only] The status of this job. Examine this value when polling an asynchronous job to see if the job is complete.
+    -- | Output only. The status of this job. Examine this value when polling an asynchronous job to see if the job is complete.
     status :: (Core.Maybe JobStatus),
-    -- | [Output-only] Email address of the user who ran the job.
+    -- | Output only. Email address of the user who ran the job.
     userEmail :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4869,8 +5847,10 @@ newJob =
     { configuration = Core.Nothing,
       etag = Core.Nothing,
       id = Core.Nothing,
+      jobCreationReason = Core.Nothing,
       jobReference = Core.Nothing,
       kind = "bigquery#job",
+      principalSubject = Core.Nothing,
       selfLink = Core.Nothing,
       statistics = Core.Nothing,
       status = Core.Nothing,
@@ -4886,8 +5866,10 @@ instance Core.FromJSON Job where
             Core.<$> (o Core..:? "configuration")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "jobCreationReason")
             Core.<*> (o Core..:? "jobReference")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#job")
+            Core.<*> (o Core..:? "principal_subject")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "statistics")
             Core.<*> (o Core..:? "status")
@@ -4901,8 +5883,10 @@ instance Core.ToJSON Job where
           [ ("configuration" Core..=) Core.<$> configuration,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
+            ("jobCreationReason" Core..=) Core.<$> jobCreationReason,
             ("jobReference" Core..=) Core.<$> jobReference,
             Core.Just ("kind" Core..= kind),
+            ("principal_subject" Core..=) Core.<$> principalSubject,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("statistics" Core..=) Core.<$> statistics,
             ("status" Core..=) Core.<$> status,
@@ -4910,6 +5894,7 @@ instance Core.ToJSON Job where
           ]
       )
 
+-- | Describes format of a jobs cancellation response.
 --
 -- /See:/ 'newJobCancelResponse' smart constructor.
 data JobCancelResponse = JobCancelResponse
@@ -4924,7 +5909,10 @@ data JobCancelResponse = JobCancelResponse
 newJobCancelResponse ::
   JobCancelResponse
 newJobCancelResponse =
-  JobCancelResponse {job = Core.Nothing, kind = "bigquery#jobCancelResponse"}
+  JobCancelResponse
+    { job = Core.Nothing,
+      kind = "bigquery#jobCancelResponse"
+    }
 
 instance Core.FromJSON JobCancelResponse where
   parseJSON =
@@ -4933,18 +5921,14 @@ instance Core.FromJSON JobCancelResponse where
       ( \o ->
           JobCancelResponse
             Core.<$> (o Core..:? "job")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "bigquery#jobCancelResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "bigquery#jobCancelResponse")
       )
 
 instance Core.ToJSON JobCancelResponse where
   toJSON JobCancelResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("job" Core..=) Core.<$> job,
-            Core.Just ("kind" Core..= kind)
-          ]
+          [("job" Core..=) Core.<$> job, Core.Just ("kind" Core..= kind)]
       )
 
 --
@@ -4952,13 +5936,13 @@ instance Core.ToJSON JobCancelResponse where
 data JobConfiguration = JobConfiguration
   { -- | [Pick one] Copies a table.
     copy :: (Core.Maybe JobConfigurationTableCopy),
-    -- | [Optional] If set, don\'t actually run this job. A valid query will return a mostly empty response with some processing statistics, while an invalid query will return the same error it would if it wasn\'t a dry run. Behavior of non-query jobs is undefined.
+    -- | Optional. If set, don\'t actually run this job. A valid query will return a mostly empty response with some processing statistics, while an invalid query will return the same error it would if it wasn\'t a dry run. Behavior of non-query jobs is undefined.
     dryRun :: (Core.Maybe Core.Bool),
     -- | [Pick one] Configures an extract job.
     extract :: (Core.Maybe JobConfigurationExtract),
-    -- | [Optional] Job timeout in milliseconds. If this time limit is exceeded, BigQuery may attempt to terminate the job.
+    -- | Optional. Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop a longer job, but may not always succeed in canceling it before the job completes. For example, a job that takes more than 60 seconds to complete has a better chance of being stopped than a job that takes 10 seconds to complete.
     jobTimeoutMs :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The type of the job. Can be QUERY, LOAD, EXTRACT, COPY or UNKNOWN.
+    -- | Output only. The type of the job. Can be QUERY, LOAD, EXTRACT, COPY or UNKNOWN.
     jobType :: (Core.Maybe Core.Text),
     -- | The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.
     labels :: (Core.Maybe JobConfiguration_Labels),
@@ -4993,9 +5977,7 @@ instance Core.FromJSON JobConfiguration where
             Core.<$> (o Core..:? "copy")
             Core.<*> (o Core..:? "dryRun")
             Core.<*> (o Core..:? "extract")
-            Core.<*> ( o Core..:? "jobTimeoutMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "jobTimeoutMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "jobType")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "load")
@@ -5009,8 +5991,7 @@ instance Core.ToJSON JobConfiguration where
           [ ("copy" Core..=) Core.<$> copy,
             ("dryRun" Core..=) Core.<$> dryRun,
             ("extract" Core..=) Core.<$> extract,
-            ("jobTimeoutMs" Core..=) Core.. Core.AsText
-              Core.<$> jobTimeoutMs,
+            ("jobTimeoutMs" Core..=) Core.. Core.AsText Core.<$> jobTimeoutMs,
             ("jobType" Core..=) Core.<$> jobType,
             ("labels" Core..=) Core.<$> labels,
             ("load" Core..=) Core.<$> load,
@@ -5022,8 +6003,7 @@ instance Core.ToJSON JobConfiguration where
 --
 -- /See:/ 'newJobConfiguration_Labels' smart constructor.
 newtype JobConfiguration_Labels = JobConfiguration_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5039,35 +6019,34 @@ instance Core.FromJSON JobConfiguration_Labels where
   parseJSON =
     Core.withObject
       "JobConfiguration_Labels"
-      ( \o ->
-          JobConfiguration_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> JobConfiguration_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON JobConfiguration_Labels where
-  toJSON JobConfiguration_Labels {..} =
-    Core.toJSON additional
+  toJSON JobConfiguration_Labels {..} = Core.toJSON additional
 
+-- | JobConfigurationExtract configures a job that exports data from a BigQuery table into Google Cloud Storage.
 --
 -- /See:/ 'newJobConfigurationExtract' smart constructor.
 data JobConfigurationExtract = JobConfigurationExtract
-  { -- | [Optional] The compression type to use for exported files. Possible values include GZIP, DEFLATE, SNAPPY, and NONE. The default value is NONE. DEFLATE and SNAPPY are only supported for Avro. Not applicable when extracting models.
+  { -- | Optional. The compression type to use for exported files. Possible values include DEFLATE, GZIP, NONE, SNAPPY, and ZSTD. The default value is NONE. Not all compression formats are support for all file formats. DEFLATE is only supported for Avro. ZSTD is only supported for Parquet. Not applicable when extracting models.
     compression :: (Core.Maybe Core.Text),
-    -- | [Optional] The exported file format. Possible values include CSV, NEWLINE/DELIMITED/JSON, PARQUET or AVRO for tables and ML/TF/SAVED/MODEL or ML/XGBOOST/BOOSTER for models. The default value for tables is CSV. Tables with nested or repeated fields cannot be exported as CSV. The default value for models is ML/TF/SAVED/MODEL.
+    -- | Optional. The exported file format. Possible values include CSV, NEWLINE/DELIMITED/JSON, PARQUET, or AVRO for tables and ML/TF/SAVED/MODEL or ML/XGBOOST/BOOSTER for models. The default value for tables is CSV. Tables with nested or repeated fields cannot be exported as CSV. The default value for models is ML/TF/SAVED/MODEL.
     destinationFormat :: (Core.Maybe Core.Text),
     -- | [Pick one] DEPRECATED: Use destinationUris instead, passing only one URI as necessary. The fully-qualified Google Cloud Storage URI where the extracted table should be written.
     destinationUri :: (Core.Maybe Core.Text),
     -- | [Pick one] A list of fully-qualified Google Cloud Storage URIs where the extracted table should be written.
     destinationUris :: (Core.Maybe [Core.Text]),
-    -- | [Optional] Delimiter to use between fields in the exported data. Default is \',\'. Not applicable when extracting models.
+    -- | Optional. When extracting data in CSV format, this defines the delimiter to use between fields in the exported data. Default is \',\'. Not applicable when extracting models.
     fieldDelimiter :: (Core.Maybe Core.Text),
-    -- | [Optional] Whether to print out a header row in the results. Default is true. Not applicable when extracting models.
+    -- | Optional. Model extract options only applicable when extracting models.
+    modelExtractOptions :: (Core.Maybe ModelExtractOptions),
+    -- | Optional. Whether to print out a header row in the results. Default is true. Not applicable when extracting models.
     printHeader :: Core.Bool,
     -- | A reference to the model being exported.
     sourceModel :: (Core.Maybe ModelReference),
     -- | A reference to the table being exported.
     sourceTable :: (Core.Maybe TableReference),
-    -- | [Optional] If destinationFormat is set to \"AVRO\", this flag indicates whether to enable extracting applicable column types (such as TIMESTAMP) to their corresponding AVRO logical types (timestamp-micros), instead of only using their raw types (avro-long). Not applicable when extracting models.
+    -- | Whether to use logical types when extracting to AVRO format. Not applicable when extracting models.
     useAvroLogicalTypes :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5082,6 +6061,7 @@ newJobConfigurationExtract =
       destinationUri = Core.Nothing,
       destinationUris = Core.Nothing,
       fieldDelimiter = Core.Nothing,
+      modelExtractOptions = Core.Nothing,
       printHeader = Core.True,
       sourceModel = Core.Nothing,
       sourceTable = Core.Nothing,
@@ -5099,6 +6079,7 @@ instance Core.FromJSON JobConfigurationExtract where
             Core.<*> (o Core..:? "destinationUri")
             Core.<*> (o Core..:? "destinationUris")
             Core.<*> (o Core..:? "fieldDelimiter")
+            Core.<*> (o Core..:? "modelExtractOptions")
             Core.<*> (o Core..:? "printHeader" Core..!= Core.True)
             Core.<*> (o Core..:? "sourceModel")
             Core.<*> (o Core..:? "sourceTable")
@@ -5110,90 +6091,106 @@ instance Core.ToJSON JobConfigurationExtract where
     Core.object
       ( Core.catMaybes
           [ ("compression" Core..=) Core.<$> compression,
-            ("destinationFormat" Core..=)
-              Core.<$> destinationFormat,
+            ("destinationFormat" Core..=) Core.<$> destinationFormat,
             ("destinationUri" Core..=) Core.<$> destinationUri,
             ("destinationUris" Core..=) Core.<$> destinationUris,
             ("fieldDelimiter" Core..=) Core.<$> fieldDelimiter,
+            ("modelExtractOptions" Core..=) Core.<$> modelExtractOptions,
             Core.Just ("printHeader" Core..= printHeader),
             ("sourceModel" Core..=) Core.<$> sourceModel,
             ("sourceTable" Core..=) Core.<$> sourceTable,
-            ("useAvroLogicalTypes" Core..=)
-              Core.<$> useAvroLogicalTypes
+            ("useAvroLogicalTypes" Core..=) Core.<$> useAvroLogicalTypes
           ]
       )
 
+-- | JobConfigurationLoad contains the configuration properties for loading data into a destination table.
 --
 -- /See:/ 'newJobConfigurationLoad' smart constructor.
 data JobConfigurationLoad = JobConfigurationLoad
-  { -- | [Optional] Accept rows that are missing trailing optional columns. The missing values are treated as nulls. If false, records with missing trailing columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. Only applicable to CSV, ignored for other formats.
+  { -- | Optional. Accept rows that are missing trailing optional columns. The missing values are treated as nulls. If false, records with missing trailing columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. Only applicable to CSV, ignored for other formats.
     allowJaggedRows :: (Core.Maybe Core.Bool),
     -- | Indicates if BigQuery should allow quoted data sections that contain newline characters in a CSV file. The default value is false.
     allowQuotedNewlines :: (Core.Maybe Core.Bool),
-    -- | [Optional] Indicates if we should automatically infer the options and schema for CSV and JSON sources.
+    -- | Optional. Indicates if we should automatically infer the options and schema for CSV and JSON sources.
     autodetect :: (Core.Maybe Core.Bool),
-    -- | [Beta] Clustering specification for the destination table. Must be specified with time-based partitioning, data in the table will be first partitioned and subsequently clustered.
+    -- | Clustering specification for the destination table.
     clustering :: (Core.Maybe Clustering),
-    -- | Connection properties.
+    -- | Optional. Character map supported for column names in CSV\/Parquet loads. Defaults to STRICT and can be overridden by Project Config Service. Using this option with unsupporting load formats will result in an error.
+    columnNameCharacterMap :: (Core.Maybe JobConfigurationLoad_ColumnNameCharacterMap),
+    -- | Optional. Connection properties which can modify the load job behavior. Currently, only the \'session/id\' connection property is supported, and is used to resolve /SESSION appearing as the dataset id.
     connectionProperties :: (Core.Maybe [ConnectionProperty]),
-    -- | [Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
+    -- | Optional. [Experimental] Configures the load job to copy files directly to the destination BigLake managed table, bypassing file content reading and rewriting. Copying files only is supported when all the following are true: * @source_uris@ are located in the same Cloud Storage location as the destination table\'s @storage_uri@ location. * @source_format@ is @PARQUET@. * @destination_table@ is an existing BigLake managed table. The table\'s schema does not have flexible column names. The table\'s columns do not have type parameters other than precision and scale. * No options other than the above are specified.
+    copyFilesOnly :: (Core.Maybe Core.Bool),
+    -- | Optional. Specifies whether the job is allowed to create new tables. The following values are supported: * CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. * CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
     createDisposition :: (Core.Maybe Core.Text),
-    -- | If true, creates a new session, where session id will be a server generated random id. If false, runs query with an existing session_id passed in ConnectionProperty, otherwise runs the load job in non-session mode.
+    -- | Optional. If this property is true, the job creates a new session using a randomly generated session_id. To continue using a created session with subsequent queries, pass the existing session identifier as a @ConnectionProperty@ value. The session identifier is returned as part of the @SessionInfo@ message within the query statistics. The new session\'s location will be set to @Job.JobReference.location@ if it is present, otherwise it\'s set to the default location based on existing routing logic.
     createSession :: (Core.Maybe Core.Bool),
-    -- | [Optional] Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: (38,9) -> NUMERIC; (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); (76,38) -> BIGNUMERIC; (77,38) -> BIGNUMERIC (error if value exeeds supported range). This field cannot contain duplicate types. The order of the types
+    -- | Optional. Date format used for parsing DATE values.
+    dateFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Date format used for parsing DATETIME values.
+    datetimeFormat :: (Core.Maybe Core.Text),
+    -- | Defines the list of possible SQL data types to which the source decimal values are converted. This list and the precision and the scale parameters of the decimal field determine the target type. In the order of NUMERIC, BIGNUMERIC, and STRING, a type is picked if it is in the specified list and if it supports the precision and the scale. STRING supports all precision and scale values. If none of the listed types supports the precision and the scale, the type supporting the widest range in the specified list is picked, and if a value exceeds the supported range when reading the data, an error will be thrown. Example: Suppose the value of this field is [\"NUMERIC\", \"BIGNUMERIC\"]. If (precision,scale) is: * (38,9) -> NUMERIC; * (39,9) -> BIGNUMERIC (NUMERIC cannot hold 30 integer digits); * (38,10) -> BIGNUMERIC (NUMERIC cannot hold 10 fractional digits); * (76,38) -> BIGNUMERIC; * (77,38) -> BIGNUMERIC (error if value exceeds supported range). This field cannot contain duplicate types. The order of the types
     -- in this field is ignored. For example, [\"BIGNUMERIC\", \"NUMERIC\"] is the same as [\"NUMERIC\", \"BIGNUMERIC\"] and NUMERIC always takes precedence over BIGNUMERIC. Defaults to [\"NUMERIC\", \"STRING\"] for ORC and [\"NUMERIC\"] for the other file formats.
-    decimalTargetTypes :: (Core.Maybe [Core.Text]),
-    -- | Custom encryption configuration (e.g., Cloud KMS keys).
+    decimalTargetTypes :: (Core.Maybe [JobConfigurationLoad_DecimalTargetTypesItem]),
+    -- | Custom encryption configuration (e.g., Cloud KMS keys)
     destinationEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
     -- | [Required] The destination table to load the data into.
     destinationTable :: (Core.Maybe TableReference),
-    -- | [Beta] [Optional] Properties with which to create the destination table if it is new.
+    -- | Optional. [Experimental] Properties with which to create the destination table if it is new.
     destinationTableProperties :: (Core.Maybe DestinationTableProperties),
-    -- | [Optional] The character encoding of the data. The supported values are UTF-8 or ISO-8859-1. The default value is UTF-8. BigQuery decodes the data after the raw, binary data has been split using the values of the quote and fieldDelimiter properties.
+    -- | Optional. The character encoding of the data. The supported values are UTF-8, ISO-8859-1, UTF-16BE, UTF-16LE, UTF-32BE, and UTF-32LE. The default value is UTF-8. BigQuery decodes the data after the raw, binary data has been split using the values of the @quote@ and @fieldDelimiter@ properties. If you don\'t specify an encoding, or if you specify a UTF-8 encoding when the CSV file is not UTF-8 encoded, BigQuery attempts to convert the data to UTF-8. Generally, your data loads successfully, but it may not match byte-for-byte what you expect. To avoid this, specify the correct encoding by using the @--encoding@ flag. If BigQuery can\'t convert a character other than the ASCII @0@ character, BigQuery converts the character to the standard Unicode replacement character: �.
     encoding :: (Core.Maybe Core.Text),
-    -- | [Optional] The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character. To use a character in the range 128-255, you must encode the character as UTF8. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence \"\\t\" to specify a tab separator. The default value is a comma (\',\').
+    -- | Optional. The separator character for fields in a CSV file. The separator is interpreted as a single byte. For files encoded in ISO-8859-1, any single character can be used as a separator. For files encoded in UTF-8, characters represented in decimal range 1-127 (U+0001-U+007F) can be used without any modification. UTF-8 characters encoded with multiple bytes (i.e. U+0080 and above) will have only the first byte used for separating fields. The remaining bytes will be treated as a part of the field. BigQuery also supports the escape sequence \"\\t\" (U+0009) to specify a tab separator. The default value is comma (\",\", U+002C).
     fieldDelimiter :: (Core.Maybe Core.Text),
-    -- | [Optional] Options to configure hive partitioning support.
+    -- | Optional. Specifies how source URIs are interpreted for constructing the file set to load. By default, source URIs are expanded against the underlying storage. You can also specify manifest files to control how the file set is constructed. This option is only applicable to object storage systems.
+    fileSetSpecType :: (Core.Maybe JobConfigurationLoad_FileSetSpecType),
+    -- | Optional. When set, configures hive partitioning support. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error, as will providing an invalid specification.
     hivePartitioningOptions :: (Core.Maybe HivePartitioningOptions),
-    -- | [Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don\'t match any column names
+    -- | Optional. Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don\'t match any column names in the table schema Avro, Parquet, ORC: Fields in the file schema that don\'t exist in the table schema.
     ignoreUnknownValues :: (Core.Maybe Core.Bool),
-    -- | [Optional] If sourceFormat is set to newline-delimited JSON, indicates whether it should be processed as a JSON variant such as GeoJSON. For a sourceFormat other than JSON, omit this field. If the sourceFormat is newline-delimited JSON: - for newline-delimited GeoJSON: set to GEOJSON.
-    jsonExtension :: (Core.Maybe Core.Text),
-    -- | [Optional] The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. This is only valid for CSV and JSON. The default value is 0, which requires that all records are valid.
+    -- | Optional. Load option to be used together with source/format newline-delimited JSON to indicate that a variant of JSON is being loaded. To load newline-delimited GeoJSON, specify GEOJSON (and source/format must be set to NEWLINE/DELIMITED/JSON).
+    jsonExtension :: (Core.Maybe JobConfigurationLoad_JsonExtension),
+    -- | Optional. The maximum number of bad records that BigQuery can ignore when running the job. If the number of bad records exceeds this value, an invalid error is returned in the job result. The default value is 0, which requires that all records are valid. This is only supported for CSV and NEWLINE/DELIMITED/JSON file formats.
     maxBadRecords :: (Core.Maybe Core.Int32),
-    -- | [Optional] Specifies a string that represents a null value in a CSV file. For example, if you specify \"\\N\", BigQuery interprets \"\\N\" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery throws an error if an empty string is present for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.
+    -- | Optional. Specifies a string that represents a null value in a CSV file. For example, if you specify \"\\N\", BigQuery interprets \"\\N\" as a null value when loading a CSV file. The default value is the empty string. If you set this property to a custom value, BigQuery throws an error if an empty string is present for all data types except for STRING and BYTE. For STRING and BYTE columns, BigQuery interprets the empty string as an empty value.
     nullMarker :: (Core.Maybe Core.Text),
-    -- | [Optional] Options to configure parquet support.
+    -- | Optional. Additional properties to set if sourceFormat is set to PARQUET.
     parquetOptions :: (Core.Maybe ParquetOptions),
-    -- | [Optional] Preserves the embedded ASCII control characters (the first 32 characters in the ASCII-table, from \'\\x00\' to \'\\x1F\') when loading from CSV. Only applicable to CSV, ignored for other formats.
+    -- | Optional. When sourceFormat is set to \"CSV\", this indicates whether the embedded ASCII control characters (the first 32 characters in the ASCII-table, from \'\\x00\' to \'\\x1F\') are preserved.
     preserveAsciiControlCharacters :: (Core.Maybe Core.Bool),
     -- | If sourceFormat is set to \"DATASTORE_BACKUP\", indicates which entity properties to load into BigQuery from a Cloud Datastore backup. Property names are case sensitive and must be top-level properties. If no properties are specified, BigQuery loads all properties. If any named property isn\'t found in the Cloud Datastore backup, an invalid error is returned in the job result.
     projectionFields :: (Core.Maybe [Core.Text]),
-    -- | [Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote (\'\"\'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true.
+    -- | Optional. The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote (\'\"\'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true. To include the specific quote character within a quoted value, precede it with an additional matching quote character. For example, if you want to escape the default character \' \" \', use \' \"\" \'. \@default \"
     quote :: (Core.Maybe Core.Text),
-    -- | [TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
+    -- | Range partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified.
     rangePartitioning :: (Core.Maybe RangePartitioning),
-    -- | User provided referencing file with the expected reader schema, Available for the format: AVRO, PARQUET, ORC.
+    -- | Optional. The user can provide a reference file with the reader schema. This file is only loaded if it is part of source URIs, but is not loaded otherwise. It is enabled for the following formats: AVRO, PARQUET, ORC.
     referenceFileSchemaUri :: (Core.Maybe Core.Text),
-    -- | [Optional] The schema for the destination table. The schema can be omitted if the destination table already exists, or if you\'re loading data from Google Cloud Datastore.
+    -- | Optional. The schema for the destination table. The schema can be omitted if the destination table already exists, or if you\'re loading data from Google Cloud Datastore.
     schema :: (Core.Maybe TableSchema),
     -- | [Deprecated] The inline schema. For CSV schemas, specify as \"Field1:Type1[,Field2:Type2]*\". For example, \"foo:STRING, bar:INTEGER, baz:FLOAT\".
     schemaInline :: (Core.Maybe Core.Text),
     -- | [Deprecated] The format of the schemaInline property.
     schemaInlineFormat :: (Core.Maybe Core.Text),
-    -- | Allows the schema of the destination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE/APPEND; when writeDisposition is WRITE/TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE/TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW/FIELD/ADDITION: allow adding a nullable field to the schema. ALLOW/FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.
+    -- | Allows the schema of the destination table to be updated as a side effect of the load job if a schema is autodetected or supplied in the job configuration. Schema update options are supported in two cases: when writeDisposition is WRITE/APPEND; when writeDisposition is WRITE/TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE/TRUNCATE will always overwrite the schema. One or more of the following values are specified: * ALLOW/FIELD/ADDITION: allow adding a nullable field to the schema. * ALLOW/FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.
     schemaUpdateOptions :: (Core.Maybe [Core.Text]),
-    -- | [Optional] The number of rows at the top of a CSV file that BigQuery will skip when loading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped.
+    -- | Optional. The number of rows at the top of a CSV file that BigQuery will skip when loading the data. The default value is 0. This property is useful if you have header rows in the file that should be skipped. When autodetect is on, the behavior is the following: * skipLeadingRows unspecified - Autodetect tries to detect headers in the first row. If they are not detected, the row is read as data. Otherwise data is read starting from the second row. * skipLeadingRows is 0 - Instructs autodetect that there are no headers and data should be read starting from the first row. * skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect headers in row N. If headers are not detected, row N is just skipped. Otherwise row N is used to extract column names for the detected schema.
     skipLeadingRows :: (Core.Maybe Core.Int32),
-    -- | [Optional] The format of the data files. For CSV files, specify \"CSV\". For datastore backups, specify \"DATASTORE/BACKUP\". For newline-delimited JSON, specify \"NEWLINE/DELIMITED_JSON\". For Avro, specify \"AVRO\". For parquet, specify \"PARQUET\". For orc, specify \"ORC\". The default value is CSV.
+    -- | Optional. The format of the data files. For CSV files, specify \"CSV\". For datastore backups, specify \"DATASTORE/BACKUP\". For newline-delimited JSON, specify \"NEWLINE/DELIMITED_JSON\". For Avro, specify \"AVRO\". For parquet, specify \"PARQUET\". For orc, specify \"ORC\". The default value is CSV.
     sourceFormat :: (Core.Maybe Core.Text),
     -- | [Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one \'/\' wildcard character and it must come after the \'bucket\' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups: Exactly one URI can be specified. Also, the \'/\' wildcard character is not allowed.
     sourceUris :: (Core.Maybe [Core.Text]),
+    -- | Optional. Date format used for parsing TIME values.
+    timeFormat :: (Core.Maybe Core.Text),
     -- | Time-based partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified.
     timePartitioning :: (Core.Maybe TimePartitioning),
-    -- | [Optional] If sourceFormat is set to \"AVRO\", indicates whether to interpret logical types as the corresponding BigQuery data type (for example, TIMESTAMP), instead of using the raw type (for example, INTEGER).
+    -- | Optional. [Experimental] Default time zone that will apply when parsing timestamp values that have no specific time zone.
+    timeZone :: (Core.Maybe Core.Text),
+    -- | Optional. Date format used for parsing TIMESTAMP values.
+    timestampFormat :: (Core.Maybe Core.Text),
+    -- | Optional. If sourceFormat is set to \"AVRO\", indicates whether to interpret logical types as the corresponding BigQuery data type (for example, TIMESTAMP), instead of using the raw type (for example, INTEGER).
     useAvroLogicalTypes :: (Core.Maybe Core.Bool),
-    -- | [Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
+    -- | Optional. Specifies the action that occurs if the destination table already exists. The following values are supported: * WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the data, removes the constraints and uses the schema from the load job. * WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/APPEND. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
     writeDisposition :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5207,15 +6204,20 @@ newJobConfigurationLoad =
       allowQuotedNewlines = Core.Nothing,
       autodetect = Core.Nothing,
       clustering = Core.Nothing,
+      columnNameCharacterMap = Core.Nothing,
       connectionProperties = Core.Nothing,
+      copyFilesOnly = Core.Nothing,
       createDisposition = Core.Nothing,
       createSession = Core.Nothing,
+      dateFormat = Core.Nothing,
+      datetimeFormat = Core.Nothing,
       decimalTargetTypes = Core.Nothing,
       destinationEncryptionConfiguration = Core.Nothing,
       destinationTable = Core.Nothing,
       destinationTableProperties = Core.Nothing,
       encoding = Core.Nothing,
       fieldDelimiter = Core.Nothing,
+      fileSetSpecType = Core.Nothing,
       hivePartitioningOptions = Core.Nothing,
       ignoreUnknownValues = Core.Nothing,
       jsonExtension = Core.Nothing,
@@ -5234,7 +6236,10 @@ newJobConfigurationLoad =
       skipLeadingRows = Core.Nothing,
       sourceFormat = Core.Nothing,
       sourceUris = Core.Nothing,
+      timeFormat = Core.Nothing,
       timePartitioning = Core.Nothing,
+      timeZone = Core.Nothing,
+      timestampFormat = Core.Nothing,
       useAvroLogicalTypes = Core.Nothing,
       writeDisposition = Core.Nothing
     }
@@ -5249,15 +6254,20 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "allowQuotedNewlines")
             Core.<*> (o Core..:? "autodetect")
             Core.<*> (o Core..:? "clustering")
+            Core.<*> (o Core..:? "columnNameCharacterMap")
             Core.<*> (o Core..:? "connectionProperties")
+            Core.<*> (o Core..:? "copyFilesOnly")
             Core.<*> (o Core..:? "createDisposition")
             Core.<*> (o Core..:? "createSession")
+            Core.<*> (o Core..:? "dateFormat")
+            Core.<*> (o Core..:? "datetimeFormat")
             Core.<*> (o Core..:? "decimalTargetTypes")
             Core.<*> (o Core..:? "destinationEncryptionConfiguration")
             Core.<*> (o Core..:? "destinationTable")
             Core.<*> (o Core..:? "destinationTableProperties")
             Core.<*> (o Core..:? "encoding")
             Core.<*> (o Core..:? "fieldDelimiter")
+            Core.<*> (o Core..:? "fileSetSpecType")
             Core.<*> (o Core..:? "hivePartitioningOptions")
             Core.<*> (o Core..:? "ignoreUnknownValues")
             Core.<*> (o Core..:? "jsonExtension")
@@ -5276,7 +6286,10 @@ instance Core.FromJSON JobConfigurationLoad where
             Core.<*> (o Core..:? "skipLeadingRows")
             Core.<*> (o Core..:? "sourceFormat")
             Core.<*> (o Core..:? "sourceUris")
+            Core.<*> (o Core..:? "timeFormat")
             Core.<*> (o Core..:? "timePartitioning")
+            Core.<*> (o Core..:? "timeZone")
+            Core.<*> (o Core..:? "timestampFormat")
             Core.<*> (o Core..:? "useAvroLogicalTypes")
             Core.<*> (o Core..:? "writeDisposition")
       )
@@ -5285,115 +6298,115 @@ instance Core.ToJSON JobConfigurationLoad where
   toJSON JobConfigurationLoad {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowJaggedRows" Core..=)
-              Core.<$> allowJaggedRows,
-            ("allowQuotedNewlines" Core..=)
-              Core.<$> allowQuotedNewlines,
+          [ ("allowJaggedRows" Core..=) Core.<$> allowJaggedRows,
+            ("allowQuotedNewlines" Core..=) Core.<$> allowQuotedNewlines,
             ("autodetect" Core..=) Core.<$> autodetect,
             ("clustering" Core..=) Core.<$> clustering,
-            ("connectionProperties" Core..=)
-              Core.<$> connectionProperties,
-            ("createDisposition" Core..=)
-              Core.<$> createDisposition,
+            ("columnNameCharacterMap" Core..=) Core.<$> columnNameCharacterMap,
+            ("connectionProperties" Core..=) Core.<$> connectionProperties,
+            ("copyFilesOnly" Core..=) Core.<$> copyFilesOnly,
+            ("createDisposition" Core..=) Core.<$> createDisposition,
             ("createSession" Core..=) Core.<$> createSession,
-            ("decimalTargetTypes" Core..=)
-              Core.<$> decimalTargetTypes,
+            ("dateFormat" Core..=) Core.<$> dateFormat,
+            ("datetimeFormat" Core..=) Core.<$> datetimeFormat,
+            ("decimalTargetTypes" Core..=) Core.<$> decimalTargetTypes,
             ("destinationEncryptionConfiguration" Core..=)
               Core.<$> destinationEncryptionConfiguration,
-            ("destinationTable" Core..=)
-              Core.<$> destinationTable,
+            ("destinationTable" Core..=) Core.<$> destinationTable,
             ("destinationTableProperties" Core..=)
               Core.<$> destinationTableProperties,
             ("encoding" Core..=) Core.<$> encoding,
             ("fieldDelimiter" Core..=) Core.<$> fieldDelimiter,
+            ("fileSetSpecType" Core..=) Core.<$> fileSetSpecType,
             ("hivePartitioningOptions" Core..=)
               Core.<$> hivePartitioningOptions,
-            ("ignoreUnknownValues" Core..=)
-              Core.<$> ignoreUnknownValues,
+            ("ignoreUnknownValues" Core..=) Core.<$> ignoreUnknownValues,
             ("jsonExtension" Core..=) Core.<$> jsonExtension,
             ("maxBadRecords" Core..=) Core.<$> maxBadRecords,
             ("nullMarker" Core..=) Core.<$> nullMarker,
             ("parquetOptions" Core..=) Core.<$> parquetOptions,
             ("preserveAsciiControlCharacters" Core..=)
               Core.<$> preserveAsciiControlCharacters,
-            ("projectionFields" Core..=)
-              Core.<$> projectionFields,
+            ("projectionFields" Core..=) Core.<$> projectionFields,
             ("quote" Core..=) Core.<$> quote,
-            ("rangePartitioning" Core..=)
-              Core.<$> rangePartitioning,
-            ("referenceFileSchemaUri" Core..=)
-              Core.<$> referenceFileSchemaUri,
+            ("rangePartitioning" Core..=) Core.<$> rangePartitioning,
+            ("referenceFileSchemaUri" Core..=) Core.<$> referenceFileSchemaUri,
             ("schema" Core..=) Core.<$> schema,
             ("schemaInline" Core..=) Core.<$> schemaInline,
-            ("schemaInlineFormat" Core..=)
-              Core.<$> schemaInlineFormat,
-            ("schemaUpdateOptions" Core..=)
-              Core.<$> schemaUpdateOptions,
+            ("schemaInlineFormat" Core..=) Core.<$> schemaInlineFormat,
+            ("schemaUpdateOptions" Core..=) Core.<$> schemaUpdateOptions,
             ("skipLeadingRows" Core..=) Core.<$> skipLeadingRows,
             ("sourceFormat" Core..=) Core.<$> sourceFormat,
             ("sourceUris" Core..=) Core.<$> sourceUris,
-            ("timePartitioning" Core..=)
-              Core.<$> timePartitioning,
-            ("useAvroLogicalTypes" Core..=)
-              Core.<$> useAvroLogicalTypes,
-            ("writeDisposition" Core..=)
-              Core.<$> writeDisposition
+            ("timeFormat" Core..=) Core.<$> timeFormat,
+            ("timePartitioning" Core..=) Core.<$> timePartitioning,
+            ("timeZone" Core..=) Core.<$> timeZone,
+            ("timestampFormat" Core..=) Core.<$> timestampFormat,
+            ("useAvroLogicalTypes" Core..=) Core.<$> useAvroLogicalTypes,
+            ("writeDisposition" Core..=) Core.<$> writeDisposition
           ]
       )
 
+-- | JobConfigurationQuery configures a BigQuery query job.
 --
 -- /See:/ 'newJobConfigurationQuery' smart constructor.
 data JobConfigurationQuery = JobConfigurationQuery
-  { -- | [Optional] If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For standard SQL queries, this flag is ignored and large results are always allowed. However, you must still set destinationTable when result size exceeds the allowed maximum response size.
+  { -- | Optional. If true and query uses legacy SQL dialect, allows the query to produce arbitrarily large result tables at a slight cost in performance. Requires destinationTable to be set. For GoogleSQL queries, this flag is ignored and large results are always allowed. However, you must still set destinationTable when result size exceeds the allowed maximum response size.
     allowLargeResults :: Core.Bool,
-    -- | [Beta] Clustering specification for the destination table. Must be specified with time-based partitioning, data in the table will be first partitioned and subsequently clustered.
+    -- | Clustering specification for the destination table.
     clustering :: (Core.Maybe Clustering),
-    -- | Connection properties.
+    -- | Connection properties which can modify the query behavior.
     connectionProperties :: (Core.Maybe [ConnectionProperty]),
     -- | [Optional] Specifies whether the query should be executed as a continuous query. The default value is false.
     continuous :: (Core.Maybe Core.Bool),
-    -- | [Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
+    -- | Optional. Specifies whether the job is allowed to create new tables. The following values are supported: * CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. * CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
     createDisposition :: (Core.Maybe Core.Text),
-    -- | If true, creates a new session, where session id will be a server generated random id. If false, runs query with an existing session_id passed in ConnectionProperty, otherwise runs query in non-session mode.
+    -- | If this property is true, the job creates a new session using a randomly generated session_id. To continue using a created session with subsequent queries, pass the existing session identifier as a @ConnectionProperty@ value. The session identifier is returned as part of the @SessionInfo@ message within the query statistics. The new session\'s location will be set to @Job.JobReference.location@ if it is present, otherwise it\'s set to the default location based on existing routing logic.
     createSession :: (Core.Maybe Core.Bool),
-    -- | [Optional] Specifies the default dataset to use for unqualified table names in the query. Note that this does not alter behavior of unqualified dataset names.
+    -- | Optional. Specifies the default dataset to use for unqualified table names in the query. This setting does not alter behavior of unqualified dataset names. Setting the system variable @\@\@dataset_id@ achieves the same behavior. See https:\/\/cloud.google.com\/bigquery\/docs\/reference\/system-variables for more information on system variables.
     defaultDataset :: (Core.Maybe DatasetReference),
-    -- | Custom encryption configuration (e.g., Cloud KMS keys).
+    -- | Custom encryption configuration (e.g., Cloud KMS keys)
     destinationEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
-    -- | [Optional] Describes the table where the query results should be stored. If not present, a new table will be created to store the results. This property must be set for large results that exceed the maximum response size.
+    -- | Optional. Describes the table where the query results should be stored. This property must be set for large results that exceed the maximum response size. For queries that produce anonymous (cached) results, this field will be populated by BigQuery.
     destinationTable :: (Core.Maybe TableReference),
-    -- | [Optional] If true and query uses legacy SQL dialect, flattens all nested and repeated fields in the query results. allowLargeResults must be true if this is set to false. For standard SQL queries, this flag is ignored and results are never flattened.
+    -- | Optional. If true and query uses legacy SQL dialect, flattens all nested and repeated fields in the query results. allowLargeResults must be true if this is set to false. For GoogleSQL queries, this flag is ignored and results are never flattened.
     flattenResults :: Core.Bool,
-    -- | [Optional] Limits the billing tier for this job. Queries that have resource usage beyond this tier will fail (without incurring a charge). If unspecified, this will be set to your project default.
+    -- | Optional. [Deprecated] Maximum billing tier allowed for this query. The billing tier controls the amount of compute resources allotted to the query, and multiplies the on-demand cost of the query accordingly. A query that runs within its allotted resources will succeed and indicate its billing tier in statistics.query.billingTier, but if the query exceeds its allotted resources, it will fail with billingTierLimitExceeded. WARNING: The billed byte amount can be multiplied by an amount up to this number! Most users should not need to alter this setting, and we recommend that you avoid introducing new uses of it.
     maximumBillingTier :: Core.Int32,
-    -- | [Optional] Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default.
+    -- | Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default.
     maximumBytesBilled :: (Core.Maybe Core.Int64),
-    -- | Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (\@myparam) query parameters in this query.
+    -- | GoogleSQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (\@myparam) query parameters in this query.
     parameterMode :: (Core.Maybe Core.Text),
     -- | [Deprecated] This property is deprecated.
     preserveNulls :: (Core.Maybe Core.Bool),
-    -- | [Optional] Specifies a priority for the query. Possible values include INTERACTIVE and BATCH. The default value is INTERACTIVE.
+    -- | Optional. Specifies a priority for the query. Possible values include INTERACTIVE and BATCH. The default value is INTERACTIVE.
     priority :: (Core.Maybe Core.Text),
-    -- | [Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or standard SQL.
+    -- | [Required] SQL query text to execute. The useLegacySql field can be used to indicate whether the query uses legacy SQL or GoogleSQL.
     query :: (Core.Maybe Core.Text),
-    -- | Query parameters for standard SQL queries.
+    -- | Query parameters for GoogleSQL queries.
     queryParameters :: (Core.Maybe [QueryParameter]),
-    -- | [TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
+    -- | Range partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified.
     rangePartitioning :: (Core.Maybe RangePartitioning),
-    -- | Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE/APPEND; when writeDisposition is WRITE/TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE/TRUNCATE will always overwrite the schema. One or more of the following values are specified: ALLOW/FIELD/ADDITION: allow adding a nullable field to the schema. ALLOW/FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.
+    -- | Allows the schema of the destination table to be updated as a side effect of the query job. Schema update options are supported in two cases: when writeDisposition is WRITE/APPEND; when writeDisposition is WRITE/TRUNCATE and the destination table is a partition of a table, specified by partition decorators. For normal tables, WRITE/TRUNCATE will always overwrite the schema. One or more of the following values are specified: * ALLOW/FIELD/ADDITION: allow adding a nullable field to the schema. * ALLOW/FIELD_RELAXATION: allow relaxing a required field in the original schema to nullable.
     schemaUpdateOptions :: (Core.Maybe [Core.Text]),
-    -- | [Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.
+    -- | Options controlling the execution of scripts.
+    scriptOptions :: (Core.Maybe ScriptOptions),
+    -- | Output only. System variables for GoogleSQL queries. A system variable is output if the variable is settable and its value differs from the system default. \"\@\@\" prefix is not included in the name of the System variables.
+    systemVariables :: (Core.Maybe SystemVariables),
+    -- | Optional. You can specify external table definitions, which operate as ephemeral tables that can be queried. These definitions are configured using a JSON map, where the string key represents the table identifier, and the value is the corresponding external data configuration object.
     tableDefinitions :: (Core.Maybe JobConfigurationQuery_TableDefinitions),
     -- | Time-based partitioning specification for the destination table. Only one of timePartitioning and rangePartitioning should be specified.
     timePartitioning :: (Core.Maybe TimePartitioning),
-    -- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery\'s standard SQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.
+    -- | Optional. Specifies whether to use BigQuery\'s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery\'s GoogleSQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.
     useLegacySql :: Core.Bool,
-    -- | [Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true.
+    -- | Optional. Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true.
     useQueryCache :: Core.Bool,
     -- | Describes user-defined function resources used in the query.
     userDefinedFunctionResources :: (Core.Maybe [UserDefinedFunctionResource]),
-    -- | [Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the table data and uses the schema from the query result. WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
-    writeDisposition :: (Core.Maybe Core.Text)
+    -- | Optional. Specifies the action that occurs if the destination table already exists. The following values are supported: * WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the data, removes the constraints, and uses the schema from the query result. * WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
+    writeDisposition :: (Core.Maybe Core.Text),
+    -- | Optional. This is only supported for a SELECT query using a temporary table. If set, the query is allowed to write results incrementally to the temporary result table. This may incur a performance penalty. This option cannot be used with Legacy SQL. This feature is not yet available.
+    writeIncrementalResults :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5421,12 +6434,15 @@ newJobConfigurationQuery =
       queryParameters = Core.Nothing,
       rangePartitioning = Core.Nothing,
       schemaUpdateOptions = Core.Nothing,
+      scriptOptions = Core.Nothing,
+      systemVariables = Core.Nothing,
       tableDefinitions = Core.Nothing,
       timePartitioning = Core.Nothing,
       useLegacySql = Core.True,
       useQueryCache = Core.True,
       userDefinedFunctionResources = Core.Nothing,
-      writeDisposition = Core.Nothing
+      writeDisposition = Core.Nothing,
+      writeIncrementalResults = Core.Nothing
     }
 
 instance Core.FromJSON JobConfigurationQuery where
@@ -5446,7 +6462,8 @@ instance Core.FromJSON JobConfigurationQuery where
             Core.<*> (o Core..:? "destinationTable")
             Core.<*> (o Core..:? "flattenResults" Core..!= Core.True)
             Core.<*> (o Core..:? "maximumBillingTier" Core..!= 1)
-            Core.<*> ( o Core..:? "maximumBytesBilled"
+            Core.<*> ( o
+                         Core..:? "maximumBytesBilled"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "parameterMode")
@@ -5456,65 +6473,62 @@ instance Core.FromJSON JobConfigurationQuery where
             Core.<*> (o Core..:? "queryParameters")
             Core.<*> (o Core..:? "rangePartitioning")
             Core.<*> (o Core..:? "schemaUpdateOptions")
+            Core.<*> (o Core..:? "scriptOptions")
+            Core.<*> (o Core..:? "systemVariables")
             Core.<*> (o Core..:? "tableDefinitions")
             Core.<*> (o Core..:? "timePartitioning")
             Core.<*> (o Core..:? "useLegacySql" Core..!= Core.True)
             Core.<*> (o Core..:? "useQueryCache" Core..!= Core.True)
             Core.<*> (o Core..:? "userDefinedFunctionResources")
             Core.<*> (o Core..:? "writeDisposition")
+            Core.<*> (o Core..:? "writeIncrementalResults")
       )
 
 instance Core.ToJSON JobConfigurationQuery where
   toJSON JobConfigurationQuery {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("allowLargeResults" Core..= allowLargeResults),
+          [ Core.Just ("allowLargeResults" Core..= allowLargeResults),
             ("clustering" Core..=) Core.<$> clustering,
-            ("connectionProperties" Core..=)
-              Core.<$> connectionProperties,
+            ("connectionProperties" Core..=) Core.<$> connectionProperties,
             ("continuous" Core..=) Core.<$> continuous,
-            ("createDisposition" Core..=)
-              Core.<$> createDisposition,
+            ("createDisposition" Core..=) Core.<$> createDisposition,
             ("createSession" Core..=) Core.<$> createSession,
             ("defaultDataset" Core..=) Core.<$> defaultDataset,
             ("destinationEncryptionConfiguration" Core..=)
               Core.<$> destinationEncryptionConfiguration,
-            ("destinationTable" Core..=)
-              Core.<$> destinationTable,
+            ("destinationTable" Core..=) Core.<$> destinationTable,
             Core.Just ("flattenResults" Core..= flattenResults),
-            Core.Just
-              ("maximumBillingTier" Core..= maximumBillingTier),
-            ("maximumBytesBilled" Core..=) Core.. Core.AsText
+            Core.Just ("maximumBillingTier" Core..= maximumBillingTier),
+            ("maximumBytesBilled" Core..=)
+              Core.. Core.AsText
               Core.<$> maximumBytesBilled,
             ("parameterMode" Core..=) Core.<$> parameterMode,
             ("preserveNulls" Core..=) Core.<$> preserveNulls,
             ("priority" Core..=) Core.<$> priority,
             ("query" Core..=) Core.<$> query,
             ("queryParameters" Core..=) Core.<$> queryParameters,
-            ("rangePartitioning" Core..=)
-              Core.<$> rangePartitioning,
-            ("schemaUpdateOptions" Core..=)
-              Core.<$> schemaUpdateOptions,
-            ("tableDefinitions" Core..=)
-              Core.<$> tableDefinitions,
-            ("timePartitioning" Core..=)
-              Core.<$> timePartitioning,
+            ("rangePartitioning" Core..=) Core.<$> rangePartitioning,
+            ("schemaUpdateOptions" Core..=) Core.<$> schemaUpdateOptions,
+            ("scriptOptions" Core..=) Core.<$> scriptOptions,
+            ("systemVariables" Core..=) Core.<$> systemVariables,
+            ("tableDefinitions" Core..=) Core.<$> tableDefinitions,
+            ("timePartitioning" Core..=) Core.<$> timePartitioning,
             Core.Just ("useLegacySql" Core..= useLegacySql),
             Core.Just ("useQueryCache" Core..= useQueryCache),
             ("userDefinedFunctionResources" Core..=)
               Core.<$> userDefinedFunctionResources,
-            ("writeDisposition" Core..=)
-              Core.<$> writeDisposition
+            ("writeDisposition" Core..=) Core.<$> writeDisposition,
+            ("writeIncrementalResults" Core..=)
+              Core.<$> writeIncrementalResults
           ]
       )
 
--- | [Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.
+-- | Optional. You can specify external table definitions, which operate as ephemeral tables that can be queried. These definitions are configured using a JSON map, where the string key represents the table identifier, and the value is the corresponding external data configuration object.
 --
 -- /See:/ 'newJobConfigurationQuery_TableDefinitions' smart constructor.
 newtype JobConfigurationQuery_TableDefinitions = JobConfigurationQuery_TableDefinitions
-  { -- |
-    additional :: (Core.HashMap Core.Text ExternalDataConfiguration)
+  { additional :: (Core.HashMap Core.Text ExternalDataConfiguration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5526,10 +6540,7 @@ newJobConfigurationQuery_TableDefinitions ::
 newJobConfigurationQuery_TableDefinitions additional =
   JobConfigurationQuery_TableDefinitions {additional = additional}
 
-instance
-  Core.FromJSON
-    JobConfigurationQuery_TableDefinitions
-  where
+instance Core.FromJSON JobConfigurationQuery_TableDefinitions where
   parseJSON =
     Core.withObject
       "JobConfigurationQuery_TableDefinitions"
@@ -5538,31 +6549,29 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    JobConfigurationQuery_TableDefinitions
-  where
+instance Core.ToJSON JobConfigurationQuery_TableDefinitions where
   toJSON JobConfigurationQuery_TableDefinitions {..} =
     Core.toJSON additional
 
+-- | JobConfigurationTableCopy configures a job that copies data from one table to another. For more information on copying tables, see <https://cloud.google.com/bigquery/docs/managing-tables#copy-table Copy a table>.
 --
 -- /See:/ 'newJobConfigurationTableCopy' smart constructor.
 data JobConfigurationTableCopy = JobConfigurationTableCopy
-  { -- | [Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
+  { -- | Optional. Specifies whether the job is allowed to create new tables. The following values are supported: * CREATE/IF/NEEDED: If the table does not exist, BigQuery creates the table. * CREATE/NEVER: The table must already exist. If it does not, a \'notFound\' error is returned in the job result. The default value is CREATE/IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.
     createDisposition :: (Core.Maybe Core.Text),
     -- | Custom encryption configuration (e.g., Cloud KMS keys).
     destinationEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
-    -- | [Optional] The time when the destination table expires. Expired tables will be deleted and their storage reclaimed.
-    destinationExpirationTime :: (Core.Maybe Core.Value),
-    -- | [Required] The destination table
+    -- | Optional. The time when the destination table expires. Expired tables will be deleted and their storage reclaimed.
+    destinationExpirationTime :: (Core.Maybe Core.DateTime),
+    -- | [Required] The destination table.
     destinationTable :: (Core.Maybe TableReference),
-    -- | [Optional] Supported operation types in table copy job.
-    operationType :: (Core.Maybe Core.Text),
+    -- | Optional. Supported operation types in table copy job.
+    operationType :: (Core.Maybe JobConfigurationTableCopy_OperationType),
     -- | [Pick one] Source table to copy.
     sourceTable :: (Core.Maybe TableReference),
     -- | [Pick one] Source tables to copy.
     sourceTables :: (Core.Maybe [TableReference]),
-    -- | [Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
+    -- | Optional. Specifies the action that occurs if the destination table already exists. The following values are supported: * WRITE/TRUNCATE: If the table already exists, BigQuery overwrites the table data and uses the schema and table constraints from the source table. * WRITE/APPEND: If the table already exists, BigQuery appends the data to the table. * WRITE/EMPTY: If the table already exists and contains data, a \'duplicate\' error is returned in the job result. The default value is WRITE/EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion.
     writeDisposition :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5602,22 +6611,44 @@ instance Core.ToJSON JobConfigurationTableCopy where
   toJSON JobConfigurationTableCopy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createDisposition" Core..=)
-              Core.<$> createDisposition,
+          [ ("createDisposition" Core..=) Core.<$> createDisposition,
             ("destinationEncryptionConfiguration" Core..=)
               Core.<$> destinationEncryptionConfiguration,
             ("destinationExpirationTime" Core..=)
               Core.<$> destinationExpirationTime,
-            ("destinationTable" Core..=)
-              Core.<$> destinationTable,
+            ("destinationTable" Core..=) Core.<$> destinationTable,
             ("operationType" Core..=) Core.<$> operationType,
             ("sourceTable" Core..=) Core.<$> sourceTable,
             ("sourceTables" Core..=) Core.<$> sourceTables,
-            ("writeDisposition" Core..=)
-              Core.<$> writeDisposition
+            ("writeDisposition" Core..=) Core.<$> writeDisposition
           ]
       )
 
+-- | Reason about why a Job was created from a <https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query jobs.query> method when used with @JOB_CREATION_OPTIONAL@ Job creation mode. For <https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert jobs.insert> method calls it will always be @REQUESTED@. <https://cloud.google.com/products/#product-launch-stages Preview>
+--
+-- /See:/ 'newJobCreationReason' smart constructor.
+newtype JobCreationReason = JobCreationReason
+  { -- | Output only. Specifies the high level reason why a Job was created.
+    code :: (Core.Maybe JobCreationReason_Code)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JobCreationReason' with the minimum fields required to make a request.
+newJobCreationReason ::
+  JobCreationReason
+newJobCreationReason = JobCreationReason {code = Core.Nothing}
+
+instance Core.FromJSON JobCreationReason where
+  parseJSON =
+    Core.withObject
+      "JobCreationReason"
+      (\o -> JobCreationReason Core.<$> (o Core..:? "code"))
+
+instance Core.ToJSON JobCreationReason where
+  toJSON JobCreationReason {..} =
+    Core.object (Core.catMaybes [("code" Core..=) Core.<$> code])
+
+-- | JobList is the response format for a jobs.list call.
 --
 -- /See:/ 'newJobList' smart constructor.
 data JobList = JobList
@@ -5628,7 +6659,9 @@ data JobList = JobList
     -- | The resource type of the response.
     kind :: Core.Text,
     -- | A token to request the next page of results.
-    nextPageToken :: (Core.Maybe Core.Text)
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | A list of skipped locations that were unreachable. For more information about BigQuery locations, see: https:\/\/cloud.google.com\/bigquery\/docs\/locations. Example: \"europe-west5\"
+    unreachable :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5640,7 +6673,8 @@ newJobList =
     { etag = Core.Nothing,
       jobs = Core.Nothing,
       kind = "bigquery#jobList",
-      nextPageToken = Core.Nothing
+      nextPageToken = Core.Nothing,
+      unreachable = Core.Nothing
     }
 
 instance Core.FromJSON JobList where
@@ -5653,6 +6687,7 @@ instance Core.FromJSON JobList where
             Core.<*> (o Core..:? "jobs")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#jobList")
             Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "unreachable")
       )
 
 instance Core.ToJSON JobList where
@@ -5662,28 +6697,32 @@ instance Core.ToJSON JobList where
           [ ("etag" Core..=) Core.<$> etag,
             ("jobs" Core..=) Core.<$> jobs,
             Core.Just ("kind" Core..= kind),
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("unreachable" Core..=) Core.<$> unreachable
           ]
       )
 
+-- | ListFormatJob is a partial projection of job information returned as part of a jobs.list response.
 --
 -- /See:/ 'newJobList_JobsItem' smart constructor.
 data JobList_JobsItem = JobList_JobsItem
-  { -- | [Full-projection-only] Specifies the job configuration.
+  { -- | Required. Describes the job configuration.
     configuration :: (Core.Maybe JobConfiguration),
     -- | A result object that will be present only if the job has failed.
     errorResult :: (Core.Maybe ErrorProto),
     -- | Unique opaque ID of the job.
     id :: (Core.Maybe Core.Text),
-    -- | Job reference uniquely identifying the job.
+    -- | Unique opaque ID of the job.
     jobReference :: (Core.Maybe JobReference),
     -- | The resource type.
-    kind :: Core.Text,
+    kind :: (Core.Maybe Core.Text),
+    -- | [Full-projection-only] String representation of identity of requesting party. Populated for both first- and third-party identities. Only present for APIs that support third-party identities.
+    principalSubject :: (Core.Maybe Core.Text),
     -- | Running state of the job. When the state is DONE, errorResult can be checked to determine whether the job succeeded or failed.
     state :: (Core.Maybe Core.Text),
-    -- | [Output-only] Information about the job, including starting time and ending time of the job.
+    -- | Output only. Information about the job, including starting time and ending time of the job.
     statistics :: (Core.Maybe JobStatistics),
-    -- | [Full-projection-only] Describes the state of the job.
+    -- | [Full-projection-only] Describes the status of this job.
     status :: (Core.Maybe JobStatus),
     -- | [Full-projection-only] Email address of the user who ran the job.
     userEmail :: (Core.Maybe Core.Text)
@@ -5699,7 +6738,8 @@ newJobList_JobsItem =
       errorResult = Core.Nothing,
       id = Core.Nothing,
       jobReference = Core.Nothing,
-      kind = "bigquery#job",
+      kind = Core.Nothing,
+      principalSubject = Core.Nothing,
       state = Core.Nothing,
       statistics = Core.Nothing,
       status = Core.Nothing,
@@ -5716,7 +6756,8 @@ instance Core.FromJSON JobList_JobsItem where
             Core.<*> (o Core..:? "errorResult")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "jobReference")
-            Core.<*> (o Core..:? "kind" Core..!= "bigquery#job")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "principal_subject")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "statistics")
             Core.<*> (o Core..:? "status")
@@ -5731,7 +6772,8 @@ instance Core.ToJSON JobList_JobsItem where
             ("errorResult" Core..=) Core.<$> errorResult,
             ("id" Core..=) Core.<$> id,
             ("jobReference" Core..=) Core.<$> jobReference,
-            Core.Just ("kind" Core..= kind),
+            ("kind" Core..=) Core.<$> kind,
+            ("principal_subject" Core..=) Core.<$> principalSubject,
             ("state" Core..=) Core.<$> state,
             ("statistics" Core..=) Core.<$> statistics,
             ("status" Core..=) Core.<$> status,
@@ -5739,14 +6781,15 @@ instance Core.ToJSON JobList_JobsItem where
           ]
       )
 
+-- | A job reference is a fully qualified identifier for referring to a job.
 --
 -- /See:/ 'newJobReference' smart constructor.
 data JobReference = JobReference
-  { -- | [Required] The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters.
+  { -- | Required. The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters.
     jobId :: (Core.Maybe Core.Text),
-    -- | The geographic location of the job. See details at https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | Optional. The geographic location of the job. The default value is US. For more information about BigQuery locations, see: https:\/\/cloud.google.com\/bigquery\/docs\/locations
     location :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the project containing this job.
+    -- | Required. The ID of the project containing this job.
     projectId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5782,48 +6825,53 @@ instance Core.ToJSON JobReference where
           ]
       )
 
+-- | Statistics for a single job execution.
 --
 -- /See:/ 'newJobStatistics' smart constructor.
 data JobStatistics = JobStatistics
-  { -- | [TrustedTester] [Output-only] Job progress (0.0 -> 1.0) for LOAD and EXTRACT jobs.
+  { -- | Output only. [TrustedTester] Job progress (0.0 -> 1.0) for LOAD and EXTRACT jobs.
     completionRatio :: (Core.Maybe Core.Double),
-    -- | [Output-only] Statistics for a copy job.
+    -- | Output only. Statistics for a copy job.
     copy :: (Core.Maybe JobStatistics5),
-    -- | [Output-only] Creation time of this job, in milliseconds since the epoch. This field will be present on all jobs.
+    -- | Output only. Creation time of this job, in milliseconds since the epoch. This field will be present on all jobs.
     creationTime :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Statistics for data masking. Present only for query and extract jobs.
+    -- | Output only. Statistics for data-masking. Present only for query and extract jobs.
     dataMaskingStatistics :: (Core.Maybe DataMaskingStatistics),
-    -- | [Output-only] End time of this job, in milliseconds since the epoch. This field will be present whenever a job is in the DONE state.
+    -- | Output only. Name of edition corresponding to the reservation for this job at the time of this update.
+    edition :: (Core.Maybe JobStatistics_Edition),
+    -- | Output only. End time of this job, in milliseconds since the epoch. This field will be present whenever a job is in the DONE state.
     endTime :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Statistics for an extract job.
+    -- | Output only. Statistics for an extract job.
     extract :: (Core.Maybe JobStatistics4),
-    -- | [Output-only] Statistics for a load job.
+    -- | Output only. The duration in milliseconds of the execution of the final attempt of this job, as BigQuery may internally re-attempt to execute the job.
+    finalExecutionDurationMs :: (Core.Maybe Core.Int64),
+    -- | Output only. Statistics for a load job.
     load :: (Core.Maybe JobStatistics3),
-    -- | [Output-only] Number of child jobs executed.
+    -- | Output only. Number of child jobs executed.
     numChildJobs :: (Core.Maybe Core.Int64),
-    -- | [Output-only] If this is a child job, the id of the parent.
+    -- | Output only. If this is a child job, specifies the job ID of the parent.
     parentJobId :: (Core.Maybe Core.Text),
-    -- | [Output-only] Statistics for a query job.
+    -- | Output only. Statistics for a query job.
     query :: (Core.Maybe JobStatistics2),
-    -- | [Output-only] Quotas which delayed this job\'s start time.
+    -- | Output only. Quotas which delayed this job\'s start time.
     quotaDeferments :: (Core.Maybe [Core.Text]),
-    -- | [Output-only] Job resource usage breakdown by reservation.
+    -- | Output only. Job resource usage breakdown by reservation. This field reported misleading information and will no longer be populated.
     reservationUsage :: (Core.Maybe [JobStatistics_ReservationUsageItem]),
-    -- | [Output-only] Name of the primary reservation assigned to this job. Note that this could be different than reservations reported in the reservation usage field if parent reservations were used to execute this job.
+    -- | Output only. Name of the primary reservation assigned to this job. Note that this could be different than reservations reported in the reservation usage field if parent reservations were used to execute this job.
     reservationId :: (Core.Maybe Core.Text),
-    -- | [Output-only] [Preview] Statistics for row-level security. Present only for query and extract jobs.
+    -- | Output only. Statistics for row-level security. Present only for query and extract jobs.
     rowLevelSecurityStatistics :: (Core.Maybe RowLevelSecurityStatistics),
-    -- | [Output-only] Statistics for a child job of a script.
+    -- | Output only. If this a child job of a script, specifies information about the context of this job within the script.
     scriptStatistics :: (Core.Maybe ScriptStatistics),
-    -- | [Output-only] [Preview] Information of the session if this job is part of one.
+    -- | Output only. Information of the session if this job is part of one.
     sessionInfo :: (Core.Maybe SessionInfo),
-    -- | [Output-only] Start time of this job, in milliseconds since the epoch. This field will be present when the job transitions from the PENDING state to either RUNNING or DONE.
+    -- | Output only. Start time of this job, in milliseconds since the epoch. This field will be present when the job transitions from the PENDING state to either RUNNING or DONE.
     startTime :: (Core.Maybe Core.Int64),
-    -- | [Output-only] [Deprecated] Use the bytes processed in the query statistics instead.
+    -- | Output only. Total bytes processed for the job.
     totalBytesProcessed :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Slot-milliseconds for the job.
+    -- | Output only. Slot-milliseconds for the job.
     totalSlotMs :: (Core.Maybe Core.Int64),
-    -- | [Output-only] [Alpha] Information of the multi-statement transaction if this job is part of one.
+    -- | Output only. [Alpha] Information of the multi-statement transaction if this job is part of one. This property is only expected on a child job or a job that is in a session. A script parent job is not part of the transaction started in the script.
     transactionInfo :: (Core.Maybe TransactionInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5837,8 +6885,10 @@ newJobStatistics =
       copy = Core.Nothing,
       creationTime = Core.Nothing,
       dataMaskingStatistics = Core.Nothing,
+      edition = Core.Nothing,
       endTime = Core.Nothing,
       extract = Core.Nothing,
+      finalExecutionDurationMs = Core.Nothing,
       load = Core.Nothing,
       numChildJobs = Core.Nothing,
       parentJobId = Core.Nothing,
@@ -5863,18 +6913,17 @@ instance Core.FromJSON JobStatistics where
           JobStatistics
             Core.<$> (o Core..:? "completionRatio")
             Core.<*> (o Core..:? "copy")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dataMaskingStatistics")
-            Core.<*> ( o Core..:? "endTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "edition")
+            Core.<*> (o Core..:? "endTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "extract")
-            Core.<*> (o Core..:? "load")
-            Core.<*> ( o Core..:? "numChildJobs"
+            Core.<*> ( o
+                         Core..:? "finalExecutionDurationMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "load")
+            Core.<*> (o Core..:? "numChildJobs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "parentJobId")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "quotaDeferments")
@@ -5883,15 +6932,12 @@ instance Core.FromJSON JobStatistics where
             Core.<*> (o Core..:? "rowLevelSecurityStatistics")
             Core.<*> (o Core..:? "scriptStatistics")
             Core.<*> (o Core..:? "sessionInfo")
-            Core.<*> ( o Core..:? "startTime"
+            Core.<*> (o Core..:? "startTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "totalBytesProcessed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalSlotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalSlotMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "transactionInfo")
       )
 
@@ -5899,47 +6945,43 @@ instance Core.ToJSON JobStatistics where
   toJSON JobStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("completionRatio" Core..=)
-              Core.<$> completionRatio,
+          [ ("completionRatio" Core..=) Core.<$> completionRatio,
             ("copy" Core..=) Core.<$> copy,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
-            ("dataMaskingStatistics" Core..=)
-              Core.<$> dataMaskingStatistics,
-            ("endTime" Core..=) Core.. Core.AsText
-              Core.<$> endTime,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("dataMaskingStatistics" Core..=) Core.<$> dataMaskingStatistics,
+            ("edition" Core..=) Core.<$> edition,
+            ("endTime" Core..=) Core.. Core.AsText Core.<$> endTime,
             ("extract" Core..=) Core.<$> extract,
+            ("finalExecutionDurationMs" Core..=)
+              Core.. Core.AsText
+              Core.<$> finalExecutionDurationMs,
             ("load" Core..=) Core.<$> load,
-            ("numChildJobs" Core..=) Core.. Core.AsText
-              Core.<$> numChildJobs,
+            ("numChildJobs" Core..=) Core.. Core.AsText Core.<$> numChildJobs,
             ("parentJobId" Core..=) Core.<$> parentJobId,
             ("query" Core..=) Core.<$> query,
             ("quotaDeferments" Core..=) Core.<$> quotaDeferments,
-            ("reservationUsage" Core..=)
-              Core.<$> reservationUsage,
+            ("reservationUsage" Core..=) Core.<$> reservationUsage,
             ("reservation_id" Core..=) Core.<$> reservationId,
             ("rowLevelSecurityStatistics" Core..=)
               Core.<$> rowLevelSecurityStatistics,
-            ("scriptStatistics" Core..=)
-              Core.<$> scriptStatistics,
+            ("scriptStatistics" Core..=) Core.<$> scriptStatistics,
             ("sessionInfo" Core..=) Core.<$> sessionInfo,
-            ("startTime" Core..=) Core.. Core.AsText
-              Core.<$> startTime,
-            ("totalBytesProcessed" Core..=) Core.. Core.AsText
+            ("startTime" Core..=) Core.. Core.AsText Core.<$> startTime,
+            ("totalBytesProcessed" Core..=)
+              Core.. Core.AsText
               Core.<$> totalBytesProcessed,
-            ("totalSlotMs" Core..=) Core.. Core.AsText
-              Core.<$> totalSlotMs,
-            ("transactionInfo" Core..=)
-              Core.<$> transactionInfo
+            ("totalSlotMs" Core..=) Core.. Core.AsText Core.<$> totalSlotMs,
+            ("transactionInfo" Core..=) Core.<$> transactionInfo
           ]
       )
 
+-- | Job resource usage breakdown by reservation.
 --
 -- /See:/ 'newJobStatistics_ReservationUsageItem' smart constructor.
 data JobStatistics_ReservationUsageItem = JobStatistics_ReservationUsageItem
-  { -- | [Output-only] Reservation name or \"unreserved\" for on-demand resources usage.
+  { -- | Reservation name or \"unreserved\" for on-demand resource usage and multi-statement queries.
     name :: (Core.Maybe Core.Text),
-    -- | [Output-only] Slot-milliseconds the job spent in the given reservation.
+    -- | Total slot milliseconds used by the reservation for a particular job.
     slotMs :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5953,104 +6995,123 @@ newJobStatistics_ReservationUsageItem =
       slotMs = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    JobStatistics_ReservationUsageItem
-  where
+instance Core.FromJSON JobStatistics_ReservationUsageItem where
   parseJSON =
     Core.withObject
       "JobStatistics_ReservationUsageItem"
       ( \o ->
           JobStatistics_ReservationUsageItem
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "slotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "slotMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    JobStatistics_ReservationUsageItem
-  where
+instance Core.ToJSON JobStatistics_ReservationUsageItem where
   toJSON JobStatistics_ReservationUsageItem {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("slotMs" Core..=) Core.. Core.AsText
-              Core.<$> slotMs
+            ("slotMs" Core..=) Core.. Core.AsText Core.<$> slotMs
           ]
       )
 
+-- | Statistics for a query job.
 --
 -- /See:/ 'newJobStatistics2' smart constructor.
 data JobStatistics2 = JobStatistics2
-  { -- | BI Engine specific Statistics. [Output only] BI Engine specific Statistics.
+  { -- | Output only. BI Engine specific Statistics.
     biEngineStatistics :: (Core.Maybe BiEngineStatistics),
-    -- | [Output only] Billing tier for the job.
+    -- | Output only. Billing tier for the job. This is a BigQuery-specific concept which is not related to the Google Cloud notion of \"free tier\". The value here is a measure of the query\'s resource consumption relative to the amount of data scanned. For on-demand queries, the limit is 100, and all queries within this limit are billed at the standard on-demand rates. On-demand queries that exceed this limit will fail with a billingTierLimitExceeded error.
     billingTier :: (Core.Maybe Core.Int32),
-    -- | [Output only] Whether the query result was fetched from the query cache.
+    -- | Output only. Whether the query result was fetched from the query cache.
     cacheHit :: (Core.Maybe Core.Bool),
-    -- | [Output only] [Preview] The number of row access policies affected by a DDL statement. Present only for DROP ALL ROW ACCESS POLICIES queries.
+    -- | Output only. Referenced dataset for DCL statement.
+    dclTargetDataset :: (Core.Maybe DatasetReference),
+    -- | Output only. Referenced table for DCL statement.
+    dclTargetTable :: (Core.Maybe TableReference),
+    -- | Output only. Referenced view for DCL statement.
+    dclTargetView :: (Core.Maybe TableReference),
+    -- | Output only. The number of row access policies affected by a DDL statement. Present only for DROP ALL ROW ACCESS POLICIES queries.
     ddlAffectedRowAccessPolicyCount :: (Core.Maybe Core.Int64),
-    -- | [Output only] The DDL destination table. Present only for ALTER TABLE RENAME TO queries. Note that ddl/target/table is used just for its type information.
+    -- | Output only. The table after rename. Present only for ALTER TABLE RENAME TO query.
     ddlDestinationTable :: (Core.Maybe TableReference),
-    -- | The DDL operation performed, possibly dependent on the pre-existence of the DDL target. Possible values (new values might be added in the future): \"CREATE\": The query created the DDL target. \"SKIP\": No-op. Example cases: the query is CREATE TABLE IF NOT EXISTS while the table already exists, or the query is DROP TABLE IF EXISTS while the table does not exist. \"REPLACE\": The query replaced the DDL target. Example case: the query is CREATE OR REPLACE TABLE, and the table already exists. \"DROP\": The query deleted the DDL target.
+    -- | Output only. The DDL operation performed, possibly dependent on the pre-existence of the DDL target.
     ddlOperationPerformed :: (Core.Maybe Core.Text),
-    -- | [Output only] The DDL target dataset. Present only for CREATE\/ALTER\/DROP SCHEMA queries.
+    -- | Output only. The DDL target dataset. Present only for CREATE\/ALTER\/DROP SCHEMA(dataset) queries.
     ddlTargetDataset :: (Core.Maybe DatasetReference),
-    -- | The DDL target routine. Present only for CREATE\/DROP FUNCTION\/PROCEDURE queries.
+    -- | Output only. [Beta] The DDL target routine. Present only for CREATE\/DROP FUNCTION\/PROCEDURE queries.
     ddlTargetRoutine :: (Core.Maybe RoutineReference),
-    -- | [Output only] [Preview] The DDL target row access policy. Present only for CREATE\/DROP ROW ACCESS POLICY queries.
+    -- | Output only. The DDL target row access policy. Present only for CREATE\/DROP ROW ACCESS POLICY queries.
     ddlTargetRowAccessPolicy :: (Core.Maybe RowAccessPolicyReference),
-    -- | [Output only] The DDL target table. Present only for CREATE\/DROP TABLE\/VIEW and DROP ALL ROW ACCESS POLICIES queries.
+    -- | Output only. The DDL target table. Present only for CREATE\/DROP TABLE\/VIEW and DROP ALL ROW ACCESS POLICIES queries.
     ddlTargetTable :: (Core.Maybe TableReference),
-    -- | [Output only] Detailed statistics for DML statements Present only for DML statements INSERT, UPDATE, DELETE or TRUNCATE.
+    -- | Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE.
     dmlStats :: (Core.Maybe DmlStatistics),
-    -- | [Output only] The original estimate of bytes processed for the job.
+    -- | Output only. The original estimate of bytes processed for the job.
     estimatedBytesProcessed :: (Core.Maybe Core.Int64),
-    -- | [Output only] Statistics of a BigQuery ML training job.
+    -- | Output only. Stats for EXPORT DATA statement.
+    exportDataStatistics :: (Core.Maybe ExportDataStatistics),
+    -- | Output only. Job cost breakdown as bigquery internal cost and external service costs.
+    externalServiceCosts :: (Core.Maybe [ExternalServiceCost]),
+    -- | Output only. Statistics for a LOAD query.
+    loadQueryStatistics :: (Core.Maybe LoadQueryStatistics),
+    -- | Output only. Statistics of materialized views of a query job.
+    materializedViewStatistics :: (Core.Maybe MaterializedViewStatistics),
+    -- | Output only. Statistics of metadata cache usage in a query for BigLake tables.
+    metadataCacheStatistics :: (Core.Maybe MetadataCacheStatistics),
+    -- | Output only. Statistics of a BigQuery ML training job.
     mlStatistics :: (Core.Maybe MlStatistics),
-    -- | [Output only, Beta] Information about create model query job progress.
+    -- | Deprecated.
     modelTraining :: (Core.Maybe BigQueryModelTraining),
-    -- | [Output only, Beta] Deprecated; do not use.
+    -- | Deprecated.
     modelTrainingCurrentIteration :: (Core.Maybe Core.Int32),
-    -- | [Output only, Beta] Deprecated; do not use.
+    -- | Deprecated.
     modelTrainingExpectedTotalIteration :: (Core.Maybe Core.Int64),
-    -- | [Output only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
+    -- | Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
     numDmlAffectedRows :: (Core.Maybe Core.Int64),
-    -- | [Output only] Describes execution plan for the query.
+    -- | Output only. Performance insights.
+    performanceInsights :: (Core.Maybe PerformanceInsights),
+    -- | Output only. Query optimization information for a QUERY job.
+    queryInfo :: (Core.Maybe QueryInfo),
+    -- | Output only. Describes execution plan for the query.
     queryPlan :: (Core.Maybe [ExplainQueryStage]),
-    -- | [Output only] Referenced routines (persistent user-defined functions and stored procedures) for the job.
+    -- | Output only. Referenced routines for the job.
     referencedRoutines :: (Core.Maybe [RoutineReference]),
-    -- | [Output only] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.
+    -- | Output only. Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.
     referencedTables :: (Core.Maybe [TableReference]),
-    -- | [Output only] Job resource usage breakdown by reservation.
+    -- | Output only. Job resource usage breakdown by reservation. This field reported misleading information and will no longer be populated.
     reservationUsage :: (Core.Maybe [JobStatistics2_ReservationUsageItem]),
-    -- | [Output only] The schema of the results. Present only for successful dry run of non-legacy SQL queries.
+    -- | Output only. The schema of the results. Present only for successful dry run of non-legacy SQL queries.
     schema :: (Core.Maybe TableSchema),
-    -- | [Output only] Search query specific statistics.
+    -- | Output only. Search query specific statistics.
     searchStatistics :: (Core.Maybe SearchStatistics),
-    -- | [Output only] Statistics of a Spark procedure job.
+    -- | Output only. Statistics of a Spark procedure job.
     sparkStatistics :: (Core.Maybe SparkStatistics),
-    -- | The type of query statement, if valid. Possible values (new values might be added in the future): \"SELECT\": SELECT query. \"INSERT\": INSERT query; see https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-manipulation-language. \"UPDATE\": UPDATE query; see https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-manipulation-language. \"DELETE\": DELETE query; see https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-manipulation-language. \"MERGE\": MERGE query; see https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-manipulation-language. \"ALTER/TABLE\": ALTER TABLE query. \"ALTER/VIEW\": ALTER VIEW query. \"ASSERT\": ASSERT condition AS \'description\'. \"CREATE/FUNCTION\": CREATE FUNCTION query. \"CREATE/MODEL\": CREATE [OR REPLACE] MODEL ... AS SELECT ... . \"CREATE/PROCEDURE\": CREATE PROCEDURE query. \"CREATE/TABLE\": CREATE [OR REPLACE] TABLE without AS SELECT. \"CREATE/TABLE/AS/SELECT\": CREATE [OR REPLACE] TABLE ...
-    -- AS SELECT ... . \"CREATE/VIEW\": CREATE [OR REPLACE] VIEW ... AS SELECT ... . \"DROP/FUNCTION\" : DROP FUNCTION query. \"DROP/PROCEDURE\": DROP PROCEDURE query. \"DROP/TABLE\": DROP TABLE query. \"DROP/VIEW\": DROP VIEW query.
+    -- | Output only. The type of query statement, if valid. Possible values: * @SELECT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_list SELECT> statement. * @ASSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/debugging-statements#assert ASSERT> statement. * @INSERT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement INSERT> statement. * @UPDATE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement UPDATE> statement. * @DELETE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language DELETE> statement. * @MERGE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-manipulation-language MERGE> statement. * @CREATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement CREATE TABLE> statement, without @AS SELECT@. * @CREATE_TABLE_AS_SELECT@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement CREATE TABLE AS SELECT> statement. * @CREATE_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement CREATE VIEW> statement. * @CREATE_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-create#create_model_statement CREATE MODEL> statement. * @CREATE_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement CREATE MATERIALIZED VIEW> statement. * @CREATE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement CREATE FUNCTION> statement. * @CREATE_TABLE_FUNCTION@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement CREATE TABLE FUNCTION> statement. * @CREATE_PROCEDURE@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure CREATE PROCEDURE> statement. * @CREATE_ROW_ACCESS_POLICY@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement CREATE ROW ACCESS POLICY> statement. * @CREATE_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement CREATE SCHEMA> statement. * @CREATE_SNAPSHOT_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement CREATE SNAPSHOT TABLE> statement. * @CREATE_SEARCH_INDEX@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement CREATE SEARCH INDEX> statement. * @DROP_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_statement DROP TABLE> statement. * @DROP_EXTERNAL_TABLE@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_external_table_statement DROP EXTERNAL TABLE> statement. * @DROP_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_view_statement DROP VIEW> statement. * @DROP_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-drop-model DROP MODEL> statement. * @DROP_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_materialized_view_statement DROP MATERIALIZED VIEW> statement. * @DROP_FUNCTION@ : <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement DROP FUNCTION> statement. * @DROP_TABLE_FUNCTION@ : <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function DROP TABLE FUNCTION> statement. * @DROP_PROCEDURE@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_procedure_statement DROP PROCEDURE> statement. * @DROP_SEARCH_INDEX@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index DROP SEARCH INDEX> statement. * @DROP_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_schema_statement DROP SCHEMA> statement. * @DROP_SNAPSHOT_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement DROP SNAPSHOT TABLE> statement. * @DROP_ROW_ACCESS_POLICY@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement DROP [ALL] ROW ACCESS POLICY|POLICIES> statement. * @ALTER_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement ALTER TABLE> statement. * @ALTER_VIEW@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_view_set_options_statement ALTER VIEW> statement. * @ALTER_MATERIALIZED_VIEW@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_materialized_view_set_options_statement ALTER MATERIALIZED VIEW> statement. * @ALTER_SCHEMA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement ALTER SCHEMA> statement. * @SCRIPT@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language SCRIPT>. * @TRUNCATE_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement TRUNCATE TABLE> statement. * @CREATE_EXTERNAL_TABLE@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement CREATE EXTERNAL TABLE> statement. * @EXPORT_DATA@:
+    -- <https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement EXPORT DATA> statement. * @EXPORT_MODEL@: <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-export-model EXPORT MODEL> statement. * @LOAD_DATA@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#load_data_statement LOAD DATA> statement. * @CALL@: <https://cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call CALL> statement.
     statementType :: (Core.Maybe Core.Text),
-    -- | [Output only] [Beta] Describes a timeline of job execution.
+    -- | Output only. Describes a timeline of job execution.
     timeline :: (Core.Maybe [QueryTimelineSample]),
-    -- | [Output only] Total bytes billed for the job.
+    -- | Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.
     totalBytesBilled :: (Core.Maybe Core.Int64),
-    -- | [Output only] Total bytes processed for the job.
+    -- | Output only. Total bytes processed for the job.
     totalBytesProcessed :: (Core.Maybe Core.Int64),
-    -- | [Output only] For dry-run jobs, totalBytesProcessed is an estimate and this field specifies the accuracy of the estimate. Possible values can be: UNKNOWN: accuracy of the estimate is unknown. PRECISE: estimate is precise. LOWER/BOUND: estimate is lower bound of what the query would cost. UPPER/BOUND: estimate is upper bound of what the query would cost.
+    -- | Output only. For dry-run jobs, totalBytesProcessed is an estimate and this field specifies the accuracy of the estimate. Possible values can be: UNKNOWN: accuracy of the estimate is unknown. PRECISE: estimate is precise. LOWER/BOUND: estimate is lower bound of what the query would cost. UPPER/BOUND: estimate is upper bound of what the query would cost.
     totalBytesProcessedAccuracy :: (Core.Maybe Core.Text),
-    -- | [Output only] Total number of partitions processed from all partitioned tables referenced in the job.
+    -- | Output only. Total number of partitions processed from all partitioned tables referenced in the job.
     totalPartitionsProcessed :: (Core.Maybe Core.Int64),
-    -- | [Output only] Slot-milliseconds for the job.
+    -- | Output only. Slot-milliseconds for the job.
     totalSlotMs :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS).
+    -- | Output only. Total bytes transferred for cross-cloud queries such as Cross Cloud Transfer and CREATE TABLE AS SELECT (CTAS).
     transferredBytes :: (Core.Maybe Core.Int64),
-    -- | Standard SQL only: list of undeclared query parameters detected during a dry run validation.
-    undeclaredQueryParameters :: (Core.Maybe [QueryParameter])
+    -- | Output only. GoogleSQL only: list of undeclared query parameters detected during a dry run validation.
+    undeclaredQueryParameters :: (Core.Maybe [QueryParameter]),
+    -- | Output only. Vector Search query specific statistics.
+    vectorSearchStatistics :: (Core.Maybe VectorSearchStatistics)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6062,6 +7123,9 @@ newJobStatistics2 =
     { biEngineStatistics = Core.Nothing,
       billingTier = Core.Nothing,
       cacheHit = Core.Nothing,
+      dclTargetDataset = Core.Nothing,
+      dclTargetTable = Core.Nothing,
+      dclTargetView = Core.Nothing,
       ddlAffectedRowAccessPolicyCount = Core.Nothing,
       ddlDestinationTable = Core.Nothing,
       ddlOperationPerformed = Core.Nothing,
@@ -6071,11 +7135,18 @@ newJobStatistics2 =
       ddlTargetTable = Core.Nothing,
       dmlStats = Core.Nothing,
       estimatedBytesProcessed = Core.Nothing,
+      exportDataStatistics = Core.Nothing,
+      externalServiceCosts = Core.Nothing,
+      loadQueryStatistics = Core.Nothing,
+      materializedViewStatistics = Core.Nothing,
+      metadataCacheStatistics = Core.Nothing,
       mlStatistics = Core.Nothing,
       modelTraining = Core.Nothing,
       modelTrainingCurrentIteration = Core.Nothing,
       modelTrainingExpectedTotalIteration = Core.Nothing,
       numDmlAffectedRows = Core.Nothing,
+      performanceInsights = Core.Nothing,
+      queryInfo = Core.Nothing,
       queryPlan = Core.Nothing,
       referencedRoutines = Core.Nothing,
       referencedTables = Core.Nothing,
@@ -6091,7 +7162,8 @@ newJobStatistics2 =
       totalPartitionsProcessed = Core.Nothing,
       totalSlotMs = Core.Nothing,
       transferredBytes = Core.Nothing,
-      undeclaredQueryParameters = Core.Nothing
+      undeclaredQueryParameters = Core.Nothing,
+      vectorSearchStatistics = Core.Nothing
     }
 
 instance Core.FromJSON JobStatistics2 where
@@ -6103,7 +7175,11 @@ instance Core.FromJSON JobStatistics2 where
             Core.<$> (o Core..:? "biEngineStatistics")
             Core.<*> (o Core..:? "billingTier")
             Core.<*> (o Core..:? "cacheHit")
-            Core.<*> ( o Core..:? "ddlAffectedRowAccessPolicyCount"
+            Core.<*> (o Core..:? "dclTargetDataset")
+            Core.<*> (o Core..:? "dclTargetTable")
+            Core.<*> (o Core..:? "dclTargetView")
+            Core.<*> ( o
+                         Core..:? "ddlAffectedRowAccessPolicyCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "ddlDestinationTable")
@@ -6113,18 +7189,28 @@ instance Core.FromJSON JobStatistics2 where
             Core.<*> (o Core..:? "ddlTargetRowAccessPolicy")
             Core.<*> (o Core..:? "ddlTargetTable")
             Core.<*> (o Core..:? "dmlStats")
-            Core.<*> ( o Core..:? "estimatedBytesProcessed"
+            Core.<*> ( o
+                         Core..:? "estimatedBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "exportDataStatistics")
+            Core.<*> (o Core..:? "externalServiceCosts")
+            Core.<*> (o Core..:? "loadQueryStatistics")
+            Core.<*> (o Core..:? "materializedViewStatistics")
+            Core.<*> (o Core..:? "metadataCacheStatistics")
             Core.<*> (o Core..:? "mlStatistics")
             Core.<*> (o Core..:? "modelTraining")
             Core.<*> (o Core..:? "modelTrainingCurrentIteration")
-            Core.<*> ( o Core..:? "modelTrainingExpectedTotalIteration"
+            Core.<*> ( o
+                         Core..:? "modelTrainingExpectedTotalIteration"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "numDmlAffectedRows"
+            Core.<*> ( o
+                         Core..:? "numDmlAffectedRows"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "performanceInsights")
+            Core.<*> (o Core..:? "queryInfo")
             Core.<*> (o Core..:? "queryPlan")
             Core.<*> (o Core..:? "referencedRoutines")
             Core.<*> (o Core..:? "referencedTables")
@@ -6134,44 +7220,39 @@ instance Core.FromJSON JobStatistics2 where
             Core.<*> (o Core..:? "sparkStatistics")
             Core.<*> (o Core..:? "statementType")
             Core.<*> (o Core..:? "timeline")
-            Core.<*> ( o Core..:? "totalBytesBilled"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalBytesProcessed"
+            Core.<*> (o Core..:? "totalBytesBilled" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "totalBytesProcessedAccuracy")
-            Core.<*> ( o Core..:? "totalPartitionsProcessed"
+            Core.<*> ( o
+                         Core..:? "totalPartitionsProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "totalSlotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "transferredBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalSlotMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "transferredBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "undeclaredQueryParameters")
+            Core.<*> (o Core..:? "vectorSearchStatistics")
       )
 
 instance Core.ToJSON JobStatistics2 where
   toJSON JobStatistics2 {..} =
     Core.object
       ( Core.catMaybes
-          [ ("biEngineStatistics" Core..=)
-              Core.<$> biEngineStatistics,
+          [ ("biEngineStatistics" Core..=) Core.<$> biEngineStatistics,
             ("billingTier" Core..=) Core.<$> billingTier,
             ("cacheHit" Core..=) Core.<$> cacheHit,
+            ("dclTargetDataset" Core..=) Core.<$> dclTargetDataset,
+            ("dclTargetTable" Core..=) Core.<$> dclTargetTable,
+            ("dclTargetView" Core..=) Core.<$> dclTargetView,
             ("ddlAffectedRowAccessPolicyCount" Core..=)
               Core.. Core.AsText
               Core.<$> ddlAffectedRowAccessPolicyCount,
-            ("ddlDestinationTable" Core..=)
-              Core.<$> ddlDestinationTable,
-            ("ddlOperationPerformed" Core..=)
-              Core.<$> ddlOperationPerformed,
-            ("ddlTargetDataset" Core..=)
-              Core.<$> ddlTargetDataset,
-            ("ddlTargetRoutine" Core..=)
-              Core.<$> ddlTargetRoutine,
+            ("ddlDestinationTable" Core..=) Core.<$> ddlDestinationTable,
+            ("ddlOperationPerformed" Core..=) Core.<$> ddlOperationPerformed,
+            ("ddlTargetDataset" Core..=) Core.<$> ddlTargetDataset,
+            ("ddlTargetRoutine" Core..=) Core.<$> ddlTargetRoutine,
             ("ddlTargetRowAccessPolicy" Core..=)
               Core.<$> ddlTargetRowAccessPolicy,
             ("ddlTargetTable" Core..=) Core.<$> ddlTargetTable,
@@ -6179,6 +7260,13 @@ instance Core.ToJSON JobStatistics2 where
             ("estimatedBytesProcessed" Core..=)
               Core.. Core.AsText
               Core.<$> estimatedBytesProcessed,
+            ("exportDataStatistics" Core..=) Core.<$> exportDataStatistics,
+            ("externalServiceCosts" Core..=) Core.<$> externalServiceCosts,
+            ("loadQueryStatistics" Core..=) Core.<$> loadQueryStatistics,
+            ("materializedViewStatistics" Core..=)
+              Core.<$> materializedViewStatistics,
+            ("metadataCacheStatistics" Core..=)
+              Core.<$> metadataCacheStatistics,
             ("mlStatistics" Core..=) Core.<$> mlStatistics,
             ("modelTraining" Core..=) Core.<$> modelTraining,
             ("modelTrainingCurrentIteration" Core..=)
@@ -6186,45 +7274,49 @@ instance Core.ToJSON JobStatistics2 where
             ("modelTrainingExpectedTotalIteration" Core..=)
               Core.. Core.AsText
               Core.<$> modelTrainingExpectedTotalIteration,
-            ("numDmlAffectedRows" Core..=) Core.. Core.AsText
+            ("numDmlAffectedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> numDmlAffectedRows,
+            ("performanceInsights" Core..=) Core.<$> performanceInsights,
+            ("queryInfo" Core..=) Core.<$> queryInfo,
             ("queryPlan" Core..=) Core.<$> queryPlan,
-            ("referencedRoutines" Core..=)
-              Core.<$> referencedRoutines,
-            ("referencedTables" Core..=)
-              Core.<$> referencedTables,
-            ("reservationUsage" Core..=)
-              Core.<$> reservationUsage,
+            ("referencedRoutines" Core..=) Core.<$> referencedRoutines,
+            ("referencedTables" Core..=) Core.<$> referencedTables,
+            ("reservationUsage" Core..=) Core.<$> reservationUsage,
             ("schema" Core..=) Core.<$> schema,
-            ("searchStatistics" Core..=)
-              Core.<$> searchStatistics,
+            ("searchStatistics" Core..=) Core.<$> searchStatistics,
             ("sparkStatistics" Core..=) Core.<$> sparkStatistics,
             ("statementType" Core..=) Core.<$> statementType,
             ("timeline" Core..=) Core.<$> timeline,
-            ("totalBytesBilled" Core..=) Core.. Core.AsText
+            ("totalBytesBilled" Core..=)
+              Core.. Core.AsText
               Core.<$> totalBytesBilled,
-            ("totalBytesProcessed" Core..=) Core.. Core.AsText
+            ("totalBytesProcessed" Core..=)
+              Core.. Core.AsText
               Core.<$> totalBytesProcessed,
             ("totalBytesProcessedAccuracy" Core..=)
               Core.<$> totalBytesProcessedAccuracy,
             ("totalPartitionsProcessed" Core..=)
               Core.. Core.AsText
               Core.<$> totalPartitionsProcessed,
-            ("totalSlotMs" Core..=) Core.. Core.AsText
-              Core.<$> totalSlotMs,
-            ("transferredBytes" Core..=) Core.. Core.AsText
+            ("totalSlotMs" Core..=) Core.. Core.AsText Core.<$> totalSlotMs,
+            ("transferredBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> transferredBytes,
             ("undeclaredQueryParameters" Core..=)
-              Core.<$> undeclaredQueryParameters
+              Core.<$> undeclaredQueryParameters,
+            ("vectorSearchStatistics" Core..=)
+              Core.<$> vectorSearchStatistics
           ]
       )
 
+-- | Job resource usage breakdown by reservation.
 --
 -- /See:/ 'newJobStatistics2_ReservationUsageItem' smart constructor.
 data JobStatistics2_ReservationUsageItem = JobStatistics2_ReservationUsageItem
-  { -- | [Output only] Reservation name or \"unreserved\" for on-demand resources usage.
+  { -- | Reservation name or \"unreserved\" for on-demand resource usage and multi-statement queries.
     name :: (Core.Maybe Core.Text),
-    -- | [Output only] Slot-milliseconds the job spent in the given reservation.
+    -- | Total slot milliseconds used by the reservation for a particular job.
     slotMs :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6238,47 +7330,41 @@ newJobStatistics2_ReservationUsageItem =
       slotMs = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    JobStatistics2_ReservationUsageItem
-  where
+instance Core.FromJSON JobStatistics2_ReservationUsageItem where
   parseJSON =
     Core.withObject
       "JobStatistics2_ReservationUsageItem"
       ( \o ->
           JobStatistics2_ReservationUsageItem
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "slotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "slotMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    JobStatistics2_ReservationUsageItem
-  where
+instance Core.ToJSON JobStatistics2_ReservationUsageItem where
   toJSON JobStatistics2_ReservationUsageItem {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("slotMs" Core..=) Core.. Core.AsText
-              Core.<$> slotMs
+            ("slotMs" Core..=) Core.. Core.AsText Core.<$> slotMs
           ]
       )
 
+-- | Statistics for a load job.
 --
 -- /See:/ 'newJobStatistics3' smart constructor.
 data JobStatistics3 = JobStatistics3
-  { -- | [Output-only] The number of bad records encountered. Note that if the job has failed because of more bad records encountered than the maximum allowed in the load job configuration, then this number can be less than the total number of bad records present in the input data.
+  { -- | Output only. The number of bad records encountered. Note that if the job has failed because of more bad records encountered than the maximum allowed in the load job configuration, then this number can be less than the total number of bad records present in the input data.
     badRecords :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of bytes of source data in a load job.
+    -- | Output only. Number of bytes of source data in a load job.
     inputFileBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of source files in a load job.
+    -- | Output only. Number of source files in a load job.
     inputFiles :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Size of the loaded data in bytes. Note that while a load job is in the running state, this value may change.
+    -- | Output only. Size of the loaded data in bytes. Note that while a load job is in the running state, this value may change.
     outputBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of rows imported in a load job. Note that while an import job is in the running state, this value may change.
-    outputRows :: (Core.Maybe Core.Int64)
+    -- | Output only. Number of rows imported in a load job. Note that while an import job is in the running state, this value may change.
+    outputRows :: (Core.Maybe Core.Int64),
+    -- | Output only. Describes a timeline of job execution.
+    timeline :: (Core.Maybe [QueryTimelineSample])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6291,7 +7377,8 @@ newJobStatistics3 =
       inputFileBytes = Core.Nothing,
       inputFiles = Core.Nothing,
       outputBytes = Core.Nothing,
-      outputRows = Core.Nothing
+      outputRows = Core.Nothing,
+      timeline = Core.Nothing
     }
 
 instance Core.FromJSON JobStatistics3 where
@@ -6300,47 +7387,39 @@ instance Core.FromJSON JobStatistics3 where
       "JobStatistics3"
       ( \o ->
           JobStatistics3
-            Core.<$> ( o Core..:? "badRecords"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "inputFileBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "inputFiles"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "outputBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "outputRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "badRecords" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "inputFileBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "inputFiles" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outputBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outputRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "timeline")
       )
 
 instance Core.ToJSON JobStatistics3 where
   toJSON JobStatistics3 {..} =
     Core.object
       ( Core.catMaybes
-          [ ("badRecords" Core..=) Core.. Core.AsText
-              Core.<$> badRecords,
-            ("inputFileBytes" Core..=) Core.. Core.AsText
+          [ ("badRecords" Core..=) Core.. Core.AsText Core.<$> badRecords,
+            ("inputFileBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> inputFileBytes,
-            ("inputFiles" Core..=) Core.. Core.AsText
-              Core.<$> inputFiles,
-            ("outputBytes" Core..=) Core.. Core.AsText
-              Core.<$> outputBytes,
-            ("outputRows" Core..=) Core.. Core.AsText
-              Core.<$> outputRows
+            ("inputFiles" Core..=) Core.. Core.AsText Core.<$> inputFiles,
+            ("outputBytes" Core..=) Core.. Core.AsText Core.<$> outputBytes,
+            ("outputRows" Core..=) Core.. Core.AsText Core.<$> outputRows,
+            ("timeline" Core..=) Core.<$> timeline
           ]
       )
 
+-- | Statistics for an extract job.
 --
 -- /See:/ 'newJobStatistics4' smart constructor.
 data JobStatistics4 = JobStatistics4
-  { -- | [Output-only] Number of files per destination URI or URI pattern specified in the extract configuration. These values will be in the same order as the URIs specified in the \'destinationUris\' field.
+  { -- | Output only. Number of files per destination URI or URI pattern specified in the extract configuration. These values will be in the same order as the URIs specified in the \'destinationUris\' field.
     destinationUriFileCounts :: (Core.Maybe [Core.Int64]),
-    -- | [Output-only] Number of user bytes extracted into the result. This is the byte count as computed by BigQuery for billing purposes.
-    inputBytes :: (Core.Maybe Core.Int64)
+    -- | Output only. Number of user bytes extracted into the result. This is the byte count as computed by BigQuery for billing purposes and doesn\'t have any relationship with the number of actual result bytes extracted in the desired format.
+    inputBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Describes a timeline of job execution.
+    timeline :: (Core.Maybe [QueryTimelineSample])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6350,7 +7429,8 @@ newJobStatistics4 ::
 newJobStatistics4 =
   JobStatistics4
     { destinationUriFileCounts = Core.Nothing,
-      inputBytes = Core.Nothing
+      inputBytes = Core.Nothing,
+      timeline = Core.Nothing
     }
 
 instance Core.FromJSON JobStatistics4 where
@@ -6359,12 +7439,12 @@ instance Core.FromJSON JobStatistics4 where
       "JobStatistics4"
       ( \o ->
           JobStatistics4
-            Core.<$> ( o Core..:? "destinationUriFileCounts"
+            Core.<$> ( o
+                         Core..:? "destinationUriFileCounts"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
-            Core.<*> ( o Core..:? "inputBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "inputBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "timeline")
       )
 
 instance Core.ToJSON JobStatistics4 where
@@ -6374,17 +7454,18 @@ instance Core.ToJSON JobStatistics4 where
           [ ("destinationUriFileCounts" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> destinationUriFileCounts,
-            ("inputBytes" Core..=) Core.. Core.AsText
-              Core.<$> inputBytes
+            ("inputBytes" Core..=) Core.. Core.AsText Core.<$> inputBytes,
+            ("timeline" Core..=) Core.<$> timeline
           ]
       )
 
+-- | Statistics for a copy job.
 --
 -- /See:/ 'newJobStatistics5' smart constructor.
 data JobStatistics5 = JobStatistics5
-  { -- | [Output-only] Number of logical bytes copied to the destination table.
+  { -- | Output only. Number of logical bytes copied to the destination table.
     copiedLogicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of rows copied to the destination table.
+    -- | Output only. Number of rows copied to the destination table.
     copiedRows :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6393,7 +7474,10 @@ data JobStatistics5 = JobStatistics5
 newJobStatistics5 ::
   JobStatistics5
 newJobStatistics5 =
-  JobStatistics5 {copiedLogicalBytes = Core.Nothing, copiedRows = Core.Nothing}
+  JobStatistics5
+    { copiedLogicalBytes = Core.Nothing,
+      copiedRows = Core.Nothing
+    }
 
 instance Core.FromJSON JobStatistics5 where
   parseJSON =
@@ -6401,33 +7485,32 @@ instance Core.FromJSON JobStatistics5 where
       "JobStatistics5"
       ( \o ->
           JobStatistics5
-            Core.<$> ( o Core..:? "copied_logical_bytes"
+            Core.<$> ( o
+                         Core..:? "copiedLogicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "copied_rows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "copiedRows" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON JobStatistics5 where
   toJSON JobStatistics5 {..} =
     Core.object
       ( Core.catMaybes
-          [ ("copied_logical_bytes" Core..=) Core.. Core.AsText
+          [ ("copiedLogicalBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> copiedLogicalBytes,
-            ("copied_rows" Core..=) Core.. Core.AsText
-              Core.<$> copiedRows
+            ("copiedRows" Core..=) Core.. Core.AsText Core.<$> copiedRows
           ]
       )
 
 --
 -- /See:/ 'newJobStatus' smart constructor.
 data JobStatus = JobStatus
-  { -- | [Output-only] Final error result of the job. If present, indicates that the job has completed and was unsuccessful.
+  { -- | Output only. Final error result of the job. If present, indicates that the job has completed and was unsuccessful.
     errorResult :: (Core.Maybe ErrorProto),
-    -- | [Output-only] The first errors encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.
+    -- | Output only. The first errors encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has not completed or was unsuccessful.
     errors :: (Core.Maybe [ErrorProto]),
-    -- | [Output-only] Running state of the job.
+    -- | Output only. Running state of the job. Valid states include \'PENDING\', \'RUNNING\', and \'DONE\'.
     state :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6463,12 +7546,50 @@ instance Core.ToJSON JobStatus where
           ]
       )
 
+-- | Represents privacy policy associated with \"join restrictions\". Join restriction gives data providers the ability to enforce joins on the \'join/allowed/columns\' when data is queried from a privacy protected view.
+--
+-- /See:/ 'newJoinRestrictionPolicy' smart constructor.
+data JoinRestrictionPolicy = JoinRestrictionPolicy
+  { -- | Optional. The only columns that joins are allowed on. This field is must be specified for join/conditions JOIN/ANY and JOIN/ALL and it cannot be set for JOIN/BLOCKED.
+    joinAllowedColumns :: (Core.Maybe [Core.Text]),
+    -- | Optional. Specifies if a join is required or not on queries for the view. Default is JOIN/CONDITION/UNSPECIFIED.
+    joinCondition :: (Core.Maybe JoinRestrictionPolicy_JoinCondition)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JoinRestrictionPolicy' with the minimum fields required to make a request.
+newJoinRestrictionPolicy ::
+  JoinRestrictionPolicy
+newJoinRestrictionPolicy =
+  JoinRestrictionPolicy
+    { joinAllowedColumns = Core.Nothing,
+      joinCondition = Core.Nothing
+    }
+
+instance Core.FromJSON JoinRestrictionPolicy where
+  parseJSON =
+    Core.withObject
+      "JoinRestrictionPolicy"
+      ( \o ->
+          JoinRestrictionPolicy
+            Core.<$> (o Core..:? "joinAllowedColumns")
+            Core.<*> (o Core..:? "joinCondition")
+      )
+
+instance Core.ToJSON JoinRestrictionPolicy where
+  toJSON JoinRestrictionPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("joinAllowedColumns" Core..=) Core.<$> joinAllowedColumns,
+            ("joinCondition" Core..=) Core.<$> joinCondition
+          ]
+      )
+
 -- | Represents a single JSON object.
 --
 -- /See:/ 'newJsonObject' smart constructor.
 newtype JsonObject = JsonObject
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6488,6 +7609,84 @@ instance Core.FromJSON JsonObject where
 instance Core.ToJSON JsonObject where
   toJSON JsonObject {..} = Core.toJSON additional
 
+-- | Json Options for load and make external tables.
+--
+-- /See:/ 'newJsonOptions' smart constructor.
+newtype JsonOptions = JsonOptions
+  { -- | Optional. The character encoding of the data. The supported values are UTF-8, UTF-16BE, UTF-16LE, UTF-32BE, and UTF-32LE. The default value is UTF-8.
+    encoding :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'JsonOptions' with the minimum fields required to make a request.
+newJsonOptions ::
+  JsonOptions
+newJsonOptions = JsonOptions {encoding = Core.Nothing}
+
+instance Core.FromJSON JsonOptions where
+  parseJSON =
+    Core.withObject
+      "JsonOptions"
+      (\o -> JsonOptions Core.<$> (o Core..:? "encoding"))
+
+instance Core.ToJSON JsonOptions where
+  toJSON JsonOptions {..} =
+    Core.object
+      (Core.catMaybes [("encoding" Core..=) Core.<$> encoding])
+
+-- | Metadata about the Linked Dataset.
+--
+-- /See:/ 'newLinkedDatasetMetadata' smart constructor.
+newtype LinkedDatasetMetadata = LinkedDatasetMetadata
+  { -- | Output only. Specifies whether Linked Dataset is currently in a linked state or not.
+    linkState :: (Core.Maybe LinkedDatasetMetadata_LinkState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LinkedDatasetMetadata' with the minimum fields required to make a request.
+newLinkedDatasetMetadata ::
+  LinkedDatasetMetadata
+newLinkedDatasetMetadata =
+  LinkedDatasetMetadata {linkState = Core.Nothing}
+
+instance Core.FromJSON LinkedDatasetMetadata where
+  parseJSON =
+    Core.withObject
+      "LinkedDatasetMetadata"
+      (\o -> LinkedDatasetMetadata Core.<$> (o Core..:? "linkState"))
+
+instance Core.ToJSON LinkedDatasetMetadata where
+  toJSON LinkedDatasetMetadata {..} =
+    Core.object
+      (Core.catMaybes [("linkState" Core..=) Core.<$> linkState])
+
+-- | A dataset source type which refers to another BigQuery dataset.
+--
+-- /See:/ 'newLinkedDatasetSource' smart constructor.
+newtype LinkedDatasetSource = LinkedDatasetSource
+  { -- | The source dataset reference contains project numbers and not project ids.
+    sourceDataset :: (Core.Maybe DatasetReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LinkedDatasetSource' with the minimum fields required to make a request.
+newLinkedDatasetSource ::
+  LinkedDatasetSource
+newLinkedDatasetSource =
+  LinkedDatasetSource {sourceDataset = Core.Nothing}
+
+instance Core.FromJSON LinkedDatasetSource where
+  parseJSON =
+    Core.withObject
+      "LinkedDatasetSource"
+      (\o -> LinkedDatasetSource Core.<$> (o Core..:? "sourceDataset"))
+
+instance Core.ToJSON LinkedDatasetSource where
+  toJSON LinkedDatasetSource {..} =
+    Core.object
+      (Core.catMaybes [("sourceDataset" Core..=) Core.<$> sourceDataset])
+
+-- | Response format for a single page when listing BigQuery ML models.
 --
 -- /See:/ 'newListModelsResponse' smart constructor.
 data ListModelsResponse = ListModelsResponse
@@ -6502,7 +7701,10 @@ data ListModelsResponse = ListModelsResponse
 newListModelsResponse ::
   ListModelsResponse
 newListModelsResponse =
-  ListModelsResponse {models = Core.Nothing, nextPageToken = Core.Nothing}
+  ListModelsResponse
+    { models = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListModelsResponse where
   parseJSON =
@@ -6523,6 +7725,7 @@ instance Core.ToJSON ListModelsResponse where
           ]
       )
 
+-- | Describes the format of a single result page when listing routines.
 --
 -- /See:/ 'newListRoutinesResponse' smart constructor.
 data ListRoutinesResponse = ListRoutinesResponse
@@ -6537,7 +7740,10 @@ data ListRoutinesResponse = ListRoutinesResponse
 newListRoutinesResponse ::
   ListRoutinesResponse
 newListRoutinesResponse =
-  ListRoutinesResponse {nextPageToken = Core.Nothing, routines = Core.Nothing}
+  ListRoutinesResponse
+    { nextPageToken = Core.Nothing,
+      routines = Core.Nothing
+    }
 
 instance Core.FromJSON ListRoutinesResponse where
   parseJSON =
@@ -6593,8 +7799,70 @@ instance Core.ToJSON ListRowAccessPoliciesResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("rowAccessPolicies" Core..=)
-              Core.<$> rowAccessPolicies
+            ("rowAccessPolicies" Core..=) Core.<$> rowAccessPolicies
+          ]
+      )
+
+-- | Statistics for a LOAD query.
+--
+-- /See:/ 'newLoadQueryStatistics' smart constructor.
+data LoadQueryStatistics = LoadQueryStatistics
+  { -- | Output only. The number of bad records encountered while processing a LOAD query. Note that if the job has failed because of more bad records encountered than the maximum allowed in the load job configuration, then this number can be less than the total number of bad records present in the input data.
+    badRecords :: (Core.Maybe Core.Int64),
+    -- | Output only. This field is deprecated. The number of bytes of source data copied over the network for a @LOAD@ query. @transferred_bytes@ has the canonical value for physical transferred bytes, which is used for BigQuery Omni billing.
+    bytesTransferred :: (Core.Maybe Core.Int64),
+    -- | Output only. Number of bytes of source data in a LOAD query.
+    inputFileBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Number of source files in a LOAD query.
+    inputFiles :: (Core.Maybe Core.Int64),
+    -- | Output only. Size of the loaded data in bytes. Note that while a LOAD query is in the running state, this value may change.
+    outputBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Number of rows imported in a LOAD query. Note that while a LOAD query is in the running state, this value may change.
+    outputRows :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoadQueryStatistics' with the minimum fields required to make a request.
+newLoadQueryStatistics ::
+  LoadQueryStatistics
+newLoadQueryStatistics =
+  LoadQueryStatistics
+    { badRecords = Core.Nothing,
+      bytesTransferred = Core.Nothing,
+      inputFileBytes = Core.Nothing,
+      inputFiles = Core.Nothing,
+      outputBytes = Core.Nothing,
+      outputRows = Core.Nothing
+    }
+
+instance Core.FromJSON LoadQueryStatistics where
+  parseJSON =
+    Core.withObject
+      "LoadQueryStatistics"
+      ( \o ->
+          LoadQueryStatistics
+            Core.<$> (o Core..:? "badRecords" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "bytesTransferred" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "inputFileBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "inputFiles" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outputBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "outputRows" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON LoadQueryStatistics where
+  toJSON LoadQueryStatistics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("badRecords" Core..=) Core.. Core.AsText Core.<$> badRecords,
+            ("bytesTransferred" Core..=)
+              Core.. Core.AsText
+              Core.<$> bytesTransferred,
+            ("inputFileBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> inputFileBytes,
+            ("inputFiles" Core..=) Core.. Core.AsText Core.<$> inputFiles,
+            ("outputBytes" Core..=) Core.. Core.AsText Core.<$> outputBytes,
+            ("outputRows" Core..=) Core.. Core.AsText Core.<$> outputRows
           ]
       )
 
@@ -6610,40 +7878,91 @@ newtype LocationMetadata = LocationMetadata
 -- | Creates a value of 'LocationMetadata' with the minimum fields required to make a request.
 newLocationMetadata ::
   LocationMetadata
-newLocationMetadata = LocationMetadata {legacyLocationId = Core.Nothing}
+newLocationMetadata =
+  LocationMetadata {legacyLocationId = Core.Nothing}
 
 instance Core.FromJSON LocationMetadata where
   parseJSON =
     Core.withObject
       "LocationMetadata"
-      ( \o ->
-          LocationMetadata
-            Core.<$> (o Core..:? "legacyLocationId")
-      )
+      (\o -> LocationMetadata Core.<$> (o Core..:? "legacyLocationId"))
 
 instance Core.ToJSON LocationMetadata where
   toJSON LocationMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("legacyLocationId" Core..=)
-              Core.<$> legacyLocationId
+          [("legacyLocationId" Core..=) Core.<$> legacyLocationId]
+      )
+
+-- | A materialized view considered for a query job.
+--
+-- /See:/ 'newMaterializedView' smart constructor.
+data MaterializedView = MaterializedView
+  { -- | Whether the materialized view is chosen for the query. A materialized view can be chosen to rewrite multiple parts of the same query. If a materialized view is chosen to rewrite any part of the query, then this field is true, even if the materialized view was not chosen to rewrite others parts.
+    chosen :: (Core.Maybe Core.Bool),
+    -- | If present, specifies a best-effort estimation of the bytes saved by using the materialized view rather than its base tables.
+    estimatedBytesSaved :: (Core.Maybe Core.Int64),
+    -- | If present, specifies the reason why the materialized view was not chosen for the query.
+    rejectedReason :: (Core.Maybe MaterializedView_RejectedReason),
+    -- | The candidate materialized view.
+    tableReference :: (Core.Maybe TableReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaterializedView' with the minimum fields required to make a request.
+newMaterializedView ::
+  MaterializedView
+newMaterializedView =
+  MaterializedView
+    { chosen = Core.Nothing,
+      estimatedBytesSaved = Core.Nothing,
+      rejectedReason = Core.Nothing,
+      tableReference = Core.Nothing
+    }
+
+instance Core.FromJSON MaterializedView where
+  parseJSON =
+    Core.withObject
+      "MaterializedView"
+      ( \o ->
+          MaterializedView
+            Core.<$> (o Core..:? "chosen")
+            Core.<*> ( o
+                         Core..:? "estimatedBytesSaved"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "rejectedReason")
+            Core.<*> (o Core..:? "tableReference")
+      )
+
+instance Core.ToJSON MaterializedView where
+  toJSON MaterializedView {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("chosen" Core..=) Core.<$> chosen,
+            ("estimatedBytesSaved" Core..=)
+              Core.. Core.AsText
+              Core.<$> estimatedBytesSaved,
+            ("rejectedReason" Core..=) Core.<$> rejectedReason,
+            ("tableReference" Core..=) Core.<$> tableReference
           ]
       )
 
+-- | Definition and configuration of a materialized view.
 --
 -- /See:/ 'newMaterializedViewDefinition' smart constructor.
 data MaterializedViewDefinition = MaterializedViewDefinition
-  { -- | [Optional] Allow non incremental materialized view definition. The default value is \"false\".
+  { -- | Optional. This option declares the intention to construct a materialized view that isn\'t refreshed incrementally. Non-incremental materialized views support an expanded range of SQL queries. The @allow_non_incremental_definition@ option can\'t be changed after the materialized view is created.
     allowNonIncrementalDefinition :: (Core.Maybe Core.Bool),
-    -- | [Optional] [TrustedTester] Enable automatic refresh of the materialized view when the base table is updated. The default value is \"true\".
+    -- | Optional. Enable automatic refresh of the materialized view when the base table is updated. The default value is \"true\".
     enableRefresh :: (Core.Maybe Core.Bool),
-    -- | [Output-only] [TrustedTester] The time when this materialized view was last modified, in milliseconds since the epoch.
+    -- | Output only. The time when this materialized view was last refreshed, in milliseconds since the epoch.
     lastRefreshTime :: (Core.Maybe Core.Int64),
     -- | [Optional] Max staleness of data that could be returned when materizlized view is queried (formatted as Google SQL Interval type).
     maxStaleness :: (Core.Maybe Core.Base64),
-    -- | [Required] A query whose result is persisted.
+    -- | Required. A query whose results are persisted.
     query :: (Core.Maybe Core.Text),
-    -- | [Optional] [TrustedTester] The maximum frequency at which this materialized view will be refreshed. The default value is \"1800000\" (30 minutes).
+    -- | Optional. The maximum frequency at which this materialized view will be refreshed. The default value is \"1800000\" (30 minutes).
     refreshIntervalMs :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6653,7 +7972,8 @@ newMaterializedViewDefinition ::
   MaterializedViewDefinition
 newMaterializedViewDefinition =
   MaterializedViewDefinition
-    { allowNonIncrementalDefinition = Core.Nothing,
+    { allowNonIncrementalDefinition =
+        Core.Nothing,
       enableRefresh = Core.Nothing,
       lastRefreshTime = Core.Nothing,
       maxStaleness = Core.Nothing,
@@ -6667,14 +7987,13 @@ instance Core.FromJSON MaterializedViewDefinition where
       "MaterializedViewDefinition"
       ( \o ->
           MaterializedViewDefinition
-            Core.<$> (o Core..:? "allow_non_incremental_definition")
+            Core.<$> (o Core..:? "allowNonIncrementalDefinition")
             Core.<*> (o Core..:? "enableRefresh")
-            Core.<*> ( o Core..:? "lastRefreshTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastRefreshTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "maxStaleness")
             Core.<*> (o Core..:? "query")
-            Core.<*> ( o Core..:? "refreshIntervalMs"
+            Core.<*> ( o
+                         Core..:? "refreshIntervalMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -6683,25 +8002,137 @@ instance Core.ToJSON MaterializedViewDefinition where
   toJSON MaterializedViewDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allow_non_incremental_definition" Core..=)
+          [ ("allowNonIncrementalDefinition" Core..=)
               Core.<$> allowNonIncrementalDefinition,
             ("enableRefresh" Core..=) Core.<$> enableRefresh,
-            ("lastRefreshTime" Core..=) Core.. Core.AsText
+            ("lastRefreshTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastRefreshTime,
             ("maxStaleness" Core..=) Core.<$> maxStaleness,
             ("query" Core..=) Core.<$> query,
-            ("refreshIntervalMs" Core..=) Core.. Core.AsText
+            ("refreshIntervalMs" Core..=)
+              Core.. Core.AsText
               Core.<$> refreshIntervalMs
           ]
       )
 
+-- | Statistics of materialized views considered in a query job.
+--
+-- /See:/ 'newMaterializedViewStatistics' smart constructor.
+newtype MaterializedViewStatistics = MaterializedViewStatistics
+  { -- | Materialized views considered for the query job. Only certain materialized views are used. For a detailed list, see the child message. If many materialized views are considered, then the list might be incomplete.
+    materializedView :: (Core.Maybe [MaterializedView])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaterializedViewStatistics' with the minimum fields required to make a request.
+newMaterializedViewStatistics ::
+  MaterializedViewStatistics
+newMaterializedViewStatistics =
+  MaterializedViewStatistics {materializedView = Core.Nothing}
+
+instance Core.FromJSON MaterializedViewStatistics where
+  parseJSON =
+    Core.withObject
+      "MaterializedViewStatistics"
+      ( \o ->
+          MaterializedViewStatistics
+            Core.<$> (o Core..:? "materializedView")
+      )
+
+instance Core.ToJSON MaterializedViewStatistics where
+  toJSON MaterializedViewStatistics {..} =
+    Core.object
+      ( Core.catMaybes
+          [("materializedView" Core..=) Core.<$> materializedView]
+      )
+
+-- | Status of a materialized view. The last refresh timestamp status is omitted here, but is present in the MaterializedViewDefinition message.
+--
+-- /See:/ 'newMaterializedViewStatus' smart constructor.
+data MaterializedViewStatus = MaterializedViewStatus
+  { -- | Output only. Error result of the last automatic refresh. If present, indicates that the last automatic refresh was unsuccessful.
+    lastRefreshStatus :: (Core.Maybe ErrorProto),
+    -- | Output only. Refresh watermark of materialized view. The base tables\' data were collected into the materialized view cache until this time.
+    refreshWatermark :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaterializedViewStatus' with the minimum fields required to make a request.
+newMaterializedViewStatus ::
+  MaterializedViewStatus
+newMaterializedViewStatus =
+  MaterializedViewStatus
+    { lastRefreshStatus = Core.Nothing,
+      refreshWatermark = Core.Nothing
+    }
+
+instance Core.FromJSON MaterializedViewStatus where
+  parseJSON =
+    Core.withObject
+      "MaterializedViewStatus"
+      ( \o ->
+          MaterializedViewStatus
+            Core.<$> (o Core..:? "lastRefreshStatus")
+            Core.<*> (o Core..:? "refreshWatermark")
+      )
+
+instance Core.ToJSON MaterializedViewStatus where
+  toJSON MaterializedViewStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("lastRefreshStatus" Core..=) Core.<$> lastRefreshStatus,
+            ("refreshWatermark" Core..=) Core.<$> refreshWatermark
+          ]
+      )
+
+-- | Statistics for metadata caching in queried tables.
+--
+-- /See:/ 'newMetadataCacheStatistics' smart constructor.
+newtype MetadataCacheStatistics = MetadataCacheStatistics
+  { -- | Set for the Metadata caching eligible tables referenced in the query.
+    tableMetadataCacheUsage :: (Core.Maybe [TableMetadataCacheUsage])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MetadataCacheStatistics' with the minimum fields required to make a request.
+newMetadataCacheStatistics ::
+  MetadataCacheStatistics
+newMetadataCacheStatistics =
+  MetadataCacheStatistics {tableMetadataCacheUsage = Core.Nothing}
+
+instance Core.FromJSON MetadataCacheStatistics where
+  parseJSON =
+    Core.withObject
+      "MetadataCacheStatistics"
+      ( \o ->
+          MetadataCacheStatistics
+            Core.<$> (o Core..:? "tableMetadataCacheUsage")
+      )
+
+instance Core.ToJSON MetadataCacheStatistics where
+  toJSON MetadataCacheStatistics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("tableMetadataCacheUsage" Core..=)
+              Core.<$> tableMetadataCacheUsage
+          ]
+      )
+
+-- | Job statistics specific to a BigQuery ML training job.
 --
 -- /See:/ 'newMlStatistics' smart constructor.
 data MlStatistics = MlStatistics
-  { -- | Results for all completed iterations.
+  { -- | Output only. Trials of a <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning job> sorted by trial_id.
+    hparamTrials :: (Core.Maybe [HparamTuningTrial]),
+    -- | Results for all completed iterations. Empty for <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning jobs>.
     iterationResults :: (Core.Maybe [IterationResult]),
-    -- | Maximum number of iterations specified as max_iterations in the \'CREATE MODEL\' query. The actual number of iterations may be less than this number due to early stop.
-    maxIterations :: (Core.Maybe Core.Int64)
+    -- | Output only. Maximum number of iterations specified as max_iterations in the \'CREATE MODEL\' query. The actual number of iterations may be less than this number due to early stop.
+    maxIterations :: (Core.Maybe Core.Int64),
+    -- | Output only. The type of the model that is being trained.
+    modelType :: (Core.Maybe MlStatistics_ModelType),
+    -- | Output only. Training type of the job.
+    trainingType :: (Core.Maybe MlStatistics_TrainingType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6709,7 +8140,13 @@ data MlStatistics = MlStatistics
 newMlStatistics ::
   MlStatistics
 newMlStatistics =
-  MlStatistics {iterationResults = Core.Nothing, maxIterations = Core.Nothing}
+  MlStatistics
+    { hparamTrials = Core.Nothing,
+      iterationResults = Core.Nothing,
+      maxIterations = Core.Nothing,
+      modelType = Core.Nothing,
+      trainingType = Core.Nothing
+    }
 
 instance Core.FromJSON MlStatistics where
   parseJSON =
@@ -6717,20 +8154,24 @@ instance Core.FromJSON MlStatistics where
       "MlStatistics"
       ( \o ->
           MlStatistics
-            Core.<$> (o Core..:? "iterationResults")
-            Core.<*> ( o Core..:? "maxIterations"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "hparamTrials")
+            Core.<*> (o Core..:? "iterationResults")
+            Core.<*> (o Core..:? "maxIterations" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "modelType")
+            Core.<*> (o Core..:? "trainingType")
       )
 
 instance Core.ToJSON MlStatistics where
   toJSON MlStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("iterationResults" Core..=)
-              Core.<$> iterationResults,
-            ("maxIterations" Core..=) Core.. Core.AsText
-              Core.<$> maxIterations
+          [ ("hparamTrials" Core..=) Core.<$> hparamTrials,
+            ("iterationResults" Core..=) Core.<$> iterationResults,
+            ("maxIterations" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxIterations,
+            ("modelType" Core..=) Core.<$> modelType,
+            ("trainingType" Core..=) Core.<$> trainingType
           ]
       )
 
@@ -6741,7 +8182,7 @@ data Model = Model
     bestTrialId :: (Core.Maybe Core.Int64),
     -- | Output only. The time when this model was created, in millisecs since the epoch.
     creationTime :: (Core.Maybe Core.Int64),
-    -- | Output only. The default trial/id to use in TVFs when the trial/id is not passed in. For single-objective </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, this is the best trial ID. For multi-objective </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, this is the smallest trial ID among all Pareto optimal trials.
+    -- | Output only. The default trial/id to use in TVFs when the trial/id is not passed in. For single-objective <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, this is the best trial ID. For multi-objective <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, this is the smallest trial ID among all Pareto optimal trials.
     defaultTrialId :: (Core.Maybe Core.Int64),
     -- | Optional. A user-friendly description of this model.
     description :: (Core.Maybe Core.Text),
@@ -6751,13 +8192,13 @@ data Model = Model
     etag :: (Core.Maybe Core.Text),
     -- | Optional. The time when this model expires, in milliseconds since the epoch. If not present, the model will persist indefinitely. Expired models will be deleted and their storage reclaimed. The defaultTableExpirationMs property of the encapsulating dataset can be used to set a default expirationTime on newly created models.
     expirationTime :: (Core.Maybe Core.Int64),
-    -- | Output only. Input feature columns that were used to train this model.
+    -- | Output only. Input feature columns for the model inference. If the model is trained with TRANSFORM clause, these are the input of the TRANSFORM clause.
     featureColumns :: (Core.Maybe [StandardSqlField]),
     -- | Optional. A descriptive name for this model.
     friendlyName :: (Core.Maybe Core.Text),
     -- | Output only. All hyperparameter search spaces in this model.
     hparamSearchSpaces :: (Core.Maybe HparamSearchSpaces),
-    -- | Output only. Trials of a </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> model sorted by trial_id.
+    -- | Output only. Trials of a <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> model sorted by trial_id.
     hparamTrials :: (Core.Maybe [HparamTuningTrial]),
     -- | Output only. Label columns that were used to train this model. The output of the model will have a \"predicted_\" prefix to these columns.
     labelColumns :: (Core.Maybe [StandardSqlField]),
@@ -6771,10 +8212,14 @@ data Model = Model
     modelReference :: (Core.Maybe ModelReference),
     -- | Output only. Type of the model resource.
     modelType :: (Core.Maybe Model_ModelType),
-    -- | Output only. For single-objective </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, it only contains the best trial. For multi-objective </bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, it contains all Pareto optimal trials sorted by trial_id.
+    -- | Output only. For single-objective <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, it only contains the best trial. For multi-objective <https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-syntax-hp-tuning-overview hyperparameter tuning> models, it contains all Pareto optimal trials sorted by trial_id.
     optimalTrialIds :: (Core.Maybe [Core.Int64]),
+    -- | Output only. Remote model info
+    remoteModelInfo :: (Core.Maybe RemoteModelInfo),
     -- | Information for all training runs in increasing order of start_time.
-    trainingRuns :: (Core.Maybe [TrainingRun])
+    trainingRuns :: (Core.Maybe [TrainingRun]),
+    -- | Output only. This field will be populated if a TRANSFORM clause was used to train a model. TRANSFORM clause (if used) takes feature/columns as input and outputs transform/columns. transform_columns then are used to train the model.
+    transformColumns :: (Core.Maybe [TransformColumn])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6801,7 +8246,9 @@ newModel =
       modelReference = Core.Nothing,
       modelType = Core.Nothing,
       optimalTrialIds = Core.Nothing,
-      trainingRuns = Core.Nothing
+      remoteModelInfo = Core.Nothing,
+      trainingRuns = Core.Nothing,
+      transformColumns = Core.Nothing
     }
 
 instance Core.FromJSON Model where
@@ -6810,63 +8257,56 @@ instance Core.FromJSON Model where
       "Model"
       ( \o ->
           Model
-            Core.<$> ( o Core..:? "bestTrialId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "defaultTrialId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "bestTrialId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "defaultTrialId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "encryptionConfiguration")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "expirationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expirationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "featureColumns")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "hparamSearchSpaces")
             Core.<*> (o Core..:? "hparamTrials")
             Core.<*> (o Core..:? "labelColumns")
             Core.<*> (o Core..:? "labels")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "modelReference")
             Core.<*> (o Core..:? "modelType")
-            Core.<*> ( o Core..:? "optimalTrialIds"
+            Core.<*> ( o
+                         Core..:? "optimalTrialIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
+            Core.<*> (o Core..:? "remoteModelInfo")
             Core.<*> (o Core..:? "trainingRuns")
+            Core.<*> (o Core..:? "transformColumns")
       )
 
 instance Core.ToJSON Model where
   toJSON Model {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestTrialId" Core..=) Core.. Core.AsText
-              Core.<$> bestTrialId,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
-            ("defaultTrialId" Core..=) Core.. Core.AsText
+          [ ("bestTrialId" Core..=) Core.. Core.AsText Core.<$> bestTrialId,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("defaultTrialId" Core..=)
+              Core.. Core.AsText
               Core.<$> defaultTrialId,
             ("description" Core..=) Core.<$> description,
             ("encryptionConfiguration" Core..=)
               Core.<$> encryptionConfiguration,
             ("etag" Core..=) Core.<$> etag,
-            ("expirationTime" Core..=) Core.. Core.AsText
+            ("expirationTime" Core..=)
+              Core.. Core.AsText
               Core.<$> expirationTime,
             ("featureColumns" Core..=) Core.<$> featureColumns,
             ("friendlyName" Core..=) Core.<$> friendlyName,
-            ("hparamSearchSpaces" Core..=)
-              Core.<$> hparamSearchSpaces,
+            ("hparamSearchSpaces" Core..=) Core.<$> hparamSearchSpaces,
             ("hparamTrials" Core..=) Core.<$> hparamTrials,
             ("labelColumns" Core..=) Core.<$> labelColumns,
             ("labels" Core..=) Core.<$> labels,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
             ("location" Core..=) Core.<$> location,
             ("modelReference" Core..=) Core.<$> modelReference,
@@ -6874,7 +8314,9 @@ instance Core.ToJSON Model where
             ("optimalTrialIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> optimalTrialIds,
-            ("trainingRuns" Core..=) Core.<$> trainingRuns
+            ("remoteModelInfo" Core..=) Core.<$> remoteModelInfo,
+            ("trainingRuns" Core..=) Core.<$> trainingRuns,
+            ("transformColumns" Core..=) Core.<$> transformColumns
           ]
       )
 
@@ -6882,8 +8324,7 @@ instance Core.ToJSON Model where
 --
 -- /See:/ 'newModel_Labels' smart constructor.
 newtype Model_Labels = Model_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6898,9 +8339,7 @@ instance Core.FromJSON Model_Labels where
   parseJSON =
     Core.withObject
       "Model_Labels"
-      ( \o ->
-          Model_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Model_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Model_Labels where
   toJSON Model_Labels {..} = Core.toJSON additional
@@ -6908,9 +8347,9 @@ instance Core.ToJSON Model_Labels where
 --
 -- /See:/ 'newModelDefinition' smart constructor.
 data ModelDefinition = ModelDefinition
-  { -- | [Output-only, Beta] Model options used for the first training run. These options are immutable for subsequent training runs. Default values are used for any options not specified in the input query.
+  { -- | Deprecated.
     modelOptions :: (Core.Maybe ModelDefinition_ModelOptions),
-    -- | [Output-only, Beta] Information about ml training runs, each training run comprises of multiple iterations and there may be multiple training runs for the model if warm start is used or if a user decides to continue a previously cancelled query.
+    -- | Deprecated.
     trainingRuns :: (Core.Maybe [BqmlTrainingRun])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6919,7 +8358,10 @@ data ModelDefinition = ModelDefinition
 newModelDefinition ::
   ModelDefinition
 newModelDefinition =
-  ModelDefinition {modelOptions = Core.Nothing, trainingRuns = Core.Nothing}
+  ModelDefinition
+    { modelOptions = Core.Nothing,
+      trainingRuns = Core.Nothing
+    }
 
 instance Core.FromJSON ModelDefinition where
   parseJSON =
@@ -6940,15 +8382,12 @@ instance Core.ToJSON ModelDefinition where
           ]
       )
 
--- | [Output-only, Beta] Model options used for the first training run. These options are immutable for subsequent training runs. Default values are used for any options not specified in the input query.
+-- | Deprecated.
 --
 -- /See:/ 'newModelDefinition_ModelOptions' smart constructor.
 data ModelDefinition_ModelOptions = ModelDefinition_ModelOptions
-  { -- |
-    labels :: (Core.Maybe [Core.Text]),
-    -- |
+  { labels :: (Core.Maybe [Core.Text]),
     lossType :: (Core.Maybe Core.Text),
-    -- |
     modelType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6984,14 +8423,46 @@ instance Core.ToJSON ModelDefinition_ModelOptions where
           ]
       )
 
+-- | Options related to model extraction.
+--
+-- /See:/ 'newModelExtractOptions' smart constructor.
+newtype ModelExtractOptions = ModelExtractOptions
+  { -- | The 1-based ID of the trial to be exported from a hyperparameter tuning model. If not specified, the trial with id = <https://cloud.google.com/bigquery/docs/reference/rest/v2/models#resource:-model Model>.defaultTrialId is exported. This field is ignored for models not trained with hyperparameter tuning.
+    trialId :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ModelExtractOptions' with the minimum fields required to make a request.
+newModelExtractOptions ::
+  ModelExtractOptions
+newModelExtractOptions =
+  ModelExtractOptions {trialId = Core.Nothing}
+
+instance Core.FromJSON ModelExtractOptions where
+  parseJSON =
+    Core.withObject
+      "ModelExtractOptions"
+      ( \o ->
+          ModelExtractOptions
+            Core.<$> (o Core..:? "trialId" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ModelExtractOptions where
+  toJSON ModelExtractOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [("trialId" Core..=) Core.. Core.AsText Core.<$> trialId]
+      )
+
+-- | Id path of a model.
 --
 -- /See:/ 'newModelReference' smart constructor.
 data ModelReference = ModelReference
-  { -- | [Required] The ID of the dataset containing this model.
+  { -- | Required. The ID of the dataset containing this model.
     datasetId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the model. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
+    -- | Required. The ID of the model. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
     modelId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the project containing this model.
+    -- | Required. The ID of the project containing this model.
     projectId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7043,14 +8514,12 @@ newMultiClassClassificationMetrics ::
   MultiClassClassificationMetrics
 newMultiClassClassificationMetrics =
   MultiClassClassificationMetrics
-    { aggregateClassificationMetrics = Core.Nothing,
+    { aggregateClassificationMetrics =
+        Core.Nothing,
       confusionMatrixList = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    MultiClassClassificationMetrics
-  where
+instance Core.FromJSON MultiClassClassificationMetrics where
   parseJSON =
     Core.withObject
       "MultiClassClassificationMetrics"
@@ -7066,18 +8535,20 @@ instance Core.ToJSON MultiClassClassificationMetrics where
       ( Core.catMaybes
           [ ("aggregateClassificationMetrics" Core..=)
               Core.<$> aggregateClassificationMetrics,
-            ("confusionMatrixList" Core..=)
-              Core.<$> confusionMatrixList
+            ("confusionMatrixList" Core..=) Core.<$> confusionMatrixList
           ]
       )
 
+-- | Parquet Options for load and make external tables.
 --
 -- /See:/ 'newParquetOptions' smart constructor.
 data ParquetOptions = ParquetOptions
-  { -- | [Optional] Indicates whether to use schema inference specifically for Parquet LIST logical type.
+  { -- | Optional. Indicates whether to use schema inference specifically for Parquet LIST logical type.
     enableListInference :: (Core.Maybe Core.Bool),
-    -- | [Optional] Indicates whether to infer Parquet ENUM logical type as STRING instead of BYTES by default.
-    enumAsString :: (Core.Maybe Core.Bool)
+    -- | Optional. Indicates whether to infer Parquet ENUM logical type as STRING instead of BYTES by default.
+    enumAsString :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates how to represent a Parquet map if present.
+    mapTargetType :: (Core.Maybe ParquetOptions_MapTargetType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7087,7 +8558,8 @@ newParquetOptions ::
 newParquetOptions =
   ParquetOptions
     { enableListInference = Core.Nothing,
-      enumAsString = Core.Nothing
+      enumAsString = Core.Nothing,
+      mapTargetType = Core.Nothing
     }
 
 instance Core.FromJSON ParquetOptions where
@@ -7098,21 +8570,152 @@ instance Core.FromJSON ParquetOptions where
           ParquetOptions
             Core.<$> (o Core..:? "enableListInference")
             Core.<*> (o Core..:? "enumAsString")
+            Core.<*> (o Core..:? "mapTargetType")
       )
 
 instance Core.ToJSON ParquetOptions where
   toJSON ParquetOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableListInference" Core..=)
-              Core.<$> enableListInference,
-            ("enumAsString" Core..=) Core.<$> enumAsString
+          [ ("enableListInference" Core..=) Core.<$> enableListInference,
+            ("enumAsString" Core..=) Core.<$> enumAsString,
+            ("mapTargetType" Core..=) Core.<$> mapTargetType
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | Partition skew detailed information.
+--
+-- /See:/ 'newPartitionSkew' smart constructor.
+newtype PartitionSkew = PartitionSkew
+  { -- | Output only. Source stages which produce skewed data.
+    skewSources :: (Core.Maybe [SkewSource])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PartitionSkew' with the minimum fields required to make a request.
+newPartitionSkew ::
+  PartitionSkew
+newPartitionSkew = PartitionSkew {skewSources = Core.Nothing}
+
+instance Core.FromJSON PartitionSkew where
+  parseJSON =
+    Core.withObject
+      "PartitionSkew"
+      (\o -> PartitionSkew Core.<$> (o Core..:? "skewSources"))
+
+instance Core.ToJSON PartitionSkew where
+  toJSON PartitionSkew {..} =
+    Core.object
+      (Core.catMaybes [("skewSources" Core..=) Core.<$> skewSources])
+
+-- | The partitioning column information.
+--
+-- /See:/ 'newPartitionedColumn' smart constructor.
+newtype PartitionedColumn = PartitionedColumn
+  { -- | Required. The name of the partition column.
+    field :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PartitionedColumn' with the minimum fields required to make a request.
+newPartitionedColumn ::
+  PartitionedColumn
+newPartitionedColumn = PartitionedColumn {field = Core.Nothing}
+
+instance Core.FromJSON PartitionedColumn where
+  parseJSON =
+    Core.withObject
+      "PartitionedColumn"
+      (\o -> PartitionedColumn Core.<$> (o Core..:? "field"))
+
+instance Core.ToJSON PartitionedColumn where
+  toJSON PartitionedColumn {..} =
+    Core.object (Core.catMaybes [("field" Core..=) Core.<$> field])
+
+-- | The partitioning information, which includes managed table, external table and metastore partitioned table partition information.
+--
+-- /See:/ 'newPartitioningDefinition' smart constructor.
+newtype PartitioningDefinition = PartitioningDefinition
+  { -- | Optional. Details about each partitioning column. This field is output only for all partitioning types other than metastore partitioned tables. BigQuery native tables only support 1 partitioning column. Other table types may support 0, 1 or more partitioning columns. For metastore partitioned tables, the order must match the definition order in the Hive Metastore, where it must match the physical layout of the table. For example, CREATE TABLE a_table(id BIGINT, name STRING) PARTITIONED BY (city STRING, state STRING). In this case the values must be [\'city\', \'state\'] in that order.
+    partitionedColumn :: (Core.Maybe [PartitionedColumn])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PartitioningDefinition' with the minimum fields required to make a request.
+newPartitioningDefinition ::
+  PartitioningDefinition
+newPartitioningDefinition =
+  PartitioningDefinition {partitionedColumn = Core.Nothing}
+
+instance Core.FromJSON PartitioningDefinition where
+  parseJSON =
+    Core.withObject
+      "PartitioningDefinition"
+      ( \o ->
+          PartitioningDefinition Core.<$> (o Core..:? "partitionedColumn")
+      )
+
+instance Core.ToJSON PartitioningDefinition where
+  toJSON PartitioningDefinition {..} =
+    Core.object
+      ( Core.catMaybes
+          [("partitionedColumn" Core..=) Core.<$> partitionedColumn]
+      )
+
+-- | Performance insights for the job.
+--
+-- /See:/ 'newPerformanceInsights' smart constructor.
+data PerformanceInsights = PerformanceInsights
+  { -- | Output only. Average execution ms of previous runs. Indicates the job ran slow compared to previous executions. To find previous executions, use INFORMATION_SCHEMA tables and filter jobs with same query hash.
+    avgPreviousExecutionMs :: (Core.Maybe Core.Int64),
+    -- | Output only. Query stage performance insights compared to previous runs, for diagnosing performance regression.
+    stagePerformanceChangeInsights :: (Core.Maybe [StagePerformanceChangeInsight]),
+    -- | Output only. Standalone query stage performance insights, for exploring potential improvements.
+    stagePerformanceStandaloneInsights :: (Core.Maybe [StagePerformanceStandaloneInsight])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PerformanceInsights' with the minimum fields required to make a request.
+newPerformanceInsights ::
+  PerformanceInsights
+newPerformanceInsights =
+  PerformanceInsights
+    { avgPreviousExecutionMs = Core.Nothing,
+      stagePerformanceChangeInsights = Core.Nothing,
+      stagePerformanceStandaloneInsights = Core.Nothing
+    }
+
+instance Core.FromJSON PerformanceInsights where
+  parseJSON =
+    Core.withObject
+      "PerformanceInsights"
+      ( \o ->
+          PerformanceInsights
+            Core.<$> ( o
+                         Core..:? "avgPreviousExecutionMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "stagePerformanceChangeInsights")
+            Core.<*> (o Core..:? "stagePerformanceStandaloneInsights")
+      )
+
+instance Core.ToJSON PerformanceInsights where
+  toJSON PerformanceInsights {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("avgPreviousExecutionMs" Core..=)
+              Core.. Core.AsText
+              Core.<$> avgPreviousExecutionMs,
+            ("stagePerformanceChangeInsights" Core..=)
+              Core.<$> stagePerformanceChangeInsights,
+            ("stagePerformanceStandaloneInsights" Core..=)
+              Core.<$> stagePerformanceStandaloneInsights
+          ]
+      )
+
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -7182,7 +8785,8 @@ newPrincipalComponentInfo ::
   PrincipalComponentInfo
 newPrincipalComponentInfo =
   PrincipalComponentInfo
-    { cumulativeExplainedVarianceRatio = Core.Nothing,
+    { cumulativeExplainedVarianceRatio =
+        Core.Nothing,
       explainedVariance = Core.Nothing,
       explainedVarianceRatio = Core.Nothing,
       principalComponentId = Core.Nothing
@@ -7197,7 +8801,8 @@ instance Core.FromJSON PrincipalComponentInfo where
             Core.<$> (o Core..:? "cumulativeExplainedVarianceRatio")
             Core.<*> (o Core..:? "explainedVariance")
             Core.<*> (o Core..:? "explainedVarianceRatio")
-            Core.<*> ( o Core..:? "principalComponentId"
+            Core.<*> ( o
+                         Core..:? "principalComponentId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -7208,27 +8813,73 @@ instance Core.ToJSON PrincipalComponentInfo where
       ( Core.catMaybes
           [ ("cumulativeExplainedVarianceRatio" Core..=)
               Core.<$> cumulativeExplainedVarianceRatio,
-            ("explainedVariance" Core..=)
-              Core.<$> explainedVariance,
-            ("explainedVarianceRatio" Core..=)
-              Core.<$> explainedVarianceRatio,
-            ("principalComponentId" Core..=) Core.. Core.AsText
+            ("explainedVariance" Core..=) Core.<$> explainedVariance,
+            ("explainedVarianceRatio" Core..=) Core.<$> explainedVarianceRatio,
+            ("principalComponentId" Core..=)
+              Core.. Core.AsText
               Core.<$> principalComponentId
           ]
       )
 
+-- | Represents privacy policy that contains the privacy requirements specified by the data owner. Currently, this is only supported on views.
+--
+-- /See:/ 'newPrivacyPolicy' smart constructor.
+data PrivacyPolicy = PrivacyPolicy
+  { -- | Optional. Policy used for aggregation thresholds.
+    aggregationThresholdPolicy :: (Core.Maybe AggregationThresholdPolicy),
+    -- | Optional. Policy used for differential privacy.
+    differentialPrivacyPolicy :: (Core.Maybe DifferentialPrivacyPolicy),
+    -- | Optional. Join restriction policy is outside of the one of policies, since this policy can be set along with other policies. This policy gives data providers the ability to enforce joins on the \'join/allowed/columns\' when data is queried from a privacy protected view.
+    joinRestrictionPolicy :: (Core.Maybe JoinRestrictionPolicy)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrivacyPolicy' with the minimum fields required to make a request.
+newPrivacyPolicy ::
+  PrivacyPolicy
+newPrivacyPolicy =
+  PrivacyPolicy
+    { aggregationThresholdPolicy = Core.Nothing,
+      differentialPrivacyPolicy = Core.Nothing,
+      joinRestrictionPolicy = Core.Nothing
+    }
+
+instance Core.FromJSON PrivacyPolicy where
+  parseJSON =
+    Core.withObject
+      "PrivacyPolicy"
+      ( \o ->
+          PrivacyPolicy
+            Core.<$> (o Core..:? "aggregationThresholdPolicy")
+            Core.<*> (o Core..:? "differentialPrivacyPolicy")
+            Core.<*> (o Core..:? "joinRestrictionPolicy")
+      )
+
+instance Core.ToJSON PrivacyPolicy where
+  toJSON PrivacyPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("aggregationThresholdPolicy" Core..=)
+              Core.<$> aggregationThresholdPolicy,
+            ("differentialPrivacyPolicy" Core..=)
+              Core.<$> differentialPrivacyPolicy,
+            ("joinRestrictionPolicy" Core..=) Core.<$> joinRestrictionPolicy
+          ]
+      )
+
+-- | Response object of ListProjects
 --
 -- /See:/ 'newProjectList' smart constructor.
 data ProjectList = ProjectList
-  { -- | A hash of the page of results
+  { -- | A hash of the page of results.
     etag :: (Core.Maybe Core.Text),
-    -- | The type of list.
+    -- | The resource type of the response.
     kind :: Core.Text,
-    -- | A token to request the next page of results.
+    -- | Use this token to request the next page of results.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | Projects to which you have at least READ access.
+    -- | Projects to which the user has at least READ access.
     projects :: (Core.Maybe [ProjectList_ProjectsItem]),
-    -- | The total number of projects in the list.
+    -- | The total number of projects in the page. A wrapper is used here because the field should still be in the response when the value is 0.
     totalItems :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7270,15 +8921,16 @@ instance Core.ToJSON ProjectList where
           ]
       )
 
+-- | Information about a single project.
 --
 -- /See:/ 'newProjectList_ProjectsItem' smart constructor.
 data ProjectList_ProjectsItem = ProjectList_ProjectsItem
-  { -- | A descriptive name for this project.
+  { -- | A descriptive name for this project. A wrapper is used here because friendlyName can be set to the empty string.
     friendlyName :: (Core.Maybe Core.Text),
     -- | An opaque ID of this project.
     id :: (Core.Maybe Core.Text),
     -- | The resource type.
-    kind :: Core.Text,
+    kind :: (Core.Maybe Core.Text),
     -- | The numeric ID of this project.
     numericId :: (Core.Maybe Core.Word64),
     -- | A unique reference to this project.
@@ -7293,7 +8945,7 @@ newProjectList_ProjectsItem =
   ProjectList_ProjectsItem
     { friendlyName = Core.Nothing,
       id = Core.Nothing,
-      kind = "bigquery#project",
+      kind = Core.Nothing,
       numericId = Core.Nothing,
       projectReference = Core.Nothing
     }
@@ -7306,10 +8958,8 @@ instance Core.FromJSON ProjectList_ProjectsItem where
           ProjectList_ProjectsItem
             Core.<$> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "kind" Core..!= "bigquery#project")
-            Core.<*> ( o Core..:? "numericId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "numericId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "projectReference")
       )
 
@@ -7319,18 +8969,17 @@ instance Core.ToJSON ProjectList_ProjectsItem where
       ( Core.catMaybes
           [ ("friendlyName" Core..=) Core.<$> friendlyName,
             ("id" Core..=) Core.<$> id,
-            Core.Just ("kind" Core..= kind),
-            ("numericId" Core..=) Core.. Core.AsText
-              Core.<$> numericId,
-            ("projectReference" Core..=)
-              Core.<$> projectReference
+            ("kind" Core..=) Core.<$> kind,
+            ("numericId" Core..=) Core.. Core.AsText Core.<$> numericId,
+            ("projectReference" Core..=) Core.<$> projectReference
           ]
       )
 
+-- | A unique reference to a project.
 --
 -- /See:/ 'newProjectReference' smart constructor.
 newtype ProjectReference = ProjectReference
-  { -- | [Required] ID of the project. Can be either the numeric ID or the assigned ID of the project.
+  { -- | Required. ID of the project. Can be either the numeric ID or the assigned ID of the project.
     projectId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7344,25 +8993,77 @@ instance Core.FromJSON ProjectReference where
   parseJSON =
     Core.withObject
       "ProjectReference"
-      ( \o ->
-          ProjectReference Core.<$> (o Core..:? "projectId")
-      )
+      (\o -> ProjectReference Core.<$> (o Core..:? "projectId"))
 
 instance Core.ToJSON ProjectReference where
   toJSON ProjectReference {..} =
     Core.object
+      (Core.catMaybes [("projectId" Core..=) Core.<$> projectId])
+
+-- | Query optimization information for a QUERY job.
+--
+-- /See:/ 'newQueryInfo' smart constructor.
+newtype QueryInfo = QueryInfo
+  { -- | Output only. Information about query optimizations.
+    optimizationDetails :: (Core.Maybe QueryInfo_OptimizationDetails)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueryInfo' with the minimum fields required to make a request.
+newQueryInfo ::
+  QueryInfo
+newQueryInfo = QueryInfo {optimizationDetails = Core.Nothing}
+
+instance Core.FromJSON QueryInfo where
+  parseJSON =
+    Core.withObject
+      "QueryInfo"
+      (\o -> QueryInfo Core.<$> (o Core..:? "optimizationDetails"))
+
+instance Core.ToJSON QueryInfo where
+  toJSON QueryInfo {..} =
+    Core.object
       ( Core.catMaybes
-          [("projectId" Core..=) Core.<$> projectId]
+          [("optimizationDetails" Core..=) Core.<$> optimizationDetails]
       )
 
+-- | Output only. Information about query optimizations.
+--
+-- /See:/ 'newQueryInfo_OptimizationDetails' smart constructor.
+newtype QueryInfo_OptimizationDetails = QueryInfo_OptimizationDetails
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueryInfo_OptimizationDetails' with the minimum fields required to make a request.
+newQueryInfo_OptimizationDetails ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  QueryInfo_OptimizationDetails
+newQueryInfo_OptimizationDetails additional =
+  QueryInfo_OptimizationDetails {additional = additional}
+
+instance Core.FromJSON QueryInfo_OptimizationDetails where
+  parseJSON =
+    Core.withObject
+      "QueryInfo_OptimizationDetails"
+      ( \o ->
+          QueryInfo_OptimizationDetails Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON QueryInfo_OptimizationDetails where
+  toJSON QueryInfo_OptimizationDetails {..} = Core.toJSON additional
+
+-- | A parameter given to a query.
 --
 -- /See:/ 'newQueryParameter' smart constructor.
 data QueryParameter = QueryParameter
-  { -- | [Optional] If unset, this is a positional parameter. Otherwise, should be unique within a query.
+  { -- | Optional. If unset, this is a positional parameter. Otherwise, should be unique within a query.
     name :: (Core.Maybe Core.Text),
-    -- | [Required] The type of this parameter.
+    -- | Required. The type of this parameter.
     parameterType :: (Core.Maybe QueryParameterType),
-    -- | [Required] The value of this parameter.
+    -- | Required. The value of this parameter.
     parameterValue :: (Core.Maybe QueryParameterValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7398,14 +9099,17 @@ instance Core.ToJSON QueryParameter where
           ]
       )
 
+-- | The type of a query parameter.
 --
 -- /See:/ 'newQueryParameterType' smart constructor.
 data QueryParameterType = QueryParameterType
-  { -- | [Optional] The type of the array\'s elements, if this is an array.
+  { -- | Optional. The type of the array\'s elements, if this is an array.
     arrayType :: (Core.Maybe QueryParameterType),
-    -- | [Optional] The types of the fields of this struct, in order, if this is a struct.
+    -- | Optional. The element type of the range, if this is a range.
+    rangeElementType :: (Core.Maybe QueryParameterType),
+    -- | Optional. The types of the fields of this struct, in order, if this is a struct.
     structTypes :: (Core.Maybe [QueryParameterType_StructTypesItem]),
-    -- | [Required] The top level type of this field.
+    -- | Required. The top level type of this field.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7416,6 +9120,7 @@ newQueryParameterType ::
 newQueryParameterType =
   QueryParameterType
     { arrayType = Core.Nothing,
+      rangeElementType = Core.Nothing,
       structTypes = Core.Nothing,
       type' = Core.Nothing
     }
@@ -7427,6 +9132,7 @@ instance Core.FromJSON QueryParameterType where
       ( \o ->
           QueryParameterType
             Core.<$> (o Core..:? "arrayType")
+            Core.<*> (o Core..:? "rangeElementType")
             Core.<*> (o Core..:? "structTypes")
             Core.<*> (o Core..:? "type")
       )
@@ -7436,19 +9142,21 @@ instance Core.ToJSON QueryParameterType where
     Core.object
       ( Core.catMaybes
           [ ("arrayType" Core..=) Core.<$> arrayType,
+            ("rangeElementType" Core..=) Core.<$> rangeElementType,
             ("structTypes" Core..=) Core.<$> structTypes,
             ("type" Core..=) Core.<$> type'
           ]
       )
 
+-- | The type of a struct parameter.
 --
 -- /See:/ 'newQueryParameterType_StructTypesItem' smart constructor.
 data QueryParameterType_StructTypesItem = QueryParameterType_StructTypesItem
-  { -- | [Optional] Human-oriented description of the field.
+  { -- | Optional. Human-oriented description of the field.
     description :: (Core.Maybe Core.Text),
-    -- | [Optional] The name of this field.
+    -- | Optional. The name of this field.
     name :: (Core.Maybe Core.Text),
-    -- | [Required] The type of this field.
+    -- | Required. The type of this field.
     type' :: (Core.Maybe QueryParameterType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7463,10 +9171,7 @@ newQueryParameterType_StructTypesItem =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    QueryParameterType_StructTypesItem
-  where
+instance Core.FromJSON QueryParameterType_StructTypesItem where
   parseJSON =
     Core.withObject
       "QueryParameterType_StructTypesItem"
@@ -7477,10 +9182,7 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    QueryParameterType_StructTypesItem
-  where
+instance Core.ToJSON QueryParameterType_StructTypesItem where
   toJSON QueryParameterType_StructTypesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -7490,14 +9192,17 @@ instance
           ]
       )
 
+-- | The value of a query parameter.
 --
 -- /See:/ 'newQueryParameterValue' smart constructor.
 data QueryParameterValue = QueryParameterValue
-  { -- | [Optional] The array values, if this is an array type.
+  { -- | Optional. The array values, if this is an array type.
     arrayValues :: (Core.Maybe [QueryParameterValue]),
-    -- | [Optional] The struct field values, in order of the struct type\'s declaration.
+    -- | Optional. The range value, if this is a range type.
+    rangeValue :: (Core.Maybe RangeValue),
+    -- | The struct field values.
     structValues :: (Core.Maybe QueryParameterValue_StructValues),
-    -- | [Optional] The value of this value, if a simple scalar type.
+    -- | Optional. The value of this value, if a simple scalar type.
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7508,6 +9213,7 @@ newQueryParameterValue ::
 newQueryParameterValue =
   QueryParameterValue
     { arrayValues = Core.Nothing,
+      rangeValue = Core.Nothing,
       structValues = Core.Nothing,
       value = Core.Nothing
     }
@@ -7519,6 +9225,7 @@ instance Core.FromJSON QueryParameterValue where
       ( \o ->
           QueryParameterValue
             Core.<$> (o Core..:? "arrayValues")
+            Core.<*> (o Core..:? "rangeValue")
             Core.<*> (o Core..:? "structValues")
             Core.<*> (o Core..:? "value")
       )
@@ -7528,17 +9235,17 @@ instance Core.ToJSON QueryParameterValue where
     Core.object
       ( Core.catMaybes
           [ ("arrayValues" Core..=) Core.<$> arrayValues,
+            ("rangeValue" Core..=) Core.<$> rangeValue,
             ("structValues" Core..=) Core.<$> structValues,
             ("value" Core..=) Core.<$> value
           ]
       )
 
--- | [Optional] The struct field values, in order of the struct type\'s declaration.
+-- | The struct field values.
 --
 -- /See:/ 'newQueryParameterValue_StructValues' smart constructor.
 newtype QueryParameterValue_StructValues = QueryParameterValue_StructValues
-  { -- |
-    additional :: (Core.HashMap Core.Text QueryParameterValue)
+  { additional :: (Core.HashMap Core.Text QueryParameterValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7550,62 +9257,69 @@ newQueryParameterValue_StructValues ::
 newQueryParameterValue_StructValues additional =
   QueryParameterValue_StructValues {additional = additional}
 
-instance
-  Core.FromJSON
-    QueryParameterValue_StructValues
-  where
+instance Core.FromJSON QueryParameterValue_StructValues where
   parseJSON =
     Core.withObject
       "QueryParameterValue_StructValues"
       ( \o ->
-          QueryParameterValue_StructValues
-            Core.<$> (Core.parseJSONObject o)
+          QueryParameterValue_StructValues Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON QueryParameterValue_StructValues where
   toJSON QueryParameterValue_StructValues {..} =
     Core.toJSON additional
 
+-- | Describes the format of the jobs.query request.
 --
 -- /See:/ 'newQueryRequest' smart constructor.
 data QueryRequest = QueryRequest
-  { -- | Connection properties.
+  { -- | Optional. Connection properties which can modify the query behavior.
     connectionProperties :: (Core.Maybe [ConnectionProperty]),
     -- | [Optional] Specifies whether the query should be executed as a continuous query. The default value is false.
     continuous :: (Core.Maybe Core.Bool),
-    -- | If true, creates a new session, where session id will be a server generated random id. If false, runs query with an existing session_id passed in ConnectionProperty, otherwise runs query in non-session mode.
+    -- | Optional. If true, creates a new session using a randomly generated session/id. If false, runs query with an existing session/id passed in ConnectionProperty, otherwise runs query in non-session mode. The session location will be set to QueryRequest.location if it is present, otherwise it\'s set to the default location based on existing routing logic.
     createSession :: (Core.Maybe Core.Bool),
-    -- | [Optional] Specifies the default datasetId and projectId to assume for any unqualified table names in the query. If not set, all table names in the query string must be qualified in the format \'datasetId.tableId\'.
+    -- | Optional. Specifies the default datasetId and projectId to assume for any unqualified table names in the query. If not set, all table names in the query string must be qualified in the format \'datasetId.tableId\'.
     defaultDataset :: (Core.Maybe DatasetReference),
-    -- | [Optional] If set to true, BigQuery doesn\'t run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
+    -- | Optional. Custom encryption configuration (e.g., Cloud KMS keys)
+    destinationEncryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
+    -- | Optional. If set to true, BigQuery doesn\'t run the job. Instead, if the query is valid, BigQuery returns statistics about the job such as how many bytes would be processed. If the query is invalid, an error returns. The default value is false.
     dryRun :: (Core.Maybe Core.Bool),
+    -- | Optional. Output format adjustments.
+    formatOptions :: (Core.Maybe DataFormatOptions),
+    -- | Optional. If not set, jobs are always required. If set, the query request will follow the behavior described JobCreationMode. <https://cloud.google.com/products/#product-launch-stages Preview>
+    jobCreationMode :: (Core.Maybe QueryRequest_JobCreationMode),
+    -- | Optional. Job timeout in milliseconds. If this time limit is exceeded, BigQuery will attempt to stop a longer job, but may not always succeed in canceling it before the job completes. For example, a job that takes more than 60 seconds to complete has a better chance of being stopped than a job that takes 10 seconds to complete. This timeout applies to the query even if a job does not need to be created.
+    jobTimeoutMs :: (Core.Maybe Core.Int64),
     -- | The resource type of the request.
     kind :: Core.Text,
-    -- | The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.
+    -- | Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the list must have a different key.
     labels :: (Core.Maybe QueryRequest_Labels),
-    -- | The geographic location where the job should run. See details at https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location where the job should run. For more information, see how to <https://cloud.google.com/bigquery/docs/locations#specify_locations specify locations>.
     location :: (Core.Maybe Core.Text),
-    -- | [Optional] The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.
+    -- | Optional. The maximum number of rows of data to return per page of results. Setting this flag to a small value such as 1000 and then paging through results might improve reliability when the query result set is large. In addition to this limit, responses are also limited to 10 MB. By default, there is no maximum row count, and only the byte limit applies.
     maxResults :: (Core.Maybe Core.Word32),
-    -- | [Optional] Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default.
+    -- | Optional. Limits the bytes billed for this query. Queries with bytes billed above this limit will fail (without incurring a charge). If unspecified, the project default is used.
     maximumBytesBilled :: (Core.Maybe Core.Int64),
-    -- | Standard SQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (\@myparam) query parameters in this query.
+    -- | GoogleSQL only. Set to POSITIONAL to use positional (?) query parameters or to NAMED to use named (\@myparam) query parameters in this query.
     parameterMode :: (Core.Maybe Core.Text),
-    -- | [Deprecated] This property is deprecated.
+    -- | This property is deprecated.
     preserveNulls :: (Core.Maybe Core.Bool),
-    -- | [Required] A query string, following the BigQuery query syntax, of the query to execute. Example: \"SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]\".
+    -- | Required. A query string to execute, using Google Standard SQL or legacy SQL syntax. Example: \"SELECT COUNT(f1) FROM myProjectId.myDatasetId.myTableId\".
     query :: (Core.Maybe Core.Text),
-    -- | Query parameters for Standard SQL queries.
+    -- | Query parameters for GoogleSQL queries.
     queryParameters :: (Core.Maybe [QueryParameter]),
-    -- | A unique user provided identifier to ensure idempotent behavior for queries. Note that this is different from the job/id. It has the following properties: 1. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended. 2. Read only queries can ignore this token since they are nullipotent by definition. 3. For the purposes of idempotency ensured by the request/id, a request is considered duplicate of another only if they have the same request/id and are actually duplicates. When determining whether a request is a duplicate of the previous request, all parameters in the request that may affect the behavior are considered. For example, query, connection/properties, query/parameters, use/legacy/sql are parameters that affect the result and are considered when determining whether a request is a duplicate, but properties like timeout/ms don\'t affect the result and are thus not considered. Dry run query requests are never considered duplicate of another request. 4. When a duplicate mutating
+    -- | Optional. A unique user provided identifier to ensure idempotent behavior for queries. Note that this is different from the job/id. It has the following properties: 1. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended. 2. Read only queries can ignore this token since they are nullipotent by definition. 3. For the purposes of idempotency ensured by the request/id, a request is considered duplicate of another only if they have the same request/id and are actually duplicates. When determining whether a request is a duplicate of another request, all parameters in the request that may affect the result are considered. For example, query, connection/properties, query/parameters, use/legacy/sql are parameters that affect the result and are considered when determining whether a request is a duplicate, but properties like timeout/ms don\'t affect the result and are thus not considered. Dry run query requests are never considered duplicate of another request. 4. When a duplicate mutating
     -- query request is detected, it returns: a. the results of the mutation if it completes successfully within the timeout. b. the running operation if it is still in progress at the end of the timeout. 5. Its lifetime is limited to 15 minutes. In other words, if two requests are sent with the same request_id, but more than 15 minutes apart, idempotency is not guaranteed.
     requestId :: (Core.Maybe Core.Text),
-    -- | [Optional] How long to wait for the query to complete, in milliseconds, before the request times out and returns. Note that this is only a timeout for the request, not the query. If the query takes longer to run than the timeout value, the call returns without any results and with the \'jobComplete\' flag set to false. You can call GetQueryResults() to wait for the query to complete and read the results. The default value is 10000 milliseconds (10 seconds).
+    -- | Optional. Optional: Specifies the maximum amount of time, in milliseconds, that the client is willing to wait for the query to complete. By default, this limit is 10 seconds (10,000 milliseconds). If the query is complete, the jobComplete field in the response is true. If the query has not yet completed, jobComplete is false. You can request a longer timeout period in the timeoutMs field. However, the call is not guaranteed to wait for the specified timeout; it typically returns after around 200 seconds (200,000 milliseconds), even if the query is not complete. If jobComplete is false, you can continue to wait for the query to complete by calling the getQueryResults method until the jobComplete field in the getQueryResults response is true.
     timeoutMs :: (Core.Maybe Core.Word32),
-    -- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery\'s standard SQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.
+    -- | Specifies whether to use BigQuery\'s legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery\'s GoogleSQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql is set to false, the value of flattenResults is ignored; query will be run as if flattenResults is false.
     useLegacySql :: Core.Bool,
-    -- | [Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true.
-    useQueryCache :: Core.Bool
+    -- | Optional. Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true.
+    useQueryCache :: Core.Bool,
+    -- | Optional. This is only supported for SELECT query. If set, the query is allowed to write results incrementally to the temporary result table. This may incur a performance penalty. This option cannot be used with Legacy SQL. This feature is not yet available.
+    writeIncrementalResults :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7618,7 +9332,11 @@ newQueryRequest =
       continuous = Core.Nothing,
       createSession = Core.Nothing,
       defaultDataset = Core.Nothing,
+      destinationEncryptionConfiguration = Core.Nothing,
       dryRun = Core.Nothing,
+      formatOptions = Core.Nothing,
+      jobCreationMode = Core.Nothing,
+      jobTimeoutMs = Core.Nothing,
       kind = "bigquery#queryRequest",
       labels = Core.Nothing,
       location = Core.Nothing,
@@ -7631,7 +9349,8 @@ newQueryRequest =
       requestId = Core.Nothing,
       timeoutMs = Core.Nothing,
       useLegacySql = Core.True,
-      useQueryCache = Core.True
+      useQueryCache = Core.True,
+      writeIncrementalResults = Core.Nothing
     }
 
 instance Core.FromJSON QueryRequest where
@@ -7644,12 +9363,17 @@ instance Core.FromJSON QueryRequest where
             Core.<*> (o Core..:? "continuous")
             Core.<*> (o Core..:? "createSession")
             Core.<*> (o Core..:? "defaultDataset")
+            Core.<*> (o Core..:? "destinationEncryptionConfiguration")
             Core.<*> (o Core..:? "dryRun")
+            Core.<*> (o Core..:? "formatOptions")
+            Core.<*> (o Core..:? "jobCreationMode")
+            Core.<*> (o Core..:? "jobTimeoutMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#queryRequest")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "maxResults")
-            Core.<*> ( o Core..:? "maximumBytesBilled"
+            Core.<*> ( o
+                         Core..:? "maximumBytesBilled"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "parameterMode")
@@ -7660,23 +9384,29 @@ instance Core.FromJSON QueryRequest where
             Core.<*> (o Core..:? "timeoutMs")
             Core.<*> (o Core..:? "useLegacySql" Core..!= Core.True)
             Core.<*> (o Core..:? "useQueryCache" Core..!= Core.True)
+            Core.<*> (o Core..:? "writeIncrementalResults")
       )
 
 instance Core.ToJSON QueryRequest where
   toJSON QueryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("connectionProperties" Core..=)
-              Core.<$> connectionProperties,
+          [ ("connectionProperties" Core..=) Core.<$> connectionProperties,
             ("continuous" Core..=) Core.<$> continuous,
             ("createSession" Core..=) Core.<$> createSession,
             ("defaultDataset" Core..=) Core.<$> defaultDataset,
+            ("destinationEncryptionConfiguration" Core..=)
+              Core.<$> destinationEncryptionConfiguration,
             ("dryRun" Core..=) Core.<$> dryRun,
+            ("formatOptions" Core..=) Core.<$> formatOptions,
+            ("jobCreationMode" Core..=) Core.<$> jobCreationMode,
+            ("jobTimeoutMs" Core..=) Core.. Core.AsText Core.<$> jobTimeoutMs,
             Core.Just ("kind" Core..= kind),
             ("labels" Core..=) Core.<$> labels,
             ("location" Core..=) Core.<$> location,
             ("maxResults" Core..=) Core.<$> maxResults,
-            ("maximumBytesBilled" Core..=) Core.. Core.AsText
+            ("maximumBytesBilled" Core..=)
+              Core.. Core.AsText
               Core.<$> maximumBytesBilled,
             ("parameterMode" Core..=) Core.<$> parameterMode,
             ("preserveNulls" Core..=) Core.<$> preserveNulls,
@@ -7685,16 +9415,17 @@ instance Core.ToJSON QueryRequest where
             ("requestId" Core..=) Core.<$> requestId,
             ("timeoutMs" Core..=) Core.<$> timeoutMs,
             Core.Just ("useLegacySql" Core..= useLegacySql),
-            Core.Just ("useQueryCache" Core..= useQueryCache)
+            Core.Just ("useQueryCache" Core..= useQueryCache),
+            ("writeIncrementalResults" Core..=)
+              Core.<$> writeIncrementalResults
           ]
       )
 
--- | The labels associated with this job. You can use these to organize and group your jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.
+-- | Optional. The labels associated with this query. Labels can be used to organize and group query jobs. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label keys must start with a letter and each label in the list must have a different key.
 --
 -- /See:/ 'newQueryRequest_Labels' smart constructor.
 newtype QueryRequest_Labels = QueryRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7710,44 +9441,56 @@ instance Core.FromJSON QueryRequest_Labels where
   parseJSON =
     Core.withObject
       "QueryRequest_Labels"
-      ( \o ->
-          QueryRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> QueryRequest_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON QueryRequest_Labels where
-  toJSON QueryRequest_Labels {..} =
-    Core.toJSON additional
+  toJSON QueryRequest_Labels {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newQueryResponse' smart constructor.
 data QueryResponse = QueryResponse
   { -- | Whether the query result was fetched from the query cache.
     cacheHit :: (Core.Maybe Core.Bool),
-    -- | [Output-only] Detailed statistics for DML statements Present only for DML statements INSERT, UPDATE, DELETE or TRUNCATE.
+    -- | Output only. Creation time of this query, in milliseconds since the epoch. This field will be present on all queries.
+    creationTime :: (Core.Maybe Core.Int64),
+    -- | Output only. Detailed statistics for DML statements INSERT, UPDATE, DELETE, MERGE or TRUNCATE.
     dmlStats :: (Core.Maybe DmlStatistics),
-    -- | [Output-only] The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful.
+    -- | Output only. End time of this query, in milliseconds since the epoch. This field will be present whenever a query job is in the DONE state.
+    endTime :: (Core.Maybe Core.Int64),
+    -- | Output only. The first errors or warnings encountered during the running of the job. The final message includes the number of errors that caused the process to stop. Errors here do not necessarily mean that the job has completed or was unsuccessful. For more information about error messages, see <https://cloud.google.com/bigquery/docs/error-messages Error messages>.
     errors :: (Core.Maybe [ErrorProto]),
     -- | Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.
     jobComplete :: (Core.Maybe Core.Bool),
-    -- | Reference to the Job that was created to run the query. This field will be present even if the original request timed out, in which case GetQueryResults can be used to read the results once the query has completed. Since this API only returns the first page of results, subsequent pages can be fetched via the same mechanism (GetQueryResults).
+    -- | Optional. The reason why a Job was created. Only relevant when a job/reference is present in the response. If job/reference is not present it will always be unset. <https://cloud.google.com/products/#product-launch-stages Preview>
+    jobCreationReason :: (Core.Maybe JobCreationReason),
+    -- | Reference to the Job that was created to run the query. This field will be present even if the original request timed out, in which case GetQueryResults can be used to read the results once the query has completed. Since this API only returns the first page of results, subsequent pages can be fetched via the same mechanism (GetQueryResults). If job/creation/mode was set to @JOB_CREATION_OPTIONAL@ and the query completes without creating a job, this field will be empty.
     jobReference :: (Core.Maybe JobReference),
     -- | The resource type.
     kind :: Core.Text,
-    -- | [Output-only] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
+    -- | Output only. The geographic location of the query. For more information about BigQuery locations, see: https:\/\/cloud.google.com\/bigquery\/docs\/locations
+    location :: (Core.Maybe Core.Text),
+    -- | Output only. The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.
     numDmlAffectedRows :: (Core.Maybe Core.Int64),
-    -- | A token used for paging results.
+    -- | A token used for paging results. A non-empty token indicates that additional results are available. To see additional results, query the <https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults jobs.getQueryResults> method. For more information, see <https://cloud.google.com/bigquery/docs/paging-results Paging through table data>.
     pageToken :: (Core.Maybe Core.Text),
+    -- | Auto-generated ID for the query. <https://cloud.google.com/products/#product-launch-stages Preview>
+    queryId :: (Core.Maybe Core.Text),
     -- | An object with as many results as can be contained within the maximum permitted reply size. To get any additional rows, you can call GetQueryResults and specify the jobReference returned above.
     rows :: (Core.Maybe [TableRow]),
     -- | The schema of the results. Present only when the query completes successfully.
     schema :: (Core.Maybe TableSchema),
-    -- | [Output-only] [Preview] Information of the session if this job is part of one.
+    -- | Output only. Information of the session if this job is part of one.
     sessionInfo :: (Core.Maybe SessionInfo),
+    -- | Output only. Start time of this query, in milliseconds since the epoch. This field will be present when the query job transitions from the PENDING state to either RUNNING or DONE.
+    startTime :: (Core.Maybe Core.Int64),
+    -- | Output only. If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.
+    totalBytesBilled :: (Core.Maybe Core.Int64),
     -- | The total number of bytes processed for this query. If this query was a dry run, this is the number of bytes that would be processed if the query were run.
     totalBytesProcessed :: (Core.Maybe Core.Int64),
     -- | The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results.
-    totalRows :: (Core.Maybe Core.Word64)
+    totalRows :: (Core.Maybe Core.Word64),
+    -- | Output only. Number of slot ms the user is actually billed for.
+    totalSlotMs :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7757,18 +9500,26 @@ newQueryResponse ::
 newQueryResponse =
   QueryResponse
     { cacheHit = Core.Nothing,
+      creationTime = Core.Nothing,
       dmlStats = Core.Nothing,
+      endTime = Core.Nothing,
       errors = Core.Nothing,
       jobComplete = Core.Nothing,
+      jobCreationReason = Core.Nothing,
       jobReference = Core.Nothing,
       kind = "bigquery#queryResponse",
+      location = Core.Nothing,
       numDmlAffectedRows = Core.Nothing,
       pageToken = Core.Nothing,
+      queryId = Core.Nothing,
       rows = Core.Nothing,
       schema = Core.Nothing,
       sessionInfo = Core.Nothing,
+      startTime = Core.Nothing,
+      totalBytesBilled = Core.Nothing,
       totalBytesProcessed = Core.Nothing,
-      totalRows = Core.Nothing
+      totalRows = Core.Nothing,
+      totalSlotMs = Core.Nothing
     }
 
 instance Core.FromJSON QueryResponse where
@@ -7778,24 +9529,32 @@ instance Core.FromJSON QueryResponse where
       ( \o ->
           QueryResponse
             Core.<$> (o Core..:? "cacheHit")
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dmlStats")
+            Core.<*> (o Core..:? "endTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "jobComplete")
+            Core.<*> (o Core..:? "jobCreationReason")
             Core.<*> (o Core..:? "jobReference")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#queryResponse")
-            Core.<*> ( o Core..:? "numDmlAffectedRows"
+            Core.<*> (o Core..:? "location")
+            Core.<*> ( o
+                         Core..:? "numDmlAffectedRows"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "pageToken")
+            Core.<*> (o Core..:? "queryId")
             Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "sessionInfo")
-            Core.<*> ( o Core..:? "totalBytesProcessed"
+            Core.<*> (o Core..:? "startTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalBytesBilled" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "totalBytesProcessed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "totalRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalSlotMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON QueryResponse where
@@ -7803,34 +9562,46 @@ instance Core.ToJSON QueryResponse where
     Core.object
       ( Core.catMaybes
           [ ("cacheHit" Core..=) Core.<$> cacheHit,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("dmlStats" Core..=) Core.<$> dmlStats,
+            ("endTime" Core..=) Core.. Core.AsText Core.<$> endTime,
             ("errors" Core..=) Core.<$> errors,
             ("jobComplete" Core..=) Core.<$> jobComplete,
+            ("jobCreationReason" Core..=) Core.<$> jobCreationReason,
             ("jobReference" Core..=) Core.<$> jobReference,
             Core.Just ("kind" Core..= kind),
-            ("numDmlAffectedRows" Core..=) Core.. Core.AsText
+            ("location" Core..=) Core.<$> location,
+            ("numDmlAffectedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> numDmlAffectedRows,
             ("pageToken" Core..=) Core.<$> pageToken,
+            ("queryId" Core..=) Core.<$> queryId,
             ("rows" Core..=) Core.<$> rows,
             ("schema" Core..=) Core.<$> schema,
             ("sessionInfo" Core..=) Core.<$> sessionInfo,
-            ("totalBytesProcessed" Core..=) Core.. Core.AsText
+            ("startTime" Core..=) Core.. Core.AsText Core.<$> startTime,
+            ("totalBytesBilled" Core..=)
+              Core.. Core.AsText
+              Core.<$> totalBytesBilled,
+            ("totalBytesProcessed" Core..=)
+              Core.. Core.AsText
               Core.<$> totalBytesProcessed,
-            ("totalRows" Core..=) Core.. Core.AsText
-              Core.<$> totalRows
+            ("totalRows" Core..=) Core.. Core.AsText Core.<$> totalRows,
+            ("totalSlotMs" Core..=) Core.. Core.AsText Core.<$> totalSlotMs
           ]
       )
 
+-- | Summary of the state of query execution at a given time.
 --
 -- /See:/ 'newQueryTimelineSample' smart constructor.
 data QueryTimelineSample = QueryTimelineSample
-  { -- | Total number of units currently being processed by workers. This does not correspond directly to slot usage. This is the largest value observed since the last sample.
+  { -- | Total number of active workers. This does not correspond directly to slot usage. This is the largest value observed since the last sample.
     activeUnits :: (Core.Maybe Core.Int64),
     -- | Total parallel units of work completed by this query.
     completedUnits :: (Core.Maybe Core.Int64),
     -- | Milliseconds elapsed since the start of query execution.
     elapsedMs :: (Core.Maybe Core.Int64),
-    -- | Units of work that can be scheduled immediately. Providing additional slots for these units of work will speed up the query, provided no other query in the reservation needs additional slots.
+    -- | Units of work that can be scheduled immediately. Providing additional slots for these units of work will accelerate the query, if no other query in the reservation needs additional slots.
     estimatedRunnableUnits :: (Core.Maybe Core.Int64),
     -- | Total units of work remaining for the query. This number can be revised (increased or decreased) while the query is running.
     pendingUnits :: (Core.Maybe Core.Int64),
@@ -7858,51 +9629,40 @@ instance Core.FromJSON QueryTimelineSample where
       "QueryTimelineSample"
       ( \o ->
           QueryTimelineSample
-            Core.<$> ( o Core..:? "activeUnits"
+            Core.<$> (o Core..:? "activeUnits" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "completedUnits" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "elapsedMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "estimatedRunnableUnits"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "completedUnits"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "elapsedMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "estimatedRunnableUnits"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "pendingUnits"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalSlotMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "pendingUnits" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalSlotMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON QueryTimelineSample where
   toJSON QueryTimelineSample {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeUnits" Core..=) Core.. Core.AsText
-              Core.<$> activeUnits,
-            ("completedUnits" Core..=) Core.. Core.AsText
+          [ ("activeUnits" Core..=) Core.. Core.AsText Core.<$> activeUnits,
+            ("completedUnits" Core..=)
+              Core.. Core.AsText
               Core.<$> completedUnits,
-            ("elapsedMs" Core..=) Core.. Core.AsText
-              Core.<$> elapsedMs,
-            ("estimatedRunnableUnits" Core..=) Core.. Core.AsText
+            ("elapsedMs" Core..=) Core.. Core.AsText Core.<$> elapsedMs,
+            ("estimatedRunnableUnits" Core..=)
+              Core.. Core.AsText
               Core.<$> estimatedRunnableUnits,
-            ("pendingUnits" Core..=) Core.. Core.AsText
-              Core.<$> pendingUnits,
-            ("totalSlotMs" Core..=) Core.. Core.AsText
-              Core.<$> totalSlotMs
+            ("pendingUnits" Core..=) Core.. Core.AsText Core.<$> pendingUnits,
+            ("totalSlotMs" Core..=) Core.. Core.AsText Core.<$> totalSlotMs
           ]
       )
 
 --
 -- /See:/ 'newRangePartitioning' smart constructor.
 data RangePartitioning = RangePartitioning
-  { -- | [TrustedTester] [Required] The table is partitioned by this field. The field must be a top-level NULLABLE\/REQUIRED field. The only supported type is INTEGER\/INT64.
+  { -- | Required. The name of the column to partition the table on. It must be a top-level, INT64 column whose mode is NULLABLE or REQUIRED.
     field :: (Core.Maybe Core.Text),
-    -- | [TrustedTester] [Required] Defines the ranges for range partitioning.
+    -- | [Experimental] Defines the ranges for range partitioning.
     range :: (Core.Maybe RangePartitioning_Range)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7919,7 +9679,8 @@ instance Core.FromJSON RangePartitioning where
       "RangePartitioning"
       ( \o ->
           RangePartitioning
-            Core.<$> (o Core..:? "field") Core.<*> (o Core..:? "range")
+            Core.<$> (o Core..:? "field")
+            Core.<*> (o Core..:? "range")
       )
 
 instance Core.ToJSON RangePartitioning where
@@ -7931,15 +9692,15 @@ instance Core.ToJSON RangePartitioning where
           ]
       )
 
--- | [TrustedTester] [Required] Defines the ranges for range partitioning.
+-- | [Experimental] Defines the ranges for range partitioning.
 --
 -- /See:/ 'newRangePartitioning_Range' smart constructor.
 data RangePartitioning_Range = RangePartitioning_Range
-  { -- | [TrustedTester] [Required] The end of range partitioning, exclusive.
+  { -- | [Experimental] The end of range partitioning, exclusive.
     end :: (Core.Maybe Core.Int64),
-    -- | [TrustedTester] [Required] The width of each interval.
+    -- | [Experimental] The width of each interval.
     interval :: (Core.Maybe Core.Int64),
-    -- | [TrustedTester] [Required] The start of range partitioning, inclusive.
+    -- | [Experimental] The start of range partitioning, inclusive.
     start :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7961,12 +9722,8 @@ instance Core.FromJSON RangePartitioning_Range where
       ( \o ->
           RangePartitioning_Range
             Core.<$> (o Core..:? "end" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> ( o Core..:? "interval"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "start"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "interval" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "start" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON RangePartitioning_Range where
@@ -7974,10 +9731,43 @@ instance Core.ToJSON RangePartitioning_Range where
     Core.object
       ( Core.catMaybes
           [ ("end" Core..=) Core.. Core.AsText Core.<$> end,
-            ("interval" Core..=) Core.. Core.AsText
-              Core.<$> interval,
+            ("interval" Core..=) Core.. Core.AsText Core.<$> interval,
             ("start" Core..=) Core.. Core.AsText Core.<$> start
           ]
+      )
+
+-- | Represents the value of a range.
+--
+-- /See:/ 'newRangeValue' smart constructor.
+data RangeValue = RangeValue
+  { -- | Optional. The end value of the range. A missing value represents an unbounded end.
+    end :: (Core.Maybe QueryParameterValue),
+    -- | Optional. The start value of the range. A missing value represents an unbounded start.
+    start :: (Core.Maybe QueryParameterValue)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RangeValue' with the minimum fields required to make a request.
+newRangeValue ::
+  RangeValue
+newRangeValue =
+  RangeValue {end = Core.Nothing, start = Core.Nothing}
+
+instance Core.FromJSON RangeValue where
+  parseJSON =
+    Core.withObject
+      "RangeValue"
+      ( \o ->
+          RangeValue
+            Core.<$> (o Core..:? "end")
+            Core.<*> (o Core..:? "start")
+      )
+
+instance Core.ToJSON RangeValue where
+  toJSON RangeValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [("end" Core..=) Core.<$> end, ("start" Core..=) Core.<$> start]
       )
 
 -- | Evaluation metrics used by weighted-ALS models specified by feedback_type=implicit.
@@ -8023,10 +9813,8 @@ instance Core.ToJSON RankingMetrics where
     Core.object
       ( Core.catMaybes
           [ ("averageRank" Core..=) Core.<$> averageRank,
-            ("meanAveragePrecision" Core..=)
-              Core.<$> meanAveragePrecision,
-            ("meanSquaredError" Core..=)
-              Core.<$> meanSquaredError,
+            ("meanAveragePrecision" Core..=) Core.<$> meanAveragePrecision,
+            ("meanSquaredError" Core..=) Core.<$> meanSquaredError,
             ("normalizedDiscountedCumulativeGain" Core..=)
               Core.<$> normalizedDiscountedCumulativeGain
           ]
@@ -8078,14 +9866,10 @@ instance Core.ToJSON RegressionMetrics where
   toJSON RegressionMetrics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("meanAbsoluteError" Core..=)
-              Core.<$> meanAbsoluteError,
-            ("meanSquaredError" Core..=)
-              Core.<$> meanSquaredError,
-            ("meanSquaredLogError" Core..=)
-              Core.<$> meanSquaredLogError,
-            ("medianAbsoluteError" Core..=)
-              Core.<$> medianAbsoluteError,
+          [ ("meanAbsoluteError" Core..=) Core.<$> meanAbsoluteError,
+            ("meanSquaredError" Core..=) Core.<$> meanSquaredError,
+            ("meanSquaredLogError" Core..=) Core.<$> meanSquaredLogError,
+            ("medianAbsoluteError" Core..=) Core.<$> medianAbsoluteError,
             ("rSquared" Core..=) Core.<$> rSquared
           ]
       )
@@ -8124,9 +9908,7 @@ instance Core.FromJSON RemoteFunctionOptions where
           RemoteFunctionOptions
             Core.<$> (o Core..:? "connection")
             Core.<*> (o Core..:? "endpoint")
-            Core.<*> ( o Core..:? "maxBatchingRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxBatchingRows" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "userDefinedContext")
       )
 
@@ -8136,10 +9918,10 @@ instance Core.ToJSON RemoteFunctionOptions where
       ( Core.catMaybes
           [ ("connection" Core..=) Core.<$> connection,
             ("endpoint" Core..=) Core.<$> endpoint,
-            ("maxBatchingRows" Core..=) Core.. Core.AsText
+            ("maxBatchingRows" Core..=)
+              Core.. Core.AsText
               Core.<$> maxBatchingRows,
-            ("userDefinedContext" Core..=)
-              Core.<$> userDefinedContext
+            ("userDefinedContext" Core..=) Core.<$> userDefinedContext
           ]
       )
 
@@ -8147,8 +9929,7 @@ instance Core.ToJSON RemoteFunctionOptions where
 --
 -- /See:/ 'newRemoteFunctionOptions_UserDefinedContext' smart constructor.
 newtype RemoteFunctionOptions_UserDefinedContext = RemoteFunctionOptions_UserDefinedContext
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8160,10 +9941,7 @@ newRemoteFunctionOptions_UserDefinedContext ::
 newRemoteFunctionOptions_UserDefinedContext additional =
   RemoteFunctionOptions_UserDefinedContext {additional = additional}
 
-instance
-  Core.FromJSON
-    RemoteFunctionOptions_UserDefinedContext
-  where
+instance Core.FromJSON RemoteFunctionOptions_UserDefinedContext where
   parseJSON =
     Core.withObject
       "RemoteFunctionOptions_UserDefinedContext"
@@ -8172,12 +9950,93 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RemoteFunctionOptions_UserDefinedContext
-  where
+instance Core.ToJSON RemoteFunctionOptions_UserDefinedContext where
   toJSON RemoteFunctionOptions_UserDefinedContext {..} =
     Core.toJSON additional
+
+-- | Remote Model Info
+--
+-- /See:/ 'newRemoteModelInfo' smart constructor.
+data RemoteModelInfo = RemoteModelInfo
+  { -- | Output only. Fully qualified name of the user-provided connection object of the remote model. Format: @\"projects\/{project_id}\/locations\/{location_id}\/connections\/{connection_id}\"@
+    connection :: (Core.Maybe Core.Text),
+    -- | Output only. The endpoint for remote model.
+    endpoint :: (Core.Maybe Core.Text),
+    -- | Output only. Max number of rows in each batch sent to the remote service. If unset, the number of rows in each batch is set dynamically.
+    maxBatchingRows :: (Core.Maybe Core.Int64),
+    -- | Output only. The model version for LLM.
+    remoteModelVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The remote service type for remote model.
+    remoteServiceType :: (Core.Maybe RemoteModelInfo_RemoteServiceType),
+    -- | Output only. The name of the speech recognizer to use for speech recognition. The expected format is @projects\/{project}\/locations\/{location}\/recognizers\/{recognizer}@. Customers can specify this field at model creation. If not specified, a default recognizer @projects\/{model project}\/locations\/global\/recognizers\/_@ will be used. See more details at <https://cloud.google.com/speech-to-text/v2/docs/reference/rest/v2/projects.locations.recognizers recognizers>
+    speechRecognizer :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RemoteModelInfo' with the minimum fields required to make a request.
+newRemoteModelInfo ::
+  RemoteModelInfo
+newRemoteModelInfo =
+  RemoteModelInfo
+    { connection = Core.Nothing,
+      endpoint = Core.Nothing,
+      maxBatchingRows = Core.Nothing,
+      remoteModelVersion = Core.Nothing,
+      remoteServiceType = Core.Nothing,
+      speechRecognizer = Core.Nothing
+    }
+
+instance Core.FromJSON RemoteModelInfo where
+  parseJSON =
+    Core.withObject
+      "RemoteModelInfo"
+      ( \o ->
+          RemoteModelInfo
+            Core.<$> (o Core..:? "connection")
+            Core.<*> (o Core..:? "endpoint")
+            Core.<*> (o Core..:? "maxBatchingRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "remoteModelVersion")
+            Core.<*> (o Core..:? "remoteServiceType")
+            Core.<*> (o Core..:? "speechRecognizer")
+      )
+
+instance Core.ToJSON RemoteModelInfo where
+  toJSON RemoteModelInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connection" Core..=) Core.<$> connection,
+            ("endpoint" Core..=) Core.<$> endpoint,
+            ("maxBatchingRows" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxBatchingRows,
+            ("remoteModelVersion" Core..=) Core.<$> remoteModelVersion,
+            ("remoteServiceType" Core..=) Core.<$> remoteServiceType,
+            ("speechRecognizer" Core..=) Core.<$> speechRecognizer
+          ]
+      )
+
+--
+-- /See:/ 'newRestrictionConfig' smart constructor.
+newtype RestrictionConfig = RestrictionConfig
+  { -- | Output only. Specifies the type of dataset\/table restriction.
+    type' :: (Core.Maybe RestrictionConfig_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RestrictionConfig' with the minimum fields required to make a request.
+newRestrictionConfig ::
+  RestrictionConfig
+newRestrictionConfig = RestrictionConfig {type' = Core.Nothing}
+
+instance Core.FromJSON RestrictionConfig where
+  parseJSON =
+    Core.withObject
+      "RestrictionConfig"
+      (\o -> RestrictionConfig Core.<$> (o Core..:? "type"))
+
+instance Core.ToJSON RestrictionConfig where
+  toJSON RestrictionConfig {..} =
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | A user-defined function or a stored procedure.
 --
@@ -8187,6 +10046,8 @@ data Routine = Routine
     arguments :: (Core.Maybe [Argument]),
     -- | Output only. The time when this routine was created, in milliseconds since the epoch.
     creationTime :: (Core.Maybe Core.Int64),
+    -- | Optional. If set to @DATA_MASKING@, the function is validated and made available as a masking function. For more information, see <https://cloud.google.com/bigquery/docs/user-defined-functions#custom-mask Create custom masking routines>.
+    dataGovernanceType :: (Core.Maybe Routine_DataGovernanceType),
     -- | Required. The body of the routine. For functions, this is the expression in the AS clause. If language=SQL, it is the substring inside (but excluding) the parentheses. For example, for the function created with the following statement: @CREATE FUNCTION JoinLines(x string, y string) as (concat(x, \"\\n\", y))@ The definition/body is @concat(x, \"\\n\", y)@ (\\n is not replaced with linebreak). If language=JAVASCRIPT, it is the evaluated string in the AS clause. For example, for the function created with the following statement: @CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS \'return \"\\n\";\\n\'@ The definition/body is @return \"\\n\";\\n@ Note that both \\n are replaced with linebreaks.
     definitionBody :: (Core.Maybe Core.Text),
     -- | Optional. The description of the routine, if defined.
@@ -8211,9 +10072,11 @@ data Routine = Routine
     routineReference :: (Core.Maybe RoutineReference),
     -- | Required. The type of routine.
     routineType :: (Core.Maybe Routine_RoutineType),
+    -- | Optional. The security mode of the routine, if defined. If not defined, the security mode is automatically determined from the routine\'s configuration.
+    securityMode :: (Core.Maybe Routine_SecurityMode),
     -- | Optional. Spark specific options.
     sparkOptions :: (Core.Maybe SparkOptions),
-    -- | Optional. Can be set for procedures only. If true (default), the definition body will be validated in the creation and the updates of the procedure. For procedures with an argument of ANY TYPE, the definition body validtion is not supported at creation\/update time, and thus this field must be set to false explicitly.
+    -- | Optional. Use this option to catch many common errors. Error checking is not exhaustive, and successfully creating a procedure doesn\'t guarantee that the procedure will successfully execute at runtime. If @strictMode@ is set to @TRUE@, the procedure body is further checked for errors such as non-existent tables or columns. The @CREATE PROCEDURE@ statement fails if the body fails any of these checks. If @strictMode@ is set to @FALSE@, the procedure body is checked only for syntax. For procedures that invoke themselves recursively, specify @strictMode=FALSE@ to avoid non-existent procedure errors during validation. Default value is @TRUE@.
     strictMode :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8225,6 +10088,7 @@ newRoutine =
   Routine
     { arguments = Core.Nothing,
       creationTime = Core.Nothing,
+      dataGovernanceType = Core.Nothing,
       definitionBody = Core.Nothing,
       description = Core.Nothing,
       determinismLevel = Core.Nothing,
@@ -8237,6 +10101,7 @@ newRoutine =
       returnType = Core.Nothing,
       routineReference = Core.Nothing,
       routineType = Core.Nothing,
+      securityMode = Core.Nothing,
       sparkOptions = Core.Nothing,
       strictMode = Core.Nothing
     }
@@ -8248,23 +10113,21 @@ instance Core.FromJSON Routine where
       ( \o ->
           Routine
             Core.<$> (o Core..:? "arguments")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dataGovernanceType")
             Core.<*> (o Core..:? "definitionBody")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "determinismLevel")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "importedLibraries")
             Core.<*> (o Core..:? "language")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "remoteFunctionOptions")
             Core.<*> (o Core..:? "returnTableType")
             Core.<*> (o Core..:? "returnType")
             Core.<*> (o Core..:? "routineReference")
             Core.<*> (o Core..:? "routineType")
+            Core.<*> (o Core..:? "securityMode")
             Core.<*> (o Core..:? "sparkOptions")
             Core.<*> (o Core..:? "strictMode")
       )
@@ -8274,38 +10137,37 @@ instance Core.ToJSON Routine where
     Core.object
       ( Core.catMaybes
           [ ("arguments" Core..=) Core.<$> arguments,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("dataGovernanceType" Core..=) Core.<$> dataGovernanceType,
             ("definitionBody" Core..=) Core.<$> definitionBody,
             ("description" Core..=) Core.<$> description,
-            ("determinismLevel" Core..=)
-              Core.<$> determinismLevel,
+            ("determinismLevel" Core..=) Core.<$> determinismLevel,
             ("etag" Core..=) Core.<$> etag,
-            ("importedLibraries" Core..=)
-              Core.<$> importedLibraries,
+            ("importedLibraries" Core..=) Core.<$> importedLibraries,
             ("language" Core..=) Core.<$> language,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
-            ("remoteFunctionOptions" Core..=)
-              Core.<$> remoteFunctionOptions,
+            ("remoteFunctionOptions" Core..=) Core.<$> remoteFunctionOptions,
             ("returnTableType" Core..=) Core.<$> returnTableType,
             ("returnType" Core..=) Core.<$> returnType,
-            ("routineReference" Core..=)
-              Core.<$> routineReference,
+            ("routineReference" Core..=) Core.<$> routineReference,
             ("routineType" Core..=) Core.<$> routineType,
+            ("securityMode" Core..=) Core.<$> securityMode,
             ("sparkOptions" Core..=) Core.<$> sparkOptions,
             ("strictMode" Core..=) Core.<$> strictMode
           ]
       )
 
+-- | Id path of a routine.
 --
 -- /See:/ 'newRoutineReference' smart constructor.
 data RoutineReference = RoutineReference
-  { -- | [Required] The ID of the dataset containing this routine.
+  { -- | Required. The ID of the dataset containing this routine.
     datasetId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the project containing this routine.
+    -- | Required. The ID of the project containing this routine.
     projectId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the routine. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
+    -- | Required. The ID of the routine. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
     routineId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8386,6 +10248,9 @@ data RowAccessPolicy = RowAccessPolicy
     etag :: (Core.Maybe Core.Text),
     -- | Required. A SQL boolean expression that represents the rows defined by this row access policy, similar to the boolean expression in a WHERE clause of a SELECT query on a table. References to other tables, routines, and temporary functions are not supported. Examples: region=\"EU\" date/field = CAST(\'2019-9-27\' as DATE) nullable/field is not NULL numeric_field BETWEEN 1.0 AND 5.0
     filterPredicate :: (Core.Maybe Core.Text),
+    -- | Optional. Input only. The optional list of iam_member users or groups that specifies the initial members that the row-level access policy should be created with. grantees types: - \"user:alice\@example.com\": An email address that represents a specific Google account. - \"serviceAccount:my-other-app\@appspot.gserviceaccount.com\": An email address that represents a service account. - \"group:admins\@example.com\": An email address that represents a Google group. - \"domain:example.com\":The Google Workspace domain (primary) that represents all the users of that domain. - \"allAuthenticatedUsers\": A special identifier that represents all service accounts and all users on the internet who have authenticated with a Google Account. This identifier includes accounts that aren\'t connected to a Google Workspace or Cloud Identity domain, such as personal Gmail accounts. Users who aren\'t authenticated, such as anonymous visitors, aren\'t included. - \"allUsers\":A special identifier that represents anyone who is on
+    -- the internet, including authenticated and unauthenticated users. Because BigQuery requires authentication before a user can access the service, allUsers includes only authenticated users.
+    grantees :: (Core.Maybe [Core.Text]),
     -- | Output only. The time when this row access policy was last modified, in milliseconds since the epoch.
     lastModifiedTime :: (Core.Maybe Core.DateTime),
     -- | Required. Reference describing the ID of this row access policy.
@@ -8401,6 +10266,7 @@ newRowAccessPolicy =
     { creationTime = Core.Nothing,
       etag = Core.Nothing,
       filterPredicate = Core.Nothing,
+      grantees = Core.Nothing,
       lastModifiedTime = Core.Nothing,
       rowAccessPolicyReference = Core.Nothing
     }
@@ -8414,6 +10280,7 @@ instance Core.FromJSON RowAccessPolicy where
             Core.<$> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "filterPredicate")
+            Core.<*> (o Core..:? "grantees")
             Core.<*> (o Core..:? "lastModifiedTime")
             Core.<*> (o Core..:? "rowAccessPolicyReference")
       )
@@ -8425,23 +10292,24 @@ instance Core.ToJSON RowAccessPolicy where
           [ ("creationTime" Core..=) Core.<$> creationTime,
             ("etag" Core..=) Core.<$> etag,
             ("filterPredicate" Core..=) Core.<$> filterPredicate,
-            ("lastModifiedTime" Core..=)
-              Core.<$> lastModifiedTime,
+            ("grantees" Core..=) Core.<$> grantees,
+            ("lastModifiedTime" Core..=) Core.<$> lastModifiedTime,
             ("rowAccessPolicyReference" Core..=)
               Core.<$> rowAccessPolicyReference
           ]
       )
 
+-- | Id path of a row access policy.
 --
 -- /See:/ 'newRowAccessPolicyReference' smart constructor.
 data RowAccessPolicyReference = RowAccessPolicyReference
-  { -- | [Required] The ID of the dataset containing this row access policy.
+  { -- | Required. The ID of the dataset containing this row access policy.
     datasetId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the row access policy. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
+    -- | Required. The ID of the row access policy. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 256 characters.
     policyId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the project containing this row access policy.
+    -- | Required. The ID of the project containing this row access policy.
     projectId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the table containing this row access policy.
+    -- | Required. The ID of the table containing this row access policy.
     tableId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8480,10 +10348,11 @@ instance Core.ToJSON RowAccessPolicyReference where
           ]
       )
 
+-- | Statistics for row-level security.
 --
 -- /See:/ 'newRowLevelSecurityStatistics' smart constructor.
 newtype RowLevelSecurityStatistics = RowLevelSecurityStatistics
-  { -- | [Output-only] [Preview] Whether any accessed data was protected by row access policies.
+  { -- | Whether any accessed data was protected by row access policies.
     rowLevelSecurityApplied :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8492,7 +10361,10 @@ newtype RowLevelSecurityStatistics = RowLevelSecurityStatistics
 newRowLevelSecurityStatistics ::
   RowLevelSecurityStatistics
 newRowLevelSecurityStatistics =
-  RowLevelSecurityStatistics {rowLevelSecurityApplied = Core.Nothing}
+  RowLevelSecurityStatistics
+    { rowLevelSecurityApplied =
+        Core.Nothing
+    }
 
 instance Core.FromJSON RowLevelSecurityStatistics where
   parseJSON =
@@ -8512,20 +10384,75 @@ instance Core.ToJSON RowLevelSecurityStatistics where
           ]
       )
 
+-- | Options related to script execution.
+--
+-- /See:/ 'newScriptOptions' smart constructor.
+data ScriptOptions = ScriptOptions
+  { -- | Determines which statement in the script represents the \"key result\", used to populate the schema and query results of the script job. Default is LAST.
+    keyResultStatement :: (Core.Maybe ScriptOptions_KeyResultStatement),
+    -- | Limit on the number of bytes billed per statement. Exceeding this budget results in an error.
+    statementByteBudget :: (Core.Maybe Core.Int64),
+    -- | Timeout period for each statement in a script.
+    statementTimeoutMs :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ScriptOptions' with the minimum fields required to make a request.
+newScriptOptions ::
+  ScriptOptions
+newScriptOptions =
+  ScriptOptions
+    { keyResultStatement = Core.Nothing,
+      statementByteBudget = Core.Nothing,
+      statementTimeoutMs = Core.Nothing
+    }
+
+instance Core.FromJSON ScriptOptions where
+  parseJSON =
+    Core.withObject
+      "ScriptOptions"
+      ( \o ->
+          ScriptOptions
+            Core.<$> (o Core..:? "keyResultStatement")
+            Core.<*> ( o
+                         Core..:? "statementByteBudget"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "statementTimeoutMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON ScriptOptions where
+  toJSON ScriptOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("keyResultStatement" Core..=) Core.<$> keyResultStatement,
+            ("statementByteBudget" Core..=)
+              Core.. Core.AsText
+              Core.<$> statementByteBudget,
+            ("statementTimeoutMs" Core..=)
+              Core.. Core.AsText
+              Core.<$> statementTimeoutMs
+          ]
+      )
+
+-- | Represents the location of the statement\/expression being evaluated. Line and column numbers are defined as follows: - Line and column numbers start with one. That is, line 1 column 1 denotes the start of the script. - When inside a stored procedure, all line\/column numbers are relative to the procedure body, not the script in which the procedure was defined. - Start\/end positions exclude leading\/trailing comments and whitespace. The end position always ends with a \";\", when present. - Multi-byte Unicode characters are treated as just one column. - If the original script (or procedure definition) contains TAB characters, a tab \"snaps\" the indentation forward to the nearest multiple of 8 characters, plus 1. For example, a TAB on column 1, 2, 3, 4, 5, 6 , or 8 will advance the next character to column 9. A TAB on column 9, 10, 11, 12, 13, 14, 15, or 16 will advance the next character to column 17.
 --
 -- /See:/ 'newScriptStackFrame' smart constructor.
 data ScriptStackFrame = ScriptStackFrame
-  { -- | [Output-only] One-based end column.
+  { -- | Output only. One-based end column.
     endColumn :: (Core.Maybe Core.Int32),
-    -- | [Output-only] One-based end line.
+    -- | Output only. One-based end line.
     endLine :: (Core.Maybe Core.Int32),
-    -- | [Output-only] Name of the active procedure, empty if in a top-level script.
+    -- | Output only. Name of the active procedure, empty if in a top-level script.
     procedureId :: (Core.Maybe Core.Text),
-    -- | [Output-only] One-based start column.
+    -- | Output only. One-based start column.
     startColumn :: (Core.Maybe Core.Int32),
-    -- | [Output-only] One-based start line.
+    -- | Output only. One-based start line.
     startLine :: (Core.Maybe Core.Int32),
-    -- | [Output-only] Text of the current statement\/expression.
+    -- | Output only. Text of the current statement\/expression.
     text :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8570,11 +10497,12 @@ instance Core.ToJSON ScriptStackFrame where
           ]
       )
 
+-- | Job statistics specific to the child job of a script.
 --
 -- /See:/ 'newScriptStatistics' smart constructor.
 data ScriptStatistics = ScriptStatistics
-  { -- | [Output-only] Whether this child job was a statement or expression.
-    evaluationKind :: (Core.Maybe Core.Text),
+  { -- | Whether this child job was a statement or expression.
+    evaluationKind :: (Core.Maybe ScriptStatistics_EvaluationKind),
     -- | Stack trace showing the line\/column\/procedure name of each frame on the stack at the point where the current evaluation happened. The leaf frame is first, the primary script is last. Never empty.
     stackFrames :: (Core.Maybe [ScriptStackFrame])
   }
@@ -8584,7 +10512,10 @@ data ScriptStatistics = ScriptStatistics
 newScriptStatistics ::
   ScriptStatistics
 newScriptStatistics =
-  ScriptStatistics {evaluationKind = Core.Nothing, stackFrames = Core.Nothing}
+  ScriptStatistics
+    { evaluationKind = Core.Nothing,
+      stackFrames = Core.Nothing
+    }
 
 instance Core.FromJSON ScriptStatistics where
   parseJSON =
@@ -8605,13 +10536,14 @@ instance Core.ToJSON ScriptStatistics where
           ]
       )
 
+-- | Statistics for a search query. Populated as part of JobStatistics2.
 --
 -- /See:/ 'newSearchStatistics' smart constructor.
 data SearchStatistics = SearchStatistics
-  { -- | When index/usage/mode is UNUSED or PARTIALLY/USED, this field explains why index was not used in all or part of the search query. If index/usage/mode is FULLLY/USED, this field is not populated.
-    indexUnusedReason :: (Core.Maybe [IndexUnusedReason]),
-    -- | Specifies index usage mode for the query.
-    indexUsageMode :: (Core.Maybe Core.Text)
+  { -- | When @indexUsageMode@ is @UNUSED@ or @PARTIALLY_USED@, this field explains why indexes were not used in all or part of the search query. If @indexUsageMode@ is @FULLY_USED@, this field is not populated.
+    indexUnusedReasons :: (Core.Maybe [IndexUnusedReason]),
+    -- | Specifies the index usage mode for the query.
+    indexUsageMode :: (Core.Maybe SearchStatistics_IndexUsageMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8620,7 +10552,7 @@ newSearchStatistics ::
   SearchStatistics
 newSearchStatistics =
   SearchStatistics
-    { indexUnusedReason = Core.Nothing,
+    { indexUnusedReasons = Core.Nothing,
       indexUsageMode = Core.Nothing
     }
 
@@ -8630,7 +10562,7 @@ instance Core.FromJSON SearchStatistics where
       "SearchStatistics"
       ( \o ->
           SearchStatistics
-            Core.<$> (o Core..:? "indexUnusedReason")
+            Core.<$> (o Core..:? "indexUnusedReasons")
             Core.<*> (o Core..:? "indexUsageMode")
       )
 
@@ -8638,16 +10570,85 @@ instance Core.ToJSON SearchStatistics where
   toJSON SearchStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("indexUnusedReason" Core..=)
-              Core.<$> indexUnusedReason,
+          [ ("indexUnusedReasons" Core..=) Core.<$> indexUnusedReasons,
             ("indexUsageMode" Core..=) Core.<$> indexUsageMode
           ]
       )
 
+-- | Serializer and deserializer information.
+--
+-- /See:/ 'newSerDeInfo' smart constructor.
+data SerDeInfo = SerDeInfo
+  { -- | Optional. Name of the SerDe. The maximum length is 256 characters.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. Key-value pairs that define the initialization parameters for the serialization library. Maximum size 10 Kib.
+    parameters :: (Core.Maybe SerDeInfo_Parameters),
+    -- | Required. Specifies a fully-qualified class name of the serialization library that is responsible for the translation of data between table representation and the underlying low-level input and output format structures. The maximum length is 256 characters.
+    serializationLibrary :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SerDeInfo' with the minimum fields required to make a request.
+newSerDeInfo ::
+  SerDeInfo
+newSerDeInfo =
+  SerDeInfo
+    { name = Core.Nothing,
+      parameters = Core.Nothing,
+      serializationLibrary = Core.Nothing
+    }
+
+instance Core.FromJSON SerDeInfo where
+  parseJSON =
+    Core.withObject
+      "SerDeInfo"
+      ( \o ->
+          SerDeInfo
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "parameters")
+            Core.<*> (o Core..:? "serializationLibrary")
+      )
+
+instance Core.ToJSON SerDeInfo where
+  toJSON SerDeInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("parameters" Core..=) Core.<$> parameters,
+            ("serializationLibrary" Core..=) Core.<$> serializationLibrary
+          ]
+      )
+
+-- | Optional. Key-value pairs that define the initialization parameters for the serialization library. Maximum size 10 Kib.
+--
+-- /See:/ 'newSerDeInfo_Parameters' smart constructor.
+newtype SerDeInfo_Parameters = SerDeInfo_Parameters
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SerDeInfo_Parameters' with the minimum fields required to make a request.
+newSerDeInfo_Parameters ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  SerDeInfo_Parameters
+newSerDeInfo_Parameters additional =
+  SerDeInfo_Parameters {additional = additional}
+
+instance Core.FromJSON SerDeInfo_Parameters where
+  parseJSON =
+    Core.withObject
+      "SerDeInfo_Parameters"
+      (\o -> SerDeInfo_Parameters Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON SerDeInfo_Parameters where
+  toJSON SerDeInfo_Parameters {..} = Core.toJSON additional
+
+-- | [Preview] Information related to sessions.
 --
 -- /See:/ 'newSessionInfo' smart constructor.
 newtype SessionInfo = SessionInfo
-  { -- | [Output-only] \/\/ [Preview] Id of the session.
+  { -- | Output only. The id of the session.
     sessionId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8661,16 +10662,12 @@ instance Core.FromJSON SessionInfo where
   parseJSON =
     Core.withObject
       "SessionInfo"
-      ( \o ->
-          SessionInfo Core.<$> (o Core..:? "sessionId")
-      )
+      (\o -> SessionInfo Core.<$> (o Core..:? "sessionId"))
 
 instance Core.ToJSON SessionInfo where
   toJSON SessionInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("sessionId" Core..=) Core.<$> sessionId]
-      )
+      (Core.catMaybes [("sessionId" Core..=) Core.<$> sessionId])
 
 -- | Request message for @SetIamPolicy@ method.
 --
@@ -8687,7 +10684,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -8708,12 +10708,43 @@ instance Core.ToJSON SetIamPolicyRequest where
           ]
       )
 
+-- | Details about source stages which produce skewed data.
+--
+-- /See:/ 'newSkewSource' smart constructor.
+newtype SkewSource = SkewSource
+  { -- | Output only. Stage id of the skew source stage.
+    stageId :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SkewSource' with the minimum fields required to make a request.
+newSkewSource ::
+  SkewSource
+newSkewSource = SkewSource {stageId = Core.Nothing}
+
+instance Core.FromJSON SkewSource where
+  parseJSON =
+    Core.withObject
+      "SkewSource"
+      ( \o ->
+          SkewSource
+            Core.<$> (o Core..:? "stageId" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON SkewSource where
+  toJSON SkewSource {..} =
+    Core.object
+      ( Core.catMaybes
+          [("stageId" Core..=) Core.. Core.AsText Core.<$> stageId]
+      )
+
+-- | Information about base table and snapshot time of the snapshot.
 --
 -- /See:/ 'newSnapshotDefinition' smart constructor.
 data SnapshotDefinition = SnapshotDefinition
-  { -- | [Required] Reference describing the ID of the table that was snapshot.
+  { -- | Required. Reference describing the ID of the table that was snapshot.
     baseTableReference :: (Core.Maybe TableReference),
-    -- | [Required] The time at which the base table was snapshot. This value is reported in the JSON response using RFC3339 format.
+    -- | Required. The time at which the base table was snapshot. This value is reported in the JSON response using RFC3339 format.
     snapshotTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8741,18 +10772,18 @@ instance Core.ToJSON SnapshotDefinition where
   toJSON SnapshotDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("baseTableReference" Core..=)
-              Core.<$> baseTableReference,
+          [ ("baseTableReference" Core..=) Core.<$> baseTableReference,
             ("snapshotTime" Core..=) Core.<$> snapshotTime
           ]
       )
 
+-- | Spark job logs can be filtered by these fields in Cloud Logging.
 --
 -- /See:/ 'newSparkLoggingInfo' smart constructor.
 data SparkLoggingInfo = SparkLoggingInfo
-  { -- | [Output-only] Project ID used for logging
+  { -- | Output only. Project ID where the Spark logs were written.
     projectId :: (Core.Maybe Core.Text),
-    -- | [Output-only] Resource type used for logging
+    -- | Output only. Resource type used for logging.
     resourceType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8761,7 +10792,10 @@ data SparkLoggingInfo = SparkLoggingInfo
 newSparkLoggingInfo ::
   SparkLoggingInfo
 newSparkLoggingInfo =
-  SparkLoggingInfo {projectId = Core.Nothing, resourceType = Core.Nothing}
+  SparkLoggingInfo
+    { projectId = Core.Nothing,
+      resourceType = Core.Nothing
+    }
 
 instance Core.FromJSON SparkLoggingInfo where
   parseJSON =
@@ -8769,16 +10803,16 @@ instance Core.FromJSON SparkLoggingInfo where
       "SparkLoggingInfo"
       ( \o ->
           SparkLoggingInfo
-            Core.<$> (o Core..:? "project_id")
-            Core.<*> (o Core..:? "resource_type")
+            Core.<$> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "resourceType")
       )
 
 instance Core.ToJSON SparkLoggingInfo where
   toJSON SparkLoggingInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("project_id" Core..=) Core.<$> projectId,
-            ("resource_type" Core..=) Core.<$> resourceType
+          [ ("projectId" Core..=) Core.<$> projectId,
+            ("resourceType" Core..=) Core.<$> resourceType
           ]
       )
 
@@ -8798,7 +10832,7 @@ data SparkOptions = SparkOptions
     jarUris :: (Core.Maybe [Core.Text]),
     -- | The fully qualified name of a class in jar/uris, for example, com.example.wordcount. Exactly one of main/class and main/jar/uri field should be set for Java\/Scala language type.
     mainClass :: (Core.Maybe Core.Text),
-    -- | The main file\/jar URI of the Spark application. Exactly one of the definition/body field and the main/file_uri field must be set for Python.
+    -- | The main file\/jar URI of the Spark application. Exactly one of the definition/body field and the main/file/uri field must be set for Python. Exactly one of main/class and main/file/uri field should be set for Java\/Scala language type.
     mainFileUri :: (Core.Maybe Core.Text),
     -- | Configuration properties as a set of key\/value pairs, which will be passed on to the Spark application. For more information, see <https://spark.apache.org/docs/latest/index.html Apache Spark> and the <https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list procedure option list>.
     properties :: (Core.Maybe SparkOptions_Properties),
@@ -8865,8 +10899,7 @@ instance Core.ToJSON SparkOptions where
 --
 -- /See:/ 'newSparkOptions_Properties' smart constructor.
 newtype SparkOptions_Properties = SparkOptions_Properties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8882,25 +10915,26 @@ instance Core.FromJSON SparkOptions_Properties where
   parseJSON =
     Core.withObject
       "SparkOptions_Properties"
-      ( \o ->
-          SparkOptions_Properties
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> SparkOptions_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON SparkOptions_Properties where
-  toJSON SparkOptions_Properties {..} =
-    Core.toJSON additional
+  toJSON SparkOptions_Properties {..} = Core.toJSON additional
 
+-- | Statistics for a BigSpark query. Populated as part of JobStatistics2
 --
 -- /See:/ 'newSparkStatistics' smart constructor.
 data SparkStatistics = SparkStatistics
-  { -- | [Output-only] Endpoints generated for the Spark job.
+  { -- | Output only. Endpoints returned from Dataproc. Key list: - history/server/endpoint: A link to Spark job UI.
     endpoints :: (Core.Maybe SparkStatistics_Endpoints),
-    -- | [Output-only] Logging info is used to generate a link to Cloud Logging.
+    -- | Output only. The Google Cloud Storage bucket that is used as the default file system by the Spark application. This field is only filled when the Spark procedure uses the invoker security mode. The @gcsStagingBucket@ bucket is inferred from the @\@\@spark_proc_properties.staging_bucket@ system variable (if it is provided). Otherwise, BigQuery creates a default staging bucket for the job and returns the bucket name in this field. Example: * @gs:\/\/[bucket_name]@
+    gcsStagingBucket :: (Core.Maybe Core.Text),
+    -- | Output only. The Cloud KMS encryption key that is used to protect the resources created by the Spark job. If the Spark procedure uses the invoker security mode, the Cloud KMS encryption key is either inferred from the provided system variable, @\@\@spark_proc_properties.kms_key_name@, or the default key of the BigQuery job\'s project (if the CMEK organization policy is enforced). Otherwise, the Cloud KMS key is either inferred from the Spark connection associated with the procedure (if it is provided), or from the default key of the Spark connection\'s project if the CMEK organization policy is enforced. Example: * @projects\/[kms_project_id]\/locations\/[region]\/keyRings\/[key_region]\/cryptoKeys\/[key]@
+    kmsKeyName :: (Core.Maybe Core.Text),
+    -- | Output only. Logging info is used to generate a link to Cloud Logging.
     loggingInfo :: (Core.Maybe SparkLoggingInfo),
-    -- | [Output-only] Spark job id if a Spark job is created successfully.
+    -- | Output only. Spark job ID if a Spark job is created successfully.
     sparkJobId :: (Core.Maybe Core.Text),
-    -- | [Output-only] Location where the Spark job is executed.
+    -- | Output only. Location where the Spark job is executed. A location is selected by BigQueury for jobs configured to run in a multi-region.
     sparkJobLocation :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8911,6 +10945,8 @@ newSparkStatistics ::
 newSparkStatistics =
   SparkStatistics
     { endpoints = Core.Nothing,
+      gcsStagingBucket = Core.Nothing,
+      kmsKeyName = Core.Nothing,
       loggingInfo = Core.Nothing,
       sparkJobId = Core.Nothing,
       sparkJobLocation = Core.Nothing
@@ -8923,9 +10959,11 @@ instance Core.FromJSON SparkStatistics where
       ( \o ->
           SparkStatistics
             Core.<$> (o Core..:? "endpoints")
-            Core.<*> (o Core..:? "logging_info")
-            Core.<*> (o Core..:? "spark_job_id")
-            Core.<*> (o Core..:? "spark_job_location")
+            Core.<*> (o Core..:? "gcsStagingBucket")
+            Core.<*> (o Core..:? "kmsKeyName")
+            Core.<*> (o Core..:? "loggingInfo")
+            Core.<*> (o Core..:? "sparkJobId")
+            Core.<*> (o Core..:? "sparkJobLocation")
       )
 
 instance Core.ToJSON SparkStatistics where
@@ -8933,19 +10971,19 @@ instance Core.ToJSON SparkStatistics where
     Core.object
       ( Core.catMaybes
           [ ("endpoints" Core..=) Core.<$> endpoints,
-            ("logging_info" Core..=) Core.<$> loggingInfo,
-            ("spark_job_id" Core..=) Core.<$> sparkJobId,
-            ("spark_job_location" Core..=)
-              Core.<$> sparkJobLocation
+            ("gcsStagingBucket" Core..=) Core.<$> gcsStagingBucket,
+            ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
+            ("loggingInfo" Core..=) Core.<$> loggingInfo,
+            ("sparkJobId" Core..=) Core.<$> sparkJobId,
+            ("sparkJobLocation" Core..=) Core.<$> sparkJobLocation
           ]
       )
 
--- | [Output-only] Endpoints generated for the Spark job.
+-- | Output only. Endpoints returned from Dataproc. Key list: - history/server/endpoint: A link to Spark job UI.
 --
 -- /See:/ 'newSparkStatistics_Endpoints' smart constructor.
 newtype SparkStatistics_Endpoints = SparkStatistics_Endpoints
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8962,20 +11000,119 @@ instance Core.FromJSON SparkStatistics_Endpoints where
     Core.withObject
       "SparkStatistics_Endpoints"
       ( \o ->
-          SparkStatistics_Endpoints
-            Core.<$> (Core.parseJSONObject o)
+          SparkStatistics_Endpoints Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SparkStatistics_Endpoints where
-  toJSON SparkStatistics_Endpoints {..} =
-    Core.toJSON additional
+  toJSON SparkStatistics_Endpoints {..} = Core.toJSON additional
 
--- | The data type of a variable such as a function argument. Examples include: * INT64: @{\"typeKind\": \"INT64\"}@ * ARRAY: { \"typeKind\": \"ARRAY\", \"arrayElementType\": {\"typeKind\": \"STRING\"} } * STRUCT>: { \"typeKind\": \"STRUCT\", \"structType\": { \"fields\": [ { \"name\": \"x\", \"type\": {\"typeKind\": \"STRING\"} }, { \"name\": \"y\", \"type\": { \"typeKind\": \"ARRAY\", \"arrayElementType\": {\"typeKind\": \"DATE\"} } } ] } }
+-- | Performance insights compared to the previous executions for a specific stage.
+--
+-- /See:/ 'newStagePerformanceChangeInsight' smart constructor.
+data StagePerformanceChangeInsight = StagePerformanceChangeInsight
+  { -- | Output only. Input data change insight of the query stage.
+    inputDataChange :: (Core.Maybe InputDataChange),
+    -- | Output only. The stage id that the insight mapped to.
+    stageId :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StagePerformanceChangeInsight' with the minimum fields required to make a request.
+newStagePerformanceChangeInsight ::
+  StagePerformanceChangeInsight
+newStagePerformanceChangeInsight =
+  StagePerformanceChangeInsight
+    { inputDataChange = Core.Nothing,
+      stageId = Core.Nothing
+    }
+
+instance Core.FromJSON StagePerformanceChangeInsight where
+  parseJSON =
+    Core.withObject
+      "StagePerformanceChangeInsight"
+      ( \o ->
+          StagePerformanceChangeInsight
+            Core.<$> (o Core..:? "inputDataChange")
+            Core.<*> (o Core..:? "stageId" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON StagePerformanceChangeInsight where
+  toJSON StagePerformanceChangeInsight {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("inputDataChange" Core..=) Core.<$> inputDataChange,
+            ("stageId" Core..=) Core.. Core.AsText Core.<$> stageId
+          ]
+      )
+
+-- | Standalone performance insights for a specific stage.
+--
+-- /See:/ 'newStagePerformanceStandaloneInsight' smart constructor.
+data StagePerformanceStandaloneInsight = StagePerformanceStandaloneInsight
+  { -- | Output only. If present, the stage had the following reasons for being disqualified from BI Engine execution.
+    biEngineReasons :: (Core.Maybe [BiEngineReason]),
+    -- | Output only. High cardinality joins in the stage.
+    highCardinalityJoins :: (Core.Maybe [HighCardinalityJoin]),
+    -- | Output only. True if the stage has insufficient shuffle quota.
+    insufficientShuffleQuota :: (Core.Maybe Core.Bool),
+    -- | Output only. Partition skew in the stage.
+    partitionSkew :: (Core.Maybe PartitionSkew),
+    -- | Output only. True if the stage has a slot contention issue.
+    slotContention :: (Core.Maybe Core.Bool),
+    -- | Output only. The stage id that the insight mapped to.
+    stageId :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StagePerformanceStandaloneInsight' with the minimum fields required to make a request.
+newStagePerformanceStandaloneInsight ::
+  StagePerformanceStandaloneInsight
+newStagePerformanceStandaloneInsight =
+  StagePerformanceStandaloneInsight
+    { biEngineReasons = Core.Nothing,
+      highCardinalityJoins = Core.Nothing,
+      insufficientShuffleQuota = Core.Nothing,
+      partitionSkew = Core.Nothing,
+      slotContention = Core.Nothing,
+      stageId = Core.Nothing
+    }
+
+instance Core.FromJSON StagePerformanceStandaloneInsight where
+  parseJSON =
+    Core.withObject
+      "StagePerformanceStandaloneInsight"
+      ( \o ->
+          StagePerformanceStandaloneInsight
+            Core.<$> (o Core..:? "biEngineReasons")
+            Core.<*> (o Core..:? "highCardinalityJoins")
+            Core.<*> (o Core..:? "insufficientShuffleQuota")
+            Core.<*> (o Core..:? "partitionSkew")
+            Core.<*> (o Core..:? "slotContention")
+            Core.<*> (o Core..:? "stageId" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON StagePerformanceStandaloneInsight where
+  toJSON StagePerformanceStandaloneInsight {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("biEngineReasons" Core..=) Core.<$> biEngineReasons,
+            ("highCardinalityJoins" Core..=) Core.<$> highCardinalityJoins,
+            ("insufficientShuffleQuota" Core..=)
+              Core.<$> insufficientShuffleQuota,
+            ("partitionSkew" Core..=) Core.<$> partitionSkew,
+            ("slotContention" Core..=) Core.<$> slotContention,
+            ("stageId" Core..=) Core.. Core.AsText Core.<$> stageId
+          ]
+      )
+
+-- | The data type of a variable such as a function argument. Examples include: * INT64: @{\"typeKind\": \"INT64\"}@ * ARRAY: { \"typeKind\": \"ARRAY\", \"arrayElementType\": {\"typeKind\": \"STRING\"} } * STRUCT>: { \"typeKind\": \"STRUCT\", \"structType\": { \"fields\": [ { \"name\": \"x\", \"type\": {\"typeKind\": \"STRING\"} }, { \"name\": \"y\", \"type\": { \"typeKind\": \"ARRAY\", \"arrayElementType\": {\"typeKind\": \"DATE\"} } } ] } } * RANGE: { \"typeKind\": \"RANGE\", \"rangeElementType\": {\"typeKind\": \"DATE\"} }
 --
 -- /See:/ 'newStandardSqlDataType' smart constructor.
 data StandardSqlDataType = StandardSqlDataType
   { -- | The type of the array\'s elements, if type_kind = \"ARRAY\".
     arrayElementType :: (Core.Maybe StandardSqlDataType),
+    -- | The type of the range\'s elements, if type_kind = \"RANGE\".
+    rangeElementType :: (Core.Maybe StandardSqlDataType),
     -- | The fields of this struct, in order, if type_kind = \"STRUCT\".
     structType :: (Core.Maybe StandardSqlStructType),
     -- | Required. The top level type of this field. Can be any GoogleSQL data type (e.g., \"INT64\", \"DATE\", \"ARRAY\").
@@ -8989,6 +11126,7 @@ newStandardSqlDataType ::
 newStandardSqlDataType =
   StandardSqlDataType
     { arrayElementType = Core.Nothing,
+      rangeElementType = Core.Nothing,
       structType = Core.Nothing,
       typeKind = Core.Nothing
     }
@@ -9000,6 +11138,7 @@ instance Core.FromJSON StandardSqlDataType where
       ( \o ->
           StandardSqlDataType
             Core.<$> (o Core..:? "arrayElementType")
+            Core.<*> (o Core..:? "rangeElementType")
             Core.<*> (o Core..:? "structType")
             Core.<*> (o Core..:? "typeKind")
       )
@@ -9008,8 +11147,8 @@ instance Core.ToJSON StandardSqlDataType where
   toJSON StandardSqlDataType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("arrayElementType" Core..=)
-              Core.<$> arrayElementType,
+          [ ("arrayElementType" Core..=) Core.<$> arrayElementType,
+            ("rangeElementType" Core..=) Core.<$> rangeElementType,
             ("structType" Core..=) Core.<$> structType,
             ("typeKind" Core..=) Core.<$> typeKind
           ]
@@ -9038,22 +11177,22 @@ instance Core.FromJSON StandardSqlField where
       "StandardSqlField"
       ( \o ->
           StandardSqlField
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON StandardSqlField where
   toJSON StandardSqlField {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("name" Core..=) Core.<$> name, ("type" Core..=) Core.<$> type']
       )
 
+-- | The representation of a SQL STRUCT type.
 --
 -- /See:/ 'newStandardSqlStructType' smart constructor.
 newtype StandardSqlStructType = StandardSqlStructType
-  { -- |
+  { -- | Fields within the struct.
     fields :: (Core.Maybe [StandardSqlField])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9061,20 +11200,18 @@ newtype StandardSqlStructType = StandardSqlStructType
 -- | Creates a value of 'StandardSqlStructType' with the minimum fields required to make a request.
 newStandardSqlStructType ::
   StandardSqlStructType
-newStandardSqlStructType = StandardSqlStructType {fields = Core.Nothing}
+newStandardSqlStructType =
+  StandardSqlStructType {fields = Core.Nothing}
 
 instance Core.FromJSON StandardSqlStructType where
   parseJSON =
     Core.withObject
       "StandardSqlStructType"
-      ( \o ->
-          StandardSqlStructType Core.<$> (o Core..:? "fields")
-      )
+      (\o -> StandardSqlStructType Core.<$> (o Core..:? "fields"))
 
 instance Core.ToJSON StandardSqlStructType where
   toJSON StandardSqlStructType {..} =
-    Core.object
-      (Core.catMaybes [("fields" Core..=) Core.<$> fields])
+    Core.object (Core.catMaybes [("fields" Core..=) Core.<$> fields])
 
 -- | A table type
 --
@@ -9088,31 +11225,166 @@ newtype StandardSqlTableType = StandardSqlTableType
 -- | Creates a value of 'StandardSqlTableType' with the minimum fields required to make a request.
 newStandardSqlTableType ::
   StandardSqlTableType
-newStandardSqlTableType = StandardSqlTableType {columns = Core.Nothing}
+newStandardSqlTableType =
+  StandardSqlTableType {columns = Core.Nothing}
 
 instance Core.FromJSON StandardSqlTableType where
   parseJSON =
     Core.withObject
       "StandardSqlTableType"
-      ( \o ->
-          StandardSqlTableType Core.<$> (o Core..:? "columns")
-      )
+      (\o -> StandardSqlTableType Core.<$> (o Core..:? "columns"))
 
 instance Core.ToJSON StandardSqlTableType where
   toJSON StandardSqlTableType {..} =
     Core.object
+      (Core.catMaybes [("columns" Core..=) Core.<$> columns])
+
+-- | Contains information about how a table\'s data is stored and accessed by open source query engines.
+--
+-- /See:/ 'newStorageDescriptor' smart constructor.
+data StorageDescriptor = StorageDescriptor
+  { -- | Optional. Specifies the fully qualified class name of the InputFormat (e.g. \"org.apache.hadoop.hive.ql.io.orc.OrcInputFormat\"). The maximum length is 128 characters.
+    inputFormat :: (Core.Maybe Core.Text),
+    -- | Optional. The physical location of the table (e.g. @gs:\/\/spark-dataproc-data\/pangea-data\/case_sensitive\/@ or @gs:\/\/spark-dataproc-data\/pangea-data\/*@). The maximum length is 2056 bytes.
+    locationUri :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies the fully qualified class name of the OutputFormat (e.g. \"org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat\"). The maximum length is 128 characters.
+    outputFormat :: (Core.Maybe Core.Text),
+    -- | Optional. Serializer and deserializer information.
+    serdeInfo :: (Core.Maybe SerDeInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StorageDescriptor' with the minimum fields required to make a request.
+newStorageDescriptor ::
+  StorageDescriptor
+newStorageDescriptor =
+  StorageDescriptor
+    { inputFormat = Core.Nothing,
+      locationUri = Core.Nothing,
+      outputFormat = Core.Nothing,
+      serdeInfo = Core.Nothing
+    }
+
+instance Core.FromJSON StorageDescriptor where
+  parseJSON =
+    Core.withObject
+      "StorageDescriptor"
+      ( \o ->
+          StorageDescriptor
+            Core.<$> (o Core..:? "inputFormat")
+            Core.<*> (o Core..:? "locationUri")
+            Core.<*> (o Core..:? "outputFormat")
+            Core.<*> (o Core..:? "serdeInfo")
+      )
+
+instance Core.ToJSON StorageDescriptor where
+  toJSON StorageDescriptor {..} =
+    Core.object
       ( Core.catMaybes
-          [("columns" Core..=) Core.<$> columns]
+          [ ("inputFormat" Core..=) Core.<$> inputFormat,
+            ("locationUri" Core..=) Core.<$> locationUri,
+            ("outputFormat" Core..=) Core.<$> outputFormat,
+            ("serdeInfo" Core..=) Core.<$> serdeInfo
+          ]
+      )
+
+-- | If the stored column was not used, explain why.
+--
+-- /See:/ 'newStoredColumnsUnusedReason' smart constructor.
+data StoredColumnsUnusedReason = StoredColumnsUnusedReason
+  { -- | Specifies the high-level reason for the unused scenario, each reason must have a code associated.
+    code :: (Core.Maybe StoredColumnsUnusedReason_Code),
+    -- | Specifies the detailed description for the scenario.
+    message :: (Core.Maybe Core.Text),
+    -- | Specifies which columns were not covered by the stored columns for the specified code up to 20 columns. This is populated when the code is STORED/COLUMNS/COVER/INSUFFICIENT and BASE/TABLE/HAS/CLS.
+    uncoveredColumns :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StoredColumnsUnusedReason' with the minimum fields required to make a request.
+newStoredColumnsUnusedReason ::
+  StoredColumnsUnusedReason
+newStoredColumnsUnusedReason =
+  StoredColumnsUnusedReason
+    { code = Core.Nothing,
+      message = Core.Nothing,
+      uncoveredColumns = Core.Nothing
+    }
+
+instance Core.FromJSON StoredColumnsUnusedReason where
+  parseJSON =
+    Core.withObject
+      "StoredColumnsUnusedReason"
+      ( \o ->
+          StoredColumnsUnusedReason
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "message")
+            Core.<*> (o Core..:? "uncoveredColumns")
+      )
+
+instance Core.ToJSON StoredColumnsUnusedReason where
+  toJSON StoredColumnsUnusedReason {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("message" Core..=) Core.<$> message,
+            ("uncoveredColumns" Core..=) Core.<$> uncoveredColumns
+          ]
+      )
+
+-- | Indicates the stored columns usage in the query.
+--
+-- /See:/ 'newStoredColumnsUsage' smart constructor.
+data StoredColumnsUsage = StoredColumnsUsage
+  { -- | Specifies the base table.
+    baseTable :: (Core.Maybe TableReference),
+    -- | Specifies whether the query was accelerated with stored columns.
+    isQueryAccelerated :: (Core.Maybe Core.Bool),
+    -- | If stored columns were not used, explain why.
+    storedColumnsUnusedReasons :: (Core.Maybe [StoredColumnsUnusedReason])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StoredColumnsUsage' with the minimum fields required to make a request.
+newStoredColumnsUsage ::
+  StoredColumnsUsage
+newStoredColumnsUsage =
+  StoredColumnsUsage
+    { baseTable = Core.Nothing,
+      isQueryAccelerated = Core.Nothing,
+      storedColumnsUnusedReasons = Core.Nothing
+    }
+
+instance Core.FromJSON StoredColumnsUsage where
+  parseJSON =
+    Core.withObject
+      "StoredColumnsUsage"
+      ( \o ->
+          StoredColumnsUsage
+            Core.<$> (o Core..:? "baseTable")
+            Core.<*> (o Core..:? "isQueryAccelerated")
+            Core.<*> (o Core..:? "storedColumnsUnusedReasons")
+      )
+
+instance Core.ToJSON StoredColumnsUsage where
+  toJSON StoredColumnsUsage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("baseTable" Core..=) Core.<$> baseTable,
+            ("isQueryAccelerated" Core..=) Core.<$> isQueryAccelerated,
+            ("storedColumnsUnusedReasons" Core..=)
+              Core.<$> storedColumnsUnusedReasons
+          ]
       )
 
 --
 -- /See:/ 'newStreamingbuffer' smart constructor.
 data Streamingbuffer = Streamingbuffer
-  { -- | [Output-only] A lower-bound estimate of the number of bytes currently in the streaming buffer.
+  { -- | Output only. A lower-bound estimate of the number of bytes currently in the streaming buffer.
     estimatedBytes :: (Core.Maybe Core.Word64),
-    -- | [Output-only] A lower-bound estimate of the number of rows currently in the streaming buffer.
+    -- | Output only. A lower-bound estimate of the number of rows currently in the streaming buffer.
     estimatedRows :: (Core.Maybe Core.Word64),
-    -- | [Output-only] Contains the timestamp of the oldest entry in the streaming buffer, in milliseconds since the epoch, if the streaming buffer is available.
+    -- | Output only. Contains the timestamp of the oldest entry in the streaming buffer, in milliseconds since the epoch, if the streaming buffer is available.
     oldestEntryTime :: (Core.Maybe Core.Word64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9133,26 +11405,23 @@ instance Core.FromJSON Streamingbuffer where
       "Streamingbuffer"
       ( \o ->
           Streamingbuffer
-            Core.<$> ( o Core..:? "estimatedBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "estimatedRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "oldestEntryTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "estimatedBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "estimatedRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "oldestEntryTime" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Streamingbuffer where
   toJSON Streamingbuffer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("estimatedBytes" Core..=) Core.. Core.AsText
+          [ ("estimatedBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> estimatedBytes,
-            ("estimatedRows" Core..=) Core.. Core.AsText
+            ("estimatedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> estimatedRows,
-            ("oldestEntryTime" Core..=) Core.. Core.AsText
+            ("oldestEntryTime" Core..=)
+              Core.. Core.AsText
               Core.<$> oldestEntryTime
           ]
       )
@@ -9169,108 +11438,213 @@ newtype StringHparamSearchSpace = StringHparamSearchSpace
 -- | Creates a value of 'StringHparamSearchSpace' with the minimum fields required to make a request.
 newStringHparamSearchSpace ::
   StringHparamSearchSpace
-newStringHparamSearchSpace = StringHparamSearchSpace {candidates = Core.Nothing}
+newStringHparamSearchSpace =
+  StringHparamSearchSpace {candidates = Core.Nothing}
 
 instance Core.FromJSON StringHparamSearchSpace where
   parseJSON =
     Core.withObject
       "StringHparamSearchSpace"
-      ( \o ->
-          StringHparamSearchSpace
-            Core.<$> (o Core..:? "candidates")
-      )
+      (\o -> StringHparamSearchSpace Core.<$> (o Core..:? "candidates"))
 
 instance Core.ToJSON StringHparamSearchSpace where
   toJSON StringHparamSearchSpace {..} =
     Core.object
-      ( Core.catMaybes
-          [("candidates" Core..=) Core.<$> candidates]
+      (Core.catMaybes [("candidates" Core..=) Core.<$> candidates])
+
+-- | System variables given to a query.
+--
+-- /See:/ 'newSystemVariables' smart constructor.
+data SystemVariables = SystemVariables
+  { -- | Output only. Data type for each system variable.
+    types :: (Core.Maybe SystemVariables_Types),
+    -- | Output only. Value for each system variable.
+    values :: (Core.Maybe SystemVariables_Values)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SystemVariables' with the minimum fields required to make a request.
+newSystemVariables ::
+  SystemVariables
+newSystemVariables =
+  SystemVariables {types = Core.Nothing, values = Core.Nothing}
+
+instance Core.FromJSON SystemVariables where
+  parseJSON =
+    Core.withObject
+      "SystemVariables"
+      ( \o ->
+          SystemVariables
+            Core.<$> (o Core..:? "types")
+            Core.<*> (o Core..:? "values")
       )
+
+instance Core.ToJSON SystemVariables where
+  toJSON SystemVariables {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("types" Core..=) Core.<$> types,
+            ("values" Core..=) Core.<$> values
+          ]
+      )
+
+-- | Output only. Data type for each system variable.
+--
+-- /See:/ 'newSystemVariables_Types' smart constructor.
+newtype SystemVariables_Types = SystemVariables_Types
+  { additional :: (Core.HashMap Core.Text StandardSqlDataType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SystemVariables_Types' with the minimum fields required to make a request.
+newSystemVariables_Types ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text StandardSqlDataType ->
+  SystemVariables_Types
+newSystemVariables_Types additional =
+  SystemVariables_Types {additional = additional}
+
+instance Core.FromJSON SystemVariables_Types where
+  parseJSON =
+    Core.withObject
+      "SystemVariables_Types"
+      (\o -> SystemVariables_Types Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON SystemVariables_Types where
+  toJSON SystemVariables_Types {..} = Core.toJSON additional
+
+-- | Output only. Value for each system variable.
+--
+-- /See:/ 'newSystemVariables_Values' smart constructor.
+newtype SystemVariables_Values = SystemVariables_Values
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SystemVariables_Values' with the minimum fields required to make a request.
+newSystemVariables_Values ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  SystemVariables_Values
+newSystemVariables_Values additional =
+  SystemVariables_Values {additional = additional}
+
+instance Core.FromJSON SystemVariables_Values where
+  parseJSON =
+    Core.withObject
+      "SystemVariables_Values"
+      (\o -> SystemVariables_Values Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON SystemVariables_Values where
+  toJSON SystemVariables_Values {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newTable' smart constructor.
 data Table = Table
-  { -- | [Output-only] Clone definition.
+  { -- | Optional. Specifies the configuration of a BigLake managed table.
+    biglakeConfiguration :: (Core.Maybe BigLakeConfiguration),
+    -- | Output only. Contains information about the clone. This value is set via the clone operation.
     cloneDefinition :: (Core.Maybe CloneDefinition),
-    -- | [Beta] Clustering specification for the table. Must be specified with partitioning, data in the table will be first partitioned and subsequently clustered.
+    -- | Clustering specification for the table. Must be specified with time-based partitioning, data in the table will be first partitioned and subsequently clustered.
     clustering :: (Core.Maybe Clustering),
-    -- | [Output-only] The time when this table was created, in milliseconds since the epoch.
+    -- | Output only. The time when this table was created, in milliseconds since the epoch.
     creationTime :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The default collation of the table.
+    -- | Optional. Defines the default collation specification of new STRING fields in the table. During table creation or update, if a STRING field is added to this table without explicit collation specified, then the table inherits the table default collation. A change to this field affects only fields added afterwards, and does not alter the existing fields. The following values are supported: * \'und:ci\': undetermined locale, case insensitive. * \'\': empty string. Default to case-sensitive behavior.
     defaultCollation :: (Core.Maybe Core.Text),
-    -- | [Output-only] The default rounding mode of the table.
-    defaultRoundingMode :: (Core.Maybe Core.Text),
-    -- | [Optional] A user-friendly description of this table.
+    -- | Optional. Defines the default rounding mode specification of new decimal fields (NUMERIC OR BIGNUMERIC) in the table. During table creation or update, if a decimal field is added to this table without an explicit rounding mode specified, then the field inherits the table default rounding mode. Changing this field doesn\'t affect existing fields.
+    defaultRoundingMode :: (Core.Maybe Table_DefaultRoundingMode),
+    -- | Optional. A user-friendly description of this table.
     description :: (Core.Maybe Core.Text),
     -- | Custom encryption configuration (e.g., Cloud KMS keys).
     encryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
-    -- | [Output-only] A hash of the table metadata. Used to ensure there were no concurrent modifications to the resource when attempting an update. Not guaranteed to change when the table contents or the fields numRows, numBytes, numLongTermBytes or lastModifiedTime change.
+    -- | Output only. A hash of this resource.
     etag :: (Core.Maybe Core.Text),
-    -- | [Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed. The defaultTableExpirationMs property of the encapsulating dataset can be used to set a default expirationTime on newly created tables.
+    -- | Optional. The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed. The defaultTableExpirationMs property of the encapsulating dataset can be used to set a default expirationTime on newly created tables.
     expirationTime :: (Core.Maybe Core.Int64),
-    -- | [Optional] Describes the data format, location, and other properties of a table stored outside of BigQuery. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.
+    -- | Optional. Options defining open source compatible table.
+    externalCatalogTableOptions :: (Core.Maybe ExternalCatalogTableOptions),
+    -- | Optional. Describes the data format, location, and other properties of a table stored outside of BigQuery. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.
     externalDataConfiguration :: (Core.Maybe ExternalDataConfiguration),
-    -- | [Optional] A descriptive name for this table.
+    -- | Optional. A descriptive name for this table.
     friendlyName :: (Core.Maybe Core.Text),
-    -- | [Output-only] An opaque ID uniquely identifying the table.
+    -- | Output only. An opaque ID uniquely identifying the table.
     id :: (Core.Maybe Core.Text),
-    -- | [Output-only] The type of the resource.
+    -- | The type of resource ID.
     kind :: Core.Text,
     -- | The labels associated with this table. You can use these to organize and group your tables. Label keys and values can be no longer than 63 characters, can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and each label in the list must have a different key.
     labels :: (Core.Maybe Table_Labels),
-    -- | [Output-only] The time when this table was last modified, in milliseconds since the epoch.
+    -- | Output only. The time when this table was last modified, in milliseconds since the epoch.
     lastModifiedTime :: (Core.Maybe Core.Word64),
-    -- | [Output-only] The geographic location where the table resides. This value is inherited from the dataset.
+    -- | Output only. The geographic location where the table resides. This value is inherited from the dataset.
     location :: (Core.Maybe Core.Text),
-    -- | [Optional] Materialized view definition.
+    -- | Optional. If set, overrides the default managed table type configured in the dataset.
+    managedTableType :: (Core.Maybe Table_ManagedTableType),
+    -- | Optional. The materialized view definition.
     materializedView :: (Core.Maybe MaterializedViewDefinition),
-    -- | [Optional] Max staleness of data that could be returned when table or materialized view is queried (formatted as Google SQL Interval type).
-    maxStaleness :: (Core.Maybe Core.Base64),
-    -- | [Output-only, Beta] Present iff this table represents a ML model. Describes the training information for the model, and it is required to run \'PREDICT\' queries.
+    -- | Output only. The materialized view status.
+    materializedViewStatus :: (Core.Maybe MaterializedViewStatus),
+    -- | Optional. The maximum staleness of data that could be returned when the table (or stale MV) is queried. Staleness encoded as a string encoding of sql IntervalValue type.
+    maxStaleness :: (Core.Maybe Core.Text),
+    -- | Deprecated.
     model :: (Core.Maybe ModelDefinition),
-    -- | [Output-only] The size of this table in bytes, excluding any data in the streaming buffer.
-    numBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The number of bytes in the table that are considered \"long-term storage\".
-    numLongTermBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] [TrustedTester] The physical size of this table in bytes, excluding any data in the streaming buffer. This includes compression and storage used for time travel.
-    numPhysicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The number of rows of data in this table, excluding any data in the streaming buffer.
-    numRows :: (Core.Maybe Core.Word64),
-    -- | [Output-only] Number of logical bytes that are less than 90 days old.
+    -- | Output only. Number of logical bytes that are less than 90 days old.
     numActiveLogicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of physical bytes less than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    -- | Output only. Number of physical bytes less than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
     numActivePhysicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of logical bytes that are more than 90 days old.
+    -- | Output only. The size of this table in logical bytes, excluding any data in the streaming buffer.
+    numBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Number of physical bytes used by current live data storage. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    numCurrentPhysicalBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. The number of logical bytes in the table that are considered \"long-term storage\".
+    numLongTermBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. Number of logical bytes that are more than 90 days old.
     numLongTermLogicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of physical bytes more than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    -- | Output only. Number of physical bytes more than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
     numLongTermPhysicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The number of partitions present in the table or materialized view. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    -- | Output only. The number of partitions present in the table or materialized view. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
     numPartitions :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Number of physical bytes used by time travel storage (deleted or changed data). This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    -- | Output only. The physical size of this table in bytes. This includes storage used for time travel.
+    numPhysicalBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. The number of rows of data in this table, excluding any data in the streaming buffer.
+    numRows :: (Core.Maybe Core.Word64),
+    -- | Output only. Number of physical bytes used by time travel storage (deleted or changed data). This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
     numTimeTravelPhysicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] Total number of logical bytes in the table or materialized view.
+    -- | Output only. Total number of logical bytes in the table or materialized view.
     numTotalLogicalBytes :: (Core.Maybe Core.Int64),
-    -- | [Output-only] The physical size of this table in bytes. This also includes storage used for time travel. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
+    -- | Output only. The physical size of this table in bytes. This also includes storage used for time travel. This data is not kept in real time, and might be delayed by a few seconds to a few minutes.
     numTotalPhysicalBytes :: (Core.Maybe Core.Int64),
-    -- | [TrustedTester] Range partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
+    -- | Optional. The partition information for all table formats, including managed partitioned tables, hive partitioned tables, iceberg partitioned, and metastore partitioned tables. This field is only populated for metastore partitioned tables. For other table formats, this is an output only field.
+    partitionDefinition :: (Core.Maybe PartitioningDefinition),
+    -- | If specified, configures range partitioning for this table.
     rangePartitioning :: (Core.Maybe RangePartitioning),
-    -- | [Optional] If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified.
+    -- | Optional. Output only. Table references of all replicas currently active on the table.
+    replicas :: (Core.Maybe [TableReference]),
+    -- | Optional. If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified.
     requirePartitionFilter :: (Core.Maybe Core.Bool),
-    -- | [Optional] Describes the schema of this table.
+    -- | [Optional] The tags associated with this table. Tag keys are globally unique. See additional information on <https://cloud.google.com/iam/docs/tags-access-control#definitions tags>. An object containing a list of \"key\": value pairs. The key is the namespaced friendly name of the tag key, e.g. \"12345\/environment\" where 12345 is parent id. The value is the friendly short name of the tag value, e.g. \"production\".
+    resourceTags :: (Core.Maybe Table_ResourceTags),
+    -- | Optional. Output only. Restriction config for table. If set, restrict certain accesses on the table based on the config. See <https://cloud.google.com/bigquery/docs/analytics-hub-introduction#data_egress Data egress> for more details.
+    restrictions :: (Core.Maybe RestrictionConfig),
+    -- | Optional. Describes the schema of this table.
     schema :: (Core.Maybe TableSchema),
-    -- | [Output-only] A URL that can be used to access this resource again.
+    -- | Output only. A URL that can be used to access this resource again.
     selfLink :: (Core.Maybe Core.Text),
-    -- | [Output-only] Snapshot definition.
+    -- | Output only. Contains information about the snapshot. This value is set via snapshot creation.
     snapshotDefinition :: (Core.Maybe SnapshotDefinition),
-    -- | [Output-only] Contains information regarding this table\'s streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer.
+    -- | Output only. Contains information regarding this table\'s streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer.
     streamingBuffer :: (Core.Maybe Streamingbuffer),
-    -- | [Required] Reference describing the ID of this table.
+    -- | Optional. Tables Primary Key and Foreign Key information
+    tableConstraints :: (Core.Maybe TableConstraints),
+    -- | Required. Reference describing the ID of this table.
     tableReference :: (Core.Maybe TableReference),
-    -- | Time-based partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
+    -- | Optional. Table replication info for table created @AS REPLICA@ DDL like: @CREATE MATERIALIZED VIEW mv1 AS REPLICA OF src_mv@
+    tableReplicationInfo :: (Core.Maybe TableReplicationInfo),
+    -- | If specified, configures time-based partitioning for this table.
     timePartitioning :: (Core.Maybe TimePartitioning),
-    -- | [Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. SNAPSHOT: An immutable, read-only table that is a copy of another table. [TrustedTester] MATERIALIZED_VIEW: SQL query whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE.
+    -- | Output only. Describes the table type. The following values are supported: * @TABLE@: A normal BigQuery table. * @VIEW@: A virtual table defined by a SQL query. * @EXTERNAL@: A table that references data stored in an external storage system, such as Google Cloud Storage. * @MATERIALIZED_VIEW@: A precomputed view defined by a SQL query. * @SNAPSHOT@: An immutable BigQuery table that preserves the contents of a base table at a particular time. See additional information on <https://cloud.google.com/bigquery/docs/table-snapshots-intro table snapshots>. The default value is @TABLE@.
     type' :: (Core.Maybe Core.Text),
-    -- | [Optional] The view definition.
+    -- | Optional. The view definition.
     view :: (Core.Maybe ViewDefinition)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9280,7 +11654,8 @@ newTable ::
   Table
 newTable =
   Table
-    { cloneDefinition = Core.Nothing,
+    { biglakeConfiguration = Core.Nothing,
+      cloneDefinition = Core.Nothing,
       clustering = Core.Nothing,
       creationTime = Core.Nothing,
       defaultCollation = Core.Nothing,
@@ -9289,6 +11664,7 @@ newTable =
       encryptionConfiguration = Core.Nothing,
       etag = Core.Nothing,
       expirationTime = Core.Nothing,
+      externalCatalogTableOptions = Core.Nothing,
       externalDataConfiguration = Core.Nothing,
       friendlyName = Core.Nothing,
       id = Core.Nothing,
@@ -9296,28 +11672,37 @@ newTable =
       labels = Core.Nothing,
       lastModifiedTime = Core.Nothing,
       location = Core.Nothing,
+      managedTableType = Core.Nothing,
       materializedView = Core.Nothing,
+      materializedViewStatus = Core.Nothing,
       maxStaleness = Core.Nothing,
       model = Core.Nothing,
-      numBytes = Core.Nothing,
-      numLongTermBytes = Core.Nothing,
-      numPhysicalBytes = Core.Nothing,
-      numRows = Core.Nothing,
       numActiveLogicalBytes = Core.Nothing,
       numActivePhysicalBytes = Core.Nothing,
+      numBytes = Core.Nothing,
+      numCurrentPhysicalBytes = Core.Nothing,
+      numLongTermBytes = Core.Nothing,
       numLongTermLogicalBytes = Core.Nothing,
       numLongTermPhysicalBytes = Core.Nothing,
       numPartitions = Core.Nothing,
+      numPhysicalBytes = Core.Nothing,
+      numRows = Core.Nothing,
       numTimeTravelPhysicalBytes = Core.Nothing,
       numTotalLogicalBytes = Core.Nothing,
       numTotalPhysicalBytes = Core.Nothing,
+      partitionDefinition = Core.Nothing,
       rangePartitioning = Core.Nothing,
+      replicas = Core.Nothing,
       requirePartitionFilter = Core.Nothing,
+      resourceTags = Core.Nothing,
+      restrictions = Core.Nothing,
       schema = Core.Nothing,
       selfLink = Core.Nothing,
       snapshotDefinition = Core.Nothing,
       streamingBuffer = Core.Nothing,
+      tableConstraints = Core.Nothing,
       tableReference = Core.Nothing,
+      tableReplicationInfo = Core.Nothing,
       timePartitioning = Core.Nothing,
       type' = Core.Nothing,
       view = Core.Nothing
@@ -9329,74 +11714,79 @@ instance Core.FromJSON Table where
       "Table"
       ( \o ->
           Table
-            Core.<$> (o Core..:? "cloneDefinition")
+            Core.<$> (o Core..:? "biglakeConfiguration")
+            Core.<*> (o Core..:? "cloneDefinition")
             Core.<*> (o Core..:? "clustering")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "defaultCollation")
             Core.<*> (o Core..:? "defaultRoundingMode")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "encryptionConfiguration")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "expirationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expirationTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "externalCatalogTableOptions")
             Core.<*> (o Core..:? "externalDataConfiguration")
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#table")
             Core.<*> (o Core..:? "labels")
-            Core.<*> ( o Core..:? "lastModifiedTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastModifiedTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "managedTableType")
             Core.<*> (o Core..:? "materializedView")
+            Core.<*> (o Core..:? "materializedViewStatus")
             Core.<*> (o Core..:? "maxStaleness")
             Core.<*> (o Core..:? "model")
-            Core.<*> ( o Core..:? "numBytes"
+            Core.<*> ( o
+                         Core..:? "numActiveLogicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "numLongTermBytes"
+            Core.<*> ( o
+                         Core..:? "numActivePhysicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "numPhysicalBytes"
+            Core.<*> (o Core..:? "numBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "numCurrentPhysicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "numRows"
+            Core.<*> (o Core..:? "numLongTermBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "numLongTermLogicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "num_active_logical_bytes"
+            Core.<*> ( o
+                         Core..:? "numLongTermPhysicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "num_active_physical_bytes"
+            Core.<*> (o Core..:? "numPartitions" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numPhysicalBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numRows" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "numTimeTravelPhysicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "num_long_term_logical_bytes"
+            Core.<*> ( o
+                         Core..:? "numTotalLogicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "num_long_term_physical_bytes"
+            Core.<*> ( o
+                         Core..:? "numTotalPhysicalBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "num_partitions"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "num_time_travel_physical_bytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "num_total_logical_bytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "num_total_physical_bytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "partitionDefinition")
             Core.<*> (o Core..:? "rangePartitioning")
+            Core.<*> (o Core..:? "replicas")
             Core.<*> (o Core..:? "requirePartitionFilter")
+            Core.<*> (o Core..:? "resourceTags")
+            Core.<*> (o Core..:? "restrictions")
             Core.<*> (o Core..:? "schema")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "snapshotDefinition")
             Core.<*> (o Core..:? "streamingBuffer")
+            Core.<*> (o Core..:? "tableConstraints")
             Core.<*> (o Core..:? "tableReference")
+            Core.<*> (o Core..:? "tableReplicationInfo")
             Core.<*> (o Core..:? "timePartitioning")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "view")
@@ -9406,77 +11796,85 @@ instance Core.ToJSON Table where
   toJSON Table {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloneDefinition" Core..=)
-              Core.<$> cloneDefinition,
+          [ ("biglakeConfiguration" Core..=) Core.<$> biglakeConfiguration,
+            ("cloneDefinition" Core..=) Core.<$> cloneDefinition,
             ("clustering" Core..=) Core.<$> clustering,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
-            ("defaultCollation" Core..=)
-              Core.<$> defaultCollation,
-            ("defaultRoundingMode" Core..=)
-              Core.<$> defaultRoundingMode,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("defaultCollation" Core..=) Core.<$> defaultCollation,
+            ("defaultRoundingMode" Core..=) Core.<$> defaultRoundingMode,
             ("description" Core..=) Core.<$> description,
             ("encryptionConfiguration" Core..=)
               Core.<$> encryptionConfiguration,
             ("etag" Core..=) Core.<$> etag,
-            ("expirationTime" Core..=) Core.. Core.AsText
+            ("expirationTime" Core..=)
+              Core.. Core.AsText
               Core.<$> expirationTime,
+            ("externalCatalogTableOptions" Core..=)
+              Core.<$> externalCatalogTableOptions,
             ("externalDataConfiguration" Core..=)
               Core.<$> externalDataConfiguration,
             ("friendlyName" Core..=) Core.<$> friendlyName,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("labels" Core..=) Core.<$> labels,
-            ("lastModifiedTime" Core..=) Core.. Core.AsText
+            ("lastModifiedTime" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedTime,
             ("location" Core..=) Core.<$> location,
-            ("materializedView" Core..=)
-              Core.<$> materializedView,
+            ("managedTableType" Core..=) Core.<$> managedTableType,
+            ("materializedView" Core..=) Core.<$> materializedView,
+            ("materializedViewStatus" Core..=) Core.<$> materializedViewStatus,
             ("maxStaleness" Core..=) Core.<$> maxStaleness,
             ("model" Core..=) Core.<$> model,
-            ("numBytes" Core..=) Core.. Core.AsText
-              Core.<$> numBytes,
-            ("numLongTermBytes" Core..=) Core.. Core.AsText
-              Core.<$> numLongTermBytes,
-            ("numPhysicalBytes" Core..=) Core.. Core.AsText
-              Core.<$> numPhysicalBytes,
-            ("numRows" Core..=) Core.. Core.AsText
-              Core.<$> numRows,
-            ("num_active_logical_bytes" Core..=)
+            ("numActiveLogicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numActiveLogicalBytes,
-            ("num_active_physical_bytes" Core..=)
+            ("numActivePhysicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numActivePhysicalBytes,
-            ("num_long_term_logical_bytes" Core..=)
+            ("numBytes" Core..=) Core.. Core.AsText Core.<$> numBytes,
+            ("numCurrentPhysicalBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> numCurrentPhysicalBytes,
+            ("numLongTermBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> numLongTermBytes,
+            ("numLongTermLogicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numLongTermLogicalBytes,
-            ("num_long_term_physical_bytes" Core..=)
+            ("numLongTermPhysicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numLongTermPhysicalBytes,
-            ("num_partitions" Core..=) Core.. Core.AsText
+            ("numPartitions" Core..=)
+              Core.. Core.AsText
               Core.<$> numPartitions,
-            ("num_time_travel_physical_bytes" Core..=)
+            ("numPhysicalBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> numPhysicalBytes,
+            ("numRows" Core..=) Core.. Core.AsText Core.<$> numRows,
+            ("numTimeTravelPhysicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numTimeTravelPhysicalBytes,
-            ("num_total_logical_bytes" Core..=)
+            ("numTotalLogicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numTotalLogicalBytes,
-            ("num_total_physical_bytes" Core..=)
+            ("numTotalPhysicalBytes" Core..=)
               Core.. Core.AsText
               Core.<$> numTotalPhysicalBytes,
-            ("rangePartitioning" Core..=)
-              Core.<$> rangePartitioning,
-            ("requirePartitionFilter" Core..=)
-              Core.<$> requirePartitionFilter,
+            ("partitionDefinition" Core..=) Core.<$> partitionDefinition,
+            ("rangePartitioning" Core..=) Core.<$> rangePartitioning,
+            ("replicas" Core..=) Core.<$> replicas,
+            ("requirePartitionFilter" Core..=) Core.<$> requirePartitionFilter,
+            ("resourceTags" Core..=) Core.<$> resourceTags,
+            ("restrictions" Core..=) Core.<$> restrictions,
             ("schema" Core..=) Core.<$> schema,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("snapshotDefinition" Core..=)
-              Core.<$> snapshotDefinition,
+            ("snapshotDefinition" Core..=) Core.<$> snapshotDefinition,
             ("streamingBuffer" Core..=) Core.<$> streamingBuffer,
+            ("tableConstraints" Core..=) Core.<$> tableConstraints,
             ("tableReference" Core..=) Core.<$> tableReference,
-            ("timePartitioning" Core..=)
-              Core.<$> timePartitioning,
+            ("tableReplicationInfo" Core..=) Core.<$> tableReplicationInfo,
+            ("timePartitioning" Core..=) Core.<$> timePartitioning,
             ("type" Core..=) Core.<$> type',
             ("view" Core..=) Core.<$> view
           ]
@@ -9486,8 +11884,7 @@ instance Core.ToJSON Table where
 --
 -- /See:/ 'newTable_Labels' smart constructor.
 newtype Table_Labels = Table_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9502,18 +11899,40 @@ instance Core.FromJSON Table_Labels where
   parseJSON =
     Core.withObject
       "Table_Labels"
-      ( \o ->
-          Table_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Table_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Table_Labels where
   toJSON Table_Labels {..} = Core.toJSON additional
 
+-- | [Optional] The tags associated with this table. Tag keys are globally unique. See additional information on <https://cloud.google.com/iam/docs/tags-access-control#definitions tags>. An object containing a list of \"key\": value pairs. The key is the namespaced friendly name of the tag key, e.g. \"12345\/environment\" where 12345 is parent id. The value is the friendly short name of the tag value, e.g. \"production\".
+--
+-- /See:/ 'newTable_ResourceTags' smart constructor.
+newtype Table_ResourceTags = Table_ResourceTags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Table_ResourceTags' with the minimum fields required to make a request.
+newTable_ResourceTags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Table_ResourceTags
+newTable_ResourceTags additional =
+  Table_ResourceTags {additional = additional}
+
+instance Core.FromJSON Table_ResourceTags where
+  parseJSON =
+    Core.withObject
+      "Table_ResourceTags"
+      (\o -> Table_ResourceTags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Table_ResourceTags where
+  toJSON Table_ResourceTags {..} = Core.toJSON additional
+
 --
 -- /See:/ 'newTableCell' smart constructor.
 newtype TableCell = TableCell
-  { -- |
-    v :: (Core.Maybe Core.Value)
+  { v :: (Core.Maybe Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9530,22 +11949,229 @@ instance Core.FromJSON TableCell where
 
 instance Core.ToJSON TableCell where
   toJSON TableCell {..} =
-    Core.object
-      (Core.catMaybes [("v" Core..=) Core.<$> v])
+    Core.object (Core.catMaybes [("v" Core..=) Core.<$> v])
 
+-- | The TableConstraints defines the primary key and foreign key.
+--
+-- /See:/ 'newTableConstraints' smart constructor.
+data TableConstraints = TableConstraints
+  { -- | Optional. Present only if the table has a foreign key. The foreign key is not enforced.
+    foreignKeys :: (Core.Maybe [TableConstraints_ForeignKeysItem]),
+    -- | Represents the primary key constraint on a table\'s columns.
+    primaryKey :: (Core.Maybe TableConstraints_PrimaryKey)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableConstraints' with the minimum fields required to make a request.
+newTableConstraints ::
+  TableConstraints
+newTableConstraints =
+  TableConstraints
+    { foreignKeys = Core.Nothing,
+      primaryKey = Core.Nothing
+    }
+
+instance Core.FromJSON TableConstraints where
+  parseJSON =
+    Core.withObject
+      "TableConstraints"
+      ( \o ->
+          TableConstraints
+            Core.<$> (o Core..:? "foreignKeys")
+            Core.<*> (o Core..:? "primaryKey")
+      )
+
+instance Core.ToJSON TableConstraints where
+  toJSON TableConstraints {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("foreignKeys" Core..=) Core.<$> foreignKeys,
+            ("primaryKey" Core..=) Core.<$> primaryKey
+          ]
+      )
+
+-- | Represents a foreign key constraint on a table\'s columns.
+--
+-- /See:/ 'newTableConstraints_ForeignKeysItem' smart constructor.
+data TableConstraints_ForeignKeysItem = TableConstraints_ForeignKeysItem
+  { -- | Required. The columns that compose the foreign key.
+    columnReferences ::
+      ( Core.Maybe
+          [TableConstraints_ForeignKeysItem_ColumnReferencesItem]
+      ),
+    -- | Optional. Set only if the foreign key constraint is named.
+    name :: (Core.Maybe Core.Text),
+    referencedTable :: (Core.Maybe TableConstraints_ForeignKeysItem_ReferencedTable)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableConstraints_ForeignKeysItem' with the minimum fields required to make a request.
+newTableConstraints_ForeignKeysItem ::
+  TableConstraints_ForeignKeysItem
+newTableConstraints_ForeignKeysItem =
+  TableConstraints_ForeignKeysItem
+    { columnReferences = Core.Nothing,
+      name = Core.Nothing,
+      referencedTable = Core.Nothing
+    }
+
+instance Core.FromJSON TableConstraints_ForeignKeysItem where
+  parseJSON =
+    Core.withObject
+      "TableConstraints_ForeignKeysItem"
+      ( \o ->
+          TableConstraints_ForeignKeysItem
+            Core.<$> (o Core..:? "columnReferences")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "referencedTable")
+      )
+
+instance Core.ToJSON TableConstraints_ForeignKeysItem where
+  toJSON TableConstraints_ForeignKeysItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("columnReferences" Core..=) Core.<$> columnReferences,
+            ("name" Core..=) Core.<$> name,
+            ("referencedTable" Core..=) Core.<$> referencedTable
+          ]
+      )
+
+-- | The pair of the foreign key column and primary key column.
+--
+-- /See:/ 'newTableConstraints_ForeignKeysItem_ColumnReferencesItem' smart constructor.
+data TableConstraints_ForeignKeysItem_ColumnReferencesItem = TableConstraints_ForeignKeysItem_ColumnReferencesItem
+  { -- | Required. The column in the primary key that are referenced by the referencing_column.
+    referencedColumn :: (Core.Maybe Core.Text),
+    -- | Required. The column that composes the foreign key.
+    referencingColumn :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableConstraints_ForeignKeysItem_ColumnReferencesItem' with the minimum fields required to make a request.
+newTableConstraints_ForeignKeysItem_ColumnReferencesItem ::
+  TableConstraints_ForeignKeysItem_ColumnReferencesItem
+newTableConstraints_ForeignKeysItem_ColumnReferencesItem =
+  TableConstraints_ForeignKeysItem_ColumnReferencesItem
+    { referencedColumn =
+        Core.Nothing,
+      referencingColumn = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    TableConstraints_ForeignKeysItem_ColumnReferencesItem
+  where
+  parseJSON =
+    Core.withObject
+      "TableConstraints_ForeignKeysItem_ColumnReferencesItem"
+      ( \o ->
+          TableConstraints_ForeignKeysItem_ColumnReferencesItem
+            Core.<$> (o Core..:? "referencedColumn")
+            Core.<*> (o Core..:? "referencingColumn")
+      )
+
+instance
+  Core.ToJSON
+    TableConstraints_ForeignKeysItem_ColumnReferencesItem
+  where
+  toJSON TableConstraints_ForeignKeysItem_ColumnReferencesItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("referencedColumn" Core..=) Core.<$> referencedColumn,
+            ("referencingColumn" Core..=) Core.<$> referencingColumn
+          ]
+      )
+
+--
+-- /See:/ 'newTableConstraints_ForeignKeysItem_ReferencedTable' smart constructor.
+data TableConstraints_ForeignKeysItem_ReferencedTable = TableConstraints_ForeignKeysItem_ReferencedTable
+  { datasetId :: (Core.Maybe Core.Text),
+    projectId :: (Core.Maybe Core.Text),
+    tableId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableConstraints_ForeignKeysItem_ReferencedTable' with the minimum fields required to make a request.
+newTableConstraints_ForeignKeysItem_ReferencedTable ::
+  TableConstraints_ForeignKeysItem_ReferencedTable
+newTableConstraints_ForeignKeysItem_ReferencedTable =
+  TableConstraints_ForeignKeysItem_ReferencedTable
+    { datasetId =
+        Core.Nothing,
+      projectId = Core.Nothing,
+      tableId = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    TableConstraints_ForeignKeysItem_ReferencedTable
+  where
+  parseJSON =
+    Core.withObject
+      "TableConstraints_ForeignKeysItem_ReferencedTable"
+      ( \o ->
+          TableConstraints_ForeignKeysItem_ReferencedTable
+            Core.<$> (o Core..:? "datasetId")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "tableId")
+      )
+
+instance
+  Core.ToJSON
+    TableConstraints_ForeignKeysItem_ReferencedTable
+  where
+  toJSON TableConstraints_ForeignKeysItem_ReferencedTable {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("datasetId" Core..=) Core.<$> datasetId,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("tableId" Core..=) Core.<$> tableId
+          ]
+      )
+
+-- | Represents the primary key constraint on a table\'s columns.
+--
+-- /See:/ 'newTableConstraints_PrimaryKey' smart constructor.
+newtype TableConstraints_PrimaryKey = TableConstraints_PrimaryKey
+  { -- | Required. The columns that are composed of the primary key constraint.
+    columns :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableConstraints_PrimaryKey' with the minimum fields required to make a request.
+newTableConstraints_PrimaryKey ::
+  TableConstraints_PrimaryKey
+newTableConstraints_PrimaryKey =
+  TableConstraints_PrimaryKey {columns = Core.Nothing}
+
+instance Core.FromJSON TableConstraints_PrimaryKey where
+  parseJSON =
+    Core.withObject
+      "TableConstraints_PrimaryKey"
+      ( \o ->
+          TableConstraints_PrimaryKey Core.<$> (o Core..:? "columns")
+      )
+
+instance Core.ToJSON TableConstraints_PrimaryKey where
+  toJSON TableConstraints_PrimaryKey {..} =
+    Core.object
+      (Core.catMaybes [("columns" Core..=) Core.<$> columns])
+
+-- | Request for sending a single streaming insert.
 --
 -- /See:/ 'newTableDataInsertAllRequest' smart constructor.
 data TableDataInsertAllRequest = TableDataInsertAllRequest
-  { -- | [Optional] Accept rows that contain values that do not match the schema. The unknown values are ignored. Default is false, which treats unknown values as errors.
+  { -- | Optional. Accept rows that contain values that do not match the schema. The unknown values are ignored. Default is false, which treats unknown values as errors.
     ignoreUnknownValues :: (Core.Maybe Core.Bool),
-    -- | The resource type of the response.
+    -- | Optional. The resource type of the response. The value is not checked at the backend. Historically, it has been set to \"bigquery#tableDataInsertAllRequest\" but you are not required to set it.
     kind :: Core.Text,
-    -- | The rows to insert.
     rows :: (Core.Maybe [TableDataInsertAllRequest_RowsItem]),
-    -- | [Optional] Insert all valid rows of a request, even if invalid rows exist. The default value is false, which causes the entire request to fail if any invalid rows exist.
+    -- | Optional. Insert all valid rows of a request, even if invalid rows exist. The default value is false, which causes the entire request to fail if any invalid rows exist.
     skipInvalidRows :: (Core.Maybe Core.Bool),
-    -- | If specified, treats the destination table as a base template, and inserts the rows into an instance table named \"{destination}{templateSuffix}\". BigQuery will manage creation of the instance table, using the schema of the base template table. See https:\/\/cloud.google.com\/bigquery\/streaming-data-into-bigquery#template-tables for considerations when working with templates tables.
-    templateSuffix :: (Core.Maybe Core.Text)
+    -- | Optional. If specified, treats the destination table as a base template, and inserts the rows into an instance table named \"{destination}{templateSuffix}\". BigQuery will manage creation of the instance table, using the schema of the base template table. See https:\/\/cloud.google.com\/bigquery\/streaming-data-into-bigquery#template-tables for considerations when working with templates tables.
+    templateSuffix :: (Core.Maybe Core.Text),
+    -- | Optional. Unique request trace id. Used for debugging purposes only. It is case-sensitive, limited to up to 36 ASCII characters. A UUID is recommended.
+    traceId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9558,7 +12184,8 @@ newTableDataInsertAllRequest =
       kind = "bigquery#tableDataInsertAllRequest",
       rows = Core.Nothing,
       skipInvalidRows = Core.Nothing,
-      templateSuffix = Core.Nothing
+      templateSuffix = Core.Nothing,
+      traceId = Core.Nothing
     }
 
 instance Core.FromJSON TableDataInsertAllRequest where
@@ -9568,33 +12195,33 @@ instance Core.FromJSON TableDataInsertAllRequest where
       ( \o ->
           TableDataInsertAllRequest
             Core.<$> (o Core..:? "ignoreUnknownValues")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "bigquery#tableDataInsertAllRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "bigquery#tableDataInsertAllRequest")
             Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "skipInvalidRows")
             Core.<*> (o Core..:? "templateSuffix")
+            Core.<*> (o Core..:? "traceId")
       )
 
 instance Core.ToJSON TableDataInsertAllRequest where
   toJSON TableDataInsertAllRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ignoreUnknownValues" Core..=)
-              Core.<$> ignoreUnknownValues,
+          [ ("ignoreUnknownValues" Core..=) Core.<$> ignoreUnknownValues,
             Core.Just ("kind" Core..= kind),
             ("rows" Core..=) Core.<$> rows,
             ("skipInvalidRows" Core..=) Core.<$> skipInvalidRows,
-            ("templateSuffix" Core..=) Core.<$> templateSuffix
+            ("templateSuffix" Core..=) Core.<$> templateSuffix,
+            ("traceId" Core..=) Core.<$> traceId
           ]
       )
 
+-- | Data for a single insertion row.
 --
 -- /See:/ 'newTableDataInsertAllRequest_RowsItem' smart constructor.
 data TableDataInsertAllRequest_RowsItem = TableDataInsertAllRequest_RowsItem
-  { -- | [Optional] A unique ID for each row. BigQuery uses this property to detect duplicate insertion requests on a best-effort basis.
+  { -- | Insertion ID for best-effort deduplication. This feature is not recommended, and users seeking stronger insertion semantics are encouraged to use other mechanisms such as the BigQuery Write API.
     insertId :: (Core.Maybe Core.Text),
-    -- | [Required] A JSON object that contains a row of data. The object\'s properties and values must match the destination table\'s schema.
+    -- | Data for a single row.
     json :: (Core.Maybe JsonObject)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9608,22 +12235,17 @@ newTableDataInsertAllRequest_RowsItem =
       json = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    TableDataInsertAllRequest_RowsItem
-  where
+instance Core.FromJSON TableDataInsertAllRequest_RowsItem where
   parseJSON =
     Core.withObject
       "TableDataInsertAllRequest_RowsItem"
       ( \o ->
           TableDataInsertAllRequest_RowsItem
-            Core.<$> (o Core..:? "insertId") Core.<*> (o Core..:? "json")
+            Core.<$> (o Core..:? "insertId")
+            Core.<*> (o Core..:? "json")
       )
 
-instance
-  Core.ToJSON
-    TableDataInsertAllRequest_RowsItem
-  where
+instance Core.ToJSON TableDataInsertAllRequest_RowsItem where
   toJSON TableDataInsertAllRequest_RowsItem {..} =
     Core.object
       ( Core.catMaybes
@@ -9632,12 +12254,13 @@ instance
           ]
       )
 
+-- | Describes the format of a streaming insert response.
 --
 -- /See:/ 'newTableDataInsertAllResponse' smart constructor.
 data TableDataInsertAllResponse = TableDataInsertAllResponse
-  { -- | An array of errors for rows that were not inserted.
+  { -- | Describes specific errors encountered while processing the request.
     insertErrors :: (Core.Maybe [TableDataInsertAllResponse_InsertErrorsItem]),
-    -- | The resource type of the response.
+    -- | Returns \"bigquery#tableDataInsertAllResponse\".
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9658,9 +12281,7 @@ instance Core.FromJSON TableDataInsertAllResponse where
       ( \o ->
           TableDataInsertAllResponse
             Core.<$> (o Core..:? "insertErrors")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "bigquery#tableDataInsertAllResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "bigquery#tableDataInsertAllResponse")
       )
 
 instance Core.ToJSON TableDataInsertAllResponse where
@@ -9672,6 +12293,7 @@ instance Core.ToJSON TableDataInsertAllResponse where
           ]
       )
 
+-- | Error details about a single row\'s insertion.
 --
 -- /See:/ 'newTableDataInsertAllResponse_InsertErrorsItem' smart constructor.
 data TableDataInsertAllResponse_InsertErrorsItem = TableDataInsertAllResponse_InsertErrorsItem
@@ -9687,34 +12309,29 @@ newTableDataInsertAllResponse_InsertErrorsItem ::
   TableDataInsertAllResponse_InsertErrorsItem
 newTableDataInsertAllResponse_InsertErrorsItem =
   TableDataInsertAllResponse_InsertErrorsItem
-    { errors = Core.Nothing,
+    { errors =
+        Core.Nothing,
       index = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    TableDataInsertAllResponse_InsertErrorsItem
-  where
+instance Core.FromJSON TableDataInsertAllResponse_InsertErrorsItem where
   parseJSON =
     Core.withObject
       "TableDataInsertAllResponse_InsertErrorsItem"
       ( \o ->
           TableDataInsertAllResponse_InsertErrorsItem
-            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "index")
+            Core.<$> (o Core..:? "errors")
+            Core.<*> (o Core..:? "index")
       )
 
-instance
-  Core.ToJSON
-    TableDataInsertAllResponse_InsertErrorsItem
-  where
-  toJSON
-    TableDataInsertAllResponse_InsertErrorsItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("errors" Core..=) Core.<$> errors,
-              ("index" Core..=) Core.<$> index
-            ]
-        )
+instance Core.ToJSON TableDataInsertAllResponse_InsertErrorsItem where
+  toJSON TableDataInsertAllResponse_InsertErrorsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("errors" Core..=) Core.<$> errors,
+            ("index" Core..=) Core.<$> index
+          ]
+      )
 
 --
 -- /See:/ 'newTableDataList' smart constructor.
@@ -9727,7 +12344,7 @@ data TableDataList = TableDataList
     pageToken :: (Core.Maybe Core.Text),
     -- | Rows of results.
     rows :: (Core.Maybe [TableRow]),
-    -- | The total number of rows in the complete table.
+    -- | Total rows of the entire table. In order to show default value 0 we have to present it as string.
     totalRows :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9754,9 +12371,7 @@ instance Core.FromJSON TableDataList where
             Core.<*> (o Core..:? "kind" Core..!= "bigquery#tableDataList")
             Core.<*> (o Core..:? "pageToken")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "totalRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalRows" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON TableDataList where
@@ -9767,40 +12382,46 @@ instance Core.ToJSON TableDataList where
             Core.Just ("kind" Core..= kind),
             ("pageToken" Core..=) Core.<$> pageToken,
             ("rows" Core..=) Core.<$> rows,
-            ("totalRows" Core..=) Core.. Core.AsText
-              Core.<$> totalRows
+            ("totalRows" Core..=) Core.. Core.AsText Core.<$> totalRows
           ]
       )
 
+-- | A field in TableSchema
 --
 -- /See:/ 'newTableFieldSchema' smart constructor.
 data TableFieldSchema = TableFieldSchema
-  { -- | [Optional] The categories attached to this field, used for field-level access control.
+  { -- | Deprecated.
     categories :: (Core.Maybe TableFieldSchema_Categories),
-    -- | Optional. Collation specification of the field. It only can be set on string type field.
+    -- | Optional. Field collation can be set only when the type of field is STRING. The following values are supported: * \'und:ci\': undetermined locale, case insensitive. * \'\': empty string. Default to case-sensitive behavior.
     collation :: (Core.Maybe Core.Text),
-    -- | Optional. A SQL expression to specify the default value for this field. It can only be set for top level fields (columns). You can use struct or array expression to specify default value for the entire struct or array. The valid SQL expressions are: - Literals for all data types, including STRUCT and ARRAY. - Following functions: - CURRENT/TIMESTAMP - CURRENT/TIME - CURRENT/DATE - CURRENT/DATETIME - GENERATE/UUID - RAND - SESSION/USER - ST/GEOGPOINT - Struct or array composed with the above allowed functions, for example, [CURRENT/DATE(), DATE \'2020-01-01\']
+    -- | Optional. Data policy options, will replace the data_policies.
+    dataPolicies :: (Core.Maybe [DataPolicyOption]),
+    -- | Optional. A SQL expression to specify the [default value] (https:\/\/cloud.google.com\/bigquery\/docs\/default-values) for this field.
     defaultValueExpression :: (Core.Maybe Core.Text),
-    -- | [Optional] The field description. The maximum length is 1,024 characters.
+    -- | Optional. The field description. The maximum length is 1,024 characters.
     description :: (Core.Maybe Core.Text),
-    -- | [Optional] Describes the nested schema fields if the type property is set to RECORD.
+    -- | Optional. Describes the nested schema fields if the type property is set to RECORD.
     fields :: (Core.Maybe [TableFieldSchema]),
-    -- | [Optional] Maximum length of values of this field for STRINGS or BYTES. If max/length is not specified, no maximum length constraint is imposed on this field. If type = \"STRING\", then max/length represents the maximum UTF-8 length of strings in this field. If type = \"BYTES\", then max_length represents the maximum number of bytes in this field. It is invalid to set this field if type ≠ \"STRING\" and ≠ \"BYTES\".
+    -- | Optional. Definition of the foreign data type. Only valid for top-level schema fields (not nested fields). If the type is FOREIGN, this field is required.
+    foreignTypeDefinition :: (Core.Maybe Core.Text),
+    -- | Optional. Maximum length of values of this field for STRINGS or BYTES. If max/length is not specified, no maximum length constraint is imposed on this field. If type = \"STRING\", then max/length represents the maximum UTF-8 length of strings in this field. If type = \"BYTES\", then max_length represents the maximum number of bytes in this field. It is invalid to set this field if type ≠ \"STRING\" and ≠ \"BYTES\".
     maxLength :: (Core.Maybe Core.Int64),
-    -- | [Optional] The field mode. Possible values include NULLABLE, REQUIRED and REPEATED. The default value is NULLABLE.
+    -- | Optional. The field mode. Possible values include NULLABLE, REQUIRED and REPEATED. The default value is NULLABLE.
     mode :: (Core.Maybe Core.Text),
-    -- | [Required] The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 300 characters.
+    -- | Required. The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 300 characters.
     name :: (Core.Maybe Core.Text),
-    -- |
+    -- | Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy_tags.
     policyTags :: (Core.Maybe TableFieldSchema_PolicyTags),
-    -- | [Optional] Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC. It is invalid to set precision or scale if type ≠ \"NUMERIC\" and ≠ \"BIGNUMERIC\". If precision and scale are not specified, no value range constraint is imposed on this field insofar as values are permitted by the type. Values of this NUMERIC or BIGNUMERIC field must be in this range when: - Precision (P) and scale (S) are specified: [-10P-S + 10-S, 10P-S - 10-S] - Precision (P) is specified but not scale (and thus scale is interpreted to be equal to zero): [-10P + 1, 10P - 1]. Acceptable values for precision and scale if both are specified: - If type = \"NUMERIC\": 1 ≤ precision - scale ≤ 29 and 0 ≤ scale ≤ 9. - If type = \"BIGNUMERIC\": 1 ≤ precision - scale ≤ 38 and 0 ≤ scale ≤ 38. Acceptable values for precision if only precision is specified but not scale (and thus scale is interpreted to be equal to
-    -- zero): - If type = \"NUMERIC\": 1 ≤ precision ≤ 29. - If type = \"BIGNUMERIC\": 1 ≤ precision ≤ 38. If scale is specified but not precision, then it is invalid.
+    -- | Optional. Precision (maximum number of total digits in base 10) and scale (maximum number of digits in the fractional part in base 10) constraints for values of this field for NUMERIC or BIGNUMERIC. It is invalid to set precision or scale if type ≠ \"NUMERIC\" and ≠ \"BIGNUMERIC\". If precision and scale are not specified, no value range constraint is imposed on this field insofar as values are permitted by the type. Values of this NUMERIC or BIGNUMERIC field must be in this range when: * Precision (P) and scale (S) are specified: [-10P-S + 10-S, 10P-S - 10-S] * Precision (P) is specified but not scale (and thus scale is interpreted to be equal to zero): [-10P + 1, 10P - 1]. Acceptable values for precision and scale if both are specified: * If type = \"NUMERIC\": 1 ≤ precision - scale ≤ 29 and 0 ≤ scale ≤ 9. * If type = \"BIGNUMERIC\": 1 ≤ precision - scale ≤ 38 and 0 ≤ scale ≤ 38. Acceptable values for precision if only precision is specified but not scale (and thus scale is interpreted to be equal to zero):
+    -- * If type = \"NUMERIC\": 1 ≤ precision ≤ 29. * If type = \"BIGNUMERIC\": 1 ≤ precision ≤ 38. If scale is specified but not precision, then it is invalid.
     precision :: (Core.Maybe Core.Int64),
-    -- | Optional. Rounding Mode specification of the field. It only can be set on NUMERIC or BIGNUMERIC type fields.
-    roundingMode :: (Core.Maybe Core.Text),
-    -- | [Optional] See documentation for precision.
+    -- | Represents the type of a field element.
+    rangeElementType :: (Core.Maybe TableFieldSchema_RangeElementType),
+    -- | Optional. Specifies the rounding mode to be used when storing values of NUMERIC and BIGNUMERIC type.
+    roundingMode :: (Core.Maybe TableFieldSchema_RoundingMode),
+    -- | Optional. See documentation for precision.
     scale :: (Core.Maybe Core.Int64),
-    -- | [Required] The field data type. Possible values include STRING, BYTES, INTEGER, INT64 (same as INTEGER), FLOAT, FLOAT64 (same as FLOAT), NUMERIC, BIGNUMERIC, BOOLEAN, BOOL (same as BOOLEAN), TIMESTAMP, DATE, TIME, DATETIME, INTERVAL, RECORD (where RECORD indicates that the field contains a nested schema) or STRUCT (same as RECORD).
+    -- | Required. The field data type. Possible values include: * STRING * BYTES * INTEGER (or INT64) * FLOAT (or FLOAT64) * BOOLEAN (or BOOL) * TIMESTAMP * DATE * TIME * DATETIME * GEOGRAPHY * NUMERIC * BIGNUMERIC * JSON * RECORD (or STRUCT) * RANGE Use of RECORD\/STRUCT indicates that the field contains a nested schema.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9812,14 +12433,17 @@ newTableFieldSchema =
   TableFieldSchema
     { categories = Core.Nothing,
       collation = Core.Nothing,
+      dataPolicies = Core.Nothing,
       defaultValueExpression = Core.Nothing,
       description = Core.Nothing,
       fields = Core.Nothing,
+      foreignTypeDefinition = Core.Nothing,
       maxLength = Core.Nothing,
       mode = Core.Nothing,
       name = Core.Nothing,
       policyTags = Core.Nothing,
       precision = Core.Nothing,
+      rangeElementType = Core.Nothing,
       roundingMode = Core.Nothing,
       scale = Core.Nothing,
       type' = Core.Nothing
@@ -9833,22 +12457,19 @@ instance Core.FromJSON TableFieldSchema where
           TableFieldSchema
             Core.<$> (o Core..:? "categories")
             Core.<*> (o Core..:? "collation")
+            Core.<*> (o Core..:? "dataPolicies")
             Core.<*> (o Core..:? "defaultValueExpression")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "fields")
-            Core.<*> ( o Core..:? "maxLength"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "foreignTypeDefinition")
+            Core.<*> (o Core..:? "maxLength" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "mode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "policyTags")
-            Core.<*> ( o Core..:? "precision"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "precision" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rangeElementType")
             Core.<*> (o Core..:? "roundingMode")
-            Core.<*> ( o Core..:? "scale"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scale" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -9858,28 +12479,28 @@ instance Core.ToJSON TableFieldSchema where
       ( Core.catMaybes
           [ ("categories" Core..=) Core.<$> categories,
             ("collation" Core..=) Core.<$> collation,
-            ("defaultValueExpression" Core..=)
-              Core.<$> defaultValueExpression,
+            ("dataPolicies" Core..=) Core.<$> dataPolicies,
+            ("defaultValueExpression" Core..=) Core.<$> defaultValueExpression,
             ("description" Core..=) Core.<$> description,
             ("fields" Core..=) Core.<$> fields,
-            ("maxLength" Core..=) Core.. Core.AsText
-              Core.<$> maxLength,
+            ("foreignTypeDefinition" Core..=) Core.<$> foreignTypeDefinition,
+            ("maxLength" Core..=) Core.. Core.AsText Core.<$> maxLength,
             ("mode" Core..=) Core.<$> mode,
             ("name" Core..=) Core.<$> name,
             ("policyTags" Core..=) Core.<$> policyTags,
-            ("precision" Core..=) Core.. Core.AsText
-              Core.<$> precision,
+            ("precision" Core..=) Core.. Core.AsText Core.<$> precision,
+            ("rangeElementType" Core..=) Core.<$> rangeElementType,
             ("roundingMode" Core..=) Core.<$> roundingMode,
             ("scale" Core..=) Core.. Core.AsText Core.<$> scale,
             ("type" Core..=) Core.<$> type'
           ]
       )
 
--- | [Optional] The categories attached to this field, used for field-level access control.
+-- | Deprecated.
 --
 -- /See:/ 'newTableFieldSchema_Categories' smart constructor.
 newtype TableFieldSchema_Categories = TableFieldSchema_Categories
-  { -- | A list of category resource names. For example, \"projects\/1\/taxonomies\/2\/categories\/3\". At most 5 categories are allowed.
+  { -- | Deprecated.
     names :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9894,20 +12515,17 @@ instance Core.FromJSON TableFieldSchema_Categories where
   parseJSON =
     Core.withObject
       "TableFieldSchema_Categories"
-      ( \o ->
-          TableFieldSchema_Categories
-            Core.<$> (o Core..:? "names")
-      )
+      (\o -> TableFieldSchema_Categories Core.<$> (o Core..:? "names"))
 
 instance Core.ToJSON TableFieldSchema_Categories where
   toJSON TableFieldSchema_Categories {..} =
-    Core.object
-      (Core.catMaybes [("names" Core..=) Core.<$> names])
+    Core.object (Core.catMaybes [("names" Core..=) Core.<$> names])
 
+-- | Optional. The policy tags attached to this field, used for field-level access control. If not set, defaults to empty policy_tags.
 --
 -- /See:/ 'newTableFieldSchema_PolicyTags' smart constructor.
 newtype TableFieldSchema_PolicyTags = TableFieldSchema_PolicyTags
-  { -- | A list of category resource names. For example, \"projects\/1\/location\/eu\/taxonomies\/2\/policyTags\/3\". At most 1 policy tag is allowed.
+  { -- | A list of policy tag resource names. For example, \"projects\/1\/locations\/eu\/taxonomies\/2\/policyTags\/3\". At most 1 policy tag is currently allowed.
     names :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9922,16 +12540,40 @@ instance Core.FromJSON TableFieldSchema_PolicyTags where
   parseJSON =
     Core.withObject
       "TableFieldSchema_PolicyTags"
-      ( \o ->
-          TableFieldSchema_PolicyTags
-            Core.<$> (o Core..:? "names")
-      )
+      (\o -> TableFieldSchema_PolicyTags Core.<$> (o Core..:? "names"))
 
 instance Core.ToJSON TableFieldSchema_PolicyTags where
   toJSON TableFieldSchema_PolicyTags {..} =
-    Core.object
-      (Core.catMaybes [("names" Core..=) Core.<$> names])
+    Core.object (Core.catMaybes [("names" Core..=) Core.<$> names])
 
+-- | Represents the type of a field element.
+--
+-- /See:/ 'newTableFieldSchema_RangeElementType' smart constructor.
+newtype TableFieldSchema_RangeElementType = TableFieldSchema_RangeElementType
+  { -- | Required. The type of a field element. For more information, see TableFieldSchema.type.
+    type' :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableFieldSchema_RangeElementType' with the minimum fields required to make a request.
+newTableFieldSchema_RangeElementType ::
+  TableFieldSchema_RangeElementType
+newTableFieldSchema_RangeElementType =
+  TableFieldSchema_RangeElementType {type' = Core.Nothing}
+
+instance Core.FromJSON TableFieldSchema_RangeElementType where
+  parseJSON =
+    Core.withObject
+      "TableFieldSchema_RangeElementType"
+      ( \o ->
+          TableFieldSchema_RangeElementType Core.<$> (o Core..:? "type")
+      )
+
+instance Core.ToJSON TableFieldSchema_RangeElementType where
+  toJSON TableFieldSchema_RangeElementType {..} =
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
+
+-- | Partial projection of the metadata for a given table in a list response.
 --
 -- /See:/ 'newTableList' smart constructor.
 data TableList = TableList
@@ -9988,29 +12630,31 @@ instance Core.ToJSON TableList where
 --
 -- /See:/ 'newTableList_TablesItem' smart constructor.
 data TableList_TablesItem = TableList_TablesItem
-  { -- | [Beta] Clustering specification for this table, if configured.
+  { -- | Clustering specification for this table, if configured.
     clustering :: (Core.Maybe Clustering),
-    -- | The time when this table was created, in milliseconds since the epoch.
+    -- | Output only. The time when this table was created, in milliseconds since the epoch.
     creationTime :: (Core.Maybe Core.Int64),
-    -- | [Optional] The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.
+    -- | The time when this table expires, in milliseconds since the epoch. If not present, the table will persist indefinitely. Expired tables will be deleted and their storage reclaimed.
     expirationTime :: (Core.Maybe Core.Int64),
     -- | The user-friendly name for this table.
     friendlyName :: (Core.Maybe Core.Text),
-    -- | An opaque ID of the table
+    -- | An opaque ID of the table.
     id :: (Core.Maybe Core.Text),
     -- | The resource type.
-    kind :: Core.Text,
+    kind :: (Core.Maybe Core.Text),
     -- | The labels associated with this table. You can use these to organize and group your tables.
     labels :: (Core.Maybe TableList_TablesItem_Labels),
-    -- | The range partitioning specification for this table, if configured.
+    -- | The range partitioning for this table.
     rangePartitioning :: (Core.Maybe RangePartitioning),
-    -- | A reference uniquely identifying the table.
+    -- | Optional. If set to true, queries including this table must specify a partition filter. This filter is used for partition elimination.
+    requirePartitionFilter :: Core.Bool,
+    -- | A reference uniquely identifying table.
     tableReference :: (Core.Maybe TableReference),
-    -- | The time-based partitioning specification for this table, if configured.
+    -- | The time-based partitioning for this table.
     timePartitioning :: (Core.Maybe TimePartitioning),
-    -- | The type of table. Possible values are: TABLE, VIEW.
+    -- | The type of table.
     type' :: (Core.Maybe Core.Text),
-    -- | Additional details for a view.
+    -- | Information about a logical view.
     view :: (Core.Maybe TableList_TablesItem_View)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10025,9 +12669,10 @@ newTableList_TablesItem =
       expirationTime = Core.Nothing,
       friendlyName = Core.Nothing,
       id = Core.Nothing,
-      kind = "bigquery#table",
+      kind = Core.Nothing,
       labels = Core.Nothing,
       rangePartitioning = Core.Nothing,
+      requirePartitionFilter = Core.False,
       tableReference = Core.Nothing,
       timePartitioning = Core.Nothing,
       type' = Core.Nothing,
@@ -10041,17 +12686,14 @@ instance Core.FromJSON TableList_TablesItem where
       ( \o ->
           TableList_TablesItem
             Core.<$> (o Core..:? "clustering")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "expirationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "expirationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "friendlyName")
             Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "kind" Core..!= "bigquery#table")
+            Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "rangePartitioning")
+            Core.<*> (o Core..:? "requirePartitionFilter" Core..!= Core.False)
             Core.<*> (o Core..:? "tableReference")
             Core.<*> (o Core..:? "timePartitioning")
             Core.<*> (o Core..:? "type")
@@ -10063,19 +12705,19 @@ instance Core.ToJSON TableList_TablesItem where
     Core.object
       ( Core.catMaybes
           [ ("clustering" Core..=) Core.<$> clustering,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
-            ("expirationTime" Core..=) Core.. Core.AsText
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
+            ("expirationTime" Core..=)
+              Core.. Core.AsText
               Core.<$> expirationTime,
             ("friendlyName" Core..=) Core.<$> friendlyName,
             ("id" Core..=) Core.<$> id,
-            Core.Just ("kind" Core..= kind),
+            ("kind" Core..=) Core.<$> kind,
             ("labels" Core..=) Core.<$> labels,
-            ("rangePartitioning" Core..=)
-              Core.<$> rangePartitioning,
+            ("rangePartitioning" Core..=) Core.<$> rangePartitioning,
+            Core.Just
+              ("requirePartitionFilter" Core..= requirePartitionFilter),
             ("tableReference" Core..=) Core.<$> tableReference,
-            ("timePartitioning" Core..=)
-              Core.<$> timePartitioning,
+            ("timePartitioning" Core..=) Core.<$> timePartitioning,
             ("type" Core..=) Core.<$> type',
             ("view" Core..=) Core.<$> view
           ]
@@ -10085,8 +12727,7 @@ instance Core.ToJSON TableList_TablesItem where
 --
 -- /See:/ 'newTableList_TablesItem_Labels' smart constructor.
 newtype TableList_TablesItem_Labels = TableList_TablesItem_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10103,19 +12744,19 @@ instance Core.FromJSON TableList_TablesItem_Labels where
     Core.withObject
       "TableList_TablesItem_Labels"
       ( \o ->
-          TableList_TablesItem_Labels
-            Core.<$> (Core.parseJSONObject o)
+          TableList_TablesItem_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON TableList_TablesItem_Labels where
-  toJSON TableList_TablesItem_Labels {..} =
-    Core.toJSON additional
+  toJSON TableList_TablesItem_Labels {..} = Core.toJSON additional
 
--- | Additional details for a view.
+-- | Information about a logical view.
 --
 -- /See:/ 'newTableList_TablesItem_View' smart constructor.
-newtype TableList_TablesItem_View = TableList_TablesItem_View
-  { -- | True if view is defined in legacy SQL dialect, false if in standard SQL.
+data TableList_TablesItem_View = TableList_TablesItem_View
+  { -- | Specifies the privacy policy for the view.
+    privacyPolicy :: (Core.Maybe PrivacyPolicy),
+    -- | True if view is defined in legacy SQL dialect, false if in GoogleSQL.
     useLegacySql :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10124,7 +12765,10 @@ newtype TableList_TablesItem_View = TableList_TablesItem_View
 newTableList_TablesItem_View ::
   TableList_TablesItem_View
 newTableList_TablesItem_View =
-  TableList_TablesItem_View {useLegacySql = Core.Nothing}
+  TableList_TablesItem_View
+    { privacyPolicy = Core.Nothing,
+      useLegacySql = Core.Nothing
+    }
 
 instance Core.FromJSON TableList_TablesItem_View where
   parseJSON =
@@ -10132,24 +12776,81 @@ instance Core.FromJSON TableList_TablesItem_View where
       "TableList_TablesItem_View"
       ( \o ->
           TableList_TablesItem_View
-            Core.<$> (o Core..:? "useLegacySql")
+            Core.<$> (o Core..:? "privacyPolicy")
+            Core.<*> (o Core..:? "useLegacySql")
       )
 
 instance Core.ToJSON TableList_TablesItem_View where
   toJSON TableList_TablesItem_View {..} =
     Core.object
       ( Core.catMaybes
-          [("useLegacySql" Core..=) Core.<$> useLegacySql]
+          [ ("privacyPolicy" Core..=) Core.<$> privacyPolicy,
+            ("useLegacySql" Core..=) Core.<$> useLegacySql
+          ]
+      )
+
+-- | Table level detail on the usage of metadata caching. Only set for Metadata caching eligible tables referenced in the query.
+--
+-- /See:/ 'newTableMetadataCacheUsage' smart constructor.
+data TableMetadataCacheUsage = TableMetadataCacheUsage
+  { -- | Free form human-readable reason metadata caching was unused for the job.
+    explanation :: (Core.Maybe Core.Text),
+    -- | Duration since last refresh as of this job for managed tables (indicates metadata cache staleness as seen by this job).
+    staleness :: (Core.Maybe Core.Duration),
+    -- | Metadata caching eligible table referenced in the query.
+    tableReference :: (Core.Maybe TableReference),
+    -- | <https://cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type Table type>.
+    tableType :: (Core.Maybe Core.Text),
+    -- | Reason for not using metadata caching for the table.
+    unusedReason :: (Core.Maybe TableMetadataCacheUsage_UnusedReason)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableMetadataCacheUsage' with the minimum fields required to make a request.
+newTableMetadataCacheUsage ::
+  TableMetadataCacheUsage
+newTableMetadataCacheUsage =
+  TableMetadataCacheUsage
+    { explanation = Core.Nothing,
+      staleness = Core.Nothing,
+      tableReference = Core.Nothing,
+      tableType = Core.Nothing,
+      unusedReason = Core.Nothing
+    }
+
+instance Core.FromJSON TableMetadataCacheUsage where
+  parseJSON =
+    Core.withObject
+      "TableMetadataCacheUsage"
+      ( \o ->
+          TableMetadataCacheUsage
+            Core.<$> (o Core..:? "explanation")
+            Core.<*> (o Core..:? "staleness")
+            Core.<*> (o Core..:? "tableReference")
+            Core.<*> (o Core..:? "tableType")
+            Core.<*> (o Core..:? "unusedReason")
+      )
+
+instance Core.ToJSON TableMetadataCacheUsage where
+  toJSON TableMetadataCacheUsage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("explanation" Core..=) Core.<$> explanation,
+            ("staleness" Core..=) Core.<$> staleness,
+            ("tableReference" Core..=) Core.<$> tableReference,
+            ("tableType" Core..=) Core.<$> tableType,
+            ("unusedReason" Core..=) Core.<$> unusedReason
+          ]
       )
 
 --
 -- /See:/ 'newTableReference' smart constructor.
 data TableReference = TableReference
-  { -- | [Required] The ID of the dataset containing this table.
+  { -- | Required. The ID of the dataset containing this table.
     datasetId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the project containing this table.
+    -- | Required. The ID of the project containing this table.
     projectId :: (Core.Maybe Core.Text),
-    -- | [Required] The ID of the table. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
+    -- | Required. The ID of the table. The ID can contain Unicode characters in category L (letter), M (mark), N (number), Pc (connector, including underscore), Pd (dash), and Zs (space). For more information, see <https://wikipedia.org/wiki/Unicode_character_property#General_Category General Category>. The maximum length is 1,024 characters. Certain operations allow suffixing of the table ID with a partition decorator, such as @sample_table$20190123@.
     tableId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10185,6 +12886,71 @@ instance Core.ToJSON TableReference where
           ]
       )
 
+-- | Replication info of a table created using @AS REPLICA@ DDL like: @CREATE MATERIALIZED VIEW mv1 AS REPLICA OF src_mv@
+--
+-- /See:/ 'newTableReplicationInfo' smart constructor.
+data TableReplicationInfo = TableReplicationInfo
+  { -- | Optional. Output only. If source is a materialized view, this field signifies the last refresh time of the source.
+    replicatedSourceLastRefreshTime :: (Core.Maybe Core.Int64),
+    -- | Optional. Output only. Replication error that will permanently stopped table replication.
+    replicationError :: (Core.Maybe ErrorProto),
+    -- | Optional. Specifies the interval at which the source table is polled for updates. It\'s Optional. If not specified, default replication interval would be applied.
+    replicationIntervalMs :: (Core.Maybe Core.Int64),
+    -- | Optional. Output only. Replication status of configured replication.
+    replicationStatus :: (Core.Maybe TableReplicationInfo_ReplicationStatus),
+    -- | Required. Source table reference that is replicated.
+    sourceTable :: (Core.Maybe TableReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TableReplicationInfo' with the minimum fields required to make a request.
+newTableReplicationInfo ::
+  TableReplicationInfo
+newTableReplicationInfo =
+  TableReplicationInfo
+    { replicatedSourceLastRefreshTime =
+        Core.Nothing,
+      replicationError = Core.Nothing,
+      replicationIntervalMs = Core.Nothing,
+      replicationStatus = Core.Nothing,
+      sourceTable = Core.Nothing
+    }
+
+instance Core.FromJSON TableReplicationInfo where
+  parseJSON =
+    Core.withObject
+      "TableReplicationInfo"
+      ( \o ->
+          TableReplicationInfo
+            Core.<$> ( o
+                         Core..:? "replicatedSourceLastRefreshTime"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "replicationError")
+            Core.<*> ( o
+                         Core..:? "replicationIntervalMs"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "replicationStatus")
+            Core.<*> (o Core..:? "sourceTable")
+      )
+
+instance Core.ToJSON TableReplicationInfo where
+  toJSON TableReplicationInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("replicatedSourceLastRefreshTime" Core..=)
+              Core.. Core.AsText
+              Core.<$> replicatedSourceLastRefreshTime,
+            ("replicationError" Core..=) Core.<$> replicationError,
+            ("replicationIntervalMs" Core..=)
+              Core.. Core.AsText
+              Core.<$> replicationIntervalMs,
+            ("replicationStatus" Core..=) Core.<$> replicationStatus,
+            ("sourceTable" Core..=) Core.<$> sourceTable
+          ]
+      )
+
 --
 -- /See:/ 'newTableRow' smart constructor.
 newtype TableRow = TableRow
@@ -10206,32 +12972,46 @@ instance Core.FromJSON TableRow where
 
 instance Core.ToJSON TableRow where
   toJSON TableRow {..} =
-    Core.object
-      (Core.catMaybes [("f" Core..=) Core.<$> f])
+    Core.object (Core.catMaybes [("f" Core..=) Core.<$> f])
 
+-- | Schema of a table
 --
 -- /See:/ 'newTableSchema' smart constructor.
-newtype TableSchema = TableSchema
+data TableSchema = TableSchema
   { -- | Describes the fields in a table.
-    fields :: (Core.Maybe [TableFieldSchema])
+    fields :: (Core.Maybe [TableFieldSchema]),
+    -- | Optional. Specifies metadata of the foreign data type definition in field schema (TableFieldSchema.foreign/type/definition).
+    foreignTypeInfo :: (Core.Maybe ForeignTypeInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'TableSchema' with the minimum fields required to make a request.
 newTableSchema ::
   TableSchema
-newTableSchema = TableSchema {fields = Core.Nothing}
+newTableSchema =
+  TableSchema
+    { fields = Core.Nothing,
+      foreignTypeInfo = Core.Nothing
+    }
 
 instance Core.FromJSON TableSchema where
   parseJSON =
     Core.withObject
       "TableSchema"
-      (\o -> TableSchema Core.<$> (o Core..:? "fields"))
+      ( \o ->
+          TableSchema
+            Core.<$> (o Core..:? "fields")
+            Core.<*> (o Core..:? "foreignTypeInfo")
+      )
 
 instance Core.ToJSON TableSchema where
   toJSON TableSchema {..} =
     Core.object
-      (Core.catMaybes [("fields" Core..=) Core.<$> fields])
+      ( Core.catMaybes
+          [ ("fields" Core..=) Core.<$> fields,
+            ("foreignTypeInfo" Core..=) Core.<$> foreignTypeInfo
+          ]
+      )
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -10253,16 +13033,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -10284,27 +13061,24 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 --
 -- /See:/ 'newTimePartitioning' smart constructor.
 data TimePartitioning = TimePartitioning
-  { -- | [Optional] Number of milliseconds for which to keep the storage for partitions in the table. The storage in a partition will have an expiration time of its partition time plus this value.
+  { -- | Optional. Number of milliseconds for which to keep the storage for a partition. A wrapper is used here because 0 is an invalid value.
     expirationMs :: (Core.Maybe Core.Int64),
-    -- | [Beta] [Optional] If not set, the table is partitioned by pseudo column, referenced via either \'/PARTITIONTIME\' as TIMESTAMP type, or \'/PARTITIONDATE\' as DATE type. If field is specified, the table is instead partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED.
+    -- | Optional. If not set, the table is partitioned by pseudo column \'_PARTITIONTIME\'; if set, the table is partitioned by this field. The field must be a top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or REQUIRED. A wrapper is used here because an empty string is an invalid value.
     field :: (Core.Maybe Core.Text),
-    -- |
-    requirePartitionFilter :: (Core.Maybe Core.Bool),
-    -- | [Required] The supported types are DAY, HOUR, MONTH, and YEAR, which will generate one partition per day, hour, month, and year, respectively. When the type is not specified, the default behavior is DAY.
+    -- | If set to true, queries over this table require a partition filter that can be used for partition elimination to be specified. This field is deprecated; please set the field with the same name on the table itself instead. This field needs a wrapper because we want to output the default value, false, if the user explicitly set it.
+    requirePartitionFilter :: Core.Bool,
+    -- | Required. The supported types are DAY, HOUR, MONTH, and YEAR, which will generate one partition per day, hour, month, and year, respectively.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10316,7 +13090,7 @@ newTimePartitioning =
   TimePartitioning
     { expirationMs = Core.Nothing,
       field = Core.Nothing,
-      requirePartitionFilter = Core.Nothing,
+      requirePartitionFilter = Core.False,
       type' = Core.Nothing
     }
 
@@ -10326,11 +13100,9 @@ instance Core.FromJSON TimePartitioning where
       "TimePartitioning"
       ( \o ->
           TimePartitioning
-            Core.<$> ( o Core..:? "expirationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "expirationMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "field")
-            Core.<*> (o Core..:? "requirePartitionFilter")
+            Core.<*> (o Core..:? "requirePartitionFilter" Core..!= Core.False)
             Core.<*> (o Core..:? "type")
       )
 
@@ -10338,11 +13110,10 @@ instance Core.ToJSON TimePartitioning where
   toJSON TimePartitioning {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expirationMs" Core..=) Core.. Core.AsText
-              Core.<$> expirationMs,
+          [ ("expirationMs" Core..=) Core.. Core.AsText Core.<$> expirationMs,
             ("field" Core..=) Core.<$> field,
-            ("requirePartitionFilter" Core..=)
-              Core.<$> requirePartitionFilter,
+            Core.Just
+              ("requirePartitionFilter" Core..= requirePartitionFilter),
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -10351,18 +13122,30 @@ instance Core.ToJSON TimePartitioning where
 --
 -- /See:/ 'newTrainingOptions' smart constructor.
 data TrainingOptions = TrainingOptions
-  { -- | If true, detect step changes and make data adjustment in the input time series.
+  { -- | Activation function of the neural nets.
+    activationFn :: (Core.Maybe Core.Text),
+    -- | If true, detect step changes and make data adjustment in the input time series.
     adjustStepChanges :: (Core.Maybe Core.Bool),
+    -- | Whether to use approximate feature contribution method in XGBoost model explanation for global explain.
+    approxGlobalFeatureContrib :: (Core.Maybe Core.Bool),
     -- | Whether to enable auto ARIMA or not.
     autoArima :: (Core.Maybe Core.Bool),
-    -- | The max value of non-seasonal p and q.
+    -- | The max value of the sum of non-seasonal p and q.
     autoArimaMaxOrder :: (Core.Maybe Core.Int64),
+    -- | The min value of the sum of non-seasonal p and q.
+    autoArimaMinOrder :: (Core.Maybe Core.Int64),
+    -- | Whether to calculate class weights automatically based on the popularity of each label.
+    autoClassWeights :: (Core.Maybe Core.Bool),
     -- | Batch size for dnn models.
     batchSize :: (Core.Maybe Core.Int64),
     -- | Booster type for boosted tree models.
     boosterType :: (Core.Maybe TrainingOptions_BoosterType),
+    -- | Budget in hours for AutoML training.
+    budgetHours :: (Core.Maybe Core.Double),
     -- | Whether or not p-value test should be computed for this model. Only available for linear and logistic regression models.
     calculatePValues :: (Core.Maybe Core.Bool),
+    -- | Categorical feature encoding method.
+    categoryEncodingMethod :: (Core.Maybe TrainingOptions_CategoryEncodingMethod),
     -- | If true, clean spikes and dips in the input time series.
     cleanSpikesAndDips :: (Core.Maybe Core.Bool),
     -- | Enums for color space, used for processing images in Object Table. See more details at https:\/\/www.tensorflow.org\/io\/tutorials\/colorspace.
@@ -10373,11 +13156,13 @@ data TrainingOptions = TrainingOptions
     colsampleBynode :: (Core.Maybe Core.Double),
     -- | Subsample ratio of columns when constructing each tree for boosted tree models.
     colsampleBytree :: (Core.Maybe Core.Double),
+    -- | The contribution metric. Applies to contribution analysis models. Allowed formats supported are for summable and summable ratio contribution metrics. These include expressions such as @SUM(x)@ or @SUM(x)\/SUM(y)@, where x and y are column names from the base table.
+    contributionMetric :: (Core.Maybe Core.Text),
     -- | Type of normalization algorithm for boosted tree models using dart booster.
     dartNormalizeType :: (Core.Maybe TrainingOptions_DartNormalizeType),
     -- | The data frequency of a time series.
     dataFrequency :: (Core.Maybe TrainingOptions_DataFrequency),
-    -- | The column to split data with. This column won\'t be used as a feature. 1. When data/split/method is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When data/split/method is SEQ, the first DATA/SPLIT/EVAL_FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-types#data-type-properties
+    -- | The column to split data with. This column won\'t be used as a feature. 1. When data/split/method is CUSTOM, the corresponding column should be boolean. The rows with true value tag are eval data, and the false are training data. 2. When data/split/method is SEQ, the first DATA/SPLIT/EVAL/FRACTION rows (from smallest to largest) in the corresponding column are used as training data, and the rest are eval data. It respects the order in Orderable data types: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/data-types#data/type_properties
     dataSplitColumn :: (Core.Maybe Core.Text),
     -- | The fraction of evaluation data over the whole input data. The rest of data will be used as training data. The format should be double. Accurate to two decimal places. Default value is 0.2.
     dataSplitEvalFraction :: (Core.Maybe Core.Double),
@@ -10385,6 +13170,8 @@ data TrainingOptions = TrainingOptions
     dataSplitMethod :: (Core.Maybe TrainingOptions_DataSplitMethod),
     -- | If true, perform decompose time series and save the results.
     decomposeTimeSeries :: (Core.Maybe Core.Bool),
+    -- | Optional. Names of the columns to slice on. Applies to contribution analysis models.
+    dimensionIdColumns :: (Core.Maybe [Core.Text]),
     -- | Distance type for clustering models.
     distanceType :: (Core.Maybe TrainingOptions_DistanceType),
     -- | Dropout probability for dnn models.
@@ -10395,10 +13182,18 @@ data TrainingOptions = TrainingOptions
     enableGlobalExplain :: (Core.Maybe Core.Bool),
     -- | Feedback type that specifies which algorithm to run for matrix factorization.
     feedbackType :: (Core.Maybe TrainingOptions_FeedbackType),
+    -- | Whether the model should include intercept during model training.
+    fitIntercept :: (Core.Maybe Core.Bool),
+    -- | The forecast limit lower bound that was used during ARIMA model training with limits. To see more details of the algorithm: https:\/\/otexts.com\/fpp2\/limits.html
+    forecastLimitLowerBound :: (Core.Maybe Core.Double),
+    -- | The forecast limit upper bound that was used during ARIMA model training with limits.
+    forecastLimitUpperBound :: (Core.Maybe Core.Double),
     -- | Hidden units for dnn models.
     hiddenUnits :: (Core.Maybe [Core.Int64]),
     -- | The geographical region based on which the holidays are considered in time series modeling. If a valid value is specified, then holiday effects modeling is enabled.
     holidayRegion :: (Core.Maybe TrainingOptions_HolidayRegion),
+    -- | A list of geographical regions that are used for time series modeling.
+    holidayRegions :: (Core.Maybe [TrainingOptions_HolidayRegionsItem]),
     -- | The number of periods ahead that need to be forecasted.
     horizon :: (Core.Maybe Core.Int64),
     -- | The target evaluation metrics to optimize the hyperparameters for.
@@ -10409,14 +13204,20 @@ data TrainingOptions = TrainingOptions
     initialLearnRate :: (Core.Maybe Core.Double),
     -- | Name of input label columns in training data.
     inputLabelColumns :: (Core.Maybe [Core.Text]),
+    -- | Name of the instance weight column for training data. This column isn\'t be used as a feature.
+    instanceWeightColumn :: (Core.Maybe Core.Text),
     -- | Number of integral steps for the integrated gradients explain method.
     integratedGradientsNumSteps :: (Core.Maybe Core.Int64),
+    -- | Name of the column used to determine the rows corresponding to control and test. Applies to contribution analysis models.
+    isTestColumn :: (Core.Maybe Core.Text),
     -- | Item column specified for matrix factorization models.
     itemColumn :: (Core.Maybe Core.Text),
     -- | The column used to provide the initial centroids for kmeans algorithm when kmeans/initialization/method is CUSTOM.
     kmeansInitializationColumn :: (Core.Maybe Core.Text),
     -- | The method used to initialize the centroids for kmeans algorithm.
     kmeansInitializationMethod :: (Core.Maybe TrainingOptions_KmeansInitializationMethod),
+    -- | L1 regularization coefficient to activations.
+    l1RegActivation :: (Core.Maybe Core.Double),
     -- | L1 regularization coefficient.
     l1Regularization :: (Core.Maybe Core.Double),
     -- | L2 regularization coefficient.
@@ -10433,18 +13234,22 @@ data TrainingOptions = TrainingOptions
     maxIterations :: (Core.Maybe Core.Int64),
     -- | Maximum number of trials to run in parallel.
     maxParallelTrials :: (Core.Maybe Core.Int64),
-    -- | Get truncated length by last n points in time series. Use separately from time/series/length/fraction and min/time/series/length.
+    -- | The maximum number of time points in a time series that can be used in modeling the trend component of the time series. Don\'t use this option with the @timeSeriesLengthFraction@ or @minTimeSeriesLength@ options.
     maxTimeSeriesLength :: (Core.Maybe Core.Int64),
     -- | Maximum depth of a tree for boosted tree models.
     maxTreeDepth :: (Core.Maybe Core.Int64),
+    -- | The apriori support minimum. Applies to contribution analysis models.
+    minAprioriSupport :: (Core.Maybe Core.Double),
     -- | When early/stop is true, stops training when accuracy improvement is less than \'min/relative_progress\'. Used only for iterative training algorithms.
     minRelativeProgress :: (Core.Maybe Core.Double),
     -- | Minimum split loss for boosted tree models.
     minSplitLoss :: (Core.Maybe Core.Double),
-    -- | Set fast trend ARIMA/PLUS model minimum training length. Use in pair with time/series/length/fraction.
+    -- | The minimum number of time points in a time series that are used in modeling the trend component of the time series. If you use this option you must also set the @timeSeriesLengthFraction@ option. This training option ensures that enough time points are available when you use @timeSeriesLengthFraction@ in trend modeling. This is particularly important when forecasting multiple time series in a single query using @timeSeriesIdColumn@. If the total number of time points is less than the @minTimeSeriesLength@ value, then the query uses all available time points.
     minTimeSeriesLength :: (Core.Maybe Core.Int64),
     -- | Minimum sum of instance weight needed in a child for boosted tree models.
     minTreeChildWeight :: (Core.Maybe Core.Int64),
+    -- | The model registry.
+    modelRegistry :: (Core.Maybe TrainingOptions_ModelRegistry),
     -- | Google Cloud Storage URI from which the model was imported. Only applicable for imported models.
     modelUri :: (Core.Maybe Core.Text),
     -- | A specification of the non-seasonal part of the ARIMA model: the three components (p, d, q) are the AR order, the degree of differencing, and the MA order.
@@ -10455,36 +13260,52 @@ data TrainingOptions = TrainingOptions
     numFactors :: (Core.Maybe Core.Int64),
     -- | Number of parallel trees constructed during each iteration for boosted tree models.
     numParallelTree :: (Core.Maybe Core.Int64),
+    -- | Number of principal components to keep in the PCA model. Must be \<= the number of features.
+    numPrincipalComponents :: (Core.Maybe Core.Int64),
     -- | Number of trials to run this hyperparameter tuning job.
     numTrials :: (Core.Maybe Core.Int64),
     -- | Optimization strategy for training linear regression models.
     optimizationStrategy :: (Core.Maybe TrainingOptions_OptimizationStrategy),
-    -- | Whether to preserve the input structs in output feature names. Suppose there is a struct A with field b. When false (default), the output feature name is A_b. When true, the output feature name is A.b.
-    preserveInputStructs :: (Core.Maybe Core.Bool),
+    -- | Optimizer used for training the neural nets.
+    optimizer :: (Core.Maybe Core.Text),
+    -- | The minimum ratio of cumulative explained variance that needs to be given by the PCA model.
+    pcaExplainedVarianceRatio :: (Core.Maybe Core.Double),
+    -- | The solver for PCA.
+    pcaSolver :: (Core.Maybe TrainingOptions_PcaSolver),
     -- | Number of paths for the sampled Shapley explain method.
     sampledShapleyNumPaths :: (Core.Maybe Core.Int64),
+    -- | If true, scale the feature values by dividing the feature standard deviation. Currently only apply to PCA.
+    scaleFeatures :: (Core.Maybe Core.Bool),
+    -- | Whether to standardize numerical features. Default to true.
+    standardizeFeatures :: (Core.Maybe Core.Bool),
     -- | Subsample fraction of the training data to grow tree to prevent overfitting for boosted tree models.
     subsample :: (Core.Maybe Core.Double),
+    -- | Based on the selected TF version, the corresponding docker image is used to train external models.
+    tfVersion :: (Core.Maybe Core.Text),
     -- | Column to be designated as time series data for ARIMA model.
     timeSeriesDataColumn :: (Core.Maybe Core.Text),
     -- | The time series id column that was used during ARIMA model training.
     timeSeriesIdColumn :: (Core.Maybe Core.Text),
     -- | The time series id columns that were used during ARIMA model training.
     timeSeriesIdColumns :: (Core.Maybe [Core.Text]),
-    -- | Get truncated length by fraction in time series.
+    -- | The fraction of the interpolated length of the time series that\'s used to model the time series trend component. All of the time points of the time series are used to model the non-trend component. This training option accelerates modeling training without sacrificing much forecasting accuracy. You can use this option with @minTimeSeriesLength@ but not with @maxTimeSeriesLength@.
     timeSeriesLengthFraction :: (Core.Maybe Core.Double),
     -- | Column to be designated as time series timestamp for ARIMA model.
     timeSeriesTimestampColumn :: (Core.Maybe Core.Text),
     -- | Tree construction algorithm for boosted tree models.
     treeMethod :: (Core.Maybe TrainingOptions_TreeMethod),
-    -- | The smoothing window size for the trend component of the time series.
+    -- | Smoothing window size for the trend component. When a positive value is specified, a center moving average smoothing is applied on the history trend. When the smoothing window is out of the boundary at the beginning or the end of the trend, the first element or the last element is padded to fill the smoothing window before the average is applied.
     trendSmoothingWindowSize :: (Core.Maybe Core.Int64),
     -- | User column specified for matrix factorization models.
     userColumn :: (Core.Maybe Core.Text),
+    -- | The version aliases to apply in Vertex AI model registry. Always overwrite if the version aliases exists in a existing model.
+    vertexAiModelVersionAliases :: (Core.Maybe [Core.Text]),
     -- | Hyperparameter for matrix factoration when implicit feedback type is specified.
     walsAlpha :: (Core.Maybe Core.Double),
     -- | Whether to train a model from the last checkpoint.
-    warmStart :: (Core.Maybe Core.Bool)
+    warmStart :: (Core.Maybe Core.Bool),
+    -- | User-selected XGBoost versions for training of XGBoost models.
+    xgboostVersion :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10493,39 +13314,54 @@ newTrainingOptions ::
   TrainingOptions
 newTrainingOptions =
   TrainingOptions
-    { adjustStepChanges = Core.Nothing,
+    { activationFn = Core.Nothing,
+      adjustStepChanges = Core.Nothing,
+      approxGlobalFeatureContrib = Core.Nothing,
       autoArima = Core.Nothing,
       autoArimaMaxOrder = Core.Nothing,
+      autoArimaMinOrder = Core.Nothing,
+      autoClassWeights = Core.Nothing,
       batchSize = Core.Nothing,
       boosterType = Core.Nothing,
+      budgetHours = Core.Nothing,
       calculatePValues = Core.Nothing,
+      categoryEncodingMethod = Core.Nothing,
       cleanSpikesAndDips = Core.Nothing,
       colorSpace = Core.Nothing,
       colsampleBylevel = Core.Nothing,
       colsampleBynode = Core.Nothing,
       colsampleBytree = Core.Nothing,
+      contributionMetric = Core.Nothing,
       dartNormalizeType = Core.Nothing,
       dataFrequency = Core.Nothing,
       dataSplitColumn = Core.Nothing,
       dataSplitEvalFraction = Core.Nothing,
       dataSplitMethod = Core.Nothing,
       decomposeTimeSeries = Core.Nothing,
+      dimensionIdColumns = Core.Nothing,
       distanceType = Core.Nothing,
       dropout = Core.Nothing,
       earlyStop = Core.Nothing,
       enableGlobalExplain = Core.Nothing,
       feedbackType = Core.Nothing,
+      fitIntercept = Core.Nothing,
+      forecastLimitLowerBound = Core.Nothing,
+      forecastLimitUpperBound = Core.Nothing,
       hiddenUnits = Core.Nothing,
       holidayRegion = Core.Nothing,
+      holidayRegions = Core.Nothing,
       horizon = Core.Nothing,
       hparamTuningObjectives = Core.Nothing,
       includeDrift = Core.Nothing,
       initialLearnRate = Core.Nothing,
       inputLabelColumns = Core.Nothing,
+      instanceWeightColumn = Core.Nothing,
       integratedGradientsNumSteps = Core.Nothing,
+      isTestColumn = Core.Nothing,
       itemColumn = Core.Nothing,
       kmeansInitializationColumn = Core.Nothing,
       kmeansInitializationMethod = Core.Nothing,
+      l1RegActivation = Core.Nothing,
       l1Regularization = Core.Nothing,
       l2Regularization = Core.Nothing,
       labelClassWeights = Core.Nothing,
@@ -10536,20 +13372,28 @@ newTrainingOptions =
       maxParallelTrials = Core.Nothing,
       maxTimeSeriesLength = Core.Nothing,
       maxTreeDepth = Core.Nothing,
+      minAprioriSupport = Core.Nothing,
       minRelativeProgress = Core.Nothing,
       minSplitLoss = Core.Nothing,
       minTimeSeriesLength = Core.Nothing,
       minTreeChildWeight = Core.Nothing,
+      modelRegistry = Core.Nothing,
       modelUri = Core.Nothing,
       nonSeasonalOrder = Core.Nothing,
       numClusters = Core.Nothing,
       numFactors = Core.Nothing,
       numParallelTree = Core.Nothing,
+      numPrincipalComponents = Core.Nothing,
       numTrials = Core.Nothing,
       optimizationStrategy = Core.Nothing,
-      preserveInputStructs = Core.Nothing,
+      optimizer = Core.Nothing,
+      pcaExplainedVarianceRatio = Core.Nothing,
+      pcaSolver = Core.Nothing,
       sampledShapleyNumPaths = Core.Nothing,
+      scaleFeatures = Core.Nothing,
+      standardizeFeatures = Core.Nothing,
       subsample = Core.Nothing,
+      tfVersion = Core.Nothing,
       timeSeriesDataColumn = Core.Nothing,
       timeSeriesIdColumn = Core.Nothing,
       timeSeriesIdColumns = Core.Nothing,
@@ -10558,8 +13402,10 @@ newTrainingOptions =
       treeMethod = Core.Nothing,
       trendSmoothingWindowSize = Core.Nothing,
       userColumn = Core.Nothing,
+      vertexAiModelVersionAliases = Core.Nothing,
       walsAlpha = Core.Nothing,
-      warmStart = Core.Nothing
+      warmStart = Core.Nothing,
+      xgboostVersion = Core.Nothing
     }
 
 instance Core.FromJSON TrainingOptions where
@@ -10568,214 +13414,241 @@ instance Core.FromJSON TrainingOptions where
       "TrainingOptions"
       ( \o ->
           TrainingOptions
-            Core.<$> (o Core..:? "adjustStepChanges")
+            Core.<$> (o Core..:? "activationFn")
+            Core.<*> (o Core..:? "adjustStepChanges")
+            Core.<*> (o Core..:? "approxGlobalFeatureContrib")
             Core.<*> (o Core..:? "autoArima")
-            Core.<*> ( o Core..:? "autoArimaMaxOrder"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "batchSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "autoArimaMaxOrder" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "autoArimaMinOrder" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "autoClassWeights")
+            Core.<*> (o Core..:? "batchSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "boosterType")
+            Core.<*> (o Core..:? "budgetHours")
             Core.<*> (o Core..:? "calculatePValues")
+            Core.<*> (o Core..:? "categoryEncodingMethod")
             Core.<*> (o Core..:? "cleanSpikesAndDips")
             Core.<*> (o Core..:? "colorSpace")
             Core.<*> (o Core..:? "colsampleBylevel")
             Core.<*> (o Core..:? "colsampleBynode")
             Core.<*> (o Core..:? "colsampleBytree")
+            Core.<*> (o Core..:? "contributionMetric")
             Core.<*> (o Core..:? "dartNormalizeType")
             Core.<*> (o Core..:? "dataFrequency")
             Core.<*> (o Core..:? "dataSplitColumn")
             Core.<*> (o Core..:? "dataSplitEvalFraction")
             Core.<*> (o Core..:? "dataSplitMethod")
             Core.<*> (o Core..:? "decomposeTimeSeries")
+            Core.<*> (o Core..:? "dimensionIdColumns")
             Core.<*> (o Core..:? "distanceType")
             Core.<*> (o Core..:? "dropout")
             Core.<*> (o Core..:? "earlyStop")
             Core.<*> (o Core..:? "enableGlobalExplain")
             Core.<*> (o Core..:? "feedbackType")
-            Core.<*> ( o Core..:? "hiddenUnits"
+            Core.<*> (o Core..:? "fitIntercept")
+            Core.<*> (o Core..:? "forecastLimitLowerBound")
+            Core.<*> (o Core..:? "forecastLimitUpperBound")
+            Core.<*> ( o
+                         Core..:? "hiddenUnits"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "holidayRegion")
-            Core.<*> ( o Core..:? "horizon"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "holidayRegions")
+            Core.<*> (o Core..:? "horizon" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "hparamTuningObjectives")
             Core.<*> (o Core..:? "includeDrift")
             Core.<*> (o Core..:? "initialLearnRate")
             Core.<*> (o Core..:? "inputLabelColumns")
-            Core.<*> ( o Core..:? "integratedGradientsNumSteps"
+            Core.<*> (o Core..:? "instanceWeightColumn")
+            Core.<*> ( o
+                         Core..:? "integratedGradientsNumSteps"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "isTestColumn")
             Core.<*> (o Core..:? "itemColumn")
             Core.<*> (o Core..:? "kmeansInitializationColumn")
             Core.<*> (o Core..:? "kmeansInitializationMethod")
+            Core.<*> (o Core..:? "l1RegActivation")
             Core.<*> (o Core..:? "l1Regularization")
             Core.<*> (o Core..:? "l2Regularization")
             Core.<*> (o Core..:? "labelClassWeights")
             Core.<*> (o Core..:? "learnRate")
             Core.<*> (o Core..:? "learnRateStrategy")
             Core.<*> (o Core..:? "lossType")
-            Core.<*> ( o Core..:? "maxIterations"
+            Core.<*> (o Core..:? "maxIterations" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxParallelTrials" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "maxTimeSeriesLength"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "maxParallelTrials"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxTimeSeriesLength"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxTreeDepth"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxTreeDepth" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minAprioriSupport")
             Core.<*> (o Core..:? "minRelativeProgress")
             Core.<*> (o Core..:? "minSplitLoss")
-            Core.<*> ( o Core..:? "minTimeSeriesLength"
+            Core.<*> ( o
+                         Core..:? "minTimeSeriesLength"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "minTreeChildWeight"
+            Core.<*> ( o
+                         Core..:? "minTreeChildWeight"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "modelRegistry")
             Core.<*> (o Core..:? "modelUri")
             Core.<*> (o Core..:? "nonSeasonalOrder")
-            Core.<*> ( o Core..:? "numClusters"
+            Core.<*> (o Core..:? "numClusters" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numFactors" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numParallelTree" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "numPrincipalComponents"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "numFactors"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "numParallelTree"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "numTrials"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numTrials" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "optimizationStrategy")
-            Core.<*> (o Core..:? "preserveInputStructs")
-            Core.<*> ( o Core..:? "sampledShapleyNumPaths"
+            Core.<*> (o Core..:? "optimizer")
+            Core.<*> (o Core..:? "pcaExplainedVarianceRatio")
+            Core.<*> (o Core..:? "pcaSolver")
+            Core.<*> ( o
+                         Core..:? "sampledShapleyNumPaths"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "scaleFeatures")
+            Core.<*> (o Core..:? "standardizeFeatures")
             Core.<*> (o Core..:? "subsample")
+            Core.<*> (o Core..:? "tfVersion")
             Core.<*> (o Core..:? "timeSeriesDataColumn")
             Core.<*> (o Core..:? "timeSeriesIdColumn")
             Core.<*> (o Core..:? "timeSeriesIdColumns")
             Core.<*> (o Core..:? "timeSeriesLengthFraction")
             Core.<*> (o Core..:? "timeSeriesTimestampColumn")
             Core.<*> (o Core..:? "treeMethod")
-            Core.<*> ( o Core..:? "trendSmoothingWindowSize"
+            Core.<*> ( o
+                         Core..:? "trendSmoothingWindowSize"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "userColumn")
+            Core.<*> (o Core..:? "vertexAiModelVersionAliases")
             Core.<*> (o Core..:? "walsAlpha")
             Core.<*> (o Core..:? "warmStart")
+            Core.<*> (o Core..:? "xgboostVersion")
       )
 
 instance Core.ToJSON TrainingOptions where
   toJSON TrainingOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adjustStepChanges" Core..=)
-              Core.<$> adjustStepChanges,
+          [ ("activationFn" Core..=) Core.<$> activationFn,
+            ("adjustStepChanges" Core..=) Core.<$> adjustStepChanges,
+            ("approxGlobalFeatureContrib" Core..=)
+              Core.<$> approxGlobalFeatureContrib,
             ("autoArima" Core..=) Core.<$> autoArima,
-            ("autoArimaMaxOrder" Core..=) Core.. Core.AsText
+            ("autoArimaMaxOrder" Core..=)
+              Core.. Core.AsText
               Core.<$> autoArimaMaxOrder,
-            ("batchSize" Core..=) Core.. Core.AsText
-              Core.<$> batchSize,
+            ("autoArimaMinOrder" Core..=)
+              Core.. Core.AsText
+              Core.<$> autoArimaMinOrder,
+            ("autoClassWeights" Core..=) Core.<$> autoClassWeights,
+            ("batchSize" Core..=) Core.. Core.AsText Core.<$> batchSize,
             ("boosterType" Core..=) Core.<$> boosterType,
-            ("calculatePValues" Core..=)
-              Core.<$> calculatePValues,
-            ("cleanSpikesAndDips" Core..=)
-              Core.<$> cleanSpikesAndDips,
+            ("budgetHours" Core..=) Core.<$> budgetHours,
+            ("calculatePValues" Core..=) Core.<$> calculatePValues,
+            ("categoryEncodingMethod" Core..=) Core.<$> categoryEncodingMethod,
+            ("cleanSpikesAndDips" Core..=) Core.<$> cleanSpikesAndDips,
             ("colorSpace" Core..=) Core.<$> colorSpace,
-            ("colsampleBylevel" Core..=)
-              Core.<$> colsampleBylevel,
+            ("colsampleBylevel" Core..=) Core.<$> colsampleBylevel,
             ("colsampleBynode" Core..=) Core.<$> colsampleBynode,
             ("colsampleBytree" Core..=) Core.<$> colsampleBytree,
-            ("dartNormalizeType" Core..=)
-              Core.<$> dartNormalizeType,
+            ("contributionMetric" Core..=) Core.<$> contributionMetric,
+            ("dartNormalizeType" Core..=) Core.<$> dartNormalizeType,
             ("dataFrequency" Core..=) Core.<$> dataFrequency,
             ("dataSplitColumn" Core..=) Core.<$> dataSplitColumn,
-            ("dataSplitEvalFraction" Core..=)
-              Core.<$> dataSplitEvalFraction,
+            ("dataSplitEvalFraction" Core..=) Core.<$> dataSplitEvalFraction,
             ("dataSplitMethod" Core..=) Core.<$> dataSplitMethod,
-            ("decomposeTimeSeries" Core..=)
-              Core.<$> decomposeTimeSeries,
+            ("decomposeTimeSeries" Core..=) Core.<$> decomposeTimeSeries,
+            ("dimensionIdColumns" Core..=) Core.<$> dimensionIdColumns,
             ("distanceType" Core..=) Core.<$> distanceType,
             ("dropout" Core..=) Core.<$> dropout,
             ("earlyStop" Core..=) Core.<$> earlyStop,
-            ("enableGlobalExplain" Core..=)
-              Core.<$> enableGlobalExplain,
+            ("enableGlobalExplain" Core..=) Core.<$> enableGlobalExplain,
             ("feedbackType" Core..=) Core.<$> feedbackType,
-            ("hiddenUnits" Core..=) Core.. Core.fmap Core.AsText
+            ("fitIntercept" Core..=) Core.<$> fitIntercept,
+            ("forecastLimitLowerBound" Core..=)
+              Core.<$> forecastLimitLowerBound,
+            ("forecastLimitUpperBound" Core..=)
+              Core.<$> forecastLimitUpperBound,
+            ("hiddenUnits" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> hiddenUnits,
             ("holidayRegion" Core..=) Core.<$> holidayRegion,
-            ("horizon" Core..=) Core.. Core.AsText
-              Core.<$> horizon,
-            ("hparamTuningObjectives" Core..=)
-              Core.<$> hparamTuningObjectives,
+            ("holidayRegions" Core..=) Core.<$> holidayRegions,
+            ("horizon" Core..=) Core.. Core.AsText Core.<$> horizon,
+            ("hparamTuningObjectives" Core..=) Core.<$> hparamTuningObjectives,
             ("includeDrift" Core..=) Core.<$> includeDrift,
-            ("initialLearnRate" Core..=)
-              Core.<$> initialLearnRate,
-            ("inputLabelColumns" Core..=)
-              Core.<$> inputLabelColumns,
+            ("initialLearnRate" Core..=) Core.<$> initialLearnRate,
+            ("inputLabelColumns" Core..=) Core.<$> inputLabelColumns,
+            ("instanceWeightColumn" Core..=) Core.<$> instanceWeightColumn,
             ("integratedGradientsNumSteps" Core..=)
               Core.. Core.AsText
               Core.<$> integratedGradientsNumSteps,
+            ("isTestColumn" Core..=) Core.<$> isTestColumn,
             ("itemColumn" Core..=) Core.<$> itemColumn,
             ("kmeansInitializationColumn" Core..=)
               Core.<$> kmeansInitializationColumn,
             ("kmeansInitializationMethod" Core..=)
               Core.<$> kmeansInitializationMethod,
-            ("l1Regularization" Core..=)
-              Core.<$> l1Regularization,
-            ("l2Regularization" Core..=)
-              Core.<$> l2Regularization,
-            ("labelClassWeights" Core..=)
-              Core.<$> labelClassWeights,
+            ("l1RegActivation" Core..=) Core.<$> l1RegActivation,
+            ("l1Regularization" Core..=) Core.<$> l1Regularization,
+            ("l2Regularization" Core..=) Core.<$> l2Regularization,
+            ("labelClassWeights" Core..=) Core.<$> labelClassWeights,
             ("learnRate" Core..=) Core.<$> learnRate,
-            ("learnRateStrategy" Core..=)
-              Core.<$> learnRateStrategy,
+            ("learnRateStrategy" Core..=) Core.<$> learnRateStrategy,
             ("lossType" Core..=) Core.<$> lossType,
-            ("maxIterations" Core..=) Core.. Core.AsText
+            ("maxIterations" Core..=)
+              Core.. Core.AsText
               Core.<$> maxIterations,
-            ("maxParallelTrials" Core..=) Core.. Core.AsText
+            ("maxParallelTrials" Core..=)
+              Core.. Core.AsText
               Core.<$> maxParallelTrials,
-            ("maxTimeSeriesLength" Core..=) Core.. Core.AsText
+            ("maxTimeSeriesLength" Core..=)
+              Core.. Core.AsText
               Core.<$> maxTimeSeriesLength,
-            ("maxTreeDepth" Core..=) Core.. Core.AsText
-              Core.<$> maxTreeDepth,
-            ("minRelativeProgress" Core..=)
-              Core.<$> minRelativeProgress,
+            ("maxTreeDepth" Core..=) Core.. Core.AsText Core.<$> maxTreeDepth,
+            ("minAprioriSupport" Core..=) Core.<$> minAprioriSupport,
+            ("minRelativeProgress" Core..=) Core.<$> minRelativeProgress,
             ("minSplitLoss" Core..=) Core.<$> minSplitLoss,
-            ("minTimeSeriesLength" Core..=) Core.. Core.AsText
+            ("minTimeSeriesLength" Core..=)
+              Core.. Core.AsText
               Core.<$> minTimeSeriesLength,
-            ("minTreeChildWeight" Core..=) Core.. Core.AsText
+            ("minTreeChildWeight" Core..=)
+              Core.. Core.AsText
               Core.<$> minTreeChildWeight,
+            ("modelRegistry" Core..=) Core.<$> modelRegistry,
             ("modelUri" Core..=) Core.<$> modelUri,
-            ("nonSeasonalOrder" Core..=)
-              Core.<$> nonSeasonalOrder,
-            ("numClusters" Core..=) Core.. Core.AsText
-              Core.<$> numClusters,
-            ("numFactors" Core..=) Core.. Core.AsText
-              Core.<$> numFactors,
-            ("numParallelTree" Core..=) Core.. Core.AsText
+            ("nonSeasonalOrder" Core..=) Core.<$> nonSeasonalOrder,
+            ("numClusters" Core..=) Core.. Core.AsText Core.<$> numClusters,
+            ("numFactors" Core..=) Core.. Core.AsText Core.<$> numFactors,
+            ("numParallelTree" Core..=)
+              Core.. Core.AsText
               Core.<$> numParallelTree,
-            ("numTrials" Core..=) Core.. Core.AsText
-              Core.<$> numTrials,
-            ("optimizationStrategy" Core..=)
-              Core.<$> optimizationStrategy,
-            ("preserveInputStructs" Core..=)
-              Core.<$> preserveInputStructs,
-            ("sampledShapleyNumPaths" Core..=) Core.. Core.AsText
+            ("numPrincipalComponents" Core..=)
+              Core.. Core.AsText
+              Core.<$> numPrincipalComponents,
+            ("numTrials" Core..=) Core.. Core.AsText Core.<$> numTrials,
+            ("optimizationStrategy" Core..=) Core.<$> optimizationStrategy,
+            ("optimizer" Core..=) Core.<$> optimizer,
+            ("pcaExplainedVarianceRatio" Core..=)
+              Core.<$> pcaExplainedVarianceRatio,
+            ("pcaSolver" Core..=) Core.<$> pcaSolver,
+            ("sampledShapleyNumPaths" Core..=)
+              Core.. Core.AsText
               Core.<$> sampledShapleyNumPaths,
+            ("scaleFeatures" Core..=) Core.<$> scaleFeatures,
+            ("standardizeFeatures" Core..=) Core.<$> standardizeFeatures,
             ("subsample" Core..=) Core.<$> subsample,
-            ("timeSeriesDataColumn" Core..=)
-              Core.<$> timeSeriesDataColumn,
-            ("timeSeriesIdColumn" Core..=)
-              Core.<$> timeSeriesIdColumn,
-            ("timeSeriesIdColumns" Core..=)
-              Core.<$> timeSeriesIdColumns,
+            ("tfVersion" Core..=) Core.<$> tfVersion,
+            ("timeSeriesDataColumn" Core..=) Core.<$> timeSeriesDataColumn,
+            ("timeSeriesIdColumn" Core..=) Core.<$> timeSeriesIdColumn,
+            ("timeSeriesIdColumns" Core..=) Core.<$> timeSeriesIdColumns,
             ("timeSeriesLengthFraction" Core..=)
               Core.<$> timeSeriesLengthFraction,
             ("timeSeriesTimestampColumn" Core..=)
@@ -10785,8 +13658,11 @@ instance Core.ToJSON TrainingOptions where
               Core.. Core.AsText
               Core.<$> trendSmoothingWindowSize,
             ("userColumn" Core..=) Core.<$> userColumn,
+            ("vertexAiModelVersionAliases" Core..=)
+              Core.<$> vertexAiModelVersionAliases,
             ("walsAlpha" Core..=) Core.<$> walsAlpha,
-            ("warmStart" Core..=) Core.<$> warmStart
+            ("warmStart" Core..=) Core.<$> warmStart,
+            ("xgboostVersion" Core..=) Core.<$> xgboostVersion
           ]
       )
 
@@ -10794,8 +13670,7 @@ instance Core.ToJSON TrainingOptions where
 --
 -- /See:/ 'newTrainingOptions_LabelClassWeights' smart constructor.
 newtype TrainingOptions_LabelClassWeights = TrainingOptions_LabelClassWeights
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Double)
+  { additional :: (Core.HashMap Core.Text Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -10807,10 +13682,7 @@ newTrainingOptions_LabelClassWeights ::
 newTrainingOptions_LabelClassWeights additional =
   TrainingOptions_LabelClassWeights {additional = additional}
 
-instance
-  Core.FromJSON
-    TrainingOptions_LabelClassWeights
-  where
+instance Core.FromJSON TrainingOptions_LabelClassWeights where
   parseJSON =
     Core.withObject
       "TrainingOptions_LabelClassWeights"
@@ -10819,10 +13691,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TrainingOptions_LabelClassWeights
-  where
+instance Core.ToJSON TrainingOptions_LabelClassWeights where
   toJSON TrainingOptions_LabelClassWeights {..} =
     Core.toJSON additional
 
@@ -10883,9 +13752,7 @@ instance Core.FromJSON TrainingRun where
             Core.<*> (o Core..:? "results")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "trainingOptions")
-            Core.<*> ( o Core..:? "trainingStartTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "trainingStartTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "vertexAiModelId")
             Core.<*> (o Core..:? "vertexAiModelVersion")
       )
@@ -10897,25 +13764,25 @@ instance Core.ToJSON TrainingRun where
           [ ("classLevelGlobalExplanations" Core..=)
               Core.<$> classLevelGlobalExplanations,
             ("dataSplitResult" Core..=) Core.<$> dataSplitResult,
-            ("evaluationMetrics" Core..=)
-              Core.<$> evaluationMetrics,
+            ("evaluationMetrics" Core..=) Core.<$> evaluationMetrics,
             ("modelLevelGlobalExplanation" Core..=)
               Core.<$> modelLevelGlobalExplanation,
             ("results" Core..=) Core.<$> results,
             ("startTime" Core..=) Core.<$> startTime,
             ("trainingOptions" Core..=) Core.<$> trainingOptions,
-            ("trainingStartTime" Core..=) Core.. Core.AsText
+            ("trainingStartTime" Core..=)
+              Core.. Core.AsText
               Core.<$> trainingStartTime,
             ("vertexAiModelId" Core..=) Core.<$> vertexAiModelId,
-            ("vertexAiModelVersion" Core..=)
-              Core.<$> vertexAiModelVersion
+            ("vertexAiModelVersion" Core..=) Core.<$> vertexAiModelVersion
           ]
       )
 
+-- | [Alpha] Information of a multi-statement transaction.
 --
 -- /See:/ 'newTransactionInfo' smart constructor.
 newtype TransactionInfo = TransactionInfo
-  { -- | [Output-only] \/\/ [Alpha] Id of the transaction.
+  { -- | Output only. [Alpha] Id of the transaction.
     transactionId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10929,19 +13796,86 @@ instance Core.FromJSON TransactionInfo where
   parseJSON =
     Core.withObject
       "TransactionInfo"
-      ( \o ->
-          TransactionInfo
-            Core.<$> (o Core..:? "transactionId")
-      )
+      (\o -> TransactionInfo Core.<$> (o Core..:? "transactionId"))
 
 instance Core.ToJSON TransactionInfo where
   toJSON TransactionInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("transactionId" Core..=) Core.<$> transactionId]
+      (Core.catMaybes [("transactionId" Core..=) Core.<$> transactionId])
+
+-- | Information about a single transform column.
+--
+-- /See:/ 'newTransformColumn' smart constructor.
+data TransformColumn = TransformColumn
+  { -- | Output only. Name of the column.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The SQL expression used in the column transform.
+    transformSql :: (Core.Maybe Core.Text),
+    -- | Output only. Data type of the column after the transform.
+    type' :: (Core.Maybe StandardSqlDataType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TransformColumn' with the minimum fields required to make a request.
+newTransformColumn ::
+  TransformColumn
+newTransformColumn =
+  TransformColumn
+    { name = Core.Nothing,
+      transformSql = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON TransformColumn where
+  parseJSON =
+    Core.withObject
+      "TransformColumn"
+      ( \o ->
+          TransformColumn
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "transformSql")
+            Core.<*> (o Core..:? "type")
       )
 
--- | This is used for defining User Defined Function (UDF) resources only when using legacy SQL. Users of Standard SQL should leverage either DDL (e.g. CREATE [TEMPORARY] FUNCTION ... ) or the Routines API to define UDF resources. For additional information on migrating, see: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/migrating-from-legacy-sql#differences/in/user-defined/javascript/functions
+instance Core.ToJSON TransformColumn where
+  toJSON TransformColumn {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("transformSql" Core..=) Core.<$> transformSql,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Request format for undeleting a dataset.
+--
+-- /See:/ 'newUndeleteDatasetRequest' smart constructor.
+newtype UndeleteDatasetRequest = UndeleteDatasetRequest
+  { -- | Optional. The exact time when the dataset was deleted. If not specified, the most recently deleted version is undeleted. Undeleting a dataset using deletion time is not supported.
+    deletionTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UndeleteDatasetRequest' with the minimum fields required to make a request.
+newUndeleteDatasetRequest ::
+  UndeleteDatasetRequest
+newUndeleteDatasetRequest =
+  UndeleteDatasetRequest {deletionTime = Core.Nothing}
+
+instance Core.FromJSON UndeleteDatasetRequest where
+  parseJSON =
+    Core.withObject
+      "UndeleteDatasetRequest"
+      ( \o ->
+          UndeleteDatasetRequest Core.<$> (o Core..:? "deletionTime")
+      )
+
+instance Core.ToJSON UndeleteDatasetRequest where
+  toJSON UndeleteDatasetRequest {..} =
+    Core.object
+      (Core.catMaybes [("deletionTime" Core..=) Core.<$> deletionTime])
+
+-- | This is used for defining User Defined Function (UDF) resources only when using legacy SQL. Users of GoogleSQL should leverage either DDL (e.g. CREATE [TEMPORARY] FUNCTION ... ) or the Routines API to define UDF resources. For additional information on migrating, see: https:\/\/cloud.google.com\/bigquery\/docs\/reference\/standard-sql\/migrating-from-legacy-sql#differences/in/user-defined/javascript/functions
 --
 -- /See:/ 'newUserDefinedFunctionResource' smart constructor.
 data UserDefinedFunctionResource = UserDefinedFunctionResource
@@ -10980,14 +13914,63 @@ instance Core.ToJSON UserDefinedFunctionResource where
           ]
       )
 
+-- | Statistics for a vector search query. Populated as part of JobStatistics2.
+--
+-- /See:/ 'newVectorSearchStatistics' smart constructor.
+data VectorSearchStatistics = VectorSearchStatistics
+  { -- | When @indexUsageMode@ is @UNUSED@ or @PARTIALLY_USED@, this field explains why indexes were not used in all or part of the vector search query. If @indexUsageMode@ is @FULLY_USED@, this field is not populated.
+    indexUnusedReasons :: (Core.Maybe [IndexUnusedReason]),
+    -- | Specifies the index usage mode for the query.
+    indexUsageMode :: (Core.Maybe VectorSearchStatistics_IndexUsageMode),
+    -- | Specifies the usage of stored columns in the query when stored columns are used in the query.
+    storedColumnsUsages :: (Core.Maybe [StoredColumnsUsage])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VectorSearchStatistics' with the minimum fields required to make a request.
+newVectorSearchStatistics ::
+  VectorSearchStatistics
+newVectorSearchStatistics =
+  VectorSearchStatistics
+    { indexUnusedReasons = Core.Nothing,
+      indexUsageMode = Core.Nothing,
+      storedColumnsUsages = Core.Nothing
+    }
+
+instance Core.FromJSON VectorSearchStatistics where
+  parseJSON =
+    Core.withObject
+      "VectorSearchStatistics"
+      ( \o ->
+          VectorSearchStatistics
+            Core.<$> (o Core..:? "indexUnusedReasons")
+            Core.<*> (o Core..:? "indexUsageMode")
+            Core.<*> (o Core..:? "storedColumnsUsages")
+      )
+
+instance Core.ToJSON VectorSearchStatistics where
+  toJSON VectorSearchStatistics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("indexUnusedReasons" Core..=) Core.<$> indexUnusedReasons,
+            ("indexUsageMode" Core..=) Core.<$> indexUsageMode,
+            ("storedColumnsUsages" Core..=) Core.<$> storedColumnsUsages
+          ]
+      )
+
+-- | Describes the definition of a logical view.
 --
 -- /See:/ 'newViewDefinition' smart constructor.
 data ViewDefinition = ViewDefinition
-  { -- | [Required] A query that BigQuery executes when the view is referenced.
+  { -- | Optional. Foreign view representations.
+    foreignDefinitions :: (Core.Maybe [ForeignViewDefinition]),
+    -- | Optional. Specifies the privacy policy for the view.
+    privacyPolicy :: (Core.Maybe PrivacyPolicy),
+    -- | Required. A query that BigQuery executes when the view is referenced.
     query :: (Core.Maybe Core.Text),
-    -- | True if the column names are explicitly specified. For example by using the \'CREATE VIEW v(c1, c2) AS ...\' syntax. Can only be set using BigQuery\'s standard SQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/
+    -- | True if the column names are explicitly specified. For example by using the \'CREATE VIEW v(c1, c2) AS ...\' syntax. Can only be set for GoogleSQL views.
     useExplicitColumnNames :: (Core.Maybe Core.Bool),
-    -- | Specifies whether to use BigQuery\'s legacy SQL for this view. The default value is true. If set to false, the view will use BigQuery\'s standard SQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ Queries and views that reference this view must use the same flag value.
+    -- | Specifies whether to use BigQuery\'s legacy SQL for this view. The default value is true. If set to false, the view will use BigQuery\'s GoogleSQL: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ Queries and views that reference this view must use the same flag value. A wrapper is used here because the default value is True.
     useLegacySql :: (Core.Maybe Core.Bool),
     -- | Describes user-defined function resources used in the query.
     userDefinedFunctionResources :: (Core.Maybe [UserDefinedFunctionResource])
@@ -10999,7 +13982,9 @@ newViewDefinition ::
   ViewDefinition
 newViewDefinition =
   ViewDefinition
-    { query = Core.Nothing,
+    { foreignDefinitions = Core.Nothing,
+      privacyPolicy = Core.Nothing,
+      query = Core.Nothing,
       useExplicitColumnNames = Core.Nothing,
       useLegacySql = Core.Nothing,
       userDefinedFunctionResources = Core.Nothing
@@ -11011,7 +13996,9 @@ instance Core.FromJSON ViewDefinition where
       "ViewDefinition"
       ( \o ->
           ViewDefinition
-            Core.<$> (o Core..:? "query")
+            Core.<$> (o Core..:? "foreignDefinitions")
+            Core.<*> (o Core..:? "privacyPolicy")
+            Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "useExplicitColumnNames")
             Core.<*> (o Core..:? "useLegacySql")
             Core.<*> (o Core..:? "userDefinedFunctionResources")
@@ -11021,9 +14008,10 @@ instance Core.ToJSON ViewDefinition where
   toJSON ViewDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("query" Core..=) Core.<$> query,
-            ("useExplicitColumnNames" Core..=)
-              Core.<$> useExplicitColumnNames,
+          [ ("foreignDefinitions" Core..=) Core.<$> foreignDefinitions,
+            ("privacyPolicy" Core..=) Core.<$> privacyPolicy,
+            ("query" Core..=) Core.<$> query,
+            ("useExplicitColumnNames" Core..=) Core.<$> useExplicitColumnNames,
             ("useLegacySql" Core..=) Core.<$> useLegacySql,
             ("userDefinedFunctionResources" Core..=)
               Core.<$> userDefinedFunctionResources

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.MachineLearning.Internal.Sum
@@ -285,7 +283,7 @@ module Gogol.MachineLearning.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -590,19 +588,15 @@ newtype GoogleCloudMlV1__Capability_Type = GoogleCloudMlV1__Capability_Type {fro
       Core.FromJSONKey
     )
 
--- |
 pattern GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_TYPEUNSPECIFIED = GoogleCloudMlV1__Capability_Type "TYPE_UNSPECIFIED"
 
--- |
 pattern GoogleCloudMlV1__Capability_Type_Training :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_Training = GoogleCloudMlV1__Capability_Type "TRAINING"
 
--- |
 pattern GoogleCloudMlV1__Capability_Type_BATCHPREDICTION :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_BATCHPREDICTION = GoogleCloudMlV1__Capability_Type "BATCH_PREDICTION"
 
--- |
 pattern GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION :: GoogleCloudMlV1__Capability_Type
 pattern GoogleCloudMlV1__Capability_Type_ONLINEPREDICTION = GoogleCloudMlV1__Capability_Type "ONLINE_PREDICTION"
 

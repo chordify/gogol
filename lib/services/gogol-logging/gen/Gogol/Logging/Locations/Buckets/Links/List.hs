@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Locations.Buckets.Links.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.Locations.Buckets.Links.List
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.locations.buckets.links.list@ method which the
 -- 'LoggingLocationsBucketsLinksList' request conforms to.
@@ -72,7 +70,7 @@ data LoggingLocationsBucketsLinksList = LoggingLocationsBucketsLinksList
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. If present, then retrieve the next batch of results from the preceding call to this method. pageToken must be the value of nextPageToken from the previous response.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/
+    -- | Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\"
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +81,7 @@ data LoggingLocationsBucketsLinksList = LoggingLocationsBucketsLinksList
 
 -- | Creates a value of 'LoggingLocationsBucketsLinksList' with the minimum fields required to make a request.
 newLoggingLocationsBucketsLinksList ::
-  -- |  Required. The parent resource whose links are to be listed:\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET_ID\/ See 'parent'.
+  -- |  Required. The parent resource whose links are to be listed: \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET_ID]\" See 'parent'.
   Core.Text ->
   LoggingLocationsBucketsLinksList
 newLoggingLocationsBucketsLinksList parent =
@@ -98,13 +96,8 @@ newLoggingLocationsBucketsLinksList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingLocationsBucketsLinksList
-  where
-  type
-    Rs LoggingLocationsBucketsLinksList =
-      ListLinksResponse
+instance Core.GoogleRequest LoggingLocationsBucketsLinksList where
+  type Rs LoggingLocationsBucketsLinksList = ListLinksResponse
   type
     Scopes LoggingLocationsBucketsLinksList =
       '[ CloudPlatform'FullControl,
@@ -127,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LoggingLocationsBucketsLinksListResource
-          )
+          (Core.Proxy :: Core.Proxy LoggingLocationsBucketsLinksListResource)
           Core.mempty

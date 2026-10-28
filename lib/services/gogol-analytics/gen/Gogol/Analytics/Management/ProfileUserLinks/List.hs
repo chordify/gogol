@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ProfileUserLinks.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ProfileUserLinks.List
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profileUserLinks.list@ method which the
 -- 'AnalyticsManagementProfileUserLinksList' request conforms to.
@@ -86,42 +84,36 @@ newAnalyticsManagementProfileUserLinksList ::
   -- |  Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or \'~all\', which refers to all the web properties that user has access to. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfileUserLinksList
-newAnalyticsManagementProfileUserLinksList accountId profileId webPropertyId =
-  AnalyticsManagementProfileUserLinksList
-    { accountId = accountId,
-      maxResults = Core.Nothing,
-      profileId = profileId,
-      startIndex = Core.Nothing,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementProfileUserLinksList
+  accountId
+  profileId
+  webPropertyId =
     AnalyticsManagementProfileUserLinksList
-  where
-  type
-    Rs AnalyticsManagementProfileUserLinksList =
-      EntityUserLinks
+      { accountId = accountId,
+        maxResults = Core.Nothing,
+        profileId = profileId,
+        startIndex = Core.Nothing,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementProfileUserLinksList where
+  type Rs AnalyticsManagementProfileUserLinksList = EntityUserLinks
   type
     Scopes AnalyticsManagementProfileUserLinksList =
-      '[ Analytics'Manage'Users,
-         Analytics'Manage'Users'Readonly
-       ]
-  requestClient
-    AnalyticsManagementProfileUserLinksList {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        maxResults
-        startIndex
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementProfileUserLinksListResource
-            )
-            Core.mempty
+      '[Analytics'Manage'Users, Analytics'Manage'Users'Readonly]
+  requestClient AnalyticsManagementProfileUserLinksList {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      maxResults
+      startIndex
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementProfileUserLinksListResource
+          )
+          Core.mempty

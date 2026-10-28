@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Create
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.create@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresCreate' request conforms to.
@@ -68,9 +66,9 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresCreate = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the HL7v2 store that is being created. The string must match the following regex: @[\\p{L}\\p{N}_\\-\\.]{1,256}@.
+    -- | Required. The ID of the HL7v2 store that is being created. The string must match the following regex: @[\\p{L}\\p{N}_\\-\\.]{1,256}@.
     hl7V2StoreId :: (Core.Maybe Core.Text),
-    -- | The name of the dataset this HL7v2 store belongs to.
+    -- | Required. The name of the dataset this HL7v2 store belongs to.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Hl7V2Store,
@@ -83,35 +81,36 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresCreate = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresCreate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresCreate ::
-  -- |  The name of the dataset this HL7v2 store belongs to. See 'parent'.
+  -- |  Required. The name of the dataset this HL7v2 store belongs to. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Hl7V2Store ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresCreate
-newHealthcareProjectsLocationsDatasetsHl7V2StoresCreate parent payload =
-  HealthcareProjectsLocationsDatasetsHl7V2StoresCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      hl7V2StoreId = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsHl7V2StoresCreate
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsHl7V2StoresCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        hl7V2StoreId = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsHl7V2StoresCreate
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsHl7V2StoresCreate =
+    Rs HealthcareProjectsLocationsDatasetsHl7V2StoresCreate =
       Hl7V2Store
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsHl7V2StoresCreate =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsHl7V2StoresCreate =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresCreate {..} =
       go

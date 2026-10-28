@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patienteverything
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patientevery
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.Patienteverything@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything' request conforms to.
@@ -70,23 +68,23 @@ type HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverythingResource 
 data HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything = HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything
   { -- | V1 error format.
     xgafv :: (Core.Maybe Xgafv),
-    -- | Maximum number of resources in a page. If not specified, 100 is used. May not be larger than 1000.
+    -- | Optional. Maximum number of resources in a page. If not specified, 100 is used. May not be larger than 1000.
     count :: (Core.Maybe Core.Int32),
     -- | Used to retrieve the next or previous page of results when using pagination. Set @_page_token@ to the value of /page/token set in next or previous page links\' url. Next and previous page are returned in the response bundle\'s links field, where @link.relation@ is \"previous\" or \"next\". Omit @_page_token@ if no previous request has been made.
     pageToken :: (Core.Maybe Core.Text),
-    -- | If provided, only resources updated after this time are returned. The time uses the format YYYY-MM-DDThh:mm:ss.sss+zz:zz. For example, @2015-02-07T13:28:17.239+02:00@ or @2017-01-01T00:00:00Z@. The time must be specified to the second and include a time zone.
+    -- | Optional. If provided, only resources updated after this time are returned. The time uses the format YYYY-MM-DDThh:mm:ss.sss+zz:zz. For example, @2015-02-07T13:28:17.239+02:00@ or @2017-01-01T00:00:00Z@. The time must be specified to the second and include a time zone.
     since :: (Core.Maybe Core.Text),
-    -- | String of comma-delimited FHIR resource types. If provided, only resources of the specified resource type(s) are returned. Specifying multiple @_type@ parameters isn\'t supported. For example, the result of @_type=Observation&_type=Encounter@ is undefined. Use @_type=Observation,Encounter@ instead.
+    -- | Optional. String of comma-delimited FHIR resource types. If provided, only resources of the specified resource type(s) are returned. Specifying multiple @_type@ parameters isn\'t supported. For example, the result of @_type=Observation&_type=Encounter@ is undefined. Use @_type=Observation,Encounter@ instead.
     type' :: (Core.Maybe Core.Text),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The response includes records prior to the end date. The date uses the format YYYY-MM-DD. If no end date is provided, all records subsequent to the start date are in scope.
+    -- | Optional. The response includes records prior to the end date. The date uses the format YYYY-MM-DD. If no end date is provided, all records subsequent to the start date are in scope.
     end :: (Core.Maybe Core.Text),
-    -- | Name of the @Patient@ resource for which the information is required.
+    -- | Required. Name of the @Patient@ resource for which the information is required.
     name :: Core.Text,
-    -- | The response includes records subsequent to the start date. The date uses the format YYYY-MM-DD. If no start date is provided, all records prior to the end date are in scope.
+    -- | Optional. The response includes records subsequent to the start date. The date uses the format YYYY-MM-DD. If no start date is provided, all records prior to the end date are in scope.
     start :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -97,24 +95,27 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything = Health
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything ::
-  -- |  Name of the @Patient@ resource for which the information is required. See 'name'.
+  -- |  Required. Name of the @Patient@ resource for which the information is required. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything
-newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything name =
-  HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything
-    { xgafv = Core.Nothing,
-      count = Core.Nothing,
-      pageToken = Core.Nothing,
-      since = Core.Nothing,
-      type' = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      end = Core.Nothing,
-      name = name,
-      start = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything
+  name =
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything
+      { xgafv =
+          Core.Nothing,
+        count = Core.Nothing,
+        pageToken = Core.Nothing,
+        since = Core.Nothing,
+        type' = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        end = Core.Nothing,
+        name = name,
+        start = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -127,7 +128,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverything {..} =
       go

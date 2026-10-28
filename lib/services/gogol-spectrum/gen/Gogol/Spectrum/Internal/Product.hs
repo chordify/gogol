@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spectrum.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Spectrum.Internal.Product
@@ -160,7 +158,7 @@ module Gogol.Spectrum.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spectrum.Internal.Sum
 
 -- | Antenna characteristics provide additional information, such as the antenna height, antenna type, etc. Whether antenna characteristics must be provided in a request depends on the device type and regulatory domain.
@@ -203,8 +201,7 @@ instance Core.ToJSON AntennaCharacteristics where
       ( Core.catMaybes
           [ ("height" Core..=) Core.<$> height,
             ("heightType" Core..=) Core.<$> heightType,
-            ("heightUncertainty" Core..=)
-              Core.<$> heightUncertainty
+            ("heightUncertainty" Core..=) Core.<$> heightUncertainty
           ]
       )
 
@@ -222,7 +219,8 @@ data DatabaseSpec = DatabaseSpec
 -- | Creates a value of 'DatabaseSpec' with the minimum fields required to make a request.
 newDatabaseSpec ::
   DatabaseSpec
-newDatabaseSpec = DatabaseSpec {name = Core.Nothing, uri = Core.Nothing}
+newDatabaseSpec =
+  DatabaseSpec {name = Core.Nothing, uri = Core.Nothing}
 
 instance Core.FromJSON DatabaseSpec where
   parseJSON =
@@ -230,16 +228,15 @@ instance Core.FromJSON DatabaseSpec where
       "DatabaseSpec"
       ( \o ->
           DatabaseSpec
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "uri")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance Core.ToJSON DatabaseSpec where
   toJSON DatabaseSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("uri" Core..=) Core.<$> uri
-          ]
+          [("name" Core..=) Core.<$> name, ("uri" Core..=) Core.<$> uri]
       )
 
 -- | This message is provided by the database to notify devices of an upcoming change to the database URI.
@@ -260,16 +257,12 @@ instance Core.FromJSON DbUpdateSpec where
   parseJSON =
     Core.withObject
       "DbUpdateSpec"
-      ( \o ->
-          DbUpdateSpec Core.<$> (o Core..:? "databases")
-      )
+      (\o -> DbUpdateSpec Core.<$> (o Core..:? "databases"))
 
 instance Core.ToJSON DbUpdateSpec where
   toJSON DbUpdateSpec {..} =
     Core.object
-      ( Core.catMaybes
-          [("databases" Core..=) Core.<$> databases]
-      )
+      (Core.catMaybes [("databases" Core..=) Core.<$> databases])
 
 -- | Device capabilities provide additional information that may be used by a device to provide additional information to the database that may help it to determine available spectrum. If the database does not support device capabilities it will ignore the parameter altogether.
 --
@@ -283,24 +276,20 @@ newtype DeviceCapabilities = DeviceCapabilities
 -- | Creates a value of 'DeviceCapabilities' with the minimum fields required to make a request.
 newDeviceCapabilities ::
   DeviceCapabilities
-newDeviceCapabilities = DeviceCapabilities {frequencyRanges = Core.Nothing}
+newDeviceCapabilities =
+  DeviceCapabilities {frequencyRanges = Core.Nothing}
 
 instance Core.FromJSON DeviceCapabilities where
   parseJSON =
     Core.withObject
       "DeviceCapabilities"
-      ( \o ->
-          DeviceCapabilities
-            Core.<$> (o Core..:? "frequencyRanges")
-      )
+      (\o -> DeviceCapabilities Core.<$> (o Core..:? "frequencyRanges"))
 
 instance Core.ToJSON DeviceCapabilities where
   toJSON DeviceCapabilities {..} =
     Core.object
       ( Core.catMaybes
-          [ ("frequencyRanges" Core..=)
-              Core.<$> frequencyRanges
-          ]
+          [("frequencyRanges" Core..=) Core.<$> frequencyRanges]
       )
 
 -- | The device descriptor contains parameters that identify the specific device, such as its manufacturer serial number, regulatory-specific identifier (e.g., FCC ID), and any other device characteristics required by regulatory domains.
@@ -371,17 +360,13 @@ instance Core.ToJSON DeviceDescriptor where
   toJSON DeviceDescriptor {..} =
     Core.object
       ( Core.catMaybes
-          [ ("etsiEnDeviceCategory" Core..=)
-              Core.<$> etsiEnDeviceCategory,
+          [ ("etsiEnDeviceCategory" Core..=) Core.<$> etsiEnDeviceCategory,
             ("etsiEnDeviceEmissionsClass" Core..=)
               Core.<$> etsiEnDeviceEmissionsClass,
-            ("etsiEnDeviceType" Core..=)
-              Core.<$> etsiEnDeviceType,
-            ("etsiEnTechnologyId" Core..=)
-              Core.<$> etsiEnTechnologyId,
+            ("etsiEnDeviceType" Core..=) Core.<$> etsiEnDeviceType,
+            ("etsiEnTechnologyId" Core..=) Core.<$> etsiEnTechnologyId,
             ("fccId" Core..=) Core.<$> fccId,
-            ("fccTvbdDeviceType" Core..=)
-              Core.<$> fccTvbdDeviceType,
+            ("fccTvbdDeviceType" Core..=) Core.<$> fccTvbdDeviceType,
             ("manufacturerId" Core..=) Core.<$> manufacturerId,
             ("modelId" Core..=) Core.<$> modelId,
             ("rulesetIds" Core..=) Core.<$> rulesetIds,
@@ -408,7 +393,8 @@ data DeviceOwner = DeviceOwner
 -- | Creates a value of 'DeviceOwner' with the minimum fields required to make a request.
 newDeviceOwner ::
   DeviceOwner
-newDeviceOwner = DeviceOwner {operator = Core.Nothing, owner = Core.Nothing}
+newDeviceOwner =
+  DeviceOwner {operator = Core.Nothing, owner = Core.Nothing}
 
 instance Core.FromJSON DeviceOwner where
   parseJSON =
@@ -489,7 +475,8 @@ data EventTime = EventTime
 -- | Creates a value of 'EventTime' with the minimum fields required to make a request.
 newEventTime ::
   EventTime
-newEventTime = EventTime {startTime = Core.Nothing, stopTime = Core.Nothing}
+newEventTime =
+  EventTime {startTime = Core.Nothing, stopTime = Core.Nothing}
 
 instance Core.FromJSON EventTime where
   parseJSON =
@@ -667,7 +654,10 @@ data GeoLocationPoint = GeoLocationPoint
 newGeoLocationPoint ::
   GeoLocationPoint
 newGeoLocationPoint =
-  GeoLocationPoint {latitude = Core.Nothing, longitude = Core.Nothing}
+  GeoLocationPoint
+    { latitude = Core.Nothing,
+      longitude = Core.Nothing
+    }
 
 instance Core.FromJSON GeoLocationPoint where
   parseJSON =
@@ -707,16 +697,12 @@ instance Core.FromJSON GeoLocationPolygon where
   parseJSON =
     Core.withObject
       "GeoLocationPolygon"
-      ( \o ->
-          GeoLocationPolygon Core.<$> (o Core..:? "exterior")
-      )
+      (\o -> GeoLocationPolygon Core.<$> (o Core..:? "exterior"))
 
 instance Core.ToJSON GeoLocationPolygon where
   toJSON GeoLocationPolygon {..} =
     Core.object
-      ( Core.catMaybes
-          [("exterior" Core..=) Core.<$> exterior]
-      )
+      (Core.catMaybes [("exterior" Core..=) Core.<$> exterior])
 
 -- | The schedule of spectrum profiles available at a particular geolocation.
 --
@@ -753,8 +739,7 @@ instance Core.ToJSON GeoSpectrumSchedule where
     Core.object
       ( Core.catMaybes
           [ ("location" Core..=) Core.<$> location,
-            ("spectrumSchedules" Core..=)
-              Core.<$> spectrumSchedules
+            ("spectrumSchedules" Core..=) Core.<$> spectrumSchedules
           ]
       )
 
@@ -830,8 +815,7 @@ instance Core.ToJSON PawsGetSpectrumBatchRequest where
             ("capabilities" Core..=) Core.<$> capabilities,
             ("deviceDesc" Core..=) Core.<$> deviceDesc,
             ("locations" Core..=) Core.<$> locations,
-            ("masterDeviceDesc" Core..=)
-              Core.<$> masterDeviceDesc,
+            ("masterDeviceDesc" Core..=) Core.<$> masterDeviceDesc,
             ("owner" Core..=) Core.<$> owner,
             ("requestType" Core..=) Core.<$> requestType,
             ("type" Core..=) Core.<$> type',
@@ -899,7 +883,8 @@ instance Core.FromJSON PawsGetSpectrumBatchResponse where
             Core.<$> (o Core..:? "databaseChange")
             Core.<*> (o Core..:? "deviceDesc")
             Core.<*> (o Core..:? "geoSpectrumSchedules")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "spectrum#pawsGetSpectrumBatchResponse"
                      )
             Core.<*> (o Core..:? "maxContiguousBwHz")
@@ -917,14 +902,11 @@ instance Core.ToJSON PawsGetSpectrumBatchResponse where
       ( Core.catMaybes
           [ ("databaseChange" Core..=) Core.<$> databaseChange,
             ("deviceDesc" Core..=) Core.<$> deviceDesc,
-            ("geoSpectrumSchedules" Core..=)
-              Core.<$> geoSpectrumSchedules,
+            ("geoSpectrumSchedules" Core..=) Core.<$> geoSpectrumSchedules,
             Core.Just ("kind" Core..= kind),
-            ("maxContiguousBwHz" Core..=)
-              Core.<$> maxContiguousBwHz,
+            ("maxContiguousBwHz" Core..=) Core.<$> maxContiguousBwHz,
             ("maxTotalBwHz" Core..=) Core.<$> maxTotalBwHz,
-            ("needsSpectrumReport" Core..=)
-              Core.<$> needsSpectrumReport,
+            ("needsSpectrumReport" Core..=) Core.<$> needsSpectrumReport,
             ("rulesetInfo" Core..=) Core.<$> rulesetInfo,
             ("timestamp" Core..=) Core.<$> timestamp,
             ("type" Core..=) Core.<$> type',
@@ -1002,8 +984,7 @@ instance Core.ToJSON PawsGetSpectrumRequest where
             ("capabilities" Core..=) Core.<$> capabilities,
             ("deviceDesc" Core..=) Core.<$> deviceDesc,
             ("location" Core..=) Core.<$> location,
-            ("masterDeviceDesc" Core..=)
-              Core.<$> masterDeviceDesc,
+            ("masterDeviceDesc" Core..=) Core.<$> masterDeviceDesc,
             ("owner" Core..=) Core.<$> owner,
             ("requestType" Core..=) Core.<$> requestType,
             ("type" Core..=) Core.<$> type',
@@ -1070,9 +1051,7 @@ instance Core.FromJSON PawsGetSpectrumResponse where
           PawsGetSpectrumResponse
             Core.<$> (o Core..:? "databaseChange")
             Core.<*> (o Core..:? "deviceDesc")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "spectrum#pawsGetSpectrumResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "spectrum#pawsGetSpectrumResponse")
             Core.<*> (o Core..:? "maxContiguousBwHz")
             Core.<*> (o Core..:? "maxTotalBwHz")
             Core.<*> (o Core..:? "needsSpectrumReport")
@@ -1090,14 +1069,11 @@ instance Core.ToJSON PawsGetSpectrumResponse where
           [ ("databaseChange" Core..=) Core.<$> databaseChange,
             ("deviceDesc" Core..=) Core.<$> deviceDesc,
             Core.Just ("kind" Core..= kind),
-            ("maxContiguousBwHz" Core..=)
-              Core.<$> maxContiguousBwHz,
+            ("maxContiguousBwHz" Core..=) Core.<$> maxContiguousBwHz,
             ("maxTotalBwHz" Core..=) Core.<$> maxTotalBwHz,
-            ("needsSpectrumReport" Core..=)
-              Core.<$> needsSpectrumReport,
+            ("needsSpectrumReport" Core..=) Core.<$> needsSpectrumReport,
             ("rulesetInfo" Core..=) Core.<$> rulesetInfo,
-            ("spectrumSchedules" Core..=)
-              Core.<$> spectrumSchedules,
+            ("spectrumSchedules" Core..=) Core.<$> spectrumSchedules,
             ("timestamp" Core..=) Core.<$> timestamp,
             ("type" Core..=) Core.<$> type',
             ("version" Core..=) Core.<$> version
@@ -1197,9 +1173,7 @@ instance Core.FromJSON PawsInitResponse where
       ( \o ->
           PawsInitResponse
             Core.<$> (o Core..:? "databaseChange")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "spectrum#pawsInitResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "spectrum#pawsInitResponse")
             Core.<*> (o Core..:? "rulesetInfo")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
@@ -1297,7 +1271,8 @@ newPawsNotifySpectrumUseResponse ::
   PawsNotifySpectrumUseResponse
 newPawsNotifySpectrumUseResponse =
   PawsNotifySpectrumUseResponse
-    { kind = "spectrum#pawsNotifySpectrumUseResponse",
+    { kind =
+        "spectrum#pawsNotifySpectrumUseResponse",
       type' = Core.Nothing,
       version = Core.Nothing
     }
@@ -1308,7 +1283,8 @@ instance Core.FromJSON PawsNotifySpectrumUseResponse where
       "PawsNotifySpectrumUseResponse"
       ( \o ->
           PawsNotifySpectrumUseResponse
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "spectrum#pawsNotifySpectrumUseResponse"
                      )
             Core.<*> (o Core..:? "type")
@@ -1425,9 +1401,7 @@ instance Core.FromJSON PawsRegisterResponse where
       ( \o ->
           PawsRegisterResponse
             Core.<$> (o Core..:? "databaseChange")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "spectrum#pawsRegisterResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "spectrum#pawsRegisterResponse")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
       )
@@ -1532,9 +1506,7 @@ instance Core.FromJSON PawsVerifyDeviceResponse where
           PawsVerifyDeviceResponse
             Core.<$> (o Core..:? "databaseChange")
             Core.<*> (o Core..:? "deviceValidities")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "spectrum#pawsVerifyDeviceResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "spectrum#pawsVerifyDeviceResponse")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "version")
       )
@@ -1544,8 +1516,7 @@ instance Core.ToJSON PawsVerifyDeviceResponse where
     Core.object
       ( Core.catMaybes
           [ ("databaseChange" Core..=) Core.<$> databaseChange,
-            ("deviceValidities" Core..=)
-              Core.<$> deviceValidities,
+            ("deviceValidities" Core..=) Core.<$> deviceValidities,
             Core.Just ("kind" Core..= kind),
             ("type" Core..=) Core.<$> type',
             ("version" Core..=) Core.<$> version
@@ -1595,8 +1566,7 @@ instance Core.ToJSON RulesetInfo where
     Core.object
       ( Core.catMaybes
           [ ("authority" Core..=) Core.<$> authority,
-            ("maxLocationChange" Core..=)
-              Core.<$> maxLocationChange,
+            ("maxLocationChange" Core..=) Core.<$> maxLocationChange,
             ("maxPollingSecs" Core..=) Core.<$> maxPollingSecs,
             ("rulesetIds" Core..=) Core.<$> rulesetIds
           ]
@@ -1617,7 +1587,10 @@ data SpectrumMessage = SpectrumMessage
 newSpectrumMessage ::
   SpectrumMessage
 newSpectrumMessage =
-  SpectrumMessage {bandwidth = Core.Nothing, frequencyRanges = Core.Nothing}
+  SpectrumMessage
+    { bandwidth = Core.Nothing,
+      frequencyRanges = Core.Nothing
+    }
 
 instance Core.FromJSON SpectrumMessage where
   parseJSON =
@@ -1634,8 +1607,7 @@ instance Core.ToJSON SpectrumMessage where
     Core.object
       ( Core.catMaybes
           [ ("bandwidth" Core..=) Core.<$> bandwidth,
-            ("frequencyRanges" Core..=)
-              Core.<$> frequencyRanges
+            ("frequencyRanges" Core..=) Core.<$> frequencyRanges
           ]
       )
 
@@ -1654,7 +1626,10 @@ data SpectrumSchedule = SpectrumSchedule
 newSpectrumSchedule ::
   SpectrumSchedule
 newSpectrumSchedule =
-  SpectrumSchedule {eventTime = Core.Nothing, spectra = Core.Nothing}
+  SpectrumSchedule
+    { eventTime = Core.Nothing,
+      spectra = Core.Nothing
+    }
 
 instance Core.FromJSON SpectrumSchedule where
   parseJSON =
@@ -1811,8 +1786,7 @@ instance Core.FromJSON VcardTelephone where
 
 instance Core.ToJSON VcardTelephone where
   toJSON VcardTelephone {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The structure used to represent an organization and an email address.
 --
@@ -1836,5 +1810,4 @@ instance Core.FromJSON VcardTypedText where
 
 instance Core.ToJSON VcardTypedText where
   toJSON VcardTypedText {..} =
-    Core.object
-      (Core.catMaybes [("text" Core..=) Core.<$> text])
+    Core.object (Core.catMaybes [("text" Core..=) Core.<$> text])

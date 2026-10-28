@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.Attestors.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an attestor, and returns a copy of the new attestor. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed, ALREADY_EXISTS if the attestor already exists.
+-- Creates an attestor, and returns a copy of the new attestor. Returns @NOT_FOUND@ if the project does not exist, @INVALID_ARGUMENT@ if the request is malformed, @ALREADY_EXISTS@ if the attestor already exists.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.create@.
 module Gogol.BinaryAuthorization.Projects.Attestors.Create
@@ -40,7 +38,7 @@ module Gogol.BinaryAuthorization.Projects.Attestors.Create
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.create@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsCreate' request conforms to.
@@ -58,7 +56,7 @@ type BinaryAuthorizationProjectsAttestorsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Attestor
     Core.:> Core.Post '[Core.JSON] Attestor
 
--- | Creates an attestor, and returns a copy of the new attestor. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed, ALREADY_EXISTS if the attestor already exists.
+-- | Creates an attestor, and returns a copy of the new attestor. Returns @NOT_FOUND@ if the project does not exist, @INVALID_ARGUMENT@ if the request is malformed, @ALREADY_EXISTS@ if the attestor already exists.
 --
 -- /See:/ 'newBinaryAuthorizationProjectsAttestorsCreate' smart constructor.
 data BinaryAuthorizationProjectsAttestorsCreate = BinaryAuthorizationProjectsAttestorsCreate
@@ -104,31 +102,26 @@ instance
   Core.GoogleRequest
     BinaryAuthorizationProjectsAttestorsCreate
   where
+  type Rs BinaryAuthorizationProjectsAttestorsCreate = Attestor
   type
-    Rs BinaryAuthorizationProjectsAttestorsCreate =
-      Attestor
-  type
-    Scopes
-      BinaryAuthorizationProjectsAttestorsCreate =
+    Scopes BinaryAuthorizationProjectsAttestorsCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    BinaryAuthorizationProjectsAttestorsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        attestorId
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationProjectsAttestorsCreateResource
-            )
-            Core.mempty
+  requestClient BinaryAuthorizationProjectsAttestorsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      attestorId
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      binaryAuthorizationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BinaryAuthorizationProjectsAttestorsCreateResource
+          )
+          Core.mempty

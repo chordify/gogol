@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.CompleteSetup
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.completeSetup@ method which the
 -- 'AdExchangeBuyer2AccountsProposalsCompleteSetup' request conforms to.
@@ -49,10 +47,7 @@ type AdExchangeBuyer2AccountsProposalsCompleteSetupResource =
     Core.:> "accounts"
     Core.:> Core.Capture "accountId" Core.Text
     Core.:> "proposals"
-    Core.:> Core.CaptureMode
-              "proposalId"
-              "completeSetup"
-              Core.Text
+    Core.:> Core.CaptureMode "proposalId" "completeSetup" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -94,48 +89,46 @@ newAdExchangeBuyer2AccountsProposalsCompleteSetup ::
   -- |  The ID of the proposal to mark as setup completed. See 'proposalId'.
   Core.Text ->
   AdExchangeBuyer2AccountsProposalsCompleteSetup
-newAdExchangeBuyer2AccountsProposalsCompleteSetup accountId payload proposalId =
-  AdExchangeBuyer2AccountsProposalsCompleteSetup
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      payload = payload,
-      proposalId = proposalId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsProposalsCompleteSetup
+  accountId
+  payload
+  proposalId =
+    AdExchangeBuyer2AccountsProposalsCompleteSetup
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        payload = payload,
+        proposalId = proposalId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsProposalsCompleteSetup
   where
+  type Rs AdExchangeBuyer2AccountsProposalsCompleteSetup = Proposal
   type
-    Rs
-      AdExchangeBuyer2AccountsProposalsCompleteSetup =
-      Proposal
-  type
-    Scopes
-      AdExchangeBuyer2AccountsProposalsCompleteSetup =
+    Scopes AdExchangeBuyer2AccountsProposalsCompleteSetup =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsProposalsCompleteSetup {..} =
-      go
-        accountId
-        proposalId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsProposalsCompleteSetupResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsProposalsCompleteSetup {..} =
+    go
+      accountId
+      proposalId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsProposalsCompleteSetupResource
+          )
+          Core.mempty

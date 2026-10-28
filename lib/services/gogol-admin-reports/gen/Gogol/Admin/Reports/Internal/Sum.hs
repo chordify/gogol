@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.Reports.Internal.Sum
@@ -56,6 +54,7 @@ module Gogol.Admin.Reports.Internal.Sum
         ActivitiesListApplicationName_Chrome,
         ActivitiesListApplicationName_DataStudio,
         ActivitiesListApplicationName_Keep,
+        ActivitiesListApplicationName_Vault,
         ..
       ),
 
@@ -93,7 +92,7 @@ module Gogol.Admin.Reports.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -219,6 +218,10 @@ pattern ActivitiesListApplicationName_DataStudio = ActivitiesListApplicationName
 pattern ActivitiesListApplicationName_Keep :: ActivitiesListApplicationName
 pattern ActivitiesListApplicationName_Keep = ActivitiesListApplicationName "keep"
 
+-- | The Vault activity reports return information about various types of Vault activity events.
+pattern ActivitiesListApplicationName_Vault :: ActivitiesListApplicationName
+pattern ActivitiesListApplicationName_Vault = ActivitiesListApplicationName "vault"
+
 {-# COMPLETE
   ActivitiesListApplicationName_AccessTransparency,
   ActivitiesListApplicationName_Admin,
@@ -241,6 +244,7 @@ pattern ActivitiesListApplicationName_Keep = ActivitiesListApplicationName "keep
   ActivitiesListApplicationName_Chrome,
   ActivitiesListApplicationName_DataStudio,
   ActivitiesListApplicationName_Keep,
+  ActivitiesListApplicationName_Vault,
   ActivitiesListApplicationName
   #-}
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Results.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ConsumerSurveys.Results.Get
 where
 
 import Gogol.ConsumerSurveys.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @consumersurveys.results.get@ method which the
 -- 'ConsumerSurveysResultsGet' request conforms to.
@@ -54,12 +52,12 @@ type ConsumerSurveysResultsGetResource =
     Core.:> Core.ReqBody '[Core.JSON] ResultsGetRequest
     Core.:> Core.Get '[Core.JSON] SurveyResults
     Core.:<|> "consumersurveys"
-      Core.:> "v2"
-      Core.:> "surveys"
-      Core.:> Core.Capture "surveyUrlId" Core.Text
-      Core.:> "results"
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v2"
+    Core.:> "surveys"
+    Core.:> Core.Capture "surveyUrlId" Core.Text
+    Core.:> "results"
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add \"?alt=media\" to the URL as an argument to get results.
 --
@@ -80,7 +78,10 @@ newConsumerSurveysResultsGet ::
   Core.Text ->
   ConsumerSurveysResultsGet
 newConsumerSurveysResultsGet payload surveyUrlId =
-  ConsumerSurveysResultsGet {payload = payload, surveyUrlId = surveyUrlId}
+  ConsumerSurveysResultsGet
+    { payload = payload,
+      surveyUrlId = surveyUrlId
+    }
 
 instance Core.GoogleRequest ConsumerSurveysResultsGet where
   type Rs ConsumerSurveysResultsGet = SurveyResults
@@ -99,9 +100,7 @@ instance Core.GoogleRequest ConsumerSurveysResultsGet where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysResultsGetResource
-          )
+          (Core.Proxy :: Core.Proxy ConsumerSurveysResultsGetResource)
           Core.mempty
 
 instance
@@ -109,23 +108,15 @@ instance
     (Core.MediaDownload ConsumerSurveysResultsGet)
   where
   type
-    Rs
-      (Core.MediaDownload ConsumerSurveysResultsGet) =
+    Rs (Core.MediaDownload ConsumerSurveysResultsGet) =
       Core.Stream
   type
-    Scopes
-      (Core.MediaDownload ConsumerSurveysResultsGet) =
+    Scopes (Core.MediaDownload ConsumerSurveysResultsGet) =
       Core.Scopes ConsumerSurveysResultsGet
-  requestClient
-    (Core.MediaDownload ConsumerSurveysResultsGet {..}) =
-      go
-        surveyUrlId
-        (Core.Just Core.AltMedia)
-        consumerSurveysService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy ConsumerSurveysResultsGetResource
-            )
-            Core.mempty
+  requestClient (Core.MediaDownload ConsumerSurveysResultsGet {..}) =
+    go surveyUrlId (Core.Just Core.AltMedia) consumerSurveysService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy ConsumerSurveysResultsGetResource)
+          Core.mempty

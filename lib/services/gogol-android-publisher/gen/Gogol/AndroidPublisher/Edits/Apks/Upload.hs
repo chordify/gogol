@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Apks.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Apks.Upload
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.apks.upload@ method which the
 -- 'AndroidPublisherEditsApksUpload' request conforms to.
@@ -60,22 +58,22 @@ type AndroidPublisherEditsApksUploadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Apk
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "edits"
-      Core.:> Core.Capture "editId" Core.Text
-      Core.:> "apks"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Apk
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "edits"
+    Core.:> Core.Capture "editId" Core.Text
+    Core.:> "apks"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Apk
 
 -- | Uploads an APK and adds to the current edit.
 --
@@ -116,10 +114,7 @@ newAndroidPublisherEditsApksUpload editId packageName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherEditsApksUpload
-  where
+instance Core.GoogleRequest AndroidPublisherEditsApksUpload where
   type Rs AndroidPublisherEditsApksUpload = Apk
   type
     Scopes AndroidPublisherEditsApksUpload =
@@ -138,28 +133,19 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherEditsApksUploadResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidPublisherEditsApksUploadResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload AndroidPublisherEditsApksUpload)
   where
+  type Rs (Core.MediaUpload AndroidPublisherEditsApksUpload) = Apk
   type
-    Rs
-      (Core.MediaUpload AndroidPublisherEditsApksUpload) =
-      Apk
-  type
-    Scopes
-      (Core.MediaUpload AndroidPublisherEditsApksUpload) =
+    Scopes (Core.MediaUpload AndroidPublisherEditsApksUpload) =
       Core.Scopes AndroidPublisherEditsApksUpload
   requestClient
-    ( Core.MediaUpload
-        AndroidPublisherEditsApksUpload {..}
-        body
-      ) =
+    (Core.MediaUpload AndroidPublisherEditsApksUpload {..} body) =
       go
         packageName
         editId
@@ -175,7 +161,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy AndroidPublisherEditsApksUploadResource
-            )
+            (Core.Proxy :: Core.Proxy AndroidPublisherEditsApksUploadResource)
             Core.mempty

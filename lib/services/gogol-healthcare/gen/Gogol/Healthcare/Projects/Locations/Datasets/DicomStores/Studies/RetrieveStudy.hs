@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.RetrieveStudy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- RetrieveStudy returns all instances within the given study. See [RetrieveTransaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4). For details on the implementation of RetrieveStudy, see <https://cloud.google.com/healthcare/docs/dicom#dicom_studyseriesinstances DICOM study\/series\/instances> in the Cloud Healthcare API conformance statement. For samples that show how to call RetrieveStudy, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#retrieving_dicom_data Retrieving DICOM data>.
+-- RetrieveStudy returns all instances within the given study. See [RetrieveTransaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4). For details on the implementation of RetrieveStudy, see <https://cloud.google.com/healthcare/docs/dicom#dicom_studyseriesinstances DICOM study\/series\/instances> in the Cloud Healthcare API conformance statement. For samples that show how to call RetrieveStudy, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#retrieve-dicom Retrieve DICOM data>.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.RetrieveStudy
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Retrieve
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.retrieveStudy@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy' request conforms to.
@@ -57,7 +55,7 @@ type HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudyResource 
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] HttpBody
 
--- | RetrieveStudy returns all instances within the given study. See [RetrieveTransaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4). For details on the implementation of RetrieveStudy, see <https://cloud.google.com/healthcare/docs/dicom#dicom_studyseriesinstances DICOM study\/series\/instances> in the Cloud Healthcare API conformance statement. For samples that show how to call RetrieveStudy, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#retrieving_dicom_data Retrieving DICOM data>.
+-- | RetrieveStudy returns all instances within the given study. See [RetrieveTransaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.4). For details on the implementation of RetrieveStudy, see <https://cloud.google.com/healthcare/docs/dicom#dicom_studyseriesinstances DICOM study\/series\/instances> in the Cloud Healthcare API conformance statement. For samples that show how to call RetrieveStudy, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#retrieve-dicom Retrieve DICOM data>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy = HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy
@@ -67,9 +65,9 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy = Health
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The path of the RetrieveStudy DICOMweb request. For example, @studies\/{study_uid}@.
+    -- | Required. The path of the RetrieveStudy DICOMweb request. For example, @studies\/{study_uid}@.
     dicomWebPath :: Core.Text,
-    -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,21 +78,25 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy = Health
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy ::
-  -- |  The path of the RetrieveStudy DICOMweb request. For example, @studies\/{study_uid}@. See 'dicomWebPath'.
+  -- |  Required. The path of the RetrieveStudy DICOMweb request. For example, @studies\/{study_uid}@. See 'dicomWebPath'.
   Core.Text ->
-  -- |  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
+  -- |  Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy
-newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy dicomWebPath parent =
-  HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomWebPath = dicomWebPath,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy
+  dicomWebPath
+  parent =
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dicomWebPath = dicomWebPath,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -107,7 +109,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesRetrieveStudy {..} =
       go

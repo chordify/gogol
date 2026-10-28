@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Script.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Script.Types
@@ -139,6 +137,9 @@ module Gogol.Script.Types
 
     -- ** GoogleAppsScriptTypeProcess_ProcessType
     GoogleAppsScriptTypeProcess_ProcessType (..),
+
+    -- ** GoogleAppsScriptTypeProcess_RuntimeVersion
+    GoogleAppsScriptTypeProcess_RuntimeVersion (..),
 
     -- ** GoogleAppsScriptTypeProcess_UserAccessLevel
     GoogleAppsScriptTypeProcess_UserAccessLevel (..),
@@ -267,7 +268,7 @@ module Gogol.Script.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Script.Internal.Product
 import Gogol.Script.Internal.Sum
 
@@ -282,19 +283,23 @@ scriptService =
 type Gmail'FullControl = "https://mail.google.com/"
 
 -- | See, edit, share, and permanently delete all the calendars you can access using Google Calendar
-type Calendar'Feeds'FullControl = "https://www.google.com/calendar/feeds"
+type Calendar'Feeds'FullControl =
+  "https://www.google.com/calendar/feeds"
 
 -- | See, edit, download, and permanently delete your contacts
 type M8'Feeds'FullControl = "https://www.google.com/m8/feeds"
 
 -- | View and manage the provisioning of groups on your domain
-type Admin'Directory'Group = "https://www.googleapis.com/auth/admin.directory.group"
+type Admin'Directory'Group =
+  "https://www.googleapis.com/auth/admin.directory.group"
 
 -- | View and manage the provisioning of users on your domain
-type Admin'Directory'User = "https://www.googleapis.com/auth/admin.directory.user"
+type Admin'Directory'User =
+  "https://www.googleapis.com/auth/admin.directory.user"
 
 -- | See, edit, create, and delete all your Google Docs documents
-type Documents'FullControl = "https://www.googleapis.com/auth/documents"
+type Documents'FullControl =
+  "https://www.googleapis.com/auth/documents"
 
 -- | See, edit, create, and delete all of your Google Drive files
 type Drive'FullControl = "https://www.googleapis.com/auth/drive"
@@ -303,31 +308,40 @@ type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 type Forms'FullControl = "https://www.googleapis.com/auth/forms"
 
 -- | View and manage forms that this application has been installed in
-type Forms'Currentonly = "https://www.googleapis.com/auth/forms.currentonly"
+type Forms'Currentonly =
+  "https://www.googleapis.com/auth/forms.currentonly"
 
 -- | View and manage your Google Groups
 type Groups'FullControl = "https://www.googleapis.com/auth/groups"
 
 -- | Create and update Google Apps Script deployments
-type Script'Deployments = "https://www.googleapis.com/auth/script.deployments"
+type Script'Deployments =
+  "https://www.googleapis.com/auth/script.deployments"
 
 -- | View Google Apps Script deployments
-type Script'Deployments'Readonly = "https://www.googleapis.com/auth/script.deployments.readonly"
+type Script'Deployments'Readonly =
+  "https://www.googleapis.com/auth/script.deployments.readonly"
 
 -- | View Google Apps Script project\'s metrics
-type Script'Metrics = "https://www.googleapis.com/auth/script.metrics"
+type Script'Metrics =
+  "https://www.googleapis.com/auth/script.metrics"
 
 -- | View Google Apps Script processes
-type Script'Processes = "https://www.googleapis.com/auth/script.processes"
+type Script'Processes =
+  "https://www.googleapis.com/auth/script.processes"
 
 -- | Create and update Google Apps Script projects
-type Script'Projects = "https://www.googleapis.com/auth/script.projects"
+type Script'Projects =
+  "https://www.googleapis.com/auth/script.projects"
 
 -- | View Google Apps Script projects
-type Script'Projects'Readonly = "https://www.googleapis.com/auth/script.projects.readonly"
+type Script'Projects'Readonly =
+  "https://www.googleapis.com/auth/script.projects.readonly"
 
 -- | See, edit, create, and delete all your Google Sheets spreadsheets
-type Spreadsheets'FullControl = "https://www.googleapis.com/auth/spreadsheets"
+type Spreadsheets'FullControl =
+  "https://www.googleapis.com/auth/spreadsheets"
 
 -- | See your primary Google Account email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+type Userinfo'Email =
+  "https://www.googleapis.com/auth/userinfo.email"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Advertisers.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Advertisers.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.advertisers.patch@ method which the
 -- 'DFAReportingAdvertisersPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingAdvertisersPatch = DFAReportingAdvertisersPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Advertiser ID.
+    -- | Required. Advertiser ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: Advertiser,
@@ -85,7 +83,7 @@ data DFAReportingAdvertisersPatch = DFAReportingAdvertisersPatch
 
 -- | Creates a value of 'DFAReportingAdvertisersPatch' with the minimum fields required to make a request.
 newDFAReportingAdvertisersPatch ::
-  -- |  Advertiser ID. See 'id'.
+  -- |  Required. Advertiser ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   Advertiser ->
@@ -104,10 +102,7 @@ newDFAReportingAdvertisersPatch id payload profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertisersPatch
-  where
+instance Core.GoogleRequest DFAReportingAdvertisersPatch where
   type Rs DFAReportingAdvertisersPatch = Advertiser
   type
     Scopes DFAReportingAdvertisersPatch =
@@ -127,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdvertisersPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAdvertisersPatchResource)
           Core.mempty

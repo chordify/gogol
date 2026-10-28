@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns permissions that the caller has on the specified database or backup resource. Attempting this RPC on a non-existent Cloud Spanner database will result in a NOT/FOUND error if the user has @spanner.databases.list@ permission on the containing Cloud Spanner instance. Otherwise returns an empty set of permissions. Calling this method on a backup that does not exist will result in a NOT/FOUND error if the user has @spanner.backups.list@ permission on the containing instance.
+-- Returns permissions that the caller has on the specified database or backup resource. Attempting this RPC on a non-existent Cloud Spanner database will result in a NOT/FOUND error if the user has @spanner.databases.list@ permission on the containing Cloud Spanner instance. Otherwise returns an empty set of permissions. Calling this method on a backup that does not exist will result in a NOT/FOUND error if the user has @spanner.backups.list@ permission on the containing instance. Calling this method on a backup schedule that does not exist will result in a NOT_FOUND error if the user has @spanner.backupSchedules.list@ permission on the containing database.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.testIamPermissions@.
 module Gogol.Spanner.Projects.Instances.Databases.TestIamPermissions
@@ -39,17 +37,14 @@ module Gogol.Spanner.Projects.Instances.Databases.TestIamPermissions
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.testIamPermissions@ method which the
 -- 'SpannerProjectsInstancesDatabasesTestIamPermissions' request conforms to.
 type SpannerProjectsInstancesDatabasesTestIamPermissionsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "testIamPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -59,7 +54,7 @@ type SpannerProjectsInstancesDatabasesTestIamPermissionsResource =
     Core.:> Core.ReqBody '[Core.JSON] TestIamPermissionsRequest
     Core.:> Core.Post '[Core.JSON] TestIamPermissionsResponse
 
--- | Returns permissions that the caller has on the specified database or backup resource. Attempting this RPC on a non-existent Cloud Spanner database will result in a NOT/FOUND error if the user has @spanner.databases.list@ permission on the containing Cloud Spanner instance. Otherwise returns an empty set of permissions. Calling this method on a backup that does not exist will result in a NOT/FOUND error if the user has @spanner.backups.list@ permission on the containing instance.
+-- | Returns permissions that the caller has on the specified database or backup resource. Attempting this RPC on a non-existent Cloud Spanner database will result in a NOT/FOUND error if the user has @spanner.databases.list@ permission on the containing Cloud Spanner instance. Otherwise returns an empty set of permissions. Calling this method on a backup that does not exist will result in a NOT/FOUND error if the user has @spanner.backups.list@ permission on the containing instance. Calling this method on a backup schedule that does not exist will result in a NOT_FOUND error if the user has @spanner.backupSchedules.list@ permission on the containing database.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesTestIamPermissions' smart constructor.
 data SpannerProjectsInstancesDatabasesTestIamPermissions = SpannerProjectsInstancesDatabasesTestIamPermissions
@@ -87,28 +82,29 @@ newSpannerProjectsInstancesDatabasesTestIamPermissions ::
   -- |  REQUIRED: The Cloud Spanner resource for which permissions are being tested. The format is @projects\/\/instances\/@ for instance resources and @projects\/\/instances\/\/databases\/@ for database resources. See 'resource'.
   Core.Text ->
   SpannerProjectsInstancesDatabasesTestIamPermissions
-newSpannerProjectsInstancesDatabasesTestIamPermissions payload resource =
-  SpannerProjectsInstancesDatabasesTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSpannerProjectsInstancesDatabasesTestIamPermissions
+  payload
+  resource =
+    SpannerProjectsInstancesDatabasesTestIamPermissions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesTestIamPermissions
   where
   type
-    Rs
-      SpannerProjectsInstancesDatabasesTestIamPermissions =
+    Rs SpannerProjectsInstancesDatabasesTestIamPermissions =
       TestIamPermissionsResponse
   type
-    Scopes
-      SpannerProjectsInstancesDatabasesTestIamPermissions =
+    Scopes SpannerProjectsInstancesDatabasesTestIamPermissions =
       '[CloudPlatform'FullControl, Spanner'Admin]
   requestClient
     SpannerProjectsInstancesDatabasesTestIamPermissions {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DNS.Types
@@ -301,7 +299,7 @@ where
 
 import Gogol.DNS.Internal.Product
 import Gogol.DNS.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Cloud DNS API. This contains the host and root path used as a starting point for constructing service requests.
 dNSService :: Core.ServiceConfig
@@ -311,13 +309,17 @@ dNSService =
     "dns.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | View your DNS records hosted by Google Cloud DNS
-type Ndev'Clouddns'Readonly = "https://www.googleapis.com/auth/ndev.clouddns.readonly"
+type Ndev'Clouddns'Readonly =
+  "https://www.googleapis.com/auth/ndev.clouddns.readonly"
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
-type Ndev'Clouddns'Readwrite = "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+type Ndev'Clouddns'Readwrite =
+  "https://www.googleapis.com/auth/ndev.clouddns.readwrite"

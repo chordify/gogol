@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
+-- The Google Drive API allows clients to access resources from Google Drive.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference>
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference>
 module Gogol.Drive
   ( -- * Configuration
     driveService,
@@ -36,7 +34,9 @@ module Gogol.Drive
     -- * OAuth Scopes
     Drive'FullControl,
     Drive'Appdata,
+    Drive'Apps'Readonly,
     Drive'File,
+    Drive'Meet'Readonly,
     Drive'Metadata,
     Drive'Metadata'Readonly,
     Drive'Photos'Readonly,
@@ -49,6 +49,31 @@ module Gogol.Drive
     DriveAboutGetResource,
     DriveAboutGet (..),
     newDriveAboutGet,
+
+    -- ** drive.accessproposals.get
+    DriveAccessproposalsGetResource,
+    DriveAccessproposalsGet (..),
+    newDriveAccessproposalsGet,
+
+    -- ** drive.accessproposals.list
+    DriveAccessproposalsListResource,
+    DriveAccessproposalsList (..),
+    newDriveAccessproposalsList,
+
+    -- ** drive.accessproposals.resolve
+    DriveAccessproposalsResolveResource,
+    DriveAccessproposalsResolve (..),
+    newDriveAccessproposalsResolve,
+
+    -- ** drive.apps.get
+    DriveAppsGetResource,
+    DriveAppsGet (..),
+    newDriveAppsGet,
+
+    -- ** drive.apps.list
+    DriveAppsListResource,
+    DriveAppsList (..),
+    newDriveAppsList,
 
     -- ** drive.changes.getStartPageToken
     DriveChangesGetStartPageTokenResource,
@@ -145,6 +170,11 @@ module Gogol.Drive
     DriveFilesDelete (..),
     newDriveFilesDelete,
 
+    -- ** drive.files.download
+    DriveFilesDownloadResource,
+    DriveFilesDownload (..),
+    newDriveFilesDownload,
+
     -- ** drive.files.emptyTrash
     DriveFilesEmptyTrashResource,
     DriveFilesEmptyTrash (..),
@@ -189,6 +219,26 @@ module Gogol.Drive
     DriveFilesWatchResource,
     DriveFilesWatch (..),
     newDriveFilesWatch,
+
+    -- ** drive.operations.cancel
+    DriveOperationsCancelResource,
+    DriveOperationsCancel (..),
+    newDriveOperationsCancel,
+
+    -- ** drive.operations.delete
+    DriveOperationsDeleteResource,
+    DriveOperationsDelete (..),
+    newDriveOperationsDelete,
+
+    -- ** drive.operations.get
+    DriveOperationsGetResource,
+    DriveOperationsGet (..),
+    newDriveOperationsGet,
+
+    -- ** drive.operations.list
+    DriveOperationsListResource,
+    DriveOperationsList (..),
+    newDriveOperationsList,
 
     -- ** drive.permissions.create
     DrivePermissionsCreateResource,
@@ -287,6 +337,9 @@ module Gogol.Drive
 
     -- * Types
 
+    -- ** Xgafv
+    Xgafv (..),
+
     -- ** About
     About (..),
     newAbout,
@@ -314,6 +367,26 @@ module Gogol.Drive
     -- ** About_TeamDriveThemesItem
     About_TeamDriveThemesItem (..),
     newAbout_TeamDriveThemesItem,
+
+    -- ** AccessProposal
+    AccessProposal (..),
+    newAccessProposal,
+
+    -- ** AccessProposalRoleAndView
+    AccessProposalRoleAndView (..),
+    newAccessProposalRoleAndView,
+
+    -- ** App
+    App (..),
+    newApp,
+
+    -- ** AppIcons
+    AppIcons (..),
+    newAppIcons,
+
+    -- ** AppList
+    AppList (..),
+    newAppList,
 
     -- ** Change
     Change (..),
@@ -346,6 +419,10 @@ module Gogol.Drive
     -- ** ContentRestriction
     ContentRestriction (..),
     newContentRestriction,
+
+    -- ** DownloadRestriction
+    DownloadRestriction (..),
+    newDownloadRestriction,
 
     -- ** Drive
     Drive (..),
@@ -451,6 +528,14 @@ module Gogol.Drive
     LabelModification (..),
     newLabelModification,
 
+    -- ** ListAccessProposalsResponse
+    ListAccessProposalsResponse (..),
+    newListAccessProposalsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
     -- ** ModifyLabelsRequest
     ModifyLabelsRequest (..),
     newModifyLabelsRequest,
@@ -458,6 +543,18 @@ module Gogol.Drive
     -- ** ModifyLabelsResponse
     ModifyLabelsResponse (..),
     newModifyLabelsResponse,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Permission
     Permission (..),
@@ -483,6 +580,13 @@ module Gogol.Drive
     ReplyList (..),
     newReplyList,
 
+    -- ** ResolveAccessProposalRequest
+    ResolveAccessProposalRequest (..),
+    newResolveAccessProposalRequest,
+
+    -- ** ResolveAccessProposalRequest_Action
+    ResolveAccessProposalRequest_Action (..),
+
     -- ** Revision
     Revision (..),
     newRevision,
@@ -498,6 +602,14 @@ module Gogol.Drive
     -- ** StartPageToken
     StartPageToken (..),
     newStartPageToken,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TeamDrive
     TeamDrive (..),
@@ -529,6 +641,11 @@ module Gogol.Drive
 where
 
 import Gogol.Drive.About.Get
+import Gogol.Drive.Accessproposals.Get
+import Gogol.Drive.Accessproposals.List
+import Gogol.Drive.Accessproposals.Resolve
+import Gogol.Drive.Apps.Get
+import Gogol.Drive.Apps.List
 import Gogol.Drive.Changes.GetStartPageToken
 import Gogol.Drive.Changes.List
 import Gogol.Drive.Changes.Watch
@@ -548,6 +665,7 @@ import Gogol.Drive.Drives.Update
 import Gogol.Drive.Files.Copy
 import Gogol.Drive.Files.Create
 import Gogol.Drive.Files.Delete
+import Gogol.Drive.Files.Download
 import Gogol.Drive.Files.EmptyTrash
 import Gogol.Drive.Files.Export
 import Gogol.Drive.Files.GenerateIds
@@ -557,6 +675,10 @@ import Gogol.Drive.Files.ListLabels
 import Gogol.Drive.Files.ModifyLabels
 import Gogol.Drive.Files.Update
 import Gogol.Drive.Files.Watch
+import Gogol.Drive.Operations.Cancel
+import Gogol.Drive.Operations.Delete
+import Gogol.Drive.Operations.Get
+import Gogol.Drive.Operations.List
 import Gogol.Drive.Permissions.Create
 import Gogol.Drive.Permissions.Delete
 import Gogol.Drive.Permissions.Get

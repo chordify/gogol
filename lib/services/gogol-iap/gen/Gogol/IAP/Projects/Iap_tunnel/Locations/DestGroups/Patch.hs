@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Patch
 where
 
 import Gogol.IAP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @iap.projects.iap_tunnel.locations.destGroups.patch@ method which the
 -- 'IAPProjectsIap_tunnelLocationsDestGroupsPatch' request conforms to.
@@ -67,7 +65,7 @@ data IAPProjectsIap_tunnelLocationsDestGroupsPatch = IAPProjectsIap_tunnelLocati
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
+    -- | Identifier. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: TunnelDestGroup,
@@ -82,14 +80,15 @@ data IAPProjectsIap_tunnelLocationsDestGroupsPatch = IAPProjectsIap_tunnelLocati
 
 -- | Creates a value of 'IAPProjectsIap_tunnelLocationsDestGroupsPatch' with the minimum fields required to make a request.
 newIAPProjectsIap_tunnelLocationsDestGroupsPatch ::
-  -- |  Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-). See 'name'.
+  -- |  Identifier. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-). See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   TunnelDestGroup ->
   IAPProjectsIap_tunnelLocationsDestGroupsPatch
 newIAPProjectsIap_tunnelLocationsDestGroupsPatch name payload =
   IAPProjectsIap_tunnelLocationsDestGroupsPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -107,27 +106,24 @@ instance
     Rs IAPProjectsIap_tunnelLocationsDestGroupsPatch =
       TunnelDestGroup
   type
-    Scopes
-      IAPProjectsIap_tunnelLocationsDestGroupsPatch =
+    Scopes IAPProjectsIap_tunnelLocationsDestGroupsPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    IAPProjectsIap_tunnelLocationsDestGroupsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        iAPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAPProjectsIap_tunnelLocationsDestGroupsPatchResource
-            )
-            Core.mempty
+  requestClient IAPProjectsIap_tunnelLocationsDestGroupsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      iAPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAPProjectsIap_tunnelLocationsDestGroupsPatchResource
+          )
+          Core.mempty

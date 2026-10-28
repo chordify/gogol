@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Purchases.Subscriptions.Cancel
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Purchases.Subscriptions.Cancel
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.purchases.subscriptions.cancel@ method which the
 -- 'AndroidPublisherPurchasesSubscriptionsCancel' request conforms to.
@@ -94,47 +92,46 @@ newAndroidPublisherPurchasesSubscriptionsCancel ::
   -- |  The token provided to the user\'s device when the subscription was purchased. See 'token'.
   Core.Text ->
   AndroidPublisherPurchasesSubscriptionsCancel
-newAndroidPublisherPurchasesSubscriptionsCancel packageName subscriptionId token =
-  AndroidPublisherPurchasesSubscriptionsCancel
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      subscriptionId = subscriptionId,
-      token = token,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherPurchasesSubscriptionsCancel
+  packageName
+  subscriptionId
+  token =
+    AndroidPublisherPurchasesSubscriptionsCancel
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        subscriptionId = subscriptionId,
+        token = token,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherPurchasesSubscriptionsCancel
   where
+  type Rs AndroidPublisherPurchasesSubscriptionsCancel = ()
   type
-    Rs AndroidPublisherPurchasesSubscriptionsCancel =
-      ()
-  type
-    Scopes
-      AndroidPublisherPurchasesSubscriptionsCancel =
+    Scopes AndroidPublisherPurchasesSubscriptionsCancel =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherPurchasesSubscriptionsCancel {..} =
-      go
-        packageName
-        subscriptionId
-        token
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherPurchasesSubscriptionsCancelResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherPurchasesSubscriptionsCancel {..} =
+    go
+      packageName
+      subscriptionId
+      token
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherPurchasesSubscriptionsCancelResource
+          )
+          Core.mempty

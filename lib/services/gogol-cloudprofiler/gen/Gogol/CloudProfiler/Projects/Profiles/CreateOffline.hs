@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudProfiler.Projects.Profiles.CreateOffline
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.
+-- CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./
 --
 -- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference> for @cloudprofiler.projects.profiles.createOffline@.
 module Gogol.CloudProfiler.Projects.Profiles.CreateOffline
@@ -40,7 +38,7 @@ module Gogol.CloudProfiler.Projects.Profiles.CreateOffline
 where
 
 import Gogol.CloudProfiler.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.createOffline@ method which the
 -- 'CloudProfilerProjectsProfilesCreateOffline' request conforms to.
@@ -57,7 +55,7 @@ type CloudProfilerProjectsProfilesCreateOfflineResource =
     Core.:> Core.ReqBody '[Core.JSON] Profile
     Core.:> Core.Post '[Core.JSON] Profile
 
--- | CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it.
+-- | CreateOfflineProfile creates a new profile resource in the offline mode. The client provides the profile to create along with the profile bytes, the server records it. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./
 --
 -- /See:/ 'newCloudProfilerProjectsProfilesCreateOffline' smart constructor.
 data CloudProfilerProjectsProfilesCreateOffline = CloudProfilerProjectsProfilesCreateOffline
@@ -100,33 +98,28 @@ instance
   Core.GoogleRequest
     CloudProfilerProjectsProfilesCreateOffline
   where
+  type Rs CloudProfilerProjectsProfilesCreateOffline = Profile
   type
-    Rs CloudProfilerProjectsProfilesCreateOffline =
-      Profile
-  type
-    Scopes
-      CloudProfilerProjectsProfilesCreateOffline =
+    Scopes CloudProfilerProjectsProfilesCreateOffline =
       '[ CloudPlatform'FullControl,
          Monitoring'FullControl,
          Monitoring'Write
        ]
-  requestClient
-    CloudProfilerProjectsProfilesCreateOffline {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudProfilerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudProfilerProjectsProfilesCreateOfflineResource
-            )
-            Core.mempty
+  requestClient CloudProfilerProjectsProfilesCreateOffline {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudProfilerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudProfilerProjectsProfilesCreateOfflineResource
+          )
+          Core.mempty

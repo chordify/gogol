@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Sites.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Sites.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.sites.patch@ method which the
 -- 'DFAReportingSitesPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingSitesPatch = DFAReportingSitesPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Site ID.
+    -- | Required. Site ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: Site,
@@ -85,7 +83,7 @@ data DFAReportingSitesPatch = DFAReportingSitesPatch
 
 -- | Creates a value of 'DFAReportingSitesPatch' with the minimum fields required to make a request.
 newDFAReportingSitesPatch ::
-  -- |  Site ID. See 'id'.
+  -- |  Required. Site ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   Site ->
@@ -106,9 +104,7 @@ newDFAReportingSitesPatch id payload profileId =
 
 instance Core.GoogleRequest DFAReportingSitesPatch where
   type Rs DFAReportingSitesPatch = Site
-  type
-    Scopes DFAReportingSitesPatch =
-      '[Dfatrafficking'FullControl]
+  type Scopes DFAReportingSitesPatch = '[Dfatrafficking'FullControl]
   requestClient DFAReportingSitesPatch {..} =
     go
       profileId
@@ -124,7 +120,5 @@ instance Core.GoogleRequest DFAReportingSitesPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingSitesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingSitesPatchResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Update
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.update@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate' request conforms to.
@@ -68,7 +66,7 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate = HealthcareProject
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the resource to update.
+    -- | Required. The name of the resource to update.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: HttpBody,
@@ -81,34 +79,35 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate = HealthcareProject
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate ::
-  -- |  The name of the resource to update. See 'name'.
+  -- |  Required. The name of the resource to update. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   HttpBody ->
   HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate
-newHealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate name payload =
-  HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate =
       HttpBody
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate {..} =
       go

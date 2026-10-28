@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.Get
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.pages.get@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsPagesGet' request conforms to.
@@ -84,7 +82,8 @@ newDialogFlowProjectsLocationsAgentsFlowsPagesGet ::
   DialogFlowProjectsLocationsAgentsFlowsPagesGet
 newDialogFlowProjectsLocationsAgentsFlowsPagesGet name =
   DialogFlowProjectsLocationsAgentsFlowsPagesGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       languageCode = Core.Nothing,
@@ -98,30 +97,26 @@ instance
     DialogFlowProjectsLocationsAgentsFlowsPagesGet
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsFlowsPagesGet =
+    Rs DialogFlowProjectsLocationsAgentsFlowsPagesGet =
       GoogleCloudDialogflowCxV3Page
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsFlowsPagesGet =
+    Scopes DialogFlowProjectsLocationsAgentsFlowsPagesGet =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsFlowsPagesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        languageCode
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsFlowsPagesGetResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsFlowsPagesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      languageCode
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsFlowsPagesGetResource
+          )
+          Core.mempty

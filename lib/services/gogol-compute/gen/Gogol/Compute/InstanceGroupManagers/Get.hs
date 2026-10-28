@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InstanceGroupManagers.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InstanceGroupManagers.Get
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instanceGroupManagers.get@ method which the
 -- 'ComputeInstanceGroupManagersGet' request conforms to.
@@ -93,31 +91,26 @@ newComputeInstanceGroupManagersGet ::
   -- |  The name of the zone where the managed instance group is located. See 'zone'.
   Core.Text ->
   ComputeInstanceGroupManagersGet
-newComputeInstanceGroupManagersGet instanceGroupManager project zone =
-  ComputeInstanceGroupManagersGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      project = project,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInstanceGroupManagersGet
+  instanceGroupManager
+  project
+  zone =
     ComputeInstanceGroupManagersGet
-  where
-  type
-    Rs ComputeInstanceGroupManagersGet =
-      InstanceGroupManager
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager = instanceGroupManager,
+        project = project,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
+
+instance Core.GoogleRequest ComputeInstanceGroupManagersGet where
+  type Rs ComputeInstanceGroupManagersGet = InstanceGroupManager
   type
     Scopes ComputeInstanceGroupManagersGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeInstanceGroupManagersGet {..} =
     go
       project
@@ -133,7 +126,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeInstanceGroupManagersGetResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeInstanceGroupManagersGetResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Tests the access control policy for a billing account. This method takes the resource and a set of permissions as input and returns the subset of the input permissions that the caller is allowed for that resource.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.testIamPermissions@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.billingAccounts.testIamPermissions@.
 module Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
   ( -- * Resource
     CloudbillingBillingAccountsTestIamPermissionsResource,
@@ -40,16 +38,13 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.TestIamPermissions
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.testIamPermissions@ method which the
 -- 'CloudbillingBillingAccountsTestIamPermissions' request conforms to.
 type CloudbillingBillingAccountsTestIamPermissionsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "testIamPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -89,7 +84,8 @@ newCloudbillingBillingAccountsTestIamPermissions ::
   CloudbillingBillingAccountsTestIamPermissions
 newCloudbillingBillingAccountsTestIamPermissions payload resource =
   CloudbillingBillingAccountsTestIamPermissions
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -106,29 +102,26 @@ instance
     Rs CloudbillingBillingAccountsTestIamPermissions =
       TestIamPermissionsResponse
   type
-    Scopes
-      CloudbillingBillingAccountsTestIamPermissions =
+    Scopes CloudbillingBillingAccountsTestIamPermissions =
       '[ CloudBilling'FullControl,
          CloudBilling'Readonly,
          CloudPlatform'FullControl
        ]
-  requestClient
-    CloudbillingBillingAccountsTestIamPermissions {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        billingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudbillingBillingAccountsTestIamPermissionsResource
-            )
-            Core.mempty
+  requestClient CloudbillingBillingAccountsTestIamPermissions {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      billingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudbillingBillingAccountsTestIamPermissionsResource
+          )
+          Core.mempty

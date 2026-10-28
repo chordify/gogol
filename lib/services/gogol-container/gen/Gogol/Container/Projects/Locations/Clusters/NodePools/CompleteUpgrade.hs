@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.completeUpgrade@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.completeUpgrade@.
 module Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
   ( -- * Resource
     ContainerProjectsLocationsClustersNodePoolsCompleteUpgradeResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.CompleteUpgrade
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.completeUpgrade@ method which the
 -- 'ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade' request conforms to.
@@ -53,9 +51,7 @@ type ContainerProjectsLocationsClustersNodePoolsCompleteUpgradeResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CompleteNodePoolUpgradeRequest
+    Core.:> Core.ReqBody '[Core.JSON] CompleteNodePoolUpgradeRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
 -- | CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.
@@ -86,24 +82,26 @@ newContainerProjectsLocationsClustersNodePoolsCompleteUpgrade ::
   -- |  Multipart request metadata. See 'payload'.
   CompleteNodePoolUpgradeRequest ->
   ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade
-newContainerProjectsLocationsClustersNodePoolsCompleteUpgrade name payload =
-  ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newContainerProjectsLocationsClustersNodePoolsCompleteUpgrade
+  name
+  payload =
+    ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade
   where
   type
-    Rs
-      ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade =
+    Rs ContainerProjectsLocationsClustersNodePoolsCompleteUpgrade =
       Empty
   type
     Scopes

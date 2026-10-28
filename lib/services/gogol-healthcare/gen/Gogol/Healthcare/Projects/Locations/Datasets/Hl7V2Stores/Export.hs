@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Export
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Export
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.export@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresExport' request conforms to.
@@ -66,7 +64,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresExport = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the source HL7v2 store, in the format @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7v2Stores\/{hl7v2_store_id}@
+    -- | Required. The name of the source HL7v2 store, in the format @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7v2Stores\/{hl7v2_store_id}@
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ExportMessagesRequest,
@@ -79,34 +77,35 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresExport = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresExport' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresExport ::
-  -- |  The name of the source HL7v2 store, in the format @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7v2Stores\/{hl7v2_store_id}@ See 'name'.
+  -- |  Required. The name of the source HL7v2 store, in the format @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7v2Stores\/{hl7v2_store_id}@ See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ExportMessagesRequest ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresExport
-newHealthcareProjectsLocationsDatasetsHl7V2StoresExport name payload =
-  HealthcareProjectsLocationsDatasetsHl7V2StoresExport
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsHl7V2StoresExport
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsHl7V2StoresExport
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsHl7V2StoresExport
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsHl7V2StoresExport =
+    Rs HealthcareProjectsLocationsDatasetsHl7V2StoresExport =
       Operation
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsHl7V2StoresExport =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsHl7V2StoresExport =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresExport {..} =
       go

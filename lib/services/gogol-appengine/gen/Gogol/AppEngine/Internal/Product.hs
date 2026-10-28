@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppEngine.Internal.Product
@@ -37,6 +35,10 @@ module Gogol.AppEngine.Internal.Product
     -- * Application
     Application (..),
     newApplication,
+
+    -- * Application_GeneratedCustomerMetadata
+    Application_GeneratedCustomerMetadata (..),
+    newApplication_GeneratedCustomerMetadata,
 
     -- * AuthorizedCertificate
     AuthorizedCertificate (..),
@@ -74,6 +76,10 @@ module Gogol.AppEngine.Internal.Product
     ContainerInfo (..),
     newContainerInfo,
 
+    -- * ContainerState
+    ContainerState (..),
+    newContainerState,
+
     -- * CpuUtilization
     CpuUtilization (..),
     newCpuUtilization,
@@ -89,6 +95,10 @@ module Gogol.AppEngine.Internal.Product
     -- * CreateVersionMetadataV1Beta
     CreateVersionMetadataV1Beta (..),
     newCreateVersionMetadataV1Beta,
+
+    -- * Date
+    Date (..),
+    newDate,
 
     -- * DebugInstanceRequest
     DebugInstanceRequest (..),
@@ -142,6 +152,10 @@ module Gogol.AppEngine.Internal.Product
     FlexibleRuntimeSettings (..),
     newFlexibleRuntimeSettings,
 
+    -- * GceTag
+    GceTag (..),
+    newGceTag,
+
     -- * GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -189,6 +203,10 @@ module Gogol.AppEngine.Internal.Product
     -- * ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- * ListRuntimesResponse
+    ListRuntimesResponse (..),
+    newListRuntimesResponse,
 
     -- * ListServicesResponse
     ListServicesResponse (..),
@@ -266,10 +284,6 @@ module Gogol.AppEngine.Internal.Product
     ProjectEvent (..),
     newProjectEvent,
 
-    -- * ProjectState
-    ProjectState (..),
-    newProjectState,
-
     -- * ProjectsMetadata
     ProjectsMetadata (..),
     newProjectsMetadata,
@@ -290,6 +304,10 @@ module Gogol.AppEngine.Internal.Product
     RequestUtilization (..),
     newRequestUtilization,
 
+    -- * ResourceEvent
+    ResourceEvent (..),
+    newResourceEvent,
+
     -- * ResourceRecord
     ResourceRecord (..),
     newResourceRecord,
@@ -298,6 +316,10 @@ module Gogol.AppEngine.Internal.Product
     Resources (..),
     newResources,
 
+    -- * Runtime
+    Runtime (..),
+    newRuntime,
+
     -- * ScriptHandler
     ScriptHandler (..),
     newScriptHandler,
@@ -305,6 +327,10 @@ module Gogol.AppEngine.Internal.Product
     -- * Service
     Service (..),
     newService,
+
+    -- * Service_GeneratedCustomerMetadata
+    Service_GeneratedCustomerMetadata (..),
+    newService_GeneratedCustomerMetadata,
 
     -- * Service_Labels
     Service_Labels (..),
@@ -366,6 +392,10 @@ module Gogol.AppEngine.Internal.Product
     Version_EnvVariables (..),
     newVersion_EnvVariables,
 
+    -- * Version_GeneratedCustomerMetadata
+    Version_GeneratedCustomerMetadata (..),
+    newVersion_GeneratedCustomerMetadata,
+
     -- * Volume
     Volume (..),
     newVolume,
@@ -381,7 +411,7 @@ module Gogol.AppEngine.Internal.Product
 where
 
 import Gogol.AppEngine.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Google Cloud Endpoints (https:\/\/cloud.google.com\/endpoints) configuration for API handlers.
 --
@@ -449,23 +479,19 @@ newtype ApiEndpointHandler = ApiEndpointHandler
 -- | Creates a value of 'ApiEndpointHandler' with the minimum fields required to make a request.
 newApiEndpointHandler ::
   ApiEndpointHandler
-newApiEndpointHandler = ApiEndpointHandler {scriptPath = Core.Nothing}
+newApiEndpointHandler =
+  ApiEndpointHandler {scriptPath = Core.Nothing}
 
 instance Core.FromJSON ApiEndpointHandler where
   parseJSON =
     Core.withObject
       "ApiEndpointHandler"
-      ( \o ->
-          ApiEndpointHandler
-            Core.<$> (o Core..:? "scriptPath")
-      )
+      (\o -> ApiEndpointHandler Core.<$> (o Core..:? "scriptPath"))
 
 instance Core.ToJSON ApiEndpointHandler where
   toJSON ApiEndpointHandler {..} =
     Core.object
-      ( Core.catMaybes
-          [("scriptPath" Core..=) Core.<$> scriptPath]
-      )
+      (Core.catMaybes [("scriptPath" Core..=) Core.<$> scriptPath])
 
 -- | An Application resource contains the top-level configuration of an App Engine application.
 --
@@ -489,7 +515,8 @@ data Application = Application
     featureSettings :: (Core.Maybe FeatureSettings),
     -- | Output only. The Google Container Registry domain used for storing managed build docker images for this application.
     gcrDomain :: (Core.Maybe Core.Text),
-    -- |
+    -- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetApplicationRequest
+    generatedCustomerMetadata :: (Core.Maybe Application_GeneratedCustomerMetadata),
     iap :: (Core.Maybe IdentityAwareProxy),
     -- | Identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: myapp.
     id :: (Core.Maybe Core.Text),
@@ -500,7 +527,9 @@ data Application = Application
     -- | The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Serving status of this application.
-    servingStatus :: (Core.Maybe Application_ServingStatus)
+    servingStatus :: (Core.Maybe Application_ServingStatus),
+    -- | The SSL policy that will be applied to the application. If set to Modern it will restrict traffic with TLS \< 1.2 and allow only Modern Ciphers suite
+    sslPolicy :: (Core.Maybe Application_SslPolicy)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -518,12 +547,14 @@ newApplication =
       dispatchRules = Core.Nothing,
       featureSettings = Core.Nothing,
       gcrDomain = Core.Nothing,
+      generatedCustomerMetadata = Core.Nothing,
       iap = Core.Nothing,
       id = Core.Nothing,
       locationId = Core.Nothing,
       name = Core.Nothing,
       serviceAccount = Core.Nothing,
-      servingStatus = Core.Nothing
+      servingStatus = Core.Nothing,
+      sslPolicy = Core.Nothing
     }
 
 instance Core.FromJSON Application where
@@ -541,12 +572,14 @@ instance Core.FromJSON Application where
             Core.<*> (o Core..:? "dispatchRules")
             Core.<*> (o Core..:? "featureSettings")
             Core.<*> (o Core..:? "gcrDomain")
+            Core.<*> (o Core..:? "generatedCustomerMetadata")
             Core.<*> (o Core..:? "iap")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "locationId")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "servingStatus")
+            Core.<*> (o Core..:? "sslPolicy")
       )
 
 instance Core.ToJSON Application where
@@ -563,14 +596,47 @@ instance Core.ToJSON Application where
             ("dispatchRules" Core..=) Core.<$> dispatchRules,
             ("featureSettings" Core..=) Core.<$> featureSettings,
             ("gcrDomain" Core..=) Core.<$> gcrDomain,
+            ("generatedCustomerMetadata" Core..=)
+              Core.<$> generatedCustomerMetadata,
             ("iap" Core..=) Core.<$> iap,
             ("id" Core..=) Core.<$> id,
             ("locationId" Core..=) Core.<$> locationId,
             ("name" Core..=) Core.<$> name,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("servingStatus" Core..=) Core.<$> servingStatus
+            ("servingStatus" Core..=) Core.<$> servingStatus,
+            ("sslPolicy" Core..=) Core.<$> sslPolicy
           ]
       )
+
+-- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetApplicationRequest
+--
+-- /See:/ 'newApplication_GeneratedCustomerMetadata' smart constructor.
+newtype Application_GeneratedCustomerMetadata = Application_GeneratedCustomerMetadata
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Application_GeneratedCustomerMetadata' with the minimum fields required to make a request.
+newApplication_GeneratedCustomerMetadata ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Application_GeneratedCustomerMetadata
+newApplication_GeneratedCustomerMetadata additional =
+  Application_GeneratedCustomerMetadata {additional = additional}
+
+instance Core.FromJSON Application_GeneratedCustomerMetadata where
+  parseJSON =
+    Core.withObject
+      "Application_GeneratedCustomerMetadata"
+      ( \o ->
+          Application_GeneratedCustomerMetadata
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON Application_GeneratedCustomerMetadata where
+  toJSON Application_GeneratedCustomerMetadata {..} =
+    Core.toJSON additional
 
 -- | An SSL certificate that a user has been authorized to administer. A user is authorized to administer any certificate that applies to one of their authorized domains.
 --
@@ -634,23 +700,19 @@ instance Core.ToJSON AuthorizedCertificate where
   toJSON AuthorizedCertificate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("certificateRawData" Core..=)
-              Core.<$> certificateRawData,
+          [ ("certificateRawData" Core..=) Core.<$> certificateRawData,
             ("displayName" Core..=) Core.<$> displayName,
-            ("domainMappingsCount" Core..=)
-              Core.<$> domainMappingsCount,
+            ("domainMappingsCount" Core..=) Core.<$> domainMappingsCount,
             ("domainNames" Core..=) Core.<$> domainNames,
             ("expireTime" Core..=) Core.<$> expireTime,
             ("id" Core..=) Core.<$> id,
-            ("managedCertificate" Core..=)
-              Core.<$> managedCertificate,
+            ("managedCertificate" Core..=) Core.<$> managedCertificate,
             ("name" Core..=) Core.<$> name,
-            ("visibleDomainMappings" Core..=)
-              Core.<$> visibleDomainMappings
+            ("visibleDomainMappings" Core..=) Core.<$> visibleDomainMappings
           ]
       )
 
--- | A domain that a user has been authorized to administer. To authorize use of a domain, verify ownership via Webmaster Central (https:\/\/www.google.com\/webmasters\/verification\/home).
+-- | A domain that a user has been authorized to administer. To authorize use of a domain, verify ownership via Search Console (https:\/\/search.google.com\/search-console\/welcome).
 --
 -- /See:/ 'newAuthorizedDomain' smart constructor.
 data AuthorizedDomain = AuthorizedDomain
@@ -664,7 +726,8 @@ data AuthorizedDomain = AuthorizedDomain
 -- | Creates a value of 'AuthorizedDomain' with the minimum fields required to make a request.
 newAuthorizedDomain ::
   AuthorizedDomain
-newAuthorizedDomain = AuthorizedDomain {id = Core.Nothing, name = Core.Nothing}
+newAuthorizedDomain =
+  AuthorizedDomain {id = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON AuthorizedDomain where
   parseJSON =
@@ -672,16 +735,15 @@ instance Core.FromJSON AuthorizedDomain where
       "AuthorizedDomain"
       ( \o ->
           AuthorizedDomain
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON AuthorizedDomain where
   toJSON AuthorizedDomain {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("id" Core..=) Core.<$> id, ("name" Core..=) Core.<$> name]
       )
 
 -- | Automatic scaling is based on request rate, response latencies, and other application metrics.
@@ -765,24 +827,15 @@ instance Core.ToJSON AutomaticScaling where
           [ ("coolDownPeriod" Core..=) Core.<$> coolDownPeriod,
             ("cpuUtilization" Core..=) Core.<$> cpuUtilization,
             ("diskUtilization" Core..=) Core.<$> diskUtilization,
-            ("maxConcurrentRequests" Core..=)
-              Core.<$> maxConcurrentRequests,
-            ("maxIdleInstances" Core..=)
-              Core.<$> maxIdleInstances,
-            ("maxPendingLatency" Core..=)
-              Core.<$> maxPendingLatency,
-            ("maxTotalInstances" Core..=)
-              Core.<$> maxTotalInstances,
-            ("minIdleInstances" Core..=)
-              Core.<$> minIdleInstances,
-            ("minPendingLatency" Core..=)
-              Core.<$> minPendingLatency,
-            ("minTotalInstances" Core..=)
-              Core.<$> minTotalInstances,
-            ("networkUtilization" Core..=)
-              Core.<$> networkUtilization,
-            ("requestUtilization" Core..=)
-              Core.<$> requestUtilization,
+            ("maxConcurrentRequests" Core..=) Core.<$> maxConcurrentRequests,
+            ("maxIdleInstances" Core..=) Core.<$> maxIdleInstances,
+            ("maxPendingLatency" Core..=) Core.<$> maxPendingLatency,
+            ("maxTotalInstances" Core..=) Core.<$> maxTotalInstances,
+            ("minIdleInstances" Core..=) Core.<$> minIdleInstances,
+            ("minPendingLatency" Core..=) Core.<$> minPendingLatency,
+            ("minTotalInstances" Core..=) Core.<$> minTotalInstances,
+            ("networkUtilization" Core..=) Core.<$> networkUtilization,
+            ("requestUtilization" Core..=) Core.<$> requestUtilization,
             ("standardSchedulerSettings" Core..=)
               Core.<$> standardSchedulerSettings
           ]
@@ -803,7 +856,10 @@ data BasicScaling = BasicScaling
 newBasicScaling ::
   BasicScaling
 newBasicScaling =
-  BasicScaling {idleTimeout = Core.Nothing, maxInstances = Core.Nothing}
+  BasicScaling
+    { idleTimeout = Core.Nothing,
+      maxInstances = Core.Nothing
+    }
 
 instance Core.FromJSON BasicScaling where
   parseJSON =
@@ -851,9 +907,7 @@ instance Core.FromJSON BatchUpdateIngressRulesRequest where
 instance Core.ToJSON BatchUpdateIngressRulesRequest where
   toJSON BatchUpdateIngressRulesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("ingressRules" Core..=) Core.<$> ingressRules]
-      )
+      (Core.catMaybes [("ingressRules" Core..=) Core.<$> ingressRules])
 
 -- | Response message for Firewall.UpdateAllIngressRules.
 --
@@ -870,10 +924,7 @@ newBatchUpdateIngressRulesResponse ::
 newBatchUpdateIngressRulesResponse =
   BatchUpdateIngressRulesResponse {ingressRules = Core.Nothing}
 
-instance
-  Core.FromJSON
-    BatchUpdateIngressRulesResponse
-  where
+instance Core.FromJSON BatchUpdateIngressRulesResponse where
   parseJSON =
     Core.withObject
       "BatchUpdateIngressRulesResponse"
@@ -885,9 +936,7 @@ instance
 instance Core.ToJSON BatchUpdateIngressRulesResponse where
   toJSON BatchUpdateIngressRulesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("ingressRules" Core..=) Core.<$> ingressRules]
-      )
+      (Core.catMaybes [("ingressRules" Core..=) Core.<$> ingressRules])
 
 -- | An SSL certificate obtained from a certificate authority.
 --
@@ -924,8 +973,7 @@ instance Core.ToJSON CertificateRawData where
     Core.object
       ( Core.catMaybes
           [ ("privateKey" Core..=) Core.<$> privateKey,
-            ("publicCertificate" Core..=)
-              Core.<$> publicCertificate
+            ("publicCertificate" Core..=) Core.<$> publicCertificate
           ]
       )
 
@@ -964,8 +1012,7 @@ instance Core.ToJSON CloudBuildOptions where
     Core.object
       ( Core.catMaybes
           [ ("appYamlPath" Core..=) Core.<$> appYamlPath,
-            ("cloudBuildTimeout" Core..=)
-              Core.<$> cloudBuildTimeout
+            ("cloudBuildTimeout" Core..=) Core.<$> cloudBuildTimeout
           ]
       )
 
@@ -991,8 +1038,50 @@ instance Core.FromJSON ContainerInfo where
 
 instance Core.ToJSON ContainerInfo where
   toJSON ContainerInfo {..} =
+    Core.object (Core.catMaybes [("image" Core..=) Core.<$> image])
+
+-- | ContainerState contains the externally-visible container state that is used to communicate the state and reasoning for that state to the CLH. This data is not persisted by CCFE, but is instead derived from CCFE\'s internal representation of the container state.
+--
+-- /See:/ 'newContainerState' smart constructor.
+data ContainerState = ContainerState
+  { currentReasons :: (Core.Maybe Reasons),
+    -- | The previous and current reasons for a container state will be sent for a container event. CLHs that need to know the signal that caused the container event to trigger (edges) as opposed to just knowing the state can act upon differences in the previous and current reasons.Reasons will be provided for every system: service management, data governance, abuse, and billing.If this is a CCFE-triggered event used for reconciliation then the current reasons will be set to their */CONTROL/PLANE/SYNC state. The previous reasons will contain the last known set of non-unknown non-control/plane_sync reasons for the state.
+    previousReasons :: (Core.Maybe Reasons),
+    -- | The current state of the container. This state is the culmination of all of the opinions from external systems that CCFE knows about of the container.
+    state :: (Core.Maybe ContainerState_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ContainerState' with the minimum fields required to make a request.
+newContainerState ::
+  ContainerState
+newContainerState =
+  ContainerState
+    { currentReasons = Core.Nothing,
+      previousReasons = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON ContainerState where
+  parseJSON =
+    Core.withObject
+      "ContainerState"
+      ( \o ->
+          ContainerState
+            Core.<$> (o Core..:? "currentReasons")
+            Core.<*> (o Core..:? "previousReasons")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON ContainerState where
+  toJSON ContainerState {..} =
     Core.object
-      (Core.catMaybes [("image" Core..=) Core.<$> image])
+      ( Core.catMaybes
+          [ ("currentReasons" Core..=) Core.<$> currentReasons,
+            ("previousReasons" Core..=) Core.<$> previousReasons,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
 
 -- | Target scaling by CPU usage.
 --
@@ -1030,8 +1119,7 @@ instance Core.ToJSON CpuUtilization where
       ( Core.catMaybes
           [ ("aggregationWindowLength" Core..=)
               Core.<$> aggregationWindowLength,
-            ("targetUtilization" Core..=)
-              Core.<$> targetUtilization
+            ("targetUtilization" Core..=) Core.<$> targetUtilization
           ]
       )
 
@@ -1055,16 +1143,13 @@ instance Core.FromJSON CreateVersionMetadataV1 where
     Core.withObject
       "CreateVersionMetadataV1"
       ( \o ->
-          CreateVersionMetadataV1
-            Core.<$> (o Core..:? "cloudBuildId")
+          CreateVersionMetadataV1 Core.<$> (o Core..:? "cloudBuildId")
       )
 
 instance Core.ToJSON CreateVersionMetadataV1 where
   toJSON CreateVersionMetadataV1 {..} =
     Core.object
-      ( Core.catMaybes
-          [("cloudBuildId" Core..=) Core.<$> cloudBuildId]
-      )
+      (Core.catMaybes [("cloudBuildId" Core..=) Core.<$> cloudBuildId])
 
 -- | Metadata for the given google.longrunning.Operation during a google.appengine.v1alpha.CreateVersionRequest.
 --
@@ -1086,16 +1171,13 @@ instance Core.FromJSON CreateVersionMetadataV1Alpha where
     Core.withObject
       "CreateVersionMetadataV1Alpha"
       ( \o ->
-          CreateVersionMetadataV1Alpha
-            Core.<$> (o Core..:? "cloudBuildId")
+          CreateVersionMetadataV1Alpha Core.<$> (o Core..:? "cloudBuildId")
       )
 
 instance Core.ToJSON CreateVersionMetadataV1Alpha where
   toJSON CreateVersionMetadataV1Alpha {..} =
     Core.object
-      ( Core.catMaybes
-          [("cloudBuildId" Core..=) Core.<$> cloudBuildId]
-      )
+      (Core.catMaybes [("cloudBuildId" Core..=) Core.<$> cloudBuildId])
 
 -- | Metadata for the given google.longrunning.Operation during a google.appengine.v1beta.CreateVersionRequest.
 --
@@ -1117,15 +1199,56 @@ instance Core.FromJSON CreateVersionMetadataV1Beta where
     Core.withObject
       "CreateVersionMetadataV1Beta"
       ( \o ->
-          CreateVersionMetadataV1Beta
-            Core.<$> (o Core..:? "cloudBuildId")
+          CreateVersionMetadataV1Beta Core.<$> (o Core..:? "cloudBuildId")
       )
 
 instance Core.ToJSON CreateVersionMetadataV1Beta where
   toJSON CreateVersionMetadataV1Beta {..} =
     Core.object
+      (Core.catMaybes [("cloudBuildId" Core..=) Core.<$> cloudBuildId])
+
+-- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values. A month and day, with a zero year (for example, an anniversary). A year on its own, with a zero month and a zero day. A year and month, with a zero day (for example, a credit card expiration date).Related types: google.type.TimeOfDay google.type.DateTime google.protobuf.Timestamp
+--
+-- /See:/ 'newDate' smart constructor.
+data Date = Date
+  { -- | Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn\'t significant.
+    day :: (Core.Maybe Core.Int32),
+    -- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+    month :: (Core.Maybe Core.Int32),
+    -- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+    year :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+newDate ::
+  Date
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
+
+instance Core.FromJSON Date where
+  parseJSON =
+    Core.withObject
+      "Date"
+      ( \o ->
+          Date
+            Core.<$> (o Core..:? "day")
+            Core.<*> (o Core..:? "month")
+            Core.<*> (o Core..:? "year")
+      )
+
+instance Core.ToJSON Date where
+  toJSON Date {..} =
+    Core.object
       ( Core.catMaybes
-          [("cloudBuildId" Core..=) Core.<$> cloudBuildId]
+          [ ("day" Core..=) Core.<$> day,
+            ("month" Core..=) Core.<$> month,
+            ("year" Core..=) Core.<$> year
+          ]
       )
 
 -- | Request message for Instances.DebugInstance.
@@ -1140,20 +1263,18 @@ newtype DebugInstanceRequest = DebugInstanceRequest
 -- | Creates a value of 'DebugInstanceRequest' with the minimum fields required to make a request.
 newDebugInstanceRequest ::
   DebugInstanceRequest
-newDebugInstanceRequest = DebugInstanceRequest {sshKey = Core.Nothing}
+newDebugInstanceRequest =
+  DebugInstanceRequest {sshKey = Core.Nothing}
 
 instance Core.FromJSON DebugInstanceRequest where
   parseJSON =
     Core.withObject
       "DebugInstanceRequest"
-      ( \o ->
-          DebugInstanceRequest Core.<$> (o Core..:? "sshKey")
-      )
+      (\o -> DebugInstanceRequest Core.<$> (o Core..:? "sshKey"))
 
 instance Core.ToJSON DebugInstanceRequest where
   toJSON DebugInstanceRequest {..} =
-    Core.object
-      (Core.catMaybes [("sshKey" Core..=) Core.<$> sshKey])
+    Core.object (Core.catMaybes [("sshKey" Core..=) Core.<$> sshKey])
 
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
@@ -1197,8 +1318,7 @@ instance Core.ToJSON Deployment where
   toJSON Deployment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloudBuildOptions" Core..=)
-              Core.<$> cloudBuildOptions,
+          [ ("cloudBuildOptions" Core..=) Core.<$> cloudBuildOptions,
             ("container" Core..=) Core.<$> container,
             ("files" Core..=) Core.<$> files,
             ("zip" Core..=) Core.<$> zip
@@ -1209,8 +1329,7 @@ instance Core.ToJSON Deployment where
 --
 -- /See:/ 'newDeployment_Files' smart constructor.
 newtype Deployment_Files = Deployment_Files
-  { -- |
-    additional :: (Core.HashMap Core.Text FileInfo)
+  { additional :: (Core.HashMap Core.Text FileInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1219,15 +1338,14 @@ newDeployment_Files ::
   -- |  See 'additional'.
   Core.HashMap Core.Text FileInfo ->
   Deployment_Files
-newDeployment_Files additional = Deployment_Files {additional = additional}
+newDeployment_Files additional =
+  Deployment_Files {additional = additional}
 
 instance Core.FromJSON Deployment_Files where
   parseJSON =
     Core.withObject
       "Deployment_Files"
-      ( \o ->
-          Deployment_Files Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Deployment_Files Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Deployment_Files where
   toJSON Deployment_Files {..} = Core.toJSON additional
@@ -1276,8 +1394,7 @@ instance Core.ToJSON DiskUtilization where
       ( Core.catMaybes
           [ ("targetReadBytesPerSecond" Core..=)
               Core.<$> targetReadBytesPerSecond,
-            ("targetReadOpsPerSecond" Core..=)
-              Core.<$> targetReadOpsPerSecond,
+            ("targetReadOpsPerSecond" Core..=) Core.<$> targetReadOpsPerSecond,
             ("targetWriteBytesPerSecond" Core..=)
               Core.<$> targetWriteBytesPerSecond,
             ("targetWriteOpsPerSecond" Core..=)
@@ -1346,8 +1463,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1395,11 +1511,9 @@ instance Core.ToJSON EndpointsApiService where
     Core.object
       ( Core.catMaybes
           [ ("configId" Core..=) Core.<$> configId,
-            ("disableTraceSampling" Core..=)
-              Core.<$> disableTraceSampling,
+            ("disableTraceSampling" Core..=) Core.<$> disableTraceSampling,
             ("name" Core..=) Core.<$> name,
-            ("rolloutStrategy" Core..=)
-              Core.<$> rolloutStrategy
+            ("rolloutStrategy" Core..=) Core.<$> rolloutStrategy
           ]
       )
 
@@ -1425,8 +1539,7 @@ instance Core.FromJSON Entrypoint where
 
 instance Core.ToJSON Entrypoint where
   toJSON Entrypoint {..} =
-    Core.object
-      (Core.catMaybes [("shell" Core..=) Core.<$> shell])
+    Core.object (Core.catMaybes [("shell" Core..=) Core.<$> shell])
 
 -- | Custom static error page to be served when an error occurs.
 --
@@ -1506,8 +1619,7 @@ instance Core.ToJSON FeatureSettings where
   toJSON FeatureSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("splitHealthChecks" Core..=)
-              Core.<$> splitHealthChecks,
+          [ ("splitHealthChecks" Core..=) Core.<$> splitHealthChecks,
             ("useContainerOptimizedOs" Core..=)
               Core.<$> useContainerOptimizedOs
           ]
@@ -1640,10 +1752,40 @@ instance Core.ToJSON FlexibleRuntimeSettings where
   toJSON FlexibleRuntimeSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("operatingSystem" Core..=)
-              Core.<$> operatingSystem,
+          [ ("operatingSystem" Core..=) Core.<$> operatingSystem,
             ("runtimeVersion" Core..=) Core.<$> runtimeVersion
           ]
+      )
+
+-- | For use only by GCE. GceTag is a wrapper around the GCE administrative tag with parent info.
+--
+-- /See:/ 'newGceTag' smart constructor.
+data GceTag = GceTag
+  { -- | The parents(s) of the tag. Eg. projects\/123, folders\/456 It usually contains only one parent. But, in some corner cases, it can contain multiple parents. Currently, organizations are not supported.
+    parent :: (Core.Maybe [Core.Text]),
+    -- | The administrative_tag name.
+    tag :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GceTag' with the minimum fields required to make a request.
+newGceTag ::
+  GceTag
+newGceTag = GceTag {parent = Core.Nothing, tag = Core.Nothing}
+
+instance Core.FromJSON GceTag where
+  parseJSON =
+    Core.withObject
+      "GceTag"
+      ( \o ->
+          GceTag Core.<$> (o Core..:? "parent") Core.<*> (o Core..:? "tag")
+      )
+
+instance Core.ToJSON GceTag where
+  toJSON GceTag {..} =
+    Core.object
+      ( Core.catMaybes
+          [("parent" Core..=) Core.<$> parent, ("tag" Core..=) Core.<$> tag]
       )
 
 -- | Metadata for the given google.cloud.location.Location.
@@ -1664,15 +1806,13 @@ newGoogleAppengineV1betaLocationMetadata ::
   GoogleAppengineV1betaLocationMetadata
 newGoogleAppengineV1betaLocationMetadata =
   GoogleAppengineV1betaLocationMetadata
-    { flexibleEnvironmentAvailable = Core.Nothing,
+    { flexibleEnvironmentAvailable =
+        Core.Nothing,
       searchApiAvailable = Core.Nothing,
       standardEnvironmentAvailable = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppengineV1betaLocationMetadata
-  where
+instance Core.FromJSON GoogleAppengineV1betaLocationMetadata where
   parseJSON =
     Core.withObject
       "GoogleAppengineV1betaLocationMetadata"
@@ -1683,17 +1823,13 @@ instance
             Core.<*> (o Core..:? "standardEnvironmentAvailable")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppengineV1betaLocationMetadata
-  where
+instance Core.ToJSON GoogleAppengineV1betaLocationMetadata where
   toJSON GoogleAppengineV1betaLocationMetadata {..} =
     Core.object
       ( Core.catMaybes
           [ ("flexibleEnvironmentAvailable" Core..=)
               Core.<$> flexibleEnvironmentAvailable,
-            ("searchApiAvailable" Core..=)
-              Core.<$> searchApiAvailable,
+            ("searchApiAvailable" Core..=) Core.<$> searchApiAvailable,
             ("standardEnvironmentAvailable" Core..=)
               Core.<$> standardEnvironmentAvailable
           ]
@@ -1754,16 +1890,12 @@ instance Core.ToJSON HealthCheck where
     Core.object
       ( Core.catMaybes
           [ ("checkInterval" Core..=) Core.<$> checkInterval,
-            ("disableHealthCheck" Core..=)
-              Core.<$> disableHealthCheck,
-            ("healthyThreshold" Core..=)
-              Core.<$> healthyThreshold,
+            ("disableHealthCheck" Core..=) Core.<$> disableHealthCheck,
+            ("healthyThreshold" Core..=) Core.<$> healthyThreshold,
             ("host" Core..=) Core.<$> host,
-            ("restartThreshold" Core..=)
-              Core.<$> restartThreshold,
+            ("restartThreshold" Core..=) Core.<$> restartThreshold,
             ("timeout" Core..=) Core.<$> timeout,
-            ("unhealthyThreshold" Core..=)
-              Core.<$> unhealthyThreshold
+            ("unhealthyThreshold" Core..=) Core.<$> unhealthyThreshold
           ]
       )
 
@@ -1811,8 +1943,7 @@ instance Core.ToJSON IdentityAwareProxy where
       ( Core.catMaybes
           [ ("enabled" Core..=) Core.<$> enabled,
             ("oauth2ClientId" Core..=) Core.<$> oauth2ClientId,
-            ("oauth2ClientSecret" Core..=)
-              Core.<$> oauth2ClientSecret,
+            ("oauth2ClientSecret" Core..=) Core.<$> oauth2ClientSecret,
             ("oauth2ClientSecretSha256" Core..=)
               Core.<$> oauth2ClientSecretSha256
           ]
@@ -1894,9 +2025,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "averageLatency")
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "memoryUsage"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "memoryUsage" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "qps")
             Core.<*> (o Core..:? "requests")
@@ -1914,14 +2043,12 @@ instance Core.ToJSON Instance where
   toJSON Instance {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appEngineRelease" Core..=)
-              Core.<$> appEngineRelease,
+          [ ("appEngineRelease" Core..=) Core.<$> appEngineRelease,
             ("availability" Core..=) Core.<$> availability,
             ("averageLatency" Core..=) Core.<$> averageLatency,
             ("errors" Core..=) Core.<$> errors,
             ("id" Core..=) Core.<$> id,
-            ("memoryUsage" Core..=) Core.. Core.AsText
-              Core.<$> memoryUsage,
+            ("memoryUsage" Core..=) Core.. Core.AsText Core.<$> memoryUsage,
             ("name" Core..=) Core.<$> name,
             ("qps" Core..=) Core.<$> qps,
             ("requests" Core..=) Core.<$> requests,
@@ -1958,7 +2085,8 @@ instance Core.FromJSON Library where
       "Library"
       ( \o ->
           Library
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON Library where
@@ -1990,10 +2118,7 @@ newListAuthorizedCertificatesResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListAuthorizedCertificatesResponse
-  where
+instance Core.FromJSON ListAuthorizedCertificatesResponse where
   parseJSON =
     Core.withObject
       "ListAuthorizedCertificatesResponse"
@@ -2003,10 +2128,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListAuthorizedCertificatesResponse
-  where
+instance Core.ToJSON ListAuthorizedCertificatesResponse where
   toJSON ListAuthorizedCertificatesResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2147,7 +2269,10 @@ data ListInstancesResponse = ListInstancesResponse
 newListInstancesResponse ::
   ListInstancesResponse
 newListInstancesResponse =
-  ListInstancesResponse {instances = Core.Nothing, nextPageToken = Core.Nothing}
+  ListInstancesResponse
+    { instances = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListInstancesResponse where
   parseJSON =
@@ -2183,7 +2308,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -2243,6 +2371,45 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
+-- | Response message for Applications.ListRuntimes.
+--
+-- /See:/ 'newListRuntimesResponse' smart constructor.
+data ListRuntimesResponse = ListRuntimesResponse
+  { -- | Continuation token for fetching the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The runtimes available to the requested application.
+    runtimes :: (Core.Maybe [Runtime])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListRuntimesResponse' with the minimum fields required to make a request.
+newListRuntimesResponse ::
+  ListRuntimesResponse
+newListRuntimesResponse =
+  ListRuntimesResponse
+    { nextPageToken = Core.Nothing,
+      runtimes = Core.Nothing
+    }
+
+instance Core.FromJSON ListRuntimesResponse where
+  parseJSON =
+    Core.withObject
+      "ListRuntimesResponse"
+      ( \o ->
+          ListRuntimesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "runtimes")
+      )
+
+instance Core.ToJSON ListRuntimesResponse where
+  toJSON ListRuntimesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("runtimes" Core..=) Core.<$> runtimes
+          ]
+      )
+
 -- | Response message for Services.ListServices.
 --
 -- /See:/ 'newListServicesResponse' smart constructor.
@@ -2258,7 +2425,10 @@ data ListServicesResponse = ListServicesResponse
 newListServicesResponse ::
   ListServicesResponse
 newListServicesResponse =
-  ListServicesResponse {nextPageToken = Core.Nothing, services = Core.Nothing}
+  ListServicesResponse
+    { nextPageToken = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON ListServicesResponse where
   parseJSON =
@@ -2294,7 +2464,10 @@ data ListVersionsResponse = ListVersionsResponse
 newListVersionsResponse ::
   ListVersionsResponse
 newListVersionsResponse =
-  ListVersionsResponse {nextPageToken = Core.Nothing, versions = Core.Nothing}
+  ListVersionsResponse
+    { nextPageToken = Core.Nothing,
+      versions = Core.Nothing
+    }
 
 instance Core.FromJSON ListVersionsResponse where
   parseJSON =
@@ -2370,18 +2543,16 @@ instance Core.ToJSON LivenessCheck where
     Core.object
       ( Core.catMaybes
           [ ("checkInterval" Core..=) Core.<$> checkInterval,
-            ("failureThreshold" Core..=)
-              Core.<$> failureThreshold,
+            ("failureThreshold" Core..=) Core.<$> failureThreshold,
             ("host" Core..=) Core.<$> host,
             ("initialDelay" Core..=) Core.<$> initialDelay,
             ("path" Core..=) Core.<$> path,
-            ("successThreshold" Core..=)
-              Core.<$> successThreshold,
+            ("successThreshold" Core..=) Core.<$> successThreshold,
             ("timeout" Core..=) Core.<$> timeout
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -2439,8 +2610,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2449,15 +2619,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -2476,15 +2645,14 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
@@ -2529,8 +2697,7 @@ instance Core.ToJSON LocationMetadata where
       ( Core.catMaybes
           [ ("flexibleEnvironmentAvailable" Core..=)
               Core.<$> flexibleEnvironmentAvailable,
-            ("searchApiAvailable" Core..=)
-              Core.<$> searchApiAvailable,
+            ("searchApiAvailable" Core..=) Core.<$> searchApiAvailable,
             ("standardEnvironmentAvailable" Core..=)
               Core.<$> standardEnvironmentAvailable
           ]
@@ -2551,7 +2718,10 @@ data ManagedCertificate = ManagedCertificate
 newManagedCertificate ::
   ManagedCertificate
 newManagedCertificate =
-  ManagedCertificate {lastRenewalTime = Core.Nothing, status = Core.Nothing}
+  ManagedCertificate
+    { lastRenewalTime = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON ManagedCertificate where
   parseJSON =
@@ -2567,8 +2737,7 @@ instance Core.ToJSON ManagedCertificate where
   toJSON ManagedCertificate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("lastRenewalTime" Core..=)
-              Core.<$> lastRenewalTime,
+          [ ("lastRenewalTime" Core..=) Core.<$> lastRenewalTime,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -2591,16 +2760,12 @@ instance Core.FromJSON ManualScaling where
   parseJSON =
     Core.withObject
       "ManualScaling"
-      ( \o ->
-          ManualScaling Core.<$> (o Core..:? "instances")
-      )
+      (\o -> ManualScaling Core.<$> (o Core..:? "instances"))
 
 instance Core.ToJSON ManualScaling where
   toJSON ManualScaling {..} =
     Core.object
-      ( Core.catMaybes
-          [("instances" Core..=) Core.<$> instances]
-      )
+      (Core.catMaybes [("instances" Core..=) Core.<$> instances])
 
 -- | Extra network settings. Only applicable in the App Engine flexible environment.
 --
@@ -2673,24 +2838,22 @@ newtype NetworkSettings = NetworkSettings
 -- | Creates a value of 'NetworkSettings' with the minimum fields required to make a request.
 newNetworkSettings ::
   NetworkSettings
-newNetworkSettings = NetworkSettings {ingressTrafficAllowed = Core.Nothing}
+newNetworkSettings =
+  NetworkSettings {ingressTrafficAllowed = Core.Nothing}
 
 instance Core.FromJSON NetworkSettings where
   parseJSON =
     Core.withObject
       "NetworkSettings"
       ( \o ->
-          NetworkSettings
-            Core.<$> (o Core..:? "ingressTrafficAllowed")
+          NetworkSettings Core.<$> (o Core..:? "ingressTrafficAllowed")
       )
 
 instance Core.ToJSON NetworkSettings where
   toJSON NetworkSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ingressTrafficAllowed" Core..=)
-              Core.<$> ingressTrafficAllowed
-          ]
+          [("ingressTrafficAllowed" Core..=) Core.<$> ingressTrafficAllowed]
       )
 
 -- | Target scaling by network usage. Only applicable in the App Engine flexible environment.
@@ -2758,7 +2921,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the name should be a resource name ending with operations\/{unique_id}.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get\/Create\/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get\/Create\/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2814,21 +2977,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get\/Create\/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get\/Create\/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -2842,26 +3003,23 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'newOperationMetadataV1' smart constructor.
 data OperationMetadataV1 = OperationMetadataV1
-  { -- |
-    createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1),
+  { createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1),
     -- | Time that this operation completed.\@OutputOnly
     endTime :: (Core.Maybe Core.DateTime),
     -- | Ephemeral message that may change every time the operation is polled. \@OutputOnly
@@ -2914,11 +3072,9 @@ instance Core.ToJSON OperationMetadataV1 where
   toJSON OperationMetadataV1 {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createVersionMetadata" Core..=)
-              Core.<$> createVersionMetadata,
+          [ ("createVersionMetadata" Core..=) Core.<$> createVersionMetadata,
             ("endTime" Core..=) Core.<$> endTime,
-            ("ephemeralMessage" Core..=)
-              Core.<$> ephemeralMessage,
+            ("ephemeralMessage" Core..=) Core.<$> ephemeralMessage,
             ("insertTime" Core..=) Core.<$> insertTime,
             ("method" Core..=) Core.<$> method,
             ("target" Core..=) Core.<$> target,
@@ -2931,8 +3087,7 @@ instance Core.ToJSON OperationMetadataV1 where
 --
 -- /See:/ 'newOperationMetadataV1Alpha' smart constructor.
 data OperationMetadataV1Alpha = OperationMetadataV1Alpha
-  { -- |
-    createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1Alpha),
+  { createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1Alpha),
     -- | Time that this operation completed.\@OutputOnly
     endTime :: (Core.Maybe Core.DateTime),
     -- | Ephemeral message that may change every time the operation is polled. \@OutputOnly
@@ -2985,11 +3140,9 @@ instance Core.ToJSON OperationMetadataV1Alpha where
   toJSON OperationMetadataV1Alpha {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createVersionMetadata" Core..=)
-              Core.<$> createVersionMetadata,
+          [ ("createVersionMetadata" Core..=) Core.<$> createVersionMetadata,
             ("endTime" Core..=) Core.<$> endTime,
-            ("ephemeralMessage" Core..=)
-              Core.<$> ephemeralMessage,
+            ("ephemeralMessage" Core..=) Core.<$> ephemeralMessage,
             ("insertTime" Core..=) Core.<$> insertTime,
             ("method" Core..=) Core.<$> method,
             ("target" Core..=) Core.<$> target,
@@ -3002,8 +3155,7 @@ instance Core.ToJSON OperationMetadataV1Alpha where
 --
 -- /See:/ 'newOperationMetadataV1Beta' smart constructor.
 data OperationMetadataV1Beta = OperationMetadataV1Beta
-  { -- |
-    createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1Beta),
+  { createVersionMetadata :: (Core.Maybe CreateVersionMetadataV1Beta),
     -- | Time that this operation completed.\@OutputOnly
     endTime :: (Core.Maybe Core.DateTime),
     -- | Ephemeral message that may change every time the operation is polled. \@OutputOnly
@@ -3056,11 +3208,9 @@ instance Core.ToJSON OperationMetadataV1Beta where
   toJSON OperationMetadataV1Beta {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createVersionMetadata" Core..=)
-              Core.<$> createVersionMetadata,
+          [ ("createVersionMetadata" Core..=) Core.<$> createVersionMetadata,
             ("endTime" Core..=) Core.<$> endTime,
-            ("ephemeralMessage" Core..=)
-              Core.<$> ephemeralMessage,
+            ("ephemeralMessage" Core..=) Core.<$> ephemeralMessage,
             ("insertTime" Core..=) Core.<$> insertTime,
             ("method" Core..=) Core.<$> method,
             ("target" Core..=) Core.<$> target,
@@ -3075,12 +3225,12 @@ instance Core.ToJSON OperationMetadataV1Beta where
 data ProjectEvent = ProjectEvent
   { -- | The unique ID for this project event. CLHs can use this value to dedup repeated calls. required
     eventId :: (Core.Maybe Core.Text),
-    -- |
+    -- | Phase indicates when in the container event propagation this event is being communicated. Events are sent before and after the per-resource events are propagated. required
     phase :: (Core.Maybe ProjectEvent_Phase),
     -- | The projects metadata for this project. required
     projectMetadata :: (Core.Maybe ProjectsMetadata),
-    -- | The state of the project that led to this event.
-    state :: (Core.Maybe ProjectState)
+    -- | The state of the organization that led to this event.
+    state :: (Core.Maybe ContainerState)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3118,50 +3268,6 @@ instance Core.ToJSON ProjectEvent where
           ]
       )
 
--- | ProjectState contains the externally-visible project state that is used to communicate the state and reasoning for that state to the CLH. This data is not persisted by CCFE, but is instead derived from CCFE\'s internal representation of the project state.
---
--- /See:/ 'newProjectState' smart constructor.
-data ProjectState = ProjectState
-  { -- |
-    currentReasons :: (Core.Maybe Reasons),
-    -- | The previous and current reasons for a project state will be sent for a project event. CLHs that need to know the signal that caused the project event to trigger (edges) as opposed to just knowing the state can act upon differences in the previous and current reasons.Reasons will be provided for every system: service management, data governance, abuse, and billing.If this is a CCFE-triggered event used for reconciliation then the current reasons will be set to their */CONTROL/PLANE/SYNC state. The previous reasons will contain the last known set of non-unknown non-control/plane_sync reasons for the state.Reasons fields are deprecated. New tenants should only use the state field. If you must know the reason(s) behind a specific state, please consult with CCFE team first (cloud-ccfe-discuss\@google.com).
-    previousReasons :: (Core.Maybe Reasons),
-    -- | The current state of the project. This state is the culmination of all of the opinions from external systems that CCFE knows about of the project.
-    state :: (Core.Maybe ProjectState_State)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ProjectState' with the minimum fields required to make a request.
-newProjectState ::
-  ProjectState
-newProjectState =
-  ProjectState
-    { currentReasons = Core.Nothing,
-      previousReasons = Core.Nothing,
-      state = Core.Nothing
-    }
-
-instance Core.FromJSON ProjectState where
-  parseJSON =
-    Core.withObject
-      "ProjectState"
-      ( \o ->
-          ProjectState
-            Core.<$> (o Core..:? "currentReasons")
-            Core.<*> (o Core..:? "previousReasons")
-            Core.<*> (o Core..:? "state")
-      )
-
-instance Core.ToJSON ProjectState where
-  toJSON ProjectState {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("currentReasons" Core..=) Core.<$> currentReasons,
-            ("previousReasons" Core..=) Core.<$> previousReasons,
-            ("state" Core..=) Core.<$> state
-          ]
-      )
-
 -- | ProjectsMetadata is the metadata CCFE stores about the all the relevant projects (tenant, consumer, producer).
 --
 -- /See:/ 'newProjectsMetadata' smart constructor.
@@ -3172,6 +3278,8 @@ data ProjectsMetadata = ProjectsMetadata
     consumerProjectNumber :: (Core.Maybe Core.Int64),
     -- | The CCFE state of the consumer project. It is the same state that is communicated to the CLH during project events. Notice that this field is not set in the DB, it is only set in this proto when communicated to CLH in the side channel.
     consumerProjectState :: (Core.Maybe ProjectsMetadata_ConsumerProjectState),
+    -- | The GCE tags associated with the consumer project and those inherited due to their ancestry, if any. Not supported by CCFE.
+    gceTag :: (Core.Maybe [GceTag]),
     -- | The service account authorized to operate on the consumer project. Note: CCFE only propagates P4SA with default tag to CLH.
     p4ServiceAccount :: (Core.Maybe Core.Text),
     -- | The producer project id.
@@ -3193,6 +3301,7 @@ newProjectsMetadata =
     { consumerProjectId = Core.Nothing,
       consumerProjectNumber = Core.Nothing,
       consumerProjectState = Core.Nothing,
+      gceTag = Core.Nothing,
       p4ServiceAccount = Core.Nothing,
       producerProjectId = Core.Nothing,
       producerProjectNumber = Core.Nothing,
@@ -3207,17 +3316,21 @@ instance Core.FromJSON ProjectsMetadata where
       ( \o ->
           ProjectsMetadata
             Core.<$> (o Core..:? "consumerProjectId")
-            Core.<*> ( o Core..:? "consumerProjectNumber"
+            Core.<*> ( o
+                         Core..:? "consumerProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "consumerProjectState")
+            Core.<*> (o Core..:? "gceTag")
             Core.<*> (o Core..:? "p4ServiceAccount")
             Core.<*> (o Core..:? "producerProjectId")
-            Core.<*> ( o Core..:? "producerProjectNumber"
+            Core.<*> ( o
+                         Core..:? "producerProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "tenantProjectId")
-            Core.<*> ( o Core..:? "tenantProjectNumber"
+            Core.<*> ( o
+                         Core..:? "tenantProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -3226,20 +3339,20 @@ instance Core.ToJSON ProjectsMetadata where
   toJSON ProjectsMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerProjectId" Core..=)
-              Core.<$> consumerProjectId,
-            ("consumerProjectNumber" Core..=) Core.. Core.AsText
+          [ ("consumerProjectId" Core..=) Core.<$> consumerProjectId,
+            ("consumerProjectNumber" Core..=)
+              Core.. Core.AsText
               Core.<$> consumerProjectNumber,
-            ("consumerProjectState" Core..=)
-              Core.<$> consumerProjectState,
-            ("p4ServiceAccount" Core..=)
-              Core.<$> p4ServiceAccount,
-            ("producerProjectId" Core..=)
-              Core.<$> producerProjectId,
-            ("producerProjectNumber" Core..=) Core.. Core.AsText
+            ("consumerProjectState" Core..=) Core.<$> consumerProjectState,
+            ("gceTag" Core..=) Core.<$> gceTag,
+            ("p4ServiceAccount" Core..=) Core.<$> p4ServiceAccount,
+            ("producerProjectId" Core..=) Core.<$> producerProjectId,
+            ("producerProjectNumber" Core..=)
+              Core.. Core.AsText
               Core.<$> producerProjectNumber,
             ("tenantProjectId" Core..=) Core.<$> tenantProjectId,
-            ("tenantProjectNumber" Core..=) Core.. Core.AsText
+            ("tenantProjectNumber" Core..=)
+              Core.. Core.AsText
               Core.<$> tenantProjectNumber
           ]
       )
@@ -3298,30 +3411,25 @@ instance Core.ToJSON ReadinessCheck where
   toJSON ReadinessCheck {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appStartTimeout" Core..=)
-              Core.<$> appStartTimeout,
+          [ ("appStartTimeout" Core..=) Core.<$> appStartTimeout,
             ("checkInterval" Core..=) Core.<$> checkInterval,
-            ("failureThreshold" Core..=)
-              Core.<$> failureThreshold,
+            ("failureThreshold" Core..=) Core.<$> failureThreshold,
             ("host" Core..=) Core.<$> host,
             ("path" Core..=) Core.<$> path,
-            ("successThreshold" Core..=)
-              Core.<$> successThreshold,
+            ("successThreshold" Core..=) Core.<$> successThreshold,
             ("timeout" Core..=) Core.<$> timeout
           ]
       )
 
--- | Projects transition between and within states based on reasons sent from various systems. CCFE will provide the CLH with reasons for the current state per system.The current systems that CCFE supports are: Service Management (Inception) Data Governance (Wipeout) Abuse (Ares) Billing (Internal Cloud Billing API)
+-- | Containers transition between and within states based on reasons sent from various systems. CCFE will provide the CLH with reasons for the current state per system.The current systems that CCFE supports are: Service Management (Inception) Data Governance (Wipeout) Abuse (Ares) Billing (Internal Cloud Billing API) Service Activation (Service Controller)
 --
 -- /See:/ 'newReasons' smart constructor.
 data Reasons = Reasons
-  { -- |
-    abuse :: (Core.Maybe Reasons_Abuse),
-    -- |
+  { abuse :: (Core.Maybe Reasons_Abuse),
     billing :: (Core.Maybe Reasons_Billing),
-    -- |
     dataGovernance :: (Core.Maybe Reasons_DataGovernance),
-    -- |
+    -- | Consumer Container denotes if the service is active within a project or not. This information could be used to clean up resources in case service in DISABLED_FULL i.e. Service is inactive > 30 days.
+    serviceActivation :: (Core.Maybe Reasons_ServiceActivation),
     serviceManagement :: (Core.Maybe Reasons_ServiceManagement)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3334,6 +3442,7 @@ newReasons =
     { abuse = Core.Nothing,
       billing = Core.Nothing,
       dataGovernance = Core.Nothing,
+      serviceActivation = Core.Nothing,
       serviceManagement = Core.Nothing
     }
 
@@ -3346,6 +3455,7 @@ instance Core.FromJSON Reasons where
             Core.<$> (o Core..:? "abuse")
             Core.<*> (o Core..:? "billing")
             Core.<*> (o Core..:? "dataGovernance")
+            Core.<*> (o Core..:? "serviceActivation")
             Core.<*> (o Core..:? "serviceManagement")
       )
 
@@ -3356,8 +3466,8 @@ instance Core.ToJSON Reasons where
           [ ("abuse" Core..=) Core.<$> abuse,
             ("billing" Core..=) Core.<$> billing,
             ("dataGovernance" Core..=) Core.<$> dataGovernance,
-            ("serviceManagement" Core..=)
-              Core.<$> serviceManagement
+            ("serviceActivation" Core..=) Core.<$> serviceActivation,
+            ("serviceManagement" Core..=) Core.<$> serviceManagement
           ]
       )
 
@@ -3419,6 +3529,50 @@ instance Core.ToJSON RequestUtilization where
               Core.<$> targetConcurrentRequests,
             ("targetRequestCountPerSecond" Core..=)
               Core.<$> targetRequestCountPerSecond
+          ]
+      )
+
+-- | The request that is passed to CLH during per-resource events. The request will be sent with update semantics in all cases except for data governance purge events. These events will be sent with delete semantics and the CLH is expected to delete the resource receiving this event.
+--
+-- /See:/ 'newResourceEvent' smart constructor.
+data ResourceEvent = ResourceEvent
+  { -- | The unique ID for this per-resource event. CLHs can use this value to dedup repeated calls. required
+    eventId :: (Core.Maybe Core.Text),
+    -- | The name of the resource for which this event is. required
+    name :: (Core.Maybe Core.Text),
+    -- | The state of the project that led to this event.
+    state :: (Core.Maybe ContainerState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResourceEvent' with the minimum fields required to make a request.
+newResourceEvent ::
+  ResourceEvent
+newResourceEvent =
+  ResourceEvent
+    { eventId = Core.Nothing,
+      name = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON ResourceEvent where
+  parseJSON =
+    Core.withObject
+      "ResourceEvent"
+      ( \o ->
+          ResourceEvent
+            Core.<$> (o Core..:? "eventId")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON ResourceEvent where
+  toJSON ResourceEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eventId" Core..=) Core.<$> eventId,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state
           ]
       )
 
@@ -3520,6 +3674,81 @@ instance Core.ToJSON Resources where
           ]
       )
 
+-- | Runtime versions for App Engine.
+--
+-- /See:/ 'newRuntime' smart constructor.
+data Runtime = Runtime
+  { -- | Date when Runtime is decommissioned.
+    decommissionedDate :: (Core.Maybe Date),
+    -- | Date when Runtime is deprecated.
+    deprecationDate :: (Core.Maybe Date),
+    -- | User-friendly display name, e.g. \'Node.js 12\', etc.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Date when Runtime is end of support.
+    endOfSupportDate :: (Core.Maybe Date),
+    -- | The environment of the runtime.
+    environment :: (Core.Maybe Runtime_Environment),
+    -- | The name of the runtime, e.g., \'go113\', \'nodejs12\', etc.
+    name :: (Core.Maybe Core.Text),
+    -- | The stage of life this runtime is in, e.g., BETA, GA, etc.
+    stage :: (Core.Maybe Runtime_Stage),
+    -- | Supported operating systems for the runtime, e.g., \'ubuntu22\', etc.
+    supportedOperatingSystems :: (Core.Maybe [Core.Text]),
+    -- | Warning messages, e.g., a deprecation warning.
+    warnings :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Runtime' with the minimum fields required to make a request.
+newRuntime ::
+  Runtime
+newRuntime =
+  Runtime
+    { decommissionedDate = Core.Nothing,
+      deprecationDate = Core.Nothing,
+      displayName = Core.Nothing,
+      endOfSupportDate = Core.Nothing,
+      environment = Core.Nothing,
+      name = Core.Nothing,
+      stage = Core.Nothing,
+      supportedOperatingSystems = Core.Nothing,
+      warnings = Core.Nothing
+    }
+
+instance Core.FromJSON Runtime where
+  parseJSON =
+    Core.withObject
+      "Runtime"
+      ( \o ->
+          Runtime
+            Core.<$> (o Core..:? "decommissionedDate")
+            Core.<*> (o Core..:? "deprecationDate")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "endOfSupportDate")
+            Core.<*> (o Core..:? "environment")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "stage")
+            Core.<*> (o Core..:? "supportedOperatingSystems")
+            Core.<*> (o Core..:? "warnings")
+      )
+
+instance Core.ToJSON Runtime where
+  toJSON Runtime {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("decommissionedDate" Core..=) Core.<$> decommissionedDate,
+            ("deprecationDate" Core..=) Core.<$> deprecationDate,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("endOfSupportDate" Core..=) Core.<$> endOfSupportDate,
+            ("environment" Core..=) Core.<$> environment,
+            ("name" Core..=) Core.<$> name,
+            ("stage" Core..=) Core.<$> stage,
+            ("supportedOperatingSystems" Core..=)
+              Core.<$> supportedOperatingSystems,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
+
 -- | Executes a script to handle the request that matches the URL pattern.
 --
 -- /See:/ 'newScriptHandler' smart constructor.
@@ -3538,26 +3767,24 @@ instance Core.FromJSON ScriptHandler where
   parseJSON =
     Core.withObject
       "ScriptHandler"
-      ( \o ->
-          ScriptHandler Core.<$> (o Core..:? "scriptPath")
-      )
+      (\o -> ScriptHandler Core.<$> (o Core..:? "scriptPath"))
 
 instance Core.ToJSON ScriptHandler where
   toJSON ScriptHandler {..} =
     Core.object
-      ( Core.catMaybes
-          [("scriptPath" Core..=) Core.<$> scriptPath]
-      )
+      (Core.catMaybes [("scriptPath" Core..=) Core.<$> scriptPath])
 
 -- | A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.
 --
 -- /See:/ 'newService' smart constructor.
 data Service = Service
-  { -- | Relative name of the service within the application. Example: default.\@OutputOnly
+  { -- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetServiceRequest
+    generatedCustomerMetadata :: (Core.Maybe Service_GeneratedCustomerMetadata),
+    -- | Output only. Relative name of the service within the application. Example: default.\@OutputOnly
     id :: (Core.Maybe Core.Text),
     -- | A set of labels to apply to this service. Labels are key\/value pairs that describe the service and all resources that belong to it (e.g., versions). The labels can be used to search and group resources, and are propagated to the usage and billing reports, enabling fine-grain analysis of costs. An example of using labels is to tag resources belonging to different environments (e.g., \"env=prod\", \"env=qa\"). Label keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, dashes, and international characters. Label keys must start with a lowercase letter or an international character. Each service can have at most 32 labels.
     labels :: (Core.Maybe Service_Labels),
-    -- | Full path to the Service resource in the API. Example: apps\/myapp\/services\/default.\@OutputOnly
+    -- | Output only. Full path to the Service resource in the API. Example: apps\/myapp\/services\/default.\@OutputOnly
     name :: (Core.Maybe Core.Text),
     -- | Ingress settings for this service. Will apply to all versions.
     networkSettings :: (Core.Maybe NetworkSettings),
@@ -3571,7 +3798,8 @@ newService ::
   Service
 newService =
   Service
-    { id = Core.Nothing,
+    { generatedCustomerMetadata = Core.Nothing,
+      id = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
       networkSettings = Core.Nothing,
@@ -3584,7 +3812,8 @@ instance Core.FromJSON Service where
       "Service"
       ( \o ->
           Service
-            Core.<$> (o Core..:? "id")
+            Core.<$> (o Core..:? "generatedCustomerMetadata")
+            Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkSettings")
@@ -3595,7 +3824,9 @@ instance Core.ToJSON Service where
   toJSON Service {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
+          [ ("generatedCustomerMetadata" Core..=)
+              Core.<$> generatedCustomerMetadata,
+            ("id" Core..=) Core.<$> id,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("networkSettings" Core..=) Core.<$> networkSettings,
@@ -3603,12 +3834,41 @@ instance Core.ToJSON Service where
           ]
       )
 
+-- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetServiceRequest
+--
+-- /See:/ 'newService_GeneratedCustomerMetadata' smart constructor.
+newtype Service_GeneratedCustomerMetadata = Service_GeneratedCustomerMetadata
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Service_GeneratedCustomerMetadata' with the minimum fields required to make a request.
+newService_GeneratedCustomerMetadata ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Service_GeneratedCustomerMetadata
+newService_GeneratedCustomerMetadata additional =
+  Service_GeneratedCustomerMetadata {additional = additional}
+
+instance Core.FromJSON Service_GeneratedCustomerMetadata where
+  parseJSON =
+    Core.withObject
+      "Service_GeneratedCustomerMetadata"
+      ( \o ->
+          Service_GeneratedCustomerMetadata
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON Service_GeneratedCustomerMetadata where
+  toJSON Service_GeneratedCustomerMetadata {..} =
+    Core.toJSON additional
+
 -- | A set of labels to apply to this service. Labels are key\/value pairs that describe the service and all resources that belong to it (e.g., versions). The labels can be used to search and group resources, and are propagated to the usage and billing reports, enabling fine-grain analysis of costs. An example of using labels is to tag resources belonging to different environments (e.g., \"env=prod\", \"env=qa\"). Label keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, dashes, and international characters. Label keys must start with a lowercase letter or an international character. Each service can have at most 32 labels.
 --
 -- /See:/ 'newService_Labels' smart constructor.
 newtype Service_Labels = Service_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3617,15 +3877,14 @@ newService_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Service_Labels
-newService_Labels additional = Service_Labels {additional = additional}
+newService_Labels additional =
+  Service_Labels {additional = additional}
 
 instance Core.FromJSON Service_Labels where
   parseJSON =
     Core.withObject
       "Service_Labels"
-      ( \o ->
-          Service_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Service_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Service_Labels where
   toJSON Service_Labels {..} = Core.toJSON additional
@@ -3671,8 +3930,7 @@ instance Core.ToJSON SslSettings where
           [ ("certificateId" Core..=) Core.<$> certificateId,
             ("pendingManagedCertificateId" Core..=)
               Core.<$> pendingManagedCertificateId,
-            ("sslManagementType" Core..=)
-              Core.<$> sslManagementType
+            ("sslManagementType" Core..=) Core.<$> sslManagementType
           ]
       )
 
@@ -3680,7 +3938,7 @@ instance Core.ToJSON SslSettings where
 --
 -- /See:/ 'newStandardSchedulerSettings' smart constructor.
 data StandardSchedulerSettings = StandardSchedulerSettings
-  { -- | Maximum number of instances to run for this version. Set to zero to disable max_instances configuration.
+  { -- | Maximum number of instances to run for this version. Set to 2147483647 to disable max_instances configuration.
     maxInstances :: (Core.Maybe Core.Int32),
     -- | Minimum number of instances to run for this version. Set to zero to disable min_instances configuration.
     minInstances :: (Core.Maybe Core.Int32),
@@ -3720,8 +3978,7 @@ instance Core.ToJSON StandardSchedulerSettings where
       ( Core.catMaybes
           [ ("maxInstances" Core..=) Core.<$> maxInstances,
             ("minInstances" Core..=) Core.<$> minInstances,
-            ("targetCpuUtilization" Core..=)
-              Core.<$> targetCpuUtilization,
+            ("targetCpuUtilization" Core..=) Core.<$> targetCpuUtilization,
             ("targetThroughputUtilization" Core..=)
               Core.<$> targetThroughputUtilization
           ]
@@ -3781,16 +4038,13 @@ instance Core.ToJSON StaticFilesHandler where
   toJSON StaticFilesHandler {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicationReadable" Core..=)
-              Core.<$> applicationReadable,
+          [ ("applicationReadable" Core..=) Core.<$> applicationReadable,
             ("expiration" Core..=) Core.<$> expiration,
             ("httpHeaders" Core..=) Core.<$> httpHeaders,
             ("mimeType" Core..=) Core.<$> mimeType,
             ("path" Core..=) Core.<$> path,
-            ("requireMatchingFile" Core..=)
-              Core.<$> requireMatchingFile,
-            ("uploadPathRegex" Core..=)
-              Core.<$> uploadPathRegex
+            ("requireMatchingFile" Core..=) Core.<$> requireMatchingFile,
+            ("uploadPathRegex" Core..=) Core.<$> uploadPathRegex
           ]
       )
 
@@ -3798,8 +4052,7 @@ instance Core.ToJSON StaticFilesHandler where
 --
 -- /See:/ 'newStaticFilesHandler_HttpHeaders' smart constructor.
 newtype StaticFilesHandler_HttpHeaders = StaticFilesHandler_HttpHeaders
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3816,13 +4069,11 @@ instance Core.FromJSON StaticFilesHandler_HttpHeaders where
     Core.withObject
       "StaticFilesHandler_HttpHeaders"
       ( \o ->
-          StaticFilesHandler_HttpHeaders
-            Core.<$> (Core.parseJSONObject o)
+          StaticFilesHandler_HttpHeaders Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON StaticFilesHandler_HttpHeaders where
-  toJSON StaticFilesHandler_HttpHeaders {..} =
-    Core.toJSON additional
+  toJSON StaticFilesHandler_HttpHeaders {..} = Core.toJSON additional
 
 -- | The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https:\/\/github.com\/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https:\/\/cloud.google.com\/apis\/design\/errors).
 --
@@ -3841,7 +4092,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -3877,19 +4132,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Traffic routing configuration for versions within a single service. Traffic splits define how traffic directed to the service is assigned to versions.
 --
@@ -3931,8 +4184,7 @@ instance Core.ToJSON TrafficSplit where
 --
 -- /See:/ 'newTrafficSplit_Allocations' smart constructor.
 newtype TrafficSplit_Allocations = TrafficSplit_Allocations
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Double)
+  { additional :: (Core.HashMap Core.Text Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3948,14 +4200,10 @@ instance Core.FromJSON TrafficSplit_Allocations where
   parseJSON =
     Core.withObject
       "TrafficSplit_Allocations"
-      ( \o ->
-          TrafficSplit_Allocations
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TrafficSplit_Allocations Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TrafficSplit_Allocations where
-  toJSON TrafficSplit_Allocations {..} =
-    Core.toJSON additional
+  toJSON TrafficSplit_Allocations {..} = Core.toJSON additional
 
 -- | Rules to match an HTTP request and dispatch that request to a service.
 --
@@ -4089,13 +4337,13 @@ data Version = Version
     buildEnvVariables :: (Core.Maybe Version_BuildEnvVariables),
     -- | Time that this version was created.\@OutputOnly
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Email address of the user who created this version.\@OutputOnly
+    -- | Output only. Email address of the user who created this version.\@OutputOnly
     createdBy :: (Core.Maybe Core.Text),
     -- | Duration that static files should be cached by web proxies and browsers. Only applicable if the corresponding StaticFilesHandler (https:\/\/cloud.google.com\/appengine\/docs\/admin-api\/reference\/rest\/v1\/apps.services.versions#StaticFilesHandler) does not specify its own expiration time.Only returned in GET requests if view=FULL is set.
     defaultExpiration :: (Core.Maybe Core.Duration),
     -- | Code and application artifacts that make up this version.Only returned in GET requests if view=FULL is set.
     deployment :: (Core.Maybe Deployment),
-    -- | Total size in bytes of all the files that are included in this version and currently hosted on the App Engine disk.\@OutputOnly
+    -- | Output only. Total size in bytes of all the files that are included in this version and currently hosted on the App Engine disk.\@OutputOnly
     diskUsageBytes :: (Core.Maybe Core.Int64),
     -- | Cloud Endpoints configuration.If endpoints/api/service is set, the Cloud Endpoints Extensible Service Proxy will be provided to serve the API implemented by the app.
     endpointsApiService :: (Core.Maybe EndpointsApiService),
@@ -4109,9 +4357,11 @@ data Version = Version
     errorHandlers :: (Core.Maybe [ErrorHandler]),
     -- | Settings for App Engine flexible runtimes.
     flexibleRuntimeSettings :: (Core.Maybe FlexibleRuntimeSettings),
+    -- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetVersionRequest
+    generatedCustomerMetadata :: (Core.Maybe Version_GeneratedCustomerMetadata),
     -- | An ordered list of URL-matching patterns that should be applied to incoming requests. The first matching URL handles the request and other request handlers are not attempted.Only returned in GET requests if view=FULL is set.
     handlers :: (Core.Maybe [UrlMap]),
-    -- | Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.Only returned in GET requests if view=FULL is set.
+    -- | Configures health checking for instances. Unhealthy instances are stopped and replaced with new instances. Only applicable in the App Engine flexible environment.
     healthCheck :: (Core.Maybe HealthCheck),
     -- | Relative name of the version within the service. Example: v1. Version names can contain only lowercase letters, numbers, or hyphens. Reserved names: \"default\", \"latest\", and any name with the prefix \"ah-\".
     id :: (Core.Maybe Core.Text),
@@ -4121,17 +4371,17 @@ data Version = Version
     instanceClass :: (Core.Maybe Core.Text),
     -- | Configuration for third-party Python runtime libraries that are required by the application.Only returned in GET requests if view=FULL is set.
     libraries :: (Core.Maybe [Library]),
-    -- | Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instancesOnly returned in GET requests if view=FULL is set.
+    -- | Configures liveness health checking for instances. Unhealthy instances are stopped and replaced with new instances
     livenessCheck :: (Core.Maybe LivenessCheck),
     -- | A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time. Manually scaled versions are sometimes referred to as \"backends\".
     manualScaling :: (Core.Maybe ManualScaling),
-    -- | Full path to the Version resource in the API. Example: apps\/myapp\/services\/default\/versions\/v1.\@OutputOnly
+    -- | Output only. Full path to the Version resource in the API. Example: apps\/myapp\/services\/default\/versions\/v1.\@OutputOnly
     name :: (Core.Maybe Core.Text),
     -- | Extra network settings. Only applicable in the App Engine flexible environment.
     network :: (Core.Maybe Network),
     -- | Files that match this pattern will not be built into this version. Only applicable for Go runtimes.Only returned in GET requests if view=FULL is set.
     nobuildFilesRegex :: (Core.Maybe Core.Text),
-    -- | Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.Only returned in GET requests if view=FULL is set.
+    -- | Configures readiness health checking for instances. Unhealthy instances are not put into the backend traffic rotation.
     readinessCheck :: (Core.Maybe ReadinessCheck),
     -- | Machine resources for this version. Only applicable in the App Engine flexible environment.
     resources :: (Core.Maybe Resources),
@@ -4149,7 +4399,7 @@ data Version = Version
     servingStatus :: (Core.Maybe Version_ServingStatus),
     -- | Whether multiple requests can be dispatched to this version at once.
     threadsafe :: (Core.Maybe Core.Bool),
-    -- | Serving URL for this version. Example: \"https:\/\/myversion-dot-myservice-dot-myapp.appspot.com\"\@OutputOnly
+    -- | Output only. Serving URL for this version. Example: \"https:\/\/myversion-dot-myservice-dot-myapp.appspot.com\"\@OutputOnly
     versionUrl :: (Core.Maybe Core.Text),
     -- | Whether to deploy this version in a container on a virtual machine.
     vm :: (Core.Maybe Core.Bool),
@@ -4182,6 +4432,7 @@ newVersion =
       envVariables = Core.Nothing,
       errorHandlers = Core.Nothing,
       flexibleRuntimeSettings = Core.Nothing,
+      generatedCustomerMetadata = Core.Nothing,
       handlers = Core.Nothing,
       healthCheck = Core.Nothing,
       id = Core.Nothing,
@@ -4224,15 +4475,14 @@ instance Core.FromJSON Version where
             Core.<*> (o Core..:? "createdBy")
             Core.<*> (o Core..:? "defaultExpiration")
             Core.<*> (o Core..:? "deployment")
-            Core.<*> ( o Core..:? "diskUsageBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "diskUsageBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "endpointsApiService")
             Core.<*> (o Core..:? "entrypoint")
             Core.<*> (o Core..:? "env")
             Core.<*> (o Core..:? "envVariables")
             Core.<*> (o Core..:? "errorHandlers")
             Core.<*> (o Core..:? "flexibleRuntimeSettings")
+            Core.<*> (o Core..:? "generatedCustomerMetadata")
             Core.<*> (o Core..:? "handlers")
             Core.<*> (o Core..:? "healthCheck")
             Core.<*> (o Core..:? "id")
@@ -4265,27 +4515,26 @@ instance Core.ToJSON Version where
       ( Core.catMaybes
           [ ("apiConfig" Core..=) Core.<$> apiConfig,
             ("appEngineApis" Core..=) Core.<$> appEngineApis,
-            ("automaticScaling" Core..=)
-              Core.<$> automaticScaling,
+            ("automaticScaling" Core..=) Core.<$> automaticScaling,
             ("basicScaling" Core..=) Core.<$> basicScaling,
             ("betaSettings" Core..=) Core.<$> betaSettings,
-            ("buildEnvVariables" Core..=)
-              Core.<$> buildEnvVariables,
+            ("buildEnvVariables" Core..=) Core.<$> buildEnvVariables,
             ("createTime" Core..=) Core.<$> createTime,
             ("createdBy" Core..=) Core.<$> createdBy,
-            ("defaultExpiration" Core..=)
-              Core.<$> defaultExpiration,
+            ("defaultExpiration" Core..=) Core.<$> defaultExpiration,
             ("deployment" Core..=) Core.<$> deployment,
-            ("diskUsageBytes" Core..=) Core.. Core.AsText
+            ("diskUsageBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> diskUsageBytes,
-            ("endpointsApiService" Core..=)
-              Core.<$> endpointsApiService,
+            ("endpointsApiService" Core..=) Core.<$> endpointsApiService,
             ("entrypoint" Core..=) Core.<$> entrypoint,
             ("env" Core..=) Core.<$> env,
             ("envVariables" Core..=) Core.<$> envVariables,
             ("errorHandlers" Core..=) Core.<$> errorHandlers,
             ("flexibleRuntimeSettings" Core..=)
               Core.<$> flexibleRuntimeSettings,
+            ("generatedCustomerMetadata" Core..=)
+              Core.<$> generatedCustomerMetadata,
             ("handlers" Core..=) Core.<$> handlers,
             ("healthCheck" Core..=) Core.<$> healthCheck,
             ("id" Core..=) Core.<$> id,
@@ -4296,13 +4545,11 @@ instance Core.ToJSON Version where
             ("manualScaling" Core..=) Core.<$> manualScaling,
             ("name" Core..=) Core.<$> name,
             ("network" Core..=) Core.<$> network,
-            ("nobuildFilesRegex" Core..=)
-              Core.<$> nobuildFilesRegex,
+            ("nobuildFilesRegex" Core..=) Core.<$> nobuildFilesRegex,
             ("readinessCheck" Core..=) Core.<$> readinessCheck,
             ("resources" Core..=) Core.<$> resources,
             ("runtime" Core..=) Core.<$> runtime,
-            ("runtimeApiVersion" Core..=)
-              Core.<$> runtimeApiVersion,
+            ("runtimeApiVersion" Core..=) Core.<$> runtimeApiVersion,
             ("runtimeChannel" Core..=) Core.<$> runtimeChannel,
             ("runtimeMainExecutablePath" Core..=)
               Core.<$> runtimeMainExecutablePath,
@@ -4311,8 +4558,7 @@ instance Core.ToJSON Version where
             ("threadsafe" Core..=) Core.<$> threadsafe,
             ("versionUrl" Core..=) Core.<$> versionUrl,
             ("vm" Core..=) Core.<$> vm,
-            ("vpcAccessConnector" Core..=)
-              Core.<$> vpcAccessConnector,
+            ("vpcAccessConnector" Core..=) Core.<$> vpcAccessConnector,
             ("zones" Core..=) Core.<$> zones
           ]
       )
@@ -4321,8 +4567,7 @@ instance Core.ToJSON Version where
 --
 -- /See:/ 'newVersion_BetaSettings' smart constructor.
 newtype Version_BetaSettings = Version_BetaSettings
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4338,21 +4583,16 @@ instance Core.FromJSON Version_BetaSettings where
   parseJSON =
     Core.withObject
       "Version_BetaSettings"
-      ( \o ->
-          Version_BetaSettings
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Version_BetaSettings Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Version_BetaSettings where
-  toJSON Version_BetaSettings {..} =
-    Core.toJSON additional
+  toJSON Version_BetaSettings {..} = Core.toJSON additional
 
 -- | Environment variables available to the build environment.Only returned in GET requests if view=FULL is set.
 --
 -- /See:/ 'newVersion_BuildEnvVariables' smart constructor.
 newtype Version_BuildEnvVariables = Version_BuildEnvVariables
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4369,20 +4609,17 @@ instance Core.FromJSON Version_BuildEnvVariables where
     Core.withObject
       "Version_BuildEnvVariables"
       ( \o ->
-          Version_BuildEnvVariables
-            Core.<$> (Core.parseJSONObject o)
+          Version_BuildEnvVariables Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Version_BuildEnvVariables where
-  toJSON Version_BuildEnvVariables {..} =
-    Core.toJSON additional
+  toJSON Version_BuildEnvVariables {..} = Core.toJSON additional
 
 -- | Environment variables available to the application.Only returned in GET requests if view=FULL is set.
 --
 -- /See:/ 'newVersion_EnvVariables' smart constructor.
 newtype Version_EnvVariables = Version_EnvVariables
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4398,13 +4635,39 @@ instance Core.FromJSON Version_EnvVariables where
   parseJSON =
     Core.withObject
       "Version_EnvVariables"
+      (\o -> Version_EnvVariables Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Version_EnvVariables where
+  toJSON Version_EnvVariables {..} = Core.toJSON additional
+
+-- | Additional Google Generated Customer Metadata, this field won\'t be provided by default and can be requested by setting the IncludeExtraData field in GetVersionRequest
+--
+-- /See:/ 'newVersion_GeneratedCustomerMetadata' smart constructor.
+newtype Version_GeneratedCustomerMetadata = Version_GeneratedCustomerMetadata
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Version_GeneratedCustomerMetadata' with the minimum fields required to make a request.
+newVersion_GeneratedCustomerMetadata ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Version_GeneratedCustomerMetadata
+newVersion_GeneratedCustomerMetadata additional =
+  Version_GeneratedCustomerMetadata {additional = additional}
+
+instance Core.FromJSON Version_GeneratedCustomerMetadata where
+  parseJSON =
+    Core.withObject
+      "Version_GeneratedCustomerMetadata"
       ( \o ->
-          Version_EnvVariables
+          Version_GeneratedCustomerMetadata
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance Core.ToJSON Version_EnvVariables where
-  toJSON Version_EnvVariables {..} =
+instance Core.ToJSON Version_GeneratedCustomerMetadata where
+  toJSON Version_GeneratedCustomerMetadata {..} =
     Core.toJSON additional
 
 -- | Volumes mounted within the app container. Only applicable in the App Engine flexible environment.
@@ -4424,7 +4687,11 @@ data Volume = Volume
 newVolume ::
   Volume
 newVolume =
-  Volume {name = Core.Nothing, sizeGb = Core.Nothing, volumeType = Core.Nothing}
+  Volume
+    { name = Core.Nothing,
+      sizeGb = Core.Nothing,
+      volumeType = Core.Nothing
+    }
 
 instance Core.FromJSON Volume where
   parseJSON =
@@ -4453,7 +4720,7 @@ instance Core.ToJSON Volume where
 data VpcAccessConnector = VpcAccessConnector
   { -- | The egress setting for the connector, controlling what traffic is diverted through it.
     egressSetting :: (Core.Maybe VpcAccessConnector_EgressSetting),
-    -- | Full Serverless VPC Access Connector name e.g. \/projects\/my-project\/locations\/us-central1\/connectors\/c1.
+    -- | Full Serverless VPC Access Connector name e.g. projects\/my-project\/locations\/us-central1\/connectors\/c1.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4462,7 +4729,10 @@ data VpcAccessConnector = VpcAccessConnector
 newVpcAccessConnector ::
   VpcAccessConnector
 newVpcAccessConnector =
-  VpcAccessConnector {egressSetting = Core.Nothing, name = Core.Nothing}
+  VpcAccessConnector
+    { egressSetting = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON VpcAccessConnector where
   parseJSON =
@@ -4497,7 +4767,8 @@ data ZipInfo = ZipInfo
 -- | Creates a value of 'ZipInfo' with the minimum fields required to make a request.
 newZipInfo ::
   ZipInfo
-newZipInfo = ZipInfo {filesCount = Core.Nothing, sourceUrl = Core.Nothing}
+newZipInfo =
+  ZipInfo {filesCount = Core.Nothing, sourceUrl = Core.Nothing}
 
 instance Core.FromJSON ZipInfo where
   parseJSON =

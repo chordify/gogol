@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Webmasters.Searchanalytics.Query
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days. When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.searchanalytics.query@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @webmasters.searchanalytics.query@.
 module Gogol.SearchConsole.Webmasters.Searchanalytics.Query
   ( -- * Resource
     WebmastersSearchanalyticsQueryResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.Webmasters.Searchanalytics.Query
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.searchanalytics.query@ method which the
@@ -57,12 +55,8 @@ type WebmastersSearchanalyticsQueryResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SearchAnalyticsQueryRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              SearchAnalyticsQueryResponse
+    Core.:> Core.ReqBody '[Core.JSON] SearchAnalyticsQueryRequest
+    Core.:> Core.Post '[Core.JSON] SearchAnalyticsQueryResponse
 
 -- | Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days. When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
 --
@@ -103,10 +97,7 @@ newWebmastersSearchanalyticsQuery payload siteUrl =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    WebmastersSearchanalyticsQuery
-  where
+instance Core.GoogleRequest WebmastersSearchanalyticsQuery where
   type
     Rs WebmastersSearchanalyticsQuery =
       SearchAnalyticsQueryResponse
@@ -127,7 +118,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSearchanalyticsQueryResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSearchanalyticsQueryResource)
           Core.mempty

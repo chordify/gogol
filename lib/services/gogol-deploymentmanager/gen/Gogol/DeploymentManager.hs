@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DeploymentManager
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -151,9 +149,20 @@ module Gogol.DeploymentManager
     Binding (..),
     newBinding,
 
+    -- ** BulkInsertOperationStatus
+    BulkInsertOperationStatus (..),
+    newBulkInsertOperationStatus,
+
+    -- ** BulkInsertOperationStatus_Status
+    BulkInsertOperationStatus_Status (..),
+
     -- ** ConfigFile
     ConfigFile (..),
     newConfigFile,
+
+    -- ** DebugInfo
+    DebugInfo (..),
+    newDebugInfo,
 
     -- ** Deployment
     Deployment (..),
@@ -183,6 +192,14 @@ module Gogol.DeploymentManager
     DeploymentsStopRequest (..),
     newDeploymentsStopRequest,
 
+    -- ** ErrorInfo
+    ErrorInfo (..),
+    newErrorInfo,
+
+    -- ** ErrorInfo_Metadatas
+    ErrorInfo_Metadatas (..),
+    newErrorInfo_Metadatas,
+
     -- ** Expr
     Expr (..),
     newExpr,
@@ -191,9 +208,29 @@ module Gogol.DeploymentManager
     GlobalSetPolicyRequest (..),
     newGlobalSetPolicyRequest,
 
+    -- ** Help
+    Help (..),
+    newHelp,
+
+    -- ** HelpLink
+    HelpLink (..),
+    newHelpLink,
+
     -- ** ImportFile
     ImportFile (..),
     newImportFile,
+
+    -- ** InstancesBulkInsertOperationMetadata
+    InstancesBulkInsertOperationMetadata (..),
+    newInstancesBulkInsertOperationMetadata,
+
+    -- ** InstancesBulkInsertOperationMetadata_PerLocationStatus
+    InstancesBulkInsertOperationMetadata_PerLocationStatus (..),
+    newInstancesBulkInsertOperationMetadata_PerLocationStatus,
+
+    -- ** LocalizedMessage
+    LocalizedMessage (..),
+    newLocalizedMessage,
 
     -- ** Manifest
     Manifest (..),
@@ -214,6 +251,10 @@ module Gogol.DeploymentManager
     -- ** Operation_Error_ErrorsItem
     Operation_Error_ErrorsItem (..),
     newOperation_Error_ErrorsItem,
+
+    -- ** Operation_Error_ErrorsItem_ErrorDetailsItem
+    Operation_Error_ErrorsItem_ErrorDetailsItem (..),
+    newOperation_Error_ErrorsItem_ErrorDetailsItem,
 
     -- ** Operation_Status
     Operation_Status (..),
@@ -236,6 +277,17 @@ module Gogol.DeploymentManager
     -- ** Policy
     Policy (..),
     newPolicy,
+
+    -- ** QuotaExceededInfo
+    QuotaExceededInfo (..),
+    newQuotaExceededInfo,
+
+    -- ** QuotaExceededInfo_Dimensions
+    QuotaExceededInfo_Dimensions (..),
+    newQuotaExceededInfo_Dimensions,
+
+    -- ** QuotaExceededInfo_RolloutStatus
+    QuotaExceededInfo_RolloutStatus (..),
 
     -- ** Resource
     Resource (..),
@@ -268,6 +320,10 @@ module Gogol.DeploymentManager
     ResourceUpdate_Error_ErrorsItem (..),
     newResourceUpdate_Error_ErrorsItem,
 
+    -- ** ResourceUpdate_Error_ErrorsItem_ErrorDetailsItem
+    ResourceUpdate_Error_ErrorsItem_ErrorDetailsItem (..),
+    newResourceUpdate_Error_ErrorsItem_ErrorDetailsItem,
+
     -- ** ResourceUpdate_Intent
     ResourceUpdate_Intent (..),
 
@@ -288,6 +344,29 @@ module Gogol.DeploymentManager
     -- ** ResourcesListResponse
     ResourcesListResponse (..),
     newResourcesListResponse,
+
+    -- ** SetCommonInstanceMetadataOperationMetadata
+    SetCommonInstanceMetadataOperationMetadata (..),
+    newSetCommonInstanceMetadataOperationMetadata,
+
+    -- ** SetCommonInstanceMetadataOperationMetadata_PerLocationOperations
+    SetCommonInstanceMetadataOperationMetadata_PerLocationOperations (..),
+    newSetCommonInstanceMetadataOperationMetadata_PerLocationOperations,
+
+    -- ** SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo
+    SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo (..),
+    newSetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo,
+
+    -- ** SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo_State
+    SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo_State (..),
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TargetConfiguration
     TargetConfiguration (..),

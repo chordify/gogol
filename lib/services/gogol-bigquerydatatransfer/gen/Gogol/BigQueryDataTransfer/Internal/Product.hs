@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BigQueryDataTransfer.Internal.Product
@@ -50,9 +48,17 @@ module Gogol.BigQueryDataTransfer.Internal.Product
     Empty (..),
     newEmpty,
 
+    -- * EncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
+
     -- * EnrollDataSourcesRequest
     EnrollDataSourcesRequest (..),
     newEnrollDataSourcesRequest,
+
+    -- * EventDrivenSchedule
+    EventDrivenSchedule (..),
+    newEventDrivenSchedule,
 
     -- * ListDataSourcesResponse
     ListDataSourcesResponse (..),
@@ -86,9 +92,17 @@ module Gogol.BigQueryDataTransfer.Internal.Product
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- * ManualSchedule
+    ManualSchedule (..),
+    newManualSchedule,
+
     -- * ScheduleOptions
     ScheduleOptions (..),
     newScheduleOptions,
+
+    -- * ScheduleOptionsV2
+    ScheduleOptionsV2 (..),
+    newScheduleOptionsV2,
 
     -- * ScheduleTransferRunsRequest
     ScheduleTransferRunsRequest (..),
@@ -114,6 +128,10 @@ module Gogol.BigQueryDataTransfer.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * TimeBasedSchedule
+    TimeBasedSchedule (..),
+    newTimeBasedSchedule,
+
     -- * TimeRange
     TimeRange (..),
     newTimeRange,
@@ -138,6 +156,10 @@ module Gogol.BigQueryDataTransfer.Internal.Product
     TransferRun_Params (..),
     newTransferRun_Params,
 
+    -- * UnenrollDataSourcesRequest
+    UnenrollDataSourcesRequest (..),
+    newUnenrollDataSourcesRequest,
+
     -- * UserInfo
     UserInfo (..),
     newUserInfo,
@@ -145,7 +167,7 @@ module Gogol.BigQueryDataTransfer.Internal.Product
 where
 
 import Gogol.BigQueryDataTransfer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A request to determine whether the user has valid credentials. This method is used to limit the number of OAuth popups in the user interface. The user id is inferred from the API call context. If the data source has the Google+ authorization type, this method returns false, as it cannot be determined whether the credentials are already valid merely based on the user id.
 --
@@ -187,16 +209,13 @@ instance Core.FromJSON CheckValidCredsResponse where
     Core.withObject
       "CheckValidCredsResponse"
       ( \o ->
-          CheckValidCredsResponse
-            Core.<$> (o Core..:? "hasValidCreds")
+          CheckValidCredsResponse Core.<$> (o Core..:? "hasValidCreds")
       )
 
 instance Core.ToJSON CheckValidCredsResponse where
   toJSON CheckValidCredsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("hasValidCreds" Core..=) Core.<$> hasValidCreds]
-      )
+      (Core.catMaybes [("hasValidCreds" Core..=) Core.<$> hasValidCreds])
 
 -- | Defines the properties and custom parameters for a data source.
 --
@@ -296,8 +315,7 @@ instance Core.ToJSON DataSource where
   toJSON DataSource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorizationType" Core..=)
-              Core.<$> authorizationType,
+          [ ("authorizationType" Core..=) Core.<$> authorizationType,
             ("clientId" Core..=) Core.<$> clientId,
             ("dataRefreshType" Core..=) Core.<$> dataRefreshType,
             ("dataSourceId" Core..=) Core.<$> dataSourceId,
@@ -307,20 +325,17 @@ instance Core.ToJSON DataSource where
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
             ("helpUrl" Core..=) Core.<$> helpUrl,
-            ("manualRunsDisabled" Core..=)
-              Core.<$> manualRunsDisabled,
+            ("manualRunsDisabled" Core..=) Core.<$> manualRunsDisabled,
             ("minimumScheduleInterval" Core..=)
               Core.<$> minimumScheduleInterval,
             ("name" Core..=) Core.<$> name,
             ("parameters" Core..=) Core.<$> parameters,
             ("scopes" Core..=) Core.<$> scopes,
-            ("supportsCustomSchedule" Core..=)
-              Core.<$> supportsCustomSchedule,
+            ("supportsCustomSchedule" Core..=) Core.<$> supportsCustomSchedule,
             ("supportsMultipleTransfers" Core..=)
               Core.<$> supportsMultipleTransfers,
             ("transferType" Core..=) Core.<$> transferType,
-            ("updateDeadlineSeconds" Core..=)
-              Core.<$> updateDeadlineSeconds
+            ("updateDeadlineSeconds" Core..=) Core.<$> updateDeadlineSeconds
           ]
       )
 
@@ -427,12 +442,9 @@ instance Core.ToJSON DataSourceParameter where
             ("repeated" Core..=) Core.<$> repeated,
             ("required" Core..=) Core.<$> required,
             ("type" Core..=) Core.<$> type',
-            ("validationDescription" Core..=)
-              Core.<$> validationDescription,
-            ("validationHelpUrl" Core..=)
-              Core.<$> validationHelpUrl,
-            ("validationRegex" Core..=)
-              Core.<$> validationRegex
+            ("validationDescription" Core..=) Core.<$> validationDescription,
+            ("validationHelpUrl" Core..=) Core.<$> validationHelpUrl,
+            ("validationRegex" Core..=) Core.<$> validationRegex
           ]
       )
 
@@ -448,24 +460,22 @@ newtype EmailPreferences = EmailPreferences
 -- | Creates a value of 'EmailPreferences' with the minimum fields required to make a request.
 newEmailPreferences ::
   EmailPreferences
-newEmailPreferences = EmailPreferences {enableFailureEmail = Core.Nothing}
+newEmailPreferences =
+  EmailPreferences {enableFailureEmail = Core.Nothing}
 
 instance Core.FromJSON EmailPreferences where
   parseJSON =
     Core.withObject
       "EmailPreferences"
       ( \o ->
-          EmailPreferences
-            Core.<$> (o Core..:? "enableFailureEmail")
+          EmailPreferences Core.<$> (o Core..:? "enableFailureEmail")
       )
 
 instance Core.ToJSON EmailPreferences where
   toJSON EmailPreferences {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableFailureEmail" Core..=)
-              Core.<$> enableFailureEmail
-          ]
+          [("enableFailureEmail" Core..=) Core.<$> enableFailureEmail]
       )
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
@@ -480,11 +490,36 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Represents the encryption configuration for a transfer.
+--
+-- /See:/ 'newEncryptionConfiguration' smart constructor.
+newtype EncryptionConfiguration = EncryptionConfiguration
+  { -- | The name of the KMS key used for encrypting BigQuery data.
+    kmsKeyName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EncryptionConfiguration' with the minimum fields required to make a request.
+newEncryptionConfiguration ::
+  EncryptionConfiguration
+newEncryptionConfiguration =
+  EncryptionConfiguration {kmsKeyName = Core.Nothing}
+
+instance Core.FromJSON EncryptionConfiguration where
+  parseJSON =
+    Core.withObject
+      "EncryptionConfiguration"
+      (\o -> EncryptionConfiguration Core.<$> (o Core..:? "kmsKeyName"))
+
+instance Core.ToJSON EncryptionConfiguration where
+  toJSON EncryptionConfiguration {..} =
+    Core.object
+      (Core.catMaybes [("kmsKeyName" Core..=) Core.<$> kmsKeyName])
 
 -- | A request to enroll a set of data sources so they are visible in the BigQuery UI\'s @Transfer@ tab.
 --
@@ -506,15 +541,42 @@ instance Core.FromJSON EnrollDataSourcesRequest where
     Core.withObject
       "EnrollDataSourcesRequest"
       ( \o ->
-          EnrollDataSourcesRequest
-            Core.<$> (o Core..:? "dataSourceIds")
+          EnrollDataSourcesRequest Core.<$> (o Core..:? "dataSourceIds")
       )
 
 instance Core.ToJSON EnrollDataSourcesRequest where
   toJSON EnrollDataSourcesRequest {..} =
     Core.object
+      (Core.catMaybes [("dataSourceIds" Core..=) Core.<$> dataSourceIds])
+
+-- | Options customizing EventDriven transfers schedule.
+--
+-- /See:/ 'newEventDrivenSchedule' smart constructor.
+newtype EventDrivenSchedule = EventDrivenSchedule
+  { -- | Pub\/Sub subscription name used to receive events. Only Google Cloud Storage data source support this option. Format: projects\/{project}\/subscriptions\/{subscription}
+    pubsubSubscription :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventDrivenSchedule' with the minimum fields required to make a request.
+newEventDrivenSchedule ::
+  EventDrivenSchedule
+newEventDrivenSchedule =
+  EventDrivenSchedule {pubsubSubscription = Core.Nothing}
+
+instance Core.FromJSON EventDrivenSchedule where
+  parseJSON =
+    Core.withObject
+      "EventDrivenSchedule"
+      ( \o ->
+          EventDrivenSchedule Core.<$> (o Core..:? "pubsubSubscription")
+      )
+
+instance Core.ToJSON EventDrivenSchedule where
+  toJSON EventDrivenSchedule {..} =
+    Core.object
       ( Core.catMaybes
-          [("dataSourceIds" Core..=) Core.<$> dataSourceIds]
+          [("pubsubSubscription" Core..=) Core.<$> pubsubSubscription]
       )
 
 -- | Returns list of supported data sources and their metadata.
@@ -571,7 +633,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -627,8 +692,7 @@ instance Core.ToJSON ListTransferConfigsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("transferConfigs" Core..=)
-              Core.<$> transferConfigs
+            ("transferConfigs" Core..=) Core.<$> transferConfigs
           ]
       )
 
@@ -667,8 +731,7 @@ instance Core.ToJSON ListTransferLogsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("transferMessages" Core..=)
-              Core.<$> transferMessages
+            ("transferMessages" Core..=) Core.<$> transferMessages
           ]
       )
 
@@ -711,7 +774,7 @@ instance Core.ToJSON ListTransferRunsResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -769,8 +832,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -779,15 +841,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -806,18 +867,37 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
+
+-- | Options customizing manual transfers schedule.
+--
+-- /See:/ 'newManualSchedule' smart constructor.
+data ManualSchedule = ManualSchedule
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ManualSchedule' with the minimum fields required to make a request.
+newManualSchedule ::
+  ManualSchedule
+newManualSchedule = ManualSchedule
+
+instance Core.FromJSON ManualSchedule where
+  parseJSON =
+    Core.withObject
+      "ManualSchedule"
+      (\o -> Core.pure ManualSchedule)
+
+instance Core.ToJSON ManualSchedule where
+  toJSON = Core.const Core.emptyObject
 
 -- | Options customizing the data transfer schedule.
 --
@@ -825,9 +905,9 @@ instance Core.ToJSON Location_Metadata where
 data ScheduleOptions = ScheduleOptions
   { -- | If true, automatic scheduling of data transfer runs for this configuration will be disabled. The runs can be started on ad-hoc basis using StartManualTransferRuns API. When automatic scheduling is disabled, the TransferConfig.schedule field will be ignored.
     disableAutoScheduling :: (Core.Maybe Core.Bool),
-    -- | Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
+    -- | Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment. The time when a data transfer can be triggered manually is not limited by this option.
     endTime :: (Core.Maybe Core.DateTime),
-    -- | Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. The time when a data transfer can be trigerred manually is not limited by this option.
+    -- | Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment. The time when a data transfer can be triggered manually is not limited by this option.
     startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -857,10 +937,53 @@ instance Core.ToJSON ScheduleOptions where
   toJSON ScheduleOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("disableAutoScheduling" Core..=)
-              Core.<$> disableAutoScheduling,
+          [ ("disableAutoScheduling" Core..=) Core.<$> disableAutoScheduling,
             ("endTime" Core..=) Core.<$> endTime,
             ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
+
+-- | V2 options customizing different types of data transfer schedule. This field supports existing time-based and manual transfer schedule. Also supports Event-Driven transfer schedule. ScheduleOptionsV2 cannot be used together with ScheduleOptions\/Schedule.
+--
+-- /See:/ 'newScheduleOptionsV2' smart constructor.
+data ScheduleOptionsV2 = ScheduleOptionsV2
+  { -- | Event driven transfer schedule options. If set, the transfer will be scheduled upon events arrial.
+    eventDrivenSchedule :: (Core.Maybe EventDrivenSchedule),
+    -- | Manual transfer schedule. If set, the transfer run will not be auto-scheduled by the system, unless the client invokes StartManualTransferRuns. This is equivalent to disable/auto/scheduling = true.
+    manualSchedule :: (Core.Maybe ManualSchedule),
+    -- | Time based transfer schedule options. This is the default schedule option.
+    timeBasedSchedule :: (Core.Maybe TimeBasedSchedule)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ScheduleOptionsV2' with the minimum fields required to make a request.
+newScheduleOptionsV2 ::
+  ScheduleOptionsV2
+newScheduleOptionsV2 =
+  ScheduleOptionsV2
+    { eventDrivenSchedule = Core.Nothing,
+      manualSchedule = Core.Nothing,
+      timeBasedSchedule = Core.Nothing
+    }
+
+instance Core.FromJSON ScheduleOptionsV2 where
+  parseJSON =
+    Core.withObject
+      "ScheduleOptionsV2"
+      ( \o ->
+          ScheduleOptionsV2
+            Core.<$> (o Core..:? "eventDrivenSchedule")
+            Core.<*> (o Core..:? "manualSchedule")
+            Core.<*> (o Core..:? "timeBasedSchedule")
+      )
+
+instance Core.ToJSON ScheduleOptionsV2 where
+  toJSON ScheduleOptionsV2 {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eventDrivenSchedule" Core..=) Core.<$> eventDrivenSchedule,
+            ("manualSchedule" Core..=) Core.<$> manualSchedule,
+            ("timeBasedSchedule" Core..=) Core.<$> timeBasedSchedule
           ]
       )
 
@@ -879,7 +1002,10 @@ data ScheduleTransferRunsRequest = ScheduleTransferRunsRequest
 newScheduleTransferRunsRequest ::
   ScheduleTransferRunsRequest
 newScheduleTransferRunsRequest =
-  ScheduleTransferRunsRequest {endTime = Core.Nothing, startTime = Core.Nothing}
+  ScheduleTransferRunsRequest
+    { endTime = Core.Nothing,
+      startTime = Core.Nothing
+    }
 
 instance Core.FromJSON ScheduleTransferRunsRequest where
   parseJSON =
@@ -919,23 +1045,19 @@ instance Core.FromJSON ScheduleTransferRunsResponse where
   parseJSON =
     Core.withObject
       "ScheduleTransferRunsResponse"
-      ( \o ->
-          ScheduleTransferRunsResponse
-            Core.<$> (o Core..:? "runs")
-      )
+      (\o -> ScheduleTransferRunsResponse Core.<$> (o Core..:? "runs"))
 
 instance Core.ToJSON ScheduleTransferRunsResponse where
   toJSON ScheduleTransferRunsResponse {..} =
-    Core.object
-      (Core.catMaybes [("runs" Core..=) Core.<$> runs])
+    Core.object (Core.catMaybes [("runs" Core..=) Core.<$> runs])
 
 -- | A request to start manual transfer runs.
 --
 -- /See:/ 'newStartManualTransferRunsRequest' smart constructor.
 data StartManualTransferRunsRequest = StartManualTransferRunsRequest
-  { -- | Specific run/time for a transfer run to be started. The requested/run_time must not be in the future.
+  { -- | A run/time timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested/run_time must be a past time and cannot include future time values.
     requestedRunTime :: (Core.Maybe Core.DateTime),
-    -- | Time range for the transfer runs that should be started.
+    -- | A time/range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested/time_range must be a past time and cannot include future time values.
     requestedTimeRange :: (Core.Maybe TimeRange)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -963,10 +1085,8 @@ instance Core.ToJSON StartManualTransferRunsRequest where
   toJSON StartManualTransferRunsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("requestedRunTime" Core..=)
-              Core.<$> requestedRunTime,
-            ("requestedTimeRange" Core..=)
-              Core.<$> requestedTimeRange
+          [ ("requestedRunTime" Core..=) Core.<$> requestedRunTime,
+            ("requestedTimeRange" Core..=) Core.<$> requestedTimeRange
           ]
       )
 
@@ -985,22 +1105,17 @@ newStartManualTransferRunsResponse ::
 newStartManualTransferRunsResponse =
   StartManualTransferRunsResponse {runs = Core.Nothing}
 
-instance
-  Core.FromJSON
-    StartManualTransferRunsResponse
-  where
+instance Core.FromJSON StartManualTransferRunsResponse where
   parseJSON =
     Core.withObject
       "StartManualTransferRunsResponse"
       ( \o ->
-          StartManualTransferRunsResponse
-            Core.<$> (o Core..:? "runs")
+          StartManualTransferRunsResponse Core.<$> (o Core..:? "runs")
       )
 
 instance Core.ToJSON StartManualTransferRunsResponse where
   toJSON StartManualTransferRunsResponse {..} =
-    Core.object
-      (Core.catMaybes [("runs" Core..=) Core.<$> runs])
+    Core.object (Core.catMaybes [("runs" Core..=) Core.<$> runs])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -1019,7 +1134,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1055,19 +1174,61 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | Options customizing the time based transfer schedule. Options are migrated from the original ScheduleOptions message.
+--
+-- /See:/ 'newTimeBasedSchedule' smart constructor.
+data TimeBasedSchedule = TimeBasedSchedule
+  { -- | Defines time to stop scheduling transfer runs. A transfer run cannot be scheduled at or after the end time. The end time can be changed at any moment.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Data transfer schedule. If the data source does not support a custom schedule, this should be empty. If it is empty, the default value for the data source will be used. The specified times are in UTC. Examples of valid format: @1st,3rd monday of month 15:30@, @every wed,fri of jan,jun 13:15@, and @first sunday of quarter 00:00@. See more explanation about the format here: https:\/\/cloud.google.com\/appengine\/docs\/flexible\/python\/scheduling-jobs-with-cron-yaml#the/schedule/format NOTE: The minimum interval time between recurring transfers depends on the data source; refer to the documentation for your data source.
+    schedule :: (Core.Maybe Core.Text),
+    -- | Specifies time to start scheduling transfer runs. The first run will be scheduled at or after the start time according to a recurrence pattern defined in the schedule string. The start time can be changed at any moment.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeBasedSchedule' with the minimum fields required to make a request.
+newTimeBasedSchedule ::
+  TimeBasedSchedule
+newTimeBasedSchedule =
+  TimeBasedSchedule
+    { endTime = Core.Nothing,
+      schedule = Core.Nothing,
+      startTime = Core.Nothing
+    }
+
+instance Core.FromJSON TimeBasedSchedule where
+  parseJSON =
+    Core.withObject
+      "TimeBasedSchedule"
+      ( \o ->
+          TimeBasedSchedule
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "schedule")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON TimeBasedSchedule where
+  toJSON TimeBasedSchedule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("schedule" Core..=) Core.<$> schedule,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
 
 -- | A specification for a time range, this will request transfer runs with run/time between start/time (inclusive) and end_time (exclusive).
 --
@@ -1083,7 +1244,8 @@ data TimeRange = TimeRange
 -- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
 newTimeRange ::
   TimeRange
-newTimeRange = TimeRange {endTime = Core.Nothing, startTime = Core.Nothing}
+newTimeRange =
+  TimeRange {endTime = Core.Nothing, startTime = Core.Nothing}
 
 instance Core.FromJSON TimeRange where
   parseJSON =
@@ -1116,17 +1278,21 @@ data TransferConfig = TransferConfig
     datasetRegion :: (Core.Maybe Core.Text),
     -- | The BigQuery target dataset id.
     destinationDatasetId :: (Core.Maybe Core.Text),
-    -- | Is this config disabled. When set to true, no runs are scheduled for a given transfer.
+    -- | Is this config disabled. When set to true, no runs will be scheduled for this transfer config.
     disabled :: (Core.Maybe Core.Bool),
     -- | User specified display name for the data transfer.
     displayName :: (Core.Maybe Core.Text),
     -- | Email notifications will be sent according to these preferences to the email address of the user who owns this transfer config.
     emailPreferences :: (Core.Maybe EmailPreferences),
-    -- | The resource name of the transfer config. Transfer config names have the form @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@. Where @config_id@ is usually a uuid, even though it is not guaranteed or required. The name is ignored when creating a transfer config.
+    -- | The encryption configuration part. Currently, it is only used for the optional KMS key name. The BigQuery service account of your project must be granted permissions to use the key. Read methods will return the key name applied in effect. Write methods will apply the key if it is present, or otherwise try to apply project default keys if it is absent.
+    encryptionConfiguration :: (Core.Maybe EncryptionConfiguration),
+    -- | Output only. Error code with detailed information about reason of the latest config failure.
+    error :: (Core.Maybe Status),
+    -- | Identifier. The resource name of the transfer config. Transfer config names have the form either @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/transferConfigs\/{config_id}@, where @config_id@ is usually a UUID, even though it is not guaranteed or required. The name is ignored when creating a transfer config.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Next time when data transfer will run.
     nextRunTime :: (Core.Maybe Core.DateTime),
-    -- | Pub\/Sub topic where notifications will be sent after transfer runs associated with this transfer config finish. The format for specifying a pubsub topic is: @projects\/{project}\/topics\/{topic}@
+    -- | Pub\/Sub topic where notifications will be sent after transfer runs associated with this transfer config finish. The format for specifying a pubsub topic is: @projects\/{project_id}\/topics\/{topic_id}@
     notificationPubsubTopic :: (Core.Maybe Core.Text),
     -- | Output only. Information about the user whose credentials are used to transfer data. Populated only for @transferConfigs.get@ requests. In case the user information is not available, this field will not be populated.
     ownerInfo :: (Core.Maybe UserInfo),
@@ -1136,6 +1302,8 @@ data TransferConfig = TransferConfig
     schedule :: (Core.Maybe Core.Text),
     -- | Options customizing the data transfer schedule.
     scheduleOptions :: (Core.Maybe ScheduleOptions),
+    -- | Options customizing different types of data transfer schedule. This field replaces \"schedule\" and \"schedule_options\" fields. ScheduleOptionsV2 cannot be used together with ScheduleOptions\/Schedule.
+    scheduleOptionsV2 :: (Core.Maybe ScheduleOptionsV2),
     -- | Output only. State of the most recently updated transfer run.
     state :: (Core.Maybe TransferConfig_State),
     -- | Output only. Data transfer modification time. Ignored by server on input.
@@ -1157,6 +1325,8 @@ newTransferConfig =
       disabled = Core.Nothing,
       displayName = Core.Nothing,
       emailPreferences = Core.Nothing,
+      encryptionConfiguration = Core.Nothing,
+      error = Core.Nothing,
       name = Core.Nothing,
       nextRunTime = Core.Nothing,
       notificationPubsubTopic = Core.Nothing,
@@ -1164,6 +1334,7 @@ newTransferConfig =
       params = Core.Nothing,
       schedule = Core.Nothing,
       scheduleOptions = Core.Nothing,
+      scheduleOptionsV2 = Core.Nothing,
       state = Core.Nothing,
       updateTime = Core.Nothing,
       userId = Core.Nothing
@@ -1182,6 +1353,8 @@ instance Core.FromJSON TransferConfig where
             Core.<*> (o Core..:? "disabled")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "emailPreferences")
+            Core.<*> (o Core..:? "encryptionConfiguration")
+            Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nextRunTime")
             Core.<*> (o Core..:? "notificationPubsubTopic")
@@ -1189,27 +1362,26 @@ instance Core.FromJSON TransferConfig where
             Core.<*> (o Core..:? "params")
             Core.<*> (o Core..:? "schedule")
             Core.<*> (o Core..:? "scheduleOptions")
+            Core.<*> (o Core..:? "scheduleOptionsV2")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "userId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "userId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON TransferConfig where
   toJSON TransferConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataRefreshWindowDays" Core..=)
-              Core.<$> dataRefreshWindowDays,
+          [ ("dataRefreshWindowDays" Core..=) Core.<$> dataRefreshWindowDays,
             ("dataSourceId" Core..=) Core.<$> dataSourceId,
             ("datasetRegion" Core..=) Core.<$> datasetRegion,
-            ("destinationDatasetId" Core..=)
-              Core.<$> destinationDatasetId,
+            ("destinationDatasetId" Core..=) Core.<$> destinationDatasetId,
             ("disabled" Core..=) Core.<$> disabled,
             ("displayName" Core..=) Core.<$> displayName,
-            ("emailPreferences" Core..=)
-              Core.<$> emailPreferences,
+            ("emailPreferences" Core..=) Core.<$> emailPreferences,
+            ("encryptionConfiguration" Core..=)
+              Core.<$> encryptionConfiguration,
+            ("error" Core..=) Core.<$> error,
             ("name" Core..=) Core.<$> name,
             ("nextRunTime" Core..=) Core.<$> nextRunTime,
             ("notificationPubsubTopic" Core..=)
@@ -1218,10 +1390,10 @@ instance Core.ToJSON TransferConfig where
             ("params" Core..=) Core.<$> params,
             ("schedule" Core..=) Core.<$> schedule,
             ("scheduleOptions" Core..=) Core.<$> scheduleOptions,
+            ("scheduleOptionsV2" Core..=) Core.<$> scheduleOptionsV2,
             ("state" Core..=) Core.<$> state,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("userId" Core..=) Core.. Core.AsText
-              Core.<$> userId
+            ("userId" Core..=) Core.. Core.AsText Core.<$> userId
           ]
       )
 
@@ -1246,14 +1418,10 @@ instance Core.FromJSON TransferConfig_Params where
   parseJSON =
     Core.withObject
       "TransferConfig_Params"
-      ( \o ->
-          TransferConfig_Params
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TransferConfig_Params Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TransferConfig_Params where
-  toJSON TransferConfig_Params {..} =
-    Core.toJSON additional
+  toJSON TransferConfig_Params {..} = Core.toJSON additional
 
 -- | Represents a user facing message for a particular data transfer run.
 --
@@ -1313,9 +1481,9 @@ data TransferRun = TransferRun
     endTime :: (Core.Maybe Core.DateTime),
     -- | Status of the transfer run.
     errorStatus :: (Core.Maybe Status),
-    -- | The resource name of the transfer run. Transfer run names have the form @projects\/{project_id}\/locations\/{location}\/transferConfigs\/{config_id}\/runs\/{run_id}@. The name is ignored when creating a transfer run.
+    -- | Identifier. The resource name of the transfer run. Transfer run names have the form @projects\/{project_id}\/locations\/{location}\/transferConfigs\/{config_id}\/runs\/{run_id}@. The name is ignored when creating a transfer run.
     name :: (Core.Maybe Core.Text),
-    -- | Output only. Pub\/Sub topic where a notification will be sent after this transfer run finishes. The format for specifying a pubsub topic is: @projects\/{project}\/topics\/{topic}@
+    -- | Output only. Pub\/Sub topic where a notification will be sent after this transfer run finishes. The format for specifying a pubsub topic is: @projects\/{project_id}\/topics\/{topic_id}@
     notificationPubsubTopic :: (Core.Maybe Core.Text),
     -- | Output only. Parameters specific to each data source. For more information see the bq tab in the \'Setting up a data transfer\' section for each data source. For example the parameters for Cloud Storage transfers are listed here: https:\/\/cloud.google.com\/bigquery-transfer\/docs\/cloud-storage-transfer#bq
     params :: (Core.Maybe TransferRun_Params),
@@ -1378,9 +1546,7 @@ instance Core.FromJSON TransferRun where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "userId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "userId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON TransferRun where
@@ -1388,10 +1554,8 @@ instance Core.ToJSON TransferRun where
     Core.object
       ( Core.catMaybes
           [ ("dataSourceId" Core..=) Core.<$> dataSourceId,
-            ("destinationDatasetId" Core..=)
-              Core.<$> destinationDatasetId,
-            ("emailPreferences" Core..=)
-              Core.<$> emailPreferences,
+            ("destinationDatasetId" Core..=) Core.<$> destinationDatasetId,
+            ("emailPreferences" Core..=) Core.<$> emailPreferences,
             ("endTime" Core..=) Core.<$> endTime,
             ("errorStatus" Core..=) Core.<$> errorStatus,
             ("name" Core..=) Core.<$> name,
@@ -1404,8 +1568,7 @@ instance Core.ToJSON TransferRun where
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("userId" Core..=) Core.. Core.AsText
-              Core.<$> userId
+            ("userId" Core..=) Core.. Core.AsText Core.<$> userId
           ]
       )
 
@@ -1423,19 +1586,45 @@ newTransferRun_Params ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   TransferRun_Params
-newTransferRun_Params additional = TransferRun_Params {additional = additional}
+newTransferRun_Params additional =
+  TransferRun_Params {additional = additional}
 
 instance Core.FromJSON TransferRun_Params where
   parseJSON =
     Core.withObject
       "TransferRun_Params"
-      ( \o ->
-          TransferRun_Params Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TransferRun_Params Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TransferRun_Params where
-  toJSON TransferRun_Params {..} =
-    Core.toJSON additional
+  toJSON TransferRun_Params {..} = Core.toJSON additional
+
+-- | A request to unenroll a set of data sources so they are no longer visible in the BigQuery UI\'s @Transfer@ tab.
+--
+-- /See:/ 'newUnenrollDataSourcesRequest' smart constructor.
+newtype UnenrollDataSourcesRequest = UnenrollDataSourcesRequest
+  { -- | Data sources that are unenrolled. It is required to provide at least one data source id.
+    dataSourceIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UnenrollDataSourcesRequest' with the minimum fields required to make a request.
+newUnenrollDataSourcesRequest ::
+  UnenrollDataSourcesRequest
+newUnenrollDataSourcesRequest =
+  UnenrollDataSourcesRequest {dataSourceIds = Core.Nothing}
+
+instance Core.FromJSON UnenrollDataSourcesRequest where
+  parseJSON =
+    Core.withObject
+      "UnenrollDataSourcesRequest"
+      ( \o ->
+          UnenrollDataSourcesRequest Core.<$> (o Core..:? "dataSourceIds")
+      )
+
+instance Core.ToJSON UnenrollDataSourcesRequest where
+  toJSON UnenrollDataSourcesRequest {..} =
+    Core.object
+      (Core.catMaybes [("dataSourceIds" Core..=) Core.<$> dataSourceIds])
 
 -- | Information about a user.
 --
@@ -1459,5 +1648,4 @@ instance Core.FromJSON UserInfo where
 
 instance Core.ToJSON UserInfo where
   toJSON UserInfo {..} =
-    Core.object
-      (Core.catMaybes [("email" Core..=) Core.<$> email])
+    Core.object (Core.catMaybes [("email" Core..=) Core.<$> email])

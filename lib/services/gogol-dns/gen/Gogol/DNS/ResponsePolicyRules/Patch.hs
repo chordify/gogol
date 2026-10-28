@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.ResponsePolicyRules.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DNS.ResponsePolicyRules.Patch
 where
 
 import Gogol.DNS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dns.responsePolicyRules.patch@ method which the
 -- 'DNSResponsePolicyRulesPatch' request conforms to.
@@ -62,12 +60,8 @@ type DNSResponsePolicyRulesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ResponsePolicyRule
-    Core.:> Core.Patch
-              '[Core.JSON]
-              ResponsePolicyRulesPatchResponse
+    Core.:> Core.ReqBody '[Core.JSON] ResponsePolicyRule
+    Core.:> Core.Patch '[Core.JSON] ResponsePolicyRulesPatchResponse
 
 -- | Applies a partial update to an existing Response Policy Rule.
 --
@@ -109,25 +103,26 @@ newDNSResponsePolicyRulesPatch ::
   -- |  User assigned name of the Response Policy Rule addressed by this request. See 'responsePolicyRule'.
   Core.Text ->
   DNSResponsePolicyRulesPatch
-newDNSResponsePolicyRulesPatch payload project responsePolicy responsePolicyRule =
-  DNSResponsePolicyRulesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clientOperationId = Core.Nothing,
-      location = "global",
-      payload = payload,
-      project = project,
-      responsePolicy = responsePolicy,
-      responsePolicyRule = responsePolicyRule,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDNSResponsePolicyRulesPatch
+  payload
+  project
+  responsePolicy
+  responsePolicyRule =
     DNSResponsePolicyRulesPatch
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clientOperationId = Core.Nothing,
+        location = "global",
+        payload = payload,
+        project = project,
+        responsePolicy = responsePolicy,
+        responsePolicyRule = responsePolicyRule,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DNSResponsePolicyRulesPatch where
   type
     Rs DNSResponsePolicyRulesPatch =
       ResponsePolicyRulesPatchResponse
@@ -152,7 +147,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DNSResponsePolicyRulesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DNSResponsePolicyRulesPatchResource)
           Core.mempty

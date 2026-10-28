@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.Patch
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.patch@ method which the
 -- 'AccessContextManagerAccessPoliciesPatch' request conforms to.
@@ -67,7 +65,7 @@ data AccessContextManagerAccessPoliciesPatch = AccessContextManagerAccessPolicie
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Output only. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@
+    -- | Output only. Identifier. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: AccessPolicy,
@@ -82,7 +80,7 @@ data AccessContextManagerAccessPoliciesPatch = AccessContextManagerAccessPolicie
 
 -- | Creates a value of 'AccessContextManagerAccessPoliciesPatch' with the minimum fields required to make a request.
 newAccessContextManagerAccessPoliciesPatch ::
-  -- |  Output only. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@ See 'name'.
+  -- |  Output only. Identifier. Resource name of the @AccessPolicy@. Format: @accessPolicies\/{access_policy}@ See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   AccessPolicy ->
@@ -99,34 +97,27 @@ newAccessContextManagerAccessPoliciesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AccessContextManagerAccessPoliciesPatch
-  where
-  type
-    Rs AccessContextManagerAccessPoliciesPatch =
-      Operation
+instance Core.GoogleRequest AccessContextManagerAccessPoliciesPatch where
+  type Rs AccessContextManagerAccessPoliciesPatch = Operation
   type
     Scopes AccessContextManagerAccessPoliciesPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    AccessContextManagerAccessPoliciesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        accessContextManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessContextManagerAccessPoliciesPatchResource
-            )
-            Core.mempty
+  requestClient AccessContextManagerAccessPoliciesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      accessContextManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AccessContextManagerAccessPoliciesPatchResource
+          )
+          Core.mempty

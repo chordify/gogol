@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Myconfig.SyncVolumeLicenses
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Myconfig.SyncVolumeLicenses
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.myconfig.syncVolumeLicenses@ method which the
 -- 'BooksMyconfigSyncVolumeLicenses' request conforms to.
@@ -55,9 +53,7 @@ type BooksMyconfigSyncVolumeLicensesResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParams
-              "features"
-              MyconfigSyncVolumeLicensesFeatures
+    Core.:> Core.QueryParams "features" MyconfigSyncVolumeLicensesFeatures
     Core.:> Core.QueryParam "includeNonComicsSeries" Core.Bool
     Core.:> Core.QueryParam "locale" Core.Text
     Core.:> Core.QueryParam "showPreorders" Core.Bool
@@ -126,14 +122,9 @@ newBooksMyconfigSyncVolumeLicenses cpksver nonce source =
       volumeIds = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMyconfigSyncVolumeLicenses
-  where
+instance Core.GoogleRequest BooksMyconfigSyncVolumeLicenses where
   type Rs BooksMyconfigSyncVolumeLicenses = Volumes
-  type
-    Scopes BooksMyconfigSyncVolumeLicenses =
-      '[Books'FullControl]
+  type Scopes BooksMyconfigSyncVolumeLicenses = '[Books'FullControl]
   requestClient BooksMyconfigSyncVolumeLicenses {..} =
     go
       (Core.Just cpksver)
@@ -154,7 +145,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksMyconfigSyncVolumeLicensesResource
-          )
+          (Core.Proxy :: Core.Proxy BooksMyconfigSyncVolumeLicensesResource)
           Core.mempty

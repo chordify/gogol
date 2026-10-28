@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Partners.Companies.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Partners.Companies.Get
 where
 
 import Gogol.Partners.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @partners.companies.get@ method which the
 -- 'PartnersCompaniesGet' request conforms to.
@@ -54,34 +52,22 @@ type PartnersCompaniesGetResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currencyCode" Core.Text
     Core.:> Core.QueryParam "orderBy" Core.Text
-    Core.:> Core.QueryParams
-              "requestMetadata.experimentIds"
-              Core.Text
+    Core.:> Core.QueryParams "requestMetadata.experimentIds" Core.Text
     Core.:> Core.QueryParam "requestMetadata.locale" Core.Text
-    Core.:> Core.QueryParam
-              "requestMetadata.partnersSessionId"
-              Core.Text
+    Core.:> Core.QueryParam "requestMetadata.partnersSessionId" Core.Text
     Core.:> Core.QueryParam
               "requestMetadata.trafficSource.trafficSourceId"
               Core.Text
     Core.:> Core.QueryParam
               "requestMetadata.trafficSource.trafficSubId"
               Core.Text
-    Core.:> Core.QueryParam
-              "requestMetadata.userOverrides.ipAddress"
-              Core.Text
-    Core.:> Core.QueryParam
-              "requestMetadata.userOverrides.userId"
-              Core.Text
+    Core.:> Core.QueryParam "requestMetadata.userOverrides.ipAddress" Core.Text
+    Core.:> Core.QueryParam "requestMetadata.userOverrides.userId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "view" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GetCompanyResponse
+    Core.:> Core.Get '[Core.JSON] GetCompanyResponse
 
 -- | Gets a company.
 --
@@ -177,7 +163,5 @@ instance Core.GoogleRequest PartnersCompaniesGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PartnersCompaniesGetResource
-          )
+          (Core.Proxy :: Core.Proxy PartnersCompaniesGetResource)
           Core.mempty

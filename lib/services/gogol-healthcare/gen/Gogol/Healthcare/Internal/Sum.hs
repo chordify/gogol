@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Healthcare.Internal.Sum
@@ -30,6 +28,22 @@ module Gogol.Healthcare.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * AccessDeterminationLogConfig_LogLevel
+    AccessDeterminationLogConfig_LogLevel
+      ( AccessDeterminationLogConfig_LogLevel_LOGLEVELUNSPECIFIED,
+        AccessDeterminationLogConfig_LogLevel_Disabled,
+        AccessDeterminationLogConfig_LogLevel_Minimum,
+        AccessDeterminationLogConfig_LogLevel_Verbose,
+        ..
+      ),
+
+    -- * AnalyzeEntitiesRequest_AlternativeOutputFormat
+    AnalyzeEntitiesRequest_AlternativeOutputFormat
+      ( AnalyzeEntitiesRequest_AlternativeOutputFormat_ALTERNATIVEOUTPUTFORMATUNSPECIFIED,
+        AnalyzeEntitiesRequest_AlternativeOutputFormat_FHIRBUNDLE,
         ..
       ),
 
@@ -58,6 +72,26 @@ module Gogol.Healthcare.Internal.Sum
         ..
       ),
 
+    -- * BlobStorageInfo_StorageClass
+    BlobStorageInfo_StorageClass
+      ( BlobStorageInfo_StorageClass_BLOBSTORAGECLASSUNSPECIFIED,
+        BlobStorageInfo_StorageClass_Standard,
+        BlobStorageInfo_StorageClass_Nearline,
+        BlobStorageInfo_StorageClass_Coldline,
+        BlobStorageInfo_StorageClass_Archive,
+        ..
+      ),
+
+    -- * BlobStorageSettings_BlobStorageClass
+    BlobStorageSettings_BlobStorageClass
+      ( BlobStorageSettings_BlobStorageClass_BLOBSTORAGECLASSUNSPECIFIED,
+        BlobStorageSettings_BlobStorageClass_Standard,
+        BlobStorageSettings_BlobStorageClass_Nearline,
+        BlobStorageSettings_BlobStorageClass_Coldline,
+        BlobStorageSettings_BlobStorageClass_Archive,
+        ..
+      ),
+
     -- * CheckDataAccessRequest_ResponseView
     CheckDataAccessRequest_ResponseView
       ( CheckDataAccessRequest_ResponseView_RESPONSEVIEWUNSPECIFIED,
@@ -77,6 +111,13 @@ module Gogol.Healthcare.Internal.Sum
         ..
       ),
 
+    -- * ConsentConfig_Version
+    ConsentConfig_Version
+      ( ConsentConfig_Version_CONSENTENFORCEMENTVERSIONUNSPECIFIED,
+        ConsentConfig_Version_V1,
+        ..
+      ),
+
     -- * ConsentEvaluation_EvaluationResult
     ConsentEvaluation_EvaluationResult
       ( ConsentEvaluation_EvaluationResult_EVALUATIONRESULTUNSPECIFIED,
@@ -84,6 +125,14 @@ module Gogol.Healthcare.Internal.Sum
         ConsentEvaluation_EvaluationResult_NOMATCHINGPOLICY,
         ConsentEvaluation_EvaluationResult_NOSATISFIEDPOLICY,
         ConsentEvaluation_EvaluationResult_HASSATISFIEDPOLICY,
+        ..
+      ),
+
+    -- * ConsentHeaderHandling_Profile
+    ConsentHeaderHandling_Profile
+      ( ConsentHeaderHandling_Profile_SCOPEPROFILEUNSPECIFIED,
+        ConsentHeaderHandling_Profile_PERMITEMPTYSCOPE,
+        ConsentHeaderHandling_Profile_REQUIREDONREAD,
         ..
       ),
 
@@ -102,6 +151,30 @@ module Gogol.Healthcare.Internal.Sum
       ( EvaluateUserConsentsRequest_ResponseView_RESPONSEVIEWUNSPECIFIED,
         EvaluateUserConsentsRequest_ResponseView_Basic,
         EvaluateUserConsentsRequest_ResponseView_Full,
+        ..
+      ),
+
+    -- * ExplainDataAccessConsentInfo_Type
+    ExplainDataAccessConsentInfo_Type
+      ( ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEUNSPECIFIED,
+        ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEPATIENT,
+        ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEADMIN,
+        ..
+      ),
+
+    -- * ExplainDataAccessConsentInfo_VariantsItem
+    ExplainDataAccessConsentInfo_VariantsItem
+      ( ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTUNSPECIFIED,
+        ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTSTANDARD,
+        ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTCASCADE,
+        ..
+      ),
+
+    -- * ExplainDataAccessConsentScope_Decision
+    ExplainDataAccessConsentScope_Decision
+      ( ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEUNSPECIFIED,
+        ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEPERMIT,
+        ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEDENY,
         ..
       ),
 
@@ -195,6 +268,26 @@ module Gogol.Healthcare.Internal.Sum
         ..
       ),
 
+    -- * RollbackFhirResourcesRequest_ChangeType
+    RollbackFhirResourcesRequest_ChangeType
+      ( RollbackFhirResourcesRequest_ChangeType_CHANGETYPEUNSPECIFIED,
+        RollbackFhirResourcesRequest_ChangeType_All,
+        RollbackFhirResourcesRequest_ChangeType_Create,
+        RollbackFhirResourcesRequest_ChangeType_Update,
+        RollbackFhirResourcesRequest_ChangeType_Delete',
+        ..
+      ),
+
+    -- * RollbackHl7V2MessagesRequest_ChangeType
+    RollbackHl7V2MessagesRequest_ChangeType
+      ( RollbackHl7V2MessagesRequest_ChangeType_CHANGETYPEUNSPECIFIED,
+        RollbackHl7V2MessagesRequest_ChangeType_All,
+        RollbackHl7V2MessagesRequest_ChangeType_Create,
+        RollbackHl7V2MessagesRequest_ChangeType_Update,
+        RollbackHl7V2MessagesRequest_ChangeType_Delete',
+        ..
+      ),
+
     -- * SchemaConfig_SchemaType
     SchemaConfig_SchemaType
       ( SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED,
@@ -263,7 +356,7 @@ module Gogol.Healthcare.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -290,6 +383,70 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Optional. Controls the amount of detail to include as part of the audit logs.
+newtype AccessDeterminationLogConfig_LogLevel = AccessDeterminationLogConfig_LogLevel {fromAccessDeterminationLogConfig_LogLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No log level specified. This value is unused.
+pattern AccessDeterminationLogConfig_LogLevel_LOGLEVELUNSPECIFIED :: AccessDeterminationLogConfig_LogLevel
+pattern AccessDeterminationLogConfig_LogLevel_LOGLEVELUNSPECIFIED = AccessDeterminationLogConfig_LogLevel "LOG_LEVEL_UNSPECIFIED"
+
+-- | No additional consent-related logging is added to audit logs.
+pattern AccessDeterminationLogConfig_LogLevel_Disabled :: AccessDeterminationLogConfig_LogLevel
+pattern AccessDeterminationLogConfig_LogLevel_Disabled = AccessDeterminationLogConfig_LogLevel "DISABLED"
+
+-- | The following information is included: * One of the following <https://cloud.google.com/healthcare-api/docs/fhir-consent#audit_logs consentMode> fields: (@off@|@emptyScope@|@enforced@|@btg@|@bypass@). * The accessor\'s request headers * The @log_level@ of the AccessDeterminationLogConfig * The final consent evaluation (@PERMIT@, @DENY@, or @NO_CONSENT@) * A human-readable summary of the evaluation
+pattern AccessDeterminationLogConfig_LogLevel_Minimum :: AccessDeterminationLogConfig_LogLevel
+pattern AccessDeterminationLogConfig_LogLevel_Minimum = AccessDeterminationLogConfig_LogLevel "MINIMUM"
+
+-- | Includes @MINIMUM@ and, for each resource owner, returns: * The resource owner\'s name * Most specific part of the @X-Consent-Scope@ resulting in consensual determination * Timestamp of the applied enforcement leading to the decision * Enforcement version at the time the applicable consents were applied * The Consent resource name * The timestamp of the Consent resource used for enforcement * Policy type (@PATIENT@ or @ADMIN@) Note that this mode adds some overhead to CRUD operations.
+pattern AccessDeterminationLogConfig_LogLevel_Verbose :: AccessDeterminationLogConfig_LogLevel
+pattern AccessDeterminationLogConfig_LogLevel_Verbose = AccessDeterminationLogConfig_LogLevel "VERBOSE"
+
+{-# COMPLETE
+  AccessDeterminationLogConfig_LogLevel_LOGLEVELUNSPECIFIED,
+  AccessDeterminationLogConfig_LogLevel_Disabled,
+  AccessDeterminationLogConfig_LogLevel_Minimum,
+  AccessDeterminationLogConfig_LogLevel_Verbose,
+  AccessDeterminationLogConfig_LogLevel
+  #-}
+
+-- | Optional. Alternative output format to be generated based on the results of analysis.
+newtype AnalyzeEntitiesRequest_AlternativeOutputFormat = AnalyzeEntitiesRequest_AlternativeOutputFormat {fromAnalyzeEntitiesRequest_AlternativeOutputFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No alternative output format is specified.
+pattern AnalyzeEntitiesRequest_AlternativeOutputFormat_ALTERNATIVEOUTPUTFORMATUNSPECIFIED :: AnalyzeEntitiesRequest_AlternativeOutputFormat
+pattern AnalyzeEntitiesRequest_AlternativeOutputFormat_ALTERNATIVEOUTPUTFORMATUNSPECIFIED = AnalyzeEntitiesRequest_AlternativeOutputFormat "ALTERNATIVE_OUTPUT_FORMAT_UNSPECIFIED"
+
+-- | FHIR bundle output.
+pattern AnalyzeEntitiesRequest_AlternativeOutputFormat_FHIRBUNDLE :: AnalyzeEntitiesRequest_AlternativeOutputFormat
+pattern AnalyzeEntitiesRequest_AlternativeOutputFormat_FHIRBUNDLE = AnalyzeEntitiesRequest_AlternativeOutputFormat "FHIR_BUNDLE"
+
+{-# COMPLETE
+  AnalyzeEntitiesRequest_AlternativeOutputFormat_ALTERNATIVEOUTPUTFORMATUNSPECIFIED,
+  AnalyzeEntitiesRequest_AlternativeOutputFormat_FHIRBUNDLE,
+  AnalyzeEntitiesRequest_AlternativeOutputFormat
   #-}
 
 newtype AnalyzeEntitiesRequest_LicensedVocabulariesItem = AnalyzeEntitiesRequest_LicensedVocabulariesItem {fromAnalyzeEntitiesRequest_LicensedVocabulariesItem :: Core.Text}
@@ -392,6 +549,90 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType
   #-}
 
+-- | The storage class in which the Blob data is stored.
+newtype BlobStorageInfo_StorageClass = BlobStorageInfo_StorageClass {fromBlobStorageInfo_StorageClass :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If unspecified in CreateDataset, the StorageClass defaults to STANDARD. If unspecified in UpdateDataset and the StorageClass is set in the field mask, an InvalidRequest error is thrown.
+pattern BlobStorageInfo_StorageClass_BLOBSTORAGECLASSUNSPECIFIED :: BlobStorageInfo_StorageClass
+pattern BlobStorageInfo_StorageClass_BLOBSTORAGECLASSUNSPECIFIED = BlobStorageInfo_StorageClass "BLOB_STORAGE_CLASS_UNSPECIFIED"
+
+-- | This stores the Object in Blob Standard Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#standard
+pattern BlobStorageInfo_StorageClass_Standard :: BlobStorageInfo_StorageClass
+pattern BlobStorageInfo_StorageClass_Standard = BlobStorageInfo_StorageClass "STANDARD"
+
+-- | This stores the Object in Blob Nearline Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#nearline
+pattern BlobStorageInfo_StorageClass_Nearline :: BlobStorageInfo_StorageClass
+pattern BlobStorageInfo_StorageClass_Nearline = BlobStorageInfo_StorageClass "NEARLINE"
+
+-- | This stores the Object in Blob Coldline Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#coldline
+pattern BlobStorageInfo_StorageClass_Coldline :: BlobStorageInfo_StorageClass
+pattern BlobStorageInfo_StorageClass_Coldline = BlobStorageInfo_StorageClass "COLDLINE"
+
+-- | This stores the Object in Blob Archive Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#archive
+pattern BlobStorageInfo_StorageClass_Archive :: BlobStorageInfo_StorageClass
+pattern BlobStorageInfo_StorageClass_Archive = BlobStorageInfo_StorageClass "ARCHIVE"
+
+{-# COMPLETE
+  BlobStorageInfo_StorageClass_BLOBSTORAGECLASSUNSPECIFIED,
+  BlobStorageInfo_StorageClass_Standard,
+  BlobStorageInfo_StorageClass_Nearline,
+  BlobStorageInfo_StorageClass_Coldline,
+  BlobStorageInfo_StorageClass_Archive,
+  BlobStorageInfo_StorageClass
+  #-}
+
+-- | The Storage class in which the Blob data is stored.
+newtype BlobStorageSettings_BlobStorageClass = BlobStorageSettings_BlobStorageClass {fromBlobStorageSettings_BlobStorageClass :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If unspecified in CreateDataset, the StorageClass defaults to STANDARD. If unspecified in UpdateDataset and the StorageClass is set in the field mask, an InvalidRequest error is thrown.
+pattern BlobStorageSettings_BlobStorageClass_BLOBSTORAGECLASSUNSPECIFIED :: BlobStorageSettings_BlobStorageClass
+pattern BlobStorageSettings_BlobStorageClass_BLOBSTORAGECLASSUNSPECIFIED = BlobStorageSettings_BlobStorageClass "BLOB_STORAGE_CLASS_UNSPECIFIED"
+
+-- | This stores the Object in Blob Standard Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#standard
+pattern BlobStorageSettings_BlobStorageClass_Standard :: BlobStorageSettings_BlobStorageClass
+pattern BlobStorageSettings_BlobStorageClass_Standard = BlobStorageSettings_BlobStorageClass "STANDARD"
+
+-- | This stores the Object in Blob Nearline Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#nearline
+pattern BlobStorageSettings_BlobStorageClass_Nearline :: BlobStorageSettings_BlobStorageClass
+pattern BlobStorageSettings_BlobStorageClass_Nearline = BlobStorageSettings_BlobStorageClass "NEARLINE"
+
+-- | This stores the Object in Blob Coldline Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#coldline
+pattern BlobStorageSettings_BlobStorageClass_Coldline :: BlobStorageSettings_BlobStorageClass
+pattern BlobStorageSettings_BlobStorageClass_Coldline = BlobStorageSettings_BlobStorageClass "COLDLINE"
+
+-- | This stores the Object in Blob Archive Storage: https:\/\/cloud.google.com\/storage\/docs\/storage-classes#archive
+pattern BlobStorageSettings_BlobStorageClass_Archive :: BlobStorageSettings_BlobStorageClass
+pattern BlobStorageSettings_BlobStorageClass_Archive = BlobStorageSettings_BlobStorageClass "ARCHIVE"
+
+{-# COMPLETE
+  BlobStorageSettings_BlobStorageClass_BLOBSTORAGECLASSUNSPECIFIED,
+  BlobStorageSettings_BlobStorageClass_Standard,
+  BlobStorageSettings_BlobStorageClass_Nearline,
+  BlobStorageSettings_BlobStorageClass_Coldline,
+  BlobStorageSettings_BlobStorageClass_Archive,
+  BlobStorageSettings_BlobStorageClass
+  #-}
+
 -- | Optional. The view for CheckDataAccessResponse. If unspecified, defaults to @BASIC@ and returns @consented@ as @TRUE@ or @FALSE@.
 newtype CheckDataAccessRequest_ResponseView = CheckDataAccessRequest_ResponseView {fromCheckDataAccessRequest_ResponseView :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -471,6 +712,33 @@ pattern Consent_State_Rejected = Consent_State "REJECTED"
   Consent_State
   #-}
 
+-- | Required. Specifies which consent enforcement version is being used for this FHIR store. This field can only be set once by either CreateFhirStore or UpdateFhirStore. After that, you must call ApplyConsents to change the version.
+newtype ConsentConfig_Version = ConsentConfig_Version {fromConsentConfig_Version :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Users must specify an enforcement version or an error is returned.
+pattern ConsentConfig_Version_CONSENTENFORCEMENTVERSIONUNSPECIFIED :: ConsentConfig_Version
+pattern ConsentConfig_Version_CONSENTENFORCEMENTVERSIONUNSPECIFIED = ConsentConfig_Version "CONSENT_ENFORCEMENT_VERSION_UNSPECIFIED"
+
+-- | Enforcement version 1. See the <https://cloud.google.com/healthcare-api/docs/fhir-consent FHIR Consent resources in the Cloud Healthcare API> guide for more details.
+pattern ConsentConfig_Version_V1 :: ConsentConfig_Version
+pattern ConsentConfig_Version_V1 = ConsentConfig_Version "V1"
+
+{-# COMPLETE
+  ConsentConfig_Version_CONSENTENFORCEMENTVERSIONUNSPECIFIED,
+  ConsentConfig_Version_V1,
+  ConsentConfig_Version
+  #-}
+
 -- | The evaluation result.
 newtype ConsentEvaluation_EvaluationResult = ConsentEvaluation_EvaluationResult {fromConsentEvaluation_EvaluationResult :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -511,6 +779,38 @@ pattern ConsentEvaluation_EvaluationResult_HASSATISFIEDPOLICY = ConsentEvaluatio
   ConsentEvaluation_EvaluationResult_NOSATISFIEDPOLICY,
   ConsentEvaluation_EvaluationResult_HASSATISFIEDPOLICY,
   ConsentEvaluation_EvaluationResult
+  #-}
+
+-- | Optional. Specifies the default server behavior when the header is empty. If not specified, the @ScopeProfile.PERMIT_EMPTY_SCOPE@ option is used.
+newtype ConsentHeaderHandling_Profile = ConsentHeaderHandling_Profile {fromConsentHeaderHandling_Profile :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If not specified, the default value @PERMIT_EMPTY_SCOPE@ is used.
+pattern ConsentHeaderHandling_Profile_SCOPEPROFILEUNSPECIFIED :: ConsentHeaderHandling_Profile
+pattern ConsentHeaderHandling_Profile_SCOPEPROFILEUNSPECIFIED = ConsentHeaderHandling_Profile "SCOPE_PROFILE_UNSPECIFIED"
+
+-- | When no consent scopes are provided (for example, if there\'s an empty or missing header), then consent check is disabled, similar to when @access_enforced@ is @false@. You can use audit logs to differentiate these two cases by looking at the value of @protopayload.metadata.consentMode@. If consents scopes are present, they must be valid and within the allowed limits, otherwise the request will be rejected with a @4xx@ code.
+pattern ConsentHeaderHandling_Profile_PERMITEMPTYSCOPE :: ConsentHeaderHandling_Profile
+pattern ConsentHeaderHandling_Profile_PERMITEMPTYSCOPE = ConsentHeaderHandling_Profile "PERMIT_EMPTY_SCOPE"
+
+-- | The consent header must be non-empty when performing read and search operations, otherwise the request is rejected with a @4xx@ code. Additionally, invalid consent scopes or scopes exceeding the allowed limits are rejected.
+pattern ConsentHeaderHandling_Profile_REQUIREDONREAD :: ConsentHeaderHandling_Profile
+pattern ConsentHeaderHandling_Profile_REQUIREDONREAD = ConsentHeaderHandling_Profile "REQUIRED_ON_READ"
+
+{-# COMPLETE
+  ConsentHeaderHandling_Profile_SCOPEPROFILEUNSPECIFIED,
+  ConsentHeaderHandling_Profile_PERMITEMPTYSCOPE,
+  ConsentHeaderHandling_Profile_REQUIREDONREAD,
+  ConsentHeaderHandling_Profile
   #-}
 
 -- | Tag filtering profile that determines which tags to keep\/remove.
@@ -587,7 +887,102 @@ pattern EvaluateUserConsentsRequest_ResponseView_Full = EvaluateUserConsentsRequ
   EvaluateUserConsentsRequest_ResponseView
   #-}
 
--- | Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+-- | The policy type of consent resource (e.g. PATIENT, ADMIN).
+newtype ExplainDataAccessConsentInfo_Type = ExplainDataAccessConsentInfo_Type {fromExplainDataAccessConsentInfo_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified policy type.
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEUNSPECIFIED :: ExplainDataAccessConsentInfo_Type
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEUNSPECIFIED = ExplainDataAccessConsentInfo_Type "CONSENT_POLICY_TYPE_UNSPECIFIED"
+
+-- | Consent represent a patient consent.
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEPATIENT :: ExplainDataAccessConsentInfo_Type
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEPATIENT = ExplainDataAccessConsentInfo_Type "CONSENT_POLICY_TYPE_PATIENT"
+
+-- | Consent represent an admin consent.
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEADMIN :: ExplainDataAccessConsentInfo_Type
+pattern ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEADMIN = ExplainDataAccessConsentInfo_Type "CONSENT_POLICY_TYPE_ADMIN"
+
+{-# COMPLETE
+  ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEUNSPECIFIED,
+  ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEPATIENT,
+  ExplainDataAccessConsentInfo_Type_CONSENTPOLICYTYPEADMIN,
+  ExplainDataAccessConsentInfo_Type
+  #-}
+
+newtype ExplainDataAccessConsentInfo_VariantsItem = ExplainDataAccessConsentInfo_VariantsItem {fromExplainDataAccessConsentInfo_VariantsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Consent variant unspecified.
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTUNSPECIFIED :: ExplainDataAccessConsentInfo_VariantsItem
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTUNSPECIFIED = ExplainDataAccessConsentInfo_VariantsItem "CONSENT_VARIANT_UNSPECIFIED"
+
+-- | Consent is a standard patient or admin consent.
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTSTANDARD :: ExplainDataAccessConsentInfo_VariantsItem
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTSTANDARD = ExplainDataAccessConsentInfo_VariantsItem "CONSENT_VARIANT_STANDARD"
+
+-- | Consent is a cascading consent.
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTCASCADE :: ExplainDataAccessConsentInfo_VariantsItem
+pattern ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTCASCADE = ExplainDataAccessConsentInfo_VariantsItem "CONSENT_VARIANT_CASCADE"
+
+{-# COMPLETE
+  ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTUNSPECIFIED,
+  ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTSTANDARD,
+  ExplainDataAccessConsentInfo_VariantsItem_CONSENTVARIANTCASCADE,
+  ExplainDataAccessConsentInfo_VariantsItem
+  #-}
+
+-- | Whether the current consent scope is permitted or denied access on the requested resource.
+newtype ExplainDataAccessConsentScope_Decision = ExplainDataAccessConsentScope_Decision {fromExplainDataAccessConsentScope_Decision :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified consent decision type.
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEUNSPECIFIED :: ExplainDataAccessConsentScope_Decision
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEUNSPECIFIED = ExplainDataAccessConsentScope_Decision "CONSENT_DECISION_TYPE_UNSPECIFIED"
+
+-- | Consent permitted access.
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEPERMIT :: ExplainDataAccessConsentScope_Decision
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEPERMIT = ExplainDataAccessConsentScope_Decision "CONSENT_DECISION_TYPE_PERMIT"
+
+-- | Consent denied access.
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEDENY :: ExplainDataAccessConsentScope_Decision
+pattern ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEDENY = ExplainDataAccessConsentScope_Decision "CONSENT_DECISION_TYPE_DENY"
+
+{-# COMPLETE
+  ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEUNSPECIFIED,
+  ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEPERMIT,
+  ExplainDataAccessConsentScope_Decision_CONSENTDECISIONTYPEDENY,
+  ExplainDataAccessConsentScope_Decision
+  #-}
+
+-- | Optional. Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
 newtype FhirStore_ComplexDataTypeReferenceParsing = FhirStore_ComplexDataTypeReferenceParsing {fromFhirStore_ComplexDataTypeReferenceParsing :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -619,7 +1014,7 @@ pattern FhirStore_ComplexDataTypeReferenceParsing_Enabled = FhirStore_ComplexDat
   FhirStore_ComplexDataTypeReferenceParsing
   #-}
 
--- | Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
+-- | Required. Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
 newtype FhirStore_Version = FhirStore_Version {fromFhirStore_Version :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -656,7 +1051,7 @@ pattern FhirStore_Version_R4 = FhirStore_Version "R4"
   FhirStore_Version
   #-}
 
--- | Deidentify action for one field.
+-- | Optional. Deidentify action for one field.
 newtype FieldMetadata_Action = FieldMetadata_Action {fromFieldMetadata_Action :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -669,7 +1064,7 @@ newtype FieldMetadata_Action = FieldMetadata_Action {fromFieldMetadata_Action ::
       Core.FromJSONKey
     )
 
--- | No action specified.
+-- | No action specified. Defaults to DO/NOT/TRANSFORM.
 pattern FieldMetadata_Action_ACTIONUNSPECIFIED :: FieldMetadata_Action
 pattern FieldMetadata_Action_ACTIONUNSPECIFIED = FieldMetadata_Action "ACTION_UNSPECIFIED"
 
@@ -767,7 +1162,7 @@ pattern GcsDestination_MessageView_Basic = GcsDestination_MessageView "BASIC"
   GcsDestination_MessageView
   #-}
 
--- | Determines whether the existing table in the destination is to be overwritten or appended to. If a write_disposition is specified, the @force@ parameter is ignored.
+-- | Optional. Determines whether the existing table in the destination is to be overwritten or appended to. If a write_disposition is specified, the @force@ parameter is ignored.
 newtype GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition = GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition {fromGoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -804,7 +1199,7 @@ pattern GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition_WRITEAP
   GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition
   #-}
 
--- | Determines if existing data in the destination dataset is overwritten, appended to, or not written if the tables contain data. If a write_disposition is specified, the @force@ parameter is ignored.
+-- | Optional. Determines if existing data in the destination dataset is overwritten, appended to, or not written if the tables contain data. If a write_disposition is specified, the @force@ parameter is ignored.
 newtype GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition = GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition {fromGoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -841,7 +1236,7 @@ pattern GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition_WRITEAPP
   GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition
   #-}
 
--- | Determines how to redact text from image.
+-- | Optional. Determines how to redact text from image.
 newtype ImageConfig_TextRedactionMode = ImageConfig_TextRedactionMode {fromImageConfig_TextRedactionMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -957,6 +1352,90 @@ pattern ParserConfig_Version_V3 = ParserConfig_Version "V3"
   ParserConfig_Version
   #-}
 
+-- | Optional. CREATE\/UPDATE\/DELETE\/ALL for reverting all txns of a certain type.
+newtype RollbackFhirResourcesRequest_ChangeType = RollbackFhirResourcesRequest_ChangeType {fromRollbackFhirResourcesRequest_ChangeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | When unspecified, revert all transactions
+pattern RollbackFhirResourcesRequest_ChangeType_CHANGETYPEUNSPECIFIED :: RollbackFhirResourcesRequest_ChangeType
+pattern RollbackFhirResourcesRequest_ChangeType_CHANGETYPEUNSPECIFIED = RollbackFhirResourcesRequest_ChangeType "CHANGE_TYPE_UNSPECIFIED"
+
+-- | All transactions
+pattern RollbackFhirResourcesRequest_ChangeType_All :: RollbackFhirResourcesRequest_ChangeType
+pattern RollbackFhirResourcesRequest_ChangeType_All = RollbackFhirResourcesRequest_ChangeType "ALL"
+
+-- | Revert only CREATE transactions
+pattern RollbackFhirResourcesRequest_ChangeType_Create :: RollbackFhirResourcesRequest_ChangeType
+pattern RollbackFhirResourcesRequest_ChangeType_Create = RollbackFhirResourcesRequest_ChangeType "CREATE"
+
+-- | Revert only Update transactions
+pattern RollbackFhirResourcesRequest_ChangeType_Update :: RollbackFhirResourcesRequest_ChangeType
+pattern RollbackFhirResourcesRequest_ChangeType_Update = RollbackFhirResourcesRequest_ChangeType "UPDATE"
+
+-- | Revert only Delete transactions
+pattern RollbackFhirResourcesRequest_ChangeType_Delete' :: RollbackFhirResourcesRequest_ChangeType
+pattern RollbackFhirResourcesRequest_ChangeType_Delete' = RollbackFhirResourcesRequest_ChangeType "DELETE"
+
+{-# COMPLETE
+  RollbackFhirResourcesRequest_ChangeType_CHANGETYPEUNSPECIFIED,
+  RollbackFhirResourcesRequest_ChangeType_All,
+  RollbackFhirResourcesRequest_ChangeType_Create,
+  RollbackFhirResourcesRequest_ChangeType_Update,
+  RollbackFhirResourcesRequest_ChangeType_Delete',
+  RollbackFhirResourcesRequest_ChangeType
+  #-}
+
+-- | Optional. CREATE\/UPDATE\/DELETE\/ALL for reverting all txns of a certain type.
+newtype RollbackHl7V2MessagesRequest_ChangeType = RollbackHl7V2MessagesRequest_ChangeType {fromRollbackHl7V2MessagesRequest_ChangeType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | When unspecified, revert all transactions
+pattern RollbackHl7V2MessagesRequest_ChangeType_CHANGETYPEUNSPECIFIED :: RollbackHl7V2MessagesRequest_ChangeType
+pattern RollbackHl7V2MessagesRequest_ChangeType_CHANGETYPEUNSPECIFIED = RollbackHl7V2MessagesRequest_ChangeType "CHANGE_TYPE_UNSPECIFIED"
+
+-- | All transactions
+pattern RollbackHl7V2MessagesRequest_ChangeType_All :: RollbackHl7V2MessagesRequest_ChangeType
+pattern RollbackHl7V2MessagesRequest_ChangeType_All = RollbackHl7V2MessagesRequest_ChangeType "ALL"
+
+-- | Revert only CREATE transactions
+pattern RollbackHl7V2MessagesRequest_ChangeType_Create :: RollbackHl7V2MessagesRequest_ChangeType
+pattern RollbackHl7V2MessagesRequest_ChangeType_Create = RollbackHl7V2MessagesRequest_ChangeType "CREATE"
+
+-- | Revert only Update transactions
+pattern RollbackHl7V2MessagesRequest_ChangeType_Update :: RollbackHl7V2MessagesRequest_ChangeType
+pattern RollbackHl7V2MessagesRequest_ChangeType_Update = RollbackHl7V2MessagesRequest_ChangeType "UPDATE"
+
+-- | Revert only Delete transactions
+pattern RollbackHl7V2MessagesRequest_ChangeType_Delete' :: RollbackHl7V2MessagesRequest_ChangeType
+pattern RollbackHl7V2MessagesRequest_ChangeType_Delete' = RollbackHl7V2MessagesRequest_ChangeType "DELETE"
+
+{-# COMPLETE
+  RollbackHl7V2MessagesRequest_ChangeType_CHANGETYPEUNSPECIFIED,
+  RollbackHl7V2MessagesRequest_ChangeType_All,
+  RollbackHl7V2MessagesRequest_ChangeType_Create,
+  RollbackHl7V2MessagesRequest_ChangeType_Update,
+  RollbackHl7V2MessagesRequest_ChangeType_Delete',
+  RollbackHl7V2MessagesRequest_ChangeType
+  #-}
+
 -- | Specifies the output schema type. Schema type is required.
 newtype SchemaConfig_SchemaType = SchemaConfig_SchemaType {fromSchemaConfig_SchemaType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -974,11 +1453,11 @@ newtype SchemaConfig_SchemaType = SchemaConfig_SchemaType {fromSchemaConfig_Sche
 pattern SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED :: SchemaConfig_SchemaType
 pattern SchemaConfig_SchemaType_SCHEMATYPEUNSPECIFIED = SchemaConfig_SchemaType "SCHEMA_TYPE_UNSPECIFIED"
 
--- | Analytics schema defined by the FHIR community. See https:\/\/github.com\/FHIR\/sql-on-fhir\/blob\/master\/sql-on-fhir.md. BigQuery only allows a maximum of 10,000 columns per table. Due to this limitation, the server will not generate schemas for fields of type @Resource@, which can hold any resource type. The affected fields are @Parameters.parameter.resource@, @Bundle.entry.resource@, and @Bundle.entry.response.outcome@.
+-- | Analytics schema defined by the FHIR community. See https:\/\/github.com\/FHIR\/sql-on-fhir\/blob\/master\/sql-on-fhir.md. BigQuery only allows a maximum of 10,000 columns per table. Due to this limitation, the server will not generate schemas for fields of type @Resource@, which can hold any resource type. The affected fields are @Parameters.parameter.resource@, @Bundle.entry.resource@, and @Bundle.entry.response.outcome@. Analytics schema does not gracefully handle extensions with one or more occurrences, anaytics schema also does not handle contained resource. Additionally, extensions with a URL ending in \"\/{existing/resource/field_name}\" may cause undefined behavior.
 pattern SchemaConfig_SchemaType_Analytics :: SchemaConfig_SchemaType
 pattern SchemaConfig_SchemaType_Analytics = SchemaConfig_SchemaType "ANALYTICS"
 
--- | Analytics V2, similar to schema defined by the FHIR community, with added support for extensions with one or more occurrences and contained resources in stringified JSON. Analytics V2 uses more space in the destination table than Analytics V1.
+-- | Analytics V2, similar to schema defined by the FHIR community, with added support for extensions with one or more occurrences and contained resources in stringified JSON. Extensions with a URL ending in \"\/{existing/resource/field_name}\" will cause conflict and prevent the resource from being sent to BigQuery. Analytics V2 uses more space in the destination table than Analytics V1. It is generally recommended to use Analytics V2 over Analytics.
 pattern SchemaConfig_SchemaType_ANALYTICS_V2 :: SchemaConfig_SchemaType
 pattern SchemaConfig_SchemaType_ANALYTICS_V2 = SchemaConfig_SchemaType "ANALYTICS_V2"
 
@@ -989,7 +1468,7 @@ pattern SchemaConfig_SchemaType_ANALYTICS_V2 = SchemaConfig_SchemaType "ANALYTIC
   SchemaConfig_SchemaType
   #-}
 
--- | Determines how messages that fail to parse are handled.
+-- | Optional. Determines how messages that fail to parse are handled.
 newtype SchemaPackage_SchematizedParsingType = SchemaPackage_SchematizedParsingType {fromSchemaPackage_SchematizedParsingType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1021,7 +1500,7 @@ pattern SchemaPackage_SchematizedParsingType_HARDFAIL = SchemaPackage_Schematize
   SchemaPackage_SchematizedParsingType
   #-}
 
--- | Determines how unexpected segments (segments not matched to the schema) are handled.
+-- | Optional. Determines how unexpected segments (segments not matched to the schema) are handled.
 newtype SchemaPackage_UnexpectedSegmentHandling = SchemaPackage_UnexpectedSegmentHandling {fromSchemaPackage_UnexpectedSegmentHandling :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

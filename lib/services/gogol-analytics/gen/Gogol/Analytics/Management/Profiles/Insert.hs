@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Profiles.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Profiles.Insert
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profiles.insert@ method which the
 -- 'AnalyticsManagementProfilesInsert' request conforms to.
@@ -79,21 +77,19 @@ newAnalyticsManagementProfilesInsert ::
   -- |  Web property ID to create the view (profile) for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfilesInsert
-newAnalyticsManagementProfilesInsert accountId payload webPropertyId =
-  AnalyticsManagementProfilesInsert
-    { accountId = accountId,
-      payload = payload,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementProfilesInsert
+  accountId
+  payload
+  webPropertyId =
     AnalyticsManagementProfilesInsert
-  where
+      { accountId = accountId,
+        payload = payload,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementProfilesInsert where
   type Rs AnalyticsManagementProfilesInsert = Profile
-  type
-    Scopes AnalyticsManagementProfilesInsert =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementProfilesInsert = '[Analytics'Edit]
   requestClient AnalyticsManagementProfilesInsert {..} =
     go
       accountId

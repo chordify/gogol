@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.Train
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Train
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.train@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsTrain' request conforms to.
@@ -53,9 +51,7 @@ type DialogFlowProjectsLocationsAgentsFlowsTrainResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3TrainFlowRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3TrainFlowRequest
     Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Trains the specified flow. Note that only the flow in \'draft\' environment is trained. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: An empty <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct Struct message> - @response@: An <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty Empty message> Note: You should always train a flow prior to sending it queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
@@ -105,26 +101,23 @@ instance
     Rs DialogFlowProjectsLocationsAgentsFlowsTrain =
       GoogleLongrunningOperation
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsFlowsTrain =
+    Scopes DialogFlowProjectsLocationsAgentsFlowsTrain =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsFlowsTrain {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsFlowsTrainResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsFlowsTrain {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsFlowsTrainResource
+          )
+          Core.mempty

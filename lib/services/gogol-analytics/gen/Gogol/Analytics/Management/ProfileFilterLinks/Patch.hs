@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ProfileFilterLinks.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ProfileFilterLinks.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profileFilterLinks.patch@ method which the
 -- 'AnalyticsManagementProfileFilterLinksPatch' request conforms to.
@@ -90,14 +88,19 @@ newAnalyticsManagementProfileFilterLinksPatch ::
   -- |  Web property Id to which profile filter link belongs See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfileFilterLinksPatch
-newAnalyticsManagementProfileFilterLinksPatch accountId linkId payload profileId webPropertyId =
-  AnalyticsManagementProfileFilterLinksPatch
-    { accountId = accountId,
-      linkId = linkId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementProfileFilterLinksPatch
+  accountId
+  linkId
+  payload
+  profileId
+  webPropertyId =
+    AnalyticsManagementProfileFilterLinksPatch
+      { accountId = accountId,
+        linkId = linkId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
@@ -107,24 +110,21 @@ instance
     Rs AnalyticsManagementProfileFilterLinksPatch =
       ProfileFilterLink
   type
-    Scopes
-      AnalyticsManagementProfileFilterLinksPatch =
+    Scopes AnalyticsManagementProfileFilterLinksPatch =
       '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementProfileFilterLinksPatch {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        linkId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementProfileFilterLinksPatchResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementProfileFilterLinksPatch {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      linkId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementProfileFilterLinksPatchResource
+          )
+          Core.mempty

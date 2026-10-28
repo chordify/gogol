@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vault.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vault.Internal.Sum
@@ -41,6 +39,26 @@ module Gogol.Vault.Internal.Sum
         AccountCountError_ErrorType_LOCATIONUNAVAILABLE,
         AccountCountError_ErrorType_Unknown,
         AccountCountError_ErrorType_DEADLINEEXCEEDED,
+        ..
+      ),
+
+    -- * CalendarExportOptions_ExportFormat
+    CalendarExportOptions_ExportFormat
+      ( CalendarExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+        CalendarExportOptions_ExportFormat_Mbox,
+        CalendarExportOptions_ExportFormat_Pst,
+        CalendarExportOptions_ExportFormat_Ics,
+        CalendarExportOptions_ExportFormat_Xml,
+        ..
+      ),
+
+    -- * CalendarOptions_ResponseStatusesItem
+    CalendarOptions_ResponseStatusesItem
+      ( CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEUNSPECIFIED,
+        CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSENEEDSACTION,
+        CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEACCEPTED,
+        CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEDECLINED,
+        CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSETENTATIVE,
         ..
       ),
 
@@ -79,11 +97,23 @@ module Gogol.Vault.Internal.Sum
         ..
       ),
 
+    -- * GeminiExportOptions_ExportFormat
+    GeminiExportOptions_ExportFormat
+      ( GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+        GeminiExportOptions_ExportFormat_Mbox,
+        GeminiExportOptions_ExportFormat_Pst,
+        GeminiExportOptions_ExportFormat_Ics,
+        GeminiExportOptions_ExportFormat_Xml,
+        ..
+      ),
+
     -- * GroupsExportOptions_ExportFormat
     GroupsExportOptions_ExportFormat
       ( GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
         GroupsExportOptions_ExportFormat_Mbox,
         GroupsExportOptions_ExportFormat_Pst,
+        GroupsExportOptions_ExportFormat_Ics,
+        GroupsExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -92,6 +122,8 @@ module Gogol.Vault.Internal.Sum
       ( HangoutsChatExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
         HangoutsChatExportOptions_ExportFormat_Mbox,
         HangoutsChatExportOptions_ExportFormat_Pst,
+        HangoutsChatExportOptions_ExportFormat_Ics,
+        HangoutsChatExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -112,6 +144,8 @@ module Gogol.Vault.Internal.Sum
         Hold_Corpus_Groups,
         Hold_Corpus_HANGOUTSCHAT,
         Hold_Corpus_Voice,
+        Hold_Corpus_Calendar,
+        Hold_Corpus_Gemini,
         ..
       ),
 
@@ -120,6 +154,26 @@ module Gogol.Vault.Internal.Sum
       ( MailExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
         MailExportOptions_ExportFormat_Mbox,
         MailExportOptions_ExportFormat_Pst,
+        MailExportOptions_ExportFormat_Ics,
+        MailExportOptions_ExportFormat_Xml,
+        ..
+      ),
+
+    -- * MailOptions_ClientSideEncryptedOption
+    MailOptions_ClientSideEncryptedOption
+      ( MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED,
+        MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY,
+        MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED,
+        MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED,
+        ..
+      ),
+
+    -- * Matter_MatterRegion
+    Matter_MatterRegion
+      ( Matter_MatterRegion_MATTERREGIONUNSPECIFIED,
+        Matter_MatterRegion_Any,
+        Matter_MatterRegion_US,
+        Matter_MatterRegion_Europe,
         ..
       ),
 
@@ -148,6 +202,8 @@ module Gogol.Vault.Internal.Sum
         Query_Corpus_Groups,
         Query_Corpus_HANGOUTSCHAT,
         Query_Corpus_Voice,
+        Query_Corpus_Calendar,
+        Query_Corpus_Gemini,
         ..
       ),
 
@@ -170,6 +226,7 @@ module Gogol.Vault.Internal.Sum
         Query_Method_Room,
         Query_Method_SITESURL,
         Query_Method_SHAREDDRIVE,
+        Query_Method_DRIVEDOCUMENT,
         ..
       ),
 
@@ -183,6 +240,7 @@ module Gogol.Vault.Internal.Sum
         Query_SearchMethod_Room,
         Query_SearchMethod_SITESURL,
         Query_SearchMethod_SHAREDDRIVE,
+        Query_SearchMethod_DRIVEDOCUMENT,
         ..
       ),
 
@@ -191,6 +249,8 @@ module Gogol.Vault.Internal.Sum
       ( VoiceExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
         VoiceExportOptions_ExportFormat_Mbox,
         VoiceExportOptions_ExportFormat_Pst,
+        VoiceExportOptions_ExportFormat_Ics,
+        VoiceExportOptions_ExportFormat_Xml,
         ..
       ),
 
@@ -246,7 +306,7 @@ module Gogol.Vault.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -320,6 +380,89 @@ pattern AccountCountError_ErrorType_DEADLINEEXCEEDED = AccountCountError_ErrorTy
   AccountCountError_ErrorType_Unknown,
   AccountCountError_ErrorType_DEADLINEEXCEEDED,
   AccountCountError_ErrorType
+  #-}
+
+-- | The file format for exported text messages.
+newtype CalendarExportOptions_ExportFormat = CalendarExportOptions_ExportFormat {fromCalendarExportOptions_ExportFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No export format specified.
+pattern CalendarExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = CalendarExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
+
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
+pattern CalendarExportOptions_ExportFormat_Mbox :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_Mbox = CalendarExportOptions_ExportFormat "MBOX"
+
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
+pattern CalendarExportOptions_ExportFormat_Pst :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_Pst = CalendarExportOptions_ExportFormat "PST"
+
+-- | Export as ICS. Only available for Calendar.
+pattern CalendarExportOptions_ExportFormat_Ics :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_Ics = CalendarExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern CalendarExportOptions_ExportFormat_Xml :: CalendarExportOptions_ExportFormat
+pattern CalendarExportOptions_ExportFormat_Xml = CalendarExportOptions_ExportFormat "XML"
+
+{-# COMPLETE
+  CalendarExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+  CalendarExportOptions_ExportFormat_Mbox,
+  CalendarExportOptions_ExportFormat_Pst,
+  CalendarExportOptions_ExportFormat_Ics,
+  CalendarExportOptions_ExportFormat_Xml,
+  CalendarExportOptions_ExportFormat
+  #-}
+
+newtype CalendarOptions_ResponseStatusesItem = CalendarOptions_ResponseStatusesItem {fromCalendarOptions_ResponseStatusesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Attendee response unspecified. If this is set no filtering on responses will be done, all other attendee responses that are part of the query options are ignored.
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEUNSPECIFIED :: CalendarOptions_ResponseStatusesItem
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEUNSPECIFIED = CalendarOptions_ResponseStatusesItem "ATTENDEE_RESPONSE_UNSPECIFIED"
+
+-- | The participant has been invited but has not responded yet.
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSENEEDSACTION :: CalendarOptions_ResponseStatusesItem
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSENEEDSACTION = CalendarOptions_ResponseStatusesItem "ATTENDEE_RESPONSE_NEEDS_ACTION"
+
+-- | The participant plans to attend.
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEACCEPTED :: CalendarOptions_ResponseStatusesItem
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEACCEPTED = CalendarOptions_ResponseStatusesItem "ATTENDEE_RESPONSE_ACCEPTED"
+
+-- | The participant does not plan to attend.
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEDECLINED :: CalendarOptions_ResponseStatusesItem
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEDECLINED = CalendarOptions_ResponseStatusesItem "ATTENDEE_RESPONSE_DECLINED"
+
+-- | The participant expects to possibly attend.
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSETENTATIVE :: CalendarOptions_ResponseStatusesItem
+pattern CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSETENTATIVE = CalendarOptions_ResponseStatusesItem "ATTENDEE_RESPONSE_TENTATIVE"
+
+{-# COMPLETE
+  CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEUNSPECIFIED,
+  CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSENEEDSACTION,
+  CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEACCEPTED,
+  CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSEDECLINED,
+  CalendarOptions_ResponseStatusesItem_ATTENDEERESPONSETENTATIVE,
+  CalendarOptions_ResponseStatusesItem
   #-}
 
 -- | Sets the granularity of the count results.
@@ -466,6 +609,48 @@ pattern ExportOptions_Region_Europe = ExportOptions_Region "EUROPE"
   #-}
 
 -- | The file format for exported messages.
+newtype GeminiExportOptions_ExportFormat = GeminiExportOptions_ExportFormat {fromGeminiExportOptions_ExportFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | No export format specified.
+pattern GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED = GeminiExportOptions_ExportFormat "EXPORT_FORMAT_UNSPECIFIED"
+
+-- | Export as MBOX. Only available for Gmail, Groups, Hangouts and Voice.
+pattern GeminiExportOptions_ExportFormat_Mbox :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Mbox = GeminiExportOptions_ExportFormat "MBOX"
+
+-- | Export as PST. Only available for Gmail, Groups, Hangouts, Voice and Calendar.
+pattern GeminiExportOptions_ExportFormat_Pst :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Pst = GeminiExportOptions_ExportFormat "PST"
+
+-- | Export as ICS. Only available for Calendar.
+pattern GeminiExportOptions_ExportFormat_Ics :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Ics = GeminiExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern GeminiExportOptions_ExportFormat_Xml :: GeminiExportOptions_ExportFormat
+pattern GeminiExportOptions_ExportFormat_Xml = GeminiExportOptions_ExportFormat "XML"
+
+{-# COMPLETE
+  GeminiExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
+  GeminiExportOptions_ExportFormat_Mbox,
+  GeminiExportOptions_ExportFormat_Pst,
+  GeminiExportOptions_ExportFormat_Ics,
+  GeminiExportOptions_ExportFormat_Xml,
+  GeminiExportOptions_ExportFormat
+  #-}
+
+-- | The file format for exported messages.
 newtype GroupsExportOptions_ExportFormat = GroupsExportOptions_ExportFormat {fromGroupsExportOptions_ExportFormat :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -490,10 +675,20 @@ pattern GroupsExportOptions_ExportFormat_Mbox = GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_Pst :: GroupsExportOptions_ExportFormat
 pattern GroupsExportOptions_ExportFormat_Pst = GroupsExportOptions_ExportFormat "PST"
 
+-- | Export as ICS. Only available for Calendar.
+pattern GroupsExportOptions_ExportFormat_Ics :: GroupsExportOptions_ExportFormat
+pattern GroupsExportOptions_ExportFormat_Ics = GroupsExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern GroupsExportOptions_ExportFormat_Xml :: GroupsExportOptions_ExportFormat
+pattern GroupsExportOptions_ExportFormat_Xml = GroupsExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   GroupsExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   GroupsExportOptions_ExportFormat_Mbox,
   GroupsExportOptions_ExportFormat_Pst,
+  GroupsExportOptions_ExportFormat_Ics,
+  GroupsExportOptions_ExportFormat_Xml,
   GroupsExportOptions_ExportFormat
   #-}
 
@@ -522,10 +717,20 @@ pattern HangoutsChatExportOptions_ExportFormat_Mbox = HangoutsChatExportOptions_
 pattern HangoutsChatExportOptions_ExportFormat_Pst :: HangoutsChatExportOptions_ExportFormat
 pattern HangoutsChatExportOptions_ExportFormat_Pst = HangoutsChatExportOptions_ExportFormat "PST"
 
+-- | Export as ICS. Only available for Calendar.
+pattern HangoutsChatExportOptions_ExportFormat_Ics :: HangoutsChatExportOptions_ExportFormat
+pattern HangoutsChatExportOptions_ExportFormat_Ics = HangoutsChatExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern HangoutsChatExportOptions_ExportFormat_Xml :: HangoutsChatExportOptions_ExportFormat
+pattern HangoutsChatExportOptions_ExportFormat_Xml = HangoutsChatExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   HangoutsChatExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   HangoutsChatExportOptions_ExportFormat_Mbox,
   HangoutsChatExportOptions_ExportFormat_Pst,
+  HangoutsChatExportOptions_ExportFormat_Ics,
+  HangoutsChatExportOptions_ExportFormat_Xml,
   HangoutsChatExportOptions_ExportFormat
   #-}
 
@@ -602,6 +807,14 @@ pattern Hold_Corpus_HANGOUTSCHAT = Hold_Corpus "HANGOUTS_CHAT"
 pattern Hold_Corpus_Voice :: Hold_Corpus
 pattern Hold_Corpus_Voice = Hold_Corpus "VOICE"
 
+-- | Calendar.
+pattern Hold_Corpus_Calendar :: Hold_Corpus
+pattern Hold_Corpus_Calendar = Hold_Corpus "CALENDAR"
+
+-- | Gemini.
+pattern Hold_Corpus_Gemini :: Hold_Corpus
+pattern Hold_Corpus_Gemini = Hold_Corpus "GEMINI"
+
 {-# COMPLETE
   Hold_Corpus_CORPUSTYPEUNSPECIFIED,
   Hold_Corpus_Drive,
@@ -609,6 +822,8 @@ pattern Hold_Corpus_Voice = Hold_Corpus "VOICE"
   Hold_Corpus_Groups,
   Hold_Corpus_HANGOUTSCHAT,
   Hold_Corpus_Voice,
+  Hold_Corpus_Calendar,
+  Hold_Corpus_Gemini,
   Hold_Corpus
   #-}
 
@@ -637,11 +852,95 @@ pattern MailExportOptions_ExportFormat_Mbox = MailExportOptions_ExportFormat "MB
 pattern MailExportOptions_ExportFormat_Pst :: MailExportOptions_ExportFormat
 pattern MailExportOptions_ExportFormat_Pst = MailExportOptions_ExportFormat "PST"
 
+-- | Export as ICS. Only available for Calendar.
+pattern MailExportOptions_ExportFormat_Ics :: MailExportOptions_ExportFormat
+pattern MailExportOptions_ExportFormat_Ics = MailExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern MailExportOptions_ExportFormat_Xml :: MailExportOptions_ExportFormat
+pattern MailExportOptions_ExportFormat_Xml = MailExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   MailExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   MailExportOptions_ExportFormat_Mbox,
   MailExportOptions_ExportFormat_Pst,
+  MailExportOptions_ExportFormat_Ics,
+  MailExportOptions_ExportFormat_Xml,
   MailExportOptions_ExportFormat
+  #-}
+
+-- | Specifies whether the results should include encrypted content, unencrypted content, or both. Defaults to including both.
+newtype MailOptions_ClientSideEncryptedOption = MailOptions_ClientSideEncryptedOption {fromMailOptions_ClientSideEncryptedOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Encryption status unspecified. Results include both client-side encrypted and non-encrypted content.
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED :: MailOptions_ClientSideEncryptedOption
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED = MailOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_UNSPECIFIED"
+
+-- | Include both client-side encrypted and unencrypted content in results.
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY :: MailOptions_ClientSideEncryptedOption
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY = MailOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_ANY"
+
+-- | Include client-side encrypted content only.
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED :: MailOptions_ClientSideEncryptedOption
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED = MailOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_ENCRYPTED"
+
+-- | Include unencrypted content only.
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED :: MailOptions_ClientSideEncryptedOption
+pattern MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED = MailOptions_ClientSideEncryptedOption "CLIENT_SIDE_ENCRYPTED_OPTION_UNENCRYPTED"
+
+{-# COMPLETE
+  MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNSPECIFIED,
+  MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONANY,
+  MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONENCRYPTED,
+  MailOptions_ClientSideEncryptedOption_CLIENTSIDEENCRYPTEDOPTIONUNENCRYPTED,
+  MailOptions_ClientSideEncryptedOption
+  #-}
+
+-- | Optional. The requested data region for the matter.
+newtype Matter_MatterRegion = Matter_MatterRegion {fromMatter_MatterRegion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The region is unspecified. Defaults to ANY.
+pattern Matter_MatterRegion_MATTERREGIONUNSPECIFIED :: Matter_MatterRegion
+pattern Matter_MatterRegion_MATTERREGIONUNSPECIFIED = Matter_MatterRegion "MATTER_REGION_UNSPECIFIED"
+
+-- | Any region.
+pattern Matter_MatterRegion_Any :: Matter_MatterRegion
+pattern Matter_MatterRegion_Any = Matter_MatterRegion "ANY"
+
+-- | United States region.
+pattern Matter_MatterRegion_US :: Matter_MatterRegion
+pattern Matter_MatterRegion_US = Matter_MatterRegion "US"
+
+-- | Europe region.
+pattern Matter_MatterRegion_Europe :: Matter_MatterRegion
+pattern Matter_MatterRegion_Europe = Matter_MatterRegion "EUROPE"
+
+{-# COMPLETE
+  Matter_MatterRegion_MATTERREGIONUNSPECIFIED,
+  Matter_MatterRegion_Any,
+  Matter_MatterRegion_US,
+  Matter_MatterRegion_Europe,
+  Matter_MatterRegion
   #-}
 
 -- | The state of the matter.
@@ -750,6 +1049,14 @@ pattern Query_Corpus_HANGOUTSCHAT = Query_Corpus "HANGOUTS_CHAT"
 pattern Query_Corpus_Voice :: Query_Corpus
 pattern Query_Corpus_Voice = Query_Corpus "VOICE"
 
+-- | Calendar.
+pattern Query_Corpus_Calendar :: Query_Corpus
+pattern Query_Corpus_Calendar = Query_Corpus "CALENDAR"
+
+-- | Gemini.
+pattern Query_Corpus_Gemini :: Query_Corpus
+pattern Query_Corpus_Gemini = Query_Corpus "GEMINI"
+
 {-# COMPLETE
   Query_Corpus_CORPUSTYPEUNSPECIFIED,
   Query_Corpus_Drive,
@@ -757,6 +1064,8 @@ pattern Query_Corpus_Voice = Query_Corpus "VOICE"
   Query_Corpus_Groups,
   Query_Corpus_HANGOUTSCHAT,
   Query_Corpus_Voice,
+  Query_Corpus_Calendar,
+  Query_Corpus_Gemini,
   Query_Corpus
   #-}
 
@@ -842,6 +1151,10 @@ pattern Query_Method_SITESURL = Query_Method "SITES_URL"
 pattern Query_Method_SHAREDDRIVE :: Query_Method
 pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
 
+-- | Retrieve the documents specified in DriveDocumentInfo.
+pattern Query_Method_DRIVEDOCUMENT :: Query_Method
+pattern Query_Method_DRIVEDOCUMENT = Query_Method "DRIVE_DOCUMENT"
+
 {-# COMPLETE
   Query_Method_SEARCHMETHODUNSPECIFIED,
   Query_Method_Account,
@@ -851,6 +1164,7 @@ pattern Query_Method_SHAREDDRIVE = Query_Method "SHARED_DRIVE"
   Query_Method_Room,
   Query_Method_SITESURL,
   Query_Method_SHAREDDRIVE,
+  Query_Method_DRIVEDOCUMENT,
   Query_Method
   #-}
 
@@ -899,6 +1213,10 @@ pattern Query_SearchMethod_SITESURL = Query_SearchMethod "SITES_URL"
 pattern Query_SearchMethod_SHAREDDRIVE :: Query_SearchMethod
 pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
 
+-- | Retrieve the documents specified in DriveDocumentInfo.
+pattern Query_SearchMethod_DRIVEDOCUMENT :: Query_SearchMethod
+pattern Query_SearchMethod_DRIVEDOCUMENT = Query_SearchMethod "DRIVE_DOCUMENT"
+
 {-# COMPLETE
   Query_SearchMethod_SEARCHMETHODUNSPECIFIED,
   Query_SearchMethod_Account,
@@ -908,6 +1226,7 @@ pattern Query_SearchMethod_SHAREDDRIVE = Query_SearchMethod "SHARED_DRIVE"
   Query_SearchMethod_Room,
   Query_SearchMethod_SITESURL,
   Query_SearchMethod_SHAREDDRIVE,
+  Query_SearchMethod_DRIVEDOCUMENT,
   Query_SearchMethod
   #-}
 
@@ -936,10 +1255,20 @@ pattern VoiceExportOptions_ExportFormat_Mbox = VoiceExportOptions_ExportFormat "
 pattern VoiceExportOptions_ExportFormat_Pst :: VoiceExportOptions_ExportFormat
 pattern VoiceExportOptions_ExportFormat_Pst = VoiceExportOptions_ExportFormat "PST"
 
+-- | Export as ICS. Only available for Calendar.
+pattern VoiceExportOptions_ExportFormat_Ics :: VoiceExportOptions_ExportFormat
+pattern VoiceExportOptions_ExportFormat_Ics = VoiceExportOptions_ExportFormat "ICS"
+
+-- | Export as XML. Only available for Gemini.
+pattern VoiceExportOptions_ExportFormat_Xml :: VoiceExportOptions_ExportFormat
+pattern VoiceExportOptions_ExportFormat_Xml = VoiceExportOptions_ExportFormat "XML"
+
 {-# COMPLETE
   VoiceExportOptions_ExportFormat_EXPORTFORMATUNSPECIFIED,
   VoiceExportOptions_ExportFormat_Mbox,
   VoiceExportOptions_ExportFormat_Pst,
+  VoiceExportOptions_ExportFormat_Ics,
+  VoiceExportOptions_ExportFormat_Xml,
   VoiceExportOptions_ExportFormat
   #-}
 

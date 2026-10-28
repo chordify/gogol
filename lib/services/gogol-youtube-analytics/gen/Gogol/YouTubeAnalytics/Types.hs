@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeAnalytics.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTubeAnalytics.Types
@@ -97,7 +95,7 @@ module Gogol.YouTubeAnalytics.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeAnalytics.Internal.Product
 import Gogol.YouTubeAnalytics.Internal.Sum
 
@@ -109,16 +107,21 @@ youTubeAnalyticsService =
     "youtubeanalytics.googleapis.com"
 
 -- | Manage your YouTube account
-type Youtube'FullControl = "https://www.googleapis.com/auth/youtube"
+type Youtube'FullControl =
+  "https://www.googleapis.com/auth/youtube"
 
 -- | View your YouTube account
-type Youtube'Readonly = "https://www.googleapis.com/auth/youtube.readonly"
+type Youtube'Readonly =
+  "https://www.googleapis.com/auth/youtube.readonly"
 
 -- | View and manage your assets and associated content on YouTube
-type Youtubepartner'FullControl = "https://www.googleapis.com/auth/youtubepartner"
+type Youtubepartner'FullControl =
+  "https://www.googleapis.com/auth/youtubepartner"
 
 -- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
-type YtAnalyticsMonetary'Readonly = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+type YtAnalyticsMonetary'Readonly =
+  "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
 
 -- | View YouTube Analytics reports for your YouTube content
-type YtAnalytics'Readonly = "https://www.googleapis.com/auth/yt-analytics.readonly"
+type YtAnalytics'Readonly =
+  "https://www.googleapis.com/auth/yt-analytics.readonly"

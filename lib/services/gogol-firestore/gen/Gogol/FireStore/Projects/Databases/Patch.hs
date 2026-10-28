@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Patch
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.patch@ method which the
 -- 'FireStoreProjectsDatabasesPatch' request conforms to.
@@ -54,9 +52,7 @@ type FireStoreProjectsDatabasesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleFirestoreAdminV1Database
+    Core.:> Core.ReqBody '[Core.JSON] GoogleFirestoreAdminV1Database
     Core.:> Core.Patch '[Core.JSON] GoogleLongrunningOperation
 
 -- | Updates a database.
@@ -101,10 +97,7 @@ newFireStoreProjectsDatabasesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FireStoreProjectsDatabasesPatch
-  where
+instance Core.GoogleRequest FireStoreProjectsDatabasesPatch where
   type
     Rs FireStoreProjectsDatabasesPatch =
       GoogleLongrunningOperation
@@ -126,7 +119,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FireStoreProjectsDatabasesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy FireStoreProjectsDatabasesPatchResource)
           Core.mempty

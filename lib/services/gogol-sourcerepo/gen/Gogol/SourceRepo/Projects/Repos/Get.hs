@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SourceRepo.Projects.Repos.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns information about a repo.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.get@.
+-- /See:/ <https://cloud.google.com/source-repositories/docs Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.get@.
 module Gogol.SourceRepo.Projects.Repos.Get
   ( -- * Resource
     SourceRepoProjectsReposGetResource,
@@ -39,7 +37,7 @@ module Gogol.SourceRepo.Projects.Repos.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.get@ method which the
@@ -89,10 +87,7 @@ newSourceRepoProjectsReposGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SourceRepoProjectsReposGet
-  where
+instance Core.GoogleRequest SourceRepoProjectsReposGet where
   type Rs SourceRepoProjectsReposGet = Repo
   type
     Scopes SourceRepoProjectsReposGet =
@@ -114,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SourceRepoProjectsReposGetResource
-          )
+          (Core.Proxy :: Core.Proxy SourceRepoProjectsReposGetResource)
           Core.mempty

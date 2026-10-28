@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Messages.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#delete_a_message Delete a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
+-- Deletes a message. For an example, see <https://developers.google.com/workspace/chat/delete-messages Delete a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> When using app authentication, requests can only delete messages created by the calling Chat app.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.delete@.
 module Gogol.Chat.Spaces.Messages.Delete
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.Messages.Delete
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.messages.delete@ method which the
 -- 'ChatSpacesMessagesDelete' request conforms to.
@@ -50,12 +48,13 @@ type ChatSpacesMessagesDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "force" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#delete_a_message Delete a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
+-- | Deletes a message. For an example, see <https://developers.google.com/workspace/chat/delete-messages Delete a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> When using app authentication, requests can only delete messages created by the calling Chat app.
 --
 -- /See:/ 'newChatSpacesMessagesDelete' smart constructor.
 data ChatSpacesMessagesDelete = ChatSpacesMessagesDelete
@@ -65,7 +64,9 @@ data ChatSpacesMessagesDelete = ChatSpacesMessagesDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the message to be deleted, in the form \"spaces\//\/messages\//\" Example: spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB
+    -- | Optional. When @true@, deleting a message also deletes its threaded replies. When @false@, if a message has threaded replies, deletion fails. Only applies when <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user authenticating as a user>. Has no effect when [authenticating as a Chat app] (https:\/\/developers.google.com\/workspace\/chat\/authenticate-authorize-chat-app).
+    force :: (Core.Maybe Core.Bool),
+    -- | Required. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ If you\'ve set a custom ID for your message, you can use the value from the @clientAssignedMessageId@ field for @{message}@. For details, see [Name a message] (https:\/\/developers.google.com\/workspace\/chat\/create-messages#name/a/created_message).
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +77,7 @@ data ChatSpacesMessagesDelete = ChatSpacesMessagesDelete
 
 -- | Creates a value of 'ChatSpacesMessagesDelete' with the minimum fields required to make a request.
 newChatSpacesMessagesDelete ::
-  -- |  Required. Resource name of the message to be deleted, in the form \"spaces\//\/messages\//\" Example: spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB See 'name'.
+  -- |  Required. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ If you\'ve set a custom ID for your message, you can use the value from the @clientAssignedMessageId@ field for @{message}@. For details, see [Name a message] (https:\/\/developers.google.com\/workspace\/chat\/create-messages#name/a/created_message). See 'name'.
   Core.Text ->
   ChatSpacesMessagesDelete
 newChatSpacesMessagesDelete name =
@@ -84,6 +85,7 @@ newChatSpacesMessagesDelete name =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
+      force = Core.Nothing,
       name = name,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -93,13 +95,14 @@ instance Core.GoogleRequest ChatSpacesMessagesDelete where
   type Rs ChatSpacesMessagesDelete = Empty
   type
     Scopes ChatSpacesMessagesDelete =
-      '[Chat'Bot, Chat'Messages]
+      '[Chat'Bot, Chat'Import, Chat'Messages]
   requestClient ChatSpacesMessagesDelete {..} =
     go
       name
       xgafv
       accessToken
       callback
+      force
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -107,7 +110,5 @@ instance Core.GoogleRequest ChatSpacesMessagesDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMessagesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ChatSpacesMessagesDeleteResource)
           Core.mempty

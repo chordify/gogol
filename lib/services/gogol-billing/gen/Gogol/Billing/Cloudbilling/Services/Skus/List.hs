@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.Services.Skus.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all publicly available SKUs for a given cloud service.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.services.skus.list@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.services.skus.list@.
 module Gogol.Billing.Cloudbilling.Services.Skus.List
   ( -- * Resource
     CloudbillingServicesSkusListResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.Services.Skus.List
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.services.skus.list@ method which the
 -- 'CloudbillingServicesSkusList' request conforms to.
@@ -79,7 +77,7 @@ data CloudbillingServicesSkusList = CloudbillingServicesSkusList
     pageSize :: (Core.Maybe Core.Int32),
     -- | A token identifying a page of results to return. This should be a @next_page_token@ value returned from a previous @ListSkus@ call. If unspecified, the first page of results is returned.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The name of the service. Example: \"services\/DA34-426B-A397\"
+    -- | Required. The name of the service. Example: \"services\/6F81-5844-456A\"
     parent :: Core.Text,
     -- | Optional inclusive start time of the time range for which the pricing versions will be returned. Timestamps in the future are not allowed. The time range has to be within a single calendar month in America\/Los_Angeles timezone. Time range as a whole is optional. If not specified, the latest pricing will be returned (up to 12 hours old at most).
     startTime :: (Core.Maybe Core.DateTime),
@@ -92,7 +90,7 @@ data CloudbillingServicesSkusList = CloudbillingServicesSkusList
 
 -- | Creates a value of 'CloudbillingServicesSkusList' with the minimum fields required to make a request.
 newCloudbillingServicesSkusList ::
-  -- |  Required. The name of the service. Example: \"services\/DA34-426B-A397\" See 'parent'.
+  -- |  Required. The name of the service. Example: \"services\/6F81-5844-456A\" See 'parent'.
   Core.Text ->
   CloudbillingServicesSkusList
 newCloudbillingServicesSkusList parent =
@@ -110,13 +108,8 @@ newCloudbillingServicesSkusList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingServicesSkusList
-  where
-  type
-    Rs CloudbillingServicesSkusList =
-      ListSkusResponse
+instance Core.GoogleRequest CloudbillingServicesSkusList where
+  type Rs CloudbillingServicesSkusList = ListSkusResponse
   type
     Scopes CloudbillingServicesSkusList =
       '[ CloudBilling'FullControl,
@@ -141,7 +134,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudbillingServicesSkusListResource
-          )
+          (Core.Proxy :: Core.Proxy CloudbillingServicesSkusListResource)
           Core.mempty

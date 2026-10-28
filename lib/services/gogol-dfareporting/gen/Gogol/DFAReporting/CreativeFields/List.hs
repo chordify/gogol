@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.CreativeFields.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.CreativeFields.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.creativeFields.list@ method which the
 -- 'DFAReportingCreativeFieldsList' request conforms to.
@@ -58,18 +56,12 @@ type DFAReportingCreativeFieldsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              CreativeFieldsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              CreativeFieldsListSortOrder
+    Core.:> Core.QueryParam "sortField" CreativeFieldsListSortField
+    Core.:> Core.QueryParam "sortOrder" CreativeFieldsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              CreativeFieldsListResponse
+    Core.:> Core.Get '[Core.JSON] CreativeFieldsListResponse
 
 -- | Retrieves a list of creative fields, possibly filtered. This method supports paging.
 --
@@ -126,13 +118,8 @@ newDFAReportingCreativeFieldsList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingCreativeFieldsList
-  where
-  type
-    Rs DFAReportingCreativeFieldsList =
-      CreativeFieldsListResponse
+instance Core.GoogleRequest DFAReportingCreativeFieldsList where
+  type Rs DFAReportingCreativeFieldsList = CreativeFieldsListResponse
   type
     Scopes DFAReportingCreativeFieldsList =
       '[Dfatrafficking'FullControl]
@@ -156,7 +143,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCreativeFieldsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCreativeFieldsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.UpdatePolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed.
+-- Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns @NOT_FOUND@ if the project does not exist, @INVALID_ARGUMENT@ if the request is malformed.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.updatePolicy@.
 module Gogol.BinaryAuthorization.Projects.UpdatePolicy
@@ -40,7 +38,7 @@ module Gogol.BinaryAuthorization.Projects.UpdatePolicy
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.updatePolicy@ method which the
 -- 'BinaryAuthorizationProjectsUpdatePolicy' request conforms to.
@@ -56,7 +54,7 @@ type BinaryAuthorizationProjectsUpdatePolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] Policy
     Core.:> Core.Put '[Core.JSON] Policy
 
--- | Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns NOT/FOUND if the project does not exist, INVALID/ARGUMENT if the request is malformed.
+-- | Creates or updates a project\'s policy, and returns a copy of the new policy. A policy is always updated as a whole, to avoid race conditions with concurrent policy enforcement (or management!) requests. Returns @NOT_FOUND@ if the project does not exist, @INVALID_ARGUMENT@ if the request is malformed.
 --
 -- /See:/ 'newBinaryAuthorizationProjectsUpdatePolicy' smart constructor.
 data BinaryAuthorizationProjectsUpdatePolicy = BinaryAuthorizationProjectsUpdatePolicy
@@ -95,33 +93,26 @@ newBinaryAuthorizationProjectsUpdatePolicy name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BinaryAuthorizationProjectsUpdatePolicy
-  where
-  type
-    Rs BinaryAuthorizationProjectsUpdatePolicy =
-      Policy
+instance Core.GoogleRequest BinaryAuthorizationProjectsUpdatePolicy where
+  type Rs BinaryAuthorizationProjectsUpdatePolicy = Policy
   type
     Scopes BinaryAuthorizationProjectsUpdatePolicy =
       '[CloudPlatform'FullControl]
-  requestClient
-    BinaryAuthorizationProjectsUpdatePolicy {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationProjectsUpdatePolicyResource
-            )
-            Core.mempty
+  requestClient BinaryAuthorizationProjectsUpdatePolicy {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      binaryAuthorizationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BinaryAuthorizationProjectsUpdatePolicyResource
+          )
+          Core.mempty

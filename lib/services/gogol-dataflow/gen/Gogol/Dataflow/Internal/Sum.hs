@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Dataflow.Internal.Sum
@@ -94,6 +92,15 @@ module Gogol.Dataflow.Internal.Sum
         ..
       ),
 
+    -- * DataSamplingConfig_BehaviorsItem
+    DataSamplingConfig_BehaviorsItem
+      ( DataSamplingConfig_BehaviorsItem_DATASAMPLINGBEHAVIORUNSPECIFIED,
+        DataSamplingConfig_BehaviorsItem_Disabled,
+        DataSamplingConfig_BehaviorsItem_ALWAYSON,
+        DataSamplingConfig_BehaviorsItem_Exceptions,
+        ..
+      ),
+
     -- * DerivedSource_DerivationMode
     DerivedSource_DerivationMode
       ( DerivedSource_DerivationMode_SOURCEDERIVATIONMODEUNKNOWN,
@@ -116,6 +123,14 @@ module Gogol.Dataflow.Internal.Sum
       ( Environment_ShuffleMode_SHUFFLEMODEUNSPECIFIED,
         Environment_ShuffleMode_VMBASED,
         Environment_ShuffleMode_SERVICEBASED,
+        ..
+      ),
+
+    -- * Environment_StreamingMode
+    Environment_StreamingMode
+      ( Environment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+        Environment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+        Environment_StreamingMode_STREAMINGMODEATLEASTONCE,
         ..
       ),
 
@@ -172,6 +187,14 @@ module Gogol.Dataflow.Internal.Sum
       ( FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPUNSPECIFIED,
         FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPUBLIC,
         FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE,
+        ..
+      ),
+
+    -- * FlexTemplateRuntimeEnvironment_StreamingMode
+    FlexTemplateRuntimeEnvironment_StreamingMode
+      ( FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+        FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+        FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE,
         ..
       ),
 
@@ -267,6 +290,17 @@ module Gogol.Dataflow.Internal.Sum
         ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION,
         ParameterMetadata_ParamType_BIGQUERYTABLE,
         ParameterMetadata_ParamType_JAVASCRIPTUDFFILE,
+        ParameterMetadata_ParamType_SERVICEACCOUNT,
+        ParameterMetadata_ParamType_MACHINETYPE,
+        ParameterMetadata_ParamType_KMSKEYNAME,
+        ParameterMetadata_ParamType_WORKERREGION,
+        ParameterMetadata_ParamType_WORKERZONE,
+        ParameterMetadata_ParamType_Boolean,
+        ParameterMetadata_ParamType_Enum',
+        ParameterMetadata_ParamType_Number,
+        ParameterMetadata_ParamType_KAFKATOPIC,
+        ParameterMetadata_ParamType_KAFKAREADTOPIC,
+        ParameterMetadata_ParamType_KAFKAWRITETOPIC,
         ..
       ),
 
@@ -278,12 +312,39 @@ module Gogol.Dataflow.Internal.Sum
         ..
       ),
 
+    -- * RuntimeEnvironment_StreamingMode
+    RuntimeEnvironment_StreamingMode
+      ( RuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+        RuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+        RuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE,
+        ..
+      ),
+
     -- * SDKInfo_Language
     SDKInfo_Language
       ( SDKInfo_Language_Unknown,
         SDKInfo_Language_Java,
         SDKInfo_Language_Python,
         SDKInfo_Language_GO,
+        SDKInfo_Language_Yaml,
+        ..
+      ),
+
+    -- * SdkBug_Severity
+    SdkBug_Severity
+      ( SdkBug_Severity_SEVERITYUNSPECIFIED,
+        SdkBug_Severity_Notice,
+        SdkBug_Severity_Warning,
+        SdkBug_Severity_Severe,
+        ..
+      ),
+
+    -- * SdkBug_Type
+    SdkBug_Type
+      ( SdkBug_Type_TYPEUNSPECIFIED,
+        SdkBug_Type_General,
+        SdkBug_Type_Performance,
+        SdkBug_Type_Dataloss,
         ..
       ),
 
@@ -544,7 +605,7 @@ module Gogol.Dataflow.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -830,6 +891,42 @@ pattern CounterStructuredName_Portion_Value = CounterStructuredName_Portion "VAL
   CounterStructuredName_Portion
   #-}
 
+newtype DataSamplingConfig_BehaviorsItem = DataSamplingConfig_BehaviorsItem {fromDataSamplingConfig_BehaviorsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If given, has no effect on sampling behavior. Used as an unknown or unset sentinel value.
+pattern DataSamplingConfig_BehaviorsItem_DATASAMPLINGBEHAVIORUNSPECIFIED :: DataSamplingConfig_BehaviorsItem
+pattern DataSamplingConfig_BehaviorsItem_DATASAMPLINGBEHAVIORUNSPECIFIED = DataSamplingConfig_BehaviorsItem "DATA_SAMPLING_BEHAVIOR_UNSPECIFIED"
+
+-- | When given, disables element sampling. Has same behavior as not setting the behavior.
+pattern DataSamplingConfig_BehaviorsItem_Disabled :: DataSamplingConfig_BehaviorsItem
+pattern DataSamplingConfig_BehaviorsItem_Disabled = DataSamplingConfig_BehaviorsItem "DISABLED"
+
+-- | When given, enables sampling in-flight from all PCollections.
+pattern DataSamplingConfig_BehaviorsItem_ALWAYSON :: DataSamplingConfig_BehaviorsItem
+pattern DataSamplingConfig_BehaviorsItem_ALWAYSON = DataSamplingConfig_BehaviorsItem "ALWAYS_ON"
+
+-- | When given, enables sampling input elements when a user-defined DoFn causes an exception.
+pattern DataSamplingConfig_BehaviorsItem_Exceptions :: DataSamplingConfig_BehaviorsItem
+pattern DataSamplingConfig_BehaviorsItem_Exceptions = DataSamplingConfig_BehaviorsItem "EXCEPTIONS"
+
+{-# COMPLETE
+  DataSamplingConfig_BehaviorsItem_DATASAMPLINGBEHAVIORUNSPECIFIED,
+  DataSamplingConfig_BehaviorsItem_Disabled,
+  DataSamplingConfig_BehaviorsItem_ALWAYSON,
+  DataSamplingConfig_BehaviorsItem_Exceptions,
+  DataSamplingConfig_BehaviorsItem
+  #-}
+
 -- | What source to base the produced source on (if any).
 newtype DerivedSource_DerivationMode = DerivedSource_DerivationMode {fromDerivedSource_DerivationMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -867,7 +964,7 @@ pattern DerivedSource_DerivationMode_SOURCEDERIVATIONMODESIBLINGOFCURRENT = Deri
   DerivedSource_DerivationMode
   #-}
 
--- | Which Flexible Resource Scheduling mode to run in.
+-- | Optional. Which Flexible Resource Scheduling mode to run in.
 newtype Environment_FlexResourceSchedulingGoal = Environment_FlexResourceSchedulingGoal {fromEnvironment_FlexResourceSchedulingGoal :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -929,6 +1026,38 @@ pattern Environment_ShuffleMode_SERVICEBASED = Environment_ShuffleMode "SERVICE_
   Environment_ShuffleMode_VMBASED,
   Environment_ShuffleMode_SERVICEBASED,
   Environment_ShuffleMode
+  #-}
+
+-- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+newtype Environment_StreamingMode = Environment_StreamingMode {fromEnvironment_StreamingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Run in the default mode.
+pattern Environment_StreamingMode_STREAMINGMODEUNSPECIFIED :: Environment_StreamingMode
+pattern Environment_StreamingMode_STREAMINGMODEUNSPECIFIED = Environment_StreamingMode "STREAMING_MODE_UNSPECIFIED"
+
+-- | In this mode, message deduplication is performed against persistent state to make sure each message is processed and committed to storage exactly once.
+pattern Environment_StreamingMode_STREAMINGMODEEXACTLYONCE :: Environment_StreamingMode
+pattern Environment_StreamingMode_STREAMINGMODEEXACTLYONCE = Environment_StreamingMode "STREAMING_MODE_EXACTLY_ONCE"
+
+-- | Message deduplication is not performed. Messages might be processed multiple times, and the results are applied multiple times. Note: Setting this value also enables Streaming Engine and Streaming Engine resource-based billing.
+pattern Environment_StreamingMode_STREAMINGMODEATLEASTONCE :: Environment_StreamingMode
+pattern Environment_StreamingMode_STREAMINGMODEATLEASTONCE = Environment_StreamingMode "STREAMING_MODE_AT_LEAST_ONCE"
+
+{-# COMPLETE
+  Environment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+  Environment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+  Environment_StreamingMode_STREAMINGMODEATLEASTONCE,
+  Environment_StreamingMode
   #-}
 
 -- | Executions stage states allow the same set of values as JobState.
@@ -1171,6 +1300,38 @@ pattern FlexTemplateRuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE = FlexTem
   FlexTemplateRuntimeEnvironment_IpConfiguration
   #-}
 
+-- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+newtype FlexTemplateRuntimeEnvironment_StreamingMode = FlexTemplateRuntimeEnvironment_StreamingMode {fromFlexTemplateRuntimeEnvironment_StreamingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Run in the default mode.
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED :: FlexTemplateRuntimeEnvironment_StreamingMode
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED = FlexTemplateRuntimeEnvironment_StreamingMode "STREAMING_MODE_UNSPECIFIED"
+
+-- | In this mode, message deduplication is performed against persistent state to make sure each message is processed and committed to storage exactly once.
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE :: FlexTemplateRuntimeEnvironment_StreamingMode
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE = FlexTemplateRuntimeEnvironment_StreamingMode "STREAMING_MODE_EXACTLY_ONCE"
+
+-- | Message deduplication is not performed. Messages might be processed multiple times, and the results are applied multiple times. Note: Setting this value also enables Streaming Engine and Streaming Engine resource-based billing.
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE :: FlexTemplateRuntimeEnvironment_StreamingMode
+pattern FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE = FlexTemplateRuntimeEnvironment_StreamingMode "STREAMING_MODE_AT_LEAST_ONCE"
+
+{-# COMPLETE
+  FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+  FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+  FlexTemplateRuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE,
+  FlexTemplateRuntimeEnvironment_StreamingMode
+  #-}
+
 -- | Template Type.
 newtype GetTemplateResponse_TemplateType = GetTemplateResponse_TemplateType {fromGetTemplateResponse_TemplateType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1203,7 +1364,7 @@ pattern GetTemplateResponse_TemplateType_Flex = GetTemplateResponse_TemplateType
   GetTemplateResponse_TemplateType
   #-}
 
--- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.
+-- | The current state of the job. Jobs are created in the @JOB_STATE_STOPPED@ state unless otherwise specified. A job in the @JOB_STATE_RUNNING@ state may asynchronously enter a terminal state. After a job has reached a terminal state, no further state updates may be made. This field might be mutated by the Dataflow service; callers cannot mutate it.
 newtype Job_CurrentState = Job_CurrentState {fromJob_CurrentState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1285,7 +1446,7 @@ pattern Job_CurrentState_JOBSTATERESOURCECLEANINGUP = Job_CurrentState "JOB_STAT
   Job_CurrentState
   #-}
 
--- | The job\'s requested state. @UpdateJob@ may be used to switch between the @JOB_STATE_STOPPED@ and @JOB_STATE_RUNNING@ states, by setting requested_state. @UpdateJob@ may also be used to directly set a job\'s requested state to @JOB_STATE_CANCELLED@ or @JOB_STATE_DONE@, irrevocably terminating the job if it has not already reached a terminal state.
+-- | The job\'s requested state. Applies to @UpdateJob@ requests. Set @requested_state@ with @UpdateJob@ requests to switch between the states @JOB_STATE_STOPPED@ and @JOB_STATE_RUNNING@. You can also use @UpdateJob@ requests to change a job\'s state from @JOB_STATE_RUNNING@ to @JOB_STATE_CANCELLED@, @JOB_STATE_DONE@, or @JOB_STATE_DRAINED@. These states irrevocably terminate the job if it hasn\'t already reached a terminal state. This field has no effect on @CreateJob@ requests.
 newtype Job_RequestedState = Job_RequestedState {fromJob_RequestedState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1367,7 +1528,7 @@ pattern Job_RequestedState_JOBSTATERESOURCECLEANINGUP = Job_RequestedState "JOB_
   Job_RequestedState
   #-}
 
--- | The type of Cloud Dataflow job.
+-- | Optional. The type of Dataflow job.
 newtype Job_Type = Job_Type {fromJob_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1574,6 +1735,50 @@ pattern ParameterMetadata_ParamType_BIGQUERYTABLE = ParameterMetadata_ParamType 
 pattern ParameterMetadata_ParamType_JAVASCRIPTUDFFILE :: ParameterMetadata_ParamType
 pattern ParameterMetadata_ParamType_JAVASCRIPTUDFFILE = ParameterMetadata_ParamType "JAVASCRIPT_UDF_FILE"
 
+-- | The parameter specifies a Service Account email.
+pattern ParameterMetadata_ParamType_SERVICEACCOUNT :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_SERVICEACCOUNT = ParameterMetadata_ParamType "SERVICE_ACCOUNT"
+
+-- | The parameter specifies a Machine Type.
+pattern ParameterMetadata_ParamType_MACHINETYPE :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_MACHINETYPE = ParameterMetadata_ParamType "MACHINE_TYPE"
+
+-- | The parameter specifies a KMS Key name.
+pattern ParameterMetadata_ParamType_KMSKEYNAME :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_KMSKEYNAME = ParameterMetadata_ParamType "KMS_KEY_NAME"
+
+-- | The parameter specifies a Worker Region.
+pattern ParameterMetadata_ParamType_WORKERREGION :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_WORKERREGION = ParameterMetadata_ParamType "WORKER_REGION"
+
+-- | The parameter specifies a Worker Zone.
+pattern ParameterMetadata_ParamType_WORKERZONE :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_WORKERZONE = ParameterMetadata_ParamType "WORKER_ZONE"
+
+-- | The parameter specifies a boolean input.
+pattern ParameterMetadata_ParamType_Boolean :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_Boolean = ParameterMetadata_ParamType "BOOLEAN"
+
+-- | The parameter specifies an enum input.
+pattern ParameterMetadata_ParamType_Enum' :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_Enum' = ParameterMetadata_ParamType "ENUM"
+
+-- | The parameter specifies a number input.
+pattern ParameterMetadata_ParamType_Number :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_Number = ParameterMetadata_ParamType "NUMBER"
+
+-- | Deprecated. Please use KAFKA/READ/TOPIC instead.
+pattern ParameterMetadata_ParamType_KAFKATOPIC :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_KAFKATOPIC = ParameterMetadata_ParamType "KAFKA_TOPIC"
+
+-- | The parameter specifies the fully-qualified name of an Apache Kafka topic. This can be either a Google Managed Kafka topic or a non-managed Kafka topic.
+pattern ParameterMetadata_ParamType_KAFKAREADTOPIC :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_KAFKAREADTOPIC = ParameterMetadata_ParamType "KAFKA_READ_TOPIC"
+
+-- | The parameter specifies the fully-qualified name of an Apache Kafka topic. This can be an existing Google Managed Kafka topic, the name for a new Google Managed Kafka topic, or an existing non-managed Kafka topic.
+pattern ParameterMetadata_ParamType_KAFKAWRITETOPIC :: ParameterMetadata_ParamType
+pattern ParameterMetadata_ParamType_KAFKAWRITETOPIC = ParameterMetadata_ParamType "KAFKA_WRITE_TOPIC"
+
 {-# COMPLETE
   ParameterMetadata_ParamType_Default,
   ParameterMetadata_ParamType_Text,
@@ -1587,6 +1792,17 @@ pattern ParameterMetadata_ParamType_JAVASCRIPTUDFFILE = ParameterMetadata_ParamT
   ParameterMetadata_ParamType_PUBSUBSUBSCRIPTION,
   ParameterMetadata_ParamType_BIGQUERYTABLE,
   ParameterMetadata_ParamType_JAVASCRIPTUDFFILE,
+  ParameterMetadata_ParamType_SERVICEACCOUNT,
+  ParameterMetadata_ParamType_MACHINETYPE,
+  ParameterMetadata_ParamType_KMSKEYNAME,
+  ParameterMetadata_ParamType_WORKERREGION,
+  ParameterMetadata_ParamType_WORKERZONE,
+  ParameterMetadata_ParamType_Boolean,
+  ParameterMetadata_ParamType_Enum',
+  ParameterMetadata_ParamType_Number,
+  ParameterMetadata_ParamType_KAFKATOPIC,
+  ParameterMetadata_ParamType_KAFKAREADTOPIC,
+  ParameterMetadata_ParamType_KAFKAWRITETOPIC,
   ParameterMetadata_ParamType
   #-}
 
@@ -1622,6 +1838,38 @@ pattern RuntimeEnvironment_IpConfiguration_WORKERIPPRIVATE = RuntimeEnvironment_
   RuntimeEnvironment_IpConfiguration
   #-}
 
+-- | Optional. Specifies the Streaming Engine message processing guarantees. Reduces cost and latency but might result in duplicate messages committed to storage. Designed to run simple mapping streaming ETL jobs at the lowest cost. For example, Change Data Capture (CDC) to BigQuery is a canonical use case. For more information, see <https://cloud.google.com/dataflow/docs/guides/streaming-modes Set the pipeline streaming mode>.
+newtype RuntimeEnvironment_StreamingMode = RuntimeEnvironment_StreamingMode {fromRuntimeEnvironment_StreamingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Run in the default mode.
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED :: RuntimeEnvironment_StreamingMode
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED = RuntimeEnvironment_StreamingMode "STREAMING_MODE_UNSPECIFIED"
+
+-- | In this mode, message deduplication is performed against persistent state to make sure each message is processed and committed to storage exactly once.
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE :: RuntimeEnvironment_StreamingMode
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE = RuntimeEnvironment_StreamingMode "STREAMING_MODE_EXACTLY_ONCE"
+
+-- | Message deduplication is not performed. Messages might be processed multiple times, and the results are applied multiple times. Note: Setting this value also enables Streaming Engine and Streaming Engine resource-based billing.
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE :: RuntimeEnvironment_StreamingMode
+pattern RuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE = RuntimeEnvironment_StreamingMode "STREAMING_MODE_AT_LEAST_ONCE"
+
+{-# COMPLETE
+  RuntimeEnvironment_StreamingMode_STREAMINGMODEUNSPECIFIED,
+  RuntimeEnvironment_StreamingMode_STREAMINGMODEEXACTLYONCE,
+  RuntimeEnvironment_StreamingMode_STREAMINGMODEATLEASTONCE,
+  RuntimeEnvironment_StreamingMode
+  #-}
+
 -- | Required. The SDK Language.
 newtype SDKInfo_Language = SDKInfo_Language {fromSDKInfo_Language :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1651,12 +1899,91 @@ pattern SDKInfo_Language_Python = SDKInfo_Language "PYTHON"
 pattern SDKInfo_Language_GO :: SDKInfo_Language
 pattern SDKInfo_Language_GO = SDKInfo_Language "GO"
 
+-- | YAML.
+pattern SDKInfo_Language_Yaml :: SDKInfo_Language
+pattern SDKInfo_Language_Yaml = SDKInfo_Language "YAML"
+
 {-# COMPLETE
   SDKInfo_Language_Unknown,
   SDKInfo_Language_Java,
   SDKInfo_Language_Python,
   SDKInfo_Language_GO,
+  SDKInfo_Language_Yaml,
   SDKInfo_Language
+  #-}
+
+-- | Output only. How severe the SDK bug is.
+newtype SdkBug_Severity = SdkBug_Severity {fromSdkBug_Severity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | A bug of unknown severity.
+pattern SdkBug_Severity_SEVERITYUNSPECIFIED :: SdkBug_Severity
+pattern SdkBug_Severity_SEVERITYUNSPECIFIED = SdkBug_Severity "SEVERITY_UNSPECIFIED"
+
+-- | A minor bug that that may reduce reliability or performance for some jobs. Impact will be minimal or non-existent for most jobs.
+pattern SdkBug_Severity_Notice :: SdkBug_Severity
+pattern SdkBug_Severity_Notice = SdkBug_Severity "NOTICE"
+
+-- | A bug that has some likelihood of causing performance degradation, data loss, or job failures.
+pattern SdkBug_Severity_Warning :: SdkBug_Severity
+pattern SdkBug_Severity_Warning = SdkBug_Severity "WARNING"
+
+-- | A bug with extremely significant impact. Jobs may fail erroneously, performance may be severely degraded, and data loss may be very likely.
+pattern SdkBug_Severity_Severe :: SdkBug_Severity
+pattern SdkBug_Severity_Severe = SdkBug_Severity "SEVERE"
+
+{-# COMPLETE
+  SdkBug_Severity_SEVERITYUNSPECIFIED,
+  SdkBug_Severity_Notice,
+  SdkBug_Severity_Warning,
+  SdkBug_Severity_Severe,
+  SdkBug_Severity
+  #-}
+
+-- | Output only. Describes the impact of this SDK bug.
+newtype SdkBug_Type = SdkBug_Type {fromSdkBug_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown issue with this SDK.
+pattern SdkBug_Type_TYPEUNSPECIFIED :: SdkBug_Type
+pattern SdkBug_Type_TYPEUNSPECIFIED = SdkBug_Type "TYPE_UNSPECIFIED"
+
+-- | Catch-all for SDK bugs that don\'t fit in the below categories.
+pattern SdkBug_Type_General :: SdkBug_Type
+pattern SdkBug_Type_General = SdkBug_Type "GENERAL"
+
+-- | Using this version of the SDK may result in degraded performance.
+pattern SdkBug_Type_Performance :: SdkBug_Type
+pattern SdkBug_Type_Performance = SdkBug_Type "PERFORMANCE"
+
+-- | Using this version of the SDK may cause data loss.
+pattern SdkBug_Type_Dataloss :: SdkBug_Type
+pattern SdkBug_Type_Dataloss = SdkBug_Type "DATALOSS"
+
+{-# COMPLETE
+  SdkBug_Type_TYPEUNSPECIFIED,
+  SdkBug_Type_General,
+  SdkBug_Type_Performance,
+  SdkBug_Type_Dataloss,
+  SdkBug_Type
   #-}
 
 -- | The support status for this SDK version.

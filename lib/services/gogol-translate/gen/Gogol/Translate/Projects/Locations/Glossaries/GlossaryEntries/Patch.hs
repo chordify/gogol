@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Translate.Projects.Locations.Glossaries.GlossaryEntries.Patch
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Translate.Types
 
 -- | A resource alias for @translate.projects.locations.glossaries.glossaryEntries.patch@ method which the
@@ -66,7 +64,7 @@ data TranslateProjectsLocationsGlossariesGlossaryEntriesPatch = TranslateProject
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the entry. Format: \"projects\//\/locations\//\/glossaries\//\/glossaryEntries\//\"
+    -- | Identifier. The resource name of the entry. Format: @projects\/*\/locations\/*\/glossaries\/*\/glossaryEntries\/*@
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GlossaryEntry,
@@ -79,36 +77,36 @@ data TranslateProjectsLocationsGlossariesGlossaryEntriesPatch = TranslateProject
 
 -- | Creates a value of 'TranslateProjectsLocationsGlossariesGlossaryEntriesPatch' with the minimum fields required to make a request.
 newTranslateProjectsLocationsGlossariesGlossaryEntriesPatch ::
-  -- |  Required. The resource name of the entry. Format: \"projects\//\/locations\//\/glossaries\//\/glossaryEntries\//\" See 'name'.
+  -- |  Identifier. The resource name of the entry. Format: @projects\/*\/locations\/*\/glossaries\/*\/glossaryEntries\/*@ See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GlossaryEntry ->
   TranslateProjectsLocationsGlossariesGlossaryEntriesPatch
-newTranslateProjectsLocationsGlossariesGlossaryEntriesPatch name payload =
-  TranslateProjectsLocationsGlossariesGlossaryEntriesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newTranslateProjectsLocationsGlossariesGlossaryEntriesPatch
+  name
+  payload =
+    TranslateProjectsLocationsGlossariesGlossaryEntriesPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     TranslateProjectsLocationsGlossariesGlossaryEntriesPatch
   where
   type
-    Rs
-      TranslateProjectsLocationsGlossariesGlossaryEntriesPatch =
+    Rs TranslateProjectsLocationsGlossariesGlossaryEntriesPatch =
       GlossaryEntry
   type
     Scopes
       TranslateProjectsLocationsGlossariesGlossaryEntriesPatch =
-      '[ CloudPlatform'FullControl,
-         CloudTranslation'FullControl
-       ]
+      '[CloudPlatform'FullControl, CloudTranslation'FullControl]
   requestClient
     TranslateProjectsLocationsGlossariesGlossaryEntriesPatch {..} =
       go

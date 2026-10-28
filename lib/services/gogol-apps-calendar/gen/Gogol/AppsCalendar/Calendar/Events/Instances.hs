@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Events.Instances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Events.Instances
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.events.instances@ method which the
 -- 'CalendarEventsInstances' request conforms to.
@@ -120,7 +118,12 @@ instance Core.GoogleRequest CalendarEventsInstances where
   type
     Scopes CalendarEventsInstances =
       '[ Calendar'FullControl,
+         Calendar'App'Created,
          Calendar'Events,
+         Calendar'Events'Freebusy,
+         Calendar'Events'Owned,
+         Calendar'Events'Owned'Readonly,
+         Calendar'Events'Public'Readonly,
          Calendar'Events'Readonly,
          Calendar'Readonly
        ]
@@ -142,7 +145,5 @@ instance Core.GoogleRequest CalendarEventsInstances where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarEventsInstancesResource
-          )
+          (Core.Proxy :: Core.Proxy CalendarEventsInstancesResource)
           Core.mempty

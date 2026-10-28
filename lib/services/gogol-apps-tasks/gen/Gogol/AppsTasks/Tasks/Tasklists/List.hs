@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.Tasklists.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns all the authenticated user\'s task lists.
+-- Returns all the authenticated user\'s task lists. A user can have up to 2000 lists at a time.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.list@.
 module Gogol.AppsTasks.Tasks.Tasklists.List
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.Tasklists.List
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasklists.list@ method which the
 -- 'TasksTasklistsList' request conforms to.
@@ -60,7 +58,7 @@ type TasksTasklistsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TaskLists
 
--- | Returns all the authenticated user\'s task lists.
+-- | Returns all the authenticated user\'s task lists. A user can have up to 2000 lists at a time.
 --
 -- /See:/ 'newTasksTasklistsList' smart constructor.
 data TasksTasklistsList = TasksTasklistsList
@@ -70,7 +68,7 @@ data TasksTasklistsList = TasksTasklistsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).
+    -- | Maximum number of task lists returned on one page. Optional. The default is 1000 (max allowed: 1000).
     maxResults :: (Core.Maybe Core.Int32),
     -- | Token specifying the result page to return. Optional.
     pageToken :: (Core.Maybe Core.Text),

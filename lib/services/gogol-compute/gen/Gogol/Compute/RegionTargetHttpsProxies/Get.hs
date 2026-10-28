@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionTargetHttpsProxies.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionTargetHttpsProxies.Get
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionTargetHttpsProxies.get@ method which the
 -- 'ComputeRegionTargetHttpsProxiesGet' request conforms to.
@@ -93,31 +91,26 @@ newComputeRegionTargetHttpsProxiesGet ::
   -- |  Name of the TargetHttpsProxy resource to return. See 'targetHttpsProxy'.
   Core.Text ->
   ComputeRegionTargetHttpsProxiesGet
-newComputeRegionTargetHttpsProxiesGet project region targetHttpsProxy =
-  ComputeRegionTargetHttpsProxiesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      project = project,
-      region = region,
-      targetHttpsProxy = targetHttpsProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeRegionTargetHttpsProxiesGet
+  project
+  region
+  targetHttpsProxy =
     ComputeRegionTargetHttpsProxiesGet
-  where
-  type
-    Rs ComputeRegionTargetHttpsProxiesGet =
-      TargetHttpsProxy
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        project = project,
+        region = region,
+        targetHttpsProxy = targetHttpsProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeRegionTargetHttpsProxiesGet where
+  type Rs ComputeRegionTargetHttpsProxiesGet = TargetHttpsProxy
   type
     Scopes ComputeRegionTargetHttpsProxiesGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeRegionTargetHttpsProxiesGet {..} =
     go
       project
@@ -134,7 +127,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeRegionTargetHttpsProxiesGetResource
+              Core.Proxy ComputeRegionTargetHttpsProxiesGetResource
           )
           Core.mempty

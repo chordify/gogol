@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Bidders.FilterSets.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.Get
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.get@ method which the
 -- 'AdExchangeBuyer2BiddersFilterSetsGet' request conforms to.
@@ -89,32 +87,25 @@ newAdExchangeBuyer2BiddersFilterSetsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyer2BiddersFilterSetsGet
-  where
-  type
-    Rs AdExchangeBuyer2BiddersFilterSetsGet =
-      FilterSet
+instance Core.GoogleRequest AdExchangeBuyer2BiddersFilterSetsGet where
+  type Rs AdExchangeBuyer2BiddersFilterSetsGet = FilterSet
   type
     Scopes AdExchangeBuyer2BiddersFilterSetsGet =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2BiddersFilterSetsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2BiddersFilterSetsGetResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2BiddersFilterSetsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2BiddersFilterSetsGetResource
+          )
+          Core.mempty

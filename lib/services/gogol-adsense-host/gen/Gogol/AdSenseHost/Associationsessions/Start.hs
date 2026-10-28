@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Associationsessions.Start
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSenseHost.Associationsessions.Start
 where
 
 import Gogol.AdSenseHost.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsensehost.associationsessions.start@ method which the
 -- 'AdSenseHostAssociationsessionsStart' request conforms to.
@@ -49,9 +47,7 @@ type AdSenseHostAssociationsessionsStartResource =
     Core.:> "v4.1"
     Core.:> "associationsessions"
     Core.:> "start"
-    Core.:> Core.QueryParams
-              "productCode"
-              AssociationsessionsStartProductCode
+    Core.:> Core.QueryParams "productCode" AssociationsessionsStartProductCode
     Core.:> Core.QueryParam "websiteUrl" Core.Text
     Core.:> Core.QueryParam "callbackUrl" Core.Text
     Core.:> Core.QueryParam "userLocale" Core.Text
@@ -92,13 +88,8 @@ newAdSenseHostAssociationsessionsStart productCode websiteUrl =
       websiteUrl = websiteUrl
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseHostAssociationsessionsStart
-  where
-  type
-    Rs AdSenseHostAssociationsessionsStart =
-      AssociationSession
+instance Core.GoogleRequest AdSenseHostAssociationsessionsStart where
+  type Rs AdSenseHostAssociationsessionsStart = AssociationSession
   type
     Scopes AdSenseHostAssociationsessionsStart =
       '[Adsensehost'FullControl]
@@ -115,7 +106,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AdSenseHostAssociationsessionsStartResource
+              Core.Proxy AdSenseHostAssociationsessionsStartResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Creatives.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Creatives.List
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.creatives.list@ method which the
 -- 'AdExchangeBuyerCreativesList' request conforms to.
@@ -50,9 +48,7 @@ type AdExchangeBuyerCreativesListResource =
     Core.:> "creatives"
     Core.:> Core.QueryParams "accountId" Core.Int32
     Core.:> Core.QueryParams "buyerCreativeId" Core.Text
-    Core.:> Core.QueryParam
-              "dealsStatusFilter"
-              CreativesListDealsStatusFilter
+    Core.:> Core.QueryParam "dealsStatusFilter" CreativesListDealsStatusFilter
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam
               "openAuctionStatusFilter"
@@ -93,14 +89,9 @@ newAdExchangeBuyerCreativesList =
       pageToken = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerCreativesList
-  where
+instance Core.GoogleRequest AdExchangeBuyerCreativesList where
   type Rs AdExchangeBuyerCreativesList = CreativesList
-  type
-    Scopes AdExchangeBuyerCreativesList =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerCreativesList = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesList {..} =
     go
       (accountId Core.^. Core._Default)
@@ -114,7 +105,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerCreativesListResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerCreativesListResource)
           Core.mempty

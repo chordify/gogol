@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreInstances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See [Store Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5). For details on the implementation of StoreInstances, see <https://cloud.google.com/healthcare/docs/dicom#store_transaction Store transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call StoreInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#storing_dicom_data Storing DICOM data>.
+-- StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See [Store Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5). For details on the implementation of StoreInstances, see <https://cloud.google.com/healthcare/docs/dicom#store_transaction Store transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call StoreInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#store-dicom Store DICOM data>.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.storeInstances@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreInstances
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreIns
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.storeInstances@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' request conforms to.
@@ -58,7 +56,7 @@ type HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResource
     Core.:> Core.ReqBody '[Core.JSON] HttpBody
     Core.:> Core.Post '[Core.JSON] HttpBody
 
--- | StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See [Store Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5). For details on the implementation of StoreInstances, see <https://cloud.google.com/healthcare/docs/dicom#store_transaction Store transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call StoreInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#storing_dicom_data Storing DICOM data>.
+-- | StoreInstances stores DICOM instances associated with study instance unique identifiers (SUID). See [Store Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.5). For details on the implementation of StoreInstances, see <https://cloud.google.com/healthcare/docs/dicom#store_transaction Store transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call StoreInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#store-dicom Store DICOM data>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances = HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
@@ -68,9 +66,9 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances = Healt
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional.
+    -- | Required. The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional.
     dicomWebPath :: Core.Text,
-    -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: HttpBody,
@@ -83,24 +81,29 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances = Healt
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances ::
-  -- |  The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional. See 'dicomWebPath'.
+  -- |  Required. The path of the StoreInstances DICOMweb request. For example, @studies\/[{study_uid}]@. Note that the @study_uid@ is optional. See 'dicomWebPath'.
   Core.Text ->
-  -- |  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
+  -- |  Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   HttpBody ->
   HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
-newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances dicomWebPath parent payload =
-  HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomWebPath = dicomWebPath,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+  dicomWebPath
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dicomWebPath = dicomWebPath,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -113,7 +116,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstances {..} =
       go

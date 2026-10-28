@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Entries.Write
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Writes log entries to Logging. This API method is the only way to send log entries to Logging. This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging libraries configured to use Logging. A single request may contain log entries for a maximum of 1000 different resources (projects, organizations, billing accounts or folders)
+-- Writes log entries to Logging. This API method is the only way to send log entries to Logging. This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging libraries configured to use Logging. A single request may contain log entries for a maximum of 1000 different resource names (projects, organizations, billing accounts or folders), where the resource name for a log entry is determined from its logName field.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.entries.write@.
 module Gogol.Logging.Entries.Write
@@ -40,7 +38,7 @@ module Gogol.Logging.Entries.Write
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.entries.write@ method which the
 -- 'LoggingEntriesWrite' request conforms to.
@@ -56,7 +54,7 @@ type LoggingEntriesWriteResource =
     Core.:> Core.ReqBody '[Core.JSON] WriteLogEntriesRequest
     Core.:> Core.Post '[Core.JSON] WriteLogEntriesResponse
 
--- | Writes log entries to Logging. This API method is the only way to send log entries to Logging. This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging libraries configured to use Logging. A single request may contain log entries for a maximum of 1000 different resources (projects, organizations, billing accounts or folders)
+-- | Writes log entries to Logging. This API method is the only way to send log entries to Logging. This method is used, directly or indirectly, by the Logging agent (fluentd) and all logging libraries configured to use Logging. A single request may contain log entries for a maximum of 1000 different resource names (projects, organizations, billing accounts or folders), where the resource name for a log entry is determined from its logName field.
 --
 -- /See:/ 'newLoggingEntriesWrite' smart constructor.
 data LoggingEntriesWrite = LoggingEntriesWrite
@@ -94,10 +92,7 @@ instance Core.GoogleRequest LoggingEntriesWrite where
   type Rs LoggingEntriesWrite = WriteLogEntriesResponse
   type
     Scopes LoggingEntriesWrite =
-      '[ CloudPlatform'FullControl,
-         Logging'Admin,
-         Logging'Write
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin, Logging'Write]
   requestClient LoggingEntriesWrite {..} =
     go
       xgafv
@@ -111,7 +106,5 @@ instance Core.GoogleRequest LoggingEntriesWrite where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LoggingEntriesWriteResource
-          )
+          (Core.Proxy :: Core.Proxy LoggingEntriesWriteResource)
           Core.mempty

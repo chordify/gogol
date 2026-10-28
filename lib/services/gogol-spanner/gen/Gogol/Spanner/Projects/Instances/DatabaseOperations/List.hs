@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.DatabaseOperations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.DatabaseOperations.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databaseOperations.list@ method which the
@@ -57,9 +55,7 @@ type SpannerProjectsInstancesDatabaseOperationsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListDatabaseOperationsResponse
+    Core.:> Core.Get '[Core.JSON] ListDatabaseOperationsResponse
 
 -- | Lists database longrunning-operations. A database operation has a name of the form @projects\/\/instances\/\/databases\/\/operations\/@. The long-running operation metadata field type @metadata.type_url@ describes the type of the metadata. Operations returned include those that have completed\/failed\/canceled within the last 7 days, and pending operations.
 --
@@ -71,7 +67,7 @@ data SpannerProjectsInstancesDatabaseOperationsList = SpannerProjectsInstancesDa
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | An expression that filters the list of returned operations. A filter expression consists of a field name, a comparison operator, and a value for filtering. The value must be a string, a number, or a boolean. The comparison operator must be one of: @\<@, @>@, @\<=@, @>=@, @!=@, @=@, or @:@. Colon @:@ is the contains operator. Filter rules are not case sensitive. The following fields in the Operation are eligible for filtering: * @name@ - The name of the long-running operation * @done@ - False if the operation is in progress, else true. * @metadata.\@type@ - the type of metadata. For example, the type string for RestoreDatabaseMetadata is @type.googleapis.com\/google.spanner.admin.database.v1.RestoreDatabaseMetadata@. * @metadata.@ - any field in metadata.value. @metadata.\@type@ must be specified first, if filtering on metadata fields. * @error@ - Error associated with the long-running operation. * @response.\@type@ - the type of response. * @response.@ - any field in response.value. You can combine multiple
+    -- | An expression that filters the list of returned operations. A filter expression consists of a field name, a comparison operator, and a value for filtering. The value must be a string, a number, or a boolean. The comparison operator must be one of: @\<@, @>@, @\<=@, @>=@, @!=@, @=@, or @:@. Colon @:@ is the contains operator. Filter rules are not case sensitive. The following fields in the operation are eligible for filtering: * @name@ - The name of the long-running operation * @done@ - False if the operation is in progress, else true. * @metadata.\@type@ - the type of metadata. For example, the type string for RestoreDatabaseMetadata is @type.googleapis.com\/google.spanner.admin.database.v1.RestoreDatabaseMetadata@. * @metadata.@ - any field in metadata.value. @metadata.\@type@ must be specified first, if filtering on metadata fields. * @error@ - Error associated with the long-running operation. * @response.\@type@ - the type of response. * @response.@ - any field in response.value. You can combine multiple
     -- expressions by enclosing each expression in parentheses. By default, expressions are combined with AND logic. However, you can specify AND, OR, and NOT logic explicitly. Here are a few examples: * @done:true@ - The operation is complete. * @(metadata.\@type=type.googleapis.com\/google.spanner.admin.database.v1.RestoreDatabaseMetadata) AND@ \\ @(metadata.source_type:BACKUP) AND@ \\ @(metadata.backup_info.backup:backup_howl) AND@ \\ @(metadata.name:restored_howl) AND@ \\ @(metadata.progress.start_time \< \\\"2018-03-28T14:50:00Z\\\") AND@ \\ @(error:*)@ - Return operations where: * The operation\'s metadata type is RestoreDatabaseMetadata. * The database is restored from a backup. * The backup name contains \"backup/howl\". * The restored database\'s name contains \"restored/howl\". * The operation started before 2018-03-28T14:50:00Z. * The operation resulted in an error.
     filter :: (Core.Maybe Core.Text),
     -- | Number of operations to be returned in the response. If 0 or less, defaults to the server\'s maximum allowed page size.
@@ -94,7 +90,8 @@ newSpannerProjectsInstancesDatabaseOperationsList ::
   SpannerProjectsInstancesDatabaseOperationsList
 newSpannerProjectsInstancesDatabaseOperationsList parent =
   SpannerProjectsInstancesDatabaseOperationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -110,32 +107,28 @@ instance
     SpannerProjectsInstancesDatabaseOperationsList
   where
   type
-    Rs
-      SpannerProjectsInstancesDatabaseOperationsList =
+    Rs SpannerProjectsInstancesDatabaseOperationsList =
       ListDatabaseOperationsResponse
   type
-    Scopes
-      SpannerProjectsInstancesDatabaseOperationsList =
+    Scopes SpannerProjectsInstancesDatabaseOperationsList =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesDatabaseOperationsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabaseOperationsListResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabaseOperationsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabaseOperationsListResource
+          )
+          Core.mempty

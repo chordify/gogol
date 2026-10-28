@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.WebmasterTools.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.WebmasterTools.Internal.Product
@@ -68,21 +66,16 @@ module Gogol.WebmasterTools.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.WebmasterTools.Internal.Sum
 
 --
 -- /See:/ 'newApiDataRow' smart constructor.
 data ApiDataRow = ApiDataRow
-  { -- |
-    clicks :: (Core.Maybe Core.Double),
-    -- |
+  { clicks :: (Core.Maybe Core.Double),
     ctr :: (Core.Maybe Core.Double),
-    -- |
     impressions :: (Core.Maybe Core.Double),
-    -- |
     keys :: (Core.Maybe [Core.Text]),
-    -- |
     position :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -127,11 +120,8 @@ instance Core.ToJSON ApiDataRow where
 --
 -- /See:/ 'newApiDimensionFilter' smart constructor.
 data ApiDimensionFilter = ApiDimensionFilter
-  { -- |
-    dimension :: (Core.Maybe Core.Text),
-    -- |
+  { dimension :: (Core.Maybe Core.Text),
     expression :: (Core.Maybe Core.Text),
-    -- |
     operator :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -170,9 +160,7 @@ instance Core.ToJSON ApiDimensionFilter where
 --
 -- /See:/ 'newApiDimensionFilterGroup' smart constructor.
 data ApiDimensionFilterGroup = ApiDimensionFilterGroup
-  { -- |
-    filters :: (Core.Maybe [ApiDimensionFilter]),
-    -- |
+  { filters :: (Core.Maybe [ApiDimensionFilter]),
     groupType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -181,7 +169,10 @@ data ApiDimensionFilterGroup = ApiDimensionFilterGroup
 newApiDimensionFilterGroup ::
   ApiDimensionFilterGroup
 newApiDimensionFilterGroup =
-  ApiDimensionFilterGroup {filters = Core.Nothing, groupType = Core.Nothing}
+  ApiDimensionFilterGroup
+    { filters = Core.Nothing,
+      groupType = Core.Nothing
+    }
 
 instance Core.FromJSON ApiDimensionFilterGroup where
   parseJSON =
@@ -267,11 +258,9 @@ instance Core.ToJSON SearchAnalyticsQueryRequest where
   toJSON SearchAnalyticsQueryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregationType" Core..=)
-              Core.<$> aggregationType,
+          [ ("aggregationType" Core..=) Core.<$> aggregationType,
             ("dataState" Core..=) Core.<$> dataState,
-            ("dimensionFilterGroups" Core..=)
-              Core.<$> dimensionFilterGroups,
+            ("dimensionFilterGroups" Core..=) Core.<$> dimensionFilterGroups,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("endDate" Core..=) Core.<$> endDate,
             ("rowLimit" Core..=) Core.<$> rowLimit,
@@ -297,7 +286,8 @@ newSearchAnalyticsQueryResponse ::
   SearchAnalyticsQueryResponse
 newSearchAnalyticsQueryResponse =
   SearchAnalyticsQueryResponse
-    { responseAggregationType = Core.Nothing,
+    { responseAggregationType =
+        Core.Nothing,
       rows = Core.Nothing
     }
 
@@ -333,22 +323,19 @@ newtype SitemapsListResponse = SitemapsListResponse
 -- | Creates a value of 'SitemapsListResponse' with the minimum fields required to make a request.
 newSitemapsListResponse ::
   SitemapsListResponse
-newSitemapsListResponse = SitemapsListResponse {sitemap = Core.Nothing}
+newSitemapsListResponse =
+  SitemapsListResponse {sitemap = Core.Nothing}
 
 instance Core.FromJSON SitemapsListResponse where
   parseJSON =
     Core.withObject
       "SitemapsListResponse"
-      ( \o ->
-          SitemapsListResponse Core.<$> (o Core..:? "sitemap")
-      )
+      (\o -> SitemapsListResponse Core.<$> (o Core..:? "sitemap"))
 
 instance Core.ToJSON SitemapsListResponse where
   toJSON SitemapsListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("sitemap" Core..=) Core.<$> sitemap]
-      )
+      (Core.catMaybes [("sitemap" Core..=) Core.<$> sitemap])
 
 -- | List of sites with access level information.
 --
@@ -368,16 +355,12 @@ instance Core.FromJSON SitesListResponse where
   parseJSON =
     Core.withObject
       "SitesListResponse"
-      ( \o ->
-          SitesListResponse Core.<$> (o Core..:? "siteEntry")
-      )
+      (\o -> SitesListResponse Core.<$> (o Core..:? "siteEntry"))
 
 instance Core.ToJSON SitesListResponse where
   toJSON SitesListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("siteEntry" Core..=) Core.<$> siteEntry]
-      )
+      (Core.catMaybes [("siteEntry" Core..=) Core.<$> siteEntry])
 
 -- | Contains permission level information about a Search Console site. For more information, see Permissions in Search Console.
 --
@@ -393,7 +376,8 @@ data WmxSite = WmxSite
 -- | Creates a value of 'WmxSite' with the minimum fields required to make a request.
 newWmxSite ::
   WmxSite
-newWmxSite = WmxSite {permissionLevel = Core.Nothing, siteUrl = Core.Nothing}
+newWmxSite =
+  WmxSite {permissionLevel = Core.Nothing, siteUrl = Core.Nothing}
 
 instance Core.FromJSON WmxSite where
   parseJSON =
@@ -409,8 +393,7 @@ instance Core.ToJSON WmxSite where
   toJSON WmxSite {..} =
     Core.object
       ( Core.catMaybes
-          [ ("permissionLevel" Core..=)
-              Core.<$> permissionLevel,
+          [ ("permissionLevel" Core..=) Core.<$> permissionLevel,
             ("siteUrl" Core..=) Core.<$> siteUrl
           ]
       )
@@ -463,18 +446,14 @@ instance Core.FromJSON WmxSitemap where
       ( \o ->
           WmxSitemap
             Core.<$> (o Core..:? "contents")
-            Core.<*> ( o Core..:? "errors"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "errors" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "isPending")
             Core.<*> (o Core..:? "isSitemapsIndex")
             Core.<*> (o Core..:? "lastDownloaded")
             Core.<*> (o Core..:? "lastSubmitted")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "type")
-            Core.<*> ( o Core..:? "warnings"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "warnings" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON WmxSitemap where
@@ -482,16 +461,14 @@ instance Core.ToJSON WmxSitemap where
     Core.object
       ( Core.catMaybes
           [ ("contents" Core..=) Core.<$> contents,
-            ("errors" Core..=) Core.. Core.AsText
-              Core.<$> errors,
+            ("errors" Core..=) Core.. Core.AsText Core.<$> errors,
             ("isPending" Core..=) Core.<$> isPending,
             ("isSitemapsIndex" Core..=) Core.<$> isSitemapsIndex,
             ("lastDownloaded" Core..=) Core.<$> lastDownloaded,
             ("lastSubmitted" Core..=) Core.<$> lastSubmitted,
             ("path" Core..=) Core.<$> path,
             ("type" Core..=) Core.<$> type',
-            ("warnings" Core..=) Core.. Core.AsText
-              Core.<$> warnings
+            ("warnings" Core..=) Core.. Core.AsText Core.<$> warnings
           ]
       )
 
@@ -524,12 +501,8 @@ instance Core.FromJSON WmxSitemapContent where
       "WmxSitemapContent"
       ( \o ->
           WmxSitemapContent
-            Core.<$> ( o Core..:? "indexed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "submitted"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "indexed" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "submitted" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -537,10 +510,8 @@ instance Core.ToJSON WmxSitemapContent where
   toJSON WmxSitemapContent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("indexed" Core..=) Core.. Core.AsText
-              Core.<$> indexed,
-            ("submitted" Core..=) Core.. Core.AsText
-              Core.<$> submitted,
+          [ ("indexed" Core..=) Core.. Core.AsText Core.<$> indexed,
+            ("submitted" Core..=) Core.. Core.AsText Core.<$> submitted,
             ("type" Core..=) Core.<$> type'
           ]
       )

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Export
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Export
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.export@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresExport' request conforms to.
@@ -66,7 +64,7 @@ data HealthcareProjectsLocationsDatasetsFhirStoresExport = HealthcareProjectsLoc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the FHIR store to export resource from, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    -- | Required. The name of the FHIR store to export resource from, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ExportResourcesRequest,
@@ -79,14 +77,15 @@ data HealthcareProjectsLocationsDatasetsFhirStoresExport = HealthcareProjectsLoc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresExport' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresExport ::
-  -- |  The name of the FHIR store to export resource from, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
+  -- |  Required. The name of the FHIR store to export resource from, in the format of @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ExportResourcesRequest ->
   HealthcareProjectsLocationsDatasetsFhirStoresExport
 newHealthcareProjectsLocationsDatasetsFhirStoresExport name payload =
   HealthcareProjectsLocationsDatasetsFhirStoresExport
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -100,13 +99,11 @@ instance
     HealthcareProjectsLocationsDatasetsFhirStoresExport
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresExport =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresExport =
       Operation
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresExport =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresExport =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresExport {..} =
       go

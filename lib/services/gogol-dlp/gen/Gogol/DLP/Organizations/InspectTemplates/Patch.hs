@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.InspectTemplates.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- Updates the InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.inspectTemplates.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.inspectTemplates.patch@.
 module Gogol.DLP.Organizations.InspectTemplates.Patch
   ( -- * Resource
     DLPOrganizationsInspectTemplatesPatchResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.InspectTemplates.Patch
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.inspectTemplates.patch@ method which the
 -- 'DLPOrganizationsInspectTemplatesPatch' request conforms to.
@@ -56,11 +54,9 @@ type DLPOrganizationsInspectTemplatesPatchResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2UpdateInspectTemplateRequest
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GooglePrivacyDlpV2InspectTemplate
+    Core.:> Core.Patch '[Core.JSON] GooglePrivacyDlpV2InspectTemplate
 
--- | Updates the InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- | Updates the InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'newDLPOrganizationsInspectTemplatesPatch' smart constructor.
 data DLPOrganizationsInspectTemplatesPatch = DLPOrganizationsInspectTemplatesPatch
@@ -99,33 +95,28 @@ newDLPOrganizationsInspectTemplatesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsInspectTemplatesPatch
-  where
+instance Core.GoogleRequest DLPOrganizationsInspectTemplatesPatch where
   type
     Rs DLPOrganizationsInspectTemplatesPatch =
       GooglePrivacyDlpV2InspectTemplate
   type
     Scopes DLPOrganizationsInspectTemplatesPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsInspectTemplatesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsInspectTemplatesPatchResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsInspectTemplatesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsInspectTemplatesPatchResource
+          )
+          Core.mempty

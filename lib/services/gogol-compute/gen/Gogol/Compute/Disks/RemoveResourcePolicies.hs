@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Disks.RemoveResourcePolicies
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Disks.RemoveResourcePolicies
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.disks.removeResourcePolicies@ method which the
 -- 'ComputeDisksRemoveResourcePolicies' request conforms to.
@@ -61,9 +59,7 @@ type ComputeDisksRemoveResourcePoliciesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DisksRemoveResourcePoliciesRequest
+    Core.:> Core.ReqBody '[Core.JSON] DisksRemoveResourcePoliciesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Removes resource policies from a disk.
@@ -118,13 +114,8 @@ newComputeDisksRemoveResourcePolicies disk payload project zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeDisksRemoveResourcePolicies
-  where
-  type
-    Rs ComputeDisksRemoveResourcePolicies =
-      Operation
+instance Core.GoogleRequest ComputeDisksRemoveResourcePolicies where
+  type Rs ComputeDisksRemoveResourcePolicies = Operation
   type
     Scopes ComputeDisksRemoveResourcePolicies =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -146,7 +137,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeDisksRemoveResourcePoliciesResource
+              Core.Proxy ComputeDisksRemoveResourcePoliciesResource
           )
           Core.mempty

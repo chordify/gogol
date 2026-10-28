@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Enterprises.WebTokens.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidManagement.Enterprises.WebTokens.Create
 where
 
 import Gogol.AndroidManagement.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidmanagement.enterprises.webTokens.create@ method which the
 -- 'AndroidManagementEnterprisesWebTokensCreate' request conforms to.
@@ -100,30 +98,25 @@ instance
   Core.GoogleRequest
     AndroidManagementEnterprisesWebTokensCreate
   where
+  type Rs AndroidManagementEnterprisesWebTokensCreate = WebToken
   type
-    Rs AndroidManagementEnterprisesWebTokensCreate =
-      WebToken
-  type
-    Scopes
-      AndroidManagementEnterprisesWebTokensCreate =
+    Scopes AndroidManagementEnterprisesWebTokensCreate =
       '[Androidmanagement'FullControl]
-  requestClient
-    AndroidManagementEnterprisesWebTokensCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidManagementService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidManagementEnterprisesWebTokensCreateResource
-            )
-            Core.mempty
+  requestClient AndroidManagementEnterprisesWebTokensCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidManagementService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidManagementEnterprisesWebTokensCreateResource
+          )
+          Core.mempty

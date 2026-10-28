@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.DlpJobs.Finish
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.dlpJobs.finish@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.dlpJobs.finish@.
 module Gogol.DLP.Projects.Locations.DlpJobs.Finish
   ( -- * Resource
     DLPProjectsLocationsDlpJobsFinishResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.DlpJobs.Finish
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.dlpJobs.finish@ method which the
 -- 'DLPProjectsLocationsDlpJobsFinish' request conforms to.
@@ -53,9 +51,7 @@ type DLPProjectsLocationsDlpJobsFinishResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2FinishDlpJobRequest
+    Core.:> Core.ReqBody '[Core.JSON] GooglePrivacyDlpV2FinishDlpJobRequest
     Core.:> Core.Post '[Core.JSON] GoogleProtobufEmpty
 
 -- | Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run.
@@ -68,7 +64,7 @@ data DLPProjectsLocationsDlpJobsFinish = DLPProjectsLocationsDlpJobsFinish
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the DlpJob resource to be cancelled.
+    -- | Required. The name of the DlpJob resource to be finished.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GooglePrivacyDlpV2FinishDlpJobRequest,
@@ -81,7 +77,7 @@ data DLPProjectsLocationsDlpJobsFinish = DLPProjectsLocationsDlpJobsFinish
 
 -- | Creates a value of 'DLPProjectsLocationsDlpJobsFinish' with the minimum fields required to make a request.
 newDLPProjectsLocationsDlpJobsFinish ::
-  -- |  Required. The name of the DlpJob resource to be cancelled. See 'name'.
+  -- |  Required. The name of the DlpJob resource to be finished. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GooglePrivacyDlpV2FinishDlpJobRequest ->
@@ -97,13 +93,8 @@ newDLPProjectsLocationsDlpJobsFinish name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsDlpJobsFinish
-  where
-  type
-    Rs DLPProjectsLocationsDlpJobsFinish =
-      GoogleProtobufEmpty
+instance Core.GoogleRequest DLPProjectsLocationsDlpJobsFinish where
+  type Rs DLPProjectsLocationsDlpJobsFinish = GoogleProtobufEmpty
   type
     Scopes DLPProjectsLocationsDlpJobsFinish =
       '[CloudPlatform'FullControl]

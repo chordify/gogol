@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ReplicaPoolUpdater.RollingUpdates.Rollback
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ReplicaPoolUpdater.Types
 
 -- | A resource alias for @replicapoolupdater.rollingUpdates.rollback@ method which the
@@ -79,36 +77,35 @@ newReplicaPoolUpdaterRollingUpdatesRollback ::
   -- |  The name of the zone in which the update\'s target resides. See 'zone'.
   Core.Text ->
   ReplicaPoolUpdaterRollingUpdatesRollback
-newReplicaPoolUpdaterRollingUpdatesRollback project rollingUpdate zone =
-  ReplicaPoolUpdaterRollingUpdatesRollback
-    { project = project,
-      rollingUpdate = rollingUpdate,
-      zone = zone
-    }
+newReplicaPoolUpdaterRollingUpdatesRollback
+  project
+  rollingUpdate
+  zone =
+    ReplicaPoolUpdaterRollingUpdatesRollback
+      { project = project,
+        rollingUpdate = rollingUpdate,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ReplicaPoolUpdaterRollingUpdatesRollback
   where
-  type
-    Rs ReplicaPoolUpdaterRollingUpdatesRollback =
-      Operation
+  type Rs ReplicaPoolUpdaterRollingUpdatesRollback = Operation
   type
     Scopes ReplicaPoolUpdaterRollingUpdatesRollback =
       '[CloudPlatform'FullControl, Replicapool'FullControl]
-  requestClient
-    ReplicaPoolUpdaterRollingUpdatesRollback {..} =
-      go
-        project
-        zone
-        rollingUpdate
-        (Core.Just Core.AltJSON)
-        replicaPoolUpdaterService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ReplicaPoolUpdaterRollingUpdatesRollbackResource
-            )
-            Core.mempty
+  requestClient ReplicaPoolUpdaterRollingUpdatesRollback {..} =
+    go
+      project
+      zone
+      rollingUpdate
+      (Core.Just Core.AltJSON)
+      replicaPoolUpdaterService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ReplicaPoolUpdaterRollingUpdatesRollbackResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.purchases.voidedpurchases.list@ method which the
 -- 'AndroidPublisherPurchasesVoidedpurchasesList' request conforms to.
@@ -55,6 +53,7 @@ type AndroidPublisherPurchasesVoidedpurchasesListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "endTime" Core.Int64
+    Core.:> Core.QueryParam "includeQuantityBasedPartialRefund" Core.Bool
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "startIndex" Core.Word32
     Core.:> Core.QueryParam "startTime" Core.Int64
@@ -63,9 +62,7 @@ type AndroidPublisherPurchasesVoidedpurchasesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              VoidedPurchasesListResponse
+    Core.:> Core.Get '[Core.JSON] VoidedPurchasesListResponse
 
 -- | Lists the purchases that were canceled, refunded or charged-back.
 --
@@ -79,6 +76,8 @@ data AndroidPublisherPurchasesVoidedpurchasesList = AndroidPublisherPurchasesVoi
     callback :: (Core.Maybe Core.Text),
     -- | The time, in milliseconds since the Epoch, of the newest voided purchase that you want to see in the response. The value of this parameter cannot be greater than the current time and is ignored if a pagination token is set. Default value is current time. Note: This filter is applied on the time at which the record is seen as voided by our systems and not the actual voided time returned in the response.
     endTime :: (Core.Maybe Core.Int64),
+    -- | Optional. Whether to include voided purchases of quantity-based partial refunds, which are applicable only to multi-quantity purchases. If true, additional voided purchases may be returned with voidedQuantity that indicates the refund quantity of a quantity-based partial refund. The default value is false.
+    includeQuantityBasedPartialRefund :: (Core.Maybe Core.Bool),
     -- | Defines how many results the list operation should return. The default number depends on the resource collection.
     maxResults :: (Core.Maybe Core.Word32),
     -- | The package name of the application for which voided purchases need to be returned (for example, \'com.some.thing\').
@@ -105,10 +104,12 @@ newAndroidPublisherPurchasesVoidedpurchasesList ::
   AndroidPublisherPurchasesVoidedpurchasesList
 newAndroidPublisherPurchasesVoidedpurchasesList packageName =
   AndroidPublisherPurchasesVoidedpurchasesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       endTime = Core.Nothing,
+      includeQuantityBasedPartialRefund = Core.Nothing,
       maxResults = Core.Nothing,
       packageName = packageName,
       startIndex = Core.Nothing,
@@ -127,31 +128,29 @@ instance
     Rs AndroidPublisherPurchasesVoidedpurchasesList =
       VoidedPurchasesListResponse
   type
-    Scopes
-      AndroidPublisherPurchasesVoidedpurchasesList =
+    Scopes AndroidPublisherPurchasesVoidedpurchasesList =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherPurchasesVoidedpurchasesList {..} =
-      go
-        packageName
-        xgafv
-        accessToken
-        callback
-        endTime
-        maxResults
-        startIndex
-        startTime
-        token
-        type'
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherPurchasesVoidedpurchasesListResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherPurchasesVoidedpurchasesList {..} =
+    go
+      packageName
+      xgafv
+      accessToken
+      callback
+      endTime
+      includeQuantityBasedPartialRefund
+      maxResults
+      startIndex
+      startTime
+      token
+      type'
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherPurchasesVoidedpurchasesListResource
+          )
+          Core.mempty

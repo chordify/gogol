@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Storage.Types
@@ -37,6 +35,18 @@ module Gogol.Storage.Types
     Devstorage'ReadWrite,
 
     -- * Types
+
+    -- ** AdvanceRelocateBucketOperationRequest
+    AdvanceRelocateBucketOperationRequest (..),
+    newAdvanceRelocateBucketOperationRequest,
+
+    -- ** AnywhereCache
+    AnywhereCache (..),
+    newAnywhereCache,
+
+    -- ** AnywhereCaches
+    AnywhereCaches (..),
+    newAnywhereCaches,
 
     -- ** Bucket
     Bucket (..),
@@ -62,6 +72,10 @@ module Gogol.Storage.Types
     Bucket_Encryption (..),
     newBucket_Encryption,
 
+    -- ** Bucket_HierarchicalNamespace
+    Bucket_HierarchicalNamespace (..),
+    newBucket_HierarchicalNamespace,
+
     -- ** Bucket_IamConfiguration
     Bucket_IamConfiguration (..),
     newBucket_IamConfiguration,
@@ -73,6 +87,18 @@ module Gogol.Storage.Types
     -- ** Bucket_IamConfiguration_UniformBucketLevelAccess
     Bucket_IamConfiguration_UniformBucketLevelAccess (..),
     newBucket_IamConfiguration_UniformBucketLevelAccess,
+
+    -- ** Bucket_IpFilter
+    Bucket_IpFilter (..),
+    newBucket_IpFilter,
+
+    -- ** Bucket_IpFilter_PublicNetworkSource
+    Bucket_IpFilter_PublicNetworkSource (..),
+    newBucket_IpFilter_PublicNetworkSource,
+
+    -- ** Bucket_IpFilter_VpcNetworkSourcesItem
+    Bucket_IpFilter_VpcNetworkSourcesItem (..),
+    newBucket_IpFilter_VpcNetworkSourcesItem,
 
     -- ** Bucket_Labels
     Bucket_Labels (..),
@@ -98,6 +124,10 @@ module Gogol.Storage.Types
     Bucket_Logging (..),
     newBucket_Logging,
 
+    -- ** Bucket_ObjectRetention
+    Bucket_ObjectRetention (..),
+    newBucket_ObjectRetention,
+
     -- ** Bucket_Owner
     Bucket_Owner (..),
     newBucket_Owner,
@@ -105,6 +135,10 @@ module Gogol.Storage.Types
     -- ** Bucket_RetentionPolicy
     Bucket_RetentionPolicy (..),
     newBucket_RetentionPolicy,
+
+    -- ** Bucket_SoftDeletePolicy
+    Bucket_SoftDeletePolicy (..),
+    newBucket_SoftDeletePolicy,
 
     -- ** Bucket_Versioning
     Bucket_Versioning (..),
@@ -126,9 +160,25 @@ module Gogol.Storage.Types
     BucketAccessControls (..),
     newBucketAccessControls,
 
+    -- ** BucketStorageLayout
+    BucketStorageLayout (..),
+    newBucketStorageLayout,
+
+    -- ** BucketStorageLayout_CustomPlacementConfig
+    BucketStorageLayout_CustomPlacementConfig (..),
+    newBucketStorageLayout_CustomPlacementConfig,
+
+    -- ** BucketStorageLayout_HierarchicalNamespace
+    BucketStorageLayout_HierarchicalNamespace (..),
+    newBucketStorageLayout_HierarchicalNamespace,
+
     -- ** Buckets
     Buckets (..),
     newBuckets,
+
+    -- ** BulkRestoreObjectsRequest
+    BulkRestoreObjectsRequest (..),
+    newBulkRestoreObjectsRequest,
 
     -- ** Channel
     Channel (..),
@@ -154,6 +204,42 @@ module Gogol.Storage.Types
     Expr (..),
     newExpr,
 
+    -- ** Folder
+    Folder (..),
+    newFolder,
+
+    -- ** Folder_PendingRenameInfo
+    Folder_PendingRenameInfo (..),
+    newFolder_PendingRenameInfo,
+
+    -- ** Folders
+    Folders (..),
+    newFolders,
+
+    -- ** GoogleLongrunningListOperationsResponse
+    GoogleLongrunningListOperationsResponse (..),
+    newGoogleLongrunningListOperationsResponse,
+
+    -- ** GoogleLongrunningOperation
+    GoogleLongrunningOperation (..),
+    newGoogleLongrunningOperation,
+
+    -- ** GoogleLongrunningOperation_Metadata
+    GoogleLongrunningOperation_Metadata (..),
+    newGoogleLongrunningOperation_Metadata,
+
+    -- ** GoogleLongrunningOperation_Response
+    GoogleLongrunningOperation_Response (..),
+    newGoogleLongrunningOperation_Response,
+
+    -- ** GoogleRpcStatus
+    GoogleRpcStatus (..),
+    newGoogleRpcStatus,
+
+    -- ** GoogleRpcStatus_DetailsItem
+    GoogleRpcStatus_DetailsItem (..),
+    newGoogleRpcStatus_DetailsItem,
+
     -- ** HmacKey
     HmacKey (..),
     newHmacKey,
@@ -165,6 +251,14 @@ module Gogol.Storage.Types
     -- ** HmacKeysMetadata
     HmacKeysMetadata (..),
     newHmacKeysMetadata,
+
+    -- ** ManagedFolder
+    ManagedFolder (..),
+    newManagedFolder,
+
+    -- ** ManagedFolders
+    ManagedFolders (..),
+    newManagedFolders,
 
     -- ** Notification
     Notification (..),
@@ -194,6 +288,10 @@ module Gogol.Storage.Types
     Object_Owner (..),
     newObject_Owner,
 
+    -- ** Object_Retention
+    Object_Retention (..),
+    newObject_Retention,
+
     -- ** ObjectAccessControl
     ObjectAccessControl (..),
     newObjectAccessControl,
@@ -217,6 +315,14 @@ module Gogol.Storage.Types
     -- ** Policy_BindingsItem
     Policy_BindingsItem (..),
     newPolicy_BindingsItem,
+
+    -- ** RelocateBucketRequest
+    RelocateBucketRequest (..),
+    newRelocateBucketRequest,
+
+    -- ** RelocateBucketRequest_DestinationCustomPlacementConfig
+    RelocateBucketRequest_DestinationCustomPlacementConfig (..),
+    newRelocateBucketRequest_DestinationCustomPlacementConfig,
 
     -- ** RewriteResponse
     RewriteResponse (..),
@@ -254,6 +360,9 @@ module Gogol.Storage.Types
     -- ** BucketsPatchProjection
     BucketsPatchProjection (..),
 
+    -- ** BucketsRestoreProjection
+    BucketsRestoreProjection (..),
+
     -- ** BucketsUpdatePredefinedAcl
     BucketsUpdatePredefinedAcl (..),
 
@@ -290,6 +399,9 @@ module Gogol.Storage.Types
     -- ** ObjectsPatchProjection
     ObjectsPatchProjection (..),
 
+    -- ** ObjectsRestoreProjection
+    ObjectsRestoreProjection (..),
+
     -- ** ObjectsRewriteDestinationPredefinedAcl
     ObjectsRewriteDestinationPredefinedAcl (..),
 
@@ -307,7 +419,7 @@ module Gogol.Storage.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Internal.Product
 import Gogol.Storage.Internal.Sum
 
@@ -319,16 +431,21 @@ storageService =
     "storage.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud Platform services
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your data and permissions in Google Cloud Storage
-type Devstorage'FullControl = "https://www.googleapis.com/auth/devstorage.full_control"
+type Devstorage'FullControl =
+  "https://www.googleapis.com/auth/devstorage.full_control"
 
 -- | View your data in Google Cloud Storage
-type Devstorage'ReadOnly = "https://www.googleapis.com/auth/devstorage.read_only"
+type Devstorage'ReadOnly =
+  "https://www.googleapis.com/auth/devstorage.read_only"
 
 -- | Manage your data in Google Cloud Storage
-type Devstorage'ReadWrite = "https://www.googleapis.com/auth/devstorage.read_write"
+type Devstorage'ReadWrite =
+  "https://www.googleapis.com/auth/devstorage.read_write"

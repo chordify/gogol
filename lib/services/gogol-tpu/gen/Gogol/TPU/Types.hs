@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TPU.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TPU.Types
@@ -48,9 +46,17 @@ module Gogol.TPU.Types
     AcceleratorType (..),
     newAcceleratorType,
 
+    -- ** AcceptedData
+    AcceptedData (..),
+    newAcceptedData,
+
     -- ** AccessConfig
     AccessConfig (..),
     newAccessConfig,
+
+    -- ** ActiveData
+    ActiveData (..),
+    newActiveData,
 
     -- ** AttachedDisk
     AttachedDisk (..),
@@ -59,9 +65,21 @@ module Gogol.TPU.Types
     -- ** AttachedDisk_Mode
     AttachedDisk_Mode (..),
 
+    -- ** CreatingData
+    CreatingData (..),
+    newCreatingData,
+
+    -- ** DeletingData
+    DeletingData (..),
+    newDeletingData,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** FailedData
+    FailedData (..),
+    newFailedData,
 
     -- ** GenerateServiceIdentityRequest
     GenerateServiceIdentityRequest (..),
@@ -79,6 +97,10 @@ module Gogol.TPU.Types
     GetGuestAttributesResponse (..),
     newGetGuestAttributesResponse,
 
+    -- ** Guaranteed
+    Guaranteed (..),
+    newGuaranteed,
+
     -- ** GuestAttributes
     GuestAttributes (..),
     newGuestAttributes,
@@ -90,6 +112,10 @@ module Gogol.TPU.Types
     -- ** GuestAttributesValue
     GuestAttributesValue (..),
     newGuestAttributesValue,
+
+    -- ** Interval
+    Interval (..),
+    newInterval,
 
     -- ** ListAcceleratorTypesResponse
     ListAcceleratorTypesResponse (..),
@@ -107,6 +133,10 @@ module Gogol.TPU.Types
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- ** ListQueuedResourcesResponse
+    ListQueuedResourcesResponse (..),
+    newListQueuedResourcesResponse,
+
     -- ** ListRuntimeVersionsResponse
     ListRuntimeVersionsResponse (..),
     newListRuntimeVersionsResponse,
@@ -122,6 +152,10 @@ module Gogol.TPU.Types
     -- ** Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- ** MultisliceParams
+    MultisliceParams (..),
+    newMultisliceParams,
 
     -- ** NetworkConfig
     NetworkConfig (..),
@@ -152,6 +186,10 @@ module Gogol.TPU.Types
     -- ** Node_State
     Node_State (..),
 
+    -- ** NodeSpec
+    NodeSpec (..),
+    newNodeSpec,
+
     -- ** Operation
     Operation (..),
     newOperation,
@@ -167,6 +205,32 @@ module Gogol.TPU.Types
     -- ** OperationMetadata
     OperationMetadata (..),
     newOperationMetadata,
+
+    -- ** ProvisioningData
+    ProvisioningData (..),
+    newProvisioningData,
+
+    -- ** QueuedResource
+    QueuedResource (..),
+    newQueuedResource,
+
+    -- ** QueuedResourceState
+    QueuedResourceState (..),
+    newQueuedResourceState,
+
+    -- ** QueuedResourceState_State
+    QueuedResourceState_State (..),
+
+    -- ** QueuedResourceState_StateInitiator
+    QueuedResourceState_StateInitiator (..),
+
+    -- ** QueueingPolicy
+    QueueingPolicy (..),
+    newQueueingPolicy,
+
+    -- ** ResetQueuedResourceRequest
+    ResetQueuedResourceRequest (..),
+    newResetQueuedResourceRequest,
 
     -- ** RuntimeVersion
     RuntimeVersion (..),
@@ -188,6 +252,10 @@ module Gogol.TPU.Types
     ShieldedInstanceConfig (..),
     newShieldedInstanceConfig,
 
+    -- ** Spot
+    Spot (..),
+    newSpot,
+
     -- ** StartNodeRequest
     StartNodeRequest (..),
     newStartNodeRequest,
@@ -204,16 +272,28 @@ module Gogol.TPU.Types
     StopNodeRequest (..),
     newStopNodeRequest,
 
+    -- ** SuspendedData
+    SuspendedData (..),
+    newSuspendedData,
+
+    -- ** SuspendingData
+    SuspendingData (..),
+    newSuspendingData,
+
     -- ** Symptom
     Symptom (..),
     newSymptom,
 
     -- ** Symptom_SymptomType
     Symptom_SymptomType (..),
+
+    -- ** Tpu
+    Tpu (..),
+    newTpu,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TPU.Internal.Product
 import Gogol.TPU.Internal.Sum
 
@@ -225,4 +305,5 @@ tPUService =
     "tpu.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

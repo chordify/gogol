@@ -11,17 +11,17 @@ import Control.Error
 import Control.Lens ((^.))
 import Control.Monad
 import Control.Monad.Except
-import Data.Aeson hiding (json)
+import Data.Aeson
 import Data.Bifunctor
 import Data.Foldable (foldr')
 import Data.Monoid
 import Data.Set (Set)
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Lazy as LText
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as LText
 import Filesystem.Path.CurrentOS hiding (FilePath, root)
 import Gen.Formatting (failure, shown)
-import qualified Gen.JSON as JS
+import Gen.JSON qualified as JS
 import Gen.Types
 import System.Directory.Tree hiding (file)
 import Text.EDE hiding (failure, render)
@@ -31,7 +31,7 @@ root :: AnchoredDirTree a -> Path
 root (p :/ d) = decodeString p </> decodeString (name d)
 
 fold ::
-  MonadError Error m =>
+  (MonadError Error m) =>
   -- | Directories
   (Path -> m ()) ->
   -- | Files
@@ -102,7 +102,7 @@ populate d Templates {..} l = (encodeString d :/) . dir lib <$> layout
     env = toJSON l
 
 module' ::
-  ToJSON a =>
+  (ToJSON a) =>
   NS ->
   Set NS ->
   Template ->
@@ -110,14 +110,15 @@ module' ::
   DirTree (Either Error Rendered)
 module' ns is t f = namespaced ns t $ do
   x <- f >>= JS.objectErr (show ns)
-  return $! x
-    <> fromPairs
-      [ "moduleName" .= ns,
-        "moduleImports" .= is
-      ]
+  return $!
+    x
+      <> fromPairs
+        [ "moduleName" .= ns,
+          "moduleImports" .= is
+        ]
 
 namespaced ::
-  ToJSON a =>
+  (ToJSON a) =>
   NS ->
   Template ->
   Either Error a ->
@@ -133,14 +134,15 @@ namespaced (unNS -> ns) t x =
     nest d c = Dir (encodeString d) [c]
 
 file' ::
-  ToJSON a =>
+  (ToJSON a) =>
   Path ->
   Template ->
   Either Error a ->
   DirTree (Either Error Rendered)
 file' (encodeString -> p) t f =
   File p $
-    f >>= JS.objectErr p
+    f
+      >>= JS.objectErr p
       >>= fmapL LText.pack . eitherRender t
 
 dir :: Path -> [DirTree a] -> DirTree a

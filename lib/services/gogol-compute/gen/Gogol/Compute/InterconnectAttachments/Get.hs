@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InterconnectAttachments.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InterconnectAttachments.Get
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.interconnectAttachments.get@ method which the
 -- 'ComputeInterconnectAttachmentsGet' request conforms to.
@@ -93,31 +91,26 @@ newComputeInterconnectAttachmentsGet ::
   -- |  Name of the region for this request. See 'region'.
   Core.Text ->
   ComputeInterconnectAttachmentsGet
-newComputeInterconnectAttachmentsGet interconnectAttachment project region =
-  ComputeInterconnectAttachmentsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      interconnectAttachment = interconnectAttachment,
-      project = project,
-      region = region,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInterconnectAttachmentsGet
+  interconnectAttachment
+  project
+  region =
     ComputeInterconnectAttachmentsGet
-  where
-  type
-    Rs ComputeInterconnectAttachmentsGet =
-      InterconnectAttachment
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        interconnectAttachment = interconnectAttachment,
+        project = project,
+        region = region,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeInterconnectAttachmentsGet where
+  type Rs ComputeInterconnectAttachmentsGet = InterconnectAttachment
   type
     Scopes ComputeInterconnectAttachmentsGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeInterconnectAttachmentsGet {..} =
     go
       project

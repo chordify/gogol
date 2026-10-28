@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudKMS.Internal.Product
@@ -50,6 +48,10 @@ module Gogol.CloudKMS.Internal.Product
     AuditLogConfig (..),
     newAuditLogConfig,
 
+    -- * AutokeyConfig
+    AutokeyConfig (..),
+    newAutokeyConfig,
+
     -- * Binding
     Binding (..),
     newBinding,
@@ -61,6 +63,10 @@ module Gogol.CloudKMS.Internal.Product
     -- * CertificateChains
     CertificateChains (..),
     newCertificateChains,
+
+    -- * ChecksummedData
+    ChecksummedData (..),
+    newChecksummedData,
 
     -- * CryptoKey
     CryptoKey (..),
@@ -134,6 +140,14 @@ module Gogol.CloudKMS.Internal.Product
     ImportJob (..),
     newImportJob,
 
+    -- * KeyAccessJustificationsPolicy
+    KeyAccessJustificationsPolicy (..),
+    newKeyAccessJustificationsPolicy,
+
+    -- * KeyHandle
+    KeyHandle (..),
+    newKeyHandle,
+
     -- * KeyOperationAttestation
     KeyOperationAttestation (..),
     newKeyOperationAttestation,
@@ -157,6 +171,10 @@ module Gogol.CloudKMS.Internal.Product
     -- * ListImportJobsResponse
     ListImportJobsResponse (..),
     newListImportJobsResponse,
+
+    -- * ListKeyHandlesResponse
+    ListKeyHandlesResponse (..),
+    newListKeyHandlesResponse,
 
     -- * ListKeyRingsResponse
     ListKeyRingsResponse (..),
@@ -198,6 +216,18 @@ module Gogol.CloudKMS.Internal.Product
     MacVerifyResponse (..),
     newMacVerifyResponse,
 
+    -- * Operation
+    Operation (..),
+    newOperation,
+
+    -- * Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- * Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
     -- * Policy
     Policy (..),
     newPolicy,
@@ -205,6 +235,22 @@ module Gogol.CloudKMS.Internal.Product
     -- * PublicKey
     PublicKey (..),
     newPublicKey,
+
+    -- * RawDecryptRequest
+    RawDecryptRequest (..),
+    newRawDecryptRequest,
+
+    -- * RawDecryptResponse
+    RawDecryptResponse (..),
+    newRawDecryptResponse,
+
+    -- * RawEncryptRequest
+    RawEncryptRequest (..),
+    newRawEncryptRequest,
+
+    -- * RawEncryptResponse
+    RawEncryptResponse (..),
+    newRawEncryptResponse,
 
     -- * RestoreCryptoKeyVersionRequest
     RestoreCryptoKeyVersionRequest (..),
@@ -218,6 +264,18 @@ module Gogol.CloudKMS.Internal.Product
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
 
+    -- * ShowEffectiveAutokeyConfigResponse
+    ShowEffectiveAutokeyConfigResponse (..),
+    newShowEffectiveAutokeyConfigResponse,
+
+    -- * Status
+    Status (..),
+    newStatus,
+
+    -- * Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
     -- * TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -230,6 +288,10 @@ module Gogol.CloudKMS.Internal.Product
     UpdateCryptoKeyPrimaryVersionRequest (..),
     newUpdateCryptoKeyPrimaryVersionRequest,
 
+    -- * VerifyConnectivityResponse
+    VerifyConnectivityResponse (..),
+    newVerifyConnectivityResponse,
+
     -- * WrappingPublicKey
     WrappingPublicKey (..),
     newWrappingPublicKey,
@@ -237,7 +299,7 @@ module Gogol.CloudKMS.Internal.Product
 where
 
 import Gogol.CloudKMS.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Request message for KeyManagementService.AsymmetricDecrypt.
 --
@@ -266,9 +328,7 @@ instance Core.FromJSON AsymmetricDecryptRequest where
       ( \o ->
           AsymmetricDecryptRequest
             Core.<$> (o Core..:? "ciphertext")
-            Core.<*> ( o Core..:? "ciphertextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "ciphertextCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AsymmetricDecryptRequest where
@@ -276,7 +336,8 @@ instance Core.ToJSON AsymmetricDecryptRequest where
     Core.object
       ( Core.catMaybes
           [ ("ciphertext" Core..=) Core.<$> ciphertext,
-            ("ciphertextCrc32c" Core..=) Core.. Core.AsText
+            ("ciphertextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> ciphertextCrc32c
           ]
       )
@@ -314,9 +375,7 @@ instance Core.FromJSON AsymmetricDecryptResponse where
       ( \o ->
           AsymmetricDecryptResponse
             Core.<$> (o Core..:? "plaintext")
-            Core.<*> ( o Core..:? "plaintextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "plaintextCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "verifiedCiphertextCrc32c")
       )
@@ -326,7 +385,8 @@ instance Core.ToJSON AsymmetricDecryptResponse where
     Core.object
       ( Core.catMaybes
           [ ("plaintext" Core..=) Core.<$> plaintext,
-            ("plaintextCrc32c" Core..=) Core.. Core.AsText
+            ("plaintextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> plaintextCrc32c,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
             ("verifiedCiphertextCrc32c" Core..=)
@@ -367,13 +427,9 @@ instance Core.FromJSON AsymmetricSignRequest where
       ( \o ->
           AsymmetricSignRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> ( o Core..:? "dataCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "digest")
-            Core.<*> ( o Core..:? "digestCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "digestCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AsymmetricSignRequest where
@@ -381,11 +437,9 @@ instance Core.ToJSON AsymmetricSignRequest where
     Core.object
       ( Core.catMaybes
           [ ("data" Core..=) Core.<$> data',
-            ("dataCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> dataCrc32c,
+            ("dataCrc32c" Core..=) Core.. Core.AsText Core.<$> dataCrc32c,
             ("digest" Core..=) Core.<$> digest,
-            ("digestCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> digestCrc32c
+            ("digestCrc32c" Core..=) Core.. Core.AsText Core.<$> digestCrc32c
           ]
       )
 
@@ -430,9 +484,7 @@ instance Core.FromJSON AsymmetricSignResponse where
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "signature")
-            Core.<*> ( o Core..:? "signatureCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "signatureCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "verifiedDataCrc32c")
             Core.<*> (o Core..:? "verifiedDigestCrc32c")
       )
@@ -444,12 +496,11 @@ instance Core.ToJSON AsymmetricSignResponse where
           [ ("name" Core..=) Core.<$> name,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
             ("signature" Core..=) Core.<$> signature,
-            ("signatureCrc32c" Core..=) Core.. Core.AsText
+            ("signatureCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> signatureCrc32c,
-            ("verifiedDataCrc32c" Core..=)
-              Core.<$> verifiedDataCrc32c,
-            ("verifiedDigestCrc32c" Core..=)
-              Core.<$> verifiedDigestCrc32c
+            ("verifiedDataCrc32c" Core..=) Core.<$> verifiedDataCrc32c,
+            ("verifiedDigestCrc32c" Core..=) Core.<$> verifiedDigestCrc32c
           ]
       )
 
@@ -469,7 +520,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -485,8 +539,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -506,7 +559,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -522,9 +578,52 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
+          ]
+      )
+
+-- | Cloud KMS Autokey configuration for a folder.
+--
+-- /See:/ 'newAutokeyConfig' smart constructor.
+data AutokeyConfig = AutokeyConfig
+  { -- | Optional. Name of the key project, e.g. @projects\/{PROJECT_ID}@ or @projects\/{PROJECT_NUMBER}@, where Cloud KMS Autokey will provision a new CryptoKey when a KeyHandle is created. On UpdateAutokeyConfig, the caller will require @cloudkms.cryptoKeys.setIamPolicy@ permission on this key project. Once configured, for Cloud KMS Autokey to function properly, this key project must have the Cloud KMS API activated and the Cloud KMS Service Agent for this key project must be granted the @cloudkms.admin@ role (or pertinent permissions). A request with an empty key project field will clear the configuration.
+    keyProject :: (Core.Maybe Core.Text),
+    -- | Identifier. Name of the AutokeyConfig resource, e.g. @folders\/{FOLDER_NUMBER}\/autokeyConfig@.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. The state for the AutokeyConfig.
+    state :: (Core.Maybe AutokeyConfig_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutokeyConfig' with the minimum fields required to make a request.
+newAutokeyConfig ::
+  AutokeyConfig
+newAutokeyConfig =
+  AutokeyConfig
+    { keyProject = Core.Nothing,
+      name = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON AutokeyConfig where
+  parseJSON =
+    Core.withObject
+      "AutokeyConfig"
+      ( \o ->
+          AutokeyConfig
+            Core.<$> (o Core..:? "keyProject")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON AutokeyConfig where
+  toJSON AutokeyConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("keyProject" Core..=) Core.<$> keyProject,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state
           ]
       )
 
@@ -535,10 +634,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -642,8 +743,7 @@ instance Core.ToJSON Certificate where
             ("parsed" Core..=) Core.<$> parsed,
             ("rawDer" Core..=) Core.<$> rawDer,
             ("serialNumber" Core..=) Core.<$> serialNumber,
-            ("sha256Fingerprint" Core..=)
-              Core.<$> sha256Fingerprint,
+            ("sha256Fingerprint" Core..=) Core.<$> sha256Fingerprint,
             ("subject" Core..=) Core.<$> subject,
             ("subjectAlternativeDnsNames" Core..=)
               Core.<$> subjectAlternativeDnsNames
@@ -690,8 +790,48 @@ instance Core.ToJSON CertificateChains where
       ( Core.catMaybes
           [ ("caviumCerts" Core..=) Core.<$> caviumCerts,
             ("googleCardCerts" Core..=) Core.<$> googleCardCerts,
-            ("googlePartitionCerts" Core..=)
-              Core.<$> googlePartitionCerts
+            ("googlePartitionCerts" Core..=) Core.<$> googlePartitionCerts
+          ]
+      )
+
+-- | Data with integrity verification field.
+--
+-- /See:/ 'newChecksummedData' smart constructor.
+data ChecksummedData = ChecksummedData
+  { -- | Integrity verification field. A CRC32C checksum of the returned ChecksummedData.data. An integrity check of ChecksummedData.data can be performed by computing the CRC32C checksum of ChecksummedData.data and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed @2^32-1@, and can be safely downconverted to uint32 in languages that support this type.
+    crc32cChecksum :: (Core.Maybe Core.Int64),
+    -- | Raw Data.
+    data' :: (Core.Maybe Core.Base64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChecksummedData' with the minimum fields required to make a request.
+newChecksummedData ::
+  ChecksummedData
+newChecksummedData =
+  ChecksummedData
+    { crc32cChecksum = Core.Nothing,
+      data' = Core.Nothing
+    }
+
+instance Core.FromJSON ChecksummedData where
+  parseJSON =
+    Core.withObject
+      "ChecksummedData"
+      ( \o ->
+          ChecksummedData
+            Core.<$> (o Core..:? "crc32cChecksum" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "data")
+      )
+
+instance Core.ToJSON ChecksummedData where
+  toJSON ChecksummedData {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("crc32cChecksum" Core..=)
+              Core.. Core.AsText
+              Core.<$> crc32cChecksum,
+            ("data" Core..=) Core.<$> data'
           ]
       )
 
@@ -703,10 +843,12 @@ data CryptoKey = CryptoKey
     createTime :: (Core.Maybe Core.DateTime),
     -- | Immutable. The resource name of the backend environment where the key material for all CryptoKeyVersions associated with this CryptoKey reside and where all related cryptographic operations are performed. Only applicable if CryptoKeyVersions have a ProtectionLevel of EXTERNAL_VPC, with the resource name in the format @projects\/*\/locations\/*\/ekmConnections\/*@. Note, this list is non-exhaustive and may apply to additional ProtectionLevels in the future.
     cryptoKeyBackend :: (Core.Maybe Core.Text),
-    -- | Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 24 hours.
+    -- | Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 30 days.
     destroyScheduledDuration :: (Core.Maybe Core.Duration),
     -- | Immutable. Whether this key may contain imported versions only.
     importOnly :: (Core.Maybe Core.Bool),
+    -- | Optional. The policy used for Key Access Justifications Policy Enforcement. If this field is present and this key is enrolled in Key Access Justifications Policy Enforcement, the policy will be evaluated in encrypt, decrypt, and sign operations, and the operation will fail if rejected by the policy. The policy is defined by specifying zero or more allowed justification codes. https:\/\/cloud.google.com\/assured-workloads\/key-access-justifications\/docs\/justification-codes By default, this field is absent, and all justification codes are allowed.
+    keyAccessJustificationsPolicy :: (Core.Maybe KeyAccessJustificationsPolicy),
     -- | Labels with user-defined metadata. For more information, see <https://cloud.google.com/kms/docs/labeling-keys Labeling Keys>.
     labels :: (Core.Maybe CryptoKey_Labels),
     -- | Output only. The resource name for this CryptoKey in the format @projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*@.
@@ -733,6 +875,7 @@ newCryptoKey =
       cryptoKeyBackend = Core.Nothing,
       destroyScheduledDuration = Core.Nothing,
       importOnly = Core.Nothing,
+      keyAccessJustificationsPolicy = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
       nextRotationTime = Core.Nothing,
@@ -752,6 +895,7 @@ instance Core.FromJSON CryptoKey where
             Core.<*> (o Core..:? "cryptoKeyBackend")
             Core.<*> (o Core..:? "destroyScheduledDuration")
             Core.<*> (o Core..:? "importOnly")
+            Core.<*> (o Core..:? "keyAccessJustificationsPolicy")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "nextRotationTime")
@@ -766,20 +910,19 @@ instance Core.ToJSON CryptoKey where
     Core.object
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
-            ("cryptoKeyBackend" Core..=)
-              Core.<$> cryptoKeyBackend,
+            ("cryptoKeyBackend" Core..=) Core.<$> cryptoKeyBackend,
             ("destroyScheduledDuration" Core..=)
               Core.<$> destroyScheduledDuration,
             ("importOnly" Core..=) Core.<$> importOnly,
+            ("keyAccessJustificationsPolicy" Core..=)
+              Core.<$> keyAccessJustificationsPolicy,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
-            ("nextRotationTime" Core..=)
-              Core.<$> nextRotationTime,
+            ("nextRotationTime" Core..=) Core.<$> nextRotationTime,
             ("primary" Core..=) Core.<$> primary,
             ("purpose" Core..=) Core.<$> purpose,
             ("rotationPeriod" Core..=) Core.<$> rotationPeriod,
-            ("versionTemplate" Core..=)
-              Core.<$> versionTemplate
+            ("versionTemplate" Core..=) Core.<$> versionTemplate
           ]
       )
 
@@ -787,8 +930,7 @@ instance Core.ToJSON CryptoKey where
 --
 -- /See:/ 'newCryptoKey_Labels' smart constructor.
 newtype CryptoKey_Labels = CryptoKey_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -797,15 +939,14 @@ newCryptoKey_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   CryptoKey_Labels
-newCryptoKey_Labels additional = CryptoKey_Labels {additional = additional}
+newCryptoKey_Labels additional =
+  CryptoKey_Labels {additional = additional}
 
 instance Core.FromJSON CryptoKey_Labels where
   parseJSON =
     Core.withObject
       "CryptoKey_Labels"
-      ( \o ->
-          CryptoKey_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CryptoKey_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CryptoKey_Labels where
   toJSON CryptoKey_Labels {..} = Core.toJSON additional
@@ -903,8 +1044,7 @@ instance Core.ToJSON CryptoKeyVersion where
           [ ("algorithm" Core..=) Core.<$> algorithm,
             ("attestation" Core..=) Core.<$> attestation,
             ("createTime" Core..=) Core.<$> createTime,
-            ("destroyEventTime" Core..=)
-              Core.<$> destroyEventTime,
+            ("destroyEventTime" Core..=) Core.<$> destroyEventTime,
             ("destroyTime" Core..=) Core.<$> destroyTime,
             ("externalDestructionFailureReason" Core..=)
               Core.<$> externalDestructionFailureReason,
@@ -913,14 +1053,12 @@ instance Core.ToJSON CryptoKeyVersion where
             ("generateTime" Core..=) Core.<$> generateTime,
             ("generationFailureReason" Core..=)
               Core.<$> generationFailureReason,
-            ("importFailureReason" Core..=)
-              Core.<$> importFailureReason,
+            ("importFailureReason" Core..=) Core.<$> importFailureReason,
             ("importJob" Core..=) Core.<$> importJob,
             ("importTime" Core..=) Core.<$> importTime,
             ("name" Core..=) Core.<$> name,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
-            ("reimportEligible" Core..=)
-              Core.<$> reimportEligible,
+            ("reimportEligible" Core..=) Core.<$> reimportEligible,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -960,8 +1098,7 @@ instance Core.ToJSON CryptoKeyVersionTemplate where
     Core.object
       ( Core.catMaybes
           [ ("algorithm" Core..=) Core.<$> algorithm,
-            ("protectionLevel" Core..=)
-              Core.<$> protectionLevel
+            ("protectionLevel" Core..=) Core.<$> protectionLevel
           ]
       )
 
@@ -998,13 +1135,12 @@ instance Core.FromJSON DecryptRequest where
       ( \o ->
           DecryptRequest
             Core.<$> (o Core..:? "additionalAuthenticatedData")
-            Core.<*> ( o Core..:? "additionalAuthenticatedDataCrc32c"
+            Core.<*> ( o
+                         Core..:? "additionalAuthenticatedDataCrc32c"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "ciphertext")
-            Core.<*> ( o Core..:? "ciphertextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "ciphertextCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON DecryptRequest where
@@ -1017,7 +1153,8 @@ instance Core.ToJSON DecryptRequest where
               Core.. Core.AsText
               Core.<$> additionalAuthenticatedDataCrc32c,
             ("ciphertext" Core..=) Core.<$> ciphertext,
-            ("ciphertextCrc32c" Core..=) Core.. Core.AsText
+            ("ciphertextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> ciphertextCrc32c
           ]
       )
@@ -1055,9 +1192,7 @@ instance Core.FromJSON DecryptResponse where
       ( \o ->
           DecryptResponse
             Core.<$> (o Core..:? "plaintext")
-            Core.<*> ( o Core..:? "plaintextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "plaintextCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "usedPrimary")
       )
@@ -1067,7 +1202,8 @@ instance Core.ToJSON DecryptResponse where
     Core.object
       ( Core.catMaybes
           [ ("plaintext" Core..=) Core.<$> plaintext,
-            ("plaintextCrc32c" Core..=) Core.. Core.AsText
+            ("plaintextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> plaintextCrc32c,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
             ("usedPrimary" Core..=) Core.<$> usedPrimary
@@ -1111,7 +1247,11 @@ data Digest = Digest
 newDigest ::
   Digest
 newDigest =
-  Digest {sha256 = Core.Nothing, sha384 = Core.Nothing, sha512 = Core.Nothing}
+  Digest
+    { sha256 = Core.Nothing,
+      sha384 = Core.Nothing,
+      sha512 = Core.Nothing
+    }
 
 instance Core.FromJSON Digest where
   parseJSON =
@@ -1149,7 +1289,10 @@ data EkmConfig = EkmConfig
 newEkmConfig ::
   EkmConfig
 newEkmConfig =
-  EkmConfig {defaultEkmConnection = Core.Nothing, name = Core.Nothing}
+  EkmConfig
+    { defaultEkmConnection = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON EkmConfig where
   parseJSON =
@@ -1165,8 +1308,7 @@ instance Core.ToJSON EkmConfig where
   toJSON EkmConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultEkmConnection" Core..=)
-              Core.<$> defaultEkmConnection,
+          [ ("defaultEkmConnection" Core..=) Core.<$> defaultEkmConnection,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -1185,7 +1327,7 @@ data EkmConnection = EkmConnection
     keyManagementMode :: (Core.Maybe EkmConnection_KeyManagementMode),
     -- | Output only. The resource name for the EkmConnection in the format @projects\/*\/locations\/*\/ekmConnections\/*@.
     name :: (Core.Maybe Core.Text),
-    -- | A list of ServiceResolvers where the EKM can be reached. There should be one ServiceResolver per EKM replica. Currently, only a single ServiceResolver is supported.
+    -- | Optional. A list of ServiceResolvers where the EKM can be reached. There should be one ServiceResolver per EKM replica. Currently, only a single ServiceResolver is supported.
     serviceResolvers :: (Core.Maybe [ServiceResolver])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1224,11 +1366,9 @@ instance Core.ToJSON EkmConnection where
           [ ("createTime" Core..=) Core.<$> createTime,
             ("cryptoSpacePath" Core..=) Core.<$> cryptoSpacePath,
             ("etag" Core..=) Core.<$> etag,
-            ("keyManagementMode" Core..=)
-              Core.<$> keyManagementMode,
+            ("keyManagementMode" Core..=) Core.<$> keyManagementMode,
             ("name" Core..=) Core.<$> name,
-            ("serviceResolvers" Core..=)
-              Core.<$> serviceResolvers
+            ("serviceResolvers" Core..=) Core.<$> serviceResolvers
           ]
       )
 
@@ -1265,13 +1405,12 @@ instance Core.FromJSON EncryptRequest where
       ( \o ->
           EncryptRequest
             Core.<$> (o Core..:? "additionalAuthenticatedData")
-            Core.<*> ( o Core..:? "additionalAuthenticatedDataCrc32c"
+            Core.<*> ( o
+                         Core..:? "additionalAuthenticatedDataCrc32c"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "plaintext")
-            Core.<*> ( o Core..:? "plaintextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "plaintextCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON EncryptRequest where
@@ -1284,7 +1423,8 @@ instance Core.ToJSON EncryptRequest where
               Core.. Core.AsText
               Core.<$> additionalAuthenticatedDataCrc32c,
             ("plaintext" Core..=) Core.<$> plaintext,
-            ("plaintextCrc32c" Core..=) Core.. Core.AsText
+            ("plaintextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> plaintextCrc32c
           ]
       )
@@ -1328,14 +1468,10 @@ instance Core.FromJSON EncryptResponse where
       ( \o ->
           EncryptResponse
             Core.<$> (o Core..:? "ciphertext")
-            Core.<*> ( o Core..:? "ciphertextCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "ciphertextCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
-            Core.<*> ( o
-                         Core..:? "verifiedAdditionalAuthenticatedDataCrc32c"
-                     )
+            Core.<*> (o Core..:? "verifiedAdditionalAuthenticatedDataCrc32c")
             Core.<*> (o Core..:? "verifiedPlaintextCrc32c")
       )
 
@@ -1344,7 +1480,8 @@ instance Core.ToJSON EncryptResponse where
     Core.object
       ( Core.catMaybes
           [ ("ciphertext" Core..=) Core.<$> ciphertext,
-            ("ciphertextCrc32c" Core..=) Core.. Core.AsText
+            ("ciphertextCrc32c" Core..=)
+              Core.. Core.AsText
               Core.<$> ciphertextCrc32c,
             ("name" Core..=) Core.<$> name,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
@@ -1421,7 +1558,8 @@ newExternalProtectionLevelOptions ::
   ExternalProtectionLevelOptions
 newExternalProtectionLevelOptions =
   ExternalProtectionLevelOptions
-    { ekmConnectionKeyPath = Core.Nothing,
+    { ekmConnectionKeyPath =
+        Core.Nothing,
       externalKeyUri = Core.Nothing
     }
 
@@ -1439,8 +1577,7 @@ instance Core.ToJSON ExternalProtectionLevelOptions where
   toJSON ExternalProtectionLevelOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ekmConnectionKeyPath" Core..=)
-              Core.<$> ekmConnectionKeyPath,
+          [ ("ekmConnectionKeyPath" Core..=) Core.<$> ekmConnectionKeyPath,
             ("externalKeyUri" Core..=) Core.<$> externalKeyUri
           ]
       )
@@ -1480,8 +1617,7 @@ instance Core.ToJSON GenerateRandomBytesRequest where
     Core.object
       ( Core.catMaybes
           [ ("lengthBytes" Core..=) Core.<$> lengthBytes,
-            ("protectionLevel" Core..=)
-              Core.<$> protectionLevel
+            ("protectionLevel" Core..=) Core.<$> protectionLevel
           ]
       )
 
@@ -1500,7 +1636,10 @@ data GenerateRandomBytesResponse = GenerateRandomBytesResponse
 newGenerateRandomBytesResponse ::
   GenerateRandomBytesResponse
 newGenerateRandomBytesResponse =
-  GenerateRandomBytesResponse {data' = Core.Nothing, dataCrc32c = Core.Nothing}
+  GenerateRandomBytesResponse
+    { data' = Core.Nothing,
+      dataCrc32c = Core.Nothing
+    }
 
 instance Core.FromJSON GenerateRandomBytesResponse where
   parseJSON =
@@ -1509,9 +1648,7 @@ instance Core.FromJSON GenerateRandomBytesResponse where
       ( \o ->
           GenerateRandomBytesResponse
             Core.<$> (o Core..:? "data")
-            Core.<*> ( o Core..:? "dataCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON GenerateRandomBytesResponse where
@@ -1519,8 +1656,7 @@ instance Core.ToJSON GenerateRandomBytesResponse where
     Core.object
       ( Core.catMaybes
           [ ("data" Core..=) Core.<$> data',
-            ("dataCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> dataCrc32c
+            ("dataCrc32c" Core..=) Core.. Core.AsText Core.<$> dataCrc32c
           ]
       )
 
@@ -1572,11 +1708,9 @@ instance Core.ToJSON ImportCryptoKeyVersionRequest where
     Core.object
       ( Core.catMaybes
           [ ("algorithm" Core..=) Core.<$> algorithm,
-            ("cryptoKeyVersion" Core..=)
-              Core.<$> cryptoKeyVersion,
+            ("cryptoKeyVersion" Core..=) Core.<$> cryptoKeyVersion,
             ("importJob" Core..=) Core.<$> importJob,
-            ("rsaAesWrappedKey" Core..=)
-              Core.<$> rsaAesWrappedKey,
+            ("rsaAesWrappedKey" Core..=) Core.<$> rsaAesWrappedKey,
             ("wrappedKey" Core..=) Core.<$> wrappedKey
           ]
       )
@@ -1661,6 +1795,87 @@ instance Core.ToJSON ImportJob where
           ]
       )
 
+-- | A KeyAccessJustificationsPolicy specifies zero or more allowed AccessReason values for encrypt, decrypt, and sign operations on a CryptoKey.
+--
+-- /See:/ 'newKeyAccessJustificationsPolicy' smart constructor.
+newtype KeyAccessJustificationsPolicy = KeyAccessJustificationsPolicy
+  { -- | The list of allowed reasons for access to a CryptoKey. Zero allowed access reasons means all encrypt, decrypt, and sign operations for the CryptoKey associated with this policy will fail.
+    allowedAccessReasons ::
+      ( Core.Maybe
+          [KeyAccessJustificationsPolicy_AllowedAccessReasonsItem]
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyAccessJustificationsPolicy' with the minimum fields required to make a request.
+newKeyAccessJustificationsPolicy ::
+  KeyAccessJustificationsPolicy
+newKeyAccessJustificationsPolicy =
+  KeyAccessJustificationsPolicy
+    { allowedAccessReasons =
+        Core.Nothing
+    }
+
+instance Core.FromJSON KeyAccessJustificationsPolicy where
+  parseJSON =
+    Core.withObject
+      "KeyAccessJustificationsPolicy"
+      ( \o ->
+          KeyAccessJustificationsPolicy
+            Core.<$> (o Core..:? "allowedAccessReasons")
+      )
+
+instance Core.ToJSON KeyAccessJustificationsPolicy where
+  toJSON KeyAccessJustificationsPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [("allowedAccessReasons" Core..=) Core.<$> allowedAccessReasons]
+      )
+
+-- | Resource-oriented representation of a request to Cloud KMS Autokey and the resulting provisioning of a CryptoKey.
+--
+-- /See:/ 'newKeyHandle' smart constructor.
+data KeyHandle = KeyHandle
+  { -- | Output only. Name of a CryptoKey that has been provisioned for Customer Managed Encryption Key (CMEK) use in the KeyHandle project and location for the requested resource type. The CryptoKey project will reflect the value configured in the AutokeyConfig on the resource project\'s ancestor folder at the time of the KeyHandle creation. If more than one ancestor folder has a configured AutokeyConfig, the nearest of these configurations is used.
+    kmsKey :: (Core.Maybe Core.Text),
+    -- | Identifier. Name of the KeyHandle resource, e.g. @projects\/{PROJECT_ID}\/locations\/{LOCATION}\/keyHandles\/{KEY_HANDLE_ID}@.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Indicates the resource type that the resulting CryptoKey is meant to protect, e.g. @{SERVICE}.googleapis.com\/{TYPE}@. See documentation for supported resource types.
+    resourceTypeSelector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'KeyHandle' with the minimum fields required to make a request.
+newKeyHandle ::
+  KeyHandle
+newKeyHandle =
+  KeyHandle
+    { kmsKey = Core.Nothing,
+      name = Core.Nothing,
+      resourceTypeSelector = Core.Nothing
+    }
+
+instance Core.FromJSON KeyHandle where
+  parseJSON =
+    Core.withObject
+      "KeyHandle"
+      ( \o ->
+          KeyHandle
+            Core.<$> (o Core..:? "kmsKey")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "resourceTypeSelector")
+      )
+
+instance Core.ToJSON KeyHandle where
+  toJSON KeyHandle {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kmsKey" Core..=) Core.<$> kmsKey,
+            ("name" Core..=) Core.<$> name,
+            ("resourceTypeSelector" Core..=) Core.<$> resourceTypeSelector
+          ]
+      )
+
 -- | Contains an HSM-generated attestation about a key operation. For more information, see [Verifying attestations] (https:\/\/cloud.google.com\/kms\/docs\/attest-key).
 --
 -- /See:/ 'newKeyOperationAttestation' smart constructor.
@@ -1719,7 +1934,8 @@ data KeyRing = KeyRing
 -- | Creates a value of 'KeyRing' with the minimum fields required to make a request.
 newKeyRing ::
   KeyRing
-newKeyRing = KeyRing {createTime = Core.Nothing, name = Core.Nothing}
+newKeyRing =
+  KeyRing {createTime = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON KeyRing where
   parseJSON =
@@ -1778,8 +1994,7 @@ instance Core.ToJSON ListCryptoKeyVersionsResponse where
   toJSON ListCryptoKeyVersionsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cryptoKeyVersions" Core..=)
-              Core.<$> cryptoKeyVersions,
+          [ ("cryptoKeyVersions" Core..=) Core.<$> cryptoKeyVersions,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("totalSize" Core..=) Core.<$> totalSize
           ]
@@ -1917,6 +2132,45 @@ instance Core.ToJSON ListImportJobsResponse where
           ]
       )
 
+-- | Response message for Autokey.ListKeyHandles.
+--
+-- /See:/ 'newListKeyHandlesResponse' smart constructor.
+data ListKeyHandlesResponse = ListKeyHandlesResponse
+  { -- | Resulting KeyHandles.
+    keyHandles :: (Core.Maybe [KeyHandle]),
+    -- | A token to retrieve next page of results. Pass this value in ListKeyHandlesRequest.page_token to retrieve the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListKeyHandlesResponse' with the minimum fields required to make a request.
+newListKeyHandlesResponse ::
+  ListKeyHandlesResponse
+newListKeyHandlesResponse =
+  ListKeyHandlesResponse
+    { keyHandles = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListKeyHandlesResponse where
+  parseJSON =
+    Core.withObject
+      "ListKeyHandlesResponse"
+      ( \o ->
+          ListKeyHandlesResponse
+            Core.<$> (o Core..:? "keyHandles")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListKeyHandlesResponse where
+  toJSON ListKeyHandlesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("keyHandles" Core..=) Core.<$> keyHandles,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
 -- | Response message for KeyManagementService.ListKeyRings.
 --
 -- /See:/ 'newListKeyRingsResponse' smart constructor.
@@ -1976,7 +2230,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -1997,7 +2254,7 @@ instance Core.ToJSON ListLocationsResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -2055,8 +2312,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2065,15 +2321,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -2092,15 +2347,14 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
@@ -2120,7 +2374,10 @@ data LocationMetadata = LocationMetadata
 newLocationMetadata ::
   LocationMetadata
 newLocationMetadata =
-  LocationMetadata {ekmAvailable = Core.Nothing, hsmAvailable = Core.Nothing}
+  LocationMetadata
+    { ekmAvailable = Core.Nothing,
+      hsmAvailable = Core.Nothing
+    }
 
 instance Core.FromJSON LocationMetadata where
   parseJSON =
@@ -2165,9 +2422,7 @@ instance Core.FromJSON MacSignRequest where
       ( \o ->
           MacSignRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> ( o Core..:? "dataCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MacSignRequest where
@@ -2175,8 +2430,7 @@ instance Core.ToJSON MacSignRequest where
     Core.object
       ( Core.catMaybes
           [ ("data" Core..=) Core.<$> data',
-            ("dataCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> dataCrc32c
+            ("dataCrc32c" Core..=) Core.. Core.AsText Core.<$> dataCrc32c
           ]
       )
 
@@ -2216,9 +2470,7 @@ instance Core.FromJSON MacSignResponse where
       ( \o ->
           MacSignResponse
             Core.<$> (o Core..:? "mac")
-            Core.<*> ( o Core..:? "macCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "macCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "protectionLevel")
             Core.<*> (o Core..:? "verifiedDataCrc32c")
@@ -2229,12 +2481,10 @@ instance Core.ToJSON MacSignResponse where
     Core.object
       ( Core.catMaybes
           [ ("mac" Core..=) Core.<$> mac,
-            ("macCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> macCrc32c,
+            ("macCrc32c" Core..=) Core.. Core.AsText Core.<$> macCrc32c,
             ("name" Core..=) Core.<$> name,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
-            ("verifiedDataCrc32c" Core..=)
-              Core.<$> verifiedDataCrc32c
+            ("verifiedDataCrc32c" Core..=) Core.<$> verifiedDataCrc32c
           ]
       )
 
@@ -2248,7 +2498,7 @@ data MacVerifyRequest = MacVerifyRequest
     dataCrc32c :: (Core.Maybe Core.Int64),
     -- | Required. The signature to verify.
     mac :: (Core.Maybe Core.Base64),
-    -- | Optional. An optional CRC32C checksum of the MacVerifyRequest.mac. If specified, KeyManagementService will verify the integrity of the received MacVerifyRequest.mac using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(MacVerifyRequest.tag) is equal to MacVerifyRequest.mac_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    -- | Optional. An optional CRC32C checksum of the MacVerifyRequest.mac. If specified, KeyManagementService will verify the integrity of the received MacVerifyRequest.mac using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(MacVerifyRequest.mac) is equal to MacVerifyRequest.mac_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
     macCrc32c :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2271,13 +2521,9 @@ instance Core.FromJSON MacVerifyRequest where
       ( \o ->
           MacVerifyRequest
             Core.<$> (o Core..:? "data")
-            Core.<*> ( o Core..:? "dataCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "mac")
-            Core.<*> ( o Core..:? "macCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "macCrc32c" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MacVerifyRequest where
@@ -2285,11 +2531,9 @@ instance Core.ToJSON MacVerifyRequest where
     Core.object
       ( Core.catMaybes
           [ ("data" Core..=) Core.<$> data',
-            ("dataCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> dataCrc32c,
+            ("dataCrc32c" Core..=) Core.. Core.AsText Core.<$> dataCrc32c,
             ("mac" Core..=) Core.<$> mac,
-            ("macCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> macCrc32c
+            ("macCrc32c" Core..=) Core.. Core.AsText Core.<$> macCrc32c
           ]
       )
 
@@ -2346,18 +2590,122 @@ instance Core.ToJSON MacVerifyResponse where
           [ ("name" Core..=) Core.<$> name,
             ("protectionLevel" Core..=) Core.<$> protectionLevel,
             ("success" Core..=) Core.<$> success,
-            ("verifiedDataCrc32c" Core..=)
-              Core.<$> verifiedDataCrc32c,
-            ("verifiedMacCrc32c" Core..=)
-              Core.<$> verifiedMacCrc32c,
+            ("verifiedDataCrc32c" Core..=) Core.<$> verifiedDataCrc32c,
+            ("verifiedMacCrc32c" Core..=) Core.<$> verifiedMacCrc32c,
             ("verifiedSuccessIntegrity" Core..=)
               Core.<$> verifiedSuccessIntegrity
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | This resource represents a long-running operation that is the result of a network API call.
+--
+-- /See:/ 'newOperation' smart constructor.
+data Operation = Operation
+  { -- | If the value is @false@, it means the operation is still in progress. If @true@, the operation is completed, and either @error@ or @response@ is available.
+    done :: (Core.Maybe Core.Bool),
+    -- | The error result of the operation in case of failure or cancellation.
+    error :: (Core.Maybe Status),
+    -- | Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+    metadata :: (Core.Maybe Operation_Metadata),
+    -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
+    name :: (Core.Maybe Core.Text),
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    response :: (Core.Maybe Operation_Response)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Operation' with the minimum fields required to make a request.
+newOperation ::
+  Operation
+newOperation =
+  Operation
+    { done = Core.Nothing,
+      error = Core.Nothing,
+      metadata = Core.Nothing,
+      name = Core.Nothing,
+      response = Core.Nothing
+    }
+
+instance Core.FromJSON Operation where
+  parseJSON =
+    Core.withObject
+      "Operation"
+      ( \o ->
+          Operation
+            Core.<$> (o Core..:? "done")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "metadata")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "response")
+      )
+
+instance Core.ToJSON Operation where
+  toJSON Operation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("done" Core..=) Core.<$> done,
+            ("error" Core..=) Core.<$> error,
+            ("metadata" Core..=) Core.<$> metadata,
+            ("name" Core..=) Core.<$> name,
+            ("response" Core..=) Core.<$> response
+          ]
+      )
+
+-- | Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+--
+-- /See:/ 'newOperation_Metadata' smart constructor.
+newtype Operation_Metadata = Operation_Metadata
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Operation_Metadata' with the minimum fields required to make a request.
+newOperation_Metadata ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Operation_Metadata
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
+
+instance Core.FromJSON Operation_Metadata where
+  parseJSON =
+    Core.withObject
+      "Operation_Metadata"
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Operation_Metadata where
+  toJSON Operation_Metadata {..} = Core.toJSON additional
+
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+--
+-- /See:/ 'newOperation_Response' smart constructor.
+newtype Operation_Response = Operation_Response
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Operation_Response' with the minimum fields required to make a request.
+newOperation_Response ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Operation_Response
+newOperation_Response additional =
+  Operation_Response {additional = additional}
+
+instance Core.FromJSON Operation_Response where
+  parseJSON =
+    Core.withObject
+      "Operation_Response"
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Operation_Response where
+  toJSON Operation_Response {..} = Core.toJSON additional
+
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -2407,7 +2755,7 @@ instance Core.ToJSON Policy where
           ]
       )
 
--- | The public key for a given CryptoKeyVersion. Obtained via GetPublicKey.
+-- | The public keys for a given CryptoKeyVersion. Obtained via GetPublicKey.
 --
 -- /See:/ 'newPublicKey' smart constructor.
 data PublicKey = PublicKey
@@ -2417,10 +2765,14 @@ data PublicKey = PublicKey
     name :: (Core.Maybe Core.Text),
     -- | The public key, encoded in PEM format. For more information, see the <https://tools.ietf.org/html/rfc7468 RFC 7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13).
     pem :: (Core.Maybe Core.Text),
-    -- | Integrity verification field. A CRC32C checksum of the returned PublicKey.pem. An integrity check of PublicKey.pem can be performed by computing the CRC32C checksum of PublicKey.pem and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta.
+    -- | Integrity verification field. A CRC32C checksum of the returned PublicKey.pem. An integrity check of PublicKey.pem can be performed by computing the CRC32C checksum of PublicKey.pem and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed @2^32-1@, and can be safely downconverted to uint32 in languages that support this type. NOTE: This field is in Beta.
     pemCrc32c :: (Core.Maybe Core.Int64),
     -- | The ProtectionLevel of the CryptoKeyVersion public key.
-    protectionLevel :: (Core.Maybe PublicKey_ProtectionLevel)
+    protectionLevel :: (Core.Maybe PublicKey_ProtectionLevel),
+    -- | This field contains the public key (with integrity verification), formatted according to the public/key/format field.
+    publicKey :: (Core.Maybe ChecksummedData),
+    -- | The PublicKey format specified by the customer through the public/key/format field.
+    publicKeyFormat :: (Core.Maybe PublicKey_PublicKeyFormat)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2433,7 +2785,9 @@ newPublicKey =
       name = Core.Nothing,
       pem = Core.Nothing,
       pemCrc32c = Core.Nothing,
-      protectionLevel = Core.Nothing
+      protectionLevel = Core.Nothing,
+      publicKey = Core.Nothing,
+      publicKeyFormat = Core.Nothing
     }
 
 instance Core.FromJSON PublicKey where
@@ -2445,10 +2799,10 @@ instance Core.FromJSON PublicKey where
             Core.<$> (o Core..:? "algorithm")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pem")
-            Core.<*> ( o Core..:? "pemCrc32c"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "pemCrc32c" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "protectionLevel")
+            Core.<*> (o Core..:? "publicKey")
+            Core.<*> (o Core..:? "publicKeyFormat")
       )
 
 instance Core.ToJSON PublicKey where
@@ -2458,10 +2812,312 @@ instance Core.ToJSON PublicKey where
           [ ("algorithm" Core..=) Core.<$> algorithm,
             ("name" Core..=) Core.<$> name,
             ("pem" Core..=) Core.<$> pem,
-            ("pemCrc32c" Core..=) Core.. Core.AsText
-              Core.<$> pemCrc32c,
-            ("protectionLevel" Core..=)
-              Core.<$> protectionLevel
+            ("pemCrc32c" Core..=) Core.. Core.AsText Core.<$> pemCrc32c,
+            ("protectionLevel" Core..=) Core.<$> protectionLevel,
+            ("publicKey" Core..=) Core.<$> publicKey,
+            ("publicKeyFormat" Core..=) Core.<$> publicKeyFormat
+          ]
+      )
+
+-- | Request message for KeyManagementService.RawDecrypt.
+--
+-- /See:/ 'newRawDecryptRequest' smart constructor.
+data RawDecryptRequest = RawDecryptRequest
+  { -- | Optional. Optional data that must match the data originally supplied in RawEncryptRequest.additional/authenticated/data.
+    additionalAuthenticatedData :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawDecryptRequest.additional/authenticated/data. If specified, KeyManagementService will verify the integrity of the received additional/authenticated/data using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(additional/authenticated/data) is equal to additional/authenticated/data_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    additionalAuthenticatedDataCrc32c :: (Core.Maybe Core.Int64),
+    -- | Required. The encrypted data originally returned in RawEncryptResponse.ciphertext.
+    ciphertext :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawDecryptRequest.ciphertext. If specified, KeyManagementService will verify the integrity of the received ciphertext using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(ciphertext) is equal to ciphertext_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    ciphertextCrc32c :: (Core.Maybe Core.Int64),
+    -- | Required. The initialization vector (IV) used during encryption, which must match the data originally provided in RawEncryptResponse.initialization_vector.
+    initializationVector :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawDecryptRequest.initialization/vector. If specified, KeyManagementService will verify the integrity of the received initialization/vector using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(initialization/vector) is equal to initialization/vector_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    initializationVectorCrc32c :: (Core.Maybe Core.Int64),
+    -- | The length of the authentication tag that is appended to the end of the ciphertext. If unspecified (0), the default value for the key\'s algorithm will be used (for AES-GCM, the default value is 16).
+    tagLength :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RawDecryptRequest' with the minimum fields required to make a request.
+newRawDecryptRequest ::
+  RawDecryptRequest
+newRawDecryptRequest =
+  RawDecryptRequest
+    { additionalAuthenticatedData = Core.Nothing,
+      additionalAuthenticatedDataCrc32c = Core.Nothing,
+      ciphertext = Core.Nothing,
+      ciphertextCrc32c = Core.Nothing,
+      initializationVector = Core.Nothing,
+      initializationVectorCrc32c = Core.Nothing,
+      tagLength = Core.Nothing
+    }
+
+instance Core.FromJSON RawDecryptRequest where
+  parseJSON =
+    Core.withObject
+      "RawDecryptRequest"
+      ( \o ->
+          RawDecryptRequest
+            Core.<$> (o Core..:? "additionalAuthenticatedData")
+            Core.<*> ( o
+                         Core..:? "additionalAuthenticatedDataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "ciphertext")
+            Core.<*> (o Core..:? "ciphertextCrc32c" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "initializationVector")
+            Core.<*> ( o
+                         Core..:? "initializationVectorCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "tagLength")
+      )
+
+instance Core.ToJSON RawDecryptRequest where
+  toJSON RawDecryptRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalAuthenticatedData" Core..=)
+              Core.<$> additionalAuthenticatedData,
+            ("additionalAuthenticatedDataCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> additionalAuthenticatedDataCrc32c,
+            ("ciphertext" Core..=) Core.<$> ciphertext,
+            ("ciphertextCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> ciphertextCrc32c,
+            ("initializationVector" Core..=) Core.<$> initializationVector,
+            ("initializationVectorCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> initializationVectorCrc32c,
+            ("tagLength" Core..=) Core.<$> tagLength
+          ]
+      )
+
+-- | Response message for KeyManagementService.RawDecrypt.
+--
+-- /See:/ 'newRawDecryptResponse' smart constructor.
+data RawDecryptResponse = RawDecryptResponse
+  { -- | The decrypted data.
+    plaintext :: (Core.Maybe Core.Base64),
+    -- | Integrity verification field. A CRC32C checksum of the returned RawDecryptResponse.plaintext. An integrity check of plaintext can be performed by computing the CRC32C checksum of plaintext and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: receiving this response message indicates that KeyManagementService is able to successfully decrypt the ciphertext. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    plaintextCrc32c :: (Core.Maybe Core.Int64),
+    -- | The ProtectionLevel of the CryptoKeyVersion used in decryption.
+    protectionLevel :: (Core.Maybe RawDecryptResponse_ProtectionLevel),
+    -- | Integrity verification field. A flag indicating whether RawDecryptRequest.additional/authenticated/data/crc32c was received by KeyManagementService and used for the integrity verification of additional/authenticated/data. A false value of this field indicates either that \/\/ RawDecryptRequest.additional/authenticated/data/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawDecryptRequest.additional/authenticated/data_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedAdditionalAuthenticatedDataCrc32c :: (Core.Maybe Core.Bool),
+    -- | Integrity verification field. A flag indicating whether RawDecryptRequest.ciphertext/crc32c was received by KeyManagementService and used for the integrity verification of the ciphertext. A false value of this field indicates either that RawDecryptRequest.ciphertext/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawDecryptRequest.ciphertext_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedCiphertextCrc32c :: (Core.Maybe Core.Bool),
+    -- | Integrity verification field. A flag indicating whether RawDecryptRequest.initialization/vector/crc32c was received by KeyManagementService and used for the integrity verification of initialization/vector. A false value of this field indicates either that RawDecryptRequest.initialization/vector/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawDecryptRequest.initialization/vector_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedInitializationVectorCrc32c :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RawDecryptResponse' with the minimum fields required to make a request.
+newRawDecryptResponse ::
+  RawDecryptResponse
+newRawDecryptResponse =
+  RawDecryptResponse
+    { plaintext = Core.Nothing,
+      plaintextCrc32c = Core.Nothing,
+      protectionLevel = Core.Nothing,
+      verifiedAdditionalAuthenticatedDataCrc32c = Core.Nothing,
+      verifiedCiphertextCrc32c = Core.Nothing,
+      verifiedInitializationVectorCrc32c = Core.Nothing
+    }
+
+instance Core.FromJSON RawDecryptResponse where
+  parseJSON =
+    Core.withObject
+      "RawDecryptResponse"
+      ( \o ->
+          RawDecryptResponse
+            Core.<$> (o Core..:? "plaintext")
+            Core.<*> (o Core..:? "plaintextCrc32c" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "protectionLevel")
+            Core.<*> (o Core..:? "verifiedAdditionalAuthenticatedDataCrc32c")
+            Core.<*> (o Core..:? "verifiedCiphertextCrc32c")
+            Core.<*> (o Core..:? "verifiedInitializationVectorCrc32c")
+      )
+
+instance Core.ToJSON RawDecryptResponse where
+  toJSON RawDecryptResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("plaintext" Core..=) Core.<$> plaintext,
+            ("plaintextCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> plaintextCrc32c,
+            ("protectionLevel" Core..=) Core.<$> protectionLevel,
+            ("verifiedAdditionalAuthenticatedDataCrc32c" Core..=)
+              Core.<$> verifiedAdditionalAuthenticatedDataCrc32c,
+            ("verifiedCiphertextCrc32c" Core..=)
+              Core.<$> verifiedCiphertextCrc32c,
+            ("verifiedInitializationVectorCrc32c" Core..=)
+              Core.<$> verifiedInitializationVectorCrc32c
+          ]
+      )
+
+-- | Request message for KeyManagementService.RawEncrypt.
+--
+-- /See:/ 'newRawEncryptRequest' smart constructor.
+data RawEncryptRequest = RawEncryptRequest
+  { -- | Optional. Optional data that, if specified, must also be provided during decryption through RawDecryptRequest.additional/authenticated/data. This field may only be used in conjunction with an algorithm that accepts additional authenticated data (for example, AES-GCM). The maximum size depends on the key version\'s protection/level. For SOFTWARE keys, the plaintext must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated_data fields must be no larger than 8KiB.
+    additionalAuthenticatedData :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawEncryptRequest.additional/authenticated/data. If specified, KeyManagementService will verify the integrity of the received additional/authenticated/data using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(additional/authenticated/data) is equal to additional/authenticated/data_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    additionalAuthenticatedDataCrc32c :: (Core.Maybe Core.Int64),
+    -- | Optional. A customer-supplied initialization vector that will be used for encryption. If it is not provided for AES-CBC and AES-CTR, one will be generated. It will be returned in RawEncryptResponse.initialization_vector.
+    initializationVector :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawEncryptRequest.initialization/vector. If specified, KeyManagementService will verify the integrity of the received initialization/vector using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(initialization/vector) is equal to initialization/vector_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    initializationVectorCrc32c :: (Core.Maybe Core.Int64),
+    -- | Required. The data to encrypt. Must be no larger than 64KiB. The maximum size depends on the key version\'s protection/level. For SOFTWARE keys, the plaintext must be no larger than 64KiB. For HSM keys, the combined length of the plaintext and additional/authenticated_data fields must be no larger than 8KiB.
+    plaintext :: (Core.Maybe Core.Base64),
+    -- | Optional. An optional CRC32C checksum of the RawEncryptRequest.plaintext. If specified, KeyManagementService will verify the integrity of the received plaintext using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(plaintext) is equal to plaintext_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    plaintextCrc32c :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RawEncryptRequest' with the minimum fields required to make a request.
+newRawEncryptRequest ::
+  RawEncryptRequest
+newRawEncryptRequest =
+  RawEncryptRequest
+    { additionalAuthenticatedData = Core.Nothing,
+      additionalAuthenticatedDataCrc32c = Core.Nothing,
+      initializationVector = Core.Nothing,
+      initializationVectorCrc32c = Core.Nothing,
+      plaintext = Core.Nothing,
+      plaintextCrc32c = Core.Nothing
+    }
+
+instance Core.FromJSON RawEncryptRequest where
+  parseJSON =
+    Core.withObject
+      "RawEncryptRequest"
+      ( \o ->
+          RawEncryptRequest
+            Core.<$> (o Core..:? "additionalAuthenticatedData")
+            Core.<*> ( o
+                         Core..:? "additionalAuthenticatedDataCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "initializationVector")
+            Core.<*> ( o
+                         Core..:? "initializationVectorCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "plaintext")
+            Core.<*> (o Core..:? "plaintextCrc32c" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON RawEncryptRequest where
+  toJSON RawEncryptRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalAuthenticatedData" Core..=)
+              Core.<$> additionalAuthenticatedData,
+            ("additionalAuthenticatedDataCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> additionalAuthenticatedDataCrc32c,
+            ("initializationVector" Core..=) Core.<$> initializationVector,
+            ("initializationVectorCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> initializationVectorCrc32c,
+            ("plaintext" Core..=) Core.<$> plaintext,
+            ("plaintextCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> plaintextCrc32c
+          ]
+      )
+
+-- | Response message for KeyManagementService.RawEncrypt.
+--
+-- /See:/ 'newRawEncryptResponse' smart constructor.
+data RawEncryptResponse = RawEncryptResponse
+  { -- | The encrypted data. In the case of AES-GCM, the authentication tag is the tag_length bytes at the end of this field.
+    ciphertext :: (Core.Maybe Core.Base64),
+    -- | Integrity verification field. A CRC32C checksum of the returned RawEncryptResponse.ciphertext. An integrity check of ciphertext can be performed by computing the CRC32C checksum of ciphertext and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    ciphertextCrc32c :: (Core.Maybe Core.Int64),
+    -- | The initialization vector (IV) generated by the service during encryption. This value must be stored and provided in RawDecryptRequest.initialization_vector at decryption time.
+    initializationVector :: (Core.Maybe Core.Base64),
+    -- | Integrity verification field. A CRC32C checksum of the returned RawEncryptResponse.initialization/vector. An integrity check of initialization/vector can be performed by computing the CRC32C checksum of initialization_vector and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type.
+    initializationVectorCrc32c :: (Core.Maybe Core.Int64),
+    -- | The resource name of the CryptoKeyVersion used in encryption. Check this field to verify that the intended resource was used for encryption.
+    name :: (Core.Maybe Core.Text),
+    -- | The ProtectionLevel of the CryptoKeyVersion used in encryption.
+    protectionLevel :: (Core.Maybe RawEncryptResponse_ProtectionLevel),
+    -- | The length of the authentication tag that is appended to the end of the ciphertext.
+    tagLength :: (Core.Maybe Core.Int32),
+    -- | Integrity verification field. A flag indicating whether RawEncryptRequest.additional/authenticated/data/crc32c was received by KeyManagementService and used for the integrity verification of additional/authenticated/data. A false value of this field indicates either that \/\/ RawEncryptRequest.additional/authenticated/data/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawEncryptRequest.additional/authenticated/data_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedAdditionalAuthenticatedDataCrc32c :: (Core.Maybe Core.Bool),
+    -- | Integrity verification field. A flag indicating whether RawEncryptRequest.initialization/vector/crc32c was received by KeyManagementService and used for the integrity verification of initialization/vector. A false value of this field indicates either that RawEncryptRequest.initialization/vector/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawEncryptRequest.initialization/vector_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedInitializationVectorCrc32c :: (Core.Maybe Core.Bool),
+    -- | Integrity verification field. A flag indicating whether RawEncryptRequest.plaintext/crc32c was received by KeyManagementService and used for the integrity verification of the plaintext. A false value of this field indicates either that RawEncryptRequest.plaintext/crc32c was left unset or that it was not delivered to KeyManagementService. If you\'ve set RawEncryptRequest.plaintext_crc32c but this field is still false, discard the response and perform a limited number of retries.
+    verifiedPlaintextCrc32c :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RawEncryptResponse' with the minimum fields required to make a request.
+newRawEncryptResponse ::
+  RawEncryptResponse
+newRawEncryptResponse =
+  RawEncryptResponse
+    { ciphertext = Core.Nothing,
+      ciphertextCrc32c = Core.Nothing,
+      initializationVector = Core.Nothing,
+      initializationVectorCrc32c = Core.Nothing,
+      name = Core.Nothing,
+      protectionLevel = Core.Nothing,
+      tagLength = Core.Nothing,
+      verifiedAdditionalAuthenticatedDataCrc32c = Core.Nothing,
+      verifiedInitializationVectorCrc32c = Core.Nothing,
+      verifiedPlaintextCrc32c = Core.Nothing
+    }
+
+instance Core.FromJSON RawEncryptResponse where
+  parseJSON =
+    Core.withObject
+      "RawEncryptResponse"
+      ( \o ->
+          RawEncryptResponse
+            Core.<$> (o Core..:? "ciphertext")
+            Core.<*> (o Core..:? "ciphertextCrc32c" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "initializationVector")
+            Core.<*> ( o
+                         Core..:? "initializationVectorCrc32c"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "protectionLevel")
+            Core.<*> (o Core..:? "tagLength")
+            Core.<*> (o Core..:? "verifiedAdditionalAuthenticatedDataCrc32c")
+            Core.<*> (o Core..:? "verifiedInitializationVectorCrc32c")
+            Core.<*> (o Core..:? "verifiedPlaintextCrc32c")
+      )
+
+instance Core.ToJSON RawEncryptResponse where
+  toJSON RawEncryptResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("ciphertext" Core..=) Core.<$> ciphertext,
+            ("ciphertextCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> ciphertextCrc32c,
+            ("initializationVector" Core..=) Core.<$> initializationVector,
+            ("initializationVectorCrc32c" Core..=)
+              Core.. Core.AsText
+              Core.<$> initializationVectorCrc32c,
+            ("name" Core..=) Core.<$> name,
+            ("protectionLevel" Core..=) Core.<$> protectionLevel,
+            ("tagLength" Core..=) Core.<$> tagLength,
+            ("verifiedAdditionalAuthenticatedDataCrc32c" Core..=)
+              Core.<$> verifiedAdditionalAuthenticatedDataCrc32c,
+            ("verifiedInitializationVectorCrc32c" Core..=)
+              Core.<$> verifiedInitializationVectorCrc32c,
+            ("verifiedPlaintextCrc32c" Core..=)
+              Core.<$> verifiedPlaintextCrc32c
           ]
       )
 
@@ -2529,8 +3185,7 @@ instance Core.ToJSON ServiceResolver where
       ( Core.catMaybes
           [ ("endpointFilter" Core..=) Core.<$> endpointFilter,
             ("hostname" Core..=) Core.<$> hostname,
-            ("serverCertificates" Core..=)
-              Core.<$> serverCertificates,
+            ("serverCertificates" Core..=) Core.<$> serverCertificates,
             ("serviceDirectoryService" Core..=)
               Core.<$> serviceDirectoryService
           ]
@@ -2551,7 +3206,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -2571,6 +3229,104 @@ instance Core.ToJSON SetIamPolicyRequest where
             ("updateMask" Core..=) Core.<$> updateMask
           ]
       )
+
+-- | Response message for ShowEffectiveAutokeyConfig.
+--
+-- /See:/ 'newShowEffectiveAutokeyConfigResponse' smart constructor.
+newtype ShowEffectiveAutokeyConfigResponse = ShowEffectiveAutokeyConfigResponse
+  { -- | Name of the key project configured in the resource project\'s folder ancestry.
+    keyProject :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ShowEffectiveAutokeyConfigResponse' with the minimum fields required to make a request.
+newShowEffectiveAutokeyConfigResponse ::
+  ShowEffectiveAutokeyConfigResponse
+newShowEffectiveAutokeyConfigResponse =
+  ShowEffectiveAutokeyConfigResponse {keyProject = Core.Nothing}
+
+instance Core.FromJSON ShowEffectiveAutokeyConfigResponse where
+  parseJSON =
+    Core.withObject
+      "ShowEffectiveAutokeyConfigResponse"
+      ( \o ->
+          ShowEffectiveAutokeyConfigResponse
+            Core.<$> (o Core..:? "keyProject")
+      )
+
+instance Core.ToJSON ShowEffectiveAutokeyConfigResponse where
+  toJSON ShowEffectiveAutokeyConfigResponse {..} =
+    Core.object
+      (Core.catMaybes [("keyProject" Core..=) Core.<$> keyProject])
+
+-- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
+--
+-- /See:/ 'newStatus' smart constructor.
+data Status = Status
+  { -- | The status code, which should be an enum value of google.rpc.Code.
+    code :: (Core.Maybe Core.Int32),
+    -- | A list of messages that carry the error details. There is a common set of message types for APIs to use.
+    details :: (Core.Maybe [Status_DetailsItem]),
+    -- | A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+newStatus ::
+  Status
+newStatus =
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON Status where
+  parseJSON =
+    Core.withObject
+      "Status"
+      ( \o ->
+          Status
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "details")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON Status where
+  toJSON Status {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("details" Core..=) Core.<$> details,
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newStatus_DetailsItem' smart constructor.
+newtype Status_DetailsItem = Status_DetailsItem
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Status_DetailsItem' with the minimum fields required to make a request.
+newStatus_DetailsItem ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Status_DetailsItem
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
+
+instance Core.FromJSON Status_DetailsItem where
+  parseJSON =
+    Core.withObject
+      "Status_DetailsItem"
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Status_DetailsItem where
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -2592,16 +3348,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -2623,16 +3376,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Request message for KeyManagementService.UpdateCryptoKeyPrimaryVersion.
 --
@@ -2647,12 +3397,12 @@ newtype UpdateCryptoKeyPrimaryVersionRequest = UpdateCryptoKeyPrimaryVersionRequ
 newUpdateCryptoKeyPrimaryVersionRequest ::
   UpdateCryptoKeyPrimaryVersionRequest
 newUpdateCryptoKeyPrimaryVersionRequest =
-  UpdateCryptoKeyPrimaryVersionRequest {cryptoKeyVersionId = Core.Nothing}
+  UpdateCryptoKeyPrimaryVersionRequest
+    { cryptoKeyVersionId =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    UpdateCryptoKeyPrimaryVersionRequest
-  where
+instance Core.FromJSON UpdateCryptoKeyPrimaryVersionRequest where
   parseJSON =
     Core.withObject
       "UpdateCryptoKeyPrimaryVersionRequest"
@@ -2661,17 +3411,32 @@ instance
             Core.<$> (o Core..:? "cryptoKeyVersionId")
       )
 
-instance
-  Core.ToJSON
-    UpdateCryptoKeyPrimaryVersionRequest
-  where
+instance Core.ToJSON UpdateCryptoKeyPrimaryVersionRequest where
   toJSON UpdateCryptoKeyPrimaryVersionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cryptoKeyVersionId" Core..=)
-              Core.<$> cryptoKeyVersionId
-          ]
+          [("cryptoKeyVersionId" Core..=) Core.<$> cryptoKeyVersionId]
       )
+
+-- | Response message for EkmService.VerifyConnectivity.
+--
+-- /See:/ 'newVerifyConnectivityResponse' smart constructor.
+data VerifyConnectivityResponse = VerifyConnectivityResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VerifyConnectivityResponse' with the minimum fields required to make a request.
+newVerifyConnectivityResponse ::
+  VerifyConnectivityResponse
+newVerifyConnectivityResponse = VerifyConnectivityResponse
+
+instance Core.FromJSON VerifyConnectivityResponse where
+  parseJSON =
+    Core.withObject
+      "VerifyConnectivityResponse"
+      (\o -> Core.pure VerifyConnectivityResponse)
+
+instance Core.ToJSON VerifyConnectivityResponse where
+  toJSON = Core.const Core.emptyObject
 
 -- | The public key component of the wrapping key. For details of the type of key this public key corresponds to, see the ImportMethod.
 --
@@ -2691,11 +3456,8 @@ instance Core.FromJSON WrappingPublicKey where
   parseJSON =
     Core.withObject
       "WrappingPublicKey"
-      ( \o ->
-          WrappingPublicKey Core.<$> (o Core..:? "pem")
-      )
+      (\o -> WrappingPublicKey Core.<$> (o Core..:? "pem"))
 
 instance Core.ToJSON WrappingPublicKey where
   toJSON WrappingPublicKey {..} =
-    Core.object
-      (Core.catMaybes [("pem" Core..=) Core.<$> pem])
+    Core.object (Core.catMaybes [("pem" Core..=) Core.<$> pem])

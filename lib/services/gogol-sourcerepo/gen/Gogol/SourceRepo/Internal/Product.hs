@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SourceRepo.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SourceRepo.Internal.Product
@@ -128,7 +126,7 @@ module Gogol.SourceRepo.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SourceRepo.Internal.Sum
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
@@ -147,7 +145,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -163,8 +164,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -184,7 +184,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -200,8 +203,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -213,10 +215,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -264,8 +268,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -335,7 +338,10 @@ data ListReposResponse = ListReposResponse
 newListReposResponse ::
   ListReposResponse
 newListReposResponse =
-  ListReposResponse {nextPageToken = Core.Nothing, repos = Core.Nothing}
+  ListReposResponse
+    { nextPageToken = Core.Nothing,
+      repos = Core.Nothing
+    }
 
 instance Core.FromJSON ListReposResponse where
   parseJSON =
@@ -412,7 +418,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -468,21 +474,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -496,23 +500,21 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -600,8 +602,7 @@ instance Core.ToJSON ProjectConfig where
   toJSON ProjectConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enablePrivateKeyCheck" Core..=)
-              Core.<$> enablePrivateKeyCheck,
+          [ ("enablePrivateKeyCheck" Core..=) Core.<$> enablePrivateKeyCheck,
             ("name" Core..=) Core.<$> name,
             ("pubsubConfigs" Core..=) Core.<$> pubsubConfigs
           ]
@@ -611,8 +612,7 @@ instance Core.ToJSON ProjectConfig where
 --
 -- /See:/ 'newProjectConfig_PubsubConfigs' smart constructor.
 newtype ProjectConfig_PubsubConfigs = ProjectConfig_PubsubConfigs
-  { -- |
-    additional :: (Core.HashMap Core.Text PubsubConfig)
+  { additional :: (Core.HashMap Core.Text PubsubConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -629,13 +629,11 @@ instance Core.FromJSON ProjectConfig_PubsubConfigs where
     Core.withObject
       "ProjectConfig_PubsubConfigs"
       ( \o ->
-          ProjectConfig_PubsubConfigs
-            Core.<$> (Core.parseJSONObject o)
+          ProjectConfig_PubsubConfigs Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON ProjectConfig_PubsubConfigs where
-  toJSON ProjectConfig_PubsubConfigs {..} =
-    Core.toJSON additional
+  toJSON ProjectConfig_PubsubConfigs {..} = Core.toJSON additional
 
 -- | Configuration to publish a Cloud Pub\/Sub message.
 --
@@ -676,8 +674,7 @@ instance Core.ToJSON PubsubConfig where
     Core.object
       ( Core.catMaybes
           [ ("messageFormat" Core..=) Core.<$> messageFormat,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
             ("topic" Core..=) Core.<$> topic
           ]
       )
@@ -720,9 +717,7 @@ instance Core.FromJSON Repo where
             Core.<$> (o Core..:? "mirrorConfig")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "pubsubConfigs")
-            Core.<*> ( o Core..:? "size"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "size" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "url")
       )
 
@@ -742,8 +737,7 @@ instance Core.ToJSON Repo where
 --
 -- /See:/ 'newRepo_PubsubConfigs' smart constructor.
 newtype Repo_PubsubConfigs = Repo_PubsubConfigs
-  { -- |
-    additional :: (Core.HashMap Core.Text PubsubConfig)
+  { additional :: (Core.HashMap Core.Text PubsubConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -752,19 +746,17 @@ newRepo_PubsubConfigs ::
   -- |  See 'additional'.
   Core.HashMap Core.Text PubsubConfig ->
   Repo_PubsubConfigs
-newRepo_PubsubConfigs additional = Repo_PubsubConfigs {additional = additional}
+newRepo_PubsubConfigs additional =
+  Repo_PubsubConfigs {additional = additional}
 
 instance Core.FromJSON Repo_PubsubConfigs where
   parseJSON =
     Core.withObject
       "Repo_PubsubConfigs"
-      ( \o ->
-          Repo_PubsubConfigs Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Repo_PubsubConfigs Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Repo_PubsubConfigs where
-  toJSON Repo_PubsubConfigs {..} =
-    Core.toJSON additional
+  toJSON Repo_PubsubConfigs {..} = Core.toJSON additional
 
 -- | Request message for @SetIamPolicy@ method.
 --
@@ -781,7 +773,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -819,7 +814,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -855,19 +854,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Metadata of SyncRepo. This message is in the metadata field of Operation.
 --
@@ -958,16 +955,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -989,16 +983,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Request for UpdateProjectConfig.
 --

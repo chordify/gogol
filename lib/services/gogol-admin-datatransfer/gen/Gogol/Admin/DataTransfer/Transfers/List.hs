@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.DataTransfer.Transfers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.DataTransfer.Transfers.List
 where
 
 import Gogol.Admin.DataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datatransfer.transfers.list@ method which the
 -- 'DatatransferTransfersList' request conforms to.
@@ -61,9 +59,7 @@ type DatatransferTransfersListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              DataTransfersListResponse
+    Core.:> Core.Get '[Core.JSON] DataTransfersListResponse
 
 -- | Lists the transfers for a customer by source user, destination user, or status.
 --
@@ -113,9 +109,7 @@ newDatatransferTransfersList =
     }
 
 instance Core.GoogleRequest DatatransferTransfersList where
-  type
-    Rs DatatransferTransfersList =
-      DataTransfersListResponse
+  type Rs DatatransferTransfersList = DataTransfersListResponse
   type
     Scopes DatatransferTransfersList =
       '[Admin'Datatransfer, Admin'Datatransfer'Readonly]
@@ -137,7 +131,5 @@ instance Core.GoogleRequest DatatransferTransfersList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DatatransferTransfersListResource
-          )
+          (Core.Proxy :: Core.Proxy DatatransferTransfersListResource)
           Core.mempty

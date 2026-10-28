@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.PlaylistItems.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.PlaylistItems.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.playlistItems.list@ method which the
@@ -61,9 +59,7 @@ type YouTubePlaylistItemsListResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "videoId" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              PlaylistItemListResponse
+    Core.:> Core.Get '[Core.JSON] PlaylistItemListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -75,7 +71,6 @@ data YouTubePlaylistItemsList = YouTubePlaylistItemsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     id :: (Core.Maybe [Core.Text]),
     -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set.
     maxResults :: Core.Word32,
@@ -118,9 +113,7 @@ newYouTubePlaylistItemsList part =
     }
 
 instance Core.GoogleRequest YouTubePlaylistItemsList where
-  type
-    Rs YouTubePlaylistItemsList =
-      PlaylistItemListResponse
+  type Rs YouTubePlaylistItemsList = PlaylistItemListResponse
   type
     Scopes YouTubePlaylistItemsList =
       '[ Youtube'FullControl,
@@ -147,7 +140,5 @@ instance Core.GoogleRequest YouTubePlaylistItemsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubePlaylistItemsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubePlaylistItemsListResource)
           Core.mempty

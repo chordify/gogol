@@ -1,14 +1,16 @@
 cabal-version:      2.2
 name:               gogol-logging
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Cloud Logging SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
@@ -37,7 +39,7 @@ flag field-selectors
   manual:      True
 
 library
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
@@ -79,6 +81,12 @@ library
     Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
     Gogol.Logging.BillingAccounts.Locations.Operations.Get
     Gogol.Logging.BillingAccounts.Locations.Operations.List
+    Gogol.Logging.BillingAccounts.Locations.RecentQueries.List
+    Gogol.Logging.BillingAccounts.Locations.SavedQueries.Create
+    Gogol.Logging.BillingAccounts.Locations.SavedQueries.Delete
+    Gogol.Logging.BillingAccounts.Locations.SavedQueries.Get
+    Gogol.Logging.BillingAccounts.Locations.SavedQueries.List
+    Gogol.Logging.BillingAccounts.Locations.SavedQueries.Patch
     Gogol.Logging.BillingAccounts.Logs.Delete
     Gogol.Logging.BillingAccounts.Logs.List
     Gogol.Logging.BillingAccounts.Sinks.Create
@@ -118,14 +126,28 @@ library
     Gogol.Logging.Folders.Locations.Buckets.Views.Create
     Gogol.Logging.Folders.Locations.Buckets.Views.Delete
     Gogol.Logging.Folders.Locations.Buckets.Views.Get
+    Gogol.Logging.Folders.Locations.Buckets.Views.GetIamPolicy
     Gogol.Logging.Folders.Locations.Buckets.Views.List
     Gogol.Logging.Folders.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Folders.Locations.Buckets.Views.Patch
+    Gogol.Logging.Folders.Locations.Buckets.Views.SetIamPolicy
+    Gogol.Logging.Folders.Locations.Buckets.Views.TestIamPermissions
     Gogol.Logging.Folders.Locations.Get
     Gogol.Logging.Folders.Locations.List
+    Gogol.Logging.Folders.Locations.LogScopes.Create
+    Gogol.Logging.Folders.Locations.LogScopes.Delete
+    Gogol.Logging.Folders.Locations.LogScopes.Get
+    Gogol.Logging.Folders.Locations.LogScopes.List
+    Gogol.Logging.Folders.Locations.LogScopes.Patch
     Gogol.Logging.Folders.Locations.Operations.Cancel
     Gogol.Logging.Folders.Locations.Operations.Get
     Gogol.Logging.Folders.Locations.Operations.List
+    Gogol.Logging.Folders.Locations.RecentQueries.List
+    Gogol.Logging.Folders.Locations.SavedQueries.Create
+    Gogol.Logging.Folders.Locations.SavedQueries.Delete
+    Gogol.Logging.Folders.Locations.SavedQueries.Get
+    Gogol.Logging.Folders.Locations.SavedQueries.List
+    Gogol.Logging.Folders.Locations.SavedQueries.Patch
     Gogol.Logging.Folders.Logs.Delete
     Gogol.Logging.Folders.Logs.List
     Gogol.Logging.Folders.Sinks.Create
@@ -152,8 +174,11 @@ library
     Gogol.Logging.Locations.Buckets.Views.Create
     Gogol.Logging.Locations.Buckets.Views.Delete
     Gogol.Logging.Locations.Buckets.Views.Get
+    Gogol.Logging.Locations.Buckets.Views.GetIamPolicy
     Gogol.Logging.Locations.Buckets.Views.List
     Gogol.Logging.Locations.Buckets.Views.Patch
+    Gogol.Logging.Locations.Buckets.Views.SetIamPolicy
+    Gogol.Logging.Locations.Buckets.Views.TestIamPermissions
     Gogol.Logging.Locations.Get
     Gogol.Logging.Locations.List
     Gogol.Logging.Locations.Operations.Cancel
@@ -184,14 +209,28 @@ library
     Gogol.Logging.Organizations.Locations.Buckets.Views.Create
     Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
     Gogol.Logging.Organizations.Locations.Buckets.Views.Get
+    Gogol.Logging.Organizations.Locations.Buckets.Views.GetIamPolicy
     Gogol.Logging.Organizations.Locations.Buckets.Views.List
     Gogol.Logging.Organizations.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
+    Gogol.Logging.Organizations.Locations.Buckets.Views.SetIamPolicy
+    Gogol.Logging.Organizations.Locations.Buckets.Views.TestIamPermissions
     Gogol.Logging.Organizations.Locations.Get
     Gogol.Logging.Organizations.Locations.List
+    Gogol.Logging.Organizations.Locations.LogScopes.Create
+    Gogol.Logging.Organizations.Locations.LogScopes.Delete
+    Gogol.Logging.Organizations.Locations.LogScopes.Get
+    Gogol.Logging.Organizations.Locations.LogScopes.List
+    Gogol.Logging.Organizations.Locations.LogScopes.Patch
     Gogol.Logging.Organizations.Locations.Operations.Cancel
     Gogol.Logging.Organizations.Locations.Operations.Get
     Gogol.Logging.Organizations.Locations.Operations.List
+    Gogol.Logging.Organizations.Locations.RecentQueries.List
+    Gogol.Logging.Organizations.Locations.SavedQueries.Create
+    Gogol.Logging.Organizations.Locations.SavedQueries.Delete
+    Gogol.Logging.Organizations.Locations.SavedQueries.Get
+    Gogol.Logging.Organizations.Locations.SavedQueries.List
+    Gogol.Logging.Organizations.Locations.SavedQueries.Patch
     Gogol.Logging.Organizations.Logs.Delete
     Gogol.Logging.Organizations.Logs.List
     Gogol.Logging.Organizations.Sinks.Create
@@ -224,14 +263,28 @@ library
     Gogol.Logging.Projects.Locations.Buckets.Views.Create
     Gogol.Logging.Projects.Locations.Buckets.Views.Delete
     Gogol.Logging.Projects.Locations.Buckets.Views.Get
+    Gogol.Logging.Projects.Locations.Buckets.Views.GetIamPolicy
     Gogol.Logging.Projects.Locations.Buckets.Views.List
     Gogol.Logging.Projects.Locations.Buckets.Views.Logs.List
     Gogol.Logging.Projects.Locations.Buckets.Views.Patch
+    Gogol.Logging.Projects.Locations.Buckets.Views.SetIamPolicy
+    Gogol.Logging.Projects.Locations.Buckets.Views.TestIamPermissions
     Gogol.Logging.Projects.Locations.Get
     Gogol.Logging.Projects.Locations.List
+    Gogol.Logging.Projects.Locations.LogScopes.Create
+    Gogol.Logging.Projects.Locations.LogScopes.Delete
+    Gogol.Logging.Projects.Locations.LogScopes.Get
+    Gogol.Logging.Projects.Locations.LogScopes.List
+    Gogol.Logging.Projects.Locations.LogScopes.Patch
     Gogol.Logging.Projects.Locations.Operations.Cancel
     Gogol.Logging.Projects.Locations.Operations.Get
     Gogol.Logging.Projects.Locations.Operations.List
+    Gogol.Logging.Projects.Locations.RecentQueries.List
+    Gogol.Logging.Projects.Locations.SavedQueries.Create
+    Gogol.Logging.Projects.Locations.SavedQueries.Delete
+    Gogol.Logging.Projects.Locations.SavedQueries.Get
+    Gogol.Logging.Projects.Locations.SavedQueries.List
+    Gogol.Logging.Projects.Locations.SavedQueries.Patch
     Gogol.Logging.Projects.Logs.Delete
     Gogol.Logging.Projects.Logs.List
     Gogol.Logging.Projects.Metrics.Create
@@ -258,6 +311,4 @@ library
     Gogol.Logging.Internal.Product
     Gogol.Logging.Internal.Sum
 
-  build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+  build-depends:    gogol-core ^>=1.0.0

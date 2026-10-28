@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Enterprises.CreateWebToken
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.
+-- Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the JavaScript API documentation for further information.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference> for @androidenterprise.enterprises.createWebToken@.
 module Gogol.AndroidEnterprise.Enterprises.CreateWebToken
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Enterprises.CreateWebToken
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.enterprises.createWebToken@ method which the
 -- 'AndroidEnterpriseEnterprisesCreateWebToken' request conforms to.
@@ -59,7 +57,7 @@ type AndroidEnterpriseEnterprisesCreateWebTokenResource =
     Core.:> Core.ReqBody '[Core.JSON] AdministratorWebTokenSpec
     Core.:> Core.Post '[Core.JSON] AdministratorWebToken
 
--- | Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the javascript API documentation for further information.
+-- | Returns a unique token to access an embeddable UI. To generate a web UI, pass the generated token into the managed Google Play javascript API. Each token may only be used to start one UI session. See the JavaScript API documentation for further information.
 --
 -- /See:/ 'newAndroidEnterpriseEnterprisesCreateWebToken' smart constructor.
 data AndroidEnterpriseEnterprisesCreateWebToken = AndroidEnterpriseEnterprisesCreateWebToken
@@ -106,26 +104,23 @@ instance
     Rs AndroidEnterpriseEnterprisesCreateWebToken =
       AdministratorWebToken
   type
-    Scopes
-      AndroidEnterpriseEnterprisesCreateWebToken =
+    Scopes AndroidEnterpriseEnterprisesCreateWebToken =
       '[Androidenterprise'FullControl]
-  requestClient
-    AndroidEnterpriseEnterprisesCreateWebToken {..} =
-      go
-        enterpriseId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidEnterpriseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidEnterpriseEnterprisesCreateWebTokenResource
-            )
-            Core.mempty
+  requestClient AndroidEnterpriseEnterprisesCreateWebToken {..} =
+    go
+      enterpriseId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidEnterpriseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidEnterpriseEnterprisesCreateWebTokenResource
+          )
+          Core.mempty

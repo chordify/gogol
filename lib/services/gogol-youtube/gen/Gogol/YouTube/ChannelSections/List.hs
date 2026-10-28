@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.ChannelSections.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.ChannelSections.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.channelSections.list@ method which the
@@ -60,9 +58,7 @@ type YouTubeChannelSectionsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ChannelSectionListResponse
+    Core.:> Core.Get '[Core.JSON] ChannelSectionListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -113,13 +109,8 @@ newYouTubeChannelSectionsList part =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeChannelSectionsList
-  where
-  type
-    Rs YouTubeChannelSectionsList =
-      ChannelSectionListResponse
+instance Core.GoogleRequest YouTubeChannelSectionsList where
+  type Rs YouTubeChannelSectionsList = ChannelSectionListResponse
   type
     Scopes YouTubeChannelSectionsList =
       '[ Youtube'FullControl,
@@ -145,7 +136,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeChannelSectionsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeChannelSectionsListResource)
           Core.mempty

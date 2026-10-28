@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Tables.DropRowRange
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Permanently drop\/delete a row range from a specified table. The request can specify whether to delete all rows in a table, or only those that match a particular prefix.
+-- Permanently drop\/delete a row range from a specified table. The request can specify whether to delete all rows in a table, or only those that match a particular prefix. Note that row key prefixes used here are treated as service data. For more information about how service data is handled, see the <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.tables.dropRowRange@.
 module Gogol.BigtableAdmin.Projects.Instances.Tables.DropRowRange
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.DropRowRange
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.dropRowRange@ method which the
 -- 'BigtableAdminProjectsInstancesTablesDropRowRange' request conforms to.
@@ -56,7 +54,7 @@ type BigtableAdminProjectsInstancesTablesDropRowRangeResource =
     Core.:> Core.ReqBody '[Core.JSON] DropRowRangeRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
--- | Permanently drop\/delete a row range from a specified table. The request can specify whether to delete all rows in a table, or only those that match a particular prefix.
+-- | Permanently drop\/delete a row range from a specified table. The request can specify whether to delete all rows in a table, or only those that match a particular prefix. Note that row key prefixes used here are treated as service data. For more information about how service data is handled, see the <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesTablesDropRowRange' smart constructor.
 data BigtableAdminProjectsInstancesTablesDropRowRange = BigtableAdminProjectsInstancesTablesDropRowRange
@@ -86,7 +84,8 @@ newBigtableAdminProjectsInstancesTablesDropRowRange ::
   BigtableAdminProjectsInstancesTablesDropRowRange
 newBigtableAdminProjectsInstancesTablesDropRowRange name payload =
   BigtableAdminProjectsInstancesTablesDropRowRange
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -99,36 +98,31 @@ instance
   Core.GoogleRequest
     BigtableAdminProjectsInstancesTablesDropRowRange
   where
+  type Rs BigtableAdminProjectsInstancesTablesDropRowRange = Empty
   type
-    Rs
-      BigtableAdminProjectsInstancesTablesDropRowRange =
-      Empty
-  type
-    Scopes
-      BigtableAdminProjectsInstancesTablesDropRowRange =
+    Scopes BigtableAdminProjectsInstancesTablesDropRowRange =
       '[ Bigtable'Admin,
          Bigtable'Admin'Table,
          CloudBigtable'Admin,
          CloudBigtable'Admin'Table,
          CloudPlatform'FullControl
        ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesDropRowRange {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesDropRowRangeResource
-            )
-            Core.mempty
+  requestClient BigtableAdminProjectsInstancesTablesDropRowRange {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                BigtableAdminProjectsInstancesTablesDropRowRangeResource
+          )
+          Core.mempty

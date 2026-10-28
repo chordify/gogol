@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Budget.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Budget.Update
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.budget.update@ method which the
 -- 'AdExchangeBuyerBudgetUpdate' request conforms to.
@@ -83,14 +81,9 @@ newAdExchangeBuyerBudgetUpdate accountId billingId payload =
       payload = payload
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerBudgetUpdate
-  where
+instance Core.GoogleRequest AdExchangeBuyerBudgetUpdate where
   type Rs AdExchangeBuyerBudgetUpdate = Budget
-  type
-    Scopes AdExchangeBuyerBudgetUpdate =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerBudgetUpdate = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBudgetUpdate {..} =
     go
       accountId
@@ -101,7 +94,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerBudgetUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerBudgetUpdateResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Fetches a list of results for a given test case.
+-- Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.
 --
 -- /See:/ <https://cloud.google.com/dialogflow/ Dialogflow API Reference> for @dialogflow.projects.locations.agents.testCases.results.list@.
 module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Results.List
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.testCases.results.list@ method which the
 -- 'DialogFlowProjectsLocationsAgentsTestCasesResultsList' request conforms to.
@@ -61,7 +59,7 @@ type DialogFlowProjectsLocationsAgentsTestCasesResultsListResource =
               '[Core.JSON]
               GoogleCloudDialogflowCxV3ListTestCaseResultsResponse
 
--- | Fetches a list of results for a given test case.
+-- | Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.
 --
 -- /See:/ 'newDialogFlowProjectsLocationsAgentsTestCasesResultsList' smart constructor.
 data DialogFlowProjectsLocationsAgentsTestCasesResultsList = DialogFlowProjectsLocationsAgentsTestCasesResultsList
@@ -77,7 +75,7 @@ data DialogFlowProjectsLocationsAgentsTestCasesResultsList = DialogFlowProjectsL
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from a previous list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The test case to list results for. Format: @projects\/\/locations\/\/agents\/\/ testCases\/@. Specify a @-@ as a wildcard for TestCase ID to list results across multiple test cases.
+    -- | Required. The test case to list results for. Format: @projects\/\/locations\/\/agents\/\/testCases\/@. Specify a @-@ as a wildcard for TestCase ID to list results across multiple test cases.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -88,12 +86,13 @@ data DialogFlowProjectsLocationsAgentsTestCasesResultsList = DialogFlowProjectsL
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsTestCasesResultsList' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsTestCasesResultsList ::
-  -- |  Required. The test case to list results for. Format: @projects\/\/locations\/\/agents\/\/ testCases\/@. Specify a @-@ as a wildcard for TestCase ID to list results across multiple test cases. See 'parent'.
+  -- |  Required. The test case to list results for. Format: @projects\/\/locations\/\/agents\/\/testCases\/@. Specify a @-@ as a wildcard for TestCase ID to list results across multiple test cases. See 'parent'.
   Core.Text ->
   DialogFlowProjectsLocationsAgentsTestCasesResultsList
 newDialogFlowProjectsLocationsAgentsTestCasesResultsList parent =
   DialogFlowProjectsLocationsAgentsTestCasesResultsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -109,12 +108,10 @@ instance
     DialogFlowProjectsLocationsAgentsTestCasesResultsList
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsTestCasesResultsList =
+    Rs DialogFlowProjectsLocationsAgentsTestCasesResultsList =
       GoogleCloudDialogflowCxV3ListTestCaseResultsResponse
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsTestCasesResultsList =
+    Scopes DialogFlowProjectsLocationsAgentsTestCasesResultsList =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsTestCasesResultsList {..} =

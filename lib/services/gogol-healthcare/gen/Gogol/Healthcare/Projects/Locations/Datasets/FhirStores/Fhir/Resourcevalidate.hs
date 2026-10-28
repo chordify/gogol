@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcevalidate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcevali
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.Resourcevalidate@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate' request conforms to.
@@ -72,13 +70,13 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate = Healthc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the FHIR store that holds the profiles being used for validation.
+    -- | Required. The name of the FHIR store that holds the profiles being used for validation.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: HttpBody,
-    -- | The canonical URL of a profile that this resource should be validated against. For example, to validate a Patient resource against the US Core Patient profile this parameter would be @http:\/\/hl7.org\/fhir\/us\/core\/StructureDefinition\/us-core-patient@. A StructureDefinition with this canonical URL must exist in the FHIR store.
+    -- | Optional. The canonical URL of a profile that this resource should be validated against. For example, to validate a Patient resource against the US Core Patient profile this parameter would be @http:\/\/hl7.org\/fhir\/us\/core\/StructureDefinition\/us-core-patient@. A StructureDefinition with this canonical URL must exist in the FHIR store.
     profile :: (Core.Maybe Core.Text),
-    -- | The FHIR resource type of the resource being validated. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, or <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content.
+    -- | Required. The FHIR resource type of the resource being validated. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, or <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content.
     type' :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -89,25 +87,29 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate = Healthc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate ::
-  -- |  The name of the FHIR store that holds the profiles being used for validation. See 'parent'.
+  -- |  Required. The name of the FHIR store that holds the profiles being used for validation. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   HttpBody ->
-  -- |  The FHIR resource type of the resource being validated. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, or <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content. See 'type''.
+  -- |  Required. The FHIR resource type of the resource being validated. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, or <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>). Must match the resource type in the provided content. See 'type''.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate
-newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate parent payload type' =
-  HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      profile = Core.Nothing,
-      type' = type',
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate
+  parent
+  payload
+  type' =
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        profile = Core.Nothing,
+        type' = type',
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -120,7 +122,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate {..} =
       go

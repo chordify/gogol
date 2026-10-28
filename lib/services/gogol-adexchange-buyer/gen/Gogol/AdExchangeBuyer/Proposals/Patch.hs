@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Proposals.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Proposals.Patch
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.proposals.patch@ method which the
 -- 'AdExchangeBuyerProposalsPatch' request conforms to.
@@ -50,9 +48,7 @@ type AdExchangeBuyerProposalsPatchResource =
     Core.:> "proposals"
     Core.:> Core.Capture "proposalId" Core.Text
     Core.:> Core.Capture "revisionNumber" Core.Int64
-    Core.:> Core.Capture
-              "updateAction"
-              ProposalsPatchUpdateAction
+    Core.:> Core.Capture "updateAction" ProposalsPatchUpdateAction
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Proposal
     Core.:> Core.Patch '[Core.JSON] Proposal
@@ -83,22 +79,21 @@ newAdExchangeBuyerProposalsPatch ::
   -- |  The proposed action to take on the proposal. This field is required and it must be set when updating a proposal. See 'updateAction'.
   ProposalsPatchUpdateAction ->
   AdExchangeBuyerProposalsPatch
-newAdExchangeBuyerProposalsPatch payload proposalId revisionNumber updateAction =
-  AdExchangeBuyerProposalsPatch
-    { payload = payload,
-      proposalId = proposalId,
-      revisionNumber = revisionNumber,
-      updateAction = updateAction
-    }
-
-instance
-  Core.GoogleRequest
+newAdExchangeBuyerProposalsPatch
+  payload
+  proposalId
+  revisionNumber
+  updateAction =
     AdExchangeBuyerProposalsPatch
-  where
+      { payload = payload,
+        proposalId = proposalId,
+        revisionNumber = revisionNumber,
+        updateAction = updateAction
+      }
+
+instance Core.GoogleRequest AdExchangeBuyerProposalsPatch where
   type Rs AdExchangeBuyerProposalsPatch = Proposal
-  type
-    Scopes AdExchangeBuyerProposalsPatch =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerProposalsPatch = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerProposalsPatch {..} =
     go
       proposalId
@@ -110,7 +105,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerProposalsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerProposalsPatchResource)
           Core.mempty

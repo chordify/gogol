@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppEngine.Types
@@ -63,8 +61,15 @@ module Gogol.AppEngine.Types
     -- ** Application_DatabaseType
     Application_DatabaseType (..),
 
+    -- ** Application_GeneratedCustomerMetadata
+    Application_GeneratedCustomerMetadata (..),
+    newApplication_GeneratedCustomerMetadata,
+
     -- ** Application_ServingStatus
     Application_ServingStatus (..),
+
+    -- ** Application_SslPolicy
+    Application_SslPolicy (..),
 
     -- ** AuthorizedCertificate
     AuthorizedCertificate (..),
@@ -102,6 +107,13 @@ module Gogol.AppEngine.Types
     ContainerInfo (..),
     newContainerInfo,
 
+    -- ** ContainerState
+    ContainerState (..),
+    newContainerState,
+
+    -- ** ContainerState_State
+    ContainerState_State (..),
+
     -- ** CpuUtilization
     CpuUtilization (..),
     newCpuUtilization,
@@ -117,6 +129,10 @@ module Gogol.AppEngine.Types
     -- ** CreateVersionMetadataV1Beta
     CreateVersionMetadataV1Beta (..),
     newCreateVersionMetadataV1Beta,
+
+    -- ** Date
+    Date (..),
+    newDate,
 
     -- ** DebugInstanceRequest
     DebugInstanceRequest (..),
@@ -179,6 +195,10 @@ module Gogol.AppEngine.Types
     FlexibleRuntimeSettings (..),
     newFlexibleRuntimeSettings,
 
+    -- ** GceTag
+    GceTag (..),
+    newGceTag,
+
     -- ** GoogleAppengineV1betaLocationMetadata
     GoogleAppengineV1betaLocationMetadata (..),
     newGoogleAppengineV1betaLocationMetadata,
@@ -232,6 +252,10 @@ module Gogol.AppEngine.Types
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** ListRuntimesResponse
+    ListRuntimesResponse (..),
+    newListRuntimesResponse,
 
     -- ** ListServicesResponse
     ListServicesResponse (..),
@@ -321,13 +345,6 @@ module Gogol.AppEngine.Types
     -- ** ProjectEvent_Phase
     ProjectEvent_Phase (..),
 
-    -- ** ProjectState
-    ProjectState (..),
-    newProjectState,
-
-    -- ** ProjectState_State
-    ProjectState_State (..),
-
     -- ** ProjectsMetadata
     ProjectsMetadata (..),
     newProjectsMetadata,
@@ -352,6 +369,9 @@ module Gogol.AppEngine.Types
     -- ** Reasons_DataGovernance
     Reasons_DataGovernance (..),
 
+    -- ** Reasons_ServiceActivation
+    Reasons_ServiceActivation (..),
+
     -- ** Reasons_ServiceManagement
     Reasons_ServiceManagement (..),
 
@@ -362,6 +382,10 @@ module Gogol.AppEngine.Types
     -- ** RequestUtilization
     RequestUtilization (..),
     newRequestUtilization,
+
+    -- ** ResourceEvent
+    ResourceEvent (..),
+    newResourceEvent,
 
     -- ** ResourceRecord
     ResourceRecord (..),
@@ -374,6 +398,16 @@ module Gogol.AppEngine.Types
     Resources (..),
     newResources,
 
+    -- ** Runtime
+    Runtime (..),
+    newRuntime,
+
+    -- ** Runtime_Environment
+    Runtime_Environment (..),
+
+    -- ** Runtime_Stage
+    Runtime_Stage (..),
+
     -- ** ScriptHandler
     ScriptHandler (..),
     newScriptHandler,
@@ -381,6 +415,10 @@ module Gogol.AppEngine.Types
     -- ** Service
     Service (..),
     newService,
+
+    -- ** Service_GeneratedCustomerMetadata
+    Service_GeneratedCustomerMetadata (..),
+    newService_GeneratedCustomerMetadata,
 
     -- ** Service_Labels
     Service_Labels (..),
@@ -460,6 +498,10 @@ module Gogol.AppEngine.Types
     Version_EnvVariables (..),
     newVersion_EnvVariables,
 
+    -- ** Version_GeneratedCustomerMetadata
+    Version_GeneratedCustomerMetadata (..),
+    newVersion_GeneratedCustomerMetadata,
+
     -- ** Version_InboundServicesItem
     Version_InboundServicesItem (..),
 
@@ -490,6 +532,12 @@ module Gogol.AppEngine.Types
     -- ** AppsDomainMappingsCreateOverrideStrategy
     AppsDomainMappingsCreateOverrideStrategy (..),
 
+    -- ** AppsGetIncludeExtraData
+    AppsGetIncludeExtraData (..),
+
+    -- ** AppsListRuntimesEnvironment
+    AppsListRuntimesEnvironment (..),
+
     -- ** AppsServicesVersionsGetView
     AppsServicesVersionsGetView (..),
 
@@ -500,7 +548,7 @@ where
 
 import Gogol.AppEngine.Internal.Product
 import Gogol.AppEngine.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the App Engine Admin API. This contains the host and root path used as a starting point for constructing service requests.
 appEngineService :: Core.ServiceConfig
@@ -510,10 +558,13 @@ appEngineService =
     "appengine.googleapis.com"
 
 -- | View and manage your applications deployed on Google App Engine
-type Appengine'Admin = "https://www.googleapis.com/auth/appengine.admin"
+type Appengine'Admin =
+  "https://www.googleapis.com/auth/appengine.admin"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

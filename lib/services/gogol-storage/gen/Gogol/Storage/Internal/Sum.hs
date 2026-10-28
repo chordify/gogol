@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Storage.Internal.Sum
@@ -93,6 +91,13 @@ module Gogol.Storage.Internal.Sum
     BucketsPatchProjection
       ( BucketsPatchProjection_Full,
         BucketsPatchProjection_NoAcl,
+        ..
+      ),
+
+    -- * BucketsRestoreProjection
+    BucketsRestoreProjection
+      ( BucketsRestoreProjection_Full,
+        BucketsRestoreProjection_NoAcl,
         ..
       ),
 
@@ -203,6 +208,13 @@ module Gogol.Storage.Internal.Sum
         ..
       ),
 
+    -- * ObjectsRestoreProjection
+    ObjectsRestoreProjection
+      ( ObjectsRestoreProjection_Full,
+        ObjectsRestoreProjection_NoAcl,
+        ..
+      ),
+
     -- * ObjectsRewriteDestinationPredefinedAcl
     ObjectsRewriteDestinationPredefinedAcl
       ( ObjectsRewriteDestinationPredefinedAcl_AuthenticatedRead,
@@ -248,7 +260,7 @@ module Gogol.Storage.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Set of properties to return. Defaults to noAcl.
 newtype BucketsGetProjection = BucketsGetProjection {fromBucketsGetProjection :: Core.Text}
@@ -534,6 +546,33 @@ pattern BucketsPatchProjection_NoAcl = BucketsPatchProjection "noAcl"
   BucketsPatchProjection_Full,
   BucketsPatchProjection_NoAcl,
   BucketsPatchProjection
+  #-}
+
+-- | Set of properties to return. Defaults to full.
+newtype BucketsRestoreProjection = BucketsRestoreProjection {fromBucketsRestoreProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Include all properties.
+pattern BucketsRestoreProjection_Full :: BucketsRestoreProjection
+pattern BucketsRestoreProjection_Full = BucketsRestoreProjection "full"
+
+-- | Omit owner, acl and defaultObjectAcl properties.
+pattern BucketsRestoreProjection_NoAcl :: BucketsRestoreProjection
+pattern BucketsRestoreProjection_NoAcl = BucketsRestoreProjection "noAcl"
+
+{-# COMPLETE
+  BucketsRestoreProjection_Full,
+  BucketsRestoreProjection_NoAcl,
+  BucketsRestoreProjection
   #-}
 
 -- | Apply a predefined set of access controls to this bucket.
@@ -973,6 +1012,33 @@ pattern ObjectsPatchProjection_NoAcl = ObjectsPatchProjection "noAcl"
   ObjectsPatchProjection_Full,
   ObjectsPatchProjection_NoAcl,
   ObjectsPatchProjection
+  #-}
+
+-- | Set of properties to return. Defaults to full.
+newtype ObjectsRestoreProjection = ObjectsRestoreProjection {fromObjectsRestoreProjection :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Include all properties.
+pattern ObjectsRestoreProjection_Full :: ObjectsRestoreProjection
+pattern ObjectsRestoreProjection_Full = ObjectsRestoreProjection "full"
+
+-- | Omit the owner, acl property.
+pattern ObjectsRestoreProjection_NoAcl :: ObjectsRestoreProjection
+pattern ObjectsRestoreProjection_NoAcl = ObjectsRestoreProjection "noAcl"
+
+{-# COMPLETE
+  ObjectsRestoreProjection_Full,
+  ObjectsRestoreProjection_NoAcl,
+  ObjectsRestoreProjection
   #-}
 
 -- | Apply a predefined set of access controls to the destination object.

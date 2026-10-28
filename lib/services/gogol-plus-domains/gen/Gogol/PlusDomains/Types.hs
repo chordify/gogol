@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlusDomains.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PlusDomains.Types
@@ -311,7 +309,7 @@ where
 
 import Gogol.PlusDomains.Internal.Product
 import Gogol.PlusDomains.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google+ Domains API. This contains the host and root path used as a starting point for constructing service requests.
 plusDomainsService :: Core.ServiceConfig
@@ -321,7 +319,8 @@ plusDomainsService =
     "www.googleapis.com"
 
 -- | View your circles and the people and pages in them
-type Plus'Circles'Read = "https://www.googleapis.com/auth/plus.circles.read"
+type Plus'Circles'Read =
+  "https://www.googleapis.com/auth/plus.circles.read"
 
 -- | View your basic profile info, including your age range and language
 type Plus'Login = "https://www.googleapis.com/auth/plus.login"
@@ -330,16 +329,21 @@ type Plus'Login = "https://www.googleapis.com/auth/plus.login"
 type Plus'Me = "https://www.googleapis.com/auth/plus.me"
 
 -- | Send your photos and videos to Google+
-type Plus'Media'Upload = "https://www.googleapis.com/auth/plus.media.upload"
+type Plus'Media'Upload =
+  "https://www.googleapis.com/auth/plus.media.upload"
 
 -- | View your own Google+ profile and profiles visible to you
-type Plus'Profiles'Read = "https://www.googleapis.com/auth/plus.profiles.read"
+type Plus'Profiles'Read =
+  "https://www.googleapis.com/auth/plus.profiles.read"
 
 -- | View your Google+ posts, comments, and stream
-type Plus'Stream'Read = "https://www.googleapis.com/auth/plus.stream.read"
+type Plus'Stream'Read =
+  "https://www.googleapis.com/auth/plus.stream.read"
 
 -- | View your email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+type Userinfo'Email =
+  "https://www.googleapis.com/auth/userinfo.email"
 
 -- | See your personal info, including any personal info you\'ve made publicly available
-type Userinfo'Profile = "https://www.googleapis.com/auth/userinfo.profile"
+type Userinfo'Profile =
+  "https://www.googleapis.com/auth/userinfo.profile"

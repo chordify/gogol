@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.SetIamPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.setIamPolicy@ method which the
 -- 'ComputeInstancesSetIamPolicy' request conforms to.
@@ -60,9 +58,7 @@ type ComputeInstancesSetIamPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ZoneSetPolicyRequest
+    Core.:> Core.ReqBody '[Core.JSON] ZoneSetPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy.
@@ -114,10 +110,7 @@ newComputeInstancesSetIamPolicy payload project resource zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInstancesSetIamPolicy
-  where
+instance Core.GoogleRequest ComputeInstancesSetIamPolicy where
   type Rs ComputeInstancesSetIamPolicy = Policy
   type
     Scopes ComputeInstancesSetIamPolicy =
@@ -138,7 +131,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeInstancesSetIamPolicyResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeInstancesSetIamPolicyResource)
           Core.mempty

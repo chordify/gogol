@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Analytics.Internal.Product
@@ -473,7 +471,7 @@ module Gogol.Analytics.Internal.Product
 where
 
 import Gogol.Analytics.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | JSON template for Analytics account entry.
 --
@@ -564,7 +562,10 @@ data Account_ChildLink = Account_ChildLink
 newAccount_ChildLink ::
   Account_ChildLink
 newAccount_ChildLink =
-  Account_ChildLink {href = Core.Nothing, type' = "analytics#webproperties"}
+  Account_ChildLink
+    { href = Core.Nothing,
+      type' = "analytics#webproperties"
+    }
 
 instance Core.FromJSON Account_ChildLink where
   parseJSON =
@@ -573,18 +574,14 @@ instance Core.FromJSON Account_ChildLink where
       ( \o ->
           Account_ChildLink
             Core.<$> (o Core..:? "href")
-            Core.<*> ( o Core..:? "type"
-                         Core..!= "analytics#webproperties"
-                     )
+            Core.<*> (o Core..:? "type" Core..!= "analytics#webproperties")
       )
 
 instance Core.ToJSON Account_ChildLink where
   toJSON Account_ChildLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Permissions the user has for this account.
@@ -599,23 +596,19 @@ newtype Account_Permissions = Account_Permissions
 -- | Creates a value of 'Account_Permissions' with the minimum fields required to make a request.
 newAccount_Permissions ::
   Account_Permissions
-newAccount_Permissions = Account_Permissions {effective = Core.Nothing}
+newAccount_Permissions =
+  Account_Permissions {effective = Core.Nothing}
 
 instance Core.FromJSON Account_Permissions where
   parseJSON =
     Core.withObject
       "Account_Permissions"
-      ( \o ->
-          Account_Permissions
-            Core.<$> (o Core..:? "effective")
-      )
+      (\o -> Account_Permissions Core.<$> (o Core..:? "effective"))
 
 instance Core.ToJSON Account_Permissions where
   toJSON Account_Permissions {..} =
     Core.object
-      ( Core.catMaybes
-          [("effective" Core..=) Core.<$> effective]
-      )
+      (Core.catMaybes [("effective" Core..=) Core.<$> effective])
 
 -- | JSON template for a linked account.
 --
@@ -712,9 +705,7 @@ instance Core.FromJSON AccountSummaries where
           AccountSummaries
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#accountSummaries"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#accountSummaries")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -773,9 +764,7 @@ instance Core.FromJSON AccountSummary where
       ( \o ->
           AccountSummary
             Core.<$> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#accountSummary"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#accountSummary")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "starred")
             Core.<*> (o Core..:? "webProperties")
@@ -833,9 +822,7 @@ instance Core.FromJSON AccountTicket where
           AccountTicket
             Core.<$> (o Core..:? "account")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#accountTicket"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#accountTicket")
             Core.<*> (o Core..:? "profile")
             Core.<*> (o Core..:? "redirectUri")
             Core.<*> (o Core..:? "webproperty")
@@ -858,17 +845,12 @@ instance Core.ToJSON AccountTicket where
 --
 -- /See:/ 'newAccountTreeRequest' smart constructor.
 data AccountTreeRequest = AccountTreeRequest
-  { -- |
-    accountName :: (Core.Maybe Core.Text),
+  { accountName :: (Core.Maybe Core.Text),
     -- | Resource type for account ticket.
     kind :: Core.Text,
-    -- |
     profileName :: (Core.Maybe Core.Text),
-    -- |
     timezone :: (Core.Maybe Core.Text),
-    -- |
     webpropertyName :: (Core.Maybe Core.Text),
-    -- |
     websiteUrl :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -893,9 +875,7 @@ instance Core.FromJSON AccountTreeRequest where
       ( \o ->
           AccountTreeRequest
             Core.<$> (o Core..:? "accountName")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#accountTreeRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#accountTreeRequest")
             Core.<*> (o Core..:? "profileName")
             Core.<*> (o Core..:? "timezone")
             Core.<*> (o Core..:? "webpropertyName")
@@ -948,9 +928,7 @@ instance Core.FromJSON AccountTreeResponse where
       ( \o ->
           AccountTreeResponse
             Core.<$> (o Core..:? "account")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#accountTreeResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#accountTreeResponse")
             Core.<*> (o Core..:? "profile")
             Core.<*> (o Core..:? "webproperty")
       )
@@ -1066,17 +1044,14 @@ instance Core.FromJSON AdWordsAccount where
           AdWordsAccount
             Core.<$> (o Core..:? "autoTaggingEnabled")
             Core.<*> (o Core..:? "customerId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#adWordsAccount"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#adWordsAccount")
       )
 
 instance Core.ToJSON AdWordsAccount where
   toJSON AdWordsAccount {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoTaggingEnabled" Core..=)
-              Core.<$> autoTaggingEnabled,
+          [ ("autoTaggingEnabled" Core..=) Core.<$> autoTaggingEnabled,
             ("customerId" Core..=) Core.<$> customerId,
             Core.Just ("kind" Core..= kind)
           ]
@@ -1096,13 +1071,11 @@ newAnalyticsDataimportDeleteUploadDataRequest ::
   AnalyticsDataimportDeleteUploadDataRequest
 newAnalyticsDataimportDeleteUploadDataRequest =
   AnalyticsDataimportDeleteUploadDataRequest
-    { customDataImportUids = Core.Nothing
+    { customDataImportUids =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AnalyticsDataimportDeleteUploadDataRequest
-  where
+instance Core.FromJSON AnalyticsDataimportDeleteUploadDataRequest where
   parseJSON =
     Core.withObject
       "AnalyticsDataimportDeleteUploadDataRequest"
@@ -1111,16 +1084,11 @@ instance
             Core.<$> (o Core..:? "customDataImportUids")
       )
 
-instance
-  Core.ToJSON
-    AnalyticsDataimportDeleteUploadDataRequest
-  where
+instance Core.ToJSON AnalyticsDataimportDeleteUploadDataRequest where
   toJSON AnalyticsDataimportDeleteUploadDataRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customDataImportUids" Core..=)
-              Core.<$> customDataImportUids
-          ]
+          [("customDataImportUids" Core..=) Core.<$> customDataImportUids]
       )
 
 -- | JSON template for a metadata column.
@@ -1181,15 +1149,14 @@ newColumn_Attributes ::
   -- |  The name of the attribute. See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Column_Attributes
-newColumn_Attributes additional = Column_Attributes {additional = additional}
+newColumn_Attributes additional =
+  Column_Attributes {additional = additional}
 
 instance Core.FromJSON Column_Attributes where
   parseJSON =
     Core.withObject
       "Column_Attributes"
-      ( \o ->
-          Column_Attributes Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Column_Attributes Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Column_Attributes where
   toJSON Column_Attributes {..} = Core.toJSON additional
@@ -1254,7 +1221,6 @@ instance Core.ToJSON Columns where
 data CustomDataSource = CustomDataSource
   { -- | Account ID to which this custom data source belongs.
     accountId :: (Core.Maybe Core.Text),
-    -- |
     childLink :: (Core.Maybe CustomDataSource_ChildLink),
     -- | Time this custom data source was created.
     created :: (Core.Maybe Core.DateTime),
@@ -1262,7 +1228,6 @@ data CustomDataSource = CustomDataSource
     description :: (Core.Maybe Core.Text),
     -- | Custom data source ID.
     id :: (Core.Maybe Core.Text),
-    -- |
     importBehavior :: (Core.Maybe Core.Text),
     -- | Resource type for Analytics custom data source.
     kind :: Core.Text,
@@ -1322,9 +1287,7 @@ instance Core.FromJSON CustomDataSource where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "importBehavior")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#customDataSource"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#customDataSource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parentLink")
             Core.<*> (o Core..:? "profilesLinked")
@@ -1373,7 +1336,10 @@ data CustomDataSource_ChildLink = CustomDataSource_ChildLink
 newCustomDataSource_ChildLink ::
   CustomDataSource_ChildLink
 newCustomDataSource_ChildLink =
-  CustomDataSource_ChildLink {href = Core.Nothing, type' = Core.Nothing}
+  CustomDataSource_ChildLink
+    { href = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON CustomDataSource_ChildLink where
   parseJSON =
@@ -1381,16 +1347,15 @@ instance Core.FromJSON CustomDataSource_ChildLink where
       "CustomDataSource_ChildLink"
       ( \o ->
           CustomDataSource_ChildLink
-            Core.<$> (o Core..:? "href") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "href")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON CustomDataSource_ChildLink where
   toJSON CustomDataSource_ChildLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("href" Core..=) Core.<$> href, ("type" Core..=) Core.<$> type']
       )
 
 -- | Parent link for this custom data source. Points to the web property to which this custom data source belongs.
@@ -1427,9 +1392,7 @@ instance Core.ToJSON CustomDataSource_ParentLink where
   toJSON CustomDataSource_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Lists Analytics custom data sources to which the user has access. Each resource in the collection corresponds to a single Analytics custom data source.
@@ -1478,9 +1441,7 @@ instance Core.FromJSON CustomDataSources where
           CustomDataSources
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#customDataSources"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#customDataSources")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -1564,9 +1525,7 @@ instance Core.FromJSON CustomDimension where
             Core.<*> (o Core..:? "created")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "index")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#customDimension"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#customDimension")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parentLink")
             Core.<*> (o Core..:? "scope")
@@ -1628,9 +1587,7 @@ instance Core.ToJSON CustomDimension_ParentLink where
   toJSON CustomDimension_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | A custom dimension collection lists Analytics custom dimensions to which the user has access. Each resource in the collection corresponds to a single Analytics custom dimension.
@@ -1679,9 +1636,7 @@ instance Core.FromJSON CustomDimensions where
           CustomDimensions
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#customDimensions"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#customDimensions")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -1823,7 +1778,10 @@ data CustomMetric_ParentLink = CustomMetric_ParentLink
 newCustomMetric_ParentLink ::
   CustomMetric_ParentLink
 newCustomMetric_ParentLink =
-  CustomMetric_ParentLink {href = Core.Nothing, type' = "analytics#webproperty"}
+  CustomMetric_ParentLink
+    { href = Core.Nothing,
+      type' = "analytics#webproperty"
+    }
 
 instance Core.FromJSON CustomMetric_ParentLink where
   parseJSON =
@@ -1839,9 +1797,7 @@ instance Core.ToJSON CustomMetric_ParentLink where
   toJSON CustomMetric_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | A custom metric collection lists Analytics custom metrics to which the user has access. Each resource in the collection corresponds to a single Analytics custom metric.
@@ -1890,9 +1846,7 @@ instance Core.FromJSON CustomMetrics where
           CustomMetrics
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#customMetrics"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#customMetrics")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -1959,9 +1913,7 @@ instance Core.FromJSON EntityAdWordsLink where
             Core.<$> (o Core..:? "adWordsAccounts")
             Core.<*> (o Core..:? "entity")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#entityAdWordsLink"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#entityAdWordsLink")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "profileIds")
             Core.<*> (o Core..:? "selfLink")
@@ -1971,8 +1923,7 @@ instance Core.ToJSON EntityAdWordsLink where
   toJSON EntityAdWordsLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adWordsAccounts" Core..=)
-              Core.<$> adWordsAccounts,
+          [ ("adWordsAccounts" Core..=) Core.<$> adWordsAccounts,
             ("entity" Core..=) Core.<$> entity,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
@@ -1986,8 +1937,7 @@ instance Core.ToJSON EntityAdWordsLink where
 --
 -- /See:/ 'newEntityAdWordsLink_Entity' smart constructor.
 newtype EntityAdWordsLink_Entity = EntityAdWordsLink_Entity
-  { -- |
-    webPropertyRef :: (Core.Maybe WebPropertyRef)
+  { webPropertyRef :: (Core.Maybe WebPropertyRef)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2002,8 +1952,7 @@ instance Core.FromJSON EntityAdWordsLink_Entity where
     Core.withObject
       "EntityAdWordsLink_Entity"
       ( \o ->
-          EntityAdWordsLink_Entity
-            Core.<$> (o Core..:? "webPropertyRef")
+          EntityAdWordsLink_Entity Core.<$> (o Core..:? "webPropertyRef")
       )
 
 instance Core.ToJSON EntityAdWordsLink_Entity where
@@ -2056,9 +2005,7 @@ instance Core.FromJSON EntityAdWordsLinks where
           EntityAdWordsLinks
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#entityAdWordsLinks"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#entityAdWordsLinks")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -2119,9 +2066,7 @@ instance Core.FromJSON EntityUserLink where
           EntityUserLink
             Core.<$> (o Core..:? "entity")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#entityUserLink"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#entityUserLink")
             Core.<*> (o Core..:? "permissions")
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "userRef")
@@ -2199,7 +2144,10 @@ data EntityUserLink_Permissions = EntityUserLink_Permissions
 newEntityUserLink_Permissions ::
   EntityUserLink_Permissions
 newEntityUserLink_Permissions =
-  EntityUserLink_Permissions {effective = Core.Nothing, local = Core.Nothing}
+  EntityUserLink_Permissions
+    { effective = Core.Nothing,
+      local = Core.Nothing
+    }
 
 instance Core.FromJSON EntityUserLink_Permissions where
   parseJSON =
@@ -2263,9 +2211,7 @@ instance Core.FromJSON EntityUserLinks where
           EntityUserLinks
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#entityUserLinks"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#entityUserLinks")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -2432,24 +2378,20 @@ instance Core.ToJSON Experiment where
             ("endTime" Core..=) Core.<$> endTime,
             ("equalWeighting" Core..=) Core.<$> equalWeighting,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("minimumExperimentLengthInDays" Core..=)
               Core.<$> minimumExperimentLengthInDays,
             ("name" Core..=) Core.<$> name,
             ("objectiveMetric" Core..=) Core.<$> objectiveMetric,
-            ("optimizationType" Core..=)
-              Core.<$> optimizationType,
+            ("optimizationType" Core..=) Core.<$> optimizationType,
             ("parentLink" Core..=) Core.<$> parentLink,
             ("profileId" Core..=) Core.<$> profileId,
-            ("reasonExperimentEnded" Core..=)
-              Core.<$> reasonExperimentEnded,
+            ("reasonExperimentEnded" Core..=) Core.<$> reasonExperimentEnded,
             ("rewriteVariationUrlsAsOriginal" Core..=)
               Core.<$> rewriteVariationUrlsAsOriginal,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("servingFramework" Core..=)
-              Core.<$> servingFramework,
+            ("servingFramework" Core..=) Core.<$> servingFramework,
             ("snippet" Core..=) Core.<$> snippet,
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
@@ -2457,8 +2399,7 @@ instance Core.ToJSON Experiment where
             ("updated" Core..=) Core.<$> updated,
             ("variations" Core..=) Core.<$> variations,
             ("webPropertyId" Core..=) Core.<$> webPropertyId,
-            ("winnerConfidenceLevel" Core..=)
-              Core.<$> winnerConfidenceLevel,
+            ("winnerConfidenceLevel" Core..=) Core.<$> winnerConfidenceLevel,
             ("winnerFound" Core..=) Core.<$> winnerFound
           ]
       )
@@ -2478,7 +2419,10 @@ data Experiment_ParentLink = Experiment_ParentLink
 newExperiment_ParentLink ::
   Experiment_ParentLink
 newExperiment_ParentLink =
-  Experiment_ParentLink {href = Core.Nothing, type' = "analytics#profile"}
+  Experiment_ParentLink
+    { href = Core.Nothing,
+      type' = "analytics#profile"
+    }
 
 instance Core.FromJSON Experiment_ParentLink where
   parseJSON =
@@ -2494,9 +2438,7 @@ instance Core.ToJSON Experiment_ParentLink where
   toJSON Experiment_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 --
@@ -2714,8 +2656,7 @@ instance Core.ToJSON Filter where
             ("id" Core..=) Core.<$> id,
             ("includeDetails" Core..=) Core.<$> includeDetails,
             Core.Just ("kind" Core..= kind),
-            ("lowercaseDetails" Core..=)
-              Core.<$> lowercaseDetails,
+            ("lowercaseDetails" Core..=) Core.<$> lowercaseDetails,
             ("name" Core..=) Core.<$> name,
             ("parentLink" Core..=) Core.<$> parentLink,
             ("searchAndReplaceDetails" Core..=)
@@ -2723,8 +2664,7 @@ instance Core.ToJSON Filter where
             ("selfLink" Core..=) Core.<$> selfLink,
             ("type" Core..=) Core.<$> type',
             ("updated" Core..=) Core.<$> updated,
-            ("uppercaseDetails" Core..=)
-              Core.<$> uppercaseDetails
+            ("uppercaseDetails" Core..=) Core.<$> uppercaseDetails
           ]
       )
 
@@ -2815,13 +2755,10 @@ instance Core.ToJSON Filter_AdvancedDetails where
             ("fieldB" Core..=) Core.<$> fieldB,
             ("fieldBIndex" Core..=) Core.<$> fieldBIndex,
             ("fieldBRequired" Core..=) Core.<$> fieldBRequired,
-            ("outputConstructor" Core..=)
-              Core.<$> outputConstructor,
+            ("outputConstructor" Core..=) Core.<$> outputConstructor,
             ("outputToField" Core..=) Core.<$> outputToField,
-            ("outputToFieldIndex" Core..=)
-              Core.<$> outputToFieldIndex,
-            ("overrideOutputField" Core..=)
-              Core.<$> overrideOutputField
+            ("outputToFieldIndex" Core..=) Core.<$> outputToFieldIndex,
+            ("overrideOutputField" Core..=) Core.<$> overrideOutputField
           ]
       )
 
@@ -2840,7 +2777,10 @@ data Filter_LowercaseDetails = Filter_LowercaseDetails
 newFilter_LowercaseDetails ::
   Filter_LowercaseDetails
 newFilter_LowercaseDetails =
-  Filter_LowercaseDetails {field = Core.Nothing, fieldIndex = Core.Nothing}
+  Filter_LowercaseDetails
+    { field = Core.Nothing,
+      fieldIndex = Core.Nothing
+    }
 
 instance Core.FromJSON Filter_LowercaseDetails where
   parseJSON =
@@ -2876,7 +2816,10 @@ data Filter_ParentLink = Filter_ParentLink
 newFilter_ParentLink ::
   Filter_ParentLink
 newFilter_ParentLink =
-  Filter_ParentLink {href = Core.Nothing, type' = "analytics#account"}
+  Filter_ParentLink
+    { href = Core.Nothing,
+      type' = "analytics#account"
+    }
 
 instance Core.FromJSON Filter_ParentLink where
   parseJSON =
@@ -2892,9 +2835,7 @@ instance Core.ToJSON Filter_ParentLink where
   toJSON Filter_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Details for the filter of the type SEARCH/AND/REPLACE.
@@ -2966,7 +2907,10 @@ data Filter_UppercaseDetails = Filter_UppercaseDetails
 newFilter_UppercaseDetails ::
   Filter_UppercaseDetails
 newFilter_UppercaseDetails =
-  Filter_UppercaseDetails {field = Core.Nothing, fieldIndex = Core.Nothing}
+  Filter_UppercaseDetails
+    { field = Core.Nothing,
+      fieldIndex = Core.Nothing
+    }
 
 instance Core.FromJSON Filter_UppercaseDetails where
   parseJSON =
@@ -3051,9 +2995,7 @@ instance Core.FromJSON FilterExpression where
             Core.<*> (o Core..:? "expressionValue")
             Core.<*> (o Core..:? "field")
             Core.<*> (o Core..:? "fieldIndex")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#filterExpression"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#filterExpression")
             Core.<*> (o Core..:? "matchType")
       )
 
@@ -3203,7 +3145,6 @@ data GaData = GaData
     containsSampledData :: (Core.Maybe Core.Bool),
     -- | The last refreshed time in seconds for Analytics data.
     dataLastRefreshed :: (Core.Maybe Core.Int64),
-    -- |
     dataTable :: (Core.Maybe GaData_DataTable),
     -- | Unique ID for this data response.
     id :: (Core.Maybe Core.Text),
@@ -3266,9 +3207,7 @@ instance Core.FromJSON GaData where
           GaData
             Core.<$> (o Core..:? "columnHeaders")
             Core.<*> (o Core..:? "containsSampledData")
-            Core.<*> ( o Core..:? "dataLastRefreshed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataLastRefreshed" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dataTable")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "itemsPerPage")
@@ -3278,12 +3217,8 @@ instance Core.FromJSON GaData where
             Core.<*> (o Core..:? "profileInfo")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "sampleSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "sampleSpace"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sampleSize" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "sampleSpace" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalResults")
             Core.<*> (o Core..:? "totalsForAllResults")
@@ -3294,9 +3229,9 @@ instance Core.ToJSON GaData where
     Core.object
       ( Core.catMaybes
           [ ("columnHeaders" Core..=) Core.<$> columnHeaders,
-            ("containsSampledData" Core..=)
-              Core.<$> containsSampledData,
-            ("dataLastRefreshed" Core..=) Core.. Core.AsText
+            ("containsSampledData" Core..=) Core.<$> containsSampledData,
+            ("dataLastRefreshed" Core..=)
+              Core.. Core.AsText
               Core.<$> dataLastRefreshed,
             ("dataTable" Core..=) Core.<$> dataTable,
             ("id" Core..=) Core.<$> id,
@@ -3307,14 +3242,11 @@ instance Core.ToJSON GaData where
             ("profileInfo" Core..=) Core.<$> profileInfo,
             ("query" Core..=) Core.<$> query,
             ("rows" Core..=) Core.<$> rows,
-            ("sampleSize" Core..=) Core.. Core.AsText
-              Core.<$> sampleSize,
-            ("sampleSpace" Core..=) Core.. Core.AsText
-              Core.<$> sampleSpace,
+            ("sampleSize" Core..=) Core.. Core.AsText Core.<$> sampleSize,
+            ("sampleSpace" Core..=) Core.. Core.AsText Core.<$> sampleSpace,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("totalResults" Core..=) Core.<$> totalResults,
-            ("totalsForAllResults" Core..=)
-              Core.<$> totalsForAllResults
+            ("totalsForAllResults" Core..=) Core.<$> totalsForAllResults
           ]
       )
 
@@ -3364,9 +3296,7 @@ instance Core.ToJSON GaData_ColumnHeadersItem where
 --
 -- /See:/ 'newGaData_DataTable' smart constructor.
 data GaData_DataTable = GaData_DataTable
-  { -- |
-    cols :: (Core.Maybe [GaData_DataTable_ColsItem]),
-    -- |
+  { cols :: (Core.Maybe [GaData_DataTable_ColsItem]),
     rows :: (Core.Maybe [GaData_DataTable_RowsItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3383,26 +3313,22 @@ instance Core.FromJSON GaData_DataTable where
       "GaData_DataTable"
       ( \o ->
           GaData_DataTable
-            Core.<$> (o Core..:? "cols") Core.<*> (o Core..:? "rows")
+            Core.<$> (o Core..:? "cols")
+            Core.<*> (o Core..:? "rows")
       )
 
 instance Core.ToJSON GaData_DataTable where
   toJSON GaData_DataTable {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cols" Core..=) Core.<$> cols,
-            ("rows" Core..=) Core.<$> rows
-          ]
+          [("cols" Core..=) Core.<$> cols, ("rows" Core..=) Core.<$> rows]
       )
 
 --
 -- /See:/ 'newGaData_DataTable_ColsItem' smart constructor.
 data GaData_DataTable_ColsItem = GaData_DataTable_ColsItem
-  { -- |
-    id :: (Core.Maybe Core.Text),
-    -- |
+  { id :: (Core.Maybe Core.Text),
     label :: (Core.Maybe Core.Text),
-    -- |
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3441,34 +3367,30 @@ instance Core.ToJSON GaData_DataTable_ColsItem where
 --
 -- /See:/ 'newGaData_DataTable_RowsItem' smart constructor.
 newtype GaData_DataTable_RowsItem = GaData_DataTable_RowsItem
-  { -- |
-    c :: (Core.Maybe [GaData_DataTable_RowsItem_CItem])
+  { c :: (Core.Maybe [GaData_DataTable_RowsItem_CItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GaData_DataTable_RowsItem' with the minimum fields required to make a request.
 newGaData_DataTable_RowsItem ::
   GaData_DataTable_RowsItem
-newGaData_DataTable_RowsItem = GaData_DataTable_RowsItem {c = Core.Nothing}
+newGaData_DataTable_RowsItem =
+  GaData_DataTable_RowsItem {c = Core.Nothing}
 
 instance Core.FromJSON GaData_DataTable_RowsItem where
   parseJSON =
     Core.withObject
       "GaData_DataTable_RowsItem"
-      ( \o ->
-          GaData_DataTable_RowsItem Core.<$> (o Core..:? "c")
-      )
+      (\o -> GaData_DataTable_RowsItem Core.<$> (o Core..:? "c"))
 
 instance Core.ToJSON GaData_DataTable_RowsItem where
   toJSON GaData_DataTable_RowsItem {..} =
-    Core.object
-      (Core.catMaybes [("c" Core..=) Core.<$> c])
+    Core.object (Core.catMaybes [("c" Core..=) Core.<$> c])
 
 --
 -- /See:/ 'newGaData_DataTable_RowsItem_CItem' smart constructor.
 newtype GaData_DataTable_RowsItem_CItem = GaData_DataTable_RowsItem_CItem
-  { -- |
-    v :: (Core.Maybe Core.Text)
+  { v :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3478,22 +3400,15 @@ newGaData_DataTable_RowsItem_CItem ::
 newGaData_DataTable_RowsItem_CItem =
   GaData_DataTable_RowsItem_CItem {v = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GaData_DataTable_RowsItem_CItem
-  where
+instance Core.FromJSON GaData_DataTable_RowsItem_CItem where
   parseJSON =
     Core.withObject
       "GaData_DataTable_RowsItem_CItem"
-      ( \o ->
-          GaData_DataTable_RowsItem_CItem
-            Core.<$> (o Core..:? "v")
-      )
+      (\o -> GaData_DataTable_RowsItem_CItem Core.<$> (o Core..:? "v"))
 
 instance Core.ToJSON GaData_DataTable_RowsItem_CItem where
   toJSON GaData_DataTable_RowsItem_CItem {..} =
-    Core.object
-      (Core.catMaybes [("v" Core..=) Core.<$> v])
+    Core.object (Core.catMaybes [("v" Core..=) Core.<$> v])
 
 -- | Information for the view (profile), for which the Analytics data was requested.
 --
@@ -3546,8 +3461,7 @@ instance Core.ToJSON GaData_ProfileInfo where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             ("profileId" Core..=) Core.<$> profileId,
             ("profileName" Core..=) Core.<$> profileName,
             ("tableId" Core..=) Core.<$> tableId,
@@ -3661,13 +3575,11 @@ instance Core.FromJSON GaData_TotalsForAllResults where
     Core.withObject
       "GaData_TotalsForAllResults"
       ( \o ->
-          GaData_TotalsForAllResults
-            Core.<$> (Core.parseJSONObject o)
+          GaData_TotalsForAllResults Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GaData_TotalsForAllResults where
-  toJSON GaData_TotalsForAllResults {..} =
-    Core.toJSON additional
+  toJSON GaData_TotalsForAllResults {..} = Core.toJSON additional
 
 -- | JSON template for Analytics goal resource.
 --
@@ -3772,8 +3684,7 @@ instance Core.ToJSON Goal where
             ("created" Core..=) Core.<$> created,
             ("eventDetails" Core..=) Core.<$> eventDetails,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
             ("parentLink" Core..=) Core.<$> parentLink,
@@ -3781,13 +3692,10 @@ instance Core.ToJSON Goal where
             ("selfLink" Core..=) Core.<$> selfLink,
             ("type" Core..=) Core.<$> type',
             ("updated" Core..=) Core.<$> updated,
-            ("urlDestinationDetails" Core..=)
-              Core.<$> urlDestinationDetails,
+            ("urlDestinationDetails" Core..=) Core.<$> urlDestinationDetails,
             ("value" Core..=) Core.<$> value,
-            ("visitNumPagesDetails" Core..=)
-              Core.<$> visitNumPagesDetails,
-            ("visitTimeOnSiteDetails" Core..=)
-              Core.<$> visitTimeOnSiteDetails,
+            ("visitNumPagesDetails" Core..=) Core.<$> visitNumPagesDetails,
+            ("visitTimeOnSiteDetails" Core..=) Core.<$> visitTimeOnSiteDetails,
             ("webPropertyId" Core..=) Core.<$> webPropertyId
           ]
       )
@@ -3826,8 +3734,7 @@ instance Core.ToJSON Goal_EventDetails where
   toJSON Goal_EventDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("eventConditions" Core..=)
-              Core.<$> eventConditions,
+          [ ("eventConditions" Core..=) Core.<$> eventConditions,
             ("useEventValue" Core..=) Core.<$> useEventValue
           ]
       )
@@ -3853,40 +3760,34 @@ newGoal_EventDetails_EventConditionsItem ::
   Goal_EventDetails_EventConditionsItem
 newGoal_EventDetails_EventConditionsItem =
   Goal_EventDetails_EventConditionsItem
-    { comparisonType = Core.Nothing,
+    { comparisonType =
+        Core.Nothing,
       comparisonValue = Core.Nothing,
       expression = Core.Nothing,
       matchType = Core.Nothing,
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Goal_EventDetails_EventConditionsItem
-  where
+instance Core.FromJSON Goal_EventDetails_EventConditionsItem where
   parseJSON =
     Core.withObject
       "Goal_EventDetails_EventConditionsItem"
       ( \o ->
           Goal_EventDetails_EventConditionsItem
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> ( o Core..:? "comparisonValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "comparisonValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "expression")
             Core.<*> (o Core..:? "matchType")
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    Goal_EventDetails_EventConditionsItem
-  where
+instance Core.ToJSON Goal_EventDetails_EventConditionsItem where
   toJSON Goal_EventDetails_EventConditionsItem {..} =
     Core.object
       ( Core.catMaybes
           [ ("comparisonType" Core..=) Core.<$> comparisonType,
-            ("comparisonValue" Core..=) Core.. Core.AsText
+            ("comparisonValue" Core..=)
+              Core.. Core.AsText
               Core.<$> comparisonValue,
             ("expression" Core..=) Core.<$> expression,
             ("matchType" Core..=) Core.<$> matchType,
@@ -3925,9 +3826,7 @@ instance Core.ToJSON Goal_ParentLink where
   toJSON Goal_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Details for the goal of the type URL_DESTINATION.
@@ -3977,8 +3876,7 @@ instance Core.ToJSON Goal_UrlDestinationDetails where
     Core.object
       ( Core.catMaybes
           [ ("caseSensitive" Core..=) Core.<$> caseSensitive,
-            ("firstStepRequired" Core..=)
-              Core.<$> firstStepRequired,
+            ("firstStepRequired" Core..=) Core.<$> firstStepRequired,
             ("matchType" Core..=) Core.<$> matchType,
             ("steps" Core..=) Core.<$> steps,
             ("url" Core..=) Core.<$> url
@@ -4007,10 +3905,7 @@ newGoal_UrlDestinationDetails_StepsItem =
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Goal_UrlDestinationDetails_StepsItem
-  where
+instance Core.FromJSON Goal_UrlDestinationDetails_StepsItem where
   parseJSON =
     Core.withObject
       "Goal_UrlDestinationDetails_StepsItem"
@@ -4021,10 +3916,7 @@ instance
             Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    Goal_UrlDestinationDetails_StepsItem
-  where
+instance Core.ToJSON Goal_UrlDestinationDetails_StepsItem where
   toJSON Goal_UrlDestinationDetails_StepsItem {..} =
     Core.object
       ( Core.catMaybes
@@ -4061,9 +3953,7 @@ instance Core.FromJSON Goal_VisitNumPagesDetails where
       ( \o ->
           Goal_VisitNumPagesDetails
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> ( o Core..:? "comparisonValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "comparisonValue" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Goal_VisitNumPagesDetails where
@@ -4071,7 +3961,8 @@ instance Core.ToJSON Goal_VisitNumPagesDetails where
     Core.object
       ( Core.catMaybes
           [ ("comparisonType" Core..=) Core.<$> comparisonType,
-            ("comparisonValue" Core..=) Core.. Core.AsText
+            ("comparisonValue" Core..=)
+              Core.. Core.AsText
               Core.<$> comparisonValue
           ]
       )
@@ -4103,9 +3994,7 @@ instance Core.FromJSON Goal_VisitTimeOnSiteDetails where
       ( \o ->
           Goal_VisitTimeOnSiteDetails
             Core.<$> (o Core..:? "comparisonType")
-            Core.<*> ( o Core..:? "comparisonValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "comparisonValue" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Goal_VisitTimeOnSiteDetails where
@@ -4113,7 +4002,8 @@ instance Core.ToJSON Goal_VisitTimeOnSiteDetails where
     Core.object
       ( Core.catMaybes
           [ ("comparisonType" Core..=) Core.<$> comparisonType,
-            ("comparisonValue" Core..=) Core.. Core.AsText
+            ("comparisonValue" Core..=)
+              Core.. Core.AsText
               Core.<$> comparisonValue
           ]
       )
@@ -4191,11 +4081,8 @@ instance Core.ToJSON Goals where
 --
 -- /See:/ 'newHashClientIdRequest' smart constructor.
 data HashClientIdRequest = HashClientIdRequest
-  { -- |
-    clientId :: (Core.Maybe Core.Text),
-    -- |
+  { clientId :: (Core.Maybe Core.Text),
     kind :: Core.Text,
-    -- |
     webPropertyId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4217,9 +4104,7 @@ instance Core.FromJSON HashClientIdRequest where
       ( \o ->
           HashClientIdRequest
             Core.<$> (o Core..:? "clientId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#hashClientIdRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#hashClientIdRequest")
             Core.<*> (o Core..:? "webPropertyId")
       )
 
@@ -4237,13 +4122,9 @@ instance Core.ToJSON HashClientIdRequest where
 --
 -- /See:/ 'newHashClientIdResponse' smart constructor.
 data HashClientIdResponse = HashClientIdResponse
-  { -- |
-    clientId :: (Core.Maybe Core.Text),
-    -- |
+  { clientId :: (Core.Maybe Core.Text),
     hashedClientId :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
-    -- |
     webPropertyId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4267,9 +4148,7 @@ instance Core.FromJSON HashClientIdResponse where
           HashClientIdResponse
             Core.<$> (o Core..:? "clientId")
             Core.<*> (o Core..:? "hashedClientId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#hashClientIdResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#hashClientIdResponse")
             Core.<*> (o Core..:? "webPropertyId")
       )
 
@@ -4321,9 +4200,7 @@ instance Core.FromJSON IncludeConditions where
           IncludeConditions
             Core.<$> (o Core..:? "daysToLookBack")
             Core.<*> (o Core..:? "isSmartList")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#includeConditions"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#includeConditions")
             Core.<*> (o Core..:? "membershipDurationDays")
             Core.<*> (o Core..:? "segment")
       )
@@ -4335,8 +4212,7 @@ instance Core.ToJSON IncludeConditions where
           [ ("daysToLookBack" Core..=) Core.<$> daysToLookBack,
             ("isSmartList" Core..=) Core.<$> isSmartList,
             Core.Just ("kind" Core..= kind),
-            ("membershipDurationDays" Core..=)
-              Core.<$> membershipDurationDays,
+            ("membershipDurationDays" Core..=) Core.<$> membershipDurationDays,
             ("segment" Core..=) Core.<$> segment
           ]
       )
@@ -4395,9 +4271,7 @@ instance Core.FromJSON LinkedForeignAccount where
             Core.<*> (o Core..:? "eligibleForSearch")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "internalWebPropertyId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#linkedForeignAccount"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#linkedForeignAccount")
             Core.<*> (o Core..:? "linkedAccountId")
             Core.<*> (o Core..:? "remarketingAudienceId")
             Core.<*> (o Core..:? "status")
@@ -4410,15 +4284,12 @@ instance Core.ToJSON LinkedForeignAccount where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("eligibleForSearch" Core..=)
-              Core.<$> eligibleForSearch,
+            ("eligibleForSearch" Core..=) Core.<$> eligibleForSearch,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("linkedAccountId" Core..=) Core.<$> linkedAccountId,
-            ("remarketingAudienceId" Core..=)
-              Core.<$> remarketingAudienceId,
+            ("remarketingAudienceId" Core..=) Core.<$> remarketingAudienceId,
             ("status" Core..=) Core.<$> status,
             ("type" Core..=) Core.<$> type',
             ("webPropertyId" Core..=) Core.<$> webPropertyId
@@ -4500,12 +4371,8 @@ instance Core.FromJSON McfData where
             Core.<*> (o Core..:? "profileInfo")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "sampleSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "sampleSpace"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sampleSize" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "sampleSpace" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "totalResults")
             Core.<*> (o Core..:? "totalsForAllResults")
@@ -4516,8 +4383,7 @@ instance Core.ToJSON McfData where
     Core.object
       ( Core.catMaybes
           [ ("columnHeaders" Core..=) Core.<$> columnHeaders,
-            ("containsSampledData" Core..=)
-              Core.<$> containsSampledData,
+            ("containsSampledData" Core..=) Core.<$> containsSampledData,
             ("id" Core..=) Core.<$> id,
             ("itemsPerPage" Core..=) Core.<$> itemsPerPage,
             Core.Just ("kind" Core..= kind),
@@ -4526,14 +4392,11 @@ instance Core.ToJSON McfData where
             ("profileInfo" Core..=) Core.<$> profileInfo,
             ("query" Core..=) Core.<$> query,
             ("rows" Core..=) Core.<$> rows,
-            ("sampleSize" Core..=) Core.. Core.AsText
-              Core.<$> sampleSize,
-            ("sampleSpace" Core..=) Core.. Core.AsText
-              Core.<$> sampleSpace,
+            ("sampleSize" Core..=) Core.. Core.AsText Core.<$> sampleSize,
+            ("sampleSpace" Core..=) Core.. Core.AsText Core.<$> sampleSpace,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("totalResults" Core..=) Core.<$> totalResults,
-            ("totalsForAllResults" Core..=)
-              Core.<$> totalsForAllResults
+            ("totalsForAllResults" Core..=) Core.<$> totalsForAllResults
           ]
       )
 
@@ -4631,8 +4494,7 @@ instance Core.ToJSON McfData_ProfileInfo where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             ("profileId" Core..=) Core.<$> profileId,
             ("profileName" Core..=) Core.<$> profileName,
             ("tableId" Core..=) Core.<$> tableId,
@@ -4758,8 +4620,7 @@ instance Core.ToJSON McfData_RowsItemItem where
   toJSON McfData_RowsItemItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conversionPathValue" Core..=)
-              Core.<$> conversionPathValue,
+          [ ("conversionPathValue" Core..=) Core.<$> conversionPathValue,
             ("primitiveValue" Core..=) Core.<$> primitiveValue
           ]
       )
@@ -4779,14 +4640,12 @@ newMcfData_RowsItemItem_ConversionPathValueItem ::
   McfData_RowsItemItem_ConversionPathValueItem
 newMcfData_RowsItemItem_ConversionPathValueItem =
   McfData_RowsItemItem_ConversionPathValueItem
-    { interactionType = Core.Nothing,
+    { interactionType =
+        Core.Nothing,
       nodeValue = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    McfData_RowsItemItem_ConversionPathValueItem
-  where
+instance Core.FromJSON McfData_RowsItemItem_ConversionPathValueItem where
   parseJSON =
     Core.withObject
       "McfData_RowsItemItem_ConversionPathValueItem"
@@ -4796,19 +4655,14 @@ instance
             Core.<*> (o Core..:? "nodeValue")
       )
 
-instance
-  Core.ToJSON
-    McfData_RowsItemItem_ConversionPathValueItem
-  where
-  toJSON
-    McfData_RowsItemItem_ConversionPathValueItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("interactionType" Core..=)
-                Core.<$> interactionType,
-              ("nodeValue" Core..=) Core.<$> nodeValue
-            ]
-        )
+instance Core.ToJSON McfData_RowsItemItem_ConversionPathValueItem where
+  toJSON McfData_RowsItemItem_ConversionPathValueItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("interactionType" Core..=) Core.<$> interactionType,
+            ("nodeValue" Core..=) Core.<$> nodeValue
+          ]
+      )
 
 -- | Total values for the requested metrics over all the results, not just the results returned in this response. The order of the metric totals is same as the metric order specified in the request.
 --
@@ -4832,13 +4686,11 @@ instance Core.FromJSON McfData_TotalsForAllResults where
     Core.withObject
       "McfData_TotalsForAllResults"
       ( \o ->
-          McfData_TotalsForAllResults
-            Core.<$> (Core.parseJSONObject o)
+          McfData_TotalsForAllResults Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON McfData_TotalsForAllResults where
-  toJSON McfData_TotalsForAllResults {..} =
-    Core.toJSON additional
+  toJSON McfData_TotalsForAllResults {..} = Core.toJSON additional
 
 -- | JSON template for an Analytics view (profile).
 --
@@ -4971,21 +4823,17 @@ instance Core.ToJSON Profile where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("botFilteringEnabled" Core..=)
-              Core.<$> botFilteringEnabled,
+            ("botFilteringEnabled" Core..=) Core.<$> botFilteringEnabled,
             ("childLink" Core..=) Core.<$> childLink,
             ("created" Core..=) Core.<$> created,
             ("currency" Core..=) Core.<$> currency,
             ("defaultPage" Core..=) Core.<$> defaultPage,
-            ("eCommerceTracking" Core..=)
-              Core.<$> eCommerceTracking,
+            ("eCommerceTracking" Core..=) Core.<$> eCommerceTracking,
             ("enhancedECommerceTracking" Core..=)
               Core.<$> enhancedECommerceTracking,
-            ("excludeQueryParameters" Core..=)
-              Core.<$> excludeQueryParameters,
+            ("excludeQueryParameters" Core..=) Core.<$> excludeQueryParameters,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
             ("parentLink" Core..=) Core.<$> parentLink,
@@ -5039,9 +4887,7 @@ instance Core.ToJSON Profile_ChildLink where
   toJSON Profile_ChildLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Parent link for this view (profile). Points to the web property to which this view (profile) belongs.
@@ -5059,7 +4905,10 @@ data Profile_ParentLink = Profile_ParentLink
 newProfile_ParentLink ::
   Profile_ParentLink
 newProfile_ParentLink =
-  Profile_ParentLink {href = Core.Nothing, type' = "analytics#webproperty"}
+  Profile_ParentLink
+    { href = Core.Nothing,
+      type' = "analytics#webproperty"
+    }
 
 instance Core.FromJSON Profile_ParentLink where
   parseJSON =
@@ -5075,9 +4924,7 @@ instance Core.ToJSON Profile_ParentLink where
   toJSON Profile_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Permissions the user has for this view (profile).
@@ -5092,23 +4939,19 @@ newtype Profile_Permissions = Profile_Permissions
 -- | Creates a value of 'Profile_Permissions' with the minimum fields required to make a request.
 newProfile_Permissions ::
   Profile_Permissions
-newProfile_Permissions = Profile_Permissions {effective = Core.Nothing}
+newProfile_Permissions =
+  Profile_Permissions {effective = Core.Nothing}
 
 instance Core.FromJSON Profile_Permissions where
   parseJSON =
     Core.withObject
       "Profile_Permissions"
-      ( \o ->
-          Profile_Permissions
-            Core.<$> (o Core..:? "effective")
-      )
+      (\o -> Profile_Permissions Core.<$> (o Core..:? "effective"))
 
 instance Core.ToJSON Profile_Permissions where
   toJSON Profile_Permissions {..} =
     Core.object
-      ( Core.catMaybes
-          [("effective" Core..=) Core.<$> effective]
-      )
+      (Core.catMaybes [("effective" Core..=) Core.<$> effective])
 
 -- | JSON template for an Analytics profile filter link.
 --
@@ -5150,9 +4993,7 @@ instance Core.FromJSON ProfileFilterLink where
           ProfileFilterLink
             Core.<$> (o Core..:? "filterRef")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#profileFilterLink"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#profileFilterLink")
             Core.<*> (o Core..:? "profileRef")
             Core.<*> (o Core..:? "rank")
             Core.<*> (o Core..:? "selfLink")
@@ -5217,9 +5058,7 @@ instance Core.FromJSON ProfileFilterLinks where
           ProfileFilterLinks
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#profileFilterLinks"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#profileFilterLinks")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -5299,8 +5138,7 @@ instance Core.ToJSON ProfileRef where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("href" Core..=) Core.<$> href,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
             ("webPropertyId" Core..=) Core.<$> webPropertyId
@@ -5343,9 +5181,7 @@ instance Core.FromJSON ProfileSummary where
       ( \o ->
           ProfileSummary
             Core.<$> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#profileSummary"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#profileSummary")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "starred")
             Core.<*> (o Core..:? "type")
@@ -5502,8 +5338,7 @@ instance Core.ToJSON RealtimeData where
             ("rows" Core..=) Core.<$> rows,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("totalResults" Core..=) Core.<$> totalResults,
-            ("totalsForAllResults" Core..=)
-              Core.<$> totalsForAllResults
+            ("totalsForAllResults" Core..=) Core.<$> totalsForAllResults
           ]
       )
 
@@ -5601,8 +5436,7 @@ instance Core.ToJSON RealtimeData_ProfileInfo where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             ("profileId" Core..=) Core.<$> profileId,
             ("profileName" Core..=) Core.<$> profileName,
             ("tableId" Core..=) Core.<$> tableId,
@@ -5686,16 +5520,12 @@ newRealtimeData_TotalsForAllResults ::
 newRealtimeData_TotalsForAllResults additional =
   RealtimeData_TotalsForAllResults {additional = additional}
 
-instance
-  Core.FromJSON
-    RealtimeData_TotalsForAllResults
-  where
+instance Core.FromJSON RealtimeData_TotalsForAllResults where
   parseJSON =
     Core.withObject
       "RealtimeData_TotalsForAllResults"
       ( \o ->
-          RealtimeData_TotalsForAllResults
-            Core.<$> (Core.parseJSONObject o)
+          RealtimeData_TotalsForAllResults Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON RealtimeData_TotalsForAllResults where
@@ -5771,9 +5601,7 @@ instance Core.FromJSON RemarketingAudience where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "internalWebPropertyId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#remarketingAudience"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#remarketingAudience")
             Core.<*> (o Core..:? "linkedAdAccounts")
             Core.<*> (o Core..:? "linkedViews")
             Core.<*> (o Core..:? "name")
@@ -5787,17 +5615,14 @@ instance Core.ToJSON RemarketingAudience where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("audienceDefinition" Core..=)
-              Core.<$> audienceDefinition,
+            ("audienceDefinition" Core..=) Core.<$> audienceDefinition,
             ("audienceType" Core..=) Core.<$> audienceType,
             ("created" Core..=) Core.<$> created,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
-            ("linkedAdAccounts" Core..=)
-              Core.<$> linkedAdAccounts,
+            ("linkedAdAccounts" Core..=) Core.<$> linkedAdAccounts,
             ("linkedViews" Core..=) Core.<$> linkedViews,
             ("name" Core..=) Core.<$> name,
             ("stateBasedAudienceDefinition" Core..=)
@@ -5820,12 +5645,12 @@ newtype RemarketingAudience_AudienceDefinition = RemarketingAudience_AudienceDef
 newRemarketingAudience_AudienceDefinition ::
   RemarketingAudience_AudienceDefinition
 newRemarketingAudience_AudienceDefinition =
-  RemarketingAudience_AudienceDefinition {includeConditions = Core.Nothing}
+  RemarketingAudience_AudienceDefinition
+    { includeConditions =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    RemarketingAudience_AudienceDefinition
-  where
+instance Core.FromJSON RemarketingAudience_AudienceDefinition where
   parseJSON =
     Core.withObject
       "RemarketingAudience_AudienceDefinition"
@@ -5834,16 +5659,11 @@ instance
             Core.<$> (o Core..:? "includeConditions")
       )
 
-instance
-  Core.ToJSON
-    RemarketingAudience_AudienceDefinition
-  where
+instance Core.ToJSON RemarketingAudience_AudienceDefinition where
   toJSON RemarketingAudience_AudienceDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("includeConditions" Core..=)
-              Core.<$> includeConditions
-          ]
+          [("includeConditions" Core..=) Core.<$> includeConditions]
       )
 
 -- | A state based audience definition that will cause a user to be added or removed from an audience.
@@ -5865,7 +5685,8 @@ newRemarketingAudience_StateBasedAudienceDefinition ::
   RemarketingAudience_StateBasedAudienceDefinition
 newRemarketingAudience_StateBasedAudienceDefinition =
   RemarketingAudience_StateBasedAudienceDefinition
-    { excludeConditions = Core.Nothing,
+    { excludeConditions =
+        Core.Nothing,
       includeConditions = Core.Nothing
     }
 
@@ -5879,23 +5700,20 @@ instance
       ( \o ->
           RemarketingAudience_StateBasedAudienceDefinition
             Core.<$> (o Core..:? "excludeConditions")
-              Core.<*> (o Core..:? "includeConditions")
+            Core.<*> (o Core..:? "includeConditions")
       )
 
 instance
   Core.ToJSON
     RemarketingAudience_StateBasedAudienceDefinition
   where
-  toJSON
-    RemarketingAudience_StateBasedAudienceDefinition {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("excludeConditions" Core..=)
-                Core.<$> excludeConditions,
-              ("includeConditions" Core..=)
-                Core.<$> includeConditions
-            ]
-        )
+  toJSON RemarketingAudience_StateBasedAudienceDefinition {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("excludeConditions" Core..=) Core.<$> excludeConditions,
+            ("includeConditions" Core..=) Core.<$> includeConditions
+          ]
+      )
 
 -- | Defines the conditions to exclude users from the audience.
 --
@@ -5913,7 +5731,8 @@ newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions ::
   RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
 newRemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions =
   RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
-    { exclusionDuration = Core.Nothing,
+    { exclusionDuration =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
@@ -5927,7 +5746,7 @@ instance
       ( \o ->
           RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions
             Core.<$> (o Core..:? "exclusionDuration")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
@@ -5938,8 +5757,7 @@ instance
     RemarketingAudience_StateBasedAudienceDefinition_ExcludeConditions {..} =
       Core.object
         ( Core.catMaybes
-            [ ("exclusionDuration" Core..=)
-                Core.<$> exclusionDuration,
+            [ ("exclusionDuration" Core..=) Core.<$> exclusionDuration,
               ("segment" Core..=) Core.<$> segment
             ]
         )
@@ -5990,9 +5808,7 @@ instance Core.FromJSON RemarketingAudiences where
           RemarketingAudiences
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#remarketingAudiences"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#remarketingAudiences")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -6244,9 +6060,7 @@ instance Core.FromJSON UnsampledReport where
             Core.<*> (o Core..:? "end-date")
             Core.<*> (o Core..:? "filters")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#unsampledReport"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#unsampledReport")
             Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "profileId")
             Core.<*> (o Core..:? "segment")
@@ -6268,8 +6082,7 @@ instance Core.ToJSON UnsampledReport where
             ("created" Core..=) Core.<$> created,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("downloadType" Core..=) Core.<$> downloadType,
-            ("driveDownloadDetails" Core..=)
-              Core.<$> driveDownloadDetails,
+            ("driveDownloadDetails" Core..=) Core.<$> driveDownloadDetails,
             ("end-date" Core..=) Core.<$> endDate,
             ("filters" Core..=) Core.<$> filters,
             ("id" Core..=) Core.<$> id,
@@ -6302,14 +6115,12 @@ newUnsampledReport_CloudStorageDownloadDetails ::
   UnsampledReport_CloudStorageDownloadDetails
 newUnsampledReport_CloudStorageDownloadDetails =
   UnsampledReport_CloudStorageDownloadDetails
-    { bucketId = Core.Nothing,
+    { bucketId =
+        Core.Nothing,
       objectId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UnsampledReport_CloudStorageDownloadDetails
-  where
+instance Core.FromJSON UnsampledReport_CloudStorageDownloadDetails where
   parseJSON =
     Core.withObject
       "UnsampledReport_CloudStorageDownloadDetails"
@@ -6319,18 +6130,14 @@ instance
             Core.<*> (o Core..:? "objectId")
       )
 
-instance
-  Core.ToJSON
-    UnsampledReport_CloudStorageDownloadDetails
-  where
-  toJSON
-    UnsampledReport_CloudStorageDownloadDetails {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bucketId" Core..=) Core.<$> bucketId,
-              ("objectId" Core..=) Core.<$> objectId
-            ]
-        )
+instance Core.ToJSON UnsampledReport_CloudStorageDownloadDetails where
+  toJSON UnsampledReport_CloudStorageDownloadDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bucketId" Core..=) Core.<$> bucketId,
+            ("objectId" Core..=) Core.<$> objectId
+          ]
+      )
 
 -- | Download details for a file stored in Google Drive.
 --
@@ -6347,10 +6154,7 @@ newUnsampledReport_DriveDownloadDetails ::
 newUnsampledReport_DriveDownloadDetails =
   UnsampledReport_DriveDownloadDetails {documentId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    UnsampledReport_DriveDownloadDetails
-  where
+instance Core.FromJSON UnsampledReport_DriveDownloadDetails where
   parseJSON =
     Core.withObject
       "UnsampledReport_DriveDownloadDetails"
@@ -6359,15 +6163,10 @@ instance
             Core.<$> (o Core..:? "documentId")
       )
 
-instance
-  Core.ToJSON
-    UnsampledReport_DriveDownloadDetails
-  where
+instance Core.ToJSON UnsampledReport_DriveDownloadDetails where
   toJSON UnsampledReport_DriveDownloadDetails {..} =
     Core.object
-      ( Core.catMaybes
-          [("documentId" Core..=) Core.<$> documentId]
-      )
+      (Core.catMaybes [("documentId" Core..=) Core.<$> documentId])
 
 -- | An unsampled report collection lists Analytics unsampled reports to which the user has access. Each view (profile) can have a set of unsampled reports. Each resource in the unsampled report collection corresponds to a single Analytics unsampled report.
 --
@@ -6415,9 +6214,7 @@ instance Core.FromJSON UnsampledReports where
           UnsampledReports
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#unsampledReports"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#unsampledReports")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -6481,9 +6278,7 @@ instance Core.FromJSON Upload where
       "Upload"
       ( \o ->
           Upload
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "customDataSourceId")
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "id")
@@ -6496,10 +6291,8 @@ instance Core.ToJSON Upload where
   toJSON Upload {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("customDataSourceId" Core..=)
-              Core.<$> customDataSourceId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("customDataSourceId" Core..=) Core.<$> customDataSourceId,
             ("errors" Core..=) Core.<$> errors,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
@@ -6613,9 +6406,7 @@ instance Core.FromJSON UserDeletionRequest where
             Core.<$> (o Core..:? "deletionRequestTime")
             Core.<*> (o Core..:? "firebaseProjectId")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#userDeletionRequest"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#userDeletionRequest")
             Core.<*> (o Core..:? "propertyId")
             Core.<*> (o Core..:? "webPropertyId")
       )
@@ -6624,10 +6415,8 @@ instance Core.ToJSON UserDeletionRequest where
   toJSON UserDeletionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deletionRequestTime" Core..=)
-              Core.<$> deletionRequestTime,
-            ("firebaseProjectId" Core..=)
-              Core.<$> firebaseProjectId,
+          [ ("deletionRequestTime" Core..=) Core.<$> deletionRequestTime,
+            ("firebaseProjectId" Core..=) Core.<$> firebaseProjectId,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("propertyId" Core..=) Core.<$> propertyId,
@@ -6650,7 +6439,10 @@ data UserDeletionRequest_Id = UserDeletionRequest_Id
 newUserDeletionRequest_Id ::
   UserDeletionRequest_Id
 newUserDeletionRequest_Id =
-  UserDeletionRequest_Id {type' = Core.Nothing, userId = Core.Nothing}
+  UserDeletionRequest_Id
+    { type' = Core.Nothing,
+      userId = Core.Nothing
+    }
 
 instance Core.FromJSON UserDeletionRequest_Id where
   parseJSON =
@@ -6658,7 +6450,8 @@ instance Core.FromJSON UserDeletionRequest_Id where
       "UserDeletionRequest_Id"
       ( \o ->
           UserDeletionRequest_Id
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "userId")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "userId")
       )
 
 instance Core.ToJSON UserDeletionRequest_Id where
@@ -6678,7 +6471,6 @@ data UserRef = UserRef
     email :: (Core.Maybe Core.Text),
     -- | User ID.
     id :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6687,7 +6479,11 @@ data UserRef = UserRef
 newUserRef ::
   UserRef
 newUserRef =
-  UserRef {email = Core.Nothing, id = Core.Nothing, kind = "analytics#userRef"}
+  UserRef
+    { email = Core.Nothing,
+      id = Core.Nothing,
+      kind = "analytics#userRef"
+    }
 
 instance Core.FromJSON UserRef where
   parseJSON =
@@ -6752,9 +6548,7 @@ instance Core.FromJSON WebPropertyRef where
             Core.<*> (o Core..:? "href")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "internalWebPropertyId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#webPropertyRef"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#webPropertyRef")
             Core.<*> (o Core..:? "name")
       )
 
@@ -6765,8 +6559,7 @@ instance Core.ToJSON WebPropertyRef where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("href" Core..=) Core.<$> href,
             ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name
           ]
@@ -6818,9 +6611,7 @@ instance Core.FromJSON WebPropertySummary where
           WebPropertySummary
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "internalWebPropertyId")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#webPropertySummary"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#webPropertySummary")
             Core.<*> (o Core..:? "level")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "profiles")
@@ -6833,8 +6624,7 @@ instance Core.ToJSON WebPropertySummary where
     Core.object
       ( Core.catMaybes
           [ ("id" Core..=) Core.<$> id,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("level" Core..=) Core.<$> level,
             ("name" Core..=) Core.<$> name,
@@ -6890,9 +6680,7 @@ instance Core.FromJSON Webproperties where
           Webproperties
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "itemsPerPage")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "analytics#webproperties"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "analytics#webproperties")
             Core.<*> (o Core..:? "nextLink")
             Core.<*> (o Core..:? "previousLink")
             Core.<*> (o Core..:? "startIndex")
@@ -6997,9 +6785,7 @@ instance Core.FromJSON Webproperty where
             Core.<*> (o Core..:? "created")
             Core.<*> (o Core..:? "dataRetentionResetOnNewActivity")
             Core.<*> (o Core..:? "dataRetentionTtl")
-            Core.<*> ( o Core..:? "defaultProfileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "defaultProfileId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "industryVertical")
             Core.<*> (o Core..:? "internalWebPropertyId")
@@ -7024,15 +6810,13 @@ instance Core.ToJSON Webproperty where
             ("created" Core..=) Core.<$> created,
             ("dataRetentionResetOnNewActivity" Core..=)
               Core.<$> dataRetentionResetOnNewActivity,
-            ("dataRetentionTtl" Core..=)
-              Core.<$> dataRetentionTtl,
-            ("defaultProfileId" Core..=) Core.. Core.AsText
+            ("dataRetentionTtl" Core..=) Core.<$> dataRetentionTtl,
+            ("defaultProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> defaultProfileId,
             ("id" Core..=) Core.<$> id,
-            ("industryVertical" Core..=)
-              Core.<$> industryVertical,
-            ("internalWebPropertyId" Core..=)
-              Core.<$> internalWebPropertyId,
+            ("industryVertical" Core..=) Core.<$> industryVertical,
+            ("internalWebPropertyId" Core..=) Core.<$> internalWebPropertyId,
             Core.Just ("kind" Core..= kind),
             ("level" Core..=) Core.<$> level,
             ("name" Core..=) Core.<$> name,
@@ -7061,7 +6845,10 @@ data Webproperty_ChildLink = Webproperty_ChildLink
 newWebproperty_ChildLink ::
   Webproperty_ChildLink
 newWebproperty_ChildLink =
-  Webproperty_ChildLink {href = Core.Nothing, type' = "analytics#profiles"}
+  Webproperty_ChildLink
+    { href = Core.Nothing,
+      type' = "analytics#profiles"
+    }
 
 instance Core.FromJSON Webproperty_ChildLink where
   parseJSON =
@@ -7077,9 +6864,7 @@ instance Core.ToJSON Webproperty_ChildLink where
   toJSON Webproperty_ChildLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Parent link for this web property. Points to the account to which this web property belongs.
@@ -7097,7 +6882,10 @@ data Webproperty_ParentLink = Webproperty_ParentLink
 newWebproperty_ParentLink ::
   Webproperty_ParentLink
 newWebproperty_ParentLink =
-  Webproperty_ParentLink {href = Core.Nothing, type' = "analytics#account"}
+  Webproperty_ParentLink
+    { href = Core.Nothing,
+      type' = "analytics#account"
+    }
 
 instance Core.FromJSON Webproperty_ParentLink where
   parseJSON =
@@ -7113,9 +6901,7 @@ instance Core.ToJSON Webproperty_ParentLink where
   toJSON Webproperty_ParentLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("href" Core..=) Core.<$> href,
-            Core.Just ("type" Core..= type')
-          ]
+          [("href" Core..=) Core.<$> href, Core.Just ("type" Core..= type')]
       )
 
 -- | Permissions the user has for this web property.
@@ -7130,20 +6916,16 @@ newtype Webproperty_Permissions = Webproperty_Permissions
 -- | Creates a value of 'Webproperty_Permissions' with the minimum fields required to make a request.
 newWebproperty_Permissions ::
   Webproperty_Permissions
-newWebproperty_Permissions = Webproperty_Permissions {effective = Core.Nothing}
+newWebproperty_Permissions =
+  Webproperty_Permissions {effective = Core.Nothing}
 
 instance Core.FromJSON Webproperty_Permissions where
   parseJSON =
     Core.withObject
       "Webproperty_Permissions"
-      ( \o ->
-          Webproperty_Permissions
-            Core.<$> (o Core..:? "effective")
-      )
+      (\o -> Webproperty_Permissions Core.<$> (o Core..:? "effective"))
 
 instance Core.ToJSON Webproperty_Permissions where
   toJSON Webproperty_Permissions {..} =
     Core.object
-      ( Core.catMaybes
-          [("effective" Core..=) Core.<$> effective]
-      )
+      (Core.catMaybes [("effective" Core..=) Core.<$> effective])

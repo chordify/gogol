@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Locations.InfoTypes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/infotypes-reference to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.locations.infoTypes.list@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.locations.infoTypes.list@.
 module Gogol.DLP.Locations.InfoTypes.List
   ( -- * Resource
     DLPLocationsInfoTypesListResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Locations.InfoTypes.List
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.locations.infoTypes.list@ method which the
 -- 'DLPLocationsInfoTypesList' request conforms to.
@@ -57,11 +55,9 @@ type DLPLocationsInfoTypesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2ListInfoTypesResponse
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2ListInfoTypesResponse
 
--- | Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- | Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/infotypes-reference to learn more.
 --
 -- /See:/ 'newDLPLocationsInfoTypesList' smart constructor.
 data DLPLocationsInfoTypesList = DLPLocationsInfoTypesList
@@ -77,7 +73,7 @@ data DLPLocationsInfoTypesList = DLPLocationsInfoTypesList
     languageCode :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | The parent resource name. The format of this value is as follows: locations\/ LOCATION_ID
+    -- | The parent resource name. The format of this value is as follows: @locations\/{location_id}@
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -88,7 +84,7 @@ data DLPLocationsInfoTypesList = DLPLocationsInfoTypesList
 
 -- | Creates a value of 'DLPLocationsInfoTypesList' with the minimum fields required to make a request.
 newDLPLocationsInfoTypesList ::
-  -- |  The parent resource name. The format of this value is as follows: locations\/ LOCATION_ID See 'parent'.
+  -- |  The parent resource name. The format of this value is as follows: @locations\/{location_id}@ See 'parent'.
   Core.Text ->
   DLPLocationsInfoTypesList
 newDLPLocationsInfoTypesList parent =
@@ -127,7 +123,5 @@ instance Core.GoogleRequest DLPLocationsInfoTypesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPLocationsInfoTypesListResource
-          )
+          (Core.Proxy :: Core.Proxy DLPLocationsInfoTypesListResource)
           Core.mempty

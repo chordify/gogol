@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.Reports.Internal.Product
@@ -101,7 +99,7 @@ module Gogol.Admin.Reports.Internal.Product
 where
 
 import Gogol.Admin.Reports.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | JSON template for a collection of activities.
 --
@@ -137,9 +135,7 @@ instance Core.FromJSON Activities where
           Activities
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#reports#activities"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#reports#activities")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -270,7 +266,7 @@ instance Core.ToJSON Activity_Actor where
 --
 -- /See:/ 'newActivity_EventsItem' smart constructor.
 data Activity_EventsItem = Activity_EventsItem
-  { -- | Name of the event. This is the specific name of the activity reported by the API. And each @eventName@ is related to a specific Google Workspace service or feature which the API organizes into types of events. For @eventName@ request parameters in general: - If no @eventName@ is given, the report returns all possible instances of an @eventName@. - When you request an @eventName@, the API\'s response returns all activities which contain that @eventName@. It is possible that the returned activities will have other @eventName@ properties in addition to the one requested. For more information about @eventName@ properties, see the list of event names for various applications above in @applicationName@.
+  { -- | Name of the event. This is the specific name of the activity reported by the API. And each @eventName@ is related to a specific Google Workspace service or feature which the API organizes into types of events. For @eventName@ request parameters in general: - If no @eventName@ is given, the report returns all possible instances of an @eventName@. - When you request an @eventName@, the API\'s response returns all activities which contain that @eventName@. For more information about @eventName@ properties, see the list of event names for various applications above in @applicationName@.
     name :: (Core.Maybe Core.Text),
     -- | Parameter value pairs for various applications. For more information about @eventName@ parameters, see the list of event names for various applications above in @applicationName@.
     parameters :: (Core.Maybe [Activity_EventsItem_ParametersItem]),
@@ -350,21 +346,17 @@ newActivity_EventsItem_ParametersItem =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_EventsItem_ParametersItem
-  where
+instance Core.FromJSON Activity_EventsItem_ParametersItem where
   parseJSON =
     Core.withObject
       "Activity_EventsItem_ParametersItem"
       ( \o ->
           Activity_EventsItem_ParametersItem
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> ( o Core..:? "intValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "intValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "messageValue")
-            Core.<*> ( o Core..:? "multiIntValue"
+            Core.<*> ( o
+                         Core..:? "multiIntValue"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "multiMessageValue")
@@ -373,22 +365,17 @@ instance
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    Activity_EventsItem_ParametersItem
-  where
+instance Core.ToJSON Activity_EventsItem_ParametersItem where
   toJSON Activity_EventsItem_ParametersItem {..} =
     Core.object
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
-            ("intValue" Core..=) Core.. Core.AsText
-              Core.<$> intValue,
+            ("intValue" Core..=) Core.. Core.AsText Core.<$> intValue,
             ("messageValue" Core..=) Core.<$> messageValue,
             ("multiIntValue" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> multiIntValue,
-            ("multiMessageValue" Core..=)
-              Core.<$> multiMessageValue,
+            ("multiMessageValue" Core..=) Core.<$> multiMessageValue,
             ("multiValue" Core..=) Core.<$> multiValue,
             ("name" Core..=) Core.<$> name,
             ("value" Core..=) Core.<$> value
@@ -408,7 +395,10 @@ newtype Activity_EventsItem_ParametersItem_MessageValue = Activity_EventsItem_Pa
 newActivity_EventsItem_ParametersItem_MessageValue ::
   Activity_EventsItem_ParametersItem_MessageValue
 newActivity_EventsItem_ParametersItem_MessageValue =
-  Activity_EventsItem_ParametersItem_MessageValue {parameter = Core.Nothing}
+  Activity_EventsItem_ParametersItem_MessageValue
+    { parameter =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -426,12 +416,9 @@ instance
   Core.ToJSON
     Activity_EventsItem_ParametersItem_MessageValue
   where
-  toJSON
-    Activity_EventsItem_ParametersItem_MessageValue {..} =
-      Core.object
-        ( Core.catMaybes
-            [("parameter" Core..=) Core.<$> parameter]
-        )
+  toJSON Activity_EventsItem_ParametersItem_MessageValue {..} =
+    Core.object
+      (Core.catMaybes [("parameter" Core..=) Core.<$> parameter])
 
 --
 -- /See:/ 'newActivity_EventsItem_ParametersItem_MultiMessageValueItem' smart constructor.
@@ -446,7 +433,8 @@ newActivity_EventsItem_ParametersItem_MultiMessageValueItem ::
   Activity_EventsItem_ParametersItem_MultiMessageValueItem
 newActivity_EventsItem_ParametersItem_MultiMessageValueItem =
   Activity_EventsItem_ParametersItem_MultiMessageValueItem
-    { parameter = Core.Nothing
+    { parameter =
+        Core.Nothing
     }
 
 instance
@@ -465,12 +453,9 @@ instance
   Core.ToJSON
     Activity_EventsItem_ParametersItem_MultiMessageValueItem
   where
-  toJSON
-    Activity_EventsItem_ParametersItem_MultiMessageValueItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [("parameter" Core..=) Core.<$> parameter]
-        )
+  toJSON Activity_EventsItem_ParametersItem_MultiMessageValueItem {..} =
+    Core.object
+      (Core.catMaybes [("parameter" Core..=) Core.<$> parameter])
 
 -- | Unique identifier for each activity record.
 --
@@ -507,20 +492,18 @@ instance Core.FromJSON Activity_Id where
             Core.<$> (o Core..:? "applicationName")
             Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "time")
-            Core.<*> ( o Core..:? "uniqueQualifier"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uniqueQualifier" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Activity_Id where
   toJSON Activity_Id {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicationName" Core..=)
-              Core.<$> applicationName,
+          [ ("applicationName" Core..=) Core.<$> applicationName,
             ("customerId" Core..=) Core.<$> customerId,
             ("time" Core..=) Core.<$> time,
-            ("uniqueQualifier" Core..=) Core.. Core.AsText
+            ("uniqueQualifier" Core..=)
+              Core.. Core.AsText
               Core.<$> uniqueQualifier
           ]
       )
@@ -539,7 +522,7 @@ data Channel = Channel
     kind :: Core.Text,
     -- | Additional parameters controlling delivery channel behavior. Optional.
     params :: (Core.Maybe Channel_Params),
-    -- | A Boolean value to indicate whether payload is wanted. Optional.
+    -- | A Boolean value to indicate whether payload is wanted. A payload is data that is sent in the body of an HTTP POST, PUT, or PATCH message and contains important information about the request. Optional.
     payload :: (Core.Maybe Core.Bool),
     -- | An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
     resourceId :: (Core.Maybe Core.Text),
@@ -576,9 +559,7 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> ( o Core..:? "expiration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -594,8 +575,7 @@ instance Core.ToJSON Channel where
     Core.object
       ( Core.catMaybes
           [ ("address" Core..=) Core.<$> address,
-            ("expiration" Core..=) Core.. Core.AsText
-              Core.<$> expiration,
+            ("expiration" Core..=) Core.. Core.AsText Core.<$> expiration,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("params" Core..=) Core.<$> params,
@@ -611,8 +591,7 @@ instance Core.ToJSON Channel where
 --
 -- /See:/ 'newChannel_Params' smart constructor.
 newtype Channel_Params = Channel_Params
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -621,15 +600,14 @@ newChannel_Params ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Channel_Params
-newChannel_Params additional = Channel_Params {additional = additional}
+newChannel_Params additional =
+  Channel_Params {additional = additional}
 
 instance Core.FromJSON Channel_Params where
   parseJSON =
     Core.withObject
       "Channel_Params"
-      ( \o ->
-          Channel_Params Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Channel_Params Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Channel_Params where
   toJSON Channel_Params {..} = Core.toJSON additional
@@ -676,11 +654,10 @@ instance Core.FromJSON NestedParameter where
       ( \o ->
           NestedParameter
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> ( o Core..:? "intValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "intValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "multiBoolValue")
-            Core.<*> ( o Core..:? "multiIntValue"
+            Core.<*> ( o
+                         Core..:? "multiIntValue"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "multiValue")
@@ -693,8 +670,7 @@ instance Core.ToJSON NestedParameter where
     Core.object
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
-            ("intValue" Core..=) Core.. Core.AsText
-              Core.<$> intValue,
+            ("intValue" Core..=) Core.. Core.AsText Core.<$> intValue,
             ("multiBoolValue" Core..=) Core.<$> multiBoolValue,
             ("multiIntValue" Core..=)
               Core.. Core.fmap Core.AsText
@@ -743,9 +719,7 @@ instance Core.FromJSON UsageReport where
             Core.<$> (o Core..:? "date")
             Core.<*> (o Core..:? "entity")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#reports#usageReport"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#reports#usageReport")
             Core.<*> (o Core..:? "parameters")
       )
 
@@ -854,9 +828,7 @@ instance Core.FromJSON UsageReport_ParametersItem where
           UsageReport_ParametersItem
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "datetimeValue")
-            Core.<*> ( o Core..:? "intValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "intValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "msgValue")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stringValue")
@@ -868,8 +840,7 @@ instance Core.ToJSON UsageReport_ParametersItem where
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
             ("datetimeValue" Core..=) Core.<$> datetimeValue,
-            ("intValue" Core..=) Core.. Core.AsText
-              Core.<$> intValue,
+            ("intValue" Core..=) Core.. Core.AsText Core.<$> intValue,
             ("msgValue" Core..=) Core.<$> msgValue,
             ("name" Core..=) Core.<$> name,
             ("stringValue" Core..=) Core.<$> stringValue
@@ -892,10 +863,7 @@ newUsageReport_ParametersItem_MsgValueItem ::
 newUsageReport_ParametersItem_MsgValueItem additional =
   UsageReport_ParametersItem_MsgValueItem {additional = additional}
 
-instance
-  Core.FromJSON
-    UsageReport_ParametersItem_MsgValueItem
-  where
+instance Core.FromJSON UsageReport_ParametersItem_MsgValueItem where
   parseJSON =
     Core.withObject
       "UsageReport_ParametersItem_MsgValueItem"
@@ -904,10 +872,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    UsageReport_ParametersItem_MsgValueItem
-  where
+instance Core.ToJSON UsageReport_ParametersItem_MsgValueItem where
   toJSON UsageReport_ParametersItem_MsgValueItem {..} =
     Core.toJSON additional
 
@@ -946,9 +911,7 @@ instance Core.FromJSON UsageReports where
       ( \o ->
           UsageReports
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#reports#usageReports"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#reports#usageReports")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "usageReports")
             Core.<*> (o Core..:? "warnings")
@@ -1023,28 +986,24 @@ data UsageReports_WarningsItem_DataItem = UsageReports_WarningsItem_DataItem
 newUsageReports_WarningsItem_DataItem ::
   UsageReports_WarningsItem_DataItem
 newUsageReports_WarningsItem_DataItem =
-  UsageReports_WarningsItem_DataItem {key = Core.Nothing, value = Core.Nothing}
+  UsageReports_WarningsItem_DataItem
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    UsageReports_WarningsItem_DataItem
-  where
+instance Core.FromJSON UsageReports_WarningsItem_DataItem where
   parseJSON =
     Core.withObject
       "UsageReports_WarningsItem_DataItem"
       ( \o ->
           UsageReports_WarningsItem_DataItem
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    UsageReports_WarningsItem_DataItem
-  where
+instance Core.ToJSON UsageReports_WarningsItem_DataItem where
   toJSON UsageReports_WarningsItem_DataItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )

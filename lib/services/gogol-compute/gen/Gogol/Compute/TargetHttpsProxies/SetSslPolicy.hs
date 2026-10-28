@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetHttpsProxies.SetSslPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetHttpsProxies.SetSslPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetHttpsProxies.setSslPolicy@ method which the
 -- 'ComputeTargetHttpsProxiesSetSslPolicy' request conforms to.
@@ -97,48 +95,44 @@ newComputeTargetHttpsProxiesSetSslPolicy ::
   -- |  Name of the TargetHttpsProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035. See 'targetHttpsProxy'.
   Core.Text ->
   ComputeTargetHttpsProxiesSetSslPolicy
-newComputeTargetHttpsProxiesSetSslPolicy payload project targetHttpsProxy =
-  ComputeTargetHttpsProxiesSetSslPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      targetHttpsProxy = targetHttpsProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeTargetHttpsProxiesSetSslPolicy
+  payload
+  project
+  targetHttpsProxy =
     ComputeTargetHttpsProxiesSetSslPolicy
-  where
-  type
-    Rs ComputeTargetHttpsProxiesSetSslPolicy =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        targetHttpsProxy = targetHttpsProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeTargetHttpsProxiesSetSslPolicy where
+  type Rs ComputeTargetHttpsProxiesSetSslPolicy = Operation
   type
     Scopes ComputeTargetHttpsProxiesSetSslPolicy =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeTargetHttpsProxiesSetSslPolicy {..} =
-      go
-        project
-        targetHttpsProxy
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeTargetHttpsProxiesSetSslPolicyResource
-            )
-            Core.mempty
+  requestClient ComputeTargetHttpsProxiesSetSslPolicy {..} =
+    go
+      project
+      targetHttpsProxy
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeTargetHttpsProxiesSetSslPolicyResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all the debuggees that the user has access to.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.list@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.debugger.debuggees.list@.
 module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesListResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.List
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.list@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesList' request conforms to.
@@ -97,18 +95,11 @@ newClouddebuggerDebuggerDebuggeesList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClouddebuggerDebuggerDebuggeesList
-  where
-  type
-    Rs ClouddebuggerDebuggerDebuggeesList =
-      ListDebuggeesResponse
+instance Core.GoogleRequest ClouddebuggerDebuggerDebuggeesList where
+  type Rs ClouddebuggerDebuggerDebuggeesList = ListDebuggeesResponse
   type
     Scopes ClouddebuggerDebuggerDebuggeesList =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
   requestClient ClouddebuggerDebuggerDebuggeesList {..} =
     go
       xgafv
@@ -125,7 +116,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ClouddebuggerDebuggerDebuggeesListResource
+              Core.Proxy ClouddebuggerDebuggerDebuggeesListResource
           )
           Core.mempty

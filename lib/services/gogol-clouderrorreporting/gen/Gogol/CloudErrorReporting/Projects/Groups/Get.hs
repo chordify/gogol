@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Projects.Groups.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudErrorReporting.Projects.Groups.Get
 where
 
 import Gogol.CloudErrorReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouderrorreporting.projects.groups.get@ method which the
 -- 'CloudErrorReportingProjectsGroupsGet' request conforms to.
@@ -65,7 +63,7 @@ data CloudErrorReportingProjectsGroupsGet = CloudErrorReportingProjectsGroupsGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call groupStats.list to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@
+    -- | Required. The group resource name. Written as either @projects\/{projectID}\/groups\/{group_id}@ or @projects\/{projectID}\/locations\/{location}\/groups\/{group_id}@. Call groupStats.list to return a list of groups belonging to this project. Examples: @projects\/my-project-123\/groups\/my-group@, @projects\/my-project-123\/locations\/global\/groups\/my-group@ In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified.
     groupName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +74,7 @@ data CloudErrorReportingProjectsGroupsGet = CloudErrorReportingProjectsGroupsGet
 
 -- | Creates a value of 'CloudErrorReportingProjectsGroupsGet' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsGroupsGet ::
-  -- |  Required. The group resource name. Written as @projects\/{projectID}\/groups\/{group_name}@. Call groupStats.list to return a list of groups belonging to this project. Example: @projects\/my-project-123\/groups\/my-group@ See 'groupName'.
+  -- |  Required. The group resource name. Written as either @projects\/{projectID}\/groups\/{group_id}@ or @projects\/{projectID}\/locations\/{location}\/groups\/{group_id}@. Call groupStats.list to return a list of groups belonging to this project. Examples: @projects\/my-project-123\/groups\/my-group@, @projects\/my-project-123\/locations\/global\/groups\/my-group@ In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified. See 'groupName'.
   Core.Text ->
   CloudErrorReportingProjectsGroupsGet
 newCloudErrorReportingProjectsGroupsGet groupName =
@@ -89,32 +87,25 @@ newCloudErrorReportingProjectsGroupsGet groupName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudErrorReportingProjectsGroupsGet
-  where
-  type
-    Rs CloudErrorReportingProjectsGroupsGet =
-      ErrorGroup
+instance Core.GoogleRequest CloudErrorReportingProjectsGroupsGet where
+  type Rs CloudErrorReportingProjectsGroupsGet = ErrorGroup
   type
     Scopes CloudErrorReportingProjectsGroupsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudErrorReportingProjectsGroupsGet {..} =
-      go
-        groupName
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudErrorReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudErrorReportingProjectsGroupsGetResource
-            )
-            Core.mempty
+  requestClient CloudErrorReportingProjectsGroupsGet {..} =
+    go
+      groupName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudErrorReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudErrorReportingProjectsGroupsGetResource
+          )
+          Core.mempty

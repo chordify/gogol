@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Template.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Template.Patch
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.template.patch@ method which the
 -- 'FusionTablesTemplatePatch' request conforms to.
@@ -86,9 +84,7 @@ newFusionTablesTemplatePatch payload tableId templateId =
 
 instance Core.GoogleRequest FusionTablesTemplatePatch where
   type Rs FusionTablesTemplatePatch = Template
-  type
-    Scopes FusionTablesTemplatePatch =
-      '[Fusiontables'FullControl]
+  type Scopes FusionTablesTemplatePatch = '[Fusiontables'FullControl]
   requestClient FusionTablesTemplatePatch {..} =
     go
       tableId
@@ -99,7 +95,5 @@ instance Core.GoogleRequest FusionTablesTemplatePatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTemplatePatchResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTemplatePatchResource)
           Core.mempty

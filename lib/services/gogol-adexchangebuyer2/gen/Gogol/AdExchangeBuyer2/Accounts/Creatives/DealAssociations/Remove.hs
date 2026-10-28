@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.Remove
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.dealAssociations.remove@ method which the
 -- 'AdExchangeBuyer2AccountsCreativesDealAssociationsRemove' request conforms to.
@@ -57,9 +55,7 @@ type AdExchangeBuyer2AccountsCreativesDealAssociationsRemoveResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RemoveDealAssociationRequest
+    Core.:> Core.ReqBody '[Core.JSON] RemoveDealAssociationRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Remove the association between a deal and a creative.
@@ -94,29 +90,31 @@ newAdExchangeBuyer2AccountsCreativesDealAssociationsRemove ::
   -- |  Multipart request metadata. See 'payload'.
   RemoveDealAssociationRequest ->
   AdExchangeBuyer2AccountsCreativesDealAssociationsRemove
-newAdExchangeBuyer2AccountsCreativesDealAssociationsRemove accountId creativeId payload =
-  AdExchangeBuyer2AccountsCreativesDealAssociationsRemove
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      creativeId = creativeId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsCreativesDealAssociationsRemove
+  accountId
+  creativeId
+  payload =
+    AdExchangeBuyer2AccountsCreativesDealAssociationsRemove
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        creativeId = creativeId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsCreativesDealAssociationsRemove
   where
   type
-    Rs
-      AdExchangeBuyer2AccountsCreativesDealAssociationsRemove =
+    Rs AdExchangeBuyer2AccountsCreativesDealAssociationsRemove =
       Empty
   type
-    Scopes
-      AdExchangeBuyer2AccountsCreativesDealAssociationsRemove =
+    Scopes AdExchangeBuyer2AccountsCreativesDealAssociationsRemove =
       '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsCreativesDealAssociationsRemove {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.BackendBuckets.SetEdgeSecurityPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.BackendBuckets.SetEdgeSecurityPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.backendBuckets.setEdgeSecurityPolicy@ method which the
 -- 'ComputeBackendBucketsSetEdgeSecurityPolicy' request conforms to.
@@ -60,9 +58,7 @@ type ComputeBackendBucketsSetEdgeSecurityPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SecurityPolicyReference
+    Core.:> Core.ReqBody '[Core.JSON] SecurityPolicyReference
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Sets the edge security policy for the specified backend bucket.
@@ -73,7 +69,7 @@ data ComputeBackendBucketsSetEdgeSecurityPolicy = ComputeBackendBucketsSetEdgeSe
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+    -- | Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035.
     backendBucket :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -92,56 +88,54 @@ data ComputeBackendBucketsSetEdgeSecurityPolicy = ComputeBackendBucketsSetEdgeSe
 
 -- | Creates a value of 'ComputeBackendBucketsSetEdgeSecurityPolicy' with the minimum fields required to make a request.
 newComputeBackendBucketsSetEdgeSecurityPolicy ::
-  -- |  Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035. See 'backendBucket'.
+  -- |  Name of the BackendBucket resource to which the security policy should be set. The name should conform to RFC1035. See 'backendBucket'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   SecurityPolicyReference ->
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
   ComputeBackendBucketsSetEdgeSecurityPolicy
-newComputeBackendBucketsSetEdgeSecurityPolicy backendBucket payload project =
-  ComputeBackendBucketsSetEdgeSecurityPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      backendBucket = backendBucket,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeBackendBucketsSetEdgeSecurityPolicy
+  backendBucket
+  payload
+  project =
+    ComputeBackendBucketsSetEdgeSecurityPolicy
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        backendBucket = backendBucket,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeBackendBucketsSetEdgeSecurityPolicy
   where
+  type Rs ComputeBackendBucketsSetEdgeSecurityPolicy = Operation
   type
-    Rs ComputeBackendBucketsSetEdgeSecurityPolicy =
-      Operation
-  type
-    Scopes
-      ComputeBackendBucketsSetEdgeSecurityPolicy =
+    Scopes ComputeBackendBucketsSetEdgeSecurityPolicy =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeBackendBucketsSetEdgeSecurityPolicy {..} =
-      go
-        project
-        backendBucket
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeBackendBucketsSetEdgeSecurityPolicyResource
-            )
-            Core.mempty
+  requestClient ComputeBackendBucketsSetEdgeSecurityPolicy {..} =
+    go
+      project
+      backendBucket
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeBackendBucketsSetEdgeSecurityPolicyResource
+          )
+          Core.mempty

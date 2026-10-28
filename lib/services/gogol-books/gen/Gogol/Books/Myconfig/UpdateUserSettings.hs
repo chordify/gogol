@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Myconfig.UpdateUserSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Myconfig.UpdateUserSettings
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.myconfig.updateUserSettings@ method which the
 -- 'BooksMyconfigUpdateUserSettings' request conforms to.
@@ -92,16 +90,9 @@ newBooksMyconfigUpdateUserSettings payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMyconfigUpdateUserSettings
-  where
-  type
-    Rs BooksMyconfigUpdateUserSettings =
-      Usersettings
-  type
-    Scopes BooksMyconfigUpdateUserSettings =
-      '[Books'FullControl]
+instance Core.GoogleRequest BooksMyconfigUpdateUserSettings where
+  type Rs BooksMyconfigUpdateUserSettings = Usersettings
+  type Scopes BooksMyconfigUpdateUserSettings = '[Books'FullControl]
   requestClient BooksMyconfigUpdateUserSettings {..} =
     go
       xgafv
@@ -115,7 +106,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksMyconfigUpdateUserSettingsResource
-          )
+          (Core.Proxy :: Core.Proxy BooksMyconfigUpdateUserSettingsResource)
           Core.mempty

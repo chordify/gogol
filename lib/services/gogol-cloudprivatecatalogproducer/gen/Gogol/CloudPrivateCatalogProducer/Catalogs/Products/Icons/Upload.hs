@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Icons.Upload
 where
 
 import Gogol.CloudPrivateCatalogProducer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.icons.upload@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsProductsIconsUpload' request conforms to.
@@ -87,28 +85,29 @@ newCloudPrivateCatalogProducerCatalogsProductsIconsUpload ::
   -- |  The resource name of the product. See 'product'.
   Core.Text ->
   CloudPrivateCatalogProducerCatalogsProductsIconsUpload
-newCloudPrivateCatalogProducerCatalogsProductsIconsUpload payload product =
-  CloudPrivateCatalogProducerCatalogsProductsIconsUpload
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      product = product,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudPrivateCatalogProducerCatalogsProductsIconsUpload
+  payload
+  product =
+    CloudPrivateCatalogProducerCatalogsProductsIconsUpload
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        product = product,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudPrivateCatalogProducerCatalogsProductsIconsUpload
   where
   type
-    Rs
-      CloudPrivateCatalogProducerCatalogsProductsIconsUpload =
+    Rs CloudPrivateCatalogProducerCatalogsProductsIconsUpload =
       GoogleProtobufEmpty
   type
-    Scopes
-      CloudPrivateCatalogProducerCatalogsProductsIconsUpload =
+    Scopes CloudPrivateCatalogProducerCatalogsProductsIconsUpload =
       '[CloudPlatform'FullControl]
   requestClient
     CloudPrivateCatalogProducerCatalogsProductsIconsUpload {..} =

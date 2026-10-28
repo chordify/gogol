@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vision.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vision.Internal.Product
@@ -318,6 +316,10 @@ module Gogol.Vision.Internal.Product
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest,
 
+    -- * GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels,
+
     -- * GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse,
@@ -326,9 +328,17 @@ module Gogol.Vision.Internal.Product
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest (..),
     newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest,
 
+    -- * GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels,
+
     -- * GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest (..),
     newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest,
+
+    -- * GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels,
 
     -- * GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse (..),
@@ -337,6 +347,10 @@ module Gogol.Vision.Internal.Product
     -- * GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest (..),
     newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest,
+
+    -- * GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels (..),
+    newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels,
 
     -- * GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse (..),
@@ -1108,7 +1122,7 @@ module Gogol.Vision.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Vision.Internal.Sum
 
 -- | Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
@@ -1243,25 +1257,19 @@ instance Core.ToJSON AnnotateImageResponse where
     Core.object
       ( Core.catMaybes
           [ ("context" Core..=) Core.<$> context,
-            ("cropHintsAnnotation" Core..=)
-              Core.<$> cropHintsAnnotation,
+            ("cropHintsAnnotation" Core..=) Core.<$> cropHintsAnnotation,
             ("error" Core..=) Core.<$> error,
             ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-            ("fullTextAnnotation" Core..=)
-              Core.<$> fullTextAnnotation,
+            ("fullTextAnnotation" Core..=) Core.<$> fullTextAnnotation,
             ("imagePropertiesAnnotation" Core..=)
               Core.<$> imagePropertiesAnnotation,
-            ("labelAnnotations" Core..=)
-              Core.<$> labelAnnotations,
-            ("landmarkAnnotations" Core..=)
-              Core.<$> landmarkAnnotations,
+            ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+            ("landmarkAnnotations" Core..=) Core.<$> landmarkAnnotations,
             ("localizedObjectAnnotations" Core..=)
               Core.<$> localizedObjectAnnotations,
             ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
-            ("productSearchResults" Core..=)
-              Core.<$> productSearchResults,
-            ("safeSearchAnnotation" Core..=)
-              Core.<$> safeSearchAnnotation,
+            ("productSearchResults" Core..=) Core.<$> productSearchResults,
+            ("safeSearchAnnotation" Core..=) Core.<$> safeSearchAnnotation,
             ("textAnnotations" Core..=) Core.<$> textAnnotations,
             ("webDetection" Core..=) Core.<$> webDetection
           ]
@@ -1287,16 +1295,13 @@ instance Core.FromJSON AsyncAnnotateFileResponse where
     Core.withObject
       "AsyncAnnotateFileResponse"
       ( \o ->
-          AsyncAnnotateFileResponse
-            Core.<$> (o Core..:? "outputConfig")
+          AsyncAnnotateFileResponse Core.<$> (o Core..:? "outputConfig")
       )
 
 instance Core.ToJSON AsyncAnnotateFileResponse where
   toJSON AsyncAnnotateFileResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("outputConfig" Core..=) Core.<$> outputConfig]
-      )
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | Response to an async batch file annotation request.
 --
@@ -1313,24 +1318,18 @@ newAsyncBatchAnnotateFilesResponse ::
 newAsyncBatchAnnotateFilesResponse =
   AsyncBatchAnnotateFilesResponse {responses = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AsyncBatchAnnotateFilesResponse
-  where
+instance Core.FromJSON AsyncBatchAnnotateFilesResponse where
   parseJSON =
     Core.withObject
       "AsyncBatchAnnotateFilesResponse"
       ( \o ->
-          AsyncBatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses")
+          AsyncBatchAnnotateFilesResponse Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON AsyncBatchAnnotateFilesResponse where
   toJSON AsyncBatchAnnotateFilesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("responses" Core..=) Core.<$> responses]
-      )
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Response to an async batch image annotation request.
 --
@@ -1347,10 +1346,7 @@ newAsyncBatchAnnotateImagesResponse ::
 newAsyncBatchAnnotateImagesResponse =
   AsyncBatchAnnotateImagesResponse {outputConfig = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AsyncBatchAnnotateImagesResponse
-  where
+instance Core.FromJSON AsyncBatchAnnotateImagesResponse where
   parseJSON =
     Core.withObject
       "AsyncBatchAnnotateImagesResponse"
@@ -1362,9 +1358,7 @@ instance
 instance Core.ToJSON AsyncBatchAnnotateImagesResponse where
   toJSON AsyncBatchAnnotateImagesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("outputConfig" Core..=) Core.<$> outputConfig]
-      )
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | A list of file annotation responses.
 --
@@ -1386,16 +1380,13 @@ instance Core.FromJSON BatchAnnotateFilesResponse where
     Core.withObject
       "BatchAnnotateFilesResponse"
       ( \o ->
-          BatchAnnotateFilesResponse
-            Core.<$> (o Core..:? "responses")
+          BatchAnnotateFilesResponse Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON BatchAnnotateFilesResponse where
   toJSON BatchAnnotateFilesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("responses" Core..=) Core.<$> responses]
-      )
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Metadata for the batch operations such as the current state. This is included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -1510,7 +1501,10 @@ data BoundingPoly = BoundingPoly
 newBoundingPoly ::
   BoundingPoly
 newBoundingPoly =
-  BoundingPoly {normalizedVertices = Core.Nothing, vertices = Core.Nothing}
+  BoundingPoly
+    { normalizedVertices = Core.Nothing,
+      vertices = Core.Nothing
+    }
 
 instance Core.FromJSON BoundingPoly where
   parseJSON =
@@ -1526,13 +1520,12 @@ instance Core.ToJSON BoundingPoly where
   toJSON BoundingPoly {..} =
     Core.object
       ( Core.catMaybes
-          [ ("normalizedVertices" Core..=)
-              Core.<$> normalizedVertices,
+          [ ("normalizedVertices" Core..=) Core.<$> normalizedVertices,
             ("vertices" Core..=) Core.<$> vertices
           ]
       )
 
--- | Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to\/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of @java.awt.Color@ in Java; it can also be trivially provided to UIColor\'s @+colorWithRed:green:blue:alpha@ method in iOS; and, with just a little work, it can be easily formatted into a CSS @rgba()@ string in JavaScript. This reference page doesn\'t carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; \/\/ ... public static java.awt.Color fromProto(Color
+-- | Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of @java.awt.Color@ in Java; it can also be trivially provided to UIColor\'s @+colorWithRed:green:blue:alpha@ method in iOS; and, with just a little work, it can be easily formatted into a CSS @rgba()@ string in JavaScript. This reference page doesn\'t have information about the absolute color space that should be used to interpret the RGB value—for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most @1e-5@. Example (Java): import com.google.type.Color; \/\/ ... public static java.awt.Color fromProto(Color
 -- protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red \/ denominator) .setGreen(green \/ denominator) .setBlue(blue \/ denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) \/ denominator) .build()); } return resultBuilder.build(); } \/\/ ... Example (iOS \/ Obj-C): \/\/ ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha/wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha/wrapper != nil) { alpha = [alpha/wrapper value]; }
 -- return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha \<= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } \/\/ ... Example (JavaScript): \/\/ ... var protoToCssColor = function(rgb/color) { var redFrac = rgb/color.red || 0.0; var greenFrac = rgb/color.green || 0.0; var blueFrac = rgb/color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!(\'alpha\' in rgb/color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(\',\'); return [\'rgba(\', rgbParams, \',\', alphaFrac, \')\'].join(\'\'); }; var rgbToCssColor =
 -- function(red, green, blue) { var rgbNumber = new Number((red \<\< 16) | (green \<\< 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = [\'#\']; for (var i = 0; i \< missingZeros; i++) { resultBuilder.push(\'0\'); } resultBuilder.push(hexString); return resultBuilder.join(\'\'); }; \/\/ ...
@@ -1668,8 +1661,7 @@ instance Core.ToJSON CropHint where
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
             ("confidence" Core..=) Core.<$> confidence,
-            ("importanceFraction" Core..=)
-              Core.<$> importanceFraction
+            ("importanceFraction" Core..=) Core.<$> importanceFraction
           ]
       )
 
@@ -1685,23 +1677,19 @@ newtype CropHintsAnnotation = CropHintsAnnotation
 -- | Creates a value of 'CropHintsAnnotation' with the minimum fields required to make a request.
 newCropHintsAnnotation ::
   CropHintsAnnotation
-newCropHintsAnnotation = CropHintsAnnotation {cropHints = Core.Nothing}
+newCropHintsAnnotation =
+  CropHintsAnnotation {cropHints = Core.Nothing}
 
 instance Core.FromJSON CropHintsAnnotation where
   parseJSON =
     Core.withObject
       "CropHintsAnnotation"
-      ( \o ->
-          CropHintsAnnotation
-            Core.<$> (o Core..:? "cropHints")
-      )
+      (\o -> CropHintsAnnotation Core.<$> (o Core..:? "cropHints"))
 
 instance Core.ToJSON CropHintsAnnotation where
   toJSON CropHintsAnnotation {..} =
     Core.object
-      ( Core.catMaybes
-          [("cropHints" Core..=) Core.<$> cropHints]
-      )
+      (Core.catMaybes [("cropHints" Core..=) Core.<$> cropHints])
 
 -- | Detected start or end of a structural component.
 --
@@ -1717,7 +1705,8 @@ data DetectedBreak = DetectedBreak
 -- | Creates a value of 'DetectedBreak' with the minimum fields required to make a request.
 newDetectedBreak ::
   DetectedBreak
-newDetectedBreak = DetectedBreak {isPrefix = Core.Nothing, type' = Core.Nothing}
+newDetectedBreak =
+  DetectedBreak {isPrefix = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON DetectedBreak where
   parseJSON =
@@ -1725,7 +1714,8 @@ instance Core.FromJSON DetectedBreak where
       "DetectedBreak"
       ( \o ->
           DetectedBreak
-            Core.<$> (o Core..:? "isPrefix") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "isPrefix")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON DetectedBreak where
@@ -1752,7 +1742,10 @@ data DetectedLanguage = DetectedLanguage
 newDetectedLanguage ::
   DetectedLanguage
 newDetectedLanguage =
-  DetectedLanguage {confidence = Core.Nothing, languageCode = Core.Nothing}
+  DetectedLanguage
+    { confidence = Core.Nothing,
+      languageCode = Core.Nothing
+    }
 
 instance Core.FromJSON DetectedLanguage where
   parseJSON =
@@ -1785,21 +1778,18 @@ newtype DominantColorsAnnotation = DominantColorsAnnotation
 -- | Creates a value of 'DominantColorsAnnotation' with the minimum fields required to make a request.
 newDominantColorsAnnotation ::
   DominantColorsAnnotation
-newDominantColorsAnnotation = DominantColorsAnnotation {colors = Core.Nothing}
+newDominantColorsAnnotation =
+  DominantColorsAnnotation {colors = Core.Nothing}
 
 instance Core.FromJSON DominantColorsAnnotation where
   parseJSON =
     Core.withObject
       "DominantColorsAnnotation"
-      ( \o ->
-          DominantColorsAnnotation
-            Core.<$> (o Core..:? "colors")
-      )
+      (\o -> DominantColorsAnnotation Core.<$> (o Core..:? "colors"))
 
 instance Core.ToJSON DominantColorsAnnotation where
   toJSON DominantColorsAnnotation {..} =
-    Core.object
-      (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | Set of detected entity features.
 --
@@ -1961,26 +1951,19 @@ instance Core.ToJSON FaceAnnotation where
   toJSON FaceAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("angerLikelihood" Core..=)
-              Core.<$> angerLikelihood,
-            ("blurredLikelihood" Core..=)
-              Core.<$> blurredLikelihood,
+          [ ("angerLikelihood" Core..=) Core.<$> angerLikelihood,
+            ("blurredLikelihood" Core..=) Core.<$> blurredLikelihood,
             ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("detectionConfidence" Core..=)
-              Core.<$> detectionConfidence,
+            ("detectionConfidence" Core..=) Core.<$> detectionConfidence,
             ("fdBoundingPoly" Core..=) Core.<$> fdBoundingPoly,
-            ("headwearLikelihood" Core..=)
-              Core.<$> headwearLikelihood,
+            ("headwearLikelihood" Core..=) Core.<$> headwearLikelihood,
             ("joyLikelihood" Core..=) Core.<$> joyLikelihood,
-            ("landmarkingConfidence" Core..=)
-              Core.<$> landmarkingConfidence,
+            ("landmarkingConfidence" Core..=) Core.<$> landmarkingConfidence,
             ("landmarks" Core..=) Core.<$> landmarks,
             ("panAngle" Core..=) Core.<$> panAngle,
             ("rollAngle" Core..=) Core.<$> rollAngle,
-            ("sorrowLikelihood" Core..=)
-              Core.<$> sorrowLikelihood,
-            ("surpriseLikelihood" Core..=)
-              Core.<$> surpriseLikelihood,
+            ("sorrowLikelihood" Core..=) Core.<$> sorrowLikelihood,
+            ("surpriseLikelihood" Core..=) Core.<$> surpriseLikelihood,
             ("tiltAngle" Core..=) Core.<$> tiltAngle,
             ("underExposedLikelihood" Core..=)
               Core.<$> underExposedLikelihood
@@ -2010,8 +1993,7 @@ instance Core.FromJSON GcsDestination where
 
 instance Core.ToJSON GcsDestination where
   toJSON GcsDestination {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Google Cloud Storage location where the input will be read from.
 --
@@ -2035,8 +2017,7 @@ instance Core.FromJSON GcsSource where
 
 instance Core.ToJSON GcsSource where
   toJSON GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
 --
@@ -2058,7 +2039,8 @@ newGoogleCloudVisionV1p1beta1AnnotateFileResponse ::
   GoogleCloudVisionV1p1beta1AnnotateFileResponse
 newGoogleCloudVisionV1p1beta1AnnotateFileResponse =
   GoogleCloudVisionV1p1beta1AnnotateFileResponse
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       inputConfig = Core.Nothing,
       responses = Core.Nothing,
       totalPages = Core.Nothing
@@ -2074,25 +2056,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses")
-              Core.<*> (o Core..:? "totalPages")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "responses")
+            Core.<*> (o Core..:? "totalPages")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1AnnotateFileResponse
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1AnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("error" Core..=) Core.<$> error,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("responses" Core..=) Core.<$> responses,
-              ("totalPages" Core..=) Core.<$> totalPages
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1AnnotateFileResponse where
+  toJSON GoogleCloudVisionV1p1beta1AnnotateFileResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("responses" Core..=) Core.<$> responses,
+            ("totalPages" Core..=) Core.<$> totalPages
+          ]
+      )
 
 -- | Response to an image annotation request.
 --
@@ -2134,7 +2112,8 @@ newGoogleCloudVisionV1p1beta1AnnotateImageResponse ::
   GoogleCloudVisionV1p1beta1AnnotateImageResponse
 newGoogleCloudVisionV1p1beta1AnnotateImageResponse =
   GoogleCloudVisionV1p1beta1AnnotateImageResponse
-    { context = Core.Nothing,
+    { context =
+        Core.Nothing,
       cropHintsAnnotation = Core.Nothing,
       error = Core.Nothing,
       faceAnnotations = Core.Nothing,
@@ -2160,53 +2139,46 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1AnnotateImageResponse
             Core.<$> (o Core..:? "context")
-              Core.<*> (o Core..:? "cropHintsAnnotation")
-              Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "fullTextAnnotation")
-              Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations")
-              Core.<*> (o Core..:? "landmarkAnnotations")
-              Core.<*> (o Core..:? "localizedObjectAnnotations")
-              Core.<*> (o Core..:? "logoAnnotations")
-              Core.<*> (o Core..:? "productSearchResults")
-              Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations")
-              Core.<*> (o Core..:? "webDetection")
+            Core.<*> (o Core..:? "cropHintsAnnotation")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "fullTextAnnotation")
+            Core.<*> (o Core..:? "imagePropertiesAnnotation")
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "landmarkAnnotations")
+            Core.<*> (o Core..:? "localizedObjectAnnotations")
+            Core.<*> (o Core..:? "logoAnnotations")
+            Core.<*> (o Core..:? "productSearchResults")
+            Core.<*> (o Core..:? "safeSearchAnnotation")
+            Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "webDetection")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1AnnotateImageResponse
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1AnnotateImageResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("context" Core..=) Core.<$> context,
-              ("cropHintsAnnotation" Core..=)
-                Core.<$> cropHintsAnnotation,
-              ("error" Core..=) Core.<$> error,
-              ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-              ("fullTextAnnotation" Core..=)
-                Core.<$> fullTextAnnotation,
-              ("imagePropertiesAnnotation" Core..=)
-                Core.<$> imagePropertiesAnnotation,
-              ("labelAnnotations" Core..=)
-                Core.<$> labelAnnotations,
-              ("landmarkAnnotations" Core..=)
-                Core.<$> landmarkAnnotations,
-              ("localizedObjectAnnotations" Core..=)
-                Core.<$> localizedObjectAnnotations,
-              ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
-              ("productSearchResults" Core..=)
-                Core.<$> productSearchResults,
-              ("safeSearchAnnotation" Core..=)
-                Core.<$> safeSearchAnnotation,
-              ("textAnnotations" Core..=) Core.<$> textAnnotations,
-              ("webDetection" Core..=) Core.<$> webDetection
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1AnnotateImageResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("context" Core..=) Core.<$> context,
+            ("cropHintsAnnotation" Core..=) Core.<$> cropHintsAnnotation,
+            ("error" Core..=) Core.<$> error,
+            ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
+            ("fullTextAnnotation" Core..=) Core.<$> fullTextAnnotation,
+            ("imagePropertiesAnnotation" Core..=)
+              Core.<$> imagePropertiesAnnotation,
+            ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+            ("landmarkAnnotations" Core..=) Core.<$> landmarkAnnotations,
+            ("localizedObjectAnnotations" Core..=)
+              Core.<$> localizedObjectAnnotations,
+            ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
+            ("productSearchResults" Core..=) Core.<$> productSearchResults,
+            ("safeSearchAnnotation" Core..=) Core.<$> safeSearchAnnotation,
+            ("textAnnotations" Core..=) Core.<$> textAnnotations,
+            ("webDetection" Core..=) Core.<$> webDetection
+          ]
+      )
 
 -- | The response for a single offline file annotation request.
 --
@@ -2222,7 +2194,8 @@ newGoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse ::
   GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
 newGoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
-    { outputConfig = Core.Nothing
+    { outputConfig =
+        Core.Nothing
     }
 
 instance
@@ -2241,12 +2214,9 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputConfig" Core..=) Core.<$> outputConfig]
-        )
+  toJSON GoogleCloudVisionV1p1beta1AsyncAnnotateFileResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | Response to an async batch file annotation request.
 --
@@ -2262,7 +2232,8 @@ newGoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
 newGoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -2284,9 +2255,7 @@ instance
   toJSON
     GoogleCloudVisionV1p1beta1AsyncBatchAnnotateFilesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+        (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Logical element on the page.
 --
@@ -2317,10 +2286,7 @@ newGoogleCloudVisionV1p1beta1Block =
       property = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Block
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Block where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Block"
@@ -2361,14 +2327,12 @@ newGoogleCloudVisionV1p1beta1BoundingPoly ::
   GoogleCloudVisionV1p1beta1BoundingPoly
 newGoogleCloudVisionV1p1beta1BoundingPoly =
   GoogleCloudVisionV1p1beta1BoundingPoly
-    { normalizedVertices = Core.Nothing,
+    { normalizedVertices =
+        Core.Nothing,
       vertices = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1BoundingPoly
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1BoundingPoly where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1BoundingPoly"
@@ -2378,15 +2342,11 @@ instance
             Core.<*> (o Core..:? "vertices")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1BoundingPoly
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1BoundingPoly where
   toJSON GoogleCloudVisionV1p1beta1BoundingPoly {..} =
     Core.object
       ( Core.catMaybes
-          [ ("normalizedVertices" Core..=)
-              Core.<$> normalizedVertices,
+          [ ("normalizedVertices" Core..=) Core.<$> normalizedVertices,
             ("vertices" Core..=) Core.<$> vertices
           ]
       )
@@ -2414,10 +2374,7 @@ newGoogleCloudVisionV1p1beta1ColorInfo =
       score = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1ColorInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1ColorInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1ColorInfo"
@@ -2428,10 +2385,7 @@ instance
             Core.<*> (o Core..:? "score")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1ColorInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1ColorInfo where
   toJSON GoogleCloudVisionV1p1beta1ColorInfo {..} =
     Core.object
       ( Core.catMaybes
@@ -2464,10 +2418,7 @@ newGoogleCloudVisionV1p1beta1CropHint =
       importanceFraction = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1CropHint
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1CropHint where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1CropHint"
@@ -2478,17 +2429,13 @@ instance
             Core.<*> (o Core..:? "importanceFraction")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1CropHint
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1CropHint where
   toJSON GoogleCloudVisionV1p1beta1CropHint {..} =
     Core.object
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
             ("confidence" Core..=) Core.<$> confidence,
-            ("importanceFraction" Core..=)
-              Core.<$> importanceFraction
+            ("importanceFraction" Core..=) Core.<$> importanceFraction
           ]
       )
 
@@ -2505,7 +2452,10 @@ newtype GoogleCloudVisionV1p1beta1CropHintsAnnotation = GoogleCloudVisionV1p1bet
 newGoogleCloudVisionV1p1beta1CropHintsAnnotation ::
   GoogleCloudVisionV1p1beta1CropHintsAnnotation
 newGoogleCloudVisionV1p1beta1CropHintsAnnotation =
-  GoogleCloudVisionV1p1beta1CropHintsAnnotation {cropHints = Core.Nothing}
+  GoogleCloudVisionV1p1beta1CropHintsAnnotation
+    { cropHints =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2519,16 +2469,10 @@ instance
             Core.<$> (o Core..:? "cropHints")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1CropHintsAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1CropHintsAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [("cropHints" Core..=) Core.<$> cropHints]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1CropHintsAnnotation where
+  toJSON GoogleCloudVisionV1p1beta1CropHintsAnnotation {..} =
+    Core.object
+      (Core.catMaybes [("cropHints" Core..=) Core.<$> cropHints])
 
 -- | Set of dominant colors and their corresponding scores.
 --
@@ -2543,7 +2487,10 @@ newtype GoogleCloudVisionV1p1beta1DominantColorsAnnotation = GoogleCloudVisionV1
 newGoogleCloudVisionV1p1beta1DominantColorsAnnotation ::
   GoogleCloudVisionV1p1beta1DominantColorsAnnotation
 newGoogleCloudVisionV1p1beta1DominantColorsAnnotation =
-  GoogleCloudVisionV1p1beta1DominantColorsAnnotation {colors = Core.Nothing}
+  GoogleCloudVisionV1p1beta1DominantColorsAnnotation
+    { colors =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2561,10 +2508,8 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1DominantColorsAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1DominantColorsAnnotation {..} =
-      Core.object
-        (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+  toJSON GoogleCloudVisionV1p1beta1DominantColorsAnnotation {..} =
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | Set of detected entity features.
 --
@@ -2596,7 +2541,8 @@ newGoogleCloudVisionV1p1beta1EntityAnnotation ::
   GoogleCloudVisionV1p1beta1EntityAnnotation
 newGoogleCloudVisionV1p1beta1EntityAnnotation =
   GoogleCloudVisionV1p1beta1EntityAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       confidence = Core.Nothing,
       description = Core.Nothing,
       locale = Core.Nothing,
@@ -2607,10 +2553,7 @@ newGoogleCloudVisionV1p1beta1EntityAnnotation =
       topicality = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1EntityAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1EntityAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1EntityAnnotation"
@@ -2627,10 +2570,7 @@ instance
             Core.<*> (o Core..:? "topicality")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1EntityAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1EntityAnnotation where
   toJSON GoogleCloudVisionV1p1beta1EntityAnnotation {..} =
     Core.object
       ( Core.catMaybes
@@ -2706,7 +2646,8 @@ newGoogleCloudVisionV1p1beta1FaceAnnotation ::
   GoogleCloudVisionV1p1beta1FaceAnnotation
 newGoogleCloudVisionV1p1beta1FaceAnnotation =
   GoogleCloudVisionV1p1beta1FaceAnnotation
-    { angerLikelihood = Core.Nothing,
+    { angerLikelihood =
+        Core.Nothing,
       blurredLikelihood = Core.Nothing,
       boundingPoly = Core.Nothing,
       detectionConfidence = Core.Nothing,
@@ -2723,10 +2664,7 @@ newGoogleCloudVisionV1p1beta1FaceAnnotation =
       underExposedLikelihood = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1FaceAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1FaceAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1FaceAnnotation"
@@ -2749,40 +2687,30 @@ instance
             Core.<*> (o Core..:? "underExposedLikelihood")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1FaceAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1FaceAnnotation where
   toJSON GoogleCloudVisionV1p1beta1FaceAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("angerLikelihood" Core..=)
-              Core.<$> angerLikelihood,
-            ("blurredLikelihood" Core..=)
-              Core.<$> blurredLikelihood,
+          [ ("angerLikelihood" Core..=) Core.<$> angerLikelihood,
+            ("blurredLikelihood" Core..=) Core.<$> blurredLikelihood,
             ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("detectionConfidence" Core..=)
-              Core.<$> detectionConfidence,
+            ("detectionConfidence" Core..=) Core.<$> detectionConfidence,
             ("fdBoundingPoly" Core..=) Core.<$> fdBoundingPoly,
-            ("headwearLikelihood" Core..=)
-              Core.<$> headwearLikelihood,
+            ("headwearLikelihood" Core..=) Core.<$> headwearLikelihood,
             ("joyLikelihood" Core..=) Core.<$> joyLikelihood,
-            ("landmarkingConfidence" Core..=)
-              Core.<$> landmarkingConfidence,
+            ("landmarkingConfidence" Core..=) Core.<$> landmarkingConfidence,
             ("landmarks" Core..=) Core.<$> landmarks,
             ("panAngle" Core..=) Core.<$> panAngle,
             ("rollAngle" Core..=) Core.<$> rollAngle,
-            ("sorrowLikelihood" Core..=)
-              Core.<$> sorrowLikelihood,
-            ("surpriseLikelihood" Core..=)
-              Core.<$> surpriseLikelihood,
+            ("sorrowLikelihood" Core..=) Core.<$> sorrowLikelihood,
+            ("surpriseLikelihood" Core..=) Core.<$> surpriseLikelihood,
             ("tiltAngle" Core..=) Core.<$> tiltAngle,
             ("underExposedLikelihood" Core..=)
               Core.<$> underExposedLikelihood
           ]
       )
 
--- | A face-specific landmark (for example, a face feature).
+-- | A face-specific landmark (for example, a face feature). Landmark positions may fall outside the bounds of the image if the face is near one or more edges of the image. Therefore it is NOT guaranteed that @0 \<= x \< width@ or @0 \<= y \< height@.
 --
 -- /See:/ 'newGoogleCloudVisionV1p1beta1FaceAnnotationLandmark' smart constructor.
 data GoogleCloudVisionV1p1beta1FaceAnnotationLandmark = GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
@@ -2798,7 +2726,8 @@ newGoogleCloudVisionV1p1beta1FaceAnnotationLandmark ::
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
 newGoogleCloudVisionV1p1beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
-    { position = Core.Nothing,
+    { position =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -2811,21 +2740,21 @@ instance
       "GoogleCloudVisionV1p1beta1FaceAnnotationLandmark"
       ( \o ->
           GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
-            Core.<$> (o Core..:? "position") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "position")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1FaceAnnotationLandmark
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1FaceAnnotationLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("position" Core..=) Core.<$> position,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1FaceAnnotationLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("position" Core..=) Core.<$> position,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | The Google Cloud Storage location where the output will be written to.
 --
@@ -2843,10 +2772,7 @@ newGoogleCloudVisionV1p1beta1GcsDestination ::
 newGoogleCloudVisionV1p1beta1GcsDestination =
   GoogleCloudVisionV1p1beta1GcsDestination {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1GcsDestination
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1GcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1GcsDestination"
@@ -2855,13 +2781,9 @@ instance
             Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1GcsDestination
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1GcsDestination where
   toJSON GoogleCloudVisionV1p1beta1GcsDestination {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Google Cloud Storage location where the input will be read from.
 --
@@ -2878,25 +2800,17 @@ newGoogleCloudVisionV1p1beta1GcsSource ::
 newGoogleCloudVisionV1p1beta1GcsSource =
   GoogleCloudVisionV1p1beta1GcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1GcsSource
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1GcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1GcsSource"
       ( \o ->
-          GoogleCloudVisionV1p1beta1GcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudVisionV1p1beta1GcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1GcsSource
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1GcsSource where
   toJSON GoogleCloudVisionV1p1beta1GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | If an image was produced from a file (e.g. a PDF), this message gives information about the source of that image.
 --
@@ -2914,7 +2828,8 @@ newGoogleCloudVisionV1p1beta1ImageAnnotationContext ::
   GoogleCloudVisionV1p1beta1ImageAnnotationContext
 newGoogleCloudVisionV1p1beta1ImageAnnotationContext =
   GoogleCloudVisionV1p1beta1ImageAnnotationContext
-    { pageNumber = Core.Nothing,
+    { pageNumber =
+        Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -2928,21 +2843,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ImageAnnotationContext
             Core.<$> (o Core..:? "pageNumber")
-              Core.<*> (o Core..:? "uri")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1ImageAnnotationContext
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1ImageAnnotationContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pageNumber" Core..=) Core.<$> pageNumber,
-              ("uri" Core..=) Core.<$> uri
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1ImageAnnotationContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pageNumber" Core..=) Core.<$> pageNumber,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
 
 -- | Stores image properties, such as dominant colors.
 --
@@ -2957,12 +2871,12 @@ newtype GoogleCloudVisionV1p1beta1ImageProperties = GoogleCloudVisionV1p1beta1Im
 newGoogleCloudVisionV1p1beta1ImageProperties ::
   GoogleCloudVisionV1p1beta1ImageProperties
 newGoogleCloudVisionV1p1beta1ImageProperties =
-  GoogleCloudVisionV1p1beta1ImageProperties {dominantColors = Core.Nothing}
+  GoogleCloudVisionV1p1beta1ImageProperties
+    { dominantColors =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1ImageProperties
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1ImageProperties where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1ImageProperties"
@@ -2971,10 +2885,7 @@ instance
             Core.<$> (o Core..:? "dominantColors")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1ImageProperties
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1ImageProperties where
   toJSON GoogleCloudVisionV1p1beta1ImageProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -3004,10 +2915,7 @@ newGoogleCloudVisionV1p1beta1InputConfig =
       mimeType = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1InputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1InputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1InputConfig"
@@ -3018,10 +2926,7 @@ instance
             Core.<*> (o Core..:? "mimeType")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1InputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1InputConfig where
   toJSON GoogleCloudVisionV1p1beta1InputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -3053,7 +2958,8 @@ newGoogleCloudVisionV1p1beta1LocalizedObjectAnnotation ::
   GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
 newGoogleCloudVisionV1p1beta1LocalizedObjectAnnotation =
   GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       languageCode = Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
@@ -3070,27 +2976,26 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("languageCode" Core..=) Core.<$> languageCode,
-              ("mid" Core..=) Core.<$> mid,
-              ("name" Core..=) Core.<$> name,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("mid" Core..=) Core.<$> mid,
+            ("name" Core..=) Core.<$> name,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Detected entity location information.
 --
@@ -3107,10 +3012,7 @@ newGoogleCloudVisionV1p1beta1LocationInfo ::
 newGoogleCloudVisionV1p1beta1LocationInfo =
   GoogleCloudVisionV1p1beta1LocationInfo {latLng = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1LocationInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1LocationInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1LocationInfo"
@@ -3119,13 +3021,9 @@ instance
             Core.<$> (o Core..:? "latLng")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1LocationInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1LocationInfo where
   toJSON GoogleCloudVisionV1p1beta1LocationInfo {..} =
-    Core.object
-      (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
+    Core.object (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -3147,22 +3045,17 @@ newGoogleCloudVisionV1p1beta1NormalizedVertex =
       y = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1NormalizedVertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1NormalizedVertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1NormalizedVertex"
       ( \o ->
           GoogleCloudVisionV1p1beta1NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1NormalizedVertex
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1NormalizedVertex where
   toJSON GoogleCloudVisionV1p1beta1NormalizedVertex {..} =
     Core.object
       ( Core.catMaybes
@@ -3187,15 +3080,13 @@ newGoogleCloudVisionV1p1beta1OperationMetadata ::
   GoogleCloudVisionV1p1beta1OperationMetadata
 newGoogleCloudVisionV1p1beta1OperationMetadata =
   GoogleCloudVisionV1p1beta1OperationMetadata
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       state = Core.Nothing,
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1OperationMetadata"
@@ -3206,19 +3097,15 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1OperationMetadata
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1OperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("state" Core..=) Core.<$> state,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1OperationMetadata where
+  toJSON GoogleCloudVisionV1p1beta1OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | The desired output location and metadata.
 --
@@ -3240,10 +3127,7 @@ newGoogleCloudVisionV1p1beta1OutputConfig =
       gcsDestination = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1OutputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1OutputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1OutputConfig"
@@ -3253,10 +3137,7 @@ instance
             Core.<*> (o Core..:? "gcsDestination")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1OutputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1OutputConfig where
   toJSON GoogleCloudVisionV1p1beta1OutputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -3345,10 +3226,7 @@ newGoogleCloudVisionV1p1beta1Paragraph =
       words = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Paragraph
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Paragraph where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Paragraph"
@@ -3360,10 +3238,7 @@ instance
             Core.<*> (o Core..:? "words")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1Paragraph
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1Paragraph where
   toJSON GoogleCloudVisionV1p1beta1Paragraph {..} =
     Core.object
       ( Core.catMaybes
@@ -3397,10 +3272,7 @@ newGoogleCloudVisionV1p1beta1Position =
       z = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Position
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Position where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Position"
@@ -3411,10 +3283,7 @@ instance
             Core.<*> (o Core..:? "z")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1Position
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1Position where
   toJSON GoogleCloudVisionV1p1beta1Position {..} =
     Core.object
       ( Core.catMaybes
@@ -3453,10 +3322,7 @@ newGoogleCloudVisionV1p1beta1Product =
       productLabels = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Product
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Product where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Product"
@@ -3469,10 +3335,7 @@ instance
             Core.<*> (o Core..:? "productLabels")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1Product
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1Product where
   toJSON GoogleCloudVisionV1p1beta1Product {..} =
     Core.object
       ( Core.catMaybes
@@ -3504,28 +3367,21 @@ newGoogleCloudVisionV1p1beta1ProductKeyValue =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1ProductKeyValue
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1ProductKeyValue where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1ProductKeyValue"
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductKeyValue
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1ProductKeyValue
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1ProductKeyValue where
   toJSON GoogleCloudVisionV1p1beta1ProductKeyValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Results for a product search request.
@@ -3549,7 +3405,8 @@ newGoogleCloudVisionV1p1beta1ProductSearchResults ::
   GoogleCloudVisionV1p1beta1ProductSearchResults
 newGoogleCloudVisionV1p1beta1ProductSearchResults =
   GoogleCloudVisionV1p1beta1ProductSearchResults
-    { indexTime = Core.Nothing,
+    { indexTime =
+        Core.Nothing,
       productGroupedResults = Core.Nothing,
       results = Core.Nothing
     }
@@ -3564,24 +3421,19 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> (o Core..:? "productGroupedResults")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "productGroupedResults")
+            Core.<*> (o Core..:? "results")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1ProductSearchResults
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1ProductSearchResults {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("indexTime" Core..=) Core.<$> indexTime,
-              ("productGroupedResults" Core..=)
-                Core.<$> productGroupedResults,
-              ("results" Core..=) Core.<$> results
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1ProductSearchResults where
+  toJSON GoogleCloudVisionV1p1beta1ProductSearchResults {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("indexTime" Core..=) Core.<$> indexTime,
+            ("productGroupedResults" Core..=) Core.<$> productGroupedResults,
+            ("results" Core..=) Core.<$> results
+          ]
+      )
 
 -- | Information about the products similar to a single product in a query image.
 --
@@ -3604,7 +3456,8 @@ newGoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult ::
   GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
 newGoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
       results = Core.Nothing
     }
@@ -3619,8 +3472,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -3632,8 +3485,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("results" Core..=) Core.<$> results
             ]
         )
@@ -3658,7 +3510,8 @@ newGoogleCloudVisionV1p1beta1ProductSearchResultsObjectAnnotation ::
   GoogleCloudVisionV1p1beta1ProductSearchResultsObjectAnnotation
 newGoogleCloudVisionV1p1beta1ProductSearchResultsObjectAnnotation =
   GoogleCloudVisionV1p1beta1ProductSearchResultsObjectAnnotation
-    { languageCode = Core.Nothing,
+    { languageCode =
+        Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
       score = Core.Nothing
@@ -3674,9 +3527,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResultsObjectAnnotation
             Core.<$> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
@@ -3712,7 +3565,8 @@ newGoogleCloudVisionV1p1beta1ProductSearchResultsResult ::
   GoogleCloudVisionV1p1beta1ProductSearchResultsResult
 newGoogleCloudVisionV1p1beta1ProductSearchResultsResult =
   GoogleCloudVisionV1p1beta1ProductSearchResultsResult
-    { image = Core.Nothing,
+    { image =
+        Core.Nothing,
       product = Core.Nothing,
       score = Core.Nothing
     }
@@ -3726,23 +3580,23 @@ instance
       "GoogleCloudVisionV1p1beta1ProductSearchResultsResult"
       ( \o ->
           GoogleCloudVisionV1p1beta1ProductSearchResultsResult
-            Core.<$> (o Core..:? "image") Core.<*> (o Core..:? "product")
-              Core.<*> (o Core..:? "score")
+            Core.<$> (o Core..:? "image")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1ProductSearchResultsResult
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1ProductSearchResultsResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("image" Core..=) Core.<$> image,
-              ("product" Core..=) Core.<$> product,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1ProductSearchResultsResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("image" Core..=) Core.<$> image,
+            ("product" Core..=) Core.<$> product,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | A @Property@ consists of a user-supplied name\/value pair.
 --
@@ -3767,32 +3621,23 @@ newGoogleCloudVisionV1p1beta1Property =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Property
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Property where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Property"
       ( \o ->
           GoogleCloudVisionV1p1beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "uint64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uint64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1Property
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1Property where
   toJSON GoogleCloudVisionV1p1beta1Property {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("uint64Value" Core..=) Core.. Core.AsText
-              Core.<$> uint64Value,
+            ("uint64Value" Core..=) Core.. Core.AsText Core.<$> uint64Value,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -3809,7 +3654,7 @@ data GoogleCloudVisionV1p1beta1SafeSearchAnnotation = GoogleCloudVisionV1p1beta1
     racy :: (Core.Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Racy),
     -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
     spoof :: (Core.Maybe GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof),
-    -- | Likelihood that this image contains violent content.
+    -- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
     violence ::
       ( Core.Maybe
           GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence
@@ -3822,7 +3667,8 @@ newGoogleCloudVisionV1p1beta1SafeSearchAnnotation ::
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation
 newGoogleCloudVisionV1p1beta1SafeSearchAnnotation =
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation
-    { adult = Core.Nothing,
+    { adult =
+        Core.Nothing,
       medical = Core.Nothing,
       racy = Core.Nothing,
       spoof = Core.Nothing,
@@ -3838,27 +3684,24 @@ instance
       "GoogleCloudVisionV1p1beta1SafeSearchAnnotation"
       ( \o ->
           GoogleCloudVisionV1p1beta1SafeSearchAnnotation
-            Core.<$> (o Core..:? "adult") Core.<*> (o Core..:? "medical")
-              Core.<*> (o Core..:? "racy")
-              Core.<*> (o Core..:? "spoof")
-              Core.<*> (o Core..:? "violence")
+            Core.<$> (o Core..:? "adult")
+            Core.<*> (o Core..:? "medical")
+            Core.<*> (o Core..:? "racy")
+            Core.<*> (o Core..:? "spoof")
+            Core.<*> (o Core..:? "violence")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1SafeSearchAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1SafeSearchAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("adult" Core..=) Core.<$> adult,
-              ("medical" Core..=) Core.<$> medical,
-              ("racy" Core..=) Core.<$> racy,
-              ("spoof" Core..=) Core.<$> spoof,
-              ("violence" Core..=) Core.<$> violence
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotation where
+  toJSON GoogleCloudVisionV1p1beta1SafeSearchAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adult" Core..=) Core.<$> adult,
+            ("medical" Core..=) Core.<$> medical,
+            ("racy" Core..=) Core.<$> racy,
+            ("spoof" Core..=) Core.<$> spoof,
+            ("violence" Core..=) Core.<$> violence
+          ]
+      )
 
 -- | A single symbol representation.
 --
@@ -3886,10 +3729,7 @@ newGoogleCloudVisionV1p1beta1Symbol =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Symbol
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Symbol where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Symbol"
@@ -3932,28 +3772,21 @@ newGoogleCloudVisionV1p1beta1TextAnnotation =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1TextAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1TextAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotation
-            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1TextAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1TextAnnotation where
   toJSON GoogleCloudVisionV1p1beta1TextAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pages" Core..=) Core.<$> pages,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("pages" Core..=) Core.<$> pages, ("text" Core..=) Core.<$> text]
       )
 
 -- | Detected start or end of a structural component.
@@ -3975,7 +3808,8 @@ newGoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak ::
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
 newGoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
-    { isPrefix = Core.Nothing,
+    { isPrefix =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -3988,21 +3822,21 @@ instance
       "GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak"
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
-            Core.<$> (o Core..:? "isPrefix") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "isPrefix")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("isPrefix" Core..=) Core.<$> isPrefix,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isPrefix" Core..=) Core.<$> isPrefix,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | Detected language for a structural component.
 --
@@ -4020,7 +3854,8 @@ newGoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage ::
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
 newGoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -4034,21 +3869,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1TextAnnotationDetectedLanguage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Additional information detected on the structural component.
 --
@@ -4069,7 +3903,8 @@ newGoogleCloudVisionV1p1beta1TextAnnotationTextProperty ::
   GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
 newGoogleCloudVisionV1p1beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
-    { detectedBreak = Core.Nothing,
+    { detectedBreak =
+        Core.Nothing,
       detectedLanguages = Core.Nothing
     }
 
@@ -4083,22 +3918,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1TextAnnotationTextProperty
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1TextAnnotationTextProperty {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
-              ("detectedLanguages" Core..=)
-                Core.<$> detectedLanguages
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1TextAnnotationTextProperty {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages
+          ]
+      )
 
 -- | A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image.
 --
@@ -4115,18 +3948,19 @@ data GoogleCloudVisionV1p1beta1Vertex = GoogleCloudVisionV1p1beta1Vertex
 newGoogleCloudVisionV1p1beta1Vertex ::
   GoogleCloudVisionV1p1beta1Vertex
 newGoogleCloudVisionV1p1beta1Vertex =
-  GoogleCloudVisionV1p1beta1Vertex {x = Core.Nothing, y = Core.Nothing}
+  GoogleCloudVisionV1p1beta1Vertex
+    { x = Core.Nothing,
+      y = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1Vertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1Vertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1Vertex"
       ( \o ->
           GoogleCloudVisionV1p1beta1Vertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p1beta1Vertex where
@@ -4160,7 +3994,8 @@ newGoogleCloudVisionV1p1beta1WebDetection ::
   GoogleCloudVisionV1p1beta1WebDetection
 newGoogleCloudVisionV1p1beta1WebDetection =
   GoogleCloudVisionV1p1beta1WebDetection
-    { bestGuessLabels = Core.Nothing,
+    { bestGuessLabels =
+        Core.Nothing,
       fullMatchingImages = Core.Nothing,
       pagesWithMatchingImages = Core.Nothing,
       partialMatchingImages = Core.Nothing,
@@ -4168,10 +4003,7 @@ newGoogleCloudVisionV1p1beta1WebDetection =
       webEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p1beta1WebDetection
-  where
+instance Core.FromJSON GoogleCloudVisionV1p1beta1WebDetection where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p1beta1WebDetection"
@@ -4185,23 +4017,16 @@ instance
             Core.<*> (o Core..:? "webEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1WebDetection
-  where
+instance Core.ToJSON GoogleCloudVisionV1p1beta1WebDetection where
   toJSON GoogleCloudVisionV1p1beta1WebDetection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestGuessLabels" Core..=)
-              Core.<$> bestGuessLabels,
-            ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("bestGuessLabels" Core..=) Core.<$> bestGuessLabels,
+            ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pagesWithMatchingImages" Core..=)
               Core.<$> pagesWithMatchingImages,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
-            ("visuallySimilarImages" Core..=)
-              Core.<$> visuallySimilarImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("visuallySimilarImages" Core..=) Core.<$> visuallySimilarImages,
             ("webEntities" Core..=) Core.<$> webEntities
           ]
       )
@@ -4224,7 +4049,8 @@ newGoogleCloudVisionV1p1beta1WebDetectionWebEntity ::
   GoogleCloudVisionV1p1beta1WebDetectionWebEntity
 newGoogleCloudVisionV1p1beta1WebDetectionWebEntity =
   GoogleCloudVisionV1p1beta1WebDetectionWebEntity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       score = Core.Nothing
     }
@@ -4239,23 +4065,22 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetectionWebEntity
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "entityId")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "entityId")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p1beta1WebDetectionWebEntity
   where
-  toJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebEntity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p1beta1WebDetectionWebEntity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Metadata for online images.
 --
@@ -4273,7 +4098,8 @@ newGoogleCloudVisionV1p1beta1WebDetectionWebImage ::
   GoogleCloudVisionV1p1beta1WebDetectionWebImage
 newGoogleCloudVisionV1p1beta1WebDetectionWebImage =
   GoogleCloudVisionV1p1beta1WebDetectionWebImage
-    { score = Core.Nothing,
+    { score =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -4286,21 +4112,16 @@ instance
       "GoogleCloudVisionV1p1beta1WebDetectionWebImage"
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetectionWebImage
-            Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebImage
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebImage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1WebDetectionWebImage where
+  toJSON GoogleCloudVisionV1p1beta1WebDetectionWebImage {..} =
+    Core.object
+      ( Core.catMaybes
+          [("score" Core..=) Core.<$> score, ("url" Core..=) Core.<$> url]
+      )
 
 -- | Label to provide extra metadata for the web detection.
 --
@@ -4318,7 +4139,8 @@ newGoogleCloudVisionV1p1beta1WebDetectionWebLabel ::
   GoogleCloudVisionV1p1beta1WebDetectionWebLabel
 newGoogleCloudVisionV1p1beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p1beta1WebDetectionWebLabel
-    { label = Core.Nothing,
+    { label =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -4332,21 +4154,17 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetectionWebLabel
             Core.<$> (o Core..:? "label")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebLabel
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebLabel {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("label" Core..=) Core.<$> label,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1WebDetectionWebLabel where
+  toJSON GoogleCloudVisionV1p1beta1WebDetectionWebLabel {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("label" Core..=) Core.<$> label,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Metadata for web pages.
 --
@@ -4370,7 +4188,8 @@ newGoogleCloudVisionV1p1beta1WebDetectionWebPage ::
   GoogleCloudVisionV1p1beta1WebDetectionWebPage
 newGoogleCloudVisionV1p1beta1WebDetectionWebPage =
   GoogleCloudVisionV1p1beta1WebDetectionWebPage
-    { fullMatchingImages = Core.Nothing,
+    { fullMatchingImages =
+        Core.Nothing,
       pageTitle = Core.Nothing,
       partialMatchingImages = Core.Nothing,
       score = Core.Nothing,
@@ -4387,29 +4206,23 @@ instance
       ( \o ->
           GoogleCloudVisionV1p1beta1WebDetectionWebPage
             Core.<$> (o Core..:? "fullMatchingImages")
-              Core.<*> (o Core..:? "pageTitle")
-              Core.<*> (o Core..:? "partialMatchingImages")
-              Core.<*> (o Core..:? "score")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "pageTitle")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebPage
-  where
-  toJSON
-    GoogleCloudVisionV1p1beta1WebDetectionWebPage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("fullMatchingImages" Core..=)
-                Core.<$> fullMatchingImages,
-              ("pageTitle" Core..=) Core.<$> pageTitle,
-              ("partialMatchingImages" Core..=)
-                Core.<$> partialMatchingImages,
-              ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p1beta1WebDetectionWebPage where
+  toJSON GoogleCloudVisionV1p1beta1WebDetectionWebPage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
+            ("pageTitle" Core..=) Core.<$> pageTitle,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("score" Core..=) Core.<$> score,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | A word representation.
 --
@@ -4480,7 +4293,8 @@ newGoogleCloudVisionV1p2beta1AnnotateFileRequest ::
   GoogleCloudVisionV1p2beta1AnnotateFileRequest
 newGoogleCloudVisionV1p2beta1AnnotateFileRequest =
   GoogleCloudVisionV1p2beta1AnnotateFileRequest
-    { features = Core.Nothing,
+    { features =
+        Core.Nothing,
       imageContext = Core.Nothing,
       inputConfig = Core.Nothing,
       pages = Core.Nothing
@@ -4496,25 +4310,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateFileRequest
             Core.<$> (o Core..:? "features")
-              Core.<*> (o Core..:? "imageContext")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "pages")
+            Core.<*> (o Core..:? "imageContext")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "pages")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1AnnotateFileRequest
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1AnnotateFileRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("features" Core..=) Core.<$> features,
-              ("imageContext" Core..=) Core.<$> imageContext,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("pages" Core..=) Core.<$> pages
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1AnnotateFileRequest where
+  toJSON GoogleCloudVisionV1p2beta1AnnotateFileRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("features" Core..=) Core.<$> features,
+            ("imageContext" Core..=) Core.<$> imageContext,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("pages" Core..=) Core.<$> pages
+          ]
+      )
 
 -- | Response to a single file annotation request. A file may contain one or more images, which individually have their own responses.
 --
@@ -4536,7 +4346,8 @@ newGoogleCloudVisionV1p2beta1AnnotateFileResponse ::
   GoogleCloudVisionV1p2beta1AnnotateFileResponse
 newGoogleCloudVisionV1p2beta1AnnotateFileResponse =
   GoogleCloudVisionV1p2beta1AnnotateFileResponse
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       inputConfig = Core.Nothing,
       responses = Core.Nothing,
       totalPages = Core.Nothing
@@ -4552,25 +4363,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses")
-              Core.<*> (o Core..:? "totalPages")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "responses")
+            Core.<*> (o Core..:? "totalPages")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1AnnotateFileResponse
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1AnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("error" Core..=) Core.<$> error,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("responses" Core..=) Core.<$> responses,
-              ("totalPages" Core..=) Core.<$> totalPages
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1AnnotateFileResponse where
+  toJSON GoogleCloudVisionV1p2beta1AnnotateFileResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("responses" Core..=) Core.<$> responses,
+            ("totalPages" Core..=) Core.<$> totalPages
+          ]
+      )
 
 -- | Request for performing Google Cloud Vision API tasks over a user-provided image, with user-requested features, and with context information.
 --
@@ -4590,7 +4397,8 @@ newGoogleCloudVisionV1p2beta1AnnotateImageRequest ::
   GoogleCloudVisionV1p2beta1AnnotateImageRequest
 newGoogleCloudVisionV1p2beta1AnnotateImageRequest =
   GoogleCloudVisionV1p2beta1AnnotateImageRequest
-    { features = Core.Nothing,
+    { features =
+        Core.Nothing,
       image = Core.Nothing,
       imageContext = Core.Nothing
     }
@@ -4604,23 +4412,20 @@ instance
       "GoogleCloudVisionV1p2beta1AnnotateImageRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateImageRequest
-            Core.<$> (o Core..:? "features") Core.<*> (o Core..:? "image")
-              Core.<*> (o Core..:? "imageContext")
+            Core.<$> (o Core..:? "features")
+            Core.<*> (o Core..:? "image")
+            Core.<*> (o Core..:? "imageContext")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1AnnotateImageRequest
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1AnnotateImageRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("features" Core..=) Core.<$> features,
-              ("image" Core..=) Core.<$> image,
-              ("imageContext" Core..=) Core.<$> imageContext
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1AnnotateImageRequest where
+  toJSON GoogleCloudVisionV1p2beta1AnnotateImageRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("features" Core..=) Core.<$> features,
+            ("image" Core..=) Core.<$> image,
+            ("imageContext" Core..=) Core.<$> imageContext
+          ]
+      )
 
 -- | Response to an image annotation request.
 --
@@ -4662,7 +4467,8 @@ newGoogleCloudVisionV1p2beta1AnnotateImageResponse ::
   GoogleCloudVisionV1p2beta1AnnotateImageResponse
 newGoogleCloudVisionV1p2beta1AnnotateImageResponse =
   GoogleCloudVisionV1p2beta1AnnotateImageResponse
-    { context = Core.Nothing,
+    { context =
+        Core.Nothing,
       cropHintsAnnotation = Core.Nothing,
       error = Core.Nothing,
       faceAnnotations = Core.Nothing,
@@ -4688,53 +4494,46 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1AnnotateImageResponse
             Core.<$> (o Core..:? "context")
-              Core.<*> (o Core..:? "cropHintsAnnotation")
-              Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "fullTextAnnotation")
-              Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations")
-              Core.<*> (o Core..:? "landmarkAnnotations")
-              Core.<*> (o Core..:? "localizedObjectAnnotations")
-              Core.<*> (o Core..:? "logoAnnotations")
-              Core.<*> (o Core..:? "productSearchResults")
-              Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations")
-              Core.<*> (o Core..:? "webDetection")
+            Core.<*> (o Core..:? "cropHintsAnnotation")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "fullTextAnnotation")
+            Core.<*> (o Core..:? "imagePropertiesAnnotation")
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "landmarkAnnotations")
+            Core.<*> (o Core..:? "localizedObjectAnnotations")
+            Core.<*> (o Core..:? "logoAnnotations")
+            Core.<*> (o Core..:? "productSearchResults")
+            Core.<*> (o Core..:? "safeSearchAnnotation")
+            Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "webDetection")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1AnnotateImageResponse
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1AnnotateImageResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("context" Core..=) Core.<$> context,
-              ("cropHintsAnnotation" Core..=)
-                Core.<$> cropHintsAnnotation,
-              ("error" Core..=) Core.<$> error,
-              ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-              ("fullTextAnnotation" Core..=)
-                Core.<$> fullTextAnnotation,
-              ("imagePropertiesAnnotation" Core..=)
-                Core.<$> imagePropertiesAnnotation,
-              ("labelAnnotations" Core..=)
-                Core.<$> labelAnnotations,
-              ("landmarkAnnotations" Core..=)
-                Core.<$> landmarkAnnotations,
-              ("localizedObjectAnnotations" Core..=)
-                Core.<$> localizedObjectAnnotations,
-              ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
-              ("productSearchResults" Core..=)
-                Core.<$> productSearchResults,
-              ("safeSearchAnnotation" Core..=)
-                Core.<$> safeSearchAnnotation,
-              ("textAnnotations" Core..=) Core.<$> textAnnotations,
-              ("webDetection" Core..=) Core.<$> webDetection
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1AnnotateImageResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("context" Core..=) Core.<$> context,
+            ("cropHintsAnnotation" Core..=) Core.<$> cropHintsAnnotation,
+            ("error" Core..=) Core.<$> error,
+            ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
+            ("fullTextAnnotation" Core..=) Core.<$> fullTextAnnotation,
+            ("imagePropertiesAnnotation" Core..=)
+              Core.<$> imagePropertiesAnnotation,
+            ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+            ("landmarkAnnotations" Core..=) Core.<$> landmarkAnnotations,
+            ("localizedObjectAnnotations" Core..=)
+              Core.<$> localizedObjectAnnotations,
+            ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
+            ("productSearchResults" Core..=) Core.<$> productSearchResults,
+            ("safeSearchAnnotation" Core..=) Core.<$> safeSearchAnnotation,
+            ("textAnnotations" Core..=) Core.<$> textAnnotations,
+            ("webDetection" Core..=) Core.<$> webDetection
+          ]
+      )
 
 -- | An offline file annotation request.
 --
@@ -4756,7 +4555,8 @@ newGoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest ::
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
 newGoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest =
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
-    { features = Core.Nothing,
+    { features =
+        Core.Nothing,
       imageContext = Core.Nothing,
       inputConfig = Core.Nothing,
       outputConfig = Core.Nothing
@@ -4772,25 +4572,24 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
             Core.<$> (o Core..:? "features")
-              Core.<*> (o Core..:? "imageContext")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "outputConfig")
+            Core.<*> (o Core..:? "imageContext")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "outputConfig")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("features" Core..=) Core.<$> features,
-              ("imageContext" Core..=) Core.<$> imageContext,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("outputConfig" Core..=) Core.<$> outputConfig
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("features" Core..=) Core.<$> features,
+            ("imageContext" Core..=) Core.<$> imageContext,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("outputConfig" Core..=) Core.<$> outputConfig
+          ]
+      )
 
 -- | The response for a single offline file annotation request.
 --
@@ -4806,7 +4605,8 @@ newGoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse ::
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
 newGoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
-    { outputConfig = Core.Nothing
+    { outputConfig =
+        Core.Nothing
     }
 
 instance
@@ -4825,18 +4625,20 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputConfig" Core..=) Core.<$> outputConfig]
-        )
+  toJSON GoogleCloudVisionV1p2beta1AsyncAnnotateFileResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | Multiple async file annotation requests are batched into a single service call.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest' smart constructor.
 data GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
-  { -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
+  { -- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+    labels ::
+      ( Core.Maybe
+          GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+      ),
+    -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: (Core.Maybe Core.Text),
     -- | Required. Individual async file annotation requests for this batch.
     requests :: (Core.Maybe [GoogleCloudVisionV1p2beta1AsyncAnnotateFileRequest])
@@ -4848,7 +4650,9 @@ newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest ::
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
 newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest =
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
-    { parent = Core.Nothing,
+    { labels =
+        Core.Nothing,
+      parent = Core.Nothing,
       requests = Core.Nothing
     }
 
@@ -4861,22 +4665,63 @@ instance
       "GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
-            Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests")
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "requests")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest
   where
+  toJSON GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("labels" Core..=) Core.<$> labels,
+            ("parent" Core..=) Core.<$> parent,
+            ("requests" Core..=) Core.<$> requests
+          ]
+      )
+
+-- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+--
+-- /See:/ 'newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels' smart constructor.
+newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels' with the minimum fields required to make a request.
+newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+  additional =
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels"
+      ( \o ->
+          GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels
+  where
   toJSON
-    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("parent" Core..=) Core.<$> parent,
-              ("requests" Core..=) Core.<$> requests
-            ]
-        )
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesRequest_Labels {..} =
+      Core.toJSON additional
 
 -- | Response to an async batch file annotation request.
 --
@@ -4892,7 +4737,8 @@ newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
 newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -4914,15 +4760,18 @@ instance
   toJSON
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateFilesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+        (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Request for async image annotation for a list of images.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest' smart constructor.
 data GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
-  { -- | Required. The desired output location and metadata (e.g. format).
+  { -- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+    labels ::
+      ( Core.Maybe
+          GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+      ),
+    -- | Required. The desired output location and metadata (e.g. format).
     outputConfig :: (Core.Maybe GoogleCloudVisionV1p2beta1OutputConfig),
     -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: (Core.Maybe Core.Text),
@@ -4936,7 +4785,9 @@ newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest ::
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
 newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest =
   GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
-    { outputConfig = Core.Nothing,
+    { labels =
+        Core.Nothing,
+      outputConfig = Core.Nothing,
       parent = Core.Nothing,
       requests = Core.Nothing
     }
@@ -4950,9 +4801,10 @@ instance
       "GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest
-            Core.<$> (o Core..:? "outputConfig")
-              Core.<*> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests")
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "outputConfig")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "requests")
       )
 
 instance
@@ -4963,17 +4815,63 @@ instance
     GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest {..} =
       Core.object
         ( Core.catMaybes
-            [ ("outputConfig" Core..=) Core.<$> outputConfig,
+            [ ("labels" Core..=) Core.<$> labels,
+              ("outputConfig" Core..=) Core.<$> outputConfig,
               ("parent" Core..=) Core.<$> parent,
               ("requests" Core..=) Core.<$> requests
             ]
         )
 
+-- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+--
+-- /See:/ 'newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels' smart constructor.
+newtype GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels = GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels' with the minimum fields required to make a request.
+newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+newGoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+  additional =
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels"
+      ( \o ->
+          GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels
+  where
+  toJSON
+    GoogleCloudVisionV1p2beta1AsyncBatchAnnotateImagesRequest_Labels {..} =
+      Core.toJSON additional
+
 -- | A list of requests to annotate files using the BatchAnnotateFiles API.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest' smart constructor.
 data GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest = GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
-  { -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
+  { -- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+    labels ::
+      ( Core.Maybe
+          GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+      ),
+    -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: (Core.Maybe Core.Text),
     -- | Required. The list of file annotation requests. Right now we support only one AnnotateFileRequest in BatchAnnotateFilesRequest.
     requests :: (Core.Maybe [GoogleCloudVisionV1p2beta1AnnotateFileRequest])
@@ -4985,7 +4883,9 @@ newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest ::
   GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
 newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest =
   GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
-    { parent = Core.Nothing,
+    { labels =
+        Core.Nothing,
+      parent = Core.Nothing,
       requests = Core.Nothing
     }
 
@@ -4998,22 +4898,63 @@ instance
       "GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
-            Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests")
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "requests")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest
   where
+  toJSON GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("labels" Core..=) Core.<$> labels,
+            ("parent" Core..=) Core.<$> parent,
+            ("requests" Core..=) Core.<$> requests
+          ]
+      )
+
+-- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+--
+-- /See:/ 'newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels' smart constructor.
+newtype GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels = GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels' with the minimum fields required to make a request.
+newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+newGoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+  additional =
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels"
+      ( \o ->
+          GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels
+  where
   toJSON
-    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("parent" Core..=) Core.<$> parent,
-              ("requests" Core..=) Core.<$> requests
-            ]
-        )
+    GoogleCloudVisionV1p2beta1BatchAnnotateFilesRequest_Labels {..} =
+      Core.toJSON additional
 
 -- | A list of file annotation responses.
 --
@@ -5029,7 +4970,8 @@ newGoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
 newGoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse =
   GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -5048,18 +4990,20 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+  toJSON GoogleCloudVisionV1p2beta1BatchAnnotateFilesResponse {..} =
+    Core.object
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Multiple image annotation requests are batched into a single service call.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest' smart constructor.
 data GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest = GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
-  { -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
+  { -- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+    labels ::
+      ( Core.Maybe
+          GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+      ),
+    -- | Optional. Target project and location to make a call. Format: @projects\/{project-id}\/locations\/{location-id}@. If no parent is specified, a region will be chosen automatically. Supported location-ids: @us@: USA country only, @asia@: East asia areas, like Japan, Taiwan, @eu@: The European Union. Example: @projects\/project-A\/locations\/eu@.
     parent :: (Core.Maybe Core.Text),
     -- | Required. Individual image annotation requests for this batch.
     requests :: (Core.Maybe [GoogleCloudVisionV1p2beta1AnnotateImageRequest])
@@ -5071,7 +5015,9 @@ newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest ::
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
 newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest =
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
-    { parent = Core.Nothing,
+    { labels =
+        Core.Nothing,
+      parent = Core.Nothing,
       requests = Core.Nothing
     }
 
@@ -5084,22 +5030,63 @@ instance
       "GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest"
       ( \o ->
           GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
-            Core.<$> (o Core..:? "parent")
-              Core.<*> (o Core..:? "requests")
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "requests")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest
   where
+  toJSON GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("labels" Core..=) Core.<$> labels,
+            ("parent" Core..=) Core.<$> parent,
+            ("requests" Core..=) Core.<$> requests
+          ]
+      )
+
+-- | Optional. The labels with user-defined metadata for the request. Label keys and values can be no longer than 63 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter.
+--
+-- /See:/ 'newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels' smart constructor.
+newtype GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels = GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels' with the minimum fields required to make a request.
+newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+newGoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+  additional =
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels"
+      ( \o ->
+          GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels
+  where
   toJSON
-    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("parent" Core..=) Core.<$> parent,
-              ("requests" Core..=) Core.<$> requests
-            ]
-        )
+    GoogleCloudVisionV1p2beta1BatchAnnotateImagesRequest_Labels {..} =
+      Core.toJSON additional
 
 -- | Response to a batch image annotation request.
 --
@@ -5115,7 +5102,8 @@ newGoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse ::
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
 newGoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse =
   GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -5134,12 +5122,9 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+  toJSON GoogleCloudVisionV1p2beta1BatchAnnotateImagesResponse {..} =
+    Core.object
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Logical element on the page.
 --
@@ -5170,10 +5155,7 @@ newGoogleCloudVisionV1p2beta1Block =
       property = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Block
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Block where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Block"
@@ -5214,14 +5196,12 @@ newGoogleCloudVisionV1p2beta1BoundingPoly ::
   GoogleCloudVisionV1p2beta1BoundingPoly
 newGoogleCloudVisionV1p2beta1BoundingPoly =
   GoogleCloudVisionV1p2beta1BoundingPoly
-    { normalizedVertices = Core.Nothing,
+    { normalizedVertices =
+        Core.Nothing,
       vertices = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1BoundingPoly
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1BoundingPoly where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1BoundingPoly"
@@ -5231,15 +5211,11 @@ instance
             Core.<*> (o Core..:? "vertices")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1BoundingPoly
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1BoundingPoly where
   toJSON GoogleCloudVisionV1p2beta1BoundingPoly {..} =
     Core.object
       ( Core.catMaybes
-          [ ("normalizedVertices" Core..=)
-              Core.<$> normalizedVertices,
+          [ ("normalizedVertices" Core..=) Core.<$> normalizedVertices,
             ("vertices" Core..=) Core.<$> vertices
           ]
       )
@@ -5267,10 +5243,7 @@ newGoogleCloudVisionV1p2beta1ColorInfo =
       score = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1ColorInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1ColorInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1ColorInfo"
@@ -5281,10 +5254,7 @@ instance
             Core.<*> (o Core..:? "score")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ColorInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ColorInfo where
   toJSON GoogleCloudVisionV1p2beta1ColorInfo {..} =
     Core.object
       ( Core.catMaybes
@@ -5317,10 +5287,7 @@ newGoogleCloudVisionV1p2beta1CropHint =
       importanceFraction = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1CropHint
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1CropHint where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1CropHint"
@@ -5331,17 +5298,13 @@ instance
             Core.<*> (o Core..:? "importanceFraction")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1CropHint
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1CropHint where
   toJSON GoogleCloudVisionV1p2beta1CropHint {..} =
     Core.object
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
             ("confidence" Core..=) Core.<$> confidence,
-            ("importanceFraction" Core..=)
-              Core.<$> importanceFraction
+            ("importanceFraction" Core..=) Core.<$> importanceFraction
           ]
       )
 
@@ -5358,7 +5321,10 @@ newtype GoogleCloudVisionV1p2beta1CropHintsAnnotation = GoogleCloudVisionV1p2bet
 newGoogleCloudVisionV1p2beta1CropHintsAnnotation ::
   GoogleCloudVisionV1p2beta1CropHintsAnnotation
 newGoogleCloudVisionV1p2beta1CropHintsAnnotation =
-  GoogleCloudVisionV1p2beta1CropHintsAnnotation {cropHints = Core.Nothing}
+  GoogleCloudVisionV1p2beta1CropHintsAnnotation
+    { cropHints =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -5372,16 +5338,10 @@ instance
             Core.<$> (o Core..:? "cropHints")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1CropHintsAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1CropHintsAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [("cropHints" Core..=) Core.<$> cropHints]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1CropHintsAnnotation where
+  toJSON GoogleCloudVisionV1p2beta1CropHintsAnnotation {..} =
+    Core.object
+      (Core.catMaybes [("cropHints" Core..=) Core.<$> cropHints])
 
 -- | Parameters for crop hints annotation request.
 --
@@ -5396,12 +5356,12 @@ newtype GoogleCloudVisionV1p2beta1CropHintsParams = GoogleCloudVisionV1p2beta1Cr
 newGoogleCloudVisionV1p2beta1CropHintsParams ::
   GoogleCloudVisionV1p2beta1CropHintsParams
 newGoogleCloudVisionV1p2beta1CropHintsParams =
-  GoogleCloudVisionV1p2beta1CropHintsParams {aspectRatios = Core.Nothing}
+  GoogleCloudVisionV1p2beta1CropHintsParams
+    { aspectRatios =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1CropHintsParams
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1CropHintsParams where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1CropHintsParams"
@@ -5410,15 +5370,10 @@ instance
             Core.<$> (o Core..:? "aspectRatios")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1CropHintsParams
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1CropHintsParams where
   toJSON GoogleCloudVisionV1p2beta1CropHintsParams {..} =
     Core.object
-      ( Core.catMaybes
-          [("aspectRatios" Core..=) Core.<$> aspectRatios]
-      )
+      (Core.catMaybes [("aspectRatios" Core..=) Core.<$> aspectRatios])
 
 -- | Set of dominant colors and their corresponding scores.
 --
@@ -5433,7 +5388,10 @@ newtype GoogleCloudVisionV1p2beta1DominantColorsAnnotation = GoogleCloudVisionV1
 newGoogleCloudVisionV1p2beta1DominantColorsAnnotation ::
   GoogleCloudVisionV1p2beta1DominantColorsAnnotation
 newGoogleCloudVisionV1p2beta1DominantColorsAnnotation =
-  GoogleCloudVisionV1p2beta1DominantColorsAnnotation {colors = Core.Nothing}
+  GoogleCloudVisionV1p2beta1DominantColorsAnnotation
+    { colors =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -5451,10 +5409,8 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1DominantColorsAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1DominantColorsAnnotation {..} =
-      Core.object
-        (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+  toJSON GoogleCloudVisionV1p2beta1DominantColorsAnnotation {..} =
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | Set of detected entity features.
 --
@@ -5486,7 +5442,8 @@ newGoogleCloudVisionV1p2beta1EntityAnnotation ::
   GoogleCloudVisionV1p2beta1EntityAnnotation
 newGoogleCloudVisionV1p2beta1EntityAnnotation =
   GoogleCloudVisionV1p2beta1EntityAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       confidence = Core.Nothing,
       description = Core.Nothing,
       locale = Core.Nothing,
@@ -5497,10 +5454,7 @@ newGoogleCloudVisionV1p2beta1EntityAnnotation =
       topicality = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1EntityAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1EntityAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1EntityAnnotation"
@@ -5517,10 +5471,7 @@ instance
             Core.<*> (o Core..:? "topicality")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1EntityAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1EntityAnnotation where
   toJSON GoogleCloudVisionV1p2beta1EntityAnnotation {..} =
     Core.object
       ( Core.catMaybes
@@ -5596,7 +5547,8 @@ newGoogleCloudVisionV1p2beta1FaceAnnotation ::
   GoogleCloudVisionV1p2beta1FaceAnnotation
 newGoogleCloudVisionV1p2beta1FaceAnnotation =
   GoogleCloudVisionV1p2beta1FaceAnnotation
-    { angerLikelihood = Core.Nothing,
+    { angerLikelihood =
+        Core.Nothing,
       blurredLikelihood = Core.Nothing,
       boundingPoly = Core.Nothing,
       detectionConfidence = Core.Nothing,
@@ -5613,10 +5565,7 @@ newGoogleCloudVisionV1p2beta1FaceAnnotation =
       underExposedLikelihood = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1FaceAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1FaceAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1FaceAnnotation"
@@ -5639,40 +5588,30 @@ instance
             Core.<*> (o Core..:? "underExposedLikelihood")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1FaceAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1FaceAnnotation where
   toJSON GoogleCloudVisionV1p2beta1FaceAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("angerLikelihood" Core..=)
-              Core.<$> angerLikelihood,
-            ("blurredLikelihood" Core..=)
-              Core.<$> blurredLikelihood,
+          [ ("angerLikelihood" Core..=) Core.<$> angerLikelihood,
+            ("blurredLikelihood" Core..=) Core.<$> blurredLikelihood,
             ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("detectionConfidence" Core..=)
-              Core.<$> detectionConfidence,
+            ("detectionConfidence" Core..=) Core.<$> detectionConfidence,
             ("fdBoundingPoly" Core..=) Core.<$> fdBoundingPoly,
-            ("headwearLikelihood" Core..=)
-              Core.<$> headwearLikelihood,
+            ("headwearLikelihood" Core..=) Core.<$> headwearLikelihood,
             ("joyLikelihood" Core..=) Core.<$> joyLikelihood,
-            ("landmarkingConfidence" Core..=)
-              Core.<$> landmarkingConfidence,
+            ("landmarkingConfidence" Core..=) Core.<$> landmarkingConfidence,
             ("landmarks" Core..=) Core.<$> landmarks,
             ("panAngle" Core..=) Core.<$> panAngle,
             ("rollAngle" Core..=) Core.<$> rollAngle,
-            ("sorrowLikelihood" Core..=)
-              Core.<$> sorrowLikelihood,
-            ("surpriseLikelihood" Core..=)
-              Core.<$> surpriseLikelihood,
+            ("sorrowLikelihood" Core..=) Core.<$> sorrowLikelihood,
+            ("surpriseLikelihood" Core..=) Core.<$> surpriseLikelihood,
             ("tiltAngle" Core..=) Core.<$> tiltAngle,
             ("underExposedLikelihood" Core..=)
               Core.<$> underExposedLikelihood
           ]
       )
 
--- | A face-specific landmark (for example, a face feature).
+-- | A face-specific landmark (for example, a face feature). Landmark positions may fall outside the bounds of the image if the face is near one or more edges of the image. Therefore it is NOT guaranteed that @0 \<= x \< width@ or @0 \<= y \< height@.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1FaceAnnotationLandmark' smart constructor.
 data GoogleCloudVisionV1p2beta1FaceAnnotationLandmark = GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
@@ -5688,7 +5627,8 @@ newGoogleCloudVisionV1p2beta1FaceAnnotationLandmark ::
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
 newGoogleCloudVisionV1p2beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
-    { position = Core.Nothing,
+    { position =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -5701,21 +5641,21 @@ instance
       "GoogleCloudVisionV1p2beta1FaceAnnotationLandmark"
       ( \o ->
           GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
-            Core.<$> (o Core..:? "position") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "position")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1FaceAnnotationLandmark
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1FaceAnnotationLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("position" Core..=) Core.<$> position,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1FaceAnnotationLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("position" Core..=) Core.<$> position,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | The type of Google Cloud Vision API detection to perform, and the maximum number of results to return for that type. Multiple @Feature@ objects can be specified in the @features@ list.
 --
@@ -5740,10 +5680,7 @@ newGoogleCloudVisionV1p2beta1Feature =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Feature
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Feature where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Feature"
@@ -5754,10 +5691,7 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1Feature
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1Feature where
   toJSON GoogleCloudVisionV1p2beta1Feature {..} =
     Core.object
       ( Core.catMaybes
@@ -5783,10 +5717,7 @@ newGoogleCloudVisionV1p2beta1GcsDestination ::
 newGoogleCloudVisionV1p2beta1GcsDestination =
   GoogleCloudVisionV1p2beta1GcsDestination {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1GcsDestination
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1GcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1GcsDestination"
@@ -5795,13 +5726,9 @@ instance
             Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1GcsDestination
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1GcsDestination where
   toJSON GoogleCloudVisionV1p2beta1GcsDestination {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Google Cloud Storage location where the input will be read from.
 --
@@ -5818,25 +5745,17 @@ newGoogleCloudVisionV1p2beta1GcsSource ::
 newGoogleCloudVisionV1p2beta1GcsSource =
   GoogleCloudVisionV1p2beta1GcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1GcsSource
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1GcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1GcsSource"
       ( \o ->
-          GoogleCloudVisionV1p2beta1GcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudVisionV1p2beta1GcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1GcsSource
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1GcsSource where
   toJSON GoogleCloudVisionV1p2beta1GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | Client image to perform Google Cloud Vision API tasks over.
 --
@@ -5858,10 +5777,7 @@ newGoogleCloudVisionV1p2beta1Image =
       source = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Image
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Image where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Image"
@@ -5896,7 +5812,8 @@ newGoogleCloudVisionV1p2beta1ImageAnnotationContext ::
   GoogleCloudVisionV1p2beta1ImageAnnotationContext
 newGoogleCloudVisionV1p2beta1ImageAnnotationContext =
   GoogleCloudVisionV1p2beta1ImageAnnotationContext
-    { pageNumber = Core.Nothing,
+    { pageNumber =
+        Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -5910,21 +5827,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ImageAnnotationContext
             Core.<$> (o Core..:? "pageNumber")
-              Core.<*> (o Core..:? "uri")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1ImageAnnotationContext
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1ImageAnnotationContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pageNumber" Core..=) Core.<$> pageNumber,
-              ("uri" Core..=) Core.<$> uri
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1ImageAnnotationContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pageNumber" Core..=) Core.<$> pageNumber,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
 
 -- | Image context and\/or feature-specific parameters.
 --
@@ -5950,7 +5866,8 @@ newGoogleCloudVisionV1p2beta1ImageContext ::
   GoogleCloudVisionV1p2beta1ImageContext
 newGoogleCloudVisionV1p2beta1ImageContext =
   GoogleCloudVisionV1p2beta1ImageContext
-    { cropHintsParams = Core.Nothing,
+    { cropHintsParams =
+        Core.Nothing,
       languageHints = Core.Nothing,
       latLongRect = Core.Nothing,
       productSearchParams = Core.Nothing,
@@ -5958,10 +5875,7 @@ newGoogleCloudVisionV1p2beta1ImageContext =
       webDetectionParams = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1ImageContext
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1ImageContext where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1ImageContext"
@@ -5975,23 +5889,16 @@ instance
             Core.<*> (o Core..:? "webDetectionParams")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ImageContext
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ImageContext where
   toJSON GoogleCloudVisionV1p2beta1ImageContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cropHintsParams" Core..=)
-              Core.<$> cropHintsParams,
+          [ ("cropHintsParams" Core..=) Core.<$> cropHintsParams,
             ("languageHints" Core..=) Core.<$> languageHints,
             ("latLongRect" Core..=) Core.<$> latLongRect,
-            ("productSearchParams" Core..=)
-              Core.<$> productSearchParams,
-            ("textDetectionParams" Core..=)
-              Core.<$> textDetectionParams,
-            ("webDetectionParams" Core..=)
-              Core.<$> webDetectionParams
+            ("productSearchParams" Core..=) Core.<$> productSearchParams,
+            ("textDetectionParams" Core..=) Core.<$> textDetectionParams,
+            ("webDetectionParams" Core..=) Core.<$> webDetectionParams
           ]
       )
 
@@ -6008,12 +5915,12 @@ newtype GoogleCloudVisionV1p2beta1ImageProperties = GoogleCloudVisionV1p2beta1Im
 newGoogleCloudVisionV1p2beta1ImageProperties ::
   GoogleCloudVisionV1p2beta1ImageProperties
 newGoogleCloudVisionV1p2beta1ImageProperties =
-  GoogleCloudVisionV1p2beta1ImageProperties {dominantColors = Core.Nothing}
+  GoogleCloudVisionV1p2beta1ImageProperties
+    { dominantColors =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1ImageProperties
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1ImageProperties where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1ImageProperties"
@@ -6022,10 +5929,7 @@ instance
             Core.<$> (o Core..:? "dominantColors")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ImageProperties
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ImageProperties where
   toJSON GoogleCloudVisionV1p2beta1ImageProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -6052,10 +5956,7 @@ newGoogleCloudVisionV1p2beta1ImageSource =
       imageUri = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1ImageSource
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1ImageSource where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1ImageSource"
@@ -6065,10 +5966,7 @@ instance
             Core.<*> (o Core..:? "imageUri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ImageSource
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ImageSource where
   toJSON GoogleCloudVisionV1p2beta1ImageSource {..} =
     Core.object
       ( Core.catMaybes
@@ -6100,10 +5998,7 @@ newGoogleCloudVisionV1p2beta1InputConfig =
       mimeType = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1InputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1InputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1InputConfig"
@@ -6114,10 +6009,7 @@ instance
             Core.<*> (o Core..:? "mimeType")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1InputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1InputConfig where
   toJSON GoogleCloudVisionV1p2beta1InputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -6147,10 +6039,7 @@ newGoogleCloudVisionV1p2beta1LatLongRect =
       minLatLng = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1LatLongRect
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1LatLongRect where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1LatLongRect"
@@ -6160,10 +6049,7 @@ instance
             Core.<*> (o Core..:? "minLatLng")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1LatLongRect
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1LatLongRect where
   toJSON GoogleCloudVisionV1p2beta1LatLongRect {..} =
     Core.object
       ( Core.catMaybes
@@ -6194,7 +6080,8 @@ newGoogleCloudVisionV1p2beta1LocalizedObjectAnnotation ::
   GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
 newGoogleCloudVisionV1p2beta1LocalizedObjectAnnotation =
   GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       languageCode = Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
@@ -6211,27 +6098,26 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("languageCode" Core..=) Core.<$> languageCode,
-              ("mid" Core..=) Core.<$> mid,
-              ("name" Core..=) Core.<$> name,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1LocalizedObjectAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("mid" Core..=) Core.<$> mid,
+            ("name" Core..=) Core.<$> name,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Detected entity location information.
 --
@@ -6248,10 +6134,7 @@ newGoogleCloudVisionV1p2beta1LocationInfo ::
 newGoogleCloudVisionV1p2beta1LocationInfo =
   GoogleCloudVisionV1p2beta1LocationInfo {latLng = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1LocationInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1LocationInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1LocationInfo"
@@ -6260,13 +6143,9 @@ instance
             Core.<$> (o Core..:? "latLng")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1LocationInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1LocationInfo where
   toJSON GoogleCloudVisionV1p2beta1LocationInfo {..} =
-    Core.object
-      (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
+    Core.object (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -6288,22 +6167,17 @@ newGoogleCloudVisionV1p2beta1NormalizedVertex =
       y = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1NormalizedVertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1NormalizedVertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1NormalizedVertex"
       ( \o ->
           GoogleCloudVisionV1p2beta1NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1NormalizedVertex
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1NormalizedVertex where
   toJSON GoogleCloudVisionV1p2beta1NormalizedVertex {..} =
     Core.object
       ( Core.catMaybes
@@ -6328,15 +6202,13 @@ newGoogleCloudVisionV1p2beta1OperationMetadata ::
   GoogleCloudVisionV1p2beta1OperationMetadata
 newGoogleCloudVisionV1p2beta1OperationMetadata =
   GoogleCloudVisionV1p2beta1OperationMetadata
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       state = Core.Nothing,
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1OperationMetadata"
@@ -6347,19 +6219,15 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1OperationMetadata
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1OperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("state" Core..=) Core.<$> state,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1OperationMetadata where
+  toJSON GoogleCloudVisionV1p2beta1OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | The desired output location and metadata.
 --
@@ -6381,10 +6249,7 @@ newGoogleCloudVisionV1p2beta1OutputConfig =
       gcsDestination = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1OutputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1OutputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1OutputConfig"
@@ -6394,10 +6259,7 @@ instance
             Core.<*> (o Core..:? "gcsDestination")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1OutputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1OutputConfig where
   toJSON GoogleCloudVisionV1p2beta1OutputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -6486,10 +6348,7 @@ newGoogleCloudVisionV1p2beta1Paragraph =
       words = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Paragraph
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Paragraph where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Paragraph"
@@ -6501,10 +6360,7 @@ instance
             Core.<*> (o Core..:? "words")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1Paragraph
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1Paragraph where
   toJSON GoogleCloudVisionV1p2beta1Paragraph {..} =
     Core.object
       ( Core.catMaybes
@@ -6538,10 +6394,7 @@ newGoogleCloudVisionV1p2beta1Position =
       z = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Position
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Position where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Position"
@@ -6552,10 +6405,7 @@ instance
             Core.<*> (o Core..:? "z")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1Position
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1Position where
   toJSON GoogleCloudVisionV1p2beta1Position {..} =
     Core.object
       ( Core.catMaybes
@@ -6594,10 +6444,7 @@ newGoogleCloudVisionV1p2beta1Product =
       productLabels = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Product
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Product where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Product"
@@ -6610,10 +6457,7 @@ instance
             Core.<*> (o Core..:? "productLabels")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1Product
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1Product where
   toJSON GoogleCloudVisionV1p2beta1Product {..} =
     Core.object
       ( Core.catMaybes
@@ -6645,28 +6489,21 @@ newGoogleCloudVisionV1p2beta1ProductKeyValue =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1ProductKeyValue
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1ProductKeyValue where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1ProductKeyValue"
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductKeyValue
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ProductKeyValue
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ProductKeyValue where
   toJSON GoogleCloudVisionV1p2beta1ProductKeyValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Parameters for a product search request.
@@ -6689,7 +6526,8 @@ newGoogleCloudVisionV1p2beta1ProductSearchParams ::
   GoogleCloudVisionV1p2beta1ProductSearchParams
 newGoogleCloudVisionV1p2beta1ProductSearchParams =
   GoogleCloudVisionV1p2beta1ProductSearchParams
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       filter = Core.Nothing,
       productCategories = Core.Nothing,
       productSet = Core.Nothing
@@ -6705,26 +6543,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchParams
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "filter")
-              Core.<*> (o Core..:? "productCategories")
-              Core.<*> (o Core..:? "productSet")
+            Core.<*> (o Core..:? "filter")
+            Core.<*> (o Core..:? "productCategories")
+            Core.<*> (o Core..:? "productSet")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ProductSearchParams
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1ProductSearchParams {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("filter" Core..=) Core.<$> filter,
-              ("productCategories" Core..=)
-                Core.<$> productCategories,
-              ("productSet" Core..=) Core.<$> productSet
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ProductSearchParams where
+  toJSON GoogleCloudVisionV1p2beta1ProductSearchParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
+            ("filter" Core..=) Core.<$> filter,
+            ("productCategories" Core..=) Core.<$> productCategories,
+            ("productSet" Core..=) Core.<$> productSet
+          ]
+      )
 
 -- | Results for a product search request.
 --
@@ -6747,7 +6580,8 @@ newGoogleCloudVisionV1p2beta1ProductSearchResults ::
   GoogleCloudVisionV1p2beta1ProductSearchResults
 newGoogleCloudVisionV1p2beta1ProductSearchResults =
   GoogleCloudVisionV1p2beta1ProductSearchResults
-    { indexTime = Core.Nothing,
+    { indexTime =
+        Core.Nothing,
       productGroupedResults = Core.Nothing,
       results = Core.Nothing
     }
@@ -6762,24 +6596,19 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> (o Core..:? "productGroupedResults")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "productGroupedResults")
+            Core.<*> (o Core..:? "results")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1ProductSearchResults
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1ProductSearchResults {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("indexTime" Core..=) Core.<$> indexTime,
-              ("productGroupedResults" Core..=)
-                Core.<$> productGroupedResults,
-              ("results" Core..=) Core.<$> results
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1ProductSearchResults where
+  toJSON GoogleCloudVisionV1p2beta1ProductSearchResults {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("indexTime" Core..=) Core.<$> indexTime,
+            ("productGroupedResults" Core..=) Core.<$> productGroupedResults,
+            ("results" Core..=) Core.<$> results
+          ]
+      )
 
 -- | Information about the products similar to a single product in a query image.
 --
@@ -6802,7 +6631,8 @@ newGoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult ::
   GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
 newGoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
       results = Core.Nothing
     }
@@ -6817,8 +6647,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -6830,8 +6660,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("results" Core..=) Core.<$> results
             ]
         )
@@ -6856,7 +6685,8 @@ newGoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation ::
   GoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation
 newGoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation =
   GoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation
-    { languageCode = Core.Nothing,
+    { languageCode =
+        Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
       score = Core.Nothing
@@ -6872,9 +6702,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResultsObjectAnnotation
             Core.<$> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
@@ -6910,7 +6740,8 @@ newGoogleCloudVisionV1p2beta1ProductSearchResultsResult ::
   GoogleCloudVisionV1p2beta1ProductSearchResultsResult
 newGoogleCloudVisionV1p2beta1ProductSearchResultsResult =
   GoogleCloudVisionV1p2beta1ProductSearchResultsResult
-    { image = Core.Nothing,
+    { image =
+        Core.Nothing,
       product = Core.Nothing,
       score = Core.Nothing
     }
@@ -6924,23 +6755,23 @@ instance
       "GoogleCloudVisionV1p2beta1ProductSearchResultsResult"
       ( \o ->
           GoogleCloudVisionV1p2beta1ProductSearchResultsResult
-            Core.<$> (o Core..:? "image") Core.<*> (o Core..:? "product")
-              Core.<*> (o Core..:? "score")
+            Core.<$> (o Core..:? "image")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1ProductSearchResultsResult
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1ProductSearchResultsResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("image" Core..=) Core.<$> image,
-              ("product" Core..=) Core.<$> product,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1ProductSearchResultsResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("image" Core..=) Core.<$> image,
+            ("product" Core..=) Core.<$> product,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | A @Property@ consists of a user-supplied name\/value pair.
 --
@@ -6965,32 +6796,23 @@ newGoogleCloudVisionV1p2beta1Property =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Property
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Property where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Property"
       ( \o ->
           GoogleCloudVisionV1p2beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "uint64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uint64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1Property
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1Property where
   toJSON GoogleCloudVisionV1p2beta1Property {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("uint64Value" Core..=) Core.. Core.AsText
-              Core.<$> uint64Value,
+            ("uint64Value" Core..=) Core.. Core.AsText Core.<$> uint64Value,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -7007,7 +6829,7 @@ data GoogleCloudVisionV1p2beta1SafeSearchAnnotation = GoogleCloudVisionV1p2beta1
     racy :: (Core.Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Racy),
     -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
     spoof :: (Core.Maybe GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof),
-    -- | Likelihood that this image contains violent content.
+    -- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
     violence ::
       ( Core.Maybe
           GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence
@@ -7020,7 +6842,8 @@ newGoogleCloudVisionV1p2beta1SafeSearchAnnotation ::
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation
 newGoogleCloudVisionV1p2beta1SafeSearchAnnotation =
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation
-    { adult = Core.Nothing,
+    { adult =
+        Core.Nothing,
       medical = Core.Nothing,
       racy = Core.Nothing,
       spoof = Core.Nothing,
@@ -7036,27 +6859,24 @@ instance
       "GoogleCloudVisionV1p2beta1SafeSearchAnnotation"
       ( \o ->
           GoogleCloudVisionV1p2beta1SafeSearchAnnotation
-            Core.<$> (o Core..:? "adult") Core.<*> (o Core..:? "medical")
-              Core.<*> (o Core..:? "racy")
-              Core.<*> (o Core..:? "spoof")
-              Core.<*> (o Core..:? "violence")
+            Core.<$> (o Core..:? "adult")
+            Core.<*> (o Core..:? "medical")
+            Core.<*> (o Core..:? "racy")
+            Core.<*> (o Core..:? "spoof")
+            Core.<*> (o Core..:? "violence")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1SafeSearchAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1SafeSearchAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("adult" Core..=) Core.<$> adult,
-              ("medical" Core..=) Core.<$> medical,
-              ("racy" Core..=) Core.<$> racy,
-              ("spoof" Core..=) Core.<$> spoof,
-              ("violence" Core..=) Core.<$> violence
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotation where
+  toJSON GoogleCloudVisionV1p2beta1SafeSearchAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adult" Core..=) Core.<$> adult,
+            ("medical" Core..=) Core.<$> medical,
+            ("racy" Core..=) Core.<$> racy,
+            ("spoof" Core..=) Core.<$> spoof,
+            ("violence" Core..=) Core.<$> violence
+          ]
+      )
 
 -- | A single symbol representation.
 --
@@ -7084,10 +6904,7 @@ newGoogleCloudVisionV1p2beta1Symbol =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Symbol
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Symbol where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Symbol"
@@ -7130,28 +6947,21 @@ newGoogleCloudVisionV1p2beta1TextAnnotation =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1TextAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1TextAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotation
-            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1TextAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1TextAnnotation where
   toJSON GoogleCloudVisionV1p2beta1TextAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pages" Core..=) Core.<$> pages,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("pages" Core..=) Core.<$> pages, ("text" Core..=) Core.<$> text]
       )
 
 -- | Detected start or end of a structural component.
@@ -7173,7 +6983,8 @@ newGoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak ::
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
 newGoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
-    { isPrefix = Core.Nothing,
+    { isPrefix =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -7186,21 +6997,21 @@ instance
       "GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak"
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
-            Core.<$> (o Core..:? "isPrefix") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "isPrefix")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("isPrefix" Core..=) Core.<$> isPrefix,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isPrefix" Core..=) Core.<$> isPrefix,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | Detected language for a structural component.
 --
@@ -7218,7 +7029,8 @@ newGoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage ::
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
 newGoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -7232,21 +7044,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1TextAnnotationDetectedLanguage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Additional information detected on the structural component.
 --
@@ -7267,7 +7078,8 @@ newGoogleCloudVisionV1p2beta1TextAnnotationTextProperty ::
   GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
 newGoogleCloudVisionV1p2beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
-    { detectedBreak = Core.Nothing,
+    { detectedBreak =
+        Core.Nothing,
       detectedLanguages = Core.Nothing
     }
 
@@ -7281,28 +7093,26 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1TextAnnotationTextProperty
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1TextAnnotationTextProperty {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
-              ("detectedLanguages" Core..=)
-                Core.<$> detectedLanguages
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1TextAnnotationTextProperty {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages
+          ]
+      )
 
 -- | Parameters for text detections. This is used to control TEXT/DETECTION and DOCUMENT/TEXT_DETECTION features.
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1TextDetectionParams' smart constructor.
 data GoogleCloudVisionV1p2beta1TextDetectionParams = GoogleCloudVisionV1p2beta1TextDetectionParams
-  { -- | A list of advanced OCR options to fine-tune OCR behavior.
+  { -- | A list of advanced OCR options to further fine-tune OCR behavior. Current valid values are: - @legacy_layout@: a heuristics layout detection algorithm, which serves as an alternative to the current ML-based layout detection algorithm. Customers can choose the best suitable layout algorithm based on their situation.
     advancedOcrOptions :: (Core.Maybe [Core.Text]),
     -- | By default, Cloud Vision API only includes confidence score for DOCUMENT/TEXT/DETECTION result. Set the flag to true to include confidence score for TEXT_DETECTION as well.
     enableTextDetectionConfidenceScore :: (Core.Maybe Core.Bool)
@@ -7314,7 +7124,8 @@ newGoogleCloudVisionV1p2beta1TextDetectionParams ::
   GoogleCloudVisionV1p2beta1TextDetectionParams
 newGoogleCloudVisionV1p2beta1TextDetectionParams =
   GoogleCloudVisionV1p2beta1TextDetectionParams
-    { advancedOcrOptions = Core.Nothing,
+    { advancedOcrOptions =
+        Core.Nothing,
       enableTextDetectionConfidenceScore = Core.Nothing
     }
 
@@ -7328,23 +7139,18 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1TextDetectionParams
             Core.<$> (o Core..:? "advancedOcrOptions")
-              Core.<*> (o Core..:? "enableTextDetectionConfidenceScore")
+            Core.<*> (o Core..:? "enableTextDetectionConfidenceScore")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1TextDetectionParams
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1TextDetectionParams {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("advancedOcrOptions" Core..=)
-                Core.<$> advancedOcrOptions,
-              ("enableTextDetectionConfidenceScore" Core..=)
-                Core.<$> enableTextDetectionConfidenceScore
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1TextDetectionParams where
+  toJSON GoogleCloudVisionV1p2beta1TextDetectionParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("advancedOcrOptions" Core..=) Core.<$> advancedOcrOptions,
+            ("enableTextDetectionConfidenceScore" Core..=)
+              Core.<$> enableTextDetectionConfidenceScore
+          ]
+      )
 
 -- | A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image.
 --
@@ -7361,18 +7167,19 @@ data GoogleCloudVisionV1p2beta1Vertex = GoogleCloudVisionV1p2beta1Vertex
 newGoogleCloudVisionV1p2beta1Vertex ::
   GoogleCloudVisionV1p2beta1Vertex
 newGoogleCloudVisionV1p2beta1Vertex =
-  GoogleCloudVisionV1p2beta1Vertex {x = Core.Nothing, y = Core.Nothing}
+  GoogleCloudVisionV1p2beta1Vertex
+    { x = Core.Nothing,
+      y = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1Vertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1Vertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1Vertex"
       ( \o ->
           GoogleCloudVisionV1p2beta1Vertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p2beta1Vertex where
@@ -7406,7 +7213,8 @@ newGoogleCloudVisionV1p2beta1WebDetection ::
   GoogleCloudVisionV1p2beta1WebDetection
 newGoogleCloudVisionV1p2beta1WebDetection =
   GoogleCloudVisionV1p2beta1WebDetection
-    { bestGuessLabels = Core.Nothing,
+    { bestGuessLabels =
+        Core.Nothing,
       fullMatchingImages = Core.Nothing,
       pagesWithMatchingImages = Core.Nothing,
       partialMatchingImages = Core.Nothing,
@@ -7414,10 +7222,7 @@ newGoogleCloudVisionV1p2beta1WebDetection =
       webEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1WebDetection
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1WebDetection where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1WebDetection"
@@ -7431,23 +7236,16 @@ instance
             Core.<*> (o Core..:? "webEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1WebDetection
-  where
+instance Core.ToJSON GoogleCloudVisionV1p2beta1WebDetection where
   toJSON GoogleCloudVisionV1p2beta1WebDetection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestGuessLabels" Core..=)
-              Core.<$> bestGuessLabels,
-            ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("bestGuessLabels" Core..=) Core.<$> bestGuessLabels,
+            ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pagesWithMatchingImages" Core..=)
               Core.<$> pagesWithMatchingImages,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
-            ("visuallySimilarImages" Core..=)
-              Core.<$> visuallySimilarImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("visuallySimilarImages" Core..=) Core.<$> visuallySimilarImages,
             ("webEntities" Core..=) Core.<$> webEntities
           ]
       )
@@ -7456,7 +7254,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudVisionV1p2beta1WebDetectionParams' smart constructor.
 newtype GoogleCloudVisionV1p2beta1WebDetectionParams = GoogleCloudVisionV1p2beta1WebDetectionParams
-  { -- | Whether to include results derived from the geo information in the image.
+  { -- | This field has no effect on results.
     includeGeoResults :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -7466,13 +7264,11 @@ newGoogleCloudVisionV1p2beta1WebDetectionParams ::
   GoogleCloudVisionV1p2beta1WebDetectionParams
 newGoogleCloudVisionV1p2beta1WebDetectionParams =
   GoogleCloudVisionV1p2beta1WebDetectionParams
-    { includeGeoResults = Core.Nothing
+    { includeGeoResults =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p2beta1WebDetectionParams
-  where
+instance Core.FromJSON GoogleCloudVisionV1p2beta1WebDetectionParams where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p2beta1WebDetectionParams"
@@ -7481,18 +7277,12 @@ instance
             Core.<$> (o Core..:? "includeGeoResults")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1WebDetectionParams
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1WebDetectionParams {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("includeGeoResults" Core..=)
-                Core.<$> includeGeoResults
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1WebDetectionParams where
+  toJSON GoogleCloudVisionV1p2beta1WebDetectionParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [("includeGeoResults" Core..=) Core.<$> includeGeoResults]
+      )
 
 -- | Entity deduced from similar images on the Internet.
 --
@@ -7512,7 +7302,8 @@ newGoogleCloudVisionV1p2beta1WebDetectionWebEntity ::
   GoogleCloudVisionV1p2beta1WebDetectionWebEntity
 newGoogleCloudVisionV1p2beta1WebDetectionWebEntity =
   GoogleCloudVisionV1p2beta1WebDetectionWebEntity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       score = Core.Nothing
     }
@@ -7527,23 +7318,22 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetectionWebEntity
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "entityId")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "entityId")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p2beta1WebDetectionWebEntity
   where
-  toJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebEntity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p2beta1WebDetectionWebEntity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Metadata for online images.
 --
@@ -7561,7 +7351,8 @@ newGoogleCloudVisionV1p2beta1WebDetectionWebImage ::
   GoogleCloudVisionV1p2beta1WebDetectionWebImage
 newGoogleCloudVisionV1p2beta1WebDetectionWebImage =
   GoogleCloudVisionV1p2beta1WebDetectionWebImage
-    { score = Core.Nothing,
+    { score =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -7574,21 +7365,16 @@ instance
       "GoogleCloudVisionV1p2beta1WebDetectionWebImage"
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetectionWebImage
-            Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebImage
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebImage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1WebDetectionWebImage where
+  toJSON GoogleCloudVisionV1p2beta1WebDetectionWebImage {..} =
+    Core.object
+      ( Core.catMaybes
+          [("score" Core..=) Core.<$> score, ("url" Core..=) Core.<$> url]
+      )
 
 -- | Label to provide extra metadata for the web detection.
 --
@@ -7606,7 +7392,8 @@ newGoogleCloudVisionV1p2beta1WebDetectionWebLabel ::
   GoogleCloudVisionV1p2beta1WebDetectionWebLabel
 newGoogleCloudVisionV1p2beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p2beta1WebDetectionWebLabel
-    { label = Core.Nothing,
+    { label =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -7620,21 +7407,17 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetectionWebLabel
             Core.<$> (o Core..:? "label")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebLabel
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebLabel {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("label" Core..=) Core.<$> label,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1WebDetectionWebLabel where
+  toJSON GoogleCloudVisionV1p2beta1WebDetectionWebLabel {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("label" Core..=) Core.<$> label,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Metadata for web pages.
 --
@@ -7658,7 +7441,8 @@ newGoogleCloudVisionV1p2beta1WebDetectionWebPage ::
   GoogleCloudVisionV1p2beta1WebDetectionWebPage
 newGoogleCloudVisionV1p2beta1WebDetectionWebPage =
   GoogleCloudVisionV1p2beta1WebDetectionWebPage
-    { fullMatchingImages = Core.Nothing,
+    { fullMatchingImages =
+        Core.Nothing,
       pageTitle = Core.Nothing,
       partialMatchingImages = Core.Nothing,
       score = Core.Nothing,
@@ -7675,29 +7459,23 @@ instance
       ( \o ->
           GoogleCloudVisionV1p2beta1WebDetectionWebPage
             Core.<$> (o Core..:? "fullMatchingImages")
-              Core.<*> (o Core..:? "pageTitle")
-              Core.<*> (o Core..:? "partialMatchingImages")
-              Core.<*> (o Core..:? "score")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "pageTitle")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebPage
-  where
-  toJSON
-    GoogleCloudVisionV1p2beta1WebDetectionWebPage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("fullMatchingImages" Core..=)
-                Core.<$> fullMatchingImages,
-              ("pageTitle" Core..=) Core.<$> pageTitle,
-              ("partialMatchingImages" Core..=)
-                Core.<$> partialMatchingImages,
-              ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p2beta1WebDetectionWebPage where
+  toJSON GoogleCloudVisionV1p2beta1WebDetectionWebPage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
+            ("pageTitle" Core..=) Core.<$> pageTitle,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("score" Core..=) Core.<$> score,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | A word representation.
 --
@@ -7768,7 +7546,8 @@ newGoogleCloudVisionV1p3beta1AnnotateFileResponse ::
   GoogleCloudVisionV1p3beta1AnnotateFileResponse
 newGoogleCloudVisionV1p3beta1AnnotateFileResponse =
   GoogleCloudVisionV1p3beta1AnnotateFileResponse
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       inputConfig = Core.Nothing,
       responses = Core.Nothing,
       totalPages = Core.Nothing
@@ -7784,25 +7563,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses")
-              Core.<*> (o Core..:? "totalPages")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "responses")
+            Core.<*> (o Core..:? "totalPages")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1AnnotateFileResponse
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1AnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("error" Core..=) Core.<$> error,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("responses" Core..=) Core.<$> responses,
-              ("totalPages" Core..=) Core.<$> totalPages
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1AnnotateFileResponse where
+  toJSON GoogleCloudVisionV1p3beta1AnnotateFileResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("responses" Core..=) Core.<$> responses,
+            ("totalPages" Core..=) Core.<$> totalPages
+          ]
+      )
 
 -- | Response to an image annotation request.
 --
@@ -7844,7 +7619,8 @@ newGoogleCloudVisionV1p3beta1AnnotateImageResponse ::
   GoogleCloudVisionV1p3beta1AnnotateImageResponse
 newGoogleCloudVisionV1p3beta1AnnotateImageResponse =
   GoogleCloudVisionV1p3beta1AnnotateImageResponse
-    { context = Core.Nothing,
+    { context =
+        Core.Nothing,
       cropHintsAnnotation = Core.Nothing,
       error = Core.Nothing,
       faceAnnotations = Core.Nothing,
@@ -7870,53 +7646,46 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1AnnotateImageResponse
             Core.<$> (o Core..:? "context")
-              Core.<*> (o Core..:? "cropHintsAnnotation")
-              Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "fullTextAnnotation")
-              Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations")
-              Core.<*> (o Core..:? "landmarkAnnotations")
-              Core.<*> (o Core..:? "localizedObjectAnnotations")
-              Core.<*> (o Core..:? "logoAnnotations")
-              Core.<*> (o Core..:? "productSearchResults")
-              Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations")
-              Core.<*> (o Core..:? "webDetection")
+            Core.<*> (o Core..:? "cropHintsAnnotation")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "fullTextAnnotation")
+            Core.<*> (o Core..:? "imagePropertiesAnnotation")
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "landmarkAnnotations")
+            Core.<*> (o Core..:? "localizedObjectAnnotations")
+            Core.<*> (o Core..:? "logoAnnotations")
+            Core.<*> (o Core..:? "productSearchResults")
+            Core.<*> (o Core..:? "safeSearchAnnotation")
+            Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "webDetection")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1AnnotateImageResponse
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1AnnotateImageResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("context" Core..=) Core.<$> context,
-              ("cropHintsAnnotation" Core..=)
-                Core.<$> cropHintsAnnotation,
-              ("error" Core..=) Core.<$> error,
-              ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-              ("fullTextAnnotation" Core..=)
-                Core.<$> fullTextAnnotation,
-              ("imagePropertiesAnnotation" Core..=)
-                Core.<$> imagePropertiesAnnotation,
-              ("labelAnnotations" Core..=)
-                Core.<$> labelAnnotations,
-              ("landmarkAnnotations" Core..=)
-                Core.<$> landmarkAnnotations,
-              ("localizedObjectAnnotations" Core..=)
-                Core.<$> localizedObjectAnnotations,
-              ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
-              ("productSearchResults" Core..=)
-                Core.<$> productSearchResults,
-              ("safeSearchAnnotation" Core..=)
-                Core.<$> safeSearchAnnotation,
-              ("textAnnotations" Core..=) Core.<$> textAnnotations,
-              ("webDetection" Core..=) Core.<$> webDetection
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1AnnotateImageResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("context" Core..=) Core.<$> context,
+            ("cropHintsAnnotation" Core..=) Core.<$> cropHintsAnnotation,
+            ("error" Core..=) Core.<$> error,
+            ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
+            ("fullTextAnnotation" Core..=) Core.<$> fullTextAnnotation,
+            ("imagePropertiesAnnotation" Core..=)
+              Core.<$> imagePropertiesAnnotation,
+            ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+            ("landmarkAnnotations" Core..=) Core.<$> landmarkAnnotations,
+            ("localizedObjectAnnotations" Core..=)
+              Core.<$> localizedObjectAnnotations,
+            ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
+            ("productSearchResults" Core..=) Core.<$> productSearchResults,
+            ("safeSearchAnnotation" Core..=) Core.<$> safeSearchAnnotation,
+            ("textAnnotations" Core..=) Core.<$> textAnnotations,
+            ("webDetection" Core..=) Core.<$> webDetection
+          ]
+      )
 
 -- | The response for a single offline file annotation request.
 --
@@ -7932,7 +7701,8 @@ newGoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse ::
   GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
 newGoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
-    { outputConfig = Core.Nothing
+    { outputConfig =
+        Core.Nothing
     }
 
 instance
@@ -7951,12 +7721,9 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputConfig" Core..=) Core.<$> outputConfig]
-        )
+  toJSON GoogleCloudVisionV1p3beta1AsyncAnnotateFileResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | Response to an async batch file annotation request.
 --
@@ -7972,7 +7739,8 @@ newGoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
 newGoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -7994,9 +7762,7 @@ instance
   toJSON
     GoogleCloudVisionV1p3beta1AsyncBatchAnnotateFilesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+        (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Metadata for the batch operations such as the current state. This is included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -8016,7 +7782,8 @@ newGoogleCloudVisionV1p3beta1BatchOperationMetadata ::
   GoogleCloudVisionV1p3beta1BatchOperationMetadata
 newGoogleCloudVisionV1p3beta1BatchOperationMetadata =
   GoogleCloudVisionV1p3beta1BatchOperationMetadata
-    { endTime = Core.Nothing,
+    { endTime =
+        Core.Nothing,
       state = Core.Nothing,
       submitTime = Core.Nothing
     }
@@ -8030,23 +7797,23 @@ instance
       "GoogleCloudVisionV1p3beta1BatchOperationMetadata"
       ( \o ->
           GoogleCloudVisionV1p3beta1BatchOperationMetadata
-            Core.<$> (o Core..:? "endTime") Core.<*> (o Core..:? "state")
-              Core.<*> (o Core..:? "submitTime")
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "submitTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1BatchOperationMetadata
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1BatchOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTime" Core..=) Core.<$> endTime,
-              ("state" Core..=) Core.<$> state,
-              ("submitTime" Core..=) Core.<$> submitTime
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1BatchOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("state" Core..=) Core.<$> state,
+            ("submitTime" Core..=) Core.<$> submitTime
+          ]
+      )
 
 -- | Logical element on the page.
 --
@@ -8077,10 +7844,7 @@ newGoogleCloudVisionV1p3beta1Block =
       property = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Block
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Block where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Block"
@@ -8121,14 +7885,12 @@ newGoogleCloudVisionV1p3beta1BoundingPoly ::
   GoogleCloudVisionV1p3beta1BoundingPoly
 newGoogleCloudVisionV1p3beta1BoundingPoly =
   GoogleCloudVisionV1p3beta1BoundingPoly
-    { normalizedVertices = Core.Nothing,
+    { normalizedVertices =
+        Core.Nothing,
       vertices = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1BoundingPoly
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1BoundingPoly where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1BoundingPoly"
@@ -8138,15 +7900,11 @@ instance
             Core.<*> (o Core..:? "vertices")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1BoundingPoly
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1BoundingPoly where
   toJSON GoogleCloudVisionV1p3beta1BoundingPoly {..} =
     Core.object
       ( Core.catMaybes
-          [ ("normalizedVertices" Core..=)
-              Core.<$> normalizedVertices,
+          [ ("normalizedVertices" Core..=) Core.<$> normalizedVertices,
             ("vertices" Core..=) Core.<$> vertices
           ]
       )
@@ -8174,10 +7932,7 @@ newGoogleCloudVisionV1p3beta1ColorInfo =
       score = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1ColorInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1ColorInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1ColorInfo"
@@ -8188,10 +7943,7 @@ instance
             Core.<*> (o Core..:? "score")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1ColorInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1ColorInfo where
   toJSON GoogleCloudVisionV1p3beta1ColorInfo {..} =
     Core.object
       ( Core.catMaybes
@@ -8224,10 +7976,7 @@ newGoogleCloudVisionV1p3beta1CropHint =
       importanceFraction = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1CropHint
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1CropHint where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1CropHint"
@@ -8238,17 +7987,13 @@ instance
             Core.<*> (o Core..:? "importanceFraction")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1CropHint
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1CropHint where
   toJSON GoogleCloudVisionV1p3beta1CropHint {..} =
     Core.object
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
             ("confidence" Core..=) Core.<$> confidence,
-            ("importanceFraction" Core..=)
-              Core.<$> importanceFraction
+            ("importanceFraction" Core..=) Core.<$> importanceFraction
           ]
       )
 
@@ -8265,7 +8010,10 @@ newtype GoogleCloudVisionV1p3beta1CropHintsAnnotation = GoogleCloudVisionV1p3bet
 newGoogleCloudVisionV1p3beta1CropHintsAnnotation ::
   GoogleCloudVisionV1p3beta1CropHintsAnnotation
 newGoogleCloudVisionV1p3beta1CropHintsAnnotation =
-  GoogleCloudVisionV1p3beta1CropHintsAnnotation {cropHints = Core.Nothing}
+  GoogleCloudVisionV1p3beta1CropHintsAnnotation
+    { cropHints =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -8279,16 +8027,10 @@ instance
             Core.<$> (o Core..:? "cropHints")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1CropHintsAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1CropHintsAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [("cropHints" Core..=) Core.<$> cropHints]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1CropHintsAnnotation where
+  toJSON GoogleCloudVisionV1p3beta1CropHintsAnnotation {..} =
+    Core.object
+      (Core.catMaybes [("cropHints" Core..=) Core.<$> cropHints])
 
 -- | Set of dominant colors and their corresponding scores.
 --
@@ -8303,7 +8045,10 @@ newtype GoogleCloudVisionV1p3beta1DominantColorsAnnotation = GoogleCloudVisionV1
 newGoogleCloudVisionV1p3beta1DominantColorsAnnotation ::
   GoogleCloudVisionV1p3beta1DominantColorsAnnotation
 newGoogleCloudVisionV1p3beta1DominantColorsAnnotation =
-  GoogleCloudVisionV1p3beta1DominantColorsAnnotation {colors = Core.Nothing}
+  GoogleCloudVisionV1p3beta1DominantColorsAnnotation
+    { colors =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -8321,10 +8066,8 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1DominantColorsAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1DominantColorsAnnotation {..} =
-      Core.object
-        (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+  toJSON GoogleCloudVisionV1p3beta1DominantColorsAnnotation {..} =
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | Set of detected entity features.
 --
@@ -8356,7 +8099,8 @@ newGoogleCloudVisionV1p3beta1EntityAnnotation ::
   GoogleCloudVisionV1p3beta1EntityAnnotation
 newGoogleCloudVisionV1p3beta1EntityAnnotation =
   GoogleCloudVisionV1p3beta1EntityAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       confidence = Core.Nothing,
       description = Core.Nothing,
       locale = Core.Nothing,
@@ -8367,10 +8111,7 @@ newGoogleCloudVisionV1p3beta1EntityAnnotation =
       topicality = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1EntityAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1EntityAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1EntityAnnotation"
@@ -8387,10 +8128,7 @@ instance
             Core.<*> (o Core..:? "topicality")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1EntityAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1EntityAnnotation where
   toJSON GoogleCloudVisionV1p3beta1EntityAnnotation {..} =
     Core.object
       ( Core.catMaybes
@@ -8466,7 +8204,8 @@ newGoogleCloudVisionV1p3beta1FaceAnnotation ::
   GoogleCloudVisionV1p3beta1FaceAnnotation
 newGoogleCloudVisionV1p3beta1FaceAnnotation =
   GoogleCloudVisionV1p3beta1FaceAnnotation
-    { angerLikelihood = Core.Nothing,
+    { angerLikelihood =
+        Core.Nothing,
       blurredLikelihood = Core.Nothing,
       boundingPoly = Core.Nothing,
       detectionConfidence = Core.Nothing,
@@ -8483,10 +8222,7 @@ newGoogleCloudVisionV1p3beta1FaceAnnotation =
       underExposedLikelihood = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1FaceAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1FaceAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1FaceAnnotation"
@@ -8509,40 +8245,30 @@ instance
             Core.<*> (o Core..:? "underExposedLikelihood")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1FaceAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1FaceAnnotation where
   toJSON GoogleCloudVisionV1p3beta1FaceAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("angerLikelihood" Core..=)
-              Core.<$> angerLikelihood,
-            ("blurredLikelihood" Core..=)
-              Core.<$> blurredLikelihood,
+          [ ("angerLikelihood" Core..=) Core.<$> angerLikelihood,
+            ("blurredLikelihood" Core..=) Core.<$> blurredLikelihood,
             ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("detectionConfidence" Core..=)
-              Core.<$> detectionConfidence,
+            ("detectionConfidence" Core..=) Core.<$> detectionConfidence,
             ("fdBoundingPoly" Core..=) Core.<$> fdBoundingPoly,
-            ("headwearLikelihood" Core..=)
-              Core.<$> headwearLikelihood,
+            ("headwearLikelihood" Core..=) Core.<$> headwearLikelihood,
             ("joyLikelihood" Core..=) Core.<$> joyLikelihood,
-            ("landmarkingConfidence" Core..=)
-              Core.<$> landmarkingConfidence,
+            ("landmarkingConfidence" Core..=) Core.<$> landmarkingConfidence,
             ("landmarks" Core..=) Core.<$> landmarks,
             ("panAngle" Core..=) Core.<$> panAngle,
             ("rollAngle" Core..=) Core.<$> rollAngle,
-            ("sorrowLikelihood" Core..=)
-              Core.<$> sorrowLikelihood,
-            ("surpriseLikelihood" Core..=)
-              Core.<$> surpriseLikelihood,
+            ("sorrowLikelihood" Core..=) Core.<$> sorrowLikelihood,
+            ("surpriseLikelihood" Core..=) Core.<$> surpriseLikelihood,
             ("tiltAngle" Core..=) Core.<$> tiltAngle,
             ("underExposedLikelihood" Core..=)
               Core.<$> underExposedLikelihood
           ]
       )
 
--- | A face-specific landmark (for example, a face feature).
+-- | A face-specific landmark (for example, a face feature). Landmark positions may fall outside the bounds of the image if the face is near one or more edges of the image. Therefore it is NOT guaranteed that @0 \<= x \< width@ or @0 \<= y \< height@.
 --
 -- /See:/ 'newGoogleCloudVisionV1p3beta1FaceAnnotationLandmark' smart constructor.
 data GoogleCloudVisionV1p3beta1FaceAnnotationLandmark = GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
@@ -8558,7 +8284,8 @@ newGoogleCloudVisionV1p3beta1FaceAnnotationLandmark ::
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
 newGoogleCloudVisionV1p3beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
-    { position = Core.Nothing,
+    { position =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -8571,21 +8298,21 @@ instance
       "GoogleCloudVisionV1p3beta1FaceAnnotationLandmark"
       ( \o ->
           GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
-            Core.<$> (o Core..:? "position") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "position")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1FaceAnnotationLandmark
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1FaceAnnotationLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("position" Core..=) Core.<$> position,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1FaceAnnotationLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("position" Core..=) Core.<$> position,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | The Google Cloud Storage location where the output will be written to.
 --
@@ -8603,10 +8330,7 @@ newGoogleCloudVisionV1p3beta1GcsDestination ::
 newGoogleCloudVisionV1p3beta1GcsDestination =
   GoogleCloudVisionV1p3beta1GcsDestination {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1GcsDestination
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1GcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1GcsDestination"
@@ -8615,13 +8339,9 @@ instance
             Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1GcsDestination
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1GcsDestination where
   toJSON GoogleCloudVisionV1p3beta1GcsDestination {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Google Cloud Storage location where the input will be read from.
 --
@@ -8638,25 +8358,17 @@ newGoogleCloudVisionV1p3beta1GcsSource ::
 newGoogleCloudVisionV1p3beta1GcsSource =
   GoogleCloudVisionV1p3beta1GcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1GcsSource
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1GcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1GcsSource"
       ( \o ->
-          GoogleCloudVisionV1p3beta1GcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudVisionV1p3beta1GcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1GcsSource
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1GcsSource where
   toJSON GoogleCloudVisionV1p3beta1GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | If an image was produced from a file (e.g. a PDF), this message gives information about the source of that image.
 --
@@ -8674,7 +8386,8 @@ newGoogleCloudVisionV1p3beta1ImageAnnotationContext ::
   GoogleCloudVisionV1p3beta1ImageAnnotationContext
 newGoogleCloudVisionV1p3beta1ImageAnnotationContext =
   GoogleCloudVisionV1p3beta1ImageAnnotationContext
-    { pageNumber = Core.Nothing,
+    { pageNumber =
+        Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -8688,21 +8401,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ImageAnnotationContext
             Core.<$> (o Core..:? "pageNumber")
-              Core.<*> (o Core..:? "uri")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1ImageAnnotationContext
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1ImageAnnotationContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pageNumber" Core..=) Core.<$> pageNumber,
-              ("uri" Core..=) Core.<$> uri
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1ImageAnnotationContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pageNumber" Core..=) Core.<$> pageNumber,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
 
 -- | Stores image properties, such as dominant colors.
 --
@@ -8717,12 +8429,12 @@ newtype GoogleCloudVisionV1p3beta1ImageProperties = GoogleCloudVisionV1p3beta1Im
 newGoogleCloudVisionV1p3beta1ImageProperties ::
   GoogleCloudVisionV1p3beta1ImageProperties
 newGoogleCloudVisionV1p3beta1ImageProperties =
-  GoogleCloudVisionV1p3beta1ImageProperties {dominantColors = Core.Nothing}
+  GoogleCloudVisionV1p3beta1ImageProperties
+    { dominantColors =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1ImageProperties
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1ImageProperties where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1ImageProperties"
@@ -8731,10 +8443,7 @@ instance
             Core.<$> (o Core..:? "dominantColors")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1ImageProperties
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1ImageProperties where
   toJSON GoogleCloudVisionV1p3beta1ImageProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -8757,7 +8466,8 @@ newGoogleCloudVisionV1p3beta1ImportProductSetsResponse ::
   GoogleCloudVisionV1p3beta1ImportProductSetsResponse
 newGoogleCloudVisionV1p3beta1ImportProductSetsResponse =
   GoogleCloudVisionV1p3beta1ImportProductSetsResponse
-    { referenceImages = Core.Nothing,
+    { referenceImages =
+        Core.Nothing,
       statuses = Core.Nothing
     }
 
@@ -8771,22 +8481,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ImportProductSetsResponse
             Core.<$> (o Core..:? "referenceImages")
-              Core.<*> (o Core..:? "statuses")
+            Core.<*> (o Core..:? "statuses")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1ImportProductSetsResponse
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1ImportProductSetsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("referenceImages" Core..=)
-                Core.<$> referenceImages,
-              ("statuses" Core..=) Core.<$> statuses
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1ImportProductSetsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("referenceImages" Core..=) Core.<$> referenceImages,
+            ("statuses" Core..=) Core.<$> statuses
+          ]
+      )
 
 -- | The desired input location and metadata.
 --
@@ -8811,10 +8519,7 @@ newGoogleCloudVisionV1p3beta1InputConfig =
       mimeType = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1InputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1InputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1InputConfig"
@@ -8825,10 +8530,7 @@ instance
             Core.<*> (o Core..:? "mimeType")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1InputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1InputConfig where
   toJSON GoogleCloudVisionV1p3beta1InputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -8860,7 +8562,8 @@ newGoogleCloudVisionV1p3beta1LocalizedObjectAnnotation ::
   GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
 newGoogleCloudVisionV1p3beta1LocalizedObjectAnnotation =
   GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       languageCode = Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
@@ -8877,27 +8580,26 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("languageCode" Core..=) Core.<$> languageCode,
-              ("mid" Core..=) Core.<$> mid,
-              ("name" Core..=) Core.<$> name,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1LocalizedObjectAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("mid" Core..=) Core.<$> mid,
+            ("name" Core..=) Core.<$> name,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Detected entity location information.
 --
@@ -8914,10 +8616,7 @@ newGoogleCloudVisionV1p3beta1LocationInfo ::
 newGoogleCloudVisionV1p3beta1LocationInfo =
   GoogleCloudVisionV1p3beta1LocationInfo {latLng = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1LocationInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1LocationInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1LocationInfo"
@@ -8926,13 +8625,9 @@ instance
             Core.<$> (o Core..:? "latLng")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1LocationInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1LocationInfo where
   toJSON GoogleCloudVisionV1p3beta1LocationInfo {..} =
-    Core.object
-      (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
+    Core.object (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -8954,22 +8649,17 @@ newGoogleCloudVisionV1p3beta1NormalizedVertex =
       y = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1NormalizedVertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1NormalizedVertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1NormalizedVertex"
       ( \o ->
           GoogleCloudVisionV1p3beta1NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1NormalizedVertex
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1NormalizedVertex where
   toJSON GoogleCloudVisionV1p3beta1NormalizedVertex {..} =
     Core.object
       ( Core.catMaybes
@@ -8994,15 +8684,13 @@ newGoogleCloudVisionV1p3beta1OperationMetadata ::
   GoogleCloudVisionV1p3beta1OperationMetadata
 newGoogleCloudVisionV1p3beta1OperationMetadata =
   GoogleCloudVisionV1p3beta1OperationMetadata
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       state = Core.Nothing,
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1OperationMetadata"
@@ -9013,19 +8701,15 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1OperationMetadata
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1OperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("state" Core..=) Core.<$> state,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1OperationMetadata where
+  toJSON GoogleCloudVisionV1p3beta1OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | The desired output location and metadata.
 --
@@ -9047,10 +8731,7 @@ newGoogleCloudVisionV1p3beta1OutputConfig =
       gcsDestination = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1OutputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1OutputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1OutputConfig"
@@ -9060,10 +8741,7 @@ instance
             Core.<*> (o Core..:? "gcsDestination")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1OutputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1OutputConfig where
   toJSON GoogleCloudVisionV1p3beta1OutputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -9152,10 +8830,7 @@ newGoogleCloudVisionV1p3beta1Paragraph =
       words = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Paragraph
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Paragraph where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Paragraph"
@@ -9167,10 +8842,7 @@ instance
             Core.<*> (o Core..:? "words")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1Paragraph
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1Paragraph where
   toJSON GoogleCloudVisionV1p3beta1Paragraph {..} =
     Core.object
       ( Core.catMaybes
@@ -9204,10 +8876,7 @@ newGoogleCloudVisionV1p3beta1Position =
       z = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Position
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Position where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Position"
@@ -9218,10 +8887,7 @@ instance
             Core.<*> (o Core..:? "z")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1Position
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1Position where
   toJSON GoogleCloudVisionV1p3beta1Position {..} =
     Core.object
       ( Core.catMaybes
@@ -9260,10 +8926,7 @@ newGoogleCloudVisionV1p3beta1Product =
       productLabels = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Product
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Product where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Product"
@@ -9276,10 +8939,7 @@ instance
             Core.<*> (o Core..:? "productLabels")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1Product
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1Product where
   toJSON GoogleCloudVisionV1p3beta1Product {..} =
     Core.object
       ( Core.catMaybes
@@ -9311,28 +8971,21 @@ newGoogleCloudVisionV1p3beta1ProductKeyValue =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1ProductKeyValue
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1ProductKeyValue where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1ProductKeyValue"
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductKeyValue
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1ProductKeyValue
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1ProductKeyValue where
   toJSON GoogleCloudVisionV1p3beta1ProductKeyValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Results for a product search request.
@@ -9356,7 +9009,8 @@ newGoogleCloudVisionV1p3beta1ProductSearchResults ::
   GoogleCloudVisionV1p3beta1ProductSearchResults
 newGoogleCloudVisionV1p3beta1ProductSearchResults =
   GoogleCloudVisionV1p3beta1ProductSearchResults
-    { indexTime = Core.Nothing,
+    { indexTime =
+        Core.Nothing,
       productGroupedResults = Core.Nothing,
       results = Core.Nothing
     }
@@ -9371,24 +9025,19 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> (o Core..:? "productGroupedResults")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "productGroupedResults")
+            Core.<*> (o Core..:? "results")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1ProductSearchResults
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1ProductSearchResults {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("indexTime" Core..=) Core.<$> indexTime,
-              ("productGroupedResults" Core..=)
-                Core.<$> productGroupedResults,
-              ("results" Core..=) Core.<$> results
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1ProductSearchResults where
+  toJSON GoogleCloudVisionV1p3beta1ProductSearchResults {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("indexTime" Core..=) Core.<$> indexTime,
+            ("productGroupedResults" Core..=) Core.<$> productGroupedResults,
+            ("results" Core..=) Core.<$> results
+          ]
+      )
 
 -- | Information about the products similar to a single product in a query image.
 --
@@ -9411,7 +9060,8 @@ newGoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult ::
   GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
 newGoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
       results = Core.Nothing
     }
@@ -9426,8 +9076,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -9439,8 +9089,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("results" Core..=) Core.<$> results
             ]
         )
@@ -9465,7 +9114,8 @@ newGoogleCloudVisionV1p3beta1ProductSearchResultsObjectAnnotation ::
   GoogleCloudVisionV1p3beta1ProductSearchResultsObjectAnnotation
 newGoogleCloudVisionV1p3beta1ProductSearchResultsObjectAnnotation =
   GoogleCloudVisionV1p3beta1ProductSearchResultsObjectAnnotation
-    { languageCode = Core.Nothing,
+    { languageCode =
+        Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
       score = Core.Nothing
@@ -9481,9 +9131,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResultsObjectAnnotation
             Core.<$> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
@@ -9519,7 +9169,8 @@ newGoogleCloudVisionV1p3beta1ProductSearchResultsResult ::
   GoogleCloudVisionV1p3beta1ProductSearchResultsResult
 newGoogleCloudVisionV1p3beta1ProductSearchResultsResult =
   GoogleCloudVisionV1p3beta1ProductSearchResultsResult
-    { image = Core.Nothing,
+    { image =
+        Core.Nothing,
       product = Core.Nothing,
       score = Core.Nothing
     }
@@ -9533,23 +9184,23 @@ instance
       "GoogleCloudVisionV1p3beta1ProductSearchResultsResult"
       ( \o ->
           GoogleCloudVisionV1p3beta1ProductSearchResultsResult
-            Core.<$> (o Core..:? "image") Core.<*> (o Core..:? "product")
-              Core.<*> (o Core..:? "score")
+            Core.<$> (o Core..:? "image")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1ProductSearchResultsResult
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1ProductSearchResultsResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("image" Core..=) Core.<$> image,
-              ("product" Core..=) Core.<$> product,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1ProductSearchResultsResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("image" Core..=) Core.<$> image,
+            ("product" Core..=) Core.<$> product,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | A @Property@ consists of a user-supplied name\/value pair.
 --
@@ -9574,32 +9225,23 @@ newGoogleCloudVisionV1p3beta1Property =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Property
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Property where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Property"
       ( \o ->
           GoogleCloudVisionV1p3beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "uint64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uint64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1Property
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1Property where
   toJSON GoogleCloudVisionV1p3beta1Property {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("uint64Value" Core..=) Core.. Core.AsText
-              Core.<$> uint64Value,
+            ("uint64Value" Core..=) Core.. Core.AsText Core.<$> uint64Value,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -9622,15 +9264,13 @@ newGoogleCloudVisionV1p3beta1ReferenceImage ::
   GoogleCloudVisionV1p3beta1ReferenceImage
 newGoogleCloudVisionV1p3beta1ReferenceImage =
   GoogleCloudVisionV1p3beta1ReferenceImage
-    { boundingPolys = Core.Nothing,
+    { boundingPolys =
+        Core.Nothing,
       name = Core.Nothing,
       uri = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1ReferenceImage
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1ReferenceImage where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1ReferenceImage"
@@ -9641,10 +9281,7 @@ instance
             Core.<*> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1ReferenceImage
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1ReferenceImage where
   toJSON GoogleCloudVisionV1p3beta1ReferenceImage {..} =
     Core.object
       ( Core.catMaybes
@@ -9666,7 +9303,7 @@ data GoogleCloudVisionV1p3beta1SafeSearchAnnotation = GoogleCloudVisionV1p3beta1
     racy :: (Core.Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Racy),
     -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
     spoof :: (Core.Maybe GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof),
-    -- | Likelihood that this image contains violent content.
+    -- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
     violence ::
       ( Core.Maybe
           GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence
@@ -9679,7 +9316,8 @@ newGoogleCloudVisionV1p3beta1SafeSearchAnnotation ::
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation
 newGoogleCloudVisionV1p3beta1SafeSearchAnnotation =
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation
-    { adult = Core.Nothing,
+    { adult =
+        Core.Nothing,
       medical = Core.Nothing,
       racy = Core.Nothing,
       spoof = Core.Nothing,
@@ -9695,27 +9333,24 @@ instance
       "GoogleCloudVisionV1p3beta1SafeSearchAnnotation"
       ( \o ->
           GoogleCloudVisionV1p3beta1SafeSearchAnnotation
-            Core.<$> (o Core..:? "adult") Core.<*> (o Core..:? "medical")
-              Core.<*> (o Core..:? "racy")
-              Core.<*> (o Core..:? "spoof")
-              Core.<*> (o Core..:? "violence")
+            Core.<$> (o Core..:? "adult")
+            Core.<*> (o Core..:? "medical")
+            Core.<*> (o Core..:? "racy")
+            Core.<*> (o Core..:? "spoof")
+            Core.<*> (o Core..:? "violence")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1SafeSearchAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1SafeSearchAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("adult" Core..=) Core.<$> adult,
-              ("medical" Core..=) Core.<$> medical,
-              ("racy" Core..=) Core.<$> racy,
-              ("spoof" Core..=) Core.<$> spoof,
-              ("violence" Core..=) Core.<$> violence
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotation where
+  toJSON GoogleCloudVisionV1p3beta1SafeSearchAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adult" Core..=) Core.<$> adult,
+            ("medical" Core..=) Core.<$> medical,
+            ("racy" Core..=) Core.<$> racy,
+            ("spoof" Core..=) Core.<$> spoof,
+            ("violence" Core..=) Core.<$> violence
+          ]
+      )
 
 -- | A single symbol representation.
 --
@@ -9743,10 +9378,7 @@ newGoogleCloudVisionV1p3beta1Symbol =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Symbol
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Symbol where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Symbol"
@@ -9789,28 +9421,21 @@ newGoogleCloudVisionV1p3beta1TextAnnotation =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1TextAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1TextAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotation
-            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1TextAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1TextAnnotation where
   toJSON GoogleCloudVisionV1p3beta1TextAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pages" Core..=) Core.<$> pages,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("pages" Core..=) Core.<$> pages, ("text" Core..=) Core.<$> text]
       )
 
 -- | Detected start or end of a structural component.
@@ -9832,7 +9457,8 @@ newGoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak ::
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
 newGoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
-    { isPrefix = Core.Nothing,
+    { isPrefix =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -9845,21 +9471,21 @@ instance
       "GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak"
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
-            Core.<$> (o Core..:? "isPrefix") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "isPrefix")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("isPrefix" Core..=) Core.<$> isPrefix,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1TextAnnotationDetectedBreak {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isPrefix" Core..=) Core.<$> isPrefix,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | Detected language for a structural component.
 --
@@ -9877,7 +9503,8 @@ newGoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage ::
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
 newGoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -9891,21 +9518,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1TextAnnotationDetectedLanguage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Additional information detected on the structural component.
 --
@@ -9926,7 +9552,8 @@ newGoogleCloudVisionV1p3beta1TextAnnotationTextProperty ::
   GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
 newGoogleCloudVisionV1p3beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
-    { detectedBreak = Core.Nothing,
+    { detectedBreak =
+        Core.Nothing,
       detectedLanguages = Core.Nothing
     }
 
@@ -9940,22 +9567,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1TextAnnotationTextProperty
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1TextAnnotationTextProperty {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
-              ("detectedLanguages" Core..=)
-                Core.<$> detectedLanguages
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1TextAnnotationTextProperty {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages
+          ]
+      )
 
 -- | A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image.
 --
@@ -9972,18 +9597,19 @@ data GoogleCloudVisionV1p3beta1Vertex = GoogleCloudVisionV1p3beta1Vertex
 newGoogleCloudVisionV1p3beta1Vertex ::
   GoogleCloudVisionV1p3beta1Vertex
 newGoogleCloudVisionV1p3beta1Vertex =
-  GoogleCloudVisionV1p3beta1Vertex {x = Core.Nothing, y = Core.Nothing}
+  GoogleCloudVisionV1p3beta1Vertex
+    { x = Core.Nothing,
+      y = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1Vertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1Vertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1Vertex"
       ( \o ->
           GoogleCloudVisionV1p3beta1Vertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p3beta1Vertex where
@@ -10017,7 +9643,8 @@ newGoogleCloudVisionV1p3beta1WebDetection ::
   GoogleCloudVisionV1p3beta1WebDetection
 newGoogleCloudVisionV1p3beta1WebDetection =
   GoogleCloudVisionV1p3beta1WebDetection
-    { bestGuessLabels = Core.Nothing,
+    { bestGuessLabels =
+        Core.Nothing,
       fullMatchingImages = Core.Nothing,
       pagesWithMatchingImages = Core.Nothing,
       partialMatchingImages = Core.Nothing,
@@ -10025,10 +9652,7 @@ newGoogleCloudVisionV1p3beta1WebDetection =
       webEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p3beta1WebDetection
-  where
+instance Core.FromJSON GoogleCloudVisionV1p3beta1WebDetection where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p3beta1WebDetection"
@@ -10042,23 +9666,16 @@ instance
             Core.<*> (o Core..:? "webEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1WebDetection
-  where
+instance Core.ToJSON GoogleCloudVisionV1p3beta1WebDetection where
   toJSON GoogleCloudVisionV1p3beta1WebDetection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestGuessLabels" Core..=)
-              Core.<$> bestGuessLabels,
-            ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("bestGuessLabels" Core..=) Core.<$> bestGuessLabels,
+            ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pagesWithMatchingImages" Core..=)
               Core.<$> pagesWithMatchingImages,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
-            ("visuallySimilarImages" Core..=)
-              Core.<$> visuallySimilarImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("visuallySimilarImages" Core..=) Core.<$> visuallySimilarImages,
             ("webEntities" Core..=) Core.<$> webEntities
           ]
       )
@@ -10081,7 +9698,8 @@ newGoogleCloudVisionV1p3beta1WebDetectionWebEntity ::
   GoogleCloudVisionV1p3beta1WebDetectionWebEntity
 newGoogleCloudVisionV1p3beta1WebDetectionWebEntity =
   GoogleCloudVisionV1p3beta1WebDetectionWebEntity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       score = Core.Nothing
     }
@@ -10096,23 +9714,22 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetectionWebEntity
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "entityId")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "entityId")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p3beta1WebDetectionWebEntity
   where
-  toJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebEntity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p3beta1WebDetectionWebEntity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Metadata for online images.
 --
@@ -10130,7 +9747,8 @@ newGoogleCloudVisionV1p3beta1WebDetectionWebImage ::
   GoogleCloudVisionV1p3beta1WebDetectionWebImage
 newGoogleCloudVisionV1p3beta1WebDetectionWebImage =
   GoogleCloudVisionV1p3beta1WebDetectionWebImage
-    { score = Core.Nothing,
+    { score =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -10143,21 +9761,16 @@ instance
       "GoogleCloudVisionV1p3beta1WebDetectionWebImage"
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetectionWebImage
-            Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebImage
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebImage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1WebDetectionWebImage where
+  toJSON GoogleCloudVisionV1p3beta1WebDetectionWebImage {..} =
+    Core.object
+      ( Core.catMaybes
+          [("score" Core..=) Core.<$> score, ("url" Core..=) Core.<$> url]
+      )
 
 -- | Label to provide extra metadata for the web detection.
 --
@@ -10175,7 +9788,8 @@ newGoogleCloudVisionV1p3beta1WebDetectionWebLabel ::
   GoogleCloudVisionV1p3beta1WebDetectionWebLabel
 newGoogleCloudVisionV1p3beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p3beta1WebDetectionWebLabel
-    { label = Core.Nothing,
+    { label =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -10189,21 +9803,17 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetectionWebLabel
             Core.<$> (o Core..:? "label")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebLabel
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebLabel {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("label" Core..=) Core.<$> label,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1WebDetectionWebLabel where
+  toJSON GoogleCloudVisionV1p3beta1WebDetectionWebLabel {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("label" Core..=) Core.<$> label,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Metadata for web pages.
 --
@@ -10227,7 +9837,8 @@ newGoogleCloudVisionV1p3beta1WebDetectionWebPage ::
   GoogleCloudVisionV1p3beta1WebDetectionWebPage
 newGoogleCloudVisionV1p3beta1WebDetectionWebPage =
   GoogleCloudVisionV1p3beta1WebDetectionWebPage
-    { fullMatchingImages = Core.Nothing,
+    { fullMatchingImages =
+        Core.Nothing,
       pageTitle = Core.Nothing,
       partialMatchingImages = Core.Nothing,
       score = Core.Nothing,
@@ -10244,29 +9855,23 @@ instance
       ( \o ->
           GoogleCloudVisionV1p3beta1WebDetectionWebPage
             Core.<$> (o Core..:? "fullMatchingImages")
-              Core.<*> (o Core..:? "pageTitle")
-              Core.<*> (o Core..:? "partialMatchingImages")
-              Core.<*> (o Core..:? "score")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "pageTitle")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebPage
-  where
-  toJSON
-    GoogleCloudVisionV1p3beta1WebDetectionWebPage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("fullMatchingImages" Core..=)
-                Core.<$> fullMatchingImages,
-              ("pageTitle" Core..=) Core.<$> pageTitle,
-              ("partialMatchingImages" Core..=)
-                Core.<$> partialMatchingImages,
-              ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p3beta1WebDetectionWebPage where
+  toJSON GoogleCloudVisionV1p3beta1WebDetectionWebPage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
+            ("pageTitle" Core..=) Core.<$> pageTitle,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("score" Core..=) Core.<$> score,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | A word representation.
 --
@@ -10337,7 +9942,8 @@ newGoogleCloudVisionV1p4beta1AnnotateFileResponse ::
   GoogleCloudVisionV1p4beta1AnnotateFileResponse
 newGoogleCloudVisionV1p4beta1AnnotateFileResponse =
   GoogleCloudVisionV1p4beta1AnnotateFileResponse
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       inputConfig = Core.Nothing,
       responses = Core.Nothing,
       totalPages = Core.Nothing
@@ -10353,25 +9959,21 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1AnnotateFileResponse
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "inputConfig")
-              Core.<*> (o Core..:? "responses")
-              Core.<*> (o Core..:? "totalPages")
+            Core.<*> (o Core..:? "inputConfig")
+            Core.<*> (o Core..:? "responses")
+            Core.<*> (o Core..:? "totalPages")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1AnnotateFileResponse
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1AnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("error" Core..=) Core.<$> error,
-              ("inputConfig" Core..=) Core.<$> inputConfig,
-              ("responses" Core..=) Core.<$> responses,
-              ("totalPages" Core..=) Core.<$> totalPages
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1AnnotateFileResponse where
+  toJSON GoogleCloudVisionV1p4beta1AnnotateFileResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("inputConfig" Core..=) Core.<$> inputConfig,
+            ("responses" Core..=) Core.<$> responses,
+            ("totalPages" Core..=) Core.<$> totalPages
+          ]
+      )
 
 -- | Response to an image annotation request.
 --
@@ -10413,7 +10015,8 @@ newGoogleCloudVisionV1p4beta1AnnotateImageResponse ::
   GoogleCloudVisionV1p4beta1AnnotateImageResponse
 newGoogleCloudVisionV1p4beta1AnnotateImageResponse =
   GoogleCloudVisionV1p4beta1AnnotateImageResponse
-    { context = Core.Nothing,
+    { context =
+        Core.Nothing,
       cropHintsAnnotation = Core.Nothing,
       error = Core.Nothing,
       faceAnnotations = Core.Nothing,
@@ -10439,53 +10042,46 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1AnnotateImageResponse
             Core.<$> (o Core..:? "context")
-              Core.<*> (o Core..:? "cropHintsAnnotation")
-              Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "fullTextAnnotation")
-              Core.<*> (o Core..:? "imagePropertiesAnnotation")
-              Core.<*> (o Core..:? "labelAnnotations")
-              Core.<*> (o Core..:? "landmarkAnnotations")
-              Core.<*> (o Core..:? "localizedObjectAnnotations")
-              Core.<*> (o Core..:? "logoAnnotations")
-              Core.<*> (o Core..:? "productSearchResults")
-              Core.<*> (o Core..:? "safeSearchAnnotation")
-              Core.<*> (o Core..:? "textAnnotations")
-              Core.<*> (o Core..:? "webDetection")
+            Core.<*> (o Core..:? "cropHintsAnnotation")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "fullTextAnnotation")
+            Core.<*> (o Core..:? "imagePropertiesAnnotation")
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "landmarkAnnotations")
+            Core.<*> (o Core..:? "localizedObjectAnnotations")
+            Core.<*> (o Core..:? "logoAnnotations")
+            Core.<*> (o Core..:? "productSearchResults")
+            Core.<*> (o Core..:? "safeSearchAnnotation")
+            Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "webDetection")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1AnnotateImageResponse
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1AnnotateImageResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("context" Core..=) Core.<$> context,
-              ("cropHintsAnnotation" Core..=)
-                Core.<$> cropHintsAnnotation,
-              ("error" Core..=) Core.<$> error,
-              ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-              ("fullTextAnnotation" Core..=)
-                Core.<$> fullTextAnnotation,
-              ("imagePropertiesAnnotation" Core..=)
-                Core.<$> imagePropertiesAnnotation,
-              ("labelAnnotations" Core..=)
-                Core.<$> labelAnnotations,
-              ("landmarkAnnotations" Core..=)
-                Core.<$> landmarkAnnotations,
-              ("localizedObjectAnnotations" Core..=)
-                Core.<$> localizedObjectAnnotations,
-              ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
-              ("productSearchResults" Core..=)
-                Core.<$> productSearchResults,
-              ("safeSearchAnnotation" Core..=)
-                Core.<$> safeSearchAnnotation,
-              ("textAnnotations" Core..=) Core.<$> textAnnotations,
-              ("webDetection" Core..=) Core.<$> webDetection
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1AnnotateImageResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("context" Core..=) Core.<$> context,
+            ("cropHintsAnnotation" Core..=) Core.<$> cropHintsAnnotation,
+            ("error" Core..=) Core.<$> error,
+            ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
+            ("fullTextAnnotation" Core..=) Core.<$> fullTextAnnotation,
+            ("imagePropertiesAnnotation" Core..=)
+              Core.<$> imagePropertiesAnnotation,
+            ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+            ("landmarkAnnotations" Core..=) Core.<$> landmarkAnnotations,
+            ("localizedObjectAnnotations" Core..=)
+              Core.<$> localizedObjectAnnotations,
+            ("logoAnnotations" Core..=) Core.<$> logoAnnotations,
+            ("productSearchResults" Core..=) Core.<$> productSearchResults,
+            ("safeSearchAnnotation" Core..=) Core.<$> safeSearchAnnotation,
+            ("textAnnotations" Core..=) Core.<$> textAnnotations,
+            ("webDetection" Core..=) Core.<$> webDetection
+          ]
+      )
 
 -- | The response for a single offline file annotation request.
 --
@@ -10501,7 +10097,8 @@ newGoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse ::
   GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse
 newGoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse =
   GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse
-    { outputConfig = Core.Nothing
+    { outputConfig =
+        Core.Nothing
     }
 
 instance
@@ -10520,12 +10117,9 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputConfig" Core..=) Core.<$> outputConfig]
-        )
+  toJSON GoogleCloudVisionV1p4beta1AsyncAnnotateFileResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | Response to an async batch file annotation request.
 --
@@ -10541,7 +10135,8 @@ newGoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse
 newGoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse =
   GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -10563,9 +10158,7 @@ instance
   toJSON
     GoogleCloudVisionV1p4beta1AsyncBatchAnnotateFilesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+        (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Response to an async batch image annotation request.
 --
@@ -10581,7 +10174,8 @@ newGoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse ::
   GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse
 newGoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse =
   GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse
-    { outputConfig = Core.Nothing
+    { outputConfig =
+        Core.Nothing
     }
 
 instance
@@ -10603,9 +10197,7 @@ instance
   toJSON
     GoogleCloudVisionV1p4beta1AsyncBatchAnnotateImagesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("outputConfig" Core..=) Core.<$> outputConfig]
-        )
+        (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
 
 -- | A list of file annotation responses.
 --
@@ -10621,7 +10213,8 @@ newGoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse ::
   GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
 newGoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse =
   GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
-    { responses = Core.Nothing
+    { responses =
+        Core.Nothing
     }
 
 instance
@@ -10640,12 +10233,9 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+  toJSON GoogleCloudVisionV1p4beta1BatchAnnotateFilesResponse {..} =
+    Core.object
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Metadata for the batch operations such as the current state. This is included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -10665,7 +10255,8 @@ newGoogleCloudVisionV1p4beta1BatchOperationMetadata ::
   GoogleCloudVisionV1p4beta1BatchOperationMetadata
 newGoogleCloudVisionV1p4beta1BatchOperationMetadata =
   GoogleCloudVisionV1p4beta1BatchOperationMetadata
-    { endTime = Core.Nothing,
+    { endTime =
+        Core.Nothing,
       state = Core.Nothing,
       submitTime = Core.Nothing
     }
@@ -10679,23 +10270,23 @@ instance
       "GoogleCloudVisionV1p4beta1BatchOperationMetadata"
       ( \o ->
           GoogleCloudVisionV1p4beta1BatchOperationMetadata
-            Core.<$> (o Core..:? "endTime") Core.<*> (o Core..:? "state")
-              Core.<*> (o Core..:? "submitTime")
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "submitTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1BatchOperationMetadata
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1BatchOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTime" Core..=) Core.<$> endTime,
-              ("state" Core..=) Core.<$> state,
-              ("submitTime" Core..=) Core.<$> submitTime
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1BatchOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("state" Core..=) Core.<$> state,
+            ("submitTime" Core..=) Core.<$> submitTime
+          ]
+      )
 
 -- | Logical element on the page.
 --
@@ -10726,10 +10317,7 @@ newGoogleCloudVisionV1p4beta1Block =
       property = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Block
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Block where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Block"
@@ -10770,14 +10358,12 @@ newGoogleCloudVisionV1p4beta1BoundingPoly ::
   GoogleCloudVisionV1p4beta1BoundingPoly
 newGoogleCloudVisionV1p4beta1BoundingPoly =
   GoogleCloudVisionV1p4beta1BoundingPoly
-    { normalizedVertices = Core.Nothing,
+    { normalizedVertices =
+        Core.Nothing,
       vertices = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1BoundingPoly
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1BoundingPoly where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1BoundingPoly"
@@ -10787,15 +10373,11 @@ instance
             Core.<*> (o Core..:? "vertices")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1BoundingPoly
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1BoundingPoly where
   toJSON GoogleCloudVisionV1p4beta1BoundingPoly {..} =
     Core.object
       ( Core.catMaybes
-          [ ("normalizedVertices" Core..=)
-              Core.<$> normalizedVertices,
+          [ ("normalizedVertices" Core..=) Core.<$> normalizedVertices,
             ("vertices" Core..=) Core.<$> vertices
           ]
       )
@@ -10823,10 +10405,7 @@ newGoogleCloudVisionV1p4beta1Celebrity =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Celebrity
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Celebrity where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Celebrity"
@@ -10837,10 +10416,7 @@ instance
             Core.<*> (o Core..:? "name")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1Celebrity
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1Celebrity where
   toJSON GoogleCloudVisionV1p4beta1Celebrity {..} =
     Core.object
       ( Core.catMaybes
@@ -10873,10 +10449,7 @@ newGoogleCloudVisionV1p4beta1ColorInfo =
       score = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1ColorInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1ColorInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1ColorInfo"
@@ -10887,10 +10460,7 @@ instance
             Core.<*> (o Core..:? "score")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1ColorInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1ColorInfo where
   toJSON GoogleCloudVisionV1p4beta1ColorInfo {..} =
     Core.object
       ( Core.catMaybes
@@ -10923,10 +10493,7 @@ newGoogleCloudVisionV1p4beta1CropHint =
       importanceFraction = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1CropHint
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1CropHint where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1CropHint"
@@ -10937,17 +10504,13 @@ instance
             Core.<*> (o Core..:? "importanceFraction")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1CropHint
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1CropHint where
   toJSON GoogleCloudVisionV1p4beta1CropHint {..} =
     Core.object
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
             ("confidence" Core..=) Core.<$> confidence,
-            ("importanceFraction" Core..=)
-              Core.<$> importanceFraction
+            ("importanceFraction" Core..=) Core.<$> importanceFraction
           ]
       )
 
@@ -10964,7 +10527,10 @@ newtype GoogleCloudVisionV1p4beta1CropHintsAnnotation = GoogleCloudVisionV1p4bet
 newGoogleCloudVisionV1p4beta1CropHintsAnnotation ::
   GoogleCloudVisionV1p4beta1CropHintsAnnotation
 newGoogleCloudVisionV1p4beta1CropHintsAnnotation =
-  GoogleCloudVisionV1p4beta1CropHintsAnnotation {cropHints = Core.Nothing}
+  GoogleCloudVisionV1p4beta1CropHintsAnnotation
+    { cropHints =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -10978,16 +10544,10 @@ instance
             Core.<$> (o Core..:? "cropHints")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1CropHintsAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1CropHintsAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [("cropHints" Core..=) Core.<$> cropHints]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1CropHintsAnnotation where
+  toJSON GoogleCloudVisionV1p4beta1CropHintsAnnotation {..} =
+    Core.object
+      (Core.catMaybes [("cropHints" Core..=) Core.<$> cropHints])
 
 -- | Set of dominant colors and their corresponding scores.
 --
@@ -11002,7 +10562,10 @@ newtype GoogleCloudVisionV1p4beta1DominantColorsAnnotation = GoogleCloudVisionV1
 newGoogleCloudVisionV1p4beta1DominantColorsAnnotation ::
   GoogleCloudVisionV1p4beta1DominantColorsAnnotation
 newGoogleCloudVisionV1p4beta1DominantColorsAnnotation =
-  GoogleCloudVisionV1p4beta1DominantColorsAnnotation {colors = Core.Nothing}
+  GoogleCloudVisionV1p4beta1DominantColorsAnnotation
+    { colors =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -11020,10 +10583,8 @@ instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1DominantColorsAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1DominantColorsAnnotation {..} =
-      Core.object
-        (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+  toJSON GoogleCloudVisionV1p4beta1DominantColorsAnnotation {..} =
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | Set of detected entity features.
 --
@@ -11055,7 +10616,8 @@ newGoogleCloudVisionV1p4beta1EntityAnnotation ::
   GoogleCloudVisionV1p4beta1EntityAnnotation
 newGoogleCloudVisionV1p4beta1EntityAnnotation =
   GoogleCloudVisionV1p4beta1EntityAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       confidence = Core.Nothing,
       description = Core.Nothing,
       locale = Core.Nothing,
@@ -11066,10 +10628,7 @@ newGoogleCloudVisionV1p4beta1EntityAnnotation =
       topicality = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1EntityAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1EntityAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1EntityAnnotation"
@@ -11086,10 +10645,7 @@ instance
             Core.<*> (o Core..:? "topicality")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1EntityAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1EntityAnnotation where
   toJSON GoogleCloudVisionV1p4beta1EntityAnnotation {..} =
     Core.object
       ( Core.catMaybes
@@ -11167,7 +10723,8 @@ newGoogleCloudVisionV1p4beta1FaceAnnotation ::
   GoogleCloudVisionV1p4beta1FaceAnnotation
 newGoogleCloudVisionV1p4beta1FaceAnnotation =
   GoogleCloudVisionV1p4beta1FaceAnnotation
-    { angerLikelihood = Core.Nothing,
+    { angerLikelihood =
+        Core.Nothing,
       blurredLikelihood = Core.Nothing,
       boundingPoly = Core.Nothing,
       detectionConfidence = Core.Nothing,
@@ -11185,10 +10742,7 @@ newGoogleCloudVisionV1p4beta1FaceAnnotation =
       underExposedLikelihood = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1FaceAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1FaceAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1FaceAnnotation"
@@ -11212,42 +10766,31 @@ instance
             Core.<*> (o Core..:? "underExposedLikelihood")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1FaceAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1FaceAnnotation where
   toJSON GoogleCloudVisionV1p4beta1FaceAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("angerLikelihood" Core..=)
-              Core.<$> angerLikelihood,
-            ("blurredLikelihood" Core..=)
-              Core.<$> blurredLikelihood,
+          [ ("angerLikelihood" Core..=) Core.<$> angerLikelihood,
+            ("blurredLikelihood" Core..=) Core.<$> blurredLikelihood,
             ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("detectionConfidence" Core..=)
-              Core.<$> detectionConfidence,
+            ("detectionConfidence" Core..=) Core.<$> detectionConfidence,
             ("fdBoundingPoly" Core..=) Core.<$> fdBoundingPoly,
-            ("headwearLikelihood" Core..=)
-              Core.<$> headwearLikelihood,
+            ("headwearLikelihood" Core..=) Core.<$> headwearLikelihood,
             ("joyLikelihood" Core..=) Core.<$> joyLikelihood,
-            ("landmarkingConfidence" Core..=)
-              Core.<$> landmarkingConfidence,
+            ("landmarkingConfidence" Core..=) Core.<$> landmarkingConfidence,
             ("landmarks" Core..=) Core.<$> landmarks,
             ("panAngle" Core..=) Core.<$> panAngle,
-            ("recognitionResult" Core..=)
-              Core.<$> recognitionResult,
+            ("recognitionResult" Core..=) Core.<$> recognitionResult,
             ("rollAngle" Core..=) Core.<$> rollAngle,
-            ("sorrowLikelihood" Core..=)
-              Core.<$> sorrowLikelihood,
-            ("surpriseLikelihood" Core..=)
-              Core.<$> surpriseLikelihood,
+            ("sorrowLikelihood" Core..=) Core.<$> sorrowLikelihood,
+            ("surpriseLikelihood" Core..=) Core.<$> surpriseLikelihood,
             ("tiltAngle" Core..=) Core.<$> tiltAngle,
             ("underExposedLikelihood" Core..=)
               Core.<$> underExposedLikelihood
           ]
       )
 
--- | A face-specific landmark (for example, a face feature).
+-- | A face-specific landmark (for example, a face feature). Landmark positions may fall outside the bounds of the image if the face is near one or more edges of the image. Therefore it is NOT guaranteed that @0 \<= x \< width@ or @0 \<= y \< height@.
 --
 -- /See:/ 'newGoogleCloudVisionV1p4beta1FaceAnnotationLandmark' smart constructor.
 data GoogleCloudVisionV1p4beta1FaceAnnotationLandmark = GoogleCloudVisionV1p4beta1FaceAnnotationLandmark
@@ -11263,7 +10806,8 @@ newGoogleCloudVisionV1p4beta1FaceAnnotationLandmark ::
   GoogleCloudVisionV1p4beta1FaceAnnotationLandmark
 newGoogleCloudVisionV1p4beta1FaceAnnotationLandmark =
   GoogleCloudVisionV1p4beta1FaceAnnotationLandmark
-    { position = Core.Nothing,
+    { position =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -11276,21 +10820,21 @@ instance
       "GoogleCloudVisionV1p4beta1FaceAnnotationLandmark"
       ( \o ->
           GoogleCloudVisionV1p4beta1FaceAnnotationLandmark
-            Core.<$> (o Core..:? "position") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "position")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1FaceAnnotationLandmark
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1FaceAnnotationLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("position" Core..=) Core.<$> position,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1FaceAnnotationLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("position" Core..=) Core.<$> position,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | Information about a face\'s identity.
 --
@@ -11308,7 +10852,8 @@ newGoogleCloudVisionV1p4beta1FaceRecognitionResult ::
   GoogleCloudVisionV1p4beta1FaceRecognitionResult
 newGoogleCloudVisionV1p4beta1FaceRecognitionResult =
   GoogleCloudVisionV1p4beta1FaceRecognitionResult
-    { celebrity = Core.Nothing,
+    { celebrity =
+        Core.Nothing,
       confidence = Core.Nothing
     }
 
@@ -11322,21 +10867,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1FaceRecognitionResult
             Core.<$> (o Core..:? "celebrity")
-              Core.<*> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "confidence")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1FaceRecognitionResult
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1FaceRecognitionResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("celebrity" Core..=) Core.<$> celebrity,
-              ("confidence" Core..=) Core.<$> confidence
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1FaceRecognitionResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("celebrity" Core..=) Core.<$> celebrity,
+            ("confidence" Core..=) Core.<$> confidence
+          ]
+      )
 
 -- | The Google Cloud Storage location where the output will be written to.
 --
@@ -11354,10 +10898,7 @@ newGoogleCloudVisionV1p4beta1GcsDestination ::
 newGoogleCloudVisionV1p4beta1GcsDestination =
   GoogleCloudVisionV1p4beta1GcsDestination {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1GcsDestination
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1GcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1GcsDestination"
@@ -11366,13 +10907,9 @@ instance
             Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1GcsDestination
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1GcsDestination where
   toJSON GoogleCloudVisionV1p4beta1GcsDestination {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Google Cloud Storage location where the input will be read from.
 --
@@ -11389,25 +10926,17 @@ newGoogleCloudVisionV1p4beta1GcsSource ::
 newGoogleCloudVisionV1p4beta1GcsSource =
   GoogleCloudVisionV1p4beta1GcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1GcsSource
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1GcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1GcsSource"
       ( \o ->
-          GoogleCloudVisionV1p4beta1GcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudVisionV1p4beta1GcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1GcsSource
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1GcsSource where
   toJSON GoogleCloudVisionV1p4beta1GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | If an image was produced from a file (e.g. a PDF), this message gives information about the source of that image.
 --
@@ -11425,7 +10954,8 @@ newGoogleCloudVisionV1p4beta1ImageAnnotationContext ::
   GoogleCloudVisionV1p4beta1ImageAnnotationContext
 newGoogleCloudVisionV1p4beta1ImageAnnotationContext =
   GoogleCloudVisionV1p4beta1ImageAnnotationContext
-    { pageNumber = Core.Nothing,
+    { pageNumber =
+        Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -11439,21 +10969,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ImageAnnotationContext
             Core.<$> (o Core..:? "pageNumber")
-              Core.<*> (o Core..:? "uri")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1ImageAnnotationContext
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1ImageAnnotationContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pageNumber" Core..=) Core.<$> pageNumber,
-              ("uri" Core..=) Core.<$> uri
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1ImageAnnotationContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pageNumber" Core..=) Core.<$> pageNumber,
+            ("uri" Core..=) Core.<$> uri
+          ]
+      )
 
 -- | Stores image properties, such as dominant colors.
 --
@@ -11468,12 +10997,12 @@ newtype GoogleCloudVisionV1p4beta1ImageProperties = GoogleCloudVisionV1p4beta1Im
 newGoogleCloudVisionV1p4beta1ImageProperties ::
   GoogleCloudVisionV1p4beta1ImageProperties
 newGoogleCloudVisionV1p4beta1ImageProperties =
-  GoogleCloudVisionV1p4beta1ImageProperties {dominantColors = Core.Nothing}
+  GoogleCloudVisionV1p4beta1ImageProperties
+    { dominantColors =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1ImageProperties
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1ImageProperties where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1ImageProperties"
@@ -11482,10 +11011,7 @@ instance
             Core.<$> (o Core..:? "dominantColors")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1ImageProperties
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1ImageProperties where
   toJSON GoogleCloudVisionV1p4beta1ImageProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -11508,7 +11034,8 @@ newGoogleCloudVisionV1p4beta1ImportProductSetsResponse ::
   GoogleCloudVisionV1p4beta1ImportProductSetsResponse
 newGoogleCloudVisionV1p4beta1ImportProductSetsResponse =
   GoogleCloudVisionV1p4beta1ImportProductSetsResponse
-    { referenceImages = Core.Nothing,
+    { referenceImages =
+        Core.Nothing,
       statuses = Core.Nothing
     }
 
@@ -11522,22 +11049,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ImportProductSetsResponse
             Core.<$> (o Core..:? "referenceImages")
-              Core.<*> (o Core..:? "statuses")
+            Core.<*> (o Core..:? "statuses")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1ImportProductSetsResponse
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1ImportProductSetsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("referenceImages" Core..=)
-                Core.<$> referenceImages,
-              ("statuses" Core..=) Core.<$> statuses
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1ImportProductSetsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("referenceImages" Core..=) Core.<$> referenceImages,
+            ("statuses" Core..=) Core.<$> statuses
+          ]
+      )
 
 -- | The desired input location and metadata.
 --
@@ -11562,10 +11087,7 @@ newGoogleCloudVisionV1p4beta1InputConfig =
       mimeType = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1InputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1InputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1InputConfig"
@@ -11576,10 +11098,7 @@ instance
             Core.<*> (o Core..:? "mimeType")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1InputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1InputConfig where
   toJSON GoogleCloudVisionV1p4beta1InputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -11611,7 +11130,8 @@ newGoogleCloudVisionV1p4beta1LocalizedObjectAnnotation ::
   GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation
 newGoogleCloudVisionV1p4beta1LocalizedObjectAnnotation =
   GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       languageCode = Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
@@ -11628,27 +11148,26 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("languageCode" Core..=) Core.<$> languageCode,
-              ("mid" Core..=) Core.<$> mid,
-              ("name" Core..=) Core.<$> name,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1LocalizedObjectAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("mid" Core..=) Core.<$> mid,
+            ("name" Core..=) Core.<$> name,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Detected entity location information.
 --
@@ -11665,10 +11184,7 @@ newGoogleCloudVisionV1p4beta1LocationInfo ::
 newGoogleCloudVisionV1p4beta1LocationInfo =
   GoogleCloudVisionV1p4beta1LocationInfo {latLng = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1LocationInfo
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1LocationInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1LocationInfo"
@@ -11677,13 +11193,9 @@ instance
             Core.<$> (o Core..:? "latLng")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1LocationInfo
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1LocationInfo where
   toJSON GoogleCloudVisionV1p4beta1LocationInfo {..} =
-    Core.object
-      (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
+    Core.object (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -11705,22 +11217,17 @@ newGoogleCloudVisionV1p4beta1NormalizedVertex =
       y = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1NormalizedVertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1NormalizedVertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1NormalizedVertex"
       ( \o ->
           GoogleCloudVisionV1p4beta1NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1NormalizedVertex
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1NormalizedVertex where
   toJSON GoogleCloudVisionV1p4beta1NormalizedVertex {..} =
     Core.object
       ( Core.catMaybes
@@ -11745,15 +11252,13 @@ newGoogleCloudVisionV1p4beta1OperationMetadata ::
   GoogleCloudVisionV1p4beta1OperationMetadata
 newGoogleCloudVisionV1p4beta1OperationMetadata =
   GoogleCloudVisionV1p4beta1OperationMetadata
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       state = Core.Nothing,
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1OperationMetadata"
@@ -11764,19 +11269,15 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1OperationMetadata
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1OperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("state" Core..=) Core.<$> state,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1OperationMetadata where
+  toJSON GoogleCloudVisionV1p4beta1OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("state" Core..=) Core.<$> state,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | The desired output location and metadata.
 --
@@ -11798,10 +11299,7 @@ newGoogleCloudVisionV1p4beta1OutputConfig =
       gcsDestination = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1OutputConfig
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1OutputConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1OutputConfig"
@@ -11811,10 +11309,7 @@ instance
             Core.<*> (o Core..:? "gcsDestination")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1OutputConfig
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1OutputConfig where
   toJSON GoogleCloudVisionV1p4beta1OutputConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -11903,10 +11398,7 @@ newGoogleCloudVisionV1p4beta1Paragraph =
       words = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Paragraph
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Paragraph where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Paragraph"
@@ -11918,10 +11410,7 @@ instance
             Core.<*> (o Core..:? "words")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1Paragraph
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1Paragraph where
   toJSON GoogleCloudVisionV1p4beta1Paragraph {..} =
     Core.object
       ( Core.catMaybes
@@ -11955,10 +11444,7 @@ newGoogleCloudVisionV1p4beta1Position =
       z = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Position
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Position where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Position"
@@ -11969,10 +11455,7 @@ instance
             Core.<*> (o Core..:? "z")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1Position
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1Position where
   toJSON GoogleCloudVisionV1p4beta1Position {..} =
     Core.object
       ( Core.catMaybes
@@ -12011,10 +11494,7 @@ newGoogleCloudVisionV1p4beta1Product =
       productLabels = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Product
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Product where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Product"
@@ -12027,10 +11507,7 @@ instance
             Core.<*> (o Core..:? "productLabels")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1Product
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1Product where
   toJSON GoogleCloudVisionV1p4beta1Product {..} =
     Core.object
       ( Core.catMaybes
@@ -12062,28 +11539,21 @@ newGoogleCloudVisionV1p4beta1ProductKeyValue =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1ProductKeyValue
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1ProductKeyValue where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1ProductKeyValue"
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductKeyValue
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1ProductKeyValue
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1ProductKeyValue where
   toJSON GoogleCloudVisionV1p4beta1ProductKeyValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Results for a product search request.
@@ -12107,7 +11577,8 @@ newGoogleCloudVisionV1p4beta1ProductSearchResults ::
   GoogleCloudVisionV1p4beta1ProductSearchResults
 newGoogleCloudVisionV1p4beta1ProductSearchResults =
   GoogleCloudVisionV1p4beta1ProductSearchResults
-    { indexTime = Core.Nothing,
+    { indexTime =
+        Core.Nothing,
       productGroupedResults = Core.Nothing,
       results = Core.Nothing
     }
@@ -12122,24 +11593,19 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResults
             Core.<$> (o Core..:? "indexTime")
-              Core.<*> (o Core..:? "productGroupedResults")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "productGroupedResults")
+            Core.<*> (o Core..:? "results")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1ProductSearchResults
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1ProductSearchResults {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("indexTime" Core..=) Core.<$> indexTime,
-              ("productGroupedResults" Core..=)
-                Core.<$> productGroupedResults,
-              ("results" Core..=) Core.<$> results
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1ProductSearchResults where
+  toJSON GoogleCloudVisionV1p4beta1ProductSearchResults {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("indexTime" Core..=) Core.<$> indexTime,
+            ("productGroupedResults" Core..=) Core.<$> productGroupedResults,
+            ("results" Core..=) Core.<$> results
+          ]
+      )
 
 -- | Information about the products similar to a single product in a query image.
 --
@@ -12162,7 +11628,8 @@ newGoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult ::
   GoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult
 newGoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult =
   GoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult
-    { boundingPoly = Core.Nothing,
+    { boundingPoly =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
       results = Core.Nothing
     }
@@ -12177,8 +11644,8 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResultsGroupedResult
             Core.<$> (o Core..:? "boundingPoly")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "results")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "results")
       )
 
 instance
@@ -12190,8 +11657,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("results" Core..=) Core.<$> results
             ]
         )
@@ -12216,7 +11682,8 @@ newGoogleCloudVisionV1p4beta1ProductSearchResultsObjectAnnotation ::
   GoogleCloudVisionV1p4beta1ProductSearchResultsObjectAnnotation
 newGoogleCloudVisionV1p4beta1ProductSearchResultsObjectAnnotation =
   GoogleCloudVisionV1p4beta1ProductSearchResultsObjectAnnotation
-    { languageCode = Core.Nothing,
+    { languageCode =
+        Core.Nothing,
       mid = Core.Nothing,
       name = Core.Nothing,
       score = Core.Nothing
@@ -12232,9 +11699,9 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResultsObjectAnnotation
             Core.<$> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "mid")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "mid")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
@@ -12270,7 +11737,8 @@ newGoogleCloudVisionV1p4beta1ProductSearchResultsResult ::
   GoogleCloudVisionV1p4beta1ProductSearchResultsResult
 newGoogleCloudVisionV1p4beta1ProductSearchResultsResult =
   GoogleCloudVisionV1p4beta1ProductSearchResultsResult
-    { image = Core.Nothing,
+    { image =
+        Core.Nothing,
       product = Core.Nothing,
       score = Core.Nothing
     }
@@ -12284,23 +11752,23 @@ instance
       "GoogleCloudVisionV1p4beta1ProductSearchResultsResult"
       ( \o ->
           GoogleCloudVisionV1p4beta1ProductSearchResultsResult
-            Core.<$> (o Core..:? "image") Core.<*> (o Core..:? "product")
-              Core.<*> (o Core..:? "score")
+            Core.<$> (o Core..:? "image")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1ProductSearchResultsResult
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1ProductSearchResultsResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("image" Core..=) Core.<$> image,
-              ("product" Core..=) Core.<$> product,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1ProductSearchResultsResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("image" Core..=) Core.<$> image,
+            ("product" Core..=) Core.<$> product,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | A @Property@ consists of a user-supplied name\/value pair.
 --
@@ -12325,32 +11793,23 @@ newGoogleCloudVisionV1p4beta1Property =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Property
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Property where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Property"
       ( \o ->
           GoogleCloudVisionV1p4beta1Property
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "uint64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uint64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1Property
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1Property where
   toJSON GoogleCloudVisionV1p4beta1Property {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("uint64Value" Core..=) Core.. Core.AsText
-              Core.<$> uint64Value,
+            ("uint64Value" Core..=) Core.. Core.AsText Core.<$> uint64Value,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -12373,15 +11832,13 @@ newGoogleCloudVisionV1p4beta1ReferenceImage ::
   GoogleCloudVisionV1p4beta1ReferenceImage
 newGoogleCloudVisionV1p4beta1ReferenceImage =
   GoogleCloudVisionV1p4beta1ReferenceImage
-    { boundingPolys = Core.Nothing,
+    { boundingPolys =
+        Core.Nothing,
       name = Core.Nothing,
       uri = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1ReferenceImage
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1ReferenceImage where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1ReferenceImage"
@@ -12392,10 +11849,7 @@ instance
             Core.<*> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1ReferenceImage
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1ReferenceImage where
   toJSON GoogleCloudVisionV1p4beta1ReferenceImage {..} =
     Core.object
       ( Core.catMaybes
@@ -12417,7 +11871,7 @@ data GoogleCloudVisionV1p4beta1SafeSearchAnnotation = GoogleCloudVisionV1p4beta1
     racy :: (Core.Maybe GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Racy),
     -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
     spoof :: (Core.Maybe GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof),
-    -- | Likelihood that this image contains violent content.
+    -- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
     violence ::
       ( Core.Maybe
           GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence
@@ -12430,7 +11884,8 @@ newGoogleCloudVisionV1p4beta1SafeSearchAnnotation ::
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation
 newGoogleCloudVisionV1p4beta1SafeSearchAnnotation =
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation
-    { adult = Core.Nothing,
+    { adult =
+        Core.Nothing,
       medical = Core.Nothing,
       racy = Core.Nothing,
       spoof = Core.Nothing,
@@ -12446,27 +11901,24 @@ instance
       "GoogleCloudVisionV1p4beta1SafeSearchAnnotation"
       ( \o ->
           GoogleCloudVisionV1p4beta1SafeSearchAnnotation
-            Core.<$> (o Core..:? "adult") Core.<*> (o Core..:? "medical")
-              Core.<*> (o Core..:? "racy")
-              Core.<*> (o Core..:? "spoof")
-              Core.<*> (o Core..:? "violence")
+            Core.<$> (o Core..:? "adult")
+            Core.<*> (o Core..:? "medical")
+            Core.<*> (o Core..:? "racy")
+            Core.<*> (o Core..:? "spoof")
+            Core.<*> (o Core..:? "violence")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1SafeSearchAnnotation
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1SafeSearchAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("adult" Core..=) Core.<$> adult,
-              ("medical" Core..=) Core.<$> medical,
-              ("racy" Core..=) Core.<$> racy,
-              ("spoof" Core..=) Core.<$> spoof,
-              ("violence" Core..=) Core.<$> violence
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotation where
+  toJSON GoogleCloudVisionV1p4beta1SafeSearchAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adult" Core..=) Core.<$> adult,
+            ("medical" Core..=) Core.<$> medical,
+            ("racy" Core..=) Core.<$> racy,
+            ("spoof" Core..=) Core.<$> spoof,
+            ("violence" Core..=) Core.<$> violence
+          ]
+      )
 
 -- | A single symbol representation.
 --
@@ -12494,10 +11946,7 @@ newGoogleCloudVisionV1p4beta1Symbol =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Symbol
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Symbol where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Symbol"
@@ -12540,28 +11989,21 @@ newGoogleCloudVisionV1p4beta1TextAnnotation =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1TextAnnotation
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1TextAnnotation where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1TextAnnotation"
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotation
-            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1TextAnnotation
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1TextAnnotation where
   toJSON GoogleCloudVisionV1p4beta1TextAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pages" Core..=) Core.<$> pages,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("pages" Core..=) Core.<$> pages, ("text" Core..=) Core.<$> text]
       )
 
 -- | Detected start or end of a structural component.
@@ -12583,7 +12025,8 @@ newGoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak ::
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak
 newGoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak =
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak
-    { isPrefix = Core.Nothing,
+    { isPrefix =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -12596,21 +12039,21 @@ instance
       "GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak"
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak
-            Core.<$> (o Core..:? "isPrefix") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "isPrefix")
+            Core.<*> (o Core..:? "type")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("isPrefix" Core..=) Core.<$> isPrefix,
-              ("type" Core..=) Core.<$> type'
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1TextAnnotationDetectedBreak {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isPrefix" Core..=) Core.<$> isPrefix,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
 
 -- | Detected language for a structural component.
 --
@@ -12628,7 +12071,8 @@ newGoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage ::
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage
 newGoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage =
   GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -12642,21 +12086,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1TextAnnotationDetectedLanguage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Additional information detected on the structural component.
 --
@@ -12677,7 +12120,8 @@ newGoogleCloudVisionV1p4beta1TextAnnotationTextProperty ::
   GoogleCloudVisionV1p4beta1TextAnnotationTextProperty
 newGoogleCloudVisionV1p4beta1TextAnnotationTextProperty =
   GoogleCloudVisionV1p4beta1TextAnnotationTextProperty
-    { detectedBreak = Core.Nothing,
+    { detectedBreak =
+        Core.Nothing,
       detectedLanguages = Core.Nothing
     }
 
@@ -12691,22 +12135,20 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1TextAnnotationTextProperty
             Core.<$> (o Core..:? "detectedBreak")
-              Core.<*> (o Core..:? "detectedLanguages")
+            Core.<*> (o Core..:? "detectedLanguages")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1TextAnnotationTextProperty
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1TextAnnotationTextProperty {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
-              ("detectedLanguages" Core..=)
-                Core.<$> detectedLanguages
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1TextAnnotationTextProperty {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages
+          ]
+      )
 
 -- | A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image.
 --
@@ -12723,18 +12165,19 @@ data GoogleCloudVisionV1p4beta1Vertex = GoogleCloudVisionV1p4beta1Vertex
 newGoogleCloudVisionV1p4beta1Vertex ::
   GoogleCloudVisionV1p4beta1Vertex
 newGoogleCloudVisionV1p4beta1Vertex =
-  GoogleCloudVisionV1p4beta1Vertex {x = Core.Nothing, y = Core.Nothing}
+  GoogleCloudVisionV1p4beta1Vertex
+    { x = Core.Nothing,
+      y = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1Vertex
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1Vertex where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1Vertex"
       ( \o ->
           GoogleCloudVisionV1p4beta1Vertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance Core.ToJSON GoogleCloudVisionV1p4beta1Vertex where
@@ -12768,7 +12211,8 @@ newGoogleCloudVisionV1p4beta1WebDetection ::
   GoogleCloudVisionV1p4beta1WebDetection
 newGoogleCloudVisionV1p4beta1WebDetection =
   GoogleCloudVisionV1p4beta1WebDetection
-    { bestGuessLabels = Core.Nothing,
+    { bestGuessLabels =
+        Core.Nothing,
       fullMatchingImages = Core.Nothing,
       pagesWithMatchingImages = Core.Nothing,
       partialMatchingImages = Core.Nothing,
@@ -12776,10 +12220,7 @@ newGoogleCloudVisionV1p4beta1WebDetection =
       webEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVisionV1p4beta1WebDetection
-  where
+instance Core.FromJSON GoogleCloudVisionV1p4beta1WebDetection where
   parseJSON =
     Core.withObject
       "GoogleCloudVisionV1p4beta1WebDetection"
@@ -12793,23 +12234,16 @@ instance
             Core.<*> (o Core..:? "webEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1WebDetection
-  where
+instance Core.ToJSON GoogleCloudVisionV1p4beta1WebDetection where
   toJSON GoogleCloudVisionV1p4beta1WebDetection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestGuessLabels" Core..=)
-              Core.<$> bestGuessLabels,
-            ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("bestGuessLabels" Core..=) Core.<$> bestGuessLabels,
+            ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pagesWithMatchingImages" Core..=)
               Core.<$> pagesWithMatchingImages,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
-            ("visuallySimilarImages" Core..=)
-              Core.<$> visuallySimilarImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("visuallySimilarImages" Core..=) Core.<$> visuallySimilarImages,
             ("webEntities" Core..=) Core.<$> webEntities
           ]
       )
@@ -12832,7 +12266,8 @@ newGoogleCloudVisionV1p4beta1WebDetectionWebEntity ::
   GoogleCloudVisionV1p4beta1WebDetectionWebEntity
 newGoogleCloudVisionV1p4beta1WebDetectionWebEntity =
   GoogleCloudVisionV1p4beta1WebDetectionWebEntity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       score = Core.Nothing
     }
@@ -12847,23 +12282,22 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetectionWebEntity
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "entityId")
-              Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "entityId")
+            Core.<*> (o Core..:? "score")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVisionV1p4beta1WebDetectionWebEntity
   where
-  toJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebEntity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("score" Core..=) Core.<$> score
-            ]
-        )
+  toJSON GoogleCloudVisionV1p4beta1WebDetectionWebEntity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("score" Core..=) Core.<$> score
+          ]
+      )
 
 -- | Metadata for online images.
 --
@@ -12881,7 +12315,8 @@ newGoogleCloudVisionV1p4beta1WebDetectionWebImage ::
   GoogleCloudVisionV1p4beta1WebDetectionWebImage
 newGoogleCloudVisionV1p4beta1WebDetectionWebImage =
   GoogleCloudVisionV1p4beta1WebDetectionWebImage
-    { score = Core.Nothing,
+    { score =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -12894,21 +12329,16 @@ instance
       "GoogleCloudVisionV1p4beta1WebDetectionWebImage"
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetectionWebImage
-            Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebImage
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebImage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1WebDetectionWebImage where
+  toJSON GoogleCloudVisionV1p4beta1WebDetectionWebImage {..} =
+    Core.object
+      ( Core.catMaybes
+          [("score" Core..=) Core.<$> score, ("url" Core..=) Core.<$> url]
+      )
 
 -- | Label to provide extra metadata for the web detection.
 --
@@ -12926,7 +12356,8 @@ newGoogleCloudVisionV1p4beta1WebDetectionWebLabel ::
   GoogleCloudVisionV1p4beta1WebDetectionWebLabel
 newGoogleCloudVisionV1p4beta1WebDetectionWebLabel =
   GoogleCloudVisionV1p4beta1WebDetectionWebLabel
-    { label = Core.Nothing,
+    { label =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -12940,21 +12371,17 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetectionWebLabel
             Core.<$> (o Core..:? "label")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebLabel
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebLabel {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("label" Core..=) Core.<$> label,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1WebDetectionWebLabel where
+  toJSON GoogleCloudVisionV1p4beta1WebDetectionWebLabel {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("label" Core..=) Core.<$> label,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Metadata for web pages.
 --
@@ -12978,7 +12405,8 @@ newGoogleCloudVisionV1p4beta1WebDetectionWebPage ::
   GoogleCloudVisionV1p4beta1WebDetectionWebPage
 newGoogleCloudVisionV1p4beta1WebDetectionWebPage =
   GoogleCloudVisionV1p4beta1WebDetectionWebPage
-    { fullMatchingImages = Core.Nothing,
+    { fullMatchingImages =
+        Core.Nothing,
       pageTitle = Core.Nothing,
       partialMatchingImages = Core.Nothing,
       score = Core.Nothing,
@@ -12995,29 +12423,23 @@ instance
       ( \o ->
           GoogleCloudVisionV1p4beta1WebDetectionWebPage
             Core.<$> (o Core..:? "fullMatchingImages")
-              Core.<*> (o Core..:? "pageTitle")
-              Core.<*> (o Core..:? "partialMatchingImages")
-              Core.<*> (o Core..:? "score")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "pageTitle")
+            Core.<*> (o Core..:? "partialMatchingImages")
+            Core.<*> (o Core..:? "score")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebPage
-  where
-  toJSON
-    GoogleCloudVisionV1p4beta1WebDetectionWebPage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("fullMatchingImages" Core..=)
-                Core.<$> fullMatchingImages,
-              ("pageTitle" Core..=) Core.<$> pageTitle,
-              ("partialMatchingImages" Core..=)
-                Core.<$> partialMatchingImages,
-              ("score" Core..=) Core.<$> score,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON GoogleCloudVisionV1p4beta1WebDetectionWebPage where
+  toJSON GoogleCloudVisionV1p4beta1WebDetectionWebPage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
+            ("pageTitle" Core..=) Core.<$> pageTitle,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("score" Core..=) Core.<$> score,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | A word representation.
 --
@@ -13107,8 +12529,7 @@ instance Core.ToJSON GroupedResult where
     Core.object
       ( Core.catMaybes
           [ ("boundingPoly" Core..=) Core.<$> boundingPoly,
-            ("objectAnnotations" Core..=)
-              Core.<$> objectAnnotations,
+            ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
             ("results" Core..=) Core.<$> results
           ]
       )
@@ -13128,7 +12549,10 @@ data ImageAnnotationContext = ImageAnnotationContext
 newImageAnnotationContext ::
   ImageAnnotationContext
 newImageAnnotationContext =
-  ImageAnnotationContext {pageNumber = Core.Nothing, uri = Core.Nothing}
+  ImageAnnotationContext
+    { pageNumber = Core.Nothing,
+      uri = Core.Nothing
+    }
 
 instance Core.FromJSON ImageAnnotationContext where
   parseJSON =
@@ -13167,10 +12591,7 @@ instance Core.FromJSON ImageProperties where
   parseJSON =
     Core.withObject
       "ImageProperties"
-      ( \o ->
-          ImageProperties
-            Core.<$> (o Core..:? "dominantColors")
-      )
+      (\o -> ImageProperties Core.<$> (o Core..:? "dominantColors"))
 
 instance Core.ToJSON ImageProperties where
   toJSON ImageProperties {..} =
@@ -13213,8 +12634,7 @@ instance Core.ToJSON ImportProductSetsResponse where
   toJSON ImportProductSetsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("referenceImages" Core..=)
-              Core.<$> referenceImages,
+          [ ("referenceImages" Core..=) Core.<$> referenceImages,
             ("statuses" Core..=) Core.<$> statuses
           ]
       )
@@ -13284,20 +12704,17 @@ instance Core.FromJSON KeyValue where
     Core.withObject
       "KeyValue"
       ( \o ->
-          KeyValue
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+          KeyValue Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON KeyValue where
   toJSON KeyValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
--- | A face-specific landmark (for example, a face feature).
+-- | A face-specific landmark (for example, a face feature). Landmark positions may fall outside the bounds of the image if the face is near one or more edges of the image. Therefore it is NOT guaranteed that @0 \<= x \< width@ or @0 \<= y \< height@.
 --
 -- /See:/ 'newLandmark' smart constructor.
 data Landmark = Landmark
@@ -13311,7 +12728,8 @@ data Landmark = Landmark
 -- | Creates a value of 'Landmark' with the minimum fields required to make a request.
 newLandmark ::
   Landmark
-newLandmark = Landmark {position = Core.Nothing, type' = Core.Nothing}
+newLandmark =
+  Landmark {position = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON Landmark where
   parseJSON =
@@ -13319,7 +12737,8 @@ instance Core.FromJSON Landmark where
       "Landmark"
       ( \o ->
           Landmark
-            Core.<$> (o Core..:? "position") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "position")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Landmark where
@@ -13345,7 +12764,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -13442,8 +12862,7 @@ instance Core.FromJSON LocationInfo where
 
 instance Core.ToJSON LocationInfo where
   toJSON LocationInfo {..} =
-    Core.object
-      (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
+    Core.object (Core.catMaybes [("latLng" Core..=) Core.<$> latLng])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -13459,7 +12878,8 @@ data NormalizedVertex = NormalizedVertex
 -- | Creates a value of 'NormalizedVertex' with the minimum fields required to make a request.
 newNormalizedVertex ::
   NormalizedVertex
-newNormalizedVertex = NormalizedVertex {x = Core.Nothing, y = Core.Nothing}
+newNormalizedVertex =
+  NormalizedVertex {x = Core.Nothing, y = Core.Nothing}
 
 instance Core.FromJSON NormalizedVertex where
   parseJSON =
@@ -13467,7 +12887,8 @@ instance Core.FromJSON NormalizedVertex where
       "NormalizedVertex"
       ( \o ->
           NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance Core.ToJSON NormalizedVertex where
@@ -13538,7 +12959,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -13594,21 +13015,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -13622,19 +13041,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Contains metadata for the BatchAnnotateImages operation.
 --
@@ -13695,7 +13112,10 @@ data OutputConfig = OutputConfig
 newOutputConfig ::
   OutputConfig
 newOutputConfig =
-  OutputConfig {batchSize = Core.Nothing, gcsDestination = Core.Nothing}
+  OutputConfig
+    { batchSize = Core.Nothing,
+      gcsDestination = Core.Nothing
+    }
 
 instance Core.FromJSON OutputConfig where
   parseJSON =
@@ -13835,7 +13255,8 @@ data Position = Position
 -- | Creates a value of 'Position' with the minimum fields required to make a request.
 newPosition ::
   Position
-newPosition = Position {x = Core.Nothing, y = Core.Nothing, z = Core.Nothing}
+newPosition =
+  Position {x = Core.Nothing, y = Core.Nothing, z = Core.Nothing}
 
 instance Core.FromJSON Position where
   parseJSON =
@@ -13951,8 +13372,7 @@ instance Core.ToJSON ProductSearchResults where
     Core.object
       ( Core.catMaybes
           [ ("indexTime" Core..=) Core.<$> indexTime,
-            ("productGroupedResults" Core..=)
-              Core.<$> productGroupedResults,
+            ("productGroupedResults" Core..=) Core.<$> productGroupedResults,
             ("results" Core..=) Core.<$> results
           ]
       )
@@ -13987,9 +13407,7 @@ instance Core.FromJSON Property where
       ( \o ->
           Property
             Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "uint64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "uint64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
@@ -13998,8 +13416,7 @@ instance Core.ToJSON Property where
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("uint64Value" Core..=) Core.. Core.AsText
-              Core.<$> uint64Value,
+            ("uint64Value" Core..=) Core.. Core.AsText Core.<$> uint64Value,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -14065,7 +13482,11 @@ data Result = Result
 newResult ::
   Result
 newResult =
-  Result {image = Core.Nothing, product = Core.Nothing, score = Core.Nothing}
+  Result
+    { image = Core.Nothing,
+      product = Core.Nothing,
+      score = Core.Nothing
+    }
 
 instance Core.FromJSON Result where
   parseJSON =
@@ -14100,7 +13521,7 @@ data SafeSearchAnnotation = SafeSearchAnnotation
     racy :: (Core.Maybe SafeSearchAnnotation_Racy),
     -- | Spoof likelihood. The likelihood that an modification was made to the image\'s canonical version to make it appear funny or offensive.
     spoof :: (Core.Maybe SafeSearchAnnotation_Spoof),
-    -- | Likelihood that this image contains violent content.
+    -- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
     violence :: (Core.Maybe SafeSearchAnnotation_Violence)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -14159,7 +13580,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -14195,19 +13620,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A single symbol representation.
 --
@@ -14272,7 +13695,8 @@ data TextAnnotation = TextAnnotation
 -- | Creates a value of 'TextAnnotation' with the minimum fields required to make a request.
 newTextAnnotation ::
   TextAnnotation
-newTextAnnotation = TextAnnotation {pages = Core.Nothing, text = Core.Nothing}
+newTextAnnotation =
+  TextAnnotation {pages = Core.Nothing, text = Core.Nothing}
 
 instance Core.FromJSON TextAnnotation where
   parseJSON =
@@ -14280,16 +13704,15 @@ instance Core.FromJSON TextAnnotation where
       "TextAnnotation"
       ( \o ->
           TextAnnotation
-            Core.<$> (o Core..:? "pages") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "pages")
+            Core.<*> (o Core..:? "text")
       )
 
 instance Core.ToJSON TextAnnotation where
   toJSON TextAnnotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pages" Core..=) Core.<$> pages,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("pages" Core..=) Core.<$> pages, ("text" Core..=) Core.<$> text]
       )
 
 -- | Additional information detected on the structural component.
@@ -14307,7 +13730,10 @@ data TextProperty = TextProperty
 newTextProperty ::
   TextProperty
 newTextProperty =
-  TextProperty {detectedBreak = Core.Nothing, detectedLanguages = Core.Nothing}
+  TextProperty
+    { detectedBreak = Core.Nothing,
+      detectedLanguages = Core.Nothing
+    }
 
 instance Core.FromJSON TextProperty where
   parseJSON =
@@ -14324,8 +13750,7 @@ instance Core.ToJSON TextProperty where
     Core.object
       ( Core.catMaybes
           [ ("detectedBreak" Core..=) Core.<$> detectedBreak,
-            ("detectedLanguages" Core..=)
-              Core.<$> detectedLanguages
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages
           ]
       )
 
@@ -14349,10 +13774,7 @@ instance Core.FromJSON Vertex where
   parseJSON =
     Core.withObject
       "Vertex"
-      ( \o ->
-          Vertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
-      )
+      (\o -> Vertex Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y"))
 
 instance Core.ToJSON Vertex where
   toJSON Vertex {..} =
@@ -14411,16 +13833,12 @@ instance Core.ToJSON WebDetection where
   toJSON WebDetection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bestGuessLabels" Core..=)
-              Core.<$> bestGuessLabels,
-            ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("bestGuessLabels" Core..=) Core.<$> bestGuessLabels,
+            ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pagesWithMatchingImages" Core..=)
               Core.<$> pagesWithMatchingImages,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
-            ("visuallySimilarImages" Core..=)
-              Core.<$> visuallySimilarImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
+            ("visuallySimilarImages" Core..=) Core.<$> visuallySimilarImages,
             ("webEntities" Core..=) Core.<$> webEntities
           ]
       )
@@ -14490,17 +13908,14 @@ instance Core.FromJSON WebImage where
     Core.withObject
       "WebImage"
       ( \o ->
-          WebImage
-            Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
+          WebImage Core.<$> (o Core..:? "score") Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON WebImage where
   toJSON WebImage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("score" Core..=) Core.<$> score,
-            ("url" Core..=) Core.<$> url
-          ]
+          [("score" Core..=) Core.<$> score, ("url" Core..=) Core.<$> url]
       )
 
 -- | Label to provide extra metadata for the web detection.
@@ -14517,7 +13932,8 @@ data WebLabel = WebLabel
 -- | Creates a value of 'WebLabel' with the minimum fields required to make a request.
 newWebLabel ::
   WebLabel
-newWebLabel = WebLabel {label = Core.Nothing, languageCode = Core.Nothing}
+newWebLabel =
+  WebLabel {label = Core.Nothing, languageCode = Core.Nothing}
 
 instance Core.FromJSON WebLabel where
   parseJSON =
@@ -14584,11 +14000,9 @@ instance Core.ToJSON WebPage where
   toJSON WebPage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("fullMatchingImages" Core..=)
-              Core.<$> fullMatchingImages,
+          [ ("fullMatchingImages" Core..=) Core.<$> fullMatchingImages,
             ("pageTitle" Core..=) Core.<$> pageTitle,
-            ("partialMatchingImages" Core..=)
-              Core.<$> partialMatchingImages,
+            ("partialMatchingImages" Core..=) Core.<$> partialMatchingImages,
             ("score" Core..=) Core.<$> score,
             ("url" Core..=) Core.<$> url
           ]

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.VideoIntelligence.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.VideoIntelligence.Internal.Product
@@ -756,7 +754,7 @@ module Gogol.VideoIntelligence.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.VideoIntelligence.Internal.Sum
 
 -- | Video annotation progress. Included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
@@ -776,7 +774,8 @@ newGoogleCloudVideointelligenceV1_AnnotateVideoProgress ::
   GoogleCloudVideointelligenceV1_AnnotateVideoProgress
 newGoogleCloudVideointelligenceV1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1_AnnotateVideoProgress
-    { annotationProgress = Core.Nothing
+    { annotationProgress =
+        Core.Nothing
     }
 
 instance
@@ -795,14 +794,11 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_AnnotateVideoProgress
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_AnnotateVideoProgress {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("annotationProgress" Core..=)
-                Core.<$> annotationProgress
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_AnnotateVideoProgress {..} =
+    Core.object
+      ( Core.catMaybes
+          [("annotationProgress" Core..=) Core.<$> annotationProgress]
+      )
 
 -- | Video annotation response. Included in the @response@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -821,7 +817,8 @@ newGoogleCloudVideointelligenceV1_AnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1_AnnotateVideoResponse
 newGoogleCloudVideointelligenceV1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1_AnnotateVideoResponse
-    { annotationResults = Core.Nothing
+    { annotationResults =
+        Core.Nothing
     }
 
 instance
@@ -840,14 +837,11 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_AnnotateVideoResponse
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_AnnotateVideoResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_AnnotateVideoResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("annotationResults" Core..=) Core.<$> annotationResults]
+      )
 
 -- | A generic detected attribute represented by name in string format.
 --
@@ -867,7 +861,8 @@ newGoogleCloudVideointelligenceV1_DetectedAttribute ::
   GoogleCloudVideointelligenceV1_DetectedAttribute
 newGoogleCloudVideointelligenceV1_DetectedAttribute =
   GoogleCloudVideointelligenceV1_DetectedAttribute
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       value = Core.Nothing
     }
@@ -882,23 +877,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_DetectedAttribute
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "value")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_DetectedAttribute
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_DetectedAttribute {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_DetectedAttribute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | A generic detected landmark represented by name in string format and a 2D location.
 --
@@ -918,7 +912,8 @@ newGoogleCloudVideointelligenceV1_DetectedLandmark ::
   GoogleCloudVideointelligenceV1_DetectedLandmark
 newGoogleCloudVideointelligenceV1_DetectedLandmark =
   GoogleCloudVideointelligenceV1_DetectedLandmark
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       point = Core.Nothing
     }
@@ -933,23 +928,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_DetectedLandmark
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "point")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "point")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_DetectedLandmark
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_DetectedLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("point" Core..=) Core.<$> point
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_DetectedLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("point" Core..=) Core.<$> point
+          ]
+      )
 
 -- | Detected entity from video analysis.
 --
@@ -974,10 +968,7 @@ newGoogleCloudVideointelligenceV1_Entity =
       languageCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_Entity
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_Entity where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_Entity"
@@ -988,10 +979,7 @@ instance
             Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_Entity
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_Entity where
   toJSON GoogleCloudVideointelligenceV1_Entity {..} =
     Core.object
       ( Core.catMaybes
@@ -1017,7 +1005,8 @@ newGoogleCloudVideointelligenceV1_ExplicitContentAnnotation ::
   GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
 newGoogleCloudVideointelligenceV1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -1031,21 +1020,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_ExplicitContentAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_ExplicitContentAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_ExplicitContentAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for explicit content.
 --
@@ -1066,7 +1054,8 @@ newGoogleCloudVideointelligenceV1_ExplicitContentFrame ::
   GoogleCloudVideointelligenceV1_ExplicitContentFrame
 newGoogleCloudVideointelligenceV1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1_ExplicitContentFrame
-    { pornographyLikelihood = Core.Nothing,
+    { pornographyLikelihood =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -1080,22 +1069,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_ExplicitContentFrame
             Core.<$> (o Core..:? "pornographyLikelihood")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_ExplicitContentFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_ExplicitContentFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pornographyLikelihood" Core..=)
-                Core.<$> pornographyLikelihood,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_ExplicitContentFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pornographyLikelihood" Core..=) Core.<$> pornographyLikelihood,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Deprecated. No effect.
 --
@@ -1115,7 +1102,8 @@ newGoogleCloudVideointelligenceV1_FaceAnnotation ::
   GoogleCloudVideointelligenceV1_FaceAnnotation
 newGoogleCloudVideointelligenceV1_FaceAnnotation =
   GoogleCloudVideointelligenceV1_FaceAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       segments = Core.Nothing,
       thumbnail = Core.Nothing
     }
@@ -1130,23 +1118,19 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_FaceAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "thumbnail")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "thumbnail")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_FaceAnnotation
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1_FaceAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("thumbnail" Core..=) Core.<$> thumbnail
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1_FaceAnnotation where
+  toJSON GoogleCloudVideointelligenceV1_FaceAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("thumbnail" Core..=) Core.<$> thumbnail
+          ]
+      )
 
 -- | Face detection annotation.
 --
@@ -1166,7 +1150,8 @@ newGoogleCloudVideointelligenceV1_FaceDetectionAnnotation ::
   GoogleCloudVideointelligenceV1_FaceDetectionAnnotation
 newGoogleCloudVideointelligenceV1_FaceDetectionAnnotation =
   GoogleCloudVideointelligenceV1_FaceDetectionAnnotation
-    { thumbnail = Core.Nothing,
+    { thumbnail =
+        Core.Nothing,
       tracks = Core.Nothing,
       version = Core.Nothing
     }
@@ -1181,23 +1166,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_FaceDetectionAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_FaceDetectionAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("thumbnail" Core..=) Core.<$> thumbnail,
-              ("tracks" Core..=) Core.<$> tracks,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_FaceDetectionAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("thumbnail" Core..=) Core.<$> thumbnail,
+            ("tracks" Core..=) Core.<$> tracks,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Deprecated. No effect.
 --
@@ -1215,14 +1199,12 @@ newGoogleCloudVideointelligenceV1_FaceFrame ::
   GoogleCloudVideointelligenceV1_FaceFrame
 newGoogleCloudVideointelligenceV1_FaceFrame =
   GoogleCloudVideointelligenceV1_FaceFrame
-    { normalizedBoundingBoxes = Core.Nothing,
+    { normalizedBoundingBoxes =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_FaceFrame
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_FaceFrame where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_FaceFrame"
@@ -1232,10 +1214,7 @@ instance
             Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_FaceFrame
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_FaceFrame where
   toJSON GoogleCloudVideointelligenceV1_FaceFrame {..} =
     Core.object
       ( Core.catMaybes
@@ -1258,12 +1237,12 @@ newtype GoogleCloudVideointelligenceV1_FaceSegment = GoogleCloudVideointelligenc
 newGoogleCloudVideointelligenceV1_FaceSegment ::
   GoogleCloudVideointelligenceV1_FaceSegment
 newGoogleCloudVideointelligenceV1_FaceSegment =
-  GoogleCloudVideointelligenceV1_FaceSegment {segment = Core.Nothing}
+  GoogleCloudVideointelligenceV1_FaceSegment
+    { segment =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_FaceSegment
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_FaceSegment where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_FaceSegment"
@@ -1272,15 +1251,10 @@ instance
             Core.<$> (o Core..:? "segment")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_FaceSegment
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_FaceSegment where
   toJSON GoogleCloudVideointelligenceV1_FaceSegment {..} =
     Core.object
-      ( Core.catMaybes
-          [("segment" Core..=) Core.<$> segment]
-      )
+      (Core.catMaybes [("segment" Core..=) Core.<$> segment])
 
 -- | Label annotation.
 --
@@ -1304,7 +1278,8 @@ newGoogleCloudVideointelligenceV1_LabelAnnotation ::
   GoogleCloudVideointelligenceV1_LabelAnnotation
 newGoogleCloudVideointelligenceV1_LabelAnnotation =
   GoogleCloudVideointelligenceV1_LabelAnnotation
-    { categoryEntities = Core.Nothing,
+    { categoryEntities =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segments = Core.Nothing,
@@ -1321,28 +1296,23 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_LabelAnnotation
             Core.<$> (o Core..:? "categoryEntities")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "version")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_LabelAnnotation
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1_LabelAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("categoryEntities" Core..=)
-                Core.<$> categoryEntities,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1_LabelAnnotation where
+  toJSON GoogleCloudVideointelligenceV1_LabelAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("categoryEntities" Core..=) Core.<$> categoryEntities,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for label detection.
 --
@@ -1360,14 +1330,12 @@ newGoogleCloudVideointelligenceV1_LabelFrame ::
   GoogleCloudVideointelligenceV1_LabelFrame
 newGoogleCloudVideointelligenceV1_LabelFrame =
   GoogleCloudVideointelligenceV1_LabelFrame
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_LabelFrame
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_LabelFrame where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_LabelFrame"
@@ -1377,10 +1345,7 @@ instance
             Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_LabelFrame
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_LabelFrame where
   toJSON GoogleCloudVideointelligenceV1_LabelFrame {..} =
     Core.object
       ( Core.catMaybes
@@ -1405,14 +1370,12 @@ newGoogleCloudVideointelligenceV1_LabelSegment ::
   GoogleCloudVideointelligenceV1_LabelSegment
 newGoogleCloudVideointelligenceV1_LabelSegment =
   GoogleCloudVideointelligenceV1_LabelSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_LabelSegment
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_LabelSegment where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_LabelSegment"
@@ -1422,18 +1385,14 @@ instance
             Core.<*> (o Core..:? "segment")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_LabelSegment
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1_LabelSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1_LabelSegment where
+  toJSON GoogleCloudVideointelligenceV1_LabelSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | Annotation corresponding to one detected, tracked and recognized logo class.
 --
@@ -1453,7 +1412,8 @@ newGoogleCloudVideointelligenceV1_LogoRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation
 newGoogleCloudVideointelligenceV1_LogoRecognitionAnnotation =
   GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation
-    { entity = Core.Nothing,
+    { entity =
+        Core.Nothing,
       segments = Core.Nothing,
       tracks = Core.Nothing
     }
@@ -1468,23 +1428,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("entity" Core..=) Core.<$> entity,
-              ("segments" Core..=) Core.<$> segments,
-              ("tracks" Core..=) Core.<$> tracks
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_LogoRecognitionAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("entity" Core..=) Core.<$> entity,
+            ("segments" Core..=) Core.<$> segments,
+            ("tracks" Core..=) Core.<$> tracks
+          ]
+      )
 
 -- | Normalized bounding box. The normalized vertex coordinates are relative to the original image. Range: [0, 1].
 --
@@ -1506,7 +1465,8 @@ newGoogleCloudVideointelligenceV1_NormalizedBoundingBox ::
   GoogleCloudVideointelligenceV1_NormalizedBoundingBox
 newGoogleCloudVideointelligenceV1_NormalizedBoundingBox =
   GoogleCloudVideointelligenceV1_NormalizedBoundingBox
-    { bottom = Core.Nothing,
+    { bottom =
+        Core.Nothing,
       left = Core.Nothing,
       right = Core.Nothing,
       top = Core.Nothing
@@ -1521,25 +1481,25 @@ instance
       "GoogleCloudVideointelligenceV1_NormalizedBoundingBox"
       ( \o ->
           GoogleCloudVideointelligenceV1_NormalizedBoundingBox
-            Core.<$> (o Core..:? "bottom") Core.<*> (o Core..:? "left")
-              Core.<*> (o Core..:? "right")
-              Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "bottom")
+            Core.<*> (o Core..:? "left")
+            Core.<*> (o Core..:? "right")
+            Core.<*> (o Core..:? "top")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_NormalizedBoundingBox
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_NormalizedBoundingBox {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bottom" Core..=) Core.<$> bottom,
-              ("left" Core..=) Core.<$> left,
-              ("right" Core..=) Core.<$> right,
-              ("top" Core..=) Core.<$> top
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_NormalizedBoundingBox {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bottom" Core..=) Core.<$> bottom,
+            ("left" Core..=) Core.<$> left,
+            ("right" Core..=) Core.<$> right,
+            ("top" Core..=) Core.<$> top
+          ]
+      )
 
 -- | Normalized bounding polygon for text (that might not be aligned with axis). Contains list of the corner points in clockwise order starting from top-left corner. For example, for a rectangular bounding box: When the text is horizontal it might look like: 0----1 | | 3----2 When it\'s clockwise rotated 180 degrees around the top-left corner it becomes: 2----3 | | 1----0 and the vertex order will still be (0, 1, 2, 3). Note that values can be less than 0, or greater than 1 due to trignometric calculations for location of the box.
 --
@@ -1555,7 +1515,8 @@ newGoogleCloudVideointelligenceV1_NormalizedBoundingPoly ::
   GoogleCloudVideointelligenceV1_NormalizedBoundingPoly
 newGoogleCloudVideointelligenceV1_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1_NormalizedBoundingPoly
-    { vertices = Core.Nothing
+    { vertices =
+        Core.Nothing
     }
 
 instance
@@ -1574,12 +1535,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_NormalizedBoundingPoly
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_NormalizedBoundingPoly {..} =
-      Core.object
-        ( Core.catMaybes
-            [("vertices" Core..=) Core.<$> vertices]
-        )
+  toJSON GoogleCloudVideointelligenceV1_NormalizedBoundingPoly {..} =
+    Core.object
+      (Core.catMaybes [("vertices" Core..=) Core.<$> vertices])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -1610,19 +1568,19 @@ instance
       "GoogleCloudVideointelligenceV1_NormalizedVertex"
       ( \o ->
           GoogleCloudVideointelligenceV1_NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_NormalizedVertex
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_NormalizedVertex {..} =
-      Core.object
-        ( Core.catMaybes
-            [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
-        )
+  toJSON GoogleCloudVideointelligenceV1_NormalizedVertex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
+      )
 
 -- | Annotations corresponding to one tracked object.
 --
@@ -1648,7 +1606,8 @@ newGoogleCloudVideointelligenceV1_ObjectTrackingAnnotation ::
   GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation
 newGoogleCloudVideointelligenceV1_ObjectTrackingAnnotation =
   GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing,
@@ -1666,32 +1625,28 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "trackId"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "trackId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segment" Core..=) Core.<$> segment,
-              ("trackId" Core..=) Core.. Core.AsText
-                Core.<$> trackId,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segment" Core..=) Core.<$> segment,
+            ("trackId" Core..=) Core.. Core.AsText Core.<$> trackId,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotations for object detection and tracking. This field stores per frame location, time offset, and confidence.
 --
@@ -1709,7 +1664,8 @@ newGoogleCloudVideointelligenceV1_ObjectTrackingFrame ::
   GoogleCloudVideointelligenceV1_ObjectTrackingFrame
 newGoogleCloudVideointelligenceV1_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1_ObjectTrackingFrame
-    { normalizedBoundingBox = Core.Nothing,
+    { normalizedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -1723,22 +1679,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_ObjectTrackingFrame
             Core.<$> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_ObjectTrackingFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_ObjectTrackingFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_ObjectTrackingFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Person detection annotation per video.
 --
@@ -1756,7 +1710,8 @@ newGoogleCloudVideointelligenceV1_PersonDetectionAnnotation ::
   GoogleCloudVideointelligenceV1_PersonDetectionAnnotation
 newGoogleCloudVideointelligenceV1_PersonDetectionAnnotation =
   GoogleCloudVideointelligenceV1_PersonDetectionAnnotation
-    { tracks = Core.Nothing,
+    { tracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -1770,21 +1725,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_PersonDetectionAnnotation
             Core.<$> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_PersonDetectionAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_PersonDetectionAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("tracks" Core..=) Core.<$> tracks,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_PersonDetectionAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("tracks" Core..=) Core.<$> tracks,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
@@ -1804,7 +1758,8 @@ newGoogleCloudVideointelligenceV1_SpeechRecognitionAlternative ::
   GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
 newGoogleCloudVideointelligenceV1_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       transcript = Core.Nothing,
       words = Core.Nothing
     }
@@ -1819,8 +1774,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words")
+            Core.<*> (o Core..:? "transcript")
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -1856,7 +1811,8 @@ newGoogleCloudVideointelligenceV1_SpeechTranscription ::
   GoogleCloudVideointelligenceV1_SpeechTranscription
 newGoogleCloudVideointelligenceV1_SpeechTranscription =
   GoogleCloudVideointelligenceV1_SpeechTranscription
-    { alternatives = Core.Nothing,
+    { alternatives =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -1870,21 +1826,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_SpeechTranscription
             Core.<$> (o Core..:? "alternatives")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_SpeechTranscription
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_SpeechTranscription {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("alternatives" Core..=) Core.<$> alternatives,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_SpeechTranscription {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alternatives" Core..=) Core.<$> alternatives,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Annotations related to one detected OCR text snippet. This will contain the corresponding text, confidence value, and frame level information for each detection.
 --
@@ -1904,7 +1859,8 @@ newGoogleCloudVideointelligenceV1_TextAnnotation ::
   GoogleCloudVideointelligenceV1_TextAnnotation
 newGoogleCloudVideointelligenceV1_TextAnnotation =
   GoogleCloudVideointelligenceV1_TextAnnotation
-    { segments = Core.Nothing,
+    { segments =
+        Core.Nothing,
       text = Core.Nothing,
       version = Core.Nothing
     }
@@ -1918,23 +1874,20 @@ instance
       "GoogleCloudVideointelligenceV1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1_TextAnnotation
-            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
-              Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "segments")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "version")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_TextAnnotation
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1_TextAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("segments" Core..=) Core.<$> segments,
-              ("text" Core..=) Core.<$> text,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1_TextAnnotation where
+  toJSON GoogleCloudVideointelligenceV1_TextAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("segments" Core..=) Core.<$> segments,
+            ("text" Core..=) Core.<$> text,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for text annotation (OCR). Contains information regarding timestamp and bounding box locations for the frames containing detected OCR text snippets.
 --
@@ -1952,14 +1905,12 @@ newGoogleCloudVideointelligenceV1_TextFrame ::
   GoogleCloudVideointelligenceV1_TextFrame
 newGoogleCloudVideointelligenceV1_TextFrame =
   GoogleCloudVideointelligenceV1_TextFrame
-    { rotatedBoundingBox = Core.Nothing,
+    { rotatedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_TextFrame
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_TextFrame where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_TextFrame"
@@ -1969,15 +1920,11 @@ instance
             Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_TextFrame
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_TextFrame where
   toJSON GoogleCloudVideointelligenceV1_TextFrame {..} =
     Core.object
       ( Core.catMaybes
-          [ ("rotatedBoundingBox" Core..=)
-              Core.<$> rotatedBoundingBox,
+          [ ("rotatedBoundingBox" Core..=) Core.<$> rotatedBoundingBox,
             ("timeOffset" Core..=) Core.<$> timeOffset
           ]
       )
@@ -2000,15 +1947,13 @@ newGoogleCloudVideointelligenceV1_TextSegment ::
   GoogleCloudVideointelligenceV1_TextSegment
 newGoogleCloudVideointelligenceV1_TextSegment =
   GoogleCloudVideointelligenceV1_TextSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_TextSegment
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_TextSegment where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_TextSegment"
@@ -2019,10 +1964,7 @@ instance
             Core.<*> (o Core..:? "segment")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_TextSegment
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_TextSegment where
   toJSON GoogleCloudVideointelligenceV1_TextSegment {..} =
     Core.object
       ( Core.catMaybes
@@ -2052,7 +1994,8 @@ newGoogleCloudVideointelligenceV1_TimestampedObject ::
   GoogleCloudVideointelligenceV1_TimestampedObject
 newGoogleCloudVideointelligenceV1_TimestampedObject =
   GoogleCloudVideointelligenceV1_TimestampedObject
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       landmarks = Core.Nothing,
       normalizedBoundingBox = Core.Nothing,
       timeOffset = Core.Nothing
@@ -2068,26 +2011,24 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_TimestampedObject
             Core.<$> (o Core..:? "attributes")
-              Core.<*> (o Core..:? "landmarks")
-              Core.<*> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "landmarks")
+            Core.<*> (o Core..:? "normalizedBoundingBox")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_TimestampedObject
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_TimestampedObject {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("landmarks" Core..=) Core.<$> landmarks,
-              ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_TimestampedObject {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("landmarks" Core..=) Core.<$> landmarks,
+            ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | A track of an object instance.
 --
@@ -2115,10 +2056,7 @@ newGoogleCloudVideointelligenceV1_Track =
       timestampedObjects = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_Track
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_Track where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_Track"
@@ -2130,18 +2068,14 @@ instance
             Core.<*> (o Core..:? "timestampedObjects")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_Track
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_Track where
   toJSON GoogleCloudVideointelligenceV1_Track {..} =
     Core.object
       ( Core.catMaybes
           [ ("attributes" Core..=) Core.<$> attributes,
             ("confidence" Core..=) Core.<$> confidence,
             ("segment" Core..=) Core.<$> segment,
-            ("timestampedObjects" Core..=)
-              Core.<$> timestampedObjects
+            ("timestampedObjects" Core..=) Core.<$> timestampedObjects
           ]
       )
 
@@ -2172,7 +2106,8 @@ newGoogleCloudVideointelligenceV1_VideoAnnotationProgress ::
   GoogleCloudVideointelligenceV1_VideoAnnotationProgress
 newGoogleCloudVideointelligenceV1_VideoAnnotationProgress =
   GoogleCloudVideointelligenceV1_VideoAnnotationProgress
-    { feature = Core.Nothing,
+    { feature =
+        Core.Nothing,
       inputUri = Core.Nothing,
       progressPercent = Core.Nothing,
       segment = Core.Nothing,
@@ -2190,29 +2125,28 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_VideoAnnotationProgress
             Core.<$> (o Core..:? "feature")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "progressPercent")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_VideoAnnotationProgress
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_VideoAnnotationProgress {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("feature" Core..=) Core.<$> feature,
-              ("inputUri" Core..=) Core.<$> inputUri,
-              ("progressPercent" Core..=) Core.<$> progressPercent,
-              ("segment" Core..=) Core.<$> segment,
-              ("startTime" Core..=) Core.<$> startTime,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_VideoAnnotationProgress {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("feature" Core..=) Core.<$> feature,
+            ("inputUri" Core..=) Core.<$> inputUri,
+            ("progressPercent" Core..=) Core.<$> progressPercent,
+            ("segment" Core..=) Core.<$> segment,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | Annotation results for a single video.
 --
@@ -2275,7 +2209,8 @@ newGoogleCloudVideointelligenceV1_VideoAnnotationResults ::
   GoogleCloudVideointelligenceV1_VideoAnnotationResults
 newGoogleCloudVideointelligenceV1_VideoAnnotationResults =
   GoogleCloudVideointelligenceV1_VideoAnnotationResults
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       explicitAnnotation = Core.Nothing,
       faceAnnotations = Core.Nothing,
       faceDetectionAnnotations = Core.Nothing,
@@ -2286,10 +2221,12 @@ newGoogleCloudVideointelligenceV1_VideoAnnotationResults =
       personDetectionAnnotations = Core.Nothing,
       segment = Core.Nothing,
       segmentLabelAnnotations = Core.Nothing,
-      segmentPresenceLabelAnnotations = Core.Nothing,
+      segmentPresenceLabelAnnotations =
+        Core.Nothing,
       shotAnnotations = Core.Nothing,
       shotLabelAnnotations = Core.Nothing,
-      shotPresenceLabelAnnotations = Core.Nothing,
+      shotPresenceLabelAnnotations =
+        Core.Nothing,
       speechTranscriptions = Core.Nothing,
       textAnnotations = Core.Nothing
     }
@@ -2304,63 +2241,56 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "faceDetectionAnnotations")
-              Core.<*> (o Core..:? "frameLabelAnnotations")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "logoRecognitionAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "personDetectionAnnotations")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "segmentLabelAnnotations")
-              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
-              Core.<*> (o Core..:? "shotLabelAnnotations")
-              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "speechTranscriptions")
-              Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "explicitAnnotation")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "faceDetectionAnnotations")
+            Core.<*> (o Core..:? "frameLabelAnnotations")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "logoRecognitionAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "personDetectionAnnotations")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segmentLabelAnnotations")
+            Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "shotLabelAnnotations")
+            Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "speechTranscriptions")
+            Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1_VideoAnnotationResults
   where
-  toJSON
-    GoogleCloudVideointelligenceV1_VideoAnnotationResults {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("error" Core..=) Core.<$> error,
-              ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
-              ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
-              ("faceDetectionAnnotations" Core..=)
-                Core.<$> faceDetectionAnnotations,
-              ("frameLabelAnnotations" Core..=)
-                Core.<$> frameLabelAnnotations,
-              ("inputUri" Core..=) Core.<$> inputUri,
-              ("logoRecognitionAnnotations" Core..=)
-                Core.<$> logoRecognitionAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
-              ("personDetectionAnnotations" Core..=)
-                Core.<$> personDetectionAnnotations,
-              ("segment" Core..=) Core.<$> segment,
-              ("segmentLabelAnnotations" Core..=)
-                Core.<$> segmentLabelAnnotations,
-              ("segmentPresenceLabelAnnotations" Core..=)
-                Core.<$> segmentPresenceLabelAnnotations,
-              ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
-              ("shotLabelAnnotations" Core..=)
-                Core.<$> shotLabelAnnotations,
-              ("shotPresenceLabelAnnotations" Core..=)
-                Core.<$> shotPresenceLabelAnnotations,
-              ("speechTranscriptions" Core..=)
-                Core.<$> speechTranscriptions,
-              ("textAnnotations" Core..=)
-                Core.<$> textAnnotations
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1_VideoAnnotationResults {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
+            ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
+            ("faceDetectionAnnotations" Core..=)
+              Core.<$> faceDetectionAnnotations,
+            ("frameLabelAnnotations" Core..=) Core.<$> frameLabelAnnotations,
+            ("inputUri" Core..=) Core.<$> inputUri,
+            ("logoRecognitionAnnotations" Core..=)
+              Core.<$> logoRecognitionAnnotations,
+            ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
+            ("personDetectionAnnotations" Core..=)
+              Core.<$> personDetectionAnnotations,
+            ("segment" Core..=) Core.<$> segment,
+            ("segmentLabelAnnotations" Core..=)
+              Core.<$> segmentLabelAnnotations,
+            ("segmentPresenceLabelAnnotations" Core..=)
+              Core.<$> segmentPresenceLabelAnnotations,
+            ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
+            ("shotLabelAnnotations" Core..=) Core.<$> shotLabelAnnotations,
+            ("shotPresenceLabelAnnotations" Core..=)
+              Core.<$> shotPresenceLabelAnnotations,
+            ("speechTranscriptions" Core..=) Core.<$> speechTranscriptions,
+            ("textAnnotations" Core..=) Core.<$> textAnnotations
+          ]
+      )
 
 -- | Video segment.
 --
@@ -2378,14 +2308,12 @@ newGoogleCloudVideointelligenceV1_VideoSegment ::
   GoogleCloudVideointelligenceV1_VideoSegment
 newGoogleCloudVideointelligenceV1_VideoSegment =
   GoogleCloudVideointelligenceV1_VideoSegment
-    { endTimeOffset = Core.Nothing,
+    { endTimeOffset =
+        Core.Nothing,
       startTimeOffset = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_VideoSegment
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_VideoSegment where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_VideoSegment"
@@ -2395,19 +2323,14 @@ instance
             Core.<*> (o Core..:? "startTimeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_VideoSegment
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1_VideoSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
-              ("startTimeOffset" Core..=)
-                Core.<$> startTimeOffset
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1_VideoSegment where
+  toJSON GoogleCloudVideointelligenceV1_VideoSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
+            ("startTimeOffset" Core..=) Core.<$> startTimeOffset
+          ]
+      )
 
 -- | Word-specific information for recognized words. Word information is only included in the response when certain request parameters are set, such as @enable_word_time_offsets@.
 --
@@ -2431,17 +2354,15 @@ newGoogleCloudVideointelligenceV1_WordInfo ::
   GoogleCloudVideointelligenceV1_WordInfo
 newGoogleCloudVideointelligenceV1_WordInfo =
   GoogleCloudVideointelligenceV1_WordInfo
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       endTime = Core.Nothing,
       speakerTag = Core.Nothing,
       startTime = Core.Nothing,
       word = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1_WordInfo
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1_WordInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1_WordInfo"
@@ -2454,10 +2375,7 @@ instance
             Core.<*> (o Core..:? "word")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1_WordInfo
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1_WordInfo where
   toJSON GoogleCloudVideointelligenceV1_WordInfo {..} =
     Core.object
       ( Core.catMaybes
@@ -2486,7 +2404,8 @@ newGoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress ::
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
 newGoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress
-    { annotationProgress = Core.Nothing
+    { annotationProgress =
+        Core.Nothing
     }
 
 instance
@@ -2509,9 +2428,7 @@ instance
     GoogleCloudVideointelligenceV1beta2_AnnotateVideoProgress {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationProgress" Core..=)
-                Core.<$> annotationProgress
-            ]
+            [("annotationProgress" Core..=) Core.<$> annotationProgress]
         )
 
 -- | Video annotation response. Included in the @response@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
@@ -2531,7 +2448,8 @@ newGoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
 newGoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse
-    { annotationResults = Core.Nothing
+    { annotationResults =
+        Core.Nothing
     }
 
 instance
@@ -2554,9 +2472,7 @@ instance
     GoogleCloudVideointelligenceV1beta2_AnnotateVideoResponse {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults
-            ]
+            [("annotationResults" Core..=) Core.<$> annotationResults]
         )
 
 -- | A generic detected attribute represented by name in string format.
@@ -2577,7 +2493,8 @@ newGoogleCloudVideointelligenceV1beta2_DetectedAttribute ::
   GoogleCloudVideointelligenceV1beta2_DetectedAttribute
 newGoogleCloudVideointelligenceV1beta2_DetectedAttribute =
   GoogleCloudVideointelligenceV1beta2_DetectedAttribute
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       value = Core.Nothing
     }
@@ -2592,23 +2509,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_DetectedAttribute
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "value")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_DetectedAttribute
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_DetectedAttribute {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_DetectedAttribute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | A generic detected landmark represented by name in string format and a 2D location.
 --
@@ -2628,7 +2544,8 @@ newGoogleCloudVideointelligenceV1beta2_DetectedLandmark ::
   GoogleCloudVideointelligenceV1beta2_DetectedLandmark
 newGoogleCloudVideointelligenceV1beta2_DetectedLandmark =
   GoogleCloudVideointelligenceV1beta2_DetectedLandmark
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       point = Core.Nothing
     }
@@ -2643,23 +2560,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_DetectedLandmark
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "point")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "point")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_DetectedLandmark
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_DetectedLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("point" Core..=) Core.<$> point
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_DetectedLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("point" Core..=) Core.<$> point
+          ]
+      )
 
 -- | Detected entity from video analysis.
 --
@@ -2679,15 +2595,13 @@ newGoogleCloudVideointelligenceV1beta2_Entity ::
   GoogleCloudVideointelligenceV1beta2_Entity
 newGoogleCloudVideointelligenceV1beta2_Entity =
   GoogleCloudVideointelligenceV1beta2_Entity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       languageCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1beta2_Entity
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1beta2_Entity where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1beta2_Entity"
@@ -2698,10 +2612,7 @@ instance
             Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_Entity
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_Entity where
   toJSON GoogleCloudVideointelligenceV1beta2_Entity {..} =
     Core.object
       ( Core.catMaybes
@@ -2730,7 +2641,8 @@ newGoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation ::
   GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
 newGoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -2744,7 +2656,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -2779,7 +2691,8 @@ newGoogleCloudVideointelligenceV1beta2_ExplicitContentFrame ::
   GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
 newGoogleCloudVideointelligenceV1beta2_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
-    { pornographyLikelihood = Core.Nothing,
+    { pornographyLikelihood =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -2793,22 +2706,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
             Core.<$> (o Core..:? "pornographyLikelihood")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("pornographyLikelihood" Core..=)
-                Core.<$> pornographyLikelihood,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_ExplicitContentFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pornographyLikelihood" Core..=) Core.<$> pornographyLikelihood,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Deprecated. No effect.
 --
@@ -2828,7 +2739,8 @@ newGoogleCloudVideointelligenceV1beta2_FaceAnnotation ::
   GoogleCloudVideointelligenceV1beta2_FaceAnnotation
 newGoogleCloudVideointelligenceV1beta2_FaceAnnotation =
   GoogleCloudVideointelligenceV1beta2_FaceAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       segments = Core.Nothing,
       thumbnail = Core.Nothing
     }
@@ -2843,23 +2755,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "thumbnail")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "thumbnail")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_FaceAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_FaceAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("thumbnail" Core..=) Core.<$> thumbnail
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_FaceAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("thumbnail" Core..=) Core.<$> thumbnail
+          ]
+      )
 
 -- | Face detection annotation.
 --
@@ -2879,7 +2790,8 @@ newGoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation ::
   GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation
 newGoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation =
   GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation
-    { thumbnail = Core.Nothing,
+    { thumbnail =
+        Core.Nothing,
       tracks = Core.Nothing,
       version = Core.Nothing
     }
@@ -2894,8 +2806,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -2931,7 +2843,8 @@ newGoogleCloudVideointelligenceV1beta2_FaceFrame ::
   GoogleCloudVideointelligenceV1beta2_FaceFrame
 newGoogleCloudVideointelligenceV1beta2_FaceFrame =
   GoogleCloudVideointelligenceV1beta2_FaceFrame
-    { normalizedBoundingBoxes = Core.Nothing,
+    { normalizedBoundingBoxes =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -2945,22 +2858,18 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_FaceFrame
             Core.<$> (o Core..:? "normalizedBoundingBoxes")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_FaceFrame
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_FaceFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBoxes" Core..=)
-                Core.<$> normalizedBoundingBoxes,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_FaceFrame where
+  toJSON GoogleCloudVideointelligenceV1beta2_FaceFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBoxes" Core..=)
+              Core.<$> normalizedBoundingBoxes,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for face detection.
 --
@@ -2975,7 +2884,10 @@ newtype GoogleCloudVideointelligenceV1beta2_FaceSegment = GoogleCloudVideointell
 newGoogleCloudVideointelligenceV1beta2_FaceSegment ::
   GoogleCloudVideointelligenceV1beta2_FaceSegment
 newGoogleCloudVideointelligenceV1beta2_FaceSegment =
-  GoogleCloudVideointelligenceV1beta2_FaceSegment {segment = Core.Nothing}
+  GoogleCloudVideointelligenceV1beta2_FaceSegment
+    { segment =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2993,12 +2905,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_FaceSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_FaceSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [("segment" Core..=) Core.<$> segment]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_FaceSegment {..} =
+    Core.object
+      (Core.catMaybes [("segment" Core..=) Core.<$> segment])
 
 -- | Label annotation.
 --
@@ -3022,7 +2931,8 @@ newGoogleCloudVideointelligenceV1beta2_LabelAnnotation ::
   GoogleCloudVideointelligenceV1beta2_LabelAnnotation
 newGoogleCloudVideointelligenceV1beta2_LabelAnnotation =
   GoogleCloudVideointelligenceV1beta2_LabelAnnotation
-    { categoryEntities = Core.Nothing,
+    { categoryEntities =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segments = Core.Nothing,
@@ -3039,28 +2949,26 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LabelAnnotation
             Core.<$> (o Core..:? "categoryEntities")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_LabelAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_LabelAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("categoryEntities" Core..=)
-                Core.<$> categoryEntities,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_LabelAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("categoryEntities" Core..=) Core.<$> categoryEntities,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for label detection.
 --
@@ -3078,7 +2986,8 @@ newGoogleCloudVideointelligenceV1beta2_LabelFrame ::
   GoogleCloudVideointelligenceV1beta2_LabelFrame
 newGoogleCloudVideointelligenceV1beta2_LabelFrame =
   GoogleCloudVideointelligenceV1beta2_LabelFrame
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -3092,21 +3001,17 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LabelFrame
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_LabelFrame
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_LabelFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_LabelFrame where
+  toJSON GoogleCloudVideointelligenceV1beta2_LabelFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for label detection.
 --
@@ -3124,7 +3029,8 @@ newGoogleCloudVideointelligenceV1beta2_LabelSegment ::
   GoogleCloudVideointelligenceV1beta2_LabelSegment
 newGoogleCloudVideointelligenceV1beta2_LabelSegment =
   GoogleCloudVideointelligenceV1beta2_LabelSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
@@ -3138,21 +3044,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LabelSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_LabelSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_LabelSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_LabelSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | Annotation corresponding to one detected, tracked and recognized logo class.
 --
@@ -3172,7 +3077,8 @@ newGoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation
 newGoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation =
   GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation
-    { entity = Core.Nothing,
+    { entity =
+        Core.Nothing,
       segments = Core.Nothing,
       tracks = Core.Nothing
     }
@@ -3187,8 +3093,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -3225,7 +3131,8 @@ newGoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox ::
   GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox
 newGoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox =
   GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox
-    { bottom = Core.Nothing,
+    { bottom =
+        Core.Nothing,
       left = Core.Nothing,
       right = Core.Nothing,
       top = Core.Nothing
@@ -3240,9 +3147,10 @@ instance
       "GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox
-            Core.<$> (o Core..:? "bottom") Core.<*> (o Core..:? "left")
-              Core.<*> (o Core..:? "right")
-              Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "bottom")
+            Core.<*> (o Core..:? "left")
+            Core.<*> (o Core..:? "right")
+            Core.<*> (o Core..:? "top")
       )
 
 instance
@@ -3274,7 +3182,8 @@ newGoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly ::
   GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly
 newGoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly
-    { vertices = Core.Nothing
+    { vertices =
+        Core.Nothing
     }
 
 instance
@@ -3296,9 +3205,7 @@ instance
   toJSON
     GoogleCloudVideointelligenceV1beta2_NormalizedBoundingPoly {..} =
       Core.object
-        ( Core.catMaybes
-            [("vertices" Core..=) Core.<$> vertices]
-        )
+        (Core.catMaybes [("vertices" Core..=) Core.<$> vertices])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -3316,7 +3223,8 @@ newGoogleCloudVideointelligenceV1beta2_NormalizedVertex ::
   GoogleCloudVideointelligenceV1beta2_NormalizedVertex
 newGoogleCloudVideointelligenceV1beta2_NormalizedVertex =
   GoogleCloudVideointelligenceV1beta2_NormalizedVertex
-    { x = Core.Nothing,
+    { x =
+        Core.Nothing,
       y = Core.Nothing
     }
 
@@ -3329,19 +3237,19 @@ instance
       "GoogleCloudVideointelligenceV1beta2_NormalizedVertex"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_NormalizedVertex
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_NormalizedVertex {..} =
-      Core.object
-        ( Core.catMaybes
-            [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_NormalizedVertex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
+      )
 
 -- | Annotations corresponding to one tracked object.
 --
@@ -3370,7 +3278,8 @@ newGoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation ::
   GoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation
 newGoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation =
   GoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing,
@@ -3388,13 +3297,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "trackId"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "trackId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -3409,8 +3316,7 @@ instance
               ("entity" Core..=) Core.<$> entity,
               ("frames" Core..=) Core.<$> frames,
               ("segment" Core..=) Core.<$> segment,
-              ("trackId" Core..=) Core.. Core.AsText
-                Core.<$> trackId,
+              ("trackId" Core..=) Core.. Core.AsText Core.<$> trackId,
               ("version" Core..=) Core.<$> version
             ]
         )
@@ -3434,7 +3340,8 @@ newGoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame ::
   GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame
 newGoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame
-    { normalizedBoundingBox = Core.Nothing,
+    { normalizedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -3448,22 +3355,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame
             Core.<$> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_ObjectTrackingFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Person detection annotation per video.
 --
@@ -3481,7 +3386,8 @@ newGoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation ::
   GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation
 newGoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation =
   GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation
-    { tracks = Core.Nothing,
+    { tracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -3495,7 +3401,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation
             Core.<$> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -3529,7 +3435,8 @@ newGoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative ::
   GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
 newGoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       transcript = Core.Nothing,
       words = Core.Nothing
     }
@@ -3544,8 +3451,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words")
+            Core.<*> (o Core..:? "transcript")
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -3581,7 +3488,8 @@ newGoogleCloudVideointelligenceV1beta2_SpeechTranscription ::
   GoogleCloudVideointelligenceV1beta2_SpeechTranscription
 newGoogleCloudVideointelligenceV1beta2_SpeechTranscription =
   GoogleCloudVideointelligenceV1beta2_SpeechTranscription
-    { alternatives = Core.Nothing,
+    { alternatives =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -3595,21 +3503,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_SpeechTranscription
             Core.<$> (o Core..:? "alternatives")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_SpeechTranscription
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_SpeechTranscription {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("alternatives" Core..=) Core.<$> alternatives,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_SpeechTranscription {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alternatives" Core..=) Core.<$> alternatives,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Annotations related to one detected OCR text snippet. This will contain the corresponding text, confidence value, and frame level information for each detection.
 --
@@ -3629,7 +3536,8 @@ newGoogleCloudVideointelligenceV1beta2_TextAnnotation ::
   GoogleCloudVideointelligenceV1beta2_TextAnnotation
 newGoogleCloudVideointelligenceV1beta2_TextAnnotation =
   GoogleCloudVideointelligenceV1beta2_TextAnnotation
-    { segments = Core.Nothing,
+    { segments =
+        Core.Nothing,
       text = Core.Nothing,
       version = Core.Nothing
     }
@@ -3643,23 +3551,23 @@ instance
       "GoogleCloudVideointelligenceV1beta2_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TextAnnotation
-            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
-              Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "segments")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_TextAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_TextAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("segments" Core..=) Core.<$> segments,
-              ("text" Core..=) Core.<$> text,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_TextAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("segments" Core..=) Core.<$> segments,
+            ("text" Core..=) Core.<$> text,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for text annotation (OCR). Contains information regarding timestamp and bounding box locations for the frames containing detected OCR text snippets.
 --
@@ -3680,7 +3588,8 @@ newGoogleCloudVideointelligenceV1beta2_TextFrame ::
   GoogleCloudVideointelligenceV1beta2_TextFrame
 newGoogleCloudVideointelligenceV1beta2_TextFrame =
   GoogleCloudVideointelligenceV1beta2_TextFrame
-    { rotatedBoundingBox = Core.Nothing,
+    { rotatedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -3694,22 +3603,17 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TextFrame
             Core.<$> (o Core..:? "rotatedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_TextFrame
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_TextFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("rotatedBoundingBox" Core..=)
-                Core.<$> rotatedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_TextFrame where
+  toJSON GoogleCloudVideointelligenceV1beta2_TextFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rotatedBoundingBox" Core..=) Core.<$> rotatedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for text detection.
 --
@@ -3729,7 +3633,8 @@ newGoogleCloudVideointelligenceV1beta2_TextSegment ::
   GoogleCloudVideointelligenceV1beta2_TextSegment
 newGoogleCloudVideointelligenceV1beta2_TextSegment =
   GoogleCloudVideointelligenceV1beta2_TextSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing
     }
@@ -3744,23 +3649,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_TextSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_TextSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("frames" Core..=) Core.<$> frames,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_TextSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("frames" Core..=) Core.<$> frames,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | For tracking related features. An object at time/offset with attributes, and located with normalized/bounding_box.
 --
@@ -3788,7 +3692,8 @@ newGoogleCloudVideointelligenceV1beta2_TimestampedObject ::
   GoogleCloudVideointelligenceV1beta2_TimestampedObject
 newGoogleCloudVideointelligenceV1beta2_TimestampedObject =
   GoogleCloudVideointelligenceV1beta2_TimestampedObject
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       landmarks = Core.Nothing,
       normalizedBoundingBox = Core.Nothing,
       timeOffset = Core.Nothing
@@ -3804,26 +3709,24 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_TimestampedObject
             Core.<$> (o Core..:? "attributes")
-              Core.<*> (o Core..:? "landmarks")
-              Core.<*> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "landmarks")
+            Core.<*> (o Core..:? "normalizedBoundingBox")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_TimestampedObject
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_TimestampedObject {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("landmarks" Core..=) Core.<$> landmarks,
-              ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_TimestampedObject {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("landmarks" Core..=) Core.<$> landmarks,
+            ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | A track of an object instance.
 --
@@ -3851,16 +3754,14 @@ newGoogleCloudVideointelligenceV1beta2_Track ::
   GoogleCloudVideointelligenceV1beta2_Track
 newGoogleCloudVideointelligenceV1beta2_Track =
   GoogleCloudVideointelligenceV1beta2_Track
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       confidence = Core.Nothing,
       segment = Core.Nothing,
       timestampedObjects = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1beta2_Track
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1beta2_Track where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1beta2_Track"
@@ -3872,18 +3773,14 @@ instance
             Core.<*> (o Core..:? "timestampedObjects")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_Track
-  where
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_Track where
   toJSON GoogleCloudVideointelligenceV1beta2_Track {..} =
     Core.object
       ( Core.catMaybes
           [ ("attributes" Core..=) Core.<$> attributes,
             ("confidence" Core..=) Core.<$> confidence,
             ("segment" Core..=) Core.<$> segment,
-            ("timestampedObjects" Core..=)
-              Core.<$> timestampedObjects
+            ("timestampedObjects" Core..=) Core.<$> timestampedObjects
           ]
       )
 
@@ -3914,7 +3811,8 @@ newGoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress ::
   GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
 newGoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress =
   GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
-    { feature = Core.Nothing,
+    { feature =
+        Core.Nothing,
       inputUri = Core.Nothing,
       progressPercent = Core.Nothing,
       segment = Core.Nothing,
@@ -3932,11 +3830,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_VideoAnnotationProgress
             Core.<$> (o Core..:? "feature")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "progressPercent")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
@@ -4020,21 +3918,28 @@ newGoogleCloudVideointelligenceV1beta2_VideoAnnotationResults ::
   GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
 newGoogleCloudVideointelligenceV1beta2_VideoAnnotationResults =
   GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       explicitAnnotation = Core.Nothing,
       faceAnnotations = Core.Nothing,
-      faceDetectionAnnotations = Core.Nothing,
+      faceDetectionAnnotations =
+        Core.Nothing,
       frameLabelAnnotations = Core.Nothing,
       inputUri = Core.Nothing,
-      logoRecognitionAnnotations = Core.Nothing,
+      logoRecognitionAnnotations =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
-      personDetectionAnnotations = Core.Nothing,
+      personDetectionAnnotations =
+        Core.Nothing,
       segment = Core.Nothing,
-      segmentLabelAnnotations = Core.Nothing,
-      segmentPresenceLabelAnnotations = Core.Nothing,
+      segmentLabelAnnotations =
+        Core.Nothing,
+      segmentPresenceLabelAnnotations =
+        Core.Nothing,
       shotAnnotations = Core.Nothing,
       shotLabelAnnotations = Core.Nothing,
-      shotPresenceLabelAnnotations = Core.Nothing,
+      shotPresenceLabelAnnotations =
+        Core.Nothing,
       speechTranscriptions = Core.Nothing,
       textAnnotations = Core.Nothing
     }
@@ -4049,22 +3954,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "faceDetectionAnnotations")
-              Core.<*> (o Core..:? "frameLabelAnnotations")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "logoRecognitionAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "personDetectionAnnotations")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "segmentLabelAnnotations")
-              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
-              Core.<*> (o Core..:? "shotLabelAnnotations")
-              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "speechTranscriptions")
-              Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "explicitAnnotation")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "faceDetectionAnnotations")
+            Core.<*> (o Core..:? "frameLabelAnnotations")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "logoRecognitionAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "personDetectionAnnotations")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segmentLabelAnnotations")
+            Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "shotLabelAnnotations")
+            Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "speechTranscriptions")
+            Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -4076,18 +3981,15 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("error" Core..=) Core.<$> error,
-              ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
+              ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
               ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
               ("faceDetectionAnnotations" Core..=)
                 Core.<$> faceDetectionAnnotations,
-              ("frameLabelAnnotations" Core..=)
-                Core.<$> frameLabelAnnotations,
+              ("frameLabelAnnotations" Core..=) Core.<$> frameLabelAnnotations,
               ("inputUri" Core..=) Core.<$> inputUri,
               ("logoRecognitionAnnotations" Core..=)
                 Core.<$> logoRecognitionAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("personDetectionAnnotations" Core..=)
                 Core.<$> personDetectionAnnotations,
               ("segment" Core..=) Core.<$> segment,
@@ -4096,14 +3998,11 @@ instance
               ("segmentPresenceLabelAnnotations" Core..=)
                 Core.<$> segmentPresenceLabelAnnotations,
               ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
-              ("shotLabelAnnotations" Core..=)
-                Core.<$> shotLabelAnnotations,
+              ("shotLabelAnnotations" Core..=) Core.<$> shotLabelAnnotations,
               ("shotPresenceLabelAnnotations" Core..=)
                 Core.<$> shotPresenceLabelAnnotations,
-              ("speechTranscriptions" Core..=)
-                Core.<$> speechTranscriptions,
-              ("textAnnotations" Core..=)
-                Core.<$> textAnnotations
+              ("speechTranscriptions" Core..=) Core.<$> speechTranscriptions,
+              ("textAnnotations" Core..=) Core.<$> textAnnotations
             ]
         )
 
@@ -4123,7 +4022,8 @@ newGoogleCloudVideointelligenceV1beta2_VideoSegment ::
   GoogleCloudVideointelligenceV1beta2_VideoSegment
 newGoogleCloudVideointelligenceV1beta2_VideoSegment =
   GoogleCloudVideointelligenceV1beta2_VideoSegment
-    { endTimeOffset = Core.Nothing,
+    { endTimeOffset =
+        Core.Nothing,
       startTimeOffset = Core.Nothing
     }
 
@@ -4137,22 +4037,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1beta2_VideoSegment
             Core.<$> (o Core..:? "endTimeOffset")
-              Core.<*> (o Core..:? "startTimeOffset")
+            Core.<*> (o Core..:? "startTimeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1beta2_VideoSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_VideoSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
-              ("startTimeOffset" Core..=)
-                Core.<$> startTimeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1beta2_VideoSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
+            ("startTimeOffset" Core..=) Core.<$> startTimeOffset
+          ]
+      )
 
 -- | Word-specific information for recognized words. Word information is only included in the response when certain request parameters are set, such as @enable_word_time_offsets@.
 --
@@ -4176,17 +4074,15 @@ newGoogleCloudVideointelligenceV1beta2_WordInfo ::
   GoogleCloudVideointelligenceV1beta2_WordInfo
 newGoogleCloudVideointelligenceV1beta2_WordInfo =
   GoogleCloudVideointelligenceV1beta2_WordInfo
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       endTime = Core.Nothing,
       speakerTag = Core.Nothing,
       startTime = Core.Nothing,
       word = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1beta2_WordInfo
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1beta2_WordInfo where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1beta2_WordInfo"
@@ -4199,21 +4095,17 @@ instance
             Core.<*> (o Core..:? "word")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1beta2_WordInfo
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1beta2_WordInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("speakerTag" Core..=) Core.<$> speakerTag,
-              ("startTime" Core..=) Core.<$> startTime,
-              ("word" Core..=) Core.<$> word
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1beta2_WordInfo where
+  toJSON GoogleCloudVideointelligenceV1beta2_WordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("speakerTag" Core..=) Core.<$> speakerTag,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
 
 -- | Video annotation progress. Included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -4232,7 +4124,8 @@ newGoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress ::
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
 newGoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress
-    { annotationProgress = Core.Nothing
+    { annotationProgress =
+        Core.Nothing
     }
 
 instance
@@ -4255,9 +4148,7 @@ instance
     GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoProgress {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationProgress" Core..=)
-                Core.<$> annotationProgress
-            ]
+            [("annotationProgress" Core..=) Core.<$> annotationProgress]
         )
 
 -- | Video annotation response. Included in the @response@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
@@ -4277,7 +4168,8 @@ newGoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
 newGoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse
-    { annotationResults = Core.Nothing
+    { annotationResults =
+        Core.Nothing
     }
 
 instance
@@ -4300,9 +4192,7 @@ instance
     GoogleCloudVideointelligenceV1p1beta1_AnnotateVideoResponse {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults
-            ]
+            [("annotationResults" Core..=) Core.<$> annotationResults]
         )
 
 -- | A generic detected attribute represented by name in string format.
@@ -4323,7 +4213,8 @@ newGoogleCloudVideointelligenceV1p1beta1_DetectedAttribute ::
   GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute
 newGoogleCloudVideointelligenceV1p1beta1_DetectedAttribute =
   GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       value = Core.Nothing
     }
@@ -4338,23 +4229,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "value")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_DetectedAttribute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | A generic detected landmark represented by name in string format and a 2D location.
 --
@@ -4374,7 +4264,8 @@ newGoogleCloudVideointelligenceV1p1beta1_DetectedLandmark ::
   GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark
 newGoogleCloudVideointelligenceV1p1beta1_DetectedLandmark =
   GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       point = Core.Nothing
     }
@@ -4389,23 +4280,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "point")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "point")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("point" Core..=) Core.<$> point
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_DetectedLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("point" Core..=) Core.<$> point
+          ]
+      )
 
 -- | Detected entity from video analysis.
 --
@@ -4425,15 +4315,13 @@ newGoogleCloudVideointelligenceV1p1beta1_Entity ::
   GoogleCloudVideointelligenceV1p1beta1_Entity
 newGoogleCloudVideointelligenceV1p1beta1_Entity =
   GoogleCloudVideointelligenceV1p1beta1_Entity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       languageCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p1beta1_Entity
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p1beta1_Entity where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p1beta1_Entity"
@@ -4444,19 +4332,15 @@ instance
             Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p1beta1_Entity
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_Entity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p1beta1_Entity where
+  toJSON GoogleCloudVideointelligenceV1p1beta1_Entity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Explicit content annotation (based on per-frame visual signals only). If no explicit content has been detected in a frame, no annotations are present for that frame.
 --
@@ -4477,7 +4361,8 @@ newGoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -4491,7 +4376,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -4526,7 +4411,8 @@ newGoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame ::
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
 newGoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
-    { pornographyLikelihood = Core.Nothing,
+    { pornographyLikelihood =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -4540,7 +4426,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame
             Core.<$> (o Core..:? "pornographyLikelihood")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -4551,8 +4437,7 @@ instance
     GoogleCloudVideointelligenceV1p1beta1_ExplicitContentFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("pornographyLikelihood" Core..=)
-                Core.<$> pornographyLikelihood,
+            [ ("pornographyLikelihood" Core..=) Core.<$> pornographyLikelihood,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -4575,7 +4460,8 @@ newGoogleCloudVideointelligenceV1p1beta1_FaceAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_FaceAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       segments = Core.Nothing,
       thumbnail = Core.Nothing
     }
@@ -4590,23 +4476,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "thumbnail")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "thumbnail")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("thumbnail" Core..=) Core.<$> thumbnail
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("thumbnail" Core..=) Core.<$> thumbnail
+          ]
+      )
 
 -- | Face detection annotation.
 --
@@ -4626,7 +4511,8 @@ newGoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation
-    { thumbnail = Core.Nothing,
+    { thumbnail =
+        Core.Nothing,
       tracks = Core.Nothing,
       version = Core.Nothing
     }
@@ -4641,8 +4527,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -4678,7 +4564,8 @@ newGoogleCloudVideointelligenceV1p1beta1_FaceFrame ::
   GoogleCloudVideointelligenceV1p1beta1_FaceFrame
 newGoogleCloudVideointelligenceV1p1beta1_FaceFrame =
   GoogleCloudVideointelligenceV1p1beta1_FaceFrame
-    { normalizedBoundingBoxes = Core.Nothing,
+    { normalizedBoundingBoxes =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -4692,22 +4579,21 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_FaceFrame
             Core.<$> (o Core..:? "normalizedBoundingBoxes")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_FaceFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_FaceFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBoxes" Core..=)
-                Core.<$> normalizedBoundingBoxes,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_FaceFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBoxes" Core..=)
+              Core.<$> normalizedBoundingBoxes,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for face detection.
 --
@@ -4722,7 +4608,10 @@ newtype GoogleCloudVideointelligenceV1p1beta1_FaceSegment = GoogleCloudVideointe
 newGoogleCloudVideointelligenceV1p1beta1_FaceSegment ::
   GoogleCloudVideointelligenceV1p1beta1_FaceSegment
 newGoogleCloudVideointelligenceV1p1beta1_FaceSegment =
-  GoogleCloudVideointelligenceV1p1beta1_FaceSegment {segment = Core.Nothing}
+  GoogleCloudVideointelligenceV1p1beta1_FaceSegment
+    { segment =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -4740,12 +4629,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_FaceSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_FaceSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [("segment" Core..=) Core.<$> segment]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_FaceSegment {..} =
+    Core.object
+      (Core.catMaybes [("segment" Core..=) Core.<$> segment])
 
 -- | Label annotation.
 --
@@ -4769,7 +4655,8 @@ newGoogleCloudVideointelligenceV1p1beta1_LabelAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_LabelAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
-    { categoryEntities = Core.Nothing,
+    { categoryEntities =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segments = Core.Nothing,
@@ -4786,28 +4673,26 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
             Core.<$> (o Core..:? "categoryEntities")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("categoryEntities" Core..=)
-                Core.<$> categoryEntities,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("categoryEntities" Core..=) Core.<$> categoryEntities,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for label detection.
 --
@@ -4825,7 +4710,8 @@ newGoogleCloudVideointelligenceV1p1beta1_LabelFrame ::
   GoogleCloudVideointelligenceV1p1beta1_LabelFrame
 newGoogleCloudVideointelligenceV1p1beta1_LabelFrame =
   GoogleCloudVideointelligenceV1p1beta1_LabelFrame
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -4839,21 +4725,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LabelFrame
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_LabelFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_LabelFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_LabelFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for label detection.
 --
@@ -4871,7 +4756,8 @@ newGoogleCloudVideointelligenceV1p1beta1_LabelSegment ::
   GoogleCloudVideointelligenceV1p1beta1_LabelSegment
 newGoogleCloudVideointelligenceV1p1beta1_LabelSegment =
   GoogleCloudVideointelligenceV1p1beta1_LabelSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
@@ -4885,21 +4771,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LabelSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_LabelSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_LabelSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_LabelSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | Annotation corresponding to one detected, tracked and recognized logo class.
 --
@@ -4919,7 +4804,8 @@ newGoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation
-    { entity = Core.Nothing,
+    { entity =
+        Core.Nothing,
       segments = Core.Nothing,
       tracks = Core.Nothing
     }
@@ -4934,8 +4820,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -4972,7 +4858,8 @@ newGoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox ::
   GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox
 newGoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox =
   GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox
-    { bottom = Core.Nothing,
+    { bottom =
+        Core.Nothing,
       left = Core.Nothing,
       right = Core.Nothing,
       top = Core.Nothing
@@ -4987,9 +4874,10 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox
-            Core.<$> (o Core..:? "bottom") Core.<*> (o Core..:? "left")
-              Core.<*> (o Core..:? "right")
-              Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "bottom")
+            Core.<*> (o Core..:? "left")
+            Core.<*> (o Core..:? "right")
+            Core.<*> (o Core..:? "top")
       )
 
 instance
@@ -5024,7 +4912,8 @@ newGoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly ::
   GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly
 newGoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly
-    { vertices = Core.Nothing
+    { vertices =
+        Core.Nothing
     }
 
 instance
@@ -5046,9 +4935,7 @@ instance
   toJSON
     GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingPoly {..} =
       Core.object
-        ( Core.catMaybes
-            [("vertices" Core..=) Core.<$> vertices]
-        )
+        (Core.catMaybes [("vertices" Core..=) Core.<$> vertices])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -5066,7 +4953,8 @@ newGoogleCloudVideointelligenceV1p1beta1_NormalizedVertex ::
   GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex
 newGoogleCloudVideointelligenceV1p1beta1_NormalizedVertex =
   GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex
-    { x = Core.Nothing,
+    { x =
+        Core.Nothing,
       y = Core.Nothing
     }
 
@@ -5079,19 +4967,19 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex {..} =
-      Core.object
-        ( Core.catMaybes
-            [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_NormalizedVertex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
+      )
 
 -- | Annotations corresponding to one tracked object.
 --
@@ -5120,7 +5008,8 @@ newGoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing,
@@ -5138,13 +5027,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "trackId"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "trackId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -5159,8 +5046,7 @@ instance
               ("entity" Core..=) Core.<$> entity,
               ("frames" Core..=) Core.<$> frames,
               ("segment" Core..=) Core.<$> segment,
-              ("trackId" Core..=) Core.. Core.AsText
-                Core.<$> trackId,
+              ("trackId" Core..=) Core.. Core.AsText Core.<$> trackId,
               ("version" Core..=) Core.<$> version
             ]
         )
@@ -5184,7 +5070,8 @@ newGoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame ::
   GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame
 newGoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame
-    { normalizedBoundingBox = Core.Nothing,
+    { normalizedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -5198,7 +5085,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame
             Core.<$> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -5209,8 +5096,7 @@ instance
     GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
+            [ ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -5231,7 +5117,8 @@ newGoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation
-    { tracks = Core.Nothing,
+    { tracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -5245,7 +5132,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation
             Core.<$> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -5279,7 +5166,8 @@ newGoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative ::
   GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
 newGoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       transcript = Core.Nothing,
       words = Core.Nothing
     }
@@ -5294,8 +5182,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words")
+            Core.<*> (o Core..:? "transcript")
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -5331,7 +5219,8 @@ newGoogleCloudVideointelligenceV1p1beta1_SpeechTranscription ::
   GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
 newGoogleCloudVideointelligenceV1p1beta1_SpeechTranscription =
   GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
-    { alternatives = Core.Nothing,
+    { alternatives =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -5345,7 +5234,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_SpeechTranscription
             Core.<$> (o Core..:? "alternatives")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
@@ -5379,7 +5268,8 @@ newGoogleCloudVideointelligenceV1p1beta1_TextAnnotation ::
   GoogleCloudVideointelligenceV1p1beta1_TextAnnotation
 newGoogleCloudVideointelligenceV1p1beta1_TextAnnotation =
   GoogleCloudVideointelligenceV1p1beta1_TextAnnotation
-    { segments = Core.Nothing,
+    { segments =
+        Core.Nothing,
       text = Core.Nothing,
       version = Core.Nothing
     }
@@ -5393,23 +5283,23 @@ instance
       "GoogleCloudVideointelligenceV1p1beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
-              Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "segments")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_TextAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_TextAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("segments" Core..=) Core.<$> segments,
-              ("text" Core..=) Core.<$> text,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_TextAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("segments" Core..=) Core.<$> segments,
+            ("text" Core..=) Core.<$> text,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for text annotation (OCR). Contains information regarding timestamp and bounding box locations for the frames containing detected OCR text snippets.
 --
@@ -5430,7 +5320,8 @@ newGoogleCloudVideointelligenceV1p1beta1_TextFrame ::
   GoogleCloudVideointelligenceV1p1beta1_TextFrame
 newGoogleCloudVideointelligenceV1p1beta1_TextFrame =
   GoogleCloudVideointelligenceV1p1beta1_TextFrame
-    { rotatedBoundingBox = Core.Nothing,
+    { rotatedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -5444,22 +5335,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TextFrame
             Core.<$> (o Core..:? "rotatedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_TextFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_TextFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("rotatedBoundingBox" Core..=)
-                Core.<$> rotatedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_TextFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rotatedBoundingBox" Core..=) Core.<$> rotatedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for text detection.
 --
@@ -5479,7 +5368,8 @@ newGoogleCloudVideointelligenceV1p1beta1_TextSegment ::
   GoogleCloudVideointelligenceV1p1beta1_TextSegment
 newGoogleCloudVideointelligenceV1p1beta1_TextSegment =
   GoogleCloudVideointelligenceV1p1beta1_TextSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing
     }
@@ -5494,23 +5384,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_TextSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_TextSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("frames" Core..=) Core.<$> frames,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_TextSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("frames" Core..=) Core.<$> frames,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | For tracking related features. An object at time/offset with attributes, and located with normalized/bounding_box.
 --
@@ -5541,7 +5430,8 @@ newGoogleCloudVideointelligenceV1p1beta1_TimestampedObject ::
   GoogleCloudVideointelligenceV1p1beta1_TimestampedObject
 newGoogleCloudVideointelligenceV1p1beta1_TimestampedObject =
   GoogleCloudVideointelligenceV1p1beta1_TimestampedObject
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       landmarks = Core.Nothing,
       normalizedBoundingBox = Core.Nothing,
       timeOffset = Core.Nothing
@@ -5557,26 +5447,24 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_TimestampedObject
             Core.<$> (o Core..:? "attributes")
-              Core.<*> (o Core..:? "landmarks")
-              Core.<*> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "landmarks")
+            Core.<*> (o Core..:? "normalizedBoundingBox")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_TimestampedObject
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_TimestampedObject {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("landmarks" Core..=) Core.<$> landmarks,
-              ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_TimestampedObject {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("landmarks" Core..=) Core.<$> landmarks,
+            ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | A track of an object instance.
 --
@@ -5604,16 +5492,14 @@ newGoogleCloudVideointelligenceV1p1beta1_Track ::
   GoogleCloudVideointelligenceV1p1beta1_Track
 newGoogleCloudVideointelligenceV1p1beta1_Track =
   GoogleCloudVideointelligenceV1p1beta1_Track
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       confidence = Core.Nothing,
       segment = Core.Nothing,
       timestampedObjects = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p1beta1_Track
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p1beta1_Track where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p1beta1_Track"
@@ -5625,21 +5511,16 @@ instance
             Core.<*> (o Core..:? "timestampedObjects")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p1beta1_Track
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_Track {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment,
-              ("timestampedObjects" Core..=)
-                Core.<$> timestampedObjects
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p1beta1_Track where
+  toJSON GoogleCloudVideointelligenceV1p1beta1_Track {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment,
+            ("timestampedObjects" Core..=) Core.<$> timestampedObjects
+          ]
+      )
 
 -- | Annotation progress for a single video.
 --
@@ -5668,7 +5549,8 @@ newGoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress ::
   GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
 newGoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress =
   GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
-    { feature = Core.Nothing,
+    { feature =
+        Core.Nothing,
       inputUri = Core.Nothing,
       progressPercent = Core.Nothing,
       segment = Core.Nothing,
@@ -5686,11 +5568,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationProgress
             Core.<$> (o Core..:? "feature")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "progressPercent")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
@@ -5789,22 +5671,32 @@ newGoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults ::
   GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
 newGoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults =
   GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       explicitAnnotation = Core.Nothing,
       faceAnnotations = Core.Nothing,
-      faceDetectionAnnotations = Core.Nothing,
-      frameLabelAnnotations = Core.Nothing,
+      faceDetectionAnnotations =
+        Core.Nothing,
+      frameLabelAnnotations =
+        Core.Nothing,
       inputUri = Core.Nothing,
-      logoRecognitionAnnotations = Core.Nothing,
+      logoRecognitionAnnotations =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
-      personDetectionAnnotations = Core.Nothing,
+      personDetectionAnnotations =
+        Core.Nothing,
       segment = Core.Nothing,
-      segmentLabelAnnotations = Core.Nothing,
-      segmentPresenceLabelAnnotations = Core.Nothing,
+      segmentLabelAnnotations =
+        Core.Nothing,
+      segmentPresenceLabelAnnotations =
+        Core.Nothing,
       shotAnnotations = Core.Nothing,
-      shotLabelAnnotations = Core.Nothing,
-      shotPresenceLabelAnnotations = Core.Nothing,
-      speechTranscriptions = Core.Nothing,
+      shotLabelAnnotations =
+        Core.Nothing,
+      shotPresenceLabelAnnotations =
+        Core.Nothing,
+      speechTranscriptions =
+        Core.Nothing,
       textAnnotations = Core.Nothing
     }
 
@@ -5818,22 +5710,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "faceDetectionAnnotations")
-              Core.<*> (o Core..:? "frameLabelAnnotations")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "logoRecognitionAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "personDetectionAnnotations")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "segmentLabelAnnotations")
-              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
-              Core.<*> (o Core..:? "shotLabelAnnotations")
-              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "speechTranscriptions")
-              Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "explicitAnnotation")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "faceDetectionAnnotations")
+            Core.<*> (o Core..:? "frameLabelAnnotations")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "logoRecognitionAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "personDetectionAnnotations")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segmentLabelAnnotations")
+            Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "shotLabelAnnotations")
+            Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "speechTranscriptions")
+            Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -5845,18 +5737,15 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("error" Core..=) Core.<$> error,
-              ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
+              ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
               ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
               ("faceDetectionAnnotations" Core..=)
                 Core.<$> faceDetectionAnnotations,
-              ("frameLabelAnnotations" Core..=)
-                Core.<$> frameLabelAnnotations,
+              ("frameLabelAnnotations" Core..=) Core.<$> frameLabelAnnotations,
               ("inputUri" Core..=) Core.<$> inputUri,
               ("logoRecognitionAnnotations" Core..=)
                 Core.<$> logoRecognitionAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("personDetectionAnnotations" Core..=)
                 Core.<$> personDetectionAnnotations,
               ("segment" Core..=) Core.<$> segment,
@@ -5865,14 +5754,11 @@ instance
               ("segmentPresenceLabelAnnotations" Core..=)
                 Core.<$> segmentPresenceLabelAnnotations,
               ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
-              ("shotLabelAnnotations" Core..=)
-                Core.<$> shotLabelAnnotations,
+              ("shotLabelAnnotations" Core..=) Core.<$> shotLabelAnnotations,
               ("shotPresenceLabelAnnotations" Core..=)
                 Core.<$> shotPresenceLabelAnnotations,
-              ("speechTranscriptions" Core..=)
-                Core.<$> speechTranscriptions,
-              ("textAnnotations" Core..=)
-                Core.<$> textAnnotations
+              ("speechTranscriptions" Core..=) Core.<$> speechTranscriptions,
+              ("textAnnotations" Core..=) Core.<$> textAnnotations
             ]
         )
 
@@ -5892,7 +5778,8 @@ newGoogleCloudVideointelligenceV1p1beta1_VideoSegment ::
   GoogleCloudVideointelligenceV1p1beta1_VideoSegment
 newGoogleCloudVideointelligenceV1p1beta1_VideoSegment =
   GoogleCloudVideointelligenceV1p1beta1_VideoSegment
-    { endTimeOffset = Core.Nothing,
+    { endTimeOffset =
+        Core.Nothing,
       startTimeOffset = Core.Nothing
     }
 
@@ -5906,22 +5793,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_VideoSegment
             Core.<$> (o Core..:? "endTimeOffset")
-              Core.<*> (o Core..:? "startTimeOffset")
+            Core.<*> (o Core..:? "startTimeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p1beta1_VideoSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_VideoSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
-              ("startTimeOffset" Core..=)
-                Core.<$> startTimeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p1beta1_VideoSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
+            ("startTimeOffset" Core..=) Core.<$> startTimeOffset
+          ]
+      )
 
 -- | Word-specific information for recognized words. Word information is only included in the response when certain request parameters are set, such as @enable_word_time_offsets@.
 --
@@ -5945,7 +5830,8 @@ newGoogleCloudVideointelligenceV1p1beta1_WordInfo ::
   GoogleCloudVideointelligenceV1p1beta1_WordInfo
 newGoogleCloudVideointelligenceV1p1beta1_WordInfo =
   GoogleCloudVideointelligenceV1p1beta1_WordInfo
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       endTime = Core.Nothing,
       speakerTag = Core.Nothing,
       startTime = Core.Nothing,
@@ -5962,27 +5848,23 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p1beta1_WordInfo
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "endTime")
-              Core.<*> (o Core..:? "speakerTag")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "word")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "speakerTag")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "word")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p1beta1_WordInfo
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p1beta1_WordInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("speakerTag" Core..=) Core.<$> speakerTag,
-              ("startTime" Core..=) Core.<$> startTime,
-              ("word" Core..=) Core.<$> word
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p1beta1_WordInfo where
+  toJSON GoogleCloudVideointelligenceV1p1beta1_WordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("speakerTag" Core..=) Core.<$> speakerTag,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
 
 -- | Video annotation progress. Included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -6001,7 +5883,8 @@ newGoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress ::
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
 newGoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress
-    { annotationProgress = Core.Nothing
+    { annotationProgress =
+        Core.Nothing
     }
 
 instance
@@ -6024,9 +5907,7 @@ instance
     GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoProgress {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationProgress" Core..=)
-                Core.<$> annotationProgress
-            ]
+            [("annotationProgress" Core..=) Core.<$> annotationProgress]
         )
 
 -- | Video annotation response. Included in the @response@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
@@ -6046,7 +5927,8 @@ newGoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
 newGoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse
-    { annotationResults = Core.Nothing
+    { annotationResults =
+        Core.Nothing
     }
 
 instance
@@ -6069,9 +5951,7 @@ instance
     GoogleCloudVideointelligenceV1p2beta1_AnnotateVideoResponse {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults
-            ]
+            [("annotationResults" Core..=) Core.<$> annotationResults]
         )
 
 -- | A generic detected attribute represented by name in string format.
@@ -6092,7 +5972,8 @@ newGoogleCloudVideointelligenceV1p2beta1_DetectedAttribute ::
   GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute
 newGoogleCloudVideointelligenceV1p2beta1_DetectedAttribute =
   GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       value = Core.Nothing
     }
@@ -6107,23 +5988,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "value")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_DetectedAttribute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | A generic detected landmark represented by name in string format and a 2D location.
 --
@@ -6143,7 +6023,8 @@ newGoogleCloudVideointelligenceV1p2beta1_DetectedLandmark ::
   GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark
 newGoogleCloudVideointelligenceV1p2beta1_DetectedLandmark =
   GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       point = Core.Nothing
     }
@@ -6158,23 +6039,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "point")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "point")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("point" Core..=) Core.<$> point
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_DetectedLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("point" Core..=) Core.<$> point
+          ]
+      )
 
 -- | Detected entity from video analysis.
 --
@@ -6194,15 +6074,13 @@ newGoogleCloudVideointelligenceV1p2beta1_Entity ::
   GoogleCloudVideointelligenceV1p2beta1_Entity
 newGoogleCloudVideointelligenceV1p2beta1_Entity =
   GoogleCloudVideointelligenceV1p2beta1_Entity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       languageCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p2beta1_Entity
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p2beta1_Entity where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p2beta1_Entity"
@@ -6213,19 +6091,15 @@ instance
             Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p2beta1_Entity
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_Entity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p2beta1_Entity where
+  toJSON GoogleCloudVideointelligenceV1p2beta1_Entity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Explicit content annotation (based on per-frame visual signals only). If no explicit content has been detected in a frame, no annotations are present for that frame.
 --
@@ -6246,7 +6120,8 @@ newGoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -6260,7 +6135,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -6295,7 +6170,8 @@ newGoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame ::
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
 newGoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
-    { pornographyLikelihood = Core.Nothing,
+    { pornographyLikelihood =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -6309,7 +6185,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame
             Core.<$> (o Core..:? "pornographyLikelihood")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -6320,8 +6196,7 @@ instance
     GoogleCloudVideointelligenceV1p2beta1_ExplicitContentFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("pornographyLikelihood" Core..=)
-                Core.<$> pornographyLikelihood,
+            [ ("pornographyLikelihood" Core..=) Core.<$> pornographyLikelihood,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -6344,7 +6219,8 @@ newGoogleCloudVideointelligenceV1p2beta1_FaceAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_FaceAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       segments = Core.Nothing,
       thumbnail = Core.Nothing
     }
@@ -6359,23 +6235,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "thumbnail")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "thumbnail")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("thumbnail" Core..=) Core.<$> thumbnail
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("thumbnail" Core..=) Core.<$> thumbnail
+          ]
+      )
 
 -- | Face detection annotation.
 --
@@ -6395,7 +6270,8 @@ newGoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation
-    { thumbnail = Core.Nothing,
+    { thumbnail =
+        Core.Nothing,
       tracks = Core.Nothing,
       version = Core.Nothing
     }
@@ -6410,8 +6286,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -6447,7 +6323,8 @@ newGoogleCloudVideointelligenceV1p2beta1_FaceFrame ::
   GoogleCloudVideointelligenceV1p2beta1_FaceFrame
 newGoogleCloudVideointelligenceV1p2beta1_FaceFrame =
   GoogleCloudVideointelligenceV1p2beta1_FaceFrame
-    { normalizedBoundingBoxes = Core.Nothing,
+    { normalizedBoundingBoxes =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -6461,22 +6338,21 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_FaceFrame
             Core.<$> (o Core..:? "normalizedBoundingBoxes")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_FaceFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_FaceFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBoxes" Core..=)
-                Core.<$> normalizedBoundingBoxes,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_FaceFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBoxes" Core..=)
+              Core.<$> normalizedBoundingBoxes,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for face detection.
 --
@@ -6491,7 +6367,10 @@ newtype GoogleCloudVideointelligenceV1p2beta1_FaceSegment = GoogleCloudVideointe
 newGoogleCloudVideointelligenceV1p2beta1_FaceSegment ::
   GoogleCloudVideointelligenceV1p2beta1_FaceSegment
 newGoogleCloudVideointelligenceV1p2beta1_FaceSegment =
-  GoogleCloudVideointelligenceV1p2beta1_FaceSegment {segment = Core.Nothing}
+  GoogleCloudVideointelligenceV1p2beta1_FaceSegment
+    { segment =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -6509,12 +6388,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_FaceSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_FaceSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [("segment" Core..=) Core.<$> segment]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_FaceSegment {..} =
+    Core.object
+      (Core.catMaybes [("segment" Core..=) Core.<$> segment])
 
 -- | Label annotation.
 --
@@ -6538,7 +6414,8 @@ newGoogleCloudVideointelligenceV1p2beta1_LabelAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_LabelAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
-    { categoryEntities = Core.Nothing,
+    { categoryEntities =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segments = Core.Nothing,
@@ -6555,28 +6432,26 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
             Core.<$> (o Core..:? "categoryEntities")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("categoryEntities" Core..=)
-                Core.<$> categoryEntities,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("categoryEntities" Core..=) Core.<$> categoryEntities,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for label detection.
 --
@@ -6594,7 +6469,8 @@ newGoogleCloudVideointelligenceV1p2beta1_LabelFrame ::
   GoogleCloudVideointelligenceV1p2beta1_LabelFrame
 newGoogleCloudVideointelligenceV1p2beta1_LabelFrame =
   GoogleCloudVideointelligenceV1p2beta1_LabelFrame
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -6608,21 +6484,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LabelFrame
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_LabelFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_LabelFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_LabelFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for label detection.
 --
@@ -6640,7 +6515,8 @@ newGoogleCloudVideointelligenceV1p2beta1_LabelSegment ::
   GoogleCloudVideointelligenceV1p2beta1_LabelSegment
 newGoogleCloudVideointelligenceV1p2beta1_LabelSegment =
   GoogleCloudVideointelligenceV1p2beta1_LabelSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
@@ -6654,21 +6530,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LabelSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_LabelSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_LabelSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_LabelSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | Annotation corresponding to one detected, tracked and recognized logo class.
 --
@@ -6688,7 +6563,8 @@ newGoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation
-    { entity = Core.Nothing,
+    { entity =
+        Core.Nothing,
       segments = Core.Nothing,
       tracks = Core.Nothing
     }
@@ -6703,8 +6579,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -6741,7 +6617,8 @@ newGoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox ::
   GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
 newGoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox =
   GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
-    { bottom = Core.Nothing,
+    { bottom =
+        Core.Nothing,
       left = Core.Nothing,
       right = Core.Nothing,
       top = Core.Nothing
@@ -6756,9 +6633,10 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox
-            Core.<$> (o Core..:? "bottom") Core.<*> (o Core..:? "left")
-              Core.<*> (o Core..:? "right")
-              Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "bottom")
+            Core.<*> (o Core..:? "left")
+            Core.<*> (o Core..:? "right")
+            Core.<*> (o Core..:? "top")
       )
 
 instance
@@ -6793,7 +6671,8 @@ newGoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly ::
   GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
 newGoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly
-    { vertices = Core.Nothing
+    { vertices =
+        Core.Nothing
     }
 
 instance
@@ -6815,9 +6694,7 @@ instance
   toJSON
     GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingPoly {..} =
       Core.object
-        ( Core.catMaybes
-            [("vertices" Core..=) Core.<$> vertices]
-        )
+        (Core.catMaybes [("vertices" Core..=) Core.<$> vertices])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -6835,7 +6712,8 @@ newGoogleCloudVideointelligenceV1p2beta1_NormalizedVertex ::
   GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
 newGoogleCloudVideointelligenceV1p2beta1_NormalizedVertex =
   GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
-    { x = Core.Nothing,
+    { x =
+        Core.Nothing,
       y = Core.Nothing
     }
 
@@ -6848,19 +6726,19 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex {..} =
-      Core.object
-        ( Core.catMaybes
-            [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_NormalizedVertex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
+      )
 
 -- | Annotations corresponding to one tracked object.
 --
@@ -6889,7 +6767,8 @@ newGoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing,
@@ -6907,13 +6786,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "trackId"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "trackId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -6928,8 +6805,7 @@ instance
               ("entity" Core..=) Core.<$> entity,
               ("frames" Core..=) Core.<$> frames,
               ("segment" Core..=) Core.<$> segment,
-              ("trackId" Core..=) Core.. Core.AsText
-                Core.<$> trackId,
+              ("trackId" Core..=) Core.. Core.AsText Core.<$> trackId,
               ("version" Core..=) Core.<$> version
             ]
         )
@@ -6953,7 +6829,8 @@ newGoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame ::
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
 newGoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
-    { normalizedBoundingBox = Core.Nothing,
+    { normalizedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -6967,7 +6844,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame
             Core.<$> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -6978,8 +6855,7 @@ instance
     GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
+            [ ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -7000,7 +6876,8 @@ newGoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation
-    { tracks = Core.Nothing,
+    { tracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -7014,7 +6891,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation
             Core.<$> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -7048,7 +6925,8 @@ newGoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative ::
   GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
 newGoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       transcript = Core.Nothing,
       words = Core.Nothing
     }
@@ -7063,8 +6941,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words")
+            Core.<*> (o Core..:? "transcript")
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -7100,7 +6978,8 @@ newGoogleCloudVideointelligenceV1p2beta1_SpeechTranscription ::
   GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
 newGoogleCloudVideointelligenceV1p2beta1_SpeechTranscription =
   GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
-    { alternatives = Core.Nothing,
+    { alternatives =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -7114,7 +6993,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_SpeechTranscription
             Core.<$> (o Core..:? "alternatives")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
@@ -7148,7 +7027,8 @@ newGoogleCloudVideointelligenceV1p2beta1_TextAnnotation ::
   GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
 newGoogleCloudVideointelligenceV1p2beta1_TextAnnotation =
   GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
-    { segments = Core.Nothing,
+    { segments =
+        Core.Nothing,
       text = Core.Nothing,
       version = Core.Nothing
     }
@@ -7162,23 +7042,23 @@ instance
       "GoogleCloudVideointelligenceV1p2beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
-              Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "segments")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_TextAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_TextAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("segments" Core..=) Core.<$> segments,
-              ("text" Core..=) Core.<$> text,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_TextAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("segments" Core..=) Core.<$> segments,
+            ("text" Core..=) Core.<$> text,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Video frame level annotation results for text annotation (OCR). Contains information regarding timestamp and bounding box locations for the frames containing detected OCR text snippets.
 --
@@ -7199,7 +7079,8 @@ newGoogleCloudVideointelligenceV1p2beta1_TextFrame ::
   GoogleCloudVideointelligenceV1p2beta1_TextFrame
 newGoogleCloudVideointelligenceV1p2beta1_TextFrame =
   GoogleCloudVideointelligenceV1p2beta1_TextFrame
-    { rotatedBoundingBox = Core.Nothing,
+    { rotatedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -7213,22 +7094,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TextFrame
             Core.<$> (o Core..:? "rotatedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_TextFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_TextFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("rotatedBoundingBox" Core..=)
-                Core.<$> rotatedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_TextFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rotatedBoundingBox" Core..=) Core.<$> rotatedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for text detection.
 --
@@ -7248,7 +7127,8 @@ newGoogleCloudVideointelligenceV1p2beta1_TextSegment ::
   GoogleCloudVideointelligenceV1p2beta1_TextSegment
 newGoogleCloudVideointelligenceV1p2beta1_TextSegment =
   GoogleCloudVideointelligenceV1p2beta1_TextSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing
     }
@@ -7263,23 +7143,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_TextSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_TextSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("frames" Core..=) Core.<$> frames,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_TextSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("frames" Core..=) Core.<$> frames,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | For tracking related features. An object at time/offset with attributes, and located with normalized/bounding_box.
 --
@@ -7310,7 +7189,8 @@ newGoogleCloudVideointelligenceV1p2beta1_TimestampedObject ::
   GoogleCloudVideointelligenceV1p2beta1_TimestampedObject
 newGoogleCloudVideointelligenceV1p2beta1_TimestampedObject =
   GoogleCloudVideointelligenceV1p2beta1_TimestampedObject
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       landmarks = Core.Nothing,
       normalizedBoundingBox = Core.Nothing,
       timeOffset = Core.Nothing
@@ -7326,26 +7206,24 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_TimestampedObject
             Core.<$> (o Core..:? "attributes")
-              Core.<*> (o Core..:? "landmarks")
-              Core.<*> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "landmarks")
+            Core.<*> (o Core..:? "normalizedBoundingBox")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_TimestampedObject
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_TimestampedObject {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("landmarks" Core..=) Core.<$> landmarks,
-              ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_TimestampedObject {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("landmarks" Core..=) Core.<$> landmarks,
+            ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | A track of an object instance.
 --
@@ -7373,16 +7251,14 @@ newGoogleCloudVideointelligenceV1p2beta1_Track ::
   GoogleCloudVideointelligenceV1p2beta1_Track
 newGoogleCloudVideointelligenceV1p2beta1_Track =
   GoogleCloudVideointelligenceV1p2beta1_Track
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       confidence = Core.Nothing,
       segment = Core.Nothing,
       timestampedObjects = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p2beta1_Track
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p2beta1_Track where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p2beta1_Track"
@@ -7394,21 +7270,16 @@ instance
             Core.<*> (o Core..:? "timestampedObjects")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p2beta1_Track
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_Track {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment,
-              ("timestampedObjects" Core..=)
-                Core.<$> timestampedObjects
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p2beta1_Track where
+  toJSON GoogleCloudVideointelligenceV1p2beta1_Track {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment,
+            ("timestampedObjects" Core..=) Core.<$> timestampedObjects
+          ]
+      )
 
 -- | Annotation progress for a single video.
 --
@@ -7437,7 +7308,8 @@ newGoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress ::
   GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
 newGoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress =
   GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
-    { feature = Core.Nothing,
+    { feature =
+        Core.Nothing,
       inputUri = Core.Nothing,
       progressPercent = Core.Nothing,
       segment = Core.Nothing,
@@ -7455,11 +7327,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationProgress
             Core.<$> (o Core..:? "feature")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "progressPercent")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
@@ -7558,22 +7430,32 @@ newGoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults ::
   GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
 newGoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults =
   GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
-    { error = Core.Nothing,
+    { error =
+        Core.Nothing,
       explicitAnnotation = Core.Nothing,
       faceAnnotations = Core.Nothing,
-      faceDetectionAnnotations = Core.Nothing,
-      frameLabelAnnotations = Core.Nothing,
+      faceDetectionAnnotations =
+        Core.Nothing,
+      frameLabelAnnotations =
+        Core.Nothing,
       inputUri = Core.Nothing,
-      logoRecognitionAnnotations = Core.Nothing,
+      logoRecognitionAnnotations =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
-      personDetectionAnnotations = Core.Nothing,
+      personDetectionAnnotations =
+        Core.Nothing,
       segment = Core.Nothing,
-      segmentLabelAnnotations = Core.Nothing,
-      segmentPresenceLabelAnnotations = Core.Nothing,
+      segmentLabelAnnotations =
+        Core.Nothing,
+      segmentPresenceLabelAnnotations =
+        Core.Nothing,
       shotAnnotations = Core.Nothing,
-      shotLabelAnnotations = Core.Nothing,
-      shotPresenceLabelAnnotations = Core.Nothing,
-      speechTranscriptions = Core.Nothing,
+      shotLabelAnnotations =
+        Core.Nothing,
+      shotPresenceLabelAnnotations =
+        Core.Nothing,
+      speechTranscriptions =
+        Core.Nothing,
       textAnnotations = Core.Nothing
     }
 
@@ -7587,22 +7469,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_VideoAnnotationResults
             Core.<$> (o Core..:? "error")
-              Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "faceDetectionAnnotations")
-              Core.<*> (o Core..:? "frameLabelAnnotations")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "logoRecognitionAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "personDetectionAnnotations")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "segmentLabelAnnotations")
-              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
-              Core.<*> (o Core..:? "shotLabelAnnotations")
-              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "speechTranscriptions")
-              Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "explicitAnnotation")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "faceDetectionAnnotations")
+            Core.<*> (o Core..:? "frameLabelAnnotations")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "logoRecognitionAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "personDetectionAnnotations")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segmentLabelAnnotations")
+            Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "shotLabelAnnotations")
+            Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "speechTranscriptions")
+            Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -7614,18 +7496,15 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("error" Core..=) Core.<$> error,
-              ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
+              ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
               ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
               ("faceDetectionAnnotations" Core..=)
                 Core.<$> faceDetectionAnnotations,
-              ("frameLabelAnnotations" Core..=)
-                Core.<$> frameLabelAnnotations,
+              ("frameLabelAnnotations" Core..=) Core.<$> frameLabelAnnotations,
               ("inputUri" Core..=) Core.<$> inputUri,
               ("logoRecognitionAnnotations" Core..=)
                 Core.<$> logoRecognitionAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("personDetectionAnnotations" Core..=)
                 Core.<$> personDetectionAnnotations,
               ("segment" Core..=) Core.<$> segment,
@@ -7634,14 +7513,11 @@ instance
               ("segmentPresenceLabelAnnotations" Core..=)
                 Core.<$> segmentPresenceLabelAnnotations,
               ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
-              ("shotLabelAnnotations" Core..=)
-                Core.<$> shotLabelAnnotations,
+              ("shotLabelAnnotations" Core..=) Core.<$> shotLabelAnnotations,
               ("shotPresenceLabelAnnotations" Core..=)
                 Core.<$> shotPresenceLabelAnnotations,
-              ("speechTranscriptions" Core..=)
-                Core.<$> speechTranscriptions,
-              ("textAnnotations" Core..=)
-                Core.<$> textAnnotations
+              ("speechTranscriptions" Core..=) Core.<$> speechTranscriptions,
+              ("textAnnotations" Core..=) Core.<$> textAnnotations
             ]
         )
 
@@ -7661,7 +7537,8 @@ newGoogleCloudVideointelligenceV1p2beta1_VideoSegment ::
   GoogleCloudVideointelligenceV1p2beta1_VideoSegment
 newGoogleCloudVideointelligenceV1p2beta1_VideoSegment =
   GoogleCloudVideointelligenceV1p2beta1_VideoSegment
-    { endTimeOffset = Core.Nothing,
+    { endTimeOffset =
+        Core.Nothing,
       startTimeOffset = Core.Nothing
     }
 
@@ -7675,22 +7552,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_VideoSegment
             Core.<$> (o Core..:? "endTimeOffset")
-              Core.<*> (o Core..:? "startTimeOffset")
+            Core.<*> (o Core..:? "startTimeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p2beta1_VideoSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_VideoSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
-              ("startTimeOffset" Core..=)
-                Core.<$> startTimeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p2beta1_VideoSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
+            ("startTimeOffset" Core..=) Core.<$> startTimeOffset
+          ]
+      )
 
 -- | Word-specific information for recognized words. Word information is only included in the response when certain request parameters are set, such as @enable_word_time_offsets@.
 --
@@ -7714,7 +7589,8 @@ newGoogleCloudVideointelligenceV1p2beta1_WordInfo ::
   GoogleCloudVideointelligenceV1p2beta1_WordInfo
 newGoogleCloudVideointelligenceV1p2beta1_WordInfo =
   GoogleCloudVideointelligenceV1p2beta1_WordInfo
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       endTime = Core.Nothing,
       speakerTag = Core.Nothing,
       startTime = Core.Nothing,
@@ -7731,27 +7607,23 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p2beta1_WordInfo
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "endTime")
-              Core.<*> (o Core..:? "speakerTag")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "word")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "speakerTag")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "word")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p2beta1_WordInfo
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p2beta1_WordInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("speakerTag" Core..=) Core.<$> speakerTag,
-              ("startTime" Core..=) Core.<$> startTime,
-              ("word" Core..=) Core.<$> word
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p2beta1_WordInfo where
+  toJSON GoogleCloudVideointelligenceV1p2beta1_WordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("speakerTag" Core..=) Core.<$> speakerTag,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
 
 -- | Video annotation progress. Included in the @metadata@ field of the @Operation@ returned by the @GetOperation@ call of the @google::longrunning::Operations@ service.
 --
@@ -7770,7 +7642,8 @@ newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress ::
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress
 newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress =
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress
-    { annotationProgress = Core.Nothing
+    { annotationProgress =
+        Core.Nothing
     }
 
 instance
@@ -7793,9 +7666,7 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationProgress" Core..=)
-                Core.<$> annotationProgress
-            ]
+            [("annotationProgress" Core..=) Core.<$> annotationProgress]
         )
 
 -- | Video annotation request.
@@ -7825,7 +7696,8 @@ newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest ::
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest
 newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest =
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest
-    { features = Core.Nothing,
+    { features =
+        Core.Nothing,
       inputContent = Core.Nothing,
       inputUri = Core.Nothing,
       locationId = Core.Nothing,
@@ -7843,11 +7715,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoRequest
             Core.<$> (o Core..:? "features")
-              Core.<*> (o Core..:? "inputContent")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "locationId")
-              Core.<*> (o Core..:? "outputUri")
-              Core.<*> (o Core..:? "videoContext")
+            Core.<*> (o Core..:? "inputContent")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "locationId")
+            Core.<*> (o Core..:? "outputUri")
+            Core.<*> (o Core..:? "videoContext")
       )
 
 instance
@@ -7884,7 +7756,8 @@ newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse
 newGoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse
-    { annotationResults = Core.Nothing
+    { annotationResults =
+        Core.Nothing
     }
 
 instance
@@ -7907,9 +7780,7 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults
-            ]
+            [("annotationResults" Core..=) Core.<$> annotationResults]
         )
 
 -- | Celebrity definition.
@@ -7930,7 +7801,8 @@ newGoogleCloudVideointelligenceV1p3beta1_Celebrity ::
   GoogleCloudVideointelligenceV1p3beta1_Celebrity
 newGoogleCloudVideointelligenceV1p3beta1_Celebrity =
   GoogleCloudVideointelligenceV1p3beta1_Celebrity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       displayName = Core.Nothing,
       name = Core.Nothing
     }
@@ -7945,23 +7817,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_Celebrity
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "name")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_Celebrity
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_Celebrity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("displayName" Core..=) Core.<$> displayName,
-              ("name" Core..=) Core.<$> name
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_Celebrity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
 
 -- | Celebrity recognition annotation per video.
 --
@@ -7979,7 +7850,8 @@ newGoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation
-    { celebrityTracks = Core.Nothing,
+    { celebrityTracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -7993,7 +7865,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation
             Core.<$> (o Core..:? "celebrityTracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -8004,8 +7876,7 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_CelebrityRecognitionAnnotation {..} =
       Core.object
         ( Core.catMaybes
-            [ ("celebrityTracks" Core..=)
-                Core.<$> celebrityTracks,
+            [ ("celebrityTracks" Core..=) Core.<$> celebrityTracks,
               ("version" Core..=) Core.<$> version
             ]
         )
@@ -8029,7 +7900,8 @@ newGoogleCloudVideointelligenceV1p3beta1_CelebrityTrack ::
   GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack
 newGoogleCloudVideointelligenceV1p3beta1_CelebrityTrack =
   GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack
-    { celebrities = Core.Nothing,
+    { celebrities =
+        Core.Nothing,
       faceTrack = Core.Nothing
     }
 
@@ -8043,21 +7915,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack
             Core.<$> (o Core..:? "celebrities")
-              Core.<*> (o Core..:? "faceTrack")
+            Core.<*> (o Core..:? "faceTrack")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("celebrities" Core..=) Core.<$> celebrities,
-              ("faceTrack" Core..=) Core.<$> faceTrack
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_CelebrityTrack {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("celebrities" Core..=) Core.<$> celebrities,
+            ("faceTrack" Core..=) Core.<$> faceTrack
+          ]
+      )
 
 -- | A generic detected attribute represented by name in string format.
 --
@@ -8077,7 +7948,8 @@ newGoogleCloudVideointelligenceV1p3beta1_DetectedAttribute ::
   GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute
 newGoogleCloudVideointelligenceV1p3beta1_DetectedAttribute =
   GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       value = Core.Nothing
     }
@@ -8092,23 +7964,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "value")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_DetectedAttribute {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 -- | A generic detected landmark represented by name in string format and a 2D location.
 --
@@ -8128,7 +7999,8 @@ newGoogleCloudVideointelligenceV1p3beta1_DetectedLandmark ::
   GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark
 newGoogleCloudVideointelligenceV1p3beta1_DetectedLandmark =
   GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       name = Core.Nothing,
       point = Core.Nothing
     }
@@ -8143,23 +8015,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "point")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "point")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("name" Core..=) Core.<$> name,
-              ("point" Core..=) Core.<$> point
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_DetectedLandmark {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("name" Core..=) Core.<$> name,
+            ("point" Core..=) Core.<$> point
+          ]
+      )
 
 -- | Detected entity from video analysis.
 --
@@ -8179,15 +8050,13 @@ newGoogleCloudVideointelligenceV1p3beta1_Entity ::
   GoogleCloudVideointelligenceV1p3beta1_Entity
 newGoogleCloudVideointelligenceV1p3beta1_Entity =
   GoogleCloudVideointelligenceV1p3beta1_Entity
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       entityId = Core.Nothing,
       languageCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p3beta1_Entity
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p3beta1_Entity where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p3beta1_Entity"
@@ -8198,19 +8067,15 @@ instance
             Core.<*> (o Core..:? "languageCode")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p3beta1_Entity
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_Entity {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("entityId" Core..=) Core.<$> entityId,
-              ("languageCode" Core..=) Core.<$> languageCode
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p3beta1_Entity where
+  toJSON GoogleCloudVideointelligenceV1p3beta1_Entity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("entityId" Core..=) Core.<$> entityId,
+            ("languageCode" Core..=) Core.<$> languageCode
+          ]
+      )
 
 -- | Explicit content annotation (based on per-frame visual signals only). If no explicit content has been detected in a frame, no annotations are present for that frame.
 --
@@ -8231,7 +8096,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -8245,7 +8111,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -8275,7 +8141,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig
-    { model = Core.Nothing
+    { model =
+        Core.Nothing
     }
 
 instance
@@ -8296,8 +8163,7 @@ instance
   where
   toJSON
     GoogleCloudVideointelligenceV1p3beta1_ExplicitContentDetectionConfig {..} =
-      Core.object
-        (Core.catMaybes [("model" Core..=) Core.<$> model])
+      Core.object (Core.catMaybes [("model" Core..=) Core.<$> model])
 
 -- | Video frame level annotation results for explicit content.
 --
@@ -8318,7 +8184,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame ::
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame
 newGoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame =
   GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame
-    { pornographyLikelihood = Core.Nothing,
+    { pornographyLikelihood =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -8332,7 +8199,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame
             Core.<$> (o Core..:? "pornographyLikelihood")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -8343,8 +8210,7 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("pornographyLikelihood" Core..=)
-                Core.<$> pornographyLikelihood,
+            [ ("pornographyLikelihood" Core..=) Core.<$> pornographyLikelihood,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -8367,7 +8233,8 @@ newGoogleCloudVideointelligenceV1p3beta1_FaceAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_FaceAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation
-    { frames = Core.Nothing,
+    { frames =
+        Core.Nothing,
       segments = Core.Nothing,
       thumbnail = Core.Nothing
     }
@@ -8382,23 +8249,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation
             Core.<$> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "thumbnail")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "thumbnail")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("thumbnail" Core..=) Core.<$> thumbnail
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("thumbnail" Core..=) Core.<$> thumbnail
+          ]
+      )
 
 -- | Face detection annotation.
 --
@@ -8418,7 +8284,8 @@ newGoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation
-    { thumbnail = Core.Nothing,
+    { thumbnail =
+        Core.Nothing,
       tracks = Core.Nothing,
       version = Core.Nothing
     }
@@ -8433,8 +8300,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation
             Core.<$> (o Core..:? "thumbnail")
-              Core.<*> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -8469,7 +8336,8 @@ newGoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig
-    { includeAttributes = Core.Nothing,
+    { includeAttributes =
+        Core.Nothing,
       includeBoundingBoxes = Core.Nothing,
       model = Core.Nothing
     }
@@ -8484,8 +8352,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig
             Core.<$> (o Core..:? "includeAttributes")
-              Core.<*> (o Core..:? "includeBoundingBoxes")
-              Core.<*> (o Core..:? "model")
+            Core.<*> (o Core..:? "includeBoundingBoxes")
+            Core.<*> (o Core..:? "model")
       )
 
 instance
@@ -8496,10 +8364,8 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_FaceDetectionConfig {..} =
       Core.object
         ( Core.catMaybes
-            [ ("includeAttributes" Core..=)
-                Core.<$> includeAttributes,
-              ("includeBoundingBoxes" Core..=)
-                Core.<$> includeBoundingBoxes,
+            [ ("includeAttributes" Core..=) Core.<$> includeAttributes,
+              ("includeBoundingBoxes" Core..=) Core.<$> includeBoundingBoxes,
               ("model" Core..=) Core.<$> model
             ]
         )
@@ -8523,7 +8389,8 @@ newGoogleCloudVideointelligenceV1p3beta1_FaceFrame ::
   GoogleCloudVideointelligenceV1p3beta1_FaceFrame
 newGoogleCloudVideointelligenceV1p3beta1_FaceFrame =
   GoogleCloudVideointelligenceV1p3beta1_FaceFrame
-    { normalizedBoundingBoxes = Core.Nothing,
+    { normalizedBoundingBoxes =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -8537,22 +8404,21 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_FaceFrame
             Core.<$> (o Core..:? "normalizedBoundingBoxes")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_FaceFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_FaceFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("normalizedBoundingBoxes" Core..=)
-                Core.<$> normalizedBoundingBoxes,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_FaceFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("normalizedBoundingBoxes" Core..=)
+              Core.<$> normalizedBoundingBoxes,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for face detection.
 --
@@ -8567,7 +8433,10 @@ newtype GoogleCloudVideointelligenceV1p3beta1_FaceSegment = GoogleCloudVideointe
 newGoogleCloudVideointelligenceV1p3beta1_FaceSegment ::
   GoogleCloudVideointelligenceV1p3beta1_FaceSegment
 newGoogleCloudVideointelligenceV1p3beta1_FaceSegment =
-  GoogleCloudVideointelligenceV1p3beta1_FaceSegment {segment = Core.Nothing}
+  GoogleCloudVideointelligenceV1p3beta1_FaceSegment
+    { segment =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -8585,12 +8454,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_FaceSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_FaceSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [("segment" Core..=) Core.<$> segment]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_FaceSegment {..} =
+    Core.object
+      (Core.catMaybes [("segment" Core..=) Core.<$> segment])
 
 -- | Label annotation.
 --
@@ -8614,7 +8480,8 @@ newGoogleCloudVideointelligenceV1p3beta1_LabelAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_LabelAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation
-    { categoryEntities = Core.Nothing,
+    { categoryEntities =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segments = Core.Nothing,
@@ -8631,28 +8498,26 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation
             Core.<$> (o Core..:? "categoryEntities")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("categoryEntities" Core..=)
-                Core.<$> categoryEntities,
-              ("entity" Core..=) Core.<$> entity,
-              ("frames" Core..=) Core.<$> frames,
-              ("segments" Core..=) Core.<$> segments,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("categoryEntities" Core..=) Core.<$> categoryEntities,
+            ("entity" Core..=) Core.<$> entity,
+            ("frames" Core..=) Core.<$> frames,
+            ("segments" Core..=) Core.<$> segments,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Config for LABEL_DETECTION.
 --
@@ -8679,11 +8544,13 @@ newGoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig
-    { frameConfidenceThreshold = Core.Nothing,
+    { frameConfidenceThreshold =
+        Core.Nothing,
       labelDetectionMode = Core.Nothing,
       model = Core.Nothing,
       stationaryCamera = Core.Nothing,
-      videoConfidenceThreshold = Core.Nothing
+      videoConfidenceThreshold =
+        Core.Nothing
     }
 
 instance
@@ -8696,10 +8563,10 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LabelDetectionConfig
             Core.<$> (o Core..:? "frameConfidenceThreshold")
-              Core.<*> (o Core..:? "labelDetectionMode")
-              Core.<*> (o Core..:? "model")
-              Core.<*> (o Core..:? "stationaryCamera")
-              Core.<*> (o Core..:? "videoConfidenceThreshold")
+            Core.<*> (o Core..:? "labelDetectionMode")
+            Core.<*> (o Core..:? "model")
+            Core.<*> (o Core..:? "stationaryCamera")
+            Core.<*> (o Core..:? "videoConfidenceThreshold")
       )
 
 instance
@@ -8712,11 +8579,9 @@ instance
         ( Core.catMaybes
             [ ("frameConfidenceThreshold" Core..=)
                 Core.<$> frameConfidenceThreshold,
-              ("labelDetectionMode" Core..=)
-                Core.<$> labelDetectionMode,
+              ("labelDetectionMode" Core..=) Core.<$> labelDetectionMode,
               ("model" Core..=) Core.<$> model,
-              ("stationaryCamera" Core..=)
-                Core.<$> stationaryCamera,
+              ("stationaryCamera" Core..=) Core.<$> stationaryCamera,
               ("videoConfidenceThreshold" Core..=)
                 Core.<$> videoConfidenceThreshold
             ]
@@ -8738,7 +8603,8 @@ newGoogleCloudVideointelligenceV1p3beta1_LabelFrame ::
   GoogleCloudVideointelligenceV1p3beta1_LabelFrame
 newGoogleCloudVideointelligenceV1p3beta1_LabelFrame =
   GoogleCloudVideointelligenceV1p3beta1_LabelFrame
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -8752,21 +8618,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LabelFrame
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_LabelFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_LabelFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_LabelFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for label detection.
 --
@@ -8784,7 +8649,8 @@ newGoogleCloudVideointelligenceV1p3beta1_LabelSegment ::
   GoogleCloudVideointelligenceV1p3beta1_LabelSegment
 newGoogleCloudVideointelligenceV1p3beta1_LabelSegment =
   GoogleCloudVideointelligenceV1p3beta1_LabelSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       segment = Core.Nothing
     }
 
@@ -8798,21 +8664,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LabelSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_LabelSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_LabelSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_LabelSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | Annotation corresponding to one detected, tracked and recognized logo class.
 --
@@ -8832,7 +8697,8 @@ newGoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation
-    { entity = Core.Nothing,
+    { entity =
+        Core.Nothing,
       segments = Core.Nothing,
       tracks = Core.Nothing
     }
@@ -8847,8 +8713,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_LogoRecognitionAnnotation
             Core.<$> (o Core..:? "entity")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "tracks")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "tracks")
       )
 
 instance
@@ -8885,7 +8751,8 @@ newGoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox ::
   GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox
 newGoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox =
   GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox
-    { bottom = Core.Nothing,
+    { bottom =
+        Core.Nothing,
       left = Core.Nothing,
       right = Core.Nothing,
       top = Core.Nothing
@@ -8900,9 +8767,10 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox
-            Core.<$> (o Core..:? "bottom") Core.<*> (o Core..:? "left")
-              Core.<*> (o Core..:? "right")
-              Core.<*> (o Core..:? "top")
+            Core.<$> (o Core..:? "bottom")
+            Core.<*> (o Core..:? "left")
+            Core.<*> (o Core..:? "right")
+            Core.<*> (o Core..:? "top")
       )
 
 instance
@@ -8937,7 +8805,8 @@ newGoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly ::
   GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly
 newGoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly =
   GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly
-    { vertices = Core.Nothing
+    { vertices =
+        Core.Nothing
     }
 
 instance
@@ -8959,9 +8828,7 @@ instance
   toJSON
     GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly {..} =
       Core.object
-        ( Core.catMaybes
-            [("vertices" Core..=) Core.<$> vertices]
-        )
+        (Core.catMaybes [("vertices" Core..=) Core.<$> vertices])
 
 -- | A vertex represents a 2D point in the image. NOTE: the normalized vertex coordinates are relative to the original image and range from 0 to 1.
 --
@@ -8979,7 +8846,8 @@ newGoogleCloudVideointelligenceV1p3beta1_NormalizedVertex ::
   GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex
 newGoogleCloudVideointelligenceV1p3beta1_NormalizedVertex =
   GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex
-    { x = Core.Nothing,
+    { x =
+        Core.Nothing,
       y = Core.Nothing
     }
 
@@ -8992,19 +8860,19 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex
-            Core.<$> (o Core..:? "x") Core.<*> (o Core..:? "y")
+            Core.<$> (o Core..:? "x")
+            Core.<*> (o Core..:? "y")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex {..} =
-      Core.object
-        ( Core.catMaybes
-            [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex {..} =
+    Core.object
+      ( Core.catMaybes
+          [("x" Core..=) Core.<$> x, ("y" Core..=) Core.<$> y]
+      )
 
 -- | Annotations corresponding to one tracked object.
 --
@@ -9033,7 +8901,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       entity = Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing,
@@ -9051,13 +8920,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "entity")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> ( o Core..:? "trackId"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "entity")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "trackId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -9072,8 +8939,7 @@ instance
               ("entity" Core..=) Core.<$> entity,
               ("frames" Core..=) Core.<$> frames,
               ("segment" Core..=) Core.<$> segment,
-              ("trackId" Core..=) Core.. Core.AsText
-                Core.<$> trackId,
+              ("trackId" Core..=) Core.. Core.AsText Core.<$> trackId,
               ("version" Core..=) Core.<$> version
             ]
         )
@@ -9092,7 +8958,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig ::
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig
 newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig =
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig
-    { model = Core.Nothing
+    { model =
+        Core.Nothing
     }
 
 instance
@@ -9113,8 +8980,7 @@ instance
   where
   toJSON
     GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingConfig {..} =
-      Core.object
-        (Core.catMaybes [("model" Core..=) Core.<$> model])
+      Core.object (Core.catMaybes [("model" Core..=) Core.<$> model])
 
 -- | Video frame level annotations for object detection and tracking. This field stores per frame location, time offset, and confidence.
 --
@@ -9135,7 +9001,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame ::
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame
 newGoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame =
   GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame
-    { normalizedBoundingBox = Core.Nothing,
+    { normalizedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -9149,7 +9016,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame
             Core.<$> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
@@ -9160,8 +9027,7 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame {..} =
       Core.object
         ( Core.catMaybes
-            [ ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
+            [ ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
               ("timeOffset" Core..=) Core.<$> timeOffset
             ]
         )
@@ -9182,7 +9048,8 @@ newGoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation
-    { tracks = Core.Nothing,
+    { tracks =
+        Core.Nothing,
       version = Core.Nothing
     }
 
@@ -9196,7 +9063,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_PersonDetectionAnnotation
             Core.<$> (o Core..:? "tracks")
-              Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
@@ -9230,7 +9097,8 @@ newGoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig
-    { includeAttributes = Core.Nothing,
+    { includeAttributes =
+        Core.Nothing,
       includeBoundingBoxes = Core.Nothing,
       includePoseLandmarks = Core.Nothing
     }
@@ -9245,8 +9113,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig
             Core.<$> (o Core..:? "includeAttributes")
-              Core.<*> (o Core..:? "includeBoundingBoxes")
-              Core.<*> (o Core..:? "includePoseLandmarks")
+            Core.<*> (o Core..:? "includeBoundingBoxes")
+            Core.<*> (o Core..:? "includePoseLandmarks")
       )
 
 instance
@@ -9257,12 +9125,9 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_PersonDetectionConfig {..} =
       Core.object
         ( Core.catMaybes
-            [ ("includeAttributes" Core..=)
-                Core.<$> includeAttributes,
-              ("includeBoundingBoxes" Core..=)
-                Core.<$> includeBoundingBoxes,
-              ("includePoseLandmarks" Core..=)
-                Core.<$> includePoseLandmarks
+            [ ("includeAttributes" Core..=) Core.<$> includeAttributes,
+              ("includeBoundingBoxes" Core..=) Core.<$> includeBoundingBoxes,
+              ("includePoseLandmarks" Core..=) Core.<$> includePoseLandmarks
             ]
         )
 
@@ -9282,7 +9147,8 @@ newGoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity ::
   GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity
 newGoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity =
   GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity
-    { celebrity = Core.Nothing,
+    { celebrity =
+        Core.Nothing,
       confidence = Core.Nothing
     }
 
@@ -9296,7 +9162,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_RecognizedCelebrity
             Core.<$> (o Core..:? "celebrity")
-              Core.<*> (o Core..:? "confidence")
+            Core.<*> (o Core..:? "confidence")
       )
 
 instance
@@ -9326,7 +9192,8 @@ newGoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig
-    { model = Core.Nothing
+    { model =
+        Core.Nothing
     }
 
 instance
@@ -9347,8 +9214,7 @@ instance
   where
   toJSON
     GoogleCloudVideointelligenceV1p3beta1_ShotChangeDetectionConfig {..} =
-      Core.object
-        (Core.catMaybes [("model" Core..=) Core.<$> model])
+      Core.object (Core.catMaybes [("model" Core..=) Core.<$> model])
 
 -- | Provides \"hints\" to the speech recognizer to favor specific words and phrases in the results.
 --
@@ -9363,7 +9229,10 @@ newtype GoogleCloudVideointelligenceV1p3beta1_SpeechContext = GoogleCloudVideoin
 newGoogleCloudVideointelligenceV1p3beta1_SpeechContext ::
   GoogleCloudVideointelligenceV1p3beta1_SpeechContext
 newGoogleCloudVideointelligenceV1p3beta1_SpeechContext =
-  GoogleCloudVideointelligenceV1p3beta1_SpeechContext {phrases = Core.Nothing}
+  GoogleCloudVideointelligenceV1p3beta1_SpeechContext
+    { phrases =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -9381,12 +9250,9 @@ instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_SpeechContext
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_SpeechContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [("phrases" Core..=) Core.<$> phrases]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_SpeechContext {..} =
+    Core.object
+      (Core.catMaybes [("phrases" Core..=) Core.<$> phrases])
 
 -- | Alternative hypotheses (a.k.a. n-best list).
 --
@@ -9406,7 +9272,8 @@ newGoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative ::
   GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative
 newGoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative =
   GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       transcript = Core.Nothing,
       words = Core.Nothing
     }
@@ -9421,8 +9288,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "transcript")
-              Core.<*> (o Core..:? "words")
+            Core.<*> (o Core..:? "transcript")
+            Core.<*> (o Core..:? "words")
       )
 
 instance
@@ -9458,7 +9325,8 @@ newGoogleCloudVideointelligenceV1p3beta1_SpeechTranscription ::
   GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription
 newGoogleCloudVideointelligenceV1p3beta1_SpeechTranscription =
   GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription
-    { alternatives = Core.Nothing,
+    { alternatives =
+        Core.Nothing,
       languageCode = Core.Nothing
     }
 
@@ -9472,7 +9340,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription
             Core.<$> (o Core..:? "alternatives")
-              Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "languageCode")
       )
 
 instance
@@ -9518,11 +9386,16 @@ newGoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig
 newGoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig =
   GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig
-    { audioTracks = Core.Nothing,
-      diarizationSpeakerCount = Core.Nothing,
-      enableAutomaticPunctuation = Core.Nothing,
-      enableSpeakerDiarization = Core.Nothing,
-      enableWordConfidence = Core.Nothing,
+    { audioTracks =
+        Core.Nothing,
+      diarizationSpeakerCount =
+        Core.Nothing,
+      enableAutomaticPunctuation =
+        Core.Nothing,
+      enableSpeakerDiarization =
+        Core.Nothing,
+      enableWordConfidence =
+        Core.Nothing,
       filterProfanity = Core.Nothing,
       languageCode = Core.Nothing,
       maxAlternatives = Core.Nothing,
@@ -9539,14 +9412,14 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_SpeechTranscriptionConfig
             Core.<$> (o Core..:? "audioTracks")
-              Core.<*> (o Core..:? "diarizationSpeakerCount")
-              Core.<*> (o Core..:? "enableAutomaticPunctuation")
-              Core.<*> (o Core..:? "enableSpeakerDiarization")
-              Core.<*> (o Core..:? "enableWordConfidence")
-              Core.<*> (o Core..:? "filterProfanity")
-              Core.<*> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "maxAlternatives")
-              Core.<*> (o Core..:? "speechContexts")
+            Core.<*> (o Core..:? "diarizationSpeakerCount")
+            Core.<*> (o Core..:? "enableAutomaticPunctuation")
+            Core.<*> (o Core..:? "enableSpeakerDiarization")
+            Core.<*> (o Core..:? "enableWordConfidence")
+            Core.<*> (o Core..:? "filterProfanity")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "maxAlternatives")
+            Core.<*> (o Core..:? "speechContexts")
       )
 
 instance
@@ -9564,8 +9437,7 @@ instance
                 Core.<$> enableAutomaticPunctuation,
               ("enableSpeakerDiarization" Core..=)
                 Core.<$> enableSpeakerDiarization,
-              ("enableWordConfidence" Core..=)
-                Core.<$> enableWordConfidence,
+              ("enableWordConfidence" Core..=) Core.<$> enableWordConfidence,
               ("filterProfanity" Core..=) Core.<$> filterProfanity,
               ("languageCode" Core..=) Core.<$> languageCode,
               ("maxAlternatives" Core..=) Core.<$> maxAlternatives,
@@ -9594,8 +9466,10 @@ newGoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse ::
   GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse
 newGoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse =
   GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse
-    { annotationResults = Core.Nothing,
-      annotationResultsUri = Core.Nothing,
+    { annotationResults =
+        Core.Nothing,
+      annotationResultsUri =
+        Core.Nothing,
       error = Core.Nothing
     }
 
@@ -9609,8 +9483,8 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse
             Core.<$> (o Core..:? "annotationResults")
-              Core.<*> (o Core..:? "annotationResultsUri")
-              Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "annotationResultsUri")
+            Core.<*> (o Core..:? "error")
       )
 
 instance
@@ -9621,10 +9495,8 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse {..} =
       Core.object
         ( Core.catMaybes
-            [ ("annotationResults" Core..=)
-                Core.<$> annotationResults,
-              ("annotationResultsUri" Core..=)
-                Core.<$> annotationResultsUri,
+            [ ("annotationResults" Core..=) Core.<$> annotationResults,
+              ("annotationResultsUri" Core..=) Core.<$> annotationResultsUri,
               ("error" Core..=) Core.<$> error
             ]
         )
@@ -9660,11 +9532,16 @@ newGoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults ::
   GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults
 newGoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults =
   GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults
-    { explicitAnnotation = Core.Nothing,
-      frameTimestamp = Core.Nothing,
-      labelAnnotations = Core.Nothing,
-      objectAnnotations = Core.Nothing,
-      shotAnnotations = Core.Nothing
+    { explicitAnnotation =
+        Core.Nothing,
+      frameTimestamp =
+        Core.Nothing,
+      labelAnnotations =
+        Core.Nothing,
+      objectAnnotations =
+        Core.Nothing,
+      shotAnnotations =
+        Core.Nothing
     }
 
 instance
@@ -9677,10 +9554,10 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults
             Core.<$> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "frameTimestamp")
-              Core.<*> (o Core..:? "labelAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "frameTimestamp")
+            Core.<*> (o Core..:? "labelAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
       )
 
 instance
@@ -9691,15 +9568,11 @@ instance
     GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults {..} =
       Core.object
         ( Core.catMaybes
-            [ ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
+            [ ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
               ("frameTimestamp" Core..=) Core.<$> frameTimestamp,
-              ("labelAnnotations" Core..=)
-                Core.<$> labelAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
-              ("shotAnnotations" Core..=)
-                Core.<$> shotAnnotations
+              ("labelAnnotations" Core..=) Core.<$> labelAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
+              ("shotAnnotations" Core..=) Core.<$> shotAnnotations
             ]
         )
 
@@ -9721,7 +9594,8 @@ newGoogleCloudVideointelligenceV1p3beta1_TextAnnotation ::
   GoogleCloudVideointelligenceV1p3beta1_TextAnnotation
 newGoogleCloudVideointelligenceV1p3beta1_TextAnnotation =
   GoogleCloudVideointelligenceV1p3beta1_TextAnnotation
-    { segments = Core.Nothing,
+    { segments =
+        Core.Nothing,
       text = Core.Nothing,
       version = Core.Nothing
     }
@@ -9735,23 +9609,23 @@ instance
       "GoogleCloudVideointelligenceV1p3beta1_TextAnnotation"
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextAnnotation
-            Core.<$> (o Core..:? "segments") Core.<*> (o Core..:? "text")
-              Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "segments")
+            Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "version")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_TextAnnotation
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_TextAnnotation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("segments" Core..=) Core.<$> segments,
-              ("text" Core..=) Core.<$> text,
-              ("version" Core..=) Core.<$> version
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_TextAnnotation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("segments" Core..=) Core.<$> segments,
+            ("text" Core..=) Core.<$> text,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
 
 -- | Config for TEXT_DETECTION.
 --
@@ -9769,7 +9643,8 @@ newGoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig ::
   GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig
 newGoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig =
   GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig
-    { languageHints = Core.Nothing,
+    { languageHints =
+        Core.Nothing,
       model = Core.Nothing
     }
 
@@ -9783,7 +9658,7 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextDetectionConfig
             Core.<$> (o Core..:? "languageHints")
-              Core.<*> (o Core..:? "model")
+            Core.<*> (o Core..:? "model")
       )
 
 instance
@@ -9818,7 +9693,8 @@ newGoogleCloudVideointelligenceV1p3beta1_TextFrame ::
   GoogleCloudVideointelligenceV1p3beta1_TextFrame
 newGoogleCloudVideointelligenceV1p3beta1_TextFrame =
   GoogleCloudVideointelligenceV1p3beta1_TextFrame
-    { rotatedBoundingBox = Core.Nothing,
+    { rotatedBoundingBox =
+        Core.Nothing,
       timeOffset = Core.Nothing
     }
 
@@ -9832,22 +9708,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextFrame
             Core.<$> (o Core..:? "rotatedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_TextFrame
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_TextFrame {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("rotatedBoundingBox" Core..=)
-                Core.<$> rotatedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_TextFrame {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rotatedBoundingBox" Core..=) Core.<$> rotatedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | Video segment level annotation results for text detection.
 --
@@ -9867,7 +9741,8 @@ newGoogleCloudVideointelligenceV1p3beta1_TextSegment ::
   GoogleCloudVideointelligenceV1p3beta1_TextSegment
 newGoogleCloudVideointelligenceV1p3beta1_TextSegment =
   GoogleCloudVideointelligenceV1p3beta1_TextSegment
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       frames = Core.Nothing,
       segment = Core.Nothing
     }
@@ -9882,23 +9757,22 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TextSegment
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "frames")
-              Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "frames")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_TextSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_TextSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("frames" Core..=) Core.<$> frames,
-              ("segment" Core..=) Core.<$> segment
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_TextSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("frames" Core..=) Core.<$> frames,
+            ("segment" Core..=) Core.<$> segment
+          ]
+      )
 
 -- | For tracking related features. An object at time/offset with attributes, and located with normalized/bounding_box.
 --
@@ -9929,7 +9803,8 @@ newGoogleCloudVideointelligenceV1p3beta1_TimestampedObject ::
   GoogleCloudVideointelligenceV1p3beta1_TimestampedObject
 newGoogleCloudVideointelligenceV1p3beta1_TimestampedObject =
   GoogleCloudVideointelligenceV1p3beta1_TimestampedObject
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       landmarks = Core.Nothing,
       normalizedBoundingBox = Core.Nothing,
       timeOffset = Core.Nothing
@@ -9945,26 +9820,24 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_TimestampedObject
             Core.<$> (o Core..:? "attributes")
-              Core.<*> (o Core..:? "landmarks")
-              Core.<*> (o Core..:? "normalizedBoundingBox")
-              Core.<*> (o Core..:? "timeOffset")
+            Core.<*> (o Core..:? "landmarks")
+            Core.<*> (o Core..:? "normalizedBoundingBox")
+            Core.<*> (o Core..:? "timeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_TimestampedObject
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_TimestampedObject {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("landmarks" Core..=) Core.<$> landmarks,
-              ("normalizedBoundingBox" Core..=)
-                Core.<$> normalizedBoundingBox,
-              ("timeOffset" Core..=) Core.<$> timeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_TimestampedObject {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("landmarks" Core..=) Core.<$> landmarks,
+            ("normalizedBoundingBox" Core..=) Core.<$> normalizedBoundingBox,
+            ("timeOffset" Core..=) Core.<$> timeOffset
+          ]
+      )
 
 -- | A track of an object instance.
 --
@@ -9992,16 +9865,14 @@ newGoogleCloudVideointelligenceV1p3beta1_Track ::
   GoogleCloudVideointelligenceV1p3beta1_Track
 newGoogleCloudVideointelligenceV1p3beta1_Track =
   GoogleCloudVideointelligenceV1p3beta1_Track
-    { attributes = Core.Nothing,
+    { attributes =
+        Core.Nothing,
       confidence = Core.Nothing,
       segment = Core.Nothing,
       timestampedObjects = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudVideointelligenceV1p3beta1_Track
-  where
+instance Core.FromJSON GoogleCloudVideointelligenceV1p3beta1_Track where
   parseJSON =
     Core.withObject
       "GoogleCloudVideointelligenceV1p3beta1_Track"
@@ -10013,21 +9884,16 @@ instance
             Core.<*> (o Core..:? "timestampedObjects")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p3beta1_Track
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_Track {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attributes" Core..=) Core.<$> attributes,
-              ("confidence" Core..=) Core.<$> confidence,
-              ("segment" Core..=) Core.<$> segment,
-              ("timestampedObjects" Core..=)
-                Core.<$> timestampedObjects
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p3beta1_Track where
+  toJSON GoogleCloudVideointelligenceV1p3beta1_Track {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attributes" Core..=) Core.<$> attributes,
+            ("confidence" Core..=) Core.<$> confidence,
+            ("segment" Core..=) Core.<$> segment,
+            ("timestampedObjects" Core..=) Core.<$> timestampedObjects
+          ]
+      )
 
 -- | Annotation progress for a single video.
 --
@@ -10056,7 +9922,8 @@ newGoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress ::
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress
 newGoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress =
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress
-    { feature = Core.Nothing,
+    { feature =
+        Core.Nothing,
       inputUri = Core.Nothing,
       progressPercent = Core.Nothing,
       segment = Core.Nothing,
@@ -10074,11 +9941,11 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress
             Core.<$> (o Core..:? "feature")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "progressPercent")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "progressPercent")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
@@ -10182,23 +10049,33 @@ newGoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults ::
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults
 newGoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults =
   GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults
-    { celebrityRecognitionAnnotations = Core.Nothing,
+    { celebrityRecognitionAnnotations =
+        Core.Nothing,
       error = Core.Nothing,
       explicitAnnotation = Core.Nothing,
       faceAnnotations = Core.Nothing,
-      faceDetectionAnnotations = Core.Nothing,
-      frameLabelAnnotations = Core.Nothing,
+      faceDetectionAnnotations =
+        Core.Nothing,
+      frameLabelAnnotations =
+        Core.Nothing,
       inputUri = Core.Nothing,
-      logoRecognitionAnnotations = Core.Nothing,
+      logoRecognitionAnnotations =
+        Core.Nothing,
       objectAnnotations = Core.Nothing,
-      personDetectionAnnotations = Core.Nothing,
+      personDetectionAnnotations =
+        Core.Nothing,
       segment = Core.Nothing,
-      segmentLabelAnnotations = Core.Nothing,
-      segmentPresenceLabelAnnotations = Core.Nothing,
+      segmentLabelAnnotations =
+        Core.Nothing,
+      segmentPresenceLabelAnnotations =
+        Core.Nothing,
       shotAnnotations = Core.Nothing,
-      shotLabelAnnotations = Core.Nothing,
-      shotPresenceLabelAnnotations = Core.Nothing,
-      speechTranscriptions = Core.Nothing,
+      shotLabelAnnotations =
+        Core.Nothing,
+      shotPresenceLabelAnnotations =
+        Core.Nothing,
+      speechTranscriptions =
+        Core.Nothing,
       textAnnotations = Core.Nothing
     }
 
@@ -10212,23 +10089,23 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults
             Core.<$> (o Core..:? "celebrityRecognitionAnnotations")
-              Core.<*> (o Core..:? "error")
-              Core.<*> (o Core..:? "explicitAnnotation")
-              Core.<*> (o Core..:? "faceAnnotations")
-              Core.<*> (o Core..:? "faceDetectionAnnotations")
-              Core.<*> (o Core..:? "frameLabelAnnotations")
-              Core.<*> (o Core..:? "inputUri")
-              Core.<*> (o Core..:? "logoRecognitionAnnotations")
-              Core.<*> (o Core..:? "objectAnnotations")
-              Core.<*> (o Core..:? "personDetectionAnnotations")
-              Core.<*> (o Core..:? "segment")
-              Core.<*> (o Core..:? "segmentLabelAnnotations")
-              Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "shotAnnotations")
-              Core.<*> (o Core..:? "shotLabelAnnotations")
-              Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
-              Core.<*> (o Core..:? "speechTranscriptions")
-              Core.<*> (o Core..:? "textAnnotations")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "explicitAnnotation")
+            Core.<*> (o Core..:? "faceAnnotations")
+            Core.<*> (o Core..:? "faceDetectionAnnotations")
+            Core.<*> (o Core..:? "frameLabelAnnotations")
+            Core.<*> (o Core..:? "inputUri")
+            Core.<*> (o Core..:? "logoRecognitionAnnotations")
+            Core.<*> (o Core..:? "objectAnnotations")
+            Core.<*> (o Core..:? "personDetectionAnnotations")
+            Core.<*> (o Core..:? "segment")
+            Core.<*> (o Core..:? "segmentLabelAnnotations")
+            Core.<*> (o Core..:? "segmentPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "shotAnnotations")
+            Core.<*> (o Core..:? "shotLabelAnnotations")
+            Core.<*> (o Core..:? "shotPresenceLabelAnnotations")
+            Core.<*> (o Core..:? "speechTranscriptions")
+            Core.<*> (o Core..:? "textAnnotations")
       )
 
 instance
@@ -10242,18 +10119,15 @@ instance
             [ ("celebrityRecognitionAnnotations" Core..=)
                 Core.<$> celebrityRecognitionAnnotations,
               ("error" Core..=) Core.<$> error,
-              ("explicitAnnotation" Core..=)
-                Core.<$> explicitAnnotation,
+              ("explicitAnnotation" Core..=) Core.<$> explicitAnnotation,
               ("faceAnnotations" Core..=) Core.<$> faceAnnotations,
               ("faceDetectionAnnotations" Core..=)
                 Core.<$> faceDetectionAnnotations,
-              ("frameLabelAnnotations" Core..=)
-                Core.<$> frameLabelAnnotations,
+              ("frameLabelAnnotations" Core..=) Core.<$> frameLabelAnnotations,
               ("inputUri" Core..=) Core.<$> inputUri,
               ("logoRecognitionAnnotations" Core..=)
                 Core.<$> logoRecognitionAnnotations,
-              ("objectAnnotations" Core..=)
-                Core.<$> objectAnnotations,
+              ("objectAnnotations" Core..=) Core.<$> objectAnnotations,
               ("personDetectionAnnotations" Core..=)
                 Core.<$> personDetectionAnnotations,
               ("segment" Core..=) Core.<$> segment,
@@ -10262,14 +10136,11 @@ instance
               ("segmentPresenceLabelAnnotations" Core..=)
                 Core.<$> segmentPresenceLabelAnnotations,
               ("shotAnnotations" Core..=) Core.<$> shotAnnotations,
-              ("shotLabelAnnotations" Core..=)
-                Core.<$> shotLabelAnnotations,
+              ("shotLabelAnnotations" Core..=) Core.<$> shotLabelAnnotations,
               ("shotPresenceLabelAnnotations" Core..=)
                 Core.<$> shotPresenceLabelAnnotations,
-              ("speechTranscriptions" Core..=)
-                Core.<$> speechTranscriptions,
-              ("textAnnotations" Core..=)
-                Core.<$> textAnnotations
+              ("speechTranscriptions" Core..=) Core.<$> speechTranscriptions,
+              ("textAnnotations" Core..=) Core.<$> textAnnotations
             ]
         )
 
@@ -10327,7 +10198,8 @@ newGoogleCloudVideointelligenceV1p3beta1_VideoContext ::
   GoogleCloudVideointelligenceV1p3beta1_VideoContext
 newGoogleCloudVideointelligenceV1p3beta1_VideoContext =
   GoogleCloudVideointelligenceV1p3beta1_VideoContext
-    { explicitContentDetectionConfig = Core.Nothing,
+    { explicitContentDetectionConfig =
+        Core.Nothing,
       faceDetectionConfig = Core.Nothing,
       labelDetectionConfig = Core.Nothing,
       objectTrackingConfig = Core.Nothing,
@@ -10348,43 +10220,37 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_VideoContext
             Core.<$> (o Core..:? "explicitContentDetectionConfig")
-              Core.<*> (o Core..:? "faceDetectionConfig")
-              Core.<*> (o Core..:? "labelDetectionConfig")
-              Core.<*> (o Core..:? "objectTrackingConfig")
-              Core.<*> (o Core..:? "personDetectionConfig")
-              Core.<*> (o Core..:? "segments")
-              Core.<*> (o Core..:? "shotChangeDetectionConfig")
-              Core.<*> (o Core..:? "speechTranscriptionConfig")
-              Core.<*> (o Core..:? "textDetectionConfig")
+            Core.<*> (o Core..:? "faceDetectionConfig")
+            Core.<*> (o Core..:? "labelDetectionConfig")
+            Core.<*> (o Core..:? "objectTrackingConfig")
+            Core.<*> (o Core..:? "personDetectionConfig")
+            Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "shotChangeDetectionConfig")
+            Core.<*> (o Core..:? "speechTranscriptionConfig")
+            Core.<*> (o Core..:? "textDetectionConfig")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_VideoContext
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_VideoContext {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("explicitContentDetectionConfig" Core..=)
-                Core.<$> explicitContentDetectionConfig,
-              ("faceDetectionConfig" Core..=)
-                Core.<$> faceDetectionConfig,
-              ("labelDetectionConfig" Core..=)
-                Core.<$> labelDetectionConfig,
-              ("objectTrackingConfig" Core..=)
-                Core.<$> objectTrackingConfig,
-              ("personDetectionConfig" Core..=)
-                Core.<$> personDetectionConfig,
-              ("segments" Core..=) Core.<$> segments,
-              ("shotChangeDetectionConfig" Core..=)
-                Core.<$> shotChangeDetectionConfig,
-              ("speechTranscriptionConfig" Core..=)
-                Core.<$> speechTranscriptionConfig,
-              ("textDetectionConfig" Core..=)
-                Core.<$> textDetectionConfig
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_VideoContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("explicitContentDetectionConfig" Core..=)
+              Core.<$> explicitContentDetectionConfig,
+            ("faceDetectionConfig" Core..=) Core.<$> faceDetectionConfig,
+            ("labelDetectionConfig" Core..=) Core.<$> labelDetectionConfig,
+            ("objectTrackingConfig" Core..=) Core.<$> objectTrackingConfig,
+            ("personDetectionConfig" Core..=) Core.<$> personDetectionConfig,
+            ("segments" Core..=) Core.<$> segments,
+            ("shotChangeDetectionConfig" Core..=)
+              Core.<$> shotChangeDetectionConfig,
+            ("speechTranscriptionConfig" Core..=)
+              Core.<$> speechTranscriptionConfig,
+            ("textDetectionConfig" Core..=) Core.<$> textDetectionConfig
+          ]
+      )
 
 -- | Video segment.
 --
@@ -10402,7 +10268,8 @@ newGoogleCloudVideointelligenceV1p3beta1_VideoSegment ::
   GoogleCloudVideointelligenceV1p3beta1_VideoSegment
 newGoogleCloudVideointelligenceV1p3beta1_VideoSegment =
   GoogleCloudVideointelligenceV1p3beta1_VideoSegment
-    { endTimeOffset = Core.Nothing,
+    { endTimeOffset =
+        Core.Nothing,
       startTimeOffset = Core.Nothing
     }
 
@@ -10416,22 +10283,20 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_VideoSegment
             Core.<$> (o Core..:? "endTimeOffset")
-              Core.<*> (o Core..:? "startTimeOffset")
+            Core.<*> (o Core..:? "startTimeOffset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudVideointelligenceV1p3beta1_VideoSegment
   where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_VideoSegment {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
-              ("startTimeOffset" Core..=)
-                Core.<$> startTimeOffset
-            ]
-        )
+  toJSON GoogleCloudVideointelligenceV1p3beta1_VideoSegment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTimeOffset" Core..=) Core.<$> endTimeOffset,
+            ("startTimeOffset" Core..=) Core.<$> startTimeOffset
+          ]
+      )
 
 -- | Word-specific information for recognized words. Word information is only included in the response when certain request parameters are set, such as @enable_word_time_offsets@.
 --
@@ -10455,7 +10320,8 @@ newGoogleCloudVideointelligenceV1p3beta1_WordInfo ::
   GoogleCloudVideointelligenceV1p3beta1_WordInfo
 newGoogleCloudVideointelligenceV1p3beta1_WordInfo =
   GoogleCloudVideointelligenceV1p3beta1_WordInfo
-    { confidence = Core.Nothing,
+    { confidence =
+        Core.Nothing,
       endTime = Core.Nothing,
       speakerTag = Core.Nothing,
       startTime = Core.Nothing,
@@ -10472,27 +10338,23 @@ instance
       ( \o ->
           GoogleCloudVideointelligenceV1p3beta1_WordInfo
             Core.<$> (o Core..:? "confidence")
-              Core.<*> (o Core..:? "endTime")
-              Core.<*> (o Core..:? "speakerTag")
-              Core.<*> (o Core..:? "startTime")
-              Core.<*> (o Core..:? "word")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "speakerTag")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "word")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudVideointelligenceV1p3beta1_WordInfo
-  where
-  toJSON
-    GoogleCloudVideointelligenceV1p3beta1_WordInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("confidence" Core..=) Core.<$> confidence,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("speakerTag" Core..=) Core.<$> speakerTag,
-              ("startTime" Core..=) Core.<$> startTime,
-              ("word" Core..=) Core.<$> word
-            ]
-        )
+instance Core.ToJSON GoogleCloudVideointelligenceV1p3beta1_WordInfo where
+  toJSON GoogleCloudVideointelligenceV1p3beta1_WordInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("confidence" Core..=) Core.<$> confidence,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("speakerTag" Core..=) Core.<$> speakerTag,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("word" Core..=) Core.<$> word
+          ]
+      )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -10506,7 +10368,7 @@ data GoogleLongrunning_Operation = GoogleLongrunning_Operation
     metadata :: (Core.Maybe GoogleLongrunning_Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe GoogleLongrunning_Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10565,10 +10427,7 @@ newGoogleLongrunning_Operation_Metadata ::
 newGoogleLongrunning_Operation_Metadata additional =
   GoogleLongrunning_Operation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunning_Operation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunning_Operation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunning_Operation_Metadata"
@@ -10577,14 +10436,11 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunning_Operation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunning_Operation_Metadata where
   toJSON GoogleLongrunning_Operation_Metadata {..} =
     Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newGoogleLongrunning_Operation_Response' smart constructor.
 newtype GoogleLongrunning_Operation_Response = GoogleLongrunning_Operation_Response
@@ -10601,10 +10457,7 @@ newGoogleLongrunning_Operation_Response ::
 newGoogleLongrunning_Operation_Response additional =
   GoogleLongrunning_Operation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunning_Operation_Response
-  where
+instance Core.FromJSON GoogleLongrunning_Operation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunning_Operation_Response"
@@ -10613,10 +10466,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunning_Operation_Response
-  where
+instance Core.ToJSON GoogleLongrunning_Operation_Response where
   toJSON GoogleLongrunning_Operation_Response {..} =
     Core.toJSON additional
 
@@ -10685,10 +10535,8 @@ instance Core.FromJSON GoogleRpc_Status_DetailsItem where
     Core.withObject
       "GoogleRpc_Status_DetailsItem"
       ( \o ->
-          GoogleRpc_Status_DetailsItem
-            Core.<$> (Core.parseJSONObject o)
+          GoogleRpc_Status_DetailsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleRpc_Status_DetailsItem where
-  toJSON GoogleRpc_Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON GoogleRpc_Status_DetailsItem {..} = Core.toJSON additional

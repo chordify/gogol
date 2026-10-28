@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Import
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.I
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.import@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport' request conforms to.
@@ -54,9 +52,7 @@ type CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImportResource 
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ImportCryptoKeyVersionRequest
+    Core.:> Core.ReqBody '[Core.JSON] ImportCryptoKeyVersionRequest
     Core.:> Core.Post '[Core.JSON] CryptoKeyVersion
 
 -- | Import wrapped key material into a CryptoKeyVersion. All requests must specify a CryptoKey. If a CryptoKeyVersion is additionally specified in the request, key material will be reimported into that version. Otherwise, a new version will be created, and will be assigned the next sequential id within the CryptoKey.
@@ -87,16 +83,20 @@ newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport ::
   -- |  Multipart request metadata. See 'payload'.
   ImportCryptoKeyVersionRequest ->
   CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport
-newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport parent payload =
-  CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport
+  parent
+  payload =
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

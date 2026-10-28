@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.Instantiate
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.instantiate@ method which the
 -- 'DataprocProjectsRegionsWorkflowTemplatesInstantiate' request conforms to.
@@ -53,9 +51,7 @@ type DataprocProjectsRegionsWorkflowTemplatesInstantiateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstantiateWorkflowTemplateRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstantiateWorkflowTemplateRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#workflowmetadata). Also see Using WorkflowMetadata (https:\/\/cloud.google.com\/dataproc\/docs\/concepts\/workflows\/debugging#using_workflowmetadata).On successful completion, Operation.response will be Empty.
@@ -88,7 +84,8 @@ newDataprocProjectsRegionsWorkflowTemplatesInstantiate ::
   DataprocProjectsRegionsWorkflowTemplatesInstantiate
 newDataprocProjectsRegionsWorkflowTemplatesInstantiate name payload =
   DataprocProjectsRegionsWorkflowTemplatesInstantiate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -102,12 +99,10 @@ instance
     DataprocProjectsRegionsWorkflowTemplatesInstantiate
   where
   type
-    Rs
-      DataprocProjectsRegionsWorkflowTemplatesInstantiate =
+    Rs DataprocProjectsRegionsWorkflowTemplatesInstantiate =
       Operation
   type
-    Scopes
-      DataprocProjectsRegionsWorkflowTemplatesInstantiate =
+    Scopes DataprocProjectsRegionsWorkflowTemplatesInstantiate =
       '[CloudPlatform'FullControl]
   requestClient
     DataprocProjectsRegionsWorkflowTemplatesInstantiate {..} =

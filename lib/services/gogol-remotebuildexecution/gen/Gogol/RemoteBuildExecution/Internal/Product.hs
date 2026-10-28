@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.RemoteBuildExecution.Internal.Product
@@ -396,7 +394,7 @@ module Gogol.RemoteBuildExecution.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Internal.Sum
 
 -- | An @Action@ captures all the information about an execution which is required to reproduce it. @Action@s are the core component of the [Execution] service. A single @Action@ represents a repeatable action that can be performed by the execution service. @Action@s can be succinctly identified by the digest of their wire format encoding and, once an @Action@ has been executed, will be cached in the action cache. Future requests can then use the cached result rather than needing to run afresh. When a server completes execution of an Action, it MAY choose to cache the result in the ActionCache unless @do_not_cache@ is @true@. Clients SHOULD expect the server to do so. By default, future calls to Execute the same @Action@ will also serve their results from the cache. Clients must take care to understand the caching behaviour. Ideally, all @Action@s will be reproducible so that serving a result from cache is always desirable and correct.
@@ -431,10 +429,7 @@ newBuildBazelRemoteExecutionV2Action =
       timeout = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Action
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Action where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Action"
@@ -448,10 +443,7 @@ instance
             Core.<*> (o Core..:? "timeout")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2Action
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2Action where
   toJSON BuildBazelRemoteExecutionV2Action {..} =
     Core.object
       ( Core.catMaybes
@@ -468,8 +460,7 @@ instance
 --
 -- /See:/ 'newBuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities' smart constructor.
 newtype BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities = BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
-  { -- |
-    updateEnabled :: (Core.Maybe Core.Bool)
+  { updateEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -478,7 +469,8 @@ newBuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities ::
   BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
 newBuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities =
   BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
-    { updateEnabled = Core.Nothing
+    { updateEnabled =
+        Core.Nothing
     }
 
 instance
@@ -497,12 +489,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities
   where
-  toJSON
-    BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities {..} =
-      Core.object
-        ( Core.catMaybes
-            [("updateEnabled" Core..=) Core.<$> updateEnabled]
-        )
+  toJSON BuildBazelRemoteExecutionV2ActionCacheUpdateCapabilities {..} =
+    Core.object
+      (Core.catMaybes [("updateEnabled" Core..=) Core.<$> updateEnabled])
 
 -- | An ActionResult represents the result of an Action being run. It is advised that at least one field (for example @ActionResult.execution_metadata.Worker@) have a non-default value, to ensure that the serialized value is non-empty, which can then be used as a basic data sanity check.
 --
@@ -541,7 +530,8 @@ newBuildBazelRemoteExecutionV2ActionResult ::
   BuildBazelRemoteExecutionV2ActionResult
 newBuildBazelRemoteExecutionV2ActionResult =
   BuildBazelRemoteExecutionV2ActionResult
-    { executionMetadata = Core.Nothing,
+    { executionMetadata =
+        Core.Nothing,
       exitCode = Core.Nothing,
       outputDirectories = Core.Nothing,
       outputDirectorySymlinks = Core.Nothing,
@@ -554,10 +544,7 @@ newBuildBazelRemoteExecutionV2ActionResult =
       stdoutRaw = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2ActionResult
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2ActionResult where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2ActionResult"
@@ -576,22 +563,16 @@ instance
             Core.<*> (o Core..:? "stdoutRaw")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ActionResult
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2ActionResult where
   toJSON BuildBazelRemoteExecutionV2ActionResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("executionMetadata" Core..=)
-              Core.<$> executionMetadata,
+          [ ("executionMetadata" Core..=) Core.<$> executionMetadata,
             ("exitCode" Core..=) Core.<$> exitCode,
-            ("outputDirectories" Core..=)
-              Core.<$> outputDirectories,
+            ("outputDirectories" Core..=) Core.<$> outputDirectories,
             ("outputDirectorySymlinks" Core..=)
               Core.<$> outputDirectorySymlinks,
-            ("outputFileSymlinks" Core..=)
-              Core.<$> outputFileSymlinks,
+            ("outputFileSymlinks" Core..=) Core.<$> outputFileSymlinks,
             ("outputFiles" Core..=) Core.<$> outputFiles,
             ("outputSymlinks" Core..=) Core.<$> outputSymlinks,
             ("stderrDigest" Core..=) Core.<$> stderrDigest,
@@ -614,7 +595,10 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsRequest = BuildBazelRemoteExecu
 newBuildBazelRemoteExecutionV2BatchReadBlobsRequest ::
   BuildBazelRemoteExecutionV2BatchReadBlobsRequest
 newBuildBazelRemoteExecutionV2BatchReadBlobsRequest =
-  BuildBazelRemoteExecutionV2BatchReadBlobsRequest {digests = Core.Nothing}
+  BuildBazelRemoteExecutionV2BatchReadBlobsRequest
+    { digests =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -632,12 +616,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2BatchReadBlobsRequest
   where
-  toJSON
-    BuildBazelRemoteExecutionV2BatchReadBlobsRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("digests" Core..=) Core.<$> digests]
-        )
+  toJSON BuildBazelRemoteExecutionV2BatchReadBlobsRequest {..} =
+    Core.object
+      (Core.catMaybes [("digests" Core..=) Core.<$> digests])
 
 -- | A response message for ContentAddressableStorage.BatchReadBlobs.
 --
@@ -655,7 +636,10 @@ newtype BuildBazelRemoteExecutionV2BatchReadBlobsResponse = BuildBazelRemoteExec
 newBuildBazelRemoteExecutionV2BatchReadBlobsResponse ::
   BuildBazelRemoteExecutionV2BatchReadBlobsResponse
 newBuildBazelRemoteExecutionV2BatchReadBlobsResponse =
-  BuildBazelRemoteExecutionV2BatchReadBlobsResponse {responses = Core.Nothing}
+  BuildBazelRemoteExecutionV2BatchReadBlobsResponse
+    { responses =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -673,12 +657,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2BatchReadBlobsResponse
   where
-  toJSON
-    BuildBazelRemoteExecutionV2BatchReadBlobsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+  toJSON BuildBazelRemoteExecutionV2BatchReadBlobsResponse {..} =
+    Core.object
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | A response corresponding to a single blob that the client tried to download.
 --
@@ -698,7 +679,8 @@ newBuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse ::
   BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
 newBuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse =
   BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
-    { data' = Core.Nothing,
+    { data' =
+        Core.Nothing,
       digest = Core.Nothing,
       status = Core.Nothing
     }
@@ -712,8 +694,9 @@ instance
       "BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchReadBlobsResponseResponse
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "digest")
-              Core.<*> (o Core..:? "status")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "digest")
+            Core.<*> (o Core..:? "status")
       )
 
 instance
@@ -746,7 +729,10 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest = BuildBazelRemoteExe
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsRequest ::
   BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsRequest =
-  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest {requests = Core.Nothing}
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
+    { requests =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -764,12 +750,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest
   where
-  toJSON
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("requests" Core..=) Core.<$> requests]
-        )
+  toJSON BuildBazelRemoteExecutionV2BatchUpdateBlobsRequest {..} =
+    Core.object
+      (Core.catMaybes [("requests" Core..=) Core.<$> requests])
 
 -- | A request corresponding to a single blob that the client wants to upload.
 --
@@ -787,7 +770,8 @@ newBuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest ::
   BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
-    { data' = Core.Nothing,
+    { data' =
+        Core.Nothing,
       digest = Core.Nothing
     }
 
@@ -800,7 +784,8 @@ instance
       "BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchUpdateBlobsRequestRequest
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "digest")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "digest")
       )
 
 instance
@@ -832,7 +817,10 @@ newtype BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse = BuildBazelRemoteEx
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsResponse ::
   BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsResponse =
-  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse {responses = Core.Nothing}
+  BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
+    { responses =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -850,12 +838,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse
   where
-  toJSON
-    BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("responses" Core..=) Core.<$> responses]
-        )
+  toJSON BuildBazelRemoteExecutionV2BatchUpdateBlobsResponse {..} =
+    Core.object
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | A response corresponding to a single blob that the client tried to upload.
 --
@@ -873,7 +858,8 @@ newBuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse ::
   BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
 newBuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse =
   BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
-    { digest = Core.Nothing,
+    { digest =
+        Core.Nothing,
       status = Core.Nothing
     }
 
@@ -886,7 +872,8 @@ instance
       "BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse"
       ( \o ->
           BuildBazelRemoteExecutionV2BatchUpdateBlobsResponseResponse
-            Core.<$> (o Core..:? "digest") Core.<*> (o Core..:? "status")
+            Core.<$> (o Core..:? "digest")
+            Core.<*> (o Core..:? "status")
       )
 
 instance
@@ -938,7 +925,8 @@ newBuildBazelRemoteExecutionV2CacheCapabilities ::
   BuildBazelRemoteExecutionV2CacheCapabilities
 newBuildBazelRemoteExecutionV2CacheCapabilities =
   BuildBazelRemoteExecutionV2CacheCapabilities
-    { actionCacheUpdateCapabilities = Core.Nothing,
+    { actionCacheUpdateCapabilities =
+        Core.Nothing,
       cachePriorityCapabilities = Core.Nothing,
       digestFunction = Core.Nothing,
       maxBatchTotalSizeBytes = Core.Nothing,
@@ -946,10 +934,7 @@ newBuildBazelRemoteExecutionV2CacheCapabilities =
       symlinkAbsolutePathStrategy = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2CacheCapabilities
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2CacheCapabilities where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2CacheCapabilities"
@@ -958,34 +943,31 @@ instance
             Core.<$> (o Core..:? "actionCacheUpdateCapabilities")
             Core.<*> (o Core..:? "cachePriorityCapabilities")
             Core.<*> (o Core..:? "digestFunction")
-            Core.<*> ( o Core..:? "maxBatchTotalSizeBytes"
+            Core.<*> ( o
+                         Core..:? "maxBatchTotalSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "supportedCompressor")
             Core.<*> (o Core..:? "symlinkAbsolutePathStrategy")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2CacheCapabilities
-  where
-  toJSON
-    BuildBazelRemoteExecutionV2CacheCapabilities {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("actionCacheUpdateCapabilities" Core..=)
-                Core.<$> actionCacheUpdateCapabilities,
-              ("cachePriorityCapabilities" Core..=)
-                Core.<$> cachePriorityCapabilities,
-              ("digestFunction" Core..=) Core.<$> digestFunction,
-              ("maxBatchTotalSizeBytes" Core..=) Core.. Core.AsText
-                Core.<$> maxBatchTotalSizeBytes,
-              ("supportedCompressor" Core..=)
-                Core.<$> supportedCompressor,
-              ("symlinkAbsolutePathStrategy" Core..=)
-                Core.<$> symlinkAbsolutePathStrategy
-            ]
-        )
+instance Core.ToJSON BuildBazelRemoteExecutionV2CacheCapabilities where
+  toJSON BuildBazelRemoteExecutionV2CacheCapabilities {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actionCacheUpdateCapabilities" Core..=)
+              Core.<$> actionCacheUpdateCapabilities,
+            ("cachePriorityCapabilities" Core..=)
+              Core.<$> cachePriorityCapabilities,
+            ("digestFunction" Core..=) Core.<$> digestFunction,
+            ("maxBatchTotalSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxBatchTotalSizeBytes,
+            ("supportedCompressor" Core..=) Core.<$> supportedCompressor,
+            ("symlinkAbsolutePathStrategy" Core..=)
+              Core.<$> symlinkAbsolutePathStrategy
+          ]
+      )
 
 -- | A @Command@ is the actual command executed by a worker running an Action and specifications of its environment. Except as otherwise required, the environment (such as which system libraries or binaries are available, and what filesystems are mounted where) is defined by and specific to the implementation of the remote execution API.
 --
@@ -1031,10 +1013,7 @@ newBuildBazelRemoteExecutionV2Command =
       workingDirectory = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Command
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Command where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Command"
@@ -1050,25 +1029,18 @@ instance
             Core.<*> (o Core..:? "workingDirectory")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2Command
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2Command where
   toJSON BuildBazelRemoteExecutionV2Command {..} =
     Core.object
       ( Core.catMaybes
           [ ("arguments" Core..=) Core.<$> arguments,
-            ("environmentVariables" Core..=)
-              Core.<$> environmentVariables,
-            ("outputDirectories" Core..=)
-              Core.<$> outputDirectories,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
+            ("outputDirectories" Core..=) Core.<$> outputDirectories,
             ("outputFiles" Core..=) Core.<$> outputFiles,
-            ("outputNodeProperties" Core..=)
-              Core.<$> outputNodeProperties,
+            ("outputNodeProperties" Core..=) Core.<$> outputNodeProperties,
             ("outputPaths" Core..=) Core.<$> outputPaths,
             ("platform" Core..=) Core.<$> platform,
-            ("workingDirectory" Core..=)
-              Core.<$> workingDirectory
+            ("workingDirectory" Core..=) Core.<$> workingDirectory
           ]
       )
 
@@ -1088,7 +1060,8 @@ newBuildBazelRemoteExecutionV2CommandEnvironmentVariable ::
   BuildBazelRemoteExecutionV2CommandEnvironmentVariable
 newBuildBazelRemoteExecutionV2CommandEnvironmentVariable =
   BuildBazelRemoteExecutionV2CommandEnvironmentVariable
-    { name = Core.Nothing,
+    { name =
+        Core.Nothing,
       value = Core.Nothing
     }
 
@@ -1101,21 +1074,19 @@ instance
       "BuildBazelRemoteExecutionV2CommandEnvironmentVariable"
       ( \o ->
           BuildBazelRemoteExecutionV2CommandEnvironmentVariable
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2CommandEnvironmentVariable
   where
-  toJSON
-    BuildBazelRemoteExecutionV2CommandEnvironmentVariable {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON BuildBazelRemoteExecutionV2CommandEnvironmentVariable {..} =
+    Core.object
+      ( Core.catMaybes
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
+      )
 
 -- | A content digest. A digest for a given blob consists of the size of the blob and its hash. The hash algorithm to use is defined by the server. The size is considered to be an integral part of the digest and cannot be separated. That is, even if the @hash@ field is correctly specified but @size_bytes@ is not, the server MUST reject the request. The reason for including the size in the digest is as follows: in a great many cases, the server needs to know the size of the blob it is about to work with prior to starting an operation with it, such as flattening Merkle tree structures or streaming it to a worker. Technically, the server could implement a separate metadata store, but this results in a significantly more complicated implementation as opposed to having the client specify the size up-front (or storing the size along with the digest in every message where digests are embedded). This does mean that the API leaks some implementation details of (what we consider to be) a reasonable server implementation,
 -- but we consider this to be a worthwhile tradeoff. When a @Digest@ is used to refer to a proto message, it always refers to the message in binary encoded form. To ensure consistent hashing, clients and servers MUST ensure that they serialize messages according to the following rules, even if there are alternate valid encodings for the same message: * Fields are serialized in tag order. * There are no unknown fields. * There are no duplicate fields. * Fields are serialized according to the default semantics for their type. Most protocol buffer implementations will always follow these rules when serializing, but care should be taken to avoid shortcuts. For instance, concatenating two messages to merge them may produce duplicate fields.
@@ -1138,31 +1109,22 @@ newBuildBazelRemoteExecutionV2Digest =
       sizeBytes = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Digest
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Digest where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Digest"
       ( \o ->
           BuildBazelRemoteExecutionV2Digest
             Core.<$> (o Core..:? "hash")
-            Core.<*> ( o Core..:? "sizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2Digest
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2Digest where
   toJSON BuildBazelRemoteExecutionV2Digest {..} =
     Core.object
       ( Core.catMaybes
           [ ("hash" Core..=) Core.<$> hash,
-            ("sizeBytes" Core..=) Core.. Core.AsText
-              Core.<$> sizeBytes
+            ("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes
           ]
       )
 
@@ -1175,7 +1137,6 @@ data BuildBazelRemoteExecutionV2Directory = BuildBazelRemoteExecutionV2Directory
     directories :: (Core.Maybe [BuildBazelRemoteExecutionV2DirectoryNode]),
     -- | The files in the directory.
     files :: (Core.Maybe [BuildBazelRemoteExecutionV2FileNode]),
-    -- |
     nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties),
     -- | The symlinks in the directory.
     symlinks :: (Core.Maybe [BuildBazelRemoteExecutionV2SymlinkNode])
@@ -1193,10 +1154,7 @@ newBuildBazelRemoteExecutionV2Directory =
       symlinks = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Directory
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Directory where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Directory"
@@ -1208,10 +1166,7 @@ instance
             Core.<*> (o Core..:? "symlinks")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2Directory
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2Directory where
   toJSON BuildBazelRemoteExecutionV2Directory {..} =
     Core.object
       ( Core.catMaybes
@@ -1242,22 +1197,17 @@ newBuildBazelRemoteExecutionV2DirectoryNode =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2DirectoryNode
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2DirectoryNode where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2DirectoryNode"
       ( \o ->
           BuildBazelRemoteExecutionV2DirectoryNode
-            Core.<$> (o Core..:? "digest") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "digest")
+            Core.<*> (o Core..:? "name")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2DirectoryNode
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2DirectoryNode where
   toJSON BuildBazelRemoteExecutionV2DirectoryNode {..} =
     Core.object
       ( Core.catMaybes
@@ -1289,7 +1239,8 @@ newBuildBazelRemoteExecutionV2ExecuteOperationMetadata ::
   BuildBazelRemoteExecutionV2ExecuteOperationMetadata
 newBuildBazelRemoteExecutionV2ExecuteOperationMetadata =
   BuildBazelRemoteExecutionV2ExecuteOperationMetadata
-    { actionDigest = Core.Nothing,
+    { actionDigest =
+        Core.Nothing,
       stage = Core.Nothing,
       stderrStreamName = Core.Nothing,
       stdoutStreamName = Core.Nothing
@@ -1305,27 +1256,24 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2ExecuteOperationMetadata
             Core.<$> (o Core..:? "actionDigest")
-              Core.<*> (o Core..:? "stage")
-              Core.<*> (o Core..:? "stderrStreamName")
-              Core.<*> (o Core..:? "stdoutStreamName")
+            Core.<*> (o Core..:? "stage")
+            Core.<*> (o Core..:? "stderrStreamName")
+            Core.<*> (o Core..:? "stdoutStreamName")
       )
 
 instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2ExecuteOperationMetadata
   where
-  toJSON
-    BuildBazelRemoteExecutionV2ExecuteOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("actionDigest" Core..=) Core.<$> actionDigest,
-              ("stage" Core..=) Core.<$> stage,
-              ("stderrStreamName" Core..=)
-                Core.<$> stderrStreamName,
-              ("stdoutStreamName" Core..=)
-                Core.<$> stdoutStreamName
-            ]
-        )
+  toJSON BuildBazelRemoteExecutionV2ExecuteOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actionDigest" Core..=) Core.<$> actionDigest,
+            ("stage" Core..=) Core.<$> stage,
+            ("stderrStreamName" Core..=) Core.<$> stderrStreamName,
+            ("stdoutStreamName" Core..=) Core.<$> stdoutStreamName
+          ]
+      )
 
 -- | A request message for Execution.Execute.
 --
@@ -1347,16 +1295,14 @@ newBuildBazelRemoteExecutionV2ExecuteRequest ::
   BuildBazelRemoteExecutionV2ExecuteRequest
 newBuildBazelRemoteExecutionV2ExecuteRequest =
   BuildBazelRemoteExecutionV2ExecuteRequest
-    { actionDigest = Core.Nothing,
+    { actionDigest =
+        Core.Nothing,
       executionPolicy = Core.Nothing,
       resultsCachePolicy = Core.Nothing,
       skipCacheLookup = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2ExecuteRequest
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2ExecuteRequest where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2ExecuteRequest"
@@ -1368,19 +1314,14 @@ instance
             Core.<*> (o Core..:? "skipCacheLookup")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ExecuteRequest
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2ExecuteRequest where
   toJSON BuildBazelRemoteExecutionV2ExecuteRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("actionDigest" Core..=) Core.<$> actionDigest,
             ("executionPolicy" Core..=) Core.<$> executionPolicy,
-            ("resultsCachePolicy" Core..=)
-              Core.<$> resultsCachePolicy,
-            ("skipCacheLookup" Core..=)
-              Core.<$> skipCacheLookup
+            ("resultsCachePolicy" Core..=) Core.<$> resultsCachePolicy,
+            ("skipCacheLookup" Core..=) Core.<$> skipCacheLookup
           ]
       )
 
@@ -1406,17 +1347,15 @@ newBuildBazelRemoteExecutionV2ExecuteResponse ::
   BuildBazelRemoteExecutionV2ExecuteResponse
 newBuildBazelRemoteExecutionV2ExecuteResponse =
   BuildBazelRemoteExecutionV2ExecuteResponse
-    { cachedResult = Core.Nothing,
+    { cachedResult =
+        Core.Nothing,
       message = Core.Nothing,
       result = Core.Nothing,
       serverLogs = Core.Nothing,
       status = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2ExecuteResponse
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2ExecuteResponse where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2ExecuteResponse"
@@ -1429,10 +1368,7 @@ instance
             Core.<*> (o Core..:? "status")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ExecuteResponse
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2ExecuteResponse where
   toJSON BuildBazelRemoteExecutionV2ExecuteResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1448,19 +1384,21 @@ instance
 --
 -- /See:/ 'newBuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs' smart constructor.
 newtype BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs = BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs
-  { -- |
-    additional :: (Core.HashMap Core.Text BuildBazelRemoteExecutionV2LogFile)
+  { additional :: (Core.HashMap Core.Text BuildBazelRemoteExecutionV2LogFile)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs' with the minimum fields required to make a request.
 newBuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text BuildBazelRemoteExecutionV2LogFile ->
+  Core.HashMap
+    Core.Text
+    BuildBazelRemoteExecutionV2LogFile ->
   BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs
 newBuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs additional =
   BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs
-    { additional = additional
+    { additional =
+        additional
     }
 
 instance
@@ -1479,9 +1417,8 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs
   where
-  toJSON
-    BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs {..} =
-      Core.toJSON additional
+  toJSON BuildBazelRemoteExecutionV2ExecuteResponse_ServerLogs {..} =
+    Core.toJSON additional
 
 -- | ExecutedActionMetadata contains details about a completed execution.
 --
@@ -1520,7 +1457,8 @@ newBuildBazelRemoteExecutionV2ExecutedActionMetadata ::
   BuildBazelRemoteExecutionV2ExecutedActionMetadata
 newBuildBazelRemoteExecutionV2ExecutedActionMetadata =
   BuildBazelRemoteExecutionV2ExecutedActionMetadata
-    { auxiliaryMetadata = Core.Nothing,
+    { auxiliaryMetadata =
+        Core.Nothing,
       executionCompletedTimestamp = Core.Nothing,
       executionStartTimestamp = Core.Nothing,
       inputFetchCompletedTimestamp = Core.Nothing,
@@ -1543,48 +1481,45 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2ExecutedActionMetadata
             Core.<$> (o Core..:? "auxiliaryMetadata")
-              Core.<*> (o Core..:? "executionCompletedTimestamp")
-              Core.<*> (o Core..:? "executionStartTimestamp")
-              Core.<*> (o Core..:? "inputFetchCompletedTimestamp")
-              Core.<*> (o Core..:? "inputFetchStartTimestamp")
-              Core.<*> (o Core..:? "outputUploadCompletedTimestamp")
-              Core.<*> (o Core..:? "outputUploadStartTimestamp")
-              Core.<*> (o Core..:? "queuedTimestamp")
-              Core.<*> (o Core..:? "worker")
-              Core.<*> (o Core..:? "workerCompletedTimestamp")
-              Core.<*> (o Core..:? "workerStartTimestamp")
+            Core.<*> (o Core..:? "executionCompletedTimestamp")
+            Core.<*> (o Core..:? "executionStartTimestamp")
+            Core.<*> (o Core..:? "inputFetchCompletedTimestamp")
+            Core.<*> (o Core..:? "inputFetchStartTimestamp")
+            Core.<*> (o Core..:? "outputUploadCompletedTimestamp")
+            Core.<*> (o Core..:? "outputUploadStartTimestamp")
+            Core.<*> (o Core..:? "queuedTimestamp")
+            Core.<*> (o Core..:? "worker")
+            Core.<*> (o Core..:? "workerCompletedTimestamp")
+            Core.<*> (o Core..:? "workerStartTimestamp")
       )
 
 instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2ExecutedActionMetadata
   where
-  toJSON
-    BuildBazelRemoteExecutionV2ExecutedActionMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("auxiliaryMetadata" Core..=)
-                Core.<$> auxiliaryMetadata,
-              ("executionCompletedTimestamp" Core..=)
-                Core.<$> executionCompletedTimestamp,
-              ("executionStartTimestamp" Core..=)
-                Core.<$> executionStartTimestamp,
-              ("inputFetchCompletedTimestamp" Core..=)
-                Core.<$> inputFetchCompletedTimestamp,
-              ("inputFetchStartTimestamp" Core..=)
-                Core.<$> inputFetchStartTimestamp,
-              ("outputUploadCompletedTimestamp" Core..=)
-                Core.<$> outputUploadCompletedTimestamp,
-              ("outputUploadStartTimestamp" Core..=)
-                Core.<$> outputUploadStartTimestamp,
-              ("queuedTimestamp" Core..=) Core.<$> queuedTimestamp,
-              ("worker" Core..=) Core.<$> worker,
-              ("workerCompletedTimestamp" Core..=)
-                Core.<$> workerCompletedTimestamp,
-              ("workerStartTimestamp" Core..=)
-                Core.<$> workerStartTimestamp
-            ]
-        )
+  toJSON BuildBazelRemoteExecutionV2ExecutedActionMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("auxiliaryMetadata" Core..=) Core.<$> auxiliaryMetadata,
+            ("executionCompletedTimestamp" Core..=)
+              Core.<$> executionCompletedTimestamp,
+            ("executionStartTimestamp" Core..=)
+              Core.<$> executionStartTimestamp,
+            ("inputFetchCompletedTimestamp" Core..=)
+              Core.<$> inputFetchCompletedTimestamp,
+            ("inputFetchStartTimestamp" Core..=)
+              Core.<$> inputFetchStartTimestamp,
+            ("outputUploadCompletedTimestamp" Core..=)
+              Core.<$> outputUploadCompletedTimestamp,
+            ("outputUploadStartTimestamp" Core..=)
+              Core.<$> outputUploadStartTimestamp,
+            ("queuedTimestamp" Core..=) Core.<$> queuedTimestamp,
+            ("worker" Core..=) Core.<$> worker,
+            ("workerCompletedTimestamp" Core..=)
+              Core.<$> workerCompletedTimestamp,
+            ("workerStartTimestamp" Core..=) Core.<$> workerStartTimestamp
+          ]
+      )
 
 --
 -- /See:/ 'newBuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem' smart constructor.
@@ -1597,12 +1532,16 @@ newtype BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem 
 -- | Creates a value of 'BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem' with the minimum fields required to make a request.
 newBuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
+  Core.HashMap
+    Core.Text
+    Core.Value ->
   BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem
-newBuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem additional =
-  BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem
-    { additional = additional
-    }
+newBuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem
+  additional =
+    BuildBazelRemoteExecutionV2ExecutedActionMetadata_AuxiliaryMetadataItem
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1647,7 +1586,8 @@ newBuildBazelRemoteExecutionV2ExecutionCapabilities ::
   BuildBazelRemoteExecutionV2ExecutionCapabilities
 newBuildBazelRemoteExecutionV2ExecutionCapabilities =
   BuildBazelRemoteExecutionV2ExecutionCapabilities
-    { digestFunction = Core.Nothing,
+    { digestFunction =
+        Core.Nothing,
       execEnabled = Core.Nothing,
       executionPriorityCapabilities = Core.Nothing,
       supportedNodeProperties = Core.Nothing
@@ -1663,27 +1603,26 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2ExecutionCapabilities
             Core.<$> (o Core..:? "digestFunction")
-              Core.<*> (o Core..:? "execEnabled")
-              Core.<*> (o Core..:? "executionPriorityCapabilities")
-              Core.<*> (o Core..:? "supportedNodeProperties")
+            Core.<*> (o Core..:? "execEnabled")
+            Core.<*> (o Core..:? "executionPriorityCapabilities")
+            Core.<*> (o Core..:? "supportedNodeProperties")
       )
 
 instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2ExecutionCapabilities
   where
-  toJSON
-    BuildBazelRemoteExecutionV2ExecutionCapabilities {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("digestFunction" Core..=) Core.<$> digestFunction,
-              ("execEnabled" Core..=) Core.<$> execEnabled,
-              ("executionPriorityCapabilities" Core..=)
-                Core.<$> executionPriorityCapabilities,
-              ("supportedNodeProperties" Core..=)
-                Core.<$> supportedNodeProperties
-            ]
-        )
+  toJSON BuildBazelRemoteExecutionV2ExecutionCapabilities {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("digestFunction" Core..=) Core.<$> digestFunction,
+            ("execEnabled" Core..=) Core.<$> execEnabled,
+            ("executionPriorityCapabilities" Core..=)
+              Core.<$> executionPriorityCapabilities,
+            ("supportedNodeProperties" Core..=)
+              Core.<$> supportedNodeProperties
+          ]
+      )
 
 -- | An @ExecutionPolicy@ can be used to control the scheduling of the action.
 --
@@ -1698,12 +1637,12 @@ newtype BuildBazelRemoteExecutionV2ExecutionPolicy = BuildBazelRemoteExecutionV2
 newBuildBazelRemoteExecutionV2ExecutionPolicy ::
   BuildBazelRemoteExecutionV2ExecutionPolicy
 newBuildBazelRemoteExecutionV2ExecutionPolicy =
-  BuildBazelRemoteExecutionV2ExecutionPolicy {priority = Core.Nothing}
+  BuildBazelRemoteExecutionV2ExecutionPolicy
+    { priority =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2ExecutionPolicy
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2ExecutionPolicy where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2ExecutionPolicy"
@@ -1712,15 +1651,10 @@ instance
             Core.<$> (o Core..:? "priority")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ExecutionPolicy
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2ExecutionPolicy where
   toJSON BuildBazelRemoteExecutionV2ExecutionPolicy {..} =
     Core.object
-      ( Core.catMaybes
-          [("priority" Core..=) Core.<$> priority]
-      )
+      (Core.catMaybes [("priority" Core..=) Core.<$> priority])
 
 -- | A @FileNode@ represents a single file and associated metadata.
 --
@@ -1732,7 +1666,6 @@ data BuildBazelRemoteExecutionV2FileNode = BuildBazelRemoteExecutionV2FileNode
     isExecutable :: (Core.Maybe Core.Bool),
     -- | The name of the file.
     name :: (Core.Maybe Core.Text),
-    -- |
     nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1748,10 +1681,7 @@ newBuildBazelRemoteExecutionV2FileNode =
       nodeProperties = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2FileNode
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2FileNode where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2FileNode"
@@ -1763,10 +1693,7 @@ instance
             Core.<*> (o Core..:? "nodeProperties")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2FileNode
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2FileNode where
   toJSON BuildBazelRemoteExecutionV2FileNode {..} =
     Core.object
       ( Core.catMaybes
@@ -1791,7 +1718,8 @@ newBuildBazelRemoteExecutionV2FindMissingBlobsRequest ::
   BuildBazelRemoteExecutionV2FindMissingBlobsRequest
 newBuildBazelRemoteExecutionV2FindMissingBlobsRequest =
   BuildBazelRemoteExecutionV2FindMissingBlobsRequest
-    { blobDigests = Core.Nothing
+    { blobDigests =
+        Core.Nothing
     }
 
 instance
@@ -1810,12 +1738,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2FindMissingBlobsRequest
   where
-  toJSON
-    BuildBazelRemoteExecutionV2FindMissingBlobsRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("blobDigests" Core..=) Core.<$> blobDigests]
-        )
+  toJSON BuildBazelRemoteExecutionV2FindMissingBlobsRequest {..} =
+    Core.object
+      (Core.catMaybes [("blobDigests" Core..=) Core.<$> blobDigests])
 
 -- | A response message for ContentAddressableStorage.FindMissingBlobs.
 --
@@ -1831,7 +1756,8 @@ newBuildBazelRemoteExecutionV2FindMissingBlobsResponse ::
   BuildBazelRemoteExecutionV2FindMissingBlobsResponse
 newBuildBazelRemoteExecutionV2FindMissingBlobsResponse =
   BuildBazelRemoteExecutionV2FindMissingBlobsResponse
-    { missingBlobDigests = Core.Nothing
+    { missingBlobDigests =
+        Core.Nothing
     }
 
 instance
@@ -1850,14 +1776,11 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2FindMissingBlobsResponse
   where
-  toJSON
-    BuildBazelRemoteExecutionV2FindMissingBlobsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("missingBlobDigests" Core..=)
-                Core.<$> missingBlobDigests
-            ]
-        )
+  toJSON BuildBazelRemoteExecutionV2FindMissingBlobsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("missingBlobDigests" Core..=) Core.<$> missingBlobDigests]
+      )
 
 -- | A response message for ContentAddressableStorage.GetTree.
 --
@@ -1875,14 +1798,12 @@ newBuildBazelRemoteExecutionV2GetTreeResponse ::
   BuildBazelRemoteExecutionV2GetTreeResponse
 newBuildBazelRemoteExecutionV2GetTreeResponse =
   BuildBazelRemoteExecutionV2GetTreeResponse
-    { directories = Core.Nothing,
+    { directories =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2GetTreeResponse
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2GetTreeResponse where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2GetTreeResponse"
@@ -1892,10 +1813,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2GetTreeResponse
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2GetTreeResponse where
   toJSON BuildBazelRemoteExecutionV2GetTreeResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1924,10 +1842,7 @@ newBuildBazelRemoteExecutionV2LogFile =
       humanReadable = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2LogFile
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2LogFile where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2LogFile"
@@ -1937,10 +1852,7 @@ instance
             Core.<*> (o Core..:? "humanReadable")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2LogFile
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2LogFile where
   toJSON BuildBazelRemoteExecutionV2LogFile {..} =
     Core.object
       ( Core.catMaybes
@@ -1972,10 +1884,7 @@ newBuildBazelRemoteExecutionV2NodeProperties =
       unixMode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2NodeProperties
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2NodeProperties where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2NodeProperties"
@@ -1986,10 +1895,7 @@ instance
             Core.<*> (o Core..:? "unixMode")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2NodeProperties
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2NodeProperties where
   toJSON BuildBazelRemoteExecutionV2NodeProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -2019,28 +1925,21 @@ newBuildBazelRemoteExecutionV2NodeProperty =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2NodeProperty
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2NodeProperty where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2NodeProperty"
       ( \o ->
           BuildBazelRemoteExecutionV2NodeProperty
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2NodeProperty
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2NodeProperty where
   toJSON BuildBazelRemoteExecutionV2NodeProperty {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | An @OutputDirectory@ is the output in an @ActionResult@ corresponding to a directory\'s full contents rather than a single file.
@@ -2063,10 +1962,7 @@ newBuildBazelRemoteExecutionV2OutputDirectory =
       treeDigest = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2OutputDirectory
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2OutputDirectory where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2OutputDirectory"
@@ -2076,10 +1972,7 @@ instance
             Core.<*> (o Core..:? "treeDigest")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2OutputDirectory
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2OutputDirectory where
   toJSON BuildBazelRemoteExecutionV2OutputDirectory {..} =
     Core.object
       ( Core.catMaybes
@@ -2098,7 +1991,6 @@ data BuildBazelRemoteExecutionV2OutputFile = BuildBazelRemoteExecutionV2OutputFi
     digest :: (Core.Maybe BuildBazelRemoteExecutionV2Digest),
     -- | True if file is executable, false otherwise.
     isExecutable :: (Core.Maybe Core.Bool),
-    -- |
     nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties),
     -- | The full path of the file relative to the working directory, including the filename. The path separator is a forward slash @\/@. Since this is a relative path, it MUST NOT begin with a leading forward slash.
     path :: (Core.Maybe Core.Text)
@@ -2117,10 +2009,7 @@ newBuildBazelRemoteExecutionV2OutputFile =
       path = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2OutputFile
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2OutputFile where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2OutputFile"
@@ -2133,10 +2022,7 @@ instance
             Core.<*> (o Core..:? "path")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2OutputFile
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2OutputFile where
   toJSON BuildBazelRemoteExecutionV2OutputFile {..} =
     Core.object
       ( Core.catMaybes
@@ -2152,8 +2038,7 @@ instance
 --
 -- /See:/ 'newBuildBazelRemoteExecutionV2OutputSymlink' smart constructor.
 data BuildBazelRemoteExecutionV2OutputSymlink = BuildBazelRemoteExecutionV2OutputSymlink
-  { -- |
-    nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties),
+  { nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties),
     -- | The full path of the symlink relative to the working directory, including the filename. The path separator is a forward slash @\/@. Since this is a relative path, it MUST NOT begin with a leading forward slash.
     path :: (Core.Maybe Core.Text),
     -- | The target path of the symlink. The path separator is a forward slash @\/@. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with @\/@. Support for absolute paths can be checked using the Capabilities API. @..@ components are allowed anywhere in the target path.
@@ -2166,15 +2051,13 @@ newBuildBazelRemoteExecutionV2OutputSymlink ::
   BuildBazelRemoteExecutionV2OutputSymlink
 newBuildBazelRemoteExecutionV2OutputSymlink =
   BuildBazelRemoteExecutionV2OutputSymlink
-    { nodeProperties = Core.Nothing,
+    { nodeProperties =
+        Core.Nothing,
       path = Core.Nothing,
       target = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2OutputSymlink
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2OutputSymlink where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2OutputSymlink"
@@ -2185,10 +2068,7 @@ instance
             Core.<*> (o Core..:? "target")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2OutputSymlink
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2OutputSymlink where
   toJSON BuildBazelRemoteExecutionV2OutputSymlink {..} =
     Core.object
       ( Core.catMaybes
@@ -2213,10 +2093,7 @@ newBuildBazelRemoteExecutionV2Platform ::
 newBuildBazelRemoteExecutionV2Platform =
   BuildBazelRemoteExecutionV2Platform {properties = Core.Nothing}
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Platform
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Platform where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Platform"
@@ -2225,15 +2102,10 @@ instance
             Core.<$> (o Core..:? "properties")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2Platform
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2Platform where
   toJSON BuildBazelRemoteExecutionV2Platform {..} =
     Core.object
-      ( Core.catMaybes
-          [("properties" Core..=) Core.<$> properties]
-      )
+      (Core.catMaybes [("properties" Core..=) Core.<$> properties])
 
 -- | A single property for the environment. The server is responsible for specifying the property @name@s that it accepts. If an unknown @name@ is provided in the requirements for an Action, the server SHOULD reject the execution request. If permitted by the server, the same @name@ may occur multiple times. The server is also responsible for specifying the interpretation of property @value@s. For instance, a property describing how much RAM must be available may be interpreted as allowing a worker with 16GB to fulfill a request for 8GB, while a property describing the OS environment on which the action must be performed may require an exact match with the worker\'s OS. The server MAY use the @value@ of one or more properties to determine how it sets up the execution environment, such as by making specific system files available to the worker. Both names and values are typically case-sensitive. Note that the platform is implicitly part of the action digest, so even tiny changes in the names or values (like changing
 -- case) may result in different action cache entries.
@@ -2256,37 +2128,28 @@ newBuildBazelRemoteExecutionV2PlatformProperty =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2PlatformProperty
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2PlatformProperty where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2PlatformProperty"
       ( \o ->
           BuildBazelRemoteExecutionV2PlatformProperty
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2PlatformProperty
-  where
-  toJSON
-    BuildBazelRemoteExecutionV2PlatformProperty {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+instance Core.ToJSON BuildBazelRemoteExecutionV2PlatformProperty where
+  toJSON BuildBazelRemoteExecutionV2PlatformProperty {..} =
+    Core.object
+      ( Core.catMaybes
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
+      )
 
 -- | Allowed values for priority in ResultsCachePolicy and ExecutionPolicy Used for querying both cache and execution valid priority ranges.
 --
 -- /See:/ 'newBuildBazelRemoteExecutionV2PriorityCapabilities' smart constructor.
 newtype BuildBazelRemoteExecutionV2PriorityCapabilities = BuildBazelRemoteExecutionV2PriorityCapabilities
-  { -- |
-    priorities ::
+  { priorities ::
       ( Core.Maybe
           [BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange]
       )
@@ -2297,7 +2160,10 @@ newtype BuildBazelRemoteExecutionV2PriorityCapabilities = BuildBazelRemoteExecut
 newBuildBazelRemoteExecutionV2PriorityCapabilities ::
   BuildBazelRemoteExecutionV2PriorityCapabilities
 newBuildBazelRemoteExecutionV2PriorityCapabilities =
-  BuildBazelRemoteExecutionV2PriorityCapabilities {priorities = Core.Nothing}
+  BuildBazelRemoteExecutionV2PriorityCapabilities
+    { priorities =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2315,12 +2181,9 @@ instance
   Core.ToJSON
     BuildBazelRemoteExecutionV2PriorityCapabilities
   where
-  toJSON
-    BuildBazelRemoteExecutionV2PriorityCapabilities {..} =
-      Core.object
-        ( Core.catMaybes
-            [("priorities" Core..=) Core.<$> priorities]
-        )
+  toJSON BuildBazelRemoteExecutionV2PriorityCapabilities {..} =
+    Core.object
+      (Core.catMaybes [("priorities" Core..=) Core.<$> priorities])
 
 -- | Supported range of priorities, including boundaries.
 --
@@ -2338,7 +2201,8 @@ newBuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange ::
   BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
 newBuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange =
   BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
-    { maxPriority = Core.Nothing,
+    { maxPriority =
+        Core.Nothing,
       minPriority = Core.Nothing
     }
 
@@ -2352,7 +2216,7 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2PriorityCapabilitiesPriorityRange
             Core.<$> (o Core..:? "maxPriority")
-              Core.<*> (o Core..:? "minPriority")
+            Core.<*> (o Core..:? "minPriority")
       )
 
 instance
@@ -2394,7 +2258,8 @@ newBuildBazelRemoteExecutionV2RequestMetadata ::
   BuildBazelRemoteExecutionV2RequestMetadata
 newBuildBazelRemoteExecutionV2RequestMetadata =
   BuildBazelRemoteExecutionV2RequestMetadata
-    { actionId = Core.Nothing,
+    { actionId =
+        Core.Nothing,
       actionMnemonic = Core.Nothing,
       configurationId = Core.Nothing,
       correlatedInvocationsId = Core.Nothing,
@@ -2403,10 +2268,7 @@ newBuildBazelRemoteExecutionV2RequestMetadata =
       toolInvocationId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2RequestMetadata
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2RequestMetadata where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2RequestMetadata"
@@ -2421,10 +2283,7 @@ instance
             Core.<*> (o Core..:? "toolInvocationId")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2RequestMetadata
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2RequestMetadata where
   toJSON BuildBazelRemoteExecutionV2RequestMetadata {..} =
     Core.object
       ( Core.catMaybes
@@ -2435,8 +2294,7 @@ instance
               Core.<$> correlatedInvocationsId,
             ("targetId" Core..=) Core.<$> targetId,
             ("toolDetails" Core..=) Core.<$> toolDetails,
-            ("toolInvocationId" Core..=)
-              Core.<$> toolInvocationId
+            ("toolInvocationId" Core..=) Core.<$> toolInvocationId
           ]
       )
 
@@ -2453,7 +2311,10 @@ newtype BuildBazelRemoteExecutionV2ResultsCachePolicy = BuildBazelRemoteExecutio
 newBuildBazelRemoteExecutionV2ResultsCachePolicy ::
   BuildBazelRemoteExecutionV2ResultsCachePolicy
 newBuildBazelRemoteExecutionV2ResultsCachePolicy =
-  BuildBazelRemoteExecutionV2ResultsCachePolicy {priority = Core.Nothing}
+  BuildBazelRemoteExecutionV2ResultsCachePolicy
+    { priority =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2467,16 +2328,10 @@ instance
             Core.<$> (o Core..:? "priority")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ResultsCachePolicy
-  where
-  toJSON
-    BuildBazelRemoteExecutionV2ResultsCachePolicy {..} =
-      Core.object
-        ( Core.catMaybes
-            [("priority" Core..=) Core.<$> priority]
-        )
+instance Core.ToJSON BuildBazelRemoteExecutionV2ResultsCachePolicy where
+  toJSON BuildBazelRemoteExecutionV2ResultsCachePolicy {..} =
+    Core.object
+      (Core.catMaybes [("priority" Core..=) Core.<$> priority])
 
 -- | A response message for Capabilities.GetCapabilities.
 --
@@ -2500,7 +2355,8 @@ newBuildBazelRemoteExecutionV2ServerCapabilities ::
   BuildBazelRemoteExecutionV2ServerCapabilities
 newBuildBazelRemoteExecutionV2ServerCapabilities =
   BuildBazelRemoteExecutionV2ServerCapabilities
-    { cacheCapabilities = Core.Nothing,
+    { cacheCapabilities =
+        Core.Nothing,
       deprecatedApiVersion = Core.Nothing,
       executionCapabilities = Core.Nothing,
       highApiVersion = Core.Nothing,
@@ -2517,30 +2373,23 @@ instance
       ( \o ->
           BuildBazelRemoteExecutionV2ServerCapabilities
             Core.<$> (o Core..:? "cacheCapabilities")
-              Core.<*> (o Core..:? "deprecatedApiVersion")
-              Core.<*> (o Core..:? "executionCapabilities")
-              Core.<*> (o Core..:? "highApiVersion")
-              Core.<*> (o Core..:? "lowApiVersion")
+            Core.<*> (o Core..:? "deprecatedApiVersion")
+            Core.<*> (o Core..:? "executionCapabilities")
+            Core.<*> (o Core..:? "highApiVersion")
+            Core.<*> (o Core..:? "lowApiVersion")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ServerCapabilities
-  where
-  toJSON
-    BuildBazelRemoteExecutionV2ServerCapabilities {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("cacheCapabilities" Core..=)
-                Core.<$> cacheCapabilities,
-              ("deprecatedApiVersion" Core..=)
-                Core.<$> deprecatedApiVersion,
-              ("executionCapabilities" Core..=)
-                Core.<$> executionCapabilities,
-              ("highApiVersion" Core..=) Core.<$> highApiVersion,
-              ("lowApiVersion" Core..=) Core.<$> lowApiVersion
-            ]
-        )
+instance Core.ToJSON BuildBazelRemoteExecutionV2ServerCapabilities where
+  toJSON BuildBazelRemoteExecutionV2ServerCapabilities {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cacheCapabilities" Core..=) Core.<$> cacheCapabilities,
+            ("deprecatedApiVersion" Core..=) Core.<$> deprecatedApiVersion,
+            ("executionCapabilities" Core..=) Core.<$> executionCapabilities,
+            ("highApiVersion" Core..=) Core.<$> highApiVersion,
+            ("lowApiVersion" Core..=) Core.<$> lowApiVersion
+          ]
+      )
 
 -- | A @SymlinkNode@ represents a symbolic link.
 --
@@ -2548,7 +2397,6 @@ instance
 data BuildBazelRemoteExecutionV2SymlinkNode = BuildBazelRemoteExecutionV2SymlinkNode
   { -- | The name of the symlink.
     name :: (Core.Maybe Core.Text),
-    -- |
     nodeProperties :: (Core.Maybe BuildBazelRemoteExecutionV2NodeProperties),
     -- | The target path of the symlink. The path separator is a forward slash @\/@. The target path can be relative to the parent directory of the symlink or it can be an absolute path starting with @\/@. Support for absolute paths can be checked using the Capabilities API. @..@ components are allowed anywhere in the target path as logical canonicalization may lead to different behavior in the presence of directory symlinks (e.g. @foo\/..\/bar@ may not be the same as @bar@). To reduce potential cache misses, canonicalization is still recommended where this is possible without impacting correctness.
     target :: (Core.Maybe Core.Text)
@@ -2565,10 +2413,7 @@ newBuildBazelRemoteExecutionV2SymlinkNode =
       target = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2SymlinkNode
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2SymlinkNode where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2SymlinkNode"
@@ -2579,10 +2424,7 @@ instance
             Core.<*> (o Core..:? "target")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2SymlinkNode
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2SymlinkNode where
   toJSON BuildBazelRemoteExecutionV2SymlinkNode {..} =
     Core.object
       ( Core.catMaybes
@@ -2612,10 +2454,7 @@ newBuildBazelRemoteExecutionV2ToolDetails =
       toolVersion = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2ToolDetails
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2ToolDetails where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2ToolDetails"
@@ -2625,10 +2464,7 @@ instance
             Core.<*> (o Core..:? "toolVersion")
       )
 
-instance
-  Core.ToJSON
-    BuildBazelRemoteExecutionV2ToolDetails
-  where
+instance Core.ToJSON BuildBazelRemoteExecutionV2ToolDetails where
   toJSON BuildBazelRemoteExecutionV2ToolDetails {..} =
     Core.object
       ( Core.catMaybes
@@ -2652,18 +2488,19 @@ data BuildBazelRemoteExecutionV2Tree = BuildBazelRemoteExecutionV2Tree
 newBuildBazelRemoteExecutionV2Tree ::
   BuildBazelRemoteExecutionV2Tree
 newBuildBazelRemoteExecutionV2Tree =
-  BuildBazelRemoteExecutionV2Tree {children = Core.Nothing, root = Core.Nothing}
+  BuildBazelRemoteExecutionV2Tree
+    { children = Core.Nothing,
+      root = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    BuildBazelRemoteExecutionV2Tree
-  where
+instance Core.FromJSON BuildBazelRemoteExecutionV2Tree where
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2Tree"
       ( \o ->
           BuildBazelRemoteExecutionV2Tree
-            Core.<$> (o Core..:? "children") Core.<*> (o Core..:? "root")
+            Core.<$> (o Core..:? "children")
+            Core.<*> (o Core..:? "root")
       )
 
 instance Core.ToJSON BuildBazelRemoteExecutionV2Tree where
@@ -2694,10 +2531,7 @@ instance
   parseJSON =
     Core.withObject
       "BuildBazelRemoteExecutionV2WaitExecutionRequest"
-      ( \o ->
-          Core.pure
-            BuildBazelRemoteExecutionV2WaitExecutionRequest
-      )
+      (\o -> Core.pure BuildBazelRemoteExecutionV2WaitExecutionRequest)
 
 instance
   Core.ToJSON
@@ -2792,7 +2626,8 @@ newGoogleDevtoolsRemotebuildbotCommandDurations ::
   GoogleDevtoolsRemotebuildbotCommandDurations
 newGoogleDevtoolsRemotebuildbotCommandDurations =
   GoogleDevtoolsRemotebuildbotCommandDurations
-    { casRelease = Core.Nothing,
+    { casRelease =
+        Core.Nothing,
       cmWaitForAssignment = Core.Nothing,
       dockerPrep = Core.Nothing,
       dockerPrepStartTime = Core.Nothing,
@@ -2807,10 +2642,7 @@ newGoogleDevtoolsRemotebuildbotCommandDurations =
       uploadStartTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemotebuildbotCommandDurations
-  where
+instance Core.FromJSON GoogleDevtoolsRemotebuildbotCommandDurations where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemotebuildbotCommandDurations"
@@ -2831,33 +2663,25 @@ instance
             Core.<*> (o Core..:? "uploadStartTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemotebuildbotCommandDurations
-  where
-  toJSON
-    GoogleDevtoolsRemotebuildbotCommandDurations {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("casRelease" Core..=) Core.<$> casRelease,
-              ("cmWaitForAssignment" Core..=)
-                Core.<$> cmWaitForAssignment,
-              ("dockerPrep" Core..=) Core.<$> dockerPrep,
-              ("dockerPrepStartTime" Core..=)
-                Core.<$> dockerPrepStartTime,
-              ("download" Core..=) Core.<$> download,
-              ("downloadStartTime" Core..=)
-                Core.<$> downloadStartTime,
-              ("execStartTime" Core..=) Core.<$> execStartTime,
-              ("execution" Core..=) Core.<$> execution,
-              ("isoPrepDone" Core..=) Core.<$> isoPrepDone,
-              ("overall" Core..=) Core.<$> overall,
-              ("stdout" Core..=) Core.<$> stdout,
-              ("upload" Core..=) Core.<$> upload,
-              ("uploadStartTime" Core..=)
-                Core.<$> uploadStartTime
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemotebuildbotCommandDurations where
+  toJSON GoogleDevtoolsRemotebuildbotCommandDurations {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("casRelease" Core..=) Core.<$> casRelease,
+            ("cmWaitForAssignment" Core..=) Core.<$> cmWaitForAssignment,
+            ("dockerPrep" Core..=) Core.<$> dockerPrep,
+            ("dockerPrepStartTime" Core..=) Core.<$> dockerPrepStartTime,
+            ("download" Core..=) Core.<$> download,
+            ("downloadStartTime" Core..=) Core.<$> downloadStartTime,
+            ("execStartTime" Core..=) Core.<$> execStartTime,
+            ("execution" Core..=) Core.<$> execution,
+            ("isoPrepDone" Core..=) Core.<$> isoPrepDone,
+            ("overall" Core..=) Core.<$> overall,
+            ("stdout" Core..=) Core.<$> stdout,
+            ("upload" Core..=) Core.<$> upload,
+            ("uploadStartTime" Core..=) Core.<$> uploadStartTime
+          ]
+      )
 
 -- | CommandEvents contains counters for the number of warnings and errors that occurred during the execution of a command.
 --
@@ -2900,10 +2724,7 @@ newGoogleDevtoolsRemotebuildbotCommandEvents =
       usedAsyncContainer = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemotebuildbotCommandEvents
-  where
+instance Core.FromJSON GoogleDevtoolsRemotebuildbotCommandEvents where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemotebuildbotCommandEvents"
@@ -2913,20 +2734,13 @@ instance
             Core.<*> (o Core..:? "dockerCacheHit")
             Core.<*> (o Core..:? "dockerImageName")
             Core.<*> (o Core..:? "inputCacheMiss")
-            Core.<*> ( o Core..:? "numErrors"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "numWarnings"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numErrors" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numWarnings" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "outputLocation")
             Core.<*> (o Core..:? "usedAsyncContainer")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemotebuildbotCommandEvents
-  where
+instance Core.ToJSON GoogleDevtoolsRemotebuildbotCommandEvents where
   toJSON GoogleDevtoolsRemotebuildbotCommandEvents {..} =
     Core.object
       ( Core.catMaybes
@@ -2934,13 +2748,10 @@ instance
             ("dockerCacheHit" Core..=) Core.<$> dockerCacheHit,
             ("dockerImageName" Core..=) Core.<$> dockerImageName,
             ("inputCacheMiss" Core..=) Core.<$> inputCacheMiss,
-            ("numErrors" Core..=) Core.. Core.AsText
-              Core.<$> numErrors,
-            ("numWarnings" Core..=) Core.. Core.AsText
-              Core.<$> numWarnings,
+            ("numErrors" Core..=) Core.. Core.AsText Core.<$> numErrors,
+            ("numWarnings" Core..=) Core.. Core.AsText Core.<$> numWarnings,
             ("outputLocation" Core..=) Core.<$> outputLocation,
-            ("usedAsyncContainer" Core..=)
-              Core.<$> usedAsyncContainer
+            ("usedAsyncContainer" Core..=) Core.<$> usedAsyncContainer
           ]
       )
 
@@ -2964,22 +2775,17 @@ newGoogleDevtoolsRemotebuildbotCommandStatus =
       message = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemotebuildbotCommandStatus
-  where
+instance Core.FromJSON GoogleDevtoolsRemotebuildbotCommandStatus where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemotebuildbotCommandStatus"
       ( \o ->
           GoogleDevtoolsRemotebuildbotCommandStatus
-            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "message")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "message")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemotebuildbotCommandStatus
-  where
+instance Core.ToJSON GoogleDevtoolsRemotebuildbotCommandStatus where
   toJSON GoogleDevtoolsRemotebuildbotCommandStatus {..} =
     Core.object
       ( Core.catMaybes
@@ -2992,13 +2798,9 @@ instance
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildbotResourceUsage' smart constructor.
 data GoogleDevtoolsRemotebuildbotResourceUsage = GoogleDevtoolsRemotebuildbotResourceUsage
-  { -- |
-    cpuUsedPercent :: (Core.Maybe Core.Double),
-    -- |
+  { cpuUsedPercent :: (Core.Maybe Core.Double),
     diskUsage :: (Core.Maybe GoogleDevtoolsRemotebuildbotResourceUsageStat),
-    -- |
     memoryUsage :: (Core.Maybe GoogleDevtoolsRemotebuildbotResourceUsageStat),
-    -- |
     totalDiskIoStats :: (Core.Maybe GoogleDevtoolsRemotebuildbotResourceUsageIOStats)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3008,16 +2810,14 @@ newGoogleDevtoolsRemotebuildbotResourceUsage ::
   GoogleDevtoolsRemotebuildbotResourceUsage
 newGoogleDevtoolsRemotebuildbotResourceUsage =
   GoogleDevtoolsRemotebuildbotResourceUsage
-    { cpuUsedPercent = Core.Nothing,
+    { cpuUsedPercent =
+        Core.Nothing,
       diskUsage = Core.Nothing,
       memoryUsage = Core.Nothing,
       totalDiskIoStats = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemotebuildbotResourceUsage
-  where
+instance Core.FromJSON GoogleDevtoolsRemotebuildbotResourceUsage where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemotebuildbotResourceUsage"
@@ -3029,35 +2829,25 @@ instance
             Core.<*> (o Core..:? "totalDiskIoStats")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemotebuildbotResourceUsage
-  where
+instance Core.ToJSON GoogleDevtoolsRemotebuildbotResourceUsage where
   toJSON GoogleDevtoolsRemotebuildbotResourceUsage {..} =
     Core.object
       ( Core.catMaybes
           [ ("cpuUsedPercent" Core..=) Core.<$> cpuUsedPercent,
             ("diskUsage" Core..=) Core.<$> diskUsage,
             ("memoryUsage" Core..=) Core.<$> memoryUsage,
-            ("totalDiskIoStats" Core..=)
-              Core.<$> totalDiskIoStats
+            ("totalDiskIoStats" Core..=) Core.<$> totalDiskIoStats
           ]
       )
 
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildbotResourceUsageIOStats' smart constructor.
 data GoogleDevtoolsRemotebuildbotResourceUsageIOStats = GoogleDevtoolsRemotebuildbotResourceUsageIOStats
-  { -- |
-    readBytesCount :: (Core.Maybe Core.Word64),
-    -- |
+  { readBytesCount :: (Core.Maybe Core.Word64),
     readCount :: (Core.Maybe Core.Word64),
-    -- |
     readTimeMs :: (Core.Maybe Core.Word64),
-    -- |
     writeBytesCount :: (Core.Maybe Core.Word64),
-    -- |
     writeCount :: (Core.Maybe Core.Word64),
-    -- |
     writeTimeMs :: (Core.Maybe Core.Word64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3067,7 +2857,8 @@ newGoogleDevtoolsRemotebuildbotResourceUsageIOStats ::
   GoogleDevtoolsRemotebuildbotResourceUsageIOStats
 newGoogleDevtoolsRemotebuildbotResourceUsageIOStats =
   GoogleDevtoolsRemotebuildbotResourceUsageIOStats
-    { readBytesCount = Core.Nothing,
+    { readBytesCount =
+        Core.Nothing,
       readCount = Core.Nothing,
       readTimeMs = Core.Nothing,
       writeBytesCount = Core.Nothing,
@@ -3084,55 +2875,38 @@ instance
       "GoogleDevtoolsRemotebuildbotResourceUsageIOStats"
       ( \o ->
           GoogleDevtoolsRemotebuildbotResourceUsageIOStats
-            Core.<$> ( o Core..:? "readBytesCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> ( o Core..:? "readCount"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> ( o Core..:? "readTimeMs"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> ( o Core..:? "writeBytesCount"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> ( o Core..:? "writeCount"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> ( o Core..:? "writeTimeMs"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<$> (o Core..:? "readBytesCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "readCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "readTimeMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "writeBytesCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "writeCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "writeTimeMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemotebuildbotResourceUsageIOStats
   where
-  toJSON
-    GoogleDevtoolsRemotebuildbotResourceUsageIOStats {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("readBytesCount" Core..=) Core.. Core.AsText
-                Core.<$> readBytesCount,
-              ("readCount" Core..=) Core.. Core.AsText
-                Core.<$> readCount,
-              ("readTimeMs" Core..=) Core.. Core.AsText
-                Core.<$> readTimeMs,
-              ("writeBytesCount" Core..=) Core.. Core.AsText
-                Core.<$> writeBytesCount,
-              ("writeCount" Core..=) Core.. Core.AsText
-                Core.<$> writeCount,
-              ("writeTimeMs" Core..=) Core.. Core.AsText
-                Core.<$> writeTimeMs
-            ]
-        )
+  toJSON GoogleDevtoolsRemotebuildbotResourceUsageIOStats {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("readBytesCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> readBytesCount,
+            ("readCount" Core..=) Core.. Core.AsText Core.<$> readCount,
+            ("readTimeMs" Core..=) Core.. Core.AsText Core.<$> readTimeMs,
+            ("writeBytesCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> writeBytesCount,
+            ("writeCount" Core..=) Core.. Core.AsText Core.<$> writeCount,
+            ("writeTimeMs" Core..=) Core.. Core.AsText Core.<$> writeTimeMs
+          ]
+      )
 
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildbotResourceUsageStat' smart constructor.
 data GoogleDevtoolsRemotebuildbotResourceUsageStat = GoogleDevtoolsRemotebuildbotResourceUsageStat
-  { -- |
-    total :: (Core.Maybe Core.Word64),
-    -- |
+  { total :: (Core.Maybe Core.Word64),
     used :: (Core.Maybe Core.Word64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3142,7 +2916,8 @@ newGoogleDevtoolsRemotebuildbotResourceUsageStat ::
   GoogleDevtoolsRemotebuildbotResourceUsageStat
 newGoogleDevtoolsRemotebuildbotResourceUsageStat =
   GoogleDevtoolsRemotebuildbotResourceUsageStat
-    { total = Core.Nothing,
+    { total =
+        Core.Nothing,
       used = Core.Nothing
     }
 
@@ -3155,26 +2930,18 @@ instance
       "GoogleDevtoolsRemotebuildbotResourceUsageStat"
       ( \o ->
           GoogleDevtoolsRemotebuildbotResourceUsageStat
-            Core.<$> ( o Core..:? "total"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> ( o Core..:? "used"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<$> (o Core..:? "total" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "used" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemotebuildbotResourceUsageStat
-  where
-  toJSON
-    GoogleDevtoolsRemotebuildbotResourceUsageStat {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("total" Core..=) Core.. Core.AsText Core.<$> total,
-              ("used" Core..=) Core.. Core.AsText Core.<$> used
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemotebuildbotResourceUsageStat where
+  toJSON GoogleDevtoolsRemotebuildbotResourceUsageStat {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("total" Core..=) Core.. Core.AsText Core.<$> total,
+            ("used" Core..=) Core.. Core.AsText Core.<$> used
+          ]
+      )
 
 -- | AcceleratorConfig defines the accelerator cards to attach to the VM.
 --
@@ -3192,7 +2959,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
-    { acceleratorCount = Core.Nothing,
+    { acceleratorCount =
+        Core.Nothing,
       acceleratorType = Core.Nothing
     }
 
@@ -3205,10 +2973,8 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig
-            Core.<$> ( o Core..:? "acceleratorCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> (o Core..:? "acceleratorType")
+            Core.<$> (o Core..:? "acceleratorCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "acceleratorType")
       )
 
 instance
@@ -3219,10 +2985,10 @@ instance
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaAcceleratorConfig {..} =
       Core.object
         ( Core.catMaybes
-            [ ("acceleratorCount" Core..=) Core.. Core.AsText
+            [ ("acceleratorCount" Core..=)
+                Core.. Core.AsText
                 Core.<$> acceleratorCount,
-              ("acceleratorType" Core..=)
-                Core.<$> acceleratorType
+              ("acceleratorType" Core..=) Core.<$> acceleratorType
             ]
         )
 
@@ -3242,7 +3008,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
-    { maxSize = Core.Nothing,
+    { maxSize =
+        Core.Nothing,
       minSize = Core.Nothing
     }
 
@@ -3255,28 +3022,21 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
-            Core.<$> ( o Core..:? "maxSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> ( o Core..:? "minSize"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<$> (o Core..:? "maxSize" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minSize" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale
   where
-  toJSON
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("maxSize" Core..=) Core.. Core.AsText
-                Core.<$> maxSize,
-              ("minSize" Core..=) Core.. Core.AsText
-                Core.<$> minSize
-            ]
-        )
+  toJSON GoogleDevtoolsRemotebuildexecutionAdminV1alphaAutoscale {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxSize" Core..=) Core.. Core.AsText Core.<$> maxSize,
+            ("minSize" Core..=) Core.. Core.AsText Core.<$> minSize
+          ]
+      )
 
 -- | The request used for @CreateInstance@.
 --
@@ -3296,7 +3056,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
-    { instance' = Core.Nothing,
+    { instance' =
+        Core.Nothing,
       instanceId = Core.Nothing,
       parent = Core.Nothing
     }
@@ -3311,8 +3072,8 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateInstanceRequest
             Core.<$> (o Core..:? "instance")
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "parent")
       )
 
 instance
@@ -3350,7 +3111,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
-    { parent = Core.Nothing,
+    { parent =
+        Core.Nothing,
       poolId = Core.Nothing,
       workerPool = Core.Nothing
     }
@@ -3364,8 +3126,9 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaCreateWorkerPoolRequest
-            Core.<$> (o Core..:? "parent") Core.<*> (o Core..:? "poolId")
-              Core.<*> (o Core..:? "workerPool")
+            Core.<$> (o Core..:? "parent")
+            Core.<*> (o Core..:? "poolId")
+            Core.<*> (o Core..:? "workerPool")
       )
 
 instance
@@ -3396,7 +3159,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest
-    { name = Core.Nothing
+    { name =
+        Core.Nothing
     }
 
 instance
@@ -3417,8 +3181,7 @@ instance
   where
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteInstanceRequest {..} =
-      Core.object
-        (Core.catMaybes [("name" Core..=) Core.<$> name])
+      Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | The request used for DeleteWorkerPool.
 --
@@ -3434,7 +3197,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest
-    { name = Core.Nothing
+    { name =
+        Core.Nothing
     }
 
 instance
@@ -3455,8 +3219,7 @@ instance
   where
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaDeleteWorkerPoolRequest {..} =
-      Core.object
-        (Core.catMaybes [("name" Core..=) Core.<$> name])
+      Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | FeaturePolicy defines features allowed to be used on RBE instances, as well as instance-wide behavior changes that take effect without opt-in or opt-out at usage time.
 --
@@ -3515,14 +3278,17 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
-    { containerImageSources = Core.Nothing,
-      dockerAddCapabilities = Core.Nothing,
+    { containerImageSources =
+        Core.Nothing,
+      dockerAddCapabilities =
+        Core.Nothing,
       dockerChrootPath = Core.Nothing,
       dockerNetwork = Core.Nothing,
       dockerPrivileged = Core.Nothing,
       dockerRunAsRoot = Core.Nothing,
       dockerRuntime = Core.Nothing,
-      dockerSiblingContainers = Core.Nothing,
+      dockerSiblingContainers =
+        Core.Nothing,
       linuxIsolation = Core.Nothing
     }
 
@@ -3536,14 +3302,14 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy
             Core.<$> (o Core..:? "containerImageSources")
-              Core.<*> (o Core..:? "dockerAddCapabilities")
-              Core.<*> (o Core..:? "dockerChrootPath")
-              Core.<*> (o Core..:? "dockerNetwork")
-              Core.<*> (o Core..:? "dockerPrivileged")
-              Core.<*> (o Core..:? "dockerRunAsRoot")
-              Core.<*> (o Core..:? "dockerRuntime")
-              Core.<*> (o Core..:? "dockerSiblingContainers")
-              Core.<*> (o Core..:? "linuxIsolation")
+            Core.<*> (o Core..:? "dockerAddCapabilities")
+            Core.<*> (o Core..:? "dockerChrootPath")
+            Core.<*> (o Core..:? "dockerNetwork")
+            Core.<*> (o Core..:? "dockerPrivileged")
+            Core.<*> (o Core..:? "dockerRunAsRoot")
+            Core.<*> (o Core..:? "dockerRuntime")
+            Core.<*> (o Core..:? "dockerSiblingContainers")
+            Core.<*> (o Core..:? "linuxIsolation")
       )
 
 instance
@@ -3554,15 +3320,11 @@ instance
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicy {..} =
       Core.object
         ( Core.catMaybes
-            [ ("containerImageSources" Core..=)
-                Core.<$> containerImageSources,
-              ("dockerAddCapabilities" Core..=)
-                Core.<$> dockerAddCapabilities,
-              ("dockerChrootPath" Core..=)
-                Core.<$> dockerChrootPath,
+            [ ("containerImageSources" Core..=) Core.<$> containerImageSources,
+              ("dockerAddCapabilities" Core..=) Core.<$> dockerAddCapabilities,
+              ("dockerChrootPath" Core..=) Core.<$> dockerChrootPath,
               ("dockerNetwork" Core..=) Core.<$> dockerNetwork,
-              ("dockerPrivileged" Core..=)
-                Core.<$> dockerPrivileged,
+              ("dockerPrivileged" Core..=) Core.<$> dockerPrivileged,
               ("dockerRunAsRoot" Core..=) Core.<$> dockerRunAsRoot,
               ("dockerRuntime" Core..=) Core.<$> dockerRuntime,
               ("dockerSiblingContainers" Core..=)
@@ -3590,7 +3352,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
-    { allowedValues = Core.Nothing,
+    { allowedValues =
+        Core.Nothing,
       policy = Core.Nothing
     }
 
@@ -3604,7 +3367,7 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaFeaturePolicyFeature
             Core.<$> (o Core..:? "allowedValues")
-              Core.<*> (o Core..:? "policy")
+            Core.<*> (o Core..:? "policy")
       )
 
 instance
@@ -3634,7 +3397,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest
-    { name = Core.Nothing
+    { name =
+        Core.Nothing
     }
 
 instance
@@ -3655,8 +3419,7 @@ instance
   where
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetInstanceRequest {..} =
-      Core.object
-        (Core.catMaybes [("name" Core..=) Core.<$> name])
+      Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | The request used for GetWorkerPool.
 --
@@ -3672,7 +3435,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest
-    { name = Core.Nothing
+    { name =
+        Core.Nothing
     }
 
 instance
@@ -3693,8 +3457,7 @@ instance
   where
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaGetWorkerPoolRequest {..} =
-      Core.object
-        (Core.catMaybes [("name" Core..=) Core.<$> name])
+      Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Instance conceptually encapsulates all Remote Build Execution resources for remote builds. An instance consists of storage and compute resources (for example, @ContentAddressableStorage@, @ActionCache@, @WorkerPools@) used for running remote builds. All Remote Build Execution API calls are scoped to an instance.
 --
@@ -3724,7 +3487,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
-    { featurePolicy = Core.Nothing,
+    { featurePolicy =
+        Core.Nothing,
       location = Core.Nothing,
       loggingEnabled = Core.Nothing,
       name = Core.Nothing,
@@ -3741,27 +3505,26 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
             Core.<$> (o Core..:? "featurePolicy")
-              Core.<*> (o Core..:? "location")
-              Core.<*> (o Core..:? "loggingEnabled")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "location")
+            Core.<*> (o Core..:? "loggingEnabled")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance
   where
-  toJSON
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("featurePolicy" Core..=) Core.<$> featurePolicy,
-              ("location" Core..=) Core.<$> location,
-              ("loggingEnabled" Core..=) Core.<$> loggingEnabled,
-              ("name" Core..=) Core.<$> name,
-              ("state" Core..=) Core.<$> state
-            ]
-        )
+  toJSON GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("featurePolicy" Core..=) Core.<$> featurePolicy,
+            ("location" Core..=) Core.<$> location,
+            ("loggingEnabled" Core..=) Core.<$> loggingEnabled,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
 
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest' smart constructor.
@@ -3776,7 +3539,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest
-    { parent = Core.Nothing
+    { parent =
+        Core.Nothing
     }
 
 instance
@@ -3797,8 +3561,7 @@ instance
   where
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesRequest {..} =
-      Core.object
-        (Core.catMaybes [("parent" Core..=) Core.<$> parent])
+      Core.object (Core.catMaybes [("parent" Core..=) Core.<$> parent])
 
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse' smart constructor.
@@ -3816,7 +3579,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse
-    { instances = Core.Nothing
+    { instances =
+        Core.Nothing
     }
 
 instance
@@ -3838,9 +3602,7 @@ instance
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListInstancesResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("instances" Core..=) Core.<$> instances]
-        )
+        (Core.catMaybes [("instances" Core..=) Core.<$> instances])
 
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest' smart constructor.
@@ -3858,7 +3620,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
-    { filter = Core.Nothing,
+    { filter =
+        Core.Nothing,
       parent = Core.Nothing
     }
 
@@ -3871,7 +3634,8 @@ instance
       "GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest"
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsRequest
-            Core.<$> (o Core..:? "filter") Core.<*> (o Core..:? "parent")
+            Core.<$> (o Core..:? "filter")
+            Core.<*> (o Core..:? "parent")
       )
 
 instance
@@ -3903,7 +3667,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse
-    { workerPools = Core.Nothing
+    { workerPools =
+        Core.Nothing
     }
 
 instance
@@ -3925,9 +3690,7 @@ instance
   toJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaListWorkerPoolsResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("workerPools" Core..=) Core.<$> workerPools]
-        )
+        (Core.catMaybes [("workerPools" Core..=) Core.<$> workerPools])
 
 -- | The request used for @UpdateInstance@.
 --
@@ -3949,8 +3712,10 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
-    { instance' = Core.Nothing,
-      loggingEnabled = Core.Nothing,
+    { instance' =
+        Core.Nothing,
+      loggingEnabled =
+        Core.Nothing,
       name = Core.Nothing,
       updateMask = Core.Nothing
     }
@@ -3965,9 +3730,9 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest
             Core.<$> (o Core..:? "instance")
-              Core.<*> (o Core..:? "loggingEnabled")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "updateMask")
+            Core.<*> (o Core..:? "loggingEnabled")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateMask")
       )
 
 instance
@@ -4004,7 +3769,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
-    { updateMask = Core.Nothing,
+    { updateMask =
+        Core.Nothing,
       workerPool = Core.Nothing
     }
 
@@ -4018,7 +3784,7 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateWorkerPoolRequest
             Core.<$> (o Core..:? "updateMask")
-              Core.<*> (o Core..:? "workerPool")
+            Core.<*> (o Core..:? "workerPool")
       )
 
 instance
@@ -4074,7 +3840,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
-    { accelerator = Core.Nothing,
+    { accelerator =
+        Core.Nothing,
       diskSizeGb = Core.Nothing,
       diskType = Core.Nothing,
       labels = Core.Nothing,
@@ -4097,20 +3864,19 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig
             Core.<$> (o Core..:? "accelerator")
-              Core.<*> ( o Core..:? "diskSizeGb"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "diskType")
-              Core.<*> (o Core..:? "labels")
-              Core.<*> (o Core..:? "machineType")
-              Core.<*> ( o Core..:? "maxConcurrentActions"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "minCpuPlatform")
-              Core.<*> (o Core..:? "networkAccess")
-              Core.<*> (o Core..:? "reserved")
-              Core.<*> (o Core..:? "soleTenantNodeType")
-              Core.<*> (o Core..:? "vmImage")
+            Core.<*> (o Core..:? "diskSizeGb" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "diskType")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "machineType")
+            Core.<*> ( o
+                         Core..:? "maxConcurrentActions"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "minCpuPlatform")
+            Core.<*> (o Core..:? "networkAccess")
+            Core.<*> (o Core..:? "reserved")
+            Core.<*> (o Core..:? "soleTenantNodeType")
+            Core.<*> (o Core..:? "vmImage")
       )
 
 instance
@@ -4122,18 +3888,17 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("accelerator" Core..=) Core.<$> accelerator,
-              ("diskSizeGb" Core..=) Core.. Core.AsText
-                Core.<$> diskSizeGb,
+              ("diskSizeGb" Core..=) Core.. Core.AsText Core.<$> diskSizeGb,
               ("diskType" Core..=) Core.<$> diskType,
               ("labels" Core..=) Core.<$> labels,
               ("machineType" Core..=) Core.<$> machineType,
-              ("maxConcurrentActions" Core..=) Core.. Core.AsText
+              ("maxConcurrentActions" Core..=)
+                Core.. Core.AsText
                 Core.<$> maxConcurrentActions,
               ("minCpuPlatform" Core..=) Core.<$> minCpuPlatform,
               ("networkAccess" Core..=) Core.<$> networkAccess,
               ("reserved" Core..=) Core.<$> reserved,
-              ("soleTenantNodeType" Core..=)
-                Core.<$> soleTenantNodeType,
+              ("soleTenantNodeType" Core..=) Core.<$> soleTenantNodeType,
               ("vmImage" Core..=) Core.<$> vmImage
             ]
         )
@@ -4142,20 +3907,23 @@ instance
 --
 -- /See:/ 'newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels' smart constructor.
 newtype GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels = GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels' with the minimum fields required to make a request.
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
+  Core.HashMap
+    Core.Text
+    Core.Text ->
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels
-newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels additional =
-  GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels
-    { additional = additional
-    }
+newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels
+  additional =
+    GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerConfig_Labels
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -4210,7 +3978,8 @@ newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool ::
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
 newGoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool =
   GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
-    { autoscale = Core.Nothing,
+    { autoscale =
+        Core.Nothing,
       channel = Core.Nothing,
       name = Core.Nothing,
       state = Core.Nothing,
@@ -4228,32 +3997,28 @@ instance
       ( \o ->
           GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
             Core.<$> (o Core..:? "autoscale")
-              Core.<*> (o Core..:? "channel")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "state")
-              Core.<*> (o Core..:? "workerConfig")
-              Core.<*> ( o Core..:? "workerCount"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "channel")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "workerConfig")
+            Core.<*> (o Core..:? "workerCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool
   where
-  toJSON
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("autoscale" Core..=) Core.<$> autoscale,
-              ("channel" Core..=) Core.<$> channel,
-              ("name" Core..=) Core.<$> name,
-              ("state" Core..=) Core.<$> state,
-              ("workerConfig" Core..=) Core.<$> workerConfig,
-              ("workerCount" Core..=) Core.. Core.AsText
-                Core.<$> workerCount
-            ]
-        )
+  toJSON GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoscale" Core..=) Core.<$> autoscale,
+            ("channel" Core..=) Core.<$> channel,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state,
+            ("workerConfig" Core..=) Core.<$> workerConfig,
+            ("workerCount" Core..=) Core.. Core.AsText Core.<$> workerCount
+          ]
+      )
 
 -- | AdminTemp is a prelimiary set of administration tasks. It\'s called \"Temp\" because we do not yet know the best way to represent admin tasks; it\'s possible that this will be entirely replaced in later versions of this API. If this message proves to be sufficient, it will be renamed in the alpha or beta release of this API. This message (suitably marshalled into a protobuf.Any) can be used as the inline_assignment field in a lease; the lease assignment field should simply be @\"admin\"@ in these cases. This message is heavily based on Swarming administration tasks from the LUCI project (http:\/\/github.com\/luci\/luci-py\/appengine\/swarming).
 --
@@ -4275,30 +4040,24 @@ newGoogleDevtoolsRemoteworkersV1test2AdminTemp =
       command = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemoteworkersV1test2AdminTemp
-  where
+instance Core.FromJSON GoogleDevtoolsRemoteworkersV1test2AdminTemp where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemoteworkersV1test2AdminTemp"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2AdminTemp
-            Core.<$> (o Core..:? "arg") Core.<*> (o Core..:? "command")
+            Core.<$> (o Core..:? "arg")
+            Core.<*> (o Core..:? "command")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2AdminTemp
-  where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2AdminTemp {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("arg" Core..=) Core.<$> arg,
-              ("command" Core..=) Core.<$> command
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2AdminTemp where
+  toJSON GoogleDevtoolsRemoteworkersV1test2AdminTemp {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("arg" Core..=) Core.<$> arg,
+            ("command" Core..=) Core.<$> command
+          ]
+      )
 
 -- | Describes a blob of binary content with its digest.
 --
@@ -4320,10 +4079,7 @@ newGoogleDevtoolsRemoteworkersV1test2Blob =
       digest = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemoteworkersV1test2Blob
-  where
+instance Core.FromJSON GoogleDevtoolsRemoteworkersV1test2Blob where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemoteworkersV1test2Blob"
@@ -4333,10 +4089,7 @@ instance
             Core.<*> (o Core..:? "digest")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2Blob
-  where
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2Blob where
   toJSON GoogleDevtoolsRemoteworkersV1test2Blob {..} =
     Core.object
       ( Core.catMaybes
@@ -4361,7 +4114,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandOutputs ::
   GoogleDevtoolsRemoteworkersV1test2CommandOutputs
 newGoogleDevtoolsRemoteworkersV1test2CommandOutputs =
   GoogleDevtoolsRemoteworkersV1test2CommandOutputs
-    { exitCode = Core.Nothing,
+    { exitCode =
+        Core.Nothing,
       outputs = Core.Nothing
     }
 
@@ -4375,21 +4129,20 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandOutputs
             Core.<$> (o Core..:? "exitCode")
-              Core.<*> (o Core..:? "outputs")
+            Core.<*> (o Core..:? "outputs")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandOutputs
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandOutputs {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("exitCode" Core..=) Core.<$> exitCode,
-              ("outputs" Core..=) Core.<$> outputs
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandOutputs {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("exitCode" Core..=) Core.<$> exitCode,
+            ("outputs" Core..=) Core.<$> outputs
+          ]
+      )
 
 -- | DEPRECATED - use CommandResult instead. Can be used as part of CompleteRequest.metadata, or are part of a more sophisticated message.
 --
@@ -4407,7 +4160,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandOverhead ::
   GoogleDevtoolsRemoteworkersV1test2CommandOverhead
 newGoogleDevtoolsRemoteworkersV1test2CommandOverhead =
   GoogleDevtoolsRemoteworkersV1test2CommandOverhead
-    { duration = Core.Nothing,
+    { duration =
+        Core.Nothing,
       overhead = Core.Nothing
     }
 
@@ -4421,21 +4175,20 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandOverhead
             Core.<$> (o Core..:? "duration")
-              Core.<*> (o Core..:? "overhead")
+            Core.<*> (o Core..:? "overhead")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandOverhead
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandOverhead {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("duration" Core..=) Core.<$> duration,
-              ("overhead" Core..=) Core.<$> overhead
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandOverhead {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("overhead" Core..=) Core.<$> overhead
+          ]
+      )
 
 -- | All information about the execution of a command, suitable for providing as the Bots interface\'s @Lease.result@ field.
 --
@@ -4464,7 +4217,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandResult ::
   GoogleDevtoolsRemoteworkersV1test2CommandResult
 newGoogleDevtoolsRemoteworkersV1test2CommandResult =
   GoogleDevtoolsRemoteworkersV1test2CommandResult
-    { duration = Core.Nothing,
+    { duration =
+        Core.Nothing,
       exitCode = Core.Nothing,
       metadata = Core.Nothing,
       outputs = Core.Nothing,
@@ -4482,29 +4236,28 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandResult
             Core.<$> (o Core..:? "duration")
-              Core.<*> (o Core..:? "exitCode")
-              Core.<*> (o Core..:? "metadata")
-              Core.<*> (o Core..:? "outputs")
-              Core.<*> (o Core..:? "overhead")
-              Core.<*> (o Core..:? "status")
+            Core.<*> (o Core..:? "exitCode")
+            Core.<*> (o Core..:? "metadata")
+            Core.<*> (o Core..:? "outputs")
+            Core.<*> (o Core..:? "overhead")
+            Core.<*> (o Core..:? "status")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandResult
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandResult {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("duration" Core..=) Core.<$> duration,
-              ("exitCode" Core..=) Core.<$> exitCode,
-              ("metadata" Core..=) Core.<$> metadata,
-              ("outputs" Core..=) Core.<$> outputs,
-              ("overhead" Core..=) Core.<$> overhead,
-              ("status" Core..=) Core.<$> status
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("exitCode" Core..=) Core.<$> exitCode,
+            ("metadata" Core..=) Core.<$> metadata,
+            ("outputs" Core..=) Core.<$> outputs,
+            ("overhead" Core..=) Core.<$> overhead,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
 
 --
 -- /See:/ 'newGoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem' smart constructor.
@@ -4519,10 +4272,12 @@ newGoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem
-newGoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem additional =
-  GoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem
-    { additional = additional
-    }
+newGoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem
+  additional =
+    GoogleDevtoolsRemoteworkersV1test2CommandResult_MetadataItem
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -4562,7 +4317,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandTask ::
   GoogleDevtoolsRemoteworkersV1test2CommandTask
 newGoogleDevtoolsRemoteworkersV1test2CommandTask =
   GoogleDevtoolsRemoteworkersV1test2CommandTask
-    { expectedOutputs = Core.Nothing,
+    { expectedOutputs =
+        Core.Nothing,
       inputs = Core.Nothing,
       timeouts = Core.Nothing
     }
@@ -4577,24 +4333,19 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTask
             Core.<$> (o Core..:? "expectedOutputs")
-              Core.<*> (o Core..:? "inputs")
-              Core.<*> (o Core..:? "timeouts")
+            Core.<*> (o Core..:? "inputs")
+            Core.<*> (o Core..:? "timeouts")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandTask
-  where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandTask {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("expectedOutputs" Core..=)
-                Core.<$> expectedOutputs,
-              ("inputs" Core..=) Core.<$> inputs,
-              ("timeouts" Core..=) Core.<$> timeouts
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2CommandTask where
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandTask {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expectedOutputs" Core..=) Core.<$> expectedOutputs,
+            ("inputs" Core..=) Core.<$> inputs,
+            ("timeouts" Core..=) Core.<$> timeouts
+          ]
+      )
 
 -- | Describes the inputs to a shell-style task.
 --
@@ -4621,7 +4372,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandTaskInputs ::
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
 newGoogleDevtoolsRemoteworkersV1test2CommandTaskInputs =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
-    { arguments = Core.Nothing,
+    { arguments =
+        Core.Nothing,
       environmentVariables = Core.Nothing,
       files = Core.Nothing,
       inlineBlobs = Core.Nothing,
@@ -4638,29 +4390,26 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
             Core.<$> (o Core..:? "arguments")
-              Core.<*> (o Core..:? "environmentVariables")
-              Core.<*> (o Core..:? "files")
-              Core.<*> (o Core..:? "inlineBlobs")
-              Core.<*> (o Core..:? "workingDirectory")
+            Core.<*> (o Core..:? "environmentVariables")
+            Core.<*> (o Core..:? "files")
+            Core.<*> (o Core..:? "inlineBlobs")
+            Core.<*> (o Core..:? "workingDirectory")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("arguments" Core..=) Core.<$> arguments,
-              ("environmentVariables" Core..=)
-                Core.<$> environmentVariables,
-              ("files" Core..=) Core.<$> files,
-              ("inlineBlobs" Core..=) Core.<$> inlineBlobs,
-              ("workingDirectory" Core..=)
-                Core.<$> workingDirectory
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandTaskInputs {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("arguments" Core..=) Core.<$> arguments,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
+            ("files" Core..=) Core.<$> files,
+            ("inlineBlobs" Core..=) Core.<$> inlineBlobs,
+            ("workingDirectory" Core..=) Core.<$> workingDirectory
+          ]
+      )
 
 -- | An environment variable required by this task.
 --
@@ -4678,7 +4427,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable ::
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
 newGoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
-    { name = Core.Nothing,
+    { name =
+        Core.Nothing,
       value = Core.Nothing
     }
 
@@ -4691,7 +4441,8 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
@@ -4702,9 +4453,7 @@ instance
     GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable {..} =
       Core.object
         ( Core.catMaybes
-            [ ("name" Core..=) Core.<$> name,
-              ("value" Core..=) Core.<$> value
-            ]
+            [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
         )
 
 -- | Describes the expected outputs of the command.
@@ -4727,7 +4476,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs ::
   GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
 newGoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
-    { directories = Core.Nothing,
+    { directories =
+        Core.Nothing,
       files = Core.Nothing,
       stderrDestination = Core.Nothing,
       stdoutDestination = Core.Nothing
@@ -4743,27 +4493,24 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
             Core.<$> (o Core..:? "directories")
-              Core.<*> (o Core..:? "files")
-              Core.<*> (o Core..:? "stderrDestination")
-              Core.<*> (o Core..:? "stdoutDestination")
+            Core.<*> (o Core..:? "files")
+            Core.<*> (o Core..:? "stderrDestination")
+            Core.<*> (o Core..:? "stdoutDestination")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("directories" Core..=) Core.<$> directories,
-              ("files" Core..=) Core.<$> files,
-              ("stderrDestination" Core..=)
-                Core.<$> stderrDestination,
-              ("stdoutDestination" Core..=)
-                Core.<$> stdoutDestination
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandTaskOutputs {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("directories" Core..=) Core.<$> directories,
+            ("files" Core..=) Core.<$> files,
+            ("stderrDestination" Core..=) Core.<$> stderrDestination,
+            ("stdoutDestination" Core..=) Core.<$> stdoutDestination
+          ]
+      )
 
 -- | Describes the timeouts associated with this task.
 --
@@ -4783,7 +4530,8 @@ newGoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts ::
   GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
 newGoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts =
   GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
-    { execution = Core.Nothing,
+    { execution =
+        Core.Nothing,
       idle = Core.Nothing,
       shutdown = Core.Nothing
     }
@@ -4797,23 +4545,23 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
-            Core.<$> (o Core..:? "execution") Core.<*> (o Core..:? "idle")
-              Core.<*> (o Core..:? "shutdown")
+            Core.<$> (o Core..:? "execution")
+            Core.<*> (o Core..:? "idle")
+            Core.<*> (o Core..:? "shutdown")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("execution" Core..=) Core.<$> execution,
-              ("idle" Core..=) Core.<$> idle,
-              ("shutdown" Core..=) Core.<$> shutdown
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2CommandTaskTimeouts {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("execution" Core..=) Core.<$> execution,
+            ("idle" Core..=) Core.<$> idle,
+            ("shutdown" Core..=) Core.<$> shutdown
+          ]
+      )
 
 -- | The CommandTask and CommandResult messages assume the existence of a service that can serve blobs of content, identified by a hash and size known as a \"digest.\" The method by which these blobs may be retrieved is not specified here, but a model implementation is in the Remote Execution API\'s \"ContentAddressibleStorage\" interface. In the context of the RWAPI, a Digest will virtually always refer to the contents of a file or a directory. The latter is represented by the byte-encoded Directory message.
 --
@@ -4835,31 +4583,22 @@ newGoogleDevtoolsRemoteworkersV1test2Digest =
       sizeBytes = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemoteworkersV1test2Digest
-  where
+instance Core.FromJSON GoogleDevtoolsRemoteworkersV1test2Digest where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemoteworkersV1test2Digest"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2Digest
             Core.<$> (o Core..:? "hash")
-            Core.<*> ( o Core..:? "sizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2Digest
-  where
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2Digest where
   toJSON GoogleDevtoolsRemoteworkersV1test2Digest {..} =
     Core.object
       ( Core.catMaybes
           [ ("hash" Core..=) Core.<$> hash,
-            ("sizeBytes" Core..=) Core.. Core.AsText
-              Core.<$> sizeBytes
+            ("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes
           ]
       )
 
@@ -4879,14 +4618,12 @@ newGoogleDevtoolsRemoteworkersV1test2Directory ::
   GoogleDevtoolsRemoteworkersV1test2Directory
 newGoogleDevtoolsRemoteworkersV1test2Directory =
   GoogleDevtoolsRemoteworkersV1test2Directory
-    { directories = Core.Nothing,
+    { directories =
+        Core.Nothing,
       files = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDevtoolsRemoteworkersV1test2Directory
-  where
+instance Core.FromJSON GoogleDevtoolsRemoteworkersV1test2Directory where
   parseJSON =
     Core.withObject
       "GoogleDevtoolsRemoteworkersV1test2Directory"
@@ -4896,18 +4633,14 @@ instance
             Core.<*> (o Core..:? "files")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2Directory
-  where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2Directory {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("directories" Core..=) Core.<$> directories,
-              ("files" Core..=) Core.<$> files
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2Directory where
+  toJSON GoogleDevtoolsRemoteworkersV1test2Directory {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("directories" Core..=) Core.<$> directories,
+            ("files" Core..=) Core.<$> files
+          ]
+      )
 
 -- | The metadata for a directory. Similar to the equivalent message in the Remote Execution API.
 --
@@ -4925,7 +4658,8 @@ newGoogleDevtoolsRemoteworkersV1test2DirectoryMetadata ::
   GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
 newGoogleDevtoolsRemoteworkersV1test2DirectoryMetadata =
   GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
-    { digest = Core.Nothing,
+    { digest =
+        Core.Nothing,
       path = Core.Nothing
     }
 
@@ -4938,21 +4672,21 @@ instance
       "GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata"
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
-            Core.<$> (o Core..:? "digest") Core.<*> (o Core..:? "path")
+            Core.<$> (o Core..:? "digest")
+            Core.<*> (o Core..:? "path")
       )
 
 instance
   Core.ToJSON
     GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata
   where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("digest" Core..=) Core.<$> digest,
-              ("path" Core..=) Core.<$> path
-            ]
-        )
+  toJSON GoogleDevtoolsRemoteworkersV1test2DirectoryMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("digest" Core..=) Core.<$> digest,
+            ("path" Core..=) Core.<$> path
+          ]
+      )
 
 -- | The metadata for a file. Similar to the equivalent message in the Remote Execution API.
 --
@@ -4974,7 +4708,8 @@ newGoogleDevtoolsRemoteworkersV1test2FileMetadata ::
   GoogleDevtoolsRemoteworkersV1test2FileMetadata
 newGoogleDevtoolsRemoteworkersV1test2FileMetadata =
   GoogleDevtoolsRemoteworkersV1test2FileMetadata
-    { contents = Core.Nothing,
+    { contents =
+        Core.Nothing,
       digest = Core.Nothing,
       isExecutable = Core.Nothing,
       path = Core.Nothing
@@ -4990,25 +4725,21 @@ instance
       ( \o ->
           GoogleDevtoolsRemoteworkersV1test2FileMetadata
             Core.<$> (o Core..:? "contents")
-              Core.<*> (o Core..:? "digest")
-              Core.<*> (o Core..:? "isExecutable")
-              Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "digest")
+            Core.<*> (o Core..:? "isExecutable")
+            Core.<*> (o Core..:? "path")
       )
 
-instance
-  Core.ToJSON
-    GoogleDevtoolsRemoteworkersV1test2FileMetadata
-  where
-  toJSON
-    GoogleDevtoolsRemoteworkersV1test2FileMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("contents" Core..=) Core.<$> contents,
-              ("digest" Core..=) Core.<$> digest,
-              ("isExecutable" Core..=) Core.<$> isExecutable,
-              ("path" Core..=) Core.<$> path
-            ]
-        )
+instance Core.ToJSON GoogleDevtoolsRemoteworkersV1test2FileMetadata where
+  toJSON GoogleDevtoolsRemoteworkersV1test2FileMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contents" Core..=) Core.<$> contents,
+            ("digest" Core..=) Core.<$> digest,
+            ("isExecutable" Core..=) Core.<$> isExecutable,
+            ("path" Core..=) Core.<$> path
+          ]
+      )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -5081,10 +4812,7 @@ newGoogleLongrunningOperation_Metadata ::
 newGoogleLongrunningOperation_Metadata additional =
   GoogleLongrunningOperation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Metadata"
@@ -5093,10 +4821,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Metadata where
   toJSON GoogleLongrunningOperation_Metadata {..} =
     Core.toJSON additional
 
@@ -5117,10 +4842,7 @@ newGoogleLongrunningOperation_Response ::
 newGoogleLongrunningOperation_Response additional =
   GoogleLongrunningOperation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Response"
@@ -5129,10 +4851,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Response where
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
@@ -5201,10 +4920,8 @@ instance Core.FromJSON GoogleRpcStatus_DetailsItem where
     Core.withObject
       "GoogleRpcStatus_DetailsItem"
       ( \o ->
-          GoogleRpcStatus_DetailsItem
-            Core.<$> (Core.parseJSONObject o)
+          GoogleRpcStatus_DetailsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleRpcStatus_DetailsItem where
-  toJSON GoogleRpcStatus_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON GoogleRpcStatus_DetailsItem {..} = Core.toJSON additional

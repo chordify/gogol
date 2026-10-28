@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DataFusion.Internal.Product
@@ -110,6 +108,22 @@ module Gogol.DataFusion.Internal.Product
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- * LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- * MaintenanceEvent
+    MaintenanceEvent (..),
+    newMaintenanceEvent,
+
+    -- * MaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
+
+    -- * MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
     -- * NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
@@ -138,6 +152,14 @@ module Gogol.DataFusion.Internal.Product
     Policy (..),
     newPolicy,
 
+    -- * PrivateServiceConnectConfig
+    PrivateServiceConnectConfig (..),
+    newPrivateServiceConnectConfig,
+
+    -- * RecurringTimeWindow
+    RecurringTimeWindow (..),
+    newRecurringTimeWindow,
+
     -- * RestartInstanceRequest
     RestartInstanceRequest (..),
     newRestartInstanceRequest,
@@ -162,6 +184,10 @@ module Gogol.DataFusion.Internal.Product
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- * TimeWindow
+    TimeWindow (..),
+    newTimeWindow,
+
     -- * Version
     Version (..),
     newVersion,
@@ -169,15 +195,15 @@ module Gogol.DataFusion.Internal.Product
 where
 
 import Gogol.DataFusion.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Identifies Data Fusion accelerators for an instance.
 --
 -- /See:/ 'newAccelerator' smart constructor.
 data Accelerator = Accelerator
-  { -- | The type of an accelator for a CDF instance.
+  { -- | Optional. The type of an accelator for a Cloud Data Fusion instance.
     acceleratorType :: (Core.Maybe Accelerator_AcceleratorType),
-    -- | The state of the accelerator.
+    -- | Output only. The state of the accelerator.
     state :: (Core.Maybe Accelerator_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -202,8 +228,7 @@ instance Core.ToJSON Accelerator where
   toJSON Accelerator {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorType" Core..=)
-              Core.<$> acceleratorType,
+          [ ("acceleratorType" Core..=) Core.<$> acceleratorType,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -224,7 +249,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -240,8 +268,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -261,7 +288,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -277,8 +307,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -290,10 +319,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -353,7 +384,7 @@ instance Core.ToJSON CancelOperationRequest where
 --
 -- /See:/ 'newCryptoKeyConfig' smart constructor.
 newtype CryptoKeyConfig = CryptoKeyConfig
-  { -- | The name of the key which is used to encrypt\/decrypt customer data. For key in Cloud KMS, the key should be in the format of @projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*@.
+  { -- | Optional. The name of the key which is used to encrypt\/decrypt customer data. For key in Cloud KMS, the key should be in the format of @projects\/*\/locations\/*\/keyRings\/*\/cryptoKeys\/*@.
     keyReference :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -367,16 +398,12 @@ instance Core.FromJSON CryptoKeyConfig where
   parseJSON =
     Core.withObject
       "CryptoKeyConfig"
-      ( \o ->
-          CryptoKeyConfig Core.<$> (o Core..:? "keyReference")
-      )
+      (\o -> CryptoKeyConfig Core.<$> (o Core..:? "keyReference"))
 
 instance Core.ToJSON CryptoKeyConfig where
   toJSON CryptoKeyConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("keyReference" Core..=) Core.<$> keyReference]
-      )
+      (Core.catMaybes [("keyReference" Core..=) Core.<$> keyReference])
 
 -- | DNS peering configuration. These configurations are used to create DNS peering with the customer Cloud DNS.
 --
@@ -386,7 +413,7 @@ data DnsPeering = DnsPeering
     description :: (Core.Maybe Core.Text),
     -- | Required. The dns name suffix of the zone.
     domain :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the dns peering zone. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering}
+    -- | Identifier. The resource name of the dns peering zone. Format: projects\/{project}\/locations\/{location}\/instances\/{instance}\/dnsPeerings\/{dns_peering}
     name :: (Core.Maybe Core.Text),
     -- | Optional. Optional target network to which dns peering should happen.
     targetNetwork :: (Core.Maybe Core.Text),
@@ -444,8 +471,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -473,7 +499,8 @@ instance Core.FromJSON EventPublishConfig where
       "EventPublishConfig"
       ( \o ->
           EventPublishConfig
-            Core.<$> (o Core..:? "enabled") Core.<*> (o Core..:? "topic")
+            Core.<$> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "topic")
       )
 
 instance Core.ToJSON EventPublishConfig where
@@ -547,40 +574,54 @@ data Instance = Instance
     availableVersion :: (Core.Maybe [Version]),
     -- | Output only. The time the instance was created.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | The crypto key configuration. This field is used by the Customer-Managed Encryption Keys (CMEK) feature.
+    -- | Optional. The crypto key configuration. This field is used by the Customer-Managed Encryption Keys (CMEK) feature.
     cryptoKeyConfig :: (Core.Maybe CryptoKeyConfig),
-    -- | User-managed service account to set on Dataproc when Cloud Data Fusion creates Dataproc to run data processing pipelines. This allows users to have fine-grained access control on Dataproc\'s accesses to cloud resources.
+    -- | Optional. Option to enable the Dataplex Lineage Integration feature.
+    dataplexDataLineageIntegrationEnabled :: (Core.Maybe Core.Bool),
+    -- | Optional. User-managed service account to set on Dataproc when Cloud Data Fusion creates Dataproc to run data processing pipelines. This allows users to have fine-grained access control on Dataproc\'s accesses to cloud resources.
     dataprocServiceAccount :: (Core.Maybe Core.Text),
-    -- | A description of this instance.
+    -- | Optional. A description of this instance.
     description :: (Core.Maybe Core.Text),
     -- | Output only. If the instance state is DISABLED, the reason for disabling the instance.
     disabledReason :: (Core.Maybe [Instance_DisabledReasonItem]),
-    -- | Display name for an instance.
+    -- | Optional. Display name for an instance.
     displayName :: (Core.Maybe Core.Text),
-    -- | Option to enable granular role-based access control.
+    -- | Optional. Option to enable granular role-based access control.
     enableRbac :: (Core.Maybe Core.Bool),
-    -- | Option to enable Stackdriver Logging.
+    -- | Optional. Option to enable Dataproc Stackdriver Logging.
     enableStackdriverLogging :: (Core.Maybe Core.Bool),
-    -- | Option to enable Stackdriver Monitoring.
+    -- | Optional. Option to enable Stackdriver Monitoring.
     enableStackdriverMonitoring :: (Core.Maybe Core.Bool),
-    -- | Option to enable granular zone separation.
+    -- | Output only. Option to enable granular zone separation.
     enableZoneSeparation :: (Core.Maybe Core.Bool),
-    -- | Option to enable and pass metadata for event publishing.
+    -- | Optional. Option to enable and pass metadata for event publishing.
     eventPublishConfig :: (Core.Maybe EventPublishConfig),
     -- | Output only. Cloud Storage bucket generated by Data Fusion in the customer project.
     gcsBucket :: (Core.Maybe Core.Text),
     -- | The resource labels for instance to use to annotate any related underlying resources such as Compute Engine VMs. The character \'=\' is not allowed to be used within the labels.
     labels :: (Core.Maybe Instance_Labels),
+    -- | Optional. The logging configuration for this instance. This field is supported only in CDF versions 6.11.0 and above.
+    loggingConfig :: (Core.Maybe LoggingConfig),
+    -- | Output only. The maintenance events for this instance.
+    maintenanceEvents :: (Core.Maybe [MaintenanceEvent]),
+    -- | Optional. Configure the maintenance policy for this instance.
+    maintenancePolicy :: (Core.Maybe MaintenancePolicy),
     -- | Output only. The name of this instance is in the form of projects\/{project}\/locations\/{location}\/instances\/{instance}.
     name :: (Core.Maybe Core.Text),
-    -- | Network configuration options. These are required when a private Data Fusion instance is to be created.
+    -- | Optional. Network configuration options. These are required when a private Data Fusion instance is to be created.
     networkConfig :: (Core.Maybe NetworkConfig),
-    -- | Map of additional options used to configure the behavior of Data Fusion instance.
+    -- | Optional. Map of additional options used to configure the behavior of Data Fusion instance.
     options :: (Core.Maybe Instance_Options),
-    -- | Output only. P4 service account for the customer project.
+    -- | Output only. Service agent for the customer project.
     p4ServiceAccount :: (Core.Maybe Core.Text),
-    -- | Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.
+    -- | Optional. Current patch revision of the Data Fusion.
+    patchRevision :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies whether the Data Fusion instance should be private. If set to true, all Data Fusion nodes will have private IP addresses and will not be able to access the public internet.
     privateInstance :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Output only. Deprecated. Use tenant/project/id instead to extract the tenant project ID.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | Output only. Endpoint on which the Data Fusion UI is accessible.
@@ -595,9 +636,11 @@ data Instance = Instance
     type' :: (Core.Maybe Instance_Type),
     -- | Output only. The time the instance was last updated.
     updateTime :: (Core.Maybe Core.DateTime),
-    -- | Current version of the Data Fusion. Only specifiable in Update.
+    -- | Optional. Current version of the Data Fusion. Only specifiable in Update.
     version :: (Core.Maybe Core.Text),
-    -- | Name of the zone in which the Data Fusion instance will be created. Only DEVELOPER instances use this field.
+    -- | Output only. Endpoint on which the Data Fusion UI is accessible to third-party users
+    workforceIdentityServiceEndpoint :: (Core.Maybe Core.Text),
+    -- | Optional. Name of the zone in which the Data Fusion instance will be created. Only DEVELOPER instances use this field.
     zone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -612,6 +655,7 @@ newInstance =
       availableVersion = Core.Nothing,
       createTime = Core.Nothing,
       cryptoKeyConfig = Core.Nothing,
+      dataplexDataLineageIntegrationEnabled = Core.Nothing,
       dataprocServiceAccount = Core.Nothing,
       description = Core.Nothing,
       disabledReason = Core.Nothing,
@@ -623,11 +667,17 @@ newInstance =
       eventPublishConfig = Core.Nothing,
       gcsBucket = Core.Nothing,
       labels = Core.Nothing,
+      loggingConfig = Core.Nothing,
+      maintenanceEvents = Core.Nothing,
+      maintenancePolicy = Core.Nothing,
       name = Core.Nothing,
       networkConfig = Core.Nothing,
       options = Core.Nothing,
       p4ServiceAccount = Core.Nothing,
+      patchRevision = Core.Nothing,
       privateInstance = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       serviceAccount = Core.Nothing,
       serviceEndpoint = Core.Nothing,
       state = Core.Nothing,
@@ -636,6 +686,7 @@ newInstance =
       type' = Core.Nothing,
       updateTime = Core.Nothing,
       version = Core.Nothing,
+      workforceIdentityServiceEndpoint = Core.Nothing,
       zone = Core.Nothing
     }
 
@@ -650,6 +701,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "availableVersion")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "cryptoKeyConfig")
+            Core.<*> (o Core..:? "dataplexDataLineageIntegrationEnabled")
             Core.<*> (o Core..:? "dataprocServiceAccount")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "disabledReason")
@@ -661,11 +713,17 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "eventPublishConfig")
             Core.<*> (o Core..:? "gcsBucket")
             Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "loggingConfig")
+            Core.<*> (o Core..:? "maintenanceEvents")
+            Core.<*> (o Core..:? "maintenancePolicy")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
             Core.<*> (o Core..:? "options")
             Core.<*> (o Core..:? "p4ServiceAccount")
+            Core.<*> (o Core..:? "patchRevision")
             Core.<*> (o Core..:? "privateInstance")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "serviceEndpoint")
             Core.<*> (o Core..:? "state")
@@ -674,6 +732,7 @@ instance Core.FromJSON Instance where
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "version")
+            Core.<*> (o Core..:? "workforceIdentityServiceEndpoint")
             Core.<*> (o Core..:? "zone")
       )
 
@@ -683,12 +742,12 @@ instance Core.ToJSON Instance where
       ( Core.catMaybes
           [ ("accelerators" Core..=) Core.<$> accelerators,
             ("apiEndpoint" Core..=) Core.<$> apiEndpoint,
-            ("availableVersion" Core..=)
-              Core.<$> availableVersion,
+            ("availableVersion" Core..=) Core.<$> availableVersion,
             ("createTime" Core..=) Core.<$> createTime,
             ("cryptoKeyConfig" Core..=) Core.<$> cryptoKeyConfig,
-            ("dataprocServiceAccount" Core..=)
-              Core.<$> dataprocServiceAccount,
+            ("dataplexDataLineageIntegrationEnabled" Core..=)
+              Core.<$> dataplexDataLineageIntegrationEnabled,
+            ("dataprocServiceAccount" Core..=) Core.<$> dataprocServiceAccount,
             ("description" Core..=) Core.<$> description,
             ("disabledReason" Core..=) Core.<$> disabledReason,
             ("displayName" Core..=) Core.<$> displayName,
@@ -697,18 +756,21 @@ instance Core.ToJSON Instance where
               Core.<$> enableStackdriverLogging,
             ("enableStackdriverMonitoring" Core..=)
               Core.<$> enableStackdriverMonitoring,
-            ("enableZoneSeparation" Core..=)
-              Core.<$> enableZoneSeparation,
-            ("eventPublishConfig" Core..=)
-              Core.<$> eventPublishConfig,
+            ("enableZoneSeparation" Core..=) Core.<$> enableZoneSeparation,
+            ("eventPublishConfig" Core..=) Core.<$> eventPublishConfig,
             ("gcsBucket" Core..=) Core.<$> gcsBucket,
             ("labels" Core..=) Core.<$> labels,
+            ("loggingConfig" Core..=) Core.<$> loggingConfig,
+            ("maintenanceEvents" Core..=) Core.<$> maintenanceEvents,
+            ("maintenancePolicy" Core..=) Core.<$> maintenancePolicy,
             ("name" Core..=) Core.<$> name,
             ("networkConfig" Core..=) Core.<$> networkConfig,
             ("options" Core..=) Core.<$> options,
-            ("p4ServiceAccount" Core..=)
-              Core.<$> p4ServiceAccount,
+            ("p4ServiceAccount" Core..=) Core.<$> p4ServiceAccount,
+            ("patchRevision" Core..=) Core.<$> patchRevision,
             ("privateInstance" Core..=) Core.<$> privateInstance,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("serviceEndpoint" Core..=) Core.<$> serviceEndpoint,
             ("state" Core..=) Core.<$> state,
@@ -717,6 +779,8 @@ instance Core.ToJSON Instance where
             ("type" Core..=) Core.<$> type',
             ("updateTime" Core..=) Core.<$> updateTime,
             ("version" Core..=) Core.<$> version,
+            ("workforceIdentityServiceEndpoint" Core..=)
+              Core.<$> workforceIdentityServiceEndpoint,
             ("zone" Core..=) Core.<$> zone
           ]
       )
@@ -725,8 +789,7 @@ instance Core.ToJSON Instance where
 --
 -- /See:/ 'newInstance_Labels' smart constructor.
 newtype Instance_Labels = Instance_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -735,25 +798,23 @@ newInstance_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Instance_Labels
-newInstance_Labels additional = Instance_Labels {additional = additional}
+newInstance_Labels additional =
+  Instance_Labels {additional = additional}
 
 instance Core.FromJSON Instance_Labels where
   parseJSON =
     Core.withObject
       "Instance_Labels"
-      ( \o ->
-          Instance_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Instance_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Instance_Labels where
   toJSON Instance_Labels {..} = Core.toJSON additional
 
--- | Map of additional options used to configure the behavior of Data Fusion instance.
+-- | Optional. Map of additional options used to configure the behavior of Data Fusion instance.
 --
 -- /See:/ 'newInstance_Options' smart constructor.
 newtype Instance_Options = Instance_Options
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -762,15 +823,14 @@ newInstance_Options ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Instance_Options
-newInstance_Options additional = Instance_Options {additional = additional}
+newInstance_Options additional =
+  Instance_Options {additional = additional}
 
 instance Core.FromJSON Instance_Options where
   parseJSON =
     Core.withObject
       "Instance_Options"
-      ( \o ->
-          Instance_Options Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Instance_Options Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Instance_Options where
   toJSON Instance_Options {..} = Core.toJSON additional
@@ -779,10 +839,12 @@ instance Core.ToJSON Instance_Options where
 --
 -- /See:/ 'newListAvailableVersionsResponse' smart constructor.
 data ListAvailableVersionsResponse = ListAvailableVersionsResponse
-  { -- | Represents a list of versions that are supported.
+  { -- | Represents a list of versions that are supported. Deprecated: Use versions field instead.
     availableVersions :: (Core.Maybe [Version]),
     -- | Token to retrieve the next page of results or empty if there are no more results in the list.
-    nextPageToken :: (Core.Maybe Core.Text)
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | Represents a list of all versions.
+    versions :: (Core.Maybe [Version])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -792,7 +854,8 @@ newListAvailableVersionsResponse ::
 newListAvailableVersionsResponse =
   ListAvailableVersionsResponse
     { availableVersions = Core.Nothing,
-      nextPageToken = Core.Nothing
+      nextPageToken = Core.Nothing,
+      versions = Core.Nothing
     }
 
 instance Core.FromJSON ListAvailableVersionsResponse where
@@ -803,15 +866,16 @@ instance Core.FromJSON ListAvailableVersionsResponse where
           ListAvailableVersionsResponse
             Core.<$> (o Core..:? "availableVersions")
             Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "versions")
       )
 
 instance Core.ToJSON ListAvailableVersionsResponse where
   toJSON ListAvailableVersionsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableVersions" Core..=)
-              Core.<$> availableVersions,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          [ ("availableVersions" Core..=) Core.<$> availableVersions,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("versions" Core..=) Core.<$> versions
           ]
       )
 
@@ -913,7 +977,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -973,7 +1040,7 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -1031,8 +1098,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1041,15 +1107,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -1068,27 +1133,176 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
+
+-- | Logging configuration for a Data Fusion instance.
+--
+-- /See:/ 'newLoggingConfig' smart constructor.
+newtype LoggingConfig = LoggingConfig
+  { -- | Optional. Option to determine whether instance logs should be written to Cloud Logging. By default, instance logs are written to Cloud Logging.
+    instanceCloudLoggingDisabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LoggingConfig' with the minimum fields required to make a request.
+newLoggingConfig ::
+  LoggingConfig
+newLoggingConfig =
+  LoggingConfig {instanceCloudLoggingDisabled = Core.Nothing}
+
+instance Core.FromJSON LoggingConfig where
+  parseJSON =
+    Core.withObject
+      "LoggingConfig"
+      ( \o ->
+          LoggingConfig Core.<$> (o Core..:? "instanceCloudLoggingDisabled")
+      )
+
+instance Core.ToJSON LoggingConfig where
+  toJSON LoggingConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("instanceCloudLoggingDisabled" Core..=)
+              Core.<$> instanceCloudLoggingDisabled
+          ]
+      )
+
+-- | Represents a maintenance event.
+--
+-- /See:/ 'newMaintenanceEvent' smart constructor.
+data MaintenanceEvent = MaintenanceEvent
+  { -- | Output only. The end time of the maintenance event provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. Example: \"2024-01-02T12:04:06-06:00\" This field will be empty if the maintenance event is not yet complete.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The start time of the maintenance event provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. Example: \"2024-01-01T12:04:06-04:00\"
+    startTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The state of the maintenance event.
+    state :: (Core.Maybe MaintenanceEvent_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaintenanceEvent' with the minimum fields required to make a request.
+newMaintenanceEvent ::
+  MaintenanceEvent
+newMaintenanceEvent =
+  MaintenanceEvent
+    { endTime = Core.Nothing,
+      startTime = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON MaintenanceEvent where
+  parseJSON =
+    Core.withObject
+      "MaintenanceEvent"
+      ( \o ->
+          MaintenanceEvent
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON MaintenanceEvent where
+  toJSON MaintenanceEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
+
+-- | Maintenance policy of the instance.
+--
+-- /See:/ 'newMaintenancePolicy' smart constructor.
+data MaintenancePolicy = MaintenancePolicy
+  { -- | Optional. The maintenance exclusion window of the instance.
+    maintenanceExclusionWindow :: (Core.Maybe TimeWindow),
+    -- | Optional. The maintenance window of the instance.
+    maintenanceWindow :: (Core.Maybe MaintenanceWindow)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaintenancePolicy' with the minimum fields required to make a request.
+newMaintenancePolicy ::
+  MaintenancePolicy
+newMaintenancePolicy =
+  MaintenancePolicy
+    { maintenanceExclusionWindow = Core.Nothing,
+      maintenanceWindow = Core.Nothing
+    }
+
+instance Core.FromJSON MaintenancePolicy where
+  parseJSON =
+    Core.withObject
+      "MaintenancePolicy"
+      ( \o ->
+          MaintenancePolicy
+            Core.<$> (o Core..:? "maintenanceExclusionWindow")
+            Core.<*> (o Core..:? "maintenanceWindow")
+      )
+
+instance Core.ToJSON MaintenancePolicy where
+  toJSON MaintenancePolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maintenanceExclusionWindow" Core..=)
+              Core.<$> maintenanceExclusionWindow,
+            ("maintenanceWindow" Core..=) Core.<$> maintenanceWindow
+          ]
+      )
+
+-- | Maintenance window of the instance.
+--
+-- /See:/ 'newMaintenanceWindow' smart constructor.
+newtype MaintenanceWindow = MaintenanceWindow
+  { -- | Required. The recurring time window of the maintenance window.
+    recurringTimeWindow :: (Core.Maybe RecurringTimeWindow)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MaintenanceWindow' with the minimum fields required to make a request.
+newMaintenanceWindow ::
+  MaintenanceWindow
+newMaintenanceWindow =
+  MaintenanceWindow {recurringTimeWindow = Core.Nothing}
+
+instance Core.FromJSON MaintenanceWindow where
+  parseJSON =
+    Core.withObject
+      "MaintenanceWindow"
+      ( \o ->
+          MaintenanceWindow Core.<$> (o Core..:? "recurringTimeWindow")
+      )
+
+instance Core.ToJSON MaintenanceWindow where
+  toJSON MaintenanceWindow {..} =
+    Core.object
+      ( Core.catMaybes
+          [("recurringTimeWindow" Core..=) Core.<$> recurringTimeWindow]
+      )
 
 -- | Network configuration for a Data Fusion instance. These configurations are used for peering with the customer network. Configurations are optional when a public Data Fusion instance is to be created. However, providing these configurations allows several benefits, such as reduced network latency while accessing the customer resources from managed Data Fusion instance nodes, as well as access to the customer on-prem resources.
 --
 -- /See:/ 'newNetworkConfig' smart constructor.
 data NetworkConfig = NetworkConfig
-  { -- | The IP range in CIDR notation to use for the managed Data Fusion instance nodes. This range must not overlap with any other ranges used in the customer network.
+  { -- | Optional. Type of connection for establishing private IP connectivity between the Data Fusion customer project VPC and the corresponding tenant project from a predefined list of available connection modes. If this field is unspecified for a private instance, VPC peering is used.
+    connectionType :: (Core.Maybe NetworkConfig_ConnectionType),
+    -- | Optional. The IP range in CIDR notation to use for the managed Data Fusion instance nodes. This range must not overlap with any other ranges used in the Data Fusion instance network. This is required only when using connection type VPC_PEERING. Format: a.b.c.d\/22 Example: 192.168.0.0\/22
     ipAllocation :: (Core.Maybe Core.Text),
-    -- | Name of the network in the customer project with which the Tenant Project will be peered for executing pipelines. In case of shared VPC where the network resides in another host project the network should specified in the form of projects\/{host-project-id}\/global\/networks\/{network}
-    network :: (Core.Maybe Core.Text)
+    -- | Optional. Name of the network in the customer project with which the Tenant Project will be peered for executing pipelines. In case of shared VPC where the network resides in another host project the network should specified in the form of projects\/{host-project-id}\/global\/networks\/{network}. This is only required for connectivity type VPC_PEERING.
+    network :: (Core.Maybe Core.Text),
+    -- | Optional. Configuration for Private Service Connect. This is required only when using connection type PRIVATE/SERVICE/CONNECT_INTERFACES.
+    privateServiceConnectConfig :: (Core.Maybe PrivateServiceConnectConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1096,7 +1310,12 @@ data NetworkConfig = NetworkConfig
 newNetworkConfig ::
   NetworkConfig
 newNetworkConfig =
-  NetworkConfig {ipAllocation = Core.Nothing, network = Core.Nothing}
+  NetworkConfig
+    { connectionType = Core.Nothing,
+      ipAllocation = Core.Nothing,
+      network = Core.Nothing,
+      privateServiceConnectConfig = Core.Nothing
+    }
 
 instance Core.FromJSON NetworkConfig where
   parseJSON =
@@ -1104,16 +1323,21 @@ instance Core.FromJSON NetworkConfig where
       "NetworkConfig"
       ( \o ->
           NetworkConfig
-            Core.<$> (o Core..:? "ipAllocation")
+            Core.<$> (o Core..:? "connectionType")
+            Core.<*> (o Core..:? "ipAllocation")
             Core.<*> (o Core..:? "network")
+            Core.<*> (o Core..:? "privateServiceConnectConfig")
       )
 
 instance Core.ToJSON NetworkConfig where
   toJSON NetworkConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ipAllocation" Core..=) Core.<$> ipAllocation,
-            ("network" Core..=) Core.<$> network
+          [ ("connectionType" Core..=) Core.<$> connectionType,
+            ("ipAllocation" Core..=) Core.<$> ipAllocation,
+            ("network" Core..=) Core.<$> network,
+            ("privateServiceConnectConfig" Core..=)
+              Core.<$> privateServiceConnectConfig
           ]
       )
 
@@ -1129,7 +1353,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1185,21 +1409,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1213,19 +1435,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Represents the metadata of a long-running operation.
 --
@@ -1239,7 +1459,7 @@ data OperationMetadata = OperationMetadata
     createTime :: (Core.Maybe Core.DateTime),
     -- | The time the operation finished running.
     endTime :: (Core.Maybe Core.DateTime),
-    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     requestedCancellation :: (Core.Maybe Core.Bool),
     -- | Human-readable status of the operation if any.
     statusDetail :: (Core.Maybe Core.Text),
@@ -1285,13 +1505,11 @@ instance Core.ToJSON OperationMetadata where
   toJSON OperationMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalStatus" Core..=)
-              Core.<$> additionalStatus,
+          [ ("additionalStatus" Core..=) Core.<$> additionalStatus,
             ("apiVersion" Core..=) Core.<$> apiVersion,
             ("createTime" Core..=) Core.<$> createTime,
             ("endTime" Core..=) Core.<$> endTime,
-            ("requestedCancellation" Core..=)
-              Core.<$> requestedCancellation,
+            ("requestedCancellation" Core..=) Core.<$> requestedCancellation,
             ("statusDetail" Core..=) Core.<$> statusDetail,
             ("target" Core..=) Core.<$> target,
             ("verb" Core..=) Core.<$> verb
@@ -1302,8 +1520,7 @@ instance Core.ToJSON OperationMetadata where
 --
 -- /See:/ 'newOperationMetadata_AdditionalStatus' smart constructor.
 newtype OperationMetadata_AdditionalStatus = OperationMetadata_AdditionalStatus
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1315,10 +1532,7 @@ newOperationMetadata_AdditionalStatus ::
 newOperationMetadata_AdditionalStatus additional =
   OperationMetadata_AdditionalStatus {additional = additional}
 
-instance
-  Core.FromJSON
-    OperationMetadata_AdditionalStatus
-  where
+instance Core.FromJSON OperationMetadata_AdditionalStatus where
   parseJSON =
     Core.withObject
       "OperationMetadata_AdditionalStatus"
@@ -1327,16 +1541,13 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    OperationMetadata_AdditionalStatus
-  where
+instance Core.ToJSON OperationMetadata_AdditionalStatus where
   toJSON OperationMetadata_AdditionalStatus {..} =
     Core.toJSON additional
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -1386,6 +1597,91 @@ instance Core.ToJSON Policy where
           ]
       )
 
+-- | Configuration for using Private Service Connect to establish connectivity between the Data Fusion consumer project and the corresponding tenant project.
+--
+-- /See:/ 'newPrivateServiceConnectConfig' smart constructor.
+data PrivateServiceConnectConfig = PrivateServiceConnectConfig
+  { -- | Output only. The CIDR block to which the CDF instance can\'t route traffic to in the consumer project VPC. The size of this block is \/25. The format of this field is governed by RFC 4632. Example: 240.0.0.0\/25
+    effectiveUnreachableCidrBlock :: (Core.Maybe Core.Text),
+    -- | Required. The reference to the network attachment used to establish private connectivity. It will be of the form projects\/{project-id}\/regions\/{region}\/networkAttachments\/{network-attachment-id}.
+    networkAttachment :: (Core.Maybe Core.Text),
+    -- | Optional. Input only. The CIDR block to which the CDF instance can\'t route traffic to in the consumer project VPC. The size of this block should be at least \/25. This range should not overlap with the primary address range of any subnetwork used by the network attachment. This range can be used for other purposes in the consumer VPC as long as there is no requirement for CDF to reach destinations using these addresses. If this value is not provided, the server chooses a non RFC 1918 address range. The format of this field is governed by RFC 4632. Example: 192.168.0.0\/25
+    unreachableCidrBlock :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrivateServiceConnectConfig' with the minimum fields required to make a request.
+newPrivateServiceConnectConfig ::
+  PrivateServiceConnectConfig
+newPrivateServiceConnectConfig =
+  PrivateServiceConnectConfig
+    { effectiveUnreachableCidrBlock =
+        Core.Nothing,
+      networkAttachment = Core.Nothing,
+      unreachableCidrBlock = Core.Nothing
+    }
+
+instance Core.FromJSON PrivateServiceConnectConfig where
+  parseJSON =
+    Core.withObject
+      "PrivateServiceConnectConfig"
+      ( \o ->
+          PrivateServiceConnectConfig
+            Core.<$> (o Core..:? "effectiveUnreachableCidrBlock")
+            Core.<*> (o Core..:? "networkAttachment")
+            Core.<*> (o Core..:? "unreachableCidrBlock")
+      )
+
+instance Core.ToJSON PrivateServiceConnectConfig where
+  toJSON PrivateServiceConnectConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("effectiveUnreachableCidrBlock" Core..=)
+              Core.<$> effectiveUnreachableCidrBlock,
+            ("networkAttachment" Core..=) Core.<$> networkAttachment,
+            ("unreachableCidrBlock" Core..=) Core.<$> unreachableCidrBlock
+          ]
+      )
+
+-- | Represents an arbitrary window of time that recurs.
+--
+-- /See:/ 'newRecurringTimeWindow' smart constructor.
+data RecurringTimeWindow = RecurringTimeWindow
+  { -- | Required. An RRULE with format <https://tools.ietf.org/html/rfc5545#section-3.8.5.3 RFC-5545> for how this window reccurs. They go on for the span of time between the start and end time. The only supported FREQ value is \"WEEKLY\". To have something repeat every weekday, use: \"FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR\". This specifies how frequently the window starts. To have a 9 am - 5 pm UTC-4 window every weekday, use something like: @start time = 2019-01-01T09:00:00-0400 end time = 2019-01-01T17:00:00-0400 recurrence = FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR@
+    recurrence :: (Core.Maybe Core.Text),
+    -- | Required. The window representing the start and end time of recurrences. This field ignores the date components of the provided timestamps. Only the time of day and duration between start and end time are relevant.
+    window :: (Core.Maybe TimeWindow)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RecurringTimeWindow' with the minimum fields required to make a request.
+newRecurringTimeWindow ::
+  RecurringTimeWindow
+newRecurringTimeWindow =
+  RecurringTimeWindow
+    { recurrence = Core.Nothing,
+      window = Core.Nothing
+    }
+
+instance Core.FromJSON RecurringTimeWindow where
+  parseJSON =
+    Core.withObject
+      "RecurringTimeWindow"
+      ( \o ->
+          RecurringTimeWindow
+            Core.<$> (o Core..:? "recurrence")
+            Core.<*> (o Core..:? "window")
+      )
+
+instance Core.ToJSON RecurringTimeWindow where
+  toJSON RecurringTimeWindow {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("recurrence" Core..=) Core.<$> recurrence,
+            ("window" Core..=) Core.<$> window
+          ]
+      )
+
 -- | Request message for restarting a Data Fusion instance.
 --
 -- /See:/ 'newRestartInstanceRequest' smart constructor.
@@ -1421,7 +1717,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -1459,7 +1758,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1495,19 +1798,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -1529,16 +1830,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -1560,15 +1858,48 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
+
+-- | Represents an arbitrary window of time.
+--
+-- /See:/ 'newTimeWindow' smart constructor.
+data TimeWindow = TimeWindow
+  { -- | Required. The end time of the time window provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. The end time should take place after the start time. Example: \"2024-01-02T12:04:06-06:00\"
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The start time of the time window provided in <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. Example: \"2024-01-01T12:04:06-04:00\"
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeWindow' with the minimum fields required to make a request.
+newTimeWindow ::
+  TimeWindow
+newTimeWindow =
+  TimeWindow {endTime = Core.Nothing, startTime = Core.Nothing}
+
+instance Core.FromJSON TimeWindow where
+  parseJSON =
+    Core.withObject
+      "TimeWindow"
+      ( \o ->
+          TimeWindow
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON TimeWindow where
+  toJSON TimeWindow {..} =
+    Core.object
       ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
       )
 
 -- | The Data Fusion version. This proto message stores information about certain Data Fusion version, which is used for Data Fusion version upgrade.
@@ -1613,8 +1944,7 @@ instance Core.ToJSON Version where
   toJSON Version {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableFeatures" Core..=)
-              Core.<$> availableFeatures,
+          [ ("availableFeatures" Core..=) Core.<$> availableFeatures,
             ("defaultVersion" Core..=) Core.<$> defaultVersion,
             ("type" Core..=) Core.<$> type',
             ("versionNumber" Core..=) Core.<$> versionNumber

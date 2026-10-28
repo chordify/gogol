@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.PageSpeed.Pagespeedonline.Pagespeedapi.Runpagespeed
 where
 
 import Gogol.PageSpeed.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @pagespeedonline.pagespeedapi.runpagespeed@ method which the
 -- 'PagespeedonlinePagespeedapiRunpagespeed' request conforms to.
@@ -53,21 +51,15 @@ type PagespeedonlinePagespeedapiRunpagespeedResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "captchaToken" Core.Text
-    Core.:> Core.QueryParams
-              "category"
-              PagespeedapiRunpagespeedCategory
+    Core.:> Core.QueryParams "category" PagespeedapiRunpagespeedCategory
     Core.:> Core.QueryParam "locale" Core.Text
-    Core.:> Core.QueryParam
-              "strategy"
-              PagespeedapiRunpagespeedStrategy
+    Core.:> Core.QueryParam "strategy" PagespeedapiRunpagespeedStrategy
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "utm_campaign" Core.Text
     Core.:> Core.QueryParam "utm_source" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              PagespeedApiPagespeedResponseV5
+    Core.:> Core.Get '[Core.JSON] PagespeedApiPagespeedResponseV5
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.
 --
@@ -121,38 +113,33 @@ newPagespeedonlinePagespeedapiRunpagespeed url =
       utmSource = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PagespeedonlinePagespeedapiRunpagespeed
-  where
+instance Core.GoogleRequest PagespeedonlinePagespeedapiRunpagespeed where
   type
     Rs PagespeedonlinePagespeedapiRunpagespeed =
       PagespeedApiPagespeedResponseV5
   type
     Scopes PagespeedonlinePagespeedapiRunpagespeed =
       '[OAuth2'OpenID]
-  requestClient
-    PagespeedonlinePagespeedapiRunpagespeed {..} =
-      go
-        (Core.Just url)
-        xgafv
-        accessToken
-        callback
-        captchaToken
-        (category Core.^. Core._Default)
-        locale
-        strategy
-        uploadType
-        uploadProtocol
-        utmCampaign
-        utmSource
-        (Core.Just Core.AltJSON)
-        pageSpeedService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PagespeedonlinePagespeedapiRunpagespeedResource
-            )
-            Core.mempty
+  requestClient PagespeedonlinePagespeedapiRunpagespeed {..} =
+    go
+      (Core.Just url)
+      xgafv
+      accessToken
+      callback
+      captchaToken
+      (category Core.^. Core._Default)
+      locale
+      strategy
+      uploadType
+      uploadProtocol
+      utmCampaign
+      utmSource
+      (Core.Just Core.AltJSON)
+      pageSpeedService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PagespeedonlinePagespeedapiRunpagespeedResource
+          )
+          Core.mempty

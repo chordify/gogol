@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.NetworkEdgeSecurityServices.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.NetworkEdgeSecurityServices.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networkEdgeSecurityServices.delete@ method which the
 -- 'ComputeNetworkEdgeSecurityServicesDelete' request conforms to.
@@ -96,48 +94,48 @@ newComputeNetworkEdgeSecurityServicesDelete ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeNetworkEdgeSecurityServicesDelete
-newComputeNetworkEdgeSecurityServicesDelete networkEdgeSecurityService project region =
-  ComputeNetworkEdgeSecurityServicesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      networkEdgeSecurityService = networkEdgeSecurityService,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeNetworkEdgeSecurityServicesDelete
+  networkEdgeSecurityService
+  project
+  region =
+    ComputeNetworkEdgeSecurityServicesDelete
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        networkEdgeSecurityService =
+          networkEdgeSecurityService,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeNetworkEdgeSecurityServicesDelete
   where
-  type
-    Rs ComputeNetworkEdgeSecurityServicesDelete =
-      Operation
+  type Rs ComputeNetworkEdgeSecurityServicesDelete = Operation
   type
     Scopes ComputeNetworkEdgeSecurityServicesDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeNetworkEdgeSecurityServicesDelete {..} =
-      go
-        project
-        region
-        networkEdgeSecurityService
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworkEdgeSecurityServicesDeleteResource
-            )
-            Core.mempty
+  requestClient ComputeNetworkEdgeSecurityServicesDelete {..} =
+    go
+      project
+      region
+      networkEdgeSecurityService
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeNetworkEdgeSecurityServicesDeleteResource
+          )
+          Core.mempty

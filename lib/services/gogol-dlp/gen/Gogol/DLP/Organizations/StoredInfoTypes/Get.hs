@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.StoredInfoTypes.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.storedInfoTypes.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.storedInfoTypes.get@.
 module Gogol.DLP.Organizations.StoredInfoTypes.Get
   ( -- * Resource
     DLPOrganizationsStoredInfoTypesGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.StoredInfoTypes.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.get@ method which the
 -- 'DLPOrganizationsStoredInfoTypesGet' request conforms to.
@@ -53,11 +51,9 @@ type DLPOrganizationsStoredInfoTypesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2StoredInfoType
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2StoredInfoType
 
--- | Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPOrganizationsStoredInfoTypesGet' smart constructor.
 data DLPOrganizationsStoredInfoTypesGet = DLPOrganizationsStoredInfoTypesGet
@@ -91,10 +87,7 @@ newDLPOrganizationsStoredInfoTypesGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsStoredInfoTypesGet
-  where
+instance Core.GoogleRequest DLPOrganizationsStoredInfoTypesGet where
   type
     Rs DLPOrganizationsStoredInfoTypesGet =
       GooglePrivacyDlpV2StoredInfoType
@@ -115,7 +108,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DLPOrganizationsStoredInfoTypesGetResource
+              Core.Proxy DLPOrganizationsStoredInfoTypesGetResource
           )
           Core.mempty

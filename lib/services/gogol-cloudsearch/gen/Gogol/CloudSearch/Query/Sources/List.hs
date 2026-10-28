@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Query.Sources.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Query.Sources.List
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.query.sources.list@ method which the
 -- 'CloudSearchQuerySourcesList' request conforms to.
@@ -55,12 +53,8 @@ type CloudSearchQuerySourcesListResource =
     Core.:> Core.QueryParam
               "requestOptions.debugOptions.enableDebugging"
               Core.Bool
-    Core.:> Core.QueryParam
-              "requestOptions.languageCode"
-              Core.Text
-    Core.:> Core.QueryParam
-              "requestOptions.searchApplicationId"
-              Core.Text
+    Core.:> Core.QueryParam "requestOptions.languageCode" Core.Text
+    Core.:> Core.QueryParam "requestOptions.searchApplicationId" Core.Text
     Core.:> Core.QueryParam "requestOptions.timeZone" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -81,7 +75,7 @@ data CloudSearchQuerySourcesList = CloudSearchQuerySourcesList
     pageToken :: (Core.Maybe Core.Text),
     -- | If you are asked by Google to help with debugging, set this field. Otherwise, ignore this field.
     requestOptionsDebugOptionsEnableDebugging :: (Core.Maybe Core.Bool),
-    -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more information, see http:\/\/www.unicode.org\/reports\/tr35\/#Unicode/locale/identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user\'s language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. From Suggest API perspective, for 3p suggest this is used as a hint while making predictions to add language boosting.
+    -- | The BCP-47 language code, such as \"en-US\" or \"sr-Latn\". For more information, see http:\/\/www.unicode.org\/reports\/tr35\/#Unicode/locale/identifier. For translations. Set this field using the language set in browser or for the page. In the event that the user\'s language preference is known, set this field to the known user language. When specified, the documents in search results are biased towards the specified language. The Suggest API uses this field as a hint to make better third-party autocomplete predictions.
     requestOptionsLanguageCode :: (Core.Maybe Core.Text),
     -- | The ID generated when you create a search application using the <https://support.google.com/a/answer/9043922 admin console>.
     requestOptionsSearchApplicationId :: (Core.Maybe Core.Text),
@@ -111,13 +105,8 @@ newCloudSearchQuerySourcesList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudSearchQuerySourcesList
-  where
-  type
-    Rs CloudSearchQuerySourcesList =
-      ListQuerySourcesResponse
+instance Core.GoogleRequest CloudSearchQuerySourcesList where
+  type Rs CloudSearchQuerySourcesList = ListQuerySourcesResponse
   type
     Scopes CloudSearchQuerySourcesList =
       '[CloudSearch'FullControl, CloudSearch'Query]
@@ -138,7 +127,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudSearchQuerySourcesListResource
-          )
+          (Core.Proxy :: Core.Proxy CloudSearchQuerySourcesListResource)
           Core.mempty

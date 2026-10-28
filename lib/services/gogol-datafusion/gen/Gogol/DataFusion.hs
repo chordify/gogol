@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -240,9 +238,31 @@ module Gogol.DataFusion
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- ** MaintenanceEvent
+    MaintenanceEvent (..),
+    newMaintenanceEvent,
+
+    -- ** MaintenanceEvent_State
+    MaintenanceEvent_State (..),
+
+    -- ** MaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
+
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
     -- ** NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
+
+    -- ** NetworkConfig_ConnectionType
+    NetworkConfig_ConnectionType (..),
 
     -- ** Operation
     Operation (..),
@@ -268,6 +288,14 @@ module Gogol.DataFusion
     Policy (..),
     newPolicy,
 
+    -- ** PrivateServiceConnectConfig
+    PrivateServiceConnectConfig (..),
+    newPrivateServiceConnectConfig,
+
+    -- ** RecurringTimeWindow
+    RecurringTimeWindow (..),
+    newRecurringTimeWindow,
+
     -- ** RestartInstanceRequest
     RestartInstanceRequest (..),
     newRestartInstanceRequest,
@@ -291,6 +319,10 @@ module Gogol.DataFusion
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** TimeWindow
+    TimeWindow (..),
+    newTimeWindow,
 
     -- ** Version
     Version (..),

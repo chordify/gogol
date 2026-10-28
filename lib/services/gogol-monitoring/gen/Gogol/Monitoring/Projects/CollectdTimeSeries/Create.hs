@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.CollectdTimeSeries.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.CollectdTimeSeries.Create
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.collectdTimeSeries.create@ method which the
 -- 'MonitoringProjectsCollectdTimeSeriesCreate' request conforms to.
@@ -54,12 +52,8 @@ type MonitoringProjectsCollectdTimeSeriesCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CreateCollectdTimeSeriesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              CreateCollectdTimeSeriesResponse
+    Core.:> Core.ReqBody '[Core.JSON] CreateCollectdTimeSeriesRequest
+    Core.:> Core.Post '[Core.JSON] CreateCollectdTimeSeriesResponse
 
 -- | Cloud Monitoring Agent only: Creates a new time series.This method is only for use by the Cloud Monitoring Agent. Use projects.timeSeries.create instead.
 --
@@ -108,29 +102,26 @@ instance
     Rs MonitoringProjectsCollectdTimeSeriesCreate =
       CreateCollectdTimeSeriesResponse
   type
-    Scopes
-      MonitoringProjectsCollectdTimeSeriesCreate =
+    Scopes MonitoringProjectsCollectdTimeSeriesCreate =
       '[ CloudPlatform'FullControl,
          Monitoring'FullControl,
          Monitoring'Write
        ]
-  requestClient
-    MonitoringProjectsCollectdTimeSeriesCreate {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsCollectdTimeSeriesCreateResource
-            )
-            Core.mempty
+  requestClient MonitoringProjectsCollectdTimeSeriesCreate {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringProjectsCollectdTimeSeriesCreateResource
+          )
+          Core.mempty

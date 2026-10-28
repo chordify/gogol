@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidEnterprise.Internal.Sum
@@ -125,6 +123,37 @@ module Gogol.AndroidEnterprise.Internal.Sum
         ..
       ),
 
+    -- * EnrollmentToken_EnrollmentTokenType
+    EnrollmentToken_EnrollmentTokenType
+      ( EnrollmentToken_EnrollmentTokenType_EnrollmentTokenTypeUnspecified,
+        EnrollmentToken_EnrollmentTokenType_UserlessDevice,
+        EnrollmentToken_EnrollmentTokenType_UserDevice,
+        ..
+      ),
+
+    -- * Enterprise_EnterpriseType
+    Enterprise_EnterpriseType
+      ( Enterprise_EnterpriseType_EnterpriseTypeUnspecified,
+        Enterprise_EnterpriseType_ManagedGoogleDomain,
+        Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType
+      ( Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified,
+        Enterprise_ManagedGoogleDomainType_TypeTeam,
+        Enterprise_ManagedGoogleDomainType_TypeDomain,
+        ..
+      ),
+
+    -- * EnterpriseUpgradeEvent_UpgradeState
+    EnterpriseUpgradeEvent_UpgradeState
+      ( EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified,
+        EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded,
+        ..
+      ),
+
     -- * Entitlement_Reason
     Entitlement_Reason
       ( Entitlement_Reason_Free,
@@ -212,6 +241,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
         Notification_NotificationType_ProductAvailabilityChange,
         Notification_NotificationType_NewDevice,
         Notification_NotificationType_DeviceReportUpdate,
+        Notification_NotificationType_EnterpriseUpgrade,
         ..
       ),
 
@@ -389,14 +419,6 @@ module Gogol.AndroidEnterprise.Internal.Sum
         ..
       ),
 
-    -- * EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType
-      ( EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
-        EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
-        EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
-        ..
-      ),
-
     -- * EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType
       ( EnterprisesGetServiceAccountKeyType_GoogleCredentials,
@@ -413,7 +435,7 @@ module Gogol.AndroidEnterprise.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -600,19 +622,15 @@ newtype AppVersion_Track = AppVersion_Track {fromAppVersion_Track :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern AppVersion_Track_AppTrackUnspecified :: AppVersion_Track
 pattern AppVersion_Track_AppTrackUnspecified = AppVersion_Track "appTrackUnspecified"
 
--- |
 pattern AppVersion_Track_Production :: AppVersion_Track
 pattern AppVersion_Track_Production = AppVersion_Track "production"
 
--- |
 pattern AppVersion_Track_Beta :: AppVersion_Track
 pattern AppVersion_Track_Beta = AppVersion_Track "beta"
 
--- |
 pattern AppVersion_Track_Alpha :: AppVersion_Track
 pattern AppVersion_Track_Alpha = AppVersion_Track "alpha"
 
@@ -637,7 +655,6 @@ newtype AutoInstallConstraint_ChargingStateConstraint = AutoInstallConstraint_Ch
       Core.FromJSONKey
     )
 
--- |
 pattern AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified :: AutoInstallConstraint_ChargingStateConstraint
 pattern AutoInstallConstraint_ChargingStateConstraint_ChargingStateConstraintUnspecified = AutoInstallConstraint_ChargingStateConstraint "chargingStateConstraintUnspecified"
 
@@ -669,7 +686,6 @@ newtype AutoInstallConstraint_DeviceIdleStateConstraint = AutoInstallConstraint_
       Core.FromJSONKey
     )
 
--- |
 pattern AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified :: AutoInstallConstraint_DeviceIdleStateConstraint
 pattern AutoInstallConstraint_DeviceIdleStateConstraint_DeviceIdleStateConstraintUnspecified = AutoInstallConstraint_DeviceIdleStateConstraint "deviceIdleStateConstraintUnspecified"
 
@@ -701,7 +717,6 @@ newtype AutoInstallConstraint_NetworkTypeConstraint = AutoInstallConstraint_Netw
       Core.FromJSONKey
     )
 
--- |
 pattern AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified :: AutoInstallConstraint_NetworkTypeConstraint
 pattern AutoInstallConstraint_NetworkTypeConstraint_NetworkTypeConstraintUnspecified = AutoInstallConstraint_NetworkTypeConstraint "networkTypeConstraintUnspecified"
 
@@ -720,7 +735,7 @@ pattern AutoInstallConstraint_NetworkTypeConstraint_UnmeteredNetwork = AutoInsta
   AutoInstallConstraint_NetworkTypeConstraint
   #-}
 
--- | The auto-install mode. If unset defaults to \"doNotAutoInstall\".
+-- | The auto-install mode. If unset, defaults to \"doNotAutoInstall\". An app is automatically installed regardless of a set maintenance window.
 newtype AutoInstallPolicy_AutoInstallMode = AutoInstallPolicy_AutoInstallMode {fromAutoInstallPolicy_AutoInstallMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -733,7 +748,6 @@ newtype AutoInstallPolicy_AutoInstallMode = AutoInstallPolicy_AutoInstallMode {f
       Core.FromJSONKey
     )
 
--- |
 pattern AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified :: AutoInstallPolicy_AutoInstallMode
 pattern AutoInstallPolicy_AutoInstallMode_AutoInstallModeUnspecified = AutoInstallPolicy_AutoInstallMode "autoInstallModeUnspecified"
 
@@ -770,19 +784,15 @@ newtype Device_ManagementType = Device_ManagementType {fromDevice_ManagementType
       Core.FromJSONKey
     )
 
--- |
 pattern Device_ManagementType_ManagedDevice :: Device_ManagementType
 pattern Device_ManagementType_ManagedDevice = Device_ManagementType "managedDevice"
 
--- |
 pattern Device_ManagementType_ManagedProfile :: Device_ManagementType
 pattern Device_ManagementType_ManagedProfile = Device_ManagementType "managedProfile"
 
--- |
 pattern Device_ManagementType_ContainerApp :: Device_ManagementType
 pattern Device_ManagementType_ContainerApp = Device_ManagementType "containerApp"
 
--- |
 pattern Device_ManagementType_UnmanagedProfile :: Device_ManagementType
 pattern Device_ManagementType_UnmanagedProfile = Device_ManagementType "unmanagedProfile"
 
@@ -807,11 +817,9 @@ newtype DeviceState_AccountState = DeviceState_AccountState {fromDeviceState_Acc
       Core.FromJSONKey
     )
 
--- |
 pattern DeviceState_AccountState_Enabled :: DeviceState_AccountState
 pattern DeviceState_AccountState_Enabled = DeviceState_AccountState "enabled"
 
--- |
 pattern DeviceState_AccountState_Disabled :: DeviceState_AccountState
 pattern DeviceState_AccountState_Disabled = DeviceState_AccountState "disabled"
 
@@ -819,6 +827,129 @@ pattern DeviceState_AccountState_Disabled = DeviceState_AccountState "disabled"
   DeviceState_AccountState_Enabled,
   DeviceState_AccountState_Disabled,
   DeviceState_AccountState
+  #-}
+
+-- | [Required] The type of the enrollment token.
+newtype EnrollmentToken_EnrollmentTokenType = EnrollmentToken_EnrollmentTokenType {fromEnrollmentToken_EnrollmentTokenType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The value is unused.
+pattern EnrollmentToken_EnrollmentTokenType_EnrollmentTokenTypeUnspecified :: EnrollmentToken_EnrollmentTokenType
+pattern EnrollmentToken_EnrollmentTokenType_EnrollmentTokenTypeUnspecified = EnrollmentToken_EnrollmentTokenType "enrollmentTokenTypeUnspecified"
+
+-- | The enrollment token is for a userless device.
+pattern EnrollmentToken_EnrollmentTokenType_UserlessDevice :: EnrollmentToken_EnrollmentTokenType
+pattern EnrollmentToken_EnrollmentTokenType_UserlessDevice = EnrollmentToken_EnrollmentTokenType "userlessDevice"
+
+-- | The enrollment token is for a user device.
+pattern EnrollmentToken_EnrollmentTokenType_UserDevice :: EnrollmentToken_EnrollmentTokenType
+pattern EnrollmentToken_EnrollmentTokenType_UserDevice = EnrollmentToken_EnrollmentTokenType "userDevice"
+
+{-# COMPLETE
+  EnrollmentToken_EnrollmentTokenType_EnrollmentTokenTypeUnspecified,
+  EnrollmentToken_EnrollmentTokenType_UserlessDevice,
+  EnrollmentToken_EnrollmentTokenType_UserDevice,
+  EnrollmentToken_EnrollmentTokenType
+  #-}
+
+-- | The type of the enterprise.
+newtype Enterprise_EnterpriseType = Enterprise_EnterpriseType {fromEnterprise_EnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern Enterprise_EnterpriseType_EnterpriseTypeUnspecified :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_EnterpriseTypeUnspecified = Enterprise_EnterpriseType "enterpriseTypeUnspecified"
+
+-- | The enterprise belongs to a managed Google domain.
+pattern Enterprise_EnterpriseType_ManagedGoogleDomain :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ManagedGoogleDomain = Enterprise_EnterpriseType "managedGoogleDomain"
+
+-- | The enterprise is a managed Google Play Accounts enterprise.
+pattern Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise = Enterprise_EnterpriseType "managedGooglePlayAccountsEnterprise"
+
+{-# COMPLETE
+  Enterprise_EnterpriseType_EnterpriseTypeUnspecified,
+  Enterprise_EnterpriseType_ManagedGoogleDomain,
+  Enterprise_EnterpriseType_ManagedGooglePlayAccountsEnterprise,
+  Enterprise_EnterpriseType
+  #-}
+
+-- | The type of managed Google domain
+newtype Enterprise_ManagedGoogleDomainType = Enterprise_ManagedGoogleDomainType {fromEnterprise_ManagedGoogleDomainType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google domain type is not specified.
+pattern Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified = Enterprise_ManagedGoogleDomainType "managedGoogleDomainTypeUnspecified"
+
+-- | The managed Google domain is an email-verified team.
+pattern Enterprise_ManagedGoogleDomainType_TypeTeam :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TypeTeam = Enterprise_ManagedGoogleDomainType "typeTeam"
+
+-- | The managed Google domain is domain-verified.
+pattern Enterprise_ManagedGoogleDomainType_TypeDomain :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TypeDomain = Enterprise_ManagedGoogleDomainType "typeDomain"
+
+{-# COMPLETE
+  Enterprise_ManagedGoogleDomainType_ManagedGoogleDomainTypeUnspecified,
+  Enterprise_ManagedGoogleDomainType_TypeTeam,
+  Enterprise_ManagedGoogleDomainType_TypeDomain,
+  Enterprise_ManagedGoogleDomainType
+  #-}
+
+-- | The upgrade state.
+newtype EnterpriseUpgradeEvent_UpgradeState = EnterpriseUpgradeEvent_UpgradeState {fromEnterpriseUpgradeEvent_UpgradeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value is not used.
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified :: EnterpriseUpgradeEvent_UpgradeState
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified = EnterpriseUpgradeEvent_UpgradeState "upgradeStateUnspecified"
+
+-- | The upgrade has succeeded.
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded :: EnterpriseUpgradeEvent_UpgradeState
+pattern EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded = EnterpriseUpgradeEvent_UpgradeState "upgradeStateSucceeded"
+
+{-# COMPLETE
+  EnterpriseUpgradeEvent_UpgradeState_UpgradeStateUnspecified,
+  EnterpriseUpgradeEvent_UpgradeState_UpgradeStateSucceeded,
+  EnterpriseUpgradeEvent_UpgradeState
   #-}
 
 -- | The reason for the entitlement. For example, \"free\" for free apps. This property is temporary: it will be replaced by the acquisition kind field of group licenses.
@@ -834,15 +965,12 @@ newtype Entitlement_Reason = Entitlement_Reason {fromEntitlement_Reason :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern Entitlement_Reason_Free :: Entitlement_Reason
 pattern Entitlement_Reason_Free = Entitlement_Reason "free"
 
--- |
 pattern Entitlement_Reason_GroupLicense :: Entitlement_Reason
 pattern Entitlement_Reason_GroupLicense = Entitlement_Reason "groupLicense"
 
--- |
 pattern Entitlement_Reason_UserPurchase :: Entitlement_Reason
 pattern Entitlement_Reason_UserPurchase = Entitlement_Reason "userPurchase"
 
@@ -930,11 +1058,9 @@ newtype GroupLicense_AcquisitionKind = GroupLicense_AcquisitionKind {fromGroupLi
       Core.FromJSONKey
     )
 
--- |
 pattern GroupLicense_AcquisitionKind_Free :: GroupLicense_AcquisitionKind
 pattern GroupLicense_AcquisitionKind_Free = GroupLicense_AcquisitionKind "free"
 
--- |
 pattern GroupLicense_AcquisitionKind_BulkPurchase :: GroupLicense_AcquisitionKind
 pattern GroupLicense_AcquisitionKind_BulkPurchase = GroupLicense_AcquisitionKind "bulkPurchase"
 
@@ -957,11 +1083,9 @@ newtype GroupLicense_Approval = GroupLicense_Approval {fromGroupLicense_Approval
       Core.FromJSONKey
     )
 
--- |
 pattern GroupLicense_Approval_Approved :: GroupLicense_Approval
 pattern GroupLicense_Approval_Approved = GroupLicense_Approval "approved"
 
--- |
 pattern GroupLicense_Approval_Unapproved :: GroupLicense_Approval
 pattern GroupLicense_Approval_Unapproved = GroupLicense_Approval "unapproved"
 
@@ -984,15 +1108,12 @@ newtype GroupLicense_Permissions = GroupLicense_Permissions {fromGroupLicense_Pe
       Core.FromJSONKey
     )
 
--- |
 pattern GroupLicense_Permissions_CurrentApproved :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_CurrentApproved = GroupLicense_Permissions "currentApproved"
 
--- |
 pattern GroupLicense_Permissions_NeedsReapproval :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_NeedsReapproval = GroupLicense_Permissions "needsReapproval"
 
--- |
 pattern GroupLicense_Permissions_AllCurrentAndFutureApproved :: GroupLicense_Permissions
 pattern GroupLicense_Permissions_AllCurrentAndFutureApproved = GroupLicense_Permissions "allCurrentAndFutureApproved"
 
@@ -1016,11 +1137,9 @@ newtype Install_InstallState = Install_InstallState {fromInstall_InstallState ::
       Core.FromJSONKey
     )
 
--- |
 pattern Install_InstallState_Installed :: Install_InstallState
 pattern Install_InstallState_Installed = Install_InstallState "installed"
 
--- |
 pattern Install_InstallState_InstallPending :: Install_InstallState
 pattern Install_InstallState_InstallPending = Install_InstallState "installPending"
 
@@ -1070,15 +1189,12 @@ newtype KeyedAppState_Severity = KeyedAppState_Severity {fromKeyedAppState_Sever
       Core.FromJSONKey
     )
 
--- |
 pattern KeyedAppState_Severity_SeverityUnknown :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityUnknown = KeyedAppState_Severity "severityUnknown"
 
--- |
 pattern KeyedAppState_Severity_SeverityInfo :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityInfo = KeyedAppState_Severity "severityInfo"
 
--- |
 pattern KeyedAppState_Severity_SeverityError :: KeyedAppState_Severity
 pattern KeyedAppState_Severity_SeverityError = KeyedAppState_Severity "severityError"
 
@@ -1102,11 +1218,9 @@ newtype NewDeviceEvent_ManagementType = NewDeviceEvent_ManagementType {fromNewDe
       Core.FromJSONKey
     )
 
--- |
 pattern NewDeviceEvent_ManagementType_ManagedDevice :: NewDeviceEvent_ManagementType
 pattern NewDeviceEvent_ManagementType_ManagedDevice = NewDeviceEvent_ManagementType "managedDevice"
 
--- |
 pattern NewDeviceEvent_ManagementType_ManagedProfile :: NewDeviceEvent_ManagementType
 pattern NewDeviceEvent_ManagementType_ManagedProfile = NewDeviceEvent_ManagementType "managedProfile"
 
@@ -1129,7 +1243,6 @@ newtype Notification_NotificationType = Notification_NotificationType {fromNotif
       Core.FromJSONKey
     )
 
--- |
 pattern Notification_NotificationType_Unknown :: Notification_NotificationType
 pattern Notification_NotificationType_Unknown = Notification_NotificationType "unknown"
 
@@ -1169,6 +1282,10 @@ pattern Notification_NotificationType_NewDevice = Notification_NotificationType 
 pattern Notification_NotificationType_DeviceReportUpdate :: Notification_NotificationType
 pattern Notification_NotificationType_DeviceReportUpdate = Notification_NotificationType "deviceReportUpdate"
 
+-- | Notification about an enterprise upgrade. __Note:__ This feature is not generally available.
+pattern Notification_NotificationType_EnterpriseUpgrade :: Notification_NotificationType
+pattern Notification_NotificationType_EnterpriseUpgrade = Notification_NotificationType "enterpriseUpgrade"
+
 {-# COMPLETE
   Notification_NotificationType_Unknown,
   Notification_NotificationType_TestNotification,
@@ -1180,10 +1297,11 @@ pattern Notification_NotificationType_DeviceReportUpdate = Notification_Notifica
   Notification_NotificationType_ProductAvailabilityChange,
   Notification_NotificationType_NewDevice,
   Notification_NotificationType_DeviceReportUpdate,
+  Notification_NotificationType_EnterpriseUpgrade,
   Notification_NotificationType
   #-}
 
--- | Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
+-- | Controls when automatic app updates on the device can be applied. Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, autoUpdatePolicy has no effect. - choiceToTheUser allows the device\'s user to configure the app update policy. - always enables auto updates. - never disables auto updates. - wifiOnly enables auto updates only when the device is connected to wifi. /Important:/ Changes to app update policies don\'t affect updates that are in progress. Any policy changes will apply to subsequent app updates.
 newtype Policy_AutoUpdatePolicy = Policy_AutoUpdatePolicy {fromPolicy_AutoUpdatePolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1301,19 +1419,15 @@ newtype Product_AvailableTracksItem = Product_AvailableTracksItem {fromProduct_A
       Core.FromJSONKey
     )
 
--- |
 pattern Product_AvailableTracksItem_AppTrackUnspecified :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_AppTrackUnspecified = Product_AvailableTracksItem "appTrackUnspecified"
 
--- |
 pattern Product_AvailableTracksItem_Production :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Production = Product_AvailableTracksItem "production"
 
--- |
 pattern Product_AvailableTracksItem_Beta :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Beta = Product_AvailableTracksItem "beta"
 
--- |
 pattern Product_AvailableTracksItem_Alpha :: Product_AvailableTracksItem
 pattern Product_AvailableTracksItem_Alpha = Product_AvailableTracksItem "alpha"
 
@@ -1338,23 +1452,18 @@ newtype Product_ContentRating = Product_ContentRating {fromProduct_ContentRating
       Core.FromJSONKey
     )
 
--- |
 pattern Product_ContentRating_RatingUnknown :: Product_ContentRating
 pattern Product_ContentRating_RatingUnknown = Product_ContentRating "ratingUnknown"
 
--- |
 pattern Product_ContentRating_All :: Product_ContentRating
 pattern Product_ContentRating_All = Product_ContentRating "all"
 
--- |
 pattern Product_ContentRating_PreTeen :: Product_ContentRating
 pattern Product_ContentRating_PreTeen = Product_ContentRating "preTeen"
 
--- |
 pattern Product_ContentRating_Teen :: Product_ContentRating
 pattern Product_ContentRating_Teen = Product_ContentRating "teen"
 
--- |
 pattern Product_ContentRating_Mature :: Product_ContentRating
 pattern Product_ContentRating_Mature = Product_ContentRating "mature"
 
@@ -1380,15 +1489,12 @@ newtype Product_DistributionChannel = Product_DistributionChannel {fromProduct_D
       Core.FromJSONKey
     )
 
--- |
 pattern Product_DistributionChannel_PublicGoogleHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PublicGoogleHosted = Product_DistributionChannel "publicGoogleHosted"
 
--- |
 pattern Product_DistributionChannel_PrivateGoogleHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PrivateGoogleHosted = Product_DistributionChannel "privateGoogleHosted"
 
--- |
 pattern Product_DistributionChannel_PrivateSelfHosted :: Product_DistributionChannel
 pattern Product_DistributionChannel_PrivateSelfHosted = Product_DistributionChannel "privateSelfHosted"
 
@@ -1411,7 +1517,6 @@ newtype Product_FeaturesItem = Product_FeaturesItem {fromProduct_FeaturesItem ::
       Core.FromJSONKey
     )
 
--- |
 pattern Product_FeaturesItem_FeatureUnknown :: Product_FeaturesItem
 pattern Product_FeaturesItem_FeatureUnknown = Product_FeaturesItem "featureUnknown"
 
@@ -1558,7 +1663,7 @@ pattern ProductPermission_State_Accepted = ProductPermission_State "accepted"
   ProductPermission_State
   #-}
 
--- | The auto-update mode for the product.
+-- | The auto-update mode for the product. When autoUpdateMode is used, it always takes precedence over the user\'s choice. So when a user makes changes to the device settings manually, these changes are ignored.
 newtype ProductPolicy_AutoUpdateMode = ProductPolicy_AutoUpdateMode {fromProductPolicy_AutoUpdateMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1583,7 +1688,7 @@ pattern ProductPolicy_AutoUpdateMode_AutoUpdateDefault = ProductPolicy_AutoUpdat
 pattern ProductPolicy_AutoUpdateMode_AutoUpdatePostponed :: ProductPolicy_AutoUpdateMode
 pattern ProductPolicy_AutoUpdateMode_AutoUpdatePostponed = ProductPolicy_AutoUpdateMode "autoUpdatePostponed"
 
--- | The app is updated as soon as possible. No constraints are applied. The device is notified immediately about a new app update after it is published by the developer.
+-- | The app is updated as soon as possible. No constraints are applied. The device is notified as soon as possible about a new app update after it is published by the developer.
 pattern ProductPolicy_AutoUpdateMode_AutoUpdateHighPriority :: ProductPolicy_AutoUpdateMode
 pattern ProductPolicy_AutoUpdateMode_AutoUpdateHighPriority = ProductPolicy_AutoUpdateMode "autoUpdateHighPriority"
 
@@ -1607,19 +1712,15 @@ newtype ProductPolicy_TracksItem = ProductPolicy_TracksItem {fromProductPolicy_T
       Core.FromJSONKey
     )
 
--- |
 pattern ProductPolicy_TracksItem_AppTrackUnspecified :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_AppTrackUnspecified = ProductPolicy_TracksItem "appTrackUnspecified"
 
--- |
 pattern ProductPolicy_TracksItem_Production :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Production = ProductPolicy_TracksItem "production"
 
--- |
 pattern ProductPolicy_TracksItem_Beta :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Beta = ProductPolicy_TracksItem "beta"
 
--- |
 pattern ProductPolicy_TracksItem_Alpha :: ProductPolicy_TracksItem
 pattern ProductPolicy_TracksItem_Alpha = ProductPolicy_TracksItem "alpha"
 
@@ -1680,19 +1781,15 @@ newtype ProductVisibility_TracksItem = ProductVisibility_TracksItem {fromProduct
       Core.FromJSONKey
     )
 
--- |
 pattern ProductVisibility_TracksItem_AppTrackUnspecified :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_AppTrackUnspecified = ProductVisibility_TracksItem "appTrackUnspecified"
 
--- |
 pattern ProductVisibility_TracksItem_Production :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Production = ProductVisibility_TracksItem "production"
 
--- |
 pattern ProductVisibility_TracksItem_Beta :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Beta = ProductVisibility_TracksItem "beta"
 
--- |
 pattern ProductVisibility_TracksItem_Alpha :: ProductVisibility_TracksItem
 pattern ProductVisibility_TracksItem_Alpha = ProductVisibility_TracksItem "alpha"
 
@@ -1771,15 +1868,12 @@ newtype StoreLayout_StoreLayoutType = StoreLayout_StoreLayoutType {fromStoreLayo
       Core.FromJSONKey
     )
 
--- |
 pattern StoreLayout_StoreLayoutType_Unknown :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Unknown = StoreLayout_StoreLayoutType "unknown"
 
--- |
 pattern StoreLayout_StoreLayoutType_Basic :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Basic = StoreLayout_StoreLayoutType "basic"
 
--- |
 pattern StoreLayout_StoreLayoutType_Custom :: StoreLayout_StoreLayoutType
 pattern StoreLayout_StoreLayoutType_Custom = StoreLayout_StoreLayoutType "custom"
 
@@ -1803,11 +1897,9 @@ newtype User_AccountType = User_AccountType {fromUser_AccountType :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern User_AccountType_DeviceAccount :: User_AccountType
 pattern User_AccountType_DeviceAccount = User_AccountType "deviceAccount"
 
--- |
 pattern User_AccountType_UserAccount :: User_AccountType
 pattern User_AccountType_UserAccount = User_AccountType "userAccount"
 
@@ -1830,11 +1922,9 @@ newtype User_ManagementType = User_ManagementType {fromUser_ManagementType :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern User_ManagementType_GoogleManaged :: User_ManagementType
 pattern User_ManagementType_GoogleManaged = User_ManagementType "googleManaged"
 
--- |
 pattern User_ManagementType_EmmManaged :: User_ManagementType
 pattern User_ManagementType_EmmManaged = User_ManagementType "emmManaged"
 
@@ -1857,7 +1947,6 @@ newtype WebApp_DisplayMode = WebApp_DisplayMode {fromWebApp_DisplayMode :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern WebApp_DisplayMode_DisplayModeUnspecified :: WebApp_DisplayMode
 pattern WebApp_DisplayMode_DisplayModeUnspecified = WebApp_DisplayMode "displayModeUnspecified"
 
@@ -1879,38 +1968,6 @@ pattern WebApp_DisplayMode_FullScreen = WebApp_DisplayMode "fullScreen"
   WebApp_DisplayMode_Standalone,
   WebApp_DisplayMode_FullScreen,
   WebApp_DisplayMode
-  #-}
-
--- | Whether it’s a dedicated device or a knowledge worker device.
-newtype EnterprisesCreateEnrollmentTokenDeviceType = EnterprisesCreateEnrollmentTokenDeviceType {fromEnterprisesCreateEnrollmentTokenDeviceType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- | This value is unused
-pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_Unknown = EnterprisesCreateEnrollmentTokenDeviceType "unknown"
-
--- | This device is a dedicated device.
-pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice = EnterprisesCreateEnrollmentTokenDeviceType "dedicatedDevice"
-
--- | This device is required to have an authenticated user.
-pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker :: EnterprisesCreateEnrollmentTokenDeviceType
-pattern EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker = EnterprisesCreateEnrollmentTokenDeviceType "knowledgeWorker"
-
-{-# COMPLETE
-  EnterprisesCreateEnrollmentTokenDeviceType_Unknown,
-  EnterprisesCreateEnrollmentTokenDeviceType_DedicatedDevice,
-  EnterprisesCreateEnrollmentTokenDeviceType_KnowledgeWorker,
-  EnterprisesCreateEnrollmentTokenDeviceType
   #-}
 
 -- | The type of credential to return with the service account. Required.

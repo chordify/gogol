@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudIdentity.Types
@@ -35,6 +33,10 @@ module Gogol.CloudIdentity.Types
     CloudIdentity'Devices'Readonly,
     CloudIdentity'Groups,
     CloudIdentity'Groups'Readonly,
+    CloudIdentity'Inboundsso,
+    CloudIdentity'Inboundsso'Readonly,
+    CloudIdentity'Policies,
+    CloudIdentity'Policies'Readonly,
     CloudPlatform'FullControl,
 
     -- * Types
@@ -163,6 +165,23 @@ module Gogol.CloudIdentity.Types
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse,
 
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserAttributes
+    GoogleAppsCloudidentityDevicesV1BrowserAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo
+    GoogleAppsCloudidentityDevicesV1BrowserInfo (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserInfo,
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel (..),
+
     -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata,
@@ -186,6 +205,17 @@ module Gogol.CloudIdentity.Types
     -- ** GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateAttributes
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1CertificateTemplate
+    GoogleAppsCloudidentityDevicesV1CertificateTemplate (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateTemplate,
 
     -- ** GoogleAppsCloudidentityDevicesV1ClientState
     GoogleAppsCloudidentityDevicesV1ClientState (..),
@@ -254,6 +284,14 @@ module Gogol.CloudIdentity.Types
 
     -- ** GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState
     GoogleAppsCloudidentityDevicesV1DeviceUser_PasswordState (..),
+
+    -- ** GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes,
+
+    -- ** GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals,
 
     -- ** GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
     GoogleAppsCloudidentityDevicesV1ListClientStatesResponse (..),
@@ -369,6 +407,10 @@ module Gogol.CloudIdentity.Types
     ListMembershipsResponse (..),
     newListMembershipsResponse,
 
+    -- ** ListPoliciesResponse
+    ListPoliciesResponse (..),
+    newListPoliciesResponse,
+
     -- ** ListUserInvitationsResponse
     ListUserInvitationsResponse (..),
     newListUserInvitationsResponse,
@@ -445,6 +487,17 @@ module Gogol.CloudIdentity.Types
     Operation_Response (..),
     newOperation_Response,
 
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** Policy_Type
+    Policy_Type (..),
+
+    -- ** PolicyQuery
+    PolicyQuery (..),
+    newPolicyQuery,
+
     -- ** RestrictionEvaluation
     RestrictionEvaluation (..),
     newRestrictionEvaluation,
@@ -495,6 +548,14 @@ module Gogol.CloudIdentity.Types
     -- ** SendUserInvitationRequest
     SendUserInvitationRequest (..),
     newSendUserInvitationRequest,
+
+    -- ** Setting
+    Setting (..),
+    newSetting,
+
+    -- ** Setting_Value
+    Setting_Value (..),
+    newSetting_Value,
 
     -- ** SignInBehavior
     SignInBehavior (..),
@@ -561,7 +622,7 @@ where
 
 import Gogol.CloudIdentity.Internal.Product
 import Gogol.CloudIdentity.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Identity API. This contains the host and root path used as a starting point for constructing service requests.
 cloudIdentityService :: Core.ServiceConfig
@@ -571,19 +632,41 @@ cloudIdentityService =
     "cloudidentity.googleapis.com"
 
 -- | Private Service: https:\/\/www.googleapis.com\/auth\/cloud-identity.devices
-type CloudIdentity'Devices = "https://www.googleapis.com/auth/cloud-identity.devices"
+type CloudIdentity'Devices =
+  "https://www.googleapis.com/auth/cloud-identity.devices"
 
 -- | See your device details
-type CloudIdentity'Devices'Lookup = "https://www.googleapis.com/auth/cloud-identity.devices.lookup"
+type CloudIdentity'Devices'Lookup =
+  "https://www.googleapis.com/auth/cloud-identity.devices.lookup"
 
 -- | Private Service: https:\/\/www.googleapis.com\/auth\/cloud-identity.devices.readonly
-type CloudIdentity'Devices'Readonly = "https://www.googleapis.com/auth/cloud-identity.devices.readonly"
+type CloudIdentity'Devices'Readonly =
+  "https://www.googleapis.com/auth/cloud-identity.devices.readonly"
 
 -- | See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group
-type CloudIdentity'Groups = "https://www.googleapis.com/auth/cloud-identity.groups"
+type CloudIdentity'Groups =
+  "https://www.googleapis.com/auth/cloud-identity.groups"
 
 -- | See any Cloud Identity Groups that you can access, including group members and their emails
-type CloudIdentity'Groups'Readonly = "https://www.googleapis.com/auth/cloud-identity.groups.readonly"
+type CloudIdentity'Groups'Readonly =
+  "https://www.googleapis.com/auth/cloud-identity.groups.readonly"
+
+-- | See and edit all of the Inbound SSO profiles and their assignments to any Org Units or Google Groups in your Cloud Identity Organization.
+type CloudIdentity'Inboundsso =
+  "https://www.googleapis.com/auth/cloud-identity.inboundsso"
+
+-- | See all of the Inbound SSO profiles and their assignments to any Org Units or Google Groups in your Cloud Identity Organization.
+type CloudIdentity'Inboundsso'Readonly =
+  "https://www.googleapis.com/auth/cloud-identity.inboundsso.readonly"
+
+-- | See and edit policies in your Cloud Identity Organization.
+type CloudIdentity'Policies =
+  "https://www.googleapis.com/auth/cloud-identity.policies"
+
+-- | See policies in your Cloud Identity Organization.
+type CloudIdentity'Policies'Readonly =
+  "https://www.googleapis.com/auth/cloud-identity.policies.readonly"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

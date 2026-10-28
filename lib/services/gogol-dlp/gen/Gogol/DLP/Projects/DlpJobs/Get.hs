@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.DlpJobs.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the latest state of a long-running DlpJob. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- Gets the latest state of a long-running DlpJob. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.dlpJobs.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.dlpJobs.get@.
 module Gogol.DLP.Projects.DlpJobs.Get
   ( -- * Resource
     DLPProjectsDlpJobsGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.DlpJobs.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.dlpJobs.get@ method which the
 -- 'DLPProjectsDlpJobsGet' request conforms to.
@@ -55,7 +53,7 @@ type DLPProjectsDlpJobsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2DlpJob
 
--- | Gets the latest state of a long-running DlpJob. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- | Gets the latest state of a long-running DlpJob. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
 -- /See:/ 'newDLPProjectsDlpJobsGet' smart constructor.
 data DLPProjectsDlpJobsGet = DLPProjectsDlpJobsGet
@@ -90,12 +88,8 @@ newDLPProjectsDlpJobsGet name =
     }
 
 instance Core.GoogleRequest DLPProjectsDlpJobsGet where
-  type
-    Rs DLPProjectsDlpJobsGet =
-      GooglePrivacyDlpV2DlpJob
-  type
-    Scopes DLPProjectsDlpJobsGet =
-      '[CloudPlatform'FullControl]
+  type Rs DLPProjectsDlpJobsGet = GooglePrivacyDlpV2DlpJob
+  type Scopes DLPProjectsDlpJobsGet = '[CloudPlatform'FullControl]
   requestClient DLPProjectsDlpJobsGet {..} =
     go
       name
@@ -109,7 +103,5 @@ instance Core.GoogleRequest DLPProjectsDlpJobsGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsDlpJobsGetResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsDlpJobsGetResource)
           Core.mempty

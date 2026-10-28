@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PageSpeed.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PageSpeed.Internal.Product
@@ -86,6 +84,10 @@ module Gogol.PageSpeed.Internal.Product
     LighthouseResultV5_CategoryGroups (..),
     newLighthouseResultV5_CategoryGroups,
 
+    -- * MetricSavings
+    MetricSavings (..),
+    newMetricSavings,
+
     -- * PagespeedApiLoadingExperienceV5
     PagespeedApiLoadingExperienceV5 (..),
     newPagespeedApiLoadingExperienceV5,
@@ -129,7 +131,7 @@ module Gogol.PageSpeed.Internal.Product
 where
 
 import Gogol.PageSpeed.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A light reference to an audit by id, used to group and weight audits in a given category.
 --
@@ -202,7 +204,11 @@ data Bucket = Bucket
 newBucket ::
   Bucket
 newBucket =
-  Bucket {max = Core.Nothing, min = Core.Nothing, proportion = Core.Nothing}
+  Bucket
+    { max = Core.Nothing,
+      min = Core.Nothing,
+      proportion = Core.Nothing
+    }
 
 instance Core.FromJSON Bucket where
   parseJSON =
@@ -235,7 +241,7 @@ data Categories = Categories
     bestPractices :: (Core.Maybe LighthouseCategoryV5),
     -- | The performance category, containing all performance related audits.
     performance :: (Core.Maybe LighthouseCategoryV5),
-    -- | The Progressive-Web-App (PWA) category, containing all pwa related audits.
+    -- | The Progressive-Web-App (PWA) category, containing all pwa related audits. This is deprecated in Lighthouse\'s 12.0 release.
     pwa :: (Core.Maybe LighthouseCategoryV5),
     -- | The Search-Engine-Optimization (SEO) category, containing all seo related audits.
     seo :: (Core.Maybe LighthouseCategoryV5)
@@ -362,8 +368,7 @@ instance Core.ToJSON ConfigSettings where
     Core.object
       ( Core.catMaybes
           [ ("channel" Core..=) Core.<$> channel,
-            ("emulatedFormFactor" Core..=)
-              Core.<$> emulatedFormFactor,
+            ("emulatedFormFactor" Core..=) Core.<$> emulatedFormFactor,
             ("formFactor" Core..=) Core.<$> formFactor,
             ("locale" Core..=) Core.<$> locale,
             ("onlyCategories" Core..=) Core.<$> onlyCategories
@@ -415,8 +420,7 @@ instance Core.ToJSON Environment where
           [ ("benchmarkIndex" Core..=) Core.<$> benchmarkIndex,
             ("credits" Core..=) Core.<$> credits,
             ("hostUserAgent" Core..=) Core.<$> hostUserAgent,
-            ("networkUserAgent" Core..=)
-              Core.<$> networkUserAgent
+            ("networkUserAgent" Core..=) Core.<$> networkUserAgent
           ]
       )
 
@@ -424,8 +428,7 @@ instance Core.ToJSON Environment where
 --
 -- /See:/ 'newEnvironment_Credits' smart constructor.
 newtype Environment_Credits = Environment_Credits
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -441,14 +444,10 @@ instance Core.FromJSON Environment_Credits where
   parseJSON =
     Core.withObject
       "Environment_Credits"
-      ( \o ->
-          Environment_Credits
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Environment_Credits Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Environment_Credits where
-  toJSON Environment_Credits {..} =
-    Core.toJSON additional
+  toJSON Environment_Credits {..} = Core.toJSON additional
 
 -- | Message containing the i18n data for the LHR - Version 1.
 --
@@ -468,10 +467,7 @@ instance Core.FromJSON I18n where
   parseJSON =
     Core.withObject
       "I18n"
-      ( \o ->
-          I18n
-            Core.<$> (o Core..:? "rendererFormattedStrings")
-      )
+      (\o -> I18n Core.<$> (o Core..:? "rendererFormattedStrings"))
 
 instance Core.ToJSON I18n where
   toJSON I18n {..} =
@@ -557,6 +553,8 @@ data LighthouseAuditResultV5 = LighthouseAuditResultV5
     explanation :: (Core.Maybe Core.Text),
     -- | The audit\'s id.
     id :: (Core.Maybe Core.Text),
+    -- | The metric savings of the audit.
+    metricSavings :: (Core.Maybe MetricSavings),
     -- | The unit of the numeric_value field. Used to format the numeric value for display.
     numericUnit :: (Core.Maybe Core.Text),
     -- | A numeric value that has a meaning specific to the audit, e.g. the number of nodes in the DOM or the timestamp of a specific load event. More information can be found in the audit details, if present.
@@ -583,6 +581,7 @@ newLighthouseAuditResultV5 =
       errorMessage = Core.Nothing,
       explanation = Core.Nothing,
       id = Core.Nothing,
+      metricSavings = Core.Nothing,
       numericUnit = Core.Nothing,
       numericValue = Core.Nothing,
       score = Core.Nothing,
@@ -603,6 +602,7 @@ instance Core.FromJSON LighthouseAuditResultV5 where
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "explanation")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "metricSavings")
             Core.<*> (o Core..:? "numericUnit")
             Core.<*> (o Core..:? "numericValue")
             Core.<*> (o Core..:? "score")
@@ -621,11 +621,11 @@ instance Core.ToJSON LighthouseAuditResultV5 where
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("explanation" Core..=) Core.<$> explanation,
             ("id" Core..=) Core.<$> id,
+            ("metricSavings" Core..=) Core.<$> metricSavings,
             ("numericUnit" Core..=) Core.<$> numericUnit,
             ("numericValue" Core..=) Core.<$> numericValue,
             ("score" Core..=) Core.<$> score,
-            ("scoreDisplayMode" Core..=)
-              Core.<$> scoreDisplayMode,
+            ("scoreDisplayMode" Core..=) Core.<$> scoreDisplayMode,
             ("title" Core..=) Core.<$> title,
             ("warnings" Core..=) Core.<$> warnings
           ]
@@ -648,21 +648,16 @@ newLighthouseAuditResultV5_Details ::
 newLighthouseAuditResultV5_Details additional =
   LighthouseAuditResultV5_Details {additional = additional}
 
-instance
-  Core.FromJSON
-    LighthouseAuditResultV5_Details
-  where
+instance Core.FromJSON LighthouseAuditResultV5_Details where
   parseJSON =
     Core.withObject
       "LighthouseAuditResultV5_Details"
       ( \o ->
-          LighthouseAuditResultV5_Details
-            Core.<$> (Core.parseJSONObject o)
+          LighthouseAuditResultV5_Details Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON LighthouseAuditResultV5_Details where
-  toJSON LighthouseAuditResultV5_Details {..} =
-    Core.toJSON additional
+  toJSON LighthouseAuditResultV5_Details {..} = Core.toJSON additional
 
 -- | A Lighthouse category.
 --
@@ -717,8 +712,7 @@ instance Core.ToJSON LighthouseCategoryV5 where
           [ ("auditRefs" Core..=) Core.<$> auditRefs,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.<$> id,
-            ("manualDescription" Core..=)
-              Core.<$> manualDescription,
+            ("manualDescription" Core..=) Core.<$> manualDescription,
             ("score" Core..=) Core.<$> score,
             ("title" Core..=) Core.<$> title
           ]
@@ -833,14 +827,11 @@ instance Core.ToJSON LighthouseResultV5 where
             ("entities" Core..=) Core.<$> entities,
             ("environment" Core..=) Core.<$> environment,
             ("fetchTime" Core..=) Core.<$> fetchTime,
-            ("finalDisplayedUrl" Core..=)
-              Core.<$> finalDisplayedUrl,
+            ("finalDisplayedUrl" Core..=) Core.<$> finalDisplayedUrl,
             ("finalUrl" Core..=) Core.<$> finalUrl,
-            ("fullPageScreenshot" Core..=)
-              Core.<$> fullPageScreenshot,
+            ("fullPageScreenshot" Core..=) Core.<$> fullPageScreenshot,
             ("i18n" Core..=) Core.<$> i18n,
-            ("lighthouseVersion" Core..=)
-              Core.<$> lighthouseVersion,
+            ("lighthouseVersion" Core..=) Core.<$> lighthouseVersion,
             ("mainDocumentUrl" Core..=) Core.<$> mainDocumentUrl,
             ("requestedUrl" Core..=) Core.<$> requestedUrl,
             ("runWarnings" Core..=) Core.<$> runWarnings,
@@ -855,8 +846,7 @@ instance Core.ToJSON LighthouseResultV5 where
 --
 -- /See:/ 'newLighthouseResultV5_Audits' smart constructor.
 newtype LighthouseResultV5_Audits = LighthouseResultV5_Audits
-  { -- |
-    additional :: (Core.HashMap Core.Text LighthouseAuditResultV5)
+  { additional :: (Core.HashMap Core.Text LighthouseAuditResultV5)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -873,20 +863,17 @@ instance Core.FromJSON LighthouseResultV5_Audits where
     Core.withObject
       "LighthouseResultV5_Audits"
       ( \o ->
-          LighthouseResultV5_Audits
-            Core.<$> (Core.parseJSONObject o)
+          LighthouseResultV5_Audits Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON LighthouseResultV5_Audits where
-  toJSON LighthouseResultV5_Audits {..} =
-    Core.toJSON additional
+  toJSON LighthouseResultV5_Audits {..} = Core.toJSON additional
 
 -- | Map of category groups in the LHR.
 --
 -- /See:/ 'newLighthouseResultV5_CategoryGroups' smart constructor.
 newtype LighthouseResultV5_CategoryGroups = LighthouseResultV5_CategoryGroups
-  { -- |
-    additional :: (Core.HashMap Core.Text CategoryGroupV5)
+  { additional :: (Core.HashMap Core.Text CategoryGroupV5)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -898,10 +885,7 @@ newLighthouseResultV5_CategoryGroups ::
 newLighthouseResultV5_CategoryGroups additional =
   LighthouseResultV5_CategoryGroups {additional = additional}
 
-instance
-  Core.FromJSON
-    LighthouseResultV5_CategoryGroups
-  where
+instance Core.FromJSON LighthouseResultV5_CategoryGroups where
   parseJSON =
     Core.withObject
       "LighthouseResultV5_CategoryGroups"
@@ -910,12 +894,63 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    LighthouseResultV5_CategoryGroups
-  where
+instance Core.ToJSON LighthouseResultV5_CategoryGroups where
   toJSON LighthouseResultV5_CategoryGroups {..} =
     Core.toJSON additional
+
+-- | The metric savings of the audit.
+--
+-- /See:/ 'newMetricSavings' smart constructor.
+data MetricSavings = MetricSavings
+  { -- | Optional. Optional numeric value representing the audit\'s savings for the CLS metric.
+    cLS :: (Core.Maybe Core.Double),
+    -- | Optional. Optional numeric value representing the audit\'s savings for the FCP metric.
+    fCP :: (Core.Maybe Core.Double),
+    -- | Optional. Optional numeric value representing the audit\'s savings for the INP metric.
+    iNP :: (Core.Maybe Core.Double),
+    -- | Optional. Optional numeric value representing the audit\'s savings for the LCP metric.
+    lCP :: (Core.Maybe Core.Double),
+    -- | Optional. Optional numeric value representing the audit\'s savings for the TBT metric.
+    tBT :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MetricSavings' with the minimum fields required to make a request.
+newMetricSavings ::
+  MetricSavings
+newMetricSavings =
+  MetricSavings
+    { cLS = Core.Nothing,
+      fCP = Core.Nothing,
+      iNP = Core.Nothing,
+      lCP = Core.Nothing,
+      tBT = Core.Nothing
+    }
+
+instance Core.FromJSON MetricSavings where
+  parseJSON =
+    Core.withObject
+      "MetricSavings"
+      ( \o ->
+          MetricSavings
+            Core.<$> (o Core..:? "CLS")
+            Core.<*> (o Core..:? "FCP")
+            Core.<*> (o Core..:? "INP")
+            Core.<*> (o Core..:? "LCP")
+            Core.<*> (o Core..:? "TBT")
+      )
+
+instance Core.ToJSON MetricSavings where
+  toJSON MetricSavings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("CLS" Core..=) Core.<$> cLS,
+            ("FCP" Core..=) Core.<$> fCP,
+            ("INP" Core..=) Core.<$> iNP,
+            ("LCP" Core..=) Core.<$> lCP,
+            ("TBT" Core..=) Core.<$> tBT
+          ]
+      )
 
 -- | The CrUX loading experience object that contains CrUX data breakdowns.
 --
@@ -946,10 +981,7 @@ newPagespeedApiLoadingExperienceV5 =
       overallCategory = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PagespeedApiLoadingExperienceV5
-  where
+instance Core.FromJSON PagespeedApiLoadingExperienceV5 where
   parseJSON =
     Core.withObject
       "PagespeedApiLoadingExperienceV5"
@@ -970,8 +1002,7 @@ instance Core.ToJSON PagespeedApiLoadingExperienceV5 where
             ("initial_url" Core..=) Core.<$> initialUrl,
             ("metrics" Core..=) Core.<$> metrics,
             ("origin_fallback" Core..=) Core.<$> originFallback,
-            ("overall_category" Core..=)
-              Core.<$> overallCategory
+            ("overall_category" Core..=) Core.<$> overallCategory
           ]
       )
 
@@ -979,8 +1010,7 @@ instance Core.ToJSON PagespeedApiLoadingExperienceV5 where
 --
 -- /See:/ 'newPagespeedApiLoadingExperienceV5_Metrics' smart constructor.
 newtype PagespeedApiLoadingExperienceV5_Metrics = PagespeedApiLoadingExperienceV5_Metrics
-  { -- |
-    additional :: (Core.HashMap Core.Text UserPageLoadMetricV5)
+  { additional :: (Core.HashMap Core.Text UserPageLoadMetricV5)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -992,10 +1022,7 @@ newPagespeedApiLoadingExperienceV5_Metrics ::
 newPagespeedApiLoadingExperienceV5_Metrics additional =
   PagespeedApiLoadingExperienceV5_Metrics {additional = additional}
 
-instance
-  Core.FromJSON
-    PagespeedApiLoadingExperienceV5_Metrics
-  where
+instance Core.FromJSON PagespeedApiLoadingExperienceV5_Metrics where
   parseJSON =
     Core.withObject
       "PagespeedApiLoadingExperienceV5_Metrics"
@@ -1004,10 +1031,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    PagespeedApiLoadingExperienceV5_Metrics
-  where
+instance Core.ToJSON PagespeedApiLoadingExperienceV5_Metrics where
   toJSON PagespeedApiLoadingExperienceV5_Metrics {..} =
     Core.toJSON additional
 
@@ -1039,7 +1063,8 @@ newPagespeedApiPagespeedResponseV5 ::
   PagespeedApiPagespeedResponseV5
 newPagespeedApiPagespeedResponseV5 =
   PagespeedApiPagespeedResponseV5
-    { analysisUTCTimestamp = Core.Nothing,
+    { analysisUTCTimestamp =
+        Core.Nothing,
       captchaResult = Core.Nothing,
       id = Core.Nothing,
       kind = Core.Nothing,
@@ -1049,10 +1074,7 @@ newPagespeedApiPagespeedResponseV5 =
       version = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PagespeedApiPagespeedResponseV5
-  where
+instance Core.FromJSON PagespeedApiPagespeedResponseV5 where
   parseJSON =
     Core.withObject
       "PagespeedApiPagespeedResponseV5"
@@ -1072,15 +1094,12 @@ instance Core.ToJSON PagespeedApiPagespeedResponseV5 where
   toJSON PagespeedApiPagespeedResponseV5 {..} =
     Core.object
       ( Core.catMaybes
-          [ ("analysisUTCTimestamp" Core..=)
-              Core.<$> analysisUTCTimestamp,
+          [ ("analysisUTCTimestamp" Core..=) Core.<$> analysisUTCTimestamp,
             ("captchaResult" Core..=) Core.<$> captchaResult,
             ("id" Core..=) Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lighthouseResult" Core..=)
-              Core.<$> lighthouseResult,
-            ("loadingExperience" Core..=)
-              Core.<$> loadingExperience,
+            ("lighthouseResult" Core..=) Core.<$> lighthouseResult,
+            ("loadingExperience" Core..=) Core.<$> loadingExperience,
             ("originLoadingExperience" Core..=)
               Core.<$> originLoadingExperience,
             ("version" Core..=) Core.<$> version
@@ -1110,7 +1129,8 @@ instance Core.FromJSON PagespeedVersion where
       "PagespeedVersion"
       ( \o ->
           PagespeedVersion
-            Core.<$> (o Core..:? "major") Core.<*> (o Core..:? "minor")
+            Core.<$> (o Core..:? "major")
+            Core.<*> (o Core..:? "minor")
       )
 
 instance Core.ToJSON PagespeedVersion where
@@ -1343,88 +1363,66 @@ instance Core.ToJSON RendererFormattedStrings where
           [ ("auditGroupExpandTooltip" Core..=)
               Core.<$> auditGroupExpandTooltip,
             ("calculatorLink" Core..=) Core.<$> calculatorLink,
-            ("crcInitialNavigation" Core..=)
-              Core.<$> crcInitialNavigation,
+            ("crcInitialNavigation" Core..=) Core.<$> crcInitialNavigation,
             ("crcLongestDurationLabel" Core..=)
               Core.<$> crcLongestDurationLabel,
-            ("dropdownCopyJSON" Core..=)
-              Core.<$> dropdownCopyJSON,
-            ("dropdownDarkTheme" Core..=)
-              Core.<$> dropdownDarkTheme,
-            ("dropdownPrintExpanded" Core..=)
-              Core.<$> dropdownPrintExpanded,
-            ("dropdownPrintSummary" Core..=)
-              Core.<$> dropdownPrintSummary,
-            ("dropdownSaveGist" Core..=)
-              Core.<$> dropdownSaveGist,
-            ("dropdownSaveHTML" Core..=)
-              Core.<$> dropdownSaveHTML,
-            ("dropdownSaveJSON" Core..=)
-              Core.<$> dropdownSaveJSON,
+            ("dropdownCopyJSON" Core..=) Core.<$> dropdownCopyJSON,
+            ("dropdownDarkTheme" Core..=) Core.<$> dropdownDarkTheme,
+            ("dropdownPrintExpanded" Core..=) Core.<$> dropdownPrintExpanded,
+            ("dropdownPrintSummary" Core..=) Core.<$> dropdownPrintSummary,
+            ("dropdownSaveGist" Core..=) Core.<$> dropdownSaveGist,
+            ("dropdownSaveHTML" Core..=) Core.<$> dropdownSaveHTML,
+            ("dropdownSaveJSON" Core..=) Core.<$> dropdownSaveJSON,
             ("dropdownViewer" Core..=) Core.<$> dropdownViewer,
             ("errorLabel" Core..=) Core.<$> errorLabel,
-            ("errorMissingAuditInfo" Core..=)
-              Core.<$> errorMissingAuditInfo,
+            ("errorMissingAuditInfo" Core..=) Core.<$> errorMissingAuditInfo,
             ("footerIssue" Core..=) Core.<$> footerIssue,
             ("labDataTitle" Core..=) Core.<$> labDataTitle,
             ("lsPerformanceCategoryDescription" Core..=)
               Core.<$> lsPerformanceCategoryDescription,
-            ("manualAuditsGroupTitle" Core..=)
-              Core.<$> manualAuditsGroupTitle,
+            ("manualAuditsGroupTitle" Core..=) Core.<$> manualAuditsGroupTitle,
             ("notApplicableAuditsGroupTitle" Core..=)
               Core.<$> notApplicableAuditsGroupTitle,
             ("opportunityResourceColumnLabel" Core..=)
               Core.<$> opportunityResourceColumnLabel,
             ("opportunitySavingsColumnLabel" Core..=)
               Core.<$> opportunitySavingsColumnLabel,
-            ("passedAuditsGroupTitle" Core..=)
-              Core.<$> passedAuditsGroupTitle,
+            ("passedAuditsGroupTitle" Core..=) Core.<$> passedAuditsGroupTitle,
             ("runtimeDesktopEmulation" Core..=)
               Core.<$> runtimeDesktopEmulation,
-            ("runtimeMobileEmulation" Core..=)
-              Core.<$> runtimeMobileEmulation,
-            ("runtimeNoEmulation" Core..=)
-              Core.<$> runtimeNoEmulation,
+            ("runtimeMobileEmulation" Core..=) Core.<$> runtimeMobileEmulation,
+            ("runtimeNoEmulation" Core..=) Core.<$> runtimeNoEmulation,
             ("runtimeSettingsAxeVersion" Core..=)
               Core.<$> runtimeSettingsAxeVersion,
             ("runtimeSettingsBenchmark" Core..=)
               Core.<$> runtimeSettingsBenchmark,
             ("runtimeSettingsCPUThrottling" Core..=)
               Core.<$> runtimeSettingsCPUThrottling,
-            ("runtimeSettingsChannel" Core..=)
-              Core.<$> runtimeSettingsChannel,
-            ("runtimeSettingsDevice" Core..=)
-              Core.<$> runtimeSettingsDevice,
+            ("runtimeSettingsChannel" Core..=) Core.<$> runtimeSettingsChannel,
+            ("runtimeSettingsDevice" Core..=) Core.<$> runtimeSettingsDevice,
             ("runtimeSettingsFetchTime" Core..=)
               Core.<$> runtimeSettingsFetchTime,
             ("runtimeSettingsNetworkThrottling" Core..=)
               Core.<$> runtimeSettingsNetworkThrottling,
-            ("runtimeSettingsTitle" Core..=)
-              Core.<$> runtimeSettingsTitle,
-            ("runtimeSettingsUA" Core..=)
-              Core.<$> runtimeSettingsUA,
+            ("runtimeSettingsTitle" Core..=) Core.<$> runtimeSettingsTitle,
+            ("runtimeSettingsUA" Core..=) Core.<$> runtimeSettingsUA,
             ("runtimeSettingsUANetwork" Core..=)
               Core.<$> runtimeSettingsUANetwork,
-            ("runtimeSettingsUrl" Core..=)
-              Core.<$> runtimeSettingsUrl,
+            ("runtimeSettingsUrl" Core..=) Core.<$> runtimeSettingsUrl,
             ("runtimeUnknown" Core..=) Core.<$> runtimeUnknown,
             ("scorescaleLabel" Core..=) Core.<$> scorescaleLabel,
-            ("showRelevantAudits" Core..=)
-              Core.<$> showRelevantAudits,
+            ("showRelevantAudits" Core..=) Core.<$> showRelevantAudits,
             ("snippetCollapseButtonLabel" Core..=)
               Core.<$> snippetCollapseButtonLabel,
             ("snippetExpandButtonLabel" Core..=)
               Core.<$> snippetExpandButtonLabel,
             ("thirdPartyResourcesLabel" Core..=)
               Core.<$> thirdPartyResourcesLabel,
-            ("throttlingProvided" Core..=)
-              Core.<$> throttlingProvided,
+            ("throttlingProvided" Core..=) Core.<$> throttlingProvided,
             ("toplevelWarningsMessage" Core..=)
               Core.<$> toplevelWarningsMessage,
-            ("varianceDisclaimer" Core..=)
-              Core.<$> varianceDisclaimer,
-            ("viewTreemapLabel" Core..=)
-              Core.<$> viewTreemapLabel,
+            ("varianceDisclaimer" Core..=) Core.<$> varianceDisclaimer,
+            ("viewTreemapLabel" Core..=) Core.<$> viewTreemapLabel,
             ("warningAuditsGroupTitle" Core..=)
               Core.<$> warningAuditsGroupTitle,
             ("warningHeader" Core..=) Core.<$> warningHeader
@@ -1445,7 +1443,8 @@ data RuntimeError = RuntimeError
 -- | Creates a value of 'RuntimeError' with the minimum fields required to make a request.
 newRuntimeError ::
   RuntimeError
-newRuntimeError = RuntimeError {code = Core.Nothing, message = Core.Nothing}
+newRuntimeError =
+  RuntimeError {code = Core.Nothing, message = Core.Nothing}
 
 instance Core.FromJSON RuntimeError where
   parseJSON =
@@ -1453,7 +1452,8 @@ instance Core.FromJSON RuntimeError where
       "RuntimeError"
       ( \o ->
           RuntimeError
-            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "message")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "message")
       )
 
 instance Core.ToJSON RuntimeError where
@@ -1518,8 +1518,7 @@ instance Core.ToJSON StackPack where
 --
 -- /See:/ 'newStackPack_Descriptions' smart constructor.
 newtype StackPack_Descriptions = StackPack_Descriptions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1535,14 +1534,10 @@ instance Core.FromJSON StackPack_Descriptions where
   parseJSON =
     Core.withObject
       "StackPack_Descriptions"
-      ( \o ->
-          StackPack_Descriptions
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> StackPack_Descriptions Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON StackPack_Descriptions where
-  toJSON StackPack_Descriptions {..} =
-    Core.toJSON additional
+  toJSON StackPack_Descriptions {..} = Core.toJSON additional
 
 -- | Message containing the performance timing data for the Lighthouse run.
 --
@@ -1566,8 +1561,7 @@ instance Core.FromJSON Timing where
 
 instance Core.ToJSON Timing where
   toJSON Timing {..} =
-    Core.object
-      (Core.catMaybes [("total" Core..=) Core.<$> total])
+    Core.object (Core.catMaybes [("total" Core..=) Core.<$> total])
 
 -- | A CrUX metric object for a single metric and form factor.
 --

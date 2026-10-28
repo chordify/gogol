@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Script.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Script.Internal.Sum
@@ -80,6 +78,7 @@ module Gogol.Script.Internal.Sum
         GoogleAppsScriptTypeProcess_ProcessStatus_TIMEDOUT,
         GoogleAppsScriptTypeProcess_ProcessStatus_Unknown,
         GoogleAppsScriptTypeProcess_ProcessStatus_Delayed,
+        GoogleAppsScriptTypeProcess_ProcessStatus_EXECUTIONDISABLED,
         ..
       ),
 
@@ -95,6 +94,14 @@ module Gogol.Script.Internal.Sum
         GoogleAppsScriptTypeProcess_ProcessType_SIMPLETRIGGER,
         GoogleAppsScriptTypeProcess_ProcessType_Menu,
         GoogleAppsScriptTypeProcess_ProcessType_BATCHTASK,
+        ..
+      ),
+
+    -- * GoogleAppsScriptTypeProcess_RuntimeVersion
+    GoogleAppsScriptTypeProcess_RuntimeVersion
+      ( GoogleAppsScriptTypeProcess_RuntimeVersion_RUNTIMEVERSIONUNSPECIFIED,
+        GoogleAppsScriptTypeProcess_RuntimeVersion_DEPRECATED_ES5,
+        GoogleAppsScriptTypeProcess_RuntimeVersion_V8,
         ..
       ),
 
@@ -143,6 +150,7 @@ module Gogol.Script.Internal.Sum
         ProcessesListUserProcessFilterStatuses_TIMEDOUT,
         ProcessesListUserProcessFilterStatuses_Unknown,
         ProcessesListUserProcessFilterStatuses_Delayed,
+        ProcessesListUserProcessFilterStatuses_EXECUTIONDISABLED,
         ..
       ),
 
@@ -182,6 +190,7 @@ module Gogol.Script.Internal.Sum
         ProcessesListScriptProcessesScriptProcessFilterStatuses_TIMEDOUT,
         ProcessesListScriptProcessesScriptProcessFilterStatuses_Unknown,
         ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed,
+        ProcessesListScriptProcessesScriptProcessFilterStatuses_EXECUTIONDISABLED,
         ..
       ),
 
@@ -220,7 +229,7 @@ module Gogol.Script.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -446,6 +455,10 @@ pattern GoogleAppsScriptTypeProcess_ProcessStatus_Unknown = GoogleAppsScriptType
 pattern GoogleAppsScriptTypeProcess_ProcessStatus_Delayed :: GoogleAppsScriptTypeProcess_ProcessStatus
 pattern GoogleAppsScriptTypeProcess_ProcessStatus_Delayed = GoogleAppsScriptTypeProcess_ProcessStatus "DELAYED"
 
+-- | AppsScript executions are disabled by Admin.
+pattern GoogleAppsScriptTypeProcess_ProcessStatus_EXECUTIONDISABLED :: GoogleAppsScriptTypeProcess_ProcessStatus
+pattern GoogleAppsScriptTypeProcess_ProcessStatus_EXECUTIONDISABLED = GoogleAppsScriptTypeProcess_ProcessStatus "EXECUTION_DISABLED"
+
 {-# COMPLETE
   GoogleAppsScriptTypeProcess_ProcessStatus_PROCESSSTATUSUNSPECIFIED,
   GoogleAppsScriptTypeProcess_ProcessStatus_Running,
@@ -456,6 +469,7 @@ pattern GoogleAppsScriptTypeProcess_ProcessStatus_Delayed = GoogleAppsScriptType
   GoogleAppsScriptTypeProcess_ProcessStatus_TIMEDOUT,
   GoogleAppsScriptTypeProcess_ProcessStatus_Unknown,
   GoogleAppsScriptTypeProcess_ProcessStatus_Delayed,
+  GoogleAppsScriptTypeProcess_ProcessStatus_EXECUTIONDISABLED,
   GoogleAppsScriptTypeProcess_ProcessStatus
   #-}
 
@@ -524,6 +538,38 @@ pattern GoogleAppsScriptTypeProcess_ProcessType_BATCHTASK = GoogleAppsScriptType
   GoogleAppsScriptTypeProcess_ProcessType_Menu,
   GoogleAppsScriptTypeProcess_ProcessType_BATCHTASK,
   GoogleAppsScriptTypeProcess_ProcessType
+  #-}
+
+-- | Which version of maestro to use to execute the script.
+newtype GoogleAppsScriptTypeProcess_RuntimeVersion = GoogleAppsScriptTypeProcess_RuntimeVersion {fromGoogleAppsScriptTypeProcess_RuntimeVersion :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Runtime version unset \/ unknown.
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_RUNTIMEVERSIONUNSPECIFIED :: GoogleAppsScriptTypeProcess_RuntimeVersion
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_RUNTIMEVERSIONUNSPECIFIED = GoogleAppsScriptTypeProcess_RuntimeVersion "RUNTIME_VERSION_UNSPECIFIED"
+
+-- | Legacy rhino version of the Apps script runtime
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_DEPRECATED_ES5 :: GoogleAppsScriptTypeProcess_RuntimeVersion
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_DEPRECATED_ES5 = GoogleAppsScriptTypeProcess_RuntimeVersion "DEPRECATED_ES5"
+
+-- | Current default V8 version of the apps script runtime.
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_V8 :: GoogleAppsScriptTypeProcess_RuntimeVersion
+pattern GoogleAppsScriptTypeProcess_RuntimeVersion_V8 = GoogleAppsScriptTypeProcess_RuntimeVersion "V8"
+
+{-# COMPLETE
+  GoogleAppsScriptTypeProcess_RuntimeVersion_RUNTIMEVERSIONUNSPECIFIED,
+  GoogleAppsScriptTypeProcess_RuntimeVersion_DEPRECATED_ES5,
+  GoogleAppsScriptTypeProcess_RuntimeVersion_V8,
+  GoogleAppsScriptTypeProcess_RuntimeVersion
   #-}
 
 -- | The executing users access level to the script.
@@ -713,6 +759,10 @@ pattern ProcessesListUserProcessFilterStatuses_Unknown = ProcessesListUserProces
 pattern ProcessesListUserProcessFilterStatuses_Delayed :: ProcessesListUserProcessFilterStatuses
 pattern ProcessesListUserProcessFilterStatuses_Delayed = ProcessesListUserProcessFilterStatuses "DELAYED"
 
+-- | AppsScript executions are disabled by Admin.
+pattern ProcessesListUserProcessFilterStatuses_EXECUTIONDISABLED :: ProcessesListUserProcessFilterStatuses
+pattern ProcessesListUserProcessFilterStatuses_EXECUTIONDISABLED = ProcessesListUserProcessFilterStatuses "EXECUTION_DISABLED"
+
 {-# COMPLETE
   ProcessesListUserProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
   ProcessesListUserProcessFilterStatuses_Running,
@@ -723,6 +773,7 @@ pattern ProcessesListUserProcessFilterStatuses_Delayed = ProcessesListUserProces
   ProcessesListUserProcessFilterStatuses_TIMEDOUT,
   ProcessesListUserProcessFilterStatuses_Unknown,
   ProcessesListUserProcessFilterStatuses_Delayed,
+  ProcessesListUserProcessFilterStatuses_EXECUTIONDISABLED,
   ProcessesListUserProcessFilterStatuses
   #-}
 
@@ -884,6 +935,10 @@ pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_Unknown = Proces
 pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed :: ProcessesListScriptProcessesScriptProcessFilterStatuses
 pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed = ProcessesListScriptProcessesScriptProcessFilterStatuses "DELAYED"
 
+-- | AppsScript executions are disabled by Admin.
+pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_EXECUTIONDISABLED :: ProcessesListScriptProcessesScriptProcessFilterStatuses
+pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_EXECUTIONDISABLED = ProcessesListScriptProcessesScriptProcessFilterStatuses "EXECUTION_DISABLED"
+
 {-# COMPLETE
   ProcessesListScriptProcessesScriptProcessFilterStatuses_PROCESSSTATUSUNSPECIFIED,
   ProcessesListScriptProcessesScriptProcessFilterStatuses_Running,
@@ -894,6 +949,7 @@ pattern ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed = Proces
   ProcessesListScriptProcessesScriptProcessFilterStatuses_TIMEDOUT,
   ProcessesListScriptProcessesScriptProcessFilterStatuses_Unknown,
   ProcessesListScriptProcessesScriptProcessFilterStatuses_Delayed,
+  ProcessesListScriptProcessesScriptProcessFilterStatuses_EXECUTIONDISABLED,
   ProcessesListScriptProcessesScriptProcessFilterStatuses
   #-}
 

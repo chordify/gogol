@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.QPXExpress.Trips.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.QPXExpress.Trips.Search
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.QPXExpress.Types
 
 -- | A resource alias for @qpxExpress.trips.search@ method which the
@@ -67,20 +65,16 @@ newQPXExpressTripsSearch ::
   -- |  Multipart request metadata. See 'payload'.
   TripsSearchRequest ->
   QPXExpressTripsSearch
-newQPXExpressTripsSearch payload = QPXExpressTripsSearch {payload = payload}
+newQPXExpressTripsSearch payload =
+  QPXExpressTripsSearch {payload = payload}
 
 instance Core.GoogleRequest QPXExpressTripsSearch where
   type Rs QPXExpressTripsSearch = TripsSearchResponse
   type Scopes QPXExpressTripsSearch = '[]
   requestClient QPXExpressTripsSearch {..} =
-    go
-      (Core.Just Core.AltJSON)
-      payload
-      qPXExpressService
+    go (Core.Just Core.AltJSON) payload qPXExpressService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy QPXExpressTripsSearchResource
-          )
+          (Core.Proxy :: Core.Proxy QPXExpressTripsSearchResource)
           Core.mempty

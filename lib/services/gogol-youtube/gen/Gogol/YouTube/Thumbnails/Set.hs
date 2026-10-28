@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Thumbnails.Set
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Thumbnails.Set
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.thumbnails.set@ method which the
@@ -59,21 +57,21 @@ type YouTubeThumbnailsSetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ThumbnailSetResponse
     Core.:<|> "upload"
-      Core.:> "youtube"
-      Core.:> "v3"
-      Core.:> "thumbnails"
-      Core.:> "set"
-      Core.:> Core.QueryParam "videoId" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] ThumbnailSetResponse
+    Core.:> "youtube"
+    Core.:> "v3"
+    Core.:> "thumbnails"
+    Core.:> "set"
+    Core.:> Core.QueryParam "videoId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] ThumbnailSetResponse
 
 -- | As this is not an insert in a strict sense (it supports uploading\/setting of a thumbnail for multiple videos, which doesn\'t result in creation of a single resource), I use a custom verb here.
 --
@@ -135,39 +133,31 @@ instance Core.GoogleRequest YouTubeThumbnailsSet where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeThumbnailsSetResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeThumbnailsSetResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload YouTubeThumbnailsSet)
-  where
+instance Core.GoogleRequest (Core.MediaUpload YouTubeThumbnailsSet) where
   type
     Rs (Core.MediaUpload YouTubeThumbnailsSet) =
       ThumbnailSetResponse
   type
     Scopes (Core.MediaUpload YouTubeThumbnailsSet) =
       Core.Scopes YouTubeThumbnailsSet
-  requestClient
-    (Core.MediaUpload YouTubeThumbnailsSet {..} body) =
-      go
-        (Core.Just videoId)
-        xgafv
-        accessToken
-        callback
-        onBehalfOfContentOwner
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.AltMedia)
-        body
-        youTubeService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy YouTubeThumbnailsSetResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload YouTubeThumbnailsSet {..} body) =
+    go
+      (Core.Just videoId)
+      xgafv
+      accessToken
+      callback
+      onBehalfOfContentOwner
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.AltMedia)
+      body
+      youTubeService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy YouTubeThumbnailsSetResource)
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.create@ method which the
@@ -87,7 +85,8 @@ newSpannerProjectsInstancesDatabasesSessionsCreate ::
   SpannerProjectsInstancesDatabasesSessionsCreate
 newSpannerProjectsInstancesDatabasesSessionsCreate database payload =
   SpannerProjectsInstancesDatabasesSessionsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       database = database,
@@ -100,31 +99,25 @@ instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesSessionsCreate
   where
+  type Rs SpannerProjectsInstancesDatabasesSessionsCreate = Session
   type
-    Rs
-      SpannerProjectsInstancesDatabasesSessionsCreate =
-      Session
-  type
-    Scopes
-      SpannerProjectsInstancesDatabasesSessionsCreate =
+    Scopes SpannerProjectsInstancesDatabasesSessionsCreate =
       '[CloudPlatform'FullControl, Spanner'Data]
-  requestClient
-    SpannerProjectsInstancesDatabasesSessionsCreate {..} =
-      go
-        database
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesSessionsCreateResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesSessionsCreate {..} =
+    go
+      database
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesSessionsCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Get
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.get@ method which the
 -- 'HealthcareProjectsLocationsDatasetsGet' request conforms to.
@@ -65,7 +63,7 @@ data HealthcareProjectsLocationsDatasetsGet = HealthcareProjectsLocationsDataset
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the dataset to read. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
+    -- | Required. The name of the dataset to read. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +74,7 @@ data HealthcareProjectsLocationsDatasetsGet = HealthcareProjectsLocationsDataset
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsGet' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsGet ::
-  -- |  The name of the dataset to read. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@. See 'name'.
+  -- |  Required. The name of the dataset to read. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsGet
 newHealthcareProjectsLocationsDatasetsGet name =
@@ -89,32 +87,25 @@ newHealthcareProjectsLocationsDatasetsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsGet
-  where
-  type
-    Rs HealthcareProjectsLocationsDatasetsGet =
-      Dataset
+instance Core.GoogleRequest HealthcareProjectsLocationsDatasetsGet where
+  type Rs HealthcareProjectsLocationsDatasetsGet = Dataset
   type
     Scopes HealthcareProjectsLocationsDatasetsGet =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsGetResource
-            )
-            Core.mempty
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient HealthcareProjectsLocationsDatasetsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      healthcareService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy HealthcareProjectsLocationsDatasetsGetResource
+          )
+          Core.mempty

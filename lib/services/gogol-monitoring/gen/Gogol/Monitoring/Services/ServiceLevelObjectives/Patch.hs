@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Services.ServiceLevelObjectives.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.Patch
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.services.serviceLevelObjectives.patch@ method which the
 -- 'MonitoringServicesServiceLevelObjectivesPatch' request conforms to.
@@ -67,7 +65,7 @@ data MonitoringServicesServiceLevelObjectivesPatch = MonitoringServicesServiceLe
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME]
+    -- | Identifier. Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME]
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ServiceLevelObjective,
@@ -82,14 +80,15 @@ data MonitoringServicesServiceLevelObjectivesPatch = MonitoringServicesServiceLe
 
 -- | Creates a value of 'MonitoringServicesServiceLevelObjectivesPatch' with the minimum fields required to make a request.
 newMonitoringServicesServiceLevelObjectivesPatch ::
-  -- |  Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME] See 'name'.
+  -- |  Identifier. Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME] See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ServiceLevelObjective ->
   MonitoringServicesServiceLevelObjectivesPatch
 newMonitoringServicesServiceLevelObjectivesPatch name payload =
   MonitoringServicesServiceLevelObjectivesPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -107,27 +106,24 @@ instance
     Rs MonitoringServicesServiceLevelObjectivesPatch =
       ServiceLevelObjective
   type
-    Scopes
-      MonitoringServicesServiceLevelObjectivesPatch =
+    Scopes MonitoringServicesServiceLevelObjectivesPatch =
       '[CloudPlatform'FullControl, Monitoring'FullControl]
-  requestClient
-    MonitoringServicesServiceLevelObjectivesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringServicesServiceLevelObjectivesPatchResource
-            )
-            Core.mempty
+  requestClient MonitoringServicesServiceLevelObjectivesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringServicesServiceLevelObjectivesPatchResource
+          )
+          Core.mempty

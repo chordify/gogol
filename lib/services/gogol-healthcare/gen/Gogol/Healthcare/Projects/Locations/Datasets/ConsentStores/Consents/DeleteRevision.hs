@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.DeleteRevision
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Consents.Delet
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.consents.deleteRevision@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision' request conforms to.
@@ -79,15 +77,20 @@ newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision ::
   -- |  Required. The resource name of the Consent revision to delete, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consents\/{consent_id}\@{revision_id}@. An INVALID_ARGUMENT error occurs if @revision_id@ is not specified in the name. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision
-newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision name =
-  HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision
+  name =
+    HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision
+      { xgafv =
+          Core.Nothing,
+        accessToken =
+          Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        uploadType =
+          Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -100,7 +103,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevision {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.List
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.list@ method which the
 -- 'HealthcareProjectsLocationsDatasetsList' request conforms to.
@@ -72,7 +70,7 @@ data HealthcareProjectsLocationsDatasetsList = HealthcareProjectsLocationsDatase
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from a previous List request, if any.
     pageToken :: (Core.Maybe Core.Text),
-    -- | The name of the project whose datasets should be listed. For example, @projects\/{project_id}\/locations\/{location_id}@.
+    -- | Required. The name of the project whose datasets should be listed. For example, @projects\/{project_id}\/locations\/{location_id}@.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -83,7 +81,7 @@ data HealthcareProjectsLocationsDatasetsList = HealthcareProjectsLocationsDatase
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsList' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsList ::
-  -- |  The name of the project whose datasets should be listed. For example, @projects\/{project_id}\/locations\/{location_id}@. See 'parent'.
+  -- |  Required. The name of the project whose datasets should be listed. For example, @projects\/{project_id}\/locations\/{location_id}@. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsList
 newHealthcareProjectsLocationsDatasetsList parent =
@@ -98,34 +96,29 @@ newHealthcareProjectsLocationsDatasetsList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    HealthcareProjectsLocationsDatasetsList
-  where
+instance Core.GoogleRequest HealthcareProjectsLocationsDatasetsList where
   type
     Rs HealthcareProjectsLocationsDatasetsList =
       ListDatasetsResponse
   type
     Scopes HealthcareProjectsLocationsDatasetsList =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsListResource
-            )
-            Core.mempty
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient HealthcareProjectsLocationsDatasetsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      healthcareService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy HealthcareProjectsLocationsDatasetsListResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Templates.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Get the template associated with a template.
+-- Get the template associated with a template. To get the template, we recommend using @projects.locations.templates.get@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.get@ is not recommended, because only templates that are running in @us-central1@ are retrieved.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.templates.get@.
 module Gogol.Dataflow.Projects.Templates.Get
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Templates.Get
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.templates.get@ method which the
 -- 'DataflowProjectsTemplatesGet' request conforms to.
@@ -60,7 +58,7 @@ type DataflowProjectsTemplatesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GetTemplateResponse
 
--- | Get the template associated with a template.
+-- | Get the template associated with a template. To get the template, we recommend using @projects.locations.templates.get@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.get@ is not recommended, because only templates that are running in @us-central1@ are retrieved.
 --
 -- /See:/ 'newDataflowProjectsTemplatesGet' smart constructor.
 data DataflowProjectsTemplatesGet = DataflowProjectsTemplatesGet
@@ -103,20 +101,11 @@ newDataflowProjectsTemplatesGet projectId =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataflowProjectsTemplatesGet
-  where
-  type
-    Rs DataflowProjectsTemplatesGet =
-      GetTemplateResponse
+instance Core.GoogleRequest DataflowProjectsTemplatesGet where
+  type Rs DataflowProjectsTemplatesGet = GetTemplateResponse
   type
     Scopes DataflowProjectsTemplatesGet =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient DataflowProjectsTemplatesGet {..} =
     go
       projectId
@@ -133,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataflowProjectsTemplatesGetResource
-          )
+          (Core.Proxy :: Core.Proxy DataflowProjectsTemplatesGetResource)
           Core.mempty

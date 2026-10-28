@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlusDomains.Media.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.PlusDomains.Media.Insert
 where
 
 import Gogol.PlusDomains.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @plusDomains.media.insert@ method which the
 -- 'PlusDomainsMediaInsert' request conforms to.
@@ -55,23 +53,22 @@ type PlusDomainsMediaInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Media
     Core.:> Core.Post '[Core.JSON] Media
     Core.:<|> "upload"
-      Core.:> "plusDomains"
-      Core.:> "v1"
-      Core.:> "people"
-      Core.:> Core.Capture "userId" Core.Text
-      Core.:> "media"
-      Core.:> Core.Capture "collection" MediaInsertCollection
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Media
-      Core.:> Core.Post '[Core.JSON] Media
+    Core.:> "plusDomains"
+    Core.:> "v1"
+    Core.:> "people"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "media"
+    Core.:> Core.Capture "collection" MediaInsertCollection
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Media
+    Core.:> Core.Post '[Core.JSON] Media
 
 -- | Shut down. See https:\/\/developers.google.com\/+\/api-shutdown for more details.
 --
 -- /See:/ 'newPlusDomainsMediaInsert' smart constructor.
 data PlusDomainsMediaInsert = PlusDomainsMediaInsert
-  { -- |
-    collection :: MediaInsertCollection,
+  { collection :: MediaInsertCollection,
     -- | Multipart request metadata.
     payload :: Media,
     -- | The ID of the user to create the activity on behalf of.
@@ -110,35 +107,28 @@ instance Core.GoogleRequest PlusDomainsMediaInsert where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PlusDomainsMediaInsertResource
-          )
+          (Core.Proxy :: Core.Proxy PlusDomainsMediaInsertResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload PlusDomainsMediaInsert)
   where
-  type
-    Rs (Core.MediaUpload PlusDomainsMediaInsert) =
-      Media
+  type Rs (Core.MediaUpload PlusDomainsMediaInsert) = Media
   type
     Scopes (Core.MediaUpload PlusDomainsMediaInsert) =
       Core.Scopes PlusDomainsMediaInsert
-  requestClient
-    (Core.MediaUpload PlusDomainsMediaInsert {..} body) =
-      go
-        userId
-        collection
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        plusDomainsService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy PlusDomainsMediaInsertResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload PlusDomainsMediaInsert {..} body) =
+    go
+      userId
+      collection
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      plusDomainsService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy PlusDomainsMediaInsertResource)
+          Core.mempty

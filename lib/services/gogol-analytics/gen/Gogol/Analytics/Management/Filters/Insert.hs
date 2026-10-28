@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Filters.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Filters.Insert
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.filters.insert@ method which the
 -- 'AnalyticsManagementFiltersInsert' request conforms to.
@@ -74,26 +72,18 @@ newAnalyticsManagementFiltersInsert ::
   Filter ->
   AnalyticsManagementFiltersInsert
 newAnalyticsManagementFiltersInsert accountId payload =
-  AnalyticsManagementFiltersInsert {accountId = accountId, payload = payload}
+  AnalyticsManagementFiltersInsert
+    { accountId = accountId,
+      payload = payload
+    }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementFiltersInsert
-  where
+instance Core.GoogleRequest AnalyticsManagementFiltersInsert where
   type Rs AnalyticsManagementFiltersInsert = Filter
-  type
-    Scopes AnalyticsManagementFiltersInsert =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementFiltersInsert = '[Analytics'Edit]
   requestClient AnalyticsManagementFiltersInsert {..} =
-    go
-      accountId
-      (Core.Just Core.AltJSON)
-      payload
-      analyticsService
+    go accountId (Core.Just Core.AltJSON) payload analyticsService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementFiltersInsertResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementFiltersInsertResource)
           Core.mempty

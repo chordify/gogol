@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Create
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.create@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresCreate' request conforms to.
@@ -68,9 +66,9 @@ data HealthcareProjectsLocationsDatasetsFhirStoresCreate = HealthcareProjectsLoc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the FHIR store that is being created. The string must match the following regex: @[\\p{L}\\p{N}_\\-\\.]{1,256}@.
+    -- | Required. The ID of the FHIR store that is being created. The string must match the following regex: @[\\p{L}\\p{N}_\\-\\.]{1,256}@.
     fhirStoreId :: (Core.Maybe Core.Text),
-    -- | The name of the dataset this FHIR store belongs to.
+    -- | Required. The name of the dataset this FHIR store belongs to.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: FhirStore,
@@ -83,35 +81,36 @@ data HealthcareProjectsLocationsDatasetsFhirStoresCreate = HealthcareProjectsLoc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresCreate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresCreate ::
-  -- |  The name of the dataset this FHIR store belongs to. See 'parent'.
+  -- |  Required. The name of the dataset this FHIR store belongs to. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   FhirStore ->
   HealthcareProjectsLocationsDatasetsFhirStoresCreate
-newHealthcareProjectsLocationsDatasetsFhirStoresCreate parent payload =
-  HealthcareProjectsLocationsDatasetsFhirStoresCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      fhirStoreId = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresCreate
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsFhirStoresCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        fhirStoreId = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsFhirStoresCreate
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresCreate =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresCreate =
       FhirStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresCreate =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresCreate =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresCreate {..} =
       go

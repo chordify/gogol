@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.Services.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists all public cloud services.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.services.list@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.services.list@.
 module Gogol.Billing.Cloudbilling.Services.List
   ( -- * Resource
     CloudbillingServicesListResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.Services.List
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.services.list@ method which the
 -- 'CloudbillingServicesList' request conforms to.
@@ -93,9 +91,7 @@ newCloudbillingServicesList =
     }
 
 instance Core.GoogleRequest CloudbillingServicesList where
-  type
-    Rs CloudbillingServicesList =
-      ListServicesResponse
+  type Rs CloudbillingServicesList = ListServicesResponse
   type
     Scopes CloudbillingServicesList =
       '[ CloudBilling'FullControl,
@@ -116,7 +112,5 @@ instance Core.GoogleRequest CloudbillingServicesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudbillingServicesListResource
-          )
+          (Core.Proxy :: Core.Proxy CloudbillingServicesListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Drive.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Drive.Types
@@ -32,7 +30,9 @@ module Gogol.Drive.Types
     -- * OAuth Scopes
     Drive'FullControl,
     Drive'Appdata,
+    Drive'Apps'Readonly,
     Drive'File,
+    Drive'Meet'Readonly,
     Drive'Metadata,
     Drive'Metadata'Readonly,
     Drive'Photos'Readonly,
@@ -40,6 +40,9 @@ module Gogol.Drive.Types
     Drive'Scripts,
 
     -- * Types
+
+    -- ** Xgafv
+    Xgafv (..),
 
     -- ** About
     About (..),
@@ -68,6 +71,26 @@ module Gogol.Drive.Types
     -- ** About_TeamDriveThemesItem
     About_TeamDriveThemesItem (..),
     newAbout_TeamDriveThemesItem,
+
+    -- ** AccessProposal
+    AccessProposal (..),
+    newAccessProposal,
+
+    -- ** AccessProposalRoleAndView
+    AccessProposalRoleAndView (..),
+    newAccessProposalRoleAndView,
+
+    -- ** App
+    App (..),
+    newApp,
+
+    -- ** AppIcons
+    AppIcons (..),
+    newAppIcons,
+
+    -- ** AppList
+    AppList (..),
+    newAppList,
 
     -- ** Change
     Change (..),
@@ -100,6 +123,10 @@ module Gogol.Drive.Types
     -- ** ContentRestriction
     ContentRestriction (..),
     newContentRestriction,
+
+    -- ** DownloadRestriction
+    DownloadRestriction (..),
+    newDownloadRestriction,
 
     -- ** Drive
     Drive (..),
@@ -205,6 +232,14 @@ module Gogol.Drive.Types
     LabelModification (..),
     newLabelModification,
 
+    -- ** ListAccessProposalsResponse
+    ListAccessProposalsResponse (..),
+    newListAccessProposalsResponse,
+
+    -- ** ListOperationsResponse
+    ListOperationsResponse (..),
+    newListOperationsResponse,
+
     -- ** ModifyLabelsRequest
     ModifyLabelsRequest (..),
     newModifyLabelsRequest,
@@ -212,6 +247,18 @@ module Gogol.Drive.Types
     -- ** ModifyLabelsResponse
     ModifyLabelsResponse (..),
     newModifyLabelsResponse,
+
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
 
     -- ** Permission
     Permission (..),
@@ -237,6 +284,13 @@ module Gogol.Drive.Types
     ReplyList (..),
     newReplyList,
 
+    -- ** ResolveAccessProposalRequest
+    ResolveAccessProposalRequest (..),
+    newResolveAccessProposalRequest,
+
+    -- ** ResolveAccessProposalRequest_Action
+    ResolveAccessProposalRequest_Action (..),
+
     -- ** Revision
     Revision (..),
     newRevision,
@@ -252,6 +306,14 @@ module Gogol.Drive.Types
     -- ** StartPageToken
     StartPageToken (..),
     newStartPageToken,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TeamDrive
     TeamDrive (..),
@@ -284,9 +346,9 @@ where
 
 import Gogol.Drive.Internal.Product
 import Gogol.Drive.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
--- | Default request referring to version @v3@ of the Drive API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version @v3@ of the Google Drive API. This contains the host and root path used as a starting point for constructing service requests.
 driveService :: Core.ServiceConfig
 driveService =
   Core.defaultService
@@ -297,22 +359,36 @@ driveService =
 type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 
 -- | See, create, and delete its own configuration data in your Google Drive
-type Drive'Appdata = "https://www.googleapis.com/auth/drive.appdata"
+type Drive'Appdata =
+  "https://www.googleapis.com/auth/drive.appdata"
+
+-- | View your Google Drive apps
+type Drive'Apps'Readonly =
+  "https://www.googleapis.com/auth/drive.apps.readonly"
 
 -- | See, edit, create, and delete only the specific Google Drive files you use with this app
 type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
+-- | See and download your Google Drive files that were created or edited by Google Meet.
+type Drive'Meet'Readonly =
+  "https://www.googleapis.com/auth/drive.meet.readonly"
+
 -- | View and manage metadata of files in your Google Drive
-type Drive'Metadata = "https://www.googleapis.com/auth/drive.metadata"
+type Drive'Metadata =
+  "https://www.googleapis.com/auth/drive.metadata"
 
 -- | See information about your Google Drive files
-type Drive'Metadata'Readonly = "https://www.googleapis.com/auth/drive.metadata.readonly"
+type Drive'Metadata'Readonly =
+  "https://www.googleapis.com/auth/drive.metadata.readonly"
 
 -- | View the photos, videos and albums in your Google Photos
-type Drive'Photos'Readonly = "https://www.googleapis.com/auth/drive.photos.readonly"
+type Drive'Photos'Readonly =
+  "https://www.googleapis.com/auth/drive.photos.readonly"
 
 -- | See and download all your Google Drive files
-type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"
+type Drive'Readonly =
+  "https://www.googleapis.com/auth/drive.readonly"
 
 -- | Modify your Google Apps Script scripts\' behavior
-type Drive'Scripts = "https://www.googleapis.com/auth/drive.scripts"
+type Drive'Scripts =
+  "https://www.googleapis.com/auth/drive.scripts"

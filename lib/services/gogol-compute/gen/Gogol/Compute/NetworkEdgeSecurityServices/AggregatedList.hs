@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.
+-- Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project. To prevent failure, Google recommends that you set the @returnPartialSuccess@ parameter to @true@.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.networkEdgeSecurityServices.aggregatedList@.
 module Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
@@ -40,7 +38,7 @@ module Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networkEdgeSecurityServices.aggregatedList@ method which the
 -- 'ComputeNetworkEdgeSecurityServicesAggregatedList' request conforms to.
@@ -59,9 +57,8 @@ type ComputeNetworkEdgeSecurityServicesAggregatedListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "returnPartialSuccess"
-              Core.Bool
+    Core.:> Core.QueryParam "returnPartialSuccess" Core.Bool
+    Core.:> Core.QueryParam "serviceProjectNumber" Core.Int64
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -69,7 +66,7 @@ type ComputeNetworkEdgeSecurityServicesAggregatedListResource =
               '[Core.JSON]
               NetworkEdgeSecurityServiceAggregatedList
 
--- | Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.
+-- | Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project. To prevent failure, Google recommends that you set the @returnPartialSuccess@ parameter to @true@.
 --
 -- /See:/ 'newComputeNetworkEdgeSecurityServicesAggregatedList' smart constructor.
 data ComputeNetworkEdgeSecurityServicesAggregatedList = ComputeNetworkEdgeSecurityServicesAggregatedList
@@ -79,9 +76,9 @@ data ComputeNetworkEdgeSecurityServicesAggregatedList = ComputeNetworkEdgeSecuri
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either @=@, @!=@, @>@, @\<@, @\<=@, @>=@ or @:@. For example, if you are filtering Compute Engine instances, you can exclude instances named @example-instance@ by specifying @name != example-instance@. The @:@ operator can be used with string fields to match substrings. For non-string fields it is equivalent to the @=@ operator. The @:*@ comparison can be used to test whether a key has been defined. For example, to find all objects with @owner@ label use: @labels.owner:*@ You can also filter nested fields. For example, you could specify
-    -- @scheduling.automaticRestart = false@ to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: @(scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")@ By default, each expression is an @AND@ expression. However, you can include @AND@ and @OR@ expressions explicitly. For example: @(cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true)@ If you want to use a regular expression, use the @eq@ (equal) or @ne@ (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: @fieldname eq unquoted literal@ @fieldname eq \'single quoted literal\'@ @fieldname eq \"double quoted literal\"@ @(fieldname1 eq literal) (fieldname2 ne \"literal\")@ The literal value is interpreted
-    -- as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use @name ne .*instance@.
+    -- | A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either @=@, @!=@, @>@, @\<@, @\<=@, @>=@ or @:@. For example, if you are filtering Compute Engine instances, you can exclude instances named @example-instance@ by specifying @name != example-instance@. The @:*@ comparison can be used to test whether a key has been defined. For example, to find all objects with @owner@ label use: @labels.owner:*@ You can also filter nested fields. For example, you could specify @scheduling.automaticRestart = false@ to include instances only if they are not scheduled for
+    -- automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: @(scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\")@ By default, each expression is an @AND@ expression. However, you can include @AND@ and @OR@ expressions explicitly. For example: @(cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true)@ If you want to use a regular expression, use the @eq@ (equal) or @ne@ (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: @fieldname eq unquoted literal@ @fieldname eq \'single quoted literal\'@ @fieldname eq \"double quoted literal\"@ @(fieldname1 eq literal) (fieldname2 ne \"literal\")@ The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the
+    -- entire field. For example, to filter for instances that do not end with name \"instance\", you would use @name ne .*instance@. You cannot combine constraints on multiple fields using regular expressions.
     filter :: (Core.Maybe Core.Text),
     -- | Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
     includeAllScopes :: (Core.Maybe Core.Bool),
@@ -93,8 +90,10 @@ data ComputeNetworkEdgeSecurityServicesAggregatedList = ComputeNetworkEdgeSecuri
     pageToken :: (Core.Maybe Core.Text),
     -- | Name of the project scoping this request.
     project :: Core.Text,
-    -- | Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+    -- | Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
     returnPartialSuccess :: (Core.Maybe Core.Bool),
+    -- | The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+    serviceProjectNumber :: (Core.Maybe Core.Int64),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -109,7 +108,8 @@ newComputeNetworkEdgeSecurityServicesAggregatedList ::
   ComputeNetworkEdgeSecurityServicesAggregatedList
 newComputeNetworkEdgeSecurityServicesAggregatedList project =
   ComputeNetworkEdgeSecurityServicesAggregatedList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -119,6 +119,7 @@ newComputeNetworkEdgeSecurityServicesAggregatedList project =
       pageToken = Core.Nothing,
       project = project,
       returnPartialSuccess = Core.Nothing,
+      serviceProjectNumber = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -128,38 +129,33 @@ instance
     ComputeNetworkEdgeSecurityServicesAggregatedList
   where
   type
-    Rs
-      ComputeNetworkEdgeSecurityServicesAggregatedList =
+    Rs ComputeNetworkEdgeSecurityServicesAggregatedList =
       NetworkEdgeSecurityServiceAggregatedList
   type
-    Scopes
-      ComputeNetworkEdgeSecurityServicesAggregatedList =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient
-    ComputeNetworkEdgeSecurityServicesAggregatedList {..} =
-      go
-        project
-        xgafv
-        accessToken
-        callback
-        filter
-        includeAllScopes
-        (Core.Just maxResults)
-        orderBy
-        pageToken
-        returnPartialSuccess
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworkEdgeSecurityServicesAggregatedListResource
-            )
-            Core.mempty
+    Scopes ComputeNetworkEdgeSecurityServicesAggregatedList =
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
+  requestClient ComputeNetworkEdgeSecurityServicesAggregatedList {..} =
+    go
+      project
+      xgafv
+      accessToken
+      callback
+      filter
+      includeAllScopes
+      (Core.Just maxResults)
+      orderBy
+      pageToken
+      returnPartialSuccess
+      serviceProjectNumber
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ComputeNetworkEdgeSecurityServicesAggregatedListResource
+          )
+          Core.mempty

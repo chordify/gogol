@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Achievements.UpdateMultiple
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Achievements.UpdateMultiple
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.achievements.updateMultiple@ method which the
 -- 'GamesAchievementsUpdateMultiple' request conforms to.
@@ -55,12 +53,8 @@ type GamesAchievementsUpdateMultipleResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              AchievementUpdateMultipleRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              AchievementUpdateMultipleResponse
+    Core.:> Core.ReqBody '[Core.JSON] AchievementUpdateMultipleRequest
+    Core.:> Core.Post '[Core.JSON] AchievementUpdateMultipleResponse
 
 -- | Updates multiple achievements for the currently authenticated player.
 --
@@ -96,16 +90,11 @@ newGamesAchievementsUpdateMultiple payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesAchievementsUpdateMultiple
-  where
+instance Core.GoogleRequest GamesAchievementsUpdateMultiple where
   type
     Rs GamesAchievementsUpdateMultiple =
       AchievementUpdateMultipleResponse
-  type
-    Scopes GamesAchievementsUpdateMultiple =
-      '[Games'FullControl]
+  type Scopes GamesAchievementsUpdateMultiple = '[Games'FullControl]
   requestClient GamesAchievementsUpdateMultiple {..} =
     go
       xgafv
@@ -119,7 +108,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesAchievementsUpdateMultipleResource
-          )
+          (Core.Proxy :: Core.Proxy GamesAchievementsUpdateMultipleResource)
           Core.mempty

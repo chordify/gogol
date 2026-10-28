@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.People.Internal.Sum
@@ -48,6 +46,7 @@ module Gogol.People.Internal.Sum
         BatchCreateContactsRequest_SourcesItem_READSOURCETYPEPROFILE,
         BatchCreateContactsRequest_SourcesItem_READSOURCETYPECONTACT,
         BatchCreateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+        BatchCreateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -57,6 +56,7 @@ module Gogol.People.Internal.Sum
         BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEPROFILE,
         BatchUpdateContactsRequest_SourcesItem_READSOURCETYPECONTACT,
         BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+        BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -82,6 +82,7 @@ module Gogol.People.Internal.Sum
         CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEPROFILE,
         CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPECONTACT,
         CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+        CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -166,6 +167,7 @@ module Gogol.People.Internal.Sum
         UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEPROFILE,
         UpdateContactPhotoRequest_SourcesItem_READSOURCETYPECONTACT,
         UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+        UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -175,6 +177,7 @@ module Gogol.People.Internal.Sum
         OtherContactsListSources_READSOURCETYPEPROFILE,
         OtherContactsListSources_READSOURCETYPECONTACT,
         OtherContactsListSources_READSOURCETYPEDOMAINCONTACT,
+        OtherContactsListSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -193,6 +196,7 @@ module Gogol.People.Internal.Sum
         PeopleConnectionsListSources_READSOURCETYPEPROFILE,
         PeopleConnectionsListSources_READSOURCETYPECONTACT,
         PeopleConnectionsListSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleConnectionsListSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -202,6 +206,7 @@ module Gogol.People.Internal.Sum
         PeopleCreateContactSources_READSOURCETYPEPROFILE,
         PeopleCreateContactSources_READSOURCETYPECONTACT,
         PeopleCreateContactSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleCreateContactSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -211,6 +216,7 @@ module Gogol.People.Internal.Sum
         PeopleDeleteContactPhotoSources_READSOURCETYPEPROFILE,
         PeopleDeleteContactPhotoSources_READSOURCETYPECONTACT,
         PeopleDeleteContactPhotoSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleDeleteContactPhotoSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -220,6 +226,7 @@ module Gogol.People.Internal.Sum
         PeopleGetSources_READSOURCETYPEPROFILE,
         PeopleGetSources_READSOURCETYPECONTACT,
         PeopleGetSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleGetSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -229,6 +236,7 @@ module Gogol.People.Internal.Sum
         PeopleGetBatchGetSources_READSOURCETYPEPROFILE,
         PeopleGetBatchGetSources_READSOURCETYPECONTACT,
         PeopleGetBatchGetSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleGetBatchGetSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -253,6 +261,7 @@ module Gogol.People.Internal.Sum
         PeopleSearchContactsSources_READSOURCETYPEPROFILE,
         PeopleSearchContactsSources_READSOURCETYPECONTACT,
         PeopleSearchContactsSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleSearchContactsSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
 
@@ -277,12 +286,13 @@ module Gogol.People.Internal.Sum
         PeopleUpdateContactSources_READSOURCETYPEPROFILE,
         PeopleUpdateContactSources_READSOURCETYPECONTACT,
         PeopleUpdateContactSources_READSOURCETYPEDOMAINCONTACT,
+        PeopleUpdateContactSources_READSOURCETYPEOTHERCONTACT,
         ..
       ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -376,11 +386,16 @@ pattern BatchCreateContactsRequest_SourcesItem_READSOURCETYPECONTACT = BatchCrea
 pattern BatchCreateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT :: BatchCreateContactsRequest_SourcesItem
 pattern BatchCreateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT = BatchCreateContactsRequest_SourcesItem "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern BatchCreateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT :: BatchCreateContactsRequest_SourcesItem
+pattern BatchCreateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT = BatchCreateContactsRequest_SourcesItem "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   BatchCreateContactsRequest_SourcesItem_READSOURCETYPEUNSPECIFIED,
   BatchCreateContactsRequest_SourcesItem_READSOURCETYPEPROFILE,
   BatchCreateContactsRequest_SourcesItem_READSOURCETYPECONTACT,
   BatchCreateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+  BatchCreateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
   BatchCreateContactsRequest_SourcesItem
   #-}
 
@@ -412,11 +427,16 @@ pattern BatchUpdateContactsRequest_SourcesItem_READSOURCETYPECONTACT = BatchUpda
 pattern BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT :: BatchUpdateContactsRequest_SourcesItem
 pattern BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT = BatchUpdateContactsRequest_SourcesItem "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT :: BatchUpdateContactsRequest_SourcesItem
+pattern BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT = BatchUpdateContactsRequest_SourcesItem "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEUNSPECIFIED,
   BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEPROFILE,
   BatchUpdateContactsRequest_SourcesItem_READSOURCETYPECONTACT,
   BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+  BatchUpdateContactsRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
   BatchUpdateContactsRequest_SourcesItem
   #-}
 
@@ -512,11 +532,16 @@ pattern CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPECONTA
 pattern CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT :: CopyOtherContactToMyContactsGroupRequest_SourcesItem
 pattern CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT = CopyOtherContactToMyContactsGroupRequest_SourcesItem "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEOTHERCONTACT :: CopyOtherContactToMyContactsGroupRequest_SourcesItem
+pattern CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEOTHERCONTACT = CopyOtherContactToMyContactsGroupRequest_SourcesItem "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEUNSPECIFIED,
   CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEPROFILE,
   CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPECONTACT,
   CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+  CopyOtherContactToMyContactsGroupRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
   CopyOtherContactToMyContactsGroupRequest_SourcesItem
   #-}
 
@@ -866,11 +891,16 @@ pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPECONTACT = UpdateCont
 pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT :: UpdateContactPhotoRequest_SourcesItem
 pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT = UpdateContactPhotoRequest_SourcesItem "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEOTHERCONTACT :: UpdateContactPhotoRequest_SourcesItem
+pattern UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEOTHERCONTACT = UpdateContactPhotoRequest_SourcesItem "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEUNSPECIFIED,
   UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEPROFILE,
   UpdateContactPhotoRequest_SourcesItem_READSOURCETYPECONTACT,
   UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEDOMAINCONTACT,
+  UpdateContactPhotoRequest_SourcesItem_READSOURCETYPEOTHERCONTACT,
   UpdateContactPhotoRequest_SourcesItem
   #-}
 
@@ -903,11 +933,16 @@ pattern OtherContactsListSources_READSOURCETYPECONTACT = OtherContactsListSource
 pattern OtherContactsListSources_READSOURCETYPEDOMAINCONTACT :: OtherContactsListSources
 pattern OtherContactsListSources_READSOURCETYPEDOMAINCONTACT = OtherContactsListSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern OtherContactsListSources_READSOURCETYPEOTHERCONTACT :: OtherContactsListSources
+pattern OtherContactsListSources_READSOURCETYPEOTHERCONTACT = OtherContactsListSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   OtherContactsListSources_READSOURCETYPEUNSPECIFIED,
   OtherContactsListSources_READSOURCETYPEPROFILE,
   OtherContactsListSources_READSOURCETYPECONTACT,
   OtherContactsListSources_READSOURCETYPEDOMAINCONTACT,
+  OtherContactsListSources_READSOURCETYPEOTHERCONTACT,
   OtherContactsListSources
   #-}
 
@@ -977,11 +1012,16 @@ pattern PeopleConnectionsListSources_READSOURCETYPECONTACT = PeopleConnectionsLi
 pattern PeopleConnectionsListSources_READSOURCETYPEDOMAINCONTACT :: PeopleConnectionsListSources
 pattern PeopleConnectionsListSources_READSOURCETYPEDOMAINCONTACT = PeopleConnectionsListSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleConnectionsListSources_READSOURCETYPEOTHERCONTACT :: PeopleConnectionsListSources
+pattern PeopleConnectionsListSources_READSOURCETYPEOTHERCONTACT = PeopleConnectionsListSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleConnectionsListSources_READSOURCETYPEUNSPECIFIED,
   PeopleConnectionsListSources_READSOURCETYPEPROFILE,
   PeopleConnectionsListSources_READSOURCETYPECONTACT,
   PeopleConnectionsListSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleConnectionsListSources_READSOURCETYPEOTHERCONTACT,
   PeopleConnectionsListSources
   #-}
 
@@ -1014,11 +1054,16 @@ pattern PeopleCreateContactSources_READSOURCETYPECONTACT = PeopleCreateContactSo
 pattern PeopleCreateContactSources_READSOURCETYPEDOMAINCONTACT :: PeopleCreateContactSources
 pattern PeopleCreateContactSources_READSOURCETYPEDOMAINCONTACT = PeopleCreateContactSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleCreateContactSources_READSOURCETYPEOTHERCONTACT :: PeopleCreateContactSources
+pattern PeopleCreateContactSources_READSOURCETYPEOTHERCONTACT = PeopleCreateContactSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleCreateContactSources_READSOURCETYPEUNSPECIFIED,
   PeopleCreateContactSources_READSOURCETYPEPROFILE,
   PeopleCreateContactSources_READSOURCETYPECONTACT,
   PeopleCreateContactSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleCreateContactSources_READSOURCETYPEOTHERCONTACT,
   PeopleCreateContactSources
   #-}
 
@@ -1051,11 +1096,16 @@ pattern PeopleDeleteContactPhotoSources_READSOURCETYPECONTACT = PeopleDeleteCont
 pattern PeopleDeleteContactPhotoSources_READSOURCETYPEDOMAINCONTACT :: PeopleDeleteContactPhotoSources
 pattern PeopleDeleteContactPhotoSources_READSOURCETYPEDOMAINCONTACT = PeopleDeleteContactPhotoSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleDeleteContactPhotoSources_READSOURCETYPEOTHERCONTACT :: PeopleDeleteContactPhotoSources
+pattern PeopleDeleteContactPhotoSources_READSOURCETYPEOTHERCONTACT = PeopleDeleteContactPhotoSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleDeleteContactPhotoSources_READSOURCETYPEUNSPECIFIED,
   PeopleDeleteContactPhotoSources_READSOURCETYPEPROFILE,
   PeopleDeleteContactPhotoSources_READSOURCETYPECONTACT,
   PeopleDeleteContactPhotoSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleDeleteContactPhotoSources_READSOURCETYPEOTHERCONTACT,
   PeopleDeleteContactPhotoSources
   #-}
 
@@ -1088,11 +1138,16 @@ pattern PeopleGetSources_READSOURCETYPECONTACT = PeopleGetSources "READ_SOURCE_T
 pattern PeopleGetSources_READSOURCETYPEDOMAINCONTACT :: PeopleGetSources
 pattern PeopleGetSources_READSOURCETYPEDOMAINCONTACT = PeopleGetSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleGetSources_READSOURCETYPEOTHERCONTACT :: PeopleGetSources
+pattern PeopleGetSources_READSOURCETYPEOTHERCONTACT = PeopleGetSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleGetSources_READSOURCETYPEUNSPECIFIED,
   PeopleGetSources_READSOURCETYPEPROFILE,
   PeopleGetSources_READSOURCETYPECONTACT,
   PeopleGetSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleGetSources_READSOURCETYPEOTHERCONTACT,
   PeopleGetSources
   #-}
 
@@ -1125,11 +1180,16 @@ pattern PeopleGetBatchGetSources_READSOURCETYPECONTACT = PeopleGetBatchGetSource
 pattern PeopleGetBatchGetSources_READSOURCETYPEDOMAINCONTACT :: PeopleGetBatchGetSources
 pattern PeopleGetBatchGetSources_READSOURCETYPEDOMAINCONTACT = PeopleGetBatchGetSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleGetBatchGetSources_READSOURCETYPEOTHERCONTACT :: PeopleGetBatchGetSources
+pattern PeopleGetBatchGetSources_READSOURCETYPEOTHERCONTACT = PeopleGetBatchGetSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleGetBatchGetSources_READSOURCETYPEUNSPECIFIED,
   PeopleGetBatchGetSources_READSOURCETYPEPROFILE,
   PeopleGetBatchGetSources_READSOURCETYPECONTACT,
   PeopleGetBatchGetSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleGetBatchGetSources_READSOURCETYPEOTHERCONTACT,
   PeopleGetBatchGetSources
   #-}
 
@@ -1221,11 +1281,16 @@ pattern PeopleSearchContactsSources_READSOURCETYPECONTACT = PeopleSearchContacts
 pattern PeopleSearchContactsSources_READSOURCETYPEDOMAINCONTACT :: PeopleSearchContactsSources
 pattern PeopleSearchContactsSources_READSOURCETYPEDOMAINCONTACT = PeopleSearchContactsSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleSearchContactsSources_READSOURCETYPEOTHERCONTACT :: PeopleSearchContactsSources
+pattern PeopleSearchContactsSources_READSOURCETYPEOTHERCONTACT = PeopleSearchContactsSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleSearchContactsSources_READSOURCETYPEUNSPECIFIED,
   PeopleSearchContactsSources_READSOURCETYPEPROFILE,
   PeopleSearchContactsSources_READSOURCETYPECONTACT,
   PeopleSearchContactsSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleSearchContactsSources_READSOURCETYPEOTHERCONTACT,
   PeopleSearchContactsSources
   #-}
 
@@ -1317,10 +1382,15 @@ pattern PeopleUpdateContactSources_READSOURCETYPECONTACT = PeopleUpdateContactSo
 pattern PeopleUpdateContactSources_READSOURCETYPEDOMAINCONTACT :: PeopleUpdateContactSources
 pattern PeopleUpdateContactSources_READSOURCETYPEDOMAINCONTACT = PeopleUpdateContactSources "READ_SOURCE_TYPE_DOMAIN_CONTACT"
 
+-- | Returns SourceType.OTHER_CONTACT.
+pattern PeopleUpdateContactSources_READSOURCETYPEOTHERCONTACT :: PeopleUpdateContactSources
+pattern PeopleUpdateContactSources_READSOURCETYPEOTHERCONTACT = PeopleUpdateContactSources "READ_SOURCE_TYPE_OTHER_CONTACT"
+
 {-# COMPLETE
   PeopleUpdateContactSources_READSOURCETYPEUNSPECIFIED,
   PeopleUpdateContactSources_READSOURCETYPEPROFILE,
   PeopleUpdateContactSources_READSOURCETYPECONTACT,
   PeopleUpdateContactSources_READSOURCETYPEDOMAINCONTACT,
+  PeopleUpdateContactSources_READSOURCETYPEOTHERCONTACT,
   PeopleUpdateContactSources
   #-}

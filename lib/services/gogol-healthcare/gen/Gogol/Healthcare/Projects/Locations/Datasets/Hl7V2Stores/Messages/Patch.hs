@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Patch
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.messages.patch@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch' request conforms to.
@@ -67,11 +65,11 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch = HealthcarePro
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
+    -- | Output only. Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
-    -- | The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+    -- | Required. The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,35 +80,37 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch = HealthcarePro
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch ::
-  -- |  Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server. See 'name'.
+  -- |  Output only. Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Message ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch
-newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch name payload =
-  HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch =
+    Rs HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch =
       Message
   type
     Scopes
       HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch {..} =
       go

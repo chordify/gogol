@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ReplicaPool.Pools.Updatetemplate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ReplicaPool.Pools.Updatetemplate
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ReplicaPool.Types
 
 -- | A resource alias for @replicapool.pools.updatetemplate@ method which the
@@ -92,10 +90,7 @@ newReplicaPoolPoolsUpdatetemplate payload poolName projectName zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ReplicaPoolPoolsUpdatetemplate
-  where
+instance Core.GoogleRequest ReplicaPoolPoolsUpdatetemplate where
   type Rs ReplicaPoolPoolsUpdatetemplate = ()
   type
     Scopes ReplicaPoolPoolsUpdatetemplate =
@@ -114,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ReplicaPoolPoolsUpdatetemplateResource
-          )
+          (Core.Proxy :: Core.Proxy ReplicaPoolPoolsUpdatetemplateResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.PretargetingConfig.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.PretargetingConfig.Update
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.pretargetingConfig.update@ method which the
 -- 'AdExchangeBuyerPretargetingConfigUpdate' request conforms to.
@@ -76,36 +74,34 @@ newAdExchangeBuyerPretargetingConfigUpdate ::
   -- |  Multipart request metadata. See 'payload'.
   PretargetingConfig ->
   AdExchangeBuyerPretargetingConfigUpdate
-newAdExchangeBuyerPretargetingConfigUpdate accountId configId payload =
-  AdExchangeBuyerPretargetingConfigUpdate
-    { accountId = accountId,
-      configId = configId,
-      payload = payload
-    }
-
-instance
-  Core.GoogleRequest
+newAdExchangeBuyerPretargetingConfigUpdate
+  accountId
+  configId
+  payload =
     AdExchangeBuyerPretargetingConfigUpdate
-  where
+      { accountId = accountId,
+        configId = configId,
+        payload = payload
+      }
+
+instance Core.GoogleRequest AdExchangeBuyerPretargetingConfigUpdate where
   type
     Rs AdExchangeBuyerPretargetingConfigUpdate =
       PretargetingConfig
   type
     Scopes AdExchangeBuyerPretargetingConfigUpdate =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyerPretargetingConfigUpdate {..} =
-      go
-        accountId
-        configId
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyerPretargetingConfigUpdateResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyerPretargetingConfigUpdate {..} =
+    go
+      accountId
+      configId
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyerPretargetingConfigUpdateResource
+          )
+          Core.mempty

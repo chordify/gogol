@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Liasettings.Setposdataprovider
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Liasettings.Setposdataprovider
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.liasettings.setposdataprovider@ method which the
@@ -60,9 +58,7 @@ type ContentLiasettingsSetposdataproviderResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              LiasettingsSetPosDataProviderResponse
+    Core.:> Core.Post '[Core.JSON] LiasettingsSetPosDataProviderResponse
 
 -- | Sets the POS data provider for the specified country.
 --
@@ -100,50 +96,48 @@ newContentLiasettingsSetposdataprovider ::
   -- |  The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and @accountId@ must be the ID of a sub-account of this account. See 'merchantId'.
   Core.Word64 ->
   ContentLiasettingsSetposdataprovider
-newContentLiasettingsSetposdataprovider accountId country merchantId =
-  ContentLiasettingsSetposdataprovider
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      country = country,
-      merchantId = merchantId,
-      posDataProviderId = Core.Nothing,
-      posExternalAccountId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newContentLiasettingsSetposdataprovider
+  accountId
+  country
+  merchantId =
     ContentLiasettingsSetposdataprovider
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        country = country,
+        merchantId = merchantId,
+        posDataProviderId = Core.Nothing,
+        posExternalAccountId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ContentLiasettingsSetposdataprovider where
   type
     Rs ContentLiasettingsSetposdataprovider =
       LiasettingsSetPosDataProviderResponse
   type
     Scopes ContentLiasettingsSetposdataprovider =
       '[Content'FullControl]
-  requestClient
-    ContentLiasettingsSetposdataprovider {..} =
-      go
-        merchantId
-        accountId
-        (Core.Just country)
-        xgafv
-        accessToken
-        callback
-        posDataProviderId
-        posExternalAccountId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        shoppingContentService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContentLiasettingsSetposdataproviderResource
-            )
-            Core.mempty
+  requestClient ContentLiasettingsSetposdataprovider {..} =
+    go
+      merchantId
+      accountId
+      (Core.Just country)
+      xgafv
+      accessToken
+      callback
+      posDataProviderId
+      posExternalAccountId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      shoppingContentService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContentLiasettingsSetposdataproviderResource
+          )
+          Core.mempty

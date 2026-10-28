@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Script.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Script.Internal.Product
@@ -188,7 +186,7 @@ module Gogol.Script.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Script.Internal.Sum
 
 -- | The Content resource.
@@ -241,7 +239,10 @@ data CreateProjectRequest = CreateProjectRequest
 newCreateProjectRequest ::
   CreateProjectRequest
 newCreateProjectRequest =
-  CreateProjectRequest {parentId = Core.Nothing, title = Core.Nothing}
+  CreateProjectRequest
+    { parentId = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON CreateProjectRequest where
   parseJSON =
@@ -304,8 +305,7 @@ instance Core.ToJSON Deployment where
   toJSON Deployment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deploymentConfig" Core..=)
-              Core.<$> deploymentConfig,
+          [ ("deploymentConfig" Core..=) Core.<$> deploymentConfig,
             ("deploymentId" Core..=) Core.<$> deploymentId,
             ("entryPoints" Core..=) Core.<$> entryPoints,
             ("updateTime" Core..=) Core.<$> updateTime
@@ -355,8 +355,7 @@ instance Core.ToJSON DeploymentConfig where
     Core.object
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
-            ("manifestFileName" Core..=)
-              Core.<$> manifestFileName,
+            ("manifestFileName" Core..=) Core.<$> manifestFileName,
             ("scriptId" Core..=) Core.<$> scriptId,
             ("versionNumber" Core..=) Core.<$> versionNumber
           ]
@@ -374,8 +373,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -441,20 +439,18 @@ newtype ExecuteStreamResponse = ExecuteStreamResponse
 -- | Creates a value of 'ExecuteStreamResponse' with the minimum fields required to make a request.
 newExecuteStreamResponse ::
   ExecuteStreamResponse
-newExecuteStreamResponse = ExecuteStreamResponse {result = Core.Nothing}
+newExecuteStreamResponse =
+  ExecuteStreamResponse {result = Core.Nothing}
 
 instance Core.FromJSON ExecuteStreamResponse where
   parseJSON =
     Core.withObject
       "ExecuteStreamResponse"
-      ( \o ->
-          ExecuteStreamResponse Core.<$> (o Core..:? "result")
-      )
+      (\o -> ExecuteStreamResponse Core.<$> (o Core..:? "result"))
 
 instance Core.ToJSON ExecuteStreamResponse where
   toJSON ExecuteStreamResponse {..} =
-    Core.object
-      (Core.catMaybes [("result" Core..=) Core.<$> result])
+    Core.object (Core.catMaybes [("result" Core..=) Core.<$> result])
 
 -- | An object that provides information about the nature of an error resulting from an attempted execution of a script function using the Apps Script API. If a run call succeeds but the script function (or Apps Script itself) throws an exception, the response body\'s error field contains a Status object. The @Status@ object\'s @details@ field contains an array with a single one of these @ExecutionError@ objects.
 --
@@ -568,14 +564,11 @@ instance Core.FromJSON ExecutionResponse where
   parseJSON =
     Core.withObject
       "ExecutionResponse"
-      ( \o ->
-          ExecutionResponse Core.<$> (o Core..:? "result")
-      )
+      (\o -> ExecutionResponse Core.<$> (o Core..:? "result"))
 
 instance Core.ToJSON ExecutionResponse where
   toJSON ExecutionResponse {..} =
-    Core.object
-      (Core.catMaybes [("result" Core..=) Core.<$> result])
+    Core.object (Core.catMaybes [("result" Core..=) Core.<$> result])
 
 -- | An individual file within a script project. A file is a third-party source code created by one or more developers. It can be a server-side JS code, HTML, or a configuration file. Each script project can contain multiple files.
 --
@@ -673,10 +666,7 @@ newGoogleAppsScriptTypeAddOnEntryPoint =
       title = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeAddOnEntryPoint
-  where
+instance Core.FromJSON GoogleAppsScriptTypeAddOnEntryPoint where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeAddOnEntryPoint"
@@ -690,18 +680,14 @@ instance
             Core.<*> (o Core..:? "title")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsScriptTypeAddOnEntryPoint
-  where
+instance Core.ToJSON GoogleAppsScriptTypeAddOnEntryPoint where
   toJSON GoogleAppsScriptTypeAddOnEntryPoint {..} =
     Core.object
       ( Core.catMaybes
           [ ("addOnType" Core..=) Core.<$> addOnType,
             ("description" Core..=) Core.<$> description,
             ("helpUrl" Core..=) Core.<$> helpUrl,
-            ("postInstallTipUrl" Core..=)
-              Core.<$> postInstallTipUrl,
+            ("postInstallTipUrl" Core..=) Core.<$> postInstallTipUrl,
             ("reportIssueUrl" Core..=) Core.<$> reportIssueUrl,
             ("title" Core..=) Core.<$> title
           ]
@@ -722,10 +708,7 @@ newGoogleAppsScriptTypeExecutionApiConfig ::
 newGoogleAppsScriptTypeExecutionApiConfig =
   GoogleAppsScriptTypeExecutionApiConfig {access = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeExecutionApiConfig
-  where
+instance Core.FromJSON GoogleAppsScriptTypeExecutionApiConfig where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeExecutionApiConfig"
@@ -734,13 +717,9 @@ instance
             Core.<$> (o Core..:? "access")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsScriptTypeExecutionApiConfig
-  where
+instance Core.ToJSON GoogleAppsScriptTypeExecutionApiConfig where
   toJSON GoogleAppsScriptTypeExecutionApiConfig {..} =
-    Core.object
-      (Core.catMaybes [("access" Core..=) Core.<$> access])
+    Core.object (Core.catMaybes [("access" Core..=) Core.<$> access])
 
 -- | An API executable entry point.
 --
@@ -755,12 +734,12 @@ newtype GoogleAppsScriptTypeExecutionApiEntryPoint = GoogleAppsScriptTypeExecuti
 newGoogleAppsScriptTypeExecutionApiEntryPoint ::
   GoogleAppsScriptTypeExecutionApiEntryPoint
 newGoogleAppsScriptTypeExecutionApiEntryPoint =
-  GoogleAppsScriptTypeExecutionApiEntryPoint {entryPointConfig = Core.Nothing}
+  GoogleAppsScriptTypeExecutionApiEntryPoint
+    { entryPointConfig =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeExecutionApiEntryPoint
-  where
+instance Core.FromJSON GoogleAppsScriptTypeExecutionApiEntryPoint where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeExecutionApiEntryPoint"
@@ -769,16 +748,11 @@ instance
             Core.<$> (o Core..:? "entryPointConfig")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsScriptTypeExecutionApiEntryPoint
-  where
+instance Core.ToJSON GoogleAppsScriptTypeExecutionApiEntryPoint where
   toJSON GoogleAppsScriptTypeExecutionApiEntryPoint {..} =
     Core.object
       ( Core.catMaybes
-          [ ("entryPointConfig" Core..=)
-              Core.<$> entryPointConfig
-          ]
+          [("entryPointConfig" Core..=) Core.<$> entryPointConfig]
       )
 
 -- | Represents a function in a script project.
@@ -796,7 +770,10 @@ data GoogleAppsScriptTypeFunction = GoogleAppsScriptTypeFunction
 newGoogleAppsScriptTypeFunction ::
   GoogleAppsScriptTypeFunction
 newGoogleAppsScriptTypeFunction =
-  GoogleAppsScriptTypeFunction {name = Core.Nothing, parameters = Core.Nothing}
+  GoogleAppsScriptTypeFunction
+    { name = Core.Nothing,
+      parameters = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleAppsScriptTypeFunction where
   parseJSON =
@@ -832,22 +809,17 @@ newGoogleAppsScriptTypeFunctionSet ::
 newGoogleAppsScriptTypeFunctionSet =
   GoogleAppsScriptTypeFunctionSet {values = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeFunctionSet
-  where
+instance Core.FromJSON GoogleAppsScriptTypeFunctionSet where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeFunctionSet"
       ( \o ->
-          GoogleAppsScriptTypeFunctionSet
-            Core.<$> (o Core..:? "values")
+          GoogleAppsScriptTypeFunctionSet Core.<$> (o Core..:? "values")
       )
 
 instance Core.ToJSON GoogleAppsScriptTypeFunctionSet where
   toJSON GoogleAppsScriptTypeFunctionSet {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Representation of a single script process execution that was started from the script editor, a trigger, an application, or using the Apps Script API. This is distinct from the @Operation@ resource, which only represents executions started via the Apps Script API.
 --
@@ -863,6 +835,8 @@ data GoogleAppsScriptTypeProcess = GoogleAppsScriptTypeProcess
     processType :: (Core.Maybe GoogleAppsScriptTypeProcess_ProcessType),
     -- | Name of the script being executed.
     projectName :: (Core.Maybe Core.Text),
+    -- | Which version of maestro to use to execute the script.
+    runtimeVersion :: (Core.Maybe GoogleAppsScriptTypeProcess_RuntimeVersion),
     -- | Time the execution started.
     startTime :: (Core.Maybe Core.DateTime),
     -- | The executing users access level to the script.
@@ -880,6 +854,7 @@ newGoogleAppsScriptTypeProcess =
       processStatus = Core.Nothing,
       processType = Core.Nothing,
       projectName = Core.Nothing,
+      runtimeVersion = Core.Nothing,
       startTime = Core.Nothing,
       userAccessLevel = Core.Nothing
     }
@@ -895,6 +870,7 @@ instance Core.FromJSON GoogleAppsScriptTypeProcess where
             Core.<*> (o Core..:? "processStatus")
             Core.<*> (o Core..:? "processType")
             Core.<*> (o Core..:? "projectName")
+            Core.<*> (o Core..:? "runtimeVersion")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "userAccessLevel")
       )
@@ -908,9 +884,9 @@ instance Core.ToJSON GoogleAppsScriptTypeProcess where
             ("processStatus" Core..=) Core.<$> processStatus,
             ("processType" Core..=) Core.<$> processType,
             ("projectName" Core..=) Core.<$> projectName,
+            ("runtimeVersion" Core..=) Core.<$> runtimeVersion,
             ("startTime" Core..=) Core.<$> startTime,
-            ("userAccessLevel" Core..=)
-              Core.<$> userAccessLevel
+            ("userAccessLevel" Core..=) Core.<$> userAccessLevel
           ]
       )
 
@@ -983,10 +959,7 @@ newGoogleAppsScriptTypeWebAppConfig =
       executeAs = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeWebAppConfig
-  where
+instance Core.FromJSON GoogleAppsScriptTypeWebAppConfig where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeWebAppConfig"
@@ -1021,14 +994,12 @@ newGoogleAppsScriptTypeWebAppEntryPoint ::
   GoogleAppsScriptTypeWebAppEntryPoint
 newGoogleAppsScriptTypeWebAppEntryPoint =
   GoogleAppsScriptTypeWebAppEntryPoint
-    { entryPointConfig = Core.Nothing,
+    { entryPointConfig =
+        Core.Nothing,
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsScriptTypeWebAppEntryPoint
-  where
+instance Core.FromJSON GoogleAppsScriptTypeWebAppEntryPoint where
   parseJSON =
     Core.withObject
       "GoogleAppsScriptTypeWebAppEntryPoint"
@@ -1038,15 +1009,11 @@ instance
             Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsScriptTypeWebAppEntryPoint
-  where
+instance Core.ToJSON GoogleAppsScriptTypeWebAppEntryPoint where
   toJSON GoogleAppsScriptTypeWebAppEntryPoint {..} =
     Core.object
       ( Core.catMaybes
-          [ ("entryPointConfig" Core..=)
-              Core.<$> entryPointConfig,
+          [ ("entryPointConfig" Core..=) Core.<$> entryPointConfig,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -1190,8 +1157,7 @@ instance Core.FromJSON ListValue where
 
 instance Core.ToJSON ListValue where
   toJSON ListValue {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Response with the list of the versions for the specified script project.
 --
@@ -1208,7 +1174,10 @@ data ListVersionsResponse = ListVersionsResponse
 newListVersionsResponse ::
   ListVersionsResponse
 newListVersionsResponse =
-  ListVersionsResponse {nextPageToken = Core.Nothing, versions = Core.Nothing}
+  ListVersionsResponse
+    { nextPageToken = Core.Nothing,
+      versions = Core.Nothing
+    }
 
 instance Core.FromJSON ListVersionsResponse where
   parseJSON =
@@ -1268,10 +1237,8 @@ instance Core.ToJSON Metrics where
     Core.object
       ( Core.catMaybes
           [ ("activeUsers" Core..=) Core.<$> activeUsers,
-            ("failedExecutions" Core..=)
-              Core.<$> failedExecutions,
-            ("totalExecutions" Core..=)
-              Core.<$> totalExecutions
+            ("failedExecutions" Core..=) Core.<$> failedExecutions,
+            ("totalExecutions" Core..=) Core.<$> totalExecutions
           ]
       )
 
@@ -1306,9 +1273,7 @@ instance Core.FromJSON MetricsValue where
           MetricsValue
             Core.<$> (o Core..:? "endTime")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MetricsValue where
@@ -1339,7 +1304,11 @@ data Operation = Operation
 newOperation ::
   Operation
 newOperation =
-  Operation {done = Core.Nothing, error = Core.Nothing, response = Core.Nothing}
+  Operation
+    { done = Core.Nothing,
+      error = Core.Nothing,
+      response = Core.Nothing
+    }
 
 instance Core.FromJSON Operation where
   parseJSON =
@@ -1376,19 +1345,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | The script project resource.
 --
@@ -1466,23 +1433,19 @@ newtype ScriptExecutionResult = ScriptExecutionResult
 -- | Creates a value of 'ScriptExecutionResult' with the minimum fields required to make a request.
 newScriptExecutionResult ::
   ScriptExecutionResult
-newScriptExecutionResult = ScriptExecutionResult {returnValue = Core.Nothing}
+newScriptExecutionResult =
+  ScriptExecutionResult {returnValue = Core.Nothing}
 
 instance Core.FromJSON ScriptExecutionResult where
   parseJSON =
     Core.withObject
       "ScriptExecutionResult"
-      ( \o ->
-          ScriptExecutionResult
-            Core.<$> (o Core..:? "returnValue")
-      )
+      (\o -> ScriptExecutionResult Core.<$> (o Core..:? "returnValue"))
 
 instance Core.ToJSON ScriptExecutionResult where
   toJSON ScriptExecutionResult {..} =
     Core.object
-      ( Core.catMaybes
-          [("returnValue" Core..=) Core.<$> returnValue]
-      )
+      (Core.catMaybes [("returnValue" Core..=) Core.<$> returnValue])
 
 -- | A stack trace through the script that shows where the execution failed.
 --
@@ -1499,7 +1462,10 @@ data ScriptStackTraceElement = ScriptStackTraceElement
 newScriptStackTraceElement ::
   ScriptStackTraceElement
 newScriptStackTraceElement =
-  ScriptStackTraceElement {function = Core.Nothing, lineNumber = Core.Nothing}
+  ScriptStackTraceElement
+    { function = Core.Nothing,
+      lineNumber = Core.Nothing
+    }
 
 instance Core.FromJSON ScriptStackTraceElement where
   parseJSON =
@@ -1537,7 +1503,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1573,19 +1543,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | @Struct@ represents a structured data value, consisting of fields which map to dynamically typed values.
 --
@@ -1609,15 +1577,13 @@ instance Core.FromJSON Struct where
 
 instance Core.ToJSON Struct where
   toJSON Struct {..} =
-    Core.object
-      (Core.catMaybes [("fields" Core..=) Core.<$> fields])
+    Core.object (Core.catMaybes [("fields" Core..=) Core.<$> fields])
 
 -- | Unordered map of dynamically typed values.
 --
 -- /See:/ 'newStruct_Fields' smart constructor.
 newtype Struct_Fields = Struct_Fields
-  { -- |
-    additional :: (Core.HashMap Core.Text Value)
+  { additional :: (Core.HashMap Core.Text Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1626,15 +1592,14 @@ newStruct_Fields ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Value ->
   Struct_Fields
-newStruct_Fields additional = Struct_Fields {additional = additional}
+newStruct_Fields additional =
+  Struct_Fields {additional = additional}
 
 instance Core.FromJSON Struct_Fields where
   parseJSON =
     Core.withObject
       "Struct_Fields"
-      ( \o ->
-          Struct_Fields Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Struct_Fields Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Struct_Fields where
   toJSON Struct_Fields {..} = Core.toJSON additional
@@ -1659,17 +1624,14 @@ instance Core.FromJSON UpdateDeploymentRequest where
     Core.withObject
       "UpdateDeploymentRequest"
       ( \o ->
-          UpdateDeploymentRequest
-            Core.<$> (o Core..:? "deploymentConfig")
+          UpdateDeploymentRequest Core.<$> (o Core..:? "deploymentConfig")
       )
 
 instance Core.ToJSON UpdateDeploymentRequest where
   toJSON UpdateDeploymentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deploymentConfig" Core..=)
-              Core.<$> deploymentConfig
-          ]
+          [("deploymentConfig" Core..=) Core.<$> deploymentConfig]
       )
 
 -- | @Value@ represents a dynamically typed value which is the outcome of an executed script.
@@ -1721,9 +1683,7 @@ instance Core.FromJSON Value where
           Value
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "bytesValue")
-            Core.<*> ( o Core..:? "dateValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dateValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "listValue")
             Core.<*> (o Core..:? "nullValue")
             Core.<*> (o Core..:? "numberValue")
@@ -1738,8 +1698,7 @@ instance Core.ToJSON Value where
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
             ("bytesValue" Core..=) Core.<$> bytesValue,
-            ("dateValue" Core..=) Core.. Core.AsText
-              Core.<$> dateValue,
+            ("dateValue" Core..=) Core.. Core.AsText Core.<$> dateValue,
             ("listValue" Core..=) Core.<$> listValue,
             ("nullValue" Core..=) Core.<$> nullValue,
             ("numberValue" Core..=) Core.<$> numberValue,
@@ -1763,15 +1722,14 @@ newValue_ProtoValue ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Value_ProtoValue
-newValue_ProtoValue additional = Value_ProtoValue {additional = additional}
+newValue_ProtoValue additional =
+  Value_ProtoValue {additional = additional}
 
 instance Core.FromJSON Value_ProtoValue where
   parseJSON =
     Core.withObject
       "Value_ProtoValue"
-      ( \o ->
-          Value_ProtoValue Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Value_ProtoValue Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Value_ProtoValue where
   toJSON Value_ProtoValue {..} = Core.toJSON additional

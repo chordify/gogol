@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Permissions.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a permission for a file or shared drive. For more information on creating permissions, see Share files, folders & drives.
+-- Creates a permission for a file or shared drive. __Warning:__ Concurrent permissions operations on the same file are not supported; only the last update is applied.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.create@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.permissions.create@.
 module Gogol.Drive.Permissions.Create
   ( -- * Resource
     DrivePermissionsCreateResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Permissions.Create
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.permissions.create@ method which the
 -- 'DrivePermissionsCreate' request conforms to.
@@ -50,6 +48,9 @@ type DrivePermissionsCreateResource =
     Core.:> "files"
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> "permissions"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "emailMessage" Core.Text
     Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
     Core.:> Core.QueryParam "moveToNewOwnersRoot" Core.Bool
@@ -57,22 +58,30 @@ type DrivePermissionsCreateResource =
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
     Core.:> Core.QueryParam "transferOwnership" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "useDomainAdminAccess" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Permission
     Core.:> Core.Post '[Core.JSON] Permission
 
--- | Creates a permission for a file or shared drive. For more information on creating permissions, see Share files, folders & drives.
+-- | Creates a permission for a file or shared drive. __Warning:__ Concurrent permissions operations on the same file are not supported; only the last update is applied.
 --
 -- /See:/ 'newDrivePermissionsCreate' smart constructor.
 data DrivePermissionsCreate = DrivePermissionsCreate
-  { -- | A plain text custom message to include in the notification email.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | A plain text custom message to include in the notification email.
     emailMessage :: (Core.Maybe Core.Text),
-    -- | Deprecated. See moveToNewOwnersRoot for details.
+    -- | Deprecated: See @moveToNewOwnersRoot@ for details.
     enforceSingleParent :: Core.Bool,
     -- | The ID of the file or shared drive.
     fileId :: Core.Text,
-    -- | This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to true, the item will be moved to the new owner\'s My Drive root folder and all prior parents removed. If set to false, parents are not changed.
+    -- | This parameter will only take effect if the item is not in a shared drive and the request is attempting to transfer the ownership of the item. If set to @true@, the item will be moved to the new owner\'s My Drive root folder and all prior parents removed. If set to @false@, parents are not changed.
     moveToNewOwnersRoot :: Core.Bool,
     -- | Multipart request metadata.
     payload :: Permission,
@@ -80,10 +89,14 @@ data DrivePermissionsCreate = DrivePermissionsCreate
     sendNotificationEmail :: (Core.Maybe Core.Bool),
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
-    -- | Deprecated use supportsAllDrives instead.
+    -- | Deprecated: Use @supportsAllDrives@ instead.
     supportsTeamDrives :: Core.Bool,
-    -- | Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
+    -- | Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.
     transferOwnership :: Core.Bool,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
     -- | Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
     useDomainAdminAccess :: Core.Bool
   }
@@ -98,7 +111,10 @@ newDrivePermissionsCreate ::
   DrivePermissionsCreate
 newDrivePermissionsCreate fileId payload =
   DrivePermissionsCreate
-    { emailMessage = Core.Nothing,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      emailMessage = Core.Nothing,
       enforceSingleParent = Core.False,
       fileId = fileId,
       moveToNewOwnersRoot = Core.False,
@@ -107,6 +123,8 @@ newDrivePermissionsCreate fileId payload =
       supportsAllDrives = Core.False,
       supportsTeamDrives = Core.False,
       transferOwnership = Core.False,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
       useDomainAdminAccess = Core.False
     }
 
@@ -118,6 +136,9 @@ instance Core.GoogleRequest DrivePermissionsCreate where
   requestClient DrivePermissionsCreate {..} =
     go
       fileId
+      xgafv
+      accessToken
+      callback
       emailMessage
       (Core.Just enforceSingleParent)
       (Core.Just moveToNewOwnersRoot)
@@ -125,6 +146,8 @@ instance Core.GoogleRequest DrivePermissionsCreate where
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
       (Core.Just transferOwnership)
+      uploadType
+      uploadProtocol
       (Core.Just useDomainAdminAccess)
       (Core.Just Core.AltJSON)
       payload
@@ -132,7 +155,5 @@ instance Core.GoogleRequest DrivePermissionsCreate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DrivePermissionsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy DrivePermissionsCreateResource)
           Core.mempty

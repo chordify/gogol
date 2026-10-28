@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Create
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.create@ method which the
 -- 'FireStoreProjectsDatabasesCreate' request conforms to.
@@ -55,9 +53,7 @@ type FireStoreProjectsDatabasesCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleFirestoreAdminV1Database
+    Core.:> Core.ReqBody '[Core.JSON] GoogleFirestoreAdminV1Database
     Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Create a database.
@@ -70,7 +66,7 @@ data FireStoreProjectsDatabasesCreate = FireStoreProjectsDatabasesCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The ID to use for the database, which will become the final component of the database\'s resource name. The value must be set to \"(default)\".
+    -- | Required. The ID to use for the database, which will become the final component of the database\'s resource name. This value should be 4-63 characters. Valid characters are \/a-z-\/ with first character a letter and the last a letter or a number. Must not be UUID-like \/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\/. \"(default)\" database ID is also valid.
     databaseId :: (Core.Maybe Core.Text),
     -- | Required. A parent name of the form @projects\/{project_id}@
     parent :: Core.Text,
@@ -102,10 +98,7 @@ newFireStoreProjectsDatabasesCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FireStoreProjectsDatabasesCreate
-  where
+instance Core.GoogleRequest FireStoreProjectsDatabasesCreate where
   type
     Rs FireStoreProjectsDatabasesCreate =
       GoogleLongrunningOperation
@@ -127,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FireStoreProjectsDatabasesCreateResource
-          )
+          (Core.Proxy :: Core.Proxy FireStoreProjectsDatabasesCreateResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeAnalytics.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTubeAnalytics.Internal.Sum
@@ -56,7 +54,7 @@ module Gogol.YouTubeAnalytics.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -129,35 +127,27 @@ newtype Errors_Code = Errors_Code {fromErrors_Code :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Errors_Code_BADREQUEST :: Errors_Code
 pattern Errors_Code_BADREQUEST = Errors_Code "BAD_REQUEST"
 
--- |
 pattern Errors_Code_Forbidden :: Errors_Code
 pattern Errors_Code_Forbidden = Errors_Code "FORBIDDEN"
 
--- |
 pattern Errors_Code_NOTFOUND :: Errors_Code
 pattern Errors_Code_NOTFOUND = Errors_Code "NOT_FOUND"
 
--- |
 pattern Errors_Code_Conflict :: Errors_Code
 pattern Errors_Code_Conflict = Errors_Code "CONFLICT"
 
--- |
 pattern Errors_Code_Gone :: Errors_Code
 pattern Errors_Code_Gone = Errors_Code "GONE"
 
--- |
 pattern Errors_Code_PRECONDITIONFAILED :: Errors_Code
 pattern Errors_Code_PRECONDITIONFAILED = Errors_Code "PRECONDITION_FAILED"
 
--- |
 pattern Errors_Code_INTERNALERROR :: Errors_Code
 pattern Errors_Code_INTERNALERROR = Errors_Code "INTERNAL_ERROR"
 
--- |
 pattern Errors_Code_SERVICEUNAVAILABLE :: Errors_Code
 pattern Errors_Code_SERVICEUNAVAILABLE = Errors_Code "SERVICE_UNAVAILABLE"
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Settings.Cse.Identities.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Settings.Cse.Identities.Patch
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.settings.cse.identities.patch@ method which the
 -- 'GmailUsersSettingsCseIdentitiesPatch' request conforms to.
@@ -104,34 +102,27 @@ newGmailUsersSettingsCseIdentitiesPatch emailAddress payload =
       userId = "me"
     }
 
-instance
-  Core.GoogleRequest
-    GmailUsersSettingsCseIdentitiesPatch
-  where
-  type
-    Rs GmailUsersSettingsCseIdentitiesPatch =
-      CseIdentity
+instance Core.GoogleRequest GmailUsersSettingsCseIdentitiesPatch where
+  type Rs GmailUsersSettingsCseIdentitiesPatch = CseIdentity
   type
     Scopes GmailUsersSettingsCseIdentitiesPatch =
       '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
-  requestClient
-    GmailUsersSettingsCseIdentitiesPatch {..} =
-      go
-        userId
-        emailAddress
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        gmailService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GmailUsersSettingsCseIdentitiesPatchResource
-            )
-            Core.mempty
+  requestClient GmailUsersSettingsCseIdentitiesPatch {..} =
+    go
+      userId
+      emailAddress
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      gmailService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GmailUsersSettingsCseIdentitiesPatchResource
+          )
+          Core.mempty

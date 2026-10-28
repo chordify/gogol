@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Groups.Memberships.CheckTransitiveMembership
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.memberships.checkTransitiveMembership@ method which the
 -- 'CloudIdentityGroupsMembershipsCheckTransitiveMembership' request conforms to.
@@ -55,9 +53,7 @@ type CloudIdentityGroupsMembershipsCheckTransitiveMembershipResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              CheckTransitiveMembershipResponse
+    Core.:> Core.Get '[Core.JSON] CheckTransitiveMembershipResponse
 
 -- | Check a potential member for membership in a group. __Note:__ This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
 --
@@ -87,7 +83,8 @@ newCloudIdentityGroupsMembershipsCheckTransitiveMembership ::
   CloudIdentityGroupsMembershipsCheckTransitiveMembership
 newCloudIdentityGroupsMembershipsCheckTransitiveMembership parent =
   CloudIdentityGroupsMembershipsCheckTransitiveMembership
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -101,12 +98,10 @@ instance
     CloudIdentityGroupsMembershipsCheckTransitiveMembership
   where
   type
-    Rs
-      CloudIdentityGroupsMembershipsCheckTransitiveMembership =
+    Rs CloudIdentityGroupsMembershipsCheckTransitiveMembership =
       CheckTransitiveMembershipResponse
   type
-    Scopes
-      CloudIdentityGroupsMembershipsCheckTransitiveMembership =
+    Scopes CloudIdentityGroupsMembershipsCheckTransitiveMembership =
       '[ CloudIdentity'Groups,
          CloudIdentity'Groups'Readonly,
          CloudPlatform'FullControl

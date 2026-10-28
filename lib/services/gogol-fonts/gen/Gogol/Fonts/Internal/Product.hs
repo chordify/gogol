@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,18 @@
 
 -- |
 -- Module      : Gogol.Fonts.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Fonts.Internal.Product
-  ( -- * Webfont
+  ( -- * Axis
+    Axis (..),
+    newAxis,
+
+    -- * Webfont
     Webfont (..),
     newWebfont,
 
@@ -41,14 +43,62 @@ module Gogol.Fonts.Internal.Product
 where
 
 import Gogol.Fonts.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | Metadata for a variable font axis.
+--
+-- /See:/ 'newAxis' smart constructor.
+data Axis = Axis
+  { -- | maximum value
+    end :: (Core.Maybe Core.Double),
+    -- | minimum value
+    start :: (Core.Maybe Core.Double),
+    -- | tag name.
+    tag :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Axis' with the minimum fields required to make a request.
+newAxis ::
+  Axis
+newAxis =
+  Axis
+    { end = Core.Nothing,
+      start = Core.Nothing,
+      tag = Core.Nothing
+    }
+
+instance Core.FromJSON Axis where
+  parseJSON =
+    Core.withObject
+      "Axis"
+      ( \o ->
+          Axis
+            Core.<$> (o Core..:? "end")
+            Core.<*> (o Core..:? "start")
+            Core.<*> (o Core..:? "tag")
+      )
+
+instance Core.ToJSON Axis where
+  toJSON Axis {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("end" Core..=) Core.<$> end,
+            ("start" Core..=) Core.<$> start,
+            ("tag" Core..=) Core.<$> tag
+          ]
+      )
 
 -- | Metadata describing a family of fonts.
 --
 -- /See:/ 'newWebfont' smart constructor.
 data Webfont = Webfont
-  { -- | The category of the font.
+  { -- | Axis for variable fonts.
+    axes :: (Core.Maybe [Axis]),
+    -- | The category of the font.
     category :: (Core.Maybe Core.Text),
+    -- | The color format(s) available for this family.
+    colorCapabilities :: (Core.Maybe [Core.Text]),
     -- | The name of the font.
     family :: (Core.Maybe Core.Text),
     -- | The font files (with all supported scripts) for each one of the available variants, as a key : value map.
@@ -57,6 +107,8 @@ data Webfont = Webfont
     kind :: (Core.Maybe Core.Text),
     -- | The date (format \"yyyy-MM-dd\") the font was modified for the last time.
     lastModified :: (Core.Maybe Core.Text),
+    -- | Font URL for menu subset, a subset of the font that is enough to display the font name
+    menu :: (Core.Maybe Core.Text),
     -- | The scripts supported by the font.
     subsets :: (Core.Maybe [Core.Text]),
     -- | The available variants for the font.
@@ -71,11 +123,14 @@ newWebfont ::
   Webfont
 newWebfont =
   Webfont
-    { category = Core.Nothing,
+    { axes = Core.Nothing,
+      category = Core.Nothing,
+      colorCapabilities = Core.Nothing,
       family = Core.Nothing,
       files = Core.Nothing,
       kind = Core.Nothing,
       lastModified = Core.Nothing,
+      menu = Core.Nothing,
       subsets = Core.Nothing,
       variants = Core.Nothing,
       version = Core.Nothing
@@ -87,11 +142,14 @@ instance Core.FromJSON Webfont where
       "Webfont"
       ( \o ->
           Webfont
-            Core.<$> (o Core..:? "category")
+            Core.<$> (o Core..:? "axes")
+            Core.<*> (o Core..:? "category")
+            Core.<*> (o Core..:? "colorCapabilities")
             Core.<*> (o Core..:? "family")
             Core.<*> (o Core..:? "files")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "lastModified")
+            Core.<*> (o Core..:? "menu")
             Core.<*> (o Core..:? "subsets")
             Core.<*> (o Core..:? "variants")
             Core.<*> (o Core..:? "version")
@@ -101,11 +159,14 @@ instance Core.ToJSON Webfont where
   toJSON Webfont {..} =
     Core.object
       ( Core.catMaybes
-          [ ("category" Core..=) Core.<$> category,
+          [ ("axes" Core..=) Core.<$> axes,
+            ("category" Core..=) Core.<$> category,
+            ("colorCapabilities" Core..=) Core.<$> colorCapabilities,
             ("family" Core..=) Core.<$> family,
             ("files" Core..=) Core.<$> files,
             ("kind" Core..=) Core.<$> kind,
             ("lastModified" Core..=) Core.<$> lastModified,
+            ("menu" Core..=) Core.<$> menu,
             ("subsets" Core..=) Core.<$> subsets,
             ("variants" Core..=) Core.<$> variants,
             ("version" Core..=) Core.<$> version
@@ -116,8 +177,7 @@ instance Core.ToJSON Webfont where
 --
 -- /See:/ 'newWebfont_Files' smart constructor.
 newtype Webfont_Files = Webfont_Files
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -126,15 +186,14 @@ newWebfont_Files ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Webfont_Files
-newWebfont_Files additional = Webfont_Files {additional = additional}
+newWebfont_Files additional =
+  Webfont_Files {additional = additional}
 
 instance Core.FromJSON Webfont_Files where
   parseJSON =
     Core.withObject
       "Webfont_Files"
-      ( \o ->
-          Webfont_Files Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Webfont_Files Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Webfont_Files where
   toJSON Webfont_Files {..} = Core.toJSON additional
@@ -153,7 +212,8 @@ data WebfontList = WebfontList
 -- | Creates a value of 'WebfontList' with the minimum fields required to make a request.
 newWebfontList ::
   WebfontList
-newWebfontList = WebfontList {items = Core.Nothing, kind = Core.Nothing}
+newWebfontList =
+  WebfontList {items = Core.Nothing, kind = Core.Nothing}
 
 instance Core.FromJSON WebfontList where
   parseJSON =
@@ -161,14 +221,13 @@ instance Core.FromJSON WebfontList where
       "WebfontList"
       ( \o ->
           WebfontList
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON WebfontList where
   toJSON WebfontList {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )

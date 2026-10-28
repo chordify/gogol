@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Discovery.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Discovery.Internal.Product
@@ -77,6 +75,10 @@ module Gogol.Discovery.Internal.Product
     -- * RestDescription_Auth_Oauth2_ScopesAdditional
     RestDescription_Auth_Oauth2_ScopesAdditional (..),
     newRestDescription_Auth_Oauth2_ScopesAdditional,
+
+    -- * RestDescription_EndpointsItem
+    RestDescription_EndpointsItem (..),
+    newRestDescription_EndpointsItem,
 
     -- * RestDescription_Icons
     RestDescription_Icons (..),
@@ -145,7 +147,7 @@ module Gogol.Discovery.Internal.Product
 where
 
 import Gogol.Discovery.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newDirectoryList' smart constructor.
@@ -177,17 +179,14 @@ instance Core.FromJSON DirectoryList where
           DirectoryList
             Core.<$> (o Core..:? "discoveryVersion" Core..!= "v1")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "discovery#directoryList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "discovery#directoryList")
       )
 
 instance Core.ToJSON DirectoryList where
   toJSON DirectoryList {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("discoveryVersion" Core..= discoveryVersion),
+          [ Core.Just ("discoveryVersion" Core..= discoveryVersion),
             ("items" Core..=) Core.<$> items,
             Core.Just ("kind" Core..= kind)
           ]
@@ -254,9 +253,7 @@ instance Core.FromJSON DirectoryList_ItemsItem where
             Core.<*> (o Core..:? "documentationLink")
             Core.<*> (o Core..:? "icons")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "discovery#directoryItem"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "discovery#directoryItem")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "preferred")
@@ -270,10 +267,8 @@ instance Core.ToJSON DirectoryList_ItemsItem where
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
             ("discoveryLink" Core..=) Core.<$> discoveryLink,
-            ("discoveryRestUrl" Core..=)
-              Core.<$> discoveryRestUrl,
-            ("documentationLink" Core..=)
-              Core.<$> documentationLink,
+            ("discoveryRestUrl" Core..=) Core.<$> discoveryRestUrl,
+            ("documentationLink" Core..=) Core.<$> documentationLink,
             ("icons" Core..=) Core.<$> icons,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
@@ -300,7 +295,10 @@ data DirectoryList_ItemsItem_Icons = DirectoryList_ItemsItem_Icons
 newDirectoryList_ItemsItem_Icons ::
   DirectoryList_ItemsItem_Icons
 newDirectoryList_ItemsItem_Icons =
-  DirectoryList_ItemsItem_Icons {x16 = Core.Nothing, x32 = Core.Nothing}
+  DirectoryList_ItemsItem_Icons
+    { x16 = Core.Nothing,
+      x32 = Core.Nothing
+    }
 
 instance Core.FromJSON DirectoryList_ItemsItem_Icons where
   parseJSON =
@@ -308,16 +306,15 @@ instance Core.FromJSON DirectoryList_ItemsItem_Icons where
       "DirectoryList_ItemsItem_Icons"
       ( \o ->
           DirectoryList_ItemsItem_Icons
-            Core.<$> (o Core..:? "x16") Core.<*> (o Core..:? "x32")
+            Core.<$> (o Core..:? "x16")
+            Core.<*> (o Core..:? "x32")
       )
 
 instance Core.ToJSON DirectoryList_ItemsItem_Icons where
   toJSON DirectoryList_ItemsItem_Icons {..} =
     Core.object
       ( Core.catMaybes
-          [ ("x16" Core..=) Core.<$> x16,
-            ("x32" Core..=) Core.<$> x32
-          ]
+          [("x16" Core..=) Core.<$> x16, ("x32" Core..=) Core.<$> x32]
       )
 
 --
@@ -331,10 +328,14 @@ data JsonSchema = JsonSchema
     annotations :: (Core.Maybe JsonSchema_Annotations),
     -- | The default value of this property (if one exists).
     default' :: (Core.Maybe Core.Text),
+    -- | Whether the parameter is deprecated.
+    deprecated :: (Core.Maybe Core.Bool),
     -- | A description of this object.
     description :: (Core.Maybe Core.Text),
     -- | Values this parameter may take (if it is an enum).
     enum :: (Core.Maybe [Core.Text]),
+    -- | The deprecation status for the enums. Each position maps to the corresponding value in the \"enum\" array.
+    enumDeprecated :: (Core.Maybe [Core.Bool]),
     -- | The descriptions for the enums. Each position maps to the corresponding value in the \"enum\" array.
     enumDescriptions :: (Core.Maybe [Core.Text]),
     -- | An additional regular expression or key that helps constrain the value. For more details see: http:\/\/tools.ietf.org\/html\/draft-zyp-json-schema-03#section-5.23
@@ -375,8 +376,10 @@ newJsonSchema =
       additionalProperties = Core.Nothing,
       annotations = Core.Nothing,
       default' = Core.Nothing,
+      deprecated = Core.Nothing,
       description = Core.Nothing,
       enum = Core.Nothing,
+      enumDeprecated = Core.Nothing,
       enumDescriptions = Core.Nothing,
       format = Core.Nothing,
       id = Core.Nothing,
@@ -403,8 +406,10 @@ instance Core.FromJSON JsonSchema where
             Core.<*> (o Core..:? "additionalProperties")
             Core.<*> (o Core..:? "annotations")
             Core.<*> (o Core..:? "default")
+            Core.<*> (o Core..:? "deprecated")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "enum")
+            Core.<*> (o Core..:? "enumDeprecated")
             Core.<*> (o Core..:? "enumDescriptions")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "id")
@@ -426,14 +431,14 @@ instance Core.ToJSON JsonSchema where
     Core.object
       ( Core.catMaybes
           [ ("$ref" Core..=) Core.<$> ref,
-            ("additionalProperties" Core..=)
-              Core.<$> additionalProperties,
+            ("additionalProperties" Core..=) Core.<$> additionalProperties,
             ("annotations" Core..=) Core.<$> annotations,
             ("default" Core..=) Core.<$> default',
+            ("deprecated" Core..=) Core.<$> deprecated,
             ("description" Core..=) Core.<$> description,
             ("enum" Core..=) Core.<$> enum,
-            ("enumDescriptions" Core..=)
-              Core.<$> enumDescriptions,
+            ("enumDeprecated" Core..=) Core.<$> enumDeprecated,
+            ("enumDescriptions" Core..=) Core.<$> enumDescriptions,
             ("format" Core..=) Core.<$> format,
             ("id" Core..=) Core.<$> id,
             ("items" Core..=) Core.<$> items,
@@ -462,23 +467,19 @@ newtype JsonSchema_Annotations = JsonSchema_Annotations
 -- | Creates a value of 'JsonSchema_Annotations' with the minimum fields required to make a request.
 newJsonSchema_Annotations ::
   JsonSchema_Annotations
-newJsonSchema_Annotations = JsonSchema_Annotations {required = Core.Nothing}
+newJsonSchema_Annotations =
+  JsonSchema_Annotations {required = Core.Nothing}
 
 instance Core.FromJSON JsonSchema_Annotations where
   parseJSON =
     Core.withObject
       "JsonSchema_Annotations"
-      ( \o ->
-          JsonSchema_Annotations
-            Core.<$> (o Core..:? "required")
-      )
+      (\o -> JsonSchema_Annotations Core.<$> (o Core..:? "required"))
 
 instance Core.ToJSON JsonSchema_Annotations where
   toJSON JsonSchema_Annotations {..} =
     Core.object
-      ( Core.catMaybes
-          [("required" Core..=) Core.<$> required]
-      )
+      (Core.catMaybes [("required" Core..=) Core.<$> required])
 
 -- | If this is a schema for an object, list the schema for each property of this object.
 --
@@ -501,14 +502,10 @@ instance Core.FromJSON JsonSchema_Properties where
   parseJSON =
     Core.withObject
       "JsonSchema_Properties"
-      ( \o ->
-          JsonSchema_Properties
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> JsonSchema_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON JsonSchema_Properties where
-  toJSON JsonSchema_Properties {..} =
-    Core.toJSON additional
+  toJSON JsonSchema_Properties {..} = Core.toJSON additional
 
 -- | In a variant data type, the value of one property is used to determine how to interpret the entire entity. Its value must exist in a map of descriminant values to schema names.
 --
@@ -525,7 +522,10 @@ data JsonSchema_Variant = JsonSchema_Variant
 newJsonSchema_Variant ::
   JsonSchema_Variant
 newJsonSchema_Variant =
-  JsonSchema_Variant {discriminant = Core.Nothing, map = Core.Nothing}
+  JsonSchema_Variant
+    { discriminant = Core.Nothing,
+      map = Core.Nothing
+    }
 
 instance Core.FromJSON JsonSchema_Variant where
   parseJSON =
@@ -549,9 +549,7 @@ instance Core.ToJSON JsonSchema_Variant where
 --
 -- /See:/ 'newJsonSchema_Variant_MapItem' smart constructor.
 data JsonSchema_Variant_MapItem = JsonSchema_Variant_MapItem
-  { -- |
-    ref :: (Core.Maybe Core.Text),
-    -- |
+  { ref :: (Core.Maybe Core.Text),
     typeValue :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -560,7 +558,10 @@ data JsonSchema_Variant_MapItem = JsonSchema_Variant_MapItem
 newJsonSchema_Variant_MapItem ::
   JsonSchema_Variant_MapItem
 newJsonSchema_Variant_MapItem =
-  JsonSchema_Variant_MapItem {ref = Core.Nothing, typeValue = Core.Nothing}
+  JsonSchema_Variant_MapItem
+    { ref = Core.Nothing,
+      typeValue = Core.Nothing
+    }
 
 instance Core.FromJSON JsonSchema_Variant_MapItem where
   parseJSON =
@@ -600,6 +601,8 @@ data RestDescription = RestDescription
     discoveryVersion :: Core.Text,
     -- | A link to human readable documentation for the API.
     documentationLink :: (Core.Maybe Core.Text),
+    -- | A list of location-based endpoint objects for this API. Each object contains the endpoint URL, location, description and deprecation status.
+    endpoints :: (Core.Maybe [RestDescription_EndpointsItem]),
     -- | The ETag for this response.
     etag :: (Core.Maybe Core.Text),
     -- | Enable exponential backoff for suitable methods in the generated clients.
@@ -642,7 +645,6 @@ data RestDescription = RestDescription
     title :: (Core.Maybe Core.Text),
     -- | The version of this API.
     version :: (Core.Maybe Core.Text),
-    -- |
     versionModule :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -660,6 +662,7 @@ newRestDescription =
       description = Core.Nothing,
       discoveryVersion = "v1",
       documentationLink = Core.Nothing,
+      endpoints = Core.Nothing,
       etag = Core.Nothing,
       exponentialBackoffDefault = Core.Nothing,
       features = Core.Nothing,
@@ -698,14 +701,13 @@ instance Core.FromJSON RestDescription where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "discoveryVersion" Core..!= "v1")
             Core.<*> (o Core..:? "documentationLink")
+            Core.<*> (o Core..:? "endpoints")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "exponentialBackoffDefault")
             Core.<*> (o Core..:? "features")
             Core.<*> (o Core..:? "icons")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "discovery#restDescription"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "discovery#restDescription")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "methods")
             Core.<*> (o Core..:? "name")
@@ -734,10 +736,9 @@ instance Core.ToJSON RestDescription where
             ("batchPath" Core..=) Core.<$> batchPath,
             ("canonicalName" Core..=) Core.<$> canonicalName,
             ("description" Core..=) Core.<$> description,
-            Core.Just
-              ("discoveryVersion" Core..= discoveryVersion),
-            ("documentationLink" Core..=)
-              Core.<$> documentationLink,
+            Core.Just ("discoveryVersion" Core..= discoveryVersion),
+            ("documentationLink" Core..=) Core.<$> documentationLink,
+            ("endpoints" Core..=) Core.<$> endpoints,
             ("etag" Core..=) Core.<$> etag,
             ("exponentialBackoffDefault" Core..=)
               Core.<$> exponentialBackoffDefault,
@@ -776,20 +777,18 @@ newtype RestDescription_Auth = RestDescription_Auth
 -- | Creates a value of 'RestDescription_Auth' with the minimum fields required to make a request.
 newRestDescription_Auth ::
   RestDescription_Auth
-newRestDescription_Auth = RestDescription_Auth {oauth2 = Core.Nothing}
+newRestDescription_Auth =
+  RestDescription_Auth {oauth2 = Core.Nothing}
 
 instance Core.FromJSON RestDescription_Auth where
   parseJSON =
     Core.withObject
       "RestDescription_Auth"
-      ( \o ->
-          RestDescription_Auth Core.<$> (o Core..:? "oauth2")
-      )
+      (\o -> RestDescription_Auth Core.<$> (o Core..:? "oauth2"))
 
 instance Core.ToJSON RestDescription_Auth where
   toJSON RestDescription_Auth {..} =
-    Core.object
-      (Core.catMaybes [("oauth2" Core..=) Core.<$> oauth2])
+    Core.object (Core.catMaybes [("oauth2" Core..=) Core.<$> oauth2])
 
 -- | OAuth 2.0 authentication information.
 --
@@ -810,15 +809,11 @@ instance Core.FromJSON RestDescription_Auth_Oauth2 where
   parseJSON =
     Core.withObject
       "RestDescription_Auth_Oauth2"
-      ( \o ->
-          RestDescription_Auth_Oauth2
-            Core.<$> (o Core..:? "scopes")
-      )
+      (\o -> RestDescription_Auth_Oauth2 Core.<$> (o Core..:? "scopes"))
 
 instance Core.ToJSON RestDescription_Auth_Oauth2 where
   toJSON RestDescription_Auth_Oauth2 {..} =
-    Core.object
-      (Core.catMaybes [("scopes" Core..=) Core.<$> scopes])
+    Core.object (Core.catMaybes [("scopes" Core..=) Core.<$> scopes])
 
 -- | Available OAuth 2.0 scopes.
 --
@@ -836,15 +831,14 @@ newtype RestDescription_Auth_Oauth2_Scopes = RestDescription_Auth_Oauth2_Scopes
 -- | Creates a value of 'RestDescription_Auth_Oauth2_Scopes' with the minimum fields required to make a request.
 newRestDescription_Auth_Oauth2_Scopes ::
   -- |  The scope value. See 'additional'.
-  Core.HashMap Core.Text RestDescription_Auth_Oauth2_ScopesAdditional ->
+  Core.HashMap
+    Core.Text
+    RestDescription_Auth_Oauth2_ScopesAdditional ->
   RestDescription_Auth_Oauth2_Scopes
 newRestDescription_Auth_Oauth2_Scopes additional =
   RestDescription_Auth_Oauth2_Scopes {additional = additional}
 
-instance
-  Core.FromJSON
-    RestDescription_Auth_Oauth2_Scopes
-  where
+instance Core.FromJSON RestDescription_Auth_Oauth2_Scopes where
   parseJSON =
     Core.withObject
       "RestDescription_Auth_Oauth2_Scopes"
@@ -853,10 +847,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RestDescription_Auth_Oauth2_Scopes
-  where
+instance Core.ToJSON RestDescription_Auth_Oauth2_Scopes where
   toJSON RestDescription_Auth_Oauth2_Scopes {..} =
     Core.toJSON additional
 
@@ -873,12 +864,12 @@ newtype RestDescription_Auth_Oauth2_ScopesAdditional = RestDescription_Auth_Oaut
 newRestDescription_Auth_Oauth2_ScopesAdditional ::
   RestDescription_Auth_Oauth2_ScopesAdditional
 newRestDescription_Auth_Oauth2_ScopesAdditional =
-  RestDescription_Auth_Oauth2_ScopesAdditional {description = Core.Nothing}
+  RestDescription_Auth_Oauth2_ScopesAdditional
+    { description =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    RestDescription_Auth_Oauth2_ScopesAdditional
-  where
+instance Core.FromJSON RestDescription_Auth_Oauth2_ScopesAdditional where
   parseJSON =
     Core.withObject
       "RestDescription_Auth_Oauth2_ScopesAdditional"
@@ -887,16 +878,59 @@ instance
             Core.<$> (o Core..:? "description")
       )
 
-instance
-  Core.ToJSON
-    RestDescription_Auth_Oauth2_ScopesAdditional
-  where
-  toJSON
-    RestDescription_Auth_Oauth2_ScopesAdditional {..} =
-      Core.object
-        ( Core.catMaybes
-            [("description" Core..=) Core.<$> description]
-        )
+instance Core.ToJSON RestDescription_Auth_Oauth2_ScopesAdditional where
+  toJSON RestDescription_Auth_Oauth2_ScopesAdditional {..} =
+    Core.object
+      (Core.catMaybes [("description" Core..=) Core.<$> description])
+
+-- | A single endpoint object
+--
+-- /See:/ 'newRestDescription_EndpointsItem' smart constructor.
+data RestDescription_EndpointsItem = RestDescription_EndpointsItem
+  { -- | Whether this endpoint is deprecated
+    deprecated :: (Core.Maybe Core.Bool),
+    -- | A string describing the host designated by the URL
+    description :: (Core.Maybe Core.Text),
+    -- | The URL of the endpoint target host
+    endpointUrl :: (Core.Maybe Core.Text),
+    -- | The location of the endpoint
+    location :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RestDescription_EndpointsItem' with the minimum fields required to make a request.
+newRestDescription_EndpointsItem ::
+  RestDescription_EndpointsItem
+newRestDescription_EndpointsItem =
+  RestDescription_EndpointsItem
+    { deprecated = Core.Nothing,
+      description = Core.Nothing,
+      endpointUrl = Core.Nothing,
+      location = Core.Nothing
+    }
+
+instance Core.FromJSON RestDescription_EndpointsItem where
+  parseJSON =
+    Core.withObject
+      "RestDescription_EndpointsItem"
+      ( \o ->
+          RestDescription_EndpointsItem
+            Core.<$> (o Core..:? "deprecated")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "endpointUrl")
+            Core.<*> (o Core..:? "location")
+      )
+
+instance Core.ToJSON RestDescription_EndpointsItem where
+  toJSON RestDescription_EndpointsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deprecated" Core..=) Core.<$> deprecated,
+            ("description" Core..=) Core.<$> description,
+            ("endpointUrl" Core..=) Core.<$> endpointUrl,
+            ("location" Core..=) Core.<$> location
+          ]
+      )
 
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
@@ -921,16 +955,15 @@ instance Core.FromJSON RestDescription_Icons where
       "RestDescription_Icons"
       ( \o ->
           RestDescription_Icons
-            Core.<$> (o Core..:? "x16") Core.<*> (o Core..:? "x32")
+            Core.<$> (o Core..:? "x16")
+            Core.<*> (o Core..:? "x32")
       )
 
 instance Core.ToJSON RestDescription_Icons where
   toJSON RestDescription_Icons {..} =
     Core.object
       ( Core.catMaybes
-          [ ("x16" Core..=) Core.<$> x16,
-            ("x32" Core..=) Core.<$> x32
-          ]
+          [("x16" Core..=) Core.<$> x16, ("x32" Core..=) Core.<$> x32]
       )
 
 -- | API-level methods for this API.
@@ -954,14 +987,10 @@ instance Core.FromJSON RestDescription_Methods where
   parseJSON =
     Core.withObject
       "RestDescription_Methods"
-      ( \o ->
-          RestDescription_Methods
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RestDescription_Methods Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RestDescription_Methods where
-  toJSON RestDescription_Methods {..} =
-    Core.toJSON additional
+  toJSON RestDescription_Methods {..} = Core.toJSON additional
 
 -- | Common parameters that apply across all apis.
 --
@@ -985,13 +1014,11 @@ instance Core.FromJSON RestDescription_Parameters where
     Core.withObject
       "RestDescription_Parameters"
       ( \o ->
-          RestDescription_Parameters
-            Core.<$> (Core.parseJSONObject o)
+          RestDescription_Parameters Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON RestDescription_Parameters where
-  toJSON RestDescription_Parameters {..} =
-    Core.toJSON additional
+  toJSON RestDescription_Parameters {..} = Core.toJSON additional
 
 -- | The resources in this API.
 --
@@ -1015,13 +1042,11 @@ instance Core.FromJSON RestDescription_Resources where
     Core.withObject
       "RestDescription_Resources"
       ( \o ->
-          RestDescription_Resources
-            Core.<$> (Core.parseJSONObject o)
+          RestDescription_Resources Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON RestDescription_Resources where
-  toJSON RestDescription_Resources {..} =
-    Core.toJSON additional
+  toJSON RestDescription_Resources {..} = Core.toJSON additional
 
 -- | The schemas for this API.
 --
@@ -1044,19 +1069,19 @@ instance Core.FromJSON RestDescription_Schemas where
   parseJSON =
     Core.withObject
       "RestDescription_Schemas"
-      ( \o ->
-          RestDescription_Schemas
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RestDescription_Schemas Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RestDescription_Schemas where
-  toJSON RestDescription_Schemas {..} =
-    Core.toJSON additional
+  toJSON RestDescription_Schemas {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newRestMethod' smart constructor.
 data RestMethod = RestMethod
-  { -- | Description of this method.
+  { -- | The API Version of this method, as passed in via the @X-Goog-Api-Version@ header or @$apiVersion@ query parameter.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Whether this method is deprecated.
+    deprecated :: (Core.Maybe Core.Bool),
+    -- | Description of this method.
     description :: (Core.Maybe Core.Text),
     -- | Whether this method requires an ETag to be specified. The ETag is sent as an HTTP If-Match or If-None-Match header.
     etagRequired :: (Core.Maybe Core.Bool),
@@ -1096,7 +1121,9 @@ newRestMethod ::
   RestMethod
 newRestMethod =
   RestMethod
-    { description = Core.Nothing,
+    { apiVersion = Core.Nothing,
+      deprecated = Core.Nothing,
+      description = Core.Nothing,
       etagRequired = Core.Nothing,
       flatPath = Core.Nothing,
       httpMethod = Core.Nothing,
@@ -1120,7 +1147,9 @@ instance Core.FromJSON RestMethod where
       "RestMethod"
       ( \o ->
           RestMethod
-            Core.<$> (o Core..:? "description")
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "deprecated")
+            Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etagRequired")
             Core.<*> (o Core..:? "flatPath")
             Core.<*> (o Core..:? "httpMethod")
@@ -1142,7 +1171,9 @@ instance Core.ToJSON RestMethod where
   toJSON RestMethod {..} =
     Core.object
       ( Core.catMaybes
-          [ ("description" Core..=) Core.<$> description,
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("deprecated" Core..=) Core.<$> deprecated,
+            ("description" Core..=) Core.<$> description,
             ("etagRequired" Core..=) Core.<$> etagRequired,
             ("flatPath" Core..=) Core.<$> flatPath,
             ("httpMethod" Core..=) Core.<$> httpMethod,
@@ -1154,12 +1185,9 @@ instance Core.ToJSON RestMethod where
             ("request" Core..=) Core.<$> request',
             ("response" Core..=) Core.<$> response,
             ("scopes" Core..=) Core.<$> scopes,
-            ("supportsMediaDownload" Core..=)
-              Core.<$> supportsMediaDownload,
-            ("supportsMediaUpload" Core..=)
-              Core.<$> supportsMediaUpload,
-            ("supportsSubscription" Core..=)
-              Core.<$> supportsSubscription,
+            ("supportsMediaDownload" Core..=) Core.<$> supportsMediaDownload,
+            ("supportsMediaUpload" Core..=) Core.<$> supportsMediaUpload,
+            ("supportsSubscription" Core..=) Core.<$> supportsSubscription,
             ("useMediaDownloadService" Core..=)
               Core.<$> useMediaDownloadService
           ]
@@ -1229,10 +1257,7 @@ newRestMethod_MediaUpload_Protocols =
       simple = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RestMethod_MediaUpload_Protocols
-  where
+instance Core.FromJSON RestMethod_MediaUpload_Protocols where
   parseJSON =
     Core.withObject
       "RestMethod_MediaUpload_Protocols"
@@ -1271,10 +1296,7 @@ newRestMethod_MediaUpload_Protocols_Resumable =
       path = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RestMethod_MediaUpload_Protocols_Resumable
-  where
+instance Core.FromJSON RestMethod_MediaUpload_Protocols_Resumable where
   parseJSON =
     Core.withObject
       "RestMethod_MediaUpload_Protocols_Resumable"
@@ -1284,10 +1306,7 @@ instance
             Core.<*> (o Core..:? "path")
       )
 
-instance
-  Core.ToJSON
-    RestMethod_MediaUpload_Protocols_Resumable
-  where
+instance Core.ToJSON RestMethod_MediaUpload_Protocols_Resumable where
   toJSON RestMethod_MediaUpload_Protocols_Resumable {..} =
     Core.object
       ( Core.catMaybes
@@ -1316,10 +1335,7 @@ newRestMethod_MediaUpload_Protocols_Simple =
       path = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RestMethod_MediaUpload_Protocols_Simple
-  where
+instance Core.FromJSON RestMethod_MediaUpload_Protocols_Simple where
   parseJSON =
     Core.withObject
       "RestMethod_MediaUpload_Protocols_Simple"
@@ -1329,10 +1345,7 @@ instance
             Core.<*> (o Core..:? "path")
       )
 
-instance
-  Core.ToJSON
-    RestMethod_MediaUpload_Protocols_Simple
-  where
+instance Core.ToJSON RestMethod_MediaUpload_Protocols_Simple where
   toJSON RestMethod_MediaUpload_Protocols_Simple {..} =
     Core.object
       ( Core.catMaybes
@@ -1362,14 +1375,10 @@ instance Core.FromJSON RestMethod_Parameters where
   parseJSON =
     Core.withObject
       "RestMethod_Parameters"
-      ( \o ->
-          RestMethod_Parameters
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RestMethod_Parameters Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RestMethod_Parameters where
-  toJSON RestMethod_Parameters {..} =
-    Core.toJSON additional
+  toJSON RestMethod_Parameters {..} = Core.toJSON additional
 
 -- | The schema for the request.
 --
@@ -1386,7 +1395,10 @@ data RestMethod_Request = RestMethod_Request
 newRestMethod_Request ::
   RestMethod_Request
 newRestMethod_Request =
-  RestMethod_Request {ref = Core.Nothing, parameterName = Core.Nothing}
+  RestMethod_Request
+    { ref = Core.Nothing,
+      parameterName = Core.Nothing
+    }
 
 instance Core.FromJSON RestMethod_Request where
   parseJSON =
@@ -1425,19 +1437,18 @@ instance Core.FromJSON RestMethod_Response where
   parseJSON =
     Core.withObject
       "RestMethod_Response"
-      ( \o ->
-          RestMethod_Response Core.<$> (o Core..:? "$ref")
-      )
+      (\o -> RestMethod_Response Core.<$> (o Core..:? "$ref"))
 
 instance Core.ToJSON RestMethod_Response where
   toJSON RestMethod_Response {..} =
-    Core.object
-      (Core.catMaybes [("$ref" Core..=) Core.<$> ref])
+    Core.object (Core.catMaybes [("$ref" Core..=) Core.<$> ref])
 
 --
 -- /See:/ 'newRestResource' smart constructor.
 data RestResource = RestResource
-  { -- | Methods on this resource.
+  { -- | Whether this resource is deprecated.
+    deprecated :: (Core.Maybe Core.Bool),
+    -- | Methods on this resource.
     methods :: (Core.Maybe RestResource_Methods),
     -- | Sub-resources on this resource.
     resources :: (Core.Maybe RestResource_Resources)
@@ -1448,7 +1459,11 @@ data RestResource = RestResource
 newRestResource ::
   RestResource
 newRestResource =
-  RestResource {methods = Core.Nothing, resources = Core.Nothing}
+  RestResource
+    { deprecated = Core.Nothing,
+      methods = Core.Nothing,
+      resources = Core.Nothing
+    }
 
 instance Core.FromJSON RestResource where
   parseJSON =
@@ -1456,7 +1471,8 @@ instance Core.FromJSON RestResource where
       "RestResource"
       ( \o ->
           RestResource
-            Core.<$> (o Core..:? "methods")
+            Core.<$> (o Core..:? "deprecated")
+            Core.<*> (o Core..:? "methods")
             Core.<*> (o Core..:? "resources")
       )
 
@@ -1464,7 +1480,8 @@ instance Core.ToJSON RestResource where
   toJSON RestResource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("methods" Core..=) Core.<$> methods,
+          [ ("deprecated" Core..=) Core.<$> deprecated,
+            ("methods" Core..=) Core.<$> methods,
             ("resources" Core..=) Core.<$> resources
           ]
       )
@@ -1490,14 +1507,10 @@ instance Core.FromJSON RestResource_Methods where
   parseJSON =
     Core.withObject
       "RestResource_Methods"
-      ( \o ->
-          RestResource_Methods
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RestResource_Methods Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RestResource_Methods where
-  toJSON RestResource_Methods {..} =
-    Core.toJSON additional
+  toJSON RestResource_Methods {..} = Core.toJSON additional
 
 -- | Sub-resources on this resource.
 --
@@ -1520,11 +1533,7 @@ instance Core.FromJSON RestResource_Resources where
   parseJSON =
     Core.withObject
       "RestResource_Resources"
-      ( \o ->
-          RestResource_Resources
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RestResource_Resources Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RestResource_Resources where
-  toJSON RestResource_Resources {..} =
-    Core.toJSON additional
+  toJSON RestResource_Resources {..} = Core.toJSON additional

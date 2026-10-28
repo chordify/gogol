@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Settings.Cse.Identities.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Settings.Cse.Identities.Delete
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.settings.cse.identities.delete@ method which the
 -- 'GmailUsersSettingsCseIdentitiesDelete' request conforms to.
@@ -98,31 +96,26 @@ newGmailUsersSettingsCseIdentitiesDelete cseEmailAddress =
       userId = "me"
     }
 
-instance
-  Core.GoogleRequest
-    GmailUsersSettingsCseIdentitiesDelete
-  where
+instance Core.GoogleRequest GmailUsersSettingsCseIdentitiesDelete where
   type Rs GmailUsersSettingsCseIdentitiesDelete = ()
   type
     Scopes GmailUsersSettingsCseIdentitiesDelete =
       '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
-  requestClient
-    GmailUsersSettingsCseIdentitiesDelete {..} =
-      go
-        userId
-        cseEmailAddress
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        gmailService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GmailUsersSettingsCseIdentitiesDeleteResource
-            )
-            Core.mempty
+  requestClient GmailUsersSettingsCseIdentitiesDelete {..} =
+    go
+      userId
+      cseEmailAddress
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gmailService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GmailUsersSettingsCseIdentitiesDeleteResource
+          )
+          Core.mempty

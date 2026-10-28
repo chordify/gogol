@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.patch@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresPatch' request conforms to.
@@ -67,11 +65,11 @@ data HealthcareProjectsLocationsDatasetsFhirStoresPatch = HealthcareProjectsLoca
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Output only. Resource name of the FHIR store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    -- | Output only. Identifier. Resource name of the FHIR store, of the form @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: FhirStore,
-    -- | The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+    -- | Required. The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,14 +80,15 @@ data HealthcareProjectsLocationsDatasetsFhirStoresPatch = HealthcareProjectsLoca
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresPatch ::
-  -- |  Output only. Resource name of the FHIR store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
+  -- |  Output only. Identifier. Resource name of the FHIR store, of the form @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   FhirStore ->
   HealthcareProjectsLocationsDatasetsFhirStoresPatch
 newHealthcareProjectsLocationsDatasetsFhirStoresPatch name payload =
   HealthcareProjectsLocationsDatasetsFhirStoresPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -104,13 +103,11 @@ instance
     HealthcareProjectsLocationsDatasetsFhirStoresPatch
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresPatch =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresPatch =
       FhirStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresPatch =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresPatch =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresPatch {..} =
       go

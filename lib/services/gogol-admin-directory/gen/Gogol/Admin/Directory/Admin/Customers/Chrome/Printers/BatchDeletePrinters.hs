@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.Printers.BatchDeletePrinters
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @admin.customers.chrome.printers.batchDeletePrinters@ method which the
 -- 'AdminCustomersChromePrintersBatchDeletePrinters' request conforms to.
@@ -57,12 +55,8 @@ type AdminCustomersChromePrintersBatchDeletePrintersResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchDeletePrintersRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchDeletePrintersResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchDeletePrintersRequest
+    Core.:> Core.Post '[Core.JSON] BatchDeletePrintersResponse
 
 -- | Deletes printers in batch.
 --
@@ -94,7 +88,8 @@ newAdminCustomersChromePrintersBatchDeletePrinters ::
   AdminCustomersChromePrintersBatchDeletePrinters
 newAdminCustomersChromePrintersBatchDeletePrinters parent payload =
   AdminCustomersChromePrintersBatchDeletePrinters
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -108,30 +103,26 @@ instance
     AdminCustomersChromePrintersBatchDeletePrinters
   where
   type
-    Rs
-      AdminCustomersChromePrintersBatchDeletePrinters =
+    Rs AdminCustomersChromePrintersBatchDeletePrinters =
       BatchDeletePrintersResponse
   type
-    Scopes
-      AdminCustomersChromePrintersBatchDeletePrinters =
+    Scopes AdminCustomersChromePrintersBatchDeletePrinters =
       '[Admin'Chrome'Printers]
-  requestClient
-    AdminCustomersChromePrintersBatchDeletePrinters {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adminDirectoryService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdminCustomersChromePrintersBatchDeletePrintersResource
-            )
-            Core.mempty
+  requestClient AdminCustomersChromePrintersBatchDeletePrinters {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adminDirectoryService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdminCustomersChromePrintersBatchDeletePrintersResource
+          )
+          Core.mempty

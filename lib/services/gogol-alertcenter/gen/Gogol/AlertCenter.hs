@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AlertCenter
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -97,6 +95,20 @@ module Gogol.AlertCenter
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AbuseDetected
+    AbuseDetected (..),
+    newAbuseDetected,
+
+    -- ** AbuseDetected_VariationType
+    AbuseDetected_VariationType (..),
+
+    -- ** AccessApproval
+    AccessApproval (..),
+    newAccessApproval,
+
+    -- ** AccessApproval_JustificationReasonItem
+    AccessApproval_JustificationReasonItem (..),
 
     -- ** AccountSuspensionDetails
     AccountSuspensionDetails (..),
@@ -217,6 +229,10 @@ module Gogol.AlertCenter
     DeviceCompromisedSecurityDetail (..),
     newDeviceCompromisedSecurityDetail,
 
+    -- ** DeviceManagementRule
+    DeviceManagementRule (..),
+    newDeviceManagementRule,
+
     -- ** DlpRuleViolation
     DlpRuleViolation (..),
     newDlpRuleViolation,
@@ -232,6 +248,14 @@ module Gogol.AlertCenter
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** Entity
+    Entity (..),
+    newEntity,
+
+    -- ** EntityList
+    EntityList (..),
+    newEntityList,
 
     -- ** GmailMessageInfo
     GmailMessageInfo (..),
@@ -315,6 +339,9 @@ module Gogol.AlertCenter
     -- ** RuleViolationInfo_DataSource
     RuleViolationInfo_DataSource (..),
 
+    -- ** RuleViolationInfo_EventType
+    RuleViolationInfo_EventType (..),
+
     -- ** RuleViolationInfo_SuppressedActionTypesItem
     RuleViolationInfo_SuppressedActionTypesItem (..),
 
@@ -359,6 +386,10 @@ module Gogol.AlertCenter
     -- ** SuperAdminPasswordResetEvent
     SuperAdminPasswordResetEvent (..),
     newSuperAdminPasswordResetEvent,
+
+    -- ** SupportTicket
+    SupportTicket (..),
+    newSupportTicket,
 
     -- ** SuspiciousActivity
     SuspiciousActivity (..),

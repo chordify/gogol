@@ -1,18 +1,26 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE OverloadedLabels #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Example.Sheets where
 
 ---------------------------------------------------------------------------------
 
-import Control.Lens ((.~), (<&>))
+import Control.Lens ((.~), (<&>), (?~))
 import Data.Aeson.Types
+import Data.Function
+import Data.Generics.Labels ()
+import Data.Proxy
 import Data.Text (Text)
 import Gogol
-import Gogol.Resource.Sheets.Spreadsheets.Get
-import Gogol.Sheets
+import Gogol.Sheets as Sheets
 import System.IO (stdout)
 
 ---------------------------------------------------------------------------------
+
+spreadsheetsScope :: Proxy '[Sheets.Spreadsheets'FullControl]
+spreadsheetsScope = Proxy
 
 -- |
 -- This gets the Information about an spreadsheet.
@@ -29,8 +37,8 @@ exampleGetSheet :: Text -> IO Spreadsheet
 exampleGetSheet sheetID = do
   lgr <- newLogger Debug stdout
   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ spreadsheetsScope)
-  runResourceT . runGoogle env $
-    send (spreadsheetsGet sheetID)
+  runResourceT $
+    send env (newSheetsSpreadsheetsGet sheetID)
 
 -- |
 -- you pass the sheet id and a range (eg. "sheet1!A1:C3") in that sheet
@@ -39,18 +47,12 @@ exampleGetValue :: Text -> Text -> IO ValueRange
 exampleGetValue sheetID range = do
   lgr <- newLogger Debug stdout
   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ spreadsheetsScope)
-  runResourceT . runGoogle env $
-    send (spreadsheetsValuesGet sheetID range)
+  runResourceT $
+    send env (newSheetsSpreadsheetsValuesGet sheetID range)
 
 exampleAppendValue :: Text -> Text -> [[Value]] -> IO AppendValuesResponse
-exampleAppendValue sheetID range val = do
+exampleAppendValue sheetID range values = do
   lgr <- newLogger Debug stdout
   env <- newEnv <&> (envLogger .~ lgr) . (envScopes .~ spreadsheetsScope)
-  runResourceT . runGoogle env $
-    send
-      ( svaValueInputOption .~ Just SVAVIOUserEntered $
-          spreadsheetsValuesAppend
-            sheetID
-            (vrMajorDimension .~ Just VRMDRows $ vrValues .~ val $ vrRange .~ Just range $ valueRange)
-            range
-      )
+  runResourceT $
+    send env (newSheetsSpreadsheetsValuesAppend (Sheets.newValueRange & #values ?~ values) range sheetID)

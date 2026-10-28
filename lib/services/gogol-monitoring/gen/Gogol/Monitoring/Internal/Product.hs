@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Monitoring.Internal.Product
@@ -66,6 +64,10 @@ module Gogol.Monitoring.Internal.Product
     BasicSli (..),
     newBasicSli,
 
+    -- * BooleanTest
+    BooleanTest (..),
+    newBooleanTest,
+
     -- * BucketOptions
     BucketOptions (..),
     newBucketOptions,
@@ -73,6 +75,10 @@ module Gogol.Monitoring.Internal.Product
     -- * CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- * CloudFunctionV2Target
+    CloudFunctionV2Target (..),
+    newCloudFunctionV2Target,
 
     -- * CloudRun
     CloudRun (..),
@@ -133,6 +139,10 @@ module Gogol.Monitoring.Internal.Product
     -- * Custom
     Custom (..),
     newCustom,
+
+    -- * Daily
+    Daily (..),
+    newDaily,
 
     -- * Distribution
     Distribution (..),
@@ -214,6 +224,10 @@ module Gogol.Monitoring.Internal.Product
     Group (..),
     newGroup,
 
+    -- * Hourly
+    Hourly (..),
+    newHourly,
+
     -- * HttpCheck
     HttpCheck (..),
     newHttpCheck,
@@ -249,6 +263,10 @@ module Gogol.Monitoring.Internal.Product
     -- * Linear
     Linear (..),
     newLinear,
+
+    -- * Link
+    Link (..),
+    newLink,
 
     -- * ListAlertPoliciesResponse
     ListAlertPoliciesResponse (..),
@@ -342,6 +360,10 @@ module Gogol.Monitoring.Internal.Product
     MetricThreshold (..),
     newMetricThreshold,
 
+    -- * Minutes
+    Minutes (..),
+    newMinutes,
+
     -- * MonitoredResource
     MonitoredResource (..),
     newMonitoredResource,
@@ -426,6 +448,14 @@ module Gogol.Monitoring.Internal.Product
     PointData (..),
     newPointData,
 
+    -- * PrometheusQueryLanguageCondition
+    PrometheusQueryLanguageCondition (..),
+    newPrometheusQueryLanguageCondition,
+
+    -- * PrometheusQueryLanguageCondition_Labels
+    PrometheusQueryLanguageCondition_Labels (..),
+    newPrometheusQueryLanguageCondition_Labels,
+
     -- * QueryTimeSeriesRequest
     QueryTimeSeriesRequest (..),
     newQueryTimeSeriesRequest,
@@ -450,6 +480,10 @@ module Gogol.Monitoring.Internal.Product
     ResponseStatusCode (..),
     newResponseStatusCode,
 
+    -- * RowCountTest
+    RowCountTest (..),
+    newRowCountTest,
+
     -- * SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -461,6 +495,10 @@ module Gogol.Monitoring.Internal.Product
     -- * Service_UserLabels
     Service_UserLabels (..),
     newService_UserLabels,
+
+    -- * ServiceAgentAuthentication
+    ServiceAgentAuthentication (..),
+    newServiceAgentAuthentication,
 
     -- * ServiceLevelIndicator
     ServiceLevelIndicator (..),
@@ -486,6 +524,10 @@ module Gogol.Monitoring.Internal.Product
     SpanContext (..),
     newSpanContext,
 
+    -- * SqlCondition
+    SqlCondition (..),
+    newSqlCondition,
+
     -- * Status
     Status (..),
     newStatus,
@@ -493,6 +535,10 @@ module Gogol.Monitoring.Internal.Product
     -- * Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- * SyntheticMonitorTarget
+    SyntheticMonitorTarget (..),
+    newSyntheticMonitorTarget,
 
     -- * TcpCheck
     TcpCheck (..),
@@ -505,6 +551,10 @@ module Gogol.Monitoring.Internal.Product
     -- * TimeInterval
     TimeInterval (..),
     newTimeInterval,
+
+    -- * TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- * TimeSeries
     TimeSeries (..),
@@ -561,7 +611,7 @@ module Gogol.Monitoring.Internal.Product
 where
 
 import Gogol.Monitoring.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Describes how to combine multiple time series to provide a different view of the data. Aggregation of time series is done in two steps. First, each time series in the set is aligned to the same time interval boundaries, then the set of time series is optionally reduced in number.Alignment consists of applying the per/series/aligner operation to each time series after its data has been divided into regular alignment/period time intervals. This process takes all of the data points in an alignment period, applies a mathematical transformation such as averaging, minimum, maximum, delta, etc., and converts them into a single data point per period.Reduction is when the aligned and transformed time series can optionally be combined, reducing the number of time series through similar mathematical transformations. Reduction involves applying a cross/series/reducer to all the time series, optionally sorting the time series into subsets with group/by_fields, and applying the reducer to each subset.The raw time series
 -- data can contain a huge amount of information from multiple sources. Alignment and reduction transforms this mass of data into a more manageable and representative collection of data, for example \"the 95% latency across the average of all tasks in a cluster\". This representative data can be more easily graphed and comprehended, and the individual time series data is still available for later drilldown. For more details, see Filtering and aggregation (https:\/\/cloud.google.com\/monitoring\/api\/v3\/aggregation).
@@ -606,29 +656,26 @@ instance Core.ToJSON Aggregation where
   toJSON Aggregation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("alignmentPeriod" Core..=)
-              Core.<$> alignmentPeriod,
-            ("crossSeriesReducer" Core..=)
-              Core.<$> crossSeriesReducer,
+          [ ("alignmentPeriod" Core..=) Core.<$> alignmentPeriod,
+            ("crossSeriesReducer" Core..=) Core.<$> crossSeriesReducer,
             ("groupByFields" Core..=) Core.<$> groupByFields,
-            ("perSeriesAligner" Core..=)
-              Core.<$> perSeriesAligner
+            ("perSeriesAligner" Core..=) Core.<$> perSeriesAligner
           ]
       )
 
--- | A description of the conditions under which some aspect of your system is considered to be \"unhealthy\" and the ways to notify people or services about this state. For an overview of alert policies, see Introduction to Alerting (https:\/\/cloud.google.com\/monitoring\/alerts\/).
+-- | A description of the conditions under which some aspect of your system is considered to be \"unhealthy\" and the ways to notify people or services about this state. For an overview of alerting policies, see Introduction to Alerting (https:\/\/cloud.google.com\/monitoring\/alerts\/).
 --
 -- /See:/ 'newAlertPolicy' smart constructor.
 data AlertPolicy = AlertPolicy
-  { -- | Control over how this alert policy\'s notification channels are notified.
+  { -- | Control over how this alerting policy\'s notification channels are notified.
     alertStrategy :: (Core.Maybe AlertStrategy),
     -- | How to combine the results of multiple conditions to determine if an incident should be opened. If condition/time/series/query/language is present, this must be COMBINE_UNSPECIFIED.
     combiner :: (Core.Maybe AlertPolicy_Combiner),
-    -- | A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If condition/time/series/query/language is present, it must be the only condition.
+    -- | A list of conditions for the policy. The conditions are combined by AND or OR according to the combiner field. If the combined conditions evaluate to true, then an incident is created. A policy can have from one to six conditions. If condition/time/series/query/language is present, it must be the only condition. If condition/monitoring/query_language is present, it must be the only condition.
     conditions :: (Core.Maybe [Condition]),
     -- | A read-only record of the creation of the alerting policy. If provided in a call to create or update, this field will be ignored.
     creationRecord :: (Core.Maybe MutationRecord),
-    -- | A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don\'t use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.
+    -- | A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don\'t use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.The convention for the display/name of a PrometheusQueryLanguageCondition is \"{rule group name}\/{alert name}\", where the {rule group name} and {alert name} should be taken from the corresponding Prometheus configuration file. This convention is not enforced. In any case the display/name is not a unique key of the AlertPolicy.
     displayName :: (Core.Maybe Core.Text),
     -- | Documentation that is included with notifications and incidents related to this policy. Best practice is for the documentation to include information to help responders understand, mitigate, escalate, and correct the underlying problems detected by the alerting policy. Notification channels that have limited capacity might not show this documentation.
     documentation :: (Core.Maybe Documentation),
@@ -636,13 +683,15 @@ data AlertPolicy = AlertPolicy
     enabled :: (Core.Maybe Core.Bool),
     -- | A read-only record of the most recent change to the alerting policy. If provided in a call to create or update, this field will be ignored.
     mutationRecord :: (Core.Maybe MutationRecord),
-    -- | Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
+    -- | Identifier. Required if the policy exists. The resource name for this policy. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[ALERT/POLICY/ID] [ALERT/POLICY_ID] is assigned by Cloud Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
     name :: (Core.Maybe Core.Text),
     -- | Identifies the notification channels to which notifications should be sent when incidents are opened or closed or when new violations occur on an already opened incident. Each element of this array corresponds to the name field in each of the NotificationChannel objects that are returned from the ListNotificationChannels method. The format of the entries in this field is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL/ID]
     notificationChannels :: (Core.Maybe [Core.Text]),
-    -- | User-supplied key\/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.
+    -- | Optional. The severity of an alerting policy indicates how important incidents generated by that policy are. The severity level will be displayed on the Incident detail page and in notifications.
+    severity :: (Core.Maybe AlertPolicy_Severity),
+    -- | User-supplied key\/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.Note that Prometheus {alert name} is a valid Prometheus label names (https:\/\/prometheus.io\/docs\/concepts\/data_model\/#metric-names-and-labels), whereas Prometheus {rule group} is an unrestricted UTF-8 string. This means that they cannot be stored as-is in user labels, because they may contain characters that are not allowed in user-label values.
     userLabels :: (Core.Maybe AlertPolicy_UserLabels),
-    -- | Read-only description of how the alert policy is invalid. OK if the alert policy is valid. If not OK, the alert policy will not generate incidents.
+    -- | Read-only description of how the alerting policy is invalid. This field is only set when the alerting policy is invalid. An invalid alerting policy will not generate incidents.
     validity :: (Core.Maybe Status)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -662,6 +711,7 @@ newAlertPolicy =
       mutationRecord = Core.Nothing,
       name = Core.Nothing,
       notificationChannels = Core.Nothing,
+      severity = Core.Nothing,
       userLabels = Core.Nothing,
       validity = Core.Nothing
     }
@@ -682,6 +732,7 @@ instance Core.FromJSON AlertPolicy where
             Core.<*> (o Core..:? "mutationRecord")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationChannels")
+            Core.<*> (o Core..:? "severity")
             Core.<*> (o Core..:? "userLabels")
             Core.<*> (o Core..:? "validity")
       )
@@ -699,19 +750,18 @@ instance Core.ToJSON AlertPolicy where
             ("enabled" Core..=) Core.<$> enabled,
             ("mutationRecord" Core..=) Core.<$> mutationRecord,
             ("name" Core..=) Core.<$> name,
-            ("notificationChannels" Core..=)
-              Core.<$> notificationChannels,
+            ("notificationChannels" Core..=) Core.<$> notificationChannels,
+            ("severity" Core..=) Core.<$> severity,
             ("userLabels" Core..=) Core.<$> userLabels,
             ("validity" Core..=) Core.<$> validity
           ]
       )
 
--- | User-supplied key\/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.
+-- | User-supplied key\/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.Note that Prometheus {alert name} is a valid Prometheus label names (https:\/\/prometheus.io\/docs\/concepts\/data_model\/#metric-names-and-labels), whereas Prometheus {rule group} is an unrestricted UTF-8 string. This means that they cannot be stored as-is in user labels, because they may contain characters that are not allowed in user-label values.
 --
 -- /See:/ 'newAlertPolicy_UserLabels' smart constructor.
 newtype AlertPolicy_UserLabels = AlertPolicy_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -727,24 +777,22 @@ instance Core.FromJSON AlertPolicy_UserLabels where
   parseJSON =
     Core.withObject
       "AlertPolicy_UserLabels"
-      ( \o ->
-          AlertPolicy_UserLabels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> AlertPolicy_UserLabels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON AlertPolicy_UserLabels where
-  toJSON AlertPolicy_UserLabels {..} =
-    Core.toJSON additional
+  toJSON AlertPolicy_UserLabels {..} = Core.toJSON additional
 
 -- | Control over how the notification channels in notification_channels are notified when this alert fires.
 --
 -- /See:/ 'newAlertStrategy' smart constructor.
 data AlertStrategy = AlertStrategy
-  { -- | If an alert policy that was active has no data for this long, any open incidents will close
+  { -- | If an alerting policy that was active has no data for this long, any open incidents will close
     autoClose :: (Core.Maybe Core.Duration),
     -- | Control how notifications will be sent out, on a per-channel basis.
     notificationChannelStrategy :: (Core.Maybe [NotificationChannelStrategy]),
-    -- | Required for alert policies with a LogMatch condition.This limit is not implemented for alert policies that are not log-based.
+    -- | For log-based alert policies, the notification prompts is always OPENED. For non log-based alert policies, the notification prompts can be OPENED or OPENED, CLOSED.
+    notificationPrompts :: (Core.Maybe [AlertStrategy_NotificationPromptsItem]),
+    -- | Required for log-based alerting policies, i.e. policies with a LogMatch condition.This limit is not implemented for alerting policies that do not have a LogMatch condition.
     notificationRateLimit :: (Core.Maybe NotificationRateLimit)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -756,6 +804,7 @@ newAlertStrategy =
   AlertStrategy
     { autoClose = Core.Nothing,
       notificationChannelStrategy = Core.Nothing,
+      notificationPrompts = Core.Nothing,
       notificationRateLimit = Core.Nothing
     }
 
@@ -767,6 +816,7 @@ instance Core.FromJSON AlertStrategy where
           AlertStrategy
             Core.<$> (o Core..:? "autoClose")
             Core.<*> (o Core..:? "notificationChannelStrategy")
+            Core.<*> (o Core..:? "notificationPrompts")
             Core.<*> (o Core..:? "notificationRateLimit")
       )
 
@@ -777,8 +827,8 @@ instance Core.ToJSON AlertStrategy where
           [ ("autoClose" Core..=) Core.<$> autoClose,
             ("notificationChannelStrategy" Core..=)
               Core.<$> notificationChannelStrategy,
-            ("notificationRateLimit" Core..=)
-              Core.<$> notificationRateLimit
+            ("notificationPrompts" Core..=) Core.<$> notificationPrompts,
+            ("notificationRateLimit" Core..=) Core.<$> notificationRateLimit
           ]
       )
 
@@ -805,9 +855,7 @@ instance Core.FromJSON AppEngine where
 instance Core.ToJSON AppEngine where
   toJSON AppEngine {..} =
     Core.object
-      ( Core.catMaybes
-          [("moduleId" Core..=) Core.<$> moduleId]
-      )
+      (Core.catMaybes [("moduleId" Core..=) Core.<$> moduleId])
 
 -- | Future parameters for the availability SLI.
 --
@@ -844,7 +892,10 @@ data BasicAuthentication = BasicAuthentication
 newBasicAuthentication ::
   BasicAuthentication
 newBasicAuthentication =
-  BasicAuthentication {password = Core.Nothing, username = Core.Nothing}
+  BasicAuthentication
+    { password = Core.Nothing,
+      username = Core.Nothing
+    }
 
 instance Core.FromJSON BasicAuthentication where
   parseJSON =
@@ -880,7 +931,10 @@ data BasicService = BasicService
 newBasicService ::
   BasicService
 newBasicService =
-  BasicService {serviceLabels = Core.Nothing, serviceType = Core.Nothing}
+  BasicService
+    { serviceLabels = Core.Nothing,
+      serviceType = Core.Nothing
+    }
 
 instance Core.FromJSON BasicService where
   parseJSON =
@@ -905,8 +959,7 @@ instance Core.ToJSON BasicService where
 --
 -- /See:/ 'newBasicService_ServiceLabels' smart constructor.
 newtype BasicService_ServiceLabels = BasicService_ServiceLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -923,13 +976,11 @@ instance Core.FromJSON BasicService_ServiceLabels where
     Core.withObject
       "BasicService_ServiceLabels"
       ( \o ->
-          BasicService_ServiceLabels
-            Core.<$> (Core.parseJSONObject o)
+          BasicService_ServiceLabels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON BasicService_ServiceLabels where
-  toJSON BasicService_ServiceLabels {..} =
-    Core.toJSON additional
+  toJSON BasicService_ServiceLabels {..} = Core.toJSON additional
 
 -- | An SLI measuring performance on a well-known service type. Performance will be computed on the basis of pre-defined metrics. The type of the service/resource determines the metrics to use and the service/resource.labels and metric_labels are used to construct a monitoring filter to filter that metric down to just the data relevant to this service.
 --
@@ -985,6 +1036,30 @@ instance Core.ToJSON BasicSli where
           ]
       )
 
+-- | A test that uses an alerting result in a boolean column produced by the SQL query.
+--
+-- /See:/ 'newBooleanTest' smart constructor.
+newtype BooleanTest = BooleanTest
+  { -- | Required. The name of the column containing the boolean value. If the value in a row is NULL, that row is ignored.
+    column :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BooleanTest' with the minimum fields required to make a request.
+newBooleanTest ::
+  BooleanTest
+newBooleanTest = BooleanTest {column = Core.Nothing}
+
+instance Core.FromJSON BooleanTest where
+  parseJSON =
+    Core.withObject
+      "BooleanTest"
+      (\o -> BooleanTest Core.<$> (o Core..:? "column"))
+
+instance Core.ToJSON BooleanTest where
+  toJSON BooleanTest {..} =
+    Core.object (Core.catMaybes [("column" Core..=) Core.<$> column])
+
 -- | BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.
 --
 -- /See:/ 'newBucketOptions' smart constructor.
@@ -1023,10 +1098,8 @@ instance Core.ToJSON BucketOptions where
   toJSON BucketOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("explicitBuckets" Core..=)
-              Core.<$> explicitBuckets,
-            ("exponentialBuckets" Core..=)
-              Core.<$> exponentialBuckets,
+          [ ("explicitBuckets" Core..=) Core.<$> explicitBuckets,
+            ("exponentialBuckets" Core..=) Core.<$> exponentialBuckets,
             ("linearBuckets" Core..=) Core.<$> linearBuckets
           ]
       )
@@ -1049,15 +1122,50 @@ instance Core.FromJSON CloudEndpoints where
   parseJSON =
     Core.withObject
       "CloudEndpoints"
-      ( \o ->
-          CloudEndpoints Core.<$> (o Core..:? "service")
-      )
+      (\o -> CloudEndpoints Core.<$> (o Core..:? "service"))
 
 instance Core.ToJSON CloudEndpoints where
   toJSON CloudEndpoints {..} =
     Core.object
+      (Core.catMaybes [("service" Core..=) Core.<$> service])
+
+-- | A Synthetic Monitor deployed to a Cloud Functions V2 instance.
+--
+-- /See:/ 'newCloudFunctionV2Target' smart constructor.
+data CloudFunctionV2Target = CloudFunctionV2Target
+  { -- | Output only. The cloud/run/revision Monitored Resource associated with the GCFv2. The Synthetic Monitor execution results (metrics, logs, and spans) are reported against this Monitored Resource. This field is output only.
+    cloudRunRevision :: (Core.Maybe MonitoredResource),
+    -- | Required. Fully qualified GCFv2 resource name i.e. projects\/{project}\/locations\/{location}\/functions\/{function} Required.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CloudFunctionV2Target' with the minimum fields required to make a request.
+newCloudFunctionV2Target ::
+  CloudFunctionV2Target
+newCloudFunctionV2Target =
+  CloudFunctionV2Target
+    { cloudRunRevision = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON CloudFunctionV2Target where
+  parseJSON =
+    Core.withObject
+      "CloudFunctionV2Target"
+      ( \o ->
+          CloudFunctionV2Target
+            Core.<$> (o Core..:? "cloudRunRevision")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON CloudFunctionV2Target where
+  toJSON CloudFunctionV2Target {..} =
+    Core.object
       ( Core.catMaybes
-          [("service" Core..=) Core.<$> service]
+          [ ("cloudRunRevision" Core..=) Core.<$> cloudRunRevision,
+            ("name" Core..=) Core.<$> name
+          ]
       )
 
 -- | Cloud Run service. Learn more at https:\/\/cloud.google.com\/run.
@@ -1074,7 +1182,8 @@ data CloudRun = CloudRun
 -- | Creates a value of 'CloudRun' with the minimum fields required to make a request.
 newCloudRun ::
   CloudRun
-newCloudRun = CloudRun {location = Core.Nothing, serviceName = Core.Nothing}
+newCloudRun =
+  CloudRun {location = Core.Nothing, serviceName = Core.Nothing}
 
 instance Core.FromJSON CloudRun where
   parseJSON =
@@ -1140,8 +1249,7 @@ instance Core.ToJSON ClusterIstio where
           [ ("clusterName" Core..=) Core.<$> clusterName,
             ("location" Core..=) Core.<$> location,
             ("serviceName" Core..=) Core.<$> serviceName,
-            ("serviceNamespace" Core..=)
-              Core.<$> serviceNamespace
+            ("serviceNamespace" Core..=) Core.<$> serviceNamespace
           ]
       )
 
@@ -1218,8 +1326,7 @@ instance Core.ToJSON CollectdPayload where
 --
 -- /See:/ 'newCollectdPayload_Metadata' smart constructor.
 newtype CollectdPayload_Metadata = CollectdPayload_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text TypedValue)
+  { additional :: (Core.HashMap Core.Text TypedValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1235,14 +1342,10 @@ instance Core.FromJSON CollectdPayload_Metadata where
   parseJSON =
     Core.withObject
       "CollectdPayload_Metadata"
-      ( \o ->
-          CollectdPayload_Metadata
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CollectdPayload_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CollectdPayload_Metadata where
-  toJSON CollectdPayload_Metadata {..} =
-    Core.toJSON additional
+  toJSON CollectdPayload_Metadata {..} = Core.toJSON additional
 
 -- | Describes the error status for payloads that were not written.
 --
@@ -1355,7 +1458,8 @@ instance Core.FromJSON CollectdValueError where
       "CollectdValueError"
       ( \o ->
           CollectdValueError
-            Core.<$> (o Core..:? "error") Core.<*> (o Core..:? "index")
+            Core.<$> (o Core..:? "error")
+            Core.<*> (o Core..:? "index")
       )
 
 instance Core.ToJSON CollectdValueError where
@@ -1377,6 +1481,10 @@ data Condition = Condition
     conditionMatchedLog :: (Core.Maybe LogMatch),
     -- | A condition that uses the Monitoring Query Language to define alerts.
     conditionMonitoringQueryLanguage :: (Core.Maybe MonitoringQueryLanguageCondition),
+    -- | A condition that uses the Prometheus query language to define alerts.
+    conditionPrometheusQueryLanguage :: (Core.Maybe PrometheusQueryLanguageCondition),
+    -- | A condition that periodically evaluates a SQL query result.
+    conditionSql :: (Core.Maybe SqlCondition),
     -- | A condition that compares a time series against a threshold.
     conditionThreshold :: (Core.Maybe MetricThreshold),
     -- | A short name or phrase used to identify the condition in dashboards, notifications, and incidents. To avoid confusion, don\'t use the same display name for multiple conditions in the same policy.
@@ -1394,6 +1502,8 @@ newCondition =
     { conditionAbsent = Core.Nothing,
       conditionMatchedLog = Core.Nothing,
       conditionMonitoringQueryLanguage = Core.Nothing,
+      conditionPrometheusQueryLanguage = Core.Nothing,
+      conditionSql = Core.Nothing,
       conditionThreshold = Core.Nothing,
       displayName = Core.Nothing,
       name = Core.Nothing
@@ -1408,6 +1518,8 @@ instance Core.FromJSON Condition where
             Core.<$> (o Core..:? "conditionAbsent")
             Core.<*> (o Core..:? "conditionMatchedLog")
             Core.<*> (o Core..:? "conditionMonitoringQueryLanguage")
+            Core.<*> (o Core..:? "conditionPrometheusQueryLanguage")
+            Core.<*> (o Core..:? "conditionSql")
             Core.<*> (o Core..:? "conditionThreshold")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
@@ -1417,14 +1529,14 @@ instance Core.ToJSON Condition where
   toJSON Condition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conditionAbsent" Core..=)
-              Core.<$> conditionAbsent,
-            ("conditionMatchedLog" Core..=)
-              Core.<$> conditionMatchedLog,
+          [ ("conditionAbsent" Core..=) Core.<$> conditionAbsent,
+            ("conditionMatchedLog" Core..=) Core.<$> conditionMatchedLog,
             ("conditionMonitoringQueryLanguage" Core..=)
               Core.<$> conditionMonitoringQueryLanguage,
-            ("conditionThreshold" Core..=)
-              Core.<$> conditionThreshold,
+            ("conditionPrometheusQueryLanguage" Core..=)
+              Core.<$> conditionPrometheusQueryLanguage,
+            ("conditionSql" Core..=) Core.<$> conditionSql,
+            ("conditionThreshold" Core..=) Core.<$> conditionThreshold,
             ("displayName" Core..=) Core.<$> displayName,
             ("name" Core..=) Core.<$> name
           ]
@@ -1497,10 +1609,7 @@ newCreateCollectdTimeSeriesRequest =
       resource = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateCollectdTimeSeriesRequest
-  where
+instance Core.FromJSON CreateCollectdTimeSeriesRequest where
   parseJSON =
     Core.withObject
       "CreateCollectdTimeSeriesRequest"
@@ -1515,8 +1624,7 @@ instance Core.ToJSON CreateCollectdTimeSeriesRequest where
   toJSON CreateCollectdTimeSeriesRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("collectdPayloads" Core..=)
-              Core.<$> collectdPayloads,
+          [ ("collectdPayloads" Core..=) Core.<$> collectdPayloads,
             ("collectdVersion" Core..=) Core.<$> collectdVersion,
             ("resource" Core..=) Core.<$> resource
           ]
@@ -1542,10 +1650,7 @@ newCreateCollectdTimeSeriesResponse =
       summary = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateCollectdTimeSeriesResponse
-  where
+instance Core.FromJSON CreateCollectdTimeSeriesResponse where
   parseJSON =
     Core.withObject
       "CreateCollectdTimeSeriesResponse"
@@ -1576,23 +1681,19 @@ newtype CreateTimeSeriesRequest = CreateTimeSeriesRequest
 -- | Creates a value of 'CreateTimeSeriesRequest' with the minimum fields required to make a request.
 newCreateTimeSeriesRequest ::
   CreateTimeSeriesRequest
-newCreateTimeSeriesRequest = CreateTimeSeriesRequest {timeSeries = Core.Nothing}
+newCreateTimeSeriesRequest =
+  CreateTimeSeriesRequest {timeSeries = Core.Nothing}
 
 instance Core.FromJSON CreateTimeSeriesRequest where
   parseJSON =
     Core.withObject
       "CreateTimeSeriesRequest"
-      ( \o ->
-          CreateTimeSeriesRequest
-            Core.<$> (o Core..:? "timeSeries")
-      )
+      (\o -> CreateTimeSeriesRequest Core.<$> (o Core..:? "timeSeries"))
 
 instance Core.ToJSON CreateTimeSeriesRequest where
   toJSON CreateTimeSeriesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("timeSeries" Core..=) Core.<$> timeSeries]
-      )
+      (Core.catMaybes [("timeSeries" Core..=) Core.<$> timeSeries])
 
 -- | Summary of the result of a failed request to write data to a time series.
 --
@@ -1633,18 +1734,18 @@ instance Core.ToJSON CreateTimeSeriesSummary where
     Core.object
       ( Core.catMaybes
           [ ("errors" Core..=) Core.<$> errors,
-            ("successPointCount" Core..=)
-              Core.<$> successPointCount,
-            ("totalPointCount" Core..=)
-              Core.<$> totalPointCount
+            ("successPointCount" Core..=) Core.<$> successPointCount,
+            ("totalPointCount" Core..=) Core.<$> totalPointCount
           ]
       )
 
 -- | Criteria specific to the AlertPolicys that this Snooze applies to. The Snooze will suppress alerts that come from one of the AlertPolicys whose names are supplied.
 --
 -- /See:/ 'newCriteria' smart constructor.
-newtype Criteria = Criteria
-  { -- | The specific AlertPolicy names for the alert that should be snoozed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID] There is a limit of 16 policies per snooze. This limit is checked during snooze creation.
+data Criteria = Criteria
+  { -- | Optional. The filter string to match on Alert fields when silencing the alerts. It follows the standard https:\/\/google.aip.dev\/160 syntax. A filter string used to apply the snooze to specific incidents that have matching filter values. Filters can be defined for snoozes that apply to one alerting policy. Filters must be a string formatted as one or more resource labels with specific label values. If multiple resource labels are used, then they must be connected with an AND operator. For example, the following filter applies the snooze to incidents that have an instance ID of 1234567890 and a zone of us-central1-a: resource.labels.instance_id=\"1234567890\" AND resource.labels.zone=\"us-central1-a\"
+    filter :: (Core.Maybe Core.Text),
+    -- | The specific AlertPolicy names for the alert that should be snoozed. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/alertPolicies\/[POLICY/ID] There is a limit of 16 policies per snooze. This limit is checked during snooze creation. Exactly 1 alert policy is required if filter is specified at the same time.
     policies :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1652,19 +1753,26 @@ newtype Criteria = Criteria
 -- | Creates a value of 'Criteria' with the minimum fields required to make a request.
 newCriteria ::
   Criteria
-newCriteria = Criteria {policies = Core.Nothing}
+newCriteria =
+  Criteria {filter = Core.Nothing, policies = Core.Nothing}
 
 instance Core.FromJSON Criteria where
   parseJSON =
     Core.withObject
       "Criteria"
-      (\o -> Criteria Core.<$> (o Core..:? "policies"))
+      ( \o ->
+          Criteria
+            Core.<$> (o Core..:? "filter")
+            Core.<*> (o Core..:? "policies")
+      )
 
 instance Core.ToJSON Criteria where
   toJSON Criteria {..} =
     Core.object
       ( Core.catMaybes
-          [("policies" Core..=) Core.<$> policies]
+          [ ("filter" Core..=) Core.<$> filter,
+            ("policies" Core..=) Core.<$> policies
+          ]
       )
 
 -- | Use a custom service to designate a service that you want to monitor when none of the other service types (like App Engine, Cloud Run, or a GKE type) matches your intended service.
@@ -1679,11 +1787,46 @@ newCustom ::
 newCustom = Custom
 
 instance Core.FromJSON Custom where
-  parseJSON =
-    Core.withObject "Custom" (\o -> Core.pure Custom)
+  parseJSON = Core.withObject "Custom" (\o -> Core.pure Custom)
 
 instance Core.ToJSON Custom where
   toJSON = Core.const Core.emptyObject
+
+-- | Used to schedule the query to run every so many days.
+--
+-- /See:/ 'newDaily' smart constructor.
+data Daily = Daily
+  { -- | Optional. The time of day (in UTC) at which the query should run. If left unspecified, the server picks an arbitrary time of day and runs the query at the same time each day.
+    executionTime :: (Core.Maybe TimeOfDay'),
+    -- | Required. The number of days between runs. Must be greater than or equal to 1 day and less than or equal to 31 days.
+    periodicity :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Daily' with the minimum fields required to make a request.
+newDaily ::
+  Daily
+newDaily =
+  Daily {executionTime = Core.Nothing, periodicity = Core.Nothing}
+
+instance Core.FromJSON Daily where
+  parseJSON =
+    Core.withObject
+      "Daily"
+      ( \o ->
+          Daily
+            Core.<$> (o Core..:? "executionTime")
+            Core.<*> (o Core..:? "periodicity")
+      )
+
+instance Core.ToJSON Daily where
+  toJSON Daily {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("executionTime" Core..=) Core.<$> executionTime,
+            ("periodicity" Core..=) Core.<$> periodicity
+          ]
+      )
 
 -- | Distribution contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.The summary statistics are the count, mean, sum of the squared deviation from the mean, the minimum, and the maximum of the set of population of values. The histogram is based on a sequence of buckets and gives a count of values that fall into each bucket. The boundaries of the buckets are given either explicitly or by formulas for buckets of fixed or exponentially increasing widths.Although it is not forbidden, it is generally a bad idea to include non-finite values (infinities or NaNs) in the population of values, as this will render the mean and sum/of/squared_deviation fields meaningless.
 --
@@ -1726,13 +1869,12 @@ instance Core.FromJSON Distribution where
       "Distribution"
       ( \o ->
           Distribution
-            Core.<$> ( o Core..:? "bucketCounts"
+            Core.<$> ( o
+                         Core..:? "bucketCounts"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "bucketOptions")
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "exemplars")
             Core.<*> (o Core..:? "mean")
             Core.<*> (o Core..:? "range")
@@ -1751,8 +1893,7 @@ instance Core.ToJSON Distribution where
             ("exemplars" Core..=) Core.<$> exemplars,
             ("mean" Core..=) Core.<$> mean,
             ("range" Core..=) Core.<$> range,
-            ("sumOfSquaredDeviation" Core..=)
-              Core.<$> sumOfSquaredDeviation
+            ("sumOfSquaredDeviation" Core..=) Core.<$> sumOfSquaredDeviation
           ]
       )
 
@@ -1771,7 +1912,10 @@ data DistributionCut = DistributionCut
 newDistributionCut ::
   DistributionCut
 newDistributionCut =
-  DistributionCut {distributionFilter = Core.Nothing, range = Core.Nothing}
+  DistributionCut
+    { distributionFilter = Core.Nothing,
+      range = Core.Nothing
+    }
 
 instance Core.FromJSON DistributionCut where
   parseJSON =
@@ -1787,20 +1931,23 @@ instance Core.ToJSON DistributionCut where
   toJSON DistributionCut {..} =
     Core.object
       ( Core.catMaybes
-          [ ("distributionFilter" Core..=)
-              Core.<$> distributionFilter,
+          [ ("distributionFilter" Core..=) Core.<$> distributionFilter,
             ("range" Core..=) Core.<$> range
           ]
       )
 
--- | A content string and a MIME type that describes the content string\'s format.
+-- | Documentation that is included in the notifications and incidents pertaining to this policy.
 --
 -- /See:/ 'newDocumentation' smart constructor.
 data Documentation = Documentation
-  { -- | The body of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables).
+  { -- | The body of the documentation, interpreted according to mime_type. The content may not exceed 8,192 Unicode characters and may not exceed more than 10,240 bytes when encoded in UTF-8 format, whichever is smaller. This text can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables#doc-vars).
     content :: (Core.Maybe Core.Text),
+    -- | Optional. Links to content such as playbooks, repositories, and other resources. This field can contain up to 3 entries.
+    links :: (Core.Maybe [Link]),
     -- | The format of the content field. Presently, only the value \"text\/markdown\" is supported. See Markdown (https:\/\/en.wikipedia.org\/wiki\/Markdown) for more information.
-    mimeType :: (Core.Maybe Core.Text)
+    mimeType :: (Core.Maybe Core.Text),
+    -- | Optional. The subject line of the notification. The subject line may not exceed 10,240 bytes. In notifications generated by this policy, the contents of the subject line after variable expansion will be truncated to 255 bytes or shorter at the latest UTF-8 character boundary. The 255-byte limit is recommended by this thread (https:\/\/stackoverflow.com\/questions\/1592291\/what-is-the-email-subject-length-limit). It is both the limit imposed by some third-party ticketing products and it is common to define textual fields in databases as VARCHAR(255).The contents of the subject line can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables#doc-vars). If this field is missing or empty, a default subject line will be generated.
+    subject :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1808,7 +1955,12 @@ data Documentation = Documentation
 newDocumentation ::
   Documentation
 newDocumentation =
-  Documentation {content = Core.Nothing, mimeType = Core.Nothing}
+  Documentation
+    { content = Core.Nothing,
+      links = Core.Nothing,
+      mimeType = Core.Nothing,
+      subject = Core.Nothing
+    }
 
 instance Core.FromJSON Documentation where
   parseJSON =
@@ -1817,7 +1969,9 @@ instance Core.FromJSON Documentation where
       ( \o ->
           Documentation
             Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "links")
             Core.<*> (o Core..:? "mimeType")
+            Core.<*> (o Core..:? "subject")
       )
 
 instance Core.ToJSON Documentation where
@@ -1825,7 +1979,9 @@ instance Core.ToJSON Documentation where
     Core.object
       ( Core.catMaybes
           [ ("content" Core..=) Core.<$> content,
-            ("mimeType" Core..=) Core.<$> mimeType
+            ("links" Core..=) Core.<$> links,
+            ("mimeType" Core..=) Core.<$> mimeType,
+            ("subject" Core..=) Core.<$> subject
           ]
       )
 
@@ -1851,15 +2007,13 @@ instance Core.FromJSON DroppedLabels where
 
 instance Core.ToJSON DroppedLabels where
   toJSON DroppedLabels {..} =
-    Core.object
-      (Core.catMaybes [("label" Core..=) Core.<$> label])
+    Core.object (Core.catMaybes [("label" Core..=) Core.<$> label])
 
 -- | Map from label to its value, for all labels dropped in any aggregation.
 --
 -- /See:/ 'newDroppedLabels_Label' smart constructor.
 newtype DroppedLabels_Label = DroppedLabels_Label
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1875,14 +2029,10 @@ instance Core.FromJSON DroppedLabels_Label where
   parseJSON =
     Core.withObject
       "DroppedLabels_Label"
-      ( \o ->
-          DroppedLabels_Label
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> DroppedLabels_Label Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON DroppedLabels_Label where
-  toJSON DroppedLabels_Label {..} =
-    Core.toJSON additional
+  toJSON DroppedLabels_Label {..} = Core.toJSON additional
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -1896,8 +2046,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -2001,14 +2150,10 @@ instance Core.FromJSON Exemplar_AttachmentsItem where
   parseJSON =
     Core.withObject
       "Exemplar_AttachmentsItem"
-      ( \o ->
-          Exemplar_AttachmentsItem
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Exemplar_AttachmentsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Exemplar_AttachmentsItem where
-  toJSON Exemplar_AttachmentsItem {..} =
-    Core.toJSON additional
+  toJSON Exemplar_AttachmentsItem {..} = Core.toJSON additional
 
 -- | Specifies a set of buckets with arbitrary widths.There are size(bounds) + 1 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): boundsi Lower bound (1 \<= i \< N); boundsi - 1The bounds field must contain at least one element. If bounds has only one element, then there are no finite buckets, and that single element is the common boundary of the overflow and underflow buckets.
 --
@@ -2032,8 +2177,7 @@ instance Core.FromJSON Explicit where
 
 instance Core.ToJSON Explicit where
   toJSON Explicit {..} =
-    Core.object
-      (Core.catMaybes [("bounds" Core..=) Core.<$> bounds])
+    Core.object (Core.catMaybes [("bounds" Core..=) Core.<$> bounds])
 
 -- | Specifies an exponential sequence of buckets that have a width that is proportional to the value of the lower bound. Each bucket represents a constant relative uncertainty on a specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): scale * (growth/factor ^ i).Lower bound (1 \<= i \< N): scale * (growth/factor ^ (i - 1)).
 --
@@ -2074,8 +2218,7 @@ instance Core.ToJSON Exponential where
     Core.object
       ( Core.catMaybes
           [ ("growthFactor" Core..=) Core.<$> growthFactor,
-            ("numFiniteBuckets" Core..=)
-              Core.<$> numFiniteBuckets,
+            ("numFiniteBuckets" Core..=) Core.<$> numFiniteBuckets,
             ("scale" Core..=) Core.<$> scale
           ]
       )
@@ -2163,7 +2306,7 @@ instance Core.ToJSON Field where
 --
 -- /See:/ 'newForecastOptions' smart constructor.
 newtype ForecastOptions = ForecastOptions
-  { -- | Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing.
+  { -- | Required. The length of time into the future to forecast whether a time series will violate the threshold. If the predicted value is found to violate the threshold, and the violation is observed in all forecasts made for the configured duration, then the time series is considered to be failing. The forecast horizon can range from 1 hour to 60 hours.
     forecastHorizon :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2171,24 +2314,20 @@ newtype ForecastOptions = ForecastOptions
 -- | Creates a value of 'ForecastOptions' with the minimum fields required to make a request.
 newForecastOptions ::
   ForecastOptions
-newForecastOptions = ForecastOptions {forecastHorizon = Core.Nothing}
+newForecastOptions =
+  ForecastOptions {forecastHorizon = Core.Nothing}
 
 instance Core.FromJSON ForecastOptions where
   parseJSON =
     Core.withObject
       "ForecastOptions"
-      ( \o ->
-          ForecastOptions
-            Core.<$> (o Core..:? "forecastHorizon")
-      )
+      (\o -> ForecastOptions Core.<$> (o Core..:? "forecastHorizon"))
 
 instance Core.ToJSON ForecastOptions where
   toJSON ForecastOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("forecastHorizon" Core..=)
-              Core.<$> forecastHorizon
-          ]
+          [("forecastHorizon" Core..=) Core.<$> forecastHorizon]
       )
 
 -- | The GetNotificationChannelVerificationCode request.
@@ -2204,7 +2343,10 @@ newtype GetNotificationChannelVerificationCodeRequest = GetNotificationChannelVe
 newGetNotificationChannelVerificationCodeRequest ::
   GetNotificationChannelVerificationCodeRequest
 newGetNotificationChannelVerificationCodeRequest =
-  GetNotificationChannelVerificationCodeRequest {expireTime = Core.Nothing}
+  GetNotificationChannelVerificationCodeRequest
+    { expireTime =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2218,16 +2360,10 @@ instance
             Core.<$> (o Core..:? "expireTime")
       )
 
-instance
-  Core.ToJSON
-    GetNotificationChannelVerificationCodeRequest
-  where
-  toJSON
-    GetNotificationChannelVerificationCodeRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("expireTime" Core..=) Core.<$> expireTime]
-        )
+instance Core.ToJSON GetNotificationChannelVerificationCodeRequest where
+  toJSON GetNotificationChannelVerificationCodeRequest {..} =
+    Core.object
+      (Core.catMaybes [("expireTime" Core..=) Core.<$> expireTime])
 
 -- | The GetNotificationChannelVerificationCode request.
 --
@@ -2245,7 +2381,8 @@ newGetNotificationChannelVerificationCodeResponse ::
   GetNotificationChannelVerificationCodeResponse
 newGetNotificationChannelVerificationCodeResponse =
   GetNotificationChannelVerificationCodeResponse
-    { code = Core.Nothing,
+    { code =
+        Core.Nothing,
       expireTime = Core.Nothing
     }
 
@@ -2259,21 +2396,17 @@ instance
       ( \o ->
           GetNotificationChannelVerificationCodeResponse
             Core.<$> (o Core..:? "code")
-              Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "expireTime")
       )
 
-instance
-  Core.ToJSON
-    GetNotificationChannelVerificationCodeResponse
-  where
-  toJSON
-    GetNotificationChannelVerificationCodeResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("code" Core..=) Core.<$> code,
-              ("expireTime" Core..=) Core.<$> expireTime
-            ]
-        )
+instance Core.ToJSON GetNotificationChannelVerificationCodeResponse where
+  toJSON GetNotificationChannelVerificationCodeResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("expireTime" Core..=) Core.<$> expireTime
+          ]
+      )
 
 -- | GKE Namespace. The field names correspond to the resource metadata labels on monitored resources that fall under a namespace (for example, k8s/container or k8s/pod).
 --
@@ -2432,8 +2565,7 @@ instance Core.ToJSON GkeWorkload where
             ("location" Core..=) Core.<$> location,
             ("namespaceName" Core..=) Core.<$> namespaceName,
             ("projectId" Core..=) Core.<$> projectId,
-            ("topLevelControllerName" Core..=)
-              Core.<$> topLevelControllerName,
+            ("topLevelControllerName" Core..=) Core.<$> topLevelControllerName,
             ("topLevelControllerType" Core..=)
               Core.<$> topLevelControllerType
           ]
@@ -2462,16 +2594,15 @@ instance Core.FromJSON GoogleMonitoringV3Range where
       "GoogleMonitoringV3Range"
       ( \o ->
           GoogleMonitoringV3Range
-            Core.<$> (o Core..:? "max") Core.<*> (o Core..:? "min")
+            Core.<$> (o Core..:? "max")
+            Core.<*> (o Core..:? "min")
       )
 
 instance Core.ToJSON GoogleMonitoringV3Range where
   toJSON GoogleMonitoringV3Range {..} =
     Core.object
       ( Core.catMaybes
-          [ ("max" Core..=) Core.<$> max,
-            ("min" Core..=) Core.<$> min
-          ]
+          [("max" Core..=) Core.<$> max, ("min" Core..=) Core.<$> min]
       )
 
 -- | The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group\'s filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups.Groups can be nested in parent-child hierarchies. The parentName field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group\'s filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group\'s ancestors. A group without a parent can contain any monitored resource.For example, consider an infrastructure running a set of instances with two user-defined tags: \"environment\" and \"role\". A parent group has a filter,
@@ -2529,13 +2660,49 @@ instance Core.ToJSON Group where
           ]
       )
 
+-- | Used to schedule the query to run every so many hours.
+--
+-- /See:/ 'newHourly' smart constructor.
+data Hourly = Hourly
+  { -- | Optional. The number of minutes after the hour (in UTC) to run the query. Must be greater than or equal to 0 minutes and less than or equal to 59 minutes. If left unspecified, then an arbitrary offset is used.
+    minuteOffset :: (Core.Maybe Core.Int32),
+    -- | Required. The number of hours between runs. Must be greater than or equal to 1 hour and less than or equal to 48 hours.
+    periodicity :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Hourly' with the minimum fields required to make a request.
+newHourly ::
+  Hourly
+newHourly =
+  Hourly {minuteOffset = Core.Nothing, periodicity = Core.Nothing}
+
+instance Core.FromJSON Hourly where
+  parseJSON =
+    Core.withObject
+      "Hourly"
+      ( \o ->
+          Hourly
+            Core.<$> (o Core..:? "minuteOffset")
+            Core.<*> (o Core..:? "periodicity")
+      )
+
+instance Core.ToJSON Hourly where
+  toJSON Hourly {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("minuteOffset" Core..=) Core.<$> minuteOffset,
+            ("periodicity" Core..=) Core.<$> periodicity
+          ]
+      )
+
 -- | Information involved in an HTTP\/HTTPS Uptime check request.
 --
 -- /See:/ 'newHttpCheck' smart constructor.
 data HttpCheck = HttpCheck
   { -- | If present, the check will only pass if the HTTP response status code is in this set of status codes. If empty, the HTTP status code will only pass if the HTTP status code is 200-299.
     acceptedResponseStatusCodes :: (Core.Maybe [ResponseStatusCode]),
-    -- | The authentication information. Optional when creating an HTTP check; defaults to empty.
+    -- | The authentication information. Optional when creating an HTTP check; defaults to empty. Do not set both auth/method and auth/info.
     authInfo :: (Core.Maybe BasicAuthentication),
     -- | The request body associated with the HTTP POST request. If content/type is URL/ENCODED, the body passed in must be URL-encoded. Users can provide a Content-Length header via the headers field or the API will do so. If the request_method is GET and body is not empty, the API will return an error. The maximum byte size is 1 megabyte.Note: If client libraries aren\'t used (which performs the conversion automatically) base64 encode your body data since the field is of bytes type.
     body :: (Core.Maybe Core.Base64),
@@ -2555,6 +2722,8 @@ data HttpCheck = HttpCheck
     port :: (Core.Maybe Core.Int32),
     -- | The HTTP request method to use for the check. If set to METHOD/UNSPECIFIED then request/method defaults to GET.
     requestMethod :: (Core.Maybe HttpCheck_RequestMethod),
+    -- | If specified, Uptime will generate and attach an OIDC JWT token for the Monitoring service agent service account as an Authorization header in the HTTP request when probing.
+    serviceAgentAuthentication :: (Core.Maybe ServiceAgentAuthentication),
     -- | If true, use HTTPS instead of HTTP to run the check.
     useSsl :: (Core.Maybe Core.Bool),
     -- | Boolean specifying whether to include SSL certificate validation as a part of the Uptime check. Only applies to checks where monitored/resource is set to uptime/url. If use/ssl is false, setting validate/ssl to true has no effect.
@@ -2578,6 +2747,7 @@ newHttpCheck =
       pingConfig = Core.Nothing,
       port = Core.Nothing,
       requestMethod = Core.Nothing,
+      serviceAgentAuthentication = Core.Nothing,
       useSsl = Core.Nothing,
       validateSsl = Core.Nothing
     }
@@ -2599,6 +2769,7 @@ instance Core.FromJSON HttpCheck where
             Core.<*> (o Core..:? "pingConfig")
             Core.<*> (o Core..:? "port")
             Core.<*> (o Core..:? "requestMethod")
+            Core.<*> (o Core..:? "serviceAgentAuthentication")
             Core.<*> (o Core..:? "useSsl")
             Core.<*> (o Core..:? "validateSsl")
       )
@@ -2612,14 +2783,15 @@ instance Core.ToJSON HttpCheck where
             ("authInfo" Core..=) Core.<$> authInfo,
             ("body" Core..=) Core.<$> body,
             ("contentType" Core..=) Core.<$> contentType,
-            ("customContentType" Core..=)
-              Core.<$> customContentType,
+            ("customContentType" Core..=) Core.<$> customContentType,
             ("headers" Core..=) Core.<$> headers,
             ("maskHeaders" Core..=) Core.<$> maskHeaders,
             ("path" Core..=) Core.<$> path,
             ("pingConfig" Core..=) Core.<$> pingConfig,
             ("port" Core..=) Core.<$> port,
             ("requestMethod" Core..=) Core.<$> requestMethod,
+            ("serviceAgentAuthentication" Core..=)
+              Core.<$> serviceAgentAuthentication,
             ("useSsl" Core..=) Core.<$> useSsl,
             ("validateSsl" Core..=) Core.<$> validateSsl
           ]
@@ -2629,8 +2801,7 @@ instance Core.ToJSON HttpCheck where
 --
 -- /See:/ 'newHttpCheck_Headers' smart constructor.
 newtype HttpCheck_Headers = HttpCheck_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2639,15 +2810,14 @@ newHttpCheck_Headers ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   HttpCheck_Headers
-newHttpCheck_Headers additional = HttpCheck_Headers {additional = additional}
+newHttpCheck_Headers additional =
+  HttpCheck_Headers {additional = additional}
 
 instance Core.FromJSON HttpCheck_Headers where
   parseJSON =
     Core.withObject
       "HttpCheck_Headers"
-      ( \o ->
-          HttpCheck_Headers Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> HttpCheck_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON HttpCheck_Headers where
   toJSON HttpCheck_Headers {..} = Core.toJSON additional
@@ -2749,8 +2919,7 @@ instance Core.ToJSON IstioCanonicalService where
   toJSON IstioCanonicalService {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canonicalService" Core..=)
-              Core.<$> canonicalService,
+          [ ("canonicalService" Core..=) Core.<$> canonicalService,
             ("canonicalServiceNamespace" Core..=)
               Core.<$> canonicalServiceNamespace,
             ("meshUid" Core..=) Core.<$> meshUid
@@ -2772,7 +2941,10 @@ data JsonPathMatcher = JsonPathMatcher
 newJsonPathMatcher ::
   JsonPathMatcher
 newJsonPathMatcher =
-  JsonPathMatcher {jsonMatcher = Core.Nothing, jsonPath = Core.Nothing}
+  JsonPathMatcher
+    { jsonMatcher = Core.Nothing,
+      jsonPath = Core.Nothing
+    }
 
 instance Core.FromJSON JsonPathMatcher where
   parseJSON =
@@ -2867,9 +3039,7 @@ instance Core.FromJSON LabelValue where
       ( \o ->
           LabelValue
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> ( o Core..:? "int64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "int64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -2878,8 +3048,7 @@ instance Core.ToJSON LabelValue where
     Core.object
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
-            ("int64Value" Core..=) Core.. Core.AsText
-              Core.<$> int64Value,
+            ("int64Value" Core..=) Core.. Core.AsText Core.<$> int64Value,
             ("stringValue" Core..=) Core.<$> stringValue
           ]
       )
@@ -2902,16 +3071,12 @@ instance Core.FromJSON LatencyCriteria where
   parseJSON =
     Core.withObject
       "LatencyCriteria"
-      ( \o ->
-          LatencyCriteria Core.<$> (o Core..:? "threshold")
-      )
+      (\o -> LatencyCriteria Core.<$> (o Core..:? "threshold"))
 
 instance Core.ToJSON LatencyCriteria where
   toJSON LatencyCriteria {..} =
     Core.object
-      ( Core.catMaybes
-          [("threshold" Core..=) Core.<$> threshold]
-      )
+      (Core.catMaybes [("threshold" Core..=) Core.<$> threshold])
 
 -- | Specifies a linear sequence of buckets that all have the same width (except overflow and underflow). Each bucket represents a constant absolute uncertainty on the specific value in the bucket.There are num/finite/buckets + 2 (= N) buckets. Bucket i has the following boundaries:Upper bound (0 \<= i \< N-1): offset + (width * i).Lower bound (1 \<= i \< N): offset + (width * (i - 1)).
 --
@@ -2951,10 +3116,44 @@ instance Core.ToJSON Linear where
   toJSON Linear {..} =
     Core.object
       ( Core.catMaybes
-          [ ("numFiniteBuckets" Core..=)
-              Core.<$> numFiniteBuckets,
+          [ ("numFiniteBuckets" Core..=) Core.<$> numFiniteBuckets,
             ("offset" Core..=) Core.<$> offset,
             ("width" Core..=) Core.<$> width
+          ]
+      )
+
+-- | Links to content such as playbooks, repositories, and other resources.
+--
+-- /See:/ 'newLink' smart constructor.
+data Link = Link
+  { -- | A short display name for the link. The display name must not be empty or exceed 63 characters. Example: \"playbook\".
+    displayName :: (Core.Maybe Core.Text),
+    -- | The url of a webpage. A url can be templatized by using variables in the path or the query parameters. The total length of a URL should not exceed 2083 characters before and after variable expansion. Example: \"https:\/\/my_domain.com\/playbook?name=${resource.name}\"
+    url :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Link' with the minimum fields required to make a request.
+newLink ::
+  Link
+newLink = Link {displayName = Core.Nothing, url = Core.Nothing}
+
+instance Core.FromJSON Link where
+  parseJSON =
+    Core.withObject
+      "Link"
+      ( \o ->
+          Link
+            Core.<$> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "url")
+      )
+
+instance Core.ToJSON Link where
+  toJSON Link {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("url" Core..=) Core.<$> url
           ]
       )
 
@@ -3061,7 +3260,10 @@ data ListGroupsResponse = ListGroupsResponse
 newListGroupsResponse ::
   ListGroupsResponse
 newListGroupsResponse =
-  ListGroupsResponse {group' = Core.Nothing, nextPageToken = Core.Nothing}
+  ListGroupsResponse
+    { group' = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListGroupsResponse where
   parseJSON =
@@ -3116,8 +3318,7 @@ instance Core.ToJSON ListMetricDescriptorsResponse where
   toJSON ListMetricDescriptorsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("metricDescriptors" Core..=)
-              Core.<$> metricDescriptors,
+          [ ("metricDescriptors" Core..=) Core.<$> metricDescriptors,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3138,14 +3339,12 @@ newListMonitoredResourceDescriptorsResponse ::
   ListMonitoredResourceDescriptorsResponse
 newListMonitoredResourceDescriptorsResponse =
   ListMonitoredResourceDescriptorsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       resourceDescriptors = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListMonitoredResourceDescriptorsResponse
-  where
+instance Core.FromJSON ListMonitoredResourceDescriptorsResponse where
   parseJSON =
     Core.withObject
       "ListMonitoredResourceDescriptorsResponse"
@@ -3155,16 +3354,12 @@ instance
             Core.<*> (o Core..:? "resourceDescriptors")
       )
 
-instance
-  Core.ToJSON
-    ListMonitoredResourceDescriptorsResponse
-  where
+instance Core.ToJSON ListMonitoredResourceDescriptorsResponse where
   toJSON ListMonitoredResourceDescriptorsResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resourceDescriptors" Core..=)
-              Core.<$> resourceDescriptors
+            ("resourceDescriptors" Core..=) Core.<$> resourceDescriptors
           ]
       )
 
@@ -3184,14 +3379,12 @@ newListNotificationChannelDescriptorsResponse ::
   ListNotificationChannelDescriptorsResponse
 newListNotificationChannelDescriptorsResponse =
   ListNotificationChannelDescriptorsResponse
-    { channelDescriptors = Core.Nothing,
+    { channelDescriptors =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListNotificationChannelDescriptorsResponse
-  where
+instance Core.FromJSON ListNotificationChannelDescriptorsResponse where
   parseJSON =
     Core.withObject
       "ListNotificationChannelDescriptorsResponse"
@@ -3201,15 +3394,11 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListNotificationChannelDescriptorsResponse
-  where
+instance Core.ToJSON ListNotificationChannelDescriptorsResponse where
   toJSON ListNotificationChannelDescriptorsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("channelDescriptors" Core..=)
-              Core.<$> channelDescriptors,
+          [ ("channelDescriptors" Core..=) Core.<$> channelDescriptors,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3237,10 +3426,7 @@ newListNotificationChannelsResponse =
       totalSize = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListNotificationChannelsResponse
-  where
+instance Core.FromJSON ListNotificationChannelsResponse where
   parseJSON =
     Core.withObject
       "ListNotificationChannelsResponse"
@@ -3256,8 +3442,7 @@ instance Core.ToJSON ListNotificationChannelsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("notificationChannels" Core..=)
-              Core.<$> notificationChannels,
+            ("notificationChannels" Core..=) Core.<$> notificationChannels,
             ("totalSize" Core..=) Core.<$> totalSize
           ]
       )
@@ -3282,10 +3467,7 @@ newListServiceLevelObjectivesResponse =
       serviceLevelObjectives = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListServiceLevelObjectivesResponse
-  where
+instance Core.FromJSON ListServiceLevelObjectivesResponse where
   parseJSON =
     Core.withObject
       "ListServiceLevelObjectivesResponse"
@@ -3295,10 +3477,7 @@ instance
             Core.<*> (o Core..:? "serviceLevelObjectives")
       )
 
-instance
-  Core.ToJSON
-    ListServiceLevelObjectivesResponse
-  where
+instance Core.ToJSON ListServiceLevelObjectivesResponse where
   toJSON ListServiceLevelObjectivesResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -3323,7 +3502,10 @@ data ListServicesResponse = ListServicesResponse
 newListServicesResponse ::
   ListServicesResponse
 newListServicesResponse =
-  ListServicesResponse {nextPageToken = Core.Nothing, services = Core.Nothing}
+  ListServicesResponse
+    { nextPageToken = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON ListServicesResponse where
   parseJSON =
@@ -3359,7 +3541,10 @@ data ListSnoozesResponse = ListSnoozesResponse
 newListSnoozesResponse ::
   ListSnoozesResponse
 newListSnoozesResponse =
-  ListSnoozesResponse {nextPageToken = Core.Nothing, snoozes = Core.Nothing}
+  ListSnoozesResponse
+    { nextPageToken = Core.Nothing,
+      snoozes = Core.Nothing
+    }
 
 instance Core.FromJSON ListSnoozesResponse where
   parseJSON =
@@ -3422,8 +3607,7 @@ instance Core.ToJSON ListTimeSeriesResponse where
   toJSON ListTimeSeriesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("executionErrors" Core..=)
-              Core.<$> executionErrors,
+          [ ("executionErrors" Core..=) Core.<$> executionErrors,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("timeSeries" Core..=) Core.<$> timeSeries,
             ("unit" Core..=) Core.<$> unit
@@ -3470,8 +3654,7 @@ instance Core.ToJSON ListUptimeCheckConfigsResponse where
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("totalSize" Core..=) Core.<$> totalSize,
-            ("uptimeCheckConfigs" Core..=)
-              Core.<$> uptimeCheckConfigs
+            ("uptimeCheckConfigs" Core..=) Core.<$> uptimeCheckConfigs
           ]
       )
 
@@ -3528,7 +3711,8 @@ data LogMatch = LogMatch
 -- | Creates a value of 'LogMatch' with the minimum fields required to make a request.
 newLogMatch ::
   LogMatch
-newLogMatch = LogMatch {filter = Core.Nothing, labelExtractors = Core.Nothing}
+newLogMatch =
+  LogMatch {filter = Core.Nothing, labelExtractors = Core.Nothing}
 
 instance Core.FromJSON LogMatch where
   parseJSON =
@@ -3545,8 +3729,7 @@ instance Core.ToJSON LogMatch where
     Core.object
       ( Core.catMaybes
           [ ("filter" Core..=) Core.<$> filter,
-            ("labelExtractors" Core..=)
-              Core.<$> labelExtractors
+            ("labelExtractors" Core..=) Core.<$> labelExtractors
           ]
       )
 
@@ -3554,8 +3737,7 @@ instance Core.ToJSON LogMatch where
 --
 -- /See:/ 'newLogMatch_LabelExtractors' smart constructor.
 newtype LogMatch_LabelExtractors = LogMatch_LabelExtractors
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3571,14 +3753,10 @@ instance Core.FromJSON LogMatch_LabelExtractors where
   parseJSON =
     Core.withObject
       "LogMatch_LabelExtractors"
-      ( \o ->
-          LogMatch_LabelExtractors
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> LogMatch_LabelExtractors Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON LogMatch_LabelExtractors where
-  toJSON LogMatch_LabelExtractors {..} =
-    Core.toJSON additional
+  toJSON LogMatch_LabelExtractors {..} = Core.toJSON additional
 
 -- | Istio service scoped to an Istio mesh. Anthos clusters running ASM \< 1.6.8 will have their services ingested as this type.
 --
@@ -3620,8 +3798,7 @@ instance Core.ToJSON MeshIstio where
       ( Core.catMaybes
           [ ("meshUid" Core..=) Core.<$> meshUid,
             ("serviceName" Core..=) Core.<$> serviceName,
-            ("serviceNamespace" Core..=)
-              Core.<$> serviceNamespace
+            ("serviceNamespace" Core..=) Core.<$> serviceNamespace
           ]
       )
 
@@ -3646,8 +3823,7 @@ instance Core.FromJSON Metric where
     Core.withObject
       "Metric"
       ( \o ->
-          Metric
-            Core.<$> (o Core..:? "labels") Core.<*> (o Core..:? "type")
+          Metric Core.<$> (o Core..:? "labels") Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Metric where
@@ -3663,8 +3839,7 @@ instance Core.ToJSON Metric where
 --
 -- /See:/ 'newMetric_Labels' smart constructor.
 newtype Metric_Labels = Metric_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3673,15 +3848,14 @@ newMetric_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Metric_Labels
-newMetric_Labels additional = Metric_Labels {additional = additional}
+newMetric_Labels additional =
+  Metric_Labels {additional = additional}
 
 instance Core.FromJSON Metric_Labels where
   parseJSON =
     Core.withObject
       "Metric_Labels"
-      ( \o ->
-          Metric_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Metric_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Metric_Labels where
   toJSON Metric_Labels {..} = Core.toJSON additional
@@ -3814,8 +3988,7 @@ instance Core.ToJSON MetricDescriptor where
             ("launchStage" Core..=) Core.<$> launchStage,
             ("metadata" Core..=) Core.<$> metadata,
             ("metricKind" Core..=) Core.<$> metricKind,
-            ("monitoredResourceTypes" Core..=)
-              Core.<$> monitoredResourceTypes,
+            ("monitoredResourceTypes" Core..=) Core.<$> monitoredResourceTypes,
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type',
             ("unit" Core..=) Core.<$> unit,
@@ -3832,7 +4005,12 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.Duration)
+    samplePeriod :: (Core.Maybe Core.Duration),
+    -- | The scope of the timeseries data of the metric.
+    timeSeriesResourceHierarchyLevel ::
+      ( Core.Maybe
+          [MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem]
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3843,7 +4021,8 @@ newMetricDescriptorMetadata =
   MetricDescriptorMetadata
     { ingestDelay = Core.Nothing,
       launchStage = Core.Nothing,
-      samplePeriod = Core.Nothing
+      samplePeriod = Core.Nothing,
+      timeSeriesResourceHierarchyLevel = Core.Nothing
     }
 
 instance Core.FromJSON MetricDescriptorMetadata where
@@ -3855,6 +4034,7 @@ instance Core.FromJSON MetricDescriptorMetadata where
             Core.<$> (o Core..:? "ingestDelay")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "samplePeriod")
+            Core.<*> (o Core..:? "timeSeriesResourceHierarchyLevel")
       )
 
 instance Core.ToJSON MetricDescriptorMetadata where
@@ -3863,7 +4043,9 @@ instance Core.ToJSON MetricDescriptorMetadata where
       ( Core.catMaybes
           [ ("ingestDelay" Core..=) Core.<$> ingestDelay,
             ("launchStage" Core..=) Core.<$> launchStage,
-            ("samplePeriod" Core..=) Core.<$> samplePeriod
+            ("samplePeriod" Core..=) Core.<$> samplePeriod,
+            ("timeSeriesResourceHierarchyLevel" Core..=)
+              Core.<$> timeSeriesResourceHierarchyLevel
           ]
       )
 
@@ -3881,7 +4063,8 @@ data MetricRange = MetricRange
 -- | Creates a value of 'MetricRange' with the minimum fields required to make a request.
 newMetricRange ::
   MetricRange
-newMetricRange = MetricRange {range = Core.Nothing, timeSeries = Core.Nothing}
+newMetricRange =
+  MetricRange {range = Core.Nothing, timeSeries = Core.Nothing}
 
 instance Core.FromJSON MetricRange where
   parseJSON =
@@ -3916,7 +4099,7 @@ data MetricThreshold = MetricThreshold
     denominatorFilter :: (Core.Maybe Core.Text),
     -- | The amount of time that a time series must violate the threshold to be considered failing. Currently, only values that are a multiple of a minute--e.g., 0, 60, 120, or 300 seconds--are supported. If an invalid value is given, an error will be returned. When choosing a duration, it is useful to keep in mind the frequency of the underlying time series data (which may also be affected by any alignments specified in the aggregations field); a good duration is long enough so that a single outlier does not generate spurious alerts, but short enough that unhealthy states are detected and alerted on quickly.
     duration :: (Core.Maybe Core.Duration),
-    -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving.
+    -- | A condition control that determines how metric-threshold conditions are evaluated when data stops arriving. To use this control, the value of the duration field must be greater than or equal to 60 seconds.
     evaluationMissingData :: (Core.Maybe MetricThreshold_EvaluationMissingData),
     -- | Required. A filter (https:\/\/cloud.google.com\/monitoring\/api\/v3\/filters) that identifies which time series should be compared with the threshold.The filter is similar to the one that is specified in the ListTimeSeries request (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.timeSeries\/list) (that call is useful to verify the time series that will be retrieved \/ processed). The filter must specify the metric type and the resource type. Optionally, it can specify resource labels and metric labels. This field must not exceed 2048 Unicode characters in length.
     filter :: (Core.Maybe Core.Text),
@@ -3972,17 +4155,40 @@ instance Core.ToJSON MetricThreshold where
             ("comparison" Core..=) Core.<$> comparison,
             ("denominatorAggregations" Core..=)
               Core.<$> denominatorAggregations,
-            ("denominatorFilter" Core..=)
-              Core.<$> denominatorFilter,
+            ("denominatorFilter" Core..=) Core.<$> denominatorFilter,
             ("duration" Core..=) Core.<$> duration,
-            ("evaluationMissingData" Core..=)
-              Core.<$> evaluationMissingData,
+            ("evaluationMissingData" Core..=) Core.<$> evaluationMissingData,
             ("filter" Core..=) Core.<$> filter,
             ("forecastOptions" Core..=) Core.<$> forecastOptions,
             ("thresholdValue" Core..=) Core.<$> thresholdValue,
             ("trigger" Core..=) Core.<$> trigger
           ]
       )
+
+-- | Used to schedule the query to run every so many minutes.
+--
+-- /See:/ 'newMinutes' smart constructor.
+newtype Minutes = Minutes
+  { -- | Required. Number of minutes between runs. The interval must be greater than or equal to 5 minutes and less than or equal to 1440 minutes.
+    periodicity :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Minutes' with the minimum fields required to make a request.
+newMinutes ::
+  Minutes
+newMinutes = Minutes {periodicity = Core.Nothing}
+
+instance Core.FromJSON Minutes where
+  parseJSON =
+    Core.withObject
+      "Minutes"
+      (\o -> Minutes Core.<$> (o Core..:? "periodicity"))
+
+instance Core.ToJSON Minutes where
+  toJSON Minutes {..} =
+    Core.object
+      (Core.catMaybes [("periodicity" Core..=) Core.<$> periodicity])
 
 -- | An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The type field identifies a MonitoredResourceDescriptor object that describes the resource\'s schema. Information in the labels field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for \"gce/instance\" has labels \"project/id\", \"instance/id\" and \"zone\": { \"type\": \"gce/instance\", \"labels\": { \"project/id\": \"my-project\", \"instance/id\": \"12345678901234\", \"zone\": \"us-central1-a\" }}
 --
@@ -4007,7 +4213,8 @@ instance Core.FromJSON MonitoredResource where
       "MonitoredResource"
       ( \o ->
           MonitoredResource
-            Core.<$> (o Core..:? "labels") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "labels")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON MonitoredResource where
@@ -4023,8 +4230,7 @@ instance Core.ToJSON MonitoredResource where
 --
 -- /See:/ 'newMonitoredResource_Labels' smart constructor.
 newtype MonitoredResource_Labels = MonitoredResource_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4040,14 +4246,10 @@ instance Core.FromJSON MonitoredResource_Labels where
   parseJSON =
     Core.withObject
       "MonitoredResource_Labels"
-      ( \o ->
-          MonitoredResource_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> MonitoredResource_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON MonitoredResource_Labels where
-  toJSON MonitoredResource_Labels {..} =
-    Core.toJSON additional
+  toJSON MonitoredResource_Labels {..} = Core.toJSON additional
 
 -- | An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of \"gce/instance\" and specifies the use of the labels \"instance/id\" and \"zone\" to identify particular VM instances.Different APIs can support different monitored resource types. APIs generally provide a list method that returns the monitored resource descriptors used by the API.
 --
@@ -4063,7 +4265,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor
     launchStage :: (Core.Maybe MonitoredResourceDescriptor_LaunchStage),
     -- | Optional. The resource name of the monitored resource descriptor: \"projects\/{project/id}\/monitoredResourceDescriptors\/{type}\" where {type} is the value of the type field in this object and {project/id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format \"monitoredResourceDescriptors\/{type}\".
     name :: (Core.Maybe Core.Text),
-    -- | Required. The monitored resource type. For example, the type \"cloudsql_database\" represents databases in Google Cloud SQL. For a list of types, see Monitoring resource types (https:\/\/cloud.google.com\/monitoring\/api\/resources) and Logging resource types (https:\/\/cloud.google.com\/logging\/docs\/api\/v2\/resource-list).
+    -- | Required. The monitored resource type. For example, the type \"cloudsql_database\" represents databases in Google Cloud SQL. For a list of types, see Monitored resource types (https:\/\/cloud.google.com\/monitoring\/api\/resources) and Logging resource types (https:\/\/cloud.google.com\/logging\/docs\/api\/v2\/resource-list).
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4164,10 +4366,7 @@ newMonitoredResourceMetadata_SystemLabels ::
 newMonitoredResourceMetadata_SystemLabels additional =
   MonitoredResourceMetadata_SystemLabels {additional = additional}
 
-instance
-  Core.FromJSON
-    MonitoredResourceMetadata_SystemLabels
-  where
+instance Core.FromJSON MonitoredResourceMetadata_SystemLabels where
   parseJSON =
     Core.withObject
       "MonitoredResourceMetadata_SystemLabels"
@@ -4176,10 +4375,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    MonitoredResourceMetadata_SystemLabels
-  where
+instance Core.ToJSON MonitoredResourceMetadata_SystemLabels where
   toJSON MonitoredResourceMetadata_SystemLabels {..} =
     Core.toJSON additional
 
@@ -4187,8 +4383,7 @@ instance
 --
 -- /See:/ 'newMonitoredResourceMetadata_UserLabels' smart constructor.
 newtype MonitoredResourceMetadata_UserLabels = MonitoredResourceMetadata_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4200,10 +4395,7 @@ newMonitoredResourceMetadata_UserLabels ::
 newMonitoredResourceMetadata_UserLabels additional =
   MonitoredResourceMetadata_UserLabels {additional = additional}
 
-instance
-  Core.FromJSON
-    MonitoredResourceMetadata_UserLabels
-  where
+instance Core.FromJSON MonitoredResourceMetadata_UserLabels where
   parseJSON =
     Core.withObject
       "MonitoredResourceMetadata_UserLabels"
@@ -4212,14 +4404,11 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    MonitoredResourceMetadata_UserLabels
-  where
+instance Core.ToJSON MonitoredResourceMetadata_UserLabels where
   toJSON MonitoredResourceMetadata_UserLabels {..} =
     Core.toJSON additional
 
--- | A condition type that allows alert policies to be defined using Monitoring Query Language (https:\/\/cloud.google.com\/monitoring\/mql).
+-- | A condition type that allows alerting policies to be defined using Monitoring Query Language (https:\/\/cloud.google.com\/monitoring\/mql).
 --
 -- /See:/ 'newMonitoringQueryLanguageCondition' smart constructor.
 data MonitoringQueryLanguageCondition = MonitoringQueryLanguageCondition
@@ -4245,10 +4434,7 @@ newMonitoringQueryLanguageCondition =
       trigger = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    MonitoringQueryLanguageCondition
-  where
+instance Core.FromJSON MonitoringQueryLanguageCondition where
   parseJSON =
     Core.withObject
       "MonitoringQueryLanguageCondition"
@@ -4265,8 +4451,7 @@ instance Core.ToJSON MonitoringQueryLanguageCondition where
     Core.object
       ( Core.catMaybes
           [ ("duration" Core..=) Core.<$> duration,
-            ("evaluationMissingData" Core..=)
-              Core.<$> evaluationMissingData,
+            ("evaluationMissingData" Core..=) Core.<$> evaluationMissingData,
             ("query" Core..=) Core.<$> query,
             ("trigger" Core..=) Core.<$> trigger
           ]
@@ -4287,7 +4472,10 @@ data MutationRecord = MutationRecord
 newMutationRecord ::
   MutationRecord
 newMutationRecord =
-  MutationRecord {mutateTime = Core.Nothing, mutatedBy = Core.Nothing}
+  MutationRecord
+    { mutateTime = Core.Nothing,
+      mutatedBy = Core.Nothing
+    }
 
 instance Core.FromJSON MutationRecord where
   parseJSON =
@@ -4324,7 +4512,7 @@ data NotificationChannel = NotificationChannel
     labels :: (Core.Maybe NotificationChannel_Labels),
     -- | Records of the modification of this channel.
     mutationRecords :: (Core.Maybe [MutationRecord]),
-    -- | The full REST resource name for this channel. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL/ID] The [CHANNEL_ID] is automatically assigned by the server on creation.
+    -- | Identifier. The full REST resource name for this channel. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL/ID] The [CHANNEL_ID] is automatically assigned by the server on creation.
     name :: (Core.Maybe Core.Text),
     -- | The type of the notification channel. This field matches the value of the NotificationChannelDescriptor.type field.
     type' :: (Core.Maybe Core.Text),
@@ -4383,8 +4571,7 @@ instance Core.ToJSON NotificationChannel where
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type',
             ("userLabels" Core..=) Core.<$> userLabels,
-            ("verificationStatus" Core..=)
-              Core.<$> verificationStatus
+            ("verificationStatus" Core..=) Core.<$> verificationStatus
           ]
       )
 
@@ -4392,8 +4579,7 @@ instance Core.ToJSON NotificationChannel where
 --
 -- /See:/ 'newNotificationChannel_Labels' smart constructor.
 newtype NotificationChannel_Labels = NotificationChannel_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4410,20 +4596,17 @@ instance Core.FromJSON NotificationChannel_Labels where
     Core.withObject
       "NotificationChannel_Labels"
       ( \o ->
-          NotificationChannel_Labels
-            Core.<$> (Core.parseJSONObject o)
+          NotificationChannel_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON NotificationChannel_Labels where
-  toJSON NotificationChannel_Labels {..} =
-    Core.toJSON additional
+  toJSON NotificationChannel_Labels {..} = Core.toJSON additional
 
 -- | User-supplied key\/value data that does not need to conform to the corresponding NotificationChannelDescriptor\'s schema, unlike the labels field. This field is intended to be used for organizing and identifying the NotificationChannel objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.
 --
 -- /See:/ 'newNotificationChannel_UserLabels' smart constructor.
 newtype NotificationChannel_UserLabels = NotificationChannel_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4440,13 +4623,11 @@ instance Core.FromJSON NotificationChannel_UserLabels where
     Core.withObject
       "NotificationChannel_UserLabels"
       ( \o ->
-          NotificationChannel_UserLabels
-            Core.<$> (Core.parseJSONObject o)
+          NotificationChannel_UserLabels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON NotificationChannel_UserLabels where
-  toJSON NotificationChannel_UserLabels {..} =
-    Core.toJSON additional
+  toJSON NotificationChannel_UserLabels {..} = Core.toJSON additional
 
 -- | A description of a notification channel. The descriptor includes the properties of the channel and the set of labels or fields that must be specified to configure channels of a given type.
 --
@@ -4528,7 +4709,8 @@ newNotificationChannelStrategy ::
   NotificationChannelStrategy
 newNotificationChannelStrategy =
   NotificationChannelStrategy
-    { notificationChannelNames = Core.Nothing,
+    { notificationChannelNames =
+        Core.Nothing,
       renotifyInterval = Core.Nothing
     }
 
@@ -4548,12 +4730,11 @@ instance Core.ToJSON NotificationChannelStrategy where
       ( Core.catMaybes
           [ ("notificationChannelNames" Core..=)
               Core.<$> notificationChannelNames,
-            ("renotifyInterval" Core..=)
-              Core.<$> renotifyInterval
+            ("renotifyInterval" Core..=) Core.<$> renotifyInterval
           ]
       )
 
--- | Control over the rate of notifications sent to this alert policy\'s notification channels.
+-- | Control over the rate of notifications sent to this alerting policy\'s notification channels.
 --
 -- /See:/ 'newNotificationRateLimit' smart constructor.
 newtype NotificationRateLimit = NotificationRateLimit
@@ -4565,20 +4746,18 @@ newtype NotificationRateLimit = NotificationRateLimit
 -- | Creates a value of 'NotificationRateLimit' with the minimum fields required to make a request.
 newNotificationRateLimit ::
   NotificationRateLimit
-newNotificationRateLimit = NotificationRateLimit {period = Core.Nothing}
+newNotificationRateLimit =
+  NotificationRateLimit {period = Core.Nothing}
 
 instance Core.FromJSON NotificationRateLimit where
   parseJSON =
     Core.withObject
       "NotificationRateLimit"
-      ( \o ->
-          NotificationRateLimit Core.<$> (o Core..:? "period")
-      )
+      (\o -> NotificationRateLimit Core.<$> (o Core..:? "period"))
 
 instance Core.ToJSON NotificationRateLimit where
   toJSON NotificationRateLimit {..} =
-    Core.object
-      (Core.catMaybes [("period" Core..=) Core.<$> period])
+    Core.object (Core.catMaybes [("period" Core..=) Core.<$> period])
 
 -- | Contains metadata for longrunning operation for the edit Metrics Scope endpoints.
 --
@@ -4645,17 +4824,14 @@ instance Core.FromJSON Option where
     Core.withObject
       "Option"
       ( \o ->
-          Option
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+          Option Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Option where
   toJSON Option {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | The option\'s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google\/protobuf\/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
@@ -4678,9 +4854,7 @@ instance Core.FromJSON Option_Value where
   parseJSON =
     Core.withObject
       "Option_Value"
-      ( \o ->
-          Option_Value Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Option_Value Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Option_Value where
   toJSON Option_Value {..} = Core.toJSON additional
@@ -4723,8 +4897,7 @@ instance Core.ToJSON PerformanceThreshold where
   toJSON PerformanceThreshold {..} =
     Core.object
       ( Core.catMaybes
-          [ ("basicSliPerformance" Core..=)
-              Core.<$> basicSliPerformance,
+          [ ("basicSliPerformance" Core..=) Core.<$> basicSliPerformance,
             ("performance" Core..=) Core.<$> performance,
             ("threshold" Core..=) Core.<$> threshold
           ]
@@ -4748,16 +4921,12 @@ instance Core.FromJSON PingConfig where
   parseJSON =
     Core.withObject
       "PingConfig"
-      ( \o ->
-          PingConfig Core.<$> (o Core..:? "pingsCount")
-      )
+      (\o -> PingConfig Core.<$> (o Core..:? "pingsCount"))
 
 instance Core.ToJSON PingConfig where
   toJSON PingConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("pingsCount" Core..=) Core.<$> pingsCount]
-      )
+      (Core.catMaybes [("pingsCount" Core..=) Core.<$> pingsCount])
 
 -- | A single data point in a time series.
 --
@@ -4808,7 +4977,8 @@ data PointData = PointData
 -- | Creates a value of 'PointData' with the minimum fields required to make a request.
 newPointData ::
   PointData
-newPointData = PointData {timeInterval = Core.Nothing, values = Core.Nothing}
+newPointData =
+  PointData {timeInterval = Core.Nothing, values = Core.Nothing}
 
 instance Core.FromJSON PointData where
   parseJSON =
@@ -4829,7 +4999,102 @@ instance Core.ToJSON PointData where
           ]
       )
 
--- | The QueryTimeSeries request.
+-- | A condition type that allows alerting policies to be defined using Prometheus Query Language (PromQL) (https:\/\/prometheus.io\/docs\/prometheus\/latest\/querying\/basics\/).The PrometheusQueryLanguageCondition message contains information from a Prometheus alerting rule and its associated rule group.A Prometheus alerting rule is described here (https:\/\/prometheus.io\/docs\/prometheus\/latest\/configuration\/alerting/rules\/). The semantics of a Prometheus alerting rule is described here (https:\/\/prometheus.io\/docs\/prometheus\/latest\/configuration\/recording/rules\/#rule).A Prometheus rule group is described here (https:\/\/prometheus.io\/docs\/prometheus\/latest\/configuration\/recording/rules\/). The semantics of a Prometheus rule group is described here (https:\/\/prometheus.io\/docs\/prometheus\/latest\/configuration\/recording/rules\/#rule_group).Because Cloud Alerting has no representation of a Prometheus rule group resource, we must embed the information of the parent rule group inside each of
+-- the conditions that refer to it. We must also update the contents of all Prometheus alerts in case the information of their rule group changes.The PrometheusQueryLanguageCondition protocol buffer combines the information of the corresponding rule group and alerting rule. The structure of the PrometheusQueryLanguageCondition protocol buffer does NOT mimic the structure of the Prometheus rule group and alerting rule YAML declarations. The PrometheusQueryLanguageCondition protocol buffer may change in the future to support future rule group and\/or alerting rule features. There are no new such features at the present time (2023-06-26).
+--
+-- /See:/ 'newPrometheusQueryLanguageCondition' smart constructor.
+data PrometheusQueryLanguageCondition = PrometheusQueryLanguageCondition
+  { -- | Optional. The alerting rule name of this alert in the corresponding Prometheus configuration file.Some external tools may require this field to be populated correctly in order to refer to the original Prometheus configuration file. The rule group name and the alert name are necessary to update the relevant AlertPolicies in case the definition of the rule group changes in the future.This field is optional. If this field is not empty, then it must be a valid Prometheus label name (https:\/\/prometheus.io\/docs\/concepts\/data_model\/#metric-names-and-labels). This field may not exceed 2048 Unicode characters in length.
+    alertRule :: (Core.Maybe Core.Text),
+    -- | Optional. Whether to disable metric existence validation for this condition.This allows alerting policies to be defined on metrics that do not yet exist, improving advanced customer workflows such as configuring alerting policies using Terraform.Users with the monitoring.alertPolicyViewer role are able to see the name of the non-existent metric in the alerting policy condition.
+    disableMetricValidation :: (Core.Maybe Core.Bool),
+    -- | Optional. Alerts are considered firing once their PromQL expression was evaluated to be \"true\" for this long. Alerts whose PromQL expression was not evaluated to be \"true\" for long enough are considered pending. Must be a non-negative duration or missing. This field is optional. Its default value is zero.
+    duration :: (Core.Maybe Core.Duration),
+    -- | Optional. How often this rule should be evaluated. Must be a positive multiple of 30 seconds or missing. This field is optional. Its default value is 30 seconds. If this PrometheusQueryLanguageCondition was generated from a Prometheus alerting rule, then this value should be taken from the enclosing rule group.
+    evaluationInterval :: (Core.Maybe Core.Duration),
+    -- | Optional. Labels to add to or overwrite in the PromQL query result. Label names must be valid (https:\/\/prometheus.io\/docs\/concepts\/data_model\/#metric-names-and-labels). Label values can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables#doc-vars). The only available variable names are the names of the labels in the PromQL result, including \"__name__\" and \"value\". \"labels\" may be empty.
+    labels :: (Core.Maybe PrometheusQueryLanguageCondition_Labels),
+    -- | Required. The PromQL expression to evaluate. Every evaluation cycle this expression is evaluated at the current time, and all resultant time series become pending\/firing alerts. This field must not be empty.
+    query :: (Core.Maybe Core.Text),
+    -- | Optional. The rule group name of this alert in the corresponding Prometheus configuration file.Some external tools may require this field to be populated correctly in order to refer to the original Prometheus configuration file. The rule group name and the alert name are necessary to update the relevant AlertPolicies in case the definition of the rule group changes in the future.This field is optional. If this field is not empty, then it must contain a valid UTF-8 string. This field may not exceed 2048 Unicode characters in length.
+    ruleGroup :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrometheusQueryLanguageCondition' with the minimum fields required to make a request.
+newPrometheusQueryLanguageCondition ::
+  PrometheusQueryLanguageCondition
+newPrometheusQueryLanguageCondition =
+  PrometheusQueryLanguageCondition
+    { alertRule = Core.Nothing,
+      disableMetricValidation = Core.Nothing,
+      duration = Core.Nothing,
+      evaluationInterval = Core.Nothing,
+      labels = Core.Nothing,
+      query = Core.Nothing,
+      ruleGroup = Core.Nothing
+    }
+
+instance Core.FromJSON PrometheusQueryLanguageCondition where
+  parseJSON =
+    Core.withObject
+      "PrometheusQueryLanguageCondition"
+      ( \o ->
+          PrometheusQueryLanguageCondition
+            Core.<$> (o Core..:? "alertRule")
+            Core.<*> (o Core..:? "disableMetricValidation")
+            Core.<*> (o Core..:? "duration")
+            Core.<*> (o Core..:? "evaluationInterval")
+            Core.<*> (o Core..:? "labels")
+            Core.<*> (o Core..:? "query")
+            Core.<*> (o Core..:? "ruleGroup")
+      )
+
+instance Core.ToJSON PrometheusQueryLanguageCondition where
+  toJSON PrometheusQueryLanguageCondition {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alertRule" Core..=) Core.<$> alertRule,
+            ("disableMetricValidation" Core..=)
+              Core.<$> disableMetricValidation,
+            ("duration" Core..=) Core.<$> duration,
+            ("evaluationInterval" Core..=) Core.<$> evaluationInterval,
+            ("labels" Core..=) Core.<$> labels,
+            ("query" Core..=) Core.<$> query,
+            ("ruleGroup" Core..=) Core.<$> ruleGroup
+          ]
+      )
+
+-- | Optional. Labels to add to or overwrite in the PromQL query result. Label names must be valid (https:\/\/prometheus.io\/docs\/concepts\/data_model\/#metric-names-and-labels). Label values can be templatized by using variables (https:\/\/cloud.google.com\/monitoring\/alerts\/doc-variables#doc-vars). The only available variable names are the names of the labels in the PromQL result, including \"__name__\" and \"value\". \"labels\" may be empty.
+--
+-- /See:/ 'newPrometheusQueryLanguageCondition_Labels' smart constructor.
+newtype PrometheusQueryLanguageCondition_Labels = PrometheusQueryLanguageCondition_Labels
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PrometheusQueryLanguageCondition_Labels' with the minimum fields required to make a request.
+newPrometheusQueryLanguageCondition_Labels ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  PrometheusQueryLanguageCondition_Labels
+newPrometheusQueryLanguageCondition_Labels additional =
+  PrometheusQueryLanguageCondition_Labels {additional = additional}
+
+instance Core.FromJSON PrometheusQueryLanguageCondition_Labels where
+  parseJSON =
+    Core.withObject
+      "PrometheusQueryLanguageCondition_Labels"
+      ( \o ->
+          PrometheusQueryLanguageCondition_Labels
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON PrometheusQueryLanguageCondition_Labels where
+  toJSON PrometheusQueryLanguageCondition_Labels {..} =
+    Core.toJSON additional
+
+-- | The QueryTimeSeries request. For information about the status of Monitoring Query Language (MQL), see the MQL deprecation notice (https:\/\/cloud.google.com\/stackdriver\/docs\/deprecations\/mql).
 --
 -- /See:/ 'newQueryTimeSeriesRequest' smart constructor.
 data QueryTimeSeriesRequest = QueryTimeSeriesRequest
@@ -4873,7 +5138,7 @@ instance Core.ToJSON QueryTimeSeriesRequest where
           ]
       )
 
--- | The QueryTimeSeries response.
+-- | The QueryTimeSeries response. For information about the status of Monitoring Query Language (MQL), see the MQL deprecation notice (https:\/\/cloud.google.com\/stackdriver\/docs\/deprecations\/mql).
 --
 -- /See:/ 'newQueryTimeSeriesResponse' smart constructor.
 data QueryTimeSeriesResponse = QueryTimeSeriesResponse
@@ -4918,8 +5183,7 @@ instance Core.ToJSON QueryTimeSeriesResponse where
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("partialErrors" Core..=) Core.<$> partialErrors,
             ("timeSeriesData" Core..=) Core.<$> timeSeriesData,
-            ("timeSeriesDescriptor" Core..=)
-              Core.<$> timeSeriesDescriptor
+            ("timeSeriesDescriptor" Core..=) Core.<$> timeSeriesDescriptor
           ]
       )
 
@@ -4944,17 +5208,14 @@ instance Core.FromJSON Range where
     Core.withObject
       "Range"
       ( \o ->
-          Range
-            Core.<$> (o Core..:? "max") Core.<*> (o Core..:? "min")
+          Range Core.<$> (o Core..:? "max") Core.<*> (o Core..:? "min")
       )
 
 instance Core.ToJSON Range where
   toJSON Range {..} =
     Core.object
       ( Core.catMaybes
-          [ ("max" Core..=) Core.<$> max,
-            ("min" Core..=) Core.<$> min
-          ]
+          [("max" Core..=) Core.<$> max, ("min" Core..=) Core.<$> min]
       )
 
 -- | Service Level Indicators for which atomic units of service are counted directly.
@@ -4991,8 +5252,7 @@ instance Core.ToJSON RequestBasedSli where
   toJSON RequestBasedSli {..} =
     Core.object
       ( Core.catMaybes
-          [ ("distributionCut" Core..=)
-              Core.<$> distributionCut,
+          [ ("distributionCut" Core..=) Core.<$> distributionCut,
             ("goodTotalRatio" Core..=) Core.<$> goodTotalRatio
           ]
       )
@@ -5012,7 +5272,10 @@ data ResourceGroup = ResourceGroup
 newResourceGroup ::
   ResourceGroup
 newResourceGroup =
-  ResourceGroup {groupId = Core.Nothing, resourceType = Core.Nothing}
+  ResourceGroup
+    { groupId = Core.Nothing,
+      resourceType = Core.Nothing
+    }
 
 instance Core.FromJSON ResourceGroup where
   parseJSON =
@@ -5048,7 +5311,10 @@ data ResponseStatusCode = ResponseStatusCode
 newResponseStatusCode ::
   ResponseStatusCode
 newResponseStatusCode =
-  ResponseStatusCode {statusClass = Core.Nothing, statusValue = Core.Nothing}
+  ResponseStatusCode
+    { statusClass = Core.Nothing,
+      statusValue = Core.Nothing
+    }
 
 instance Core.FromJSON ResponseStatusCode where
   parseJSON =
@@ -5066,6 +5332,42 @@ instance Core.ToJSON ResponseStatusCode where
       ( Core.catMaybes
           [ ("statusClass" Core..=) Core.<$> statusClass,
             ("statusValue" Core..=) Core.<$> statusValue
+          ]
+      )
+
+-- | A test that checks if the number of rows in the result set violates some threshold.
+--
+-- /See:/ 'newRowCountTest' smart constructor.
+data RowCountTest = RowCountTest
+  { -- | Required. The comparison to apply between the number of rows returned by the query and the threshold.
+    comparison :: (Core.Maybe RowCountTest_Comparison),
+    -- | Required. The value against which to compare the row count.
+    threshold :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RowCountTest' with the minimum fields required to make a request.
+newRowCountTest ::
+  RowCountTest
+newRowCountTest =
+  RowCountTest {comparison = Core.Nothing, threshold = Core.Nothing}
+
+instance Core.FromJSON RowCountTest where
+  parseJSON =
+    Core.withObject
+      "RowCountTest"
+      ( \o ->
+          RowCountTest
+            Core.<$> (o Core..:? "comparison")
+            Core.<*> (o Core..:? "threshold" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON RowCountTest where
+  toJSON RowCountTest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("comparison" Core..=) Core.<$> comparison,
+            ("threshold" Core..=) Core.. Core.AsText Core.<$> threshold
           ]
       )
 
@@ -5088,15 +5390,9 @@ instance
   parseJSON =
     Core.withObject
       "SendNotificationChannelVerificationCodeRequest"
-      ( \o ->
-          Core.pure
-            SendNotificationChannelVerificationCodeRequest
-      )
+      (\o -> Core.pure SendNotificationChannelVerificationCodeRequest)
 
-instance
-  Core.ToJSON
-    SendNotificationChannelVerificationCodeRequest
-  where
+instance Core.ToJSON SendNotificationChannelVerificationCodeRequest where
   toJSON = Core.const Core.emptyObject
 
 -- | A Service is a discrete, autonomous, and network-accessible unit, designed to solve an individual concern (Wikipedia (https:\/\/en.wikipedia.org\/wiki\/Service-orientation)). In Cloud Monitoring, a Service acts as the root resource under which operational aspects of the service are accessible.
@@ -5127,7 +5423,7 @@ data Service = Service
     istioCanonicalService :: (Core.Maybe IstioCanonicalService),
     -- | Type used for Istio services scoped to an Istio mesh.
     meshIstio :: (Core.Maybe MeshIstio),
-    -- | Resource name for this Service. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]
+    -- | Identifier. Resource name for this Service. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]
     name :: (Core.Maybe Core.Text),
     -- | Configuration for how to query telemetry on a Service.
     telemetry :: (Core.Maybe Telemetry),
@@ -5195,8 +5491,7 @@ instance Core.ToJSON Service where
             ("gkeNamespace" Core..=) Core.<$> gkeNamespace,
             ("gkeService" Core..=) Core.<$> gkeService,
             ("gkeWorkload" Core..=) Core.<$> gkeWorkload,
-            ("istioCanonicalService" Core..=)
-              Core.<$> istioCanonicalService,
+            ("istioCanonicalService" Core..=) Core.<$> istioCanonicalService,
             ("meshIstio" Core..=) Core.<$> meshIstio,
             ("name" Core..=) Core.<$> name,
             ("telemetry" Core..=) Core.<$> telemetry,
@@ -5208,8 +5503,7 @@ instance Core.ToJSON Service where
 --
 -- /See:/ 'newService_UserLabels' smart constructor.
 newtype Service_UserLabels = Service_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5218,19 +5512,42 @@ newService_UserLabels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Service_UserLabels
-newService_UserLabels additional = Service_UserLabels {additional = additional}
+newService_UserLabels additional =
+  Service_UserLabels {additional = additional}
 
 instance Core.FromJSON Service_UserLabels where
   parseJSON =
     Core.withObject
       "Service_UserLabels"
-      ( \o ->
-          Service_UserLabels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Service_UserLabels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Service_UserLabels where
-  toJSON Service_UserLabels {..} =
-    Core.toJSON additional
+  toJSON Service_UserLabels {..} = Core.toJSON additional
+
+-- | Contains information needed for generating either an OpenID Connect token (https:\/\/developers.google.com\/identity\/protocols\/OpenIDConnect) or OAuth token (https:\/\/developers.google.com\/identity\/protocols\/oauth2). The token will be generated for the Monitoring service agent service account.
+--
+-- /See:/ 'newServiceAgentAuthentication' smart constructor.
+newtype ServiceAgentAuthentication = ServiceAgentAuthentication
+  { -- | Type of authentication.
+    type' :: (Core.Maybe ServiceAgentAuthentication_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceAgentAuthentication' with the minimum fields required to make a request.
+newServiceAgentAuthentication ::
+  ServiceAgentAuthentication
+newServiceAgentAuthentication =
+  ServiceAgentAuthentication {type' = Core.Nothing}
+
+instance Core.FromJSON ServiceAgentAuthentication where
+  parseJSON =
+    Core.withObject
+      "ServiceAgentAuthentication"
+      (\o -> ServiceAgentAuthentication Core.<$> (o Core..:? "type"))
+
+instance Core.ToJSON ServiceAgentAuthentication where
+  toJSON ServiceAgentAuthentication {..} =
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | A Service-Level Indicator (SLI) describes the \"performance\" of a service. For some services, the SLI is well-defined. In such cases, the SLI can be described easily by referencing the well-known SLI and providing the needed parameters. Alternatively, a \"custom\" SLI can be defined with a query to the underlying metric store. An SLI is defined to be good/service \/ total/service over any queried time interval. The value of performance always falls into the range 0 \<= performance \<= 1. A custom SLI describes how to compute this ratio, whether this is by dividing values from a pair of time series, cutting a Distribution into good and bad counts, or counting time windows in which the service complies with a criterion. For separation of concerns, a single Service-Level Indicator measures performance for only one aspect of service quality, such as fraction of successful queries or fast-enough queries.
 --
@@ -5284,9 +5601,9 @@ data ServiceLevelObjective = ServiceLevelObjective
     calendarPeriod :: (Core.Maybe ServiceLevelObjective_CalendarPeriod),
     -- | Name used for UI elements listing this SLO.
     displayName :: (Core.Maybe Core.Text),
-    -- | The fraction of service that must be good in order for this objective to be met. 0 \< goal \<= 0.999.
+    -- | The fraction of service that must be good in order for this objective to be met. 0 \< goal \<= 0.9999.
     goal :: (Core.Maybe Core.Double),
-    -- | Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME]
+    -- | Identifier. Resource name for this ServiceLevelObjective. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/services\/[SERVICE/ID]\/serviceLevelObjectives\/[SLO_NAME]
     name :: (Core.Maybe Core.Text),
     -- | A rolling time period, semantically \"in the past \". Must be an integer multiple of 1 day no larger than 30 days.
     rollingPeriod :: (Core.Maybe Core.Duration),
@@ -5335,8 +5652,7 @@ instance Core.ToJSON ServiceLevelObjective where
             ("goal" Core..=) Core.<$> goal,
             ("name" Core..=) Core.<$> name,
             ("rollingPeriod" Core..=) Core.<$> rollingPeriod,
-            ("serviceLevelIndicator" Core..=)
-              Core.<$> serviceLevelIndicator,
+            ("serviceLevelIndicator" Core..=) Core.<$> serviceLevelIndicator,
             ("userLabels" Core..=) Core.<$> userLabels
           ]
       )
@@ -5345,8 +5661,7 @@ instance Core.ToJSON ServiceLevelObjective where
 --
 -- /See:/ 'newServiceLevelObjective_UserLabels' smart constructor.
 newtype ServiceLevelObjective_UserLabels = ServiceLevelObjective_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5358,16 +5673,12 @@ newServiceLevelObjective_UserLabels ::
 newServiceLevelObjective_UserLabels additional =
   ServiceLevelObjective_UserLabels {additional = additional}
 
-instance
-  Core.FromJSON
-    ServiceLevelObjective_UserLabels
-  where
+instance Core.FromJSON ServiceLevelObjective_UserLabels where
   parseJSON =
     Core.withObject
       "ServiceLevelObjective_UserLabels"
       ( \o ->
-          ServiceLevelObjective_UserLabels
-            Core.<$> (Core.parseJSONObject o)
+          ServiceLevelObjective_UserLabels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON ServiceLevelObjective_UserLabels where
@@ -5384,7 +5695,7 @@ data Snooze = Snooze
     displayName :: (Core.Maybe Core.Text),
     -- | Required. The Snooze will be active from interval.start/time through interval.end/time. interval.start_time cannot be in the past. There is a 15 second clock skew to account for the time it takes for a request to reach the API from the UI.
     interval :: (Core.Maybe TimeInterval),
-    -- | Required. The name of the Snooze. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/snoozes\/[SNOOZE/ID] The ID of the Snooze will be generated by the system.
+    -- | Required. Identifier. The name of the Snooze. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/snoozes\/[SNOOZE/ID] The ID of the Snooze will be generated by the system.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5441,16 +5752,12 @@ instance Core.FromJSON SourceContext where
   parseJSON =
     Core.withObject
       "SourceContext"
-      ( \o ->
-          SourceContext Core.<$> (o Core..:? "fileName")
-      )
+      (\o -> SourceContext Core.<$> (o Core..:? "fileName"))
 
 instance Core.ToJSON SourceContext where
   toJSON SourceContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("fileName" Core..=) Core.<$> fileName]
-      )
+      (Core.catMaybes [("fileName" Core..=) Core.<$> fileName])
 
 -- | The context of a span. This is attached to an Exemplar in Distribution values during aggregation.It contains the name of a span with format: projects\/[PROJECT/ID/OR/NUMBER]\/traces\/[TRACE/ID]\/spans\/[SPAN_ID]
 --
@@ -5475,8 +5782,65 @@ instance Core.FromJSON SpanContext where
 instance Core.ToJSON SpanContext where
   toJSON SpanContext {..} =
     Core.object
+      (Core.catMaybes [("spanName" Core..=) Core.<$> spanName])
+
+-- | A condition that allows alerting policies to be defined using GoogleSQL. SQL conditions examine a sliding window of logs using GoogleSQL. Alert policies with SQL conditions may incur additional billing.
+--
+-- /See:/ 'newSqlCondition' smart constructor.
+data SqlCondition = SqlCondition
+  { -- | Test the boolean value in the indicated column.
+    booleanTest :: (Core.Maybe BooleanTest),
+    -- | Schedule the query to execute every so many days.
+    daily :: (Core.Maybe Daily),
+    -- | Schedule the query to execute every so many hours.
+    hourly :: (Core.Maybe Hourly),
+    -- | Schedule the query to execute every so many minutes.
+    minutes :: (Core.Maybe Minutes),
+    -- | Required. The Log Analytics SQL query to run, as a string. The query must conform to the required shape. Specifically, the query must not try to filter the input by time. A filter will automatically be applied to filter the input so that the query receives all rows received since the last time the query was run.For example, the following query extracts all log entries containing an HTTP request: SELECT timestamp, log/name, severity, http/request, resource, labels FROM my-project.global./Default./AllLogs WHERE http_request IS NOT NULL
+    query :: (Core.Maybe Core.Text),
+    -- | Test the row count against a threshold.
+    rowCountTest :: (Core.Maybe RowCountTest)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SqlCondition' with the minimum fields required to make a request.
+newSqlCondition ::
+  SqlCondition
+newSqlCondition =
+  SqlCondition
+    { booleanTest = Core.Nothing,
+      daily = Core.Nothing,
+      hourly = Core.Nothing,
+      minutes = Core.Nothing,
+      query = Core.Nothing,
+      rowCountTest = Core.Nothing
+    }
+
+instance Core.FromJSON SqlCondition where
+  parseJSON =
+    Core.withObject
+      "SqlCondition"
+      ( \o ->
+          SqlCondition
+            Core.<$> (o Core..:? "booleanTest")
+            Core.<*> (o Core..:? "daily")
+            Core.<*> (o Core..:? "hourly")
+            Core.<*> (o Core..:? "minutes")
+            Core.<*> (o Core..:? "query")
+            Core.<*> (o Core..:? "rowCountTest")
+      )
+
+instance Core.ToJSON SqlCondition where
+  toJSON SqlCondition {..} =
+    Core.object
       ( Core.catMaybes
-          [("spanName" Core..=) Core.<$> spanName]
+          [ ("booleanTest" Core..=) Core.<$> booleanTest,
+            ("daily" Core..=) Core.<$> daily,
+            ("hourly" Core..=) Core.<$> hourly,
+            ("minutes" Core..=) Core.<$> minutes,
+            ("query" Core..=) Core.<$> query,
+            ("rowCountTest" Core..=) Core.<$> rowCountTest
+          ]
       )
 
 -- | The Status type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by gRPC (https:\/\/github.com\/grpc). Each Status message contains three pieces of data: error code, error message, and error details.You can find out more about this error model and how to work with it in the API Design Guide (https:\/\/cloud.google.com\/apis\/design\/errors).
@@ -5496,7 +5860,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -5532,19 +5900,47 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | Describes a Synthetic Monitor to be invoked by Uptime.
+--
+-- /See:/ 'newSyntheticMonitorTarget' smart constructor.
+newtype SyntheticMonitorTarget = SyntheticMonitorTarget
+  { -- | Target a Synthetic Monitor GCFv2 instance.
+    cloudFunctionV2 :: (Core.Maybe CloudFunctionV2Target)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SyntheticMonitorTarget' with the minimum fields required to make a request.
+newSyntheticMonitorTarget ::
+  SyntheticMonitorTarget
+newSyntheticMonitorTarget =
+  SyntheticMonitorTarget {cloudFunctionV2 = Core.Nothing}
+
+instance Core.FromJSON SyntheticMonitorTarget where
+  parseJSON =
+    Core.withObject
+      "SyntheticMonitorTarget"
+      ( \o ->
+          SyntheticMonitorTarget Core.<$> (o Core..:? "cloudFunctionV2")
+      )
+
+instance Core.ToJSON SyntheticMonitorTarget where
+  toJSON SyntheticMonitorTarget {..} =
+    Core.object
+      ( Core.catMaybes
+          [("cloudFunctionV2" Core..=) Core.<$> cloudFunctionV2]
+      )
 
 -- | Information required for a TCP Uptime check request.
 --
@@ -5560,7 +5956,8 @@ data TcpCheck = TcpCheck
 -- | Creates a value of 'TcpCheck' with the minimum fields required to make a request.
 newTcpCheck ::
   TcpCheck
-newTcpCheck = TcpCheck {pingConfig = Core.Nothing, port = Core.Nothing}
+newTcpCheck =
+  TcpCheck {pingConfig = Core.Nothing, port = Core.Nothing}
 
 instance Core.FromJSON TcpCheck where
   parseJSON =
@@ -5599,16 +5996,12 @@ instance Core.FromJSON Telemetry where
   parseJSON =
     Core.withObject
       "Telemetry"
-      ( \o ->
-          Telemetry Core.<$> (o Core..:? "resourceName")
-      )
+      (\o -> Telemetry Core.<$> (o Core..:? "resourceName"))
 
 instance Core.ToJSON Telemetry where
   toJSON Telemetry {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceName" Core..=) Core.<$> resourceName]
-      )
+      (Core.catMaybes [("resourceName" Core..=) Core.<$> resourceName])
 
 -- | Describes a time interval: Reads: A half-open time interval. It includes the end time but excludes the start time: (startTime, endTime]. The start time must be specified, must be earlier than the end time, and should be no older than the data retention period for the metric. Writes: A closed time interval. It extends from the start time to the end time, and includes both: [startTime, endTime]. Valid time intervals depend on the MetricKind (https:\/\/cloud.google.com\/monitoring\/api\/ref_v3\/rest\/v3\/projects.metricDescriptors#MetricKind) of the metric value. The end time must not be earlier than the start time, and the end time must not be more than 25 hours in the past or more than five minutes in the future. For GAUGE metrics, the startTime value is technically optional; if no value is specified, the start time defaults to the value of the end time, and the interval represents a single point in time. If both start and end times are specified, they must be identical. Such an interval is valid only for
 -- GAUGE metrics, which are point-in-time measurements. The end time of a new interval must be at least a millisecond after the end time of the previous interval. For DELTA metrics, the start time and end time must specify a non-zero interval, with subsequent points specifying contiguous and non-overlapping intervals. For DELTA metrics, the start time of the next interval must be at least a millisecond after the end time of the previous interval. For CUMULATIVE metrics, the start time and end time must specify a non-zero interval, with subsequent points specifying the same start time and increasing end times, until an event resets the cumulative value to zero and sets a new start time for the following points. The new start time must be at least a millisecond after the end time of the previous interval. The start time of a new interval must be at least a millisecond after the end time of the previous interval because intervals are closed. If the start time of a new interval is the same as the end time of the
@@ -5648,11 +6041,62 @@ instance Core.ToJSON TimeInterval where
           ]
       )
 
+-- | Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and google.protobuf.Timestamp.
+--
+-- /See:/ 'newTimeOfDay' smart constructor.
+data TimeOfDay' = TimeOfDay'
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+    hours :: (Core.Maybe Core.Int32),
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
+    minutes :: (Core.Maybe Core.Int32),
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
+    nanos :: (Core.Maybe Core.Int32),
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
+    seconds :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeOfDay' with the minimum fields required to make a request.
+newTimeOfDay ::
+  TimeOfDay'
+newTimeOfDay =
+  TimeOfDay'
+    { hours = Core.Nothing,
+      minutes = Core.Nothing,
+      nanos = Core.Nothing,
+      seconds = Core.Nothing
+    }
+
+instance Core.FromJSON TimeOfDay' where
+  parseJSON =
+    Core.withObject
+      "TimeOfDay'"
+      ( \o ->
+          TimeOfDay'
+            Core.<$> (o Core..:? "hours")
+            Core.<*> (o Core..:? "minutes")
+            Core.<*> (o Core..:? "nanos")
+            Core.<*> (o Core..:? "seconds")
+      )
+
+instance Core.ToJSON TimeOfDay' where
+  toJSON TimeOfDay' {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("hours" Core..=) Core.<$> hours,
+            ("minutes" Core..=) Core.<$> minutes,
+            ("nanos" Core..=) Core.<$> nanos,
+            ("seconds" Core..=) Core.<$> seconds
+          ]
+      )
+
 -- | A collection of data points that describes the time-varying values of a metric. A time series is identified by a combination of a fully-specified monitored resource and a fully-specified metric. This type is used for both listing and creating time series.
 --
 -- /See:/ 'newTimeSeries' smart constructor.
 data TimeSeries = TimeSeries
-  { -- | Output only. The associated monitored resource metadata. When reading a time series, this field will include metadata labels that are explicitly named in the reduction. When creating a time series, this field is ignored.
+  { -- | Input only. A detailed description of the time series that will be associated with the google.api.MetricDescriptor for the metric. Once set, this field cannot be changed through CreateTimeSeries.
+    description :: (Core.Maybe Core.Text),
+    -- | Output only. The associated monitored resource metadata. When reading a time series, this field will include metadata labels that are explicitly named in the reduction. When creating a time series, this field is ignored.
     metadata :: (Core.Maybe MonitoredResourceMetadata),
     -- | The associated metric. A fully-specified metric used to identify the time series.
     metric :: (Core.Maybe Metric),
@@ -5662,7 +6106,7 @@ data TimeSeries = TimeSeries
     points :: (Core.Maybe [Point]),
     -- | The associated monitored resource. Custom metrics can use only certain monitored resource types in their time series data. For more information, see Monitored resources for custom metrics (https:\/\/cloud.google.com\/monitoring\/custom-metrics\/creating-metrics#custom-metric-resources).
     resource :: (Core.Maybe MonitoredResource),
-    -- | The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values.
+    -- | The units in which the metric value is reported. It is only applicable if the value_type is INT64, DOUBLE, or DISTRIBUTION. The unit defines the representation of the stored metric values. This field can only be changed through CreateTimeSeries when it is empty.
     unit :: (Core.Maybe Core.Text),
     -- | The value type of the time series. When listing time series, this value type might be different from the value type of the associated metric if this time series is an alignment or reduction of other time series.When creating a time series, this field is optional. If present, it must be the same as the type of the data in the points field.
     valueType :: (Core.Maybe TimeSeries_ValueType)
@@ -5674,7 +6118,8 @@ newTimeSeries ::
   TimeSeries
 newTimeSeries =
   TimeSeries
-    { metadata = Core.Nothing,
+    { description = Core.Nothing,
+      metadata = Core.Nothing,
       metric = Core.Nothing,
       metricKind = Core.Nothing,
       points = Core.Nothing,
@@ -5689,7 +6134,8 @@ instance Core.FromJSON TimeSeries where
       "TimeSeries"
       ( \o ->
           TimeSeries
-            Core.<$> (o Core..:? "metadata")
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "metricKind")
             Core.<*> (o Core..:? "points")
@@ -5702,7 +6148,8 @@ instance Core.ToJSON TimeSeries where
   toJSON TimeSeries {..} =
     Core.object
       ( Core.catMaybes
-          [ ("metadata" Core..=) Core.<$> metadata,
+          [ ("description" Core..=) Core.<$> description,
+            ("metadata" Core..=) Core.<$> metadata,
             ("metric" Core..=) Core.<$> metric,
             ("metricKind" Core..=) Core.<$> metricKind,
             ("points" Core..=) Core.<$> points,
@@ -5727,7 +6174,10 @@ data TimeSeriesData = TimeSeriesData
 newTimeSeriesData ::
   TimeSeriesData
 newTimeSeriesData =
-  TimeSeriesData {labelValues = Core.Nothing, pointData = Core.Nothing}
+  TimeSeriesData
+    { labelValues = Core.Nothing,
+      pointData = Core.Nothing
+    }
 
 instance Core.FromJSON TimeSeriesData where
   parseJSON =
@@ -5782,10 +6232,8 @@ instance Core.ToJSON TimeSeriesDescriptor where
   toJSON TimeSeriesDescriptor {..} =
     Core.object
       ( Core.catMaybes
-          [ ("labelDescriptors" Core..=)
-              Core.<$> labelDescriptors,
-            ("pointDescriptors" Core..=)
-              Core.<$> pointDescriptors
+          [ ("labelDescriptors" Core..=) Core.<$> labelDescriptors,
+            ("pointDescriptors" Core..=) Core.<$> pointDescriptors
           ]
       )
 
@@ -5827,12 +6275,9 @@ instance Core.ToJSON TimeSeriesRatio where
   toJSON TimeSeriesRatio {..} =
     Core.object
       ( Core.catMaybes
-          [ ("badServiceFilter" Core..=)
-              Core.<$> badServiceFilter,
-            ("goodServiceFilter" Core..=)
-              Core.<$> goodServiceFilter,
-            ("totalServiceFilter" Core..=)
-              Core.<$> totalServiceFilter
+          [ ("badServiceFilter" Core..=) Core.<$> badServiceFilter,
+            ("goodServiceFilter" Core..=) Core.<$> goodServiceFilter,
+            ("totalServiceFilter" Core..=) Core.<$> totalServiceFilter
           ]
       )
 
@@ -5858,7 +6303,8 @@ instance Core.FromJSON Trigger where
       "Trigger"
       ( \o ->
           Trigger
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "percent")
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "percent")
       )
 
 instance Core.ToJSON Trigger where
@@ -5972,9 +6418,7 @@ instance Core.FromJSON TypedValue where
             Core.<$> (o Core..:? "boolValue")
             Core.<*> (o Core..:? "distributionValue")
             Core.<*> (o Core..:? "doubleValue")
-            Core.<*> ( o Core..:? "int64Value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "int64Value" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -5983,11 +6427,9 @@ instance Core.ToJSON TypedValue where
     Core.object
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
-            ("distributionValue" Core..=)
-              Core.<$> distributionValue,
+            ("distributionValue" Core..=) Core.<$> distributionValue,
             ("doubleValue" Core..=) Core.<$> doubleValue,
-            ("int64Value" Core..=) Core.. Core.AsText
-              Core.<$> int64Value,
+            ("int64Value" Core..=) Core.. Core.AsText Core.<$> int64Value,
             ("stringValue" Core..=) Core.<$> stringValue
           ]
       )
@@ -6008,9 +6450,11 @@ data UptimeCheckConfig = UptimeCheckConfig
     internalCheckers :: (Core.Maybe [InternalChecker]),
     -- | If this is true, then checks are made only from the \'internal/checkers\'. If it is false, then checks are made only from the \'selected/regions\'. It is an error to provide \'selected/regions\' when is/internal is true, or to provide \'internal/checkers\' when is/internal is false.
     isInternal :: (Core.Maybe Core.Bool),
+    -- | To specify whether to log the results of failed probes to Cloud Logging.
+    logCheckFailures :: (Core.Maybe Core.Bool),
     -- | The monitored resource (https:\/\/cloud.google.com\/monitoring\/api\/resources) associated with the configuration. The following monitored resource types are valid for this field: uptime/url, gce/instance, gae/app, aws/ec2/instance, aws/elb/load/balancer k8s/service servicedirectory/service cloud/run/revision
     monitoredResource :: (Core.Maybe MonitoredResource),
-    -- | A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
+    -- | Identifier. A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
     name :: (Core.Maybe Core.Text),
     -- | How often, in seconds, the Uptime check is performed. Currently, the only supported values are 60s (1 minute), 300s (5 minutes), 600s (10 minutes), and 900s (15 minutes). Optional, defaults to 60s.
     period :: (Core.Maybe Core.Duration),
@@ -6018,6 +6462,8 @@ data UptimeCheckConfig = UptimeCheckConfig
     resourceGroup :: (Core.Maybe ResourceGroup),
     -- | The list of regions from which the check will be run. Some regions contain one location, and others contain more than one. If this field is specified, enough regions must be provided to include a minimum of 3 locations. Not specifying this field will result in Uptime checks running from all available regions.
     selectedRegions :: (Core.Maybe [UptimeCheckConfig_SelectedRegionsItem]),
+    -- | Specifies a Synthetic Monitor to invoke.
+    syntheticMonitor :: (Core.Maybe SyntheticMonitorTarget),
     -- | Contains information needed to make a TCP check.
     tcpCheck :: (Core.Maybe TcpCheck),
     -- | The maximum amount of time to wait for the request to complete (must be between 1 and 60 seconds). Required.
@@ -6038,11 +6484,13 @@ newUptimeCheckConfig =
       httpCheck = Core.Nothing,
       internalCheckers = Core.Nothing,
       isInternal = Core.Nothing,
+      logCheckFailures = Core.Nothing,
       monitoredResource = Core.Nothing,
       name = Core.Nothing,
       period = Core.Nothing,
       resourceGroup = Core.Nothing,
       selectedRegions = Core.Nothing,
+      syntheticMonitor = Core.Nothing,
       tcpCheck = Core.Nothing,
       timeout = Core.Nothing,
       userLabels = Core.Nothing
@@ -6060,11 +6508,13 @@ instance Core.FromJSON UptimeCheckConfig where
             Core.<*> (o Core..:? "httpCheck")
             Core.<*> (o Core..:? "internalCheckers")
             Core.<*> (o Core..:? "isInternal")
+            Core.<*> (o Core..:? "logCheckFailures")
             Core.<*> (o Core..:? "monitoredResource")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "period")
             Core.<*> (o Core..:? "resourceGroup")
             Core.<*> (o Core..:? "selectedRegions")
+            Core.<*> (o Core..:? "syntheticMonitor")
             Core.<*> (o Core..:? "tcpCheck")
             Core.<*> (o Core..:? "timeout")
             Core.<*> (o Core..:? "userLabels")
@@ -6078,15 +6528,15 @@ instance Core.ToJSON UptimeCheckConfig where
             ("contentMatchers" Core..=) Core.<$> contentMatchers,
             ("displayName" Core..=) Core.<$> displayName,
             ("httpCheck" Core..=) Core.<$> httpCheck,
-            ("internalCheckers" Core..=)
-              Core.<$> internalCheckers,
+            ("internalCheckers" Core..=) Core.<$> internalCheckers,
             ("isInternal" Core..=) Core.<$> isInternal,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource,
+            ("logCheckFailures" Core..=) Core.<$> logCheckFailures,
+            ("monitoredResource" Core..=) Core.<$> monitoredResource,
             ("name" Core..=) Core.<$> name,
             ("period" Core..=) Core.<$> period,
             ("resourceGroup" Core..=) Core.<$> resourceGroup,
             ("selectedRegions" Core..=) Core.<$> selectedRegions,
+            ("syntheticMonitor" Core..=) Core.<$> syntheticMonitor,
             ("tcpCheck" Core..=) Core.<$> tcpCheck,
             ("timeout" Core..=) Core.<$> timeout,
             ("userLabels" Core..=) Core.<$> userLabels
@@ -6097,8 +6547,7 @@ instance Core.ToJSON UptimeCheckConfig where
 --
 -- /See:/ 'newUptimeCheckConfig_UserLabels' smart constructor.
 newtype UptimeCheckConfig_UserLabels = UptimeCheckConfig_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6115,13 +6564,11 @@ instance Core.FromJSON UptimeCheckConfig_UserLabels where
     Core.withObject
       "UptimeCheckConfig_UserLabels"
       ( \o ->
-          UptimeCheckConfig_UserLabels
-            Core.<$> (Core.parseJSONObject o)
+          UptimeCheckConfig_UserLabels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON UptimeCheckConfig_UserLabels where
-  toJSON UptimeCheckConfig_UserLabels {..} =
-    Core.toJSON additional
+  toJSON UptimeCheckConfig_UserLabels {..} = Core.toJSON additional
 
 -- | Contains the region, location, and list of IP addresses where checkers in the location run from.
 --
@@ -6231,22 +6678,17 @@ newVerifyNotificationChannelRequest ::
 newVerifyNotificationChannelRequest =
   VerifyNotificationChannelRequest {code = Core.Nothing}
 
-instance
-  Core.FromJSON
-    VerifyNotificationChannelRequest
-  where
+instance Core.FromJSON VerifyNotificationChannelRequest where
   parseJSON =
     Core.withObject
       "VerifyNotificationChannelRequest"
       ( \o ->
-          VerifyNotificationChannelRequest
-            Core.<$> (o Core..:? "code")
+          VerifyNotificationChannelRequest Core.<$> (o Core..:? "code")
       )
 
 instance Core.ToJSON VerifyNotificationChannelRequest where
   toJSON VerifyNotificationChannelRequest {..} =
-    Core.object
-      (Core.catMaybes [("code" Core..=) Core.<$> code])
+    Core.object (Core.catMaybes [("code" Core..=) Core.<$> code])
 
 -- | A WindowsBasedSli defines good/service as the count of time windows for which the provided service was of good quality. Criteria for determining if service was good are embedded in the window/criterion.
 --
@@ -6294,14 +6736,11 @@ instance Core.ToJSON WindowsBasedSli where
   toJSON WindowsBasedSli {..} =
     Core.object
       ( Core.catMaybes
-          [ ("goodBadMetricFilter" Core..=)
-              Core.<$> goodBadMetricFilter,
+          [ ("goodBadMetricFilter" Core..=) Core.<$> goodBadMetricFilter,
             ("goodTotalRatioThreshold" Core..=)
               Core.<$> goodTotalRatioThreshold,
-            ("metricMeanInRange" Core..=)
-              Core.<$> metricMeanInRange,
-            ("metricSumInRange" Core..=)
-              Core.<$> metricSumInRange,
+            ("metricMeanInRange" Core..=) Core.<$> metricMeanInRange,
+            ("metricSumInRange" Core..=) Core.<$> metricSumInRange,
             ("windowPeriod" Core..=) Core.<$> windowPeriod
           ]
       )

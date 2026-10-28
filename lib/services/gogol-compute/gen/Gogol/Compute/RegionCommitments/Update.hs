@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionCommitments.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+-- Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.regionCommitments.update@.
 module Gogol.Compute.RegionCommitments.Update
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionCommitments.Update
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionCommitments.update@ method which the
 -- 'ComputeRegionCommitmentsUpdate' request conforms to.
@@ -65,7 +63,7 @@ type ComputeRegionCommitmentsUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Commitment
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: auto_renew.
+-- | Updates the specified commitment with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be updated: auto_renew and plan.
 --
 -- /See:/ 'newComputeRegionCommitmentsUpdate' smart constructor.
 data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
@@ -75,9 +73,8 @@ data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the commitment for which auto renew is being updated.
+    -- | Name of the commitment that you want to update.
     commitment :: Core.Text,
-    -- |
     paths :: (Core.Maybe [Core.Text]),
     -- | Multipart request metadata.
     payload :: Commitment,
@@ -98,7 +95,7 @@ data ComputeRegionCommitmentsUpdate = ComputeRegionCommitmentsUpdate
 
 -- | Creates a value of 'ComputeRegionCommitmentsUpdate' with the minimum fields required to make a request.
 newComputeRegionCommitmentsUpdate ::
-  -- |  Name of the commitment for which auto renew is being updated. See 'commitment'.
+  -- |  Name of the commitment that you want to update. See 'commitment'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Commitment ->
@@ -123,10 +120,7 @@ newComputeRegionCommitmentsUpdate commitment payload project region =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeRegionCommitmentsUpdate
-  where
+instance Core.GoogleRequest ComputeRegionCommitmentsUpdate where
   type Rs ComputeRegionCommitmentsUpdate = Operation
   type
     Scopes ComputeRegionCommitmentsUpdate =
@@ -150,7 +144,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeRegionCommitmentsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeRegionCommitmentsUpdateResource)
           Core.mempty

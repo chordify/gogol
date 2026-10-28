@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.IAMCredentials
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates short-lived credentials for impersonating IAM service accounts. To enable this API, you must enable the IAM API (iam.googleapis.com).
+-- Creates short-lived credentials for impersonating IAM service accounts. Disabling this API also disables the IAM API (iam.googleapis.com). However, enabling this API doesn\'t enable the IAM API.
 --
 -- /See:/ <https://cloud.google.com/iam/docs/creating-short-lived-service-account-credentials IAM Service Account Credentials API Reference>
 module Gogol.IAMCredentials
@@ -47,6 +45,11 @@ module Gogol.IAMCredentials
     IAMCredentialsProjectsServiceAccountsGenerateIdTokenResource,
     IAMCredentialsProjectsServiceAccountsGenerateIdToken (..),
     newIAMCredentialsProjectsServiceAccountsGenerateIdToken,
+
+    -- ** iamcredentials.projects.serviceAccounts.getAllowedLocations
+    IAMCredentialsProjectsServiceAccountsGetAllowedLocationsResource,
+    IAMCredentialsProjectsServiceAccountsGetAllowedLocations (..),
+    newIAMCredentialsProjectsServiceAccountsGetAllowedLocations,
 
     -- ** iamcredentials.projects.serviceAccounts.signBlob
     IAMCredentialsProjectsServiceAccountsSignBlobResource,
@@ -79,6 +82,10 @@ module Gogol.IAMCredentials
     GenerateIdTokenResponse (..),
     newGenerateIdTokenResponse,
 
+    -- ** ServiceAccountAllowedLocations
+    ServiceAccountAllowedLocations (..),
+    newServiceAccountAllowedLocations,
+
     -- ** SignBlobRequest
     SignBlobRequest (..),
     newSignBlobRequest,
@@ -99,6 +106,7 @@ where
 
 import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateAccessToken
 import Gogol.IAMCredentials.Projects.ServiceAccounts.GenerateIdToken
+import Gogol.IAMCredentials.Projects.ServiceAccounts.GetAllowedLocations
 import Gogol.IAMCredentials.Projects.ServiceAccounts.SignBlob
 import Gogol.IAMCredentials.Projects.ServiceAccounts.SignJwt
 import Gogol.IAMCredentials.Types

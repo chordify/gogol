@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Debug.Datasources.Items.SearchByViewUrl
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.debug.datasources.items.searchByViewUrl@ method which the
 -- 'CloudSearchDebugDatasourcesItemsSearchByViewUrl' request conforms to.
@@ -88,7 +86,8 @@ newCloudSearchDebugDatasourcesItemsSearchByViewUrl ::
   CloudSearchDebugDatasourcesItemsSearchByViewUrl
 newCloudSearchDebugDatasourcesItemsSearchByViewUrl name payload =
   CloudSearchDebugDatasourcesItemsSearchByViewUrl
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -102,30 +101,26 @@ instance
     CloudSearchDebugDatasourcesItemsSearchByViewUrl
   where
   type
-    Rs
-      CloudSearchDebugDatasourcesItemsSearchByViewUrl =
+    Rs CloudSearchDebugDatasourcesItemsSearchByViewUrl =
       SearchItemsByViewUrlResponse
   type
-    Scopes
-      CloudSearchDebugDatasourcesItemsSearchByViewUrl =
+    Scopes CloudSearchDebugDatasourcesItemsSearchByViewUrl =
       '[CloudSearch'FullControl, CloudSearch'Debug]
-  requestClient
-    CloudSearchDebugDatasourcesItemsSearchByViewUrl {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchDebugDatasourcesItemsSearchByViewUrlResource
-            )
-            Core.mempty
+  requestClient CloudSearchDebugDatasourcesItemsSearchByViewUrl {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchDebugDatasourcesItemsSearchByViewUrlResource
+          )
+          Core.mempty

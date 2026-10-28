@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Memberships.SearchDirectGroups
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Groups.Memberships.SearchDirectGroups
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.memberships.searchDirectGroups@ method which the
 -- 'CloudIdentityGroupsMembershipsSearchDirectGroups' request conforms to.
@@ -74,7 +72,7 @@ data CloudIdentityGroupsMembershipsSearchDirectGroups = CloudIdentityGroupsMembe
     orderBy :: (Core.Maybe Core.Text),
     -- | The default page size is 200 (max 1000).
     pageSize :: (Core.Maybe Core.Int32),
-    -- | The next/page/token value returned from a previous list request, if any
+    -- | The @next_page_token@ value returned from a previous list request, if any
     pageToken :: (Core.Maybe Core.Text),
     -- | <https://cloud.google.com/apis/design/resource_names Resource name> of the group to search transitive memberships in. Format: groups\/{group/id}, where group/id is always \'-\' as this API will search across all groups for a given member.
     parent :: Core.Text,
@@ -94,7 +92,8 @@ newCloudIdentityGroupsMembershipsSearchDirectGroups ::
   CloudIdentityGroupsMembershipsSearchDirectGroups
 newCloudIdentityGroupsMembershipsSearchDirectGroups parent =
   CloudIdentityGroupsMembershipsSearchDirectGroups
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       orderBy = Core.Nothing,
@@ -111,33 +110,33 @@ instance
     CloudIdentityGroupsMembershipsSearchDirectGroups
   where
   type
-    Rs
-      CloudIdentityGroupsMembershipsSearchDirectGroups =
+    Rs CloudIdentityGroupsMembershipsSearchDirectGroups =
       SearchDirectGroupsResponse
   type
-    Scopes
-      CloudIdentityGroupsMembershipsSearchDirectGroups =
-      '[]
-  requestClient
-    CloudIdentityGroupsMembershipsSearchDirectGroups {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        orderBy
-        pageSize
-        pageToken
-        query
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudIdentityService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIdentityGroupsMembershipsSearchDirectGroupsResource
-            )
-            Core.mempty
+    Scopes CloudIdentityGroupsMembershipsSearchDirectGroups =
+      '[ CloudIdentity'Groups,
+         CloudIdentity'Groups'Readonly,
+         CloudPlatform'FullControl
+       ]
+  requestClient CloudIdentityGroupsMembershipsSearchDirectGroups {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      orderBy
+      pageSize
+      pageToken
+      query
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudIdentityService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                CloudIdentityGroupsMembershipsSearchDirectGroupsResource
+          )
+          Core.mempty

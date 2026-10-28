@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Messages.Attachments.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/chat/api/reference/rest/v1/media/download media API>. Requires <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>.
+-- Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download media API>. For an example, see <https://developers.google.com/workspace/chat/get-media-attachments Get metadata about a message attachment>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app app authentication>.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.attachments.get@.
 module Gogol.Chat.Spaces.Messages.Attachments.Get
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.Messages.Attachments.Get
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.messages.attachments.get@ method which the
 -- 'ChatSpacesMessagesAttachmentsGet' request conforms to.
@@ -55,7 +53,7 @@ type ChatSpacesMessagesAttachmentsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Attachment
 
--- | Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/chat/api/reference/rest/v1/media/download media API>. Requires <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>.
+-- | Gets the metadata of a message attachment. The attachment data is fetched using the <https://developers.google.com/workspace/chat/api/reference/rest/v1/media/download media API>. For an example, see <https://developers.google.com/workspace/chat/get-media-attachments Get metadata about a message attachment>. Requires <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app app authentication>.
 --
 -- /See:/ 'newChatSpacesMessagesAttachmentsGet' smart constructor.
 data ChatSpacesMessagesAttachmentsGet = ChatSpacesMessagesAttachmentsGet
@@ -65,7 +63,7 @@ data ChatSpacesMessagesAttachmentsGet = ChatSpacesMessagesAttachmentsGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the attachment, in the form \"spaces\//\/messages\//\/attachments\/*\".
+    -- | Required. Resource name of the attachment, in the form @spaces\/{space}\/messages\/{message}\/attachments\/{attachment}@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +74,7 @@ data ChatSpacesMessagesAttachmentsGet = ChatSpacesMessagesAttachmentsGet
 
 -- | Creates a value of 'ChatSpacesMessagesAttachmentsGet' with the minimum fields required to make a request.
 newChatSpacesMessagesAttachmentsGet ::
-  -- |  Required. Resource name of the attachment, in the form \"spaces\//\/messages\//\/attachments\/*\". See 'name'.
+  -- |  Required. Resource name of the attachment, in the form @spaces\/{space}\/messages\/{message}\/attachments\/{attachment}@. See 'name'.
   Core.Text ->
   ChatSpacesMessagesAttachmentsGet
 newChatSpacesMessagesAttachmentsGet name =
@@ -89,14 +87,9 @@ newChatSpacesMessagesAttachmentsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ChatSpacesMessagesAttachmentsGet
-  where
+instance Core.GoogleRequest ChatSpacesMessagesAttachmentsGet where
   type Rs ChatSpacesMessagesAttachmentsGet = Attachment
-  type
-    Scopes ChatSpacesMessagesAttachmentsGet =
-      '[Chat'Bot]
+  type Scopes ChatSpacesMessagesAttachmentsGet = '[Chat'Bot]
   requestClient ChatSpacesMessagesAttachmentsGet {..} =
     go
       name
@@ -110,7 +103,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMessagesAttachmentsGetResource
-          )
+          (Core.Proxy :: Core.Proxy ChatSpacesMessagesAttachmentsGetResource)
           Core.mempty

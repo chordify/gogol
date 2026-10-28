@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Settings.Searchapplications.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Settings.Searchapplications.Create
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.create@ method which the
 -- 'CloudSearchSettingsSearchapplicationsCreate' request conforms to.
@@ -95,32 +93,27 @@ instance
   Core.GoogleRequest
     CloudSearchSettingsSearchapplicationsCreate
   where
+  type Rs CloudSearchSettingsSearchapplicationsCreate = Operation
   type
-    Rs CloudSearchSettingsSearchapplicationsCreate =
-      Operation
-  type
-    Scopes
-      CloudSearchSettingsSearchapplicationsCreate =
+    Scopes CloudSearchSettingsSearchapplicationsCreate =
       '[ CloudSearch'FullControl,
          CloudSearch'Settings,
          CloudSearch'Settings'Query
        ]
-  requestClient
-    CloudSearchSettingsSearchapplicationsCreate {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchSettingsSearchapplicationsCreateResource
-            )
-            Core.mempty
+  requestClient CloudSearchSettingsSearchapplicationsCreate {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchSettingsSearchapplicationsCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.DirectorySites.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.DirectorySites.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.directorySites.list@ method which the
 -- 'DFAReportingDirectorySitesList' request conforms to.
@@ -51,15 +49,9 @@ type DFAReportingDirectorySitesListResource =
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "directorySites"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam
-              "acceptsInStreamVideoPlacements"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "acceptsInterstitialPlacements"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "acceptsPublisherPaidPlacements"
-              Core.Bool
+    Core.:> Core.QueryParam "acceptsInStreamVideoPlacements" Core.Bool
+    Core.:> Core.QueryParam "acceptsInterstitialPlacements" Core.Bool
+    Core.:> Core.QueryParam "acceptsPublisherPaidPlacements" Core.Bool
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "active" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
@@ -68,24 +60,12 @@ type DFAReportingDirectorySitesListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              DirectorySitesListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              DirectorySitesListSortOrder
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              DirectorySitesListResponse
+    Core.:> Core.QueryParam "sortField" DirectorySitesListSortField
+    Core.:> Core.QueryParam "sortOrder" DirectorySitesListSortOrder
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] DirectorySitesListResponse
 
 -- | Retrieves a list of directory sites, possibly filtered. This method supports paging.
 --
@@ -154,13 +134,8 @@ newDFAReportingDirectorySitesList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingDirectorySitesList
-  where
-  type
-    Rs DFAReportingDirectorySitesList =
-      DirectorySitesListResponse
+instance Core.GoogleRequest DFAReportingDirectorySitesList where
+  type Rs DFAReportingDirectorySitesList = DirectorySitesListResponse
   type
     Scopes DFAReportingDirectorySitesList =
       '[Dfatrafficking'FullControl]
@@ -188,7 +163,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingDirectorySitesListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingDirectorySitesListResource)
           Core.mempty

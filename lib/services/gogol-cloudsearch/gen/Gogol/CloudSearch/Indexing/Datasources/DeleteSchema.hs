@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Indexing.Datasources.DeleteSchema
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.indexing.datasources.deleteSchema@ method which the
 -- 'CloudSearchIndexingDatasourcesDeleteSchema' request conforms to.
@@ -52,9 +50,7 @@ type CloudSearchIndexingDatasourcesDeleteSchemaResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "debugOptions.enableDebugging"
-              Core.Bool
+    Core.:> Core.QueryParam "debugOptions.enableDebugging" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -101,33 +97,28 @@ instance
   Core.GoogleRequest
     CloudSearchIndexingDatasourcesDeleteSchema
   where
+  type Rs CloudSearchIndexingDatasourcesDeleteSchema = Operation
   type
-    Rs CloudSearchIndexingDatasourcesDeleteSchema =
-      Operation
-  type
-    Scopes
-      CloudSearchIndexingDatasourcesDeleteSchema =
+    Scopes CloudSearchIndexingDatasourcesDeleteSchema =
       '[ CloudSearch'FullControl,
          CloudSearch'Settings,
          CloudSearch'Settings'Indexing
        ]
-  requestClient
-    CloudSearchIndexingDatasourcesDeleteSchema {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        debugOptionsEnableDebugging
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchIndexingDatasourcesDeleteSchemaResource
-            )
-            Core.mempty
+  requestClient CloudSearchIndexingDatasourcesDeleteSchema {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      debugOptionsEnableDebugging
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchIndexingDatasourcesDeleteSchemaResource
+          )
+          Core.mempty

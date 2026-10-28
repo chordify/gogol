@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.Values.BatchGetByDataFilter
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchGetByDataFilter@ method which the
@@ -55,12 +53,8 @@ type SheetsSpreadsheetsValuesBatchGetByDataFilterResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchGetValuesByDataFilterRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchGetValuesByDataFilterResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchGetValuesByDataFilterRequest
+    Core.:> Core.Post '[Core.JSON] BatchGetValuesByDataFilterResponse
 
 -- | Returns one or more ranges of values that match the specified data filters. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges that match any of the data filters in the request will be returned.
 --
@@ -90,16 +84,19 @@ newSheetsSpreadsheetsValuesBatchGetByDataFilter ::
   -- |  The ID of the spreadsheet to retrieve data from. See 'spreadsheetId'.
   Core.Text ->
   SheetsSpreadsheetsValuesBatchGetByDataFilter
-newSheetsSpreadsheetsValuesBatchGetByDataFilter payload spreadsheetId =
-  SheetsSpreadsheetsValuesBatchGetByDataFilter
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      spreadsheetId = spreadsheetId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSheetsSpreadsheetsValuesBatchGetByDataFilter
+  payload
+  spreadsheetId =
+    SheetsSpreadsheetsValuesBatchGetByDataFilter
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        spreadsheetId = spreadsheetId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -109,29 +106,23 @@ instance
     Rs SheetsSpreadsheetsValuesBatchGetByDataFilter =
       BatchGetValuesByDataFilterResponse
   type
-    Scopes
-      SheetsSpreadsheetsValuesBatchGetByDataFilter =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
-  requestClient
-    SheetsSpreadsheetsValuesBatchGetByDataFilter {..} =
-      go
-        spreadsheetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sheetsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SheetsSpreadsheetsValuesBatchGetByDataFilterResource
-            )
-            Core.mempty
+    Scopes SheetsSpreadsheetsValuesBatchGetByDataFilter =
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
+  requestClient SheetsSpreadsheetsValuesBatchGetByDataFilter {..} =
+    go
+      spreadsheetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sheetsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SheetsSpreadsheetsValuesBatchGetByDataFilterResource
+          )
+          Core.mempty

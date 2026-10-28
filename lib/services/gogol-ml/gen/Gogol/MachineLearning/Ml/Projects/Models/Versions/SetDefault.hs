@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Models.Versions.SetDefault
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Models.Versions.SetDefault
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.models.versions.setDefault@ method which the
 -- 'MlProjectsModelsVersionsSetDefault' request conforms to.
@@ -53,9 +51,7 @@ type MlProjectsModelsVersionsSetDefaultResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__SetDefaultVersionRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudMlV1__SetDefaultVersionRequest
     Core.:> Core.Post '[Core.JSON] GoogleCloudMlV1__Version
 
 -- | Designates a version to be the default for the model. The default version is used for prediction requests made against the model that don\'t specify a version. The first version to be created for a model is automatically set as the default. You must make any subsequent changes to the default version setting manually using this method.
@@ -97,10 +93,7 @@ newMlProjectsModelsVersionsSetDefault name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsModelsVersionsSetDefault
-  where
+instance Core.GoogleRequest MlProjectsModelsVersionsSetDefault where
   type
     Rs MlProjectsModelsVersionsSetDefault =
       GoogleCloudMlV1__Version
@@ -122,7 +115,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                MlProjectsModelsVersionsSetDefaultResource
+              Core.Proxy MlProjectsModelsVersionsSetDefaultResource
           )
           Core.mempty

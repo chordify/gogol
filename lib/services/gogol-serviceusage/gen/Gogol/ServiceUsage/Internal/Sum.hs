@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceUsage.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceUsage.Internal.Sum
@@ -30,6 +28,15 @@ module Gogol.ServiceUsage.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * Analysis_AnalysisType
+    Analysis_AnalysisType
+      ( Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+        Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+        Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+        Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE,
         ..
       ),
 
@@ -75,6 +82,15 @@ module Gogol.ServiceUsage.Internal.Sum
       ( DisableServiceRequest_CheckIfServiceHasUsage_CHECKIFSERVICEHASUSAGEUNSPECIFIED,
         DisableServiceRequest_CheckIfServiceHasUsage_Skip,
         DisableServiceRequest_CheckIfServiceHasUsage_Check,
+        ..
+      ),
+
+    -- * EnableRule_EnableType
+    EnableRule_EnableType
+      ( EnableRule_EnableType_ENABLETYPEUNSPECIFIED,
+        EnableRule_EnableType_Client,
+        EnableRule_EnableType_Resource,
+        EnableRule_EnableType_V1COMPATIBLE,
         ..
       ),
 
@@ -141,6 +157,29 @@ module Gogol.ServiceUsage.Internal.Sum
         ..
       ),
 
+    -- * GoogleApiServiceusageV2betaAnalysis_AnalysisType
+    GoogleApiServiceusageV2betaAnalysis_AnalysisType
+      ( GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+        GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+        GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+        ..
+      ),
+
+    -- * GoogleApiServiceusageV2betaImpact_ImpactType
+    GoogleApiServiceusageV2betaImpact_ImpactType
+      ( GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED,
+        GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+        ..
+      ),
+
+    -- * Impact_ImpactType
+    Impact_ImpactType
+      ( Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
+        Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+        Impact_ImpactType_RESOURCEEXISTENCEPROJECT,
+        ..
+      ),
+
     -- * LabelDescriptor_ValueType
     LabelDescriptor_ValueType
       ( LabelDescriptor_ValueType_String,
@@ -204,6 +243,15 @@ module Gogol.ServiceUsage.Internal.Sum
         ..
       ),
 
+    -- * MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+      ( MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+        ..
+      ),
+
     -- * MonitoredResourceDescriptor_LaunchStage
     MonitoredResourceDescriptor_LaunchStage
       ( MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
@@ -224,6 +272,9 @@ module Gogol.ServiceUsage.Internal.Sum
         Publishing_Organization_Ads,
         Publishing_Organization_Photos,
         Publishing_Organization_STREETVIEW,
+        Publishing_Organization_Shopping,
+        Publishing_Organization_Geo,
+        Publishing_Organization_GENERATIVEAI,
         ..
       ),
 
@@ -237,7 +288,7 @@ module Gogol.ServiceUsage.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -264,6 +315,43 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Output only. The type of analysis.
+newtype Analysis_AnalysisType = Analysis_AnalysisType {fromAnalysis_AnalysisType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified analysis type. Do not use.
+pattern Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED = Analysis_AnalysisType "ANALYSIS_TYPE_UNSPECIFIED"
+
+-- | The analysis of service dependencies.
+pattern Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY = Analysis_AnalysisType "ANALYSIS_TYPE_DEPENDENCY"
+
+-- | The analysis of service resource usage.
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE = Analysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_USAGE"
+
+-- | The analysis of service resource existence.
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE :: Analysis_AnalysisType
+pattern Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE = Analysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_EXISTENCE"
+
+{-# COMPLETE
+  Analysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+  Analysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+  Analysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+  Analysis_AnalysisType_ANALYSISTYPERESOURCEEXISTENCE,
+  Analysis_AnalysisType
   #-}
 
 -- | The source syntax of the service.
@@ -310,7 +398,6 @@ newtype BackendRule_PathTranslation = BackendRule_PathTranslation {fromBackendRu
       Core.FromJSONKey
     )
 
--- |
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED :: BackendRule_PathTranslation
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED = BackendRule_PathTranslation "PATH_TRANSLATION_UNSPECIFIED"
 
@@ -447,6 +534,43 @@ pattern DisableServiceRequest_CheckIfServiceHasUsage_Check = DisableServiceReque
   DisableServiceRequest_CheckIfServiceHasUsage_Skip,
   DisableServiceRequest_CheckIfServiceHasUsage_Check,
   DisableServiceRequest_CheckIfServiceHasUsage
+  #-}
+
+-- | Client and resource project enable type.
+newtype EnableRule_EnableType = EnableRule_EnableType {fromEnableRule_EnableType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified enable type, which means enabled as both client and resource project.
+pattern EnableRule_EnableType_ENABLETYPEUNSPECIFIED :: EnableRule_EnableType
+pattern EnableRule_EnableType_ENABLETYPEUNSPECIFIED = EnableRule_EnableType "ENABLE_TYPE_UNSPECIFIED"
+
+-- | Enable all clients under the CRM node specified by @ConsumerPolicy.name@ to use the listed services. A client can be an API key, an OAuth client, or a service account.
+pattern EnableRule_EnableType_Client :: EnableRule_EnableType
+pattern EnableRule_EnableType_Client = EnableRule_EnableType "CLIENT"
+
+-- | Enable resources in the list services to be created and used under the CRM node specified by the @ConsumerPolicy.name@.
+pattern EnableRule_EnableType_Resource :: EnableRule_EnableType
+pattern EnableRule_EnableType_Resource = EnableRule_EnableType "RESOURCE"
+
+-- | Activation made by Service Usage v1 API. This will be how consumers differentiate between policy changes made by v1 and v2 clients and understand what is actually possible based on those different policies.
+pattern EnableRule_EnableType_V1COMPATIBLE :: EnableRule_EnableType
+pattern EnableRule_EnableType_V1COMPATIBLE = EnableRule_EnableType "V1_COMPATIBLE"
+
+{-# COMPLETE
+  EnableRule_EnableType_ENABLETYPEUNSPECIFIED,
+  EnableRule_EnableType_Client,
+  EnableRule_EnableType_Resource,
+  EnableRule_EnableType_V1COMPATIBLE,
+  EnableRule_EnableType
   #-}
 
 -- | The source syntax.
@@ -716,6 +840,97 @@ pattern GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State_Active = Go
   GoogleApiServiceusageV1beta1GetServiceIdentityResponse_State
   #-}
 
+-- | Output only. The type of analysis.
+newtype GoogleApiServiceusageV2betaAnalysis_AnalysisType = GoogleApiServiceusageV2betaAnalysis_AnalysisType {fromGoogleApiServiceusageV2betaAnalysis_AnalysisType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified analysis type. Do not use.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_UNSPECIFIED"
+
+-- | The analysis of service dependencies.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_DEPENDENCY"
+
+-- | The analysis of service resource usage.
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE :: GoogleApiServiceusageV2betaAnalysis_AnalysisType
+pattern GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE = GoogleApiServiceusageV2betaAnalysis_AnalysisType "ANALYSIS_TYPE_RESOURCE_USAGE"
+
+{-# COMPLETE
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEUNSPECIFIED,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPEDEPENDENCY,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType_ANALYSISTYPERESOURCEUSAGE,
+  GoogleApiServiceusageV2betaAnalysis_AnalysisType
+  #-}
+
+-- | Output only. The type of impact.
+newtype GoogleApiServiceusageV2betaImpact_ImpactType = GoogleApiServiceusageV2betaImpact_ImpactType {fromGoogleApiServiceusageV2betaImpact_ImpactType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE_USAGE ...
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED :: GoogleApiServiceusageV2betaImpact_ImpactType
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED = GoogleApiServiceusageV2betaImpact_ImpactType "IMPACT_TYPE_UNSPECIFIED"
+
+-- | Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES :: GoogleApiServiceusageV2betaImpact_ImpactType
+pattern GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES = GoogleApiServiceusageV2betaImpact_ImpactType "DEPENDENCY_MISSING_DEPENDENCIES"
+
+{-# COMPLETE
+  GoogleApiServiceusageV2betaImpact_ImpactType_IMPACTTYPEUNSPECIFIED,
+  GoogleApiServiceusageV2betaImpact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+  GoogleApiServiceusageV2betaImpact_ImpactType
+  #-}
+
+-- | Output only. The type of impact.
+newtype Impact_ImpactType = Impact_ImpactType {fromImpact_ImpactType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reserved Blocks (Block n contains codes from 100n to 100(n+1) -1 Block 0 - Special\/Admin codes Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY Block 2 - Impact Type of ANALYSIS/TYPE/RESOURCE/USAGE Block 3 - Impact Type of ANALYSIS/TYPE/RESOURCE/EXISTENCE ...
+pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED :: Impact_ImpactType
+pattern Impact_ImpactType_IMPACTTYPEUNSPECIFIED = Impact_ImpactType "IMPACT_TYPE_UNSPECIFIED"
+
+-- | Block 1 - Impact Type of ANALYSIS/TYPE/DEPENDENCY
+pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES :: Impact_ImpactType
+pattern Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES = Impact_ImpactType "DEPENDENCY_MISSING_DEPENDENCIES"
+
+-- | Block 3 - Impact Type of ANALYSIS/TYPE/RESOURCE_EXISTENCE
+pattern Impact_ImpactType_RESOURCEEXISTENCEPROJECT :: Impact_ImpactType
+pattern Impact_ImpactType_RESOURCEEXISTENCEPROJECT = Impact_ImpactType "RESOURCE_EXISTENCE_PROJECT"
+
+{-# COMPLETE
+  Impact_ImpactType_IMPACTTYPEUNSPECIFIED,
+  Impact_ImpactType_DEPENDENCYMISSINGDEPENDENCIES,
+  Impact_ImpactType_RESOURCEEXISTENCEPROJECT,
+  Impact_ImpactType
+  #-}
+
 -- | The type of data that can be assigned to the label.
 newtype LabelDescriptor_ValueType = LabelDescriptor_ValueType {fromLabelDescriptor_ValueType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -983,6 +1198,42 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage
   #-}
 
+newtype MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem {fromMetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED"
+
+-- | Scopes a metric to a project.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "PROJECT"
+
+-- | Scopes a metric to an organization.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "ORGANIZATION"
+
+-- | Scopes a metric to a folder.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "FOLDER"
+
+{-# COMPLETE
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+  #-}
+
 -- | Optional. The launch stage of the monitored resource definition.
 newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage {fromMonitoredResourceDescriptor_LaunchStage :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1073,12 +1324,27 @@ pattern Publishing_Organization_Photos = Publishing_Organization "PHOTOS"
 pattern Publishing_Organization_STREETVIEW :: Publishing_Organization
 pattern Publishing_Organization_STREETVIEW = Publishing_Organization "STREET_VIEW"
 
+-- | Shopping Org.
+pattern Publishing_Organization_Shopping :: Publishing_Organization
+pattern Publishing_Organization_Shopping = Publishing_Organization "SHOPPING"
+
+-- | Geo Org.
+pattern Publishing_Organization_Geo :: Publishing_Organization
+pattern Publishing_Organization_Geo = Publishing_Organization "GEO"
+
+-- | Generative AI - https:\/\/developers.generativeai.google
+pattern Publishing_Organization_GENERATIVEAI :: Publishing_Organization
+pattern Publishing_Organization_GENERATIVEAI = Publishing_Organization "GENERATIVE_AI"
+
 {-# COMPLETE
   Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
   Publishing_Organization_Cloud,
   Publishing_Organization_Ads,
   Publishing_Organization_Photos,
   Publishing_Organization_STREETVIEW,
+  Publishing_Organization_Shopping,
+  Publishing_Organization_Geo,
+  Publishing_Organization_GENERATIVEAI,
   Publishing_Organization
   #-}
 

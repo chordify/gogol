@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -82,6 +80,11 @@ module Gogol.Compute
     ComputeAddressesListResource,
     ComputeAddressesList (..),
     newComputeAddressesList,
+
+    -- ** compute.addresses.move
+    ComputeAddressesMoveResource,
+    ComputeAddressesMove (..),
+    newComputeAddressesMove,
 
     -- ** compute.addresses.setLabels
     ComputeAddressesSetLabelsResource,
@@ -143,6 +146,11 @@ module Gogol.Compute
     ComputeBackendBucketsGet (..),
     newComputeBackendBucketsGet,
 
+    -- ** compute.backendBuckets.getIamPolicy
+    ComputeBackendBucketsGetIamPolicyResource,
+    ComputeBackendBucketsGetIamPolicy (..),
+    newComputeBackendBucketsGetIamPolicy,
+
     -- ** compute.backendBuckets.insert
     ComputeBackendBucketsInsertResource,
     ComputeBackendBucketsInsert (..),
@@ -162,6 +170,16 @@ module Gogol.Compute
     ComputeBackendBucketsSetEdgeSecurityPolicyResource,
     ComputeBackendBucketsSetEdgeSecurityPolicy (..),
     newComputeBackendBucketsSetEdgeSecurityPolicy,
+
+    -- ** compute.backendBuckets.setIamPolicy
+    ComputeBackendBucketsSetIamPolicyResource,
+    ComputeBackendBucketsSetIamPolicy (..),
+    newComputeBackendBucketsSetIamPolicy,
+
+    -- ** compute.backendBuckets.testIamPermissions
+    ComputeBackendBucketsTestIamPermissionsResource,
+    ComputeBackendBucketsTestIamPermissions (..),
+    newComputeBackendBucketsTestIamPermissions,
 
     -- ** compute.backendBuckets.update
     ComputeBackendBucketsUpdateResource,
@@ -213,6 +231,11 @@ module Gogol.Compute
     ComputeBackendServicesList (..),
     newComputeBackendServicesList,
 
+    -- ** compute.backendServices.listUsable
+    ComputeBackendServicesListUsableResource,
+    ComputeBackendServicesListUsable (..),
+    newComputeBackendServicesListUsable,
+
     -- ** compute.backendServices.patch
     ComputeBackendServicesPatchResource,
     ComputeBackendServicesPatch (..),
@@ -232,6 +255,11 @@ module Gogol.Compute
     ComputeBackendServicesSetSecurityPolicyResource,
     ComputeBackendServicesSetSecurityPolicy (..),
     newComputeBackendServicesSetSecurityPolicy,
+
+    -- ** compute.backendServices.testIamPermissions
+    ComputeBackendServicesTestIamPermissionsResource,
+    ComputeBackendServicesTestIamPermissions (..),
+    newComputeBackendServicesTestIamPermissions,
 
     -- ** compute.backendServices.update
     ComputeBackendServicesUpdateResource,
@@ -262,6 +290,11 @@ module Gogol.Compute
     ComputeDisksAggregatedListResource,
     ComputeDisksAggregatedList (..),
     newComputeDisksAggregatedList,
+
+    -- ** compute.disks.bulkInsert
+    ComputeDisksBulkInsertResource,
+    ComputeDisksBulkInsert (..),
+    newComputeDisksBulkInsert,
 
     -- ** compute.disks.createSnapshot
     ComputeDisksCreateSnapshotResource,
@@ -312,6 +345,21 @@ module Gogol.Compute
     ComputeDisksSetLabelsResource,
     ComputeDisksSetLabels (..),
     newComputeDisksSetLabels,
+
+    -- ** compute.disks.startAsyncReplication
+    ComputeDisksStartAsyncReplicationResource,
+    ComputeDisksStartAsyncReplication (..),
+    newComputeDisksStartAsyncReplication,
+
+    -- ** compute.disks.stopAsyncReplication
+    ComputeDisksStopAsyncReplicationResource,
+    ComputeDisksStopAsyncReplication (..),
+    newComputeDisksStopAsyncReplication,
+
+    -- ** compute.disks.stopGroupAsyncReplication
+    ComputeDisksStopGroupAsyncReplicationResource,
+    ComputeDisksStopGroupAsyncReplication (..),
+    newComputeDisksStopGroupAsyncReplication,
 
     -- ** compute.disks.testIamPermissions
     ComputeDisksTestIamPermissionsResource,
@@ -532,6 +580,11 @@ module Gogol.Compute
     ComputeGlobalAddressesListResource,
     ComputeGlobalAddressesList (..),
     newComputeGlobalAddressesList,
+
+    -- ** compute.globalAddresses.move
+    ComputeGlobalAddressesMoveResource,
+    ComputeGlobalAddressesMove (..),
+    newComputeGlobalAddressesMove,
 
     -- ** compute.globalAddresses.setLabels
     ComputeGlobalAddressesSetLabelsResource,
@@ -828,6 +881,31 @@ module Gogol.Compute
     ComputeImagesTestIamPermissions (..),
     newComputeImagesTestIamPermissions,
 
+    -- ** compute.instanceGroupManagerResizeRequests.cancel
+    ComputeInstanceGroupManagerResizeRequestsCancelResource,
+    ComputeInstanceGroupManagerResizeRequestsCancel (..),
+    newComputeInstanceGroupManagerResizeRequestsCancel,
+
+    -- ** compute.instanceGroupManagerResizeRequests.delete
+    ComputeInstanceGroupManagerResizeRequestsDeleteResource,
+    ComputeInstanceGroupManagerResizeRequestsDelete (..),
+    newComputeInstanceGroupManagerResizeRequestsDelete,
+
+    -- ** compute.instanceGroupManagerResizeRequests.get
+    ComputeInstanceGroupManagerResizeRequestsGetResource,
+    ComputeInstanceGroupManagerResizeRequestsGet (..),
+    newComputeInstanceGroupManagerResizeRequestsGet,
+
+    -- ** compute.instanceGroupManagerResizeRequests.insert
+    ComputeInstanceGroupManagerResizeRequestsInsertResource,
+    ComputeInstanceGroupManagerResizeRequestsInsert (..),
+    newComputeInstanceGroupManagerResizeRequestsInsert,
+
+    -- ** compute.instanceGroupManagerResizeRequests.list
+    ComputeInstanceGroupManagerResizeRequestsListResource,
+    ComputeInstanceGroupManagerResizeRequestsList (..),
+    newComputeInstanceGroupManagerResizeRequestsList,
+
     -- ** compute.instanceGroupManagers.abandonInstances
     ComputeInstanceGroupManagersAbandonInstancesResource,
     ComputeInstanceGroupManagersAbandonInstances (..),
@@ -913,6 +991,11 @@ module Gogol.Compute
     ComputeInstanceGroupManagersResize (..),
     newComputeInstanceGroupManagersResize,
 
+    -- ** compute.instanceGroupManagers.resumeInstances
+    ComputeInstanceGroupManagersResumeInstancesResource,
+    ComputeInstanceGroupManagersResumeInstances (..),
+    newComputeInstanceGroupManagersResumeInstances,
+
     -- ** compute.instanceGroupManagers.setInstanceTemplate
     ComputeInstanceGroupManagersSetInstanceTemplateResource,
     ComputeInstanceGroupManagersSetInstanceTemplate (..),
@@ -922,6 +1005,21 @@ module Gogol.Compute
     ComputeInstanceGroupManagersSetTargetPoolsResource,
     ComputeInstanceGroupManagersSetTargetPools (..),
     newComputeInstanceGroupManagersSetTargetPools,
+
+    -- ** compute.instanceGroupManagers.startInstances
+    ComputeInstanceGroupManagersStartInstancesResource,
+    ComputeInstanceGroupManagersStartInstances (..),
+    newComputeInstanceGroupManagersStartInstances,
+
+    -- ** compute.instanceGroupManagers.stopInstances
+    ComputeInstanceGroupManagersStopInstancesResource,
+    ComputeInstanceGroupManagersStopInstances (..),
+    newComputeInstanceGroupManagersStopInstances,
+
+    -- ** compute.instanceGroupManagers.suspendInstances
+    ComputeInstanceGroupManagersSuspendInstancesResource,
+    ComputeInstanceGroupManagersSuspendInstances (..),
+    newComputeInstanceGroupManagersSuspendInstances,
 
     -- ** compute.instanceGroupManagers.updatePerInstanceConfigs
     ComputeInstanceGroupManagersUpdatePerInstanceConfigsResource,
@@ -972,6 +1070,16 @@ module Gogol.Compute
     ComputeInstanceGroupsSetNamedPortsResource,
     ComputeInstanceGroupsSetNamedPorts (..),
     newComputeInstanceGroupsSetNamedPorts,
+
+    -- ** compute.instanceSettings.get
+    ComputeInstanceSettingsGetResource,
+    ComputeInstanceSettingsGet (..),
+    newComputeInstanceSettingsGet,
+
+    -- ** compute.instanceSettings.patch
+    ComputeInstanceSettingsPatchResource,
+    ComputeInstanceSettingsPatch (..),
+    newComputeInstanceSettingsPatch,
 
     -- ** compute.instanceTemplates.aggregatedList
     ComputeInstanceTemplatesAggregatedListResource,
@@ -1103,10 +1211,20 @@ module Gogol.Compute
     ComputeInstancesListReferrers (..),
     newComputeInstancesListReferrers,
 
+    -- ** compute.instances.performMaintenance
+    ComputeInstancesPerformMaintenanceResource,
+    ComputeInstancesPerformMaintenance (..),
+    newComputeInstancesPerformMaintenance,
+
     -- ** compute.instances.removeResourcePolicies
     ComputeInstancesRemoveResourcePoliciesResource,
     ComputeInstancesRemoveResourcePolicies (..),
     newComputeInstancesRemoveResourcePolicies,
+
+    -- ** compute.instances.reportHostAsFaulty
+    ComputeInstancesReportHostAsFaultyResource,
+    ComputeInstancesReportHostAsFaulty (..),
+    newComputeInstancesReportHostAsFaulty,
 
     -- ** compute.instances.reset
     ComputeInstancesResetResource,
@@ -1172,6 +1290,11 @@ module Gogol.Compute
     ComputeInstancesSetSchedulingResource,
     ComputeInstancesSetScheduling (..),
     newComputeInstancesSetScheduling,
+
+    -- ** compute.instances.setSecurityPolicy
+    ComputeInstancesSetSecurityPolicyResource,
+    ComputeInstancesSetSecurityPolicy (..),
+    newComputeInstancesSetSecurityPolicy,
 
     -- ** compute.instances.setServiceAccount
     ComputeInstancesSetServiceAccountResource,
@@ -1243,6 +1366,51 @@ module Gogol.Compute
     ComputeInstancesUpdateShieldedInstanceConfig (..),
     newComputeInstancesUpdateShieldedInstanceConfig,
 
+    -- ** compute.instantSnapshots.aggregatedList
+    ComputeInstantSnapshotsAggregatedListResource,
+    ComputeInstantSnapshotsAggregatedList (..),
+    newComputeInstantSnapshotsAggregatedList,
+
+    -- ** compute.instantSnapshots.delete
+    ComputeInstantSnapshotsDeleteResource,
+    ComputeInstantSnapshotsDelete (..),
+    newComputeInstantSnapshotsDelete,
+
+    -- ** compute.instantSnapshots.get
+    ComputeInstantSnapshotsGetResource,
+    ComputeInstantSnapshotsGet (..),
+    newComputeInstantSnapshotsGet,
+
+    -- ** compute.instantSnapshots.getIamPolicy
+    ComputeInstantSnapshotsGetIamPolicyResource,
+    ComputeInstantSnapshotsGetIamPolicy (..),
+    newComputeInstantSnapshotsGetIamPolicy,
+
+    -- ** compute.instantSnapshots.insert
+    ComputeInstantSnapshotsInsertResource,
+    ComputeInstantSnapshotsInsert (..),
+    newComputeInstantSnapshotsInsert,
+
+    -- ** compute.instantSnapshots.list
+    ComputeInstantSnapshotsListResource,
+    ComputeInstantSnapshotsList (..),
+    newComputeInstantSnapshotsList,
+
+    -- ** compute.instantSnapshots.setIamPolicy
+    ComputeInstantSnapshotsSetIamPolicyResource,
+    ComputeInstantSnapshotsSetIamPolicy (..),
+    newComputeInstantSnapshotsSetIamPolicy,
+
+    -- ** compute.instantSnapshots.setLabels
+    ComputeInstantSnapshotsSetLabelsResource,
+    ComputeInstantSnapshotsSetLabels (..),
+    newComputeInstantSnapshotsSetLabels,
+
+    -- ** compute.instantSnapshots.testIamPermissions
+    ComputeInstantSnapshotsTestIamPermissionsResource,
+    ComputeInstantSnapshotsTestIamPermissions (..),
+    newComputeInstantSnapshotsTestIamPermissions,
+
     -- ** compute.interconnectAttachments.aggregatedList
     ComputeInterconnectAttachmentsAggregatedListResource,
     ComputeInterconnectAttachmentsAggregatedList (..),
@@ -1288,6 +1456,16 @@ module Gogol.Compute
     ComputeInterconnectLocationsList (..),
     newComputeInterconnectLocationsList,
 
+    -- ** compute.interconnectRemoteLocations.get
+    ComputeInterconnectRemoteLocationsGetResource,
+    ComputeInterconnectRemoteLocationsGet (..),
+    newComputeInterconnectRemoteLocationsGet,
+
+    -- ** compute.interconnectRemoteLocations.list
+    ComputeInterconnectRemoteLocationsListResource,
+    ComputeInterconnectRemoteLocationsList (..),
+    newComputeInterconnectRemoteLocationsList,
+
     -- ** compute.interconnects.delete
     ComputeInterconnectsDeleteResource,
     ComputeInterconnectsDelete (..),
@@ -1302,6 +1480,11 @@ module Gogol.Compute
     ComputeInterconnectsGetDiagnosticsResource,
     ComputeInterconnectsGetDiagnostics (..),
     newComputeInterconnectsGetDiagnostics,
+
+    -- ** compute.interconnects.getMacsecConfig
+    ComputeInterconnectsGetMacsecConfigResource,
+    ComputeInterconnectsGetMacsecConfig (..),
+    newComputeInterconnectsGetMacsecConfig,
 
     -- ** compute.interconnects.insert
     ComputeInterconnectsInsertResource,
@@ -1448,6 +1631,11 @@ module Gogol.Compute
     ComputeNetworkAttachmentsList (..),
     newComputeNetworkAttachmentsList,
 
+    -- ** compute.networkAttachments.patch
+    ComputeNetworkAttachmentsPatchResource,
+    ComputeNetworkAttachmentsPatch (..),
+    newComputeNetworkAttachmentsPatch,
+
     -- ** compute.networkAttachments.setIamPolicy
     ComputeNetworkAttachmentsSetIamPolicyResource,
     ComputeNetworkAttachmentsSetIamPolicy (..),
@@ -1533,10 +1721,20 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesAddAssociation (..),
     newComputeNetworkFirewallPoliciesAddAssociation,
 
+    -- ** compute.networkFirewallPolicies.addPacketMirroringRule
+    ComputeNetworkFirewallPoliciesAddPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesAddPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesAddPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.addRule
     ComputeNetworkFirewallPoliciesAddRuleResource,
     ComputeNetworkFirewallPoliciesAddRule (..),
     newComputeNetworkFirewallPoliciesAddRule,
+
+    -- ** compute.networkFirewallPolicies.aggregatedList
+    ComputeNetworkFirewallPoliciesAggregatedListResource,
+    ComputeNetworkFirewallPoliciesAggregatedList (..),
+    newComputeNetworkFirewallPoliciesAggregatedList,
 
     -- ** compute.networkFirewallPolicies.cloneRules
     ComputeNetworkFirewallPoliciesCloneRulesResource,
@@ -1563,6 +1761,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesGetIamPolicy (..),
     newComputeNetworkFirewallPoliciesGetIamPolicy,
 
+    -- ** compute.networkFirewallPolicies.getPacketMirroringRule
+    ComputeNetworkFirewallPoliciesGetPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesGetPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesGetPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.getRule
     ComputeNetworkFirewallPoliciesGetRuleResource,
     ComputeNetworkFirewallPoliciesGetRule (..),
@@ -1583,6 +1786,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesPatch (..),
     newComputeNetworkFirewallPoliciesPatch,
 
+    -- ** compute.networkFirewallPolicies.patchPacketMirroringRule
+    ComputeNetworkFirewallPoliciesPatchPacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesPatchPacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesPatchPacketMirroringRule,
+
     -- ** compute.networkFirewallPolicies.patchRule
     ComputeNetworkFirewallPoliciesPatchRuleResource,
     ComputeNetworkFirewallPoliciesPatchRule (..),
@@ -1592,6 +1800,11 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesRemoveAssociationResource,
     ComputeNetworkFirewallPoliciesRemoveAssociation (..),
     newComputeNetworkFirewallPoliciesRemoveAssociation,
+
+    -- ** compute.networkFirewallPolicies.removePacketMirroringRule
+    ComputeNetworkFirewallPoliciesRemovePacketMirroringRuleResource,
+    ComputeNetworkFirewallPoliciesRemovePacketMirroringRule (..),
+    newComputeNetworkFirewallPoliciesRemovePacketMirroringRule,
 
     -- ** compute.networkFirewallPolicies.removeRule
     ComputeNetworkFirewallPoliciesRemoveRuleResource,
@@ -1607,6 +1820,16 @@ module Gogol.Compute
     ComputeNetworkFirewallPoliciesTestIamPermissionsResource,
     ComputeNetworkFirewallPoliciesTestIamPermissions (..),
     newComputeNetworkFirewallPoliciesTestIamPermissions,
+
+    -- ** compute.networkProfiles.get
+    ComputeNetworkProfilesGetResource,
+    ComputeNetworkProfilesGet (..),
+    newComputeNetworkProfilesGet,
+
+    -- ** compute.networkProfiles.list
+    ComputeNetworkProfilesListResource,
+    ComputeNetworkProfilesList (..),
+    newComputeNetworkProfilesList,
 
     -- ** compute.networks.addPeering
     ComputeNetworksAddPeeringResource,
@@ -1712,6 +1935,11 @@ module Gogol.Compute
     ComputeNodeGroupsPatchResource,
     ComputeNodeGroupsPatch (..),
     newComputeNodeGroupsPatch,
+
+    -- ** compute.nodeGroups.performMaintenance
+    ComputeNodeGroupsPerformMaintenanceResource,
+    ComputeNodeGroupsPerformMaintenance (..),
+    newComputeNodeGroupsPerformMaintenance,
 
     -- ** compute.nodeGroups.setIamPolicy
     ComputeNodeGroupsSetIamPolicyResource,
@@ -1873,6 +2101,11 @@ module Gogol.Compute
     ComputeProjectsMoveInstance (..),
     newComputeProjectsMoveInstance,
 
+    -- ** compute.projects.setCloudArmorTier
+    ComputeProjectsSetCloudArmorTierResource,
+    ComputeProjectsSetCloudArmorTier (..),
+    newComputeProjectsSetCloudArmorTier,
+
     -- ** compute.projects.setCommonInstanceMetadata
     ComputeProjectsSetCommonInstanceMetadataResource,
     ComputeProjectsSetCommonInstanceMetadata (..),
@@ -1887,6 +2120,11 @@ module Gogol.Compute
     ComputeProjectsSetUsageExportBucketResource,
     ComputeProjectsSetUsageExportBucket (..),
     newComputeProjectsSetUsageExportBucket,
+
+    -- ** compute.publicAdvertisedPrefixes.announce
+    ComputePublicAdvertisedPrefixesAnnounceResource,
+    ComputePublicAdvertisedPrefixesAnnounce (..),
+    newComputePublicAdvertisedPrefixesAnnounce,
 
     -- ** compute.publicAdvertisedPrefixes.delete
     ComputePublicAdvertisedPrefixesDeleteResource,
@@ -1913,10 +2151,20 @@ module Gogol.Compute
     ComputePublicAdvertisedPrefixesPatch (..),
     newComputePublicAdvertisedPrefixesPatch,
 
+    -- ** compute.publicAdvertisedPrefixes.withdraw
+    ComputePublicAdvertisedPrefixesWithdrawResource,
+    ComputePublicAdvertisedPrefixesWithdraw (..),
+    newComputePublicAdvertisedPrefixesWithdraw,
+
     -- ** compute.publicDelegatedPrefixes.aggregatedList
     ComputePublicDelegatedPrefixesAggregatedListResource,
     ComputePublicDelegatedPrefixesAggregatedList (..),
     newComputePublicDelegatedPrefixesAggregatedList,
+
+    -- ** compute.publicDelegatedPrefixes.announce
+    ComputePublicDelegatedPrefixesAnnounceResource,
+    ComputePublicDelegatedPrefixesAnnounce (..),
+    newComputePublicDelegatedPrefixesAnnounce,
 
     -- ** compute.publicDelegatedPrefixes.delete
     ComputePublicDelegatedPrefixesDeleteResource,
@@ -1942,6 +2190,11 @@ module Gogol.Compute
     ComputePublicDelegatedPrefixesPatchResource,
     ComputePublicDelegatedPrefixesPatch (..),
     newComputePublicDelegatedPrefixesPatch,
+
+    -- ** compute.publicDelegatedPrefixes.withdraw
+    ComputePublicDelegatedPrefixesWithdrawResource,
+    ComputePublicDelegatedPrefixesWithdraw (..),
+    newComputePublicDelegatedPrefixesWithdraw,
 
     -- ** compute.regionAutoscalers.delete
     ComputeRegionAutoscalersDeleteResource,
@@ -2003,6 +2256,11 @@ module Gogol.Compute
     ComputeRegionBackendServicesList (..),
     newComputeRegionBackendServicesList,
 
+    -- ** compute.regionBackendServices.listUsable
+    ComputeRegionBackendServicesListUsableResource,
+    ComputeRegionBackendServicesListUsable (..),
+    newComputeRegionBackendServicesListUsable,
+
     -- ** compute.regionBackendServices.patch
     ComputeRegionBackendServicesPatchResource,
     ComputeRegionBackendServicesPatch (..),
@@ -2012,6 +2270,16 @@ module Gogol.Compute
     ComputeRegionBackendServicesSetIamPolicyResource,
     ComputeRegionBackendServicesSetIamPolicy (..),
     newComputeRegionBackendServicesSetIamPolicy,
+
+    -- ** compute.regionBackendServices.setSecurityPolicy
+    ComputeRegionBackendServicesSetSecurityPolicyResource,
+    ComputeRegionBackendServicesSetSecurityPolicy (..),
+    newComputeRegionBackendServicesSetSecurityPolicy,
+
+    -- ** compute.regionBackendServices.testIamPermissions
+    ComputeRegionBackendServicesTestIamPermissionsResource,
+    ComputeRegionBackendServicesTestIamPermissions (..),
+    newComputeRegionBackendServicesTestIamPermissions,
 
     -- ** compute.regionBackendServices.update
     ComputeRegionBackendServicesUpdateResource,
@@ -2057,6 +2325,11 @@ module Gogol.Compute
     ComputeRegionDisksAddResourcePoliciesResource,
     ComputeRegionDisksAddResourcePolicies (..),
     newComputeRegionDisksAddResourcePolicies,
+
+    -- ** compute.regionDisks.bulkInsert
+    ComputeRegionDisksBulkInsertResource,
+    ComputeRegionDisksBulkInsert (..),
+    newComputeRegionDisksBulkInsert,
 
     -- ** compute.regionDisks.createSnapshot
     ComputeRegionDisksCreateSnapshotResource,
@@ -2107,6 +2380,21 @@ module Gogol.Compute
     ComputeRegionDisksSetLabelsResource,
     ComputeRegionDisksSetLabels (..),
     newComputeRegionDisksSetLabels,
+
+    -- ** compute.regionDisks.startAsyncReplication
+    ComputeRegionDisksStartAsyncReplicationResource,
+    ComputeRegionDisksStartAsyncReplication (..),
+    newComputeRegionDisksStartAsyncReplication,
+
+    -- ** compute.regionDisks.stopAsyncReplication
+    ComputeRegionDisksStopAsyncReplicationResource,
+    ComputeRegionDisksStopAsyncReplication (..),
+    newComputeRegionDisksStopAsyncReplication,
+
+    -- ** compute.regionDisks.stopGroupAsyncReplication
+    ComputeRegionDisksStopGroupAsyncReplicationResource,
+    ComputeRegionDisksStopGroupAsyncReplication (..),
+    newComputeRegionDisksStopGroupAsyncReplication,
 
     -- ** compute.regionDisks.testIamPermissions
     ComputeRegionDisksTestIamPermissionsResource,
@@ -2253,6 +2541,11 @@ module Gogol.Compute
     ComputeRegionInstanceGroupManagersResize (..),
     newComputeRegionInstanceGroupManagersResize,
 
+    -- ** compute.regionInstanceGroupManagers.resumeInstances
+    ComputeRegionInstanceGroupManagersResumeInstancesResource,
+    ComputeRegionInstanceGroupManagersResumeInstances (..),
+    newComputeRegionInstanceGroupManagersResumeInstances,
+
     -- ** compute.regionInstanceGroupManagers.setInstanceTemplate
     ComputeRegionInstanceGroupManagersSetInstanceTemplateResource,
     ComputeRegionInstanceGroupManagersSetInstanceTemplate (..),
@@ -2262,6 +2555,21 @@ module Gogol.Compute
     ComputeRegionInstanceGroupManagersSetTargetPoolsResource,
     ComputeRegionInstanceGroupManagersSetTargetPools (..),
     newComputeRegionInstanceGroupManagersSetTargetPools,
+
+    -- ** compute.regionInstanceGroupManagers.startInstances
+    ComputeRegionInstanceGroupManagersStartInstancesResource,
+    ComputeRegionInstanceGroupManagersStartInstances (..),
+    newComputeRegionInstanceGroupManagersStartInstances,
+
+    -- ** compute.regionInstanceGroupManagers.stopInstances
+    ComputeRegionInstanceGroupManagersStopInstancesResource,
+    ComputeRegionInstanceGroupManagersStopInstances (..),
+    newComputeRegionInstanceGroupManagersStopInstances,
+
+    -- ** compute.regionInstanceGroupManagers.suspendInstances
+    ComputeRegionInstanceGroupManagersSuspendInstancesResource,
+    ComputeRegionInstanceGroupManagersSuspendInstances (..),
+    newComputeRegionInstanceGroupManagersSuspendInstances,
 
     -- ** compute.regionInstanceGroupManagers.updatePerInstanceConfigs
     ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigsResource,
@@ -2288,15 +2596,85 @@ module Gogol.Compute
     ComputeRegionInstanceGroupsSetNamedPorts (..),
     newComputeRegionInstanceGroupsSetNamedPorts,
 
+    -- ** compute.regionInstanceTemplates.delete
+    ComputeRegionInstanceTemplatesDeleteResource,
+    ComputeRegionInstanceTemplatesDelete (..),
+    newComputeRegionInstanceTemplatesDelete,
+
+    -- ** compute.regionInstanceTemplates.get
+    ComputeRegionInstanceTemplatesGetResource,
+    ComputeRegionInstanceTemplatesGet (..),
+    newComputeRegionInstanceTemplatesGet,
+
+    -- ** compute.regionInstanceTemplates.insert
+    ComputeRegionInstanceTemplatesInsertResource,
+    ComputeRegionInstanceTemplatesInsert (..),
+    newComputeRegionInstanceTemplatesInsert,
+
+    -- ** compute.regionInstanceTemplates.list
+    ComputeRegionInstanceTemplatesListResource,
+    ComputeRegionInstanceTemplatesList (..),
+    newComputeRegionInstanceTemplatesList,
+
     -- ** compute.regionInstances.bulkInsert
     ComputeRegionInstancesBulkInsertResource,
     ComputeRegionInstancesBulkInsert (..),
     newComputeRegionInstancesBulkInsert,
 
+    -- ** compute.regionInstantSnapshots.delete
+    ComputeRegionInstantSnapshotsDeleteResource,
+    ComputeRegionInstantSnapshotsDelete (..),
+    newComputeRegionInstantSnapshotsDelete,
+
+    -- ** compute.regionInstantSnapshots.get
+    ComputeRegionInstantSnapshotsGetResource,
+    ComputeRegionInstantSnapshotsGet (..),
+    newComputeRegionInstantSnapshotsGet,
+
+    -- ** compute.regionInstantSnapshots.getIamPolicy
+    ComputeRegionInstantSnapshotsGetIamPolicyResource,
+    ComputeRegionInstantSnapshotsGetIamPolicy (..),
+    newComputeRegionInstantSnapshotsGetIamPolicy,
+
+    -- ** compute.regionInstantSnapshots.insert
+    ComputeRegionInstantSnapshotsInsertResource,
+    ComputeRegionInstantSnapshotsInsert (..),
+    newComputeRegionInstantSnapshotsInsert,
+
+    -- ** compute.regionInstantSnapshots.list
+    ComputeRegionInstantSnapshotsListResource,
+    ComputeRegionInstantSnapshotsList (..),
+    newComputeRegionInstantSnapshotsList,
+
+    -- ** compute.regionInstantSnapshots.setIamPolicy
+    ComputeRegionInstantSnapshotsSetIamPolicyResource,
+    ComputeRegionInstantSnapshotsSetIamPolicy (..),
+    newComputeRegionInstantSnapshotsSetIamPolicy,
+
+    -- ** compute.regionInstantSnapshots.setLabels
+    ComputeRegionInstantSnapshotsSetLabelsResource,
+    ComputeRegionInstantSnapshotsSetLabels (..),
+    newComputeRegionInstantSnapshotsSetLabels,
+
+    -- ** compute.regionInstantSnapshots.testIamPermissions
+    ComputeRegionInstantSnapshotsTestIamPermissionsResource,
+    ComputeRegionInstantSnapshotsTestIamPermissions (..),
+    newComputeRegionInstantSnapshotsTestIamPermissions,
+
+    -- ** compute.regionNetworkEndpointGroups.attachNetworkEndpoints
+    ComputeRegionNetworkEndpointGroupsAttachNetworkEndpointsResource,
+    ComputeRegionNetworkEndpointGroupsAttachNetworkEndpoints (..),
+    newComputeRegionNetworkEndpointGroupsAttachNetworkEndpoints,
+
     -- ** compute.regionNetworkEndpointGroups.delete
     ComputeRegionNetworkEndpointGroupsDeleteResource,
     ComputeRegionNetworkEndpointGroupsDelete (..),
     newComputeRegionNetworkEndpointGroupsDelete,
+
+    -- ** compute.regionNetworkEndpointGroups.detachNetworkEndpoints
+    ComputeRegionNetworkEndpointGroupsDetachNetworkEndpointsResource,
+    ComputeRegionNetworkEndpointGroupsDetachNetworkEndpoints (..),
+    newComputeRegionNetworkEndpointGroupsDetachNetworkEndpoints,
 
     -- ** compute.regionNetworkEndpointGroups.get
     ComputeRegionNetworkEndpointGroupsGetResource,
@@ -2312,6 +2690,11 @@ module Gogol.Compute
     ComputeRegionNetworkEndpointGroupsListResource,
     ComputeRegionNetworkEndpointGroupsList (..),
     newComputeRegionNetworkEndpointGroupsList,
+
+    -- ** compute.regionNetworkEndpointGroups.listNetworkEndpoints
+    ComputeRegionNetworkEndpointGroupsListNetworkEndpointsResource,
+    ComputeRegionNetworkEndpointGroupsListNetworkEndpoints (..),
+    newComputeRegionNetworkEndpointGroupsListNetworkEndpoints,
 
     -- ** compute.regionNetworkFirewallPolicies.addAssociation
     ComputeRegionNetworkFirewallPoliciesAddAssociationResource,
@@ -2438,6 +2821,11 @@ module Gogol.Compute
     ComputeRegionOperationsWait (..),
     newComputeRegionOperationsWait,
 
+    -- ** compute.regionSecurityPolicies.addRule
+    ComputeRegionSecurityPoliciesAddRuleResource,
+    ComputeRegionSecurityPoliciesAddRule (..),
+    newComputeRegionSecurityPoliciesAddRule,
+
     -- ** compute.regionSecurityPolicies.delete
     ComputeRegionSecurityPoliciesDeleteResource,
     ComputeRegionSecurityPoliciesDelete (..),
@@ -2447,6 +2835,11 @@ module Gogol.Compute
     ComputeRegionSecurityPoliciesGetResource,
     ComputeRegionSecurityPoliciesGet (..),
     newComputeRegionSecurityPoliciesGet,
+
+    -- ** compute.regionSecurityPolicies.getRule
+    ComputeRegionSecurityPoliciesGetRuleResource,
+    ComputeRegionSecurityPoliciesGetRule (..),
+    newComputeRegionSecurityPoliciesGetRule,
 
     -- ** compute.regionSecurityPolicies.insert
     ComputeRegionSecurityPoliciesInsertResource,
@@ -2462,6 +2855,21 @@ module Gogol.Compute
     ComputeRegionSecurityPoliciesPatchResource,
     ComputeRegionSecurityPoliciesPatch (..),
     newComputeRegionSecurityPoliciesPatch,
+
+    -- ** compute.regionSecurityPolicies.patchRule
+    ComputeRegionSecurityPoliciesPatchRuleResource,
+    ComputeRegionSecurityPoliciesPatchRule (..),
+    newComputeRegionSecurityPoliciesPatchRule,
+
+    -- ** compute.regionSecurityPolicies.removeRule
+    ComputeRegionSecurityPoliciesRemoveRuleResource,
+    ComputeRegionSecurityPoliciesRemoveRule (..),
+    newComputeRegionSecurityPoliciesRemoveRule,
+
+    -- ** compute.regionSecurityPolicies.setLabels
+    ComputeRegionSecurityPoliciesSetLabelsResource,
+    ComputeRegionSecurityPoliciesSetLabels (..),
+    newComputeRegionSecurityPoliciesSetLabels,
 
     -- ** compute.regionSslCertificates.delete
     ComputeRegionSslCertificatesDeleteResource,
@@ -2628,6 +3036,11 @@ module Gogol.Compute
     ComputeRegionUrlMapsValidate (..),
     newComputeRegionUrlMapsValidate,
 
+    -- ** compute.regionZones.list
+    ComputeRegionZonesListResource,
+    ComputeRegionZonesList (..),
+    newComputeRegionZonesList,
+
     -- ** compute.regions.get
     ComputeRegionsGetResource,
     ComputeRegionsGet (..),
@@ -2718,6 +3131,11 @@ module Gogol.Compute
     ComputeResourcePoliciesList (..),
     newComputeResourcePoliciesList,
 
+    -- ** compute.resourcePolicies.patch
+    ComputeResourcePoliciesPatchResource,
+    ComputeResourcePoliciesPatch (..),
+    newComputeResourcePoliciesPatch,
+
     -- ** compute.resourcePolicies.setIamPolicy
     ComputeResourcePoliciesSetIamPolicyResource,
     ComputeResourcePoliciesSetIamPolicy (..),
@@ -2738,15 +3156,30 @@ module Gogol.Compute
     ComputeRoutersDelete (..),
     newComputeRoutersDelete,
 
+    -- ** compute.routers.deleteRoutePolicy
+    ComputeRoutersDeleteRoutePolicyResource,
+    ComputeRoutersDeleteRoutePolicy (..),
+    newComputeRoutersDeleteRoutePolicy,
+
     -- ** compute.routers.get
     ComputeRoutersGetResource,
     ComputeRoutersGet (..),
     newComputeRoutersGet,
 
+    -- ** compute.routers.getNatIpInfo
+    ComputeRoutersGetNatIpInfoResource,
+    ComputeRoutersGetNatIpInfo (..),
+    newComputeRoutersGetNatIpInfo,
+
     -- ** compute.routers.getNatMappingInfo
     ComputeRoutersGetNatMappingInfoResource,
     ComputeRoutersGetNatMappingInfo (..),
     newComputeRoutersGetNatMappingInfo,
+
+    -- ** compute.routers.getRoutePolicy
+    ComputeRoutersGetRoutePolicyResource,
+    ComputeRoutersGetRoutePolicy (..),
+    newComputeRoutersGetRoutePolicy,
 
     -- ** compute.routers.getRouterStatus
     ComputeRoutersGetRouterStatusResource,
@@ -2763,10 +3196,25 @@ module Gogol.Compute
     ComputeRoutersList (..),
     newComputeRoutersList,
 
+    -- ** compute.routers.listBgpRoutes
+    ComputeRoutersListBgpRoutesResource,
+    ComputeRoutersListBgpRoutes (..),
+    newComputeRoutersListBgpRoutes,
+
+    -- ** compute.routers.listRoutePolicies
+    ComputeRoutersListRoutePoliciesResource,
+    ComputeRoutersListRoutePolicies (..),
+    newComputeRoutersListRoutePolicies,
+
     -- ** compute.routers.patch
     ComputeRoutersPatchResource,
     ComputeRoutersPatch (..),
     newComputeRoutersPatch,
+
+    -- ** compute.routers.patchRoutePolicy
+    ComputeRoutersPatchRoutePolicyResource,
+    ComputeRoutersPatchRoutePolicy (..),
+    newComputeRoutersPatchRoutePolicy,
 
     -- ** compute.routers.preview
     ComputeRoutersPreviewResource,
@@ -2777,6 +3225,11 @@ module Gogol.Compute
     ComputeRoutersUpdateResource,
     ComputeRoutersUpdate (..),
     newComputeRoutersUpdate,
+
+    -- ** compute.routers.updateRoutePolicy
+    ComputeRoutersUpdateRoutePolicyResource,
+    ComputeRoutersUpdateRoutePolicy (..),
+    newComputeRoutersUpdateRoutePolicy,
 
     -- ** compute.routes.delete
     ComputeRoutesDeleteResource,
@@ -2903,6 +3356,16 @@ module Gogol.Compute
     ComputeServiceAttachmentsTestIamPermissions (..),
     newComputeServiceAttachmentsTestIamPermissions,
 
+    -- ** compute.snapshotSettings.get
+    ComputeSnapshotSettingsGetResource,
+    ComputeSnapshotSettingsGet (..),
+    newComputeSnapshotSettingsGet,
+
+    -- ** compute.snapshotSettings.patch
+    ComputeSnapshotSettingsPatchResource,
+    ComputeSnapshotSettingsPatch (..),
+    newComputeSnapshotSettingsPatch,
+
     -- ** compute.snapshots.delete
     ComputeSnapshotsDeleteResource,
     ComputeSnapshotsDelete (..),
@@ -3002,6 +3465,71 @@ module Gogol.Compute
     ComputeSslPoliciesPatchResource,
     ComputeSslPoliciesPatch (..),
     newComputeSslPoliciesPatch,
+
+    -- ** compute.storagePoolTypes.aggregatedList
+    ComputeStoragePoolTypesAggregatedListResource,
+    ComputeStoragePoolTypesAggregatedList (..),
+    newComputeStoragePoolTypesAggregatedList,
+
+    -- ** compute.storagePoolTypes.get
+    ComputeStoragePoolTypesGetResource,
+    ComputeStoragePoolTypesGet (..),
+    newComputeStoragePoolTypesGet,
+
+    -- ** compute.storagePoolTypes.list
+    ComputeStoragePoolTypesListResource,
+    ComputeStoragePoolTypesList (..),
+    newComputeStoragePoolTypesList,
+
+    -- ** compute.storagePools.aggregatedList
+    ComputeStoragePoolsAggregatedListResource,
+    ComputeStoragePoolsAggregatedList (..),
+    newComputeStoragePoolsAggregatedList,
+
+    -- ** compute.storagePools.delete
+    ComputeStoragePoolsDeleteResource,
+    ComputeStoragePoolsDelete (..),
+    newComputeStoragePoolsDelete,
+
+    -- ** compute.storagePools.get
+    ComputeStoragePoolsGetResource,
+    ComputeStoragePoolsGet (..),
+    newComputeStoragePoolsGet,
+
+    -- ** compute.storagePools.getIamPolicy
+    ComputeStoragePoolsGetIamPolicyResource,
+    ComputeStoragePoolsGetIamPolicy (..),
+    newComputeStoragePoolsGetIamPolicy,
+
+    -- ** compute.storagePools.insert
+    ComputeStoragePoolsInsertResource,
+    ComputeStoragePoolsInsert (..),
+    newComputeStoragePoolsInsert,
+
+    -- ** compute.storagePools.list
+    ComputeStoragePoolsListResource,
+    ComputeStoragePoolsList (..),
+    newComputeStoragePoolsList,
+
+    -- ** compute.storagePools.listDisks
+    ComputeStoragePoolsListDisksResource,
+    ComputeStoragePoolsListDisks (..),
+    newComputeStoragePoolsListDisks,
+
+    -- ** compute.storagePools.setIamPolicy
+    ComputeStoragePoolsSetIamPolicyResource,
+    ComputeStoragePoolsSetIamPolicy (..),
+    newComputeStoragePoolsSetIamPolicy,
+
+    -- ** compute.storagePools.testIamPermissions
+    ComputeStoragePoolsTestIamPermissionsResource,
+    ComputeStoragePoolsTestIamPermissions (..),
+    newComputeStoragePoolsTestIamPermissions,
+
+    -- ** compute.storagePools.update
+    ComputeStoragePoolsUpdateResource,
+    ComputeStoragePoolsUpdate (..),
+    newComputeStoragePoolsUpdate,
 
     -- ** compute.subnetworks.aggregatedList
     ComputeSubnetworksAggregatedListResource,
@@ -3203,6 +3731,11 @@ module Gogol.Compute
     ComputeTargetInstancesList (..),
     newComputeTargetInstancesList,
 
+    -- ** compute.targetInstances.setSecurityPolicy
+    ComputeTargetInstancesSetSecurityPolicyResource,
+    ComputeTargetInstancesSetSecurityPolicy (..),
+    newComputeTargetInstancesSetSecurityPolicy,
+
     -- ** compute.targetPools.addHealthCheck
     ComputeTargetPoolsAddHealthCheckResource,
     ComputeTargetPoolsAddHealthCheck (..),
@@ -3257,6 +3790,11 @@ module Gogol.Compute
     ComputeTargetPoolsSetBackupResource,
     ComputeTargetPoolsSetBackup (..),
     newComputeTargetPoolsSetBackup,
+
+    -- ** compute.targetPools.setSecurityPolicy
+    ComputeTargetPoolsSetSecurityPolicyResource,
+    ComputeTargetPoolsSetSecurityPolicy (..),
+    newComputeTargetPoolsSetSecurityPolicy,
 
     -- ** compute.targetSslProxies.delete
     ComputeTargetSslProxiesDeleteResource,
@@ -3518,6 +4056,10 @@ module Gogol.Compute
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AWSV4Signature
+    AWSV4Signature (..),
+    newAWSV4Signature,
+
     -- ** AcceleratorConfig
     AcceleratorConfig (..),
     newAcceleratorConfig,
@@ -3598,6 +4140,10 @@ module Gogol.Compute
     -- ** Address_Ipv6EndpointType
     Address_Ipv6EndpointType (..),
 
+    -- ** Address_Labels
+    Address_Labels (..),
+    newAddress_Labels,
+
     -- ** Address_NetworkTier
     Address_NetworkTier (..),
 
@@ -3660,9 +4206,37 @@ module Gogol.Compute
     AdvancedMachineFeatures (..),
     newAdvancedMachineFeatures,
 
+    -- ** AdvancedMachineFeatures_PerformanceMonitoringUnit
+    AdvancedMachineFeatures_PerformanceMonitoringUnit (..),
+
     -- ** AliasIpRange
     AliasIpRange (..),
     newAliasIpRange,
+
+    -- ** AllocationAggregateReservation
+    AllocationAggregateReservation (..),
+    newAllocationAggregateReservation,
+
+    -- ** AllocationAggregateReservation_VmFamily
+    AllocationAggregateReservation_VmFamily (..),
+
+    -- ** AllocationAggregateReservation_WorkloadType
+    AllocationAggregateReservation_WorkloadType (..),
+
+    -- ** AllocationAggregateReservationReservedResourceInfo
+    AllocationAggregateReservationReservedResourceInfo (..),
+    newAllocationAggregateReservationReservedResourceInfo,
+
+    -- ** AllocationAggregateReservationReservedResourceInfoAccelerator
+    AllocationAggregateReservationReservedResourceInfoAccelerator (..),
+    newAllocationAggregateReservationReservedResourceInfoAccelerator,
+
+    -- ** AllocationReservationSharingPolicy
+    AllocationReservationSharingPolicy (..),
+    newAllocationReservationSharingPolicy,
+
+    -- ** AllocationReservationSharingPolicy_ServiceShareType
+    AllocationReservationSharingPolicy_ServiceShareType (..),
 
     -- ** AllocationResourceStatus
     AllocationResourceStatus (..),
@@ -3671,6 +4245,10 @@ module Gogol.Compute
     -- ** AllocationResourceStatusSpecificSKUAllocation
     AllocationResourceStatusSpecificSKUAllocation (..),
     newAllocationResourceStatusSpecificSKUAllocation,
+
+    -- ** AllocationResourceStatusSpecificSKUAllocation_Utilizations
+    AllocationResourceStatusSpecificSKUAllocation_Utilizations (..),
+    newAllocationResourceStatusSpecificSKUAllocation_Utilizations,
 
     -- ** AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk
     AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk (..),
@@ -3699,6 +4277,9 @@ module Gogol.Compute
 
     -- ** AttachedDisk_Mode
     AttachedDisk_Mode (..),
+
+    -- ** AttachedDisk_SavedState
+    AttachedDisk_SavedState (..),
 
     -- ** AttachedDisk_Type
     AttachedDisk_Type (..),
@@ -3731,13 +4312,6 @@ module Gogol.Compute
 
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
-
-    -- ** AuthorizationLoggingOptions
-    AuthorizationLoggingOptions (..),
-    newAuthorizationLoggingOptions,
-
-    -- ** AuthorizationLoggingOptions_PermissionType
-    AuthorizationLoggingOptions_PermissionType (..),
 
     -- ** Autoscaler
     Autoscaler (..),
@@ -3850,6 +4424,9 @@ module Gogol.Compute
     -- ** Backend_BalancingMode
     Backend_BalancingMode (..),
 
+    -- ** Backend_Preference
+    Backend_Preference (..),
+
     -- ** BackendBucket
     BackendBucket (..),
     newBackendBucket,
@@ -3891,6 +4468,14 @@ module Gogol.Compute
     BackendBucketList_Warning_DataItem (..),
     newBackendBucketList_Warning_DataItem,
 
+    -- ** BackendBucketUsedBy
+    BackendBucketUsedBy (..),
+    newBackendBucketUsedBy,
+
+    -- ** BackendCustomMetric
+    BackendCustomMetric (..),
+    newBackendCustomMetric,
+
     -- ** BackendService
     BackendService (..),
     newBackendService,
@@ -3898,11 +4483,18 @@ module Gogol.Compute
     -- ** BackendService_CompressionMode
     BackendService_CompressionMode (..),
 
+    -- ** BackendService_IpAddressSelectionPolicy
+    BackendService_IpAddressSelectionPolicy (..),
+
     -- ** BackendService_LoadBalancingScheme
     BackendService_LoadBalancingScheme (..),
 
     -- ** BackendService_LocalityLbPolicy
     BackendService_LocalityLbPolicy (..),
+
+    -- ** BackendService_Metadatas
+    BackendService_Metadatas (..),
+    newBackendService_Metadatas,
 
     -- ** BackendService_Protocol
     BackendService_Protocol (..),
@@ -3954,6 +4546,10 @@ module Gogol.Compute
     -- ** BackendServiceConnectionTrackingPolicy_TrackingMode
     BackendServiceConnectionTrackingPolicy_TrackingMode (..),
 
+    -- ** BackendServiceCustomMetric
+    BackendServiceCustomMetric (..),
+    newBackendServiceCustomMetric,
+
     -- ** BackendServiceFailoverPolicy
     BackendServiceFailoverPolicy (..),
     newBackendServiceFailoverPolicy,
@@ -3965,6 +4561,10 @@ module Gogol.Compute
     -- ** BackendServiceGroupHealth_Annotations
     BackendServiceGroupHealth_Annotations (..),
     newBackendServiceGroupHealth_Annotations,
+
+    -- ** BackendServiceHttpCookie
+    BackendServiceHttpCookie (..),
+    newBackendServiceHttpCookie,
 
     -- ** BackendServiceIAP
     BackendServiceIAP (..),
@@ -3984,6 +4584,21 @@ module Gogol.Compute
     -- ** BackendServiceList_Warning_DataItem
     BackendServiceList_Warning_DataItem (..),
     newBackendServiceList_Warning_DataItem,
+
+    -- ** BackendServiceListUsable
+    BackendServiceListUsable (..),
+    newBackendServiceListUsable,
+
+    -- ** BackendServiceListUsable_Warning
+    BackendServiceListUsable_Warning (..),
+    newBackendServiceListUsable_Warning,
+
+    -- ** BackendServiceListUsable_Warning_Code
+    BackendServiceListUsable_Warning_Code (..),
+
+    -- ** BackendServiceListUsable_Warning_DataItem
+    BackendServiceListUsable_Warning_DataItem (..),
+    newBackendServiceListUsable_Warning_DataItem,
 
     -- ** BackendServiceLocalityLoadBalancingPolicyConfig
     BackendServiceLocalityLoadBalancingPolicyConfig (..),
@@ -4010,6 +4625,10 @@ module Gogol.Compute
     -- ** BackendServiceReference
     BackendServiceReference (..),
     newBackendServiceReference,
+
+    -- ** BackendServiceUsedBy
+    BackendServiceUsedBy (..),
+    newBackendServiceUsedBy,
 
     -- ** BackendServicesScopedList
     BackendServicesScopedList (..),
@@ -4053,9 +4672,31 @@ module Gogol.Compute
     BfdStatusPacketCounts (..),
     newBfdStatusPacketCounts,
 
+    -- ** BgpRoute
+    BgpRoute (..),
+    newBgpRoute,
+
+    -- ** BgpRoute_Origin
+    BgpRoute_Origin (..),
+
+    -- ** BgpRouteAsPath
+    BgpRouteAsPath (..),
+    newBgpRouteAsPath,
+
+    -- ** BgpRouteAsPath_Type
+    BgpRouteAsPath_Type (..),
+
+    -- ** BgpRouteNetworkLayerReachabilityInformation
+    BgpRouteNetworkLayerReachabilityInformation (..),
+    newBgpRouteNetworkLayerReachabilityInformation,
+
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BulkInsertDiskResource
+    BulkInsertDiskResource (..),
+    newBulkInsertDiskResource,
 
     -- ** BulkInsertInstanceResource
     BulkInsertInstanceResource (..),
@@ -4068,6 +4709,13 @@ module Gogol.Compute
     -- ** BulkInsertInstanceResourcePerInstanceProperties
     BulkInsertInstanceResourcePerInstanceProperties (..),
     newBulkInsertInstanceResourcePerInstanceProperties,
+
+    -- ** BulkInsertOperationStatus
+    BulkInsertOperationStatus (..),
+    newBulkInsertOperationStatus,
+
+    -- ** BulkInsertOperationStatus_Status
+    BulkInsertOperationStatus_Status (..),
 
     -- ** CacheInvalidationRule
     CacheInvalidationRule (..),
@@ -4131,6 +4779,10 @@ module Gogol.Compute
     CommitmentList_Warning_DataItem (..),
     newCommitmentList_Warning_DataItem,
 
+    -- ** CommitmentResourceStatus
+    CommitmentResourceStatus (..),
+    newCommitmentResourceStatus,
+
     -- ** CommitmentsScopedList
     CommitmentsScopedList (..),
     newCommitmentsScopedList,
@@ -4146,22 +4798,12 @@ module Gogol.Compute
     CommitmentsScopedList_Warning_DataItem (..),
     newCommitmentsScopedList_Warning_DataItem,
 
-    -- ** Condition
-    Condition (..),
-    newCondition,
-
-    -- ** Condition_Iam
-    Condition_Iam (..),
-
-    -- ** Condition_Op
-    Condition_Op (..),
-
-    -- ** Condition_Sys
-    Condition_Sys (..),
-
     -- ** ConfidentialInstanceConfig
     ConfidentialInstanceConfig (..),
     newConfidentialInstanceConfig,
+
+    -- ** ConfidentialInstanceConfig_ConfidentialInstanceType
+    ConfidentialInstanceConfig_ConfidentialInstanceType (..),
 
     -- ** ConnectionDraining
     ConnectionDraining (..),
@@ -4178,6 +4820,14 @@ module Gogol.Compute
     -- ** CorsPolicy
     CorsPolicy (..),
     newCorsPolicy,
+
+    -- ** CustomErrorResponsePolicy
+    CustomErrorResponsePolicy (..),
+    newCustomErrorResponsePolicy,
+
+    -- ** CustomErrorResponsePolicyCustomErrorResponseRule
+    CustomErrorResponsePolicyCustomErrorResponseRule (..),
+    newCustomErrorResponsePolicyCustomErrorResponseRule,
 
     -- ** CustomerEncryptionKey
     CustomerEncryptionKey (..),
@@ -4198,8 +4848,15 @@ module Gogol.Compute
     Disk (..),
     newDisk,
 
+    -- ** Disk_AccessMode
+    Disk_AccessMode (..),
+
     -- ** Disk_Architecture
     Disk_Architecture (..),
+
+    -- ** Disk_AsyncSecondaryDisks
+    Disk_AsyncSecondaryDisks (..),
+    newDisk_AsyncSecondaryDisks,
 
     -- ** Disk_Labels
     Disk_Labels (..),
@@ -4226,6 +4883,14 @@ module Gogol.Compute
     -- ** DiskAggregatedList_Warning_DataItem
     DiskAggregatedList_Warning_DataItem (..),
     newDiskAggregatedList_Warning_DataItem,
+
+    -- ** DiskAsyncReplication
+    DiskAsyncReplication (..),
+    newDiskAsyncReplication,
+
+    -- ** DiskAsyncReplicationList
+    DiskAsyncReplicationList (..),
+    newDiskAsyncReplicationList,
 
     -- ** DiskInstantiationConfig
     DiskInstantiationConfig (..),
@@ -4260,6 +4925,21 @@ module Gogol.Compute
     -- ** DiskParams_ResourceManagerTags
     DiskParams_ResourceManagerTags (..),
     newDiskParams_ResourceManagerTags,
+
+    -- ** DiskResourceStatus
+    DiskResourceStatus (..),
+    newDiskResourceStatus,
+
+    -- ** DiskResourceStatus_AsyncSecondaryDisks
+    DiskResourceStatus_AsyncSecondaryDisks (..),
+    newDiskResourceStatus_AsyncSecondaryDisks,
+
+    -- ** DiskResourceStatusAsyncReplicationStatus
+    DiskResourceStatusAsyncReplicationStatus (..),
+    newDiskResourceStatusAsyncReplicationStatus,
+
+    -- ** DiskResourceStatusAsyncReplicationStatus_State
+    DiskResourceStatusAsyncReplicationStatus_State (..),
 
     -- ** DiskType
     DiskType (..),
@@ -4340,6 +5020,14 @@ module Gogol.Compute
     -- ** DisksScopedList_Warning_DataItem
     DisksScopedList_Warning_DataItem (..),
     newDisksScopedList_Warning_DataItem,
+
+    -- ** DisksStartAsyncReplicationRequest
+    DisksStartAsyncReplicationRequest (..),
+    newDisksStartAsyncReplicationRequest,
+
+    -- ** DisksStopGroupAsyncReplicationResource
+    DisksStopGroupAsyncReplicationResource (..),
+    newDisksStopGroupAsyncReplicationResource,
 
     -- ** DisplayDevice
     DisplayDevice (..),
@@ -4471,6 +5159,21 @@ module Gogol.Compute
     -- ** FirewallPoliciesListAssociationsResponse
     FirewallPoliciesListAssociationsResponse (..),
     newFirewallPoliciesListAssociationsResponse,
+
+    -- ** FirewallPoliciesScopedList
+    FirewallPoliciesScopedList (..),
+    newFirewallPoliciesScopedList,
+
+    -- ** FirewallPoliciesScopedList_Warning
+    FirewallPoliciesScopedList_Warning (..),
+    newFirewallPoliciesScopedList_Warning,
+
+    -- ** FirewallPoliciesScopedList_Warning_Code
+    FirewallPoliciesScopedList_Warning_Code (..),
+
+    -- ** FirewallPoliciesScopedList_Warning_DataItem
+    FirewallPoliciesScopedList_Warning_DataItem (..),
+    newFirewallPoliciesScopedList_Warning_DataItem,
 
     -- ** FirewallPolicy
     FirewallPolicy (..),
@@ -4607,6 +5310,10 @@ module Gogol.Compute
 
     -- ** GRPCHealthCheck_PortSpecification
     GRPCHealthCheck_PortSpecification (..),
+
+    -- ** GlobalAddressesMoveRequest
+    GlobalAddressesMoveRequest (..),
+    newGlobalAddressesMoveRequest,
 
     -- ** GlobalNetworkEndpointGroupsAttachEndpointsRequest
     GlobalNetworkEndpointGroupsAttachEndpointsRequest (..),
@@ -4782,6 +5489,9 @@ module Gogol.Compute
     -- ** HealthStatus_HealthState
     HealthStatus_HealthState (..),
 
+    -- ** HealthStatus_Ipv6HealthState
+    HealthStatus_Ipv6HealthState (..),
+
     -- ** HealthStatus_WeightError
     HealthStatus_WeightError (..),
 
@@ -4791,6 +5501,9 @@ module Gogol.Compute
 
     -- ** HealthStatusForNetworkEndpoint_HealthState
     HealthStatusForNetworkEndpoint_HealthState (..),
+
+    -- ** HealthStatusForNetworkEndpoint_Ipv6HealthState
+    HealthStatusForNetworkEndpoint_Ipv6HealthState (..),
 
     -- ** Help
     Help (..),
@@ -5052,9 +5765,35 @@ module Gogol.Compute
     InstanceGroupManagerAggregatedList_Warning_DataItem (..),
     newInstanceGroupManagerAggregatedList_Warning_DataItem,
 
+    -- ** InstanceGroupManagerAllInstancesConfig
+    InstanceGroupManagerAllInstancesConfig (..),
+    newInstanceGroupManagerAllInstancesConfig,
+
     -- ** InstanceGroupManagerAutoHealingPolicy
     InstanceGroupManagerAutoHealingPolicy (..),
     newInstanceGroupManagerAutoHealingPolicy,
+
+    -- ** InstanceGroupManagerInstanceFlexibilityPolicy
+    InstanceGroupManagerInstanceFlexibilityPolicy (..),
+    newInstanceGroupManagerInstanceFlexibilityPolicy,
+
+    -- ** InstanceGroupManagerInstanceFlexibilityPolicy_InstanceSelections
+    InstanceGroupManagerInstanceFlexibilityPolicy_InstanceSelections (..),
+    newInstanceGroupManagerInstanceFlexibilityPolicy_InstanceSelections,
+
+    -- ** InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection
+    InstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection (..),
+    newInstanceGroupManagerInstanceFlexibilityPolicyInstanceSelection,
+
+    -- ** InstanceGroupManagerInstanceLifecyclePolicy
+    InstanceGroupManagerInstanceLifecyclePolicy (..),
+    newInstanceGroupManagerInstanceLifecyclePolicy,
+
+    -- ** InstanceGroupManagerInstanceLifecyclePolicy_DefaultActionOnFailure
+    InstanceGroupManagerInstanceLifecyclePolicy_DefaultActionOnFailure (..),
+
+    -- ** InstanceGroupManagerInstanceLifecyclePolicy_ForceUpdateOnRepair
+    InstanceGroupManagerInstanceLifecyclePolicy_ForceUpdateOnRepair (..),
 
     -- ** InstanceGroupManagerList
     InstanceGroupManagerList (..),
@@ -5071,9 +5810,78 @@ module Gogol.Compute
     InstanceGroupManagerList_Warning_DataItem (..),
     newInstanceGroupManagerList_Warning_DataItem,
 
+    -- ** InstanceGroupManagerResizeRequest
+    InstanceGroupManagerResizeRequest (..),
+    newInstanceGroupManagerResizeRequest,
+
+    -- ** InstanceGroupManagerResizeRequest_State
+    InstanceGroupManagerResizeRequest_State (..),
+
+    -- ** InstanceGroupManagerResizeRequestStatus
+    InstanceGroupManagerResizeRequestStatus (..),
+    newInstanceGroupManagerResizeRequestStatus,
+
+    -- ** InstanceGroupManagerResizeRequestStatus_Error
+    InstanceGroupManagerResizeRequestStatus_Error (..),
+    newInstanceGroupManagerResizeRequestStatus_Error,
+
+    -- ** InstanceGroupManagerResizeRequestStatus_Error_ErrorsItem
+    InstanceGroupManagerResizeRequestStatus_Error_ErrorsItem (..),
+    newInstanceGroupManagerResizeRequestStatus_Error_ErrorsItem,
+
+    -- ** InstanceGroupManagerResizeRequestStatus_Error_ErrorsItem_ErrorDetailsItem
+    InstanceGroupManagerResizeRequestStatus_Error_ErrorsItem_ErrorDetailsItem (..),
+    newInstanceGroupManagerResizeRequestStatus_Error_ErrorsItem_ErrorDetailsItem,
+
+    -- ** InstanceGroupManagerResizeRequestStatusLastAttempt
+    InstanceGroupManagerResizeRequestStatusLastAttempt (..),
+    newInstanceGroupManagerResizeRequestStatusLastAttempt,
+
+    -- ** InstanceGroupManagerResizeRequestStatusLastAttempt_Error
+    InstanceGroupManagerResizeRequestStatusLastAttempt_Error (..),
+    newInstanceGroupManagerResizeRequestStatusLastAttempt_Error,
+
+    -- ** InstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem
+    InstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem (..),
+    newInstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem,
+
+    -- ** InstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem_ErrorDetailsItem
+    InstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem_ErrorDetailsItem (..),
+    newInstanceGroupManagerResizeRequestStatusLastAttempt_Error_ErrorsItem_ErrorDetailsItem,
+
+    -- ** InstanceGroupManagerResizeRequestsListResponse
+    InstanceGroupManagerResizeRequestsListResponse (..),
+    newInstanceGroupManagerResizeRequestsListResponse,
+
+    -- ** InstanceGroupManagerResizeRequestsListResponse_Warning
+    InstanceGroupManagerResizeRequestsListResponse_Warning (..),
+    newInstanceGroupManagerResizeRequestsListResponse_Warning,
+
+    -- ** InstanceGroupManagerResizeRequestsListResponse_Warning_Code
+    InstanceGroupManagerResizeRequestsListResponse_Warning_Code (..),
+
+    -- ** InstanceGroupManagerResizeRequestsListResponse_Warning_DataItem
+    InstanceGroupManagerResizeRequestsListResponse_Warning_DataItem (..),
+    newInstanceGroupManagerResizeRequestsListResponse_Warning_DataItem,
+
+    -- ** InstanceGroupManagerResourcePolicies
+    InstanceGroupManagerResourcePolicies (..),
+    newInstanceGroupManagerResourcePolicies,
+
+    -- ** InstanceGroupManagerStandbyPolicy
+    InstanceGroupManagerStandbyPolicy (..),
+    newInstanceGroupManagerStandbyPolicy,
+
+    -- ** InstanceGroupManagerStandbyPolicy_Mode
+    InstanceGroupManagerStandbyPolicy_Mode (..),
+
     -- ** InstanceGroupManagerStatus
     InstanceGroupManagerStatus (..),
     newInstanceGroupManagerStatus,
+
+    -- ** InstanceGroupManagerStatusAllInstancesConfig
+    InstanceGroupManagerStatusAllInstancesConfig (..),
+    newInstanceGroupManagerStatusAllInstancesConfig,
 
     -- ** InstanceGroupManagerStatusStateful
     InstanceGroupManagerStatusStateful (..),
@@ -5167,6 +5975,10 @@ module Gogol.Compute
     InstanceGroupManagersRecreateInstancesRequest (..),
     newInstanceGroupManagersRecreateInstancesRequest,
 
+    -- ** InstanceGroupManagersResumeInstancesRequest
+    InstanceGroupManagersResumeInstancesRequest (..),
+    newInstanceGroupManagersResumeInstancesRequest,
+
     -- ** InstanceGroupManagersScopedList
     InstanceGroupManagersScopedList (..),
     newInstanceGroupManagersScopedList,
@@ -5189,6 +6001,18 @@ module Gogol.Compute
     -- ** InstanceGroupManagersSetTargetPoolsRequest
     InstanceGroupManagersSetTargetPoolsRequest (..),
     newInstanceGroupManagersSetTargetPoolsRequest,
+
+    -- ** InstanceGroupManagersStartInstancesRequest
+    InstanceGroupManagersStartInstancesRequest (..),
+    newInstanceGroupManagersStartInstancesRequest,
+
+    -- ** InstanceGroupManagersStopInstancesRequest
+    InstanceGroupManagersStopInstancesRequest (..),
+    newInstanceGroupManagersStopInstancesRequest,
+
+    -- ** InstanceGroupManagersSuspendInstancesRequest
+    InstanceGroupManagersSuspendInstancesRequest (..),
+    newInstanceGroupManagersSuspendInstancesRequest,
 
     -- ** InstanceGroupManagersUpdatePerInstanceConfigsReq
     InstanceGroupManagersUpdatePerInstanceConfigsReq (..),
@@ -5318,9 +6142,33 @@ module Gogol.Compute
     InstanceProperties_ResourceManagerTags (..),
     newInstanceProperties_ResourceManagerTags,
 
+    -- ** InstancePropertiesPatch
+    InstancePropertiesPatch (..),
+    newInstancePropertiesPatch,
+
+    -- ** InstancePropertiesPatch_Labels
+    InstancePropertiesPatch_Labels (..),
+    newInstancePropertiesPatch_Labels,
+
+    -- ** InstancePropertiesPatch_Metadata
+    InstancePropertiesPatch_Metadata (..),
+    newInstancePropertiesPatch_Metadata,
+
     -- ** InstanceReference
     InstanceReference (..),
     newInstanceReference,
+
+    -- ** InstanceSettings
+    InstanceSettings (..),
+    newInstanceSettings,
+
+    -- ** InstanceSettingsMetadata
+    InstanceSettingsMetadata (..),
+    newInstanceSettingsMetadata,
+
+    -- ** InstanceSettingsMetadata_Items
+    InstanceSettingsMetadata_Items (..),
+    newInstanceSettingsMetadata_Items,
 
     -- ** InstanceTemplate
     InstanceTemplate (..),
@@ -5386,6 +6234,14 @@ module Gogol.Compute
     InstancesAddResourcePoliciesRequest (..),
     newInstancesAddResourcePoliciesRequest,
 
+    -- ** InstancesBulkInsertOperationMetadata
+    InstancesBulkInsertOperationMetadata (..),
+    newInstancesBulkInsertOperationMetadata,
+
+    -- ** InstancesBulkInsertOperationMetadata_PerLocationStatus
+    InstancesBulkInsertOperationMetadata_PerLocationStatus (..),
+    newInstancesBulkInsertOperationMetadata_PerLocationStatus,
+
     -- ** InstancesGetEffectiveFirewallsResponse
     InstancesGetEffectiveFirewallsResponse (..),
     newInstancesGetEffectiveFirewallsResponse,
@@ -5400,6 +6256,20 @@ module Gogol.Compute
     -- ** InstancesRemoveResourcePoliciesRequest
     InstancesRemoveResourcePoliciesRequest (..),
     newInstancesRemoveResourcePoliciesRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest
+    InstancesReportHostAsFaultyRequest (..),
+    newInstancesReportHostAsFaultyRequest,
+
+    -- ** InstancesReportHostAsFaultyRequest_DisruptionSchedule
+    InstancesReportHostAsFaultyRequest_DisruptionSchedule (..),
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason
+    InstancesReportHostAsFaultyRequestFaultReason (..),
+    newInstancesReportHostAsFaultyRequestFaultReason,
+
+    -- ** InstancesReportHostAsFaultyRequestFaultReason_Behavior
+    InstancesReportHostAsFaultyRequestFaultReason_Behavior (..),
 
     -- ** InstancesScopedList
     InstancesScopedList (..),
@@ -5440,6 +6310,10 @@ module Gogol.Compute
     InstancesSetNameRequest (..),
     newInstancesSetNameRequest,
 
+    -- ** InstancesSetSecurityPolicyRequest
+    InstancesSetSecurityPolicyRequest (..),
+    newInstancesSetSecurityPolicyRequest,
+
     -- ** InstancesSetServiceAccountRequest
     InstancesSetServiceAccountRequest (..),
     newInstancesSetServiceAccountRequest,
@@ -5447,6 +6321,73 @@ module Gogol.Compute
     -- ** InstancesStartWithEncryptionKeyRequest
     InstancesStartWithEncryptionKeyRequest (..),
     newInstancesStartWithEncryptionKeyRequest,
+
+    -- ** InstantSnapshot
+    InstantSnapshot (..),
+    newInstantSnapshot,
+
+    -- ** InstantSnapshot_Architecture
+    InstantSnapshot_Architecture (..),
+
+    -- ** InstantSnapshot_Labels
+    InstantSnapshot_Labels (..),
+    newInstantSnapshot_Labels,
+
+    -- ** InstantSnapshot_Status
+    InstantSnapshot_Status (..),
+
+    -- ** InstantSnapshotAggregatedList
+    InstantSnapshotAggregatedList (..),
+    newInstantSnapshotAggregatedList,
+
+    -- ** InstantSnapshotAggregatedList_Items
+    InstantSnapshotAggregatedList_Items (..),
+    newInstantSnapshotAggregatedList_Items,
+
+    -- ** InstantSnapshotAggregatedList_Warning
+    InstantSnapshotAggregatedList_Warning (..),
+    newInstantSnapshotAggregatedList_Warning,
+
+    -- ** InstantSnapshotAggregatedList_Warning_Code
+    InstantSnapshotAggregatedList_Warning_Code (..),
+
+    -- ** InstantSnapshotAggregatedList_Warning_DataItem
+    InstantSnapshotAggregatedList_Warning_DataItem (..),
+    newInstantSnapshotAggregatedList_Warning_DataItem,
+
+    -- ** InstantSnapshotList
+    InstantSnapshotList (..),
+    newInstantSnapshotList,
+
+    -- ** InstantSnapshotList_Warning
+    InstantSnapshotList_Warning (..),
+    newInstantSnapshotList_Warning,
+
+    -- ** InstantSnapshotList_Warning_Code
+    InstantSnapshotList_Warning_Code (..),
+
+    -- ** InstantSnapshotList_Warning_DataItem
+    InstantSnapshotList_Warning_DataItem (..),
+    newInstantSnapshotList_Warning_DataItem,
+
+    -- ** InstantSnapshotResourceStatus
+    InstantSnapshotResourceStatus (..),
+    newInstantSnapshotResourceStatus,
+
+    -- ** InstantSnapshotsScopedList
+    InstantSnapshotsScopedList (..),
+    newInstantSnapshotsScopedList,
+
+    -- ** InstantSnapshotsScopedList_Warning
+    InstantSnapshotsScopedList_Warning (..),
+    newInstantSnapshotsScopedList_Warning,
+
+    -- ** InstantSnapshotsScopedList_Warning_Code
+    InstantSnapshotsScopedList_Warning_Code (..),
+
+    -- ** InstantSnapshotsScopedList_Warning_DataItem
+    InstantSnapshotsScopedList_Warning_DataItem (..),
+    newInstantSnapshotsScopedList_Warning_DataItem,
 
     -- ** Int64RangeMatch
     Int64RangeMatch (..),
@@ -5456,14 +6397,24 @@ module Gogol.Compute
     Interconnect (..),
     newInterconnect,
 
+    -- ** Interconnect_AvailableFeaturesItem
+    Interconnect_AvailableFeaturesItem (..),
+
     -- ** Interconnect_InterconnectType
     Interconnect_InterconnectType (..),
+
+    -- ** Interconnect_Labels
+    Interconnect_Labels (..),
+    newInterconnect_Labels,
 
     -- ** Interconnect_LinkType
     Interconnect_LinkType (..),
 
     -- ** Interconnect_OperationalStatus
     Interconnect_OperationalStatus (..),
+
+    -- ** Interconnect_RequestedFeaturesItem
+    Interconnect_RequestedFeaturesItem (..),
 
     -- ** Interconnect_State
     Interconnect_State (..),
@@ -5480,6 +6431,10 @@ module Gogol.Compute
 
     -- ** InterconnectAttachment_Encryption
     InterconnectAttachment_Encryption (..),
+
+    -- ** InterconnectAttachment_Labels
+    InterconnectAttachment_Labels (..),
+    newInterconnectAttachment_Labels,
 
     -- ** InterconnectAttachment_OperationalStatus
     InterconnectAttachment_OperationalStatus (..),
@@ -5511,6 +6466,17 @@ module Gogol.Compute
     -- ** InterconnectAttachmentAggregatedList_Warning_DataItem
     InterconnectAttachmentAggregatedList_Warning_DataItem (..),
     newInterconnectAttachmentAggregatedList_Warning_DataItem,
+
+    -- ** InterconnectAttachmentConfigurationConstraints
+    InterconnectAttachmentConfigurationConstraints (..),
+    newInterconnectAttachmentConfigurationConstraints,
+
+    -- ** InterconnectAttachmentConfigurationConstraints_BgpMd5
+    InterconnectAttachmentConfigurationConstraints_BgpMd5 (..),
+
+    -- ** InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange
+    InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange (..),
+    newInterconnectAttachmentConfigurationConstraintsBgpPeerASNRange,
 
     -- ** InterconnectAttachmentList
     InterconnectAttachmentList (..),
@@ -5589,6 +6555,10 @@ module Gogol.Compute
     -- ** InterconnectDiagnosticsLinkStatus_OperationalStatus
     InterconnectDiagnosticsLinkStatus_OperationalStatus (..),
 
+    -- ** InterconnectDiagnosticsMacsecStatus
+    InterconnectDiagnosticsMacsecStatus (..),
+    newInterconnectDiagnosticsMacsecStatus,
+
     -- ** InterconnectList
     InterconnectList (..),
     newInterconnectList,
@@ -5607,6 +6577,12 @@ module Gogol.Compute
     -- ** InterconnectLocation
     InterconnectLocation (..),
     newInterconnectLocation,
+
+    -- ** InterconnectLocation_AvailableFeaturesItem
+    InterconnectLocation_AvailableFeaturesItem (..),
+
+    -- ** InterconnectLocation_AvailableLinkTypesItem
+    InterconnectLocation_AvailableLinkTypesItem (..),
 
     -- ** InterconnectLocation_Continent
     InterconnectLocation_Continent (..),
@@ -5636,6 +6612,22 @@ module Gogol.Compute
     -- ** InterconnectLocationRegionInfo_LocationPresence
     InterconnectLocationRegionInfo_LocationPresence (..),
 
+    -- ** InterconnectMacsec
+    InterconnectMacsec (..),
+    newInterconnectMacsec,
+
+    -- ** InterconnectMacsecConfig
+    InterconnectMacsecConfig (..),
+    newInterconnectMacsecConfig,
+
+    -- ** InterconnectMacsecConfigPreSharedKey
+    InterconnectMacsecConfigPreSharedKey (..),
+    newInterconnectMacsecConfigPreSharedKey,
+
+    -- ** InterconnectMacsecPreSharedKey
+    InterconnectMacsecPreSharedKey (..),
+    newInterconnectMacsecPreSharedKey,
+
     -- ** InterconnectOutageNotification
     InterconnectOutageNotification (..),
     newInterconnectOutageNotification,
@@ -5649,9 +6641,59 @@ module Gogol.Compute
     -- ** InterconnectOutageNotification_State
     InterconnectOutageNotification_State (..),
 
+    -- ** InterconnectRemoteLocation
+    InterconnectRemoteLocation (..),
+    newInterconnectRemoteLocation,
+
+    -- ** InterconnectRemoteLocation_Continent
+    InterconnectRemoteLocation_Continent (..),
+
+    -- ** InterconnectRemoteLocation_Lacp
+    InterconnectRemoteLocation_Lacp (..),
+
+    -- ** InterconnectRemoteLocation_Status
+    InterconnectRemoteLocation_Status (..),
+
+    -- ** InterconnectRemoteLocationConstraints
+    InterconnectRemoteLocationConstraints (..),
+    newInterconnectRemoteLocationConstraints,
+
+    -- ** InterconnectRemoteLocationConstraints_PortPairRemoteLocation
+    InterconnectRemoteLocationConstraints_PortPairRemoteLocation (..),
+
+    -- ** InterconnectRemoteLocationConstraints_PortPairVlan
+    InterconnectRemoteLocationConstraints_PortPairVlan (..),
+
+    -- ** InterconnectRemoteLocationConstraintsSubnetLengthRange
+    InterconnectRemoteLocationConstraintsSubnetLengthRange (..),
+    newInterconnectRemoteLocationConstraintsSubnetLengthRange,
+
+    -- ** InterconnectRemoteLocationList
+    InterconnectRemoteLocationList (..),
+    newInterconnectRemoteLocationList,
+
+    -- ** InterconnectRemoteLocationList_Warning
+    InterconnectRemoteLocationList_Warning (..),
+    newInterconnectRemoteLocationList_Warning,
+
+    -- ** InterconnectRemoteLocationList_Warning_Code
+    InterconnectRemoteLocationList_Warning_Code (..),
+
+    -- ** InterconnectRemoteLocationList_Warning_DataItem
+    InterconnectRemoteLocationList_Warning_DataItem (..),
+    newInterconnectRemoteLocationList_Warning_DataItem,
+
+    -- ** InterconnectRemoteLocationPermittedConnections
+    InterconnectRemoteLocationPermittedConnections (..),
+    newInterconnectRemoteLocationPermittedConnections,
+
     -- ** InterconnectsGetDiagnosticsResponse
     InterconnectsGetDiagnosticsResponse (..),
     newInterconnectsGetDiagnosticsResponse,
+
+    -- ** InterconnectsGetMacsecConfigResponse
+    InterconnectsGetMacsecConfigResponse (..),
+    newInterconnectsGetMacsecConfigResponse,
 
     -- ** License
     License (..),
@@ -5721,32 +6763,6 @@ module Gogol.Compute
     LocationPolicyLocationConstraints (..),
     newLocationPolicyLocationConstraints,
 
-    -- ** LogConfig
-    LogConfig (..),
-    newLogConfig,
-
-    -- ** LogConfigCloudAuditOptions
-    LogConfigCloudAuditOptions (..),
-    newLogConfigCloudAuditOptions,
-
-    -- ** LogConfigCloudAuditOptions_LogName
-    LogConfigCloudAuditOptions_LogName (..),
-
-    -- ** LogConfigCounterOptions
-    LogConfigCounterOptions (..),
-    newLogConfigCounterOptions,
-
-    -- ** LogConfigCounterOptionsCustomField
-    LogConfigCounterOptionsCustomField (..),
-    newLogConfigCounterOptionsCustomField,
-
-    -- ** LogConfigDataAccessOptions
-    LogConfigDataAccessOptions (..),
-    newLogConfigDataAccessOptions,
-
-    -- ** LogConfigDataAccessOptions_LogMode
-    LogConfigDataAccessOptions_LogMode (..),
-
     -- ** MachineImage
     MachineImage (..),
     newMachineImage,
@@ -5776,6 +6792,9 @@ module Gogol.Compute
     -- ** MachineType_AcceleratorsItem
     MachineType_AcceleratorsItem (..),
     newMachineType_AcceleratorsItem,
+
+    -- ** MachineType_Architecture
+    MachineType_Architecture (..),
 
     -- ** MachineType_ScratchDisksItem
     MachineType_ScratchDisksItem (..),
@@ -5863,6 +6882,10 @@ module Gogol.Compute
     ManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem (..),
     newManagedInstanceLastAttempt_Errors_ErrorsItem_ErrorDetailsItem,
 
+    -- ** ManagedInstancePropertiesFromFlexibilityPolicy
+    ManagedInstancePropertiesFromFlexibilityPolicy (..),
+    newManagedInstancePropertiesFromFlexibilityPolicy,
+
     -- ** ManagedInstanceVersion
     ManagedInstanceVersion (..),
     newManagedInstanceVersion,
@@ -5889,6 +6912,24 @@ module Gogol.Compute
     -- ** NamedPort
     NamedPort (..),
     newNamedPort,
+
+    -- ** NatIpInfo
+    NatIpInfo (..),
+    newNatIpInfo,
+
+    -- ** NatIpInfoNatIpInfoMapping
+    NatIpInfoNatIpInfoMapping (..),
+    newNatIpInfoNatIpInfoMapping,
+
+    -- ** NatIpInfoNatIpInfoMapping_Mode
+    NatIpInfoNatIpInfoMapping_Mode (..),
+
+    -- ** NatIpInfoNatIpInfoMapping_Usage
+    NatIpInfoNatIpInfoMapping_Usage (..),
+
+    -- ** NatIpInfoResponse
+    NatIpInfoResponse (..),
+    newNatIpInfoResponse,
 
     -- ** Network
     Network (..),
@@ -6119,6 +7160,25 @@ module Gogol.Compute
     NetworkEndpointWithHealthStatus (..),
     newNetworkEndpointWithHealthStatus,
 
+    -- ** NetworkFirewallPolicyAggregatedList
+    NetworkFirewallPolicyAggregatedList (..),
+    newNetworkFirewallPolicyAggregatedList,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Items
+    NetworkFirewallPolicyAggregatedList_Items (..),
+    newNetworkFirewallPolicyAggregatedList_Items,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning
+    NetworkFirewallPolicyAggregatedList_Warning (..),
+    newNetworkFirewallPolicyAggregatedList_Warning,
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_Code
+    NetworkFirewallPolicyAggregatedList_Warning_Code (..),
+
+    -- ** NetworkFirewallPolicyAggregatedList_Warning_DataItem
+    NetworkFirewallPolicyAggregatedList_Warning_DataItem (..),
+    newNetworkFirewallPolicyAggregatedList_Warning_DataItem,
+
     -- ** NetworkInterface
     NetworkInterface (..),
     newNetworkInterface,
@@ -6164,9 +7224,114 @@ module Gogol.Compute
     -- ** NetworkPerformanceConfig_TotalEgressBandwidthTier
     NetworkPerformanceConfig_TotalEgressBandwidthTier (..),
 
+    -- ** NetworkProfile
+    NetworkProfile (..),
+    newNetworkProfile,
+
+    -- ** NetworkProfileLocation
+    NetworkProfileLocation (..),
+    newNetworkProfileLocation,
+
+    -- ** NetworkProfileLocation_Scope
+    NetworkProfileLocation_Scope (..),
+
+    -- ** NetworkProfileNetworkFeatures
+    NetworkProfileNetworkFeatures (..),
+    newNetworkProfileNetworkFeatures,
+
+    -- ** NetworkProfileNetworkFeatures_AddressPurposesItem
+    NetworkProfileNetworkFeatures_AddressPurposesItem (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowAliasIpRanges
+    NetworkProfileNetworkFeatures_AllowAliasIpRanges (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowAutoModeSubnet
+    NetworkProfileNetworkFeatures_AllowAutoModeSubnet (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowClassDFirewalls
+    NetworkProfileNetworkFeatures_AllowClassDFirewalls (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowCloudNat
+    NetworkProfileNetworkFeatures_AllowCloudNat (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowCloudRouter
+    NetworkProfileNetworkFeatures_AllowCloudRouter (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowExternalIpAccess
+    NetworkProfileNetworkFeatures_AllowExternalIpAccess (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowInterconnect
+    NetworkProfileNetworkFeatures_AllowInterconnect (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowLoadBalancing
+    NetworkProfileNetworkFeatures_AllowLoadBalancing (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowMultiNicInSameNetwork
+    NetworkProfileNetworkFeatures_AllowMultiNicInSameNetwork (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowPacketMirroring
+    NetworkProfileNetworkFeatures_AllowPacketMirroring (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowPrivateGoogleAccess
+    NetworkProfileNetworkFeatures_AllowPrivateGoogleAccess (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowPsc
+    NetworkProfileNetworkFeatures_AllowPsc (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowSameNetworkUnicast
+    NetworkProfileNetworkFeatures_AllowSameNetworkUnicast (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowStaticRoutes
+    NetworkProfileNetworkFeatures_AllowStaticRoutes (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowSubInterfaces
+    NetworkProfileNetworkFeatures_AllowSubInterfaces (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowVpcPeering
+    NetworkProfileNetworkFeatures_AllowVpcPeering (..),
+
+    -- ** NetworkProfileNetworkFeatures_AllowVpn
+    NetworkProfileNetworkFeatures_AllowVpn (..),
+
+    -- ** NetworkProfileNetworkFeatures_InterfaceTypesItem
+    NetworkProfileNetworkFeatures_InterfaceTypesItem (..),
+
+    -- ** NetworkProfileNetworkFeatures_SubnetPurposesItem
+    NetworkProfileNetworkFeatures_SubnetPurposesItem (..),
+
+    -- ** NetworkProfileNetworkFeatures_SubnetStackTypesItem
+    NetworkProfileNetworkFeatures_SubnetStackTypesItem (..),
+
+    -- ** NetworkProfileNetworkFeatures_Unicast
+    NetworkProfileNetworkFeatures_Unicast (..),
+
+    -- ** NetworkProfilesListResponse
+    NetworkProfilesListResponse (..),
+    newNetworkProfilesListResponse,
+
+    -- ** NetworkProfilesListResponse_Warning
+    NetworkProfilesListResponse_Warning (..),
+    newNetworkProfilesListResponse_Warning,
+
+    -- ** NetworkProfilesListResponse_Warning_Code
+    NetworkProfilesListResponse_Warning_Code (..),
+
+    -- ** NetworkProfilesListResponse_Warning_DataItem
+    NetworkProfilesListResponse_Warning_DataItem (..),
+    newNetworkProfilesListResponse_Warning_DataItem,
+
     -- ** NetworkRoutingConfig
     NetworkRoutingConfig (..),
     newNetworkRoutingConfig,
+
+    -- ** NetworkRoutingConfig_BgpBestPathSelectionMode
+    NetworkRoutingConfig_BgpBestPathSelectionMode (..),
+
+    -- ** NetworkRoutingConfig_BgpInterRegionCost
+    NetworkRoutingConfig_BgpInterRegionCost (..),
+
+    -- ** NetworkRoutingConfig_EffectiveBgpInterRegionCost
+    NetworkRoutingConfig_EffectiveBgpInterRegionCost (..),
 
     -- ** NetworkRoutingConfig_RoutingMode
     NetworkRoutingConfig_RoutingMode (..),
@@ -6197,6 +7362,9 @@ module Gogol.Compute
     -- ** NodeGroup
     NodeGroup (..),
     newNodeGroup,
+
+    -- ** NodeGroup_MaintenanceInterval
+    NodeGroup_MaintenanceInterval (..),
 
     -- ** NodeGroup_MaintenancePolicy
     NodeGroup_MaintenancePolicy (..),
@@ -6281,6 +7449,10 @@ module Gogol.Compute
     -- ** NodeGroupsListNodes_Warning_DataItem
     NodeGroupsListNodes_Warning_DataItem (..),
     newNodeGroupsListNodes_Warning_DataItem,
+
+    -- ** NodeGroupsPerformMaintenanceRequest
+    NodeGroupsPerformMaintenanceRequest (..),
+    newNodeGroupsPerformMaintenanceRequest,
 
     -- ** NodeGroupsScopedList
     NodeGroupsScopedList (..),
@@ -6655,6 +7827,14 @@ module Gogol.Compute
     PreservedState_Disks (..),
     newPreservedState_Disks,
 
+    -- ** PreservedState_ExternalIPs
+    PreservedState_ExternalIPs (..),
+    newPreservedState_ExternalIPs,
+
+    -- ** PreservedState_InternalIPs
+    PreservedState_InternalIPs (..),
+    newPreservedState_InternalIPs,
+
     -- ** PreservedState_Metadata
     PreservedState_Metadata (..),
     newPreservedState_Metadata,
@@ -6669,9 +7849,23 @@ module Gogol.Compute
     -- ** PreservedStatePreservedDisk_Mode
     PreservedStatePreservedDisk_Mode (..),
 
+    -- ** PreservedStatePreservedNetworkIp
+    PreservedStatePreservedNetworkIp (..),
+    newPreservedStatePreservedNetworkIp,
+
+    -- ** PreservedStatePreservedNetworkIp_AutoDelete
+    PreservedStatePreservedNetworkIp_AutoDelete (..),
+
+    -- ** PreservedStatePreservedNetworkIpIpAddress
+    PreservedStatePreservedNetworkIpIpAddress (..),
+    newPreservedStatePreservedNetworkIpIpAddress,
+
     -- ** Project
     Project (..),
     newProject,
+
+    -- ** Project_CloudArmorTier
+    Project_CloudArmorTier (..),
 
     -- ** Project_DefaultNetworkTier
     Project_DefaultNetworkTier (..),
@@ -6698,6 +7892,13 @@ module Gogol.Compute
     ProjectsListXpnHostsRequest (..),
     newProjectsListXpnHostsRequest,
 
+    -- ** ProjectsSetCloudArmorTierRequest
+    ProjectsSetCloudArmorTierRequest (..),
+    newProjectsSetCloudArmorTierRequest,
+
+    -- ** ProjectsSetCloudArmorTierRequest_CloudArmorTier
+    ProjectsSetCloudArmorTierRequest_CloudArmorTier (..),
+
     -- ** ProjectsSetDefaultNetworkTierRequest
     ProjectsSetDefaultNetworkTierRequest (..),
     newProjectsSetDefaultNetworkTierRequest,
@@ -6708,6 +7909,12 @@ module Gogol.Compute
     -- ** PublicAdvertisedPrefix
     PublicAdvertisedPrefix (..),
     newPublicAdvertisedPrefix,
+
+    -- ** PublicAdvertisedPrefix_ByoipApiVersion
+    PublicAdvertisedPrefix_ByoipApiVersion (..),
+
+    -- ** PublicAdvertisedPrefix_PdpScope
+    PublicAdvertisedPrefix_PdpScope (..),
 
     -- ** PublicAdvertisedPrefix_Status
     PublicAdvertisedPrefix_Status (..),
@@ -6734,6 +7941,12 @@ module Gogol.Compute
     -- ** PublicDelegatedPrefix
     PublicDelegatedPrefix (..),
     newPublicDelegatedPrefix,
+
+    -- ** PublicDelegatedPrefix_ByoipApiVersion
+    PublicDelegatedPrefix_ByoipApiVersion (..),
+
+    -- ** PublicDelegatedPrefix_Mode
+    PublicDelegatedPrefix_Mode (..),
 
     -- ** PublicDelegatedPrefix_Status
     PublicDelegatedPrefix_Status (..),
@@ -6776,6 +7989,9 @@ module Gogol.Compute
     PublicDelegatedPrefixPublicDelegatedSubPrefix (..),
     newPublicDelegatedPrefixPublicDelegatedSubPrefix,
 
+    -- ** PublicDelegatedPrefixPublicDelegatedSubPrefix_Mode
+    PublicDelegatedPrefixPublicDelegatedSubPrefix_Mode (..),
+
     -- ** PublicDelegatedPrefixPublicDelegatedSubPrefix_Status
     PublicDelegatedPrefixPublicDelegatedSubPrefix_Status (..),
 
@@ -6809,6 +8025,9 @@ module Gogol.Compute
     QuotaExceededInfo_Dimensions (..),
     newQuotaExceededInfo_Dimensions,
 
+    -- ** QuotaExceededInfo_RolloutStatus
+    QuotaExceededInfo_RolloutStatus (..),
+
     -- ** Reference
     Reference (..),
     newReference,
@@ -6817,8 +8036,23 @@ module Gogol.Compute
     Region (..),
     newRegion,
 
+    -- ** Region_QuotaStatusWarning
+    Region_QuotaStatusWarning (..),
+    newRegion_QuotaStatusWarning,
+
+    -- ** Region_QuotaStatusWarning_Code
+    Region_QuotaStatusWarning_Code (..),
+
+    -- ** Region_QuotaStatusWarning_DataItem
+    Region_QuotaStatusWarning_DataItem (..),
+    newRegion_QuotaStatusWarning_DataItem,
+
     -- ** Region_Status
     Region_Status (..),
+
+    -- ** RegionAddressesMoveRequest
+    RegionAddressesMoveRequest (..),
+    newRegionAddressesMoveRequest,
 
     -- ** RegionAutoscalerList
     RegionAutoscalerList (..),
@@ -6861,6 +8095,10 @@ module Gogol.Compute
     -- ** RegionDisksResizeRequest
     RegionDisksResizeRequest (..),
     newRegionDisksResizeRequest,
+
+    -- ** RegionDisksStartAsyncReplicationRequest
+    RegionDisksStartAsyncReplicationRequest (..),
+    newRegionDisksStartAsyncReplicationRequest,
 
     -- ** RegionInstanceGroupList
     RegionInstanceGroupList (..),
@@ -6953,6 +8191,10 @@ module Gogol.Compute
     RegionInstanceGroupManagersRecreateRequest (..),
     newRegionInstanceGroupManagersRecreateRequest,
 
+    -- ** RegionInstanceGroupManagersResumeInstancesRequest
+    RegionInstanceGroupManagersResumeInstancesRequest (..),
+    newRegionInstanceGroupManagersResumeInstancesRequest,
+
     -- ** RegionInstanceGroupManagersSetTargetPoolsRequest
     RegionInstanceGroupManagersSetTargetPoolsRequest (..),
     newRegionInstanceGroupManagersSetTargetPoolsRequest,
@@ -6960,6 +8202,18 @@ module Gogol.Compute
     -- ** RegionInstanceGroupManagersSetTemplateRequest
     RegionInstanceGroupManagersSetTemplateRequest (..),
     newRegionInstanceGroupManagersSetTemplateRequest,
+
+    -- ** RegionInstanceGroupManagersStartInstancesRequest
+    RegionInstanceGroupManagersStartInstancesRequest (..),
+    newRegionInstanceGroupManagersStartInstancesRequest,
+
+    -- ** RegionInstanceGroupManagersStopInstancesRequest
+    RegionInstanceGroupManagersStopInstancesRequest (..),
+    newRegionInstanceGroupManagersStopInstancesRequest,
+
+    -- ** RegionInstanceGroupManagersSuspendInstancesRequest
+    RegionInstanceGroupManagersSuspendInstancesRequest (..),
+    newRegionInstanceGroupManagersSuspendInstancesRequest,
 
     -- ** RegionInstanceGroupsListInstances
     RegionInstanceGroupsListInstances (..),
@@ -7001,6 +8255,14 @@ module Gogol.Compute
     -- ** RegionList_Warning_DataItem
     RegionList_Warning_DataItem (..),
     newRegionList_Warning_DataItem,
+
+    -- ** RegionNetworkEndpointGroupsAttachEndpointsRequest
+    RegionNetworkEndpointGroupsAttachEndpointsRequest (..),
+    newRegionNetworkEndpointGroupsAttachEndpointsRequest,
+
+    -- ** RegionNetworkEndpointGroupsDetachEndpointsRequest
+    RegionNetworkEndpointGroupsDetachEndpointsRequest (..),
+    newRegionNetworkEndpointGroupsDetachEndpointsRequest,
 
     -- ** RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
     RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse (..),
@@ -7164,6 +8426,10 @@ module Gogol.Compute
     ResourcePolicyDailyCycle (..),
     newResourcePolicyDailyCycle,
 
+    -- ** ResourcePolicyDiskConsistencyGroupPolicy
+    ResourcePolicyDiskConsistencyGroupPolicy (..),
+    newResourcePolicyDiskConsistencyGroupPolicy,
+
     -- ** ResourcePolicyGroupPlacementPolicy
     ResourcePolicyGroupPlacementPolicy (..),
     newResourcePolicyGroupPlacementPolicy,
@@ -7244,9 +8510,16 @@ module Gogol.Compute
     ResourceStatus (..),
     newResourceStatus,
 
+    -- ** ResourceStatusScheduling
+    ResourceStatusScheduling (..),
+    newResourceStatusScheduling,
+
     -- ** Route
     Route (..),
     newRoute,
+
+    -- ** Route_NextHopOrigin
+    Route_NextHopOrigin (..),
 
     -- ** Route_RouteStatus
     Route_RouteStatus (..),
@@ -7286,6 +8559,17 @@ module Gogol.Compute
     -- ** RouteList_Warning_DataItem
     RouteList_Warning_DataItem (..),
     newRouteList_Warning_DataItem,
+
+    -- ** RoutePolicy
+    RoutePolicy (..),
+    newRoutePolicy,
+
+    -- ** RoutePolicy_Type
+    RoutePolicy_Type (..),
+
+    -- ** RoutePolicyPolicyTerm
+    RoutePolicyPolicyTerm (..),
+    newRoutePolicyPolicyTerm,
 
     -- ** Router
     Router (..),
@@ -7347,9 +8631,16 @@ module Gogol.Compute
     -- ** RouterBgpPeerBfd_SessionInitializationMode
     RouterBgpPeerBfd_SessionInitializationMode (..),
 
+    -- ** RouterBgpPeerCustomLearnedIpRange
+    RouterBgpPeerCustomLearnedIpRange (..),
+    newRouterBgpPeerCustomLearnedIpRange,
+
     -- ** RouterInterface
     RouterInterface (..),
     newRouterInterface,
+
+    -- ** RouterInterface_IpVersion
+    RouterInterface_IpVersion (..),
 
     -- ** RouterInterface_ManagementType
     RouterInterface_ManagementType (..),
@@ -7377,6 +8668,9 @@ module Gogol.Compute
     RouterNat (..),
     newRouterNat,
 
+    -- ** RouterNat_AutoNetworkTier
+    RouterNat_AutoNetworkTier (..),
+
     -- ** RouterNat_EndpointTypesItem
     RouterNat_EndpointTypesItem (..),
 
@@ -7385,6 +8679,9 @@ module Gogol.Compute
 
     -- ** RouterNat_SourceSubnetworkIpRangesToNat
     RouterNat_SourceSubnetworkIpRangesToNat (..),
+
+    -- ** RouterNat_Type
+    RouterNat_Type (..),
 
     -- ** RouterNatLogConfig
     RouterNatLogConfig (..),
@@ -7434,6 +8731,40 @@ module Gogol.Compute
     RouterStatusResponse (..),
     newRouterStatusResponse,
 
+    -- ** RoutersGetRoutePolicyResponse
+    RoutersGetRoutePolicyResponse (..),
+    newRoutersGetRoutePolicyResponse,
+
+    -- ** RoutersListBgpRoutes
+    RoutersListBgpRoutes (..),
+    newRoutersListBgpRoutes,
+
+    -- ** RoutersListBgpRoutes_Warning
+    RoutersListBgpRoutes_Warning (..),
+    newRoutersListBgpRoutes_Warning,
+
+    -- ** RoutersListBgpRoutes_Warning_Code
+    RoutersListBgpRoutes_Warning_Code (..),
+
+    -- ** RoutersListBgpRoutes_Warning_DataItem
+    RoutersListBgpRoutes_Warning_DataItem (..),
+    newRoutersListBgpRoutes_Warning_DataItem,
+
+    -- ** RoutersListRoutePolicies
+    RoutersListRoutePolicies (..),
+    newRoutersListRoutePolicies,
+
+    -- ** RoutersListRoutePolicies_Warning
+    RoutersListRoutePolicies_Warning (..),
+    newRoutersListRoutePolicies_Warning,
+
+    -- ** RoutersListRoutePolicies_Warning_Code
+    RoutersListRoutePolicies_Warning_Code (..),
+
+    -- ** RoutersListRoutePolicies_Warning_DataItem
+    RoutersListRoutePolicies_Warning_DataItem (..),
+    newRoutersListRoutePolicies_Warning_DataItem,
+
     -- ** RoutersPreviewResponse
     RoutersPreviewResponse (..),
     newRoutersPreviewResponse,
@@ -7452,13 +8783,6 @@ module Gogol.Compute
     -- ** RoutersScopedList_Warning_DataItem
     RoutersScopedList_Warning_DataItem (..),
     newRoutersScopedList_Warning_DataItem,
-
-    -- ** Rule
-    Rule (..),
-    newRule,
-
-    -- ** Rule_Action
-    Rule_Action (..),
 
     -- ** SSLHealthCheck
     SSLHealthCheck (..),
@@ -7523,6 +8847,10 @@ module Gogol.Compute
     -- ** SchedulingNodeAffinity_Operator
     SchedulingNodeAffinity_Operator (..),
 
+    -- ** SchedulingOnInstanceStopAction
+    SchedulingOnInstanceStopAction (..),
+    newSchedulingOnInstanceStopAction,
+
     -- ** Screenshot
     Screenshot (..),
     newScreenshot,
@@ -7573,6 +8901,10 @@ module Gogol.Compute
     SecurityPolicy (..),
     newSecurityPolicy,
 
+    -- ** SecurityPolicy_Labels
+    SecurityPolicy_Labels (..),
+    newSecurityPolicy_Labels,
+
     -- ** SecurityPolicy_Type
     SecurityPolicy_Type (..),
 
@@ -7586,6 +8918,17 @@ module Gogol.Compute
 
     -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility
     SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig_RuleVisibility (..),
+
+    -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfig
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfig (..),
+    newSecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfig,
+
+    -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfigTrafficGranularityConfig
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfigTrafficGranularityConfig (..),
+    newSecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfigTrafficGranularityConfig,
+
+    -- ** SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfigTrafficGranularityConfig_Type
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfigThresholdConfigTrafficGranularityConfig_Type (..),
 
     -- ** SecurityPolicyAdvancedOptionsConfig
     SecurityPolicyAdvancedOptionsConfig (..),
@@ -7654,6 +8997,22 @@ module Gogol.Compute
     SecurityPolicyRuleMatcherConfig (..),
     newSecurityPolicyRuleMatcherConfig,
 
+    -- ** SecurityPolicyRuleMatcherExprOptions
+    SecurityPolicyRuleMatcherExprOptions (..),
+    newSecurityPolicyRuleMatcherExprOptions,
+
+    -- ** SecurityPolicyRuleMatcherExprOptionsRecaptchaOptions
+    SecurityPolicyRuleMatcherExprOptionsRecaptchaOptions (..),
+    newSecurityPolicyRuleMatcherExprOptionsRecaptchaOptions,
+
+    -- ** SecurityPolicyRuleNetworkMatcher
+    SecurityPolicyRuleNetworkMatcher (..),
+    newSecurityPolicyRuleNetworkMatcher,
+
+    -- ** SecurityPolicyRuleNetworkMatcherUserDefinedFieldMatch
+    SecurityPolicyRuleNetworkMatcherUserDefinedFieldMatch (..),
+    newSecurityPolicyRuleNetworkMatcherUserDefinedFieldMatch,
+
     -- ** SecurityPolicyRulePreconfiguredWafConfig
     SecurityPolicyRulePreconfiguredWafConfig (..),
     newSecurityPolicyRulePreconfiguredWafConfig,
@@ -7676,6 +9035,13 @@ module Gogol.Compute
     -- ** SecurityPolicyRuleRateLimitOptions_EnforceOnKey
     SecurityPolicyRuleRateLimitOptions_EnforceOnKey (..),
 
+    -- ** SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig
+    SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig (..),
+    newSecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig,
+
+    -- ** SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig_EnforceOnKeyType
+    SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig_EnforceOnKeyType (..),
+
     -- ** SecurityPolicyRuleRateLimitOptionsThreshold
     SecurityPolicyRuleRateLimitOptionsThreshold (..),
     newSecurityPolicyRuleRateLimitOptionsThreshold,
@@ -7686,6 +9052,13 @@ module Gogol.Compute
 
     -- ** SecurityPolicyRuleRedirectOptions_Type
     SecurityPolicyRuleRedirectOptions_Type (..),
+
+    -- ** SecurityPolicyUserDefinedField
+    SecurityPolicyUserDefinedField (..),
+    newSecurityPolicyUserDefinedField,
+
+    -- ** SecurityPolicyUserDefinedField_Base
+    SecurityPolicyUserDefinedField_Base (..),
 
     -- ** SecuritySettings
     SecuritySettings (..),
@@ -7773,6 +9146,21 @@ module Gogol.Compute
     ServiceAttachmentsScopedList_Warning_DataItem (..),
     newServiceAttachmentsScopedList_Warning_DataItem,
 
+    -- ** SetCommonInstanceMetadataOperationMetadata
+    SetCommonInstanceMetadataOperationMetadata (..),
+    newSetCommonInstanceMetadataOperationMetadata,
+
+    -- ** SetCommonInstanceMetadataOperationMetadata_PerLocationOperations
+    SetCommonInstanceMetadataOperationMetadata_PerLocationOperations (..),
+    newSetCommonInstanceMetadataOperationMetadata_PerLocationOperations,
+
+    -- ** SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo
+    SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo (..),
+    newSetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo,
+
+    -- ** SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo_State
+    SetCommonInstanceMetadataOperationMetadataPerLocationOperationInfo_State (..),
+
     -- ** ShareSettings
     ShareSettings (..),
     newShareSettings,
@@ -7842,6 +9230,25 @@ module Gogol.Compute
     -- ** SnapshotList_Warning_DataItem
     SnapshotList_Warning_DataItem (..),
     newSnapshotList_Warning_DataItem,
+
+    -- ** SnapshotSettings
+    SnapshotSettings (..),
+    newSnapshotSettings,
+
+    -- ** SnapshotSettingsStorageLocationSettings
+    SnapshotSettingsStorageLocationSettings (..),
+    newSnapshotSettingsStorageLocationSettings,
+
+    -- ** SnapshotSettingsStorageLocationSettings_Locations
+    SnapshotSettingsStorageLocationSettings_Locations (..),
+    newSnapshotSettingsStorageLocationSettings_Locations,
+
+    -- ** SnapshotSettingsStorageLocationSettings_Policy
+    SnapshotSettingsStorageLocationSettings_Policy (..),
+
+    -- ** SnapshotSettingsStorageLocationSettingsStorageLocationPreference
+    SnapshotSettingsStorageLocationSettingsStorageLocationPreference (..),
+    newSnapshotSettingsStorageLocationSettingsStorageLocationPreference,
 
     -- ** SourceDiskEncryptionKey
     SourceDiskEncryptionKey (..),
@@ -8026,12 +9433,180 @@ module Gogol.Compute
     StatefulPolicyPreservedState_Disks (..),
     newStatefulPolicyPreservedState_Disks,
 
+    -- ** StatefulPolicyPreservedState_ExternalIPs
+    StatefulPolicyPreservedState_ExternalIPs (..),
+    newStatefulPolicyPreservedState_ExternalIPs,
+
+    -- ** StatefulPolicyPreservedState_InternalIPs
+    StatefulPolicyPreservedState_InternalIPs (..),
+    newStatefulPolicyPreservedState_InternalIPs,
+
     -- ** StatefulPolicyPreservedStateDiskDevice
     StatefulPolicyPreservedStateDiskDevice (..),
     newStatefulPolicyPreservedStateDiskDevice,
 
     -- ** StatefulPolicyPreservedStateDiskDevice_AutoDelete
     StatefulPolicyPreservedStateDiskDevice_AutoDelete (..),
+
+    -- ** StatefulPolicyPreservedStateNetworkIp
+    StatefulPolicyPreservedStateNetworkIp (..),
+    newStatefulPolicyPreservedStateNetworkIp,
+
+    -- ** StatefulPolicyPreservedStateNetworkIp_AutoDelete
+    StatefulPolicyPreservedStateNetworkIp_AutoDelete (..),
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
+    -- ** StoragePool
+    StoragePool (..),
+    newStoragePool,
+
+    -- ** StoragePool_CapacityProvisioningType
+    StoragePool_CapacityProvisioningType (..),
+
+    -- ** StoragePool_Labels
+    StoragePool_Labels (..),
+    newStoragePool_Labels,
+
+    -- ** StoragePool_PerformanceProvisioningType
+    StoragePool_PerformanceProvisioningType (..),
+
+    -- ** StoragePool_State
+    StoragePool_State (..),
+
+    -- ** StoragePoolAggregatedList
+    StoragePoolAggregatedList (..),
+    newStoragePoolAggregatedList,
+
+    -- ** StoragePoolAggregatedList_Items
+    StoragePoolAggregatedList_Items (..),
+    newStoragePoolAggregatedList_Items,
+
+    -- ** StoragePoolAggregatedList_Warning
+    StoragePoolAggregatedList_Warning (..),
+    newStoragePoolAggregatedList_Warning,
+
+    -- ** StoragePoolAggregatedList_Warning_Code
+    StoragePoolAggregatedList_Warning_Code (..),
+
+    -- ** StoragePoolAggregatedList_Warning_DataItem
+    StoragePoolAggregatedList_Warning_DataItem (..),
+    newStoragePoolAggregatedList_Warning_DataItem,
+
+    -- ** StoragePoolDisk
+    StoragePoolDisk (..),
+    newStoragePoolDisk,
+
+    -- ** StoragePoolDisk_Status
+    StoragePoolDisk_Status (..),
+
+    -- ** StoragePoolList
+    StoragePoolList (..),
+    newStoragePoolList,
+
+    -- ** StoragePoolList_Warning
+    StoragePoolList_Warning (..),
+    newStoragePoolList_Warning,
+
+    -- ** StoragePoolList_Warning_Code
+    StoragePoolList_Warning_Code (..),
+
+    -- ** StoragePoolList_Warning_DataItem
+    StoragePoolList_Warning_DataItem (..),
+    newStoragePoolList_Warning_DataItem,
+
+    -- ** StoragePoolListDisks
+    StoragePoolListDisks (..),
+    newStoragePoolListDisks,
+
+    -- ** StoragePoolListDisks_Warning
+    StoragePoolListDisks_Warning (..),
+    newStoragePoolListDisks_Warning,
+
+    -- ** StoragePoolListDisks_Warning_Code
+    StoragePoolListDisks_Warning_Code (..),
+
+    -- ** StoragePoolListDisks_Warning_DataItem
+    StoragePoolListDisks_Warning_DataItem (..),
+    newStoragePoolListDisks_Warning_DataItem,
+
+    -- ** StoragePoolResourceStatus
+    StoragePoolResourceStatus (..),
+    newStoragePoolResourceStatus,
+
+    -- ** StoragePoolType
+    StoragePoolType (..),
+    newStoragePoolType,
+
+    -- ** StoragePoolTypeAggregatedList
+    StoragePoolTypeAggregatedList (..),
+    newStoragePoolTypeAggregatedList,
+
+    -- ** StoragePoolTypeAggregatedList_Items
+    StoragePoolTypeAggregatedList_Items (..),
+    newStoragePoolTypeAggregatedList_Items,
+
+    -- ** StoragePoolTypeAggregatedList_Warning
+    StoragePoolTypeAggregatedList_Warning (..),
+    newStoragePoolTypeAggregatedList_Warning,
+
+    -- ** StoragePoolTypeAggregatedList_Warning_Code
+    StoragePoolTypeAggregatedList_Warning_Code (..),
+
+    -- ** StoragePoolTypeAggregatedList_Warning_DataItem
+    StoragePoolTypeAggregatedList_Warning_DataItem (..),
+    newStoragePoolTypeAggregatedList_Warning_DataItem,
+
+    -- ** StoragePoolTypeList
+    StoragePoolTypeList (..),
+    newStoragePoolTypeList,
+
+    -- ** StoragePoolTypeList_Warning
+    StoragePoolTypeList_Warning (..),
+    newStoragePoolTypeList_Warning,
+
+    -- ** StoragePoolTypeList_Warning_Code
+    StoragePoolTypeList_Warning_Code (..),
+
+    -- ** StoragePoolTypeList_Warning_DataItem
+    StoragePoolTypeList_Warning_DataItem (..),
+    newStoragePoolTypeList_Warning_DataItem,
+
+    -- ** StoragePoolTypesScopedList
+    StoragePoolTypesScopedList (..),
+    newStoragePoolTypesScopedList,
+
+    -- ** StoragePoolTypesScopedList_Warning
+    StoragePoolTypesScopedList_Warning (..),
+    newStoragePoolTypesScopedList_Warning,
+
+    -- ** StoragePoolTypesScopedList_Warning_Code
+    StoragePoolTypesScopedList_Warning_Code (..),
+
+    -- ** StoragePoolTypesScopedList_Warning_DataItem
+    StoragePoolTypesScopedList_Warning_DataItem (..),
+    newStoragePoolTypesScopedList_Warning_DataItem,
+
+    -- ** StoragePoolsScopedList
+    StoragePoolsScopedList (..),
+    newStoragePoolsScopedList,
+
+    -- ** StoragePoolsScopedList_Warning
+    StoragePoolsScopedList_Warning (..),
+    newStoragePoolsScopedList_Warning,
+
+    -- ** StoragePoolsScopedList_Warning_Code
+    StoragePoolsScopedList_Warning_Code (..),
+
+    -- ** StoragePoolsScopedList_Warning_DataItem
+    StoragePoolsScopedList_Warning_DataItem (..),
+    newStoragePoolsScopedList_Warning_DataItem,
 
     -- ** Subnetwork
     Subnetwork (..),
@@ -8244,6 +9819,9 @@ module Gogol.Compute
 
     -- ** TargetHttpsProxy_QuicOverride
     TargetHttpsProxy_QuicOverride (..),
+
+    -- ** TargetHttpsProxy_TlsEarlyData
+    TargetHttpsProxy_TlsEarlyData (..),
 
     -- ** TargetHttpsProxyAggregatedList
     TargetHttpsProxyAggregatedList (..),
@@ -8527,6 +10105,10 @@ module Gogol.Compute
     TargetVpnGateway (..),
     newTargetVpnGateway,
 
+    -- ** TargetVpnGateway_Labels
+    TargetVpnGateway_Labels (..),
+    newTargetVpnGateway_Labels,
+
     -- ** TargetVpnGateway_Status
     TargetVpnGateway_Status (..),
 
@@ -8594,6 +10176,16 @@ module Gogol.Compute
     -- ** Uint128
     Uint128 (..),
     newUint128,
+
+    -- ** UpcomingMaintenance
+    UpcomingMaintenance (..),
+    newUpcomingMaintenance,
+
+    -- ** UpcomingMaintenance_MaintenanceStatus
+    UpcomingMaintenance_MaintenanceStatus (..),
+
+    -- ** UpcomingMaintenance_Type
+    UpcomingMaintenance_Type (..),
 
     -- ** UrlMap
     UrlMap (..),
@@ -8749,6 +10341,9 @@ module Gogol.Compute
     VpnGateway (..),
     newVpnGateway,
 
+    -- ** VpnGateway_GatewayIpVersion
+    VpnGateway_GatewayIpVersion (..),
+
     -- ** VpnGateway_Labels
     VpnGateway_Labels (..),
     newVpnGateway_Labels,
@@ -8838,6 +10433,10 @@ module Gogol.Compute
     -- ** VpnTunnel
     VpnTunnel (..),
     newVpnTunnel,
+
+    -- ** VpnTunnel_Labels
+    VpnTunnel_Labels (..),
+    newVpnTunnel_Labels,
 
     -- ** VpnTunnel_Status
     VpnTunnel_Status (..),
@@ -8967,6 +10566,12 @@ module Gogol.Compute
 
     -- ** NetworksListPeeringRoutesDirection
     NetworksListPeeringRoutesDirection (..),
+
+    -- ** RoutersListBgpRoutesAddressFamily
+    RoutersListBgpRoutesAddressFamily (..),
+
+    -- ** RoutersListBgpRoutesRouteType
+    RoutersListBgpRoutesRouteType (..),
   )
 where
 
@@ -8978,6 +10583,7 @@ import Gogol.Compute.Addresses.Delete
 import Gogol.Compute.Addresses.Get
 import Gogol.Compute.Addresses.Insert
 import Gogol.Compute.Addresses.List
+import Gogol.Compute.Addresses.Move
 import Gogol.Compute.Addresses.SetLabels
 import Gogol.Compute.Autoscalers.AggregatedList
 import Gogol.Compute.Autoscalers.Delete
@@ -8990,10 +10596,13 @@ import Gogol.Compute.BackendBuckets.AddSignedUrlKey
 import Gogol.Compute.BackendBuckets.Delete
 import Gogol.Compute.BackendBuckets.DeleteSignedUrlKey
 import Gogol.Compute.BackendBuckets.Get
+import Gogol.Compute.BackendBuckets.GetIamPolicy
 import Gogol.Compute.BackendBuckets.Insert
 import Gogol.Compute.BackendBuckets.List
 import Gogol.Compute.BackendBuckets.Patch
 import Gogol.Compute.BackendBuckets.SetEdgeSecurityPolicy
+import Gogol.Compute.BackendBuckets.SetIamPolicy
+import Gogol.Compute.BackendBuckets.TestIamPermissions
 import Gogol.Compute.BackendBuckets.Update
 import Gogol.Compute.BackendServices.AddSignedUrlKey
 import Gogol.Compute.BackendServices.AggregatedList
@@ -9004,16 +10613,19 @@ import Gogol.Compute.BackendServices.GetHealth
 import Gogol.Compute.BackendServices.GetIamPolicy
 import Gogol.Compute.BackendServices.Insert
 import Gogol.Compute.BackendServices.List
+import Gogol.Compute.BackendServices.ListUsable
 import Gogol.Compute.BackendServices.Patch
 import Gogol.Compute.BackendServices.SetEdgeSecurityPolicy
 import Gogol.Compute.BackendServices.SetIamPolicy
 import Gogol.Compute.BackendServices.SetSecurityPolicy
+import Gogol.Compute.BackendServices.TestIamPermissions
 import Gogol.Compute.BackendServices.Update
 import Gogol.Compute.DiskTypes.AggregatedList
 import Gogol.Compute.DiskTypes.Get
 import Gogol.Compute.DiskTypes.List
 import Gogol.Compute.Disks.AddResourcePolicies
 import Gogol.Compute.Disks.AggregatedList
+import Gogol.Compute.Disks.BulkInsert
 import Gogol.Compute.Disks.CreateSnapshot
 import Gogol.Compute.Disks.Delete
 import Gogol.Compute.Disks.Get
@@ -9024,6 +10636,9 @@ import Gogol.Compute.Disks.RemoveResourcePolicies
 import Gogol.Compute.Disks.Resize
 import Gogol.Compute.Disks.SetIamPolicy
 import Gogol.Compute.Disks.SetLabels
+import Gogol.Compute.Disks.StartAsyncReplication
+import Gogol.Compute.Disks.StopAsyncReplication
+import Gogol.Compute.Disks.StopGroupAsyncReplication
 import Gogol.Compute.Disks.TestIamPermissions
 import Gogol.Compute.Disks.Update
 import Gogol.Compute.ExternalVpnGateways.Delete
@@ -9068,6 +10683,7 @@ import Gogol.Compute.GlobalAddresses.Delete
 import Gogol.Compute.GlobalAddresses.Get
 import Gogol.Compute.GlobalAddresses.Insert
 import Gogol.Compute.GlobalAddresses.List
+import Gogol.Compute.GlobalAddresses.Move
 import Gogol.Compute.GlobalAddresses.SetLabels
 import Gogol.Compute.GlobalForwardingRules.Delete
 import Gogol.Compute.GlobalForwardingRules.Get
@@ -9127,6 +10743,11 @@ import Gogol.Compute.Images.Patch
 import Gogol.Compute.Images.SetIamPolicy
 import Gogol.Compute.Images.SetLabels
 import Gogol.Compute.Images.TestIamPermissions
+import Gogol.Compute.InstanceGroupManagerResizeRequests.Cancel
+import Gogol.Compute.InstanceGroupManagerResizeRequests.Delete
+import Gogol.Compute.InstanceGroupManagerResizeRequests.Get
+import Gogol.Compute.InstanceGroupManagerResizeRequests.Insert
+import Gogol.Compute.InstanceGroupManagerResizeRequests.List
 import Gogol.Compute.InstanceGroupManagers.AbandonInstances
 import Gogol.Compute.InstanceGroupManagers.AggregatedList
 import Gogol.Compute.InstanceGroupManagers.ApplyUpdatesToInstances
@@ -9144,8 +10765,12 @@ import Gogol.Compute.InstanceGroupManagers.Patch
 import Gogol.Compute.InstanceGroupManagers.PatchPerInstanceConfigs
 import Gogol.Compute.InstanceGroupManagers.RecreateInstances
 import Gogol.Compute.InstanceGroupManagers.Resize
+import Gogol.Compute.InstanceGroupManagers.ResumeInstances
 import Gogol.Compute.InstanceGroupManagers.SetInstanceTemplate
 import Gogol.Compute.InstanceGroupManagers.SetTargetPools
+import Gogol.Compute.InstanceGroupManagers.StartInstances
+import Gogol.Compute.InstanceGroupManagers.StopInstances
+import Gogol.Compute.InstanceGroupManagers.SuspendInstances
 import Gogol.Compute.InstanceGroupManagers.UpdatePerInstanceConfigs
 import Gogol.Compute.InstanceGroups.AddInstances
 import Gogol.Compute.InstanceGroups.AggregatedList
@@ -9156,6 +10781,8 @@ import Gogol.Compute.InstanceGroups.List
 import Gogol.Compute.InstanceGroups.ListInstances
 import Gogol.Compute.InstanceGroups.RemoveInstances
 import Gogol.Compute.InstanceGroups.SetNamedPorts
+import Gogol.Compute.InstanceSettings.Get
+import Gogol.Compute.InstanceSettings.Patch
 import Gogol.Compute.InstanceTemplates.AggregatedList
 import Gogol.Compute.InstanceTemplates.Delete
 import Gogol.Compute.InstanceTemplates.Get
@@ -9182,7 +10809,9 @@ import Gogol.Compute.Instances.GetShieldedInstanceIdentity
 import Gogol.Compute.Instances.Insert
 import Gogol.Compute.Instances.List
 import Gogol.Compute.Instances.ListReferrers
+import Gogol.Compute.Instances.PerformMaintenance
 import Gogol.Compute.Instances.RemoveResourcePolicies
+import Gogol.Compute.Instances.ReportHostAsFaulty
 import Gogol.Compute.Instances.Reset
 import Gogol.Compute.Instances.Resume
 import Gogol.Compute.Instances.SendDiagnosticInterrupt
@@ -9196,6 +10825,7 @@ import Gogol.Compute.Instances.SetMetadata
 import Gogol.Compute.Instances.SetMinCpuPlatform
 import Gogol.Compute.Instances.SetName
 import Gogol.Compute.Instances.SetScheduling
+import Gogol.Compute.Instances.SetSecurityPolicy
 import Gogol.Compute.Instances.SetServiceAccount
 import Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
 import Gogol.Compute.Instances.SetTags
@@ -9210,6 +10840,15 @@ import Gogol.Compute.Instances.UpdateAccessConfig
 import Gogol.Compute.Instances.UpdateDisplayDevice
 import Gogol.Compute.Instances.UpdateNetworkInterface
 import Gogol.Compute.Instances.UpdateShieldedInstanceConfig
+import Gogol.Compute.InstantSnapshots.AggregatedList
+import Gogol.Compute.InstantSnapshots.Delete
+import Gogol.Compute.InstantSnapshots.Get
+import Gogol.Compute.InstantSnapshots.GetIamPolicy
+import Gogol.Compute.InstantSnapshots.Insert
+import Gogol.Compute.InstantSnapshots.List
+import Gogol.Compute.InstantSnapshots.SetIamPolicy
+import Gogol.Compute.InstantSnapshots.SetLabels
+import Gogol.Compute.InstantSnapshots.TestIamPermissions
 import Gogol.Compute.InterconnectAttachments.AggregatedList
 import Gogol.Compute.InterconnectAttachments.Delete
 import Gogol.Compute.InterconnectAttachments.Get
@@ -9219,9 +10858,12 @@ import Gogol.Compute.InterconnectAttachments.Patch
 import Gogol.Compute.InterconnectAttachments.SetLabels
 import Gogol.Compute.InterconnectLocations.Get
 import Gogol.Compute.InterconnectLocations.List
+import Gogol.Compute.InterconnectRemoteLocations.Get
+import Gogol.Compute.InterconnectRemoteLocations.List
 import Gogol.Compute.Interconnects.Delete
 import Gogol.Compute.Interconnects.Get
 import Gogol.Compute.Interconnects.GetDiagnostics
+import Gogol.Compute.Interconnects.GetMacsecConfig
 import Gogol.Compute.Interconnects.Insert
 import Gogol.Compute.Interconnects.List
 import Gogol.Compute.Interconnects.Patch
@@ -9251,6 +10893,7 @@ import Gogol.Compute.NetworkAttachments.Get
 import Gogol.Compute.NetworkAttachments.GetIamPolicy
 import Gogol.Compute.NetworkAttachments.Insert
 import Gogol.Compute.NetworkAttachments.List
+import Gogol.Compute.NetworkAttachments.Patch
 import Gogol.Compute.NetworkAttachments.SetIamPolicy
 import Gogol.Compute.NetworkAttachments.TestIamPermissions
 import Gogol.Compute.NetworkEdgeSecurityServices.AggregatedList
@@ -9268,21 +10911,28 @@ import Gogol.Compute.NetworkEndpointGroups.List
 import Gogol.Compute.NetworkEndpointGroups.ListNetworkEndpoints
 import Gogol.Compute.NetworkEndpointGroups.TestIamPermissions
 import Gogol.Compute.NetworkFirewallPolicies.AddAssociation
+import Gogol.Compute.NetworkFirewallPolicies.AddPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.AddRule
+import Gogol.Compute.NetworkFirewallPolicies.AggregatedList
 import Gogol.Compute.NetworkFirewallPolicies.CloneRules
 import Gogol.Compute.NetworkFirewallPolicies.Delete
 import Gogol.Compute.NetworkFirewallPolicies.Get
 import Gogol.Compute.NetworkFirewallPolicies.GetAssociation
 import Gogol.Compute.NetworkFirewallPolicies.GetIamPolicy
+import Gogol.Compute.NetworkFirewallPolicies.GetPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.GetRule
 import Gogol.Compute.NetworkFirewallPolicies.Insert
 import Gogol.Compute.NetworkFirewallPolicies.List
 import Gogol.Compute.NetworkFirewallPolicies.Patch
+import Gogol.Compute.NetworkFirewallPolicies.PatchPacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.PatchRule
 import Gogol.Compute.NetworkFirewallPolicies.RemoveAssociation
+import Gogol.Compute.NetworkFirewallPolicies.RemovePacketMirroringRule
 import Gogol.Compute.NetworkFirewallPolicies.RemoveRule
 import Gogol.Compute.NetworkFirewallPolicies.SetIamPolicy
 import Gogol.Compute.NetworkFirewallPolicies.TestIamPermissions
+import Gogol.Compute.NetworkProfiles.Get
+import Gogol.Compute.NetworkProfiles.List
 import Gogol.Compute.Networks.AddPeering
 import Gogol.Compute.Networks.Delete
 import Gogol.Compute.Networks.Get
@@ -9304,6 +10954,7 @@ import Gogol.Compute.NodeGroups.Insert
 import Gogol.Compute.NodeGroups.List
 import Gogol.Compute.NodeGroups.ListNodes
 import Gogol.Compute.NodeGroups.Patch
+import Gogol.Compute.NodeGroups.PerformMaintenance
 import Gogol.Compute.NodeGroups.SetIamPolicy
 import Gogol.Compute.NodeGroups.SetNodeTemplate
 import Gogol.Compute.NodeGroups.SimulateMaintenanceEvent
@@ -9336,20 +10987,25 @@ import Gogol.Compute.Projects.GetXpnResources
 import Gogol.Compute.Projects.ListXpnHosts
 import Gogol.Compute.Projects.MoveDisk
 import Gogol.Compute.Projects.MoveInstance
+import Gogol.Compute.Projects.SetCloudArmorTier
 import Gogol.Compute.Projects.SetCommonInstanceMetadata
 import Gogol.Compute.Projects.SetDefaultNetworkTier
 import Gogol.Compute.Projects.SetUsageExportBucket
+import Gogol.Compute.PublicAdvertisedPrefixes.Announce
 import Gogol.Compute.PublicAdvertisedPrefixes.Delete
 import Gogol.Compute.PublicAdvertisedPrefixes.Get
 import Gogol.Compute.PublicAdvertisedPrefixes.Insert
 import Gogol.Compute.PublicAdvertisedPrefixes.List
 import Gogol.Compute.PublicAdvertisedPrefixes.Patch
+import Gogol.Compute.PublicAdvertisedPrefixes.Withdraw
 import Gogol.Compute.PublicDelegatedPrefixes.AggregatedList
+import Gogol.Compute.PublicDelegatedPrefixes.Announce
 import Gogol.Compute.PublicDelegatedPrefixes.Delete
 import Gogol.Compute.PublicDelegatedPrefixes.Get
 import Gogol.Compute.PublicDelegatedPrefixes.Insert
 import Gogol.Compute.PublicDelegatedPrefixes.List
 import Gogol.Compute.PublicDelegatedPrefixes.Patch
+import Gogol.Compute.PublicDelegatedPrefixes.Withdraw
 import Gogol.Compute.RegionAutoscalers.Delete
 import Gogol.Compute.RegionAutoscalers.Get
 import Gogol.Compute.RegionAutoscalers.Insert
@@ -9362,8 +11018,11 @@ import Gogol.Compute.RegionBackendServices.GetHealth
 import Gogol.Compute.RegionBackendServices.GetIamPolicy
 import Gogol.Compute.RegionBackendServices.Insert
 import Gogol.Compute.RegionBackendServices.List
+import Gogol.Compute.RegionBackendServices.ListUsable
 import Gogol.Compute.RegionBackendServices.Patch
 import Gogol.Compute.RegionBackendServices.SetIamPolicy
+import Gogol.Compute.RegionBackendServices.SetSecurityPolicy
+import Gogol.Compute.RegionBackendServices.TestIamPermissions
 import Gogol.Compute.RegionBackendServices.Update
 import Gogol.Compute.RegionCommitments.AggregatedList
 import Gogol.Compute.RegionCommitments.Get
@@ -9373,6 +11032,7 @@ import Gogol.Compute.RegionCommitments.Update
 import Gogol.Compute.RegionDiskTypes.Get
 import Gogol.Compute.RegionDiskTypes.List
 import Gogol.Compute.RegionDisks.AddResourcePolicies
+import Gogol.Compute.RegionDisks.BulkInsert
 import Gogol.Compute.RegionDisks.CreateSnapshot
 import Gogol.Compute.RegionDisks.Delete
 import Gogol.Compute.RegionDisks.Get
@@ -9383,6 +11043,9 @@ import Gogol.Compute.RegionDisks.RemoveResourcePolicies
 import Gogol.Compute.RegionDisks.Resize
 import Gogol.Compute.RegionDisks.SetIamPolicy
 import Gogol.Compute.RegionDisks.SetLabels
+import Gogol.Compute.RegionDisks.StartAsyncReplication
+import Gogol.Compute.RegionDisks.StopAsyncReplication
+import Gogol.Compute.RegionDisks.StopGroupAsyncReplication
 import Gogol.Compute.RegionDisks.TestIamPermissions
 import Gogol.Compute.RegionDisks.Update
 import Gogol.Compute.RegionHealthCheckServices.Delete
@@ -9412,18 +11075,37 @@ import Gogol.Compute.RegionInstanceGroupManagers.Patch
 import Gogol.Compute.RegionInstanceGroupManagers.PatchPerInstanceConfigs
 import Gogol.Compute.RegionInstanceGroupManagers.RecreateInstances
 import Gogol.Compute.RegionInstanceGroupManagers.Resize
+import Gogol.Compute.RegionInstanceGroupManagers.ResumeInstances
 import Gogol.Compute.RegionInstanceGroupManagers.SetInstanceTemplate
 import Gogol.Compute.RegionInstanceGroupManagers.SetTargetPools
+import Gogol.Compute.RegionInstanceGroupManagers.StartInstances
+import Gogol.Compute.RegionInstanceGroupManagers.StopInstances
+import Gogol.Compute.RegionInstanceGroupManagers.SuspendInstances
 import Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
 import Gogol.Compute.RegionInstanceGroups.Get
 import Gogol.Compute.RegionInstanceGroups.List
 import Gogol.Compute.RegionInstanceGroups.ListInstances
 import Gogol.Compute.RegionInstanceGroups.SetNamedPorts
+import Gogol.Compute.RegionInstanceTemplates.Delete
+import Gogol.Compute.RegionInstanceTemplates.Get
+import Gogol.Compute.RegionInstanceTemplates.Insert
+import Gogol.Compute.RegionInstanceTemplates.List
 import Gogol.Compute.RegionInstances.BulkInsert
+import Gogol.Compute.RegionInstantSnapshots.Delete
+import Gogol.Compute.RegionInstantSnapshots.Get
+import Gogol.Compute.RegionInstantSnapshots.GetIamPolicy
+import Gogol.Compute.RegionInstantSnapshots.Insert
+import Gogol.Compute.RegionInstantSnapshots.List
+import Gogol.Compute.RegionInstantSnapshots.SetIamPolicy
+import Gogol.Compute.RegionInstantSnapshots.SetLabels
+import Gogol.Compute.RegionInstantSnapshots.TestIamPermissions
+import Gogol.Compute.RegionNetworkEndpointGroups.AttachNetworkEndpoints
 import Gogol.Compute.RegionNetworkEndpointGroups.Delete
+import Gogol.Compute.RegionNetworkEndpointGroups.DetachNetworkEndpoints
 import Gogol.Compute.RegionNetworkEndpointGroups.Get
 import Gogol.Compute.RegionNetworkEndpointGroups.Insert
 import Gogol.Compute.RegionNetworkEndpointGroups.List
+import Gogol.Compute.RegionNetworkEndpointGroups.ListNetworkEndpoints
 import Gogol.Compute.RegionNetworkFirewallPolicies.AddAssociation
 import Gogol.Compute.RegionNetworkFirewallPolicies.AddRule
 import Gogol.Compute.RegionNetworkFirewallPolicies.CloneRules
@@ -9449,11 +11131,16 @@ import Gogol.Compute.RegionOperations.Delete
 import Gogol.Compute.RegionOperations.Get
 import Gogol.Compute.RegionOperations.List
 import Gogol.Compute.RegionOperations.Wait
+import Gogol.Compute.RegionSecurityPolicies.AddRule
 import Gogol.Compute.RegionSecurityPolicies.Delete
 import Gogol.Compute.RegionSecurityPolicies.Get
+import Gogol.Compute.RegionSecurityPolicies.GetRule
 import Gogol.Compute.RegionSecurityPolicies.Insert
 import Gogol.Compute.RegionSecurityPolicies.List
 import Gogol.Compute.RegionSecurityPolicies.Patch
+import Gogol.Compute.RegionSecurityPolicies.PatchRule
+import Gogol.Compute.RegionSecurityPolicies.RemoveRule
+import Gogol.Compute.RegionSecurityPolicies.SetLabels
 import Gogol.Compute.RegionSslCertificates.Delete
 import Gogol.Compute.RegionSslCertificates.Get
 import Gogol.Compute.RegionSslCertificates.Insert
@@ -9487,6 +11174,7 @@ import Gogol.Compute.RegionUrlMaps.List
 import Gogol.Compute.RegionUrlMaps.Patch
 import Gogol.Compute.RegionUrlMaps.Update
 import Gogol.Compute.RegionUrlMaps.Validate
+import Gogol.Compute.RegionZones.List
 import Gogol.Compute.Regions.Get
 import Gogol.Compute.Regions.List
 import Gogol.Compute.Reservations.AggregatedList
@@ -9505,18 +11193,26 @@ import Gogol.Compute.ResourcePolicies.Get
 import Gogol.Compute.ResourcePolicies.GetIamPolicy
 import Gogol.Compute.ResourcePolicies.Insert
 import Gogol.Compute.ResourcePolicies.List
+import Gogol.Compute.ResourcePolicies.Patch
 import Gogol.Compute.ResourcePolicies.SetIamPolicy
 import Gogol.Compute.ResourcePolicies.TestIamPermissions
 import Gogol.Compute.Routers.AggregatedList
 import Gogol.Compute.Routers.Delete
+import Gogol.Compute.Routers.DeleteRoutePolicy
 import Gogol.Compute.Routers.Get
+import Gogol.Compute.Routers.GetNatIpInfo
 import Gogol.Compute.Routers.GetNatMappingInfo
+import Gogol.Compute.Routers.GetRoutePolicy
 import Gogol.Compute.Routers.GetRouterStatus
 import Gogol.Compute.Routers.Insert
 import Gogol.Compute.Routers.List
+import Gogol.Compute.Routers.ListBgpRoutes
+import Gogol.Compute.Routers.ListRoutePolicies
 import Gogol.Compute.Routers.Patch
+import Gogol.Compute.Routers.PatchRoutePolicy
 import Gogol.Compute.Routers.Preview
 import Gogol.Compute.Routers.Update
+import Gogol.Compute.Routers.UpdateRoutePolicy
 import Gogol.Compute.Routes.Delete
 import Gogol.Compute.Routes.Get
 import Gogol.Compute.Routes.Insert
@@ -9542,6 +11238,8 @@ import Gogol.Compute.ServiceAttachments.List
 import Gogol.Compute.ServiceAttachments.Patch
 import Gogol.Compute.ServiceAttachments.SetIamPolicy
 import Gogol.Compute.ServiceAttachments.TestIamPermissions
+import Gogol.Compute.SnapshotSettings.Get
+import Gogol.Compute.SnapshotSettings.Patch
 import Gogol.Compute.Snapshots.Delete
 import Gogol.Compute.Snapshots.Get
 import Gogol.Compute.Snapshots.GetIamPolicy
@@ -9562,6 +11260,19 @@ import Gogol.Compute.SslPolicies.Insert
 import Gogol.Compute.SslPolicies.List
 import Gogol.Compute.SslPolicies.ListAvailableFeatures
 import Gogol.Compute.SslPolicies.Patch
+import Gogol.Compute.StoragePoolTypes.AggregatedList
+import Gogol.Compute.StoragePoolTypes.Get
+import Gogol.Compute.StoragePoolTypes.List
+import Gogol.Compute.StoragePools.AggregatedList
+import Gogol.Compute.StoragePools.Delete
+import Gogol.Compute.StoragePools.Get
+import Gogol.Compute.StoragePools.GetIamPolicy
+import Gogol.Compute.StoragePools.Insert
+import Gogol.Compute.StoragePools.List
+import Gogol.Compute.StoragePools.ListDisks
+import Gogol.Compute.StoragePools.SetIamPolicy
+import Gogol.Compute.StoragePools.TestIamPermissions
+import Gogol.Compute.StoragePools.Update
 import Gogol.Compute.Subnetworks.AggregatedList
 import Gogol.Compute.Subnetworks.Delete
 import Gogol.Compute.Subnetworks.ExpandIpCidrRange
@@ -9602,6 +11313,7 @@ import Gogol.Compute.TargetInstances.Delete
 import Gogol.Compute.TargetInstances.Get
 import Gogol.Compute.TargetInstances.Insert
 import Gogol.Compute.TargetInstances.List
+import Gogol.Compute.TargetInstances.SetSecurityPolicy
 import Gogol.Compute.TargetPools.AddHealthCheck
 import Gogol.Compute.TargetPools.AddInstance
 import Gogol.Compute.TargetPools.AggregatedList
@@ -9613,6 +11325,7 @@ import Gogol.Compute.TargetPools.List
 import Gogol.Compute.TargetPools.RemoveHealthCheck
 import Gogol.Compute.TargetPools.RemoveInstance
 import Gogol.Compute.TargetPools.SetBackup
+import Gogol.Compute.TargetPools.SetSecurityPolicy
 import Gogol.Compute.TargetSslProxies.Delete
 import Gogol.Compute.TargetSslProxies.Get
 import Gogol.Compute.TargetSslProxies.Insert

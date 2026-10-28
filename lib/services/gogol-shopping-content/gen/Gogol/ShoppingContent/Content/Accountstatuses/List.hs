@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Accountstatuses.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Accountstatuses.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.accountstatuses.list@ method which the
@@ -59,9 +57,7 @@ type ContentAccountstatusesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              AccountstatusesListResponse
+    Core.:> Core.Get '[Core.JSON] AccountstatusesListResponse
 
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
 --
@@ -109,16 +105,9 @@ newContentAccountstatusesList merchantId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentAccountstatusesList
-  where
-  type
-    Rs ContentAccountstatusesList =
-      AccountstatusesListResponse
-  type
-    Scopes ContentAccountstatusesList =
-      '[Content'FullControl]
+instance Core.GoogleRequest ContentAccountstatusesList where
+  type Rs ContentAccountstatusesList = AccountstatusesListResponse
+  type Scopes ContentAccountstatusesList = '[Content'FullControl]
   requestClient ContentAccountstatusesList {..} =
     go
       merchantId
@@ -136,7 +125,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentAccountstatusesListResource
-          )
+          (Core.Proxy :: Core.Proxy ContentAccountstatusesListResource)
           Core.mempty

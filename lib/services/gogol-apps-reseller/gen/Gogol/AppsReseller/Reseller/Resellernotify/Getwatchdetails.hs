@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsReseller.Reseller.Resellernotify.Getwatchdetails
 where
 
 import Gogol.AppsReseller.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reseller.resellernotify.getwatchdetails@ method which the
 -- 'ResellerResellernotifyGetwatchdetails' request conforms to.
@@ -56,9 +54,7 @@ type ResellerResellernotifyGetwatchdetailsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ResellernotifyGetwatchdetailsResponse
+    Core.:> Core.Get '[Core.JSON] ResellernotifyGetwatchdetailsResponse
 
 -- | Returns all the details of the watch corresponding to the reseller.
 --
@@ -89,31 +85,26 @@ newResellerResellernotifyGetwatchdetails =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ResellerResellernotifyGetwatchdetails
-  where
+instance Core.GoogleRequest ResellerResellernotifyGetwatchdetails where
   type
     Rs ResellerResellernotifyGetwatchdetails =
       ResellernotifyGetwatchdetailsResponse
   type
     Scopes ResellerResellernotifyGetwatchdetails =
       '[Apps'Order, Apps'Order'Readonly]
-  requestClient
-    ResellerResellernotifyGetwatchdetails {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        appsResellerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ResellerResellernotifyGetwatchdetailsResource
-            )
-            Core.mempty
+  requestClient ResellerResellernotifyGetwatchdetails {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      appsResellerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ResellerResellernotifyGetwatchdetailsResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Testing.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Testing.Internal.Sum
@@ -92,6 +90,19 @@ module Gogol.Testing.Internal.Sum
         ..
       ),
 
+    -- * DeviceSession_State
+    DeviceSession_State
+      ( DeviceSession_State_SESSIONSTATEUNSPECIFIED,
+        DeviceSession_State_Requested,
+        DeviceSession_State_Pending,
+        DeviceSession_State_Active,
+        DeviceSession_State_Expired,
+        DeviceSession_State_Finished,
+        DeviceSession_State_Unavailable,
+        DeviceSession_State_Error',
+        ..
+      ),
+
     -- * IosModel_FormFactor
     IosModel_FormFactor
       ( IosModel_FormFactor_DEVICEFORMFACTORUNSPECIFIED,
@@ -127,6 +138,19 @@ module Gogol.Testing.Internal.Sum
         RoboDirective_ActionType_SINGLECLICK,
         RoboDirective_ActionType_ENTERTEXT,
         RoboDirective_ActionType_Ignore,
+        ..
+      ),
+
+    -- * SessionStateEvent_SessionState
+    SessionStateEvent_SessionState
+      ( SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED,
+        SessionStateEvent_SessionState_Requested,
+        SessionStateEvent_SessionState_Pending,
+        SessionStateEvent_SessionState_Active,
+        SessionStateEvent_SessionState_Expired,
+        SessionStateEvent_SessionState_Finished,
+        SessionStateEvent_SessionState_Unavailable,
+        SessionStateEvent_SessionState_Error',
         ..
       ),
 
@@ -229,7 +253,7 @@ module Gogol.Testing.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -505,6 +529,63 @@ pattern DeviceIpBlock_Form_Emulator = DeviceIpBlock_Form "EMULATOR"
   DeviceIpBlock_Form
   #-}
 
+-- | Output only. Current state of the DeviceSession.
+newtype DeviceSession_State = DeviceSession_State {fromDeviceSession_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern DeviceSession_State_SESSIONSTATEUNSPECIFIED :: DeviceSession_State
+pattern DeviceSession_State_SESSIONSTATEUNSPECIFIED = DeviceSession_State "SESSION_STATE_UNSPECIFIED"
+
+-- | Initial state of a session request. The session is being validated for correctness and a device is not yet requested.
+pattern DeviceSession_State_Requested :: DeviceSession_State
+pattern DeviceSession_State_Requested = DeviceSession_State "REQUESTED"
+
+-- | The session has been validated and is in the queue for a device.
+pattern DeviceSession_State_Pending :: DeviceSession_State
+pattern DeviceSession_State_Pending = DeviceSession_State "PENDING"
+
+-- | The session has been granted and the device is accepting connections.
+pattern DeviceSession_State_Active :: DeviceSession_State
+pattern DeviceSession_State_Active = DeviceSession_State "ACTIVE"
+
+-- | The session duration exceeded the device’s reservation time period and timed out automatically.
+pattern DeviceSession_State_Expired :: DeviceSession_State
+pattern DeviceSession_State_Expired = DeviceSession_State "EXPIRED"
+
+-- | The user is finished with the session and it was canceled by the user while the request was still getting allocated or after allocation and during device usage period.
+pattern DeviceSession_State_Finished :: DeviceSession_State
+pattern DeviceSession_State_Finished = DeviceSession_State "FINISHED"
+
+-- | Unable to complete the session because the device was unavailable and it failed to allocate through the scheduler. For example, a device not in the catalog was requested or the request expired in the allocation queue.
+pattern DeviceSession_State_Unavailable :: DeviceSession_State
+pattern DeviceSession_State_Unavailable = DeviceSession_State "UNAVAILABLE"
+
+-- | Unable to complete the session for an internal reason, such as an infrastructure failure.
+pattern DeviceSession_State_Error' :: DeviceSession_State
+pattern DeviceSession_State_Error' = DeviceSession_State "ERROR"
+
+{-# COMPLETE
+  DeviceSession_State_SESSIONSTATEUNSPECIFIED,
+  DeviceSession_State_Requested,
+  DeviceSession_State_Pending,
+  DeviceSession_State_Active,
+  DeviceSession_State_Expired,
+  DeviceSession_State_Finished,
+  DeviceSession_State_Unavailable,
+  DeviceSession_State_Error',
+  DeviceSession_State
+  #-}
+
 -- | Whether this device is a phone, tablet, wearable, etc.
 newtype IosModel_FormFactor = IosModel_FormFactor {fromIosModel_FormFactor :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -663,6 +744,63 @@ pattern RoboDirective_ActionType_Ignore = RoboDirective_ActionType "IGNORE"
   RoboDirective_ActionType
   #-}
 
+-- | Output only. The session_state tracked by this event
+newtype SessionStateEvent_SessionState = SessionStateEvent_SessionState {fromSessionStateEvent_SessionState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. This value is unused.
+pattern SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED = SessionStateEvent_SessionState "SESSION_STATE_UNSPECIFIED"
+
+-- | Initial state of a session request. The session is being validated for correctness and a device is not yet requested.
+pattern SessionStateEvent_SessionState_Requested :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Requested = SessionStateEvent_SessionState "REQUESTED"
+
+-- | The session has been validated and is in the queue for a device.
+pattern SessionStateEvent_SessionState_Pending :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Pending = SessionStateEvent_SessionState "PENDING"
+
+-- | The session has been granted and the device is accepting connections.
+pattern SessionStateEvent_SessionState_Active :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Active = SessionStateEvent_SessionState "ACTIVE"
+
+-- | The session duration exceeded the device’s reservation time period and timed out automatically.
+pattern SessionStateEvent_SessionState_Expired :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Expired = SessionStateEvent_SessionState "EXPIRED"
+
+-- | The user is finished with the session and it was canceled by the user while the request was still getting allocated or after allocation and during device usage period.
+pattern SessionStateEvent_SessionState_Finished :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Finished = SessionStateEvent_SessionState "FINISHED"
+
+-- | Unable to complete the session because the device was unavailable and it failed to allocate through the scheduler. For example, a device not in the catalog was requested or the request expired in the allocation queue.
+pattern SessionStateEvent_SessionState_Unavailable :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Unavailable = SessionStateEvent_SessionState "UNAVAILABLE"
+
+-- | Unable to complete the session for an internal reason, such as an infrastructure failure.
+pattern SessionStateEvent_SessionState_Error' :: SessionStateEvent_SessionState
+pattern SessionStateEvent_SessionState_Error' = SessionStateEvent_SessionState "ERROR"
+
+{-# COMPLETE
+  SessionStateEvent_SessionState_SESSIONSTATEUNSPECIFIED,
+  SessionStateEvent_SessionState_Requested,
+  SessionStateEvent_SessionState_Pending,
+  SessionStateEvent_SessionState_Active,
+  SessionStateEvent_SessionState_Expired,
+  SessionStateEvent_SessionState_Finished,
+  SessionStateEvent_SessionState_Unavailable,
+  SessionStateEvent_SessionState_Error',
+  SessionStateEvent_SessionState
+  #-}
+
 -- | Output only. Indicates the current progress of the test execution (e.g., FINISHED).
 newtype TestExecution_State = TestExecution_State {fromTestExecution_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -792,7 +930,7 @@ pattern TestMatrix_InvalidMatrixDetails_NOSIGNATURE = TestMatrix_InvalidMatrixDe
 pattern TestMatrix_InvalidMatrixDetails_INSTRUMENTATIONORCHESTRATORINCOMPATIBLE :: TestMatrix_InvalidMatrixDetails
 pattern TestMatrix_InvalidMatrixDetails_INSTRUMENTATIONORCHESTRATORINCOMPATIBLE = TestMatrix_InvalidMatrixDetails "INSTRUMENTATION_ORCHESTRATOR_INCOMPATIBLE"
 
--- | The test APK does not contain the test runner class specified by user or in the manifest file. This can be caused by either of the following reasons: - the user provided a runner class name that\'s incorrect, or - the test runner isn\'t built into the test APK (might be in the app APK instead).
+-- | The test APK does not contain the test runner class specified by the user or in the manifest file. This can be caused by one of the following reasons: - the user provided a runner class name that\'s incorrect, or - the test runner isn\'t built into the test APK (might be in the app APK instead).
 pattern TestMatrix_InvalidMatrixDetails_NOTESTRUNNERCLASS :: TestMatrix_InvalidMatrixDetails
 pattern TestMatrix_InvalidMatrixDetails_NOTESTRUNNERCLASS = TestMatrix_InvalidMatrixDetails "NO_TEST_RUNNER_CLASS"
 
@@ -968,7 +1106,7 @@ pattern TestMatrix_OutcomeSummary_OUTCOMESUMMARYUNSPECIFIED = TestMatrix_Outcome
 pattern TestMatrix_OutcomeSummary_Success :: TestMatrix_OutcomeSummary
 pattern TestMatrix_OutcomeSummary_Success = TestMatrix_OutcomeSummary "SUCCESS"
 
--- | A run failed, for instance: - One or more test case failed. - A test timed out. - The application under test crashed.
+-- | A run failed, for instance: - One or more test cases failed. - A test timed out. - The application under test crashed.
 pattern TestMatrix_OutcomeSummary_Failure :: TestMatrix_OutcomeSummary
 pattern TestMatrix_OutcomeSummary_Failure = TestMatrix_OutcomeSummary "FAILURE"
 

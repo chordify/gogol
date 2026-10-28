@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.CreativeFieldValues.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.CreativeFieldValues.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.creativeFieldValues.patch@ method which the
 -- 'DFAReportingCreativeFieldValuesPatch' request conforms to.
@@ -98,48 +96,45 @@ newDFAReportingCreativeFieldValuesPatch ::
   -- |  User profile ID associated with this request. See 'profileId'.
   Core.Int64 ->
   DFAReportingCreativeFieldValuesPatch
-newDFAReportingCreativeFieldValuesPatch creativeFieldId id payload profileId =
-  DFAReportingCreativeFieldValuesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      creativeFieldId = creativeFieldId,
-      id = id,
-      payload = payload,
-      profileId = profileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDFAReportingCreativeFieldValuesPatch
+  creativeFieldId
+  id
+  payload
+  profileId =
     DFAReportingCreativeFieldValuesPatch
-  where
-  type
-    Rs DFAReportingCreativeFieldValuesPatch =
-      CreativeFieldValue
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        creativeFieldId = creativeFieldId,
+        id = id,
+        payload = payload,
+        profileId = profileId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DFAReportingCreativeFieldValuesPatch where
+  type Rs DFAReportingCreativeFieldValuesPatch = CreativeFieldValue
   type
     Scopes DFAReportingCreativeFieldValuesPatch =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingCreativeFieldValuesPatch {..} =
-      go
-        profileId
-        creativeFieldId
-        (Core.Just id)
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingCreativeFieldValuesPatchResource
-            )
-            Core.mempty
+  requestClient DFAReportingCreativeFieldValuesPatch {..} =
+    go
+      profileId
+      creativeFieldId
+      (Core.Just id)
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingCreativeFieldValuesPatchResource
+          )
+          Core.mempty

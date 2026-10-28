@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.InfoTypes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/infotypes-reference to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.infoTypes.list@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.infoTypes.list@.
 module Gogol.DLP.InfoTypes.List
   ( -- * Resource
     DLPInfoTypesListResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.InfoTypes.List
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.infoTypes.list@ method which the
 -- 'DLPInfoTypesList' request conforms to.
@@ -57,11 +55,9 @@ type DLPInfoTypesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2ListInfoTypesResponse
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2ListInfoTypesResponse
 
--- | Returns a list of the sensitive information types that DLP API supports. See https:\/\/cloud.google.com\/dlp\/docs\/infotypes-reference to learn more.
+-- | Returns a list of the sensitive information types that the DLP API supports. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/infotypes-reference to learn more.
 --
 -- /See:/ 'newDLPInfoTypesList' smart constructor.
 data DLPInfoTypesList = DLPInfoTypesList
@@ -77,7 +73,7 @@ data DLPInfoTypesList = DLPInfoTypesList
     languageCode :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | The parent resource name. The format of this value is as follows: locations\/ LOCATION_ID
+    -- | The parent resource name. The format of this value is as follows: @locations\/{location_id}@
     parent :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -103,12 +99,8 @@ newDLPInfoTypesList =
     }
 
 instance Core.GoogleRequest DLPInfoTypesList where
-  type
-    Rs DLPInfoTypesList =
-      GooglePrivacyDlpV2ListInfoTypesResponse
-  type
-    Scopes DLPInfoTypesList =
-      '[CloudPlatform'FullControl]
+  type Rs DLPInfoTypesList = GooglePrivacyDlpV2ListInfoTypesResponse
+  type Scopes DLPInfoTypesList = '[CloudPlatform'FullControl]
   requestClient DLPInfoTypesList {..} =
     go
       xgafv

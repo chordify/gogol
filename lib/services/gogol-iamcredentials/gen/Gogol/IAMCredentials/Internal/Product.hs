@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAMCredentials.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.IAMCredentials.Internal.Product
@@ -41,6 +39,10 @@ module Gogol.IAMCredentials.Internal.Product
     -- * GenerateIdTokenResponse
     GenerateIdTokenResponse (..),
     newGenerateIdTokenResponse,
+
+    -- * ServiceAccountAllowedLocations
+    ServiceAccountAllowedLocations (..),
+    newServiceAccountAllowedLocations,
 
     -- * SignBlobRequest
     SignBlobRequest (..),
@@ -61,7 +63,7 @@ module Gogol.IAMCredentials.Internal.Product
 where
 
 import Gogol.IAMCredentials.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newGenerateAccessTokenRequest' smart constructor.
@@ -198,21 +200,57 @@ newtype GenerateIdTokenResponse = GenerateIdTokenResponse
 -- | Creates a value of 'GenerateIdTokenResponse' with the minimum fields required to make a request.
 newGenerateIdTokenResponse ::
   GenerateIdTokenResponse
-newGenerateIdTokenResponse = GenerateIdTokenResponse {token = Core.Nothing}
+newGenerateIdTokenResponse =
+  GenerateIdTokenResponse {token = Core.Nothing}
 
 instance Core.FromJSON GenerateIdTokenResponse where
   parseJSON =
     Core.withObject
       "GenerateIdTokenResponse"
-      ( \o ->
-          GenerateIdTokenResponse
-            Core.<$> (o Core..:? "token")
-      )
+      (\o -> GenerateIdTokenResponse Core.<$> (o Core..:? "token"))
 
 instance Core.ToJSON GenerateIdTokenResponse where
   toJSON GenerateIdTokenResponse {..} =
+    Core.object (Core.catMaybes [("token" Core..=) Core.<$> token])
+
+-- | Represents a list of allowed locations for given service account.
+--
+-- /See:/ 'newServiceAccountAllowedLocations' smart constructor.
+data ServiceAccountAllowedLocations = ServiceAccountAllowedLocations
+  { -- | Output only. The hex encoded bitmap of the trust boundary locations
+    encodedLocations :: (Core.Maybe Core.Text),
+    -- | Output only. The human readable trust boundary locations. For example, [\"us-central1\", \"europe-west1\"]
+    locations :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceAccountAllowedLocations' with the minimum fields required to make a request.
+newServiceAccountAllowedLocations ::
+  ServiceAccountAllowedLocations
+newServiceAccountAllowedLocations =
+  ServiceAccountAllowedLocations
+    { encodedLocations = Core.Nothing,
+      locations = Core.Nothing
+    }
+
+instance Core.FromJSON ServiceAccountAllowedLocations where
+  parseJSON =
+    Core.withObject
+      "ServiceAccountAllowedLocations"
+      ( \o ->
+          ServiceAccountAllowedLocations
+            Core.<$> (o Core..:? "encodedLocations")
+            Core.<*> (o Core..:? "locations")
+      )
+
+instance Core.ToJSON ServiceAccountAllowedLocations where
+  toJSON ServiceAccountAllowedLocations {..} =
     Core.object
-      (Core.catMaybes [("token" Core..=) Core.<$> token])
+      ( Core.catMaybes
+          [ ("encodedLocations" Core..=) Core.<$> encodedLocations,
+            ("locations" Core..=) Core.<$> locations
+          ]
+      )
 
 --
 -- /See:/ 'newSignBlobRequest' smart constructor.

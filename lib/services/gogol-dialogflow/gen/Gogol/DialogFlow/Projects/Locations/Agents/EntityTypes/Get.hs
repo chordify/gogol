@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Get
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.entityTypes.get@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEntityTypesGet' request conforms to.
@@ -54,9 +52,7 @@ type DialogFlowProjectsLocationsAgentsEntityTypesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3EntityType
+    Core.:> Core.Get '[Core.JSON] GoogleCloudDialogflowCxV3EntityType
 
 -- | Retrieves the specified entity type.
 --
@@ -86,7 +82,8 @@ newDialogFlowProjectsLocationsAgentsEntityTypesGet ::
   DialogFlowProjectsLocationsAgentsEntityTypesGet
 newDialogFlowProjectsLocationsAgentsEntityTypesGet name =
   DialogFlowProjectsLocationsAgentsEntityTypesGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       languageCode = Core.Nothing,
@@ -100,30 +97,26 @@ instance
     DialogFlowProjectsLocationsAgentsEntityTypesGet
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsEntityTypesGet =
+    Rs DialogFlowProjectsLocationsAgentsEntityTypesGet =
       GoogleCloudDialogflowCxV3EntityType
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsEntityTypesGet =
+    Scopes DialogFlowProjectsLocationsAgentsEntityTypesGet =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsEntityTypesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        languageCode
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsEntityTypesGetResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsEntityTypesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      languageCode
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsEntityTypesGetResource
+          )
+          Core.mempty

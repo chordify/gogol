@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the breakpoint to the debuggee.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.debugger.debuggees.breakpoints.set@.
 module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesBreakpointsSetResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.set@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesBreakpointsSet' request conforms to.
@@ -98,7 +96,8 @@ newClouddebuggerDebuggerDebuggeesBreakpointsSet ::
   ClouddebuggerDebuggerDebuggeesBreakpointsSet
 newClouddebuggerDebuggerDebuggeesBreakpointsSet debuggeeId payload =
   ClouddebuggerDebuggerDebuggeesBreakpointsSet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       canaryOption = Core.Nothing,
@@ -117,30 +116,25 @@ instance
     Rs ClouddebuggerDebuggerDebuggeesBreakpointsSet =
       SetBreakpointResponse
   type
-    Scopes
-      ClouddebuggerDebuggerDebuggeesBreakpointsSet =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerDebuggerDebuggeesBreakpointsSet {..} =
-      go
-        debuggeeId
-        xgafv
-        accessToken
-        callback
-        canaryOption
-        clientVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerDebuggerDebuggeesBreakpointsSetResource
-            )
-            Core.mempty
+    Scopes ClouddebuggerDebuggerDebuggeesBreakpointsSet =
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerDebuggerDebuggeesBreakpointsSet {..} =
+    go
+      debuggeeId
+      xgafv
+      accessToken
+      callback
+      canaryOption
+      clientVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClouddebuggerDebuggerDebuggeesBreakpointsSetResource
+          )
+          Core.mempty

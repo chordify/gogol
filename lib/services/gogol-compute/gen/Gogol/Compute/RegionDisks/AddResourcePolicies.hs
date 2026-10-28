@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionDisks.AddResourcePolicies
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionDisks.AddResourcePolicies
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionDisks.addResourcePolicies@ method which the
 -- 'ComputeRegionDisksAddResourcePolicies' request conforms to.
@@ -61,9 +59,7 @@ type ComputeRegionDisksAddResourcePoliciesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RegionDisksAddResourcePoliciesRequest
+    Core.:> Core.ReqBody '[Core.JSON] RegionDisksAddResourcePoliciesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Adds existing resource policies to a regional disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
@@ -104,50 +100,47 @@ newComputeRegionDisksAddResourcePolicies ::
   -- |  The name of the region for this request. See 'region'.
   Core.Text ->
   ComputeRegionDisksAddResourcePolicies
-newComputeRegionDisksAddResourcePolicies disk payload project region =
-  ComputeRegionDisksAddResourcePolicies
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      disk = disk,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeRegionDisksAddResourcePolicies
+  disk
+  payload
+  project
+  region =
     ComputeRegionDisksAddResourcePolicies
-  where
-  type
-    Rs ComputeRegionDisksAddResourcePolicies =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        disk = disk,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeRegionDisksAddResourcePolicies where
+  type Rs ComputeRegionDisksAddResourcePolicies = Operation
   type
     Scopes ComputeRegionDisksAddResourcePolicies =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionDisksAddResourcePolicies {..} =
-      go
-        project
-        region
-        disk
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionDisksAddResourcePoliciesResource
-            )
-            Core.mempty
+  requestClient ComputeRegionDisksAddResourcePolicies {..} =
+    go
+      project
+      region
+      disk
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionDisksAddResourcePoliciesResource
+          )
+          Core.mempty

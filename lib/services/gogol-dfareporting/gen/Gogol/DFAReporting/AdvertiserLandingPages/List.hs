@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.AdvertiserLandingPages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.AdvertiserLandingPages.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.advertiserLandingPages.list@ method which the
 -- 'DFAReportingAdvertiserLandingPagesList' request conforms to.
@@ -60,17 +58,11 @@ type DFAReportingAdvertiserLandingPagesListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              AdvertiserLandingPagesListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              AdvertiserLandingPagesListSortOrder
+    Core.:> Core.QueryParam "sortField" AdvertiserLandingPagesListSortField
+    Core.:> Core.QueryParam "sortOrder" AdvertiserLandingPagesListSortOrder
     Core.:> Core.QueryParam "subaccountId" Core.Int64
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
@@ -134,48 +126,44 @@ newDFAReportingAdvertiserLandingPagesList profileId =
       profileId = profileId,
       searchString = Core.Nothing,
       sortField = AdvertiserLandingPagesListSortField_ID,
-      sortOrder = AdvertiserLandingPagesListSortOrder_Ascending,
+      sortOrder =
+        AdvertiserLandingPagesListSortOrder_Ascending,
       subaccountId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertiserLandingPagesList
-  where
+instance Core.GoogleRequest DFAReportingAdvertiserLandingPagesList where
   type
     Rs DFAReportingAdvertiserLandingPagesList =
       AdvertiserLandingPagesListResponse
   type
     Scopes DFAReportingAdvertiserLandingPagesList =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingAdvertiserLandingPagesList {..} =
-      go
-        profileId
-        xgafv
-        accessToken
-        (advertiserIds Core.^. Core._Default)
-        archived
-        callback
-        (campaignIds Core.^. Core._Default)
-        (ids Core.^. Core._Default)
-        (Core.Just maxResults)
-        pageToken
-        searchString
-        (Core.Just sortField)
-        (Core.Just sortOrder)
-        subaccountId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingAdvertiserLandingPagesListResource
-            )
-            Core.mempty
+  requestClient DFAReportingAdvertiserLandingPagesList {..} =
+    go
+      profileId
+      xgafv
+      accessToken
+      (advertiserIds Core.^. Core._Default)
+      archived
+      callback
+      (campaignIds Core.^. Core._Default)
+      (ids Core.^. Core._Default)
+      (Core.Just maxResults)
+      pageToken
+      searchString
+      (Core.Just sortField)
+      (Core.Just sortOrder)
+      subaccountId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingAdvertiserLandingPagesListResource
+          )
+          Core.mempty

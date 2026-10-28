@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Budget.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Budget.Get
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.budget.get@ method which the
 -- 'AdExchangeBuyerBudgetGet' request conforms to.
@@ -72,13 +70,14 @@ newAdExchangeBuyerBudgetGet ::
   Core.Int64 ->
   AdExchangeBuyerBudgetGet
 newAdExchangeBuyerBudgetGet accountId billingId =
-  AdExchangeBuyerBudgetGet {accountId = accountId, billingId = billingId}
+  AdExchangeBuyerBudgetGet
+    { accountId = accountId,
+      billingId = billingId
+    }
 
 instance Core.GoogleRequest AdExchangeBuyerBudgetGet where
   type Rs AdExchangeBuyerBudgetGet = Budget
-  type
-    Scopes AdExchangeBuyerBudgetGet =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerBudgetGet = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerBudgetGet {..} =
     go
       accountId
@@ -88,7 +87,5 @@ instance Core.GoogleRequest AdExchangeBuyerBudgetGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerBudgetGetResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerBudgetGetResource)
           Core.mempty

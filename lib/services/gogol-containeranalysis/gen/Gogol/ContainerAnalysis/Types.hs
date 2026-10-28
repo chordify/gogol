@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ContainerAnalysis.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ContainerAnalysis.Types
@@ -90,6 +88,22 @@ module Gogol.ContainerAnalysis.Types
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BuildDefinition
+    BuildDefinition (..),
+    newBuildDefinition,
+
+    -- ** BuildDefinition_ExternalParameters
+    BuildDefinition_ExternalParameters (..),
+    newBuildDefinition_ExternalParameters,
+
+    -- ** BuildDefinition_InternalParameters
+    BuildDefinition_InternalParameters (..),
+    newBuildDefinition_InternalParameters,
+
+    -- ** BuildMetadata
+    BuildMetadata (..),
+    newBuildMetadata,
 
     -- ** BuildNote
     BuildNote (..),
@@ -192,6 +206,10 @@ module Gogol.ContainerAnalysis.Types
     CloudRepoSourceContext (..),
     newCloudRepoSourceContext,
 
+    -- ** CloudStorageLocation
+    CloudStorageLocation (..),
+    newCloudStorageLocation,
+
     -- ** Command
     Command (..),
     newCommand,
@@ -231,9 +249,17 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage (..),
@@ -315,9 +341,41 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes
     ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitSource
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitSource (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitSource,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Hash
     ContaineranalysisGoogleDevtoolsCloudbuildV1Hash (..),
@@ -378,6 +436,9 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+    ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher (..),
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest
     ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest,
@@ -386,9 +447,17 @@ module Gogol.ContainerAnalysis.Types
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage (..),
@@ -465,6 +534,14 @@ module Gogol.ContainerAnalysis.Types
     EnvelopeSignature (..),
     newEnvelopeSignature,
 
+    -- ** ExportSBOMRequest
+    ExportSBOMRequest (..),
+    newExportSBOMRequest,
+
+    -- ** ExportSBOMResponse
+    ExportSBOMResponse (..),
+    newExportSBOMResponse,
+
     -- ** Expr
     Expr (..),
     newExpr,
@@ -483,10 +560,6 @@ module Gogol.ContainerAnalysis.Types
 
     -- ** FixableTotalByDigest_Severity
     FixableTotalByDigest_Severity (..),
-
-    -- ** GeneratePackagesSummaryRequest
-    GeneratePackagesSummaryRequest (..),
-    newGeneratePackagesSummaryRequest,
 
     -- ** GerritSourceContext
     GerritSourceContext (..),
@@ -576,6 +649,10 @@ module Gogol.ContainerAnalysis.Types
     InTotoProvenance (..),
     newInTotoProvenance,
 
+    -- ** InTotoSlsaProvenanceV1
+    InTotoSlsaProvenanceV1 (..),
+    newInTotoSlsaProvenanceV1,
+
     -- ** InTotoStatement
     InTotoStatement (..),
     newInTotoStatement,
@@ -602,10 +679,6 @@ module Gogol.ContainerAnalysis.Types
     -- ** License
     License (..),
     newLicense,
-
-    -- ** LicensesSummary
-    LicensesSummary (..),
-    newLicensesSummary,
 
     -- ** ListNoteOccurrencesResponse
     ListNoteOccurrencesResponse (..),
@@ -674,10 +747,6 @@ module Gogol.ContainerAnalysis.Types
     -- ** PackageOccurrence_Architecture
     PackageOccurrence_Architecture (..),
 
-    -- ** PackagesSummaryResponse
-    PackagesSummaryResponse (..),
-    newPackagesSummaryResponse,
-
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -689,6 +758,14 @@ module Gogol.ContainerAnalysis.Types
     -- ** ProjectRepoId
     ProjectRepoId (..),
     newProjectRepoId,
+
+    -- ** ProvenanceBuilder
+    ProvenanceBuilder (..),
+    newProvenanceBuilder,
+
+    -- ** ProvenanceBuilder_Version
+    ProvenanceBuilder_Version (..),
+    newProvenanceBuilder_Version,
 
     -- ** Publisher
     Publisher (..),
@@ -721,6 +798,49 @@ module Gogol.ContainerAnalysis.Types
     RepoId (..),
     newRepoId,
 
+    -- ** ResourceDescriptor
+    ResourceDescriptor (..),
+    newResourceDescriptor,
+
+    -- ** ResourceDescriptor_Annotations
+    ResourceDescriptor_Annotations (..),
+    newResourceDescriptor_Annotations,
+
+    -- ** ResourceDescriptor_Digest
+    ResourceDescriptor_Digest (..),
+    newResourceDescriptor_Digest,
+
+    -- ** RunDetails
+    RunDetails (..),
+    newRunDetails,
+
+    -- ** SBOMReferenceNote
+    SBOMReferenceNote (..),
+    newSBOMReferenceNote,
+
+    -- ** SBOMReferenceOccurrence
+    SBOMReferenceOccurrence (..),
+    newSBOMReferenceOccurrence,
+
+    -- ** SBOMStatus
+    SBOMStatus (..),
+    newSBOMStatus,
+
+    -- ** SBOMStatus_SbomState
+    SBOMStatus_SbomState (..),
+
+    -- ** SbomReferenceIntotoPayload
+    SbomReferenceIntotoPayload (..),
+    newSbomReferenceIntotoPayload,
+
+    -- ** SbomReferenceIntotoPredicate
+    SbomReferenceIntotoPredicate (..),
+    newSbomReferenceIntotoPredicate,
+
+    -- ** SbomReferenceIntotoPredicate_Digest
+    SbomReferenceIntotoPredicate_Digest (..),
+    newSbomReferenceIntotoPredicate_Digest,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -744,6 +864,10 @@ module Gogol.ContainerAnalysis.Types
     -- ** SlsaProvenance
     SlsaProvenance (..),
     newSlsaProvenance,
+
+    -- ** SlsaProvenanceV1
+    SlsaProvenanceV1 (..),
+    newSlsaProvenanceV1,
 
     -- ** SlsaProvenanceZeroTwo
     SlsaProvenanceZeroTwo (..),
@@ -882,7 +1006,7 @@ where
 
 import Gogol.ContainerAnalysis.Internal.Product
 import Gogol.ContainerAnalysis.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Container Analysis API. This contains the host and root path used as a starting point for constructing service requests.
 containerAnalysisService :: Core.ServiceConfig
@@ -892,4 +1016,5 @@ containerAnalysisService =
     "containeranalysis.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

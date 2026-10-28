@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdExchangeBuyer2.Internal.Product
@@ -461,7 +459,7 @@ module Gogol.AdExchangeBuyer2.Internal.Product
 where
 
 import Gogol.AdExchangeBuyer2.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An absolute date range, specified by its start date and end date. The supported range of dates begins 30 days before today and ends today. Validity checked upon filter set creation. If a filter set with an absolute date range is run at a later date more than 30 days after start_date, it will fail.
 --
@@ -478,7 +476,10 @@ data AbsoluteDateRange = AbsoluteDateRange
 newAbsoluteDateRange ::
   AbsoluteDateRange
 newAbsoluteDateRange =
-  AbsoluteDateRange {endDate = Core.Nothing, startDate = Core.Nothing}
+  AbsoluteDateRange
+    { endDate = Core.Nothing,
+      startDate = Core.Nothing
+    }
 
 instance Core.FromJSON AbsoluteDateRange where
   parseJSON =
@@ -520,16 +521,15 @@ instance Core.FromJSON AcceptProposalRequest where
       "AcceptProposalRequest"
       ( \o ->
           AcceptProposalRequest
-            Core.<$> ( o Core..:? "proposalRevision"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "proposalRevision" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AcceptProposalRequest where
   toJSON AcceptProposalRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("proposalRevision" Core..=) Core.. Core.AsText
+          [ ("proposalRevision" Core..=)
+              Core.. Core.AsText
               Core.<$> proposalRevision
           ]
       )
@@ -551,7 +551,11 @@ data AdSize = AdSize
 newAdSize ::
   AdSize
 newAdSize =
-  AdSize {height = Core.Nothing, sizeType = Core.Nothing, width = Core.Nothing}
+  AdSize
+    { height = Core.Nothing,
+      sizeType = Core.Nothing,
+      width = Core.Nothing
+    }
 
 instance Core.FromJSON AdSize where
   parseJSON =
@@ -559,21 +563,16 @@ instance Core.FromJSON AdSize where
       "AdSize"
       ( \o ->
           AdSize
-            Core.<$> ( o Core..:? "height"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "height" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "sizeType")
-            Core.<*> ( o Core..:? "width"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "width" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AdSize where
   toJSON AdSize {..} =
     Core.object
       ( Core.catMaybes
-          [ ("height" Core..=) Core.. Core.AsText
-              Core.<$> height,
+          [ ("height" Core..=) Core.. Core.AsText Core.<$> height,
             ("sizeType" Core..=) Core.<$> sizeType,
             ("width" Core..=) Core.. Core.AsText Core.<$> width
           ]
@@ -605,7 +604,8 @@ instance Core.FromJSON AdTechnologyProviders where
       "AdTechnologyProviders"
       ( \o ->
           AdTechnologyProviders
-            Core.<$> ( o Core..:? "detectedProviderIds"
+            Core.<$> ( o
+                         Core..:? "detectedProviderIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "hasUnidentifiedProvider")
@@ -643,16 +643,13 @@ instance Core.FromJSON AddDealAssociationRequest where
     Core.withObject
       "AddDealAssociationRequest"
       ( \o ->
-          AddDealAssociationRequest
-            Core.<$> (o Core..:? "association")
+          AddDealAssociationRequest Core.<$> (o Core..:? "association")
       )
 
 instance Core.ToJSON AddDealAssociationRequest where
   toJSON AddDealAssociationRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("association" Core..=) Core.<$> association]
-      )
+      (Core.catMaybes [("association" Core..=) Core.<$> association])
 
 -- | Request message for adding a note to a given proposal.
 --
@@ -676,8 +673,7 @@ instance Core.FromJSON AddNoteRequest where
 
 instance Core.ToJSON AddNoteRequest where
   toJSON AddNoteRequest {..} =
-    Core.object
-      (Core.catMaybes [("note" Core..=) Core.<$> note])
+    Core.object (Core.catMaybes [("note" Core..=) Core.<$> note])
 
 -- | Output only. The app type the restriction applies to for mobile device.
 --
@@ -702,9 +698,7 @@ instance Core.FromJSON AppContext where
 instance Core.ToJSON AppContext where
   toJSON AppContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("appTypes" Core..=) Core.<$> appTypes]
-      )
+      (Core.catMaybes [("appTypes" Core..=) Core.<$> appTypes])
 
 -- | Output only. The auction type the restriction applies to.
 --
@@ -724,16 +718,12 @@ instance Core.FromJSON AuctionContext where
   parseJSON =
     Core.withObject
       "AuctionContext"
-      ( \o ->
-          AuctionContext Core.<$> (o Core..:? "auctionTypes")
-      )
+      (\o -> AuctionContext Core.<$> (o Core..:? "auctionTypes"))
 
 instance Core.ToJSON AuctionContext where
   toJSON AuctionContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("auctionTypes" Core..=) Core.<$> auctionTypes]
-      )
+      (Core.catMaybes [("auctionTypes" Core..=) Core.<$> auctionTypes])
 
 -- | The set of metrics that are measured in numbers of bids, representing how many bids with the specified dimension values were considered eligible at each stage of the bidding funnel;
 --
@@ -743,7 +733,7 @@ data BidMetricsRow = BidMetricsRow
     bids :: (Core.Maybe MetricValue),
     -- | The number of bids that were permitted to compete in the auction.
     bidsInAuction :: (Core.Maybe MetricValue),
-    -- | The number of bids for which the buyer was billed.
+    -- | The number of bids for which the buyer was billed. Also called valid impressions as invalid impressions are not billed.
     billedImpressions :: (Core.Maybe MetricValue),
     -- | The number of bids that won the auction.
     impressionsWon :: (Core.Maybe MetricValue),
@@ -795,15 +785,12 @@ instance Core.ToJSON BidMetricsRow where
       ( Core.catMaybes
           [ ("bids" Core..=) Core.<$> bids,
             ("bidsInAuction" Core..=) Core.<$> bidsInAuction,
-            ("billedImpressions" Core..=)
-              Core.<$> billedImpressions,
+            ("billedImpressions" Core..=) Core.<$> billedImpressions,
             ("impressionsWon" Core..=) Core.<$> impressionsWon,
-            ("measurableImpressions" Core..=)
-              Core.<$> measurableImpressions,
+            ("measurableImpressions" Core..=) Core.<$> measurableImpressions,
             ("reachedQueries" Core..=) Core.<$> reachedQueries,
             ("rowDimensions" Core..=) Core.<$> rowDimensions,
-            ("viewableImpressions" Core..=)
-              Core.<$> viewableImpressions
+            ("viewableImpressions" Core..=) Core.<$> viewableImpressions
           ]
       )
 
@@ -830,10 +817,7 @@ newBidResponseWithoutBidsStatusRow =
       status = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BidResponseWithoutBidsStatusRow
-  where
+instance Core.FromJSON BidResponseWithoutBidsStatusRow where
   parseJSON =
     Core.withObject
       "BidResponseWithoutBidsStatusRow"
@@ -848,8 +832,7 @@ instance Core.ToJSON BidResponseWithoutBidsStatusRow where
   toJSON BidResponseWithoutBidsStatusRow {..} =
     Core.object
       ( Core.catMaybes
-          [ ("impressionCount" Core..=)
-              Core.<$> impressionCount,
+          [ ("impressionCount" Core..=) Core.<$> impressionCount,
             ("rowDimensions" Core..=) Core.<$> rowDimensions,
             ("status" Core..=) Core.<$> status
           ]
@@ -878,9 +861,7 @@ instance Core.FromJSON Buyer where
 instance Core.ToJSON Buyer where
   toJSON Buyer {..} =
     Core.object
-      ( Core.catMaybes
-          [("accountId" Core..=) Core.<$> accountId]
-      )
+      (Core.catMaybes [("accountId" Core..=) Core.<$> accountId])
 
 -- | The number of impressions with the specified dimension values where the corresponding bid request or bid response was not successful, as described by the specified callout status.
 --
@@ -920,8 +901,7 @@ instance Core.ToJSON CalloutStatusRow where
   toJSON CalloutStatusRow {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calloutStatusId" Core..=)
-              Core.<$> calloutStatusId,
+          [ ("calloutStatusId" Core..=) Core.<$> calloutStatusId,
             ("impressionCount" Core..=) Core.<$> impressionCount,
             ("rowDimensions" Core..=) Core.<$> rowDimensions
           ]
@@ -994,13 +974,9 @@ instance Core.FromJSON Client where
       "Client"
       ( \o ->
           Client
-            Core.<$> ( o Core..:? "clientAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "clientAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clientName")
-            Core.<*> ( o Core..:? "entityId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "entityId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "entityName")
             Core.<*> (o Core..:? "entityType")
             Core.<*> (o Core..:? "partnerClientId")
@@ -1013,18 +989,17 @@ instance Core.ToJSON Client where
   toJSON Client {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientAccountId" Core..=) Core.. Core.AsText
+          [ ("clientAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> clientAccountId,
             ("clientName" Core..=) Core.<$> clientName,
-            ("entityId" Core..=) Core.. Core.AsText
-              Core.<$> entityId,
+            ("entityId" Core..=) Core.. Core.AsText Core.<$> entityId,
             ("entityName" Core..=) Core.<$> entityName,
             ("entityType" Core..=) Core.<$> entityType,
             ("partnerClientId" Core..=) Core.<$> partnerClientId,
             ("role" Core..=) Core.<$> role',
             ("status" Core..=) Core.<$> status,
-            ("visibleToSeller" Core..=)
-              Core.<$> visibleToSeller
+            ("visibleToSeller" Core..=) Core.<$> visibleToSeller
           ]
       )
 
@@ -1060,26 +1035,22 @@ instance Core.FromJSON ClientUser where
       "ClientUser"
       ( \o ->
           ClientUser
-            Core.<$> ( o Core..:? "clientAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "clientAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "status")
-            Core.<*> ( o Core..:? "userId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "userId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ClientUser where
   toJSON ClientUser {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientAccountId" Core..=) Core.. Core.AsText
+          [ ("clientAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> clientAccountId,
             ("email" Core..=) Core.<$> email,
             ("status" Core..=) Core.<$> status,
-            ("userId" Core..=) Core.. Core.AsText
-              Core.<$> userId
+            ("userId" Core..=) Core.. Core.AsText Core.<$> userId
           ]
       )
 
@@ -1112,24 +1083,20 @@ instance Core.FromJSON ClientUserInvitation where
       "ClientUserInvitation"
       ( \o ->
           ClientUserInvitation
-            Core.<$> ( o Core..:? "clientAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "clientAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "email")
-            Core.<*> ( o Core..:? "invitationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "invitationId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ClientUserInvitation where
   toJSON ClientUserInvitation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientAccountId" Core..=) Core.. Core.AsText
+          [ ("clientAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> clientAccountId,
             ("email" Core..=) Core.<$> email,
-            ("invitationId" Core..=) Core.. Core.AsText
-              Core.<$> invitationId
+            ("invitationId" Core..=) Core.. Core.AsText Core.<$> invitationId
           ]
       )
 
@@ -1176,16 +1143,15 @@ instance Core.FromJSON ContactInformation where
       "ContactInformation"
       ( \o ->
           ContactInformation
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON ContactInformation where
   toJSON ContactInformation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("email" Core..=) Core.<$> email,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("email" Core..=) Core.<$> email, ("name" Core..=) Core.<$> name]
       )
 
 -- | Output only. Shows any corrections that were applied to this creative.
@@ -1334,9 +1300,7 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "adChoicesDestinationUrl")
             Core.<*> (o Core..:? "adTechnologyProviders")
             Core.<*> (o Core..:? "advertiserName")
-            Core.<*> ( o Core..:? "agencyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "agencyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "apiUpdateTime")
             Core.<*> (o Core..:? "attributes")
             Core.<*> (o Core..:? "clickThroughUrls")
@@ -1344,7 +1308,8 @@ instance Core.FromJSON Creative where
             Core.<*> (o Core..:? "creativeId")
             Core.<*> (o Core..:? "dealsStatus")
             Core.<*> (o Core..:? "declaredClickThroughUrls")
-            Core.<*> ( o Core..:? "detectedAdvertiserIds"
+            Core.<*> ( o
+                         Core..:? "detectedAdvertiserIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "detectedDomains")
@@ -1369,15 +1334,12 @@ instance Core.ToJSON Creative where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("adChoicesDestinationUrl" Core..=)
               Core.<$> adChoicesDestinationUrl,
-            ("adTechnologyProviders" Core..=)
-              Core.<$> adTechnologyProviders,
+            ("adTechnologyProviders" Core..=) Core.<$> adTechnologyProviders,
             ("advertiserName" Core..=) Core.<$> advertiserName,
-            ("agencyId" Core..=) Core.. Core.AsText
-              Core.<$> agencyId,
+            ("agencyId" Core..=) Core.. Core.AsText Core.<$> agencyId,
             ("apiUpdateTime" Core..=) Core.<$> apiUpdateTime,
             ("attributes" Core..=) Core.<$> attributes,
-            ("clickThroughUrls" Core..=)
-              Core.<$> clickThroughUrls,
+            ("clickThroughUrls" Core..=) Core.<$> clickThroughUrls,
             ("corrections" Core..=) Core.<$> corrections,
             ("creativeId" Core..=) Core.<$> creativeId,
             ("dealsStatus" Core..=) Core.<$> dealsStatus,
@@ -1387,22 +1349,17 @@ instance Core.ToJSON Creative where
               Core.. Core.fmap Core.AsText
               Core.<$> detectedAdvertiserIds,
             ("detectedDomains" Core..=) Core.<$> detectedDomains,
-            ("detectedLanguages" Core..=)
-              Core.<$> detectedLanguages,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages,
             ("detectedProductCategories" Core..=)
               Core.<$> detectedProductCategories,
             ("detectedSensitiveCategories" Core..=)
               Core.<$> detectedSensitiveCategories,
             ("html" Core..=) Core.<$> html,
-            ("impressionTrackingUrls" Core..=)
-              Core.<$> impressionTrackingUrls,
+            ("impressionTrackingUrls" Core..=) Core.<$> impressionTrackingUrls,
             ("native" Core..=) Core.<$> native,
-            ("openAuctionStatus" Core..=)
-              Core.<$> openAuctionStatus,
-            ("restrictedCategories" Core..=)
-              Core.<$> restrictedCategories,
-            ("servingRestrictions" Core..=)
-              Core.<$> servingRestrictions,
+            ("openAuctionStatus" Core..=) Core.<$> openAuctionStatus,
+            ("restrictedCategories" Core..=) Core.<$> restrictedCategories,
+            ("servingRestrictions" Core..=) Core.<$> servingRestrictions,
             ("vendorIds" Core..=) Core.<$> vendorIds,
             ("version" Core..=) Core.<$> version,
             ("video" Core..=) Core.<$> video
@@ -1459,7 +1416,6 @@ instance Core.ToJSON CreativeDealAssociation where
 data CreativeRestrictions = CreativeRestrictions
   { -- | The format of the environment that the creatives will be displayed in.
     creativeFormat :: (Core.Maybe CreativeRestrictions_CreativeFormat),
-    -- |
     creativeSpecifications :: (Core.Maybe [CreativeSpecification]),
     -- | Skippable video ads allow viewers to skip ads after 5 seconds.
     skippableAdType :: (Core.Maybe CreativeRestrictions_SkippableAdType)
@@ -1492,10 +1448,8 @@ instance Core.ToJSON CreativeRestrictions where
     Core.object
       ( Core.catMaybes
           [ ("creativeFormat" Core..=) Core.<$> creativeFormat,
-            ("creativeSpecifications" Core..=)
-              Core.<$> creativeSpecifications,
-            ("skippableAdType" Core..=)
-              Core.<$> skippableAdType
+            ("creativeSpecifications" Core..=) Core.<$> creativeSpecifications,
+            ("skippableAdType" Core..=) Core.<$> skippableAdType
           ]
       )
 
@@ -1551,12 +1505,10 @@ instance Core.ToJSON CreativeSize where
       ( Core.catMaybes
           [ ("allowedFormats" Core..=) Core.<$> allowedFormats,
             ("companionSizes" Core..=) Core.<$> companionSizes,
-            ("creativeSizeType" Core..=)
-              Core.<$> creativeSizeType,
+            ("creativeSizeType" Core..=) Core.<$> creativeSizeType,
             ("nativeTemplate" Core..=) Core.<$> nativeTemplate,
             ("size" Core..=) Core.<$> size,
-            ("skippableAdType" Core..=)
-              Core.<$> skippableAdType
+            ("skippableAdType" Core..=) Core.<$> skippableAdType
           ]
       )
 
@@ -1639,8 +1591,7 @@ instance Core.ToJSON CreativeStatusRow where
     Core.object
       ( Core.catMaybes
           [ ("bidCount" Core..=) Core.<$> bidCount,
-            ("creativeStatusId" Core..=)
-              Core.<$> creativeStatusId,
+            ("creativeStatusId" Core..=) Core.<$> creativeStatusId,
             ("rowDimensions" Core..=) Core.<$> rowDimensions
           ]
       )
@@ -1671,10 +1622,12 @@ instance Core.FromJSON CriteriaTargeting where
       "CriteriaTargeting"
       ( \o ->
           CriteriaTargeting
-            Core.<$> ( o Core..:? "excludedCriteriaIds"
+            Core.<$> ( o
+                         Core..:? "excludedCriteriaIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
-            Core.<*> ( o Core..:? "targetedCriteriaIds"
+            Core.<*> ( o
+                         Core..:? "targetedCriteriaIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -1708,7 +1661,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -1790,7 +1748,10 @@ data DayPartTargeting = DayPartTargeting
 newDayPartTargeting ::
   DayPartTargeting
 newDayPartTargeting =
-  DayPartTargeting {dayParts = Core.Nothing, timeZoneType = Core.Nothing}
+  DayPartTargeting
+    { dayParts = Core.Nothing,
+      timeZoneType = Core.Nothing
+    }
 
 instance Core.FromJSON DayPartTargeting where
   parseJSON =
@@ -1910,7 +1871,8 @@ instance Core.FromJSON Deal where
             Core.<*> (o Core..:? "availableStartTime")
             Core.<*> (o Core..:? "buyerPrivateData")
             Core.<*> (o Core..:? "createProductId")
-            Core.<*> ( o Core..:? "createProductRevision"
+            Core.<*> ( o
+                         Core..:? "createProductRevision"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "createTime")
@@ -1939,25 +1901,21 @@ instance Core.ToJSON Deal where
   toJSON Deal {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableEndTime" Core..=)
-              Core.<$> availableEndTime,
-            ("availableStartTime" Core..=)
-              Core.<$> availableStartTime,
-            ("buyerPrivateData" Core..=)
-              Core.<$> buyerPrivateData,
+          [ ("availableEndTime" Core..=) Core.<$> availableEndTime,
+            ("availableStartTime" Core..=) Core.<$> availableStartTime,
+            ("buyerPrivateData" Core..=) Core.<$> buyerPrivateData,
             ("createProductId" Core..=) Core.<$> createProductId,
-            ("createProductRevision" Core..=) Core.. Core.AsText
+            ("createProductRevision" Core..=)
+              Core.. Core.AsText
               Core.<$> createProductRevision,
             ("createTime" Core..=) Core.<$> createTime,
             ("creativePreApprovalPolicy" Core..=)
               Core.<$> creativePreApprovalPolicy,
-            ("creativeRestrictions" Core..=)
-              Core.<$> creativeRestrictions,
+            ("creativeRestrictions" Core..=) Core.<$> creativeRestrictions,
             ("creativeSafeFrameCompatibility" Core..=)
               Core.<$> creativeSafeFrameCompatibility,
             ("dealId" Core..=) Core.<$> dealId,
-            ("dealServingMetadata" Core..=)
-              Core.<$> dealServingMetadata,
+            ("dealServingMetadata" Core..=) Core.<$> dealServingMetadata,
             ("dealTerms" Core..=) Core.<$> dealTerms,
             ("deliveryControl" Core..=) Core.<$> deliveryControl,
             ("description" Core..=) Core.<$> description,
@@ -1968,14 +1926,11 @@ instance Core.ToJSON Deal where
               Core.<$> programmaticCreativeSource,
             ("proposalId" Core..=) Core.<$> proposalId,
             ("sellerContacts" Core..=) Core.<$> sellerContacts,
-            ("syndicationProduct" Core..=)
-              Core.<$> syndicationProduct,
+            ("syndicationProduct" Core..=) Core.<$> syndicationProduct,
             ("targeting" Core..=) Core.<$> targeting,
-            ("targetingCriterion" Core..=)
-              Core.<$> targetingCriterion,
+            ("targetingCriterion" Core..=) Core.<$> targetingCriterion,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("webPropertyCode" Core..=)
-              Core.<$> webPropertyCode
+            ("webPropertyCode" Core..=) Core.<$> webPropertyCode
           ]
       )
 
@@ -2025,13 +1980,11 @@ instance Core.ToJSON DealPauseStatus where
   toJSON DealPauseStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("buyerPauseReason" Core..=)
-              Core.<$> buyerPauseReason,
+          [ ("buyerPauseReason" Core..=) Core.<$> buyerPauseReason,
             ("firstPausedBy" Core..=) Core.<$> firstPausedBy,
             ("hasBuyerPaused" Core..=) Core.<$> hasBuyerPaused,
             ("hasSellerPaused" Core..=) Core.<$> hasSellerPaused,
-            ("sellerPauseReason" Core..=)
-              Core.<$> sellerPauseReason
+            ("sellerPauseReason" Core..=) Core.<$> sellerPauseReason
           ]
       )
 
@@ -2047,24 +2000,22 @@ newtype DealServingMetadata = DealServingMetadata
 -- | Creates a value of 'DealServingMetadata' with the minimum fields required to make a request.
 newDealServingMetadata ::
   DealServingMetadata
-newDealServingMetadata = DealServingMetadata {dealPauseStatus = Core.Nothing}
+newDealServingMetadata =
+  DealServingMetadata {dealPauseStatus = Core.Nothing}
 
 instance Core.FromJSON DealServingMetadata where
   parseJSON =
     Core.withObject
       "DealServingMetadata"
       ( \o ->
-          DealServingMetadata
-            Core.<$> (o Core..:? "dealPauseStatus")
+          DealServingMetadata Core.<$> (o Core..:? "dealPauseStatus")
       )
 
 instance Core.ToJSON DealServingMetadata where
   toJSON DealServingMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dealPauseStatus" Core..=)
-              Core.<$> dealPauseStatus
-          ]
+          [("dealPauseStatus" Core..=) Core.<$> dealPauseStatus]
       )
 
 -- | The deal terms specify the details of a Product\/deal. They specify things like price per buyer, the type of pricing model (for example, fixed price, auction) and expected impressions from the publisher.
@@ -2114,7 +2065,8 @@ instance Core.FromJSON DealTerms where
             Core.<$> (o Core..:? "brandingType")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "estimatedGrossSpend")
-            Core.<*> ( o Core..:? "estimatedImpressionsPerDay"
+            Core.<*> ( o
+                         Core..:? "estimatedImpressionsPerDay"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "guaranteedFixedPriceTerms")
@@ -2129,8 +2081,7 @@ instance Core.ToJSON DealTerms where
       ( Core.catMaybes
           [ ("brandingType" Core..=) Core.<$> brandingType,
             ("description" Core..=) Core.<$> description,
-            ("estimatedGrossSpend" Core..=)
-              Core.<$> estimatedGrossSpend,
+            ("estimatedGrossSpend" Core..=) Core.<$> estimatedGrossSpend,
             ("estimatedImpressionsPerDay" Core..=)
               Core.. Core.AsText
               Core.<$> estimatedImpressionsPerDay,
@@ -2182,10 +2133,8 @@ instance Core.ToJSON DeliveryControl where
   toJSON DeliveryControl {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeBlockingLevel" Core..=)
-              Core.<$> creativeBlockingLevel,
-            ("deliveryRateType" Core..=)
-              Core.<$> deliveryRateType,
+          [ ("creativeBlockingLevel" Core..=) Core.<$> creativeBlockingLevel,
+            ("deliveryRateType" Core..=) Core.<$> deliveryRateType,
             ("frequencyCaps" Core..=) Core.<$> frequencyCaps
           ]
       )
@@ -2204,7 +2153,8 @@ data Disapproval = Disapproval
 -- | Creates a value of 'Disapproval' with the minimum fields required to make a request.
 newDisapproval ::
   Disapproval
-newDisapproval = Disapproval {details = Core.Nothing, reason = Core.Nothing}
+newDisapproval =
+  Disapproval {details = Core.Nothing, reason = Core.Nothing}
 
 instance Core.FromJSON Disapproval where
   parseJSON =
@@ -2237,8 +2187,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -2308,9 +2257,7 @@ instance Core.FromJSON FilterSet where
             Core.<$> (o Core..:? "absoluteDateRange")
             Core.<*> (o Core..:? "breakdownDimensions")
             Core.<*> (o Core..:? "creativeId")
-            Core.<*> ( o Core..:? "dealId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dealId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "format")
             Core.<*> (o Core..:? "formats")
@@ -2327,28 +2274,20 @@ instance Core.ToJSON FilterSet where
   toJSON FilterSet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("absoluteDateRange" Core..=)
-              Core.<$> absoluteDateRange,
-            ("breakdownDimensions" Core..=)
-              Core.<$> breakdownDimensions,
+          [ ("absoluteDateRange" Core..=) Core.<$> absoluteDateRange,
+            ("breakdownDimensions" Core..=) Core.<$> breakdownDimensions,
             ("creativeId" Core..=) Core.<$> creativeId,
-            ("dealId" Core..=) Core.. Core.AsText
-              Core.<$> dealId,
+            ("dealId" Core..=) Core.. Core.AsText Core.<$> dealId,
             ("environment" Core..=) Core.<$> environment,
             ("format" Core..=) Core.<$> format,
             ("formats" Core..=) Core.<$> formats,
             ("name" Core..=) Core.<$> name,
             ("platforms" Core..=) Core.<$> platforms,
-            ("publisherIdentifiers" Core..=)
-              Core.<$> publisherIdentifiers,
-            ("realtimeTimeRange" Core..=)
-              Core.<$> realtimeTimeRange,
-            ("relativeDateRange" Core..=)
-              Core.<$> relativeDateRange,
-            ("sellerNetworkIds" Core..=)
-              Core.<$> sellerNetworkIds,
-            ("timeSeriesGranularity" Core..=)
-              Core.<$> timeSeriesGranularity
+            ("publisherIdentifiers" Core..=) Core.<$> publisherIdentifiers,
+            ("realtimeTimeRange" Core..=) Core.<$> realtimeTimeRange,
+            ("relativeDateRange" Core..=) Core.<$> relativeDateRange,
+            ("sellerNetworkIds" Core..=) Core.<$> sellerNetworkIds,
+            ("timeSeriesGranularity" Core..=) Core.<$> timeSeriesGranularity
           ]
       )
 
@@ -2461,14 +2400,12 @@ newFirstPartyMobileApplicationTargeting ::
   FirstPartyMobileApplicationTargeting
 newFirstPartyMobileApplicationTargeting =
   FirstPartyMobileApplicationTargeting
-    { excludedAppIds = Core.Nothing,
+    { excludedAppIds =
+        Core.Nothing,
       targetedAppIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FirstPartyMobileApplicationTargeting
-  where
+instance Core.FromJSON FirstPartyMobileApplicationTargeting where
   parseJSON =
     Core.withObject
       "FirstPartyMobileApplicationTargeting"
@@ -2478,10 +2415,7 @@ instance
             Core.<*> (o Core..:? "targetedAppIds")
       )
 
-instance
-  Core.ToJSON
-    FirstPartyMobileApplicationTargeting
-  where
+instance Core.ToJSON FirstPartyMobileApplicationTargeting where
   toJSON FirstPartyMobileApplicationTargeting {..} =
     Core.object
       ( Core.catMaybes
@@ -2542,11 +2476,11 @@ data GuaranteedFixedPriceTerms = GuaranteedFixedPriceTerms
     fixedPrices :: (Core.Maybe [PricePerBuyer]),
     -- | Guaranteed impressions as a percentage. This is the percentage of guaranteed looks that the buyer is guaranteeing to buy.
     guaranteedImpressions :: (Core.Maybe Core.Int64),
-    -- | Count of guaranteed looks. Required for deal, optional for product.
+    -- | Count of guaranteed looks. Required for deal, optional for product. For CPD deals, buyer changes to guaranteed_looks will be ignored.
     guaranteedLooks :: (Core.Maybe Core.Int64),
     -- | The lifetime impression cap for CPM sponsorship deals. The deal will stop serving when the cap is reached.
     impressionCap :: (Core.Maybe Core.Int64),
-    -- | Daily minimum looks for CPD deal types.
+    -- | Daily minimum looks for CPD deal types. For CPD deals, buyer should negotiate on this field instead of guaranteed_looks.
     minimumDailyLooks :: (Core.Maybe Core.Int64),
     -- | For sponsorship deals, this is the percentage of the seller\'s eligible impressions that the deal will serve until the cap is reached.
     percentShareOfVoice :: (Core.Maybe Core.Int64),
@@ -2576,19 +2510,15 @@ instance Core.FromJSON GuaranteedFixedPriceTerms where
       ( \o ->
           GuaranteedFixedPriceTerms
             Core.<$> (o Core..:? "fixedPrices")
-            Core.<*> ( o Core..:? "guaranteedImpressions"
+            Core.<*> ( o
+                         Core..:? "guaranteedImpressions"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "guaranteedLooks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "impressionCap"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "minimumDailyLooks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "percentShareOfVoice"
+            Core.<*> (o Core..:? "guaranteedLooks" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "impressionCap" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minimumDailyLooks" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "percentShareOfVoice"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "reservationType")
@@ -2599,18 +2529,22 @@ instance Core.ToJSON GuaranteedFixedPriceTerms where
     Core.object
       ( Core.catMaybes
           [ ("fixedPrices" Core..=) Core.<$> fixedPrices,
-            ("guaranteedImpressions" Core..=) Core.. Core.AsText
+            ("guaranteedImpressions" Core..=)
+              Core.. Core.AsText
               Core.<$> guaranteedImpressions,
-            ("guaranteedLooks" Core..=) Core.. Core.AsText
+            ("guaranteedLooks" Core..=)
+              Core.. Core.AsText
               Core.<$> guaranteedLooks,
-            ("impressionCap" Core..=) Core.. Core.AsText
+            ("impressionCap" Core..=)
+              Core.. Core.AsText
               Core.<$> impressionCap,
-            ("minimumDailyLooks" Core..=) Core.. Core.AsText
+            ("minimumDailyLooks" Core..=)
+              Core.. Core.AsText
               Core.<$> minimumDailyLooks,
-            ("percentShareOfVoice" Core..=) Core.. Core.AsText
+            ("percentShareOfVoice" Core..=)
+              Core.. Core.AsText
               Core.<$> percentShareOfVoice,
-            ("reservationType" Core..=)
-              Core.<$> reservationType
+            ("reservationType" Core..=) Core.<$> reservationType
           ]
       )
 
@@ -2675,7 +2609,11 @@ data Image = Image
 newImage ::
   Image
 newImage =
-  Image {height = Core.Nothing, url = Core.Nothing, width = Core.Nothing}
+  Image
+    { height = Core.Nothing,
+      url = Core.Nothing,
+      width = Core.Nothing
+    }
 
 instance Core.FromJSON Image where
   parseJSON =
@@ -2748,16 +2686,12 @@ instance Core.ToJSON ImpressionMetricsRow where
   toJSON ImpressionMetricsRow {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableImpressions" Core..=)
-              Core.<$> availableImpressions,
+          [ ("availableImpressions" Core..=) Core.<$> availableImpressions,
             ("bidRequests" Core..=) Core.<$> bidRequests,
-            ("inventoryMatches" Core..=)
-              Core.<$> inventoryMatches,
-            ("responsesWithBids" Core..=)
-              Core.<$> responsesWithBids,
+            ("inventoryMatches" Core..=) Core.<$> inventoryMatches,
+            ("responsesWithBids" Core..=) Core.<$> responsesWithBids,
             ("rowDimensions" Core..=) Core.<$> rowDimensions,
-            ("successfulResponses" Core..=)
-              Core.<$> successfulResponses
+            ("successfulResponses" Core..=) Core.<$> successfulResponses
           ]
       )
 
@@ -2875,8 +2809,7 @@ instance Core.ToJSON ListBidResponseErrorsResponse where
   toJSON ListBidResponseErrorsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calloutStatusRows" Core..=)
-              Core.<$> calloutStatusRows,
+          [ ("calloutStatusRows" Core..=) Core.<$> calloutStatusRows,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -2897,14 +2830,12 @@ newListBidResponsesWithoutBidsResponse ::
   ListBidResponsesWithoutBidsResponse
 newListBidResponsesWithoutBidsResponse =
   ListBidResponsesWithoutBidsResponse
-    { bidResponseWithoutBidsStatusRows = Core.Nothing,
+    { bidResponseWithoutBidsStatusRows =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListBidResponsesWithoutBidsResponse
-  where
+instance Core.FromJSON ListBidResponsesWithoutBidsResponse where
   parseJSON =
     Core.withObject
       "ListBidResponsesWithoutBidsResponse"
@@ -2914,10 +2845,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListBidResponsesWithoutBidsResponse
-  where
+instance Core.ToJSON ListBidResponsesWithoutBidsResponse where
   toJSON ListBidResponsesWithoutBidsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2946,10 +2874,7 @@ newListClientUserInvitationsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListClientUserInvitationsResponse
-  where
+instance Core.FromJSON ListClientUserInvitationsResponse where
   parseJSON =
     Core.withObject
       "ListClientUserInvitationsResponse"
@@ -2959,10 +2884,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListClientUserInvitationsResponse
-  where
+instance Core.ToJSON ListClientUserInvitationsResponse where
   toJSON ListClientUserInvitationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2985,7 +2907,10 @@ data ListClientUsersResponse = ListClientUsersResponse
 newListClientUsersResponse ::
   ListClientUsersResponse
 newListClientUsersResponse =
-  ListClientUsersResponse {nextPageToken = Core.Nothing, users = Core.Nothing}
+  ListClientUsersResponse
+    { nextPageToken = Core.Nothing,
+      users = Core.Nothing
+    }
 
 instance Core.FromJSON ListClientUsersResponse where
   parseJSON =
@@ -3020,7 +2945,10 @@ data ListClientsResponse = ListClientsResponse
 newListClientsResponse ::
   ListClientsResponse
 newListClientsResponse =
-  ListClientsResponse {clients = Core.Nothing, nextPageToken = Core.Nothing}
+  ListClientsResponse
+    { clients = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListClientsResponse where
   parseJSON =
@@ -3057,7 +2985,8 @@ newListCreativeStatusBreakdownByCreativeResponse ::
   ListCreativeStatusBreakdownByCreativeResponse
 newListCreativeStatusBreakdownByCreativeResponse =
   ListCreativeStatusBreakdownByCreativeResponse
-    { filteredBidCreativeRows = Core.Nothing,
+    { filteredBidCreativeRows =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -3071,22 +3000,18 @@ instance
       ( \o ->
           ListCreativeStatusBreakdownByCreativeResponse
             Core.<$> (o Core..:? "filteredBidCreativeRows")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListCreativeStatusBreakdownByCreativeResponse
-  where
-  toJSON
-    ListCreativeStatusBreakdownByCreativeResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("filteredBidCreativeRows" Core..=)
-                Core.<$> filteredBidCreativeRows,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+instance Core.ToJSON ListCreativeStatusBreakdownByCreativeResponse where
+  toJSON ListCreativeStatusBreakdownByCreativeResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("filteredBidCreativeRows" Core..=)
+              Core.<$> filteredBidCreativeRows,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Response message for listing all details associated with a given filtered bid reason.
 --
@@ -3106,15 +3031,13 @@ newListCreativeStatusBreakdownByDetailResponse ::
   ListCreativeStatusBreakdownByDetailResponse
 newListCreativeStatusBreakdownByDetailResponse =
   ListCreativeStatusBreakdownByDetailResponse
-    { detailType = Core.Nothing,
+    { detailType =
+        Core.Nothing,
       filteredBidDetailRows = Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListCreativeStatusBreakdownByDetailResponse
-  where
+instance Core.FromJSON ListCreativeStatusBreakdownByDetailResponse where
   parseJSON =
     Core.withObject
       "ListCreativeStatusBreakdownByDetailResponse"
@@ -3125,20 +3048,15 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListCreativeStatusBreakdownByDetailResponse
-  where
-  toJSON
-    ListCreativeStatusBreakdownByDetailResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("detailType" Core..=) Core.<$> detailType,
-              ("filteredBidDetailRows" Core..=)
-                Core.<$> filteredBidDetailRows,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+instance Core.ToJSON ListCreativeStatusBreakdownByDetailResponse where
+  toJSON ListCreativeStatusBreakdownByDetailResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detailType" Core..=) Core.<$> detailType,
+            ("filteredBidDetailRows" Core..=) Core.<$> filteredBidDetailRows,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | A response for listing creatives.
 --
@@ -3155,7 +3073,10 @@ data ListCreativesResponse = ListCreativesResponse
 newListCreativesResponse ::
   ListCreativesResponse
 newListCreativesResponse =
-  ListCreativesResponse {creatives = Core.Nothing, nextPageToken = Core.Nothing}
+  ListCreativesResponse
+    { creatives = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListCreativesResponse where
   parseJSON =
@@ -3274,10 +3195,7 @@ newListFilteredBidRequestsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListFilteredBidRequestsResponse
-  where
+instance Core.FromJSON ListFilteredBidRequestsResponse where
   parseJSON =
     Core.withObject
       "ListFilteredBidRequestsResponse"
@@ -3291,8 +3209,7 @@ instance Core.ToJSON ListFilteredBidRequestsResponse where
   toJSON ListFilteredBidRequestsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calloutStatusRows" Core..=)
-              Core.<$> calloutStatusRows,
+          [ ("calloutStatusRows" Core..=) Core.<$> calloutStatusRows,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3331,8 +3248,7 @@ instance Core.ToJSON ListFilteredBidsResponse where
   toJSON ListFilteredBidsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeStatusRows" Core..=)
-              Core.<$> creativeStatusRows,
+          [ ("creativeStatusRows" Core..=) Core.<$> creativeStatusRows,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3353,7 +3269,8 @@ newListImpressionMetricsResponse ::
   ListImpressionMetricsResponse
 newListImpressionMetricsResponse =
   ListImpressionMetricsResponse
-    { impressionMetricsRows = Core.Nothing,
+    { impressionMetricsRows =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -3371,8 +3288,7 @@ instance Core.ToJSON ListImpressionMetricsResponse where
   toJSON ListImpressionMetricsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("impressionMetricsRows" Core..=)
-              Core.<$> impressionMetricsRows,
+          [ ("impressionMetricsRows" Core..=) Core.<$> impressionMetricsRows,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3411,8 +3327,7 @@ instance Core.ToJSON ListLosingBidsResponse where
   toJSON ListLosingBidsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeStatusRows" Core..=)
-              Core.<$> creativeStatusRows,
+          [ ("creativeStatusRows" Core..=) Core.<$> creativeStatusRows,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3437,10 +3352,7 @@ newListNonBillableWinningBidsResponse =
       nonBillableWinningBidStatusRows = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListNonBillableWinningBidsResponse
-  where
+instance Core.FromJSON ListNonBillableWinningBidsResponse where
   parseJSON =
     Core.withObject
       "ListNonBillableWinningBidsResponse"
@@ -3450,10 +3362,7 @@ instance
             Core.<*> (o Core..:? "nonBillableWinningBidStatusRows")
       )
 
-instance
-  Core.ToJSON
-    ListNonBillableWinningBidsResponse
-  where
+instance Core.ToJSON ListNonBillableWinningBidsResponse where
   toJSON ListNonBillableWinningBidsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -3478,7 +3387,10 @@ data ListProductsResponse = ListProductsResponse
 newListProductsResponse ::
   ListProductsResponse
 newListProductsResponse =
-  ListProductsResponse {nextPageToken = Core.Nothing, products = Core.Nothing}
+  ListProductsResponse
+    { nextPageToken = Core.Nothing,
+      products = Core.Nothing
+    }
 
 instance Core.FromJSON ListProductsResponse where
   parseJSON =
@@ -3514,7 +3426,10 @@ data ListProposalsResponse = ListProposalsResponse
 newListProposalsResponse ::
   ListProposalsResponse
 newListProposalsResponse =
-  ListProposalsResponse {nextPageToken = Core.Nothing, proposals = Core.Nothing}
+  ListProposalsResponse
+    { nextPageToken = Core.Nothing,
+      proposals = Core.Nothing
+    }
 
 instance Core.FromJSON ListProposalsResponse where
   parseJSON =
@@ -3570,8 +3485,7 @@ instance Core.ToJSON ListPublisherProfilesResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("publisherProfiles" Core..=)
-              Core.<$> publisherProfiles
+            ("publisherProfiles" Core..=) Core.<$> publisherProfiles
           ]
       )
 
@@ -3593,10 +3507,7 @@ instance Core.FromJSON LocationContext where
   parseJSON =
     Core.withObject
       "LocationContext"
-      ( \o ->
-          LocationContext
-            Core.<$> (o Core..:? "geoCriteriaIds")
-      )
+      (\o -> LocationContext Core.<$> (o Core..:? "geoCriteriaIds"))
 
 instance Core.ToJSON LocationContext where
   toJSON LocationContext {..} =
@@ -3652,12 +3563,9 @@ instance Core.ToJSON MarketplaceTargeting where
     Core.object
       ( Core.catMaybes
           [ ("geoTargeting" Core..=) Core.<$> geoTargeting,
-            ("inventorySizeTargeting" Core..=)
-              Core.<$> inventorySizeTargeting,
-            ("placementTargeting" Core..=)
-              Core.<$> placementTargeting,
-            ("technologyTargeting" Core..=)
-              Core.<$> technologyTargeting,
+            ("inventorySizeTargeting" Core..=) Core.<$> inventorySizeTargeting,
+            ("placementTargeting" Core..=) Core.<$> placementTargeting,
+            ("technologyTargeting" Core..=) Core.<$> technologyTargeting,
             ("videoTargeting" Core..=) Core.<$> videoTargeting
           ]
       )
@@ -3676,7 +3584,8 @@ data MetricValue = MetricValue
 -- | Creates a value of 'MetricValue' with the minimum fields required to make a request.
 newMetricValue ::
   MetricValue
-newMetricValue = MetricValue {value = Core.Nothing, variance = Core.Nothing}
+newMetricValue =
+  MetricValue {value = Core.Nothing, variance = Core.Nothing}
 
 instance Core.FromJSON MetricValue where
   parseJSON =
@@ -3684,12 +3593,8 @@ instance Core.FromJSON MetricValue where
       "MetricValue"
       ( \o ->
           MetricValue
-            Core.<$> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "variance"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "variance" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MetricValue where
@@ -3697,8 +3602,7 @@ instance Core.ToJSON MetricValue where
     Core.object
       ( Core.catMaybes
           [ ("value" Core..=) Core.. Core.AsText Core.<$> value,
-            ("variance" Core..=) Core.. Core.AsText
-              Core.<$> variance
+            ("variance" Core..=) Core.. Core.AsText Core.<$> variance
           ]
       )
 
@@ -3730,9 +3634,7 @@ instance Core.ToJSON MobileApplicationTargeting where
   toJSON MobileApplicationTargeting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("firstPartyTargeting" Core..=)
-              Core.<$> firstPartyTargeting
-          ]
+          [("firstPartyTargeting" Core..=) Core.<$> firstPartyTargeting]
       )
 
 -- | Represents an amount of money with its currency type.
@@ -3766,9 +3668,7 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> ( o Core..:? "units"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "units" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Money where
@@ -3864,13 +3764,11 @@ instance Core.ToJSON NativeContent where
             ("body" Core..=) Core.<$> body,
             ("callToAction" Core..=) Core.<$> callToAction,
             ("clickLinkUrl" Core..=) Core.<$> clickLinkUrl,
-            ("clickTrackingUrl" Core..=)
-              Core.<$> clickTrackingUrl,
+            ("clickTrackingUrl" Core..=) Core.<$> clickTrackingUrl,
             ("headline" Core..=) Core.<$> headline,
             ("image" Core..=) Core.<$> image,
             ("logo" Core..=) Core.<$> logo,
-            ("priceDisplayText" Core..=)
-              Core.<$> priceDisplayText,
+            ("priceDisplayText" Core..=) Core.<$> priceDisplayText,
             ("starRating" Core..=) Core.<$> starRating,
             ("storeUrl" Core..=) Core.<$> storeUrl,
             ("videoUrl" Core..=) Core.<$> videoUrl
@@ -3937,7 +3835,8 @@ newNonGuaranteedAuctionTerms ::
   NonGuaranteedAuctionTerms
 newNonGuaranteedAuctionTerms =
   NonGuaranteedAuctionTerms
-    { autoOptimizePrivateAuction = Core.Nothing,
+    { autoOptimizePrivateAuction =
+        Core.Nothing,
       reservePricesPerBuyer = Core.Nothing
     }
 
@@ -3957,8 +3856,7 @@ instance Core.ToJSON NonGuaranteedAuctionTerms where
       ( Core.catMaybes
           [ ("autoOptimizePrivateAuction" Core..=)
               Core.<$> autoOptimizePrivateAuction,
-            ("reservePricesPerBuyer" Core..=)
-              Core.<$> reservePricesPerBuyer
+            ("reservePricesPerBuyer" Core..=) Core.<$> reservePricesPerBuyer
           ]
       )
 
@@ -3982,16 +3880,13 @@ instance Core.FromJSON NonGuaranteedFixedPriceTerms where
     Core.withObject
       "NonGuaranteedFixedPriceTerms"
       ( \o ->
-          NonGuaranteedFixedPriceTerms
-            Core.<$> (o Core..:? "fixedPrices")
+          NonGuaranteedFixedPriceTerms Core.<$> (o Core..:? "fixedPrices")
       )
 
 instance Core.ToJSON NonGuaranteedFixedPriceTerms where
   toJSON NonGuaranteedFixedPriceTerms {..} =
     Core.object
-      ( Core.catMaybes
-          [("fixedPrices" Core..=) Core.<$> fixedPrices]
-      )
+      (Core.catMaybes [("fixedPrices" Core..=) Core.<$> fixedPrices])
 
 -- | A proposal may be associated to several notes.
 --
@@ -4032,9 +3927,7 @@ instance Core.FromJSON Note where
             Core.<*> (o Core..:? "creatorRole")
             Core.<*> (o Core..:? "note")
             Core.<*> (o Core..:? "noteId")
-            Core.<*> ( o Core..:? "proposalRevision"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "proposalRevision" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Note where
@@ -4045,7 +3938,8 @@ instance Core.ToJSON Note where
             ("creatorRole" Core..=) Core.<$> creatorRole,
             ("note" Core..=) Core.<$> note,
             ("noteId" Core..=) Core.<$> noteId,
-            ("proposalRevision" Core..=) Core.. Core.AsText
+            ("proposalRevision" Core..=)
+              Core.. Core.AsText
               Core.<$> proposalRevision
           ]
       )
@@ -4125,8 +4019,7 @@ instance Core.ToJSON PauseProposalDealsRequest where
   toJSON PauseProposalDealsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("externalDealIds" Core..=)
-              Core.<$> externalDealIds,
+          [ ("externalDealIds" Core..=) Core.<$> externalDealIds,
             ("reason" Core..=) Core.<$> reason
           ]
       )
@@ -4143,20 +4036,18 @@ newtype PauseProposalRequest = PauseProposalRequest
 -- | Creates a value of 'PauseProposalRequest' with the minimum fields required to make a request.
 newPauseProposalRequest ::
   PauseProposalRequest
-newPauseProposalRequest = PauseProposalRequest {reason = Core.Nothing}
+newPauseProposalRequest =
+  PauseProposalRequest {reason = Core.Nothing}
 
 instance Core.FromJSON PauseProposalRequest where
   parseJSON =
     Core.withObject
       "PauseProposalRequest"
-      ( \o ->
-          PauseProposalRequest Core.<$> (o Core..:? "reason")
-      )
+      (\o -> PauseProposalRequest Core.<$> (o Core..:? "reason"))
 
 instance Core.ToJSON PauseProposalRequest where
   toJSON PauseProposalRequest {..} =
-    Core.object
-      (Core.catMaybes [("reason" Core..=) Core.<$> reason])
+    Core.object (Core.catMaybes [("reason" Core..=) Core.<$> reason])
 
 -- | Represents targeting about where the ads can appear, for example, certain sites or mobile applications. Different placement targeting types will be logically OR\'ed.
 --
@@ -4216,16 +4107,12 @@ instance Core.FromJSON PlatformContext where
   parseJSON =
     Core.withObject
       "PlatformContext"
-      ( \o ->
-          PlatformContext Core.<$> (o Core..:? "platforms")
-      )
+      (\o -> PlatformContext Core.<$> (o Core..:? "platforms"))
 
 instance Core.ToJSON PlatformContext where
   toJSON PlatformContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("platforms" Core..=) Core.<$> platforms]
-      )
+      (Core.catMaybes [("platforms" Core..=) Core.<$> platforms])
 
 -- | Represents a price and a pricing type for a product \/ deal.
 --
@@ -4324,16 +4211,12 @@ instance Core.FromJSON PrivateData where
   parseJSON =
     Core.withObject
       "PrivateData"
-      ( \o ->
-          PrivateData Core.<$> (o Core..:? "referenceId")
-      )
+      (\o -> PrivateData Core.<$> (o Core..:? "referenceId"))
 
 instance Core.ToJSON PrivateData where
   toJSON PrivateData {..} =
     Core.object
-      ( Core.catMaybes
-          [("referenceId" Core..=) Core.<$> referenceId]
-      )
+      (Core.catMaybes [("referenceId" Core..=) Core.<$> referenceId])
 
 -- | A product is a segment of inventory that a seller wants to sell. It is associated with certain terms and targeting information which helps the buyer know more about the inventory.
 --
@@ -4407,9 +4290,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "hasCreatorSignedOff")
             Core.<*> (o Core..:? "productId")
-            Core.<*> ( o Core..:? "productRevision"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "productRevision" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "publisherProfileId")
             Core.<*> (o Core..:? "seller")
             Core.<*> (o Core..:? "syndicationProduct")
@@ -4423,29 +4304,23 @@ instance Core.ToJSON Product where
   toJSON Product {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableEndTime" Core..=)
-              Core.<$> availableEndTime,
-            ("availableStartTime" Core..=)
-              Core.<$> availableStartTime,
+          [ ("availableEndTime" Core..=) Core.<$> availableEndTime,
+            ("availableStartTime" Core..=) Core.<$> availableStartTime,
             ("createTime" Core..=) Core.<$> createTime,
             ("creatorContacts" Core..=) Core.<$> creatorContacts,
             ("displayName" Core..=) Core.<$> displayName,
-            ("hasCreatorSignedOff" Core..=)
-              Core.<$> hasCreatorSignedOff,
+            ("hasCreatorSignedOff" Core..=) Core.<$> hasCreatorSignedOff,
             ("productId" Core..=) Core.<$> productId,
-            ("productRevision" Core..=) Core.. Core.AsText
+            ("productRevision" Core..=)
+              Core.. Core.AsText
               Core.<$> productRevision,
-            ("publisherProfileId" Core..=)
-              Core.<$> publisherProfileId,
+            ("publisherProfileId" Core..=) Core.<$> publisherProfileId,
             ("seller" Core..=) Core.<$> seller,
-            ("syndicationProduct" Core..=)
-              Core.<$> syndicationProduct,
-            ("targetingCriterion" Core..=)
-              Core.<$> targetingCriterion,
+            ("syndicationProduct" Core..=) Core.<$> syndicationProduct,
+            ("targetingCriterion" Core..=) Core.<$> targetingCriterion,
             ("terms" Core..=) Core.<$> terms,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("webPropertyCode" Core..=)
-              Core.<$> webPropertyCode
+            ("webPropertyCode" Core..=) Core.<$> webPropertyCode
           ]
       )
 
@@ -4539,9 +4414,7 @@ instance Core.FromJSON Proposal where
             Core.<*> (o Core..:? "originatorRole")
             Core.<*> (o Core..:? "privateAuctionId")
             Core.<*> (o Core..:? "proposalId")
-            Core.<*> ( o Core..:? "proposalRevision"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "proposalRevision" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "proposalState")
             Core.<*> (o Core..:? "seller")
             Core.<*> (o Core..:? "sellerContacts")
@@ -4556,8 +4429,7 @@ instance Core.ToJSON Proposal where
           [ ("billedBuyer" Core..=) Core.<$> billedBuyer,
             ("buyer" Core..=) Core.<$> buyer,
             ("buyerContacts" Core..=) Core.<$> buyerContacts,
-            ("buyerPrivateData" Core..=)
-              Core.<$> buyerPrivateData,
+            ("buyerPrivateData" Core..=) Core.<$> buyerPrivateData,
             ("deals" Core..=) Core.<$> deals,
             ("displayName" Core..=) Core.<$> displayName,
             ("isRenegotiating" Core..=) Core.<$> isRenegotiating,
@@ -4566,16 +4438,15 @@ instance Core.ToJSON Proposal where
               Core.<$> lastUpdaterOrCommentorRole,
             ("notes" Core..=) Core.<$> notes,
             ("originatorRole" Core..=) Core.<$> originatorRole,
-            ("privateAuctionId" Core..=)
-              Core.<$> privateAuctionId,
+            ("privateAuctionId" Core..=) Core.<$> privateAuctionId,
             ("proposalId" Core..=) Core.<$> proposalId,
-            ("proposalRevision" Core..=) Core.. Core.AsText
+            ("proposalRevision" Core..=)
+              Core.. Core.AsText
               Core.<$> proposalRevision,
             ("proposalState" Core..=) Core.<$> proposalState,
             ("seller" Core..=) Core.<$> seller,
             ("sellerContacts" Core..=) Core.<$> sellerContacts,
-            ("termsAndConditions" Core..=)
-              Core.<$> termsAndConditions,
+            ("termsAndConditions" Core..=) Core.<$> termsAndConditions,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
@@ -4674,12 +4545,9 @@ instance Core.ToJSON PublisherProfile where
   toJSON PublisherProfile {..} =
     Core.object
       ( Core.catMaybes
-          [ ("audienceDescription" Core..=)
-              Core.<$> audienceDescription,
-            ("buyerPitchStatement" Core..=)
-              Core.<$> buyerPitchStatement,
-            ("directDealsContact" Core..=)
-              Core.<$> directDealsContact,
+          [ ("audienceDescription" Core..=) Core.<$> audienceDescription,
+            ("buyerPitchStatement" Core..=) Core.<$> buyerPitchStatement,
+            ("directDealsContact" Core..=) Core.<$> directDealsContact,
             ("displayName" Core..=) Core.<$> displayName,
             ("domains" Core..=) Core.<$> domains,
             ("googlePlusUrl" Core..=) Core.<$> googlePlusUrl,
@@ -4690,8 +4558,7 @@ instance Core.ToJSON PublisherProfile where
             ("overview" Core..=) Core.<$> overview,
             ("programmaticDealsContact" Core..=)
               Core.<$> programmaticDealsContact,
-            ("publisherProfileId" Core..=)
-              Core.<$> publisherProfileId,
+            ("publisherProfileId" Core..=) Core.<$> publisherProfileId,
             ("rateCardInfoUrl" Core..=) Core.<$> rateCardInfoUrl,
             ("samplePageUrl" Core..=) Core.<$> samplePageUrl,
             ("seller" Core..=) Core.<$> seller,
@@ -4722,10 +4589,7 @@ newPublisherProfileMobileApplication =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PublisherProfileMobileApplication
-  where
+instance Core.FromJSON PublisherProfileMobileApplication where
   parseJSON =
     Core.withObject
       "PublisherProfileMobileApplication"
@@ -4736,10 +4600,7 @@ instance
             Core.<*> (o Core..:? "name")
       )
 
-instance
-  Core.ToJSON
-    PublisherProfileMobileApplication
-  where
+instance Core.ToJSON PublisherProfileMobileApplication where
   toJSON PublisherProfileMobileApplication {..} =
     Core.object
       ( Core.catMaybes
@@ -4761,16 +4622,14 @@ newtype RealtimeTimeRange = RealtimeTimeRange
 -- | Creates a value of 'RealtimeTimeRange' with the minimum fields required to make a request.
 newRealtimeTimeRange ::
   RealtimeTimeRange
-newRealtimeTimeRange = RealtimeTimeRange {startTimestamp = Core.Nothing}
+newRealtimeTimeRange =
+  RealtimeTimeRange {startTimestamp = Core.Nothing}
 
 instance Core.FromJSON RealtimeTimeRange where
   parseJSON =
     Core.withObject
       "RealtimeTimeRange"
-      ( \o ->
-          RealtimeTimeRange
-            Core.<$> (o Core..:? "startTimestamp")
-      )
+      (\o -> RealtimeTimeRange Core.<$> (o Core..:? "startTimestamp"))
 
 instance Core.ToJSON RealtimeTimeRange where
   toJSON RealtimeTimeRange {..} =
@@ -4794,7 +4653,10 @@ data RelativeDateRange = RelativeDateRange
 newRelativeDateRange ::
   RelativeDateRange
 newRelativeDateRange =
-  RelativeDateRange {durationDays = Core.Nothing, offsetDays = Core.Nothing}
+  RelativeDateRange
+    { durationDays = Core.Nothing,
+      offsetDays = Core.Nothing
+    }
 
 instance Core.FromJSON RelativeDateRange where
   parseJSON =
@@ -4835,16 +4697,13 @@ instance Core.FromJSON RemoveDealAssociationRequest where
     Core.withObject
       "RemoveDealAssociationRequest"
       ( \o ->
-          RemoveDealAssociationRequest
-            Core.<$> (o Core..:? "association")
+          RemoveDealAssociationRequest Core.<$> (o Core..:? "association")
       )
 
 instance Core.ToJSON RemoveDealAssociationRequest where
   toJSON RemoveDealAssociationRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("association" Core..=) Core.<$> association]
-      )
+      (Core.catMaybes [("association" Core..=) Core.<$> association])
 
 -- | Request message to resume (unpause) serving for already-finalized deals.
 --
@@ -4866,17 +4725,14 @@ instance Core.FromJSON ResumeProposalDealsRequest where
     Core.withObject
       "ResumeProposalDealsRequest"
       ( \o ->
-          ResumeProposalDealsRequest
-            Core.<$> (o Core..:? "externalDealIds")
+          ResumeProposalDealsRequest Core.<$> (o Core..:? "externalDealIds")
       )
 
 instance Core.ToJSON ResumeProposalDealsRequest where
   toJSON ResumeProposalDealsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("externalDealIds" Core..=)
-              Core.<$> externalDealIds
-          ]
+          [("externalDealIds" Core..=) Core.<$> externalDealIds]
       )
 
 -- | Request message to resume (unpause) serving for an already-finalized proposal.
@@ -4933,8 +4789,7 @@ instance Core.ToJSON RowDimensions where
   toJSON RowDimensions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("publisherIdentifier" Core..=)
-              Core.<$> publisherIdentifier,
+          [ ("publisherIdentifier" Core..=) Core.<$> publisherIdentifier,
             ("timeInterval" Core..=) Core.<$> timeInterval
           ]
       )
@@ -4957,16 +4812,12 @@ instance Core.FromJSON SecurityContext where
   parseJSON =
     Core.withObject
       "SecurityContext"
-      ( \o ->
-          SecurityContext Core.<$> (o Core..:? "securities")
-      )
+      (\o -> SecurityContext Core.<$> (o Core..:? "securities"))
 
 instance Core.ToJSON SecurityContext where
   toJSON SecurityContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("securities" Core..=) Core.<$> securities]
-      )
+      (Core.catMaybes [("securities" Core..=) Core.<$> securities])
 
 -- | Represents a seller of inventory. Each seller is identified by a unique Ad Manager account ID.
 --
@@ -4982,7 +4833,8 @@ data Seller = Seller
 -- | Creates a value of 'Seller' with the minimum fields required to make a request.
 newSeller ::
   Seller
-newSeller = Seller {accountId = Core.Nothing, subAccountId = Core.Nothing}
+newSeller =
+  Seller {accountId = Core.Nothing, subAccountId = Core.Nothing}
 
 instance Core.FromJSON Seller where
   parseJSON =
@@ -5106,8 +4958,7 @@ instance Core.ToJSON ServingRestriction where
       ( Core.catMaybes
           [ ("contexts" Core..=) Core.<$> contexts,
             ("disapproval" Core..=) Core.<$> disapproval,
-            ("disapprovalReasons" Core..=)
-              Core.<$> disapprovalReasons,
+            ("disapprovalReasons" Core..=) Core.<$> disapprovalReasons,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -5133,8 +4984,7 @@ instance Core.FromJSON Size where
     Core.withObject
       "Size"
       ( \o ->
-          Size
-            Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
+          Size Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
       )
 
 instance Core.ToJSON Size where
@@ -5244,9 +5094,7 @@ instance Core.FromJSON TargetingValue where
           TargetingValue
             Core.<$> (o Core..:? "creativeSizeValue")
             Core.<*> (o Core..:? "dayPartTargetingValue")
-            Core.<*> ( o Core..:? "longValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "longValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -5254,12 +5102,9 @@ instance Core.ToJSON TargetingValue where
   toJSON TargetingValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creativeSizeValue" Core..=)
-              Core.<$> creativeSizeValue,
-            ("dayPartTargetingValue" Core..=)
-              Core.<$> dayPartTargetingValue,
-            ("longValue" Core..=) Core.. Core.AsText
-              Core.<$> longValue,
+          [ ("creativeSizeValue" Core..=) Core.<$> creativeSizeValue,
+            ("dayPartTargetingValue" Core..=) Core.<$> dayPartTargetingValue,
+            ("longValue" Core..=) Core.. Core.AsText Core.<$> longValue,
             ("stringValue" Core..=) Core.<$> stringValue
           ]
       )
@@ -5351,13 +5196,13 @@ instance Core.ToJSON TimeInterval where
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5411,7 +5256,10 @@ data UrlTargeting = UrlTargeting
 newUrlTargeting ::
   UrlTargeting
 newUrlTargeting =
-  UrlTargeting {excludedUrls = Core.Nothing, targetedUrls = Core.Nothing}
+  UrlTargeting
+    { excludedUrls = Core.Nothing,
+      targetedUrls = Core.Nothing
+    }
 
 instance Core.FromJSON UrlTargeting where
   parseJSON =
@@ -5447,7 +5295,10 @@ data VideoContent = VideoContent
 newVideoContent ::
   VideoContent
 newVideoContent =
-  VideoContent {videoUrl = Core.Nothing, videoVastXml = Core.Nothing}
+  VideoContent
+    { videoUrl = Core.Nothing,
+      videoVastXml = Core.Nothing
+    }
 
 instance Core.FromJSON VideoContent where
   parseJSON =
@@ -5502,10 +5353,8 @@ instance Core.ToJSON VideoTargeting where
   toJSON VideoTargeting {..} =
     Core.object
       ( Core.catMaybes
-          [ ("excludedPositionTypes" Core..=)
-              Core.<$> excludedPositionTypes,
-            ("targetedPositionTypes" Core..=)
-              Core.<$> targetedPositionTypes
+          [ ("excludedPositionTypes" Core..=) Core.<$> excludedPositionTypes,
+            ("targetedPositionTypes" Core..=) Core.<$> targetedPositionTypes
           ]
       )
 
@@ -5521,17 +5370,15 @@ newtype WatchCreativeRequest = WatchCreativeRequest
 -- | Creates a value of 'WatchCreativeRequest' with the minimum fields required to make a request.
 newWatchCreativeRequest ::
   WatchCreativeRequest
-newWatchCreativeRequest = WatchCreativeRequest {topic = Core.Nothing}
+newWatchCreativeRequest =
+  WatchCreativeRequest {topic = Core.Nothing}
 
 instance Core.FromJSON WatchCreativeRequest where
   parseJSON =
     Core.withObject
       "WatchCreativeRequest"
-      ( \o ->
-          WatchCreativeRequest Core.<$> (o Core..:? "topic")
-      )
+      (\o -> WatchCreativeRequest Core.<$> (o Core..:? "topic"))
 
 instance Core.ToJSON WatchCreativeRequest where
   toJSON WatchCreativeRequest {..} =
-    Core.object
-      (Core.catMaybes [("topic" Core..=) Core.<$> topic])
+    Core.object (Core.catMaybes [("topic" Core..=) Core.<$> topic])

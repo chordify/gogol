@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudErrorReporting.Internal.Product
@@ -89,7 +87,7 @@ module Gogol.CloudErrorReporting.Internal.Product
 where
 
 import Gogol.CloudErrorReporting.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Response message for deleting error events.
 --
@@ -155,8 +153,7 @@ instance Core.ToJSON ErrorContext where
       ( Core.catMaybes
           [ ("httpRequest" Core..=) Core.<$> httpRequest,
             ("reportLocation" Core..=) Core.<$> reportLocation,
-            ("sourceReferences" Core..=)
-              Core.<$> sourceReferences,
+            ("sourceReferences" Core..=) Core.<$> sourceReferences,
             ("user" Core..=) Core.<$> user
           ]
       )
@@ -214,9 +211,9 @@ instance Core.ToJSON ErrorEvent where
 --
 -- /See:/ 'newErrorGroup' smart constructor.
 data ErrorGroup = ErrorGroup
-  { -- | Group IDs are unique for a given project. If the same kind of error occurs in different service contexts, it will receive the same group ID.
+  { -- | An opaque identifier of the group. This field is assigned by the Error Reporting system and always populated. In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>.
     groupId :: (Core.Maybe Core.Text),
-    -- | The group resource name. Example: projects\/my-project-123\/groups\/CNSgkpnppqKCUw
+    -- | The group resource name. Written as @projects\/{projectID}\/groups\/{group_id}@ or @projects\/{projectID}\/locations\/{location}\/groups\/{group_id}@ Examples: @projects\/my-project-123\/groups\/my-group@, @projects\/my-project-123\/locations\/us-central1\/groups\/my-group@ In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified.
     name :: (Core.Maybe Core.Text),
     -- | Error group\'s resolution status. An unspecified resolution status will be interpreted as OPEN
     resolutionStatus :: (Core.Maybe ErrorGroup_ResolutionStatus),
@@ -254,8 +251,7 @@ instance Core.ToJSON ErrorGroup where
       ( Core.catMaybes
           [ ("groupId" Core..=) Core.<$> groupId,
             ("name" Core..=) Core.<$> name,
-            ("resolutionStatus" Core..=)
-              Core.<$> resolutionStatus,
+            ("resolutionStatus" Core..=) Core.<$> resolutionStatus,
             ("trackingIssues" Core..=) Core.<$> trackingIssues
           ]
       )
@@ -308,12 +304,11 @@ instance Core.FromJSON ErrorGroupStats where
       ( \o ->
           ErrorGroupStats
             Core.<$> (o Core..:? "affectedServices")
-            Core.<*> ( o Core..:? "affectedUsersCount"
+            Core.<*> ( o
+                         Core..:? "affectedUsersCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "firstSeenTime")
             Core.<*> (o Core..:? "group")
             Core.<*> (o Core..:? "lastSeenTime")
@@ -326,16 +321,15 @@ instance Core.ToJSON ErrorGroupStats where
   toJSON ErrorGroupStats {..} =
     Core.object
       ( Core.catMaybes
-          [ ("affectedServices" Core..=)
-              Core.<$> affectedServices,
-            ("affectedUsersCount" Core..=) Core.. Core.AsText
+          [ ("affectedServices" Core..=) Core.<$> affectedServices,
+            ("affectedUsersCount" Core..=)
+              Core.. Core.AsText
               Core.<$> affectedUsersCount,
             ("count" Core..=) Core.. Core.AsText Core.<$> count,
             ("firstSeenTime" Core..=) Core.<$> firstSeenTime,
             ("group" Core..=) Core.<$> group',
             ("lastSeenTime" Core..=) Core.<$> lastSeenTime,
-            ("numAffectedServices" Core..=)
-              Core.<$> numAffectedServices,
+            ("numAffectedServices" Core..=) Core.<$> numAffectedServices,
             ("representative" Core..=) Core.<$> representative,
             ("timedCounts" Core..=) Core.<$> timedCounts
           ]
@@ -394,8 +388,7 @@ instance Core.ToJSON HttpRequestContext where
           [ ("method" Core..=) Core.<$> method,
             ("referrer" Core..=) Core.<$> referrer,
             ("remoteIp" Core..=) Core.<$> remoteIp,
-            ("responseStatusCode" Core..=)
-              Core.<$> responseStatusCode,
+            ("responseStatusCode" Core..=) Core.<$> responseStatusCode,
             ("url" Core..=) Core.<$> url,
             ("userAgent" Core..=) Core.<$> userAgent
           ]
@@ -483,8 +476,7 @@ instance Core.ToJSON ListGroupStatsResponse where
   toJSON ListGroupStatsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("errorGroupStats" Core..=)
-              Core.<$> errorGroupStats,
+          [ ("errorGroupStats" Core..=) Core.<$> errorGroupStats,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("timeRangeBegin" Core..=) Core.<$> timeRangeBegin
           ]
@@ -519,7 +511,7 @@ data ReportedErrorEvent = ReportedErrorEvent
     -- | Optional. Time when the event occurred. If not provided, the time when the event was received by the Error Reporting system is used. If provided, the time must not exceed the <https://cloud.google.com/logging/quotas#logs_retention_periods logs retention period> in the past, or be more than 24 hours in the future. If an invalid time is provided, then an error is returned.
     eventTime :: (Core.Maybe Core.DateTime),
     -- | Required. The error message. If no @context.reportLocation@ is provided, the message must contain a header (typically consisting of the exception type name and an error message) and an exception stack trace in one of the supported programming languages and formats. Supported languages are Java, Python, JavaScript, Ruby, C#, PHP, and Go. Supported stack trace formats are: * __Java__: Must be the return value of <https://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace%28%29 Throwable.printStackTrace()>. * __Python__: Must be the return value of <https://docs.python.org/2/library/traceback.html#traceback.format_exc traceback.format_exc()>. * __JavaScript__: Must be the value of <https://github.com/v8/v8/wiki/Stack-Trace-API error.stack> as returned by V8. * __Ruby__: Must contain frames returned by <https://ruby-doc.org/core-2.2.0/Exception.html#method-i-backtrace Exception.backtrace>. * __C#__: Must be the return value of
-    -- <https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx Exception.ToString()>. * __PHP__: Must be prefixed with @\"PHP (Notice|Parse error|Fatal error|Warning): \"@ and contain the result of <https://php.net/manual/en/exception.tostring.php (string)$exception>. * __Go__: Must be the return value of <https://golang.org/pkg/runtime/debug/#Stack runtime.Stack()>.
+    -- <https://msdn.microsoft.com/en-us/library/system.exception.tostring.aspx Exception.ToString()>. * __PHP__: Must be prefixed with @\"PHP (Notice|Parse error|Fatal error|Warning): \"@ and contain the result of <https://php.net/manual/en/exception.tostring.php (string)$exception>. * __Go__: Must be the return value of <https://pkg.go.dev/runtime/debug#Stack debug.Stack()>.
     message :: (Core.Maybe Core.Text),
     -- | Required. The service context in which this error has occurred.
     serviceContext :: (Core.Maybe ServiceContext)
@@ -663,7 +655,10 @@ data SourceReference = SourceReference
 newSourceReference ::
   SourceReference
 newSourceReference =
-  SourceReference {repository = Core.Nothing, revisionId = Core.Nothing}
+  SourceReference
+    { repository = Core.Nothing,
+      revisionId = Core.Nothing
+    }
 
 instance Core.FromJSON SourceReference where
   parseJSON =
@@ -713,9 +708,7 @@ instance Core.FromJSON TimedCount where
       "TimedCount"
       ( \o ->
           TimedCount
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "startTime")
       )
@@ -752,5 +745,4 @@ instance Core.FromJSON TrackingIssue where
 
 instance Core.ToJSON TrackingIssue where
   toJSON TrackingIssue {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])

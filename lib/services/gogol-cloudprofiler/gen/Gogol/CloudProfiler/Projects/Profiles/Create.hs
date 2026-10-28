@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudProfiler.Projects.Profiles.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- CreateProfile creates a new profile resource in the online mode. The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".
+-- CreateProfile creates a new profile resource in the online mode. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./ The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".
 --
 -- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference> for @cloudprofiler.projects.profiles.create@.
 module Gogol.CloudProfiler.Projects.Profiles.Create
@@ -40,7 +38,7 @@ module Gogol.CloudProfiler.Projects.Profiles.Create
 where
 
 import Gogol.CloudProfiler.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.create@ method which the
 -- 'CloudProfilerProjectsProfilesCreate' request conforms to.
@@ -57,7 +55,7 @@ type CloudProfilerProjectsProfilesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] CreateProfileRequest
     Core.:> Core.Post '[Core.JSON] Profile
 
--- | CreateProfile creates a new profile resource in the online mode. The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".
+-- | CreateProfile creates a new profile resource in the online mode. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./ The server ensures that the new profiles are created at a constant rate per deployment, so the creation request may hang for some time until the next profile session is available. The request may fail with ABORTED error if the creation is not available within ~1m, the response will indicate the duration of the backoff the client should take before attempting creating a profile again. The backoff duration is returned in google.rpc.RetryInfo extension on the response status. To a gRPC client, the extension will be return as a binary-serialized proto in the trailing metadata item named \"google.rpc.retryinfo-bin\".
 --
 -- /See:/ 'newCloudProfilerProjectsProfilesCreate' smart constructor.
 data CloudProfilerProjectsProfilesCreate = CloudProfilerProjectsProfilesCreate
@@ -96,10 +94,7 @@ newCloudProfilerProjectsProfilesCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudProfilerProjectsProfilesCreate
-  where
+instance Core.GoogleRequest CloudProfilerProjectsProfilesCreate where
   type Rs CloudProfilerProjectsProfilesCreate = Profile
   type
     Scopes CloudProfilerProjectsProfilesCreate =
@@ -122,7 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudProfilerProjectsProfilesCreateResource
+              Core.Proxy CloudProfilerProjectsProfilesCreateResource
           )
           Core.mempty

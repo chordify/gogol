@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.organizations.gcpUserAccessBindings.list@ method which the
 -- 'AccessContextManagerOrganizationsGcpUserAccessBindingsList' request conforms to.
@@ -56,9 +54,7 @@ type AccessContextManagerOrganizationsGcpUserAccessBindingsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListGcpUserAccessBindingsResponse
+    Core.:> Core.Get '[Core.JSON] ListGcpUserAccessBindingsResponse
 
 -- | Lists all GcpUserAccessBindings for a Google Cloud organization.
 --
@@ -88,25 +84,26 @@ newAccessContextManagerOrganizationsGcpUserAccessBindingsList ::
   -- |  Required. Example: \"organizations\/256\" See 'parent'.
   Core.Text ->
   AccessContextManagerOrganizationsGcpUserAccessBindingsList
-newAccessContextManagerOrganizationsGcpUserAccessBindingsList parent =
-  AccessContextManagerOrganizationsGcpUserAccessBindingsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAccessContextManagerOrganizationsGcpUserAccessBindingsList
+  parent =
+    AccessContextManagerOrganizationsGcpUserAccessBindingsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AccessContextManagerOrganizationsGcpUserAccessBindingsList
   where
   type
-    Rs
-      AccessContextManagerOrganizationsGcpUserAccessBindingsList =
+    Rs AccessContextManagerOrganizationsGcpUserAccessBindingsList =
       ListGcpUserAccessBindingsResponse
   type
     Scopes

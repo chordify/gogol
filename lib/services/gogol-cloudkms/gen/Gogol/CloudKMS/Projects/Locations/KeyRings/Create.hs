@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.Create
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.create@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsCreate' request conforms to.
@@ -100,34 +98,27 @@ newCloudKMSProjectsLocationsKeyRingsCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudKMSProjectsLocationsKeyRingsCreate
-  where
-  type
-    Rs CloudKMSProjectsLocationsKeyRingsCreate =
-      KeyRing
+instance Core.GoogleRequest CloudKMSProjectsLocationsKeyRingsCreate where
+  type Rs CloudKMSProjectsLocationsKeyRingsCreate = KeyRing
   type
     Scopes CloudKMSProjectsLocationsKeyRingsCreate =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsKeyRingsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        keyRingId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsKeyRingsCreateResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsKeyRingsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      keyRingId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudKMSProjectsLocationsKeyRingsCreateResource
+          )
+          Core.mempty

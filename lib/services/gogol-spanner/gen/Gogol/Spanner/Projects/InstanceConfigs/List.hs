@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.InstanceConfigs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the supported instance configurations for a given project.
+-- Lists the supported instance configurations for a given project. Returns both Google-managed configurations and user-managed configurations.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instanceConfigs.list@.
 module Gogol.Spanner.Projects.InstanceConfigs.List
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.InstanceConfigs.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instanceConfigs.list@ method which the
@@ -58,7 +56,7 @@ type SpannerProjectsInstanceConfigsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListInstanceConfigsResponse
 
--- | Lists the supported instance configurations for a given project.
+-- | Lists the supported instance configurations for a given project. Returns both Google-managed configurations and user-managed configurations.
 --
 -- /See:/ 'newSpannerProjectsInstanceConfigsList' smart constructor.
 data SpannerProjectsInstanceConfigsList = SpannerProjectsInstanceConfigsList
@@ -98,10 +96,7 @@ newSpannerProjectsInstanceConfigsList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstanceConfigsList
-  where
+instance Core.GoogleRequest SpannerProjectsInstanceConfigsList where
   type
     Rs SpannerProjectsInstanceConfigsList =
       ListInstanceConfigsResponse
@@ -124,7 +119,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                SpannerProjectsInstanceConfigsListResource
+              Core.Proxy SpannerProjectsInstanceConfigsListResource
           )
           Core.mempty

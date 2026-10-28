@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.Content.Reidentify
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
+-- Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.content.reidentify@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.content.reidentify@.
 module Gogol.DLP.Projects.Locations.Content.Reidentify
   ( -- * Resource
     DLPProjectsLocationsContentReidentifyResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.Content.Reidentify
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.content.reidentify@ method which the
 -- 'DLPProjectsLocationsContentReidentify' request conforms to.
@@ -57,11 +55,9 @@ type DLPProjectsLocationsContentReidentifyResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2ReidentifyContentRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GooglePrivacyDlpV2ReidentifyContentResponse
+    Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2ReidentifyContentResponse
 
--- | Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/dlp\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
+-- | Re-identifies content that has been de-identified. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/pseudonymization#re-identification/in/free/text/code_example to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsContentReidentify' smart constructor.
 data DLPProjectsLocationsContentReidentify = DLPProjectsLocationsContentReidentify
@@ -71,7 +67,7 @@ data DLPProjectsLocationsContentReidentify = DLPProjectsLocationsContentReidenti
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GooglePrivacyDlpV2ReidentifyContentRequest,
@@ -84,7 +80,7 @@ data DLPProjectsLocationsContentReidentify = DLPProjectsLocationsContentReidenti
 
 -- | Creates a value of 'DLPProjectsLocationsContentReidentify' with the minimum fields required to make a request.
 newDLPProjectsLocationsContentReidentify ::
-  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GooglePrivacyDlpV2ReidentifyContentRequest ->
@@ -100,33 +96,28 @@ newDLPProjectsLocationsContentReidentify parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsContentReidentify
-  where
+instance Core.GoogleRequest DLPProjectsLocationsContentReidentify where
   type
     Rs DLPProjectsLocationsContentReidentify =
       GooglePrivacyDlpV2ReidentifyContentResponse
   type
     Scopes DLPProjectsLocationsContentReidentify =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsContentReidentify {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsContentReidentifyResource
-            )
-            Core.mempty
+  requestClient DLPProjectsLocationsContentReidentify {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPProjectsLocationsContentReidentifyResource
+          )
+          Core.mempty

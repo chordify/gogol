@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.ListForProductAndSku
 where
 
 import Gogol.AppsLicensing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @licensing.licenseAssignments.listForProductAndSku@ method which the
 -- 'LicensingLicenseAssignmentsListForProductAndSku' request conforms to.
@@ -62,9 +60,7 @@ type LicensingLicenseAssignmentsListForProductAndSkuResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              LicenseAssignmentList
+    Core.:> Core.Get '[Core.JSON] LicenseAssignmentList
 
 -- | List all users assigned licenses for a specific product SKU.
 --
@@ -102,52 +98,52 @@ newLicensingLicenseAssignmentsListForProductAndSku ::
   -- |  A product SKU\'s unique identifier. For more information about available SKUs in this version of the API, see Products and SKUs. See 'skuId'.
   Core.Text ->
   LicensingLicenseAssignmentsListForProductAndSku
-newLicensingLicenseAssignmentsListForProductAndSku customerId productId skuId =
-  LicensingLicenseAssignmentsListForProductAndSku
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      customerId = customerId,
-      maxResults = 100,
-      pageToken = "",
-      productId = productId,
-      skuId = skuId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newLicensingLicenseAssignmentsListForProductAndSku
+  customerId
+  productId
+  skuId =
+    LicensingLicenseAssignmentsListForProductAndSku
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        customerId = customerId,
+        maxResults = 100,
+        pageToken = "",
+        productId = productId,
+        skuId = skuId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     LicensingLicenseAssignmentsListForProductAndSku
   where
   type
-    Rs
-      LicensingLicenseAssignmentsListForProductAndSku =
+    Rs LicensingLicenseAssignmentsListForProductAndSku =
       LicenseAssignmentList
   type
-    Scopes
-      LicensingLicenseAssignmentsListForProductAndSku =
+    Scopes LicensingLicenseAssignmentsListForProductAndSku =
       '[Apps'Licensing]
-  requestClient
-    LicensingLicenseAssignmentsListForProductAndSku {..} =
-      go
-        productId
-        skuId
-        (Core.Just customerId)
-        xgafv
-        accessToken
-        callback
-        (Core.Just maxResults)
-        (Core.Just pageToken)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        appsLicensingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LicensingLicenseAssignmentsListForProductAndSkuResource
-            )
-            Core.mempty
+  requestClient LicensingLicenseAssignmentsListForProductAndSku {..} =
+    go
+      productId
+      skuId
+      (Core.Just customerId)
+      xgafv
+      accessToken
+      callback
+      (Core.Just maxResults)
+      (Core.Just pageToken)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      appsLicensingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LicensingLicenseAssignmentsListForProductAndSkuResource
+          )
+          Core.mempty

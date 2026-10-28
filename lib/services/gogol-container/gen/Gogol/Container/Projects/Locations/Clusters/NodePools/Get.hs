@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.NodePools.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves the requested node pool.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.get@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.get@.
 module Gogol.Container.Projects.Locations.Clusters.NodePools.Get
   ( -- * Resource
     ContainerProjectsLocationsClustersNodePoolsGetResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.Get
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.get@ method which the
 -- 'ContainerProjectsLocationsClustersNodePoolsGet' request conforms to.
@@ -93,7 +91,8 @@ newContainerProjectsLocationsClustersNodePoolsGet ::
   ContainerProjectsLocationsClustersNodePoolsGet
 newContainerProjectsLocationsClustersNodePoolsGet name =
   ContainerProjectsLocationsClustersNodePoolsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       clusterId = Core.Nothing,
@@ -109,34 +108,28 @@ instance
   Core.GoogleRequest
     ContainerProjectsLocationsClustersNodePoolsGet
   where
+  type Rs ContainerProjectsLocationsClustersNodePoolsGet = NodePool
   type
-    Rs
-      ContainerProjectsLocationsClustersNodePoolsGet =
-      NodePool
-  type
-    Scopes
-      ContainerProjectsLocationsClustersNodePoolsGet =
+    Scopes ContainerProjectsLocationsClustersNodePoolsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersNodePoolsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        clusterId
-        nodePoolId
-        projectId
-        uploadType
-        uploadProtocol
-        zone
-        (Core.Just Core.AltJSON)
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersNodePoolsGetResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsLocationsClustersNodePoolsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      clusterId
+      nodePoolId
+      projectId
+      uploadType
+      uploadProtocol
+      zone
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsLocationsClustersNodePoolsGetResource
+          )
+          Core.mempty

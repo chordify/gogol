@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceConsumerManagement.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceConsumerManagement.Internal.Sum
@@ -174,6 +172,15 @@ module Gogol.ServiceConsumerManagement.Internal.Sum
         ..
       ),
 
+    -- * MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+      ( MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+        ..
+      ),
+
     -- * MonitoredResourceDescriptor_LaunchStage
     MonitoredResourceDescriptor_LaunchStage
       ( MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
@@ -194,6 +201,9 @@ module Gogol.ServiceConsumerManagement.Internal.Sum
         Publishing_Organization_Ads,
         Publishing_Organization_Photos,
         Publishing_Organization_STREETVIEW,
+        Publishing_Organization_Shopping,
+        Publishing_Organization_Geo,
+        Publishing_Organization_GENERATIVEAI,
         ..
       ),
 
@@ -228,7 +238,7 @@ module Gogol.ServiceConsumerManagement.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -301,7 +311,6 @@ newtype BackendRule_PathTranslation = BackendRule_PathTranslation {fromBackendRu
       Core.FromJSONKey
     )
 
--- |
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED :: BackendRule_PathTranslation
 pattern BackendRule_PathTranslation_PATHTRANSLATIONUNSPECIFIED = BackendRule_PathTranslation "PATH_TRANSLATION_UNSPECIFIED"
 
@@ -856,6 +865,42 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage
   #-}
 
+newtype MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem {fromMetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED"
+
+-- | Scopes a metric to a project.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "PROJECT"
+
+-- | Scopes a metric to an organization.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "ORGANIZATION"
+
+-- | Scopes a metric to a folder.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "FOLDER"
+
+{-# COMPLETE
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+  #-}
+
 -- | Optional. The launch stage of the monitored resource definition.
 newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage {fromMonitoredResourceDescriptor_LaunchStage :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -946,12 +991,27 @@ pattern Publishing_Organization_Photos = Publishing_Organization "PHOTOS"
 pattern Publishing_Organization_STREETVIEW :: Publishing_Organization
 pattern Publishing_Organization_STREETVIEW = Publishing_Organization "STREET_VIEW"
 
+-- | Shopping Org.
+pattern Publishing_Organization_Shopping :: Publishing_Organization
+pattern Publishing_Organization_Shopping = Publishing_Organization "SHOPPING"
+
+-- | Geo Org.
+pattern Publishing_Organization_Geo :: Publishing_Organization
+pattern Publishing_Organization_Geo = Publishing_Organization "GEO"
+
+-- | Generative AI - https:\/\/developers.generativeai.google
+pattern Publishing_Organization_GENERATIVEAI :: Publishing_Organization
+pattern Publishing_Organization_GENERATIVEAI = Publishing_Organization "GENERATIVE_AI"
+
 {-# COMPLETE
   Publishing_Organization_CLIENTLIBRARYORGANIZATIONUNSPECIFIED,
   Publishing_Organization_Cloud,
   Publishing_Organization_Ads,
   Publishing_Organization_Photos,
   Publishing_Organization_STREETVIEW,
+  Publishing_Organization_Shopping,
+  Publishing_Organization_Geo,
+  Publishing_Organization_GENERATIVEAI,
   Publishing_Organization
   #-}
 

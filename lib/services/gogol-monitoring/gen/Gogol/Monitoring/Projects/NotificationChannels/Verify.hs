@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.NotificationChannels.Verify
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.NotificationChannels.Verify
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.notificationChannels.verify@ method which the
 -- 'MonitoringProjectsNotificationChannelsVerify' request conforms to.
@@ -53,9 +51,7 @@ type MonitoringProjectsNotificationChannelsVerifyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              VerifyNotificationChannelRequest
+    Core.:> Core.ReqBody '[Core.JSON] VerifyNotificationChannelRequest
     Core.:> Core.Post '[Core.JSON] NotificationChannel
 
 -- | Verifies a NotificationChannel by proving receipt of the code delivered to the channel as a result of calling SendNotificationChannelVerificationCode.
@@ -88,7 +84,8 @@ newMonitoringProjectsNotificationChannelsVerify ::
   MonitoringProjectsNotificationChannelsVerify
 newMonitoringProjectsNotificationChannelsVerify name payload =
   MonitoringProjectsNotificationChannelsVerify
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -105,26 +102,23 @@ instance
     Rs MonitoringProjectsNotificationChannelsVerify =
       NotificationChannel
   type
-    Scopes
-      MonitoringProjectsNotificationChannelsVerify =
+    Scopes MonitoringProjectsNotificationChannelsVerify =
       '[CloudPlatform'FullControl, Monitoring'FullControl]
-  requestClient
-    MonitoringProjectsNotificationChannelsVerify {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsNotificationChannelsVerifyResource
-            )
-            Core.mempty
+  requestClient MonitoringProjectsNotificationChannelsVerify {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringProjectsNotificationChannelsVerifyResource
+          )
+          Core.mempty

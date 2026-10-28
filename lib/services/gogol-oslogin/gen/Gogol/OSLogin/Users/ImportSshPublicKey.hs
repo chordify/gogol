@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.OSLogin.Users.ImportSshPublicKey
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,20 +38,18 @@ module Gogol.OSLogin.Users.ImportSshPublicKey
 where
 
 import Gogol.OSLogin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @oslogin.users.importSshPublicKey@ method which the
 -- 'OSLoginUsersImportSshPublicKey' request conforms to.
 type OSLoginUsersImportSshPublicKeyResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "parent"
-              "importSshPublicKey"
-              Core.Text
+    Core.:> Core.CaptureMode "parent" "importSshPublicKey" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "projectId" Core.Text
+    Core.:> Core.QueryParams "regions" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -76,6 +72,8 @@ data OSLoginUsersImportSshPublicKey = OSLoginUsersImportSshPublicKey
     payload :: SshPublicKey,
     -- | The project ID of the Google Cloud Platform project.
     projectId :: (Core.Maybe Core.Text),
+    -- | Optional. The regions to which to assert that the key was written. If unspecified, defaults to all regions. Regions are listed at https:\/\/cloud.google.com\/about\/locations#region.
+    regions :: (Core.Maybe [Core.Text]),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -98,17 +96,13 @@ newOSLoginUsersImportSshPublicKey parent payload =
       parent = parent,
       payload = payload,
       projectId = Core.Nothing,
+      regions = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    OSLoginUsersImportSshPublicKey
-  where
-  type
-    Rs OSLoginUsersImportSshPublicKey =
-      ImportSshPublicKeyResponse
+instance Core.GoogleRequest OSLoginUsersImportSshPublicKey where
+  type Rs OSLoginUsersImportSshPublicKey = ImportSshPublicKeyResponse
   type
     Scopes OSLoginUsersImportSshPublicKey =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -119,6 +113,7 @@ instance
       accessToken
       callback
       projectId
+      (regions Core.^. Core._Default)
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -127,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy OSLoginUsersImportSshPublicKeyResource
-          )
+          (Core.Proxy :: Core.Proxy OSLoginUsersImportSshPublicKeyResource)
           Core.mempty

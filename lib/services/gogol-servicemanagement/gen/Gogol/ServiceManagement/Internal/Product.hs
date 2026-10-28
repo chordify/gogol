@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceManagement.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceManagement.Internal.Product
@@ -33,6 +31,14 @@ module Gogol.ServiceManagement.Internal.Product
     -- * Api
     Api (..),
     newApi,
+
+    -- * Aspect
+    Aspect (..),
+    newAspect,
+
+    -- * Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- * AuditConfig
     AuditConfig (..),
@@ -182,6 +188,10 @@ module Gogol.ServiceManagement.Internal.Product
     EnumValue (..),
     newEnumValue,
 
+    -- * ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- * Expr
     Expr (..),
     newExpr,
@@ -189,6 +199,10 @@ module Gogol.ServiceManagement.Internal.Product
     -- * Field
     Field (..),
     newField,
+
+    -- * FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
 
     -- * FlowErrorDetails
     FlowErrorDetails (..),
@@ -221,6 +235,10 @@ module Gogol.ServiceManagement.Internal.Product
     -- * GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- * GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- * Http
     Http (..),
@@ -285,6 +303,10 @@ module Gogol.ServiceManagement.Internal.Product
     -- * Method
     Method (..),
     newMethod,
+
+    -- * MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
 
     -- * MethodSettings
     MethodSettings (..),
@@ -402,6 +424,10 @@ module Gogol.ServiceManagement.Internal.Product
     RubySettings (..),
     newRubySettings,
 
+    -- * SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
+
     -- * Service
     Service (..),
     newService,
@@ -488,7 +514,7 @@ module Gogol.ServiceManagement.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceManagement.Internal.Sum
 
 -- | Generated advice about this change, used for providing more information about how a change will affect the existing service.
@@ -514,9 +540,7 @@ instance Core.FromJSON Advice where
 instance Core.ToJSON Advice where
   toJSON Advice {..} =
     Core.object
-      ( Core.catMaybes
-          [("description" Core..=) Core.<$> description]
-      )
+      (Core.catMaybes [("description" Core..=) Core.<$> description])
 
 -- | Api is a light-weight descriptor for an API Interface. Interfaces are also described as \"protocol buffer services\" in some contexts, such as by the \"service\" keyword in a .proto file, but they are different from API Services, which represent a concrete implementation of an interface as opposed to simply a description of methods and bindings. They are also sometimes simply referred to as \"APIs\" in other contexts, such as the name of this message itself. See https:\/\/cloud.google.com\/apis\/design\/glossary for detailed terminology.
 --
@@ -582,6 +606,62 @@ instance Core.ToJSON Api where
           ]
       )
 
+-- | Aspect represents Generic aspect. It is used to configure an aspect without making direct changes to service.proto
+--
+-- /See:/ 'newAspect' smart constructor.
+data Aspect = Aspect
+  { -- | The type of this aspect configuration.
+    kind :: (Core.Maybe Core.Text),
+    -- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+    spec :: (Core.Maybe Aspect_Spec)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect' with the minimum fields required to make a request.
+newAspect ::
+  Aspect
+newAspect = Aspect {kind = Core.Nothing, spec = Core.Nothing}
+
+instance Core.FromJSON Aspect where
+  parseJSON =
+    Core.withObject
+      "Aspect"
+      ( \o ->
+          Aspect Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "spec")
+      )
+
+instance Core.ToJSON Aspect where
+  toJSON Aspect {..} =
+    Core.object
+      ( Core.catMaybes
+          [("kind" Core..=) Core.<$> kind, ("spec" Core..=) Core.<$> spec]
+      )
+
+-- | Content of the configuration. The underlying schema should be defined by Aspect owners as protobuf message under @apiserving\/configaspects\/proto@.
+--
+-- /See:/ 'newAspect_Spec' smart constructor.
+newtype Aspect_Spec = Aspect_Spec
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Aspect_Spec' with the minimum fields required to make a request.
+newAspect_Spec ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Aspect_Spec
+newAspect_Spec additional = Aspect_Spec {additional = additional}
+
+instance Core.FromJSON Aspect_Spec where
+  parseJSON =
+    Core.withObject
+      "Aspect_Spec"
+      (\o -> Aspect_Spec Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Aspect_Spec where
+  toJSON Aspect_Spec {..} = Core.toJSON additional
+
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
 -- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
 --
@@ -598,7 +678,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -614,8 +697,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -635,7 +717,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -651,8 +736,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -708,8 +792,7 @@ instance Core.ToJSON AuthProvider where
     Core.object
       ( Core.catMaybes
           [ ("audiences" Core..=) Core.<$> audiences,
-            ("authorizationUrl" Core..=)
-              Core.<$> authorizationUrl,
+            ("authorizationUrl" Core..=) Core.<$> authorizationUrl,
             ("id" Core..=) Core.<$> id,
             ("issuer" Core..=) Core.<$> issuer,
             ("jwksUri" Core..=) Core.<$> jwksUri,
@@ -732,7 +815,10 @@ data AuthRequirement = AuthRequirement
 newAuthRequirement ::
   AuthRequirement
 newAuthRequirement =
-  AuthRequirement {audiences = Core.Nothing, providerId = Core.Nothing}
+  AuthRequirement
+    { audiences = Core.Nothing,
+      providerId = Core.Nothing
+    }
 
 instance Core.FromJSON AuthRequirement where
   parseJSON =
@@ -861,8 +947,7 @@ instance Core.FromJSON Backend where
 
 instance Core.ToJSON Backend where
   toJSON Backend {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A backend rule provides configuration for an individual API element.
 --
@@ -876,13 +961,14 @@ data BackendRule = BackendRule
     disableAuth :: (Core.Maybe Core.Bool),
     -- | The JWT audience is used when generating a JWT ID token for the backend. This ID token will be added in the HTTP \"authorization\" header, and sent to the backend.
     jwtAudience :: (Core.Maybe Core.Text),
+    -- | The load balancing policy used for connection to the application backend. Defined as an arbitrary string to accomondate custom load balancing policies supported by the underlying channel, but suggest most users use one of the standard policies, such as the default, \"RoundRobin\".
+    loadBalancingPolicy :: (Core.Maybe Core.Text),
     -- | Deprecated, do not use.
     minDeadline :: (Core.Maybe Core.Double),
     -- | The number of seconds to wait for the completion of a long running operation. The default is no deadline.
     operationDeadline :: (Core.Maybe Core.Double),
     -- | The map between request protocol and the backend address.
     overridesByRequestProtocol :: (Core.Maybe BackendRule_OverridesByRequestProtocol),
-    -- |
     pathTranslation :: (Core.Maybe BackendRule_PathTranslation),
     -- | The protocol used for sending a request to the backend. The supported values are \"http\/1.1\" and \"h2\". The default value is inferred from the scheme in the address field: SCHEME PROTOCOL http:\/\/ http\/1.1 https:\/\/ http\/1.1 grpc:\/\/ h2 grpcs:\/\/ h2 For secure HTTP backends (https:\/\/) that support HTTP\/2, set this field to \"h2\" for improved performance. Configuring this field to non-default values is only supported for secure HTTP backends. This field will be ignored for all other backends. See https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids for more details on the supported values.
     protocol :: (Core.Maybe Core.Text),
@@ -900,6 +986,7 @@ newBackendRule =
       deadline = Core.Nothing,
       disableAuth = Core.Nothing,
       jwtAudience = Core.Nothing,
+      loadBalancingPolicy = Core.Nothing,
       minDeadline = Core.Nothing,
       operationDeadline = Core.Nothing,
       overridesByRequestProtocol = Core.Nothing,
@@ -918,6 +1005,7 @@ instance Core.FromJSON BackendRule where
             Core.<*> (o Core..:? "deadline")
             Core.<*> (o Core..:? "disableAuth")
             Core.<*> (o Core..:? "jwtAudience")
+            Core.<*> (o Core..:? "loadBalancingPolicy")
             Core.<*> (o Core..:? "minDeadline")
             Core.<*> (o Core..:? "operationDeadline")
             Core.<*> (o Core..:? "overridesByRequestProtocol")
@@ -934,9 +1022,9 @@ instance Core.ToJSON BackendRule where
             ("deadline" Core..=) Core.<$> deadline,
             ("disableAuth" Core..=) Core.<$> disableAuth,
             ("jwtAudience" Core..=) Core.<$> jwtAudience,
+            ("loadBalancingPolicy" Core..=) Core.<$> loadBalancingPolicy,
             ("minDeadline" Core..=) Core.<$> minDeadline,
-            ("operationDeadline" Core..=)
-              Core.<$> operationDeadline,
+            ("operationDeadline" Core..=) Core.<$> operationDeadline,
             ("overridesByRequestProtocol" Core..=)
               Core.<$> overridesByRequestProtocol,
             ("pathTranslation" Core..=) Core.<$> pathTranslation,
@@ -949,8 +1037,7 @@ instance Core.ToJSON BackendRule where
 --
 -- /See:/ 'newBackendRule_OverridesByRequestProtocol' smart constructor.
 newtype BackendRule_OverridesByRequestProtocol = BackendRule_OverridesByRequestProtocol
-  { -- |
-    additional :: (Core.HashMap Core.Text BackendRule)
+  { additional :: (Core.HashMap Core.Text BackendRule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -962,10 +1049,7 @@ newBackendRule_OverridesByRequestProtocol ::
 newBackendRule_OverridesByRequestProtocol additional =
   BackendRule_OverridesByRequestProtocol {additional = additional}
 
-instance
-  Core.FromJSON
-    BackendRule_OverridesByRequestProtocol
-  where
+instance Core.FromJSON BackendRule_OverridesByRequestProtocol where
   parseJSON =
     Core.withObject
       "BackendRule_OverridesByRequestProtocol"
@@ -974,10 +1058,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BackendRule_OverridesByRequestProtocol
-  where
+instance Core.ToJSON BackendRule_OverridesByRequestProtocol where
   toJSON BackendRule_OverridesByRequestProtocol {..} =
     Core.toJSON additional
 
@@ -1000,17 +1081,13 @@ instance Core.FromJSON Billing where
   parseJSON =
     Core.withObject
       "Billing"
-      ( \o ->
-          Billing Core.<$> (o Core..:? "consumerDestinations")
-      )
+      (\o -> Billing Core.<$> (o Core..:? "consumerDestinations"))
 
 instance Core.ToJSON Billing where
   toJSON Billing {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations
-          ]
+          [("consumerDestinations" Core..=) Core.<$> consumerDestinations]
       )
 
 -- | Configuration of a specific billing destination (Currently only support bill against consumer project).
@@ -1028,7 +1105,10 @@ data BillingDestination = BillingDestination
 newBillingDestination ::
   BillingDestination
 newBillingDestination =
-  BillingDestination {metrics = Core.Nothing, monitoredResource = Core.Nothing}
+  BillingDestination
+    { metrics = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON BillingDestination where
   parseJSON =
@@ -1045,8 +1125,7 @@ instance Core.ToJSON BillingDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -1057,10 +1136,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1114,16 +1195,12 @@ instance Core.FromJSON ChangeReport where
   parseJSON =
     Core.withObject
       "ChangeReport"
-      ( \o ->
-          ChangeReport Core.<$> (o Core..:? "configChanges")
-      )
+      (\o -> ChangeReport Core.<$> (o Core..:? "configChanges"))
 
 instance Core.ToJSON ChangeReport where
   toJSON ChangeReport {..} =
     Core.object
-      ( Core.catMaybes
-          [("configChanges" Core..=) Core.<$> configChanges]
-      )
+      (Core.catMaybes [("configChanges" Core..=) Core.<$> configChanges])
 
 -- | Details about how and where to publish client libraries.
 --
@@ -1203,8 +1280,7 @@ instance Core.ToJSON ClientLibrarySettings where
             ("nodeSettings" Core..=) Core.<$> nodeSettings,
             ("phpSettings" Core..=) Core.<$> phpSettings,
             ("pythonSettings" Core..=) Core.<$> pythonSettings,
-            ("restNumericEnums" Core..=)
-              Core.<$> restNumericEnums,
+            ("restNumericEnums" Core..=) Core.<$> restNumericEnums,
             ("rubySettings" Core..=) Core.<$> rubySettings,
             ("version" Core..=) Core.<$> version
           ]
@@ -1217,7 +1293,9 @@ data CommonLanguageSettings = CommonLanguageSettings
   { -- | The destination where API teams want this client library to be published.
     destinations :: (Core.Maybe [CommonLanguageSettings_DestinationsItem]),
     -- | Link to automatically generated reference documentation. Example: https:\/\/cloud.google.com\/nodejs\/docs\/reference\/asset\/latest
-    referenceDocsUri :: (Core.Maybe Core.Text)
+    referenceDocsUri :: (Core.Maybe Core.Text),
+    -- | Configuration for which RPCs should be generated in the GAPIC client.
+    selectiveGapicGeneration :: (Core.Maybe SelectiveGapicGeneration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1227,7 +1305,8 @@ newCommonLanguageSettings ::
 newCommonLanguageSettings =
   CommonLanguageSettings
     { destinations = Core.Nothing,
-      referenceDocsUri = Core.Nothing
+      referenceDocsUri = Core.Nothing,
+      selectiveGapicGeneration = Core.Nothing
     }
 
 instance Core.FromJSON CommonLanguageSettings where
@@ -1238,6 +1317,7 @@ instance Core.FromJSON CommonLanguageSettings where
           CommonLanguageSettings
             Core.<$> (o Core..:? "destinations")
             Core.<*> (o Core..:? "referenceDocsUri")
+            Core.<*> (o Core..:? "selectiveGapicGeneration")
       )
 
 instance Core.ToJSON CommonLanguageSettings where
@@ -1245,8 +1325,9 @@ instance Core.ToJSON CommonLanguageSettings where
     Core.object
       ( Core.catMaybes
           [ ("destinations" Core..=) Core.<$> destinations,
-            ("referenceDocsUri" Core..=)
-              Core.<$> referenceDocsUri
+            ("referenceDocsUri" Core..=) Core.<$> referenceDocsUri,
+            ("selectiveGapicGeneration" Core..=)
+              Core.<$> selectiveGapicGeneration
           ]
       )
 
@@ -1370,8 +1451,7 @@ instance Core.FromJSON ConfigRef where
 
 instance Core.ToJSON ConfigRef where
   toJSON ConfigRef {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Represents a source file which is used to generate the service configuration defined by @google.api.Service@.
 --
@@ -1387,7 +1467,8 @@ data ConfigSource = ConfigSource
 -- | Creates a value of 'ConfigSource' with the minimum fields required to make a request.
 newConfigSource ::
   ConfigSource
-newConfigSource = ConfigSource {files = Core.Nothing, id = Core.Nothing}
+newConfigSource =
+  ConfigSource {files = Core.Nothing, id = Core.Nothing}
 
 instance Core.FromJSON ConfigSource where
   parseJSON =
@@ -1395,16 +1476,15 @@ instance Core.FromJSON ConfigSource where
       "ConfigSource"
       ( \o ->
           ConfigSource
-            Core.<$> (o Core..:? "files") Core.<*> (o Core..:? "id")
+            Core.<$> (o Core..:? "files")
+            Core.<*> (o Core..:? "id")
       )
 
 instance Core.ToJSON ConfigSource where
   toJSON ConfigSource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("files" Core..=) Core.<$> files,
-            ("id" Core..=) Core.<$> id
-          ]
+          [("files" Core..=) Core.<$> files, ("id" Core..=) Core.<$> id]
       )
 
 -- | @Context@ defines which contexts an API requests. Example: context: rules: - selector: \"*\" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request @google.rpc.context.ProjectContext@ and @google.rpc.context.OriginContext@. Available context types are defined in package @google.rpc.context@. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allowed/request/extensions: - google.foo.v1.NewExtension allowed/response/extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.
@@ -1429,8 +1509,7 @@ instance Core.FromJSON Context where
 
 instance Core.ToJSON Context where
   toJSON Context {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A context rule provides information about the context for an individual API element.
 --
@@ -1440,9 +1519,9 @@ data ContextRule = ContextRule
     allowedRequestExtensions :: (Core.Maybe [Core.Text]),
     -- | A list of full type names or extension IDs of extensions allowed in grpc side channel from backend to client.
     allowedResponseExtensions :: (Core.Maybe [Core.Text]),
-    -- | A list of full type names of provided contexts.
+    -- | A list of full type names of provided contexts. It is used to support propagating HTTP headers and ETags from the response extension.
     provided :: (Core.Maybe [Core.Text]),
-    -- | A list of full type names of requested contexts.
+    -- | A list of full type names of requested contexts, only the requested context will be made available to the backend.
     requested :: (Core.Maybe [Core.Text]),
     -- | Selects the methods to which this rule applies. Refer to selector for syntax details.
     selector :: (Core.Maybe Core.Text)
@@ -1491,28 +1570,40 @@ instance Core.ToJSON ContextRule where
 -- | Selects and configures the service controller used by the service. Example: control: environment: servicecontrol.googleapis.com
 --
 -- /See:/ 'newControl' smart constructor.
-newtype Control = Control
+data Control = Control
   { -- | The service controller environment to use. If empty, no control plane feature (like quota and billing) will be enabled. The recommended value for most services is servicecontrol.googleapis.com
-    environment :: (Core.Maybe Core.Text)
+    environment :: (Core.Maybe Core.Text),
+    -- | Defines policies applying to the API methods of the service.
+    methodPolicies :: (Core.Maybe [MethodPolicy])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Control' with the minimum fields required to make a request.
 newControl ::
   Control
-newControl = Control {environment = Core.Nothing}
+newControl =
+  Control
+    { environment = Core.Nothing,
+      methodPolicies = Core.Nothing
+    }
 
 instance Core.FromJSON Control where
   parseJSON =
     Core.withObject
       "Control"
-      (\o -> Control Core.<$> (o Core..:? "environment"))
+      ( \o ->
+          Control
+            Core.<$> (o Core..:? "environment")
+            Core.<*> (o Core..:? "methodPolicies")
+      )
 
 instance Core.ToJSON Control where
   toJSON Control {..} =
     Core.object
       ( Core.catMaybes
-          [("environment" Core..=) Core.<$> environment]
+          [ ("environment" Core..=) Core.<$> environment,
+            ("methodPolicies" Core..=) Core.<$> methodPolicies
+          ]
       )
 
 -- | Settings for C++ client libraries.
@@ -1537,8 +1628,7 @@ instance Core.FromJSON CppSettings where
 
 instance Core.ToJSON CppSettings where
   toJSON CppSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | Customize service error responses. For example, list any service specific protobuf types that can appear in error detail lists of error responses. Example: custom_error: types: - google.foo.v1.CustomError - google.foo.v1.AnotherError
 --
@@ -1554,7 +1644,8 @@ data CustomError = CustomError
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 newCustomError ::
   CustomError
-newCustomError = CustomError {rules = Core.Nothing, types = Core.Nothing}
+newCustomError =
+  CustomError {rules = Core.Nothing, types = Core.Nothing}
 
 instance Core.FromJSON CustomError where
   parseJSON =
@@ -1562,7 +1653,8 @@ instance Core.FromJSON CustomError where
       "CustomError"
       ( \o ->
           CustomError
-            Core.<$> (o Core..:? "rules") Core.<*> (o Core..:? "types")
+            Core.<$> (o Core..:? "rules")
+            Core.<*> (o Core..:? "types")
       )
 
 instance Core.ToJSON CustomError where
@@ -1589,7 +1681,10 @@ data CustomErrorRule = CustomErrorRule
 newCustomErrorRule ::
   CustomErrorRule
 newCustomErrorRule =
-  CustomErrorRule {isErrorType = Core.Nothing, selector = Core.Nothing}
+  CustomErrorRule
+    { isErrorType = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON CustomErrorRule where
   parseJSON =
@@ -1633,16 +1728,15 @@ instance Core.FromJSON CustomHttpPattern where
       "CustomHttpPattern"
       ( \o ->
           CustomHttpPattern
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "path")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "path")
       )
 
 instance Core.ToJSON CustomHttpPattern where
   toJSON CustomHttpPattern {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("path" Core..=) Core.<$> path
-          ]
+          [("kind" Core..=) Core.<$> kind, ("path" Core..=) Core.<$> path]
       )
 
 -- | Strategy used to delete a service. This strategy is a placeholder only used by the system generated rollout to delete a service.
@@ -1709,12 +1803,14 @@ instance Core.ToJSON Diagnostic where
           ]
       )
 
--- | @Documentation@ provides the information for describing a service. Example: documentation: summary: > The Google Calendar API gives access to most calendar features. pages: - name: Overview content: (== include google\/foo\/overview.md ==) - name: Tutorial content: (== include google\/foo\/tutorial.md ==) subpages; - name: Java content: (== include google\/foo\/tutorial/java.md ==) rules: - selector: google.calendar.Calendar.Get description: > ... - selector: google.calendar.Calendar.Put description: > ... Documentation is provided in markdown syntax. In addition to standard markdown features, definition lists, tables and fenced code blocks are supported. Section headers can be provided and are interpreted relative to the section nesting of the context where a documentation fragment is embedded. Documentation from the IDL is merged with documentation defined via the config at normalization time, where documentation provided by config rules overrides IDL provided. A number of constructs specific to the API
+-- | @Documentation@ provides the information for describing a service. Example: documentation: summary: > The Google Calendar API gives access to most calendar features. pages: - name: Overview content: (== include google\/foo\/overview.md ==) - name: Tutorial content: (== include google\/foo\/tutorial.md ==) subpages: - name: Java content: (== include google\/foo\/tutorial/java.md ==) rules: - selector: google.calendar.Calendar.Get description: > ... - selector: google.calendar.Calendar.Put description: > ... Documentation is provided in markdown syntax. In addition to standard markdown features, definition lists, tables and fenced code blocks are supported. Section headers can be provided and are interpreted relative to the section nesting of the context where a documentation fragment is embedded. Documentation from the IDL is merged with documentation defined via the config at normalization time, where documentation provided by config rules overrides IDL provided. A number of constructs specific to the API
 -- platform are supported in documentation text. In order to reference a proto element, the following notation can be used: [fully.qualified.proto.name][] To override the display text used for the link, this can be used: [display text][fully.qualified.proto.name] Text can be excluded from doc using the following notation: (-- internal comment --) A few directives are available in documentation. Note that directives must appear on a single line to be properly identified. The @include@ directive includes a markdown file from an external source: (== include path\/to\/file ==) The @resource_for@ directive marks a message to be the resource of a collection in REST view. If it is not specified, tools attempt to infer the resource from the operations in a collection: (== resource/for v1.shelves.books ==) The directive @suppress_warning@ does not directly affect documentation and is documented together with service config validation.
 --
 -- /See:/ 'newDocumentation' smart constructor.
 data Documentation = Documentation
-  { -- | The URL to the root of documentation.
+  { -- | Optional information about the IAM configuration. This is typically used to link to documentation about a product\'s IAM roles and permissions.
+    additionalIamInfo :: (Core.Maybe Core.Text),
+    -- | The URL to the root of documentation.
     documentationRootUrl :: (Core.Maybe Core.Text),
     -- | Declares a single overview page. For example: documentation: summary: ... overview: (== include overview.md ==) This is a shortcut for the following declaration (using pages style): documentation: summary: ... pages: - name: Overview content: (== include overview.md ==) Note: you cannot specify both @overview@ field and @pages@ field.
     overview :: (Core.Maybe Core.Text),
@@ -1722,6 +1818,8 @@ data Documentation = Documentation
     pages :: (Core.Maybe [Page]),
     -- | A list of documentation rules that apply to individual API elements. __NOTE:__ All service configuration rules follow \"last one wins\" order.
     rules :: (Core.Maybe [DocumentationRule]),
+    -- | Specifies section and content to override the boilerplate content. Currently overrides following sections: 1. rest.service.client_libraries
+    sectionOverrides :: (Core.Maybe [Page]),
     -- | Specifies the service root url if the default one (the service name from the yaml file) is not suitable. This can be seen in any fully specified service urls as well as sections that show a base that other urls are relative to.
     serviceRootUrl :: (Core.Maybe Core.Text),
     -- | A short description of what the service does. The summary must be plain text. It becomes the overview of the service displayed in Google Cloud Console. NOTE: This field is equivalent to the standard field @description@.
@@ -1734,10 +1832,12 @@ newDocumentation ::
   Documentation
 newDocumentation =
   Documentation
-    { documentationRootUrl = Core.Nothing,
+    { additionalIamInfo = Core.Nothing,
+      documentationRootUrl = Core.Nothing,
       overview = Core.Nothing,
       pages = Core.Nothing,
       rules = Core.Nothing,
+      sectionOverrides = Core.Nothing,
       serviceRootUrl = Core.Nothing,
       summary = Core.Nothing
     }
@@ -1748,10 +1848,12 @@ instance Core.FromJSON Documentation where
       "Documentation"
       ( \o ->
           Documentation
-            Core.<$> (o Core..:? "documentationRootUrl")
+            Core.<$> (o Core..:? "additionalIamInfo")
+            Core.<*> (o Core..:? "documentationRootUrl")
             Core.<*> (o Core..:? "overview")
             Core.<*> (o Core..:? "pages")
             Core.<*> (o Core..:? "rules")
+            Core.<*> (o Core..:? "sectionOverrides")
             Core.<*> (o Core..:? "serviceRootUrl")
             Core.<*> (o Core..:? "summary")
       )
@@ -1760,11 +1862,12 @@ instance Core.ToJSON Documentation where
   toJSON Documentation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentationRootUrl" Core..=)
-              Core.<$> documentationRootUrl,
+          [ ("additionalIamInfo" Core..=) Core.<$> additionalIamInfo,
+            ("documentationRootUrl" Core..=) Core.<$> documentationRootUrl,
             ("overview" Core..=) Core.<$> overview,
             ("pages" Core..=) Core.<$> pages,
             ("rules" Core..=) Core.<$> rules,
+            ("sectionOverrides" Core..=) Core.<$> sectionOverrides,
             ("serviceRootUrl" Core..=) Core.<$> serviceRootUrl,
             ("summary" Core..=) Core.<$> summary
           ]
@@ -1778,6 +1881,8 @@ data DocumentationRule = DocumentationRule
     deprecationDescription :: (Core.Maybe Core.Text),
     -- | Description of the selected proto element (e.g. a message, a method, a \'service\' definition, or a field). Defaults to leading & trailing comments taken from the proto source definition of the proto element.
     description :: (Core.Maybe Core.Text),
+    -- | String of comma or space separated case-sensitive words for which method\/field name replacement will be disabled.
+    disableReplacementWords :: (Core.Maybe Core.Text),
     -- | The selector is a comma-separated list of patterns for any element such as a method, a field, an enum value. Each pattern is a qualified name of the element which may end in \"/\", indicating a wildcard. Wildcards are only allowed at the end and for a whole component of the qualified name, i.e. \"foo./\" is ok, but not \"foo.b/\" or \"foo./.bar\". A wildcard will match one or more components. To specify a default for all applicable elements, the whole pattern \"*\" is used.
     selector :: (Core.Maybe Core.Text)
   }
@@ -1790,6 +1895,7 @@ newDocumentationRule =
   DocumentationRule
     { deprecationDescription = Core.Nothing,
       description = Core.Nothing,
+      disableReplacementWords = Core.Nothing,
       selector = Core.Nothing
     }
 
@@ -1801,6 +1907,7 @@ instance Core.FromJSON DocumentationRule where
           DocumentationRule
             Core.<$> (o Core..:? "deprecationDescription")
             Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "disableReplacementWords")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -1811,6 +1918,8 @@ instance Core.ToJSON DocumentationRule where
           [ ("deprecationDescription" Core..=)
               Core.<$> deprecationDescription,
             ("description" Core..=) Core.<$> description,
+            ("disableReplacementWords" Core..=)
+              Core.<$> disableReplacementWords,
             ("selector" Core..=) Core.<$> selector
           ]
       )
@@ -1866,16 +1975,11 @@ instance Core.ToJSON DotnetSettings where
     Core.object
       ( Core.catMaybes
           [ ("common" Core..=) Core.<$> common,
-            ("forcedNamespaceAliases" Core..=)
-              Core.<$> forcedNamespaceAliases,
-            ("handwrittenSignatures" Core..=)
-              Core.<$> handwrittenSignatures,
-            ("ignoredResources" Core..=)
-              Core.<$> ignoredResources,
-            ("renamedResources" Core..=)
-              Core.<$> renamedResources,
-            ("renamedServices" Core..=)
-              Core.<$> renamedServices
+            ("forcedNamespaceAliases" Core..=) Core.<$> forcedNamespaceAliases,
+            ("handwrittenSignatures" Core..=) Core.<$> handwrittenSignatures,
+            ("ignoredResources" Core..=) Core.<$> ignoredResources,
+            ("renamedResources" Core..=) Core.<$> renamedResources,
+            ("renamedServices" Core..=) Core.<$> renamedServices
           ]
       )
 
@@ -1883,8 +1987,7 @@ instance Core.ToJSON DotnetSettings where
 --
 -- /See:/ 'newDotnetSettings_RenamedResources' smart constructor.
 newtype DotnetSettings_RenamedResources = DotnetSettings_RenamedResources
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1896,28 +1999,22 @@ newDotnetSettings_RenamedResources ::
 newDotnetSettings_RenamedResources additional =
   DotnetSettings_RenamedResources {additional = additional}
 
-instance
-  Core.FromJSON
-    DotnetSettings_RenamedResources
-  where
+instance Core.FromJSON DotnetSettings_RenamedResources where
   parseJSON =
     Core.withObject
       "DotnetSettings_RenamedResources"
       ( \o ->
-          DotnetSettings_RenamedResources
-            Core.<$> (Core.parseJSONObject o)
+          DotnetSettings_RenamedResources Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DotnetSettings_RenamedResources where
-  toJSON DotnetSettings_RenamedResources {..} =
-    Core.toJSON additional
+  toJSON DotnetSettings_RenamedResources {..} = Core.toJSON additional
 
 -- | Map from original service names to renamed versions. This is used when the default generated types would cause a naming conflict. (Neither name is fully-qualified.) Example: Subscriber to SubscriberServiceApi.
 --
 -- /See:/ 'newDotnetSettings_RenamedServices' smart constructor.
 newtype DotnetSettings_RenamedServices = DotnetSettings_RenamedServices
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1934,13 +2031,11 @@ instance Core.FromJSON DotnetSettings_RenamedServices where
     Core.withObject
       "DotnetSettings_RenamedServices"
       ( \o ->
-          DotnetSettings_RenamedServices
-            Core.<$> (Core.parseJSONObject o)
+          DotnetSettings_RenamedServices Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DotnetSettings_RenamedServices where
-  toJSON DotnetSettings_RenamedServices {..} =
-    Core.toJSON additional
+  toJSON DotnetSettings_RenamedServices {..} = Core.toJSON additional
 
 -- | Operation payload for EnableService method.
 --
@@ -1966,7 +2061,7 @@ instance Core.ToJSON EnableServiceResponse where
 --
 -- /See:/ 'newEndpoint' smart constructor.
 data Endpoint = Endpoint
-  { -- | Unimplemented. Dot not use. DEPRECATED: This field is no longer supported. Instead of using aliases, please specify multiple google.api.Endpoint for each of the intended aliases. Additional names that this endpoint will be hosted on.
+  { -- | Aliases for this endpoint, these will be served by the same UrlMap as the parent endpoint, and will be provisioned in the GCP stack for the Regional Endpoints.
     aliases :: (Core.Maybe [Core.Text]),
     -- | Allowing <https://en.wikipedia.org/wiki/Cross-origin_resource_sharing CORS>, aka cross-domain traffic, would allow the backends served from this endpoint to receive and respond to HTTP OPTIONS requests. The response will be used by the browser to determine whether the subsequent cross-origin request is allowed to proceed.
     allowCors :: (Core.Maybe Core.Bool),
@@ -2087,7 +2182,11 @@ data EnumValue = EnumValue
 newEnumValue ::
   EnumValue
 newEnumValue =
-  EnumValue {name = Core.Nothing, number = Core.Nothing, options = Core.Nothing}
+  EnumValue
+    { name = Core.Nothing,
+      number = Core.Nothing,
+      options = Core.Nothing
+    }
 
 instance Core.FromJSON EnumValue where
   parseJSON =
@@ -2107,6 +2206,52 @@ instance Core.ToJSON EnumValue where
           [ ("name" Core..=) Core.<$> name,
             ("number" Core..=) Core.<$> number,
             ("options" Core..=) Core.<$> options
+          ]
+      )
+
+-- | Experimental features to be included during client library generation. These fields will be deprecated once the feature graduates and is enabled by default.
+--
+-- /See:/ 'newExperimentalFeatures' smart constructor.
+data ExperimentalFeatures = ExperimentalFeatures
+  { -- | Enables generation of protobuf code using new types that are more Pythonic which are included in @protobuf>=5.29.x@. This feature will be enabled by default 1 month after launching the feature in preview packages.
+    protobufPythonicTypesEnabled :: (Core.Maybe Core.Bool),
+    -- | Enables generation of asynchronous REST clients if @rest@ transport is enabled. By default, asynchronous REST clients will not be generated. This feature will be enabled by default 1 month after launching the feature in preview packages.
+    restAsyncIoEnabled :: (Core.Maybe Core.Bool),
+    -- | Disables generation of an unversioned Python package for this client library. This means that the module names will need to be versioned in import statements. For example @import google.cloud.library_v2@ instead of @import google.cloud.library@.
+    unversionedPackageDisabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExperimentalFeatures' with the minimum fields required to make a request.
+newExperimentalFeatures ::
+  ExperimentalFeatures
+newExperimentalFeatures =
+  ExperimentalFeatures
+    { protobufPythonicTypesEnabled = Core.Nothing,
+      restAsyncIoEnabled = Core.Nothing,
+      unversionedPackageDisabled = Core.Nothing
+    }
+
+instance Core.FromJSON ExperimentalFeatures where
+  parseJSON =
+    Core.withObject
+      "ExperimentalFeatures"
+      ( \o ->
+          ExperimentalFeatures
+            Core.<$> (o Core..:? "protobufPythonicTypesEnabled")
+            Core.<*> (o Core..:? "restAsyncIoEnabled")
+            Core.<*> (o Core..:? "unversionedPackageDisabled")
+      )
+
+instance Core.ToJSON ExperimentalFeatures where
+  toJSON ExperimentalFeatures {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("protobufPythonicTypesEnabled" Core..=)
+              Core.<$> protobufPythonicTypesEnabled,
+            ("restAsyncIoEnabled" Core..=) Core.<$> restAsyncIoEnabled,
+            ("unversionedPackageDisabled" Core..=)
+              Core.<$> unversionedPackageDisabled
           ]
       )
 
@@ -2239,6 +2384,50 @@ instance Core.ToJSON Field where
           ]
       )
 
+-- | Google API Policy Annotation This message defines a simple API policy annotation that can be used to annotate API request and response message fields with applicable policies. One field may have multiple applicable policies that must all be satisfied before a request can be processed. This policy annotation is used to generate the overall policy that will be used for automatic runtime policy enforcement and documentation generation.
+--
+-- /See:/ 'newFieldPolicy' smart constructor.
+data FieldPolicy = FieldPolicy
+  { -- | Specifies the required permission(s) for the resource referred to by the field. It requires the field contains a valid resource reference, and the request must pass the permission checks to proceed. For example, \"resourcemanager.projects.get\".
+    resourcePermission :: (Core.Maybe Core.Text),
+    -- | Specifies the resource type for the resource referred to by the field.
+    resourceType :: (Core.Maybe Core.Text),
+    -- | Selects one or more request or response message fields to apply this @FieldPolicy@. When a @FieldPolicy@ is used in proto annotation, the selector must be left as empty. The service config generator will automatically fill the correct value. When a @FieldPolicy@ is used in service config, the selector must be a comma-separated string with valid request or response field paths, such as \"foo.bar\" or \"foo.bar,foo.baz\".
+    selector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FieldPolicy' with the minimum fields required to make a request.
+newFieldPolicy ::
+  FieldPolicy
+newFieldPolicy =
+  FieldPolicy
+    { resourcePermission = Core.Nothing,
+      resourceType = Core.Nothing,
+      selector = Core.Nothing
+    }
+
+instance Core.FromJSON FieldPolicy where
+  parseJSON =
+    Core.withObject
+      "FieldPolicy"
+      ( \o ->
+          FieldPolicy
+            Core.<$> (o Core..:? "resourcePermission")
+            Core.<*> (o Core..:? "resourceType")
+            Core.<*> (o Core..:? "selector")
+      )
+
+instance Core.ToJSON FieldPolicy where
+  toJSON FieldPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("resourcePermission" Core..=) Core.<$> resourcePermission,
+            ("resourceType" Core..=) Core.<$> resourceType,
+            ("selector" Core..=) Core.<$> selector
+          ]
+      )
+
 -- | Encapsulation of flow-specific error details for debugging. Used as a details field on an error Status, not intended for external use.
 --
 -- /See:/ 'newFlowErrorDetails' smart constructor.
@@ -2254,7 +2443,10 @@ data FlowErrorDetails = FlowErrorDetails
 newFlowErrorDetails ::
   FlowErrorDetails
 newFlowErrorDetails =
-  FlowErrorDetails {exceptionType = Core.Nothing, flowStepId = Core.Nothing}
+  FlowErrorDetails
+    { exceptionType = Core.Nothing,
+      flowStepId = Core.Nothing
+    }
 
 instance Core.FromJSON FlowErrorDetails where
   parseJSON =
@@ -2331,10 +2523,7 @@ newGenerateConfigReportRequest_NewConfig ::
 newGenerateConfigReportRequest_NewConfig additional =
   GenerateConfigReportRequest_NewConfig {additional = additional}
 
-instance
-  Core.FromJSON
-    GenerateConfigReportRequest_NewConfig
-  where
+instance Core.FromJSON GenerateConfigReportRequest_NewConfig where
   parseJSON =
     Core.withObject
       "GenerateConfigReportRequest_NewConfig"
@@ -2343,10 +2532,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GenerateConfigReportRequest_NewConfig
-  where
+instance Core.ToJSON GenerateConfigReportRequest_NewConfig where
   toJSON GenerateConfigReportRequest_NewConfig {..} =
     Core.toJSON additional
 
@@ -2367,10 +2553,7 @@ newGenerateConfigReportRequest_OldConfig ::
 newGenerateConfigReportRequest_OldConfig additional =
   GenerateConfigReportRequest_OldConfig {additional = additional}
 
-instance
-  Core.FromJSON
-    GenerateConfigReportRequest_OldConfig
-  where
+instance Core.FromJSON GenerateConfigReportRequest_OldConfig where
   parseJSON =
     Core.withObject
       "GenerateConfigReportRequest_OldConfig"
@@ -2379,10 +2562,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GenerateConfigReportRequest_OldConfig
-  where
+instance Core.ToJSON GenerateConfigReportRequest_OldConfig where
   toJSON GenerateConfigReportRequest_OldConfig {..} =
     Core.toJSON additional
 
@@ -2447,22 +2627,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -2476,15 +2653,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -2499,27 +2676,65 @@ instance Core.ToJSON GetPolicyOptions where
 -- | Settings for Go client libraries.
 --
 -- /See:/ 'newGoSettings' smart constructor.
-newtype GoSettings = GoSettings
+data GoSettings = GoSettings
   { -- | Some settings.
-    common :: (Core.Maybe CommonLanguageSettings)
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | Map of service names to renamed services. Keys are the package relative service names and values are the name to be used for the service client and call options. publishing: go/settings: renamed/services: Publisher: TopicAdmin
+    renamedServices :: (Core.Maybe GoSettings_RenamedServices)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'GoSettings' with the minimum fields required to make a request.
 newGoSettings ::
   GoSettings
-newGoSettings = GoSettings {common = Core.Nothing}
+newGoSettings =
+  GoSettings {common = Core.Nothing, renamedServices = Core.Nothing}
 
 instance Core.FromJSON GoSettings where
   parseJSON =
     Core.withObject
       "GoSettings"
-      (\o -> GoSettings Core.<$> (o Core..:? "common"))
+      ( \o ->
+          GoSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "renamedServices")
+      )
 
 instance Core.ToJSON GoSettings where
   toJSON GoSettings {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("renamedServices" Core..=) Core.<$> renamedServices
+          ]
+      )
+
+-- | Map of service names to renamed services. Keys are the package relative service names and values are the name to be used for the service client and call options. publishing: go/settings: renamed/services: Publisher: TopicAdmin
+--
+-- /See:/ 'newGoSettings_RenamedServices' smart constructor.
+newtype GoSettings_RenamedServices = GoSettings_RenamedServices
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoSettings_RenamedServices' with the minimum fields required to make a request.
+newGoSettings_RenamedServices ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  GoSettings_RenamedServices
+newGoSettings_RenamedServices additional =
+  GoSettings_RenamedServices {additional = additional}
+
+instance Core.FromJSON GoSettings_RenamedServices where
+  parseJSON =
+    Core.withObject
+      "GoSettings_RenamedServices"
+      ( \o ->
+          GoSettings_RenamedServices Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON GoSettings_RenamedServices where
+  toJSON GoSettings_RenamedServices {..} = Core.toJSON additional
 
 -- | Defines the HTTP configuration for an API service. It contains a list of HttpRule, each specifying the mapping of an RPC method to one or more HTTP REST API methods.
 --
@@ -2536,7 +2751,10 @@ data Http = Http
 newHttp ::
   Http
 newHttp =
-  Http {fullyDecodeReservedExpansion = Core.Nothing, rules = Core.Nothing}
+  Http
+    { fullyDecodeReservedExpansion = Core.Nothing,
+      rules = Core.Nothing
+    }
 
 instance Core.FromJSON Http where
   parseJSON =
@@ -2558,7 +2776,16 @@ instance Core.ToJSON Http where
           ]
       )
 
--- | = gRPC Transcoding gRPC Transcoding is a feature for mapping between a gRPC method and one or more HTTP REST endpoints. It allows developers to build a single API service that supports both gRPC APIs and REST APIs. Many systems, including <https://github.com/googleapis/googleapis Google APIs>, <https://cloud.google.com/endpoints Cloud Endpoints>, <https://github.com/grpc-ecosystem/grpc-gateway gRPC Gateway>, and <https://github.com/envoyproxy/envoy Envoy> proxy support this feature and use it for large scale production services. @HttpRule@ defines the schema of the gRPC\/REST mapping. The mapping specifies how different portions of the gRPC request message are mapped to the URL path, URL query parameters, and HTTP request body. It also controls how the gRPC response message is mapped to the HTTP response body. @HttpRule@ is typically specified as an @google.api.http@ annotation on the gRPC method. Each mapping specifies a URL path template and an HTTP method. The path template may refer to one or more fields in the gRPC request message, as long as each field is a non-repeated field with a primitive (non-message) type. The path template controls how fields of the request message are mapped to the URL path. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message Message { string text = 1; \/\/ The resource content. } This enables an HTTP REST to gRPC mapping as below: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456@ | @GetMessage(name: \"messages\/123456\")@ Any fields in the request message which are not bound by the path template automatically become HTTP query parameters if there is no HTTP request body. For example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get:\"\/v1\/messages\/{message/id}\" }; } } message GetMessageRequest { message SubMessage { string subfield = 1; } string message/id = 1; \/\/ Mapped to URL path. int64 revision = 2; \/\/ Mapped to URL query parameter @revision@. SubMessage sub = 3; \/\/ Mapped to URL query parameter @sub.subfield@. } This enables a HTTP JSON to RPC mapping as below: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456?revision=2&sub.subfield=foo@ | @GetMessage(message_id: \"123456\" revision: 2 sub: SubMessage(subfield: \"foo\"))@ Note that fields which are mapped to URL query parameters must have a primitive type or a repeated primitive type or a non-repeated message type. In the case of a repeated type, the parameter can be repeated in the URL as @...?param=A&param=B@. In the case of a message type, each field of the message is mapped to a separate parameter, such as @...?foo.a=A&foo.b=B&foo.c=C@. For HTTP methods that allow a request body, the @body@ field specifies the mapping. Consider a REST update method on the message resource collection: service Messaging { rpc UpdateMessage(UpdateMessageRequest) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message/id}\" body: \"message\" }; } } message UpdateMessageRequest { string message/id = 1; \/\/ mapped to the URL Message message = 2; \/\/ mapped to the body } The following HTTP JSON to RPC mapping is enabled, where the representation of the JSON in the request body is determined by protos JSON encoding: HTTP | gRPC -----|----- @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ | @UpdateMessage(message_id: \"123456\" message { text: \"Hi!\" })@ The special name @*@ can be used in the body mapping to define that every field not bound by the path template should be mapped to the request body. This enables the following alternative definition of the update method: service Messaging { rpc UpdateMessage(Message) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message_id}\" body: \"*\" }; } } message Message { string message/id = 1; string text = 2; } The following HTTP JSON to RPC mapping is enabled: HTTP | gRPC -----|----- @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ | @UpdateMessage(message_id: \"123456\" text: \"Hi!\")@ Note that when using @*@ in the body mapping, it is not possible to have HTTP parameters, as all fields not bound by the path end in the body. This makes this option more rarely used in practice when defining REST APIs. The common usage of @*@ is in custom methods which don\'t use the URL at all for transferring data. It is possible to define multiple HTTP methods for one RPC by using the @additional_bindings@ option. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/messages\/{message/id}\" additional/bindings { get: \"\/v1\/users\/{user/id}\/messages\/{message/id}\" } }; } } message GetMessageRequest { string message/id = 1; string user_id = 2; } This enables the following two alternative HTTP JSON to RPC mappings: HTTP | gRPC -----|----- @GET \/v1\/messages\/123456@ | @GetMessage(message_id: \"123456\")@ @GET \/v1\/users\/me\/messages\/123456@ | @GetMessage(user_id: \"me\" message_id: \"123456\")@ ## Rules for HTTP mapping 1. Leaf request fields (recursive expansion nested messages in the request message) are classified into three categories: - Fields referred by the path template. They are passed via the URL path. - Fields referred by the HttpRule.body. They are passed via the HTTP request body. - All other fields are passed via the URL query parameters, and the parameter name is the field path in the request message. A repeated field can be represented as multiple query parameters under the same name. 2. If HttpRule.body is \"/\", there is no URL query parameter, all fields are passed via URL path and HTTP request body. 3. If HttpRule.body is omitted, there is no HTTP request body, all fields are passed via URL path and URL query parameters. ### Path template syntax Template = \"\/\" Segments [ Verb ] ; Segments = Segment { \"\/\" Segment } ; Segment = \"/\" | \"**\" | LITERAL | Variable ; Variable = \"{\" FieldPath [ \"=\" Segments ] \"}\" ; FieldPath = IDENT { \".\" IDENT } ; Verb = \":\" LITERAL ; The syntax @*@ matches a single URL path segment. The syntax @**@ matches zero or more URL path segments, which must be the last part of the URL path except the @Verb@. The syntax @Variable@ matches part of the URL path as specified by its template. A variable template must not contain other variables. If a variable matches a single path segment, its template may be omitted, e.g. @{var}@ is equivalent to @{var=*}@. The syntax @LITERAL@ matches literal text in the URL path. If the @LITERAL@ contains any reserved character, such characters should be percent-encoded before the matching. If a variable contains exactly one path segment, such as @\"{var}\"@ or @\"{var=*}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{var}@. If a variable contains multiple path segments, such as @\"{var=foo\/*}\"@ or @\"{var=**}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~\/0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding, except \"%2F\" and \"%2f\" are left unchanged. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{+var}@. ## Using gRPC API Service Configuration gRPC API Service Configuration (service config) is a configuration language for configuring a gRPC service to become a user-facing product. The service config is simply the YAML representation of the @google.api.Service@ proto message. As an alternative to annotating your proto file, you can configure gRPC transcoding in your service config YAML files. You do this by specifying a @HttpRule@ that maps the gRPC method to a REST endpoint, achieving the same effect as the proto annotation. This can be particularly useful if you have a proto that is reused in multiple services. Note that any transcoding specified in the service config will override any matching transcoding configuration in the proto. Example: http: rules: # Selects a gRPC method and applies HttpRule to it. - selector: example.v1.Messaging.GetMessage get: \/v1\/messages\/{message_id}\/{sub.subfield} ## Special notes When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the proto to JSON conversion must follow the <https://developers.google.com/protocol-buffers/docs/proto3#json proto3 specification>. While the single segment variable follows the semantics of <https://tools.ietf.org/html/rfc6570 RFC 6570> Section 3.2.2 Simple String Expansion, the multi segment variable __does not__ follow RFC 6570 Section 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion does not expand special characters like @?@ and @#@, which would lead to invalid URLs. As the result, gRPC Transcoding uses a custom encoding for multi segment variables. The path variables __must not__ refer to any repeated or mapped field, because client libraries are not capable of handling such variable expansion. The path variables __must not__ capture the leading \"\/\" character. The reason is that the most common use case \"{var}\" does not capture the leading \"\/\" character. For consistency, all path variables must share the same behavior. Repeated message fields must not be mapped to URL query parameters, because no client library can support such complicated mapping. If an API needs to use a JSON array for request or response body, it can map the request or response body to a repeated field. However, some gRPC Transcoding implementations may not support this feature.
+-- | gRPC Transcoding gRPC Transcoding is a feature for mapping between a gRPC method and one or more HTTP REST endpoints. It allows developers to build a single API service that supports both gRPC APIs and REST APIs. Many systems, including <https://github.com/googleapis/googleapis Google APIs>, <https://cloud.google.com/endpoints Cloud Endpoints>, <https://github.com/grpc-ecosystem/grpc-gateway gRPC Gateway>, and <https://github.com/envoyproxy/envoy Envoy> proxy support this feature and use it for large scale production services. @HttpRule@ defines the schema of the gRPC\/REST mapping. The mapping specifies how different portions of the gRPC request message are mapped to the URL path, URL query parameters, and HTTP request body. It also controls how the gRPC response message is mapped to the HTTP response body. @HttpRule@ is typically specified as an @google.api.http@ annotation on the gRPC method. Each mapping specifies a URL path template and an HTTP method. The path template may refer to one or more fields in
+-- the gRPC request message, as long as each field is a non-repeated field with a primitive (non-message) type. The path template controls how fields of the request message are mapped to the URL path. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/{name=messages\/*}\" }; } } message GetMessageRequest { string name = 1; \/\/ Mapped to URL path. } message Message { string text = 1; \/\/ The resource content. } This enables an HTTP REST to gRPC mapping as below: - HTTP: @GET \/v1\/messages\/123456@ - gRPC: @GetMessage(name: \"messages\/123456\")@ Any fields in the request message which are not bound by the path template automatically become HTTP query parameters if there is no HTTP request body. For example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get:\"\/v1\/messages\/{message/id}\" }; } } message GetMessageRequest { message SubMessage { string subfield = 1; } string
+-- message/id = 1; \/\/ Mapped to URL path. int64 revision = 2; \/\/ Mapped to URL query parameter @revision@. SubMessage sub = 3; \/\/ Mapped to URL query parameter @sub.subfield@. } This enables a HTTP JSON to RPC mapping as below: - HTTP: @GET \/v1\/messages\/123456?revision=2&sub.subfield=foo@ - gRPC: @GetMessage(message_id: \"123456\" revision: 2 sub: SubMessage(subfield: \"foo\"))@ Note that fields which are mapped to URL query parameters must have a primitive type or a repeated primitive type or a non-repeated message type. In the case of a repeated type, the parameter can be repeated in the URL as @...?param=A&param=B@. In the case of a message type, each field of the message is mapped to a separate parameter, such as @...?foo.a=A&foo.b=B&foo.c=C@. For HTTP methods that allow a request body, the @body@ field specifies the mapping. Consider a REST update method on the message resource collection: service Messaging { rpc UpdateMessage(UpdateMessageRequest) returns (Message) { option (google.api.http) = {
+-- patch: \"\/v1\/messages\/{message/id}\" body: \"message\" }; } } message UpdateMessageRequest { string message/id = 1; \/\/ mapped to the URL Message message = 2; \/\/ mapped to the body } The following HTTP JSON to RPC mapping is enabled, where the representation of the JSON in the request body is determined by protos JSON encoding: - HTTP: @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ - gRPC: @UpdateMessage(message_id: \"123456\" message { text: \"Hi!\" })@ The special name @*@ can be used in the body mapping to define that every field not bound by the path template should be mapped to the request body. This enables the following alternative definition of the update method: service Messaging { rpc UpdateMessage(Message) returns (Message) { option (google.api.http) = { patch: \"\/v1\/messages\/{message_id}\" body: \"*\" }; } } message Message { string message/id = 1; string text = 2; } The following HTTP JSON to RPC mapping is enabled: - HTTP: @PATCH \/v1\/messages\/123456 { \"text\": \"Hi!\" }@ -
+-- gRPC: @UpdateMessage(message_id: \"123456\" text: \"Hi!\")@ Note that when using @*@ in the body mapping, it is not possible to have HTTP parameters, as all fields not bound by the path end in the body. This makes this option more rarely used in practice when defining REST APIs. The common usage of @*@ is in custom methods which don\'t use the URL at all for transferring data. It is possible to define multiple HTTP methods for one RPC by using the @additional_bindings@ option. Example: service Messaging { rpc GetMessage(GetMessageRequest) returns (Message) { option (google.api.http) = { get: \"\/v1\/messages\/{message/id}\" additional/bindings { get: \"\/v1\/users\/{user/id}\/messages\/{message/id}\" } }; } } message GetMessageRequest { string message/id = 1; string user_id = 2; } This enables the following two alternative HTTP JSON to RPC mappings: - HTTP: @GET \/v1\/messages\/123456@ - gRPC: @GetMessage(message_id: \"123456\")@ - HTTP: @GET \/v1\/users\/me\/messages\/123456@ - gRPC:
+-- @GetMessage(user_id: \"me\" message_id: \"123456\")@ Rules for HTTP mapping 1. Leaf request fields (recursive expansion nested messages in the request message) are classified into three categories: - Fields referred by the path template. They are passed via the URL path. - Fields referred by the HttpRule.body. They are passed via the HTTP request body. - All other fields are passed via the URL query parameters, and the parameter name is the field path in the request message. A repeated field can be represented as multiple query parameters under the same name. 2. If HttpRule.body is \"/\", there is no URL query parameter, all fields are passed via URL path and HTTP request body. 3. If HttpRule.body is omitted, there is no HTTP request body, all fields are passed via URL path and URL query parameters. Path template syntax Template = \"\/\" Segments [ Verb ] ; Segments = Segment { \"\/\" Segment } ; Segment = \"/\" | \"**\" | LITERAL | Variable ; Variable = \"{\" FieldPath [ \"=\" Segments ] \"}\" ; FieldPath =
+-- IDENT { \".\" IDENT } ; Verb = \":\" LITERAL ; The syntax @*@ matches a single URL path segment. The syntax @**@ matches zero or more URL path segments, which must be the last part of the URL path except the @Verb@. The syntax @Variable@ matches part of the URL path as specified by its template. A variable template must not contain other variables. If a variable matches a single path segment, its template may be omitted, e.g. @{var}@ is equivalent to @{var=*}@. The syntax @LITERAL@ matches literal text in the URL path. If the @LITERAL@ contains any reserved character, such characters should be percent-encoded before the matching. If a variable contains exactly one path segment, such as @\"{var}\"@ or @\"{var=*}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{var}@. If a
+-- variable contains multiple path segments, such as @\"{var=foo\/*}\"@ or @\"{var=**}\"@, when such a variable is expanded into a URL path on the client side, all characters except @[-_.~\/0-9a-zA-Z]@ are percent-encoded. The server side does the reverse decoding, except \"%2F\" and \"%2f\" are left unchanged. Such variables show up in the <https://developers.google.com/discovery/v1/reference/apis Discovery Document> as @{+var}@. Using gRPC API Service Configuration gRPC API Service Configuration (service config) is a configuration language for configuring a gRPC service to become a user-facing product. The service config is simply the YAML representation of the @google.api.Service@ proto message. As an alternative to annotating your proto file, you can configure gRPC transcoding in your service config YAML files. You do this by specifying a @HttpRule@ that maps the gRPC method to a REST endpoint, achieving the same effect as the proto annotation. This can be particularly useful if you have a proto that is
+-- reused in multiple services. Note that any transcoding specified in the service config will override any matching transcoding configuration in the proto. The following example selects a gRPC method and applies an @HttpRule@ to it: http: rules: - selector: example.v1.Messaging.GetMessage get: \/v1\/messages\/{message_id}\/{sub.subfield} Special notes When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the proto to JSON conversion must follow the <https://developers.google.com/protocol-buffers/docs/proto3#json proto3 specification>. While the single segment variable follows the semantics of <https://tools.ietf.org/html/rfc6570 RFC 6570> Section 3.2.2 Simple String Expansion, the multi segment variable __does not__ follow RFC 6570 Section 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion does not expand special characters like @?@ and @#@, which would lead to invalid URLs. As the result, gRPC Transcoding uses a custom encoding for multi segment variables. The path variables
+-- __must not__ refer to any repeated or mapped field, because client libraries are not capable of handling such variable expansion. The path variables __must not__ capture the leading \"\/\" character. The reason is that the most common use case \"{var}\" does not capture the leading \"\/\" character. For consistency, all path variables must share the same behavior. Repeated message fields must not be mapped to URL query parameters, because no client library can support such complicated mapping. If an API needs to use a JSON array for request or response body, it can map the request or response body to a repeated field. However, some gRPC Transcoding implementations may not support this feature.
 --
 -- /See:/ 'newHttpRule' smart constructor.
 data HttpRule = HttpRule
@@ -2624,8 +2851,7 @@ instance Core.ToJSON HttpRule where
   toJSON HttpRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalBindings" Core..=)
-              Core.<$> additionalBindings,
+          [ ("additionalBindings" Core..=) Core.<$> additionalBindings,
             ("body" Core..=) Core.<$> body,
             ("custom" Core..=) Core.<$> custom,
             ("delete" Core..=) Core.<$> delete,
@@ -2678,8 +2904,7 @@ instance Core.ToJSON JavaSettings where
       ( Core.catMaybes
           [ ("common" Core..=) Core.<$> common,
             ("libraryPackage" Core..=) Core.<$> libraryPackage,
-            ("serviceClassNames" Core..=)
-              Core.<$> serviceClassNames
+            ("serviceClassNames" Core..=) Core.<$> serviceClassNames
           ]
       )
 
@@ -2687,8 +2912,7 @@ instance Core.ToJSON JavaSettings where
 --
 -- /See:/ 'newJavaSettings_ServiceClassNames' smart constructor.
 newtype JavaSettings_ServiceClassNames = JavaSettings_ServiceClassNames
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2705,13 +2929,11 @@ instance Core.FromJSON JavaSettings_ServiceClassNames where
     Core.withObject
       "JavaSettings_ServiceClassNames"
       ( \o ->
-          JavaSettings_ServiceClassNames
-            Core.<$> (Core.parseJSONObject o)
+          JavaSettings_ServiceClassNames Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON JavaSettings_ServiceClassNames where
-  toJSON JavaSettings_ServiceClassNames {..} =
-    Core.toJSON additional
+  toJSON JavaSettings_ServiceClassNames {..} = Core.toJSON additional
 
 -- | Specifies a location to extract JWT from an API request.
 --
@@ -2938,7 +3160,10 @@ data ListServicesResponse = ListServicesResponse
 newListServicesResponse ::
   ListServicesResponse
 newListServicesResponse =
-  ListServicesResponse {nextPageToken = Core.Nothing, services = Core.Nothing}
+  ListServicesResponse
+    { nextPageToken = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON ListServicesResponse where
   parseJSON =
@@ -3042,10 +3267,8 @@ instance Core.ToJSON Logging where
   toJSON Logging {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -3064,7 +3287,10 @@ data LoggingDestination = LoggingDestination
 newLoggingDestination ::
   LoggingDestination
 newLoggingDestination =
-  LoggingDestination {logs = Core.Nothing, monitoredResource = Core.Nothing}
+  LoggingDestination
+    { logs = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON LoggingDestination where
   parseJSON =
@@ -3081,8 +3307,7 @@ instance Core.ToJSON LoggingDestination where
     Core.object
       ( Core.catMaybes
           [ ("logs" Core..=) Core.<$> logs,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -3128,13 +3353,10 @@ instance Core.ToJSON LongRunning where
   toJSON LongRunning {..} =
     Core.object
       ( Core.catMaybes
-          [ ("initialPollDelay" Core..=)
-              Core.<$> initialPollDelay,
+          [ ("initialPollDelay" Core..=) Core.<$> initialPollDelay,
             ("maxPollDelay" Core..=) Core.<$> maxPollDelay,
-            ("pollDelayMultiplier" Core..=)
-              Core.<$> pollDelayMultiplier,
-            ("totalPollTimeout" Core..=)
-              Core.<$> totalPollTimeout
+            ("pollDelayMultiplier" Core..=) Core.<$> pollDelayMultiplier,
+            ("totalPollTimeout" Core..=) Core.<$> totalPollTimeout
           ]
       )
 
@@ -3153,7 +3375,10 @@ data ManagedService = ManagedService
 newManagedService ::
   ManagedService
 newManagedService =
-  ManagedService {producerProjectId = Core.Nothing, serviceName = Core.Nothing}
+  ManagedService
+    { producerProjectId = Core.Nothing,
+      serviceName = Core.Nothing
+    }
 
 instance Core.FromJSON ManagedService where
   parseJSON =
@@ -3169,8 +3394,7 @@ instance Core.ToJSON ManagedService where
   toJSON ManagedService {..} =
     Core.object
       ( Core.catMaybes
-          [ ("producerProjectId" Core..=)
-              Core.<$> producerProjectId,
+          [ ("producerProjectId" Core..=) Core.<$> producerProjectId,
             ("serviceName" Core..=) Core.<$> serviceName
           ]
       )
@@ -3231,13 +3455,50 @@ instance Core.ToJSON Method where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("options" Core..=) Core.<$> options,
-            ("requestStreaming" Core..=)
-              Core.<$> requestStreaming,
+            ("requestStreaming" Core..=) Core.<$> requestStreaming,
             ("requestTypeUrl" Core..=) Core.<$> requestTypeUrl,
-            ("responseStreaming" Core..=)
-              Core.<$> responseStreaming,
+            ("responseStreaming" Core..=) Core.<$> responseStreaming,
             ("responseTypeUrl" Core..=) Core.<$> responseTypeUrl,
             ("syntax" Core..=) Core.<$> syntax
+          ]
+      )
+
+-- | Defines policies applying to an RPC method.
+--
+-- /See:/ 'newMethodPolicy' smart constructor.
+data MethodPolicy = MethodPolicy
+  { -- | Policies that are applicable to the request message.
+    requestPolicies :: (Core.Maybe [FieldPolicy]),
+    -- | Selects a method to which these policies should be enforced, for example, \"google.pubsub.v1.Subscriber.CreateSubscription\". Refer to selector for syntax details. NOTE: This field must not be set in the proto annotation. It will be automatically filled by the service config compiler .
+    selector :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MethodPolicy' with the minimum fields required to make a request.
+newMethodPolicy ::
+  MethodPolicy
+newMethodPolicy =
+  MethodPolicy
+    { requestPolicies = Core.Nothing,
+      selector = Core.Nothing
+    }
+
+instance Core.FromJSON MethodPolicy where
+  parseJSON =
+    Core.withObject
+      "MethodPolicy"
+      ( \o ->
+          MethodPolicy
+            Core.<$> (o Core..:? "requestPolicies")
+            Core.<*> (o Core..:? "selector")
+      )
+
+instance Core.ToJSON MethodPolicy where
+  toJSON MethodPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("requestPolicies" Core..=) Core.<$> requestPolicies,
+            ("selector" Core..=) Core.<$> selector
           ]
       )
 
@@ -3245,9 +3506,11 @@ instance Core.ToJSON Method where
 --
 -- /See:/ 'newMethodSettings' smart constructor.
 data MethodSettings = MethodSettings
-  { -- | Describes settings to use for long-running operations when generating API methods for RPCs. Complements RPCs that use the annotations in google\/longrunning\/operations.proto. Example of a YAML configuration:: publishing: method/settings: - selector: google.cloud.speech.v2.Speech.BatchRecognize long/running: initial/poll/delay: seconds: 60 # 1 minute poll/delay/multiplier: 1.5 max/poll/delay: seconds: 360 # 6 minutes total/poll/timeout: seconds: 54000 # 90 minutes
+  { -- | List of top-level fields of the request message, that should be automatically populated by the client libraries based on their (google.api.field/info).format. Currently supported format: UUID4. Example of a YAML configuration: publishing: method/settings: - selector: google.example.v1.ExampleService.CreateExample auto/populated/fields: - request_id
+    autoPopulatedFields :: (Core.Maybe [Core.Text]),
+    -- | Describes settings to use for long-running operations when generating API methods for RPCs. Complements RPCs that use the annotations in google\/longrunning\/operations.proto. Example of a YAML configuration:: publishing: method/settings: - selector: google.cloud.speech.v2.Speech.BatchRecognize long/running: initial/poll/delay: 60s # 1 minute poll/delay/multiplier: 1.5 max/poll/delay: 360s # 6 minutes total/poll/timeout: 54000s # 90 minutes
     longRunning :: (Core.Maybe LongRunning),
-    -- | The fully qualified name of the method, for which the options below apply. This is used to find the method to apply the options.
+    -- | The fully qualified name of the method, for which the options below apply. This is used to find the method to apply the options. Example: publishing: method_settings: - selector: google.storage.control.v2.StorageControl.CreateFolder # method settings for CreateFolder...
     selector :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3256,7 +3519,11 @@ data MethodSettings = MethodSettings
 newMethodSettings ::
   MethodSettings
 newMethodSettings =
-  MethodSettings {longRunning = Core.Nothing, selector = Core.Nothing}
+  MethodSettings
+    { autoPopulatedFields = Core.Nothing,
+      longRunning = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON MethodSettings where
   parseJSON =
@@ -3264,7 +3531,8 @@ instance Core.FromJSON MethodSettings where
       "MethodSettings"
       ( \o ->
           MethodSettings
-            Core.<$> (o Core..:? "longRunning")
+            Core.<$> (o Core..:? "autoPopulatedFields")
+            Core.<*> (o Core..:? "longRunning")
             Core.<*> (o Core..:? "selector")
       )
 
@@ -3272,7 +3540,8 @@ instance Core.ToJSON MethodSettings where
   toJSON MethodSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("longRunning" Core..=) Core.<$> longRunning,
+          [ ("autoPopulatedFields" Core..=) Core.<$> autoPopulatedFields,
+            ("longRunning" Core..=) Core.<$> longRunning,
             ("selector" Core..=) Core.<$> selector
           ]
       )
@@ -3356,8 +3625,7 @@ instance Core.ToJSON MetricDescriptor where
             ("launchStage" Core..=) Core.<$> launchStage,
             ("metadata" Core..=) Core.<$> metadata,
             ("metricKind" Core..=) Core.<$> metricKind,
-            ("monitoredResourceTypes" Core..=)
-              Core.<$> monitoredResourceTypes,
+            ("monitoredResourceTypes" Core..=) Core.<$> monitoredResourceTypes,
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type',
             ("unit" Core..=) Core.<$> unit,
@@ -3374,7 +3642,12 @@ data MetricDescriptorMetadata = MetricDescriptorMetadata
     -- | Deprecated. Must use the MetricDescriptor.launch_stage instead.
     launchStage :: (Core.Maybe MetricDescriptorMetadata_LaunchStage),
     -- | The sampling period of metric data points. For metrics which are written periodically, consecutive data points are stored at this time interval, excluding data loss due to errors. Metrics with a higher granularity have a smaller sampling period.
-    samplePeriod :: (Core.Maybe Core.Duration)
+    samplePeriod :: (Core.Maybe Core.Duration),
+    -- | The scope of the timeseries data of the metric.
+    timeSeriesResourceHierarchyLevel ::
+      ( Core.Maybe
+          [MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem]
+      )
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3385,7 +3658,8 @@ newMetricDescriptorMetadata =
   MetricDescriptorMetadata
     { ingestDelay = Core.Nothing,
       launchStage = Core.Nothing,
-      samplePeriod = Core.Nothing
+      samplePeriod = Core.Nothing,
+      timeSeriesResourceHierarchyLevel = Core.Nothing
     }
 
 instance Core.FromJSON MetricDescriptorMetadata where
@@ -3397,6 +3671,7 @@ instance Core.FromJSON MetricDescriptorMetadata where
             Core.<$> (o Core..:? "ingestDelay")
             Core.<*> (o Core..:? "launchStage")
             Core.<*> (o Core..:? "samplePeriod")
+            Core.<*> (o Core..:? "timeSeriesResourceHierarchyLevel")
       )
 
 instance Core.ToJSON MetricDescriptorMetadata where
@@ -3405,7 +3680,9 @@ instance Core.ToJSON MetricDescriptorMetadata where
       ( Core.catMaybes
           [ ("ingestDelay" Core..=) Core.<$> ingestDelay,
             ("launchStage" Core..=) Core.<$> launchStage,
-            ("samplePeriod" Core..=) Core.<$> samplePeriod
+            ("samplePeriod" Core..=) Core.<$> samplePeriod,
+            ("timeSeriesResourceHierarchyLevel" Core..=)
+              Core.<$> timeSeriesResourceHierarchyLevel
           ]
       )
 
@@ -3423,7 +3700,8 @@ data MetricRule = MetricRule
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 newMetricRule ::
   MetricRule
-newMetricRule = MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
+newMetricRule =
+  MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
 
 instance Core.FromJSON MetricRule where
   parseJSON =
@@ -3448,8 +3726,7 @@ instance Core.ToJSON MetricRule where
 --
 -- /See:/ 'newMetricRule_MetricCosts' smart constructor.
 newtype MetricRule_MetricCosts = MetricRule_MetricCosts
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3465,17 +3742,13 @@ instance Core.FromJSON MetricRule_MetricCosts where
   parseJSON =
     Core.withObject
       "MetricRule_MetricCosts"
-      ( \o ->
-          MetricRule_MetricCosts
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> MetricRule_MetricCosts Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON MetricRule_MetricCosts where
-  toJSON MetricRule_MetricCosts {..} =
-    Core.toJSON additional
+  toJSON MetricRule_MetricCosts {..} = Core.toJSON additional
 
 -- | Declares an API Interface to be included in this interface. The including interface must redeclare all the methods from the included interface, but documentation and options are inherited as follows: - If after comment and whitespace stripping, the documentation string of the redeclared method is empty, it will be inherited from the original method. - Each annotation belonging to the service config (http, visibility) which is not set in the redeclared method will be inherited. - If an http annotation is inherited, the path pattern will be modified as follows. Any version prefix will be replaced by the version of the including interface plus the root path if specified. Example of a simple mixin: package google.acl.v1; service AccessControl { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v1\/{resource=__}:getAcl\"; } } package google.storage.v2; service Storage { \/\/ rpc GetAcl(GetAclRequest) returns (Acl); \/\/ Get a data record. rpc
--- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inherting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
+-- GetData(GetDataRequest) returns (Data) { option (google.api.http).get = \"\/v2\/{resource=__}\"; } } Example of a mixin configuration: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl The mixin construct implies that all methods in @AccessControl@ are also declared with same name and request\/response types in @Storage@. A documentation generator or annotation processor will see the effective @Storage.GetAcl@ method after inheriting documentation and annotations as follows: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/{resource=__}:getAcl\"; } ... } Note how the version in the path pattern changed from @v1@ to @v2@. If the @root@ field in the mixin is specified, it should be a relative path under which inherited HTTP paths are placed. Example: apis: - name: google.storage.v2.Storage mixins: - name: google.acl.v1.AccessControl root: acls This implies the following inherited HTTP
 -- annotation: service Storage { \/\/ Get the underlying ACL object. rpc GetAcl(GetAclRequest) returns (Acl) { option (google.api.http).get = \"\/v2\/acls\/{resource=__}:getAcl\"; } ... }
 --
 -- /See:/ 'newMixin' smart constructor.
@@ -3497,17 +3770,14 @@ instance Core.FromJSON Mixin where
     Core.withObject
       "Mixin"
       ( \o ->
-          Mixin
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
+          Mixin Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
       )
 
 instance Core.ToJSON Mixin where
   toJSON Mixin {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("root" Core..=) Core.<$> root
-          ]
+          [("name" Core..=) Core.<$> name, ("root" Core..=) Core.<$> root]
       )
 
 -- | An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of @\"gce_instance\"@ and specifies the use of the labels @\"instance_id\"@ and @\"zone\"@ to identify particular VM instances. Different APIs can support different monitored resource types. APIs generally provide a @list@ method that returns the monitored resource descriptors used by the API.
@@ -3524,7 +3794,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor
     launchStage :: (Core.Maybe MonitoredResourceDescriptor_LaunchStage),
     -- | Optional. The resource name of the monitored resource descriptor: @\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"@ where {type} is the value of the @type@ field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format @\"monitoredResourceDescriptors\/{type}\"@.
     name :: (Core.Maybe Core.Text),
-    -- | Required. The monitored resource type. For example, the type @\"cloudsql_database\"@ represents databases in Google Cloud SQL. For a list of types, see <https://cloud.google.com/monitoring/api/resources Monitoring resource types> and <https://cloud.google.com/logging/docs/api/v2/resource-list Logging resource types>.
+    -- | Required. The monitored resource type. For example, the type @\"cloudsql_database\"@ represents databases in Google Cloud SQL. For a list of types, see <https://cloud.google.com/monitoring/api/resources Monitored resource types> and <https://cloud.google.com/logging/docs/api/v2/resource-list Logging resource types>.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3604,10 +3874,8 @@ instance Core.ToJSON Monitoring where
   toJSON Monitoring {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -3646,8 +3914,7 @@ instance Core.ToJSON MonitoringDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -3673,8 +3940,7 @@ instance Core.FromJSON NodeSettings where
 
 instance Core.ToJSON NodeSettings where
   toJSON NodeSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
 -- | OAuth scopes are a way to define data and permissions on data. For example, there are scopes defined for \"Read-only access to Google Calendar\" and \"Access to Cloud Platform\". Users can consent to a scope for an application, giving it permission to access that data on their behalf. OAuth scope specifications should be fairly coarse grained; a user will need to see and understand the text description of what your scope means. In most cases: use one or at most two OAuth scopes for an entire family of products. If your product has multiple APIs, you should probably be sharing the OAuth scope across all of those APIs. When you need finer grained OAuth consent screens: talk with your product management about how developers will use them in practice. Please note that even though each of the canonical scopes is enough for a request to be accepted and passed to the backend, a request can still fail due to the backend requiring additional scopes or permissions.
 --
@@ -3688,24 +3954,20 @@ newtype OAuthRequirements = OAuthRequirements
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 newOAuthRequirements ::
   OAuthRequirements
-newOAuthRequirements = OAuthRequirements {canonicalScopes = Core.Nothing}
+newOAuthRequirements =
+  OAuthRequirements {canonicalScopes = Core.Nothing}
 
 instance Core.FromJSON OAuthRequirements where
   parseJSON =
     Core.withObject
       "OAuthRequirements"
-      ( \o ->
-          OAuthRequirements
-            Core.<$> (o Core..:? "canonicalScopes")
-      )
+      (\o -> OAuthRequirements Core.<$> (o Core..:? "canonicalScopes"))
 
 instance Core.ToJSON OAuthRequirements where
   toJSON OAuthRequirements {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canonicalScopes" Core..=)
-              Core.<$> canonicalScopes
-          ]
+          [("canonicalScopes" Core..=) Core.<$> canonicalScopes]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -3720,7 +3982,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3776,21 +4038,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -3804,19 +4064,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | A message representing the message types used by a long-running operation. Example: rpc Export(ExportRequest) returns (google.longrunning.Operation) { option (google.longrunning.operation/info) = { response/type: \"ExportResponse\" metadata_type: \"ExportMetadata\" }; }
 --
@@ -3833,7 +4091,10 @@ data OperationInfo = OperationInfo
 newOperationInfo ::
   OperationInfo
 newOperationInfo =
-  OperationInfo {metadataType = Core.Nothing, responseType = Core.Nothing}
+  OperationInfo
+    { metadataType = Core.Nothing,
+      responseType = Core.Nothing
+    }
 
 instance Core.FromJSON OperationInfo where
   parseJSON =
@@ -3896,8 +4157,7 @@ instance Core.ToJSON OperationMetadata where
   toJSON OperationMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("progressPercentage" Core..=)
-              Core.<$> progressPercentage,
+          [ ("progressPercentage" Core..=) Core.<$> progressPercentage,
             ("resourceNames" Core..=) Core.<$> resourceNames,
             ("startTime" Core..=) Core.<$> startTime,
             ("steps" Core..=) Core.<$> steps
@@ -3925,17 +4185,14 @@ instance Core.FromJSON Option where
     Core.withObject
       "Option"
       ( \o ->
-          Option
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+          Option Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Option where
   toJSON Option {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | The option\'s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google\/protobuf\/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
@@ -3958,9 +4215,7 @@ instance Core.FromJSON Option_Value where
   parseJSON =
     Core.withObject
       "Option_Value"
-      ( \o ->
-          Option_Value Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Option_Value Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Option_Value where
   toJSON Option_Value {..} = Core.toJSON additional
@@ -3969,7 +4224,7 @@ instance Core.ToJSON Option_Value where
 --
 -- /See:/ 'newPage' smart constructor.
 data Page = Page
-  { -- | The Markdown content of the page. You can use (== include {path} ==) to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
+  { -- | The Markdown content of the page. You can use @(== include {path} ==)@ to include content from a Markdown file. The content can be used to produce the documentation page such as HTML format page.
     content :: (Core.Maybe Core.Text),
     -- | The name of the page. It will be used as an identity of the page to generate URI of the page, text of the link to this page in navigation, etc. The full page name (start from the root page name to this page concatenated with @.@) can be used as reference to the page in your documentation. For example: pages: - name: Tutorial content: (== include tutorial.md ==) subpages: - name: Java content: (== include tutorial_java.md ==) You can reference @Java@ page using Markdown reference link syntax: @Java@.
     name :: (Core.Maybe Core.Text),
@@ -3982,7 +4237,11 @@ data Page = Page
 newPage ::
   Page
 newPage =
-  Page {content = Core.Nothing, name = Core.Nothing, subpages = Core.Nothing}
+  Page
+    { content = Core.Nothing,
+      name = Core.Nothing,
+      subpages = Core.Nothing
+    }
 
 instance Core.FromJSON Page where
   parseJSON =
@@ -4027,12 +4286,11 @@ instance Core.FromJSON PhpSettings where
 
 instance Core.ToJSON PhpSettings where
   toJSON PhpSettings {..} =
-    Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -4100,12 +4358,14 @@ data Publishing = Publishing
     librarySettings :: (Core.Maybe [ClientLibrarySettings]),
     -- | A list of API method settings, e.g. the behavior for methods that use the long-running operation pattern.
     methodSettings :: (Core.Maybe [MethodSettings]),
-    -- | Link to a place that API users can report issues. Example: https:\/\/issuetracker.google.com\/issues\/new?component=190865&template=1161103
+    -- | Link to a /public/ URI where users can report issues. Example: https:\/\/issuetracker.google.com\/issues\/new?component=190865&template=1161103
     newIssueUri' :: (Core.Maybe Core.Text),
     -- | For whom the client library is being published.
     organization :: (Core.Maybe Publishing_Organization),
     -- | Optional link to proto reference documentation. Example: https:\/\/cloud.google.com\/pubsub\/lite\/docs\/reference\/rpc
-    protoReferenceDocumentationUri :: (Core.Maybe Core.Text)
+    protoReferenceDocumentationUri :: (Core.Maybe Core.Text),
+    -- | Optional link to REST reference documentation. Example: https:\/\/cloud.google.com\/pubsub\/lite\/docs\/reference\/rest
+    restReferenceDocumentationUri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4123,7 +4383,8 @@ newPublishing =
       methodSettings = Core.Nothing,
       newIssueUri' = Core.Nothing,
       organization = Core.Nothing,
-      protoReferenceDocumentationUri = Core.Nothing
+      protoReferenceDocumentationUri = Core.Nothing,
+      restReferenceDocumentationUri = Core.Nothing
     }
 
 instance Core.FromJSON Publishing where
@@ -4142,6 +4403,7 @@ instance Core.FromJSON Publishing where
             Core.<*> (o Core..:? "newIssueUri")
             Core.<*> (o Core..:? "organization")
             Core.<*> (o Core..:? "protoReferenceDocumentationUri")
+            Core.<*> (o Core..:? "restReferenceDocumentationUri")
       )
 
 instance Core.ToJSON Publishing where
@@ -4149,47 +4411,59 @@ instance Core.ToJSON Publishing where
     Core.object
       ( Core.catMaybes
           [ ("apiShortName" Core..=) Core.<$> apiShortName,
-            ("codeownerGithubTeams" Core..=)
-              Core.<$> codeownerGithubTeams,
+            ("codeownerGithubTeams" Core..=) Core.<$> codeownerGithubTeams,
             ("docTagPrefix" Core..=) Core.<$> docTagPrefix,
-            ("documentationUri" Core..=)
-              Core.<$> documentationUri,
+            ("documentationUri" Core..=) Core.<$> documentationUri,
             ("githubLabel" Core..=) Core.<$> githubLabel,
             ("librarySettings" Core..=) Core.<$> librarySettings,
             ("methodSettings" Core..=) Core.<$> methodSettings,
             ("newIssueUri" Core..=) Core.<$> newIssueUri',
             ("organization" Core..=) Core.<$> organization,
             ("protoReferenceDocumentationUri" Core..=)
-              Core.<$> protoReferenceDocumentationUri
+              Core.<$> protoReferenceDocumentationUri,
+            ("restReferenceDocumentationUri" Core..=)
+              Core.<$> restReferenceDocumentationUri
           ]
       )
 
 -- | Settings for Python client libraries.
 --
 -- /See:/ 'newPythonSettings' smart constructor.
-newtype PythonSettings = PythonSettings
+data PythonSettings = PythonSettings
   { -- | Some settings.
-    common :: (Core.Maybe CommonLanguageSettings)
+    common :: (Core.Maybe CommonLanguageSettings),
+    -- | Experimental features to be included during client library generation.
+    experimentalFeatures :: (Core.Maybe ExperimentalFeatures)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PythonSettings' with the minimum fields required to make a request.
 newPythonSettings ::
   PythonSettings
-newPythonSettings = PythonSettings {common = Core.Nothing}
+newPythonSettings =
+  PythonSettings
+    { common = Core.Nothing,
+      experimentalFeatures = Core.Nothing
+    }
 
 instance Core.FromJSON PythonSettings where
   parseJSON =
     Core.withObject
       "PythonSettings"
       ( \o ->
-          PythonSettings Core.<$> (o Core..:? "common")
+          PythonSettings
+            Core.<$> (o Core..:? "common")
+            Core.<*> (o Core..:? "experimentalFeatures")
       )
 
 instance Core.ToJSON PythonSettings where
   toJSON PythonSettings {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("experimentalFeatures" Core..=) Core.<$> experimentalFeatures
+          ]
+      )
 
 -- | Quota configuration helps to achieve fairness and budgeting in service usage. The metric based quota configuration works this way: - The service configuration defines a set of metrics. - For API calls, the quota.metric/rules maps methods to metrics with corresponding costs. - The quota.limits defines limits on the metrics, which will be used for quota checks at runtime. An example quota configuration in yaml format: quota: limits: - name: apiWriteQpsPerProject metric: library.googleapis.com\/write/calls unit: \"1\/min\/{project}\" # rate limit for consumer projects values: STANDARD: 10000 (The metric rules bind all methods to the read/calls metric, except for the UpdateBook and DeleteBook methods. These two methods are mapped to the write/calls metric, with the UpdateBook method consuming at twice rate as the DeleteBook method.) metric_rules: - selector: \"*\" metric/costs: library.googleapis.com\/read/calls: 1 - selector: google.example.library.v1.LibraryService.UpdateBook metric/costs:
 -- library.googleapis.com\/write/calls: 2 - selector: google.example.library.v1.LibraryService.DeleteBook metric/costs: library.googleapis.com\/write/calls: 1 Corresponding Metric definition: metrics: - name: library.googleapis.com\/read/calls display/name: Read requests metric/kind: DELTA value/type: INT64 - name: library.googleapis.com\/write/calls display/name: Write requests metric/kind: DELTA value/type: INT64
@@ -4247,7 +4521,7 @@ data QuotaLimit = QuotaLimit
     metric :: (Core.Maybe Core.Text),
     -- | Name of the quota limit. The name must be provided, and it must be unique within the service. The name can only include alphanumeric characters as well as \'-\'. The maximum length of the limit name is 64 characters.
     name :: (Core.Maybe Core.Text),
-    -- | Specify the unit of the quota limit. It uses the same syntax as Metric.unit. The supported unit kinds are determined by the quota backend system. Here are some examples: * \"1\/min\/{project}\" for quota per minute per project. Note: the order of unit components is insignificant. The \"1\" at the beginning is required to follow the metric unit syntax.
+    -- | Specify the unit of the quota limit. It uses the same syntax as MetricDescriptor.unit. The supported unit kinds are determined by the quota backend system. Here are some examples: * \"1\/min\/{project}\" for quota per minute per project. Note: the order of unit components is insignificant. The \"1\" at the beginning is required to follow the metric unit syntax.
     unit :: (Core.Maybe Core.Text),
     -- | Tiered limit values. You must specify this as a key:value pair, with an integer value that is the maximum number of requests allowed for the specified unit. Currently only STANDARD is supported.
     values :: (Core.Maybe QuotaLimit_Values)
@@ -4277,18 +4551,12 @@ instance Core.FromJSON QuotaLimit where
       "QuotaLimit"
       ( \o ->
           QuotaLimit
-            Core.<$> ( o Core..:? "defaultLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "defaultLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "duration")
-            Core.<*> ( o Core..:? "freeTier"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "freeTier" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "unit")
@@ -4299,15 +4567,12 @@ instance Core.ToJSON QuotaLimit where
   toJSON QuotaLimit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultLimit" Core..=) Core.. Core.AsText
-              Core.<$> defaultLimit,
+          [ ("defaultLimit" Core..=) Core.. Core.AsText Core.<$> defaultLimit,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
             ("duration" Core..=) Core.<$> duration,
-            ("freeTier" Core..=) Core.. Core.AsText
-              Core.<$> freeTier,
-            ("maxLimit" Core..=) Core.. Core.AsText
-              Core.<$> maxLimit,
+            ("freeTier" Core..=) Core.. Core.AsText Core.<$> freeTier,
+            ("maxLimit" Core..=) Core.. Core.AsText Core.<$> maxLimit,
             ("metric" Core..=) Core.<$> metric,
             ("name" Core..=) Core.<$> name,
             ("unit" Core..=) Core.<$> unit,
@@ -4319,8 +4584,7 @@ instance Core.ToJSON QuotaLimit where
 --
 -- /See:/ 'newQuotaLimit_Values' smart constructor.
 newtype QuotaLimit_Values = QuotaLimit_Values
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4329,15 +4593,14 @@ newQuotaLimit_Values ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Int64 ->
   QuotaLimit_Values
-newQuotaLimit_Values additional = QuotaLimit_Values {additional = additional}
+newQuotaLimit_Values additional =
+  QuotaLimit_Values {additional = additional}
 
 instance Core.FromJSON QuotaLimit_Values where
   parseJSON =
     Core.withObject
       "QuotaLimit_Values"
-      ( \o ->
-          QuotaLimit_Values Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> QuotaLimit_Values Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON QuotaLimit_Values where
   toJSON QuotaLimit_Values {..} = Core.toJSON additional
@@ -4434,8 +4697,7 @@ instance Core.ToJSON Rollout where
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
             ("createdBy" Core..=) Core.<$> createdBy,
-            ("deleteServiceStrategy" Core..=)
-              Core.<$> deleteServiceStrategy,
+            ("deleteServiceStrategy" Core..=) Core.<$> deleteServiceStrategy,
             ("rolloutId" Core..=) Core.<$> rolloutId,
             ("serviceName" Core..=) Core.<$> serviceName,
             ("status" Core..=) Core.<$> status,
@@ -4466,8 +4728,48 @@ instance Core.FromJSON RubySettings where
 
 instance Core.ToJSON RubySettings where
   toJSON RubySettings {..} =
+    Core.object (Core.catMaybes [("common" Core..=) Core.<$> common])
+
+-- | This message is used to configure the generation of a subset of the RPCs in a service for client libraries.
+--
+-- /See:/ 'newSelectiveGapicGeneration' smart constructor.
+data SelectiveGapicGeneration = SelectiveGapicGeneration
+  { -- | Setting this to true indicates to the client generators that methods that would be excluded from the generation should instead be generated in a way that indicates these methods should not be consumed by end users. How this is expressed is up to individual language implementations to decide. Some examples may be: added annotations, obfuscated identifiers, or other language idiomatic patterns.
+    generateOmittedAsInternal :: (Core.Maybe Core.Bool),
+    -- | An allowlist of the fully qualified names of RPCs that should be included on public client surfaces.
+    methods :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SelectiveGapicGeneration' with the minimum fields required to make a request.
+newSelectiveGapicGeneration ::
+  SelectiveGapicGeneration
+newSelectiveGapicGeneration =
+  SelectiveGapicGeneration
+    { generateOmittedAsInternal =
+        Core.Nothing,
+      methods = Core.Nothing
+    }
+
+instance Core.FromJSON SelectiveGapicGeneration where
+  parseJSON =
+    Core.withObject
+      "SelectiveGapicGeneration"
+      ( \o ->
+          SelectiveGapicGeneration
+            Core.<$> (o Core..:? "generateOmittedAsInternal")
+            Core.<*> (o Core..:? "methods")
+      )
+
+instance Core.ToJSON SelectiveGapicGeneration where
+  toJSON SelectiveGapicGeneration {..} =
     Core.object
-      (Core.catMaybes [("common" Core..=) Core.<$> common])
+      ( Core.catMaybes
+          [ ("generateOmittedAsInternal" Core..=)
+              Core.<$> generateOmittedAsInternal,
+            ("methods" Core..=) Core.<$> methods
+          ]
+      )
 
 -- | @Service@ is the root object of Google API service configuration (service config). It describes the basic information about a logical service, such as the service name and the user-facing title, and delegates other aspects to sub-sections. Each sub-section is either a proto message or a repeated proto message that configures a specific aspect, such as auth. For more information, see each proto message definition. Example: type: google.api.Service name: calendar.googleapis.com title: Google Calendar API apis: - name: google.calendar.v3.Calendar visibility: rules: - selector: \"google.calendar.v3./\" restriction: PREVIEW backend: rules: - selector: \"google.calendar.v3./\" address: calendar.example.com authentication: providers: - id: google/calendar/auth jwks_uri: https:\/\/www.googleapis.com\/oauth2\/v1\/certs issuer: https:\/\/securetoken.google.com rules: - selector: \"*\" requirements: provider/id: google/calendar_auth
 --
@@ -4475,6 +4777,8 @@ instance Core.ToJSON RubySettings where
 data Service = Service
   { -- | A list of API interfaces exported by this service. Only the @name@ field of the google.protobuf.Api needs to be provided by the configuration author, as the remaining fields will be derived from the IDL during the normalization process. It is an error to specify an API interface here which cannot be resolved against the associated IDL files.
     apis :: (Core.Maybe [Api]),
+    -- | Configuration aspects. This is a repeated field to allow multiple aspects to be configured. The kind field in each ConfigAspect specifies the type of aspect. The spec field contains the configuration for that aspect. The schema for the spec field is defined by the backend service owners.
+    aspects :: (Core.Maybe [Aspect]),
     -- | Auth configuration.
     authentication :: (Core.Maybe Authentication),
     -- | API backend configuration.
@@ -4538,6 +4842,7 @@ newService ::
 newService =
   Service
     { apis = Core.Nothing,
+      aspects = Core.Nothing,
       authentication = Core.Nothing,
       backend = Core.Nothing,
       billing = Core.Nothing,
@@ -4574,6 +4879,7 @@ instance Core.FromJSON Service where
       ( \o ->
           Service
             Core.<$> (o Core..:? "apis")
+            Core.<*> (o Core..:? "aspects")
             Core.<*> (o Core..:? "authentication")
             Core.<*> (o Core..:? "backend")
             Core.<*> (o Core..:? "billing")
@@ -4608,6 +4914,7 @@ instance Core.ToJSON Service where
     Core.object
       ( Core.catMaybes
           [ ("apis" Core..=) Core.<$> apis,
+            ("aspects" Core..=) Core.<$> aspects,
             ("authentication" Core..=) Core.<$> authentication,
             ("backend" Core..=) Core.<$> backend,
             ("billing" Core..=) Core.<$> billing,
@@ -4623,17 +4930,14 @@ instance Core.ToJSON Service where
             ("logging" Core..=) Core.<$> logging,
             ("logs" Core..=) Core.<$> logs,
             ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResources" Core..=)
-              Core.<$> monitoredResources,
+            ("monitoredResources" Core..=) Core.<$> monitoredResources,
             ("monitoring" Core..=) Core.<$> monitoring,
             ("name" Core..=) Core.<$> name,
-            ("producerProjectId" Core..=)
-              Core.<$> producerProjectId,
+            ("producerProjectId" Core..=) Core.<$> producerProjectId,
             ("publishing" Core..=) Core.<$> publishing,
             ("quota" Core..=) Core.<$> quota,
             ("sourceInfo" Core..=) Core.<$> sourceInfo,
-            ("systemParameters" Core..=)
-              Core.<$> systemParameters,
+            ("systemParameters" Core..=) Core.<$> systemParameters,
             ("systemTypes" Core..=) Core.<$> systemTypes,
             ("title" Core..=) Core.<$> title,
             ("types" Core..=) Core.<$> types,
@@ -4656,7 +4960,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -4695,16 +5002,12 @@ instance Core.FromJSON SourceContext where
   parseJSON =
     Core.withObject
       "SourceContext"
-      ( \o ->
-          SourceContext Core.<$> (o Core..:? "fileName")
-      )
+      (\o -> SourceContext Core.<$> (o Core..:? "fileName"))
 
 instance Core.ToJSON SourceContext where
   toJSON SourceContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("fileName" Core..=) Core.<$> fileName]
-      )
+      (Core.catMaybes [("fileName" Core..=) Core.<$> fileName])
 
 -- | Source information used to create a Service Config
 --
@@ -4724,16 +5027,12 @@ instance Core.FromJSON SourceInfo where
   parseJSON =
     Core.withObject
       "SourceInfo"
-      ( \o ->
-          SourceInfo Core.<$> (o Core..:? "sourceFiles")
-      )
+      (\o -> SourceInfo Core.<$> (o Core..:? "sourceFiles"))
 
 instance Core.ToJSON SourceInfo where
   toJSON SourceInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("sourceFiles" Core..=) Core.<$> sourceFiles]
-      )
+      (Core.catMaybes [("sourceFiles" Core..=) Core.<$> sourceFiles])
 
 --
 -- /See:/ 'newSourceInfo_SourceFilesItem' smart constructor.
@@ -4756,13 +5055,11 @@ instance Core.FromJSON SourceInfo_SourceFilesItem where
     Core.withObject
       "SourceInfo_SourceFilesItem"
       ( \o ->
-          SourceInfo_SourceFilesItem
-            Core.<$> (Core.parseJSONObject o)
+          SourceInfo_SourceFilesItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SourceInfo_SourceFilesItem where
-  toJSON SourceInfo_SourceFilesItem {..} =
-    Core.toJSON additional
+  toJSON SourceInfo_SourceFilesItem {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -4781,7 +5078,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -4817,19 +5118,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents the status of one operation step.
 --
@@ -4925,16 +5224,13 @@ instance Core.FromJSON SubmitConfigSourceResponse where
     Core.withObject
       "SubmitConfigSourceResponse"
       ( \o ->
-          SubmitConfigSourceResponse
-            Core.<$> (o Core..:? "serviceConfig")
+          SubmitConfigSourceResponse Core.<$> (o Core..:? "serviceConfig")
       )
 
 instance Core.ToJSON SubmitConfigSourceResponse where
   toJSON SubmitConfigSourceResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("serviceConfig" Core..=) Core.<$> serviceConfig]
-      )
+      (Core.catMaybes [("serviceConfig" Core..=) Core.<$> serviceConfig])
 
 -- | Define a parameter\'s name and location. The parameter may be passed as either an HTTP header or a URL query parameter, and if both are passed the behavior is implementation-dependent.
 --
@@ -4976,8 +5272,7 @@ instance Core.ToJSON SystemParameter where
       ( Core.catMaybes
           [ ("httpHeader" Core..=) Core.<$> httpHeader,
             ("name" Core..=) Core.<$> name,
-            ("urlQueryParameter" Core..=)
-              Core.<$> urlQueryParameter
+            ("urlQueryParameter" Core..=) Core.<$> urlQueryParameter
           ]
       )
 
@@ -4996,7 +5291,10 @@ data SystemParameterRule = SystemParameterRule
 newSystemParameterRule ::
   SystemParameterRule
 newSystemParameterRule =
-  SystemParameterRule {parameters = Core.Nothing, selector = Core.Nothing}
+  SystemParameterRule
+    { parameters = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON SystemParameterRule where
   parseJSON =
@@ -5035,14 +5333,11 @@ instance Core.FromJSON SystemParameters where
   parseJSON =
     Core.withObject
       "SystemParameters"
-      ( \o ->
-          SystemParameters Core.<$> (o Core..:? "rules")
-      )
+      (\o -> SystemParameters Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON SystemParameters where
   toJSON SystemParameters {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -5064,16 +5359,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -5095,16 +5387,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Strategy that specifies how clients of Google Service Controller want to send traffic to use different config versions. This is generally used by API proxy to split traffic based on your configured percentage for each config version. One example of how to gradually rollout a new service configuration using this strategy: Day 1 Rollout { id: \"example.googleapis.com\/rollout/20160206\" traffic/percent/strategy { percentages: { \"example.googleapis.com\/20160201\": 70.00 \"example.googleapis.com\/20160206\": 30.00 } } } Day 2 Rollout { id: \"example.googleapis.com\/rollout/20160207\" traffic/percent/strategy: { percentages: { \"example.googleapis.com\/20160206\": 100.00 } } }
 --
@@ -5118,30 +5407,25 @@ newtype TrafficPercentStrategy = TrafficPercentStrategy
 -- | Creates a value of 'TrafficPercentStrategy' with the minimum fields required to make a request.
 newTrafficPercentStrategy ::
   TrafficPercentStrategy
-newTrafficPercentStrategy = TrafficPercentStrategy {percentages = Core.Nothing}
+newTrafficPercentStrategy =
+  TrafficPercentStrategy {percentages = Core.Nothing}
 
 instance Core.FromJSON TrafficPercentStrategy where
   parseJSON =
     Core.withObject
       "TrafficPercentStrategy"
-      ( \o ->
-          TrafficPercentStrategy
-            Core.<$> (o Core..:? "percentages")
-      )
+      (\o -> TrafficPercentStrategy Core.<$> (o Core..:? "percentages"))
 
 instance Core.ToJSON TrafficPercentStrategy where
   toJSON TrafficPercentStrategy {..} =
     Core.object
-      ( Core.catMaybes
-          [("percentages" Core..=) Core.<$> percentages]
-      )
+      (Core.catMaybes [("percentages" Core..=) Core.<$> percentages])
 
 -- | Maps service configuration IDs to their corresponding traffic percentage. Key is the service configuration ID, Value is the traffic percentage which must be greater than 0.0 and the sum must equal to 100.0.
 --
 -- /See:/ 'newTrafficPercentStrategy_Percentages' smart constructor.
 newtype TrafficPercentStrategy_Percentages = TrafficPercentStrategy_Percentages
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Double)
+  { additional :: (Core.HashMap Core.Text Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5153,10 +5437,7 @@ newTrafficPercentStrategy_Percentages ::
 newTrafficPercentStrategy_Percentages additional =
   TrafficPercentStrategy_Percentages {additional = additional}
 
-instance
-  Core.FromJSON
-    TrafficPercentStrategy_Percentages
-  where
+instance Core.FromJSON TrafficPercentStrategy_Percentages where
   parseJSON =
     Core.withObject
       "TrafficPercentStrategy_Percentages"
@@ -5165,10 +5446,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TrafficPercentStrategy_Percentages
-  where
+instance Core.ToJSON TrafficPercentStrategy_Percentages where
   toJSON TrafficPercentStrategy_Percentages {..} =
     Core.toJSON additional
 
@@ -5248,23 +5526,19 @@ newtype UndeleteServiceResponse = UndeleteServiceResponse
 -- | Creates a value of 'UndeleteServiceResponse' with the minimum fields required to make a request.
 newUndeleteServiceResponse ::
   UndeleteServiceResponse
-newUndeleteServiceResponse = UndeleteServiceResponse {service = Core.Nothing}
+newUndeleteServiceResponse =
+  UndeleteServiceResponse {service = Core.Nothing}
 
 instance Core.FromJSON UndeleteServiceResponse where
   parseJSON =
     Core.withObject
       "UndeleteServiceResponse"
-      ( \o ->
-          UndeleteServiceResponse
-            Core.<$> (o Core..:? "service")
-      )
+      (\o -> UndeleteServiceResponse Core.<$> (o Core..:? "service"))
 
 instance Core.ToJSON UndeleteServiceResponse where
   toJSON UndeleteServiceResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("service" Core..=) Core.<$> service]
-      )
+      (Core.catMaybes [("service" Core..=) Core.<$> service])
 
 -- | Configuration controlling usage of a service.
 --
@@ -5311,11 +5585,11 @@ instance Core.ToJSON Usage where
           ]
       )
 
--- | Usage configuration rules for the service. NOTE: Under development. Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity. Use this rule to allow\/disallow unregistered calls. Example of an API that wants to allow unregistered calls for entire service. usage: rules: - selector: \"*\" allow/unregistered/calls: true Example of a method that wants to allow unregistered calls. usage: rules: - selector: \"google.example.library.v1.LibraryService.CreateBook\" allow/unregistered/calls: true
+-- | Usage configuration rules for the service.
 --
 -- /See:/ 'newUsageRule' smart constructor.
 data UsageRule = UsageRule
-  { -- | If true, the selected method allows unregistered calls, e.g. calls that don\'t identify any user or application.
+  { -- | Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). WARNING: By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity.
     allowUnregisteredCalls :: (Core.Maybe Core.Bool),
     -- | Selects the methods to which this rule applies. Use \'*\' to indicate all methods in all APIs. Refer to selector for syntax details.
     selector :: (Core.Maybe Core.Text),
@@ -5352,7 +5626,6 @@ instance Core.ToJSON UsageRule where
           [ ("allowUnregisteredCalls" Core..=)
               Core.<$> allowUnregisteredCalls,
             ("selector" Core..=) Core.<$> selector,
-            ("skipServiceControl" Core..=)
-              Core.<$> skipServiceControl
+            ("skipServiceControl" Core..=) Core.<$> skipServiceControl
           ]
       )

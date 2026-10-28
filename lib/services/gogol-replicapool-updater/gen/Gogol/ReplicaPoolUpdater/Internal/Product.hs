@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ReplicaPoolUpdater.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ReplicaPoolUpdater.Internal.Product
@@ -88,7 +86,7 @@ module Gogol.ReplicaPoolUpdater.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ReplicaPoolUpdater.Internal.Sum
 
 -- | Update of a single instance.
@@ -148,20 +146,18 @@ newtype InstanceUpdate_Error = InstanceUpdate_Error
 -- | Creates a value of 'InstanceUpdate_Error' with the minimum fields required to make a request.
 newInstanceUpdate_Error ::
   InstanceUpdate_Error
-newInstanceUpdate_Error = InstanceUpdate_Error {errors = Core.Nothing}
+newInstanceUpdate_Error =
+  InstanceUpdate_Error {errors = Core.Nothing}
 
 instance Core.FromJSON InstanceUpdate_Error where
   parseJSON =
     Core.withObject
       "InstanceUpdate_Error"
-      ( \o ->
-          InstanceUpdate_Error Core.<$> (o Core..:? "errors")
-      )
+      (\o -> InstanceUpdate_Error Core.<$> (o Core..:? "errors"))
 
 instance Core.ToJSON InstanceUpdate_Error where
   toJSON InstanceUpdate_Error {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 --
 -- /See:/ 'newInstanceUpdate_Error_ErrorsItem' smart constructor.
@@ -185,10 +181,7 @@ newInstanceUpdate_Error_ErrorsItem =
       message = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    InstanceUpdate_Error_ErrorsItem
-  where
+instance Core.FromJSON InstanceUpdate_Error_ErrorsItem where
   parseJSON =
     Core.withObject
       "InstanceUpdate_Error_ErrorsItem"
@@ -242,7 +235,8 @@ instance Core.FromJSON InstanceUpdateList where
       ( \o ->
           InstanceUpdateList
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "replicapoolupdater#instanceUpdateList"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -264,17 +258,13 @@ instance Core.ToJSON InstanceUpdateList where
 --
 -- /See:/ 'newOperation' smart constructor.
 data Operation = Operation
-  { -- |
-    clientOperationId :: (Core.Maybe Core.Text),
+  { clientOperationId :: (Core.Maybe Core.Text),
     -- | [Output Only] Creation timestamp in RFC3339 text format.
     creationTimestamp :: (Core.Maybe Core.Text),
-    -- |
     endTime :: (Core.Maybe Core.Text),
     -- | [Output Only] If errors occurred during processing of this operation, this field will be populated.
     error :: (Core.Maybe Operation_Error),
-    -- |
     httpErrorMessage :: (Core.Maybe Core.Text),
-    -- |
     httpErrorStatusCode :: (Core.Maybe Core.Int32),
     -- | [Output Only] Unique identifier for the resource; defined by the server.
     id :: (Core.Maybe Core.Word64),
@@ -284,9 +274,7 @@ data Operation = Operation
     kind :: Core.Text,
     -- | [Output Only] Name of the resource.
     name :: (Core.Maybe Core.Text),
-    -- |
     operationType :: (Core.Maybe Core.Text),
-    -- |
     progress :: (Core.Maybe Core.Int32),
     -- | [Output Only] URL of the region where the operation resides.
     region :: (Core.Maybe Core.Text),
@@ -302,9 +290,7 @@ data Operation = Operation
     targetId :: (Core.Maybe Core.Word64),
     -- | [Output Only] URL of the resource the operation is mutating.
     targetLink :: (Core.Maybe Core.Text),
-    -- |
     user :: (Core.Maybe Core.Text),
-    -- |
     warnings :: (Core.Maybe [Operation_WarningsItem]),
     -- | [Output Only] URL of the zone where the operation resides.
     zone :: (Core.Maybe Core.Text)
@@ -354,9 +340,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "httpErrorStatusCode")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "insertTime")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "replicapoolupdater#operation"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "replicapoolupdater#operation")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "progress")
@@ -365,9 +349,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "statusMessage")
-            Core.<*> ( o Core..:? "targetId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "targetId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "targetLink")
             Core.<*> (o Core..:? "user")
             Core.<*> (o Core..:? "warnings")
@@ -378,16 +360,12 @@ instance Core.ToJSON Operation where
   toJSON Operation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientOperationId" Core..=)
-              Core.<$> clientOperationId,
-            ("creationTimestamp" Core..=)
-              Core.<$> creationTimestamp,
+          [ ("clientOperationId" Core..=) Core.<$> clientOperationId,
+            ("creationTimestamp" Core..=) Core.<$> creationTimestamp,
             ("endTime" Core..=) Core.<$> endTime,
             ("error" Core..=) Core.<$> error,
-            ("httpErrorMessage" Core..=)
-              Core.<$> httpErrorMessage,
-            ("httpErrorStatusCode" Core..=)
-              Core.<$> httpErrorStatusCode,
+            ("httpErrorMessage" Core..=) Core.<$> httpErrorMessage,
+            ("httpErrorStatusCode" Core..=) Core.<$> httpErrorStatusCode,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("insertTime" Core..=) Core.<$> insertTime,
             Core.Just ("kind" Core..= kind),
@@ -399,8 +377,7 @@ instance Core.ToJSON Operation where
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
             ("statusMessage" Core..=) Core.<$> statusMessage,
-            ("targetId" Core..=) Core.. Core.AsText
-              Core.<$> targetId,
+            ("targetId" Core..=) Core.. Core.AsText Core.<$> targetId,
             ("targetLink" Core..=) Core.<$> targetLink,
             ("user" Core..=) Core.<$> user,
             ("warnings" Core..=) Core.<$> warnings,
@@ -426,14 +403,11 @@ instance Core.FromJSON Operation_Error where
   parseJSON =
     Core.withObject
       "Operation_Error"
-      ( \o ->
-          Operation_Error Core.<$> (o Core..:? "errors")
-      )
+      (\o -> Operation_Error Core.<$> (o Core..:? "errors"))
 
 instance Core.ToJSON Operation_Error where
   toJSON Operation_Error {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 --
 -- /See:/ 'newOperation_Error_ErrorsItem' smart constructor.
@@ -535,27 +509,26 @@ data Operation_WarningsItem_DataItem = Operation_WarningsItem_DataItem
 newOperation_WarningsItem_DataItem ::
   Operation_WarningsItem_DataItem
 newOperation_WarningsItem_DataItem =
-  Operation_WarningsItem_DataItem {key = Core.Nothing, value = Core.Nothing}
+  Operation_WarningsItem_DataItem
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Operation_WarningsItem_DataItem
-  where
+instance Core.FromJSON Operation_WarningsItem_DataItem where
   parseJSON =
     Core.withObject
       "Operation_WarningsItem_DataItem"
       ( \o ->
           Operation_WarningsItem_DataItem
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Operation_WarningsItem_DataItem where
   toJSON Operation_WarningsItem_DataItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Contains a list of Operation resources.
@@ -595,9 +568,7 @@ instance Core.FromJSON OperationList where
           OperationList
             Core.<$> (o Core..:? "id")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "replicapoolupdater#operationList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "replicapoolupdater#operationList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
       )
@@ -691,9 +662,7 @@ instance Core.FromJSON RollingUpdate where
             Core.<*> (o Core..:? "instanceGroup")
             Core.<*> (o Core..:? "instanceGroupManager")
             Core.<*> (o Core..:? "instanceTemplate")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "replicapoolupdater#rollingUpdate"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "replicapoolupdater#rollingUpdate")
             Core.<*> (o Core..:? "oldInstanceTemplate")
             Core.<*> (o Core..:? "policy")
             Core.<*> (o Core..:? "progress")
@@ -708,19 +677,15 @@ instance Core.ToJSON RollingUpdate where
     Core.object
       ( Core.catMaybes
           [ ("actionType" Core..=) Core.<$> actionType,
-            ("creationTimestamp" Core..=)
-              Core.<$> creationTimestamp,
+            ("creationTimestamp" Core..=) Core.<$> creationTimestamp,
             ("description" Core..=) Core.<$> description,
             ("error" Core..=) Core.<$> error,
             ("id" Core..=) Core.<$> id,
             ("instanceGroup" Core..=) Core.<$> instanceGroup,
-            ("instanceGroupManager" Core..=)
-              Core.<$> instanceGroupManager,
-            ("instanceTemplate" Core..=)
-              Core.<$> instanceTemplate,
+            ("instanceGroupManager" Core..=) Core.<$> instanceGroupManager,
+            ("instanceTemplate" Core..=) Core.<$> instanceTemplate,
             Core.Just ("kind" Core..= kind),
-            ("oldInstanceTemplate" Core..=)
-              Core.<$> oldInstanceTemplate,
+            ("oldInstanceTemplate" Core..=) Core.<$> oldInstanceTemplate,
             ("policy" Core..=) Core.<$> policy,
             ("progress" Core..=) Core.<$> progress,
             ("selfLink" Core..=) Core.<$> selfLink,
@@ -748,14 +713,11 @@ instance Core.FromJSON RollingUpdate_Error where
   parseJSON =
     Core.withObject
       "RollingUpdate_Error"
-      ( \o ->
-          RollingUpdate_Error Core.<$> (o Core..:? "errors")
-      )
+      (\o -> RollingUpdate_Error Core.<$> (o Core..:? "errors"))
 
 instance Core.ToJSON RollingUpdate_Error where
   toJSON RollingUpdate_Error {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 --
 -- /See:/ 'newRollingUpdate_Error_ErrorsItem' smart constructor.
@@ -852,8 +814,7 @@ instance Core.ToJSON RollingUpdate_Policy where
               Core.<$> instanceStartupTimeoutSec,
             ("maxNumConcurrentInstances" Core..=)
               Core.<$> maxNumConcurrentInstances,
-            ("maxNumFailedInstances" Core..=)
-              Core.<$> maxNumFailedInstances,
+            ("maxNumFailedInstances" Core..=) Core.<$> maxNumFailedInstances,
             ("minInstanceUpdateTimeSec" Core..=)
               Core.<$> minInstanceUpdateTimeSec
           ]
@@ -892,9 +853,7 @@ instance Core.FromJSON RollingUpdateList where
       ( \o ->
           RollingUpdateList
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "replicapoolupdater#rollingUpdateList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "replicapoolupdater#rollingUpdateList")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "selfLink")
       )

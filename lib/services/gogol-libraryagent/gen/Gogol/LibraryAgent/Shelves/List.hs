@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.LibraryAgent.Shelves.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.LibraryAgent.Shelves.List
 where
 
 import Gogol.LibraryAgent.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @libraryagent.shelves.list@ method which the
 -- 'LibraryAgentShelvesList' request conforms to.
@@ -98,9 +96,7 @@ instance Core.GoogleRequest LibraryAgentShelvesList where
   type
     Rs LibraryAgentShelvesList =
       GoogleExampleLibraryagentV1ListShelvesResponse
-  type
-    Scopes LibraryAgentShelvesList =
-      '[CloudPlatform'FullControl]
+  type Scopes LibraryAgentShelvesList = '[CloudPlatform'FullControl]
   requestClient LibraryAgentShelvesList {..} =
     go
       xgafv
@@ -115,7 +111,5 @@ instance Core.GoogleRequest LibraryAgentShelvesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LibraryAgentShelvesListResource
-          )
+          (Core.Proxy :: Core.Proxy LibraryAgentShelvesListResource)
           Core.mempty

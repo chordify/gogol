@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fitness.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Fitness.Internal.Product
@@ -117,7 +115,7 @@ module Gogol.Fitness.Internal.Product
 where
 
 import Gogol.Fitness.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newAggregateBucket' smart constructor.
@@ -158,13 +156,9 @@ instance Core.FromJSON AggregateBucket where
           AggregateBucket
             Core.<$> (o Core..:? "activity")
             Core.<*> (o Core..:? "dataset")
-            Core.<*> ( o Core..:? "endTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "endTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "session")
-            Core.<*> ( o Core..:? "startTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -174,10 +168,12 @@ instance Core.ToJSON AggregateBucket where
       ( Core.catMaybes
           [ ("activity" Core..=) Core.<$> activity,
             ("dataset" Core..=) Core.<$> dataset,
-            ("endTimeMillis" Core..=) Core.. Core.AsText
+            ("endTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> endTimeMillis,
             ("session" Core..=) Core.<$> session,
-            ("startTimeMillis" Core..=) Core.. Core.AsText
+            ("startTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> startTimeMillis,
             ("type" Core..=) Core.<$> type'
           ]
@@ -198,7 +194,10 @@ data AggregateBy = AggregateBy
 newAggregateBy ::
   AggregateBy
 newAggregateBy =
-  AggregateBy {dataSourceId = Core.Nothing, dataTypeName = Core.Nothing}
+  AggregateBy
+    { dataSourceId = Core.Nothing,
+      dataTypeName = Core.Nothing
+    }
 
 instance Core.FromJSON AggregateBy where
   parseJSON =
@@ -268,13 +267,9 @@ instance Core.FromJSON AggregateRequest where
             Core.<*> (o Core..:? "bucketByActivityType")
             Core.<*> (o Core..:? "bucketBySession")
             Core.<*> (o Core..:? "bucketByTime")
-            Core.<*> ( o Core..:? "endTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "endTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "filteredDataQualityStandard")
-            Core.<*> ( o Core..:? "startTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startTimeMillis" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AggregateRequest where
@@ -284,15 +279,16 @@ instance Core.ToJSON AggregateRequest where
           [ ("aggregateBy" Core..=) Core.<$> aggregateBy,
             ("bucketByActivitySegment" Core..=)
               Core.<$> bucketByActivitySegment,
-            ("bucketByActivityType" Core..=)
-              Core.<$> bucketByActivityType,
+            ("bucketByActivityType" Core..=) Core.<$> bucketByActivityType,
             ("bucketBySession" Core..=) Core.<$> bucketBySession,
             ("bucketByTime" Core..=) Core.<$> bucketByTime,
-            ("endTimeMillis" Core..=) Core.. Core.AsText
+            ("endTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> endTimeMillis,
             ("filteredDataQualityStandard" Core..=)
               Core.<$> filteredDataQualityStandard,
-            ("startTimeMillis" Core..=) Core.. Core.AsText
+            ("startTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> startTimeMillis
           ]
       )
@@ -314,14 +310,11 @@ instance Core.FromJSON AggregateResponse where
   parseJSON =
     Core.withObject
       "AggregateResponse"
-      ( \o ->
-          AggregateResponse Core.<$> (o Core..:? "bucket")
-      )
+      (\o -> AggregateResponse Core.<$> (o Core..:? "bucket"))
 
 instance Core.ToJSON AggregateResponse where
   toJSON AggregateResponse {..} =
-    Core.object
-      (Core.catMaybes [("bucket" Core..=) Core.<$> bucket])
+    Core.object (Core.catMaybes [("bucket" Core..=) Core.<$> bucket])
 
 --
 -- /See:/ 'newApplication' smart constructor.
@@ -397,7 +390,8 @@ instance Core.FromJSON BucketByActivity where
       ( \o ->
           BucketByActivity
             Core.<$> (o Core..:? "activityDataSourceId")
-            Core.<*> ( o Core..:? "minDurationMillis"
+            Core.<*> ( o
+                         Core..:? "minDurationMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -406,9 +400,9 @@ instance Core.ToJSON BucketByActivity where
   toJSON BucketByActivity {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activityDataSourceId" Core..=)
-              Core.<$> activityDataSourceId,
-            ("minDurationMillis" Core..=) Core.. Core.AsText
+          [ ("activityDataSourceId" Core..=) Core.<$> activityDataSourceId,
+            ("minDurationMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> minDurationMillis
           ]
       )
@@ -424,7 +418,8 @@ newtype BucketBySession = BucketBySession
 -- | Creates a value of 'BucketBySession' with the minimum fields required to make a request.
 newBucketBySession ::
   BucketBySession
-newBucketBySession = BucketBySession {minDurationMillis = Core.Nothing}
+newBucketBySession =
+  BucketBySession {minDurationMillis = Core.Nothing}
 
 instance Core.FromJSON BucketBySession where
   parseJSON =
@@ -432,7 +427,8 @@ instance Core.FromJSON BucketBySession where
       "BucketBySession"
       ( \o ->
           BucketBySession
-            Core.<$> ( o Core..:? "minDurationMillis"
+            Core.<$> ( o
+                         Core..:? "minDurationMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -441,7 +437,8 @@ instance Core.ToJSON BucketBySession where
   toJSON BucketBySession {..} =
     Core.object
       ( Core.catMaybes
-          [ ("minDurationMillis" Core..=) Core.. Core.AsText
+          [ ("minDurationMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> minDurationMillis
           ]
       )
@@ -451,7 +448,6 @@ instance Core.ToJSON BucketBySession where
 data BucketByTime = BucketByTime
   { -- | Specifies that result buckets aggregate data by exactly durationMillis time frames. Time frames that contain no data will be included in the response with an empty dataset.
     durationMillis :: (Core.Maybe Core.Int64),
-    -- |
     period :: (Core.Maybe BucketByTimePeriod)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -460,7 +456,10 @@ data BucketByTime = BucketByTime
 newBucketByTime ::
   BucketByTime
 newBucketByTime =
-  BucketByTime {durationMillis = Core.Nothing, period = Core.Nothing}
+  BucketByTime
+    { durationMillis = Core.Nothing,
+      period = Core.Nothing
+    }
 
 instance Core.FromJSON BucketByTime where
   parseJSON =
@@ -468,9 +467,7 @@ instance Core.FromJSON BucketByTime where
       "BucketByTime"
       ( \o ->
           BucketByTime
-            Core.<$> ( o Core..:? "durationMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "durationMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "period")
       )
 
@@ -478,7 +475,8 @@ instance Core.ToJSON BucketByTime where
   toJSON BucketByTime {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationMillis" Core..=) Core.. Core.AsText
+          [ ("durationMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> durationMillis,
             ("period" Core..=) Core.<$> period
           ]
@@ -489,9 +487,7 @@ instance Core.ToJSON BucketByTime where
 data BucketByTimePeriod = BucketByTimePeriod
   { -- | org.joda.timezone.DateTimeZone
     timeZoneId :: (Core.Maybe Core.Text),
-    -- |
     type' :: (Core.Maybe BucketByTimePeriod_Type),
-    -- |
     value :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -571,23 +567,19 @@ instance Core.FromJSON DataPoint where
       "DataPoint"
       ( \o ->
           DataPoint
-            Core.<$> ( o Core..:? "computationTimeMillis"
+            Core.<$> ( o
+                         Core..:? "computationTimeMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "dataTypeName")
-            Core.<*> ( o Core..:? "endTimeNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "modifiedTimeMillis"
+            Core.<*> (o Core..:? "endTimeNanos" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "modifiedTimeMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "originDataSourceId")
-            Core.<*> ( o Core..:? "rawTimestampNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "startTimeNanos"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "rawTimestampNanos" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "startTimeNanos" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
@@ -595,18 +587,20 @@ instance Core.ToJSON DataPoint where
   toJSON DataPoint {..} =
     Core.object
       ( Core.catMaybes
-          [ ("computationTimeMillis" Core..=) Core.. Core.AsText
+          [ ("computationTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> computationTimeMillis,
             ("dataTypeName" Core..=) Core.<$> dataTypeName,
-            ("endTimeNanos" Core..=) Core.. Core.AsText
-              Core.<$> endTimeNanos,
-            ("modifiedTimeMillis" Core..=) Core.. Core.AsText
+            ("endTimeNanos" Core..=) Core.. Core.AsText Core.<$> endTimeNanos,
+            ("modifiedTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> modifiedTimeMillis,
-            ("originDataSourceId" Core..=)
-              Core.<$> originDataSourceId,
-            ("rawTimestampNanos" Core..=) Core.. Core.AsText
+            ("originDataSourceId" Core..=) Core.<$> originDataSourceId,
+            ("rawTimestampNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> rawTimestampNanos,
-            ("startTimeNanos" Core..=) Core.. Core.AsText
+            ("startTimeNanos" Core..=)
+              Core.. Core.AsText
               Core.<$> startTimeNanos,
             ("value" Core..=) Core.<$> value
           ]
@@ -672,8 +666,7 @@ instance Core.ToJSON DataSource where
     Core.object
       ( Core.catMaybes
           [ ("application" Core..=) Core.<$> application,
-            ("dataQualityStandard" Core..=)
-              Core.<$> dataQualityStandard,
+            ("dataQualityStandard" Core..=) Core.<$> dataQualityStandard,
             ("dataStreamId" Core..=) Core.<$> dataStreamId,
             ("dataStreamName" Core..=) Core.<$> dataStreamName,
             ("dataType" Core..=) Core.<$> dataType,
@@ -704,16 +697,15 @@ instance Core.FromJSON DataType where
       "DataType"
       ( \o ->
           DataType
-            Core.<$> (o Core..:? "field") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "field")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON DataType where
   toJSON DataType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("field" Core..=) Core.<$> field,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("field" Core..=) Core.<$> field, ("name" Core..=) Core.<$> name]
       )
 
 -- | In case of multi-dimensional data (such as an accelerometer with x, y, and z axes) each field represents one dimension. Each data type field has a unique name which identifies it. The field also defines the format of the data (int, float, etc.). This message is only instantiated in code and not used for wire comms or stored in any way.
@@ -724,7 +716,6 @@ data DataTypeField = DataTypeField
     format :: (Core.Maybe DataTypeField_Format),
     -- | Defines the name and format of data. Unlike data type names, field names are not namespaced, and only need to be unique within the data type.
     name :: (Core.Maybe Core.Text),
-    -- |
     optional :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -796,12 +787,8 @@ instance Core.FromJSON Dataset where
       ( \o ->
           Dataset
             Core.<$> (o Core..:? "dataSourceId")
-            Core.<*> ( o Core..:? "maxEndTimeNs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "minStartTimeNs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxEndTimeNs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minStartTimeNs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "point")
       )
@@ -811,9 +798,9 @@ instance Core.ToJSON Dataset where
     Core.object
       ( Core.catMaybes
           [ ("dataSourceId" Core..=) Core.<$> dataSourceId,
-            ("maxEndTimeNs" Core..=) Core.. Core.AsText
-              Core.<$> maxEndTimeNs,
-            ("minStartTimeNs" Core..=) Core.. Core.AsText
+            ("maxEndTimeNs" Core..=) Core.. Core.AsText Core.<$> maxEndTimeNs,
+            ("minStartTimeNs" Core..=)
+              Core.. Core.AsText
               Core.<$> minStartTimeNs,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("point" Core..=) Core.<$> point
@@ -916,10 +903,8 @@ instance Core.ToJSON ListDataPointChangesResponse where
     Core.object
       ( Core.catMaybes
           [ ("dataSourceId" Core..=) Core.<$> dataSourceId,
-            ("deletedDataPoint" Core..=)
-              Core.<$> deletedDataPoint,
-            ("insertedDataPoint" Core..=)
-              Core.<$> insertedDataPoint,
+            ("deletedDataPoint" Core..=) Core.<$> deletedDataPoint,
+            ("insertedDataPoint" Core..=) Core.<$> insertedDataPoint,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -935,23 +920,19 @@ newtype ListDataSourcesResponse = ListDataSourcesResponse
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
 newListDataSourcesResponse ::
   ListDataSourcesResponse
-newListDataSourcesResponse = ListDataSourcesResponse {dataSource = Core.Nothing}
+newListDataSourcesResponse =
+  ListDataSourcesResponse {dataSource = Core.Nothing}
 
 instance Core.FromJSON ListDataSourcesResponse where
   parseJSON =
     Core.withObject
       "ListDataSourcesResponse"
-      ( \o ->
-          ListDataSourcesResponse
-            Core.<$> (o Core..:? "dataSource")
-      )
+      (\o -> ListDataSourcesResponse Core.<$> (o Core..:? "dataSource"))
 
 instance Core.ToJSON ListDataSourcesResponse where
   toJSON ListDataSourcesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataSource" Core..=) Core.<$> dataSource]
-      )
+      (Core.catMaybes [("dataSource" Core..=) Core.<$> dataSource])
 
 --
 -- /See:/ 'newListSessionsResponse' smart constructor.
@@ -1023,8 +1004,7 @@ instance Core.FromJSON MapValue where
 
 instance Core.ToJSON MapValue where
   toJSON MapValue {..} =
-    Core.object
-      (Core.catMaybes [("fpVal" Core..=) Core.<$> fpVal])
+    Core.object (Core.catMaybes [("fpVal" Core..=) Core.<$> fpVal])
 
 -- | Sessions contain metadata, such as a user-friendly name and time interval information.
 --
@@ -1073,41 +1053,40 @@ instance Core.FromJSON Session where
       "Session"
       ( \o ->
           Session
-            Core.<$> ( o Core..:? "activeTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "activeTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "activityType")
             Core.<*> (o Core..:? "application")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "endTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "endTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "modifiedTimeMillis"
+            Core.<*> ( o
+                         Core..:? "modifiedTimeMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "startTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startTimeMillis" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Session where
   toJSON Session {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeTimeMillis" Core..=) Core.. Core.AsText
+          [ ("activeTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> activeTimeMillis,
             ("activityType" Core..=) Core.<$> activityType,
             ("application" Core..=) Core.<$> application,
             ("description" Core..=) Core.<$> description,
-            ("endTimeMillis" Core..=) Core.. Core.AsText
+            ("endTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> endTimeMillis,
             ("id" Core..=) Core.<$> id,
-            ("modifiedTimeMillis" Core..=) Core.. Core.AsText
+            ("modifiedTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> modifiedTimeMillis,
             ("name" Core..=) Core.<$> name,
-            ("startTimeMillis" Core..=) Core.. Core.AsText
+            ("startTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> startTimeMillis
           ]
       )
@@ -1164,9 +1143,7 @@ instance Core.ToJSON Value where
 --
 -- /See:/ 'newValueMapValEntry' smart constructor.
 data ValueMapValEntry = ValueMapValEntry
-  { -- |
-    key :: (Core.Maybe Core.Text),
-    -- |
+  { key :: (Core.Maybe Core.Text),
     value :: (Core.Maybe MapValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1183,14 +1160,13 @@ instance Core.FromJSON ValueMapValEntry where
       "ValueMapValEntry"
       ( \o ->
           ValueMapValEntry
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ValueMapValEntry where
   toJSON ValueMapValEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )

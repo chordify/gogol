@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.Interconnects.GetDiagnostics
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the interconnectDiagnostics for the specified Interconnect.
+-- Returns the interconnectDiagnostics for the specified Interconnect. In the event of a global outage, do not use this API to make decisions about where to redirect your network traffic. Unlike a VLAN attachment, which is regional, a Cloud Interconnect connection is a global resource. A global outage can prevent this API from functioning properly.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.interconnects.getDiagnostics@.
 module Gogol.Compute.Interconnects.GetDiagnostics
@@ -40,7 +38,7 @@ module Gogol.Compute.Interconnects.GetDiagnostics
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.interconnects.getDiagnostics@ method which the
 -- 'ComputeInterconnectsGetDiagnostics' request conforms to.
@@ -59,11 +57,9 @@ type ComputeInterconnectsGetDiagnosticsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              InterconnectsGetDiagnosticsResponse
+    Core.:> Core.Get '[Core.JSON] InterconnectsGetDiagnosticsResponse
 
--- | Returns the interconnectDiagnostics for the specified Interconnect.
+-- | Returns the interconnectDiagnostics for the specified Interconnect. In the event of a global outage, do not use this API to make decisions about where to redirect your network traffic. Unlike a VLAN attachment, which is regional, a Cloud Interconnect connection is a global resource. A global outage can prevent this API from functioning properly.
 --
 -- /See:/ 'newComputeInterconnectsGetDiagnostics' smart constructor.
 data ComputeInterconnectsGetDiagnostics = ComputeInterconnectsGetDiagnostics
@@ -102,19 +98,13 @@ newComputeInterconnectsGetDiagnostics interconnect project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInterconnectsGetDiagnostics
-  where
+instance Core.GoogleRequest ComputeInterconnectsGetDiagnostics where
   type
     Rs ComputeInterconnectsGetDiagnostics =
       InterconnectsGetDiagnosticsResponse
   type
     Scopes ComputeInterconnectsGetDiagnostics =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeInterconnectsGetDiagnostics {..} =
     go
       project
@@ -130,7 +120,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeInterconnectsGetDiagnosticsResource
+              Core.Proxy ComputeInterconnectsGetDiagnosticsResource
           )
           Core.mempty

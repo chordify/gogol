@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Subscriptions.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a subscription to a given topic. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource/names). If the subscription already exists, returns @ALREADY_EXISTS@. If the corresponding topic doesn\'t exist, returns @NOT_FOUND@. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic, conforming to the [resource name format] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource/names). The generated name is populated in the returned Subscription object. Note that for REST API requests, you must specify a name in the request.
+-- Creates a subscription to a given topic. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource/names). If the subscription already exists, returns @ALREADY_EXISTS@. If the corresponding topic doesn\'t exist, returns @NOT_FOUND@. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic, conforming to the [resource name format] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource/names). The generated name is populated in the returned Subscription object. Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Gogol.PubSub.Projects.Subscriptions.Create
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Subscriptions.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.create@ method which the
@@ -56,7 +54,7 @@ type PubSubProjectsSubscriptionsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Subscription
     Core.:> Core.Put '[Core.JSON] Subscription
 
--- | Creates a subscription to a given topic. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource/names). If the subscription already exists, returns @ALREADY_EXISTS@. If the corresponding topic doesn\'t exist, returns @NOT_FOUND@. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic, conforming to the [resource name format] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource/names). The generated name is populated in the returned Subscription object. Note that for REST API requests, you must specify a name in the request.
+-- | Creates a subscription to a given topic. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource/names). If the subscription already exists, returns @ALREADY_EXISTS@. If the corresponding topic doesn\'t exist, returns @NOT_FOUND@. If the name is not provided in the request, the server will assign a random name for this subscription on the same project as the topic, conforming to the [resource name format] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource/names). The generated name is populated in the returned Subscription object. Note that for REST API requests, you must specify a name in the request.
 --
 -- /See:/ 'newPubSubProjectsSubscriptionsCreate' smart constructor.
 data PubSubProjectsSubscriptionsCreate = PubSubProjectsSubscriptionsCreate
@@ -95,13 +93,8 @@ newPubSubProjectsSubscriptionsCreate name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSubscriptionsCreate
-  where
-  type
-    Rs PubSubProjectsSubscriptionsCreate =
-      Subscription
+instance Core.GoogleRequest PubSubProjectsSubscriptionsCreate where
+  type Rs PubSubProjectsSubscriptionsCreate = Subscription
   type
     Scopes PubSubProjectsSubscriptionsCreate =
       '[CloudPlatform'FullControl, Pubsub'FullControl]

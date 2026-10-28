@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.StreetViewPublish.Internal.Product
@@ -160,7 +158,7 @@ module Gogol.StreetViewPublish.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StreetViewPublish.Internal.Sum
 
 -- | Request to delete multiple Photos.
@@ -175,23 +173,19 @@ newtype BatchDeletePhotosRequest = BatchDeletePhotosRequest
 -- | Creates a value of 'BatchDeletePhotosRequest' with the minimum fields required to make a request.
 newBatchDeletePhotosRequest ::
   BatchDeletePhotosRequest
-newBatchDeletePhotosRequest = BatchDeletePhotosRequest {photoIds = Core.Nothing}
+newBatchDeletePhotosRequest =
+  BatchDeletePhotosRequest {photoIds = Core.Nothing}
 
 instance Core.FromJSON BatchDeletePhotosRequest where
   parseJSON =
     Core.withObject
       "BatchDeletePhotosRequest"
-      ( \o ->
-          BatchDeletePhotosRequest
-            Core.<$> (o Core..:? "photoIds")
-      )
+      (\o -> BatchDeletePhotosRequest Core.<$> (o Core..:? "photoIds"))
 
 instance Core.ToJSON BatchDeletePhotosRequest where
   toJSON BatchDeletePhotosRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("photoIds" Core..=) Core.<$> photoIds]
-      )
+      (Core.catMaybes [("photoIds" Core..=) Core.<$> photoIds])
 
 -- | Response to batch delete of one or more Photos.
 --
@@ -205,21 +199,18 @@ newtype BatchDeletePhotosResponse = BatchDeletePhotosResponse
 -- | Creates a value of 'BatchDeletePhotosResponse' with the minimum fields required to make a request.
 newBatchDeletePhotosResponse ::
   BatchDeletePhotosResponse
-newBatchDeletePhotosResponse = BatchDeletePhotosResponse {status = Core.Nothing}
+newBatchDeletePhotosResponse =
+  BatchDeletePhotosResponse {status = Core.Nothing}
 
 instance Core.FromJSON BatchDeletePhotosResponse where
   parseJSON =
     Core.withObject
       "BatchDeletePhotosResponse"
-      ( \o ->
-          BatchDeletePhotosResponse
-            Core.<$> (o Core..:? "status")
-      )
+      (\o -> BatchDeletePhotosResponse Core.<$> (o Core..:? "status"))
 
 instance Core.ToJSON BatchDeletePhotosResponse where
   toJSON BatchDeletePhotosResponse {..} =
-    Core.object
-      (Core.catMaybes [("status" Core..=) Core.<$> status])
+    Core.object (Core.catMaybes [("status" Core..=) Core.<$> status])
 
 -- | Response to batch get of Photos.
 --
@@ -233,23 +224,19 @@ newtype BatchGetPhotosResponse = BatchGetPhotosResponse
 -- | Creates a value of 'BatchGetPhotosResponse' with the minimum fields required to make a request.
 newBatchGetPhotosResponse ::
   BatchGetPhotosResponse
-newBatchGetPhotosResponse = BatchGetPhotosResponse {results = Core.Nothing}
+newBatchGetPhotosResponse =
+  BatchGetPhotosResponse {results = Core.Nothing}
 
 instance Core.FromJSON BatchGetPhotosResponse where
   parseJSON =
     Core.withObject
       "BatchGetPhotosResponse"
-      ( \o ->
-          BatchGetPhotosResponse
-            Core.<$> (o Core..:? "results")
-      )
+      (\o -> BatchGetPhotosResponse Core.<$> (o Core..:? "results"))
 
 instance Core.ToJSON BatchGetPhotosResponse where
   toJSON BatchGetPhotosResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("results" Core..=) Core.<$> results]
-      )
+      (Core.catMaybes [("results" Core..=) Core.<$> results])
 
 -- | Request to update the metadata of photos. Updating the pixels of photos is not supported.
 --
@@ -279,9 +266,7 @@ instance Core.ToJSON BatchUpdatePhotosRequest where
   toJSON BatchUpdatePhotosRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("updatePhotoRequests" Core..=)
-              Core.<$> updatePhotoRequests
-          ]
+          [("updatePhotoRequests" Core..=) Core.<$> updatePhotoRequests]
       )
 
 -- | Response to batch update of metadata of one or more Photos.
@@ -303,17 +288,12 @@ instance Core.FromJSON BatchUpdatePhotosResponse where
   parseJSON =
     Core.withObject
       "BatchUpdatePhotosResponse"
-      ( \o ->
-          BatchUpdatePhotosResponse
-            Core.<$> (o Core..:? "results")
-      )
+      (\o -> BatchUpdatePhotosResponse Core.<$> (o Core..:? "results"))
 
 instance Core.ToJSON BatchUpdatePhotosResponse where
   toJSON BatchUpdatePhotosResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("results" Core..=) Core.<$> results]
-      )
+      (Core.catMaybes [("results" Core..=) Core.<$> results])
 
 -- | A connection is the link from a source photo to a destination photo.
 --
@@ -337,8 +317,7 @@ instance Core.FromJSON Connection where
 
 instance Core.ToJSON Connection where
   toJSON Connection {..} =
-    Core.object
-      (Core.catMaybes [("target" Core..=) Core.<$> target])
+    Core.object (Core.catMaybes [("target" Core..=) Core.<$> target])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -352,8 +331,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -414,7 +392,11 @@ data Imu = Imu
 newImu ::
   Imu
 newImu =
-  Imu {accelMpsps = Core.Nothing, gyroRps = Core.Nothing, magUt = Core.Nothing}
+  Imu
+    { accelMpsps = Core.Nothing,
+      gyroRps = Core.Nothing,
+      magUt = Core.Nothing
+    }
 
 instance Core.FromJSON Imu where
   parseJSON =
@@ -521,7 +503,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -599,8 +582,7 @@ instance Core.FromJSON Level where
     Core.withObject
       "Level"
       ( \o ->
-          Level
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "number")
+          Level Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "number")
       )
 
 instance Core.ToJSON Level where
@@ -666,7 +648,10 @@ data ListPhotosResponse = ListPhotosResponse
 newListPhotosResponse ::
   ListPhotosResponse
 newListPhotosResponse =
-  ListPhotosResponse {nextPageToken = Core.Nothing, photos = Core.Nothing}
+  ListPhotosResponse
+    { nextPageToken = Core.Nothing,
+      photos = Core.Nothing
+    }
 
 instance Core.FromJSON ListPhotosResponse where
   parseJSON =
@@ -805,16 +790,13 @@ instance Core.FromJSON NotOutdoorsFailureDetails where
     Core.withObject
       "NotOutdoorsFailureDetails"
       ( \o ->
-          NotOutdoorsFailureDetails
-            Core.<$> (o Core..:? "startTime")
+          NotOutdoorsFailureDetails Core.<$> (o Core..:? "startTime")
       )
 
 instance Core.ToJSON NotOutdoorsFailureDetails where
   toJSON NotOutdoorsFailureDetails {..} =
     Core.object
-      ( Core.catMaybes
-          [("startTime" Core..=) Core.<$> startTime]
-      )
+      (Core.catMaybes [("startTime" Core..=) Core.<$> startTime])
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -828,7 +810,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -884,21 +866,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -912,19 +892,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Photo is used to store 360 photos along with photo metadata.
 --
@@ -997,9 +975,7 @@ instance Core.FromJSON Photo where
             Core.<*> (o Core..:? "transferStatus")
             Core.<*> (o Core..:? "uploadReference")
             Core.<*> (o Core..:? "uploadTime")
-            Core.<*> ( o Core..:? "viewCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "viewCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Photo where
@@ -1009,8 +985,7 @@ instance Core.ToJSON Photo where
           [ ("captureTime" Core..=) Core.<$> captureTime,
             ("connections" Core..=) Core.<$> connections,
             ("downloadUrl" Core..=) Core.<$> downloadUrl,
-            ("mapsPublishStatus" Core..=)
-              Core.<$> mapsPublishStatus,
+            ("mapsPublishStatus" Core..=) Core.<$> mapsPublishStatus,
             ("photoId" Core..=) Core.<$> photoId,
             ("places" Core..=) Core.<$> places,
             ("pose" Core..=) Core.<$> pose,
@@ -1019,8 +994,7 @@ instance Core.ToJSON Photo where
             ("transferStatus" Core..=) Core.<$> transferStatus,
             ("uploadReference" Core..=) Core.<$> uploadReference,
             ("uploadTime" Core..=) Core.<$> uploadTime,
-            ("viewCount" Core..=) Core.. Core.AsText
-              Core.<$> viewCount
+            ("viewCount" Core..=) Core.. Core.AsText Core.<$> viewCount
           ]
       )
 
@@ -1046,8 +1020,7 @@ instance Core.FromJSON PhotoId where
 
 instance Core.ToJSON PhotoId where
   toJSON PhotoId {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 -- | Response payload for a single Photo in batch operations including BatchGetPhotos and BatchUpdatePhotos.
 --
@@ -1063,7 +1036,8 @@ data PhotoResponse = PhotoResponse
 -- | Creates a value of 'PhotoResponse' with the minimum fields required to make a request.
 newPhotoResponse ::
   PhotoResponse
-newPhotoResponse = PhotoResponse {photo = Core.Nothing, status = Core.Nothing}
+newPhotoResponse =
+  PhotoResponse {photo = Core.Nothing, status = Core.Nothing}
 
 instance Core.FromJSON PhotoResponse where
   parseJSON =
@@ -1071,7 +1045,8 @@ instance Core.FromJSON PhotoResponse where
       "PhotoResponse"
       ( \o ->
           PhotoResponse
-            Core.<$> (o Core..:? "photo") Core.<*> (o Core..:? "status")
+            Core.<$> (o Core..:? "photo")
+            Core.<*> (o Core..:? "status")
       )
 
 instance Core.ToJSON PhotoResponse where
@@ -1162,17 +1137,14 @@ instance Core.FromJSON PhotoSequence where
             Core.<*> (o Core..:? "sequenceBounds")
             Core.<*> (o Core..:? "uploadReference")
             Core.<*> (o Core..:? "uploadTime")
-            Core.<*> ( o Core..:? "viewCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "viewCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PhotoSequence where
   toJSON PhotoSequence {..} =
     Core.object
       ( Core.catMaybes
-          [ ("captureTimeOverride" Core..=)
-              Core.<$> captureTimeOverride,
+          [ ("captureTimeOverride" Core..=) Core.<$> captureTimeOverride,
             ("distanceMeters" Core..=) Core.<$> distanceMeters,
             ("failureDetails" Core..=) Core.<$> failureDetails,
             ("failureReason" Core..=) Core.<$> failureReason,
@@ -1186,8 +1158,7 @@ instance Core.ToJSON PhotoSequence where
             ("sequenceBounds" Core..=) Core.<$> sequenceBounds,
             ("uploadReference" Core..=) Core.<$> uploadReference,
             ("uploadTime" Core..=) Core.<$> uploadTime,
-            ("viewCount" Core..=) Core.. Core.AsText
-              Core.<$> viewCount
+            ("viewCount" Core..=) Core.. Core.AsText Core.<$> viewCount
           ]
       )
 
@@ -1351,16 +1322,11 @@ instance Core.ToJSON ProcessingFailureDetails where
   toJSON ProcessingFailureDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("gpsDataGapDetails" Core..=)
-              Core.<$> gpsDataGapDetails,
-            ("imuDataGapDetails" Core..=)
-              Core.<$> imuDataGapDetails,
-            ("insufficientGpsDetails" Core..=)
-              Core.<$> insufficientGpsDetails,
-            ("noOverlapGpsDetails" Core..=)
-              Core.<$> noOverlapGpsDetails,
-            ("notOutdoorsDetails" Core..=)
-              Core.<$> notOutdoorsDetails
+          [ ("gpsDataGapDetails" Core..=) Core.<$> gpsDataGapDetails,
+            ("imuDataGapDetails" Core..=) Core.<$> imuDataGapDetails,
+            ("insufficientGpsDetails" Core..=) Core.<$> insufficientGpsDetails,
+            ("noOverlapGpsDetails" Core..=) Core.<$> noOverlapGpsDetails,
+            ("notOutdoorsDetails" Core..=) Core.<$> notOutdoorsDetails
           ]
       )
 
@@ -1381,7 +1347,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1417,19 +1387,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request to update the metadata of a Photo. Updating the pixels of a photo is not supported.
 --
@@ -1446,7 +1414,10 @@ data UpdatePhotoRequest = UpdatePhotoRequest
 newUpdatePhotoRequest ::
   UpdatePhotoRequest
 newUpdatePhotoRequest =
-  UpdatePhotoRequest {photo = Core.Nothing, updateMask = Core.Nothing}
+  UpdatePhotoRequest
+    { photo = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON UpdatePhotoRequest where
   parseJSON =
@@ -1490,6 +1461,4 @@ instance Core.FromJSON UploadRef where
 instance Core.ToJSON UploadRef where
   toJSON UploadRef {..} =
     Core.object
-      ( Core.catMaybes
-          [("uploadUrl" Core..=) Core.<$> uploadUrl]
-      )
+      (Core.catMaybes [("uploadUrl" Core..=) Core.<$> uploadUrl])

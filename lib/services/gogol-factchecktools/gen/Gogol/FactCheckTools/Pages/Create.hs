@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FactCheckTools.Pages.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FactCheckTools.Pages.Create
 where
 
 import Gogol.FactCheckTools.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @factchecktools.pages.create@ method which the
 -- 'FactCheckToolsPagesCreate' request conforms to.
@@ -100,7 +98,7 @@ instance Core.GoogleRequest FactCheckToolsPagesCreate where
       GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
   type
     Scopes FactCheckToolsPagesCreate =
-      '[Userinfo'Email]
+      '[Factchecktools'FullControl]
   requestClient FactCheckToolsPagesCreate {..} =
     go
       xgafv
@@ -114,7 +112,5 @@ instance Core.GoogleRequest FactCheckToolsPagesCreate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FactCheckToolsPagesCreateResource
-          )
+          (Core.Proxy :: Core.Proxy FactCheckToolsPagesCreateResource)
           Core.mempty

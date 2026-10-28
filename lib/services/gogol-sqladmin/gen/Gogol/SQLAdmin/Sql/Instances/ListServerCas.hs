@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Instances.ListServerCas
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Instances.ListServerCas
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.instances.listServerCas@ method which the
@@ -57,9 +55,7 @@ type SqlInstancesListServerCasResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              InstancesListServerCasResponse
+    Core.:> Core.Get '[Core.JSON] InstancesListServerCasResponse
 
 -- | Lists all of the trusted Certificate Authorities (CAs) for the specified instance. There can be up to three CAs listed: the CA that was used to sign the certificate that is currently in use, a CA that has been added but not yet used to sign a certificate, and a CA used to sign a certificate that has previously rotated out.
 --
@@ -101,9 +97,7 @@ newSqlInstancesListServerCas instance' project =
     }
 
 instance Core.GoogleRequest SqlInstancesListServerCas where
-  type
-    Rs SqlInstancesListServerCas =
-      InstancesListServerCasResponse
+  type Rs SqlInstancesListServerCas = InstancesListServerCasResponse
   type
     Scopes SqlInstancesListServerCas =
       '[CloudPlatform'FullControl, Sqlservice'Admin]
@@ -121,7 +115,5 @@ instance Core.GoogleRequest SqlInstancesListServerCas where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SqlInstancesListServerCasResource
-          )
+          (Core.Proxy :: Core.Proxy SqlInstancesListServerCasResource)
           Core.mempty

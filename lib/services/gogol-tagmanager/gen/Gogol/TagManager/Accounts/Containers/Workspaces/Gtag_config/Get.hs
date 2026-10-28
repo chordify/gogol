@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Gtag_config.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.gtag_config.get@ method which the
@@ -82,7 +80,8 @@ newTagManagerAccountsContainersWorkspacesGtag_configGet ::
   TagManagerAccountsContainersWorkspacesGtag_configGet
 newTagManagerAccountsContainersWorkspacesGtag_configGet path =
   TagManagerAccountsContainersWorkspacesGtag_configGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       path = path,
@@ -95,12 +94,10 @@ instance
     TagManagerAccountsContainersWorkspacesGtag_configGet
   where
   type
-    Rs
-      TagManagerAccountsContainersWorkspacesGtag_configGet =
+    Rs TagManagerAccountsContainersWorkspacesGtag_configGet =
       GtagConfig
   type
-    Scopes
-      TagManagerAccountsContainersWorkspacesGtag_configGet =
+    Scopes TagManagerAccountsContainersWorkspacesGtag_configGet =
       '[Tagmanager'Edit'Containers, Tagmanager'Readonly]
   requestClient
     TagManagerAccountsContainersWorkspacesGtag_configGet {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionNetworkFirewallPolicies.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionNetworkFirewallPolicies.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionNetworkFirewallPolicies.patch@ method which the
 -- 'ComputeRegionNetworkFirewallPoliciesPatch' request conforms to.
@@ -101,50 +99,50 @@ newComputeRegionNetworkFirewallPoliciesPatch ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionNetworkFirewallPoliciesPatch
-newComputeRegionNetworkFirewallPoliciesPatch firewallPolicy payload project region =
-  ComputeRegionNetworkFirewallPoliciesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      firewallPolicy = firewallPolicy,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionNetworkFirewallPoliciesPatch
+  firewallPolicy
+  payload
+  project
+  region =
+    ComputeRegionNetworkFirewallPoliciesPatch
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        firewallPolicy = firewallPolicy,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionNetworkFirewallPoliciesPatch
   where
-  type
-    Rs ComputeRegionNetworkFirewallPoliciesPatch =
-      Operation
+  type Rs ComputeRegionNetworkFirewallPoliciesPatch = Operation
   type
     Scopes ComputeRegionNetworkFirewallPoliciesPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionNetworkFirewallPoliciesPatch {..} =
-      go
-        project
-        region
-        firewallPolicy
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionNetworkFirewallPoliciesPatchResource
-            )
-            Core.mempty
+  requestClient ComputeRegionNetworkFirewallPoliciesPatch {..} =
+    go
+      project
+      region
+      firewallPolicy
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionNetworkFirewallPoliciesPatchResource
+          )
+          Core.mempty

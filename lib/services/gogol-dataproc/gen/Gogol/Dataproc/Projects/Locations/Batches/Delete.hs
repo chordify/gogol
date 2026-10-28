@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Locations.Batches.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the batch workload resource. If the batch is not in terminal state, the delete fails and the response returns FAILED_PRECONDITION.
+-- Deletes the batch workload resource. If the batch is not in a CANCELLED, SUCCEEDED or FAILED State, the delete operation fails and the response returns FAILED_PRECONDITION.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Cloud Dataproc API Reference> for @dataproc.projects.locations.batches.delete@.
 module Gogol.Dataproc.Projects.Locations.Batches.Delete
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Locations.Batches.Delete
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.locations.batches.delete@ method which the
 -- 'DataprocProjectsLocationsBatchesDelete' request conforms to.
@@ -55,7 +53,7 @@ type DataprocProjectsLocationsBatchesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes the batch workload resource. If the batch is not in terminal state, the delete fails and the response returns FAILED_PRECONDITION.
+-- | Deletes the batch workload resource. If the batch is not in a CANCELLED, SUCCEEDED or FAILED State, the delete operation fails and the response returns FAILED_PRECONDITION.
 --
 -- /See:/ 'newDataprocProjectsLocationsBatchesDelete' smart constructor.
 data DataprocProjectsLocationsBatchesDelete = DataprocProjectsLocationsBatchesDelete
@@ -89,32 +87,25 @@ newDataprocProjectsLocationsBatchesDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsLocationsBatchesDelete
-  where
-  type
-    Rs DataprocProjectsLocationsBatchesDelete =
-      Empty
+instance Core.GoogleRequest DataprocProjectsLocationsBatchesDelete where
+  type Rs DataprocProjectsLocationsBatchesDelete = Empty
   type
     Scopes DataprocProjectsLocationsBatchesDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsLocationsBatchesDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsLocationsBatchesDeleteResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsLocationsBatchesDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsLocationsBatchesDeleteResource
+          )
+          Core.mempty

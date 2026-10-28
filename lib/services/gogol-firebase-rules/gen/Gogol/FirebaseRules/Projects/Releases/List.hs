@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRules.Projects.Releases.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FirebaseRules.Projects.Releases.List
 where
 
 import Gogol.FirebaseRules.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firebaserules.projects.releases.list@ method which the
 -- 'FirebaseRulesProjectsReleasesList' request conforms to.
@@ -69,13 +67,13 @@ data FirebaseRulesProjectsReleasesList = FirebaseRulesProjectsReleasesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | @Release@ filter. The list method supports filters with restrictions on the @Release.name@, and @Release.ruleset_name@. Example 1: A filter of \'name=prod/\' might return @Release@s with names within \'projects\/foo\' prefixed with \'prod\': Name -> Ruleset Name: / projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/uuid1234 * projects\/foo\/releases\/prod\/v1 -> projects\/foo\/rulesets\/uuid1234 * projects\/foo\/releases\/prod\/v2 -> projects\/foo\/rulesets\/uuid8888 Example 2: A filter of @name=prod* ruleset_name=uuid1234@ would return only @Release@ instances for \'projects\/foo\' with names prefixed with \'prod\' referring to the same @Ruleset@ name of \'uuid1234\': Name -> Ruleset Name: * projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/1234 * projects\/foo\/releases\/prod\/v1 -> projects\/foo\/rulesets\/1234 In the examples, the filter parameters refer to the search filters are relative to the project. Fully qualified prefixed may also be used.
+    -- | Optional. @Release@ filter. The list method supports filters with restrictions on the @Release.name@, and @Release.ruleset_name@. Example 1: A filter of \'name=prod/\' might return @Release@s with names within \'projects\/foo\' prefixed with \'prod\': Name -> Ruleset Name: / projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/uuid1234 * projects\/foo\/releases\/prod\/v1 -> projects\/foo\/rulesets\/uuid1234 * projects\/foo\/releases\/prod\/v2 -> projects\/foo\/rulesets\/uuid8888 Example 2: A filter of @name=prod* ruleset_name=uuid1234@ would return only @Release@ instances for \'projects\/foo\' with names prefixed with \'prod\' referring to the same @Ruleset@ name of \'uuid1234\': Name -> Ruleset Name: * projects\/foo\/releases\/prod -> projects\/foo\/rulesets\/1234 * projects\/foo\/releases\/prod\/v1 -> projects\/foo\/rulesets\/1234 In the examples, the filter parameters refer to the search filters are relative to the project. Fully qualified prefixed may also be used.
     filter :: (Core.Maybe Core.Text),
     -- | Required. Resource name for the project. Format: @projects\/{project_id}@
     name :: Core.Text,
-    -- | Page size to load. Maximum of 100. Defaults to 10. Note: @page_size@ is just a hint and the service may choose to load fewer than @page_size@ results due to the size of the output. To traverse all of the releases, the caller should iterate until the @page_token@ on the response is empty.
+    -- | Optional. Page size to load. Maximum of 100. Defaults to 10. Note: @page_size@ is just a hint and the service may choose to load fewer than @page_size@ results due to the size of the output. To traverse all of the releases, the caller should iterate until the @page_token@ on the response is empty.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Next page token for the next batch of @Release@ instances.
+    -- | Optional. Next page token for the next batch of @Release@ instances.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -102,13 +100,8 @@ newFirebaseRulesProjectsReleasesList name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FirebaseRulesProjectsReleasesList
-  where
-  type
-    Rs FirebaseRulesProjectsReleasesList =
-      ListReleasesResponse
+instance Core.GoogleRequest FirebaseRulesProjectsReleasesList where
+  type Rs FirebaseRulesProjectsReleasesList = ListReleasesResponse
   type
     Scopes FirebaseRulesProjectsReleasesList =
       '[ CloudPlatform'FullControl,

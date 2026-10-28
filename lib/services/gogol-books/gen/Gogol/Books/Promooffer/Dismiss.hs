@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Promooffer.Dismiss
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Promooffer.Dismiss
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.promooffer.dismiss@ method which the
 -- 'BooksPromoofferDismiss' request conforms to.
@@ -116,9 +114,7 @@ newBooksPromoofferDismiss =
 
 instance Core.GoogleRequest BooksPromoofferDismiss where
   type Rs BooksPromoofferDismiss = Empty
-  type
-    Scopes BooksPromoofferDismiss =
-      '[Books'FullControl]
+  type Scopes BooksPromoofferDismiss = '[Books'FullControl]
   requestClient BooksPromoofferDismiss {..} =
     go
       xgafv
@@ -138,7 +134,5 @@ instance Core.GoogleRequest BooksPromoofferDismiss where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksPromoofferDismissResource
-          )
+          (Core.Proxy :: Core.Proxy BooksPromoofferDismissResource)
           Core.mempty

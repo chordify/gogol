@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SecurityCenter.Organizations.Sources.GetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.sources.getIamPolicy@ method which the
@@ -86,7 +84,8 @@ newSecurityCenterOrganizationsSourcesGetIamPolicy ::
   SecurityCenterOrganizationsSourcesGetIamPolicy
 newSecurityCenterOrganizationsSourcesGetIamPolicy payload resource =
   SecurityCenterOrganizationsSourcesGetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -99,31 +98,25 @@ instance
   Core.GoogleRequest
     SecurityCenterOrganizationsSourcesGetIamPolicy
   where
+  type Rs SecurityCenterOrganizationsSourcesGetIamPolicy = Policy
   type
-    Rs
-      SecurityCenterOrganizationsSourcesGetIamPolicy =
-      Policy
-  type
-    Scopes
-      SecurityCenterOrganizationsSourcesGetIamPolicy =
+    Scopes SecurityCenterOrganizationsSourcesGetIamPolicy =
       '[CloudPlatform'FullControl]
-  requestClient
-    SecurityCenterOrganizationsSourcesGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        securityCenterService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SecurityCenterOrganizationsSourcesGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient SecurityCenterOrganizationsSourcesGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      securityCenterService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SecurityCenterOrganizationsSourcesGetIamPolicyResource
+          )
+          Core.mempty

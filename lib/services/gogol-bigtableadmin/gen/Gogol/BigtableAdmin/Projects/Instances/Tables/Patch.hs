@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Tables.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Tables.Patch
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.tables.patch@ method which the
 -- 'BigtableAdminProjectsInstancesTablesPatch' request conforms to.
@@ -71,7 +69,7 @@ data BigtableAdminProjectsInstancesTablesPatch = BigtableAdminProjectsInstancesT
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Table,
-    -- | Required. The list of fields to update. A mask specifying which fields (e.g. @change_stream_config@) in the @table@ field should be updated. This mask is relative to the @table@ field, not to the request message. The wildcard (/) path is currently not supported. Currently UpdateTable is only supported for the following fields: / @change_stream_config@ * @change_stream_config.retention_period@ * @deletion_protection@ If @column_families@ is set in @update_mask@, it will return an UNIMPLEMENTED error.
+    -- | Required. The list of fields to update. A mask specifying which fields (e.g. @change_stream_config@) in the @table@ field should be updated. This mask is relative to the @table@ field, not to the request message. The wildcard (/) path is currently not supported. Currently UpdateTable is only supported for the following fields: / @change_stream_config@ * @change_stream_config.retention_period@ * @deletion_protection@ * @automated_backup_policy@ * @automated_backup_policy.retention_period@ * @automated_backup_policy.frequency@ * @row_key_schema@ If @column_families@ is set in @update_mask@, it will return an UNIMPLEMENTED error.
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -103,9 +101,7 @@ instance
   Core.GoogleRequest
     BigtableAdminProjectsInstancesTablesPatch
   where
-  type
-    Rs BigtableAdminProjectsInstancesTablesPatch =
-      Operation
+  type Rs BigtableAdminProjectsInstancesTablesPatch = Operation
   type
     Scopes BigtableAdminProjectsInstancesTablesPatch =
       '[ Bigtable'Admin,
@@ -114,24 +110,22 @@ instance
          CloudBigtable'Admin'Table,
          CloudPlatform'FullControl
        ]
-  requestClient
-    BigtableAdminProjectsInstancesTablesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesTablesPatchResource
-            )
-            Core.mempty
+  requestClient BigtableAdminProjectsInstancesTablesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BigtableAdminProjectsInstancesTablesPatchResource
+          )
+          Core.mempty

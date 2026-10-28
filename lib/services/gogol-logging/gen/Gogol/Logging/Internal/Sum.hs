@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Logging.Internal.Sum
@@ -42,6 +40,7 @@ module Gogol.Logging.Internal.Sum
         BucketMetadata_State_OPERATIONSTATESUCCEEDED,
         BucketMetadata_State_OPERATIONSTATEFAILED,
         BucketMetadata_State_OPERATIONSTATECANCELLED,
+        BucketMetadata_State_OPERATIONSTATEPENDING,
         ..
       ),
 
@@ -54,6 +53,15 @@ module Gogol.Logging.Internal.Sum
         CopyLogEntriesMetadata_State_OPERATIONSTATESUCCEEDED,
         CopyLogEntriesMetadata_State_OPERATIONSTATEFAILED,
         CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED,
+        CopyLogEntriesMetadata_State_OPERATIONSTATEPENDING,
+        ..
+      ),
+
+    -- * DefaultSinkConfig_Mode
+    DefaultSinkConfig_Mode
+      ( DefaultSinkConfig_Mode_FILTERWRITEMODEUNSPECIFIED,
+        DefaultSinkConfig_Mode_Append,
+        DefaultSinkConfig_Mode_Overwrite,
         ..
       ),
 
@@ -93,6 +101,7 @@ module Gogol.Logging.Internal.Sum
         LinkMetadata_State_OPERATIONSTATESUCCEEDED,
         LinkMetadata_State_OPERATIONSTATEFAILED,
         LinkMetadata_State_OPERATIONSTATECANCELLED,
+        LinkMetadata_State_OPERATIONSTATEPENDING,
         ..
       ),
 
@@ -197,6 +206,15 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
+    -- * MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+      ( MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+        MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+        ..
+      ),
+
     -- * MonitoredResourceDescriptor_LaunchStage
     MonitoredResourceDescriptor_LaunchStage
       ( MonitoredResourceDescriptor_LaunchStage_LAUNCHSTAGEUNSPECIFIED,
@@ -210,6 +228,14 @@ module Gogol.Logging.Internal.Sum
         ..
       ),
 
+    -- * SavedQuery_Visibility
+    SavedQuery_Visibility
+      ( SavedQuery_Visibility_VISIBILITYUNSPECIFIED,
+        SavedQuery_Visibility_Private,
+        SavedQuery_Visibility_Shared,
+        ..
+      ),
+
     -- * SuppressionInfo_Reason
     SuppressionInfo_Reason
       ( SuppressionInfo_Reason_REASONUNSPECIFIED,
@@ -220,7 +246,7 @@ module Gogol.Logging.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -249,7 +275,7 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
--- | State of an operation.
+-- | Output only. State of an operation.
 newtype BucketMetadata_State = BucketMetadata_State {fromBucketMetadata_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -290,6 +316,10 @@ pattern BucketMetadata_State_OPERATIONSTATEFAILED = BucketMetadata_State "OPERAT
 pattern BucketMetadata_State_OPERATIONSTATECANCELLED :: BucketMetadata_State
 pattern BucketMetadata_State_OPERATIONSTATECANCELLED = BucketMetadata_State "OPERATION_STATE_CANCELLED"
 
+-- | The operation is waiting for quota.
+pattern BucketMetadata_State_OPERATIONSTATEPENDING :: BucketMetadata_State
+pattern BucketMetadata_State_OPERATIONSTATEPENDING = BucketMetadata_State "OPERATION_STATE_PENDING"
+
 {-# COMPLETE
   BucketMetadata_State_OPERATIONSTATEUNSPECIFIED,
   BucketMetadata_State_OPERATIONSTATESCHEDULED,
@@ -298,10 +328,11 @@ pattern BucketMetadata_State_OPERATIONSTATECANCELLED = BucketMetadata_State "OPE
   BucketMetadata_State_OPERATIONSTATESUCCEEDED,
   BucketMetadata_State_OPERATIONSTATEFAILED,
   BucketMetadata_State_OPERATIONSTATECANCELLED,
+  BucketMetadata_State_OPERATIONSTATEPENDING,
   BucketMetadata_State
   #-}
 
--- | State of an operation.
+-- | Output only. State of an operation.
 newtype CopyLogEntriesMetadata_State = CopyLogEntriesMetadata_State {fromCopyLogEntriesMetadata_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -342,6 +373,10 @@ pattern CopyLogEntriesMetadata_State_OPERATIONSTATEFAILED = CopyLogEntriesMetada
 pattern CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED :: CopyLogEntriesMetadata_State
 pattern CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED = CopyLogEntriesMetadata_State "OPERATION_STATE_CANCELLED"
 
+-- | The operation is waiting for quota.
+pattern CopyLogEntriesMetadata_State_OPERATIONSTATEPENDING :: CopyLogEntriesMetadata_State
+pattern CopyLogEntriesMetadata_State_OPERATIONSTATEPENDING = CopyLogEntriesMetadata_State "OPERATION_STATE_PENDING"
+
 {-# COMPLETE
   CopyLogEntriesMetadata_State_OPERATIONSTATEUNSPECIFIED,
   CopyLogEntriesMetadata_State_OPERATIONSTATESCHEDULED,
@@ -350,7 +385,40 @@ pattern CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED = CopyLogEntriesMet
   CopyLogEntriesMetadata_State_OPERATIONSTATESUCCEEDED,
   CopyLogEntriesMetadata_State_OPERATIONSTATEFAILED,
   CopyLogEntriesMetadata_State_OPERATIONSTATECANCELLED,
+  CopyLogEntriesMetadata_State_OPERATIONSTATEPENDING,
   CopyLogEntriesMetadata_State
+  #-}
+
+-- | Required. Determines the behavior to apply to the built-in /Default sink inclusion filter.Exclusions are always appended, as built-in /Default sinks have no exclusions.
+newtype DefaultSinkConfig_Mode = DefaultSinkConfig_Mode {fromDefaultSinkConfig_Mode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The filter\'s write mode is unspecified. This mode must not be used.
+pattern DefaultSinkConfig_Mode_FILTERWRITEMODEUNSPECIFIED :: DefaultSinkConfig_Mode
+pattern DefaultSinkConfig_Mode_FILTERWRITEMODEUNSPECIFIED = DefaultSinkConfig_Mode "FILTER_WRITE_MODE_UNSPECIFIED"
+
+-- | The contents of filter will be appended to the built-in _Default sink filter. Using the append mode with an empty filter will keep the sink inclusion filter unchanged.
+pattern DefaultSinkConfig_Mode_Append :: DefaultSinkConfig_Mode
+pattern DefaultSinkConfig_Mode_Append = DefaultSinkConfig_Mode "APPEND"
+
+-- | The contents of filter will overwrite the built-in _Default sink filter.
+pattern DefaultSinkConfig_Mode_Overwrite :: DefaultSinkConfig_Mode
+pattern DefaultSinkConfig_Mode_Overwrite = DefaultSinkConfig_Mode "OVERWRITE"
+
+{-# COMPLETE
+  DefaultSinkConfig_Mode_FILTERWRITEMODEUNSPECIFIED,
+  DefaultSinkConfig_Mode_Append,
+  DefaultSinkConfig_Mode_Overwrite,
+  DefaultSinkConfig_Mode
   #-}
 
 -- | Required. The type of data in this index.
@@ -464,7 +532,7 @@ pattern Link_LifecycleState_Failed = Link_LifecycleState "FAILED"
   Link_LifecycleState
   #-}
 
--- | State of an operation.
+-- | Output only. State of an operation.
 newtype LinkMetadata_State = LinkMetadata_State {fromLinkMetadata_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -505,6 +573,10 @@ pattern LinkMetadata_State_OPERATIONSTATEFAILED = LinkMetadata_State "OPERATION_
 pattern LinkMetadata_State_OPERATIONSTATECANCELLED :: LinkMetadata_State
 pattern LinkMetadata_State_OPERATIONSTATECANCELLED = LinkMetadata_State "OPERATION_STATE_CANCELLED"
 
+-- | The operation is waiting for quota.
+pattern LinkMetadata_State_OPERATIONSTATEPENDING :: LinkMetadata_State
+pattern LinkMetadata_State_OPERATIONSTATEPENDING = LinkMetadata_State "OPERATION_STATE_PENDING"
+
 {-# COMPLETE
   LinkMetadata_State_OPERATIONSTATEUNSPECIFIED,
   LinkMetadata_State_OPERATIONSTATESCHEDULED,
@@ -513,6 +585,7 @@ pattern LinkMetadata_State_OPERATIONSTATECANCELLED = LinkMetadata_State "OPERATI
   LinkMetadata_State_OPERATIONSTATESUCCEEDED,
   LinkMetadata_State_OPERATIONSTATEFAILED,
   LinkMetadata_State_OPERATIONSTATECANCELLED,
+  LinkMetadata_State_OPERATIONSTATEPENDING,
   LinkMetadata_State
   #-}
 
@@ -949,6 +1022,42 @@ pattern MetricDescriptorMetadata_LaunchStage_Deprecated = MetricDescriptorMetada
   MetricDescriptorMetadata_LaunchStage
   #-}
 
+newtype MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem {fromMetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED"
+
+-- | Scopes a metric to a project.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "PROJECT"
+
+-- | Scopes a metric to an organization.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "ORGANIZATION"
+
+-- | Scopes a metric to a folder.
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder :: MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+pattern MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder = MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem "FOLDER"
+
+{-# COMPLETE
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_TIMESERIESRESOURCEHIERARCHYLEVELUNSPECIFIED,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Project,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Organization,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem_Folder,
+  MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+  #-}
+
 -- | Optional. The launch stage of the monitored resource definition.
 newtype MonitoredResourceDescriptor_LaunchStage = MonitoredResourceDescriptor_LaunchStage {fromMonitoredResourceDescriptor_LaunchStage :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1004,6 +1113,38 @@ pattern MonitoredResourceDescriptor_LaunchStage_Deprecated = MonitoredResourceDe
   MonitoredResourceDescriptor_LaunchStage_GA,
   MonitoredResourceDescriptor_LaunchStage_Deprecated,
   MonitoredResourceDescriptor_LaunchStage
+  #-}
+
+-- | Required. The visibility status of this query, which determines its ownership.
+newtype SavedQuery_Visibility = SavedQuery_Visibility {fromSavedQuery_Visibility :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The saved query visibility is unspecified. A CreateSavedQuery request with an unspecified visibility will be rejected.
+pattern SavedQuery_Visibility_VISIBILITYUNSPECIFIED :: SavedQuery_Visibility
+pattern SavedQuery_Visibility_VISIBILITYUNSPECIFIED = SavedQuery_Visibility "VISIBILITY_UNSPECIFIED"
+
+-- | The saved query is only visible to the user that created it.
+pattern SavedQuery_Visibility_Private :: SavedQuery_Visibility
+pattern SavedQuery_Visibility_Private = SavedQuery_Visibility "PRIVATE"
+
+-- | The saved query is visible to anyone in the project.
+pattern SavedQuery_Visibility_Shared :: SavedQuery_Visibility
+pattern SavedQuery_Visibility_Shared = SavedQuery_Visibility "SHARED"
+
+{-# COMPLETE
+  SavedQuery_Visibility_VISIBILITYUNSPECIFIED,
+  SavedQuery_Visibility_Private,
+  SavedQuery_Visibility_Shared,
+  SavedQuery_Visibility
   #-}
 
 -- | The reason that entries were omitted from the session.

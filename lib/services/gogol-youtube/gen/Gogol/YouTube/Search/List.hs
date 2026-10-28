@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Search.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Search.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.search.list@ method which the
@@ -61,39 +59,20 @@ type YouTubeSearchListResource =
     Core.:> Core.QueryParam "location" Core.Text
     Core.:> Core.QueryParam "locationRadius" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwner"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
     Core.:> Core.QueryParam "order" SearchListOrder
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "publishedAfter"
-              Core.DateTime
-    Core.:> Core.QueryParam
-              "publishedBefore"
-              Core.DateTime
+    Core.:> Core.QueryParam "publishedAfter" Core.DateTime
+    Core.:> Core.QueryParam "publishedBefore" Core.DateTime
     Core.:> Core.QueryParam "q" Core.Text
-    Core.:> Core.QueryParam
-              "regionCode"
-              Core.Text
-    Core.:> Core.QueryParam
-              "relatedToVideoId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "relevanceLanguage"
-              Core.Text
+    Core.:> Core.QueryParam "regionCode" Core.Text
+    Core.:> Core.QueryParam "relevanceLanguage" Core.Text
     Core.:> Core.QueryParam
               "safeSearch"
               SearchListSafeSearch
-    Core.:> Core.QueryParam
-              "topicId"
-              Core.Text
-    Core.:> Core.QueryParams
-              "type"
-              Core.Text
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
+    Core.:> Core.QueryParam "topicId" Core.Text
+    Core.:> Core.QueryParams "type" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam
               "upload_protocol"
               Core.Text
@@ -118,6 +97,9 @@ type YouTubeSearchListResource =
     Core.:> Core.QueryParam
               "videoLicense"
               SearchListVideoLicense
+    Core.:> Core.QueryParam
+              "videoPaidProductPlacement"
+              SearchListVideoPaidProductPlacement
     Core.:> Core.QueryParam
               "videoSyndicated"
               SearchListVideoSyndicated
@@ -175,8 +157,6 @@ data YouTubeSearchList = YouTubeSearchList
     q :: (Core.Maybe Core.Text),
     -- | Display the content as seen by viewers in this country.
     regionCode :: (Core.Maybe Core.Text),
-    -- | Search related to a resource.
-    relatedToVideoId :: (Core.Maybe Core.Text),
     -- | Return results relevant to this language.
     relevanceLanguage :: (Core.Maybe Core.Text),
     -- | Indicates whether the search results should include restricted content as well as standard content.
@@ -203,6 +183,7 @@ data YouTubeSearchList = YouTubeSearchList
     videoEmbeddable :: (Core.Maybe SearchListVideoEmbeddable),
     -- | Filter on the license of the videos.
     videoLicense :: (Core.Maybe SearchListVideoLicense),
+    videoPaidProductPlacement :: (Core.Maybe SearchListVideoPaidProductPlacement),
     -- | Filter on syndicated videos.
     videoSyndicated :: (Core.Maybe SearchListVideoSyndicated),
     -- | Filter on videos of a specific type.
@@ -237,7 +218,6 @@ newYouTubeSearchList part =
       publishedBefore = Core.Nothing,
       q = Core.Nothing,
       regionCode = Core.Nothing,
-      relatedToVideoId = Core.Nothing,
       relevanceLanguage = Core.Nothing,
       safeSearch = SearchListSafeSearch_Moderate,
       topicId = Core.Nothing,
@@ -251,6 +231,7 @@ newYouTubeSearchList part =
       videoDuration = Core.Nothing,
       videoEmbeddable = Core.Nothing,
       videoLicense = Core.Nothing,
+      videoPaidProductPlacement = Core.Nothing,
       videoSyndicated = Core.Nothing,
       videoType = Core.Nothing
     }
@@ -286,7 +267,6 @@ instance Core.GoogleRequest YouTubeSearchList where
       publishedBefore
       q
       regionCode
-      relatedToVideoId
       relevanceLanguage
       (Core.Just safeSearch)
       topicId
@@ -300,6 +280,7 @@ instance Core.GoogleRequest YouTubeSearchList where
       videoDuration
       videoEmbeddable
       videoLicense
+      videoPaidProductPlacement
       videoSyndicated
       videoType
       (Core.Just Core.AltJSON)

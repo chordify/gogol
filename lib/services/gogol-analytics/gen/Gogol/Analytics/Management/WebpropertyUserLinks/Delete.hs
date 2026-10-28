@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.WebpropertyUserLinks.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.WebpropertyUserLinks.Delete
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.webpropertyUserLinks.delete@ method which the
 -- 'AnalyticsManagementWebpropertyUserLinksDelete' request conforms to.
@@ -79,37 +77,36 @@ newAnalyticsManagementWebpropertyUserLinksDelete ::
   -- |  Web Property ID to delete the user link for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementWebpropertyUserLinksDelete
-newAnalyticsManagementWebpropertyUserLinksDelete accountId linkId webPropertyId =
-  AnalyticsManagementWebpropertyUserLinksDelete
-    { accountId = accountId,
-      linkId = linkId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementWebpropertyUserLinksDelete
+  accountId
+  linkId
+  webPropertyId =
+    AnalyticsManagementWebpropertyUserLinksDelete
+      { accountId =
+          accountId,
+        linkId = linkId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementWebpropertyUserLinksDelete
   where
+  type Rs AnalyticsManagementWebpropertyUserLinksDelete = ()
   type
-    Rs AnalyticsManagementWebpropertyUserLinksDelete =
-      ()
-  type
-    Scopes
-      AnalyticsManagementWebpropertyUserLinksDelete =
+    Scopes AnalyticsManagementWebpropertyUserLinksDelete =
       '[Analytics'Manage'Users]
-  requestClient
-    AnalyticsManagementWebpropertyUserLinksDelete {..} =
-      go
-        accountId
-        webPropertyId
-        linkId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementWebpropertyUserLinksDeleteResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementWebpropertyUserLinksDelete {..} =
+    go
+      accountId
+      webPropertyId
+      linkId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementWebpropertyUserLinksDeleteResource
+          )
+          Core.mempty

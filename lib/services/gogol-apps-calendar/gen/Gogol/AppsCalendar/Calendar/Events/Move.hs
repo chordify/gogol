@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Events.Move
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Moves an event to another calendar, i.e. changes an event\'s organizer.
+-- Moves an event to another calendar, i.e. changes an event\'s organizer. Note that only default events can be moved; birthday, focusTime, fromGmail, outOfOffice and workingLocation events cannot be moved.
 --
 -- /See:/ <https://developers.google.com/google-apps/calendar/firstapp Calendar API Reference> for @calendar.events.move@.
 module Gogol.AppsCalendar.Calendar.Events.Move
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Events.Move
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.events.move@ method which the
 -- 'CalendarEventsMove' request conforms to.
@@ -58,7 +56,7 @@ type CalendarEventsMoveResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Event
 
--- | Moves an event to another calendar, i.e. changes an event\'s organizer.
+-- | Moves an event to another calendar, i.e. changes an event\'s organizer. Note that only default events can be moved; birthday, focusTime, fromGmail, outOfOffice and workingLocation events cannot be moved.
 --
 -- /See:/ 'newCalendarEventsMove' smart constructor.
 data CalendarEventsMove = CalendarEventsMove
@@ -99,7 +97,7 @@ instance Core.GoogleRequest CalendarEventsMove where
   type Rs CalendarEventsMove = Event
   type
     Scopes CalendarEventsMove =
-      '[Calendar'FullControl, Calendar'Events]
+      '[Calendar'FullControl, Calendar'Events, Calendar'Events'Owned]
   requestClient CalendarEventsMove {..} =
     go
       calendarId

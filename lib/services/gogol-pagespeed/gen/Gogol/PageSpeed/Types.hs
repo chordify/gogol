@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PageSpeed.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PageSpeed.Types
@@ -97,6 +95,10 @@ module Gogol.PageSpeed.Types
     LighthouseResultV5_CategoryGroups (..),
     newLighthouseResultV5_CategoryGroups,
 
+    -- ** MetricSavings
+    MetricSavings (..),
+    newMetricSavings,
+
     -- ** PagespeedApiLoadingExperienceV5
     PagespeedApiLoadingExperienceV5 (..),
     newPagespeedApiLoadingExperienceV5,
@@ -147,7 +149,7 @@ where
 
 import Gogol.PageSpeed.Internal.Product
 import Gogol.PageSpeed.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v5@ of the PageSpeed Insights API. This contains the host and root path used as a starting point for constructing service requests.
 pageSpeedService :: Core.ServiceConfig

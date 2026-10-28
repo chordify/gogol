@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -145,6 +143,11 @@ module Gogol.BigQueryDataTransfer
     BigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns (..),
     newBigQueryDataTransferProjectsLocationsTransferConfigsStartManualRuns,
 
+    -- ** bigquerydatatransfer.projects.locations.unenrollDataSources
+    BigQueryDataTransferProjectsLocationsUnenrollDataSourcesResource,
+    BigQueryDataTransferProjectsLocationsUnenrollDataSources (..),
+    newBigQueryDataTransferProjectsLocationsUnenrollDataSources,
+
     -- ** bigquerydatatransfer.projects.transferConfigs.create
     BigQueryDataTransferProjectsTransferConfigsCreateResource,
     BigQueryDataTransferProjectsTransferConfigsCreate (..),
@@ -241,9 +244,17 @@ module Gogol.BigQueryDataTransfer
     Empty (..),
     newEmpty,
 
+    -- ** EncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
+
     -- ** EnrollDataSourcesRequest
     EnrollDataSourcesRequest (..),
     newEnrollDataSourcesRequest,
+
+    -- ** EventDrivenSchedule
+    EventDrivenSchedule (..),
+    newEventDrivenSchedule,
 
     -- ** ListDataSourcesResponse
     ListDataSourcesResponse (..),
@@ -277,9 +288,17 @@ module Gogol.BigQueryDataTransfer
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** ManualSchedule
+    ManualSchedule (..),
+    newManualSchedule,
+
     -- ** ScheduleOptions
     ScheduleOptions (..),
     newScheduleOptions,
+
+    -- ** ScheduleOptionsV2
+    ScheduleOptionsV2 (..),
+    newScheduleOptionsV2,
 
     -- ** ScheduleTransferRunsRequest
     ScheduleTransferRunsRequest (..),
@@ -304,6 +323,10 @@ module Gogol.BigQueryDataTransfer
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** TimeBasedSchedule
+    TimeBasedSchedule (..),
+    newTimeBasedSchedule,
 
     -- ** TimeRange
     TimeRange (..),
@@ -337,6 +360,10 @@ module Gogol.BigQueryDataTransfer
 
     -- ** TransferRun_State
     TransferRun_State (..),
+
+    -- ** UnenrollDataSourcesRequest
+    UnenrollDataSourcesRequest (..),
+    newUnenrollDataSourcesRequest,
 
     -- ** UserInfo
     UserInfo (..),
@@ -383,6 +410,7 @@ import Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.List
 import Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Runs.TransferLogs.List
 import Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.ScheduleRuns
 import Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.StartManualRuns
+import Gogol.BigQueryDataTransfer.Projects.Locations.UnenrollDataSources
 import Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Create
 import Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Delete
 import Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Get

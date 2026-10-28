@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomains.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ServiceNetworking.Services.Projects.Global.Networks.PeeredDnsDomain
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.projects.global.networks.peeredDnsDomains.list@ method which the
@@ -80,15 +78,18 @@ newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList ::
   -- |  Required. Parent resource identifying the connection which owns this collection of peered DNS domains in the format: @services\/{service}\/projects\/{project}\/global\/networks\/{network}@. {service} is the peering service that is managing connectivity for the service producer\'s organization. For Google services that support this functionality, this value is @servicenetworking.googleapis.com@. {project} is a project number e.g. @12345@ that contains the service consumer\'s VPC network. {network} is the name of the service consumer\'s VPC network. See 'parent'.
   Core.Text ->
   ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList
-newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList parent =
-  ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList
+  parent =
+    ServiceNetworkingServicesProjectsGlobalNetworksPeeredDnsDomainsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

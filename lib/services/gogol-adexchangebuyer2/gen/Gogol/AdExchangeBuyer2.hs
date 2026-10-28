@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -357,6 +355,76 @@ module Gogol.AdExchangeBuyer2
     AdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsListResource,
     AdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsList (..),
     newAdExchangeBuyer2BiddersFilterSetsNonBillableWinningBidsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.bidMetrics.list
+    AdExchangeBuyer2BuyersFilterSetsBidMetricsListResource,
+    AdExchangeBuyer2BuyersFilterSetsBidMetricsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsBidMetricsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.bidResponseErrors.list
+    AdExchangeBuyer2BuyersFilterSetsBidResponseErrorsListResource,
+    AdExchangeBuyer2BuyersFilterSetsBidResponseErrorsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsBidResponseErrorsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.bidResponsesWithoutBids.list
+    AdExchangeBuyer2BuyersFilterSetsBidResponsesWithoutBidsListResource,
+    AdExchangeBuyer2BuyersFilterSetsBidResponsesWithoutBidsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsBidResponsesWithoutBidsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.create
+    AdExchangeBuyer2BuyersFilterSetsCreateResource,
+    AdExchangeBuyer2BuyersFilterSetsCreate (..),
+    newAdExchangeBuyer2BuyersFilterSetsCreate,
+
+    -- ** adexchangebuyer2.buyers.filterSets.delete
+    AdExchangeBuyer2BuyersFilterSetsDeleteResource,
+    AdExchangeBuyer2BuyersFilterSetsDelete (..),
+    newAdExchangeBuyer2BuyersFilterSetsDelete,
+
+    -- ** adexchangebuyer2.buyers.filterSets.filteredBidRequests.list
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidRequestsListResource,
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidRequestsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsFilteredBidRequestsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.filteredBids.creatives.list
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsCreativesListResource,
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsCreativesList (..),
+    newAdExchangeBuyer2BuyersFilterSetsFilteredBidsCreativesList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.filteredBids.details.list
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsDetailsListResource,
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsDetailsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsFilteredBidsDetailsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.filteredBids.list
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsListResource,
+    AdExchangeBuyer2BuyersFilterSetsFilteredBidsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsFilteredBidsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.get
+    AdExchangeBuyer2BuyersFilterSetsGetResource,
+    AdExchangeBuyer2BuyersFilterSetsGet (..),
+    newAdExchangeBuyer2BuyersFilterSetsGet,
+
+    -- ** adexchangebuyer2.buyers.filterSets.impressionMetrics.list
+    AdExchangeBuyer2BuyersFilterSetsImpressionMetricsListResource,
+    AdExchangeBuyer2BuyersFilterSetsImpressionMetricsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsImpressionMetricsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.list
+    AdExchangeBuyer2BuyersFilterSetsListResource,
+    AdExchangeBuyer2BuyersFilterSetsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.losingBids.list
+    AdExchangeBuyer2BuyersFilterSetsLosingBidsListResource,
+    AdExchangeBuyer2BuyersFilterSetsLosingBidsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsLosingBidsList,
+
+    -- ** adexchangebuyer2.buyers.filterSets.nonBillableWinningBids.list
+    AdExchangeBuyer2BuyersFilterSetsNonBillableWinningBidsListResource,
+    AdExchangeBuyer2BuyersFilterSetsNonBillableWinningBidsList (..),
+    newAdExchangeBuyer2BuyersFilterSetsNonBillableWinningBidsList,
 
     -- * Types
 
@@ -1029,4 +1097,18 @@ import Gogol.AdExchangeBuyer2.Bidders.FilterSets.ImpressionMetrics.List
 import Gogol.AdExchangeBuyer2.Bidders.FilterSets.List
 import Gogol.AdExchangeBuyer2.Bidders.FilterSets.LosingBids.List
 import Gogol.AdExchangeBuyer2.Bidders.FilterSets.NonBillableWinningBids.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidMetrics.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponseErrors.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.BidResponsesWithoutBids.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.Create
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.Delete
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBidRequests.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Creatives.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.Details.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.FilteredBids.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.Get
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.ImpressionMetrics.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.LosingBids.List
+import Gogol.AdExchangeBuyer2.Buyers.FilterSets.NonBillableWinningBids.List
 import Gogol.AdExchangeBuyer2.Types

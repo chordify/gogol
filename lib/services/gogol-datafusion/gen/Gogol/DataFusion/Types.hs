@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DataFusion.Types
@@ -139,9 +137,31 @@ module Gogol.DataFusion.Types
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** LoggingConfig
+    LoggingConfig (..),
+    newLoggingConfig,
+
+    -- ** MaintenanceEvent
+    MaintenanceEvent (..),
+    newMaintenanceEvent,
+
+    -- ** MaintenanceEvent_State
+    MaintenanceEvent_State (..),
+
+    -- ** MaintenancePolicy
+    MaintenancePolicy (..),
+    newMaintenancePolicy,
+
+    -- ** MaintenanceWindow
+    MaintenanceWindow (..),
+    newMaintenanceWindow,
+
     -- ** NetworkConfig
     NetworkConfig (..),
     newNetworkConfig,
+
+    -- ** NetworkConfig_ConnectionType
+    NetworkConfig_ConnectionType (..),
 
     -- ** Operation
     Operation (..),
@@ -167,6 +187,14 @@ module Gogol.DataFusion.Types
     Policy (..),
     newPolicy,
 
+    -- ** PrivateServiceConnectConfig
+    PrivateServiceConnectConfig (..),
+    newPrivateServiceConnectConfig,
+
+    -- ** RecurringTimeWindow
+    RecurringTimeWindow (..),
+    newRecurringTimeWindow,
+
     -- ** RestartInstanceRequest
     RestartInstanceRequest (..),
     newRestartInstanceRequest,
@@ -191,6 +219,10 @@ module Gogol.DataFusion.Types
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** TimeWindow
+    TimeWindow (..),
+    newTimeWindow,
+
     -- ** Version
     Version (..),
     newVersion,
@@ -202,7 +234,7 @@ where
 
 import Gogol.DataFusion.Internal.Product
 import Gogol.DataFusion.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Data Fusion API. This contains the host and root path used as a starting point for constructing service requests.
 dataFusionService :: Core.ServiceConfig
@@ -212,4 +244,5 @@ dataFusionService =
     "datafusion.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

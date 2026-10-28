@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetSslProxies.SetSslCertificates
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetSslProxies.SetSslCertificates
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetSslProxies.setSslCertificates@ method which the
 -- 'ComputeTargetSslProxiesSetSslCertificates' request conforms to.
@@ -99,48 +97,47 @@ newComputeTargetSslProxiesSetSslCertificates ::
   -- |  Name of the TargetSslProxy resource whose SslCertificate resource is to be set. See 'targetSslProxy'.
   Core.Text ->
   ComputeTargetSslProxiesSetSslCertificates
-newComputeTargetSslProxiesSetSslCertificates payload project targetSslProxy =
-  ComputeTargetSslProxiesSetSslCertificates
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      targetSslProxy = targetSslProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeTargetSslProxiesSetSslCertificates
+  payload
+  project
+  targetSslProxy =
+    ComputeTargetSslProxiesSetSslCertificates
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        targetSslProxy = targetSslProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeTargetSslProxiesSetSslCertificates
   where
-  type
-    Rs ComputeTargetSslProxiesSetSslCertificates =
-      Operation
+  type Rs ComputeTargetSslProxiesSetSslCertificates = Operation
   type
     Scopes ComputeTargetSslProxiesSetSslCertificates =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeTargetSslProxiesSetSslCertificates {..} =
-      go
-        project
-        targetSslProxy
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeTargetSslProxiesSetSslCertificatesResource
-            )
-            Core.mempty
+  requestClient ComputeTargetSslProxiesSetSslCertificates {..} =
+    go
+      project
+      targetSslProxy
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeTargetSslProxiesSetSslCertificatesResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ProfileFilterLinks.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ProfileFilterLinks.Get
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profileFilterLinks.get@ method which the
 -- 'AnalyticsManagementProfileFilterLinksGet' request conforms to.
@@ -85,13 +83,17 @@ newAnalyticsManagementProfileFilterLinksGet ::
   -- |  Web property Id to retrieve profile filter link for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfileFilterLinksGet
-newAnalyticsManagementProfileFilterLinksGet accountId linkId profileId webPropertyId =
-  AnalyticsManagementProfileFilterLinksGet
-    { accountId = accountId,
-      linkId = linkId,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementProfileFilterLinksGet
+  accountId
+  linkId
+  profileId
+  webPropertyId =
+    AnalyticsManagementProfileFilterLinksGet
+      { accountId = accountId,
+        linkId = linkId,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
@@ -103,20 +105,18 @@ instance
   type
     Scopes AnalyticsManagementProfileFilterLinksGet =
       '[Analytics'Edit, Analytics'Readonly]
-  requestClient
-    AnalyticsManagementProfileFilterLinksGet {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        linkId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementProfileFilterLinksGetResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementProfileFilterLinksGet {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      linkId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementProfileFilterLinksGetResource
+          )
+          Core.mempty

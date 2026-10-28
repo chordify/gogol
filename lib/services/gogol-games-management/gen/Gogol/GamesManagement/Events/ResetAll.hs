@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesManagement.Events.ResetAll
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GamesManagement.Events.ResetAll
 where
 
 import Gogol.GamesManagement.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gamesManagement.events.resetAll@ method which the
 -- 'GamesManagementEventsResetAll' request conforms to.
@@ -86,14 +84,9 @@ newGamesManagementEventsResetAll =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesManagementEventsResetAll
-  where
+instance Core.GoogleRequest GamesManagementEventsResetAll where
   type Rs GamesManagementEventsResetAll = ()
-  type
-    Scopes GamesManagementEventsResetAll =
-      '[Games'FullControl]
+  type Scopes GamesManagementEventsResetAll = '[Games'FullControl]
   requestClient GamesManagementEventsResetAll {..} =
     go
       xgafv
@@ -106,7 +99,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesManagementEventsResetAllResource
-          )
+          (Core.Proxy :: Core.Proxy GamesManagementEventsResetAllResource)
           Core.mempty

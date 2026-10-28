@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.WorkItems.ReportStatus
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.workItems.reportStatus@ method which the
 -- 'DataflowProjectsLocationsJobsWorkItemsReportStatus' request conforms to.
@@ -59,12 +57,8 @@ type DataflowProjectsLocationsJobsWorkItemsReportStatusResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ReportWorkItemStatusRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              ReportWorkItemStatusResponse
+    Core.:> Core.ReqBody '[Core.JSON] ReportWorkItemStatusRequest
+    Core.:> Core.Post '[Core.JSON] ReportWorkItemStatusResponse
 
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
@@ -102,35 +96,34 @@ newDataflowProjectsLocationsJobsWorkItemsReportStatus ::
   -- |  The project which owns the WorkItem\'s job. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsJobsWorkItemsReportStatus
-newDataflowProjectsLocationsJobsWorkItemsReportStatus jobId location payload projectId =
-  DataflowProjectsLocationsJobsWorkItemsReportStatus
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsWorkItemsReportStatus
+  jobId
+  location
+  payload
+  projectId =
+    DataflowProjectsLocationsJobsWorkItemsReportStatus
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DataflowProjectsLocationsJobsWorkItemsReportStatus
   where
   type
-    Rs
-      DataflowProjectsLocationsJobsWorkItemsReportStatus =
+    Rs DataflowProjectsLocationsJobsWorkItemsReportStatus =
       ReportWorkItemStatusResponse
   type
-    Scopes
-      DataflowProjectsLocationsJobsWorkItemsReportStatus =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+    Scopes DataflowProjectsLocationsJobsWorkItemsReportStatus =
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     DataflowProjectsLocationsJobsWorkItemsReportStatus {..} =
       go

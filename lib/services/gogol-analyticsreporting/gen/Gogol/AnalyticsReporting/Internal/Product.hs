@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AnalyticsReporting.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AnalyticsReporting.Internal.Product
@@ -229,7 +227,7 @@ module Gogol.AnalyticsReporting.Internal.Product
 where
 
 import Gogol.AnalyticsReporting.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An Activity represents data for an activity of a user. Note that an Activity is different from a hit. A hit might result in multiple Activity\'s. For example, if a hit includes a transaction and a goal completion, there will be two Activity protos for this hit, one for ECOMMERCE and one for GOAL. Conversely, multiple hits can also construct one Activity. In classic e-commerce, data for one transaction might be sent through multiple hits. These hits will be merged into one ECOMMERCE Activity.
 --
@@ -352,7 +350,11 @@ data Cohort = Cohort
 newCohort ::
   Cohort
 newCohort =
-  Cohort {dateRange = Core.Nothing, name = Core.Nothing, type' = Core.Nothing}
+  Cohort
+    { dateRange = Core.Nothing,
+      name = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON Cohort where
   parseJSON =
@@ -427,7 +429,10 @@ data ColumnHeader = ColumnHeader
 newColumnHeader ::
   ColumnHeader
 newColumnHeader =
-  ColumnHeader {dimensions = Core.Nothing, metricHeader = Core.Nothing}
+  ColumnHeader
+    { dimensions = Core.Nothing,
+      metricHeader = Core.Nothing
+    }
 
 instance Core.FromJSON ColumnHeader where
   parseJSON =
@@ -471,7 +476,8 @@ instance Core.FromJSON CustomDimension where
       "CustomDimension"
       ( \o ->
           CustomDimension
-            Core.<$> (o Core..:? "index") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "index")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON CustomDimension where
@@ -497,7 +503,8 @@ data DateRange = DateRange
 -- | Creates a value of 'DateRange' with the minimum fields required to make a request.
 newDateRange ::
   DateRange
-newDateRange = DateRange {endDate = Core.Nothing, startDate = Core.Nothing}
+newDateRange =
+  DateRange {endDate = Core.Nothing, startDate = Core.Nothing}
 
 instance Core.FromJSON DateRange where
   parseJSON =
@@ -533,7 +540,10 @@ data DateRangeValues = DateRangeValues
 newDateRangeValues ::
   DateRangeValues
 newDateRangeValues =
-  DateRangeValues {pivotValueRegions = Core.Nothing, values = Core.Nothing}
+  DateRangeValues
+    { pivotValueRegions = Core.Nothing,
+      values = Core.Nothing
+    }
 
 instance Core.FromJSON DateRangeValues where
   parseJSON =
@@ -549,8 +559,7 @@ instance Core.ToJSON DateRangeValues where
   toJSON DateRangeValues {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pivotValueRegions" Core..=)
-              Core.<$> pivotValueRegions,
+          [ ("pivotValueRegions" Core..=) Core.<$> pivotValueRegions,
             ("values" Core..=) Core.<$> values
           ]
       )
@@ -570,7 +579,8 @@ data Dimension = Dimension
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 newDimension ::
   Dimension
-newDimension = Dimension {histogramBuckets = Core.Nothing, name = Core.Nothing}
+newDimension =
+  Dimension {histogramBuckets = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON Dimension where
   parseJSON =
@@ -578,7 +588,8 @@ instance Core.FromJSON Dimension where
       "Dimension"
       ( \o ->
           Dimension
-            Core.<$> ( o Core..:? "histogramBuckets"
+            Core.<$> ( o
+                         Core..:? "histogramBuckets"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "name")
@@ -664,7 +675,10 @@ data DimensionFilterClause = DimensionFilterClause
 newDimensionFilterClause ::
   DimensionFilterClause
 newDimensionFilterClause =
-  DimensionFilterClause {filters = Core.Nothing, operator = Core.Nothing}
+  DimensionFilterClause
+    { filters = Core.Nothing,
+      operator = Core.Nothing
+    }
 
 instance Core.FromJSON DimensionFilterClause where
   parseJSON =
@@ -815,13 +829,9 @@ instance Core.FromJSON EventData where
           EventData
             Core.<$> (o Core..:? "eventAction")
             Core.<*> (o Core..:? "eventCategory")
-            Core.<*> ( o Core..:? "eventCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "eventCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "eventLabel")
-            Core.<*> ( o Core..:? "eventValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "eventValue" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON EventData where
@@ -830,11 +840,9 @@ instance Core.ToJSON EventData where
       ( Core.catMaybes
           [ ("eventAction" Core..=) Core.<$> eventAction,
             ("eventCategory" Core..=) Core.<$> eventCategory,
-            ("eventCount" Core..=) Core.. Core.AsText
-              Core.<$> eventCount,
+            ("eventCount" Core..=) Core.. Core.AsText Core.<$> eventCount,
             ("eventLabel" Core..=) Core.<$> eventLabel,
-            ("eventValue" Core..=) Core.. Core.AsText
-              Core.<$> eventValue
+            ("eventValue" Core..=) Core.. Core.AsText Core.<$> eventValue
           ]
       )
 
@@ -873,8 +881,7 @@ instance Core.ToJSON GetReportsRequest where
     Core.object
       ( Core.catMaybes
           [ ("reportRequests" Core..=) Core.<$> reportRequests,
-            ("useResourceQuotas" Core..=)
-              Core.<$> useResourceQuotas
+            ("useResourceQuotas" Core..=) Core.<$> useResourceQuotas
           ]
       )
 
@@ -968,9 +975,7 @@ instance Core.FromJSON GoalData where
       ( \o ->
           GoalData
             Core.<$> (o Core..:? "goalCompletionLocation")
-            Core.<*> ( o Core..:? "goalCompletions"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "goalCompletions" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "goalIndex")
             Core.<*> (o Core..:? "goalName")
             Core.<*> (o Core..:? "goalPreviousStep1")
@@ -985,16 +990,14 @@ instance Core.ToJSON GoalData where
       ( Core.catMaybes
           [ ("goalCompletionLocation" Core..=)
               Core.<$> goalCompletionLocation,
-            ("goalCompletions" Core..=) Core.. Core.AsText
+            ("goalCompletions" Core..=)
+              Core.. Core.AsText
               Core.<$> goalCompletions,
             ("goalIndex" Core..=) Core.<$> goalIndex,
             ("goalName" Core..=) Core.<$> goalName,
-            ("goalPreviousStep1" Core..=)
-              Core.<$> goalPreviousStep1,
-            ("goalPreviousStep2" Core..=)
-              Core.<$> goalPreviousStep2,
-            ("goalPreviousStep3" Core..=)
-              Core.<$> goalPreviousStep3,
+            ("goalPreviousStep1" Core..=) Core.<$> goalPreviousStep1,
+            ("goalPreviousStep2" Core..=) Core.<$> goalPreviousStep2,
+            ("goalPreviousStep3" Core..=) Core.<$> goalPreviousStep3,
             ("goalValue" Core..=) Core.<$> goalValue
           ]
       )
@@ -1021,8 +1024,7 @@ instance Core.FromJSON GoalSetData where
 
 instance Core.ToJSON GoalSetData where
   toJSON GoalSetData {..} =
-    Core.object
-      (Core.catMaybes [("goals" Core..=) Core.<$> goals])
+    Core.object (Core.catMaybes [("goals" Core..=) Core.<$> goals])
 
 -- | <https://support.google.com/analytics/answer/1033861 Metrics> are the quantitative measurements. For example, the metric @ga:users@ indicates the total number of users for the requested time period.
 --
@@ -1110,8 +1112,7 @@ instance Core.ToJSON MetricFilter where
   toJSON MetricFilter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("comparisonValue" Core..=)
-              Core.<$> comparisonValue,
+          [ ("comparisonValue" Core..=) Core.<$> comparisonValue,
             ("metricName" Core..=) Core.<$> metricName,
             ("not" Core..=) Core.<$> not,
             ("operator" Core..=) Core.<$> operator
@@ -1133,7 +1134,10 @@ data MetricFilterClause = MetricFilterClause
 newMetricFilterClause ::
   MetricFilterClause
 newMetricFilterClause =
-  MetricFilterClause {filters = Core.Nothing, operator = Core.Nothing}
+  MetricFilterClause
+    { filters = Core.Nothing,
+      operator = Core.Nothing
+    }
 
 instance Core.FromJSON MetricFilterClause where
   parseJSON =
@@ -1169,7 +1173,10 @@ data MetricHeader = MetricHeader
 newMetricHeader ::
   MetricHeader
 newMetricHeader =
-  MetricHeader {metricHeaderEntries = Core.Nothing, pivotHeaders = Core.Nothing}
+  MetricHeader
+    { metricHeaderEntries = Core.Nothing,
+      pivotHeaders = Core.Nothing
+    }
 
 instance Core.FromJSON MetricHeader where
   parseJSON =
@@ -1185,8 +1192,7 @@ instance Core.ToJSON MetricHeader where
   toJSON MetricHeader {..} =
     Core.object
       ( Core.catMaybes
-          [ ("metricHeaderEntries" Core..=)
-              Core.<$> metricHeaderEntries,
+          [ ("metricHeaderEntries" Core..=) Core.<$> metricHeaderEntries,
             ("pivotHeaders" Core..=) Core.<$> pivotHeaders
           ]
       )
@@ -1214,16 +1220,15 @@ instance Core.FromJSON MetricHeaderEntry where
       "MetricHeaderEntry"
       ( \o ->
           MetricHeaderEntry
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON MetricHeaderEntry where
   toJSON MetricHeaderEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("name" Core..=) Core.<$> name, ("type" Core..=) Core.<$> type']
       )
 
 -- | A list of segment filters in the @OR@ group are combined with the logical OR operator.
@@ -1246,17 +1251,14 @@ instance Core.FromJSON OrFiltersForSegment where
     Core.withObject
       "OrFiltersForSegment"
       ( \o ->
-          OrFiltersForSegment
-            Core.<$> (o Core..:? "segmentFilterClauses")
+          OrFiltersForSegment Core.<$> (o Core..:? "segmentFilterClauses")
       )
 
 instance Core.ToJSON OrFiltersForSegment where
   toJSON OrFiltersForSegment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("segmentFilterClauses" Core..=)
-              Core.<$> segmentFilterClauses
-          ]
+          [("segmentFilterClauses" Core..=) Core.<$> segmentFilterClauses]
       )
 
 -- | Specifies the sorting options.
@@ -1428,10 +1430,8 @@ instance Core.ToJSON PivotHeader where
   toJSON PivotHeader {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pivotHeaderEntries" Core..=)
-              Core.<$> pivotHeaderEntries,
-            ("totalPivotGroupsCount" Core..=)
-              Core.<$> totalPivotGroupsCount
+          [ ("pivotHeaderEntries" Core..=) Core.<$> pivotHeaderEntries,
+            ("totalPivotGroupsCount" Core..=) Core.<$> totalPivotGroupsCount
           ]
       )
 
@@ -1497,14 +1497,11 @@ instance Core.FromJSON PivotValueRegion where
   parseJSON =
     Core.withObject
       "PivotValueRegion"
-      ( \o ->
-          PivotValueRegion Core.<$> (o Core..:? "values")
-      )
+      (\o -> PivotValueRegion Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON PivotValueRegion where
   toJSON PivotValueRegion {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Details of the products in an e-commerce transaction.
 --
@@ -1540,9 +1537,7 @@ instance Core.FromJSON ProductData where
           ProductData
             Core.<$> (o Core..:? "itemRevenue")
             Core.<*> (o Core..:? "productName")
-            Core.<*> ( o Core..:? "productQuantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "productQuantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "productSku")
       )
 
@@ -1552,7 +1547,8 @@ instance Core.ToJSON ProductData where
       ( Core.catMaybes
           [ ("itemRevenue" Core..=) Core.<$> itemRevenue,
             ("productName" Core..=) Core.<$> productName,
-            ("productQuantity" Core..=) Core.. Core.AsText
+            ("productQuantity" Core..=)
+              Core.. Core.AsText
               Core.<$> productQuantity,
             ("productSku" Core..=) Core.<$> productSku
           ]
@@ -1659,10 +1655,12 @@ instance Core.FromJSON ReportData where
             Core.<*> (o Core..:? "minimums")
             Core.<*> (o Core..:? "rowCount")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "samplesReadCounts"
+            Core.<*> ( o
+                         Core..:? "samplesReadCounts"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
-            Core.<*> ( o Core..:? "samplingSpaceSizes"
+            Core.<*> ( o
+                         Core..:? "samplingSpaceSizes"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "totals")
@@ -1672,8 +1670,7 @@ instance Core.ToJSON ReportData where
   toJSON ReportData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataLastRefreshed" Core..=)
-              Core.<$> dataLastRefreshed,
+          [ ("dataLastRefreshed" Core..=) Core.<$> dataLastRefreshed,
             ("emptyReason" Core..=) Core.<$> emptyReason,
             ("isDataGolden" Core..=) Core.<$> isDataGolden,
             ("maximums" Core..=) Core.<$> maximums,
@@ -1786,17 +1783,13 @@ instance Core.ToJSON ReportRequest where
       ( Core.catMaybes
           [ ("cohortGroup" Core..=) Core.<$> cohortGroup,
             ("dateRanges" Core..=) Core.<$> dateRanges,
-            ("dimensionFilterClauses" Core..=)
-              Core.<$> dimensionFilterClauses,
+            ("dimensionFilterClauses" Core..=) Core.<$> dimensionFilterClauses,
             ("dimensions" Core..=) Core.<$> dimensions,
-            ("filtersExpression" Core..=)
-              Core.<$> filtersExpression,
+            ("filtersExpression" Core..=) Core.<$> filtersExpression,
             ("hideTotals" Core..=) Core.<$> hideTotals,
             ("hideValueRanges" Core..=) Core.<$> hideValueRanges,
-            ("includeEmptyRows" Core..=)
-              Core.<$> includeEmptyRows,
-            ("metricFilterClauses" Core..=)
-              Core.<$> metricFilterClauses,
+            ("includeEmptyRows" Core..=) Core.<$> includeEmptyRows,
+            ("metricFilterClauses" Core..=) Core.<$> metricFilterClauses,
             ("metrics" Core..=) Core.<$> metrics,
             ("orderBys" Core..=) Core.<$> orderBys,
             ("pageSize" Core..=) Core.<$> pageSize,
@@ -1822,7 +1815,8 @@ data ReportRow = ReportRow
 -- | Creates a value of 'ReportRow' with the minimum fields required to make a request.
 newReportRow ::
   ReportRow
-newReportRow = ReportRow {dimensions = Core.Nothing, metrics = Core.Nothing}
+newReportRow =
+  ReportRow {dimensions = Core.Nothing, metrics = Core.Nothing}
 
 instance Core.FromJSON ReportRow where
   parseJSON =
@@ -1926,10 +1920,8 @@ instance Core.ToJSON ScreenviewData where
     Core.object
       ( Core.catMaybes
           [ ("appName" Core..=) Core.<$> appName,
-            ("mobileDeviceBranding" Core..=)
-              Core.<$> mobileDeviceBranding,
-            ("mobileDeviceModel" Core..=)
-              Core.<$> mobileDeviceModel,
+            ("mobileDeviceBranding" Core..=) Core.<$> mobileDeviceBranding,
+            ("mobileDeviceModel" Core..=) Core.<$> mobileDeviceModel,
             ("screenName" Core..=) Core.<$> screenName
           ]
       )
@@ -2056,7 +2048,8 @@ data Segment = Segment
 -- | Creates a value of 'Segment' with the minimum fields required to make a request.
 newSegment ::
   Segment
-newSegment = Segment {dynamicSegment = Core.Nothing, segmentId = Core.Nothing}
+newSegment =
+  Segment {dynamicSegment = Core.Nothing, segmentId = Core.Nothing}
 
 instance Core.FromJSON Segment where
   parseJSON =
@@ -2089,16 +2082,14 @@ newtype SegmentDefinition = SegmentDefinition
 -- | Creates a value of 'SegmentDefinition' with the minimum fields required to make a request.
 newSegmentDefinition ::
   SegmentDefinition
-newSegmentDefinition = SegmentDefinition {segmentFilters = Core.Nothing}
+newSegmentDefinition =
+  SegmentDefinition {segmentFilters = Core.Nothing}
 
 instance Core.FromJSON SegmentDefinition where
   parseJSON =
     Core.withObject
       "SegmentDefinition"
-      ( \o ->
-          SegmentDefinition
-            Core.<$> (o Core..:? "segmentFilters")
-      )
+      (\o -> SegmentDefinition Core.<$> (o Core..:? "segmentFilters"))
 
 instance Core.ToJSON SegmentDefinition where
   toJSON SegmentDefinition {..} =
@@ -2160,10 +2151,8 @@ instance Core.ToJSON SegmentDimensionFilter where
           [ ("caseSensitive" Core..=) Core.<$> caseSensitive,
             ("dimensionName" Core..=) Core.<$> dimensionName,
             ("expressions" Core..=) Core.<$> expressions,
-            ("maxComparisonValue" Core..=)
-              Core.<$> maxComparisonValue,
-            ("minComparisonValue" Core..=)
-              Core.<$> minComparisonValue,
+            ("maxComparisonValue" Core..=) Core.<$> maxComparisonValue,
+            ("minComparisonValue" Core..=) Core.<$> minComparisonValue,
             ("operator" Core..=) Core.<$> operator
           ]
       )
@@ -2250,8 +2239,7 @@ instance Core.ToJSON SegmentFilterClause where
   toJSON SegmentFilterClause {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionFilter" Core..=)
-              Core.<$> dimensionFilter,
+          [ ("dimensionFilter" Core..=) Core.<$> dimensionFilter,
             ("metricFilter" Core..=) Core.<$> metricFilter,
             ("not" Core..=) Core.<$> not
           ]
@@ -2303,10 +2291,8 @@ instance Core.ToJSON SegmentMetricFilter where
   toJSON SegmentMetricFilter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("comparisonValue" Core..=)
-              Core.<$> comparisonValue,
-            ("maxComparisonValue" Core..=)
-              Core.<$> maxComparisonValue,
+          [ ("comparisonValue" Core..=) Core.<$> comparisonValue,
+            ("maxComparisonValue" Core..=) Core.<$> maxComparisonValue,
             ("metricName" Core..=) Core.<$> metricName,
             ("operator" Core..=) Core.<$> operator,
             ("scope" Core..=) Core.<$> scope
@@ -2348,8 +2334,7 @@ instance Core.ToJSON SegmentSequenceStep where
     Core.object
       ( Core.catMaybes
           [ ("matchType" Core..=) Core.<$> matchType,
-            ("orFiltersForSegment" Core..=)
-              Core.<$> orFiltersForSegment
+            ("orFiltersForSegment" Core..=) Core.<$> orFiltersForSegment
           ]
       )
 
@@ -2389,8 +2374,7 @@ instance Core.ToJSON SequenceSegment where
       ( Core.catMaybes
           [ ("firstStepShouldMatchFirstHit" Core..=)
               Core.<$> firstStepShouldMatchFirstHit,
-            ("segmentSequenceSteps" Core..=)
-              Core.<$> segmentSequenceSteps
+            ("segmentSequenceSteps" Core..=) Core.<$> segmentSequenceSteps
           ]
       )
 
@@ -2406,24 +2390,20 @@ newtype SimpleSegment = SimpleSegment
 -- | Creates a value of 'SimpleSegment' with the minimum fields required to make a request.
 newSimpleSegment ::
   SimpleSegment
-newSimpleSegment = SimpleSegment {orFiltersForSegment = Core.Nothing}
+newSimpleSegment =
+  SimpleSegment {orFiltersForSegment = Core.Nothing}
 
 instance Core.FromJSON SimpleSegment where
   parseJSON =
     Core.withObject
       "SimpleSegment"
-      ( \o ->
-          SimpleSegment
-            Core.<$> (o Core..:? "orFiltersForSegment")
-      )
+      (\o -> SimpleSegment Core.<$> (o Core..:? "orFiltersForSegment"))
 
 instance Core.ToJSON SimpleSegment where
   toJSON SimpleSegment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("orFiltersForSegment" Core..=)
-              Core.<$> orFiltersForSegment
-          ]
+          [("orFiltersForSegment" Core..=) Core.<$> orFiltersForSegment]
       )
 
 -- | Represents details collected when the visitor performs a transaction on the page.
@@ -2469,10 +2449,8 @@ instance Core.ToJSON TransactionData where
     Core.object
       ( Core.catMaybes
           [ ("transactionId" Core..=) Core.<$> transactionId,
-            ("transactionRevenue" Core..=)
-              Core.<$> transactionRevenue,
-            ("transactionShipping" Core..=)
-              Core.<$> transactionShipping,
+            ("transactionRevenue" Core..=) Core.<$> transactionRevenue,
+            ("transactionShipping" Core..=) Core.<$> transactionShipping,
             ("transactionTax" Core..=) Core.<$> transactionTax
           ]
       )
@@ -2498,8 +2476,7 @@ instance Core.FromJSON User where
     Core.withObject
       "User"
       ( \o ->
-          User
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "userId")
+          User Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "userId")
       )
 
 instance Core.ToJSON User where

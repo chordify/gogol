@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- Gets a DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.locations.deidentifyTemplates.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.locations.deidentifyTemplates.get@.
 module Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Get
   ( -- * Resource
     DLPOrganizationsLocationsDeidentifyTemplatesGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.Locations.DeidentifyTemplates.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.locations.deidentifyTemplates.get@ method which the
 -- 'DLPOrganizationsLocationsDeidentifyTemplatesGet' request conforms to.
@@ -53,11 +51,9 @@ type DLPOrganizationsLocationsDeidentifyTemplatesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2DeidentifyTemplate
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2DeidentifyTemplate
 
--- | Gets a DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- | Gets a DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
 -- /See:/ 'newDLPOrganizationsLocationsDeidentifyTemplatesGet' smart constructor.
 data DLPOrganizationsLocationsDeidentifyTemplatesGet = DLPOrganizationsLocationsDeidentifyTemplatesGet
@@ -83,7 +79,8 @@ newDLPOrganizationsLocationsDeidentifyTemplatesGet ::
   DLPOrganizationsLocationsDeidentifyTemplatesGet
 newDLPOrganizationsLocationsDeidentifyTemplatesGet name =
   DLPOrganizationsLocationsDeidentifyTemplatesGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -96,29 +93,25 @@ instance
     DLPOrganizationsLocationsDeidentifyTemplatesGet
   where
   type
-    Rs
-      DLPOrganizationsLocationsDeidentifyTemplatesGet =
+    Rs DLPOrganizationsLocationsDeidentifyTemplatesGet =
       GooglePrivacyDlpV2DeidentifyTemplate
   type
-    Scopes
-      DLPOrganizationsLocationsDeidentifyTemplatesGet =
+    Scopes DLPOrganizationsLocationsDeidentifyTemplatesGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsLocationsDeidentifyTemplatesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsLocationsDeidentifyTemplatesGetResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsLocationsDeidentifyTemplatesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsLocationsDeidentifyTemplatesGetResource
+          )
+          Core.mempty

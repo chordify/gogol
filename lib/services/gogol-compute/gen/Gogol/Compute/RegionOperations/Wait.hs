@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionOperations.Wait
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionOperations.Wait
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionOperations.wait@ method which the
 -- 'ComputeRegionOperationsWait' request conforms to.
@@ -72,7 +70,7 @@ data ComputeRegionOperationsWait = ComputeRegionOperationsWait
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Operations resource to return.
+    -- | Name of the Operations resource to return, or its unique numeric identifier.
     operation :: Core.Text,
     -- | Project ID for this request.
     project :: Core.Text,
@@ -87,7 +85,7 @@ data ComputeRegionOperationsWait = ComputeRegionOperationsWait
 
 -- | Creates a value of 'ComputeRegionOperationsWait' with the minimum fields required to make a request.
 newComputeRegionOperationsWait ::
-  -- |  Name of the Operations resource to return. See 'operation'.
+  -- |  Name of the Operations resource to return, or its unique numeric identifier. See 'operation'.
   Core.Text ->
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
@@ -106,17 +104,11 @@ newComputeRegionOperationsWait operation project region =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeRegionOperationsWait
-  where
+instance Core.GoogleRequest ComputeRegionOperationsWait where
   type Rs ComputeRegionOperationsWait = Operation
   type
     Scopes ComputeRegionOperationsWait =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeRegionOperationsWait {..} =
     go
       project
@@ -132,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeRegionOperationsWaitResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeRegionOperationsWaitResource)
           Core.mempty

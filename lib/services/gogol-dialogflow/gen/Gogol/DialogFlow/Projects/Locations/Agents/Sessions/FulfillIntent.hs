@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Sessions.FulfillIntent
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.sessions.fulfillIntent@ method which the
 -- 'DialogFlowProjectsLocationsAgentsSessionsFulfillIntent' request conforms to.
@@ -88,28 +86,29 @@ newDialogFlowProjectsLocationsAgentsSessionsFulfillIntent ::
   -- |  Required. The name of the session this query is sent to. Format: @projects\/\/locations\/\/agents\/\/sessions\/@ or @projects\/\/locations\/\/agents\/\/environments\/\/sessions\/@. If @Environment ID@ is not specified, we assume default \'draft\' environment. It\'s up to the API caller to choose an appropriate @Session ID@. It can be a random number or some type of session identifiers (preferably hashed). The length of the @Session ID@ must not exceed 36 characters. For more information, see the <https://cloud.google.com/dialogflow/cx/docs/concept/session sessions guide>. See 'session'.
   Core.Text ->
   DialogFlowProjectsLocationsAgentsSessionsFulfillIntent
-newDialogFlowProjectsLocationsAgentsSessionsFulfillIntent payload session =
-  DialogFlowProjectsLocationsAgentsSessionsFulfillIntent
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      session = session,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsSessionsFulfillIntent
+  payload
+  session =
+    DialogFlowProjectsLocationsAgentsSessionsFulfillIntent
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        session = session,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DialogFlowProjectsLocationsAgentsSessionsFulfillIntent
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsSessionsFulfillIntent =
+    Rs DialogFlowProjectsLocationsAgentsSessionsFulfillIntent =
       GoogleCloudDialogflowCxV3FulfillIntentResponse
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsSessionsFulfillIntent =
+    Scopes DialogFlowProjectsLocationsAgentsSessionsFulfillIntent =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsSessionsFulfillIntent {..} =

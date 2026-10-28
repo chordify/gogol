@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Genomics.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Genomics.Internal.Product
@@ -249,7 +247,7 @@ module Gogol.Genomics.Internal.Product
 where
 
 import Gogol.Genomics.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Carries information about an accelerator that can be attached to a VM.
 --
@@ -265,7 +263,8 @@ data Accelerator = Accelerator
 -- | Creates a value of 'Accelerator' with the minimum fields required to make a request.
 newAccelerator ::
   Accelerator
-newAccelerator = Accelerator {count = Core.Nothing, type' = Core.Nothing}
+newAccelerator =
+  Accelerator {count = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON Accelerator where
   parseJSON =
@@ -273,9 +272,7 @@ instance Core.FromJSON Accelerator where
       "Accelerator"
       ( \o ->
           Accelerator
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -368,8 +365,7 @@ instance Core.ToJSON Action where
       ( Core.catMaybes
           [ ("commands" Core..=) Core.<$> commands,
             ("credentials" Core..=) Core.<$> credentials,
-            ("encryptedEnvironment" Core..=)
-              Core.<$> encryptedEnvironment,
+            ("encryptedEnvironment" Core..=) Core.<$> encryptedEnvironment,
             ("entrypoint" Core..=) Core.<$> entrypoint,
             ("environment" Core..=) Core.<$> environment,
             ("flags" Core..=) Core.<$> flags,
@@ -387,8 +383,7 @@ instance Core.ToJSON Action where
 --
 -- /See:/ 'newAction_Environment' smart constructor.
 newtype Action_Environment = Action_Environment
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -397,26 +392,23 @@ newAction_Environment ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Action_Environment
-newAction_Environment additional = Action_Environment {additional = additional}
+newAction_Environment additional =
+  Action_Environment {additional = additional}
 
 instance Core.FromJSON Action_Environment where
   parseJSON =
     Core.withObject
       "Action_Environment"
-      ( \o ->
-          Action_Environment Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Action_Environment Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Action_Environment where
-  toJSON Action_Environment {..} =
-    Core.toJSON additional
+  toJSON Action_Environment {..} = Core.toJSON additional
 
 -- | Labels to associate with the action. This field is provided to assist workflow engine authors in identifying actions (for example, to indicate what sort of action they perform, such as localization or debugging). They are returned in the operation metadata, but are otherwise ignored.
 --
 -- /See:/ 'newAction_Labels' smart constructor.
 newtype Action_Labels = Action_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -425,15 +417,14 @@ newAction_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Action_Labels
-newAction_Labels additional = Action_Labels {additional = additional}
+newAction_Labels additional =
+  Action_Labels {additional = additional}
 
 instance Core.FromJSON Action_Labels where
   parseJSON =
     Core.withObject
       "Action_Labels"
-      ( \o ->
-          Action_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Action_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Action_Labels where
   toJSON Action_Labels {..} = Core.toJSON additional
@@ -442,8 +433,7 @@ instance Core.ToJSON Action_Labels where
 --
 -- /See:/ 'newAction_PortMappings' smart constructor.
 newtype Action_PortMappings = Action_PortMappings
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int32)
+  { additional :: (Core.HashMap Core.Text Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -459,14 +449,10 @@ instance Core.FromJSON Action_PortMappings where
   parseJSON =
     Core.withObject
       "Action_PortMappings"
-      ( \o ->
-          Action_PortMappings
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Action_PortMappings Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Action_PortMappings where
-  toJSON Action_PortMappings {..} =
-    Core.toJSON additional
+  toJSON Action_PortMappings {..} = Core.toJSON additional
 
 -- | The request message for Operations.CancelOperation.
 --
@@ -538,8 +524,7 @@ instance Core.ToJSON CheckInRequest where
   toJSON CheckInRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deadlineExpired" Core..=)
-              Core.<$> deadlineExpired,
+          [ ("deadlineExpired" Core..=) Core.<$> deadlineExpired,
             ("event" Core..=) Core.<$> event,
             ("events" Core..=) Core.<$> events,
             ("result" Core..=) Core.<$> result,
@@ -569,14 +554,10 @@ instance Core.FromJSON CheckInRequest_Event where
   parseJSON =
     Core.withObject
       "CheckInRequest_Event"
-      ( \o ->
-          CheckInRequest_Event
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CheckInRequest_Event Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CheckInRequest_Event where
-  toJSON CheckInRequest_Event {..} =
-    Core.toJSON additional
+  toJSON CheckInRequest_Event {..} = Core.toJSON additional
 
 -- | The response to the CheckIn method.
 --
@@ -643,14 +624,10 @@ instance Core.FromJSON CheckInResponse_Features where
   parseJSON =
     Core.withObject
       "CheckInResponse_Features"
-      ( \o ->
-          CheckInResponse_Features
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CheckInResponse_Features Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CheckInResponse_Features where
-  toJSON CheckInResponse_Features {..} =
-    Core.toJSON additional
+  toJSON CheckInResponse_Features {..} = Core.toJSON additional
 
 -- | The metadata that describes the operation assigned to the worker.
 --
@@ -673,14 +650,10 @@ instance Core.FromJSON CheckInResponse_Metadata where
   parseJSON =
     Core.withObject
       "CheckInResponse_Metadata"
-      ( \o ->
-          CheckInResponse_Metadata
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CheckInResponse_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CheckInResponse_Metadata where
-  toJSON CheckInResponse_Metadata {..} =
-    Core.toJSON additional
+  toJSON CheckInResponse_Metadata {..} = Core.toJSON additional
 
 -- | An event generated when a container is forcibly terminated by the worker. Currently, this only occurs when the container outlives the timeout specified by the user.
 --
@@ -694,23 +667,19 @@ newtype ContainerKilledEvent = ContainerKilledEvent
 -- | Creates a value of 'ContainerKilledEvent' with the minimum fields required to make a request.
 newContainerKilledEvent ::
   ContainerKilledEvent
-newContainerKilledEvent = ContainerKilledEvent {actionId = Core.Nothing}
+newContainerKilledEvent =
+  ContainerKilledEvent {actionId = Core.Nothing}
 
 instance Core.FromJSON ContainerKilledEvent where
   parseJSON =
     Core.withObject
       "ContainerKilledEvent"
-      ( \o ->
-          ContainerKilledEvent
-            Core.<$> (o Core..:? "actionId")
-      )
+      (\o -> ContainerKilledEvent Core.<$> (o Core..:? "actionId"))
 
 instance Core.ToJSON ContainerKilledEvent where
   toJSON ContainerKilledEvent {..} =
     Core.object
-      ( Core.catMaybes
-          [("actionId" Core..=) Core.<$> actionId]
-      )
+      (Core.catMaybes [("actionId" Core..=) Core.<$> actionId])
 
 -- | An event generated when a container starts.
 --
@@ -760,8 +729,7 @@ instance Core.ToJSON ContainerStartedEvent where
 --
 -- /See:/ 'newContainerStartedEvent_PortMappings' smart constructor.
 newtype ContainerStartedEvent_PortMappings = ContainerStartedEvent_PortMappings
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int32)
+  { additional :: (Core.HashMap Core.Text Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -773,10 +741,7 @@ newContainerStartedEvent_PortMappings ::
 newContainerStartedEvent_PortMappings additional =
   ContainerStartedEvent_PortMappings {additional = additional}
 
-instance
-  Core.FromJSON
-    ContainerStartedEvent_PortMappings
-  where
+instance Core.FromJSON ContainerStartedEvent_PortMappings where
   parseJSON =
     Core.withObject
       "ContainerStartedEvent_PortMappings"
@@ -785,10 +750,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ContainerStartedEvent_PortMappings
-  where
+instance Core.ToJSON ContainerStartedEvent_PortMappings where
   toJSON ContainerStartedEvent_PortMappings {..} =
     Core.toJSON additional
 
@@ -850,7 +812,8 @@ data DelayedEvent = DelayedEvent
 -- | Creates a value of 'DelayedEvent' with the minimum fields required to make a request.
 newDelayedEvent ::
   DelayedEvent
-newDelayedEvent = DelayedEvent {cause = Core.Nothing, metrics = Core.Nothing}
+newDelayedEvent =
+  DelayedEvent {cause = Core.Nothing, metrics = Core.Nothing}
 
 instance Core.FromJSON DelayedEvent where
   parseJSON =
@@ -858,7 +821,8 @@ instance Core.FromJSON DelayedEvent where
       "DelayedEvent"
       ( \o ->
           DelayedEvent
-            Core.<$> (o Core..:? "cause") Core.<*> (o Core..:? "metrics")
+            Core.<$> (o Core..:? "cause")
+            Core.<*> (o Core..:? "metrics")
       )
 
 instance Core.ToJSON DelayedEvent where
@@ -934,7 +898,10 @@ data DiskStatus = DiskStatus
 newDiskStatus ::
   DiskStatus
 newDiskStatus =
-  DiskStatus {freeSpaceBytes = Core.Nothing, totalSpaceBytes = Core.Nothing}
+  DiskStatus
+    { freeSpaceBytes = Core.Nothing,
+      totalSpaceBytes = Core.Nothing
+    }
 
 instance Core.FromJSON DiskStatus where
   parseJSON =
@@ -942,21 +909,19 @@ instance Core.FromJSON DiskStatus where
       "DiskStatus"
       ( \o ->
           DiskStatus
-            Core.<$> ( o Core..:? "freeSpaceBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalSpaceBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "freeSpaceBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalSpaceBytes" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON DiskStatus where
   toJSON DiskStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("freeSpaceBytes" Core..=) Core.. Core.AsText
+          [ ("freeSpaceBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> freeSpaceBytes,
-            ("totalSpaceBytes" Core..=) Core.. Core.AsText
+            ("totalSpaceBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> totalSpaceBytes
           ]
       )
@@ -973,8 +938,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1037,15 +1001,14 @@ newEvent_Details ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Event_Details
-newEvent_Details additional = Event_Details {additional = additional}
+newEvent_Details additional =
+  Event_Details {additional = additional}
 
 instance Core.FromJSON Event_Details where
   parseJSON =
     Core.withObject
       "Event_Details"
-      ( \o ->
-          Event_Details Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Event_Details Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Event_Details where
   toJSON Event_Details {..} = Core.toJSON additional
@@ -1072,8 +1035,7 @@ instance Core.FromJSON ExistingDisk where
 
 instance Core.ToJSON ExistingDisk where
   toJSON ExistingDisk {..} =
-    Core.object
-      (Core.catMaybes [("disk" Core..=) Core.<$> disk])
+    Core.object (Core.catMaybes [("disk" Core..=) Core.<$> disk])
 
 -- | An event generated when the execution of a pipeline has failed. Note that other events can continue to occur after this event.
 --
@@ -1089,7 +1051,8 @@ data FailedEvent = FailedEvent
 -- | Creates a value of 'FailedEvent' with the minimum fields required to make a request.
 newFailedEvent ::
   FailedEvent
-newFailedEvent = FailedEvent {cause = Core.Nothing, code = Core.Nothing}
+newFailedEvent =
+  FailedEvent {cause = Core.Nothing, code = Core.Nothing}
 
 instance Core.FromJSON FailedEvent where
   parseJSON =
@@ -1097,16 +1060,15 @@ instance Core.FromJSON FailedEvent where
       "FailedEvent"
       ( \o ->
           FailedEvent
-            Core.<$> (o Core..:? "cause") Core.<*> (o Core..:? "code")
+            Core.<$> (o Core..:? "cause")
+            Core.<*> (o Core..:? "code")
       )
 
 instance Core.ToJSON FailedEvent where
   toJSON FailedEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cause" Core..=) Core.<$> cause,
-            ("code" Core..=) Core.<$> code
-          ]
+          [("cause" Core..=) Core.<$> cause, ("code" Core..=) Core.<$> code]
       )
 
 -- | The response message for Operations.ListOperations.
@@ -1211,8 +1173,7 @@ instance Core.ToJSON Metadata where
 --
 -- /See:/ 'newMetadata_Labels' smart constructor.
 newtype Metadata_Labels = Metadata_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1221,15 +1182,14 @@ newMetadata_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Metadata_Labels
-newMetadata_Labels additional = Metadata_Labels {additional = additional}
+newMetadata_Labels additional =
+  Metadata_Labels {additional = additional}
 
 instance Core.FromJSON Metadata_Labels where
   parseJSON =
     Core.withObject
       "Metadata_Labels"
-      ( \o ->
-          Metadata_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Metadata_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Metadata_Labels where
   toJSON Metadata_Labels {..} = Core.toJSON additional
@@ -1251,7 +1211,11 @@ data Mount = Mount
 newMount ::
   Mount
 newMount =
-  Mount {disk = Core.Nothing, path = Core.Nothing, readOnly = Core.Nothing}
+  Mount
+    { disk = Core.Nothing,
+      path = Core.Nothing,
+      readOnly = Core.Nothing
+    }
 
 instance Core.FromJSON Mount where
   parseJSON =
@@ -1296,8 +1260,7 @@ instance Core.FromJSON NFSMount where
 
 instance Core.ToJSON NFSMount where
   toJSON NFSMount {..} =
-    Core.object
-      (Core.catMaybes [("target" Core..=) Core.<$> target])
+    Core.object (Core.catMaybes [("target" Core..=) Core.<$> target])
 
 -- | VM networking options.
 --
@@ -1339,8 +1302,7 @@ instance Core.ToJSON Network where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("subnetwork" Core..=) Core.<$> subnetwork,
-            ("usePrivateAddress" Core..=)
-              Core.<$> usePrivateAddress
+            ("usePrivateAddress" Core..=) Core.<$> usePrivateAddress
           ]
       )
 
@@ -1412,19 +1374,17 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
 -- | An Empty object.
 --
@@ -1440,19 +1400,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Configuration for a persistent disk to be attached to the VM. See https:\/\/cloud.google.com\/compute\/docs\/disks\/performance for more information about disk type, size, and performance considerations.
 --
@@ -1545,8 +1503,7 @@ instance Core.ToJSON Pipeline where
     Core.object
       ( Core.catMaybes
           [ ("actions" Core..=) Core.<$> actions,
-            ("encryptedEnvironment" Core..=)
-              Core.<$> encryptedEnvironment,
+            ("encryptedEnvironment" Core..=) Core.<$> encryptedEnvironment,
             ("environment" Core..=) Core.<$> environment,
             ("resources" Core..=) Core.<$> resources,
             ("timeout" Core..=) Core.<$> timeout
@@ -1557,8 +1514,7 @@ instance Core.ToJSON Pipeline where
 --
 -- /See:/ 'newPipeline_Environment' smart constructor.
 newtype Pipeline_Environment = Pipeline_Environment
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1574,14 +1530,10 @@ instance Core.FromJSON Pipeline_Environment where
   parseJSON =
     Core.withObject
       "Pipeline_Environment"
-      ( \o ->
-          Pipeline_Environment
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Pipeline_Environment Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Pipeline_Environment where
-  toJSON Pipeline_Environment {..} =
-    Core.toJSON additional
+  toJSON Pipeline_Environment {..} = Core.toJSON additional
 
 -- | An event generated when the worker starts pulling an image.
 --
@@ -1601,16 +1553,12 @@ instance Core.FromJSON PullStartedEvent where
   parseJSON =
     Core.withObject
       "PullStartedEvent"
-      ( \o ->
-          PullStartedEvent Core.<$> (o Core..:? "imageUri")
-      )
+      (\o -> PullStartedEvent Core.<$> (o Core..:? "imageUri"))
 
 instance Core.ToJSON PullStartedEvent where
   toJSON PullStartedEvent {..} =
     Core.object
-      ( Core.catMaybes
-          [("imageUri" Core..=) Core.<$> imageUri]
-      )
+      (Core.catMaybes [("imageUri" Core..=) Core.<$> imageUri])
 
 -- | An event generated when the worker stops pulling an image.
 --
@@ -1630,16 +1578,12 @@ instance Core.FromJSON PullStoppedEvent where
   parseJSON =
     Core.withObject
       "PullStoppedEvent"
-      ( \o ->
-          PullStoppedEvent Core.<$> (o Core..:? "imageUri")
-      )
+      (\o -> PullStoppedEvent Core.<$> (o Core..:? "imageUri"))
 
 instance Core.ToJSON PullStoppedEvent where
   toJSON PullStoppedEvent {..} =
     Core.object
-      ( Core.catMaybes
-          [("imageUri" Core..=) Core.<$> imageUri]
-      )
+      (Core.catMaybes [("imageUri" Core..=) Core.<$> imageUri])
 
 -- | The system resources for the pipeline run. At least one zone or region must be specified or the pipeline run will fail.
 --
@@ -1738,8 +1682,7 @@ instance Core.ToJSON RunPipelineRequest where
 --
 -- /See:/ 'newRunPipelineRequest_Labels' smart constructor.
 newtype RunPipelineRequest_Labels = RunPipelineRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1756,13 +1699,11 @@ instance Core.FromJSON RunPipelineRequest_Labels where
     Core.withObject
       "RunPipelineRequest_Labels"
       ( \o ->
-          RunPipelineRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
+          RunPipelineRequest_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON RunPipelineRequest_Labels where
-  toJSON RunPipelineRequest_Labels {..} =
-    Core.toJSON additional
+  toJSON RunPipelineRequest_Labels {..} = Core.toJSON additional
 
 -- | The response to the RunPipeline method, returned in the operation\'s result field on success.
 --
@@ -1798,7 +1739,8 @@ data Secret = Secret
 -- | Creates a value of 'Secret' with the minimum fields required to make a request.
 newSecret ::
   Secret
-newSecret = Secret {cipherText = Core.Nothing, keyName = Core.Nothing}
+newSecret =
+  Secret {cipherText = Core.Nothing, keyName = Core.Nothing}
 
 instance Core.FromJSON Secret where
   parseJSON =
@@ -1833,7 +1775,8 @@ data ServiceAccount = ServiceAccount
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 newServiceAccount ::
   ServiceAccount
-newServiceAccount = ServiceAccount {email = Core.Nothing, scopes = Core.Nothing}
+newServiceAccount =
+  ServiceAccount {email = Core.Nothing, scopes = Core.Nothing}
 
 instance Core.FromJSON ServiceAccount where
   parseJSON =
@@ -1841,7 +1784,8 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scopes")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "scopes")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1870,7 +1814,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1906,19 +1854,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | An event that occured in the operation assigned to the worker and the time of occurance.
 --
@@ -1977,14 +1923,10 @@ instance Core.FromJSON TimestampedEvent_Data where
   parseJSON =
     Core.withObject
       "TimestampedEvent_Data"
-      ( \o ->
-          TimestampedEvent_Data
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TimestampedEvent_Data Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TimestampedEvent_Data where
-  toJSON TimestampedEvent_Data {..} =
-    Core.toJSON additional
+  toJSON TimestampedEvent_Data {..} = Core.toJSON additional
 
 -- | An event generated when the execution of a container results in a non-zero exit status that was not otherwise ignored. Execution will continue, but only actions that are flagged as @ALWAYS_RUN@ will be executed. Other actions will be skipped.
 --
@@ -2001,7 +1943,10 @@ data UnexpectedExitStatusEvent = UnexpectedExitStatusEvent
 newUnexpectedExitStatusEvent ::
   UnexpectedExitStatusEvent
 newUnexpectedExitStatusEvent =
-  UnexpectedExitStatusEvent {actionId = Core.Nothing, exitStatus = Core.Nothing}
+  UnexpectedExitStatusEvent
+    { actionId = Core.Nothing,
+      exitStatus = Core.Nothing
+    }
 
 instance Core.FromJSON UnexpectedExitStatusEvent where
   parseJSON =
@@ -2113,15 +2058,13 @@ instance Core.ToJSON VirtualMachine where
             ("bootImage" Core..=) Core.<$> bootImage,
             ("cpuPlatform" Core..=) Core.<$> cpuPlatform,
             ("disks" Core..=) Core.<$> disks,
-            ("dockerCacheImages" Core..=)
-              Core.<$> dockerCacheImages,
+            ("dockerCacheImages" Core..=) Core.<$> dockerCacheImages,
             ("enableStackdriverMonitoring" Core..=)
               Core.<$> enableStackdriverMonitoring,
             ("labels" Core..=) Core.<$> labels,
             ("machineType" Core..=) Core.<$> machineType,
             ("network" Core..=) Core.<$> network,
-            ("nvidiaDriverVersion" Core..=)
-              Core.<$> nvidiaDriverVersion,
+            ("nvidiaDriverVersion" Core..=) Core.<$> nvidiaDriverVersion,
             ("preemptible" Core..=) Core.<$> preemptible,
             ("reservation" Core..=) Core.<$> reservation,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
@@ -2133,8 +2076,7 @@ instance Core.ToJSON VirtualMachine where
 --
 -- /See:/ 'newVirtualMachine_Labels' smart constructor.
 newtype VirtualMachine_Labels = VirtualMachine_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2150,14 +2092,10 @@ instance Core.FromJSON VirtualMachine_Labels where
   parseJSON =
     Core.withObject
       "VirtualMachine_Labels"
-      ( \o ->
-          VirtualMachine_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> VirtualMachine_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON VirtualMachine_Labels where
-  toJSON VirtualMachine_Labels {..} =
-    Core.toJSON additional
+  toJSON VirtualMachine_Labels {..} = Core.toJSON additional
 
 -- | Carries information about storage that can be attached to a VM. Specify either @Volume@ or @Disk@, but not both.
 --
@@ -2267,7 +2205,10 @@ data WorkerReleasedEvent = WorkerReleasedEvent
 newWorkerReleasedEvent ::
   WorkerReleasedEvent
 newWorkerReleasedEvent =
-  WorkerReleasedEvent {instance' = Core.Nothing, zone = Core.Nothing}
+  WorkerReleasedEvent
+    { instance' = Core.Nothing,
+      zone = Core.Nothing
+    }
 
 instance Core.FromJSON WorkerReleasedEvent where
   parseJSON =
@@ -2275,7 +2216,8 @@ instance Core.FromJSON WorkerReleasedEvent where
       "WorkerReleasedEvent"
       ( \o ->
           WorkerReleasedEvent
-            Core.<$> (o Core..:? "instance") Core.<*> (o Core..:? "zone")
+            Core.<$> (o Core..:? "instance")
+            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON WorkerReleasedEvent where
@@ -2324,15 +2266,9 @@ instance Core.FromJSON WorkerStatus where
           WorkerStatus
             Core.<$> (o Core..:? "attachedDisks")
             Core.<*> (o Core..:? "bootDisk")
-            Core.<*> ( o Core..:? "freeRamBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "totalRamBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "uptimeSeconds"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "freeRamBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "totalRamBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "uptimeSeconds" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON WorkerStatus where
@@ -2341,11 +2277,12 @@ instance Core.ToJSON WorkerStatus where
       ( Core.catMaybes
           [ ("attachedDisks" Core..=) Core.<$> attachedDisks,
             ("bootDisk" Core..=) Core.<$> bootDisk,
-            ("freeRamBytes" Core..=) Core.. Core.AsText
-              Core.<$> freeRamBytes,
-            ("totalRamBytes" Core..=) Core.. Core.AsText
+            ("freeRamBytes" Core..=) Core.. Core.AsText Core.<$> freeRamBytes,
+            ("totalRamBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> totalRamBytes,
-            ("uptimeSeconds" Core..=) Core.. Core.AsText
+            ("uptimeSeconds" Core..=)
+              Core.. Core.AsText
               Core.<$> uptimeSeconds
           ]
       )
@@ -2354,8 +2291,7 @@ instance Core.ToJSON WorkerStatus where
 --
 -- /See:/ 'newWorkerStatus_AttachedDisks' smart constructor.
 newtype WorkerStatus_AttachedDisks = WorkerStatus_AttachedDisks
-  { -- |
-    additional :: (Core.HashMap Core.Text DiskStatus)
+  { additional :: (Core.HashMap Core.Text DiskStatus)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2372,10 +2308,8 @@ instance Core.FromJSON WorkerStatus_AttachedDisks where
     Core.withObject
       "WorkerStatus_AttachedDisks"
       ( \o ->
-          WorkerStatus_AttachedDisks
-            Core.<$> (Core.parseJSONObject o)
+          WorkerStatus_AttachedDisks Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON WorkerStatus_AttachedDisks where
-  toJSON WorkerStatus_AttachedDisks {..} =
-    Core.toJSON additional
+  toJSON WorkerStatus_AttachedDisks {..} = Core.toJSON additional

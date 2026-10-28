@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Webmasters.Sitemaps.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes a sitemap from the Sitemaps report. Does not stop Google from crawling this sitemap or the URLs that were previously crawled in the deleted sitemap.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @webmasters.sitemaps.delete@.
 module Gogol.SearchConsole.Webmasters.Sitemaps.Delete
   ( -- * Resource
     WebmastersSitemapsDeleteResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.Webmasters.Sitemaps.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.sitemaps.delete@ method which the
@@ -100,9 +98,7 @@ newWebmastersSitemapsDelete feedpath siteUrl =
 
 instance Core.GoogleRequest WebmastersSitemapsDelete where
   type Rs WebmastersSitemapsDelete = ()
-  type
-    Scopes WebmastersSitemapsDelete =
-      '[Webmasters'FullControl]
+  type Scopes WebmastersSitemapsDelete = '[Webmasters'FullControl]
   requestClient WebmastersSitemapsDelete {..} =
     go
       siteUrl
@@ -117,7 +113,5 @@ instance Core.GoogleRequest WebmastersSitemapsDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitemapsDeleteResource)
           Core.mempty

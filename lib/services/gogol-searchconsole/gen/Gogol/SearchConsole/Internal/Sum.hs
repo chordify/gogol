@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SearchConsole.Internal.Sum
@@ -248,6 +246,7 @@ module Gogol.SearchConsole.Internal.Sum
       ( SearchAnalyticsQueryRequest_AggregationType_Auto,
         SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY,
         SearchAnalyticsQueryRequest_AggregationType_BYPAGE,
+        SearchAnalyticsQueryRequest_AggregationType_BYNEWSSHOWCASEPANEL,
         ..
       ),
 
@@ -297,6 +296,7 @@ module Gogol.SearchConsole.Internal.Sum
       ( SearchAnalyticsQueryResponse_ResponseAggregationType_Auto,
         SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY,
         SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE,
+        SearchAnalyticsQueryResponse_ResponseAggregationType_BYNEWSSHOWCASEPANEL,
         ..
       ),
 
@@ -347,7 +347,7 @@ module Gogol.SearchConsole.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -650,23 +650,18 @@ newtype ApiDimensionFilter_Dimension = ApiDimensionFilter_Dimension {fromApiDime
       Core.FromJSONKey
     )
 
--- |
 pattern ApiDimensionFilter_Dimension_Query :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Query = ApiDimensionFilter_Dimension "QUERY"
 
--- |
 pattern ApiDimensionFilter_Dimension_Page :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Page = ApiDimensionFilter_Dimension "PAGE"
 
--- |
 pattern ApiDimensionFilter_Dimension_Country :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Country = ApiDimensionFilter_Dimension "COUNTRY"
 
--- |
 pattern ApiDimensionFilter_Dimension_Device :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_Device = ApiDimensionFilter_Dimension "DEVICE"
 
--- |
 pattern ApiDimensionFilter_Dimension_SEARCHAPPEARANCE :: ApiDimensionFilter_Dimension
 pattern ApiDimensionFilter_Dimension_SEARCHAPPEARANCE = ApiDimensionFilter_Dimension "SEARCH_APPEARANCE"
 
@@ -691,27 +686,21 @@ newtype ApiDimensionFilter_Operator = ApiDimensionFilter_Operator {fromApiDimens
       Core.FromJSONKey
     )
 
--- |
 pattern ApiDimensionFilter_Operator_Equals :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_Equals = ApiDimensionFilter_Operator "EQUALS"
 
--- |
 pattern ApiDimensionFilter_Operator_NOTEQUALS :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_NOTEQUALS = ApiDimensionFilter_Operator "NOT_EQUALS"
 
--- |
 pattern ApiDimensionFilter_Operator_Contains :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_Contains = ApiDimensionFilter_Operator "CONTAINS"
 
--- |
 pattern ApiDimensionFilter_Operator_NOTCONTAINS :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_NOTCONTAINS = ApiDimensionFilter_Operator "NOT_CONTAINS"
 
--- |
 pattern ApiDimensionFilter_Operator_INCLUDINGREGEX :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_INCLUDINGREGEX = ApiDimensionFilter_Operator "INCLUDING_REGEX"
 
--- |
 pattern ApiDimensionFilter_Operator_EXCLUDINGREGEX :: ApiDimensionFilter_Operator
 pattern ApiDimensionFilter_Operator_EXCLUDINGREGEX = ApiDimensionFilter_Operator "EXCLUDING_REGEX"
 
@@ -737,7 +726,6 @@ newtype ApiDimensionFilterGroup_GroupType = ApiDimensionFilterGroup_GroupType {f
       Core.FromJSONKey
     )
 
--- |
 pattern ApiDimensionFilterGroup_GroupType_And :: ApiDimensionFilterGroup_GroupType
 pattern ApiDimensionFilterGroup_GroupType_And = ApiDimensionFilterGroup_GroupType "AND"
 
@@ -1255,7 +1243,7 @@ pattern RunMobileFriendlyTestResponse_MobileFriendliness_NOTMOBILEFRIENDLY = Run
   RunMobileFriendlyTestResponse_MobileFriendliness
   #-}
 
--- | [Optional; Default is \"auto\"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see the help documentation to learn how data is calculated differently by site versus by page. __Note:__ If you group or filter by page, you cannot aggregate by property. If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
+-- | [Optional; Default is \\\"auto\\\"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see the help documentation to learn how data is calculated differently by site versus by page. __Note:__ If you group or filter by page, you cannot aggregate by property. If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
 newtype SearchAnalyticsQueryRequest_AggregationType = SearchAnalyticsQueryRequest_AggregationType {fromSearchAnalyticsQueryRequest_AggregationType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1268,22 +1256,23 @@ newtype SearchAnalyticsQueryRequest_AggregationType = SearchAnalyticsQueryReques
       Core.FromJSONKey
     )
 
--- |
 pattern SearchAnalyticsQueryRequest_AggregationType_Auto :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_Auto = SearchAnalyticsQueryRequest_AggregationType "AUTO"
 
--- |
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY = SearchAnalyticsQueryRequest_AggregationType "BY_PROPERTY"
 
--- |
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPAGE :: SearchAnalyticsQueryRequest_AggregationType
 pattern SearchAnalyticsQueryRequest_AggregationType_BYPAGE = SearchAnalyticsQueryRequest_AggregationType "BY_PAGE"
+
+pattern SearchAnalyticsQueryRequest_AggregationType_BYNEWSSHOWCASEPANEL :: SearchAnalyticsQueryRequest_AggregationType
+pattern SearchAnalyticsQueryRequest_AggregationType_BYNEWSSHOWCASEPANEL = SearchAnalyticsQueryRequest_AggregationType "BY_NEWS_SHOWCASE_PANEL"
 
 {-# COMPLETE
   SearchAnalyticsQueryRequest_AggregationType_Auto,
   SearchAnalyticsQueryRequest_AggregationType_BYPROPERTY,
   SearchAnalyticsQueryRequest_AggregationType_BYPAGE,
+  SearchAnalyticsQueryRequest_AggregationType_BYNEWSSHOWCASEPANEL,
   SearchAnalyticsQueryRequest_AggregationType
   #-}
 
@@ -1331,27 +1320,21 @@ newtype SearchAnalyticsQueryRequest_DimensionsItem = SearchAnalyticsQueryRequest
       Core.FromJSONKey
     )
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Date :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Date = SearchAnalyticsQueryRequest_DimensionsItem "DATE"
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Query :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Query = SearchAnalyticsQueryRequest_DimensionsItem "QUERY"
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Page :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Page = SearchAnalyticsQueryRequest_DimensionsItem "PAGE"
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Country :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Country = SearchAnalyticsQueryRequest_DimensionsItem "COUNTRY"
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Device :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_Device = SearchAnalyticsQueryRequest_DimensionsItem "DEVICE"
 
--- |
 pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE :: SearchAnalyticsQueryRequest_DimensionsItem
 pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE = SearchAnalyticsQueryRequest_DimensionsItem "SEARCH_APPEARANCE"
 
@@ -1365,7 +1348,7 @@ pattern SearchAnalyticsQueryRequest_DimensionsItem_SEARCHAPPEARANCE = SearchAnal
   SearchAnalyticsQueryRequest_DimensionsItem
   #-}
 
--- | [Optional; Default is \"web\"] The search type to filter for.
+-- | [Optional; Default is \\\"web\\\"] The search type to filter for.
 newtype SearchAnalyticsQueryRequest_SearchType = SearchAnalyticsQueryRequest_SearchType {fromSearchAnalyticsQueryRequest_SearchType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1378,15 +1361,12 @@ newtype SearchAnalyticsQueryRequest_SearchType = SearchAnalyticsQueryRequest_Sea
       Core.FromJSONKey
     )
 
--- |
 pattern SearchAnalyticsQueryRequest_SearchType_Web :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Web = SearchAnalyticsQueryRequest_SearchType "WEB"
 
--- |
 pattern SearchAnalyticsQueryRequest_SearchType_Image :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Image = SearchAnalyticsQueryRequest_SearchType "IMAGE"
 
--- |
 pattern SearchAnalyticsQueryRequest_SearchType_Video :: SearchAnalyticsQueryRequest_SearchType
 pattern SearchAnalyticsQueryRequest_SearchType_Video = SearchAnalyticsQueryRequest_SearchType "VIDEO"
 
@@ -1412,7 +1392,7 @@ pattern SearchAnalyticsQueryRequest_SearchType_GOOGLENEWS = SearchAnalyticsQuery
   SearchAnalyticsQueryRequest_SearchType
   #-}
 
--- | Optional. [Optional; Default is \"web\"] Type of report: search type, or either Discover or Gnews.
+-- | Optional. [Optional; Default is \\\"web\\\"] Type of report: search type, or either Discover or Gnews.
 newtype SearchAnalyticsQueryRequest_Type = SearchAnalyticsQueryRequest_Type {fromSearchAnalyticsQueryRequest_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1425,15 +1405,12 @@ newtype SearchAnalyticsQueryRequest_Type = SearchAnalyticsQueryRequest_Type {fro
       Core.FromJSONKey
     )
 
--- |
 pattern SearchAnalyticsQueryRequest_Type_Web :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Web = SearchAnalyticsQueryRequest_Type "WEB"
 
--- |
 pattern SearchAnalyticsQueryRequest_Type_Image :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Image = SearchAnalyticsQueryRequest_Type "IMAGE"
 
--- |
 pattern SearchAnalyticsQueryRequest_Type_Video :: SearchAnalyticsQueryRequest_Type
 pattern SearchAnalyticsQueryRequest_Type_Video = SearchAnalyticsQueryRequest_Type "VIDEO"
 
@@ -1472,22 +1449,23 @@ newtype SearchAnalyticsQueryResponse_ResponseAggregationType = SearchAnalyticsQu
       Core.FromJSONKey
     )
 
--- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_Auto :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_Auto = SearchAnalyticsQueryResponse_ResponseAggregationType "AUTO"
 
--- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY = SearchAnalyticsQueryResponse_ResponseAggregationType "BY_PROPERTY"
 
--- |
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE :: SearchAnalyticsQueryResponse_ResponseAggregationType
 pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE = SearchAnalyticsQueryResponse_ResponseAggregationType "BY_PAGE"
+
+pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYNEWSSHOWCASEPANEL :: SearchAnalyticsQueryResponse_ResponseAggregationType
+pattern SearchAnalyticsQueryResponse_ResponseAggregationType_BYNEWSSHOWCASEPANEL = SearchAnalyticsQueryResponse_ResponseAggregationType "BY_NEWS_SHOWCASE_PANEL"
 
 {-# COMPLETE
   SearchAnalyticsQueryResponse_ResponseAggregationType_Auto,
   SearchAnalyticsQueryResponse_ResponseAggregationType_BYPROPERTY,
   SearchAnalyticsQueryResponse_ResponseAggregationType_BYPAGE,
+  SearchAnalyticsQueryResponse_ResponseAggregationType_BYNEWSSHOWCASEPANEL,
   SearchAnalyticsQueryResponse_ResponseAggregationType
   #-}
 
@@ -1541,7 +1519,6 @@ newtype WmxSite_PermissionLevel = WmxSite_PermissionLevel {fromWmxSite_Permissio
       Core.FromJSONKey
     )
 
--- |
 pattern WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED :: WmxSite_PermissionLevel
 pattern WmxSite_PermissionLevel_SITEPERMISSIONLEVELUNSPECIFIED = WmxSite_PermissionLevel "SITE_PERMISSION_LEVEL_UNSPECIFIED"
 
@@ -1583,23 +1560,18 @@ newtype WmxSitemap_Type = WmxSitemap_Type {fromWmxSitemap_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern WmxSitemap_Type_NOTSITEMAP :: WmxSitemap_Type
 pattern WmxSitemap_Type_NOTSITEMAP = WmxSitemap_Type "NOT_SITEMAP"
 
--- |
 pattern WmxSitemap_Type_URLLIST :: WmxSitemap_Type
 pattern WmxSitemap_Type_URLLIST = WmxSitemap_Type "URL_LIST"
 
--- |
 pattern WmxSitemap_Type_Sitemap :: WmxSitemap_Type
 pattern WmxSitemap_Type_Sitemap = WmxSitemap_Type "SITEMAP"
 
--- |
 pattern WmxSitemap_Type_RSSFEED :: WmxSitemap_Type
 pattern WmxSitemap_Type_RSSFEED = WmxSitemap_Type "RSS_FEED"
 
--- |
 pattern WmxSitemap_Type_ATOMFEED :: WmxSitemap_Type
 pattern WmxSitemap_Type_ATOMFEED = WmxSitemap_Type "ATOM_FEED"
 
@@ -1607,7 +1579,6 @@ pattern WmxSitemap_Type_ATOMFEED = WmxSitemap_Type "ATOM_FEED"
 pattern WmxSitemap_Type_PATTERNSITEMAP :: WmxSitemap_Type
 pattern WmxSitemap_Type_PATTERNSITEMAP = WmxSitemap_Type "PATTERN_SITEMAP"
 
--- |
 pattern WmxSitemap_Type_Oceanfront :: WmxSitemap_Type
 pattern WmxSitemap_Type_Oceanfront = WmxSitemap_Type "OCEANFRONT"
 
@@ -1635,27 +1606,21 @@ newtype WmxSitemapContent_Type = WmxSitemapContent_Type {fromWmxSitemapContent_T
       Core.FromJSONKey
     )
 
--- |
 pattern WmxSitemapContent_Type_Web :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Web = WmxSitemapContent_Type "WEB"
 
--- |
 pattern WmxSitemapContent_Type_Image :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Image = WmxSitemapContent_Type "IMAGE"
 
--- |
 pattern WmxSitemapContent_Type_Video :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Video = WmxSitemapContent_Type "VIDEO"
 
--- |
 pattern WmxSitemapContent_Type_News :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_News = WmxSitemapContent_Type "NEWS"
 
--- |
 pattern WmxSitemapContent_Type_Mobile :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Mobile = WmxSitemapContent_Type "MOBILE"
 
--- |
 pattern WmxSitemapContent_Type_ANDROIDAPP :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_ANDROIDAPP = WmxSitemapContent_Type "ANDROID_APP"
 
@@ -1663,7 +1628,6 @@ pattern WmxSitemapContent_Type_ANDROIDAPP = WmxSitemapContent_Type "ANDROID_APP"
 pattern WmxSitemapContent_Type_Pattern :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_Pattern = WmxSitemapContent_Type "PATTERN"
 
--- |
 pattern WmxSitemapContent_Type_IOSAPP :: WmxSitemapContent_Type
 pattern WmxSitemapContent_Type_IOSAPP = WmxSitemapContent_Type "IOS_APP"
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.DlpJobs.HybridInspect
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Inspect hybrid content and store findings to a job. To review the findings, inspect the job. Inspection will occur asynchronously.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.dlpJobs.hybridInspect@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.dlpJobs.hybridInspect@.
 module Gogol.DLP.Projects.Locations.DlpJobs.HybridInspect
   ( -- * Resource
     DLPProjectsLocationsDlpJobsHybridInspectResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.DlpJobs.HybridInspect
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.dlpJobs.hybridInspect@ method which the
 -- 'DLPProjectsLocationsDlpJobsHybridInspect' request conforms to.
@@ -56,9 +54,7 @@ type DLPProjectsLocationsDlpJobsHybridInspectResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2HybridInspectDlpJobRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GooglePrivacyDlpV2HybridInspectResponse
+    Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2HybridInspectResponse
 
 -- | Inspect hybrid content and store findings to a job. To review the findings, inspect the job. Inspection will occur asynchronously.
 --
@@ -109,23 +105,21 @@ instance
   type
     Scopes DLPProjectsLocationsDlpJobsHybridInspect =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsDlpJobsHybridInspect {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsDlpJobsHybridInspectResource
-            )
-            Core.mempty
+  requestClient DLPProjectsLocationsDlpJobsHybridInspect {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPProjectsLocationsDlpJobsHybridInspectResource
+          )
+          Core.mempty

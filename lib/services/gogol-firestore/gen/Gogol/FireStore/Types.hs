@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FireStore.Types
@@ -54,6 +52,10 @@ module Gogol.FireStore.Types
     ArrayValue (..),
     newArrayValue,
 
+    -- ** Avg
+    Avg (..),
+    newAvg,
+
     -- ** BatchGetDocumentsRequest
     BatchGetDocumentsRequest (..),
     newBatchGetDocumentsRequest,
@@ -81,6 +83,14 @@ module Gogol.FireStore.Types
     -- ** BeginTransactionResponse
     BeginTransactionResponse (..),
     newBeginTransactionResponse,
+
+    -- ** BitSequence
+    BitSequence (..),
+    newBitSequence,
+
+    -- ** BloomFilter
+    BloomFilter (..),
+    newBloomFilter,
 
     -- ** CollectionSelector
     CollectionSelector (..),
@@ -145,9 +155,25 @@ module Gogol.FireStore.Types
     Empty (..),
     newEmpty,
 
+    -- ** ExecutionStats
+    ExecutionStats (..),
+    newExecutionStats,
+
+    -- ** ExecutionStats_DebugStats
+    ExecutionStats_DebugStats (..),
+    newExecutionStats_DebugStats,
+
     -- ** ExistenceFilter
     ExistenceFilter (..),
     newExistenceFilter,
+
+    -- ** ExplainMetrics
+    ExplainMetrics (..),
+    newExplainMetrics,
+
+    -- ** ExplainOptions
+    ExplainOptions (..),
+    newExplainOptions,
 
     -- ** FieldFilter
     FieldFilter (..),
@@ -171,6 +197,55 @@ module Gogol.FireStore.Types
     Filter (..),
     newFilter,
 
+    -- ** FindNearest
+    FindNearest (..),
+    newFindNearest,
+
+    -- ** FindNearest_DistanceMeasure
+    FindNearest_DistanceMeasure (..),
+
+    -- ** GoogleFirestoreAdminV1Backup
+    GoogleFirestoreAdminV1Backup (..),
+    newGoogleFirestoreAdminV1Backup,
+
+    -- ** GoogleFirestoreAdminV1Backup_State
+    GoogleFirestoreAdminV1Backup_State (..),
+
+    -- ** GoogleFirestoreAdminV1BackupSchedule
+    GoogleFirestoreAdminV1BackupSchedule (..),
+    newGoogleFirestoreAdminV1BackupSchedule,
+
+    -- ** GoogleFirestoreAdminV1BackupSource
+    GoogleFirestoreAdminV1BackupSource (..),
+    newGoogleFirestoreAdminV1BackupSource,
+
+    -- ** GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata
+    GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata (..),
+    newGoogleFirestoreAdminV1BulkDeleteDocumentsMetadata,
+
+    -- ** GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState
+    GoogleFirestoreAdminV1BulkDeleteDocumentsMetadata_OperationState (..),
+
+    -- ** GoogleFirestoreAdminV1BulkDeleteDocumentsRequest
+    GoogleFirestoreAdminV1BulkDeleteDocumentsRequest (..),
+    newGoogleFirestoreAdminV1BulkDeleteDocumentsRequest,
+
+    -- ** GoogleFirestoreAdminV1CmekConfig
+    GoogleFirestoreAdminV1CmekConfig (..),
+    newGoogleFirestoreAdminV1CmekConfig,
+
+    -- ** GoogleFirestoreAdminV1CreateDatabaseMetadata
+    GoogleFirestoreAdminV1CreateDatabaseMetadata (..),
+    newGoogleFirestoreAdminV1CreateDatabaseMetadata,
+
+    -- ** GoogleFirestoreAdminV1CustomerManagedEncryptionOptions
+    GoogleFirestoreAdminV1CustomerManagedEncryptionOptions (..),
+    newGoogleFirestoreAdminV1CustomerManagedEncryptionOptions,
+
+    -- ** GoogleFirestoreAdminV1DailyRecurrence
+    GoogleFirestoreAdminV1DailyRecurrence (..),
+    newGoogleFirestoreAdminV1DailyRecurrence,
+
     -- ** GoogleFirestoreAdminV1Database
     GoogleFirestoreAdminV1Database (..),
     newGoogleFirestoreAdminV1Database,
@@ -181,8 +256,22 @@ module Gogol.FireStore.Types
     -- ** GoogleFirestoreAdminV1Database_ConcurrencyMode
     GoogleFirestoreAdminV1Database_ConcurrencyMode (..),
 
+    -- ** GoogleFirestoreAdminV1Database_DeleteProtectionState
+    GoogleFirestoreAdminV1Database_DeleteProtectionState (..),
+
+    -- ** GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement
+    GoogleFirestoreAdminV1Database_PointInTimeRecoveryEnablement (..),
+
     -- ** GoogleFirestoreAdminV1Database_Type
     GoogleFirestoreAdminV1Database_Type (..),
+
+    -- ** GoogleFirestoreAdminV1DeleteDatabaseMetadata
+    GoogleFirestoreAdminV1DeleteDatabaseMetadata (..),
+    newGoogleFirestoreAdminV1DeleteDatabaseMetadata,
+
+    -- ** GoogleFirestoreAdminV1EncryptionConfig
+    GoogleFirestoreAdminV1EncryptionConfig (..),
+    newGoogleFirestoreAdminV1EncryptionConfig,
 
     -- ** GoogleFirestoreAdminV1ExportDocumentsMetadata
     GoogleFirestoreAdminV1ExportDocumentsMetadata (..),
@@ -209,6 +298,14 @@ module Gogol.FireStore.Types
 
     -- ** GoogleFirestoreAdminV1FieldOperationMetadata_State
     GoogleFirestoreAdminV1FieldOperationMetadata_State (..),
+
+    -- ** GoogleFirestoreAdminV1FlatIndex
+    GoogleFirestoreAdminV1FlatIndex (..),
+    newGoogleFirestoreAdminV1FlatIndex,
+
+    -- ** GoogleFirestoreAdminV1GoogleDefaultEncryptionOptions
+    GoogleFirestoreAdminV1GoogleDefaultEncryptionOptions (..),
+    newGoogleFirestoreAdminV1GoogleDefaultEncryptionOptions,
 
     -- ** GoogleFirestoreAdminV1ImportDocumentsMetadata
     GoogleFirestoreAdminV1ImportDocumentsMetadata (..),
@@ -262,6 +359,14 @@ module Gogol.FireStore.Types
     -- ** GoogleFirestoreAdminV1IndexOperationMetadata_State
     GoogleFirestoreAdminV1IndexOperationMetadata_State (..),
 
+    -- ** GoogleFirestoreAdminV1ListBackupSchedulesResponse
+    GoogleFirestoreAdminV1ListBackupSchedulesResponse (..),
+    newGoogleFirestoreAdminV1ListBackupSchedulesResponse,
+
+    -- ** GoogleFirestoreAdminV1ListBackupsResponse
+    GoogleFirestoreAdminV1ListBackupsResponse (..),
+    newGoogleFirestoreAdminV1ListBackupsResponse,
+
     -- ** GoogleFirestoreAdminV1ListDatabasesResponse
     GoogleFirestoreAdminV1ListDatabasesResponse (..),
     newGoogleFirestoreAdminV1ListDatabasesResponse,
@@ -282,6 +387,29 @@ module Gogol.FireStore.Types
     GoogleFirestoreAdminV1Progress (..),
     newGoogleFirestoreAdminV1Progress,
 
+    -- ** GoogleFirestoreAdminV1RestoreDatabaseMetadata
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata (..),
+    newGoogleFirestoreAdminV1RestoreDatabaseMetadata,
+
+    -- ** GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata_OperationState (..),
+
+    -- ** GoogleFirestoreAdminV1RestoreDatabaseRequest
+    GoogleFirestoreAdminV1RestoreDatabaseRequest (..),
+    newGoogleFirestoreAdminV1RestoreDatabaseRequest,
+
+    -- ** GoogleFirestoreAdminV1SourceEncryptionOptions
+    GoogleFirestoreAdminV1SourceEncryptionOptions (..),
+    newGoogleFirestoreAdminV1SourceEncryptionOptions,
+
+    -- ** GoogleFirestoreAdminV1SourceInfo
+    GoogleFirestoreAdminV1SourceInfo (..),
+    newGoogleFirestoreAdminV1SourceInfo,
+
+    -- ** GoogleFirestoreAdminV1Stats
+    GoogleFirestoreAdminV1Stats (..),
+    newGoogleFirestoreAdminV1Stats,
+
     -- ** GoogleFirestoreAdminV1TtlConfig
     GoogleFirestoreAdminV1TtlConfig (..),
     newGoogleFirestoreAdminV1TtlConfig,
@@ -299,6 +427,17 @@ module Gogol.FireStore.Types
     -- ** GoogleFirestoreAdminV1UpdateDatabaseMetadata
     GoogleFirestoreAdminV1UpdateDatabaseMetadata (..),
     newGoogleFirestoreAdminV1UpdateDatabaseMetadata,
+
+    -- ** GoogleFirestoreAdminV1VectorConfig
+    GoogleFirestoreAdminV1VectorConfig (..),
+    newGoogleFirestoreAdminV1VectorConfig,
+
+    -- ** GoogleFirestoreAdminV1WeeklyRecurrence
+    GoogleFirestoreAdminV1WeeklyRecurrence (..),
+    newGoogleFirestoreAdminV1WeeklyRecurrence,
+
+    -- ** GoogleFirestoreAdminV1WeeklyRecurrence_Day
+    GoogleFirestoreAdminV1WeeklyRecurrence_Day (..),
 
     -- ** GoogleLongrunningCancelOperationRequest
     GoogleLongrunningCancelOperationRequest (..),
@@ -387,6 +526,14 @@ module Gogol.FireStore.Types
     PartitionQueryResponse (..),
     newPartitionQueryResponse,
 
+    -- ** PlanSummary
+    PlanSummary (..),
+    newPlanSummary,
+
+    -- ** PlanSummary_IndexesUsedItem
+    PlanSummary_IndexesUsedItem (..),
+    newPlanSummary_IndexesUsedItem,
+
     -- ** Precondition
     Precondition (..),
     newPrecondition,
@@ -443,6 +590,10 @@ module Gogol.FireStore.Types
     StructuredQuery (..),
     newStructuredQuery,
 
+    -- ** Sum
+    Sum (..),
+    newSum,
+
     -- ** Target
     Target (..),
     newTarget,
@@ -496,7 +647,7 @@ where
 
 import Gogol.FireStore.Internal.Product
 import Gogol.FireStore.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Firestore API. This contains the host and root path used as a starting point for constructing service requests.
 fireStoreService :: Core.ServiceConfig
@@ -506,7 +657,9 @@ fireStoreService =
     "firestore.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your Google Cloud Datastore data
-type Datastore'FullControl = "https://www.googleapis.com/auth/datastore"
+type Datastore'FullControl =
+  "https://www.googleapis.com/auth/datastore"

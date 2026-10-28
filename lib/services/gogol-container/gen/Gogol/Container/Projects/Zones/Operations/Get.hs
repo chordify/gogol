@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Zones.Operations.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the specified operation.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.operations.get@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.zones.operations.get@.
 module Gogol.Container.Projects.Zones.Operations.Get
   ( -- * Resource
     ContainerProjectsZonesOperationsGetResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Zones.Operations.Get
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.zones.operations.get@ method which the
 -- 'ContainerProjectsZonesOperationsGet' request conforms to.
@@ -108,13 +106,8 @@ newContainerProjectsZonesOperationsGet operationId projectId zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ContainerProjectsZonesOperationsGet
-  where
-  type
-    Rs ContainerProjectsZonesOperationsGet =
-      Operation
+instance Core.GoogleRequest ContainerProjectsZonesOperationsGet where
+  type Rs ContainerProjectsZonesOperationsGet = Operation
   type
     Scopes ContainerProjectsZonesOperationsGet =
       '[CloudPlatform'FullControl]
@@ -135,7 +128,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ContainerProjectsZonesOperationsGetResource
+              Core.Proxy ContainerProjectsZonesOperationsGetResource
           )
           Core.mempty

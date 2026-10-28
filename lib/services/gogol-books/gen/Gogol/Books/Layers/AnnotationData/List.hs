@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Layers.AnnotationData.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Layers.AnnotationData.List
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.layers.annotationData.list@ method which the
 -- 'BooksLayersAnnotationDataList' request conforms to.
@@ -64,22 +62,12 @@ type BooksLayersAnnotationDataListResource =
     Core.:> Core.QueryParam "scale" Core.Int32
     Core.:> Core.QueryParam "source" Core.Text
     Core.:> Core.QueryParam "updatedMax" Core.Text
-    Core.:> Core.QueryParam
-              "updatedMin"
-              Core.Text
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "updatedMin" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "w" Core.Int32
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              Annotationsdata
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Annotationsdata
 
 -- | Gets the annotation data for a volume and layer.
 --
@@ -155,16 +143,9 @@ newBooksLayersAnnotationDataList contentVersion layerId volumeId =
       w = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksLayersAnnotationDataList
-  where
-  type
-    Rs BooksLayersAnnotationDataList =
-      Annotationsdata
-  type
-    Scopes BooksLayersAnnotationDataList =
-      '[Books'FullControl]
+instance Core.GoogleRequest BooksLayersAnnotationDataList where
+  type Rs BooksLayersAnnotationDataList = Annotationsdata
+  type Scopes BooksLayersAnnotationDataList = '[Books'FullControl]
   requestClient BooksLayersAnnotationDataList {..} =
     go
       volumeId
@@ -190,7 +171,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksLayersAnnotationDataListResource
-          )
+          (Core.Proxy :: Core.Proxy BooksLayersAnnotationDataListResource)
           Core.mempty

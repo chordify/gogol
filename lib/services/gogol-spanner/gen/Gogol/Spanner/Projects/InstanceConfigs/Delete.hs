@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.InstanceConfigs.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the instance config. Deletion is only allowed when no instances are using the configuration. If any instances are using the config, returns @FAILED_PRECONDITION@. Only user managed configurations can be deleted. Authorization requires @spanner.instanceConfigs.delete@ permission on the resource name.
+-- Deletes the instance configuration. Deletion is only allowed when no instances are using the configuration. If any instances are using the configuration, returns @FAILED_PRECONDITION@. Only user-managed configurations can be deleted. Authorization requires @spanner.instanceConfigs.delete@ permission on the resource name.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instanceConfigs.delete@.
 module Gogol.Spanner.Projects.InstanceConfigs.Delete
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.InstanceConfigs.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instanceConfigs.delete@ method which the
@@ -57,7 +55,7 @@ type SpannerProjectsInstanceConfigsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes the instance config. Deletion is only allowed when no instances are using the configuration. If any instances are using the config, returns @FAILED_PRECONDITION@. Only user managed configurations can be deleted. Authorization requires @spanner.instanceConfigs.delete@ permission on the resource name.
+-- | Deletes the instance configuration. Deletion is only allowed when no instances are using the configuration. If any instances are using the configuration, returns @FAILED_PRECONDITION@. Only user-managed configurations can be deleted. Authorization requires @spanner.instanceConfigs.delete@ permission on the resource name.
 --
 -- /See:/ 'newSpannerProjectsInstanceConfigsDelete' smart constructor.
 data SpannerProjectsInstanceConfigsDelete = SpannerProjectsInstanceConfigsDelete
@@ -67,7 +65,7 @@ data SpannerProjectsInstanceConfigsDelete = SpannerProjectsInstanceConfigsDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Used for optimistic concurrency control as a way to help prevent simultaneous deletes of an instance config from overwriting each other. If not empty, the API only deletes the instance config when the etag provided matches the current status of the requested instance config. Otherwise, deletes the instance config without checking the current status of the requested instance config.
+    -- | Used for optimistic concurrency control as a way to help prevent simultaneous deletes of an instance configuration from overwriting each other. If not empty, the API only deletes the instance configuration when the etag provided matches the current status of the requested instance configuration. Otherwise, deletes the instance configuration without checking the current status of the requested instance configuration.
     etag :: (Core.Maybe Core.Text),
     -- | Required. The name of the instance configuration to be deleted. Values are of the form @projects\/\/instanceConfigs\/@
     name :: Core.Text,
@@ -97,32 +95,27 @@ newSpannerProjectsInstanceConfigsDelete name =
       validateOnly = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstanceConfigsDelete
-  where
+instance Core.GoogleRequest SpannerProjectsInstanceConfigsDelete where
   type Rs SpannerProjectsInstanceConfigsDelete = Empty
   type
     Scopes SpannerProjectsInstanceConfigsDelete =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstanceConfigsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        etag
-        uploadType
-        uploadProtocol
-        validateOnly
-        (Core.Just Core.AltJSON)
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstanceConfigsDeleteResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstanceConfigsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      etag
+      uploadType
+      uploadProtocol
+      validateOnly
+      (Core.Just Core.AltJSON)
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstanceConfigsDeleteResource
+          )
+          Core.mempty

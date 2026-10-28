@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Folders.Locations.Buckets.Views.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a view on a log bucket. This method replaces the following fields in the existing view with values from the new view: filter. If an UNAVAILABLE error is returned, this indicates that system is not in a state where it can update the view. If this occurs, please try again in a few minutes.
+-- Updates a view on a log bucket. This method replaces the value of the filter field from the existing view with the corresponding value from the new view. If an UNAVAILABLE error is returned, this indicates that system is not in a state where it can update the view. If this occurs, please try again in a few minutes.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.folders.locations.buckets.views.patch@.
 module Gogol.Logging.Folders.Locations.Buckets.Views.Patch
@@ -40,7 +38,7 @@ module Gogol.Logging.Folders.Locations.Buckets.Views.Patch
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.folders.locations.buckets.views.patch@ method which the
 -- 'LoggingFoldersLocationsBucketsViewsPatch' request conforms to.
@@ -57,7 +55,7 @@ type LoggingFoldersLocationsBucketsViewsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] LogView
     Core.:> Core.Patch '[Core.JSON] LogView
 
--- | Updates a view on a log bucket. This method replaces the following fields in the existing view with values from the new view: filter. If an UNAVAILABLE error is returned, this indicates that system is not in a state where it can update the view. If this occurs, please try again in a few minutes.
+-- | Updates a view on a log bucket. This method replaces the value of the filter field from the existing view with the corresponding value from the new view. If an UNAVAILABLE error is returned, this indicates that system is not in a state where it can update the view. If this occurs, please try again in a few minutes.
 --
 -- /See:/ 'newLoggingFoldersLocationsBucketsViewsPatch' smart constructor.
 data LoggingFoldersLocationsBucketsViewsPatch = LoggingFoldersLocationsBucketsViewsPatch
@@ -103,30 +101,26 @@ instance
   Core.GoogleRequest
     LoggingFoldersLocationsBucketsViewsPatch
   where
-  type
-    Rs LoggingFoldersLocationsBucketsViewsPatch =
-      LogView
+  type Rs LoggingFoldersLocationsBucketsViewsPatch = LogView
   type
     Scopes LoggingFoldersLocationsBucketsViewsPatch =
       '[CloudPlatform'FullControl, Logging'Admin]
-  requestClient
-    LoggingFoldersLocationsBucketsViewsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingFoldersLocationsBucketsViewsPatchResource
-            )
-            Core.mempty
+  requestClient LoggingFoldersLocationsBucketsViewsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingFoldersLocationsBucketsViewsPatchResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.DeveloperMetadata.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.developerMetadata.get@ method which the
@@ -97,36 +95,26 @@ newSheetsSpreadsheetsDeveloperMetadataGet metadataId spreadsheetId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SheetsSpreadsheetsDeveloperMetadataGet
-  where
-  type
-    Rs SheetsSpreadsheetsDeveloperMetadataGet =
-      DeveloperMetadata
+instance Core.GoogleRequest SheetsSpreadsheetsDeveloperMetadataGet where
+  type Rs SheetsSpreadsheetsDeveloperMetadataGet = DeveloperMetadata
   type
     Scopes SheetsSpreadsheetsDeveloperMetadataGet =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
-  requestClient
-    SheetsSpreadsheetsDeveloperMetadataGet {..} =
-      go
-        spreadsheetId
-        metadataId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        sheetsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SheetsSpreadsheetsDeveloperMetadataGetResource
-            )
-            Core.mempty
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
+  requestClient SheetsSpreadsheetsDeveloperMetadataGet {..} =
+    go
+      spreadsheetId
+      metadataId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      sheetsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SheetsSpreadsheetsDeveloperMetadataGetResource
+          )
+          Core.mempty

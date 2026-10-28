@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Analytics.Types
@@ -497,7 +495,7 @@ where
 
 import Gogol.Analytics.Internal.Product
 import Gogol.Analytics.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Google Analytics API. This contains the host and root path used as a starting point for constructing service requests.
 analyticsService :: Core.ServiceConfig
@@ -507,22 +505,29 @@ analyticsService =
     "analytics.googleapis.com"
 
 -- | View and manage your Google Analytics data
-type Analytics'FullControl = "https://www.googleapis.com/auth/analytics"
+type Analytics'FullControl =
+  "https://www.googleapis.com/auth/analytics"
 
 -- | Edit Google Analytics management entities
-type Analytics'Edit = "https://www.googleapis.com/auth/analytics.edit"
+type Analytics'Edit =
+  "https://www.googleapis.com/auth/analytics.edit"
 
 -- | Manage Google Analytics Account users by email address
-type Analytics'Manage'Users = "https://www.googleapis.com/auth/analytics.manage.users"
+type Analytics'Manage'Users =
+  "https://www.googleapis.com/auth/analytics.manage.users"
 
 -- | View Google Analytics user permissions
-type Analytics'Manage'Users'Readonly = "https://www.googleapis.com/auth/analytics.manage.users.readonly"
+type Analytics'Manage'Users'Readonly =
+  "https://www.googleapis.com/auth/analytics.manage.users.readonly"
 
 -- | Create a new Google Analytics account along with its default property and view
-type Analytics'Provision = "https://www.googleapis.com/auth/analytics.provision"
+type Analytics'Provision =
+  "https://www.googleapis.com/auth/analytics.provision"
 
 -- | View your Google Analytics data
-type Analytics'Readonly = "https://www.googleapis.com/auth/analytics.readonly"
+type Analytics'Readonly =
+  "https://www.googleapis.com/auth/analytics.readonly"
 
 -- | Manage Google Analytics user deletion requests
-type Analytics'User'Deletion = "https://www.googleapis.com/auth/analytics.user.deletion"
+type Analytics'User'Deletion =
+  "https://www.googleapis.com/auth/analytics.user.deletion"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Chromeosdevices.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Chromeosdevices.Update
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.chromeosdevices.update@ method which the
 -- 'DirectoryChromeosdevicesUpdate' request conforms to.
@@ -56,9 +54,7 @@ type DirectoryChromeosdevicesUpdateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "projection"
-              ChromeosdevicesUpdateProjection
+    Core.:> Core.QueryParam "projection" ChromeosdevicesUpdateProjection
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -81,7 +77,7 @@ data DirectoryChromeosdevicesUpdate = DirectoryChromeosdevicesUpdate
     deviceId :: Core.Text,
     -- | Multipart request metadata.
     payload :: ChromeOsDevice,
-    -- | Restrict information returned to a set of selected fields.
+    -- | Determines whether the response contains the full list of properties or only a subset.
     projection :: (Core.Maybe ChromeosdevicesUpdateProjection),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -112,13 +108,8 @@ newDirectoryChromeosdevicesUpdate customerId deviceId payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DirectoryChromeosdevicesUpdate
-  where
-  type
-    Rs DirectoryChromeosdevicesUpdate =
-      ChromeOsDevice
+instance Core.GoogleRequest DirectoryChromeosdevicesUpdate where
+  type Rs DirectoryChromeosdevicesUpdate = ChromeOsDevice
   type
     Scopes DirectoryChromeosdevicesUpdate =
       '[Admin'Directory'Device'Chromeos]
@@ -138,7 +129,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryChromeosdevicesUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryChromeosdevicesUpdateResource)
           Core.mempty

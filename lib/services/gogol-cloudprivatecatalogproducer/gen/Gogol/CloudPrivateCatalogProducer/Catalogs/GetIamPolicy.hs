@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.GetIamPolicy
 where
 
 import Gogol.CloudPrivateCatalogProducer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.getIamPolicy@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsGetIamPolicy' request conforms to.
@@ -50,9 +48,7 @@ type CloudPrivateCatalogProducerCatalogsGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "options.requestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "options.requestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -90,7 +86,8 @@ newCloudPrivateCatalogProducerCatalogsGetIamPolicy ::
   CloudPrivateCatalogProducerCatalogsGetIamPolicy
 newCloudPrivateCatalogProducerCatalogsGetIamPolicy resource =
   CloudPrivateCatalogProducerCatalogsGetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       optionsRequestedPolicyVersion = Core.Nothing,
@@ -104,30 +101,26 @@ instance
     CloudPrivateCatalogProducerCatalogsGetIamPolicy
   where
   type
-    Rs
-      CloudPrivateCatalogProducerCatalogsGetIamPolicy =
+    Rs CloudPrivateCatalogProducerCatalogsGetIamPolicy =
       GoogleIamV1Policy
   type
-    Scopes
-      CloudPrivateCatalogProducerCatalogsGetIamPolicy =
+    Scopes CloudPrivateCatalogProducerCatalogsGetIamPolicy =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudPrivateCatalogProducerCatalogsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        optionsRequestedPolicyVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerCatalogsGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient CloudPrivateCatalogProducerCatalogsGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      optionsRequestedPolicyVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudPrivateCatalogProducerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudPrivateCatalogProducerCatalogsGetIamPolicyResource
+          )
+          Core.mempty

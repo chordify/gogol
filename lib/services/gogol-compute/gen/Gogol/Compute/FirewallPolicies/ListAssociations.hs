@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.FirewallPolicies.ListAssociations
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.FirewallPolicies.ListAssociations
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.firewallPolicies.listAssociations@ method which the
 -- 'ComputeFirewallPoliciesListAssociations' request conforms to.
@@ -58,9 +56,7 @@ type ComputeFirewallPoliciesListAssociationsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              FirewallPoliciesListAssociationsResponse
+    Core.:> Core.Get '[Core.JSON] FirewallPoliciesListAssociationsResponse
 
 -- | Lists associations of a specified target, i.e., organization or folder.
 --
@@ -94,35 +90,27 @@ newComputeFirewallPoliciesListAssociations =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeFirewallPoliciesListAssociations
-  where
+instance Core.GoogleRequest ComputeFirewallPoliciesListAssociations where
   type
     Rs ComputeFirewallPoliciesListAssociations =
       FirewallPoliciesListAssociationsResponse
   type
     Scopes ComputeFirewallPoliciesListAssociations =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient
-    ComputeFirewallPoliciesListAssociations {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        targetResource
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeFirewallPoliciesListAssociationsResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
+  requestClient ComputeFirewallPoliciesListAssociations {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      targetResource
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeFirewallPoliciesListAssociationsResource
+          )
+          Core.mempty

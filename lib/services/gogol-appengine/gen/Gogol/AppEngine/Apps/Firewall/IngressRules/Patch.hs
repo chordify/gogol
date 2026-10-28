@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Firewall.IngressRules.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Firewall.IngressRules.Patch
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.patch@ method which the
 -- 'AppEngineAppsFirewallIngressRulesPatch' request conforms to.
@@ -95,48 +93,44 @@ newAppEngineAppsFirewallIngressRulesPatch ::
   -- |  Multipart request metadata. See 'payload'.
   FirewallRule ->
   AppEngineAppsFirewallIngressRulesPatch
-newAppEngineAppsFirewallIngressRulesPatch appsId ingressRulesId payload =
-  AppEngineAppsFirewallIngressRulesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      callback = Core.Nothing,
-      ingressRulesId = ingressRulesId,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAppEngineAppsFirewallIngressRulesPatch
+  appsId
+  ingressRulesId
+  payload =
     AppEngineAppsFirewallIngressRulesPatch
-  where
-  type
-    Rs AppEngineAppsFirewallIngressRulesPatch =
-      FirewallRule
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        callback = Core.Nothing,
+        ingressRulesId = ingressRulesId,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest AppEngineAppsFirewallIngressRulesPatch where
+  type Rs AppEngineAppsFirewallIngressRulesPatch = FirewallRule
   type
     Scopes AppEngineAppsFirewallIngressRulesPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    AppEngineAppsFirewallIngressRulesPatch {..} =
-      go
-        appsId
-        ingressRulesId
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsFirewallIngressRulesPatchResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsFirewallIngressRulesPatch {..} =
+    go
+      appsId
+      ingressRulesId
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsFirewallIngressRulesPatchResource
+          )
+          Core.mempty

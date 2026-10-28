@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -38,6 +36,16 @@ module Gogol.CloudKMS
     Cloudkms'FullControl,
 
     -- * Resources
+
+    -- ** cloudkms.folders.getAutokeyConfig
+    CloudKMSFoldersGetAutokeyConfigResource,
+    CloudKMSFoldersGetAutokeyConfig (..),
+    newCloudKMSFoldersGetAutokeyConfig,
+
+    -- ** cloudkms.folders.updateAutokeyConfig
+    CloudKMSFoldersUpdateAutokeyConfigResource,
+    CloudKMSFoldersUpdateAutokeyConfig (..),
+    newCloudKMSFoldersUpdateAutokeyConfig,
 
     -- ** cloudkms.projects.locations.ekmConfig.getIamPolicy
     CloudKMSProjectsLocationsEkmConfigGetIamPolicyResource,
@@ -89,6 +97,11 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsEkmConnectionsTestIamPermissions (..),
     newCloudKMSProjectsLocationsEkmConnectionsTestIamPermissions,
 
+    -- ** cloudkms.projects.locations.ekmConnections.verifyConnectivity
+    CloudKMSProjectsLocationsEkmConnectionsVerifyConnectivityResource,
+    CloudKMSProjectsLocationsEkmConnectionsVerifyConnectivity (..),
+    newCloudKMSProjectsLocationsEkmConnectionsVerifyConnectivity,
+
     -- ** cloudkms.projects.locations.generateRandomBytes
     CloudKMSProjectsLocationsGenerateRandomBytesResource,
     CloudKMSProjectsLocationsGenerateRandomBytes (..),
@@ -103,6 +116,21 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsGetEkmConfigResource,
     CloudKMSProjectsLocationsGetEkmConfig (..),
     newCloudKMSProjectsLocationsGetEkmConfig,
+
+    -- ** cloudkms.projects.locations.keyHandles.create
+    CloudKMSProjectsLocationsKeyHandlesCreateResource,
+    CloudKMSProjectsLocationsKeyHandlesCreate (..),
+    newCloudKMSProjectsLocationsKeyHandlesCreate,
+
+    -- ** cloudkms.projects.locations.keyHandles.get
+    CloudKMSProjectsLocationsKeyHandlesGetResource,
+    CloudKMSProjectsLocationsKeyHandlesGet (..),
+    newCloudKMSProjectsLocationsKeyHandlesGet,
+
+    -- ** cloudkms.projects.locations.keyHandles.list
+    CloudKMSProjectsLocationsKeyHandlesListResource,
+    CloudKMSProjectsLocationsKeyHandlesList (..),
+    newCloudKMSProjectsLocationsKeyHandlesList,
 
     -- ** cloudkms.projects.locations.keyRings.create
     CloudKMSProjectsLocationsKeyRingsCreateResource,
@@ -168,6 +196,16 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatchResource,
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch (..),
     newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch,
+
+    -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.rawDecrypt
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawDecryptResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawDecrypt (..),
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawDecrypt,
+
+    -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.rawEncrypt
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawEncryptResource,
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawEncrypt (..),
+    newCloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRawEncrypt,
 
     -- ** cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.restore
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestoreResource,
@@ -279,10 +317,20 @@ module Gogol.CloudKMS
     CloudKMSProjectsLocationsList (..),
     newCloudKMSProjectsLocationsList,
 
+    -- ** cloudkms.projects.locations.operations.get
+    CloudKMSProjectsLocationsOperationsGetResource,
+    CloudKMSProjectsLocationsOperationsGet (..),
+    newCloudKMSProjectsLocationsOperationsGet,
+
     -- ** cloudkms.projects.locations.updateEkmConfig
     CloudKMSProjectsLocationsUpdateEkmConfigResource,
     CloudKMSProjectsLocationsUpdateEkmConfig (..),
     newCloudKMSProjectsLocationsUpdateEkmConfig,
+
+    -- ** cloudkms.projects.showEffectiveAutokeyConfig
+    CloudKMSProjectsShowEffectiveAutokeyConfigResource,
+    CloudKMSProjectsShowEffectiveAutokeyConfig (..),
+    newCloudKMSProjectsShowEffectiveAutokeyConfig,
 
     -- * Types
 
@@ -322,6 +370,13 @@ module Gogol.CloudKMS
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
 
+    -- ** AutokeyConfig
+    AutokeyConfig (..),
+    newAutokeyConfig,
+
+    -- ** AutokeyConfig_State
+    AutokeyConfig_State (..),
+
     -- ** Binding
     Binding (..),
     newBinding,
@@ -333,6 +388,10 @@ module Gogol.CloudKMS
     -- ** CertificateChains
     CertificateChains (..),
     newCertificateChains,
+
+    -- ** ChecksummedData
+    ChecksummedData (..),
+    newChecksummedData,
 
     -- ** CryptoKey
     CryptoKey (..),
@@ -448,6 +507,17 @@ module Gogol.CloudKMS
     -- ** ImportJob_State
     ImportJob_State (..),
 
+    -- ** KeyAccessJustificationsPolicy
+    KeyAccessJustificationsPolicy (..),
+    newKeyAccessJustificationsPolicy,
+
+    -- ** KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+    KeyAccessJustificationsPolicy_AllowedAccessReasonsItem (..),
+
+    -- ** KeyHandle
+    KeyHandle (..),
+    newKeyHandle,
+
     -- ** KeyOperationAttestation
     KeyOperationAttestation (..),
     newKeyOperationAttestation,
@@ -474,6 +544,10 @@ module Gogol.CloudKMS
     -- ** ListImportJobsResponse
     ListImportJobsResponse (..),
     newListImportJobsResponse,
+
+    -- ** ListKeyHandlesResponse
+    ListKeyHandlesResponse (..),
+    newListKeyHandlesResponse,
 
     -- ** ListKeyRingsResponse
     ListKeyRingsResponse (..),
@@ -521,6 +595,18 @@ module Gogol.CloudKMS
     -- ** MacVerifyResponse_ProtectionLevel
     MacVerifyResponse_ProtectionLevel (..),
 
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -535,6 +621,31 @@ module Gogol.CloudKMS
     -- ** PublicKey_ProtectionLevel
     PublicKey_ProtectionLevel (..),
 
+    -- ** PublicKey_PublicKeyFormat
+    PublicKey_PublicKeyFormat (..),
+
+    -- ** RawDecryptRequest
+    RawDecryptRequest (..),
+    newRawDecryptRequest,
+
+    -- ** RawDecryptResponse
+    RawDecryptResponse (..),
+    newRawDecryptResponse,
+
+    -- ** RawDecryptResponse_ProtectionLevel
+    RawDecryptResponse_ProtectionLevel (..),
+
+    -- ** RawEncryptRequest
+    RawEncryptRequest (..),
+    newRawEncryptRequest,
+
+    -- ** RawEncryptResponse
+    RawEncryptResponse (..),
+    newRawEncryptResponse,
+
+    -- ** RawEncryptResponse_ProtectionLevel
+    RawEncryptResponse_ProtectionLevel (..),
+
     -- ** RestoreCryptoKeyVersionRequest
     RestoreCryptoKeyVersionRequest (..),
     newRestoreCryptoKeyVersionRequest,
@@ -546,6 +657,18 @@ module Gogol.CloudKMS
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
+
+    -- ** ShowEffectiveAutokeyConfigResponse
+    ShowEffectiveAutokeyConfigResponse (..),
+    newShowEffectiveAutokeyConfigResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
@@ -559,9 +682,16 @@ module Gogol.CloudKMS
     UpdateCryptoKeyPrimaryVersionRequest (..),
     newUpdateCryptoKeyPrimaryVersionRequest,
 
+    -- ** VerifyConnectivityResponse
+    VerifyConnectivityResponse (..),
+    newVerifyConnectivityResponse,
+
     -- ** WrappingPublicKey
     WrappingPublicKey (..),
     newWrappingPublicKey,
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat (..),
 
     -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
     ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),
@@ -571,6 +701,8 @@ module Gogol.CloudKMS
   )
 where
 
+import Gogol.CloudKMS.Folders.GetAutokeyConfig
+import Gogol.CloudKMS.Folders.UpdateAutokeyConfig
 import Gogol.CloudKMS.Projects.Locations.EkmConfig.GetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.EkmConfig.SetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.EkmConfig.TestIamPermissions
@@ -581,9 +713,13 @@ import Gogol.CloudKMS.Projects.Locations.EkmConnections.List
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.Patch
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.SetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.EkmConnections.TestIamPermissions
+import Gogol.CloudKMS.Projects.Locations.EkmConnections.VerifyConnectivity
 import Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
 import Gogol.CloudKMS.Projects.Locations.Get
 import Gogol.CloudKMS.Projects.Locations.GetEkmConfig
+import Gogol.CloudKMS.Projects.Locations.KeyHandles.Create
+import Gogol.CloudKMS.Projects.Locations.KeyHandles.Get
+import Gogol.CloudKMS.Projects.Locations.KeyHandles.List
 import Gogol.CloudKMS.Projects.Locations.KeyRings.Create
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.AsymmetricDecrypt
@@ -597,6 +733,8 @@ import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.L
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacSign
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.MacVerify
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Patch
+import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.RawDecrypt
+import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.RawEncrypt
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.CryptoKeyVersions.Restore
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Decrypt
 import Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Encrypt
@@ -619,5 +757,7 @@ import Gogol.CloudKMS.Projects.Locations.KeyRings.List
 import Gogol.CloudKMS.Projects.Locations.KeyRings.SetIamPolicy
 import Gogol.CloudKMS.Projects.Locations.KeyRings.TestIamPermissions
 import Gogol.CloudKMS.Projects.Locations.List
+import Gogol.CloudKMS.Projects.Locations.Operations.Get
 import Gogol.CloudKMS.Projects.Locations.UpdateEkmConfig
+import Gogol.CloudKMS.Projects.ShowEffectiveAutokeyConfig
 import Gogol.CloudKMS.Types

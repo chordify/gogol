@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Composer.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Composer.Types
@@ -37,9 +35,20 @@ module Gogol.Composer.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AirflowMetadataRetentionPolicyConfig
+    AirflowMetadataRetentionPolicyConfig (..),
+    newAirflowMetadataRetentionPolicyConfig,
+
+    -- ** AirflowMetadataRetentionPolicyConfig_RetentionMode
+    AirflowMetadataRetentionPolicyConfig_RetentionMode (..),
+
     -- ** AllowedIpRange
     AllowedIpRange (..),
     newAllowedIpRange,
+
+    -- ** CheckUpgradeRequest
+    CheckUpgradeRequest (..),
+    newCheckUpgradeRequest,
 
     -- ** CheckUpgradeResponse
     CheckUpgradeResponse (..),
@@ -56,9 +65,43 @@ module Gogol.Composer.Types
     CidrBlock (..),
     newCidrBlock,
 
+    -- ** CloudDataLineageIntegration
+    CloudDataLineageIntegration (..),
+    newCloudDataLineageIntegration,
+
+    -- ** ComposerWorkload
+    ComposerWorkload (..),
+    newComposerWorkload,
+
+    -- ** ComposerWorkload_Type
+    ComposerWorkload_Type (..),
+
+    -- ** ComposerWorkloadStatus
+    ComposerWorkloadStatus (..),
+    newComposerWorkloadStatus,
+
+    -- ** ComposerWorkloadStatus_State
+    ComposerWorkloadStatus_State (..),
+
+    -- ** DagProcessorResource
+    DagProcessorResource (..),
+    newDagProcessorResource,
+
+    -- ** DataRetentionConfig
+    DataRetentionConfig (..),
+    newDataRetentionConfig,
+
     -- ** DatabaseConfig
     DatabaseConfig (..),
     newDatabaseConfig,
+
+    -- ** DatabaseFailoverRequest
+    DatabaseFailoverRequest (..),
+    newDatabaseFailoverRequest,
+
+    -- ** DatabaseFailoverResponse
+    DatabaseFailoverResponse (..),
+    newDatabaseFailoverResponse,
 
     -- ** Date
     Date (..),
@@ -90,6 +133,25 @@ module Gogol.Composer.Types
     -- ** EnvironmentConfig_EnvironmentSize
     EnvironmentConfig_EnvironmentSize (..),
 
+    -- ** EnvironmentConfig_ResilienceMode
+    EnvironmentConfig_ResilienceMode (..),
+
+    -- ** ExecuteAirflowCommandRequest
+    ExecuteAirflowCommandRequest (..),
+    newExecuteAirflowCommandRequest,
+
+    -- ** ExecuteAirflowCommandResponse
+    ExecuteAirflowCommandResponse (..),
+    newExecuteAirflowCommandResponse,
+
+    -- ** ExitInfo
+    ExitInfo (..),
+    newExitInfo,
+
+    -- ** FetchDatabasePropertiesResponse
+    FetchDatabasePropertiesResponse (..),
+    newFetchDatabasePropertiesResponse,
+
     -- ** IPAllocationPolicy
     IPAllocationPolicy (..),
     newIPAllocationPolicy,
@@ -97,6 +159,10 @@ module Gogol.Composer.Types
     -- ** ImageVersion
     ImageVersion (..),
     newImageVersion,
+
+    -- ** Line
+    Line (..),
+    newLine,
 
     -- ** ListEnvironmentsResponse
     ListEnvironmentsResponse (..),
@@ -109,6 +175,18 @@ module Gogol.Composer.Types
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** ListUserWorkloadsConfigMapsResponse
+    ListUserWorkloadsConfigMapsResponse (..),
+    newListUserWorkloadsConfigMapsResponse,
+
+    -- ** ListUserWorkloadsSecretsResponse
+    ListUserWorkloadsSecretsResponse (..),
+    newListUserWorkloadsSecretsResponse,
+
+    -- ** ListWorkloadsResponse
+    ListWorkloadsResponse (..),
+    newListWorkloadsResponse,
 
     -- ** LoadSnapshotRequest
     LoadSnapshotRequest (..),
@@ -159,6 +237,14 @@ module Gogol.Composer.Types
     -- ** OperationMetadata_State
     OperationMetadata_State (..),
 
+    -- ** PollAirflowCommandRequest
+    PollAirflowCommandRequest (..),
+    newPollAirflowCommandRequest,
+
+    -- ** PollAirflowCommandResponse
+    PollAirflowCommandResponse (..),
+    newPollAirflowCommandResponse,
+
     -- ** PrivateClusterConfig
     PrivateClusterConfig (..),
     newPrivateClusterConfig,
@@ -203,6 +289,9 @@ module Gogol.Composer.Types
     SoftwareConfig_PypiPackages (..),
     newSoftwareConfig_PypiPackages,
 
+    -- ** SoftwareConfig_WebServerPluginsMode
+    SoftwareConfig_WebServerPluginsMode (..),
+
     -- ** Status
     Status (..),
     newStatus,
@@ -210,6 +299,45 @@ module Gogol.Composer.Types
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** StopAirflowCommandRequest
+    StopAirflowCommandRequest (..),
+    newStopAirflowCommandRequest,
+
+    -- ** StopAirflowCommandResponse
+    StopAirflowCommandResponse (..),
+    newStopAirflowCommandResponse,
+
+    -- ** StorageConfig
+    StorageConfig (..),
+    newStorageConfig,
+
+    -- ** TaskLogsRetentionConfig
+    TaskLogsRetentionConfig (..),
+    newTaskLogsRetentionConfig,
+
+    -- ** TaskLogsRetentionConfig_StorageMode
+    TaskLogsRetentionConfig_StorageMode (..),
+
+    -- ** TriggererResource
+    TriggererResource (..),
+    newTriggererResource,
+
+    -- ** UserWorkloadsConfigMap
+    UserWorkloadsConfigMap (..),
+    newUserWorkloadsConfigMap,
+
+    -- ** UserWorkloadsConfigMap_Data
+    UserWorkloadsConfigMap_Data (..),
+    newUserWorkloadsConfigMap_Data,
+
+    -- ** UserWorkloadsSecret
+    UserWorkloadsSecret (..),
+    newUserWorkloadsSecret,
+
+    -- ** UserWorkloadsSecret_Data
+    UserWorkloadsSecret_Data (..),
+    newUserWorkloadsSecret_Data,
 
     -- ** WebServerConfig
     WebServerConfig (..),
@@ -235,7 +363,7 @@ where
 
 import Gogol.Composer.Internal.Product
 import Gogol.Composer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Composer API. This contains the host and root path used as a starting point for constructing service requests.
 composerService :: Core.ServiceConfig
@@ -245,4 +373,5 @@ composerService =
     "composer.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Changes.GetStartPageToken
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the starting pageToken for listing future changes.
+-- Gets the starting pageToken for listing future changes. For more information, see <https://developers.google.com/drive/api/guides/manage-changes Retrieve changes>.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.changes.getStartPageToken@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.changes.getStartPageToken@.
 module Gogol.Drive.Changes.GetStartPageToken
   ( -- * Resource
     DriveChangesGetStartPageTokenResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Changes.GetStartPageToken
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.changes.getStartPageToken@ method which the
 -- 'DriveChangesGetStartPageToken' request conforms to.
@@ -49,25 +47,40 @@ type DriveChangesGetStartPageTokenResource =
     Core.:> "v3"
     Core.:> "changes"
     Core.:> "startPageToken"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "driveId" Core.Text
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
     Core.:> Core.QueryParam "teamDriveId" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] StartPageToken
 
--- | Gets the starting pageToken for listing future changes.
+-- | Gets the starting pageToken for listing future changes. For more information, see <https://developers.google.com/drive/api/guides/manage-changes Retrieve changes>.
 --
 -- /See:/ 'newDriveChangesGetStartPageToken' smart constructor.
 data DriveChangesGetStartPageToken = DriveChangesGetStartPageToken
-  { -- | The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive is returned.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | The ID of the shared drive for which the starting pageToken for listing future changes from that shared drive will be returned.
     driveId :: (Core.Maybe Core.Text),
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
-    -- | Deprecated use supportsAllDrives instead.
+    -- | Deprecated: Use @supportsAllDrives@ instead.
     supportsTeamDrives :: Core.Bool,
-    -- | Deprecated use driveId instead.
-    teamDriveId :: (Core.Maybe Core.Text)
+    -- | Deprecated: Use @driveId@ instead.
+    teamDriveId :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -76,24 +89,25 @@ newDriveChangesGetStartPageToken ::
   DriveChangesGetStartPageToken
 newDriveChangesGetStartPageToken =
   DriveChangesGetStartPageToken
-    { driveId = Core.Nothing,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      driveId = Core.Nothing,
       supportsAllDrives = Core.False,
       supportsTeamDrives = Core.False,
-      teamDriveId = Core.Nothing
+      teamDriveId = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DriveChangesGetStartPageToken
-  where
-  type
-    Rs DriveChangesGetStartPageToken =
-      StartPageToken
+instance Core.GoogleRequest DriveChangesGetStartPageToken where
+  type Rs DriveChangesGetStartPageToken = StartPageToken
   type
     Scopes DriveChangesGetStartPageToken =
       '[ Drive'FullControl,
          Drive'Appdata,
          Drive'File,
+         Drive'Meet'Readonly,
          Drive'Metadata,
          Drive'Metadata'Readonly,
          Drive'Photos'Readonly,
@@ -101,16 +115,19 @@ instance
        ]
   requestClient DriveChangesGetStartPageToken {..} =
     go
+      xgafv
+      accessToken
+      callback
       driveId
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
       teamDriveId
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       driveService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DriveChangesGetStartPageTokenResource
-          )
+          (Core.Proxy :: Core.Proxy DriveChangesGetStartPageTokenResource)
           Core.mempty

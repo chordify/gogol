@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File.Projects.Locations.Instances.Snapshots.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.File.Projects.Locations.Instances.Snapshots.Create
 where
 
 import Gogol.File.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @file.projects.locations.instances.snapshots.create@ method which the
 -- 'FileProjectsLocationsInstancesSnapshotsCreate' request conforms to.
@@ -90,7 +88,8 @@ newFileProjectsLocationsInstancesSnapshotsCreate ::
   FileProjectsLocationsInstancesSnapshotsCreate
 newFileProjectsLocationsInstancesSnapshotsCreate parent payload =
   FileProjectsLocationsInstancesSnapshotsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -104,31 +103,26 @@ instance
   Core.GoogleRequest
     FileProjectsLocationsInstancesSnapshotsCreate
   where
+  type Rs FileProjectsLocationsInstancesSnapshotsCreate = Operation
   type
-    Rs FileProjectsLocationsInstancesSnapshotsCreate =
-      Operation
-  type
-    Scopes
-      FileProjectsLocationsInstancesSnapshotsCreate =
+    Scopes FileProjectsLocationsInstancesSnapshotsCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    FileProjectsLocationsInstancesSnapshotsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        snapshotId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fileService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FileProjectsLocationsInstancesSnapshotsCreateResource
-            )
-            Core.mempty
+  requestClient FileProjectsLocationsInstancesSnapshotsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      snapshotId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      fileService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FileProjectsLocationsInstancesSnapshotsCreateResource
+          )
+          Core.mempty

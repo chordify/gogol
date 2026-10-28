@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Creatives.AddDeal
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Creatives.AddDeal
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.creatives.addDeal@ method which the
 -- 'AdExchangeBuyerCreativesAddDeal' request conforms to.
@@ -84,14 +82,9 @@ newAdExchangeBuyerCreativesAddDeal accountId buyerCreativeId dealId =
       dealId = dealId
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerCreativesAddDeal
-  where
+instance Core.GoogleRequest AdExchangeBuyerCreativesAddDeal where
   type Rs AdExchangeBuyerCreativesAddDeal = ()
-  type
-    Scopes AdExchangeBuyerCreativesAddDeal =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerCreativesAddDeal = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesAddDeal {..} =
     go
       accountId
@@ -102,7 +95,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerCreativesAddDealResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerCreativesAddDealResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Projects.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all projects to which you have been granted any project role.
+-- RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the <https://cloud.google.com/resource-manager/docs/ Resource Manager> API, which provides the underlying data for this method and has more capabilities.
 --
 -- /See:/ <https://cloud.google.com/bigquery/ BigQuery API Reference> for @bigquery.projects.list@.
 module Gogol.BigQuery.Projects.List
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Projects.List
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.projects.list@ method which the
 -- 'BigQueryProjectsList' request conforms to.
@@ -48,19 +46,34 @@ type BigQueryProjectsListResource =
   "bigquery"
     Core.:> "v2"
     Core.:> "projects"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ProjectList
 
--- | Lists all projects to which you have been granted any project role.
+-- | RPC to list projects to which the user has been granted any project role. Users of this method are encouraged to consider the <https://cloud.google.com/resource-manager/docs/ Resource Manager> API, which provides the underlying data for this method and has more capabilities.
 --
 -- /See:/ 'newBigQueryProjectsList' smart constructor.
 data BigQueryProjectsList = BigQueryProjectsList
-  { -- | Maximum number of results to return
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | @maxResults@ unset returns all results, up to 50 per page. Additionally, the number of projects in a page may be fewer than @maxResults@ because projects are retrieved and then filtered to only projects with the BigQuery API enabled.
     maxResults :: (Core.Maybe Core.Word32),
-    -- | Page token, returned by a previous call, to request the next page of results
-    pageToken :: (Core.Maybe Core.Text)
+    -- | Page token, returned by a previous call, to request the next page of results. If not present, no further pages are present.
+    pageToken :: (Core.Maybe Core.Text),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -68,7 +81,15 @@ data BigQueryProjectsList = BigQueryProjectsList
 newBigQueryProjectsList ::
   BigQueryProjectsList
 newBigQueryProjectsList =
-  BigQueryProjectsList {maxResults = Core.Nothing, pageToken = Core.Nothing}
+  BigQueryProjectsList
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      maxResults = Core.Nothing,
+      pageToken = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
+    }
 
 instance Core.GoogleRequest BigQueryProjectsList where
   type Rs BigQueryProjectsList = ProjectList
@@ -80,14 +101,17 @@ instance Core.GoogleRequest BigQueryProjectsList where
        ]
   requestClient BigQueryProjectsList {..} =
     go
+      xgafv
+      accessToken
+      callback
       maxResults
       pageToken
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryProjectsListResource
-          )
+          (Core.Proxy :: Core.Proxy BigQueryProjectsListResource)
           Core.mempty

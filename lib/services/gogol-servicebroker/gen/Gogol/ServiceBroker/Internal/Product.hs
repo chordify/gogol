@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceBroker.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceBroker.Internal.Product
@@ -52,7 +50,7 @@ module Gogol.ServiceBroker.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceBroker.Internal.Sum
 
 -- | Associates @members@ with a @role@.
@@ -243,22 +241,17 @@ newGoogleIamV1__SetIamPolicyRequest ::
 newGoogleIamV1__SetIamPolicyRequest =
   GoogleIamV1__SetIamPolicyRequest {policy = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleIamV1__SetIamPolicyRequest
-  where
+instance Core.FromJSON GoogleIamV1__SetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GoogleIamV1__SetIamPolicyRequest"
       ( \o ->
-          GoogleIamV1__SetIamPolicyRequest
-            Core.<$> (o Core..:? "policy")
+          GoogleIamV1__SetIamPolicyRequest Core.<$> (o Core..:? "policy")
       )
 
 instance Core.ToJSON GoogleIamV1__SetIamPolicyRequest where
   toJSON GoogleIamV1__SetIamPolicyRequest {..} =
-    Core.object
-      (Core.catMaybes [("policy" Core..=) Core.<$> policy])
+    Core.object (Core.catMaybes [("policy" Core..=) Core.<$> policy])
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -273,12 +266,12 @@ newtype GoogleIamV1__TestIamPermissionsRequest = GoogleIamV1__TestIamPermissions
 newGoogleIamV1__TestIamPermissionsRequest ::
   GoogleIamV1__TestIamPermissionsRequest
 newGoogleIamV1__TestIamPermissionsRequest =
-  GoogleIamV1__TestIamPermissionsRequest {permissions = Core.Nothing}
+  GoogleIamV1__TestIamPermissionsRequest
+    { permissions =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleIamV1__TestIamPermissionsRequest
-  where
+instance Core.FromJSON GoogleIamV1__TestIamPermissionsRequest where
   parseJSON =
     Core.withObject
       "GoogleIamV1__TestIamPermissionsRequest"
@@ -287,15 +280,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1__TestIamPermissionsRequest
-  where
+instance Core.ToJSON GoogleIamV1__TestIamPermissionsRequest where
   toJSON GoogleIamV1__TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -310,12 +298,12 @@ newtype GoogleIamV1__TestIamPermissionsResponse = GoogleIamV1__TestIamPermission
 newGoogleIamV1__TestIamPermissionsResponse ::
   GoogleIamV1__TestIamPermissionsResponse
 newGoogleIamV1__TestIamPermissionsResponse =
-  GoogleIamV1__TestIamPermissionsResponse {permissions = Core.Nothing}
+  GoogleIamV1__TestIamPermissionsResponse
+    { permissions =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleIamV1__TestIamPermissionsResponse
-  where
+instance Core.FromJSON GoogleIamV1__TestIamPermissionsResponse where
   parseJSON =
     Core.withObject
       "GoogleIamV1__TestIamPermissionsResponse"
@@ -324,15 +312,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1__TestIamPermissionsResponse
-  where
+instance Core.ToJSON GoogleIamV1__TestIamPermissionsResponse where
   toJSON GoogleIamV1__TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Represents an expression text. Example:
 --

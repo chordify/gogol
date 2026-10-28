@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Slides.Presentations.BatchUpdate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Slides.Presentations.BatchUpdate
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Slides.Types
 
 -- | A resource alias for @slides.presentations.batchUpdate@ method which the
@@ -47,22 +45,15 @@ import Gogol.Slides.Types
 type SlidesPresentationsBatchUpdateResource =
   "v1"
     Core.:> "presentations"
-    Core.:> Core.CaptureMode
-              "presentationId"
-              "batchUpdate"
-              Core.Text
+    Core.:> Core.CaptureMode "presentationId" "batchUpdate" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchUpdatePresentationRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchUpdatePresentationResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchUpdatePresentationRequest
+    Core.:> Core.Post '[Core.JSON] BatchUpdatePresentationResponse
 
 -- | Applies one or more updates to the presentation. Each request is validated before being applied. If any request is not valid, then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. Other requests do not need to return information; these each return an empty reply. The order of replies matches that of the requests. For example, suppose you call batchUpdate with four updates, and only the third one returns information. The response would have two empty replies: the reply to the third request, and another empty reply, in that order. Because other users may be editing the presentation, the presentation might not exactly reflect your changes: your changes may be altered with respect to collaborator changes. If there are no collaborators, the presentation should reflect your changes. In any case, the updates in your request are guaranteed to be applied together atomically.
 --
@@ -103,10 +94,7 @@ newSlidesPresentationsBatchUpdate payload presentationId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SlidesPresentationsBatchUpdate
-  where
+instance Core.GoogleRequest SlidesPresentationsBatchUpdate where
   type
     Rs SlidesPresentationsBatchUpdate =
       BatchUpdatePresentationResponse
@@ -133,7 +121,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SlidesPresentationsBatchUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy SlidesPresentationsBatchUpdateResource)
           Core.mempty

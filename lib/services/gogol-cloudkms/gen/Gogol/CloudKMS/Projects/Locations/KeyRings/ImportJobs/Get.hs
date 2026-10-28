@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.ImportJobs.Get
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.importJobs.get@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsImportJobsGet' request conforms to.
@@ -81,7 +79,8 @@ newCloudKMSProjectsLocationsKeyRingsImportJobsGet ::
   CloudKMSProjectsLocationsKeyRingsImportJobsGet
 newCloudKMSProjectsLocationsKeyRingsImportJobsGet name =
   CloudKMSProjectsLocationsKeyRingsImportJobsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,30 +92,24 @@ instance
   Core.GoogleRequest
     CloudKMSProjectsLocationsKeyRingsImportJobsGet
   where
+  type Rs CloudKMSProjectsLocationsKeyRingsImportJobsGet = ImportJob
   type
-    Rs
-      CloudKMSProjectsLocationsKeyRingsImportJobsGet =
-      ImportJob
-  type
-    Scopes
-      CloudKMSProjectsLocationsKeyRingsImportJobsGet =
+    Scopes CloudKMSProjectsLocationsKeyRingsImportJobsGet =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsKeyRingsImportJobsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsKeyRingsImportJobsGetResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsKeyRingsImportJobsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudKMSProjectsLocationsKeyRingsImportJobsGetResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -34,6 +32,7 @@ module Gogol.Healthcare
     healthcareService,
 
     -- * OAuth Scopes
+    CloudHealthcare'FullControl,
     CloudPlatform'FullControl,
 
     -- * Resources
@@ -223,6 +222,21 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsCreate (..),
     newHealthcareProjectsLocationsDatasetsCreate,
 
+    -- ** healthcare.projects.locations.datasets.dataMapperWorkspaces.getIamPolicy
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesGetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesGetIamPolicy (..),
+    newHealthcareProjectsLocationsDatasetsDataMapperWorkspacesGetIamPolicy,
+
+    -- ** healthcare.projects.locations.datasets.dataMapperWorkspaces.setIamPolicy
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesSetIamPolicyResource,
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesSetIamPolicy (..),
+    newHealthcareProjectsLocationsDatasetsDataMapperWorkspacesSetIamPolicy,
+
+    -- ** healthcare.projects.locations.datasets.dataMapperWorkspaces.testIamPermissions
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesTestIamPermissionsResource,
+    HealthcareProjectsLocationsDatasetsDataMapperWorkspacesTestIamPermissions (..),
+    newHealthcareProjectsLocationsDatasetsDataMapperWorkspacesTestIamPermissions,
+
     -- ** healthcare.projects.locations.datasets.deidentify
     HealthcareProjectsLocationsDatasetsDeidentifyResource,
     HealthcareProjectsLocationsDatasetsDeidentify (..),
@@ -248,6 +262,26 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsDicomStoresDelete (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresDelete,
 
+    -- ** healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.getStudyMetrics
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesGetStudyMetricsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesGetStudyMetrics (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesGetStudyMetrics,
+
+    -- ** healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.series.getSeriesMetrics
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesGetSeriesMetricsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesGetSeriesMetrics (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesGetSeriesMetrics,
+
+    -- ** healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.series.instances.getStorageInfo
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesInstancesGetStorageInfoResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesInstancesGetStorageInfo (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSeriesInstancesGetStorageInfo,
+
+    -- ** healthcare.projects.locations.datasets.dicomStores.dicomWeb.studies.setBlobStorageSettings
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSetBlobStorageSettingsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSetBlobStorageSettings (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresDicomWebStudiesSetBlobStorageSettings,
+
     -- ** healthcare.projects.locations.datasets.dicomStores.export
     HealthcareProjectsLocationsDatasetsDicomStoresExportResource,
     HealthcareProjectsLocationsDatasetsDicomStoresExport (..),
@@ -257,6 +291,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsDicomStoresGetResource,
     HealthcareProjectsLocationsDatasetsDicomStoresGet (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresGet,
+
+    -- ** healthcare.projects.locations.datasets.dicomStores.getDICOMStoreMetrics
+    HealthcareProjectsLocationsDatasetsDicomStoresGetDICOMStoreMetricsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresGetDICOMStoreMetrics (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresGetDICOMStoreMetrics,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.getIamPolicy
     HealthcareProjectsLocationsDatasetsDicomStoresGetIamPolicyResource,
@@ -292,6 +331,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForStudiesResource,
     HealthcareProjectsLocationsDatasetsDicomStoresSearchForStudies (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresSearchForStudies,
+
+    -- ** healthcare.projects.locations.datasets.dicomStores.setBlobStorageSettings
+    HealthcareProjectsLocationsDatasetsDicomStoresSetBlobStorageSettingsResource,
+    HealthcareProjectsLocationsDatasetsDicomStoresSetBlobStorageSettings (..),
+    newHealthcareProjectsLocationsDatasetsDicomStoresSetBlobStorageSettings,
 
     -- ** healthcare.projects.locations.datasets.dicomStores.setIamPolicy
     HealthcareProjectsLocationsDatasetsDicomStoresSetIamPolicyResource,
@@ -388,6 +432,21 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions (..),
     newHealthcareProjectsLocationsDatasetsDicomStoresTestIamPermissions,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.applyAdminConsents
+    HealthcareProjectsLocationsDatasetsFhirStoresApplyAdminConsentsResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresApplyAdminConsents (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresApplyAdminConsents,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.applyConsents
+    HealthcareProjectsLocationsDatasetsFhirStoresApplyConsentsResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresApplyConsents (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresApplyConsents,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.bulkexportgroup
+    HealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroupResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroup (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresBulkexportgroup,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.create
     HealthcareProjectsLocationsDatasetsFhirStoresCreateResource,
     HealthcareProjectsLocationsDatasetsFhirStoresCreate (..),
@@ -403,10 +462,45 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresDelete (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresDelete,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.explainDataAccess
+    HealthcareProjectsLocationsDatasetsFhirStoresExplainDataAccessResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresExplainDataAccess (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresExplainDataAccess,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.export
     HealthcareProjectsLocationsDatasetsFhirStoresExportResource,
     HealthcareProjectsLocationsDatasetsFhirStoresExport (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresExport,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Binarycreate
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinarycreateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinarycreate (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBinarycreate,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Binaryread
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryreadResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryread (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryread,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Binaryupdate
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryupdateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryupdate (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryupdate,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Binaryvread
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryvreadResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryvread (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBinaryvread,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Consentenforcementstatus
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConsentenforcementstatusResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConsentenforcementstatus (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirConsentenforcementstatus,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Patientconsentenforcementstatus
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatientconsentenforcementstatusResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirPatientconsentenforcementstatus (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirPatientconsentenforcementstatus,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.Patienteverything
     HealthcareProjectsLocationsDatasetsFhirStoresFhirPatienteverythingResource,
@@ -423,10 +517,30 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirResourcevalidate,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.bulkexport
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexportResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexport (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirBulkexport,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.capabilities
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesResource,
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilities (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilities,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.conditionalDelete
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalDeleteResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalDelete (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalDelete,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.conditionalPatch
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalPatchResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalPatch (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalPatch,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.fhir.conditionalUpdate
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdateResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.fhir.create
     HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateResource,
@@ -503,10 +617,25 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsFhirStoresList (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresList,
 
+    -- ** healthcare.projects.locations.datasets.fhirStores.operations.deletefhiroperation
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperationResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperation (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresOperationsDeletefhiroperation,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.operations.getfhiroperationstatus
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatusResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatus (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresOperationsGetfhiroperationstatus,
+
     -- ** healthcare.projects.locations.datasets.fhirStores.patch
     HealthcareProjectsLocationsDatasetsFhirStoresPatchResource,
     HealthcareProjectsLocationsDatasetsFhirStoresPatch (..),
     newHealthcareProjectsLocationsDatasetsFhirStoresPatch,
+
+    -- ** healthcare.projects.locations.datasets.fhirStores.rollback
+    HealthcareProjectsLocationsDatasetsFhirStoresRollbackResource,
+    HealthcareProjectsLocationsDatasetsFhirStoresRollback (..),
+    newHealthcareProjectsLocationsDatasetsFhirStoresRollback,
 
     -- ** healthcare.projects.locations.datasets.fhirStores.setIamPolicy
     HealthcareProjectsLocationsDatasetsFhirStoresSetIamPolicyResource,
@@ -547,6 +676,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsHl7V2StoresGetResource,
     HealthcareProjectsLocationsDatasetsHl7V2StoresGet (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresGet,
+
+    -- ** healthcare.projects.locations.datasets.hl7V2Stores.getHL7v2StoreMetrics
+    HealthcareProjectsLocationsDatasetsHl7V2StoresGetHL7v2StoreMetricsResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresGetHL7v2StoreMetrics (..),
+    newHealthcareProjectsLocationsDatasetsHl7V2StoresGetHL7v2StoreMetrics,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.getIamPolicy
     HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicyResource,
@@ -597,6 +731,11 @@ module Gogol.Healthcare
     HealthcareProjectsLocationsDatasetsHl7V2StoresPatchResource,
     HealthcareProjectsLocationsDatasetsHl7V2StoresPatch (..),
     newHealthcareProjectsLocationsDatasetsHl7V2StoresPatch,
+
+    -- ** healthcare.projects.locations.datasets.hl7V2Stores.rollback
+    HealthcareProjectsLocationsDatasetsHl7V2StoresRollbackResource,
+    HealthcareProjectsLocationsDatasetsHl7V2StoresRollback (..),
+    newHealthcareProjectsLocationsDatasetsHl7V2StoresRollback,
 
     -- ** healthcare.projects.locations.datasets.hl7V2Stores.setIamPolicy
     HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicyResource,
@@ -663,13 +802,27 @@ module Gogol.Healthcare
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AccessDeterminationLogConfig
+    AccessDeterminationLogConfig (..),
+    newAccessDeterminationLogConfig,
+
+    -- ** AccessDeterminationLogConfig_LogLevel
+    AccessDeterminationLogConfig_LogLevel (..),
+
     -- ** ActivateConsentRequest
     ActivateConsentRequest (..),
     newActivateConsentRequest,
 
+    -- ** AdminConsents
+    AdminConsents (..),
+    newAdminConsents,
+
     -- ** AnalyzeEntitiesRequest
     AnalyzeEntitiesRequest (..),
     newAnalyzeEntitiesRequest,
+
+    -- ** AnalyzeEntitiesRequest_AlternativeOutputFormat
+    AnalyzeEntitiesRequest_AlternativeOutputFormat (..),
 
     -- ** AnalyzeEntitiesRequest_LicensedVocabulariesItem
     AnalyzeEntitiesRequest_LicensedVocabulariesItem (..),
@@ -677,6 +830,26 @@ module Gogol.Healthcare
     -- ** AnalyzeEntitiesResponse
     AnalyzeEntitiesResponse (..),
     newAnalyzeEntitiesResponse,
+
+    -- ** ApplyAdminConsentsErrorDetail
+    ApplyAdminConsentsErrorDetail (..),
+    newApplyAdminConsentsErrorDetail,
+
+    -- ** ApplyAdminConsentsRequest
+    ApplyAdminConsentsRequest (..),
+    newApplyAdminConsentsRequest,
+
+    -- ** ApplyAdminConsentsResponse
+    ApplyAdminConsentsResponse (..),
+    newApplyAdminConsentsResponse,
+
+    -- ** ApplyConsentsRequest
+    ApplyConsentsRequest (..),
+    newApplyConsentsRequest,
+
+    -- ** ApplyConsentsResponse
+    ApplyConsentsResponse (..),
+    newApplyConsentsResponse,
 
     -- ** ArchiveUserDataMappingRequest
     ArchiveUserDataMappingRequest (..),
@@ -711,6 +884,24 @@ module Gogol.Healthcare
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BlobStorageInfo
+    BlobStorageInfo (..),
+    newBlobStorageInfo,
+
+    -- ** BlobStorageInfo_StorageClass
+    BlobStorageInfo_StorageClass (..),
+
+    -- ** BlobStorageSettings
+    BlobStorageSettings (..),
+    newBlobStorageSettings,
+
+    -- ** BlobStorageSettings_BlobStorageClass
+    BlobStorageSettings_BlobStorageClass (..),
+
+    -- ** BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -750,6 +941,10 @@ module Gogol.Healthcare
     -- ** Consent_State
     Consent_State (..),
 
+    -- ** ConsentAccessorScope
+    ConsentAccessorScope (..),
+    newConsentAccessorScope,
+
     -- ** ConsentArtifact
     ConsentArtifact (..),
     newConsentArtifact,
@@ -758,12 +953,30 @@ module Gogol.Healthcare
     ConsentArtifact_Metadata (..),
     newConsentArtifact_Metadata,
 
+    -- ** ConsentConfig
+    ConsentConfig (..),
+    newConsentConfig,
+
+    -- ** ConsentConfig_Version
+    ConsentConfig_Version (..),
+
+    -- ** ConsentErrors
+    ConsentErrors (..),
+    newConsentErrors,
+
     -- ** ConsentEvaluation
     ConsentEvaluation (..),
     newConsentEvaluation,
 
     -- ** ConsentEvaluation_EvaluationResult
     ConsentEvaluation_EvaluationResult (..),
+
+    -- ** ConsentHeaderHandling
+    ConsentHeaderHandling (..),
+    newConsentHeaderHandling,
+
+    -- ** ConsentHeaderHandling_Profile
+    ConsentHeaderHandling_Profile (..),
 
     -- ** ConsentList
     ConsentList (..),
@@ -836,9 +1049,17 @@ module Gogol.Healthcare
     DicomStore_Labels (..),
     newDicomStore_Labels,
 
+    -- ** DicomStoreMetrics
+    DicomStoreMetrics (..),
+    newDicomStoreMetrics,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EncryptionSpec
+    EncryptionSpec (..),
+    newEncryptionSpec,
 
     -- ** Entity
     Entity (..),
@@ -870,6 +1091,27 @@ module Gogol.Healthcare
     -- ** EvaluateUserConsentsResponse
     EvaluateUserConsentsResponse (..),
     newEvaluateUserConsentsResponse,
+
+    -- ** ExplainDataAccessConsentInfo
+    ExplainDataAccessConsentInfo (..),
+    newExplainDataAccessConsentInfo,
+
+    -- ** ExplainDataAccessConsentInfo_Type
+    ExplainDataAccessConsentInfo_Type (..),
+
+    -- ** ExplainDataAccessConsentInfo_VariantsItem
+    ExplainDataAccessConsentInfo_VariantsItem (..),
+
+    -- ** ExplainDataAccessConsentScope
+    ExplainDataAccessConsentScope (..),
+    newExplainDataAccessConsentScope,
+
+    -- ** ExplainDataAccessConsentScope_Decision
+    ExplainDataAccessConsentScope_Decision (..),
+
+    -- ** ExplainDataAccessResponse
+    ExplainDataAccessResponse (..),
+    newExplainDataAccessResponse,
 
     -- ** ExportDicomDataRequest
     ExportDicomDataRequest (..),
@@ -910,6 +1152,10 @@ module Gogol.Healthcare
     -- ** FhirFilter
     FhirFilter (..),
     newFhirFilter,
+
+    -- ** FhirNotificationConfig
+    FhirNotificationConfig (..),
+    newFhirNotificationConfig,
 
     -- ** FhirStore
     FhirStore (..),
@@ -989,6 +1235,10 @@ module Gogol.Healthcare
     GoogleCloudHealthcareV1DicomGcsSource (..),
     newGoogleCloudHealthcareV1DicomGcsSource,
 
+    -- ** GoogleCloudHealthcareV1DicomStreamConfig
+    GoogleCloudHealthcareV1DicomStreamConfig (..),
+    newGoogleCloudHealthcareV1DicomStreamConfig,
+
     -- ** GoogleCloudHealthcareV1FhirBigQueryDestination
     GoogleCloudHealthcareV1FhirBigQueryDestination (..),
     newGoogleCloudHealthcareV1FhirBigQueryDestination,
@@ -1031,6 +1281,14 @@ module Gogol.Healthcare
     -- ** Hl7V2Store_Labels
     Hl7V2Store_Labels (..),
     newHl7V2Store_Labels,
+
+    -- ** Hl7V2StoreMetric
+    Hl7V2StoreMetric (..),
+    newHl7V2StoreMetric,
+
+    -- ** Hl7V2StoreMetrics
+    Hl7V2StoreMetrics (..),
+    newHl7V2StoreMetrics,
 
     -- ** HttpBody
     HttpBody (..),
@@ -1205,6 +1463,10 @@ module Gogol.Healthcare
     PatientId (..),
     newPatientId,
 
+    -- ** PatientScope
+    PatientScope (..),
+    newPatientScope,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -1212,6 +1474,10 @@ module Gogol.Healthcare
     -- ** ProgressCounter
     ProgressCounter (..),
     newProgressCounter,
+
+    -- ** PubsubDestination
+    PubsubDestination (..),
+    newPubsubDestination,
 
     -- ** QueryAccessibleDataRequest
     QueryAccessibleDataRequest (..),
@@ -1257,6 +1523,36 @@ module Gogol.Healthcare
     RevokeConsentRequest (..),
     newRevokeConsentRequest,
 
+    -- ** RollbackFhirResourceFilteringFields
+    RollbackFhirResourceFilteringFields (..),
+    newRollbackFhirResourceFilteringFields,
+
+    -- ** RollbackFhirResourcesRequest
+    RollbackFhirResourcesRequest (..),
+    newRollbackFhirResourcesRequest,
+
+    -- ** RollbackFhirResourcesRequest_ChangeType
+    RollbackFhirResourcesRequest_ChangeType (..),
+
+    -- ** RollbackFhirResourcesResponse
+    RollbackFhirResourcesResponse (..),
+    newRollbackFhirResourcesResponse,
+
+    -- ** RollbackHL7MessagesFilteringFields
+    RollbackHL7MessagesFilteringFields (..),
+    newRollbackHL7MessagesFilteringFields,
+
+    -- ** RollbackHl7V2MessagesRequest
+    RollbackHl7V2MessagesRequest (..),
+    newRollbackHl7V2MessagesRequest,
+
+    -- ** RollbackHl7V2MessagesRequest_ChangeType
+    RollbackHl7V2MessagesRequest_ChangeType (..),
+
+    -- ** RollbackHl7V2MessagesResponse
+    RollbackHl7V2MessagesResponse (..),
+    newRollbackHl7V2MessagesResponse,
+
     -- ** SchemaConfig
     SchemaConfig (..),
     newSchemaConfig,
@@ -1298,6 +1594,18 @@ module Gogol.Healthcare
     Segment_Fields (..),
     newSegment_Fields,
 
+    -- ** SeriesMetrics
+    SeriesMetrics (..),
+    newSeriesMetrics,
+
+    -- ** SetBlobStorageSettingsRequest
+    SetBlobStorageSettingsRequest (..),
+    newSetBlobStorageSettingsRequest,
+
+    -- ** SetBlobStorageSettingsResponse
+    SetBlobStorageSettingsResponse (..),
+    newSetBlobStorageSettingsResponse,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -1318,9 +1626,21 @@ module Gogol.Healthcare
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** StorageInfo
+    StorageInfo (..),
+    newStorageInfo,
+
     -- ** StreamConfig
     StreamConfig (..),
     newStreamConfig,
+
+    -- ** StructuredStorageInfo
+    StructuredStorageInfo (..),
+    newStructuredStorageInfo,
+
+    -- ** StudyMetrics
+    StudyMetrics (..),
+    newStudyMetrics,
 
     -- ** TagFilterList
     TagFilterList (..),
@@ -1348,6 +1668,10 @@ module Gogol.Healthcare
 
     -- ** TimePartitioning_Type
     TimePartitioning_Type (..),
+
+    -- ** TimeRange
+    TimeRange (..),
+    newTimeRange,
 
     -- ** Type
     Type (..),
@@ -1413,13 +1737,21 @@ import Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappin
 import Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.List
 import Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.UserDataMappings.Patch
 import Gogol.Healthcare.Projects.Locations.Datasets.Create
+import Gogol.Healthcare.Projects.Locations.Datasets.DataMapperWorkspaces.GetIamPolicy
+import Gogol.Healthcare.Projects.Locations.Datasets.DataMapperWorkspaces.SetIamPolicy
+import Gogol.Healthcare.Projects.Locations.Datasets.DataMapperWorkspaces.TestIamPermissions
 import Gogol.Healthcare.Projects.Locations.Datasets.Deidentify
 import Gogol.Healthcare.Projects.Locations.Datasets.Delete
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Create
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Deidentify
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Delete
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.DicomWeb.Studies.GetStudyMetrics
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.DicomWeb.Studies.Series.GetSeriesMetrics
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.DicomWeb.Studies.Series.Instances.GetStorageInfo
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.DicomWeb.Studies.SetBlobStorageSettings
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Export
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Get
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.GetDICOMStoreMetrics
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.GetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Import
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.List
@@ -1427,6 +1759,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Patch
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForInstances
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForSeries
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SearchForStudies
+import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SetBlobStorageSettings
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.SetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.StoreInstances
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Delete
@@ -1446,16 +1779,30 @@ import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.R
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.SearchForInstances
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.StoreInstances
 import Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.TestIamPermissions
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyAdminConsents
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ApplyConsents
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Bulkexportgroup
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Create
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Delete
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.ExplainDataAccess
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Export
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binarycreate
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryread
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryupdate
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Binaryvread
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Bulkexport
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Capabilities
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalDelete
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalPatch
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ConditionalUpdate
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Consentenforcementstatus
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Create
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Delete
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.ExecuteBundle
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.History
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patch
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patientconsentenforcementstatus
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Patienteverything
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Read
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Resourcepurge
@@ -1469,7 +1816,10 @@ import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetFHIRStoreMetri
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.GetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Import
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.List
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Deletefhiroperation
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Operations.Getfhiroperationstatus
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Patch
+import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Rollback
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.SetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.TestIamPermissions
 import Gogol.Healthcare.Projects.Locations.Datasets.Get
@@ -1478,6 +1828,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Create
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Delete
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Export
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Get
+import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.GetHL7v2StoreMetrics
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.GetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Import
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.List
@@ -1488,6 +1839,7 @@ import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Ingest
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.List
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Patch
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Patch
+import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Rollback
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.SetIamPolicy
 import Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.TestIamPermissions
 import Gogol.Healthcare.Projects.Locations.Datasets.List

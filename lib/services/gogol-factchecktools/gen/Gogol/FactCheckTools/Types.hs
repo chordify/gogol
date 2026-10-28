@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FactCheckTools.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FactCheckTools.Types
@@ -30,7 +28,7 @@ module Gogol.FactCheckTools.Types
     factCheckToolsService,
 
     -- * OAuth Scopes
-    Userinfo'Email,
+    Factchecktools'FullControl,
 
     -- * Types
 
@@ -65,6 +63,14 @@ module Gogol.FactCheckTools.Types
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
 
+    -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse,
+
+    -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult,
+
     -- ** GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
     GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse,
@@ -85,7 +91,7 @@ where
 
 import Gogol.FactCheckTools.Internal.Product
 import Gogol.FactCheckTools.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1alpha1@ of the Fact Check Tools API. This contains the host and root path used as a starting point for constructing service requests.
 factCheckToolsService :: Core.ServiceConfig
@@ -94,5 +100,6 @@ factCheckToolsService =
     (Core.ServiceId "factchecktools:v1alpha1")
     "factchecktools.googleapis.com"
 
--- | See your primary Google Account email address
-type Userinfo'Email = "https://www.googleapis.com/auth/userinfo.email"
+-- | Read, create, update, and delete your ClaimReview data.
+type Factchecktools'FullControl =
+  "https://www.googleapis.com/auth/factchecktools"

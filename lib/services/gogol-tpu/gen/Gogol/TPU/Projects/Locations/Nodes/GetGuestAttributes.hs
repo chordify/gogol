@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TPU.Projects.Locations.Nodes.GetGuestAttributes
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,17 +37,14 @@ module Gogol.TPU.Projects.Locations.Nodes.GetGuestAttributes
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TPU.Types
 
 -- | A resource alias for @tpu.projects.locations.nodes.getGuestAttributes@ method which the
 -- 'TPUProjectsLocationsNodesGetGuestAttributes' request conforms to.
 type TPUProjectsLocationsNodesGetGuestAttributesResource =
   "v2"
-    Core.:> Core.CaptureMode
-              "name"
-              "getGuestAttributes"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "getGuestAttributes" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -106,26 +101,23 @@ instance
     Rs TPUProjectsLocationsNodesGetGuestAttributes =
       GetGuestAttributesResponse
   type
-    Scopes
-      TPUProjectsLocationsNodesGetGuestAttributes =
+    Scopes TPUProjectsLocationsNodesGetGuestAttributes =
       '[CloudPlatform'FullControl]
-  requestClient
-    TPUProjectsLocationsNodesGetGuestAttributes {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        tPUService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TPUProjectsLocationsNodesGetGuestAttributesResource
-            )
-            Core.mempty
+  requestClient TPUProjectsLocationsNodesGetGuestAttributes {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      tPUService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy TPUProjectsLocationsNodesGetGuestAttributesResource
+          )
+          Core.mempty

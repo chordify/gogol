@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Destinations.Link
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Destinations.Link
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.destinations.link@ method which the
@@ -51,9 +49,7 @@ type TagManagerAccountsContainersDestinationsLinkResource =
     Core.:> "destinations:link"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "allowUserPermissionFeatureUpdate"
-              Core.Bool
+    Core.:> Core.QueryParam "allowUserPermissionFeatureUpdate" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "destinationId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -91,7 +87,8 @@ newTagManagerAccountsContainersDestinationsLink ::
   TagManagerAccountsContainersDestinationsLink
 newTagManagerAccountsContainersDestinationsLink parent =
   TagManagerAccountsContainersDestinationsLink
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       allowUserPermissionFeatureUpdate = Core.Nothing,
       callback = Core.Nothing,
@@ -105,31 +102,26 @@ instance
   Core.GoogleRequest
     TagManagerAccountsContainersDestinationsLink
   where
+  type Rs TagManagerAccountsContainersDestinationsLink = Destination
   type
-    Rs TagManagerAccountsContainersDestinationsLink =
-      Destination
-  type
-    Scopes
-      TagManagerAccountsContainersDestinationsLink =
+    Scopes TagManagerAccountsContainersDestinationsLink =
       '[Tagmanager'Edit'Containers]
-  requestClient
-    TagManagerAccountsContainersDestinationsLink {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        allowUserPermissionFeatureUpdate
-        callback
-        destinationId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        tagManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TagManagerAccountsContainersDestinationsLinkResource
-            )
-            Core.mempty
+  requestClient TagManagerAccountsContainersDestinationsLink {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      allowUserPermissionFeatureUpdate
+      callback
+      destinationId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      tagManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy TagManagerAccountsContainersDestinationsLinkResource
+          )
+          Core.mempty

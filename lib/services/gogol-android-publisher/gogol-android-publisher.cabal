@@ -1,14 +1,16 @@
 cabal-version:      2.2
 name:               gogol-android-publisher
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Play Android Developer SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
@@ -37,7 +39,7 @@ flag field-selectors
   manual:      True
 
 library
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
@@ -49,9 +51,15 @@ library
 
   exposed-modules:
     Gogol.AndroidPublisher
+    Gogol.AndroidPublisher.Applications.DataSafety
     Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Create
     Gogol.AndroidPublisher.Applications.DeviceTierConfigs.Get
     Gogol.AndroidPublisher.Applications.DeviceTierConfigs.List
+    Gogol.AndroidPublisher.Apprecovery.AddTargeting
+    Gogol.AndroidPublisher.Apprecovery.Cancel
+    Gogol.AndroidPublisher.Apprecovery.Create
+    Gogol.AndroidPublisher.Apprecovery.Deploy
+    Gogol.AndroidPublisher.Apprecovery.List
     Gogol.AndroidPublisher.Edits.Apks.Addexternallyhosted
     Gogol.AndroidPublisher.Edits.Apks.List
     Gogol.AndroidPublisher.Edits.Apks.Upload
@@ -83,16 +91,23 @@ library
     Gogol.AndroidPublisher.Edits.Testers.Get
     Gogol.AndroidPublisher.Edits.Testers.Patch
     Gogol.AndroidPublisher.Edits.Testers.Update
+    Gogol.AndroidPublisher.Edits.Tracks.Create
     Gogol.AndroidPublisher.Edits.Tracks.Get
     Gogol.AndroidPublisher.Edits.Tracks.List
     Gogol.AndroidPublisher.Edits.Tracks.Patch
     Gogol.AndroidPublisher.Edits.Tracks.Update
     Gogol.AndroidPublisher.Edits.Validate
+    Gogol.AndroidPublisher.Externaltransactions.Createexternaltransaction
+    Gogol.AndroidPublisher.Externaltransactions.Getexternaltransaction
+    Gogol.AndroidPublisher.Externaltransactions.Refundexternaltransaction
     Gogol.AndroidPublisher.Generatedapks.Download
     Gogol.AndroidPublisher.Generatedapks.List
     Gogol.AndroidPublisher.Grants.Create
     Gogol.AndroidPublisher.Grants.Delete
     Gogol.AndroidPublisher.Grants.Patch
+    Gogol.AndroidPublisher.Inappproducts.BatchDelete
+    Gogol.AndroidPublisher.Inappproducts.BatchGet
+    Gogol.AndroidPublisher.Inappproducts.BatchUpdate
     Gogol.AndroidPublisher.Inappproducts.Delete
     Gogol.AndroidPublisher.Inappproducts.Get
     Gogol.AndroidPublisher.Inappproducts.Insert
@@ -104,16 +119,23 @@ library
     Gogol.AndroidPublisher.Monetization.ConvertRegionPrices
     Gogol.AndroidPublisher.Monetization.Subscriptions.Archive
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Activate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.BatchMigratePrices
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.BatchUpdateStates
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Deactivate
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Delete
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Activate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchGet
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchUpdate
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.BatchUpdateStates
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deactivate
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Delete
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Get
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.List
     Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Patch
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BatchGet
+    Gogol.AndroidPublisher.Monetization.Subscriptions.BatchUpdate
     Gogol.AndroidPublisher.Monetization.Subscriptions.Create
     Gogol.AndroidPublisher.Monetization.Subscriptions.Delete
     Gogol.AndroidPublisher.Monetization.Subscriptions.Get
@@ -130,6 +152,7 @@ library
     Gogol.AndroidPublisher.Purchases.Subscriptions.Refund
     Gogol.AndroidPublisher.Purchases.Subscriptions.Revoke
     Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Get
+    Gogol.AndroidPublisher.Purchases.Subscriptionsv2.Revoke
     Gogol.AndroidPublisher.Purchases.Voidedpurchases.List
     Gogol.AndroidPublisher.Reviews.Get
     Gogol.AndroidPublisher.Reviews.List
@@ -148,6 +171,4 @@ library
     Gogol.AndroidPublisher.Internal.Product
     Gogol.AndroidPublisher.Internal.Sum
 
-  build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+  build-depends:    gogol-core ^>=1.0.0

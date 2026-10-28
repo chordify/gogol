@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Plus.Activities.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Plus.Activities.Get
 where
 
 import Gogol.Plus.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @plus.activities.get@ method which the
 -- 'PlusActivitiesGet' request conforms to.
@@ -66,13 +64,12 @@ newPlusActivitiesGet ::
   -- |  The ID of the activity to get. See 'activityId'.
   Core.Text ->
   PlusActivitiesGet
-newPlusActivitiesGet activityId = PlusActivitiesGet {activityId = activityId}
+newPlusActivitiesGet activityId =
+  PlusActivitiesGet {activityId = activityId}
 
 instance Core.GoogleRequest PlusActivitiesGet where
   type Rs PlusActivitiesGet = Activity
-  type
-    Scopes PlusActivitiesGet =
-      '[Plus'Login, Plus'Me]
+  type Scopes PlusActivitiesGet = '[Plus'Login, Plus'Me]
   requestClient PlusActivitiesGet {..} =
     go activityId (Core.Just Core.AltJSON) plusService
     where

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Reports.Saved.Generate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Reports.Saved.Generate
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.reports.saved.generate@ method which the
 -- 'AdSenseAccountsReportsSavedGenerate' request conforms to.
@@ -52,9 +50,7 @@ type AdSenseAccountsReportsSavedGenerateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currencyCode" Core.Text
-    Core.:> Core.QueryParam
-              "dateRange"
-              AccountsReportsSavedGenerateDateRange
+    Core.:> Core.QueryParam "dateRange" AccountsReportsSavedGenerateDateRange
     Core.:> Core.QueryParam "endDate.day" Core.Int32
     Core.:> Core.QueryParam "endDate.month" Core.Int32
     Core.:> Core.QueryParam "endDate.year" Core.Int32
@@ -66,9 +62,7 @@ type AdSenseAccountsReportsSavedGenerateResource =
     Core.:> Core.QueryParam "startDate.month" Core.Int32
     Core.:> Core.QueryParam "startDate.year" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ReportResult
 
@@ -136,13 +130,8 @@ newAdSenseAccountsReportsSavedGenerate name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseAccountsReportsSavedGenerate
-  where
-  type
-    Rs AdSenseAccountsReportsSavedGenerate =
-      ReportResult
+instance Core.GoogleRequest AdSenseAccountsReportsSavedGenerate where
+  type Rs AdSenseAccountsReportsSavedGenerate = ReportResult
   type
     Scopes AdSenseAccountsReportsSavedGenerate =
       '[Adsense'FullControl, Adsense'Readonly]
@@ -170,7 +159,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AdSenseAccountsReportsSavedGenerateResource
+              Core.Proxy AdSenseAccountsReportsSavedGenerateResource
           )
           Core.mempty

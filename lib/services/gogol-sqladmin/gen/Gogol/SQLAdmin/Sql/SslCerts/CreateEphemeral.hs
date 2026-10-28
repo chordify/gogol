@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.SslCerts.CreateEphemeral
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.sslCerts.createEphemeral@ method which the
@@ -57,9 +55,7 @@ type SqlSslCertsCreateEphemeralResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SslCertsCreateEphemeralRequest
+    Core.:> Core.ReqBody '[Core.JSON] SslCertsCreateEphemeralRequest
     Core.:> Core.Post '[Core.JSON] SslCert
 
 -- | Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.
@@ -106,10 +102,7 @@ newSqlSslCertsCreateEphemeral instance' payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SqlSslCertsCreateEphemeral
-  where
+instance Core.GoogleRequest SqlSslCertsCreateEphemeral where
   type Rs SqlSslCertsCreateEphemeral = SslCert
   type
     Scopes SqlSslCertsCreateEphemeral =
@@ -129,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SqlSslCertsCreateEphemeralResource
-          )
+          (Core.Proxy :: Core.Proxy SqlSslCertsCreateEphemeralResource)
           Core.mempty

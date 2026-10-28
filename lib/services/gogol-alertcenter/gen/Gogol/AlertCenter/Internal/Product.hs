@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,22 @@
 
 -- |
 -- Module      : Gogol.AlertCenter.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AlertCenter.Internal.Product
-  ( -- * AccountSuspensionDetails
+  ( -- * AbuseDetected
+    AbuseDetected (..),
+    newAbuseDetected,
+
+    -- * AccessApproval
+    AccessApproval (..),
+    newAccessApproval,
+
+    -- * AccountSuspensionDetails
     AccountSuspensionDetails (..),
     newAccountSuspensionDetails,
 
@@ -130,6 +136,10 @@ module Gogol.AlertCenter.Internal.Product
     DeviceCompromisedSecurityDetail (..),
     newDeviceCompromisedSecurityDetail,
 
+    -- * DeviceManagementRule
+    DeviceManagementRule (..),
+    newDeviceManagementRule,
+
     -- * DlpRuleViolation
     DlpRuleViolation (..),
     newDlpRuleViolation,
@@ -145,6 +155,14 @@ module Gogol.AlertCenter.Internal.Product
     -- * Empty
     Empty (..),
     newEmpty,
+
+    -- * Entity
+    Entity (..),
+    newEntity,
+
+    -- * EntityList
+    EntityList (..),
+    newEntityList,
 
     -- * GmailMessageInfo
     GmailMessageInfo (..),
@@ -258,6 +276,10 @@ module Gogol.AlertCenter.Internal.Product
     SuperAdminPasswordResetEvent (..),
     newSuperAdminPasswordResetEvent,
 
+    -- * SupportTicket
+    SupportTicket (..),
+    newSupportTicket,
+
     -- * SuspiciousActivity
     SuspiciousActivity (..),
     newSuspiciousActivity,
@@ -305,7 +327,115 @@ module Gogol.AlertCenter.Internal.Product
 where
 
 import Gogol.AlertCenter.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | A generic alert for abusive user activity occurring with a customer.
+--
+-- /See:/ 'newAbuseDetected' smart constructor.
+data AbuseDetected = AbuseDetected
+  { -- | List of abusive users\/entities to be displayed in a table in the alert.
+    additionalDetails :: (Core.Maybe EntityList),
+    -- | Product that the abuse is originating from.
+    product :: (Core.Maybe Core.Text),
+    -- | Unique identifier of each sub alert that is onboarded.
+    subAlertId :: (Core.Maybe Core.Text),
+    -- | Variation of AbuseDetected alerts. The variation/type determines the texts displayed the alert details. This differs from sub/alert/id because each sub alert can have multiple variation/types, representing different stages of the alert.
+    variationType :: (Core.Maybe AbuseDetected_VariationType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AbuseDetected' with the minimum fields required to make a request.
+newAbuseDetected ::
+  AbuseDetected
+newAbuseDetected =
+  AbuseDetected
+    { additionalDetails = Core.Nothing,
+      product = Core.Nothing,
+      subAlertId = Core.Nothing,
+      variationType = Core.Nothing
+    }
+
+instance Core.FromJSON AbuseDetected where
+  parseJSON =
+    Core.withObject
+      "AbuseDetected"
+      ( \o ->
+          AbuseDetected
+            Core.<$> (o Core..:? "additionalDetails")
+            Core.<*> (o Core..:? "product")
+            Core.<*> (o Core..:? "subAlertId")
+            Core.<*> (o Core..:? "variationType")
+      )
+
+instance Core.ToJSON AbuseDetected where
+  toJSON AbuseDetected {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalDetails" Core..=) Core.<$> additionalDetails,
+            ("product" Core..=) Core.<$> product,
+            ("subAlertId" Core..=) Core.<$> subAlertId,
+            ("variationType" Core..=) Core.<$> variationType
+          ]
+      )
+
+-- | Alert that is triggered when Google support requests to access customer data.
+--
+-- /See:/ 'newAccessApproval' smart constructor.
+data AccessApproval = AccessApproval
+  { -- | Justification for data access based on justification enums.
+    justificationReason :: (Core.Maybe [AccessApproval_JustificationReasonItem]),
+    -- | Office location of Google staff requesting access such as \"US\".
+    officeLocation :: (Core.Maybe Core.Text),
+    -- | Products within scope of the Access Approvals request.
+    products :: (Core.Maybe [Core.Text]),
+    -- | ID of the Access Approvals request. This is a helpful field when requesting support from Google.
+    requestId :: (Core.Maybe Core.Text),
+    -- | Scope of access, also known as a resource. This is further narrowed down by the product field.
+    scope :: (Core.Maybe Core.Text),
+    -- | Support tickets related to this Access Approvals request. Populated if there is an associated case number.
+    tickets :: (Core.Maybe [SupportTicket])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccessApproval' with the minimum fields required to make a request.
+newAccessApproval ::
+  AccessApproval
+newAccessApproval =
+  AccessApproval
+    { justificationReason = Core.Nothing,
+      officeLocation = Core.Nothing,
+      products = Core.Nothing,
+      requestId = Core.Nothing,
+      scope = Core.Nothing,
+      tickets = Core.Nothing
+    }
+
+instance Core.FromJSON AccessApproval where
+  parseJSON =
+    Core.withObject
+      "AccessApproval"
+      ( \o ->
+          AccessApproval
+            Core.<$> (o Core..:? "justificationReason")
+            Core.<*> (o Core..:? "officeLocation")
+            Core.<*> (o Core..:? "products")
+            Core.<*> (o Core..:? "requestId")
+            Core.<*> (o Core..:? "scope")
+            Core.<*> (o Core..:? "tickets")
+      )
+
+instance Core.ToJSON AccessApproval where
+  toJSON AccessApproval {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("justificationReason" Core..=) Core.<$> justificationReason,
+            ("officeLocation" Core..=) Core.<$> officeLocation,
+            ("products" Core..=) Core.<$> products,
+            ("requestId" Core..=) Core.<$> requestId,
+            ("scope" Core..=) Core.<$> scope,
+            ("tickets" Core..=) Core.<$> tickets
+          ]
+      )
 
 -- | Details about why an account is receiving an account suspension warning.
 --
@@ -386,8 +516,7 @@ instance Core.ToJSON AccountSuspensionWarning where
       ( Core.catMaybes
           [ ("appealWindow" Core..=) Core.<$> appealWindow,
             ("state" Core..=) Core.<$> state,
-            ("suspensionDetails" Core..=)
-              Core.<$> suspensionDetails
+            ("suspensionDetails" Core..=) Core.<$> suspensionDetails
           ]
       )
 
@@ -440,9 +569,7 @@ newActionInfo = ActionInfo
 
 instance Core.FromJSON ActionInfo where
   parseJSON =
-    Core.withObject
-      "ActionInfo"
-      (\o -> Core.pure ActionInfo)
+    Core.withObject "ActionInfo" (\o -> Core.pure ActionInfo)
 
 instance Core.ToJSON ActionInfo where
   toJSON = Core.const Core.emptyObject
@@ -527,10 +654,8 @@ instance Core.ToJSON ActivityRule where
             ("displayName" Core..=) Core.<$> displayName,
             ("name" Core..=) Core.<$> name,
             ("query" Core..=) Core.<$> query,
-            ("supersededAlerts" Core..=)
-              Core.<$> supersededAlerts,
-            ("supersedingAlert" Core..=)
-              Core.<$> supersedingAlert,
+            ("supersededAlerts" Core..=) Core.<$> supersededAlerts,
+            ("supersedingAlert" Core..=) Core.<$> supersedingAlert,
             ("threshold" Core..=) Core.<$> threshold,
             ("triggerSource" Core..=) Core.<$> triggerSource,
             ("updateTime" Core..=) Core.<$> updateTime,
@@ -781,15 +906,15 @@ instance Core.ToJSON AlertMetadata where
           ]
       )
 
--- | The explanation message associated with ApnsCertificationExpiring and ApnsCertificationExpired alerts.
+-- | The explanation message associated with \"APNS certificate is expiring soon\" and \"APNS certificate has expired\" alerts.
 --
 -- /See:/ 'newApnsCertificateExpirationInfo' smart constructor.
 data ApnsCertificateExpirationInfo = ApnsCertificateExpirationInfo
-  { -- | The Apple ID used for the certificate may be blank if admins didn\'t enter it.
+  { -- | The Apple ID used to create the certificate. It may be blank if admins didn\'t enter it.
     appleId :: (Core.Maybe Core.Text),
-    -- | The expiration date of the APNS Certificate.
+    -- | The expiration date of the APNS certificate.
     expirationTime :: (Core.Maybe Core.DateTime),
-    -- | The UID for the certificate.
+    -- | The UID of the certificate.
     uid :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -845,18 +970,15 @@ instance Core.FromJSON AppMakerSqlSetupNotification where
     Core.withObject
       "AppMakerSqlSetupNotification"
       ( \o ->
-          AppMakerSqlSetupNotification
-            Core.<$> (o Core..:? "requestInfo")
+          AppMakerSqlSetupNotification Core.<$> (o Core..:? "requestInfo")
       )
 
 instance Core.ToJSON AppMakerSqlSetupNotification where
   toJSON AppMakerSqlSetupNotification {..} =
     Core.object
-      ( Core.catMaybes
-          [("requestInfo" Core..=) Core.<$> requestInfo]
-      )
+      (Core.catMaybes [("requestInfo" Core..=) Core.<$> requestInfo])
 
--- | Alerts from AppSettingsChanged bucket Rules configured by Admin which contain the below rules. Calendar settings changed Drive settings changed Email settings changed Mobile settings changed
+-- | -   Alerts from AppSettingsChanged bucket Rules configured by Admin which contain the below rules. Calendar settings changed Drive settings changed Email settings changed Mobile settings changed
 --
 -- /See:/ 'newAppSettingsChanged' smart constructor.
 data AppSettingsChanged = AppSettingsChanged
@@ -871,7 +993,10 @@ data AppSettingsChanged = AppSettingsChanged
 newAppSettingsChanged ::
   AppSettingsChanged
 newAppSettingsChanged =
-  AppSettingsChanged {alertDetails = Core.Nothing, name = Core.Nothing}
+  AppSettingsChanged
+    { alertDetails = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON AppSettingsChanged where
   parseJSON =
@@ -947,8 +1072,7 @@ instance Core.ToJSON AppsOutage where
     Core.object
       ( Core.catMaybes
           [ ("dashboardUri" Core..=) Core.<$> dashboardUri,
-            ("incidentTrackingId" Core..=)
-              Core.<$> incidentTrackingId,
+            ("incidentTrackingId" Core..=) Core.<$> incidentTrackingId,
             ("mergeInfo" Core..=) Core.<$> mergeInfo,
             ("nextUpdateTime" Core..=) Core.<$> nextUpdateTime,
             ("products" Core..=) Core.<$> products,
@@ -979,8 +1103,7 @@ instance Core.FromJSON Attachment where
 
 instance Core.ToJSON Attachment where
   toJSON Attachment {..} =
-    Core.object
-      (Core.catMaybes [("csv" Core..=) Core.<$> csv])
+    Core.object (Core.catMaybes [("csv" Core..=) Core.<$> csv])
 
 -- | Alert for setting the domain or IP that malicious email comes from as whitelisted domain or IP in Gmail advanced settings.
 --
@@ -1046,7 +1169,10 @@ data BatchDeleteAlertsRequest = BatchDeleteAlertsRequest
 newBatchDeleteAlertsRequest ::
   BatchDeleteAlertsRequest
 newBatchDeleteAlertsRequest =
-  BatchDeleteAlertsRequest {alertId = Core.Nothing, customerId = Core.Nothing}
+  BatchDeleteAlertsRequest
+    { alertId = Core.Nothing,
+      customerId = Core.Nothing
+    }
 
 instance Core.FromJSON BatchDeleteAlertsRequest where
   parseJSON =
@@ -1101,10 +1227,8 @@ instance Core.ToJSON BatchDeleteAlertsResponse where
   toJSON BatchDeleteAlertsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failedAlertStatus" Core..=)
-              Core.<$> failedAlertStatus,
-            ("successAlertIds" Core..=)
-              Core.<$> successAlertIds
+          [ ("failedAlertStatus" Core..=) Core.<$> failedAlertStatus,
+            ("successAlertIds" Core..=) Core.<$> successAlertIds
           ]
       )
 
@@ -1112,8 +1236,7 @@ instance Core.ToJSON BatchDeleteAlertsResponse where
 --
 -- /See:/ 'newBatchDeleteAlertsResponse_FailedAlertStatus' smart constructor.
 newtype BatchDeleteAlertsResponse_FailedAlertStatus = BatchDeleteAlertsResponse_FailedAlertStatus
-  { -- |
-    additional :: (Core.HashMap Core.Text Status)
+  { additional :: (Core.HashMap Core.Text Status)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1123,12 +1246,12 @@ newBatchDeleteAlertsResponse_FailedAlertStatus ::
   Core.HashMap Core.Text Status ->
   BatchDeleteAlertsResponse_FailedAlertStatus
 newBatchDeleteAlertsResponse_FailedAlertStatus additional =
-  BatchDeleteAlertsResponse_FailedAlertStatus {additional = additional}
+  BatchDeleteAlertsResponse_FailedAlertStatus
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    BatchDeleteAlertsResponse_FailedAlertStatus
-  where
+instance Core.FromJSON BatchDeleteAlertsResponse_FailedAlertStatus where
   parseJSON =
     Core.withObject
       "BatchDeleteAlertsResponse_FailedAlertStatus"
@@ -1137,13 +1260,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchDeleteAlertsResponse_FailedAlertStatus
-  where
-  toJSON
-    BatchDeleteAlertsResponse_FailedAlertStatus {..} =
-      Core.toJSON additional
+instance Core.ToJSON BatchDeleteAlertsResponse_FailedAlertStatus where
+  toJSON BatchDeleteAlertsResponse_FailedAlertStatus {..} =
+    Core.toJSON additional
 
 -- | A request to perform batch undelete on alerts.
 --
@@ -1160,7 +1279,10 @@ data BatchUndeleteAlertsRequest = BatchUndeleteAlertsRequest
 newBatchUndeleteAlertsRequest ::
   BatchUndeleteAlertsRequest
 newBatchUndeleteAlertsRequest =
-  BatchUndeleteAlertsRequest {alertId = Core.Nothing, customerId = Core.Nothing}
+  BatchUndeleteAlertsRequest
+    { alertId = Core.Nothing,
+      customerId = Core.Nothing
+    }
 
 instance Core.FromJSON BatchUndeleteAlertsRequest where
   parseJSON =
@@ -1215,10 +1337,8 @@ instance Core.ToJSON BatchUndeleteAlertsResponse where
   toJSON BatchUndeleteAlertsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failedAlertStatus" Core..=)
-              Core.<$> failedAlertStatus,
-            ("successAlertIds" Core..=)
-              Core.<$> successAlertIds
+          [ ("failedAlertStatus" Core..=) Core.<$> failedAlertStatus,
+            ("successAlertIds" Core..=) Core.<$> successAlertIds
           ]
       )
 
@@ -1226,8 +1346,7 @@ instance Core.ToJSON BatchUndeleteAlertsResponse where
 --
 -- /See:/ 'newBatchUndeleteAlertsResponse_FailedAlertStatus' smart constructor.
 newtype BatchUndeleteAlertsResponse_FailedAlertStatus = BatchUndeleteAlertsResponse_FailedAlertStatus
-  { -- |
-    additional :: (Core.HashMap Core.Text Status)
+  { additional :: (Core.HashMap Core.Text Status)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1237,7 +1356,10 @@ newBatchUndeleteAlertsResponse_FailedAlertStatus ::
   Core.HashMap Core.Text Status ->
   BatchUndeleteAlertsResponse_FailedAlertStatus
 newBatchUndeleteAlertsResponse_FailedAlertStatus additional =
-  BatchUndeleteAlertsResponse_FailedAlertStatus {additional = additional}
+  BatchUndeleteAlertsResponse_FailedAlertStatus
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -1251,13 +1373,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchUndeleteAlertsResponse_FailedAlertStatus
-  where
-  toJSON
-    BatchUndeleteAlertsResponse_FailedAlertStatus {..} =
-      Core.toJSON additional
+instance Core.ToJSON BatchUndeleteAlertsResponse_FailedAlertStatus where
+  toJSON BatchUndeleteAlertsResponse_FailedAlertStatus {..} =
+    Core.toJSON additional
 
 -- | A reference to a Cloud Pubsub topic. To register for notifications, the owner of the topic must grant @alerts-api-push-notifications\@system.gserviceaccount.com@ the @projects.topics.publish@ permission.
 --
@@ -1274,7 +1392,10 @@ data CloudPubsubTopic = CloudPubsubTopic
 newCloudPubsubTopic ::
   CloudPubsubTopic
 newCloudPubsubTopic =
-  CloudPubsubTopic {payloadFormat = Core.Nothing, topicName = Core.Nothing}
+  CloudPubsubTopic
+    { payloadFormat = Core.Nothing,
+      topicName = Core.Nothing
+    }
 
 instance Core.FromJSON CloudPubsubTopic where
   parseJSON =
@@ -1353,9 +1474,7 @@ instance Core.FromJSON CsvRow where
 instance Core.ToJSON CsvRow where
   toJSON CsvRow {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A mobile device compromised alert. Derived from audit logs.
 --
@@ -1380,7 +1499,8 @@ instance Core.FromJSON DeviceCompromised where
       "DeviceCompromised"
       ( \o ->
           DeviceCompromised
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "events")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "events")
       )
 
 instance Core.ToJSON DeviceCompromised where
@@ -1418,7 +1538,8 @@ newDeviceCompromisedSecurityDetail ::
   DeviceCompromisedSecurityDetail
 newDeviceCompromisedSecurityDetail =
   DeviceCompromisedSecurityDetail
-    { deviceCompromisedState = Core.Nothing,
+    { deviceCompromisedState =
+        Core.Nothing,
       deviceId = Core.Nothing,
       deviceModel = Core.Nothing,
       deviceType = Core.Nothing,
@@ -1427,10 +1548,7 @@ newDeviceCompromisedSecurityDetail =
       serialNumber = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DeviceCompromisedSecurityDetail
-  where
+instance Core.FromJSON DeviceCompromisedSecurityDetail where
   parseJSON =
     Core.withObject
       "DeviceCompromisedSecurityDetail"
@@ -1460,6 +1578,85 @@ instance Core.ToJSON DeviceCompromisedSecurityDetail where
           ]
       )
 
+-- | Alerts from Device Management Rules configured by Admin.
+--
+-- /See:/ 'newDeviceManagementRule' smart constructor.
+data DeviceManagementRule = DeviceManagementRule
+  { -- | Required. The device ID.
+    deviceId :: (Core.Maybe Core.Text),
+    -- | The model of the device.
+    deviceModel :: (Core.Maybe Core.Text),
+    -- | The type of the device.
+    deviceType :: (Core.Maybe Core.Text),
+    -- | The email of the user this alert was created for.
+    email :: (Core.Maybe Core.Text),
+    -- | ID of the rule that triggered the alert
+    id :: (Core.Maybe Core.Text),
+    -- | Required for iOS, empty for others.
+    iosVendorId :: (Core.Maybe Core.Text),
+    -- | Obfuscated ID of the owner of the device
+    ownerId :: (Core.Maybe Core.Text),
+    -- | The device resource ID.
+    resourceId :: (Core.Maybe Core.Text),
+    -- | Action taken as result of the rule
+    ruleAction :: (Core.Maybe Core.Text),
+    -- | The serial number of the device.
+    serialNumber :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceManagementRule' with the minimum fields required to make a request.
+newDeviceManagementRule ::
+  DeviceManagementRule
+newDeviceManagementRule =
+  DeviceManagementRule
+    { deviceId = Core.Nothing,
+      deviceModel = Core.Nothing,
+      deviceType = Core.Nothing,
+      email = Core.Nothing,
+      id = Core.Nothing,
+      iosVendorId = Core.Nothing,
+      ownerId = Core.Nothing,
+      resourceId = Core.Nothing,
+      ruleAction = Core.Nothing,
+      serialNumber = Core.Nothing
+    }
+
+instance Core.FromJSON DeviceManagementRule where
+  parseJSON =
+    Core.withObject
+      "DeviceManagementRule"
+      ( \o ->
+          DeviceManagementRule
+            Core.<$> (o Core..:? "deviceId")
+            Core.<*> (o Core..:? "deviceModel")
+            Core.<*> (o Core..:? "deviceType")
+            Core.<*> (o Core..:? "email")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "iosVendorId")
+            Core.<*> (o Core..:? "ownerId")
+            Core.<*> (o Core..:? "resourceId")
+            Core.<*> (o Core..:? "ruleAction")
+            Core.<*> (o Core..:? "serialNumber")
+      )
+
+instance Core.ToJSON DeviceManagementRule where
+  toJSON DeviceManagementRule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceId" Core..=) Core.<$> deviceId,
+            ("deviceModel" Core..=) Core.<$> deviceModel,
+            ("deviceType" Core..=) Core.<$> deviceType,
+            ("email" Core..=) Core.<$> email,
+            ("id" Core..=) Core.<$> id,
+            ("iosVendorId" Core..=) Core.<$> iosVendorId,
+            ("ownerId" Core..=) Core.<$> ownerId,
+            ("resourceId" Core..=) Core.<$> resourceId,
+            ("ruleAction" Core..=) Core.<$> ruleAction,
+            ("serialNumber" Core..=) Core.<$> serialNumber
+          ]
+      )
+
 -- | Alerts that get triggered on violations of Data Loss Prevention (DLP) rules.
 --
 -- /See:/ 'newDlpRuleViolation' smart constructor.
@@ -1472,24 +1669,20 @@ newtype DlpRuleViolation = DlpRuleViolation
 -- | Creates a value of 'DlpRuleViolation' with the minimum fields required to make a request.
 newDlpRuleViolation ::
   DlpRuleViolation
-newDlpRuleViolation = DlpRuleViolation {ruleViolationInfo = Core.Nothing}
+newDlpRuleViolation =
+  DlpRuleViolation {ruleViolationInfo = Core.Nothing}
 
 instance Core.FromJSON DlpRuleViolation where
   parseJSON =
     Core.withObject
       "DlpRuleViolation"
-      ( \o ->
-          DlpRuleViolation
-            Core.<$> (o Core..:? "ruleViolationInfo")
-      )
+      (\o -> DlpRuleViolation Core.<$> (o Core..:? "ruleViolationInfo"))
 
 instance Core.ToJSON DlpRuleViolation where
   toJSON DlpRuleViolation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ruleViolationInfo" Core..=)
-              Core.<$> ruleViolationInfo
-          ]
+          [("ruleViolationInfo" Core..=) Core.<$> ruleViolationInfo]
       )
 
 -- | Domain ID of Gmail phishing alerts.
@@ -1510,18 +1703,13 @@ instance Core.FromJSON DomainId where
   parseJSON =
     Core.withObject
       "DomainId"
-      ( \o ->
-          DomainId
-            Core.<$> (o Core..:? "customerPrimaryDomain")
-      )
+      (\o -> DomainId Core.<$> (o Core..:? "customerPrimaryDomain"))
 
 instance Core.ToJSON DomainId where
   toJSON DomainId {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerPrimaryDomain" Core..=)
-              Core.<$> customerPrimaryDomain
-          ]
+          [("customerPrimaryDomain" Core..=) Core.<$> customerPrimaryDomain]
       )
 
 -- | A takeout operation for the entire domain was initiated by an admin. Derived from audit logs.
@@ -1559,8 +1747,7 @@ instance Core.ToJSON DomainWideTakeoutInitiated where
     Core.object
       ( Core.catMaybes
           [ ("email" Core..=) Core.<$> email,
-            ("takeoutRequestId" Core..=)
-              Core.<$> takeoutRequestId
+            ("takeoutRequestId" Core..=) Core.<$> takeoutRequestId
           ]
       )
 
@@ -1576,11 +1763,98 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Individual entity affected by, or related to, an alert.
+--
+-- /See:/ 'newEntity' smart constructor.
+data Entity = Entity
+  { -- | Link to a Security Investigation Tool search based on this entity, if available.
+    link :: (Core.Maybe Core.Text),
+    -- | Human-readable name of this entity, such as an email address, file ID, or device name.
+    name :: (Core.Maybe Core.Text),
+    -- | Extra values beyond name. The order of values should align with headers in EntityList.
+    values :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Entity' with the minimum fields required to make a request.
+newEntity ::
+  Entity
+newEntity =
+  Entity
+    { link = Core.Nothing,
+      name = Core.Nothing,
+      values = Core.Nothing
+    }
+
+instance Core.FromJSON Entity where
+  parseJSON =
+    Core.withObject
+      "Entity"
+      ( \o ->
+          Entity
+            Core.<$> (o Core..:? "link")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "values")
+      )
+
+instance Core.ToJSON Entity where
+  toJSON Entity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("link" Core..=) Core.<$> link,
+            ("name" Core..=) Core.<$> name,
+            ("values" Core..=) Core.<$> values
+          ]
+      )
+
+-- | EntityList stores entities in a format that can be translated to a table in the Alert Center UI.
+--
+-- /See:/ 'newEntityList' smart constructor.
+data EntityList = EntityList
+  { -- | List of entities affected by the alert.
+    entities :: (Core.Maybe [Entity]),
+    -- | Headers of the values in entities. If no value is defined in Entity, this field should be empty.
+    headers :: (Core.Maybe [Core.Text]),
+    -- | Name of the key detail used to display this entity list.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EntityList' with the minimum fields required to make a request.
+newEntityList ::
+  EntityList
+newEntityList =
+  EntityList
+    { entities = Core.Nothing,
+      headers = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON EntityList where
+  parseJSON =
+    Core.withObject
+      "EntityList"
+      ( \o ->
+          EntityList
+            Core.<$> (o Core..:? "entities")
+            Core.<*> (o Core..:? "headers")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON EntityList where
+  toJSON EntityList {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("entities" Core..=) Core.<$> entities,
+            ("headers" Core..=) Core.<$> headers,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
 
 -- | Details of a message in phishing spike alert.
 --
@@ -1644,14 +1918,11 @@ instance Core.ToJSON GmailMessageInfo where
   toJSON GmailMessageInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attachmentsSha256Hash" Core..=)
-              Core.<$> attachmentsSha256Hash,
+          [ ("attachmentsSha256Hash" Core..=) Core.<$> attachmentsSha256Hash,
             ("date" Core..=) Core.<$> date,
-            ("md5HashMessageBody" Core..=)
-              Core.<$> md5HashMessageBody,
+            ("md5HashMessageBody" Core..=) Core.<$> md5HashMessageBody,
             ("md5HashSubject" Core..=) Core.<$> md5HashSubject,
-            ("messageBodySnippet" Core..=)
-              Core.<$> messageBodySnippet,
+            ("messageBodySnippet" Core..=) Core.<$> messageBodySnippet,
             ("messageId" Core..=) Core.<$> messageId,
             ("recipient" Core..=) Core.<$> recipient,
             ("sentTime" Core..=) Core.<$> sentTime,
@@ -1709,8 +1980,7 @@ instance Core.ToJSON GoogleOperations where
   toJSON GoogleOperations {..} =
     Core.object
       ( Core.catMaybes
-          [ ("affectedUserEmails" Core..=)
-              Core.<$> affectedUserEmails,
+          [ ("affectedUserEmails" Core..=) Core.<$> affectedUserEmails,
             ("attachmentData" Core..=) Core.<$> attachmentData,
             ("description" Core..=) Core.<$> description,
             ("domain" Core..=) Core.<$> domain,
@@ -1738,17 +2008,12 @@ instance Core.FromJSON ListAlertFeedbackResponse where
   parseJSON =
     Core.withObject
       "ListAlertFeedbackResponse"
-      ( \o ->
-          ListAlertFeedbackResponse
-            Core.<$> (o Core..:? "feedback")
-      )
+      (\o -> ListAlertFeedbackResponse Core.<$> (o Core..:? "feedback"))
 
 instance Core.ToJSON ListAlertFeedbackResponse where
   toJSON ListAlertFeedbackResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("feedback" Core..=) Core.<$> feedback]
-      )
+      (Core.catMaybes [("feedback" Core..=) Core.<$> feedback])
 
 -- | Response message for an alert listing request.
 --
@@ -1765,7 +2030,10 @@ data ListAlertsResponse = ListAlertsResponse
 newListAlertsResponse ::
   ListAlertsResponse
 newListAlertsResponse =
-  ListAlertsResponse {alerts = Core.Nothing, nextPageToken = Core.Nothing}
+  ListAlertsResponse
+    { alerts = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListAlertsResponse where
   parseJSON =
@@ -1872,8 +2140,7 @@ instance Core.ToJSON MailPhishing where
             ("isInternal" Core..=) Core.<$> isInternal,
             ("maliciousEntity" Core..=) Core.<$> maliciousEntity,
             ("messages" Core..=) Core.<$> messages,
-            ("systemActionType" Core..=)
-              Core.<$> systemActionType
+            ("systemActionType" Core..=) Core.<$> systemActionType
           ]
       )
 
@@ -1994,10 +2261,8 @@ instance Core.ToJSON MatchInfo where
   toJSON MatchInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("predefinedDetector" Core..=)
-              Core.<$> predefinedDetector,
-            ("userDefinedDetector" Core..=)
-              Core.<$> userDefinedDetector
+          [ ("predefinedDetector" Core..=) Core.<$> predefinedDetector,
+            ("userDefinedDetector" Core..=) Core.<$> userDefinedDetector
           ]
       )
 
@@ -2016,7 +2281,10 @@ data MergeInfo = MergeInfo
 newMergeInfo ::
   MergeInfo
 newMergeInfo =
-  MergeInfo {newAlertId' = Core.Nothing, newIncidentTrackingId' = Core.Nothing}
+  MergeInfo
+    { newAlertId' = Core.Nothing,
+      newIncidentTrackingId' = Core.Nothing
+    }
 
 instance Core.FromJSON MergeInfo where
   parseJSON =
@@ -2033,8 +2301,7 @@ instance Core.ToJSON MergeInfo where
     Core.object
       ( Core.catMaybes
           [ ("newAlertId" Core..=) Core.<$> newAlertId',
-            ("newIncidentTrackingId" Core..=)
-              Core.<$> newIncidentTrackingId'
+            ("newIncidentTrackingId" Core..=) Core.<$> newIncidentTrackingId'
           ]
       )
 
@@ -2056,18 +2323,13 @@ instance Core.FromJSON Notification where
   parseJSON =
     Core.withObject
       "Notification"
-      ( \o ->
-          Notification
-            Core.<$> (o Core..:? "cloudPubsubTopic")
-      )
+      (\o -> Notification Core.<$> (o Core..:? "cloudPubsubTopic"))
 
 instance Core.ToJSON Notification where
   toJSON Notification {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloudPubsubTopic" Core..=)
-              Core.<$> cloudPubsubTopic
-          ]
+          [("cloudPubsubTopic" Core..=) Core.<$> cloudPubsubTopic]
       )
 
 -- | Alert for a spike in user reported phishing. /Warning/: This type has been deprecated. Use </admin-sdk/alertcenter/reference/rest/v1beta1/MailPhishing MailPhishing> instead.
@@ -2131,25 +2393,23 @@ newtype PredefinedDetectorInfo = PredefinedDetectorInfo
 -- | Creates a value of 'PredefinedDetectorInfo' with the minimum fields required to make a request.
 newPredefinedDetectorInfo ::
   PredefinedDetectorInfo
-newPredefinedDetectorInfo = PredefinedDetectorInfo {detectorName = Core.Nothing}
+newPredefinedDetectorInfo =
+  PredefinedDetectorInfo {detectorName = Core.Nothing}
 
 instance Core.FromJSON PredefinedDetectorInfo where
   parseJSON =
     Core.withObject
       "PredefinedDetectorInfo"
       ( \o ->
-          PredefinedDetectorInfo
-            Core.<$> (o Core..:? "detectorName")
+          PredefinedDetectorInfo Core.<$> (o Core..:? "detectorName")
       )
 
 instance Core.ToJSON PredefinedDetectorInfo where
   toJSON PredefinedDetectorInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("detectorName" Core..=) Core.<$> detectorName]
-      )
+      (Core.catMaybes [("detectorName" Core..=) Core.<$> detectorName])
 
--- | Event occurred when primary admin changed in customer\'s account. The event are being received from insight forwarder
+-- | -   Event occurred when primary admin changed in customer\'s account. The event are being received from insight forwarder
 --
 -- /See:/ 'newPrimaryAdminChangedEvent' smart constructor.
 data PrimaryAdminChangedEvent = PrimaryAdminChangedEvent
@@ -2188,10 +2448,8 @@ instance Core.ToJSON PrimaryAdminChangedEvent where
     Core.object
       ( Core.catMaybes
           [ ("domain" Core..=) Core.<$> domain,
-            ("previousAdminEmail" Core..=)
-              Core.<$> previousAdminEmail,
-            ("updatedAdminEmail" Core..=)
-              Core.<$> updatedAdminEmail
+            ("previousAdminEmail" Core..=) Core.<$> previousAdminEmail,
+            ("updatedAdminEmail" Core..=) Core.<$> updatedAdminEmail
           ]
       )
 
@@ -2270,19 +2528,17 @@ instance Core.FromJSON RequestInfo where
           RequestInfo
             Core.<$> (o Core..:? "appDeveloperEmail")
             Core.<*> (o Core..:? "appKey")
-            Core.<*> ( o Core..:? "numberOfRequests"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numberOfRequests" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON RequestInfo where
   toJSON RequestInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appDeveloperEmail" Core..=)
-              Core.<$> appDeveloperEmail,
+          [ ("appDeveloperEmail" Core..=) Core.<$> appDeveloperEmail,
             ("appKey" Core..=) Core.<$> appKey,
-            ("numberOfRequests" Core..=) Core.. Core.AsText
+            ("numberOfRequests" Core..=)
+              Core.. Core.AsText
               Core.<$> numberOfRequests
           ]
       )
@@ -2291,7 +2547,13 @@ instance Core.ToJSON RequestInfo where
 --
 -- /See:/ 'newResourceInfo' smart constructor.
 data ResourceInfo = ResourceInfo
-  { -- | Drive file ID.
+  { -- | Chat attachment ID.
+    chatAttachmentId :: (Core.Maybe Core.Text),
+    -- | Chat message ID.
+    chatMessageId :: (Core.Maybe Core.Text),
+    -- | Id to identify a device. For example, for Android devices, this is the \"Android Device Id\" and for Chrome OS devices, it\'s the \"Device Virtual Id\".
+    deviceId :: (Core.Maybe Core.Text),
+    -- | Drive file ID.
     documentId :: (Core.Maybe Core.Text),
     -- | Title of the resource, for example email subject, or document title.
     resourceTitle :: (Core.Maybe Core.Text)
@@ -2302,7 +2564,13 @@ data ResourceInfo = ResourceInfo
 newResourceInfo ::
   ResourceInfo
 newResourceInfo =
-  ResourceInfo {documentId = Core.Nothing, resourceTitle = Core.Nothing}
+  ResourceInfo
+    { chatAttachmentId = Core.Nothing,
+      chatMessageId = Core.Nothing,
+      deviceId = Core.Nothing,
+      documentId = Core.Nothing,
+      resourceTitle = Core.Nothing
+    }
 
 instance Core.FromJSON ResourceInfo where
   parseJSON =
@@ -2310,7 +2578,10 @@ instance Core.FromJSON ResourceInfo where
       "ResourceInfo"
       ( \o ->
           ResourceInfo
-            Core.<$> (o Core..:? "documentId")
+            Core.<$> (o Core..:? "chatAttachmentId")
+            Core.<*> (o Core..:? "chatMessageId")
+            Core.<*> (o Core..:? "deviceId")
+            Core.<*> (o Core..:? "documentId")
             Core.<*> (o Core..:? "resourceTitle")
       )
 
@@ -2318,7 +2589,10 @@ instance Core.ToJSON ResourceInfo where
   toJSON ResourceInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentId" Core..=) Core.<$> documentId,
+          [ ("chatAttachmentId" Core..=) Core.<$> chatAttachmentId,
+            ("chatMessageId" Core..=) Core.<$> chatMessageId,
+            ("deviceId" Core..=) Core.<$> deviceId,
+            ("documentId" Core..=) Core.<$> documentId,
             ("resourceTitle" Core..=) Core.<$> resourceTitle
           ]
       )
@@ -2337,7 +2611,8 @@ data RuleInfo = RuleInfo
 -- | Creates a value of 'RuleInfo' with the minimum fields required to make a request.
 newRuleInfo ::
   RuleInfo
-newRuleInfo = RuleInfo {displayName = Core.Nothing, resourceName = Core.Nothing}
+newRuleInfo =
+  RuleInfo {displayName = Core.Nothing, resourceName = Core.Nothing}
 
 instance Core.FromJSON RuleInfo where
   parseJSON =
@@ -2364,6 +2639,8 @@ instance Core.ToJSON RuleInfo where
 data RuleViolationInfo = RuleViolationInfo
   { -- | Source of the data.
     dataSource :: (Core.Maybe RuleViolationInfo_DataSource),
+    -- | Event associated with this alert after applying the rule.
+    eventType :: (Core.Maybe RuleViolationInfo_EventType),
     -- | List of matches that were found in the resource content.
     matchInfo :: (Core.Maybe [MatchInfo]),
     -- | Resource recipients. For Drive, they are grantees that the Drive file was shared with at the time of rule triggering. Valid values include user emails, group emails, domains, or \'anyone\' if the file was publicly accessible. If the file was private the recipients list will be empty. For Gmail, they are emails of the users or groups that the Gmail message was sent to.
@@ -2391,6 +2668,7 @@ newRuleViolationInfo ::
 newRuleViolationInfo =
   RuleViolationInfo
     { dataSource = Core.Nothing,
+      eventType = Core.Nothing,
       matchInfo = Core.Nothing,
       recipients = Core.Nothing,
       resourceInfo = Core.Nothing,
@@ -2409,6 +2687,7 @@ instance Core.FromJSON RuleViolationInfo where
       ( \o ->
           RuleViolationInfo
             Core.<$> (o Core..:? "dataSource")
+            Core.<*> (o Core..:? "eventType")
             Core.<*> (o Core..:? "matchInfo")
             Core.<*> (o Core..:? "recipients")
             Core.<*> (o Core..:? "resourceInfo")
@@ -2425,23 +2704,20 @@ instance Core.ToJSON RuleViolationInfo where
     Core.object
       ( Core.catMaybes
           [ ("dataSource" Core..=) Core.<$> dataSource,
+            ("eventType" Core..=) Core.<$> eventType,
             ("matchInfo" Core..=) Core.<$> matchInfo,
             ("recipients" Core..=) Core.<$> recipients,
             ("resourceInfo" Core..=) Core.<$> resourceInfo,
             ("ruleInfo" Core..=) Core.<$> ruleInfo,
-            ("suppressedActionTypes" Core..=)
-              Core.<$> suppressedActionTypes,
+            ("suppressedActionTypes" Core..=) Core.<$> suppressedActionTypes,
             ("trigger" Core..=) Core.<$> trigger,
-            ("triggeredActionInfo" Core..=)
-              Core.<$> triggeredActionInfo,
-            ("triggeredActionTypes" Core..=)
-              Core.<$> triggeredActionTypes,
-            ("triggeringUserEmail" Core..=)
-              Core.<$> triggeringUserEmail
+            ("triggeredActionInfo" Core..=) Core.<$> triggeredActionInfo,
+            ("triggeredActionTypes" Core..=) Core.<$> triggeredActionTypes,
+            ("triggeringUserEmail" Core..=) Core.<$> triggeringUserEmail
           ]
       )
 
--- | Event occurred when SSO Profile created in customer\'s account. The event are being received from insight forwarder
+-- | -   Event occurred when SSO Profile created in customer\'s account. The event are being received from insight forwarder
 --
 -- /See:/ 'newSSOProfileCreatedEvent' smart constructor.
 newtype SSOProfileCreatedEvent = SSOProfileCreatedEvent
@@ -2469,12 +2745,10 @@ instance Core.ToJSON SSOProfileCreatedEvent where
   toJSON SSOProfileCreatedEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inboundSsoProfileName" Core..=)
-              Core.<$> inboundSsoProfileName
-          ]
+          [("inboundSsoProfileName" Core..=) Core.<$> inboundSsoProfileName]
       )
 
--- | Event occurred when SSO Profile deleted in customer\'s account. The event are being received from insight forwarder
+-- | -   Event occurred when SSO Profile deleted in customer\'s account. The event are being received from insight forwarder
 --
 -- /See:/ 'newSSOProfileDeletedEvent' smart constructor.
 newtype SSOProfileDeletedEvent = SSOProfileDeletedEvent
@@ -2502,12 +2776,10 @@ instance Core.ToJSON SSOProfileDeletedEvent where
   toJSON SSOProfileDeletedEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inboundSsoProfileName" Core..=)
-              Core.<$> inboundSsoProfileName
-          ]
+          [("inboundSsoProfileName" Core..=) Core.<$> inboundSsoProfileName]
       )
 
--- | Event occurred when SSO Profile updated in customer\'s account. The event are being received from insight forwarder
+-- | -   Event occurred when SSO Profile updated in customer\'s account. The event are being received from insight forwarder
 --
 -- /See:/ 'newSSOProfileUpdatedEvent' smart constructor.
 data SSOProfileUpdatedEvent = SSOProfileUpdatedEvent
@@ -2543,8 +2815,7 @@ instance Core.ToJSON SSOProfileUpdatedEvent where
       ( Core.catMaybes
           [ ("inboundSsoProfileChanges" Core..=)
               Core.<$> inboundSsoProfileChanges,
-            ("inboundSsoProfileName" Core..=)
-              Core.<$> inboundSsoProfileName
+            ("inboundSsoProfileName" Core..=) Core.<$> inboundSsoProfileName
           ]
       )
 
@@ -2606,12 +2877,9 @@ instance Core.ToJSON SensitiveAdminAction where
             ("eventTime" Core..=) Core.<$> eventTime,
             ("primaryAdminChangedEvent" Core..=)
               Core.<$> primaryAdminChangedEvent,
-            ("ssoProfileCreatedEvent" Core..=)
-              Core.<$> ssoProfileCreatedEvent,
-            ("ssoProfileDeletedEvent" Core..=)
-              Core.<$> ssoProfileDeletedEvent,
-            ("ssoProfileUpdatedEvent" Core..=)
-              Core.<$> ssoProfileUpdatedEvent,
+            ("ssoProfileCreatedEvent" Core..=) Core.<$> ssoProfileCreatedEvent,
+            ("ssoProfileDeletedEvent" Core..=) Core.<$> ssoProfileDeletedEvent,
+            ("ssoProfileUpdatedEvent" Core..=) Core.<$> ssoProfileUpdatedEvent,
             ("superAdminPasswordResetEvent" Core..=)
               Core.<$> superAdminPasswordResetEvent
           ]
@@ -2635,16 +2903,12 @@ instance Core.FromJSON Settings where
   parseJSON =
     Core.withObject
       "Settings"
-      ( \o ->
-          Settings Core.<$> (o Core..:? "notifications")
-      )
+      (\o -> Settings Core.<$> (o Core..:? "notifications"))
 
 instance Core.ToJSON Settings where
   toJSON Settings {..} =
     Core.object
-      ( Core.catMaybes
-          [("notifications" Core..=) Core.<$> notifications]
-      )
+      (Core.catMaybes [("notifications" Core..=) Core.<$> notifications])
 
 -- | A state-sponsored attack alert. Derived from audit logs.
 --
@@ -2658,20 +2922,18 @@ newtype StateSponsoredAttack = StateSponsoredAttack
 -- | Creates a value of 'StateSponsoredAttack' with the minimum fields required to make a request.
 newStateSponsoredAttack ::
   StateSponsoredAttack
-newStateSponsoredAttack = StateSponsoredAttack {email = Core.Nothing}
+newStateSponsoredAttack =
+  StateSponsoredAttack {email = Core.Nothing}
 
 instance Core.FromJSON StateSponsoredAttack where
   parseJSON =
     Core.withObject
       "StateSponsoredAttack"
-      ( \o ->
-          StateSponsoredAttack Core.<$> (o Core..:? "email")
-      )
+      (\o -> StateSponsoredAttack Core.<$> (o Core..:? "email"))
 
 instance Core.ToJSON StateSponsoredAttack where
   toJSON StateSponsoredAttack {..} =
-    Core.object
-      (Core.catMaybes [("email" Core..=) Core.<$> email])
+    Core.object (Core.catMaybes [("email" Core..=) Core.<$> email])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -2690,7 +2952,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2726,21 +2992,19 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
--- | Event occurred when password was reset for super admin in customer\'s account. The event are being received from insight forwarder
+-- | -   Event occurred when password was reset for super admin in customer\'s account. The event are being received from insight forwarder
 --
 -- /See:/ 'newSuperAdminPasswordResetEvent' smart constructor.
 newtype SuperAdminPasswordResetEvent = SuperAdminPasswordResetEvent
@@ -2760,15 +3024,48 @@ instance Core.FromJSON SuperAdminPasswordResetEvent where
     Core.withObject
       "SuperAdminPasswordResetEvent"
       ( \o ->
-          SuperAdminPasswordResetEvent
-            Core.<$> (o Core..:? "userEmail")
+          SuperAdminPasswordResetEvent Core.<$> (o Core..:? "userEmail")
       )
 
 instance Core.ToJSON SuperAdminPasswordResetEvent where
   toJSON SuperAdminPasswordResetEvent {..} =
     Core.object
+      (Core.catMaybes [("userEmail" Core..=) Core.<$> userEmail])
+
+-- | Support ticket related to Access Approvals request
+--
+-- /See:/ 'newSupportTicket' smart constructor.
+data SupportTicket = SupportTicket
+  { -- | Support ticket ID
+    ticketId :: (Core.Maybe Core.Text),
+    -- | Link to support ticket
+    ticketUrl :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SupportTicket' with the minimum fields required to make a request.
+newSupportTicket ::
+  SupportTicket
+newSupportTicket =
+  SupportTicket {ticketId = Core.Nothing, ticketUrl = Core.Nothing}
+
+instance Core.FromJSON SupportTicket where
+  parseJSON =
+    Core.withObject
+      "SupportTicket"
+      ( \o ->
+          SupportTicket
+            Core.<$> (o Core..:? "ticketId")
+            Core.<*> (o Core..:? "ticketUrl")
+      )
+
+instance Core.ToJSON SupportTicket where
+  toJSON SupportTicket {..} =
+    Core.object
       ( Core.catMaybes
-          [("userEmail" Core..=) Core.<$> userEmail]
+          [ ("ticketId" Core..=) Core.<$> ticketId,
+            ("ticketUrl" Core..=) Core.<$> ticketUrl
+          ]
       )
 
 -- | A mobile suspicious activity alert. Derived from audit logs.
@@ -2794,7 +3091,8 @@ instance Core.FromJSON SuspiciousActivity where
       "SuspiciousActivity"
       ( \o ->
           SuspiciousActivity
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "events")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "events")
       )
 
 instance Core.ToJSON SuspiciousActivity where
@@ -2847,10 +3145,7 @@ newSuspiciousActivitySecurityDetail =
       serialNumber = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SuspiciousActivitySecurityDetail
-  where
+instance Core.FromJSON SuspiciousActivitySecurityDetail where
   parseJSON =
     Core.withObject
       "SuspiciousActivitySecurityDetail"
@@ -2949,21 +3244,18 @@ newtype TransferMisconfiguration = TransferMisconfiguration
 -- | Creates a value of 'TransferMisconfiguration' with the minimum fields required to make a request.
 newTransferMisconfiguration ::
   TransferMisconfiguration
-newTransferMisconfiguration = TransferMisconfiguration {errors = Core.Nothing}
+newTransferMisconfiguration =
+  TransferMisconfiguration {errors = Core.Nothing}
 
 instance Core.FromJSON TransferMisconfiguration where
   parseJSON =
     Core.withObject
       "TransferMisconfiguration"
-      ( \o ->
-          TransferMisconfiguration
-            Core.<$> (o Core..:? "errors")
-      )
+      (\o -> TransferMisconfiguration Core.<$> (o Core..:? "errors"))
 
 instance Core.ToJSON TransferMisconfiguration where
   toJSON TransferMisconfiguration {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 -- | A request to undelete a specific alert that was marked for deletion.
 --
@@ -2977,23 +3269,19 @@ newtype UndeleteAlertRequest = UndeleteAlertRequest
 -- | Creates a value of 'UndeleteAlertRequest' with the minimum fields required to make a request.
 newUndeleteAlertRequest ::
   UndeleteAlertRequest
-newUndeleteAlertRequest = UndeleteAlertRequest {customerId = Core.Nothing}
+newUndeleteAlertRequest =
+  UndeleteAlertRequest {customerId = Core.Nothing}
 
 instance Core.FromJSON UndeleteAlertRequest where
   parseJSON =
     Core.withObject
       "UndeleteAlertRequest"
-      ( \o ->
-          UndeleteAlertRequest
-            Core.<$> (o Core..:? "customerId")
-      )
+      (\o -> UndeleteAlertRequest Core.<$> (o Core..:? "customerId"))
 
 instance Core.ToJSON UndeleteAlertRequest where
   toJSON UndeleteAlertRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("customerId" Core..=) Core.<$> customerId]
-      )
+      (Core.catMaybes [("customerId" Core..=) Core.<$> customerId])
 
 -- | A user.
 --
@@ -3009,7 +3297,8 @@ data User = User
 -- | Creates a value of 'User' with the minimum fields required to make a request.
 newUser ::
   User
-newUser = User {displayName = Core.Nothing, emailAddress = Core.Nothing}
+newUser =
+  User {displayName = Core.Nothing, emailAddress = Core.Nothing}
 
 instance Core.FromJSON User where
   parseJSON =
@@ -3030,7 +3319,7 @@ instance Core.ToJSON User where
           ]
       )
 
--- | Alerts from UserChanges bucket Rules for predefined rules which contain the below rules. Suspended user made active New user Added User suspended (by admin) User granted admin privileges User admin privileges revoked User deleted Users password changed
+-- | -   Alerts from UserChanges bucket Rules for predefined rules which contain the below rules. Suspended user made active New user Added User suspended (by admin) User granted admin privileges User admin privileges revoked User deleted Users password changed
 --
 -- /See:/ 'newUserChanges' smart constructor.
 newtype UserChanges = UserChanges
@@ -3052,8 +3341,7 @@ instance Core.FromJSON UserChanges where
 
 instance Core.ToJSON UserChanges where
   toJSON UserChanges {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Detector defined by administrators.
 --
@@ -3168,21 +3456,18 @@ newtype VoicemailMisconfiguration = VoicemailMisconfiguration
 -- | Creates a value of 'VoicemailMisconfiguration' with the minimum fields required to make a request.
 newVoicemailMisconfiguration ::
   VoicemailMisconfiguration
-newVoicemailMisconfiguration = VoicemailMisconfiguration {errors = Core.Nothing}
+newVoicemailMisconfiguration =
+  VoicemailMisconfiguration {errors = Core.Nothing}
 
 instance Core.FromJSON VoicemailMisconfiguration where
   parseJSON =
     Core.withObject
       "VoicemailMisconfiguration"
-      ( \o ->
-          VoicemailMisconfiguration
-            Core.<$> (o Core..:? "errors")
-      )
+      (\o -> VoicemailMisconfiguration Core.<$> (o Core..:? "errors"))
 
 instance Core.ToJSON VoicemailMisconfiguration where
   toJSON VoicemailMisconfiguration {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 -- | Issue(s) with a voicemail recipient.
 --
@@ -3199,7 +3484,10 @@ data VoicemailRecipientError = VoicemailRecipientError
 newVoicemailRecipientError ::
   VoicemailRecipientError
 newVoicemailRecipientError =
-  VoicemailRecipientError {email = Core.Nothing, invalidReason = Core.Nothing}
+  VoicemailRecipientError
+    { email = Core.Nothing,
+      invalidReason = Core.Nothing
+    }
 
 instance Core.FromJSON VoicemailRecipientError where
   parseJSON =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Patch
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.patch@ method which the
 -- 'DialogFlowProjectsLocationsAgentsPatch' request conforms to.
@@ -54,12 +52,8 @@ type DialogFlowProjectsLocationsAgentsPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Agent
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Agent
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3Agent
+    Core.:> Core.Patch '[Core.JSON] GoogleCloudDialogflowCxV3Agent
 
 -- | Updates the specified agent. Note: You should always train flows prior to sending them queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
 --
@@ -103,34 +97,29 @@ newDialogFlowProjectsLocationsAgentsPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DialogFlowProjectsLocationsAgentsPatch
-  where
+instance Core.GoogleRequest DialogFlowProjectsLocationsAgentsPatch where
   type
     Rs DialogFlowProjectsLocationsAgentsPatch =
       GoogleCloudDialogflowCxV3Agent
   type
     Scopes DialogFlowProjectsLocationsAgentsPatch =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsPatchResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsPatchResource
+          )
+          Core.mempty

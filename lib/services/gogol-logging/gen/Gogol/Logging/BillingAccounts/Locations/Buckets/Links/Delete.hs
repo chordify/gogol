@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.BillingAccounts.Locations.Buckets.Links.Delete
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.billingAccounts.locations.buckets.links.delete@ method which the
 -- 'LoggingBillingAccountsLocationsBucketsLinksDelete' request conforms to.
@@ -65,7 +63,7 @@ data LoggingBillingAccountsLocationsBucketsLinksDelete = LoggingBillingAccountsL
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The full resource name of the link to delete.\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK_ID\"
+    -- | Required. The full resource name of the link to delete. \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK_ID]\"
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,12 +74,13 @@ data LoggingBillingAccountsLocationsBucketsLinksDelete = LoggingBillingAccountsL
 
 -- | Creates a value of 'LoggingBillingAccountsLocationsBucketsLinksDelete' with the minimum fields required to make a request.
 newLoggingBillingAccountsLocationsBucketsLinksDelete ::
-  -- |  Required. The full resource name of the link to delete.\"projects\/PROJECT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"organizations\/ORGANIZATION/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"billingAccounts\/BILLING/ACCOUNT/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK/ID\" \"folders\/FOLDER/ID\/locations\/LOCATION/ID\/buckets\/BUCKET/ID\/links\/LINK_ID\" See 'name'.
+  -- |  Required. The full resource name of the link to delete. \"projects\/[PROJECT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"organizations\/[ORGANIZATION/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"billingAccounts\/[BILLING/ACCOUNT/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK/ID]\" \"folders\/[FOLDER/ID]\/locations\/[LOCATION/ID]\/buckets\/[BUCKET/ID]\/links\/[LINK_ID]\" See 'name'.
   Core.Text ->
   LoggingBillingAccountsLocationsBucketsLinksDelete
 newLoggingBillingAccountsLocationsBucketsLinksDelete name =
   LoggingBillingAccountsLocationsBucketsLinksDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,29 +93,26 @@ instance
     LoggingBillingAccountsLocationsBucketsLinksDelete
   where
   type
-    Rs
-      LoggingBillingAccountsLocationsBucketsLinksDelete =
+    Rs LoggingBillingAccountsLocationsBucketsLinksDelete =
       Operation
   type
-    Scopes
-      LoggingBillingAccountsLocationsBucketsLinksDelete =
+    Scopes LoggingBillingAccountsLocationsBucketsLinksDelete =
       '[CloudPlatform'FullControl, Logging'Admin]
-  requestClient
-    LoggingBillingAccountsLocationsBucketsLinksDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingBillingAccountsLocationsBucketsLinksDeleteResource
-            )
-            Core.mempty
+  requestClient LoggingBillingAccountsLocationsBucketsLinksDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                LoggingBillingAccountsLocationsBucketsLinksDeleteResource
+          )
+          Core.mempty

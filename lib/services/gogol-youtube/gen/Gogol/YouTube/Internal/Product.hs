@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTube.Internal.Product
@@ -214,6 +212,14 @@ module Gogol.YouTube.Internal.Product
     ChannelToStoreLinkDetails (..),
     newChannelToStoreLinkDetails,
 
+    -- * ChannelToStoreLinkDetailsBillingDetails
+    ChannelToStoreLinkDetailsBillingDetails (..),
+    newChannelToStoreLinkDetailsBillingDetails,
+
+    -- * ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+    ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails (..),
+    newChannelToStoreLinkDetailsMerchantAffiliateProgramDetails,
+
     -- * ChannelTopicDetails
     ChannelTopicDetails (..),
     newChannelTopicDetails,
@@ -257,6 +263,10 @@ module Gogol.YouTube.Internal.Product
     -- * Cuepoint
     Cuepoint (..),
     newCuepoint,
+
+    -- * CuepointSchedule
+    CuepointSchedule (..),
+    newCuepointSchedule,
 
     -- * Entity
     Entity (..),
@@ -329,6 +339,10 @@ module Gogol.YouTube.Internal.Product
     -- * LiveBroadcastListResponse
     LiveBroadcastListResponse (..),
     newLiveBroadcastListResponse,
+
+    -- * LiveBroadcastMonetizationDetails
+    LiveBroadcastMonetizationDetails (..),
+    newLiveBroadcastMonetizationDetails,
 
     -- * LiveBroadcastSnippet
     LiveBroadcastSnippet (..),
@@ -405,6 +419,18 @@ module Gogol.YouTube.Internal.Product
     -- * LiveChatNewSponsorDetails
     LiveChatNewSponsorDetails (..),
     newLiveChatNewSponsorDetails,
+
+    -- * LiveChatPollDetails
+    LiveChatPollDetails (..),
+    newLiveChatPollDetails,
+
+    -- * LiveChatPollDetailsPollMetadata
+    LiveChatPollDetailsPollMetadata (..),
+    newLiveChatPollDetailsPollMetadata,
+
+    -- * LiveChatPollDetailsPollMetadataPollOption
+    LiveChatPollDetailsPollMetadataPollOption (..),
+    newLiveChatPollDetailsPollMetadataPollOption,
 
     -- * LiveChatSuperChatDetails
     LiveChatSuperChatDetails (..),
@@ -513,6 +539,18 @@ module Gogol.YouTube.Internal.Product
     -- * PlaylistContentDetails
     PlaylistContentDetails (..),
     newPlaylistContentDetails,
+
+    -- * PlaylistImage
+    PlaylistImage (..),
+    newPlaylistImage,
+
+    -- * PlaylistImageListResponse
+    PlaylistImageListResponse (..),
+    newPlaylistImageListResponse,
+
+    -- * PlaylistImageSnippet
+    PlaylistImageSnippet (..),
+    newPlaylistImageSnippet,
 
     -- * PlaylistItem
     PlaylistItem (..),
@@ -738,6 +776,10 @@ module Gogol.YouTube.Internal.Product
     VideoMonetizationDetails (..),
     newVideoMonetizationDetails,
 
+    -- * VideoPaidProductPlacementDetails
+    VideoPaidProductPlacementDetails (..),
+    newVideoPaidProductPlacementDetails,
+
     -- * VideoPlayer
     VideoPlayer (..),
     newVideoPlayer,
@@ -786,25 +828,25 @@ module Gogol.YouTube.Internal.Product
     VideoTopicDetails (..),
     newVideoTopicDetails,
 
+    -- * VideoTrainability
+    VideoTrainability (..),
+    newVideoTrainability,
+
     -- * WatchSettings
     WatchSettings (..),
     newWatchSettings,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Internal.Sum
 
 --
 -- /See:/ 'newAbuseReport' smart constructor.
 data AbuseReport = AbuseReport
-  { -- |
-    abuseTypes :: (Core.Maybe [AbuseType]),
-    -- |
+  { abuseTypes :: (Core.Maybe [AbuseType]),
     description :: (Core.Maybe Core.Text),
-    -- |
     relatedEntities :: (Core.Maybe [RelatedEntity]),
-    -- |
     subject :: (Core.Maybe Entity)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -846,8 +888,7 @@ instance Core.ToJSON AbuseReport where
 --
 -- /See:/ 'newAbuseType' smart constructor.
 newtype AbuseType = AbuseType
-  { -- |
-    id :: (Core.Maybe Core.Text)
+  { id :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -864,8 +905,7 @@ instance Core.FromJSON AbuseType where
 
 instance Core.ToJSON AbuseType where
   toJSON AbuseType {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 -- | Rights management policy for YouTube resources.
 --
@@ -1061,16 +1101,13 @@ instance Core.FromJSON ActivityContentDetailsBulletin where
     Core.withObject
       "ActivityContentDetailsBulletin"
       ( \o ->
-          ActivityContentDetailsBulletin
-            Core.<$> (o Core..:? "resourceId")
+          ActivityContentDetailsBulletin Core.<$> (o Core..:? "resourceId")
       )
 
 instance Core.ToJSON ActivityContentDetailsBulletin where
   toJSON ActivityContentDetailsBulletin {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Details about a resource which was added to a channel.
 --
@@ -1087,10 +1124,7 @@ newActivityContentDetailsChannelItem ::
 newActivityContentDetailsChannelItem =
   ActivityContentDetailsChannelItem {resourceId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ActivityContentDetailsChannelItem
-  where
+instance Core.FromJSON ActivityContentDetailsChannelItem where
   parseJSON =
     Core.withObject
       "ActivityContentDetailsChannelItem"
@@ -1099,15 +1133,10 @@ instance
             Core.<$> (o Core..:? "resourceId")
       )
 
-instance
-  Core.ToJSON
-    ActivityContentDetailsChannelItem
-  where
+instance Core.ToJSON ActivityContentDetailsChannelItem where
   toJSON ActivityContentDetailsChannelItem {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Information about a resource that received a comment.
 --
@@ -1129,16 +1158,13 @@ instance Core.FromJSON ActivityContentDetailsComment where
     Core.withObject
       "ActivityContentDetailsComment"
       ( \o ->
-          ActivityContentDetailsComment
-            Core.<$> (o Core..:? "resourceId")
+          ActivityContentDetailsComment Core.<$> (o Core..:? "resourceId")
       )
 
 instance Core.ToJSON ActivityContentDetailsComment where
   toJSON ActivityContentDetailsComment {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Information about a video that was marked as a favorite video.
 --
@@ -1160,16 +1186,13 @@ instance Core.FromJSON ActivityContentDetailsFavorite where
     Core.withObject
       "ActivityContentDetailsFavorite"
       ( \o ->
-          ActivityContentDetailsFavorite
-            Core.<$> (o Core..:? "resourceId")
+          ActivityContentDetailsFavorite Core.<$> (o Core..:? "resourceId")
       )
 
 instance Core.ToJSON ActivityContentDetailsFavorite where
   toJSON ActivityContentDetailsFavorite {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Information about a resource that received a positive (like) rating.
 --
@@ -1191,16 +1214,13 @@ instance Core.FromJSON ActivityContentDetailsLike where
     Core.withObject
       "ActivityContentDetailsLike"
       ( \o ->
-          ActivityContentDetailsLike
-            Core.<$> (o Core..:? "resourceId")
+          ActivityContentDetailsLike Core.<$> (o Core..:? "resourceId")
       )
 
 instance Core.ToJSON ActivityContentDetailsLike where
   toJSON ActivityContentDetailsLike {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Information about a new playlist item.
 --
@@ -1225,10 +1245,7 @@ newActivityContentDetailsPlaylistItem =
       resourceId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ActivityContentDetailsPlaylistItem
-  where
+instance Core.FromJSON ActivityContentDetailsPlaylistItem where
   parseJSON =
     Core.withObject
       "ActivityContentDetailsPlaylistItem"
@@ -1239,10 +1256,7 @@ instance
             Core.<*> (o Core..:? "resourceId")
       )
 
-instance
-  Core.ToJSON
-    ActivityContentDetailsPlaylistItem
-  where
+instance Core.ToJSON ActivityContentDetailsPlaylistItem where
   toJSON ActivityContentDetailsPlaylistItem {..} =
     Core.object
       ( Core.catMaybes
@@ -1296,10 +1310,7 @@ newActivityContentDetailsPromotedItem =
       videoId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ActivityContentDetailsPromotedItem
-  where
+instance Core.FromJSON ActivityContentDetailsPromotedItem where
   parseJSON =
     Core.withObject
       "ActivityContentDetailsPromotedItem"
@@ -1317,20 +1328,15 @@ instance
             Core.<*> (o Core..:? "videoId")
       )
 
-instance
-  Core.ToJSON
-    ActivityContentDetailsPromotedItem
-  where
+instance Core.ToJSON ActivityContentDetailsPromotedItem where
   toJSON ActivityContentDetailsPromotedItem {..} =
     Core.object
       ( Core.catMaybes
           [ ("adTag" Core..=) Core.<$> adTag,
-            ("clickTrackingUrl" Core..=)
-              Core.<$> clickTrackingUrl,
+            ("clickTrackingUrl" Core..=) Core.<$> clickTrackingUrl,
             ("creativeViewUrl" Core..=) Core.<$> creativeViewUrl,
             ("ctaType" Core..=) Core.<$> ctaType,
-            ("customCtaButtonText" Core..=)
-              Core.<$> customCtaButtonText,
+            ("customCtaButtonText" Core..=) Core.<$> customCtaButtonText,
             ("descriptionText" Core..=) Core.<$> descriptionText,
             ("destinationUrl" Core..=) Core.<$> destinationUrl,
             ("forecastingUrl" Core..=) Core.<$> forecastingUrl,
@@ -1362,10 +1368,7 @@ newActivityContentDetailsRecommendation =
       seedResourceId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ActivityContentDetailsRecommendation
-  where
+instance Core.FromJSON ActivityContentDetailsRecommendation where
   parseJSON =
     Core.withObject
       "ActivityContentDetailsRecommendation"
@@ -1376,10 +1379,7 @@ instance
             Core.<*> (o Core..:? "seedResourceId")
       )
 
-instance
-  Core.ToJSON
-    ActivityContentDetailsRecommendation
-  where
+instance Core.ToJSON ActivityContentDetailsRecommendation where
   toJSON ActivityContentDetailsRecommendation {..} =
     Core.object
       ( Core.catMaybes
@@ -1458,10 +1458,7 @@ newActivityContentDetailsSubscription ::
 newActivityContentDetailsSubscription =
   ActivityContentDetailsSubscription {resourceId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ActivityContentDetailsSubscription
-  where
+instance Core.FromJSON ActivityContentDetailsSubscription where
   parseJSON =
     Core.withObject
       "ActivityContentDetailsSubscription"
@@ -1470,15 +1467,10 @@ instance
             Core.<$> (o Core..:? "resourceId")
       )
 
-instance
-  Core.ToJSON
-    ActivityContentDetailsSubscription
-  where
+instance Core.ToJSON ActivityContentDetailsSubscription where
   toJSON ActivityContentDetailsSubscription {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceId" Core..=) Core.<$> resourceId]
-      )
+      (Core.catMaybes [("resourceId" Core..=) Core.<$> resourceId])
 
 -- | Information about the uploaded video.
 --
@@ -1500,16 +1492,13 @@ instance Core.FromJSON ActivityContentDetailsUpload where
     Core.withObject
       "ActivityContentDetailsUpload"
       ( \o ->
-          ActivityContentDetailsUpload
-            Core.<$> (o Core..:? "videoId")
+          ActivityContentDetailsUpload Core.<$> (o Core..:? "videoId")
       )
 
 instance Core.ToJSON ActivityContentDetailsUpload where
   toJSON ActivityContentDetailsUpload {..} =
     Core.object
-      ( Core.catMaybes
-          [("videoId" Core..=) Core.<$> videoId]
-      )
+      (Core.catMaybes [("videoId" Core..=) Core.<$> videoId])
 
 --
 -- /See:/ 'newActivityListResponse' smart constructor.
@@ -1518,7 +1507,6 @@ data ActivityListResponse = ActivityListResponse
     etag :: (Core.Maybe Core.Text),
     -- | Serialized EventId of the request which produced this response.
     eventId :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [Activity]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#activityListResponse\".
     kind :: Core.Text,
@@ -1528,7 +1516,6 @@ data ActivityListResponse = ActivityListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -1560,9 +1547,7 @@ instance Core.FromJSON ActivityListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#activityListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#activityListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -1741,9 +1726,7 @@ instance Core.FromJSON CaptionListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#captionListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#captionListResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -1986,11 +1969,9 @@ instance Core.ToJSON Channel where
     Core.object
       ( Core.catMaybes
           [ ("auditDetails" Core..=) Core.<$> auditDetails,
-            ("brandingSettings" Core..=)
-              Core.<$> brandingSettings,
+            ("brandingSettings" Core..=) Core.<$> brandingSettings,
             ("contentDetails" Core..=) Core.<$> contentDetails,
-            ("contentOwnerDetails" Core..=)
-              Core.<$> contentOwnerDetails,
+            ("contentOwnerDetails" Core..=) Core.<$> contentOwnerDetails,
             ("conversionPings" Core..=) Core.<$> conversionPings,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
@@ -2007,8 +1988,7 @@ instance Core.ToJSON Channel where
 --
 -- /See:/ 'newChannel_Localizations' smart constructor.
 newtype Channel_Localizations = Channel_Localizations
-  { -- |
-    additional :: (Core.HashMap Core.Text ChannelLocalization)
+  { additional :: (Core.HashMap Core.Text ChannelLocalization)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2024,14 +2004,10 @@ instance Core.FromJSON Channel_Localizations where
   parseJSON =
     Core.withObject
       "Channel_Localizations"
-      ( \o ->
-          Channel_Localizations
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Channel_Localizations Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Channel_Localizations where
-  toJSON Channel_Localizations {..} =
-    Core.toJSON additional
+  toJSON Channel_Localizations {..} = Core.toJSON additional
 
 -- | The auditDetails object encapsulates channel data that is relevant for YouTube Partners during the audit process.
 --
@@ -2051,7 +2027,8 @@ newChannelAuditDetails ::
   ChannelAuditDetails
 newChannelAuditDetails =
   ChannelAuditDetails
-    { communityGuidelinesGoodStanding = Core.Nothing,
+    { communityGuidelinesGoodStanding =
+        Core.Nothing,
       contentIdClaimsGoodStanding = Core.Nothing,
       copyrightStrikesGoodStanding = Core.Nothing
     }
@@ -2084,8 +2061,7 @@ instance Core.ToJSON ChannelAuditDetails where
 --
 -- /See:/ 'newChannelBannerResource' smart constructor.
 data ChannelBannerResource = ChannelBannerResource
-  { -- |
-    etag :: (Core.Maybe Core.Text),
+  { etag :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#channelBannerResource\".
     kind :: Core.Text,
     -- | The URL of this banner image.
@@ -2110,9 +2086,7 @@ instance Core.FromJSON ChannelBannerResource where
       ( \o ->
           ChannelBannerResource
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#channelBannerResource"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#channelBannerResource")
             Core.<*> (o Core..:? "url")
       )
 
@@ -2179,8 +2153,7 @@ instance Core.ToJSON ChannelBrandingSettings where
 --
 -- /See:/ 'newChannelContentDetails' smart constructor.
 newtype ChannelContentDetails = ChannelContentDetails
-  { -- |
-    relatedPlaylists :: (Core.Maybe ChannelContentDetails_RelatedPlaylists)
+  { relatedPlaylists :: (Core.Maybe ChannelContentDetails_RelatedPlaylists)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2195,17 +2168,14 @@ instance Core.FromJSON ChannelContentDetails where
     Core.withObject
       "ChannelContentDetails"
       ( \o ->
-          ChannelContentDetails
-            Core.<$> (o Core..:? "relatedPlaylists")
+          ChannelContentDetails Core.<$> (o Core..:? "relatedPlaylists")
       )
 
 instance Core.ToJSON ChannelContentDetails where
   toJSON ChannelContentDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("relatedPlaylists" Core..=)
-              Core.<$> relatedPlaylists
-          ]
+          [("relatedPlaylists" Core..=) Core.<$> relatedPlaylists]
       )
 
 --
@@ -2236,10 +2206,7 @@ newChannelContentDetails_RelatedPlaylists =
       watchLater = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChannelContentDetails_RelatedPlaylists
-  where
+instance Core.FromJSON ChannelContentDetails_RelatedPlaylists where
   parseJSON =
     Core.withObject
       "ChannelContentDetails_RelatedPlaylists"
@@ -2252,10 +2219,7 @@ instance
             Core.<*> (o Core..:? "watchLater")
       )
 
-instance
-  Core.ToJSON
-    ChannelContentDetails_RelatedPlaylists
-  where
+instance Core.ToJSON ChannelContentDetails_RelatedPlaylists where
   toJSON ChannelContentDetails_RelatedPlaylists {..} =
     Core.object
       ( Core.catMaybes
@@ -2321,7 +2285,10 @@ data ChannelConversionPing = ChannelConversionPing
 newChannelConversionPing ::
   ChannelConversionPing
 newChannelConversionPing =
-  ChannelConversionPing {context = Core.Nothing, conversionUrl = Core.Nothing}
+  ChannelConversionPing
+    { context = Core.Nothing,
+      conversionUrl = Core.Nothing
+    }
 
 instance Core.FromJSON ChannelConversionPing where
   parseJSON =
@@ -2354,20 +2321,18 @@ newtype ChannelConversionPings = ChannelConversionPings
 -- | Creates a value of 'ChannelConversionPings' with the minimum fields required to make a request.
 newChannelConversionPings ::
   ChannelConversionPings
-newChannelConversionPings = ChannelConversionPings {pings = Core.Nothing}
+newChannelConversionPings =
+  ChannelConversionPings {pings = Core.Nothing}
 
 instance Core.FromJSON ChannelConversionPings where
   parseJSON =
     Core.withObject
       "ChannelConversionPings"
-      ( \o ->
-          ChannelConversionPings Core.<$> (o Core..:? "pings")
-      )
+      (\o -> ChannelConversionPings Core.<$> (o Core..:? "pings"))
 
 instance Core.ToJSON ChannelConversionPings where
   toJSON ChannelConversionPings {..} =
-    Core.object
-      (Core.catMaybes [("pings" Core..=) Core.<$> pings])
+    Core.object (Core.catMaybes [("pings" Core..=) Core.<$> pings])
 
 --
 -- /See:/ 'newChannelListResponse' smart constructor.
@@ -2376,7 +2341,6 @@ data ChannelListResponse = ChannelListResponse
     etag :: (Core.Maybe Core.Text),
     -- | Serialized EventId of the request which produced this response.
     eventId :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [Channel]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#channelListResponse\".
     kind :: Core.Text,
@@ -2386,7 +2350,6 @@ data ChannelListResponse = ChannelListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -2418,9 +2381,7 @@ instance Core.FromJSON ChannelListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#channelListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#channelListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -2459,7 +2420,10 @@ data ChannelLocalization = ChannelLocalization
 newChannelLocalization ::
   ChannelLocalization
 newChannelLocalization =
-  ChannelLocalization {description = Core.Nothing, title = Core.Nothing}
+  ChannelLocalization
+    { description = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON ChannelLocalization where
   parseJSON =
@@ -2524,8 +2488,7 @@ instance Core.ToJSON ChannelProfileDetails where
           [ ("channelId" Core..=) Core.<$> channelId,
             ("channelUrl" Core..=) Core.<$> channelUrl,
             ("displayName" Core..=) Core.<$> displayName,
-            ("profileImageUrl" Core..=)
-              Core.<$> profileImageUrl
+            ("profileImageUrl" Core..=) Core.<$> profileImageUrl
           ]
       )
 
@@ -2596,8 +2559,7 @@ instance Core.ToJSON ChannelSection where
 --
 -- /See:/ 'newChannelSection_Localizations' smart constructor.
 newtype ChannelSection_Localizations = ChannelSection_Localizations
-  { -- |
-    additional :: (Core.HashMap Core.Text ChannelSectionLocalization)
+  { additional :: (Core.HashMap Core.Text ChannelSectionLocalization)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2614,13 +2576,11 @@ instance Core.FromJSON ChannelSection_Localizations where
     Core.withObject
       "ChannelSection_Localizations"
       ( \o ->
-          ChannelSection_Localizations
-            Core.<$> (Core.parseJSONObject o)
+          ChannelSection_Localizations Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON ChannelSection_Localizations where
-  toJSON ChannelSection_Localizations {..} =
-    Core.toJSON additional
+  toJSON ChannelSection_Localizations {..} = Core.toJSON additional
 
 -- | Details about a channelsection, including playlists and channels.
 --
@@ -2698,9 +2658,7 @@ instance Core.FromJSON ChannelSectionListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#channelSectionListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#channelSectionListResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -2735,15 +2693,11 @@ instance Core.FromJSON ChannelSectionLocalization where
   parseJSON =
     Core.withObject
       "ChannelSectionLocalization"
-      ( \o ->
-          ChannelSectionLocalization
-            Core.<$> (o Core..:? "title")
-      )
+      (\o -> ChannelSectionLocalization Core.<$> (o Core..:? "title"))
 
 instance Core.ToJSON ChannelSectionLocalization where
   toJSON ChannelSectionLocalization {..} =
-    Core.object
-      (Core.catMaybes [("title" Core..=) Core.<$> title])
+    Core.object (Core.catMaybes [("title" Core..=) Core.<$> title])
 
 -- | Basic details about a channel section, including title, style and position.
 --
@@ -2859,7 +2813,6 @@ instance Core.ToJSON ChannelSectionTargeting where
 data ChannelSettings = ChannelSettings
   { -- | The country of the channel.
     country :: (Core.Maybe Core.Text),
-    -- |
     defaultLanguage :: (Core.Maybe Core.Text),
     -- | Which content tab users should see when viewing the channel.
     defaultTab :: (Core.Maybe Core.Text),
@@ -2939,22 +2892,17 @@ instance Core.ToJSON ChannelSettings where
             ("defaultLanguage" Core..=) Core.<$> defaultLanguage,
             ("defaultTab" Core..=) Core.<$> defaultTab,
             ("description" Core..=) Core.<$> description,
-            ("featuredChannelsTitle" Core..=)
-              Core.<$> featuredChannelsTitle,
-            ("featuredChannelsUrls" Core..=)
-              Core.<$> featuredChannelsUrls,
+            ("featuredChannelsTitle" Core..=) Core.<$> featuredChannelsTitle,
+            ("featuredChannelsUrls" Core..=) Core.<$> featuredChannelsUrls,
             ("keywords" Core..=) Core.<$> keywords,
-            ("moderateComments" Core..=)
-              Core.<$> moderateComments,
+            ("moderateComments" Core..=) Core.<$> moderateComments,
             ("profileColor" Core..=) Core.<$> profileColor,
             ("showBrowseView" Core..=) Core.<$> showBrowseView,
-            ("showRelatedChannels" Core..=)
-              Core.<$> showRelatedChannels,
+            ("showRelatedChannels" Core..=) Core.<$> showRelatedChannels,
             ("title" Core..=) Core.<$> title,
             ("trackingAnalyticsAccountId" Core..=)
               Core.<$> trackingAnalyticsAccountId,
-            ("unsubscribedTrailer" Core..=)
-              Core.<$> unsubscribedTrailer
+            ("unsubscribedTrailer" Core..=) Core.<$> unsubscribedTrailer
           ]
       )
 
@@ -3062,35 +3010,24 @@ instance Core.FromJSON ChannelStatistics where
       "ChannelStatistics"
       ( \o ->
           ChannelStatistics
-            Core.<$> ( o Core..:? "commentCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "commentCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "hiddenSubscriberCount")
-            Core.<*> ( o Core..:? "subscriberCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "videoCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "viewCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "subscriberCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "videoCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "viewCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ChannelStatistics where
   toJSON ChannelStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("commentCount" Core..=) Core.. Core.AsText
-              Core.<$> commentCount,
-            ("hiddenSubscriberCount" Core..=)
-              Core.<$> hiddenSubscriberCount,
-            ("subscriberCount" Core..=) Core.. Core.AsText
+          [ ("commentCount" Core..=) Core.. Core.AsText Core.<$> commentCount,
+            ("hiddenSubscriberCount" Core..=) Core.<$> hiddenSubscriberCount,
+            ("subscriberCount" Core..=)
+              Core.. Core.AsText
               Core.<$> subscriberCount,
-            ("videoCount" Core..=) Core.. Core.AsText
-              Core.<$> videoCount,
-            ("viewCount" Core..=) Core.. Core.AsText
-              Core.<$> viewCount
+            ("videoCount" Core..=) Core.. Core.AsText Core.<$> videoCount,
+            ("viewCount" Core..=) Core.. Core.AsText Core.<$> viewCount
           ]
       )
 
@@ -3098,15 +3035,15 @@ instance Core.ToJSON ChannelStatistics where
 --
 -- /See:/ 'newChannelStatus' smart constructor.
 data ChannelStatus = ChannelStatus
-  { -- | If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn\'t have a public YouTube identity.
+  { -- | Whether the channel is considered ypp monetization enabled. See go\/yppornot for more details.
+    isChannelMonetizationEnabled :: (Core.Maybe Core.Bool),
+    -- | If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn\'t have a public YouTube identity.
     isLinked :: (Core.Maybe Core.Bool),
     -- | The long uploads status of this channel. See https:\/\/support.google.com\/youtube\/answer\/71673 for more information.
     longUploadsStatus :: (Core.Maybe ChannelStatus_LongUploadsStatus),
-    -- |
     madeForKids :: (Core.Maybe Core.Bool),
     -- | Privacy status of the channel.
     privacyStatus :: (Core.Maybe ChannelStatus_PrivacyStatus),
-    -- |
     selfDeclaredMadeForKids :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3116,7 +3053,8 @@ newChannelStatus ::
   ChannelStatus
 newChannelStatus =
   ChannelStatus
-    { isLinked = Core.Nothing,
+    { isChannelMonetizationEnabled = Core.Nothing,
+      isLinked = Core.Nothing,
       longUploadsStatus = Core.Nothing,
       madeForKids = Core.Nothing,
       privacyStatus = Core.Nothing,
@@ -3129,7 +3067,8 @@ instance Core.FromJSON ChannelStatus where
       "ChannelStatus"
       ( \o ->
           ChannelStatus
-            Core.<$> (o Core..:? "isLinked")
+            Core.<$> (o Core..:? "isChannelMonetizationEnabled")
+            Core.<*> (o Core..:? "isLinked")
             Core.<*> (o Core..:? "longUploadsStatus")
             Core.<*> (o Core..:? "madeForKids")
             Core.<*> (o Core..:? "privacyStatus")
@@ -3140,9 +3079,10 @@ instance Core.ToJSON ChannelStatus where
   toJSON ChannelStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("isLinked" Core..=) Core.<$> isLinked,
-            ("longUploadsStatus" Core..=)
-              Core.<$> longUploadsStatus,
+          [ ("isChannelMonetizationEnabled" Core..=)
+              Core.<$> isChannelMonetizationEnabled,
+            ("isLinked" Core..=) Core.<$> isLinked,
+            ("longUploadsStatus" Core..=) Core.<$> longUploadsStatus,
             ("madeForKids" Core..=) Core.<$> madeForKids,
             ("privacyStatus" Core..=) Core.<$> privacyStatus,
             ("selfDeclaredMadeForKids" Core..=)
@@ -3154,7 +3094,14 @@ instance Core.ToJSON ChannelStatus where
 --
 -- /See:/ 'newChannelToStoreLinkDetails' smart constructor.
 data ChannelToStoreLinkDetails = ChannelToStoreLinkDetails
-  { -- | Google Merchant Center id of the store.
+  { -- | Information specific to billing (read-only).
+    billingDetails :: (Core.Maybe ChannelToStoreLinkDetailsBillingDetails),
+    -- | Information specific to merchant affiliate program (read-only).
+    merchantAffiliateProgramDetails ::
+      ( Core.Maybe
+          ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+      ),
+    -- | Google Merchant Center id of the store.
     merchantId :: (Core.Maybe Core.Word64),
     -- | Name of the store.
     storeName :: (Core.Maybe Core.Text),
@@ -3168,7 +3115,9 @@ newChannelToStoreLinkDetails ::
   ChannelToStoreLinkDetails
 newChannelToStoreLinkDetails =
   ChannelToStoreLinkDetails
-    { merchantId = Core.Nothing,
+    { billingDetails = Core.Nothing,
+      merchantAffiliateProgramDetails = Core.Nothing,
+      merchantId = Core.Nothing,
       storeName = Core.Nothing,
       storeUrl = Core.Nothing
     }
@@ -3179,9 +3128,9 @@ instance Core.FromJSON ChannelToStoreLinkDetails where
       "ChannelToStoreLinkDetails"
       ( \o ->
           ChannelToStoreLinkDetails
-            Core.<$> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "billingDetails")
+            Core.<*> (o Core..:? "merchantAffiliateProgramDetails")
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "storeName")
             Core.<*> (o Core..:? "storeUrl")
       )
@@ -3190,12 +3139,86 @@ instance Core.ToJSON ChannelToStoreLinkDetails where
   toJSON ChannelToStoreLinkDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+          [ ("billingDetails" Core..=) Core.<$> billingDetails,
+            ("merchantAffiliateProgramDetails" Core..=)
+              Core.<$> merchantAffiliateProgramDetails,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("storeName" Core..=) Core.<$> storeName,
             ("storeUrl" Core..=) Core.<$> storeUrl
           ]
       )
+
+-- | Information specific to billing.
+--
+-- /See:/ 'newChannelToStoreLinkDetailsBillingDetails' smart constructor.
+newtype ChannelToStoreLinkDetailsBillingDetails = ChannelToStoreLinkDetailsBillingDetails
+  { -- | The current billing profile status.
+    billingStatus :: (Core.Maybe ChannelToStoreLinkDetailsBillingDetails_BillingStatus)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChannelToStoreLinkDetailsBillingDetails' with the minimum fields required to make a request.
+newChannelToStoreLinkDetailsBillingDetails ::
+  ChannelToStoreLinkDetailsBillingDetails
+newChannelToStoreLinkDetailsBillingDetails =
+  ChannelToStoreLinkDetailsBillingDetails
+    { billingStatus =
+        Core.Nothing
+    }
+
+instance Core.FromJSON ChannelToStoreLinkDetailsBillingDetails where
+  parseJSON =
+    Core.withObject
+      "ChannelToStoreLinkDetailsBillingDetails"
+      ( \o ->
+          ChannelToStoreLinkDetailsBillingDetails
+            Core.<$> (o Core..:? "billingStatus")
+      )
+
+instance Core.ToJSON ChannelToStoreLinkDetailsBillingDetails where
+  toJSON ChannelToStoreLinkDetailsBillingDetails {..} =
+    Core.object
+      (Core.catMaybes [("billingStatus" Core..=) Core.<$> billingStatus])
+
+-- | Information specific to merchant affiliate program.
+--
+-- /See:/ 'newChannelToStoreLinkDetailsMerchantAffiliateProgramDetails' smart constructor.
+newtype ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails = ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+  { -- | The current merchant affiliate program status.
+    status ::
+      ( Core.Maybe
+          ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails_Status
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails' with the minimum fields required to make a request.
+newChannelToStoreLinkDetailsMerchantAffiliateProgramDetails ::
+  ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+newChannelToStoreLinkDetailsMerchantAffiliateProgramDetails =
+  ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+    { status =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+  where
+  parseJSON =
+    Core.withObject
+      "ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails"
+      ( \o ->
+          ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+            Core.<$> (o Core..:? "status")
+      )
+
+instance
+  Core.ToJSON
+    ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+  where
+  toJSON ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails {..} =
+    Core.object (Core.catMaybes [("status" Core..=) Core.<$> status])
 
 -- | Freebase topic information related to the channel.
 --
@@ -3212,7 +3235,10 @@ data ChannelTopicDetails = ChannelTopicDetails
 newChannelTopicDetails ::
   ChannelTopicDetails
 newChannelTopicDetails =
-  ChannelTopicDetails {topicCategories = Core.Nothing, topicIds = Core.Nothing}
+  ChannelTopicDetails
+    { topicCategories = Core.Nothing,
+      topicIds = Core.Nothing
+    }
 
 instance Core.FromJSON ChannelTopicDetails where
   parseJSON =
@@ -3228,8 +3254,7 @@ instance Core.ToJSON ChannelTopicDetails where
   toJSON ChannelTopicDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("topicCategories" Core..=)
-              Core.<$> topicCategories,
+          [ ("topicCategories" Core..=) Core.<$> topicCategories,
             ("topicIds" Core..=) Core.<$> topicIds
           ]
       )
@@ -3298,7 +3323,6 @@ data CommentListResponse = CommentListResponse
     nextPageToken :: (Core.Maybe Core.Text),
     -- | General pagination information.
     pageInfo :: (Core.Maybe PageInfo),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -3329,9 +3353,7 @@ instance Core.FromJSON CommentListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#commentListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#commentListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
@@ -3357,8 +3379,7 @@ instance Core.ToJSON CommentListResponse where
 --
 -- /See:/ 'newCommentSnippet' smart constructor.
 data CommentSnippet = CommentSnippet
-  { -- |
-    authorChannelId :: (Core.Maybe CommentSnippetAuthorChannelId),
+  { authorChannelId :: (Core.Maybe CommentSnippetAuthorChannelId),
     -- | Link to the author\'s YouTube channel, if any.
     authorChannelUrl :: (Core.Maybe Core.Text),
     -- | The name of the user who posted the comment.
@@ -3439,19 +3460,14 @@ instance Core.ToJSON CommentSnippet where
   toJSON CommentSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorChannelId" Core..=)
-              Core.<$> authorChannelId,
-            ("authorChannelUrl" Core..=)
-              Core.<$> authorChannelUrl,
-            ("authorDisplayName" Core..=)
-              Core.<$> authorDisplayName,
-            ("authorProfileImageUrl" Core..=)
-              Core.<$> authorProfileImageUrl,
+          [ ("authorChannelId" Core..=) Core.<$> authorChannelId,
+            ("authorChannelUrl" Core..=) Core.<$> authorChannelUrl,
+            ("authorDisplayName" Core..=) Core.<$> authorDisplayName,
+            ("authorProfileImageUrl" Core..=) Core.<$> authorProfileImageUrl,
             ("canRate" Core..=) Core.<$> canRate,
             ("channelId" Core..=) Core.<$> channelId,
             ("likeCount" Core..=) Core.<$> likeCount,
-            ("moderationStatus" Core..=)
-              Core.<$> moderationStatus,
+            ("moderationStatus" Core..=) Core.<$> moderationStatus,
             ("parentId" Core..=) Core.<$> parentId,
             ("publishedAt" Core..=) Core.<$> publishedAt,
             ("textDisplay" Core..=) Core.<$> textDisplay,
@@ -3466,8 +3482,7 @@ instance Core.ToJSON CommentSnippet where
 --
 -- /See:/ 'newCommentSnippetAuthorChannelId' smart constructor.
 newtype CommentSnippetAuthorChannelId = CommentSnippetAuthorChannelId
-  { -- |
-    value :: (Core.Maybe Core.Text)
+  { value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3482,14 +3497,12 @@ instance Core.FromJSON CommentSnippetAuthorChannelId where
     Core.withObject
       "CommentSnippetAuthorChannelId"
       ( \o ->
-          CommentSnippetAuthorChannelId
-            Core.<$> (o Core..:? "value")
+          CommentSnippetAuthorChannelId Core.<$> (o Core..:? "value")
       )
 
 instance Core.ToJSON CommentSnippetAuthorChannelId where
   toJSON CommentSnippetAuthorChannelId {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | A /comment thread/ represents information that applies to a top level comment and all its replies. It can also include the top level comment itself and some of the replies.
 --
@@ -3560,7 +3573,6 @@ data CommentThreadListResponse = CommentThreadListResponse
     nextPageToken :: (Core.Maybe Core.Text),
     -- | General pagination information.
     pageInfo :: (Core.Maybe PageInfo),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -3591,9 +3603,7 @@ instance Core.FromJSON CommentThreadListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#commentThreadListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#commentThreadListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
@@ -3627,23 +3637,19 @@ newtype CommentThreadReplies = CommentThreadReplies
 -- | Creates a value of 'CommentThreadReplies' with the minimum fields required to make a request.
 newCommentThreadReplies ::
   CommentThreadReplies
-newCommentThreadReplies = CommentThreadReplies {comments = Core.Nothing}
+newCommentThreadReplies =
+  CommentThreadReplies {comments = Core.Nothing}
 
 instance Core.FromJSON CommentThreadReplies where
   parseJSON =
     Core.withObject
       "CommentThreadReplies"
-      ( \o ->
-          CommentThreadReplies
-            Core.<$> (o Core..:? "comments")
-      )
+      (\o -> CommentThreadReplies Core.<$> (o Core..:? "comments"))
 
 instance Core.ToJSON CommentThreadReplies where
   toJSON CommentThreadReplies {..} =
     Core.object
-      ( Core.catMaybes
-          [("comments" Core..=) Core.<$> comments]
-      )
+      (Core.catMaybes [("comments" Core..=) Core.<$> comments])
 
 -- | Basic details about a comment thread.
 --
@@ -4034,8 +4040,7 @@ instance Core.ToJSON ContentRating where
             ("cscfRating" Core..=) Core.<$> cscfRating,
             ("czfilmRating" Core..=) Core.<$> czfilmRating,
             ("djctqRating" Core..=) Core.<$> djctqRating,
-            ("djctqRatingReasons" Core..=)
-              Core.<$> djctqRatingReasons,
+            ("djctqRatingReasons" Core..=) Core.<$> djctqRatingReasons,
             ("ecbmctRating" Core..=) Core.<$> ecbmctRating,
             ("eefilmRating" Core..=) Core.<$> eefilmRating,
             ("egfilmRating" Core..=) Core.<$> egfilmRating,
@@ -4044,8 +4049,7 @@ instance Core.ToJSON ContentRating where
             ("fcoRating" Core..=) Core.<$> fcoRating,
             ("fmocRating" Core..=) Core.<$> fmocRating,
             ("fpbRating" Core..=) Core.<$> fpbRating,
-            ("fpbRatingReasons" Core..=)
-              Core.<$> fpbRatingReasons,
+            ("fpbRatingReasons" Core..=) Core.<$> fpbRatingReasons,
             ("fskRating" Core..=) Core.<$> fskRating,
             ("grfilmRating" Core..=) Core.<$> grfilmRating,
             ("icaaRating" Core..=) Core.<$> icaaRating,
@@ -4053,16 +4057,14 @@ instance Core.ToJSON ContentRating where
             ("ilfilmRating" Core..=) Core.<$> ilfilmRating,
             ("incaaRating" Core..=) Core.<$> incaaRating,
             ("kfcbRating" Core..=) Core.<$> kfcbRating,
-            ("kijkwijzerRating" Core..=)
-              Core.<$> kijkwijzerRating,
+            ("kijkwijzerRating" Core..=) Core.<$> kijkwijzerRating,
             ("kmrbRating" Core..=) Core.<$> kmrbRating,
             ("lsfRating" Core..=) Core.<$> lsfRating,
             ("mccaaRating" Core..=) Core.<$> mccaaRating,
             ("mccypRating" Core..=) Core.<$> mccypRating,
             ("mcstRating" Core..=) Core.<$> mcstRating,
             ("mdaRating" Core..=) Core.<$> mdaRating,
-            ("medietilsynetRating" Core..=)
-              Core.<$> medietilsynetRating,
+            ("medietilsynetRating" Core..=) Core.<$> medietilsynetRating,
             ("mekuRating" Core..=) Core.<$> mekuRating,
             ("menaMpaaRating" Core..=) Core.<$> menaMpaaRating,
             ("mibacRating" Core..=) Core.<$> mibacRating,
@@ -4080,8 +4082,7 @@ instance Core.ToJSON ContentRating where
             ("oflcRating" Core..=) Core.<$> oflcRating,
             ("pefilmRating" Core..=) Core.<$> pefilmRating,
             ("rcnofRating" Core..=) Core.<$> rcnofRating,
-            ("resorteviolenciaRating" Core..=)
-              Core.<$> resorteviolenciaRating,
+            ("resorteviolenciaRating" Core..=) Core.<$> resorteviolenciaRating,
             ("rtcRating" Core..=) Core.<$> rtcRating,
             ("rteRating" Core..=) Core.<$> rteRating,
             ("russiaRating" Core..=) Core.<$> russiaRating,
@@ -4097,11 +4098,9 @@ instance Core.ToJSON ContentRating where
 --
 -- /See:/ 'newCuepoint' smart constructor.
 data Cuepoint = Cuepoint
-  { -- |
-    cueType :: (Core.Maybe Cuepoint_CueType),
+  { cueType :: (Core.Maybe Cuepoint_CueType),
     -- | The duration of this cuepoint.
     durationSecs :: (Core.Maybe Core.Word32),
-    -- |
     etag :: (Core.Maybe Core.Text),
     -- | The identifier for cuepoint resource.
     id :: (Core.Maybe Core.Text),
@@ -4135,12 +4134,11 @@ instance Core.FromJSON Cuepoint where
             Core.<*> (o Core..:? "durationSecs")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "insertionOffsetTimeMs"
+            Core.<*> ( o
+                         Core..:? "insertionOffsetTimeMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "walltimeMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "walltimeMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Cuepoint where
@@ -4151,21 +4149,67 @@ instance Core.ToJSON Cuepoint where
             ("durationSecs" Core..=) Core.<$> durationSecs,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
-            ("insertionOffsetTimeMs" Core..=) Core.. Core.AsText
+            ("insertionOffsetTimeMs" Core..=)
+              Core.. Core.AsText
               Core.<$> insertionOffsetTimeMs,
-            ("walltimeMs" Core..=) Core.. Core.AsText
-              Core.<$> walltimeMs
+            ("walltimeMs" Core..=) Core.. Core.AsText Core.<$> walltimeMs
+          ]
+      )
+
+-- | Schedule to insert cuepoints into a broadcast by ads automator.
+--
+-- /See:/ 'newCuepointSchedule' smart constructor.
+data CuepointSchedule = CuepointSchedule
+  { -- | This field is semantically required. If it is set false or not set, other fields in this message will be ignored.
+    enabled :: (Core.Maybe Core.Bool),
+    -- | If set, automatic cuepoint insertion is paused until this timestamp (\"No Ad Zone\"). The value is specified in ISO 8601 format.
+    pauseAdsUntil :: (Core.Maybe Core.Text),
+    -- | Interval frequency in seconds that api uses to insert cuepoints automatically.
+    repeatIntervalSecs :: (Core.Maybe Core.Int32),
+    -- | The strategy to use when scheduling cuepoints.
+    scheduleStrategy :: (Core.Maybe CuepointSchedule_ScheduleStrategy)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CuepointSchedule' with the minimum fields required to make a request.
+newCuepointSchedule ::
+  CuepointSchedule
+newCuepointSchedule =
+  CuepointSchedule
+    { enabled = Core.Nothing,
+      pauseAdsUntil = Core.Nothing,
+      repeatIntervalSecs = Core.Nothing,
+      scheduleStrategy = Core.Nothing
+    }
+
+instance Core.FromJSON CuepointSchedule where
+  parseJSON =
+    Core.withObject
+      "CuepointSchedule"
+      ( \o ->
+          CuepointSchedule
+            Core.<$> (o Core..:? "enabled")
+            Core.<*> (o Core..:? "pauseAdsUntil")
+            Core.<*> (o Core..:? "repeatIntervalSecs")
+            Core.<*> (o Core..:? "scheduleStrategy")
+      )
+
+instance Core.ToJSON CuepointSchedule where
+  toJSON CuepointSchedule {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("enabled" Core..=) Core.<$> enabled,
+            ("pauseAdsUntil" Core..=) Core.<$> pauseAdsUntil,
+            ("repeatIntervalSecs" Core..=) Core.<$> repeatIntervalSecs,
+            ("scheduleStrategy" Core..=) Core.<$> scheduleStrategy
           ]
       )
 
 --
 -- /See:/ 'newEntity' smart constructor.
 data Entity = Entity
-  { -- |
-    id :: (Core.Maybe Core.Text),
-    -- |
+  { id :: (Core.Maybe Core.Text),
     typeId :: (Core.Maybe Core.Text),
-    -- |
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4174,7 +4218,11 @@ data Entity = Entity
 newEntity ::
   Entity
 newEntity =
-  Entity {id = Core.Nothing, typeId = Core.Nothing, url = Core.Nothing}
+  Entity
+    { id = Core.Nothing,
+      typeId = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON Entity where
   parseJSON =
@@ -4327,9 +4375,7 @@ instance Core.FromJSON I18nLanguageListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#i18nLanguageListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#i18nLanguageListResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -4368,16 +4414,15 @@ instance Core.FromJSON I18nLanguageSnippet where
       "I18nLanguageSnippet"
       ( \o ->
           I18nLanguageSnippet
-            Core.<$> (o Core..:? "hl") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "hl")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON I18nLanguageSnippet where
   toJSON I18nLanguageSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("hl" Core..=) Core.<$> hl,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("hl" Core..=) Core.<$> hl, ("name" Core..=) Core.<$> name]
       )
 
 -- | A /i18nRegion/ resource identifies a region where YouTube is available.
@@ -4466,9 +4511,7 @@ instance Core.FromJSON I18nRegionListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#i18nRegionListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#i18nRegionListResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -4507,16 +4550,15 @@ instance Core.FromJSON I18nRegionSnippet where
       "I18nRegionSnippet"
       ( \o ->
           I18nRegionSnippet
-            Core.<$> (o Core..:? "gl") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "gl")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON I18nRegionSnippet where
   toJSON I18nRegionSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("gl" Core..=) Core.<$> gl,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("gl" Core..=) Core.<$> gl, ("name" Core..=) Core.<$> name]
       )
 
 -- | Branding properties for images associated with the channel.
@@ -4565,7 +4607,6 @@ data ImageSettings = ImageSettings
     smallBrandedBannerImageUrl :: (Core.Maybe LocalizedProperty),
     -- | The URL for a 1px by 1px tracking pixel that can be used to collect statistics for views of the channel or video pages.
     trackingImageUrl :: (Core.Maybe Core.Text),
-    -- |
     watchIconImageUrl :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4633,37 +4674,27 @@ instance Core.ToJSON ImageSettings where
   toJSON ImageSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundImageUrl" Core..=)
-              Core.<$> backgroundImageUrl,
-            ("bannerExternalUrl" Core..=)
-              Core.<$> bannerExternalUrl,
+          [ ("backgroundImageUrl" Core..=) Core.<$> backgroundImageUrl,
+            ("bannerExternalUrl" Core..=) Core.<$> bannerExternalUrl,
             ("bannerImageUrl" Core..=) Core.<$> bannerImageUrl,
             ("bannerMobileExtraHdImageUrl" Core..=)
               Core.<$> bannerMobileExtraHdImageUrl,
-            ("bannerMobileHdImageUrl" Core..=)
-              Core.<$> bannerMobileHdImageUrl,
-            ("bannerMobileImageUrl" Core..=)
-              Core.<$> bannerMobileImageUrl,
+            ("bannerMobileHdImageUrl" Core..=) Core.<$> bannerMobileHdImageUrl,
+            ("bannerMobileImageUrl" Core..=) Core.<$> bannerMobileImageUrl,
             ("bannerMobileLowImageUrl" Core..=)
               Core.<$> bannerMobileLowImageUrl,
             ("bannerMobileMediumHdImageUrl" Core..=)
               Core.<$> bannerMobileMediumHdImageUrl,
             ("bannerTabletExtraHdImageUrl" Core..=)
               Core.<$> bannerTabletExtraHdImageUrl,
-            ("bannerTabletHdImageUrl" Core..=)
-              Core.<$> bannerTabletHdImageUrl,
-            ("bannerTabletImageUrl" Core..=)
-              Core.<$> bannerTabletImageUrl,
+            ("bannerTabletHdImageUrl" Core..=) Core.<$> bannerTabletHdImageUrl,
+            ("bannerTabletImageUrl" Core..=) Core.<$> bannerTabletImageUrl,
             ("bannerTabletLowImageUrl" Core..=)
               Core.<$> bannerTabletLowImageUrl,
-            ("bannerTvHighImageUrl" Core..=)
-              Core.<$> bannerTvHighImageUrl,
-            ("bannerTvImageUrl" Core..=)
-              Core.<$> bannerTvImageUrl,
-            ("bannerTvLowImageUrl" Core..=)
-              Core.<$> bannerTvLowImageUrl,
-            ("bannerTvMediumImageUrl" Core..=)
-              Core.<$> bannerTvMediumImageUrl,
+            ("bannerTvHighImageUrl" Core..=) Core.<$> bannerTvHighImageUrl,
+            ("bannerTvImageUrl" Core..=) Core.<$> bannerTvImageUrl,
+            ("bannerTvLowImageUrl" Core..=) Core.<$> bannerTvLowImageUrl,
+            ("bannerTvMediumImageUrl" Core..=) Core.<$> bannerTvMediumImageUrl,
             ("largeBrandedBannerImageImapScript" Core..=)
               Core.<$> largeBrandedBannerImageImapScript,
             ("largeBrandedBannerImageUrl" Core..=)
@@ -4672,10 +4703,8 @@ instance Core.ToJSON ImageSettings where
               Core.<$> smallBrandedBannerImageImapScript,
             ("smallBrandedBannerImageUrl" Core..=)
               Core.<$> smallBrandedBannerImageUrl,
-            ("trackingImageUrl" Core..=)
-              Core.<$> trackingImageUrl,
-            ("watchIconImageUrl" Core..=)
-              Core.<$> watchIconImageUrl
+            ("trackingImageUrl" Core..=) Core.<$> trackingImageUrl,
+            ("watchIconImageUrl" Core..=) Core.<$> watchIconImageUrl
           ]
       )
 
@@ -4727,17 +4756,15 @@ instance Core.ToJSON IngestionInfo where
       ( Core.catMaybes
           [ ("backupIngestionAddress" Core..=)
               Core.<$> backupIngestionAddress,
-            ("ingestionAddress" Core..=)
-              Core.<$> ingestionAddress,
+            ("ingestionAddress" Core..=) Core.<$> ingestionAddress,
             ("rtmpsBackupIngestionAddress" Core..=)
               Core.<$> rtmpsBackupIngestionAddress,
-            ("rtmpsIngestionAddress" Core..=)
-              Core.<$> rtmpsIngestionAddress,
+            ("rtmpsIngestionAddress" Core..=) Core.<$> rtmpsIngestionAddress,
             ("streamName" Core..=) Core.<$> streamName
           ]
       )
 
--- | LINT.IfChange Describes an invideo branding.
+-- | Describes an invideo branding.
 --
 -- /See:/ 'newInvideoBranding' smart constructor.
 data InvideoBranding = InvideoBranding
@@ -4806,7 +4833,10 @@ data InvideoPosition = InvideoPosition
 newInvideoPosition ::
   InvideoPosition
 newInvideoPosition =
-  InvideoPosition {cornerPosition = Core.Nothing, type' = Core.Nothing}
+  InvideoPosition
+    { cornerPosition = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON InvideoPosition where
   parseJSON =
@@ -4856,12 +4886,8 @@ instance Core.FromJSON InvideoTiming where
       "InvideoTiming"
       ( \o ->
           InvideoTiming
-            Core.<$> ( o Core..:? "durationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "offsetMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "durationMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "offsetMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -4869,10 +4895,8 @@ instance Core.ToJSON InvideoTiming where
   toJSON InvideoTiming {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationMs" Core..=) Core.. Core.AsText
-              Core.<$> durationMs,
-            ("offsetMs" Core..=) Core.. Core.AsText
-              Core.<$> offsetMs,
+          [ ("durationMs" Core..=) Core.. Core.AsText Core.<$> durationMs,
+            ("offsetMs" Core..=) Core.. Core.AsText Core.<$> offsetMs,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -4880,8 +4904,7 @@ instance Core.ToJSON InvideoTiming where
 --
 -- /See:/ 'newLanguageTag' smart constructor.
 newtype LanguageTag = LanguageTag
-  { -- |
-    value :: (Core.Maybe Core.Text)
+  { value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4898,8 +4921,7 @@ instance Core.FromJSON LanguageTag where
 
 instance Core.ToJSON LanguageTag where
   toJSON LanguageTag {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 --
 -- /See:/ 'newLevelDetails' smart constructor.
@@ -4918,16 +4940,12 @@ instance Core.FromJSON LevelDetails where
   parseJSON =
     Core.withObject
       "LevelDetails"
-      ( \o ->
-          LevelDetails Core.<$> (o Core..:? "displayName")
-      )
+      (\o -> LevelDetails Core.<$> (o Core..:? "displayName"))
 
 instance Core.ToJSON LevelDetails where
   toJSON LevelDetails {..} =
     Core.object
-      ( Core.catMaybes
-          [("displayName" Core..=) Core.<$> displayName]
-      )
+      (Core.catMaybes [("displayName" Core..=) Core.<$> displayName])
 
 -- | A /liveBroadcast/ resource represents an event that will be streamed, via live video, on YouTube.
 --
@@ -4941,6 +4959,8 @@ data LiveBroadcast = LiveBroadcast
     id :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#liveBroadcast\".
     kind :: Core.Text,
+    -- | The monetizationDetails object contains information about the event\'s monetization details.
+    monetizationDetails :: (Core.Maybe LiveBroadcastMonetizationDetails),
     -- | The snippet object contains basic details about the event, including its title, description, start time, and end time.
     snippet :: (Core.Maybe LiveBroadcastSnippet),
     -- | The statistics object contains info about the event\'s current stats. These include concurrent viewers and total chat count. Statistics can change (in either direction) during the lifetime of an event. Statistics are only returned while the event is live.
@@ -4959,6 +4979,7 @@ newLiveBroadcast =
       etag = Core.Nothing,
       id = Core.Nothing,
       kind = "youtube#liveBroadcast",
+      monetizationDetails = Core.Nothing,
       snippet = Core.Nothing,
       statistics = Core.Nothing,
       status = Core.Nothing
@@ -4974,6 +4995,7 @@ instance Core.FromJSON LiveBroadcast where
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "youtube#liveBroadcast")
+            Core.<*> (o Core..:? "monetizationDetails")
             Core.<*> (o Core..:? "snippet")
             Core.<*> (o Core..:? "statistics")
             Core.<*> (o Core..:? "status")
@@ -4987,6 +5009,7 @@ instance Core.ToJSON LiveBroadcast where
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
+            ("monetizationDetails" Core..=) Core.<$> monetizationDetails,
             ("snippet" Core..=) Core.<$> snippet,
             ("statistics" Core..=) Core.<$> statistics,
             ("status" Core..=) Core.<$> status
@@ -5001,7 +5024,6 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails
     boundStreamId :: (Core.Maybe Core.Text),
     -- | The date and time that the live stream referenced by boundStreamId was last updated.
     boundStreamLastUpdateTimeMs :: (Core.Maybe Core.DateTime),
-    -- |
     closedCaptionsType :: (Core.Maybe LiveBroadcastContentDetails_ClosedCaptionsType),
     -- | This setting indicates whether auto start is enabled for this broadcast. The default value for this property is false. This setting can only be used by Events.
     enableAutoStart :: (Core.Maybe Core.Bool),
@@ -5090,20 +5112,16 @@ instance Core.ToJSON LiveBroadcastContentDetails where
           [ ("boundStreamId" Core..=) Core.<$> boundStreamId,
             ("boundStreamLastUpdateTimeMs" Core..=)
               Core.<$> boundStreamLastUpdateTimeMs,
-            ("closedCaptionsType" Core..=)
-              Core.<$> closedCaptionsType,
+            ("closedCaptionsType" Core..=) Core.<$> closedCaptionsType,
             ("enableAutoStart" Core..=) Core.<$> enableAutoStart,
             ("enableAutoStop" Core..=) Core.<$> enableAutoStop,
-            ("enableClosedCaptions" Core..=)
-              Core.<$> enableClosedCaptions,
+            ("enableClosedCaptions" Core..=) Core.<$> enableClosedCaptions,
             ("enableContentEncryption" Core..=)
               Core.<$> enableContentEncryption,
             ("enableDvr" Core..=) Core.<$> enableDvr,
             ("enableEmbed" Core..=) Core.<$> enableEmbed,
-            ("enableLowLatency" Core..=)
-              Core.<$> enableLowLatency,
-            ("latencyPreference" Core..=)
-              Core.<$> latencyPreference,
+            ("enableLowLatency" Core..=) Core.<$> enableLowLatency,
+            ("latencyPreference" Core..=) Core.<$> latencyPreference,
             ("mesh" Core..=) Core.<$> mesh,
             ("monitorStream" Core..=) Core.<$> monitorStream,
             ("projection" Core..=) Core.<$> projection,
@@ -5130,7 +5148,6 @@ data LiveBroadcastListResponse = LiveBroadcastListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -5162,9 +5179,7 @@ instance Core.FromJSON LiveBroadcastListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#liveBroadcastListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#liveBroadcastListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -5186,6 +5201,36 @@ instance Core.ToJSON LiveBroadcastListResponse where
             ("tokenPagination" Core..=) Core.<$> tokenPagination,
             ("visitorId" Core..=) Core.<$> visitorId
           ]
+      )
+
+-- | Monetization settings of a broadcast.
+--
+-- /See:/ 'newLiveBroadcastMonetizationDetails' smart constructor.
+newtype LiveBroadcastMonetizationDetails = LiveBroadcastMonetizationDetails
+  { cuepointSchedule :: (Core.Maybe CuepointSchedule)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LiveBroadcastMonetizationDetails' with the minimum fields required to make a request.
+newLiveBroadcastMonetizationDetails ::
+  LiveBroadcastMonetizationDetails
+newLiveBroadcastMonetizationDetails =
+  LiveBroadcastMonetizationDetails {cuepointSchedule = Core.Nothing}
+
+instance Core.FromJSON LiveBroadcastMonetizationDetails where
+  parseJSON =
+    Core.withObject
+      "LiveBroadcastMonetizationDetails"
+      ( \o ->
+          LiveBroadcastMonetizationDetails
+            Core.<$> (o Core..:? "cuepointSchedule")
+      )
+
+instance Core.ToJSON LiveBroadcastMonetizationDetails where
+  toJSON LiveBroadcastMonetizationDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [("cuepointSchedule" Core..=) Core.<$> cuepointSchedule]
       )
 
 -- | Basic broadcast information.
@@ -5262,14 +5307,11 @@ instance Core.ToJSON LiveBroadcastSnippet where
             ("actualStartTime" Core..=) Core.<$> actualStartTime,
             ("channelId" Core..=) Core.<$> channelId,
             ("description" Core..=) Core.<$> description,
-            ("isDefaultBroadcast" Core..=)
-              Core.<$> isDefaultBroadcast,
+            ("isDefaultBroadcast" Core..=) Core.<$> isDefaultBroadcast,
             ("liveChatId" Core..=) Core.<$> liveChatId,
             ("publishedAt" Core..=) Core.<$> publishedAt,
-            ("scheduledEndTime" Core..=)
-              Core.<$> scheduledEndTime,
-            ("scheduledStartTime" Core..=)
-              Core.<$> scheduledStartTime,
+            ("scheduledEndTime" Core..=) Core.<$> scheduledEndTime,
+            ("scheduledStartTime" Core..=) Core.<$> scheduledStartTime,
             ("thumbnails" Core..=) Core.<$> thumbnails,
             ("title" Core..=) Core.<$> title
           ]
@@ -5296,7 +5338,8 @@ instance Core.FromJSON LiveBroadcastStatistics where
       "LiveBroadcastStatistics"
       ( \o ->
           LiveBroadcastStatistics
-            Core.<$> ( o Core..:? "concurrentViewers"
+            Core.<$> ( o
+                         Core..:? "concurrentViewers"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -5305,7 +5348,8 @@ instance Core.ToJSON LiveBroadcastStatistics where
   toJSON LiveBroadcastStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("concurrentViewers" Core..=) Core.. Core.AsText
+          [ ("concurrentViewers" Core..=)
+              Core.. Core.AsText
               Core.<$> concurrentViewers
           ]
       )
@@ -5360,10 +5404,8 @@ instance Core.ToJSON LiveBroadcastStatus where
   toJSON LiveBroadcastStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("lifeCycleStatus" Core..=)
-              Core.<$> lifeCycleStatus,
-            ("liveBroadcastPriority" Core..=)
-              Core.<$> liveBroadcastPriority,
+          [ ("lifeCycleStatus" Core..=) Core.<$> lifeCycleStatus,
+            ("liveBroadcastPriority" Core..=) Core.<$> liveBroadcastPriority,
             ("madeForKids" Core..=) Core.<$> madeForKids,
             ("privacyStatus" Core..=) Core.<$> privacyStatus,
             ("recordingStatus" Core..=) Core.<$> recordingStatus,
@@ -5426,7 +5468,6 @@ instance Core.ToJSON LiveChatBan where
 data LiveChatBanSnippet = LiveChatBanSnippet
   { -- | The duration of a ban, only filled if the ban has type TEMPORARY.
     banDurationSeconds :: (Core.Maybe Core.Word64),
-    -- |
     bannedUserDetails :: (Core.Maybe ChannelProfileDetails),
     -- | The chat this ban is pertinent to.
     liveChatId :: (Core.Maybe Core.Text),
@@ -5452,7 +5493,8 @@ instance Core.FromJSON LiveChatBanSnippet where
       "LiveChatBanSnippet"
       ( \o ->
           LiveChatBanSnippet
-            Core.<$> ( o Core..:? "banDurationSeconds"
+            Core.<$> ( o
+                         Core..:? "banDurationSeconds"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "bannedUserDetails")
@@ -5464,10 +5506,10 @@ instance Core.ToJSON LiveChatBanSnippet where
   toJSON LiveChatBanSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("banDurationSeconds" Core..=) Core.. Core.AsText
+          [ ("banDurationSeconds" Core..=)
+              Core.. Core.AsText
               Core.<$> banDurationSeconds,
-            ("bannedUserDetails" Core..=)
-              Core.<$> bannedUserDetails,
+            ("bannedUserDetails" Core..=) Core.<$> bannedUserDetails,
             ("liveChatId" Core..=) Core.<$> liveChatId,
             ("type" Core..=) Core.<$> type'
           ]
@@ -5492,7 +5534,8 @@ newLiveChatFanFundingEventDetails ::
   LiveChatFanFundingEventDetails
 newLiveChatFanFundingEventDetails =
   LiveChatFanFundingEventDetails
-    { amountDisplayString = Core.Nothing,
+    { amountDisplayString =
+        Core.Nothing,
       amountMicros = Core.Nothing,
       currency = Core.Nothing,
       userComment = Core.Nothing
@@ -5505,9 +5548,7 @@ instance Core.FromJSON LiveChatFanFundingEventDetails where
       ( \o ->
           LiveChatFanFundingEventDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> ( o Core..:? "amountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "amountMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "userComment")
       )
@@ -5516,10 +5557,8 @@ instance Core.ToJSON LiveChatFanFundingEventDetails where
   toJSON LiveChatFanFundingEventDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("amountDisplayString" Core..=)
-              Core.<$> amountDisplayString,
-            ("amountMicros" Core..=) Core.. Core.AsText
-              Core.<$> amountMicros,
+          [ ("amountDisplayString" Core..=) Core.<$> amountDisplayString,
+            ("amountMicros" Core..=) Core.. Core.AsText Core.<$> amountMicros,
             ("currency" Core..=) Core.<$> currency,
             ("userComment" Core..=) Core.<$> userComment
           ]
@@ -5542,15 +5581,13 @@ newLiveChatGiftMembershipReceivedDetails ::
   LiveChatGiftMembershipReceivedDetails
 newLiveChatGiftMembershipReceivedDetails =
   LiveChatGiftMembershipReceivedDetails
-    { associatedMembershipGiftingMessageId = Core.Nothing,
+    { associatedMembershipGiftingMessageId =
+        Core.Nothing,
       gifterChannelId = Core.Nothing,
       memberLevelName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiveChatGiftMembershipReceivedDetails
-  where
+instance Core.FromJSON LiveChatGiftMembershipReceivedDetails where
   parseJSON =
     Core.withObject
       "LiveChatGiftMembershipReceivedDetails"
@@ -5561,18 +5598,14 @@ instance
             Core.<*> (o Core..:? "memberLevelName")
       )
 
-instance
-  Core.ToJSON
-    LiveChatGiftMembershipReceivedDetails
-  where
+instance Core.ToJSON LiveChatGiftMembershipReceivedDetails where
   toJSON LiveChatGiftMembershipReceivedDetails {..} =
     Core.object
       ( Core.catMaybes
           [ ("associatedMembershipGiftingMessageId" Core..=)
               Core.<$> associatedMembershipGiftingMessageId,
             ("gifterChannelId" Core..=) Core.<$> gifterChannelId,
-            ("memberLevelName" Core..=)
-              Core.<$> memberLevelName
+            ("memberLevelName" Core..=) Core.<$> memberLevelName
           ]
       )
 
@@ -5593,15 +5626,13 @@ newLiveChatMemberMilestoneChatDetails ::
   LiveChatMemberMilestoneChatDetails
 newLiveChatMemberMilestoneChatDetails =
   LiveChatMemberMilestoneChatDetails
-    { memberLevelName = Core.Nothing,
+    { memberLevelName =
+        Core.Nothing,
       memberMonth = Core.Nothing,
       userComment = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiveChatMemberMilestoneChatDetails
-  where
+instance Core.FromJSON LiveChatMemberMilestoneChatDetails where
   parseJSON =
     Core.withObject
       "LiveChatMemberMilestoneChatDetails"
@@ -5612,15 +5643,11 @@ instance
             Core.<*> (o Core..:? "userComment")
       )
 
-instance
-  Core.ToJSON
-    LiveChatMemberMilestoneChatDetails
-  where
+instance Core.ToJSON LiveChatMemberMilestoneChatDetails where
   toJSON LiveChatMemberMilestoneChatDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("memberLevelName" Core..=)
-              Core.<$> memberLevelName,
+          [ ("memberLevelName" Core..=) Core.<$> memberLevelName,
             ("memberMonth" Core..=) Core.<$> memberMonth,
             ("userComment" Core..=) Core.<$> userComment
           ]
@@ -5641,14 +5668,12 @@ newLiveChatMembershipGiftingDetails ::
   LiveChatMembershipGiftingDetails
 newLiveChatMembershipGiftingDetails =
   LiveChatMembershipGiftingDetails
-    { giftMembershipsCount = Core.Nothing,
+    { giftMembershipsCount =
+        Core.Nothing,
       giftMembershipsLevelName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiveChatMembershipGiftingDetails
-  where
+instance Core.FromJSON LiveChatMembershipGiftingDetails where
   parseJSON =
     Core.withObject
       "LiveChatMembershipGiftingDetails"
@@ -5662,8 +5687,7 @@ instance Core.ToJSON LiveChatMembershipGiftingDetails where
   toJSON LiveChatMembershipGiftingDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("giftMembershipsCount" Core..=)
-              Core.<$> giftMembershipsCount,
+          [ ("giftMembershipsCount" Core..=) Core.<$> giftMembershipsCount,
             ("giftMembershipsLevelName" Core..=)
               Core.<$> giftMembershipsLevelName
           ]
@@ -5707,9 +5731,7 @@ instance Core.FromJSON LiveChatMessage where
             Core.<$> (o Core..:? "authorDetails")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#liveChatMessage"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#liveChatMessage")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -5789,16 +5811,14 @@ instance Core.ToJSON LiveChatMessageAuthorDetails where
             ("isChatOwner" Core..=) Core.<$> isChatOwner,
             ("isChatSponsor" Core..=) Core.<$> isChatSponsor,
             ("isVerified" Core..=) Core.<$> isVerified,
-            ("profileImageUrl" Core..=)
-              Core.<$> profileImageUrl
+            ("profileImageUrl" Core..=) Core.<$> profileImageUrl
           ]
       )
 
 --
 -- /See:/ 'newLiveChatMessageDeletedDetails' smart constructor.
 newtype LiveChatMessageDeletedDetails = LiveChatMessageDeletedDetails
-  { -- |
-    deletedMessageId :: (Core.Maybe Core.Text)
+  { deletedMessageId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5821,23 +5841,21 @@ instance Core.ToJSON LiveChatMessageDeletedDetails where
   toJSON LiveChatMessageDeletedDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deletedMessageId" Core..=)
-              Core.<$> deletedMessageId
-          ]
+          [("deletedMessageId" Core..=) Core.<$> deletedMessageId]
       )
 
 --
 -- /See:/ 'newLiveChatMessageListResponse' smart constructor.
 data LiveChatMessageListResponse = LiveChatMessageListResponse
-  { -- | Etag of this resource.
+  { -- | Set when there is an active poll.
+    activePollItem :: (Core.Maybe LiveChatMessage),
+    -- | Etag of this resource.
     etag :: (Core.Maybe Core.Text),
     -- | Serialized EventId of the request which produced this response.
     eventId :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [LiveChatMessage]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#liveChatMessageListResponse\".
     kind :: Core.Text,
-    -- |
     nextPageToken :: (Core.Maybe Core.Text),
     -- | The date and time when the underlying stream went offline.
     offlineAt :: (Core.Maybe Core.DateTime),
@@ -5845,7 +5863,6 @@ data LiveChatMessageListResponse = LiveChatMessageListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The amount of time the client should wait before polling again.
     pollingIntervalMillis :: (Core.Maybe Core.Word32),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -5857,7 +5874,8 @@ newLiveChatMessageListResponse ::
   LiveChatMessageListResponse
 newLiveChatMessageListResponse =
   LiveChatMessageListResponse
-    { etag = Core.Nothing,
+    { activePollItem = Core.Nothing,
+      etag = Core.Nothing,
       eventId = Core.Nothing,
       items = Core.Nothing,
       kind = "youtube#liveChatMessageListResponse",
@@ -5875,12 +5893,11 @@ instance Core.FromJSON LiveChatMessageListResponse where
       "LiveChatMessageListResponse"
       ( \o ->
           LiveChatMessageListResponse
-            Core.<$> (o Core..:? "etag")
+            Core.<$> (o Core..:? "activePollItem")
+            Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#liveChatMessageListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#liveChatMessageListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "offlineAt")
             Core.<*> (o Core..:? "pageInfo")
@@ -5893,15 +5910,15 @@ instance Core.ToJSON LiveChatMessageListResponse where
   toJSON LiveChatMessageListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("etag" Core..=) Core.<$> etag,
+          [ ("activePollItem" Core..=) Core.<$> activePollItem,
+            ("etag" Core..=) Core.<$> etag,
             ("eventId" Core..=) Core.<$> eventId,
             ("items" Core..=) Core.<$> items,
             Core.Just ("kind" Core..= kind),
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("offlineAt" Core..=) Core.<$> offlineAt,
             ("pageInfo" Core..=) Core.<$> pageInfo,
-            ("pollingIntervalMillis" Core..=)
-              Core.<$> pollingIntervalMillis,
+            ("pollingIntervalMillis" Core..=) Core.<$> pollingIntervalMillis,
             ("tokenPagination" Core..=) Core.<$> tokenPagination,
             ("visitorId" Core..=) Core.<$> visitorId
           ]
@@ -5910,8 +5927,7 @@ instance Core.ToJSON LiveChatMessageListResponse where
 --
 -- /See:/ 'newLiveChatMessageRetractedDetails' smart constructor.
 newtype LiveChatMessageRetractedDetails = LiveChatMessageRetractedDetails
-  { -- |
-    retractedMessageId :: (Core.Maybe Core.Text)
+  { retractedMessageId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5919,12 +5935,12 @@ newtype LiveChatMessageRetractedDetails = LiveChatMessageRetractedDetails
 newLiveChatMessageRetractedDetails ::
   LiveChatMessageRetractedDetails
 newLiveChatMessageRetractedDetails =
-  LiveChatMessageRetractedDetails {retractedMessageId = Core.Nothing}
+  LiveChatMessageRetractedDetails
+    { retractedMessageId =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    LiveChatMessageRetractedDetails
-  where
+instance Core.FromJSON LiveChatMessageRetractedDetails where
   parseJSON =
     Core.withObject
       "LiveChatMessageRetractedDetails"
@@ -5937,16 +5953,14 @@ instance Core.ToJSON LiveChatMessageRetractedDetails where
   toJSON LiveChatMessageRetractedDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("retractedMessageId" Core..=)
-              Core.<$> retractedMessageId
-          ]
+          [("retractedMessageId" Core..=) Core.<$> retractedMessageId]
       )
 
--- | Next ID: 33
+-- | Next ID: 34
 --
 -- /See:/ 'newLiveChatMessageSnippet' smart constructor.
 data LiveChatMessageSnippet = LiveChatMessageSnippet
-  { -- | The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message membershipGiftingEvent - the user that made the purchase giftMembershipReceivedEvent - the user that received the gift membership messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase
+  { -- | The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor memberMilestoneChatEvent - the member that sent the message membershipGiftingEvent - the user that made the purchase giftMembershipReceivedEvent - the user that received the gift membership messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action superChatEvent - the user that made the purchase superStickerEvent - the user that made the purchase pollEvent - the user that created the poll
     authorChannelId :: (Core.Maybe Core.Text),
     -- | Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT/ENDED/EVENT are silent.
     displayMessage :: (Core.Maybe Core.Text),
@@ -5956,18 +5970,17 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet
     giftMembershipReceivedDetails :: (Core.Maybe LiveChatGiftMembershipReceivedDetails),
     -- | Whether the message has display content that should be displayed to users.
     hasDisplayContent :: (Core.Maybe Core.Bool),
-    -- |
     liveChatId :: (Core.Maybe Core.Text),
     -- | Details about the Member Milestone Chat event, this is only set if the type is \'memberMilestoneChatEvent\'.
     memberMilestoneChatDetails :: (Core.Maybe LiveChatMemberMilestoneChatDetails),
     -- | Details about the Membership Gifting event, this is only set if the type is \'membershipGiftingEvent\'.
     membershipGiftingDetails :: (Core.Maybe LiveChatMembershipGiftingDetails),
-    -- |
     messageDeletedDetails :: (Core.Maybe LiveChatMessageDeletedDetails),
-    -- |
     messageRetractedDetails :: (Core.Maybe LiveChatMessageRetractedDetails),
     -- | Details about the New Member Announcement event, this is only set if the type is \'newSponsorEvent\'. Please note that \"member\" is the new term for \"sponsor\".
     newSponsorDetails' :: (Core.Maybe LiveChatNewSponsorDetails),
+    -- | Details about the poll event, this is only set if the type is \'pollEvent\'.
+    pollDetails :: (Core.Maybe LiveChatPollDetails),
     -- | The date and time when the message was orignally published.
     publishedAt :: (Core.Maybe Core.DateTime),
     -- | Details about the Super Chat event, this is only set if the type is \'superChatEvent\'.
@@ -5978,7 +5991,6 @@ data LiveChatMessageSnippet = LiveChatMessageSnippet
     textMessageDetails :: (Core.Maybe LiveChatTextMessageDetails),
     -- | The type of message, this will always be present, it determines the contents of the message as well as which fields will be present.
     type' :: (Core.Maybe LiveChatMessageSnippet_Type),
-    -- |
     userBannedDetails :: (Core.Maybe LiveChatUserBannedMessageDetails)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5999,6 +6011,7 @@ newLiveChatMessageSnippet =
       messageDeletedDetails = Core.Nothing,
       messageRetractedDetails = Core.Nothing,
       newSponsorDetails' = Core.Nothing,
+      pollDetails = Core.Nothing,
       publishedAt = Core.Nothing,
       superChatDetails = Core.Nothing,
       superStickerDetails = Core.Nothing,
@@ -6024,6 +6037,7 @@ instance Core.FromJSON LiveChatMessageSnippet where
             Core.<*> (o Core..:? "messageDeletedDetails")
             Core.<*> (o Core..:? "messageRetractedDetails")
             Core.<*> (o Core..:? "newSponsorDetails")
+            Core.<*> (o Core..:? "pollDetails")
             Core.<*> (o Core..:? "publishedAt")
             Core.<*> (o Core..:? "superChatDetails")
             Core.<*> (o Core..:? "superStickerDetails")
@@ -6036,36 +6050,28 @@ instance Core.ToJSON LiveChatMessageSnippet where
   toJSON LiveChatMessageSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorChannelId" Core..=)
-              Core.<$> authorChannelId,
+          [ ("authorChannelId" Core..=) Core.<$> authorChannelId,
             ("displayMessage" Core..=) Core.<$> displayMessage,
-            ("fanFundingEventDetails" Core..=)
-              Core.<$> fanFundingEventDetails,
+            ("fanFundingEventDetails" Core..=) Core.<$> fanFundingEventDetails,
             ("giftMembershipReceivedDetails" Core..=)
               Core.<$> giftMembershipReceivedDetails,
-            ("hasDisplayContent" Core..=)
-              Core.<$> hasDisplayContent,
+            ("hasDisplayContent" Core..=) Core.<$> hasDisplayContent,
             ("liveChatId" Core..=) Core.<$> liveChatId,
             ("memberMilestoneChatDetails" Core..=)
               Core.<$> memberMilestoneChatDetails,
             ("membershipGiftingDetails" Core..=)
               Core.<$> membershipGiftingDetails,
-            ("messageDeletedDetails" Core..=)
-              Core.<$> messageDeletedDetails,
+            ("messageDeletedDetails" Core..=) Core.<$> messageDeletedDetails,
             ("messageRetractedDetails" Core..=)
               Core.<$> messageRetractedDetails,
-            ("newSponsorDetails" Core..=)
-              Core.<$> newSponsorDetails',
+            ("newSponsorDetails" Core..=) Core.<$> newSponsorDetails',
+            ("pollDetails" Core..=) Core.<$> pollDetails,
             ("publishedAt" Core..=) Core.<$> publishedAt,
-            ("superChatDetails" Core..=)
-              Core.<$> superChatDetails,
-            ("superStickerDetails" Core..=)
-              Core.<$> superStickerDetails,
-            ("textMessageDetails" Core..=)
-              Core.<$> textMessageDetails,
+            ("superChatDetails" Core..=) Core.<$> superChatDetails,
+            ("superStickerDetails" Core..=) Core.<$> superStickerDetails,
+            ("textMessageDetails" Core..=) Core.<$> textMessageDetails,
             ("type" Core..=) Core.<$> type',
-            ("userBannedDetails" Core..=)
-              Core.<$> userBannedDetails
+            ("userBannedDetails" Core..=) Core.<$> userBannedDetails
           ]
       )
 
@@ -6103,9 +6109,7 @@ instance Core.FromJSON LiveChatModerator where
           LiveChatModerator
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#liveChatModerator"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#liveChatModerator")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -6137,7 +6141,6 @@ data LiveChatModeratorListResponse = LiveChatModeratorListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -6169,7 +6172,8 @@ instance Core.FromJSON LiveChatModeratorListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "youtube#liveChatModeratorListResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -6229,8 +6233,7 @@ instance Core.ToJSON LiveChatModeratorSnippet where
     Core.object
       ( Core.catMaybes
           [ ("liveChatId" Core..=) Core.<$> liveChatId,
-            ("moderatorDetails" Core..=)
-              Core.<$> moderatorDetails
+            ("moderatorDetails" Core..=) Core.<$> moderatorDetails
           ]
       )
 
@@ -6268,8 +6271,117 @@ instance Core.ToJSON LiveChatNewSponsorDetails where
     Core.object
       ( Core.catMaybes
           [ ("isUpgrade" Core..=) Core.<$> isUpgrade,
-            ("memberLevelName" Core..=)
-              Core.<$> memberLevelName
+            ("memberLevelName" Core..=) Core.<$> memberLevelName
+          ]
+      )
+
+--
+-- /See:/ 'newLiveChatPollDetails' smart constructor.
+data LiveChatPollDetails = LiveChatPollDetails
+  { metadata :: (Core.Maybe LiveChatPollDetailsPollMetadata),
+    status :: (Core.Maybe LiveChatPollDetails_Status)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LiveChatPollDetails' with the minimum fields required to make a request.
+newLiveChatPollDetails ::
+  LiveChatPollDetails
+newLiveChatPollDetails =
+  LiveChatPollDetails
+    { metadata = Core.Nothing,
+      status = Core.Nothing
+    }
+
+instance Core.FromJSON LiveChatPollDetails where
+  parseJSON =
+    Core.withObject
+      "LiveChatPollDetails"
+      ( \o ->
+          LiveChatPollDetails
+            Core.<$> (o Core..:? "metadata")
+            Core.<*> (o Core..:? "status")
+      )
+
+instance Core.ToJSON LiveChatPollDetails where
+  toJSON LiveChatPollDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metadata" Core..=) Core.<$> metadata,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
+
+--
+-- /See:/ 'newLiveChatPollDetailsPollMetadata' smart constructor.
+data LiveChatPollDetailsPollMetadata = LiveChatPollDetailsPollMetadata
+  { -- | The options will be returned in the order that is displayed in 1P
+    options :: (Core.Maybe [LiveChatPollDetailsPollMetadataPollOption]),
+    questionText :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LiveChatPollDetailsPollMetadata' with the minimum fields required to make a request.
+newLiveChatPollDetailsPollMetadata ::
+  LiveChatPollDetailsPollMetadata
+newLiveChatPollDetailsPollMetadata =
+  LiveChatPollDetailsPollMetadata
+    { options = Core.Nothing,
+      questionText = Core.Nothing
+    }
+
+instance Core.FromJSON LiveChatPollDetailsPollMetadata where
+  parseJSON =
+    Core.withObject
+      "LiveChatPollDetailsPollMetadata"
+      ( \o ->
+          LiveChatPollDetailsPollMetadata
+            Core.<$> (o Core..:? "options")
+            Core.<*> (o Core..:? "questionText")
+      )
+
+instance Core.ToJSON LiveChatPollDetailsPollMetadata where
+  toJSON LiveChatPollDetailsPollMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("options" Core..=) Core.<$> options,
+            ("questionText" Core..=) Core.<$> questionText
+          ]
+      )
+
+--
+-- /See:/ 'newLiveChatPollDetailsPollMetadataPollOption' smart constructor.
+data LiveChatPollDetailsPollMetadataPollOption = LiveChatPollDetailsPollMetadataPollOption
+  { optionText :: (Core.Maybe Core.Text),
+    tally :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LiveChatPollDetailsPollMetadataPollOption' with the minimum fields required to make a request.
+newLiveChatPollDetailsPollMetadataPollOption ::
+  LiveChatPollDetailsPollMetadataPollOption
+newLiveChatPollDetailsPollMetadataPollOption =
+  LiveChatPollDetailsPollMetadataPollOption
+    { optionText =
+        Core.Nothing,
+      tally = Core.Nothing
+    }
+
+instance Core.FromJSON LiveChatPollDetailsPollMetadataPollOption where
+  parseJSON =
+    Core.withObject
+      "LiveChatPollDetailsPollMetadataPollOption"
+      ( \o ->
+          LiveChatPollDetailsPollMetadataPollOption
+            Core.<$> (o Core..:? "optionText")
+            Core.<*> (o Core..:? "tally" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON LiveChatPollDetailsPollMetadataPollOption where
+  toJSON LiveChatPollDetailsPollMetadataPollOption {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("optionText" Core..=) Core.<$> optionText,
+            ("tally" Core..=) Core.. Core.AsText Core.<$> tally
           ]
       )
 
@@ -6308,9 +6420,7 @@ instance Core.FromJSON LiveChatSuperChatDetails where
       ( \o ->
           LiveChatSuperChatDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> ( o Core..:? "amountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "amountMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "tier")
             Core.<*> (o Core..:? "userComment")
@@ -6320,10 +6430,8 @@ instance Core.ToJSON LiveChatSuperChatDetails where
   toJSON LiveChatSuperChatDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("amountDisplayString" Core..=)
-              Core.<$> amountDisplayString,
-            ("amountMicros" Core..=) Core.. Core.AsText
-              Core.<$> amountMicros,
+          [ ("amountDisplayString" Core..=) Core.<$> amountDisplayString,
+            ("amountMicros" Core..=) Core.. Core.AsText Core.<$> amountMicros,
             ("currency" Core..=) Core.<$> currency,
             ("tier" Core..=) Core.<$> tier,
             ("userComment" Core..=) Core.<$> userComment
@@ -6365,9 +6473,7 @@ instance Core.FromJSON LiveChatSuperStickerDetails where
       ( \o ->
           LiveChatSuperStickerDetails
             Core.<$> (o Core..:? "amountDisplayString")
-            Core.<*> ( o Core..:? "amountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "amountMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "currency")
             Core.<*> (o Core..:? "superStickerMetadata")
             Core.<*> (o Core..:? "tier")
@@ -6377,13 +6483,10 @@ instance Core.ToJSON LiveChatSuperStickerDetails where
   toJSON LiveChatSuperStickerDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("amountDisplayString" Core..=)
-              Core.<$> amountDisplayString,
-            ("amountMicros" Core..=) Core.. Core.AsText
-              Core.<$> amountMicros,
+          [ ("amountDisplayString" Core..=) Core.<$> amountDisplayString,
+            ("amountMicros" Core..=) Core.. Core.AsText Core.<$> amountMicros,
             ("currency" Core..=) Core.<$> currency,
-            ("superStickerMetadata" Core..=)
-              Core.<$> superStickerMetadata,
+            ("superStickerMetadata" Core..=) Core.<$> superStickerMetadata,
             ("tier" Core..=) Core.<$> tier
           ]
       )
@@ -6407,16 +6510,13 @@ instance Core.FromJSON LiveChatTextMessageDetails where
     Core.withObject
       "LiveChatTextMessageDetails"
       ( \o ->
-          LiveChatTextMessageDetails
-            Core.<$> (o Core..:? "messageText")
+          LiveChatTextMessageDetails Core.<$> (o Core..:? "messageText")
       )
 
 instance Core.ToJSON LiveChatTextMessageDetails where
   toJSON LiveChatTextMessageDetails {..} =
     Core.object
-      ( Core.catMaybes
-          [("messageText" Core..=) Core.<$> messageText]
-      )
+      (Core.catMaybes [("messageText" Core..=) Core.<$> messageText])
 
 --
 -- /See:/ 'newLiveChatUserBannedMessageDetails' smart constructor.
@@ -6435,21 +6535,20 @@ newLiveChatUserBannedMessageDetails ::
   LiveChatUserBannedMessageDetails
 newLiveChatUserBannedMessageDetails =
   LiveChatUserBannedMessageDetails
-    { banDurationSeconds = Core.Nothing,
+    { banDurationSeconds =
+        Core.Nothing,
       banType = Core.Nothing,
       bannedUserDetails = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiveChatUserBannedMessageDetails
-  where
+instance Core.FromJSON LiveChatUserBannedMessageDetails where
   parseJSON =
     Core.withObject
       "LiveChatUserBannedMessageDetails"
       ( \o ->
           LiveChatUserBannedMessageDetails
-            Core.<$> ( o Core..:? "banDurationSeconds"
+            Core.<$> ( o
+                         Core..:? "banDurationSeconds"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "banType")
@@ -6460,11 +6559,11 @@ instance Core.ToJSON LiveChatUserBannedMessageDetails where
   toJSON LiveChatUserBannedMessageDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("banDurationSeconds" Core..=) Core.. Core.AsText
+          [ ("banDurationSeconds" Core..=)
+              Core.. Core.AsText
               Core.<$> banDurationSeconds,
             ("banType" Core..=) Core.<$> banType,
-            ("bannedUserDetails" Core..=)
-              Core.<$> bannedUserDetails
+            ("bannedUserDetails" Core..=) Core.<$> bannedUserDetails
           ]
       )
 
@@ -6596,7 +6695,8 @@ newLiveStreamContentDetails ::
   LiveStreamContentDetails
 newLiveStreamContentDetails =
   LiveStreamContentDetails
-    { closedCaptionsIngestionUrl = Core.Nothing,
+    { closedCaptionsIngestionUrl =
+        Core.Nothing,
       isReusable = Core.Nothing
     }
 
@@ -6649,7 +6749,8 @@ instance Core.FromJSON LiveStreamHealthStatus where
       ( \o ->
           LiveStreamHealthStatus
             Core.<$> (o Core..:? "configurationIssues")
-            Core.<*> ( o Core..:? "lastUpdateTimeSeconds"
+            Core.<*> ( o
+                         Core..:? "lastUpdateTimeSeconds"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "status")
@@ -6659,9 +6760,9 @@ instance Core.ToJSON LiveStreamHealthStatus where
   toJSON LiveStreamHealthStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("configurationIssues" Core..=)
-              Core.<$> configurationIssues,
-            ("lastUpdateTimeSeconds" Core..=) Core.. Core.AsText
+          [ ("configurationIssues" Core..=) Core.<$> configurationIssues,
+            ("lastUpdateTimeSeconds" Core..=)
+              Core.. Core.AsText
               Core.<$> lastUpdateTimeSeconds,
             ("status" Core..=) Core.<$> status
           ]
@@ -6680,11 +6781,9 @@ data LiveStreamListResponse = LiveStreamListResponse
     kind :: Core.Text,
     -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -6716,9 +6815,7 @@ instance Core.FromJSON LiveStreamListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#liveStreamListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#liveStreamListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -6749,7 +6846,6 @@ data LiveStreamSnippet = LiveStreamSnippet
     channelId :: (Core.Maybe Core.Text),
     -- | The stream\'s description. The value cannot be longer than 10000 characters.
     description :: (Core.Maybe Core.Text),
-    -- |
     isDefaultStream :: (Core.Maybe Core.Bool),
     -- | The date and time that the stream was created.
     publishedAt :: (Core.Maybe Core.DateTime),
@@ -6801,7 +6897,6 @@ instance Core.ToJSON LiveStreamSnippet where
 data LiveStreamStatus = LiveStreamStatus
   { -- | The health status of the stream.
     healthStatus :: (Core.Maybe LiveStreamHealthStatus),
-    -- |
     streamStatus :: (Core.Maybe LiveStreamStatus_StreamStatus)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6810,7 +6905,10 @@ data LiveStreamStatus = LiveStreamStatus
 newLiveStreamStatus ::
   LiveStreamStatus
 newLiveStreamStatus =
-  LiveStreamStatus {healthStatus = Core.Nothing, streamStatus = Core.Nothing}
+  LiveStreamStatus
+    { healthStatus = Core.Nothing,
+      streamStatus = Core.Nothing
+    }
 
 instance Core.FromJSON LiveStreamStatus where
   parseJSON =
@@ -6834,11 +6932,9 @@ instance Core.ToJSON LiveStreamStatus where
 --
 -- /See:/ 'newLocalizedProperty' smart constructor.
 data LocalizedProperty = LocalizedProperty
-  { -- |
-    default' :: (Core.Maybe Core.Text),
+  { default' :: (Core.Maybe Core.Text),
     -- | The language of the default property.
     defaultLanguage :: (Core.Maybe LanguageTag),
-    -- |
     localized :: (Core.Maybe [LocalizedString])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6877,9 +6973,7 @@ instance Core.ToJSON LocalizedProperty where
 --
 -- /See:/ 'newLocalizedString' smart constructor.
 data LocalizedString = LocalizedString
-  { -- |
-    language :: (Core.Maybe Core.Text),
-    -- |
+  { language :: (Core.Maybe Core.Text),
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6926,7 +7020,11 @@ data Member = Member
 newMember ::
   Member
 newMember =
-  Member {etag = Core.Nothing, kind = "youtube#member", snippet = Core.Nothing}
+  Member
+    { etag = Core.Nothing,
+      kind = "youtube#member",
+      snippet = Core.Nothing
+    }
 
 instance Core.FromJSON Member where
   parseJSON =
@@ -6962,9 +7060,7 @@ data MemberListResponse = MemberListResponse
     kind :: Core.Text,
     -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     pageInfo :: (Core.Maybe PageInfo),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -6995,9 +7091,7 @@ instance Core.FromJSON MemberListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#memberListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#memberListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
@@ -7056,11 +7150,9 @@ instance Core.ToJSON MemberSnippet where
   toJSON MemberSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creatorChannelId" Core..=)
-              Core.<$> creatorChannelId,
+          [ ("creatorChannelId" Core..=) Core.<$> creatorChannelId,
             ("memberDetails" Core..=) Core.<$> memberDetails,
-            ("membershipsDetails" Core..=)
-              Core.<$> membershipsDetails
+            ("membershipsDetails" Core..=) Core.<$> membershipsDetails
           ]
       )
 
@@ -7109,14 +7201,11 @@ instance Core.ToJSON MembershipsDetails where
   toJSON MembershipsDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accessibleLevels" Core..=)
-              Core.<$> accessibleLevels,
-            ("highestAccessibleLevel" Core..=)
-              Core.<$> highestAccessibleLevel,
+          [ ("accessibleLevels" Core..=) Core.<$> accessibleLevels,
+            ("highestAccessibleLevel" Core..=) Core.<$> highestAccessibleLevel,
             ("highestAccessibleLevelDisplayName" Core..=)
               Core.<$> highestAccessibleLevelDisplayName,
-            ("membershipsDuration" Core..=)
-              Core.<$> membershipsDuration,
+            ("membershipsDuration" Core..=) Core.<$> membershipsDuration,
             ("membershipsDurationAtLevels" Core..=)
               Core.<$> membershipsDurationAtLevels
           ]
@@ -7239,9 +7328,7 @@ instance Core.FromJSON MembershipsLevel where
           MembershipsLevel
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#membershipsLevel"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#membershipsLevel")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -7293,9 +7380,7 @@ instance Core.FromJSON MembershipsLevelListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#membershipsLevelListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#membershipsLevelListResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -7344,8 +7429,7 @@ instance Core.ToJSON MembershipsLevelSnippet where
   toJSON MembershipsLevelSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creatorChannelId" Core..=)
-              Core.<$> creatorChannelId,
+          [ ("creatorChannelId" Core..=) Core.<$> creatorChannelId,
             ("levelDetails" Core..=) Core.<$> levelDetails
           ]
       )
@@ -7391,8 +7475,7 @@ instance Core.ToJSON MonitorStreamInfo where
           [ ("broadcastStreamDelayMs" Core..=)
               Core.<$> broadcastStreamDelayMs,
             ("embedHtml" Core..=) Core.<$> embedHtml,
-            ("enableMonitorStream" Core..=)
-              Core.<$> enableMonitorStream
+            ("enableMonitorStream" Core..=) Core.<$> enableMonitorStream
           ]
       )
 
@@ -7411,7 +7494,10 @@ data PageInfo = PageInfo
 newPageInfo ::
   PageInfo
 newPageInfo =
-  PageInfo {resultsPerPage = Core.Nothing, totalResults = Core.Nothing}
+  PageInfo
+    { resultsPerPage = Core.Nothing,
+      totalResults = Core.Nothing
+    }
 
 instance Core.FromJSON PageInfo where
   parseJSON =
@@ -7506,8 +7592,7 @@ instance Core.ToJSON Playlist where
 --
 -- /See:/ 'newPlaylist_Localizations' smart constructor.
 newtype Playlist_Localizations = Playlist_Localizations
-  { -- |
-    additional :: (Core.HashMap Core.Text PlaylistLocalization)
+  { additional :: (Core.HashMap Core.Text PlaylistLocalization)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7523,14 +7608,10 @@ instance Core.FromJSON Playlist_Localizations where
   parseJSON =
     Core.withObject
       "Playlist_Localizations"
-      ( \o ->
-          Playlist_Localizations
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Playlist_Localizations Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Playlist_Localizations where
-  toJSON Playlist_Localizations {..} =
-    Core.toJSON additional
+  toJSON Playlist_Localizations {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newPlaylistContentDetails' smart constructor.
@@ -7543,22 +7624,161 @@ newtype PlaylistContentDetails = PlaylistContentDetails
 -- | Creates a value of 'PlaylistContentDetails' with the minimum fields required to make a request.
 newPlaylistContentDetails ::
   PlaylistContentDetails
-newPlaylistContentDetails = PlaylistContentDetails {itemCount = Core.Nothing}
+newPlaylistContentDetails =
+  PlaylistContentDetails {itemCount = Core.Nothing}
 
 instance Core.FromJSON PlaylistContentDetails where
   parseJSON =
     Core.withObject
       "PlaylistContentDetails"
-      ( \o ->
-          PlaylistContentDetails
-            Core.<$> (o Core..:? "itemCount")
-      )
+      (\o -> PlaylistContentDetails Core.<$> (o Core..:? "itemCount"))
 
 instance Core.ToJSON PlaylistContentDetails where
   toJSON PlaylistContentDetails {..} =
     Core.object
+      (Core.catMaybes [("itemCount" Core..=) Core.<$> itemCount])
+
+--
+-- /See:/ 'newPlaylistImage' smart constructor.
+data PlaylistImage = PlaylistImage
+  { -- | Identifies this resource (playlist id and image type).
+    id :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#playlistImages\".
+    kind :: Core.Text,
+    snippet :: (Core.Maybe PlaylistImageSnippet)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlaylistImage' with the minimum fields required to make a request.
+newPlaylistImage ::
+  PlaylistImage
+newPlaylistImage =
+  PlaylistImage
+    { id = Core.Nothing,
+      kind = "youtube#playlistImage",
+      snippet = Core.Nothing
+    }
+
+instance Core.FromJSON PlaylistImage where
+  parseJSON =
+    Core.withObject
+      "PlaylistImage"
+      ( \o ->
+          PlaylistImage
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#playlistImage")
+            Core.<*> (o Core..:? "snippet")
+      )
+
+instance Core.ToJSON PlaylistImage where
+  toJSON PlaylistImage {..} =
+    Core.object
       ( Core.catMaybes
-          [("itemCount" Core..=) Core.<$> itemCount]
+          [ ("id" Core..=) Core.<$> id,
+            Core.Just ("kind" Core..= kind),
+            ("snippet" Core..=) Core.<$> snippet
+          ]
+      )
+
+--
+-- /See:/ 'newPlaylistImageListResponse' smart constructor.
+data PlaylistImageListResponse = PlaylistImageListResponse
+  { items :: (Core.Maybe [PlaylistImage]),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#playlistImageListResponse\".
+    kind :: Core.Text,
+    -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | General pagination information.
+    pageInfo :: (Core.Maybe PageInfo),
+    -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
+    prevPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlaylistImageListResponse' with the minimum fields required to make a request.
+newPlaylistImageListResponse ::
+  PlaylistImageListResponse
+newPlaylistImageListResponse =
+  PlaylistImageListResponse
+    { items = Core.Nothing,
+      kind = "youtube#playlistImageListResponse",
+      nextPageToken = Core.Nothing,
+      pageInfo = Core.Nothing,
+      prevPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON PlaylistImageListResponse where
+  parseJSON =
+    Core.withObject
+      "PlaylistImageListResponse"
+      ( \o ->
+          PlaylistImageListResponse
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#playlistImageListResponse")
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "pageInfo")
+            Core.<*> (o Core..:? "prevPageToken")
+      )
+
+instance Core.ToJSON PlaylistImageListResponse where
+  toJSON PlaylistImageListResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("items" Core..=) Core.<$> items,
+            Core.Just ("kind" Core..= kind),
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("pageInfo" Core..=) Core.<$> pageInfo,
+            ("prevPageToken" Core..=) Core.<$> prevPageToken
+          ]
+      )
+
+-- | A /playlistImage/ resource identifies another resource, such as a image, that is associated with a playlist. In addition, the playlistImage resource contains details about the included resource that pertain specifically to how that resource is used in that playlist. YouTube uses playlists to identify special collections of videos for a channel, such as: - uploaded videos - favorite videos - positively rated (liked) videos - watch history To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company\'s videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel. You can then use the playlistImages.list method to retrieve image data for any of those playlists. You can also add or remove images from those lists by calling the playlistImages.insert and playlistImages.delete methods.
+--
+-- /See:/ 'newPlaylistImageSnippet' smart constructor.
+data PlaylistImageSnippet = PlaylistImageSnippet
+  { -- | The image height.
+    height :: (Core.Maybe Core.Int32),
+    -- | The Playlist ID of the playlist this image is associated with.
+    playlistId :: (Core.Maybe Core.Text),
+    -- | The image type.
+    type' :: (Core.Maybe PlaylistImageSnippet_Type),
+    -- | The image width.
+    width :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlaylistImageSnippet' with the minimum fields required to make a request.
+newPlaylistImageSnippet ::
+  PlaylistImageSnippet
+newPlaylistImageSnippet =
+  PlaylistImageSnippet
+    { height = Core.Nothing,
+      playlistId = Core.Nothing,
+      type' = Core.Nothing,
+      width = Core.Nothing
+    }
+
+instance Core.FromJSON PlaylistImageSnippet where
+  parseJSON =
+    Core.withObject
+      "PlaylistImageSnippet"
+      ( \o ->
+          PlaylistImageSnippet
+            Core.<$> (o Core..:? "height")
+            Core.<*> (o Core..:? "playlistId")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "width")
+      )
+
+instance Core.ToJSON PlaylistImageSnippet where
+  toJSON PlaylistImageSnippet {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("height" Core..=) Core.<$> height,
+            ("playlistId" Core..=) Core.<$> playlistId,
+            ("type" Core..=) Core.<$> type',
+            ("width" Core..=) Core.<$> width
+          ]
       )
 
 -- | A /playlistItem/ resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem resource contains details about the included resource that pertain specifically to how that resource is used in that playlist. YouTube uses playlists to identify special collections of videos for a channel, such as: - uploaded videos - favorite videos - positively rated (liked) videos - watch history - watch later To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company\'s videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the channel resource for a given channel. You can then use the playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the playlistItems.insert and playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the
@@ -7670,21 +7890,19 @@ instance Core.ToJSON PlaylistItemContentDetails where
             ("note" Core..=) Core.<$> note,
             ("startAt" Core..=) Core.<$> startAt,
             ("videoId" Core..=) Core.<$> videoId,
-            ("videoPublishedAt" Core..=)
-              Core.<$> videoPublishedAt
+            ("videoPublishedAt" Core..=) Core.<$> videoPublishedAt
           ]
       )
 
 --
 -- /See:/ 'newPlaylistItemListResponse' smart constructor.
 data PlaylistItemListResponse = PlaylistItemListResponse
-  { -- |
-    etag :: (Core.Maybe Core.Text),
+  { etag :: (Core.Maybe Core.Text),
     -- | Serialized EventId of the request which produced this response.
     eventId :: (Core.Maybe Core.Text),
     -- | A list of playlist items that match the request criteria.
     items :: (Core.Maybe [PlaylistItem]),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#playlistItemListResponse\". Etag of this resource.
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#playlistItemListResponse\".
     kind :: Core.Text,
     -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
     nextPageToken :: (Core.Maybe Core.Text),
@@ -7692,7 +7910,6 @@ data PlaylistItemListResponse = PlaylistItemListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -7724,9 +7941,7 @@ instance Core.FromJSON PlaylistItemListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#playlistItemListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#playlistItemListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -7829,8 +8044,7 @@ instance Core.ToJSON PlaylistItemSnippet where
             ("resourceId" Core..=) Core.<$> resourceId,
             ("thumbnails" Core..=) Core.<$> thumbnails,
             ("title" Core..=) Core.<$> title,
-            ("videoOwnerChannelId" Core..=)
-              Core.<$> videoOwnerChannelId,
+            ("videoOwnerChannelId" Core..=) Core.<$> videoOwnerChannelId,
             ("videoOwnerChannelTitle" Core..=)
               Core.<$> videoOwnerChannelTitle
           ]
@@ -7848,23 +8062,19 @@ newtype PlaylistItemStatus = PlaylistItemStatus
 -- | Creates a value of 'PlaylistItemStatus' with the minimum fields required to make a request.
 newPlaylistItemStatus ::
   PlaylistItemStatus
-newPlaylistItemStatus = PlaylistItemStatus {privacyStatus = Core.Nothing}
+newPlaylistItemStatus =
+  PlaylistItemStatus {privacyStatus = Core.Nothing}
 
 instance Core.FromJSON PlaylistItemStatus where
   parseJSON =
     Core.withObject
       "PlaylistItemStatus"
-      ( \o ->
-          PlaylistItemStatus
-            Core.<$> (o Core..:? "privacyStatus")
-      )
+      (\o -> PlaylistItemStatus Core.<$> (o Core..:? "privacyStatus"))
 
 instance Core.ToJSON PlaylistItemStatus where
   toJSON PlaylistItemStatus {..} =
     Core.object
-      ( Core.catMaybes
-          [("privacyStatus" Core..=) Core.<$> privacyStatus]
-      )
+      (Core.catMaybes [("privacyStatus" Core..=) Core.<$> privacyStatus])
 
 --
 -- /See:/ 'newPlaylistListResponse' smart constructor.
@@ -7883,7 +8093,6 @@ data PlaylistListResponse = PlaylistListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -7915,9 +8124,7 @@ instance Core.FromJSON PlaylistListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#playlistListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#playlistListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -7956,7 +8163,10 @@ data PlaylistLocalization = PlaylistLocalization
 newPlaylistLocalization ::
   PlaylistLocalization
 newPlaylistLocalization =
-  PlaylistLocalization {description = Core.Nothing, title = Core.Nothing}
+  PlaylistLocalization
+    { description = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON PlaylistLocalization where
   parseJSON =
@@ -7994,16 +8204,12 @@ instance Core.FromJSON PlaylistPlayer where
   parseJSON =
     Core.withObject
       "PlaylistPlayer"
-      ( \o ->
-          PlaylistPlayer Core.<$> (o Core..:? "embedHtml")
-      )
+      (\o -> PlaylistPlayer Core.<$> (o Core..:? "embedHtml"))
 
 instance Core.ToJSON PlaylistPlayer where
   toJSON PlaylistPlayer {..} =
     Core.object
-      ( Core.catMaybes
-          [("embedHtml" Core..=) Core.<$> embedHtml]
-      )
+      (Core.catMaybes [("embedHtml" Core..=) Core.<$> embedHtml])
 
 -- | Basic details about a playlist, including title, description and thumbnails.
 --
@@ -8078,8 +8284,7 @@ instance Core.ToJSON PlaylistSnippet where
             ("localized" Core..=) Core.<$> localized,
             ("publishedAt" Core..=) Core.<$> publishedAt,
             ("tags" Core..=) Core.<$> tags,
-            ("thumbnailVideoId" Core..=)
-              Core.<$> thumbnailVideoId,
+            ("thumbnailVideoId" Core..=) Core.<$> thumbnailVideoId,
             ("thumbnails" Core..=) Core.<$> thumbnails,
             ("title" Core..=) Core.<$> title
           ]
@@ -8087,8 +8292,10 @@ instance Core.ToJSON PlaylistSnippet where
 
 --
 -- /See:/ 'newPlaylistStatus' smart constructor.
-newtype PlaylistStatus = PlaylistStatus
-  { -- | The playlist\'s privacy status.
+data PlaylistStatus = PlaylistStatus
+  { -- | The playlist\'s podcast status.
+    podcastStatus :: (Core.Maybe PlaylistStatus_PodcastStatus),
+    -- | The playlist\'s privacy status.
     privacyStatus :: (Core.Maybe PlaylistStatus_PrivacyStatus)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8096,21 +8303,29 @@ newtype PlaylistStatus = PlaylistStatus
 -- | Creates a value of 'PlaylistStatus' with the minimum fields required to make a request.
 newPlaylistStatus ::
   PlaylistStatus
-newPlaylistStatus = PlaylistStatus {privacyStatus = Core.Nothing}
+newPlaylistStatus =
+  PlaylistStatus
+    { podcastStatus = Core.Nothing,
+      privacyStatus = Core.Nothing
+    }
 
 instance Core.FromJSON PlaylistStatus where
   parseJSON =
     Core.withObject
       "PlaylistStatus"
       ( \o ->
-          PlaylistStatus Core.<$> (o Core..:? "privacyStatus")
+          PlaylistStatus
+            Core.<$> (o Core..:? "podcastStatus")
+            Core.<*> (o Core..:? "privacyStatus")
       )
 
 instance Core.ToJSON PlaylistStatus where
   toJSON PlaylistStatus {..} =
     Core.object
       ( Core.catMaybes
-          [("privacyStatus" Core..=) Core.<$> privacyStatus]
+          [ ("podcastStatus" Core..=) Core.<$> podcastStatus,
+            ("privacyStatus" Core..=) Core.<$> privacyStatus
+          ]
       )
 
 -- | A pair Property \/ Value.
@@ -8127,7 +8342,8 @@ data PropertyValue = PropertyValue
 -- | Creates a value of 'PropertyValue' with the minimum fields required to make a request.
 newPropertyValue ::
   PropertyValue
-newPropertyValue = PropertyValue {property = Core.Nothing, value = Core.Nothing}
+newPropertyValue =
+  PropertyValue {property = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON PropertyValue where
   parseJSON =
@@ -8151,8 +8367,7 @@ instance Core.ToJSON PropertyValue where
 --
 -- /See:/ 'newRelatedEntity' smart constructor.
 newtype RelatedEntity = RelatedEntity
-  { -- |
-    entity :: (Core.Maybe Entity)
+  { entity :: (Core.Maybe Entity)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8169,8 +8384,7 @@ instance Core.FromJSON RelatedEntity where
 
 instance Core.ToJSON RelatedEntity where
   toJSON RelatedEntity {..} =
-    Core.object
-      (Core.catMaybes [("entity" Core..=) Core.<$> entity])
+    Core.object (Core.catMaybes [("entity" Core..=) Core.<$> entity])
 
 -- | A resource id is a generic reference that points to another YouTube resource.
 --
@@ -8238,9 +8452,7 @@ data SearchListResponse = SearchListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     regionCode :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -8273,9 +8485,7 @@ instance Core.FromJSON SearchListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#searchListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#searchListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -8407,8 +8617,7 @@ instance Core.ToJSON SearchResultSnippet where
           [ ("channelId" Core..=) Core.<$> channelId,
             ("channelTitle" Core..=) Core.<$> channelTitle,
             ("description" Core..=) Core.<$> description,
-            ("liveBroadcastContent" Core..=)
-              Core.<$> liveBroadcastContent,
+            ("liveBroadcastContent" Core..=) Core.<$> liveBroadcastContent,
             ("publishedAt" Core..=) Core.<$> publishedAt,
             ("thumbnails" Core..=) Core.<$> thumbnails,
             ("title" Core..=) Core.<$> title
@@ -8470,8 +8679,7 @@ instance Core.ToJSON Subscription where
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("snippet" Core..=) Core.<$> snippet,
-            ("subscriberSnippet" Core..=)
-              Core.<$> subscriberSnippet
+            ("subscriberSnippet" Core..=) Core.<$> subscriberSnippet
           ]
       )
 
@@ -8532,11 +8740,9 @@ data SubscriptionListResponse = SubscriptionListResponse
     kind :: Core.Text,
     -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -8568,9 +8774,7 @@ instance Core.FromJSON SubscriptionListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#subscriptionListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#subscriptionListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -8600,8 +8804,6 @@ instance Core.ToJSON SubscriptionListResponse where
 data SubscriptionSnippet = SubscriptionSnippet
   { -- | The ID that YouTube uses to uniquely identify the subscriber\'s channel.
     channelId :: (Core.Maybe Core.Text),
-    -- | Channel title for the channel that the subscription belongs to.
-    channelTitle :: (Core.Maybe Core.Text),
     -- | The subscription\'s details.
     description :: (Core.Maybe Core.Text),
     -- | The date and time that the subscription was created.
@@ -8621,7 +8823,6 @@ newSubscriptionSnippet ::
 newSubscriptionSnippet =
   SubscriptionSnippet
     { channelId = Core.Nothing,
-      channelTitle = Core.Nothing,
       description = Core.Nothing,
       publishedAt = Core.Nothing,
       resourceId = Core.Nothing,
@@ -8636,7 +8837,6 @@ instance Core.FromJSON SubscriptionSnippet where
       ( \o ->
           SubscriptionSnippet
             Core.<$> (o Core..:? "channelId")
-            Core.<*> (o Core..:? "channelTitle")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "publishedAt")
             Core.<*> (o Core..:? "resourceId")
@@ -8649,7 +8849,6 @@ instance Core.ToJSON SubscriptionSnippet where
     Core.object
       ( Core.catMaybes
           [ ("channelId" Core..=) Core.<$> channelId,
-            ("channelTitle" Core..=) Core.<$> channelTitle,
             ("description" Core..=) Core.<$> description,
             ("publishedAt" Core..=) Core.<$> publishedAt,
             ("resourceId" Core..=) Core.<$> resourceId,
@@ -8769,9 +8968,7 @@ data SuperChatEventListResponse = SuperChatEventListResponse
     kind :: Core.Text,
     -- | The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     pageInfo :: (Core.Maybe PageInfo),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -8802,9 +8999,7 @@ instance Core.FromJSON SuperChatEventListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#superChatEventListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#superChatEventListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "tokenPagination")
@@ -8875,9 +9070,7 @@ instance Core.FromJSON SuperChatEventSnippet where
       "SuperChatEventSnippet"
       ( \o ->
           SuperChatEventSnippet
-            Core.<$> ( o Core..:? "amountMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "amountMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "channelId")
             Core.<*> (o Core..:? "commentText")
             Core.<*> (o Core..:? "createdAt")
@@ -8893,20 +9086,16 @@ instance Core.ToJSON SuperChatEventSnippet where
   toJSON SuperChatEventSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("amountMicros" Core..=) Core.. Core.AsText
-              Core.<$> amountMicros,
+          [ ("amountMicros" Core..=) Core.. Core.AsText Core.<$> amountMicros,
             ("channelId" Core..=) Core.<$> channelId,
             ("commentText" Core..=) Core.<$> commentText,
             ("createdAt" Core..=) Core.<$> createdAt,
             ("currency" Core..=) Core.<$> currency,
             ("displayString" Core..=) Core.<$> displayString,
-            ("isSuperStickerEvent" Core..=)
-              Core.<$> isSuperStickerEvent,
+            ("isSuperStickerEvent" Core..=) Core.<$> isSuperStickerEvent,
             ("messageType" Core..=) Core.<$> messageType,
-            ("superStickerMetadata" Core..=)
-              Core.<$> superStickerMetadata,
-            ("supporterDetails" Core..=)
-              Core.<$> supporterDetails
+            ("superStickerMetadata" Core..=) Core.<$> superStickerMetadata,
+            ("supporterDetails" Core..=) Core.<$> supporterDetails
           ]
       )
 
@@ -8956,13 +9145,11 @@ instance Core.ToJSON SuperStickerMetadata where
 --
 -- /See:/ 'newTestItem' smart constructor.
 data TestItem = TestItem
-  { -- |
+  { -- | Etag for the resource. See https:\/\/en.wikipedia.org\/wiki\/HTTP_ETag.
+    etag :: (Core.Maybe Core.Text),
     featuredPart :: (Core.Maybe Core.Bool),
-    -- |
     gaia :: (Core.Maybe Core.Int64),
-    -- |
     id :: (Core.Maybe Core.Text),
-    -- |
     snippet :: (Core.Maybe TestItemTestItemSnippet)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8972,7 +9159,8 @@ newTestItem ::
   TestItem
 newTestItem =
   TestItem
-    { featuredPart = Core.Nothing,
+    { etag = Core.Nothing,
+      featuredPart = Core.Nothing,
       gaia = Core.Nothing,
       id = Core.Nothing,
       snippet = Core.Nothing
@@ -8984,10 +9172,9 @@ instance Core.FromJSON TestItem where
       "TestItem"
       ( \o ->
           TestItem
-            Core.<$> (o Core..:? "featuredPart")
-            Core.<*> ( o Core..:? "gaia"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "featuredPart")
+            Core.<*> (o Core..:? "gaia" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "snippet")
       )
@@ -8996,7 +9183,8 @@ instance Core.ToJSON TestItem where
   toJSON TestItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("featuredPart" Core..=) Core.<$> featuredPart,
+          [ ("etag" Core..=) Core.<$> etag,
+            ("featuredPart" Core..=) Core.<$> featuredPart,
             ("gaia" Core..=) Core.. Core.AsText Core.<$> gaia,
             ("id" Core..=) Core.<$> id,
             ("snippet" Core..=) Core.<$> snippet
@@ -9081,7 +9269,6 @@ instance Core.ToJSON ThirdPartyLink where
 data ThirdPartyLinkListResponse = ThirdPartyLinkListResponse
   { -- | Etag of this resource.
     etag :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [ThirdPartyLink]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#thirdPartyLinkListResponse\".
     kind :: Core.Text
@@ -9106,9 +9293,7 @@ instance Core.FromJSON ThirdPartyLinkListResponse where
           ThirdPartyLinkListResponse
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#thirdPartyLinkListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#thirdPartyLinkListResponse")
       )
 
 instance Core.ToJSON ThirdPartyLinkListResponse where
@@ -9155,8 +9340,7 @@ instance Core.ToJSON ThirdPartyLinkSnippet where
   toJSON ThirdPartyLinkSnippet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("channelToStoreLink" Core..=)
-              Core.<$> channelToStoreLink,
+          [ ("channelToStoreLink" Core..=) Core.<$> channelToStoreLink,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -9165,31 +9349,26 @@ instance Core.ToJSON ThirdPartyLinkSnippet where
 --
 -- /See:/ 'newThirdPartyLinkStatus' smart constructor.
 newtype ThirdPartyLinkStatus = ThirdPartyLinkStatus
-  { -- |
-    linkStatus :: (Core.Maybe ThirdPartyLinkStatus_LinkStatus)
+  { linkStatus :: (Core.Maybe ThirdPartyLinkStatus_LinkStatus)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ThirdPartyLinkStatus' with the minimum fields required to make a request.
 newThirdPartyLinkStatus ::
   ThirdPartyLinkStatus
-newThirdPartyLinkStatus = ThirdPartyLinkStatus {linkStatus = Core.Nothing}
+newThirdPartyLinkStatus =
+  ThirdPartyLinkStatus {linkStatus = Core.Nothing}
 
 instance Core.FromJSON ThirdPartyLinkStatus where
   parseJSON =
     Core.withObject
       "ThirdPartyLinkStatus"
-      ( \o ->
-          ThirdPartyLinkStatus
-            Core.<$> (o Core..:? "linkStatus")
-      )
+      (\o -> ThirdPartyLinkStatus Core.<$> (o Core..:? "linkStatus"))
 
 instance Core.ToJSON ThirdPartyLinkStatus where
   toJSON ThirdPartyLinkStatus {..} =
     Core.object
-      ( Core.catMaybes
-          [("linkStatus" Core..=) Core.<$> linkStatus]
-      )
+      (Core.catMaybes [("linkStatus" Core..=) Core.<$> linkStatus])
 
 -- | A thumbnail is an image representing a YouTube resource.
 --
@@ -9208,7 +9387,11 @@ data Thumbnail = Thumbnail
 newThumbnail ::
   Thumbnail
 newThumbnail =
-  Thumbnail {height = Core.Nothing, url = Core.Nothing, width = Core.Nothing}
+  Thumbnail
+    { height = Core.Nothing,
+      url = Core.Nothing,
+      width = Core.Nothing
+    }
 
 instance Core.FromJSON Thumbnail where
   parseJSON =
@@ -9322,9 +9505,7 @@ instance Core.FromJSON ThumbnailSetResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#thumbnailSetResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#thumbnailSetResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -9382,6 +9563,7 @@ data Video = Video
     localizations :: (Core.Maybe Video_Localizations),
     -- | The monetizationDetails object encapsulates information about the monetization status of the video.
     monetizationDetails :: (Core.Maybe VideoMonetizationDetails),
+    paidProductPlacementDetails :: (Core.Maybe VideoPaidProductPlacementDetails),
     -- | The player object contains information that you would use to play the video in an embedded player.
     player :: (Core.Maybe VideoPlayer),
     -- | The processingDetails object encapsulates information about YouTube\'s progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video. The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
@@ -9417,6 +9599,7 @@ newVideo =
       liveStreamingDetails = Core.Nothing,
       localizations = Core.Nothing,
       monetizationDetails = Core.Nothing,
+      paidProductPlacementDetails = Core.Nothing,
       player = Core.Nothing,
       processingDetails = Core.Nothing,
       projectDetails = Core.Nothing,
@@ -9443,6 +9626,7 @@ instance Core.FromJSON Video where
             Core.<*> (o Core..:? "liveStreamingDetails")
             Core.<*> (o Core..:? "localizations")
             Core.<*> (o Core..:? "monetizationDetails")
+            Core.<*> (o Core..:? "paidProductPlacementDetails")
             Core.<*> (o Core..:? "player")
             Core.<*> (o Core..:? "processingDetails")
             Core.<*> (o Core..:? "projectDetails")
@@ -9464,17 +9648,15 @@ instance Core.ToJSON Video where
             ("fileDetails" Core..=) Core.<$> fileDetails,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
-            ("liveStreamingDetails" Core..=)
-              Core.<$> liveStreamingDetails,
+            ("liveStreamingDetails" Core..=) Core.<$> liveStreamingDetails,
             ("localizations" Core..=) Core.<$> localizations,
-            ("monetizationDetails" Core..=)
-              Core.<$> monetizationDetails,
+            ("monetizationDetails" Core..=) Core.<$> monetizationDetails,
+            ("paidProductPlacementDetails" Core..=)
+              Core.<$> paidProductPlacementDetails,
             ("player" Core..=) Core.<$> player,
-            ("processingDetails" Core..=)
-              Core.<$> processingDetails,
+            ("processingDetails" Core..=) Core.<$> processingDetails,
             ("projectDetails" Core..=) Core.<$> projectDetails,
-            ("recordingDetails" Core..=)
-              Core.<$> recordingDetails,
+            ("recordingDetails" Core..=) Core.<$> recordingDetails,
             ("snippet" Core..=) Core.<$> snippet,
             ("statistics" Core..=) Core.<$> statistics,
             ("status" Core..=) Core.<$> status,
@@ -9487,8 +9669,7 @@ instance Core.ToJSON Video where
 --
 -- /See:/ 'newVideo_Localizations' smart constructor.
 newtype Video_Localizations = Video_Localizations
-  { -- |
-    additional :: (Core.HashMap Core.Text VideoLocalization)
+  { additional :: (Core.HashMap Core.Text VideoLocalization)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9504,14 +9685,10 @@ instance Core.FromJSON Video_Localizations where
   parseJSON =
     Core.withObject
       "Video_Localizations"
-      ( \o ->
-          Video_Localizations
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Video_Localizations Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Video_Localizations where
-  toJSON Video_Localizations {..} =
-    Core.toJSON additional
+  toJSON Video_Localizations {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newVideoAbuseReport' smart constructor.
@@ -9561,8 +9738,7 @@ instance Core.ToJSON VideoAbuseReport where
           [ ("comments" Core..=) Core.<$> comments,
             ("language" Core..=) Core.<$> language,
             ("reasonId" Core..=) Core.<$> reasonId,
-            ("secondaryReasonId" Core..=)
-              Core.<$> secondaryReasonId,
+            ("secondaryReasonId" Core..=) Core.<$> secondaryReasonId,
             ("videoId" Core..=) Core.<$> videoId
           ]
       )
@@ -9601,9 +9777,7 @@ instance Core.FromJSON VideoAbuseReportReason where
           VideoAbuseReportReason
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#videoAbuseReportReason"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoAbuseReportReason")
             Core.<*> (o Core..:? "snippet")
       )
 
@@ -9646,10 +9820,7 @@ newVideoAbuseReportReasonListResponse =
       visitorId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    VideoAbuseReportReasonListResponse
-  where
+instance Core.FromJSON VideoAbuseReportReasonListResponse where
   parseJSON =
     Core.withObject
       "VideoAbuseReportReasonListResponse"
@@ -9658,16 +9829,14 @@ instance
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "youtube#videoAbuseReportReasonListResponse"
                      )
             Core.<*> (o Core..:? "visitorId")
       )
 
-instance
-  Core.ToJSON
-    VideoAbuseReportReasonListResponse
-  where
+instance Core.ToJSON VideoAbuseReportReasonListResponse where
   toJSON VideoAbuseReportReasonListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -9714,8 +9883,7 @@ instance Core.ToJSON VideoAbuseReportReasonSnippet where
     Core.object
       ( Core.catMaybes
           [ ("label" Core..=) Core.<$> label,
-            ("secondaryReasons" Core..=)
-              Core.<$> secondaryReasons
+            ("secondaryReasons" Core..=) Core.<$> secondaryReasons
           ]
       )
 
@@ -9733,27 +9901,26 @@ data VideoAbuseReportSecondaryReason = VideoAbuseReportSecondaryReason
 newVideoAbuseReportSecondaryReason ::
   VideoAbuseReportSecondaryReason
 newVideoAbuseReportSecondaryReason =
-  VideoAbuseReportSecondaryReason {id = Core.Nothing, label = Core.Nothing}
+  VideoAbuseReportSecondaryReason
+    { id = Core.Nothing,
+      label = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    VideoAbuseReportSecondaryReason
-  where
+instance Core.FromJSON VideoAbuseReportSecondaryReason where
   parseJSON =
     Core.withObject
       "VideoAbuseReportSecondaryReason"
       ( \o ->
           VideoAbuseReportSecondaryReason
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "label")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "label")
       )
 
 instance Core.ToJSON VideoAbuseReportSecondaryReason where
   toJSON VideoAbuseReportSecondaryReason {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("label" Core..=) Core.<$> label
-          ]
+          [("id" Core..=) Core.<$> id, ("label" Core..=) Core.<$> label]
       )
 
 --
@@ -9795,8 +9962,7 @@ instance Core.ToJSON VideoAgeGating where
       ( Core.catMaybes
           [ ("alcoholContent" Core..=) Core.<$> alcoholContent,
             ("restricted" Core..=) Core.<$> restricted,
-            ("videoGameRating" Core..=)
-              Core.<$> videoGameRating
+            ("videoGameRating" Core..=) Core.<$> videoGameRating
           ]
       )
 
@@ -9866,7 +10032,6 @@ data VideoCategoryListResponse = VideoCategoryListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -9898,9 +10063,7 @@ instance Core.FromJSON VideoCategoryListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#videoCategoryListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoCategoryListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -9928,8 +10091,7 @@ instance Core.ToJSON VideoCategoryListResponse where
 --
 -- /See:/ 'newVideoCategorySnippet' smart constructor.
 data VideoCategorySnippet = VideoCategorySnippet
-  { -- |
-    assignable :: (Core.Maybe Core.Bool),
+  { assignable :: (Core.Maybe Core.Bool),
     -- | The YouTube channel that created the video category.
     channelId :: Core.Text,
     -- | The video category\'s title.
@@ -9954,9 +10116,7 @@ instance Core.FromJSON VideoCategorySnippet where
       ( \o ->
           VideoCategorySnippet
             Core.<$> (o Core..:? "assignable")
-            Core.<*> ( o Core..:? "channelId"
-                         Core..!= "UCBR8-60-B28hp2BmDPdntcQ"
-                     )
+            Core.<*> (o Core..:? "channelId" Core..!= "UCBR8-60-B28hp2BmDPdntcQ")
             Core.<*> (o Core..:? "title")
       )
 
@@ -10038,17 +10198,14 @@ instance Core.ToJSON VideoContentDetails where
       ( Core.catMaybes
           [ ("caption" Core..=) Core.<$> caption,
             ("contentRating" Core..=) Core.<$> contentRating,
-            ("countryRestriction" Core..=)
-              Core.<$> countryRestriction,
+            ("countryRestriction" Core..=) Core.<$> countryRestriction,
             ("definition" Core..=) Core.<$> definition,
             ("dimension" Core..=) Core.<$> dimension,
             ("duration" Core..=) Core.<$> duration,
-            ("hasCustomThumbnail" Core..=)
-              Core.<$> hasCustomThumbnail,
+            ("hasCustomThumbnail" Core..=) Core.<$> hasCustomThumbnail,
             ("licensedContent" Core..=) Core.<$> licensedContent,
             ("projection" Core..=) Core.<$> projection,
-            ("regionRestriction" Core..=)
-              Core.<$> regionRestriction
+            ("regionRestriction" Core..=) Core.<$> regionRestriction
           ]
       )
 
@@ -10072,10 +10229,7 @@ newVideoContentDetailsRegionRestriction =
       blocked = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    VideoContentDetailsRegionRestriction
-  where
+instance Core.FromJSON VideoContentDetailsRegionRestriction where
   parseJSON =
     Core.withObject
       "VideoContentDetailsRegionRestriction"
@@ -10085,10 +10239,7 @@ instance
             Core.<*> (o Core..:? "blocked")
       )
 
-instance
-  Core.ToJSON
-    VideoContentDetailsRegionRestriction
-  where
+instance Core.ToJSON VideoContentDetailsRegionRestriction where
   toJSON VideoContentDetailsRegionRestriction {..} =
     Core.object
       ( Core.catMaybes
@@ -10145,18 +10296,12 @@ instance Core.FromJSON VideoFileDetails where
       ( \o ->
           VideoFileDetails
             Core.<$> (o Core..:? "audioStreams")
-            Core.<*> ( o Core..:? "bitrateBps"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "bitrateBps" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "container")
             Core.<*> (o Core..:? "creationTime")
-            Core.<*> ( o Core..:? "durationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "durationMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "fileName")
-            Core.<*> ( o Core..:? "fileSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "fileSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "fileType")
             Core.<*> (o Core..:? "videoStreams")
       )
@@ -10166,15 +10311,12 @@ instance Core.ToJSON VideoFileDetails where
     Core.object
       ( Core.catMaybes
           [ ("audioStreams" Core..=) Core.<$> audioStreams,
-            ("bitrateBps" Core..=) Core.. Core.AsText
-              Core.<$> bitrateBps,
+            ("bitrateBps" Core..=) Core.. Core.AsText Core.<$> bitrateBps,
             ("container" Core..=) Core.<$> container,
             ("creationTime" Core..=) Core.<$> creationTime,
-            ("durationMs" Core..=) Core.. Core.AsText
-              Core.<$> durationMs,
+            ("durationMs" Core..=) Core.. Core.AsText Core.<$> durationMs,
             ("fileName" Core..=) Core.<$> fileName,
-            ("fileSize" Core..=) Core.. Core.AsText
-              Core.<$> fileSize,
+            ("fileSize" Core..=) Core.. Core.AsText Core.<$> fileSize,
             ("fileType" Core..=) Core.<$> fileType,
             ("videoStreams" Core..=) Core.<$> videoStreams
           ]
@@ -10212,9 +10354,7 @@ instance Core.FromJSON VideoFileDetailsAudioStream where
       "VideoFileDetailsAudioStream"
       ( \o ->
           VideoFileDetailsAudioStream
-            Core.<$> ( o Core..:? "bitrateBps"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "bitrateBps" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "channelCount")
             Core.<*> (o Core..:? "codec")
             Core.<*> (o Core..:? "vendor")
@@ -10224,8 +10364,7 @@ instance Core.ToJSON VideoFileDetailsAudioStream where
   toJSON VideoFileDetailsAudioStream {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bitrateBps" Core..=) Core.. Core.AsText
-              Core.<$> bitrateBps,
+          [ ("bitrateBps" Core..=) Core.. Core.AsText Core.<$> bitrateBps,
             ("channelCount" Core..=) Core.<$> channelCount,
             ("codec" Core..=) Core.<$> codec,
             ("vendor" Core..=) Core.<$> vendor
@@ -10277,9 +10416,7 @@ instance Core.FromJSON VideoFileDetailsVideoStream where
       ( \o ->
           VideoFileDetailsVideoStream
             Core.<$> (o Core..:? "aspectRatio")
-            Core.<*> ( o Core..:? "bitrateBps"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "bitrateBps" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "codec")
             Core.<*> (o Core..:? "frameRateFps")
             Core.<*> (o Core..:? "heightPixels")
@@ -10293,8 +10430,7 @@ instance Core.ToJSON VideoFileDetailsVideoStream where
     Core.object
       ( Core.catMaybes
           [ ("aspectRatio" Core..=) Core.<$> aspectRatio,
-            ("bitrateBps" Core..=) Core.. Core.AsText
-              Core.<$> bitrateBps,
+            ("bitrateBps" Core..=) Core.. Core.AsText Core.<$> bitrateBps,
             ("codec" Core..=) Core.<$> codec,
             ("frameRateFps" Core..=) Core.<$> frameRateFps,
             ("heightPixels" Core..=) Core.<$> heightPixels,
@@ -10341,9 +10477,7 @@ instance Core.FromJSON VideoGetRatingResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#videoGetRatingResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoGetRatingResponse")
             Core.<*> (o Core..:? "visitorId")
       )
 
@@ -10366,7 +10500,6 @@ data VideoListResponse = VideoListResponse
     etag :: (Core.Maybe Core.Text),
     -- | Serialized EventId of the request which produced this response.
     eventId :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [Video]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#videoListResponse\".
     kind :: Core.Text,
@@ -10376,7 +10509,6 @@ data VideoListResponse = VideoListResponse
     pageInfo :: (Core.Maybe PageInfo),
     -- | The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
     prevPageToken :: (Core.Maybe Core.Text),
-    -- |
     tokenPagination :: (Core.Maybe TokenPagination),
     -- | The visitorId identifies the visitor.
     visitorId :: (Core.Maybe Core.Text)
@@ -10408,9 +10540,7 @@ instance Core.FromJSON VideoListResponse where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventId")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "youtube#videoListResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoListResponse")
             Core.<*> (o Core..:? "nextPageToken")
             Core.<*> (o Core..:? "pageInfo")
             Core.<*> (o Core..:? "prevPageToken")
@@ -10446,7 +10576,7 @@ data VideoLiveStreamingDetails = VideoLiveStreamingDetails
     actualStartTime :: (Core.Maybe Core.DateTime),
     -- | The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.
     concurrentViewers :: (Core.Maybe Core.Word64),
-    -- | The time that the broadcast is scheduled to end. If the value is empty or the property is not present, then the broadcast is scheduled to contiue indefinitely.
+    -- | The time that the broadcast is scheduled to end. If the value is empty or the property is not present, then the broadcast is scheduled to continue indefinitely.
     scheduledEndTime :: (Core.Maybe Core.DateTime),
     -- | The time that the broadcast is scheduled to begin.
     scheduledStartTime :: (Core.Maybe Core.DateTime)
@@ -10475,9 +10605,7 @@ instance Core.FromJSON VideoLiveStreamingDetails where
             Core.<$> (o Core..:? "activeLiveChatId")
             Core.<*> (o Core..:? "actualEndTime")
             Core.<*> (o Core..:? "actualStartTime")
-            Core.<*> ( o Core..:? "concurrentViewers"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "concurrentViewers" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scheduledEndTime")
             Core.<*> (o Core..:? "scheduledStartTime")
       )
@@ -10486,16 +10614,14 @@ instance Core.ToJSON VideoLiveStreamingDetails where
   toJSON VideoLiveStreamingDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeLiveChatId" Core..=)
-              Core.<$> activeLiveChatId,
+          [ ("activeLiveChatId" Core..=) Core.<$> activeLiveChatId,
             ("actualEndTime" Core..=) Core.<$> actualEndTime,
             ("actualStartTime" Core..=) Core.<$> actualStartTime,
-            ("concurrentViewers" Core..=) Core.. Core.AsText
+            ("concurrentViewers" Core..=)
+              Core.. Core.AsText
               Core.<$> concurrentViewers,
-            ("scheduledEndTime" Core..=)
-              Core.<$> scheduledEndTime,
-            ("scheduledStartTime" Core..=)
-              Core.<$> scheduledStartTime
+            ("scheduledEndTime" Core..=) Core.<$> scheduledEndTime,
+            ("scheduledStartTime" Core..=) Core.<$> scheduledStartTime
           ]
       )
 
@@ -10514,7 +10640,10 @@ data VideoLocalization = VideoLocalization
 newVideoLocalization ::
   VideoLocalization
 newVideoLocalization =
-  VideoLocalization {description = Core.Nothing, title = Core.Nothing}
+  VideoLocalization
+    { description = Core.Nothing,
+      title = Core.Nothing
+    }
 
 instance Core.FromJSON VideoLocalization where
   parseJSON =
@@ -10547,28 +10676,60 @@ newtype VideoMonetizationDetails = VideoMonetizationDetails
 -- | Creates a value of 'VideoMonetizationDetails' with the minimum fields required to make a request.
 newVideoMonetizationDetails ::
   VideoMonetizationDetails
-newVideoMonetizationDetails = VideoMonetizationDetails {access = Core.Nothing}
+newVideoMonetizationDetails =
+  VideoMonetizationDetails {access = Core.Nothing}
 
 instance Core.FromJSON VideoMonetizationDetails where
   parseJSON =
     Core.withObject
       "VideoMonetizationDetails"
-      ( \o ->
-          VideoMonetizationDetails
-            Core.<$> (o Core..:? "access")
-      )
+      (\o -> VideoMonetizationDetails Core.<$> (o Core..:? "access"))
 
 instance Core.ToJSON VideoMonetizationDetails where
   toJSON VideoMonetizationDetails {..} =
+    Core.object (Core.catMaybes [("access" Core..=) Core.<$> access])
+
+-- | Details about paid content, such as paid product placement, sponsorships or endorsement, contained in a YouTube video and a method to inform viewers of paid promotion. This data can only be retrieved by the video owner.
+--
+-- /See:/ 'newVideoPaidProductPlacementDetails' smart constructor.
+newtype VideoPaidProductPlacementDetails = VideoPaidProductPlacementDetails
+  { -- | This boolean represents whether the video contains Paid Product Placement, Studio equivalent: https:\/\/screenshot.googleplex.com\/4Me79DE6AfT2ktp.png
+    hasPaidProductPlacement :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VideoPaidProductPlacementDetails' with the minimum fields required to make a request.
+newVideoPaidProductPlacementDetails ::
+  VideoPaidProductPlacementDetails
+newVideoPaidProductPlacementDetails =
+  VideoPaidProductPlacementDetails
+    { hasPaidProductPlacement =
+        Core.Nothing
+    }
+
+instance Core.FromJSON VideoPaidProductPlacementDetails where
+  parseJSON =
+    Core.withObject
+      "VideoPaidProductPlacementDetails"
+      ( \o ->
+          VideoPaidProductPlacementDetails
+            Core.<$> (o Core..:? "hasPaidProductPlacement")
+      )
+
+instance Core.ToJSON VideoPaidProductPlacementDetails where
+  toJSON VideoPaidProductPlacementDetails {..} =
     Core.object
-      (Core.catMaybes [("access" Core..=) Core.<$> access])
+      ( Core.catMaybes
+          [ ("hasPaidProductPlacement" Core..=)
+              Core.<$> hasPaidProductPlacement
+          ]
+      )
 
 -- | Player to be used for a video playback.
 --
 -- /See:/ 'newVideoPlayer' smart constructor.
 data VideoPlayer = VideoPlayer
-  { -- |
-    embedHeight :: (Core.Maybe Core.Int64),
+  { embedHeight :: (Core.Maybe Core.Int64),
     -- | An \<iframe> tag that embeds a player that will play the video.
     embedHtml :: (Core.Maybe Core.Text),
     -- | The embed width
@@ -10592,24 +10753,18 @@ instance Core.FromJSON VideoPlayer where
       "VideoPlayer"
       ( \o ->
           VideoPlayer
-            Core.<$> ( o Core..:? "embedHeight"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "embedHeight" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "embedHtml")
-            Core.<*> ( o Core..:? "embedWidth"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "embedWidth" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON VideoPlayer where
   toJSON VideoPlayer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("embedHeight" Core..=) Core.. Core.AsText
-              Core.<$> embedHeight,
+          [ ("embedHeight" Core..=) Core.. Core.AsText Core.<$> embedHeight,
             ("embedHtml" Core..=) Core.<$> embedHtml,
-            ("embedWidth" Core..=) Core.. Core.AsText
-              Core.<$> embedWidth
+            ("embedWidth" Core..=) Core.. Core.AsText Core.<$> embedWidth
           ]
       )
 
@@ -10641,7 +10796,8 @@ newVideoProcessingDetails ::
   VideoProcessingDetails
 newVideoProcessingDetails =
   VideoProcessingDetails
-    { editorSuggestionsAvailability = Core.Nothing,
+    { editorSuggestionsAvailability =
+        Core.Nothing,
       fileDetailsAvailability = Core.Nothing,
       processingFailureReason = Core.Nothing,
       processingIssuesAvailability = Core.Nothing,
@@ -10679,10 +10835,8 @@ instance Core.ToJSON VideoProcessingDetails where
               Core.<$> processingFailureReason,
             ("processingIssuesAvailability" Core..=)
               Core.<$> processingIssuesAvailability,
-            ("processingProgress" Core..=)
-              Core.<$> processingProgress,
-            ("processingStatus" Core..=)
-              Core.<$> processingStatus,
+            ("processingProgress" Core..=) Core.<$> processingProgress,
+            ("processingStatus" Core..=) Core.<$> processingStatus,
             ("tagSuggestionsAvailability" Core..=)
               Core.<$> tagSuggestionsAvailability,
             ("thumbnailsAvailability" Core..=)
@@ -10708,44 +10862,32 @@ newVideoProcessingDetailsProcessingProgress ::
   VideoProcessingDetailsProcessingProgress
 newVideoProcessingDetailsProcessingProgress =
   VideoProcessingDetailsProcessingProgress
-    { partsProcessed = Core.Nothing,
+    { partsProcessed =
+        Core.Nothing,
       partsTotal = Core.Nothing,
       timeLeftMs = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    VideoProcessingDetailsProcessingProgress
-  where
+instance Core.FromJSON VideoProcessingDetailsProcessingProgress where
   parseJSON =
     Core.withObject
       "VideoProcessingDetailsProcessingProgress"
       ( \o ->
           VideoProcessingDetailsProcessingProgress
-            Core.<$> ( o Core..:? "partsProcessed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "partsTotal"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "timeLeftMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "partsProcessed" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "partsTotal" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "timeLeftMs" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    VideoProcessingDetailsProcessingProgress
-  where
+instance Core.ToJSON VideoProcessingDetailsProcessingProgress where
   toJSON VideoProcessingDetailsProcessingProgress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("partsProcessed" Core..=) Core.. Core.AsText
+          [ ("partsProcessed" Core..=)
+              Core.. Core.AsText
               Core.<$> partsProcessed,
-            ("partsTotal" Core..=) Core.. Core.AsText
-              Core.<$> partsTotal,
-            ("timeLeftMs" Core..=) Core.. Core.AsText
-              Core.<$> timeLeftMs
+            ("partsTotal" Core..=) Core.. Core.AsText Core.<$> partsTotal,
+            ("timeLeftMs" Core..=) Core.. Core.AsText Core.<$> timeLeftMs
           ]
       )
 
@@ -10783,7 +10925,8 @@ data VideoRating = VideoRating
 -- | Creates a value of 'VideoRating' with the minimum fields required to make a request.
 newVideoRating ::
   VideoRating
-newVideoRating = VideoRating {rating = Core.Nothing, videoId = Core.Nothing}
+newVideoRating =
+  VideoRating {rating = Core.Nothing, videoId = Core.Nothing}
 
 instance Core.FromJSON VideoRating where
   parseJSON =
@@ -10843,8 +10986,7 @@ instance Core.ToJSON VideoRecordingDetails where
     Core.object
       ( Core.catMaybes
           [ ("location" Core..=) Core.<$> location,
-            ("locationDescription" Core..=)
-              Core.<$> locationDescription,
+            ("locationDescription" Core..=) Core.<$> locationDescription,
             ("recordingDate" Core..=) Core.<$> recordingDate
           ]
       )
@@ -10926,12 +11068,10 @@ instance Core.ToJSON VideoSnippet where
           [ ("categoryId" Core..=) Core.<$> categoryId,
             ("channelId" Core..=) Core.<$> channelId,
             ("channelTitle" Core..=) Core.<$> channelTitle,
-            ("defaultAudioLanguage" Core..=)
-              Core.<$> defaultAudioLanguage,
+            ("defaultAudioLanguage" Core..=) Core.<$> defaultAudioLanguage,
             ("defaultLanguage" Core..=) Core.<$> defaultLanguage,
             ("description" Core..=) Core.<$> description,
-            ("liveBroadcastContent" Core..=)
-              Core.<$> liveBroadcastContent,
+            ("liveBroadcastContent" Core..=) Core.<$> liveBroadcastContent,
             ("localized" Core..=) Core.<$> localized,
             ("publishedAt" Core..=) Core.<$> publishedAt,
             ("tags" Core..=) Core.<$> tags,
@@ -10975,51 +11115,39 @@ instance Core.FromJSON VideoStatistics where
       "VideoStatistics"
       ( \o ->
           VideoStatistics
-            Core.<$> ( o Core..:? "commentCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "dislikeCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "favoriteCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "likeCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "viewCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "commentCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "dislikeCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "favoriteCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "likeCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "viewCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON VideoStatistics where
   toJSON VideoStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("commentCount" Core..=) Core.. Core.AsText
-              Core.<$> commentCount,
-            ("dislikeCount" Core..=) Core.. Core.AsText
-              Core.<$> dislikeCount,
-            ("favoriteCount" Core..=) Core.. Core.AsText
+          [ ("commentCount" Core..=) Core.. Core.AsText Core.<$> commentCount,
+            ("dislikeCount" Core..=) Core.. Core.AsText Core.<$> dislikeCount,
+            ("favoriteCount" Core..=)
+              Core.. Core.AsText
               Core.<$> favoriteCount,
-            ("likeCount" Core..=) Core.. Core.AsText
-              Core.<$> likeCount,
-            ("viewCount" Core..=) Core.. Core.AsText
-              Core.<$> viewCount
+            ("likeCount" Core..=) Core.. Core.AsText Core.<$> likeCount,
+            ("viewCount" Core..=) Core.. Core.AsText Core.<$> viewCount
           ]
       )
 
--- | Basic details about a video category, such as its localized title. Next Id: 18
+-- | Basic details about a video category, such as its localized title. Next Id: 19
 --
 -- /See:/ 'newVideoStatus' smart constructor.
 data VideoStatus = VideoStatus
-  { -- | This value indicates if the video can be embedded on another website. \@mutable youtube.videos.insert youtube.videos.update
+  { -- | Indicates if the video contains altered or synthetic media.
+    containsSyntheticMedia :: (Core.Maybe Core.Bool),
+    -- | This value indicates if the video can be embedded on another website. \@mutable youtube.videos.insert youtube.videos.update
     embeddable :: (Core.Maybe Core.Bool),
     -- | This value explains why a video failed to upload. This property is only present if the uploadStatus property indicates that the upload failed.
     failureReason :: (Core.Maybe VideoStatus_FailureReason),
     -- | The video\'s license. \@mutable youtube.videos.insert youtube.videos.update
     license :: (Core.Maybe VideoStatus_License),
-    -- |
     madeForKids :: (Core.Maybe Core.Bool),
     -- | The video\'s privacy status.
     privacyStatus :: (Core.Maybe VideoStatus_PrivacyStatus),
@@ -11029,7 +11157,6 @@ data VideoStatus = VideoStatus
     publishAt :: (Core.Maybe Core.DateTime),
     -- | This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected.
     rejectionReason :: (Core.Maybe VideoStatus_RejectionReason),
-    -- |
     selfDeclaredMadeForKids :: (Core.Maybe Core.Bool),
     -- | The status of the uploaded video.
     uploadStatus :: (Core.Maybe VideoStatus_UploadStatus)
@@ -11041,7 +11168,8 @@ newVideoStatus ::
   VideoStatus
 newVideoStatus =
   VideoStatus
-    { embeddable = Core.Nothing,
+    { containsSyntheticMedia = Core.Nothing,
+      embeddable = Core.Nothing,
       failureReason = Core.Nothing,
       license = Core.Nothing,
       madeForKids = Core.Nothing,
@@ -11059,7 +11187,8 @@ instance Core.FromJSON VideoStatus where
       "VideoStatus"
       ( \o ->
           VideoStatus
-            Core.<$> (o Core..:? "embeddable")
+            Core.<$> (o Core..:? "containsSyntheticMedia")
+            Core.<*> (o Core..:? "embeddable")
             Core.<*> (o Core..:? "failureReason")
             Core.<*> (o Core..:? "license")
             Core.<*> (o Core..:? "madeForKids")
@@ -11075,13 +11204,14 @@ instance Core.ToJSON VideoStatus where
   toJSON VideoStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("embeddable" Core..=) Core.<$> embeddable,
+          [ ("containsSyntheticMedia" Core..=)
+              Core.<$> containsSyntheticMedia,
+            ("embeddable" Core..=) Core.<$> embeddable,
             ("failureReason" Core..=) Core.<$> failureReason,
             ("license" Core..=) Core.<$> license,
             ("madeForKids" Core..=) Core.<$> madeForKids,
             ("privacyStatus" Core..=) Core.<$> privacyStatus,
-            ("publicStatsViewable" Core..=)
-              Core.<$> publicStatsViewable,
+            ("publicStatsViewable" Core..=) Core.<$> publicStatsViewable,
             ("publishAt" Core..=) Core.<$> publishAt,
             ("rejectionReason" Core..=) Core.<$> rejectionReason,
             ("selfDeclaredMadeForKids" Core..=)
@@ -11136,18 +11266,15 @@ instance Core.ToJSON VideoSuggestions where
   toJSON VideoSuggestions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("editorSuggestions" Core..=)
-              Core.<$> editorSuggestions,
-            ("processingErrors" Core..=)
-              Core.<$> processingErrors,
+          [ ("editorSuggestions" Core..=) Core.<$> editorSuggestions,
+            ("processingErrors" Core..=) Core.<$> processingErrors,
             ("processingHints" Core..=) Core.<$> processingHints,
-            ("processingWarnings" Core..=)
-              Core.<$> processingWarnings,
+            ("processingWarnings" Core..=) Core.<$> processingWarnings,
             ("tagSuggestions" Core..=) Core.<$> tagSuggestions
           ]
       )
 
--- | A single tag suggestion with it\'s relevance information.
+-- | A single tag suggestion with its relevance information.
 --
 -- /See:/ 'newVideoSuggestionsTagSuggestion' smart constructor.
 data VideoSuggestionsTagSuggestion = VideoSuggestionsTagSuggestion
@@ -11181,8 +11308,7 @@ instance Core.ToJSON VideoSuggestionsTagSuggestion where
   toJSON VideoSuggestionsTagSuggestion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("categoryRestricts" Core..=)
-              Core.<$> categoryRestricts,
+          [ ("categoryRestricts" Core..=) Core.<$> categoryRestricts,
             ("tag" Core..=) Core.<$> tag
           ]
       )
@@ -11225,10 +11351,58 @@ instance Core.ToJSON VideoTopicDetails where
   toJSON VideoTopicDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("relevantTopicIds" Core..=)
-              Core.<$> relevantTopicIds,
+          [ ("relevantTopicIds" Core..=) Core.<$> relevantTopicIds,
             ("topicCategories" Core..=) Core.<$> topicCategories,
             ("topicIds" Core..=) Core.<$> topicIds
+          ]
+      )
+
+-- | Specifies who is allowed to train on the video.
+--
+-- /See:/ 'newVideoTrainability' smart constructor.
+data VideoTrainability = VideoTrainability
+  { -- | Etag of this resource.
+    etag :: (Core.Maybe Core.Text),
+    -- | Identifies what kind of resource this is. Value: the fixed string \"youtube#videoTrainability\".
+    kind :: Core.Text,
+    -- | Specifies who is allowed to train on the video. Valid values are: - a single string \"all\" - a single string \"none\" - a list of allowed parties
+    permitted :: (Core.Maybe [Core.Text]),
+    -- | The ID of the video.
+    videoId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'VideoTrainability' with the minimum fields required to make a request.
+newVideoTrainability ::
+  VideoTrainability
+newVideoTrainability =
+  VideoTrainability
+    { etag = Core.Nothing,
+      kind = "youtube#videoTrainability",
+      permitted = Core.Nothing,
+      videoId = Core.Nothing
+    }
+
+instance Core.FromJSON VideoTrainability where
+  parseJSON =
+    Core.withObject
+      "VideoTrainability"
+      ( \o ->
+          VideoTrainability
+            Core.<$> (o Core..:? "etag")
+            Core.<*> (o Core..:? "kind" Core..!= "youtube#videoTrainability")
+            Core.<*> (o Core..:? "permitted")
+            Core.<*> (o Core..:? "videoId")
+      )
+
+instance Core.ToJSON VideoTrainability where
+  toJSON VideoTrainability {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("etag" Core..=) Core.<$> etag,
+            Core.Just ("kind" Core..= kind),
+            ("permitted" Core..=) Core.<$> permitted,
+            ("videoId" Core..=) Core.<$> videoId
           ]
       )
 
@@ -11270,10 +11444,8 @@ instance Core.ToJSON WatchSettings where
   toJSON WatchSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
-            ("featuredPlaylistId" Core..=)
-              Core.<$> featuredPlaylistId,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
+            ("featuredPlaylistId" Core..=) Core.<$> featuredPlaylistId,
             ("textColor" Core..=) Core.<$> textColor
           ]
       )

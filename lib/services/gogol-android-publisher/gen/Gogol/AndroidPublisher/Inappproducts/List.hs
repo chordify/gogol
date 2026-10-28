@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field @tokenPagination.nextPageToken@ will be set and the caller should provide its value as a @token@ request parameter to retrieve the next page.
+-- Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field @tokenPagination.nextPageToken@ will be set and the caller should provide its value as a @token@ request parameter to retrieve the next page. This method should no longer be used to retrieve subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.list@.
 module Gogol.AndroidPublisher.Inappproducts.List
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Inappproducts.List
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.inappproducts.list@ method which the
 -- 'AndroidPublisherInappproductsList' request conforms to.
@@ -61,7 +59,7 @@ type AndroidPublisherInappproductsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] InappproductsListResponse
 
--- | Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field @tokenPagination.nextPageToken@ will be set and the caller should provide its value as a @token@ request parameter to retrieve the next page.
+-- | Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field @tokenPagination.nextPageToken@ will be set and the caller should provide its value as a @token@ request parameter to retrieve the next page. This method should no longer be used to retrieve subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ 'newAndroidPublisherInappproductsList' smart constructor.
 data AndroidPublisherInappproductsList = AndroidPublisherInappproductsList
@@ -75,7 +73,7 @@ data AndroidPublisherInappproductsList = AndroidPublisherInappproductsList
     maxResults :: (Core.Maybe Core.Word32),
     -- | Package name of the app.
     packageName :: Core.Text,
-    -- | Deprecated and ignored. Set the @token@ parameter to rertieve the next page.
+    -- | Deprecated and ignored. Set the @token@ parameter to retrieve the next page.
     startIndex :: (Core.Maybe Core.Word32),
     -- | Pagination token. If empty, list starts at the first product.
     token :: (Core.Maybe Core.Text),
@@ -104,10 +102,7 @@ newAndroidPublisherInappproductsList packageName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsList
-  where
+instance Core.GoogleRequest AndroidPublisherInappproductsList where
   type
     Rs AndroidPublisherInappproductsList =
       InappproductsListResponse

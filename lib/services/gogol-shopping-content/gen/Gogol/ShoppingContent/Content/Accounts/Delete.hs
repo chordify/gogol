@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Accounts.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Accounts.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.delete@ method which the
@@ -103,9 +101,7 @@ newContentAccountsDelete accountId merchantId =
 
 instance Core.GoogleRequest ContentAccountsDelete where
   type Rs ContentAccountsDelete = ()
-  type
-    Scopes ContentAccountsDelete =
-      '[Content'FullControl]
+  type Scopes ContentAccountsDelete = '[Content'FullControl]
   requestClient ContentAccountsDelete {..} =
     go
       merchantId
@@ -121,7 +117,5 @@ instance Core.GoogleRequest ContentAccountsDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentAccountsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ContentAccountsDeleteResource)
           Core.mempty

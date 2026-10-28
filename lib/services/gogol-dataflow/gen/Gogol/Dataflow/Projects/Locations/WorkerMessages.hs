@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.WorkerMessages
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.WorkerMessages
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.workerMessages@ method which the
 -- 'DataflowProjectsLocationsWorkerMessages' request conforms to.
@@ -92,50 +90,44 @@ newDataflowProjectsLocationsWorkerMessages ::
   -- |  The project to send the WorkerMessages to. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsWorkerMessages
-newDataflowProjectsLocationsWorkerMessages location payload projectId =
-  DataflowProjectsLocationsWorkerMessages
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      location = location,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDataflowProjectsLocationsWorkerMessages
+  location
+  payload
+  projectId =
     DataflowProjectsLocationsWorkerMessages
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        location = location,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DataflowProjectsLocationsWorkerMessages where
   type
     Rs DataflowProjectsLocationsWorkerMessages =
       SendWorkerMessagesResponse
   type
     Scopes DataflowProjectsLocationsWorkerMessages =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsWorkerMessages {..} =
-      go
-        projectId
-        location
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsWorkerMessagesResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsWorkerMessages {..} =
+    go
+      projectId
+      location
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataflowProjectsLocationsWorkerMessagesResource
+          )
+          Core.mempty

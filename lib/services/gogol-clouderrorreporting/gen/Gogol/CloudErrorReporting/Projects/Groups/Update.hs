@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Projects.Groups.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudErrorReporting.Projects.Groups.Update
 where
 
 import Gogol.CloudErrorReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouderrorreporting.projects.groups.update@ method which the
 -- 'CloudErrorReportingProjectsGroupsUpdate' request conforms to.
@@ -66,7 +64,7 @@ data CloudErrorReportingProjectsGroupsUpdate = CloudErrorReportingProjectsGroups
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The group resource name. Example: projects\/my-project-123\/groups\/CNSgkpnppqKCUw
+    -- | The group resource name. Written as @projects\/{projectID}\/groups\/{group_id}@ or @projects\/{projectID}\/locations\/{location}\/groups\/{group_id}@ Examples: @projects\/my-project-123\/groups\/my-group@, @projects\/my-project-123\/locations\/us-central1\/groups\/my-group@ In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ErrorGroup,
@@ -79,7 +77,7 @@ data CloudErrorReportingProjectsGroupsUpdate = CloudErrorReportingProjectsGroups
 
 -- | Creates a value of 'CloudErrorReportingProjectsGroupsUpdate' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsGroupsUpdate ::
-  -- |  The group resource name. Example: projects\/my-project-123\/groups\/CNSgkpnppqKCUw See 'name'.
+  -- |  The group resource name. Written as @projects\/{projectID}\/groups\/{group_id}@ or @projects\/{projectID}\/locations\/{location}\/groups\/{group_id}@ Examples: @projects\/my-project-123\/groups\/my-group@, @projects\/my-project-123\/locations\/us-central1\/groups\/my-group@ In the group resource name, the @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see <https://cloud.google.com/terms/cloud-privacy-notice Google Cloud Privacy Notice>. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ErrorGroup ->
@@ -95,33 +93,26 @@ newCloudErrorReportingProjectsGroupsUpdate name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudErrorReportingProjectsGroupsUpdate
-  where
-  type
-    Rs CloudErrorReportingProjectsGroupsUpdate =
-      ErrorGroup
+instance Core.GoogleRequest CloudErrorReportingProjectsGroupsUpdate where
+  type Rs CloudErrorReportingProjectsGroupsUpdate = ErrorGroup
   type
     Scopes CloudErrorReportingProjectsGroupsUpdate =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudErrorReportingProjectsGroupsUpdate {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudErrorReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudErrorReportingProjectsGroupsUpdateResource
-            )
-            Core.mempty
+  requestClient CloudErrorReportingProjectsGroupsUpdate {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudErrorReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudErrorReportingProjectsGroupsUpdateResource
+          )
+          Core.mempty

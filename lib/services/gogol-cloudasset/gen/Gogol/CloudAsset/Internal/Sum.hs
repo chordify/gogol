@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudAsset.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudAsset.Internal.Sum
@@ -103,6 +101,14 @@ module Gogol.CloudAsset.Internal.Sum
         ..
       ),
 
+    -- * GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+    GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+      ( GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+        GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
+        GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
+        ..
+      ),
+
     -- * GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
     GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType
       ( GoogleIdentityAccesscontextmanagerV1IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
@@ -133,7 +139,7 @@ module Gogol.CloudAsset.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -263,11 +269,11 @@ newtype GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey = GoogleCloudAssetV1
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_PARTITIONKEYUNSPECIFIED = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "PARTITION_KEY_UNSPECIFIED"
 
--- | The time when the snapshot is taken. If specified as partition key, the result table(s) is partitoned by the additional timestamp column, readTime. If [read_time] in ExportAssetsRequest is specified, the readTime column\'s value will be the same as it. Otherwise, its value will be the current time that is used to take the snapshot.
+-- | The time when the snapshot is taken. If specified as partition key, the result table(s) is partitioned by the additional timestamp column, readTime. If [read_time] in ExportAssetsRequest is specified, the readTime column\'s value will be the same as it. Otherwise, its value will be the current time that is used to take the snapshot.
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_READTIME = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "READ_TIME"
 
--- | The time when the request is received and started to be processed. If specified as partition key, the result table(s) is partitoned by the requestTime column, an additional timestamp column representing when the request was received.
+-- | The time when the request is received and started to be processed. If specified as partition key, the result table(s) is partitioned by the requestTime column, an additional timestamp column representing when the request was received.
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME :: GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey
 pattern GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey_REQUESTTIME = GoogleCloudAssetV1p7beta1PartitionSpec_PartitionKey "REQUEST_TIME"
 
@@ -444,6 +450,38 @@ pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYSERVICEAC
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYUSERACCOUNT,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType_ANYSERVICEACCOUNT,
   GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
+  #-}
+
+-- | Whether to enforce traffic restrictions based on @sources@ field. If the @sources@ fields is non-empty, then this field must be set to @SOURCE_RESTRICTION_ENABLED@.
+newtype GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction {fromGoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Enforcement preference unspecified, will not enforce traffic restrictions based on @sources@ in EgressFrom.
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED :: GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction "SOURCE_RESTRICTION_UNSPECIFIED"
+
+-- | Enforcement preference enabled, traffic restrictions will be enforced based on @sources@ in EgressFrom.
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED :: GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction "SOURCE_RESTRICTION_ENABLED"
+
+-- | Enforcement preference disabled, will not enforce traffic restrictions based on @sources@ in EgressFrom.
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED :: GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+pattern GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED = GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction "SOURCE_RESTRICTION_DISABLED"
+
+{-# COMPLETE
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
+  GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
   #-}
 
 -- | Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.

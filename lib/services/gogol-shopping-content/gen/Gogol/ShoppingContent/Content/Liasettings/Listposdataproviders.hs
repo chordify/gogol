@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Liasettings.Listposdataproviders
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Liasettings.Listposdataproviders
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.liasettings.listposdataproviders@ method which the
@@ -55,9 +53,7 @@ type ContentLiasettingsListposdataprovidersResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              LiasettingsListPosDataProvidersResponse
+    Core.:> Core.Get '[Core.JSON] LiasettingsListPosDataProvidersResponse
 
 -- | Retrieves the list of POS data providers that have active settings for the all eiligible countries.
 --
@@ -88,31 +84,26 @@ newContentLiasettingsListposdataproviders =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentLiasettingsListposdataproviders
-  where
+instance Core.GoogleRequest ContentLiasettingsListposdataproviders where
   type
     Rs ContentLiasettingsListposdataproviders =
       LiasettingsListPosDataProvidersResponse
   type
     Scopes ContentLiasettingsListposdataproviders =
       '[Content'FullControl]
-  requestClient
-    ContentLiasettingsListposdataproviders {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        shoppingContentService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContentLiasettingsListposdataprovidersResource
-            )
-            Core.mempty
+  requestClient ContentLiasettingsListposdataproviders {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      shoppingContentService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContentLiasettingsListposdataprovidersResource
+          )
+          Core.mempty

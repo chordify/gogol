@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Chat.Media.Download
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Chat.Media.Download
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.media.download@ method which the
 -- 'ChatMediaDownload' request conforms to.
@@ -56,15 +54,15 @@ type ChatMediaDownloadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Media
     Core.:<|> "v1"
-      Core.:> "media"
-      Core.:> Core.Capture "resourceName" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "media"
+    Core.:> Core.Capture "resourceName" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Downloads media. Download is supported on the URI @\/v1\/media\/{+name}?alt=media@.
 --
@@ -121,29 +119,23 @@ instance Core.GoogleRequest ChatMediaDownload where
           (Core.Proxy :: Core.Proxy ChatMediaDownloadResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaDownload ChatMediaDownload)
-  where
-  type
-    Rs (Core.MediaDownload ChatMediaDownload) =
-      Core.Stream
+instance Core.GoogleRequest (Core.MediaDownload ChatMediaDownload) where
+  type Rs (Core.MediaDownload ChatMediaDownload) = Core.Stream
   type
     Scopes (Core.MediaDownload ChatMediaDownload) =
       Core.Scopes ChatMediaDownload
-  requestClient
-    (Core.MediaDownload ChatMediaDownload {..}) =
-      go
-        resourceName
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltMedia)
-        chatService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            (Core.Proxy :: Core.Proxy ChatMediaDownloadResource)
-            Core.mempty
+  requestClient (Core.MediaDownload ChatMediaDownload {..}) =
+    go
+      resourceName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltMedia)
+      chatService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy ChatMediaDownloadResource)
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.LiveBroadcasts.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.LiveBroadcasts.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.list@ method which the
@@ -51,27 +49,19 @@ type YouTubeLiveBroadcastsListResource =
     Core.:> Core.QueryParams "part" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "broadcastStatus"
-              LiveBroadcastsListBroadcastStatus
-    Core.:> Core.QueryParam
-              "broadcastType"
-              LiveBroadcastsListBroadcastType
+    Core.:> Core.QueryParam "broadcastStatus" LiveBroadcastsListBroadcastStatus
+    Core.:> Core.QueryParam "broadcastType" LiveBroadcastsListBroadcastType
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "id" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "mine" Core.Bool
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwnerChannel"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              LiveBroadcastListResponse
+    Core.:> Core.Get '[Core.JSON] LiveBroadcastListResponse
 
 -- | Retrieve the list of broadcasts associated with the given channel.
 --
@@ -91,7 +81,6 @@ data YouTubeLiveBroadcastsList = YouTubeLiveBroadcastsList
     id :: (Core.Maybe [Core.Text]),
     -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set.
     maxResults :: Core.Word32,
-    -- |
     mine :: (Core.Maybe Core.Bool),
     -- | /Note:/ This parameter is intended exclusively for YouTube content partners. The /onBehalfOfContentOwner/ parameter indicates that the request\'s authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
     onBehalfOfContentOwner :: (Core.Maybe Core.Text),
@@ -133,15 +122,10 @@ newYouTubeLiveBroadcastsList part =
     }
 
 instance Core.GoogleRequest YouTubeLiveBroadcastsList where
-  type
-    Rs YouTubeLiveBroadcastsList =
-      LiveBroadcastListResponse
+  type Rs YouTubeLiveBroadcastsList = LiveBroadcastListResponse
   type
     Scopes YouTubeLiveBroadcastsList =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Readonly
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Readonly]
   requestClient YouTubeLiveBroadcastsList {..} =
     go
       part
@@ -163,7 +147,5 @@ instance Core.GoogleRequest YouTubeLiveBroadcastsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeLiveBroadcastsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeLiveBroadcastsListResource)
           Core.mempty

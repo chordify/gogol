@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates one or more fields of a course work. See google.classroom.v1.CourseWork for details of which fields may be updated and who may change them. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding course work, if the user is not permitted to make the requested modification to the student submission, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if the requested course work has already been deleted. * @NOT_FOUND@ if the requested course, course work, or student submission does not exist.
+-- Updates one or more fields of a course work. See google.classroom.v1.CourseWork for details of which fields may be updated and who may change them. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding course work, if the user is not permitted to make the requested modification to the student submission, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if the requested course work has already been deleted. * @NOT_FOUND@ if the requested course or course work does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.courseWork.patch@.
 module Gogol.Classroom.Courses.CourseWork.Patch
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.Patch
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.patch@ method which the
 -- 'ClassroomCoursesCourseWorkPatch' request conforms to.
@@ -60,7 +58,7 @@ type ClassroomCoursesCourseWorkPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] CourseWork
     Core.:> Core.Patch '[Core.JSON] CourseWork
 
--- | Updates one or more fields of a course work. See google.classroom.v1.CourseWork for details of which fields may be updated and who may change them. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding course work, if the user is not permitted to make the requested modification to the student submission, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if the requested course work has already been deleted. * @NOT_FOUND@ if the requested course, course work, or student submission does not exist.
+-- | Updates one or more fields of a course work. See google.classroom.v1.CourseWork for details of which fields may be updated and who may change them. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding course work, if the user is not permitted to make the requested modification to the student submission, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if the requested course work has already been deleted. * @NOT_FOUND@ if the requested course or course work does not exist.
 --
 -- /See:/ 'newClassroomCoursesCourseWorkPatch' smart constructor.
 data ClassroomCoursesCourseWorkPatch = ClassroomCoursesCourseWorkPatch
@@ -76,7 +74,7 @@ data ClassroomCoursesCourseWorkPatch = ClassroomCoursesCourseWorkPatch
     id :: Core.Text,
     -- | Multipart request metadata.
     payload :: CourseWork,
-    -- | Mask that identifies which fields on the course work to update. This field is required to do an update. The update fails if invalid fields are specified. If a field supports empty values, it can be cleared by specifying it in the update mask and not in the CourseWork object. If a field that does not support empty values is included in the update mask and not set in the CourseWork object, an @INVALID_ARGUMENT@ error is returned. The following fields may be specified by teachers: * @title@ * @description@ * @state@ * @due_date@ * @due_time@ * @max_points@ * @scheduled_time@ * @submission_modification_mode@ * @topic_id@
+    -- | Mask that identifies which fields on the course work to update. This field is required to do an update. The update fails if invalid fields are specified. If a field supports empty values, it can be cleared by specifying it in the update mask and not in the @CourseWork@ object. If a field that does not support empty values is included in the update mask and not set in the @CourseWork@ object, an @INVALID_ARGUMENT@ error is returned. The following fields may be specified by teachers: * @title@ * @description@ * @state@ * @due_date@ * @due_time@ * @max_points@ * @scheduled_time@ * @submission_modification_mode@ * @topic_id@ * @grading_period_id@ Available in <https://developers.google.com/classroom/reference/preview V120240401PREVIEW> and later.
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -107,10 +105,7 @@ newClassroomCoursesCourseWorkPatch courseId id payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesCourseWorkPatch
-  where
+instance Core.GoogleRequest ClassroomCoursesCourseWorkPatch where
   type Rs ClassroomCoursesCourseWorkPatch = CourseWork
   type
     Scopes ClassroomCoursesCourseWorkPatch =
@@ -131,7 +126,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ClassroomCoursesCourseWorkPatchResource
-          )
+          (Core.Proxy :: Core.Proxy ClassroomCoursesCourseWorkPatchResource)
           Core.mempty

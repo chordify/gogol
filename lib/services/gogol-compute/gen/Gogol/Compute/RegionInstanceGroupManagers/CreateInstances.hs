@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionInstanceGroupManagers.CreateInstances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionInstanceGroupManagers.CreateInstances
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.createInstances@ method which the
 -- 'ComputeRegionInstanceGroupManagersCreateInstances' request conforms to.
@@ -104,52 +102,54 @@ newComputeRegionInstanceGroupManagersCreateInstances ::
   -- |  The name of the region where the managed instance group is located. It should conform to RFC1035. See 'region'.
   Core.Text ->
   ComputeRegionInstanceGroupManagersCreateInstances
-newComputeRegionInstanceGroupManagersCreateInstances instanceGroupManager payload project region =
-  ComputeRegionInstanceGroupManagersCreateInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionInstanceGroupManagersCreateInstances
+  instanceGroupManager
+  payload
+  project
+  region =
+    ComputeRegionInstanceGroupManagersCreateInstances
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager = instanceGroupManager,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionInstanceGroupManagersCreateInstances
   where
   type
-    Rs
-      ComputeRegionInstanceGroupManagersCreateInstances =
+    Rs ComputeRegionInstanceGroupManagersCreateInstances =
       Operation
   type
-    Scopes
-      ComputeRegionInstanceGroupManagersCreateInstances =
+    Scopes ComputeRegionInstanceGroupManagersCreateInstances =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionInstanceGroupManagersCreateInstances {..} =
-      go
-        project
-        region
-        instanceGroupManager
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionInstanceGroupManagersCreateInstancesResource
-            )
-            Core.mempty
+  requestClient ComputeRegionInstanceGroupManagersCreateInstances {..} =
+    go
+      project
+      region
+      instanceGroupManager
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ComputeRegionInstanceGroupManagersCreateInstancesResource
+          )
+          Core.mempty

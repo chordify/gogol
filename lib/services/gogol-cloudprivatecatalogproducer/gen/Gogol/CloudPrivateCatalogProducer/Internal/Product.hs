@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudPrivateCatalogProducer.Internal.Product
@@ -153,7 +151,7 @@ module Gogol.CloudPrivateCatalogProducer.Internal.Product
 where
 
 import Gogol.CloudPrivateCatalogProducer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An association tuple that pairs a @Catalog@ to a resource that can use the @Catalog@. After association, a google.cloud.privatecatalog.v1beta1.Catalog becomes available to consumers under specified Association.resource and all of its child nodes. Users who have the @cloudprivatecatalog.targets.get@ permission on any of the resource nodes can access the catalog and child products under the node.
 --
@@ -193,7 +191,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1Association ::
   GoogleCloudPrivatecatalogproducerV1beta1Association
 newGoogleCloudPrivatecatalogproducerV1beta1Association =
   GoogleCloudPrivatecatalogproducerV1beta1Association
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       name = Core.Nothing,
       resource = Core.Nothing
     }
@@ -208,23 +207,22 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1Association
             Core.<$> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "resource")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "resource")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogproducerV1beta1Association
   where
-  toJSON
-    GoogleCloudPrivatecatalogproducerV1beta1Association {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("name" Core..=) Core.<$> name,
-              ("resource" Core..=) Core.<$> resource
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogproducerV1beta1Association {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("name" Core..=) Core.<$> name,
+            ("resource" Core..=) Core.<$> resource
+          ]
+      )
 
 -- | The producer representation of a catalog which is a curated collection of solutions that can be managed, controlled, and shared by cloud admins.
 --
@@ -252,7 +250,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1Catalog ::
   GoogleCloudPrivatecatalogproducerV1beta1Catalog
 newGoogleCloudPrivatecatalogproducerV1beta1Catalog =
   GoogleCloudPrivatecatalogproducerV1beta1Catalog
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       description = Core.Nothing,
       displayName = Core.Nothing,
       name = Core.Nothing,
@@ -270,29 +269,28 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1Catalog
             Core.<$> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "description")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "parent")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogproducerV1beta1Catalog
   where
-  toJSON
-    GoogleCloudPrivatecatalogproducerV1beta1Catalog {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("description" Core..=) Core.<$> description,
-              ("displayName" Core..=) Core.<$> displayName,
-              ("name" Core..=) Core.<$> name,
-              ("parent" Core..=) Core.<$> parent,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogproducerV1beta1Catalog {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("description" Core..=) Core.<$> description,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("name" Core..=) Core.<$> name,
+            ("parent" Core..=) Core.<$> parent,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 --
 -- /See:/ 'newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest' smart constructor.
@@ -307,7 +305,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest ::
   GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
 newGoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest =
   GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest
-    { destinationProductName = Core.Nothing
+    { destinationProductName =
+        Core.Nothing
     }
 
 instance
@@ -350,7 +349,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest ::
   GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
 newGoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest =
   GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest
-    { association = Core.Nothing
+    { association =
+        Core.Nothing
     }
 
 instance
@@ -372,9 +372,7 @@ instance
   toJSON
     GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest {..} =
       Core.object
-        ( Core.catMaybes
-            [("association" Core..=) Core.<$> association]
-        )
+        (Core.catMaybes [("association" Core..=) Core.<$> association])
 
 --
 -- /See:/ 'newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse' smart constructor.
@@ -391,7 +389,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse ::
   GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
 newGoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse =
   GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
-    { associations = Core.Nothing,
+    { associations =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -405,7 +404,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse
             Core.<$> (o Core..:? "associations")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
@@ -436,7 +435,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse ::
   GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
 newGoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse =
   GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
-    { catalogs = Core.Nothing,
+    { catalogs =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -450,7 +450,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
             Core.<$> (o Core..:? "catalogs")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
@@ -481,7 +481,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse ::
   GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
 newGoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse =
   GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       products = Core.Nothing
     }
 
@@ -495,7 +496,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "products")
+            Core.<*> (o Core..:? "products")
       )
 
 instance
@@ -526,7 +527,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse ::
   GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
 newGoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse =
   GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       versions = Core.Nothing
     }
 
@@ -540,7 +542,7 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "versions")
+            Core.<*> (o Core..:? "versions")
       )
 
 instance
@@ -600,7 +602,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1Product ::
   GoogleCloudPrivatecatalogproducerV1beta1Product
 newGoogleCloudPrivatecatalogproducerV1beta1Product =
   GoogleCloudPrivatecatalogproducerV1beta1Product
-    { assetType = Core.Nothing,
+    { assetType =
+        Core.Nothing,
       createTime = Core.Nothing,
       displayMetadata = Core.Nothing,
       iconUri = Core.Nothing,
@@ -618,29 +621,28 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1Product
             Core.<$> (o Core..:? "assetType")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "displayMetadata")
-              Core.<*> (o Core..:? "iconUri")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "displayMetadata")
+            Core.<*> (o Core..:? "iconUri")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogproducerV1beta1Product
   where
-  toJSON
-    GoogleCloudPrivatecatalogproducerV1beta1Product {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("assetType" Core..=) Core.<$> assetType,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("displayMetadata" Core..=) Core.<$> displayMetadata,
-              ("iconUri" Core..=) Core.<$> iconUri,
-              ("name" Core..=) Core.<$> name,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogproducerV1beta1Product {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("assetType" Core..=) Core.<$> assetType,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("displayMetadata" Core..=) Core.<$> displayMetadata,
+            ("iconUri" Core..=) Core.<$> iconUri,
+            ("name" Core..=) Core.<$> name,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | The user-supplied display metadata to describe the product. The JSON schema of the metadata differs by Product.asset_type. When the type is @google.deploymentmanager.Template@, the schema is as follows:
 --
@@ -664,10 +666,12 @@ newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
-newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata additional =
-  GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
-    { additional = additional
-    }
+newGoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
+  additional =
+    GoogleCloudPrivatecatalogproducerV1beta1Product_DisplayMetadata
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -731,7 +735,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest ::
   GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
 newGoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest =
   GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest
-    { icon = Core.Nothing
+    { icon =
+        Core.Nothing
     }
 
 instance
@@ -752,8 +757,7 @@ instance
   where
   toJSON
     GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest {..} =
-      Core.object
-        (Core.catMaybes [("icon" Core..=) Core.<$> icon])
+      Core.object (Core.catMaybes [("icon" Core..=) Core.<$> icon])
 
 -- | The producer representation of a version, which is a child resource under a @Product@ with asset data.
 --
@@ -786,7 +790,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1Version ::
   GoogleCloudPrivatecatalogproducerV1beta1Version
 newGoogleCloudPrivatecatalogproducerV1beta1Version =
   GoogleCloudPrivatecatalogproducerV1beta1Version
-    { asset = Core.Nothing,
+    { asset =
+        Core.Nothing,
       createTime = Core.Nothing,
       description = Core.Nothing,
       name = Core.Nothing,
@@ -804,29 +809,28 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogproducerV1beta1Version
             Core.<$> (o Core..:? "asset")
-              Core.<*> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "description")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "originalAsset")
-              Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "originalAsset")
+            Core.<*> (o Core..:? "updateTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogproducerV1beta1Version
   where
-  toJSON
-    GoogleCloudPrivatecatalogproducerV1beta1Version {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("asset" Core..=) Core.<$> asset,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("description" Core..=) Core.<$> description,
-              ("name" Core..=) Core.<$> name,
-              ("originalAsset" Core..=) Core.<$> originalAsset,
-              ("updateTime" Core..=) Core.<$> updateTime
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogproducerV1beta1Version {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("asset" Core..=) Core.<$> asset,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("description" Core..=) Core.<$> description,
+            ("name" Core..=) Core.<$> name,
+            ("originalAsset" Core..=) Core.<$> originalAsset,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
 
 -- | Output only. The asset which has been validated and is ready to be provisioned. See Version.original_asset for the schema.
 --
@@ -844,7 +848,8 @@ newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset ::
   GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
 newGoogleCloudPrivatecatalogproducerV1beta1Version_Asset additional =
   GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
-    { additional = additional
+    { additional =
+        additional
     }
 
 instance
@@ -863,9 +868,8 @@ instance
   Core.ToJSON
     GoogleCloudPrivatecatalogproducerV1beta1Version_Asset
   where
-  toJSON
-    GoogleCloudPrivatecatalogproducerV1beta1Version_Asset {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudPrivatecatalogproducerV1beta1Version_Asset {..} =
+    Core.toJSON additional
 
 -- | The user-supplied asset payload. The maximum size of the payload is 2MB. The JSON schema of the payload is defined as:
 --
@@ -883,10 +887,12 @@ newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
-newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset additional =
-  GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
-    { additional = additional
-    }
+newGoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
+  additional =
+    GoogleCloudPrivatecatalogproducerV1beta1Version_OriginalAsset
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -984,8 +990,7 @@ instance Core.ToJSON GoogleIamV1AuditConfig where
   toJSON GoogleIamV1AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -1040,8 +1045,7 @@ instance Core.ToJSON GoogleIamV1AuditLogConfig where
   toJSON GoogleIamV1AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -1278,10 +1282,7 @@ newGoogleIamV1TestIamPermissionsRequest ::
 newGoogleIamV1TestIamPermissionsRequest =
   GoogleIamV1TestIamPermissionsRequest {permissions = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleIamV1TestIamPermissionsRequest
-  where
+instance Core.FromJSON GoogleIamV1TestIamPermissionsRequest where
   parseJSON =
     Core.withObject
       "GoogleIamV1TestIamPermissionsRequest"
@@ -1290,15 +1291,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1TestIamPermissionsRequest
-  where
+instance Core.ToJSON GoogleIamV1TestIamPermissionsRequest where
   toJSON GoogleIamV1TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -1315,10 +1311,7 @@ newGoogleIamV1TestIamPermissionsResponse ::
 newGoogleIamV1TestIamPermissionsResponse =
   GoogleIamV1TestIamPermissionsResponse {permissions = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleIamV1TestIamPermissionsResponse
-  where
+instance Core.FromJSON GoogleIamV1TestIamPermissionsResponse where
   parseJSON =
     Core.withObject
       "GoogleIamV1TestIamPermissionsResponse"
@@ -1327,15 +1320,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1TestIamPermissionsResponse
-  where
+instance Core.ToJSON GoogleIamV1TestIamPermissionsResponse where
   toJSON GoogleIamV1TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | The request message for Operations.CancelOperation.
 --
@@ -1349,21 +1337,13 @@ newGoogleLongrunningCancelOperationRequest ::
 newGoogleLongrunningCancelOperationRequest =
   GoogleLongrunningCancelOperationRequest
 
-instance
-  Core.FromJSON
-    GoogleLongrunningCancelOperationRequest
-  where
+instance Core.FromJSON GoogleLongrunningCancelOperationRequest where
   parseJSON =
     Core.withObject
       "GoogleLongrunningCancelOperationRequest"
-      ( \o ->
-          Core.pure GoogleLongrunningCancelOperationRequest
-      )
+      (\o -> Core.pure GoogleLongrunningCancelOperationRequest)
 
-instance
-  Core.ToJSON
-    GoogleLongrunningCancelOperationRequest
-  where
+instance Core.ToJSON GoogleLongrunningCancelOperationRequest where
   toJSON = Core.const Core.emptyObject
 
 -- | The response message for Operations.ListOperations.
@@ -1382,14 +1362,12 @@ newGoogleLongrunningListOperationsResponse ::
   GoogleLongrunningListOperationsResponse
 newGoogleLongrunningListOperationsResponse =
   GoogleLongrunningListOperationsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       operations = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleLongrunningListOperationsResponse
-  where
+instance Core.FromJSON GoogleLongrunningListOperationsResponse where
   parseJSON =
     Core.withObject
       "GoogleLongrunningListOperationsResponse"
@@ -1399,10 +1377,7 @@ instance
             Core.<*> (o Core..:? "operations")
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningListOperationsResponse
-  where
+instance Core.ToJSON GoogleLongrunningListOperationsResponse where
   toJSON GoogleLongrunningListOperationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1482,10 +1457,7 @@ newGoogleLongrunningOperation_Metadata ::
 newGoogleLongrunningOperation_Metadata additional =
   GoogleLongrunningOperation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Metadata"
@@ -1494,10 +1466,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Metadata where
   toJSON GoogleLongrunningOperation_Metadata {..} =
     Core.toJSON additional
 
@@ -1518,10 +1487,7 @@ newGoogleLongrunningOperation_Response ::
 newGoogleLongrunningOperation_Response additional =
   GoogleLongrunningOperation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Response"
@@ -1530,10 +1496,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Response where
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
@@ -1630,13 +1593,11 @@ instance Core.FromJSON GoogleRpcStatus_DetailsItem where
     Core.withObject
       "GoogleRpcStatus_DetailsItem"
       ( \o ->
-          GoogleRpcStatus_DetailsItem
-            Core.<$> (Core.parseJSONObject o)
+          GoogleRpcStatus_DetailsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleRpcStatus_DetailsItem where
-  toJSON GoogleRpcStatus_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON GoogleRpcStatus_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https:\/\/github.com\/google\/cel-spec.
 --

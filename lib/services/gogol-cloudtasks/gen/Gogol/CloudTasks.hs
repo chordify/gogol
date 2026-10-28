@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudTasks
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,6 +40,11 @@ module Gogol.CloudTasks
     CloudTasksProjectsLocationsGetResource,
     CloudTasksProjectsLocationsGet (..),
     newCloudTasksProjectsLocationsGet,
+
+    -- ** cloudtasks.projects.locations.getCmekConfig
+    CloudTasksProjectsLocationsGetCmekConfigResource,
+    CloudTasksProjectsLocationsGetCmekConfig (..),
+    newCloudTasksProjectsLocationsGetCmekConfig,
 
     -- ** cloudtasks.projects.locations.list
     CloudTasksProjectsLocationsListResource,
@@ -98,6 +101,11 @@ module Gogol.CloudTasks
     CloudTasksProjectsLocationsQueuesSetIamPolicy (..),
     newCloudTasksProjectsLocationsQueuesSetIamPolicy,
 
+    -- ** cloudtasks.projects.locations.queues.tasks.buffer
+    CloudTasksProjectsLocationsQueuesTasksBufferResource,
+    CloudTasksProjectsLocationsQueuesTasksBuffer (..),
+    newCloudTasksProjectsLocationsQueuesTasksBuffer,
+
     -- ** cloudtasks.projects.locations.queues.tasks.create
     CloudTasksProjectsLocationsQueuesTasksCreateResource,
     CloudTasksProjectsLocationsQueuesTasksCreate (..),
@@ -128,6 +136,11 @@ module Gogol.CloudTasks
     CloudTasksProjectsLocationsQueuesTestIamPermissions (..),
     newCloudTasksProjectsLocationsQueuesTestIamPermissions,
 
+    -- ** cloudtasks.projects.locations.updateCmekConfig
+    CloudTasksProjectsLocationsUpdateCmekConfigResource,
+    CloudTasksProjectsLocationsUpdateCmekConfig (..),
+    newCloudTasksProjectsLocationsUpdateCmekConfig,
+
     -- * Types
 
     -- ** Xgafv
@@ -156,6 +169,18 @@ module Gogol.CloudTasks
     Binding (..),
     newBinding,
 
+    -- ** BufferTaskRequest
+    BufferTaskRequest (..),
+    newBufferTaskRequest,
+
+    -- ** BufferTaskResponse
+    BufferTaskResponse (..),
+    newBufferTaskResponse,
+
+    -- ** CmekConfig
+    CmekConfig (..),
+    newCmekConfig,
+
     -- ** CreateTaskRequest
     CreateTaskRequest (..),
     newCreateTaskRequest,
@@ -179,6 +204,22 @@ module Gogol.CloudTasks
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** Header
+    Header (..),
+    newHeader,
+
+    -- ** HeaderOverride
+    HeaderOverride (..),
+    newHeaderOverride,
+
+    -- ** HttpBody
+    HttpBody (..),
+    newHttpBody,
+
+    -- ** HttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
+
     -- ** HttpRequest
     HttpRequest (..),
     newHttpRequest,
@@ -189,6 +230,13 @@ module Gogol.CloudTasks
 
     -- ** HttpRequest_HttpMethod
     HttpRequest_HttpMethod (..),
+
+    -- ** HttpTarget
+    HttpTarget (..),
+    newHttpTarget,
+
+    -- ** HttpTarget_HttpMethod
+    HttpTarget_HttpMethod (..),
 
     -- ** ListLocationsResponse
     ListLocationsResponse (..),
@@ -222,6 +270,10 @@ module Gogol.CloudTasks
     OidcToken (..),
     newOidcToken,
 
+    -- ** PathOverride
+    PathOverride (..),
+    newPathOverride,
+
     -- ** PauseQueueRequest
     PauseQueueRequest (..),
     newPauseQueueRequest,
@@ -233,6 +285,10 @@ module Gogol.CloudTasks
     -- ** PurgeQueueRequest
     PurgeQueueRequest (..),
     newPurgeQueueRequest,
+
+    -- ** QueryOverride
+    QueryOverride (..),
+    newQueryOverride,
 
     -- ** Queue
     Queue (..),
@@ -291,6 +347,16 @@ module Gogol.CloudTasks
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** UriOverride
+    UriOverride (..),
+    newUriOverride,
+
+    -- ** UriOverride_Scheme
+    UriOverride_Scheme (..),
+
+    -- ** UriOverride_UriOverrideEnforceMode
+    UriOverride_UriOverrideEnforceMode (..),
+
     -- ** ProjectsLocationsQueuesTasksGetResponseView
     ProjectsLocationsQueuesTasksGetResponseView (..),
 
@@ -300,6 +366,7 @@ module Gogol.CloudTasks
 where
 
 import Gogol.CloudTasks.Projects.Locations.Get
+import Gogol.CloudTasks.Projects.Locations.GetCmekConfig
 import Gogol.CloudTasks.Projects.Locations.List
 import Gogol.CloudTasks.Projects.Locations.Queues.Create
 import Gogol.CloudTasks.Projects.Locations.Queues.Delete
@@ -311,10 +378,12 @@ import Gogol.CloudTasks.Projects.Locations.Queues.Pause
 import Gogol.CloudTasks.Projects.Locations.Queues.Purge
 import Gogol.CloudTasks.Projects.Locations.Queues.Resume
 import Gogol.CloudTasks.Projects.Locations.Queues.SetIamPolicy
+import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Buffer
 import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Create
 import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Delete
 import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Get
 import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.List
 import Gogol.CloudTasks.Projects.Locations.Queues.Tasks.Run
 import Gogol.CloudTasks.Projects.Locations.Queues.TestIamPermissions
+import Gogol.CloudTasks.Projects.Locations.UpdateCmekConfig
 import Gogol.CloudTasks.Types

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists subnetworks that are usable for creating clusters in a project.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.aggregated.usableSubnetworks.list@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.aggregated.usableSubnetworks.list@.
 module Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
   ( -- * Resource
     ContainerProjectsAggregatedUsableSubnetworksListResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.aggregated.usableSubnetworks.list@ method which the
 -- 'ContainerProjectsAggregatedUsableSubnetworksList' request conforms to.
@@ -58,9 +56,7 @@ type ContainerProjectsAggregatedUsableSubnetworksListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListUsableSubnetworksResponse
+    Core.:> Core.Get '[Core.JSON] ListUsableSubnetworksResponse
 
 -- | Lists subnetworks that are usable for creating clusters in a project.
 --
@@ -94,7 +90,8 @@ newContainerProjectsAggregatedUsableSubnetworksList ::
   ContainerProjectsAggregatedUsableSubnetworksList
 newContainerProjectsAggregatedUsableSubnetworksList parent =
   ContainerProjectsAggregatedUsableSubnetworksList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -110,32 +107,29 @@ instance
     ContainerProjectsAggregatedUsableSubnetworksList
   where
   type
-    Rs
-      ContainerProjectsAggregatedUsableSubnetworksList =
+    Rs ContainerProjectsAggregatedUsableSubnetworksList =
       ListUsableSubnetworksResponse
   type
-    Scopes
-      ContainerProjectsAggregatedUsableSubnetworksList =
+    Scopes ContainerProjectsAggregatedUsableSubnetworksList =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsAggregatedUsableSubnetworksList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsAggregatedUsableSubnetworksListResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsAggregatedUsableSubnetworksList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ContainerProjectsAggregatedUsableSubnetworksListResource
+          )
+          Core.mempty

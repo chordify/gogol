@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer.TransferOperations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StorageTransfer.TransferOperations.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.list@ method which the
@@ -68,7 +66,8 @@ data StorageTransferTransferOperationsList = StorageTransferTransferOperationsLi
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"operationNames\":[\"opid1\",\"opid2\",...], \"transferStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@, @operationNames@, and @transferStatuses@ support multiple values, they must be specified with array notation. @projectId@ is required. @jobNames@, @operationNames@, and @transferStatuses@ are optional. The valid values for @transferStatuses@ are case-insensitive: IN_PROGRESS, PAUSED, SUCCESS, FAILED, and ABORTED.
+    -- | Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobNamePattern\": \"job_name_pattern\", \"operationNames\":[\"opid1\",\"opid2\",...], \"operationNamePattern\": \"operation_name_pattern\", \"minCreationTime\": \"min_creation_time\", \"maxCreationTime\": \"max_creation_time\", \"transferStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@, @operationNames@, and @transferStatuses@ support multiple values, they must be specified with array notation. @projectId@ is the only argument that is required. If specified, @jobNamePattern@ and @operationNamePattern@ must match the full job or operation name respectively. \'*\' is a wildcard matching 0 or more characters. @minCreationTime@ and @maxCreationTime@ should be timestamps encoded as a string in the <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. The valid values for @transferStatuses@ are case-insensitive: IN_PROGRESS, PAUSED, SUCCESS, FAILED,
+    -- and ABORTED.
     filter :: Core.Text,
     -- | Required. The name of the type being listed; must be @transferOperations@.
     name :: Core.Text,
@@ -85,7 +84,8 @@ data StorageTransferTransferOperationsList = StorageTransferTransferOperationsLi
 
 -- | Creates a value of 'StorageTransferTransferOperationsList' with the minimum fields required to make a request.
 newStorageTransferTransferOperationsList ::
-  -- |  Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"operationNames\":[\"opid1\",\"opid2\",...], \"transferStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@, @operationNames@, and @transferStatuses@ support multiple values, they must be specified with array notation. @projectId@ is required. @jobNames@, @operationNames@, and @transferStatuses@ are optional. The valid values for @transferStatuses@ are case-insensitive: IN_PROGRESS, PAUSED, SUCCESS, FAILED, and ABORTED. See 'filter'.
+  -- |  Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobNamePattern\": \"job_name_pattern\", \"operationNames\":[\"opid1\",\"opid2\",...], \"operationNamePattern\": \"operation_name_pattern\", \"minCreationTime\": \"min_creation_time\", \"maxCreationTime\": \"max_creation_time\", \"transferStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@, @operationNames@, and @transferStatuses@ support multiple values, they must be specified with array notation. @projectId@ is the only argument that is required. If specified, @jobNamePattern@ and @operationNamePattern@ must match the full job or operation name respectively. \'*\' is a wildcard matching 0 or more characters. @minCreationTime@ and @maxCreationTime@ should be timestamps encoded as a string in the <https://www.ietf.org/rfc/rfc3339.txt RFC 3339> format. The valid values for @transferStatuses@ are case-insensitive: IN_PROGRESS, PAUSED, SUCCESS, FAILED,
+  -- and ABORTED. See 'filter'.
   Core.Text ->
   -- |  Required. The name of the type being listed; must be @transferOperations@. See 'name'.
   Core.Text ->
@@ -103,35 +103,30 @@ newStorageTransferTransferOperationsList filter name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageTransferTransferOperationsList
-  where
+instance Core.GoogleRequest StorageTransferTransferOperationsList where
   type
     Rs StorageTransferTransferOperationsList =
       ListOperationsResponse
   type
     Scopes StorageTransferTransferOperationsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    StorageTransferTransferOperationsList {..} =
-      go
-        name
-        (Core.Just filter)
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        storageTransferService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StorageTransferTransferOperationsListResource
-            )
-            Core.mempty
+  requestClient StorageTransferTransferOperationsList {..} =
+    go
+      name
+      (Core.Just filter)
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      storageTransferService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StorageTransferTransferOperationsListResource
+          )
+          Core.mempty

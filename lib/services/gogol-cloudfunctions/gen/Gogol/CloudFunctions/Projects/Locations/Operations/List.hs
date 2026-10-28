@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Projects.Locations.Operations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudFunctions.Projects.Locations.Operations.List
 where
 
 import Gogol.CloudFunctions.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.operations.list@ method which the
 -- 'CloudFunctionsProjectsLocationsOperationsList' request conforms to.
@@ -69,13 +67,13 @@ data CloudFunctionsProjectsLocationsOperationsList = CloudFunctionsProjectsLocat
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. A filter for matching the requested operations. The supported formats of /filter/ are: To query for a specific function: project:/,location:/,function:* To query for all of the latest operations for a project: project:*,latest:true
+    -- | The standard list filter.
     filter :: (Core.Maybe Core.Text),
-    -- | Must not be set.
+    -- | The name of the operation\'s parent resource.
     name :: Core.Text,
-    -- | The maximum number of records that should be returned. Requested page size cannot exceed 100. If not set, the default page size is 100. Pagination is only supported when querying for a specific function.
+    -- | The standard list page size.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Token identifying which result to start with, which is returned by a previous list call. Pagination is only supported when querying for a specific function.
+    -- | The standard list page token.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,12 +84,13 @@ data CloudFunctionsProjectsLocationsOperationsList = CloudFunctionsProjectsLocat
 
 -- | Creates a value of 'CloudFunctionsProjectsLocationsOperationsList' with the minimum fields required to make a request.
 newCloudFunctionsProjectsLocationsOperationsList ::
-  -- |  Must not be set. See 'name'.
+  -- |  The name of the operation\'s parent resource. See 'name'.
   Core.Text ->
   CloudFunctionsProjectsLocationsOperationsList
 newCloudFunctionsProjectsLocationsOperationsList name =
   CloudFunctionsProjectsLocationsOperationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -110,28 +109,25 @@ instance
     Rs CloudFunctionsProjectsLocationsOperationsList =
       ListOperationsResponse
   type
-    Scopes
-      CloudFunctionsProjectsLocationsOperationsList =
+    Scopes CloudFunctionsProjectsLocationsOperationsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudFunctionsProjectsLocationsOperationsList {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        filter
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudFunctionsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudFunctionsProjectsLocationsOperationsListResource
-            )
-            Core.mempty
+  requestClient CloudFunctionsProjectsLocationsOperationsList {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      filter
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudFunctionsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudFunctionsProjectsLocationsOperationsListResource
+          )
+          Core.mempty

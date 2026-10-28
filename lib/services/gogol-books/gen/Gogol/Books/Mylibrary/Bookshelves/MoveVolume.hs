@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Bookshelves.MoveVolume
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Mylibrary.Bookshelves.MoveVolume
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.bookshelves.moveVolume@ method which the
 -- 'BooksMylibraryBookshelvesMoveVolume' request conforms to.
@@ -96,23 +94,23 @@ newBooksMylibraryBookshelvesMoveVolume ::
   -- |  Position on shelf to move the item (0 puts the item before the current first item, 1 puts it between the first and the second and so on.) See 'volumePosition'.
   Core.Int32 ->
   BooksMylibraryBookshelvesMoveVolume
-newBooksMylibraryBookshelvesMoveVolume shelf volumeId volumePosition =
-  BooksMylibraryBookshelvesMoveVolume
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      shelf = shelf,
-      source = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      volumeId = volumeId,
-      volumePosition = volumePosition
-    }
-
-instance
-  Core.GoogleRequest
+newBooksMylibraryBookshelvesMoveVolume
+  shelf
+  volumeId
+  volumePosition =
     BooksMylibraryBookshelvesMoveVolume
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        shelf = shelf,
+        source = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        volumeId = volumeId,
+        volumePosition = volumePosition
+      }
+
+instance Core.GoogleRequest BooksMylibraryBookshelvesMoveVolume where
   type Rs BooksMylibraryBookshelvesMoveVolume = Empty
   type
     Scopes BooksMylibraryBookshelvesMoveVolume =
@@ -134,7 +132,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                BooksMylibraryBookshelvesMoveVolumeResource
+              Core.Proxy BooksMylibraryBookshelvesMoveVolumeResource
           )
           Core.mempty

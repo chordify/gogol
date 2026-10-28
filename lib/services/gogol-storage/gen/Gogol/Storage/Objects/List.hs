@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.list@ method which the
@@ -52,12 +50,14 @@ type StorageObjectsListResource =
     Core.:> "o"
     Core.:> Core.QueryParam "delimiter" Core.Text
     Core.:> Core.QueryParam "endOffset" Core.Text
+    Core.:> Core.QueryParam "includeFoldersAsPrefixes" Core.Bool
     Core.:> Core.QueryParam "includeTrailingDelimiter" Core.Bool
     Core.:> Core.QueryParam "matchGlob" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "prefix" Core.Text
     Core.:> Core.QueryParam "projection" ObjectsListProjection
+    Core.:> Core.QueryParam "softDeleted" Core.Bool
     Core.:> Core.QueryParam "startOffset" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
@@ -75,6 +75,8 @@ data StorageObjectsList = StorageObjectsList
     delimiter :: (Core.Maybe Core.Text),
     -- | Filter results to objects whose names are lexicographically before endOffset. If startOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
     endOffset :: (Core.Maybe Core.Text),
+    -- | Only applicable if delimiter is set to \'\/\'. If true, will also include folders and managed folders (besides objects) in the returned prefixes.
+    includeFoldersAsPrefixes :: (Core.Maybe Core.Bool),
     -- | If true, objects that end in exactly one instance of delimiter will have their metadata included in items in addition to prefixes.
     includeTrailingDelimiter :: (Core.Maybe Core.Bool),
     -- | Filter results to objects and prefixes that match this glob pattern.
@@ -87,13 +89,15 @@ data StorageObjectsList = StorageObjectsList
     prefix :: (Core.Maybe Core.Text),
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe ObjectsListProjection),
+    -- | If true, only soft-deleted object versions will be listed. The default is false. For more information, see <https://cloud.google.com/storage/docs/soft-delete Soft Delete>.
+    softDeleted :: (Core.Maybe Core.Bool),
     -- | Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
     startOffset :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
     userProject :: (Core.Maybe Core.Text),
-    -- | If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.
+    -- | If true, lists all versions of an object as distinct results. The default is false. For more information, see <https://cloud.google.com/storage/docs/object-versioning Object Versioning>.
     versions :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -108,12 +112,14 @@ newStorageObjectsList bucket =
     { bucket = bucket,
       delimiter = Core.Nothing,
       endOffset = Core.Nothing,
+      includeFoldersAsPrefixes = Core.Nothing,
       includeTrailingDelimiter = Core.Nothing,
       matchGlob = Core.Nothing,
       maxResults = 1000,
       pageToken = Core.Nothing,
       prefix = Core.Nothing,
       projection = Core.Nothing,
+      softDeleted = Core.Nothing,
       startOffset = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing,
@@ -135,12 +141,14 @@ instance Core.GoogleRequest StorageObjectsList where
       bucket
       delimiter
       endOffset
+      includeFoldersAsPrefixes
       includeTrailingDelimiter
       matchGlob
       (Core.Just maxResults)
       pageToken
       prefix
       projection
+      softDeleted
       startOffset
       uploadType
       userProject

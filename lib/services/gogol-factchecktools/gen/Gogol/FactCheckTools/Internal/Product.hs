@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FactCheckTools.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FactCheckTools.Internal.Product
@@ -54,6 +52,14 @@ module Gogol.FactCheckTools.Internal.Product
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage,
 
+    -- * GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse,
+
+    -- * GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult (..),
+    newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult,
+
     -- * GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
     GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse (..),
     newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse,
@@ -73,7 +79,7 @@ module Gogol.FactCheckTools.Internal.Product
 where
 
 import Gogol.FactCheckTools.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Information about the claim.
 --
@@ -95,7 +101,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1Claim ::
   GoogleFactcheckingFactchecktoolsV1alpha1Claim
 newGoogleFactcheckingFactchecktoolsV1alpha1Claim =
   GoogleFactcheckingFactchecktoolsV1alpha1Claim
-    { claimDate = Core.Nothing,
+    { claimDate =
+        Core.Nothing,
       claimReview = Core.Nothing,
       claimant = Core.Nothing,
       text = Core.Nothing
@@ -111,25 +118,21 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1Claim
             Core.<$> (o Core..:? "claimDate")
-              Core.<*> (o Core..:? "claimReview")
-              Core.<*> (o Core..:? "claimant")
-              Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "claimReview")
+            Core.<*> (o Core..:? "claimant")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1Claim
-  where
-  toJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1Claim {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("claimDate" Core..=) Core.<$> claimDate,
-              ("claimReview" Core..=) Core.<$> claimReview,
-              ("claimant" Core..=) Core.<$> claimant,
-              ("text" Core..=) Core.<$> text
-            ]
-        )
+instance Core.ToJSON GoogleFactcheckingFactchecktoolsV1alpha1Claim where
+  toJSON GoogleFactcheckingFactchecktoolsV1alpha1Claim {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("claimDate" Core..=) Core.<$> claimDate,
+            ("claimReview" Core..=) Core.<$> claimReview,
+            ("claimant" Core..=) Core.<$> claimant,
+            ("text" Core..=) Core.<$> text
+          ]
+      )
 
 -- | Information about the claim author.
 --
@@ -151,7 +154,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
-    { imageUrl = Core.Nothing,
+    { imageUrl =
+        Core.Nothing,
       jobTitle = Core.Nothing,
       name = Core.Nothing,
       sameAs = Core.Nothing
@@ -167,25 +171,24 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
             Core.<$> (o Core..:? "imageUrl")
-              Core.<*> (o Core..:? "jobTitle")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "sameAs")
+            Core.<*> (o Core..:? "jobTitle")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "sameAs")
       )
 
 instance
   Core.ToJSON
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor
   where
-  toJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("imageUrl" Core..=) Core.<$> imageUrl,
-              ("jobTitle" Core..=) Core.<$> jobTitle,
-              ("name" Core..=) Core.<$> name,
-              ("sameAs" Core..=) Core.<$> sameAs
-            ]
-        )
+  toJSON GoogleFactcheckingFactchecktoolsV1alpha1ClaimAuthor {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("imageUrl" Core..=) Core.<$> imageUrl,
+            ("jobTitle" Core..=) Core.<$> jobTitle,
+            ("name" Core..=) Core.<$> name,
+            ("sameAs" Core..=) Core.<$> sameAs
+          ]
+      )
 
 -- | Information about the claim rating.
 --
@@ -211,7 +214,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimRating =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
-    { bestRating = Core.Nothing,
+    { bestRating =
+        Core.Nothing,
       imageUrl = Core.Nothing,
       ratingExplanation = Core.Nothing,
       ratingValue = Core.Nothing,
@@ -229,30 +233,28 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
             Core.<$> (o Core..:? "bestRating")
-              Core.<*> (o Core..:? "imageUrl")
-              Core.<*> (o Core..:? "ratingExplanation")
-              Core.<*> (o Core..:? "ratingValue")
-              Core.<*> (o Core..:? "textualRating")
-              Core.<*> (o Core..:? "worstRating")
+            Core.<*> (o Core..:? "imageUrl")
+            Core.<*> (o Core..:? "ratingExplanation")
+            Core.<*> (o Core..:? "ratingValue")
+            Core.<*> (o Core..:? "textualRating")
+            Core.<*> (o Core..:? "worstRating")
       )
 
 instance
   Core.ToJSON
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating
   where
-  toJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("bestRating" Core..=) Core.<$> bestRating,
-              ("imageUrl" Core..=) Core.<$> imageUrl,
-              ("ratingExplanation" Core..=)
-                Core.<$> ratingExplanation,
-              ("ratingValue" Core..=) Core.<$> ratingValue,
-              ("textualRating" Core..=) Core.<$> textualRating,
-              ("worstRating" Core..=) Core.<$> worstRating
-            ]
-        )
+  toJSON GoogleFactcheckingFactchecktoolsV1alpha1ClaimRating {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("bestRating" Core..=) Core.<$> bestRating,
+            ("imageUrl" Core..=) Core.<$> imageUrl,
+            ("ratingExplanation" Core..=) Core.<$> ratingExplanation,
+            ("ratingValue" Core..=) Core.<$> ratingValue,
+            ("textualRating" Core..=) Core.<$> textualRating,
+            ("worstRating" Core..=) Core.<$> worstRating
+          ]
+      )
 
 -- | Information about a claim review.
 --
@@ -278,7 +280,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReview =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
-    { languageCode = Core.Nothing,
+    { languageCode =
+        Core.Nothing,
       publisher = Core.Nothing,
       reviewDate = Core.Nothing,
       textualRating = Core.Nothing,
@@ -296,29 +299,28 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
             Core.<$> (o Core..:? "languageCode")
-              Core.<*> (o Core..:? "publisher")
-              Core.<*> (o Core..:? "reviewDate")
-              Core.<*> (o Core..:? "textualRating")
-              Core.<*> (o Core..:? "title")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "publisher")
+            Core.<*> (o Core..:? "reviewDate")
+            Core.<*> (o Core..:? "textualRating")
+            Core.<*> (o Core..:? "title")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
   Core.ToJSON
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview
   where
-  toJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("languageCode" Core..=) Core.<$> languageCode,
-              ("publisher" Core..=) Core.<$> publisher,
-              ("reviewDate" Core..=) Core.<$> reviewDate,
-              ("textualRating" Core..=) Core.<$> textualRating,
-              ("title" Core..=) Core.<$> title,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+  toJSON GoogleFactcheckingFactchecktoolsV1alpha1ClaimReview {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("languageCode" Core..=) Core.<$> languageCode,
+            ("publisher" Core..=) Core.<$> publisher,
+            ("reviewDate" Core..=) Core.<$> reviewDate,
+            ("textualRating" Core..=) Core.<$> textualRating,
+            ("title" Core..=) Core.<$> title,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | Information about the claim review author.
 --
@@ -336,7 +338,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
-    { imageUrl = Core.Nothing,
+    { imageUrl =
+        Core.Nothing,
       name = Core.Nothing
     }
 
@@ -349,7 +352,8 @@ instance
       "GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor"
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewAuthor
-            Core.<$> (o Core..:? "imageUrl") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "imageUrl")
+            Core.<*> (o Core..:? "name")
       )
 
 instance
@@ -393,7 +397,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
-    { claimAppearances = Core.Nothing,
+    { claimAppearances =
+        Core.Nothing,
       claimAuthor = Core.Nothing,
       claimDate = Core.Nothing,
       claimFirstAppearance = Core.Nothing,
@@ -413,13 +418,13 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup
             Core.<$> (o Core..:? "claimAppearances")
-              Core.<*> (o Core..:? "claimAuthor")
-              Core.<*> (o Core..:? "claimDate")
-              Core.<*> (o Core..:? "claimFirstAppearance")
-              Core.<*> (o Core..:? "claimLocation")
-              Core.<*> (o Core..:? "claimReviewed")
-              Core.<*> (o Core..:? "rating")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "claimAuthor")
+            Core.<*> (o Core..:? "claimDate")
+            Core.<*> (o Core..:? "claimFirstAppearance")
+            Core.<*> (o Core..:? "claimLocation")
+            Core.<*> (o Core..:? "claimReviewed")
+            Core.<*> (o Core..:? "rating")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
@@ -430,12 +435,10 @@ instance
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkup {..} =
       Core.object
         ( Core.catMaybes
-            [ ("claimAppearances" Core..=)
-                Core.<$> claimAppearances,
+            [ ("claimAppearances" Core..=) Core.<$> claimAppearances,
               ("claimAuthor" Core..=) Core.<$> claimAuthor,
               ("claimDate" Core..=) Core.<$> claimDate,
-              ("claimFirstAppearance" Core..=)
-                Core.<$> claimFirstAppearance,
+              ("claimFirstAppearance" Core..=) Core.<$> claimFirstAppearance,
               ("claimLocation" Core..=) Core.<$> claimLocation,
               ("claimReviewed" Core..=) Core.<$> claimReviewed,
               ("rating" Core..=) Core.<$> rating,
@@ -473,7 +476,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage ::
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
 newGoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage =
   GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
-    { claimReviewAuthor = Core.Nothing,
+    { claimReviewAuthor =
+        Core.Nothing,
       claimReviewMarkups = Core.Nothing,
       name = Core.Nothing,
       pageUrl = Core.Nothing,
@@ -491,11 +495,11 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage
             Core.<$> (o Core..:? "claimReviewAuthor")
-              Core.<*> (o Core..:? "claimReviewMarkups")
-              Core.<*> (o Core..:? "name")
-              Core.<*> (o Core..:? "pageUrl")
-              Core.<*> (o Core..:? "publishDate")
-              Core.<*> (o Core..:? "versionId")
+            Core.<*> (o Core..:? "claimReviewMarkups")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "pageUrl")
+            Core.<*> (o Core..:? "publishDate")
+            Core.<*> (o Core..:? "versionId")
       )
 
 instance
@@ -506,16 +510,103 @@ instance
     GoogleFactcheckingFactchecktoolsV1alpha1ClaimReviewMarkupPage {..} =
       Core.object
         ( Core.catMaybes
-            [ ("claimReviewAuthor" Core..=)
-                Core.<$> claimReviewAuthor,
-              ("claimReviewMarkups" Core..=)
-                Core.<$> claimReviewMarkups,
+            [ ("claimReviewAuthor" Core..=) Core.<$> claimReviewAuthor,
+              ("claimReviewMarkups" Core..=) Core.<$> claimReviewMarkups,
               ("name" Core..=) Core.<$> name,
               ("pageUrl" Core..=) Core.<$> pageUrl,
               ("publishDate" Core..=) Core.<$> publishDate,
               ("versionId" Core..=) Core.<$> versionId
             ]
         )
+
+-- | Response from searching fact-checked claims by image.
+--
+-- /See:/ 'newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse' smart constructor.
+data GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse = GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+  { -- | The next pagination token in the Search response. It should be used as the @page_token@ for the following request. An empty value means no more results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of claims and all of their associated information.
+    results ::
+      ( Core.Maybe
+          [GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult]
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse' with the minimum fields required to make a request.
+newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse ::
+  GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse =
+  GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+    { nextPageToken =
+        Core.Nothing,
+      results =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse"
+      ( \o ->
+          GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "results")
+      )
+
+instance
+  Core.ToJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse
+  where
+  toJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponse {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+              ("results" Core..=) Core.<$> results
+            ]
+        )
+
+-- | A claim and its associated information.
+--
+-- /See:/ 'newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult' smart constructor.
+newtype GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult = GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+  { -- | A claim which matched the query.
+    claim :: (Core.Maybe GoogleFactcheckingFactchecktoolsV1alpha1Claim)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult' with the minimum fields required to make a request.
+newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult ::
+  GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult =
+  GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+    { claim =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult"
+      ( \o ->
+          GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+            Core.<$> (o Core..:? "claim")
+      )
+
+instance
+  Core.ToJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult
+  where
+  toJSON
+    GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimImageSearchResponseResult {..} =
+      Core.object (Core.catMaybes [("claim" Core..=) Core.<$> claim])
 
 -- | Response from searching fact-checked claims.
 --
@@ -533,8 +624,10 @@ newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse ::
   GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
 newGoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse =
   GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
-    { claims = Core.Nothing,
-      nextPageToken = Core.Nothing
+    { claims =
+        Core.Nothing,
+      nextPageToken =
+        Core.Nothing
     }
 
 instance
@@ -547,7 +640,7 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1FactCheckedClaimSearchResponse
             Core.<$> (o Core..:? "claims")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
@@ -582,8 +675,10 @@ newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse ::
   GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
 newGoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse =
   GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
-    { claimReviewMarkupPages = Core.Nothing,
-      nextPageToken = Core.Nothing
+    { claimReviewMarkupPages =
+        Core.Nothing,
+      nextPageToken =
+        Core.Nothing
     }
 
 instance
@@ -596,7 +691,7 @@ instance
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
             Core.<$> (o Core..:? "claimReviewMarkupPages")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
@@ -629,7 +724,8 @@ newGoogleFactcheckingFactchecktoolsV1alpha1Publisher ::
   GoogleFactcheckingFactchecktoolsV1alpha1Publisher
 newGoogleFactcheckingFactchecktoolsV1alpha1Publisher =
   GoogleFactcheckingFactchecktoolsV1alpha1Publisher
-    { name = Core.Nothing,
+    { name =
+        Core.Nothing,
       site = Core.Nothing
     }
 
@@ -642,21 +738,19 @@ instance
       "GoogleFactcheckingFactchecktoolsV1alpha1Publisher"
       ( \o ->
           GoogleFactcheckingFactchecktoolsV1alpha1Publisher
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "site")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "site")
       )
 
 instance
   Core.ToJSON
     GoogleFactcheckingFactchecktoolsV1alpha1Publisher
   where
-  toJSON
-    GoogleFactcheckingFactchecktoolsV1alpha1Publisher {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("name" Core..=) Core.<$> name,
-              ("site" Core..=) Core.<$> site
-            ]
-        )
+  toJSON GoogleFactcheckingFactchecktoolsV1alpha1Publisher {..} =
+    Core.object
+      ( Core.catMaybes
+          [("name" Core..=) Core.<$> name, ("site" Core..=) Core.<$> site]
+      )
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --

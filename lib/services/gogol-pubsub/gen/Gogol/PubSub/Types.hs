@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PubSub.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PubSub.Types
@@ -42,6 +40,39 @@ module Gogol.PubSub.Types
     AcknowledgeRequest (..),
     newAcknowledgeRequest,
 
+    -- ** AnalyticsHubSubscriptionInfo
+    AnalyticsHubSubscriptionInfo (..),
+    newAnalyticsHubSubscriptionInfo,
+
+    -- ** AvroConfig
+    AvroConfig (..),
+    newAvroConfig,
+
+    -- ** AvroFormat
+    AvroFormat (..),
+    newAvroFormat,
+
+    -- ** AwsKinesis
+    AwsKinesis (..),
+    newAwsKinesis,
+
+    -- ** AwsKinesis_State
+    AwsKinesis_State (..),
+
+    -- ** AwsMsk
+    AwsMsk (..),
+    newAwsMsk,
+
+    -- ** AwsMsk_State
+    AwsMsk_State (..),
+
+    -- ** AzureEventHubs
+    AzureEventHubs (..),
+    newAzureEventHubs,
+
+    -- ** AzureEventHubs_State
+    AzureEventHubs_State (..),
+
     -- ** BigQueryConfig
     BigQueryConfig (..),
     newBigQueryConfig,
@@ -53,9 +84,30 @@ module Gogol.PubSub.Types
     Binding (..),
     newBinding,
 
+    -- ** CloudStorage
+    CloudStorage (..),
+    newCloudStorage,
+
+    -- ** CloudStorage_State
+    CloudStorage_State (..),
+
+    -- ** CloudStorageConfig
+    CloudStorageConfig (..),
+    newCloudStorageConfig,
+
+    -- ** CloudStorageConfig_State
+    CloudStorageConfig_State (..),
+
     -- ** CommitSchemaRequest
     CommitSchemaRequest (..),
     newCommitSchemaRequest,
+
+    -- ** ConfluentCloud
+    ConfluentCloud (..),
+    newConfluentCloud,
+
+    -- ** ConfluentCloud_State
+    ConfluentCloud_State (..),
 
     -- ** CreateSnapshotRequest
     CreateSnapshotRequest (..),
@@ -84,6 +136,14 @@ module Gogol.PubSub.Types
     -- ** Expr
     Expr (..),
     newExpr,
+
+    -- ** IngestionDataSourceSettings
+    IngestionDataSourceSettings (..),
+    newIngestionDataSourceSettings,
+
+    -- ** JavaScriptUDF
+    JavaScriptUDF (..),
+    newJavaScriptUDF,
 
     -- ** ListSchemaRevisionsResponse
     ListSchemaRevisionsResponse (..),
@@ -117,6 +177,10 @@ module Gogol.PubSub.Types
     MessageStoragePolicy (..),
     newMessageStoragePolicy,
 
+    -- ** MessageTransform
+    MessageTransform (..),
+    newMessageTransform,
+
     -- ** ModifyAckDeadlineRequest
     ModifyAckDeadlineRequest (..),
     newModifyAckDeadlineRequest,
@@ -125,13 +189,28 @@ module Gogol.PubSub.Types
     ModifyPushConfigRequest (..),
     newModifyPushConfigRequest,
 
+    -- ** NoWrapper
+    NoWrapper (..),
+    newNoWrapper,
+
     -- ** OidcToken
     OidcToken (..),
     newOidcToken,
 
+    -- ** PlatformLogsSettings
+    PlatformLogsSettings (..),
+    newPlatformLogsSettings,
+
+    -- ** PlatformLogsSettings_Severity
+    PlatformLogsSettings_Severity (..),
+
     -- ** Policy
     Policy (..),
     newPolicy,
+
+    -- ** PubSubAvroFormat
+    PubSubAvroFormat (..),
+    newPubSubAvroFormat,
 
     -- ** PublishRequest
     PublishRequest (..),
@@ -148,6 +227,10 @@ module Gogol.PubSub.Types
     -- ** PubsubMessage_Attributes
     PubsubMessage_Attributes (..),
     newPubsubMessage_Attributes,
+
+    -- ** PubsubWrapper
+    PubsubWrapper (..),
+    newPubsubWrapper,
 
     -- ** PullRequest
     PullRequest (..),
@@ -230,6 +313,14 @@ module Gogol.PubSub.Types
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** TextConfig
+    TextConfig (..),
+    newTextConfig,
+
+    -- ** TextFormat
+    TextFormat (..),
+    newTextFormat,
+
     -- ** Topic
     Topic (..),
     newTopic,
@@ -237,6 +328,9 @@ module Gogol.PubSub.Types
     -- ** Topic_Labels
     Topic_Labels (..),
     newTopic_Labels,
+
+    -- ** Topic_State
+    Topic_State (..),
 
     -- ** UpdateSnapshotRequest
     UpdateSnapshotRequest (..),
@@ -280,7 +374,7 @@ module Gogol.PubSub.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Internal.Product
 import Gogol.PubSub.Internal.Sum
 
@@ -292,7 +386,8 @@ pubSubService =
     "pubsub.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage Pub\/Sub topics and subscriptions
 type Pubsub'FullControl = "https://www.googleapis.com/auth/pubsub"

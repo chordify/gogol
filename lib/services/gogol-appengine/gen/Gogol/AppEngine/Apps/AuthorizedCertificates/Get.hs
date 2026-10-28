@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.AuthorizedCertificates.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.AuthorizedCertificates.Get
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.get@ method which the
 -- 'AppEngineAppsAuthorizedCertificatesGet' request conforms to.
@@ -55,9 +53,7 @@ type AppEngineAppsAuthorizedCertificatesGetResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              AppsAuthorizedCertificatesGetView
+    Core.:> Core.QueryParam "view" AppsAuthorizedCertificatesGetView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] AuthorizedCertificate
 
@@ -91,22 +87,21 @@ newAppEngineAppsAuthorizedCertificatesGet ::
   -- |  Part of @name@. See documentation of @appsId@. See 'authorizedCertificatesId'.
   Core.Text ->
   AppEngineAppsAuthorizedCertificatesGet
-newAppEngineAppsAuthorizedCertificatesGet appsId authorizedCertificatesId =
-  AppEngineAppsAuthorizedCertificatesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      authorizedCertificatesId = authorizedCertificatesId,
-      callback = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      view = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAppEngineAppsAuthorizedCertificatesGet
+  appsId
+  authorizedCertificatesId =
     AppEngineAppsAuthorizedCertificatesGet
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        authorizedCertificatesId = authorizedCertificatesId,
+        callback = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        view = Core.Nothing
+      }
+
+instance Core.GoogleRequest AppEngineAppsAuthorizedCertificatesGet where
   type
     Rs AppEngineAppsAuthorizedCertificatesGet =
       AuthorizedCertificate
@@ -116,24 +111,22 @@ instance
          CloudPlatform'FullControl,
          CloudPlatform'ReadOnly
        ]
-  requestClient
-    AppEngineAppsAuthorizedCertificatesGet {..} =
-      go
-        appsId
-        authorizedCertificatesId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsAuthorizedCertificatesGetResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsAuthorizedCertificatesGet {..} =
+    go
+      appsId
+      authorizedCertificatesId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsAuthorizedCertificatesGetResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Storage.Projects.HmacKeys.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
+-- Updates the state of an HMAC key. See the <https://cloud.google.com/storage/docs/json_api/v1/projects/hmacKeys/update#request-body HMAC Key resource descriptor> for valid states.
 --
 -- /See:/ <https://developers.google.com/storage/docs/json_api/ Cloud Storage JSON API Reference> for @storage.projects.hmacKeys.update@.
 module Gogol.Storage.Projects.HmacKeys.Update
@@ -39,7 +37,7 @@ module Gogol.Storage.Projects.HmacKeys.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.projects.hmacKeys.update@ method which the
@@ -57,7 +55,7 @@ type StorageProjectsHmacKeysUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] HmacKeyMetadata
     Core.:> Core.Put '[Core.JSON] HmacKeyMetadata
 
--- | Updates the state of an HMAC key. See the HMAC Key resource descriptor for valid states.
+-- | Updates the state of an HMAC key. See the <https://cloud.google.com/storage/docs/json_api/v1/projects/hmacKeys/update#request-body HMAC Key resource descriptor> for valid states.
 --
 -- /See:/ 'newStorageProjectsHmacKeysUpdate' smart constructor.
 data StorageProjectsHmacKeysUpdate = StorageProjectsHmacKeysUpdate
@@ -92,13 +90,8 @@ newStorageProjectsHmacKeysUpdate accessId payload projectId =
       userProject = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageProjectsHmacKeysUpdate
-  where
-  type
-    Rs StorageProjectsHmacKeysUpdate =
-      HmacKeyMetadata
+instance Core.GoogleRequest StorageProjectsHmacKeysUpdate where
+  type Rs StorageProjectsHmacKeysUpdate = HmacKeyMetadata
   type
     Scopes StorageProjectsHmacKeysUpdate =
       '[CloudPlatform'FullControl, Devstorage'FullControl]
@@ -114,7 +107,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageProjectsHmacKeysUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy StorageProjectsHmacKeysUpdateResource)
           Core.mempty

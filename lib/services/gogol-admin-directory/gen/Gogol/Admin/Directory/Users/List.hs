@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Users.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Users.List
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.users.list@ method which the
 -- 'DirectoryUsersList' request conforms to.
@@ -59,24 +57,14 @@ type DirectoryUsersListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "orderBy" UsersListOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "projection"
-              UsersListProjection
+    Core.:> Core.QueryParam "projection" UsersListProjection
     Core.:> Core.QueryParam "query" Core.Text
     Core.:> Core.QueryParam "showDeleted" Core.Text
-    Core.:> Core.QueryParam
-              "sortOrder"
-              UsersListSortOrder
+    Core.:> Core.QueryParam "sortOrder" UsersListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "viewType"
-              UsersListViewType
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "viewType" UsersListViewType
+    Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Users
 
 -- | Retrieves a paginated list of either deleted users or all users in a domain.
@@ -91,9 +79,9 @@ data DirectoryUsersList = DirectoryUsersList
     callback :: (Core.Maybe Core.Text),
     -- | A comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when @projection=custom@.
     customFieldMask :: (Core.Maybe Core.Text),
-    -- | The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter.
+    -- | The unique ID for the customer\'s Google Workspace account. In case of a multi-domain account, to fetch all users for a customer, use this field instead of @domain@. You can also use the @my_customer@ alias to represent your account\'s @customerId@. The @customerId@ is also returned as part of the </admin-sdk/directory/v1/reference/users Users> resource. You must provide either the @customer@ or the @domain@ parameter.
     customer :: (Core.Maybe Core.Text),
-    -- | The domain name. Use this field to get groups from only one domain. To return all domains for a customer account, use the @customer@ query parameter instead. Either the @customer@ or the @domain@ parameter must be provided.
+    -- | The domain name. Use this field to get users from only one domain. To return all domains for a customer account, use the @customer@ query parameter instead. Either the @customer@ or the @domain@ parameter must be provided.
     domain :: (Core.Maybe Core.Text),
     -- | Event on which subscription is intended (if subscribing)
     event :: (Core.Maybe UsersListEvent),
@@ -101,7 +89,7 @@ data DirectoryUsersList = DirectoryUsersList
     maxResults :: Core.Int32,
     -- | Property to use for sorting results.
     orderBy :: (Core.Maybe UsersListOrderBy),
-    -- | Token to specify next page in the list
+    -- | Token to specify next page in the list. The page token is only valid for three days.
     pageToken :: (Core.Maybe Core.Text),
     -- | What subset of fields to fetch for this user.
     projection :: UsersListProjection,

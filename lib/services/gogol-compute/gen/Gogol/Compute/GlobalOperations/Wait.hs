@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.GlobalOperations.Wait
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.GlobalOperations.Wait
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.globalOperations.wait@ method which the
 -- 'ComputeGlobalOperationsWait' request conforms to.
@@ -71,7 +69,7 @@ data ComputeGlobalOperationsWait = ComputeGlobalOperationsWait
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Operations resource to return.
+    -- | Name of the Operations resource to return, or its unique numeric identifier.
     operation :: Core.Text,
     -- | Project ID for this request.
     project :: Core.Text,
@@ -84,7 +82,7 @@ data ComputeGlobalOperationsWait = ComputeGlobalOperationsWait
 
 -- | Creates a value of 'ComputeGlobalOperationsWait' with the minimum fields required to make a request.
 newComputeGlobalOperationsWait ::
-  -- |  Name of the Operations resource to return. See 'operation'.
+  -- |  Name of the Operations resource to return, or its unique numeric identifier. See 'operation'.
   Core.Text ->
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
@@ -100,17 +98,11 @@ newComputeGlobalOperationsWait operation project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeGlobalOperationsWait
-  where
+instance Core.GoogleRequest ComputeGlobalOperationsWait where
   type Rs ComputeGlobalOperationsWait = Operation
   type
     Scopes ComputeGlobalOperationsWait =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeGlobalOperationsWait {..} =
     go
       project
@@ -125,7 +117,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeGlobalOperationsWaitResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeGlobalOperationsWaitResource)
           Core.mempty

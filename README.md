@@ -1,5 +1,6 @@
 # Gogol
 
+![CI](https://github.com/brendanhay/gogol/actions/workflows/ci.yml/badge.svg)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
 
 * [Description](#description)
@@ -18,6 +19,10 @@ A comprehensive Google Services SDK for Haskell supporting all of the publicly a
 
 You can find the latest stable release documentation for each respective library
 on Hackage under the [Google section](http://hackage.haskell.org/packages/#cat:Google).
+
+### Getting started
+
+A simple tutorial for getting you started can be found in this [literate programming tutorial](examples/src/Example/Tutorial.lhs)
 
 ## Organisation
 

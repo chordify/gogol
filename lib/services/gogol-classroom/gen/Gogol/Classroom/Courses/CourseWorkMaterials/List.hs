@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWorkMaterials.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWorkMaterials.List
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWorkMaterials.list@ method which the
 -- 'ClassroomCoursesCourseWorkMaterialsList' request conforms to.
@@ -63,9 +61,7 @@ type ClassroomCoursesCourseWorkMaterialsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListCourseWorkMaterialResponse
+    Core.:> Core.Get '[Core.JSON] ListCourseWorkMaterialResponse
 
 -- | Returns a list of course work material that the requester is permitted to view. Course students may only view @PUBLISHED@ course work material. Course teachers and domain administrators may view all course work material. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course does not exist.
 --
@@ -122,10 +118,7 @@ newClassroomCoursesCourseWorkMaterialsList courseId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesCourseWorkMaterialsList
-  where
+instance Core.GoogleRequest ClassroomCoursesCourseWorkMaterialsList where
   type
     Rs ClassroomCoursesCourseWorkMaterialsList =
       ListCourseWorkMaterialResponse
@@ -134,28 +127,26 @@ instance
       '[ Classroom'Courseworkmaterials,
          Classroom'Courseworkmaterials'Readonly
        ]
-  requestClient
-    ClassroomCoursesCourseWorkMaterialsList {..} =
-      go
-        courseId
-        xgafv
-        accessToken
-        callback
-        (courseWorkMaterialStates Core.^. Core._Default)
-        materialDriveId
-        materialLink
-        orderBy
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkMaterialsListResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesCourseWorkMaterialsList {..} =
+    go
+      courseId
+      xgafv
+      accessToken
+      callback
+      (courseWorkMaterialStates Core.^. Core._Default)
+      materialDriveId
+      materialLink
+      orderBy
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomCoursesCourseWorkMaterialsListResource
+          )
+          Core.mempty

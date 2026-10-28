@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing.Projects.TestMatrices.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Checks the status of a test matrix. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
+-- Checks the status of a test matrix and the executions once they are created. The test matrix will contain the list of test executions to run if and only if the resultStorage.toolResultsExecution fields have been populated. Note: Flaky test executions may be added to the matrix at a later stage. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.get@.
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.get@.
 module Gogol.Testing.Projects.TestMatrices.Get
   ( -- * Resource
     TestingProjectsTestMatricesGetResource,
@@ -39,7 +37,7 @@ module Gogol.Testing.Projects.TestMatrices.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.get@ method which the
@@ -58,7 +56,7 @@ type TestingProjectsTestMatricesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] TestMatrix
 
--- | Checks the status of a test matrix. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
+-- | Checks the status of a test matrix and the executions once they are created. The test matrix will contain the list of test executions to run if and only if the resultStorage.toolResultsExecution fields have been populated. Note: Flaky test executions may be added to the matrix at a later stage. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
 --
 -- /See:/ 'newTestingProjectsTestMatricesGet' smart constructor.
 data TestingProjectsTestMatricesGet = TestingProjectsTestMatricesGet
@@ -97,10 +95,7 @@ newTestingProjectsTestMatricesGet projectId testMatrixId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TestingProjectsTestMatricesGet
-  where
+instance Core.GoogleRequest TestingProjectsTestMatricesGet where
   type Rs TestingProjectsTestMatricesGet = TestMatrix
   type
     Scopes TestingProjectsTestMatricesGet =
@@ -119,7 +114,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy TestingProjectsTestMatricesGetResource
-          )
+          (Core.Proxy :: Core.Proxy TestingProjectsTestMatricesGetResource)
           Core.mempty

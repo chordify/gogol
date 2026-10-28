@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Blogger.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Blogger.Internal.Product
@@ -169,7 +167,7 @@ module Gogol.Blogger.Internal.Product
 where
 
 import Gogol.Blogger.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newBlog' smart constructor.
@@ -322,7 +320,8 @@ data Blog_Pages = Blog_Pages
 -- | Creates a value of 'Blog_Pages' with the minimum fields required to make a request.
 newBlog_Pages ::
   Blog_Pages
-newBlog_Pages = Blog_Pages {selfLink = Core.Nothing, totalItems = Core.Nothing}
+newBlog_Pages =
+  Blog_Pages {selfLink = Core.Nothing, totalItems = Core.Nothing}
 
 instance Core.FromJSON Blog_Pages where
   parseJSON =
@@ -681,14 +680,11 @@ instance Core.FromJSON Comment_Author_Image where
   parseJSON =
     Core.withObject
       "Comment_Author_Image"
-      ( \o ->
-          Comment_Author_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Comment_Author_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Comment_Author_Image where
   toJSON Comment_Author_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Data about the blog containing this comment.
 --
@@ -712,8 +708,7 @@ instance Core.FromJSON Comment_Blog where
 
 instance Core.ToJSON Comment_Blog where
   toJSON Comment_Blog {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 -- | Data about the comment this is in reply to.
 --
@@ -737,8 +732,7 @@ instance Core.FromJSON Comment_InReplyTo where
 
 instance Core.ToJSON Comment_InReplyTo where
   toJSON Comment_InReplyTo {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 -- | Data about the post containing this comment.
 --
@@ -762,8 +756,7 @@ instance Core.FromJSON Comment_Post where
 
 instance Core.ToJSON Comment_Post where
   toJSON Comment_Post {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 --
 -- /See:/ 'newCommentList' smart constructor.
@@ -978,14 +971,11 @@ instance Core.FromJSON Page_Author_Image where
   parseJSON =
     Core.withObject
       "Page_Author_Image"
-      ( \o ->
-          Page_Author_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Page_Author_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Page_Author_Image where
   toJSON Page_Author_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Data about the blog containing this Page.
 --
@@ -1009,8 +999,7 @@ instance Core.FromJSON Page_Blog where
 
 instance Core.ToJSON Page_Blog where
   toJSON Page_Blog {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 --
 -- /See:/ 'newPageList' smart constructor.
@@ -1076,7 +1065,11 @@ data Pageviews = Pageviews
 newPageviews ::
   Pageviews
 newPageviews =
-  Pageviews {blogId = Core.Nothing, counts = Core.Nothing, kind = Core.Nothing}
+  Pageviews
+    { blogId = Core.Nothing,
+      counts = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON Pageviews where
   parseJSON =
@@ -1113,7 +1106,10 @@ data Pageviews_CountsItem = Pageviews_CountsItem
 newPageviews_CountsItem ::
   Pageviews_CountsItem
 newPageviews_CountsItem =
-  Pageviews_CountsItem {count = Core.Nothing, timeRange = Core.Nothing}
+  Pageviews_CountsItem
+    { count = Core.Nothing,
+      timeRange = Core.Nothing
+    }
 
 instance Core.FromJSON Pageviews_CountsItem where
   parseJSON =
@@ -1121,9 +1117,7 @@ instance Core.FromJSON Pageviews_CountsItem where
       "Pageviews_CountsItem"
       ( \o ->
           Pageviews_CountsItem
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "timeRange")
       )
 
@@ -1331,14 +1325,11 @@ instance Core.FromJSON Post_Author_Image where
   parseJSON =
     Core.withObject
       "Post_Author_Image"
-      ( \o ->
-          Post_Author_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Post_Author_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Post_Author_Image where
   toJSON Post_Author_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Data about the blog containing this Post.
 --
@@ -1362,14 +1353,12 @@ instance Core.FromJSON Post_Blog where
 
 instance Core.ToJSON Post_Blog where
   toJSON Post_Blog {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 --
 -- /See:/ 'newPost_ImagesItem' smart constructor.
 newtype Post_ImagesItem = Post_ImagesItem
-  { -- |
-    url :: (Core.Maybe Core.Text)
+  { url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1386,8 +1375,7 @@ instance Core.FromJSON Post_ImagesItem where
 
 instance Core.ToJSON Post_ImagesItem where
   toJSON Post_ImagesItem {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | The location for geotagged posts.
 --
@@ -1469,9 +1457,7 @@ instance Core.FromJSON Post_Replies where
           Post_Replies
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "selfLink")
-            Core.<*> ( o Core..:? "totalItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalItems" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Post_Replies where
@@ -1480,8 +1466,7 @@ instance Core.ToJSON Post_Replies where
       ( Core.catMaybes
           [ ("items" Core..=) Core.<$> items,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("totalItems" Core..=) Core.. Core.AsText
-              Core.<$> totalItems
+            ("totalItems" Core..=) Core.. Core.AsText Core.<$> totalItems
           ]
       )
 
@@ -1773,9 +1758,7 @@ instance Core.FromJSON User_Blogs where
 instance Core.ToJSON User_Blogs where
   toJSON User_Blogs {..} =
     Core.object
-      ( Core.catMaybes
-          [("selfLink" Core..=) Core.<$> selfLink]
-      )
+      (Core.catMaybes [("selfLink" Core..=) Core.<$> selfLink])
 
 -- | This user\'s locale
 --

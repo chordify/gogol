@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BigQueryDataTransfer.Types
@@ -75,9 +73,17 @@ module Gogol.BigQueryDataTransfer.Types
     Empty (..),
     newEmpty,
 
+    -- ** EncryptionConfiguration
+    EncryptionConfiguration (..),
+    newEncryptionConfiguration,
+
     -- ** EnrollDataSourcesRequest
     EnrollDataSourcesRequest (..),
     newEnrollDataSourcesRequest,
+
+    -- ** EventDrivenSchedule
+    EventDrivenSchedule (..),
+    newEventDrivenSchedule,
 
     -- ** ListDataSourcesResponse
     ListDataSourcesResponse (..),
@@ -111,9 +117,17 @@ module Gogol.BigQueryDataTransfer.Types
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** ManualSchedule
+    ManualSchedule (..),
+    newManualSchedule,
+
     -- ** ScheduleOptions
     ScheduleOptions (..),
     newScheduleOptions,
+
+    -- ** ScheduleOptionsV2
+    ScheduleOptionsV2 (..),
+    newScheduleOptionsV2,
 
     -- ** ScheduleTransferRunsRequest
     ScheduleTransferRunsRequest (..),
@@ -138,6 +152,10 @@ module Gogol.BigQueryDataTransfer.Types
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** TimeBasedSchedule
+    TimeBasedSchedule (..),
+    newTimeBasedSchedule,
 
     -- ** TimeRange
     TimeRange (..),
@@ -172,6 +190,10 @@ module Gogol.BigQueryDataTransfer.Types
     -- ** TransferRun_State
     TransferRun_State (..),
 
+    -- ** UnenrollDataSourcesRequest
+    UnenrollDataSourcesRequest (..),
+    newUnenrollDataSourcesRequest,
+
     -- ** UserInfo
     UserInfo (..),
     newUserInfo,
@@ -198,7 +220,7 @@ where
 
 import Gogol.BigQueryDataTransfer.Internal.Product
 import Gogol.BigQueryDataTransfer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the BigQuery Data Transfer API. This contains the host and root path used as a starting point for constructing service requests.
 bigQueryDataTransferService :: Core.ServiceConfig
@@ -208,10 +230,13 @@ bigQueryDataTransferService =
     "bigquerydatatransfer.googleapis.com"
 
 -- | View and manage your data in Google BigQuery and see the email address for your Google Account
-type Bigquery'FullControl = "https://www.googleapis.com/auth/bigquery"
+type Bigquery'FullControl =
+  "https://www.googleapis.com/auth/bigquery"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.TestCases.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.List
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.testCases.list@ method which the
 -- 'DialogFlowProjectsLocationsAgentsTestCasesList' request conforms to.
@@ -55,9 +53,7 @@ type DialogFlowProjectsLocationsAgentsTestCasesListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ProjectsLocationsAgentsTestCasesListView
+    Core.:> Core.QueryParam "view" ProjectsLocationsAgentsTestCasesListView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
@@ -95,7 +91,8 @@ newDialogFlowProjectsLocationsAgentsTestCasesList ::
   DialogFlowProjectsLocationsAgentsTestCasesList
 newDialogFlowProjectsLocationsAgentsTestCasesList parent =
   DialogFlowProjectsLocationsAgentsTestCasesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -111,32 +108,28 @@ instance
     DialogFlowProjectsLocationsAgentsTestCasesList
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsTestCasesList =
+    Rs DialogFlowProjectsLocationsAgentsTestCasesList =
       GoogleCloudDialogflowCxV3ListTestCasesResponse
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsTestCasesList =
+    Scopes DialogFlowProjectsLocationsAgentsTestCasesList =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsTestCasesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsTestCasesListResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsTestCasesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsTestCasesListResource
+          )
+          Core.mempty

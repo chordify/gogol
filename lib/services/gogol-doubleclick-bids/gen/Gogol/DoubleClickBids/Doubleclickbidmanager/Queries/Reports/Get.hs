@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Reports.Get
 where
 
 import Gogol.DoubleClickBids.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclickbidmanager.queries.reports.get@ method which the
 -- 'DoubleclickbidmanagerQueriesReportsGet' request conforms to.
@@ -68,9 +66,9 @@ data DoubleclickbidmanagerQueriesReportsGet = DoubleclickbidmanagerQueriesReport
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. ID of the query the report is associated with.
+    -- | Required. The ID of the query that generated the report.
     queryId :: Core.Int64,
-    -- | Required. ID of the report to retrieve.
+    -- | Required. The ID of the query to retrieve.
     reportId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,9 +79,9 @@ data DoubleclickbidmanagerQueriesReportsGet = DoubleclickbidmanagerQueriesReport
 
 -- | Creates a value of 'DoubleclickbidmanagerQueriesReportsGet' with the minimum fields required to make a request.
 newDoubleclickbidmanagerQueriesReportsGet ::
-  -- |  Required. ID of the query the report is associated with. See 'queryId'.
+  -- |  Required. The ID of the query that generated the report. See 'queryId'.
   Core.Int64 ->
-  -- |  Required. ID of the report to retrieve. See 'reportId'.
+  -- |  Required. The ID of the query to retrieve. See 'reportId'.
   Core.Int64 ->
   DoubleclickbidmanagerQueriesReportsGet
 newDoubleclickbidmanagerQueriesReportsGet queryId reportId =
@@ -97,33 +95,26 @@ newDoubleclickbidmanagerQueriesReportsGet queryId reportId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DoubleclickbidmanagerQueriesReportsGet
-  where
-  type
-    Rs DoubleclickbidmanagerQueriesReportsGet =
-      Report
+instance Core.GoogleRequest DoubleclickbidmanagerQueriesReportsGet where
+  type Rs DoubleclickbidmanagerQueriesReportsGet = Report
   type
     Scopes DoubleclickbidmanagerQueriesReportsGet =
       '[Doubleclickbidmanager'FullControl]
-  requestClient
-    DoubleclickbidmanagerQueriesReportsGet {..} =
-      go
-        queryId
-        reportId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        doubleClickBidsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DoubleclickbidmanagerQueriesReportsGetResource
-            )
-            Core.mempty
+  requestClient DoubleclickbidmanagerQueriesReportsGet {..} =
+    go
+      queryId
+      reportId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      doubleClickBidsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DoubleclickbidmanagerQueriesReportsGetResource
+          )
+          Core.mempty

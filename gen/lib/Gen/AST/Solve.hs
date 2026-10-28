@@ -6,10 +6,11 @@ where
 
 import Control.Applicative
 import Control.Lens hiding (enum)
+import Control.Monad
 import Control.Monad.Except
 import Data.List (intersect)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe
 import Gen.Formatting hiding (list)
 import Gen.Text
@@ -77,11 +78,11 @@ getType g = loc "getType" g $ memo Gen.Types.typed g go
         | ref r /= g -> req <$> getType (ref r)
         --            | otherwise  -> res (TType (ref r))
         | otherwise ->
-          throwError $
-            format
-              ("Ref cycle detected between: " % gid % " == " % shown)
-              g
-              s
+            throwError $
+              format
+                ("Ref cycle detected between: " % gid % " == " % shown)
+                g
+                s
       where
         res = pure . may . rep
 

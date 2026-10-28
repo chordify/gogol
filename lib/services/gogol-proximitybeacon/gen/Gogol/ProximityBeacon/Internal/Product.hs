@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ProximityBeacon.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ProximityBeacon.Internal.Product
@@ -116,7 +114,7 @@ module Gogol.ProximityBeacon.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ProximityBeacon.Internal.Sum
 
 -- | Defines a unique identifier of a beacon as broadcast by the device.
@@ -133,7 +131,8 @@ data AdvertisedId = AdvertisedId
 -- | Creates a value of 'AdvertisedId' with the minimum fields required to make a request.
 newAdvertisedId ::
   AdvertisedId
-newAdvertisedId = AdvertisedId {id = Core.Nothing, type' = Core.Nothing}
+newAdvertisedId =
+  AdvertisedId {id = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON AdvertisedId where
   parseJSON =
@@ -141,16 +140,15 @@ instance Core.FromJSON AdvertisedId where
       "AdvertisedId"
       ( \o ->
           AdvertisedId
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON AdvertisedId where
   toJSON AdvertisedId {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("id" Core..=) Core.<$> id, ("type" Core..=) Core.<$> type']
       )
 
 -- | A subset of attachment information served via the @beaconinfo.getforobserved@ method, used when your users encounter your beacons.
@@ -200,8 +198,7 @@ instance Core.ToJSON AttachmentInfo where
     Core.object
       ( Core.catMaybes
           [ ("data" Core..=) Core.<$> data',
-            ("maxDistanceMeters" Core..=)
-              Core.<$> maxDistanceMeters,
+            ("maxDistanceMeters" Core..=) Core.<$> maxDistanceMeters,
             ("namespacedType" Core..=) Core.<$> namespacedType
           ]
       )
@@ -285,8 +282,7 @@ instance Core.ToJSON Beacon where
             ("description" Core..=) Core.<$> description,
             ("ephemeralIdRegistration" Core..=)
               Core.<$> ephemeralIdRegistration,
-            ("expectedStability" Core..=)
-              Core.<$> expectedStability,
+            ("expectedStability" Core..=) Core.<$> expectedStability,
             ("indoorLevel" Core..=) Core.<$> indoorLevel,
             ("latLng" Core..=) Core.<$> latLng,
             ("placeId" Core..=) Core.<$> placeId,
@@ -300,8 +296,7 @@ instance Core.ToJSON Beacon where
 --
 -- /See:/ 'newBeacon_Properties' smart constructor.
 newtype Beacon_Properties = Beacon_Properties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -310,15 +305,14 @@ newBeacon_Properties ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Beacon_Properties
-newBeacon_Properties additional = Beacon_Properties {additional = additional}
+newBeacon_Properties additional =
+  Beacon_Properties {additional = additional}
 
 instance Core.FromJSON Beacon_Properties where
   parseJSON =
     Core.withObject
       "Beacon_Properties"
-      ( \o ->
-          Beacon_Properties Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Beacon_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Beacon_Properties where
   toJSON Beacon_Properties {..} = Core.toJSON additional
@@ -382,8 +376,7 @@ instance Core.ToJSON BeaconAttachment where
           [ ("attachmentName" Core..=) Core.<$> attachmentName,
             ("creationTimeMs" Core..=) Core.<$> creationTimeMs,
             ("data" Core..=) Core.<$> data',
-            ("maxDistanceMeters" Core..=)
-              Core.<$> maxDistanceMeters,
+            ("maxDistanceMeters" Core..=) Core.<$> maxDistanceMeters,
             ("namespacedType" Core..=) Core.<$> namespacedType
           ]
       )
@@ -455,7 +448,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -498,16 +496,13 @@ instance Core.FromJSON DeleteAttachmentsResponse where
     Core.withObject
       "DeleteAttachmentsResponse"
       ( \o ->
-          DeleteAttachmentsResponse
-            Core.<$> (o Core..:? "numDeleted")
+          DeleteAttachmentsResponse Core.<$> (o Core..:? "numDeleted")
       )
 
 instance Core.ToJSON DeleteAttachmentsResponse where
   toJSON DeleteAttachmentsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("numDeleted" Core..=) Core.<$> numDeleted]
-      )
+      (Core.catMaybes [("numDeleted" Core..=) Core.<$> numDeleted])
 
 -- | Diagnostics for a single beacon.
 --
@@ -572,8 +567,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -623,9 +617,7 @@ instance Core.FromJSON EphemeralIdRegistration where
           EphemeralIdRegistration
             Core.<$> (o Core..:? "beaconEcdhPublicKey")
             Core.<*> (o Core..:? "beaconIdentityKey")
-            Core.<*> ( o Core..:? "initialClockValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "initialClockValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "initialEid")
             Core.<*> (o Core..:? "rotationPeriodExponent")
             Core.<*> (o Core..:? "serviceEcdhPublicKey")
@@ -635,17 +627,14 @@ instance Core.ToJSON EphemeralIdRegistration where
   toJSON EphemeralIdRegistration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("beaconEcdhPublicKey" Core..=)
-              Core.<$> beaconEcdhPublicKey,
-            ("beaconIdentityKey" Core..=)
-              Core.<$> beaconIdentityKey,
-            ("initialClockValue" Core..=) Core.. Core.AsText
+          [ ("beaconEcdhPublicKey" Core..=) Core.<$> beaconEcdhPublicKey,
+            ("beaconIdentityKey" Core..=) Core.<$> beaconIdentityKey,
+            ("initialClockValue" Core..=)
+              Core.. Core.AsText
               Core.<$> initialClockValue,
             ("initialEid" Core..=) Core.<$> initialEid,
-            ("rotationPeriodExponent" Core..=)
-              Core.<$> rotationPeriodExponent,
-            ("serviceEcdhPublicKey" Core..=)
-              Core.<$> serviceEcdhPublicKey
+            ("rotationPeriodExponent" Core..=) Core.<$> rotationPeriodExponent,
+            ("serviceEcdhPublicKey" Core..=) Core.<$> serviceEcdhPublicKey
           ]
       )
 
@@ -667,7 +656,8 @@ newEphemeralIdRegistrationParams ::
   EphemeralIdRegistrationParams
 newEphemeralIdRegistrationParams =
   EphemeralIdRegistrationParams
-    { maxRotationPeriodExponent = Core.Nothing,
+    { maxRotationPeriodExponent =
+        Core.Nothing,
       minRotationPeriodExponent = Core.Nothing,
       serviceEcdhPublicKey = Core.Nothing
     }
@@ -691,8 +681,7 @@ instance Core.ToJSON EphemeralIdRegistrationParams where
               Core.<$> maxRotationPeriodExponent,
             ("minRotationPeriodExponent" Core..=)
               Core.<$> minRotationPeriodExponent,
-            ("serviceEcdhPublicKey" Core..=)
-              Core.<$> serviceEcdhPublicKey
+            ("serviceEcdhPublicKey" Core..=) Core.<$> serviceEcdhPublicKey
           ]
       )
 
@@ -716,10 +705,7 @@ newGetInfoForObservedBeaconsRequest =
       observations = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GetInfoForObservedBeaconsRequest
-  where
+instance Core.FromJSON GetInfoForObservedBeaconsRequest where
   parseJSON =
     Core.withObject
       "GetInfoForObservedBeaconsRequest"
@@ -733,8 +719,7 @@ instance Core.ToJSON GetInfoForObservedBeaconsRequest where
   toJSON GetInfoForObservedBeaconsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("namespacedTypes" Core..=)
-              Core.<$> namespacedTypes,
+          [ ("namespacedTypes" Core..=) Core.<$> namespacedTypes,
             ("observations" Core..=) Core.<$> observations
           ]
       )
@@ -754,27 +739,18 @@ newGetInfoForObservedBeaconsResponse ::
 newGetInfoForObservedBeaconsResponse =
   GetInfoForObservedBeaconsResponse {beacons = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GetInfoForObservedBeaconsResponse
-  where
+instance Core.FromJSON GetInfoForObservedBeaconsResponse where
   parseJSON =
     Core.withObject
       "GetInfoForObservedBeaconsResponse"
       ( \o ->
-          GetInfoForObservedBeaconsResponse
-            Core.<$> (o Core..:? "beacons")
+          GetInfoForObservedBeaconsResponse Core.<$> (o Core..:? "beacons")
       )
 
-instance
-  Core.ToJSON
-    GetInfoForObservedBeaconsResponse
-  where
+instance Core.ToJSON GetInfoForObservedBeaconsResponse where
   toJSON GetInfoForObservedBeaconsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("beacons" Core..=) Core.<$> beacons]
-      )
+      (Core.catMaybes [("beacons" Core..=) Core.<$> beacons])
 
 -- | Indoor level, a human-readable string as returned by Google Maps APIs, useful to indicate which floor of a building a beacon is located on.
 --
@@ -798,8 +774,7 @@ instance Core.FromJSON IndoorLevel where
 
 instance Core.ToJSON IndoorLevel where
   toJSON IndoorLevel {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | An object representing a latitude\/longitude pair. This is expressed as a pair of doubles representing degrees latitude and degrees longitude. Unless specified otherwise, this must conform to the \<a href=\"http:\/\/www.unoosa.org\/pdf\/icg\/2012\/template\/WGS_84.pdf\">WGS84 standard\<\/a>. Values must be within normalized ranges.
 --
@@ -815,7 +790,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -856,16 +832,13 @@ instance Core.FromJSON ListBeaconAttachmentsResponse where
     Core.withObject
       "ListBeaconAttachmentsResponse"
       ( \o ->
-          ListBeaconAttachmentsResponse
-            Core.<$> (o Core..:? "attachments")
+          ListBeaconAttachmentsResponse Core.<$> (o Core..:? "attachments")
       )
 
 instance Core.ToJSON ListBeaconAttachmentsResponse where
   toJSON ListBeaconAttachmentsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("attachments" Core..=) Core.<$> attachments]
-      )
+      (Core.catMaybes [("attachments" Core..=) Core.<$> attachments])
 
 -- | Response that contains list beacon results and pagination help.
 --
@@ -898,9 +871,7 @@ instance Core.FromJSON ListBeaconsResponse where
           ListBeaconsResponse
             Core.<$> (o Core..:? "beacons")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "totalCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ListBeaconsResponse where
@@ -909,8 +880,7 @@ instance Core.ToJSON ListBeaconsResponse where
       ( Core.catMaybes
           [ ("beacons" Core..=) Core.<$> beacons,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("totalCount" Core..=) Core.. Core.AsText
-              Core.<$> totalCount
+            ("totalCount" Core..=) Core.. Core.AsText Core.<$> totalCount
           ]
       )
 
@@ -965,23 +935,19 @@ newtype ListNamespacesResponse = ListNamespacesResponse
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
 newListNamespacesResponse ::
   ListNamespacesResponse
-newListNamespacesResponse = ListNamespacesResponse {namespaces = Core.Nothing}
+newListNamespacesResponse =
+  ListNamespacesResponse {namespaces = Core.Nothing}
 
 instance Core.FromJSON ListNamespacesResponse where
   parseJSON =
     Core.withObject
       "ListNamespacesResponse"
-      ( \o ->
-          ListNamespacesResponse
-            Core.<$> (o Core..:? "namespaces")
-      )
+      (\o -> ListNamespacesResponse Core.<$> (o Core..:? "namespaces"))
 
 instance Core.ToJSON ListNamespacesResponse where
   toJSON ListNamespacesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("namespaces" Core..=) Core.<$> namespaces]
-      )
+      (Core.catMaybes [("namespaces" Core..=) Core.<$> namespaces])
 
 -- | An attachment namespace defines read and write access for all the attachments created under it. Each namespace is globally unique, and owned by one project which is the only project that can create attachments under it.
 --
@@ -998,7 +964,10 @@ data Namespace = Namespace
 newNamespace ::
   Namespace
 newNamespace =
-  Namespace {namespaceName = Core.Nothing, servingVisibility = Core.Nothing}
+  Namespace
+    { namespaceName = Core.Nothing,
+      servingVisibility = Core.Nothing
+    }
 
 instance Core.FromJSON Namespace where
   parseJSON =
@@ -1015,8 +984,7 @@ instance Core.ToJSON Namespace where
     Core.object
       ( Core.catMaybes
           [ ("namespaceName" Core..=) Core.<$> namespaceName,
-            ("servingVisibility" Core..=)
-              Core.<$> servingVisibility
+            ("servingVisibility" Core..=) Core.<$> servingVisibility
           ]
       )
 

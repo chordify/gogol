@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer.TransferJobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StorageTransfer.TransferJobs.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferJobs.list@ method which the
@@ -68,7 +66,7 @@ data StorageTransferTransferJobsList = StorageTransferTransferJobsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@ and @jobStatuses@ support multiple values, their values must be specified with array notation. @projectId@ is required. @jobNames@ and @jobStatuses@ are optional. The valid values for @jobStatuses@ are case-insensitive: ENABLED, DISABLED, and DELETED.
+    -- | Required. A list of query parameters specified as JSON text in the form of: @{ \"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobStatuses\":[\"status1\",\"status2\",...], \"dataBackend\":\"QUERY_REPLICATION_CONFIGS\", \"sourceBucket\":\"source-bucket-name\", \"sinkBucket\":\"sink-bucket-name\", }@ The JSON formatting in the example is for display only; provide the query parameters without spaces or line breaks. * @projectId@ is required. * Since @jobNames@ and @jobStatuses@ support multiple values, their values must be specified with array notation. @jobNames@ and @jobStatuses@ are optional. Valid values are case-insensitive: * ENABLED * DISABLED * DELETED * Specify @\"dataBackend\":\"QUERY_REPLICATION_CONFIGS\"@ to return a list of cross-bucket replication jobs. * Limit the results to jobs from a particular bucket with @sourceBucket@ and\/or to a particular bucket with @sinkBucket@.
     filter :: Core.Text,
     -- | The list page size. The max allowed value is 256.
     pageSize :: (Core.Maybe Core.Int32),
@@ -83,7 +81,7 @@ data StorageTransferTransferJobsList = StorageTransferTransferJobsList
 
 -- | Creates a value of 'StorageTransferTransferJobsList' with the minimum fields required to make a request.
 newStorageTransferTransferJobsList ::
-  -- |  Required. A list of query parameters specified as JSON text in the form of: @{\"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobStatuses\":[\"status1\",\"status2\",...]}@ Since @jobNames@ and @jobStatuses@ support multiple values, their values must be specified with array notation. @projectId@ is required. @jobNames@ and @jobStatuses@ are optional. The valid values for @jobStatuses@ are case-insensitive: ENABLED, DISABLED, and DELETED. See 'filter'.
+  -- |  Required. A list of query parameters specified as JSON text in the form of: @{ \"projectId\":\"my_project_id\", \"jobNames\":[\"jobid1\",\"jobid2\",...], \"jobStatuses\":[\"status1\",\"status2\",...], \"dataBackend\":\"QUERY_REPLICATION_CONFIGS\", \"sourceBucket\":\"source-bucket-name\", \"sinkBucket\":\"sink-bucket-name\", }@ The JSON formatting in the example is for display only; provide the query parameters without spaces or line breaks. * @projectId@ is required. * Since @jobNames@ and @jobStatuses@ support multiple values, their values must be specified with array notation. @jobNames@ and @jobStatuses@ are optional. Valid values are case-insensitive: * ENABLED * DISABLED * DELETED * Specify @\"dataBackend\":\"QUERY_REPLICATION_CONFIGS\"@ to return a list of cross-bucket replication jobs. * Limit the results to jobs from a particular bucket with @sourceBucket@ and\/or to a particular bucket with @sinkBucket@. See 'filter'.
   Core.Text ->
   StorageTransferTransferJobsList
 newStorageTransferTransferJobsList filter =
@@ -98,13 +96,8 @@ newStorageTransferTransferJobsList filter =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageTransferTransferJobsList
-  where
-  type
-    Rs StorageTransferTransferJobsList =
-      ListTransferJobsResponse
+instance Core.GoogleRequest StorageTransferTransferJobsList where
+  type Rs StorageTransferTransferJobsList = ListTransferJobsResponse
   type
     Scopes StorageTransferTransferJobsList =
       '[CloudPlatform'FullControl]
@@ -123,7 +116,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageTransferTransferJobsListResource
-          )
+          (Core.Proxy :: Core.Proxy StorageTransferTransferJobsListResource)
           Core.mempty

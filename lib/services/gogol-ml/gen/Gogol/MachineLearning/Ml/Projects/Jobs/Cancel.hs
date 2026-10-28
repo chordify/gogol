@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Jobs.Cancel
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Jobs.Cancel
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.jobs.cancel@ method which the
 -- 'MlProjectsJobsCancel' request conforms to.
@@ -53,9 +51,7 @@ type MlProjectsJobsCancelResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__CancelJobRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudMlV1__CancelJobRequest
     Core.:> Core.Post '[Core.JSON] GoogleProtobuf__Empty
 
 -- | Cancels a running job.
@@ -99,9 +95,7 @@ newMlProjectsJobsCancel name payload =
 
 instance Core.GoogleRequest MlProjectsJobsCancel where
   type Rs MlProjectsJobsCancel = GoogleProtobuf__Empty
-  type
-    Scopes MlProjectsJobsCancel =
-      '[CloudPlatform'FullControl]
+  type Scopes MlProjectsJobsCancel = '[CloudPlatform'FullControl]
   requestClient MlProjectsJobsCancel {..} =
     go
       name
@@ -116,7 +110,5 @@ instance Core.GoogleRequest MlProjectsJobsCancel where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MlProjectsJobsCancelResource
-          )
+          (Core.Proxy :: Core.Proxy MlProjectsJobsCancelResource)
           Core.mempty

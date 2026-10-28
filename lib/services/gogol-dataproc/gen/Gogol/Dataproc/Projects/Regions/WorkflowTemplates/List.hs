@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.WorkflowTemplates.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.WorkflowTemplates.List
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.workflowTemplates.list@ method which the
 -- 'DataprocProjectsRegionsWorkflowTemplatesList' request conforms to.
@@ -88,7 +86,8 @@ newDataprocProjectsRegionsWorkflowTemplatesList ::
   DataprocProjectsRegionsWorkflowTemplatesList
 newDataprocProjectsRegionsWorkflowTemplatesList parent =
   DataprocProjectsRegionsWorkflowTemplatesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -106,27 +105,24 @@ instance
     Rs DataprocProjectsRegionsWorkflowTemplatesList =
       ListWorkflowTemplatesResponse
   type
-    Scopes
-      DataprocProjectsRegionsWorkflowTemplatesList =
+    Scopes DataprocProjectsRegionsWorkflowTemplatesList =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsWorkflowTemplatesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsWorkflowTemplatesListResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsWorkflowTemplatesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsWorkflowTemplatesListResource
+          )
+          Core.mempty

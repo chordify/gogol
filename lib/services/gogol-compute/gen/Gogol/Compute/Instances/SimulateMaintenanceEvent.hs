@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.SimulateMaintenanceEvent
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.SimulateMaintenanceEvent
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.simulateMaintenanceEvent@ method which the
 -- 'ComputeInstancesSimulateMaintenanceEvent' request conforms to.
@@ -57,8 +55,10 @@ type ComputeInstancesSimulateMaintenanceEventResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "withExtendedNotifications" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Operation
 
@@ -76,10 +76,14 @@ data ComputeInstancesSimulateMaintenanceEvent = ComputeInstancesSimulateMaintena
     instance' :: Core.Text,
     -- | Project ID for this request.
     project :: Core.Text,
+    -- | An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+    requestId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Determines whether the customers receive notifications before migration. Only applicable to SF vms.
+    withExtendedNotifications :: (Core.Maybe Core.Bool),
     -- | The name of the zone for this request.
     zone :: Core.Text
   }
@@ -101,8 +105,10 @@ newComputeInstancesSimulateMaintenanceEvent instance' project zone =
       callback = Core.Nothing,
       instance' = instance',
       project = project,
+      requestId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
+      withExtendedNotifications = Core.Nothing,
       zone = zone
     }
 
@@ -110,30 +116,28 @@ instance
   Core.GoogleRequest
     ComputeInstancesSimulateMaintenanceEvent
   where
-  type
-    Rs ComputeInstancesSimulateMaintenanceEvent =
-      Operation
+  type Rs ComputeInstancesSimulateMaintenanceEvent = Operation
   type
     Scopes ComputeInstancesSimulateMaintenanceEvent =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeInstancesSimulateMaintenanceEvent {..} =
-      go
-        project
-        zone
-        instance'
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInstancesSimulateMaintenanceEventResource
-            )
-            Core.mempty
+  requestClient ComputeInstancesSimulateMaintenanceEvent {..} =
+    go
+      project
+      zone
+      instance'
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      withExtendedNotifications
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeInstancesSimulateMaintenanceEventResource
+          )
+          Core.mempty

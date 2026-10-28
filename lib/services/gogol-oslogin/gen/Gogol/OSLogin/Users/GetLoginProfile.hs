@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.OSLogin.Users.GetLoginProfile
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.OSLogin.Users.GetLoginProfile
 where
 
 import Gogol.OSLogin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @oslogin.users.getLoginProfile@ method which the
 -- 'OSLoginUsersGetLoginProfile' request conforms to.
@@ -98,10 +96,7 @@ newOSLoginUsersGetLoginProfile name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    OSLoginUsersGetLoginProfile
-  where
+instance Core.GoogleRequest OSLoginUsersGetLoginProfile where
   type Rs OSLoginUsersGetLoginProfile = LoginProfile
   type
     Scopes OSLoginUsersGetLoginProfile =
@@ -125,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy OSLoginUsersGetLoginProfileResource
-          )
+          (Core.Proxy :: Core.Proxy OSLoginUsersGetLoginProfileResource)
           Core.mempty

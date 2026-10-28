@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Testing.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Testing.Types
@@ -110,6 +108,10 @@ module Gogol.Testing.Types
     AppBundle (..),
     newAppBundle,
 
+    -- ** CancelDeviceSessionRequest
+    CancelDeviceSessionRequest (..),
+    newCancelDeviceSessionRequest,
+
     -- ** CancelTestMatrixResponse
     CancelTestMatrixResponse (..),
     newCancelTestMatrixResponse,
@@ -144,9 +146,24 @@ module Gogol.Testing.Types
     DeviceIpBlockCatalog (..),
     newDeviceIpBlockCatalog,
 
+    -- ** DeviceSession
+    DeviceSession (..),
+    newDeviceSession,
+
+    -- ** DeviceSession_State
+    DeviceSession_State (..),
+
+    -- ** DirectAccessVersionInfo
+    DirectAccessVersionInfo (..),
+    newDirectAccessVersionInfo,
+
     -- ** Distribution
     Distribution (..),
     newDistribution,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
     -- ** Environment
     Environment (..),
@@ -203,6 +220,10 @@ module Gogol.Testing.Types
     -- ** IosModel_FormFactor
     IosModel_FormFactor (..),
 
+    -- ** IosRoboTest
+    IosRoboTest (..),
+    newIosRoboTest,
+
     -- ** IosRuntimeConfiguration
     IosRuntimeConfiguration (..),
     newIosRuntimeConfiguration,
@@ -223,9 +244,17 @@ module Gogol.Testing.Types
     IosXcTest (..),
     newIosXcTest,
 
+    -- ** LabInfo
+    LabInfo (..),
+    newLabInfo,
+
     -- ** LauncherActivityIntent
     LauncherActivityIntent (..),
     newLauncherActivityIntent,
+
+    -- ** ListDeviceSessionsResponse
+    ListDeviceSessionsResponse (..),
+    newListDeviceSessionsResponse,
 
     -- ** Locale
     Locale (..),
@@ -234,6 +263,10 @@ module Gogol.Testing.Types
     -- ** ManualSharding
     ManualSharding (..),
     newManualSharding,
+
+    -- ** MatrixErrorDetail
+    MatrixErrorDetail (..),
+    newMatrixErrorDetail,
 
     -- ** Metadata
     Metadata (..),
@@ -246,6 +279,10 @@ module Gogol.Testing.Types
     -- ** NetworkConfigurationCatalog
     NetworkConfigurationCatalog (..),
     newNetworkConfigurationCatalog,
+
+    -- ** NoActivityIntent
+    NoActivityIntent (..),
+    newNoActivityIntent,
 
     -- ** ObbFile
     ObbFile (..),
@@ -292,6 +329,17 @@ module Gogol.Testing.Types
     RoboStartingIntent (..),
     newRoboStartingIntent,
 
+    -- ** Service
+    Service (..),
+    newService,
+
+    -- ** SessionStateEvent
+    SessionStateEvent (..),
+    newSessionStateEvent,
+
+    -- ** SessionStateEvent_SessionState
+    SessionStateEvent_SessionState (..),
+
     -- ** Shard
     Shard (..),
     newShard,
@@ -299,6 +347,10 @@ module Gogol.Testing.Types
     -- ** ShardingOption
     ShardingOption (..),
     newShardingOption,
+
+    -- ** SmartSharding
+    SmartSharding (..),
+    newSmartSharding,
 
     -- ** StartActivityIntent
     StartActivityIntent (..),
@@ -372,6 +424,10 @@ module Gogol.Testing.Types
     UsesFeature (..),
     newUsesFeature,
 
+    -- ** UsesPermissionTag
+    UsesPermissionTag (..),
+    newUsesPermissionTag,
+
     -- ** XcodeVersion
     XcodeVersion (..),
     newXcodeVersion,
@@ -381,7 +437,7 @@ module Gogol.Testing.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Internal.Product
 import Gogol.Testing.Internal.Sum
 
@@ -393,7 +449,9 @@ testingService =
     "testing.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

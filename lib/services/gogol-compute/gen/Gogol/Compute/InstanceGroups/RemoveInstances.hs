@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InstanceGroups.RemoveInstances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InstanceGroups.RemoveInstances
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instanceGroups.removeInstances@ method which the
 -- 'ComputeInstanceGroupsRemoveInstances' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstanceGroupsRemoveInstancesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstanceGroupsRemoveInstancesRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstanceGroupsRemoveInstancesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Removes one or more instances from the specified instance group, but does not delete those instances. If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration before the VM instance is removed or deleted.
@@ -104,50 +100,47 @@ newComputeInstanceGroupsRemoveInstances ::
   -- |  The name of the zone where the instance group is located. See 'zone'.
   Core.Text ->
   ComputeInstanceGroupsRemoveInstances
-newComputeInstanceGroupsRemoveInstances instanceGroup payload project zone =
-  ComputeInstanceGroupsRemoveInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroup = instanceGroup,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInstanceGroupsRemoveInstances
+  instanceGroup
+  payload
+  project
+  zone =
     ComputeInstanceGroupsRemoveInstances
-  where
-  type
-    Rs ComputeInstanceGroupsRemoveInstances =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroup = instanceGroup,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
+
+instance Core.GoogleRequest ComputeInstanceGroupsRemoveInstances where
+  type Rs ComputeInstanceGroupsRemoveInstances = Operation
   type
     Scopes ComputeInstanceGroupsRemoveInstances =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeInstanceGroupsRemoveInstances {..} =
-      go
-        project
-        zone
-        instanceGroup
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInstanceGroupsRemoveInstancesResource
-            )
-            Core.mempty
+  requestClient ComputeInstanceGroupsRemoveInstances {..} =
+    go
+      project
+      zone
+      instanceGroup
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeInstanceGroupsRemoveInstancesResource
+          )
+          Core.mempty

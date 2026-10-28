@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Indexing.Datasources.Items.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Indexing.Datasources.Items.Delete
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.indexing.datasources.items.delete@ method which the
 -- 'CloudSearchIndexingDatasourcesItemsDelete' request conforms to.
@@ -52,12 +50,8 @@ type CloudSearchIndexingDatasourcesItemsDeleteResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "connectorName" Core.Text
-    Core.:> Core.QueryParam
-              "debugOptions.enableDebugging"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "mode"
-              IndexingDatasourcesItemsDeleteMode
+    Core.:> Core.QueryParam "debugOptions.enableDebugging" Core.Bool
+    Core.:> Core.QueryParam "mode" IndexingDatasourcesItemsDeleteMode
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "version" Core.Base64
@@ -114,32 +108,28 @@ instance
   Core.GoogleRequest
     CloudSearchIndexingDatasourcesItemsDelete
   where
-  type
-    Rs CloudSearchIndexingDatasourcesItemsDelete =
-      Operation
+  type Rs CloudSearchIndexingDatasourcesItemsDelete = Operation
   type
     Scopes CloudSearchIndexingDatasourcesItemsDelete =
       '[CloudSearch'FullControl, CloudSearch'Indexing]
-  requestClient
-    CloudSearchIndexingDatasourcesItemsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        connectorName
-        debugOptionsEnableDebugging
-        mode
-        uploadType
-        uploadProtocol
-        version
-        (Core.Just Core.AltJSON)
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchIndexingDatasourcesItemsDeleteResource
-            )
-            Core.mempty
+  requestClient CloudSearchIndexingDatasourcesItemsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      connectorName
+      debugOptionsEnableDebugging
+      mode
+      uploadType
+      uploadProtocol
+      version
+      (Core.Just Core.AltJSON)
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchIndexingDatasourcesItemsDeleteResource
+          )
+          Core.mempty

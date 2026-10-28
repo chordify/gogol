@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.UptimeCheckConfigs.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.UptimeCheckConfigs.Patch
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.uptimeCheckConfigs.patch@ method which the
 -- 'MonitoringProjectsUptimeCheckConfigsPatch' request conforms to.
@@ -67,7 +65,7 @@ data MonitoringProjectsUptimeCheckConfigsPatch = MonitoringProjectsUptimeCheckCo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
+    -- | Identifier. A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: UptimeCheckConfig,
@@ -82,7 +80,7 @@ data MonitoringProjectsUptimeCheckConfigsPatch = MonitoringProjectsUptimeCheckCo
 
 -- | Creates a value of 'MonitoringProjectsUptimeCheckConfigsPatch' with the minimum fields required to make a request.
 newMonitoringProjectsUptimeCheckConfigsPatch ::
-  -- |  A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response. See 'name'.
+  -- |  Identifier. A unique resource name for this Uptime check configuration. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/uptimeCheckConfigs\/[UPTIME/CHECK/ID] [PROJECT/ID/OR/NUMBER] is the Workspace host project associated with the Uptime check.This field should be omitted when creating the Uptime check configuration; on create, the resource name is assigned by the server and included in the response. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   UptimeCheckConfig ->
@@ -109,24 +107,22 @@ instance
   type
     Scopes MonitoringProjectsUptimeCheckConfigsPatch =
       '[CloudPlatform'FullControl, Monitoring'FullControl]
-  requestClient
-    MonitoringProjectsUptimeCheckConfigsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsUptimeCheckConfigsPatchResource
-            )
-            Core.mempty
+  requestClient MonitoringProjectsUptimeCheckConfigsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringProjectsUptimeCheckConfigsPatchResource
+          )
+          Core.mempty

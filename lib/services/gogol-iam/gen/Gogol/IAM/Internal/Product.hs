@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,22 @@
 
 -- |
 -- Module      : Gogol.IAM.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.IAM.Internal.Product
-  ( -- * GoogleIamAdminV1AuditData
+  ( -- * CloudControl2SharedOperationsReconciliationOperationMetadata
+    CloudControl2SharedOperationsReconciliationOperationMetadata (..),
+    newCloudControl2SharedOperationsReconciliationOperationMetadata,
+
+    -- * GoogleCloudCommonOperationMetadata
+    GoogleCloudCommonOperationMetadata (..),
+    newGoogleCloudCommonOperationMetadata,
+
+    -- * GoogleIamAdminV1AuditData
     GoogleIamAdminV1AuditData (..),
     newGoogleIamAdminV1AuditData,
 
@@ -74,6 +80,22 @@ module Gogol.IAM.Internal.Product
     GoogleIamV2PolicyRule (..),
     newGoogleIamV2PolicyRule,
 
+    -- * GoogleIamV3OperationMetadata
+    GoogleIamV3OperationMetadata (..),
+    newGoogleIamV3OperationMetadata,
+
+    -- * GoogleIamV3alphaOperationMetadata
+    GoogleIamV3alphaOperationMetadata (..),
+    newGoogleIamV3alphaOperationMetadata,
+
+    -- * GoogleIamV3betaOperationMetadata
+    GoogleIamV3betaOperationMetadata (..),
+    newGoogleIamV3betaOperationMetadata,
+
+    -- * GoogleIamV3mainOperationMetadata
+    GoogleIamV3mainOperationMetadata (..),
+    newGoogleIamV3mainOperationMetadata,
+
     -- * GoogleLongrunningOperation
     GoogleLongrunningOperation (..),
     newGoogleLongrunningOperation,
@@ -101,7 +123,121 @@ module Gogol.IAM.Internal.Product
 where
 
 import Gogol.IAM.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | Operation metadata returned by the CLH during resource state reconciliation.
+--
+-- /See:/ 'newCloudControl2SharedOperationsReconciliationOperationMetadata' smart constructor.
+data CloudControl2SharedOperationsReconciliationOperationMetadata = CloudControl2SharedOperationsReconciliationOperationMetadata
+  { -- | DEPRECATED. Use exclusive_action instead.
+    deleteResource :: (Core.Maybe Core.Bool),
+    -- | Excluisive action returned by the CLH.
+    exclusiveAction ::
+      ( Core.Maybe
+          CloudControl2SharedOperationsReconciliationOperationMetadata_ExclusiveAction
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CloudControl2SharedOperationsReconciliationOperationMetadata' with the minimum fields required to make a request.
+newCloudControl2SharedOperationsReconciliationOperationMetadata ::
+  CloudControl2SharedOperationsReconciliationOperationMetadata
+newCloudControl2SharedOperationsReconciliationOperationMetadata =
+  CloudControl2SharedOperationsReconciliationOperationMetadata
+    { deleteResource =
+        Core.Nothing,
+      exclusiveAction = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    CloudControl2SharedOperationsReconciliationOperationMetadata
+  where
+  parseJSON =
+    Core.withObject
+      "CloudControl2SharedOperationsReconciliationOperationMetadata"
+      ( \o ->
+          CloudControl2SharedOperationsReconciliationOperationMetadata
+            Core.<$> (o Core..:? "deleteResource")
+            Core.<*> (o Core..:? "exclusiveAction")
+      )
+
+instance
+  Core.ToJSON
+    CloudControl2SharedOperationsReconciliationOperationMetadata
+  where
+  toJSON
+    CloudControl2SharedOperationsReconciliationOperationMetadata {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("deleteResource" Core..=) Core.<$> deleteResource,
+              ("exclusiveAction" Core..=) Core.<$> exclusiveAction
+            ]
+        )
+
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleCloudCommonOperationMetadata' smart constructor.
+data GoogleCloudCommonOperationMetadata = GoogleCloudCommonOperationMetadata
+  { -- | Output only. API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have google.longrunning.Operation.error value with a google.rpc.Status.code of @1@, corresponding to @Code.CANCELLED@.
+    cancelRequested :: (Core.Maybe Core.Bool),
+    -- | Output only. The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Human-readable status of the operation, if any.
+    statusDetail :: (Core.Maybe Core.Text),
+    -- | Output only. Server-defined resource path for the target of the operation.
+    target :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudCommonOperationMetadata' with the minimum fields required to make a request.
+newGoogleCloudCommonOperationMetadata ::
+  GoogleCloudCommonOperationMetadata
+newGoogleCloudCommonOperationMetadata =
+  GoogleCloudCommonOperationMetadata
+    { apiVersion = Core.Nothing,
+      cancelRequested = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      statusDetail = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudCommonOperationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudCommonOperationMetadata"
+      ( \o ->
+          GoogleCloudCommonOperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "cancelRequested")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "statusDetail")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance Core.ToJSON GoogleCloudCommonOperationMetadata where
+  toJSON GoogleCloudCommonOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("cancelRequested" Core..=) Core.<$> cancelRequested,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("statusDetail" Core..=) Core.<$> statusDetail,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
 
 -- | Audit log information specific to Cloud IAM admin APIs. This message is serialized as an @Any@ type in the @ServiceData@ message of an @AuditLog@ message.
 --
@@ -123,17 +259,14 @@ instance Core.FromJSON GoogleIamAdminV1AuditData where
     Core.withObject
       "GoogleIamAdminV1AuditData"
       ( \o ->
-          GoogleIamAdminV1AuditData
-            Core.<$> (o Core..:? "permissionDelta")
+          GoogleIamAdminV1AuditData Core.<$> (o Core..:? "permissionDelta")
       )
 
 instance Core.ToJSON GoogleIamAdminV1AuditData where
   toJSON GoogleIamAdminV1AuditData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("permissionDelta" Core..=)
-              Core.<$> permissionDelta
-          ]
+          [("permissionDelta" Core..=) Core.<$> permissionDelta]
       )
 
 -- | A PermissionDelta message to record the added/permissions and removed/permissions inside a role.
@@ -152,14 +285,12 @@ newGoogleIamAdminV1AuditDataPermissionDelta ::
   GoogleIamAdminV1AuditDataPermissionDelta
 newGoogleIamAdminV1AuditDataPermissionDelta =
   GoogleIamAdminV1AuditDataPermissionDelta
-    { addedPermissions = Core.Nothing,
+    { addedPermissions =
+        Core.Nothing,
       removedPermissions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleIamAdminV1AuditDataPermissionDelta
-  where
+instance Core.FromJSON GoogleIamAdminV1AuditDataPermissionDelta where
   parseJSON =
     Core.withObject
       "GoogleIamAdminV1AuditDataPermissionDelta"
@@ -169,17 +300,12 @@ instance
             Core.<*> (o Core..:? "removedPermissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamAdminV1AuditDataPermissionDelta
-  where
+instance Core.ToJSON GoogleIamAdminV1AuditDataPermissionDelta where
   toJSON GoogleIamAdminV1AuditDataPermissionDelta {..} =
     Core.object
       ( Core.catMaybes
-          [ ("addedPermissions" Core..=)
-              Core.<$> addedPermissions,
-            ("removedPermissions" Core..=)
-              Core.<$> removedPermissions
+          [ ("addedPermissions" Core..=) Core.<$> addedPermissions,
+            ("removedPermissions" Core..=) Core.<$> removedPermissions
           ]
       )
 
@@ -252,16 +378,13 @@ instance Core.FromJSON GoogleIamV1LoggingAuditData where
     Core.withObject
       "GoogleIamV1LoggingAuditData"
       ( \o ->
-          GoogleIamV1LoggingAuditData
-            Core.<$> (o Core..:? "policyDelta")
+          GoogleIamV1LoggingAuditData Core.<$> (o Core..:? "policyDelta")
       )
 
 instance Core.ToJSON GoogleIamV1LoggingAuditData where
   toJSON GoogleIamV1LoggingAuditData {..} =
     Core.object
-      ( Core.catMaybes
-          [("policyDelta" Core..=) Core.<$> policyDelta]
-      )
+      (Core.catMaybes [("policyDelta" Core..=) Core.<$> policyDelta])
 
 -- | The difference delta between two policies.
 --
@@ -283,16 +406,13 @@ instance Core.FromJSON GoogleIamV1PolicyDelta where
     Core.withObject
       "GoogleIamV1PolicyDelta"
       ( \o ->
-          GoogleIamV1PolicyDelta
-            Core.<$> (o Core..:? "bindingDeltas")
+          GoogleIamV1PolicyDelta Core.<$> (o Core..:? "bindingDeltas")
       )
 
 instance Core.ToJSON GoogleIamV1PolicyDelta where
   toJSON GoogleIamV1PolicyDelta {..} =
     Core.object
-      ( Core.catMaybes
-          [("bindingDeltas" Core..=) Core.<$> bindingDeltas]
-      )
+      (Core.catMaybes [("bindingDeltas" Core..=) Core.<$> bindingDeltas])
 
 -- | Metadata for long-running WorkloadIdentityPool operations.
 --
@@ -314,8 +434,7 @@ instance
     Core.withObject
       "GoogleIamV1betaWorkloadIdentityPoolOperationMetadata"
       ( \o ->
-          Core.pure
-            GoogleIamV1betaWorkloadIdentityPoolOperationMetadata
+          Core.pure GoogleIamV1betaWorkloadIdentityPoolOperationMetadata
       )
 
 instance
@@ -332,9 +451,11 @@ data GoogleIamV2DenyRule = GoogleIamV2DenyRule
     denialCondition :: (Core.Maybe GoogleTypeExpr),
     -- | The permissions that are explicitly denied by this rule. Each permission uses the format @{service_fqdn}\/{resource}.{verb}@, where @{service_fqdn}@ is the fully qualified domain name for the service. For example, @iam.googleapis.com\/roles.list@.
     deniedPermissions :: (Core.Maybe [Core.Text]),
-    -- | The identities that are prevented from using one or more permissions on Google Cloud resources. This field can contain the following values: * @principalSet:\/\/goog\/public:all@: A special identifier that represents any principal that is on the internet, even if they do not have a Google Account or are not logged in. * @principal:\/\/goog\/subject\/{email_id}@: A specific Google Account. Includes Gmail, Cloud Identity, and Google Workspace user accounts. For example, @principal:\/\/goog\/subject\/alice\@example.com@. * @deleted:principal:\/\/goog\/subject\/{email_id}?uid={uid}@: A specific Google Account that was deleted recently. For example, @deleted:principal:\/\/goog\/subject\/alice\@example.com?uid=1234567890@. If the Google Account is recovered, this identifier reverts to the standard identifier for a Google Account. * @principalSet:\/\/goog\/group\/{group_id}@: A Google group. For example, @principalSet:\/\/goog\/group\/admins\@example.com@. *
-    -- @deleted:principalSet:\/\/goog\/group\/{group_id}?uid={uid}@: A Google group that was deleted recently. For example, @deleted:principalSet:\/\/goog\/group\/admins\@example.com?uid=1234567890@. If the Google group is restored, this identifier reverts to the standard identifier for a Google group. * @principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/{service_account_id}@: A Google Cloud service account. For example, @principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/my-service-account\@iam.gserviceaccount.com@. * @deleted:principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/{service_account_id}?uid={uid}@: A Google Cloud service account that was deleted recently. For example, @deleted:principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/my-service-account\@iam.gserviceaccount.com?uid=1234567890@. If the service account is undeleted, this identifier reverts to the standard identifier for a service account. *
-    -- @principalSet:\/\/goog\/cloudIdentityCustomerId\/{customer_id}@: All of the principals associated with the specified Google Workspace or Cloud Identity customer ID. For example, @principalSet:\/\/goog\/cloudIdentityCustomerId\/C01Abc35@.
+    -- | The identities that are prevented from using one or more permissions on Google Cloud resources. This field can contain the following values: * @principal:\/\/goog\/subject\/{email_id}@: A specific Google Account. Includes Gmail, Cloud Identity, and Google Workspace user accounts. For example, @principal:\/\/goog\/subject\/alice\@example.com@. * @principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/{service_account_id}@: A Google Cloud service account. For example, @principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/my-service-account\@iam.gserviceaccount.com@. * @principalSet:\/\/goog\/group\/{group_id}@: A Google group. For example, @principalSet:\/\/goog\/group\/admins\@example.com@. * @principalSet:\/\/goog\/public:all@: A special identifier that represents any principal that is on the internet, even if they do not have a Google Account or are not logged in. * @principalSet:\/\/goog\/cloudIdentityCustomerId\/{customer_id}@: All of the principals associated with the specified Google
+    -- Workspace or Cloud Identity customer ID. For example, @principalSet:\/\/goog\/cloudIdentityCustomerId\/C01Abc35@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. * @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. *
+    -- @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @principalSet:\/\/cloudresourcemanager.googleapis.com\/[projects|folders|organizations]\/{project_number|folder_number|org_number}\/type\/ServiceAccount@: All service accounts grouped under a resource (project, folder, or organization). * @principalSet:\/\/cloudresourcemanager.googleapis.com\/[projects|folders|organizations]\/{project_number|folder_number|org_number}\/type\/ServiceAgent@: All service agents grouped under a resource
+    -- (project, folder, or organization). * @deleted:principal:\/\/goog\/subject\/{email_id}?uid={uid}@: A specific Google Account that was deleted recently. For example, @deleted:principal:\/\/goog\/subject\/alice\@example.com?uid=1234567890@. If the Google Account is recovered, this identifier reverts to the standard identifier for a Google Account. * @deleted:principalSet:\/\/goog\/group\/{group_id}?uid={uid}@: A Google group that was deleted recently. For example, @deleted:principalSet:\/\/goog\/group\/admins\@example.com?uid=1234567890@. If the Google group is restored, this identifier reverts to the standard identifier for a Google group. * @deleted:principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/{service_account_id}?uid={uid}@: A Google Cloud service account that was deleted recently. For example, @deleted:principal:\/\/iam.googleapis.com\/projects\/-\/serviceAccounts\/my-service-account\@iam.gserviceaccount.com?uid=1234567890@. If the service account is undeleted, this identifier reverts to
+    -- the standard identifier for a service account. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example, @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     deniedPrincipals :: (Core.Maybe [Core.Text]),
     -- | Specifies the permissions that this rule excludes from the set of denied permissions given by @denied_permissions@. If a permission appears in @denied_permissions@ /and/ in @exception_permissions@ then it will /not/ be denied. The excluded permissions can be specified using the same syntax as @denied_permissions@.
     exceptionPermissions :: (Core.Maybe [Core.Text]),
@@ -372,16 +493,11 @@ instance Core.ToJSON GoogleIamV2DenyRule where
   toJSON GoogleIamV2DenyRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("denialCondition" Core..=)
-              Core.<$> denialCondition,
-            ("deniedPermissions" Core..=)
-              Core.<$> deniedPermissions,
-            ("deniedPrincipals" Core..=)
-              Core.<$> deniedPrincipals,
-            ("exceptionPermissions" Core..=)
-              Core.<$> exceptionPermissions,
-            ("exceptionPrincipals" Core..=)
-              Core.<$> exceptionPrincipals
+          [ ("denialCondition" Core..=) Core.<$> denialCondition,
+            ("deniedPermissions" Core..=) Core.<$> deniedPermissions,
+            ("deniedPrincipals" Core..=) Core.<$> deniedPrincipals,
+            ("exceptionPermissions" Core..=) Core.<$> exceptionPermissions,
+            ("exceptionPrincipals" Core..=) Core.<$> exceptionPrincipals
           ]
       )
 
@@ -405,10 +521,7 @@ newGoogleIamV2ListPoliciesResponse =
       policies = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleIamV2ListPoliciesResponse
-  where
+instance Core.FromJSON GoogleIamV2ListPoliciesResponse where
   parseJSON =
     Core.withObject
       "GoogleIamV2ListPoliciesResponse"
@@ -439,7 +552,7 @@ data GoogleIamV2Policy = GoogleIamV2Policy
     deleteTime :: (Core.Maybe Core.DateTime),
     -- | A user-specified description of the @Policy@. This value can be up to 63 characters.
     displayName :: (Core.Maybe Core.Text),
-    -- | An opaque tag that identifies the current version of the @Policy@. IAM uses this value to help manage concurrent updates, so they do not cause one update to be overwritten by another. If this field is present in a CreatePolicy request, the value is ignored.
+    -- | An opaque tag that identifies the current version of the @Policy@. IAM uses this value to help manage concurrent updates, so they do not cause one update to be overwritten by another. If this field is present in a CreatePolicyRequest, the value is ignored.
     etag :: (Core.Maybe Core.Text),
     -- | Output only. The kind of the @Policy@. Always contains the value @DenyPolicy@.
     kind :: (Core.Maybe Core.Text),
@@ -510,8 +623,7 @@ instance Core.ToJSON GoogleIamV2Policy where
 --
 -- /See:/ 'newGoogleIamV2Policy_Annotations' smart constructor.
 newtype GoogleIamV2Policy_Annotations = GoogleIamV2Policy_Annotations
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -528,13 +640,11 @@ instance Core.FromJSON GoogleIamV2Policy_Annotations where
     Core.withObject
       "GoogleIamV2Policy_Annotations"
       ( \o ->
-          GoogleIamV2Policy_Annotations
-            Core.<$> (Core.parseJSONObject o)
+          GoogleIamV2Policy_Annotations Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleIamV2Policy_Annotations where
-  toJSON GoogleIamV2Policy_Annotations {..} =
-    Core.toJSON additional
+  toJSON GoogleIamV2Policy_Annotations {..} = Core.toJSON additional
 
 -- | Metadata for long-running @Policy@ operations.
 --
@@ -551,10 +661,7 @@ newGoogleIamV2PolicyOperationMetadata ::
 newGoogleIamV2PolicyOperationMetadata =
   GoogleIamV2PolicyOperationMetadata {createTime = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleIamV2PolicyOperationMetadata
-  where
+instance Core.FromJSON GoogleIamV2PolicyOperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleIamV2PolicyOperationMetadata"
@@ -563,15 +670,10 @@ instance
             Core.<$> (o Core..:? "createTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV2PolicyOperationMetadata
-  where
+instance Core.ToJSON GoogleIamV2PolicyOperationMetadata where
   toJSON GoogleIamV2PolicyOperationMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("createTime" Core..=) Core.<$> createTime]
-      )
+      (Core.catMaybes [("createTime" Core..=) Core.<$> createTime])
 
 -- | A single rule in a @Policy@.
 --
@@ -588,7 +690,10 @@ data GoogleIamV2PolicyRule = GoogleIamV2PolicyRule
 newGoogleIamV2PolicyRule ::
   GoogleIamV2PolicyRule
 newGoogleIamV2PolicyRule =
-  GoogleIamV2PolicyRule {denyRule = Core.Nothing, description = Core.Nothing}
+  GoogleIamV2PolicyRule
+    { denyRule = Core.Nothing,
+      description = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleIamV2PolicyRule where
   parseJSON =
@@ -609,6 +714,262 @@ instance Core.ToJSON GoogleIamV2PolicyRule where
           ]
       )
 
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleIamV3OperationMetadata' smart constructor.
+data GoogleIamV3OperationMetadata = GoogleIamV3OperationMetadata
+  { -- | Output only. API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    requestedCancellation :: (Core.Maybe Core.Bool),
+    -- | Output only. Human-readable status of the operation, if any.
+    statusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. Server-defined resource path for the target of the
+    target :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleIamV3OperationMetadata' with the minimum fields required to make a request.
+newGoogleIamV3OperationMetadata ::
+  GoogleIamV3OperationMetadata
+newGoogleIamV3OperationMetadata =
+  GoogleIamV3OperationMetadata
+    { apiVersion = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      requestedCancellation = Core.Nothing,
+      statusMessage = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleIamV3OperationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleIamV3OperationMetadata"
+      ( \o ->
+          GoogleIamV3OperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "requestedCancellation")
+            Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance Core.ToJSON GoogleIamV3OperationMetadata where
+  toJSON GoogleIamV3OperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("requestedCancellation" Core..=) Core.<$> requestedCancellation,
+            ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
+
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleIamV3alphaOperationMetadata' smart constructor.
+data GoogleIamV3alphaOperationMetadata = GoogleIamV3alphaOperationMetadata
+  { -- | Output only. API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    requestedCancellation :: (Core.Maybe Core.Bool),
+    -- | Output only. Human-readable status of the operation, if any.
+    statusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. Server-defined resource path for the target of the
+    target :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleIamV3alphaOperationMetadata' with the minimum fields required to make a request.
+newGoogleIamV3alphaOperationMetadata ::
+  GoogleIamV3alphaOperationMetadata
+newGoogleIamV3alphaOperationMetadata =
+  GoogleIamV3alphaOperationMetadata
+    { apiVersion = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      requestedCancellation = Core.Nothing,
+      statusMessage = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleIamV3alphaOperationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleIamV3alphaOperationMetadata"
+      ( \o ->
+          GoogleIamV3alphaOperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "requestedCancellation")
+            Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance Core.ToJSON GoogleIamV3alphaOperationMetadata where
+  toJSON GoogleIamV3alphaOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("requestedCancellation" Core..=) Core.<$> requestedCancellation,
+            ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
+
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleIamV3betaOperationMetadata' smart constructor.
+data GoogleIamV3betaOperationMetadata = GoogleIamV3betaOperationMetadata
+  { -- | Output only. API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    requestedCancellation :: (Core.Maybe Core.Bool),
+    -- | Output only. Human-readable status of the operation, if any.
+    statusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. Server-defined resource path for the target of the
+    target :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleIamV3betaOperationMetadata' with the minimum fields required to make a request.
+newGoogleIamV3betaOperationMetadata ::
+  GoogleIamV3betaOperationMetadata
+newGoogleIamV3betaOperationMetadata =
+  GoogleIamV3betaOperationMetadata
+    { apiVersion = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      requestedCancellation = Core.Nothing,
+      statusMessage = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleIamV3betaOperationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleIamV3betaOperationMetadata"
+      ( \o ->
+          GoogleIamV3betaOperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "requestedCancellation")
+            Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance Core.ToJSON GoogleIamV3betaOperationMetadata where
+  toJSON GoogleIamV3betaOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("requestedCancellation" Core..=) Core.<$> requestedCancellation,
+            ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
+
+-- | Represents the metadata of the long-running operation.
+--
+-- /See:/ 'newGoogleIamV3mainOperationMetadata' smart constructor.
+data GoogleIamV3mainOperationMetadata = GoogleIamV3mainOperationMetadata
+  { -- | Output only. API version used to start the operation.
+    apiVersion :: (Core.Maybe Core.Text),
+    -- | Output only. The time the operation was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The time the operation finished running.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    requestedCancellation :: (Core.Maybe Core.Bool),
+    -- | Output only. Human-readable status of the operation, if any.
+    statusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. Server-defined resource path for the target of the
+    target :: (Core.Maybe Core.Text),
+    -- | Output only. Name of the verb executed by the operation.
+    verb :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleIamV3mainOperationMetadata' with the minimum fields required to make a request.
+newGoogleIamV3mainOperationMetadata ::
+  GoogleIamV3mainOperationMetadata
+newGoogleIamV3mainOperationMetadata =
+  GoogleIamV3mainOperationMetadata
+    { apiVersion = Core.Nothing,
+      createTime = Core.Nothing,
+      endTime = Core.Nothing,
+      requestedCancellation = Core.Nothing,
+      statusMessage = Core.Nothing,
+      target = Core.Nothing,
+      verb = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleIamV3mainOperationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleIamV3mainOperationMetadata"
+      ( \o ->
+          GoogleIamV3mainOperationMetadata
+            Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "requestedCancellation")
+            Core.<*> (o Core..:? "statusMessage")
+            Core.<*> (o Core..:? "target")
+            Core.<*> (o Core..:? "verb")
+      )
+
+instance Core.ToJSON GoogleIamV3mainOperationMetadata where
+  toJSON GoogleIamV3mainOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("endTime" Core..=) Core.<$> endTime,
+            ("requestedCancellation" Core..=) Core.<$> requestedCancellation,
+            ("statusMessage" Core..=) Core.<$> statusMessage,
+            ("target" Core..=) Core.<$> target,
+            ("verb" Core..=) Core.<$> verb
+          ]
+      )
+
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
 -- /See:/ 'newGoogleLongrunningOperation' smart constructor.
@@ -621,7 +982,7 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation
     metadata :: (Core.Maybe GoogleLongrunningOperation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe GoogleLongrunningOperation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -680,10 +1041,7 @@ newGoogleLongrunningOperation_Metadata ::
 newGoogleLongrunningOperation_Metadata additional =
   GoogleLongrunningOperation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Metadata"
@@ -692,14 +1050,11 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Metadata where
   toJSON GoogleLongrunningOperation_Metadata {..} =
     Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newGoogleLongrunningOperation_Response' smart constructor.
 newtype GoogleLongrunningOperation_Response = GoogleLongrunningOperation_Response
@@ -716,10 +1071,7 @@ newGoogleLongrunningOperation_Response ::
 newGoogleLongrunningOperation_Response additional =
   GoogleLongrunningOperation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Response"
@@ -728,10 +1080,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Response where
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
@@ -800,13 +1149,11 @@ instance Core.FromJSON GoogleRpcStatus_DetailsItem where
     Core.withObject
       "GoogleRpcStatus_DetailsItem"
       ( \o ->
-          GoogleRpcStatus_DetailsItem
-            Core.<$> (Core.parseJSONObject o)
+          GoogleRpcStatus_DetailsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleRpcStatus_DetailsItem where
-  toJSON GoogleRpcStatus_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON GoogleRpcStatus_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https:\/\/github.com\/google\/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() \< 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != \'private\' && document.type != \'internal\'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"\'New message received at \' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are
 -- determined by the service that evaluates it. See the service documentation for additional information.

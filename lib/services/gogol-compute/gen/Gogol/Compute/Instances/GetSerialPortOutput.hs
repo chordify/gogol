@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.GetSerialPortOutput
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.GetSerialPortOutput
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.getSerialPortOutput@ method which the
 -- 'ComputeInstancesGetSerialPortOutput' request conforms to.
@@ -80,7 +78,7 @@ data ComputeInstancesGetSerialPortOutput = ComputeInstancesGetSerialPortOutput
     port :: Core.Int32,
     -- | Project ID for this request.
     project :: Core.Text,
-    -- | Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to @0@. If the output for that byte position is available, this field matches the @start@ parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the @start@ property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console.
+    -- | Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to @0@. If the output for that byte position is available, this field matches the @start@ parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the @start@ property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console. Note that the negative start is bounded by the retained buffer size, and the returned serial console output will not exceed the max buffer size.
     start :: (Core.Maybe Core.Int64),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -114,19 +112,11 @@ newComputeInstancesGetSerialPortOutput instance' project zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInstancesGetSerialPortOutput
-  where
-  type
-    Rs ComputeInstancesGetSerialPortOutput =
-      SerialPortOutput
+instance Core.GoogleRequest ComputeInstancesGetSerialPortOutput where
+  type Rs ComputeInstancesGetSerialPortOutput = SerialPortOutput
   type
     Scopes ComputeInstancesGetSerialPortOutput =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeInstancesGetSerialPortOutput {..} =
     go
       project
@@ -145,7 +135,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeInstancesGetSerialPortOutputResource
+              Core.Proxy ComputeInstancesGetSerialPortOutputResource
           )
           Core.mempty

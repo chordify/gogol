@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SQLAdmin.Internal.Sum
@@ -38,6 +36,55 @@ module Gogol.SQLAdmin.Internal.Sum
       ( ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
         ApiWarning_Code_REGIONUNREACHABLE,
         ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT,
+        ApiWarning_Code_COMPROMISEDCREDENTIALS,
+        ApiWarning_Code_INTERNALSTATEFAILURE,
+        ..
+      ),
+
+    -- * Backup_BackupKind
+    Backup_BackupKind
+      ( Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED,
+        Backup_BackupKind_Snapshot,
+        Backup_BackupKind_Physical,
+        ..
+      ),
+
+    -- * Backup_State
+    Backup_State
+      ( Backup_State_SQLBACKUPSTATEUNSPECIFIED,
+        Backup_State_Enqueued,
+        Backup_State_Running,
+        Backup_State_Failed,
+        Backup_State_Successful,
+        Backup_State_Deleting,
+        Backup_State_DELETIONFAILED,
+        ..
+      ),
+
+    -- * Backup_Type
+    Backup_Type
+      ( Backup_Type_SQLBACKUPTYPEUNSPECIFIED,
+        Backup_Type_Automated,
+        Backup_Type_ONDEMAND,
+        Backup_Type_Final,
+        ..
+      ),
+
+    -- * BackupConfiguration_TransactionalLogStorageState
+    BackupConfiguration_TransactionalLogStorageState
+      ( BackupConfiguration_TransactionalLogStorageState_TRANSACTIONALLOGSTORAGESTATEUNSPECIFIED,
+        BackupConfiguration_TransactionalLogStorageState_Disk,
+        BackupConfiguration_TransactionalLogStorageState_SWITCHINGTOCLOUDSTORAGE,
+        BackupConfiguration_TransactionalLogStorageState_SWITCHEDTOCLOUDSTORAGE,
+        BackupConfiguration_TransactionalLogStorageState_CLOUDSTORAGE,
+        ..
+      ),
+
+    -- * BackupReencryptionConfig_BackupType
+    BackupReencryptionConfig_BackupType
+      ( BackupReencryptionConfig_BackupType_BACKUPTYPEUNSPECIFIED,
+        BackupReencryptionConfig_BackupType_Automated,
+        BackupReencryptionConfig_BackupType_ONDEMAND,
         ..
       ),
 
@@ -95,6 +142,26 @@ module Gogol.SQLAdmin.Internal.Sum
         ConnectSettings_DatabaseVersion_MYSQL_5_5,
         ConnectSettings_DatabaseVersion_MYSQL_5_6,
         ConnectSettings_DatabaseVersion_MYSQL_5_7,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_33,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_34,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_35,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_36,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_37,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_38,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_39,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_40,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_41,
+        ConnectSettings_DatabaseVersion_MYSQL_8_0_42,
+        ConnectSettings_DatabaseVersion_MYSQL_8_4,
         ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD,
         ConnectSettings_DatabaseVersion_SQLSERVER2017ENTERPRISE,
         ConnectSettings_DatabaseVersion_SQLSERVER2017EXPRESS,
@@ -105,19 +172,26 @@ module Gogol.SQLAdmin.Internal.Sum
         ConnectSettings_DatabaseVersion_POSTGRES_12,
         ConnectSettings_DatabaseVersion_POSTGRES_13,
         ConnectSettings_DatabaseVersion_POSTGRES_14,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
-        ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
+        ConnectSettings_DatabaseVersion_POSTGRES_15,
+        ConnectSettings_DatabaseVersion_POSTGRES_16,
+        ConnectSettings_DatabaseVersion_POSTGRES_17,
         ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD,
         ConnectSettings_DatabaseVersion_SQLSERVER2019ENTERPRISE,
         ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS,
         ConnectSettings_DatabaseVersion_SQLSERVER2019WEB,
+        ConnectSettings_DatabaseVersion_SQLSERVER2022STANDARD,
+        ConnectSettings_DatabaseVersion_SQLSERVER2022ENTERPRISE,
+        ConnectSettings_DatabaseVersion_SQLSERVER2022EXPRESS,
+        ConnectSettings_DatabaseVersion_SQLSERVER2022WEB,
+        ..
+      ),
+
+    -- * ConnectSettings_ServerCaMode
+    ConnectSettings_ServerCaMode
+      ( ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED,
+        ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
+        ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA,
+        ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA,
         ..
       ),
 
@@ -137,6 +211,26 @@ module Gogol.SQLAdmin.Internal.Sum
         DatabaseInstance_DatabaseVersion_MYSQL_5_5,
         DatabaseInstance_DatabaseVersion_MYSQL_5_6,
         DatabaseInstance_DatabaseVersion_MYSQL_5_7,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_33,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_34,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_35,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_36,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_37,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_38,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_39,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_40,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_41,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_0_42,
+        DatabaseInstance_DatabaseVersion_MYSQL_8_4,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017ENTERPRISE,
         DatabaseInstance_DatabaseVersion_SQLSERVER2017EXPRESS,
@@ -147,19 +241,17 @@ module Gogol.SQLAdmin.Internal.Sum
         DatabaseInstance_DatabaseVersion_POSTGRES_12,
         DatabaseInstance_DatabaseVersion_POSTGRES_13,
         DatabaseInstance_DatabaseVersion_POSTGRES_14,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
-        DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
+        DatabaseInstance_DatabaseVersion_POSTGRES_15,
+        DatabaseInstance_DatabaseVersion_POSTGRES_16,
+        DatabaseInstance_DatabaseVersion_POSTGRES_17,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019ENTERPRISE,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS,
         DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB,
+        DatabaseInstance_DatabaseVersion_SQLSERVER2022STANDARD,
+        DatabaseInstance_DatabaseVersion_SQLSERVER2022ENTERPRISE,
+        DatabaseInstance_DatabaseVersion_SQLSERVER2022EXPRESS,
+        DatabaseInstance_DatabaseVersion_SQLSERVER2022WEB,
         ..
       ),
 
@@ -169,6 +261,14 @@ module Gogol.SQLAdmin.Internal.Sum
         DatabaseInstance_InstanceType_CLOUDSQLINSTANCE,
         DatabaseInstance_InstanceType_ONPREMISESINSTANCE,
         DatabaseInstance_InstanceType_READREPLICAINSTANCE,
+        ..
+      ),
+
+    -- * DatabaseInstance_SqlNetworkArchitecture
+    DatabaseInstance_SqlNetworkArchitecture
+      ( DatabaseInstance_SqlNetworkArchitecture_SQLNETWORKARCHITECTUREUNSPECIFIED,
+        DatabaseInstance_SqlNetworkArchitecture_NEWNETWORKARCHITECTURE,
+        DatabaseInstance_SqlNetworkArchitecture_OLDNETWORKARCHITECTURE,
         ..
       ),
 
@@ -195,12 +295,38 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * DnsNameMapping_ConnectionType
+    DnsNameMapping_ConnectionType
+      ( DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+        DnsNameMapping_ConnectionType_Public,
+        DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS,
+        DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT,
+        ..
+      ),
+
+    -- * DnsNameMapping_DnsScope
+    DnsNameMapping_DnsScope
+      ( DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED,
+        DnsNameMapping_DnsScope_Instance,
+        ..
+      ),
+
+    -- * ExportContext_BakExportOptions_BakType
+    ExportContext_BakExportOptions_BakType
+      ( ExportContext_BakExportOptions_BakType_BAKTYPEUNSPECIFIED,
+        ExportContext_BakExportOptions_BakType_Full,
+        ExportContext_BakExportOptions_BakType_Diff,
+        ExportContext_BakExportOptions_BakType_Tlog,
+        ..
+      ),
+
     -- * ExportContext_FileType
     ExportContext_FileType
       ( ExportContext_FileType_SQLFILETYPEUNSPECIFIED,
         ExportContext_FileType_Sql,
         ExportContext_FileType_Csv,
         ExportContext_FileType_Bak,
+        ExportContext_FileType_Tde,
         ..
       ),
 
@@ -211,6 +337,26 @@ module Gogol.SQLAdmin.Internal.Sum
         Flag_AppliesToItem_MYSQL_5_5,
         Flag_AppliesToItem_MYSQL_5_6,
         Flag_AppliesToItem_MYSQL_5_7,
+        Flag_AppliesToItem_MYSQL_8_0,
+        Flag_AppliesToItem_MYSQL_8_0_18,
+        Flag_AppliesToItem_MYSQL_8_0_26,
+        Flag_AppliesToItem_MYSQL_8_0_27,
+        Flag_AppliesToItem_MYSQL_8_0_28,
+        Flag_AppliesToItem_MYSQL_8_0_29,
+        Flag_AppliesToItem_MYSQL_8_0_30,
+        Flag_AppliesToItem_MYSQL_8_0_31,
+        Flag_AppliesToItem_MYSQL_8_0_32,
+        Flag_AppliesToItem_MYSQL_8_0_33,
+        Flag_AppliesToItem_MYSQL_8_0_34,
+        Flag_AppliesToItem_MYSQL_8_0_35,
+        Flag_AppliesToItem_MYSQL_8_0_36,
+        Flag_AppliesToItem_MYSQL_8_0_37,
+        Flag_AppliesToItem_MYSQL_8_0_38,
+        Flag_AppliesToItem_MYSQL_8_0_39,
+        Flag_AppliesToItem_MYSQL_8_0_40,
+        Flag_AppliesToItem_MYSQL_8_0_41,
+        Flag_AppliesToItem_MYSQL_8_0_42,
+        Flag_AppliesToItem_MYSQL_8_4,
         Flag_AppliesToItem_SQLSERVER2017STANDARD,
         Flag_AppliesToItem_SQLSERVER2017ENTERPRISE,
         Flag_AppliesToItem_SQLSERVER2017EXPRESS,
@@ -221,19 +367,17 @@ module Gogol.SQLAdmin.Internal.Sum
         Flag_AppliesToItem_POSTGRES_12,
         Flag_AppliesToItem_POSTGRES_13,
         Flag_AppliesToItem_POSTGRES_14,
-        Flag_AppliesToItem_MYSQL_8_0,
-        Flag_AppliesToItem_MYSQL_8_0_18,
-        Flag_AppliesToItem_MYSQL_8_0_26,
-        Flag_AppliesToItem_MYSQL_8_0_27,
-        Flag_AppliesToItem_MYSQL_8_0_28,
-        Flag_AppliesToItem_MYSQL_8_0_29,
-        Flag_AppliesToItem_MYSQL_8_0_30,
-        Flag_AppliesToItem_MYSQL_8_0_31,
-        Flag_AppliesToItem_MYSQL_8_0_32,
+        Flag_AppliesToItem_POSTGRES_15,
+        Flag_AppliesToItem_POSTGRES_16,
+        Flag_AppliesToItem_POSTGRES_17,
         Flag_AppliesToItem_SQLSERVER2019STANDARD,
         Flag_AppliesToItem_SQLSERVER2019ENTERPRISE,
         Flag_AppliesToItem_SQLSERVER2019EXPRESS,
         Flag_AppliesToItem_SQLSERVER2019WEB,
+        Flag_AppliesToItem_SQLSERVER2022STANDARD,
+        Flag_AppliesToItem_SQLSERVER2022ENTERPRISE,
+        Flag_AppliesToItem_SQLSERVER2022EXPRESS,
+        Flag_AppliesToItem_SQLSERVER2022WEB,
         ..
       ),
 
@@ -250,12 +394,40 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * ImportContext_BakImportOptions_BakType
+    ImportContext_BakImportOptions_BakType
+      ( ImportContext_BakImportOptions_BakType_BAKTYPEUNSPECIFIED,
+        ImportContext_BakImportOptions_BakType_Full,
+        ImportContext_BakImportOptions_BakType_Diff,
+        ImportContext_BakImportOptions_BakType_Tlog,
+        ..
+      ),
+
     -- * ImportContext_FileType
     ImportContext_FileType
       ( ImportContext_FileType_SQLFILETYPEUNSPECIFIED,
         ImportContext_FileType_Sql,
         ImportContext_FileType_Csv,
         ImportContext_FileType_Bak,
+        ImportContext_FileType_Tde,
+        ..
+      ),
+
+    -- * IpConfiguration_ServerCaMode
+    IpConfiguration_ServerCaMode
+      ( IpConfiguration_ServerCaMode_CAMODEUNSPECIFIED,
+        IpConfiguration_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
+        IpConfiguration_ServerCaMode_GOOGLEMANAGEDCASCA,
+        IpConfiguration_ServerCaMode_CUSTOMERMANAGEDCASCA,
+        ..
+      ),
+
+    -- * IpConfiguration_SslMode
+    IpConfiguration_SslMode
+      ( IpConfiguration_SslMode_SSLMODEUNSPECIFIED,
+        IpConfiguration_SslMode_ALLOWUNENCRYPTEDANDENCRYPTED,
+        IpConfiguration_SslMode_ENCRYPTEDONLY,
+        IpConfiguration_SslMode_TRUSTEDCLIENTCERTIFICATEREQUIRED,
         ..
       ),
 
@@ -274,6 +446,16 @@ module Gogol.SQLAdmin.Internal.Sum
       ( MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED,
         MaintenanceWindow_UpdateTrack_Canary,
         MaintenanceWindow_UpdateTrack_Stable,
+        MaintenanceWindow_UpdateTrack_WEEK5,
+        ..
+      ),
+
+    -- * OnPremisesConfiguration_SslOption
+    OnPremisesConfiguration_SslOption
+      ( OnPremisesConfiguration_SslOption_SSLOPTIONUNSPECIFIED,
+        OnPremisesConfiguration_SslOption_Disable,
+        OnPremisesConfiguration_SslOption_Require,
+        OnPremisesConfiguration_SslOption_VERIFYCA,
         ..
       ),
 
@@ -317,6 +499,18 @@ module Gogol.SQLAdmin.Internal.Sum
         Operation_OperationType_LOGCLEANUP,
         Operation_OperationType_AUTORESTART,
         Operation_OperationType_Reencrypt,
+        Operation_OperationType_Switchover,
+        Operation_OperationType_UPDATEBACKUP,
+        Operation_OperationType_ACQUIRESSRSLEASE,
+        Operation_OperationType_RELEASESSRSLEASE,
+        Operation_OperationType_RECONFIGUREOLDPRIMARY,
+        Operation_OperationType_CLUSTERMAINTENANCE,
+        Operation_OperationType_SELFSERVICEMAINTENANCE,
+        Operation_OperationType_SWITCHOVERTOREPLICA,
+        Operation_OperationType_MAJORVERSIONUPGRADE,
+        Operation_OperationType_ADVANCEDBACKUP,
+        Operation_OperationType_MANAGEBACKUP,
+        Operation_OperationType_ENHANCEDBACKUP,
         ..
       ),
 
@@ -376,6 +570,15 @@ module Gogol.SQLAdmin.Internal.Sum
         Settings_DataDiskType_PDSSD,
         Settings_DataDiskType_PDHDD,
         Settings_DataDiskType_OBSOLETELOCALSSD,
+        Settings_DataDiskType_HYPERDISKBALANCED,
+        ..
+      ),
+
+    -- * Settings_Edition
+    Settings_Edition
+      ( Settings_Edition_EDITIONUNSPECIFIED,
+        Settings_Edition_Enterprise,
+        Settings_Edition_ENTERPRISEPLUS,
         ..
       ),
 
@@ -426,6 +629,39 @@ module Gogol.SQLAdmin.Internal.Sum
         SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE,
         SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES,
         SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA,
+        SqlExternalSyncSettingError_Type_MISSINGOPTIONALPRIVILEGES,
+        SqlExternalSyncSettingError_Type_RISKYBACKUPADMINPRIVILEGE,
+        SqlExternalSyncSettingError_Type_INSUFFICIENTGCSPERMISSIONS,
+        SqlExternalSyncSettingError_Type_INVALIDFILEINFO,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDDATABASESETTINGS,
+        SqlExternalSyncSettingError_Type_MYSQLPARALLELIMPORTINSUFFICIENTPRIVILEGE,
+        SqlExternalSyncSettingError_Type_LOCALINFILEOFF,
+        SqlExternalSyncSettingError_Type_TURNONPITRAFTERPROMOTE,
+        SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEMINORVERSION,
+        SqlExternalSyncSettingError_Type_SOURCEMAXSUBSCRIPTIONS,
+        SqlExternalSyncSettingError_Type_UNABLETOVERIFYDEFINERS,
+        SqlExternalSyncSettingError_Type_SUBSCRIPTIONCALCULATIONSTATUS,
+        SqlExternalSyncSettingError_Type_PGSUBSCRIPTIONCOUNT,
+        SqlExternalSyncSettingError_Type_PGSYNCPARALLELLEVEL,
+        SqlExternalSyncSettingError_Type_INSUFFICIENTDISKSIZE,
+        SqlExternalSyncSettingError_Type_INSUFFICIENTMACHINETIER,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONSNOTMIGRATED,
+        SqlExternalSyncSettingError_Type_EXTENSIONSNOTMIGRATED,
+        SqlExternalSyncSettingError_Type_PGCRONFLAGENABLEDINREPLICA,
+        SqlExternalSyncSettingError_Type_EXTENSIONSNOTENABLEDINREPLICA,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDCOLUMNS,
+        SqlExternalSyncSettingError_Type_USERSNOTCREATEDINREPLICA,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDSYSTEMOBJECTS,
+        SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLESWITHREPLICAIDENTITY,
+        SqlExternalSyncSettingError_Type_SELECTEDOBJECTSNOTEXISTONSOURCE,
+        ..
+      ),
+
+    -- * SqlInstancesStartExternalSyncRequest_MigrationType
+    SqlInstancesStartExternalSyncRequest_MigrationType
+      ( SqlInstancesStartExternalSyncRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED,
+        SqlInstancesStartExternalSyncRequest_MigrationType_Logical,
+        SqlInstancesStartExternalSyncRequest_MigrationType_Physical,
         ..
       ),
 
@@ -437,6 +673,23 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+    SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+      ( SqlInstancesStartExternalSyncRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED,
+        SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Min,
+        SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Optimal,
+        SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Max,
+        ..
+      ),
+
+    -- * SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+    SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+      ( SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED,
+        SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Logical,
+        SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Physical,
+        ..
+      ),
+
     -- * SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
     SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
       ( SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_EXTERNALSYNCMODEUNSPECIFIED,
@@ -445,11 +698,30 @@ module Gogol.SQLAdmin.Internal.Sum
         ..
       ),
 
+    -- * SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+    SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+      ( SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED,
+        SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Min,
+        SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Optimal,
+        SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Max,
+        ..
+      ),
+
     -- * SqlOutOfDiskReport_SqlOutOfDiskState
     SqlOutOfDiskReport_SqlOutOfDiskState
       ( SqlOutOfDiskReport_SqlOutOfDiskState_SQLOUTOFDISKSTATEUNSPECIFIED,
         SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
         SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
+        ..
+      ),
+
+    -- * SqlSubOperationType_MaintenanceType
+    SqlSubOperationType_MaintenanceType
+      ( SqlSubOperationType_MaintenanceType_SQLMAINTENANCETYPEUNSPECIFIED,
+        SqlSubOperationType_MaintenanceType_INSTANCEMAINTENANCE,
+        SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDMAINTENANCE,
+        SqlSubOperationType_MaintenanceType_INSTANCESELFSERVICEMAINTENANCE,
+        SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDSELFSERVICEMAINTENANCE,
         ..
       ),
 
@@ -467,12 +739,15 @@ module Gogol.SQLAdmin.Internal.Sum
       ( User_Type_BUILTIN,
         User_Type_CLOUDIAMUSER,
         User_Type_CLOUDIAMSERVICEACCOUNT,
+        User_Type_CLOUDIAMGROUP,
+        User_Type_CLOUDIAMGROUPUSER,
+        User_Type_CLOUDIAMGROUPSERVICEACCOUNT,
         ..
       ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -526,11 +801,216 @@ pattern ApiWarning_Code_REGIONUNREACHABLE = ApiWarning_Code "REGION_UNREACHABLE"
 pattern ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT :: ApiWarning_Code
 pattern ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT = ApiWarning_Code "MAX_RESULTS_EXCEEDS_LIMIT"
 
+-- | Warning when user tries to create\/update a user with credentials that have previously been compromised by a public data breach.
+pattern ApiWarning_Code_COMPROMISEDCREDENTIALS :: ApiWarning_Code
+pattern ApiWarning_Code_COMPROMISEDCREDENTIALS = ApiWarning_Code "COMPROMISED_CREDENTIALS"
+
+-- | Warning when the operation succeeds but some non-critical workflow state failed.
+pattern ApiWarning_Code_INTERNALSTATEFAILURE :: ApiWarning_Code
+pattern ApiWarning_Code_INTERNALSTATEFAILURE = ApiWarning_Code "INTERNAL_STATE_FAILURE"
+
 {-# COMPLETE
   ApiWarning_Code_SQLAPIWARNINGCODEUNSPECIFIED,
   ApiWarning_Code_REGIONUNREACHABLE,
   ApiWarning_Code_MAXRESULTSEXCEEDSLIMIT,
+  ApiWarning_Code_COMPROMISEDCREDENTIALS,
+  ApiWarning_Code_INTERNALSTATEFAILURE,
   ApiWarning_Code
+  #-}
+
+-- | Output only. Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
+newtype Backup_BackupKind = Backup_BackupKind {fromBackup_BackupKind :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This is an unknown BackupKind.
+pattern Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED :: Backup_BackupKind
+pattern Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED = Backup_BackupKind "SQL_BACKUP_KIND_UNSPECIFIED"
+
+-- | Snapshot-based backups.
+pattern Backup_BackupKind_Snapshot :: Backup_BackupKind
+pattern Backup_BackupKind_Snapshot = Backup_BackupKind "SNAPSHOT"
+
+-- | Physical backups.
+pattern Backup_BackupKind_Physical :: Backup_BackupKind
+pattern Backup_BackupKind_Physical = Backup_BackupKind "PHYSICAL"
+
+{-# COMPLETE
+  Backup_BackupKind_SQLBACKUPKINDUNSPECIFIED,
+  Backup_BackupKind_Snapshot,
+  Backup_BackupKind_Physical,
+  Backup_BackupKind
+  #-}
+
+-- | Output only. The status of this backup.
+newtype Backup_State = Backup_State {fromBackup_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state of the backup is unknown.
+pattern Backup_State_SQLBACKUPSTATEUNSPECIFIED :: Backup_State
+pattern Backup_State_SQLBACKUPSTATEUNSPECIFIED = Backup_State "SQL_BACKUP_STATE_UNSPECIFIED"
+
+-- | The backup that\'s added to a queue.
+pattern Backup_State_Enqueued :: Backup_State
+pattern Backup_State_Enqueued = Backup_State "ENQUEUED"
+
+-- | The backup is in progress.
+pattern Backup_State_Running :: Backup_State
+pattern Backup_State_Running = Backup_State "RUNNING"
+
+-- | The backup failed.
+pattern Backup_State_Failed :: Backup_State
+pattern Backup_State_Failed = Backup_State "FAILED"
+
+-- | The backup is successful.
+pattern Backup_State_Successful :: Backup_State
+pattern Backup_State_Successful = Backup_State "SUCCESSFUL"
+
+-- | The backup is being deleted.
+pattern Backup_State_Deleting :: Backup_State
+pattern Backup_State_Deleting = Backup_State "DELETING"
+
+-- | Deletion of the backup failed.
+pattern Backup_State_DELETIONFAILED :: Backup_State
+pattern Backup_State_DELETIONFAILED = Backup_State "DELETION_FAILED"
+
+{-# COMPLETE
+  Backup_State_SQLBACKUPSTATEUNSPECIFIED,
+  Backup_State_Enqueued,
+  Backup_State_Running,
+  Backup_State_Failed,
+  Backup_State_Successful,
+  Backup_State_Deleting,
+  Backup_State_DELETIONFAILED,
+  Backup_State
+  #-}
+
+-- | Output only. The type of this backup. The type can be \"AUTOMATED\", \"ON_DEMAND\" or “FINAL”.
+newtype Backup_Type = Backup_Type {fromBackup_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This is an unknown backup type.
+pattern Backup_Type_SQLBACKUPTYPEUNSPECIFIED :: Backup_Type
+pattern Backup_Type_SQLBACKUPTYPEUNSPECIFIED = Backup_Type "SQL_BACKUP_TYPE_UNSPECIFIED"
+
+-- | The backup schedule triggers a backup automatically.
+pattern Backup_Type_Automated :: Backup_Type
+pattern Backup_Type_Automated = Backup_Type "AUTOMATED"
+
+-- | The user triggers a backup manually.
+pattern Backup_Type_ONDEMAND :: Backup_Type
+pattern Backup_Type_ONDEMAND = Backup_Type "ON_DEMAND"
+
+-- | The backup created when instance is deleted.
+pattern Backup_Type_Final :: Backup_Type
+pattern Backup_Type_Final = Backup_Type "FINAL"
+
+{-# COMPLETE
+  Backup_Type_SQLBACKUPTYPEUNSPECIFIED,
+  Backup_Type_Automated,
+  Backup_Type_ONDEMAND,
+  Backup_Type_Final,
+  Backup_Type
+  #-}
+
+-- | Output only. This value contains the storage location of transactional logs used to perform point-in-time recovery (PITR) for the database.
+newtype BackupConfiguration_TransactionalLogStorageState = BackupConfiguration_TransactionalLogStorageState {fromBackupConfiguration_TransactionalLogStorageState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern BackupConfiguration_TransactionalLogStorageState_TRANSACTIONALLOGSTORAGESTATEUNSPECIFIED :: BackupConfiguration_TransactionalLogStorageState
+pattern BackupConfiguration_TransactionalLogStorageState_TRANSACTIONALLOGSTORAGESTATEUNSPECIFIED = BackupConfiguration_TransactionalLogStorageState "TRANSACTIONAL_LOG_STORAGE_STATE_UNSPECIFIED"
+
+-- | The transaction logs used for PITR for the instance are stored on a data disk.
+pattern BackupConfiguration_TransactionalLogStorageState_Disk :: BackupConfiguration_TransactionalLogStorageState
+pattern BackupConfiguration_TransactionalLogStorageState_Disk = BackupConfiguration_TransactionalLogStorageState "DISK"
+
+-- | The transaction logs used for PITR for the instance are switching from being stored on a data disk to being stored in Cloud Storage. Only applicable to MySQL.
+pattern BackupConfiguration_TransactionalLogStorageState_SWITCHINGTOCLOUDSTORAGE :: BackupConfiguration_TransactionalLogStorageState
+pattern BackupConfiguration_TransactionalLogStorageState_SWITCHINGTOCLOUDSTORAGE = BackupConfiguration_TransactionalLogStorageState "SWITCHING_TO_CLOUD_STORAGE"
+
+-- | The transaction logs used for PITR for the instance are now stored in Cloud Storage. Previously, they were stored on a data disk. Only applicable to MySQL.
+pattern BackupConfiguration_TransactionalLogStorageState_SWITCHEDTOCLOUDSTORAGE :: BackupConfiguration_TransactionalLogStorageState
+pattern BackupConfiguration_TransactionalLogStorageState_SWITCHEDTOCLOUDSTORAGE = BackupConfiguration_TransactionalLogStorageState "SWITCHED_TO_CLOUD_STORAGE"
+
+-- | The transaction logs used for PITR for the instance are stored in Cloud Storage. Only applicable to MySQL and PostgreSQL.
+pattern BackupConfiguration_TransactionalLogStorageState_CLOUDSTORAGE :: BackupConfiguration_TransactionalLogStorageState
+pattern BackupConfiguration_TransactionalLogStorageState_CLOUDSTORAGE = BackupConfiguration_TransactionalLogStorageState "CLOUD_STORAGE"
+
+{-# COMPLETE
+  BackupConfiguration_TransactionalLogStorageState_TRANSACTIONALLOGSTORAGESTATEUNSPECIFIED,
+  BackupConfiguration_TransactionalLogStorageState_Disk,
+  BackupConfiguration_TransactionalLogStorageState_SWITCHINGTOCLOUDSTORAGE,
+  BackupConfiguration_TransactionalLogStorageState_SWITCHEDTOCLOUDSTORAGE,
+  BackupConfiguration_TransactionalLogStorageState_CLOUDSTORAGE,
+  BackupConfiguration_TransactionalLogStorageState
+  #-}
+
+-- | Type of backups users want to re-encrypt.
+newtype BackupReencryptionConfig_BackupType = BackupReencryptionConfig_BackupType {fromBackupReencryptionConfig_BackupType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown backup type, will be defaulted to AUTOMATIC backup type
+pattern BackupReencryptionConfig_BackupType_BACKUPTYPEUNSPECIFIED :: BackupReencryptionConfig_BackupType
+pattern BackupReencryptionConfig_BackupType_BACKUPTYPEUNSPECIFIED = BackupReencryptionConfig_BackupType "BACKUP_TYPE_UNSPECIFIED"
+
+-- | Reencrypt automatic backups
+pattern BackupReencryptionConfig_BackupType_Automated :: BackupReencryptionConfig_BackupType
+pattern BackupReencryptionConfig_BackupType_Automated = BackupReencryptionConfig_BackupType "AUTOMATED"
+
+-- | Reencrypt on-demand backups
+pattern BackupReencryptionConfig_BackupType_ONDEMAND :: BackupReencryptionConfig_BackupType
+pattern BackupReencryptionConfig_BackupType_ONDEMAND = BackupReencryptionConfig_BackupType "ON_DEMAND"
+
+{-# COMPLETE
+  BackupReencryptionConfig_BackupType_BACKUPTYPEUNSPECIFIED,
+  BackupReencryptionConfig_BackupType_Automated,
+  BackupReencryptionConfig_BackupType_ONDEMAND,
+  BackupReencryptionConfig_BackupType
   #-}
 
 -- | The unit that \'retained_backups\' represents.
@@ -577,11 +1057,11 @@ newtype BackupRun_BackupKind = BackupRun_BackupKind {fromBackupRun_BackupKind ::
 pattern BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED :: BackupRun_BackupKind
 pattern BackupRun_BackupKind_SQLBACKUPKINDUNSPECIFIED = BackupRun_BackupKind "SQL_BACKUP_KIND_UNSPECIFIED"
 
--- | The snapshot based backups
+-- | Snapshot-based backups.
 pattern BackupRun_BackupKind_Snapshot :: BackupRun_BackupKind
 pattern BackupRun_BackupKind_Snapshot = BackupRun_BackupKind "SNAPSHOT"
 
--- | Physical backups
+-- | Physical backups.
 pattern BackupRun_BackupKind_Physical :: BackupRun_BackupKind
 pattern BackupRun_BackupKind_Physical = BackupRun_BackupKind "PHYSICAL"
 
@@ -761,6 +1241,86 @@ pattern ConnectSettings_DatabaseVersion_MYSQL_5_6 = ConnectSettings_DatabaseVers
 pattern ConnectSettings_DatabaseVersion_MYSQL_5_7 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_MYSQL_5_7 = ConnectSettings_DatabaseVersion "MYSQL_5_7"
 
+-- | The database version is MySQL 8.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0 = ConnectSettings_DatabaseVersion "MYSQL_8_0"
+
+-- | The database major version is MySQL 8.0 and the minor version is 18.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_18 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_18 = ConnectSettings_DatabaseVersion "MYSQL_8_0_18"
+
+-- | The database major version is MySQL 8.0 and the minor version is 26.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 = ConnectSettings_DatabaseVersion "MYSQL_8_0_26"
+
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 = ConnectSettings_DatabaseVersion "MYSQL_8_0_27"
+
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 = ConnectSettings_DatabaseVersion "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 = ConnectSettings_DatabaseVersion "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 = ConnectSettings_DatabaseVersion "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 = ConnectSettings_DatabaseVersion "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 = ConnectSettings_DatabaseVersion "MYSQL_8_0_32"
+
+-- | The database major version is MySQL 8.0 and the minor version is 33.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_33 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_33 = ConnectSettings_DatabaseVersion "MYSQL_8_0_33"
+
+-- | The database major version is MySQL 8.0 and the minor version is 34.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_34 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_34 = ConnectSettings_DatabaseVersion "MYSQL_8_0_34"
+
+-- | The database major version is MySQL 8.0 and the minor version is 35.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_35 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_35 = ConnectSettings_DatabaseVersion "MYSQL_8_0_35"
+
+-- | The database major version is MySQL 8.0 and the minor version is 36.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_36 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_36 = ConnectSettings_DatabaseVersion "MYSQL_8_0_36"
+
+-- | The database major version is MySQL 8.0 and the minor version is 37.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_37 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_37 = ConnectSettings_DatabaseVersion "MYSQL_8_0_37"
+
+-- | The database major version is MySQL 8.0 and the minor version is 38.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_38 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_38 = ConnectSettings_DatabaseVersion "MYSQL_8_0_38"
+
+-- | The database major version is MySQL 8.0 and the minor version is 39.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_39 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_39 = ConnectSettings_DatabaseVersion "MYSQL_8_0_39"
+
+-- | The database major version is MySQL 8.0 and the minor version is 40.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_40 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_40 = ConnectSettings_DatabaseVersion "MYSQL_8_0_40"
+
+-- | The database major version is MySQL 8.0 and the minor version is 41.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_41 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_41 = ConnectSettings_DatabaseVersion "MYSQL_8_0_41"
+
+-- | The database major version is MySQL 8.0 and the minor version is 42.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_42 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_42 = ConnectSettings_DatabaseVersion "MYSQL_8_0_42"
+
+-- | The database version is MySQL 8.4.
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_4 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_MYSQL_8_4 = ConnectSettings_DatabaseVersion "MYSQL_8_4"
+
 -- | The database version is SQL Server 2017 Standard.
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD = ConnectSettings_DatabaseVersion "SQLSERVER_2017_STANDARD"
@@ -801,41 +1361,17 @@ pattern ConnectSettings_DatabaseVersion_POSTGRES_13 = ConnectSettings_DatabaseVe
 pattern ConnectSettings_DatabaseVersion_POSTGRES_14 :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_POSTGRES_14 = ConnectSettings_DatabaseVersion "POSTGRES_14"
 
--- | The database version is MySQL 8.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0 = ConnectSettings_DatabaseVersion "MYSQL_8_0"
+-- | The database version is PostgreSQL 15.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_15 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_15 = ConnectSettings_DatabaseVersion "POSTGRES_15"
 
--- | The database major version is MySQL 8.0 and the minor version is 18.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_18 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_18 = ConnectSettings_DatabaseVersion "MYSQL_8_0_18"
+-- | The database version is PostgreSQL 16.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_16 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_16 = ConnectSettings_DatabaseVersion "POSTGRES_16"
 
--- | The database major version is MySQL 8.0 and the minor version is 26.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_26 = ConnectSettings_DatabaseVersion "MYSQL_8_0_26"
-
--- | The database major version is MySQL 8.0 and the minor version is 27.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_27 = ConnectSettings_DatabaseVersion "MYSQL_8_0_27"
-
--- | The database major version is MySQL 8.0 and the minor version is 28.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_28 = ConnectSettings_DatabaseVersion "MYSQL_8_0_28"
-
--- | The database major version is MySQL 8.0 and the minor version is 29.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_29 = ConnectSettings_DatabaseVersion "MYSQL_8_0_29"
-
--- | The database major version is MySQL 8.0 and the minor version is 30.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_30 = ConnectSettings_DatabaseVersion "MYSQL_8_0_30"
-
--- | The database major version is MySQL 8.0 and the minor version is 31.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_31 = ConnectSettings_DatabaseVersion "MYSQL_8_0_31"
-
--- | The database major version is MySQL 8.0 and the minor version is 32.
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 :: ConnectSettings_DatabaseVersion
-pattern ConnectSettings_DatabaseVersion_MYSQL_8_0_32 = ConnectSettings_DatabaseVersion "MYSQL_8_0_32"
+-- | The database version is PostgreSQL 17.
+pattern ConnectSettings_DatabaseVersion_POSTGRES_17 :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_POSTGRES_17 = ConnectSettings_DatabaseVersion "POSTGRES_17"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD :: ConnectSettings_DatabaseVersion
@@ -853,12 +1389,48 @@ pattern ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS = ConnectSettings_D
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2019WEB :: ConnectSettings_DatabaseVersion
 pattern ConnectSettings_DatabaseVersion_SQLSERVER2019WEB = ConnectSettings_DatabaseVersion "SQLSERVER_2019_WEB"
 
+-- | The database version is SQL Server 2022 Standard.
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022STANDARD :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022STANDARD = ConnectSettings_DatabaseVersion "SQLSERVER_2022_STANDARD"
+
+-- | The database version is SQL Server 2022 Enterprise.
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022ENTERPRISE :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022ENTERPRISE = ConnectSettings_DatabaseVersion "SQLSERVER_2022_ENTERPRISE"
+
+-- | The database version is SQL Server 2022 Express.
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022EXPRESS :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022EXPRESS = ConnectSettings_DatabaseVersion "SQLSERVER_2022_EXPRESS"
+
+-- | The database version is SQL Server 2022 Web.
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022WEB :: ConnectSettings_DatabaseVersion
+pattern ConnectSettings_DatabaseVersion_SQLSERVER2022WEB = ConnectSettings_DatabaseVersion "SQLSERVER_2022_WEB"
+
 {-# COMPLETE
   ConnectSettings_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
   ConnectSettings_DatabaseVersion_MYSQL_5_1,
   ConnectSettings_DatabaseVersion_MYSQL_5_5,
   ConnectSettings_DatabaseVersion_MYSQL_5_6,
   ConnectSettings_DatabaseVersion_MYSQL_5_7,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_33,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_34,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_35,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_36,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_37,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_38,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_39,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_40,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_41,
+  ConnectSettings_DatabaseVersion_MYSQL_8_0_42,
+  ConnectSettings_DatabaseVersion_MYSQL_8_4,
   ConnectSettings_DatabaseVersion_SQLSERVER2017STANDARD,
   ConnectSettings_DatabaseVersion_SQLSERVER2017ENTERPRISE,
   ConnectSettings_DatabaseVersion_SQLSERVER2017EXPRESS,
@@ -869,20 +1441,55 @@ pattern ConnectSettings_DatabaseVersion_SQLSERVER2019WEB = ConnectSettings_Datab
   ConnectSettings_DatabaseVersion_POSTGRES_12,
   ConnectSettings_DatabaseVersion_POSTGRES_13,
   ConnectSettings_DatabaseVersion_POSTGRES_14,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_18,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_26,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_27,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_28,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_29,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_30,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_31,
-  ConnectSettings_DatabaseVersion_MYSQL_8_0_32,
+  ConnectSettings_DatabaseVersion_POSTGRES_15,
+  ConnectSettings_DatabaseVersion_POSTGRES_16,
+  ConnectSettings_DatabaseVersion_POSTGRES_17,
   ConnectSettings_DatabaseVersion_SQLSERVER2019STANDARD,
   ConnectSettings_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   ConnectSettings_DatabaseVersion_SQLSERVER2019EXPRESS,
   ConnectSettings_DatabaseVersion_SQLSERVER2019WEB,
+  ConnectSettings_DatabaseVersion_SQLSERVER2022STANDARD,
+  ConnectSettings_DatabaseVersion_SQLSERVER2022ENTERPRISE,
+  ConnectSettings_DatabaseVersion_SQLSERVER2022EXPRESS,
+  ConnectSettings_DatabaseVersion_SQLSERVER2022WEB,
   ConnectSettings_DatabaseVersion
+  #-}
+
+-- | Specify what type of CA is used for the server certificate.
+newtype ConnectSettings_ServerCaMode = ConnectSettings_ServerCaMode {fromConnectSettings_ServerCaMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | CA mode is unknown.
+pattern ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED :: ConnectSettings_ServerCaMode
+pattern ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED = ConnectSettings_ServerCaMode "CA_MODE_UNSPECIFIED"
+
+-- | Google-managed self-signed internal CA.
+pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA :: ConnectSettings_ServerCaMode
+pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA = ConnectSettings_ServerCaMode "GOOGLE_MANAGED_INTERNAL_CA"
+
+-- | Google-managed regional CA part of root CA hierarchy hosted on Google Cloud\'s Certificate Authority Service (CAS).
+pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA :: ConnectSettings_ServerCaMode
+pattern ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA = ConnectSettings_ServerCaMode "GOOGLE_MANAGED_CAS_CA"
+
+-- | Customer-managed CA hosted on Google Cloud\'s Certificate Authority Service (CAS).
+pattern ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA :: ConnectSettings_ServerCaMode
+pattern ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA = ConnectSettings_ServerCaMode "CUSTOMER_MANAGED_CAS_CA"
+
+{-# COMPLETE
+  ConnectSettings_ServerCaMode_CAMODEUNSPECIFIED,
+  ConnectSettings_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
+  ConnectSettings_ServerCaMode_GOOGLEMANAGEDCASCA,
+  ConnectSettings_ServerCaMode_CUSTOMERMANAGEDCASCA,
+  ConnectSettings_ServerCaMode
   #-}
 
 -- | The backend type. @SECOND_GEN@: Cloud SQL database instance. @EXTERNAL@: A database server that is not managed by Google. This property is read-only; use the @tier@ property in the @settings@ object to determine the database type.
@@ -955,6 +1562,86 @@ pattern DatabaseInstance_DatabaseVersion_MYSQL_5_6 = DatabaseInstance_DatabaseVe
 pattern DatabaseInstance_DatabaseVersion_MYSQL_5_7 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_MYSQL_5_7 = DatabaseInstance_DatabaseVersion "MYSQL_5_7"
 
+-- | The database version is MySQL 8.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0 = DatabaseInstance_DatabaseVersion "MYSQL_8_0"
+
+-- | The database major version is MySQL 8.0 and the minor version is 18.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_18 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_18 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_18"
+
+-- | The database major version is MySQL 8.0 and the minor version is 26.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_26"
+
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_27"
+
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_32"
+
+-- | The database major version is MySQL 8.0 and the minor version is 33.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_33 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_33 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_33"
+
+-- | The database major version is MySQL 8.0 and the minor version is 34.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_34 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_34 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_34"
+
+-- | The database major version is MySQL 8.0 and the minor version is 35.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_35 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_35 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_35"
+
+-- | The database major version is MySQL 8.0 and the minor version is 36.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_36 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_36 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_36"
+
+-- | The database major version is MySQL 8.0 and the minor version is 37.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_37 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_37 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_37"
+
+-- | The database major version is MySQL 8.0 and the minor version is 38.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_38 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_38 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_38"
+
+-- | The database major version is MySQL 8.0 and the minor version is 39.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_39 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_39 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_39"
+
+-- | The database major version is MySQL 8.0 and the minor version is 40.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_40 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_40 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_40"
+
+-- | The database major version is MySQL 8.0 and the minor version is 41.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_41 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_41 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_41"
+
+-- | The database major version is MySQL 8.0 and the minor version is 42.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_42 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_42 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_42"
+
+-- | The database version is MySQL 8.4.
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_4 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_MYSQL_8_4 = DatabaseInstance_DatabaseVersion "MYSQL_8_4"
+
 -- | The database version is SQL Server 2017 Standard.
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD = DatabaseInstance_DatabaseVersion "SQLSERVER_2017_STANDARD"
@@ -995,41 +1682,17 @@ pattern DatabaseInstance_DatabaseVersion_POSTGRES_13 = DatabaseInstance_Database
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_POSTGRES_14 = DatabaseInstance_DatabaseVersion "POSTGRES_14"
 
--- | The database version is MySQL 8.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0 = DatabaseInstance_DatabaseVersion "MYSQL_8_0"
+-- | The database version is PostgreSQL 15.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_15 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_15 = DatabaseInstance_DatabaseVersion "POSTGRES_15"
 
--- | The database major version is MySQL 8.0 and the minor version is 18.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_18 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_18 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_18"
+-- | The database version is PostgreSQL 16.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_16 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_16 = DatabaseInstance_DatabaseVersion "POSTGRES_16"
 
--- | The database major version is MySQL 8.0 and the minor version is 26.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_26 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_26"
-
--- | The database major version is MySQL 8.0 and the minor version is 27.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_27 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_27"
-
--- | The database major version is MySQL 8.0 and the minor version is 28.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_28 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_28"
-
--- | The database major version is MySQL 8.0 and the minor version is 29.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_29 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_29"
-
--- | The database major version is MySQL 8.0 and the minor version is 30.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_30 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_30"
-
--- | The database major version is MySQL 8.0 and the minor version is 31.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_31 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_31"
-
--- | The database major version is MySQL 8.0 and the minor version is 32.
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 :: DatabaseInstance_DatabaseVersion
-pattern DatabaseInstance_DatabaseVersion_MYSQL_8_0_32 = DatabaseInstance_DatabaseVersion "MYSQL_8_0_32"
+-- | The database version is PostgreSQL 17.
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_17 :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_POSTGRES_17 = DatabaseInstance_DatabaseVersion "POSTGRES_17"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD :: DatabaseInstance_DatabaseVersion
@@ -1047,12 +1710,48 @@ pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS = DatabaseInstance
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB :: DatabaseInstance_DatabaseVersion
 pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB = DatabaseInstance_DatabaseVersion "SQLSERVER_2019_WEB"
 
+-- | The database version is SQL Server 2022 Standard.
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022STANDARD :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022STANDARD = DatabaseInstance_DatabaseVersion "SQLSERVER_2022_STANDARD"
+
+-- | The database version is SQL Server 2022 Enterprise.
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022ENTERPRISE :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022ENTERPRISE = DatabaseInstance_DatabaseVersion "SQLSERVER_2022_ENTERPRISE"
+
+-- | The database version is SQL Server 2022 Express.
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022EXPRESS :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022EXPRESS = DatabaseInstance_DatabaseVersion "SQLSERVER_2022_EXPRESS"
+
+-- | The database version is SQL Server 2022 Web.
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022WEB :: DatabaseInstance_DatabaseVersion
+pattern DatabaseInstance_DatabaseVersion_SQLSERVER2022WEB = DatabaseInstance_DatabaseVersion "SQLSERVER_2022_WEB"
+
 {-# COMPLETE
   DatabaseInstance_DatabaseVersion_SQLDATABASEVERSIONUNSPECIFIED,
   DatabaseInstance_DatabaseVersion_MYSQL_5_1,
   DatabaseInstance_DatabaseVersion_MYSQL_5_5,
   DatabaseInstance_DatabaseVersion_MYSQL_5_6,
   DatabaseInstance_DatabaseVersion_MYSQL_5_7,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_33,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_34,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_35,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_36,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_37,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_38,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_39,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_40,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_41,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_0_42,
+  DatabaseInstance_DatabaseVersion_MYSQL_8_4,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017STANDARD,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017ENTERPRISE,
   DatabaseInstance_DatabaseVersion_SQLSERVER2017EXPRESS,
@@ -1063,19 +1762,17 @@ pattern DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB = DatabaseInstance_Dat
   DatabaseInstance_DatabaseVersion_POSTGRES_12,
   DatabaseInstance_DatabaseVersion_POSTGRES_13,
   DatabaseInstance_DatabaseVersion_POSTGRES_14,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_18,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_26,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_27,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_28,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_29,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_30,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_31,
-  DatabaseInstance_DatabaseVersion_MYSQL_8_0_32,
+  DatabaseInstance_DatabaseVersion_POSTGRES_15,
+  DatabaseInstance_DatabaseVersion_POSTGRES_16,
+  DatabaseInstance_DatabaseVersion_POSTGRES_17,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019STANDARD,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019ENTERPRISE,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019EXPRESS,
   DatabaseInstance_DatabaseVersion_SQLSERVER2019WEB,
+  DatabaseInstance_DatabaseVersion_SQLSERVER2022STANDARD,
+  DatabaseInstance_DatabaseVersion_SQLSERVER2022ENTERPRISE,
+  DatabaseInstance_DatabaseVersion_SQLSERVER2022EXPRESS,
+  DatabaseInstance_DatabaseVersion_SQLSERVER2022WEB,
   DatabaseInstance_DatabaseVersion
   #-}
 
@@ -1114,6 +1811,36 @@ pattern DatabaseInstance_InstanceType_READREPLICAINSTANCE = DatabaseInstance_Ins
   DatabaseInstance_InstanceType_ONPREMISESINSTANCE,
   DatabaseInstance_InstanceType_READREPLICAINSTANCE,
   DatabaseInstance_InstanceType
+  #-}
+
+newtype DatabaseInstance_SqlNetworkArchitecture = DatabaseInstance_SqlNetworkArchitecture {fromDatabaseInstance_SqlNetworkArchitecture :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+pattern DatabaseInstance_SqlNetworkArchitecture_SQLNETWORKARCHITECTUREUNSPECIFIED :: DatabaseInstance_SqlNetworkArchitecture
+pattern DatabaseInstance_SqlNetworkArchitecture_SQLNETWORKARCHITECTUREUNSPECIFIED = DatabaseInstance_SqlNetworkArchitecture "SQL_NETWORK_ARCHITECTURE_UNSPECIFIED"
+
+-- | The instance uses the new network architecture.
+pattern DatabaseInstance_SqlNetworkArchitecture_NEWNETWORKARCHITECTURE :: DatabaseInstance_SqlNetworkArchitecture
+pattern DatabaseInstance_SqlNetworkArchitecture_NEWNETWORKARCHITECTURE = DatabaseInstance_SqlNetworkArchitecture "NEW_NETWORK_ARCHITECTURE"
+
+-- | The instance uses the old network architecture.
+pattern DatabaseInstance_SqlNetworkArchitecture_OLDNETWORKARCHITECTURE :: DatabaseInstance_SqlNetworkArchitecture
+pattern DatabaseInstance_SqlNetworkArchitecture_OLDNETWORKARCHITECTURE = DatabaseInstance_SqlNetworkArchitecture "OLD_NETWORK_ARCHITECTURE"
+
+{-# COMPLETE
+  DatabaseInstance_SqlNetworkArchitecture_SQLNETWORKARCHITECTUREUNSPECIFIED,
+  DatabaseInstance_SqlNetworkArchitecture_NEWNETWORKARCHITECTURE,
+  DatabaseInstance_SqlNetworkArchitecture_OLDNETWORKARCHITECTURE,
+  DatabaseInstance_SqlNetworkArchitecture
   #-}
 
 -- | The current serving state of the Cloud SQL instance.
@@ -1214,6 +1941,107 @@ pattern DatabaseInstance_SuspensionReasonItem_KMSKEYISSUE = DatabaseInstance_Sus
   DatabaseInstance_SuspensionReasonItem
   #-}
 
+-- | Output only. The connection type of the DNS name.
+newtype DnsNameMapping_ConnectionType = DnsNameMapping_ConnectionType {fromDnsNameMapping_ConnectionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown connection type.
+pattern DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED = DnsNameMapping_ConnectionType "CONNECTION_TYPE_UNSPECIFIED"
+
+-- | Public IP.
+pattern DnsNameMapping_ConnectionType_Public :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_Public = DnsNameMapping_ConnectionType "PUBLIC"
+
+-- | Private services access (private IP).
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS = DnsNameMapping_ConnectionType "PRIVATE_SERVICES_ACCESS"
+
+-- | Private Service Connect.
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT :: DnsNameMapping_ConnectionType
+pattern DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT = DnsNameMapping_ConnectionType "PRIVATE_SERVICE_CONNECT"
+
+{-# COMPLETE
+  DnsNameMapping_ConnectionType_CONNECTIONTYPEUNSPECIFIED,
+  DnsNameMapping_ConnectionType_Public,
+  DnsNameMapping_ConnectionType_PRIVATESERVICESACCESS,
+  DnsNameMapping_ConnectionType_PRIVATESERVICECONNECT,
+  DnsNameMapping_ConnectionType
+  #-}
+
+-- | Output only. The scope that the DNS name applies to.
+newtype DnsNameMapping_DnsScope = DnsNameMapping_DnsScope {fromDnsNameMapping_DnsScope :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown DNS scope.
+pattern DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED :: DnsNameMapping_DnsScope
+pattern DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED = DnsNameMapping_DnsScope "DNS_SCOPE_UNSPECIFIED"
+
+-- | Indicates a instance-level DNS name.
+pattern DnsNameMapping_DnsScope_Instance :: DnsNameMapping_DnsScope
+pattern DnsNameMapping_DnsScope_Instance = DnsNameMapping_DnsScope "INSTANCE"
+
+{-# COMPLETE
+  DnsNameMapping_DnsScope_DNSSCOPEUNSPECIFIED,
+  DnsNameMapping_DnsScope_Instance,
+  DnsNameMapping_DnsScope
+  #-}
+
+-- | Type of this bak file will be export, FULL or DIFF, SQL Server only
+newtype ExportContext_BakExportOptions_BakType = ExportContext_BakExportOptions_BakType {fromExportContext_BakExportOptions_BakType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default type.
+pattern ExportContext_BakExportOptions_BakType_BAKTYPEUNSPECIFIED :: ExportContext_BakExportOptions_BakType
+pattern ExportContext_BakExportOptions_BakType_BAKTYPEUNSPECIFIED = ExportContext_BakExportOptions_BakType "BAK_TYPE_UNSPECIFIED"
+
+-- | Full backup.
+pattern ExportContext_BakExportOptions_BakType_Full :: ExportContext_BakExportOptions_BakType
+pattern ExportContext_BakExportOptions_BakType_Full = ExportContext_BakExportOptions_BakType "FULL"
+
+-- | Differential backup.
+pattern ExportContext_BakExportOptions_BakType_Diff :: ExportContext_BakExportOptions_BakType
+pattern ExportContext_BakExportOptions_BakType_Diff = ExportContext_BakExportOptions_BakType "DIFF"
+
+-- | Transaction Log backup
+pattern ExportContext_BakExportOptions_BakType_Tlog :: ExportContext_BakExportOptions_BakType
+pattern ExportContext_BakExportOptions_BakType_Tlog = ExportContext_BakExportOptions_BakType "TLOG"
+
+{-# COMPLETE
+  ExportContext_BakExportOptions_BakType_BAKTYPEUNSPECIFIED,
+  ExportContext_BakExportOptions_BakType_Full,
+  ExportContext_BakExportOptions_BakType_Diff,
+  ExportContext_BakExportOptions_BakType_Tlog,
+  ExportContext_BakExportOptions_BakType
+  #-}
+
 -- | The file type for the specified uri.
 newtype ExportContext_FileType = ExportContext_FileType {fromExportContext_FileType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1239,15 +2067,19 @@ pattern ExportContext_FileType_Sql = ExportContext_FileType "SQL"
 pattern ExportContext_FileType_Csv :: ExportContext_FileType
 pattern ExportContext_FileType_Csv = ExportContext_FileType "CSV"
 
--- |
 pattern ExportContext_FileType_Bak :: ExportContext_FileType
 pattern ExportContext_FileType_Bak = ExportContext_FileType "BAK"
+
+-- | TDE certificate.
+pattern ExportContext_FileType_Tde :: ExportContext_FileType
+pattern ExportContext_FileType_Tde = ExportContext_FileType "TDE"
 
 {-# COMPLETE
   ExportContext_FileType_SQLFILETYPEUNSPECIFIED,
   ExportContext_FileType_Sql,
   ExportContext_FileType_Csv,
   ExportContext_FileType_Bak,
+  ExportContext_FileType_Tde,
   ExportContext_FileType
   #-}
 
@@ -1282,6 +2114,86 @@ pattern Flag_AppliesToItem_MYSQL_5_6 = Flag_AppliesToItem "MYSQL_5_6"
 -- | The database version is MySQL 5.7.
 pattern Flag_AppliesToItem_MYSQL_5_7 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_MYSQL_5_7 = Flag_AppliesToItem "MYSQL_5_7"
+
+-- | The database version is MySQL 8.
+pattern Flag_AppliesToItem_MYSQL_8_0 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0 = Flag_AppliesToItem "MYSQL_8_0"
+
+-- | The database major version is MySQL 8.0 and the minor version is 18.
+pattern Flag_AppliesToItem_MYSQL_8_0_18 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_18 = Flag_AppliesToItem "MYSQL_8_0_18"
+
+-- | The database major version is MySQL 8.0 and the minor version is 26.
+pattern Flag_AppliesToItem_MYSQL_8_0_26 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_26 = Flag_AppliesToItem "MYSQL_8_0_26"
+
+-- | The database major version is MySQL 8.0 and the minor version is 27.
+pattern Flag_AppliesToItem_MYSQL_8_0_27 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_27 = Flag_AppliesToItem "MYSQL_8_0_27"
+
+-- | The database major version is MySQL 8.0 and the minor version is 28.
+pattern Flag_AppliesToItem_MYSQL_8_0_28 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_28 = Flag_AppliesToItem "MYSQL_8_0_28"
+
+-- | The database major version is MySQL 8.0 and the minor version is 29.
+pattern Flag_AppliesToItem_MYSQL_8_0_29 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_29 = Flag_AppliesToItem "MYSQL_8_0_29"
+
+-- | The database major version is MySQL 8.0 and the minor version is 30.
+pattern Flag_AppliesToItem_MYSQL_8_0_30 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_30 = Flag_AppliesToItem "MYSQL_8_0_30"
+
+-- | The database major version is MySQL 8.0 and the minor version is 31.
+pattern Flag_AppliesToItem_MYSQL_8_0_31 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_31 = Flag_AppliesToItem "MYSQL_8_0_31"
+
+-- | The database major version is MySQL 8.0 and the minor version is 32.
+pattern Flag_AppliesToItem_MYSQL_8_0_32 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_32 = Flag_AppliesToItem "MYSQL_8_0_32"
+
+-- | The database major version is MySQL 8.0 and the minor version is 33.
+pattern Flag_AppliesToItem_MYSQL_8_0_33 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_33 = Flag_AppliesToItem "MYSQL_8_0_33"
+
+-- | The database major version is MySQL 8.0 and the minor version is 34.
+pattern Flag_AppliesToItem_MYSQL_8_0_34 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_34 = Flag_AppliesToItem "MYSQL_8_0_34"
+
+-- | The database major version is MySQL 8.0 and the minor version is 35.
+pattern Flag_AppliesToItem_MYSQL_8_0_35 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_35 = Flag_AppliesToItem "MYSQL_8_0_35"
+
+-- | The database major version is MySQL 8.0 and the minor version is 36.
+pattern Flag_AppliesToItem_MYSQL_8_0_36 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_36 = Flag_AppliesToItem "MYSQL_8_0_36"
+
+-- | The database major version is MySQL 8.0 and the minor version is 37.
+pattern Flag_AppliesToItem_MYSQL_8_0_37 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_37 = Flag_AppliesToItem "MYSQL_8_0_37"
+
+-- | The database major version is MySQL 8.0 and the minor version is 38.
+pattern Flag_AppliesToItem_MYSQL_8_0_38 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_38 = Flag_AppliesToItem "MYSQL_8_0_38"
+
+-- | The database major version is MySQL 8.0 and the minor version is 39.
+pattern Flag_AppliesToItem_MYSQL_8_0_39 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_39 = Flag_AppliesToItem "MYSQL_8_0_39"
+
+-- | The database major version is MySQL 8.0 and the minor version is 40.
+pattern Flag_AppliesToItem_MYSQL_8_0_40 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_40 = Flag_AppliesToItem "MYSQL_8_0_40"
+
+-- | The database major version is MySQL 8.0 and the minor version is 41.
+pattern Flag_AppliesToItem_MYSQL_8_0_41 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_41 = Flag_AppliesToItem "MYSQL_8_0_41"
+
+-- | The database major version is MySQL 8.0 and the minor version is 42.
+pattern Flag_AppliesToItem_MYSQL_8_0_42 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_0_42 = Flag_AppliesToItem "MYSQL_8_0_42"
+
+-- | The database version is MySQL 8.4.
+pattern Flag_AppliesToItem_MYSQL_8_4 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_MYSQL_8_4 = Flag_AppliesToItem "MYSQL_8_4"
 
 -- | The database version is SQL Server 2017 Standard.
 pattern Flag_AppliesToItem_SQLSERVER2017STANDARD :: Flag_AppliesToItem
@@ -1323,41 +2235,17 @@ pattern Flag_AppliesToItem_POSTGRES_13 = Flag_AppliesToItem "POSTGRES_13"
 pattern Flag_AppliesToItem_POSTGRES_14 :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_POSTGRES_14 = Flag_AppliesToItem "POSTGRES_14"
 
--- | The database version is MySQL 8.
-pattern Flag_AppliesToItem_MYSQL_8_0 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0 = Flag_AppliesToItem "MYSQL_8_0"
+-- | The database version is PostgreSQL 15.
+pattern Flag_AppliesToItem_POSTGRES_15 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_15 = Flag_AppliesToItem "POSTGRES_15"
 
--- | The database major version is MySQL 8.0 and the minor version is 18.
-pattern Flag_AppliesToItem_MYSQL_8_0_18 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_18 = Flag_AppliesToItem "MYSQL_8_0_18"
+-- | The database version is PostgreSQL 16.
+pattern Flag_AppliesToItem_POSTGRES_16 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_16 = Flag_AppliesToItem "POSTGRES_16"
 
--- | The database major version is MySQL 8.0 and the minor version is 26.
-pattern Flag_AppliesToItem_MYSQL_8_0_26 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_26 = Flag_AppliesToItem "MYSQL_8_0_26"
-
--- | The database major version is MySQL 8.0 and the minor version is 27.
-pattern Flag_AppliesToItem_MYSQL_8_0_27 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_27 = Flag_AppliesToItem "MYSQL_8_0_27"
-
--- | The database major version is MySQL 8.0 and the minor version is 28.
-pattern Flag_AppliesToItem_MYSQL_8_0_28 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_28 = Flag_AppliesToItem "MYSQL_8_0_28"
-
--- | The database major version is MySQL 8.0 and the minor version is 29.
-pattern Flag_AppliesToItem_MYSQL_8_0_29 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_29 = Flag_AppliesToItem "MYSQL_8_0_29"
-
--- | The database major version is MySQL 8.0 and the minor version is 30.
-pattern Flag_AppliesToItem_MYSQL_8_0_30 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_30 = Flag_AppliesToItem "MYSQL_8_0_30"
-
--- | The database major version is MySQL 8.0 and the minor version is 31.
-pattern Flag_AppliesToItem_MYSQL_8_0_31 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_31 = Flag_AppliesToItem "MYSQL_8_0_31"
-
--- | The database major version is MySQL 8.0 and the minor version is 32.
-pattern Flag_AppliesToItem_MYSQL_8_0_32 :: Flag_AppliesToItem
-pattern Flag_AppliesToItem_MYSQL_8_0_32 = Flag_AppliesToItem "MYSQL_8_0_32"
+-- | The database version is PostgreSQL 17.
+pattern Flag_AppliesToItem_POSTGRES_17 :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_POSTGRES_17 = Flag_AppliesToItem "POSTGRES_17"
 
 -- | The database version is SQL Server 2019 Standard.
 pattern Flag_AppliesToItem_SQLSERVER2019STANDARD :: Flag_AppliesToItem
@@ -1375,12 +2263,48 @@ pattern Flag_AppliesToItem_SQLSERVER2019EXPRESS = Flag_AppliesToItem "SQLSERVER_
 pattern Flag_AppliesToItem_SQLSERVER2019WEB :: Flag_AppliesToItem
 pattern Flag_AppliesToItem_SQLSERVER2019WEB = Flag_AppliesToItem "SQLSERVER_2019_WEB"
 
+-- | The database version is SQL Server 2022 Standard.
+pattern Flag_AppliesToItem_SQLSERVER2022STANDARD :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_SQLSERVER2022STANDARD = Flag_AppliesToItem "SQLSERVER_2022_STANDARD"
+
+-- | The database version is SQL Server 2022 Enterprise.
+pattern Flag_AppliesToItem_SQLSERVER2022ENTERPRISE :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_SQLSERVER2022ENTERPRISE = Flag_AppliesToItem "SQLSERVER_2022_ENTERPRISE"
+
+-- | The database version is SQL Server 2022 Express.
+pattern Flag_AppliesToItem_SQLSERVER2022EXPRESS :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_SQLSERVER2022EXPRESS = Flag_AppliesToItem "SQLSERVER_2022_EXPRESS"
+
+-- | The database version is SQL Server 2022 Web.
+pattern Flag_AppliesToItem_SQLSERVER2022WEB :: Flag_AppliesToItem
+pattern Flag_AppliesToItem_SQLSERVER2022WEB = Flag_AppliesToItem "SQLSERVER_2022_WEB"
+
 {-# COMPLETE
   Flag_AppliesToItem_SQLDATABASEVERSIONUNSPECIFIED,
   Flag_AppliesToItem_MYSQL_5_1,
   Flag_AppliesToItem_MYSQL_5_5,
   Flag_AppliesToItem_MYSQL_5_6,
   Flag_AppliesToItem_MYSQL_5_7,
+  Flag_AppliesToItem_MYSQL_8_0,
+  Flag_AppliesToItem_MYSQL_8_0_18,
+  Flag_AppliesToItem_MYSQL_8_0_26,
+  Flag_AppliesToItem_MYSQL_8_0_27,
+  Flag_AppliesToItem_MYSQL_8_0_28,
+  Flag_AppliesToItem_MYSQL_8_0_29,
+  Flag_AppliesToItem_MYSQL_8_0_30,
+  Flag_AppliesToItem_MYSQL_8_0_31,
+  Flag_AppliesToItem_MYSQL_8_0_32,
+  Flag_AppliesToItem_MYSQL_8_0_33,
+  Flag_AppliesToItem_MYSQL_8_0_34,
+  Flag_AppliesToItem_MYSQL_8_0_35,
+  Flag_AppliesToItem_MYSQL_8_0_36,
+  Flag_AppliesToItem_MYSQL_8_0_37,
+  Flag_AppliesToItem_MYSQL_8_0_38,
+  Flag_AppliesToItem_MYSQL_8_0_39,
+  Flag_AppliesToItem_MYSQL_8_0_40,
+  Flag_AppliesToItem_MYSQL_8_0_41,
+  Flag_AppliesToItem_MYSQL_8_0_42,
+  Flag_AppliesToItem_MYSQL_8_4,
   Flag_AppliesToItem_SQLSERVER2017STANDARD,
   Flag_AppliesToItem_SQLSERVER2017ENTERPRISE,
   Flag_AppliesToItem_SQLSERVER2017EXPRESS,
@@ -1391,19 +2315,17 @@ pattern Flag_AppliesToItem_SQLSERVER2019WEB = Flag_AppliesToItem "SQLSERVER_2019
   Flag_AppliesToItem_POSTGRES_12,
   Flag_AppliesToItem_POSTGRES_13,
   Flag_AppliesToItem_POSTGRES_14,
-  Flag_AppliesToItem_MYSQL_8_0,
-  Flag_AppliesToItem_MYSQL_8_0_18,
-  Flag_AppliesToItem_MYSQL_8_0_26,
-  Flag_AppliesToItem_MYSQL_8_0_27,
-  Flag_AppliesToItem_MYSQL_8_0_28,
-  Flag_AppliesToItem_MYSQL_8_0_29,
-  Flag_AppliesToItem_MYSQL_8_0_30,
-  Flag_AppliesToItem_MYSQL_8_0_31,
-  Flag_AppliesToItem_MYSQL_8_0_32,
+  Flag_AppliesToItem_POSTGRES_15,
+  Flag_AppliesToItem_POSTGRES_16,
+  Flag_AppliesToItem_POSTGRES_17,
   Flag_AppliesToItem_SQLSERVER2019STANDARD,
   Flag_AppliesToItem_SQLSERVER2019ENTERPRISE,
   Flag_AppliesToItem_SQLSERVER2019EXPRESS,
   Flag_AppliesToItem_SQLSERVER2019WEB,
+  Flag_AppliesToItem_SQLSERVER2022STANDARD,
+  Flag_AppliesToItem_SQLSERVER2022ENTERPRISE,
+  Flag_AppliesToItem_SQLSERVER2022EXPRESS,
+  Flag_AppliesToItem_SQLSERVER2022WEB,
   Flag_AppliesToItem
   #-}
 
@@ -1464,6 +2386,43 @@ pattern Flag_Type_REPEATEDSTRING = Flag_Type "REPEATED_STRING"
   Flag_Type
   #-}
 
+-- | Type of the bak content, FULL or DIFF
+newtype ImportContext_BakImportOptions_BakType = ImportContext_BakImportOptions_BakType {fromImportContext_BakImportOptions_BakType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default type.
+pattern ImportContext_BakImportOptions_BakType_BAKTYPEUNSPECIFIED :: ImportContext_BakImportOptions_BakType
+pattern ImportContext_BakImportOptions_BakType_BAKTYPEUNSPECIFIED = ImportContext_BakImportOptions_BakType "BAK_TYPE_UNSPECIFIED"
+
+-- | Full backup.
+pattern ImportContext_BakImportOptions_BakType_Full :: ImportContext_BakImportOptions_BakType
+pattern ImportContext_BakImportOptions_BakType_Full = ImportContext_BakImportOptions_BakType "FULL"
+
+-- | Differential backup.
+pattern ImportContext_BakImportOptions_BakType_Diff :: ImportContext_BakImportOptions_BakType
+pattern ImportContext_BakImportOptions_BakType_Diff = ImportContext_BakImportOptions_BakType "DIFF"
+
+-- | Transaction Log backup
+pattern ImportContext_BakImportOptions_BakType_Tlog :: ImportContext_BakImportOptions_BakType
+pattern ImportContext_BakImportOptions_BakType_Tlog = ImportContext_BakImportOptions_BakType "TLOG"
+
+{-# COMPLETE
+  ImportContext_BakImportOptions_BakType_BAKTYPEUNSPECIFIED,
+  ImportContext_BakImportOptions_BakType_Full,
+  ImportContext_BakImportOptions_BakType_Diff,
+  ImportContext_BakImportOptions_BakType_Tlog,
+  ImportContext_BakImportOptions_BakType
+  #-}
+
 -- | The file type for the specified uri.\`SQL@: The file contains SQL statements. \\@CSV\`: The file contains CSV data.
 newtype ImportContext_FileType = ImportContext_FileType {fromImportContext_FileType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1489,16 +2448,94 @@ pattern ImportContext_FileType_Sql = ImportContext_FileType "SQL"
 pattern ImportContext_FileType_Csv :: ImportContext_FileType
 pattern ImportContext_FileType_Csv = ImportContext_FileType "CSV"
 
--- |
 pattern ImportContext_FileType_Bak :: ImportContext_FileType
 pattern ImportContext_FileType_Bak = ImportContext_FileType "BAK"
+
+-- | TDE certificate.
+pattern ImportContext_FileType_Tde :: ImportContext_FileType
+pattern ImportContext_FileType_Tde = ImportContext_FileType "TDE"
 
 {-# COMPLETE
   ImportContext_FileType_SQLFILETYPEUNSPECIFIED,
   ImportContext_FileType_Sql,
   ImportContext_FileType_Csv,
   ImportContext_FileType_Bak,
+  ImportContext_FileType_Tde,
   ImportContext_FileType
+  #-}
+
+-- | Specify what type of CA is used for the server certificate.
+newtype IpConfiguration_ServerCaMode = IpConfiguration_ServerCaMode {fromIpConfiguration_ServerCaMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | CA mode is unspecified. It is effectively the same as @GOOGLE_MANAGED_INTERNAL_CA@.
+pattern IpConfiguration_ServerCaMode_CAMODEUNSPECIFIED :: IpConfiguration_ServerCaMode
+pattern IpConfiguration_ServerCaMode_CAMODEUNSPECIFIED = IpConfiguration_ServerCaMode "CA_MODE_UNSPECIFIED"
+
+-- | Google-managed self-signed internal CA.
+pattern IpConfiguration_ServerCaMode_GOOGLEMANAGEDINTERNALCA :: IpConfiguration_ServerCaMode
+pattern IpConfiguration_ServerCaMode_GOOGLEMANAGEDINTERNALCA = IpConfiguration_ServerCaMode "GOOGLE_MANAGED_INTERNAL_CA"
+
+-- | Google-managed regional CA part of root CA hierarchy hosted on Google Cloud\'s Certificate Authority Service (CAS).
+pattern IpConfiguration_ServerCaMode_GOOGLEMANAGEDCASCA :: IpConfiguration_ServerCaMode
+pattern IpConfiguration_ServerCaMode_GOOGLEMANAGEDCASCA = IpConfiguration_ServerCaMode "GOOGLE_MANAGED_CAS_CA"
+
+-- | Customer-managed CA hosted on Google Cloud\'s Certificate Authority Service (CAS).
+pattern IpConfiguration_ServerCaMode_CUSTOMERMANAGEDCASCA :: IpConfiguration_ServerCaMode
+pattern IpConfiguration_ServerCaMode_CUSTOMERMANAGEDCASCA = IpConfiguration_ServerCaMode "CUSTOMER_MANAGED_CAS_CA"
+
+{-# COMPLETE
+  IpConfiguration_ServerCaMode_CAMODEUNSPECIFIED,
+  IpConfiguration_ServerCaMode_GOOGLEMANAGEDINTERNALCA,
+  IpConfiguration_ServerCaMode_GOOGLEMANAGEDCASCA,
+  IpConfiguration_ServerCaMode_CUSTOMERMANAGEDCASCA,
+  IpConfiguration_ServerCaMode
+  #-}
+
+-- | Specify how SSL\/TLS is enforced in database connections. If you must use the @require_ssl@ flag for backward compatibility, then only the following value pairs are valid: For PostgreSQL and MySQL: * @ssl_mode=ALLOW_UNENCRYPTED_AND_ENCRYPTED@ and @require_ssl=false@ * @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=false@ * @ssl_mode=TRUSTED_CLIENT_CERTIFICATE_REQUIRED@ and @require_ssl=true@ For SQL Server: * @ssl_mode=ALLOW_UNENCRYPTED_AND_ENCRYPTED@ and @require_ssl=false@ * @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=true@ The value of @ssl_mode@ has priority over the value of @require_ssl@. For example, for the pair @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=false@, @ssl_mode=ENCRYPTED_ONLY@ means accept only SSL connections, while @require_ssl=false@ means accept both non-SSL and SSL connections. In this case, MySQL and PostgreSQL databases respect @ssl_mode@ and accepts only SSL connections.
+newtype IpConfiguration_SslMode = IpConfiguration_SslMode {fromIpConfiguration_SslMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The SSL mode is unknown.
+pattern IpConfiguration_SslMode_SSLMODEUNSPECIFIED :: IpConfiguration_SslMode
+pattern IpConfiguration_SslMode_SSLMODEUNSPECIFIED = IpConfiguration_SslMode "SSL_MODE_UNSPECIFIED"
+
+-- | Allow non-SSL\/non-TLS and SSL\/TLS connections. For SSL connections to MySQL and PostgreSQL, the client certificate isn\'t verified. When this value is used, the legacy @require_ssl@ flag must be false or cleared to avoid a conflict between the values of the two flags.
+pattern IpConfiguration_SslMode_ALLOWUNENCRYPTEDANDENCRYPTED :: IpConfiguration_SslMode
+pattern IpConfiguration_SslMode_ALLOWUNENCRYPTEDANDENCRYPTED = IpConfiguration_SslMode "ALLOW_UNENCRYPTED_AND_ENCRYPTED"
+
+-- | Only allow connections encrypted with SSL\/TLS. For SSL connections to MySQL and PostgreSQL, the client certificate isn\'t verified. When this value is used, the legacy @require_ssl@ flag must be false or cleared to avoid a conflict between the values of the two flags.
+pattern IpConfiguration_SslMode_ENCRYPTEDONLY :: IpConfiguration_SslMode
+pattern IpConfiguration_SslMode_ENCRYPTEDONLY = IpConfiguration_SslMode "ENCRYPTED_ONLY"
+
+-- | Only allow connections encrypted with SSL\/TLS and with valid client certificates. When this value is used, the legacy @require_ssl@ flag must be true or cleared to avoid the conflict between values of two flags. PostgreSQL clients or users that connect using IAM database authentication must use either the <https://cloud.google.com/sql/docs/postgres/connect-auth-proxy Cloud SQL Auth Proxy> or <https://cloud.google.com/sql/docs/postgres/connect-connectors Cloud SQL Connectors> to enforce client identity verification. Only applicable to MySQL and PostgreSQL. Not applicable to SQL Server.
+pattern IpConfiguration_SslMode_TRUSTEDCLIENTCERTIFICATEREQUIRED :: IpConfiguration_SslMode
+pattern IpConfiguration_SslMode_TRUSTEDCLIENTCERTIFICATEREQUIRED = IpConfiguration_SslMode "TRUSTED_CLIENT_CERTIFICATE_REQUIRED"
+
+{-# COMPLETE
+  IpConfiguration_SslMode_SSLMODEUNSPECIFIED,
+  IpConfiguration_SslMode_ALLOWUNENCRYPTEDANDENCRYPTED,
+  IpConfiguration_SslMode_ENCRYPTEDONLY,
+  IpConfiguration_SslMode_TRUSTEDCLIENTCERTIFICATEREQUIRED,
+  IpConfiguration_SslMode
   #-}
 
 -- | The type of this IP address. A @PRIMARY@ address is a public address that can accept incoming connections. A @PRIVATE@ address is a private address that can accept incoming connections. An @OUTGOING@ address is the source address of connections originating from the instance, if supported.
@@ -1543,7 +2580,7 @@ pattern IpMapping_Type_MIGRATED1STGEN = IpMapping_Type "MIGRATED_1ST_GEN"
   IpMapping_Type
   #-}
 
--- | Maintenance timing setting: @canary@ (Earlier) or @stable@ (Later). <https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen Learn more>.
+-- | Maintenance timing settings: @canary@, @stable@, or @week5@. For more information, see <https://cloud.google.com/sql/docs/mysql/maintenance About maintenance on Cloud SQL instances>.
 newtype MaintenanceWindow_UpdateTrack = MaintenanceWindow_UpdateTrack {fromMaintenanceWindow_UpdateTrack :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1560,19 +2597,61 @@ newtype MaintenanceWindow_UpdateTrack = MaintenanceWindow_UpdateTrack {fromMaint
 pattern MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED :: MaintenanceWindow_UpdateTrack
 pattern MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED = MaintenanceWindow_UpdateTrack "SQL_UPDATE_TRACK_UNSPECIFIED"
 
--- | For instance update that requires a restart, this update track indicates your instance prefer to restart for new version early in maintenance window.
+-- | For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 7 to 14 days after the notification is sent out. Also referred to as @Week 1@ (Console) and @preview@ (gcloud CLI).
 pattern MaintenanceWindow_UpdateTrack_Canary :: MaintenanceWindow_UpdateTrack
 pattern MaintenanceWindow_UpdateTrack_Canary = MaintenanceWindow_UpdateTrack "canary"
 
--- | For instance update that requires a restart, this update track indicates your instance prefer to let Cloud SQL choose the timing of restart (within its Maintenance window, if applicable).
+-- | For an instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 15 to 21 days after the notification is sent out. Also referred to as @Week 2@ (Console) and @production@ (gcloud CLI).
 pattern MaintenanceWindow_UpdateTrack_Stable :: MaintenanceWindow_UpdateTrack
 pattern MaintenanceWindow_UpdateTrack_Stable = MaintenanceWindow_UpdateTrack "stable"
+
+-- | For instance with a scheduled maintenance window, this maintenance timing indicates that the maintenance update is scheduled 35 to 42 days after the notification is sent out.
+pattern MaintenanceWindow_UpdateTrack_WEEK5 :: MaintenanceWindow_UpdateTrack
+pattern MaintenanceWindow_UpdateTrack_WEEK5 = MaintenanceWindow_UpdateTrack "week5"
 
 {-# COMPLETE
   MaintenanceWindow_UpdateTrack_SQLUPDATETRACKUNSPECIFIED,
   MaintenanceWindow_UpdateTrack_Canary,
   MaintenanceWindow_UpdateTrack_Stable,
+  MaintenanceWindow_UpdateTrack_WEEK5,
   MaintenanceWindow_UpdateTrack
+  #-}
+
+-- | Optional. SSL option for replica connection to the on-premises source.
+newtype OnPremisesConfiguration_SslOption = OnPremisesConfiguration_SslOption {fromOnPremisesConfiguration_SslOption :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown SSL option i.e. SSL option not specified by user.
+pattern OnPremisesConfiguration_SslOption_SSLOPTIONUNSPECIFIED :: OnPremisesConfiguration_SslOption
+pattern OnPremisesConfiguration_SslOption_SSLOPTIONUNSPECIFIED = OnPremisesConfiguration_SslOption "SSL_OPTION_UNSPECIFIED"
+
+-- | SSL is not used for replica connection to the on-premises source.
+pattern OnPremisesConfiguration_SslOption_Disable :: OnPremisesConfiguration_SslOption
+pattern OnPremisesConfiguration_SslOption_Disable = OnPremisesConfiguration_SslOption "DISABLE"
+
+-- | SSL is required for replica connection to the on-premises source.
+pattern OnPremisesConfiguration_SslOption_Require :: OnPremisesConfiguration_SslOption
+pattern OnPremisesConfiguration_SslOption_Require = OnPremisesConfiguration_SslOption "REQUIRE"
+
+-- | Verify CA is required for replica connection to the on-premises source.
+pattern OnPremisesConfiguration_SslOption_VERIFYCA :: OnPremisesConfiguration_SslOption
+pattern OnPremisesConfiguration_SslOption_VERIFYCA = OnPremisesConfiguration_SslOption "VERIFY_CA"
+
+{-# COMPLETE
+  OnPremisesConfiguration_SslOption_SSLOPTIONUNSPECIFIED,
+  OnPremisesConfiguration_SslOption_Disable,
+  OnPremisesConfiguration_SslOption_Require,
+  OnPremisesConfiguration_SslOption_VERIFYCA,
+  OnPremisesConfiguration_SslOption
   #-}
 
 -- | The type of the operation. Valid values are: * @CREATE@ * @DELETE@ * @UPDATE@ * @RESTART@ * @IMPORT@ * @EXPORT@ * @BACKUP_VOLUME@ * @RESTORE_VOLUME@ * @CREATE_USER@ * @DELETE_USER@ * @CREATE_DATABASE@ * @DELETE_DATABASE@
@@ -1616,11 +2695,9 @@ pattern Operation_OperationType_Delete' = Operation_OperationType "DELETE"
 pattern Operation_OperationType_Restart :: Operation_OperationType
 pattern Operation_OperationType_Restart = Operation_OperationType "RESTART"
 
--- |
 pattern Operation_OperationType_Backup :: Operation_OperationType
 pattern Operation_OperationType_Backup = Operation_OperationType "BACKUP"
 
--- |
 pattern Operation_OperationType_Snapshot :: Operation_OperationType
 pattern Operation_OperationType_Snapshot = Operation_OperationType "SNAPSHOT"
 
@@ -1692,7 +2769,6 @@ pattern Operation_OperationType_Failover = Operation_OperationType "FAILOVER"
 pattern Operation_OperationType_DELETEBACKUP :: Operation_OperationType
 pattern Operation_OperationType_DELETEBACKUP = Operation_OperationType "DELETE_BACKUP"
 
--- |
 pattern Operation_OperationType_RECREATEREPLICA :: Operation_OperationType
 pattern Operation_OperationType_RECREATEREPLICA = Operation_OperationType "RECREATE_REPLICA"
 
@@ -1712,7 +2788,6 @@ pattern Operation_OperationType_Maintenance = Operation_OperationType "MAINTENAN
 pattern Operation_OperationType_ENABLEPRIVATEIP :: Operation_OperationType
 pattern Operation_OperationType_ENABLEPRIVATEIP = Operation_OperationType "ENABLE_PRIVATE_IP"
 
--- |
 pattern Operation_OperationType_DEFERMAINTENANCE :: Operation_OperationType
 pattern Operation_OperationType_DEFERMAINTENANCE = Operation_OperationType "DEFER_MAINTENANCE"
 
@@ -1739,6 +2814,54 @@ pattern Operation_OperationType_AUTORESTART = Operation_OperationType "AUTO_REST
 -- | Re-encrypts CMEK instances with latest key version.
 pattern Operation_OperationType_Reencrypt :: Operation_OperationType
 pattern Operation_OperationType_Reencrypt = Operation_OperationType "REENCRYPT"
+
+-- | Switches the roles of the primary and replica pair. The target instance should be the replica.
+pattern Operation_OperationType_Switchover :: Operation_OperationType
+pattern Operation_OperationType_Switchover = Operation_OperationType "SWITCHOVER"
+
+-- | Update a backup.
+pattern Operation_OperationType_UPDATEBACKUP :: Operation_OperationType
+pattern Operation_OperationType_UPDATEBACKUP = Operation_OperationType "UPDATE_BACKUP"
+
+-- | Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
+pattern Operation_OperationType_ACQUIRESSRSLEASE :: Operation_OperationType
+pattern Operation_OperationType_ACQUIRESSRSLEASE = Operation_OperationType "ACQUIRE_SSRS_LEASE"
+
+-- | Release a lease for the setup of SQL Server Reporting Services (SSRS).
+pattern Operation_OperationType_RELEASESSRSLEASE :: Operation_OperationType
+pattern Operation_OperationType_RELEASESSRSLEASE = Operation_OperationType "RELEASE_SSRS_LEASE"
+
+-- | Reconfigures old primary after a promote replica operation. Effect of a promote operation to the old primary is executed in this operation, asynchronously from the promote replica operation executed to the replica.
+pattern Operation_OperationType_RECONFIGUREOLDPRIMARY :: Operation_OperationType
+pattern Operation_OperationType_RECONFIGUREOLDPRIMARY = Operation_OperationType "RECONFIGURE_OLD_PRIMARY"
+
+-- | Indicates that the instance, its read replicas, and its cascading replicas are in maintenance. Maintenance typically gets initiated on groups of replicas first, followed by the primary instance. For each instance, maintenance typically causes the instance to be unavailable for 1-3 minutes.
+pattern Operation_OperationType_CLUSTERMAINTENANCE :: Operation_OperationType
+pattern Operation_OperationType_CLUSTERMAINTENANCE = Operation_OperationType "CLUSTER_MAINTENANCE"
+
+-- | Indicates that the instance (and any of its replicas) are currently in maintenance. This is initiated as a self-service request by using SSM. Maintenance typically causes the instance to be unavailable for 1-3 minutes.
+pattern Operation_OperationType_SELFSERVICEMAINTENANCE :: Operation_OperationType
+pattern Operation_OperationType_SELFSERVICEMAINTENANCE = Operation_OperationType "SELF_SERVICE_MAINTENANCE"
+
+-- | Switches a primary instance to a replica. This operation runs as part of a switchover operation to the original primary instance.
+pattern Operation_OperationType_SWITCHOVERTOREPLICA :: Operation_OperationType
+pattern Operation_OperationType_SWITCHOVERTOREPLICA = Operation_OperationType "SWITCHOVER_TO_REPLICA"
+
+-- | Updates the major version of a Cloud SQL instance.
+pattern Operation_OperationType_MAJORVERSIONUPGRADE :: Operation_OperationType
+pattern Operation_OperationType_MAJORVERSIONUPGRADE = Operation_OperationType "MAJOR_VERSION_UPGRADE"
+
+-- | Deprecated: ADVANCED/BACKUP is deprecated. Use ENHANCED/BACKUP instead.
+pattern Operation_OperationType_ADVANCEDBACKUP :: Operation_OperationType
+pattern Operation_OperationType_ADVANCEDBACKUP = Operation_OperationType "ADVANCED_BACKUP"
+
+-- | Changes the BackupTier of a Cloud SQL instance.
+pattern Operation_OperationType_MANAGEBACKUP :: Operation_OperationType
+pattern Operation_OperationType_MANAGEBACKUP = Operation_OperationType "MANAGE_BACKUP"
+
+-- | Creates a backup for an Enhanced BackupTier Cloud SQL instance.
+pattern Operation_OperationType_ENHANCEDBACKUP :: Operation_OperationType
+pattern Operation_OperationType_ENHANCEDBACKUP = Operation_OperationType "ENHANCED_BACKUP"
 
 {-# COMPLETE
   Operation_OperationType_SQLOPERATIONTYPEUNSPECIFIED,
@@ -1779,6 +2902,18 @@ pattern Operation_OperationType_Reencrypt = Operation_OperationType "REENCRYPT"
   Operation_OperationType_LOGCLEANUP,
   Operation_OperationType_AUTORESTART,
   Operation_OperationType_Reencrypt,
+  Operation_OperationType_Switchover,
+  Operation_OperationType_UPDATEBACKUP,
+  Operation_OperationType_ACQUIRESSRSLEASE,
+  Operation_OperationType_RELEASESSRSLEASE,
+  Operation_OperationType_RECONFIGUREOLDPRIMARY,
+  Operation_OperationType_CLUSTERMAINTENANCE,
+  Operation_OperationType_SELFSERVICEMAINTENANCE,
+  Operation_OperationType_SWITCHOVERTOREPLICA,
+  Operation_OperationType_MAJORVERSIONUPGRADE,
+  Operation_OperationType_ADVANCEDBACKUP,
+  Operation_OperationType_MANAGEBACKUP,
+  Operation_OperationType_ENHANCEDBACKUP,
   Operation_OperationType
   #-}
 
@@ -1859,7 +2994,6 @@ newtype Reschedule_RescheduleType = Reschedule_RescheduleType {fromReschedule_Re
       Core.FromJSONKey
     )
 
--- |
 pattern Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED :: Reschedule_RescheduleType
 pattern Reschedule_RescheduleType_RESCHEDULETYPEUNSPECIFIED = Reschedule_RescheduleType "RESCHEDULE_TYPE_UNSPECIFIED"
 
@@ -2013,12 +3147,49 @@ pattern Settings_DataDiskType_PDHDD = Settings_DataDiskType "PD_HDD"
 pattern Settings_DataDiskType_OBSOLETELOCALSSD :: Settings_DataDiskType
 pattern Settings_DataDiskType_OBSOLETELOCALSSD = Settings_DataDiskType "OBSOLETE_LOCAL_SSD"
 
+-- | A Hyperdisk Balanced data disk.
+pattern Settings_DataDiskType_HYPERDISKBALANCED :: Settings_DataDiskType
+pattern Settings_DataDiskType_HYPERDISKBALANCED = Settings_DataDiskType "HYPERDISK_BALANCED"
+
 {-# COMPLETE
   Settings_DataDiskType_SQLDATADISKTYPEUNSPECIFIED,
   Settings_DataDiskType_PDSSD,
   Settings_DataDiskType_PDHDD,
   Settings_DataDiskType_OBSOLETELOCALSSD,
+  Settings_DataDiskType_HYPERDISKBALANCED,
   Settings_DataDiskType
+  #-}
+
+-- | Optional. The edition of the instance.
+newtype Settings_Edition = Settings_Edition {fromSettings_Edition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The instance did not specify the edition.
+pattern Settings_Edition_EDITIONUNSPECIFIED :: Settings_Edition
+pattern Settings_Edition_EDITIONUNSPECIFIED = Settings_Edition "EDITION_UNSPECIFIED"
+
+-- | The instance is an enterprise edition.
+pattern Settings_Edition_Enterprise :: Settings_Edition
+pattern Settings_Edition_Enterprise = Settings_Edition "ENTERPRISE"
+
+-- | The instance is an Enterprise Plus edition.
+pattern Settings_Edition_ENTERPRISEPLUS :: Settings_Edition
+pattern Settings_Edition_ENTERPRISEPLUS = Settings_Edition "ENTERPRISE_PLUS"
+
+{-# COMPLETE
+  Settings_Edition_EDITIONUNSPECIFIED,
+  Settings_Edition_Enterprise,
+  Settings_Edition_ENTERPRISEPLUS,
+  Settings_Edition
   #-}
 
 -- | The pricing plan for this instance. This can be either @PER_USE@ or @PACKAGE@. Only @PER_USE@ is supported for Second Generation instances.
@@ -2098,27 +3269,22 @@ newtype SqlExternalSyncSettingError_Type = SqlExternalSyncSettingError_Type {fro
       Core.FromJSONKey
     )
 
--- |
 pattern SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED = SqlExternalSyncSettingError_Type "SQL_EXTERNAL_SYNC_SETTING_ERROR_TYPE_UNSPECIFIED"
 
--- |
 pattern SqlExternalSyncSettingError_Type_CONNECTIONFAILURE :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_CONNECTIONFAILURE = SqlExternalSyncSettingError_Type "CONNECTION_FAILURE"
 
--- |
 pattern SqlExternalSyncSettingError_Type_BINLOGNOTENABLED :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_BINLOGNOTENABLED = SqlExternalSyncSettingError_Type "BINLOG_NOT_ENABLED"
 
--- |
 pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEVERSION :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEVERSION = SqlExternalSyncSettingError_Type "INCOMPATIBLE_DATABASE_VERSION"
 
--- |
 pattern SqlExternalSyncSettingError_Type_REPLICAALREADYSETUP :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_REPLICAALREADYSETUP = SqlExternalSyncSettingError_Type "REPLICA_ALREADY_SETUP"
 
--- |
+-- | The replication user is missing privileges that are required.
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTPRIVILEGE :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTPRIVILEGE = SqlExternalSyncSettingError_Type "INSUFFICIENT_PRIVILEGE"
 
@@ -2154,7 +3320,7 @@ pattern SqlExternalSyncSettingError_Type_INSUFFICIENTMAXWALSENDERS = SqlExternal
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTMAXWORKERPROCESSES :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_INSUFFICIENTMAXWORKERPROCESSES = SqlExternalSyncSettingError_Type "INSUFFICIENT_MAX_WORKER_PROCESSES"
 
--- | Extensions installed are either not supported or having unsupported versions
+-- | Extensions installed are either not supported or having unsupported versions.
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONS :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONS = SqlExternalSyncSettingError_Type "UNSUPPORTED_EXTENSIONS"
 
@@ -2178,7 +3344,7 @@ pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDGTIDMODE = SqlExternalSyncSe
 pattern SqlExternalSyncSettingError_Type_SQLSERVERAGENTNOTRUNNING :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_SQLSERVERAGENTNOTRUNNING = SqlExternalSyncSettingError_Type "SQLSERVER_AGENT_NOT_RUNNING"
 
--- | The table definition is not support due to missing primary key or replica identity, applicable for postgres.
+-- | The table definition is not support due to missing primary key or replica identity, applicable for postgres. Note that this is a warning and won\'t block the migration.
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLEDEFINITION :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLEDEFINITION = SqlExternalSyncSettingError_Type "UNSUPPORTED_TABLE_DEFINITION"
 
@@ -2186,7 +3352,7 @@ pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLEDEFINITION = SqlExterna
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDDEFINER :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDDEFINER = SqlExternalSyncSettingError_Type "UNSUPPORTED_DEFINER"
 
--- | SQL Server \@\@SERVERNAME does not match actual host name
+-- | SQL Server \@\@SERVERNAME does not match actual host name.
 pattern SqlExternalSyncSettingError_Type_SQLSERVERSERVERNAMEMISMATCH :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_SQLSERVERSERVERNAMEMISMATCH = SqlExternalSyncSettingError_Type "SQLSERVER_SERVERNAME_MISMATCH"
 
@@ -2206,13 +3372,113 @@ pattern SqlExternalSyncSettingError_Type_BINLOGRETENTIONSETTING = SqlExternalSyn
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE = SqlExternalSyncSettingError_Type "UNSUPPORTED_STORAGE_ENGINE"
 
--- | Source has tables with limited support eg: PostgreSQL tables without primary keys
+-- | Source has tables with limited support eg: PostgreSQL tables without primary keys.
 pattern SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES = SqlExternalSyncSettingError_Type "LIMITED_SUPPORT_TABLES"
 
 -- | The replica instance contains existing data.
 pattern SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA :: SqlExternalSyncSettingError_Type
 pattern SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA = SqlExternalSyncSettingError_Type "EXISTING_DATA_IN_REPLICA"
+
+-- | The replication user is missing privileges that are optional.
+pattern SqlExternalSyncSettingError_Type_MISSINGOPTIONALPRIVILEGES :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_MISSINGOPTIONALPRIVILEGES = SqlExternalSyncSettingError_Type "MISSING_OPTIONAL_PRIVILEGES"
+
+-- | Additional BACKUP_ADMIN privilege is granted to the replication user which may lock source MySQL 8 instance for DDLs during initial sync.
+pattern SqlExternalSyncSettingError_Type_RISKYBACKUPADMINPRIVILEGE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_RISKYBACKUPADMINPRIVILEGE = SqlExternalSyncSettingError_Type "RISKY_BACKUP_ADMIN_PRIVILEGE"
+
+-- | The Cloud Storage bucket is missing necessary permissions.
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTGCSPERMISSIONS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTGCSPERMISSIONS = SqlExternalSyncSettingError_Type "INSUFFICIENT_GCS_PERMISSIONS"
+
+-- | The Cloud Storage bucket has an error in the file or contains invalid file information.
+pattern SqlExternalSyncSettingError_Type_INVALIDFILEINFO :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_INVALIDFILEINFO = SqlExternalSyncSettingError_Type "INVALID_FILE_INFO"
+
+-- | The source instance has unsupported database settings for migration.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDDATABASESETTINGS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDDATABASESETTINGS = SqlExternalSyncSettingError_Type "UNSUPPORTED_DATABASE_SETTINGS"
+
+-- | The replication user is missing parallel import specific privileges. (e.g. LOCK TABLES) for MySQL.
+pattern SqlExternalSyncSettingError_Type_MYSQLPARALLELIMPORTINSUFFICIENTPRIVILEGE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_MYSQLPARALLELIMPORTINSUFFICIENTPRIVILEGE = SqlExternalSyncSettingError_Type "MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE"
+
+-- | The global variable local_infile is off on external server replica.
+pattern SqlExternalSyncSettingError_Type_LOCALINFILEOFF :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_LOCALINFILEOFF = SqlExternalSyncSettingError_Type "LOCAL_INFILE_OFF"
+
+-- | This code instructs customers to turn on point-in-time recovery manually for the instance after promoting the Cloud SQL for PostgreSQL instance.
+pattern SqlExternalSyncSettingError_Type_TURNONPITRAFTERPROMOTE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_TURNONPITRAFTERPROMOTE = SqlExternalSyncSettingError_Type "TURN_ON_PITR_AFTER_PROMOTE"
+
+-- | The minor version of replica database is incompatible with the source.
+pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEMINORVERSION :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEMINORVERSION = SqlExternalSyncSettingError_Type "INCOMPATIBLE_DATABASE_MINOR_VERSION"
+
+-- | This warning message indicates that Cloud SQL uses the maximum number of subscriptions to migrate data from the source to the destination.
+pattern SqlExternalSyncSettingError_Type_SOURCEMAXSUBSCRIPTIONS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_SOURCEMAXSUBSCRIPTIONS = SqlExternalSyncSettingError_Type "SOURCE_MAX_SUBSCRIPTIONS"
+
+-- | Unable to verify definers on the source for MySQL.
+pattern SqlExternalSyncSettingError_Type_UNABLETOVERIFYDEFINERS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNABLETOVERIFYDEFINERS = SqlExternalSyncSettingError_Type "UNABLE_TO_VERIFY_DEFINERS"
+
+-- | If a time out occurs while the subscription counts are calculated, then this value is set to 1. Otherwise, this value is set to 2.
+pattern SqlExternalSyncSettingError_Type_SUBSCRIPTIONCALCULATIONSTATUS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_SUBSCRIPTIONCALCULATIONSTATUS = SqlExternalSyncSettingError_Type "SUBSCRIPTION_CALCULATION_STATUS"
+
+-- | Count of subscriptions needed to sync source data for PostgreSQL database.
+pattern SqlExternalSyncSettingError_Type_PGSUBSCRIPTIONCOUNT :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_PGSUBSCRIPTIONCOUNT = SqlExternalSyncSettingError_Type "PG_SUBSCRIPTION_COUNT"
+
+-- | Final parallel level that is used to do migration.
+pattern SqlExternalSyncSettingError_Type_PGSYNCPARALLELLEVEL :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_PGSYNCPARALLELLEVEL = SqlExternalSyncSettingError_Type "PG_SYNC_PARALLEL_LEVEL"
+
+-- | The disk size of the replica instance is smaller than the data size of the source instance.
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTDISKSIZE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTDISKSIZE = SqlExternalSyncSettingError_Type "INSUFFICIENT_DISK_SIZE"
+
+-- | The data size of the source instance is greater than 1 TB, the number of cores of the replica instance is less than 8, and the memory of the replica is less than 32 GB.
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTMACHINETIER :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_INSUFFICIENTMACHINETIER = SqlExternalSyncSettingError_Type "INSUFFICIENT_MACHINE_TIER"
+
+-- | The warning message indicates the unsupported extensions will not be migrated to the destination.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONSNOTMIGRATED :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONSNOTMIGRATED = SqlExternalSyncSettingError_Type "UNSUPPORTED_EXTENSIONS_NOT_MIGRATED"
+
+-- | The warning message indicates the pg_cron extension and settings will not be migrated to the destination.
+pattern SqlExternalSyncSettingError_Type_EXTENSIONSNOTMIGRATED :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_EXTENSIONSNOTMIGRATED = SqlExternalSyncSettingError_Type "EXTENSIONS_NOT_MIGRATED"
+
+-- | The error message indicates that pg_cron flags are enabled on the destination which is not supported during the migration.
+pattern SqlExternalSyncSettingError_Type_PGCRONFLAGENABLEDINREPLICA :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_PGCRONFLAGENABLEDINREPLICA = SqlExternalSyncSettingError_Type "PG_CRON_FLAG_ENABLED_IN_REPLICA"
+
+-- | This error message indicates that the specified extensions are not enabled on destination instance. For example, before you can migrate data to the destination instance, you must enable the PGAudit extension on the instance.
+pattern SqlExternalSyncSettingError_Type_EXTENSIONSNOTENABLEDINREPLICA :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_EXTENSIONSNOTENABLEDINREPLICA = SqlExternalSyncSettingError_Type "EXTENSIONS_NOT_ENABLED_IN_REPLICA"
+
+-- | The source database has generated columns that can\'t be migrated. Please change them to regular columns before migration.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDCOLUMNS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDCOLUMNS = SqlExternalSyncSettingError_Type "UNSUPPORTED_COLUMNS"
+
+-- | The source database has users that aren\'t created in the replica. First, create all users, which are in the pg/user/mappings table of the source database, in the destination instance. Then, perform the migration.
+pattern SqlExternalSyncSettingError_Type_USERSNOTCREATEDINREPLICA :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_USERSNOTCREATEDINREPLICA = SqlExternalSyncSettingError_Type "USERS_NOT_CREATED_IN_REPLICA"
+
+-- | The selected objects include system objects that aren\'t supported for migration.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSYSTEMOBJECTS :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDSYSTEMOBJECTS = SqlExternalSyncSettingError_Type "UNSUPPORTED_SYSTEM_OBJECTS"
+
+-- | The source database has tables with the FULL or NOTHING replica identity. Before starting your migration, either remove the identity or change it to DEFAULT. Note that this is an error and will block the migration.
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLESWITHREPLICAIDENTITY :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLESWITHREPLICAIDENTITY = SqlExternalSyncSettingError_Type "UNSUPPORTED_TABLES_WITH_REPLICA_IDENTITY"
+
+-- | The selected objects don\'t exist on the source instance.
+pattern SqlExternalSyncSettingError_Type_SELECTEDOBJECTSNOTEXISTONSOURCE :: SqlExternalSyncSettingError_Type
+pattern SqlExternalSyncSettingError_Type_SELECTEDOBJECTSNOTEXISTONSOURCE = SqlExternalSyncSettingError_Type "SELECTED_OBJECTS_NOT_EXIST_ON_SOURCE"
 
 {-# COMPLETE
   SqlExternalSyncSettingError_Type_SQLEXTERNALSYNCSETTINGERRORTYPEUNSPECIFIED,
@@ -2244,7 +3510,64 @@ pattern SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA = SqlExternalSync
   SqlExternalSyncSettingError_Type_UNSUPPORTEDSTORAGEENGINE,
   SqlExternalSyncSettingError_Type_LIMITEDSUPPORTTABLES,
   SqlExternalSyncSettingError_Type_EXISTINGDATAINREPLICA,
+  SqlExternalSyncSettingError_Type_MISSINGOPTIONALPRIVILEGES,
+  SqlExternalSyncSettingError_Type_RISKYBACKUPADMINPRIVILEGE,
+  SqlExternalSyncSettingError_Type_INSUFFICIENTGCSPERMISSIONS,
+  SqlExternalSyncSettingError_Type_INVALIDFILEINFO,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDDATABASESETTINGS,
+  SqlExternalSyncSettingError_Type_MYSQLPARALLELIMPORTINSUFFICIENTPRIVILEGE,
+  SqlExternalSyncSettingError_Type_LOCALINFILEOFF,
+  SqlExternalSyncSettingError_Type_TURNONPITRAFTERPROMOTE,
+  SqlExternalSyncSettingError_Type_INCOMPATIBLEDATABASEMINORVERSION,
+  SqlExternalSyncSettingError_Type_SOURCEMAXSUBSCRIPTIONS,
+  SqlExternalSyncSettingError_Type_UNABLETOVERIFYDEFINERS,
+  SqlExternalSyncSettingError_Type_SUBSCRIPTIONCALCULATIONSTATUS,
+  SqlExternalSyncSettingError_Type_PGSUBSCRIPTIONCOUNT,
+  SqlExternalSyncSettingError_Type_PGSYNCPARALLELLEVEL,
+  SqlExternalSyncSettingError_Type_INSUFFICIENTDISKSIZE,
+  SqlExternalSyncSettingError_Type_INSUFFICIENTMACHINETIER,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDEXTENSIONSNOTMIGRATED,
+  SqlExternalSyncSettingError_Type_EXTENSIONSNOTMIGRATED,
+  SqlExternalSyncSettingError_Type_PGCRONFLAGENABLEDINREPLICA,
+  SqlExternalSyncSettingError_Type_EXTENSIONSNOTENABLEDINREPLICA,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDCOLUMNS,
+  SqlExternalSyncSettingError_Type_USERSNOTCREATEDINREPLICA,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDSYSTEMOBJECTS,
+  SqlExternalSyncSettingError_Type_UNSUPPORTEDTABLESWITHREPLICAIDENTITY,
+  SqlExternalSyncSettingError_Type_SELECTEDOBJECTSNOTEXISTONSOURCE,
   SqlExternalSyncSettingError_Type
+  #-}
+
+-- | Optional. MigrationType configures the migration to use physical files or logical dump files. If not set, then the logical dump file configuration is used. Valid values are @LOGICAL@ or @PHYSICAL@. Only applicable to MySQL.
+newtype SqlInstancesStartExternalSyncRequest_MigrationType = SqlInstancesStartExternalSyncRequest_MigrationType {fromSqlInstancesStartExternalSyncRequest_MigrationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value is a logical dump file-based migration
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED :: SqlInstancesStartExternalSyncRequest_MigrationType
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED = SqlInstancesStartExternalSyncRequest_MigrationType "MIGRATION_TYPE_UNSPECIFIED"
+
+-- | Logical dump file-based migration
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_Logical :: SqlInstancesStartExternalSyncRequest_MigrationType
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_Logical = SqlInstancesStartExternalSyncRequest_MigrationType "LOGICAL"
+
+-- | Physical file-based migration
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_Physical :: SqlInstancesStartExternalSyncRequest_MigrationType
+pattern SqlInstancesStartExternalSyncRequest_MigrationType_Physical = SqlInstancesStartExternalSyncRequest_MigrationType "PHYSICAL"
+
+{-# COMPLETE
+  SqlInstancesStartExternalSyncRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED,
+  SqlInstancesStartExternalSyncRequest_MigrationType_Logical,
+  SqlInstancesStartExternalSyncRequest_MigrationType_Physical,
+  SqlInstancesStartExternalSyncRequest_MigrationType
   #-}
 
 -- | External sync mode.
@@ -2279,6 +3602,75 @@ pattern SqlInstancesStartExternalSyncRequest_SyncMode_Offline = SqlInstancesStar
   SqlInstancesStartExternalSyncRequest_SyncMode
   #-}
 
+-- | Optional. Parallel level for initial data sync. Currently only applicable for MySQL.
+newtype SqlInstancesStartExternalSyncRequest_SyncParallelLevel = SqlInstancesStartExternalSyncRequest_SyncParallelLevel {fromSqlInstancesStartExternalSyncRequest_SyncParallelLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown sync parallel level. Will be defaulted to OPTIMAL.
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED :: SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED = SqlInstancesStartExternalSyncRequest_SyncParallelLevel "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED"
+
+-- | Minimal parallel level.
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Min :: SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Min = SqlInstancesStartExternalSyncRequest_SyncParallelLevel "MIN"
+
+-- | Optimal parallel level.
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Optimal :: SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Optimal = SqlInstancesStartExternalSyncRequest_SyncParallelLevel "OPTIMAL"
+
+-- | Maximum parallel level.
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Max :: SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+pattern SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Max = SqlInstancesStartExternalSyncRequest_SyncParallelLevel "MAX"
+
+{-# COMPLETE
+  SqlInstancesStartExternalSyncRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED,
+  SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Min,
+  SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Optimal,
+  SqlInstancesStartExternalSyncRequest_SyncParallelLevel_Max,
+  SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+  #-}
+
+-- | Optional. MigrationType configures the migration to use physical files or logical dump files. If not set, then the logical dump file configuration is used. Valid values are @LOGICAL@ or @PHYSICAL@. Only applicable to MySQL.
+newtype SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType = SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType {fromSqlInstancesVerifyExternalSyncSettingsRequest_MigrationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value is a logical dump file-based migration
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED :: SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED = SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType "MIGRATION_TYPE_UNSPECIFIED"
+
+-- | Logical dump file-based migration
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Logical :: SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Logical = SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType "LOGICAL"
+
+-- | Physical file-based migration
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Physical :: SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Physical = SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType "PHYSICAL"
+
+{-# COMPLETE
+  SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_MIGRATIONTYPEUNSPECIFIED,
+  SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Logical,
+  SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType_Physical,
+  SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+  #-}
+
 -- | External sync mode
 newtype SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode = SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode {fromSqlInstancesVerifyExternalSyncSettingsRequest_SyncMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2311,6 +3703,43 @@ pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode_Offline = SqlInst
   SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
   #-}
 
+-- | Optional. Parallel level for initial data sync. Only applicable for PostgreSQL.
+newtype SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel = SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel {fromSqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unknown sync parallel level. Will be defaulted to OPTIMAL.
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED :: SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED = SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel "EXTERNAL_SYNC_PARALLEL_LEVEL_UNSPECIFIED"
+
+-- | Minimal parallel level.
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Min :: SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Min = SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel "MIN"
+
+-- | Optimal parallel level.
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Optimal :: SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Optimal = SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel "OPTIMAL"
+
+-- | Maximum parallel level.
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Max :: SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+pattern SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Max = SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel "MAX"
+
+{-# COMPLETE
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_EXTERNALSYNCPARALLELLEVELUNSPECIFIED,
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Min,
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Optimal,
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel_Max,
+  SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+  #-}
+
 -- | This field represents the state generated by the proactive database wellness job for OutOfDisk issues. * Writers: * the proactive database wellness job for OOD. * Readers: * the proactive database wellness job
 newtype SqlOutOfDiskReport_SqlOutOfDiskState = SqlOutOfDiskReport_SqlOutOfDiskState {fromSqlOutOfDiskReport_SqlOutOfDiskState :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2341,6 +3770,48 @@ pattern SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN = SqlOutOfDiskReport_S
   SqlOutOfDiskReport_SqlOutOfDiskState_Normal,
   SqlOutOfDiskReport_SqlOutOfDiskState_SOFTSHUTDOWN,
   SqlOutOfDiskReport_SqlOutOfDiskState
+  #-}
+
+-- | The type of maintenance to be performed on the instance.
+newtype SqlSubOperationType_MaintenanceType = SqlSubOperationType_MaintenanceType {fromSqlSubOperationType_MaintenanceType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Maintenance type is unspecified.
+pattern SqlSubOperationType_MaintenanceType_SQLMAINTENANCETYPEUNSPECIFIED :: SqlSubOperationType_MaintenanceType
+pattern SqlSubOperationType_MaintenanceType_SQLMAINTENANCETYPEUNSPECIFIED = SqlSubOperationType_MaintenanceType "SQL_MAINTENANCE_TYPE_UNSPECIFIED"
+
+-- | Indicates that a standalone instance is undergoing maintenance. The instance can be either a primary instance or a replica.
+pattern SqlSubOperationType_MaintenanceType_INSTANCEMAINTENANCE :: SqlSubOperationType_MaintenanceType
+pattern SqlSubOperationType_MaintenanceType_INSTANCEMAINTENANCE = SqlSubOperationType_MaintenanceType "INSTANCE_MAINTENANCE"
+
+-- | Indicates that the primary instance and all of its replicas, including cascading replicas, are undergoing maintenance. Maintenance is performed on groups of replicas first, followed by the primary instance.
+pattern SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDMAINTENANCE :: SqlSubOperationType_MaintenanceType
+pattern SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDMAINTENANCE = SqlSubOperationType_MaintenanceType "REPLICA_INCLUDED_MAINTENANCE"
+
+-- | Indicates that the standalone instance is undergoing maintenance, initiated by self-service. The instance can be either a primary instance or a replica.
+pattern SqlSubOperationType_MaintenanceType_INSTANCESELFSERVICEMAINTENANCE :: SqlSubOperationType_MaintenanceType
+pattern SqlSubOperationType_MaintenanceType_INSTANCESELFSERVICEMAINTENANCE = SqlSubOperationType_MaintenanceType "INSTANCE_SELF_SERVICE_MAINTENANCE"
+
+-- | Indicates that the primary instance and all of its replicas are undergoing maintenance, initiated by self-service. Maintenance is performed on groups of replicas first, followed by the primary instance.
+pattern SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDSELFSERVICEMAINTENANCE :: SqlSubOperationType_MaintenanceType
+pattern SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDSELFSERVICEMAINTENANCE = SqlSubOperationType_MaintenanceType "REPLICA_INCLUDED_SELF_SERVICE_MAINTENANCE"
+
+{-# COMPLETE
+  SqlSubOperationType_MaintenanceType_SQLMAINTENANCETYPEUNSPECIFIED,
+  SqlSubOperationType_MaintenanceType_INSTANCEMAINTENANCE,
+  SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDMAINTENANCE,
+  SqlSubOperationType_MaintenanceType_INSTANCESELFSERVICEMAINTENANCE,
+  SqlSubOperationType_MaintenanceType_REPLICAINCLUDEDSELFSERVICEMAINTENANCE,
+  SqlSubOperationType_MaintenanceType
   #-}
 
 -- | Dual password status for the user.
@@ -2405,9 +3876,24 @@ pattern User_Type_CLOUDIAMUSER = User_Type "CLOUD_IAM_USER"
 pattern User_Type_CLOUDIAMSERVICEACCOUNT :: User_Type
 pattern User_Type_CLOUDIAMSERVICEACCOUNT = User_Type "CLOUD_IAM_SERVICE_ACCOUNT"
 
+-- | Cloud IAM group. Not used for login.
+pattern User_Type_CLOUDIAMGROUP :: User_Type
+pattern User_Type_CLOUDIAMGROUP = User_Type "CLOUD_IAM_GROUP"
+
+-- | Read-only. Login for a user that belongs to the Cloud IAM group.
+pattern User_Type_CLOUDIAMGROUPUSER :: User_Type
+pattern User_Type_CLOUDIAMGROUPUSER = User_Type "CLOUD_IAM_GROUP_USER"
+
+-- | Read-only. Login for a service account that belongs to the Cloud IAM group.
+pattern User_Type_CLOUDIAMGROUPSERVICEACCOUNT :: User_Type
+pattern User_Type_CLOUDIAMGROUPSERVICEACCOUNT = User_Type "CLOUD_IAM_GROUP_SERVICE_ACCOUNT"
+
 {-# COMPLETE
   User_Type_BUILTIN,
   User_Type_CLOUDIAMUSER,
   User_Type_CLOUDIAMSERVICEACCOUNT,
+  User_Type_CLOUDIAMGROUP,
+  User_Type_CLOUDIAMGROUPUSER,
+  User_Type_CLOUDIAMGROUPSERVICEACCOUNT,
   User_Type
   #-}

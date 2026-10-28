@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefinitions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.AttributeDefin
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.attributeDefinitions.list@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList' request conforms to.
@@ -57,9 +55,7 @@ type HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsListRes
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListAttributeDefinitionsResponse
+    Core.:> Core.Get '[Core.JSON] ListAttributeDefinitionsResponse
 
 -- | Lists the Attribute definitions in the specified consent store.
 --
@@ -91,18 +87,26 @@ newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList ::
   -- |  Required. Name of the consent store to retrieve Attribute definitions from. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList
-newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList parent =
-  HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      filter = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList
+  parent =
+    HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList
+      { xgafv =
+          Core.Nothing,
+        accessToken =
+          Core.Nothing,
+        callback =
+          Core.Nothing,
+        filter = Core.Nothing,
+        pageSize =
+          Core.Nothing,
+        pageToken =
+          Core.Nothing,
+        parent = parent,
+        uploadType =
+          Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -115,7 +119,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsList {..} =
       go

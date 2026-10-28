@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -153,6 +151,16 @@ module Gogol.AdSense
     AdSenseAccountsPaymentsListResource,
     AdSenseAccountsPaymentsList (..),
     newAdSenseAccountsPaymentsList,
+
+    -- ** adsense.accounts.policyIssues.get
+    AdSenseAccountsPolicyIssuesGetResource,
+    AdSenseAccountsPolicyIssuesGet (..),
+    newAdSenseAccountsPolicyIssuesGet,
+
+    -- ** adsense.accounts.policyIssues.list
+    AdSenseAccountsPolicyIssuesListResource,
+    AdSenseAccountsPolicyIssuesList (..),
+    newAdSenseAccountsPolicyIssuesList,
 
     -- ** adsense.accounts.reports.generate
     AdSenseAccountsReportsGenerateResource,
@@ -313,6 +321,10 @@ module Gogol.AdSense
     ListPaymentsResponse (..),
     newListPaymentsResponse,
 
+    -- ** ListPolicyIssuesResponse
+    ListPolicyIssuesResponse (..),
+    newListPolicyIssuesResponse,
+
     -- ** ListSavedReportsResponse
     ListSavedReportsResponse (..),
     newListSavedReportsResponse,
@@ -328,6 +340,23 @@ module Gogol.AdSense
     -- ** Payment
     Payment (..),
     newPayment,
+
+    -- ** PolicyIssue
+    PolicyIssue (..),
+    newPolicyIssue,
+
+    -- ** PolicyIssue_Action
+    PolicyIssue_Action (..),
+
+    -- ** PolicyIssue_EntityType
+    PolicyIssue_EntityType (..),
+
+    -- ** PolicyTopic
+    PolicyTopic (..),
+    newPolicyTopic,
+
+    -- ** PolicyTopic_Type
+    PolicyTopic_Type (..),
 
     -- ** ReportResult
     ReportResult (..),
@@ -417,6 +446,8 @@ import Gogol.AdSense.Accounts.GetAdBlockingRecoveryTag
 import Gogol.AdSense.Accounts.List
 import Gogol.AdSense.Accounts.ListChildAccounts
 import Gogol.AdSense.Accounts.Payments.List
+import Gogol.AdSense.Accounts.PolicyIssues.Get
+import Gogol.AdSense.Accounts.PolicyIssues.List
 import Gogol.AdSense.Accounts.Reports.Generate
 import Gogol.AdSense.Accounts.Reports.GenerateCsv
 import Gogol.AdSense.Accounts.Reports.GetSaved

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Docs
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -92,6 +90,10 @@ module Gogol.Docs
     -- ** Body
     Body (..),
     newBody,
+
+    -- ** BookmarkLink
+    BookmarkLink (..),
+    newBookmarkLink,
 
     -- ** Bullet
     Bullet (..),
@@ -256,6 +258,46 @@ module Gogol.Docs
     DocumentStyleSuggestionState (..),
     newDocumentStyleSuggestionState,
 
+    -- ** DocumentTab
+    DocumentTab (..),
+    newDocumentTab,
+
+    -- ** DocumentTab_Footers
+    DocumentTab_Footers (..),
+    newDocumentTab_Footers,
+
+    -- ** DocumentTab_Footnotes
+    DocumentTab_Footnotes (..),
+    newDocumentTab_Footnotes,
+
+    -- ** DocumentTab_Headers
+    DocumentTab_Headers (..),
+    newDocumentTab_Headers,
+
+    -- ** DocumentTab_InlineObjects
+    DocumentTab_InlineObjects (..),
+    newDocumentTab_InlineObjects,
+
+    -- ** DocumentTab_Lists
+    DocumentTab_Lists (..),
+    newDocumentTab_Lists,
+
+    -- ** DocumentTab_NamedRanges
+    DocumentTab_NamedRanges (..),
+    newDocumentTab_NamedRanges,
+
+    -- ** DocumentTab_PositionedObjects
+    DocumentTab_PositionedObjects (..),
+    newDocumentTab_PositionedObjects,
+
+    -- ** DocumentTab_SuggestedDocumentStyleChanges
+    DocumentTab_SuggestedDocumentStyleChanges (..),
+    newDocumentTab_SuggestedDocumentStyleChanges,
+
+    -- ** DocumentTab_SuggestedNamedStylesChanges
+    DocumentTab_SuggestedNamedStylesChanges (..),
+    newDocumentTab_SuggestedNamedStylesChanges,
+
     -- ** EmbeddedDrawingProperties
     EmbeddedDrawingProperties (..),
     newEmbeddedDrawingProperties,
@@ -313,6 +355,10 @@ module Gogol.Docs
     -- ** Header
     Header (..),
     newHeader,
+
+    -- ** HeadingLink
+    HeadingLink (..),
+    newHeadingLink,
 
     -- ** HorizontalRule
     HorizontalRule (..),
@@ -719,6 +765,14 @@ module Gogol.Docs
     SuggestedTextStyle (..),
     newSuggestedTextStyle,
 
+    -- ** Tab
+    Tab (..),
+    newTab,
+
+    -- ** TabProperties
+    TabProperties (..),
+    newTabProperties,
+
     -- ** TabStop
     TabStop (..),
     newTabStop,
@@ -794,6 +848,10 @@ module Gogol.Docs
     -- ** TableStyle
     TableStyle (..),
     newTableStyle,
+
+    -- ** TabsCriteria
+    TabsCriteria (..),
+    newTabsCriteria,
 
     -- ** TextRun
     TextRun (..),

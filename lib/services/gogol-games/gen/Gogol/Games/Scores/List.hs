@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Scores.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Scores.List
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.scores.list@ method which the
 -- 'GamesScoresList' request conforms to.
@@ -83,7 +81,7 @@ data GamesScoresList = GamesScoresList
     maxResults :: (Core.Maybe Core.Int32),
     -- | The token returned by the previous request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | The time span for the scores and ranks you\'re requesting.
+    -- | Required. The time span for the scores and ranks you\'re requesting.
     timeSpan :: ScoresListTimeSpan,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -98,7 +96,7 @@ newGamesScoresList ::
   ScoresListCollection ->
   -- |  The ID of the leaderboard. See 'leaderboardId'.
   Core.Text ->
-  -- |  The time span for the scores and ranks you\'re requesting. See 'timeSpan'.
+  -- |  Required. The time span for the scores and ranks you\'re requesting. See 'timeSpan'.
   ScoresListTimeSpan ->
   GamesScoresList
 newGamesScoresList collection leaderboardId timeSpan =

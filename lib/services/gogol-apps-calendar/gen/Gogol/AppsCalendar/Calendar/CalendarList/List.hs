@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.CalendarList.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.CalendarList.List
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.calendarList.list@ method which the
 -- 'CalendarCalendarListList' request conforms to.
@@ -51,9 +49,7 @@ type CalendarCalendarListListResource =
     Core.:> "me"
     Core.:> "calendarList"
     Core.:> Core.QueryParam "maxResults" Core.Int32
-    Core.:> Core.QueryParam
-              "minAccessRole"
-              CalendarListListMinAccessRole
+    Core.:> Core.QueryParam "minAccessRole" CalendarListListMinAccessRole
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "showDeleted" Core.Bool
     Core.:> Core.QueryParam "showHidden" Core.Bool
@@ -97,7 +93,11 @@ instance Core.GoogleRequest CalendarCalendarListList where
   type Rs CalendarCalendarListList = CalendarList
   type
     Scopes CalendarCalendarListList =
-      '[Calendar'FullControl, Calendar'Readonly]
+      '[ Calendar'FullControl,
+         Calendar'Calendarlist,
+         Calendar'Calendarlist'Readonly,
+         Calendar'Readonly
+       ]
   requestClient CalendarCalendarListList {..} =
     go
       maxResults
@@ -111,7 +111,5 @@ instance Core.GoogleRequest CalendarCalendarListList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarCalendarListListResource
-          )
+          (Core.Proxy :: Core.Proxy CalendarCalendarListListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Webmasters.Sitemaps.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the </webmaster-tools/v3/sitemaps sitemaps-entries> submitted for this site, or included in the sitemap index file (if @sitemapIndex@ is specified in the request).
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sitemaps.list@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @webmasters.sitemaps.list@.
 module Gogol.SearchConsole.Webmasters.Sitemaps.List
   ( -- * Resource
     WebmastersSitemapsListResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.Webmasters.Sitemaps.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.sitemaps.list@ method which the
@@ -115,7 +113,5 @@ instance Core.GoogleRequest WebmastersSitemapsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitemapsListResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitemapsListResource)
           Core.mempty

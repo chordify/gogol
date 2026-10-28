@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Enterprises.EnrollmentTokens.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken: all the fields but name and expiration_timestamp are empty. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it\'s recommended to delete active enrollment tokens as soon as they\'re not intended to be used anymore.
+-- Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken object. Only the following fields are populated: name, expirationTimestamp, allowPersonalUsage, value, qrCode. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it\'s recommended to delete active enrollment tokens as soon as they\'re not intended to be used anymore.
 --
 -- /See:/ <https://developers.google.com/android/management Android Management API Reference> for @androidmanagement.enterprises.enrollmentTokens.list@.
 module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.List
@@ -40,7 +38,7 @@ module Gogol.AndroidManagement.Enterprises.EnrollmentTokens.List
 where
 
 import Gogol.AndroidManagement.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidmanagement.enterprises.enrollmentTokens.list@ method which the
 -- 'AndroidManagementEnterprisesEnrollmentTokensList' request conforms to.
@@ -58,7 +56,7 @@ type AndroidManagementEnterprisesEnrollmentTokensListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListEnrollmentTokensResponse
 
--- | Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken: all the fields but name and expiration_timestamp are empty. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it\'s recommended to delete active enrollment tokens as soon as they\'re not intended to be used anymore.
+-- | Lists active, unexpired enrollment tokens for a given enterprise. The list items contain only a partial view of EnrollmentToken object. Only the following fields are populated: name, expirationTimestamp, allowPersonalUsage, value, qrCode. This method is meant to help manage active enrollment tokens lifecycle. For security reasons, it\'s recommended to delete active enrollment tokens as soon as they\'re not intended to be used anymore.
 --
 -- /See:/ 'newAndroidManagementEnterprisesEnrollmentTokensList' smart constructor.
 data AndroidManagementEnterprisesEnrollmentTokensList = AndroidManagementEnterprisesEnrollmentTokensList
@@ -88,7 +86,8 @@ newAndroidManagementEnterprisesEnrollmentTokensList ::
   AndroidManagementEnterprisesEnrollmentTokensList
 newAndroidManagementEnterprisesEnrollmentTokensList parent =
   AndroidManagementEnterprisesEnrollmentTokensList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -103,31 +102,28 @@ instance
     AndroidManagementEnterprisesEnrollmentTokensList
   where
   type
-    Rs
-      AndroidManagementEnterprisesEnrollmentTokensList =
+    Rs AndroidManagementEnterprisesEnrollmentTokensList =
       ListEnrollmentTokensResponse
   type
-    Scopes
-      AndroidManagementEnterprisesEnrollmentTokensList =
+    Scopes AndroidManagementEnterprisesEnrollmentTokensList =
       '[Androidmanagement'FullControl]
-  requestClient
-    AndroidManagementEnterprisesEnrollmentTokensList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidManagementService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidManagementEnterprisesEnrollmentTokensListResource
-            )
-            Core.mempty
+  requestClient AndroidManagementEnterprisesEnrollmentTokensList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidManagementService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AndroidManagementEnterprisesEnrollmentTokensListResource
+          )
+          Core.mempty

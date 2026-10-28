@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionHealthCheckServices.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionHealthCheckServices.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionHealthCheckServices.delete@ method which the
 -- 'ComputeRegionHealthCheckServicesDelete' request conforms to.
@@ -96,48 +94,44 @@ newComputeRegionHealthCheckServicesDelete ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionHealthCheckServicesDelete
-newComputeRegionHealthCheckServicesDelete healthCheckService project region =
-  ComputeRegionHealthCheckServicesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      healthCheckService = healthCheckService,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeRegionHealthCheckServicesDelete
+  healthCheckService
+  project
+  region =
     ComputeRegionHealthCheckServicesDelete
-  where
-  type
-    Rs ComputeRegionHealthCheckServicesDelete =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        healthCheckService = healthCheckService,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeRegionHealthCheckServicesDelete where
+  type Rs ComputeRegionHealthCheckServicesDelete = Operation
   type
     Scopes ComputeRegionHealthCheckServicesDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionHealthCheckServicesDelete {..} =
-      go
-        project
-        region
-        healthCheckService
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionHealthCheckServicesDeleteResource
-            )
-            Core.mempty
+  requestClient ComputeRegionHealthCheckServicesDelete {..} =
+    go
+      project
+      region
+      healthCheckService
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionHealthCheckServicesDeleteResource
+          )
+          Core.mempty

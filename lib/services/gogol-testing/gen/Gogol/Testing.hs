@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Allows developers to run automated tests for their mobile applications on Google infrastructure.
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference>
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference>
 module Gogol.Testing
   ( -- * Configuration
     testingService,
@@ -43,6 +41,31 @@ module Gogol.Testing
     TestingApplicationDetailServiceGetApkDetailsResource,
     TestingApplicationDetailServiceGetApkDetails (..),
     newTestingApplicationDetailServiceGetApkDetails,
+
+    -- ** testing.projects.deviceSessions.cancel
+    TestingProjectsDeviceSessionsCancelResource,
+    TestingProjectsDeviceSessionsCancel (..),
+    newTestingProjectsDeviceSessionsCancel,
+
+    -- ** testing.projects.deviceSessions.create
+    TestingProjectsDeviceSessionsCreateResource,
+    TestingProjectsDeviceSessionsCreate (..),
+    newTestingProjectsDeviceSessionsCreate,
+
+    -- ** testing.projects.deviceSessions.get
+    TestingProjectsDeviceSessionsGetResource,
+    TestingProjectsDeviceSessionsGet (..),
+    newTestingProjectsDeviceSessionsGet,
+
+    -- ** testing.projects.deviceSessions.list
+    TestingProjectsDeviceSessionsListResource,
+    TestingProjectsDeviceSessionsList (..),
+    newTestingProjectsDeviceSessionsList,
+
+    -- ** testing.projects.deviceSessions.patch
+    TestingProjectsDeviceSessionsPatchResource,
+    TestingProjectsDeviceSessionsPatch (..),
+    newTestingProjectsDeviceSessionsPatch,
 
     -- ** testing.projects.testMatrices.cancel
     TestingProjectsTestMatricesCancelResource,
@@ -141,6 +164,10 @@ module Gogol.Testing
     AppBundle (..),
     newAppBundle,
 
+    -- ** CancelDeviceSessionRequest
+    CancelDeviceSessionRequest (..),
+    newCancelDeviceSessionRequest,
+
     -- ** CancelTestMatrixResponse
     CancelTestMatrixResponse (..),
     newCancelTestMatrixResponse,
@@ -175,9 +202,24 @@ module Gogol.Testing
     DeviceIpBlockCatalog (..),
     newDeviceIpBlockCatalog,
 
+    -- ** DeviceSession
+    DeviceSession (..),
+    newDeviceSession,
+
+    -- ** DeviceSession_State
+    DeviceSession_State (..),
+
+    -- ** DirectAccessVersionInfo
+    DirectAccessVersionInfo (..),
+    newDirectAccessVersionInfo,
+
     -- ** Distribution
     Distribution (..),
     newDistribution,
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
 
     -- ** Environment
     Environment (..),
@@ -234,6 +276,10 @@ module Gogol.Testing
     -- ** IosModel_FormFactor
     IosModel_FormFactor (..),
 
+    -- ** IosRoboTest
+    IosRoboTest (..),
+    newIosRoboTest,
+
     -- ** IosRuntimeConfiguration
     IosRuntimeConfiguration (..),
     newIosRuntimeConfiguration,
@@ -254,9 +300,17 @@ module Gogol.Testing
     IosXcTest (..),
     newIosXcTest,
 
+    -- ** LabInfo
+    LabInfo (..),
+    newLabInfo,
+
     -- ** LauncherActivityIntent
     LauncherActivityIntent (..),
     newLauncherActivityIntent,
+
+    -- ** ListDeviceSessionsResponse
+    ListDeviceSessionsResponse (..),
+    newListDeviceSessionsResponse,
 
     -- ** Locale
     Locale (..),
@@ -265,6 +319,10 @@ module Gogol.Testing
     -- ** ManualSharding
     ManualSharding (..),
     newManualSharding,
+
+    -- ** MatrixErrorDetail
+    MatrixErrorDetail (..),
+    newMatrixErrorDetail,
 
     -- ** Metadata
     Metadata (..),
@@ -277,6 +335,10 @@ module Gogol.Testing
     -- ** NetworkConfigurationCatalog
     NetworkConfigurationCatalog (..),
     newNetworkConfigurationCatalog,
+
+    -- ** NoActivityIntent
+    NoActivityIntent (..),
+    newNoActivityIntent,
 
     -- ** ObbFile
     ObbFile (..),
@@ -323,6 +385,17 @@ module Gogol.Testing
     RoboStartingIntent (..),
     newRoboStartingIntent,
 
+    -- ** Service
+    Service (..),
+    newService,
+
+    -- ** SessionStateEvent
+    SessionStateEvent (..),
+    newSessionStateEvent,
+
+    -- ** SessionStateEvent_SessionState
+    SessionStateEvent_SessionState (..),
+
     -- ** Shard
     Shard (..),
     newShard,
@@ -330,6 +403,10 @@ module Gogol.Testing
     -- ** ShardingOption
     ShardingOption (..),
     newShardingOption,
+
+    -- ** SmartSharding
+    SmartSharding (..),
+    newSmartSharding,
 
     -- ** StartActivityIntent
     StartActivityIntent (..),
@@ -403,6 +480,10 @@ module Gogol.Testing
     UsesFeature (..),
     newUsesFeature,
 
+    -- ** UsesPermissionTag
+    UsesPermissionTag (..),
+    newUsesPermissionTag,
+
     -- ** XcodeVersion
     XcodeVersion (..),
     newXcodeVersion,
@@ -413,6 +494,11 @@ module Gogol.Testing
 where
 
 import Gogol.Testing.ApplicationDetailService.GetApkDetails
+import Gogol.Testing.Projects.DeviceSessions.Cancel
+import Gogol.Testing.Projects.DeviceSessions.Create
+import Gogol.Testing.Projects.DeviceSessions.Get
+import Gogol.Testing.Projects.DeviceSessions.List
+import Gogol.Testing.Projects.DeviceSessions.Patch
 import Gogol.Testing.Projects.TestMatrices.Cancel
 import Gogol.Testing.Projects.TestMatrices.Create
 import Gogol.Testing.Projects.TestMatrices.Get

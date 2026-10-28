@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Translate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -48,6 +46,61 @@ module Gogol.Translate
     TranslateProjectsGetSupportedLanguagesResource,
     TranslateProjectsGetSupportedLanguages (..),
     newTranslateProjectsGetSupportedLanguages,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.adaptiveMtFiles.adaptiveMtSentences.list
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesAdaptiveMtSentencesListResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesAdaptiveMtSentencesList (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesAdaptiveMtSentencesList,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.adaptiveMtFiles.delete
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesDeleteResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesDelete (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesDelete,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.adaptiveMtFiles.get
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesGetResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesGet (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesGet,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.adaptiveMtFiles.list
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesListResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesList (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtFilesList,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.adaptiveMtSentences.list
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtSentencesListResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtSentencesList (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsAdaptiveMtSentencesList,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.create
+    TranslateProjectsLocationsAdaptiveMtDatasetsCreateResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsCreate (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsCreate,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.delete
+    TranslateProjectsLocationsAdaptiveMtDatasetsDeleteResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsDelete (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsDelete,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.get
+    TranslateProjectsLocationsAdaptiveMtDatasetsGetResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsGet (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsGet,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.importAdaptiveMtFile
+    TranslateProjectsLocationsAdaptiveMtDatasetsImportAdaptiveMtFileResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsImportAdaptiveMtFile (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsImportAdaptiveMtFile,
+
+    -- ** translate.projects.locations.adaptiveMtDatasets.list
+    TranslateProjectsLocationsAdaptiveMtDatasetsListResource,
+    TranslateProjectsLocationsAdaptiveMtDatasetsList (..),
+    newTranslateProjectsLocationsAdaptiveMtDatasetsList,
+
+    -- ** translate.projects.locations.adaptiveMtTranslate
+    TranslateProjectsLocationsAdaptiveMtTranslateResource,
+    TranslateProjectsLocationsAdaptiveMtTranslate (..),
+    newTranslateProjectsLocationsAdaptiveMtTranslate,
 
     -- ** translate.projects.locations.batchTranslateDocument
     TranslateProjectsLocationsBatchTranslateDocumentResource,
@@ -209,6 +262,11 @@ module Gogol.Translate
     TranslateProjectsLocationsOperationsWait (..),
     newTranslateProjectsLocationsOperationsWait,
 
+    -- ** translate.projects.locations.romanizeText
+    TranslateProjectsLocationsRomanizeTextResource,
+    TranslateProjectsLocationsRomanizeText (..),
+    newTranslateProjectsLocationsRomanizeText,
+
     -- ** translate.projects.locations.translateDocument
     TranslateProjectsLocationsTranslateDocumentResource,
     TranslateProjectsLocationsTranslateDocument (..),
@@ -219,6 +277,11 @@ module Gogol.Translate
     TranslateProjectsLocationsTranslateText (..),
     newTranslateProjectsLocationsTranslateText,
 
+    -- ** translate.projects.romanizeText
+    TranslateProjectsRomanizeTextResource,
+    TranslateProjectsRomanizeText (..),
+    newTranslateProjectsRomanizeText,
+
     -- ** translate.projects.translateText
     TranslateProjectsTranslateTextResource,
     TranslateProjectsTranslateText (..),
@@ -228,6 +291,30 @@ module Gogol.Translate
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AdaptiveMtDataset
+    AdaptiveMtDataset (..),
+    newAdaptiveMtDataset,
+
+    -- ** AdaptiveMtFile
+    AdaptiveMtFile (..),
+    newAdaptiveMtFile,
+
+    -- ** AdaptiveMtSentence
+    AdaptiveMtSentence (..),
+    newAdaptiveMtSentence,
+
+    -- ** AdaptiveMtTranslateRequest
+    AdaptiveMtTranslateRequest (..),
+    newAdaptiveMtTranslateRequest,
+
+    -- ** AdaptiveMtTranslateResponse
+    AdaptiveMtTranslateResponse (..),
+    newAdaptiveMtTranslateResponse,
+
+    -- ** AdaptiveMtTranslation
+    AdaptiveMtTranslation (..),
+    newAdaptiveMtTranslation,
 
     -- ** BatchDocumentInputConfig
     BatchDocumentInputConfig (..),
@@ -325,6 +412,10 @@ module Gogol.Translate
     ExportDataRequest (..),
     newExportDataRequest,
 
+    -- ** FileInputSource
+    FileInputSource (..),
+    newFileInputSource,
+
     -- ** GcsDestination
     GcsDestination (..),
     newGcsDestination,
@@ -344,6 +435,10 @@ module Gogol.Translate
     -- ** Glossary
     Glossary (..),
     newGlossary,
+
+    -- ** GlossaryConfig
+    GlossaryConfig (..),
+    newGlossaryConfig,
 
     -- ** GlossaryEntry
     GlossaryEntry (..),
@@ -365,6 +460,14 @@ module Gogol.Translate
     GlossaryTermsSet (..),
     newGlossaryTermsSet,
 
+    -- ** ImportAdaptiveMtFileRequest
+    ImportAdaptiveMtFileRequest (..),
+    newImportAdaptiveMtFileRequest,
+
+    -- ** ImportAdaptiveMtFileResponse
+    ImportAdaptiveMtFileResponse (..),
+    newImportAdaptiveMtFileResponse,
+
     -- ** ImportDataRequest
     ImportDataRequest (..),
     newImportDataRequest,
@@ -384,6 +487,18 @@ module Gogol.Translate
     -- ** LanguageCodesSet
     LanguageCodesSet (..),
     newLanguageCodesSet,
+
+    -- ** ListAdaptiveMtDatasetsResponse
+    ListAdaptiveMtDatasetsResponse (..),
+    newListAdaptiveMtDatasetsResponse,
+
+    -- ** ListAdaptiveMtFilesResponse
+    ListAdaptiveMtFilesResponse (..),
+    newListAdaptiveMtFilesResponse,
+
+    -- ** ListAdaptiveMtSentencesResponse
+    ListAdaptiveMtSentencesResponse (..),
+    newListAdaptiveMtSentencesResponse,
 
     -- ** ListDatasetsResponse
     ListDatasetsResponse (..),
@@ -445,6 +560,30 @@ module Gogol.Translate
     OutputConfig (..),
     newOutputConfig,
 
+    -- ** ReferenceSentenceConfig
+    ReferenceSentenceConfig (..),
+    newReferenceSentenceConfig,
+
+    -- ** ReferenceSentencePair
+    ReferenceSentencePair (..),
+    newReferenceSentencePair,
+
+    -- ** ReferenceSentencePairList
+    ReferenceSentencePairList (..),
+    newReferenceSentencePairList,
+
+    -- ** Romanization
+    Romanization (..),
+    newRomanization,
+
+    -- ** RomanizeTextRequest
+    RomanizeTextRequest (..),
+    newRomanizeTextRequest,
+
+    -- ** RomanizeTextResponse
+    RomanizeTextResponse (..),
+    newRomanizeTextResponse,
+
     -- ** Status
     Status (..),
     newStatus,
@@ -493,6 +632,10 @@ module Gogol.Translate
     Translation (..),
     newTranslation,
 
+    -- ** TransliterationConfig
+    TransliterationConfig (..),
+    newTransliterationConfig,
+
     -- ** WaitOperationRequest
     WaitOperationRequest (..),
     newWaitOperationRequest,
@@ -501,6 +644,17 @@ where
 
 import Gogol.Translate.Projects.DetectLanguage
 import Gogol.Translate.Projects.GetSupportedLanguages
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.AdaptiveMtFiles.AdaptiveMtSentences.List
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.AdaptiveMtFiles.Delete
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.AdaptiveMtFiles.Get
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.AdaptiveMtFiles.List
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.AdaptiveMtSentences.List
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.Create
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.Delete
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.Get
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.ImportAdaptiveMtFile
+import Gogol.Translate.Projects.Locations.AdaptiveMtDatasets.List
+import Gogol.Translate.Projects.Locations.AdaptiveMtTranslate
 import Gogol.Translate.Projects.Locations.BatchTranslateDocument
 import Gogol.Translate.Projects.Locations.BatchTranslateText
 import Gogol.Translate.Projects.Locations.Datasets.Create
@@ -533,7 +687,9 @@ import Gogol.Translate.Projects.Locations.Operations.Delete
 import Gogol.Translate.Projects.Locations.Operations.Get
 import Gogol.Translate.Projects.Locations.Operations.List
 import Gogol.Translate.Projects.Locations.Operations.Wait
+import Gogol.Translate.Projects.Locations.RomanizeText
 import Gogol.Translate.Projects.Locations.TranslateDocument
 import Gogol.Translate.Projects.Locations.TranslateText
+import Gogol.Translate.Projects.RomanizeText
 import Gogol.Translate.Projects.TranslateText
 import Gogol.Translate.Types

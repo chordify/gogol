@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalog.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudPrivateCatalog.Internal.Product
@@ -61,7 +59,7 @@ module Gogol.CloudPrivateCatalog.Internal.Product
 where
 
 import Gogol.CloudPrivateCatalog.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | The readonly representation of a catalog computed with a given resource context.
 --
@@ -85,17 +83,15 @@ newGoogleCloudPrivatecatalogV1beta1Catalog ::
   GoogleCloudPrivatecatalogV1beta1Catalog
 newGoogleCloudPrivatecatalogV1beta1Catalog =
   GoogleCloudPrivatecatalogV1beta1Catalog
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       description = Core.Nothing,
       displayName = Core.Nothing,
       name = Core.Nothing,
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudPrivatecatalogV1beta1Catalog
-  where
+instance Core.FromJSON GoogleCloudPrivatecatalogV1beta1Catalog where
   parseJSON =
     Core.withObject
       "GoogleCloudPrivatecatalogV1beta1Catalog"
@@ -108,10 +104,7 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudPrivatecatalogV1beta1Catalog
-  where
+instance Core.ToJSON GoogleCloudPrivatecatalogV1beta1Catalog where
   toJSON GoogleCloudPrivatecatalogV1beta1Catalog {..} =
     Core.object
       ( Core.catMaybes
@@ -171,10 +164,7 @@ newGoogleCloudPrivatecatalogV1beta1Product =
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudPrivatecatalogV1beta1Product
-  where
+instance Core.FromJSON GoogleCloudPrivatecatalogV1beta1Product where
   parseJSON =
     Core.withObject
       "GoogleCloudPrivatecatalogV1beta1Product"
@@ -188,10 +178,7 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudPrivatecatalogV1beta1Product
-  where
+instance Core.ToJSON GoogleCloudPrivatecatalogV1beta1Product where
   toJSON GoogleCloudPrivatecatalogV1beta1Product {..} =
     Core.object
       ( Core.catMaybes
@@ -226,10 +213,12 @@ newGoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
-newGoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata additional =
-  GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
-    { additional = additional
-    }
+newGoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
+  additional =
+    GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -247,9 +236,8 @@ instance
   Core.ToJSON
     GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata
   where
-  toJSON
-    GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudPrivatecatalogV1beta1Product_DisplayMetadata {..} =
+    Core.toJSON additional
 
 -- | Response message for PrivateCatalog.SearchCatalogs.
 --
@@ -267,7 +255,8 @@ newGoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse ::
   GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
 newGoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
-    { catalogs = Core.Nothing,
+    { catalogs =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -281,21 +270,20 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
             Core.<$> (o Core..:? "catalogs")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse
   where
-  toJSON
-    GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("catalogs" Core..=) Core.<$> catalogs,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("catalogs" Core..=) Core.<$> catalogs,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Response message for PrivateCatalog.SearchProducts.
 --
@@ -313,7 +301,8 @@ newGoogleCloudPrivatecatalogV1beta1SearchProductsResponse ::
   GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
 newGoogleCloudPrivatecatalogV1beta1SearchProductsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       products = Core.Nothing
     }
 
@@ -327,21 +316,20 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "products")
+            Core.<*> (o Core..:? "products")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogV1beta1SearchProductsResponse
   where
-  toJSON
-    GoogleCloudPrivatecatalogV1beta1SearchProductsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-              ("products" Core..=) Core.<$> products
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogV1beta1SearchProductsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("products" Core..=) Core.<$> products
+          ]
+      )
 
 -- | Response message for PrivateCatalog.SearchVersions.
 --
@@ -359,7 +347,8 @@ newGoogleCloudPrivatecatalogV1beta1SearchVersionsResponse ::
   GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
 newGoogleCloudPrivatecatalogV1beta1SearchVersionsResponse =
   GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       versions = Core.Nothing
     }
 
@@ -373,21 +362,20 @@ instance
       ( \o ->
           GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "versions")
+            Core.<*> (o Core..:? "versions")
       )
 
 instance
   Core.ToJSON
     GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse
   where
-  toJSON
-    GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-              ("versions" Core..=) Core.<$> versions
-            ]
-        )
+  toJSON GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("versions" Core..=) Core.<$> versions
+          ]
+      )
 
 -- | The consumer representation of a version which is a child resource under a @Product@ with asset data.
 --
@@ -420,10 +408,7 @@ newGoogleCloudPrivatecatalogV1beta1Version =
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudPrivatecatalogV1beta1Version
-  where
+instance Core.FromJSON GoogleCloudPrivatecatalogV1beta1Version where
   parseJSON =
     Core.withObject
       "GoogleCloudPrivatecatalogV1beta1Version"
@@ -436,10 +421,7 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudPrivatecatalogV1beta1Version
-  where
+instance Core.ToJSON GoogleCloudPrivatecatalogV1beta1Version where
   toJSON GoogleCloudPrivatecatalogV1beta1Version {..} =
     Core.object
       ( Core.catMaybes
@@ -466,7 +448,10 @@ newGoogleCloudPrivatecatalogV1beta1Version_Asset ::
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudPrivatecatalogV1beta1Version_Asset
 newGoogleCloudPrivatecatalogV1beta1Version_Asset additional =
-  GoogleCloudPrivatecatalogV1beta1Version_Asset {additional = additional}
+  GoogleCloudPrivatecatalogV1beta1Version_Asset
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -480,10 +465,6 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudPrivatecatalogV1beta1Version_Asset
-  where
-  toJSON
-    GoogleCloudPrivatecatalogV1beta1Version_Asset {..} =
-      Core.toJSON additional
+instance Core.ToJSON GoogleCloudPrivatecatalogV1beta1Version_Asset where
+  toJSON GoogleCloudPrivatecatalogV1beta1Version_Asset {..} =
+    Core.toJSON additional

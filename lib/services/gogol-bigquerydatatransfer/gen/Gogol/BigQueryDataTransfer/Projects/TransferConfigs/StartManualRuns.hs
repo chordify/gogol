@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQueryDataTransfer.Projects.TransferConfigs.StartManualRuns
 where
 
 import Gogol.BigQueryDataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.startManualRuns@ method which the
 -- 'BigQueryDataTransferProjectsTransferConfigsStartManualRuns' request conforms to.
@@ -53,12 +51,8 @@ type BigQueryDataTransferProjectsTransferConfigsStartManualRunsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              StartManualTransferRunsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              StartManualTransferRunsResponse
+    Core.:> Core.ReqBody '[Core.JSON] StartManualTransferRunsRequest
+    Core.:> Core.Post '[Core.JSON] StartManualTransferRunsResponse
 
 -- | Start manual transfer runs to be executed now with schedule/time equal to current time. The transfer runs can be created for a time range where the run/time is between start/time (inclusive) and end/time (exclusive), or for a specific run_time.
 --
@@ -70,7 +64,7 @@ data BigQueryDataTransferProjectsTransferConfigsStartManualRuns = BigQueryDataTr
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Transfer configuration name in the form: @projects\/{project_id}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}@.
+    -- | Required. Transfer configuration name in the form: @projects\/{project_id}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: StartManualTransferRunsRequest,
@@ -83,29 +77,31 @@ data BigQueryDataTransferProjectsTransferConfigsStartManualRuns = BigQueryDataTr
 
 -- | Creates a value of 'BigQueryDataTransferProjectsTransferConfigsStartManualRuns' with the minimum fields required to make a request.
 newBigQueryDataTransferProjectsTransferConfigsStartManualRuns ::
-  -- |  Transfer configuration name in the form: @projects\/{project_id}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}@. See 'parent'.
+  -- |  Required. Transfer configuration name in the form: @projects\/{project_id}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/locations\/{location_id}\/transferConfigs\/{config_id}@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   StartManualTransferRunsRequest ->
   BigQueryDataTransferProjectsTransferConfigsStartManualRuns
-newBigQueryDataTransferProjectsTransferConfigsStartManualRuns parent payload =
-  BigQueryDataTransferProjectsTransferConfigsStartManualRuns
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBigQueryDataTransferProjectsTransferConfigsStartManualRuns
+  parent
+  payload =
+    BigQueryDataTransferProjectsTransferConfigsStartManualRuns
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BigQueryDataTransferProjectsTransferConfigsStartManualRuns
   where
   type
-    Rs
-      BigQueryDataTransferProjectsTransferConfigsStartManualRuns =
+    Rs BigQueryDataTransferProjectsTransferConfigsStartManualRuns =
       StartManualTransferRunsResponse
   type
     Scopes

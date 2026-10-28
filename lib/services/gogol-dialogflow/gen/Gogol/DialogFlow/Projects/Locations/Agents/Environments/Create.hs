@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Environments.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Create
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.environments.create@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEnvironmentsCreate' request conforms to.
@@ -54,9 +52,7 @@ type DialogFlowProjectsLocationsAgentsEnvironmentsCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Environment
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3Environment
     Core.:> Core.Post '[Core.JSON] GoogleLongrunningOperation
 
 -- | Creates an Environment in the specified Agent. This method is a <https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation long-running operation>. The returned @Operation@ type has the following method-specific fields: - @metadata@: An empty <https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct Struct message> - @response@: Environment
@@ -87,28 +83,29 @@ newDialogFlowProjectsLocationsAgentsEnvironmentsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3Environment ->
   DialogFlowProjectsLocationsAgentsEnvironmentsCreate
-newDialogFlowProjectsLocationsAgentsEnvironmentsCreate parent payload =
-  DialogFlowProjectsLocationsAgentsEnvironmentsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsEnvironmentsCreate
+  parent
+  payload =
+    DialogFlowProjectsLocationsAgentsEnvironmentsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DialogFlowProjectsLocationsAgentsEnvironmentsCreate
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsEnvironmentsCreate =
+    Rs DialogFlowProjectsLocationsAgentsEnvironmentsCreate =
       GoogleLongrunningOperation
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsEnvironmentsCreate =
+    Scopes DialogFlowProjectsLocationsAgentsEnvironmentsCreate =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsEnvironmentsCreate {..} =

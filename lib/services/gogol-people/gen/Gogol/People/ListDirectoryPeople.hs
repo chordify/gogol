@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.ListDirectoryPeople
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.People.ListDirectoryPeople
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.listDirectoryPeople@ method which the
 -- 'PeoplePeopleListDirectoryPeople' request conforms to.
@@ -57,16 +55,12 @@ type PeoplePeopleListDirectoryPeopleResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "readMask" Core.FieldMask
     Core.:> Core.QueryParam "requestSyncToken" Core.Bool
-    Core.:> Core.QueryParams
-              "sources"
-              PeopleListDirectoryPeopleSources
+    Core.:> Core.QueryParams "sources" PeopleListDirectoryPeopleSources
     Core.:> Core.QueryParam "syncToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListDirectoryPeopleResponse
+    Core.:> Core.Get '[Core.JSON] ListDirectoryPeopleResponse
 
 -- | Provides a list of domain profiles and domain contacts in the authenticated user\'s domain directory. When the @sync_token@ is specified, resources deleted since the last sync will be returned as a person with @PersonMetadata.deleted@ set to true. When the @page_token@ or @sync_token@ is specified, all other request parameters must match the first call. Writes may have a propagation delay of several minutes for sync requests. Incremental syncs are not intended for read-after-write use cases. See example usage at </people/v1/directory#list_the_directory_people_that_have_changed List the directory people that have changed>.
 --
@@ -118,16 +112,11 @@ newPeoplePeopleListDirectoryPeople =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeoplePeopleListDirectoryPeople
-  where
+instance Core.GoogleRequest PeoplePeopleListDirectoryPeople where
   type
     Rs PeoplePeopleListDirectoryPeople =
       ListDirectoryPeopleResponse
-  type
-    Scopes PeoplePeopleListDirectoryPeople =
-      '[Directory'Readonly]
+  type Scopes PeoplePeopleListDirectoryPeople = '[Directory'Readonly]
   requestClient PeoplePeopleListDirectoryPeople {..} =
     go
       xgafv
@@ -147,7 +136,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleListDirectoryPeopleResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleListDirectoryPeopleResource)
           Core.mempty

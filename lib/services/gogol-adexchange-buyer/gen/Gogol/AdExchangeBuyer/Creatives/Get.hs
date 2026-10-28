@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Creatives.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Creatives.Get
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.creatives.get@ method which the
 -- 'AdExchangeBuyerCreativesGet' request conforms to.
@@ -77,14 +75,9 @@ newAdExchangeBuyerCreativesGet accountId buyerCreativeId =
       buyerCreativeId = buyerCreativeId
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerCreativesGet
-  where
+instance Core.GoogleRequest AdExchangeBuyerCreativesGet where
   type Rs AdExchangeBuyerCreativesGet = Creative
-  type
-    Scopes AdExchangeBuyerCreativesGet =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerCreativesGet = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerCreativesGet {..} =
     go
       accountId
@@ -94,7 +87,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerCreativesGetResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerCreativesGetResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.Get
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.get@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsGet' request conforms to.
@@ -87,45 +85,43 @@ newAndroidPublisherMonetizationSubscriptionsGet ::
   -- |  Required. The unique product ID of the subscription to get. See 'productId'.
   Core.Text ->
   AndroidPublisherMonetizationSubscriptionsGet
-newAndroidPublisherMonetizationSubscriptionsGet packageName productId =
-  AndroidPublisherMonetizationSubscriptionsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsGet
+  packageName
+  productId =
+    AndroidPublisherMonetizationSubscriptionsGet
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        productId = productId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherMonetizationSubscriptionsGet
   where
+  type Rs AndroidPublisherMonetizationSubscriptionsGet = Subscription
   type
-    Rs AndroidPublisherMonetizationSubscriptionsGet =
-      Subscription
-  type
-    Scopes
-      AndroidPublisherMonetizationSubscriptionsGet =
+    Scopes AndroidPublisherMonetizationSubscriptionsGet =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherMonetizationSubscriptionsGet {..} =
-      go
-        packageName
-        productId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherMonetizationSubscriptionsGetResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherMonetizationSubscriptionsGet {..} =
+    go
+      packageName
+      productId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherMonetizationSubscriptionsGetResource
+          )
+          Core.mempty

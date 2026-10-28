@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Managedconfigurationsforuser.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Managedconfigurationsforuser.Update
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.managedconfigurationsforuser.update@ method which the
 -- 'AndroidEnterpriseManagedconfigurationsforuserUpdate' request conforms to.
@@ -52,9 +50,7 @@ type AndroidEnterpriseManagedconfigurationsforuserUpdateResource =
     Core.:> "users"
     Core.:> Core.Capture "userId" Core.Text
     Core.:> "managedConfigurationsForUser"
-    Core.:> Core.Capture
-              "managedConfigurationForUserId"
-              Core.Text
+    Core.:> Core.Capture "managedConfigurationForUserId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -100,30 +96,34 @@ newAndroidEnterpriseManagedconfigurationsforuserUpdate ::
   -- |  The ID of the user. See 'userId'.
   Core.Text ->
   AndroidEnterpriseManagedconfigurationsforuserUpdate
-newAndroidEnterpriseManagedconfigurationsforuserUpdate enterpriseId managedConfigurationForUserId payload userId =
-  AndroidEnterpriseManagedconfigurationsforuserUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      enterpriseId = enterpriseId,
-      managedConfigurationForUserId = managedConfigurationForUserId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
+newAndroidEnterpriseManagedconfigurationsforuserUpdate
+  enterpriseId
+  managedConfigurationForUserId
+  payload
+  userId =
+    AndroidEnterpriseManagedconfigurationsforuserUpdate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        enterpriseId = enterpriseId,
+        managedConfigurationForUserId =
+          managedConfigurationForUserId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
 
 instance
   Core.GoogleRequest
     AndroidEnterpriseManagedconfigurationsforuserUpdate
   where
   type
-    Rs
-      AndroidEnterpriseManagedconfigurationsforuserUpdate =
+    Rs AndroidEnterpriseManagedconfigurationsforuserUpdate =
       ManagedConfiguration
   type
-    Scopes
-      AndroidEnterpriseManagedconfigurationsforuserUpdate =
+    Scopes AndroidEnterpriseManagedconfigurationsforuserUpdate =
       '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsforuserUpdate {..} =

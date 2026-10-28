@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -68,6 +66,11 @@ module Gogol.BigQuery
     BigQueryDatasetsPatchResource,
     BigQueryDatasetsPatch (..),
     newBigQueryDatasetsPatch,
+
+    -- ** bigquery.datasets.undelete
+    BigQueryDatasetsUndeleteResource,
+    BigQueryDatasetsUndelete (..),
+    newBigQueryDatasetsUndelete,
 
     -- ** bigquery.datasets.update
     BigQueryDatasetsUpdateResource,
@@ -149,6 +152,11 @@ module Gogol.BigQuery
     BigQueryRoutinesGet (..),
     newBigQueryRoutinesGet,
 
+    -- ** bigquery.routines.getIamPolicy
+    BigQueryRoutinesGetIamPolicyResource,
+    BigQueryRoutinesGetIamPolicy (..),
+    newBigQueryRoutinesGetIamPolicy,
+
     -- ** bigquery.routines.insert
     BigQueryRoutinesInsertResource,
     BigQueryRoutinesInsert (..),
@@ -159,30 +167,55 @@ module Gogol.BigQuery
     BigQueryRoutinesList (..),
     newBigQueryRoutinesList,
 
+    -- ** bigquery.routines.setIamPolicy
+    BigQueryRoutinesSetIamPolicyResource,
+    BigQueryRoutinesSetIamPolicy (..),
+    newBigQueryRoutinesSetIamPolicy,
+
     -- ** bigquery.routines.update
     BigQueryRoutinesUpdateResource,
     BigQueryRoutinesUpdate (..),
     newBigQueryRoutinesUpdate,
+
+    -- ** bigquery.rowAccessPolicies.batchDelete
+    BigQueryRowAccessPoliciesBatchDeleteResource,
+    BigQueryRowAccessPoliciesBatchDelete (..),
+    newBigQueryRowAccessPoliciesBatchDelete,
+
+    -- ** bigquery.rowAccessPolicies.delete
+    BigQueryRowAccessPoliciesDeleteResource,
+    BigQueryRowAccessPoliciesDelete (..),
+    newBigQueryRowAccessPoliciesDelete,
+
+    -- ** bigquery.rowAccessPolicies.get
+    BigQueryRowAccessPoliciesGetResource,
+    BigQueryRowAccessPoliciesGet (..),
+    newBigQueryRowAccessPoliciesGet,
 
     -- ** bigquery.rowAccessPolicies.getIamPolicy
     BigQueryRowAccessPoliciesGetIamPolicyResource,
     BigQueryRowAccessPoliciesGetIamPolicy (..),
     newBigQueryRowAccessPoliciesGetIamPolicy,
 
+    -- ** bigquery.rowAccessPolicies.insert
+    BigQueryRowAccessPoliciesInsertResource,
+    BigQueryRowAccessPoliciesInsert (..),
+    newBigQueryRowAccessPoliciesInsert,
+
     -- ** bigquery.rowAccessPolicies.list
     BigQueryRowAccessPoliciesListResource,
     BigQueryRowAccessPoliciesList (..),
     newBigQueryRowAccessPoliciesList,
 
-    -- ** bigquery.rowAccessPolicies.setIamPolicy
-    BigQueryRowAccessPoliciesSetIamPolicyResource,
-    BigQueryRowAccessPoliciesSetIamPolicy (..),
-    newBigQueryRowAccessPoliciesSetIamPolicy,
-
     -- ** bigquery.rowAccessPolicies.testIamPermissions
     BigQueryRowAccessPoliciesTestIamPermissionsResource,
     BigQueryRowAccessPoliciesTestIamPermissions (..),
     newBigQueryRowAccessPoliciesTestIamPermissions,
+
+    -- ** bigquery.rowAccessPolicies.update
+    BigQueryRowAccessPoliciesUpdateResource,
+    BigQueryRowAccessPoliciesUpdate (..),
+    newBigQueryRowAccessPoliciesUpdate,
 
     -- ** bigquery.tabledata.insertAll
     BigQueryTabledataInsertAllResource,
@@ -241,9 +274,16 @@ module Gogol.BigQuery
 
     -- * Types
 
+    -- ** Xgafv
+    Xgafv (..),
+
     -- ** AggregateClassificationMetrics
     AggregateClassificationMetrics (..),
     newAggregateClassificationMetrics,
+
+    -- ** AggregationThresholdPolicy
+    AggregationThresholdPolicy (..),
+    newAggregationThresholdPolicy,
 
     -- ** Argument
     Argument (..),
@@ -310,13 +350,36 @@ module Gogol.BigQuery
     AvroOptions (..),
     newAvroOptions,
 
+    -- ** BatchDeleteRowAccessPoliciesRequest
+    BatchDeleteRowAccessPoliciesRequest (..),
+    newBatchDeleteRowAccessPoliciesRequest,
+
     -- ** BiEngineReason
     BiEngineReason (..),
     newBiEngineReason,
 
+    -- ** BiEngineReason_Code
+    BiEngineReason_Code (..),
+
     -- ** BiEngineStatistics
     BiEngineStatistics (..),
     newBiEngineStatistics,
+
+    -- ** BiEngineStatistics_AccelerationMode
+    BiEngineStatistics_AccelerationMode (..),
+
+    -- ** BiEngineStatistics_BiEngineMode
+    BiEngineStatistics_BiEngineMode (..),
+
+    -- ** BigLakeConfiguration
+    BigLakeConfiguration (..),
+    newBigLakeConfiguration,
+
+    -- ** BigLakeConfiguration_FileFormat
+    BigLakeConfiguration_FileFormat (..),
+
+    -- ** BigLakeConfiguration_TableFormat
+    BigLakeConfiguration_TableFormat (..),
 
     -- ** BigQueryModelTraining
     BigQueryModelTraining (..),
@@ -398,9 +461,17 @@ module Gogol.BigQuery
     CsvOptions (..),
     newCsvOptions,
 
+    -- ** DataFormatOptions
+    DataFormatOptions (..),
+    newDataFormatOptions,
+
     -- ** DataMaskingStatistics
     DataMaskingStatistics (..),
     newDataMaskingStatistics,
+
+    -- ** DataPolicyOption
+    DataPolicyOption (..),
+    newDataPolicyOption,
 
     -- ** DataSplitResult
     DataSplitResult (..),
@@ -414,9 +485,19 @@ module Gogol.BigQuery
     Dataset_AccessItem (..),
     newDataset_AccessItem,
 
+    -- ** Dataset_DefaultRoundingMode
+    Dataset_DefaultRoundingMode (..),
+
     -- ** Dataset_Labels
     Dataset_Labels (..),
     newDataset_Labels,
+
+    -- ** Dataset_ResourceTags
+    Dataset_ResourceTags (..),
+    newDataset_ResourceTags,
+
+    -- ** Dataset_StorageBillingModel
+    Dataset_StorageBillingModel (..),
 
     -- ** Dataset_TagsItem
     Dataset_TagsItem (..),
@@ -452,6 +533,10 @@ module Gogol.BigQuery
     -- ** DestinationTableProperties_Labels
     DestinationTableProperties_Labels (..),
     newDestinationTableProperties_Labels,
+
+    -- ** DifferentialPrivacyPolicy
+    DifferentialPrivacyPolicy (..),
+    newDifferentialPrivacyPolicy,
 
     -- ** DimensionalityReductionMetrics
     DimensionalityReductionMetrics (..),
@@ -493,6 +578,9 @@ module Gogol.BigQuery
     ExplainQueryStage (..),
     newExplainQueryStage,
 
+    -- ** ExplainQueryStage_ComputeMode
+    ExplainQueryStage_ComputeMode (..),
+
     -- ** ExplainQueryStep
     ExplainQueryStep (..),
     newExplainQueryStep,
@@ -501,17 +589,71 @@ module Gogol.BigQuery
     Explanation (..),
     newExplanation,
 
+    -- ** ExportDataStatistics
+    ExportDataStatistics (..),
+    newExportDataStatistics,
+
     -- ** Expr
     Expr (..),
     newExpr,
+
+    -- ** ExternalCatalogDatasetOptions
+    ExternalCatalogDatasetOptions (..),
+    newExternalCatalogDatasetOptions,
+
+    -- ** ExternalCatalogDatasetOptions_Parameters
+    ExternalCatalogDatasetOptions_Parameters (..),
+    newExternalCatalogDatasetOptions_Parameters,
+
+    -- ** ExternalCatalogTableOptions
+    ExternalCatalogTableOptions (..),
+    newExternalCatalogTableOptions,
+
+    -- ** ExternalCatalogTableOptions_Parameters
+    ExternalCatalogTableOptions_Parameters (..),
+    newExternalCatalogTableOptions_Parameters,
 
     -- ** ExternalDataConfiguration
     ExternalDataConfiguration (..),
     newExternalDataConfiguration,
 
+    -- ** ExternalDataConfiguration_DecimalTargetTypesItem
+    ExternalDataConfiguration_DecimalTargetTypesItem (..),
+
+    -- ** ExternalDataConfiguration_FileSetSpecType
+    ExternalDataConfiguration_FileSetSpecType (..),
+
+    -- ** ExternalDataConfiguration_JsonExtension
+    ExternalDataConfiguration_JsonExtension (..),
+
+    -- ** ExternalDataConfiguration_MetadataCacheMode
+    ExternalDataConfiguration_MetadataCacheMode (..),
+
+    -- ** ExternalDataConfiguration_ObjectMetadata
+    ExternalDataConfiguration_ObjectMetadata (..),
+
+    -- ** ExternalDatasetReference
+    ExternalDatasetReference (..),
+    newExternalDatasetReference,
+
+    -- ** ExternalServiceCost
+    ExternalServiceCost (..),
+    newExternalServiceCost,
+
     -- ** FeatureValue
     FeatureValue (..),
     newFeatureValue,
+
+    -- ** ForeignTypeInfo
+    ForeignTypeInfo (..),
+    newForeignTypeInfo,
+
+    -- ** ForeignTypeInfo_TypeSystem
+    ForeignTypeInfo_TypeSystem (..),
+
+    -- ** ForeignViewDefinition
+    ForeignViewDefinition (..),
+    newForeignViewDefinition,
 
     -- ** GetIamPolicyRequest
     GetIamPolicyRequest (..),
@@ -537,6 +679,10 @@ module Gogol.BigQuery
     GoogleSheetsOptions (..),
     newGoogleSheetsOptions,
 
+    -- ** HighCardinalityJoin
+    HighCardinalityJoin (..),
+    newHighCardinalityJoin,
+
     -- ** HivePartitioningOptions
     HivePartitioningOptions (..),
     newHivePartitioningOptions,
@@ -555,6 +701,13 @@ module Gogol.BigQuery
     -- ** IndexUnusedReason
     IndexUnusedReason (..),
     newIndexUnusedReason,
+
+    -- ** IndexUnusedReason_Code
+    IndexUnusedReason_Code (..),
+
+    -- ** InputDataChange
+    InputDataChange (..),
+    newInputDataChange,
 
     -- ** IntArray
     IntArray (..),
@@ -604,6 +757,18 @@ module Gogol.BigQuery
     JobConfigurationLoad (..),
     newJobConfigurationLoad,
 
+    -- ** JobConfigurationLoad_ColumnNameCharacterMap
+    JobConfigurationLoad_ColumnNameCharacterMap (..),
+
+    -- ** JobConfigurationLoad_DecimalTargetTypesItem
+    JobConfigurationLoad_DecimalTargetTypesItem (..),
+
+    -- ** JobConfigurationLoad_FileSetSpecType
+    JobConfigurationLoad_FileSetSpecType (..),
+
+    -- ** JobConfigurationLoad_JsonExtension
+    JobConfigurationLoad_JsonExtension (..),
+
     -- ** JobConfigurationQuery
     JobConfigurationQuery (..),
     newJobConfigurationQuery,
@@ -615,6 +780,16 @@ module Gogol.BigQuery
     -- ** JobConfigurationTableCopy
     JobConfigurationTableCopy (..),
     newJobConfigurationTableCopy,
+
+    -- ** JobConfigurationTableCopy_OperationType
+    JobConfigurationTableCopy_OperationType (..),
+
+    -- ** JobCreationReason
+    JobCreationReason (..),
+    newJobCreationReason,
+
+    -- ** JobCreationReason_Code
+    JobCreationReason_Code (..),
 
     -- ** JobList
     JobList (..),
@@ -631,6 +806,9 @@ module Gogol.BigQuery
     -- ** JobStatistics
     JobStatistics (..),
     newJobStatistics,
+
+    -- ** JobStatistics_Edition
+    JobStatistics_Edition (..),
 
     -- ** JobStatistics_ReservationUsageItem
     JobStatistics_ReservationUsageItem (..),
@@ -660,9 +838,31 @@ module Gogol.BigQuery
     JobStatus (..),
     newJobStatus,
 
+    -- ** JoinRestrictionPolicy
+    JoinRestrictionPolicy (..),
+    newJoinRestrictionPolicy,
+
+    -- ** JoinRestrictionPolicy_JoinCondition
+    JoinRestrictionPolicy_JoinCondition (..),
+
     -- ** JsonObject
     JsonObject (..),
     newJsonObject,
+
+    -- ** JsonOptions
+    JsonOptions (..),
+    newJsonOptions,
+
+    -- ** LinkedDatasetMetadata
+    LinkedDatasetMetadata (..),
+    newLinkedDatasetMetadata,
+
+    -- ** LinkedDatasetMetadata_LinkState
+    LinkedDatasetMetadata_LinkState (..),
+
+    -- ** LinkedDatasetSource
+    LinkedDatasetSource (..),
+    newLinkedDatasetSource,
 
     -- ** ListModelsResponse
     ListModelsResponse (..),
@@ -676,17 +876,46 @@ module Gogol.BigQuery
     ListRowAccessPoliciesResponse (..),
     newListRowAccessPoliciesResponse,
 
+    -- ** LoadQueryStatistics
+    LoadQueryStatistics (..),
+    newLoadQueryStatistics,
+
     -- ** LocationMetadata
     LocationMetadata (..),
     newLocationMetadata,
+
+    -- ** MaterializedView
+    MaterializedView (..),
+    newMaterializedView,
+
+    -- ** MaterializedView_RejectedReason
+    MaterializedView_RejectedReason (..),
 
     -- ** MaterializedViewDefinition
     MaterializedViewDefinition (..),
     newMaterializedViewDefinition,
 
+    -- ** MaterializedViewStatistics
+    MaterializedViewStatistics (..),
+    newMaterializedViewStatistics,
+
+    -- ** MaterializedViewStatus
+    MaterializedViewStatus (..),
+    newMaterializedViewStatus,
+
+    -- ** MetadataCacheStatistics
+    MetadataCacheStatistics (..),
+    newMetadataCacheStatistics,
+
     -- ** MlStatistics
     MlStatistics (..),
     newMlStatistics,
+
+    -- ** MlStatistics_ModelType
+    MlStatistics_ModelType (..),
+
+    -- ** MlStatistics_TrainingType
+    MlStatistics_TrainingType (..),
 
     -- ** Model
     Model (..),
@@ -707,6 +936,10 @@ module Gogol.BigQuery
     ModelDefinition_ModelOptions (..),
     newModelDefinition_ModelOptions,
 
+    -- ** ModelExtractOptions
+    ModelExtractOptions (..),
+    newModelExtractOptions,
+
     -- ** ModelReference
     ModelReference (..),
     newModelReference,
@@ -719,6 +952,25 @@ module Gogol.BigQuery
     ParquetOptions (..),
     newParquetOptions,
 
+    -- ** ParquetOptions_MapTargetType
+    ParquetOptions_MapTargetType (..),
+
+    -- ** PartitionSkew
+    PartitionSkew (..),
+    newPartitionSkew,
+
+    -- ** PartitionedColumn
+    PartitionedColumn (..),
+    newPartitionedColumn,
+
+    -- ** PartitioningDefinition
+    PartitioningDefinition (..),
+    newPartitioningDefinition,
+
+    -- ** PerformanceInsights
+    PerformanceInsights (..),
+    newPerformanceInsights,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -726,6 +978,10 @@ module Gogol.BigQuery
     -- ** PrincipalComponentInfo
     PrincipalComponentInfo (..),
     newPrincipalComponentInfo,
+
+    -- ** PrivacyPolicy
+    PrivacyPolicy (..),
+    newPrivacyPolicy,
 
     -- ** ProjectList
     ProjectList (..),
@@ -738,6 +994,14 @@ module Gogol.BigQuery
     -- ** ProjectReference
     ProjectReference (..),
     newProjectReference,
+
+    -- ** QueryInfo
+    QueryInfo (..),
+    newQueryInfo,
+
+    -- ** QueryInfo_OptimizationDetails
+    QueryInfo_OptimizationDetails (..),
+    newQueryInfo_OptimizationDetails,
 
     -- ** QueryParameter
     QueryParameter (..),
@@ -763,6 +1027,9 @@ module Gogol.BigQuery
     QueryRequest (..),
     newQueryRequest,
 
+    -- ** QueryRequest_JobCreationMode
+    QueryRequest_JobCreationMode (..),
+
     -- ** QueryRequest_Labels
     QueryRequest_Labels (..),
     newQueryRequest_Labels,
@@ -783,6 +1050,10 @@ module Gogol.BigQuery
     RangePartitioning_Range (..),
     newRangePartitioning_Range,
 
+    -- ** RangeValue
+    RangeValue (..),
+    newRangeValue,
+
     -- ** RankingMetrics
     RankingMetrics (..),
     newRankingMetrics,
@@ -799,9 +1070,26 @@ module Gogol.BigQuery
     RemoteFunctionOptions_UserDefinedContext (..),
     newRemoteFunctionOptions_UserDefinedContext,
 
+    -- ** RemoteModelInfo
+    RemoteModelInfo (..),
+    newRemoteModelInfo,
+
+    -- ** RemoteModelInfo_RemoteServiceType
+    RemoteModelInfo_RemoteServiceType (..),
+
+    -- ** RestrictionConfig
+    RestrictionConfig (..),
+    newRestrictionConfig,
+
+    -- ** RestrictionConfig_Type
+    RestrictionConfig_Type (..),
+
     -- ** Routine
     Routine (..),
     newRoutine,
+
+    -- ** Routine_DataGovernanceType
+    Routine_DataGovernanceType (..),
 
     -- ** Routine_DeterminismLevel
     Routine_DeterminismLevel (..),
@@ -811,6 +1099,9 @@ module Gogol.BigQuery
 
     -- ** Routine_RoutineType
     Routine_RoutineType (..),
+
+    -- ** Routine_SecurityMode
+    Routine_SecurityMode (..),
 
     -- ** RoutineReference
     RoutineReference (..),
@@ -832,6 +1123,13 @@ module Gogol.BigQuery
     RowLevelSecurityStatistics (..),
     newRowLevelSecurityStatistics,
 
+    -- ** ScriptOptions
+    ScriptOptions (..),
+    newScriptOptions,
+
+    -- ** ScriptOptions_KeyResultStatement
+    ScriptOptions_KeyResultStatement (..),
+
     -- ** ScriptStackFrame
     ScriptStackFrame (..),
     newScriptStackFrame,
@@ -840,9 +1138,23 @@ module Gogol.BigQuery
     ScriptStatistics (..),
     newScriptStatistics,
 
+    -- ** ScriptStatistics_EvaluationKind
+    ScriptStatistics_EvaluationKind (..),
+
     -- ** SearchStatistics
     SearchStatistics (..),
     newSearchStatistics,
+
+    -- ** SearchStatistics_IndexUsageMode
+    SearchStatistics_IndexUsageMode (..),
+
+    -- ** SerDeInfo
+    SerDeInfo (..),
+    newSerDeInfo,
+
+    -- ** SerDeInfo_Parameters
+    SerDeInfo_Parameters (..),
+    newSerDeInfo_Parameters,
 
     -- ** SessionInfo
     SessionInfo (..),
@@ -851,6 +1163,10 @@ module Gogol.BigQuery
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
+
+    -- ** SkewSource
+    SkewSource (..),
+    newSkewSource,
 
     -- ** SnapshotDefinition
     SnapshotDefinition (..),
@@ -876,6 +1192,14 @@ module Gogol.BigQuery
     SparkStatistics_Endpoints (..),
     newSparkStatistics_Endpoints,
 
+    -- ** StagePerformanceChangeInsight
+    StagePerformanceChangeInsight (..),
+    newStagePerformanceChangeInsight,
+
+    -- ** StagePerformanceStandaloneInsight
+    StagePerformanceStandaloneInsight (..),
+    newStagePerformanceStandaloneInsight,
+
     -- ** StandardSqlDataType
     StandardSqlDataType (..),
     newStandardSqlDataType,
@@ -895,6 +1219,21 @@ module Gogol.BigQuery
     StandardSqlTableType (..),
     newStandardSqlTableType,
 
+    -- ** StorageDescriptor
+    StorageDescriptor (..),
+    newStorageDescriptor,
+
+    -- ** StoredColumnsUnusedReason
+    StoredColumnsUnusedReason (..),
+    newStoredColumnsUnusedReason,
+
+    -- ** StoredColumnsUnusedReason_Code
+    StoredColumnsUnusedReason_Code (..),
+
+    -- ** StoredColumnsUsage
+    StoredColumnsUsage (..),
+    newStoredColumnsUsage,
+
     -- ** Streamingbuffer
     Streamingbuffer (..),
     newStreamingbuffer,
@@ -903,17 +1242,59 @@ module Gogol.BigQuery
     StringHparamSearchSpace (..),
     newStringHparamSearchSpace,
 
+    -- ** SystemVariables
+    SystemVariables (..),
+    newSystemVariables,
+
+    -- ** SystemVariables_Types
+    SystemVariables_Types (..),
+    newSystemVariables_Types,
+
+    -- ** SystemVariables_Values
+    SystemVariables_Values (..),
+    newSystemVariables_Values,
+
     -- ** Table
     Table (..),
     newTable,
+
+    -- ** Table_DefaultRoundingMode
+    Table_DefaultRoundingMode (..),
 
     -- ** Table_Labels
     Table_Labels (..),
     newTable_Labels,
 
+    -- ** Table_ManagedTableType
+    Table_ManagedTableType (..),
+
+    -- ** Table_ResourceTags
+    Table_ResourceTags (..),
+    newTable_ResourceTags,
+
     -- ** TableCell
     TableCell (..),
     newTableCell,
+
+    -- ** TableConstraints
+    TableConstraints (..),
+    newTableConstraints,
+
+    -- ** TableConstraints_ForeignKeysItem
+    TableConstraints_ForeignKeysItem (..),
+    newTableConstraints_ForeignKeysItem,
+
+    -- ** TableConstraints_ForeignKeysItem_ColumnReferencesItem
+    TableConstraints_ForeignKeysItem_ColumnReferencesItem (..),
+    newTableConstraints_ForeignKeysItem_ColumnReferencesItem,
+
+    -- ** TableConstraints_ForeignKeysItem_ReferencedTable
+    TableConstraints_ForeignKeysItem_ReferencedTable (..),
+    newTableConstraints_ForeignKeysItem_ReferencedTable,
+
+    -- ** TableConstraints_PrimaryKey
+    TableConstraints_PrimaryKey (..),
+    newTableConstraints_PrimaryKey,
 
     -- ** TableDataInsertAllRequest
     TableDataInsertAllRequest (..),
@@ -947,6 +1328,13 @@ module Gogol.BigQuery
     TableFieldSchema_PolicyTags (..),
     newTableFieldSchema_PolicyTags,
 
+    -- ** TableFieldSchema_RangeElementType
+    TableFieldSchema_RangeElementType (..),
+    newTableFieldSchema_RangeElementType,
+
+    -- ** TableFieldSchema_RoundingMode
+    TableFieldSchema_RoundingMode (..),
+
     -- ** TableList
     TableList (..),
     newTableList,
@@ -963,9 +1351,23 @@ module Gogol.BigQuery
     TableList_TablesItem_View (..),
     newTableList_TablesItem_View,
 
+    -- ** TableMetadataCacheUsage
+    TableMetadataCacheUsage (..),
+    newTableMetadataCacheUsage,
+
+    -- ** TableMetadataCacheUsage_UnusedReason
+    TableMetadataCacheUsage_UnusedReason (..),
+
     -- ** TableReference
     TableReference (..),
     newTableReference,
+
+    -- ** TableReplicationInfo
+    TableReplicationInfo (..),
+    newTableReplicationInfo,
+
+    -- ** TableReplicationInfo_ReplicationStatus
+    TableReplicationInfo_ReplicationStatus (..),
 
     -- ** TableRow
     TableRow (..),
@@ -994,6 +1396,9 @@ module Gogol.BigQuery
     -- ** TrainingOptions_BoosterType
     TrainingOptions_BoosterType (..),
 
+    -- ** TrainingOptions_CategoryEncodingMethod
+    TrainingOptions_CategoryEncodingMethod (..),
+
     -- ** TrainingOptions_ColorSpace
     TrainingOptions_ColorSpace (..),
 
@@ -1015,6 +1420,9 @@ module Gogol.BigQuery
     -- ** TrainingOptions_HolidayRegion
     TrainingOptions_HolidayRegion (..),
 
+    -- ** TrainingOptions_HolidayRegionsItem
+    TrainingOptions_HolidayRegionsItem (..),
+
     -- ** TrainingOptions_HparamTuningObjectivesItem
     TrainingOptions_HparamTuningObjectivesItem (..),
 
@@ -1031,8 +1439,14 @@ module Gogol.BigQuery
     -- ** TrainingOptions_LossType
     TrainingOptions_LossType (..),
 
+    -- ** TrainingOptions_ModelRegistry
+    TrainingOptions_ModelRegistry (..),
+
     -- ** TrainingOptions_OptimizationStrategy
     TrainingOptions_OptimizationStrategy (..),
+
+    -- ** TrainingOptions_PcaSolver
+    TrainingOptions_PcaSolver (..),
 
     -- ** TrainingOptions_TreeMethod
     TrainingOptions_TreeMethod (..),
@@ -1045,13 +1459,31 @@ module Gogol.BigQuery
     TransactionInfo (..),
     newTransactionInfo,
 
+    -- ** TransformColumn
+    TransformColumn (..),
+    newTransformColumn,
+
+    -- ** UndeleteDatasetRequest
+    UndeleteDatasetRequest (..),
+    newUndeleteDatasetRequest,
+
     -- ** UserDefinedFunctionResource
     UserDefinedFunctionResource (..),
     newUserDefinedFunctionResource,
 
+    -- ** VectorSearchStatistics
+    VectorSearchStatistics (..),
+    newVectorSearchStatistics,
+
+    -- ** VectorSearchStatistics_IndexUsageMode
+    VectorSearchStatistics_IndexUsageMode (..),
+
     -- ** ViewDefinition
     ViewDefinition (..),
     newViewDefinition,
+
+    -- ** DatasetsGetDatasetView
+    DatasetsGetDatasetView (..),
 
     -- ** JobsListProjection
     JobsListProjection (..),
@@ -1069,6 +1501,7 @@ import Gogol.BigQuery.Datasets.Get
 import Gogol.BigQuery.Datasets.Insert
 import Gogol.BigQuery.Datasets.List
 import Gogol.BigQuery.Datasets.Patch
+import Gogol.BigQuery.Datasets.Undelete
 import Gogol.BigQuery.Datasets.Update
 import Gogol.BigQuery.Jobs.Cancel
 import Gogol.BigQuery.Jobs.Delete
@@ -1085,13 +1518,19 @@ import Gogol.BigQuery.Projects.GetServiceAccount
 import Gogol.BigQuery.Projects.List
 import Gogol.BigQuery.Routines.Delete
 import Gogol.BigQuery.Routines.Get
+import Gogol.BigQuery.Routines.GetIamPolicy
 import Gogol.BigQuery.Routines.Insert
 import Gogol.BigQuery.Routines.List
+import Gogol.BigQuery.Routines.SetIamPolicy
 import Gogol.BigQuery.Routines.Update
+import Gogol.BigQuery.RowAccessPolicies.BatchDelete
+import Gogol.BigQuery.RowAccessPolicies.Delete
+import Gogol.BigQuery.RowAccessPolicies.Get
 import Gogol.BigQuery.RowAccessPolicies.GetIamPolicy
+import Gogol.BigQuery.RowAccessPolicies.Insert
 import Gogol.BigQuery.RowAccessPolicies.List
-import Gogol.BigQuery.RowAccessPolicies.SetIamPolicy
 import Gogol.BigQuery.RowAccessPolicies.TestIamPermissions
+import Gogol.BigQuery.RowAccessPolicies.Update
 import Gogol.BigQuery.Tabledata.InsertAll
 import Gogol.BigQuery.Tabledata.List
 import Gogol.BigQuery.Tables.Delete

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.Topics.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or topic does not exist
+-- Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if there exists a topic in the course with the same name. * @NOT_FOUND@ if the requested course or topic does not exist
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.topics.patch@.
 module Gogol.Classroom.Courses.Topics.Patch
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.Topics.Patch
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.topics.patch@ method which the
 -- 'ClassroomCoursesTopicsPatch' request conforms to.
@@ -60,7 +58,7 @@ type ClassroomCoursesTopicsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Topic
     Core.:> Core.Patch '[Core.JSON] Topic
 
--- | Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course or topic does not exist
+-- | Updates one or more fields of a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting developer project did not create the corresponding topic or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @FAILED_PRECONDITION@ if there exists a topic in the course with the same name. * @NOT_FOUND@ if the requested course or topic does not exist
 --
 -- /See:/ 'newClassroomCoursesTopicsPatch' smart constructor.
 data ClassroomCoursesTopicsPatch = ClassroomCoursesTopicsPatch
@@ -107,14 +105,9 @@ newClassroomCoursesTopicsPatch courseId id payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesTopicsPatch
-  where
+instance Core.GoogleRequest ClassroomCoursesTopicsPatch where
   type Rs ClassroomCoursesTopicsPatch = Topic
-  type
-    Scopes ClassroomCoursesTopicsPatch =
-      '[Classroom'Topics]
+  type Scopes ClassroomCoursesTopicsPatch = '[Classroom'Topics]
   requestClient ClassroomCoursesTopicsPatch {..} =
     go
       courseId
@@ -131,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ClassroomCoursesTopicsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy ClassroomCoursesTopicsPatchResource)
           Core.mempty

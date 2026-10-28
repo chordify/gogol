@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Gmail.Types
@@ -120,6 +118,10 @@ module Gogol.Gmail.Types
 
     -- ** ForwardingAddress_VerificationStatus
     ForwardingAddress_VerificationStatus (..),
+
+    -- ** HardwareKeyMetadata
+    HardwareKeyMetadata (..),
+    newHardwareKeyMetadata,
 
     -- ** History
     History (..),
@@ -270,6 +272,10 @@ module Gogol.Gmail.Types
     -- ** SendAs_VerificationStatus
     SendAs_VerificationStatus (..),
 
+    -- ** SignAndEncryptKeyPairs
+    SignAndEncryptKeyPairs (..),
+    newSignAndEncryptKeyPairs,
+
     -- ** SmimeInfo
     SmimeInfo (..),
     newSmimeInfo,
@@ -295,6 +301,9 @@ module Gogol.Gmail.Types
 
     -- ** WatchRequest_LabelFilterAction
     WatchRequest_LabelFilterAction (..),
+
+    -- ** WatchRequest_LabelFilterBehavior
+    WatchRequest_LabelFilterBehavior (..),
 
     -- ** WatchResponse
     WatchResponse (..),
@@ -322,7 +331,7 @@ where
 
 import Gogol.Gmail.Internal.Product
 import Gogol.Gmail.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Gmail API. This contains the host and root path used as a starting point for constructing service requests.
 gmailService :: Core.ServiceConfig
@@ -335,19 +344,24 @@ gmailService =
 type Gmail'FullControl = "https://mail.google.com/"
 
 -- | Manage drafts and send emails when you interact with the add-on
-type Gmail'Addons'Current'Action'Compose = "https://www.googleapis.com/auth/gmail.addons.current.action.compose"
+type Gmail'Addons'Current'Action'Compose =
+  "https://www.googleapis.com/auth/gmail.addons.current.action.compose"
 
 -- | View your email messages when you interact with the add-on
-type Gmail'Addons'Current'Message'Action = "https://www.googleapis.com/auth/gmail.addons.current.message.action"
+type Gmail'Addons'Current'Message'Action =
+  "https://www.googleapis.com/auth/gmail.addons.current.message.action"
 
 -- | View your email message metadata when the add-on is running
-type Gmail'Addons'Current'Message'Metadata = "https://www.googleapis.com/auth/gmail.addons.current.message.metadata"
+type Gmail'Addons'Current'Message'Metadata =
+  "https://www.googleapis.com/auth/gmail.addons.current.message.metadata"
 
 -- | View your email messages when the add-on is running
-type Gmail'Addons'Current'Message'Readonly = "https://www.googleapis.com/auth/gmail.addons.current.message.readonly"
+type Gmail'Addons'Current'Message'Readonly =
+  "https://www.googleapis.com/auth/gmail.addons.current.message.readonly"
 
 -- | Manage drafts and send emails
-type Gmail'Compose = "https://www.googleapis.com/auth/gmail.compose"
+type Gmail'Compose =
+  "https://www.googleapis.com/auth/gmail.compose"
 
 -- | Add emails into your Gmail mailbox
 type Gmail'Insert = "https://www.googleapis.com/auth/gmail.insert"
@@ -356,19 +370,23 @@ type Gmail'Insert = "https://www.googleapis.com/auth/gmail.insert"
 type Gmail'Labels = "https://www.googleapis.com/auth/gmail.labels"
 
 -- | View your email message metadata such as labels and headers, but not the email body
-type Gmail'Metadata = "https://www.googleapis.com/auth/gmail.metadata"
+type Gmail'Metadata =
+  "https://www.googleapis.com/auth/gmail.metadata"
 
 -- | Read, compose, and send emails from your Gmail account
 type Gmail'Modify = "https://www.googleapis.com/auth/gmail.modify"
 
 -- | View your email messages and settings
-type Gmail'Readonly = "https://www.googleapis.com/auth/gmail.readonly"
+type Gmail'Readonly =
+  "https://www.googleapis.com/auth/gmail.readonly"
 
 -- | Send email on your behalf
 type Gmail'Send = "https://www.googleapis.com/auth/gmail.send"
 
 -- | See, edit, create, or change your email settings and filters in Gmail
-type Gmail'Settings'Basic = "https://www.googleapis.com/auth/gmail.settings.basic"
+type Gmail'Settings'Basic =
+  "https://www.googleapis.com/auth/gmail.settings.basic"
 
 -- | Manage your sensitive mail settings, including who can manage your mail
-type Gmail'Settings'Sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
+type Gmail'Settings'Sharing =
+  "https://www.googleapis.com/auth/gmail.settings.sharing"

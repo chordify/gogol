@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionTargetHttpsProxies.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionTargetHttpsProxies.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionTargetHttpsProxies.patch@ method which the
 -- 'ComputeRegionTargetHttpsProxiesPatch' request conforms to.
@@ -101,50 +99,47 @@ newComputeRegionTargetHttpsProxiesPatch ::
   -- |  Name of the TargetHttpsProxy resource to patch. See 'targetHttpsProxy'.
   Core.Text ->
   ComputeRegionTargetHttpsProxiesPatch
-newComputeRegionTargetHttpsProxiesPatch payload project region targetHttpsProxy =
-  ComputeRegionTargetHttpsProxiesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      targetHttpsProxy = targetHttpsProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeRegionTargetHttpsProxiesPatch
+  payload
+  project
+  region
+  targetHttpsProxy =
     ComputeRegionTargetHttpsProxiesPatch
-  where
-  type
-    Rs ComputeRegionTargetHttpsProxiesPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        targetHttpsProxy = targetHttpsProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeRegionTargetHttpsProxiesPatch where
+  type Rs ComputeRegionTargetHttpsProxiesPatch = Operation
   type
     Scopes ComputeRegionTargetHttpsProxiesPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionTargetHttpsProxiesPatch {..} =
-      go
-        project
-        region
-        targetHttpsProxy
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionTargetHttpsProxiesPatchResource
-            )
-            Core.mempty
+  requestClient ComputeRegionTargetHttpsProxiesPatch {..} =
+    go
+      project
+      region
+      targetHttpsProxy
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionTargetHttpsProxiesPatchResource
+          )
+          Core.mempty

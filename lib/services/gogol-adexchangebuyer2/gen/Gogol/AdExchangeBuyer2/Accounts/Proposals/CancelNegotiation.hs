@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.CancelNegotiation
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.cancelNegotiation@ method which the
 -- 'AdExchangeBuyer2AccountsProposalsCancelNegotiation' request conforms to.
@@ -49,10 +47,7 @@ type AdExchangeBuyer2AccountsProposalsCancelNegotiationResource =
     Core.:> "accounts"
     Core.:> Core.Capture "accountId" Core.Text
     Core.:> "proposals"
-    Core.:> Core.CaptureMode
-              "proposalId"
-              "cancelNegotiation"
-              Core.Text
+    Core.:> Core.CaptureMode "proposalId" "cancelNegotiation" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -94,29 +89,31 @@ newAdExchangeBuyer2AccountsProposalsCancelNegotiation ::
   -- |  The ID of the proposal to cancel negotiation for. See 'proposalId'.
   Core.Text ->
   AdExchangeBuyer2AccountsProposalsCancelNegotiation
-newAdExchangeBuyer2AccountsProposalsCancelNegotiation accountId payload proposalId =
-  AdExchangeBuyer2AccountsProposalsCancelNegotiation
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      payload = payload,
-      proposalId = proposalId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsProposalsCancelNegotiation
+  accountId
+  payload
+  proposalId =
+    AdExchangeBuyer2AccountsProposalsCancelNegotiation
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        payload = payload,
+        proposalId = proposalId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsProposalsCancelNegotiation
   where
   type
-    Rs
-      AdExchangeBuyer2AccountsProposalsCancelNegotiation =
+    Rs AdExchangeBuyer2AccountsProposalsCancelNegotiation =
       Proposal
   type
-    Scopes
-      AdExchangeBuyer2AccountsProposalsCancelNegotiation =
+    Scopes AdExchangeBuyer2AccountsProposalsCancelNegotiation =
       '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsProposalsCancelNegotiation {..} =

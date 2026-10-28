@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DFAReporting.Types
@@ -231,6 +229,14 @@ module Gogol.DFAReporting.Types
     CampaignsListResponse (..),
     newCampaignsListResponse,
 
+    -- ** CartData
+    CartData (..),
+    newCartData,
+
+    -- ** CartDataItem
+    CartDataItem (..),
+    newCartDataItem,
+
     -- ** ChangeLog
     ChangeLog (..),
     newChangeLog,
@@ -238,14 +244,6 @@ module Gogol.DFAReporting.Types
     -- ** ChangeLogsListResponse
     ChangeLogsListResponse (..),
     newChangeLogsListResponse,
-
-    -- ** ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
-
-    -- ** ChannelGroupingRule
-    ChannelGroupingRule (..),
-    newChannelGroupingRule,
 
     -- ** CitiesListResponse
     CitiesListResponse (..),
@@ -298,6 +296,9 @@ module Gogol.DFAReporting.Types
     -- ** Conversion
     Conversion (..),
     newConversion,
+
+    -- ** Conversion_AdUserDataConsent
+    Conversion_AdUserDataConsent (..),
 
     -- ** ConversionError
     ConversionError (..),
@@ -498,6 +499,10 @@ module Gogol.DFAReporting.Types
     CrossDimensionReachReportCompatibleFields (..),
     newCrossDimensionReachReportCompatibleFields,
 
+    -- ** CrossMediaReachReportCompatibleFields
+    CrossMediaReachReportCompatibleFields (..),
+    newCrossMediaReachReportCompatibleFields,
+
     -- ** CustomFloodlightVariable
     CustomFloodlightVariable (..),
     newCustomFloodlightVariable,
@@ -591,10 +596,6 @@ module Gogol.DFAReporting.Types
     DirectorySitesListResponse (..),
     newDirectorySitesListResponse,
 
-    -- ** DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
     -- ** DynamicTargetingKey
     DynamicTargetingKey (..),
     newDynamicTargetingKey,
@@ -615,10 +616,6 @@ module Gogol.DFAReporting.Types
 
     -- ** EncryptionInfo_EncryptionSource
     EncryptionInfo_EncryptionSource (..),
-
-    -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
 
     -- ** EventTag
     EventTag (..),
@@ -891,6 +888,10 @@ module Gogol.DFAReporting.Types
     -- ** ObjectFilter_Status
     ObjectFilter_Status (..),
 
+    -- ** OfflineUserAddressInfo
+    OfflineUserAddressInfo (..),
+    newOfflineUserAddressInfo,
+
     -- ** OffsetPosition
     OffsetPosition (..),
     newOffsetPosition,
@@ -930,38 +931,9 @@ module Gogol.DFAReporting.Types
     -- ** OrderContact_ContactType
     OrderContact_ContactType (..),
 
-    -- ** OrderDocument
-    OrderDocument (..),
-    newOrderDocument,
-
-    -- ** OrderDocument_Type
-    OrderDocument_Type (..),
-
-    -- ** OrderDocumentsListResponse
-    OrderDocumentsListResponse (..),
-    newOrderDocumentsListResponse,
-
     -- ** OrdersListResponse
     OrdersListResponse (..),
     newOrdersListResponse,
-
-    -- ** PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- ** PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition (..),
-
-    -- ** PathReportCompatibleFields
-    PathReportCompatibleFields (..),
-    newPathReportCompatibleFields,
-
-    -- ** PathReportDimensionValue
-    PathReportDimensionValue (..),
-    newPathReportDimensionValue,
-
-    -- ** PathReportDimensionValue_MatchType
-    PathReportDimensionValue_MatchType (..),
 
     -- ** PathToConversionReportCompatibleFields
     PathToConversionReportCompatibleFields (..),
@@ -993,6 +965,10 @@ module Gogol.DFAReporting.Types
     PlacementAssignment (..),
     newPlacementAssignment,
 
+    -- ** PlacementConversionDomainOverride
+    PlacementConversionDomainOverride (..),
+    newPlacementConversionDomainOverride,
+
     -- ** PlacementGroup
     PlacementGroup (..),
     newPlacementGroup,
@@ -1006,6 +982,10 @@ module Gogol.DFAReporting.Types
     -- ** PlacementGroupsListResponse
     PlacementGroupsListResponse (..),
     newPlacementGroupsListResponse,
+
+    -- ** PlacementSingleConversionDomain
+    PlacementSingleConversionDomain (..),
+    newPlacementSingleConversionDomain,
 
     -- ** PlacementStrategiesListResponse
     PlacementStrategiesListResponse (..),
@@ -1140,6 +1120,10 @@ module Gogol.DFAReporting.Types
     -- ** Report_CrossDimensionReachCriteria_Dimension
     Report_CrossDimensionReachCriteria_Dimension (..),
 
+    -- ** Report_CrossMediaReachCriteria
+    Report_CrossMediaReachCriteria (..),
+    newReport_CrossMediaReachCriteria,
+
     -- ** Report_Delivery
     Report_Delivery (..),
     newReport_Delivery,
@@ -1157,14 +1141,6 @@ module Gogol.DFAReporting.Types
 
     -- ** Report_Format
     Report_Format (..),
-
-    -- ** Report_PathAttributionCriteria
-    Report_PathAttributionCriteria (..),
-    newReport_PathAttributionCriteria,
-
-    -- ** Report_PathCriteria
-    Report_PathCriteria (..),
-    newReport_PathCriteria,
 
     -- ** Report_PathToConversionCriteria
     Report_PathToConversionCriteria (..),
@@ -1342,6 +1318,28 @@ module Gogol.DFAReporting.Types
     TranscodeSetting (..),
     newTranscodeSetting,
 
+    -- ** TvCampaignDetail
+    TvCampaignDetail (..),
+    newTvCampaignDetail,
+
+    -- ** TvCampaignSummariesListResponse
+    TvCampaignSummariesListResponse (..),
+    newTvCampaignSummariesListResponse,
+
+    -- ** TvCampaignSummary
+    TvCampaignSummary (..),
+    newTvCampaignSummary,
+
+    -- ** TvCampaignSummary_Type
+    TvCampaignSummary_Type (..),
+
+    -- ** TvCampaignTimepoint
+    TvCampaignTimepoint (..),
+    newTvCampaignTimepoint,
+
+    -- ** TvCampaignTimepoint_DateWindow
+    TvCampaignTimepoint_DateWindow (..),
+
     -- ** UniversalAdId
     UniversalAdId (..),
     newUniversalAdId,
@@ -1358,6 +1356,10 @@ module Gogol.DFAReporting.Types
 
     -- ** UserDefinedVariableConfiguration_VariableType
     UserDefinedVariableConfiguration_VariableType (..),
+
+    -- ** UserIdentifier
+    UserIdentifier (..),
+    newUserIdentifier,
 
     -- ** UserProfile
     UserProfile (..),
@@ -1393,13 +1395,6 @@ module Gogol.DFAReporting.Types
     -- ** UserRolesListResponse
     UserRolesListResponse (..),
     newUserRolesListResponse,
-
-    -- ** UvarFilter
-    UvarFilter (..),
-    newUvarFilter,
-
-    -- ** UvarFilter_Match
-    UvarFilter_Match (..),
 
     -- ** VideoFormat
     VideoFormat (..),
@@ -1585,12 +1580,6 @@ module Gogol.DFAReporting.Types
     -- ** MobileAppsListDirectories
     MobileAppsListDirectories (..),
 
-    -- ** OrderDocumentsListSortField
-    OrderDocumentsListSortField (..),
-
-    -- ** OrderDocumentsListSortOrder
-    OrderDocumentsListSortOrder (..),
-
     -- ** OrdersListSortField
     OrdersListSortField (..),
 
@@ -1700,7 +1689,7 @@ where
 
 import Gogol.DFAReporting.Internal.Product
 import Gogol.DFAReporting.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v4@ of the Campaign Manager 360 API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: Core.ServiceConfig
@@ -1710,10 +1699,13 @@ dFAReportingService =
     "dfareporting.googleapis.com"
 
 -- | Manage DoubleClick Digital Marketing conversions
-type Ddmconversions'FullControl = "https://www.googleapis.com/auth/ddmconversions"
+type Ddmconversions'FullControl =
+  "https://www.googleapis.com/auth/ddmconversions"
 
 -- | View and manage DoubleClick for Advertisers reports
-type Dfareporting'FullControl = "https://www.googleapis.com/auth/dfareporting"
+type Dfareporting'FullControl =
+  "https://www.googleapis.com/auth/dfareporting"
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad campaigns
-type Dfatrafficking'FullControl = "https://www.googleapis.com/auth/dfatrafficking"
+type Dfatrafficking'FullControl =
+  "https://www.googleapis.com/auth/dfatrafficking"

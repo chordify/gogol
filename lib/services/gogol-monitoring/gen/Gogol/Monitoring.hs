@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -333,6 +331,9 @@ module Gogol.Monitoring
     -- ** AlertPolicy_Combiner
     AlertPolicy_Combiner (..),
 
+    -- ** AlertPolicy_Severity
+    AlertPolicy_Severity (..),
+
     -- ** AlertPolicy_UserLabels
     AlertPolicy_UserLabels (..),
     newAlertPolicy_UserLabels,
@@ -340,6 +341,9 @@ module Gogol.Monitoring
     -- ** AlertStrategy
     AlertStrategy (..),
     newAlertStrategy,
+
+    -- ** AlertStrategy_NotificationPromptsItem
+    AlertStrategy_NotificationPromptsItem (..),
 
     -- ** AppEngine
     AppEngine (..),
@@ -365,6 +369,10 @@ module Gogol.Monitoring
     BasicSli (..),
     newBasicSli,
 
+    -- ** BooleanTest
+    BooleanTest (..),
+    newBooleanTest,
+
     -- ** BucketOptions
     BucketOptions (..),
     newBucketOptions,
@@ -372,6 +380,10 @@ module Gogol.Monitoring
     -- ** CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- ** CloudFunctionV2Target
+    CloudFunctionV2Target (..),
+    newCloudFunctionV2Target,
 
     -- ** CloudRun
     CloudRun (..),
@@ -438,6 +450,10 @@ module Gogol.Monitoring
     -- ** Custom
     Custom (..),
     newCustom,
+
+    -- ** Daily
+    Daily (..),
+    newDaily,
 
     -- ** Distribution
     Distribution (..),
@@ -525,6 +541,10 @@ module Gogol.Monitoring
     Group (..),
     newGroup,
 
+    -- ** Hourly
+    Hourly (..),
+    newHourly,
+
     -- ** HttpCheck
     HttpCheck (..),
     newHttpCheck,
@@ -575,6 +595,10 @@ module Gogol.Monitoring
     -- ** Linear
     Linear (..),
     newLinear,
+
+    -- ** Link
+    Link (..),
+    newLink,
 
     -- ** ListAlertPoliciesResponse
     ListAlertPoliciesResponse (..),
@@ -672,6 +696,9 @@ module Gogol.Monitoring
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
 
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
+
     -- ** MetricRange
     MetricRange (..),
     newMetricRange,
@@ -685,6 +712,10 @@ module Gogol.Monitoring
 
     -- ** MetricThreshold_EvaluationMissingData
     MetricThreshold_EvaluationMissingData (..),
+
+    -- ** Minutes
+    Minutes (..),
+    newMinutes,
 
     -- ** MonitoredResource
     MonitoredResource (..),
@@ -788,6 +819,14 @@ module Gogol.Monitoring
     PointData (..),
     newPointData,
 
+    -- ** PrometheusQueryLanguageCondition
+    PrometheusQueryLanguageCondition (..),
+    newPrometheusQueryLanguageCondition,
+
+    -- ** PrometheusQueryLanguageCondition_Labels
+    PrometheusQueryLanguageCondition_Labels (..),
+    newPrometheusQueryLanguageCondition_Labels,
+
     -- ** QueryTimeSeriesRequest
     QueryTimeSeriesRequest (..),
     newQueryTimeSeriesRequest,
@@ -818,6 +857,13 @@ module Gogol.Monitoring
     -- ** ResponseStatusCode_StatusClass
     ResponseStatusCode_StatusClass (..),
 
+    -- ** RowCountTest
+    RowCountTest (..),
+    newRowCountTest,
+
+    -- ** RowCountTest_Comparison
+    RowCountTest_Comparison (..),
+
     -- ** SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -829,6 +875,13 @@ module Gogol.Monitoring
     -- ** Service_UserLabels
     Service_UserLabels (..),
     newService_UserLabels,
+
+    -- ** ServiceAgentAuthentication
+    ServiceAgentAuthentication (..),
+    newServiceAgentAuthentication,
+
+    -- ** ServiceAgentAuthentication_Type
+    ServiceAgentAuthentication_Type (..),
 
     -- ** ServiceLevelIndicator
     ServiceLevelIndicator (..),
@@ -857,6 +910,10 @@ module Gogol.Monitoring
     SpanContext (..),
     newSpanContext,
 
+    -- ** SqlCondition
+    SqlCondition (..),
+    newSqlCondition,
+
     -- ** Status
     Status (..),
     newStatus,
@@ -864,6 +921,10 @@ module Gogol.Monitoring
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** SyntheticMonitorTarget
+    SyntheticMonitorTarget (..),
+    newSyntheticMonitorTarget,
 
     -- ** TcpCheck
     TcpCheck (..),
@@ -876,6 +937,10 @@ module Gogol.Monitoring
     -- ** TimeInterval
     TimeInterval (..),
     newTimeInterval,
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** TimeSeries
     TimeSeries (..),

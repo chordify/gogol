@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Groups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Groups.List
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.groups.list@ method which the
 -- 'DirectoryGroupsList' request conforms to.
@@ -93,7 +91,7 @@ data DirectoryGroupsList = DirectoryGroupsList
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it\'s an ID, it should match with the ID of the user object.
+    -- | Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it\'s an ID, it should match with the ID of the user object. Cannot be used with the @customer@ parameter.
     userKey :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -122,9 +120,7 @@ instance Core.GoogleRequest DirectoryGroupsList where
   type Rs DirectoryGroupsList = Groups
   type
     Scopes DirectoryGroupsList =
-      '[ Admin'Directory'Group,
-         Admin'Directory'Group'Readonly
-       ]
+      '[Admin'Directory'Group, Admin'Directory'Group'Readonly]
   requestClient DirectoryGroupsList {..} =
     go
       xgafv
@@ -145,7 +141,5 @@ instance Core.GoogleRequest DirectoryGroupsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryGroupsListResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryGroupsListResource)
           Core.mempty

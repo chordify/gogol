@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.DataTransfer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.DataTransfer.Internal.Product
@@ -53,7 +51,7 @@ module Gogol.Admin.DataTransfer.Internal.Product
 where
 
 import Gogol.Admin.DataTransfer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Application resources represent applications installed on the domain that support transferring ownership of user data.
 --
@@ -92,7 +90,8 @@ instance Core.FromJSON Application where
           Application
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#datatransfer#ApplicationResource"
                      )
             Core.<*> (o Core..:? "name")
@@ -140,9 +139,7 @@ instance Core.FromJSON ApplicationDataTransfer where
       "ApplicationDataTransfer"
       ( \o ->
           ApplicationDataTransfer
-            Core.<$> ( o Core..:? "applicationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "applicationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "applicationTransferParams")
             Core.<*> (o Core..:? "applicationTransferStatus")
       )
@@ -151,7 +148,8 @@ instance Core.ToJSON ApplicationDataTransfer where
   toJSON ApplicationDataTransfer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicationId" Core..=) Core.. Core.AsText
+          [ ("applicationId" Core..=)
+              Core.. Core.AsText
               Core.<$> applicationId,
             ("applicationTransferParams" Core..=)
               Core.<$> applicationTransferParams,
@@ -175,7 +173,10 @@ data ApplicationTransferParam = ApplicationTransferParam
 newApplicationTransferParam ::
   ApplicationTransferParam
 newApplicationTransferParam =
-  ApplicationTransferParam {key = Core.Nothing, value = Core.Nothing}
+  ApplicationTransferParam
+    { key = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ApplicationTransferParam where
   parseJSON =
@@ -183,16 +184,15 @@ instance Core.FromJSON ApplicationTransferParam where
       "ApplicationTransferParam"
       ( \o ->
           ApplicationTransferParam
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ApplicationTransferParam where
   toJSON ApplicationTransferParam {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Template for a collection of Applications.
@@ -229,9 +229,7 @@ instance Core.FromJSON ApplicationsListResponse where
           ApplicationsListResponse
             Core.<$> (o Core..:? "applications")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#datatransfer#applicationsList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#datatransfer#applicationsList")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -293,9 +291,7 @@ instance Core.FromJSON DataTransfer where
             Core.<$> (o Core..:? "applicationDataTransfers")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#datatransfer#DataTransfer"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#datatransfer#DataTransfer")
             Core.<*> (o Core..:? "newOwnerUserId")
             Core.<*> (o Core..:? "oldOwnerUserId")
             Core.<*> (o Core..:? "overallTransferStatusCode")
@@ -353,9 +349,7 @@ instance Core.FromJSON DataTransfersListResponse where
           DataTransfersListResponse
             Core.<$> (o Core..:? "dataTransfers")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#datatransfer#dataTransfersList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#datatransfer#dataTransfersList")
             Core.<*> (o Core..:? "nextPageToken")
       )
 

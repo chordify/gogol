@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InstanceGroupManagers.SetTargetPools
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InstanceGroupManagers.SetTargetPools
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instanceGroupManagers.setTargetPools@ method which the
 -- 'ComputeInstanceGroupManagersSetTargetPools' request conforms to.
@@ -104,51 +102,50 @@ newComputeInstanceGroupManagersSetTargetPools ::
   -- |  The name of the zone where the managed instance group is located. See 'zone'.
   Core.Text ->
   ComputeInstanceGroupManagersSetTargetPools
-newComputeInstanceGroupManagersSetTargetPools instanceGroupManager payload project zone =
-  ComputeInstanceGroupManagersSetTargetPools
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newComputeInstanceGroupManagersSetTargetPools
+  instanceGroupManager
+  payload
+  project
+  zone =
+    ComputeInstanceGroupManagersSetTargetPools
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager = instanceGroupManager,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ComputeInstanceGroupManagersSetTargetPools
   where
+  type Rs ComputeInstanceGroupManagersSetTargetPools = Operation
   type
-    Rs ComputeInstanceGroupManagersSetTargetPools =
-      Operation
-  type
-    Scopes
-      ComputeInstanceGroupManagersSetTargetPools =
+    Scopes ComputeInstanceGroupManagersSetTargetPools =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeInstanceGroupManagersSetTargetPools {..} =
-      go
-        project
-        zone
-        instanceGroupManager
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInstanceGroupManagersSetTargetPoolsResource
-            )
-            Core.mempty
+  requestClient ComputeInstanceGroupManagersSetTargetPools {..} =
+    go
+      project
+      zone
+      instanceGroupManager
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeInstanceGroupManagersSetTargetPoolsResource
+          )
+          Core.mempty

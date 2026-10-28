@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Messages.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#read_a_message Read a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts Service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.readonly@ authorization scope. Note: Might return a message from a blocked member or space.
+-- Returns details about a message. For an example, see <https://developers.google.com/workspace/chat/get-messages Get details about a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> Note: Might return a message from a blocked member or space.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.get@.
 module Gogol.Chat.Spaces.Messages.Get
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.Messages.Get
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.messages.get@ method which the
 -- 'ChatSpacesMessagesGet' request conforms to.
@@ -55,7 +53,7 @@ type ChatSpacesMessagesGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Message
 
--- | Returns a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#read_a_message Read a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts Service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.readonly@ authorization scope. Note: Might return a message from a blocked member or space.
+-- | Returns details about a message. For an example, see <https://developers.google.com/workspace/chat/get-messages Get details about a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> Note: Might return a message from a blocked member or space.
 --
 -- /See:/ 'newChatSpacesMessagesGet' smart constructor.
 data ChatSpacesMessagesGet = ChatSpacesMessagesGet
@@ -65,7 +63,7 @@ data ChatSpacesMessagesGet = ChatSpacesMessagesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the message to retrieve. Format: spaces\/{space}\/messages\/{message} If the message begins with @client-@, then it has a custom name assigned by a Chat app that created it with the Chat REST API. That Chat app (but not others) can pass the custom name to get, update, or delete the message. To learn more, see [create and name a message] (https:\/\/developers.google.com\/chat\/api\/guides\/crudl\/messages#name/a/created_message).
+    -- | Required. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ If you\'ve set a custom ID for your message, you can use the value from the @clientAssignedMessageId@ field for @{message}@. For details, see [Name a message] (https:\/\/developers.google.com\/workspace\/chat\/create-messages#name/a/created_message).
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,7 +74,7 @@ data ChatSpacesMessagesGet = ChatSpacesMessagesGet
 
 -- | Creates a value of 'ChatSpacesMessagesGet' with the minimum fields required to make a request.
 newChatSpacesMessagesGet ::
-  -- |  Required. Resource name of the message to retrieve. Format: spaces\/{space}\/messages\/{message} If the message begins with @client-@, then it has a custom name assigned by a Chat app that created it with the Chat REST API. That Chat app (but not others) can pass the custom name to get, update, or delete the message. To learn more, see [create and name a message] (https:\/\/developers.google.com\/chat\/api\/guides\/crudl\/messages#name/a/created_message). See 'name'.
+  -- |  Required. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ If you\'ve set a custom ID for your message, you can use the value from the @clientAssignedMessageId@ field for @{message}@. For details, see [Name a message] (https:\/\/developers.google.com\/workspace\/chat\/create-messages#name/a/created_message). See 'name'.
   Core.Text ->
   ChatSpacesMessagesGet
 newChatSpacesMessagesGet name =
@@ -107,7 +105,5 @@ instance Core.GoogleRequest ChatSpacesMessagesGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMessagesGetResource
-          )
+          (Core.Proxy :: Core.Proxy ChatSpacesMessagesGetResource)
           Core.mempty

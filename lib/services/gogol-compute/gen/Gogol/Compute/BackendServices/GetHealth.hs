@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.BackendServices.GetHealth
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.BackendServices.GetHealth
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.backendServices.getHealth@ method which the
 -- 'ComputeBackendServicesGetHealth' request conforms to.
@@ -59,12 +57,8 @@ type ComputeBackendServicesGetHealthResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ResourceGroupReference
-    Core.:> Core.Post
-              '[Core.JSON]
-              BackendServiceGroupHealth
+    Core.:> Core.ReqBody '[Core.JSON] ResourceGroupReference
+    Core.:> Core.Post '[Core.JSON] BackendServiceGroupHealth
 
 -- | Gets the most recent health check results for this BackendService. Example request body: { \"group\": \"\/zones\/us-east1-b\/instanceGroups\/lb-backend-example\" }
 --
@@ -80,7 +74,6 @@ data ComputeBackendServicesGetHealth = ComputeBackendServicesGetHealth
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: ResourceGroupReference,
-    -- |
     project :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -110,19 +103,11 @@ newComputeBackendServicesGetHealth backendService payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeBackendServicesGetHealth
-  where
-  type
-    Rs ComputeBackendServicesGetHealth =
-      BackendServiceGroupHealth
+instance Core.GoogleRequest ComputeBackendServicesGetHealth where
+  type Rs ComputeBackendServicesGetHealth = BackendServiceGroupHealth
   type
     Scopes ComputeBackendServicesGetHealth =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeBackendServicesGetHealth {..} =
     go
       project
@@ -138,7 +123,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeBackendServicesGetHealthResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeBackendServicesGetHealthResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.AccessLevels.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.AccessLevels.Get
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.accessLevels.get@ method which the
 -- 'AccessContextManagerAccessPoliciesAccessLevelsGet' request conforms to.
@@ -86,7 +84,8 @@ newAccessContextManagerAccessPoliciesAccessLevelsGet ::
   AccessContextManagerAccessPoliciesAccessLevelsGet
 newAccessContextManagerAccessPoliciesAccessLevelsGet name =
   AccessContextManagerAccessPoliciesAccessLevelsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessLevelFormat = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
@@ -100,30 +99,27 @@ instance
     AccessContextManagerAccessPoliciesAccessLevelsGet
   where
   type
-    Rs
-      AccessContextManagerAccessPoliciesAccessLevelsGet =
+    Rs AccessContextManagerAccessPoliciesAccessLevelsGet =
       AccessLevel
   type
-    Scopes
-      AccessContextManagerAccessPoliciesAccessLevelsGet =
+    Scopes AccessContextManagerAccessPoliciesAccessLevelsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    AccessContextManagerAccessPoliciesAccessLevelsGet {..} =
-      go
-        name
-        xgafv
-        accessLevelFormat
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        accessContextManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessContextManagerAccessPoliciesAccessLevelsGetResource
-            )
-            Core.mempty
+  requestClient AccessContextManagerAccessPoliciesAccessLevelsGet {..} =
+    go
+      name
+      xgafv
+      accessLevelFormat
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      accessContextManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AccessContextManagerAccessPoliciesAccessLevelsGetResource
+          )
+          Core.mempty

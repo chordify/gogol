@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Jobs.Executions.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Run.Projects.Locations.Jobs.Executions.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.jobs.executions.delete@ method which the
@@ -69,7 +67,7 @@ data RunProjectsLocationsJobsExecutionsDelete = RunProjectsLocationsJobsExecutio
     callback :: (Core.Maybe Core.Text),
     -- | A system-generated fingerprint for this version of the resource. This may be used to detect modification conflict during updates.
     etag :: (Core.Maybe Core.Text),
-    -- | Required. The name of the Execution to delete. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}, where {project} can be project id or number.
+    -- | Required. The name of the Execution to delete. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}@, where @{project}@ can be project id or number.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,7 +80,7 @@ data RunProjectsLocationsJobsExecutionsDelete = RunProjectsLocationsJobsExecutio
 
 -- | Creates a value of 'RunProjectsLocationsJobsExecutionsDelete' with the minimum fields required to make a request.
 newRunProjectsLocationsJobsExecutionsDelete ::
-  -- |  Required. The name of the Execution to delete. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}, where {project} can be project id or number. See 'name'.
+  -- |  Required. The name of the Execution to delete. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}\/executions\/{execution}@, where @{project}@ can be project id or number. See 'name'.
   Core.Text ->
   RunProjectsLocationsJobsExecutionsDelete
 newRunProjectsLocationsJobsExecutionsDelete name =
@@ -107,24 +105,22 @@ instance
   type
     Scopes RunProjectsLocationsJobsExecutionsDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    RunProjectsLocationsJobsExecutionsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        etag
-        uploadType
-        uploadProtocol
-        validateOnly
-        (Core.Just Core.AltJSON)
-        runService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RunProjectsLocationsJobsExecutionsDeleteResource
-            )
-            Core.mempty
+  requestClient RunProjectsLocationsJobsExecutionsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      etag
+      uploadType
+      uploadProtocol
+      validateOnly
+      (Core.Just Core.AltJSON)
+      runService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RunProjectsLocationsJobsExecutionsDeleteResource
+          )
+          Core.mempty

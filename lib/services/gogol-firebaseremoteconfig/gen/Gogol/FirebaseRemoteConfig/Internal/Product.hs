@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRemoteConfig.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FirebaseRemoteConfig.Internal.Product
@@ -53,7 +51,7 @@ module Gogol.FirebaseRemoteConfig.Internal.Product
 where
 
 import Gogol.FirebaseRemoteConfig.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | -   The RemoteConfig consists of a list of conditions (which can be thought of as named \"if\" statements) and a map of parameters (parameter key to a structure containing an optional default value, as well as a optional submap of (condition name to value when that condition is true).
 --
@@ -74,7 +72,10 @@ data RemoteConfig = RemoteConfig
 newRemoteConfig ::
   RemoteConfig
 newRemoteConfig =
-  RemoteConfig {conditions = Core.Nothing, parameters = Core.Nothing}
+  RemoteConfig
+    { conditions = Core.Nothing,
+      parameters = Core.Nothing
+    }
 
 instance Core.FromJSON RemoteConfig where
   parseJSON =
@@ -99,8 +100,7 @@ instance Core.ToJSON RemoteConfig where
 --
 -- /See:/ 'newRemoteConfig_Parameters' smart constructor.
 newtype RemoteConfig_Parameters = RemoteConfig_Parameters
-  { -- |
-    additional :: (Core.HashMap Core.Text RemoteConfigParameter)
+  { additional :: (Core.HashMap Core.Text RemoteConfigParameter)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -116,14 +116,10 @@ instance Core.FromJSON RemoteConfig_Parameters where
   parseJSON =
     Core.withObject
       "RemoteConfig_Parameters"
-      ( \o ->
-          RemoteConfig_Parameters
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> RemoteConfig_Parameters Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON RemoteConfig_Parameters where
-  toJSON RemoteConfig_Parameters {..} =
-    Core.toJSON additional
+  toJSON RemoteConfig_Parameters {..} = Core.toJSON additional
 
 -- | A single RemoteConfig Condition. A list of these (because order matters) are part of a single RemoteConfig template.
 --
@@ -212,8 +208,7 @@ instance Core.ToJSON RemoteConfigParameter where
   toJSON RemoteConfigParameter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conditionalValues" Core..=)
-              Core.<$> conditionalValues,
+          [ ("conditionalValues" Core..=) Core.<$> conditionalValues,
             ("defaultValue" Core..=) Core.<$> defaultValue,
             ("description" Core..=) Core.<$> description
           ]
@@ -223,8 +218,7 @@ instance Core.ToJSON RemoteConfigParameter where
 --
 -- /See:/ 'newRemoteConfigParameter_ConditionalValues' smart constructor.
 newtype RemoteConfigParameter_ConditionalValues = RemoteConfigParameter_ConditionalValues
-  { -- |
-    additional :: (Core.HashMap Core.Text RemoteConfigParameterValue)
+  { additional :: (Core.HashMap Core.Text RemoteConfigParameterValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -236,10 +230,7 @@ newRemoteConfigParameter_ConditionalValues ::
 newRemoteConfigParameter_ConditionalValues additional =
   RemoteConfigParameter_ConditionalValues {additional = additional}
 
-instance
-  Core.FromJSON
-    RemoteConfigParameter_ConditionalValues
-  where
+instance Core.FromJSON RemoteConfigParameter_ConditionalValues where
   parseJSON =
     Core.withObject
       "RemoteConfigParameter_ConditionalValues"
@@ -248,10 +239,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RemoteConfigParameter_ConditionalValues
-  where
+instance Core.ToJSON RemoteConfigParameter_ConditionalValues where
   toJSON RemoteConfigParameter_ConditionalValues {..} =
     Core.toJSON additional
 
@@ -289,8 +277,7 @@ instance Core.ToJSON RemoteConfigParameterValue where
   toJSON RemoteConfigParameterValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("useInAppDefault" Core..=)
-              Core.<$> useInAppDefault,
+          [ ("useInAppDefault" Core..=) Core.<$> useInAppDefault,
             ("value" Core..=) Core.<$> value
           ]
       )

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -191,6 +189,36 @@ module Gogol.Logging
     LoggingBillingAccountsLocationsOperationsListResource,
     LoggingBillingAccountsLocationsOperationsList (..),
     newLoggingBillingAccountsLocationsOperationsList,
+
+    -- ** logging.billingAccounts.locations.recentQueries.list
+    LoggingBillingAccountsLocationsRecentQueriesListResource,
+    LoggingBillingAccountsLocationsRecentQueriesList (..),
+    newLoggingBillingAccountsLocationsRecentQueriesList,
+
+    -- ** logging.billingAccounts.locations.savedQueries.create
+    LoggingBillingAccountsLocationsSavedQueriesCreateResource,
+    LoggingBillingAccountsLocationsSavedQueriesCreate (..),
+    newLoggingBillingAccountsLocationsSavedQueriesCreate,
+
+    -- ** logging.billingAccounts.locations.savedQueries.delete
+    LoggingBillingAccountsLocationsSavedQueriesDeleteResource,
+    LoggingBillingAccountsLocationsSavedQueriesDelete (..),
+    newLoggingBillingAccountsLocationsSavedQueriesDelete,
+
+    -- ** logging.billingAccounts.locations.savedQueries.get
+    LoggingBillingAccountsLocationsSavedQueriesGetResource,
+    LoggingBillingAccountsLocationsSavedQueriesGet (..),
+    newLoggingBillingAccountsLocationsSavedQueriesGet,
+
+    -- ** logging.billingAccounts.locations.savedQueries.list
+    LoggingBillingAccountsLocationsSavedQueriesListResource,
+    LoggingBillingAccountsLocationsSavedQueriesList (..),
+    newLoggingBillingAccountsLocationsSavedQueriesList,
+
+    -- ** logging.billingAccounts.locations.savedQueries.patch
+    LoggingBillingAccountsLocationsSavedQueriesPatchResource,
+    LoggingBillingAccountsLocationsSavedQueriesPatch (..),
+    newLoggingBillingAccountsLocationsSavedQueriesPatch,
 
     -- ** logging.billingAccounts.logs.delete
     LoggingBillingAccountsLogsDeleteResource,
@@ -387,6 +415,11 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsViewsGet (..),
     newLoggingFoldersLocationsBucketsViewsGet,
 
+    -- ** logging.folders.locations.buckets.views.getIamPolicy
+    LoggingFoldersLocationsBucketsViewsGetIamPolicyResource,
+    LoggingFoldersLocationsBucketsViewsGetIamPolicy (..),
+    newLoggingFoldersLocationsBucketsViewsGetIamPolicy,
+
     -- ** logging.folders.locations.buckets.views.list
     LoggingFoldersLocationsBucketsViewsListResource,
     LoggingFoldersLocationsBucketsViewsList (..),
@@ -402,6 +435,16 @@ module Gogol.Logging
     LoggingFoldersLocationsBucketsViewsPatch (..),
     newLoggingFoldersLocationsBucketsViewsPatch,
 
+    -- ** logging.folders.locations.buckets.views.setIamPolicy
+    LoggingFoldersLocationsBucketsViewsSetIamPolicyResource,
+    LoggingFoldersLocationsBucketsViewsSetIamPolicy (..),
+    newLoggingFoldersLocationsBucketsViewsSetIamPolicy,
+
+    -- ** logging.folders.locations.buckets.views.testIamPermissions
+    LoggingFoldersLocationsBucketsViewsTestIamPermissionsResource,
+    LoggingFoldersLocationsBucketsViewsTestIamPermissions (..),
+    newLoggingFoldersLocationsBucketsViewsTestIamPermissions,
+
     -- ** logging.folders.locations.get
     LoggingFoldersLocationsGetResource,
     LoggingFoldersLocationsGet (..),
@@ -411,6 +454,31 @@ module Gogol.Logging
     LoggingFoldersLocationsListResource,
     LoggingFoldersLocationsList (..),
     newLoggingFoldersLocationsList,
+
+    -- ** logging.folders.locations.logScopes.create
+    LoggingFoldersLocationsLogScopesCreateResource,
+    LoggingFoldersLocationsLogScopesCreate (..),
+    newLoggingFoldersLocationsLogScopesCreate,
+
+    -- ** logging.folders.locations.logScopes.delete
+    LoggingFoldersLocationsLogScopesDeleteResource,
+    LoggingFoldersLocationsLogScopesDelete (..),
+    newLoggingFoldersLocationsLogScopesDelete,
+
+    -- ** logging.folders.locations.logScopes.get
+    LoggingFoldersLocationsLogScopesGetResource,
+    LoggingFoldersLocationsLogScopesGet (..),
+    newLoggingFoldersLocationsLogScopesGet,
+
+    -- ** logging.folders.locations.logScopes.list
+    LoggingFoldersLocationsLogScopesListResource,
+    LoggingFoldersLocationsLogScopesList (..),
+    newLoggingFoldersLocationsLogScopesList,
+
+    -- ** logging.folders.locations.logScopes.patch
+    LoggingFoldersLocationsLogScopesPatchResource,
+    LoggingFoldersLocationsLogScopesPatch (..),
+    newLoggingFoldersLocationsLogScopesPatch,
 
     -- ** logging.folders.locations.operations.cancel
     LoggingFoldersLocationsOperationsCancelResource,
@@ -426,6 +494,36 @@ module Gogol.Logging
     LoggingFoldersLocationsOperationsListResource,
     LoggingFoldersLocationsOperationsList (..),
     newLoggingFoldersLocationsOperationsList,
+
+    -- ** logging.folders.locations.recentQueries.list
+    LoggingFoldersLocationsRecentQueriesListResource,
+    LoggingFoldersLocationsRecentQueriesList (..),
+    newLoggingFoldersLocationsRecentQueriesList,
+
+    -- ** logging.folders.locations.savedQueries.create
+    LoggingFoldersLocationsSavedQueriesCreateResource,
+    LoggingFoldersLocationsSavedQueriesCreate (..),
+    newLoggingFoldersLocationsSavedQueriesCreate,
+
+    -- ** logging.folders.locations.savedQueries.delete
+    LoggingFoldersLocationsSavedQueriesDeleteResource,
+    LoggingFoldersLocationsSavedQueriesDelete (..),
+    newLoggingFoldersLocationsSavedQueriesDelete,
+
+    -- ** logging.folders.locations.savedQueries.get
+    LoggingFoldersLocationsSavedQueriesGetResource,
+    LoggingFoldersLocationsSavedQueriesGet (..),
+    newLoggingFoldersLocationsSavedQueriesGet,
+
+    -- ** logging.folders.locations.savedQueries.list
+    LoggingFoldersLocationsSavedQueriesListResource,
+    LoggingFoldersLocationsSavedQueriesList (..),
+    newLoggingFoldersLocationsSavedQueriesList,
+
+    -- ** logging.folders.locations.savedQueries.patch
+    LoggingFoldersLocationsSavedQueriesPatchResource,
+    LoggingFoldersLocationsSavedQueriesPatch (..),
+    newLoggingFoldersLocationsSavedQueriesPatch,
 
     -- ** logging.folders.logs.delete
     LoggingFoldersLogsDeleteResource,
@@ -557,6 +655,11 @@ module Gogol.Logging
     LoggingLocationsBucketsViewsGet (..),
     newLoggingLocationsBucketsViewsGet,
 
+    -- ** logging.locations.buckets.views.getIamPolicy
+    LoggingLocationsBucketsViewsGetIamPolicyResource,
+    LoggingLocationsBucketsViewsGetIamPolicy (..),
+    newLoggingLocationsBucketsViewsGetIamPolicy,
+
     -- ** logging.locations.buckets.views.list
     LoggingLocationsBucketsViewsListResource,
     LoggingLocationsBucketsViewsList (..),
@@ -566,6 +669,16 @@ module Gogol.Logging
     LoggingLocationsBucketsViewsPatchResource,
     LoggingLocationsBucketsViewsPatch (..),
     newLoggingLocationsBucketsViewsPatch,
+
+    -- ** logging.locations.buckets.views.setIamPolicy
+    LoggingLocationsBucketsViewsSetIamPolicyResource,
+    LoggingLocationsBucketsViewsSetIamPolicy (..),
+    newLoggingLocationsBucketsViewsSetIamPolicy,
+
+    -- ** logging.locations.buckets.views.testIamPermissions
+    LoggingLocationsBucketsViewsTestIamPermissionsResource,
+    LoggingLocationsBucketsViewsTestIamPermissions (..),
+    newLoggingLocationsBucketsViewsTestIamPermissions,
 
     -- ** logging.locations.get
     LoggingLocationsGetResource,
@@ -717,6 +830,11 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsViewsGet (..),
     newLoggingOrganizationsLocationsBucketsViewsGet,
 
+    -- ** logging.organizations.locations.buckets.views.getIamPolicy
+    LoggingOrganizationsLocationsBucketsViewsGetIamPolicyResource,
+    LoggingOrganizationsLocationsBucketsViewsGetIamPolicy (..),
+    newLoggingOrganizationsLocationsBucketsViewsGetIamPolicy,
+
     -- ** logging.organizations.locations.buckets.views.list
     LoggingOrganizationsLocationsBucketsViewsListResource,
     LoggingOrganizationsLocationsBucketsViewsList (..),
@@ -732,6 +850,16 @@ module Gogol.Logging
     LoggingOrganizationsLocationsBucketsViewsPatch (..),
     newLoggingOrganizationsLocationsBucketsViewsPatch,
 
+    -- ** logging.organizations.locations.buckets.views.setIamPolicy
+    LoggingOrganizationsLocationsBucketsViewsSetIamPolicyResource,
+    LoggingOrganizationsLocationsBucketsViewsSetIamPolicy (..),
+    newLoggingOrganizationsLocationsBucketsViewsSetIamPolicy,
+
+    -- ** logging.organizations.locations.buckets.views.testIamPermissions
+    LoggingOrganizationsLocationsBucketsViewsTestIamPermissionsResource,
+    LoggingOrganizationsLocationsBucketsViewsTestIamPermissions (..),
+    newLoggingOrganizationsLocationsBucketsViewsTestIamPermissions,
+
     -- ** logging.organizations.locations.get
     LoggingOrganizationsLocationsGetResource,
     LoggingOrganizationsLocationsGet (..),
@@ -741,6 +869,31 @@ module Gogol.Logging
     LoggingOrganizationsLocationsListResource,
     LoggingOrganizationsLocationsList (..),
     newLoggingOrganizationsLocationsList,
+
+    -- ** logging.organizations.locations.logScopes.create
+    LoggingOrganizationsLocationsLogScopesCreateResource,
+    LoggingOrganizationsLocationsLogScopesCreate (..),
+    newLoggingOrganizationsLocationsLogScopesCreate,
+
+    -- ** logging.organizations.locations.logScopes.delete
+    LoggingOrganizationsLocationsLogScopesDeleteResource,
+    LoggingOrganizationsLocationsLogScopesDelete (..),
+    newLoggingOrganizationsLocationsLogScopesDelete,
+
+    -- ** logging.organizations.locations.logScopes.get
+    LoggingOrganizationsLocationsLogScopesGetResource,
+    LoggingOrganizationsLocationsLogScopesGet (..),
+    newLoggingOrganizationsLocationsLogScopesGet,
+
+    -- ** logging.organizations.locations.logScopes.list
+    LoggingOrganizationsLocationsLogScopesListResource,
+    LoggingOrganizationsLocationsLogScopesList (..),
+    newLoggingOrganizationsLocationsLogScopesList,
+
+    -- ** logging.organizations.locations.logScopes.patch
+    LoggingOrganizationsLocationsLogScopesPatchResource,
+    LoggingOrganizationsLocationsLogScopesPatch (..),
+    newLoggingOrganizationsLocationsLogScopesPatch,
 
     -- ** logging.organizations.locations.operations.cancel
     LoggingOrganizationsLocationsOperationsCancelResource,
@@ -756,6 +909,36 @@ module Gogol.Logging
     LoggingOrganizationsLocationsOperationsListResource,
     LoggingOrganizationsLocationsOperationsList (..),
     newLoggingOrganizationsLocationsOperationsList,
+
+    -- ** logging.organizations.locations.recentQueries.list
+    LoggingOrganizationsLocationsRecentQueriesListResource,
+    LoggingOrganizationsLocationsRecentQueriesList (..),
+    newLoggingOrganizationsLocationsRecentQueriesList,
+
+    -- ** logging.organizations.locations.savedQueries.create
+    LoggingOrganizationsLocationsSavedQueriesCreateResource,
+    LoggingOrganizationsLocationsSavedQueriesCreate (..),
+    newLoggingOrganizationsLocationsSavedQueriesCreate,
+
+    -- ** logging.organizations.locations.savedQueries.delete
+    LoggingOrganizationsLocationsSavedQueriesDeleteResource,
+    LoggingOrganizationsLocationsSavedQueriesDelete (..),
+    newLoggingOrganizationsLocationsSavedQueriesDelete,
+
+    -- ** logging.organizations.locations.savedQueries.get
+    LoggingOrganizationsLocationsSavedQueriesGetResource,
+    LoggingOrganizationsLocationsSavedQueriesGet (..),
+    newLoggingOrganizationsLocationsSavedQueriesGet,
+
+    -- ** logging.organizations.locations.savedQueries.list
+    LoggingOrganizationsLocationsSavedQueriesListResource,
+    LoggingOrganizationsLocationsSavedQueriesList (..),
+    newLoggingOrganizationsLocationsSavedQueriesList,
+
+    -- ** logging.organizations.locations.savedQueries.patch
+    LoggingOrganizationsLocationsSavedQueriesPatchResource,
+    LoggingOrganizationsLocationsSavedQueriesPatch (..),
+    newLoggingOrganizationsLocationsSavedQueriesPatch,
 
     -- ** logging.organizations.logs.delete
     LoggingOrganizationsLogsDeleteResource,
@@ -917,6 +1100,11 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsViewsGet (..),
     newLoggingProjectsLocationsBucketsViewsGet,
 
+    -- ** logging.projects.locations.buckets.views.getIamPolicy
+    LoggingProjectsLocationsBucketsViewsGetIamPolicyResource,
+    LoggingProjectsLocationsBucketsViewsGetIamPolicy (..),
+    newLoggingProjectsLocationsBucketsViewsGetIamPolicy,
+
     -- ** logging.projects.locations.buckets.views.list
     LoggingProjectsLocationsBucketsViewsListResource,
     LoggingProjectsLocationsBucketsViewsList (..),
@@ -932,6 +1120,16 @@ module Gogol.Logging
     LoggingProjectsLocationsBucketsViewsPatch (..),
     newLoggingProjectsLocationsBucketsViewsPatch,
 
+    -- ** logging.projects.locations.buckets.views.setIamPolicy
+    LoggingProjectsLocationsBucketsViewsSetIamPolicyResource,
+    LoggingProjectsLocationsBucketsViewsSetIamPolicy (..),
+    newLoggingProjectsLocationsBucketsViewsSetIamPolicy,
+
+    -- ** logging.projects.locations.buckets.views.testIamPermissions
+    LoggingProjectsLocationsBucketsViewsTestIamPermissionsResource,
+    LoggingProjectsLocationsBucketsViewsTestIamPermissions (..),
+    newLoggingProjectsLocationsBucketsViewsTestIamPermissions,
+
     -- ** logging.projects.locations.get
     LoggingProjectsLocationsGetResource,
     LoggingProjectsLocationsGet (..),
@@ -941,6 +1139,31 @@ module Gogol.Logging
     LoggingProjectsLocationsListResource,
     LoggingProjectsLocationsList (..),
     newLoggingProjectsLocationsList,
+
+    -- ** logging.projects.locations.logScopes.create
+    LoggingProjectsLocationsLogScopesCreateResource,
+    LoggingProjectsLocationsLogScopesCreate (..),
+    newLoggingProjectsLocationsLogScopesCreate,
+
+    -- ** logging.projects.locations.logScopes.delete
+    LoggingProjectsLocationsLogScopesDeleteResource,
+    LoggingProjectsLocationsLogScopesDelete (..),
+    newLoggingProjectsLocationsLogScopesDelete,
+
+    -- ** logging.projects.locations.logScopes.get
+    LoggingProjectsLocationsLogScopesGetResource,
+    LoggingProjectsLocationsLogScopesGet (..),
+    newLoggingProjectsLocationsLogScopesGet,
+
+    -- ** logging.projects.locations.logScopes.list
+    LoggingProjectsLocationsLogScopesListResource,
+    LoggingProjectsLocationsLogScopesList (..),
+    newLoggingProjectsLocationsLogScopesList,
+
+    -- ** logging.projects.locations.logScopes.patch
+    LoggingProjectsLocationsLogScopesPatchResource,
+    LoggingProjectsLocationsLogScopesPatch (..),
+    newLoggingProjectsLocationsLogScopesPatch,
 
     -- ** logging.projects.locations.operations.cancel
     LoggingProjectsLocationsOperationsCancelResource,
@@ -956,6 +1179,36 @@ module Gogol.Logging
     LoggingProjectsLocationsOperationsListResource,
     LoggingProjectsLocationsOperationsList (..),
     newLoggingProjectsLocationsOperationsList,
+
+    -- ** logging.projects.locations.recentQueries.list
+    LoggingProjectsLocationsRecentQueriesListResource,
+    LoggingProjectsLocationsRecentQueriesList (..),
+    newLoggingProjectsLocationsRecentQueriesList,
+
+    -- ** logging.projects.locations.savedQueries.create
+    LoggingProjectsLocationsSavedQueriesCreateResource,
+    LoggingProjectsLocationsSavedQueriesCreate (..),
+    newLoggingProjectsLocationsSavedQueriesCreate,
+
+    -- ** logging.projects.locations.savedQueries.delete
+    LoggingProjectsLocationsSavedQueriesDeleteResource,
+    LoggingProjectsLocationsSavedQueriesDelete (..),
+    newLoggingProjectsLocationsSavedQueriesDelete,
+
+    -- ** logging.projects.locations.savedQueries.get
+    LoggingProjectsLocationsSavedQueriesGetResource,
+    LoggingProjectsLocationsSavedQueriesGet (..),
+    newLoggingProjectsLocationsSavedQueriesGet,
+
+    -- ** logging.projects.locations.savedQueries.list
+    LoggingProjectsLocationsSavedQueriesListResource,
+    LoggingProjectsLocationsSavedQueriesList (..),
+    newLoggingProjectsLocationsSavedQueriesList,
+
+    -- ** logging.projects.locations.savedQueries.patch
+    LoggingProjectsLocationsSavedQueriesPatchResource,
+    LoggingProjectsLocationsSavedQueriesPatch (..),
+    newLoggingProjectsLocationsSavedQueriesPatch,
 
     -- ** logging.projects.logs.delete
     LoggingProjectsLogsDeleteResource,
@@ -1070,6 +1323,10 @@ module Gogol.Logging
     BigQueryOptions (..),
     newBigQueryOptions,
 
+    -- ** Binding
+    Binding (..),
+    newBinding,
+
     -- ** BucketMetadata
     BucketMetadata (..),
     newBucketMetadata,
@@ -1112,6 +1369,13 @@ module Gogol.Logging
     CreateLinkRequest (..),
     newCreateLinkRequest,
 
+    -- ** DefaultSinkConfig
+    DefaultSinkConfig (..),
+    newDefaultSinkConfig,
+
+    -- ** DefaultSinkConfig_Mode
+    DefaultSinkConfig_Mode (..),
+
     -- ** DeleteLinkRequest
     DeleteLinkRequest (..),
     newDeleteLinkRequest,
@@ -1127,6 +1391,18 @@ module Gogol.Logging
     -- ** Exponential
     Exponential (..),
     newExponential,
+
+    -- ** Expr
+    Expr (..),
+    newExpr,
+
+    -- ** GetIamPolicyRequest
+    GetIamPolicyRequest (..),
+    newGetIamPolicyRequest,
+
+    -- ** GetPolicyOptions
+    GetPolicyOptions (..),
+    newGetPolicyOptions,
 
     -- ** HttpRequest
     HttpRequest (..),
@@ -1192,6 +1468,10 @@ module Gogol.Logging
     ListLogMetricsResponse (..),
     newListLogMetricsResponse,
 
+    -- ** ListLogScopesResponse
+    ListLogScopesResponse (..),
+    newListLogScopesResponse,
+
     -- ** ListLogsResponse
     ListLogsResponse (..),
     newListLogsResponse,
@@ -1203,6 +1483,14 @@ module Gogol.Logging
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** ListRecentQueriesResponse
+    ListRecentQueriesResponse (..),
+    newListRecentQueriesResponse,
+
+    -- ** ListSavedQueriesResponse
+    ListSavedQueriesResponse (..),
+    newListSavedQueriesResponse,
 
     -- ** ListSinksResponse
     ListSinksResponse (..),
@@ -1262,6 +1550,10 @@ module Gogol.Logging
     LogEntrySourceLocation (..),
     newLogEntrySourceLocation,
 
+    -- ** LogErrorGroup
+    LogErrorGroup (..),
+    newLogErrorGroup,
+
     -- ** LogExclusion
     LogExclusion (..),
     newLogExclusion,
@@ -1284,6 +1576,10 @@ module Gogol.Logging
     -- ** LogMetric_Version
     LogMetric_Version (..),
 
+    -- ** LogScope
+    LogScope (..),
+    newLogScope,
+
     -- ** LogSink
     LogSink (..),
     newLogSink,
@@ -1298,6 +1594,10 @@ module Gogol.Logging
     -- ** LogView
     LogView (..),
     newLogView,
+
+    -- ** LoggingQuery
+    LoggingQuery (..),
+    newLoggingQuery,
 
     -- ** MetricDescriptor
     MetricDescriptor (..),
@@ -1318,6 +1618,9 @@ module Gogol.Logging
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MonitoredResource
     MonitoredResource (..),
@@ -1358,9 +1661,32 @@ module Gogol.Logging
     Operation_Response (..),
     newOperation_Response,
 
+    -- ** OpsAnalyticsQuery
+    OpsAnalyticsQuery (..),
+    newOpsAnalyticsQuery,
+
+    -- ** Policy
+    Policy (..),
+    newPolicy,
+
+    -- ** RecentQuery
+    RecentQuery (..),
+    newRecentQuery,
+
     -- ** RequestLog
     RequestLog (..),
     newRequestLog,
+
+    -- ** SavedQuery
+    SavedQuery (..),
+    newSavedQuery,
+
+    -- ** SavedQuery_Visibility
+    SavedQuery_Visibility (..),
+
+    -- ** SetIamPolicyRequest
+    SetIamPolicyRequest (..),
+    newSetIamPolicyRequest,
 
     -- ** Settings
     Settings (..),
@@ -1382,6 +1708,10 @@ module Gogol.Logging
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SummaryField
+    SummaryField (..),
+    newSummaryField,
+
     -- ** SuppressionInfo
     SuppressionInfo (..),
     newSuppressionInfo,
@@ -1396,6 +1726,14 @@ module Gogol.Logging
     -- ** TailLogEntriesResponse
     TailLogEntriesResponse (..),
     newTailLogEntriesResponse,
+
+    -- ** TestIamPermissionsRequest
+    TestIamPermissionsRequest (..),
+    newTestIamPermissionsRequest,
+
+    -- ** TestIamPermissionsResponse
+    TestIamPermissionsResponse (..),
+    newTestIamPermissionsResponse,
 
     -- ** UndeleteBucketRequest
     UndeleteBucketRequest (..),
@@ -1449,6 +1787,12 @@ import Gogol.Logging.BillingAccounts.Locations.List
 import Gogol.Logging.BillingAccounts.Locations.Operations.Cancel
 import Gogol.Logging.BillingAccounts.Locations.Operations.Get
 import Gogol.Logging.BillingAccounts.Locations.Operations.List
+import Gogol.Logging.BillingAccounts.Locations.RecentQueries.List
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Create
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Delete
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Get
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.List
+import Gogol.Logging.BillingAccounts.Locations.SavedQueries.Patch
 import Gogol.Logging.BillingAccounts.Logs.Delete
 import Gogol.Logging.BillingAccounts.Logs.List
 import Gogol.Logging.BillingAccounts.Sinks.Create
@@ -1488,14 +1832,28 @@ import Gogol.Logging.Folders.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Folders.Locations.Buckets.Views.Create
 import Gogol.Logging.Folders.Locations.Buckets.Views.Delete
 import Gogol.Logging.Folders.Locations.Buckets.Views.Get
+import Gogol.Logging.Folders.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Folders.Locations.Buckets.Views.List
 import Gogol.Logging.Folders.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Folders.Locations.Buckets.Views.Patch
+import Gogol.Logging.Folders.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Folders.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Folders.Locations.Get
 import Gogol.Logging.Folders.Locations.List
+import Gogol.Logging.Folders.Locations.LogScopes.Create
+import Gogol.Logging.Folders.Locations.LogScopes.Delete
+import Gogol.Logging.Folders.Locations.LogScopes.Get
+import Gogol.Logging.Folders.Locations.LogScopes.List
+import Gogol.Logging.Folders.Locations.LogScopes.Patch
 import Gogol.Logging.Folders.Locations.Operations.Cancel
 import Gogol.Logging.Folders.Locations.Operations.Get
 import Gogol.Logging.Folders.Locations.Operations.List
+import Gogol.Logging.Folders.Locations.RecentQueries.List
+import Gogol.Logging.Folders.Locations.SavedQueries.Create
+import Gogol.Logging.Folders.Locations.SavedQueries.Delete
+import Gogol.Logging.Folders.Locations.SavedQueries.Get
+import Gogol.Logging.Folders.Locations.SavedQueries.List
+import Gogol.Logging.Folders.Locations.SavedQueries.Patch
 import Gogol.Logging.Folders.Logs.Delete
 import Gogol.Logging.Folders.Logs.List
 import Gogol.Logging.Folders.Sinks.Create
@@ -1522,8 +1880,11 @@ import Gogol.Logging.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Locations.Buckets.Views.Create
 import Gogol.Logging.Locations.Buckets.Views.Delete
 import Gogol.Logging.Locations.Buckets.Views.Get
+import Gogol.Logging.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Locations.Buckets.Views.List
 import Gogol.Logging.Locations.Buckets.Views.Patch
+import Gogol.Logging.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Locations.Get
 import Gogol.Logging.Locations.List
 import Gogol.Logging.Locations.Operations.Cancel
@@ -1554,14 +1915,28 @@ import Gogol.Logging.Organizations.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Create
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Delete
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Get
+import Gogol.Logging.Organizations.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Organizations.Locations.Buckets.Views.List
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Organizations.Locations.Buckets.Views.Patch
+import Gogol.Logging.Organizations.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Organizations.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Organizations.Locations.Get
 import Gogol.Logging.Organizations.Locations.List
+import Gogol.Logging.Organizations.Locations.LogScopes.Create
+import Gogol.Logging.Organizations.Locations.LogScopes.Delete
+import Gogol.Logging.Organizations.Locations.LogScopes.Get
+import Gogol.Logging.Organizations.Locations.LogScopes.List
+import Gogol.Logging.Organizations.Locations.LogScopes.Patch
 import Gogol.Logging.Organizations.Locations.Operations.Cancel
 import Gogol.Logging.Organizations.Locations.Operations.Get
 import Gogol.Logging.Organizations.Locations.Operations.List
+import Gogol.Logging.Organizations.Locations.RecentQueries.List
+import Gogol.Logging.Organizations.Locations.SavedQueries.Create
+import Gogol.Logging.Organizations.Locations.SavedQueries.Delete
+import Gogol.Logging.Organizations.Locations.SavedQueries.Get
+import Gogol.Logging.Organizations.Locations.SavedQueries.List
+import Gogol.Logging.Organizations.Locations.SavedQueries.Patch
 import Gogol.Logging.Organizations.Logs.Delete
 import Gogol.Logging.Organizations.Logs.List
 import Gogol.Logging.Organizations.Sinks.Create
@@ -1594,14 +1969,28 @@ import Gogol.Logging.Projects.Locations.Buckets.UpdateAsync
 import Gogol.Logging.Projects.Locations.Buckets.Views.Create
 import Gogol.Logging.Projects.Locations.Buckets.Views.Delete
 import Gogol.Logging.Projects.Locations.Buckets.Views.Get
+import Gogol.Logging.Projects.Locations.Buckets.Views.GetIamPolicy
 import Gogol.Logging.Projects.Locations.Buckets.Views.List
 import Gogol.Logging.Projects.Locations.Buckets.Views.Logs.List
 import Gogol.Logging.Projects.Locations.Buckets.Views.Patch
+import Gogol.Logging.Projects.Locations.Buckets.Views.SetIamPolicy
+import Gogol.Logging.Projects.Locations.Buckets.Views.TestIamPermissions
 import Gogol.Logging.Projects.Locations.Get
 import Gogol.Logging.Projects.Locations.List
+import Gogol.Logging.Projects.Locations.LogScopes.Create
+import Gogol.Logging.Projects.Locations.LogScopes.Delete
+import Gogol.Logging.Projects.Locations.LogScopes.Get
+import Gogol.Logging.Projects.Locations.LogScopes.List
+import Gogol.Logging.Projects.Locations.LogScopes.Patch
 import Gogol.Logging.Projects.Locations.Operations.Cancel
 import Gogol.Logging.Projects.Locations.Operations.Get
 import Gogol.Logging.Projects.Locations.Operations.List
+import Gogol.Logging.Projects.Locations.RecentQueries.List
+import Gogol.Logging.Projects.Locations.SavedQueries.Create
+import Gogol.Logging.Projects.Locations.SavedQueries.Delete
+import Gogol.Logging.Projects.Locations.SavedQueries.Get
+import Gogol.Logging.Projects.Locations.SavedQueries.List
+import Gogol.Logging.Projects.Locations.SavedQueries.Patch
 import Gogol.Logging.Projects.Logs.Delete
 import Gogol.Logging.Projects.Logs.List
 import Gogol.Logging.Projects.Metrics.Create

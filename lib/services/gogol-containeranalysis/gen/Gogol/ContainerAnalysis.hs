@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ContainerAnalysis
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An implementation of the Grafeas API, which stores, and enables querying and retrieval of critical metadata about all of your software artifacts.
+-- This API is a prerequisite for leveraging Artifact Analysis scanning capabilities in both Artifact Registry and with Advanced Vulnerability Insights (runtime scanning) in GKE. In addition, the Container Analysis API is an implementation of the Grafeas API, which enables storing, querying, and retrieval of critical metadata about all of your software artifacts.
 --
 -- /See:/ <https://cloud.google.com/container-analysis/api/reference/rest/ Container Analysis API Reference>
 module Gogol.ContainerAnalysis
@@ -37,6 +35,116 @@ module Gogol.ContainerAnalysis
     CloudPlatform'FullControl,
 
     -- * Resources
+
+    -- ** containeranalysis.projects.locations.notes.batchCreate
+    ContainerAnalysisProjectsLocationsNotesBatchCreateResource,
+    ContainerAnalysisProjectsLocationsNotesBatchCreate (..),
+    newContainerAnalysisProjectsLocationsNotesBatchCreate,
+
+    -- ** containeranalysis.projects.locations.notes.create
+    ContainerAnalysisProjectsLocationsNotesCreateResource,
+    ContainerAnalysisProjectsLocationsNotesCreate (..),
+    newContainerAnalysisProjectsLocationsNotesCreate,
+
+    -- ** containeranalysis.projects.locations.notes.delete
+    ContainerAnalysisProjectsLocationsNotesDeleteResource,
+    ContainerAnalysisProjectsLocationsNotesDelete (..),
+    newContainerAnalysisProjectsLocationsNotesDelete,
+
+    -- ** containeranalysis.projects.locations.notes.get
+    ContainerAnalysisProjectsLocationsNotesGetResource,
+    ContainerAnalysisProjectsLocationsNotesGet (..),
+    newContainerAnalysisProjectsLocationsNotesGet,
+
+    -- ** containeranalysis.projects.locations.notes.getIamPolicy
+    ContainerAnalysisProjectsLocationsNotesGetIamPolicyResource,
+    ContainerAnalysisProjectsLocationsNotesGetIamPolicy (..),
+    newContainerAnalysisProjectsLocationsNotesGetIamPolicy,
+
+    -- ** containeranalysis.projects.locations.notes.list
+    ContainerAnalysisProjectsLocationsNotesListResource,
+    ContainerAnalysisProjectsLocationsNotesList (..),
+    newContainerAnalysisProjectsLocationsNotesList,
+
+    -- ** containeranalysis.projects.locations.notes.occurrences.list
+    ContainerAnalysisProjectsLocationsNotesOccurrencesListResource,
+    ContainerAnalysisProjectsLocationsNotesOccurrencesList (..),
+    newContainerAnalysisProjectsLocationsNotesOccurrencesList,
+
+    -- ** containeranalysis.projects.locations.notes.patch
+    ContainerAnalysisProjectsLocationsNotesPatchResource,
+    ContainerAnalysisProjectsLocationsNotesPatch (..),
+    newContainerAnalysisProjectsLocationsNotesPatch,
+
+    -- ** containeranalysis.projects.locations.notes.setIamPolicy
+    ContainerAnalysisProjectsLocationsNotesSetIamPolicyResource,
+    ContainerAnalysisProjectsLocationsNotesSetIamPolicy (..),
+    newContainerAnalysisProjectsLocationsNotesSetIamPolicy,
+
+    -- ** containeranalysis.projects.locations.notes.testIamPermissions
+    ContainerAnalysisProjectsLocationsNotesTestIamPermissionsResource,
+    ContainerAnalysisProjectsLocationsNotesTestIamPermissions (..),
+    newContainerAnalysisProjectsLocationsNotesTestIamPermissions,
+
+    -- ** containeranalysis.projects.locations.occurrences.batchCreate
+    ContainerAnalysisProjectsLocationsOccurrencesBatchCreateResource,
+    ContainerAnalysisProjectsLocationsOccurrencesBatchCreate (..),
+    newContainerAnalysisProjectsLocationsOccurrencesBatchCreate,
+
+    -- ** containeranalysis.projects.locations.occurrences.create
+    ContainerAnalysisProjectsLocationsOccurrencesCreateResource,
+    ContainerAnalysisProjectsLocationsOccurrencesCreate (..),
+    newContainerAnalysisProjectsLocationsOccurrencesCreate,
+
+    -- ** containeranalysis.projects.locations.occurrences.delete
+    ContainerAnalysisProjectsLocationsOccurrencesDeleteResource,
+    ContainerAnalysisProjectsLocationsOccurrencesDelete (..),
+    newContainerAnalysisProjectsLocationsOccurrencesDelete,
+
+    -- ** containeranalysis.projects.locations.occurrences.get
+    ContainerAnalysisProjectsLocationsOccurrencesGetResource,
+    ContainerAnalysisProjectsLocationsOccurrencesGet (..),
+    newContainerAnalysisProjectsLocationsOccurrencesGet,
+
+    -- ** containeranalysis.projects.locations.occurrences.getIamPolicy
+    ContainerAnalysisProjectsLocationsOccurrencesGetIamPolicyResource,
+    ContainerAnalysisProjectsLocationsOccurrencesGetIamPolicy (..),
+    newContainerAnalysisProjectsLocationsOccurrencesGetIamPolicy,
+
+    -- ** containeranalysis.projects.locations.occurrences.getNotes
+    ContainerAnalysisProjectsLocationsOccurrencesGetNotesResource,
+    ContainerAnalysisProjectsLocationsOccurrencesGetNotes (..),
+    newContainerAnalysisProjectsLocationsOccurrencesGetNotes,
+
+    -- ** containeranalysis.projects.locations.occurrences.getVulnerabilitySummary
+    ContainerAnalysisProjectsLocationsOccurrencesGetVulnerabilitySummaryResource,
+    ContainerAnalysisProjectsLocationsOccurrencesGetVulnerabilitySummary (..),
+    newContainerAnalysisProjectsLocationsOccurrencesGetVulnerabilitySummary,
+
+    -- ** containeranalysis.projects.locations.occurrences.list
+    ContainerAnalysisProjectsLocationsOccurrencesListResource,
+    ContainerAnalysisProjectsLocationsOccurrencesList (..),
+    newContainerAnalysisProjectsLocationsOccurrencesList,
+
+    -- ** containeranalysis.projects.locations.occurrences.patch
+    ContainerAnalysisProjectsLocationsOccurrencesPatchResource,
+    ContainerAnalysisProjectsLocationsOccurrencesPatch (..),
+    newContainerAnalysisProjectsLocationsOccurrencesPatch,
+
+    -- ** containeranalysis.projects.locations.occurrences.setIamPolicy
+    ContainerAnalysisProjectsLocationsOccurrencesSetIamPolicyResource,
+    ContainerAnalysisProjectsLocationsOccurrencesSetIamPolicy (..),
+    newContainerAnalysisProjectsLocationsOccurrencesSetIamPolicy,
+
+    -- ** containeranalysis.projects.locations.occurrences.testIamPermissions
+    ContainerAnalysisProjectsLocationsOccurrencesTestIamPermissionsResource,
+    ContainerAnalysisProjectsLocationsOccurrencesTestIamPermissions (..),
+    newContainerAnalysisProjectsLocationsOccurrencesTestIamPermissions,
+
+    -- ** containeranalysis.projects.locations.resources.exportSBOM
+    ContainerAnalysisProjectsLocationsResourcesExportSBOMResource,
+    ContainerAnalysisProjectsLocationsResourcesExportSBOM (..),
+    newContainerAnalysisProjectsLocationsResourcesExportSBOM,
 
     -- ** containeranalysis.projects.notes.batchCreate
     ContainerAnalysisProjectsNotesBatchCreateResource,
@@ -143,10 +251,10 @@ module Gogol.ContainerAnalysis
     ContainerAnalysisProjectsOccurrencesTestIamPermissions (..),
     newContainerAnalysisProjectsOccurrencesTestIamPermissions,
 
-    -- ** containeranalysis.projects.resources.generatePackagesSummary
-    ContainerAnalysisProjectsResourcesGeneratePackagesSummaryResource,
-    ContainerAnalysisProjectsResourcesGeneratePackagesSummary (..),
-    newContainerAnalysisProjectsResourcesGeneratePackagesSummary,
+    -- ** containeranalysis.projects.resources.exportSBOM
+    ContainerAnalysisProjectsResourcesExportSBOMResource,
+    ContainerAnalysisProjectsResourcesExportSBOM (..),
+    newContainerAnalysisProjectsResourcesExportSBOM,
 
     -- * Types
 
@@ -206,6 +314,22 @@ module Gogol.ContainerAnalysis
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** BuildDefinition
+    BuildDefinition (..),
+    newBuildDefinition,
+
+    -- ** BuildDefinition_ExternalParameters
+    BuildDefinition_ExternalParameters (..),
+    newBuildDefinition_ExternalParameters,
+
+    -- ** BuildDefinition_InternalParameters
+    BuildDefinition_InternalParameters (..),
+    newBuildDefinition_InternalParameters,
+
+    -- ** BuildMetadata
+    BuildMetadata (..),
+    newBuildMetadata,
 
     -- ** BuildNote
     BuildNote (..),
@@ -308,6 +432,10 @@ module Gogol.ContainerAnalysis
     CloudRepoSourceContext (..),
     newCloudRepoSourceContext,
 
+    -- ** CloudStorageLocation
+    CloudStorageLocation (..),
+    newCloudStorageLocation,
+
     -- ** Command
     Command (..),
     newCommand,
@@ -347,9 +475,17 @@ module Gogol.ContainerAnalysis
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsArtifactObjects,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsGoModule,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsNpmPackage,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage
     ContaineranalysisGoogleDevtoolsCloudbuildV1ArtifactsPythonPackage (..),
@@ -431,9 +567,41 @@ module Gogol.ContainerAnalysis
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1BuiltImage,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1Dependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1Dependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceDependency,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DependencyGitSourceRepository,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1DeveloperConnectConfig,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes
     ContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1FileHashes,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitConfig,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitConfigHttpConfig,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1GitSource
+    ContaineranalysisGoogleDevtoolsCloudbuildV1GitSource (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1GitSource,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1Hash
     ContaineranalysisGoogleDevtoolsCloudbuildV1Hash (..),
@@ -494,6 +662,9 @@ module Gogol.ContainerAnalysis
     ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+    ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher (..),
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest
     ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1StorageSourceManifest,
@@ -502,9 +673,17 @@ module Gogol.ContainerAnalysis
     ContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1TimeSpan,
 
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedGoModule,
+
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
     newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedMavenArtifact,
+
+    -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage
+    ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage (..),
+    newContaineranalysisGoogleDevtoolsCloudbuildV1UploadedNpmPackage,
 
     -- ** ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage
     ContaineranalysisGoogleDevtoolsCloudbuildV1UploadedPythonPackage (..),
@@ -581,6 +760,14 @@ module Gogol.ContainerAnalysis
     EnvelopeSignature (..),
     newEnvelopeSignature,
 
+    -- ** ExportSBOMRequest
+    ExportSBOMRequest (..),
+    newExportSBOMRequest,
+
+    -- ** ExportSBOMResponse
+    ExportSBOMResponse (..),
+    newExportSBOMResponse,
+
     -- ** Expr
     Expr (..),
     newExpr,
@@ -599,10 +786,6 @@ module Gogol.ContainerAnalysis
 
     -- ** FixableTotalByDigest_Severity
     FixableTotalByDigest_Severity (..),
-
-    -- ** GeneratePackagesSummaryRequest
-    GeneratePackagesSummaryRequest (..),
-    newGeneratePackagesSummaryRequest,
 
     -- ** GerritSourceContext
     GerritSourceContext (..),
@@ -692,6 +875,10 @@ module Gogol.ContainerAnalysis
     InTotoProvenance (..),
     newInTotoProvenance,
 
+    -- ** InTotoSlsaProvenanceV1
+    InTotoSlsaProvenanceV1 (..),
+    newInTotoSlsaProvenanceV1,
+
     -- ** InTotoStatement
     InTotoStatement (..),
     newInTotoStatement,
@@ -718,10 +905,6 @@ module Gogol.ContainerAnalysis
     -- ** License
     License (..),
     newLicense,
-
-    -- ** LicensesSummary
-    LicensesSummary (..),
-    newLicensesSummary,
 
     -- ** ListNoteOccurrencesResponse
     ListNoteOccurrencesResponse (..),
@@ -790,10 +973,6 @@ module Gogol.ContainerAnalysis
     -- ** PackageOccurrence_Architecture
     PackageOccurrence_Architecture (..),
 
-    -- ** PackagesSummaryResponse
-    PackagesSummaryResponse (..),
-    newPackagesSummaryResponse,
-
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -805,6 +984,14 @@ module Gogol.ContainerAnalysis
     -- ** ProjectRepoId
     ProjectRepoId (..),
     newProjectRepoId,
+
+    -- ** ProvenanceBuilder
+    ProvenanceBuilder (..),
+    newProvenanceBuilder,
+
+    -- ** ProvenanceBuilder_Version
+    ProvenanceBuilder_Version (..),
+    newProvenanceBuilder_Version,
 
     -- ** Publisher
     Publisher (..),
@@ -837,6 +1024,49 @@ module Gogol.ContainerAnalysis
     RepoId (..),
     newRepoId,
 
+    -- ** ResourceDescriptor
+    ResourceDescriptor (..),
+    newResourceDescriptor,
+
+    -- ** ResourceDescriptor_Annotations
+    ResourceDescriptor_Annotations (..),
+    newResourceDescriptor_Annotations,
+
+    -- ** ResourceDescriptor_Digest
+    ResourceDescriptor_Digest (..),
+    newResourceDescriptor_Digest,
+
+    -- ** RunDetails
+    RunDetails (..),
+    newRunDetails,
+
+    -- ** SBOMReferenceNote
+    SBOMReferenceNote (..),
+    newSBOMReferenceNote,
+
+    -- ** SBOMReferenceOccurrence
+    SBOMReferenceOccurrence (..),
+    newSBOMReferenceOccurrence,
+
+    -- ** SBOMStatus
+    SBOMStatus (..),
+    newSBOMStatus,
+
+    -- ** SBOMStatus_SbomState
+    SBOMStatus_SbomState (..),
+
+    -- ** SbomReferenceIntotoPayload
+    SbomReferenceIntotoPayload (..),
+    newSbomReferenceIntotoPayload,
+
+    -- ** SbomReferenceIntotoPredicate
+    SbomReferenceIntotoPredicate (..),
+    newSbomReferenceIntotoPredicate,
+
+    -- ** SbomReferenceIntotoPredicate_Digest
+    SbomReferenceIntotoPredicate_Digest (..),
+    newSbomReferenceIntotoPredicate_Digest,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -860,6 +1090,10 @@ module Gogol.ContainerAnalysis
     -- ** SlsaProvenance
     SlsaProvenance (..),
     newSlsaProvenance,
+
+    -- ** SlsaProvenanceV1
+    SlsaProvenanceV1 (..),
+    newSlsaProvenanceV1,
 
     -- ** SlsaProvenanceZeroTwo
     SlsaProvenanceZeroTwo (..),
@@ -996,6 +1230,28 @@ module Gogol.ContainerAnalysis
   )
 where
 
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.BatchCreate
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.Create
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.Delete
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.Get
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.GetIamPolicy
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.List
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.Occurrences.List
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.Patch
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.SetIamPolicy
+import Gogol.ContainerAnalysis.Projects.Locations.Notes.TestIamPermissions
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.BatchCreate
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Create
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Delete
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Get
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetIamPolicy
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetNotes
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.GetVulnerabilitySummary
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.List
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.Patch
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.SetIamPolicy
+import Gogol.ContainerAnalysis.Projects.Locations.Occurrences.TestIamPermissions
+import Gogol.ContainerAnalysis.Projects.Locations.Resources.ExportSBOM
 import Gogol.ContainerAnalysis.Projects.Notes.BatchCreate
 import Gogol.ContainerAnalysis.Projects.Notes.Create
 import Gogol.ContainerAnalysis.Projects.Notes.Delete
@@ -1017,5 +1273,5 @@ import Gogol.ContainerAnalysis.Projects.Occurrences.List
 import Gogol.ContainerAnalysis.Projects.Occurrences.Patch
 import Gogol.ContainerAnalysis.Projects.Occurrences.SetIamPolicy
 import Gogol.ContainerAnalysis.Projects.Occurrences.TestIamPermissions
-import Gogol.ContainerAnalysis.Projects.Resources.GeneratePackagesSummary
+import Gogol.ContainerAnalysis.Projects.Resources.ExportSBOM
 import Gogol.ContainerAnalysis.Types

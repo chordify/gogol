@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InterconnectAttachments.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InterconnectAttachments.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.interconnectAttachments.delete@ method which the
 -- 'ComputeInterconnectAttachmentsDelete' request conforms to.
@@ -96,48 +94,44 @@ newComputeInterconnectAttachmentsDelete ::
   -- |  Name of the region for this request. See 'region'.
   Core.Text ->
   ComputeInterconnectAttachmentsDelete
-newComputeInterconnectAttachmentsDelete interconnectAttachment project region =
-  ComputeInterconnectAttachmentsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      interconnectAttachment = interconnectAttachment,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInterconnectAttachmentsDelete
+  interconnectAttachment
+  project
+  region =
     ComputeInterconnectAttachmentsDelete
-  where
-  type
-    Rs ComputeInterconnectAttachmentsDelete =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        interconnectAttachment = interconnectAttachment,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeInterconnectAttachmentsDelete where
+  type Rs ComputeInterconnectAttachmentsDelete = Operation
   type
     Scopes ComputeInterconnectAttachmentsDelete =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeInterconnectAttachmentsDelete {..} =
-      go
-        project
-        region
-        interconnectAttachment
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInterconnectAttachmentsDeleteResource
-            )
-            Core.mempty
+  requestClient ComputeInterconnectAttachmentsDelete {..} =
+    go
+      project
+      region
+      interconnectAttachment
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeInterconnectAttachmentsDeleteResource
+          )
+          Core.mempty

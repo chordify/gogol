@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Achievements.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Achievements.List
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.achievements.list@ method which the
 -- 'GamesAchievementsList' request conforms to.
@@ -60,9 +58,7 @@ type GamesAchievementsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              PlayerAchievementListResponse
+    Core.:> Core.Get '[Core.JSON] PlayerAchievementListResponse
 
 -- | Lists the progress for all your application\'s achievements for the currently authenticated player.
 --
@@ -111,12 +107,8 @@ newGamesAchievementsList playerId =
     }
 
 instance Core.GoogleRequest GamesAchievementsList where
-  type
-    Rs GamesAchievementsList =
-      PlayerAchievementListResponse
-  type
-    Scopes GamesAchievementsList =
-      '[Games'FullControl]
+  type Rs GamesAchievementsList = PlayerAchievementListResponse
+  type Scopes GamesAchievementsList = '[Games'FullControl]
   requestClient GamesAchievementsList {..} =
     go
       playerId
@@ -134,7 +126,5 @@ instance Core.GoogleRequest GamesAchievementsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesAchievementsListResource
-          )
+          (Core.Proxy :: Core.Proxy GamesAchievementsListResource)
           Core.mempty

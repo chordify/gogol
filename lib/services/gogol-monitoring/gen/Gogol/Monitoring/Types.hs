@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Monitoring.Types
@@ -57,6 +55,9 @@ module Gogol.Monitoring.Types
     -- ** AlertPolicy_Combiner
     AlertPolicy_Combiner (..),
 
+    -- ** AlertPolicy_Severity
+    AlertPolicy_Severity (..),
+
     -- ** AlertPolicy_UserLabels
     AlertPolicy_UserLabels (..),
     newAlertPolicy_UserLabels,
@@ -64,6 +65,9 @@ module Gogol.Monitoring.Types
     -- ** AlertStrategy
     AlertStrategy (..),
     newAlertStrategy,
+
+    -- ** AlertStrategy_NotificationPromptsItem
+    AlertStrategy_NotificationPromptsItem (..),
 
     -- ** AppEngine
     AppEngine (..),
@@ -89,6 +93,10 @@ module Gogol.Monitoring.Types
     BasicSli (..),
     newBasicSli,
 
+    -- ** BooleanTest
+    BooleanTest (..),
+    newBooleanTest,
+
     -- ** BucketOptions
     BucketOptions (..),
     newBucketOptions,
@@ -96,6 +104,10 @@ module Gogol.Monitoring.Types
     -- ** CloudEndpoints
     CloudEndpoints (..),
     newCloudEndpoints,
+
+    -- ** CloudFunctionV2Target
+    CloudFunctionV2Target (..),
+    newCloudFunctionV2Target,
 
     -- ** CloudRun
     CloudRun (..),
@@ -162,6 +174,10 @@ module Gogol.Monitoring.Types
     -- ** Custom
     Custom (..),
     newCustom,
+
+    -- ** Daily
+    Daily (..),
+    newDaily,
 
     -- ** Distribution
     Distribution (..),
@@ -249,6 +265,10 @@ module Gogol.Monitoring.Types
     Group (..),
     newGroup,
 
+    -- ** Hourly
+    Hourly (..),
+    newHourly,
+
     -- ** HttpCheck
     HttpCheck (..),
     newHttpCheck,
@@ -299,6 +319,10 @@ module Gogol.Monitoring.Types
     -- ** Linear
     Linear (..),
     newLinear,
+
+    -- ** Link
+    Link (..),
+    newLink,
 
     -- ** ListAlertPoliciesResponse
     ListAlertPoliciesResponse (..),
@@ -396,6 +420,9 @@ module Gogol.Monitoring.Types
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
 
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
+
     -- ** MetricRange
     MetricRange (..),
     newMetricRange,
@@ -409,6 +436,10 @@ module Gogol.Monitoring.Types
 
     -- ** MetricThreshold_EvaluationMissingData
     MetricThreshold_EvaluationMissingData (..),
+
+    -- ** Minutes
+    Minutes (..),
+    newMinutes,
 
     -- ** MonitoredResource
     MonitoredResource (..),
@@ -512,6 +543,14 @@ module Gogol.Monitoring.Types
     PointData (..),
     newPointData,
 
+    -- ** PrometheusQueryLanguageCondition
+    PrometheusQueryLanguageCondition (..),
+    newPrometheusQueryLanguageCondition,
+
+    -- ** PrometheusQueryLanguageCondition_Labels
+    PrometheusQueryLanguageCondition_Labels (..),
+    newPrometheusQueryLanguageCondition_Labels,
+
     -- ** QueryTimeSeriesRequest
     QueryTimeSeriesRequest (..),
     newQueryTimeSeriesRequest,
@@ -542,6 +581,13 @@ module Gogol.Monitoring.Types
     -- ** ResponseStatusCode_StatusClass
     ResponseStatusCode_StatusClass (..),
 
+    -- ** RowCountTest
+    RowCountTest (..),
+    newRowCountTest,
+
+    -- ** RowCountTest_Comparison
+    RowCountTest_Comparison (..),
+
     -- ** SendNotificationChannelVerificationCodeRequest
     SendNotificationChannelVerificationCodeRequest (..),
     newSendNotificationChannelVerificationCodeRequest,
@@ -553,6 +599,13 @@ module Gogol.Monitoring.Types
     -- ** Service_UserLabels
     Service_UserLabels (..),
     newService_UserLabels,
+
+    -- ** ServiceAgentAuthentication
+    ServiceAgentAuthentication (..),
+    newServiceAgentAuthentication,
+
+    -- ** ServiceAgentAuthentication_Type
+    ServiceAgentAuthentication_Type (..),
 
     -- ** ServiceLevelIndicator
     ServiceLevelIndicator (..),
@@ -581,6 +634,10 @@ module Gogol.Monitoring.Types
     SpanContext (..),
     newSpanContext,
 
+    -- ** SqlCondition
+    SqlCondition (..),
+    newSqlCondition,
+
     -- ** Status
     Status (..),
     newStatus,
@@ -588,6 +645,10 @@ module Gogol.Monitoring.Types
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
+
+    -- ** SyntheticMonitorTarget
+    SyntheticMonitorTarget (..),
+    newSyntheticMonitorTarget,
 
     -- ** TcpCheck
     TcpCheck (..),
@@ -600,6 +661,10 @@ module Gogol.Monitoring.Types
     -- ** TimeInterval
     TimeInterval (..),
     newTimeInterval,
+
+    -- ** TimeOfDay'
+    TimeOfDay' (..),
+    newTimeOfDay,
 
     -- ** TimeSeries
     TimeSeries (..),
@@ -732,7 +797,7 @@ where
 
 import Gogol.Monitoring.Internal.Product
 import Gogol.Monitoring.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Cloud Monitoring API. This contains the host and root path used as a starting point for constructing service requests.
 monitoringService :: Core.ServiceConfig
@@ -742,13 +807,17 @@ monitoringService =
     "monitoring.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and write monitoring data for all of your Google and third-party Cloud and API projects
-type Monitoring'FullControl = "https://www.googleapis.com/auth/monitoring"
+type Monitoring'FullControl =
+  "https://www.googleapis.com/auth/monitoring"
 
 -- | View monitoring data for all of your Google Cloud and third-party projects
-type Monitoring'Read = "https://www.googleapis.com/auth/monitoring.read"
+type Monitoring'Read =
+  "https://www.googleapis.com/auth/monitoring.read"
 
 -- | Publish metric data to your Google Cloud projects
-type Monitoring'Write = "https://www.googleapis.com/auth/monitoring.write"
+type Monitoring'Write =
+  "https://www.googleapis.com/auth/monitoring.write"

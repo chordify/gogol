@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Services.Versions.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -43,7 +41,7 @@ module Gogol.AppEngine.Apps.Services.Versions.Patch
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.services.versions.patch@ method which the
 -- 'AppEngineAppsServicesVersionsPatch' request conforms to.
@@ -106,27 +104,26 @@ newAppEngineAppsServicesVersionsPatch ::
   -- |  Part of @name@. See documentation of @appsId@. See 'versionsId'.
   Core.Text ->
   AppEngineAppsServicesVersionsPatch
-newAppEngineAppsServicesVersionsPatch appsId payload servicesId versionsId =
-  AppEngineAppsServicesVersionsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      callback = Core.Nothing,
-      payload = payload,
-      servicesId = servicesId,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      versionsId = versionsId
-    }
-
-instance
-  Core.GoogleRequest
+newAppEngineAppsServicesVersionsPatch
+  appsId
+  payload
+  servicesId
+  versionsId =
     AppEngineAppsServicesVersionsPatch
-  where
-  type
-    Rs AppEngineAppsServicesVersionsPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        callback = Core.Nothing,
+        payload = payload,
+        servicesId = servicesId,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        versionsId = versionsId
+      }
+
+instance Core.GoogleRequest AppEngineAppsServicesVersionsPatch where
+  type Rs AppEngineAppsServicesVersionsPatch = Operation
   type
     Scopes AppEngineAppsServicesVersionsPatch =
       '[CloudPlatform'FullControl]
@@ -148,7 +145,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AppEngineAppsServicesVersionsPatchResource
+              Core.Proxy AppEngineAppsServicesVersionsPatchResource
           )
           Core.mempty

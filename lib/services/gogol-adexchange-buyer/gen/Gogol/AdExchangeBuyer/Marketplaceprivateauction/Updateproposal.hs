@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.marketplaceprivateauction.updateproposal@ method which the
 -- 'AdExchangeBuyerMarketplaceprivateauctionUpdateproposal' request conforms to.
@@ -51,9 +49,7 @@ type AdExchangeBuyerMarketplaceprivateauctionUpdateproposalResource =
     Core.:> Core.Capture "privateAuctionId" Core.Text
     Core.:> "updateproposal"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UpdatePrivateAuctionProposalRequest
+    Core.:> Core.ReqBody '[Core.JSON] UpdatePrivateAuctionProposalRequest
     Core.:> Core.Post '[Core.JSON] ()
 
 -- | Update a given private auction proposal
@@ -74,23 +70,22 @@ newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal ::
   -- |  The private auction id to be updated. See 'privateAuctionId'.
   Core.Text ->
   AdExchangeBuyerMarketplaceprivateauctionUpdateproposal
-newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal payload privateAuctionId =
-  AdExchangeBuyerMarketplaceprivateauctionUpdateproposal
-    { payload = payload,
-      privateAuctionId = privateAuctionId
-    }
+newAdExchangeBuyerMarketplaceprivateauctionUpdateproposal
+  payload
+  privateAuctionId =
+    AdExchangeBuyerMarketplaceprivateauctionUpdateproposal
+      { payload =
+          payload,
+        privateAuctionId = privateAuctionId
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyerMarketplaceprivateauctionUpdateproposal
   where
+  type Rs AdExchangeBuyerMarketplaceprivateauctionUpdateproposal = ()
   type
-    Rs
-      AdExchangeBuyerMarketplaceprivateauctionUpdateproposal =
-      ()
-  type
-    Scopes
-      AdExchangeBuyerMarketplaceprivateauctionUpdateproposal =
+    Scopes AdExchangeBuyerMarketplaceprivateauctionUpdateproposal =
       '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyerMarketplaceprivateauctionUpdateproposal {..} =

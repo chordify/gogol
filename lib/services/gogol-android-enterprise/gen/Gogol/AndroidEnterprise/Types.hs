@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidEnterprise.Types
@@ -145,10 +143,6 @@ module Gogol.AndroidEnterprise.Types
     ConfigurationVariables (..),
     newConfigurationVariables,
 
-    -- ** CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
-
     -- ** Device
     Device (..),
     newDevice,
@@ -175,9 +169,22 @@ module Gogol.AndroidEnterprise.Types
     DevicesListResponse (..),
     newDevicesListResponse,
 
+    -- ** EnrollmentToken
+    EnrollmentToken (..),
+    newEnrollmentToken,
+
+    -- ** EnrollmentToken_EnrollmentTokenType
+    EnrollmentToken_EnrollmentTokenType (..),
+
     -- ** Enterprise
     Enterprise (..),
     newEnterprise,
+
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
 
     -- ** EnterpriseAccount
     EnterpriseAccount (..),
@@ -186,6 +193,13 @@ module Gogol.AndroidEnterprise.Types
     -- ** EnterpriseAuthenticationAppLinkConfig
     EnterpriseAuthenticationAppLinkConfig (..),
     newEnterpriseAuthenticationAppLinkConfig,
+
+    -- ** EnterpriseUpgradeEvent
+    EnterpriseUpgradeEvent (..),
+    newEnterpriseUpgradeEvent,
+
+    -- ** EnterpriseUpgradeEvent_UpgradeState
+    EnterpriseUpgradeEvent_UpgradeState (..),
 
     -- ** EnterprisesListResponse
     EnterprisesListResponse (..),
@@ -205,6 +219,10 @@ module Gogol.AndroidEnterprise.Types
     -- ** EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- ** GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -511,9 +529,6 @@ module Gogol.AndroidEnterprise.Types
     WebAppsListResponse (..),
     newWebAppsListResponse,
 
-    -- ** EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType (..),
-
     -- ** EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType (..),
 
@@ -524,7 +539,7 @@ where
 
 import Gogol.AndroidEnterprise.Internal.Product
 import Gogol.AndroidEnterprise.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Play EMM API. This contains the host and root path used as a starting point for constructing service requests.
 androidEnterpriseService :: Core.ServiceConfig
@@ -534,4 +549,5 @@ androidEnterpriseService =
     "androidenterprise.googleapis.com"
 
 -- | Manage corporate Android devices
-type Androidenterprise'FullControl = "https://www.googleapis.com/auth/androidenterprise"
+type Androidenterprise'FullControl =
+  "https://www.googleapis.com/auth/androidenterprise"

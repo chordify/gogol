@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Docs.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Docs.Types
@@ -71,6 +69,10 @@ module Gogol.Docs.Types
     -- ** Body
     Body (..),
     newBody,
+
+    -- ** BookmarkLink
+    BookmarkLink (..),
+    newBookmarkLink,
 
     -- ** Bullet
     Bullet (..),
@@ -235,6 +237,46 @@ module Gogol.Docs.Types
     DocumentStyleSuggestionState (..),
     newDocumentStyleSuggestionState,
 
+    -- ** DocumentTab
+    DocumentTab (..),
+    newDocumentTab,
+
+    -- ** DocumentTab_Footers
+    DocumentTab_Footers (..),
+    newDocumentTab_Footers,
+
+    -- ** DocumentTab_Footnotes
+    DocumentTab_Footnotes (..),
+    newDocumentTab_Footnotes,
+
+    -- ** DocumentTab_Headers
+    DocumentTab_Headers (..),
+    newDocumentTab_Headers,
+
+    -- ** DocumentTab_InlineObjects
+    DocumentTab_InlineObjects (..),
+    newDocumentTab_InlineObjects,
+
+    -- ** DocumentTab_Lists
+    DocumentTab_Lists (..),
+    newDocumentTab_Lists,
+
+    -- ** DocumentTab_NamedRanges
+    DocumentTab_NamedRanges (..),
+    newDocumentTab_NamedRanges,
+
+    -- ** DocumentTab_PositionedObjects
+    DocumentTab_PositionedObjects (..),
+    newDocumentTab_PositionedObjects,
+
+    -- ** DocumentTab_SuggestedDocumentStyleChanges
+    DocumentTab_SuggestedDocumentStyleChanges (..),
+    newDocumentTab_SuggestedDocumentStyleChanges,
+
+    -- ** DocumentTab_SuggestedNamedStylesChanges
+    DocumentTab_SuggestedNamedStylesChanges (..),
+    newDocumentTab_SuggestedNamedStylesChanges,
+
     -- ** EmbeddedDrawingProperties
     EmbeddedDrawingProperties (..),
     newEmbeddedDrawingProperties,
@@ -292,6 +334,10 @@ module Gogol.Docs.Types
     -- ** Header
     Header (..),
     newHeader,
+
+    -- ** HeadingLink
+    HeadingLink (..),
+    newHeadingLink,
 
     -- ** HorizontalRule
     HorizontalRule (..),
@@ -698,6 +744,14 @@ module Gogol.Docs.Types
     SuggestedTextStyle (..),
     newSuggestedTextStyle,
 
+    -- ** Tab
+    Tab (..),
+    newTab,
+
+    -- ** TabProperties
+    TabProperties (..),
+    newTabProperties,
+
     -- ** TabStop
     TabStop (..),
     newTabStop,
@@ -774,6 +828,10 @@ module Gogol.Docs.Types
     TableStyle (..),
     newTableStyle,
 
+    -- ** TabsCriteria
+    TabsCriteria (..),
+    newTabsCriteria,
+
     -- ** TextRun
     TextRun (..),
     newTextRun,
@@ -840,7 +898,7 @@ where
 
 import Gogol.Docs.Internal.Product
 import Gogol.Docs.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Docs API. This contains the host and root path used as a starting point for constructing service requests.
 docsService :: Core.ServiceConfig
@@ -850,10 +908,12 @@ docsService =
     "docs.googleapis.com"
 
 -- | See, edit, create, and delete all your Google Docs documents
-type Documents'FullControl = "https://www.googleapis.com/auth/documents"
+type Documents'FullControl =
+  "https://www.googleapis.com/auth/documents"
 
 -- | See all your Google Docs documents
-type Documents'Readonly = "https://www.googleapis.com/auth/documents.readonly"
+type Documents'Readonly =
+  "https://www.googleapis.com/auth/documents.readonly"
 
 -- | See, edit, create, and delete all of your Google Drive files
 type Drive'FullControl = "https://www.googleapis.com/auth/drive"
@@ -862,4 +922,5 @@ type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
 -- | See and download all your Google Drive files
-type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"
+type Drive'Readonly =
+  "https://www.googleapis.com/auth/drive.readonly"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TPU.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TPU.Internal.Sum
@@ -39,6 +37,9 @@ module Gogol.TPU.Internal.Sum
         AcceleratorConfig_Type_V2,
         AcceleratorConfig_Type_V3,
         AcceleratorConfig_Type_V4,
+        AcceleratorConfig_Type_V5LITEPOD,
+        AcceleratorConfig_Type_V5P,
+        AcceleratorConfig_Type_V6E,
         ..
       ),
 
@@ -87,6 +88,30 @@ module Gogol.TPU.Internal.Sum
         Node_State_Hiding,
         Node_State_Hidden,
         Node_State_Unhiding,
+        Node_State_Unknown,
+        ..
+      ),
+
+    -- * QueuedResourceState_State
+    QueuedResourceState_State
+      ( QueuedResourceState_State_STATEUNSPECIFIED,
+        QueuedResourceState_State_Creating,
+        QueuedResourceState_State_Accepted,
+        QueuedResourceState_State_Provisioning,
+        QueuedResourceState_State_Failed,
+        QueuedResourceState_State_Deleting,
+        QueuedResourceState_State_Active,
+        QueuedResourceState_State_Suspending,
+        QueuedResourceState_State_Suspended,
+        QueuedResourceState_State_WAITINGFORRESOURCES,
+        ..
+      ),
+
+    -- * QueuedResourceState_StateInitiator
+    QueuedResourceState_StateInitiator
+      ( QueuedResourceState_StateInitiator_STATEINITIATORUNSPECIFIED,
+        QueuedResourceState_StateInitiator_User,
+        QueuedResourceState_StateInitiator_Service,
         ..
       ),
 
@@ -104,7 +129,7 @@ module Gogol.TPU.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -162,11 +187,26 @@ pattern AcceleratorConfig_Type_V3 = AcceleratorConfig_Type "V3"
 pattern AcceleratorConfig_Type_V4 :: AcceleratorConfig_Type
 pattern AcceleratorConfig_Type_V4 = AcceleratorConfig_Type "V4"
 
+-- | TPU v5lite pod.
+pattern AcceleratorConfig_Type_V5LITEPOD :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V5LITEPOD = AcceleratorConfig_Type "V5LITE_POD"
+
+-- | TPU v5p.
+pattern AcceleratorConfig_Type_V5P :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V5P = AcceleratorConfig_Type "V5P"
+
+-- | TPU v6e.
+pattern AcceleratorConfig_Type_V6E :: AcceleratorConfig_Type
+pattern AcceleratorConfig_Type_V6E = AcceleratorConfig_Type "V6E"
+
 {-# COMPLETE
   AcceleratorConfig_Type_TYPEUNSPECIFIED,
   AcceleratorConfig_Type_V2,
   AcceleratorConfig_Type_V3,
   AcceleratorConfig_Type_V4,
+  AcceleratorConfig_Type_V5LITEPOD,
+  AcceleratorConfig_Type_V5P,
+  AcceleratorConfig_Type_V6E,
   AcceleratorConfig_Type
   #-}
 
@@ -323,7 +363,7 @@ pattern Node_State_Reimaging = Node_State "REIMAGING"
 pattern Node_State_Deleting :: Node_State
 pattern Node_State_Deleting = Node_State "DELETING"
 
--- | TPU node is being repaired and may be unusable. Details can be found in the @help_description@ field.
+-- | TPU node is being repaired and may be unusable. Details can be found in the \'help_description\' field.
 pattern Node_State_Repairing :: Node_State
 pattern Node_State_Repairing = Node_State "REPAIRING"
 
@@ -359,6 +399,10 @@ pattern Node_State_Hidden = Node_State "HIDDEN"
 pattern Node_State_Unhiding :: Node_State
 pattern Node_State_Unhiding = Node_State "UNHIDING"
 
+-- | TPU node has unknown state after a failed repair.
+pattern Node_State_Unknown :: Node_State
+pattern Node_State_Unknown = Node_State "UNKNOWN"
+
 {-# COMPLETE
   Node_State_STATEUNSPECIFIED,
   Node_State_Creating,
@@ -375,7 +419,107 @@ pattern Node_State_Unhiding = Node_State "UNHIDING"
   Node_State_Hiding,
   Node_State_Hidden,
   Node_State_Unhiding,
+  Node_State_Unknown,
   Node_State
+  #-}
+
+-- | Output only. State of the QueuedResource request.
+newtype QueuedResourceState_State = QueuedResourceState_State {fromQueuedResourceState_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | State of the QueuedResource request is not known\/set.
+pattern QueuedResourceState_State_STATEUNSPECIFIED :: QueuedResourceState_State
+pattern QueuedResourceState_State_STATEUNSPECIFIED = QueuedResourceState_State "STATE_UNSPECIFIED"
+
+-- | The QueuedResource request has been received. We\'re still working on determining if we will be able to honor this request.
+pattern QueuedResourceState_State_Creating :: QueuedResourceState_State
+pattern QueuedResourceState_State_Creating = QueuedResourceState_State "CREATING"
+
+-- | The QueuedResource request has passed initial validation\/admission control and has been persisted in the queue.
+pattern QueuedResourceState_State_Accepted :: QueuedResourceState_State
+pattern QueuedResourceState_State_Accepted = QueuedResourceState_State "ACCEPTED"
+
+-- | The QueuedResource request has been selected. The associated resources are currently being provisioned (or very soon will begin provisioning).
+pattern QueuedResourceState_State_Provisioning :: QueuedResourceState_State
+pattern QueuedResourceState_State_Provisioning = QueuedResourceState_State "PROVISIONING"
+
+-- | The request could not be completed. This may be due to some late-discovered problem with the request itself, or due to unavailability of resources within the constraints of the request (e.g., the \'valid until\' start timing constraint expired).
+pattern QueuedResourceState_State_Failed :: QueuedResourceState_State
+pattern QueuedResourceState_State_Failed = QueuedResourceState_State "FAILED"
+
+-- | The QueuedResource is being deleted.
+pattern QueuedResourceState_State_Deleting :: QueuedResourceState_State
+pattern QueuedResourceState_State_Deleting = QueuedResourceState_State "DELETING"
+
+-- | The resources specified in the QueuedResource request have been provisioned and are ready for use by the end-user\/consumer.
+pattern QueuedResourceState_State_Active :: QueuedResourceState_State
+pattern QueuedResourceState_State_Active = QueuedResourceState_State "ACTIVE"
+
+-- | The resources specified in the QueuedResource request are being deleted. This may have been initiated by the user, or the Cloud TPU service. Inspect the state data for more details.
+pattern QueuedResourceState_State_Suspending :: QueuedResourceState_State
+pattern QueuedResourceState_State_Suspending = QueuedResourceState_State "SUSPENDING"
+
+-- | The resources specified in the QueuedResource request have been deleted.
+pattern QueuedResourceState_State_Suspended :: QueuedResourceState_State
+pattern QueuedResourceState_State_Suspended = QueuedResourceState_State "SUSPENDED"
+
+-- | The QueuedResource request has passed initial validation and has been persisted in the queue. It will remain in this state until there are sufficient free resources to begin provisioning your request. Wait times will vary significantly depending on demand levels. When demand is high, not all requests can be immediately provisioned. If you need more reliable obtainability of TPUs consider purchasing a reservation. To put a limit on how long you are willing to wait, use <https://cloud.google.com/tpu/docs/queued-resources#request_a_queued_resource_before_a_specified_time timing constraints>.
+pattern QueuedResourceState_State_WAITINGFORRESOURCES :: QueuedResourceState_State
+pattern QueuedResourceState_State_WAITINGFORRESOURCES = QueuedResourceState_State "WAITING_FOR_RESOURCES"
+
+{-# COMPLETE
+  QueuedResourceState_State_STATEUNSPECIFIED,
+  QueuedResourceState_State_Creating,
+  QueuedResourceState_State_Accepted,
+  QueuedResourceState_State_Provisioning,
+  QueuedResourceState_State_Failed,
+  QueuedResourceState_State_Deleting,
+  QueuedResourceState_State_Active,
+  QueuedResourceState_State_Suspending,
+  QueuedResourceState_State_Suspended,
+  QueuedResourceState_State_WAITINGFORRESOURCES,
+  QueuedResourceState_State
+  #-}
+
+-- | Output only. The initiator of the QueuedResources\'s current state. Used to indicate whether the SUSPENDING\/SUSPENDED state was initiated by the user or the service.
+newtype QueuedResourceState_StateInitiator = QueuedResourceState_StateInitiator {fromQueuedResourceState_StateInitiator :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state initiator is unspecified.
+pattern QueuedResourceState_StateInitiator_STATEINITIATORUNSPECIFIED :: QueuedResourceState_StateInitiator
+pattern QueuedResourceState_StateInitiator_STATEINITIATORUNSPECIFIED = QueuedResourceState_StateInitiator "STATE_INITIATOR_UNSPECIFIED"
+
+-- | The current QueuedResource state was initiated by the user.
+pattern QueuedResourceState_StateInitiator_User :: QueuedResourceState_StateInitiator
+pattern QueuedResourceState_StateInitiator_User = QueuedResourceState_StateInitiator "USER"
+
+-- | The current QueuedResource state was initiated by the service.
+pattern QueuedResourceState_StateInitiator_Service :: QueuedResourceState_StateInitiator
+pattern QueuedResourceState_StateInitiator_Service = QueuedResourceState_StateInitiator "SERVICE"
+
+{-# COMPLETE
+  QueuedResourceState_StateInitiator_STATEINITIATORUNSPECIFIED,
+  QueuedResourceState_StateInitiator_User,
+  QueuedResourceState_StateInitiator_Service,
+  QueuedResourceState_StateInitiator
   #-}
 
 -- | Type of the Symptom.

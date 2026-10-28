@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceNetworking.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceNetworking.Types
@@ -80,6 +78,14 @@ module Gogol.ServiceNetworking.Types
 
     -- ** Api_Syntax
     Api_Syntax (..),
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AuthProvider
     AuthProvider (..),
@@ -210,6 +216,10 @@ module Gogol.ServiceNetworking.Types
     DnsZone (..),
     newDnsZone,
 
+    -- ** DnsZonePair
+    DnsZonePair (..),
+    newDnsZonePair,
+
     -- ** Documentation
     Documentation (..),
     newDocumentation,
@@ -253,6 +263,10 @@ module Gogol.ServiceNetworking.Types
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Field
     Field (..),
     newField,
@@ -263,9 +277,21 @@ module Gogol.ServiceNetworking.Types
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
+
+    -- ** GetDnsZoneResponse
+    GetDnsZoneResponse (..),
+    newGetDnsZoneResponse,
+
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** GoogleCloudServicenetworkingV1ConsumerConfigReservedRange
     GoogleCloudServicenetworkingV1ConsumerConfigReservedRange (..),
@@ -310,6 +336,14 @@ module Gogol.ServiceNetworking.Types
     ListConnectionsResponse (..),
     newListConnectionsResponse,
 
+    -- ** ListDnsRecordSetsResponse
+    ListDnsRecordSetsResponse (..),
+    newListDnsRecordSetsResponse,
+
+    -- ** ListDnsZonesResponse
+    ListDnsZonesResponse (..),
+    newListDnsZonesResponse,
+
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
@@ -341,6 +375,10 @@ module Gogol.ServiceNetworking.Types
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -364,6 +402,9 @@ module Gogol.ServiceNetworking.Types
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -519,6 +560,10 @@ module Gogol.ServiceNetworking.Types
     SecondaryIpRangeSpec (..),
     newSecondaryIpRangeSpec,
 
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
+
     -- ** Service
     Service (..),
     newService,
@@ -596,10 +641,14 @@ module Gogol.ServiceNetworking.Types
 
     -- ** ValidateConsumerConfigResponse_ValidationError
     ValidateConsumerConfigResponse_ValidationError (..),
+
+    -- ** VpcServiceControls
+    VpcServiceControls (..),
+    newVpcServiceControls,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceNetworking.Internal.Product
 import Gogol.ServiceNetworking.Internal.Sum
 
@@ -611,7 +660,9 @@ serviceNetworkingService =
     "servicenetworking.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google API service configuration
-type Service'Management = "https://www.googleapis.com/auth/service.management"
+type Service'Management =
+  "https://www.googleapis.com/auth/service.management"

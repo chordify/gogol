@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the access control policy for a billing account. Replaces any existing policy. The caller must have the @billing.accounts.setIamPolicy@ permission on the account, which is often given to billing account <https://cloud.google.com/billing/docs/how-to/billing-access administrators>.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.billingAccounts.setIamPolicy@.
 module Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
   ( -- * Resource
     CloudbillingBillingAccountsSetIamPolicyResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.SetIamPolicy
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.setIamPolicy@ method which the
 -- 'CloudbillingBillingAccountsSetIamPolicy' request conforms to.
@@ -95,35 +93,26 @@ newCloudbillingBillingAccountsSetIamPolicy payload resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingBillingAccountsSetIamPolicy
-  where
-  type
-    Rs CloudbillingBillingAccountsSetIamPolicy =
-      Policy
+instance Core.GoogleRequest CloudbillingBillingAccountsSetIamPolicy where
+  type Rs CloudbillingBillingAccountsSetIamPolicy = Policy
   type
     Scopes CloudbillingBillingAccountsSetIamPolicy =
-      '[ CloudBilling'FullControl,
-         CloudPlatform'FullControl
-       ]
-  requestClient
-    CloudbillingBillingAccountsSetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        billingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudbillingBillingAccountsSetIamPolicyResource
-            )
-            Core.mempty
+      '[CloudBilling'FullControl, CloudPlatform'FullControl]
+  requestClient CloudbillingBillingAccountsSetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      billingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudbillingBillingAccountsSetIamPolicyResource
+          )
+          Core.mempty

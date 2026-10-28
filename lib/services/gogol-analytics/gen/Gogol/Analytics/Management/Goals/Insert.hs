@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Goals.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Goals.Insert
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.goals.insert@ method which the
 -- 'AnalyticsManagementGoalsInsert' request conforms to.
@@ -85,22 +83,21 @@ newAnalyticsManagementGoalsInsert ::
   -- |  Web property ID to create the goal for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementGoalsInsert
-newAnalyticsManagementGoalsInsert accountId payload profileId webPropertyId =
-  AnalyticsManagementGoalsInsert
-    { accountId = accountId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementGoalsInsert
+  accountId
+  payload
+  profileId
+  webPropertyId =
     AnalyticsManagementGoalsInsert
-  where
+      { accountId = accountId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementGoalsInsert where
   type Rs AnalyticsManagementGoalsInsert = Goal
-  type
-    Scopes AnalyticsManagementGoalsInsert =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementGoalsInsert = '[Analytics'Edit]
   requestClient AnalyticsManagementGoalsInsert {..} =
     go
       accountId
@@ -112,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementGoalsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementGoalsInsertResource)
           Core.mempty

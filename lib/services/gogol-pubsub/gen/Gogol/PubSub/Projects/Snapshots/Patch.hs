@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Snapshots.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing snapshot. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
+-- Updates an existing snapshot by updating the fields specified in the update mask. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.snapshots.patch@.
 module Gogol.PubSub.Projects.Snapshots.Patch
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Snapshots.Patch
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.snapshots.patch@ method which the
@@ -56,7 +54,7 @@ type PubSubProjectsSnapshotsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] UpdateSnapshotRequest
     Core.:> Core.Patch '[Core.JSON] Snapshot
 
--- | Updates an existing snapshot. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
+-- | Updates an existing snapshot by updating the fields specified in the update mask. Snapshots are used in <https://cloud.google.com/pubsub/docs/replay-overview Seek> operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
 --
 -- /See:/ 'newPubSubProjectsSnapshotsPatch' smart constructor.
 data PubSubProjectsSnapshotsPatch = PubSubProjectsSnapshotsPatch
@@ -66,7 +64,7 @@ data PubSubProjectsSnapshotsPatch = PubSubProjectsSnapshotsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the snapshot.
+    -- | Optional. The name of the snapshot.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: UpdateSnapshotRequest,
@@ -79,7 +77,7 @@ data PubSubProjectsSnapshotsPatch = PubSubProjectsSnapshotsPatch
 
 -- | Creates a value of 'PubSubProjectsSnapshotsPatch' with the minimum fields required to make a request.
 newPubSubProjectsSnapshotsPatch ::
-  -- |  The name of the snapshot. See 'name'.
+  -- |  Optional. The name of the snapshot. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   UpdateSnapshotRequest ->
@@ -95,10 +93,7 @@ newPubSubProjectsSnapshotsPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsSnapshotsPatch
-  where
+instance Core.GoogleRequest PubSubProjectsSnapshotsPatch where
   type Rs PubSubProjectsSnapshotsPatch = Snapshot
   type
     Scopes PubSubProjectsSnapshotsPatch =
@@ -117,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsSnapshotsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy PubSubProjectsSnapshotsPatchResource)
           Core.mempty

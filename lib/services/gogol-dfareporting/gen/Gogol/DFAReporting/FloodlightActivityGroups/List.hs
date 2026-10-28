@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.FloodlightActivityGroups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.FloodlightActivityGroups.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.floodlightActivityGroups.list@ method which the
 -- 'DFAReportingFloodlightActivityGroupsList' request conforms to.
@@ -54,26 +52,16 @@ type DFAReportingFloodlightActivityGroupsListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "advertiserId" Core.Int64
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "floodlightConfigurationId"
-              Core.Int64
+    Core.:> Core.QueryParam "floodlightConfigurationId" Core.Int64
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              FloodlightActivityGroupsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              FloodlightActivityGroupsListSortOrder
-    Core.:> Core.QueryParam
-              "type"
-              FloodlightActivityGroupsListType
+    Core.:> Core.QueryParam "sortField" FloodlightActivityGroupsListSortField
+    Core.:> Core.QueryParam "sortOrder" FloodlightActivityGroupsListSortOrder
+    Core.:> Core.QueryParam "type" FloodlightActivityGroupsListType
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
@@ -134,7 +122,8 @@ newDFAReportingFloodlightActivityGroupsList profileId =
       profileId = profileId,
       searchString = Core.Nothing,
       sortField = FloodlightActivityGroupsListSortField_ID,
-      sortOrder = FloodlightActivityGroupsListSortOrder_Ascending,
+      sortOrder =
+        FloodlightActivityGroupsListSortOrder_Ascending,
       type' = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -150,31 +139,29 @@ instance
   type
     Scopes DFAReportingFloodlightActivityGroupsList =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingFloodlightActivityGroupsList {..} =
-      go
-        profileId
-        xgafv
-        accessToken
-        advertiserId
-        callback
-        floodlightConfigurationId
-        (ids Core.^. Core._Default)
-        (Core.Just maxResults)
-        pageToken
-        searchString
-        (Core.Just sortField)
-        (Core.Just sortOrder)
-        type'
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingFloodlightActivityGroupsListResource
-            )
-            Core.mempty
+  requestClient DFAReportingFloodlightActivityGroupsList {..} =
+    go
+      profileId
+      xgafv
+      accessToken
+      advertiserId
+      callback
+      floodlightConfigurationId
+      (ids Core.^. Core._Default)
+      (Core.Just maxResults)
+      pageToken
+      searchString
+      (Core.Just sortField)
+      (Core.Just sortOrder)
+      type'
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingFloodlightActivityGroupsListResource
+          )
+          Core.mempty

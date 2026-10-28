@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Blogger.Comments.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Blogger.Comments.List
 where
 
 import Gogol.Blogger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @blogger.comments.list@ method which the
 -- 'BloggerCommentsList' request conforms to.
@@ -74,29 +72,20 @@ data BloggerCommentsList = BloggerCommentsList
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- |
     blogId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     endDate :: (Core.Maybe Core.Text),
-    -- |
     fetchBodies :: (Core.Maybe Core.Bool),
-    -- |
     maxResults :: (Core.Maybe Core.Word32),
-    -- |
     pageToken :: (Core.Maybe Core.Text),
-    -- |
     postId :: Core.Text,
-    -- |
     startDate :: (Core.Maybe Core.Text),
-    -- |
     status :: (Core.Maybe CommentsListStatus),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- |
     view :: (Core.Maybe CommentsListView)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -152,7 +141,5 @@ instance Core.GoogleRequest BloggerCommentsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BloggerCommentsListResource
-          )
+          (Core.Proxy :: Core.Proxy BloggerCommentsListResource)
           Core.mempty

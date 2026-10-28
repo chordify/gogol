@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Profiles.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Profiles.Delete
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profiles.delete@ method which the
 -- 'AnalyticsManagementProfilesDelete' request conforms to.
@@ -79,21 +77,19 @@ newAnalyticsManagementProfilesDelete ::
   -- |  Web property ID to delete the view (profile) for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfilesDelete
-newAnalyticsManagementProfilesDelete accountId profileId webPropertyId =
-  AnalyticsManagementProfilesDelete
-    { accountId = accountId,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementProfilesDelete
+  accountId
+  profileId
+  webPropertyId =
     AnalyticsManagementProfilesDelete
-  where
+      { accountId = accountId,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementProfilesDelete where
   type Rs AnalyticsManagementProfilesDelete = ()
-  type
-    Scopes AnalyticsManagementProfilesDelete =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementProfilesDelete = '[Analytics'Edit]
   requestClient AnalyticsManagementProfilesDelete {..} =
     go
       accountId

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Partners.Companies.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Partners.Companies.List
 where
 
 import Gogol.Partners.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @partners.companies.list@ method which the
 -- 'PartnersCompaniesList' request conforms to.
@@ -55,29 +53,19 @@ type PartnersCompaniesListResource =
     Core.:> Core.QueryParams "gpsMotivations" Core.Text
     Core.:> Core.QueryParams "industries" Core.Text
     Core.:> Core.QueryParams "languageCodes" Core.Text
-    Core.:> Core.QueryParam
-              "maxMonthlyBudget.currencyCode"
-              Core.Text
+    Core.:> Core.QueryParam "maxMonthlyBudget.currencyCode" Core.Text
     Core.:> Core.QueryParam "maxMonthlyBudget.nanos" Core.Int32
     Core.:> Core.QueryParam "maxMonthlyBudget.units" Core.Int64
-    Core.:> Core.QueryParam
-              "minMonthlyBudget.currencyCode"
-              Core.Text
-    Core.:> Core.QueryParam
-              "minMonthlyBudget.nanos"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "minMonthlyBudget.units"
-              Core.Int64
+    Core.:> Core.QueryParam "minMonthlyBudget.currencyCode" Core.Text
+    Core.:> Core.QueryParam "minMonthlyBudget.nanos" Core.Int32
+    Core.:> Core.QueryParam "minMonthlyBudget.units" Core.Int64
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParams
               "requestMetadata.experimentIds"
               Core.Text
-    Core.:> Core.QueryParam
-              "requestMetadata.locale"
-              Core.Text
+    Core.:> Core.QueryParam "requestMetadata.locale" Core.Text
     Core.:> Core.QueryParam
               "requestMetadata.partnersSessionId"
               Core.Text
@@ -93,21 +81,15 @@ type PartnersCompaniesListResource =
     Core.:> Core.QueryParam
               "requestMetadata.userOverrides.userId"
               Core.Text
-    Core.:> Core.QueryParams
-              "services"
-              Core.Text
+    Core.:> Core.QueryParams "services" Core.Text
     Core.:> Core.QueryParams
               "specializations"
               Core.Text
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam
               "upload_protocol"
               Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              Core.Text
+    Core.:> Core.QueryParam "view" Core.Text
     Core.:> Core.QueryParam
               "websiteUrl"
               Core.Text
@@ -262,7 +244,5 @@ instance Core.GoogleRequest PartnersCompaniesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PartnersCompaniesListResource
-          )
+          (Core.Proxy :: Core.Proxy PartnersCompaniesListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Models.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Models.List
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.models.list@ method which the
 -- 'MlProjectsModelsList' request conforms to.
@@ -57,9 +55,7 @@ type MlProjectsModelsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudMlV1__ListModelsResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudMlV1__ListModelsResponse
 
 -- | Lists the models in a project. Each project can contain multiple models, and each model can have multiple versions. If there are no models that match the request parameters, the list request returns an empty response body: {}.
 --
@@ -105,9 +101,7 @@ newMlProjectsModelsList parent =
     }
 
 instance Core.GoogleRequest MlProjectsModelsList where
-  type
-    Rs MlProjectsModelsList =
-      GoogleCloudMlV1__ListModelsResponse
+  type Rs MlProjectsModelsList = GoogleCloudMlV1__ListModelsResponse
   type
     Scopes MlProjectsModelsList =
       '[CloudPlatform'FullControl, CloudPlatform'ReadOnly]
@@ -127,7 +121,5 @@ instance Core.GoogleRequest MlProjectsModelsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MlProjectsModelsListResource
-          )
+          (Core.Proxy :: Core.Proxy MlProjectsModelsListResource)
           Core.mempty

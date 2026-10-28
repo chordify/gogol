@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deactivate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Deacti
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.basePlans.offers.deactivate@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate' request conforms to.
@@ -61,9 +59,7 @@ type AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivateResource 
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DeactivateSubscriptionOfferRequest
+    Core.:> Core.ReqBody '[Core.JSON] DeactivateSubscriptionOfferRequest
     Core.:> Core.Post '[Core.JSON] SubscriptionOffer
 
 -- | Deactivates a subscription offer. Once deactivated, existing subscribers will maintain their subscription, but the offer will become unavailable to new subscribers.
@@ -106,19 +102,26 @@ newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate ::
   -- |  Required. The parent subscription (ID) of the offer to deactivate. See 'productId'.
   Core.Text ->
   AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate
-newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate basePlanId offerId packageName payload productId =
-  AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      basePlanId = basePlanId,
-      callback = Core.Nothing,
-      offerId = offerId,
-      packageName = packageName,
-      payload = payload,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate
+  basePlanId
+  offerId
+  packageName
+  payload
+  productId =
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersDeactivate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        basePlanId = basePlanId,
+        callback = Core.Nothing,
+        offerId = offerId,
+        packageName = packageName,
+        payload = payload,
+        productId = productId,
+        uploadType = Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

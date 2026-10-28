@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.BillingAccounts.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Updates a billing account\'s fields. Currently the only field that can be edited is @display_name@. The current authenticated user must have the @billing.accounts.update@ IAM permission, which is typically given to the <https://cloud.google.com/billing/docs/how-to/billing-access administrator> of the billing account.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.billingAccounts.patch@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.billingAccounts.patch@.
 module Gogol.Billing.Cloudbilling.BillingAccounts.Patch
   ( -- * Resource
     CloudbillingBillingAccountsPatchResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.BillingAccounts.Patch
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.billingAccounts.patch@ method which the
 -- 'CloudbillingBillingAccountsPatch' request conforms to.
@@ -99,18 +97,11 @@ newCloudbillingBillingAccountsPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingBillingAccountsPatch
-  where
-  type
-    Rs CloudbillingBillingAccountsPatch =
-      BillingAccount
+instance Core.GoogleRequest CloudbillingBillingAccountsPatch where
+  type Rs CloudbillingBillingAccountsPatch = BillingAccount
   type
     Scopes CloudbillingBillingAccountsPatch =
-      '[ CloudBilling'FullControl,
-         CloudPlatform'FullControl
-       ]
+      '[CloudBilling'FullControl, CloudPlatform'FullControl]
   requestClient CloudbillingBillingAccountsPatch {..} =
     go
       name
@@ -126,7 +117,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CloudbillingBillingAccountsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy CloudbillingBillingAccountsPatchResource)
           Core.mempty

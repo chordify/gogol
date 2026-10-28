@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SecurityCenter.Organizations.NotificationConfigs.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SecurityCenter.Organizations.NotificationConfigs.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SecurityCenter.Types
 
 -- | A resource alias for @securitycenter.organizations.notificationConfigs.create@ method which the
@@ -88,29 +86,30 @@ newSecurityCenterOrganizationsNotificationConfigsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   NotificationConfig ->
   SecurityCenterOrganizationsNotificationConfigsCreate
-newSecurityCenterOrganizationsNotificationConfigsCreate parent payload =
-  SecurityCenterOrganizationsNotificationConfigsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      configId = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSecurityCenterOrganizationsNotificationConfigsCreate
+  parent
+  payload =
+    SecurityCenterOrganizationsNotificationConfigsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        configId = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SecurityCenterOrganizationsNotificationConfigsCreate
   where
   type
-    Rs
-      SecurityCenterOrganizationsNotificationConfigsCreate =
+    Rs SecurityCenterOrganizationsNotificationConfigsCreate =
       NotificationConfig
   type
-    Scopes
-      SecurityCenterOrganizationsNotificationConfigsCreate =
+    Scopes SecurityCenterOrganizationsNotificationConfigsCreate =
       '[CloudPlatform'FullControl]
   requestClient
     SecurityCenterOrganizationsNotificationConfigsCreate {..} =

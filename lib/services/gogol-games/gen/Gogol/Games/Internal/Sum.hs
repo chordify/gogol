@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Games.Internal.Sum
@@ -35,16 +33,14 @@ module Gogol.Games.Internal.Sum
 
     -- * AchievementDefinition_AchievementType
     AchievementDefinition_AchievementType
-      ( AchievementDefinition_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED,
-        AchievementDefinition_AchievementType_Standard,
+      ( AchievementDefinition_AchievementType_Standard,
         AchievementDefinition_AchievementType_Incremental,
         ..
       ),
 
     -- * AchievementDefinition_InitialState
     AchievementDefinition_InitialState
-      ( AchievementDefinition_InitialState_INITIALACHIEVEMENTSTATEUNSPECIFIED,
-        AchievementDefinition_InitialState_Hidden,
+      ( AchievementDefinition_InitialState_Hidden,
         AchievementDefinition_InitialState_Revealed,
         AchievementDefinition_InitialState_Unlocked,
         ..
@@ -52,16 +48,14 @@ module Gogol.Games.Internal.Sum
 
     -- * AchievementRevealResponse_CurrentState
     AchievementRevealResponse_CurrentState
-      ( AchievementRevealResponse_CurrentState_REVEALACHIEVEMENTSTATEUNSPECIFIED,
-        AchievementRevealResponse_CurrentState_Revealed,
+      ( AchievementRevealResponse_CurrentState_Revealed,
         AchievementRevealResponse_CurrentState_Unlocked,
         ..
       ),
 
     -- * AchievementUpdateRequest_UpdateType
     AchievementUpdateRequest_UpdateType
-      ( AchievementUpdateRequest_UpdateType_ACHIEVEMENTUPDATETYPEUNSPECIFIED,
-        AchievementUpdateRequest_UpdateType_Reveal,
+      ( AchievementUpdateRequest_UpdateType_Reveal,
         AchievementUpdateRequest_UpdateType_Unlock,
         AchievementUpdateRequest_UpdateType_Increment,
         AchievementUpdateRequest_UpdateType_SETSTEPSATLEAST,
@@ -70,8 +64,7 @@ module Gogol.Games.Internal.Sum
 
     -- * AchievementUpdateResponse_CurrentState
     AchievementUpdateResponse_CurrentState
-      ( AchievementUpdateResponse_CurrentState_UPDATEDACHIEVEMENTSTATEUNSPECIFIED,
-        AchievementUpdateResponse_CurrentState_Hidden,
+      ( AchievementUpdateResponse_CurrentState_Hidden,
         AchievementUpdateResponse_CurrentState_Revealed,
         AchievementUpdateResponse_CurrentState_Unlocked,
         ..
@@ -79,15 +72,13 @@ module Gogol.Games.Internal.Sum
 
     -- * Application_EnabledFeaturesItem
     Application_EnabledFeaturesItem
-      ( Application_EnabledFeaturesItem_APPLICATIONFEATUREUNSPECIFIED,
-        Application_EnabledFeaturesItem_Snapshots,
+      ( Application_EnabledFeaturesItem_Snapshots,
         ..
       ),
 
     -- * EventBatchRecordFailure_FailureCause
     EventBatchRecordFailure_FailureCause
-      ( EventBatchRecordFailure_FailureCause_EVENTFAILURECAUSEUNSPECIFIED,
-        EventBatchRecordFailure_FailureCause_TOOLARGE,
+      ( EventBatchRecordFailure_FailureCause_TOOLARGE,
         EventBatchRecordFailure_FailureCause_TIMEPERIODEXPIRED,
         EventBatchRecordFailure_FailureCause_TIMEPERIODSHORT,
         EventBatchRecordFailure_FailureCause_TIMEPERIODLONG,
@@ -98,24 +89,21 @@ module Gogol.Games.Internal.Sum
 
     -- * EventDefinition_Visibility
     EventDefinition_Visibility
-      ( EventDefinition_Visibility_EVENTVISIBILITYUNSPECIFIED,
-        EventDefinition_Visibility_Revealed,
+      ( EventDefinition_Visibility_Revealed,
         EventDefinition_Visibility_Hidden,
         ..
       ),
 
     -- * EventRecordFailure_FailureCause
     EventRecordFailure_FailureCause
-      ( EventRecordFailure_FailureCause_EVENTUPDATEFAILURECAUSEUNSPECIFIED,
-        EventRecordFailure_FailureCause_NOTFOUND,
+      ( EventRecordFailure_FailureCause_NOTFOUND,
         EventRecordFailure_FailureCause_INVALIDUPDATEVALUE,
         ..
       ),
 
     -- * Instance_PlatformType
     Instance_PlatformType
-      ( Instance_PlatformType_PLATFORMTYPEUNSPECIFIED,
-        Instance_PlatformType_Android,
+      ( Instance_PlatformType_Android,
         Instance_PlatformType_Ios,
         Instance_PlatformType_WEBAPP,
         ..
@@ -123,33 +111,49 @@ module Gogol.Games.Internal.Sum
 
     -- * Leaderboard_Order
     Leaderboard_Order
-      ( Leaderboard_Order_SCOREORDERUNSPECIFIED,
-        Leaderboard_Order_LARGERISBETTER,
+      ( Leaderboard_Order_LARGERISBETTER,
         Leaderboard_Order_SMALLERISBETTER,
         ..
       ),
 
     -- * LeaderboardEntry_TimeSpan
     LeaderboardEntry_TimeSpan
-      ( LeaderboardEntry_TimeSpan_SCORETIMESPANUNSPECIFIED,
-        LeaderboardEntry_TimeSpan_ALLTIME,
+      ( LeaderboardEntry_TimeSpan_ALLTIME,
         LeaderboardEntry_TimeSpan_Weekly,
         LeaderboardEntry_TimeSpan_Daily,
         ..
       ),
 
+    -- * LinkPersonaRequest_CardinalityConstraint
+    LinkPersonaRequest_CardinalityConstraint
+      ( LinkPersonaRequest_CardinalityConstraint_ONEPERSONATOONEPLAYER,
+        ..
+      ),
+
+    -- * LinkPersonaRequest_ConflictingLinksResolutionPolicy
+    LinkPersonaRequest_ConflictingLinksResolutionPolicy
+      ( LinkPersonaRequest_ConflictingLinksResolutionPolicy_KEEPEXISTINGLINKS,
+        LinkPersonaRequest_ConflictingLinksResolutionPolicy_CREATENEWLINK,
+        ..
+      ),
+
+    -- * LinkPersonaResponse_State
+    LinkPersonaResponse_State
+      ( LinkPersonaResponse_State_LINKCREATED,
+        LinkPersonaResponse_State_PERSONAORPLAYERALREADYLINKED,
+        ..
+      ),
+
     -- * Player_FriendStatus
     Player_FriendStatus
-      ( Player_FriendStatus_FRIENDSTATUSUNSPECIFIED,
-        Player_FriendStatus_NORELATIONSHIP,
+      ( Player_FriendStatus_NORELATIONSHIP,
         Player_FriendStatus_Friend,
         ..
       ),
 
     -- * PlayerAchievement_AchievementState
     PlayerAchievement_AchievementState
-      ( PlayerAchievement_AchievementState_STATEUNSPECIFIED,
-        PlayerAchievement_AchievementState_Hidden,
+      ( PlayerAchievement_AchievementState_Hidden,
         PlayerAchievement_AchievementState_Revealed,
         PlayerAchievement_AchievementState_Unlocked,
         ..
@@ -157,8 +161,7 @@ module Gogol.Games.Internal.Sum
 
     -- * PlayerLeaderboardScore_TimeSpan
     PlayerLeaderboardScore_TimeSpan
-      ( PlayerLeaderboardScore_TimeSpan_SCORETIMESPANUNSPECIFIED,
-        PlayerLeaderboardScore_TimeSpan_ALLTIME,
+      ( PlayerLeaderboardScore_TimeSpan_ALLTIME,
         PlayerLeaderboardScore_TimeSpan_Weekly,
         PlayerLeaderboardScore_TimeSpan_Daily,
         ..
@@ -166,8 +169,7 @@ module Gogol.Games.Internal.Sum
 
     -- * PlayerScore_TimeSpan
     PlayerScore_TimeSpan
-      ( PlayerScore_TimeSpan_SCORETIMESPANUNSPECIFIED,
-        PlayerScore_TimeSpan_ALLTIME,
+      ( PlayerScore_TimeSpan_ALLTIME,
         PlayerScore_TimeSpan_Weekly,
         PlayerScore_TimeSpan_Daily,
         ..
@@ -175,8 +177,7 @@ module Gogol.Games.Internal.Sum
 
     -- * PlayerScoreResponse_BeatenScoreTimeSpansItem
     PlayerScoreResponse_BeatenScoreTimeSpansItem
-      ( PlayerScoreResponse_BeatenScoreTimeSpansItem_SCORETIMESPANUNSPECIFIED,
-        PlayerScoreResponse_BeatenScoreTimeSpansItem_ALLTIME,
+      ( PlayerScoreResponse_BeatenScoreTimeSpansItem_ALLTIME,
         PlayerScoreResponse_BeatenScoreTimeSpansItem_Weekly,
         PlayerScoreResponse_BeatenScoreTimeSpansItem_Daily,
         ..
@@ -184,8 +185,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ProfileSettings_FriendsListVisibility
     ProfileSettings_FriendsListVisibility
-      ( ProfileSettings_FriendsListVisibility_FRIENDSLISTVISIBILITYUNSPECIFIED,
-        ProfileSettings_FriendsListVisibility_Visible,
+      ( ProfileSettings_FriendsListVisibility_Visible,
         ProfileSettings_FriendsListVisibility_REQUESTREQUIRED,
         ProfileSettings_FriendsListVisibility_Unavailable,
         ..
@@ -193,8 +193,7 @@ module Gogol.Games.Internal.Sum
 
     -- * RevisionCheckResponse_RevisionStatus
     RevisionCheckResponse_RevisionStatus
-      ( RevisionCheckResponse_RevisionStatus_REVISIONSTATUSUNSPECIFIED,
-        RevisionCheckResponse_RevisionStatus_OK,
+      ( RevisionCheckResponse_RevisionStatus_OK,
         RevisionCheckResponse_RevisionStatus_Deprecated,
         RevisionCheckResponse_RevisionStatus_Invalid,
         ..
@@ -202,8 +201,7 @@ module Gogol.Games.Internal.Sum
 
     -- * Snapshot_Type
     Snapshot_Type
-      ( Snapshot_Type_SNAPSHOTTYPEUNSPECIFIED,
-        Snapshot_Type_SAVEGAME,
+      ( Snapshot_Type_SAVEGAME,
         ..
       ),
 
@@ -218,8 +216,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ApplicationsGetPlatformType
     ApplicationsGetPlatformType
-      ( ApplicationsGetPlatformType_PLATFORMTYPEUNSPECIFIED,
-        ApplicationsGetPlatformType_Android,
+      ( ApplicationsGetPlatformType_Android,
         ApplicationsGetPlatformType_Ios,
         ApplicationsGetPlatformType_WEBAPP,
         ..
@@ -227,16 +224,14 @@ module Gogol.Games.Internal.Sum
 
     -- * ApplicationsGetEndPointEndPointType
     ApplicationsGetEndPointEndPointType
-      ( ApplicationsGetEndPointEndPointType_ENDPOINTTYPEUNSPECIFIED,
-        ApplicationsGetEndPointEndPointType_PROFILECREATION,
+      ( ApplicationsGetEndPointEndPointType_PROFILECREATION,
         ApplicationsGetEndPointEndPointType_PROFILESETTINGS,
         ..
       ),
 
     -- * MetagameListCategoriesByPlayerCollection
     MetagameListCategoriesByPlayerCollection
-      ( MetagameListCategoriesByPlayerCollection_COLLECTIONUNSPECIFIED,
-        MetagameListCategoriesByPlayerCollection_All,
+      ( MetagameListCategoriesByPlayerCollection_All,
         ..
       ),
 
@@ -248,8 +243,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresGetIncludeRankType
     ScoresGetIncludeRankType
-      ( ScoresGetIncludeRankType_INCLUDERANKTYPEUNSPECIFIED,
-        ScoresGetIncludeRankType_All,
+      ( ScoresGetIncludeRankType_All,
         ScoresGetIncludeRankType_Public,
         ScoresGetIncludeRankType_Social,
         ScoresGetIncludeRankType_Friends,
@@ -258,8 +252,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresGetTimeSpan
     ScoresGetTimeSpan
-      ( ScoresGetTimeSpan_SCORETIMESPANUNSPECIFIED,
-        ScoresGetTimeSpan_All,
+      ( ScoresGetTimeSpan_All,
         ScoresGetTimeSpan_ALLTIME,
         ScoresGetTimeSpan_Weekly,
         ScoresGetTimeSpan_Daily,
@@ -268,8 +261,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresListCollection
     ScoresListCollection
-      ( ScoresListCollection_SCORECOLLECTIONUNSPECIFIED,
-        ScoresListCollection_Public,
+      ( ScoresListCollection_Public,
         ScoresListCollection_Social,
         ScoresListCollection_Friends,
         ..
@@ -277,8 +269,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresListTimeSpan
     ScoresListTimeSpan
-      ( ScoresListTimeSpan_SCORETIMESPANUNSPECIFIED,
-        ScoresListTimeSpan_ALLTIME,
+      ( ScoresListTimeSpan_ALLTIME,
         ScoresListTimeSpan_Weekly,
         ScoresListTimeSpan_Daily,
         ..
@@ -286,8 +277,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresListWindowCollection
     ScoresListWindowCollection
-      ( ScoresListWindowCollection_SCORECOLLECTIONUNSPECIFIED,
-        ScoresListWindowCollection_Public,
+      ( ScoresListWindowCollection_Public,
         ScoresListWindowCollection_Social,
         ScoresListWindowCollection_Friends,
         ..
@@ -295,8 +285,7 @@ module Gogol.Games.Internal.Sum
 
     -- * ScoresListWindowTimeSpan
     ScoresListWindowTimeSpan
-      ( ScoresListWindowTimeSpan_SCORETIMESPANUNSPECIFIED,
-        ScoresListWindowTimeSpan_ALLTIME,
+      ( ScoresListWindowTimeSpan_ALLTIME,
         ScoresListWindowTimeSpan_Weekly,
         ScoresListWindowTimeSpan_Daily,
         ..
@@ -304,7 +293,7 @@ module Gogol.Games.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -346,10 +335,6 @@ newtype AchievementDefinition_AchievementType = AchievementDefinition_Achievemen
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern AchievementDefinition_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED :: AchievementDefinition_AchievementType
-pattern AchievementDefinition_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED = AchievementDefinition_AchievementType "ACHIEVEMENT_TYPE_UNSPECIFIED"
-
 -- | Achievement is either locked or unlocked.
 pattern AchievementDefinition_AchievementType_Standard :: AchievementDefinition_AchievementType
 pattern AchievementDefinition_AchievementType_Standard = AchievementDefinition_AchievementType "STANDARD"
@@ -359,7 +344,6 @@ pattern AchievementDefinition_AchievementType_Incremental :: AchievementDefiniti
 pattern AchievementDefinition_AchievementType_Incremental = AchievementDefinition_AchievementType "INCREMENTAL"
 
 {-# COMPLETE
-  AchievementDefinition_AchievementType_ACHIEVEMENTTYPEUNSPECIFIED,
   AchievementDefinition_AchievementType_Standard,
   AchievementDefinition_AchievementType_Incremental,
   AchievementDefinition_AchievementType
@@ -378,10 +362,6 @@ newtype AchievementDefinition_InitialState = AchievementDefinition_InitialState 
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern AchievementDefinition_InitialState_INITIALACHIEVEMENTSTATEUNSPECIFIED :: AchievementDefinition_InitialState
-pattern AchievementDefinition_InitialState_INITIALACHIEVEMENTSTATEUNSPECIFIED = AchievementDefinition_InitialState "INITIAL_ACHIEVEMENT_STATE_UNSPECIFIED"
-
 -- | Achievement is hidden.
 pattern AchievementDefinition_InitialState_Hidden :: AchievementDefinition_InitialState
 pattern AchievementDefinition_InitialState_Hidden = AchievementDefinition_InitialState "HIDDEN"
@@ -395,7 +375,6 @@ pattern AchievementDefinition_InitialState_Unlocked :: AchievementDefinition_Ini
 pattern AchievementDefinition_InitialState_Unlocked = AchievementDefinition_InitialState "UNLOCKED"
 
 {-# COMPLETE
-  AchievementDefinition_InitialState_INITIALACHIEVEMENTSTATEUNSPECIFIED,
   AchievementDefinition_InitialState_Hidden,
   AchievementDefinition_InitialState_Revealed,
   AchievementDefinition_InitialState_Unlocked,
@@ -415,10 +394,6 @@ newtype AchievementRevealResponse_CurrentState = AchievementRevealResponse_Curre
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern AchievementRevealResponse_CurrentState_REVEALACHIEVEMENTSTATEUNSPECIFIED :: AchievementRevealResponse_CurrentState
-pattern AchievementRevealResponse_CurrentState_REVEALACHIEVEMENTSTATEUNSPECIFIED = AchievementRevealResponse_CurrentState "REVEAL_ACHIEVEMENT_STATE_UNSPECIFIED"
-
 -- | Achievement is revealed.
 pattern AchievementRevealResponse_CurrentState_Revealed :: AchievementRevealResponse_CurrentState
 pattern AchievementRevealResponse_CurrentState_Revealed = AchievementRevealResponse_CurrentState "REVEALED"
@@ -428,7 +403,6 @@ pattern AchievementRevealResponse_CurrentState_Unlocked :: AchievementRevealResp
 pattern AchievementRevealResponse_CurrentState_Unlocked = AchievementRevealResponse_CurrentState "UNLOCKED"
 
 {-# COMPLETE
-  AchievementRevealResponse_CurrentState_REVEALACHIEVEMENTSTATEUNSPECIFIED,
   AchievementRevealResponse_CurrentState_Revealed,
   AchievementRevealResponse_CurrentState_Unlocked,
   AchievementRevealResponse_CurrentState
@@ -447,10 +421,6 @@ newtype AchievementUpdateRequest_UpdateType = AchievementUpdateRequest_UpdateTyp
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern AchievementUpdateRequest_UpdateType_ACHIEVEMENTUPDATETYPEUNSPECIFIED :: AchievementUpdateRequest_UpdateType
-pattern AchievementUpdateRequest_UpdateType_ACHIEVEMENTUPDATETYPEUNSPECIFIED = AchievementUpdateRequest_UpdateType "ACHIEVEMENT_UPDATE_TYPE_UNSPECIFIED"
-
 -- | Achievement is revealed.
 pattern AchievementUpdateRequest_UpdateType_Reveal :: AchievementUpdateRequest_UpdateType
 pattern AchievementUpdateRequest_UpdateType_Reveal = AchievementUpdateRequest_UpdateType "REVEAL"
@@ -468,7 +438,6 @@ pattern AchievementUpdateRequest_UpdateType_SETSTEPSATLEAST :: AchievementUpdate
 pattern AchievementUpdateRequest_UpdateType_SETSTEPSATLEAST = AchievementUpdateRequest_UpdateType "SET_STEPS_AT_LEAST"
 
 {-# COMPLETE
-  AchievementUpdateRequest_UpdateType_ACHIEVEMENTUPDATETYPEUNSPECIFIED,
   AchievementUpdateRequest_UpdateType_Reveal,
   AchievementUpdateRequest_UpdateType_Unlock,
   AchievementUpdateRequest_UpdateType_Increment,
@@ -489,10 +458,6 @@ newtype AchievementUpdateResponse_CurrentState = AchievementUpdateResponse_Curre
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern AchievementUpdateResponse_CurrentState_UPDATEDACHIEVEMENTSTATEUNSPECIFIED :: AchievementUpdateResponse_CurrentState
-pattern AchievementUpdateResponse_CurrentState_UPDATEDACHIEVEMENTSTATEUNSPECIFIED = AchievementUpdateResponse_CurrentState "UPDATED_ACHIEVEMENT_STATE_UNSPECIFIED"
-
 -- | Achievement is hidden.
 pattern AchievementUpdateResponse_CurrentState_Hidden :: AchievementUpdateResponse_CurrentState
 pattern AchievementUpdateResponse_CurrentState_Hidden = AchievementUpdateResponse_CurrentState "HIDDEN"
@@ -506,7 +471,6 @@ pattern AchievementUpdateResponse_CurrentState_Unlocked :: AchievementUpdateResp
 pattern AchievementUpdateResponse_CurrentState_Unlocked = AchievementUpdateResponse_CurrentState "UNLOCKED"
 
 {-# COMPLETE
-  AchievementUpdateResponse_CurrentState_UPDATEDACHIEVEMENTSTATEUNSPECIFIED,
   AchievementUpdateResponse_CurrentState_Hidden,
   AchievementUpdateResponse_CurrentState_Revealed,
   AchievementUpdateResponse_CurrentState_Unlocked,
@@ -525,16 +489,11 @@ newtype Application_EnabledFeaturesItem = Application_EnabledFeaturesItem {fromA
       Core.FromJSONKey
     )
 
--- | Safe default, don\'t use.
-pattern Application_EnabledFeaturesItem_APPLICATIONFEATUREUNSPECIFIED :: Application_EnabledFeaturesItem
-pattern Application_EnabledFeaturesItem_APPLICATIONFEATUREUNSPECIFIED = Application_EnabledFeaturesItem "APPLICATION_FEATURE_UNSPECIFIED"
-
 -- | Saved Games (snapshots).
 pattern Application_EnabledFeaturesItem_Snapshots :: Application_EnabledFeaturesItem
 pattern Application_EnabledFeaturesItem_Snapshots = Application_EnabledFeaturesItem "SNAPSHOTS"
 
 {-# COMPLETE
-  Application_EnabledFeaturesItem_APPLICATIONFEATUREUNSPECIFIED,
   Application_EnabledFeaturesItem_Snapshots,
   Application_EnabledFeaturesItem
   #-}
@@ -551,10 +510,6 @@ newtype EventBatchRecordFailure_FailureCause = EventBatchRecordFailure_FailureCa
       Core.FromJSON,
       Core.FromJSONKey
     )
-
--- | Default value. Should not be used.
-pattern EventBatchRecordFailure_FailureCause_EVENTFAILURECAUSEUNSPECIFIED :: EventBatchRecordFailure_FailureCause
-pattern EventBatchRecordFailure_FailureCause_EVENTFAILURECAUSEUNSPECIFIED = EventBatchRecordFailure_FailureCause "EVENT_FAILURE_CAUSE_UNSPECIFIED"
 
 -- | A batch request was issued with more events than are allowed in a single batch.
 pattern EventBatchRecordFailure_FailureCause_TOOLARGE :: EventBatchRecordFailure_FailureCause
@@ -581,7 +536,6 @@ pattern EventBatchRecordFailure_FailureCause_RECORDRATEHIGH :: EventBatchRecordF
 pattern EventBatchRecordFailure_FailureCause_RECORDRATEHIGH = EventBatchRecordFailure_FailureCause "RECORD_RATE_HIGH"
 
 {-# COMPLETE
-  EventBatchRecordFailure_FailureCause_EVENTFAILURECAUSEUNSPECIFIED,
   EventBatchRecordFailure_FailureCause_TOOLARGE,
   EventBatchRecordFailure_FailureCause_TIMEPERIODEXPIRED,
   EventBatchRecordFailure_FailureCause_TIMEPERIODSHORT,
@@ -604,10 +558,6 @@ newtype EventDefinition_Visibility = EventDefinition_Visibility {fromEventDefini
       Core.FromJSONKey
     )
 
--- | Default value. Should not be used.
-pattern EventDefinition_Visibility_EVENTVISIBILITYUNSPECIFIED :: EventDefinition_Visibility
-pattern EventDefinition_Visibility_EVENTVISIBILITYUNSPECIFIED = EventDefinition_Visibility "EVENT_VISIBILITY_UNSPECIFIED"
-
 -- | This event should be visible to all users.
 pattern EventDefinition_Visibility_Revealed :: EventDefinition_Visibility
 pattern EventDefinition_Visibility_Revealed = EventDefinition_Visibility "REVEALED"
@@ -617,7 +567,6 @@ pattern EventDefinition_Visibility_Hidden :: EventDefinition_Visibility
 pattern EventDefinition_Visibility_Hidden = EventDefinition_Visibility "HIDDEN"
 
 {-# COMPLETE
-  EventDefinition_Visibility_EVENTVISIBILITYUNSPECIFIED,
   EventDefinition_Visibility_Revealed,
   EventDefinition_Visibility_Hidden,
   EventDefinition_Visibility
@@ -636,10 +585,6 @@ newtype EventRecordFailure_FailureCause = EventRecordFailure_FailureCause {fromE
       Core.FromJSONKey
     )
 
--- | Default value. Should not use.
-pattern EventRecordFailure_FailureCause_EVENTUPDATEFAILURECAUSEUNSPECIFIED :: EventRecordFailure_FailureCause
-pattern EventRecordFailure_FailureCause_EVENTUPDATEFAILURECAUSEUNSPECIFIED = EventRecordFailure_FailureCause "EVENT_UPDATE_FAILURE_CAUSE_UNSPECIFIED"
-
 -- | An attempt was made to set an event that was not defined.
 pattern EventRecordFailure_FailureCause_NOTFOUND :: EventRecordFailure_FailureCause
 pattern EventRecordFailure_FailureCause_NOTFOUND = EventRecordFailure_FailureCause "NOT_FOUND"
@@ -649,7 +594,6 @@ pattern EventRecordFailure_FailureCause_INVALIDUPDATEVALUE :: EventRecordFailure
 pattern EventRecordFailure_FailureCause_INVALIDUPDATEVALUE = EventRecordFailure_FailureCause "INVALID_UPDATE_VALUE"
 
 {-# COMPLETE
-  EventRecordFailure_FailureCause_EVENTUPDATEFAILURECAUSEUNSPECIFIED,
   EventRecordFailure_FailureCause_NOTFOUND,
   EventRecordFailure_FailureCause_INVALIDUPDATEVALUE,
   EventRecordFailure_FailureCause
@@ -668,10 +612,6 @@ newtype Instance_PlatformType = Instance_PlatformType {fromInstance_PlatformType
       Core.FromJSONKey
     )
 
--- | Default value. Should be unused.
-pattern Instance_PlatformType_PLATFORMTYPEUNSPECIFIED :: Instance_PlatformType
-pattern Instance_PlatformType_PLATFORMTYPEUNSPECIFIED = Instance_PlatformType "PLATFORM_TYPE_UNSPECIFIED"
-
 -- | Instance is for Android.
 pattern Instance_PlatformType_Android :: Instance_PlatformType
 pattern Instance_PlatformType_Android = Instance_PlatformType "ANDROID"
@@ -685,7 +625,6 @@ pattern Instance_PlatformType_WEBAPP :: Instance_PlatformType
 pattern Instance_PlatformType_WEBAPP = Instance_PlatformType "WEB_APP"
 
 {-# COMPLETE
-  Instance_PlatformType_PLATFORMTYPEUNSPECIFIED,
   Instance_PlatformType_Android,
   Instance_PlatformType_Ios,
   Instance_PlatformType_WEBAPP,
@@ -705,10 +644,6 @@ newtype Leaderboard_Order = Leaderboard_Order {fromLeaderboard_Order :: Core.Tex
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern Leaderboard_Order_SCOREORDERUNSPECIFIED :: Leaderboard_Order
-pattern Leaderboard_Order_SCOREORDERUNSPECIFIED = Leaderboard_Order "SCORE_ORDER_UNSPECIFIED"
-
 -- | Larger values are better; scores are sorted in descending order
 pattern Leaderboard_Order_LARGERISBETTER :: Leaderboard_Order
 pattern Leaderboard_Order_LARGERISBETTER = Leaderboard_Order "LARGER_IS_BETTER"
@@ -718,7 +653,6 @@ pattern Leaderboard_Order_SMALLERISBETTER :: Leaderboard_Order
 pattern Leaderboard_Order_SMALLERISBETTER = Leaderboard_Order "SMALLER_IS_BETTER"
 
 {-# COMPLETE
-  Leaderboard_Order_SCOREORDERUNSPECIFIED,
   Leaderboard_Order_LARGERISBETTER,
   Leaderboard_Order_SMALLERISBETTER,
   Leaderboard_Order
@@ -737,10 +671,6 @@ newtype LeaderboardEntry_TimeSpan = LeaderboardEntry_TimeSpan {fromLeaderboardEn
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern LeaderboardEntry_TimeSpan_SCORETIMESPANUNSPECIFIED :: LeaderboardEntry_TimeSpan
-pattern LeaderboardEntry_TimeSpan_SCORETIMESPANUNSPECIFIED = LeaderboardEntry_TimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
-
 -- | The score is an all-time score.
 pattern LeaderboardEntry_TimeSpan_ALLTIME :: LeaderboardEntry_TimeSpan
 pattern LeaderboardEntry_TimeSpan_ALLTIME = LeaderboardEntry_TimeSpan "ALL_TIME"
@@ -754,11 +684,86 @@ pattern LeaderboardEntry_TimeSpan_Daily :: LeaderboardEntry_TimeSpan
 pattern LeaderboardEntry_TimeSpan_Daily = LeaderboardEntry_TimeSpan "DAILY"
 
 {-# COMPLETE
-  LeaderboardEntry_TimeSpan_SCORETIMESPANUNSPECIFIED,
   LeaderboardEntry_TimeSpan_ALLTIME,
   LeaderboardEntry_TimeSpan_Weekly,
   LeaderboardEntry_TimeSpan_Daily,
   LeaderboardEntry_TimeSpan
+  #-}
+
+-- | Required. Cardinality constraint to observe when linking a persona to a player in the scope of a game.
+newtype LinkPersonaRequest_CardinalityConstraint = LinkPersonaRequest_CardinalityConstraint {fromLinkPersonaRequest_CardinalityConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | 1:1 cardinality between in-game personas and Play Games Services players. By the end of the linking operation only one entry for the player and the persona should remain in the scope of the application. Whether a new link is created or not when this constraint is specified is determined by the chosen @ConflictingLinksResolutionPolicy@: * If @KEEP_EXISTING_LINKS@ is specified and the provided persona is already linked to a different player, or the player is already linked to a different persona, no new link will be created and the already existing link(s) will remain as is(are). * If @CREATE_NEW_LINK@ is specified and the provided persona is already linked to a different player, or the player is already linked to another persona, the older link(s) will be removed in favour of the new link being created.
+pattern LinkPersonaRequest_CardinalityConstraint_ONEPERSONATOONEPLAYER :: LinkPersonaRequest_CardinalityConstraint
+pattern LinkPersonaRequest_CardinalityConstraint_ONEPERSONATOONEPLAYER = LinkPersonaRequest_CardinalityConstraint "ONE_PERSONA_TO_ONE_PLAYER"
+
+{-# COMPLETE
+  LinkPersonaRequest_CardinalityConstraint_ONEPERSONATOONEPLAYER,
+  LinkPersonaRequest_CardinalityConstraint
+  #-}
+
+-- | Required. Resolution policy to apply when the linking of a persona to a player would result in violating the specified cardinality constraint.
+newtype LinkPersonaRequest_ConflictingLinksResolutionPolicy = LinkPersonaRequest_ConflictingLinksResolutionPolicy {fromLinkPersonaRequest_ConflictingLinksResolutionPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If link(s) between a player and persona already exists which would result in violating the specified @RecallTokensCardinalityConstraint@ if the new link was created, keep the already existing link(s). For example, if Persona1-Player1 is already linked in the scope of application1 and a new link Persona1-Player2 is attempted to be created in the scope of application1, then the old link will remain and no new link will be added. Note that if the already existing links do violate the specified policy (which could occur if not all @LinkPersona@ calls use the same @RecallTokensCardinalityConstraint@) this policy will leave these violations unresolved; in order to resolve conflicts, the {\@link @CREATE_NEW_LINK@ policy needs to be used to rewrite links resolving conflicts.
+pattern LinkPersonaRequest_ConflictingLinksResolutionPolicy_KEEPEXISTINGLINKS :: LinkPersonaRequest_ConflictingLinksResolutionPolicy
+pattern LinkPersonaRequest_ConflictingLinksResolutionPolicy_KEEPEXISTINGLINKS = LinkPersonaRequest_ConflictingLinksResolutionPolicy "KEEP_EXISTING_LINKS"
+
+-- | If an existing link between a player and persona already exists which would result in violating the specified @RecallTokensCardinalityConstraint@ if the new link was created, replace the already existing link(s) with the new link. For example, if Persona1-Player1 is already linked in the scope of application1 and a new link Persona1-Player2 is attempted to be created in the scope of application1, then the old link will be removed and the new link will be added to replace it.
+pattern LinkPersonaRequest_ConflictingLinksResolutionPolicy_CREATENEWLINK :: LinkPersonaRequest_ConflictingLinksResolutionPolicy
+pattern LinkPersonaRequest_ConflictingLinksResolutionPolicy_CREATENEWLINK = LinkPersonaRequest_ConflictingLinksResolutionPolicy "CREATE_NEW_LINK"
+
+{-# COMPLETE
+  LinkPersonaRequest_ConflictingLinksResolutionPolicy_KEEPEXISTINGLINKS,
+  LinkPersonaRequest_ConflictingLinksResolutionPolicy_CREATENEWLINK,
+  LinkPersonaRequest_ConflictingLinksResolutionPolicy
+  #-}
+
+-- | Output only. State of a persona linking attempt.
+newtype LinkPersonaResponse_State = LinkPersonaResponse_State {fromLinkPersonaResponse_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The link specified in the request was created.
+pattern LinkPersonaResponse_State_LINKCREATED :: LinkPersonaResponse_State
+pattern LinkPersonaResponse_State_LINKCREATED = LinkPersonaResponse_State "LINK_CREATED"
+
+-- | The link specified in the request was not created because already existing links would result in the new link violating the specified @RecallTokensCardinalityConstraint@ if created.
+pattern LinkPersonaResponse_State_PERSONAORPLAYERALREADYLINKED :: LinkPersonaResponse_State
+pattern LinkPersonaResponse_State_PERSONAORPLAYERALREADYLINKED = LinkPersonaResponse_State "PERSONA_OR_PLAYER_ALREADY_LINKED"
+
+{-# COMPLETE
+  LinkPersonaResponse_State_LINKCREATED,
+  LinkPersonaResponse_State_PERSONAORPLAYERALREADYLINKED,
+  LinkPersonaResponse_State
   #-}
 
 -- | The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.
@@ -774,10 +779,6 @@ newtype Player_FriendStatus = Player_FriendStatus {fromPlayer_FriendStatus :: Co
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern Player_FriendStatus_FRIENDSTATUSUNSPECIFIED :: Player_FriendStatus
-pattern Player_FriendStatus_FRIENDSTATUSUNSPECIFIED = Player_FriendStatus "FRIEND_STATUS_UNSPECIFIED"
-
 -- | There is no relationship between the players.
 pattern Player_FriendStatus_NORELATIONSHIP :: Player_FriendStatus
 pattern Player_FriendStatus_NORELATIONSHIP = Player_FriendStatus "NO_RELATIONSHIP"
@@ -787,7 +788,6 @@ pattern Player_FriendStatus_Friend :: Player_FriendStatus
 pattern Player_FriendStatus_Friend = Player_FriendStatus "FRIEND"
 
 {-# COMPLETE
-  Player_FriendStatus_FRIENDSTATUSUNSPECIFIED,
   Player_FriendStatus_NORELATIONSHIP,
   Player_FriendStatus_Friend,
   Player_FriendStatus
@@ -806,10 +806,6 @@ newtype PlayerAchievement_AchievementState = PlayerAchievement_AchievementState 
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern PlayerAchievement_AchievementState_STATEUNSPECIFIED :: PlayerAchievement_AchievementState
-pattern PlayerAchievement_AchievementState_STATEUNSPECIFIED = PlayerAchievement_AchievementState "STATE_UNSPECIFIED"
-
 -- | Achievement is hidden.
 pattern PlayerAchievement_AchievementState_Hidden :: PlayerAchievement_AchievementState
 pattern PlayerAchievement_AchievementState_Hidden = PlayerAchievement_AchievementState "HIDDEN"
@@ -823,7 +819,6 @@ pattern PlayerAchievement_AchievementState_Unlocked :: PlayerAchievement_Achieve
 pattern PlayerAchievement_AchievementState_Unlocked = PlayerAchievement_AchievementState "UNLOCKED"
 
 {-# COMPLETE
-  PlayerAchievement_AchievementState_STATEUNSPECIFIED,
   PlayerAchievement_AchievementState_Hidden,
   PlayerAchievement_AchievementState_Revealed,
   PlayerAchievement_AchievementState_Unlocked,
@@ -843,10 +838,6 @@ newtype PlayerLeaderboardScore_TimeSpan = PlayerLeaderboardScore_TimeSpan {fromP
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern PlayerLeaderboardScore_TimeSpan_SCORETIMESPANUNSPECIFIED :: PlayerLeaderboardScore_TimeSpan
-pattern PlayerLeaderboardScore_TimeSpan_SCORETIMESPANUNSPECIFIED = PlayerLeaderboardScore_TimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
-
 -- | The score is an all-time score.
 pattern PlayerLeaderboardScore_TimeSpan_ALLTIME :: PlayerLeaderboardScore_TimeSpan
 pattern PlayerLeaderboardScore_TimeSpan_ALLTIME = PlayerLeaderboardScore_TimeSpan "ALL_TIME"
@@ -860,7 +851,6 @@ pattern PlayerLeaderboardScore_TimeSpan_Daily :: PlayerLeaderboardScore_TimeSpan
 pattern PlayerLeaderboardScore_TimeSpan_Daily = PlayerLeaderboardScore_TimeSpan "DAILY"
 
 {-# COMPLETE
-  PlayerLeaderboardScore_TimeSpan_SCORETIMESPANUNSPECIFIED,
   PlayerLeaderboardScore_TimeSpan_ALLTIME,
   PlayerLeaderboardScore_TimeSpan_Weekly,
   PlayerLeaderboardScore_TimeSpan_Daily,
@@ -880,10 +870,6 @@ newtype PlayerScore_TimeSpan = PlayerScore_TimeSpan {fromPlayerScore_TimeSpan ::
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern PlayerScore_TimeSpan_SCORETIMESPANUNSPECIFIED :: PlayerScore_TimeSpan
-pattern PlayerScore_TimeSpan_SCORETIMESPANUNSPECIFIED = PlayerScore_TimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
-
 -- | The score is an all-time score.
 pattern PlayerScore_TimeSpan_ALLTIME :: PlayerScore_TimeSpan
 pattern PlayerScore_TimeSpan_ALLTIME = PlayerScore_TimeSpan "ALL_TIME"
@@ -897,7 +883,6 @@ pattern PlayerScore_TimeSpan_Daily :: PlayerScore_TimeSpan
 pattern PlayerScore_TimeSpan_Daily = PlayerScore_TimeSpan "DAILY"
 
 {-# COMPLETE
-  PlayerScore_TimeSpan_SCORETIMESPANUNSPECIFIED,
   PlayerScore_TimeSpan_ALLTIME,
   PlayerScore_TimeSpan_Weekly,
   PlayerScore_TimeSpan_Daily,
@@ -916,10 +901,6 @@ newtype PlayerScoreResponse_BeatenScoreTimeSpansItem = PlayerScoreResponse_Beate
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_SCORETIMESPANUNSPECIFIED :: PlayerScoreResponse_BeatenScoreTimeSpansItem
-pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_SCORETIMESPANUNSPECIFIED = PlayerScoreResponse_BeatenScoreTimeSpansItem "SCORE_TIME_SPAN_UNSPECIFIED"
-
 -- | The score is an all-time score.
 pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_ALLTIME :: PlayerScoreResponse_BeatenScoreTimeSpansItem
 pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_ALLTIME = PlayerScoreResponse_BeatenScoreTimeSpansItem "ALL_TIME"
@@ -933,7 +914,6 @@ pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_Daily :: PlayerScoreRespons
 pattern PlayerScoreResponse_BeatenScoreTimeSpansItem_Daily = PlayerScoreResponse_BeatenScoreTimeSpansItem "DAILY"
 
 {-# COMPLETE
-  PlayerScoreResponse_BeatenScoreTimeSpansItem_SCORETIMESPANUNSPECIFIED,
   PlayerScoreResponse_BeatenScoreTimeSpansItem_ALLTIME,
   PlayerScoreResponse_BeatenScoreTimeSpansItem_Weekly,
   PlayerScoreResponse_BeatenScoreTimeSpansItem_Daily,
@@ -952,10 +932,6 @@ newtype ProfileSettings_FriendsListVisibility = ProfileSettings_FriendsListVisib
       Core.FromJSONKey
     )
 
--- | Unused.
-pattern ProfileSettings_FriendsListVisibility_FRIENDSLISTVISIBILITYUNSPECIFIED :: ProfileSettings_FriendsListVisibility
-pattern ProfileSettings_FriendsListVisibility_FRIENDSLISTVISIBILITYUNSPECIFIED = ProfileSettings_FriendsListVisibility "FRIENDS_LIST_VISIBILITY_UNSPECIFIED"
-
 -- | The friends list is currently visible to the game.
 pattern ProfileSettings_FriendsListVisibility_Visible :: ProfileSettings_FriendsListVisibility
 pattern ProfileSettings_FriendsListVisibility_Visible = ProfileSettings_FriendsListVisibility "VISIBLE"
@@ -969,7 +945,6 @@ pattern ProfileSettings_FriendsListVisibility_Unavailable :: ProfileSettings_Fri
 pattern ProfileSettings_FriendsListVisibility_Unavailable = ProfileSettings_FriendsListVisibility "UNAVAILABLE"
 
 {-# COMPLETE
-  ProfileSettings_FriendsListVisibility_FRIENDSLISTVISIBILITYUNSPECIFIED,
   ProfileSettings_FriendsListVisibility_Visible,
   ProfileSettings_FriendsListVisibility_REQUESTREQUIRED,
   ProfileSettings_FriendsListVisibility_Unavailable,
@@ -989,10 +964,6 @@ newtype RevisionCheckResponse_RevisionStatus = RevisionCheckResponse_RevisionSta
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern RevisionCheckResponse_RevisionStatus_REVISIONSTATUSUNSPECIFIED :: RevisionCheckResponse_RevisionStatus
-pattern RevisionCheckResponse_RevisionStatus_REVISIONSTATUSUNSPECIFIED = RevisionCheckResponse_RevisionStatus "REVISION_STATUS_UNSPECIFIED"
-
 -- | The revision being used is current.
 pattern RevisionCheckResponse_RevisionStatus_OK :: RevisionCheckResponse_RevisionStatus
 pattern RevisionCheckResponse_RevisionStatus_OK = RevisionCheckResponse_RevisionStatus "OK"
@@ -1006,7 +977,6 @@ pattern RevisionCheckResponse_RevisionStatus_Invalid :: RevisionCheckResponse_Re
 pattern RevisionCheckResponse_RevisionStatus_Invalid = RevisionCheckResponse_RevisionStatus "INVALID"
 
 {-# COMPLETE
-  RevisionCheckResponse_RevisionStatus_REVISIONSTATUSUNSPECIFIED,
   RevisionCheckResponse_RevisionStatus_OK,
   RevisionCheckResponse_RevisionStatus_Deprecated,
   RevisionCheckResponse_RevisionStatus_Invalid,
@@ -1026,16 +996,11 @@ newtype Snapshot_Type = Snapshot_Type {fromSnapshot_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern Snapshot_Type_SNAPSHOTTYPEUNSPECIFIED :: Snapshot_Type
-pattern Snapshot_Type_SNAPSHOTTYPEUNSPECIFIED = Snapshot_Type "SNAPSHOT_TYPE_UNSPECIFIED"
-
 -- | A snapshot representing a save game.
 pattern Snapshot_Type_SAVEGAME :: Snapshot_Type
 pattern Snapshot_Type_SAVEGAME = Snapshot_Type "SAVE_GAME"
 
 {-# COMPLETE
-  Snapshot_Type_SNAPSHOTTYPEUNSPECIFIED,
   Snapshot_Type_SAVEGAME,
   Snapshot_Type
   #-}
@@ -1090,10 +1055,6 @@ newtype ApplicationsGetPlatformType = ApplicationsGetPlatformType {fromApplicati
       Core.FromJSONKey
     )
 
--- | Default value, don\'t use.
-pattern ApplicationsGetPlatformType_PLATFORMTYPEUNSPECIFIED :: ApplicationsGetPlatformType
-pattern ApplicationsGetPlatformType_PLATFORMTYPEUNSPECIFIED = ApplicationsGetPlatformType "PLATFORM_TYPE_UNSPECIFIED"
-
 -- | Retrieve applications that can be played on Android.
 pattern ApplicationsGetPlatformType_Android :: ApplicationsGetPlatformType
 pattern ApplicationsGetPlatformType_Android = ApplicationsGetPlatformType "ANDROID"
@@ -1107,7 +1068,6 @@ pattern ApplicationsGetPlatformType_WEBAPP :: ApplicationsGetPlatformType
 pattern ApplicationsGetPlatformType_WEBAPP = ApplicationsGetPlatformType "WEB_APP"
 
 {-# COMPLETE
-  ApplicationsGetPlatformType_PLATFORMTYPEUNSPECIFIED,
   ApplicationsGetPlatformType_Android,
   ApplicationsGetPlatformType_Ios,
   ApplicationsGetPlatformType_WEBAPP,
@@ -1127,10 +1087,6 @@ newtype ApplicationsGetEndPointEndPointType = ApplicationsGetEndPointEndPointTyp
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern ApplicationsGetEndPointEndPointType_ENDPOINTTYPEUNSPECIFIED :: ApplicationsGetEndPointEndPointType
-pattern ApplicationsGetEndPointEndPointType_ENDPOINTTYPEUNSPECIFIED = ApplicationsGetEndPointEndPointType "END_POINT_TYPE_UNSPECIFIED"
-
 -- | Request a URL to create a new profile.
 pattern ApplicationsGetEndPointEndPointType_PROFILECREATION :: ApplicationsGetEndPointEndPointType
 pattern ApplicationsGetEndPointEndPointType_PROFILECREATION = ApplicationsGetEndPointEndPointType "PROFILE_CREATION"
@@ -1140,7 +1096,6 @@ pattern ApplicationsGetEndPointEndPointType_PROFILESETTINGS :: ApplicationsGetEn
 pattern ApplicationsGetEndPointEndPointType_PROFILESETTINGS = ApplicationsGetEndPointEndPointType "PROFILE_SETTINGS"
 
 {-# COMPLETE
-  ApplicationsGetEndPointEndPointType_ENDPOINTTYPEUNSPECIFIED,
   ApplicationsGetEndPointEndPointType_PROFILECREATION,
   ApplicationsGetEndPointEndPointType_PROFILESETTINGS,
   ApplicationsGetEndPointEndPointType
@@ -1159,16 +1114,11 @@ newtype MetagameListCategoriesByPlayerCollection = MetagameListCategoriesByPlaye
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern MetagameListCategoriesByPlayerCollection_COLLECTIONUNSPECIFIED :: MetagameListCategoriesByPlayerCollection
-pattern MetagameListCategoriesByPlayerCollection_COLLECTIONUNSPECIFIED = MetagameListCategoriesByPlayerCollection "COLLECTION_UNSPECIFIED"
-
 -- | Retrieve data for all categories. This is the default.
 pattern MetagameListCategoriesByPlayerCollection_All :: MetagameListCategoriesByPlayerCollection
 pattern MetagameListCategoriesByPlayerCollection_All = MetagameListCategoriesByPlayerCollection "ALL"
 
 {-# COMPLETE
-  MetagameListCategoriesByPlayerCollection_COLLECTIONUNSPECIFIED,
   MetagameListCategoriesByPlayerCollection_All,
   MetagameListCategoriesByPlayerCollection
   #-}
@@ -1208,10 +1158,6 @@ newtype ScoresGetIncludeRankType = ScoresGetIncludeRankType {fromScoresGetInclud
       Core.FromJSONKey
     )
 
--- | Default value. Should be unused.
-pattern ScoresGetIncludeRankType_INCLUDERANKTYPEUNSPECIFIED :: ScoresGetIncludeRankType
-pattern ScoresGetIncludeRankType_INCLUDERANKTYPEUNSPECIFIED = ScoresGetIncludeRankType "INCLUDE_RANK_TYPE_UNSPECIFIED"
-
 -- | Retrieve all supported ranks. In HTTP, this parameter value can also be specified as @ALL@.
 pattern ScoresGetIncludeRankType_All :: ScoresGetIncludeRankType
 pattern ScoresGetIncludeRankType_All = ScoresGetIncludeRankType "ALL"
@@ -1229,7 +1175,6 @@ pattern ScoresGetIncludeRankType_Friends :: ScoresGetIncludeRankType
 pattern ScoresGetIncludeRankType_Friends = ScoresGetIncludeRankType "FRIENDS"
 
 {-# COMPLETE
-  ScoresGetIncludeRankType_INCLUDERANKTYPEUNSPECIFIED,
   ScoresGetIncludeRankType_All,
   ScoresGetIncludeRankType_Public,
   ScoresGetIncludeRankType_Social,
@@ -1250,10 +1195,6 @@ newtype ScoresGetTimeSpan = ScoresGetTimeSpan {fromScoresGetTimeSpan :: Core.Tex
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern ScoresGetTimeSpan_SCORETIMESPANUNSPECIFIED :: ScoresGetTimeSpan
-pattern ScoresGetTimeSpan_SCORETIMESPANUNSPECIFIED = ScoresGetTimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
-
 -- | Get the high scores for all time spans. If this is used, maxResults values will be ignored.
 pattern ScoresGetTimeSpan_All :: ScoresGetTimeSpan
 pattern ScoresGetTimeSpan_All = ScoresGetTimeSpan "ALL"
@@ -1271,7 +1212,6 @@ pattern ScoresGetTimeSpan_Daily :: ScoresGetTimeSpan
 pattern ScoresGetTimeSpan_Daily = ScoresGetTimeSpan "DAILY"
 
 {-# COMPLETE
-  ScoresGetTimeSpan_SCORETIMESPANUNSPECIFIED,
   ScoresGetTimeSpan_All,
   ScoresGetTimeSpan_ALLTIME,
   ScoresGetTimeSpan_Weekly,
@@ -1292,10 +1232,6 @@ newtype ScoresListCollection = ScoresListCollection {fromScoresListCollection ::
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern ScoresListCollection_SCORECOLLECTIONUNSPECIFIED :: ScoresListCollection
-pattern ScoresListCollection_SCORECOLLECTIONUNSPECIFIED = ScoresListCollection "SCORE_COLLECTION_UNSPECIFIED"
-
 -- | List all scores in the public leaderboard.
 pattern ScoresListCollection_Public :: ScoresListCollection
 pattern ScoresListCollection_Public = ScoresListCollection "PUBLIC"
@@ -1309,14 +1245,13 @@ pattern ScoresListCollection_Friends :: ScoresListCollection
 pattern ScoresListCollection_Friends = ScoresListCollection "FRIENDS"
 
 {-# COMPLETE
-  ScoresListCollection_SCORECOLLECTIONUNSPECIFIED,
   ScoresListCollection_Public,
   ScoresListCollection_Social,
   ScoresListCollection_Friends,
   ScoresListCollection
   #-}
 
--- | The time span for the scores and ranks you\'re requesting.
+-- | Required. The time span for the scores and ranks you\'re requesting.
 newtype ScoresListTimeSpan = ScoresListTimeSpan {fromScoresListTimeSpan :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1328,10 +1263,6 @@ newtype ScoresListTimeSpan = ScoresListTimeSpan {fromScoresListTimeSpan :: Core.
       Core.FromJSON,
       Core.FromJSONKey
     )
-
--- | Default value. This value is unused.
-pattern ScoresListTimeSpan_SCORETIMESPANUNSPECIFIED :: ScoresListTimeSpan
-pattern ScoresListTimeSpan_SCORETIMESPANUNSPECIFIED = ScoresListTimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
 
 -- | The score is an all-time score.
 pattern ScoresListTimeSpan_ALLTIME :: ScoresListTimeSpan
@@ -1346,7 +1277,6 @@ pattern ScoresListTimeSpan_Daily :: ScoresListTimeSpan
 pattern ScoresListTimeSpan_Daily = ScoresListTimeSpan "DAILY"
 
 {-# COMPLETE
-  ScoresListTimeSpan_SCORETIMESPANUNSPECIFIED,
   ScoresListTimeSpan_ALLTIME,
   ScoresListTimeSpan_Weekly,
   ScoresListTimeSpan_Daily,
@@ -1366,10 +1296,6 @@ newtype ScoresListWindowCollection = ScoresListWindowCollection {fromScoresListW
       Core.FromJSONKey
     )
 
--- | Default value. This value is unused.
-pattern ScoresListWindowCollection_SCORECOLLECTIONUNSPECIFIED :: ScoresListWindowCollection
-pattern ScoresListWindowCollection_SCORECOLLECTIONUNSPECIFIED = ScoresListWindowCollection "SCORE_COLLECTION_UNSPECIFIED"
-
 -- | List all scores in the public leaderboard.
 pattern ScoresListWindowCollection_Public :: ScoresListWindowCollection
 pattern ScoresListWindowCollection_Public = ScoresListWindowCollection "PUBLIC"
@@ -1383,14 +1309,13 @@ pattern ScoresListWindowCollection_Friends :: ScoresListWindowCollection
 pattern ScoresListWindowCollection_Friends = ScoresListWindowCollection "FRIENDS"
 
 {-# COMPLETE
-  ScoresListWindowCollection_SCORECOLLECTIONUNSPECIFIED,
   ScoresListWindowCollection_Public,
   ScoresListWindowCollection_Social,
   ScoresListWindowCollection_Friends,
   ScoresListWindowCollection
   #-}
 
--- | The time span for the scores and ranks you\'re requesting.
+-- | Required. The time span for the scores and ranks you\'re requesting.
 newtype ScoresListWindowTimeSpan = ScoresListWindowTimeSpan {fromScoresListWindowTimeSpan :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1402,10 +1327,6 @@ newtype ScoresListWindowTimeSpan = ScoresListWindowTimeSpan {fromScoresListWindo
       Core.FromJSON,
       Core.FromJSONKey
     )
-
--- | Default value. This value is unused.
-pattern ScoresListWindowTimeSpan_SCORETIMESPANUNSPECIFIED :: ScoresListWindowTimeSpan
-pattern ScoresListWindowTimeSpan_SCORETIMESPANUNSPECIFIED = ScoresListWindowTimeSpan "SCORE_TIME_SPAN_UNSPECIFIED"
 
 -- | The score is an all-time score.
 pattern ScoresListWindowTimeSpan_ALLTIME :: ScoresListWindowTimeSpan
@@ -1420,7 +1341,6 @@ pattern ScoresListWindowTimeSpan_Daily :: ScoresListWindowTimeSpan
 pattern ScoresListWindowTimeSpan_Daily = ScoresListWindowTimeSpan "DAILY"
 
 {-# COMPLETE
-  ScoresListWindowTimeSpan_SCORETIMESPANUNSPECIFIED,
   ScoresListWindowTimeSpan_ALLTIME,
   ScoresListWindowTimeSpan_Weekly,
   ScoresListWindowTimeSpan_Daily,

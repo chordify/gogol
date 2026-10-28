@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Patch
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.patch@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsPatch' request conforms to.
@@ -100,54 +98,54 @@ newClassroomCoursesCourseWorkStudentSubmissionsPatch ::
   -- |  Multipart request metadata. See 'payload'.
   StudentSubmission ->
   ClassroomCoursesCourseWorkStudentSubmissionsPatch
-newClassroomCoursesCourseWorkStudentSubmissionsPatch courseId courseWorkId id payload =
-  ClassroomCoursesCourseWorkStudentSubmissionsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      id = id,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClassroomCoursesCourseWorkStudentSubmissionsPatch
+  courseId
+  courseWorkId
+  id
+  payload =
+    ClassroomCoursesCourseWorkStudentSubmissionsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        courseId = courseId,
+        courseWorkId = courseWorkId,
+        id = id,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkStudentSubmissionsPatch
   where
   type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsPatch =
+    Rs ClassroomCoursesCourseWorkStudentSubmissionsPatch =
       StudentSubmission
   type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsPatch =
-      '[ Classroom'Coursework'Me,
-         Classroom'Coursework'Students
-       ]
-  requestClient
-    ClassroomCoursesCourseWorkStudentSubmissionsPatch {..} =
-      go
-        courseId
-        courseWorkId
-        id
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkStudentSubmissionsPatchResource
-            )
-            Core.mempty
+    Scopes ClassroomCoursesCourseWorkStudentSubmissionsPatch =
+      '[Classroom'Coursework'Me, Classroom'Coursework'Students]
+  requestClient ClassroomCoursesCourseWorkStudentSubmissionsPatch {..} =
+    go
+      courseId
+      courseWorkId
+      id
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ClassroomCoursesCourseWorkStudentSubmissionsPatchResource
+          )
+          Core.mempty

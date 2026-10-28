@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CustomSearch.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CustomSearch.Internal.Product
@@ -93,7 +91,7 @@ module Gogol.CustomSearch.Internal.Product
 where
 
 import Gogol.CustomSearch.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Promotion result.
 --
@@ -337,8 +335,7 @@ instance Core.ToJSON Result where
             ("displayLink" Core..=) Core.<$> displayLink,
             ("fileFormat" Core..=) Core.<$> fileFormat,
             ("formattedUrl" Core..=) Core.<$> formattedUrl,
-            ("htmlFormattedUrl" Core..=)
-              Core.<$> htmlFormattedUrl,
+            ("htmlFormattedUrl" Core..=) Core.<$> htmlFormattedUrl,
             ("htmlSnippet" Core..=) Core.<$> htmlSnippet,
             ("htmlTitle" Core..=) Core.<$> htmlTitle,
             ("image" Core..=) Core.<$> image,
@@ -474,15 +471,14 @@ newResult_Pagemap ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Result_Pagemap
-newResult_Pagemap additional = Result_Pagemap {additional = additional}
+newResult_Pagemap additional =
+  Result_Pagemap {additional = additional}
 
 instance Core.FromJSON Result_Pagemap where
   parseJSON =
     Core.withObject
       "Result_Pagemap"
-      ( \o ->
-          Result_Pagemap Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Result_Pagemap Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Result_Pagemap where
   toJSON Result_Pagemap {..} = Core.toJSON additional
@@ -550,8 +546,7 @@ instance Core.ToJSON Search where
             ("kind" Core..=) Core.<$> kind,
             ("promotions" Core..=) Core.<$> promotions,
             ("queries" Core..=) Core.<$> queries,
-            ("searchInformation" Core..=)
-              Core.<$> searchInformation,
+            ("searchInformation" Core..=) Core.<$> searchInformation,
             ("spelling" Core..=) Core.<$> spelling,
             ("url" Core..=) Core.<$> url
           ]
@@ -571,15 +566,14 @@ newSearch_Context ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Search_Context
-newSearch_Context additional = Search_Context {additional = additional}
+newSearch_Context additional =
+  Search_Context {additional = additional}
 
 instance Core.FromJSON Search_Context where
   parseJSON =
     Core.withObject
       "Search_Context"
-      ( \o ->
-          Search_Context Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Search_Context Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Search_Context where
   toJSON Search_Context {..} = Core.toJSON additional
@@ -791,9 +785,7 @@ instance Core.FromJSON Search_Queries_NextPageItem where
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "totalResults"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalResults" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Search_Queries_NextPageItem where
@@ -804,8 +796,7 @@ instance Core.ToJSON Search_Queries_NextPageItem where
             ("cr" Core..=) Core.<$> cr,
             ("cx" Core..=) Core.<$> cx,
             ("dateRestrict" Core..=) Core.<$> dateRestrict,
-            ("disableCnTwTranslation" Core..=)
-              Core.<$> disableCnTwTranslation,
+            ("disableCnTwTranslation" Core..=) Core.<$> disableCnTwTranslation,
             ("exactTerms" Core..=) Core.<$> exactTerms,
             ("excludeTerms" Core..=) Core.<$> excludeTerms,
             ("fileType" Core..=) Core.<$> fileType,
@@ -816,8 +807,7 @@ instance Core.ToJSON Search_Queries_NextPageItem where
             ("hl" Core..=) Core.<$> hl,
             ("hq" Core..=) Core.<$> hq,
             ("imgColorType" Core..=) Core.<$> imgColorType,
-            ("imgDominantColor" Core..=)
-              Core.<$> imgDominantColor,
+            ("imgDominantColor" Core..=) Core.<$> imgDominantColor,
             ("imgSize" Core..=) Core.<$> imgSize,
             ("imgType" Core..=) Core.<$> imgType,
             ("inputEncoding" Core..=) Core.<$> inputEncoding,
@@ -832,14 +822,12 @@ instance Core.ToJSON Search_Queries_NextPageItem where
             ("searchTerms" Core..=) Core.<$> searchTerms,
             ("searchType" Core..=) Core.<$> searchType,
             ("siteSearch" Core..=) Core.<$> siteSearch,
-            ("siteSearchFilter" Core..=)
-              Core.<$> siteSearchFilter,
+            ("siteSearchFilter" Core..=) Core.<$> siteSearchFilter,
             ("sort" Core..=) Core.<$> sort,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("startPage" Core..=) Core.<$> startPage,
             ("title" Core..=) Core.<$> title,
-            ("totalResults" Core..=) Core.. Core.AsText
-              Core.<$> totalResults
+            ("totalResults" Core..=) Core.. Core.AsText Core.<$> totalResults
           ]
       )
 
@@ -965,10 +953,7 @@ newSearch_Queries_PreviousPageItem =
       totalResults = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Search_Queries_PreviousPageItem
-  where
+instance Core.FromJSON Search_Queries_PreviousPageItem where
   parseJSON =
     Core.withObject
       "Search_Queries_PreviousPageItem"
@@ -1009,9 +994,7 @@ instance
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "totalResults"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalResults" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Search_Queries_PreviousPageItem where
@@ -1022,8 +1005,7 @@ instance Core.ToJSON Search_Queries_PreviousPageItem where
             ("cr" Core..=) Core.<$> cr,
             ("cx" Core..=) Core.<$> cx,
             ("dateRestrict" Core..=) Core.<$> dateRestrict,
-            ("disableCnTwTranslation" Core..=)
-              Core.<$> disableCnTwTranslation,
+            ("disableCnTwTranslation" Core..=) Core.<$> disableCnTwTranslation,
             ("exactTerms" Core..=) Core.<$> exactTerms,
             ("excludeTerms" Core..=) Core.<$> excludeTerms,
             ("fileType" Core..=) Core.<$> fileType,
@@ -1034,8 +1016,7 @@ instance Core.ToJSON Search_Queries_PreviousPageItem where
             ("hl" Core..=) Core.<$> hl,
             ("hq" Core..=) Core.<$> hq,
             ("imgColorType" Core..=) Core.<$> imgColorType,
-            ("imgDominantColor" Core..=)
-              Core.<$> imgDominantColor,
+            ("imgDominantColor" Core..=) Core.<$> imgDominantColor,
             ("imgSize" Core..=) Core.<$> imgSize,
             ("imgType" Core..=) Core.<$> imgType,
             ("inputEncoding" Core..=) Core.<$> inputEncoding,
@@ -1050,14 +1031,12 @@ instance Core.ToJSON Search_Queries_PreviousPageItem where
             ("searchTerms" Core..=) Core.<$> searchTerms,
             ("searchType" Core..=) Core.<$> searchType,
             ("siteSearch" Core..=) Core.<$> siteSearch,
-            ("siteSearchFilter" Core..=)
-              Core.<$> siteSearchFilter,
+            ("siteSearchFilter" Core..=) Core.<$> siteSearchFilter,
             ("sort" Core..=) Core.<$> sort,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("startPage" Core..=) Core.<$> startPage,
             ("title" Core..=) Core.<$> title,
-            ("totalResults" Core..=) Core.. Core.AsText
-              Core.<$> totalResults
+            ("totalResults" Core..=) Core.. Core.AsText Core.<$> totalResults
           ]
       )
 
@@ -1224,9 +1203,7 @@ instance Core.FromJSON Search_Queries_RequestItem where
             Core.<*> (o Core..:? "startIndex")
             Core.<*> (o Core..:? "startPage")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "totalResults"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalResults" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Search_Queries_RequestItem where
@@ -1237,8 +1214,7 @@ instance Core.ToJSON Search_Queries_RequestItem where
             ("cr" Core..=) Core.<$> cr,
             ("cx" Core..=) Core.<$> cx,
             ("dateRestrict" Core..=) Core.<$> dateRestrict,
-            ("disableCnTwTranslation" Core..=)
-              Core.<$> disableCnTwTranslation,
+            ("disableCnTwTranslation" Core..=) Core.<$> disableCnTwTranslation,
             ("exactTerms" Core..=) Core.<$> exactTerms,
             ("excludeTerms" Core..=) Core.<$> excludeTerms,
             ("fileType" Core..=) Core.<$> fileType,
@@ -1249,8 +1225,7 @@ instance Core.ToJSON Search_Queries_RequestItem where
             ("hl" Core..=) Core.<$> hl,
             ("hq" Core..=) Core.<$> hq,
             ("imgColorType" Core..=) Core.<$> imgColorType,
-            ("imgDominantColor" Core..=)
-              Core.<$> imgDominantColor,
+            ("imgDominantColor" Core..=) Core.<$> imgDominantColor,
             ("imgSize" Core..=) Core.<$> imgSize,
             ("imgType" Core..=) Core.<$> imgType,
             ("inputEncoding" Core..=) Core.<$> inputEncoding,
@@ -1265,14 +1240,12 @@ instance Core.ToJSON Search_Queries_RequestItem where
             ("searchTerms" Core..=) Core.<$> searchTerms,
             ("searchType" Core..=) Core.<$> searchType,
             ("siteSearch" Core..=) Core.<$> siteSearch,
-            ("siteSearchFilter" Core..=)
-              Core.<$> siteSearchFilter,
+            ("siteSearchFilter" Core..=) Core.<$> siteSearchFilter,
             ("sort" Core..=) Core.<$> sort,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("startPage" Core..=) Core.<$> startPage,
             ("title" Core..=) Core.<$> title,
-            ("totalResults" Core..=) Core.. Core.AsText
-              Core.<$> totalResults
+            ("totalResults" Core..=) Core.. Core.AsText Core.<$> totalResults
           ]
       )
 
@@ -1318,10 +1291,8 @@ instance Core.ToJSON Search_SearchInformation where
   toJSON Search_SearchInformation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("formattedSearchTime" Core..=)
-              Core.<$> formattedSearchTime,
-            ("formattedTotalResults" Core..=)
-              Core.<$> formattedTotalResults,
+          [ ("formattedSearchTime" Core..=) Core.<$> formattedSearchTime,
+            ("formattedTotalResults" Core..=) Core.<$> formattedTotalResults,
             ("searchTime" Core..=) Core.<$> searchTime,
             ("totalResults" Core..=) Core.<$> totalResults
           ]
@@ -1362,8 +1333,7 @@ instance Core.ToJSON Search_Spelling where
     Core.object
       ( Core.catMaybes
           [ ("correctedQuery" Core..=) Core.<$> correctedQuery,
-            ("htmlCorrectedQuery" Core..=)
-              Core.<$> htmlCorrectedQuery
+            ("htmlCorrectedQuery" Core..=) Core.<$> htmlCorrectedQuery
           ]
       )
 
@@ -1381,7 +1351,8 @@ data Search_Url = Search_Url
 -- | Creates a value of 'Search_Url' with the minimum fields required to make a request.
 newSearch_Url ::
   Search_Url
-newSearch_Url = Search_Url {template = Core.Nothing, type' = Core.Nothing}
+newSearch_Url =
+  Search_Url {template = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON Search_Url where
   parseJSON =
@@ -1389,7 +1360,8 @@ instance Core.FromJSON Search_Url where
       "Search_Url"
       ( \o ->
           Search_Url
-            Core.<$> (o Core..:? "template") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "template")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Search_Url where

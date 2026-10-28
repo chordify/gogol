@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.Create
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.create@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsCreate' request conforms to.
@@ -77,7 +75,7 @@ data AndroidPublisherMonetizationSubscriptionsCreate = AndroidPublisherMonetizat
     payload :: Subscription,
     -- | Required. The ID to use for the subscription. For the requirements on this format, see the documentation of the product_id field on the Subscription resource.
     productId :: (Core.Maybe Core.Text),
-    -- | Required. A string representing version of the available regions being used for the specified resource. The current version is 2022\/02.
+    -- | Required. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in <https://support.google.com/googleplay/android-developer/answer/10532353 this article>. Each time the supported locations substantially change, the version will be incremented. Using this field will ensure that creating and updating the resource with an older region\'s version and set of regional prices and currencies will succeed even though a new version is available. The latest version is 2022\/02.
     regionsVersionVersion :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,50 +91,49 @@ newAndroidPublisherMonetizationSubscriptionsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   Subscription ->
   AndroidPublisherMonetizationSubscriptionsCreate
-newAndroidPublisherMonetizationSubscriptionsCreate packageName payload =
-  AndroidPublisherMonetizationSubscriptionsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      payload = payload,
-      productId = Core.Nothing,
-      regionsVersionVersion = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsCreate
+  packageName
+  payload =
+    AndroidPublisherMonetizationSubscriptionsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        payload = payload,
+        productId = Core.Nothing,
+        regionsVersionVersion = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherMonetizationSubscriptionsCreate
   where
   type
-    Rs
-      AndroidPublisherMonetizationSubscriptionsCreate =
+    Rs AndroidPublisherMonetizationSubscriptionsCreate =
       Subscription
   type
-    Scopes
-      AndroidPublisherMonetizationSubscriptionsCreate =
+    Scopes AndroidPublisherMonetizationSubscriptionsCreate =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherMonetizationSubscriptionsCreate {..} =
-      go
-        packageName
-        xgafv
-        accessToken
-        callback
-        productId
-        regionsVersionVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherMonetizationSubscriptionsCreateResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherMonetizationSubscriptionsCreate {..} =
+    go
+      packageName
+      xgafv
+      accessToken
+      callback
+      productId
+      regionsVersionVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherMonetizationSubscriptionsCreateResource
+          )
+          Core.mempty

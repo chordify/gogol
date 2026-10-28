@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,7 +40,7 @@ module Gogol.PlayMoviesPartner.Accounts.StoreInfos.List
 where
 
 import Gogol.PlayMoviesPartner.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.list@ method which the
 -- 'PlayMoviesPartnerAccountsStoreInfosList' request conforms to.
@@ -65,19 +63,11 @@ type PlayMoviesPartnerAccountsStoreInfosListResource =
     Core.:> Core.QueryParams "seasonIds" Core.Text
     Core.:> Core.QueryParams "studioNames" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "videoId" Core.Text
-    Core.:> Core.QueryParams
-              "videoIds"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListStoreInfosResponse
+    Core.:> Core.QueryParams "videoIds" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListStoreInfosResponse
 
 -- | List StoreInfos owned or managed by the partner.
 --
@@ -151,44 +141,39 @@ newPlayMoviesPartnerAccountsStoreInfosList accountId =
       videoIds = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PlayMoviesPartnerAccountsStoreInfosList
-  where
+instance Core.GoogleRequest PlayMoviesPartnerAccountsStoreInfosList where
   type
     Rs PlayMoviesPartnerAccountsStoreInfosList =
       ListStoreInfosResponse
   type
     Scopes PlayMoviesPartnerAccountsStoreInfosList =
       '[PlaymoviesPartner'Readonly]
-  requestClient
-    PlayMoviesPartnerAccountsStoreInfosList {..} =
-      go
-        accountId
-        xgafv
-        accessToken
-        bearerToken
-        callback
-        (countries Core.^. Core._Default)
-        (mids Core.^. Core._Default)
-        name
-        pageSize
-        pageToken
-        (Core.Just pp)
-        (pphNames Core.^. Core._Default)
-        (seasonIds Core.^. Core._Default)
-        (studioNames Core.^. Core._Default)
-        uploadType
-        uploadProtocol
-        videoId
-        (videoIds Core.^. Core._Default)
-        (Core.Just Core.AltJSON)
-        playMoviesPartnerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PlayMoviesPartnerAccountsStoreInfosListResource
-            )
-            Core.mempty
+  requestClient PlayMoviesPartnerAccountsStoreInfosList {..} =
+    go
+      accountId
+      xgafv
+      accessToken
+      bearerToken
+      callback
+      (countries Core.^. Core._Default)
+      (mids Core.^. Core._Default)
+      name
+      pageSize
+      pageToken
+      (Core.Just pp)
+      (pphNames Core.^. Core._Default)
+      (seasonIds Core.^. Core._Default)
+      (studioNames Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      videoId
+      (videoIds Core.^. Core._Default)
+      (Core.Just Core.AltJSON)
+      playMoviesPartnerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PlayMoviesPartnerAccountsStoreInfosListResource
+          )
+          Core.mempty

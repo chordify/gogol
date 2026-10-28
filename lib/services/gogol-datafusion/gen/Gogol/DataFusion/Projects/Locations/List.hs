@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Projects.Locations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DataFusion.Projects.Locations.List
 where
 
 import Gogol.DataFusion.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datafusion.projects.locations.list@ method which the
 -- 'DataFusionProjectsLocationsList' request conforms to.
@@ -52,9 +50,6 @@ type DataFusionProjectsLocationsListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam
-              "includeUnrevealedLocations"
-              Core.Bool
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -74,8 +69,6 @@ data DataFusionProjectsLocationsList = DataFusionProjectsLocationsList
     callback :: (Core.Maybe Core.Text),
     -- | A filter to narrow down results to a preferred subset. The filtering language accepts strings like @\"displayName=tokyo\"@, and is documented in more detail in <https://google.aip.dev/160 AIP-160>.
     filter :: (Core.Maybe Core.Text),
-    -- | If true, the returned list will include locations which are not yet revealed.
-    includeUnrevealedLocations :: (Core.Maybe Core.Bool),
     -- | The resource that owns the locations collection, if applicable.
     name :: Core.Text,
     -- | The maximum number of results to return. If not set, the service selects a default.
@@ -100,7 +93,6 @@ newDataFusionProjectsLocationsList name =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
-      includeUnrevealedLocations = Core.Nothing,
       name = name,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
@@ -108,13 +100,8 @@ newDataFusionProjectsLocationsList name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataFusionProjectsLocationsList
-  where
-  type
-    Rs DataFusionProjectsLocationsList =
-      ListLocationsResponse
+instance Core.GoogleRequest DataFusionProjectsLocationsList where
+  type Rs DataFusionProjectsLocationsList = ListLocationsResponse
   type
     Scopes DataFusionProjectsLocationsList =
       '[CloudPlatform'FullControl]
@@ -125,7 +112,6 @@ instance
       accessToken
       callback
       filter
-      includeUnrevealedLocations
       pageSize
       pageToken
       uploadType
@@ -135,7 +121,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataFusionProjectsLocationsListResource
-          )
+          (Core.Proxy :: Core.Proxy DataFusionProjectsLocationsListResource)
           Core.mempty

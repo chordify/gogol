@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.IAP.Internal.Sum
@@ -30,6 +28,13 @@ module Gogol.IAP.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * AccessSettings_IdentitySourcesItem
+    AccessSettings_IdentitySourcesItem
+      ( AccessSettings_IdentitySourcesItem_IDENTITYSOURCEUNSPECIFIED,
+        AccessSettings_IdentitySourcesItem_WORKFORCEIDENTITYFEDERATION,
         ..
       ),
 
@@ -62,7 +67,7 @@ module Gogol.IAP.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -91,6 +96,32 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
+newtype AccessSettings_IdentitySourcesItem = AccessSettings_IdentitySourcesItem {fromAccessSettings_IdentitySourcesItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | IdentitySource Unspecified. When selected, IAP relies on which identity settings are fully configured to redirect the traffic to. The precedence order is WorkforceIdentitySettings > GcipSettings. If none is set, default to use Google identity.
+pattern AccessSettings_IdentitySourcesItem_IDENTITYSOURCEUNSPECIFIED :: AccessSettings_IdentitySourcesItem
+pattern AccessSettings_IdentitySourcesItem_IDENTITYSOURCEUNSPECIFIED = AccessSettings_IdentitySourcesItem "IDENTITY_SOURCE_UNSPECIFIED"
+
+-- | Use external identities set up on Google Cloud Workforce Identity Federation.
+pattern AccessSettings_IdentitySourcesItem_WORKFORCEIDENTITYFEDERATION :: AccessSettings_IdentitySourcesItem
+pattern AccessSettings_IdentitySourcesItem_WORKFORCEIDENTITYFEDERATION = AccessSettings_IdentitySourcesItem "WORKFORCE_IDENTITY_FEDERATION"
+
+{-# COMPLETE
+  AccessSettings_IdentitySourcesItem_IDENTITYSOURCEUNSPECIFIED,
+  AccessSettings_IdentitySourcesItem_WORKFORCEIDENTITYFEDERATION,
+  AccessSettings_IdentitySourcesItem
+  #-}
+
 newtype AttributePropagationSettings_OutputCredentialsItem = AttributePropagationSettings_OutputCredentialsItem {fromAttributePropagationSettings_OutputCredentialsItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -103,7 +134,7 @@ newtype AttributePropagationSettings_OutputCredentialsItem = AttributePropagatio
       Core.FromJSONKey
     )
 
--- | Output credential not provided. This is unsupported in IAP. An output credential is required.
+-- | An output credential is required.
 pattern AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED :: AttributePropagationSettings_OutputCredentialsItem
 pattern AttributePropagationSettings_OutputCredentialsItem_OUTPUTCREDENTIALSUNSPECIFIED = AttributePropagationSettings_OutputCredentialsItem "OUTPUT_CREDENTIALS_UNSPECIFIED"
 
@@ -127,7 +158,7 @@ pattern AttributePropagationSettings_OutputCredentialsItem_Rctoken = AttributePr
   AttributePropagationSettings_OutputCredentialsItem
   #-}
 
--- | Reauth method requested.
+-- | Optional. Reauth method requested.
 newtype ReauthSettings_Method = ReauthSettings_Method {fromReauthSettings_Method :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -148,7 +179,6 @@ pattern ReauthSettings_Method_METHODUNSPECIFIED = ReauthSettings_Method "METHOD_
 pattern ReauthSettings_Method_Login :: ReauthSettings_Method
 pattern ReauthSettings_Method_Login = ReauthSettings_Method "LOGIN"
 
--- | Deprecated.
 pattern ReauthSettings_Method_Password :: ReauthSettings_Method
 pattern ReauthSettings_Method_Password = ReauthSettings_Method "PASSWORD"
 
@@ -169,7 +199,7 @@ pattern ReauthSettings_Method_ENROLLEDSECONDFACTORS = ReauthSettings_Method "ENR
   ReauthSettings_Method
   #-}
 
--- | How IAP determines the effective policy in cases of hierarchial policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.
+-- | Optional. How IAP determines the effective policy in cases of hierarchical policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.
 newtype ReauthSettings_PolicyType = ReauthSettings_PolicyType {fromReauthSettings_PolicyType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.Projects.MoveInstance
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Moves an instance and its attached persistent disks from one zone to another. /Note/: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior known issue>.
+-- Moves an instance and its attached persistent disks from one zone to another. /Note/: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior known issue>. [Deprecated] This method is deprecated. See </compute/docs/instances/moving-instance-across-zones moving instance across zones> instead.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.projects.moveInstance@.
 module Gogol.Compute.Projects.MoveInstance
@@ -40,7 +38,7 @@ module Gogol.Compute.Projects.MoveInstance
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.projects.moveInstance@ method which the
 -- 'ComputeProjectsMoveInstance' request conforms to.
@@ -60,7 +58,7 @@ type ComputeProjectsMoveInstanceResource =
     Core.:> Core.ReqBody '[Core.JSON] InstanceMoveRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Moves an instance and its attached persistent disks from one zone to another. /Note/: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior known issue>.
+-- | Moves an instance and its attached persistent disks from one zone to another. /Note/: Moving VMs or disks by using this method might cause unexpected behavior. For more information, see the </compute/docs/troubleshooting/known-issues#moving_vms_or_disks_using_the_moveinstance_api_or_the_causes_unexpected_behavior known issue>. [Deprecated] This method is deprecated. See </compute/docs/instances/moving-instance-across-zones moving instance across zones> instead.
 --
 -- /See:/ 'newComputeProjectsMoveInstance' smart constructor.
 data ComputeProjectsMoveInstance = ComputeProjectsMoveInstance
@@ -102,10 +100,7 @@ newComputeProjectsMoveInstance payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeProjectsMoveInstance
-  where
+instance Core.GoogleRequest ComputeProjectsMoveInstance where
   type Rs ComputeProjectsMoveInstance = Operation
   type
     Scopes ComputeProjectsMoveInstance =
@@ -125,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeProjectsMoveInstanceResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeProjectsMoveInstanceResource)
           Core.mempty

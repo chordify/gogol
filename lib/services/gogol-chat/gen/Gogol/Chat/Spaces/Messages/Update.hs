@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Messages.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#update_a_message Update a message>. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
+-- Updates a message. There\'s a difference between the @patch@ and @update@ methods. The @patch@ method uses a @patch@ request while the @update@ method uses a @put@ request. We recommend using the @patch@ method. For an example, see <https://developers.google.com/workspace/chat/update-messages Update a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> When using app authentication, requests can only update messages created by the calling Chat app.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.update@.
 module Gogol.Chat.Spaces.Messages.Update
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.Messages.Update
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.messages.update@ method which the
 -- 'ChatSpacesMessagesUpdate' request conforms to.
@@ -58,7 +56,7 @@ type ChatSpacesMessagesUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Put '[Core.JSON] Message
 
--- | Updates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#update_a_message Update a message>. Requires <https://developers.google.com/chat/api/guides/auth/ authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ authorization scope.
+-- | Updates a message. There\'s a difference between the @patch@ and @update@ methods. The @patch@ method uses a @patch@ request while the @update@ method uses a @put@ request. We recommend using the @patch@ method. For an example, see <https://developers.google.com/workspace/chat/update-messages Update a message>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> When using app authentication, requests can only update messages created by the calling Chat app.
 --
 -- /See:/ 'newChatSpacesMessagesUpdate' smart constructor.
 data ChatSpacesMessagesUpdate = ChatSpacesMessagesUpdate
@@ -66,15 +64,15 @@ data ChatSpacesMessagesUpdate = ChatSpacesMessagesUpdate
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Optional. If @true@ and the message is not found, a new message is created and @updateMask@ is ignored. The specified message ID must be <https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message client-assigned> or the request fails.
+    -- | Optional. If @true@ and the message isn\'t found, a new message is created and @updateMask@ is ignored. The specified message ID must be <https://developers.google.com/workspace/chat/create-messages#name_a_created_message client-assigned> or the request fails.
     allowMissing :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name in the form @spaces\/*\/messages\/*@. Example: @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@
+    -- | Identifier. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ Where @{space}@ is the ID of the space where the message is posted and @{message}@ is a system-assigned ID for the message. For example, @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@. If you set a custom ID when you create a message, you can use this ID to specify the message in a request by replacing @{message}@ with the value from the @clientAssignedMessageId@ field. For example, @spaces\/AAAAAAAAAAA\/messages\/client-custom-name@. For details, see <https://developers.google.com/workspace/chat/create-messages#name_a_created_message Name a message>.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
-    -- | Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires </chat/api/guides/auth/service-accounts service account authentication>.) - cards_v2
+    -- | Required. The field paths to update. Separate multiple values with commas or use @*@ to update all field paths. Currently supported field paths: - @text@ - @attachment@ - @cards@ (Requires </chat/api/guides/auth/service-accounts app authentication>.) - @cards_v2@ (Requires </chat/api/guides/auth/service-accounts app authentication>.) - @accessory_widgets@ (Requires </chat/api/guides/auth/service-accounts app authentication>.)
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,7 +83,7 @@ data ChatSpacesMessagesUpdate = ChatSpacesMessagesUpdate
 
 -- | Creates a value of 'ChatSpacesMessagesUpdate' with the minimum fields required to make a request.
 newChatSpacesMessagesUpdate ::
-  -- |  Resource name in the form @spaces\/*\/messages\/*@. Example: @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@ See 'name'.
+  -- |  Identifier. Resource name of the message. Format: @spaces\/{space}\/messages\/{message}@ Where @{space}@ is the ID of the space where the message is posted and @{message}@ is a system-assigned ID for the message. For example, @spaces\/AAAAAAAAAAA\/messages\/BBBBBBBBBBB.BBBBBBBBBBB@. If you set a custom ID when you create a message, you can use this ID to specify the message in a request by replacing @{message}@ with the value from the @clientAssignedMessageId@ field. For example, @spaces\/AAAAAAAAAAA\/messages\/client-custom-name@. For details, see <https://developers.google.com/workspace/chat/create-messages#name_a_created_message Name a message>. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Message ->
@@ -107,7 +105,7 @@ instance Core.GoogleRequest ChatSpacesMessagesUpdate where
   type Rs ChatSpacesMessagesUpdate = Message
   type
     Scopes ChatSpacesMessagesUpdate =
-      '[Chat'Bot, Chat'Messages]
+      '[Chat'Bot, Chat'Import, Chat'Messages]
   requestClient ChatSpacesMessagesUpdate {..} =
     go
       name
@@ -124,7 +122,5 @@ instance Core.GoogleRequest ChatSpacesMessagesUpdate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMessagesUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy ChatSpacesMessagesUpdateResource)
           Core.mempty

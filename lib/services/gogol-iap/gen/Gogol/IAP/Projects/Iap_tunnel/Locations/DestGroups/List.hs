@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.List
 where
 
 import Gogol.IAP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @iap.projects.iap_tunnel.locations.destGroups.list@ method which the
 -- 'IAPProjectsIap_tunnelLocationsDestGroupsList' request conforms to.
@@ -88,7 +86,8 @@ newIAPProjectsIap_tunnelLocationsDestGroupsList ::
   IAPProjectsIap_tunnelLocationsDestGroupsList
 newIAPProjectsIap_tunnelLocationsDestGroupsList parent =
   IAPProjectsIap_tunnelLocationsDestGroupsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -106,27 +105,24 @@ instance
     Rs IAPProjectsIap_tunnelLocationsDestGroupsList =
       ListTunnelDestGroupsResponse
   type
-    Scopes
-      IAPProjectsIap_tunnelLocationsDestGroupsList =
+    Scopes IAPProjectsIap_tunnelLocationsDestGroupsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    IAPProjectsIap_tunnelLocationsDestGroupsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        iAPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAPProjectsIap_tunnelLocationsDestGroupsListResource
-            )
-            Core.mempty
+  requestClient IAPProjectsIap_tunnelLocationsDestGroupsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAPProjectsIap_tunnelLocationsDestGroupsListResource
+          )
+          Core.mempty

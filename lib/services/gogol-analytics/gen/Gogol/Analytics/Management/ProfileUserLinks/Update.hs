@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ProfileUserLinks.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ProfileUserLinks.Update
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profileUserLinks.update@ method which the
 -- 'AnalyticsManagementProfileUserLinksUpdate' request conforms to.
@@ -90,40 +88,41 @@ newAnalyticsManagementProfileUserLinksUpdate ::
   -- |  Web Property ID to update the user link for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfileUserLinksUpdate
-newAnalyticsManagementProfileUserLinksUpdate accountId linkId payload profileId webPropertyId =
-  AnalyticsManagementProfileUserLinksUpdate
-    { accountId = accountId,
-      linkId = linkId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementProfileUserLinksUpdate
+  accountId
+  linkId
+  payload
+  profileId
+  webPropertyId =
+    AnalyticsManagementProfileUserLinksUpdate
+      { accountId = accountId,
+        linkId = linkId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementProfileUserLinksUpdate
   where
-  type
-    Rs AnalyticsManagementProfileUserLinksUpdate =
-      EntityUserLink
+  type Rs AnalyticsManagementProfileUserLinksUpdate = EntityUserLink
   type
     Scopes AnalyticsManagementProfileUserLinksUpdate =
       '[Analytics'Manage'Users]
-  requestClient
-    AnalyticsManagementProfileUserLinksUpdate {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        linkId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementProfileUserLinksUpdateResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementProfileUserLinksUpdate {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      linkId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementProfileUserLinksUpdateResource
+          )
+          Core.mempty

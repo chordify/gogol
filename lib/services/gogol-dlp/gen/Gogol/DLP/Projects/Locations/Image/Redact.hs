@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.Image.Redact
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/dlp\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.
+-- Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated. Only the first frame of each multiframe image is redacted. Metadata and other frames are omitted in the response.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.image.redact@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.image.redact@.
 module Gogol.DLP.Projects.Locations.Image.Redact
   ( -- * Resource
     DLPProjectsLocationsImageRedactResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.Image.Redact
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.image.redact@ method which the
 -- 'DLPProjectsLocationsImageRedact' request conforms to.
@@ -54,14 +52,10 @@ type DLPProjectsLocationsImageRedactResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2RedactImageRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GooglePrivacyDlpV2RedactImageResponse
+    Core.:> Core.ReqBody '[Core.JSON] GooglePrivacyDlpV2RedactImageRequest
+    Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2RedactImageResponse
 
--- | Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/dlp\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated.
+-- | Redacts potentially sensitive info from an image. This method has limits on input size, processing time, and output size. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/redacting-sensitive-data-images to learn more. When no InfoTypes or CustomInfoTypes are specified in this request, the system will automatically choose what detectors to run. By default this may be all types, but may change over time as detectors are updated. Only the first frame of each multiframe image is redacted. Metadata and other frames are omitted in the response.
 --
 -- /See:/ 'newDLPProjectsLocationsImageRedact' smart constructor.
 data DLPProjectsLocationsImageRedact = DLPProjectsLocationsImageRedact
@@ -71,7 +65,7 @@ data DLPProjectsLocationsImageRedact = DLPProjectsLocationsImageRedact
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GooglePrivacyDlpV2RedactImageRequest,
@@ -84,7 +78,7 @@ data DLPProjectsLocationsImageRedact = DLPProjectsLocationsImageRedact
 
 -- | Creates a value of 'DLPProjectsLocationsImageRedact' with the minimum fields required to make a request.
 newDLPProjectsLocationsImageRedact ::
-  -- |  Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GooglePrivacyDlpV2RedactImageRequest ->
@@ -100,10 +94,7 @@ newDLPProjectsLocationsImageRedact parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsImageRedact
-  where
+instance Core.GoogleRequest DLPProjectsLocationsImageRedact where
   type
     Rs DLPProjectsLocationsImageRedact =
       GooglePrivacyDlpV2RedactImageResponse
@@ -124,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsLocationsImageRedactResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsLocationsImageRedactResource)
           Core.mempty

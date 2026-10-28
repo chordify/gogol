@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Applications.GetEndPoint
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Applications.GetEndPoint
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.applications.getEndPoint@ method which the
 -- 'GamesApplicationsGetEndPoint' request conforms to.
@@ -53,9 +51,7 @@ type GamesApplicationsGetEndPointResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "applicationId" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "endPointType"
-              ApplicationsGetEndPointEndPointType
+    Core.:> Core.QueryParam "endPointType" ApplicationsGetEndPointEndPointType
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -96,14 +92,9 @@ newGamesApplicationsGetEndPoint =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesApplicationsGetEndPoint
-  where
+instance Core.GoogleRequest GamesApplicationsGetEndPoint where
   type Rs GamesApplicationsGetEndPoint = EndPoint
-  type
-    Scopes GamesApplicationsGetEndPoint =
-      '[Games'FullControl]
+  type Scopes GamesApplicationsGetEndPoint = '[Games'FullControl]
   requestClient GamesApplicationsGetEndPoint {..} =
     go
       xgafv
@@ -118,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesApplicationsGetEndPointResource
-          )
+          (Core.Proxy :: Core.Proxy GamesApplicationsGetEndPointResource)
           Core.mempty

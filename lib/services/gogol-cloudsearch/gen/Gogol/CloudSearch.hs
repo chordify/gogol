@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -150,6 +148,16 @@ module Gogol.CloudSearch
     CloudSearchOperationsLroListResource,
     CloudSearchOperationsLroList (..),
     newCloudSearchOperationsLroList,
+
+    -- ** cloudsearch.query.debugSearch
+    CloudSearchQueryDebugSearchResource,
+    CloudSearchQueryDebugSearch (..),
+    newCloudSearchQueryDebugSearch,
+
+    -- ** cloudsearch.query.removeActivity
+    CloudSearchQueryRemoveActivityResource,
+    CloudSearchQueryRemoveActivity (..),
+    newCloudSearchQueryRemoveActivity,
 
     -- ** cloudsearch.query.search
     CloudSearchQuerySearchResource,
@@ -291,711 +299,20 @@ module Gogol.CloudSearch
     -- ** Xgafv
     Xgafv (..),
 
-    -- ** AbuseReportingConfig
-    AbuseReportingConfig (..),
-    newAbuseReportingConfig,
-
-    -- ** AckInfo
-    AckInfo (..),
-    newAckInfo,
-
-    -- ** AclFixRequest
-    AclFixRequest (..),
-    newAclFixRequest,
-
-    -- ** AclFixRequest_Role
-    AclFixRequest_Role (..),
-
-    -- ** AclFixStatus
-    AclFixStatus (..),
-    newAclFixStatus,
-
-    -- ** AclFixStatus_Fixability
-    AclFixStatus_Fixability (..),
-
-    -- ** AclInfo
-    AclInfo (..),
-    newAclInfo,
-
-    -- ** AclInfo_Scope
-    AclInfo_Scope (..),
-
-    -- ** ActionParameter
-    ActionParameter (..),
-    newActionParameter,
-
-    -- ** AddonComposeUiActionMarkup
-    AddonComposeUiActionMarkup (..),
-    newAddonComposeUiActionMarkup,
-
-    -- ** AddonComposeUiActionMarkup_Type
-    AddonComposeUiActionMarkup_Type (..),
-
-    -- ** AffectedMembership
-    AffectedMembership (..),
-    newAffectedMembership,
-
-    -- ** AffectedMembership_PriorMembershipRole
-    AffectedMembership_PriorMembershipRole (..),
-
-    -- ** AffectedMembership_PriorMembershipState
-    AffectedMembership_PriorMembershipState (..),
-
-    -- ** AffectedMembership_TargetMembershipRole
-    AffectedMembership_TargetMembershipRole (..),
-
-    -- ** AllAuthenticatedUsersProto
-    AllAuthenticatedUsersProto (..),
-    newAllAuthenticatedUsersProto,
-
-    -- ** Annotation
-    Annotation (..),
-    newAnnotation,
-
-    -- ** Annotation_ChipRenderType
-    Annotation_ChipRenderType (..),
-
-    -- ** Annotation_InlineRenderFormat
-    Annotation_InlineRenderFormat (..),
-
-    -- ** Annotation_Type
-    Annotation_Type (..),
-
-    -- ** AppId
-    AppId (..),
-    newAppId,
-
-    -- ** AppId_AppType
-    AppId_AppType (..),
-
-    -- ** AppId_GsuiteAppType
-    AppId_GsuiteAppType (..),
-
-    -- ** AppsDynamiteSharedActivityFeedAnnotationData
-    AppsDynamiteSharedActivityFeedAnnotationData (..),
-    newAppsDynamiteSharedActivityFeedAnnotationData,
-
-    -- ** AppsDynamiteSharedActivityFeedAnnotationDataUserInfo
-    AppsDynamiteSharedActivityFeedAnnotationDataUserInfo (..),
-    newAppsDynamiteSharedActivityFeedAnnotationDataUserInfo,
-
-    -- ** AppsDynamiteSharedActivityFeedAnnotationDataUserInfo_UpdaterCountDisplayType
-    AppsDynamiteSharedActivityFeedAnnotationDataUserInfo_UpdaterCountDisplayType (..),
-
-    -- ** AppsDynamiteSharedAppProfile
-    AppsDynamiteSharedAppProfile (..),
-    newAppsDynamiteSharedAppProfile,
-
-    -- ** AppsDynamiteSharedAssistantAnnotationData
-    AppsDynamiteSharedAssistantAnnotationData (..),
-    newAppsDynamiteSharedAssistantAnnotationData,
-
-    -- ** AppsDynamiteSharedAssistantDebugContext
-    AppsDynamiteSharedAssistantDebugContext (..),
-    newAppsDynamiteSharedAssistantDebugContext,
-
-    -- ** AppsDynamiteSharedAssistantFeedbackContext
-    AppsDynamiteSharedAssistantFeedbackContext (..),
-    newAppsDynamiteSharedAssistantFeedbackContext,
-
-    -- ** AppsDynamiteSharedAssistantFeedbackContext_ThumbsFeedback
-    AppsDynamiteSharedAssistantFeedbackContext_ThumbsFeedback (..),
-
-    -- ** AppsDynamiteSharedAssistantFeedbackContextFeedbackChip
-    AppsDynamiteSharedAssistantFeedbackContextFeedbackChip (..),
-    newAppsDynamiteSharedAssistantFeedbackContextFeedbackChip,
-
-    -- ** AppsDynamiteSharedAssistantFeedbackContextFeedbackChip_FeedbackChipType
-    AppsDynamiteSharedAssistantFeedbackContextFeedbackChip_FeedbackChipType (..),
-
-    -- ** AppsDynamiteSharedAssistantFeedbackContextFeedbackChip_State
-    AppsDynamiteSharedAssistantFeedbackContextFeedbackChip_State (..),
-
-    -- ** AppsDynamiteSharedAssistantSessionContext
-    AppsDynamiteSharedAssistantSessionContext (..),
-    newAppsDynamiteSharedAssistantSessionContext,
-
-    -- ** AppsDynamiteSharedAssistantSuggestion
-    AppsDynamiteSharedAssistantSuggestion (..),
-    newAppsDynamiteSharedAssistantSuggestion,
-
-    -- ** AppsDynamiteSharedAssistantUnfulfillableRequest
-    AppsDynamiteSharedAssistantUnfulfillableRequest (..),
-    newAppsDynamiteSharedAssistantUnfulfillableRequest,
-
-    -- ** AppsDynamiteSharedAvatarInfo
-    AppsDynamiteSharedAvatarInfo (..),
-    newAppsDynamiteSharedAvatarInfo,
-
-    -- ** AppsDynamiteSharedBackendUploadMetadata
-    AppsDynamiteSharedBackendUploadMetadata (..),
-    newAppsDynamiteSharedBackendUploadMetadata,
-
-    -- ** AppsDynamiteSharedBackendUploadMetadata_DlpScanOutcome
-    AppsDynamiteSharedBackendUploadMetadata_DlpScanOutcome (..),
-
-    -- ** AppsDynamiteSharedBackendUploadMetadata_VirusScanResult
-    AppsDynamiteSharedBackendUploadMetadata_VirusScanResult (..),
-
-    -- ** AppsDynamiteSharedCalendarEventAnnotationData
-    AppsDynamiteSharedCalendarEventAnnotationData (..),
-    newAppsDynamiteSharedCalendarEventAnnotationData,
-
-    -- ** AppsDynamiteSharedCalendarEventAnnotationDataCalendarEvent
-    AppsDynamiteSharedCalendarEventAnnotationDataCalendarEvent (..),
-    newAppsDynamiteSharedCalendarEventAnnotationDataCalendarEvent,
-
-    -- ** AppsDynamiteSharedCalendarEventAnnotationDataCalendarEventTime
-    AppsDynamiteSharedCalendarEventAnnotationDataCalendarEventTime (..),
-    newAppsDynamiteSharedCalendarEventAnnotationDataCalendarEventTime,
-
-    -- ** AppsDynamiteSharedCalendarEventAnnotationDataEventCreation
-    AppsDynamiteSharedCalendarEventAnnotationDataEventCreation (..),
-    newAppsDynamiteSharedCalendarEventAnnotationDataEventCreation,
-
-    -- ** AppsDynamiteSharedCallAnnotationData
-    AppsDynamiteSharedCallAnnotationData (..),
-    newAppsDynamiteSharedCallAnnotationData,
-
-    -- ** AppsDynamiteSharedCallAnnotationData_CallStatus
-    AppsDynamiteSharedCallAnnotationData_CallStatus (..),
-
-    -- ** AppsDynamiteSharedCallMetadata
-    AppsDynamiteSharedCallMetadata (..),
-    newAppsDynamiteSharedCallMetadata,
-
-    -- ** AppsDynamiteSharedCardClickSuggestion
-    AppsDynamiteSharedCardClickSuggestion (..),
-    newAppsDynamiteSharedCardClickSuggestion,
-
-    -- ** AppsDynamiteSharedChatItem
-    AppsDynamiteSharedChatItem (..),
-    newAppsDynamiteSharedChatItem,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfo
-    AppsDynamiteSharedChatItemActivityInfo (..),
-    newAppsDynamiteSharedChatItemActivityInfo,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemNudge
-    AppsDynamiteSharedChatItemActivityInfoFeedItemNudge (..),
-    newAppsDynamiteSharedChatItemActivityInfoFeedItemNudge,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemNudge_NudgeType
-    AppsDynamiteSharedChatItemActivityInfoFeedItemNudge_NudgeType (..),
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemReactions
-    AppsDynamiteSharedChatItemActivityInfoFeedItemReactions (..),
-    newAppsDynamiteSharedChatItemActivityInfoFeedItemReactions,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemThreadReply
-    AppsDynamiteSharedChatItemActivityInfoFeedItemThreadReply (..),
-    newAppsDynamiteSharedChatItemActivityInfoFeedItemThreadReply,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemThreadReply_ReplyType
-    AppsDynamiteSharedChatItemActivityInfoFeedItemThreadReply_ReplyType (..),
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemUserMention
-    AppsDynamiteSharedChatItemActivityInfoFeedItemUserMention (..),
-    newAppsDynamiteSharedChatItemActivityInfoFeedItemUserMention,
-
-    -- ** AppsDynamiteSharedChatItemActivityInfoFeedItemUserMention_Type
-    AppsDynamiteSharedChatItemActivityInfoFeedItemUserMention_Type (..),
-
-    -- ** AppsDynamiteSharedChatItemGroupInfo
-    AppsDynamiteSharedChatItemGroupInfo (..),
-    newAppsDynamiteSharedChatItemGroupInfo,
-
-    -- ** AppsDynamiteSharedChatItemGroupInfo_AttributeCheckerGroupType
-    AppsDynamiteSharedChatItemGroupInfo_AttributeCheckerGroupType (..),
-
-    -- ** AppsDynamiteSharedContentReportType
-    AppsDynamiteSharedContentReportType (..),
-    newAppsDynamiteSharedContentReportType,
-
-    -- ** AppsDynamiteSharedContentReportType_SystemViolation
-    AppsDynamiteSharedContentReportType_SystemViolation (..),
-
-    -- ** AppsDynamiteSharedCustomEmoji
-    AppsDynamiteSharedCustomEmoji (..),
-    newAppsDynamiteSharedCustomEmoji,
-
-    -- ** AppsDynamiteSharedCustomEmoji_State
-    AppsDynamiteSharedCustomEmoji_State (..),
-
-    -- ** AppsDynamiteSharedDimension
-    AppsDynamiteSharedDimension (..),
-    newAppsDynamiteSharedDimension,
-
-    -- ** AppsDynamiteSharedDlpMetricsMetadata
-    AppsDynamiteSharedDlpMetricsMetadata (..),
-    newAppsDynamiteSharedDlpMetricsMetadata,
-
-    -- ** AppsDynamiteSharedDlpMetricsMetadata_DlpStatus
-    AppsDynamiteSharedDlpMetricsMetadata_DlpStatus (..),
-
-    -- ** AppsDynamiteSharedDocument
-    AppsDynamiteSharedDocument (..),
-    newAppsDynamiteSharedDocument,
-
-    -- ** AppsDynamiteSharedEmoji
-    AppsDynamiteSharedEmoji (..),
-    newAppsDynamiteSharedEmoji,
-
-    -- ** AppsDynamiteSharedFindDocumentSuggestion
-    AppsDynamiteSharedFindDocumentSuggestion (..),
-    newAppsDynamiteSharedFindDocumentSuggestion,
-
-    -- ** AppsDynamiteSharedGroupDetails
-    AppsDynamiteSharedGroupDetails (..),
-    newAppsDynamiteSharedGroupDetails,
-
-    -- ** AppsDynamiteSharedGroupVisibility
-    AppsDynamiteSharedGroupVisibility (..),
-    newAppsDynamiteSharedGroupVisibility,
-
-    -- ** AppsDynamiteSharedGroupVisibility_State
-    AppsDynamiteSharedGroupVisibility_State (..),
-
-    -- ** AppsDynamiteSharedJustification
-    AppsDynamiteSharedJustification (..),
-    newAppsDynamiteSharedJustification,
-
-    -- ** AppsDynamiteSharedJustification_ActionType
-    AppsDynamiteSharedJustification_ActionType (..),
-
-    -- ** AppsDynamiteSharedJustificationPerson
-    AppsDynamiteSharedJustificationPerson (..),
-    newAppsDynamiteSharedJustificationPerson,
-
-    -- ** AppsDynamiteSharedMeetMetadata
-    AppsDynamiteSharedMeetMetadata (..),
-    newAppsDynamiteSharedMeetMetadata,
-
-    -- ** AppsDynamiteSharedMessageComponentSearchInfo
-    AppsDynamiteSharedMessageComponentSearchInfo (..),
-    newAppsDynamiteSharedMessageComponentSearchInfo,
-
-    -- ** AppsDynamiteSharedMessageInfo
-    AppsDynamiteSharedMessageInfo (..),
-    newAppsDynamiteSharedMessageInfo,
-
-    -- ** AppsDynamiteSharedMessageInfo_MessageType
-    AppsDynamiteSharedMessageInfo_MessageType (..),
-
-    -- ** AppsDynamiteSharedMessageIntegrationPayload
-    AppsDynamiteSharedMessageIntegrationPayload (..),
-    newAppsDynamiteSharedMessageIntegrationPayload,
-
-    -- ** AppsDynamiteSharedMessageIntegrationPayload_Type
-    AppsDynamiteSharedMessageIntegrationPayload_Type (..),
-
-    -- ** AppsDynamiteSharedOrganizationInfo
-    AppsDynamiteSharedOrganizationInfo (..),
-    newAppsDynamiteSharedOrganizationInfo,
-
-    -- ** AppsDynamiteSharedOrganizationInfoConsumerInfo
-    AppsDynamiteSharedOrganizationInfoConsumerInfo (..),
-    newAppsDynamiteSharedOrganizationInfoConsumerInfo,
-
-    -- ** AppsDynamiteSharedOrganizationInfoCustomerInfo
-    AppsDynamiteSharedOrganizationInfoCustomerInfo (..),
-    newAppsDynamiteSharedOrganizationInfoCustomerInfo,
-
-    -- ** AppsDynamiteSharedOriginAppSuggestion
-    AppsDynamiteSharedOriginAppSuggestion (..),
-    newAppsDynamiteSharedOriginAppSuggestion,
-
-    -- ** AppsDynamiteSharedPhoneNumber
-    AppsDynamiteSharedPhoneNumber (..),
-    newAppsDynamiteSharedPhoneNumber,
-
-    -- ** AppsDynamiteSharedReaction
-    AppsDynamiteSharedReaction (..),
-    newAppsDynamiteSharedReaction,
-
-    -- ** AppsDynamiteSharedRetentionSettings
-    AppsDynamiteSharedRetentionSettings (..),
-    newAppsDynamiteSharedRetentionSettings,
-
-    -- ** AppsDynamiteSharedRetentionSettings_State
-    AppsDynamiteSharedRetentionSettings_State (..),
-
-    -- ** AppsDynamiteSharedSegmentedMembershipCount
-    AppsDynamiteSharedSegmentedMembershipCount (..),
-    newAppsDynamiteSharedSegmentedMembershipCount,
-
-    -- ** AppsDynamiteSharedSegmentedMembershipCount_MemberType
-    AppsDynamiteSharedSegmentedMembershipCount_MemberType (..),
-
-    -- ** AppsDynamiteSharedSegmentedMembershipCount_MembershipState
-    AppsDynamiteSharedSegmentedMembershipCount_MembershipState (..),
-
-    -- ** AppsDynamiteSharedSegmentedMembershipCounts
-    AppsDynamiteSharedSegmentedMembershipCounts (..),
-    newAppsDynamiteSharedSegmentedMembershipCounts,
-
-    -- ** AppsDynamiteSharedSpaceInfo
-    AppsDynamiteSharedSpaceInfo (..),
-    newAppsDynamiteSharedSpaceInfo,
-
-    -- ** AppsDynamiteSharedSpaceInfo_UserMembershipState
-    AppsDynamiteSharedSpaceInfo_UserMembershipState (..),
-
-    -- ** AppsDynamiteSharedTasksAnnotationData
-    AppsDynamiteSharedTasksAnnotationData (..),
-    newAppsDynamiteSharedTasksAnnotationData,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataAssigneeChange
-    AppsDynamiteSharedTasksAnnotationDataAssigneeChange (..),
-    newAppsDynamiteSharedTasksAnnotationDataAssigneeChange,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataCompletionChange
-    AppsDynamiteSharedTasksAnnotationDataCompletionChange (..),
-    newAppsDynamiteSharedTasksAnnotationDataCompletionChange,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataCreation
-    AppsDynamiteSharedTasksAnnotationDataCreation (..),
-    newAppsDynamiteSharedTasksAnnotationDataCreation,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataDeletionChange
-    AppsDynamiteSharedTasksAnnotationDataDeletionChange (..),
-    newAppsDynamiteSharedTasksAnnotationDataDeletionChange,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataTaskProperties
-    AppsDynamiteSharedTasksAnnotationDataTaskProperties (..),
-    newAppsDynamiteSharedTasksAnnotationDataTaskProperties,
-
-    -- ** AppsDynamiteSharedTasksAnnotationDataUserDefinedMessage
-    AppsDynamiteSharedTasksAnnotationDataUserDefinedMessage (..),
-    newAppsDynamiteSharedTasksAnnotationDataUserDefinedMessage,
-
-    -- ** AppsDynamiteSharedTasksMessageIntegrationPayload
-    AppsDynamiteSharedTasksMessageIntegrationPayload (..),
-    newAppsDynamiteSharedTasksMessageIntegrationPayload,
-
-    -- ** AppsDynamiteSharedTextSegment
-    AppsDynamiteSharedTextSegment (..),
-    newAppsDynamiteSharedTextSegment,
-
-    -- ** AppsDynamiteSharedTextSegmentsWithDescription
-    AppsDynamiteSharedTextSegmentsWithDescription (..),
-    newAppsDynamiteSharedTextSegmentsWithDescription,
-
-    -- ** AppsDynamiteSharedTextSegmentsWithDescription_DescriptionType
-    AppsDynamiteSharedTextSegmentsWithDescription_DescriptionType (..),
-
-    -- ** AppsDynamiteSharedTextWithDescription
-    AppsDynamiteSharedTextWithDescription (..),
-    newAppsDynamiteSharedTextWithDescription,
-
-    -- ** AppsDynamiteSharedUserBlockRelationship
-    AppsDynamiteSharedUserBlockRelationship (..),
-    newAppsDynamiteSharedUserBlockRelationship,
-
-    -- ** AppsDynamiteSharedVideoReference
-    AppsDynamiteSharedVideoReference (..),
-    newAppsDynamiteSharedVideoReference,
-
-    -- ** AppsDynamiteSharedVideoReference_Status
-    AppsDynamiteSharedVideoReference_Status (..),
-
-    -- ** AppsDynamiteStorageAction
-    AppsDynamiteStorageAction (..),
-    newAppsDynamiteStorageAction,
-
-    -- ** AppsDynamiteStorageAction_Interaction
-    AppsDynamiteStorageAction_Interaction (..),
-
-    -- ** AppsDynamiteStorageAction_LoadIndicator
-    AppsDynamiteStorageAction_LoadIndicator (..),
-
-    -- ** AppsDynamiteStorageActionActionParameter
-    AppsDynamiteStorageActionActionParameter (..),
-    newAppsDynamiteStorageActionActionParameter,
-
-    -- ** AppsDynamiteStorageBorderStyle
-    AppsDynamiteStorageBorderStyle (..),
-    newAppsDynamiteStorageBorderStyle,
-
-    -- ** AppsDynamiteStorageBorderStyle_Type
-    AppsDynamiteStorageBorderStyle_Type (..),
-
-    -- ** AppsDynamiteStorageButton
-    AppsDynamiteStorageButton (..),
-    newAppsDynamiteStorageButton,
-
-    -- ** AppsDynamiteStorageButtonList
-    AppsDynamiteStorageButtonList (..),
-    newAppsDynamiteStorageButtonList,
-
-    -- ** AppsDynamiteStorageCard
-    AppsDynamiteStorageCard (..),
-    newAppsDynamiteStorageCard,
-
-    -- ** AppsDynamiteStorageCardCardAction
-    AppsDynamiteStorageCardCardAction (..),
-    newAppsDynamiteStorageCardCardAction,
-
-    -- ** AppsDynamiteStorageCardCardHeader
-    AppsDynamiteStorageCardCardHeader (..),
-    newAppsDynamiteStorageCardCardHeader,
-
-    -- ** AppsDynamiteStorageCardCardHeader_ImageType
-    AppsDynamiteStorageCardCardHeader_ImageType (..),
-
-    -- ** AppsDynamiteStorageCardSection
-    AppsDynamiteStorageCardSection (..),
-    newAppsDynamiteStorageCardSection,
-
-    -- ** AppsDynamiteStorageColumns
-    AppsDynamiteStorageColumns (..),
-    newAppsDynamiteStorageColumns,
-
-    -- ** AppsDynamiteStorageColumns_WrapStyle
-    AppsDynamiteStorageColumns_WrapStyle (..),
-
-    -- ** AppsDynamiteStorageColumnsColumn
-    AppsDynamiteStorageColumnsColumn (..),
-    newAppsDynamiteStorageColumnsColumn,
-
-    -- ** AppsDynamiteStorageColumnsColumn_HorizontalAlignment
-    AppsDynamiteStorageColumnsColumn_HorizontalAlignment (..),
-
-    -- ** AppsDynamiteStorageColumnsColumn_HorizontalSizeStyle
-    AppsDynamiteStorageColumnsColumn_HorizontalSizeStyle (..),
-
-    -- ** AppsDynamiteStorageColumnsColumn_VerticalAlignment
-    AppsDynamiteStorageColumnsColumn_VerticalAlignment (..),
-
-    -- ** AppsDynamiteStorageColumnsColumnWidgets
-    AppsDynamiteStorageColumnsColumnWidgets (..),
-    newAppsDynamiteStorageColumnsColumnWidgets,
-
-    -- ** AppsDynamiteStorageDateTimePicker
-    AppsDynamiteStorageDateTimePicker (..),
-    newAppsDynamiteStorageDateTimePicker,
-
-    -- ** AppsDynamiteStorageDateTimePicker_Type
-    AppsDynamiteStorageDateTimePicker_Type (..),
-
-    -- ** AppsDynamiteStorageDecoratedText
-    AppsDynamiteStorageDecoratedText (..),
-    newAppsDynamiteStorageDecoratedText,
-
-    -- ** AppsDynamiteStorageDecoratedTextSwitchControl
-    AppsDynamiteStorageDecoratedTextSwitchControl (..),
-    newAppsDynamiteStorageDecoratedTextSwitchControl,
-
-    -- ** AppsDynamiteStorageDecoratedTextSwitchControl_ControlType
-    AppsDynamiteStorageDecoratedTextSwitchControl_ControlType (..),
-
-    -- ** AppsDynamiteStorageDivider
-    AppsDynamiteStorageDivider (..),
-    newAppsDynamiteStorageDivider,
-
-    -- ** AppsDynamiteStorageGrid
-    AppsDynamiteStorageGrid (..),
-    newAppsDynamiteStorageGrid,
-
-    -- ** AppsDynamiteStorageGridGridItem
-    AppsDynamiteStorageGridGridItem (..),
-    newAppsDynamiteStorageGridGridItem,
-
-    -- ** AppsDynamiteStorageGridGridItem_Layout
-    AppsDynamiteStorageGridGridItem_Layout (..),
-
-    -- ** AppsDynamiteStorageGridGridItem_TextAlignment
-    AppsDynamiteStorageGridGridItem_TextAlignment (..),
-
-    -- ** AppsDynamiteStorageIcon
-    AppsDynamiteStorageIcon (..),
-    newAppsDynamiteStorageIcon,
-
-    -- ** AppsDynamiteStorageIcon_ImageType
-    AppsDynamiteStorageIcon_ImageType (..),
-
-    -- ** AppsDynamiteStorageImage
-    AppsDynamiteStorageImage (..),
-    newAppsDynamiteStorageImage,
-
-    -- ** AppsDynamiteStorageImageComponent
-    AppsDynamiteStorageImageComponent (..),
-    newAppsDynamiteStorageImageComponent,
-
-    -- ** AppsDynamiteStorageImageCropStyle
-    AppsDynamiteStorageImageCropStyle (..),
-    newAppsDynamiteStorageImageCropStyle,
-
-    -- ** AppsDynamiteStorageImageCropStyle_Type
-    AppsDynamiteStorageImageCropStyle_Type (..),
-
-    -- ** AppsDynamiteStorageMaterialIcon
-    AppsDynamiteStorageMaterialIcon (..),
-    newAppsDynamiteStorageMaterialIcon,
-
-    -- ** AppsDynamiteStorageOnClick
-    AppsDynamiteStorageOnClick (..),
-    newAppsDynamiteStorageOnClick,
-
-    -- ** AppsDynamiteStorageOpenLink
-    AppsDynamiteStorageOpenLink (..),
-    newAppsDynamiteStorageOpenLink,
-
-    -- ** AppsDynamiteStorageOpenLink_OnClose
-    AppsDynamiteStorageOpenLink_OnClose (..),
-
-    -- ** AppsDynamiteStorageOpenLink_OpenAs
-    AppsDynamiteStorageOpenLink_OpenAs (..),
-
-    -- ** AppsDynamiteStorageOpenLinkAppUri
-    AppsDynamiteStorageOpenLinkAppUri (..),
-    newAppsDynamiteStorageOpenLinkAppUri,
-
-    -- ** AppsDynamiteStorageOpenLinkAppUriIntent
-    AppsDynamiteStorageOpenLinkAppUriIntent (..),
-    newAppsDynamiteStorageOpenLinkAppUriIntent,
-
-    -- ** AppsDynamiteStorageOpenLinkAppUriIntentExtraData
-    AppsDynamiteStorageOpenLinkAppUriIntentExtraData (..),
-    newAppsDynamiteStorageOpenLinkAppUriIntentExtraData,
-
-    -- ** AppsDynamiteStorageSelectionInput
-    AppsDynamiteStorageSelectionInput (..),
-    newAppsDynamiteStorageSelectionInput,
-
-    -- ** AppsDynamiteStorageSelectionInput_Type
-    AppsDynamiteStorageSelectionInput_Type (..),
-
-    -- ** AppsDynamiteStorageSelectionInputSelectionItem
-    AppsDynamiteStorageSelectionInputSelectionItem (..),
-    newAppsDynamiteStorageSelectionInputSelectionItem,
-
-    -- ** AppsDynamiteStorageSuggestions
-    AppsDynamiteStorageSuggestions (..),
-    newAppsDynamiteStorageSuggestions,
-
-    -- ** AppsDynamiteStorageSuggestionsSuggestionItem
-    AppsDynamiteStorageSuggestionsSuggestionItem (..),
-    newAppsDynamiteStorageSuggestionsSuggestionItem,
-
-    -- ** AppsDynamiteStorageTextInput
-    AppsDynamiteStorageTextInput (..),
-    newAppsDynamiteStorageTextInput,
-
-    -- ** AppsDynamiteStorageTextInput_Type
-    AppsDynamiteStorageTextInput_Type (..),
-
-    -- ** AppsDynamiteStorageTextParagraph
-    AppsDynamiteStorageTextParagraph (..),
-    newAppsDynamiteStorageTextParagraph,
-
-    -- ** AppsDynamiteStorageWidget
-    AppsDynamiteStorageWidget (..),
-    newAppsDynamiteStorageWidget,
-
-    -- ** AppsDynamiteStorageWidget_HorizontalAlignment
-    AppsDynamiteStorageWidget_HorizontalAlignment (..),
-
-    -- ** AppsDynamiteV1ApiCompatV1Action
-    AppsDynamiteV1ApiCompatV1Action (..),
-    newAppsDynamiteV1ApiCompatV1Action,
-
-    -- ** AppsDynamiteV1ApiCompatV1ActionConfirm
-    AppsDynamiteV1ApiCompatV1ActionConfirm (..),
-    newAppsDynamiteV1ApiCompatV1ActionConfirm,
-
-    -- ** AppsDynamiteV1ApiCompatV1Attachment
-    AppsDynamiteV1ApiCompatV1Attachment (..),
-    newAppsDynamiteV1ApiCompatV1Attachment,
-
-    -- ** AppsDynamiteV1ApiCompatV1Field
-    AppsDynamiteV1ApiCompatV1Field (..),
-    newAppsDynamiteV1ApiCompatV1Field,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkup
-    AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkup (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkup,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkupAddonAttachment
-    AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkupAddonAttachment (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkupAddonAttachment,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkup
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkup (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkup,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup_FeaturesItem
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup_FeaturesItem (..),
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup_Type
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup_Type (..),
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError_Type
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError_Type (..),
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupParameter
-    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupParameter (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupParameter,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupEditAttendeesActionMarkup
-    AppsExtensionsMarkupCalendarClientActionMarkupEditAttendeesActionMarkup (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupEditAttendeesActionMarkup,
-
-    -- ** AppsExtensionsMarkupCalendarClientActionMarkupEditConferenceDataActionMarkup
-    AppsExtensionsMarkupCalendarClientActionMarkupEditConferenceDataActionMarkup (..),
-    newAppsExtensionsMarkupCalendarClientActionMarkupEditConferenceDataActionMarkup,
-
-    -- ** Attachment
-    Attachment (..),
-    newAttachment,
-
-    -- ** Attribute
-    Attribute (..),
-    newAttribute,
-
-    -- ** AttributeRemoved
-    AttributeRemoved (..),
-    newAttributeRemoved,
-
-    -- ** AttributeSet
-    AttributeSet (..),
-    newAttributeSet,
-
-    -- ** Attributes
-    Attributes (..),
-    newAttributes,
+    -- ** Action
+    Action (..),
+    newAction,
 
     -- ** AuditLoggingSettings
     AuditLoggingSettings (..),
     newAuditLoggingSettings,
 
-    -- ** AuthorizedItemId
-    AuthorizedItemId (..),
-    newAuthorizedItemId,
+    -- ** BackgroundColoredText
+    BackgroundColoredText (..),
+    newBackgroundColoredText,
 
-    -- ** AutoComplete
-    AutoComplete (..),
-    newAutoComplete,
-
-    -- ** AutoCompleteItem
-    AutoCompleteItem (..),
-    newAutoCompleteItem,
-
-    -- ** BabelMessageProps
-    BabelMessageProps (..),
-    newBabelMessageProps,
-
-    -- ** BabelPlaceholderMetadata
-    BabelPlaceholderMetadata (..),
-    newBabelPlaceholderMetadata,
+    -- ** BackgroundColoredText_BackgroundColor
+    BackgroundColoredText_BackgroundColor (..),
 
     -- ** BooleanOperatorOptions
     BooleanOperatorOptions (..),
@@ -1005,195 +322,9 @@ module Gogol.CloudSearch
     BooleanPropertyOptions (..),
     newBooleanPropertyOptions,
 
-    -- ** BorderStyle
-    BorderStyle (..),
-    newBorderStyle,
-
-    -- ** BorderStyle_Type
-    BorderStyle_Type (..),
-
-    -- ** BotInfo
-    BotInfo (..),
-    newBotInfo,
-
-    -- ** BotInfo_AppAllowlistStatus
-    BotInfo_AppAllowlistStatus (..),
-
-    -- ** BotInfo_Status
-    BotInfo_Status (..),
-
-    -- ** BotInfo_SupportedUsesItem
-    BotInfo_SupportedUsesItem (..),
-
-    -- ** BotResponse
-    BotResponse (..),
-    newBotResponse,
-
-    -- ** BotResponse_RequiredAction
-    BotResponse_RequiredAction (..),
-
-    -- ** BotResponse_ResponseType
-    BotResponse_ResponseType (..),
-
-    -- ** BroadcastAccess
-    BroadcastAccess (..),
-    newBroadcastAccess,
-
-    -- ** BroadcastAccess_AccessPolicy
-    BroadcastAccess_AccessPolicy (..),
-
-    -- ** BroadcastSessionInfo
-    BroadcastSessionInfo (..),
-    newBroadcastSessionInfo,
-
-    -- ** BroadcastStats
-    BroadcastStats (..),
-    newBroadcastStats,
-
-    -- ** Button
-    Button (..),
-    newButton,
-
-    -- ** CalendarClientActionMarkup
-    CalendarClientActionMarkup (..),
-    newCalendarClientActionMarkup,
-
-    -- ** CallInfo
-    CallInfo (..),
-    newCallInfo,
-
-    -- ** CallInfo_AvailableAccessTypesItem
-    CallInfo_AvailableAccessTypesItem (..),
-
-    -- ** CallSettings
-    CallSettings (..),
-    newCallSettings,
-
-    -- ** CallSettings_AccessType
-    CallSettings_AccessType (..),
-
-    -- ** CapTokenHolderProto
-    CapTokenHolderProto (..),
-    newCapTokenHolderProto,
-
-    -- ** Card
-    Card (..),
-    newCard,
-
-    -- ** Card_DisplayStyle
-    Card_DisplayStyle (..),
-
-    -- ** CardAction
-    CardAction (..),
-    newCardAction,
-
-    -- ** CardCapabilityMetadata
-    CardCapabilityMetadata (..),
-    newCardCapabilityMetadata,
-
-    -- ** CardCapabilityMetadata_RequiredCapabilitiesItem
-    CardCapabilityMetadata_RequiredCapabilitiesItem (..),
-
-    -- ** CardHeader
-    CardHeader (..),
-    newCardHeader,
-
-    -- ** CardHeader_ImageStyle
-    CardHeader_ImageStyle (..),
-
-    -- ** CaribouAttributeValue
-    CaribouAttributeValue (..),
-    newCaribouAttributeValue,
-
-    -- ** ChatClientActionMarkup
-    ChatClientActionMarkup (..),
-    newChatClientActionMarkup,
-
-    -- ** ChatConserverDynamitePlaceholderMetadata
-    ChatConserverDynamitePlaceholderMetadata (..),
-    newChatConserverDynamitePlaceholderMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataAttachmentMetadata
-    ChatConserverDynamitePlaceholderMetadataAttachmentMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataAttachmentMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataBotMessageMetadata
-    ChatConserverDynamitePlaceholderMetadataBotMessageMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataBotMessageMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataCalendarEventMetadata
-    ChatConserverDynamitePlaceholderMetadataCalendarEventMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataCalendarEventMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataDeleteMetadata
-    ChatConserverDynamitePlaceholderMetadataDeleteMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataDeleteMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataEditMetadata
-    ChatConserverDynamitePlaceholderMetadataEditMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataEditMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataTasksMetadata
-    ChatConserverDynamitePlaceholderMetadataTasksMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataTasksMetadata,
-
-    -- ** ChatConserverDynamitePlaceholderMetadataVideoCallMetadata
-    ChatConserverDynamitePlaceholderMetadataVideoCallMetadata (..),
-    newChatConserverDynamitePlaceholderMetadataVideoCallMetadata,
-
-    -- ** ChatConserverMessageContent
-    ChatConserverMessageContent (..),
-    newChatConserverMessageContent,
-
-    -- ** ChatContentExtension
-    ChatContentExtension (..),
-    newChatContentExtension,
-
-    -- ** ChatContentExtension_EventOtrStatus
-    ChatContentExtension_EventOtrStatus (..),
-
-    -- ** ChatProto
-    ChatProto (..),
-    newChatProto,
-
     -- ** CheckAccessResponse
     CheckAccessResponse (..),
     newCheckAccessResponse,
-
-    -- ** CircleProto
-    CircleProto (..),
-    newCircleProto,
-
-    -- ** ClientContext
-    ClientContext (..),
-    newClientContext,
-
-    -- ** CloudPrincipalProto
-    CloudPrincipalProto (..),
-    newCloudPrincipalProto,
-
-    -- ** ClusterInfo
-    ClusterInfo (..),
-    newClusterInfo,
-
-    -- ** CoActivity
-    CoActivity (..),
-    newCoActivity,
-
-    -- ** CoActivity_CoActivityApp
-    CoActivity_CoActivityApp (..),
-
-    -- ** Collaboration
-    Collaboration (..),
-    newCollaboration,
-
-    -- ** Color
-    Color (..),
-    newColor,
-
-    -- ** CommunalLabelTag
-    CommunalLabelTag (..),
-    newCommunalLabelTag,
 
     -- ** CompositeFilter
     CompositeFilter (..),
@@ -1202,49 +333,26 @@ module Gogol.CloudSearch
     -- ** CompositeFilter_LogicOperator
     CompositeFilter_LogicOperator (..),
 
-    -- ** ConsentedAppUnfurlMetadata
-    ConsentedAppUnfurlMetadata (..),
-    newConsentedAppUnfurlMetadata,
+    -- ** Content
+    Content (..),
+    newContent,
 
-    -- ** ContactGroupProto
-    ContactGroupProto (..),
-    newContactGroupProto,
+    -- ** Context
+    Context (..),
+    newContext,
 
-    -- ** ContentReport
-    ContentReport (..),
-    newContentReport,
+    -- ** Context_AppItem
+    Context_AppItem (..),
 
-    -- ** ContentReportJustification
-    ContentReportJustification (..),
-    newContentReportJustification,
+    -- ** Context_SurfaceItem
+    Context_SurfaceItem (..),
 
-    -- ** ContentReportSummary
-    ContentReportSummary (..),
-    newContentReportSummary,
+    -- ** Context_TypeItem
+    Context_TypeItem (..),
 
     -- ** ContextAttribute
     ContextAttribute (..),
     newContextAttribute,
-
-    -- ** ContextualAddOnMarkup
-    ContextualAddOnMarkup (..),
-    newContextualAddOnMarkup,
-
-    -- ** CseInfo
-    CseInfo (..),
-    newCseInfo,
-
-    -- ** CustomEmojiMetadata
-    CustomEmojiMetadata (..),
-    newCustomEmojiMetadata,
-
-    -- ** CustomFunctionReturnValueMarkup
-    CustomFunctionReturnValueMarkup (..),
-    newCustomFunctionReturnValueMarkup,
-
-    -- ** CustomerId
-    CustomerId (..),
-    newCustomerId,
 
     -- ** CustomerIndexStats
     CustomerIndexStats (..),
@@ -1270,10 +378,6 @@ module Gogol.CloudSearch
     CustomerUserStats (..),
     newCustomerUserStats,
 
-    -- ** DataLossPreventionMetadata
-    DataLossPreventionMetadata (..),
-    newDataLossPreventionMetadata,
-
     -- ** DataSource
     DataSource (..),
     newDataSource,
@@ -1298,13 +402,6 @@ module Gogol.CloudSearch
     DatePropertyOptions (..),
     newDatePropertyOptions,
 
-    -- ** DateTimePicker
-    DateTimePicker (..),
-    newDateTimePicker,
-
-    -- ** DateTimePicker_Type
-    DateTimePicker_Type (..),
-
     -- ** DateValues
     DateValues (..),
     newDateValues,
@@ -1313,54 +410,17 @@ module Gogol.CloudSearch
     DebugOptions (..),
     newDebugOptions,
 
-    -- ** DeepLinkData
-    DeepLinkData (..),
-    newDeepLinkData,
-
-    -- ** DeleteMetadata
-    DeleteMetadata (..),
-    newDeleteMetadata,
+    -- ** DebugResponse
+    DebugResponse (..),
+    newDebugResponse,
 
     -- ** DeleteQueueItemsRequest
     DeleteQueueItemsRequest (..),
     newDeleteQueueItemsRequest,
 
-    -- ** DeliveryMedium
-    DeliveryMedium (..),
-    newDeliveryMedium,
-
-    -- ** DeliveryMedium_MediumType
-    DeliveryMedium_MediumType (..),
-
     -- ** DisplayedProperty
     DisplayedProperty (..),
     newDisplayedProperty,
-
-    -- ** Divider
-    Divider (..),
-    newDivider,
-
-    -- ** DlpAction
-    DlpAction (..),
-    newDlpAction,
-
-    -- ** DlpAction_ActionType
-    DlpAction_ActionType (..),
-
-    -- ** DlpScanSummary
-    DlpScanSummary (..),
-    newDlpScanSummary,
-
-    -- ** DlpScanSummary_ScanOutcome
-    DlpScanSummary_ScanOutcome (..),
-
-    -- ** DmId
-    DmId (..),
-    newDmId,
-
-    -- ** DocumentInfo
-    DocumentInfo (..),
-    newDocumentInfo,
 
     -- ** DoubleOperatorOptions
     DoubleOperatorOptions (..),
@@ -1373,10 +433,6 @@ module Gogol.CloudSearch
     -- ** DoubleValues
     DoubleValues (..),
     newDoubleValues,
-
-    -- ** DriveClientActionMarkup
-    DriveClientActionMarkup (..),
-    newDriveClientActionMarkup,
 
     -- ** DriveFollowUpRestrict
     DriveFollowUpRestrict (..),
@@ -1392,16 +448,6 @@ module Gogol.CloudSearch
     -- ** DriveLocationRestrict_Type
     DriveLocationRestrict_Type (..),
 
-    -- ** DriveMetadata
-    DriveMetadata (..),
-    newDriveMetadata,
-
-    -- ** DriveMetadata_DriveAction
-    DriveMetadata_DriveAction (..),
-
-    -- ** DriveMetadata_DriveState
-    DriveMetadata_DriveState (..),
-
     -- ** DriveMimeTypeRestrict
     DriveMimeTypeRestrict (..),
     newDriveMimeTypeRestrict,
@@ -1416,36 +462,280 @@ module Gogol.CloudSearch
     -- ** DriveTimeSpanRestrict_Type
     DriveTimeSpanRestrict_Type (..),
 
-    -- ** DynamiteMessagesScoringInfo
-    DynamiteMessagesScoringInfo (..),
-    newDynamiteMessagesScoringInfo,
-
-    -- ** DynamiteSpacesScoringInfo
-    DynamiteSpacesScoringInfo (..),
-    newDynamiteSpacesScoringInfo,
-
-    -- ** EditMetadata
-    EditMetadata (..),
-    newEditMetadata,
-
-    -- ** EditorClientActionMarkup
-    EditorClientActionMarkup (..),
-    newEditorClientActionMarkup,
-
     -- ** EmailAddress
     EmailAddress (..),
     newEmailAddress,
 
-    -- ** EmailOwnerProto
-    EmailOwnerProto (..),
-    newEmailOwnerProto,
+    -- ** EnterpriseTopazFrontendTeamsLink
+    EnterpriseTopazFrontendTeamsLink (..),
+    newEnterpriseTopazFrontendTeamsLink,
 
-    -- ** EmbedClientItem
-    EmbedClientItem (..),
-    newEmbedClientItem,
+    -- ** EnterpriseTopazFrontendTeamsPersonCorePhoneNumber
+    EnterpriseTopazFrontendTeamsPersonCorePhoneNumber (..),
+    newEnterpriseTopazFrontendTeamsPersonCorePhoneNumber,
 
-    -- ** EmbedClientItem_TypeItem
-    EmbedClientItem_TypeItem (..),
+    -- ** EnterpriseTopazFrontendTeamsPersonCorePhoneNumber_Type
+    EnterpriseTopazFrontendTeamsPersonCorePhoneNumber_Type (..),
+
+    -- ** EnterpriseTopazSidekickAgendaEntry
+    EnterpriseTopazSidekickAgendaEntry (..),
+    newEnterpriseTopazSidekickAgendaEntry,
+
+    -- ** EnterpriseTopazSidekickAgendaEntry_Chronology
+    EnterpriseTopazSidekickAgendaEntry_Chronology (..),
+
+    -- ** EnterpriseTopazSidekickAgendaEntry_CurrentUserAttendingStatus
+    EnterpriseTopazSidekickAgendaEntry_CurrentUserAttendingStatus (..),
+
+    -- ** EnterpriseTopazSidekickAgendaGroupCardProto
+    EnterpriseTopazSidekickAgendaGroupCardProto (..),
+    newEnterpriseTopazSidekickAgendaGroupCardProto,
+
+    -- ** EnterpriseTopazSidekickAgendaGroupCardProtoContext
+    EnterpriseTopazSidekickAgendaGroupCardProtoContext (..),
+    newEnterpriseTopazSidekickAgendaGroupCardProtoContext,
+
+    -- ** EnterpriseTopazSidekickAgendaGroupCardProtoContext_EventsRestrict
+    EnterpriseTopazSidekickAgendaGroupCardProtoContext_EventsRestrict (..),
+
+    -- ** EnterpriseTopazSidekickAgendaItem
+    EnterpriseTopazSidekickAgendaItem (..),
+    newEnterpriseTopazSidekickAgendaItem,
+
+    -- ** EnterpriseTopazSidekickAnswerAnswerList
+    EnterpriseTopazSidekickAnswerAnswerList (..),
+    newEnterpriseTopazSidekickAnswerAnswerList,
+
+    -- ** EnterpriseTopazSidekickAnswerAnswerList_Type
+    EnterpriseTopazSidekickAnswerAnswerList_Type (..),
+
+    -- ** EnterpriseTopazSidekickAnswerAnswerListLabeledAnswer
+    EnterpriseTopazSidekickAnswerAnswerListLabeledAnswer (..),
+    newEnterpriseTopazSidekickAnswerAnswerListLabeledAnswer,
+
+    -- ** EnterpriseTopazSidekickAnswerSuggestedQueryAnswerCard
+    EnterpriseTopazSidekickAnswerSuggestedQueryAnswerCard (..),
+    newEnterpriseTopazSidekickAnswerSuggestedQueryAnswerCard,
+
+    -- ** EnterpriseTopazSidekickAnswerSuggestedQueryCategory
+    EnterpriseTopazSidekickAnswerSuggestedQueryCategory (..),
+    newEnterpriseTopazSidekickAnswerSuggestedQueryCategory,
+
+    -- ** EnterpriseTopazSidekickAnswerSuggestedQueryCategory_Category
+    EnterpriseTopazSidekickAnswerSuggestedQueryCategory_Category (..),
+
+    -- ** EnterpriseTopazSidekickAssistCardProto
+    EnterpriseTopazSidekickAssistCardProto (..),
+    newEnterpriseTopazSidekickAssistCardProto,
+
+    -- ** EnterpriseTopazSidekickAssistCardProto_CardType
+    EnterpriseTopazSidekickAssistCardProto_CardType (..),
+
+    -- ** EnterpriseTopazSidekickCardMetadata
+    EnterpriseTopazSidekickCardMetadata (..),
+    newEnterpriseTopazSidekickCardMetadata,
+
+    -- ** EnterpriseTopazSidekickCardMetadata_CardCategory
+    EnterpriseTopazSidekickCardMetadata_CardCategory (..),
+
+    -- ** EnterpriseTopazSidekickCardMetadata_Chronology
+    EnterpriseTopazSidekickCardMetadata_Chronology (..),
+
+    -- ** EnterpriseTopazSidekickCardMetadata_RenderMode
+    EnterpriseTopazSidekickCardMetadata_RenderMode (..),
+
+    -- ** EnterpriseTopazSidekickCommonDebugInfo
+    EnterpriseTopazSidekickCommonDebugInfo (..),
+    newEnterpriseTopazSidekickCommonDebugInfo,
+
+    -- ** EnterpriseTopazSidekickCommonDocument
+    EnterpriseTopazSidekickCommonDocument (..),
+    newEnterpriseTopazSidekickCommonDocument,
+
+    -- ** EnterpriseTopazSidekickCommonDocument_AccessType
+    EnterpriseTopazSidekickCommonDocument_AccessType (..),
+
+    -- ** EnterpriseTopazSidekickCommonDocument_Provenance
+    EnterpriseTopazSidekickCommonDocument_Provenance (..),
+
+    -- ** EnterpriseTopazSidekickCommonDocument_Reason
+    EnterpriseTopazSidekickCommonDocument_Reason (..),
+
+    -- ** EnterpriseTopazSidekickCommonDocument_Type
+    EnterpriseTopazSidekickCommonDocument_Type (..),
+
+    -- ** EnterpriseTopazSidekickCommonDocumentDriveDocumentMetadata
+    EnterpriseTopazSidekickCommonDocumentDriveDocumentMetadata (..),
+    newEnterpriseTopazSidekickCommonDocumentDriveDocumentMetadata,
+
+    -- ** EnterpriseTopazSidekickCommonDocumentDriveDocumentMetadata_Scope
+    EnterpriseTopazSidekickCommonDocumentDriveDocumentMetadata_Scope (..),
+
+    -- ** EnterpriseTopazSidekickCommonDocumentJustification
+    EnterpriseTopazSidekickCommonDocumentJustification (..),
+    newEnterpriseTopazSidekickCommonDocumentJustification,
+
+    -- ** EnterpriseTopazSidekickCommonDocumentJustification_Reason
+    EnterpriseTopazSidekickCommonDocumentJustification_Reason (..),
+
+    -- ** EnterpriseTopazSidekickCommonPerson
+    EnterpriseTopazSidekickCommonPerson (..),
+    newEnterpriseTopazSidekickCommonPerson,
+
+    -- ** EnterpriseTopazSidekickCommonPersonBirthday
+    EnterpriseTopazSidekickCommonPersonBirthday (..),
+    newEnterpriseTopazSidekickCommonPersonBirthday,
+
+    -- ** EnterpriseTopazSidekickConflictingEventsCardProto
+    EnterpriseTopazSidekickConflictingEventsCardProto (..),
+    newEnterpriseTopazSidekickConflictingEventsCardProto,
+
+    -- ** EnterpriseTopazSidekickDocumentGroup
+    EnterpriseTopazSidekickDocumentGroup (..),
+    newEnterpriseTopazSidekickDocumentGroup,
+
+    -- ** EnterpriseTopazSidekickDocumentGroup_GroupType
+    EnterpriseTopazSidekickDocumentGroup_GroupType (..),
+
+    -- ** EnterpriseTopazSidekickDocumentPerCategoryList
+    EnterpriseTopazSidekickDocumentPerCategoryList (..),
+    newEnterpriseTopazSidekickDocumentPerCategoryList,
+
+    -- ** EnterpriseTopazSidekickDocumentPerCategoryList_ListType
+    EnterpriseTopazSidekickDocumentPerCategoryList_ListType (..),
+
+    -- ** EnterpriseTopazSidekickDocumentPerCategoryListDocumentPerCategoryListEntry
+    EnterpriseTopazSidekickDocumentPerCategoryListDocumentPerCategoryListEntry (..),
+    newEnterpriseTopazSidekickDocumentPerCategoryListDocumentPerCategoryListEntry,
+
+    -- ** EnterpriseTopazSidekickDocumentPerCategoryListDocumentPerCategoryListEntry_Category
+    EnterpriseTopazSidekickDocumentPerCategoryListDocumentPerCategoryListEntry_Category (..),
+
+    -- ** EnterpriseTopazSidekickFindMeetingTimeCardProto
+    EnterpriseTopazSidekickFindMeetingTimeCardProto (..),
+    newEnterpriseTopazSidekickFindMeetingTimeCardProto,
+
+    -- ** EnterpriseTopazSidekickGap
+    EnterpriseTopazSidekickGap (..),
+    newEnterpriseTopazSidekickGap,
+
+    -- ** EnterpriseTopazSidekickGenericAnswerCard
+    EnterpriseTopazSidekickGenericAnswerCard (..),
+    newEnterpriseTopazSidekickGenericAnswerCard,
+
+    -- ** EnterpriseTopazSidekickGetAndKeepAheadCardProto
+    EnterpriseTopazSidekickGetAndKeepAheadCardProto (..),
+    newEnterpriseTopazSidekickGetAndKeepAheadCardProto,
+
+    -- ** EnterpriseTopazSidekickGetAndKeepAheadCardProtoDeclinedEvents
+    EnterpriseTopazSidekickGetAndKeepAheadCardProtoDeclinedEvents (..),
+    newEnterpriseTopazSidekickGetAndKeepAheadCardProtoDeclinedEvents,
+
+    -- ** EnterpriseTopazSidekickMeetingNotesCardError
+    EnterpriseTopazSidekickMeetingNotesCardError (..),
+    newEnterpriseTopazSidekickMeetingNotesCardError,
+
+    -- ** EnterpriseTopazSidekickMeetingNotesCardError_Reason
+    EnterpriseTopazSidekickMeetingNotesCardError_Reason (..),
+
+    -- ** EnterpriseTopazSidekickMeetingNotesCardProto
+    EnterpriseTopazSidekickMeetingNotesCardProto (..),
+    newEnterpriseTopazSidekickMeetingNotesCardProto,
+
+    -- ** EnterpriseTopazSidekickMeetingNotesCardRequest
+    EnterpriseTopazSidekickMeetingNotesCardRequest (..),
+    newEnterpriseTopazSidekickMeetingNotesCardRequest,
+
+    -- ** EnterpriseTopazSidekickMeetingNotesCardRequest_CanCreateForItem
+    EnterpriseTopazSidekickMeetingNotesCardRequest_CanCreateForItem (..),
+
+    -- ** EnterpriseTopazSidekickNlpMetadata
+    EnterpriseTopazSidekickNlpMetadata (..),
+    newEnterpriseTopazSidekickNlpMetadata,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerDisambiguationInfo
+    EnterpriseTopazSidekickPeopleAnswerDisambiguationInfo (..),
+    newEnterpriseTopazSidekickPeopleAnswerDisambiguationInfo,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerDisambiguationInfoDisambiguationPerson
+    EnterpriseTopazSidekickPeopleAnswerDisambiguationInfoDisambiguationPerson (..),
+    newEnterpriseTopazSidekickPeopleAnswerDisambiguationInfoDisambiguationPerson,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerPeopleAnswerCardHeader
+    EnterpriseTopazSidekickPeopleAnswerPeopleAnswerCardHeader (..),
+    newEnterpriseTopazSidekickPeopleAnswerPeopleAnswerCardHeader,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerPersonAnswerCard
+    EnterpriseTopazSidekickPeopleAnswerPersonAnswerCard (..),
+    newEnterpriseTopazSidekickPeopleAnswerPersonAnswerCard,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerPersonAnswerCard_ResponseStatus
+    EnterpriseTopazSidekickPeopleAnswerPersonAnswerCard_ResponseStatus (..),
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard
+    EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard (..),
+    newEnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard,
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard_RelationType
+    EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard_RelationType (..),
+
+    -- ** EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard_ResponseStatus
+    EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard_ResponseStatus (..),
+
+    -- ** EnterpriseTopazSidekickPeopleDisambiguationCard
+    EnterpriseTopazSidekickPeopleDisambiguationCard (..),
+    newEnterpriseTopazSidekickPeopleDisambiguationCard,
+
+    -- ** EnterpriseTopazSidekickPerson
+    EnterpriseTopazSidekickPerson (..),
+    newEnterpriseTopazSidekickPerson,
+
+    -- ** EnterpriseTopazSidekickPerson_AffinityLevel
+    EnterpriseTopazSidekickPerson_AffinityLevel (..),
+
+    -- ** EnterpriseTopazSidekickPerson_AttendingStatus
+    EnterpriseTopazSidekickPerson_AttendingStatus (..),
+
+    -- ** EnterpriseTopazSidekickPersonProfileCard
+    EnterpriseTopazSidekickPersonProfileCard (..),
+    newEnterpriseTopazSidekickPersonProfileCard,
+
+    -- ** EnterpriseTopazSidekickPersonProfileCardRelatedPeople
+    EnterpriseTopazSidekickPersonProfileCardRelatedPeople (..),
+    newEnterpriseTopazSidekickPersonProfileCardRelatedPeople,
+
+    -- ** EnterpriseTopazSidekickPersonProfileCardRelatedPeople_Relation
+    EnterpriseTopazSidekickPersonProfileCardRelatedPeople_Relation (..),
+
+    -- ** EnterpriseTopazSidekickPersonalizedDocsCardProto
+    EnterpriseTopazSidekickPersonalizedDocsCardProto (..),
+    newEnterpriseTopazSidekickPersonalizedDocsCardProto,
+
+    -- ** EnterpriseTopazSidekickRankingParams
+    EnterpriseTopazSidekickRankingParams (..),
+    newEnterpriseTopazSidekickRankingParams,
+
+    -- ** EnterpriseTopazSidekickRankingParams_Priority
+    EnterpriseTopazSidekickRankingParams_Priority (..),
+
+    -- ** EnterpriseTopazSidekickRankingParams_Type
+    EnterpriseTopazSidekickRankingParams_Type (..),
+
+    -- ** EnterpriseTopazSidekickRecentDocumentsCardProto
+    EnterpriseTopazSidekickRecentDocumentsCardProto (..),
+    newEnterpriseTopazSidekickRecentDocumentsCardProto,
+
+    -- ** EnterpriseTopazSidekickScheduledMeeting
+    EnterpriseTopazSidekickScheduledMeeting (..),
+    newEnterpriseTopazSidekickScheduledMeeting,
+
+    -- ** EnterpriseTopazSidekickShareMeetingDocsCardProto
+    EnterpriseTopazSidekickShareMeetingDocsCardProto (..),
+    newEnterpriseTopazSidekickShareMeetingDocsCardProto,
+
+    -- ** EnterpriseTopazSidekickTimeSlot
+    EnterpriseTopazSidekickTimeSlot (..),
+    newEnterpriseTopazSidekickTimeSlot,
 
     -- ** EnumOperatorOptions
     EnumOperatorOptions (..),
@@ -1474,14 +764,6 @@ module Gogol.CloudSearch
     ErrorMessage (..),
     newErrorMessage,
 
-    -- ** EventAnnotation
-    EventAnnotation (..),
-    newEventAnnotation,
-
-    -- ** EventProto
-    EventProto (..),
-    newEventProto,
-
     -- ** FacetBucket
     FacetBucket (..),
     newFacetBucket,
@@ -1502,90 +784,17 @@ module Gogol.CloudSearch
     Filter (..),
     newFilter,
 
-    -- ** FilterCreated
-    FilterCreated (..),
-    newFilterCreated,
-
-    -- ** FilterDeleted
-    FilterDeleted (..),
-    newFilterDeleted,
-
     -- ** FilterOptions
     FilterOptions (..),
     newFilterOptions,
-
-    -- ** FilterUpdate
-    FilterUpdate (..),
-    newFilterUpdate,
-
-    -- ** FixedFooter
-    FixedFooter (..),
-    newFixedFooter,
-
-    -- ** Folder
-    Folder (..),
-    newFolder,
-
-    -- ** FolderAttribute
-    FolderAttribute (..),
-    newFolderAttribute,
-
-    -- ** FormAction
-    FormAction (..),
-    newFormAction,
-
-    -- ** FormAction_LoadIndicator
-    FormAction_LoadIndicator (..),
-
-    -- ** FormatMetadata
-    FormatMetadata (..),
-    newFormatMetadata,
-
-    -- ** FormatMetadata_FormatType
-    FormatMetadata_FormatType (..),
-
-    -- ** Formatting
-    Formatting (..),
-    newFormatting,
-
-    -- ** Formatting_Style
-    Formatting_Style (..),
 
     -- ** FreshnessOptions
     FreshnessOptions (..),
     newFreshnessOptions,
 
-    -- ** FuseboxItem
-    FuseboxItem (..),
-    newFuseboxItem,
-
-    -- ** FuseboxItemThreadMatchInfo
-    FuseboxItemThreadMatchInfo (..),
-    newFuseboxItemThreadMatchInfo,
-
-    -- ** FuseboxPrefUpdatePreState
-    FuseboxPrefUpdatePreState (..),
-    newFuseboxPrefUpdatePreState,
-
     -- ** GSuitePrincipal
     GSuitePrincipal (..),
     newGSuitePrincipal,
-
-    -- ** GaiaGroupProto
-    GaiaGroupProto (..),
-    newGaiaGroupProto,
-
-    -- ** GaiaUserProto
-    GaiaUserProto (..),
-    newGaiaUserProto,
-
-    -- ** GatewayAccess
-    GatewayAccess (..),
-    newGatewayAccess,
-
-    -- ** GatewaySipAccess
-    GatewaySipAccess (..),
-    newGatewaySipAccess,
 
     -- ** GetCustomerIndexStatsResponse
     GetCustomerIndexStatsResponse (..),
@@ -1623,174 +832,6 @@ module Gogol.CloudSearch
     GetSearchApplicationUserStatsResponse (..),
     newGetSearchApplicationUserStatsResponse,
 
-    -- ** GmailClientActionMarkup
-    GmailClientActionMarkup (..),
-    newGmailClientActionMarkup,
-
-    -- ** GoogleChatV1ContextualAddOnMarkup
-    GoogleChatV1ContextualAddOnMarkup (..),
-    newGoogleChatV1ContextualAddOnMarkup,
-
-    -- ** GoogleChatV1ContextualAddOnMarkupCard
-    GoogleChatV1ContextualAddOnMarkupCard (..),
-    newGoogleChatV1ContextualAddOnMarkupCard,
-
-    -- ** GoogleChatV1ContextualAddOnMarkupCardCardAction
-    GoogleChatV1ContextualAddOnMarkupCardCardAction (..),
-    newGoogleChatV1ContextualAddOnMarkupCardCardAction,
-
-    -- ** GoogleChatV1ContextualAddOnMarkupCardCardHeader
-    GoogleChatV1ContextualAddOnMarkupCardCardHeader (..),
-    newGoogleChatV1ContextualAddOnMarkupCardCardHeader,
-
-    -- ** GoogleChatV1ContextualAddOnMarkupCardCardHeader_ImageStyle
-    GoogleChatV1ContextualAddOnMarkupCardCardHeader_ImageStyle (..),
-
-    -- ** GoogleChatV1ContextualAddOnMarkupCardSection
-    GoogleChatV1ContextualAddOnMarkupCardSection (..),
-    newGoogleChatV1ContextualAddOnMarkupCardSection,
-
-    -- ** GoogleChatV1WidgetMarkup
-    GoogleChatV1WidgetMarkup (..),
-    newGoogleChatV1WidgetMarkup,
-
-    -- ** GoogleChatV1WidgetMarkupButton
-    GoogleChatV1WidgetMarkupButton (..),
-    newGoogleChatV1WidgetMarkupButton,
-
-    -- ** GoogleChatV1WidgetMarkupFormAction
-    GoogleChatV1WidgetMarkupFormAction (..),
-    newGoogleChatV1WidgetMarkupFormAction,
-
-    -- ** GoogleChatV1WidgetMarkupFormActionActionParameter
-    GoogleChatV1WidgetMarkupFormActionActionParameter (..),
-    newGoogleChatV1WidgetMarkupFormActionActionParameter,
-
-    -- ** GoogleChatV1WidgetMarkupImage
-    GoogleChatV1WidgetMarkupImage (..),
-    newGoogleChatV1WidgetMarkupImage,
-
-    -- ** GoogleChatV1WidgetMarkupImageButton
-    GoogleChatV1WidgetMarkupImageButton (..),
-    newGoogleChatV1WidgetMarkupImageButton,
-
-    -- ** GoogleChatV1WidgetMarkupImageButton_Icon
-    GoogleChatV1WidgetMarkupImageButton_Icon (..),
-
-    -- ** GoogleChatV1WidgetMarkupKeyValue
-    GoogleChatV1WidgetMarkupKeyValue (..),
-    newGoogleChatV1WidgetMarkupKeyValue,
-
-    -- ** GoogleChatV1WidgetMarkupKeyValue_Icon
-    GoogleChatV1WidgetMarkupKeyValue_Icon (..),
-
-    -- ** GoogleChatV1WidgetMarkupOnClick
-    GoogleChatV1WidgetMarkupOnClick (..),
-    newGoogleChatV1WidgetMarkupOnClick,
-
-    -- ** GoogleChatV1WidgetMarkupOpenLink
-    GoogleChatV1WidgetMarkupOpenLink (..),
-    newGoogleChatV1WidgetMarkupOpenLink,
-
-    -- ** GoogleChatV1WidgetMarkupTextButton
-    GoogleChatV1WidgetMarkupTextButton (..),
-    newGoogleChatV1WidgetMarkupTextButton,
-
-    -- ** GoogleChatV1WidgetMarkupTextParagraph
-    GoogleChatV1WidgetMarkupTextParagraph (..),
-    newGoogleChatV1WidgetMarkupTextParagraph,
-
-    -- ** GoogleDocsMetadata
-    GoogleDocsMetadata (..),
-    newGoogleDocsMetadata,
-
-    -- ** GoogleDocsMetadata_DocumentType
-    GoogleDocsMetadata_DocumentType (..),
-
-    -- ** GoogleDocsResultInfo
-    GoogleDocsResultInfo (..),
-    newGoogleDocsResultInfo,
-
-    -- ** Grid
-    Grid (..),
-    newGrid,
-
-    -- ** GridItem
-    GridItem (..),
-    newGridItem,
-
-    -- ** GridItem_Layout
-    GridItem_Layout (..),
-
-    -- ** GridItem_TextAlignment
-    GridItem_TextAlignment (..),
-
-    -- ** GroupDetailsUpdatedMetadata
-    GroupDetailsUpdatedMetadata (..),
-    newGroupDetailsUpdatedMetadata,
-
-    -- ** GroupId
-    GroupId (..),
-    newGroupId,
-
-    -- ** GroupLinkSharingModificationEvent
-    GroupLinkSharingModificationEvent (..),
-    newGroupLinkSharingModificationEvent,
-
-    -- ** GroupLinkSharingModificationEvent_NewStatus
-    GroupLinkSharingModificationEvent_NewStatus (..),
-
-    -- ** GroupRetentionSettingsUpdatedMetaData
-    GroupRetentionSettingsUpdatedMetaData (..),
-    newGroupRetentionSettingsUpdatedMetaData,
-
-    -- ** GsuiteIntegrationMetadata
-    GsuiteIntegrationMetadata (..),
-    newGsuiteIntegrationMetadata,
-
-    -- ** GsuiteIntegrationMetadata_ClientType
-    GsuiteIntegrationMetadata_ClientType (..),
-
-    -- ** HangoutEvent
-    HangoutEvent (..),
-    newHangoutEvent,
-
-    -- ** HangoutEvent_MediaType
-    HangoutEvent_MediaType (..),
-
-    -- ** HangoutEvent_Type
-    HangoutEvent_Type (..),
-
-    -- ** HangoutVideoEventMetadata
-    HangoutVideoEventMetadata (..),
-    newHangoutVideoEventMetadata,
-
-    -- ** HangoutVideoEventMetadata_HangoutVideoType
-    HangoutVideoEventMetadata_HangoutVideoType (..),
-
-    -- ** HashtagData
-    HashtagData (..),
-    newHashtagData,
-
-    -- ** History
-    History (..),
-    newHistory,
-
-    -- ** HistoryRecord
-    HistoryRecord (..),
-    newHistoryRecord,
-
-    -- ** HistoryRecord_Type
-    HistoryRecord_Type (..),
-
-    -- ** HostAppActionMarkup
-    HostAppActionMarkup (..),
-    newHostAppActionMarkup,
-
-    -- ** HostProto
-    HostProto (..),
-    newHostProto,
-
     -- ** HtmlOperatorOptions
     HtmlOperatorOptions (..),
     newHtmlOperatorOptions,
@@ -1802,89 +843,6 @@ module Gogol.CloudSearch
     -- ** HtmlValues
     HtmlValues (..),
     newHtmlValues,
-
-    -- ** IconImage
-    IconImage (..),
-    newIconImage,
-
-    -- ** IconImage_Icon
-    IconImage_Icon (..),
-
-    -- ** IconImage_ImageStyle
-    IconImage_ImageStyle (..),
-
-    -- ** Id
-    Id (..),
-    newId,
-
-    -- ** Image
-    Image (..),
-    newImage,
-
-    -- ** ImageButton
-    ImageButton (..),
-    newImageButton,
-
-    -- ** ImageButton_Icon
-    ImageButton_Icon (..),
-
-    -- ** ImageComponent
-    ImageComponent (..),
-    newImageComponent,
-
-    -- ** ImageCropStyle
-    ImageCropStyle (..),
-    newImageCropStyle,
-
-    -- ** ImageCropStyle_Type
-    ImageCropStyle_Type (..),
-
-    -- ** ImageKeyValue
-    ImageKeyValue (..),
-    newImageKeyValue,
-
-    -- ** ImageKeyValue_Icon
-    ImageKeyValue_Icon (..),
-
-    -- ** ImapSessionContext
-    ImapSessionContext (..),
-    newImapSessionContext,
-
-    -- ** ImapSessionContext_App
-    ImapSessionContext_App (..),
-
-    -- ** ImapSessionContext_DeviceType
-    ImapSessionContext_DeviceType (..),
-
-    -- ** ImapSessionContext_Os
-    ImapSessionContext_Os (..),
-
-    -- ** ImapSyncDelete
-    ImapSyncDelete (..),
-    newImapSyncDelete,
-
-    -- ** ImapUidsReassign
-    ImapUidsReassign (..),
-    newImapUidsReassign,
-
-    -- ** ImapUpdate
-    ImapUpdate (..),
-    newImapUpdate,
-
-    -- ** ImapsyncFolderAttributeFolderMessage
-    ImapsyncFolderAttributeFolderMessage (..),
-    newImapsyncFolderAttributeFolderMessage,
-
-    -- ** ImapsyncFolderAttributeFolderMessageFlags
-    ImapsyncFolderAttributeFolderMessageFlags (..),
-    newImapsyncFolderAttributeFolderMessageFlags,
-
-    -- ** IncomingWebhookChangedMetadata
-    IncomingWebhookChangedMetadata (..),
-    newIncomingWebhookChangedMetadata,
-
-    -- ** IncomingWebhookChangedMetadata_Type
-    IncomingWebhookChangedMetadata_Type (..),
 
     -- ** IndexItemOptions
     IndexItemOptions (..),
@@ -1900,16 +858,6 @@ module Gogol.CloudSearch
     -- ** InitializeCustomerRequest
     InitializeCustomerRequest (..),
     newInitializeCustomerRequest,
-
-    -- ** InsertContent
-    InsertContent (..),
-    newInsertContent,
-
-    -- ** InsertContent_ContentType
-    InsertContent_ContentType (..),
-
-    -- ** InsertContent_MimeType
-    InsertContent_MimeType (..),
 
     -- ** IntegerFacetingOptions
     IntegerFacetingOptions (..),
@@ -1930,32 +878,12 @@ module Gogol.CloudSearch
     IntegerValues (..),
     newIntegerValues,
 
-    -- ** IntegrationConfigMutation
-    IntegrationConfigMutation (..),
-    newIntegrationConfigMutation,
-
-    -- ** IntegrationConfigUpdatedMetadata
-    IntegrationConfigUpdatedMetadata (..),
-    newIntegrationConfigUpdatedMetadata,
-
     -- ** Interaction
     Interaction (..),
     newInteraction,
 
     -- ** Interaction_Type
     Interaction_Type (..),
-
-    -- ** InteractionData
-    InteractionData (..),
-    newInteractionData,
-
-    -- ** InviteAcceptedEvent
-    InviteAcceptedEvent (..),
-    newInviteAcceptedEvent,
-
-    -- ** InviteeInfo
-    InviteeInfo (..),
-    newInviteeInfo,
 
     -- ** Item
     Item (..),
@@ -1989,10 +917,6 @@ module Gogol.CloudSearch
     ItemMetadata (..),
     newItemMetadata,
 
-    -- ** ItemParts
-    ItemParts (..),
-    newItemParts,
-
     -- ** ItemStatus
     ItemStatus (..),
     newItemStatus,
@@ -2003,82 +927,6 @@ module Gogol.CloudSearch
     -- ** ItemStructuredData
     ItemStructuredData (..),
     newItemStructuredData,
-
-    -- ** ItemThread
-    ItemThread (..),
-    newItemThread,
-
-    -- ** JobsettedServerSpec
-    JobsettedServerSpec (..),
-    newJobsettedServerSpec,
-
-    -- ** KeyValue
-    KeyValue (..),
-    newKeyValue,
-
-    -- ** KeyValue_Icon
-    KeyValue_Icon (..),
-
-    -- ** KeyValue_ImageStyle
-    KeyValue_ImageStyle (..),
-
-    -- ** LabelAdded
-    LabelAdded (..),
-    newLabelAdded,
-
-    -- ** LabelCreated
-    LabelCreated (..),
-    newLabelCreated,
-
-    -- ** LabelDeleted
-    LabelDeleted (..),
-    newLabelDeleted,
-
-    -- ** LabelRemoved
-    LabelRemoved (..),
-    newLabelRemoved,
-
-    -- ** LabelRenamed
-    LabelRenamed (..),
-    newLabelRenamed,
-
-    -- ** LabelUpdate
-    LabelUpdate (..),
-    newLabelUpdate,
-
-    -- ** LabelUpdated
-    LabelUpdated (..),
-    newLabelUpdated,
-
-    -- ** Labels
-    Labels (..),
-    newLabels,
-
-    -- ** LanguageConfig
-    LanguageConfig (..),
-    newLanguageConfig,
-
-    -- ** LdapGroupProto
-    LdapGroupProto (..),
-    newLdapGroupProto,
-
-    -- ** LdapUserProto
-    LdapUserProto (..),
-    newLdapUserProto,
-
-    -- ** LegacyUploadMetadata
-    LegacyUploadMetadata (..),
-    newLegacyUploadMetadata,
-
-    -- ** LinkData
-    LinkData (..),
-    newLinkData,
-
-    -- ** LinkData_AttachmentRenderHint
-    LinkData_AttachmentRenderHint (..),
-
-    -- ** LinkData_LinkType
-    LinkData_LinkType (..),
 
     -- ** ListDataSourceResponse
     ListDataSourceResponse (..),
@@ -2108,128 +956,21 @@ module Gogol.CloudSearch
     ListUnmappedIdentitiesResponse (..),
     newListUnmappedIdentitiesResponse,
 
-    -- ** MatchInfo
-    MatchInfo (..),
-    newMatchInfo,
+    -- ** MapInfo
+    MapInfo (..),
+    newMapInfo,
+
+    -- ** MapTile
+    MapTile (..),
+    newMapTile,
 
     -- ** MatchRange
     MatchRange (..),
     newMatchRange,
 
-    -- ** MdbGroupProto
-    MdbGroupProto (..),
-    newMdbGroupProto,
-
-    -- ** MdbUserProto
-    MdbUserProto (..),
-    newMdbUserProto,
-
     -- ** Media
     Media (..),
     newMedia,
-
-    -- ** MeetingSpace
-    MeetingSpace (..),
-    newMeetingSpace,
-
-    -- ** MeetingSpace_AcceptedNumberClassItem
-    MeetingSpace_AcceptedNumberClassItem (..),
-
-    -- ** Member
-    Member (..),
-    newMember,
-
-    -- ** MemberId
-    MemberId (..),
-    newMemberId,
-
-    -- ** MembershipChangeEvent
-    MembershipChangeEvent (..),
-    newMembershipChangeEvent,
-
-    -- ** MembershipChangeEvent_LeaveReason
-    MembershipChangeEvent_LeaveReason (..),
-
-    -- ** MembershipChangeEvent_Type
-    MembershipChangeEvent_Type (..),
-
-    -- ** MembershipChangedMetadata
-    MembershipChangedMetadata (..),
-    newMembershipChangedMetadata,
-
-    -- ** MembershipChangedMetadata_InitiatorType
-    MembershipChangedMetadata_InitiatorType (..),
-
-    -- ** MembershipChangedMetadata_Type
-    MembershipChangedMetadata_Type (..),
-
-    -- ** Menu
-    Menu (..),
-    newMenu,
-
-    -- ** MenuItem
-    MenuItem (..),
-    newMenuItem,
-
-    -- ** Message
-    Message (..),
-    newMessage,
-
-    -- ** Message_DeletableBy
-    Message_DeletableBy (..),
-
-    -- ** Message_EditableBy
-    Message_EditableBy (..),
-
-    -- ** Message_MessageOrigin
-    Message_MessageOrigin (..),
-
-    -- ** Message_MessageState
-    Message_MessageState (..),
-
-    -- ** Message_QuotedByState
-    Message_QuotedByState (..),
-
-    -- ** Message_RichTextFormattingType
-    Message_RichTextFormattingType (..),
-
-    -- ** MessageAdded
-    MessageAdded (..),
-    newMessageAdded,
-
-    -- ** MessageAttributes
-    MessageAttributes (..),
-    newMessageAttributes,
-
-    -- ** MessageDeleted
-    MessageDeleted (..),
-    newMessageDeleted,
-
-    -- ** MessageId
-    MessageId (..),
-    newMessageId,
-
-    -- ** MessageInfo
-    MessageInfo (..),
-    newMessageInfo,
-
-    -- ** MessageInfo_AuthorUserType
-    MessageInfo_AuthorUserType (..),
-
-    -- ** MessageInfo_SearcherMembershipState
-    MessageInfo_SearcherMembershipState (..),
-
-    -- ** MessageParentId
-    MessageParentId (..),
-    newMessageParentId,
-
-    -- ** MessageProps
-    MessageProps (..),
-    newMessageProps,
-
-    -- ** MessageSet
-    MessageSet (..),
-    newMessageSet,
 
     -- ** Metadata
     Metadata (..),
@@ -2239,10 +980,6 @@ module Gogol.CloudSearch
     Metaline (..),
     newMetaline,
 
-    -- ** MultiKey
-    MultiKey (..),
-    newMultiKey,
-
     -- ** Name
     Name (..),
     newName,
@@ -2250,10 +987,6 @@ module Gogol.CloudSearch
     -- ** NamedProperty
     NamedProperty (..),
     newNamedProperty,
-
-    -- ** OAuthConsumerProto
-    OAuthConsumerProto (..),
-    newOAuthConsumerProto,
 
     -- ** ObjectDefinition
     ObjectDefinition (..),
@@ -2275,27 +1008,6 @@ module Gogol.CloudSearch
     ObjectValues (..),
     newObjectValues,
 
-    -- ** OnClick
-    OnClick (..),
-    newOnClick,
-
-    -- ** OpenCreatedDraftActionMarkup
-    OpenCreatedDraftActionMarkup (..),
-    newOpenCreatedDraftActionMarkup,
-
-    -- ** OpenLink
-    OpenLink (..),
-    newOpenLink,
-
-    -- ** OpenLink_LoadIndicator
-    OpenLink_LoadIndicator (..),
-
-    -- ** OpenLink_OnClose
-    OpenLink_OnClose (..),
-
-    -- ** OpenLink_OpenAs
-    OpenLink_OpenAs (..),
-
     -- ** Operation
     Operation (..),
     newOperation,
@@ -2308,43 +1020,9 @@ module Gogol.CloudSearch
     Operation_Response (..),
     newOperation_Response,
 
-    -- ** OsVersion
-    OsVersion (..),
-    newOsVersion,
-
-    -- ** OtrChatMessageEvent
-    OtrChatMessageEvent (..),
-    newOtrChatMessageEvent,
-
-    -- ** OtrChatMessageEvent_MessageOtrStatus
-    OtrChatMessageEvent_MessageOtrStatus (..),
-
-    -- ** OtrModificationEvent
-    OtrModificationEvent (..),
-    newOtrModificationEvent,
-
-    -- ** OtrModificationEvent_NewOtrStatus
-    OtrModificationEvent_NewOtrStatus (..),
-
-    -- ** OtrModificationEvent_NewOtrToggle
-    OtrModificationEvent_NewOtrToggle (..),
-
-    -- ** OtrModificationEvent_OldOtrStatus
-    OtrModificationEvent_OldOtrStatus (..),
-
-    -- ** OtrModificationEvent_OldOtrToggle
-    OtrModificationEvent_OldOtrToggle (..),
-
-    -- ** PackagingServiceClient
-    PackagingServiceClient (..),
-    newPackagingServiceClient,
-
-    -- ** PackagingServiceClient_Type
-    PackagingServiceClient_Type (..),
-
-    -- ** PaygateInfo
-    PaygateInfo (..),
-    newPaygateInfo,
+    -- ** PeoplePromotionCard
+    PeoplePromotionCard (..),
+    newPeoplePromotionCard,
 
     -- ** PeopleSuggestion
     PeopleSuggestion (..),
@@ -2354,13 +1032,16 @@ module Gogol.CloudSearch
     Person (..),
     newPerson,
 
-    -- ** PersonalLabelTag
-    PersonalLabelTag (..),
-    newPersonalLabelTag,
+    -- ** PersonCore
+    PersonCore (..),
+    newPersonCore,
 
-    -- ** PhoneAccess
-    PhoneAccess (..),
-    newPhoneAccess,
+    -- ** PersonCore_AvailabilityStatus
+    PersonCore_AvailabilityStatus (..),
+
+    -- ** PersonCore_Keywords
+    PersonCore_Keywords (..),
+    newPersonCore_Keywords,
 
     -- ** PhoneNumber
     PhoneNumber (..),
@@ -2373,10 +1054,6 @@ module Gogol.CloudSearch
     Photo (..),
     newPhoto,
 
-    -- ** PinnedItemId
-    PinnedItemId (..),
-    newPinnedItemId,
-
     -- ** PollItemsRequest
     PollItemsRequest (..),
     newPollItemsRequest,
@@ -2388,48 +1065,9 @@ module Gogol.CloudSearch
     PollItemsResponse (..),
     newPollItemsResponse,
 
-    -- ** PossiblyTrimmedModel
-    PossiblyTrimmedModel (..),
-    newPossiblyTrimmedModel,
-
-    -- ** PostiniUserProto
-    PostiniUserProto (..),
-    newPostiniUserProto,
-
-    -- ** PreState
-    PreState (..),
-    newPreState,
-
-    -- ** PrefDeleted
-    PrefDeleted (..),
-    newPrefDeleted,
-
-    -- ** PrefUpdate
-    PrefUpdate (..),
-    newPrefUpdate,
-
-    -- ** PrefWritten
-    PrefWritten (..),
-    newPrefWritten,
-
-    -- ** Presenter
-    Presenter (..),
-    newPresenter,
-
     -- ** Principal
     Principal (..),
     newPrincipal,
-
-    -- ** PrincipalProto
-    PrincipalProto (..),
-    newPrincipalProto,
-
-    -- ** PrincipalProto_Scope
-    PrincipalProto_Scope (..),
-
-    -- ** PrivateMessageInfo
-    PrivateMessageInfo (..),
-    newPrivateMessageInfo,
 
     -- ** ProcessingError
     ProcessingError (..),
@@ -2446,10 +1084,6 @@ module Gogol.CloudSearch
     PropertyDisplayOptions (..),
     newPropertyDisplayOptions,
 
-    -- ** Provenance
-    Provenance (..),
-    newProvenance,
-
     -- ** PushItem
     PushItem (..),
     newPushItem,
@@ -2460,6 +1094,10 @@ module Gogol.CloudSearch
     -- ** PushItemRequest
     PushItemRequest (..),
     newPushItemRequest,
+
+    -- ** QueryActivity
+    QueryActivity (..),
+    newQueryActivity,
 
     -- ** QueryCountByStatus
     QueryCountByStatus (..),
@@ -2502,72 +1140,13 @@ module Gogol.CloudSearch
     QuerySuggestion (..),
     newQuerySuggestion,
 
-    -- ** QuotedMessageMetadata
-    QuotedMessageMetadata (..),
-    newQuotedMessageMetadata,
+    -- ** RemoveActivityRequest
+    RemoveActivityRequest (..),
+    newRemoveActivityRequest,
 
-    -- ** QuotedMessageMetadata_BotAttachmentState
-    QuotedMessageMetadata_BotAttachmentState (..),
-
-    -- ** QuotedMessageMetadata_MessageState
-    QuotedMessageMetadata_MessageState (..),
-
-    -- ** Rank
-    Rank (..),
-    newRank,
-
-    -- ** RbacRoleProto
-    RbacRoleProto (..),
-    newRbacRoleProto,
-
-    -- ** RbacSubjectProto
-    RbacSubjectProto (..),
-    newRbacSubjectProto,
-
-    -- ** ReactionInfo
-    ReactionInfo (..),
-    newReactionInfo,
-
-    -- ** ReadReceiptsSettingsUpdatedMetadata
-    ReadReceiptsSettingsUpdatedMetadata (..),
-    newReadReceiptsSettingsUpdatedMetadata,
-
-    -- ** Recipient
-    Recipient (..),
-    newRecipient,
-
-    -- ** RecordingEvent
-    RecordingEvent (..),
-    newRecordingEvent,
-
-    -- ** RecordingEvent_Type
-    RecordingEvent_Type (..),
-
-    -- ** RecordingInfo
-    RecordingInfo (..),
-    newRecordingInfo,
-
-    -- ** RecordingInfo_RecordingApplicationType
-    RecordingInfo_RecordingApplicationType (..),
-
-    -- ** RecordingInfo_RecordingStatus
-    RecordingInfo_RecordingStatus (..),
-
-    -- ** RecordingSessionInfo
-    RecordingSessionInfo (..),
-    newRecordingSessionInfo,
-
-    -- ** Reference
-    Reference (..),
-    newReference,
-
-    -- ** References
-    References (..),
-    newReferences,
-
-    -- ** RenameEvent
-    RenameEvent (..),
-    newRenameEvent,
+    -- ** RemoveActivityResponse
+    RemoveActivityResponse (..),
+    newRemoveActivityResponse,
 
     -- ** RepositoryError
     RepositoryError (..),
@@ -2576,32 +1155,13 @@ module Gogol.CloudSearch
     -- ** RepositoryError_Type
     RepositoryError_Type (..),
 
-    -- ** RequestFileScope
-    RequestFileScope (..),
-    newRequestFileScope,
-
-    -- ** RequestFileScopeForActiveDocument
-    RequestFileScopeForActiveDocument (..),
-    newRequestFileScopeForActiveDocument,
-
     -- ** RequestOptions
     RequestOptions (..),
     newRequestOptions,
 
-    -- ** RequiredMessageFeaturesMetadata
-    RequiredMessageFeaturesMetadata (..),
-    newRequiredMessageFeaturesMetadata,
-
-    -- ** RequiredMessageFeaturesMetadata_RequiredFeaturesItem
-    RequiredMessageFeaturesMetadata_RequiredFeaturesItem (..),
-
     -- ** ResetSearchApplicationRequest
     ResetSearchApplicationRequest (..),
     newResetSearchApplicationRequest,
-
-    -- ** ResourceRoleProto
-    ResourceRoleProto (..),
-    newResourceRoleProto,
 
     -- ** ResponseDebugInfo
     ResponseDebugInfo (..),
@@ -2638,31 +1198,9 @@ module Gogol.CloudSearch
     -- ** RetrievalImportance_Importance
     RetrievalImportance_Importance (..),
 
-    -- ** RoomRenameMetadata
-    RoomRenameMetadata (..),
-    newRoomRenameMetadata,
-
-    -- ** RoomUpdatedMetadata
-    RoomUpdatedMetadata (..),
-    newRoomUpdatedMetadata,
-
-    -- ** RoomUpdatedMetadata_InitiatorType
-    RoomUpdatedMetadata_InitiatorType (..),
-
-    -- ** Roster
-    Roster (..),
-    newRoster,
-
-    -- ** Roster_RosterState
-    Roster_RosterState (..),
-
-    -- ** RosterId
-    RosterId (..),
-    newRosterId,
-
-    -- ** RpcOptions
-    RpcOptions (..),
-    newRpcOptions,
+    -- ** SafeHtmlProto
+    SafeHtmlProto (..),
+    newSafeHtmlProto,
 
     -- ** SafeUrlProto
     SafeUrlProto (..),
@@ -2716,100 +1254,9 @@ module Gogol.CloudSearch
     SearchResult (..),
     newSearchResult,
 
-    -- ** Section
-    Section (..),
-    newSection,
-
-    -- ** Segment
-    Segment (..),
-    newSegment,
-
-    -- ** Segment_Type
-    Segment_Type (..),
-
-    -- ** SelectionControl
-    SelectionControl (..),
-    newSelectionControl,
-
-    -- ** SelectionControl_Type
-    SelectionControl_Type (..),
-
-    -- ** SelectionItem
-    SelectionItem (..),
-    newSelectionItem,
-
-    -- ** SessionContext
-    SessionContext (..),
-    newSessionContext,
-
-    -- ** SessionEvent
-    SessionEvent (..),
-    newSessionEvent,
-
-    -- ** SessionEvent_Type
-    SessionEvent_Type (..),
-
-    -- ** SessionStateInfo
-    SessionStateInfo (..),
-    newSessionStateInfo,
-
-    -- ** SessionStateInfo_SessionState
-    SessionStateInfo_SessionState (..),
-
-    -- ** SessionStateInfo_SessionStopReason
-    SessionStateInfo_SessionStopReason (..),
-
-    -- ** Settings
-    Settings (..),
-    newSettings,
-
-    -- ** Settings_AccessType
-    Settings_AccessType (..),
-
-    -- ** ShareScope
-    ShareScope (..),
-    newShareScope,
-
-    -- ** ShareScope_Scope
-    ShareScope_Scope (..),
-
-    -- ** SheetsClientActionMarkup
-    SheetsClientActionMarkup (..),
-    newSheetsClientActionMarkup,
-
-    -- ** SigningKeyPossessorProto
-    SigningKeyPossessorProto (..),
-    newSigningKeyPossessorProto,
-
-    -- ** SimpleSecretHolderProto
-    SimpleSecretHolderProto (..),
-    newSimpleSecretHolderProto,
-
-    -- ** SimpleSecretLabelProto
-    SimpleSecretLabelProto (..),
-    newSimpleSecretLabelProto,
-
-    -- ** SimpleSecretLabelProto_Type
-    SimpleSecretLabelProto_Type (..),
-
-    -- ** SlashCommandMetadata
-    SlashCommandMetadata (..),
-    newSlashCommandMetadata,
-
-    -- ** SlashCommandMetadata_Type
-    SlashCommandMetadata_Type (..),
-
     -- ** Snippet
     Snippet (..),
     newSnippet,
-
-    -- ** SocialCommonAttachmentAttachment
-    SocialCommonAttachmentAttachment (..),
-    newSocialCommonAttachmentAttachment,
-
-    -- ** SocialGraphNodeProto
-    SocialGraphNodeProto (..),
-    newSocialGraphNodeProto,
 
     -- ** SortOptions
     SortOptions (..),
@@ -2844,17 +1291,12 @@ module Gogol.CloudSearch
     -- ** SourceScoringConfig_SourceImportance
     SourceScoringConfig_SourceImportance (..),
 
-    -- ** SpaceId
-    SpaceId (..),
-    newSpaceId,
-
     -- ** SpellResult
     SpellResult (..),
     newSpellResult,
 
-    -- ** SquareProto
-    SquareProto (..),
-    newSquareProto,
+    -- ** SpellResult_SuggestionType
+    SpellResult_SuggestionType (..),
 
     -- ** StartUploadItemRequest
     StartUploadItemRequest (..),
@@ -2867,27 +1309,6 @@ module Gogol.CloudSearch
     -- ** Status_DetailsItem
     Status_DetailsItem (..),
     newStatus_DetailsItem,
-
-    -- ** StoredParticipantId
-    StoredParticipantId (..),
-    newStoredParticipantId,
-
-    -- ** StreamViewerStats
-    StreamViewerStats (..),
-    newStreamViewerStats,
-
-    -- ** StreamingSessionInfo
-    StreamingSessionInfo (..),
-    newStreamingSessionInfo,
-
-    -- ** StreamingSessionInfo_ApplicationType
-    StreamingSessionInfo_ApplicationType (..),
-
-    -- ** StreamingSessionInfo_Status
-    StreamingSessionInfo_Status (..),
-
-    -- ** StreamingSessionInfo_ViewerAccessPolicy
-    StreamingSessionInfo_ViewerAccessPolicy (..),
 
     -- ** StructuredDataObject
     StructuredDataObject (..),
@@ -2909,46 +1330,9 @@ module Gogol.CloudSearch
     SuggestResult (..),
     newSuggestResult,
 
-    -- ** SupportUrls
-    SupportUrls (..),
-    newSupportUrls,
-
-    -- ** SwitchWidget
-    SwitchWidget (..),
-    newSwitchWidget,
-
-    -- ** SwitchWidget_ControlType
-    SwitchWidget_ControlType (..),
-
-    -- ** TaskActionMarkup
-    TaskActionMarkup (..),
-    newTaskActionMarkup,
-
-    -- ** TextButton
-    TextButton (..),
-    newTextButton,
-
-    -- ** TextButton_Style
-    TextButton_Style (..),
-
-    -- ** TextField
-    TextField (..),
-    newTextField,
-
-    -- ** TextField_Type
-    TextField_Type (..),
-
-    -- ** TextKeyValue
-    TextKeyValue (..),
-    newTextKeyValue,
-
     -- ** TextOperatorOptions
     TextOperatorOptions (..),
     newTextOperatorOptions,
-
-    -- ** TextParagraph
-    TextParagraph (..),
-    newTextParagraph,
 
     -- ** TextPropertyOptions
     TextPropertyOptions (..),
@@ -2958,13 +1342,9 @@ module Gogol.CloudSearch
     TextValues (..),
     newTextValues,
 
-    -- ** ThreadKeySet
-    ThreadKeySet (..),
-    newThreadKeySet,
-
-    -- ** ThreadUpdate
-    ThreadUpdate (..),
-    newThreadUpdate,
+    -- ** ThirdPartyGenericCard
+    ThirdPartyGenericCard (..),
+    newThirdPartyGenericCard,
 
     -- ** TimestampOperatorOptions
     TimestampOperatorOptions (..),
@@ -2978,83 +1358,6 @@ module Gogol.CloudSearch
     TimestampValues (..),
     newTimestampValues,
 
-    -- ** TombstoneMetadata
-    TombstoneMetadata (..),
-    newTombstoneMetadata,
-
-    -- ** TombstoneMetadata_TombstoneType
-    TombstoneMetadata_TombstoneType (..),
-
-    -- ** Toolbar
-    Toolbar (..),
-    newToolbar,
-
-    -- ** TopicId
-    TopicId (..),
-    newTopicId,
-
-    -- ** TopicState
-    TopicState (..),
-    newTopicState,
-
-    -- ** TopicState_LabelIdMessageCount
-    TopicState_LabelIdMessageCount (..),
-    newTopicState_LabelIdMessageCount,
-
-    -- ** TopicStateUpdate
-    TopicStateUpdate (..),
-    newTopicStateUpdate,
-
-    -- ** TransactionContext
-    TransactionContext (..),
-    newTransactionContext,
-
-    -- ** TransactionDebugInfo
-    TransactionDebugInfo (..),
-    newTransactionDebugInfo,
-
-    -- ** TranscriptionSessionInfo
-    TranscriptionSessionInfo (..),
-    newTranscriptionSessionInfo,
-
-    -- ** TransientData
-    TransientData (..),
-    newTransientData,
-
-    -- ** Trigger
-    Trigger (..),
-    newTrigger,
-
-    -- ** Trigger_Dispatcher
-    Trigger_Dispatcher (..),
-
-    -- ** TriggerAction
-    TriggerAction (..),
-    newTriggerAction,
-
-    -- ** TriggerAction_Action
-    TriggerAction_Action (..),
-
-    -- ** TriggerKey
-    TriggerKey (..),
-    newTriggerKey,
-
-    -- ** Triggers
-    Triggers (..),
-    newTriggers,
-
-    -- ** TrustedResourceUrlProto
-    TrustedResourceUrlProto (..),
-    newTrustedResourceUrlProto,
-
-    -- ** TypeInfo
-    TypeInfo (..),
-    newTypeInfo,
-
-    -- ** UniversalPhoneAccess
-    UniversalPhoneAccess (..),
-    newUniversalPhoneAccess,
-
     -- ** UnmappedIdentity
     UnmappedIdentity (..),
     newUnmappedIdentity,
@@ -3066,103 +1369,21 @@ module Gogol.CloudSearch
     UnreserveItemsRequest (..),
     newUnreserveItemsRequest,
 
-    -- ** UpdateBccRecipients
-    UpdateBccRecipients (..),
-    newUpdateBccRecipients,
-
-    -- ** UpdateBody
-    UpdateBody (..),
-    newUpdateBody,
-
-    -- ** UpdateBody_Type
-    UpdateBody_Type (..),
-
-    -- ** UpdateCcRecipients
-    UpdateCcRecipients (..),
-    newUpdateCcRecipients,
-
     -- ** UpdateDataSourceRequest
     UpdateDataSourceRequest (..),
     newUpdateDataSourceRequest,
-
-    -- ** UpdateDraftActionMarkup
-    UpdateDraftActionMarkup (..),
-    newUpdateDraftActionMarkup,
 
     -- ** UpdateSchemaRequest
     UpdateSchemaRequest (..),
     newUpdateSchemaRequest,
 
-    -- ** UpdateSubject
-    UpdateSubject (..),
-    newUpdateSubject,
-
-    -- ** UpdateToRecipients
-    UpdateToRecipients (..),
-    newUpdateToRecipients,
-
     -- ** UploadItemRef
     UploadItemRef (..),
     newUploadItemRef,
 
-    -- ** UploadMetadata
-    UploadMetadata (..),
-    newUploadMetadata,
-
-    -- ** UploadMetadata_ClonedDriveAction
-    UploadMetadata_ClonedDriveAction (..),
-
-    -- ** UploadMetadata_VirusScanResult
-    UploadMetadata_VirusScanResult (..),
-
-    -- ** UrlMetadata
-    UrlMetadata (..),
-    newUrlMetadata,
-
-    -- ** UrlMetadata_UrlSource
-    UrlMetadata_UrlSource (..),
-
-    -- ** User
-    User (..),
-    newUser,
-
-    -- ** User_UserAccountState
-    User_UserAccountState (..),
-
-    -- ** User_UserProfileVisibility
-    User_UserProfileVisibility (..),
-
-    -- ** UserDisplayInfo
-    UserDisplayInfo (..),
-    newUserDisplayInfo,
-
-    -- ** UserId
-    UserId (..),
-    newUserId,
-
-    -- ** UserId_Type
-    UserId_Type (..),
-
-    -- ** UserInfo
-    UserInfo (..),
-    newUserInfo,
-
-    -- ** UserInfo_UpdaterCountDisplayType
-    UserInfo_UpdaterCountDisplayType (..),
-
-    -- ** UserMentionData
-    UserMentionData (..),
-    newUserMentionData,
-
-    -- ** UserMentionMetadata
-    UserMentionMetadata (..),
-    newUserMentionMetadata,
-
-    -- ** UserMentionMetadata_Type
-    UserMentionMetadata_Type (..),
-
-    -- ** UserMentionMetadata_UserMentionError
-    UserMentionMetadata_UserMentionError (..),
+    -- ** UserActivity
+    UserActivity (..),
+    newUserActivity,
 
     -- ** VPCSettings
     VPCSettings (..),
@@ -3175,76 +1396,6 @@ module Gogol.CloudSearch
     -- ** ValueFilter
     ValueFilter (..),
     newValueFilter,
-
-    -- ** VideoCallMetadata
-    VideoCallMetadata (..),
-    newVideoCallMetadata,
-
-    -- ** VideoInfo
-    VideoInfo (..),
-    newVideoInfo,
-
-    -- ** VoicePhoneNumber
-    VoicePhoneNumber (..),
-    newVoicePhoneNumber,
-
-    -- ** VoicePhoneNumberI18nData
-    VoicePhoneNumberI18nData (..),
-    newVoicePhoneNumberI18nData,
-
-    -- ** VoicePhoneNumberI18nData_ValidationResult
-    VoicePhoneNumberI18nData_ValidationResult (..),
-
-    -- ** WhiteboardInfo
-    WhiteboardInfo (..),
-    newWhiteboardInfo,
-
-    -- ** WidgetMarkup
-    WidgetMarkup (..),
-    newWidgetMarkup,
-
-    -- ** WidgetMarkup_HorizontalAlignment
-    WidgetMarkup_HorizontalAlignment (..),
-
-    -- ** WonderCardDelete
-    WonderCardDelete (..),
-    newWonderCardDelete,
-
-    -- ** WonderCardDelete_MessageMappings
-    WonderCardDelete_MessageMappings (..),
-    newWonderCardDelete_MessageMappings,
-
-    -- ** WonderMessageMapping
-    WonderMessageMapping (..),
-    newWonderMessageMapping,
-
-    -- ** WrappedResourceKey
-    WrappedResourceKey (..),
-    newWrappedResourceKey,
-
-    -- ** YouTubeBroadcastSessionInfo
-    YouTubeBroadcastSessionInfo (..),
-    newYouTubeBroadcastSessionInfo,
-
-    -- ** YouTubeBroadcastStats
-    YouTubeBroadcastStats (..),
-    newYouTubeBroadcastStats,
-
-    -- ** YouTubeLiveBroadcastEvent
-    YouTubeLiveBroadcastEvent (..),
-    newYouTubeLiveBroadcastEvent,
-
-    -- ** YoutubeMetadata
-    YoutubeMetadata (..),
-    newYoutubeMetadata,
-
-    -- ** YoutubeUserProto
-    YoutubeUserProto (..),
-    newYoutubeUserProto,
-
-    -- ** ZwiebackSessionProto
-    ZwiebackSessionProto (..),
-    newZwiebackSessionProto,
 
     -- ** DebugIdentitysourcesUnmappedidsListResolutionStatusCode
     DebugIdentitysourcesUnmappedidsListResolutionStatusCode (..),
@@ -3275,6 +1426,8 @@ import Gogol.CloudSearch.InitializeCustomer
 import Gogol.CloudSearch.Media.Upload
 import Gogol.CloudSearch.Operations.Get
 import Gogol.CloudSearch.Operations.Lro.List
+import Gogol.CloudSearch.Query.DebugSearch
+import Gogol.CloudSearch.Query.RemoveActivity
 import Gogol.CloudSearch.Query.Search
 import Gogol.CloudSearch.Query.Sources.List
 import Gogol.CloudSearch.Query.Suggest

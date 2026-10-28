@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.LiveChatMessages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.LiveChatMessages.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatMessages.list@ method which the
@@ -61,9 +59,7 @@ type YouTubeLiveChatMessagesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              LiveChatMessageListResponse
+    Core.:> Core.Get '[Core.JSON] LiveChatMessageListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -79,11 +75,11 @@ data YouTubeLiveChatMessagesList = YouTubeLiveChatMessagesList
     hl :: (Core.Maybe Core.Text),
     -- | The id of the live chat for which comments should be returned.
     liveChatId :: Core.Text,
-    -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set.
+    -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set. Not used in the streaming RPC.
     maxResults :: Core.Word32,
     -- | The /pageToken/ parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.
     pageToken :: (Core.Maybe Core.Text),
-    -- | The /part/ parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet.
+    -- | The /part/ parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id, snippet, and authorDetails.
     part :: [Core.Text],
     -- | Specifies the size of the profile image that should be returned for each user.
     profileImageSize :: (Core.Maybe Core.Word32),
@@ -98,7 +94,7 @@ data YouTubeLiveChatMessagesList = YouTubeLiveChatMessagesList
 newYouTubeLiveChatMessagesList ::
   -- |  The id of the live chat for which comments should be returned. See 'liveChatId'.
   Core.Text ->
-  -- |  The /part/ parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet. See 'part'.
+  -- |  The /part/ parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id, snippet, and authorDetails. See 'part'.
   [Core.Text] ->
   YouTubeLiveChatMessagesList
 newYouTubeLiveChatMessagesList liveChatId part =
@@ -116,19 +112,11 @@ newYouTubeLiveChatMessagesList liveChatId part =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeLiveChatMessagesList
-  where
-  type
-    Rs YouTubeLiveChatMessagesList =
-      LiveChatMessageListResponse
+instance Core.GoogleRequest YouTubeLiveChatMessagesList where
+  type Rs YouTubeLiveChatMessagesList = LiveChatMessageListResponse
   type
     Scopes YouTubeLiveChatMessagesList =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Readonly
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Readonly]
   requestClient YouTubeLiveChatMessagesList {..} =
     go
       (Core.Just liveChatId)
@@ -147,7 +135,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeLiveChatMessagesListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeLiveChatMessagesListResource)
           Core.mempty

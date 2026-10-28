@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Placements.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Placements.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.placements.list@ method which the
 -- 'DFAReportingPlacementsList' request conforms to.
@@ -52,33 +50,21 @@ type DFAReportingPlacementsListResource =
     Core.:> "placements"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParams
-              "activeStatus"
-              PlacementsListActiveStatus
+    Core.:> Core.QueryParams "activeStatus" PlacementsListActiveStatus
     Core.:> Core.QueryParams "advertiserIds" Core.Int64
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "campaignIds" Core.Int64
-    Core.:> Core.QueryParams
-              "compatibilities"
-              PlacementsListCompatibilities
+    Core.:> Core.QueryParams "compatibilities" PlacementsListCompatibilities
     Core.:> Core.QueryParams "contentCategoryIds" Core.Int64
     Core.:> Core.QueryParams "directorySiteIds" Core.Int64
     Core.:> Core.QueryParams "groupIds" Core.Int64
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "maxEndDate" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Int32
-    Core.:> Core.QueryParam
-              "maxStartDate"
-              Core.Text
-    Core.:> Core.QueryParam
-              "minEndDate"
-              Core.Text
-    Core.:> Core.QueryParam
-              "minStartDate"
-              Core.Text
-    Core.:> Core.QueryParam
-              "pageToken"
-              Core.Text
+    Core.:> Core.QueryParam "maxStartDate" Core.Text
+    Core.:> Core.QueryParam "minEndDate" Core.Text
+    Core.:> Core.QueryParam "minStartDate" Core.Text
+    Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam
               "paymentSource"
               PlacementsListPaymentSource
@@ -88,15 +74,9 @@ type DFAReportingPlacementsListResource =
     Core.:> Core.QueryParams
               "pricingTypes"
               PlacementsListPricingTypes
-    Core.:> Core.QueryParam
-              "searchString"
-              Core.Text
-    Core.:> Core.QueryParams
-              "siteIds"
-              Core.Int64
-    Core.:> Core.QueryParams
-              "sizeIds"
-              Core.Int64
+    Core.:> Core.QueryParam "searchString" Core.Text
+    Core.:> Core.QueryParams "siteIds" Core.Int64
+    Core.:> Core.QueryParams "sizeIds" Core.Int64
     Core.:> Core.QueryParam
               "sortField"
               PlacementsListSortField
@@ -216,13 +196,8 @@ newDFAReportingPlacementsList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingPlacementsList
-  where
-  type
-    Rs DFAReportingPlacementsList =
-      PlacementsListResponse
+instance Core.GoogleRequest DFAReportingPlacementsList where
+  type Rs DFAReportingPlacementsList = PlacementsListResponse
   type
     Scopes DFAReportingPlacementsList =
       '[Dfatrafficking'FullControl]
@@ -261,7 +236,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingPlacementsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingPlacementsListResource)
           Core.mempty

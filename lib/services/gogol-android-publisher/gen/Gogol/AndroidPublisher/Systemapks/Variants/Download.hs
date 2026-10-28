@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Systemapks.Variants.Download
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Systemapks.Variants.Download
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.systemapks.variants.download@ method which the
 -- 'AndroidPublisherSystemapksVariantsDownload' request conforms to.
@@ -61,20 +59,20 @@ type AndroidPublisherSystemapksVariantsDownloadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ()
     Core.:<|> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "systemApks"
-      Core.:> Core.Capture "versionCode" Core.Int64
-      Core.:> "variants"
-      Core.:> Core.CaptureMode "variantId" "download" Core.Word32
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "systemApks"
+    Core.:> Core.Capture "versionCode" Core.Int64
+    Core.:> "variants"
+    Core.:> Core.CaptureMode "variantId" "download" Core.Word32
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Downloads a previously created system APK which is suitable for inclusion in a system image.
 --
@@ -108,74 +106,63 @@ newAndroidPublisherSystemapksVariantsDownload ::
   -- |  The version code of the App Bundle. See 'versionCode'.
   Core.Int64 ->
   AndroidPublisherSystemapksVariantsDownload
-newAndroidPublisherSystemapksVariantsDownload packageName variantId versionCode =
-  AndroidPublisherSystemapksVariantsDownload
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      variantId = variantId,
-      versionCode = versionCode
-    }
+newAndroidPublisherSystemapksVariantsDownload
+  packageName
+  variantId
+  versionCode =
+    AndroidPublisherSystemapksVariantsDownload
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        variantId = variantId,
+        versionCode = versionCode
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherSystemapksVariantsDownload
   where
+  type Rs AndroidPublisherSystemapksVariantsDownload = ()
   type
-    Rs AndroidPublisherSystemapksVariantsDownload =
-      ()
-  type
-    Scopes
-      AndroidPublisherSystemapksVariantsDownload =
+    Scopes AndroidPublisherSystemapksVariantsDownload =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherSystemapksVariantsDownload {..} =
-      go
-        packageName
-        versionCode
-        variantId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherSystemapksVariantsDownloadResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherSystemapksVariantsDownload {..} =
+    go
+      packageName
+      versionCode
+      variantId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherSystemapksVariantsDownloadResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaDownload
-        AndroidPublisherSystemapksVariantsDownload
-    )
+    (Core.MediaDownload AndroidPublisherSystemapksVariantsDownload)
   where
   type
     Rs
-      ( Core.MediaDownload
-          AndroidPublisherSystemapksVariantsDownload
-      ) =
+      (Core.MediaDownload AndroidPublisherSystemapksVariantsDownload) =
       Core.Stream
   type
     Scopes
-      ( Core.MediaDownload
-          AndroidPublisherSystemapksVariantsDownload
-      ) =
-      Core.Scopes
-        AndroidPublisherSystemapksVariantsDownload
+      (Core.MediaDownload AndroidPublisherSystemapksVariantsDownload) =
+      Core.Scopes AndroidPublisherSystemapksVariantsDownload
   requestClient
-    ( Core.MediaDownload
-        AndroidPublisherSystemapksVariantsDownload {..}
-      ) =
+    (Core.MediaDownload AndroidPublisherSystemapksVariantsDownload {..}) =
       go
         packageName
         versionCode
@@ -191,7 +178,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherSystemapksVariantsDownloadResource
+                Core.Proxy AndroidPublisherSystemapksVariantsDownloadResource
             )
             Core.mempty

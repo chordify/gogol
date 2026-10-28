@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Uploads.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Uploads.Get
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.uploads.get@ method which the
 -- 'AnalyticsManagementUploadsGet' request conforms to.
@@ -85,25 +83,23 @@ newAnalyticsManagementUploadsGet ::
   -- |  Web property Id for the upload to retrieve. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementUploadsGet
-newAnalyticsManagementUploadsGet accountId customDataSourceId uploadId webPropertyId =
-  AnalyticsManagementUploadsGet
-    { accountId = accountId,
-      customDataSourceId = customDataSourceId,
-      uploadId = uploadId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementUploadsGet
+  accountId
+  customDataSourceId
+  uploadId
+  webPropertyId =
     AnalyticsManagementUploadsGet
-  where
+      { accountId = accountId,
+        customDataSourceId = customDataSourceId,
+        uploadId = uploadId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementUploadsGet where
   type Rs AnalyticsManagementUploadsGet = Upload
   type
     Scopes AnalyticsManagementUploadsGet =
-      '[ Analytics'FullControl,
-         Analytics'Edit,
-         Analytics'Readonly
-       ]
+      '[Analytics'FullControl, Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementUploadsGet {..} =
     go
       accountId
@@ -115,7 +111,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementUploadsGetResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementUploadsGetResource)
           Core.mempty

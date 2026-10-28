@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.SecurityPolicies.PatchRule
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches a rule at the specified priority.
+-- Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.securityPolicies.patchRule@.
 module Gogol.Compute.SecurityPolicies.PatchRule
@@ -40,7 +38,7 @@ module Gogol.Compute.SecurityPolicies.PatchRule
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.securityPolicies.patchRule@ method which the
 -- 'ComputeSecurityPoliciesPatchRule' request conforms to.
@@ -57,16 +55,15 @@ type ComputeSecurityPoliciesPatchRuleResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "priority" Core.Int32
+    Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "validateOnly" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SecurityPolicyRule
+    Core.:> Core.ReqBody '[Core.JSON] SecurityPolicyRule
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Patches a rule at the specified priority.
+-- | Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.
 --
 -- /See:/ 'newComputeSecurityPoliciesPatchRule' smart constructor.
 data ComputeSecurityPoliciesPatchRule = ComputeSecurityPoliciesPatchRule
@@ -84,6 +81,8 @@ data ComputeSecurityPoliciesPatchRule = ComputeSecurityPoliciesPatchRule
     project :: Core.Text,
     -- | Name of the security policy to update.
     securityPolicy :: Core.Text,
+    -- | Indicates fields to be cleared as part of this request.
+    updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -111,15 +110,13 @@ newComputeSecurityPoliciesPatchRule payload project securityPolicy =
       priority = Core.Nothing,
       project = project,
       securityPolicy = securityPolicy,
+      updateMask = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
       validateOnly = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeSecurityPoliciesPatchRule
-  where
+instance Core.GoogleRequest ComputeSecurityPoliciesPatchRule where
   type Rs ComputeSecurityPoliciesPatchRule = Operation
   type
     Scopes ComputeSecurityPoliciesPatchRule =
@@ -132,6 +129,7 @@ instance
       accessToken
       callback
       priority
+      updateMask
       uploadType
       uploadProtocol
       validateOnly
@@ -141,7 +139,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeSecurityPoliciesPatchRuleResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeSecurityPoliciesPatchRuleResource)
           Core.mempty

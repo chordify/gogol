@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Jobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the jobs of a project. To list the jobs of a project in a region, we recommend using @projects.locations.jobs.list@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). To list the all jobs across all regions, use @projects.jobs.aggregated@. Using @projects.jobs.list@ is not recommended, as you can only get the list of jobs that are running in @us-central1@.
+-- List the jobs of a project. To list the jobs of a project in a region, we recommend using @projects.locations.jobs.list@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). To list the all jobs across all regions, use @projects.jobs.aggregated@. Using @projects.jobs.list@ is not recommended, because you can only get the list of jobs that are running in @us-central1@. @projects.locations.jobs.list@ and @projects.jobs.list@ support filtering the list of jobs by name. Filtering by name isn\'t supported by @projects.jobs.aggregated@.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.list@.
 module Gogol.Dataflow.Projects.Jobs.List
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Jobs.List
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.jobs.list@ method which the
 -- 'DataflowProjectsJobsList' request conforms to.
@@ -63,7 +61,7 @@ type DataflowProjectsJobsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListJobsResponse
 
--- | List the jobs of a project. To list the jobs of a project in a region, we recommend using @projects.locations.jobs.list@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). To list the all jobs across all regions, use @projects.jobs.aggregated@. Using @projects.jobs.list@ is not recommended, as you can only get the list of jobs that are running in @us-central1@.
+-- | List the jobs of a project. To list the jobs of a project in a region, we recommend using @projects.locations.jobs.list@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). To list the all jobs across all regions, use @projects.jobs.aggregated@. Using @projects.jobs.list@ is not recommended, because you can only get the list of jobs that are running in @us-central1@. @projects.locations.jobs.list@ and @projects.jobs.list@ support filtering the list of jobs by name. Filtering by name isn\'t supported by @projects.jobs.aggregated@.
 --
 -- /See:/ 'newDataflowProjectsJobsList' smart constructor.
 data DataflowProjectsJobsList = DataflowProjectsJobsList
@@ -77,7 +75,7 @@ data DataflowProjectsJobsList = DataflowProjectsJobsList
     filter :: (Core.Maybe ProjectsJobsListFilter),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains this job.
     location :: (Core.Maybe Core.Text),
-    -- | Optional. The job name. Optional.
+    -- | Optional. The job name.
     name :: (Core.Maybe Core.Text),
     -- | If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
     pageSize :: (Core.Maybe Core.Int32),
@@ -119,11 +117,7 @@ instance Core.GoogleRequest DataflowProjectsJobsList where
   type Rs DataflowProjectsJobsList = ListJobsResponse
   type
     Scopes DataflowProjectsJobsList =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient DataflowProjectsJobsList {..} =
     go
       projectId
@@ -143,7 +137,5 @@ instance Core.GoogleRequest DataflowProjectsJobsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataflowProjectsJobsListResource
-          )
+          (Core.Proxy :: Core.Proxy DataflowProjectsJobsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.People.Internal.Product
@@ -329,7 +327,7 @@ module Gogol.People.Internal.Product
 where
 
 import Gogol.People.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A person\'s physical address. May be a P.O. box or street address. All fields are optional.
 --
@@ -520,16 +518,13 @@ instance Core.FromJSON BatchCreateContactsResponse where
     Core.withObject
       "BatchCreateContactsResponse"
       ( \o ->
-          BatchCreateContactsResponse
-            Core.<$> (o Core..:? "createdPeople")
+          BatchCreateContactsResponse Core.<$> (o Core..:? "createdPeople")
       )
 
 instance Core.ToJSON BatchCreateContactsResponse where
   toJSON BatchCreateContactsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("createdPeople" Core..=) Core.<$> createdPeople]
-      )
+      (Core.catMaybes [("createdPeople" Core..=) Core.<$> createdPeople])
 
 -- | A request to delete a batch of existing contacts.
 --
@@ -551,16 +546,13 @@ instance Core.FromJSON BatchDeleteContactsRequest where
     Core.withObject
       "BatchDeleteContactsRequest"
       ( \o ->
-          BatchDeleteContactsRequest
-            Core.<$> (o Core..:? "resourceNames")
+          BatchDeleteContactsRequest Core.<$> (o Core..:? "resourceNames")
       )
 
 instance Core.ToJSON BatchDeleteContactsRequest where
   toJSON BatchDeleteContactsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceNames" Core..=) Core.<$> resourceNames]
-      )
+      (Core.catMaybes [("resourceNames" Core..=) Core.<$> resourceNames])
 
 -- | The response to a batch get contact groups request.
 --
@@ -582,16 +574,13 @@ instance Core.FromJSON BatchGetContactGroupsResponse where
     Core.withObject
       "BatchGetContactGroupsResponse"
       ( \o ->
-          BatchGetContactGroupsResponse
-            Core.<$> (o Core..:? "responses")
+          BatchGetContactGroupsResponse Core.<$> (o Core..:? "responses")
       )
 
 instance Core.ToJSON BatchGetContactGroupsResponse where
   toJSON BatchGetContactGroupsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("responses" Core..=) Core.<$> responses]
-      )
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | A request to update a batch of contacts.
 --
@@ -646,8 +635,7 @@ instance Core.ToJSON BatchUpdateContactsRequest where
 --
 -- /See:/ 'newBatchUpdateContactsRequest_Contacts' smart constructor.
 newtype BatchUpdateContactsRequest_Contacts = BatchUpdateContactsRequest_Contacts
-  { -- |
-    additional :: (Core.HashMap Core.Text Person)
+  { additional :: (Core.HashMap Core.Text Person)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -659,10 +647,7 @@ newBatchUpdateContactsRequest_Contacts ::
 newBatchUpdateContactsRequest_Contacts additional =
   BatchUpdateContactsRequest_Contacts {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchUpdateContactsRequest_Contacts
-  where
+instance Core.FromJSON BatchUpdateContactsRequest_Contacts where
   parseJSON =
     Core.withObject
       "BatchUpdateContactsRequest_Contacts"
@@ -671,10 +656,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchUpdateContactsRequest_Contacts
-  where
+instance Core.ToJSON BatchUpdateContactsRequest_Contacts where
   toJSON BatchUpdateContactsRequest_Contacts {..} =
     Core.toJSON additional
 
@@ -698,23 +680,19 @@ instance Core.FromJSON BatchUpdateContactsResponse where
     Core.withObject
       "BatchUpdateContactsResponse"
       ( \o ->
-          BatchUpdateContactsResponse
-            Core.<$> (o Core..:? "updateResult")
+          BatchUpdateContactsResponse Core.<$> (o Core..:? "updateResult")
       )
 
 instance Core.ToJSON BatchUpdateContactsResponse where
   toJSON BatchUpdateContactsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("updateResult" Core..=) Core.<$> updateResult]
-      )
+      (Core.catMaybes [("updateResult" Core..=) Core.<$> updateResult])
 
 -- | A map of resource names to the contacts that were updated, unless the request @read_mask@ is empty.
 --
 -- /See:/ 'newBatchUpdateContactsResponse_UpdateResult' smart constructor.
 newtype BatchUpdateContactsResponse_UpdateResult = BatchUpdateContactsResponse_UpdateResult
-  { -- |
-    additional :: (Core.HashMap Core.Text PersonResponse)
+  { additional :: (Core.HashMap Core.Text PersonResponse)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -726,10 +704,7 @@ newBatchUpdateContactsResponse_UpdateResult ::
 newBatchUpdateContactsResponse_UpdateResult additional =
   BatchUpdateContactsResponse_UpdateResult {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchUpdateContactsResponse_UpdateResult
-  where
+instance Core.FromJSON BatchUpdateContactsResponse_UpdateResult where
   parseJSON =
     Core.withObject
       "BatchUpdateContactsResponse_UpdateResult"
@@ -738,10 +713,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchUpdateContactsResponse_UpdateResult
-  where
+instance Core.ToJSON BatchUpdateContactsResponse_UpdateResult where
   toJSON BatchUpdateContactsResponse_UpdateResult {..} =
     Core.toJSON additional
 
@@ -806,7 +778,11 @@ data Birthday = Birthday
 newBirthday ::
   Birthday
 newBirthday =
-  Birthday {date = Core.Nothing, metadata = Core.Nothing, text = Core.Nothing}
+  Birthday
+    { date = Core.Nothing,
+      metadata = Core.Nothing,
+      text = Core.Nothing
+    }
 
 instance Core.FromJSON Birthday where
   parseJSON =
@@ -931,7 +907,11 @@ data ClientData = ClientData
 newClientData ::
   ClientData
 newClientData =
-  ClientData {key = Core.Nothing, metadata = Core.Nothing, value = Core.Nothing}
+  ClientData
+    { key = Core.Nothing,
+      metadata = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ClientData where
   parseJSON =
@@ -1021,8 +1001,7 @@ instance Core.ToJSON ContactGroup where
             ("formattedName" Core..=) Core.<$> formattedName,
             ("groupType" Core..=) Core.<$> groupType,
             ("memberCount" Core..=) Core.<$> memberCount,
-            ("memberResourceNames" Core..=)
-              Core.<$> memberResourceNames,
+            ("memberResourceNames" Core..=) Core.<$> memberResourceNames,
             ("metadata" Core..=) Core.<$> metadata,
             ("name" Core..=) Core.<$> name,
             ("resourceName" Core..=) Core.<$> resourceName
@@ -1084,7 +1063,10 @@ data ContactGroupMetadata = ContactGroupMetadata
 newContactGroupMetadata ::
   ContactGroupMetadata
 newContactGroupMetadata =
-  ContactGroupMetadata {deleted = Core.Nothing, updateTime = Core.Nothing}
+  ContactGroupMetadata
+    { deleted = Core.Nothing,
+      updateTime = Core.Nothing
+    }
 
 instance Core.FromJSON ContactGroupMetadata where
   parseJSON =
@@ -1144,8 +1126,7 @@ instance Core.ToJSON ContactGroupResponse where
     Core.object
       ( Core.catMaybes
           [ ("contactGroup" Core..=) Core.<$> contactGroup,
-            ("requestedResourceName" Core..=)
-              Core.<$> requestedResourceName,
+            ("requestedResourceName" Core..=) Core.<$> requestedResourceName,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -1168,17 +1149,12 @@ instance Core.FromJSON ContactToCreate where
   parseJSON =
     Core.withObject
       "ContactToCreate"
-      ( \o ->
-          ContactToCreate
-            Core.<$> (o Core..:? "contactPerson")
-      )
+      (\o -> ContactToCreate Core.<$> (o Core..:? "contactPerson"))
 
 instance Core.ToJSON ContactToCreate where
   toJSON ContactToCreate {..} =
     Core.object
-      ( Core.catMaybes
-          [("contactPerson" Core..=) Core.<$> contactPerson]
-      )
+      (Core.catMaybes [("contactPerson" Core..=) Core.<$> contactPerson])
 
 -- | A request to copy an \"Other contact\" to my contacts group.
 --
@@ -1203,10 +1179,7 @@ newCopyOtherContactToMyContactsGroupRequest =
       sources = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CopyOtherContactToMyContactsGroupRequest
-  where
+instance Core.FromJSON CopyOtherContactToMyContactsGroupRequest where
   parseJSON =
     Core.withObject
       "CopyOtherContactToMyContactsGroupRequest"
@@ -1217,10 +1190,7 @@ instance
             Core.<*> (o Core..:? "sources")
       )
 
-instance
-  Core.ToJSON
-    CopyOtherContactToMyContactsGroupRequest
-  where
+instance Core.ToJSON CopyOtherContactToMyContactsGroupRequest where
   toJSON CopyOtherContactToMyContactsGroupRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -1309,8 +1279,7 @@ instance Core.ToJSON CreateContactGroupRequest where
     Core.object
       ( Core.catMaybes
           [ ("contactGroup" Core..=) Core.<$> contactGroup,
-            ("readGroupFields" Core..=)
-              Core.<$> readGroupFields
+            ("readGroupFields" Core..=) Core.<$> readGroupFields
           ]
       )
 
@@ -1330,7 +1299,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -1372,15 +1346,11 @@ instance Core.FromJSON DeleteContactPhotoResponse where
   parseJSON =
     Core.withObject
       "DeleteContactPhotoResponse"
-      ( \o ->
-          DeleteContactPhotoResponse
-            Core.<$> (o Core..:? "person")
-      )
+      (\o -> DeleteContactPhotoResponse Core.<$> (o Core..:? "person"))
 
 instance Core.ToJSON DeleteContactPhotoResponse where
   toJSON DeleteContactPhotoResponse {..} =
-    Core.object
-      (Core.catMaybes [("person" Core..=) Core.<$> person])
+    Core.object (Core.catMaybes [("person" Core..=) Core.<$> person])
 
 -- | A Google Workspace Domain membership.
 --
@@ -1394,16 +1364,14 @@ newtype DomainMembership = DomainMembership
 -- | Creates a value of 'DomainMembership' with the minimum fields required to make a request.
 newDomainMembership ::
   DomainMembership
-newDomainMembership = DomainMembership {inViewerDomain = Core.Nothing}
+newDomainMembership =
+  DomainMembership {inViewerDomain = Core.Nothing}
 
 instance Core.FromJSON DomainMembership where
   parseJSON =
     Core.withObject
       "DomainMembership"
-      ( \o ->
-          DomainMembership
-            Core.<$> (o Core..:? "inViewerDomain")
-      )
+      (\o -> DomainMembership Core.<$> (o Core..:? "inViewerDomain"))
 
 instance Core.ToJSON DomainMembership where
   toJSON DomainMembership {..} =
@@ -1478,8 +1446,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1733,16 +1700,12 @@ instance Core.FromJSON GetPeopleResponse where
   parseJSON =
     Core.withObject
       "GetPeopleResponse"
-      ( \o ->
-          GetPeopleResponse Core.<$> (o Core..:? "responses")
-      )
+      (\o -> GetPeopleResponse Core.<$> (o Core..:? "responses"))
 
 instance Core.ToJSON GetPeopleResponse where
   toJSON GetPeopleResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("responses" Core..=) Core.<$> responses]
-      )
+      (Core.catMaybes [("responses" Core..=) Core.<$> responses])
 
 -- | Arbitrary client data that is populated by clients. Duplicate keys and values are allowed.
 --
@@ -1758,7 +1721,8 @@ data GroupClientData = GroupClientData
 -- | Creates a value of 'GroupClientData' with the minimum fields required to make a request.
 newGroupClientData ::
   GroupClientData
-newGroupClientData = GroupClientData {key = Core.Nothing, value = Core.Nothing}
+newGroupClientData =
+  GroupClientData {key = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON GroupClientData where
   parseJSON =
@@ -1766,16 +1730,15 @@ instance Core.FromJSON GroupClientData where
       "GroupClientData"
       ( \o ->
           GroupClientData
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON GroupClientData where
   toJSON GroupClientData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | A person\'s instant messaging client.
@@ -1828,8 +1791,7 @@ instance Core.ToJSON ImClient where
   toJSON ImClient {..} =
     Core.object
       ( Core.catMaybes
-          [ ("formattedProtocol" Core..=)
-              Core.<$> formattedProtocol,
+          [ ("formattedProtocol" Core..=) Core.<$> formattedProtocol,
             ("formattedType" Core..=) Core.<$> formattedType,
             ("metadata" Core..=) Core.<$> metadata,
             ("protocol" Core..=) Core.<$> protocol,
@@ -1852,7 +1814,8 @@ data Interest = Interest
 -- | Creates a value of 'Interest' with the minimum fields required to make a request.
 newInterest ::
   Interest
-newInterest = Interest {metadata = Core.Nothing, value = Core.Nothing}
+newInterest =
+  Interest {metadata = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON Interest where
   parseJSON =
@@ -2213,8 +2176,7 @@ instance Core.ToJSON Membership where
       ( Core.catMaybes
           [ ("contactGroupMembership" Core..=)
               Core.<$> contactGroupMembership,
-            ("domainMembership" Core..=)
-              Core.<$> domainMembership,
+            ("domainMembership" Core..=) Core.<$> domainMembership,
             ("metadata" Core..=) Core.<$> metadata
           ]
       )
@@ -2284,14 +2246,12 @@ newModifyContactGroupMembersRequest ::
   ModifyContactGroupMembersRequest
 newModifyContactGroupMembersRequest =
   ModifyContactGroupMembersRequest
-    { resourceNamesToAdd = Core.Nothing,
+    { resourceNamesToAdd =
+        Core.Nothing,
       resourceNamesToRemove = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyContactGroupMembersRequest
-  where
+instance Core.FromJSON ModifyContactGroupMembersRequest where
   parseJSON =
     Core.withObject
       "ModifyContactGroupMembersRequest"
@@ -2305,10 +2265,8 @@ instance Core.ToJSON ModifyContactGroupMembersRequest where
   toJSON ModifyContactGroupMembersRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("resourceNamesToAdd" Core..=)
-              Core.<$> resourceNamesToAdd,
-            ("resourceNamesToRemove" Core..=)
-              Core.<$> resourceNamesToRemove
+          [ ("resourceNamesToAdd" Core..=) Core.<$> resourceNamesToAdd,
+            ("resourceNamesToRemove" Core..=) Core.<$> resourceNamesToRemove
           ]
       )
 
@@ -2328,38 +2286,28 @@ newModifyContactGroupMembersResponse ::
   ModifyContactGroupMembersResponse
 newModifyContactGroupMembersResponse =
   ModifyContactGroupMembersResponse
-    { canNotRemoveLastContactGroupResourceNames = Core.Nothing,
+    { canNotRemoveLastContactGroupResourceNames =
+        Core.Nothing,
       notFoundResourceNames = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyContactGroupMembersResponse
-  where
+instance Core.FromJSON ModifyContactGroupMembersResponse where
   parseJSON =
     Core.withObject
       "ModifyContactGroupMembersResponse"
       ( \o ->
           ModifyContactGroupMembersResponse
-            Core.<$> ( o
-                         Core..:? "canNotRemoveLastContactGroupResourceNames"
-                     )
+            Core.<$> (o Core..:? "canNotRemoveLastContactGroupResourceNames")
             Core.<*> (o Core..:? "notFoundResourceNames")
       )
 
-instance
-  Core.ToJSON
-    ModifyContactGroupMembersResponse
-  where
+instance Core.ToJSON ModifyContactGroupMembersResponse where
   toJSON ModifyContactGroupMembersResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ( "canNotRemoveLastContactGroupResourceNames"
-                Core..=
-            )
+          [ ("canNotRemoveLastContactGroupResourceNames" Core..=)
               Core.<$> canNotRemoveLastContactGroupResourceNames,
-            ("notFoundResourceNames" Core..=)
-              Core.<$> notFoundResourceNames
+            ("notFoundResourceNames" Core..=) Core.<$> notFoundResourceNames
           ]
       )
 
@@ -2450,28 +2398,22 @@ instance Core.ToJSON Name where
     Core.object
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
-            ("displayNameLastFirst" Core..=)
-              Core.<$> displayNameLastFirst,
+            ("displayNameLastFirst" Core..=) Core.<$> displayNameLastFirst,
             ("familyName" Core..=) Core.<$> familyName,
             ("givenName" Core..=) Core.<$> givenName,
             ("honorificPrefix" Core..=) Core.<$> honorificPrefix,
             ("honorificSuffix" Core..=) Core.<$> honorificSuffix,
             ("metadata" Core..=) Core.<$> metadata,
             ("middleName" Core..=) Core.<$> middleName,
-            ("phoneticFamilyName" Core..=)
-              Core.<$> phoneticFamilyName,
-            ("phoneticFullName" Core..=)
-              Core.<$> phoneticFullName,
-            ("phoneticGivenName" Core..=)
-              Core.<$> phoneticGivenName,
+            ("phoneticFamilyName" Core..=) Core.<$> phoneticFamilyName,
+            ("phoneticFullName" Core..=) Core.<$> phoneticFullName,
+            ("phoneticGivenName" Core..=) Core.<$> phoneticGivenName,
             ("phoneticHonorificPrefix" Core..=)
               Core.<$> phoneticHonorificPrefix,
             ("phoneticHonorificSuffix" Core..=)
               Core.<$> phoneticHonorificSuffix,
-            ("phoneticMiddleName" Core..=)
-              Core.<$> phoneticMiddleName,
-            ("unstructuredName" Core..=)
-              Core.<$> unstructuredName
+            ("phoneticMiddleName" Core..=) Core.<$> phoneticMiddleName,
+            ("unstructuredName" Core..=) Core.<$> unstructuredName
           ]
       )
 
@@ -2492,7 +2434,11 @@ data Nickname = Nickname
 newNickname ::
   Nickname
 newNickname =
-  Nickname {metadata = Core.Nothing, type' = Core.Nothing, value = Core.Nothing}
+  Nickname
+    { metadata = Core.Nothing,
+      type' = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON Nickname where
   parseJSON =
@@ -2529,7 +2475,8 @@ data Occupation = Occupation
 -- | Creates a value of 'Occupation' with the minimum fields required to make a request.
 newOccupation ::
   Occupation
-newOccupation = Occupation {metadata = Core.Nothing, value = Core.Nothing}
+newOccupation =
+  Occupation {metadata = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON Occupation where
   parseJSON =
@@ -2867,10 +2814,8 @@ instance Core.ToJSON Person where
             ("phoneNumbers" Core..=) Core.<$> phoneNumbers,
             ("photos" Core..=) Core.<$> photos,
             ("relations" Core..=) Core.<$> relations,
-            ("relationshipInterests" Core..=)
-              Core.<$> relationshipInterests,
-            ("relationshipStatuses" Core..=)
-              Core.<$> relationshipStatuses,
+            ("relationshipInterests" Core..=) Core.<$> relationshipInterests,
+            ("relationshipStatuses" Core..=) Core.<$> relationshipStatuses,
             ("residences" Core..=) Core.<$> residences,
             ("resourceName" Core..=) Core.<$> resourceName,
             ("sipAddresses" Core..=) Core.<$> sipAddresses,
@@ -2931,8 +2876,7 @@ instance Core.ToJSON PersonMetadata where
             ("linkedPeopleResourceNames" Core..=)
               Core.<$> linkedPeopleResourceNames,
             ("objectType" Core..=) Core.<$> objectType,
-            ("previousResourceNames" Core..=)
-              Core.<$> previousResourceNames,
+            ("previousResourceNames" Core..=) Core.<$> previousResourceNames,
             ("sources" Core..=) Core.<$> sources
           ]
       )
@@ -2981,8 +2925,7 @@ instance Core.ToJSON PersonResponse where
       ( Core.catMaybes
           [ ("httpStatusCode" Core..=) Core.<$> httpStatusCode,
             ("person" Core..=) Core.<$> person,
-            ("requestedResourceName" Core..=)
-              Core.<$> requestedResourceName,
+            ("requestedResourceName" Core..=) Core.<$> requestedResourceName,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -3058,7 +3001,11 @@ data Photo = Photo
 newPhoto ::
   Photo
 newPhoto =
-  Photo {default' = Core.Nothing, metadata = Core.Nothing, url = Core.Nothing}
+  Photo
+    { default' = Core.Nothing,
+      metadata = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON Photo where
   parseJSON =
@@ -3096,7 +3043,10 @@ data ProfileMetadata = ProfileMetadata
 newProfileMetadata ::
   ProfileMetadata
 newProfileMetadata =
-  ProfileMetadata {objectType = Core.Nothing, userTypes = Core.Nothing}
+  ProfileMetadata
+    { objectType = Core.Nothing,
+      userTypes = Core.Nothing
+    }
 
 instance Core.FromJSON ProfileMetadata where
   parseJSON =
@@ -3360,16 +3310,12 @@ instance Core.FromJSON SearchResponse where
   parseJSON =
     Core.withObject
       "SearchResponse"
-      ( \o ->
-          SearchResponse Core.<$> (o Core..:? "results")
-      )
+      (\o -> SearchResponse Core.<$> (o Core..:? "results"))
 
 instance Core.ToJSON SearchResponse where
   toJSON SearchResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("results" Core..=) Core.<$> results]
-      )
+      (Core.catMaybes [("results" Core..=) Core.<$> results])
 
 -- | A result of a search query.
 --
@@ -3393,8 +3339,7 @@ instance Core.FromJSON SearchResult where
 
 instance Core.ToJSON SearchResult where
   toJSON SearchResult {..} =
-    Core.object
-      (Core.catMaybes [("person" Core..=) Core.<$> person])
+    Core.object (Core.catMaybes [("person" Core..=) Core.<$> person])
 
 -- | A person\'s SIP address. Session Initial Protocol addresses are used for VoIP communications to make voice or video calls over the internet.
 --
@@ -3551,7 +3496,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -3587,19 +3536,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | __DEPRECATED__: No data will be returned A brief one-line description of the person.
 --
@@ -3676,8 +3623,7 @@ instance Core.ToJSON UpdateContactGroupRequest where
       ( Core.catMaybes
           [ ("contactGroup" Core..=) Core.<$> contactGroup,
             ("readGroupFields" Core..=) Core.<$> readGroupFields,
-            ("updateGroupFields" Core..=)
-              Core.<$> updateGroupFields
+            ("updateGroupFields" Core..=) Core.<$> updateGroupFields
           ]
       )
 
@@ -3744,15 +3690,11 @@ instance Core.FromJSON UpdateContactPhotoResponse where
   parseJSON =
     Core.withObject
       "UpdateContactPhotoResponse"
-      ( \o ->
-          UpdateContactPhotoResponse
-            Core.<$> (o Core..:? "person")
-      )
+      (\o -> UpdateContactPhotoResponse Core.<$> (o Core..:? "person"))
 
 instance Core.ToJSON UpdateContactPhotoResponse where
   toJSON UpdateContactPhotoResponse {..} =
-    Core.object
-      (Core.catMaybes [("person" Core..=) Core.<$> person])
+    Core.object (Core.catMaybes [("person" Core..=) Core.<$> person])
 
 -- | A person\'s associated URLs.
 --

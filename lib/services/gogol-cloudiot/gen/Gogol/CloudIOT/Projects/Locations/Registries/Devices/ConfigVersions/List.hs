@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.ConfigVersions.List
 where
 
 import Gogol.CloudIOT.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.configVersions.list@ method which the
 -- 'CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList' request conforms to.
@@ -55,9 +53,7 @@ type CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListDeviceConfigVersionsResponse
+    Core.:> Core.Get '[Core.JSON] ListDeviceConfigVersionsResponse
 
 -- | Lists the last few versions of the device configuration in descending order (i.e.: newest first).
 --
@@ -85,16 +81,18 @@ newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList ::
   -- |  Required. The name of the device. For example, @projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/device0@ or @projects\/p0\/locations\/us-central1\/registries\/registry0\/devices\/{num_id}@. See 'name'.
   Core.Text ->
   CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList
-newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList name =
-  CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      numVersions = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList
+  name =
+    CloudIOTProjectsLocationsRegistriesDevicesConfigVersionsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        numVersions = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

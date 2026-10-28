@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.FirebaseRemoteConfig.Projects.UpdateRemoteConfig
 where
 
 import Gogol.FirebaseRemoteConfig.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firebaseremoteconfig.projects.updateRemoteConfig@ method which the
 -- 'FirebaseRemoteConfigProjectsUpdateRemoteConfig' request conforms to.
@@ -98,7 +96,8 @@ newFirebaseRemoteConfigProjectsUpdateRemoteConfig ::
   FirebaseRemoteConfigProjectsUpdateRemoteConfig
 newFirebaseRemoteConfigProjectsUpdateRemoteConfig payload project =
   FirebaseRemoteConfigProjectsUpdateRemoteConfig
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       bearerToken = Core.Nothing,
       callback = Core.Nothing,
@@ -115,33 +114,27 @@ instance
     FirebaseRemoteConfigProjectsUpdateRemoteConfig
   where
   type
-    Rs
-      FirebaseRemoteConfigProjectsUpdateRemoteConfig =
+    Rs FirebaseRemoteConfigProjectsUpdateRemoteConfig =
       RemoteConfig
-  type
-    Scopes
-      FirebaseRemoteConfigProjectsUpdateRemoteConfig =
-      '[]
-  requestClient
-    FirebaseRemoteConfigProjectsUpdateRemoteConfig {..} =
-      go
-        project
-        xgafv
-        accessToken
-        bearerToken
-        callback
-        (Core.Just pp)
-        uploadType
-        uploadProtocol
-        validateOnly
-        (Core.Just Core.AltJSON)
-        payload
-        firebaseRemoteConfigService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FirebaseRemoteConfigProjectsUpdateRemoteConfigResource
-            )
-            Core.mempty
+  type Scopes FirebaseRemoteConfigProjectsUpdateRemoteConfig = '[]
+  requestClient FirebaseRemoteConfigProjectsUpdateRemoteConfig {..} =
+    go
+      project
+      xgafv
+      accessToken
+      bearerToken
+      callback
+      (Core.Just pp)
+      uploadType
+      uploadProtocol
+      validateOnly
+      (Core.Just Core.AltJSON)
+      payload
+      firebaseRemoteConfigService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FirebaseRemoteConfigProjectsUpdateRemoteConfigResource
+          )
+          Core.mempty

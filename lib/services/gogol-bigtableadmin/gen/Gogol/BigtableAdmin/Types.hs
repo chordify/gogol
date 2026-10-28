@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BigtableAdmin.Types
@@ -49,6 +47,9 @@ module Gogol.BigtableAdmin.Types
     AppProfile (..),
     newAppProfile,
 
+    -- ** AppProfile_Priority
+    AppProfile_Priority (..),
+
     -- ** AuditConfig
     AuditConfig (..),
     newAuditConfig,
@@ -59,6 +60,14 @@ module Gogol.BigtableAdmin.Types
 
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
+
+    -- ** AuthorizedView
+    AuthorizedView (..),
+    newAuthorizedView,
+
+    -- ** AutomatedBackupPolicy
+    AutomatedBackupPolicy (..),
+    newAutomatedBackupPolicy,
 
     -- ** AutoscalingLimits
     AutoscalingLimits (..),
@@ -72,6 +81,9 @@ module Gogol.BigtableAdmin.Types
     Backup (..),
     newBackup,
 
+    -- ** Backup_BackupType
+    Backup_BackupType (..),
+
     -- ** Backup_State
     Backup_State (..),
 
@@ -82,6 +94,10 @@ module Gogol.BigtableAdmin.Types
     -- ** Binding
     Binding (..),
     newBinding,
+
+    -- ** ChangeStreamConfig
+    ChangeStreamConfig (..),
+    newChangeStreamConfig,
 
     -- ** CheckConsistencyRequest
     CheckConsistencyRequest (..),
@@ -97,6 +113,9 @@ module Gogol.BigtableAdmin.Types
 
     -- ** Cluster_DefaultStorageType
     Cluster_DefaultStorageType (..),
+
+    -- ** Cluster_NodeScalingFactor
+    Cluster_NodeScalingFactor (..),
 
     -- ** Cluster_State
     Cluster_State (..),
@@ -132,6 +151,14 @@ module Gogol.BigtableAdmin.Types
     CopyBackupRequest (..),
     newCopyBackupRequest,
 
+    -- ** CreateAuthorizedViewMetadata
+    CreateAuthorizedViewMetadata (..),
+    newCreateAuthorizedViewMetadata,
+
+    -- ** CreateAuthorizedViewRequest
+    CreateAuthorizedViewRequest (..),
+    newCreateAuthorizedViewRequest,
+
     -- ** CreateBackupMetadata
     CreateBackupMetadata (..),
     newCreateBackupMetadata,
@@ -163,6 +190,17 @@ module Gogol.BigtableAdmin.Types
     -- ** CreateTableRequest
     CreateTableRequest (..),
     newCreateTableRequest,
+
+    -- ** DataBoostIsolationReadOnly
+    DataBoostIsolationReadOnly (..),
+    newDataBoostIsolationReadOnly,
+
+    -- ** DataBoostIsolationReadOnly_ComputeBillingOwner
+    DataBoostIsolationReadOnly_ComputeBillingOwner (..),
+
+    -- ** DataBoostReadLocalWrites
+    DataBoostReadLocalWrites (..),
+    newDataBoostReadLocalWrites,
 
     -- ** DropRowRangeRequest
     DropRowRangeRequest (..),
@@ -207,6 +245,138 @@ module Gogol.BigtableAdmin.Types
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- ** GoogleBigtableAdminV2AuthorizedViewFamilySubsets
+    GoogleBigtableAdminV2AuthorizedViewFamilySubsets (..),
+    newGoogleBigtableAdminV2AuthorizedViewFamilySubsets,
+
+    -- ** GoogleBigtableAdminV2AuthorizedViewSubsetView
+    GoogleBigtableAdminV2AuthorizedViewSubsetView (..),
+    newGoogleBigtableAdminV2AuthorizedViewSubsetView,
+
+    -- ** GoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets
+    GoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets (..),
+    newGoogleBigtableAdminV2AuthorizedViewSubsetView_FamilySubsets,
+
+    -- ** GoogleBigtableAdminV2TypeAggregate
+    GoogleBigtableAdminV2TypeAggregate (..),
+    newGoogleBigtableAdminV2TypeAggregate,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount
+    GoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount (..),
+    newGoogleBigtableAdminV2TypeAggregateHyperLogLogPlusPlusUniqueCount,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateMax
+    GoogleBigtableAdminV2TypeAggregateMax (..),
+    newGoogleBigtableAdminV2TypeAggregateMax,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateMin
+    GoogleBigtableAdminV2TypeAggregateMin (..),
+    newGoogleBigtableAdminV2TypeAggregateMin,
+
+    -- ** GoogleBigtableAdminV2TypeAggregateSum
+    GoogleBigtableAdminV2TypeAggregateSum (..),
+    newGoogleBigtableAdminV2TypeAggregateSum,
+
+    -- ** GoogleBigtableAdminV2TypeArray
+    GoogleBigtableAdminV2TypeArray (..),
+    newGoogleBigtableAdminV2TypeArray,
+
+    -- ** GoogleBigtableAdminV2TypeBool
+    GoogleBigtableAdminV2TypeBool (..),
+    newGoogleBigtableAdminV2TypeBool,
+
+    -- ** GoogleBigtableAdminV2TypeBytes
+    GoogleBigtableAdminV2TypeBytes (..),
+    newGoogleBigtableAdminV2TypeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeBytesEncoding
+    GoogleBigtableAdminV2TypeBytesEncoding (..),
+    newGoogleBigtableAdminV2TypeBytesEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeBytesEncodingRaw
+    GoogleBigtableAdminV2TypeBytesEncodingRaw (..),
+    newGoogleBigtableAdminV2TypeBytesEncodingRaw,
+
+    -- ** GoogleBigtableAdminV2TypeDate
+    GoogleBigtableAdminV2TypeDate (..),
+    newGoogleBigtableAdminV2TypeDate,
+
+    -- ** GoogleBigtableAdminV2TypeFloat32
+    GoogleBigtableAdminV2TypeFloat32 (..),
+    newGoogleBigtableAdminV2TypeFloat32,
+
+    -- ** GoogleBigtableAdminV2TypeFloat64
+    GoogleBigtableAdminV2TypeFloat64 (..),
+    newGoogleBigtableAdminV2TypeFloat64,
+
+    -- ** GoogleBigtableAdminV2TypeInt64
+    GoogleBigtableAdminV2TypeInt64 (..),
+    newGoogleBigtableAdminV2TypeInt64,
+
+    -- ** GoogleBigtableAdminV2TypeInt64Encoding
+    GoogleBigtableAdminV2TypeInt64Encoding (..),
+    newGoogleBigtableAdminV2TypeInt64Encoding,
+
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes
+    GoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingBigEndianBytes,
+
+    -- ** GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeInt64EncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeMap
+    GoogleBigtableAdminV2TypeMap (..),
+    newGoogleBigtableAdminV2TypeMap,
+
+    -- ** GoogleBigtableAdminV2TypeString
+    GoogleBigtableAdminV2TypeString (..),
+    newGoogleBigtableAdminV2TypeString,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncoding
+    GoogleBigtableAdminV2TypeStringEncoding (..),
+    newGoogleBigtableAdminV2TypeStringEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes
+    GoogleBigtableAdminV2TypeStringEncodingUtf8Bytes (..),
+    newGoogleBigtableAdminV2TypeStringEncodingUtf8Bytes,
+
+    -- ** GoogleBigtableAdminV2TypeStringEncodingUtf8Raw
+    GoogleBigtableAdminV2TypeStringEncodingUtf8Raw (..),
+    newGoogleBigtableAdminV2TypeStringEncodingUtf8Raw,
+
+    -- ** GoogleBigtableAdminV2TypeStruct
+    GoogleBigtableAdminV2TypeStruct (..),
+    newGoogleBigtableAdminV2TypeStruct,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncoding
+    GoogleBigtableAdminV2TypeStructEncoding (..),
+    newGoogleBigtableAdminV2TypeStructEncoding,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes
+    GoogleBigtableAdminV2TypeStructEncodingDelimitedBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingDelimitedBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes
+    GoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes (..),
+    newGoogleBigtableAdminV2TypeStructEncodingOrderedCodeBytes,
+
+    -- ** GoogleBigtableAdminV2TypeStructEncodingSingleton
+    GoogleBigtableAdminV2TypeStructEncodingSingleton (..),
+    newGoogleBigtableAdminV2TypeStructEncodingSingleton,
+
+    -- ** GoogleBigtableAdminV2TypeStructField
+    GoogleBigtableAdminV2TypeStructField (..),
+    newGoogleBigtableAdminV2TypeStructField,
+
+    -- ** GoogleBigtableAdminV2TypeTimestamp
+    GoogleBigtableAdminV2TypeTimestamp (..),
+    newGoogleBigtableAdminV2TypeTimestamp,
+
+    -- ** GoogleBigtableAdminV2TypeTimestampEncoding
+    GoogleBigtableAdminV2TypeTimestampEncoding (..),
+    newGoogleBigtableAdminV2TypeTimestampEncoding,
+
     -- ** HotTablet
     HotTablet (..),
     newHotTablet,
@@ -232,6 +402,10 @@ module Gogol.BigtableAdmin.Types
     -- ** ListAppProfilesResponse
     ListAppProfilesResponse (..),
     newListAppProfilesResponse,
+
+    -- ** ListAuthorizedViewsResponse
+    ListAuthorizedViewsResponse (..),
+    newListAuthorizedViewsResponse,
 
     -- ** ListBackupsResponse
     ListBackupsResponse (..),
@@ -339,6 +513,10 @@ module Gogol.BigtableAdmin.Types
     RestoreTableRequest (..),
     newRestoreTableRequest,
 
+    -- ** RowAffinity
+    RowAffinity (..),
+    newRowAffinity,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -350,6 +528,17 @@ module Gogol.BigtableAdmin.Types
     -- ** Split
     Split (..),
     newSplit,
+
+    -- ** StandardIsolation
+    StandardIsolation (..),
+    newStandardIsolation,
+
+    -- ** StandardIsolation_Priority
+    StandardIsolation_Priority (..),
+
+    -- ** StandardReadRemoteWrites
+    StandardReadRemoteWrites (..),
+    newStandardReadRemoteWrites,
 
     -- ** Status
     Status (..),
@@ -393,6 +582,10 @@ module Gogol.BigtableAdmin.Types
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
 
+    -- ** Type
+    Type (..),
+    newType,
+
     -- ** UndeleteTableMetadata
     UndeleteTableMetadata (..),
     newUndeleteTableMetadata,
@@ -409,6 +602,14 @@ module Gogol.BigtableAdmin.Types
     UpdateAppProfileMetadata (..),
     newUpdateAppProfileMetadata,
 
+    -- ** UpdateAuthorizedViewMetadata
+    UpdateAuthorizedViewMetadata (..),
+    newUpdateAuthorizedViewMetadata,
+
+    -- ** UpdateAuthorizedViewRequest
+    UpdateAuthorizedViewRequest (..),
+    newUpdateAuthorizedViewRequest,
+
     -- ** UpdateClusterMetadata
     UpdateClusterMetadata (..),
     newUpdateClusterMetadata,
@@ -421,6 +622,12 @@ module Gogol.BigtableAdmin.Types
     UpdateTableMetadata (..),
     newUpdateTableMetadata,
 
+    -- ** ProjectsInstancesTablesAuthorizedViewsGetView
+    ProjectsInstancesTablesAuthorizedViewsGetView (..),
+
+    -- ** ProjectsInstancesTablesAuthorizedViewsListView
+    ProjectsInstancesTablesAuthorizedViewsListView (..),
+
     -- ** ProjectsInstancesTablesGetView
     ProjectsInstancesTablesGetView (..),
 
@@ -431,7 +638,7 @@ where
 
 import Gogol.BigtableAdmin.Internal.Product
 import Gogol.BigtableAdmin.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Cloud Bigtable Admin API. This contains the host and root path used as a starting point for constructing service requests.
 bigtableAdminService :: Core.ServiceConfig
@@ -441,28 +648,37 @@ bigtableAdminService =
     "bigtableadmin.googleapis.com"
 
 -- | Administer your Cloud Bigtable tables and clusters
-type Bigtable'Admin = "https://www.googleapis.com/auth/bigtable.admin"
+type Bigtable'Admin =
+  "https://www.googleapis.com/auth/bigtable.admin"
 
 -- | Administer your Cloud Bigtable clusters
-type Bigtable'Admin'Cluster = "https://www.googleapis.com/auth/bigtable.admin.cluster"
+type Bigtable'Admin'Cluster =
+  "https://www.googleapis.com/auth/bigtable.admin.cluster"
 
 -- | Administer your Cloud Bigtable clusters
-type Bigtable'Admin'Instance = "https://www.googleapis.com/auth/bigtable.admin.instance"
+type Bigtable'Admin'Instance =
+  "https://www.googleapis.com/auth/bigtable.admin.instance"
 
 -- | Administer your Cloud Bigtable tables
-type Bigtable'Admin'Table = "https://www.googleapis.com/auth/bigtable.admin.table"
+type Bigtable'Admin'Table =
+  "https://www.googleapis.com/auth/bigtable.admin.table"
 
 -- | Administer your Cloud Bigtable tables and clusters
-type CloudBigtable'Admin = "https://www.googleapis.com/auth/cloud-bigtable.admin"
+type CloudBigtable'Admin =
+  "https://www.googleapis.com/auth/cloud-bigtable.admin"
 
 -- | Administer your Cloud Bigtable clusters
-type CloudBigtable'Admin'Cluster = "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"
+type CloudBigtable'Admin'Cluster =
+  "https://www.googleapis.com/auth/cloud-bigtable.admin.cluster"
 
 -- | Administer your Cloud Bigtable tables
-type CloudBigtable'Admin'Table = "https://www.googleapis.com/auth/cloud-bigtable.admin.table"
+type CloudBigtable'Admin'Table =
+  "https://www.googleapis.com/auth/cloud-bigtable.admin.table"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"

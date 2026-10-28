@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Create
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.create@ method which the
 -- 'DataprocProjectsRegionsClustersCreate' request conforms to.
@@ -117,36 +115,29 @@ newDataprocProjectsRegionsClustersCreate payload projectId region =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsRegionsClustersCreate
-  where
-  type
-    Rs DataprocProjectsRegionsClustersCreate =
-      Operation
+instance Core.GoogleRequest DataprocProjectsRegionsClustersCreate where
+  type Rs DataprocProjectsRegionsClustersCreate = Operation
   type
     Scopes DataprocProjectsRegionsClustersCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersCreate {..} =
-      go
-        projectId
-        region
-        xgafv
-        accessToken
-        actionOnFailedPrimaryWorkers
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersCreateResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsClustersCreate {..} =
+    go
+      projectId
+      region
+      xgafv
+      accessToken
+      actionOnFailedPrimaryWorkers
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsClustersCreateResource
+          )
+          Core.mempty

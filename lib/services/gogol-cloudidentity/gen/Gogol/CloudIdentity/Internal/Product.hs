@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudIdentity.Internal.Product
@@ -138,6 +136,14 @@ module Gogol.CloudIdentity.Internal.Product
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse,
 
+    -- * GoogleAppsCloudidentityDevicesV1BrowserAttributes
+    GoogleAppsCloudidentityDevicesV1BrowserAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserAttributes,
+
+    -- * GoogleAppsCloudidentityDevicesV1BrowserInfo
+    GoogleAppsCloudidentityDevicesV1BrowserInfo (..),
+    newGoogleAppsCloudidentityDevicesV1BrowserInfo,
+
     -- * GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata,
@@ -161,6 +167,14 @@ module Gogol.CloudIdentity.Internal.Product
     -- * GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse (..),
     newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse,
+
+    -- * GoogleAppsCloudidentityDevicesV1CertificateAttributes
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateAttributes,
+
+    -- * GoogleAppsCloudidentityDevicesV1CertificateTemplate
+    GoogleAppsCloudidentityDevicesV1CertificateTemplate (..),
+    newGoogleAppsCloudidentityDevicesV1CertificateTemplate,
 
     -- * GoogleAppsCloudidentityDevicesV1ClientState
     GoogleAppsCloudidentityDevicesV1ClientState (..),
@@ -193,6 +207,14 @@ module Gogol.CloudIdentity.Internal.Product
     -- * GoogleAppsCloudidentityDevicesV1DeviceUser
     GoogleAppsCloudidentityDevicesV1DeviceUser (..),
     newGoogleAppsCloudidentityDevicesV1DeviceUser,
+
+    -- * GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes,
+
+    -- * GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals (..),
+    newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals,
 
     -- * GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
     GoogleAppsCloudidentityDevicesV1ListClientStatesResponse (..),
@@ -302,6 +324,10 @@ module Gogol.CloudIdentity.Internal.Product
     ListMembershipsResponse (..),
     newListMembershipsResponse,
 
+    -- * ListPoliciesResponse
+    ListPoliciesResponse (..),
+    newListPoliciesResponse,
+
     -- * ListUserInvitationsResponse
     ListUserInvitationsResponse (..),
     newListUserInvitationsResponse,
@@ -366,6 +392,14 @@ module Gogol.CloudIdentity.Internal.Product
     Operation_Response (..),
     newOperation_Response,
 
+    -- * Policy
+    Policy (..),
+    newPolicy,
+
+    -- * PolicyQuery
+    PolicyQuery (..),
+    newPolicyQuery,
+
     -- * RestrictionEvaluation
     RestrictionEvaluation (..),
     newRestrictionEvaluation,
@@ -414,6 +448,14 @@ module Gogol.CloudIdentity.Internal.Product
     SendUserInvitationRequest (..),
     newSendUserInvitationRequest,
 
+    -- * Setting
+    Setting (..),
+    newSetting,
+
+    -- * Setting_Value
+    Setting_Value (..),
+    newSetting_Value,
+
     -- * SignInBehavior
     SignInBehavior (..),
     newSignInBehavior,
@@ -457,33 +499,34 @@ module Gogol.CloudIdentity.Internal.Product
 where
 
 import Gogol.CloudIdentity.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | LRO response metadata for InboundSamlSsoProfilesService.AddIdpCredential.
 --
 -- /See:/ 'newAddIdpCredentialOperationMetadata' smart constructor.
-data AddIdpCredentialOperationMetadata = AddIdpCredentialOperationMetadata
+newtype AddIdpCredentialOperationMetadata = AddIdpCredentialOperationMetadata
+  { -- | State of this Operation Will be \"awaiting-multi-party-approval\" when the operation is deferred due to the target customer having enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>.
+    state :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'AddIdpCredentialOperationMetadata' with the minimum fields required to make a request.
 newAddIdpCredentialOperationMetadata ::
   AddIdpCredentialOperationMetadata
-newAddIdpCredentialOperationMetadata = AddIdpCredentialOperationMetadata
+newAddIdpCredentialOperationMetadata =
+  AddIdpCredentialOperationMetadata {state = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AddIdpCredentialOperationMetadata
-  where
+instance Core.FromJSON AddIdpCredentialOperationMetadata where
   parseJSON =
     Core.withObject
       "AddIdpCredentialOperationMetadata"
-      (\o -> Core.pure AddIdpCredentialOperationMetadata)
+      ( \o ->
+          AddIdpCredentialOperationMetadata Core.<$> (o Core..:? "state")
+      )
 
-instance
-  Core.ToJSON
-    AddIdpCredentialOperationMetadata
-  where
-  toJSON = Core.const Core.emptyObject
+instance Core.ToJSON AddIdpCredentialOperationMetadata where
+  toJSON AddIdpCredentialOperationMetadata {..} =
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | The request for creating an IdpCredential with its associated payload. An InboundSamlSsoProfile can own up to 2 credentials.
 --
@@ -497,23 +540,19 @@ newtype AddIdpCredentialRequest = AddIdpCredentialRequest
 -- | Creates a value of 'AddIdpCredentialRequest' with the minimum fields required to make a request.
 newAddIdpCredentialRequest ::
   AddIdpCredentialRequest
-newAddIdpCredentialRequest = AddIdpCredentialRequest {pemData = Core.Nothing}
+newAddIdpCredentialRequest =
+  AddIdpCredentialRequest {pemData = Core.Nothing}
 
 instance Core.FromJSON AddIdpCredentialRequest where
   parseJSON =
     Core.withObject
       "AddIdpCredentialRequest"
-      ( \o ->
-          AddIdpCredentialRequest
-            Core.<$> (o Core..:? "pemData")
-      )
+      (\o -> AddIdpCredentialRequest Core.<$> (o Core..:? "pemData"))
 
 instance Core.ToJSON AddIdpCredentialRequest where
   toJSON AddIdpCredentialRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("pemData" Core..=) Core.<$> pemData]
-      )
+      (Core.catMaybes [("pemData" Core..=) Core.<$> pemData])
 
 -- | Request to cancel sent invitation for target email in UserInvitation.
 --
@@ -550,10 +589,7 @@ newCheckTransitiveMembershipResponse ::
 newCheckTransitiveMembershipResponse =
   CheckTransitiveMembershipResponse {hasMembership = Core.Nothing}
 
-instance
-  Core.FromJSON
-    CheckTransitiveMembershipResponse
-  where
+instance Core.FromJSON CheckTransitiveMembershipResponse where
   parseJSON =
     Core.withObject
       "CheckTransitiveMembershipResponse"
@@ -562,15 +598,10 @@ instance
             Core.<$> (o Core..:? "hasMembership")
       )
 
-instance
-  Core.ToJSON
-    CheckTransitiveMembershipResponse
-  where
+instance Core.ToJSON CheckTransitiveMembershipResponse where
   toJSON CheckTransitiveMembershipResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("hasMembership" Core..=) Core.<$> hasMembership]
-      )
+      (Core.catMaybes [("hasMembership" Core..=) Core.<$> hasMembership])
 
 -- | Metadata for CreateGroup LRO.
 --
@@ -595,7 +626,10 @@ instance Core.ToJSON CreateGroupMetadata where
 -- | LRO response metadata for InboundSamlSsoProfilesService.CreateInboundSamlSsoProfile.
 --
 -- /See:/ 'newCreateInboundSamlSsoProfileOperationMetadata' smart constructor.
-data CreateInboundSamlSsoProfileOperationMetadata = CreateInboundSamlSsoProfileOperationMetadata
+newtype CreateInboundSamlSsoProfileOperationMetadata = CreateInboundSamlSsoProfileOperationMetadata
+  { -- | State of this Operation Will be \"awaiting-multi-party-approval\" when the operation is deferred due to the target customer having enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>.
+    state :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'CreateInboundSamlSsoProfileOperationMetadata' with the minimum fields required to make a request.
@@ -603,24 +637,22 @@ newCreateInboundSamlSsoProfileOperationMetadata ::
   CreateInboundSamlSsoProfileOperationMetadata
 newCreateInboundSamlSsoProfileOperationMetadata =
   CreateInboundSamlSsoProfileOperationMetadata
+    { state =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    CreateInboundSamlSsoProfileOperationMetadata
-  where
+instance Core.FromJSON CreateInboundSamlSsoProfileOperationMetadata where
   parseJSON =
     Core.withObject
       "CreateInboundSamlSsoProfileOperationMetadata"
       ( \o ->
-          Core.pure
-            CreateInboundSamlSsoProfileOperationMetadata
+          CreateInboundSamlSsoProfileOperationMetadata
+            Core.<$> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    CreateInboundSamlSsoProfileOperationMetadata
-  where
-  toJSON = Core.const Core.emptyObject
+instance Core.ToJSON CreateInboundSamlSsoProfileOperationMetadata where
+  toJSON CreateInboundSamlSsoProfileOperationMetadata {..} =
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | LRO response metadata for InboundSsoAssignmentsService.CreateInboundSsoAssignment.
 --
@@ -634,22 +666,13 @@ newCreateInboundSsoAssignmentOperationMetadata ::
 newCreateInboundSsoAssignmentOperationMetadata =
   CreateInboundSsoAssignmentOperationMetadata
 
-instance
-  Core.FromJSON
-    CreateInboundSsoAssignmentOperationMetadata
-  where
+instance Core.FromJSON CreateInboundSsoAssignmentOperationMetadata where
   parseJSON =
     Core.withObject
       "CreateInboundSsoAssignmentOperationMetadata"
-      ( \o ->
-          Core.pure
-            CreateInboundSsoAssignmentOperationMetadata
-      )
+      (\o -> Core.pure CreateInboundSsoAssignmentOperationMetadata)
 
-instance
-  Core.ToJSON
-    CreateInboundSsoAssignmentOperationMetadata
-  where
+instance Core.ToJSON CreateInboundSsoAssignmentOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | Metadata for CreateMembership LRO.
@@ -701,23 +724,16 @@ data DeleteIdpCredentialOperationMetadata = DeleteIdpCredentialOperationMetadata
 -- | Creates a value of 'DeleteIdpCredentialOperationMetadata' with the minimum fields required to make a request.
 newDeleteIdpCredentialOperationMetadata ::
   DeleteIdpCredentialOperationMetadata
-newDeleteIdpCredentialOperationMetadata = DeleteIdpCredentialOperationMetadata
+newDeleteIdpCredentialOperationMetadata =
+  DeleteIdpCredentialOperationMetadata
 
-instance
-  Core.FromJSON
-    DeleteIdpCredentialOperationMetadata
-  where
+instance Core.FromJSON DeleteIdpCredentialOperationMetadata where
   parseJSON =
     Core.withObject
       "DeleteIdpCredentialOperationMetadata"
-      ( \o ->
-          Core.pure DeleteIdpCredentialOperationMetadata
-      )
+      (\o -> Core.pure DeleteIdpCredentialOperationMetadata)
 
-instance
-  Core.ToJSON
-    DeleteIdpCredentialOperationMetadata
-  where
+instance Core.ToJSON DeleteIdpCredentialOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | LRO response metadata for InboundSamlSsoProfilesService.DeleteInboundSamlSsoProfile.
@@ -732,22 +748,13 @@ newDeleteInboundSamlSsoProfileOperationMetadata ::
 newDeleteInboundSamlSsoProfileOperationMetadata =
   DeleteInboundSamlSsoProfileOperationMetadata
 
-instance
-  Core.FromJSON
-    DeleteInboundSamlSsoProfileOperationMetadata
-  where
+instance Core.FromJSON DeleteInboundSamlSsoProfileOperationMetadata where
   parseJSON =
     Core.withObject
       "DeleteInboundSamlSsoProfileOperationMetadata"
-      ( \o ->
-          Core.pure
-            DeleteInboundSamlSsoProfileOperationMetadata
-      )
+      (\o -> Core.pure DeleteInboundSamlSsoProfileOperationMetadata)
 
-instance
-  Core.ToJSON
-    DeleteInboundSamlSsoProfileOperationMetadata
-  where
+instance Core.ToJSON DeleteInboundSamlSsoProfileOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | LRO response metadata for InboundSsoAssignmentsService.DeleteInboundSsoAssignment.
@@ -762,22 +769,13 @@ newDeleteInboundSsoAssignmentOperationMetadata ::
 newDeleteInboundSsoAssignmentOperationMetadata =
   DeleteInboundSsoAssignmentOperationMetadata
 
-instance
-  Core.FromJSON
-    DeleteInboundSsoAssignmentOperationMetadata
-  where
+instance Core.FromJSON DeleteInboundSsoAssignmentOperationMetadata where
   parseJSON =
     Core.withObject
       "DeleteInboundSsoAssignmentOperationMetadata"
-      ( \o ->
-          Core.pure
-            DeleteInboundSsoAssignmentOperationMetadata
-      )
+      (\o -> Core.pure DeleteInboundSsoAssignmentOperationMetadata)
 
-instance
-  Core.ToJSON
-    DeleteInboundSsoAssignmentOperationMetadata
-  where
+instance Core.ToJSON DeleteInboundSsoAssignmentOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | Metadata for DeleteMembership LRO.
@@ -818,22 +816,18 @@ instance Core.FromJSON DsaPublicKeyInfo where
   parseJSON =
     Core.withObject
       "DsaPublicKeyInfo"
-      ( \o ->
-          DsaPublicKeyInfo Core.<$> (o Core..:? "keySize")
-      )
+      (\o -> DsaPublicKeyInfo Core.<$> (o Core..:? "keySize"))
 
 instance Core.ToJSON DsaPublicKeyInfo where
   toJSON DsaPublicKeyInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("keySize" Core..=) Core.<$> keySize]
-      )
+      (Core.catMaybes [("keySize" Core..=) Core.<$> keySize])
 
 -- | Dynamic group metadata like queries and status.
 --
 -- /See:/ 'newDynamicGroupMetadata' smart constructor.
 data DynamicGroupMetadata = DynamicGroupMetadata
-  { -- | Memberships will be the union of all queries. Only one entry with USER resource is currently supported. Customers can create up to 100 dynamic groups.
+  { -- | Memberships will be the union of all queries. Only one entry with USER resource is currently supported. Customers can create up to 500 dynamic groups.
     queries :: (Core.Maybe [DynamicGroupQuery]),
     -- | Output only. Status of the dynamic group.
     status :: (Core.Maybe DynamicGroupStatus)
@@ -844,7 +838,10 @@ data DynamicGroupMetadata = DynamicGroupMetadata
 newDynamicGroupMetadata ::
   DynamicGroupMetadata
 newDynamicGroupMetadata =
-  DynamicGroupMetadata {queries = Core.Nothing, status = Core.Nothing}
+  DynamicGroupMetadata
+    { queries = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON DynamicGroupMetadata where
   parseJSON =
@@ -880,7 +877,10 @@ data DynamicGroupQuery = DynamicGroupQuery
 newDynamicGroupQuery ::
   DynamicGroupQuery
 newDynamicGroupQuery =
-  DynamicGroupQuery {query = Core.Nothing, resourceType = Core.Nothing}
+  DynamicGroupQuery
+    { query = Core.Nothing,
+      resourceType = Core.Nothing
+    }
 
 instance Core.FromJSON DynamicGroupQuery where
   parseJSON =
@@ -916,7 +916,10 @@ data DynamicGroupStatus = DynamicGroupStatus
 newDynamicGroupStatus ::
   DynamicGroupStatus
 newDynamicGroupStatus =
-  DynamicGroupStatus {status = Core.Nothing, statusTime = Core.Nothing}
+  DynamicGroupStatus
+    { status = Core.Nothing,
+      statusTime = Core.Nothing
+    }
 
 instance Core.FromJSON DynamicGroupStatus where
   parseJSON =
@@ -941,7 +944,7 @@ instance Core.ToJSON DynamicGroupStatus where
 --
 -- /See:/ 'newEntityKey' smart constructor.
 data EntityKey = EntityKey
-  { -- | The ID of the entity. For Google-managed entities, the @id@ should be the email address of an existing group or user. For external-identity-mapped entities, the @id@ must be a string conforming to the Identity Source\'s requirements. Must be unique within a @namespace@.
+  { -- | The ID of the entity. For Google-managed entities, the @id@ should be the email address of an existing group or user. Email addresses need to adhere to <https://support.google.com/a/answer/9193374 name guidelines for users and groups>. For external-identity-mapped entities, the @id@ must be a string conforming to the Identity Source\'s requirements. Must be unique within a @namespace@.
     id :: (Core.Maybe Core.Text),
     -- | The namespace in which the entity exists. If not specified, the @EntityKey@ represents a Google-managed entity such as a Google user or a Google Group. If specified, the @EntityKey@ represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of @identitysources\/{identity_source}@.
     namespace :: (Core.Maybe Core.Text)
@@ -951,7 +954,8 @@ data EntityKey = EntityKey
 -- | Creates a value of 'EntityKey' with the minimum fields required to make a request.
 newEntityKey ::
   EntityKey
-newEntityKey = EntityKey {id = Core.Nothing, namespace = Core.Nothing}
+newEntityKey =
+  EntityKey {id = Core.Nothing, namespace = Core.Nothing}
 
 instance Core.FromJSON EntityKey where
   parseJSON =
@@ -959,7 +963,8 @@ instance Core.FromJSON EntityKey where
       "EntityKey"
       ( \o ->
           EntityKey
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "namespace")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "namespace")
       )
 
 instance Core.ToJSON EntityKey where
@@ -989,16 +994,12 @@ instance Core.FromJSON ExpiryDetail where
   parseJSON =
     Core.withObject
       "ExpiryDetail"
-      ( \o ->
-          ExpiryDetail Core.<$> (o Core..:? "expireTime")
-      )
+      (\o -> ExpiryDetail Core.<$> (o Core..:? "expireTime"))
 
 instance Core.ToJSON ExpiryDetail where
   toJSON ExpiryDetail {..} =
     Core.object
-      ( Core.catMaybes
-          [("expireTime" Core..=) Core.<$> expireTime]
-      )
+      (Core.catMaybes [("expireTime" Core..=) Core.<$> expireTime])
 
 -- | Metadata of GetMembershipGraphResponse LRO. This is currently empty to permit future extensibility.
 --
@@ -1063,8 +1064,12 @@ instance Core.ToJSON GetMembershipGraphResponse where
 --
 -- /See:/ 'newGoogleAppsCloudidentityDevicesV1AndroidAttributes' smart constructor.
 data GoogleAppsCloudidentityDevicesV1AndroidAttributes = GoogleAppsCloudidentityDevicesV1AndroidAttributes
-  { -- | Whether applications from unknown sources can be installed on device.
+  { -- | Whether the device passes Android CTS compliance.
+    ctsProfileMatch :: (Core.Maybe Core.Bool),
+    -- | Whether applications from unknown sources can be installed on device.
     enabledUnknownSources :: (Core.Maybe Core.Bool),
+    -- | Whether any potentially harmful apps were detected on the device.
+    hasPotentiallyHarmfulApps :: (Core.Maybe Core.Bool),
     -- | Whether this account is on an owner\/primary profile. For phones, only true for owner profiles. Android 4+ devices can have secondary or restricted user profiles.
     ownerProfileAccount :: (Core.Maybe Core.Bool),
     -- | Ownership privileges on device.
@@ -1073,7 +1078,11 @@ data GoogleAppsCloudidentityDevicesV1AndroidAttributes = GoogleAppsCloudidentity
           GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
       ),
     -- | Whether device supports Android work profiles. If false, this service will not block access to corp data even if an administrator turns on the \"Enforce Work Profile\" policy.
-    supportsWorkProfile :: (Core.Maybe Core.Bool)
+    supportsWorkProfile :: (Core.Maybe Core.Bool),
+    -- | Whether Android verified boot status is GREEN.
+    verifiedBoot :: (Core.Maybe Core.Bool),
+    -- | Whether Google Play Protect Verify Apps is enabled.
+    verifyAppsEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1082,10 +1091,15 @@ newGoogleAppsCloudidentityDevicesV1AndroidAttributes ::
   GoogleAppsCloudidentityDevicesV1AndroidAttributes
 newGoogleAppsCloudidentityDevicesV1AndroidAttributes =
   GoogleAppsCloudidentityDevicesV1AndroidAttributes
-    { enabledUnknownSources = Core.Nothing,
+    { ctsProfileMatch =
+        Core.Nothing,
+      enabledUnknownSources = Core.Nothing,
+      hasPotentiallyHarmfulApps = Core.Nothing,
       ownerProfileAccount = Core.Nothing,
       ownershipPrivilege = Core.Nothing,
-      supportsWorkProfile = Core.Nothing
+      supportsWorkProfile = Core.Nothing,
+      verifiedBoot = Core.Nothing,
+      verifyAppsEnabled = Core.Nothing
     }
 
 instance
@@ -1097,30 +1111,34 @@ instance
       "GoogleAppsCloudidentityDevicesV1AndroidAttributes"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1AndroidAttributes
-            Core.<$> (o Core..:? "enabledUnknownSources")
-              Core.<*> (o Core..:? "ownerProfileAccount")
-              Core.<*> (o Core..:? "ownershipPrivilege")
-              Core.<*> (o Core..:? "supportsWorkProfile")
+            Core.<$> (o Core..:? "ctsProfileMatch")
+            Core.<*> (o Core..:? "enabledUnknownSources")
+            Core.<*> (o Core..:? "hasPotentiallyHarmfulApps")
+            Core.<*> (o Core..:? "ownerProfileAccount")
+            Core.<*> (o Core..:? "ownershipPrivilege")
+            Core.<*> (o Core..:? "supportsWorkProfile")
+            Core.<*> (o Core..:? "verifiedBoot")
+            Core.<*> (o Core..:? "verifyAppsEnabled")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1AndroidAttributes
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1AndroidAttributes {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("enabledUnknownSources" Core..=)
-                Core.<$> enabledUnknownSources,
-              ("ownerProfileAccount" Core..=)
-                Core.<$> ownerProfileAccount,
-              ("ownershipPrivilege" Core..=)
-                Core.<$> ownershipPrivilege,
-              ("supportsWorkProfile" Core..=)
-                Core.<$> supportsWorkProfile
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1AndroidAttributes {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("ctsProfileMatch" Core..=) Core.<$> ctsProfileMatch,
+            ("enabledUnknownSources" Core..=) Core.<$> enabledUnknownSources,
+            ("hasPotentiallyHarmfulApps" Core..=)
+              Core.<$> hasPotentiallyHarmfulApps,
+            ("ownerProfileAccount" Core..=) Core.<$> ownerProfileAccount,
+            ("ownershipPrivilege" Core..=) Core.<$> ownershipPrivilege,
+            ("supportsWorkProfile" Core..=) Core.<$> supportsWorkProfile,
+            ("verifiedBoot" Core..=) Core.<$> verifiedBoot,
+            ("verifyAppsEnabled" Core..=) Core.<$> verifyAppsEnabled
+          ]
+      )
 
 -- | Metadata for ApproveDeviceUser LRO.
 --
@@ -1166,7 +1184,8 @@ newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest ::
   GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
 newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest =
   GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
-    { customer = Core.Nothing
+    { customer =
+        Core.Nothing
     }
 
 instance
@@ -1185,12 +1204,9 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("customer" Core..=) Core.<$> customer]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1ApproveDeviceUserRequest {..} =
+    Core.object
+      (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Response message for approving the device to access user data.
 --
@@ -1206,7 +1222,8 @@ newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse ::
   GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
 newGoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse =
   GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse
-    { deviceUser = Core.Nothing
+    { deviceUser =
+        Core.Nothing
     }
 
 instance
@@ -1228,9 +1245,7 @@ instance
   toJSON
     GoogleAppsCloudidentityDevicesV1ApproveDeviceUserResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("deviceUser" Core..=) Core.<$> deviceUser]
-        )
+        (Core.catMaybes [("deviceUser" Core..=) Core.<$> deviceUser])
 
 -- | Metadata for BlockDeviceUser LRO.
 --
@@ -1252,8 +1267,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1BlockDeviceUserMetadata
       )
 
 instance
@@ -1276,7 +1290,8 @@ newGoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest ::
   GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest
 newGoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest =
   GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest
-    { customer = Core.Nothing
+    { customer =
+        Core.Nothing
     }
 
 instance
@@ -1295,12 +1310,9 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("customer" Core..=) Core.<$> customer]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1BlockDeviceUserRequest {..} =
+    Core.object
+      (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Response message for blocking the device from accessing user data.
 --
@@ -1316,7 +1328,8 @@ newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse ::
   GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
 newGoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse =
   GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
-    { deviceUser = Core.Nothing
+    { deviceUser =
+        Core.Nothing
     }
 
 instance
@@ -1335,12 +1348,180 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("deviceUser" Core..=) Core.<$> deviceUser]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1BlockDeviceUserResponse {..} =
+    Core.object
+      (Core.catMaybes [("deviceUser" Core..=) Core.<$> deviceUser])
+
+-- | Contains information about browser profiles reported by the <https://chromewebstore.google.com/detail/endpoint-verification/callobklhcbilhphinckomhgkigmfocg?pli=1 Endpoint Verification extension>.
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1BrowserAttributes' smart constructor.
+data GoogleAppsCloudidentityDevicesV1BrowserAttributes = GoogleAppsCloudidentityDevicesV1BrowserAttributes
+  { -- | Represents the current state of the <https://cloud.google.com/access-context-manager/docs/browser-attributes Chrome browser attributes> sent by the <https://chromewebstore.google.com/detail/endpoint-verification/callobklhcbilhphinckomhgkigmfocg?pli=1 Endpoint Verification extension>.
+    chromeBrowserInfo :: (Core.Maybe GoogleAppsCloudidentityDevicesV1BrowserInfo),
+    -- | Chrome profile ID that is exposed by the Chrome API. It is unique for each device.
+    chromeProfileId :: (Core.Maybe Core.Text),
+    -- | Timestamp in milliseconds since the Unix epoch when the profile\/gcm id was last synced.
+    lastProfileSyncTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1BrowserAttributes' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1BrowserAttributes ::
+  GoogleAppsCloudidentityDevicesV1BrowserAttributes
+newGoogleAppsCloudidentityDevicesV1BrowserAttributes =
+  GoogleAppsCloudidentityDevicesV1BrowserAttributes
+    { chromeBrowserInfo =
+        Core.Nothing,
+      chromeProfileId = Core.Nothing,
+      lastProfileSyncTime = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleAppsCloudidentityDevicesV1BrowserAttributes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1BrowserAttributes"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1BrowserAttributes
+            Core.<$> (o Core..:? "chromeBrowserInfo")
+            Core.<*> (o Core..:? "chromeProfileId")
+            Core.<*> (o Core..:? "lastProfileSyncTime")
+      )
+
+instance
+  Core.ToJSON
+    GoogleAppsCloudidentityDevicesV1BrowserAttributes
+  where
+  toJSON GoogleAppsCloudidentityDevicesV1BrowserAttributes {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("chromeBrowserInfo" Core..=) Core.<$> chromeBrowserInfo,
+            ("chromeProfileId" Core..=) Core.<$> chromeProfileId,
+            ("lastProfileSyncTime" Core..=) Core.<$> lastProfileSyncTime
+          ]
+      )
+
+-- | Browser-specific fields reported by the <https://chromewebstore.google.com/detail/endpoint-verification/callobklhcbilhphinckomhgkigmfocg?pli=1 Endpoint Verification extension>.
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1BrowserInfo' smart constructor.
+data GoogleAppsCloudidentityDevicesV1BrowserInfo = GoogleAppsCloudidentityDevicesV1BrowserInfo
+  { -- | Output only. Browser\'s management state.
+    browserManagementState ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+      ),
+    -- | Version of the request initiating browser. E.g. @91.0.4442.4@.
+    browserVersion :: (Core.Maybe Core.Text),
+    -- | Current state of <https://chromeenterprise.google/policies/#BuiltInDnsClientEnabled built-in DNS client>.
+    isBuiltInDnsClientEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#OnBulkDataEntryEnterpriseConnector bulk data analysis>. Set to true if provider list from Chrome is non-empty.
+    isBulkDataEntryAnalysisEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#ChromeCleanupEnabled Chrome Cleanup>.
+    isChromeCleanupEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#URLBlocklist Chrome Remote Desktop app>.
+    isChromeRemoteDesktopAppBlocked :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#OnFileDownloadedEnterpriseConnector file download analysis>. Set to true if provider list from Chrome is non-empty.
+    isFileDownloadAnalysisEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#OnFileAttachedEnterpriseConnector file upload analysis>. Set to true if provider list from Chrome is non-empty.
+    isFileUploadAnalysisEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#EnterpriseRealTimeUrlCheckMode real-time URL check>. Set to true if provider list from Chrome is non-empty.
+    isRealtimeUrlCheckEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#OnSecurityEventEnterpriseConnector security event analysis>. Set to true if provider list from Chrome is non-empty.
+    isSecurityEventAnalysisEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/?policy=IsolateOrigins site isolation>.
+    isSiteIsolationEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#ThirdPartyBlockingEnabled third-party blocking>.
+    isThirdPartyBlockingEnabled :: (Core.Maybe Core.Bool),
+    -- | Current state of <https://chromeenterprise.google/policies/#PasswordProtectionWarningTrigger password protection trigger>.
+    passwordProtectionWarningTrigger ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+      ),
+    -- | Current state of <https://chromeenterprise.google/policies/#SafeBrowsingProtectionLevel Safe Browsing protection level>.
+    safeBrowsingProtectionLevel ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1BrowserInfo' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1BrowserInfo ::
+  GoogleAppsCloudidentityDevicesV1BrowserInfo
+newGoogleAppsCloudidentityDevicesV1BrowserInfo =
+  GoogleAppsCloudidentityDevicesV1BrowserInfo
+    { browserManagementState =
+        Core.Nothing,
+      browserVersion = Core.Nothing,
+      isBuiltInDnsClientEnabled = Core.Nothing,
+      isBulkDataEntryAnalysisEnabled = Core.Nothing,
+      isChromeCleanupEnabled = Core.Nothing,
+      isChromeRemoteDesktopAppBlocked = Core.Nothing,
+      isFileDownloadAnalysisEnabled = Core.Nothing,
+      isFileUploadAnalysisEnabled = Core.Nothing,
+      isRealtimeUrlCheckEnabled = Core.Nothing,
+      isSecurityEventAnalysisEnabled = Core.Nothing,
+      isSiteIsolationEnabled = Core.Nothing,
+      isThirdPartyBlockingEnabled = Core.Nothing,
+      passwordProtectionWarningTrigger = Core.Nothing,
+      safeBrowsingProtectionLevel = Core.Nothing
+    }
+
+instance Core.FromJSON GoogleAppsCloudidentityDevicesV1BrowserInfo where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1BrowserInfo"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1BrowserInfo
+            Core.<$> (o Core..:? "browserManagementState")
+            Core.<*> (o Core..:? "browserVersion")
+            Core.<*> (o Core..:? "isBuiltInDnsClientEnabled")
+            Core.<*> (o Core..:? "isBulkDataEntryAnalysisEnabled")
+            Core.<*> (o Core..:? "isChromeCleanupEnabled")
+            Core.<*> (o Core..:? "isChromeRemoteDesktopAppBlocked")
+            Core.<*> (o Core..:? "isFileDownloadAnalysisEnabled")
+            Core.<*> (o Core..:? "isFileUploadAnalysisEnabled")
+            Core.<*> (o Core..:? "isRealtimeUrlCheckEnabled")
+            Core.<*> (o Core..:? "isSecurityEventAnalysisEnabled")
+            Core.<*> (o Core..:? "isSiteIsolationEnabled")
+            Core.<*> (o Core..:? "isThirdPartyBlockingEnabled")
+            Core.<*> (o Core..:? "passwordProtectionWarningTrigger")
+            Core.<*> (o Core..:? "safeBrowsingProtectionLevel")
+      )
+
+instance Core.ToJSON GoogleAppsCloudidentityDevicesV1BrowserInfo where
+  toJSON GoogleAppsCloudidentityDevicesV1BrowserInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("browserManagementState" Core..=)
+              Core.<$> browserManagementState,
+            ("browserVersion" Core..=) Core.<$> browserVersion,
+            ("isBuiltInDnsClientEnabled" Core..=)
+              Core.<$> isBuiltInDnsClientEnabled,
+            ("isBulkDataEntryAnalysisEnabled" Core..=)
+              Core.<$> isBulkDataEntryAnalysisEnabled,
+            ("isChromeCleanupEnabled" Core..=) Core.<$> isChromeCleanupEnabled,
+            ("isChromeRemoteDesktopAppBlocked" Core..=)
+              Core.<$> isChromeRemoteDesktopAppBlocked,
+            ("isFileDownloadAnalysisEnabled" Core..=)
+              Core.<$> isFileDownloadAnalysisEnabled,
+            ("isFileUploadAnalysisEnabled" Core..=)
+              Core.<$> isFileUploadAnalysisEnabled,
+            ("isRealtimeUrlCheckEnabled" Core..=)
+              Core.<$> isRealtimeUrlCheckEnabled,
+            ("isSecurityEventAnalysisEnabled" Core..=)
+              Core.<$> isSecurityEventAnalysisEnabled,
+            ("isSiteIsolationEnabled" Core..=) Core.<$> isSiteIsolationEnabled,
+            ("isThirdPartyBlockingEnabled" Core..=)
+              Core.<$> isThirdPartyBlockingEnabled,
+            ("passwordProtectionWarningTrigger" Core..=)
+              Core.<$> passwordProtectionWarningTrigger,
+            ("safeBrowsingProtectionLevel" Core..=)
+              Core.<$> safeBrowsingProtectionLevel
+          ]
+      )
 
 -- | Metadata for CancelWipeDevice LRO.
 --
@@ -1362,8 +1543,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1CancelWipeDeviceMetadata
       )
 
 instance
@@ -1386,7 +1566,8 @@ newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest ::
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
 newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest =
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
-    { customer = Core.Nothing
+    { customer =
+        Core.Nothing
     }
 
 instance
@@ -1405,12 +1586,9 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("customer" Core..=) Core.<$> customer]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1CancelWipeDeviceRequest {..} =
+    Core.object
+      (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Response message for cancelling an unfinished device wipe.
 --
@@ -1426,7 +1604,8 @@ newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse ::
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
 newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse =
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
-    { device = Core.Nothing
+    { device =
+        Core.Nothing
     }
 
 instance
@@ -1445,10 +1624,8 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse {..} =
-      Core.object
-        (Core.catMaybes [("device" Core..=) Core.<$> device])
+  toJSON GoogleAppsCloudidentityDevicesV1CancelWipeDeviceResponse {..} =
+    Core.object (Core.catMaybes [("device" Core..=) Core.<$> device])
 
 -- | Metadata for CancelWipeDeviceUser LRO.
 --
@@ -1494,7 +1671,8 @@ newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest ::
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
 newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest =
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest
-    { customer = Core.Nothing
+    { customer =
+        Core.Nothing
     }
 
 instance
@@ -1516,9 +1694,7 @@ instance
   toJSON
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserRequest {..} =
       Core.object
-        ( Core.catMaybes
-            [("customer" Core..=) Core.<$> customer]
-        )
+        (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Response message for cancelling an unfinished user account wipe.
 --
@@ -1534,7 +1710,8 @@ newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse ::
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
 newGoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse =
   GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse
-    { deviceUser = Core.Nothing
+    { deviceUser =
+        Core.Nothing
     }
 
 instance
@@ -1556,9 +1733,142 @@ instance
   toJSON
     GoogleAppsCloudidentityDevicesV1CancelWipeDeviceUserResponse {..} =
       Core.object
-        ( Core.catMaybes
-            [("deviceUser" Core..=) Core.<$> deviceUser]
-        )
+        (Core.catMaybes [("deviceUser" Core..=) Core.<$> deviceUser])
+
+-- | Stores information about a certificate.
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1CertificateAttributes' smart constructor.
+data GoogleAppsCloudidentityDevicesV1CertificateAttributes = GoogleAppsCloudidentityDevicesV1CertificateAttributes
+  { -- | The X.509 extension for CertificateTemplate.
+    certificateTemplate :: (Core.Maybe GoogleAppsCloudidentityDevicesV1CertificateTemplate),
+    -- | The encoded certificate fingerprint.
+    fingerprint :: (Core.Maybe Core.Text),
+    -- | The name of the issuer of this certificate.
+    issuer :: (Core.Maybe Core.Text),
+    -- | Serial number of the certificate, Example: \"123456789\".
+    serialNumber :: (Core.Maybe Core.Text),
+    -- | The subject name of this certificate.
+    subject :: (Core.Maybe Core.Text),
+    -- | The certificate thumbprint.
+    thumbprint :: (Core.Maybe Core.Text),
+    -- | Output only. Validation state of this certificate.
+    validationState ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+      ),
+    -- | Certificate not valid at or after this timestamp.
+    validityExpirationTime :: (Core.Maybe Core.DateTime),
+    -- | Certificate not valid before this timestamp.
+    validityStartTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1CertificateAttributes' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1CertificateAttributes ::
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes
+newGoogleAppsCloudidentityDevicesV1CertificateAttributes =
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes
+    { certificateTemplate =
+        Core.Nothing,
+      fingerprint = Core.Nothing,
+      issuer = Core.Nothing,
+      serialNumber = Core.Nothing,
+      subject = Core.Nothing,
+      thumbprint = Core.Nothing,
+      validationState = Core.Nothing,
+      validityExpirationTime = Core.Nothing,
+      validityStartTime = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1CertificateAttributes"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1CertificateAttributes
+            Core.<$> (o Core..:? "certificateTemplate")
+            Core.<*> (o Core..:? "fingerprint")
+            Core.<*> (o Core..:? "issuer")
+            Core.<*> (o Core..:? "serialNumber")
+            Core.<*> (o Core..:? "subject")
+            Core.<*> (o Core..:? "thumbprint")
+            Core.<*> (o Core..:? "validationState")
+            Core.<*> (o Core..:? "validityExpirationTime")
+            Core.<*> (o Core..:? "validityStartTime")
+      )
+
+instance
+  Core.ToJSON
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes
+  where
+  toJSON GoogleAppsCloudidentityDevicesV1CertificateAttributes {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificateTemplate" Core..=) Core.<$> certificateTemplate,
+            ("fingerprint" Core..=) Core.<$> fingerprint,
+            ("issuer" Core..=) Core.<$> issuer,
+            ("serialNumber" Core..=) Core.<$> serialNumber,
+            ("subject" Core..=) Core.<$> subject,
+            ("thumbprint" Core..=) Core.<$> thumbprint,
+            ("validationState" Core..=) Core.<$> validationState,
+            ("validityExpirationTime" Core..=) Core.<$> validityExpirationTime,
+            ("validityStartTime" Core..=) Core.<$> validityStartTime
+          ]
+      )
+
+-- | CertificateTemplate (v3 Extension in X.509).
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1CertificateTemplate' smart constructor.
+data GoogleAppsCloudidentityDevicesV1CertificateTemplate = GoogleAppsCloudidentityDevicesV1CertificateTemplate
+  { -- | The template id of the template. Example: \"1.3.6.1.4.1.311.21.8.15608621.11768144.5720724.16068415.6889630.81.2472537.7784047\".
+    id :: (Core.Maybe Core.Text),
+    -- | The Major version of the template. Example: 100.
+    majorVersion :: (Core.Maybe Core.Int32),
+    -- | The minor version of the template. Example: 12.
+    minorVersion :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1CertificateTemplate' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1CertificateTemplate ::
+  GoogleAppsCloudidentityDevicesV1CertificateTemplate
+newGoogleAppsCloudidentityDevicesV1CertificateTemplate =
+  GoogleAppsCloudidentityDevicesV1CertificateTemplate
+    { id =
+        Core.Nothing,
+      majorVersion = Core.Nothing,
+      minorVersion = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleAppsCloudidentityDevicesV1CertificateTemplate
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1CertificateTemplate"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1CertificateTemplate
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "majorVersion")
+            Core.<*> (o Core..:? "minorVersion")
+      )
+
+instance
+  Core.ToJSON
+    GoogleAppsCloudidentityDevicesV1CertificateTemplate
+  where
+  toJSON GoogleAppsCloudidentityDevicesV1CertificateTemplate {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("id" Core..=) Core.<$> id,
+            ("majorVersion" Core..=) Core.<$> majorVersion,
+            ("minorVersion" Core..=) Core.<$> minorVersion
+          ]
+      )
 
 -- | Represents the state associated with an API client calling the Devices API. Resource representing ClientState and supports updates from API users
 --
@@ -1605,7 +1915,8 @@ newGoogleAppsCloudidentityDevicesV1ClientState ::
   GoogleAppsCloudidentityDevicesV1ClientState
 newGoogleAppsCloudidentityDevicesV1ClientState =
   GoogleAppsCloudidentityDevicesV1ClientState
-    { assetTags = Core.Nothing,
+    { assetTags =
+        Core.Nothing,
       complianceState = Core.Nothing,
       createTime = Core.Nothing,
       customId = Core.Nothing,
@@ -1619,10 +1930,7 @@ newGoogleAppsCloudidentityDevicesV1ClientState =
       scoreReason = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsCloudidentityDevicesV1ClientState
-  where
+instance Core.FromJSON GoogleAppsCloudidentityDevicesV1ClientState where
   parseJSON =
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1ClientState"
@@ -1642,35 +1950,30 @@ instance
             Core.<*> (o Core..:? "scoreReason")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsCloudidentityDevicesV1ClientState
-  where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1ClientState {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("assetTags" Core..=) Core.<$> assetTags,
-              ("complianceState" Core..=) Core.<$> complianceState,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("customId" Core..=) Core.<$> customId,
-              ("etag" Core..=) Core.<$> etag,
-              ("healthScore" Core..=) Core.<$> healthScore,
-              ("keyValuePairs" Core..=) Core.<$> keyValuePairs,
-              ("lastUpdateTime" Core..=) Core.<$> lastUpdateTime,
-              ("managed" Core..=) Core.<$> managed,
-              ("name" Core..=) Core.<$> name,
-              ("ownerType" Core..=) Core.<$> ownerType,
-              ("scoreReason" Core..=) Core.<$> scoreReason
-            ]
-        )
+instance Core.ToJSON GoogleAppsCloudidentityDevicesV1ClientState where
+  toJSON GoogleAppsCloudidentityDevicesV1ClientState {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("assetTags" Core..=) Core.<$> assetTags,
+            ("complianceState" Core..=) Core.<$> complianceState,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("customId" Core..=) Core.<$> customId,
+            ("etag" Core..=) Core.<$> etag,
+            ("healthScore" Core..=) Core.<$> healthScore,
+            ("keyValuePairs" Core..=) Core.<$> keyValuePairs,
+            ("lastUpdateTime" Core..=) Core.<$> lastUpdateTime,
+            ("managed" Core..=) Core.<$> managed,
+            ("name" Core..=) Core.<$> name,
+            ("ownerType" Core..=) Core.<$> ownerType,
+            ("scoreReason" Core..=) Core.<$> scoreReason
+          ]
+      )
 
 -- | The map of key-value attributes stored by callers specific to a device. The total serialized length of this map may not exceed 10KB. No limit is placed on the number of attributes in a map.
 --
 -- /See:/ 'newGoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs' smart constructor.
 newtype GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs = GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
-  { -- |
-    additional ::
+  { additional ::
       ( Core.HashMap
           Core.Text
           GoogleAppsCloudidentityDevicesV1CustomAttributeValue
@@ -1681,12 +1984,16 @@ newtype GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs = GoogleAppsCl
 -- | Creates a value of 'GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs' with the minimum fields required to make a request.
 newGoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text GoogleAppsCloudidentityDevicesV1CustomAttributeValue ->
+  Core.HashMap
+    Core.Text
+    GoogleAppsCloudidentityDevicesV1CustomAttributeValue ->
   GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
-newGoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs additional =
-  GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
-    { additional = additional
-    }
+newGoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
+  additional =
+    GoogleAppsCloudidentityDevicesV1ClientState_KeyValuePairs
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1728,8 +2035,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1CreateDeviceMetadata
       )
 
 instance
@@ -1756,7 +2062,8 @@ newGoogleAppsCloudidentityDevicesV1CustomAttributeValue ::
   GoogleAppsCloudidentityDevicesV1CustomAttributeValue
 newGoogleAppsCloudidentityDevicesV1CustomAttributeValue =
   GoogleAppsCloudidentityDevicesV1CustomAttributeValue
-    { boolValue = Core.Nothing,
+    { boolValue =
+        Core.Nothing,
       numberValue = Core.Nothing,
       stringValue = Core.Nothing
     }
@@ -1771,23 +2078,22 @@ instance
       ( \o ->
           GoogleAppsCloudidentityDevicesV1CustomAttributeValue
             Core.<$> (o Core..:? "boolValue")
-              Core.<*> (o Core..:? "numberValue")
-              Core.<*> (o Core..:? "stringValue")
+            Core.<*> (o Core..:? "numberValue")
+            Core.<*> (o Core..:? "stringValue")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1CustomAttributeValue
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1CustomAttributeValue {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("boolValue" Core..=) Core.<$> boolValue,
-              ("numberValue" Core..=) Core.<$> numberValue,
-              ("stringValue" Core..=) Core.<$> stringValue
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1CustomAttributeValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boolValue" Core..=) Core.<$> boolValue,
+            ("numberValue" Core..=) Core.<$> numberValue,
+            ("stringValue" Core..=) Core.<$> stringValue
+          ]
+      )
 
 -- | Metadata for DeleteDevice LRO.
 --
@@ -1809,8 +2115,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1DeleteDeviceMetadata
       )
 
 instance
@@ -1839,8 +2144,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1DeleteDeviceUserMetadata
       )
 
 instance
@@ -1882,6 +2186,13 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
     enabledUsbDebugging :: (Core.Maybe Core.Bool),
     -- | Output only. Device encryption state.
     encryptionState :: (Core.Maybe GoogleAppsCloudidentityDevicesV1Device_EncryptionState),
+    -- | Output only. Attributes specific to <https://cloud.google.com/endpoint-verification/docs/overview Endpoint Verification> devices.
+    endpointVerificationSpecificAttributes ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+      ),
+    -- | Host name of the device.
+    hostname :: (Core.Maybe Core.Text),
     -- | Output only. IMEI number of device if GSM device; empty otherwise.
     imei :: (Core.Maybe Core.Text),
     -- | Output only. Kernel version of the device.
@@ -1896,7 +2207,7 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
     meid :: (Core.Maybe Core.Text),
     -- | Output only. Model name of device. Example: Pixel 3.
     model :: (Core.Maybe Core.Text),
-    -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique id assigned to the Device.
+    -- | Output only. <https://cloud.google.com/apis/design/resource_names Resource name> of the Device in format: @devices\/{device}@, where device is the unique id assigned to the Device. Important: Device API scopes require that you use domain-wide delegation to access the API. For more information, see <https://cloud.google.com/identity/docs/how-to/setup-devices Set up the Devices API>.
     name :: (Core.Maybe Core.Text),
     -- | Output only. Mobile or network operator of device, if available.
     networkOperator :: (Core.Maybe Core.Text),
@@ -1912,6 +2223,8 @@ data GoogleAppsCloudidentityDevicesV1Device = GoogleAppsCloudidentityDevicesV1De
     securityPatchTime :: (Core.Maybe Core.DateTime),
     -- | Serial Number of device. Example: HT82V1A01076.
     serialNumber :: (Core.Maybe Core.Text),
+    -- | Output only. Unified device id of the device.
+    unifiedDeviceId :: (Core.Maybe Core.Text),
     -- | WiFi MAC addresses of device.
     wifiMacAddresses :: (Core.Maybe [Core.Text])
   }
@@ -1922,7 +2235,8 @@ newGoogleAppsCloudidentityDevicesV1Device ::
   GoogleAppsCloudidentityDevicesV1Device
 newGoogleAppsCloudidentityDevicesV1Device =
   GoogleAppsCloudidentityDevicesV1Device
-    { androidSpecificAttributes = Core.Nothing,
+    { androidSpecificAttributes =
+        Core.Nothing,
       assetTag = Core.Nothing,
       basebandVersion = Core.Nothing,
       bootloaderVersion = Core.Nothing,
@@ -1935,6 +2249,8 @@ newGoogleAppsCloudidentityDevicesV1Device =
       enabledDeveloperOptions = Core.Nothing,
       enabledUsbDebugging = Core.Nothing,
       encryptionState = Core.Nothing,
+      endpointVerificationSpecificAttributes = Core.Nothing,
+      hostname = Core.Nothing,
       imei = Core.Nothing,
       kernelVersion = Core.Nothing,
       lastSyncTime = Core.Nothing,
@@ -1950,13 +2266,11 @@ newGoogleAppsCloudidentityDevicesV1Device =
       releaseVersion = Core.Nothing,
       securityPatchTime = Core.Nothing,
       serialNumber = Core.Nothing,
+      unifiedDeviceId = Core.Nothing,
       wifiMacAddresses = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsCloudidentityDevicesV1Device
-  where
+instance Core.FromJSON GoogleAppsCloudidentityDevicesV1Device where
   parseJSON =
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1Device"
@@ -1975,6 +2289,8 @@ instance
             Core.<*> (o Core..:? "enabledDeveloperOptions")
             Core.<*> (o Core..:? "enabledUsbDebugging")
             Core.<*> (o Core..:? "encryptionState")
+            Core.<*> (o Core..:? "endpointVerificationSpecificAttributes")
+            Core.<*> (o Core..:? "hostname")
             Core.<*> (o Core..:? "imei")
             Core.<*> (o Core..:? "kernelVersion")
             Core.<*> (o Core..:? "lastSyncTime")
@@ -1990,13 +2306,11 @@ instance
             Core.<*> (o Core..:? "releaseVersion")
             Core.<*> (o Core..:? "securityPatchTime")
             Core.<*> (o Core..:? "serialNumber")
+            Core.<*> (o Core..:? "unifiedDeviceId")
             Core.<*> (o Core..:? "wifiMacAddresses")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsCloudidentityDevicesV1Device
-  where
+instance Core.ToJSON GoogleAppsCloudidentityDevicesV1Device where
   toJSON GoogleAppsCloudidentityDevicesV1Device {..} =
     Core.object
       ( Core.catMaybes
@@ -2004,20 +2318,20 @@ instance
               Core.<$> androidSpecificAttributes,
             ("assetTag" Core..=) Core.<$> assetTag,
             ("basebandVersion" Core..=) Core.<$> basebandVersion,
-            ("bootloaderVersion" Core..=)
-              Core.<$> bootloaderVersion,
+            ("bootloaderVersion" Core..=) Core.<$> bootloaderVersion,
             ("brand" Core..=) Core.<$> brand,
             ("buildNumber" Core..=) Core.<$> buildNumber,
-            ("compromisedState" Core..=)
-              Core.<$> compromisedState,
+            ("compromisedState" Core..=) Core.<$> compromisedState,
             ("createTime" Core..=) Core.<$> createTime,
             ("deviceId" Core..=) Core.<$> deviceId,
             ("deviceType" Core..=) Core.<$> deviceType,
             ("enabledDeveloperOptions" Core..=)
               Core.<$> enabledDeveloperOptions,
-            ("enabledUsbDebugging" Core..=)
-              Core.<$> enabledUsbDebugging,
+            ("enabledUsbDebugging" Core..=) Core.<$> enabledUsbDebugging,
             ("encryptionState" Core..=) Core.<$> encryptionState,
+            ("endpointVerificationSpecificAttributes" Core..=)
+              Core.<$> endpointVerificationSpecificAttributes,
+            ("hostname" Core..=) Core.<$> hostname,
             ("imei" Core..=) Core.<$> imei,
             ("kernelVersion" Core..=) Core.<$> kernelVersion,
             ("lastSyncTime" Core..=) Core.<$> lastSyncTime,
@@ -2031,11 +2345,10 @@ instance
             ("otherAccounts" Core..=) Core.<$> otherAccounts,
             ("ownerType" Core..=) Core.<$> ownerType,
             ("releaseVersion" Core..=) Core.<$> releaseVersion,
-            ("securityPatchTime" Core..=)
-              Core.<$> securityPatchTime,
+            ("securityPatchTime" Core..=) Core.<$> securityPatchTime,
             ("serialNumber" Core..=) Core.<$> serialNumber,
-            ("wifiMacAddresses" Core..=)
-              Core.<$> wifiMacAddresses
+            ("unifiedDeviceId" Core..=) Core.<$> unifiedDeviceId,
+            ("wifiMacAddresses" Core..=) Core.<$> wifiMacAddresses
           ]
       )
 
@@ -2080,7 +2393,8 @@ newGoogleAppsCloudidentityDevicesV1DeviceUser ::
   GoogleAppsCloudidentityDevicesV1DeviceUser
 newGoogleAppsCloudidentityDevicesV1DeviceUser =
   GoogleAppsCloudidentityDevicesV1DeviceUser
-    { compromisedState = Core.Nothing,
+    { compromisedState =
+        Core.Nothing,
       createTime = Core.Nothing,
       firstSyncTime = Core.Nothing,
       languageCode = Core.Nothing,
@@ -2092,10 +2406,7 @@ newGoogleAppsCloudidentityDevicesV1DeviceUser =
       userEmail = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleAppsCloudidentityDevicesV1DeviceUser
-  where
+instance Core.FromJSON GoogleAppsCloudidentityDevicesV1DeviceUser where
   parseJSON =
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1DeviceUser"
@@ -2113,15 +2424,11 @@ instance
             Core.<*> (o Core..:? "userEmail")
       )
 
-instance
-  Core.ToJSON
-    GoogleAppsCloudidentityDevicesV1DeviceUser
-  where
+instance Core.ToJSON GoogleAppsCloudidentityDevicesV1DeviceUser where
   toJSON GoogleAppsCloudidentityDevicesV1DeviceUser {..} =
     Core.object
       ( Core.catMaybes
-          [ ("compromisedState" Core..=)
-              Core.<$> compromisedState,
+          [ ("compromisedState" Core..=) Core.<$> compromisedState,
             ("createTime" Core..=) Core.<$> createTime,
             ("firstSyncTime" Core..=) Core.<$> firstSyncTime,
             ("languageCode" Core..=) Core.<$> languageCode,
@@ -2133,6 +2440,109 @@ instance
             ("userEmail" Core..=) Core.<$> userEmail
           ]
       )
+
+-- | Resource representing the <https://cloud.google.com/endpoint-verification/docs/device-information Endpoint Verification-specific attributes> of a device.
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes' smart constructor.
+data GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes = GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+  { -- | <https://cloud.google.com/endpoint-verification/docs/device-information Additional signals> reported by Endpoint Verification. It includes the following attributes: * Non-configurable attributes: hotfixes, av/installed, av/enabled, windows/domain/name, is/os/native/firewall/enabled, and is/secure/boot_enabled. * <https://cloud.google.com/endpoint-verification/docs/collect-config-attributes Configurable attributes>: file, folder, and binary attributes; registry entries; and properties in a plist.
+    additionalSignals ::
+      ( Core.Maybe
+          GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+      ),
+    -- | Details of browser profiles reported by Endpoint Verification.
+    browserAttributes :: (Core.Maybe [GoogleAppsCloudidentityDevicesV1BrowserAttributes]),
+    -- | Details of certificates.
+    certificateAttributes ::
+      ( Core.Maybe
+          [GoogleAppsCloudidentityDevicesV1CertificateAttributes]
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes ::
+  GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes =
+  GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+    { additionalSignals =
+        Core.Nothing,
+      browserAttributes =
+        Core.Nothing,
+      certificateAttributes =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+            Core.<$> (o Core..:? "additionalSignals")
+            Core.<*> (o Core..:? "browserAttributes")
+            Core.<*> (o Core..:? "certificateAttributes")
+      )
+
+instance
+  Core.ToJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes
+  where
+  toJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes {..} =
+      Core.object
+        ( Core.catMaybes
+            [ ("additionalSignals" Core..=) Core.<$> additionalSignals,
+              ("browserAttributes" Core..=) Core.<$> browserAttributes,
+              ("certificateAttributes" Core..=) Core.<$> certificateAttributes
+            ]
+        )
+
+-- | <https://cloud.google.com/endpoint-verification/docs/device-information Additional signals> reported by Endpoint Verification. It includes the following attributes: * Non-configurable attributes: hotfixes, av/installed, av/enabled, windows/domain/name, is/os/native/firewall/enabled, and is/secure/boot_enabled. * <https://cloud.google.com/endpoint-verification/docs/collect-config-attributes Configurable attributes>: file, folder, and binary attributes; registry entries; and properties in a plist.
+--
+-- /See:/ 'newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals' smart constructor.
+newtype GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals = GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals' with the minimum fields required to make a request.
+newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap
+    Core.Text
+    Core.Value ->
+  GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+newGoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+  additional =
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+      { additional =
+          additional
+      }
+
+instance
+  Core.FromJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals"
+      ( \o ->
+          GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance
+  Core.ToJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals
+  where
+  toJSON
+    GoogleAppsCloudidentityDevicesV1EndpointVerificationSpecificAttributes_AdditionalSignals {..} =
+      Core.toJSON additional
 
 -- | Response message that is returned in ListClientStates.
 --
@@ -2150,7 +2560,8 @@ newGoogleAppsCloudidentityDevicesV1ListClientStatesResponse ::
   GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
 newGoogleAppsCloudidentityDevicesV1ListClientStatesResponse =
   GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
-    { clientStates = Core.Nothing,
+    { clientStates =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -2164,21 +2575,20 @@ instance
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
             Core.<$> (o Core..:? "clientStates")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1ListClientStatesResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1ListClientStatesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("clientStates" Core..=) Core.<$> clientStates,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1ListClientStatesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clientStates" Core..=) Core.<$> clientStates,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Response message that is returned from the ListDeviceUsers method.
 --
@@ -2196,7 +2606,8 @@ newGoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse ::
   GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
 newGoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse =
   GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
-    { deviceUsers = Core.Nothing,
+    { deviceUsers =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -2210,21 +2621,20 @@ instance
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
             Core.<$> (o Core..:? "deviceUsers")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("deviceUsers" Core..=) Core.<$> deviceUsers,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceUsers" Core..=) Core.<$> deviceUsers,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Response message that is returned from the ListDevices method.
 --
@@ -2242,7 +2652,8 @@ newGoogleAppsCloudidentityDevicesV1ListDevicesResponse ::
   GoogleAppsCloudidentityDevicesV1ListDevicesResponse
 newGoogleAppsCloudidentityDevicesV1ListDevicesResponse =
   GoogleAppsCloudidentityDevicesV1ListDevicesResponse
-    { devices = Core.Nothing,
+    { devices =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -2256,21 +2667,20 @@ instance
       ( \o ->
           GoogleAppsCloudidentityDevicesV1ListDevicesResponse
             Core.<$> (o Core..:? "devices")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1ListDevicesResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1ListDevicesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("devices" Core..=) Core.<$> devices,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1ListDevicesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("devices" Core..=) Core.<$> devices,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Metadata for ListEndpointApps LRO.
 --
@@ -2292,8 +2702,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1ListEndpointAppsMetadata
       )
 
 instance
@@ -2320,7 +2729,8 @@ newGoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse ::
   GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
 newGoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse =
   GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-    { customer = Core.Nothing,
+    { customer =
+        Core.Nothing,
       names = Core.Nothing,
       nextPageToken = Core.Nothing
     }
@@ -2334,8 +2744,9 @@ instance
       "GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse"
       ( \o ->
           GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
-            Core.<$> (o Core..:? "customer") Core.<*> (o Core..:? "names")
-              Core.<*> (o Core..:? "nextPageToken")
+            Core.<$> (o Core..:? "customer")
+            Core.<*> (o Core..:? "names")
+            Core.<*> (o Core..:? "nextPageToken")
       )
 
 instance
@@ -2432,8 +2843,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1UpdateDeviceMetadata
       )
 
 instance
@@ -2462,8 +2872,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1WipeDeviceMetadata
       )
 
 instance
@@ -2488,7 +2897,8 @@ newGoogleAppsCloudidentityDevicesV1WipeDeviceRequest ::
   GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
 newGoogleAppsCloudidentityDevicesV1WipeDeviceRequest =
   GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
-    { customer = Core.Nothing,
+    { customer =
+        Core.Nothing,
       removeResetLock = Core.Nothing
     }
 
@@ -2502,22 +2912,20 @@ instance
       ( \o ->
           GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
             Core.<$> (o Core..:? "customer")
-              Core.<*> (o Core..:? "removeResetLock")
+            Core.<*> (o Core..:? "removeResetLock")
       )
 
 instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1WipeDeviceRequest
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1WipeDeviceRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("customer" Core..=) Core.<$> customer,
-              ("removeResetLock" Core..=)
-                Core.<$> removeResetLock
-            ]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1WipeDeviceRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customer" Core..=) Core.<$> customer,
+            ("removeResetLock" Core..=) Core.<$> removeResetLock
+          ]
+      )
 
 -- | Response message for wiping all data on the device.
 --
@@ -2532,7 +2940,10 @@ newtype GoogleAppsCloudidentityDevicesV1WipeDeviceResponse = GoogleAppsCloudiden
 newGoogleAppsCloudidentityDevicesV1WipeDeviceResponse ::
   GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
 newGoogleAppsCloudidentityDevicesV1WipeDeviceResponse =
-  GoogleAppsCloudidentityDevicesV1WipeDeviceResponse {device = Core.Nothing}
+  GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
+    { device =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2550,10 +2961,8 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1WipeDeviceResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1WipeDeviceResponse {..} =
-      Core.object
-        (Core.catMaybes [("device" Core..=) Core.<$> device])
+  toJSON GoogleAppsCloudidentityDevicesV1WipeDeviceResponse {..} =
+    Core.object (Core.catMaybes [("device" Core..=) Core.<$> device])
 
 -- | Metadata for WipeDeviceUser LRO.
 --
@@ -2575,8 +2984,7 @@ instance
     Core.withObject
       "GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata"
       ( \o ->
-          Core.pure
-            GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata
+          Core.pure GoogleAppsCloudidentityDevicesV1WipeDeviceUserMetadata
       )
 
 instance
@@ -2599,7 +3007,8 @@ newGoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest ::
   GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
 newGoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest =
   GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
-    { customer = Core.Nothing
+    { customer =
+        Core.Nothing
     }
 
 instance
@@ -2618,12 +3027,9 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("customer" Core..=) Core.<$> customer]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1WipeDeviceUserRequest {..} =
+    Core.object
+      (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Response message for wiping the user\'s account from the device.
 --
@@ -2639,7 +3045,8 @@ newGoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse ::
   GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse
 newGoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse =
   GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse
-    { deviceUser = Core.Nothing
+    { deviceUser =
+        Core.Nothing
     }
 
 instance
@@ -2658,12 +3065,9 @@ instance
   Core.ToJSON
     GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse
   where
-  toJSON
-    GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("deviceUser" Core..=) Core.<$> deviceUser]
-        )
+  toJSON GoogleAppsCloudidentityDevicesV1WipeDeviceUserResponse {..} =
+    Core.object
+      (Core.catMaybes [("deviceUser" Core..=) Core.<$> deviceUser])
 
 -- | A group within the Cloud Identity Groups API. A @Group@ is a collection of entities, where each entity is either a user, another group, or a service account.
 --
@@ -2731,13 +3135,11 @@ instance Core.ToJSON Group where
   toJSON Group {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalGroupKeys" Core..=)
-              Core.<$> additionalGroupKeys,
+          [ ("additionalGroupKeys" Core..=) Core.<$> additionalGroupKeys,
             ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
-            ("dynamicGroupMetadata" Core..=)
-              Core.<$> dynamicGroupMetadata,
+            ("dynamicGroupMetadata" Core..=) Core.<$> dynamicGroupMetadata,
             ("groupKey" Core..=) Core.<$> groupKey,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
@@ -2750,8 +3152,7 @@ instance Core.ToJSON Group where
 --
 -- /See:/ 'newGroup_Labels' smart constructor.
 newtype Group_Labels = Group_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2766,9 +3167,7 @@ instance Core.FromJSON Group_Labels where
   parseJSON =
     Core.withObject
       "Group_Labels"
-      ( \o ->
-          Group_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Group_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Group_Labels where
   toJSON Group_Labels {..} = Core.toJSON additional
@@ -2836,8 +3235,7 @@ instance Core.ToJSON GroupRelation where
 --
 -- /See:/ 'newGroupRelation_Labels' smart constructor.
 newtype GroupRelation_Labels = GroupRelation_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2853,14 +3251,10 @@ instance Core.FromJSON GroupRelation_Labels where
   parseJSON =
     Core.withObject
       "GroupRelation_Labels"
-      ( \o ->
-          GroupRelation_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> GroupRelation_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON GroupRelation_Labels where
-  toJSON GroupRelation_Labels {..} =
-    Core.toJSON additional
+  toJSON GroupRelation_Labels {..} = Core.toJSON additional
 
 -- | Credential for verifying signatures produced by the Identity Provider.
 --
@@ -3054,17 +3448,14 @@ instance Core.FromJSON IsInvitableUserResponse where
     Core.withObject
       "IsInvitableUserResponse"
       ( \o ->
-          IsInvitableUserResponse
-            Core.<$> (o Core..:? "isInvitableUser")
+          IsInvitableUserResponse Core.<$> (o Core..:? "isInvitableUser")
       )
 
 instance Core.ToJSON IsInvitableUserResponse where
   toJSON IsInvitableUserResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("isInvitableUser" Core..=)
-              Core.<$> isInvitableUser
-          ]
+          [("isInvitableUser" Core..=) Core.<$> isInvitableUser]
       )
 
 -- | Response message for ListGroups operation.
@@ -3082,7 +3473,10 @@ data ListGroupsResponse = ListGroupsResponse
 newListGroupsResponse ::
   ListGroupsResponse
 newListGroupsResponse =
-  ListGroupsResponse {groups = Core.Nothing, nextPageToken = Core.Nothing}
+  ListGroupsResponse
+    { groups = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListGroupsResponse where
   parseJSON =
@@ -3158,14 +3552,12 @@ newListInboundSamlSsoProfilesResponse ::
   ListInboundSamlSsoProfilesResponse
 newListInboundSamlSsoProfilesResponse =
   ListInboundSamlSsoProfilesResponse
-    { inboundSamlSsoProfiles = Core.Nothing,
+    { inboundSamlSsoProfiles =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListInboundSamlSsoProfilesResponse
-  where
+instance Core.FromJSON ListInboundSamlSsoProfilesResponse where
   parseJSON =
     Core.withObject
       "ListInboundSamlSsoProfilesResponse"
@@ -3175,10 +3567,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListInboundSamlSsoProfilesResponse
-  where
+instance Core.ToJSON ListInboundSamlSsoProfilesResponse where
   toJSON ListInboundSamlSsoProfilesResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -3204,14 +3593,12 @@ newListInboundSsoAssignmentsResponse ::
   ListInboundSsoAssignmentsResponse
 newListInboundSsoAssignmentsResponse =
   ListInboundSsoAssignmentsResponse
-    { inboundSsoAssignments = Core.Nothing,
+    { inboundSsoAssignments =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListInboundSsoAssignmentsResponse
-  where
+instance Core.FromJSON ListInboundSsoAssignmentsResponse where
   parseJSON =
     Core.withObject
       "ListInboundSsoAssignmentsResponse"
@@ -3221,15 +3608,11 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListInboundSsoAssignmentsResponse
-  where
+instance Core.ToJSON ListInboundSsoAssignmentsResponse where
   toJSON ListInboundSsoAssignmentsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inboundSsoAssignments" Core..=)
-              Core.<$> inboundSsoAssignments,
+          [ ("inboundSsoAssignments" Core..=) Core.<$> inboundSsoAssignments,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -3273,6 +3656,45 @@ instance Core.ToJSON ListMembershipsResponse where
           ]
       )
 
+-- | The response message for PoliciesService.ListPolicies.
+--
+-- /See:/ 'newListPoliciesResponse' smart constructor.
+data ListPoliciesResponse = ListPoliciesResponse
+  { -- | The pagination token to retrieve the next page of results. If this field is empty, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The results
+    policies :: (Core.Maybe [Policy])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListPoliciesResponse' with the minimum fields required to make a request.
+newListPoliciesResponse ::
+  ListPoliciesResponse
+newListPoliciesResponse =
+  ListPoliciesResponse
+    { nextPageToken = Core.Nothing,
+      policies = Core.Nothing
+    }
+
+instance Core.FromJSON ListPoliciesResponse where
+  parseJSON =
+    Core.withObject
+      "ListPoliciesResponse"
+      ( \o ->
+          ListPoliciesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "policies")
+      )
+
+instance Core.ToJSON ListPoliciesResponse where
+  toJSON ListPoliciesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("policies" Core..=) Core.<$> policies
+          ]
+      )
+
 -- | Response message for UserInvitation listing request.
 --
 -- /See:/ 'newListUserInvitationsResponse' smart constructor.
@@ -3308,8 +3730,7 @@ instance Core.ToJSON ListUserInvitationsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("userInvitations" Core..=)
-              Core.<$> userInvitations
+            ("userInvitations" Core..=) Core.<$> userInvitations
           ]
       )
 
@@ -3325,20 +3746,18 @@ newtype LookupGroupNameResponse = LookupGroupNameResponse
 -- | Creates a value of 'LookupGroupNameResponse' with the minimum fields required to make a request.
 newLookupGroupNameResponse ::
   LookupGroupNameResponse
-newLookupGroupNameResponse = LookupGroupNameResponse {name = Core.Nothing}
+newLookupGroupNameResponse =
+  LookupGroupNameResponse {name = Core.Nothing}
 
 instance Core.FromJSON LookupGroupNameResponse where
   parseJSON =
     Core.withObject
       "LookupGroupNameResponse"
-      ( \o ->
-          LookupGroupNameResponse Core.<$> (o Core..:? "name")
-      )
+      (\o -> LookupGroupNameResponse Core.<$> (o Core..:? "name"))
 
 instance Core.ToJSON LookupGroupNameResponse where
   toJSON LookupGroupNameResponse {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | The response message for MembershipsService.LookupMembershipName.
 --
@@ -3359,15 +3778,11 @@ instance Core.FromJSON LookupMembershipNameResponse where
   parseJSON =
     Core.withObject
       "LookupMembershipNameResponse"
-      ( \o ->
-          LookupMembershipNameResponse
-            Core.<$> (o Core..:? "name")
-      )
+      (\o -> LookupMembershipNameResponse Core.<$> (o Core..:? "name"))
 
 instance Core.ToJSON LookupMembershipNameResponse where
   toJSON LookupMembershipNameResponse {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Message representing a transitive membership of a group.
 --
@@ -3412,8 +3827,7 @@ instance Core.ToJSON MemberRelation where
     Core.object
       ( Core.catMaybes
           [ ("member" Core..=) Core.<$> member,
-            ("preferredMemberKey" Core..=)
-              Core.<$> preferredMemberKey,
+            ("preferredMemberKey" Core..=) Core.<$> preferredMemberKey,
             ("relationType" Core..=) Core.<$> relationType,
             ("roles" Core..=) Core.<$> roles
           ]
@@ -3434,7 +3848,10 @@ data MemberRestriction = MemberRestriction
 newMemberRestriction ::
   MemberRestriction
 newMemberRestriction =
-  MemberRestriction {evaluation = Core.Nothing, query = Core.Nothing}
+  MemberRestriction
+    { evaluation = Core.Nothing,
+      query = Core.Nothing
+    }
 
 instance Core.FromJSON MemberRestriction where
   parseJSON =
@@ -3512,8 +3929,7 @@ instance Core.ToJSON Membership where
           [ ("createTime" Core..=) Core.<$> createTime,
             ("deliverySetting" Core..=) Core.<$> deliverySetting,
             ("name" Core..=) Core.<$> name,
-            ("preferredMemberKey" Core..=)
-              Core.<$> preferredMemberKey,
+            ("preferredMemberKey" Core..=) Core.<$> preferredMemberKey,
             ("roles" Core..=) Core.<$> roles,
             ("type" Core..=) Core.<$> type',
             ("updateTime" Core..=) Core.<$> updateTime
@@ -3524,7 +3940,7 @@ instance Core.ToJSON Membership where
 --
 -- /See:/ 'newMembershipAdjacencyList' smart constructor.
 data MembershipAdjacencyList = MembershipAdjacencyList
-  { -- | Each edge contains information about the member that belongs to this group. Note: Fields returned here will help identify the specific Membership resource (e.g name, preferred/member/key and role), but may not be a comprehensive list of all fields.
+  { -- | Each edge contains information about the member that belongs to this group. Note: Fields returned here will help identify the specific Membership resource (e.g @name@, @preferred_member_key@ and @role@), but may not be a comprehensive list of all fields.
     edges :: (Core.Maybe [Membership]),
     -- | Resource name of the group that the members belong to.
     group' :: (Core.Maybe Core.Text)
@@ -3535,7 +3951,10 @@ data MembershipAdjacencyList = MembershipAdjacencyList
 newMembershipAdjacencyList ::
   MembershipAdjacencyList
 newMembershipAdjacencyList =
-  MembershipAdjacencyList {edges = Core.Nothing, group' = Core.Nothing}
+  MembershipAdjacencyList
+    { edges = Core.Nothing,
+      group' = Core.Nothing
+    }
 
 instance Core.FromJSON MembershipAdjacencyList where
   parseJSON =
@@ -3543,7 +3962,8 @@ instance Core.FromJSON MembershipAdjacencyList where
       "MembershipAdjacencyList"
       ( \o ->
           MembershipAdjacencyList
-            Core.<$> (o Core..:? "edges") Core.<*> (o Core..:? "group")
+            Core.<$> (o Core..:? "edges")
+            Core.<*> (o Core..:? "group")
       )
 
 instance Core.ToJSON MembershipAdjacencyList where
@@ -3623,8 +4043,7 @@ instance Core.ToJSON MembershipRelation where
 --
 -- /See:/ 'newMembershipRelation_Labels' smart constructor.
 newtype MembershipRelation_Labels = MembershipRelation_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3641,13 +4060,11 @@ instance Core.FromJSON MembershipRelation_Labels where
     Core.withObject
       "MembershipRelation_Labels"
       ( \o ->
-          MembershipRelation_Labels
-            Core.<$> (Core.parseJSONObject o)
+          MembershipRelation_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON MembershipRelation_Labels where
-  toJSON MembershipRelation_Labels {..} =
-    Core.toJSON additional
+  toJSON MembershipRelation_Labels {..} = Core.toJSON additional
 
 -- | A membership role within the Cloud Identity Groups API. A @MembershipRole@ defines the privileges granted to a @Membership@.
 --
@@ -3709,25 +4126,17 @@ newMembershipRoleRestrictionEvaluation ::
 newMembershipRoleRestrictionEvaluation =
   MembershipRoleRestrictionEvaluation {state = Core.Nothing}
 
-instance
-  Core.FromJSON
-    MembershipRoleRestrictionEvaluation
-  where
+instance Core.FromJSON MembershipRoleRestrictionEvaluation where
   parseJSON =
     Core.withObject
       "MembershipRoleRestrictionEvaluation"
       ( \o ->
-          MembershipRoleRestrictionEvaluation
-            Core.<$> (o Core..:? "state")
+          MembershipRoleRestrictionEvaluation Core.<$> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    MembershipRoleRestrictionEvaluation
-  where
+instance Core.ToJSON MembershipRoleRestrictionEvaluation where
   toJSON MembershipRoleRestrictionEvaluation {..} =
-    Core.object
-      (Core.catMaybes [("state" Core..=) Core.<$> state])
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | The request message for MembershipsService.ModifyMembershipRoles.
 --
@@ -3769,8 +4178,7 @@ instance Core.ToJSON ModifyMembershipRolesRequest where
       ( Core.catMaybes
           [ ("addRoles" Core..=) Core.<$> addRoles,
             ("removeRoles" Core..=) Core.<$> removeRoles,
-            ("updateRolesParams" Core..=)
-              Core.<$> updateRolesParams
+            ("updateRolesParams" Core..=) Core.<$> updateRolesParams
           ]
       )
 
@@ -3794,16 +4202,13 @@ instance Core.FromJSON ModifyMembershipRolesResponse where
     Core.withObject
       "ModifyMembershipRolesResponse"
       ( \o ->
-          ModifyMembershipRolesResponse
-            Core.<$> (o Core..:? "membership")
+          ModifyMembershipRolesResponse Core.<$> (o Core..:? "membership")
       )
 
 instance Core.ToJSON ModifyMembershipRolesResponse where
   toJSON ModifyMembershipRolesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("membership" Core..=) Core.<$> membership]
-      )
+      (Core.catMaybes [("membership" Core..=) Core.<$> membership])
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -3817,7 +4222,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3873,21 +4278,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -3901,19 +4304,120 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
+
+-- | A Policy resource binds an instance of a single Setting with the scope of a PolicyQuery. The Setting instance will be applied to all entities that satisfy the query.
+--
+-- /See:/ 'newPolicy' smart constructor.
+data Policy = Policy
+  { -- | Immutable. Customer that the Policy belongs to. The value is in the format \'customers\/{customerId}\'. The @customerId@ must begin with \"C\" To find your customer ID in Admin Console see https:\/\/support.google.com\/a\/answer\/10070793.
+    customer :: (Core.Maybe Core.Text),
+    -- | Output only. Identifier. The <https://cloud.google.com/apis/design/resource_names resource name> of the Policy. Format: policies\/{policy}.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. The PolicyQuery the Setting applies to.
+    policyQuery :: (Core.Maybe PolicyQuery),
+    -- | Required. The Setting configured by this Policy.
+    setting :: (Core.Maybe Setting),
+    -- | Output only. The type of the policy.
+    type' :: (Core.Maybe Policy_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Policy' with the minimum fields required to make a request.
+newPolicy ::
+  Policy
+newPolicy =
+  Policy
+    { customer = Core.Nothing,
+      name = Core.Nothing,
+      policyQuery = Core.Nothing,
+      setting = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON Policy where
+  parseJSON =
+    Core.withObject
+      "Policy"
+      ( \o ->
+          Policy
+            Core.<$> (o Core..:? "customer")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "policyQuery")
+            Core.<*> (o Core..:? "setting")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON Policy where
+  toJSON Policy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customer" Core..=) Core.<$> customer,
+            ("name" Core..=) Core.<$> name,
+            ("policyQuery" Core..=) Core.<$> policyQuery,
+            ("setting" Core..=) Core.<$> setting,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | PolicyQuery
+--
+-- /See:/ 'newPolicyQuery' smart constructor.
+data PolicyQuery = PolicyQuery
+  { -- | Immutable. The group that the query applies to. This field is only set if there is a single value for group that satisfies all clauses of the query. If no group applies, this will be the empty string.
+    group' :: (Core.Maybe Core.Text),
+    -- | Required. Immutable. Non-empty default. The OrgUnit the query applies to. This field is only set if there is a single value for org_unit that satisfies all clauses of the query.
+    orgUnit :: (Core.Maybe Core.Text),
+    -- | Immutable. The CEL query that defines which entities the Policy applies to (ex. a User entity). For details about CEL see https:\/\/opensource.google.com\/projects\/cel. The OrgUnits the Policy applies to are represented by a clause like so: entity.org/units.exists(org/unit, org/unit.org/unit/id == orgUnitId(\'{orgUnitId}\')) The Group the Policy applies to are represented by a clause like so: entity.groups.exists(group, group.group/id == groupId(\'{groupId}\')) The Licenses the Policy applies to are represented by a clause like so: entity.licenses.exists(license, license in [\'\/product\/{productId}\/sku\/{skuId}\']) The above clauses can be present in any combination, and used in conjunction with the &&, || and ! operators. The org_unit and group fields below are helper fields that contain the corresponding value(s) as the query to make the query easier to use.
+    query :: (Core.Maybe Core.Text),
+    -- | Output only. The decimal sort order of this PolicyQuery. The value is relative to all other policies with the same setting type for the customer. (There are no duplicates within this set).
+    sortOrder :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PolicyQuery' with the minimum fields required to make a request.
+newPolicyQuery ::
+  PolicyQuery
+newPolicyQuery =
+  PolicyQuery
+    { group' = Core.Nothing,
+      orgUnit = Core.Nothing,
+      query = Core.Nothing,
+      sortOrder = Core.Nothing
+    }
+
+instance Core.FromJSON PolicyQuery where
+  parseJSON =
+    Core.withObject
+      "PolicyQuery"
+      ( \o ->
+          PolicyQuery
+            Core.<$> (o Core..:? "group")
+            Core.<*> (o Core..:? "orgUnit")
+            Core.<*> (o Core..:? "query")
+            Core.<*> (o Core..:? "sortOrder")
+      )
+
+instance Core.ToJSON PolicyQuery where
+  toJSON PolicyQuery {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("group" Core..=) Core.<$> group',
+            ("orgUnit" Core..=) Core.<$> orgUnit,
+            ("query" Core..=) Core.<$> query,
+            ("sortOrder" Core..=) Core.<$> sortOrder
+          ]
+      )
 
 -- | The evaluated state of this restriction.
 --
@@ -3927,20 +4431,18 @@ newtype RestrictionEvaluation = RestrictionEvaluation
 -- | Creates a value of 'RestrictionEvaluation' with the minimum fields required to make a request.
 newRestrictionEvaluation ::
   RestrictionEvaluation
-newRestrictionEvaluation = RestrictionEvaluation {state = Core.Nothing}
+newRestrictionEvaluation =
+  RestrictionEvaluation {state = Core.Nothing}
 
 instance Core.FromJSON RestrictionEvaluation where
   parseJSON =
     Core.withObject
       "RestrictionEvaluation"
-      ( \o ->
-          RestrictionEvaluation Core.<$> (o Core..:? "state")
-      )
+      (\o -> RestrictionEvaluation Core.<$> (o Core..:? "state"))
 
 instance Core.ToJSON RestrictionEvaluation where
   toJSON RestrictionEvaluation {..} =
-    Core.object
-      (Core.catMaybes [("state" Core..=) Core.<$> state])
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | Evaluations of restrictions applied to parent group on this membership.
 --
@@ -3955,7 +4457,10 @@ newtype RestrictionEvaluations = RestrictionEvaluations
 newRestrictionEvaluations ::
   RestrictionEvaluations
 newRestrictionEvaluations =
-  RestrictionEvaluations {memberRestrictionEvaluation = Core.Nothing}
+  RestrictionEvaluations
+    { memberRestrictionEvaluation =
+        Core.Nothing
+    }
 
 instance Core.FromJSON RestrictionEvaluations where
   parseJSON =
@@ -3993,16 +4498,12 @@ instance Core.FromJSON RsaPublicKeyInfo where
   parseJSON =
     Core.withObject
       "RsaPublicKeyInfo"
-      ( \o ->
-          RsaPublicKeyInfo Core.<$> (o Core..:? "keySize")
-      )
+      (\o -> RsaPublicKeyInfo Core.<$> (o Core..:? "keySize"))
 
 instance Core.ToJSON RsaPublicKeyInfo where
   toJSON RsaPublicKeyInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("keySize" Core..=) Core.<$> keySize]
-      )
+      (Core.catMaybes [("keySize" Core..=) Core.<$> keySize])
 
 -- | SAML IDP (identity provider) configuration.
 --
@@ -4046,11 +4547,9 @@ instance Core.ToJSON SamlIdpConfig where
   toJSON SamlIdpConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("changePasswordUri" Core..=)
-              Core.<$> changePasswordUri,
+          [ ("changePasswordUri" Core..=) Core.<$> changePasswordUri,
             ("entityId" Core..=) Core.<$> entityId,
-            ("logoutRedirectUri" Core..=)
-              Core.<$> logoutRedirectUri,
+            ("logoutRedirectUri" Core..=) Core.<$> logoutRedirectUri,
             ("singleSignOnServiceUri" Core..=)
               Core.<$> singleSignOnServiceUri
           ]
@@ -4114,18 +4613,13 @@ instance Core.FromJSON SamlSsoInfo where
   parseJSON =
     Core.withObject
       "SamlSsoInfo"
-      ( \o ->
-          SamlSsoInfo
-            Core.<$> (o Core..:? "inboundSamlSsoProfile")
-      )
+      (\o -> SamlSsoInfo Core.<$> (o Core..:? "inboundSamlSsoProfile"))
 
 instance Core.ToJSON SamlSsoInfo where
   toJSON SamlSsoInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inboundSamlSsoProfile" Core..=)
-              Core.<$> inboundSamlSsoProfile
-          ]
+          [("inboundSamlSsoProfile" Core..=) Core.<$> inboundSamlSsoProfile]
       )
 
 -- | The response message for MembershipsService.SearchDirectGroups.
@@ -4182,7 +4676,10 @@ data SearchGroupsResponse = SearchGroupsResponse
 newSearchGroupsResponse ::
   SearchGroupsResponse
 newSearchGroupsResponse =
-  SearchGroupsResponse {groups = Core.Nothing, nextPageToken = Core.Nothing}
+  SearchGroupsResponse
+    { groups = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON SearchGroupsResponse where
   parseJSON =
@@ -4262,10 +4759,7 @@ newSearchTransitiveMembershipsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SearchTransitiveMembershipsResponse
-  where
+instance Core.FromJSON SearchTransitiveMembershipsResponse where
   parseJSON =
     Core.withObject
       "SearchTransitiveMembershipsResponse"
@@ -4275,10 +4769,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    SearchTransitiveMembershipsResponse
-  where
+instance Core.ToJSON SearchTransitiveMembershipsResponse where
   toJSON SearchTransitiveMembershipsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -4302,7 +4793,10 @@ data SecuritySettings = SecuritySettings
 newSecuritySettings ::
   SecuritySettings
 newSecuritySettings =
-  SecuritySettings {memberRestriction = Core.Nothing, name = Core.Nothing}
+  SecuritySettings
+    { memberRestriction = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON SecuritySettings where
   parseJSON =
@@ -4318,8 +4812,7 @@ instance Core.ToJSON SecuritySettings where
   toJSON SecuritySettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("memberRestriction" Core..=)
-              Core.<$> memberRestriction,
+          [ ("memberRestriction" Core..=) Core.<$> memberRestriction,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -4344,6 +4837,65 @@ instance Core.FromJSON SendUserInvitationRequest where
 instance Core.ToJSON SendUserInvitationRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | Setting
+--
+-- /See:/ 'newSetting' smart constructor.
+data Setting = Setting
+  { -- | Required. Immutable. The type of the Setting. .
+    type' :: (Core.Maybe Core.Text),
+    -- | Required. The value of the Setting.
+    value :: (Core.Maybe Setting_Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Setting' with the minimum fields required to make a request.
+newSetting ::
+  Setting
+newSetting = Setting {type' = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON Setting where
+  parseJSON =
+    Core.withObject
+      "Setting"
+      ( \o ->
+          Setting Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON Setting where
+  toJSON Setting {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("type" Core..=) Core.<$> type',
+            ("value" Core..=) Core.<$> value
+          ]
+      )
+
+-- | Required. The value of the Setting.
+--
+-- /See:/ 'newSetting_Value' smart constructor.
+newtype Setting_Value = Setting_Value
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Setting_Value' with the minimum fields required to make a request.
+newSetting_Value ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Setting_Value
+newSetting_Value additional =
+  Setting_Value {additional = additional}
+
+instance Core.FromJSON Setting_Value where
+  parseJSON =
+    Core.withObject
+      "Setting_Value"
+      (\o -> Setting_Value Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Setting_Value where
+  toJSON Setting_Value {..} = Core.toJSON additional
+
 -- | Controls sign-in behavior.
 --
 -- /See:/ 'newSignInBehavior' smart constructor.
@@ -4356,24 +4908,20 @@ newtype SignInBehavior = SignInBehavior
 -- | Creates a value of 'SignInBehavior' with the minimum fields required to make a request.
 newSignInBehavior ::
   SignInBehavior
-newSignInBehavior = SignInBehavior {redirectCondition = Core.Nothing}
+newSignInBehavior =
+  SignInBehavior {redirectCondition = Core.Nothing}
 
 instance Core.FromJSON SignInBehavior where
   parseJSON =
     Core.withObject
       "SignInBehavior"
-      ( \o ->
-          SignInBehavior
-            Core.<$> (o Core..:? "redirectCondition")
-      )
+      (\o -> SignInBehavior Core.<$> (o Core..:? "redirectCondition"))
 
 instance Core.ToJSON SignInBehavior where
   toJSON SignInBehavior {..} =
     Core.object
       ( Core.catMaybes
-          [ ("redirectCondition" Core..=)
-              Core.<$> redirectCondition
-          ]
+          [("redirectCondition" Core..=) Core.<$> redirectCondition]
       )
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
@@ -4393,7 +4941,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -4429,19 +4981,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Message representing the role of a TransitiveMembership.
 --
@@ -4455,21 +5005,18 @@ newtype TransitiveMembershipRole = TransitiveMembershipRole
 -- | Creates a value of 'TransitiveMembershipRole' with the minimum fields required to make a request.
 newTransitiveMembershipRole ::
   TransitiveMembershipRole
-newTransitiveMembershipRole = TransitiveMembershipRole {role' = Core.Nothing}
+newTransitiveMembershipRole =
+  TransitiveMembershipRole {role' = Core.Nothing}
 
 instance Core.FromJSON TransitiveMembershipRole where
   parseJSON =
     Core.withObject
       "TransitiveMembershipRole"
-      ( \o ->
-          TransitiveMembershipRole
-            Core.<$> (o Core..:? "role")
-      )
+      (\o -> TransitiveMembershipRole Core.<$> (o Core..:? "role"))
 
 instance Core.ToJSON TransitiveMembershipRole where
   toJSON TransitiveMembershipRole {..} =
-    Core.object
-      (Core.catMaybes [("role" Core..=) Core.<$> role'])
+    Core.object (Core.catMaybes [("role" Core..=) Core.<$> role'])
 
 -- | Metadata for UpdateGroup LRO.
 --
@@ -4494,7 +5041,10 @@ instance Core.ToJSON UpdateGroupMetadata where
 -- | LRO response metadata for InboundSamlSsoProfilesService.UpdateInboundSamlSsoProfile.
 --
 -- /See:/ 'newUpdateInboundSamlSsoProfileOperationMetadata' smart constructor.
-data UpdateInboundSamlSsoProfileOperationMetadata = UpdateInboundSamlSsoProfileOperationMetadata
+newtype UpdateInboundSamlSsoProfileOperationMetadata = UpdateInboundSamlSsoProfileOperationMetadata
+  { -- | State of this Operation Will be \"awaiting-multi-party-approval\" when the operation is deferred due to the target customer having enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>.
+    state :: (Core.Maybe Core.Text)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'UpdateInboundSamlSsoProfileOperationMetadata' with the minimum fields required to make a request.
@@ -4502,24 +5052,22 @@ newUpdateInboundSamlSsoProfileOperationMetadata ::
   UpdateInboundSamlSsoProfileOperationMetadata
 newUpdateInboundSamlSsoProfileOperationMetadata =
   UpdateInboundSamlSsoProfileOperationMetadata
+    { state =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    UpdateInboundSamlSsoProfileOperationMetadata
-  where
+instance Core.FromJSON UpdateInboundSamlSsoProfileOperationMetadata where
   parseJSON =
     Core.withObject
       "UpdateInboundSamlSsoProfileOperationMetadata"
       ( \o ->
-          Core.pure
-            UpdateInboundSamlSsoProfileOperationMetadata
+          UpdateInboundSamlSsoProfileOperationMetadata
+            Core.<$> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    UpdateInboundSamlSsoProfileOperationMetadata
-  where
-  toJSON = Core.const Core.emptyObject
+instance Core.ToJSON UpdateInboundSamlSsoProfileOperationMetadata where
+  toJSON UpdateInboundSamlSsoProfileOperationMetadata {..} =
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | LRO response metadata for InboundSsoAssignmentsService.UpdateInboundSsoAssignment.
 --
@@ -4533,22 +5081,13 @@ newUpdateInboundSsoAssignmentOperationMetadata ::
 newUpdateInboundSsoAssignmentOperationMetadata =
   UpdateInboundSsoAssignmentOperationMetadata
 
-instance
-  Core.FromJSON
-    UpdateInboundSsoAssignmentOperationMetadata
-  where
+instance Core.FromJSON UpdateInboundSsoAssignmentOperationMetadata where
   parseJSON =
     Core.withObject
       "UpdateInboundSsoAssignmentOperationMetadata"
-      ( \o ->
-          Core.pure
-            UpdateInboundSsoAssignmentOperationMetadata
-      )
+      (\o -> Core.pure UpdateInboundSsoAssignmentOperationMetadata)
 
-instance
-  Core.ToJSON
-    UpdateInboundSsoAssignmentOperationMetadata
-  where
+instance Core.ToJSON UpdateInboundSsoAssignmentOperationMetadata where
   toJSON = Core.const Core.emptyObject
 
 -- | Metadata for UpdateMembership LRO.
@@ -4642,9 +5181,7 @@ instance Core.FromJSON UserInvitation where
       "UserInvitation"
       ( \o ->
           UserInvitation
-            Core.<$> ( o Core..:? "mailsSentCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "mailsSentCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "updateTime")
@@ -4654,7 +5191,8 @@ instance Core.ToJSON UserInvitation where
   toJSON UserInvitation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mailsSentCount" Core..=) Core.. Core.AsText
+          [ ("mailsSentCount" Core..=)
+              Core.. Core.AsText
               Core.<$> mailsSentCount,
             ("name" Core..=) Core.<$> name,
             ("state" Core..=) Core.<$> state,

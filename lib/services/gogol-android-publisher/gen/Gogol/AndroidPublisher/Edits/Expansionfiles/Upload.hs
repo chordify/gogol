@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Expansionfiles.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Expansionfiles.Upload
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.expansionfiles.upload@ method which the
 -- 'AndroidPublisherEditsExpansionfilesUpload' request conforms to.
@@ -63,35 +61,29 @@ type AndroidPublisherEditsExpansionfilesUploadResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              ExpansionFilesUploadResponse
+    Core.:> Core.Post '[Core.JSON] ExpansionFilesUploadResponse
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "edits"
-      Core.:> Core.Capture "editId" Core.Text
-      Core.:> "apks"
-      Core.:> Core.Capture "apkVersionCode" Core.Int32
-      Core.:> "expansionFiles"
-      Core.:> Core.Capture
-                "expansionFileType"
-                EditsExpansionfilesUploadExpansionFileType
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post
-                '[Core.JSON]
-                ExpansionFilesUploadResponse
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "edits"
+    Core.:> Core.Capture "editId" Core.Text
+    Core.:> "apks"
+    Core.:> Core.Capture "apkVersionCode" Core.Int32
+    Core.:> "expansionFiles"
+    Core.:> Core.Capture
+              "expansionFileType"
+              EditsExpansionfilesUploadExpansionFileType
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] ExpansionFilesUploadResponse
 
 -- | Uploads a new expansion file and attaches to the specified APK.
 --
@@ -129,18 +121,22 @@ newAndroidPublisherEditsExpansionfilesUpload ::
   -- |  Package name of the app. See 'packageName'.
   Core.Text ->
   AndroidPublisherEditsExpansionfilesUpload
-newAndroidPublisherEditsExpansionfilesUpload apkVersionCode editId expansionFileType packageName =
-  AndroidPublisherEditsExpansionfilesUpload
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      apkVersionCode = apkVersionCode,
-      callback = Core.Nothing,
-      editId = editId,
-      expansionFileType = expansionFileType,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherEditsExpansionfilesUpload
+  apkVersionCode
+  editId
+  expansionFileType
+  packageName =
+    AndroidPublisherEditsExpansionfilesUpload
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        apkVersionCode = apkVersionCode,
+        callback = Core.Nothing,
+        editId = editId,
+        expansionFileType = expansionFileType,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -152,46 +148,38 @@ instance
   type
     Scopes AndroidPublisherEditsExpansionfilesUpload =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherEditsExpansionfilesUpload {..} =
-      go
-        packageName
-        editId
-        apkVersionCode
-        expansionFileType
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsExpansionfilesUploadResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherEditsExpansionfilesUpload {..} =
+    go
+      packageName
+      editId
+      apkVersionCode
+      expansionFileType
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherEditsExpansionfilesUploadResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaUpload
-        AndroidPublisherEditsExpansionfilesUpload
-    )
+    (Core.MediaUpload AndroidPublisherEditsExpansionfilesUpload)
   where
   type
     Rs
-      ( Core.MediaUpload
-          AndroidPublisherEditsExpansionfilesUpload
-      ) =
+      (Core.MediaUpload AndroidPublisherEditsExpansionfilesUpload) =
       ExpansionFilesUploadResponse
   type
     Scopes
-      ( Core.MediaUpload
-          AndroidPublisherEditsExpansionfilesUpload
-      ) =
+      (Core.MediaUpload AndroidPublisherEditsExpansionfilesUpload) =
       Core.Scopes AndroidPublisherEditsExpansionfilesUpload
   requestClient
     ( Core.MediaUpload
@@ -216,7 +204,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsExpansionfilesUploadResource
+                Core.Proxy AndroidPublisherEditsExpansionfilesUploadResource
             )
             Core.mempty

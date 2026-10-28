@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Campaigns.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Campaigns.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.campaigns.patch@ method which the
 -- 'DFAReportingCampaignsPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingCampaignsPatch = DFAReportingCampaignsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Campaign ID.
+    -- | Required. Campaign ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: Campaign,
@@ -85,7 +83,7 @@ data DFAReportingCampaignsPatch = DFAReportingCampaignsPatch
 
 -- | Creates a value of 'DFAReportingCampaignsPatch' with the minimum fields required to make a request.
 newDFAReportingCampaignsPatch ::
-  -- |  Campaign ID. See 'id'.
+  -- |  Required. Campaign ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   Campaign ->
@@ -104,10 +102,7 @@ newDFAReportingCampaignsPatch id payload profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingCampaignsPatch
-  where
+instance Core.GoogleRequest DFAReportingCampaignsPatch where
   type Rs DFAReportingCampaignsPatch = Campaign
   type
     Scopes DFAReportingCampaignsPatch =
@@ -127,7 +122,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCampaignsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCampaignsPatchResource)
           Core.mempty

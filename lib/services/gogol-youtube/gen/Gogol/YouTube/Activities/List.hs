@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Activities.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Activities.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.activities.list@ method which the
@@ -63,9 +61,7 @@ type YouTubeActivitiesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ActivityListResponse
+    Core.:> Core.Get '[Core.JSON] ActivityListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -77,23 +73,17 @@ data YouTubeActivitiesList = YouTubeActivitiesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     channelId :: (Core.Maybe Core.Text),
-    -- |
     home :: (Core.Maybe Core.Bool),
     -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set.
     maxResults :: Core.Word32,
-    -- |
     mine :: (Core.Maybe Core.Bool),
     -- | The /pageToken/ parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
     pageToken :: (Core.Maybe Core.Text),
     -- | The /part/ parameter specifies a comma-separated list of one or more activity resource properties that the API response will include. If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set /part=snippet/, the API response will also contain all of those nested properties.
     part :: [Core.Text],
-    -- |
     publishedAfter :: (Core.Maybe Core.DateTime),
-    -- |
     publishedBefore :: (Core.Maybe Core.DateTime),
-    -- |
     regionCode :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -129,10 +119,7 @@ instance Core.GoogleRequest YouTubeActivitiesList where
   type Rs YouTubeActivitiesList = ActivityListResponse
   type
     Scopes YouTubeActivitiesList =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Readonly
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Readonly]
   requestClient YouTubeActivitiesList {..} =
     go
       part
@@ -154,7 +141,5 @@ instance Core.GoogleRequest YouTubeActivitiesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeActivitiesListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeActivitiesListResource)
           Core.mempty

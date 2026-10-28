@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsReseller.Internal.Sum
@@ -48,10 +46,18 @@ module Gogol.AppsReseller.Internal.Sum
         SubscriptionsDeleteDeletionType_TransferToDirect,
         ..
       ),
+
+    -- * SubscriptionsInsertAction
+    SubscriptionsInsertAction
+      ( SubscriptionsInsertAction_ActionUnspecified,
+        SubscriptionsInsertAction_Buy,
+        SubscriptionsInsertAction_Switch,
+        ..
+      ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -125,7 +131,6 @@ newtype SubscriptionsDeleteDeletionType = SubscriptionsDeleteDeletionType {fromS
       Core.FromJSONKey
     )
 
--- |
 pattern SubscriptionsDeleteDeletionType_DeletionTypeUndefined :: SubscriptionsDeleteDeletionType
 pattern SubscriptionsDeleteDeletionType_DeletionTypeUndefined = SubscriptionsDeleteDeletionType "deletion_type_undefined"
 
@@ -142,4 +147,36 @@ pattern SubscriptionsDeleteDeletionType_TransferToDirect = SubscriptionsDeleteDe
   SubscriptionsDeleteDeletionType_Cancel,
   SubscriptionsDeleteDeletionType_TransferToDirect,
   SubscriptionsDeleteDeletionType
+  #-}
+
+-- | The intented insert action. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
+newtype SubscriptionsInsertAction = SubscriptionsInsertAction {fromSubscriptionsInsertAction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Auto determines whether to create new subscription, upgrade or downagrade existing subscription or transfer the existing subscription
+pattern SubscriptionsInsertAction_ActionUnspecified :: SubscriptionsInsertAction
+pattern SubscriptionsInsertAction_ActionUnspecified = SubscriptionsInsertAction "actionUnspecified"
+
+-- | Create new subscription
+pattern SubscriptionsInsertAction_Buy :: SubscriptionsInsertAction
+pattern SubscriptionsInsertAction_Buy = SubscriptionsInsertAction "buy"
+
+-- | Switch existing subscription to another sku (upgrade\/downgrade)
+pattern SubscriptionsInsertAction_Switch :: SubscriptionsInsertAction
+pattern SubscriptionsInsertAction_Switch = SubscriptionsInsertAction "switch"
+
+{-# COMPLETE
+  SubscriptionsInsertAction_ActionUnspecified,
+  SubscriptionsInsertAction_Buy,
+  SubscriptionsInsertAction_Switch,
+  SubscriptionsInsertAction
   #-}

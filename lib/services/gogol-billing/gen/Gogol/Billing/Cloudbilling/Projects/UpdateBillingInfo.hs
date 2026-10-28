@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,16 +17,17 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets or updates the billing account associated with a project. You specify the new billing account by setting the @billing_account_name@ in the @ProjectBillingInfo@ resource to the resource name of a billing account. Associating a project with an open billing account enables billing on the project and allows charges for resource usage. If the project already had a billing account, this method changes the billing account used for resource usage charges. /Note:/ Incurred charges that have not yet been reported in the transaction history of the Google Cloud Console might be billed to the new billing account, even if the charge occurred before the new billing account was assigned to the project. The current authenticated user must have ownership privileges for both the <https://cloud.google.com/docs/permissions-overview#h.bgs0oxofvnoo project> and the <https://cloud.google.com/billing/docs/how-to/billing-access billing account>. You can disable billing on the project by setting the @billing_account_name@ field to
 -- empty. This action disassociates the current billing account from the project. Any billable activity of your in-use services will stop, and your application could stop functioning as expected. Any unbilled charges to date will be billed to the previously associated account. The current authenticated user must be either an owner of the project or an owner of the billing account for the project. Note that associating a project with a /closed/ billing account will have much the same effect as disabling billing on the project: any paid resources used by the project will be shut down. Thus, unless you wish to disable billing, you should always call this method with the name of an /open/ billing account.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.projects.updateBillingInfo@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.projects.updateBillingInfo@.
 module Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
   ( -- * Resource
     CloudbillingProjectsUpdateBillingInfoResource,
@@ -41,7 +39,7 @@ module Gogol.Billing.Cloudbilling.Projects.UpdateBillingInfo
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.projects.updateBillingInfo@ method which the
 -- 'CloudbillingProjectsUpdateBillingInfo' request conforms to.
@@ -98,35 +96,26 @@ newCloudbillingProjectsUpdateBillingInfo name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingProjectsUpdateBillingInfo
-  where
-  type
-    Rs CloudbillingProjectsUpdateBillingInfo =
-      ProjectBillingInfo
+instance Core.GoogleRequest CloudbillingProjectsUpdateBillingInfo where
+  type Rs CloudbillingProjectsUpdateBillingInfo = ProjectBillingInfo
   type
     Scopes CloudbillingProjectsUpdateBillingInfo =
-      '[ CloudBilling'FullControl,
-         CloudPlatform'FullControl
-       ]
-  requestClient
-    CloudbillingProjectsUpdateBillingInfo {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        billingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudbillingProjectsUpdateBillingInfoResource
-            )
-            Core.mempty
+      '[CloudBilling'FullControl, CloudPlatform'FullControl]
+  requestClient CloudbillingProjectsUpdateBillingInfo {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      billingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudbillingProjectsUpdateBillingInfoResource
+          )
+          Core.mempty

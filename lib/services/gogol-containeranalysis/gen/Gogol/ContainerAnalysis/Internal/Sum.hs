@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ContainerAnalysis.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ContainerAnalysis.Internal.Sum
@@ -73,6 +71,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
       ( CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
         CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW,
         CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH,
+        CVSS_AttackComplexity_ATTACKCOMPLEXITYMEDIUM,
         ..
       ),
 
@@ -101,6 +100,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
         CVSS_AvailabilityImpact_IMPACTHIGH,
         CVSS_AvailabilityImpact_IMPACTLOW,
         CVSS_AvailabilityImpact_IMPACTNONE,
+        CVSS_AvailabilityImpact_IMPACTPARTIAL,
+        CVSS_AvailabilityImpact_IMPACTCOMPLETE,
         ..
       ),
 
@@ -110,6 +111,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
         CVSS_ConfidentialityImpact_IMPACTHIGH,
         CVSS_ConfidentialityImpact_IMPACTLOW,
         CVSS_ConfidentialityImpact_IMPACTNONE,
+        CVSS_ConfidentialityImpact_IMPACTPARTIAL,
+        CVSS_ConfidentialityImpact_IMPACTCOMPLETE,
         ..
       ),
 
@@ -119,6 +122,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
         CVSS_IntegrityImpact_IMPACTHIGH,
         CVSS_IntegrityImpact_IMPACTLOW,
         CVSS_IntegrityImpact_IMPACTNONE,
+        CVSS_IntegrityImpact_IMPACTPARTIAL,
+        CVSS_IntegrityImpact_IMPACTCOMPLETE,
         ..
       ),
 
@@ -277,6 +282,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
     ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET,
         ..
       ),
 
@@ -306,6 +312,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_32,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_8,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_32,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2MEDIUM,
         ..
       ),
 
@@ -321,6 +328,8 @@ module Gogol.ContainerAnalysis.Internal.Sum
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
         ..
       ),
 
@@ -360,6 +369,16 @@ module Gogol.ContainerAnalysis.Internal.Sum
       ( ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
         ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
+        ..
+      ),
+
+    -- * ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+    ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+      ( ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_Gsutil,
+        ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_GCSFETCHER,
         ..
       ),
 
@@ -386,6 +405,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         DiscoveryNote_AnalysisKind_Compliance,
         DiscoveryNote_AnalysisKind_DSSEATTESTATION,
         DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT,
+        DiscoveryNote_AnalysisKind_SBOMREFERENCE,
         ..
       ),
 
@@ -453,6 +473,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         Note_Kind_Compliance,
         Note_Kind_DSSEATTESTATION,
         Note_Kind_VULNERABILITYASSESSMENT,
+        Note_Kind_SBOMREFERENCE,
         ..
       ),
 
@@ -470,6 +491,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
         Occurrence_Kind_Compliance,
         Occurrence_Kind_DSSEATTESTATION,
         Occurrence_Kind_VULNERABILITYASSESSMENT,
+        Occurrence_Kind_SBOMREFERENCE,
         ..
       ),
 
@@ -508,6 +530,14 @@ module Gogol.ContainerAnalysis.Internal.Sum
         Remediation_RemediationType_NONEAVAILABLE,
         Remediation_RemediationType_VENDORFIX,
         Remediation_RemediationType_Workaround,
+        ..
+      ),
+
+    -- * SBOMStatus_SbomState
+    SBOMStatus_SbomState
+      ( SBOMStatus_SbomState_SBOMSTATEUNSPECIFIED,
+        SBOMStatus_SbomState_Pending,
+        SBOMStatus_SbomState_Complete,
         ..
       ),
 
@@ -581,7 +611,7 @@ module Gogol.ContainerAnalysis.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -773,22 +803,23 @@ newtype CVSS_AttackComplexity = CVSS_AttackComplexity {fromCVSS_AttackComplexity
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED = CVSS_AttackComplexity "ATTACK_COMPLEXITY_UNSPECIFIED"
 
--- |
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW = CVSS_AttackComplexity "ATTACK_COMPLEXITY_LOW"
 
--- |
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH :: CVSS_AttackComplexity
 pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSS_AttackComplexity "ATTACK_COMPLEXITY_HIGH"
+
+pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYMEDIUM :: CVSS_AttackComplexity
+pattern CVSS_AttackComplexity_ATTACKCOMPLEXITYMEDIUM = CVSS_AttackComplexity "ATTACK_COMPLEXITY_MEDIUM"
 
 {-# COMPLETE
   CVSS_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED,
   CVSS_AttackComplexity_ATTACKCOMPLEXITYLOW,
   CVSS_AttackComplexity_ATTACKCOMPLEXITYHIGH,
+  CVSS_AttackComplexity_ATTACKCOMPLEXITYMEDIUM,
   CVSS_AttackComplexity
   #-}
 
@@ -805,23 +836,18 @@ newtype CVSS_AttackVector = CVSS_AttackVector {fromCVSS_AttackVector :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_AttackVector_ATTACKVECTORUNSPECIFIED :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORUNSPECIFIED = CVSS_AttackVector "ATTACK_VECTOR_UNSPECIFIED"
 
--- |
 pattern CVSS_AttackVector_ATTACKVECTORNETWORK :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORNETWORK = CVSS_AttackVector "ATTACK_VECTOR_NETWORK"
 
--- |
 pattern CVSS_AttackVector_ATTACKVECTORADJACENT :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORADJACENT = CVSS_AttackVector "ATTACK_VECTOR_ADJACENT"
 
--- |
 pattern CVSS_AttackVector_ATTACKVECTORLOCAL :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORLOCAL = CVSS_AttackVector "ATTACK_VECTOR_LOCAL"
 
--- |
 pattern CVSS_AttackVector_ATTACKVECTORPHYSICAL :: CVSS_AttackVector
 pattern CVSS_AttackVector_ATTACKVECTORPHYSICAL = CVSS_AttackVector "ATTACK_VECTOR_PHYSICAL"
 
@@ -846,19 +872,15 @@ newtype CVSS_Authentication = CVSS_Authentication {fromCVSS_Authentication :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_Authentication_AUTHENTICATIONUNSPECIFIED :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONUNSPECIFIED = CVSS_Authentication "AUTHENTICATION_UNSPECIFIED"
 
--- |
 pattern CVSS_Authentication_AUTHENTICATIONMULTIPLE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONMULTIPLE = CVSS_Authentication "AUTHENTICATION_MULTIPLE"
 
--- |
 pattern CVSS_Authentication_AUTHENTICATIONSINGLE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONSINGLE = CVSS_Authentication "AUTHENTICATION_SINGLE"
 
--- |
 pattern CVSS_Authentication_AUTHENTICATIONNONE :: CVSS_Authentication
 pattern CVSS_Authentication_AUTHENTICATIONNONE = CVSS_Authentication "AUTHENTICATION_NONE"
 
@@ -882,27 +904,31 @@ newtype CVSS_AvailabilityImpact = CVSS_AvailabilityImpact {fromCVSS_Availability
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_AvailabilityImpact_IMPACTUNSPECIFIED :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTUNSPECIFIED = CVSS_AvailabilityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSS_AvailabilityImpact_IMPACTHIGH :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTHIGH = CVSS_AvailabilityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSS_AvailabilityImpact_IMPACTLOW :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTLOW = CVSS_AvailabilityImpact "IMPACT_LOW"
 
--- |
 pattern CVSS_AvailabilityImpact_IMPACTNONE :: CVSS_AvailabilityImpact
 pattern CVSS_AvailabilityImpact_IMPACTNONE = CVSS_AvailabilityImpact "IMPACT_NONE"
+
+pattern CVSS_AvailabilityImpact_IMPACTPARTIAL :: CVSS_AvailabilityImpact
+pattern CVSS_AvailabilityImpact_IMPACTPARTIAL = CVSS_AvailabilityImpact "IMPACT_PARTIAL"
+
+pattern CVSS_AvailabilityImpact_IMPACTCOMPLETE :: CVSS_AvailabilityImpact
+pattern CVSS_AvailabilityImpact_IMPACTCOMPLETE = CVSS_AvailabilityImpact "IMPACT_COMPLETE"
 
 {-# COMPLETE
   CVSS_AvailabilityImpact_IMPACTUNSPECIFIED,
   CVSS_AvailabilityImpact_IMPACTHIGH,
   CVSS_AvailabilityImpact_IMPACTLOW,
   CVSS_AvailabilityImpact_IMPACTNONE,
+  CVSS_AvailabilityImpact_IMPACTPARTIAL,
+  CVSS_AvailabilityImpact_IMPACTCOMPLETE,
   CVSS_AvailabilityImpact
   #-}
 
@@ -918,27 +944,31 @@ newtype CVSS_ConfidentialityImpact = CVSS_ConfidentialityImpact {fromCVSS_Confid
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED = CVSS_ConfidentialityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSS_ConfidentialityImpact_IMPACTHIGH :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTHIGH = CVSS_ConfidentialityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSS_ConfidentialityImpact_IMPACTLOW :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTLOW = CVSS_ConfidentialityImpact "IMPACT_LOW"
 
--- |
 pattern CVSS_ConfidentialityImpact_IMPACTNONE :: CVSS_ConfidentialityImpact
 pattern CVSS_ConfidentialityImpact_IMPACTNONE = CVSS_ConfidentialityImpact "IMPACT_NONE"
+
+pattern CVSS_ConfidentialityImpact_IMPACTPARTIAL :: CVSS_ConfidentialityImpact
+pattern CVSS_ConfidentialityImpact_IMPACTPARTIAL = CVSS_ConfidentialityImpact "IMPACT_PARTIAL"
+
+pattern CVSS_ConfidentialityImpact_IMPACTCOMPLETE :: CVSS_ConfidentialityImpact
+pattern CVSS_ConfidentialityImpact_IMPACTCOMPLETE = CVSS_ConfidentialityImpact "IMPACT_COMPLETE"
 
 {-# COMPLETE
   CVSS_ConfidentialityImpact_IMPACTUNSPECIFIED,
   CVSS_ConfidentialityImpact_IMPACTHIGH,
   CVSS_ConfidentialityImpact_IMPACTLOW,
   CVSS_ConfidentialityImpact_IMPACTNONE,
+  CVSS_ConfidentialityImpact_IMPACTPARTIAL,
+  CVSS_ConfidentialityImpact_IMPACTCOMPLETE,
   CVSS_ConfidentialityImpact
   #-}
 
@@ -954,27 +984,31 @@ newtype CVSS_IntegrityImpact = CVSS_IntegrityImpact {fromCVSS_IntegrityImpact ::
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_IntegrityImpact_IMPACTUNSPECIFIED :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTUNSPECIFIED = CVSS_IntegrityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSS_IntegrityImpact_IMPACTHIGH :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTHIGH = CVSS_IntegrityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSS_IntegrityImpact_IMPACTLOW :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTLOW = CVSS_IntegrityImpact "IMPACT_LOW"
 
--- |
 pattern CVSS_IntegrityImpact_IMPACTNONE :: CVSS_IntegrityImpact
 pattern CVSS_IntegrityImpact_IMPACTNONE = CVSS_IntegrityImpact "IMPACT_NONE"
+
+pattern CVSS_IntegrityImpact_IMPACTPARTIAL :: CVSS_IntegrityImpact
+pattern CVSS_IntegrityImpact_IMPACTPARTIAL = CVSS_IntegrityImpact "IMPACT_PARTIAL"
+
+pattern CVSS_IntegrityImpact_IMPACTCOMPLETE :: CVSS_IntegrityImpact
+pattern CVSS_IntegrityImpact_IMPACTCOMPLETE = CVSS_IntegrityImpact "IMPACT_COMPLETE"
 
 {-# COMPLETE
   CVSS_IntegrityImpact_IMPACTUNSPECIFIED,
   CVSS_IntegrityImpact_IMPACTHIGH,
   CVSS_IntegrityImpact_IMPACTLOW,
   CVSS_IntegrityImpact_IMPACTNONE,
+  CVSS_IntegrityImpact_IMPACTPARTIAL,
+  CVSS_IntegrityImpact_IMPACTCOMPLETE,
   CVSS_IntegrityImpact
   #-}
 
@@ -990,19 +1024,15 @@ newtype CVSS_PrivilegesRequired = CVSS_PrivilegesRequired {fromCVSS_PrivilegesRe
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_UNSPECIFIED"
 
--- |
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDNONE = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_NONE"
 
--- |
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDLOW = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_LOW"
 
--- |
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH :: CVSS_PrivilegesRequired
 pattern CVSS_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSS_PrivilegesRequired "PRIVILEGES_REQUIRED_HIGH"
 
@@ -1026,15 +1056,12 @@ newtype CVSS_Scope = CVSS_Scope {fromCVSS_Scope :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_Scope_SCOPEUNSPECIFIED :: CVSS_Scope
 pattern CVSS_Scope_SCOPEUNSPECIFIED = CVSS_Scope "SCOPE_UNSPECIFIED"
 
--- |
 pattern CVSS_Scope_SCOPEUNCHANGED :: CVSS_Scope
 pattern CVSS_Scope_SCOPEUNCHANGED = CVSS_Scope "SCOPE_UNCHANGED"
 
--- |
 pattern CVSS_Scope_SCOPECHANGED :: CVSS_Scope
 pattern CVSS_Scope_SCOPECHANGED = CVSS_Scope "SCOPE_CHANGED"
 
@@ -1057,15 +1084,12 @@ newtype CVSS_UserInteraction = CVSS_UserInteraction {fromCVSS_UserInteraction ::
       Core.FromJSONKey
     )
 
--- |
 pattern CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONUNSPECIFIED = CVSS_UserInteraction "USER_INTERACTION_UNSPECIFIED"
 
--- |
 pattern CVSS_UserInteraction_USERINTERACTIONNONE :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONNONE = CVSS_UserInteraction "USER_INTERACTION_NONE"
 
--- |
 pattern CVSS_UserInteraction_USERINTERACTIONREQUIRED :: CVSS_UserInteraction
 pattern CVSS_UserInteraction_USERINTERACTIONREQUIRED = CVSS_UserInteraction "USER_INTERACTION_REQUIRED"
 
@@ -1088,15 +1112,12 @@ newtype CVSSv3_AttackComplexity = CVSSv3_AttackComplexity {fromCVSSv3_AttackComp
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYUNSPECIFIED = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_UNSPECIFIED"
 
--- |
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYLOW = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_LOW"
 
--- |
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH :: CVSSv3_AttackComplexity
 pattern CVSSv3_AttackComplexity_ATTACKCOMPLEXITYHIGH = CVSSv3_AttackComplexity "ATTACK_COMPLEXITY_HIGH"
 
@@ -1120,23 +1141,18 @@ newtype CVSSv3_AttackVector = CVSSv3_AttackVector {fromCVSSv3_AttackVector :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORUNSPECIFIED = CVSSv3_AttackVector "ATTACK_VECTOR_UNSPECIFIED"
 
--- |
 pattern CVSSv3_AttackVector_ATTACKVECTORNETWORK :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORNETWORK = CVSSv3_AttackVector "ATTACK_VECTOR_NETWORK"
 
--- |
 pattern CVSSv3_AttackVector_ATTACKVECTORADJACENT :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORADJACENT = CVSSv3_AttackVector "ATTACK_VECTOR_ADJACENT"
 
--- |
 pattern CVSSv3_AttackVector_ATTACKVECTORLOCAL :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORLOCAL = CVSSv3_AttackVector "ATTACK_VECTOR_LOCAL"
 
--- |
 pattern CVSSv3_AttackVector_ATTACKVECTORPHYSICAL :: CVSSv3_AttackVector
 pattern CVSSv3_AttackVector_ATTACKVECTORPHYSICAL = CVSSv3_AttackVector "ATTACK_VECTOR_PHYSICAL"
 
@@ -1161,19 +1177,15 @@ newtype CVSSv3_AvailabilityImpact = CVSSv3_AvailabilityImpact {fromCVSSv3_Availa
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTUNSPECIFIED = CVSSv3_AvailabilityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSSv3_AvailabilityImpact_IMPACTHIGH :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTHIGH = CVSSv3_AvailabilityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSSv3_AvailabilityImpact_IMPACTLOW :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTLOW = CVSSv3_AvailabilityImpact "IMPACT_LOW"
 
--- |
 pattern CVSSv3_AvailabilityImpact_IMPACTNONE :: CVSSv3_AvailabilityImpact
 pattern CVSSv3_AvailabilityImpact_IMPACTNONE = CVSSv3_AvailabilityImpact "IMPACT_NONE"
 
@@ -1197,19 +1209,15 @@ newtype CVSSv3_ConfidentialityImpact = CVSSv3_ConfidentialityImpact {fromCVSSv3_
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTUNSPECIFIED = CVSSv3_ConfidentialityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSSv3_ConfidentialityImpact_IMPACTHIGH :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTHIGH = CVSSv3_ConfidentialityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSSv3_ConfidentialityImpact_IMPACTLOW :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTLOW = CVSSv3_ConfidentialityImpact "IMPACT_LOW"
 
--- |
 pattern CVSSv3_ConfidentialityImpact_IMPACTNONE :: CVSSv3_ConfidentialityImpact
 pattern CVSSv3_ConfidentialityImpact_IMPACTNONE = CVSSv3_ConfidentialityImpact "IMPACT_NONE"
 
@@ -1233,19 +1241,15 @@ newtype CVSSv3_IntegrityImpact = CVSSv3_IntegrityImpact {fromCVSSv3_IntegrityImp
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTUNSPECIFIED = CVSSv3_IntegrityImpact "IMPACT_UNSPECIFIED"
 
--- |
 pattern CVSSv3_IntegrityImpact_IMPACTHIGH :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTHIGH = CVSSv3_IntegrityImpact "IMPACT_HIGH"
 
--- |
 pattern CVSSv3_IntegrityImpact_IMPACTLOW :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTLOW = CVSSv3_IntegrityImpact "IMPACT_LOW"
 
--- |
 pattern CVSSv3_IntegrityImpact_IMPACTNONE :: CVSSv3_IntegrityImpact
 pattern CVSSv3_IntegrityImpact_IMPACTNONE = CVSSv3_IntegrityImpact "IMPACT_NONE"
 
@@ -1269,19 +1273,15 @@ newtype CVSSv3_PrivilegesRequired = CVSSv3_PrivilegesRequired {fromCVSSv3_Privil
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDUNSPECIFIED = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_UNSPECIFIED"
 
--- |
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDNONE = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_NONE"
 
--- |
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDLOW = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_LOW"
 
--- |
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH :: CVSSv3_PrivilegesRequired
 pattern CVSSv3_PrivilegesRequired_PRIVILEGESREQUIREDHIGH = CVSSv3_PrivilegesRequired "PRIVILEGES_REQUIRED_HIGH"
 
@@ -1305,15 +1305,12 @@ newtype CVSSv3_Scope = CVSSv3_Scope {fromCVSSv3_Scope :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_Scope_SCOPEUNSPECIFIED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPEUNSPECIFIED = CVSSv3_Scope "SCOPE_UNSPECIFIED"
 
--- |
 pattern CVSSv3_Scope_SCOPEUNCHANGED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPEUNCHANGED = CVSSv3_Scope "SCOPE_UNCHANGED"
 
--- |
 pattern CVSSv3_Scope_SCOPECHANGED :: CVSSv3_Scope
 pattern CVSSv3_Scope_SCOPECHANGED = CVSSv3_Scope "SCOPE_CHANGED"
 
@@ -1336,15 +1333,12 @@ newtype CVSSv3_UserInteraction = CVSSv3_UserInteraction {fromCVSSv3_UserInteract
       Core.FromJSONKey
     )
 
--- |
 pattern CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONUNSPECIFIED = CVSSv3_UserInteraction "USER_INTERACTION_UNSPECIFIED"
 
--- |
 pattern CVSSv3_UserInteraction_USERINTERACTIONNONE :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONNONE = CVSSv3_UserInteraction "USER_INTERACTION_NONE"
 
--- |
 pattern CVSSv3_UserInteraction_USERINTERACTIONREQUIRED :: CVSSv3_UserInteraction
 pattern CVSSv3_UserInteraction_USERINTERACTIONREQUIRED = CVSSv3_UserInteraction "USER_INTERACTION_REQUIRED"
 
@@ -1611,17 +1605,22 @@ newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucke
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior "DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED"
 
--- | Bucket is located in user-owned project in the same region as the build. The builder service account must have access to create and write to GCS buckets in the build project.
+-- | Bucket is located in user-owned project in the same region as the build. The builder service account must have access to create and write to Cloud Storage buckets in the build project.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior "REGIONAL_USER_OWNED_BUCKET"
+
+-- | Bucket is located in a Google-owned project and is not regionalized.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior "LEGACY_BUCKET"
 
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_DEFAULTLOGSBUCKETBEHAVIORUNSPECIFIED,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_REGIONALUSEROWNEDBUCKET,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior_LEGACYBUCKET,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
   #-}
 
--- | Option to define build log streaming behavior to Google Cloud Storage.
+-- | Option to define build log streaming behavior to Cloud Storage.
 newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption {fromContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1638,11 +1637,11 @@ newtype ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOpti
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMDEFAULT = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption "STREAM_DEFAULT"
 
--- | Build logs should be streamed to Google Cloud Storage.
+-- | Build logs should be streamed to Cloud Storage.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMON :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMON = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption "STREAM_ON"
 
--- | Build logs should not be streamed to Google Cloud Storage; they will be written when the build is completed.
+-- | Build logs should not be streamed to Cloud Storage; they will be written when the build is completed.
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMOFF :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption_STREAMOFF = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption "STREAM_OFF"
 
@@ -1733,12 +1732,17 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_H
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_32 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_32 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType "E2_HIGHCPU_32"
 
+-- | E2 machine with 1 CPU.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2MEDIUM :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2MEDIUM = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType "E2_MEDIUM"
+
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_Unspecified,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_8,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_N1_HIGHCPU_32,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_8,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2_HIGHCPU_32,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType_E2MEDIUM,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_MachineType
   #-}
 
@@ -1793,10 +1797,20 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenance
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "GO_MODULE_H1"
+
+-- | Use a sha512 hash.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 :: ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512 = ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem "SHA512"
+
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_MD5,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_GO_MODULE_H1,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem_SHA512,
   ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
   #-}
 
@@ -1956,11 +1970,53 @@ pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256 = Containera
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
 pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "MD5"
 
+-- | Dirhash of a Go module\'s source code which is then hex-encoded.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "GO_MODULE_H1"
+
+-- | Use a sha512 hash.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512 :: ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512 = ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type "SHA512"
+
 {-# COMPLETE
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_None,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA256,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_MD5,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_GO_MODULE_H1,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type_SHA512,
   ContaineranalysisGoogleDevtoolsCloudbuildV1Hash_Type
+  #-}
+
+-- | Optional. Option to specify the tool to fetch the source file for the build.
+newtype ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher = ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher {fromContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified defaults to GSUTIL.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED :: ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED = ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher "SOURCE_FETCHER_UNSPECIFIED"
+
+-- | Use the \"gsutil\" tool to download the source file.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_Gsutil :: ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_Gsutil = ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher "GSUTIL"
+
+-- | Use the Cloud Storage Fetcher tool to download the source file.
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_GCSFETCHER :: ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+pattern ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_GCSFETCHER = ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher "GCS_FETCHER"
+
+{-# COMPLETE
+  ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_SOURCEFETCHERUNSPECIFIED,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_Gsutil,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher_GCSFETCHER,
+  ContaineranalysisGoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
   #-}
 
 -- | Platform hosting this deployment.
@@ -2061,6 +2117,10 @@ pattern DiscoveryNote_AnalysisKind_DSSEATTESTATION = DiscoveryNote_AnalysisKind 
 pattern DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT :: DiscoveryNote_AnalysisKind
 pattern DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT = DiscoveryNote_AnalysisKind "VULNERABILITY_ASSESSMENT"
 
+-- | This represents an SBOM Reference.
+pattern DiscoveryNote_AnalysisKind_SBOMREFERENCE :: DiscoveryNote_AnalysisKind
+pattern DiscoveryNote_AnalysisKind_SBOMREFERENCE = DiscoveryNote_AnalysisKind "SBOM_REFERENCE"
+
 {-# COMPLETE
   DiscoveryNote_AnalysisKind_NOTEKINDUNSPECIFIED,
   DiscoveryNote_AnalysisKind_Vulnerability,
@@ -2074,6 +2134,7 @@ pattern DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT = DiscoveryNote_Analy
   DiscoveryNote_AnalysisKind_Compliance,
   DiscoveryNote_AnalysisKind_DSSEATTESTATION,
   DiscoveryNote_AnalysisKind_VULNERABILITYASSESSMENT,
+  DiscoveryNote_AnalysisKind_SBOMREFERENCE,
   DiscoveryNote_AnalysisKind
   #-}
 
@@ -2348,6 +2409,10 @@ pattern Note_Kind_DSSEATTESTATION = Note_Kind "DSSE_ATTESTATION"
 pattern Note_Kind_VULNERABILITYASSESSMENT :: Note_Kind
 pattern Note_Kind_VULNERABILITYASSESSMENT = Note_Kind "VULNERABILITY_ASSESSMENT"
 
+-- | This represents an SBOM Reference.
+pattern Note_Kind_SBOMREFERENCE :: Note_Kind
+pattern Note_Kind_SBOMREFERENCE = Note_Kind "SBOM_REFERENCE"
+
 {-# COMPLETE
   Note_Kind_NOTEKINDUNSPECIFIED,
   Note_Kind_Vulnerability,
@@ -2361,6 +2426,7 @@ pattern Note_Kind_VULNERABILITYASSESSMENT = Note_Kind "VULNERABILITY_ASSESSMENT"
   Note_Kind_Compliance,
   Note_Kind_DSSEATTESTATION,
   Note_Kind_VULNERABILITYASSESSMENT,
+  Note_Kind_SBOMREFERENCE,
   Note_Kind
   #-}
 
@@ -2425,6 +2491,10 @@ pattern Occurrence_Kind_DSSEATTESTATION = Occurrence_Kind "DSSE_ATTESTATION"
 pattern Occurrence_Kind_VULNERABILITYASSESSMENT :: Occurrence_Kind
 pattern Occurrence_Kind_VULNERABILITYASSESSMENT = Occurrence_Kind "VULNERABILITY_ASSESSMENT"
 
+-- | This represents an SBOM Reference.
+pattern Occurrence_Kind_SBOMREFERENCE :: Occurrence_Kind
+pattern Occurrence_Kind_SBOMREFERENCE = Occurrence_Kind "SBOM_REFERENCE"
+
 {-# COMPLETE
   Occurrence_Kind_NOTEKINDUNSPECIFIED,
   Occurrence_Kind_Vulnerability,
@@ -2438,6 +2508,7 @@ pattern Occurrence_Kind_VULNERABILITYASSESSMENT = Occurrence_Kind "VULNERABILITY
   Occurrence_Kind_Compliance,
   Occurrence_Kind_DSSEATTESTATION,
   Occurrence_Kind_VULNERABILITYASSESSMENT,
+  Occurrence_Kind_SBOMREFERENCE,
   Occurrence_Kind
   #-}
 
@@ -2599,6 +2670,38 @@ pattern Remediation_RemediationType_Workaround = Remediation_RemediationType "WO
   Remediation_RemediationType
   #-}
 
+-- | The progress of the SBOM generation.
+newtype SBOMStatus_SbomState = SBOMStatus_SbomState {fromSBOMStatus_SbomState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default unknown state.
+pattern SBOMStatus_SbomState_SBOMSTATEUNSPECIFIED :: SBOMStatus_SbomState
+pattern SBOMStatus_SbomState_SBOMSTATEUNSPECIFIED = SBOMStatus_SbomState "SBOM_STATE_UNSPECIFIED"
+
+-- | SBOM scanning is pending.
+pattern SBOMStatus_SbomState_Pending :: SBOMStatus_SbomState
+pattern SBOMStatus_SbomState_Pending = SBOMStatus_SbomState "PENDING"
+
+-- | SBOM scanning has completed.
+pattern SBOMStatus_SbomState_Complete :: SBOMStatus_SbomState
+pattern SBOMStatus_SbomState_Complete = SBOMStatus_SbomState "COMPLETE"
+
+{-# COMPLETE
+  SBOMStatus_SbomState_SBOMSTATEUNSPECIFIED,
+  SBOMStatus_SbomState_Pending,
+  SBOMStatus_SbomState_Complete,
+  SBOMStatus_SbomState
+  #-}
+
 -- | Required. Distinguishes between sentinel MIN\/MAX versions and normal versions.
 newtype Version_Kind = Version_Kind {fromVersion_Kind :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2691,15 +2794,12 @@ newtype VulnerabilityNote_CvssVersion = VulnerabilityNote_CvssVersion {fromVulne
       Core.FromJSONKey
     )
 
--- |
 pattern VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED :: VulnerabilityNote_CvssVersion
 pattern VulnerabilityNote_CvssVersion_CVSSVERSIONUNSPECIFIED = VulnerabilityNote_CvssVersion "CVSS_VERSION_UNSPECIFIED"
 
--- |
 pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_2 :: VulnerabilityNote_CvssVersion
 pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_2 = VulnerabilityNote_CvssVersion "CVSS_VERSION_2"
 
--- |
 pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_3 :: VulnerabilityNote_CvssVersion
 pattern VulnerabilityNote_CvssVersion_CVSS_VERSION_3 = VulnerabilityNote_CvssVersion "CVSS_VERSION_3"
 
@@ -2770,15 +2870,12 @@ newtype VulnerabilityOccurrence_CvssVersion = VulnerabilityOccurrence_CvssVersio
       Core.FromJSONKey
     )
 
--- |
 pattern VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED :: VulnerabilityOccurrence_CvssVersion
 pattern VulnerabilityOccurrence_CvssVersion_CVSSVERSIONUNSPECIFIED = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_UNSPECIFIED"
 
--- |
 pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2 :: VulnerabilityOccurrence_CvssVersion
 pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_2 = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_2"
 
--- |
 pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3 :: VulnerabilityOccurrence_CvssVersion
 pattern VulnerabilityOccurrence_CvssVersion_CVSS_VERSION_3 = VulnerabilityOccurrence_CvssVersion "CVSS_VERSION_3"
 

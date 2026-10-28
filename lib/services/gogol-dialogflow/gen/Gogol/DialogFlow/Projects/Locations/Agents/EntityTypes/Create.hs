@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.EntityTypes.Create
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.entityTypes.create@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEntityTypesCreate' request conforms to.
@@ -55,12 +53,8 @@ type DialogFlowProjectsLocationsAgentsEntityTypesCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3EntityType
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3EntityType
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3EntityType
+    Core.:> Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3EntityType
 
 -- | Creates an entity type in the specified agent. Note: You should always train a flow prior to sending it queries. See the <https://cloud.google.com/dialogflow/cx/docs/concept/training training documentation>.
 --
@@ -92,29 +86,30 @@ newDialogFlowProjectsLocationsAgentsEntityTypesCreate ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3EntityType ->
   DialogFlowProjectsLocationsAgentsEntityTypesCreate
-newDialogFlowProjectsLocationsAgentsEntityTypesCreate parent payload =
-  DialogFlowProjectsLocationsAgentsEntityTypesCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      languageCode = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsEntityTypesCreate
+  parent
+  payload =
+    DialogFlowProjectsLocationsAgentsEntityTypesCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        languageCode = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DialogFlowProjectsLocationsAgentsEntityTypesCreate
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsEntityTypesCreate =
+    Rs DialogFlowProjectsLocationsAgentsEntityTypesCreate =
       GoogleCloudDialogflowCxV3EntityType
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsEntityTypesCreate =
+    Scopes DialogFlowProjectsLocationsAgentsEntityTypesCreate =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
   requestClient
     DialogFlowProjectsLocationsAgentsEntityTypesCreate {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Games.Internal.Product
@@ -134,6 +132,10 @@ module Gogol.Games.Internal.Product
     EventUpdateResponse (..),
     newEventUpdateResponse,
 
+    -- * GamePlayerToken
+    GamePlayerToken (..),
+    newGamePlayerToken,
+
     -- * GamesAchievementIncrement
     GamesAchievementIncrement (..),
     newGamesAchievementIncrement,
@@ -141,6 +143,14 @@ module Gogol.Games.Internal.Product
     -- * GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- * GeneratePlayGroupingApiTokenResponse
+    GeneratePlayGroupingApiTokenResponse (..),
+    newGeneratePlayGroupingApiTokenResponse,
+
+    -- * GenerateRecallPlayGroupingApiTokenResponse
+    GenerateRecallPlayGroupingApiTokenResponse (..),
+    newGenerateRecallPlayGroupingApiTokenResponse,
 
     -- * GetMultipleApplicationPlayerIdsResponse
     GetMultipleApplicationPlayerIdsResponse (..),
@@ -186,9 +196,21 @@ module Gogol.Games.Internal.Product
     LeaderboardScores (..),
     newLeaderboardScores,
 
+    -- * LinkPersonaRequest
+    LinkPersonaRequest (..),
+    newLinkPersonaRequest,
+
+    -- * LinkPersonaResponse
+    LinkPersonaResponse (..),
+    newLinkPersonaResponse,
+
     -- * MetagameConfig
     MetagameConfig (..),
     newMetagameConfig,
+
+    -- * PlayGroupingApiToken
+    PlayGroupingApiToken (..),
+    newPlayGroupingApiToken,
 
     -- * Player
     Player (..),
@@ -254,6 +276,30 @@ module Gogol.Games.Internal.Product
     ProfileSettings (..),
     newProfileSettings,
 
+    -- * RecallToken
+    RecallToken (..),
+    newRecallToken,
+
+    -- * ResetPersonaRequest
+    ResetPersonaRequest (..),
+    newResetPersonaRequest,
+
+    -- * ResetPersonaResponse
+    ResetPersonaResponse (..),
+    newResetPersonaResponse,
+
+    -- * RetrieveDeveloperGamesLastPlayerTokenResponse
+    RetrieveDeveloperGamesLastPlayerTokenResponse (..),
+    newRetrieveDeveloperGamesLastPlayerTokenResponse,
+
+    -- * RetrieveGamesPlayerTokensResponse
+    RetrieveGamesPlayerTokensResponse (..),
+    newRetrieveGamesPlayerTokensResponse,
+
+    -- * RetrievePlayerTokensResponse
+    RetrievePlayerTokensResponse (..),
+    newRetrievePlayerTokensResponse,
+
     -- * RevisionCheckResponse
     RevisionCheckResponse (..),
     newRevisionCheckResponse,
@@ -281,11 +327,19 @@ module Gogol.Games.Internal.Product
     -- * StatsResponse
     StatsResponse (..),
     newStatsResponse,
+
+    -- * UnlinkPersonaRequest
+    UnlinkPersonaRequest (..),
+    newUnlinkPersonaRequest,
+
+    -- * UnlinkPersonaResponse
+    UnlinkPersonaResponse (..),
+    newUnlinkPersonaResponse,
   )
 where
 
 import Gogol.Games.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An achievement definition object.
 --
@@ -348,9 +402,7 @@ instance Core.FromJSON AchievementDefinition where
           AchievementDefinition
             Core.<$> (o Core..:? "achievementType")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "experiencePoints"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "experiencePoints" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "formattedTotalSteps")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "initialState")
@@ -367,13 +419,12 @@ instance Core.ToJSON AchievementDefinition where
   toJSON AchievementDefinition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("achievementType" Core..=)
-              Core.<$> achievementType,
+          [ ("achievementType" Core..=) Core.<$> achievementType,
             ("description" Core..=) Core.<$> description,
-            ("experiencePoints" Core..=) Core.. Core.AsText
+            ("experiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> experiencePoints,
-            ("formattedTotalSteps" Core..=)
-              Core.<$> formattedTotalSteps,
+            ("formattedTotalSteps" Core..=) Core.<$> formattedTotalSteps,
             ("id" Core..=) Core.<$> id,
             ("initialState" Core..=) Core.<$> initialState,
             ("isRevealedIconUrlDefault" Core..=)
@@ -384,8 +435,7 @@ instance Core.ToJSON AchievementDefinition where
             ("name" Core..=) Core.<$> name,
             ("revealedIconUrl" Core..=) Core.<$> revealedIconUrl,
             ("totalSteps" Core..=) Core.<$> totalSteps,
-            ("unlockedIconUrl" Core..=)
-              Core.<$> unlockedIconUrl
+            ("unlockedIconUrl" Core..=) Core.<$> unlockedIconUrl
           ]
       )
 
@@ -412,10 +462,7 @@ newAchievementDefinitionsListResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AchievementDefinitionsListResponse
-  where
+instance Core.FromJSON AchievementDefinitionsListResponse where
   parseJSON =
     Core.withObject
       "AchievementDefinitionsListResponse"
@@ -426,10 +473,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    AchievementDefinitionsListResponse
-  where
+instance Core.ToJSON AchievementDefinitionsListResponse where
   toJSON AchievementDefinitionsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -498,7 +542,10 @@ data AchievementRevealResponse = AchievementRevealResponse
 newAchievementRevealResponse ::
   AchievementRevealResponse
 newAchievementRevealResponse =
-  AchievementRevealResponse {currentState = Core.Nothing, kind = Core.Nothing}
+  AchievementRevealResponse
+    { currentState = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON AchievementRevealResponse where
   parseJSON =
@@ -542,10 +589,7 @@ newAchievementSetStepsAtLeastResponse =
       newlyUnlocked' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AchievementSetStepsAtLeastResponse
-  where
+instance Core.FromJSON AchievementSetStepsAtLeastResponse where
   parseJSON =
     Core.withObject
       "AchievementSetStepsAtLeastResponse"
@@ -556,10 +600,7 @@ instance
             Core.<*> (o Core..:? "newlyUnlocked")
       )
 
-instance
-  Core.ToJSON
-    AchievementSetStepsAtLeastResponse
-  where
+instance Core.ToJSON AchievementSetStepsAtLeastResponse where
   toJSON AchievementSetStepsAtLeastResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -584,7 +625,10 @@ data AchievementUnlockResponse = AchievementUnlockResponse
 newAchievementUnlockResponse ::
   AchievementUnlockResponse
 newAchievementUnlockResponse =
-  AchievementUnlockResponse {kind = Core.Nothing, newlyUnlocked' = Core.Nothing}
+  AchievementUnlockResponse
+    { kind = Core.Nothing,
+      newlyUnlocked' = Core.Nothing
+    }
 
 instance Core.FromJSON AchievementUnlockResponse where
   parseJSON =
@@ -620,18 +664,19 @@ data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest
 newAchievementUpdateMultipleRequest ::
   AchievementUpdateMultipleRequest
 newAchievementUpdateMultipleRequest =
-  AchievementUpdateMultipleRequest {kind = Core.Nothing, updates = Core.Nothing}
+  AchievementUpdateMultipleRequest
+    { kind = Core.Nothing,
+      updates = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    AchievementUpdateMultipleRequest
-  where
+instance Core.FromJSON AchievementUpdateMultipleRequest where
   parseJSON =
     Core.withObject
       "AchievementUpdateMultipleRequest"
       ( \o ->
           AchievementUpdateMultipleRequest
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "updates")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "updates")
       )
 
 instance Core.ToJSON AchievementUpdateMultipleRequest where
@@ -663,10 +708,7 @@ newAchievementUpdateMultipleResponse =
       updatedAchievements = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AchievementUpdateMultipleResponse
-  where
+instance Core.FromJSON AchievementUpdateMultipleResponse where
   parseJSON =
     Core.withObject
       "AchievementUpdateMultipleResponse"
@@ -676,16 +718,12 @@ instance
             Core.<*> (o Core..:? "updatedAchievements")
       )
 
-instance
-  Core.ToJSON
-    AchievementUpdateMultipleResponse
-  where
+instance Core.ToJSON AchievementUpdateMultipleResponse where
   toJSON AchievementUpdateMultipleResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("updatedAchievements" Core..=)
-              Core.<$> updatedAchievements
+            ("updatedAchievements" Core..=) Core.<$> updatedAchievements
           ]
       )
 
@@ -736,11 +774,9 @@ instance Core.ToJSON AchievementUpdateRequest where
     Core.object
       ( Core.catMaybes
           [ ("achievementId" Core..=) Core.<$> achievementId,
-            ("incrementPayload" Core..=)
-              Core.<$> incrementPayload,
+            ("incrementPayload" Core..=) Core.<$> incrementPayload,
             ("kind" Core..=) Core.<$> kind,
-            ("setStepsAtLeastPayload" Core..=)
-              Core.<$> setStepsAtLeastPayload,
+            ("setStepsAtLeastPayload" Core..=) Core.<$> setStepsAtLeastPayload,
             ("updateType" Core..=) Core.<$> updateType
           ]
       )
@@ -872,7 +908,8 @@ instance Core.FromJSON Application where
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "instances")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastUpdatedTimestamp"
+            Core.<*> ( o
+                         Core..:? "lastUpdatedTimestamp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "leaderboard_count")
@@ -884,8 +921,7 @@ instance Core.ToJSON Application where
   toJSON Application {..} =
     Core.object
       ( Core.catMaybes
-          [ ("achievement_count" Core..=)
-              Core.<$> achievementCount,
+          [ ("achievement_count" Core..=) Core.<$> achievementCount,
             ("assets" Core..=) Core.<$> assets,
             ("author" Core..=) Core.<$> author,
             ("category" Core..=) Core.<$> category,
@@ -894,10 +930,10 @@ instance Core.ToJSON Application where
             ("id" Core..=) Core.<$> id,
             ("instances" Core..=) Core.<$> instances,
             ("kind" Core..=) Core.<$> kind,
-            ("lastUpdatedTimestamp" Core..=) Core.. Core.AsText
+            ("lastUpdatedTimestamp" Core..=)
+              Core.. Core.AsText
               Core.<$> lastUpdatedTimestamp,
-            ("leaderboard_count" Core..=)
-              Core.<$> leaderboardCount,
+            ("leaderboard_count" Core..=) Core.<$> leaderboardCount,
             ("name" Core..=) Core.<$> name,
             ("themeColor" Core..=) Core.<$> themeColor
           ]
@@ -962,7 +998,10 @@ data ApplicationPlayerId = ApplicationPlayerId
 newApplicationPlayerId ::
   ApplicationPlayerId
 newApplicationPlayerId =
-  ApplicationPlayerId {applicationId = Core.Nothing, playerId = Core.Nothing}
+  ApplicationPlayerId
+    { applicationId = Core.Nothing,
+      playerId = Core.Nothing
+    }
 
 instance Core.FromJSON ApplicationPlayerId where
   parseJSON =
@@ -1021,8 +1060,7 @@ instance Core.ToJSON ApplicationVerifyResponse where
   toJSON ApplicationVerifyResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("alternate_player_id" Core..=)
-              Core.<$> alternatePlayerId,
+          [ ("alternate_player_id" Core..=) Core.<$> alternatePlayerId,
             ("kind" Core..=) Core.<$> kind,
             ("player_id" Core..=) Core.<$> playerId
           ]
@@ -1058,9 +1096,7 @@ instance Core.FromJSON Category where
       ( \o ->
           Category
             Core.<$> (o Core..:? "category")
-            Core.<*> ( o Core..:? "experiencePoints"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "experiencePoints" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
       )
 
@@ -1069,7 +1105,8 @@ instance Core.ToJSON Category where
     Core.object
       ( Core.catMaybes
           [ ("category" Core..=) Core.<$> category,
-            ("experiencePoints" Core..=) Core.. Core.AsText
+            ("experiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> experiencePoints,
             ("kind" Core..=) Core.<$> kind
           ]
@@ -1141,8 +1178,7 @@ instance Core.FromJSON EndPoint where
 
 instance Core.ToJSON EndPoint where
   toJSON EndPoint {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | A batch update failure resource.
 --
@@ -1202,7 +1238,8 @@ data EventChild = EventChild
 -- | Creates a value of 'EventChild' with the minimum fields required to make a request.
 newEventChild ::
   EventChild
-newEventChild = EventChild {childId = Core.Nothing, kind = Core.Nothing}
+newEventChild =
+  EventChild {childId = Core.Nothing, kind = Core.Nothing}
 
 instance Core.FromJSON EventChild where
   parseJSON =
@@ -1210,7 +1247,8 @@ instance Core.FromJSON EventChild where
       "EventChild"
       ( \o ->
           EventChild
-            Core.<$> (o Core..:? "childId") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "childId")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON EventChild where
@@ -1285,8 +1323,7 @@ instance Core.ToJSON EventDefinition where
             ("displayName" Core..=) Core.<$> displayName,
             ("id" Core..=) Core.<$> id,
             ("imageUrl" Core..=) Core.<$> imageUrl,
-            ("isDefaultImageUrl" Core..=)
-              Core.<$> isDefaultImageUrl,
+            ("isDefaultImageUrl" Core..=) Core.<$> isDefaultImageUrl,
             ("kind" Core..=) Core.<$> kind,
             ("visibility" Core..=) Core.<$> visibility
           ]
@@ -1366,10 +1403,9 @@ instance Core.FromJSON EventPeriodRange where
       ( \o ->
           EventPeriodRange
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "periodEndMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "periodStartMillis"
+            Core.<*> (o Core..:? "periodEndMillis" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "periodStartMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1379,9 +1415,11 @@ instance Core.ToJSON EventPeriodRange where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("periodEndMillis" Core..=) Core.. Core.AsText
+            ("periodEndMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> periodEndMillis,
-            ("periodStartMillis" Core..=) Core.. Core.AsText
+            ("periodStartMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> periodStartMillis
           ]
       )
@@ -1506,13 +1544,9 @@ instance Core.FromJSON EventRecordRequest where
       "EventRecordRequest"
       ( \o ->
           EventRecordRequest
-            Core.<$> ( o Core..:? "currentTimeMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "currentTimeMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "requestId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "requestId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "timePeriods")
       )
 
@@ -1520,11 +1554,11 @@ instance Core.ToJSON EventRecordRequest where
   toJSON EventRecordRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentTimeMillis" Core..=) Core.. Core.AsText
+          [ ("currentTimeMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> currentTimeMillis,
             ("kind" Core..=) Core.<$> kind,
-            ("requestId" Core..=) Core.. Core.AsText
-              Core.<$> requestId,
+            ("requestId" Core..=) Core.. Core.AsText Core.<$> requestId,
             ("timePeriods" Core..=) Core.<$> timePeriods
           ]
       )
@@ -1560,9 +1594,7 @@ instance Core.FromJSON EventUpdateRequest where
           EventUpdateRequest
             Core.<$> (o Core..:? "definitionId")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "updateCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "updateCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON EventUpdateRequest where
@@ -1571,8 +1603,7 @@ instance Core.ToJSON EventUpdateRequest where
       ( Core.catMaybes
           [ ("definitionId" Core..=) Core.<$> definitionId,
             ("kind" Core..=) Core.<$> kind,
-            ("updateCount" Core..=) Core.. Core.AsText
-              Core.<$> updateCount
+            ("updateCount" Core..=) Core.. Core.AsText Core.<$> updateCount
           ]
       )
 
@@ -1625,6 +1656,45 @@ instance Core.ToJSON EventUpdateResponse where
           ]
       )
 
+-- | Recall tokens for a game.
+--
+-- /See:/ 'newGamePlayerToken' smart constructor.
+data GamePlayerToken = GamePlayerToken
+  { -- | The application that this player identifier is for.
+    applicationId :: (Core.Maybe Core.Text),
+    -- | Recall token data.
+    recallToken :: (Core.Maybe RecallToken)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GamePlayerToken' with the minimum fields required to make a request.
+newGamePlayerToken ::
+  GamePlayerToken
+newGamePlayerToken =
+  GamePlayerToken
+    { applicationId = Core.Nothing,
+      recallToken = Core.Nothing
+    }
+
+instance Core.FromJSON GamePlayerToken where
+  parseJSON =
+    Core.withObject
+      "GamePlayerToken"
+      ( \o ->
+          GamePlayerToken
+            Core.<$> (o Core..:? "applicationId")
+            Core.<*> (o Core..:? "recallToken")
+      )
+
+instance Core.ToJSON GamePlayerToken where
+  toJSON GamePlayerToken {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("applicationId" Core..=) Core.<$> applicationId,
+            ("recallToken" Core..=) Core.<$> recallToken
+          ]
+      )
+
 -- | The payload to request to increment an achievement.
 --
 -- /See:/ 'newGamesAchievementIncrement' smart constructor.
@@ -1655,9 +1725,7 @@ instance Core.FromJSON GamesAchievementIncrement where
       ( \o ->
           GamesAchievementIncrement
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "requestId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "requestId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "steps")
       )
 
@@ -1666,8 +1734,7 @@ instance Core.ToJSON GamesAchievementIncrement where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("requestId" Core..=) Core.. Core.AsText
-              Core.<$> requestId,
+            ("requestId" Core..=) Core.. Core.AsText Core.<$> requestId,
             ("steps" Core..=) Core.<$> steps
           ]
       )
@@ -1687,28 +1754,82 @@ data GamesAchievementSetStepsAtLeast = GamesAchievementSetStepsAtLeast
 newGamesAchievementSetStepsAtLeast ::
   GamesAchievementSetStepsAtLeast
 newGamesAchievementSetStepsAtLeast =
-  GamesAchievementSetStepsAtLeast {kind = Core.Nothing, steps = Core.Nothing}
+  GamesAchievementSetStepsAtLeast
+    { kind = Core.Nothing,
+      steps = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GamesAchievementSetStepsAtLeast
-  where
+instance Core.FromJSON GamesAchievementSetStepsAtLeast where
   parseJSON =
     Core.withObject
       "GamesAchievementSetStepsAtLeast"
       ( \o ->
           GamesAchievementSetStepsAtLeast
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "steps")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "steps")
       )
 
 instance Core.ToJSON GamesAchievementSetStepsAtLeast where
   toJSON GamesAchievementSetStepsAtLeast {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("steps" Core..=) Core.<$> steps
-          ]
+          [("kind" Core..=) Core.<$> kind, ("steps" Core..=) Core.<$> steps]
       )
+
+-- | Response for the GeneratePlayGroupingApiToken RPC.
+--
+-- /See:/ 'newGeneratePlayGroupingApiTokenResponse' smart constructor.
+newtype GeneratePlayGroupingApiTokenResponse = GeneratePlayGroupingApiTokenResponse
+  { -- | Token for accessing the Play Grouping API.
+    token :: (Core.Maybe PlayGroupingApiToken)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeneratePlayGroupingApiTokenResponse' with the minimum fields required to make a request.
+newGeneratePlayGroupingApiTokenResponse ::
+  GeneratePlayGroupingApiTokenResponse
+newGeneratePlayGroupingApiTokenResponse =
+  GeneratePlayGroupingApiTokenResponse {token = Core.Nothing}
+
+instance Core.FromJSON GeneratePlayGroupingApiTokenResponse where
+  parseJSON =
+    Core.withObject
+      "GeneratePlayGroupingApiTokenResponse"
+      ( \o ->
+          GeneratePlayGroupingApiTokenResponse Core.<$> (o Core..:? "token")
+      )
+
+instance Core.ToJSON GeneratePlayGroupingApiTokenResponse where
+  toJSON GeneratePlayGroupingApiTokenResponse {..} =
+    Core.object (Core.catMaybes [("token" Core..=) Core.<$> token])
+
+-- | Response for the GenerateRecallPlayGroupingApiToken RPC.
+--
+-- /See:/ 'newGenerateRecallPlayGroupingApiTokenResponse' smart constructor.
+newtype GenerateRecallPlayGroupingApiTokenResponse = GenerateRecallPlayGroupingApiTokenResponse
+  { -- | Token for accessing the Play Grouping API.
+    token :: (Core.Maybe PlayGroupingApiToken)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GenerateRecallPlayGroupingApiTokenResponse' with the minimum fields required to make a request.
+newGenerateRecallPlayGroupingApiTokenResponse ::
+  GenerateRecallPlayGroupingApiTokenResponse
+newGenerateRecallPlayGroupingApiTokenResponse =
+  GenerateRecallPlayGroupingApiTokenResponse {token = Core.Nothing}
+
+instance Core.FromJSON GenerateRecallPlayGroupingApiTokenResponse where
+  parseJSON =
+    Core.withObject
+      "GenerateRecallPlayGroupingApiTokenResponse"
+      ( \o ->
+          GenerateRecallPlayGroupingApiTokenResponse
+            Core.<$> (o Core..:? "token")
+      )
+
+instance Core.ToJSON GenerateRecallPlayGroupingApiTokenResponse where
+  toJSON GenerateRecallPlayGroupingApiTokenResponse {..} =
+    Core.object (Core.catMaybes [("token" Core..=) Core.<$> token])
 
 -- | Response message for GetMultipleApplicationPlayerIds rpc.
 --
@@ -1725,10 +1846,7 @@ newGetMultipleApplicationPlayerIdsResponse ::
 newGetMultipleApplicationPlayerIdsResponse =
   GetMultipleApplicationPlayerIdsResponse {playerIds = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GetMultipleApplicationPlayerIdsResponse
-  where
+instance Core.FromJSON GetMultipleApplicationPlayerIdsResponse where
   parseJSON =
     Core.withObject
       "GetMultipleApplicationPlayerIdsResponse"
@@ -1737,15 +1855,10 @@ instance
             Core.<$> (o Core..:? "playerIds")
       )
 
-instance
-  Core.ToJSON
-    GetMultipleApplicationPlayerIdsResponse
-  where
+instance Core.ToJSON GetMultipleApplicationPlayerIdsResponse where
   toJSON GetMultipleApplicationPlayerIdsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("playerIds" Core..=) Core.<$> playerIds]
-      )
+      (Core.catMaybes [("playerIds" Core..=) Core.<$> playerIds])
 
 -- | An image asset object.
 --
@@ -1917,8 +2030,7 @@ instance Core.ToJSON InstanceAndroidDetails where
   toJSON InstanceAndroidDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enablePiracyCheck" Core..=)
-              Core.<$> enablePiracyCheck,
+          [ ("enablePiracyCheck" Core..=) Core.<$> enablePiracyCheck,
             ("kind" Core..=) Core.<$> kind,
             ("packageName" Core..=) Core.<$> packageName,
             ("preferred" Core..=) Core.<$> preferred
@@ -1979,14 +2091,11 @@ instance Core.ToJSON InstanceIosDetails where
   toJSON InstanceIosDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bundleIdentifier" Core..=)
-              Core.<$> bundleIdentifier,
+          [ ("bundleIdentifier" Core..=) Core.<$> bundleIdentifier,
             ("itunesAppId" Core..=) Core.<$> itunesAppId,
             ("kind" Core..=) Core.<$> kind,
-            ("preferredForIpad" Core..=)
-              Core.<$> preferredForIpad,
-            ("preferredForIphone" Core..=)
-              Core.<$> preferredForIphone,
+            ("preferredForIpad" Core..=) Core.<$> preferredForIpad,
+            ("preferredForIphone" Core..=) Core.<$> preferredForIphone,
             ("supportIpad" Core..=) Core.<$> supportIpad,
             ("supportIphone" Core..=) Core.<$> supportIphone
           ]
@@ -2088,8 +2197,7 @@ instance Core.ToJSON Leaderboard where
       ( Core.catMaybes
           [ ("iconUrl" Core..=) Core.<$> iconUrl,
             ("id" Core..=) Core.<$> id,
-            ("isIconUrlDefault" Core..=)
-              Core.<$> isIconUrlDefault,
+            ("isIconUrlDefault" Core..=) Core.<$> isIconUrlDefault,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
             ("order" Core..=) Core.<$> order
@@ -2147,15 +2255,12 @@ instance Core.FromJSON LeaderboardEntry where
             Core.<*> (o Core..:? "formattedScoreRank")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "player")
-            Core.<*> ( o Core..:? "scoreRank"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scoreRank" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scoreTag")
-            Core.<*> ( o Core..:? "scoreValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scoreValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "timeSpan")
-            Core.<*> ( o Core..:? "writeTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "writeTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -2165,17 +2270,15 @@ instance Core.ToJSON LeaderboardEntry where
     Core.object
       ( Core.catMaybes
           [ ("formattedScore" Core..=) Core.<$> formattedScore,
-            ("formattedScoreRank" Core..=)
-              Core.<$> formattedScoreRank,
+            ("formattedScoreRank" Core..=) Core.<$> formattedScoreRank,
             ("kind" Core..=) Core.<$> kind,
             ("player" Core..=) Core.<$> player,
-            ("scoreRank" Core..=) Core.. Core.AsText
-              Core.<$> scoreRank,
+            ("scoreRank" Core..=) Core.. Core.AsText Core.<$> scoreRank,
             ("scoreTag" Core..=) Core.<$> scoreTag,
-            ("scoreValue" Core..=) Core.. Core.AsText
-              Core.<$> scoreValue,
+            ("scoreValue" Core..=) Core.. Core.AsText Core.<$> scoreValue,
             ("timeSpan" Core..=) Core.<$> timeSpan,
-            ("writeTimestampMillis" Core..=) Core.. Core.AsText
+            ("writeTimestampMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> writeTimestampMillis
           ]
       )
@@ -2262,24 +2365,18 @@ instance Core.FromJSON LeaderboardScoreRank where
             Core.<$> (o Core..:? "formattedNumScores")
             Core.<*> (o Core..:? "formattedRank")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "numScores"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "rank"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numScores" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rank" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON LeaderboardScoreRank where
   toJSON LeaderboardScoreRank {..} =
     Core.object
       ( Core.catMaybes
-          [ ("formattedNumScores" Core..=)
-              Core.<$> formattedNumScores,
+          [ ("formattedNumScores" Core..=) Core.<$> formattedNumScores,
             ("formattedRank" Core..=) Core.<$> formattedRank,
             ("kind" Core..=) Core.<$> kind,
-            ("numScores" Core..=) Core.. Core.AsText
-              Core.<$> numScores,
+            ("numScores" Core..=) Core.. Core.AsText Core.<$> numScores,
             ("rank" Core..=) Core.. Core.AsText Core.<$> rank
           ]
       )
@@ -2325,9 +2422,7 @@ instance Core.FromJSON LeaderboardScores where
             Core.<$> (o Core..:? "items")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> ( o Core..:? "numScores"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numScores" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "playerScore")
             Core.<*> (o Core..:? "prevPageToken")
       )
@@ -2339,12 +2434,100 @@ instance Core.ToJSON LeaderboardScores where
           [ ("items" Core..=) Core.<$> items,
             ("kind" Core..=) Core.<$> kind,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("numScores" Core..=) Core.. Core.AsText
-              Core.<$> numScores,
+            ("numScores" Core..=) Core.. Core.AsText Core.<$> numScores,
             ("playerScore" Core..=) Core.<$> playerScore,
             ("prevPageToken" Core..=) Core.<$> prevPageToken
           ]
       )
+
+-- | Request to link an in-game account with a PGS principal (encoded in the session id).
+--
+-- /See:/ 'newLinkPersonaRequest' smart constructor.
+data LinkPersonaRequest = LinkPersonaRequest
+  { -- | Required. Cardinality constraint to observe when linking a persona to a player in the scope of a game.
+    cardinalityConstraint :: (Core.Maybe LinkPersonaRequest_CardinalityConstraint),
+    -- | Required. Resolution policy to apply when the linking of a persona to a player would result in violating the specified cardinality constraint.
+    conflictingLinksResolutionPolicy :: (Core.Maybe LinkPersonaRequest_ConflictingLinksResolutionPolicy),
+    -- | Input only. Optional expiration time.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Required. Stable identifier of the in-game account. Please refrain from re-using the same persona for different games.
+    persona :: (Core.Maybe Core.Text),
+    -- | Required. Opaque server-generated string that encodes all the necessary information to identify the PGS player \/ Google user and application.
+    sessionId :: (Core.Maybe Core.Text),
+    -- | Required. Value of the token to create. Opaque to Play Games and assumed to be non-stable (encrypted with key rotation).
+    token :: (Core.Maybe Core.Text),
+    -- | Input only. Optional time-to-live.
+    ttl :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LinkPersonaRequest' with the minimum fields required to make a request.
+newLinkPersonaRequest ::
+  LinkPersonaRequest
+newLinkPersonaRequest =
+  LinkPersonaRequest
+    { cardinalityConstraint = Core.Nothing,
+      conflictingLinksResolutionPolicy = Core.Nothing,
+      expireTime = Core.Nothing,
+      persona = Core.Nothing,
+      sessionId = Core.Nothing,
+      token = Core.Nothing,
+      ttl = Core.Nothing
+    }
+
+instance Core.FromJSON LinkPersonaRequest where
+  parseJSON =
+    Core.withObject
+      "LinkPersonaRequest"
+      ( \o ->
+          LinkPersonaRequest
+            Core.<$> (o Core..:? "cardinalityConstraint")
+            Core.<*> (o Core..:? "conflictingLinksResolutionPolicy")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "persona")
+            Core.<*> (o Core..:? "sessionId")
+            Core.<*> (o Core..:? "token")
+            Core.<*> (o Core..:? "ttl")
+      )
+
+instance Core.ToJSON LinkPersonaRequest where
+  toJSON LinkPersonaRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cardinalityConstraint" Core..=) Core.<$> cardinalityConstraint,
+            ("conflictingLinksResolutionPolicy" Core..=)
+              Core.<$> conflictingLinksResolutionPolicy,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("persona" Core..=) Core.<$> persona,
+            ("sessionId" Core..=) Core.<$> sessionId,
+            ("token" Core..=) Core.<$> token,
+            ("ttl" Core..=) Core.<$> ttl
+          ]
+      )
+
+-- | Outcome of a persona linking attempt.
+--
+-- /See:/ 'newLinkPersonaResponse' smart constructor.
+newtype LinkPersonaResponse = LinkPersonaResponse
+  { -- | Output only. State of a persona linking attempt.
+    state :: (Core.Maybe LinkPersonaResponse_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LinkPersonaResponse' with the minimum fields required to make a request.
+newLinkPersonaResponse ::
+  LinkPersonaResponse
+newLinkPersonaResponse = LinkPersonaResponse {state = Core.Nothing}
+
+instance Core.FromJSON LinkPersonaResponse where
+  parseJSON =
+    Core.withObject
+      "LinkPersonaResponse"
+      (\o -> LinkPersonaResponse Core.<$> (o Core..:? "state"))
+
+instance Core.ToJSON LinkPersonaResponse where
+  toJSON LinkPersonaResponse {..} =
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | The metagame config resource
 --
@@ -2389,6 +2572,32 @@ instance Core.ToJSON MetagameConfig where
             ("playerLevels" Core..=) Core.<$> playerLevels
           ]
       )
+
+-- | Token data returned from GeneratePlayGroupingApiToken RPC.
+--
+-- /See:/ 'newPlayGroupingApiToken' smart constructor.
+newtype PlayGroupingApiToken = PlayGroupingApiToken
+  { -- | Value of the token.
+    tokenValue :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlayGroupingApiToken' with the minimum fields required to make a request.
+newPlayGroupingApiToken ::
+  PlayGroupingApiToken
+newPlayGroupingApiToken =
+  PlayGroupingApiToken {tokenValue = Core.Nothing}
+
+instance Core.FromJSON PlayGroupingApiToken where
+  parseJSON =
+    Core.withObject
+      "PlayGroupingApiToken"
+      (\o -> PlayGroupingApiToken Core.<$> (o Core..:? "tokenValue"))
+
+instance Core.ToJSON PlayGroupingApiToken where
+  toJSON PlayGroupingApiToken {..} =
+    Core.object
+      (Core.catMaybes [("tokenValue" Core..=) Core.<$> tokenValue])
 
 -- | A Player resource.
 --
@@ -2469,18 +2678,15 @@ instance Core.ToJSON Player where
     Core.object
       ( Core.catMaybes
           [ ("avatarImageUrl" Core..=) Core.<$> avatarImageUrl,
-            ("bannerUrlLandscape" Core..=)
-              Core.<$> bannerUrlLandscape,
-            ("bannerUrlPortrait" Core..=)
-              Core.<$> bannerUrlPortrait,
+            ("bannerUrlLandscape" Core..=) Core.<$> bannerUrlLandscape,
+            ("bannerUrlPortrait" Core..=) Core.<$> bannerUrlPortrait,
             ("displayName" Core..=) Core.<$> displayName,
             ("experienceInfo" Core..=) Core.<$> experienceInfo,
             ("friendStatus" Core..=) Core.<$> friendStatus,
             ("gamePlayerId" Core..=) Core.<$> gamePlayerId,
             ("kind" Core..=) Core.<$> kind,
             ("name" Core..=) Core.<$> name,
-            ("originalPlayerId" Core..=)
-              Core.<$> originalPlayerId,
+            ("originalPlayerId" Core..=) Core.<$> originalPlayerId,
             ("playerId" Core..=) Core.<$> playerId,
             ("profileSettings" Core..=) Core.<$> profileSettings,
             ("title" Core..=) Core.<$> title
@@ -2566,13 +2772,12 @@ instance Core.FromJSON PlayerAchievement where
           PlayerAchievement
             Core.<$> (o Core..:? "achievementState")
             Core.<*> (o Core..:? "currentSteps")
-            Core.<*> ( o Core..:? "experiencePoints"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "experiencePoints" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "formattedCurrentStepsString")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastUpdatedTimestamp"
+            Core.<*> ( o
+                         Core..:? "lastUpdatedTimestamp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -2581,16 +2786,17 @@ instance Core.ToJSON PlayerAchievement where
   toJSON PlayerAchievement {..} =
     Core.object
       ( Core.catMaybes
-          [ ("achievementState" Core..=)
-              Core.<$> achievementState,
+          [ ("achievementState" Core..=) Core.<$> achievementState,
             ("currentSteps" Core..=) Core.<$> currentSteps,
-            ("experiencePoints" Core..=) Core.. Core.AsText
+            ("experiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> experiencePoints,
             ("formattedCurrentStepsString" Core..=)
               Core.<$> formattedCurrentStepsString,
             ("id" Core..=) Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastUpdatedTimestamp" Core..=) Core.. Core.AsText
+            ("lastUpdatedTimestamp" Core..=)
+              Core.. Core.AsText
               Core.<$> lastUpdatedTimestamp
           ]
       )
@@ -2677,9 +2883,7 @@ instance Core.FromJSON PlayerEvent where
             Core.<$> (o Core..:? "definitionId")
             Core.<*> (o Core..:? "formattedNumEvents")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "numEvents"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numEvents" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "playerId")
       )
 
@@ -2688,11 +2892,9 @@ instance Core.ToJSON PlayerEvent where
     Core.object
       ( Core.catMaybes
           [ ("definitionId" Core..=) Core.<$> definitionId,
-            ("formattedNumEvents" Core..=)
-              Core.<$> formattedNumEvents,
+            ("formattedNumEvents" Core..=) Core.<$> formattedNumEvents,
             ("kind" Core..=) Core.<$> kind,
-            ("numEvents" Core..=) Core.. Core.AsText
-              Core.<$> numEvents,
+            ("numEvents" Core..=) Core.. Core.AsText Core.<$> numEvents,
             ("playerId" Core..=) Core.<$> playerId
           ]
       )
@@ -2776,12 +2978,14 @@ instance Core.FromJSON PlayerExperienceInfo where
       "PlayerExperienceInfo"
       ( \o ->
           PlayerExperienceInfo
-            Core.<$> ( o Core..:? "currentExperiencePoints"
+            Core.<$> ( o
+                         Core..:? "currentExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "currentLevel")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastLevelUpTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "lastLevelUpTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "nextLevel")
@@ -2859,14 +3063,10 @@ instance Core.FromJSON PlayerLeaderboardScore where
             Core.<*> (o Core..:? "publicRank")
             Core.<*> (o Core..:? "scoreString")
             Core.<*> (o Core..:? "scoreTag")
-            Core.<*> ( o Core..:? "scoreValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scoreValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "socialRank")
             Core.<*> (o Core..:? "timeSpan")
-            Core.<*> ( o Core..:? "writeTimestamp"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "writeTimestamp" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PlayerLeaderboardScore where
@@ -2879,11 +3079,11 @@ instance Core.ToJSON PlayerLeaderboardScore where
             ("publicRank" Core..=) Core.<$> publicRank,
             ("scoreString" Core..=) Core.<$> scoreString,
             ("scoreTag" Core..=) Core.<$> scoreTag,
-            ("scoreValue" Core..=) Core.. Core.AsText
-              Core.<$> scoreValue,
+            ("scoreValue" Core..=) Core.. Core.AsText Core.<$> scoreValue,
             ("socialRank" Core..=) Core.<$> socialRank,
             ("timeSpan" Core..=) Core.<$> timeSpan,
-            ("writeTimestamp" Core..=) Core.. Core.AsText
+            ("writeTimestamp" Core..=)
+              Core.. Core.AsText
               Core.<$> writeTimestamp
           ]
       )
@@ -2914,10 +3114,7 @@ newPlayerLeaderboardScoreListResponse =
       player = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PlayerLeaderboardScoreListResponse
-  where
+instance Core.FromJSON PlayerLeaderboardScoreListResponse where
   parseJSON =
     Core.withObject
       "PlayerLeaderboardScoreListResponse"
@@ -2929,10 +3126,7 @@ instance
             Core.<*> (o Core..:? "player")
       )
 
-instance
-  Core.ToJSON
-    PlayerLeaderboardScoreListResponse
-  where
+instance Core.ToJSON PlayerLeaderboardScoreListResponse where
   toJSON PlayerLeaderboardScoreListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2977,10 +3171,12 @@ instance Core.FromJSON PlayerLevel where
           PlayerLevel
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "level")
-            Core.<*> ( o Core..:? "maxExperiencePoints"
+            Core.<*> ( o
+                         Core..:? "maxExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "minExperiencePoints"
+            Core.<*> ( o
+                         Core..:? "minExperiencePoints"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -2991,9 +3187,11 @@ instance Core.ToJSON PlayerLevel where
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
             ("level" Core..=) Core.<$> level,
-            ("maxExperiencePoints" Core..=) Core.. Core.AsText
+            ("maxExperiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> maxExperiencePoints,
-            ("minExperiencePoints" Core..=) Core.. Core.AsText
+            ("minExperiencePoints" Core..=)
+              Core.. Core.AsText
               Core.<$> minExperiencePoints
           ]
       )
@@ -3079,9 +3277,7 @@ instance Core.FromJSON PlayerScore where
           PlayerScore
             Core.<$> (o Core..:? "formattedScore")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "score"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "score" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scoreTag")
             Core.<*> (o Core..:? "timeSpan")
       )
@@ -3113,7 +3309,10 @@ data PlayerScoreListResponse = PlayerScoreListResponse
 newPlayerScoreListResponse ::
   PlayerScoreListResponse
 newPlayerScoreListResponse =
-  PlayerScoreListResponse {kind = Core.Nothing, submittedScores = Core.Nothing}
+  PlayerScoreListResponse
+    { kind = Core.Nothing,
+      submittedScores = Core.Nothing
+    }
 
 instance Core.FromJSON PlayerScoreListResponse where
   parseJSON =
@@ -3130,8 +3329,7 @@ instance Core.ToJSON PlayerScoreListResponse where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("submittedScores" Core..=)
-              Core.<$> submittedScores
+            ("submittedScores" Core..=) Core.<$> submittedScores
           ]
       )
 
@@ -3185,8 +3383,7 @@ instance Core.ToJSON PlayerScoreResponse where
   toJSON PlayerScoreResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("beatenScoreTimeSpans" Core..=)
-              Core.<$> beatenScoreTimeSpans,
+          [ ("beatenScoreTimeSpans" Core..=) Core.<$> beatenScoreTimeSpans,
             ("formattedScore" Core..=) Core.<$> formattedScore,
             ("kind" Core..=) Core.<$> kind,
             ("leaderboardId" Core..=) Core.<$> leaderboardId,
@@ -3210,7 +3407,10 @@ data PlayerScoreSubmissionList = PlayerScoreSubmissionList
 newPlayerScoreSubmissionList ::
   PlayerScoreSubmissionList
 newPlayerScoreSubmissionList =
-  PlayerScoreSubmissionList {kind = Core.Nothing, scores = Core.Nothing}
+  PlayerScoreSubmissionList
+    { kind = Core.Nothing,
+      scores = Core.Nothing
+    }
 
 instance Core.FromJSON PlayerScoreSubmissionList where
   parseJSON =
@@ -3218,7 +3418,8 @@ instance Core.FromJSON PlayerScoreSubmissionList where
       "PlayerScoreSubmissionList"
       ( \o ->
           PlayerScoreSubmissionList
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "scores")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "scores")
       )
 
 instance Core.ToJSON PlayerScoreSubmissionList where
@@ -3234,8 +3435,7 @@ instance Core.ToJSON PlayerScoreSubmissionList where
 --
 -- /See:/ 'newProfileSettings' smart constructor.
 data ProfileSettings = ProfileSettings
-  { -- |
-    friendsListVisibility :: (Core.Maybe ProfileSettings_FriendsListVisibility),
+  { friendsListVisibility :: (Core.Maybe ProfileSettings_FriendsListVisibility),
     -- | Uniquely identifies the type of this resource. Value is always the fixed string @games#profileSettings@.
     kind :: (Core.Maybe Core.Text),
     -- | Whether the player\'s profile is visible to the currently signed in player.
@@ -3268,12 +3468,205 @@ instance Core.ToJSON ProfileSettings where
   toJSON ProfileSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("friendsListVisibility" Core..=)
-              Core.<$> friendsListVisibility,
+          [ ("friendsListVisibility" Core..=) Core.<$> friendsListVisibility,
             ("kind" Core..=) Core.<$> kind,
             ("profileVisible" Core..=) Core.<$> profileVisible
           ]
       )
+
+-- | Recall token data returned from RetrievePlayerTokens RPC
+--
+-- /See:/ 'newRecallToken' smart constructor.
+data RecallToken = RecallToken
+  { -- | Optional. Optional expiration time of the token
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Required. Whether the persona identified by the token is linked to multiple PGS Players
+    multiPlayerPersona :: (Core.Maybe Core.Bool),
+    -- | Required. Value of the Recall token as it is provided by the client via LinkPersona RPC
+    token :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RecallToken' with the minimum fields required to make a request.
+newRecallToken ::
+  RecallToken
+newRecallToken =
+  RecallToken
+    { expireTime = Core.Nothing,
+      multiPlayerPersona = Core.Nothing,
+      token = Core.Nothing
+    }
+
+instance Core.FromJSON RecallToken where
+  parseJSON =
+    Core.withObject
+      "RecallToken"
+      ( \o ->
+          RecallToken
+            Core.<$> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "multiPlayerPersona")
+            Core.<*> (o Core..:? "token")
+      )
+
+instance Core.ToJSON RecallToken where
+  toJSON RecallToken {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expireTime" Core..=) Core.<$> expireTime,
+            ("multiPlayerPersona" Core..=) Core.<$> multiPlayerPersona,
+            ("token" Core..=) Core.<$> token
+          ]
+      )
+
+-- | Request to remove all Recall tokens associated with a persona for an app.
+--
+-- /See:/ 'newResetPersonaRequest' smart constructor.
+newtype ResetPersonaRequest = ResetPersonaRequest
+  { -- | Value of the \'persona\' field as it was provided by the client in LinkPersona RPC
+    persona :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResetPersonaRequest' with the minimum fields required to make a request.
+newResetPersonaRequest ::
+  ResetPersonaRequest
+newResetPersonaRequest =
+  ResetPersonaRequest {persona = Core.Nothing}
+
+instance Core.FromJSON ResetPersonaRequest where
+  parseJSON =
+    Core.withObject
+      "ResetPersonaRequest"
+      (\o -> ResetPersonaRequest Core.<$> (o Core..:? "persona"))
+
+instance Core.ToJSON ResetPersonaRequest where
+  toJSON ResetPersonaRequest {..} =
+    Core.object
+      (Core.catMaybes [("persona" Core..=) Core.<$> persona])
+
+-- | Response for the ResetPersona RPC
+--
+-- /See:/ 'newResetPersonaResponse' smart constructor.
+newtype ResetPersonaResponse = ResetPersonaResponse
+  { -- | Required. Whether any tokens were unlinked as a result of this request.
+    unlinked :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResetPersonaResponse' with the minimum fields required to make a request.
+newResetPersonaResponse ::
+  ResetPersonaResponse
+newResetPersonaResponse =
+  ResetPersonaResponse {unlinked = Core.Nothing}
+
+instance Core.FromJSON ResetPersonaResponse where
+  parseJSON =
+    Core.withObject
+      "ResetPersonaResponse"
+      (\o -> ResetPersonaResponse Core.<$> (o Core..:? "unlinked"))
+
+instance Core.ToJSON ResetPersonaResponse where
+  toJSON ResetPersonaResponse {..} =
+    Core.object
+      (Core.catMaybes [("unlinked" Core..=) Core.<$> unlinked])
+
+-- | Recall token data returned from for the RetrieveDeveloperGamesLastPlayerToken RPC
+--
+-- /See:/ 'newRetrieveDeveloperGamesLastPlayerTokenResponse' smart constructor.
+newtype RetrieveDeveloperGamesLastPlayerTokenResponse = RetrieveDeveloperGamesLastPlayerTokenResponse
+  { -- | The recall token associated with the requested PGS Player principal. It can be unset if there is no recall token associated with the requested principal.
+    gamePlayerToken :: (Core.Maybe GamePlayerToken)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RetrieveDeveloperGamesLastPlayerTokenResponse' with the minimum fields required to make a request.
+newRetrieveDeveloperGamesLastPlayerTokenResponse ::
+  RetrieveDeveloperGamesLastPlayerTokenResponse
+newRetrieveDeveloperGamesLastPlayerTokenResponse =
+  RetrieveDeveloperGamesLastPlayerTokenResponse
+    { gamePlayerToken =
+        Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    RetrieveDeveloperGamesLastPlayerTokenResponse
+  where
+  parseJSON =
+    Core.withObject
+      "RetrieveDeveloperGamesLastPlayerTokenResponse"
+      ( \o ->
+          RetrieveDeveloperGamesLastPlayerTokenResponse
+            Core.<$> (o Core..:? "gamePlayerToken")
+      )
+
+instance Core.ToJSON RetrieveDeveloperGamesLastPlayerTokenResponse where
+  toJSON RetrieveDeveloperGamesLastPlayerTokenResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("gamePlayerToken" Core..=) Core.<$> gamePlayerToken]
+      )
+
+-- | A list of recall token data returned from the RetrieveGamesPlayerTokens RPC
+--
+-- /See:/ 'newRetrieveGamesPlayerTokensResponse' smart constructor.
+newtype RetrieveGamesPlayerTokensResponse = RetrieveGamesPlayerTokensResponse
+  { -- | The requested applications along with the recall tokens for the player. If the player does not have recall tokens for an application, that application is not included in the response.
+    gamePlayerTokens :: (Core.Maybe [GamePlayerToken])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RetrieveGamesPlayerTokensResponse' with the minimum fields required to make a request.
+newRetrieveGamesPlayerTokensResponse ::
+  RetrieveGamesPlayerTokensResponse
+newRetrieveGamesPlayerTokensResponse =
+  RetrieveGamesPlayerTokensResponse
+    { gamePlayerTokens =
+        Core.Nothing
+    }
+
+instance Core.FromJSON RetrieveGamesPlayerTokensResponse where
+  parseJSON =
+    Core.withObject
+      "RetrieveGamesPlayerTokensResponse"
+      ( \o ->
+          RetrieveGamesPlayerTokensResponse
+            Core.<$> (o Core..:? "gamePlayerTokens")
+      )
+
+instance Core.ToJSON RetrieveGamesPlayerTokensResponse where
+  toJSON RetrieveGamesPlayerTokensResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("gamePlayerTokens" Core..=) Core.<$> gamePlayerTokens]
+      )
+
+-- | Response for the RetrievePlayerTokens RPC
+--
+-- /See:/ 'newRetrievePlayerTokensResponse' smart constructor.
+newtype RetrievePlayerTokensResponse = RetrievePlayerTokensResponse
+  { -- | Required. Recall tokens associated with the requested PGS Player principal
+    tokens :: (Core.Maybe [RecallToken])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RetrievePlayerTokensResponse' with the minimum fields required to make a request.
+newRetrievePlayerTokensResponse ::
+  RetrievePlayerTokensResponse
+newRetrievePlayerTokensResponse =
+  RetrievePlayerTokensResponse {tokens = Core.Nothing}
+
+instance Core.FromJSON RetrievePlayerTokensResponse where
+  parseJSON =
+    Core.withObject
+      "RetrievePlayerTokensResponse"
+      ( \o ->
+          RetrievePlayerTokensResponse Core.<$> (o Core..:? "tokens")
+      )
+
+instance Core.ToJSON RetrievePlayerTokensResponse where
+  toJSON RetrievePlayerTokensResponse {..} =
+    Core.object (Core.catMaybes [("tokens" Core..=) Core.<$> tokens])
 
 -- | A third party checking a revision response.
 --
@@ -3353,8 +3746,7 @@ instance Core.ToJSON ScopedPlayerIds where
   toJSON ScopedPlayerIds {..} =
     Core.object
       ( Core.catMaybes
-          [ ("developerPlayerKey" Core..=)
-              Core.<$> developerPlayerKey,
+          [ ("developerPlayerKey" Core..=) Core.<$> developerPlayerKey,
             ("gamePlayerId" Core..=) Core.<$> gamePlayerId
           ]
       )
@@ -3396,9 +3788,7 @@ instance Core.FromJSON ScoreSubmission where
           ScoreSubmission
             Core.<$> (o Core..:? "kind")
             Core.<*> (o Core..:? "leaderboardId")
-            Core.<*> ( o Core..:? "score"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "score" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scoreTag")
             Core.<*> (o Core..:? "signature")
       )
@@ -3471,17 +3861,14 @@ instance Core.FromJSON Snapshot where
             Core.<$> (o Core..:? "coverImage")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "driveId")
-            Core.<*> ( o Core..:? "durationMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "durationMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "lastModifiedMillis"
+            Core.<*> ( o
+                         Core..:? "lastModifiedMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "progressValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "progressValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "uniqueName")
@@ -3494,13 +3881,16 @@ instance Core.ToJSON Snapshot where
           [ ("coverImage" Core..=) Core.<$> coverImage,
             ("description" Core..=) Core.<$> description,
             ("driveId" Core..=) Core.<$> driveId,
-            ("durationMillis" Core..=) Core.. Core.AsText
+            ("durationMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> durationMillis,
             ("id" Core..=) Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("lastModifiedMillis" Core..=) Core.. Core.AsText
+            ("lastModifiedMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> lastModifiedMillis,
-            ("progressValue" Core..=) Core.. Core.AsText
+            ("progressValue" Core..=)
+              Core.. Core.AsText
               Core.<$> progressValue,
             ("title" Core..=) Core.<$> title,
             ("type" Core..=) Core.<$> type',
@@ -3678,22 +4068,87 @@ instance Core.ToJSON StatsResponse where
       ( Core.catMaybes
           [ ("avg_session_length_minutes" Core..=)
               Core.<$> avgSessionLengthMinutes,
-            ("churn_probability" Core..=)
-              Core.<$> churnProbability,
-            ("days_since_last_played" Core..=)
-              Core.<$> daysSinceLastPlayed,
+            ("churn_probability" Core..=) Core.<$> churnProbability,
+            ("days_since_last_played" Core..=) Core.<$> daysSinceLastPlayed,
             ("high_spender_probability" Core..=)
               Core.<$> highSpenderProbability,
             ("kind" Core..=) Core.<$> kind,
             ("num_purchases" Core..=) Core.<$> numPurchases,
             ("num_sessions" Core..=) Core.<$> numSessions,
-            ("num_sessions_percentile" Core..=)
-              Core.<$> numSessionsPercentile,
-            ("spend_percentile" Core..=)
-              Core.<$> spendPercentile,
-            ("spend_probability" Core..=)
-              Core.<$> spendProbability,
+            ("num_sessions_percentile" Core..=) Core.<$> numSessionsPercentile,
+            ("spend_percentile" Core..=) Core.<$> spendPercentile,
+            ("spend_probability" Core..=) Core.<$> spendProbability,
             ("total_spend_next_28_days" Core..=)
               Core.<$> totalSpendNext28Days
           ]
       )
+
+-- | Request to remove a Recall token linking PGS principal and an in-game account
+--
+-- /See:/ 'newUnlinkPersonaRequest' smart constructor.
+data UnlinkPersonaRequest = UnlinkPersonaRequest
+  { -- | Value of the \'persona\' field as it was provided by the client in LinkPersona RPC
+    persona :: (Core.Maybe Core.Text),
+    -- | Required. Opaque server-generated string that encodes all the necessary information to identify the PGS player \/ Google user and application.
+    sessionId :: (Core.Maybe Core.Text),
+    -- | Value of the Recall token as it was provided by the client in LinkPersona RPC
+    token :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UnlinkPersonaRequest' with the minimum fields required to make a request.
+newUnlinkPersonaRequest ::
+  UnlinkPersonaRequest
+newUnlinkPersonaRequest =
+  UnlinkPersonaRequest
+    { persona = Core.Nothing,
+      sessionId = Core.Nothing,
+      token = Core.Nothing
+    }
+
+instance Core.FromJSON UnlinkPersonaRequest where
+  parseJSON =
+    Core.withObject
+      "UnlinkPersonaRequest"
+      ( \o ->
+          UnlinkPersonaRequest
+            Core.<$> (o Core..:? "persona")
+            Core.<*> (o Core..:? "sessionId")
+            Core.<*> (o Core..:? "token")
+      )
+
+instance Core.ToJSON UnlinkPersonaRequest where
+  toJSON UnlinkPersonaRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("persona" Core..=) Core.<$> persona,
+            ("sessionId" Core..=) Core.<$> sessionId,
+            ("token" Core..=) Core.<$> token
+          ]
+      )
+
+-- | Response for the UnlinkPersona RPC
+--
+-- /See:/ 'newUnlinkPersonaResponse' smart constructor.
+newtype UnlinkPersonaResponse = UnlinkPersonaResponse
+  { -- | Required. Whether a Recall token specified by the request was deleted. Can be \'false\' when there were no Recall tokens satisfied the criteria from the request.
+    unlinked :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UnlinkPersonaResponse' with the minimum fields required to make a request.
+newUnlinkPersonaResponse ::
+  UnlinkPersonaResponse
+newUnlinkPersonaResponse =
+  UnlinkPersonaResponse {unlinked = Core.Nothing}
+
+instance Core.FromJSON UnlinkPersonaResponse where
+  parseJSON =
+    Core.withObject
+      "UnlinkPersonaResponse"
+      (\o -> UnlinkPersonaResponse Core.<$> (o Core..:? "unlinked"))
+
+instance Core.ToJSON UnlinkPersonaResponse where
+  toJSON UnlinkPersonaResponse {..} =
+    Core.object
+      (Core.catMaybes [("unlinked" Core..=) Core.<$> unlinked])

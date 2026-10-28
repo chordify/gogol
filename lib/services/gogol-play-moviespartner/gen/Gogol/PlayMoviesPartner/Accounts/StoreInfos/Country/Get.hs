@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,7 +40,7 @@ module Gogol.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 where
 
 import Gogol.PlayMoviesPartner.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @playmoviespartner.accounts.storeInfos.country.get@ method which the
 -- 'PlayMoviesPartnerAccountsStoreInfosCountryGet' request conforms to.
@@ -102,51 +100,50 @@ newPlayMoviesPartnerAccountsStoreInfosCountryGet ::
   -- |  REQUIRED. Video ID. See 'videoId'.
   Core.Text ->
   PlayMoviesPartnerAccountsStoreInfosCountryGet
-newPlayMoviesPartnerAccountsStoreInfosCountryGet accountId country videoId =
-  PlayMoviesPartnerAccountsStoreInfosCountryGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      bearerToken = Core.Nothing,
-      callback = Core.Nothing,
-      country = country,
-      pp = Core.True,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      videoId = videoId
-    }
+newPlayMoviesPartnerAccountsStoreInfosCountryGet
+  accountId
+  country
+  videoId =
+    PlayMoviesPartnerAccountsStoreInfosCountryGet
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        bearerToken = Core.Nothing,
+        callback = Core.Nothing,
+        country = country,
+        pp = Core.True,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        videoId = videoId
+      }
 
 instance
   Core.GoogleRequest
     PlayMoviesPartnerAccountsStoreInfosCountryGet
   where
+  type Rs PlayMoviesPartnerAccountsStoreInfosCountryGet = StoreInfo
   type
-    Rs PlayMoviesPartnerAccountsStoreInfosCountryGet =
-      StoreInfo
-  type
-    Scopes
-      PlayMoviesPartnerAccountsStoreInfosCountryGet =
+    Scopes PlayMoviesPartnerAccountsStoreInfosCountryGet =
       '[PlaymoviesPartner'Readonly]
-  requestClient
-    PlayMoviesPartnerAccountsStoreInfosCountryGet {..} =
-      go
-        accountId
-        videoId
-        country
-        xgafv
-        accessToken
-        bearerToken
-        callback
-        (Core.Just pp)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        playMoviesPartnerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PlayMoviesPartnerAccountsStoreInfosCountryGetResource
-            )
-            Core.mempty
+  requestClient PlayMoviesPartnerAccountsStoreInfosCountryGet {..} =
+    go
+      accountId
+      videoId
+      country
+      xgafv
+      accessToken
+      bearerToken
+      callback
+      (Core.Just pp)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      playMoviesPartnerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PlayMoviesPartnerAccountsStoreInfosCountryGetResource
+          )
+          Core.mempty

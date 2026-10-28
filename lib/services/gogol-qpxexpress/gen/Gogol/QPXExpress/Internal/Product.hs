@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.QPXExpress.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.QPXExpress.Internal.Product
@@ -124,7 +122,7 @@ module Gogol.QPXExpress.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.QPXExpress.Internal.Sum
 
 -- | The make, model, and type of an aircraft.
@@ -157,9 +155,7 @@ instance Core.FromJSON AircraftData where
       ( \o ->
           AircraftData
             Core.<$> (o Core..:? "code")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#aircraftData"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#aircraftData")
             Core.<*> (o Core..:? "name")
       )
 
@@ -260,9 +256,7 @@ instance Core.FromJSON BagDescriptor where
             Core.<$> (o Core..:? "commercialName")
             Core.<*> (o Core..:? "count")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#bagDescriptor"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#bagDescriptor")
             Core.<*> (o Core..:? "subcode")
       )
 
@@ -434,8 +428,7 @@ instance Core.ToJSON Data' where
 --
 -- /See:/ 'newFareInfo' smart constructor.
 data FareInfo = FareInfo
-  { -- |
-    basisCode :: (Core.Maybe Core.Text),
+  { basisCode :: (Core.Maybe Core.Text),
     -- | The carrier of the aircraft or other vehicle commuting between two points.
     carrier :: (Core.Maybe Core.Text),
     -- | The city code of the city the trip ends at.
@@ -498,8 +491,7 @@ instance Core.ToJSON FareInfo where
 --
 -- /See:/ 'newFlightInfo' smart constructor.
 data FlightInfo = FlightInfo
-  { -- |
-    carrier :: (Core.Maybe Core.Text),
+  { carrier :: (Core.Maybe Core.Text),
     -- | The flight number.
     number :: (Core.Maybe Core.Text)
   }
@@ -508,7 +500,8 @@ data FlightInfo = FlightInfo
 -- | Creates a value of 'FlightInfo' with the minimum fields required to make a request.
 newFlightInfo ::
   FlightInfo
-newFlightInfo = FlightInfo {carrier = Core.Nothing, number = Core.Nothing}
+newFlightInfo =
+  FlightInfo {carrier = Core.Nothing, number = Core.Nothing}
 
 instance Core.FromJSON FlightInfo where
   parseJSON =
@@ -570,9 +563,7 @@ instance Core.FromJSON FreeBaggageAllowance where
             Core.<$> (o Core..:? "bagDescriptor")
             Core.<*> (o Core..:? "kilos")
             Core.<*> (o Core..:? "kilosPerPiece")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#freeBaggageAllowance"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#freeBaggageAllowance")
             Core.<*> (o Core..:? "pieces")
             Core.<*> (o Core..:? "pounds")
       )
@@ -687,21 +678,17 @@ instance Core.ToJSON LegInfo where
           [ ("aircraft" Core..=) Core.<$> aircraft,
             ("arrivalTime" Core..=) Core.<$> arrivalTime,
             ("changePlane" Core..=) Core.<$> changePlane,
-            ("connectionDuration" Core..=)
-              Core.<$> connectionDuration,
+            ("connectionDuration" Core..=) Core.<$> connectionDuration,
             ("departureTime" Core..=) Core.<$> departureTime,
             ("destination" Core..=) Core.<$> destination,
-            ("destinationTerminal" Core..=)
-              Core.<$> destinationTerminal,
+            ("destinationTerminal" Core..=) Core.<$> destinationTerminal,
             ("duration" Core..=) Core.<$> duration,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("meal" Core..=) Core.<$> meal,
             ("mileage" Core..=) Core.<$> mileage,
-            ("onTimePerformance" Core..=)
-              Core.<$> onTimePerformance,
-            ("operatingDisclosure" Core..=)
-              Core.<$> operatingDisclosure,
+            ("onTimePerformance" Core..=) Core.<$> onTimePerformance,
+            ("operatingDisclosure" Core..=) Core.<$> operatingDisclosure,
             ("origin" Core..=) Core.<$> origin,
             ("originTerminal" Core..=) Core.<$> originTerminal,
             ("secure" Core..=) Core.<$> secure
@@ -750,9 +737,7 @@ instance Core.FromJSON PassengerCounts where
             Core.<*> (o Core..:? "childCount")
             Core.<*> (o Core..:? "infantInLapCount")
             Core.<*> (o Core..:? "infantInSeatCount")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#passengerCounts"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#passengerCounts")
             Core.<*> (o Core..:? "seniorCount")
       )
 
@@ -762,10 +747,8 @@ instance Core.ToJSON PassengerCounts where
       ( Core.catMaybes
           [ ("adultCount" Core..=) Core.<$> adultCount,
             ("childCount" Core..=) Core.<$> childCount,
-            ("infantInLapCount" Core..=)
-              Core.<$> infantInLapCount,
-            ("infantInSeatCount" Core..=)
-              Core.<$> infantInSeatCount,
+            ("infantInLapCount" Core..=) Core.<$> infantInLapCount,
+            ("infantInSeatCount" Core..=) Core.<$> infantInSeatCount,
             Core.Just ("kind" Core..= kind),
             ("seniorCount" Core..=) Core.<$> seniorCount
           ]
@@ -853,8 +836,7 @@ instance Core.ToJSON PricingInfo where
             ("fare" Core..=) Core.<$> fare,
             ("fareCalculation" Core..=) Core.<$> fareCalculation,
             Core.Just ("kind" Core..= kind),
-            ("latestTicketingTime" Core..=)
-              Core.<$> latestTicketingTime,
+            ("latestTicketingTime" Core..=) Core.<$> latestTicketingTime,
             ("passengers" Core..=) Core.<$> passengers,
             ("ptc" Core..=) Core.<$> ptc,
             ("refundable" Core..=) Core.<$> refundable,
@@ -937,18 +919,15 @@ instance Core.ToJSON SegmentInfo where
     Core.object
       ( Core.catMaybes
           [ ("bookingCode" Core..=) Core.<$> bookingCode,
-            ("bookingCodeCount" Core..=)
-              Core.<$> bookingCodeCount,
+            ("bookingCodeCount" Core..=) Core.<$> bookingCodeCount,
             ("cabin" Core..=) Core.<$> cabin,
-            ("connectionDuration" Core..=)
-              Core.<$> connectionDuration,
+            ("connectionDuration" Core..=) Core.<$> connectionDuration,
             ("duration" Core..=) Core.<$> duration,
             ("flight" Core..=) Core.<$> flight,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("leg" Core..=) Core.<$> leg,
-            ("marriedSegmentGroup" Core..=)
-              Core.<$> marriedSegmentGroup,
+            ("marriedSegmentGroup" Core..=) Core.<$> marriedSegmentGroup,
             ("subjectToGovernmentApproval" Core..=)
               Core.<$> subjectToGovernmentApproval
           ]
@@ -988,9 +967,7 @@ instance Core.FromJSON SegmentPricing where
           SegmentPricing
             Core.<$> (o Core..:? "fareId")
             Core.<*> (o Core..:? "freeBaggageOption")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#segmentPricing"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#segmentPricing")
             Core.<*> (o Core..:? "segmentId")
       )
 
@@ -999,8 +976,7 @@ instance Core.ToJSON SegmentPricing where
     Core.object
       ( Core.catMaybes
           [ ("fareId" Core..=) Core.<$> fareId,
-            ("freeBaggageOption" Core..=)
-              Core.<$> freeBaggageOption,
+            ("freeBaggageOption" Core..=) Core.<$> freeBaggageOption,
             Core.Just ("kind" Core..= kind),
             ("segmentId" Core..=) Core.<$> segmentId
           ]
@@ -1124,17 +1100,13 @@ instance Core.ToJSON SliceInput where
             ("date" Core..=) Core.<$> date,
             ("destination" Core..=) Core.<$> destination,
             Core.Just ("kind" Core..= kind),
-            ("maxConnectionDuration" Core..=)
-              Core.<$> maxConnectionDuration,
+            ("maxConnectionDuration" Core..=) Core.<$> maxConnectionDuration,
             ("maxStops" Core..=) Core.<$> maxStops,
             ("origin" Core..=) Core.<$> origin,
-            ("permittedCarrier" Core..=)
-              Core.<$> permittedCarrier,
-            ("permittedDepartureTime" Core..=)
-              Core.<$> permittedDepartureTime,
+            ("permittedCarrier" Core..=) Core.<$> permittedCarrier,
+            ("permittedDepartureTime" Core..=) Core.<$> permittedDepartureTime,
             ("preferredCabin" Core..=) Core.<$> preferredCabin,
-            ("prohibitedCarrier" Core..=)
-              Core.<$> prohibitedCarrier
+            ("prohibitedCarrier" Core..=) Core.<$> prohibitedCarrier
           ]
       )
 
@@ -1155,7 +1127,11 @@ data TaxData = TaxData
 newTaxData ::
   TaxData
 newTaxData =
-  TaxData {id = Core.Nothing, kind = "qpxexpress#taxData", name = Core.Nothing}
+  TaxData
+    { id = Core.Nothing,
+      kind = "qpxexpress#taxData",
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON TaxData where
   parseJSON =
@@ -1267,9 +1243,7 @@ instance Core.FromJSON TimeOfDayRange where
       ( \o ->
           TimeOfDayRange
             Core.<$> (o Core..:? "earliestTime")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "qpxexpress#timeOfDayRange"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "qpxexpress#timeOfDayRange")
             Core.<*> (o Core..:? "latestTime")
       )
 
@@ -1397,8 +1371,7 @@ instance Core.ToJSON TripOptionsRequest where
             ("saleCountry" Core..=) Core.<$> saleCountry,
             ("slice" Core..=) Core.<$> slice,
             ("solutions" Core..=) Core.<$> solutions,
-            ("ticketingCountry" Core..=)
-              Core.<$> ticketingCountry
+            ("ticketingCountry" Core..=) Core.<$> ticketingCountry
           ]
       )
 
@@ -1469,16 +1442,12 @@ instance Core.FromJSON TripsSearchRequest where
   parseJSON =
     Core.withObject
       "TripsSearchRequest"
-      ( \o ->
-          TripsSearchRequest Core.<$> (o Core..:? "request")
-      )
+      (\o -> TripsSearchRequest Core.<$> (o Core..:? "request"))
 
 instance Core.ToJSON TripsSearchRequest where
   toJSON TripsSearchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("request" Core..=) Core.<$> request']
-      )
+      (Core.catMaybes [("request" Core..=) Core.<$> request'])
 
 -- | A QPX Express search response.
 --
@@ -1495,7 +1464,10 @@ data TripsSearchResponse = TripsSearchResponse
 newTripsSearchResponse ::
   TripsSearchResponse
 newTripsSearchResponse =
-  TripsSearchResponse {kind = "qpxExpress#tripsSearch", trips = Core.Nothing}
+  TripsSearchResponse
+    { kind = "qpxExpress#tripsSearch",
+      trips = Core.Nothing
+    }
 
 instance Core.FromJSON TripsSearchResponse where
   parseJSON =

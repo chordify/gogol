@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Runs a stored query to generate a report.
+-- Runs an existing query to generate a report.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.run@.
 module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
@@ -40,7 +38,7 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Run
 where
 
 import Gogol.DoubleClickBids.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclickbidmanager.queries.run@ method which the
 -- 'DoubleclickbidmanagerQueriesRun' request conforms to.
@@ -58,7 +56,7 @@ type DoubleclickbidmanagerQueriesRunResource =
     Core.:> Core.ReqBody '[Core.JSON] RunQueryRequest
     Core.:> Core.Post '[Core.JSON] Report
 
--- | Runs a stored query to generate a report.
+-- | Runs an existing query to generate a report.
 --
 -- /See:/ 'newDoubleclickbidmanagerQueriesRun' smart constructor.
 data DoubleclickbidmanagerQueriesRun = DoubleclickbidmanagerQueriesRun
@@ -70,9 +68,9 @@ data DoubleclickbidmanagerQueriesRun = DoubleclickbidmanagerQueriesRun
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: RunQueryRequest,
-    -- | Required. ID of query to run.
+    -- | Required. The ID of the query to run.
     queryId :: Core.Int64,
-    -- | Whether the query should be run synchronously. When true, this method will not return until the query has finished running. When false or not specified, this method will return immediately.
+    -- | Whether the query should be run synchronously. When @true@, the request won\'t return until the resulting report has finished running. This parameter is @false@ by default. Setting this parameter to @true@ is __not recommended__.
     synchronous :: (Core.Maybe Core.Bool),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,7 +83,7 @@ data DoubleclickbidmanagerQueriesRun = DoubleclickbidmanagerQueriesRun
 newDoubleclickbidmanagerQueriesRun ::
   -- |  Multipart request metadata. See 'payload'.
   RunQueryRequest ->
-  -- |  Required. ID of query to run. See 'queryId'.
+  -- |  Required. The ID of the query to run. See 'queryId'.
   Core.Int64 ->
   DoubleclickbidmanagerQueriesRun
 newDoubleclickbidmanagerQueriesRun payload queryId =
@@ -100,10 +98,7 @@ newDoubleclickbidmanagerQueriesRun payload queryId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DoubleclickbidmanagerQueriesRun
-  where
+instance Core.GoogleRequest DoubleclickbidmanagerQueriesRun where
   type Rs DoubleclickbidmanagerQueriesRun = Report
   type
     Scopes DoubleclickbidmanagerQueriesRun =
@@ -123,7 +118,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DoubleclickbidmanagerQueriesRunResource
-          )
+          (Core.Proxy :: Core.Proxy DoubleclickbidmanagerQueriesRunResource)
           Core.mempty

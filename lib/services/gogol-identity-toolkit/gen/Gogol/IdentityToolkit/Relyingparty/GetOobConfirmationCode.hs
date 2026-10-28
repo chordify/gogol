@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IdentityToolkit.Relyingparty.GetOobConfirmationCode
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IdentityToolkit.Relyingparty.GetOobConfirmationCode
 where
 
 import Gogol.IdentityToolkit.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @identitytoolkit.relyingparty.getOobConfirmationCode@ method which the
 -- 'IdentityToolkitRelyingpartyGetOobConfirmationCode' request conforms to.
@@ -68,31 +66,28 @@ newIdentityToolkitRelyingpartyGetOobConfirmationCode ::
   Relyingparty ->
   IdentityToolkitRelyingpartyGetOobConfirmationCode
 newIdentityToolkitRelyingpartyGetOobConfirmationCode payload =
-  IdentityToolkitRelyingpartyGetOobConfirmationCode {payload = payload}
+  IdentityToolkitRelyingpartyGetOobConfirmationCode
+    { payload =
+        payload
+    }
 
 instance
   Core.GoogleRequest
     IdentityToolkitRelyingpartyGetOobConfirmationCode
   where
   type
-    Rs
-      IdentityToolkitRelyingpartyGetOobConfirmationCode =
+    Rs IdentityToolkitRelyingpartyGetOobConfirmationCode =
       GetOobConfirmationCodeResponse
   type
-    Scopes
-      IdentityToolkitRelyingpartyGetOobConfirmationCode =
+    Scopes IdentityToolkitRelyingpartyGetOobConfirmationCode =
       '[CloudPlatform'FullControl]
-  requestClient
-    IdentityToolkitRelyingpartyGetOobConfirmationCode {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        identityToolkitService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IdentityToolkitRelyingpartyGetOobConfirmationCodeResource
-            )
-            Core.mempty
+  requestClient IdentityToolkitRelyingpartyGetOobConfirmationCode {..} =
+    go (Core.Just Core.AltJSON) payload identityToolkitService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                IdentityToolkitRelyingpartyGetOobConfirmationCodeResource
+          )
+          Core.mempty

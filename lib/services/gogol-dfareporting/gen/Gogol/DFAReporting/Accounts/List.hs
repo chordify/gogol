@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Accounts.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Accounts.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.accounts.list@ method which the
 -- 'DFAReportingAccountsList' request conforms to.
@@ -59,15 +57,11 @@ type DFAReportingAccountsListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
     Core.:> Core.QueryParam "sortField" AccountsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              AccountsListSortOrder
+    Core.:> Core.QueryParam "sortOrder" AccountsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              AccountsListResponse
+    Core.:> Core.Get '[Core.JSON] AccountsListResponse
 
 -- | Retrieves the list of accounts, possibly filtered. This method supports paging.
 --
@@ -125,9 +119,7 @@ newDFAReportingAccountsList profileId =
     }
 
 instance Core.GoogleRequest DFAReportingAccountsList where
-  type
-    Rs DFAReportingAccountsList =
-      AccountsListResponse
+  type Rs DFAReportingAccountsList = AccountsListResponse
   type
     Scopes DFAReportingAccountsList =
       '[Dfatrafficking'FullControl]
@@ -151,7 +143,5 @@ instance Core.GoogleRequest DFAReportingAccountsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAccountsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAccountsListResource)
           Core.mempty

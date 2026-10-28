@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudIdentity.Internal.Sum
@@ -55,6 +53,42 @@ module Gogol.CloudIdentity.Internal.Sum
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEADMINISTRATOR,
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_PROFILEOWNER,
         GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEOWNER,
+        ..
+      ),
+
+    -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unmanaged,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWSERMANAGED,
+        ..
+      ),
+
+    -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE,
+        ..
+      ),
+
+    -- * GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+    GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+      ( GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard,
+        GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced,
+        ..
+      ),
+
+    -- * GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+    GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+      ( GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED,
+        GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL,
+        GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED,
         ..
       ),
 
@@ -216,6 +250,7 @@ module Gogol.CloudIdentity.Internal.Sum
         Membership_Type_SERVICEACCOUNT,
         Membership_Type_Group,
         Membership_Type_SHAREDDRIVE,
+        Membership_Type_CBCMBROWSER,
         Membership_Type_Other,
         ..
       ),
@@ -227,6 +262,14 @@ module Gogol.CloudIdentity.Internal.Sum
         MembershipRoleRestrictionEvaluation_State_FORWARDCOMPLIANT,
         MembershipRoleRestrictionEvaluation_State_NONCOMPLIANT,
         MembershipRoleRestrictionEvaluation_State_Evaluating,
+        ..
+      ),
+
+    -- * Policy_Type
+    Policy_Type
+      ( Policy_Type_POLICYTYPEUNSPECIFIED,
+        Policy_Type_System,
+        Policy_Type_Admin,
         ..
       ),
 
@@ -299,7 +342,7 @@ module Gogol.CloudIdentity.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -427,6 +470,154 @@ pattern GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEV
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_PROFILEOWNER,
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege_DEVICEOWNER,
   GoogleAppsCloudidentityDevicesV1AndroidAttributes_OwnershipPrivilege
+  #-}
+
+-- | Output only. Browser\'s management state.
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Management state is not specified.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState "UNSPECIFIED"
+
+-- | Browser\/Profile is not managed by any customer.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unmanaged :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unmanaged = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState "UNMANAGED"
+
+-- | Browser\/Profile is managed, but by some other customer.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState "MANAGED_BY_OTHER_DOMAIN"
+
+-- | Profile is managed by customer.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState "PROFILE_MANAGED"
+
+-- | Browser is managed by customer.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWSERMANAGED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWSERMANAGED = GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState "BROWSER_MANAGED"
+
+{-# COMPLETE
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unspecified,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_Unmanaged,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_MANAGEDBYOTHERDOMAIN,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_PROFILEMANAGED,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState_BROWSERMANAGED,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_BrowserManagementState
+  #-}
+
+-- | Current state of <https://chromeenterprise.google/policies/#PasswordProtectionWarningTrigger password protection trigger>.
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Password protection is not specified.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger "PASSWORD_PROTECTION_TRIGGER_UNSPECIFIED"
+
+-- | Password reuse is never detected.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF :: GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger "PROTECTION_OFF"
+
+-- | Warning is shown when the user reuses their protected password on a non-allowed site.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE :: GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger "PASSWORD_REUSE"
+
+-- | Warning is shown when the user reuses their protected password on a phishing site.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE :: GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE = GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger "PHISHING_REUSE"
+
+{-# COMPLETE
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDPROTECTIONTRIGGERUNSPECIFIED,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PROTECTIONOFF,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PASSWORDREUSE,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger_PHISHINGREUSE,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_PasswordProtectionWarningTrigger
+  #-}
+
+-- | Current state of <https://chromeenterprise.google/policies/#SafeBrowsingProtectionLevel Safe Browsing protection level>.
+newtype GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel {fromGoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Browser protection level is not specified.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel "SAFE_BROWSING_LEVEL_UNSPECIFIED"
+
+-- | No protection against dangerous websites, downloads, and extensions.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled :: GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel "DISABLED"
+
+-- | Standard protection against websites, downloads, and extensions that are known to be dangerous.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard :: GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel "STANDARD"
+
+-- | Faster, proactive protection against dangerous websites, downloads, and extensions.
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced :: GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+pattern GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced = GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel "ENHANCED"
+
+{-# COMPLETE
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_SAFEBROWSINGLEVELUNSPECIFIED,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Disabled,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Standard,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel_Enhanced,
+  GoogleAppsCloudidentityDevicesV1BrowserInfo_SafeBrowsingProtectionLevel
+  #-}
+
+-- | Output only. Validation state of this certificate.
+newtype GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState {fromGoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value.
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED :: GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState "CERTIFICATE_VALIDATION_STATE_UNSPECIFIED"
+
+-- | Certificate validation was successful.
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL :: GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState "VALIDATION_SUCCESSFUL"
+
+-- | Certificate validation failed.
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED :: GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
+pattern GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED = GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState "VALIDATION_FAILED"
+
+{-# COMPLETE
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_CERTIFICATEVALIDATIONSTATEUNSPECIFIED,
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONSUCCESSFUL,
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState_VALIDATIONFAILED,
+  GoogleAppsCloudidentityDevicesV1CertificateAttributes_ValidationState
   #-}
 
 -- | The compliance state of the resource as specified by the API client.
@@ -1089,6 +1280,10 @@ pattern Membership_Type_Group = Membership_Type "GROUP"
 pattern Membership_Type_SHAREDDRIVE :: Membership_Type
 pattern Membership_Type_SHAREDDRIVE = Membership_Type "SHARED_DRIVE"
 
+-- | Represents a CBCM-managed Chrome Browser type.
+pattern Membership_Type_CBCMBROWSER :: Membership_Type
+pattern Membership_Type_CBCMBROWSER = Membership_Type "CBCM_BROWSER"
+
 -- | Represents other type.
 pattern Membership_Type_Other :: Membership_Type
 pattern Membership_Type_Other = Membership_Type "OTHER"
@@ -1099,6 +1294,7 @@ pattern Membership_Type_Other = Membership_Type "OTHER"
   Membership_Type_SERVICEACCOUNT,
   Membership_Type_Group,
   Membership_Type_SHAREDDRIVE,
+  Membership_Type_CBCMBROWSER,
   Membership_Type_Other,
   Membership_Type
   #-}
@@ -1143,6 +1339,38 @@ pattern MembershipRoleRestrictionEvaluation_State_Evaluating = MembershipRoleRes
   MembershipRoleRestrictionEvaluation_State_NONCOMPLIANT,
   MembershipRoleRestrictionEvaluation_State_Evaluating,
   MembershipRoleRestrictionEvaluation_State
+  #-}
+
+-- | Output only. The type of the policy.
+newtype Policy_Type = Policy_Type {fromPolicy_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified policy type.
+pattern Policy_Type_POLICYTYPEUNSPECIFIED :: Policy_Type
+pattern Policy_Type_POLICYTYPEUNSPECIFIED = Policy_Type "POLICY_TYPE_UNSPECIFIED"
+
+-- | Policy type denoting the system-configured policies.
+pattern Policy_Type_System :: Policy_Type
+pattern Policy_Type_System = Policy_Type "SYSTEM"
+
+-- | Policy type denoting the admin-configurable policies.
+pattern Policy_Type_Admin :: Policy_Type
+pattern Policy_Type_Admin = Policy_Type "ADMIN"
+
+{-# COMPLETE
+  Policy_Type_POLICYTYPEUNSPECIFIED,
+  Policy_Type_System,
+  Policy_Type_Admin,
+  Policy_Type
   #-}
 
 -- | Output only. The current state of the restriction
@@ -1273,7 +1501,7 @@ newtype DevicesListView = DevicesListView {fromDevicesListView :: Core.Text}
 pattern DevicesListView_VIEWUNSPECIFIED :: DevicesListView
 pattern DevicesListView_VIEWUNSPECIFIED = DevicesListView "VIEW_UNSPECIFIED"
 
--- | This view contains all devices imported by the company admin. Each device in the response contains all information specified by the company admin when importing the device (i.e. asset tags). This includes devices that may be unaassigned or assigned to users.
+-- | This view contains all devices imported by the company admin. Each device in the response contains all information specified by the company admin when importing the device (i.e. asset tags). This includes devices that may be unassigned or assigned to users.
 pattern DevicesListView_COMPANYINVENTORY :: DevicesListView
 pattern DevicesListView_COMPANYINVENTORY = DevicesListView "COMPANY_INVENTORY"
 

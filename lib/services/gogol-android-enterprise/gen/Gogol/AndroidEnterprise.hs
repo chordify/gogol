@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -68,6 +66,11 @@ module Gogol.AndroidEnterprise
     AndroidEnterpriseDevicesUpdate (..),
     newAndroidEnterpriseDevicesUpdate,
 
+    -- ** androidenterprise.enrollmentTokens.create
+    AndroidEnterpriseEnrollmentTokensCreateResource,
+    AndroidEnterpriseEnrollmentTokensCreate (..),
+    newAndroidEnterpriseEnrollmentTokensCreate,
+
     -- ** androidenterprise.enterprises.acknowledgeNotificationSet
     AndroidEnterpriseEnterprisesAcknowledgeNotificationSetResource,
     AndroidEnterpriseEnterprisesAcknowledgeNotificationSet (..),
@@ -78,11 +81,6 @@ module Gogol.AndroidEnterprise
     AndroidEnterpriseEnterprisesCompleteSignup (..),
     newAndroidEnterpriseEnterprisesCompleteSignup,
 
-    -- ** androidenterprise.enterprises.createEnrollmentToken
-    AndroidEnterpriseEnterprisesCreateEnrollmentTokenResource,
-    AndroidEnterpriseEnterprisesCreateEnrollmentToken (..),
-    newAndroidEnterpriseEnterprisesCreateEnrollmentToken,
-
     -- ** androidenterprise.enterprises.createWebToken
     AndroidEnterpriseEnterprisesCreateWebTokenResource,
     AndroidEnterpriseEnterprisesCreateWebToken (..),
@@ -92,6 +90,11 @@ module Gogol.AndroidEnterprise
     AndroidEnterpriseEnterprisesEnrollResource,
     AndroidEnterpriseEnterprisesEnroll (..),
     newAndroidEnterpriseEnterprisesEnroll,
+
+    -- ** androidenterprise.enterprises.generateEnterpriseUpgradeUrl
+    AndroidEnterpriseEnterprisesGenerateEnterpriseUpgradeUrlResource,
+    AndroidEnterpriseEnterprisesGenerateEnterpriseUpgradeUrl (..),
+    newAndroidEnterpriseEnterprisesGenerateEnterpriseUpgradeUrl,
 
     -- ** androidenterprise.enterprises.generateSignupUrl
     AndroidEnterpriseEnterprisesGenerateSignupUrlResource,
@@ -531,10 +534,6 @@ module Gogol.AndroidEnterprise
     ConfigurationVariables (..),
     newConfigurationVariables,
 
-    -- ** CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
-
     -- ** Device
     Device (..),
     newDevice,
@@ -561,9 +560,22 @@ module Gogol.AndroidEnterprise
     DevicesListResponse (..),
     newDevicesListResponse,
 
+    -- ** EnrollmentToken
+    EnrollmentToken (..),
+    newEnrollmentToken,
+
+    -- ** EnrollmentToken_EnrollmentTokenType
+    EnrollmentToken_EnrollmentTokenType (..),
+
     -- ** Enterprise
     Enterprise (..),
     newEnterprise,
+
+    -- ** Enterprise_EnterpriseType
+    Enterprise_EnterpriseType (..),
+
+    -- ** Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType (..),
 
     -- ** EnterpriseAccount
     EnterpriseAccount (..),
@@ -572,6 +584,13 @@ module Gogol.AndroidEnterprise
     -- ** EnterpriseAuthenticationAppLinkConfig
     EnterpriseAuthenticationAppLinkConfig (..),
     newEnterpriseAuthenticationAppLinkConfig,
+
+    -- ** EnterpriseUpgradeEvent
+    EnterpriseUpgradeEvent (..),
+    newEnterpriseUpgradeEvent,
+
+    -- ** EnterpriseUpgradeEvent_UpgradeState
+    EnterpriseUpgradeEvent_UpgradeState (..),
 
     -- ** EnterprisesListResponse
     EnterprisesListResponse (..),
@@ -591,6 +610,10 @@ module Gogol.AndroidEnterprise
     -- ** EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- ** GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- ** GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -897,9 +920,6 @@ module Gogol.AndroidEnterprise
     WebAppsListResponse (..),
     newWebAppsListResponse,
 
-    -- ** EnterprisesCreateEnrollmentTokenDeviceType
-    EnterprisesCreateEnrollmentTokenDeviceType (..),
-
     -- ** EnterprisesGetServiceAccountKeyType
     EnterprisesGetServiceAccountKeyType (..),
 
@@ -914,11 +934,12 @@ import Gogol.AndroidEnterprise.Devices.GetState
 import Gogol.AndroidEnterprise.Devices.List
 import Gogol.AndroidEnterprise.Devices.SetState
 import Gogol.AndroidEnterprise.Devices.Update
+import Gogol.AndroidEnterprise.EnrollmentTokens.Create
 import Gogol.AndroidEnterprise.Enterprises.AcknowledgeNotificationSet
 import Gogol.AndroidEnterprise.Enterprises.CompleteSignup
-import Gogol.AndroidEnterprise.Enterprises.CreateEnrollmentToken
 import Gogol.AndroidEnterprise.Enterprises.CreateWebToken
 import Gogol.AndroidEnterprise.Enterprises.Enroll
+import Gogol.AndroidEnterprise.Enterprises.GenerateEnterpriseUpgradeUrl
 import Gogol.AndroidEnterprise.Enterprises.GenerateSignupUrl
 import Gogol.AndroidEnterprise.Enterprises.Get
 import Gogol.AndroidEnterprise.Enterprises.GetServiceAccount

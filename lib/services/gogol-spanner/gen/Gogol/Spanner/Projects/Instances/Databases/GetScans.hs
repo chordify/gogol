@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.GetScans
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.GetScans
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.getScans@ method which the
@@ -55,9 +53,7 @@ type SpannerProjectsInstancesDatabasesGetScansResource =
     Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ProjectsInstancesDatabasesGetScansView
+    Core.:> Core.QueryParam "view" ProjectsInstancesDatabasesGetScansView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Scan
 
@@ -108,31 +104,27 @@ instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesGetScans
   where
-  type
-    Rs SpannerProjectsInstancesDatabasesGetScans =
-      Scan
+  type Rs SpannerProjectsInstancesDatabasesGetScans = Scan
   type
     Scopes SpannerProjectsInstancesDatabasesGetScans =
       '[CloudPlatform'FullControl, Spanner'Data]
-  requestClient
-    SpannerProjectsInstancesDatabasesGetScans {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        endTime
-        startTime
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesGetScansResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesGetScans {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      endTime
+      startTime
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesGetScansResource
+          )
+          Core.mempty

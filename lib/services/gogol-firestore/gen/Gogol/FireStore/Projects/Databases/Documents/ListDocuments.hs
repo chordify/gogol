@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.ListDocuments
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.ListDocuments
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.listDocuments@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsListDocuments' request conforms to.
@@ -85,7 +83,7 @@ data FireStoreProjectsDatabasesDocumentsListDocuments = FireStoreProjectsDatabas
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The parent resource name. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents@ or @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents@ or @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@
     parent :: Core.Text,
-    -- | Perform the read at the provided time. This may not be older than 270 seconds.
+    -- | Perform the read at the provided time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
     readTime :: (Core.Maybe Core.DateTime),
     -- | If the list should show missing documents. A document is missing if it does not exist, but there are sub-documents nested underneath it. When true, such missing documents will be returned with a key but will not have fields, @create_time@, or @update_time@ set. Requests with @show_missing@ may not specify @where@ or @order_by@.
     showMissing :: (Core.Maybe Core.Bool),
@@ -105,60 +103,60 @@ newFireStoreProjectsDatabasesDocumentsListDocuments ::
   -- |  Required. The parent resource name. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents@ or @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@. For example: @projects\/my-project\/databases\/my-database\/documents@ or @projects\/my-project\/databases\/my-database\/documents\/chatrooms\/my-chatroom@ See 'parent'.
   Core.Text ->
   FireStoreProjectsDatabasesDocumentsListDocuments
-newFireStoreProjectsDatabasesDocumentsListDocuments collectionId parent =
-  FireStoreProjectsDatabasesDocumentsListDocuments
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      collectionId = collectionId,
-      maskFieldPaths = Core.Nothing,
-      orderBy = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      readTime = Core.Nothing,
-      showMissing = Core.Nothing,
-      transaction = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newFireStoreProjectsDatabasesDocumentsListDocuments
+  collectionId
+  parent =
+    FireStoreProjectsDatabasesDocumentsListDocuments
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        collectionId = collectionId,
+        maskFieldPaths = Core.Nothing,
+        orderBy = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        readTime = Core.Nothing,
+        showMissing = Core.Nothing,
+        transaction = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesDocumentsListDocuments
   where
   type
-    Rs
-      FireStoreProjectsDatabasesDocumentsListDocuments =
+    Rs FireStoreProjectsDatabasesDocumentsListDocuments =
       ListDocumentsResponse
   type
-    Scopes
-      FireStoreProjectsDatabasesDocumentsListDocuments =
+    Scopes FireStoreProjectsDatabasesDocumentsListDocuments =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsListDocuments {..} =
-      go
-        parent
-        collectionId
-        xgafv
-        accessToken
-        callback
-        (maskFieldPaths Core.^. Core._Default)
-        orderBy
-        pageSize
-        pageToken
-        readTime
-        showMissing
-        transaction
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsListDocumentsResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsListDocuments {..} =
+    go
+      parent
+      collectionId
+      xgafv
+      accessToken
+      callback
+      (maskFieldPaths Core.^. Core._Default)
+      orderBy
+      pageSize
+      pageToken
+      readTime
+      showMissing
+      transaction
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                FireStoreProjectsDatabasesDocumentsListDocumentsResource
+          )
+          Core.mempty

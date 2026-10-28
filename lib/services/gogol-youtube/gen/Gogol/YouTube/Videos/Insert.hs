@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Videos.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Videos.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.videos.insert@ method which the
@@ -55,9 +53,7 @@ type YouTubeVideosInsertResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "notifySubscribers" Core.Bool
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwnerChannel"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
     Core.:> Core.QueryParam "stabilize" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -65,30 +61,24 @@ type YouTubeVideosInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Video
     Core.:> Core.Post '[Core.JSON] Video
     Core.:<|> "upload"
-      Core.:> "youtube"
-      Core.:> "v3"
-      Core.:> "videos"
-      Core.:> Core.QueryParams "part" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "autoLevels" Core.Bool
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "notifySubscribers" Core.Bool
-      Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-      Core.:> Core.QueryParam
-                "onBehalfOfContentOwnerChannel"
-                Core.Text
-      Core.:> Core.QueryParam "stabilize" Core.Bool
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.Multipart
-      Core.:> Core.MultipartRelated
-                '[Core.JSON]
-                Video
-      Core.:> Core.Post '[Core.JSON] Video
+    Core.:> "youtube"
+    Core.:> "v3"
+    Core.:> "videos"
+    Core.:> Core.QueryParams "part" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "autoLevels" Core.Bool
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "notifySubscribers" Core.Bool
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
+    Core.:> Core.QueryParam "stabilize" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Video
+    Core.:> Core.Post '[Core.JSON] Video
 
 -- | Inserts a new resource into this collection.
 --
@@ -173,44 +163,34 @@ instance Core.GoogleRequest YouTubeVideosInsert where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeVideosInsertResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeVideosInsertResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload YouTubeVideosInsert)
-  where
-  type
-    Rs (Core.MediaUpload YouTubeVideosInsert) =
-      Video
+instance Core.GoogleRequest (Core.MediaUpload YouTubeVideosInsert) where
+  type Rs (Core.MediaUpload YouTubeVideosInsert) = Video
   type
     Scopes (Core.MediaUpload YouTubeVideosInsert) =
       Core.Scopes YouTubeVideosInsert
-  requestClient
-    (Core.MediaUpload YouTubeVideosInsert {..} body) =
-      go
-        part
-        xgafv
-        accessToken
-        autoLevels
-        callback
-        (Core.Just notifySubscribers)
-        onBehalfOfContentOwner
-        onBehalfOfContentOwnerChannel
-        stabilize
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        youTubeService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy YouTubeVideosInsertResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload YouTubeVideosInsert {..} body) =
+    go
+      part
+      xgafv
+      accessToken
+      autoLevels
+      callback
+      (Core.Just notifySubscribers)
+      onBehalfOfContentOwner
+      onBehalfOfContentOwnerChannel
+      stabilize
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      youTubeService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy YouTubeVideosInsertResource)
+          Core.mempty

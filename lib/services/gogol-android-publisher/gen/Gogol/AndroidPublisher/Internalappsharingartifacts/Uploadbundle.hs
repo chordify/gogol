@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Internalappsharingartifacts.Uploadbundle
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.internalappsharingartifacts.uploadbundle@ method which the
 -- 'AndroidPublisherInternalappsharingartifactsUploadbundle' request conforms to.
@@ -60,24 +58,22 @@ type AndroidPublisherInternalappsharingartifactsUploadbundleResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] InternalAppSharingArtifact
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> "internalappsharing"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "artifacts"
-      Core.:> "bundle"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post
-                '[Core.JSON]
-                InternalAppSharingArtifact
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> "internalappsharing"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "artifacts"
+    Core.:> "bundle"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] InternalAppSharingArtifact
 
 -- | Uploads an app bundle to internal app sharing. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See <https://developers.google.com/api-client-library/java/google-api-java-client/errors Timeouts and Errors> for an example in java.
 --
@@ -103,27 +99,27 @@ newAndroidPublisherInternalappsharingartifactsUploadbundle ::
   -- |  Package name of the app. See 'packageName'.
   Core.Text ->
   AndroidPublisherInternalappsharingartifactsUploadbundle
-newAndroidPublisherInternalappsharingartifactsUploadbundle packageName =
-  AndroidPublisherInternalappsharingartifactsUploadbundle
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherInternalappsharingartifactsUploadbundle
+  packageName =
+    AndroidPublisherInternalappsharingartifactsUploadbundle
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidPublisherInternalappsharingartifactsUploadbundle
   where
   type
-    Rs
-      AndroidPublisherInternalappsharingartifactsUploadbundle =
+    Rs AndroidPublisherInternalappsharingartifactsUploadbundle =
       InternalAppSharingArtifact
   type
-    Scopes
-      AndroidPublisherInternalappsharingartifactsUploadbundle =
+    Scopes AndroidPublisherInternalappsharingartifactsUploadbundle =
       '[Androidpublisher'FullControl]
   requestClient
     AndroidPublisherInternalappsharingartifactsUploadbundle {..} =
@@ -162,8 +158,7 @@ instance
       ( Core.MediaUpload
           AndroidPublisherInternalappsharingartifactsUploadbundle
       ) =
-      Core.Scopes
-        AndroidPublisherInternalappsharingartifactsUploadbundle
+      Core.Scopes AndroidPublisherInternalappsharingartifactsUploadbundle
   requestClient
     ( Core.MediaUpload
         AndroidPublisherInternalappsharingartifactsUploadbundle {..}

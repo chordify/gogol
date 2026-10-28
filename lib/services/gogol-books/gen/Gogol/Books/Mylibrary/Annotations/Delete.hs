@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Annotations.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Mylibrary.Annotations.Delete
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.annotations.delete@ method which the
 -- 'BooksMylibraryAnnotationsDelete' request conforms to.
@@ -96,14 +94,9 @@ newBooksMylibraryAnnotationsDelete annotationId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMylibraryAnnotationsDelete
-  where
+instance Core.GoogleRequest BooksMylibraryAnnotationsDelete where
   type Rs BooksMylibraryAnnotationsDelete = Empty
-  type
-    Scopes BooksMylibraryAnnotationsDelete =
-      '[Books'FullControl]
+  type Scopes BooksMylibraryAnnotationsDelete = '[Books'FullControl]
   requestClient BooksMylibraryAnnotationsDelete {..} =
     go
       annotationId
@@ -118,7 +111,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksMylibraryAnnotationsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy BooksMylibraryAnnotationsDeleteResource)
           Core.mempty

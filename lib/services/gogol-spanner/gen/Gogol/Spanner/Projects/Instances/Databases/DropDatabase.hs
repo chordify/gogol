@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.DropDatabase
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.DropDatabase
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.dropDatabase@ method which the
@@ -81,7 +79,8 @@ newSpannerProjectsInstancesDatabasesDropDatabase ::
   SpannerProjectsInstancesDatabasesDropDatabase
 newSpannerProjectsInstancesDatabasesDropDatabase database =
   SpannerProjectsInstancesDatabasesDropDatabase
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       database = database,
@@ -93,29 +92,24 @@ instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesDropDatabase
   where
+  type Rs SpannerProjectsInstancesDatabasesDropDatabase = Empty
   type
-    Rs SpannerProjectsInstancesDatabasesDropDatabase =
-      Empty
-  type
-    Scopes
-      SpannerProjectsInstancesDatabasesDropDatabase =
+    Scopes SpannerProjectsInstancesDatabasesDropDatabase =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesDatabasesDropDatabase {..} =
-      go
-        database
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesDropDatabaseResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesDropDatabase {..} =
+    go
+      database
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesDropDatabaseResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Builds and manages container-based applications, powered by the open source Kubernetes technology.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference>
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference>
 module Gogol.Container
   ( -- * Configuration
     containerService,
@@ -42,6 +40,11 @@ module Gogol.Container
     ContainerProjectsAggregatedUsableSubnetworksListResource,
     ContainerProjectsAggregatedUsableSubnetworksList (..),
     newContainerProjectsAggregatedUsableSubnetworksList,
+
+    -- ** container.projects.locations.clusters.checkAutopilotCompatibility
+    ContainerProjectsLocationsClustersCheckAutopilotCompatibilityResource,
+    ContainerProjectsLocationsClustersCheckAutopilotCompatibility (..),
+    newContainerProjectsLocationsClustersCheckAutopilotCompatibility,
 
     -- ** container.projects.locations.clusters.completeIpRotation
     ContainerProjectsLocationsClustersCompleteIpRotationResource,
@@ -367,6 +370,14 @@ module Gogol.Container
     AcceleratorConfig (..),
     newAcceleratorConfig,
 
+    -- ** AdditionalNodeNetworkConfig
+    AdditionalNodeNetworkConfig (..),
+    newAdditionalNodeNetworkConfig,
+
+    -- ** AdditionalPodNetworkConfig
+    AdditionalPodNetworkConfig (..),
+    newAdditionalPodNetworkConfig,
+
     -- ** AdditionalPodRangesConfig
     AdditionalPodRangesConfig (..),
     newAdditionalPodRangesConfig,
@@ -374,6 +385,13 @@ module Gogol.Container
     -- ** AddonsConfig
     AddonsConfig (..),
     newAddonsConfig,
+
+    -- ** AdvancedDatapathObservabilityConfig
+    AdvancedDatapathObservabilityConfig (..),
+    newAdvancedDatapathObservabilityConfig,
+
+    -- ** AdvancedDatapathObservabilityConfig_RelayMode
+    AdvancedDatapathObservabilityConfig_RelayMode (..),
 
     -- ** AdvancedMachineFeatures
     AdvancedMachineFeatures (..),
@@ -383,6 +401,13 @@ module Gogol.Container
     AuthenticatorGroupsConfig (..),
     newAuthenticatorGroupsConfig,
 
+    -- ** AutoMonitoringConfig
+    AutoMonitoringConfig (..),
+    newAutoMonitoringConfig,
+
+    -- ** AutoMonitoringConfig_Scope
+    AutoMonitoringConfig_Scope (..),
+
     -- ** AutoUpgradeOptions
     AutoUpgradeOptions (..),
     newAutoUpgradeOptions,
@@ -391,9 +416,24 @@ module Gogol.Container
     Autopilot (..),
     newAutopilot,
 
+    -- ** AutopilotCompatibilityIssue
+    AutopilotCompatibilityIssue (..),
+    newAutopilotCompatibilityIssue,
+
+    -- ** AutopilotCompatibilityIssue_IncompatibilityType
+    AutopilotCompatibilityIssue_IncompatibilityType (..),
+
+    -- ** AutopilotConfig
+    AutopilotConfig (..),
+    newAutopilotConfig,
+
     -- ** AutoprovisioningNodePoolDefaults
     AutoprovisioningNodePoolDefaults (..),
     newAutoprovisioningNodePoolDefaults,
+
+    -- ** BestEffortProvisioning
+    BestEffortProvisioning (..),
+    newBestEffortProvisioning,
 
     -- ** BigQueryDestination
     BigQueryDestination (..),
@@ -420,6 +460,14 @@ module Gogol.Container
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
+
+    -- ** CertificateAuthorityDomainConfig
+    CertificateAuthorityDomainConfig (..),
+    newCertificateAuthorityDomainConfig,
+
+    -- ** CheckAutopilotCompatibilityResponse
+    CheckAutopilotCompatibilityResponse (..),
+    newCheckAutopilotCompatibilityResponse,
 
     -- ** CidrBlock
     CidrBlock (..),
@@ -454,12 +502,22 @@ module Gogol.Container
     -- ** ClusterAutoscaling_AutoscalingProfile
     ClusterAutoscaling_AutoscalingProfile (..),
 
+    -- ** ClusterNetworkPerformanceConfig
+    ClusterNetworkPerformanceConfig (..),
+    newClusterNetworkPerformanceConfig,
+
+    -- ** ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier
+    ClusterNetworkPerformanceConfig_TotalEgressBandwidthTier (..),
+
     -- ** ClusterUpdate
     ClusterUpdate (..),
     newClusterUpdate,
 
     -- ** ClusterUpdate_DesiredDatapathProvider
     ClusterUpdate_DesiredDatapathProvider (..),
+
+    -- ** ClusterUpdate_DesiredInTransitEncryptionConfig
+    ClusterUpdate_DesiredInTransitEncryptionConfig (..),
 
     -- ** ClusterUpdate_DesiredPrivateIpv6GoogleAccess
     ClusterUpdate_DesiredPrivateIpv6GoogleAccess (..),
@@ -475,6 +533,17 @@ module Gogol.Container
     CompleteNodePoolUpgradeRequest (..),
     newCompleteNodePoolUpgradeRequest,
 
+    -- ** CompliancePostureConfig
+    CompliancePostureConfig (..),
+    newCompliancePostureConfig,
+
+    -- ** CompliancePostureConfig_Mode
+    CompliancePostureConfig_Mode (..),
+
+    -- ** ComplianceStandard
+    ComplianceStandard (..),
+    newComplianceStandard,
+
     -- ** ConfidentialNodes
     ConfidentialNodes (..),
     newConfidentialNodes,
@@ -486,6 +555,14 @@ module Gogol.Container
     -- ** ConsumptionMeteringConfig
     ConsumptionMeteringConfig (..),
     newConsumptionMeteringConfig,
+
+    -- ** ContainerdConfig
+    ContainerdConfig (..),
+    newContainerdConfig,
+
+    -- ** ControlPlaneEndpointsConfig
+    ControlPlaneEndpointsConfig (..),
+    newControlPlaneEndpointsConfig,
 
     -- ** CostManagementConfig
     CostManagementConfig (..),
@@ -509,6 +586,10 @@ module Gogol.Container
     -- ** DNSConfig_ClusterDnsScope
     DNSConfig_ClusterDnsScope (..),
 
+    -- ** DNSEndpointConfig
+    DNSEndpointConfig (..),
+    newDNSEndpointConfig,
+
     -- ** DailyMaintenanceWindow
     DailyMaintenanceWindow (..),
     newDailyMaintenanceWindow,
@@ -517,12 +598,22 @@ module Gogol.Container
     DatabaseEncryption (..),
     newDatabaseEncryption,
 
+    -- ** DatabaseEncryption_CurrentState
+    DatabaseEncryption_CurrentState (..),
+
     -- ** DatabaseEncryption_State
     DatabaseEncryption_State (..),
 
     -- ** DefaultSnatStatus
     DefaultSnatStatus (..),
     newDefaultSnatStatus,
+
+    -- ** DesiredEnterpriseConfig
+    DesiredEnterpriseConfig (..),
+    newDesiredEnterpriseConfig,
+
+    -- ** DesiredEnterpriseConfig_DesiredTier
+    DesiredEnterpriseConfig_DesiredTier (..),
 
     -- ** DnsCacheConfig
     DnsCacheConfig (..),
@@ -531,6 +622,16 @@ module Gogol.Container
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EnterpriseConfig
+    EnterpriseConfig (..),
+    newEnterpriseConfig,
+
+    -- ** EnterpriseConfig_ClusterTier
+    EnterpriseConfig_ClusterTier (..),
+
+    -- ** EnterpriseConfig_DesiredTier
+    EnterpriseConfig_DesiredTier (..),
 
     -- ** EphemeralStorageLocalSsdConfig
     EphemeralStorageLocalSsdConfig (..),
@@ -550,6 +651,17 @@ module Gogol.Container
     -- ** Fleet
     Fleet (..),
     newFleet,
+
+    -- ** GCPSecretManagerCertificateConfig
+    GCPSecretManagerCertificateConfig (..),
+    newGCPSecretManagerCertificateConfig,
+
+    -- ** GPUDriverInstallationConfig
+    GPUDriverInstallationConfig (..),
+    newGPUDriverInstallationConfig,
+
+    -- ** GPUDriverInstallationConfig_GpuDriverVersion
+    GPUDriverInstallationConfig_GpuDriverVersion (..),
 
     -- ** GPUSharingConfig
     GPUSharingConfig (..),
@@ -577,6 +689,10 @@ module Gogol.Container
     GcpFilestoreCsiDriverConfig (..),
     newGcpFilestoreCsiDriverConfig,
 
+    -- ** GcsFuseCsiDriverConfig
+    GcsFuseCsiDriverConfig (..),
+    newGcsFuseCsiDriverConfig,
+
     -- ** GetJSONWebKeysResponse
     GetJSONWebKeysResponse (..),
     newGetJSONWebKeysResponse,
@@ -601,6 +717,10 @@ module Gogol.Container
     HttpLoadBalancing (..),
     newHttpLoadBalancing,
 
+    -- ** HugepagesConfig
+    HugepagesConfig (..),
+    newHugepagesConfig,
+
     -- ** ILBSubsettingConfig
     ILBSubsettingConfig (..),
     newILBSubsettingConfig,
@@ -615,6 +735,10 @@ module Gogol.Container
     -- ** IPAllocationPolicy_StackType
     IPAllocationPolicy_StackType (..),
 
+    -- ** IPEndpointsConfig
+    IPEndpointsConfig (..),
+    newIPEndpointsConfig,
+
     -- ** IdentityServiceConfig
     IdentityServiceConfig (..),
     newIdentityServiceConfig,
@@ -626,6 +750,10 @@ module Gogol.Container
     -- ** Jwk
     Jwk (..),
     newJwk,
+
+    -- ** K8sBetaAPIConfig
+    K8sBetaAPIConfig (..),
+    newK8sBetaAPIConfig,
 
     -- ** KubernetesDashboard
     KubernetesDashboard (..),
@@ -745,6 +873,9 @@ module Gogol.Container
     -- ** NetworkConfig_DatapathProvider
     NetworkConfig_DatapathProvider (..),
 
+    -- ** NetworkConfig_InTransitEncryptionConfig
+    NetworkConfig_InTransitEncryptionConfig (..),
+
     -- ** NetworkConfig_PrivateIpv6GoogleAccess
     NetworkConfig_PrivateIpv6GoogleAccess (..),
 
@@ -770,13 +901,26 @@ module Gogol.Container
     NetworkTags (..),
     newNetworkTags,
 
+    -- ** NodeAffinity
+    NodeAffinity (..),
+    newNodeAffinity,
+
+    -- ** NodeAffinity_Operator
+    NodeAffinity_Operator (..),
+
     -- ** NodeConfig
     NodeConfig (..),
     newNodeConfig,
 
+    -- ** NodeConfig_EffectiveCgroupMode
+    NodeConfig_EffectiveCgroupMode (..),
+
     -- ** NodeConfig_Labels
     NodeConfig_Labels (..),
     newNodeConfig_Labels,
+
+    -- ** NodeConfig_LocalSsdEncryptionMode
+    NodeConfig_LocalSsdEncryptionMode (..),
 
     -- ** NodeConfig_Metadata
     NodeConfig_Metadata (..),
@@ -861,12 +1005,28 @@ module Gogol.Container
     -- ** Operation_Status
     Operation_Status (..),
 
+    -- ** OperationError
+    OperationError (..),
+    newOperationError,
+
     -- ** OperationProgress
     OperationProgress (..),
     newOperationProgress,
 
     -- ** OperationProgress_Status
     OperationProgress_Status (..),
+
+    -- ** ParallelstoreCsiDriverConfig
+    ParallelstoreCsiDriverConfig (..),
+    newParallelstoreCsiDriverConfig,
+
+    -- ** ParentProductConfig
+    ParentProductConfig (..),
+    newParentProductConfig,
+
+    -- ** ParentProductConfig_Labels
+    ParentProductConfig_Labels (..),
+    newParentProductConfig_Labels,
 
     -- ** PlacementPolicy
     PlacementPolicy (..),
@@ -887,9 +1047,37 @@ module Gogol.Container
     PrivateClusterMasterGlobalAccessConfig (..),
     newPrivateClusterMasterGlobalAccessConfig,
 
+    -- ** PrivateRegistryAccessConfig
+    PrivateRegistryAccessConfig (..),
+    newPrivateRegistryAccessConfig,
+
     -- ** PubSub
     PubSub (..),
     newPubSub,
+
+    -- ** QueuedProvisioning
+    QueuedProvisioning (..),
+    newQueuedProvisioning,
+
+    -- ** RBACBindingConfig
+    RBACBindingConfig (..),
+    newRBACBindingConfig,
+
+    -- ** RangeInfo
+    RangeInfo (..),
+    newRangeInfo,
+
+    -- ** RayClusterLoggingConfig
+    RayClusterLoggingConfig (..),
+    newRayClusterLoggingConfig,
+
+    -- ** RayClusterMonitoringConfig
+    RayClusterMonitoringConfig (..),
+    newRayClusterMonitoringConfig,
+
+    -- ** RayOperatorConfig
+    RayOperatorConfig (..),
+    newRayOperatorConfig,
 
     -- ** RecurringTimeWindow
     RecurringTimeWindow (..),
@@ -928,6 +1116,14 @@ module Gogol.Container
     ResourceLimit (..),
     newResourceLimit,
 
+    -- ** ResourceManagerTags
+    ResourceManagerTags (..),
+    newResourceManagerTags,
+
+    -- ** ResourceManagerTags_Tags
+    ResourceManagerTags_Tags (..),
+    newResourceManagerTags_Tags,
+
     -- ** ResourceUsageExportConfig
     ResourceUsageExportConfig (..),
     newResourceUsageExportConfig,
@@ -943,9 +1139,34 @@ module Gogol.Container
     -- ** SandboxConfig_Type
     SandboxConfig_Type (..),
 
+    -- ** SecondaryBootDisk
+    SecondaryBootDisk (..),
+    newSecondaryBootDisk,
+
+    -- ** SecondaryBootDisk_Mode
+    SecondaryBootDisk_Mode (..),
+
+    -- ** SecondaryBootDiskUpdateStrategy
+    SecondaryBootDiskUpdateStrategy (..),
+    newSecondaryBootDiskUpdateStrategy,
+
+    -- ** SecretManagerConfig
+    SecretManagerConfig (..),
+    newSecretManagerConfig,
+
     -- ** SecurityBulletinEvent
     SecurityBulletinEvent (..),
     newSecurityBulletinEvent,
+
+    -- ** SecurityPostureConfig
+    SecurityPostureConfig (..),
+    newSecurityPostureConfig,
+
+    -- ** SecurityPostureConfig_Mode
+    SecurityPostureConfig_Mode (..),
+
+    -- ** SecurityPostureConfig_VulnerabilityMode
+    SecurityPostureConfig_VulnerabilityMode (..),
 
     -- ** ServerConfig
     ServerConfig (..),
@@ -1018,6 +1239,10 @@ module Gogol.Container
     ShieldedNodes (..),
     newShieldedNodes,
 
+    -- ** SoleTenantConfig
+    SoleTenantConfig (..),
+    newSoleTenantConfig,
+
     -- ** StandardRolloutPolicy
     StandardRolloutPolicy (..),
     newStandardRolloutPolicy,
@@ -1025,6 +1250,10 @@ module Gogol.Container
     -- ** StartIPRotationRequest
     StartIPRotationRequest (..),
     newStartIPRotationRequest,
+
+    -- ** StatefulHAConfig
+    StatefulHAConfig (..),
+    newStatefulHAConfig,
 
     -- ** Status
     Status (..),
@@ -1078,6 +1307,19 @@ module Gogol.Container
     -- ** UpgradeEvent_ResourceType
     UpgradeEvent_ResourceType (..),
 
+    -- ** UpgradeInfoEvent
+    UpgradeInfoEvent (..),
+    newUpgradeInfoEvent,
+
+    -- ** UpgradeInfoEvent_EventType
+    UpgradeInfoEvent_EventType (..),
+
+    -- ** UpgradeInfoEvent_ResourceType
+    UpgradeInfoEvent_ResourceType (..),
+
+    -- ** UpgradeInfoEvent_State
+    UpgradeInfoEvent_State (..),
+
     -- ** UpgradeSettings
     UpgradeSettings (..),
     newUpgradeSettings,
@@ -1095,6 +1337,10 @@ module Gogol.Container
 
     -- ** UsableSubnetworkSecondaryRange_Status
     UsableSubnetworkSecondaryRange_Status (..),
+
+    -- ** UserManagedKeysConfig
+    UserManagedKeysConfig (..),
+    newUserManagedKeysConfig,
 
     -- ** VerticalPodAutoscaling
     VerticalPodAutoscaling (..),
@@ -1121,10 +1367,15 @@ module Gogol.Container
 
     -- ** WorkloadMetadataConfig_Mode
     WorkloadMetadataConfig_Mode (..),
+
+    -- ** WorkloadPolicyConfig
+    WorkloadPolicyConfig (..),
+    newWorkloadPolicyConfig,
   )
 where
 
 import Gogol.Container.Projects.Aggregated.UsableSubnetworks.List
+import Gogol.Container.Projects.Locations.Clusters.CheckAutopilotCompatibility
 import Gogol.Container.Projects.Locations.Clusters.CompleteIpRotation
 import Gogol.Container.Projects.Locations.Clusters.Create
 import Gogol.Container.Projects.Locations.Clusters.Delete

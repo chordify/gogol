@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Locations.Buckets.Views.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a view on a log bucket..
+-- Gets a view on a log bucket.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.locations.buckets.views.get@.
 module Gogol.Logging.Locations.Buckets.Views.Get
@@ -40,7 +38,7 @@ module Gogol.Logging.Locations.Buckets.Views.Get
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.locations.buckets.views.get@ method which the
 -- 'LoggingLocationsBucketsViewsGet' request conforms to.
@@ -55,7 +53,7 @@ type LoggingLocationsBucketsViewsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] LogView
 
--- | Gets a view on a log bucket..
+-- | Gets a view on a log bucket.
 --
 -- /See:/ 'newLoggingLocationsBucketsViewsGet' smart constructor.
 data LoggingLocationsBucketsViewsGet = LoggingLocationsBucketsViewsGet
@@ -89,10 +87,7 @@ newLoggingLocationsBucketsViewsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingLocationsBucketsViewsGet
-  where
+instance Core.GoogleRequest LoggingLocationsBucketsViewsGet where
   type Rs LoggingLocationsBucketsViewsGet = LogView
   type
     Scopes LoggingLocationsBucketsViewsGet =
@@ -114,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LoggingLocationsBucketsViewsGetResource
-          )
+          (Core.Proxy :: Core.Proxy LoggingLocationsBucketsViewsGetResource)
           Core.mempty

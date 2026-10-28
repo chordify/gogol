@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.ConsentStores.Patch
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.consentStores.patch@ method which the
 -- 'HealthcareProjectsLocationsDatasetsConsentStoresPatch' request conforms to.
@@ -67,7 +65,7 @@ data HealthcareProjectsLocationsDatasetsConsentStoresPatch = HealthcareProjectsL
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation.
+    -- | Identifier. Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ConsentStore,
@@ -82,35 +80,36 @@ data HealthcareProjectsLocationsDatasetsConsentStoresPatch = HealthcareProjectsL
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsConsentStoresPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsConsentStoresPatch ::
-  -- |  Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation. See 'name'.
+  -- |  Identifier. Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ConsentStore ->
   HealthcareProjectsLocationsDatasetsConsentStoresPatch
-newHealthcareProjectsLocationsDatasetsConsentStoresPatch name payload =
-  HealthcareProjectsLocationsDatasetsConsentStoresPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsConsentStoresPatch
+  name
+  payload =
+    HealthcareProjectsLocationsDatasetsConsentStoresPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsConsentStoresPatch
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsConsentStoresPatch =
+    Rs HealthcareProjectsLocationsDatasetsConsentStoresPatch =
       ConsentStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsConsentStoresPatch =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsConsentStoresPatch =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsConsentStoresPatch {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceUsage
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -95,6 +93,14 @@ module Gogol.ServiceUsage
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AddEnableRulesMetadata
+    AddEnableRulesMetadata (..),
+    newAddEnableRulesMetadata,
+
+    -- ** AddEnableRulesResponse
+    AddEnableRulesResponse (..),
+    newAddEnableRulesResponse,
+
     -- ** AdminQuotaPolicy
     AdminQuotaPolicy (..),
     newAdminQuotaPolicy,
@@ -103,12 +109,39 @@ module Gogol.ServiceUsage
     AdminQuotaPolicy_Dimensions (..),
     newAdminQuotaPolicy_Dimensions,
 
+    -- ** Analysis
+    Analysis (..),
+    newAnalysis,
+
+    -- ** Analysis_AnalysisType
+    Analysis_AnalysisType (..),
+
+    -- ** AnalysisResult
+    AnalysisResult (..),
+    newAnalysisResult,
+
+    -- ** AnalyzeConsumerPolicyMetadata
+    AnalyzeConsumerPolicyMetadata (..),
+    newAnalyzeConsumerPolicyMetadata,
+
+    -- ** AnalyzeConsumerPolicyResponse
+    AnalyzeConsumerPolicyResponse (..),
+    newAnalyzeConsumerPolicyResponse,
+
     -- ** Api
     Api (..),
     newApi,
 
     -- ** Api_Syntax
     Api_Syntax (..),
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AuthProvider
     AuthProvider (..),
@@ -187,6 +220,14 @@ module Gogol.ServiceUsage
     -- ** CommonLanguageSettings_DestinationsItem
     CommonLanguageSettings_DestinationsItem (..),
 
+    -- ** ConsumerPolicy
+    ConsumerPolicy (..),
+    newConsumerPolicy,
+
+    -- ** ConsumerPolicy_Annotations
+    ConsumerPolicy_Annotations (..),
+    newConsumerPolicy_Annotations,
+
     -- ** Context
     Context (..),
     newContext,
@@ -262,6 +303,13 @@ module Gogol.ServiceUsage
     EnableFailure (..),
     newEnableFailure,
 
+    -- ** EnableRule
+    EnableRule (..),
+    newEnableRule,
+
+    -- ** EnableRule_EnableType
+    EnableRule_EnableType (..),
+
     -- ** EnableServiceRequest
     EnableServiceRequest (..),
     newEnableServiceRequest,
@@ -285,6 +333,10 @@ module Gogol.ServiceUsage
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Field
     Field (..),
     newField,
@@ -294,6 +346,10 @@ module Gogol.ServiceUsage
 
     -- ** Field_Kind
     Field_Kind (..),
+
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
 
     -- ** GetServiceIdentityMetadata
     GetServiceIdentityMetadata (..),
@@ -309,6 +365,10 @@ module Gogol.ServiceUsage
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** GoogleApiService
     GoogleApiService (..),
@@ -340,6 +400,64 @@ module Gogol.ServiceUsage
     GoogleApiServiceusageV1beta1ServiceIdentity (..),
     newGoogleApiServiceusageV1beta1ServiceIdentity,
 
+    -- ** GoogleApiServiceusageV2alphaConsumerPolicy
+    GoogleApiServiceusageV2alphaConsumerPolicy (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy,
+
+    -- ** GoogleApiServiceusageV2alphaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2alphaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2alphaConsumerPolicy_Annotations,
+
+    -- ** GoogleApiServiceusageV2alphaEnableRule
+    GoogleApiServiceusageV2alphaEnableRule (..),
+    newGoogleApiServiceusageV2alphaEnableRule,
+
+    -- ** GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2alphaUpdateConsumerPolicyMetadata,
+
+    -- ** GoogleApiServiceusageV2betaAnalysis
+    GoogleApiServiceusageV2betaAnalysis (..),
+    newGoogleApiServiceusageV2betaAnalysis,
+
+    -- ** GoogleApiServiceusageV2betaAnalysis_AnalysisType
+    GoogleApiServiceusageV2betaAnalysis_AnalysisType (..),
+
+    -- ** GoogleApiServiceusageV2betaAnalysisResult
+    GoogleApiServiceusageV2betaAnalysisResult (..),
+    newGoogleApiServiceusageV2betaAnalysisResult,
+
+    -- ** GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyMetadata,
+
+    -- ** GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse
+    GoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse (..),
+    newGoogleApiServiceusageV2betaAnalyzeConsumerPolicyResponse,
+
+    -- ** GoogleApiServiceusageV2betaConsumerPolicy
+    GoogleApiServiceusageV2betaConsumerPolicy (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy,
+
+    -- ** GoogleApiServiceusageV2betaConsumerPolicy_Annotations
+    GoogleApiServiceusageV2betaConsumerPolicy_Annotations (..),
+    newGoogleApiServiceusageV2betaConsumerPolicy_Annotations,
+
+    -- ** GoogleApiServiceusageV2betaEnableRule
+    GoogleApiServiceusageV2betaEnableRule (..),
+    newGoogleApiServiceusageV2betaEnableRule,
+
+    -- ** GoogleApiServiceusageV2betaImpact
+    GoogleApiServiceusageV2betaImpact (..),
+    newGoogleApiServiceusageV2betaImpact,
+
+    -- ** GoogleApiServiceusageV2betaImpact_ImpactType
+    GoogleApiServiceusageV2betaImpact_ImpactType (..),
+
+    -- ** GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata
+    GoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata (..),
+    newGoogleApiServiceusageV2betaUpdateConsumerPolicyMetadata,
+
     -- ** Http
     Http (..),
     newHttp,
@@ -347,6 +465,13 @@ module Gogol.ServiceUsage
     -- ** HttpRule
     HttpRule (..),
     newHttpRule,
+
+    -- ** Impact
+    Impact (..),
+    newImpact,
+
+    -- ** Impact_ImpactType
+    Impact_ImpactType (..),
 
     -- ** ImportAdminOverridesMetadata
     ImportAdminOverridesMetadata (..),
@@ -422,6 +547,10 @@ module Gogol.ServiceUsage
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -445,6 +574,9 @@ module Gogol.ServiceUsage
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -544,9 +676,21 @@ module Gogol.ServiceUsage
     QuotaOverride_Dimensions (..),
     newQuotaOverride_Dimensions,
 
+    -- ** RemoveEnableRulesMetadata
+    RemoveEnableRulesMetadata (..),
+    newRemoveEnableRulesMetadata,
+
+    -- ** RemoveEnableRulesResponse
+    RemoveEnableRulesResponse (..),
+    newRemoveEnableRulesResponse,
+
     -- ** RubySettings
     RubySettings (..),
     newRubySettings,
+
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
 
     -- ** ServiceIdentity
     ServiceIdentity (..),
@@ -594,6 +738,10 @@ module Gogol.ServiceUsage
     -- ** UpdateAdminQuotaPolicyMetadata
     UpdateAdminQuotaPolicyMetadata (..),
     newUpdateAdminQuotaPolicyMetadata,
+
+    -- ** UpdateConsumerPolicyMetadata
+    UpdateConsumerPolicyMetadata (..),
+    newUpdateConsumerPolicyMetadata,
 
     -- ** Usage
     Usage (..),

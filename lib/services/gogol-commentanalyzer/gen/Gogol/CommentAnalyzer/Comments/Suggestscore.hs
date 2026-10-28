@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CommentAnalyzer.Comments.Suggestscore
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CommentAnalyzer.Comments.Suggestscore
 where
 
 import Gogol.CommentAnalyzer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @commentanalyzer.comments.suggestscore@ method which the
 -- 'CommentAnalyzerCommentsSuggestscore' request conforms to.
@@ -90,16 +88,11 @@ newCommentAnalyzerCommentsSuggestscore payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CommentAnalyzerCommentsSuggestscore
-  where
+instance Core.GoogleRequest CommentAnalyzerCommentsSuggestscore where
   type
     Rs CommentAnalyzerCommentsSuggestscore =
       SuggestCommentScoreResponse
-  type
-    Scopes CommentAnalyzerCommentsSuggestscore =
-      '[Userinfo'Email]
+  type Scopes CommentAnalyzerCommentsSuggestscore = '[Userinfo'Email]
   requestClient CommentAnalyzerCommentsSuggestscore {..} =
     go
       xgafv
@@ -114,7 +107,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CommentAnalyzerCommentsSuggestscoreResource
+              Core.Proxy CommentAnalyzerCommentsSuggestscoreResource
           )
           Core.mempty

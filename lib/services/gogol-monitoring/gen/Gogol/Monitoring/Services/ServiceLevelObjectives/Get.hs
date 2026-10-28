@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Services.ServiceLevelObjectives.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Services.ServiceLevelObjectives.Get
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.services.serviceLevelObjectives.get@ method which the
 -- 'MonitoringServicesServiceLevelObjectivesGet' request conforms to.
@@ -52,9 +50,7 @@ type MonitoringServicesServiceLevelObjectivesGetResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ServicesServiceLevelObjectivesGetView
+    Core.:> Core.QueryParam "view" ServicesServiceLevelObjectivesGetView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ServiceLevelObjective
 
@@ -103,29 +99,26 @@ instance
     Rs MonitoringServicesServiceLevelObjectivesGet =
       ServiceLevelObjective
   type
-    Scopes
-      MonitoringServicesServiceLevelObjectivesGet =
+    Scopes MonitoringServicesServiceLevelObjectivesGet =
       '[ CloudPlatform'FullControl,
          Monitoring'FullControl,
          Monitoring'Read
        ]
-  requestClient
-    MonitoringServicesServiceLevelObjectivesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringServicesServiceLevelObjectivesGetResource
-            )
-            Core.mempty
+  requestClient MonitoringServicesServiceLevelObjectivesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringServicesServiceLevelObjectivesGetResource
+          )
+          Core.mempty

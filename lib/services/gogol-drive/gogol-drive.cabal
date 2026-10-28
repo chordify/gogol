@@ -1,14 +1,16 @@
 cabal-version:      2.2
 name:               gogol-drive
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Drive SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
@@ -16,7 +18,7 @@ extra-source-files:
   src/.gitkeep
 
 description:
-  Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.
+  The Google Drive API allows clients to access resources from Google Drive.
   .
   /Warning:/ This is an experimental prototype/preview release which is still
   under exploratory development and not intended for public use, caveat emptor!
@@ -37,7 +39,7 @@ flag field-selectors
   manual:      True
 
 library
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
@@ -50,6 +52,11 @@ library
   exposed-modules:
     Gogol.Drive
     Gogol.Drive.About.Get
+    Gogol.Drive.Accessproposals.Get
+    Gogol.Drive.Accessproposals.List
+    Gogol.Drive.Accessproposals.Resolve
+    Gogol.Drive.Apps.Get
+    Gogol.Drive.Apps.List
     Gogol.Drive.Changes.GetStartPageToken
     Gogol.Drive.Changes.List
     Gogol.Drive.Changes.Watch
@@ -69,6 +76,7 @@ library
     Gogol.Drive.Files.Copy
     Gogol.Drive.Files.Create
     Gogol.Drive.Files.Delete
+    Gogol.Drive.Files.Download
     Gogol.Drive.Files.EmptyTrash
     Gogol.Drive.Files.Export
     Gogol.Drive.Files.GenerateIds
@@ -78,6 +86,10 @@ library
     Gogol.Drive.Files.ModifyLabels
     Gogol.Drive.Files.Update
     Gogol.Drive.Files.Watch
+    Gogol.Drive.Operations.Cancel
+    Gogol.Drive.Operations.Delete
+    Gogol.Drive.Operations.Get
+    Gogol.Drive.Operations.List
     Gogol.Drive.Permissions.Create
     Gogol.Drive.Permissions.Delete
     Gogol.Drive.Permissions.Get
@@ -103,6 +115,4 @@ library
     Gogol.Drive.Internal.Product
     Gogol.Drive.Internal.Sum
 
-  build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+  build-depends:    gogol-core ^>=1.0.0

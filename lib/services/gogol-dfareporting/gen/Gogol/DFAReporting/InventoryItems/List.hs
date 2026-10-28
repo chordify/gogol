@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.InventoryItems.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.InventoryItems.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.inventoryItems.list@ method which the
 -- 'DFAReportingInventoryItemsList' request conforms to.
@@ -61,27 +59,13 @@ type DFAReportingInventoryItemsListResource =
     Core.:> Core.QueryParams "orderId" Core.Int64
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParams "siteId" Core.Int64
-    Core.:> Core.QueryParam
-              "sortField"
-              InventoryItemsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              InventoryItemsListSortOrder
-    Core.:> Core.QueryParam
-              "type"
-              InventoryItemsListType
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              InventoryItemsListResponse
+    Core.:> Core.QueryParam "sortField" InventoryItemsListSortField
+    Core.:> Core.QueryParam "sortOrder" InventoryItemsListSortOrder
+    Core.:> Core.QueryParam "type" InventoryItemsListType
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] InventoryItemsListResponse
 
 -- | Retrieves a list of inventory items, possibly filtered. This method supports paging.
 --
@@ -149,13 +133,8 @@ newDFAReportingInventoryItemsList profileId projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingInventoryItemsList
-  where
-  type
-    Rs DFAReportingInventoryItemsList =
-      InventoryItemsListResponse
+instance Core.GoogleRequest DFAReportingInventoryItemsList where
+  type Rs DFAReportingInventoryItemsList = InventoryItemsListResponse
   type
     Scopes DFAReportingInventoryItemsList =
       '[Dfatrafficking'FullControl]
@@ -182,7 +161,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingInventoryItemsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingInventoryItemsListResource)
           Core.mempty

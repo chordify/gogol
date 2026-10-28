@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AccessApproval.Internal.Product
@@ -53,6 +51,10 @@ module Gogol.AccessApproval.Internal.Product
     -- * ApproveDecision
     ApproveDecision (..),
     newApproveDecision,
+
+    -- * AugmentedInfo
+    AugmentedInfo (..),
+    newAugmentedInfo,
 
     -- * DismissApprovalRequestMessage
     DismissApprovalRequestMessage (..),
@@ -89,7 +91,7 @@ module Gogol.AccessApproval.Internal.Product
 where
 
 import Gogol.AccessApproval.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Access Approval service account related to a project\/folder\/organization.
 --
@@ -147,7 +149,17 @@ data AccessApprovalSettings = AccessApprovalSettings
     -- | The resource name of the settings. Format is one of: * \"projects\/{project}\/accessApprovalSettings\" * \"folders\/{folder}\/accessApprovalSettings\" * \"organizations\/{organization}\/accessApprovalSettings\"
     name :: (Core.Maybe Core.Text),
     -- | A list of email addresses to which notifications relating to approval requests should be sent. Notifications relating to a resource will be sent to all emails in the settings of ancestor resources of that resource. A maximum of 50 email addresses are allowed.
-    notificationEmails :: (Core.Maybe [Core.Text])
+    notificationEmails :: (Core.Maybe [Core.Text]),
+    -- | Optional. A pubsub topic to which notifications relating to approval requests should be sent.
+    notificationPubsubTopic :: (Core.Maybe Core.Text),
+    -- | This preference is communicated to Google personnel when sending an approval request but can be overridden if necessary.
+    preferNoBroadApprovalRequests :: (Core.Maybe Core.Bool),
+    -- | This preference is shared with Google personnel, but can be overridden if said personnel deems necessary. The approver ultimately can set the expiration at approval time.
+    preferredRequestExpirationDays :: (Core.Maybe Core.Int32),
+    -- | Optional. A setting to indicate the maximum width of an Access Approval request.
+    requestScopeMaxWidthPreference :: (Core.Maybe AccessApprovalSettings_RequestScopeMaxWidthPreference),
+    -- | Optional. A setting to require approval request justifications to be customer visible.
+    requireCustomerVisibleJustification :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -162,7 +174,12 @@ newAccessApprovalSettings =
       enrolledServices = Core.Nothing,
       invalidKeyVersion = Core.Nothing,
       name = Core.Nothing,
-      notificationEmails = Core.Nothing
+      notificationEmails = Core.Nothing,
+      notificationPubsubTopic = Core.Nothing,
+      preferNoBroadApprovalRequests = Core.Nothing,
+      preferredRequestExpirationDays = Core.Nothing,
+      requestScopeMaxWidthPreference = Core.Nothing,
+      requireCustomerVisibleJustification = Core.Nothing
     }
 
 instance Core.FromJSON AccessApprovalSettings where
@@ -178,25 +195,35 @@ instance Core.FromJSON AccessApprovalSettings where
             Core.<*> (o Core..:? "invalidKeyVersion")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationEmails")
+            Core.<*> (o Core..:? "notificationPubsubTopic")
+            Core.<*> (o Core..:? "preferNoBroadApprovalRequests")
+            Core.<*> (o Core..:? "preferredRequestExpirationDays")
+            Core.<*> (o Core..:? "requestScopeMaxWidthPreference")
+            Core.<*> (o Core..:? "requireCustomerVisibleJustification")
       )
 
 instance Core.ToJSON AccessApprovalSettings where
   toJSON AccessApprovalSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeKeyVersion" Core..=)
-              Core.<$> activeKeyVersion,
+          [ ("activeKeyVersion" Core..=) Core.<$> activeKeyVersion,
             ("ancestorHasActiveKeyVersion" Core..=)
               Core.<$> ancestorHasActiveKeyVersion,
-            ("enrolledAncestor" Core..=)
-              Core.<$> enrolledAncestor,
-            ("enrolledServices" Core..=)
-              Core.<$> enrolledServices,
-            ("invalidKeyVersion" Core..=)
-              Core.<$> invalidKeyVersion,
+            ("enrolledAncestor" Core..=) Core.<$> enrolledAncestor,
+            ("enrolledServices" Core..=) Core.<$> enrolledServices,
+            ("invalidKeyVersion" Core..=) Core.<$> invalidKeyVersion,
             ("name" Core..=) Core.<$> name,
-            ("notificationEmails" Core..=)
-              Core.<$> notificationEmails
+            ("notificationEmails" Core..=) Core.<$> notificationEmails,
+            ("notificationPubsubTopic" Core..=)
+              Core.<$> notificationPubsubTopic,
+            ("preferNoBroadApprovalRequests" Core..=)
+              Core.<$> preferNoBroadApprovalRequests,
+            ("preferredRequestExpirationDays" Core..=)
+              Core.<$> preferredRequestExpirationDays,
+            ("requestScopeMaxWidthPreference" Core..=)
+              Core.<$> requestScopeMaxWidthPreference,
+            ("requireCustomerVisibleJustification" Core..=)
+              Core.<$> requireCustomerVisibleJustification
           ]
       )
 
@@ -254,7 +281,8 @@ data AccessReason = AccessReason
 -- | Creates a value of 'AccessReason' with the minimum fields required to make a request.
 newAccessReason ::
   AccessReason
-newAccessReason = AccessReason {detail = Core.Nothing, type' = Core.Nothing}
+newAccessReason =
+  AccessReason {detail = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON AccessReason where
   parseJSON =
@@ -262,7 +290,8 @@ instance Core.FromJSON AccessReason where
       "AccessReason"
       ( \o ->
           AccessReason
-            Core.<$> (o Core..:? "detail") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "detail")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON AccessReason where
@@ -286,7 +315,11 @@ data ApprovalRequest = ApprovalRequest
     name :: (Core.Maybe Core.Text),
     -- | The time at which approval was requested.
     requestTime :: (Core.Maybe Core.DateTime),
-    -- | The requested expiration for the approval. If the request is approved, access will be granted from the time of approval until the expiration time.
+    -- | This field contains the augmented information of the request.
+    requestedAugmentedInfo :: (Core.Maybe AugmentedInfo),
+    -- | The requested access duration.
+    requestedDuration :: (Core.Maybe Core.Duration),
+    -- | The original requested expiration for the approval. Calculated by adding the requested/duration to the request/time.
     requestedExpiration :: (Core.Maybe Core.DateTime),
     -- | The locations for which approval is being requested.
     requestedLocations :: (Core.Maybe AccessLocations),
@@ -308,6 +341,8 @@ newApprovalRequest =
       dismiss = Core.Nothing,
       name = Core.Nothing,
       requestTime = Core.Nothing,
+      requestedAugmentedInfo = Core.Nothing,
+      requestedDuration = Core.Nothing,
       requestedExpiration = Core.Nothing,
       requestedLocations = Core.Nothing,
       requestedReason = Core.Nothing,
@@ -325,6 +360,8 @@ instance Core.FromJSON ApprovalRequest where
             Core.<*> (o Core..:? "dismiss")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "requestTime")
+            Core.<*> (o Core..:? "requestedAugmentedInfo")
+            Core.<*> (o Core..:? "requestedDuration")
             Core.<*> (o Core..:? "requestedExpiration")
             Core.<*> (o Core..:? "requestedLocations")
             Core.<*> (o Core..:? "requestedReason")
@@ -340,13 +377,12 @@ instance Core.ToJSON ApprovalRequest where
             ("dismiss" Core..=) Core.<$> dismiss,
             ("name" Core..=) Core.<$> name,
             ("requestTime" Core..=) Core.<$> requestTime,
-            ("requestedExpiration" Core..=)
-              Core.<$> requestedExpiration,
-            ("requestedLocations" Core..=)
-              Core.<$> requestedLocations,
+            ("requestedAugmentedInfo" Core..=) Core.<$> requestedAugmentedInfo,
+            ("requestedDuration" Core..=) Core.<$> requestedDuration,
+            ("requestedExpiration" Core..=) Core.<$> requestedExpiration,
+            ("requestedLocations" Core..=) Core.<$> requestedLocations,
             ("requestedReason" Core..=) Core.<$> requestedReason,
-            ("requestedResourceName" Core..=)
-              Core.<$> requestedResourceName,
+            ("requestedResourceName" Core..=) Core.<$> requestedResourceName,
             ("requestedResourceProperties" Core..=)
               Core.<$> requestedResourceProperties
           ]
@@ -372,16 +408,13 @@ instance Core.FromJSON ApproveApprovalRequestMessage where
     Core.withObject
       "ApproveApprovalRequestMessage"
       ( \o ->
-          ApproveApprovalRequestMessage
-            Core.<$> (o Core..:? "expireTime")
+          ApproveApprovalRequestMessage Core.<$> (o Core..:? "expireTime")
       )
 
 instance Core.ToJSON ApproveApprovalRequestMessage where
   toJSON ApproveApprovalRequestMessage {..} =
     Core.object
-      ( Core.catMaybes
-          [("expireTime" Core..=) Core.<$> expireTime]
-      )
+      (Core.catMaybes [("expireTime" Core..=) Core.<$> expireTime])
 
 -- | A decision that has been made to approve access to a resource.
 --
@@ -437,6 +470,31 @@ instance Core.ToJSON ApproveDecision where
           ]
       )
 
+-- | This field contains the augmented information of the request.
+--
+-- /See:/ 'newAugmentedInfo' smart constructor.
+newtype AugmentedInfo = AugmentedInfo
+  { -- | For command-line tools, the full command-line exactly as entered by the actor without adding any additional characters (such as quotation marks).
+    command :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AugmentedInfo' with the minimum fields required to make a request.
+newAugmentedInfo ::
+  AugmentedInfo
+newAugmentedInfo = AugmentedInfo {command = Core.Nothing}
+
+instance Core.FromJSON AugmentedInfo where
+  parseJSON =
+    Core.withObject
+      "AugmentedInfo"
+      (\o -> AugmentedInfo Core.<$> (o Core..:? "command"))
+
+instance Core.ToJSON AugmentedInfo where
+  toJSON AugmentedInfo {..} =
+    Core.object
+      (Core.catMaybes [("command" Core..=) Core.<$> command])
+
 -- | Request to dismiss an approval request.
 --
 -- /See:/ 'newDismissApprovalRequestMessage' smart constructor.
@@ -472,7 +530,10 @@ data DismissDecision = DismissDecision
 newDismissDecision ::
   DismissDecision
 newDismissDecision =
-  DismissDecision {dismissTime = Core.Nothing, implicit = Core.Nothing}
+  DismissDecision
+    { dismissTime = Core.Nothing,
+      implicit = Core.Nothing
+    }
 
 instance Core.FromJSON DismissDecision where
   parseJSON =
@@ -505,8 +566,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -515,8 +575,8 @@ instance Core.ToJSON Empty where
 --
 -- /See:/ 'newEnrolledService' smart constructor.
 data EnrolledService = EnrolledService
-  { -- | The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): * all * GA * App Engine * Artifact Registry * BigQuery * Certificate Authority Service * Cloud Bigtable * Cloud Key Management Service * Compute Engine * Cloud Composer * Cloud Dataflow * Cloud Dataproc * Cloud DLP * Cloud EKM * Cloud Firestore * Cloud HSM * Cloud Identity and Access Management * Cloud Logging * Cloud NAT * Cloud Pub\/Sub * Cloud Spanner * Cloud SQL * Cloud Storage * Google Kubernetes Engine * Organization Policy Serivice * Persistent Disk * Resource Manager * Secret Manager * Speaker ID Note: These values are supported as input for legacy purposes, but will not be returned from the API. * all * ga-only * appengine.googleapis.com * artifactregistry.googleapis.com * bigquery.googleapis.com * bigtable.googleapis.com * container.googleapis.com * cloudkms.googleapis.com * cloudresourcemanager.googleapis.com * cloudsql.googleapis.com * compute.googleapis.com * dataflow.googleapis.com *
-    -- dataproc.googleapis.com * dlp.googleapis.com * iam.googleapis.com * logging.googleapis.com * orgpolicy.googleapis.com * pubsub.googleapis.com * spanner.googleapis.com * secretmanager.googleapis.com * speakerid.googleapis.com * storage.googleapis.com Calls to UpdateAccessApprovalSettings using \'all\' or any of the XXX.googleapis.com will be translated to the associated product name (\'all\', \'App Engine\', etc.). Note: \'all\' will enroll the resource in all products supported at both \'GA\' and \'Preview\' levels. More information about levels of support is available at https:\/\/cloud.google.com\/access-approval\/docs\/supported-services
+  { -- | The product for which Access Approval will be enrolled. Allowed values are listed below (case-sensitive): * all * GA * App Engine * Artifact Registry * BigQuery * Certificate Authority Service * Cloud Bigtable * Cloud Key Management Service * Compute Engine * Cloud Composer * Cloud Dataflow * Cloud Dataproc * Cloud DLP * Cloud EKM * Cloud Firestore * Cloud HSM * Cloud Identity and Access Management * Cloud Logging * Cloud NAT * Cloud Pub\/Sub * Cloud Spanner * Cloud SQL * Cloud Storage * Eventarc * Google Kubernetes Engine * Organization Policy Serivice * Persistent Disk * Resource Manager * Secret Manager * Speaker ID Note: These values are supported as input for legacy purposes, but will not be returned from the API. * all * ga-only * appengine.googleapis.com * artifactregistry.googleapis.com * bigquery.googleapis.com * bigtable.googleapis.com * container.googleapis.com * cloudkms.googleapis.com * cloudresourcemanager.googleapis.com * cloudsql.googleapis.com * compute.googleapis.com *
+    -- dataflow.googleapis.com * dataproc.googleapis.com * dlp.googleapis.com * iam.googleapis.com * logging.googleapis.com * orgpolicy.googleapis.com * pubsub.googleapis.com * spanner.googleapis.com * secretmanager.googleapis.com * speakerid.googleapis.com * storage.googleapis.com Calls to UpdateAccessApprovalSettings using \'all\' or any of the XXX.googleapis.com will be translated to the associated product name (\'all\', \'App Engine\', etc.). Note: \'all\' will enroll the resource in all products supported at both \'GA\' and \'Preview\' levels. More information about levels of support is available at https:\/\/cloud.google.com\/access-approval\/docs\/supported-services
     cloudProduct :: (Core.Maybe Core.Text),
     -- | The enrollment level of the service.
     enrollmentLevel :: (Core.Maybe EnrolledService_EnrollmentLevel)
@@ -527,7 +587,10 @@ data EnrolledService = EnrolledService
 newEnrolledService ::
   EnrolledService
 newEnrolledService =
-  EnrolledService {cloudProduct = Core.Nothing, enrollmentLevel = Core.Nothing}
+  EnrolledService
+    { cloudProduct = Core.Nothing,
+      enrollmentLevel = Core.Nothing
+    }
 
 instance Core.FromJSON EnrolledService where
   parseJSON =
@@ -544,8 +607,7 @@ instance Core.ToJSON EnrolledService where
     Core.object
       ( Core.catMaybes
           [ ("cloudProduct" Core..=) Core.<$> cloudProduct,
-            ("enrollmentLevel" Core..=)
-              Core.<$> enrollmentLevel
+            ("enrollmentLevel" Core..=) Core.<$> enrollmentLevel
           ]
       )
 
@@ -558,12 +620,10 @@ data InvalidateApprovalRequestMessage = InvalidateApprovalRequestMessage
 -- | Creates a value of 'InvalidateApprovalRequestMessage' with the minimum fields required to make a request.
 newInvalidateApprovalRequestMessage ::
   InvalidateApprovalRequestMessage
-newInvalidateApprovalRequestMessage = InvalidateApprovalRequestMessage
+newInvalidateApprovalRequestMessage =
+  InvalidateApprovalRequestMessage
 
-instance
-  Core.FromJSON
-    InvalidateApprovalRequestMessage
-  where
+instance Core.FromJSON InvalidateApprovalRequestMessage where
   parseJSON =
     Core.withObject
       "InvalidateApprovalRequestMessage"
@@ -606,8 +666,7 @@ instance Core.ToJSON ListApprovalRequestsResponse where
   toJSON ListApprovalRequestsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("approvalRequests" Core..=)
-              Core.<$> approvalRequests,
+          [ ("approvalRequests" Core..=) Core.<$> approvalRequests,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -624,24 +683,22 @@ newtype ResourceProperties = ResourceProperties
 -- | Creates a value of 'ResourceProperties' with the minimum fields required to make a request.
 newResourceProperties ::
   ResourceProperties
-newResourceProperties = ResourceProperties {excludesDescendants = Core.Nothing}
+newResourceProperties =
+  ResourceProperties {excludesDescendants = Core.Nothing}
 
 instance Core.FromJSON ResourceProperties where
   parseJSON =
     Core.withObject
       "ResourceProperties"
       ( \o ->
-          ResourceProperties
-            Core.<$> (o Core..:? "excludesDescendants")
+          ResourceProperties Core.<$> (o Core..:? "excludesDescendants")
       )
 
 instance Core.ToJSON ResourceProperties where
   toJSON ResourceProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("excludesDescendants" Core..=)
-              Core.<$> excludesDescendants
-          ]
+          [("excludesDescendants" Core..=) Core.<$> excludesDescendants]
       )
 
 -- | Information about the digital signature of the resource.
@@ -650,8 +707,12 @@ instance Core.ToJSON ResourceProperties where
 data SignatureInfo = SignatureInfo
   { -- | The resource name of the customer CryptoKeyVersion used for signing.
     customerKmsKeyVersion :: (Core.Maybe Core.Text),
+    -- | The hashing algorithm used for signature verification. It will only be present in the case of Google managed keys.
+    googleKeyAlgorithm :: (Core.Maybe SignatureInfo_GoogleKeyAlgorithm),
     -- | The public key for the Google default signing, encoded in PEM format. The signature was created using a private key which may be verified using this public key.
     googlePublicKeyPem :: (Core.Maybe Core.Text),
+    -- | The ApprovalRequest that is serialized without the SignatureInfo message field. This data is used with the hashing algorithm to generate the digital signature, and it can be used for signature verification.
+    serializedApprovalRequest :: (Core.Maybe Core.Base64),
     -- | The digital signature.
     signature :: (Core.Maybe Core.Base64)
   }
@@ -663,7 +724,9 @@ newSignatureInfo ::
 newSignatureInfo =
   SignatureInfo
     { customerKmsKeyVersion = Core.Nothing,
+      googleKeyAlgorithm = Core.Nothing,
       googlePublicKeyPem = Core.Nothing,
+      serializedApprovalRequest = Core.Nothing,
       signature = Core.Nothing
     }
 
@@ -674,7 +737,9 @@ instance Core.FromJSON SignatureInfo where
       ( \o ->
           SignatureInfo
             Core.<$> (o Core..:? "customerKmsKeyVersion")
+            Core.<*> (o Core..:? "googleKeyAlgorithm")
             Core.<*> (o Core..:? "googlePublicKeyPem")
+            Core.<*> (o Core..:? "serializedApprovalRequest")
             Core.<*> (o Core..:? "signature")
       )
 
@@ -682,10 +747,11 @@ instance Core.ToJSON SignatureInfo where
   toJSON SignatureInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerKmsKeyVersion" Core..=)
-              Core.<$> customerKmsKeyVersion,
-            ("googlePublicKeyPem" Core..=)
-              Core.<$> googlePublicKeyPem,
+          [ ("customerKmsKeyVersion" Core..=) Core.<$> customerKmsKeyVersion,
+            ("googleKeyAlgorithm" Core..=) Core.<$> googleKeyAlgorithm,
+            ("googlePublicKeyPem" Core..=) Core.<$> googlePublicKeyPem,
+            ("serializedApprovalRequest" Core..=)
+              Core.<$> serializedApprovalRequest,
             ("signature" Core..=) Core.<$> signature
           ]
       )

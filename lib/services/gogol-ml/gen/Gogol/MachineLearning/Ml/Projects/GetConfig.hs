@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.GetConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.GetConfig
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.getConfig@ method which the
 -- 'MlProjectsGetConfig' request conforms to.
@@ -53,9 +51,7 @@ type MlProjectsGetConfigResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudMlV1__GetConfigResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudMlV1__GetConfigResponse
 
 -- | Get the service account information associated with your project. You need this information in order to grant the service account permissions for the Google Cloud Storage location where you put your model training code for training the model with Google Cloud Machine Learning.
 --
@@ -92,12 +88,8 @@ newMlProjectsGetConfig name =
     }
 
 instance Core.GoogleRequest MlProjectsGetConfig where
-  type
-    Rs MlProjectsGetConfig =
-      GoogleCloudMlV1__GetConfigResponse
-  type
-    Scopes MlProjectsGetConfig =
-      '[CloudPlatform'FullControl]
+  type Rs MlProjectsGetConfig = GoogleCloudMlV1__GetConfigResponse
+  type Scopes MlProjectsGetConfig = '[CloudPlatform'FullControl]
   requestClient MlProjectsGetConfig {..} =
     go
       name
@@ -111,7 +103,5 @@ instance Core.GoogleRequest MlProjectsGetConfig where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MlProjectsGetConfigResource
-          )
+          (Core.Proxy :: Core.Proxy MlProjectsGetConfigResource)
           Core.mempty

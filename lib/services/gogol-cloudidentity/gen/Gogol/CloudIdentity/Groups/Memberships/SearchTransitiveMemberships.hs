@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Groups.Memberships.SearchTransitiveMemberships
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.groups.memberships.searchTransitiveMemberships@ method which the
 -- 'CloudIdentityGroupsMembershipsSearchTransitiveMemberships' request conforms to.
@@ -56,9 +54,7 @@ type CloudIdentityGroupsMembershipsSearchTransitiveMembershipsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SearchTransitiveMembershipsResponse
+    Core.:> Core.Get '[Core.JSON] SearchTransitiveMembershipsResponse
 
 -- | Search transitive memberships of a group. __Note:__ This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the group is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
 --
@@ -72,7 +68,7 @@ data CloudIdentityGroupsMembershipsSearchTransitiveMemberships = CloudIdentityGr
     callback :: (Core.Maybe Core.Text),
     -- | The default page size is 200 (max 1000).
     pageSize :: (Core.Maybe Core.Int32),
-    -- | The next/page/token value returned from a previous list request, if any.
+    -- | The @next_page_token@ value returned from a previous list request, if any.
     pageToken :: (Core.Maybe Core.Text),
     -- | <https://cloud.google.com/apis/design/resource_names Resource name> of the group to search transitive memberships in. Format: @groups\/{group}@, where @group@ is the unique ID assigned to the Group.
     parent :: Core.Text,
@@ -90,7 +86,8 @@ newCloudIdentityGroupsMembershipsSearchTransitiveMemberships ::
   CloudIdentityGroupsMembershipsSearchTransitiveMemberships
 newCloudIdentityGroupsMembershipsSearchTransitiveMemberships parent =
   CloudIdentityGroupsMembershipsSearchTransitiveMemberships
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -105,8 +102,7 @@ instance
     CloudIdentityGroupsMembershipsSearchTransitiveMemberships
   where
   type
-    Rs
-      CloudIdentityGroupsMembershipsSearchTransitiveMemberships =
+    Rs CloudIdentityGroupsMembershipsSearchTransitiveMemberships =
       SearchTransitiveMembershipsResponse
   type
     Scopes

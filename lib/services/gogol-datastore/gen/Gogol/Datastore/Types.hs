@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Datastore.Types
@@ -73,6 +71,10 @@ module Gogol.Datastore.Types
     ArrayValue (..),
     newArrayValue,
 
+    -- ** Avg
+    Avg (..),
+    newAvg,
+
     -- ** BeginTransactionRequest
     BeginTransactionRequest (..),
     newBeginTransactionRequest,
@@ -119,9 +121,32 @@ module Gogol.Datastore.Types
     EntityResult (..),
     newEntityResult,
 
+    -- ** ExecutionStats
+    ExecutionStats (..),
+    newExecutionStats,
+
+    -- ** ExecutionStats_DebugStats
+    ExecutionStats_DebugStats (..),
+    newExecutionStats_DebugStats,
+
+    -- ** ExplainMetrics
+    ExplainMetrics (..),
+    newExplainMetrics,
+
+    -- ** ExplainOptions
+    ExplainOptions (..),
+    newExplainOptions,
+
     -- ** Filter
     Filter (..),
     newFilter,
+
+    -- ** FindNearest
+    FindNearest (..),
+    newFindNearest,
+
+    -- ** FindNearest_DistanceMeasure
+    FindNearest_DistanceMeasure (..),
 
     -- ** GoogleDatastoreAdminV1CommonMetadata
     GoogleDatastoreAdminV1CommonMetadata (..),
@@ -322,6 +347,9 @@ module Gogol.Datastore.Types
     Mutation (..),
     newMutation,
 
+    -- ** Mutation_ConflictResolutionStrategy
+    Mutation_ConflictResolutionStrategy (..),
+
     -- ** MutationResult
     MutationResult (..),
     newMutationResult,
@@ -334,6 +362,14 @@ module Gogol.Datastore.Types
     PathElement (..),
     newPathElement,
 
+    -- ** PlanSummary
+    PlanSummary (..),
+    newPlanSummary,
+
+    -- ** PlanSummary_IndexesUsedItem
+    PlanSummary_IndexesUsedItem (..),
+    newPlanSummary_IndexesUsedItem,
+
     -- ** Projection
     Projection (..),
     newProjection,
@@ -345,6 +381,10 @@ module Gogol.Datastore.Types
     -- ** PropertyFilter_Op
     PropertyFilter_Op (..),
 
+    -- ** PropertyMask
+    PropertyMask (..),
+    newPropertyMask,
+
     -- ** PropertyOrder
     PropertyOrder (..),
     newPropertyOrder,
@@ -355,6 +395,13 @@ module Gogol.Datastore.Types
     -- ** PropertyReference
     PropertyReference (..),
     newPropertyReference,
+
+    -- ** PropertyTransform
+    PropertyTransform (..),
+    newPropertyTransform,
+
+    -- ** PropertyTransform_SetToServerValue
+    PropertyTransform_SetToServerValue (..),
 
     -- ** Query
     Query (..),
@@ -425,6 +472,10 @@ module Gogol.Datastore.Types
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** Sum
+    Sum (..),
+    newSum,
+
     -- ** TransactionOptions
     TransactionOptions (..),
     newTransactionOptions,
@@ -440,7 +491,7 @@ where
 
 import Gogol.Datastore.Internal.Product
 import Gogol.Datastore.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Datastore API. This contains the host and root path used as a starting point for constructing service requests.
 datastoreService :: Core.ServiceConfig
@@ -450,7 +501,9 @@ datastoreService =
     "datastore.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your Google Cloud Datastore data
-type Datastore'FullControl = "https://www.googleapis.com/auth/datastore"
+type Datastore'FullControl =
+  "https://www.googleapis.com/auth/datastore"

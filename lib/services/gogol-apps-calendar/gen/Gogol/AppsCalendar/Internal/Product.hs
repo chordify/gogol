@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AppsCalendar.Internal.Product
@@ -174,9 +172,21 @@ module Gogol.AppsCalendar.Internal.Product
     EventAttendee (..),
     newEventAttendee,
 
+    -- * EventBirthdayProperties
+    EventBirthdayProperties (..),
+    newEventBirthdayProperties,
+
     -- * EventDateTime
     EventDateTime (..),
     newEventDateTime,
+
+    -- * EventFocusTimeProperties
+    EventFocusTimeProperties (..),
+    newEventFocusTimeProperties,
+
+    -- * EventOutOfOfficeProperties
+    EventOutOfOfficeProperties (..),
+    newEventOutOfOfficeProperties,
 
     -- * EventReminder
     EventReminder (..),
@@ -241,7 +251,7 @@ module Gogol.AppsCalendar.Internal.Product
 where
 
 import Gogol.AppsCalendar.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newAcl' smart constructor.
@@ -306,7 +316,7 @@ data AclRule = AclRule
     -- | Type of the resource (\"calendar#aclRule\").
     kind :: Core.Text,
     -- | The role assigned to the scope. Possible values are:
-    -- - \"none\" - Provides no access. - \"freeBusyReader\" - Provides read access to free\/busy information. - \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. - \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. - \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
+    -- - \"none\" - Provides no access. - \"freeBusyReader\" - Provides read access to free\/busy information. - \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. - \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. Provides read access to the calendar\'s ACLs. - \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to manipulate ACLs.
     role' :: (Core.Maybe Core.Text),
     -- | The extent to which calendar access is granted by this ACL rule.
     scope :: (Core.Maybe AclRule_Scope)
@@ -365,7 +375,8 @@ data AclRule_Scope = AclRule_Scope
 -- | Creates a value of 'AclRule_Scope' with the minimum fields required to make a request.
 newAclRule_Scope ::
   AclRule_Scope
-newAclRule_Scope = AclRule_Scope {type' = Core.Nothing, value = Core.Nothing}
+newAclRule_Scope =
+  AclRule_Scope {type' = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON AclRule_Scope where
   parseJSON =
@@ -373,7 +384,8 @@ instance Core.FromJSON AclRule_Scope where
       "AclRule_Scope"
       ( \o ->
           AclRule_Scope
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON AclRule_Scope where
@@ -442,8 +454,7 @@ instance Core.ToJSON Calendar where
   toJSON Calendar {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conferenceProperties" Core..=)
-              Core.<$> conferenceProperties,
+          [ ("conferenceProperties" Core..=) Core.<$> conferenceProperties,
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
@@ -595,9 +606,7 @@ instance Core.FromJSON CalendarListEntry where
             Core.<*> (o Core..:? "foregroundColor")
             Core.<*> (o Core..:? "hidden" Core..!= Core.False)
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "calendar#calendarListEntry"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "calendar#calendarListEntry")
             Core.<*> (o Core..:? "location")
             Core.<*> (o Core..:? "notificationSettings")
             Core.<*> (o Core..:? "primary" Core..!= Core.False)
@@ -614,10 +623,8 @@ instance Core.ToJSON CalendarListEntry where
           [ ("accessRole" Core..=) Core.<$> accessRole,
             ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("colorId" Core..=) Core.<$> colorId,
-            ("conferenceProperties" Core..=)
-              Core.<$> conferenceProperties,
-            ("defaultReminders" Core..=)
-              Core.<$> defaultReminders,
+            ("conferenceProperties" Core..=) Core.<$> conferenceProperties,
+            ("defaultReminders" Core..=) Core.<$> defaultReminders,
             Core.Just ("deleted" Core..= deleted),
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
@@ -626,8 +633,7 @@ instance Core.ToJSON CalendarListEntry where
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("location" Core..=) Core.<$> location,
-            ("notificationSettings" Core..=)
-              Core.<$> notificationSettings,
+            ("notificationSettings" Core..=) Core.<$> notificationSettings,
             Core.Just ("primary" Core..= primary),
             Core.Just ("selected" Core..= selected),
             ("summary" Core..=) Core.<$> summary,
@@ -649,12 +655,12 @@ newtype CalendarListEntry_NotificationSettings = CalendarListEntry_NotificationS
 newCalendarListEntry_NotificationSettings ::
   CalendarListEntry_NotificationSettings
 newCalendarListEntry_NotificationSettings =
-  CalendarListEntry_NotificationSettings {notifications = Core.Nothing}
+  CalendarListEntry_NotificationSettings
+    { notifications =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    CalendarListEntry_NotificationSettings
-  where
+instance Core.FromJSON CalendarListEntry_NotificationSettings where
   parseJSON =
     Core.withObject
       "CalendarListEntry_NotificationSettings"
@@ -663,15 +669,10 @@ instance
             Core.<$> (o Core..:? "notifications")
       )
 
-instance
-  Core.ToJSON
-    CalendarListEntry_NotificationSettings
-  where
+instance Core.ToJSON CalendarListEntry_NotificationSettings where
   toJSON CalendarListEntry_NotificationSettings {..} =
     Core.object
-      ( Core.catMaybes
-          [("notifications" Core..=) Core.<$> notifications]
-      )
+      (Core.catMaybes [("notifications" Core..=) Core.<$> notifications])
 
 --
 -- /See:/ 'newCalendarNotification' smart constructor.
@@ -699,7 +700,8 @@ instance Core.FromJSON CalendarNotification where
       "CalendarNotification"
       ( \o ->
           CalendarNotification
-            Core.<$> (o Core..:? "method") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "method")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON CalendarNotification where
@@ -761,9 +763,7 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> ( o Core..:? "expiration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -779,8 +779,7 @@ instance Core.ToJSON Channel where
     Core.object
       ( Core.catMaybes
           [ ("address" Core..=) Core.<$> address,
-            ("expiration" Core..=) Core.. Core.AsText
-              Core.<$> expiration,
+            ("expiration" Core..=) Core.. Core.AsText Core.<$> expiration,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("params" Core..=) Core.<$> params,
@@ -806,15 +805,14 @@ newChannel_Params ::
   -- |  Declares a new parameter by name. See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Channel_Params
-newChannel_Params additional = Channel_Params {additional = additional}
+newChannel_Params additional =
+  Channel_Params {additional = additional}
 
 instance Core.FromJSON Channel_Params where
   parseJSON =
     Core.withObject
       "Channel_Params"
-      ( \o ->
-          Channel_Params Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Channel_Params Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Channel_Params where
   toJSON Channel_Params {..} = Core.toJSON additional
@@ -833,7 +831,10 @@ data ColorDefinition = ColorDefinition
 newColorDefinition ::
   ColorDefinition
 newColorDefinition =
-  ColorDefinition {background = Core.Nothing, foreground = Core.Nothing}
+  ColorDefinition
+    { background = Core.Nothing,
+      foreground = Core.Nothing
+    }
 
 instance Core.FromJSON ColorDefinition where
   parseJSON =
@@ -916,15 +917,14 @@ newColors_Calendar ::
   -- |  A calendar color definition. See 'additional'.
   Core.HashMap Core.Text ColorDefinition ->
   Colors_Calendar
-newColors_Calendar additional = Colors_Calendar {additional = additional}
+newColors_Calendar additional =
+  Colors_Calendar {additional = additional}
 
 instance Core.FromJSON Colors_Calendar where
   parseJSON =
     Core.withObject
       "Colors_Calendar"
-      ( \o ->
-          Colors_Calendar Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Colors_Calendar Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Colors_Calendar where
   toJSON Colors_Calendar {..} = Core.toJSON additional
@@ -949,9 +949,7 @@ instance Core.FromJSON Colors_Event where
   parseJSON =
     Core.withObject
       "Colors_Event"
-      ( \o ->
-          Colors_Event Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Colors_Event Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Colors_Event where
   toJSON Colors_Event {..} = Core.toJSON additional
@@ -1011,8 +1009,7 @@ instance Core.ToJSON ConferenceData where
     Core.object
       ( Core.catMaybes
           [ ("conferenceId" Core..=) Core.<$> conferenceId,
-            ("conferenceSolution" Core..=)
-              Core.<$> conferenceSolution,
+            ("conferenceSolution" Core..=) Core.<$> conferenceSolution,
             ("createRequest" Core..=) Core.<$> createRequest,
             ("entryPoints" Core..=) Core.<$> entryPoints,
             ("notes" Core..=) Core.<$> notes,
@@ -1032,31 +1029,28 @@ newtype ConferenceParameters = ConferenceParameters
 -- | Creates a value of 'ConferenceParameters' with the minimum fields required to make a request.
 newConferenceParameters ::
   ConferenceParameters
-newConferenceParameters = ConferenceParameters {addOnParameters = Core.Nothing}
+newConferenceParameters =
+  ConferenceParameters {addOnParameters = Core.Nothing}
 
 instance Core.FromJSON ConferenceParameters where
   parseJSON =
     Core.withObject
       "ConferenceParameters"
       ( \o ->
-          ConferenceParameters
-            Core.<$> (o Core..:? "addOnParameters")
+          ConferenceParameters Core.<$> (o Core..:? "addOnParameters")
       )
 
 instance Core.ToJSON ConferenceParameters where
   toJSON ConferenceParameters {..} =
     Core.object
       ( Core.catMaybes
-          [ ("addOnParameters" Core..=)
-              Core.<$> addOnParameters
-          ]
+          [("addOnParameters" Core..=) Core.<$> addOnParameters]
       )
 
 --
 -- /See:/ 'newConferenceParametersAddOnParameters' smart constructor.
 newtype ConferenceParametersAddOnParameters = ConferenceParametersAddOnParameters
-  { -- |
-    parameters :: (Core.Maybe ConferenceParametersAddOnParameters_Parameters)
+  { parameters :: (Core.Maybe ConferenceParametersAddOnParameters_Parameters)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1066,10 +1060,7 @@ newConferenceParametersAddOnParameters ::
 newConferenceParametersAddOnParameters =
   ConferenceParametersAddOnParameters {parameters = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ConferenceParametersAddOnParameters
-  where
+instance Core.FromJSON ConferenceParametersAddOnParameters where
   parseJSON =
     Core.withObject
       "ConferenceParametersAddOnParameters"
@@ -1078,21 +1069,15 @@ instance
             Core.<$> (o Core..:? "parameters")
       )
 
-instance
-  Core.ToJSON
-    ConferenceParametersAddOnParameters
-  where
+instance Core.ToJSON ConferenceParametersAddOnParameters where
   toJSON ConferenceParametersAddOnParameters {..} =
     Core.object
-      ( Core.catMaybes
-          [("parameters" Core..=) Core.<$> parameters]
-      )
+      (Core.catMaybes [("parameters" Core..=) Core.<$> parameters])
 
 --
 -- /See:/ 'newConferenceParametersAddOnParameters_Parameters' smart constructor.
 newtype ConferenceParametersAddOnParameters_Parameters = ConferenceParametersAddOnParameters_Parameters
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1102,7 +1087,10 @@ newConferenceParametersAddOnParameters_Parameters ::
   Core.HashMap Core.Text Core.Text ->
   ConferenceParametersAddOnParameters_Parameters
 newConferenceParametersAddOnParameters_Parameters additional =
-  ConferenceParametersAddOnParameters_Parameters {additional = additional}
+  ConferenceParametersAddOnParameters_Parameters
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -1116,13 +1104,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ConferenceParametersAddOnParameters_Parameters
-  where
-  toJSON
-    ConferenceParametersAddOnParameters_Parameters {..} =
-      Core.toJSON additional
+instance Core.ToJSON ConferenceParametersAddOnParameters_Parameters where
+  toJSON ConferenceParametersAddOnParameters_Parameters {..} =
+    Core.toJSON additional
 
 --
 -- /See:/ 'newConferenceProperties' smart constructor.
@@ -1137,7 +1121,10 @@ newtype ConferenceProperties = ConferenceProperties
 newConferenceProperties ::
   ConferenceProperties
 newConferenceProperties =
-  ConferenceProperties {allowedConferenceSolutionTypes = Core.Nothing}
+  ConferenceProperties
+    { allowedConferenceSolutionTypes =
+        Core.Nothing
+    }
 
 instance Core.FromJSON ConferenceProperties where
   parseJSON =
@@ -1169,23 +1156,19 @@ newtype ConferenceRequestStatus = ConferenceRequestStatus
 -- | Creates a value of 'ConferenceRequestStatus' with the minimum fields required to make a request.
 newConferenceRequestStatus ::
   ConferenceRequestStatus
-newConferenceRequestStatus = ConferenceRequestStatus {statusCode = Core.Nothing}
+newConferenceRequestStatus =
+  ConferenceRequestStatus {statusCode = Core.Nothing}
 
 instance Core.FromJSON ConferenceRequestStatus where
   parseJSON =
     Core.withObject
       "ConferenceRequestStatus"
-      ( \o ->
-          ConferenceRequestStatus
-            Core.<$> (o Core..:? "statusCode")
-      )
+      (\o -> ConferenceRequestStatus Core.<$> (o Core..:? "statusCode"))
 
 instance Core.ToJSON ConferenceRequestStatus where
   toJSON ConferenceRequestStatus {..} =
     Core.object
-      ( Core.catMaybes
-          [("statusCode" Core..=) Core.<$> statusCode]
-      )
+      (Core.catMaybes [("statusCode" Core..=) Core.<$> statusCode])
 
 --
 -- /See:/ 'newConferenceSolution' smart constructor.
@@ -1242,20 +1225,18 @@ newtype ConferenceSolutionKey = ConferenceSolutionKey
 -- | Creates a value of 'ConferenceSolutionKey' with the minimum fields required to make a request.
 newConferenceSolutionKey ::
   ConferenceSolutionKey
-newConferenceSolutionKey = ConferenceSolutionKey {type' = Core.Nothing}
+newConferenceSolutionKey =
+  ConferenceSolutionKey {type' = Core.Nothing}
 
 instance Core.FromJSON ConferenceSolutionKey where
   parseJSON =
     Core.withObject
       "ConferenceSolutionKey"
-      ( \o ->
-          ConferenceSolutionKey Core.<$> (o Core..:? "type")
-      )
+      (\o -> ConferenceSolutionKey Core.<$> (o Core..:? "type"))
 
 instance Core.ToJSON ConferenceSolutionKey where
   toJSON ConferenceSolutionKey {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 --
 -- /See:/ 'newCreateConferenceRequest' smart constructor.
@@ -1294,8 +1275,7 @@ instance Core.ToJSON CreateConferenceRequest where
   toJSON CreateConferenceRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conferenceSolutionKey" Core..=)
-              Core.<$> conferenceSolutionKey,
+          [ ("conferenceSolutionKey" Core..=) Core.<$> conferenceSolutionKey,
             ("requestId" Core..=) Core.<$> requestId,
             ("status" Core..=) Core.<$> status
           ]
@@ -1371,8 +1351,7 @@ instance Core.ToJSON EntryPoint where
     Core.object
       ( Core.catMaybes
           [ ("accessCode" Core..=) Core.<$> accessCode,
-            ("entryPointFeatures" Core..=)
-              Core.<$> entryPointFeatures,
+            ("entryPointFeatures" Core..=) Core.<$> entryPointFeatures,
             ("entryPointType" Core..=) Core.<$> entryPointType,
             ("label" Core..=) Core.<$> label,
             ("meetingCode" Core..=) Core.<$> meetingCode,
@@ -1406,7 +1385,8 @@ instance Core.FromJSON Error' where
       "Error'"
       ( \o ->
           Error'
-            Core.<$> (o Core..:? "domain") Core.<*> (o Core..:? "reason")
+            Core.<$> (o Core..:? "domain")
+            Core.<*> (o Core..:? "reason")
       )
 
 instance Core.ToJSON Error' where
@@ -1429,6 +1409,8 @@ data Event = Event
     attendees :: (Core.Maybe [EventAttendee]),
     -- | Whether attendees may have been omitted from the event\'s representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant\'s response. Optional. The default is False.
     attendeesOmitted :: Core.Bool,
+    -- | Birthday or special event data. Used if eventType is \"birthday\". Immutable.
+    birthdayProperties :: (Core.Maybe EventBirthdayProperties),
     -- | The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the colors endpoint). Optional.
     colorId :: (Core.Maybe Core.Text),
     -- | The conference-related information, such as details of a Google Meet conference. To create new conference details use the createRequest field. To persist your changes, remember to set the conferenceDataVersion request parameter to 1 for all event modification requests.
@@ -1445,11 +1427,13 @@ data Event = Event
     endTimeUnspecified :: Core.Bool,
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
-    -- | Specific type of the event. Read-only. Possible values are:
-    -- - \"default\" - A regular event or not further specified. - \"outOfOffice\" - An out-of-office event. - \"focusTime\" - A focus-time event. - \"workingLocation\" - A working location event. Developer Preview.
+    -- | Specific type of the event. This cannot be modified after the event is created. Possible values are:
+    -- - \"birthday\" - A special all-day event with an annual recurrence. - \"default\" - A regular event or not further specified. - \"focusTime\" - A focus-time event. - \"fromGmail\" - An event from Gmail. This type of event cannot be created. - \"outOfOffice\" - An out-of-office event. - \"workingLocation\" - A working location event.
     eventType :: Core.Text,
     -- | Extended properties of the event.
     extendedProperties :: (Core.Maybe Event_ExtendedProperties),
+    -- | Focus Time event data. Used if eventType is focusTime.
+    focusTimeProperties :: (Core.Maybe EventFocusTimeProperties),
     -- | A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
     gadget :: (Core.Maybe Event_Gadget),
     -- | Whether attendees other than the organizer can invite others to the event. Optional. The default is True.
@@ -1477,13 +1461,15 @@ data Event = Event
     organizer :: (Core.Maybe Event_Organizer),
     -- | For an instance of a recurring event, this is the time at which this event would start according to the recurrence data in the recurring event identified by recurringEventId. It uniquely identifies the instance within the recurring event series even if the instance was moved to a different time. Immutable.
     originalStartTime :: (Core.Maybe EventDateTime),
+    -- | Out of office event data. Used if eventType is outOfOffice.
+    outOfOfficeProperties :: (Core.Maybe EventOutOfOfficeProperties),
     -- | If set to True, Event propagation is disabled. Note that it is not the same thing as Private event properties. Optional. Immutable. The default is False.
     privateCopy :: Core.Bool,
     -- | List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events.
     recurrence :: (Core.Maybe [Core.Text]),
     -- | For an instance of a recurring event, this is the id of the recurring event to which this instance belongs. Immutable.
     recurringEventId :: (Core.Maybe Core.Text),
-    -- | Information about the event\'s reminders for the authenticated user.
+    -- | Information about the event\'s reminders for the authenticated user. Note that changing reminders does not also change the updated property of the enclosing event.
     reminders :: (Core.Maybe Event_Reminders),
     -- | Sequence number as per iCalendar.
     sequence :: (Core.Maybe Core.Int32),
@@ -1501,12 +1487,12 @@ data Event = Event
     -- | Whether the event blocks time on the calendar. Optional. Possible values are:
     -- - \"opaque\" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI. - \"transparent\" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
     transparency :: Core.Text,
-    -- | Last modification time of the event (as a RFC3339 timestamp). Read-only.
+    -- | Last modification time of the main event data (as a RFC3339 timestamp). Updating event reminders will not cause this to change. Read-only.
     updated :: (Core.Maybe Core.DateTime),
     -- | Visibility of the event. Optional. Possible values are:
     -- - \"default\" - Uses the default visibility for events on the calendar. This is the default value. - \"public\" - The event is public and event details are visible to all readers of the calendar. - \"private\" - The event is private and only event attendees may view event details. - \"confidential\" - The event is private. This value is provided for compatibility reasons.
     visibility :: Core.Text,
-    -- | Developer Preview: Working Location event data. Read-only.
+    -- | Working location event data.
     workingLocationProperties :: (Core.Maybe EventWorkingLocationProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1520,6 +1506,7 @@ newEvent =
       attachments = Core.Nothing,
       attendees = Core.Nothing,
       attendeesOmitted = Core.False,
+      birthdayProperties = Core.Nothing,
       colorId = Core.Nothing,
       conferenceData = Core.Nothing,
       created = Core.Nothing,
@@ -1530,6 +1517,7 @@ newEvent =
       etag = Core.Nothing,
       eventType = "default",
       extendedProperties = Core.Nothing,
+      focusTimeProperties = Core.Nothing,
       gadget = Core.Nothing,
       guestsCanInviteOthers = Core.True,
       guestsCanModify = Core.False,
@@ -1543,6 +1531,7 @@ newEvent =
       locked = Core.False,
       organizer = Core.Nothing,
       originalStartTime = Core.Nothing,
+      outOfOfficeProperties = Core.Nothing,
       privateCopy = Core.False,
       recurrence = Core.Nothing,
       recurringEventId = Core.Nothing,
@@ -1568,6 +1557,7 @@ instance Core.FromJSON Event where
             Core.<*> (o Core..:? "attachments")
             Core.<*> (o Core..:? "attendees")
             Core.<*> (o Core..:? "attendeesOmitted" Core..!= Core.False)
+            Core.<*> (o Core..:? "birthdayProperties")
             Core.<*> (o Core..:? "colorId")
             Core.<*> (o Core..:? "conferenceData")
             Core.<*> (o Core..:? "created")
@@ -1578,14 +1568,11 @@ instance Core.FromJSON Event where
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "eventType" Core..!= "default")
             Core.<*> (o Core..:? "extendedProperties")
+            Core.<*> (o Core..:? "focusTimeProperties")
             Core.<*> (o Core..:? "gadget")
-            Core.<*> ( o Core..:? "guestsCanInviteOthers"
-                         Core..!= Core.True
-                     )
+            Core.<*> (o Core..:? "guestsCanInviteOthers" Core..!= Core.True)
             Core.<*> (o Core..:? "guestsCanModify" Core..!= Core.False)
-            Core.<*> ( o Core..:? "guestsCanSeeOtherGuests"
-                         Core..!= Core.True
-                     )
+            Core.<*> (o Core..:? "guestsCanSeeOtherGuests" Core..!= Core.True)
             Core.<*> (o Core..:? "hangoutLink")
             Core.<*> (o Core..:? "htmlLink")
             Core.<*> (o Core..:? "iCalUID")
@@ -1595,6 +1582,7 @@ instance Core.FromJSON Event where
             Core.<*> (o Core..:? "locked" Core..!= Core.False)
             Core.<*> (o Core..:? "organizer")
             Core.<*> (o Core..:? "originalStartTime")
+            Core.<*> (o Core..:? "outOfOfficeProperties")
             Core.<*> (o Core..:? "privateCopy" Core..!= Core.False)
             Core.<*> (o Core..:? "recurrence")
             Core.<*> (o Core..:? "recurringEventId")
@@ -1614,35 +1602,27 @@ instance Core.ToJSON Event where
   toJSON Event {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("anyoneCanAddSelf" Core..= anyoneCanAddSelf),
+          [ Core.Just ("anyoneCanAddSelf" Core..= anyoneCanAddSelf),
             ("attachments" Core..=) Core.<$> attachments,
             ("attendees" Core..=) Core.<$> attendees,
-            Core.Just
-              ("attendeesOmitted" Core..= attendeesOmitted),
+            Core.Just ("attendeesOmitted" Core..= attendeesOmitted),
+            ("birthdayProperties" Core..=) Core.<$> birthdayProperties,
             ("colorId" Core..=) Core.<$> colorId,
             ("conferenceData" Core..=) Core.<$> conferenceData,
             ("created" Core..=) Core.<$> created,
             ("creator" Core..=) Core.<$> creator,
             ("description" Core..=) Core.<$> description,
             ("end" Core..=) Core.<$> end,
-            Core.Just
-              ("endTimeUnspecified" Core..= endTimeUnspecified),
+            Core.Just ("endTimeUnspecified" Core..= endTimeUnspecified),
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("eventType" Core..= eventType),
-            ("extendedProperties" Core..=)
-              Core.<$> extendedProperties,
+            ("extendedProperties" Core..=) Core.<$> extendedProperties,
+            ("focusTimeProperties" Core..=) Core.<$> focusTimeProperties,
             ("gadget" Core..=) Core.<$> gadget,
+            Core.Just ("guestsCanInviteOthers" Core..= guestsCanInviteOthers),
+            Core.Just ("guestsCanModify" Core..= guestsCanModify),
             Core.Just
-              ( "guestsCanInviteOthers"
-                  Core..= guestsCanInviteOthers
-              ),
-            Core.Just
-              ("guestsCanModify" Core..= guestsCanModify),
-            Core.Just
-              ( "guestsCanSeeOtherGuests"
-                  Core..= guestsCanSeeOtherGuests
-              ),
+              ("guestsCanSeeOtherGuests" Core..= guestsCanSeeOtherGuests),
             ("hangoutLink" Core..=) Core.<$> hangoutLink,
             ("htmlLink" Core..=) Core.<$> htmlLink,
             ("iCalUID" Core..=) Core.<$> iCalUID,
@@ -1651,12 +1631,11 @@ instance Core.ToJSON Event where
             ("location" Core..=) Core.<$> location,
             Core.Just ("locked" Core..= locked),
             ("organizer" Core..=) Core.<$> organizer,
-            ("originalStartTime" Core..=)
-              Core.<$> originalStartTime,
+            ("originalStartTime" Core..=) Core.<$> originalStartTime,
+            ("outOfOfficeProperties" Core..=) Core.<$> outOfOfficeProperties,
             Core.Just ("privateCopy" Core..= privateCopy),
             ("recurrence" Core..=) Core.<$> recurrence,
-            ("recurringEventId" Core..=)
-              Core.<$> recurringEventId,
+            ("recurringEventId" Core..=) Core.<$> recurringEventId,
             ("reminders" Core..=) Core.<$> reminders,
             ("sequence" Core..=) Core.<$> sequence,
             ("source" Core..=) Core.<$> source,
@@ -1735,7 +1714,10 @@ data Event_ExtendedProperties = Event_ExtendedProperties
 newEvent_ExtendedProperties ::
   Event_ExtendedProperties
 newEvent_ExtendedProperties =
-  Event_ExtendedProperties {private = Core.Nothing, shared = Core.Nothing}
+  Event_ExtendedProperties
+    { private = Core.Nothing,
+      shared = Core.Nothing
+    }
 
 instance Core.FromJSON Event_ExtendedProperties where
   parseJSON =
@@ -1773,16 +1755,12 @@ newEvent_ExtendedProperties_Private ::
 newEvent_ExtendedProperties_Private additional =
   Event_ExtendedProperties_Private {additional = additional}
 
-instance
-  Core.FromJSON
-    Event_ExtendedProperties_Private
-  where
+instance Core.FromJSON Event_ExtendedProperties_Private where
   parseJSON =
     Core.withObject
       "Event_ExtendedProperties_Private"
       ( \o ->
-          Event_ExtendedProperties_Private
-            Core.<$> (Core.parseJSONObject o)
+          Event_ExtendedProperties_Private Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Event_ExtendedProperties_Private where
@@ -1806,21 +1784,16 @@ newEvent_ExtendedProperties_Shared ::
 newEvent_ExtendedProperties_Shared additional =
   Event_ExtendedProperties_Shared {additional = additional}
 
-instance
-  Core.FromJSON
-    Event_ExtendedProperties_Shared
-  where
+instance Core.FromJSON Event_ExtendedProperties_Shared where
   parseJSON =
     Core.withObject
       "Event_ExtendedProperties_Shared"
       ( \o ->
-          Event_ExtendedProperties_Shared
-            Core.<$> (Core.parseJSONObject o)
+          Event_ExtendedProperties_Shared Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Event_ExtendedProperties_Shared where
-  toJSON Event_ExtendedProperties_Shared {..} =
-    Core.toJSON additional
+  toJSON Event_ExtendedProperties_Shared {..} = Core.toJSON additional
 
 -- | A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
 --
@@ -1913,14 +1886,10 @@ instance Core.FromJSON Event_Gadget_Preferences where
   parseJSON =
     Core.withObject
       "Event_Gadget_Preferences"
-      ( \o ->
-          Event_Gadget_Preferences
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Event_Gadget_Preferences Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Event_Gadget_Preferences where
-  toJSON Event_Gadget_Preferences {..} =
-    Core.toJSON additional
+  toJSON Event_Gadget_Preferences {..} = Core.toJSON additional
 
 -- | The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
 --
@@ -1971,7 +1940,7 @@ instance Core.ToJSON Event_Organizer where
           ]
       )
 
--- | Information about the event\'s reminders for the authenticated user.
+-- | Information about the event\'s reminders for the authenticated user. Note that changing reminders does not also change the updated property of the enclosing event.
 --
 -- /See:/ 'newEvent_Reminders' smart constructor.
 data Event_Reminders = Event_Reminders
@@ -1986,7 +1955,10 @@ data Event_Reminders = Event_Reminders
 newEvent_Reminders ::
   Event_Reminders
 newEvent_Reminders =
-  Event_Reminders {overrides = Core.Nothing, useDefault = Core.Nothing}
+  Event_Reminders
+    { overrides = Core.Nothing,
+      useDefault = Core.Nothing
+    }
 
 instance Core.FromJSON Event_Reminders where
   parseJSON =
@@ -2021,7 +1993,8 @@ data Event_Source = Event_Source
 -- | Creates a value of 'Event_Source' with the minimum fields required to make a request.
 newEvent_Source ::
   Event_Source
-newEvent_Source = Event_Source {title = Core.Nothing, url = Core.Nothing}
+newEvent_Source =
+  Event_Source {title = Core.Nothing, url = Core.Nothing}
 
 instance Core.FromJSON Event_Source where
   parseJSON =
@@ -2029,16 +2002,15 @@ instance Core.FromJSON Event_Source where
       "Event_Source"
       ( \o ->
           Event_Source
-            Core.<$> (o Core..:? "title") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "title")
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON Event_Source where
   toJSON Event_Source {..} =
     Core.object
       ( Core.catMaybes
-          [ ("title" Core..=) Core.<$> title,
-            ("url" Core..=) Core.<$> url
-          ]
+          [("title" Core..=) Core.<$> title, ("url" Core..=) Core.<$> url]
       )
 
 --
@@ -2114,7 +2086,7 @@ data EventAttendee = EventAttendee
     -- | Whether the attendee is a resource. Can only be set when the attendee is added to the event for the first time. Subsequent modifications are ignored. Optional. The default is False.
     resource :: Core.Bool,
     -- | The attendee\'s response status. Possible values are:
-    -- - \"needsAction\" - The attendee has not responded to the invitation (recommended for new events). - \"declined\" - The attendee has declined the invitation. - \"tentative\" - The attendee has tentatively accepted the invitation. - \"accepted\" - The attendee has accepted the invitation. Warning: If you add an event using the values declined, tentative, or accepted, attendees with the \"Add invitations to my calendar\" setting set to \"When I respond to invitation in email\" won\'t see an event on their calendar unless they choose to change their invitation response in the event invitation email.
+    -- - \"needsAction\" - The attendee has not responded to the invitation (recommended for new events). - \"declined\" - The attendee has declined the invitation. - \"tentative\" - The attendee has tentatively accepted the invitation. - \"accepted\" - The attendee has accepted the invitation. Warning: If you add an event using the values declined, tentative, or accepted, attendees with the \"Add invitations to my calendar\" setting set to \"When I respond to invitation in email\" or \"Only if the sender is known\" might have their response reset to needsAction and won\'t see an event in their calendar unless they change their response in the event invitation email. Furthermore, if more than 200 guests are invited to the event, response status is not propagated to the guests.
     responseStatus :: (Core.Maybe Core.Text),
     -- | Whether this entry represents the calendar on which this copy of the event appears. Read-only. The default is False.
     self :: Core.Bool
@@ -2160,8 +2132,7 @@ instance Core.ToJSON EventAttendee where
   toJSON EventAttendee {..} =
     Core.object
       ( Core.catMaybes
-          [ Core.Just
-              ("additionalGuests" Core..= additionalGuests),
+          [ Core.Just ("additionalGuests" Core..= additionalGuests),
             ("comment" Core..=) Core.<$> comment,
             ("displayName" Core..=) Core.<$> displayName,
             ("email" Core..=) Core.<$> email,
@@ -2171,6 +2142,50 @@ instance Core.ToJSON EventAttendee where
             Core.Just ("resource" Core..= resource),
             ("responseStatus" Core..=) Core.<$> responseStatus,
             Core.Just ("self" Core..= self)
+          ]
+      )
+
+--
+-- /See:/ 'newEventBirthdayProperties' smart constructor.
+data EventBirthdayProperties = EventBirthdayProperties
+  { -- | Resource name of the contact this birthday event is linked to. This can be used to fetch contact details from People API. Format: \"people\/c12345\". Read-only.
+    contact :: (Core.Maybe Core.Text),
+    -- | Custom type label specified for this event. This is populated if birthdayProperties.type is set to \"custom\". Read-only.
+    customTypeName :: (Core.Maybe Core.Text),
+    -- | Type of birthday or special event. Possible values are:
+    -- - \"anniversary\" - An anniversary other than birthday. Always has a contact. - \"birthday\" - A birthday event. This is the default value. - \"custom\" - A special date whose label is further specified in the customTypeName field. Always has a contact. - \"other\" - A special date which does not fall into the other categories, and does not have a custom label. Always has a contact. - \"self\" - Calendar owner\'s own birthday. Cannot have a contact. The Calendar API only supports creating events with the type \"birthday\". The type cannot be changed after the event is created.
+    type' :: Core.Text
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventBirthdayProperties' with the minimum fields required to make a request.
+newEventBirthdayProperties ::
+  EventBirthdayProperties
+newEventBirthdayProperties =
+  EventBirthdayProperties
+    { contact = Core.Nothing,
+      customTypeName = Core.Nothing,
+      type' = "birthday"
+    }
+
+instance Core.FromJSON EventBirthdayProperties where
+  parseJSON =
+    Core.withObject
+      "EventBirthdayProperties"
+      ( \o ->
+          EventBirthdayProperties
+            Core.<$> (o Core..:? "contact")
+            Core.<*> (o Core..:? "customTypeName")
+            Core.<*> (o Core..:? "type" Core..!= "birthday")
+      )
+
+instance Core.ToJSON EventBirthdayProperties where
+  toJSON EventBirthdayProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contact" Core..=) Core.<$> contact,
+            ("customTypeName" Core..=) Core.<$> customTypeName,
+            Core.Just ("type" Core..= type')
           ]
       )
 
@@ -2218,6 +2233,87 @@ instance Core.ToJSON EventDateTime where
       )
 
 --
+-- /See:/ 'newEventFocusTimeProperties' smart constructor.
+data EventFocusTimeProperties = EventFocusTimeProperties
+  { -- | Whether to decline meeting invitations which overlap Focus Time events. Valid values are declineNone, meaning that no meeting invitations are declined; declineAllConflictingInvitations, meaning that all conflicting meeting invitations that conflict with the event are declined; and declineOnlyNewConflictingInvitations, meaning that only new conflicting meeting invitations which arrive while the Focus Time event is present are to be declined.
+    autoDeclineMode :: (Core.Maybe Core.Text),
+    -- | The status to mark the user in Chat and related products. This can be available or doNotDisturb.
+    chatStatus :: (Core.Maybe Core.Text),
+    -- | Response message to set if an existing event or new invitation is automatically declined by Calendar.
+    declineMessage :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventFocusTimeProperties' with the minimum fields required to make a request.
+newEventFocusTimeProperties ::
+  EventFocusTimeProperties
+newEventFocusTimeProperties =
+  EventFocusTimeProperties
+    { autoDeclineMode = Core.Nothing,
+      chatStatus = Core.Nothing,
+      declineMessage = Core.Nothing
+    }
+
+instance Core.FromJSON EventFocusTimeProperties where
+  parseJSON =
+    Core.withObject
+      "EventFocusTimeProperties"
+      ( \o ->
+          EventFocusTimeProperties
+            Core.<$> (o Core..:? "autoDeclineMode")
+            Core.<*> (o Core..:? "chatStatus")
+            Core.<*> (o Core..:? "declineMessage")
+      )
+
+instance Core.ToJSON EventFocusTimeProperties where
+  toJSON EventFocusTimeProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoDeclineMode" Core..=) Core.<$> autoDeclineMode,
+            ("chatStatus" Core..=) Core.<$> chatStatus,
+            ("declineMessage" Core..=) Core.<$> declineMessage
+          ]
+      )
+
+--
+-- /See:/ 'newEventOutOfOfficeProperties' smart constructor.
+data EventOutOfOfficeProperties = EventOutOfOfficeProperties
+  { -- | Whether to decline meeting invitations which overlap Out of office events. Valid values are declineNone, meaning that no meeting invitations are declined; declineAllConflictingInvitations, meaning that all conflicting meeting invitations that conflict with the event are declined; and declineOnlyNewConflictingInvitations, meaning that only new conflicting meeting invitations which arrive while the Out of office event is present are to be declined.
+    autoDeclineMode :: (Core.Maybe Core.Text),
+    -- | Response message to set if an existing event or new invitation is automatically declined by Calendar.
+    declineMessage :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EventOutOfOfficeProperties' with the minimum fields required to make a request.
+newEventOutOfOfficeProperties ::
+  EventOutOfOfficeProperties
+newEventOutOfOfficeProperties =
+  EventOutOfOfficeProperties
+    { autoDeclineMode = Core.Nothing,
+      declineMessage = Core.Nothing
+    }
+
+instance Core.FromJSON EventOutOfOfficeProperties where
+  parseJSON =
+    Core.withObject
+      "EventOutOfOfficeProperties"
+      ( \o ->
+          EventOutOfOfficeProperties
+            Core.<$> (o Core..:? "autoDeclineMode")
+            Core.<*> (o Core..:? "declineMessage")
+      )
+
+instance Core.ToJSON EventOutOfOfficeProperties where
+  toJSON EventOutOfOfficeProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoDeclineMode" Core..=) Core.<$> autoDeclineMode,
+            ("declineMessage" Core..=) Core.<$> declineMessage
+          ]
+      )
+
+--
 -- /See:/ 'newEventReminder' smart constructor.
 data EventReminder = EventReminder
   { -- | The method used by this reminder. Possible values are:
@@ -2232,7 +2328,8 @@ data EventReminder = EventReminder
 -- | Creates a value of 'EventReminder' with the minimum fields required to make a request.
 newEventReminder ::
   EventReminder
-newEventReminder = EventReminder {method = Core.Nothing, minutes = Core.Nothing}
+newEventReminder =
+  EventReminder {method = Core.Nothing, minutes = Core.Nothing}
 
 instance Core.FromJSON EventReminder where
   parseJSON =
@@ -2261,7 +2358,10 @@ data EventWorkingLocationProperties = EventWorkingLocationProperties
     -- | If present, specifies that the user is working at home.
     homeOffice :: (Core.Maybe Core.Value),
     -- | If present, specifies that the user is working from an office.
-    officeLocation :: (Core.Maybe EventWorkingLocationProperties_OfficeLocation)
+    officeLocation :: (Core.Maybe EventWorkingLocationProperties_OfficeLocation),
+    -- | Type of the working location. Possible values are:
+    -- - \"homeOffice\" - The user is working at home. - \"officeLocation\" - The user is working from an office. - \"customLocation\" - The user is working from a custom location. Any details are specified in a sub-field of the specified name, but this field may be missing if empty. Any other fields are ignored. Required when adding working location properties.
+    type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2272,7 +2372,8 @@ newEventWorkingLocationProperties =
   EventWorkingLocationProperties
     { customLocation = Core.Nothing,
       homeOffice = Core.Nothing,
-      officeLocation = Core.Nothing
+      officeLocation = Core.Nothing,
+      type' = Core.Nothing
     }
 
 instance Core.FromJSON EventWorkingLocationProperties where
@@ -2284,6 +2385,7 @@ instance Core.FromJSON EventWorkingLocationProperties where
             Core.<$> (o Core..:? "customLocation")
             Core.<*> (o Core..:? "homeOffice")
             Core.<*> (o Core..:? "officeLocation")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON EventWorkingLocationProperties where
@@ -2292,7 +2394,8 @@ instance Core.ToJSON EventWorkingLocationProperties where
       ( Core.catMaybes
           [ ("customLocation" Core..=) Core.<$> customLocation,
             ("homeOffice" Core..=) Core.<$> homeOffice,
-            ("officeLocation" Core..=) Core.<$> officeLocation
+            ("officeLocation" Core..=) Core.<$> officeLocation,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
@@ -2309,7 +2412,10 @@ newtype EventWorkingLocationProperties_CustomLocation = EventWorkingLocationProp
 newEventWorkingLocationProperties_CustomLocation ::
   EventWorkingLocationProperties_CustomLocation
 newEventWorkingLocationProperties_CustomLocation =
-  EventWorkingLocationProperties_CustomLocation {label = Core.Nothing}
+  EventWorkingLocationProperties_CustomLocation
+    { label =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2323,14 +2429,9 @@ instance
             Core.<$> (o Core..:? "label")
       )
 
-instance
-  Core.ToJSON
-    EventWorkingLocationProperties_CustomLocation
-  where
-  toJSON
-    EventWorkingLocationProperties_CustomLocation {..} =
-      Core.object
-        (Core.catMaybes [("label" Core..=) Core.<$> label])
+instance Core.ToJSON EventWorkingLocationProperties_CustomLocation where
+  toJSON EventWorkingLocationProperties_CustomLocation {..} =
+    Core.object (Core.catMaybes [("label" Core..=) Core.<$> label])
 
 -- | If present, specifies that the user is working from an office.
 --
@@ -2338,13 +2439,13 @@ instance
 data EventWorkingLocationProperties_OfficeLocation = EventWorkingLocationProperties_OfficeLocation
   { -- | An optional building identifier. This should reference a building ID in the organization\'s Resources database.
     buildingId :: (Core.Maybe Core.Text),
-    -- | An optional arbitrary desk identifier.
+    -- | An optional desk identifier.
     deskId :: (Core.Maybe Core.Text),
-    -- | An optional arbitrary floor identifier.
+    -- | An optional floor identifier.
     floorId :: (Core.Maybe Core.Text),
-    -- | An optional arbitrary floor section identifier.
+    -- | An optional floor section identifier.
     floorSectionId :: (Core.Maybe Core.Text),
-    -- | An optional extra label for additional information.
+    -- | The office name that\'s displayed in Calendar Web and Mobile clients. We recommend you reference a building name in the organization\'s Resources database.
     label :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2354,7 +2455,8 @@ newEventWorkingLocationProperties_OfficeLocation ::
   EventWorkingLocationProperties_OfficeLocation
 newEventWorkingLocationProperties_OfficeLocation =
   EventWorkingLocationProperties_OfficeLocation
-    { buildingId = Core.Nothing,
+    { buildingId =
+        Core.Nothing,
       deskId = Core.Nothing,
       floorId = Core.Nothing,
       floorSectionId = Core.Nothing,
@@ -2371,27 +2473,23 @@ instance
       ( \o ->
           EventWorkingLocationProperties_OfficeLocation
             Core.<$> (o Core..:? "buildingId")
-              Core.<*> (o Core..:? "deskId")
-              Core.<*> (o Core..:? "floorId")
-              Core.<*> (o Core..:? "floorSectionId")
-              Core.<*> (o Core..:? "label")
+            Core.<*> (o Core..:? "deskId")
+            Core.<*> (o Core..:? "floorId")
+            Core.<*> (o Core..:? "floorSectionId")
+            Core.<*> (o Core..:? "label")
       )
 
-instance
-  Core.ToJSON
-    EventWorkingLocationProperties_OfficeLocation
-  where
-  toJSON
-    EventWorkingLocationProperties_OfficeLocation {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("buildingId" Core..=) Core.<$> buildingId,
-              ("deskId" Core..=) Core.<$> deskId,
-              ("floorId" Core..=) Core.<$> floorId,
-              ("floorSectionId" Core..=) Core.<$> floorSectionId,
-              ("label" Core..=) Core.<$> label
-            ]
-        )
+instance Core.ToJSON EventWorkingLocationProperties_OfficeLocation where
+  toJSON EventWorkingLocationProperties_OfficeLocation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("buildingId" Core..=) Core.<$> buildingId,
+            ("deskId" Core..=) Core.<$> deskId,
+            ("floorId" Core..=) Core.<$> floorId,
+            ("floorSectionId" Core..=) Core.<$> floorSectionId,
+            ("label" Core..=) Core.<$> label
+          ]
+      )
 
 --
 -- /See:/ 'newEvents' smart constructor.
@@ -2464,8 +2562,7 @@ instance Core.ToJSON Events where
     Core.object
       ( Core.catMaybes
           [ ("accessRole" Core..=) Core.<$> accessRole,
-            ("defaultReminders" Core..=)
-              Core.<$> defaultReminders,
+            ("defaultReminders" Core..=) Core.<$> defaultReminders,
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
             ("items" Core..=) Core.<$> items,
@@ -2500,7 +2597,8 @@ instance Core.FromJSON FreeBusyCalendar where
       "FreeBusyCalendar"
       ( \o ->
           FreeBusyCalendar
-            Core.<$> (o Core..:? "busy") Core.<*> (o Core..:? "errors")
+            Core.<$> (o Core..:? "busy")
+            Core.<*> (o Core..:? "errors")
       )
 
 instance Core.ToJSON FreeBusyCalendar where
@@ -2596,10 +2694,8 @@ instance Core.ToJSON FreeBusyRequest where
   toJSON FreeBusyRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calendarExpansionMax" Core..=)
-              Core.<$> calendarExpansionMax,
-            ("groupExpansionMax" Core..=)
-              Core.<$> groupExpansionMax,
+          [ ("calendarExpansionMax" Core..=) Core.<$> calendarExpansionMax,
+            ("groupExpansionMax" Core..=) Core.<$> groupExpansionMax,
             ("items" Core..=) Core.<$> items,
             ("timeMax" Core..=) Core.<$> timeMax,
             ("timeMin" Core..=) Core.<$> timeMin,
@@ -2624,14 +2720,11 @@ instance Core.FromJSON FreeBusyRequestItem where
   parseJSON =
     Core.withObject
       "FreeBusyRequestItem"
-      ( \o ->
-          FreeBusyRequestItem Core.<$> (o Core..:? "id")
-      )
+      (\o -> FreeBusyRequestItem Core.<$> (o Core..:? "id"))
 
 instance Core.ToJSON FreeBusyRequestItem where
   toJSON FreeBusyRequestItem {..} =
-    Core.object
-      (Core.catMaybes [("id" Core..=) Core.<$> id])
+    Core.object (Core.catMaybes [("id" Core..=) Core.<$> id])
 
 --
 -- /See:/ 'newFreeBusyResponse' smart constructor.
@@ -2708,13 +2801,11 @@ instance Core.FromJSON FreeBusyResponse_Calendars where
     Core.withObject
       "FreeBusyResponse_Calendars"
       ( \o ->
-          FreeBusyResponse_Calendars
-            Core.<$> (Core.parseJSONObject o)
+          FreeBusyResponse_Calendars Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON FreeBusyResponse_Calendars where
-  toJSON FreeBusyResponse_Calendars {..} =
-    Core.toJSON additional
+  toJSON FreeBusyResponse_Calendars {..} = Core.toJSON additional
 
 -- | Expansion of groups.
 --
@@ -2737,14 +2828,10 @@ instance Core.FromJSON FreeBusyResponse_Groups where
   parseJSON =
     Core.withObject
       "FreeBusyResponse_Groups"
-      ( \o ->
-          FreeBusyResponse_Groups
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> FreeBusyResponse_Groups Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON FreeBusyResponse_Groups where
-  toJSON FreeBusyResponse_Groups {..} =
-    Core.toJSON additional
+  toJSON FreeBusyResponse_Groups {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newSetting' smart constructor.
@@ -2860,7 +2947,8 @@ data TimePeriod = TimePeriod
 -- | Creates a value of 'TimePeriod' with the minimum fields required to make a request.
 newTimePeriod ::
   TimePeriod
-newTimePeriod = TimePeriod {end = Core.Nothing, start = Core.Nothing}
+newTimePeriod =
+  TimePeriod {end = Core.Nothing, start = Core.Nothing}
 
 instance Core.FromJSON TimePeriod where
   parseJSON =
@@ -2868,14 +2956,13 @@ instance Core.FromJSON TimePeriod where
       "TimePeriod"
       ( \o ->
           TimePeriod
-            Core.<$> (o Core..:? "end") Core.<*> (o Core..:? "start")
+            Core.<$> (o Core..:? "end")
+            Core.<*> (o Core..:? "start")
       )
 
 instance Core.ToJSON TimePeriod where
   toJSON TimePeriod {..} =
     Core.object
       ( Core.catMaybes
-          [ ("end" Core..=) Core.<$> end,
-            ("start" Core..=) Core.<$> start
-          ]
+          [("end" Core..=) Core.<$> end, ("start" Core..=) Core.<$> start]
       )

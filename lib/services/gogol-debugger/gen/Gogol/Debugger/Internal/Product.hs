@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Debugger.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Debugger.Internal.Product
@@ -149,7 +147,7 @@ module Gogol.Debugger.Internal.Product
 where
 
 import Gogol.Debugger.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An alias to a repo revision.
 --
@@ -165,7 +163,8 @@ data AliasContext = AliasContext
 -- | Creates a value of 'AliasContext' with the minimum fields required to make a request.
 newAliasContext ::
   AliasContext
-newAliasContext = AliasContext {kind = Core.Nothing, name = Core.Nothing}
+newAliasContext =
+  AliasContext {kind = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON AliasContext where
   parseJSON =
@@ -173,16 +172,15 @@ instance Core.FromJSON AliasContext where
       "AliasContext"
       ( \o ->
           AliasContext
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON AliasContext where
   toJSON AliasContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("kind" Core..=) Core.<$> kind, ("name" Core..=) Core.<$> name]
       )
 
 -- | ------------------------------------------------------------------------------ ## Breakpoint (the resource) Represents the breakpoint specification, status and results.
@@ -284,12 +282,10 @@ instance Core.ToJSON Breakpoint where
     Core.object
       ( Core.catMaybes
           [ ("action" Core..=) Core.<$> action,
-            ("canaryExpireTime" Core..=)
-              Core.<$> canaryExpireTime,
+            ("canaryExpireTime" Core..=) Core.<$> canaryExpireTime,
             ("condition" Core..=) Core.<$> condition,
             ("createTime" Core..=) Core.<$> createTime,
-            ("evaluatedExpressions" Core..=)
-              Core.<$> evaluatedExpressions,
+            ("evaluatedExpressions" Core..=) Core.<$> evaluatedExpressions,
             ("expressions" Core..=) Core.<$> expressions,
             ("finalTime" Core..=) Core.<$> finalTime,
             ("id" Core..=) Core.<$> id,
@@ -297,8 +293,7 @@ instance Core.ToJSON Breakpoint where
             ("labels" Core..=) Core.<$> labels,
             ("location" Core..=) Core.<$> location,
             ("logLevel" Core..=) Core.<$> logLevel,
-            ("logMessageFormat" Core..=)
-              Core.<$> logMessageFormat,
+            ("logMessageFormat" Core..=) Core.<$> logMessageFormat,
             ("stackFrames" Core..=) Core.<$> stackFrames,
             ("state" Core..=) Core.<$> state,
             ("status" Core..=) Core.<$> status,
@@ -311,8 +306,7 @@ instance Core.ToJSON Breakpoint where
 --
 -- /See:/ 'newBreakpoint_Labels' smart constructor.
 newtype Breakpoint_Labels = Breakpoint_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -321,15 +315,14 @@ newBreakpoint_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Breakpoint_Labels
-newBreakpoint_Labels additional = Breakpoint_Labels {additional = additional}
+newBreakpoint_Labels additional =
+  Breakpoint_Labels {additional = additional}
 
 instance Core.FromJSON Breakpoint_Labels where
   parseJSON =
     Core.withObject
       "Breakpoint_Labels"
-      ( \o ->
-          Breakpoint_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Breakpoint_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Breakpoint_Labels where
   toJSON Breakpoint_Labels {..} = Core.toJSON additional
@@ -406,7 +399,8 @@ instance Core.FromJSON CloudWorkspaceId where
       "CloudWorkspaceId"
       ( \o ->
           CloudWorkspaceId
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "repoId")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "repoId")
       )
 
 instance Core.ToJSON CloudWorkspaceId where
@@ -534,8 +528,7 @@ instance Core.ToJSON Debuggee where
           [ ("agentVersion" Core..=) Core.<$> agentVersion,
             ("canaryMode" Core..=) Core.<$> canaryMode,
             ("description" Core..=) Core.<$> description,
-            ("extSourceContexts" Core..=)
-              Core.<$> extSourceContexts,
+            ("extSourceContexts" Core..=) Core.<$> extSourceContexts,
             ("id" Core..=) Core.<$> id,
             ("isDisabled" Core..=) Core.<$> isDisabled,
             ("isInactive" Core..=) Core.<$> isInactive,
@@ -551,8 +544,7 @@ instance Core.ToJSON Debuggee where
 --
 -- /See:/ 'newDebuggee_Labels' smart constructor.
 newtype Debuggee_Labels = Debuggee_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -561,15 +553,14 @@ newDebuggee_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Debuggee_Labels
-newDebuggee_Labels additional = Debuggee_Labels {additional = additional}
+newDebuggee_Labels additional =
+  Debuggee_Labels {additional = additional}
 
 instance Core.FromJSON Debuggee_Labels where
   parseJSON =
     Core.withObject
       "Debuggee_Labels"
-      ( \o ->
-          Debuggee_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Debuggee_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Debuggee_Labels where
   toJSON Debuggee_Labels {..} = Core.toJSON additional
@@ -586,8 +577,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -607,7 +597,10 @@ data ExtendedSourceContext = ExtendedSourceContext
 newExtendedSourceContext ::
   ExtendedSourceContext
 newExtendedSourceContext =
-  ExtendedSourceContext {context = Core.Nothing, labels = Core.Nothing}
+  ExtendedSourceContext
+    { context = Core.Nothing,
+      labels = Core.Nothing
+    }
 
 instance Core.FromJSON ExtendedSourceContext where
   parseJSON =
@@ -632,8 +625,7 @@ instance Core.ToJSON ExtendedSourceContext where
 --
 -- /See:/ 'newExtendedSourceContext_Labels' smart constructor.
 newtype ExtendedSourceContext_Labels = ExtendedSourceContext_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -650,13 +642,11 @@ instance Core.FromJSON ExtendedSourceContext_Labels where
     Core.withObject
       "ExtendedSourceContext_Labels"
       ( \o ->
-          ExtendedSourceContext_Labels
-            Core.<$> (Core.parseJSONObject o)
+          ExtendedSourceContext_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON ExtendedSourceContext_Labels where
-  toJSON ExtendedSourceContext_Labels {..} =
-    Core.toJSON additional
+  toJSON ExtendedSourceContext_Labels {..} = Core.toJSON additional
 
 -- | Represents a message with parameters.
 --
@@ -760,23 +750,19 @@ newtype GetBreakpointResponse = GetBreakpointResponse
 -- | Creates a value of 'GetBreakpointResponse' with the minimum fields required to make a request.
 newGetBreakpointResponse ::
   GetBreakpointResponse
-newGetBreakpointResponse = GetBreakpointResponse {breakpoint = Core.Nothing}
+newGetBreakpointResponse =
+  GetBreakpointResponse {breakpoint = Core.Nothing}
 
 instance Core.FromJSON GetBreakpointResponse where
   parseJSON =
     Core.withObject
       "GetBreakpointResponse"
-      ( \o ->
-          GetBreakpointResponse
-            Core.<$> (o Core..:? "breakpoint")
-      )
+      (\o -> GetBreakpointResponse Core.<$> (o Core..:? "breakpoint"))
 
 instance Core.ToJSON GetBreakpointResponse where
   toJSON GetBreakpointResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("breakpoint" Core..=) Core.<$> breakpoint]
-      )
+      (Core.catMaybes [("breakpoint" Core..=) Core.<$> breakpoint])
 
 -- | A GitSourceContext denotes a particular revision in a third party Git repository (e.g. GitHub).
 --
@@ -909,23 +895,19 @@ newtype ListDebuggeesResponse = ListDebuggeesResponse
 -- | Creates a value of 'ListDebuggeesResponse' with the minimum fields required to make a request.
 newListDebuggeesResponse ::
   ListDebuggeesResponse
-newListDebuggeesResponse = ListDebuggeesResponse {debuggees = Core.Nothing}
+newListDebuggeesResponse =
+  ListDebuggeesResponse {debuggees = Core.Nothing}
 
 instance Core.FromJSON ListDebuggeesResponse where
   parseJSON =
     Core.withObject
       "ListDebuggeesResponse"
-      ( \o ->
-          ListDebuggeesResponse
-            Core.<$> (o Core..:? "debuggees")
-      )
+      (\o -> ListDebuggeesResponse Core.<$> (o Core..:? "debuggees"))
 
 instance Core.ToJSON ListDebuggeesResponse where
   toJSON ListDebuggeesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("debuggees" Core..=) Core.<$> debuggees]
-      )
+      (Core.catMaybes [("debuggees" Core..=) Core.<$> debuggees])
 
 -- | Selects a repo using a Google Cloud Platform project ID (e.g. winged-cargo-31) and a repo name within that project.
 --
@@ -975,23 +957,19 @@ newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
 -- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
 newRegisterDebuggeeRequest ::
   RegisterDebuggeeRequest
-newRegisterDebuggeeRequest = RegisterDebuggeeRequest {debuggee = Core.Nothing}
+newRegisterDebuggeeRequest =
+  RegisterDebuggeeRequest {debuggee = Core.Nothing}
 
 instance Core.FromJSON RegisterDebuggeeRequest where
   parseJSON =
     Core.withObject
       "RegisterDebuggeeRequest"
-      ( \o ->
-          RegisterDebuggeeRequest
-            Core.<$> (o Core..:? "debuggee")
-      )
+      (\o -> RegisterDebuggeeRequest Core.<$> (o Core..:? "debuggee"))
 
 instance Core.ToJSON RegisterDebuggeeRequest where
   toJSON RegisterDebuggeeRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("debuggee" Core..=) Core.<$> debuggee]
-      )
+      (Core.catMaybes [("debuggee" Core..=) Core.<$> debuggee])
 
 -- | Response for registering a debuggee.
 --
@@ -1008,7 +986,10 @@ data RegisterDebuggeeResponse = RegisterDebuggeeResponse
 newRegisterDebuggeeResponse ::
   RegisterDebuggeeResponse
 newRegisterDebuggeeResponse =
-  RegisterDebuggeeResponse {agentId = Core.Nothing, debuggee = Core.Nothing}
+  RegisterDebuggeeResponse
+    { agentId = Core.Nothing,
+      debuggee = Core.Nothing
+    }
 
 instance Core.FromJSON RegisterDebuggeeResponse where
   parseJSON =
@@ -1043,7 +1024,8 @@ data RepoId = RepoId
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
 newRepoId ::
   RepoId
-newRepoId = RepoId {projectRepoId = Core.Nothing, uid = Core.Nothing}
+newRepoId =
+  RepoId {projectRepoId = Core.Nothing, uid = Core.Nothing}
 
 instance Core.FromJSON RepoId where
   parseJSON =
@@ -1076,23 +1058,19 @@ newtype SetBreakpointResponse = SetBreakpointResponse
 -- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
 newSetBreakpointResponse ::
   SetBreakpointResponse
-newSetBreakpointResponse = SetBreakpointResponse {breakpoint = Core.Nothing}
+newSetBreakpointResponse =
+  SetBreakpointResponse {breakpoint = Core.Nothing}
 
 instance Core.FromJSON SetBreakpointResponse where
   parseJSON =
     Core.withObject
       "SetBreakpointResponse"
-      ( \o ->
-          SetBreakpointResponse
-            Core.<$> (o Core..:? "breakpoint")
-      )
+      (\o -> SetBreakpointResponse Core.<$> (o Core..:? "breakpoint"))
 
 instance Core.ToJSON SetBreakpointResponse where
   toJSON SetBreakpointResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("breakpoint" Core..=) Core.<$> breakpoint]
-      )
+      (Core.catMaybes [("breakpoint" Core..=) Core.<$> breakpoint])
 
 -- | A SourceContext is a reference to a tree of files. A SourceContext together with a path point to a unique revision of a single file or directory.
 --
@@ -1300,16 +1278,13 @@ instance Core.FromJSON UpdateActiveBreakpointRequest where
     Core.withObject
       "UpdateActiveBreakpointRequest"
       ( \o ->
-          UpdateActiveBreakpointRequest
-            Core.<$> (o Core..:? "breakpoint")
+          UpdateActiveBreakpointRequest Core.<$> (o Core..:? "breakpoint")
       )
 
 instance Core.ToJSON UpdateActiveBreakpointRequest where
   toJSON UpdateActiveBreakpointRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("breakpoint" Core..=) Core.<$> breakpoint]
-      )
+      (Core.catMaybes [("breakpoint" Core..=) Core.<$> breakpoint])
 
 -- | Response for updating an active breakpoint. The message is defined to allow future extensions.
 --

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TagManager.Internal.Product
@@ -166,6 +164,10 @@ module Gogol.TagManager.Internal.Product
     ListTemplatesResponse (..),
     newListTemplatesResponse,
 
+    -- * ListTransformationsResponse
+    ListTransformationsResponse (..),
+    newListTransformationsResponse,
+
     -- * ListTriggersResponse
     ListTriggersResponse (..),
     newListTriggersResponse,
@@ -222,6 +224,10 @@ module Gogol.TagManager.Internal.Product
     RevertTemplateResponse (..),
     newRevertTemplateResponse,
 
+    -- * RevertTransformationResponse
+    RevertTransformationResponse (..),
+    newRevertTransformationResponse,
+
     -- * RevertTriggerResponse
     RevertTriggerResponse (..),
     newRevertTriggerResponse,
@@ -257,6 +263,10 @@ module Gogol.TagManager.Internal.Product
     -- * TeardownTag
     TeardownTag (..),
     newTeardownTag,
+
+    -- * Transformation
+    Transformation (..),
+    newTransformation,
 
     -- * Trigger
     Trigger (..),
@@ -296,7 +306,7 @@ module Gogol.TagManager.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Internal.Sum
 
 -- | Represents a Google Tag Manager Account.
@@ -381,16 +391,12 @@ instance Core.FromJSON AccountAccess where
   parseJSON =
     Core.withObject
       "AccountAccess"
-      ( \o ->
-          AccountAccess Core.<$> (o Core..:? "permission")
-      )
+      (\o -> AccountAccess Core.<$> (o Core..:? "permission"))
 
 instance Core.ToJSON AccountAccess where
   toJSON AccountAccess {..} =
     Core.object
-      ( Core.catMaybes
-          [("permission" Core..=) Core.<$> permission]
-      )
+      (Core.catMaybes [("permission" Core..=) Core.<$> permission])
 
 --
 -- /See:/ 'newAccountFeatures' smart constructor.
@@ -598,7 +604,8 @@ data Condition = Condition
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
 newCondition ::
   Condition
-newCondition = Condition {parameter = Core.Nothing, type' = Core.Nothing}
+newCondition =
+  Condition {parameter = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON Condition where
   parseJSON =
@@ -708,8 +715,7 @@ instance Core.ToJSON Container where
             ("publicId" Core..=) Core.<$> publicId,
             ("tagIds" Core..=) Core.<$> tagIds,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
-            ("taggingServerUrls" Core..=)
-              Core.<$> taggingServerUrls,
+            ("taggingServerUrls" Core..=) Core.<$> taggingServerUrls,
             ("usageContext" Core..=) Core.<$> usageContext
           ]
       )
@@ -729,7 +735,10 @@ data ContainerAccess = ContainerAccess
 newContainerAccess ::
   ContainerAccess
 newContainerAccess =
-  ContainerAccess {containerId = Core.Nothing, permission = Core.Nothing}
+  ContainerAccess
+    { containerId = Core.Nothing,
+      permission = Core.Nothing
+    }
 
 instance Core.FromJSON ContainerAccess where
   parseJSON =
@@ -767,6 +776,8 @@ data ContainerFeatures = ContainerFeatures
     supportTags :: (Core.Maybe Core.Bool),
     -- | Whether this Container supports templates.
     supportTemplates :: (Core.Maybe Core.Bool),
+    -- | Whether this Container supports transformations.
+    supportTransformations :: (Core.Maybe Core.Bool),
     -- | Whether this Container supports triggers.
     supportTriggers :: (Core.Maybe Core.Bool),
     -- | Whether this Container supports user permissions managed by GTM.
@@ -794,6 +805,7 @@ newContainerFeatures =
       supportGtagConfigs = Core.Nothing,
       supportTags = Core.Nothing,
       supportTemplates = Core.Nothing,
+      supportTransformations = Core.Nothing,
       supportTriggers = Core.Nothing,
       supportUserPermissions = Core.Nothing,
       supportVariables = Core.Nothing,
@@ -815,6 +827,7 @@ instance Core.FromJSON ContainerFeatures where
             Core.<*> (o Core..:? "supportGtagConfigs")
             Core.<*> (o Core..:? "supportTags")
             Core.<*> (o Core..:? "supportTemplates")
+            Core.<*> (o Core..:? "supportTransformations")
             Core.<*> (o Core..:? "supportTriggers")
             Core.<*> (o Core..:? "supportUserPermissions")
             Core.<*> (o Core..:? "supportVariables")
@@ -830,22 +843,17 @@ instance Core.ToJSON ContainerFeatures where
           [ ("supportBuiltInVariables" Core..=)
               Core.<$> supportBuiltInVariables,
             ("supportClients" Core..=) Core.<$> supportClients,
-            ("supportEnvironments" Core..=)
-              Core.<$> supportEnvironments,
+            ("supportEnvironments" Core..=) Core.<$> supportEnvironments,
             ("supportFolders" Core..=) Core.<$> supportFolders,
-            ("supportGtagConfigs" Core..=)
-              Core.<$> supportGtagConfigs,
+            ("supportGtagConfigs" Core..=) Core.<$> supportGtagConfigs,
             ("supportTags" Core..=) Core.<$> supportTags,
-            ("supportTemplates" Core..=)
-              Core.<$> supportTemplates,
+            ("supportTemplates" Core..=) Core.<$> supportTemplates,
+            ("supportTransformations" Core..=) Core.<$> supportTransformations,
             ("supportTriggers" Core..=) Core.<$> supportTriggers,
-            ("supportUserPermissions" Core..=)
-              Core.<$> supportUserPermissions,
-            ("supportVariables" Core..=)
-              Core.<$> supportVariables,
+            ("supportUserPermissions" Core..=) Core.<$> supportUserPermissions,
+            ("supportVariables" Core..=) Core.<$> supportVariables,
             ("supportVersions" Core..=) Core.<$> supportVersions,
-            ("supportWorkspaces" Core..=)
-              Core.<$> supportWorkspaces,
+            ("supportWorkspaces" Core..=) Core.<$> supportWorkspaces,
             ("supportZones" Core..=) Core.<$> supportZones
           ]
       )
@@ -886,6 +894,8 @@ data ContainerVersion = ContainerVersion
     tag :: (Core.Maybe [Tag]),
     -- | Auto generated link to the tag manager UI
     tagManagerUrl :: (Core.Maybe Core.Text),
+    -- | The transformations in the container that this version was taken from.
+    transformation :: (Core.Maybe [Transformation]),
     -- | The triggers in the container that this version was taken from.
     trigger :: (Core.Maybe [Trigger]),
     -- | The variables in the container that this version was taken from.
@@ -916,6 +926,7 @@ newContainerVersion =
       path = Core.Nothing,
       tag = Core.Nothing,
       tagManagerUrl = Core.Nothing,
+      transformation = Core.Nothing,
       trigger = Core.Nothing,
       variable = Core.Nothing,
       zone = Core.Nothing
@@ -943,6 +954,7 @@ instance Core.FromJSON ContainerVersion where
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "tag")
             Core.<*> (o Core..:? "tagManagerUrl")
+            Core.<*> (o Core..:? "transformation")
             Core.<*> (o Core..:? "trigger")
             Core.<*> (o Core..:? "variable")
             Core.<*> (o Core..:? "zone")
@@ -957,8 +969,7 @@ instance Core.ToJSON ContainerVersion where
             ("client" Core..=) Core.<$> client,
             ("container" Core..=) Core.<$> container,
             ("containerId" Core..=) Core.<$> containerId,
-            ("containerVersionId" Core..=)
-              Core.<$> containerVersionId,
+            ("containerVersionId" Core..=) Core.<$> containerVersionId,
             ("customTemplate" Core..=) Core.<$> customTemplate,
             ("deleted" Core..=) Core.<$> deleted,
             ("description" Core..=) Core.<$> description,
@@ -969,6 +980,7 @@ instance Core.ToJSON ContainerVersion where
             ("path" Core..=) Core.<$> path,
             ("tag" Core..=) Core.<$> tag,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
+            ("transformation" Core..=) Core.<$> transformation,
             ("trigger" Core..=) Core.<$> trigger,
             ("variable" Core..=) Core.<$> variable,
             ("zone" Core..=) Core.<$> zone
@@ -1001,6 +1013,8 @@ data ContainerVersionHeader = ContainerVersionHeader
     numRules :: (Core.Maybe Core.Text),
     -- | Number of tags in the container version.
     numTags :: (Core.Maybe Core.Text),
+    -- | Number of transformations in the container version.
+    numTransformations :: (Core.Maybe Core.Text),
     -- | Number of triggers in the container version.
     numTriggers :: (Core.Maybe Core.Text),
     -- | Number of variables in the container version.
@@ -1028,6 +1042,7 @@ newContainerVersionHeader =
       numMacros = Core.Nothing,
       numRules = Core.Nothing,
       numTags = Core.Nothing,
+      numTransformations = Core.Nothing,
       numTriggers = Core.Nothing,
       numVariables = Core.Nothing,
       numZones = Core.Nothing,
@@ -1051,6 +1066,7 @@ instance Core.FromJSON ContainerVersionHeader where
             Core.<*> (o Core..:? "numMacros")
             Core.<*> (o Core..:? "numRules")
             Core.<*> (o Core..:? "numTags")
+            Core.<*> (o Core..:? "numTransformations")
             Core.<*> (o Core..:? "numTriggers")
             Core.<*> (o Core..:? "numVariables")
             Core.<*> (o Core..:? "numZones")
@@ -1063,17 +1079,16 @@ instance Core.ToJSON ContainerVersionHeader where
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
             ("containerId" Core..=) Core.<$> containerId,
-            ("containerVersionId" Core..=)
-              Core.<$> containerVersionId,
+            ("containerVersionId" Core..=) Core.<$> containerVersionId,
             ("deleted" Core..=) Core.<$> deleted,
             ("name" Core..=) Core.<$> name,
             ("numClients" Core..=) Core.<$> numClients,
-            ("numCustomTemplates" Core..=)
-              Core.<$> numCustomTemplates,
+            ("numCustomTemplates" Core..=) Core.<$> numCustomTemplates,
             ("numGtagConfigs" Core..=) Core.<$> numGtagConfigs,
             ("numMacros" Core..=) Core.<$> numMacros,
             ("numRules" Core..=) Core.<$> numRules,
             ("numTags" Core..=) Core.<$> numTags,
+            ("numTransformations" Core..=) Core.<$> numTransformations,
             ("numTriggers" Core..=) Core.<$> numTriggers,
             ("numVariables" Core..=) Core.<$> numVariables,
             ("numZones" Core..=) Core.<$> numZones,
@@ -1108,9 +1123,7 @@ instance Core.ToJSON CreateBuiltInVariableResponse where
   toJSON CreateBuiltInVariableResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("builtInVariable" Core..=)
-              Core.<$> builtInVariable
-          ]
+          [("builtInVariable" Core..=) Core.<$> builtInVariable]
       )
 
 -- | Options for new container versions.
@@ -1133,30 +1146,22 @@ newCreateContainerVersionRequestVersionOptions =
       notes = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CreateContainerVersionRequestVersionOptions
-  where
+instance Core.FromJSON CreateContainerVersionRequestVersionOptions where
   parseJSON =
     Core.withObject
       "CreateContainerVersionRequestVersionOptions"
       ( \o ->
           CreateContainerVersionRequestVersionOptions
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "notes")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "notes")
       )
 
-instance
-  Core.ToJSON
-    CreateContainerVersionRequestVersionOptions
-  where
-  toJSON
-    CreateContainerVersionRequestVersionOptions {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("name" Core..=) Core.<$> name,
-              ("notes" Core..=) Core.<$> notes
-            ]
-        )
+instance Core.ToJSON CreateContainerVersionRequestVersionOptions where
+  toJSON CreateContainerVersionRequestVersionOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [("name" Core..=) Core.<$> name, ("notes" Core..=) Core.<$> notes]
+      )
 
 -- | Create container versions response.
 --
@@ -1201,10 +1206,8 @@ instance Core.ToJSON CreateContainerVersionResponse where
     Core.object
       ( Core.catMaybes
           [ ("compilerError" Core..=) Core.<$> compilerError,
-            ("containerVersion" Core..=)
-              Core.<$> containerVersion,
-            ("newWorkspacePath" Core..=)
-              Core.<$> newWorkspacePath',
+            ("containerVersion" Core..=) Core.<$> containerVersion,
+            ("newWorkspacePath" Core..=) Core.<$> newWorkspacePath',
             ("syncStatus" Core..=) Core.<$> syncStatus
           ]
       )
@@ -1278,8 +1281,7 @@ instance Core.ToJSON CustomTemplate where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("containerId" Core..=) Core.<$> containerId,
             ("fingerprint" Core..=) Core.<$> fingerprint,
-            ("galleryReference" Core..=)
-              Core.<$> galleryReference,
+            ("galleryReference" Core..=) Core.<$> galleryReference,
             ("name" Core..=) Core.<$> name,
             ("path" Core..=) Core.<$> path,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
@@ -1350,8 +1352,7 @@ instance Core.ToJSON Destination where
           [ ("accountId" Core..=) Core.<$> accountId,
             ("containerId" Core..=) Core.<$> containerId,
             ("destinationId" Core..=) Core.<$> destinationId,
-            ("destinationLinkId" Core..=)
-              Core.<$> destinationLinkId,
+            ("destinationLinkId" Core..=) Core.<$> destinationLinkId,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("name" Core..=) Core.<$> name,
             ("path" Core..=) Core.<$> path,
@@ -1363,18 +1364,28 @@ instance Core.ToJSON Destination where
 --
 -- /See:/ 'newEntity' smart constructor.
 data Entity = Entity
-  { -- | Represents how the entity has been changed in the workspace.
+  { -- | The built in variable being represented by the entity.
+    builtInVariable :: (Core.Maybe BuiltInVariable),
+    -- | Represents how the entity has been changed in the workspace.
     changeStatus :: (Core.Maybe Entity_ChangeStatus),
     -- | The client being represented by the entity.
     client :: (Core.Maybe Client),
+    -- | The custom template being represented by the entity.
+    customTemplate :: (Core.Maybe CustomTemplate),
     -- | The folder being represented by the entity.
     folder :: (Core.Maybe Folder),
+    -- | The gtag config being represented by the entity.
+    gtagConfig :: (Core.Maybe GtagConfig),
     -- | The tag being represented by the entity.
     tag :: (Core.Maybe Tag),
+    -- | The transformation being represented by the entity.
+    transformation :: (Core.Maybe Transformation),
     -- | The trigger being represented by the entity.
     trigger :: (Core.Maybe Trigger),
     -- | The variable being represented by the entity.
-    variable :: (Core.Maybe Variable)
+    variable :: (Core.Maybe Variable),
+    -- | The zone being represented by the entity.
+    zone :: (Core.Maybe Zone)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1383,12 +1394,17 @@ newEntity ::
   Entity
 newEntity =
   Entity
-    { changeStatus = Core.Nothing,
+    { builtInVariable = Core.Nothing,
+      changeStatus = Core.Nothing,
       client = Core.Nothing,
+      customTemplate = Core.Nothing,
       folder = Core.Nothing,
+      gtagConfig = Core.Nothing,
       tag = Core.Nothing,
+      transformation = Core.Nothing,
       trigger = Core.Nothing,
-      variable = Core.Nothing
+      variable = Core.Nothing,
+      zone = Core.Nothing
     }
 
 instance Core.FromJSON Entity where
@@ -1397,24 +1413,34 @@ instance Core.FromJSON Entity where
       "Entity"
       ( \o ->
           Entity
-            Core.<$> (o Core..:? "changeStatus")
+            Core.<$> (o Core..:? "builtInVariable")
+            Core.<*> (o Core..:? "changeStatus")
             Core.<*> (o Core..:? "client")
+            Core.<*> (o Core..:? "customTemplate")
             Core.<*> (o Core..:? "folder")
+            Core.<*> (o Core..:? "gtagConfig")
             Core.<*> (o Core..:? "tag")
+            Core.<*> (o Core..:? "transformation")
             Core.<*> (o Core..:? "trigger")
             Core.<*> (o Core..:? "variable")
+            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON Entity where
   toJSON Entity {..} =
     Core.object
       ( Core.catMaybes
-          [ ("changeStatus" Core..=) Core.<$> changeStatus,
+          [ ("builtInVariable" Core..=) Core.<$> builtInVariable,
+            ("changeStatus" Core..=) Core.<$> changeStatus,
             ("client" Core..=) Core.<$> client,
+            ("customTemplate" Core..=) Core.<$> customTemplate,
             ("folder" Core..=) Core.<$> folder,
+            ("gtagConfig" Core..=) Core.<$> gtagConfig,
             ("tag" Core..=) Core.<$> tag,
+            ("transformation" Core..=) Core.<$> transformation,
             ("trigger" Core..=) Core.<$> trigger,
-            ("variable" Core..=) Core.<$> variable
+            ("variable" Core..=) Core.<$> variable,
+            ("zone" Core..=) Core.<$> zone
           ]
       )
 
@@ -1505,13 +1531,10 @@ instance Core.ToJSON Environment where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("authorizationCode" Core..=)
-              Core.<$> authorizationCode,
-            ("authorizationTimestamp" Core..=)
-              Core.<$> authorizationTimestamp,
+            ("authorizationCode" Core..=) Core.<$> authorizationCode,
+            ("authorizationTimestamp" Core..=) Core.<$> authorizationTimestamp,
             ("containerId" Core..=) Core.<$> containerId,
-            ("containerVersionId" Core..=)
-              Core.<$> containerVersionId,
+            ("containerVersionId" Core..=) Core.<$> containerVersionId,
             ("description" Core..=) Core.<$> description,
             ("enableDebug" Core..=) Core.<$> enableDebug,
             ("environmentId" Core..=) Core.<$> environmentId,
@@ -1652,7 +1675,9 @@ instance Core.ToJSON FolderEntities where
 --
 -- /See:/ 'newGalleryReference' smart constructor.
 data GalleryReference = GalleryReference
-  { -- | The name of the host for the community gallery template.
+  { -- | ID for the gallery template that is generated once during first sync and travels with the template redirects.
+    galleryTemplateId :: (Core.Maybe Core.Text),
+    -- | The name of the host for the community gallery template.
     host :: (Core.Maybe Core.Text),
     -- | If a user has manually edited the community gallery template.
     isModified :: (Core.Maybe Core.Bool),
@@ -1662,6 +1687,8 @@ data GalleryReference = GalleryReference
     repository :: (Core.Maybe Core.Text),
     -- | The signature of the community gallery template as computed at import time. This value is recomputed whenever the template is updated from the gallery.
     signature :: (Core.Maybe Core.Text),
+    -- | The developer id of the community gallery template. This value is set whenever the template is created from the gallery.
+    templateDeveloperId :: (Core.Maybe Core.Text),
     -- | The version of the community gallery template.
     version :: (Core.Maybe Core.Text)
   }
@@ -1672,11 +1699,13 @@ newGalleryReference ::
   GalleryReference
 newGalleryReference =
   GalleryReference
-    { host = Core.Nothing,
+    { galleryTemplateId = Core.Nothing,
+      host = Core.Nothing,
       isModified = Core.Nothing,
       owner = Core.Nothing,
       repository = Core.Nothing,
       signature = Core.Nothing,
+      templateDeveloperId = Core.Nothing,
       version = Core.Nothing
     }
 
@@ -1686,11 +1715,13 @@ instance Core.FromJSON GalleryReference where
       "GalleryReference"
       ( \o ->
           GalleryReference
-            Core.<$> (o Core..:? "host")
+            Core.<$> (o Core..:? "galleryTemplateId")
+            Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "isModified")
             Core.<*> (o Core..:? "owner")
             Core.<*> (o Core..:? "repository")
             Core.<*> (o Core..:? "signature")
+            Core.<*> (o Core..:? "templateDeveloperId")
             Core.<*> (o Core..:? "version")
       )
 
@@ -1698,19 +1729,23 @@ instance Core.ToJSON GalleryReference where
   toJSON GalleryReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("host" Core..=) Core.<$> host,
+          [ ("galleryTemplateId" Core..=) Core.<$> galleryTemplateId,
+            ("host" Core..=) Core.<$> host,
             ("isModified" Core..=) Core.<$> isModified,
             ("owner" Core..=) Core.<$> owner,
             ("repository" Core..=) Core.<$> repository,
             ("signature" Core..=) Core.<$> signature,
+            ("templateDeveloperId" Core..=) Core.<$> templateDeveloperId,
             ("version" Core..=) Core.<$> version
           ]
       )
 
 --
 -- /See:/ 'newGetContainerSnippetResponse' smart constructor.
-newtype GetContainerSnippetResponse = GetContainerSnippetResponse
-  { -- | Tagging snippet for a Container.
+data GetContainerSnippetResponse = GetContainerSnippetResponse
+  { -- | Server container config param for manually provisioning a tagging server.
+    containerConfig :: (Core.Maybe Core.Text),
+    -- | Tagging snippet for a Container.
     snippet :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1719,7 +1754,10 @@ newtype GetContainerSnippetResponse = GetContainerSnippetResponse
 newGetContainerSnippetResponse ::
   GetContainerSnippetResponse
 newGetContainerSnippetResponse =
-  GetContainerSnippetResponse {snippet = Core.Nothing}
+  GetContainerSnippetResponse
+    { containerConfig = Core.Nothing,
+      snippet = Core.Nothing
+    }
 
 instance Core.FromJSON GetContainerSnippetResponse where
   parseJSON =
@@ -1727,14 +1765,17 @@ instance Core.FromJSON GetContainerSnippetResponse where
       "GetContainerSnippetResponse"
       ( \o ->
           GetContainerSnippetResponse
-            Core.<$> (o Core..:? "snippet")
+            Core.<$> (o Core..:? "containerConfig")
+            Core.<*> (o Core..:? "snippet")
       )
 
 instance Core.ToJSON GetContainerSnippetResponse where
   toJSON GetContainerSnippetResponse {..} =
     Core.object
       ( Core.catMaybes
-          [("snippet" Core..=) Core.<$> snippet]
+          [ ("containerConfig" Core..=) Core.<$> containerConfig,
+            ("snippet" Core..=) Core.<$> snippet
+          ]
       )
 
 -- | The changes that have occurred in the workspace since the base container version.
@@ -1772,8 +1813,7 @@ instance Core.ToJSON GetWorkspaceStatusResponse where
     Core.object
       ( Core.catMaybes
           [ ("mergeConflict" Core..=) Core.<$> mergeConflict,
-            ("workspaceChange" Core..=)
-              Core.<$> workspaceChange
+            ("workspaceChange" Core..=) Core.<$> workspaceChange
           ]
       )
 
@@ -1866,7 +1906,10 @@ data ListAccountsResponse = ListAccountsResponse
 newListAccountsResponse ::
   ListAccountsResponse
 newListAccountsResponse =
-  ListAccountsResponse {account = Core.Nothing, nextPageToken = Core.Nothing}
+  ListAccountsResponse
+    { account = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListAccountsResponse where
   parseJSON =
@@ -1901,7 +1944,10 @@ data ListClientsResponse = ListClientsResponse
 newListClientsResponse ::
   ListClientsResponse
 newListClientsResponse =
-  ListClientsResponse {client = Core.Nothing, nextPageToken = Core.Nothing}
+  ListClientsResponse
+    { client = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListClientsResponse where
   parseJSON =
@@ -1938,7 +1984,8 @@ newListContainerVersionsResponse ::
   ListContainerVersionsResponse
 newListContainerVersionsResponse =
   ListContainerVersionsResponse
-    { containerVersionHeader = Core.Nothing,
+    { containerVersionHeader =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
@@ -2055,14 +2102,12 @@ newListEnabledBuiltInVariablesResponse ::
   ListEnabledBuiltInVariablesResponse
 newListEnabledBuiltInVariablesResponse =
   ListEnabledBuiltInVariablesResponse
-    { builtInVariable = Core.Nothing,
+    { builtInVariable =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListEnabledBuiltInVariablesResponse
-  where
+instance Core.FromJSON ListEnabledBuiltInVariablesResponse where
   parseJSON =
     Core.withObject
       "ListEnabledBuiltInVariablesResponse"
@@ -2072,15 +2117,11 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    ListEnabledBuiltInVariablesResponse
-  where
+instance Core.ToJSON ListEnabledBuiltInVariablesResponse where
   toJSON ListEnabledBuiltInVariablesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("builtInVariable" Core..=)
-              Core.<$> builtInVariable,
+          [ ("builtInVariable" Core..=) Core.<$> builtInVariable,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -2139,7 +2180,10 @@ data ListFoldersResponse = ListFoldersResponse
 newListFoldersResponse ::
   ListFoldersResponse
 newListFoldersResponse =
-  ListFoldersResponse {folder = Core.Nothing, nextPageToken = Core.Nothing}
+  ListFoldersResponse
+    { folder = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListFoldersResponse where
   parseJSON =
@@ -2213,7 +2257,10 @@ data ListTagsResponse = ListTagsResponse
 newListTagsResponse ::
   ListTagsResponse
 newListTagsResponse =
-  ListTagsResponse {nextPageToken = Core.Nothing, tag = Core.Nothing}
+  ListTagsResponse
+    { nextPageToken = Core.Nothing,
+      tag = Core.Nothing
+    }
 
 instance Core.FromJSON ListTagsResponse where
   parseJSON =
@@ -2248,7 +2295,10 @@ data ListTemplatesResponse = ListTemplatesResponse
 newListTemplatesResponse ::
   ListTemplatesResponse
 newListTemplatesResponse =
-  ListTemplatesResponse {nextPageToken = Core.Nothing, template = Core.Nothing}
+  ListTemplatesResponse
+    { nextPageToken = Core.Nothing,
+      template = Core.Nothing
+    }
 
 instance Core.FromJSON ListTemplatesResponse where
   parseJSON =
@@ -2269,6 +2319,44 @@ instance Core.ToJSON ListTemplatesResponse where
           ]
       )
 
+--
+-- /See:/ 'newListTransformationsResponse' smart constructor.
+data ListTransformationsResponse = ListTransformationsResponse
+  { -- | Continuation token for fetching the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | All GTM Transformations of a GTM Container.
+    transformation :: (Core.Maybe [Transformation])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListTransformationsResponse' with the minimum fields required to make a request.
+newListTransformationsResponse ::
+  ListTransformationsResponse
+newListTransformationsResponse =
+  ListTransformationsResponse
+    { nextPageToken = Core.Nothing,
+      transformation = Core.Nothing
+    }
+
+instance Core.FromJSON ListTransformationsResponse where
+  parseJSON =
+    Core.withObject
+      "ListTransformationsResponse"
+      ( \o ->
+          ListTransformationsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "transformation")
+      )
+
+instance Core.ToJSON ListTransformationsResponse where
+  toJSON ListTransformationsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("transformation" Core..=) Core.<$> transformation
+          ]
+      )
+
 -- | List triggers response.
 --
 -- /See:/ 'newListTriggersResponse' smart constructor.
@@ -2284,7 +2372,10 @@ data ListTriggersResponse = ListTriggersResponse
 newListTriggersResponse ::
   ListTriggersResponse
 newListTriggersResponse =
-  ListTriggersResponse {nextPageToken = Core.Nothing, trigger = Core.Nothing}
+  ListTriggersResponse
+    { nextPageToken = Core.Nothing,
+      trigger = Core.Nothing
+    }
 
 instance Core.FromJSON ListTriggersResponse where
   parseJSON =
@@ -2359,7 +2450,10 @@ data ListVariablesResponse = ListVariablesResponse
 newListVariablesResponse ::
   ListVariablesResponse
 newListVariablesResponse =
-  ListVariablesResponse {nextPageToken = Core.Nothing, variable = Core.Nothing}
+  ListVariablesResponse
+    { nextPageToken = Core.Nothing,
+      variable = Core.Nothing
+    }
 
 instance Core.FromJSON ListVariablesResponse where
   parseJSON =
@@ -2433,7 +2527,10 @@ data ListZonesResponse = ListZonesResponse
 newListZonesResponse ::
   ListZonesResponse
 newListZonesResponse =
-  ListZonesResponse {nextPageToken = Core.Nothing, zone = Core.Nothing}
+  ListZonesResponse
+    { nextPageToken = Core.Nothing,
+      zone = Core.Nothing
+    }
 
 instance Core.FromJSON ListZonesResponse where
   parseJSON =
@@ -2488,10 +2585,8 @@ instance Core.ToJSON MergeConflict where
   toJSON MergeConflict {..} =
     Core.object
       ( Core.catMaybes
-          [ ("entityInBaseVersion" Core..=)
-              Core.<$> entityInBaseVersion,
-            ("entityInWorkspace" Core..=)
-              Core.<$> entityInWorkspace
+          [ ("entityInBaseVersion" Core..=) Core.<$> entityInBaseVersion,
+            ("entityInWorkspace" Core..=) Core.<$> entityInWorkspace
           ]
       )
 
@@ -2499,7 +2594,9 @@ instance Core.ToJSON MergeConflict where
 --
 -- /See:/ 'newParameter' smart constructor.
 data Parameter = Parameter
-  { -- | The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values. \@mutable tagmanager.accounts.containers.workspaces.variables.create \@mutable tagmanager.accounts.containers.workspaces.variables.update \@mutable tagmanager.accounts.containers.workspaces.triggers.create \@mutable tagmanager.accounts.containers.workspaces.triggers.update \@mutable tagmanager.accounts.containers.workspaces.tags.create \@mutable tagmanager.accounts.containers.workspaces.tags.update
+  { -- | Whether or not a reference type parameter is strongly or weakly referenced. Only used by Transformations. \@mutable tagmanager.accounts.containers.workspaces.transformations.create \@mutable tagmanager.accounts.containers.workspaces.transformations.update
+    isWeakReference :: (Core.Maybe Core.Bool),
+    -- | The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values. \@mutable tagmanager.accounts.containers.workspaces.variables.create \@mutable tagmanager.accounts.containers.workspaces.variables.update \@mutable tagmanager.accounts.containers.workspaces.triggers.create \@mutable tagmanager.accounts.containers.workspaces.triggers.update \@mutable tagmanager.accounts.containers.workspaces.tags.create \@mutable tagmanager.accounts.containers.workspaces.tags.update
     key :: (Core.Maybe Core.Text),
     -- | This list parameter\'s parameters (keys will be ignored). \@mutable tagmanager.accounts.containers.workspaces.variables.create \@mutable tagmanager.accounts.containers.workspaces.variables.update \@mutable tagmanager.accounts.containers.workspaces.triggers.create \@mutable tagmanager.accounts.containers.workspaces.triggers.update \@mutable tagmanager.accounts.containers.workspaces.tags.create \@mutable tagmanager.accounts.containers.workspaces.tags.update
     list :: (Core.Maybe [Parameter]),
@@ -2517,7 +2614,8 @@ newParameter ::
   Parameter
 newParameter =
   Parameter
-    { key = Core.Nothing,
+    { isWeakReference = Core.Nothing,
+      key = Core.Nothing,
       list = Core.Nothing,
       map = Core.Nothing,
       type' = Core.Nothing,
@@ -2530,7 +2628,8 @@ instance Core.FromJSON Parameter where
       "Parameter"
       ( \o ->
           Parameter
-            Core.<$> (o Core..:? "key")
+            Core.<$> (o Core..:? "isWeakReference")
+            Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "list")
             Core.<*> (o Core..:? "map")
             Core.<*> (o Core..:? "type")
@@ -2541,7 +2640,8 @@ instance Core.ToJSON Parameter where
   toJSON Parameter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
+          [ ("isWeakReference" Core..=) Core.<$> isWeakReference,
+            ("key" Core..=) Core.<$> key,
             ("list" Core..=) Core.<$> list,
             ("map" Core..=) Core.<$> map,
             ("type" Core..=) Core.<$> type',
@@ -2569,10 +2669,7 @@ newPublishContainerVersionResponse =
       containerVersion = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PublishContainerVersionResponse
-  where
+instance Core.FromJSON PublishContainerVersionResponse where
   parseJSON =
     Core.withObject
       "PublishContainerVersionResponse"
@@ -2587,8 +2684,7 @@ instance Core.ToJSON PublishContainerVersionResponse where
     Core.object
       ( Core.catMaybes
           [ ("compilerError" Core..=) Core.<$> compilerError,
-            ("containerVersion" Core..=)
-              Core.<$> containerVersion
+            ("containerVersion" Core..=) Core.<$> containerVersion
           ]
       )
 
@@ -2631,8 +2727,7 @@ instance Core.ToJSON QuickPreviewResponse where
     Core.object
       ( Core.catMaybes
           [ ("compilerError" Core..=) Core.<$> compilerError,
-            ("containerVersion" Core..=)
-              Core.<$> containerVersion,
+            ("containerVersion" Core..=) Core.<$> containerVersion,
             ("syncStatus" Core..=) Core.<$> syncStatus
           ]
       )
@@ -2657,16 +2752,13 @@ instance Core.FromJSON RevertBuiltInVariableResponse where
     Core.withObject
       "RevertBuiltInVariableResponse"
       ( \o ->
-          RevertBuiltInVariableResponse
-            Core.<$> (o Core..:? "enabled")
+          RevertBuiltInVariableResponse Core.<$> (o Core..:? "enabled")
       )
 
 instance Core.ToJSON RevertBuiltInVariableResponse where
   toJSON RevertBuiltInVariableResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 -- | The result of reverting a client in a workspace.
 --
@@ -2680,20 +2772,18 @@ newtype RevertClientResponse = RevertClientResponse
 -- | Creates a value of 'RevertClientResponse' with the minimum fields required to make a request.
 newRevertClientResponse ::
   RevertClientResponse
-newRevertClientResponse = RevertClientResponse {client = Core.Nothing}
+newRevertClientResponse =
+  RevertClientResponse {client = Core.Nothing}
 
 instance Core.FromJSON RevertClientResponse where
   parseJSON =
     Core.withObject
       "RevertClientResponse"
-      ( \o ->
-          RevertClientResponse Core.<$> (o Core..:? "client")
-      )
+      (\o -> RevertClientResponse Core.<$> (o Core..:? "client"))
 
 instance Core.ToJSON RevertClientResponse where
   toJSON RevertClientResponse {..} =
-    Core.object
-      (Core.catMaybes [("client" Core..=) Core.<$> client])
+    Core.object (Core.catMaybes [("client" Core..=) Core.<$> client])
 
 -- | The result of reverting folder changes in a workspace.
 --
@@ -2707,20 +2797,18 @@ newtype RevertFolderResponse = RevertFolderResponse
 -- | Creates a value of 'RevertFolderResponse' with the minimum fields required to make a request.
 newRevertFolderResponse ::
   RevertFolderResponse
-newRevertFolderResponse = RevertFolderResponse {folder = Core.Nothing}
+newRevertFolderResponse =
+  RevertFolderResponse {folder = Core.Nothing}
 
 instance Core.FromJSON RevertFolderResponse where
   parseJSON =
     Core.withObject
       "RevertFolderResponse"
-      ( \o ->
-          RevertFolderResponse Core.<$> (o Core..:? "folder")
-      )
+      (\o -> RevertFolderResponse Core.<$> (o Core..:? "folder"))
 
 instance Core.ToJSON RevertFolderResponse where
   toJSON RevertFolderResponse {..} =
-    Core.object
-      (Core.catMaybes [("folder" Core..=) Core.<$> folder])
+    Core.object (Core.catMaybes [("folder" Core..=) Core.<$> folder])
 
 -- | The result of reverting a tag in a workspace.
 --
@@ -2740,14 +2828,11 @@ instance Core.FromJSON RevertTagResponse where
   parseJSON =
     Core.withObject
       "RevertTagResponse"
-      ( \o ->
-          RevertTagResponse Core.<$> (o Core..:? "tag")
-      )
+      (\o -> RevertTagResponse Core.<$> (o Core..:? "tag"))
 
 instance Core.ToJSON RevertTagResponse where
   toJSON RevertTagResponse {..} =
-    Core.object
-      (Core.catMaybes [("tag" Core..=) Core.<$> tag])
+    Core.object (Core.catMaybes [("tag" Core..=) Core.<$> tag])
 
 -- | The result of reverting a template in a workspace.
 --
@@ -2761,22 +2846,49 @@ newtype RevertTemplateResponse = RevertTemplateResponse
 -- | Creates a value of 'RevertTemplateResponse' with the minimum fields required to make a request.
 newRevertTemplateResponse ::
   RevertTemplateResponse
-newRevertTemplateResponse = RevertTemplateResponse {template = Core.Nothing}
+newRevertTemplateResponse =
+  RevertTemplateResponse {template = Core.Nothing}
 
 instance Core.FromJSON RevertTemplateResponse where
   parseJSON =
     Core.withObject
       "RevertTemplateResponse"
-      ( \o ->
-          RevertTemplateResponse
-            Core.<$> (o Core..:? "template")
-      )
+      (\o -> RevertTemplateResponse Core.<$> (o Core..:? "template"))
 
 instance Core.ToJSON RevertTemplateResponse where
   toJSON RevertTemplateResponse {..} =
     Core.object
+      (Core.catMaybes [("template" Core..=) Core.<$> template])
+
+-- | The result of reverting a transformation in a workspace.
+--
+-- /See:/ 'newRevertTransformationResponse' smart constructor.
+newtype RevertTransformationResponse = RevertTransformationResponse
+  { -- | Transformation as it appears in the latest container version since the last workspace synchronization operation. If no transformation is present, that means the transformation was deleted in the latest container version.
+    transformation :: (Core.Maybe Transformation)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RevertTransformationResponse' with the minimum fields required to make a request.
+newRevertTransformationResponse ::
+  RevertTransformationResponse
+newRevertTransformationResponse =
+  RevertTransformationResponse {transformation = Core.Nothing}
+
+instance Core.FromJSON RevertTransformationResponse where
+  parseJSON =
+    Core.withObject
+      "RevertTransformationResponse"
+      ( \o ->
+          RevertTransformationResponse
+            Core.<$> (o Core..:? "transformation")
+      )
+
+instance Core.ToJSON RevertTransformationResponse where
+  toJSON RevertTransformationResponse {..} =
+    Core.object
       ( Core.catMaybes
-          [("template" Core..=) Core.<$> template]
+          [("transformation" Core..=) Core.<$> transformation]
       )
 
 -- | The result of reverting a trigger in a workspace.
@@ -2791,23 +2903,19 @@ newtype RevertTriggerResponse = RevertTriggerResponse
 -- | Creates a value of 'RevertTriggerResponse' with the minimum fields required to make a request.
 newRevertTriggerResponse ::
   RevertTriggerResponse
-newRevertTriggerResponse = RevertTriggerResponse {trigger = Core.Nothing}
+newRevertTriggerResponse =
+  RevertTriggerResponse {trigger = Core.Nothing}
 
 instance Core.FromJSON RevertTriggerResponse where
   parseJSON =
     Core.withObject
       "RevertTriggerResponse"
-      ( \o ->
-          RevertTriggerResponse
-            Core.<$> (o Core..:? "trigger")
-      )
+      (\o -> RevertTriggerResponse Core.<$> (o Core..:? "trigger"))
 
 instance Core.ToJSON RevertTriggerResponse where
   toJSON RevertTriggerResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("trigger" Core..=) Core.<$> trigger]
-      )
+      (Core.catMaybes [("trigger" Core..=) Core.<$> trigger])
 
 -- | The result of reverting a variable in a workspace.
 --
@@ -2821,23 +2929,19 @@ newtype RevertVariableResponse = RevertVariableResponse
 -- | Creates a value of 'RevertVariableResponse' with the minimum fields required to make a request.
 newRevertVariableResponse ::
   RevertVariableResponse
-newRevertVariableResponse = RevertVariableResponse {variable = Core.Nothing}
+newRevertVariableResponse =
+  RevertVariableResponse {variable = Core.Nothing}
 
 instance Core.FromJSON RevertVariableResponse where
   parseJSON =
     Core.withObject
       "RevertVariableResponse"
-      ( \o ->
-          RevertVariableResponse
-            Core.<$> (o Core..:? "variable")
-      )
+      (\o -> RevertVariableResponse Core.<$> (o Core..:? "variable"))
 
 instance Core.ToJSON RevertVariableResponse where
   toJSON RevertVariableResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("variable" Core..=) Core.<$> variable]
-      )
+      (Core.catMaybes [("variable" Core..=) Core.<$> variable])
 
 -- | The result of reverting a zone in a workspace.
 --
@@ -2857,14 +2961,11 @@ instance Core.FromJSON RevertZoneResponse where
   parseJSON =
     Core.withObject
       "RevertZoneResponse"
-      ( \o ->
-          RevertZoneResponse Core.<$> (o Core..:? "zone")
-      )
+      (\o -> RevertZoneResponse Core.<$> (o Core..:? "zone"))
 
 instance Core.ToJSON RevertZoneResponse where
   toJSON RevertZoneResponse {..} =
-    Core.object
-      (Core.catMaybes [("zone" Core..=) Core.<$> zone])
+    Core.object (Core.catMaybes [("zone" Core..=) Core.<$> zone])
 
 -- | Represents a reference to atag that fires before another tag in order to set up dependencies.
 --
@@ -2881,7 +2982,10 @@ data SetupTag = SetupTag
 newSetupTag ::
   SetupTag
 newSetupTag =
-  SetupTag {stopOnSetupFailure = Core.Nothing, tagName = Core.Nothing}
+  SetupTag
+    { stopOnSetupFailure = Core.Nothing,
+      tagName = Core.Nothing
+    }
 
 instance Core.FromJSON SetupTag where
   parseJSON =
@@ -2897,8 +3001,7 @@ instance Core.ToJSON SetupTag where
   toJSON SetupTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("stopOnSetupFailure" Core..=)
-              Core.<$> stopOnSetupFailure,
+          [ ("stopOnSetupFailure" Core..=) Core.<$> stopOnSetupFailure,
             ("tagName" Core..=) Core.<$> tagName
           ]
       )
@@ -2918,7 +3021,10 @@ data SyncStatus = SyncStatus
 newSyncStatus ::
   SyncStatus
 newSyncStatus =
-  SyncStatus {mergeConflict = Core.Nothing, syncError = Core.Nothing}
+  SyncStatus
+    { mergeConflict = Core.Nothing,
+      syncError = Core.Nothing
+    }
 
 instance Core.FromJSON SyncStatus where
   parseJSON =
@@ -3097,12 +3203,8 @@ instance Core.FromJSON Tag where
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "paused")
             Core.<*> (o Core..:? "priority")
-            Core.<*> ( o Core..:? "scheduleEndMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "scheduleStartMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scheduleEndMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "scheduleStartMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "setupTag")
             Core.<*> (o Core..:? "tagFiringOption")
             Core.<*> (o Core..:? "tagId")
@@ -3118,16 +3220,14 @@ instance Core.ToJSON Tag where
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
             ("blockingRuleId" Core..=) Core.<$> blockingRuleId,
-            ("blockingTriggerId" Core..=)
-              Core.<$> blockingTriggerId,
+            ("blockingTriggerId" Core..=) Core.<$> blockingTriggerId,
             ("consentSettings" Core..=) Core.<$> consentSettings,
             ("containerId" Core..=) Core.<$> containerId,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("firingRuleId" Core..=) Core.<$> firingRuleId,
             ("firingTriggerId" Core..=) Core.<$> firingTriggerId,
             ("liveOnly" Core..=) Core.<$> liveOnly,
-            ("monitoringMetadata" Core..=)
-              Core.<$> monitoringMetadata,
+            ("monitoringMetadata" Core..=) Core.<$> monitoringMetadata,
             ("monitoringMetadataTagNameKey" Core..=)
               Core.<$> monitoringMetadataTagNameKey,
             ("name" Core..=) Core.<$> name,
@@ -3137,9 +3237,11 @@ instance Core.ToJSON Tag where
             ("path" Core..=) Core.<$> path,
             ("paused" Core..=) Core.<$> paused,
             ("priority" Core..=) Core.<$> priority,
-            ("scheduleEndMs" Core..=) Core.. Core.AsText
+            ("scheduleEndMs" Core..=)
+              Core.. Core.AsText
               Core.<$> scheduleEndMs,
-            ("scheduleStartMs" Core..=) Core.. Core.AsText
+            ("scheduleStartMs" Core..=)
+              Core.. Core.AsText
               Core.<$> scheduleStartMs,
             ("setupTag" Core..=) Core.<$> setupTag,
             ("tagFiringOption" Core..=) Core.<$> tagFiringOption,
@@ -3165,7 +3267,10 @@ data TagConsentSetting = TagConsentSetting
 newTagConsentSetting ::
   TagConsentSetting
 newTagConsentSetting =
-  TagConsentSetting {consentStatus = Core.Nothing, consentType = Core.Nothing}
+  TagConsentSetting
+    { consentStatus = Core.Nothing,
+      consentType = Core.Nothing
+    }
 
 instance Core.FromJSON TagConsentSetting where
   parseJSON =
@@ -3201,7 +3306,10 @@ data TeardownTag = TeardownTag
 newTeardownTag ::
   TeardownTag
 newTeardownTag =
-  TeardownTag {stopTeardownOnFailure = Core.Nothing, tagName = Core.Nothing}
+  TeardownTag
+    { stopTeardownOnFailure = Core.Nothing,
+      tagName = Core.Nothing
+    }
 
 instance Core.FromJSON TeardownTag where
   parseJSON =
@@ -3217,9 +3325,97 @@ instance Core.ToJSON TeardownTag where
   toJSON TeardownTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("stopTeardownOnFailure" Core..=)
-              Core.<$> stopTeardownOnFailure,
+          [ ("stopTeardownOnFailure" Core..=) Core.<$> stopTeardownOnFailure,
             ("tagName" Core..=) Core.<$> tagName
+          ]
+      )
+
+-- | Represents a Google Tag Manager Transformation.
+--
+-- /See:/ 'newTransformation' smart constructor.
+data Transformation = Transformation
+  { -- | GTM Account ID.
+    accountId :: (Core.Maybe Core.Text),
+    -- | GTM Container ID.
+    containerId :: (Core.Maybe Core.Text),
+    -- | The fingerprint of the GTM Transformation as computed at storage time. This value is recomputed whenever the transformation is modified.
+    fingerprint :: (Core.Maybe Core.Text),
+    -- | Transformation display name. \@mutable tagmanager.accounts.containers.workspaces.transformations.create \@mutable tagmanager.accounts.containers.workspaces.transformations.update
+    name :: (Core.Maybe Core.Text),
+    -- | User notes on how to apply this transformation in the container. \@mutable tagmanager.accounts.containers.workspaces.transformations.create \@mutable tagmanager.accounts.containers.workspaces.transformations.update
+    notes :: (Core.Maybe Core.Text),
+    -- | The transformation\'s parameters. \@mutable tagmanager.accounts.containers.workspaces.transformations.create \@mutable tagmanager.accounts.containers.workspaces.transformations.update
+    parameter :: (Core.Maybe [Parameter]),
+    -- | Parent folder id.
+    parentFolderId :: (Core.Maybe Core.Text),
+    -- | GTM transformation\'s API relative path.
+    path :: (Core.Maybe Core.Text),
+    -- | Auto generated link to the tag manager UI
+    tagManagerUrl :: (Core.Maybe Core.Text),
+    -- | The Transformation ID uniquely identifies the GTM transformation.
+    transformationId :: (Core.Maybe Core.Text),
+    -- | Transformation type. \@mutable tagmanager.accounts.containers.workspaces.transformations.create \@mutable tagmanager.accounts.containers.workspaces.transformations.update
+    type' :: (Core.Maybe Core.Text),
+    -- | GTM Workspace ID.
+    workspaceId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Transformation' with the minimum fields required to make a request.
+newTransformation ::
+  Transformation
+newTransformation =
+  Transformation
+    { accountId = Core.Nothing,
+      containerId = Core.Nothing,
+      fingerprint = Core.Nothing,
+      name = Core.Nothing,
+      notes = Core.Nothing,
+      parameter = Core.Nothing,
+      parentFolderId = Core.Nothing,
+      path = Core.Nothing,
+      tagManagerUrl = Core.Nothing,
+      transformationId = Core.Nothing,
+      type' = Core.Nothing,
+      workspaceId = Core.Nothing
+    }
+
+instance Core.FromJSON Transformation where
+  parseJSON =
+    Core.withObject
+      "Transformation"
+      ( \o ->
+          Transformation
+            Core.<$> (o Core..:? "accountId")
+            Core.<*> (o Core..:? "containerId")
+            Core.<*> (o Core..:? "fingerprint")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "notes")
+            Core.<*> (o Core..:? "parameter")
+            Core.<*> (o Core..:? "parentFolderId")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "tagManagerUrl")
+            Core.<*> (o Core..:? "transformationId")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "workspaceId")
+      )
+
+instance Core.ToJSON Transformation where
+  toJSON Transformation {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accountId" Core..=) Core.<$> accountId,
+            ("containerId" Core..=) Core.<$> containerId,
+            ("fingerprint" Core..=) Core.<$> fingerprint,
+            ("name" Core..=) Core.<$> name,
+            ("notes" Core..=) Core.<$> notes,
+            ("parameter" Core..=) Core.<$> parameter,
+            ("parentFolderId" Core..=) Core.<$> parentFolderId,
+            ("path" Core..=) Core.<$> path,
+            ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
+            ("transformationId" Core..=) Core.<$> transformationId,
+            ("type" Core..=) Core.<$> type',
+            ("workspaceId" Core..=) Core.<$> workspaceId
           ]
       )
 
@@ -3383,8 +3579,7 @@ instance Core.ToJSON Trigger where
             ("containerId" Core..=) Core.<$> containerId,
             ("continuousTimeMinMilliseconds" Core..=)
               Core.<$> continuousTimeMinMilliseconds,
-            ("customEventFilter" Core..=)
-              Core.<$> customEventFilter,
+            ("customEventFilter" Core..=) Core.<$> customEventFilter,
             ("eventName" Core..=) Core.<$> eventName,
             ("filter" Core..=) Core.<$> filter,
             ("fingerprint" Core..=) Core.<$> fingerprint,
@@ -3393,8 +3588,7 @@ instance Core.ToJSON Trigger where
             ("interval" Core..=) Core.<$> interval,
             ("intervalSeconds" Core..=) Core.<$> intervalSeconds,
             ("limit" Core..=) Core.<$> limit,
-            ("maxTimerLengthSeconds" Core..=)
-              Core.<$> maxTimerLengthSeconds,
+            ("maxTimerLengthSeconds" Core..=) Core.<$> maxTimerLengthSeconds,
             ("name" Core..=) Core.<$> name,
             ("notes" Core..=) Core.<$> notes,
             ("parameter" Core..=) Core.<$> parameter,
@@ -3409,15 +3603,11 @@ instance Core.ToJSON Trigger where
             ("uniqueTriggerId" Core..=) Core.<$> uniqueTriggerId,
             ("verticalScrollPercentageList" Core..=)
               Core.<$> verticalScrollPercentageList,
-            ("visibilitySelector" Core..=)
-              Core.<$> visibilitySelector,
-            ("visiblePercentageMax" Core..=)
-              Core.<$> visiblePercentageMax,
-            ("visiblePercentageMin" Core..=)
-              Core.<$> visiblePercentageMin,
+            ("visibilitySelector" Core..=) Core.<$> visibilitySelector,
+            ("visiblePercentageMax" Core..=) Core.<$> visiblePercentageMax,
+            ("visiblePercentageMin" Core..=) Core.<$> visiblePercentageMin,
             ("waitForTags" Core..=) Core.<$> waitForTags,
-            ("waitForTagsTimeout" Core..=)
-              Core.<$> waitForTagsTimeout,
+            ("waitForTagsTimeout" Core..=) Core.<$> waitForTagsTimeout,
             ("workspaceId" Core..=) Core.<$> workspaceId
           ]
       )
@@ -3558,12 +3748,8 @@ instance Core.FromJSON Variable where
             Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "parentFolderId")
             Core.<*> (o Core..:? "path")
-            Core.<*> ( o Core..:? "scheduleEndMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "scheduleStartMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "scheduleEndMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "scheduleStartMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tagManagerUrl")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "variableId")
@@ -3576,10 +3762,8 @@ instance Core.ToJSON Variable where
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
             ("containerId" Core..=) Core.<$> containerId,
-            ("disablingTriggerId" Core..=)
-              Core.<$> disablingTriggerId,
-            ("enablingTriggerId" Core..=)
-              Core.<$> enablingTriggerId,
+            ("disablingTriggerId" Core..=) Core.<$> disablingTriggerId,
+            ("enablingTriggerId" Core..=) Core.<$> enablingTriggerId,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("formatValue" Core..=) Core.<$> formatValue,
             ("name" Core..=) Core.<$> name,
@@ -3587,9 +3771,11 @@ instance Core.ToJSON Variable where
             ("parameter" Core..=) Core.<$> parameter,
             ("parentFolderId" Core..=) Core.<$> parentFolderId,
             ("path" Core..=) Core.<$> path,
-            ("scheduleEndMs" Core..=) Core.. Core.AsText
+            ("scheduleEndMs" Core..=)
+              Core.. Core.AsText
               Core.<$> scheduleEndMs,
-            ("scheduleStartMs" Core..=) Core.. Core.AsText
+            ("scheduleStartMs" Core..=)
+              Core.. Core.AsText
               Core.<$> scheduleStartMs,
             ("tagManagerUrl" Core..=) Core.<$> tagManagerUrl,
             ("type" Core..=) Core.<$> type',
@@ -3643,14 +3829,10 @@ instance Core.ToJSON VariableFormatValue where
   toJSON VariableFormatValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("caseConversionType" Core..=)
-              Core.<$> caseConversionType,
-            ("convertFalseToValue" Core..=)
-              Core.<$> convertFalseToValue,
-            ("convertNullToValue" Core..=)
-              Core.<$> convertNullToValue,
-            ("convertTrueToValue" Core..=)
-              Core.<$> convertTrueToValue,
+          [ ("caseConversionType" Core..=) Core.<$> caseConversionType,
+            ("convertFalseToValue" Core..=) Core.<$> convertFalseToValue,
+            ("convertNullToValue" Core..=) Core.<$> convertNullToValue,
+            ("convertTrueToValue" Core..=) Core.<$> convertTrueToValue,
             ("convertUndefinedToValue" Core..=)
               Core.<$> convertUndefinedToValue
           ]
@@ -3869,7 +4051,10 @@ data ZoneChildContainer = ZoneChildContainer
 newZoneChildContainer ::
   ZoneChildContainer
 newZoneChildContainer =
-  ZoneChildContainer {nickname = Core.Nothing, publicId = Core.Nothing}
+  ZoneChildContainer
+    { nickname = Core.Nothing,
+      publicId = Core.Nothing
+    }
 
 instance Core.FromJSON ZoneChildContainer where
   parseJSON =
@@ -3905,7 +4090,10 @@ data ZoneTypeRestriction = ZoneTypeRestriction
 newZoneTypeRestriction ::
   ZoneTypeRestriction
 newZoneTypeRestriction =
-  ZoneTypeRestriction {enable = Core.Nothing, whitelistedTypeId = Core.Nothing}
+  ZoneTypeRestriction
+    { enable = Core.Nothing,
+      whitelistedTypeId = Core.Nothing
+    }
 
 instance Core.FromJSON ZoneTypeRestriction where
   parseJSON =
@@ -3922,7 +4110,6 @@ instance Core.ToJSON ZoneTypeRestriction where
     Core.object
       ( Core.catMaybes
           [ ("enable" Core..=) Core.<$> enable,
-            ("whitelistedTypeId" Core..=)
-              Core.<$> whitelistedTypeId
+            ("whitelistedTypeId" Core..=) Core.<$> whitelistedTypeId
           ]
       )

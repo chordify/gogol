@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Videos.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Videos.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.videos.list@ method which the
@@ -60,24 +58,14 @@ type YouTubeVideosListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "maxWidth" Core.Int32
     Core.:> Core.QueryParam "myRating" VideosListMyRating
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwner"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "regionCode" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "videoCategoryId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              VideoListResponse
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "videoCategoryId" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] VideoListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -95,9 +83,7 @@ data YouTubeVideosList = YouTubeVideosList
     hl :: (Core.Maybe Core.Text),
     -- | Return videos with the given ids.
     id :: (Core.Maybe [Core.Text]),
-    -- |
     locale :: (Core.Maybe Core.Text),
-    -- |
     maxHeight :: (Core.Maybe Core.Int32),
     -- | The /maxResults/ parameter specifies the maximum number of items that should be returned in the result set. /Note:/ This parameter is supported for use in conjunction with the myRating and chart parameters, but it is not supported for use in conjunction with the id parameter.
     maxResults :: Core.Word32,

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.ContactGroups.Members.Modify
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.People.ContactGroups.Members.Modify
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.contactGroups.members.modify@ method which the
 -- 'PeopleContactGroupsMembersModify' request conforms to.
@@ -54,12 +52,8 @@ type PeopleContactGroupsMembersModifyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ModifyContactGroupMembersRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              ModifyContactGroupMembersResponse
+    Core.:> Core.ReqBody '[Core.JSON] ModifyContactGroupMembersRequest
+    Core.:> Core.Post '[Core.JSON] ModifyContactGroupMembersResponse
 
 -- | Modify the members of a contact group owned by the authenticated user. The only system contact groups that can have members added are @contactGroups\/myContacts@ and @contactGroups\/starred@. Other system contact groups are deprecated and can only have contacts removed.
 --
@@ -100,10 +94,7 @@ newPeopleContactGroupsMembersModify payload resourceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeopleContactGroupsMembersModify
-  where
+instance Core.GoogleRequest PeopleContactGroupsMembersModify where
   type
     Rs PeopleContactGroupsMembersModify =
       ModifyContactGroupMembersResponse
@@ -124,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeopleContactGroupsMembersModifyResource
-          )
+          (Core.Proxy :: Core.Proxy PeopleContactGroupsMembersModifyResource)
           Core.mempty

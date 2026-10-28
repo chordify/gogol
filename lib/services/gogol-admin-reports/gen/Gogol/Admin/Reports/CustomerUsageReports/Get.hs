@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.CustomerUsageReports.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Reports.CustomerUsageReports.Get
 where
 
 import Gogol.Admin.Reports.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reports.customerUsageReports.get@ method which the
 -- 'ReportsCustomerUsageReportsGet' request conforms to.
@@ -74,7 +72,7 @@ data ReportsCustomerUsageReportsGet = ReportsCustomerUsageReportsGet
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
     customerId :: (Core.Maybe Core.Text),
-    -- | Represents the date the usage occurred, based on PST time zone. The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
+    -- | Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
     date :: Core.Text,
     -- | Token to specify next page. A report with multiple pages has a @nextPageToken@ property in the response. For your follow-on requests getting all of the report\'s pages, enter the @nextPageToken@ value in the @pageToken@ query string.
     pageToken :: (Core.Maybe Core.Text),
@@ -89,7 +87,7 @@ data ReportsCustomerUsageReportsGet = ReportsCustomerUsageReportsGet
 
 -- | Creates a value of 'ReportsCustomerUsageReportsGet' with the minimum fields required to make a request.
 newReportsCustomerUsageReportsGet ::
-  -- |  Represents the date the usage occurred, based on PST time zone. The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
+  -- |  Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
   Core.Text ->
   ReportsCustomerUsageReportsGet
 newReportsCustomerUsageReportsGet date =
@@ -105,10 +103,7 @@ newReportsCustomerUsageReportsGet date =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ReportsCustomerUsageReportsGet
-  where
+instance Core.GoogleRequest ReportsCustomerUsageReportsGet where
   type Rs ReportsCustomerUsageReportsGet = UsageReports
   type
     Scopes ReportsCustomerUsageReportsGet =
@@ -129,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ReportsCustomerUsageReportsGetResource
-          )
+          (Core.Proxy :: Core.Proxy ReportsCustomerUsageReportsGetResource)
           Core.mempty

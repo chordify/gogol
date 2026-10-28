@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,19 +17,28 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudFunctions.Internal.Product
-  ( -- * AuditConfig
+  ( -- * AbortFunctionUpgradeRequest
+    AbortFunctionUpgradeRequest (..),
+    newAbortFunctionUpgradeRequest,
+
+    -- * AuditConfig
     AuditConfig (..),
     newAuditConfig,
 
     -- * AuditLogConfig
     AuditLogConfig (..),
     newAuditLogConfig,
+
+    -- * AutomaticUpdatePolicy
+    AutomaticUpdatePolicy (..),
+    newAutomaticUpdatePolicy,
 
     -- * Binding
     Binding (..),
@@ -45,6 +51,18 @@ module Gogol.CloudFunctions.Internal.Product
     -- * BuildConfig_EnvironmentVariables
     BuildConfig_EnvironmentVariables (..),
     newBuildConfig_EnvironmentVariables,
+
+    -- * CommitFunctionUpgradeRequest
+    CommitFunctionUpgradeRequest (..),
+    newCommitFunctionUpgradeRequest,
+
+    -- * Date
+    Date (..),
+    newDate,
+
+    -- * DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
 
     -- * EventFilter
     EventFilter (..),
@@ -82,6 +100,10 @@ module Gogol.CloudFunctions.Internal.Product
     GenerateUploadUrlResponse (..),
     newGenerateUploadUrlResponse,
 
+    -- * GoogleCloudFunctionsV2LocationMetadata
+    GoogleCloudFunctionsV2LocationMetadata (..),
+    newGoogleCloudFunctionsV2LocationMetadata,
+
     -- * GoogleCloudFunctionsV2OperationMetadata
     GoogleCloudFunctionsV2OperationMetadata (..),
     newGoogleCloudFunctionsV2OperationMetadata,
@@ -97,38 +119,6 @@ module Gogol.CloudFunctions.Internal.Product
     -- * GoogleCloudFunctionsV2StateMessage
     GoogleCloudFunctionsV2StateMessage (..),
     newGoogleCloudFunctionsV2StateMessage,
-
-    -- * GoogleCloudFunctionsV2alphaOperationMetadata
-    GoogleCloudFunctionsV2alphaOperationMetadata (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata,
-
-    -- * GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource,
-
-    -- * GoogleCloudFunctionsV2alphaStage
-    GoogleCloudFunctionsV2alphaStage (..),
-    newGoogleCloudFunctionsV2alphaStage,
-
-    -- * GoogleCloudFunctionsV2alphaStateMessage
-    GoogleCloudFunctionsV2alphaStateMessage (..),
-    newGoogleCloudFunctionsV2alphaStateMessage,
-
-    -- * GoogleCloudFunctionsV2betaOperationMetadata
-    GoogleCloudFunctionsV2betaOperationMetadata (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata,
-
-    -- * GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource,
-
-    -- * GoogleCloudFunctionsV2betaStage
-    GoogleCloudFunctionsV2betaStage (..),
-    newGoogleCloudFunctionsV2betaStage,
-
-    -- * GoogleCloudFunctionsV2betaStateMessage
-    GoogleCloudFunctionsV2betaStateMessage (..),
-    newGoogleCloudFunctionsV2betaStateMessage,
 
     -- * ListFunctionsResponse
     ListFunctionsResponse (..),
@@ -158,6 +148,10 @@ module Gogol.CloudFunctions.Internal.Product
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- * OnDeployUpdatePolicy
+    OnDeployUpdatePolicy (..),
+    newOnDeployUpdatePolicy,
+
     -- * Operation
     Operation (..),
     newOperation,
@@ -182,9 +176,17 @@ module Gogol.CloudFunctions.Internal.Product
     Policy (..),
     newPolicy,
 
+    -- * RedirectFunctionUpgradeTrafficRequest
+    RedirectFunctionUpgradeTrafficRequest (..),
+    newRedirectFunctionUpgradeTrafficRequest,
+
     -- * RepoSource
     RepoSource (..),
     newRepoSource,
+
+    -- * RollbackFunctionUpgradeTrafficRequest
+    RollbackFunctionUpgradeTrafficRequest (..),
+    newRollbackFunctionUpgradeTrafficRequest,
 
     -- * Runtime
     Runtime (..),
@@ -214,6 +216,10 @@ module Gogol.CloudFunctions.Internal.Product
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
 
+    -- * SetupFunctionUpgradeConfigRequest
+    SetupFunctionUpgradeConfigRequest (..),
+    newSetupFunctionUpgradeConfigRequest,
+
     -- * Source
     Source (..),
     newSource,
@@ -241,11 +247,35 @@ module Gogol.CloudFunctions.Internal.Product
     -- * TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- * UpgradeInfo
+    UpgradeInfo (..),
+    newUpgradeInfo,
   )
 where
 
 import Gogol.CloudFunctions.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | Request for the @AbortFunctionUpgrade@ method.
+--
+-- /See:/ 'newAbortFunctionUpgradeRequest' smart constructor.
+data AbortFunctionUpgradeRequest = AbortFunctionUpgradeRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AbortFunctionUpgradeRequest' with the minimum fields required to make a request.
+newAbortFunctionUpgradeRequest ::
+  AbortFunctionUpgradeRequest
+newAbortFunctionUpgradeRequest = AbortFunctionUpgradeRequest
+
+instance Core.FromJSON AbortFunctionUpgradeRequest where
+  parseJSON =
+    Core.withObject
+      "AbortFunctionUpgradeRequest"
+      (\o -> Core.pure AbortFunctionUpgradeRequest)
+
+instance Core.ToJSON AbortFunctionUpgradeRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
 -- ADMIN/READ logging. It also exempts @jose\@example.com@ from DATA/READ logging, and @aliya\@example.com@ from DATA/WRITE logging.
@@ -263,7 +293,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -279,8 +312,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -300,7 +332,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -316,11 +351,30 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
+
+-- | Security patches are applied automatically to the runtime without requiring the function to be redeployed.
+--
+-- /See:/ 'newAutomaticUpdatePolicy' smart constructor.
+data AutomaticUpdatePolicy = AutomaticUpdatePolicy
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AutomaticUpdatePolicy' with the minimum fields required to make a request.
+newAutomaticUpdatePolicy ::
+  AutomaticUpdatePolicy
+newAutomaticUpdatePolicy = AutomaticUpdatePolicy
+
+instance Core.FromJSON AutomaticUpdatePolicy where
+  parseJSON =
+    Core.withObject
+      "AutomaticUpdatePolicy"
+      (\o -> Core.pure AutomaticUpdatePolicy)
+
+instance Core.ToJSON AutomaticUpdatePolicy where
+  toJSON = Core.const Core.emptyObject
 
 -- | Associates @members@, or principals, with a @role@.
 --
@@ -329,10 +383,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -372,24 +428,28 @@ instance Core.ToJSON Binding where
 --
 -- /See:/ 'newBuildConfig' smart constructor.
 data BuildConfig = BuildConfig
-  { -- | Output only. The Cloud Build name of the latest successful deployment of the function.
+  { automaticUpdatePolicy :: (Core.Maybe AutomaticUpdatePolicy),
+    -- | Output only. The Cloud Build name of the latest successful deployment of the function.
     build :: (Core.Maybe Core.Text),
-    -- | Specifies one of the Google provided buildpack stacks.
-    buildpackStack :: (Core.Maybe Core.Text),
-    -- | Optional. Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If @docker_repository@ field is specified, this field will be automatically set as @ARTIFACT_REGISTRY@. If unspecified, it currently defaults to @CONTAINER_REGISTRY@. This field may be overridden by the backend for eligible deployments.
+    -- | Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. Deprecated: Container Registry option will no longer be available after March 2025: https:\/\/cloud.google.com\/artifact-registry\/docs\/transition\/transition-from-gcr Please use Artifact Registry instead, which is the default choice. If unspecified, it defaults to @ARTIFACT_REGISTRY@. If @docker_repository@ field is specified, this field should either be left unspecified or set to @ARTIFACT_REGISTRY@.
     dockerRegistry :: (Core.Maybe BuildConfig_DockerRegistry),
-    -- | User managed repository created in Artifact Registry optionally with a customer managed encryption key. This is the repository to which the function docker image will be pushed after it is built by Cloud Build. If unspecified, GCF will create and use a repository named \'gcf-artifacts\' for every deployed region. It must match the pattern @projects\/{project}\/locations\/{location}\/repositories\/{repository}@. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be \'DOCKER\'.
+    -- | Repository in Artifact Registry to which the function docker image will be pushed after it is built by Cloud Build. If specified by user, it is created and managed by user with a customer managed encryption key. Otherwise, GCF will create and use a repository named \'gcf-artifacts\' for every deployed region. It must match the pattern @projects\/{project}\/locations\/{location}\/repositories\/{repository}@. Repository format must be \'DOCKER\'.
     dockerRepository :: (Core.Maybe Core.Text),
     -- | The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named \"function\". For Node.js this is name of a function exported by the module specified in @source_location@.
     entryPoint :: (Core.Maybe Core.Text),
     -- | User-provided build-time environment variables for the function
     environmentVariables :: (Core.Maybe BuildConfig_EnvironmentVariables),
+    onDeployUpdatePolicy :: (Core.Maybe OnDeployUpdatePolicy),
     -- | The runtime in which to run the function. Required when deploying a new function, optional when updating an existing function. For a complete list of possible choices, see the <https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime gcloud command reference>.
     runtime :: (Core.Maybe Core.Text),
+    -- | Service account to be used for building the container. The format of this field is @projects\/{projectId}\/serviceAccounts\/{serviceAccountEmail}@.
+    serviceAccount :: (Core.Maybe Core.Text),
     -- | The location of the function source code.
     source :: (Core.Maybe Source),
     -- | Output only. A permanent fixed identifier for source.
     sourceProvenance :: (Core.Maybe SourceProvenance),
+    -- | An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments.
+    sourceToken :: (Core.Maybe Core.Text),
     -- | Name of the Cloud Build Custom Worker Pool that should be used to build the function. The format of this field is @projects\/{project}\/locations\/{region}\/workerPools\/{workerPool}@ where {project} and {region} are the project id and region respectively where the worker pool is defined and {workerPool} is the short name of the worker pool. If the project id is not the same as the function, then the Cloud Functions Service Agent (service-\@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role Cloud Build Custom Workers Builder (roles\/cloudbuild.customworkers.builder) in the project.
     workerPool :: (Core.Maybe Core.Text)
   }
@@ -400,15 +460,18 @@ newBuildConfig ::
   BuildConfig
 newBuildConfig =
   BuildConfig
-    { build = Core.Nothing,
-      buildpackStack = Core.Nothing,
+    { automaticUpdatePolicy = Core.Nothing,
+      build = Core.Nothing,
       dockerRegistry = Core.Nothing,
       dockerRepository = Core.Nothing,
       entryPoint = Core.Nothing,
       environmentVariables = Core.Nothing,
+      onDeployUpdatePolicy = Core.Nothing,
       runtime = Core.Nothing,
+      serviceAccount = Core.Nothing,
       source = Core.Nothing,
       sourceProvenance = Core.Nothing,
+      sourceToken = Core.Nothing,
       workerPool = Core.Nothing
     }
 
@@ -418,15 +481,18 @@ instance Core.FromJSON BuildConfig where
       "BuildConfig"
       ( \o ->
           BuildConfig
-            Core.<$> (o Core..:? "build")
-            Core.<*> (o Core..:? "buildpackStack")
+            Core.<$> (o Core..:? "automaticUpdatePolicy")
+            Core.<*> (o Core..:? "build")
             Core.<*> (o Core..:? "dockerRegistry")
             Core.<*> (o Core..:? "dockerRepository")
             Core.<*> (o Core..:? "entryPoint")
             Core.<*> (o Core..:? "environmentVariables")
+            Core.<*> (o Core..:? "onDeployUpdatePolicy")
             Core.<*> (o Core..:? "runtime")
+            Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "source")
             Core.<*> (o Core..:? "sourceProvenance")
+            Core.<*> (o Core..:? "sourceToken")
             Core.<*> (o Core..:? "workerPool")
       )
 
@@ -434,18 +500,18 @@ instance Core.ToJSON BuildConfig where
   toJSON BuildConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("build" Core..=) Core.<$> build,
-            ("buildpackStack" Core..=) Core.<$> buildpackStack,
+          [ ("automaticUpdatePolicy" Core..=) Core.<$> automaticUpdatePolicy,
+            ("build" Core..=) Core.<$> build,
             ("dockerRegistry" Core..=) Core.<$> dockerRegistry,
-            ("dockerRepository" Core..=)
-              Core.<$> dockerRepository,
+            ("dockerRepository" Core..=) Core.<$> dockerRepository,
             ("entryPoint" Core..=) Core.<$> entryPoint,
-            ("environmentVariables" Core..=)
-              Core.<$> environmentVariables,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
+            ("onDeployUpdatePolicy" Core..=) Core.<$> onDeployUpdatePolicy,
             ("runtime" Core..=) Core.<$> runtime,
+            ("serviceAccount" Core..=) Core.<$> serviceAccount,
             ("source" Core..=) Core.<$> source,
-            ("sourceProvenance" Core..=)
-              Core.<$> sourceProvenance,
+            ("sourceProvenance" Core..=) Core.<$> sourceProvenance,
+            ("sourceToken" Core..=) Core.<$> sourceToken,
             ("workerPool" Core..=) Core.<$> workerPool
           ]
       )
@@ -454,8 +520,7 @@ instance Core.ToJSON BuildConfig where
 --
 -- /See:/ 'newBuildConfig_EnvironmentVariables' smart constructor.
 newtype BuildConfig_EnvironmentVariables = BuildConfig_EnvironmentVariables
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -467,21 +532,101 @@ newBuildConfig_EnvironmentVariables ::
 newBuildConfig_EnvironmentVariables additional =
   BuildConfig_EnvironmentVariables {additional = additional}
 
-instance
-  Core.FromJSON
-    BuildConfig_EnvironmentVariables
-  where
+instance Core.FromJSON BuildConfig_EnvironmentVariables where
   parseJSON =
     Core.withObject
       "BuildConfig_EnvironmentVariables"
       ( \o ->
-          BuildConfig_EnvironmentVariables
-            Core.<$> (Core.parseJSONObject o)
+          BuildConfig_EnvironmentVariables Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON BuildConfig_EnvironmentVariables where
   toJSON BuildConfig_EnvironmentVariables {..} =
     Core.toJSON additional
+
+-- | Request for the @CommitFunctionUpgrade@ method.
+--
+-- /See:/ 'newCommitFunctionUpgradeRequest' smart constructor.
+data CommitFunctionUpgradeRequest = CommitFunctionUpgradeRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CommitFunctionUpgradeRequest' with the minimum fields required to make a request.
+newCommitFunctionUpgradeRequest ::
+  CommitFunctionUpgradeRequest
+newCommitFunctionUpgradeRequest = CommitFunctionUpgradeRequest
+
+instance Core.FromJSON CommitFunctionUpgradeRequest where
+  parseJSON =
+    Core.withObject
+      "CommitFunctionUpgradeRequest"
+      (\o -> Core.pure CommitFunctionUpgradeRequest)
+
+instance Core.ToJSON CommitFunctionUpgradeRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
+--
+-- /See:/ 'newDate' smart constructor.
+data Date = Date
+  { -- | Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn\'t significant.
+    day :: (Core.Maybe Core.Int32),
+    -- | Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+    month :: (Core.Maybe Core.Int32),
+    -- | Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+    year :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Date' with the minimum fields required to make a request.
+newDate ::
+  Date
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
+
+instance Core.FromJSON Date where
+  parseJSON =
+    Core.withObject
+      "Date"
+      ( \o ->
+          Date
+            Core.<$> (o Core..:? "day")
+            Core.<*> (o Core..:? "month")
+            Core.<*> (o Core..:? "year")
+      )
+
+instance Core.ToJSON Date where
+  toJSON Date {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("day" Core..=) Core.<$> day,
+            ("month" Core..=) Core.<$> month,
+            ("year" Core..=) Core.<$> year
+          ]
+      )
+
+-- | Request for the @DetachFunction@ method.
+--
+-- /See:/ 'newDetachFunctionRequest' smart constructor.
+data DetachFunctionRequest = DetachFunctionRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DetachFunctionRequest' with the minimum fields required to make a request.
+newDetachFunctionRequest ::
+  DetachFunctionRequest
+newDetachFunctionRequest = DetachFunctionRequest
+
+instance Core.FromJSON DetachFunctionRequest where
+  parseJSON =
+    Core.withObject
+      "DetachFunctionRequest"
+      (\o -> Core.pure DetachFunctionRequest)
+
+instance Core.ToJSON DetachFunctionRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Filters events based on exact matches on the CloudEvents attributes.
 --
@@ -541,6 +686,8 @@ data EventTrigger = EventTrigger
     pubsubTopic :: (Core.Maybe Core.Text),
     -- | Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).
     retryPolicy :: (Core.Maybe EventTrigger_RetryPolicy),
+    -- | Optional. The hostname of the service that 1st Gen function should be observed. If no string is provided, the default service implementing the API will be used. For example, @storage.googleapis.com@ is the default for all event types in the @google.storage@ namespace. The field is only applicable to 1st Gen functions.
+    service :: (Core.Maybe Core.Text),
     -- | Optional. The email of the trigger\'s service account. The service account must have permission to invoke Cloud Run services, the permission is @run.routes.invoke@. If empty, defaults to the Compute Engine default service account: @{project_number}-compute\@developer.gserviceaccount.com@.
     serviceAccountEmail :: (Core.Maybe Core.Text),
     -- | Output only. The resource name of the Eventarc trigger. The format of this field is @projects\/{project}\/locations\/{region}\/triggers\/{trigger}@.
@@ -560,6 +707,7 @@ newEventTrigger =
       eventType = Core.Nothing,
       pubsubTopic = Core.Nothing,
       retryPolicy = Core.Nothing,
+      service = Core.Nothing,
       serviceAccountEmail = Core.Nothing,
       trigger = Core.Nothing,
       triggerRegion = Core.Nothing
@@ -576,6 +724,7 @@ instance Core.FromJSON EventTrigger where
             Core.<*> (o Core..:? "eventType")
             Core.<*> (o Core..:? "pubsubTopic")
             Core.<*> (o Core..:? "retryPolicy")
+            Core.<*> (o Core..:? "service")
             Core.<*> (o Core..:? "serviceAccountEmail")
             Core.<*> (o Core..:? "trigger")
             Core.<*> (o Core..:? "triggerRegion")
@@ -590,8 +739,8 @@ instance Core.ToJSON EventTrigger where
             ("eventType" Core..=) Core.<$> eventType,
             ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
             ("retryPolicy" Core..=) Core.<$> retryPolicy,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
+            ("service" Core..=) Core.<$> service,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
             ("trigger" Core..=) Core.<$> trigger,
             ("triggerRegion" Core..=) Core.<$> triggerRegion
           ]
@@ -653,6 +802,8 @@ instance Core.ToJSON Expr where
 data Function = Function
   { -- | Describes the Build step of the function that builds a container from the given source.
     buildConfig :: (Core.Maybe BuildConfig),
+    -- | Output only. The create timestamp of a Cloud Function. This is only applicable to 2nd Gen functions.
+    createTime :: (Core.Maybe Core.DateTime),
     -- | User-provided description of a function.
     description :: (Core.Maybe Core.Text),
     -- | Describe whether the function is 1st Gen or 2nd Gen.
@@ -665,6 +816,10 @@ data Function = Function
     labels :: (Core.Maybe Function_Labels),
     -- | A user-defined name of the function. Function names must be unique globally and match pattern @projects\/*\/locations\/*\/functions\/*@
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | Describes the Service being deployed. Currently deploys services to Cloud Run (fully managed).
     serviceConfig :: (Core.Maybe ServiceConfig),
     -- | Output only. State of the function.
@@ -672,7 +827,11 @@ data Function = Function
     -- | Output only. State Messages for this Cloud Function.
     stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2StateMessage]),
     -- | Output only. The last update timestamp of a Cloud Function.
-    updateTime :: (Core.Maybe Core.DateTime)
+    updateTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. UpgradeInfo for this Cloud Function
+    upgradeInfo :: (Core.Maybe UpgradeInfo),
+    -- | Output only. The deployed url for the function.
+    url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -682,16 +841,21 @@ newFunction ::
 newFunction =
   Function
     { buildConfig = Core.Nothing,
+      createTime = Core.Nothing,
       description = Core.Nothing,
       environment = Core.Nothing,
       eventTrigger = Core.Nothing,
       kmsKeyName = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       serviceConfig = Core.Nothing,
       state = Core.Nothing,
       stateMessages = Core.Nothing,
-      updateTime = Core.Nothing
+      updateTime = Core.Nothing,
+      upgradeInfo = Core.Nothing,
+      url = Core.Nothing
     }
 
 instance Core.FromJSON Function where
@@ -701,16 +865,21 @@ instance Core.FromJSON Function where
       ( \o ->
           Function
             Core.<$> (o Core..:? "buildConfig")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "eventTrigger")
             Core.<*> (o Core..:? "kmsKeyName")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "serviceConfig")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "stateMessages")
             Core.<*> (o Core..:? "updateTime")
+            Core.<*> (o Core..:? "upgradeInfo")
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON Function where
@@ -718,16 +887,21 @@ instance Core.ToJSON Function where
     Core.object
       ( Core.catMaybes
           [ ("buildConfig" Core..=) Core.<$> buildConfig,
+            ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
             ("environment" Core..=) Core.<$> environment,
             ("eventTrigger" Core..=) Core.<$> eventTrigger,
             ("kmsKeyName" Core..=) Core.<$> kmsKeyName,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("serviceConfig" Core..=) Core.<$> serviceConfig,
             ("state" Core..=) Core.<$> state,
             ("stateMessages" Core..=) Core.<$> stateMessages,
-            ("updateTime" Core..=) Core.<$> updateTime
+            ("updateTime" Core..=) Core.<$> updateTime,
+            ("upgradeInfo" Core..=) Core.<$> upgradeInfo,
+            ("url" Core..=) Core.<$> url
           ]
       )
 
@@ -735,8 +909,7 @@ instance Core.ToJSON Function where
 --
 -- /See:/ 'newFunction_Labels' smart constructor.
 newtype Function_Labels = Function_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -745,15 +918,14 @@ newFunction_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Function_Labels
-newFunction_Labels additional = Function_Labels {additional = additional}
+newFunction_Labels additional =
+  Function_Labels {additional = additional}
 
 instance Core.FromJSON Function_Labels where
   parseJSON =
     Core.withObject
       "Function_Labels"
-      ( \o ->
-          Function_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Function_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Function_Labels where
   toJSON Function_Labels {..} = Core.toJSON additional
@@ -798,22 +970,21 @@ instance Core.FromJSON GenerateDownloadUrlResponse where
     Core.withObject
       "GenerateDownloadUrlResponse"
       ( \o ->
-          GenerateDownloadUrlResponse
-            Core.<$> (o Core..:? "downloadUrl")
+          GenerateDownloadUrlResponse Core.<$> (o Core..:? "downloadUrl")
       )
 
 instance Core.ToJSON GenerateDownloadUrlResponse where
   toJSON GenerateDownloadUrlResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("downloadUrl" Core..=) Core.<$> downloadUrl]
-      )
+      (Core.catMaybes [("downloadUrl" Core..=) Core.<$> downloadUrl])
 
 -- | Request of @GenerateSourceUploadUrl@ method.
 --
 -- /See:/ 'newGenerateUploadUrlRequest' smart constructor.
-newtype GenerateUploadUrlRequest = GenerateUploadUrlRequest
-  { -- | Resource name of a KMS crypto key (managed by the user) used to encrypt\/decrypt function source code objects in intermediate Cloud Storage buckets. When you generate an upload url and upload your source code, it gets copied to an intermediate Cloud Storage bucket. The source code is then copied to a versioned directory in the sources bucket in the consumer project during the function deployment. It must match the pattern @projects\/{project}\/locations\/{location}\/keyRings\/{key_ring}\/cryptoKeys\/{crypto_key}@. The Google Cloud Functions service account (service-{project_number}\@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role \'Cloud KMS CryptoKey Encrypter\/Decrypter (roles\/cloudkms.cryptoKeyEncrypterDecrypter)\' on the Key\/KeyRing\/Project\/Organization (least access preferred).
+data GenerateUploadUrlRequest = GenerateUploadUrlRequest
+  { -- | The function environment the generated upload url will be used for. The upload url for 2nd Gen functions can also be used for 1st gen functions, but not vice versa. If not specified, 2nd generation-style upload URLs are generated.
+    environment :: (Core.Maybe GenerateUploadUrlRequest_Environment),
+    -- | Resource name of a KMS crypto key (managed by the user) used to encrypt\/decrypt function source code objects in intermediate Cloud Storage buckets. When you generate an upload url and upload your source code, it gets copied to an intermediate Cloud Storage bucket. The source code is then copied to a versioned directory in the sources bucket in the consumer project during the function deployment. It must match the pattern @projects\/{project}\/locations\/{location}\/keyRings\/{key_ring}\/cryptoKeys\/{crypto_key}@. The Google Cloud Functions service account (service-{project_number}\@gcf-admin-robot.iam.gserviceaccount.com) must be granted the role \'Cloud KMS CryptoKey Encrypter\/Decrypter (roles\/cloudkms.cryptoKeyEncrypterDecrypter)\' on the Key\/KeyRing\/Project\/Organization (least access preferred).
     kmsKeyName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -822,7 +993,10 @@ newtype GenerateUploadUrlRequest = GenerateUploadUrlRequest
 newGenerateUploadUrlRequest ::
   GenerateUploadUrlRequest
 newGenerateUploadUrlRequest =
-  GenerateUploadUrlRequest {kmsKeyName = Core.Nothing}
+  GenerateUploadUrlRequest
+    { environment = Core.Nothing,
+      kmsKeyName = Core.Nothing
+    }
 
 instance Core.FromJSON GenerateUploadUrlRequest where
   parseJSON =
@@ -830,14 +1004,17 @@ instance Core.FromJSON GenerateUploadUrlRequest where
       "GenerateUploadUrlRequest"
       ( \o ->
           GenerateUploadUrlRequest
-            Core.<$> (o Core..:? "kmsKeyName")
+            Core.<$> (o Core..:? "environment")
+            Core.<*> (o Core..:? "kmsKeyName")
       )
 
 instance Core.ToJSON GenerateUploadUrlRequest where
   toJSON GenerateUploadUrlRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("kmsKeyName" Core..=) Core.<$> kmsKeyName]
+          [ ("environment" Core..=) Core.<$> environment,
+            ("kmsKeyName" Core..=) Core.<$> kmsKeyName
+          ]
       )
 
 -- | Response of @GenerateSourceUploadUrl@ method.
@@ -879,23 +1056,66 @@ instance Core.ToJSON GenerateUploadUrlResponse where
           ]
       )
 
+-- | Extra GCF specific location information.
+--
+-- /See:/ 'newGoogleCloudFunctionsV2LocationMetadata' smart constructor.
+newtype GoogleCloudFunctionsV2LocationMetadata = GoogleCloudFunctionsV2LocationMetadata
+  { -- | The Cloud Function environments this location supports.
+    environments ::
+      ( Core.Maybe
+          [GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem]
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudFunctionsV2LocationMetadata' with the minimum fields required to make a request.
+newGoogleCloudFunctionsV2LocationMetadata ::
+  GoogleCloudFunctionsV2LocationMetadata
+newGoogleCloudFunctionsV2LocationMetadata =
+  GoogleCloudFunctionsV2LocationMetadata
+    { environments =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudFunctionsV2LocationMetadata where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudFunctionsV2LocationMetadata"
+      ( \o ->
+          GoogleCloudFunctionsV2LocationMetadata
+            Core.<$> (o Core..:? "environments")
+      )
+
+instance Core.ToJSON GoogleCloudFunctionsV2LocationMetadata where
+  toJSON GoogleCloudFunctionsV2LocationMetadata {..} =
+    Core.object
+      (Core.catMaybes [("environments" Core..=) Core.<$> environments])
+
 -- | Represents the metadata of the long-running operation.
 --
 -- /See:/ 'newGoogleCloudFunctionsV2OperationMetadata' smart constructor.
 data GoogleCloudFunctionsV2OperationMetadata = GoogleCloudFunctionsV2OperationMetadata
   { -- | API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
-    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    -- | The build name of the function for create and update operations.
+    buildName :: (Core.Maybe Core.Text),
+    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | The time the operation was created.
     createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. Whether a custom IAM role binding was detected during the upgrade.
+    customIamRoleDetected :: (Core.Maybe Core.Bool),
     -- | The time the operation finished running.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | The operation type.
+    operationType :: (Core.Maybe GoogleCloudFunctionsV2OperationMetadata_OperationType),
     -- | The original request that started the operation.
     requestResource ::
       ( Core.Maybe
           GoogleCloudFunctionsV2OperationMetadata_RequestResource
       ),
+    -- | An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments.
+    sourceToken :: (Core.Maybe Core.Text),
     -- | Mechanism for reporting in-progress stages
     stages :: (Core.Maybe [GoogleCloudFunctionsV2Stage]),
     -- | Human-readable status of the operation, if any.
@@ -912,49 +1132,56 @@ newGoogleCloudFunctionsV2OperationMetadata ::
   GoogleCloudFunctionsV2OperationMetadata
 newGoogleCloudFunctionsV2OperationMetadata =
   GoogleCloudFunctionsV2OperationMetadata
-    { apiVersion = Core.Nothing,
+    { apiVersion =
+        Core.Nothing,
+      buildName = Core.Nothing,
       cancelRequested = Core.Nothing,
       createTime = Core.Nothing,
+      customIamRoleDetected = Core.Nothing,
       endTime = Core.Nothing,
+      operationType = Core.Nothing,
       requestResource = Core.Nothing,
+      sourceToken = Core.Nothing,
       stages = Core.Nothing,
       statusDetail = Core.Nothing,
       target = Core.Nothing,
       verb = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudFunctionsV2OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudFunctionsV2OperationMetadata"
       ( \o ->
           GoogleCloudFunctionsV2OperationMetadata
             Core.<$> (o Core..:? "apiVersion")
+            Core.<*> (o Core..:? "buildName")
             Core.<*> (o Core..:? "cancelRequested")
             Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "customIamRoleDetected")
             Core.<*> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "operationType")
             Core.<*> (o Core..:? "requestResource")
+            Core.<*> (o Core..:? "sourceToken")
             Core.<*> (o Core..:? "stages")
             Core.<*> (o Core..:? "statusDetail")
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "verb")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2OperationMetadata
-  where
+instance Core.ToJSON GoogleCloudFunctionsV2OperationMetadata where
   toJSON GoogleCloudFunctionsV2OperationMetadata {..} =
     Core.object
       ( Core.catMaybes
           [ ("apiVersion" Core..=) Core.<$> apiVersion,
+            ("buildName" Core..=) Core.<$> buildName,
             ("cancelRequested" Core..=) Core.<$> cancelRequested,
             ("createTime" Core..=) Core.<$> createTime,
+            ("customIamRoleDetected" Core..=) Core.<$> customIamRoleDetected,
             ("endTime" Core..=) Core.<$> endTime,
+            ("operationType" Core..=) Core.<$> operationType,
             ("requestResource" Core..=) Core.<$> requestResource,
+            ("sourceToken" Core..=) Core.<$> sourceToken,
             ("stages" Core..=) Core.<$> stages,
             ("statusDetail" Core..=) Core.<$> statusDetail,
             ("target" Core..=) Core.<$> target,
@@ -976,10 +1203,12 @@ newGoogleCloudFunctionsV2OperationMetadata_RequestResource ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudFunctionsV2OperationMetadata_RequestResource
-newGoogleCloudFunctionsV2OperationMetadata_RequestResource additional =
-  GoogleCloudFunctionsV2OperationMetadata_RequestResource
-    { additional = additional
-    }
+newGoogleCloudFunctionsV2OperationMetadata_RequestResource
+  additional =
+    GoogleCloudFunctionsV2OperationMetadata_RequestResource
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -997,9 +1226,8 @@ instance
   Core.ToJSON
     GoogleCloudFunctionsV2OperationMetadata_RequestResource
   where
-  toJSON
-    GoogleCloudFunctionsV2OperationMetadata_RequestResource {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudFunctionsV2OperationMetadata_RequestResource {..} =
+    Core.toJSON additional
 
 -- | Each Stage of the deployment process
 --
@@ -1083,10 +1311,7 @@ newGoogleCloudFunctionsV2StateMessage =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2StateMessage
-  where
+instance Core.FromJSON GoogleCloudFunctionsV2StateMessage where
   parseJSON =
     Core.withObject
       "GoogleCloudFunctionsV2StateMessage"
@@ -1097,481 +1322,8 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2StateMessage
-  where
+instance Core.ToJSON GoogleCloudFunctionsV2StateMessage where
   toJSON GoogleCloudFunctionsV2StateMessage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("message" Core..=) Core.<$> message,
-            ("severity" Core..=) Core.<$> severity,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | Represents the metadata of the long-running operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2alphaOperationMetadata' smart constructor.
-data GoogleCloudFunctionsV2alphaOperationMetadata = GoogleCloudFunctionsV2alphaOperationMetadata
-  { -- | API version used to start the operation.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    cancelRequested :: (Core.Maybe Core.Bool),
-    -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | The original request that started the operation.
-    requestResource ::
-      ( Core.Maybe
-          GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-      ),
-    -- | Mechanism for reporting in-progress stages
-    stages :: (Core.Maybe [GoogleCloudFunctionsV2alphaStage]),
-    -- | Human-readable status of the operation, if any.
-    statusDetail :: (Core.Maybe Core.Text),
-    -- | Server-defined resource path for the target of the operation.
-    target :: (Core.Maybe Core.Text),
-    -- | Name of the verb executed by the operation.
-    verb :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2alphaOperationMetadata' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2alphaOperationMetadata ::
-  GoogleCloudFunctionsV2alphaOperationMetadata
-newGoogleCloudFunctionsV2alphaOperationMetadata =
-  GoogleCloudFunctionsV2alphaOperationMetadata
-    { apiVersion = Core.Nothing,
-      cancelRequested = Core.Nothing,
-      createTime = Core.Nothing,
-      endTime = Core.Nothing,
-      requestResource = Core.Nothing,
-      stages = Core.Nothing,
-      statusDetail = Core.Nothing,
-      target = Core.Nothing,
-      verb = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2alphaOperationMetadata"
-      ( \o ->
-          GoogleCloudFunctionsV2alphaOperationMetadata
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "cancelRequested")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "requestResource")
-            Core.<*> (o Core..:? "stages")
-            Core.<*> (o Core..:? "statusDetail")
-            Core.<*> (o Core..:? "target")
-            Core.<*> (o Core..:? "verb")
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata
-  where
-  toJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("apiVersion" Core..=) Core.<$> apiVersion,
-              ("cancelRequested" Core..=) Core.<$> cancelRequested,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("requestResource" Core..=) Core.<$> requestResource,
-              ("stages" Core..=) Core.<$> stages,
-              ("statusDetail" Core..=) Core.<$> statusDetail,
-              ("target" Core..=) Core.<$> target,
-              ("verb" Core..=) Core.<$> verb
-            ]
-        )
-
--- | The original request that started the operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource' smart constructor.
-newtype GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource = GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource additional =
-  GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-    { additional = additional
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource"
-      ( \o ->
-          GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-  where
-  toJSON
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource {..} =
-      Core.toJSON additional
-
--- | Each Stage of the deployment process
---
--- /See:/ 'newGoogleCloudFunctionsV2alphaStage' smart constructor.
-data GoogleCloudFunctionsV2alphaStage = GoogleCloudFunctionsV2alphaStage
-  { -- | Message describing the Stage
-    message :: (Core.Maybe Core.Text),
-    -- | Name of the Stage. This will be unique for each Stage.
-    name :: (Core.Maybe GoogleCloudFunctionsV2alphaStage_Name),
-    -- | Resource of the Stage
-    resource :: (Core.Maybe Core.Text),
-    -- | Link to the current Stage resource
-    resourceUri :: (Core.Maybe Core.Text),
-    -- | Current state of the Stage
-    state :: (Core.Maybe GoogleCloudFunctionsV2alphaStage_State),
-    -- | State messages from the current Stage.
-    stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2alphaStateMessage])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2alphaStage' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2alphaStage ::
-  GoogleCloudFunctionsV2alphaStage
-newGoogleCloudFunctionsV2alphaStage =
-  GoogleCloudFunctionsV2alphaStage
-    { message = Core.Nothing,
-      name = Core.Nothing,
-      resource = Core.Nothing,
-      resourceUri = Core.Nothing,
-      state = Core.Nothing,
-      stateMessages = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2alphaStage
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2alphaStage"
-      ( \o ->
-          GoogleCloudFunctionsV2alphaStage
-            Core.<$> (o Core..:? "message")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "resource")
-            Core.<*> (o Core..:? "resourceUri")
-            Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateMessages")
-      )
-
-instance Core.ToJSON GoogleCloudFunctionsV2alphaStage where
-  toJSON GoogleCloudFunctionsV2alphaStage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("message" Core..=) Core.<$> message,
-            ("name" Core..=) Core.<$> name,
-            ("resource" Core..=) Core.<$> resource,
-            ("resourceUri" Core..=) Core.<$> resourceUri,
-            ("state" Core..=) Core.<$> state,
-            ("stateMessages" Core..=) Core.<$> stateMessages
-          ]
-      )
-
--- | Informational messages about the state of the Cloud Function or Operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2alphaStateMessage' smart constructor.
-data GoogleCloudFunctionsV2alphaStateMessage = GoogleCloudFunctionsV2alphaStateMessage
-  { -- | The message.
-    message :: (Core.Maybe Core.Text),
-    -- | Severity of the state message.
-    severity :: (Core.Maybe GoogleCloudFunctionsV2alphaStateMessage_Severity),
-    -- | One-word CamelCase type of the state message.
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2alphaStateMessage' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2alphaStateMessage ::
-  GoogleCloudFunctionsV2alphaStateMessage
-newGoogleCloudFunctionsV2alphaStateMessage =
-  GoogleCloudFunctionsV2alphaStateMessage
-    { message = Core.Nothing,
-      severity = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2alphaStateMessage
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2alphaStateMessage"
-      ( \o ->
-          GoogleCloudFunctionsV2alphaStateMessage
-            Core.<$> (o Core..:? "message")
-            Core.<*> (o Core..:? "severity")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2alphaStateMessage
-  where
-  toJSON GoogleCloudFunctionsV2alphaStateMessage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("message" Core..=) Core.<$> message,
-            ("severity" Core..=) Core.<$> severity,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | Represents the metadata of the long-running operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2betaOperationMetadata' smart constructor.
-data GoogleCloudFunctionsV2betaOperationMetadata = GoogleCloudFunctionsV2betaOperationMetadata
-  { -- | API version used to start the operation.
-    apiVersion :: (Core.Maybe Core.Text),
-    -- | Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
-    cancelRequested :: (Core.Maybe Core.Bool),
-    -- | The time the operation was created.
-    createTime :: (Core.Maybe Core.DateTime),
-    -- | The time the operation finished running.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | The original request that started the operation.
-    requestResource ::
-      ( Core.Maybe
-          GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-      ),
-    -- | Mechanism for reporting in-progress stages
-    stages :: (Core.Maybe [GoogleCloudFunctionsV2betaStage]),
-    -- | Human-readable status of the operation, if any.
-    statusDetail :: (Core.Maybe Core.Text),
-    -- | Server-defined resource path for the target of the operation.
-    target :: (Core.Maybe Core.Text),
-    -- | Name of the verb executed by the operation.
-    verb :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2betaOperationMetadata' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2betaOperationMetadata ::
-  GoogleCloudFunctionsV2betaOperationMetadata
-newGoogleCloudFunctionsV2betaOperationMetadata =
-  GoogleCloudFunctionsV2betaOperationMetadata
-    { apiVersion = Core.Nothing,
-      cancelRequested = Core.Nothing,
-      createTime = Core.Nothing,
-      endTime = Core.Nothing,
-      requestResource = Core.Nothing,
-      stages = Core.Nothing,
-      statusDetail = Core.Nothing,
-      target = Core.Nothing,
-      verb = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2betaOperationMetadata
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2betaOperationMetadata"
-      ( \o ->
-          GoogleCloudFunctionsV2betaOperationMetadata
-            Core.<$> (o Core..:? "apiVersion")
-            Core.<*> (o Core..:? "cancelRequested")
-            Core.<*> (o Core..:? "createTime")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "requestResource")
-            Core.<*> (o Core..:? "stages")
-            Core.<*> (o Core..:? "statusDetail")
-            Core.<*> (o Core..:? "target")
-            Core.<*> (o Core..:? "verb")
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2betaOperationMetadata
-  where
-  toJSON
-    GoogleCloudFunctionsV2betaOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("apiVersion" Core..=) Core.<$> apiVersion,
-              ("cancelRequested" Core..=) Core.<$> cancelRequested,
-              ("createTime" Core..=) Core.<$> createTime,
-              ("endTime" Core..=) Core.<$> endTime,
-              ("requestResource" Core..=) Core.<$> requestResource,
-              ("stages" Core..=) Core.<$> stages,
-              ("statusDetail" Core..=) Core.<$> statusDetail,
-              ("target" Core..=) Core.<$> target,
-              ("verb" Core..=) Core.<$> verb
-            ]
-        )
-
--- | The original request that started the operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource' smart constructor.
-newtype GoogleCloudFunctionsV2betaOperationMetadata_RequestResource = GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-  { -- | Properties of the object. Contains field \@type with type URL.
-    additional :: (Core.HashMap Core.Text Core.Value)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2betaOperationMetadata_RequestResource' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource ::
-  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
-  Core.HashMap Core.Text Core.Value ->
-  GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource additional =
-  GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-    { additional = additional
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2betaOperationMetadata_RequestResource"
-      ( \o ->
-          GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-  where
-  toJSON
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource {..} =
-      Core.toJSON additional
-
--- | Each Stage of the deployment process
---
--- /See:/ 'newGoogleCloudFunctionsV2betaStage' smart constructor.
-data GoogleCloudFunctionsV2betaStage = GoogleCloudFunctionsV2betaStage
-  { -- | Message describing the Stage
-    message :: (Core.Maybe Core.Text),
-    -- | Name of the Stage. This will be unique for each Stage.
-    name :: (Core.Maybe GoogleCloudFunctionsV2betaStage_Name),
-    -- | Resource of the Stage
-    resource :: (Core.Maybe Core.Text),
-    -- | Link to the current Stage resource
-    resourceUri :: (Core.Maybe Core.Text),
-    -- | Current state of the Stage
-    state :: (Core.Maybe GoogleCloudFunctionsV2betaStage_State),
-    -- | State messages from the current Stage.
-    stateMessages :: (Core.Maybe [GoogleCloudFunctionsV2betaStateMessage])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2betaStage' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2betaStage ::
-  GoogleCloudFunctionsV2betaStage
-newGoogleCloudFunctionsV2betaStage =
-  GoogleCloudFunctionsV2betaStage
-    { message = Core.Nothing,
-      name = Core.Nothing,
-      resource = Core.Nothing,
-      resourceUri = Core.Nothing,
-      state = Core.Nothing,
-      stateMessages = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2betaStage
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2betaStage"
-      ( \o ->
-          GoogleCloudFunctionsV2betaStage
-            Core.<$> (o Core..:? "message")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "resource")
-            Core.<*> (o Core..:? "resourceUri")
-            Core.<*> (o Core..:? "state")
-            Core.<*> (o Core..:? "stateMessages")
-      )
-
-instance Core.ToJSON GoogleCloudFunctionsV2betaStage where
-  toJSON GoogleCloudFunctionsV2betaStage {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("message" Core..=) Core.<$> message,
-            ("name" Core..=) Core.<$> name,
-            ("resource" Core..=) Core.<$> resource,
-            ("resourceUri" Core..=) Core.<$> resourceUri,
-            ("state" Core..=) Core.<$> state,
-            ("stateMessages" Core..=) Core.<$> stateMessages
-          ]
-      )
-
--- | Informational messages about the state of the Cloud Function or Operation.
---
--- /See:/ 'newGoogleCloudFunctionsV2betaStateMessage' smart constructor.
-data GoogleCloudFunctionsV2betaStateMessage = GoogleCloudFunctionsV2betaStateMessage
-  { -- | The message.
-    message :: (Core.Maybe Core.Text),
-    -- | Severity of the state message.
-    severity :: (Core.Maybe GoogleCloudFunctionsV2betaStateMessage_Severity),
-    -- | One-word CamelCase type of the state message.
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GoogleCloudFunctionsV2betaStateMessage' with the minimum fields required to make a request.
-newGoogleCloudFunctionsV2betaStateMessage ::
-  GoogleCloudFunctionsV2betaStateMessage
-newGoogleCloudFunctionsV2betaStateMessage =
-  GoogleCloudFunctionsV2betaStateMessage
-    { message = Core.Nothing,
-      severity = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    GoogleCloudFunctionsV2betaStateMessage
-  where
-  parseJSON =
-    Core.withObject
-      "GoogleCloudFunctionsV2betaStateMessage"
-      ( \o ->
-          GoogleCloudFunctionsV2betaStateMessage
-            Core.<$> (o Core..:? "message")
-            Core.<*> (o Core..:? "severity")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance
-  Core.ToJSON
-    GoogleCloudFunctionsV2betaStateMessage
-  where
-  toJSON GoogleCloudFunctionsV2betaStateMessage {..} =
     Core.object
       ( Core.catMaybes
           [ ("message" Core..=) Core.<$> message,
@@ -1639,7 +1391,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -1711,25 +1466,21 @@ newtype ListRuntimesResponse = ListRuntimesResponse
 -- | Creates a value of 'ListRuntimesResponse' with the minimum fields required to make a request.
 newListRuntimesResponse ::
   ListRuntimesResponse
-newListRuntimesResponse = ListRuntimesResponse {runtimes = Core.Nothing}
+newListRuntimesResponse =
+  ListRuntimesResponse {runtimes = Core.Nothing}
 
 instance Core.FromJSON ListRuntimesResponse where
   parseJSON =
     Core.withObject
       "ListRuntimesResponse"
-      ( \o ->
-          ListRuntimesResponse
-            Core.<$> (o Core..:? "runtimes")
-      )
+      (\o -> ListRuntimesResponse Core.<$> (o Core..:? "runtimes"))
 
 instance Core.ToJSON ListRuntimesResponse where
   toJSON ListRuntimesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("runtimes" Core..=) Core.<$> runtimes]
-      )
+      (Core.catMaybes [("runtimes" Core..=) Core.<$> runtimes])
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -1787,8 +1538,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1797,15 +1547,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -1824,18 +1573,47 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
+
+-- | Security patches are only applied when a function is redeployed.
+--
+-- /See:/ 'newOnDeployUpdatePolicy' smart constructor.
+newtype OnDeployUpdatePolicy = OnDeployUpdatePolicy
+  { -- | Output only. contains the runtime version which was used during latest function deployment.
+    runtimeVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'OnDeployUpdatePolicy' with the minimum fields required to make a request.
+newOnDeployUpdatePolicy ::
+  OnDeployUpdatePolicy
+newOnDeployUpdatePolicy =
+  OnDeployUpdatePolicy {runtimeVersion = Core.Nothing}
+
+instance Core.FromJSON OnDeployUpdatePolicy where
+  parseJSON =
+    Core.withObject
+      "OnDeployUpdatePolicy"
+      ( \o ->
+          OnDeployUpdatePolicy Core.<$> (o Core..:? "runtimeVersion")
+      )
+
+instance Core.ToJSON OnDeployUpdatePolicy where
+  toJSON OnDeployUpdatePolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [("runtimeVersion" Core..=) Core.<$> runtimeVersion]
+      )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -1849,7 +1627,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1905,21 +1683,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1933,19 +1709,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Metadata describing an Operation
 --
@@ -1998,9 +1772,7 @@ instance Core.FromJSON OperationMetadataV1 where
             Core.<*> (o Core..:? "target")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "versionId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "versionId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON OperationMetadataV1 where
@@ -2014,8 +1786,7 @@ instance Core.ToJSON OperationMetadataV1 where
             ("target" Core..=) Core.<$> target,
             ("type" Core..=) Core.<$> type',
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("versionId" Core..=) Core.. Core.AsText
-              Core.<$> versionId
+            ("versionId" Core..=) Core.. Core.AsText Core.<$> versionId
           ]
       )
 
@@ -2041,17 +1812,15 @@ instance Core.FromJSON OperationMetadataV1_Request where
     Core.withObject
       "OperationMetadataV1_Request"
       ( \o ->
-          OperationMetadataV1_Request
-            Core.<$> (Core.parseJSONObject o)
+          OperationMetadataV1_Request Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON OperationMetadataV1_Request where
-  toJSON OperationMetadataV1_Request {..} =
-    Core.toJSON additional
+  toJSON OperationMetadataV1_Request {..} = Core.toJSON additional
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -2101,6 +1870,27 @@ instance Core.ToJSON Policy where
           ]
       )
 
+-- | Request for the @RedirectFunctionUpgradeTraffic@ method.
+--
+-- /See:/ 'newRedirectFunctionUpgradeTrafficRequest' smart constructor.
+data RedirectFunctionUpgradeTrafficRequest = RedirectFunctionUpgradeTrafficRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RedirectFunctionUpgradeTrafficRequest' with the minimum fields required to make a request.
+newRedirectFunctionUpgradeTrafficRequest ::
+  RedirectFunctionUpgradeTrafficRequest
+newRedirectFunctionUpgradeTrafficRequest =
+  RedirectFunctionUpgradeTrafficRequest
+
+instance Core.FromJSON RedirectFunctionUpgradeTrafficRequest where
+  parseJSON =
+    Core.withObject
+      "RedirectFunctionUpgradeTrafficRequest"
+      (\o -> Core.pure RedirectFunctionUpgradeTrafficRequest)
+
+instance Core.ToJSON RedirectFunctionUpgradeTrafficRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | Location of the source in a Google Cloud Source Repository.
 --
 -- /See:/ 'newRepoSource' smart constructor.
@@ -2111,8 +1901,6 @@ data RepoSource = RepoSource
     commitSha :: (Core.Maybe Core.Text),
     -- | Directory, relative to the source root, in which to run the build. This must be a relative path. If a step\'s @dir@ is specified and is an absolute path, this value is ignored for that step\'s execution. eg. helloworld (no leading slash allowed)
     dir :: (Core.Maybe Core.Text),
-    -- | Only trigger a build if the revision regex does NOT match the revision regex.
-    invertRegex :: (Core.Maybe Core.Bool),
     -- | ID of the project that owns the Cloud Source Repository. If omitted, the project ID requesting the build is assumed.
     projectId :: (Core.Maybe Core.Text),
     -- | Name of the Cloud Source Repository.
@@ -2130,7 +1918,6 @@ newRepoSource =
     { branchName = Core.Nothing,
       commitSha = Core.Nothing,
       dir = Core.Nothing,
-      invertRegex = Core.Nothing,
       projectId = Core.Nothing,
       repoName = Core.Nothing,
       tagName = Core.Nothing
@@ -2145,7 +1932,6 @@ instance Core.FromJSON RepoSource where
             Core.<$> (o Core..:? "branchName")
             Core.<*> (o Core..:? "commitSha")
             Core.<*> (o Core..:? "dir")
-            Core.<*> (o Core..:? "invertRegex")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "repoName")
             Core.<*> (o Core..:? "tagName")
@@ -2158,18 +1944,42 @@ instance Core.ToJSON RepoSource where
           [ ("branchName" Core..=) Core.<$> branchName,
             ("commitSha" Core..=) Core.<$> commitSha,
             ("dir" Core..=) Core.<$> dir,
-            ("invertRegex" Core..=) Core.<$> invertRegex,
             ("projectId" Core..=) Core.<$> projectId,
             ("repoName" Core..=) Core.<$> repoName,
             ("tagName" Core..=) Core.<$> tagName
           ]
       )
 
+-- | Request for the @RollbackFunctionUpgradeTraffic@ method.
+--
+-- /See:/ 'newRollbackFunctionUpgradeTrafficRequest' smart constructor.
+data RollbackFunctionUpgradeTrafficRequest = RollbackFunctionUpgradeTrafficRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackFunctionUpgradeTrafficRequest' with the minimum fields required to make a request.
+newRollbackFunctionUpgradeTrafficRequest ::
+  RollbackFunctionUpgradeTrafficRequest
+newRollbackFunctionUpgradeTrafficRequest =
+  RollbackFunctionUpgradeTrafficRequest
+
+instance Core.FromJSON RollbackFunctionUpgradeTrafficRequest where
+  parseJSON =
+    Core.withObject
+      "RollbackFunctionUpgradeTrafficRequest"
+      (\o -> Core.pure RollbackFunctionUpgradeTrafficRequest)
+
+instance Core.ToJSON RollbackFunctionUpgradeTrafficRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | Describes a runtime and any special information (e.g., deprecation status) related to it.
 --
 -- /See:/ 'newRuntime' smart constructor.
 data Runtime = Runtime
-  { -- | The user facing name, eg \'Go 1.13\', \'Node.js 12\', etc.
+  { -- | Decommission date for the runtime.
+    decommissionDate :: (Core.Maybe Date),
+    -- | Deprecation date for the runtime.
+    deprecationDate :: (Core.Maybe Date),
+    -- | The user facing name, eg \'Go 1.13\', \'Node.js 12\', etc.
     displayName :: (Core.Maybe Core.Text),
     -- | The environment for the runtime.
     environment :: (Core.Maybe Runtime_Environment),
@@ -2187,7 +1997,9 @@ newRuntime ::
   Runtime
 newRuntime =
   Runtime
-    { displayName = Core.Nothing,
+    { decommissionDate = Core.Nothing,
+      deprecationDate = Core.Nothing,
+      displayName = Core.Nothing,
       environment = Core.Nothing,
       name = Core.Nothing,
       stage = Core.Nothing,
@@ -2200,7 +2012,9 @@ instance Core.FromJSON Runtime where
       "Runtime"
       ( \o ->
           Runtime
-            Core.<$> (o Core..:? "displayName")
+            Core.<$> (o Core..:? "decommissionDate")
+            Core.<*> (o Core..:? "deprecationDate")
+            Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "environment")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "stage")
@@ -2211,7 +2025,9 @@ instance Core.ToJSON Runtime where
   toJSON Runtime {..} =
     Core.object
       ( Core.catMaybes
-          [ ("displayName" Core..=) Core.<$> displayName,
+          [ ("decommissionDate" Core..=) Core.<$> decommissionDate,
+            ("deprecationDate" Core..=) Core.<$> deprecationDate,
+            ("displayName" Core..=) Core.<$> displayName,
             ("environment" Core..=) Core.<$> environment,
             ("name" Core..=) Core.<$> name,
             ("stage" Core..=) Core.<$> stage,
@@ -2282,7 +2098,8 @@ data SecretVersion = SecretVersion
 -- | Creates a value of 'SecretVersion' with the minimum fields required to make a request.
 newSecretVersion ::
   SecretVersion
-newSecretVersion = SecretVersion {path = Core.Nothing, version = Core.Nothing}
+newSecretVersion =
+  SecretVersion {path = Core.Nothing, version = Core.Nothing}
 
 instance Core.FromJSON SecretVersion where
   parseJSON =
@@ -2290,7 +2107,8 @@ instance Core.FromJSON SecretVersion where
       "SecretVersion"
       ( \o ->
           SecretVersion
-            Core.<$> (o Core..:? "path") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "path")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON SecretVersion where
@@ -2351,7 +2169,7 @@ instance Core.ToJSON SecretVolume where
           ]
       )
 
--- | Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23
+-- | Describes the Service being deployed. Currently Supported : Cloud Run (fully managed).
 --
 -- /See:/ 'newServiceConfig' smart constructor.
 data ServiceConfig = ServiceConfig
@@ -2361,6 +2179,8 @@ data ServiceConfig = ServiceConfig
     availableCpu :: (Core.Maybe Core.Text),
     -- | The amount of memory available for a function. Defaults to 256M. Supported units are k, M, G, Mi, Gi. If no unit is supplied the value is interpreted as bytes. See https:\/\/github.com\/kubernetes\/kubernetes\/blob\/master\/staging\/src\/k8s.io\/apimachinery\/pkg\/api\/resource\/quantity.go a full description.
     availableMemory :: (Core.Maybe Core.Text),
+    -- | Optional. The binary authorization policy to be checked when deploying the Cloud Run service.
+    binaryAuthorizationPolicy :: (Core.Maybe Core.Text),
     -- | Environment variables that shall be available during function execution.
     environmentVariables :: (Core.Maybe ServiceConfig_EnvironmentVariables),
     -- | The ingress settings for the function, controlling what traffic can reach it.
@@ -2402,6 +2222,7 @@ newServiceConfig =
     { allTrafficOnLatestRevision = Core.Nothing,
       availableCpu = Core.Nothing,
       availableMemory = Core.Nothing,
+      binaryAuthorizationPolicy = Core.Nothing,
       environmentVariables = Core.Nothing,
       ingressSettings = Core.Nothing,
       maxInstanceCount = Core.Nothing,
@@ -2428,6 +2249,7 @@ instance Core.FromJSON ServiceConfig where
             Core.<$> (o Core..:? "allTrafficOnLatestRevision")
             Core.<*> (o Core..:? "availableCpu")
             Core.<*> (o Core..:? "availableMemory")
+            Core.<*> (o Core..:? "binaryAuthorizationPolicy")
             Core.<*> (o Core..:? "environmentVariables")
             Core.<*> (o Core..:? "ingressSettings")
             Core.<*> (o Core..:? "maxInstanceCount")
@@ -2453,23 +2275,21 @@ instance Core.ToJSON ServiceConfig where
               Core.<$> allTrafficOnLatestRevision,
             ("availableCpu" Core..=) Core.<$> availableCpu,
             ("availableMemory" Core..=) Core.<$> availableMemory,
-            ("environmentVariables" Core..=)
-              Core.<$> environmentVariables,
+            ("binaryAuthorizationPolicy" Core..=)
+              Core.<$> binaryAuthorizationPolicy,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
             ("ingressSettings" Core..=) Core.<$> ingressSettings,
-            ("maxInstanceCount" Core..=)
-              Core.<$> maxInstanceCount,
+            ("maxInstanceCount" Core..=) Core.<$> maxInstanceCount,
             ("maxInstanceRequestConcurrency" Core..=)
               Core.<$> maxInstanceRequestConcurrency,
-            ("minInstanceCount" Core..=)
-              Core.<$> minInstanceCount,
+            ("minInstanceCount" Core..=) Core.<$> minInstanceCount,
             ("revision" Core..=) Core.<$> revision,
             ("secretEnvironmentVariables" Core..=)
               Core.<$> secretEnvironmentVariables,
             ("secretVolumes" Core..=) Core.<$> secretVolumes,
             ("securityLevel" Core..=) Core.<$> securityLevel,
             ("service" Core..=) Core.<$> service,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail,
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail,
             ("timeoutSeconds" Core..=) Core.<$> timeoutSeconds,
             ("uri" Core..=) Core.<$> uri,
             ("vpcConnector" Core..=) Core.<$> vpcConnector,
@@ -2482,8 +2302,7 @@ instance Core.ToJSON ServiceConfig where
 --
 -- /See:/ 'newServiceConfig_EnvironmentVariables' smart constructor.
 newtype ServiceConfig_EnvironmentVariables = ServiceConfig_EnvironmentVariables
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2495,10 +2314,7 @@ newServiceConfig_EnvironmentVariables ::
 newServiceConfig_EnvironmentVariables additional =
   ServiceConfig_EnvironmentVariables {additional = additional}
 
-instance
-  Core.FromJSON
-    ServiceConfig_EnvironmentVariables
-  where
+instance Core.FromJSON ServiceConfig_EnvironmentVariables where
   parseJSON =
     Core.withObject
       "ServiceConfig_EnvironmentVariables"
@@ -2507,10 +2323,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ServiceConfig_EnvironmentVariables
-  where
+instance Core.ToJSON ServiceConfig_EnvironmentVariables where
   toJSON ServiceConfig_EnvironmentVariables {..} =
     Core.toJSON additional
 
@@ -2529,7 +2342,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -2550,11 +2366,34 @@ instance Core.ToJSON SetIamPolicyRequest where
           ]
       )
 
+-- | Request for the @SetupFunctionUpgradeConfig@ method.
+--
+-- /See:/ 'newSetupFunctionUpgradeConfigRequest' smart constructor.
+data SetupFunctionUpgradeConfigRequest = SetupFunctionUpgradeConfigRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SetupFunctionUpgradeConfigRequest' with the minimum fields required to make a request.
+newSetupFunctionUpgradeConfigRequest ::
+  SetupFunctionUpgradeConfigRequest
+newSetupFunctionUpgradeConfigRequest =
+  SetupFunctionUpgradeConfigRequest
+
+instance Core.FromJSON SetupFunctionUpgradeConfigRequest where
+  parseJSON =
+    Core.withObject
+      "SetupFunctionUpgradeConfigRequest"
+      (\o -> Core.pure SetupFunctionUpgradeConfigRequest)
+
+instance Core.ToJSON SetupFunctionUpgradeConfigRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | The location of the function source code.
 --
 -- /See:/ 'newSource' smart constructor.
 data Source = Source
-  { -- | If provided, get the source from this location in a Cloud Source Repository.
+  { -- | If provided, get the source from GitHub repository. This option is valid only for GCF 1st Gen function. Example: https:\/\/github.com\/\/\/blob\/\/
+    gitUri :: (Core.Maybe Core.Text),
+    -- | If provided, get the source from this location in a Cloud Source Repository.
     repoSource :: (Core.Maybe RepoSource),
     -- | If provided, get the source from this location in Google Cloud Storage.
     storageSource :: (Core.Maybe StorageSource)
@@ -2564,7 +2403,12 @@ data Source = Source
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
 newSource ::
   Source
-newSource = Source {repoSource = Core.Nothing, storageSource = Core.Nothing}
+newSource =
+  Source
+    { gitUri = Core.Nothing,
+      repoSource = Core.Nothing,
+      storageSource = Core.Nothing
+    }
 
 instance Core.FromJSON Source where
   parseJSON =
@@ -2572,7 +2416,8 @@ instance Core.FromJSON Source where
       "Source"
       ( \o ->
           Source
-            Core.<$> (o Core..:? "repoSource")
+            Core.<$> (o Core..:? "gitUri")
+            Core.<*> (o Core..:? "repoSource")
             Core.<*> (o Core..:? "storageSource")
       )
 
@@ -2580,7 +2425,8 @@ instance Core.ToJSON Source where
   toJSON Source {..} =
     Core.object
       ( Core.catMaybes
-          [ ("repoSource" Core..=) Core.<$> repoSource,
+          [ ("gitUri" Core..=) Core.<$> gitUri,
+            ("repoSource" Core..=) Core.<$> repoSource,
             ("storageSource" Core..=) Core.<$> storageSource
           ]
       )
@@ -2589,7 +2435,9 @@ instance Core.ToJSON Source where
 --
 -- /See:/ 'newSourceProvenance' smart constructor.
 data SourceProvenance = SourceProvenance
-  { -- | A copy of the build\'s @source.repo_source@, if exists, with any revisions resolved.
+  { -- | A copy of the build\'s @source.git_uri@, if exists, with any commits resolved.
+    gitUri :: (Core.Maybe Core.Text),
+    -- | A copy of the build\'s @source.repo_source@, if exists, with any revisions resolved.
     resolvedRepoSource :: (Core.Maybe RepoSource),
     -- | A copy of the build\'s @source.storage_source@, if exists, with any generations resolved.
     resolvedStorageSource :: (Core.Maybe StorageSource)
@@ -2601,7 +2449,8 @@ newSourceProvenance ::
   SourceProvenance
 newSourceProvenance =
   SourceProvenance
-    { resolvedRepoSource = Core.Nothing,
+    { gitUri = Core.Nothing,
+      resolvedRepoSource = Core.Nothing,
       resolvedStorageSource = Core.Nothing
     }
 
@@ -2611,7 +2460,8 @@ instance Core.FromJSON SourceProvenance where
       "SourceProvenance"
       ( \o ->
           SourceProvenance
-            Core.<$> (o Core..:? "resolvedRepoSource")
+            Core.<$> (o Core..:? "gitUri")
+            Core.<*> (o Core..:? "resolvedRepoSource")
             Core.<*> (o Core..:? "resolvedStorageSource")
       )
 
@@ -2619,10 +2469,9 @@ instance Core.ToJSON SourceProvenance where
   toJSON SourceProvenance {..} =
     Core.object
       ( Core.catMaybes
-          [ ("resolvedRepoSource" Core..=)
-              Core.<$> resolvedRepoSource,
-            ("resolvedStorageSource" Core..=)
-              Core.<$> resolvedStorageSource
+          [ ("gitUri" Core..=) Core.<$> gitUri,
+            ("resolvedRepoSource" Core..=) Core.<$> resolvedRepoSource,
+            ("resolvedStorageSource" Core..=) Core.<$> resolvedStorageSource
           ]
       )
 
@@ -2643,7 +2492,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2679,19 +2532,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Location of the source in an archive file in Google Cloud Storage.
 --
@@ -2702,7 +2553,9 @@ data StorageSource = StorageSource
     -- | Google Cloud Storage generation for the object. If the generation is omitted, the latest generation will be used.
     generation :: (Core.Maybe Core.Int64),
     -- | Google Cloud Storage object containing the source. This object must be a gzipped archive file (@.tar.gz@) containing source to build.
-    object :: (Core.Maybe Core.Text)
+    object :: (Core.Maybe Core.Text),
+    -- | When the specified storage bucket is a 1st gen function uploard url bucket, this field should be set as the generated upload url for 1st gen deployment.
+    sourceUploadUrl :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2713,7 +2566,8 @@ newStorageSource =
   StorageSource
     { bucket = Core.Nothing,
       generation = Core.Nothing,
-      object = Core.Nothing
+      object = Core.Nothing,
+      sourceUploadUrl = Core.Nothing
     }
 
 instance Core.FromJSON StorageSource where
@@ -2723,10 +2577,9 @@ instance Core.FromJSON StorageSource where
       ( \o ->
           StorageSource
             Core.<$> (o Core..:? "bucket")
-            Core.<*> ( o Core..:? "generation"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "generation" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "object")
+            Core.<*> (o Core..:? "sourceUploadUrl")
       )
 
 instance Core.ToJSON StorageSource where
@@ -2734,9 +2587,9 @@ instance Core.ToJSON StorageSource where
     Core.object
       ( Core.catMaybes
           [ ("bucket" Core..=) Core.<$> bucket,
-            ("generation" Core..=) Core.. Core.AsText
-              Core.<$> generation,
-            ("object" Core..=) Core.<$> object
+            ("generation" Core..=) Core.. Core.AsText Core.<$> generation,
+            ("object" Core..=) Core.<$> object,
+            ("sourceUploadUrl" Core..=) Core.<$> sourceUploadUrl
           ]
       )
 
@@ -2760,16 +2613,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -2791,13 +2641,59 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
+
+-- | Information related to: * A function\'s eligibility for 1st Gen to 2nd Gen migration. * Current state of migration for function undergoing migration.
+--
+-- /See:/ 'newUpgradeInfo' smart constructor.
+data UpgradeInfo = UpgradeInfo
+  { -- | Describes the Build step of the function that builds a container to prepare for 2nd gen upgrade.
+    buildConfig :: (Core.Maybe BuildConfig),
+    -- | Describes the Event trigger which has been setup to prepare for 2nd gen upgrade.
+    eventTrigger :: (Core.Maybe EventTrigger),
+    -- | Describes the Cloud Run service which has been setup to prepare for 2nd gen upgrade.
+    serviceConfig :: (Core.Maybe ServiceConfig),
+    -- | UpgradeState of the function
+    upgradeState :: (Core.Maybe UpgradeInfo_UpgradeState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UpgradeInfo' with the minimum fields required to make a request.
+newUpgradeInfo ::
+  UpgradeInfo
+newUpgradeInfo =
+  UpgradeInfo
+    { buildConfig = Core.Nothing,
+      eventTrigger = Core.Nothing,
+      serviceConfig = Core.Nothing,
+      upgradeState = Core.Nothing
+    }
+
+instance Core.FromJSON UpgradeInfo where
+  parseJSON =
+    Core.withObject
+      "UpgradeInfo"
+      ( \o ->
+          UpgradeInfo
+            Core.<$> (o Core..:? "buildConfig")
+            Core.<*> (o Core..:? "eventTrigger")
+            Core.<*> (o Core..:? "serviceConfig")
+            Core.<*> (o Core..:? "upgradeState")
+      )
+
+instance Core.ToJSON UpgradeInfo where
+  toJSON UpgradeInfo {..} =
+    Core.object
       ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
+          [ ("buildConfig" Core..=) Core.<$> buildConfig,
+            ("eventTrigger" Core..=) Core.<$> eventTrigger,
+            ("serviceConfig" Core..=) Core.<$> serviceConfig,
+            ("upgradeState" Core..=) Core.<$> upgradeState
+          ]
       )

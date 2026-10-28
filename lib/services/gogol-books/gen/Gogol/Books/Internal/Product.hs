@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Books.Internal.Product
@@ -473,7 +471,7 @@ module Gogol.Books.Internal.Product
 where
 
 import Gogol.Books.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newAnnotation' smart constructor.
@@ -500,7 +498,6 @@ data Annotation = Annotation
     kind :: (Core.Maybe Core.Text),
     -- | The layer this annotation is for.
     layerId :: (Core.Maybe Core.Text),
-    -- |
     layerSummary :: (Core.Maybe Annotation_LayerSummary),
     -- | Pages that this annotation spans.
     pageIds :: (Core.Maybe [Core.Text]),
@@ -568,15 +565,11 @@ instance Core.ToJSON Annotation where
   toJSON Annotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("afterSelectedText" Core..=)
-              Core.<$> afterSelectedText,
-            ("beforeSelectedText" Core..=)
-              Core.<$> beforeSelectedText,
-            ("clientVersionRanges" Core..=)
-              Core.<$> clientVersionRanges,
+          [ ("afterSelectedText" Core..=) Core.<$> afterSelectedText,
+            ("beforeSelectedText" Core..=) Core.<$> beforeSelectedText,
+            ("clientVersionRanges" Core..=) Core.<$> clientVersionRanges,
             ("created" Core..=) Core.<$> created,
-            ("currentVersionRanges" Core..=)
-              Core.<$> currentVersionRanges,
+            ("currentVersionRanges" Core..=) Core.<$> currentVersionRanges,
             ("data" Core..=) Core.<$> data',
             ("deleted" Core..=) Core.<$> deleted,
             ("highlightStyle" Core..=) Core.<$> highlightStyle,
@@ -675,10 +668,7 @@ newAnnotation_CurrentVersionRanges =
       imageCfiRange = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Annotation_CurrentVersionRanges
-  where
+instance Core.FromJSON Annotation_CurrentVersionRanges where
   parseJSON =
     Core.withObject
       "Annotation_CurrentVersionRanges"
@@ -740,8 +730,7 @@ instance Core.ToJSON Annotation_LayerSummary where
   toJSON Annotation_LayerSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedCharacterCount" Core..=)
-              Core.<$> allowedCharacterCount,
+          [ ("allowedCharacterCount" Core..=) Core.<$> allowedCharacterCount,
             ("limitType" Core..=) Core.<$> limitType,
             ("remainingCharacterCount" Core..=)
               Core.<$> remainingCharacterCount
@@ -799,9 +788,7 @@ instance Core.ToJSON Annotations where
 --
 -- /See:/ 'newAnnotationsSummary' smart constructor.
 data AnnotationsSummary = AnnotationsSummary
-  { -- |
-    kind :: (Core.Maybe Core.Text),
-    -- |
+  { kind :: (Core.Maybe Core.Text),
     layers :: (Core.Maybe [AnnotationsSummary_LayersItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -818,7 +805,8 @@ instance Core.FromJSON AnnotationsSummary where
       "AnnotationsSummary"
       ( \o ->
           AnnotationsSummary
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "layers")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "layers")
       )
 
 instance Core.ToJSON AnnotationsSummary where
@@ -833,15 +821,10 @@ instance Core.ToJSON AnnotationsSummary where
 --
 -- /See:/ 'newAnnotationsSummary_LayersItem' smart constructor.
 data AnnotationsSummary_LayersItem = AnnotationsSummary_LayersItem
-  { -- |
-    allowedCharacterCount :: (Core.Maybe Core.Int32),
-    -- |
+  { allowedCharacterCount :: (Core.Maybe Core.Int32),
     layerId :: (Core.Maybe Core.Text),
-    -- |
     limitType :: (Core.Maybe Core.Text),
-    -- |
     remainingCharacterCount :: (Core.Maybe Core.Int32),
-    -- |
     updated :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -851,7 +834,8 @@ newAnnotationsSummary_LayersItem ::
   AnnotationsSummary_LayersItem
 newAnnotationsSummary_LayersItem =
   AnnotationsSummary_LayersItem
-    { allowedCharacterCount = Core.Nothing,
+    { allowedCharacterCount =
+        Core.Nothing,
       layerId = Core.Nothing,
       limitType = Core.Nothing,
       remainingCharacterCount = Core.Nothing,
@@ -875,8 +859,7 @@ instance Core.ToJSON AnnotationsSummary_LayersItem where
   toJSON AnnotationsSummary_LayersItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedCharacterCount" Core..=)
-              Core.<$> allowedCharacterCount,
+          [ ("allowedCharacterCount" Core..=) Core.<$> allowedCharacterCount,
             ("layerId" Core..=) Core.<$> layerId,
             ("limitType" Core..=) Core.<$> limitType,
             ("remainingCharacterCount" Core..=)
@@ -984,13 +967,9 @@ instance Core.ToJSON BooksAnnotationsRange where
 --
 -- /See:/ 'newBooksCloudloadingResource' smart constructor.
 data BooksCloudloadingResource = BooksCloudloadingResource
-  { -- |
-    author :: (Core.Maybe Core.Text),
-    -- |
+  { author :: (Core.Maybe Core.Text),
     processingState :: (Core.Maybe Core.Text),
-    -- |
     title :: (Core.Maybe Core.Text),
-    -- |
     volumeId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1032,8 +1011,7 @@ instance Core.ToJSON BooksCloudloadingResource where
 --
 -- /See:/ 'newBooksVolumesRecommendedRateResponse' smart constructor.
 newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateResponse
-  { -- |
-    consistencyToken :: (Core.Maybe Core.Text)
+  { consistencyToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1041,12 +1019,12 @@ newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateRespons
 newBooksVolumesRecommendedRateResponse ::
   BooksVolumesRecommendedRateResponse
 newBooksVolumesRecommendedRateResponse =
-  BooksVolumesRecommendedRateResponse {consistencyToken = Core.Nothing}
+  BooksVolumesRecommendedRateResponse
+    { consistencyToken =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    BooksVolumesRecommendedRateResponse
-  where
+instance Core.FromJSON BooksVolumesRecommendedRateResponse where
   parseJSON =
     Core.withObject
       "BooksVolumesRecommendedRateResponse"
@@ -1055,16 +1033,11 @@ instance
             Core.<$> (o Core..:? "consistency_token")
       )
 
-instance
-  Core.ToJSON
-    BooksVolumesRecommendedRateResponse
-  where
+instance Core.ToJSON BooksVolumesRecommendedRateResponse where
   toJSON BooksVolumesRecommendedRateResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consistency_token" Core..=)
-              Core.<$> consistencyToken
-          ]
+          [("consistency_token" Core..=) Core.<$> consistencyToken]
       )
 
 --
@@ -1141,8 +1114,7 @@ instance Core.ToJSON Bookshelf where
             ("title" Core..=) Core.<$> title,
             ("updated" Core..=) Core.<$> updated,
             ("volumeCount" Core..=) Core.<$> volumeCount,
-            ("volumesLastUpdated" Core..=)
-              Core.<$> volumesLastUpdated
+            ("volumesLastUpdated" Core..=) Core.<$> volumesLastUpdated
           ]
       )
 
@@ -1159,7 +1131,8 @@ data Bookshelves = Bookshelves
 -- | Creates a value of 'Bookshelves' with the minimum fields required to make a request.
 newBookshelves ::
   Bookshelves
-newBookshelves = Bookshelves {items = Core.Nothing, kind = Core.Nothing}
+newBookshelves =
+  Bookshelves {items = Core.Nothing, kind = Core.Nothing}
 
 instance Core.FromJSON Bookshelves where
   parseJSON =
@@ -1167,16 +1140,15 @@ instance Core.FromJSON Bookshelves where
       "Bookshelves"
       ( \o ->
           Bookshelves
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Bookshelves where
   toJSON Bookshelves {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 --
@@ -1200,26 +1172,22 @@ instance Core.FromJSON Category where
       "Category"
       ( \o ->
           Category
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Category where
   toJSON Category {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 --
 -- /See:/ 'newCategory_ItemsItem' smart constructor.
 data Category_ItemsItem = Category_ItemsItem
-  { -- |
-    badgeUrl :: (Core.Maybe Core.Text),
-    -- |
+  { badgeUrl :: (Core.Maybe Core.Text),
     categoryId :: (Core.Maybe Core.Text),
-    -- |
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1326,16 +1294,14 @@ instance Core.ToJSON ConcurrentAccessRestriction where
       ( Core.catMaybes
           [ ("deviceAllowed" Core..=) Core.<$> deviceAllowed,
             ("kind" Core..=) Core.<$> kind,
-            ("maxConcurrentDevices" Core..=)
-              Core.<$> maxConcurrentDevices,
+            ("maxConcurrentDevices" Core..=) Core.<$> maxConcurrentDevices,
             ("message" Core..=) Core.<$> message,
             ("nonce" Core..=) Core.<$> nonce,
             ("reasonCode" Core..=) Core.<$> reasonCode,
             ("restricted" Core..=) Core.<$> restricted,
             ("signature" Core..=) Core.<$> signature,
             ("source" Core..=) Core.<$> source,
-            ("timeWindowSeconds" Core..=)
-              Core.<$> timeWindowSeconds,
+            ("timeWindowSeconds" Core..=) Core.<$> timeWindowSeconds,
             ("volumeId" Core..=) Core.<$> volumeId
           ]
       )
@@ -1416,11 +1382,8 @@ instance Core.ToJSON DictionaryAnnotationdata where
 --
 -- /See:/ 'newDictlayerdata' smart constructor.
 data Dictlayerdata = Dictlayerdata
-  { -- |
-    common :: (Core.Maybe Dictlayerdata_Common),
-    -- |
+  { common :: (Core.Maybe Dictlayerdata_Common),
     dict :: (Core.Maybe Dictlayerdata_Dict),
-    -- |
     kind :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1467,27 +1430,24 @@ newtype Dictlayerdata_Common = Dictlayerdata_Common
 -- | Creates a value of 'Dictlayerdata_Common' with the minimum fields required to make a request.
 newDictlayerdata_Common ::
   Dictlayerdata_Common
-newDictlayerdata_Common = Dictlayerdata_Common {title = Core.Nothing}
+newDictlayerdata_Common =
+  Dictlayerdata_Common {title = Core.Nothing}
 
 instance Core.FromJSON Dictlayerdata_Common where
   parseJSON =
     Core.withObject
       "Dictlayerdata_Common"
-      ( \o ->
-          Dictlayerdata_Common Core.<$> (o Core..:? "title")
-      )
+      (\o -> Dictlayerdata_Common Core.<$> (o Core..:? "title"))
 
 instance Core.ToJSON Dictlayerdata_Common where
   toJSON Dictlayerdata_Common {..} =
-    Core.object
-      (Core.catMaybes [("title" Core..=) Core.<$> title])
+    Core.object (Core.catMaybes [("title" Core..=) Core.<$> title])
 
 --
 -- /See:/ 'newDictlayerdata_Dict' smart constructor.
 data Dictlayerdata_Dict = Dictlayerdata_Dict
   { -- | The source, url and attribution for this dictionary data.
     source :: (Core.Maybe Dictlayerdata_Dict_Source),
-    -- |
     words :: (Core.Maybe [Dictlayerdata_Dict_WordsItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1504,7 +1464,8 @@ instance Core.FromJSON Dictlayerdata_Dict where
       "Dictlayerdata_Dict"
       ( \o ->
           Dictlayerdata_Dict
-            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "words")
+            Core.<$> (o Core..:? "source")
+            Core.<*> (o Core..:? "words")
       )
 
 instance Core.ToJSON Dictlayerdata_Dict where
@@ -1520,9 +1481,7 @@ instance Core.ToJSON Dictlayerdata_Dict where
 --
 -- /See:/ 'newDictlayerdata_Dict_Source' smart constructor.
 data Dictlayerdata_Dict_Source = Dictlayerdata_Dict_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1531,7 +1490,10 @@ data Dictlayerdata_Dict_Source = Dictlayerdata_Dict_Source
 newDictlayerdata_Dict_Source ::
   Dictlayerdata_Dict_Source
 newDictlayerdata_Dict_Source =
-  Dictlayerdata_Dict_Source {attribution = Core.Nothing, url = Core.Nothing}
+  Dictlayerdata_Dict_Source
+    { attribution = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON Dictlayerdata_Dict_Source where
   parseJSON =
@@ -1555,11 +1517,8 @@ instance Core.ToJSON Dictlayerdata_Dict_Source where
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem = Dictlayerdata_Dict_WordsItem
-  { -- |
-    derivatives :: (Core.Maybe [Dictlayerdata_Dict_WordsItem_DerivativesItem]),
-    -- |
+  { derivatives :: (Core.Maybe [Dictlayerdata_Dict_WordsItem_DerivativesItem]),
     examples :: (Core.Maybe [Dictlayerdata_Dict_WordsItem_ExamplesItem]),
-    -- |
     senses :: (Core.Maybe [Dictlayerdata_Dict_WordsItem_SensesItem]),
     -- | The words with different meanings but not related words, e.g. \"go\" (game) and \"go\" (verb).
     source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_Source)
@@ -1603,9 +1562,7 @@ instance Core.ToJSON Dictlayerdata_Dict_WordsItem where
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_DerivativesItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_DerivativesItem = Dictlayerdata_Dict_WordsItem_DerivativesItem
-  { -- |
-    source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_DerivativesItem_Source),
-    -- |
+  { source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_DerivativesItem_Source),
     text :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1615,41 +1572,34 @@ newDictlayerdata_Dict_WordsItem_DerivativesItem ::
   Dictlayerdata_Dict_WordsItem_DerivativesItem
 newDictlayerdata_Dict_WordsItem_DerivativesItem =
   Dictlayerdata_Dict_WordsItem_DerivativesItem
-    { source = Core.Nothing,
+    { source =
+        Core.Nothing,
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Dictlayerdata_Dict_WordsItem_DerivativesItem
-  where
+instance Core.FromJSON Dictlayerdata_Dict_WordsItem_DerivativesItem where
   parseJSON =
     Core.withObject
       "Dictlayerdata_Dict_WordsItem_DerivativesItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_DerivativesItem
-            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "source")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    Dictlayerdata_Dict_WordsItem_DerivativesItem
-  where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_DerivativesItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("source" Core..=) Core.<$> source,
-              ("text" Core..=) Core.<$> text
-            ]
-        )
+instance Core.ToJSON Dictlayerdata_Dict_WordsItem_DerivativesItem where
+  toJSON Dictlayerdata_Dict_WordsItem_DerivativesItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("source" Core..=) Core.<$> source,
+            ("text" Core..=) Core.<$> text
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_DerivativesItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_DerivativesItem_Source = Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1659,7 +1609,8 @@ newDictlayerdata_Dict_WordsItem_DerivativesItem_Source ::
   Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
 newDictlayerdata_Dict_WordsItem_DerivativesItem_Source =
   Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
-    { attribution = Core.Nothing,
+    { attribution =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -1673,28 +1624,25 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
             Core.<$> (o Core..:? "attribution")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
   Core.ToJSON
     Dictlayerdata_Dict_WordsItem_DerivativesItem_Source
   where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_DerivativesItem_Source {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attribution" Core..=) Core.<$> attribution,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+  toJSON Dictlayerdata_Dict_WordsItem_DerivativesItem_Source {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attribution" Core..=) Core.<$> attribution,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_ExamplesItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_ExamplesItem = Dictlayerdata_Dict_WordsItem_ExamplesItem
-  { -- |
-    source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_ExamplesItem_Source),
-    -- |
+  { source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_ExamplesItem_Source),
     text :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1708,22 +1656,17 @@ newDictlayerdata_Dict_WordsItem_ExamplesItem =
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Dictlayerdata_Dict_WordsItem_ExamplesItem
-  where
+instance Core.FromJSON Dictlayerdata_Dict_WordsItem_ExamplesItem where
   parseJSON =
     Core.withObject
       "Dictlayerdata_Dict_WordsItem_ExamplesItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_ExamplesItem
-            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "source")
+            Core.<*> (o Core..:? "text")
       )
 
-instance
-  Core.ToJSON
-    Dictlayerdata_Dict_WordsItem_ExamplesItem
-  where
+instance Core.ToJSON Dictlayerdata_Dict_WordsItem_ExamplesItem where
   toJSON Dictlayerdata_Dict_WordsItem_ExamplesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -1735,9 +1678,7 @@ instance
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_ExamplesItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_ExamplesItem_Source = Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1747,7 +1688,8 @@ newDictlayerdata_Dict_WordsItem_ExamplesItem_Source ::
   Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
 newDictlayerdata_Dict_WordsItem_ExamplesItem_Source =
   Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
-    { attribution = Core.Nothing,
+    { attribution =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -1761,46 +1703,37 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
             Core.<$> (o Core..:? "attribution")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
   Core.ToJSON
     Dictlayerdata_Dict_WordsItem_ExamplesItem_Source
   where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_ExamplesItem_Source {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attribution" Core..=) Core.<$> attribution,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+  toJSON Dictlayerdata_Dict_WordsItem_ExamplesItem_Source {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attribution" Core..=) Core.<$> attribution,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem = Dictlayerdata_Dict_WordsItem_SensesItem
-  { -- |
-    conjugations ::
+  { conjugations ::
       ( Core.Maybe
           [Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem]
       ),
-    -- |
     definitions ::
       ( Core.Maybe
           [Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem]
       ),
-    -- |
     partOfSpeech :: (Core.Maybe Core.Text),
-    -- |
     pronunciation :: (Core.Maybe Core.Text),
-    -- |
     pronunciationUrl :: (Core.Maybe Core.Text),
-    -- |
     source :: (Core.Maybe Dictlayerdata_Dict_WordsItem_SensesItem_Source),
-    -- |
     syllabification :: (Core.Maybe Core.Text),
-    -- |
     synonyms :: (Core.Maybe [Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1810,7 +1743,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem ::
   Dictlayerdata_Dict_WordsItem_SensesItem
 newDictlayerdata_Dict_WordsItem_SensesItem =
   Dictlayerdata_Dict_WordsItem_SensesItem
-    { conjugations = Core.Nothing,
+    { conjugations =
+        Core.Nothing,
       definitions = Core.Nothing,
       partOfSpeech = Core.Nothing,
       pronunciation = Core.Nothing,
@@ -1820,10 +1754,7 @@ newDictlayerdata_Dict_WordsItem_SensesItem =
       synonyms = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem
-  where
+instance Core.FromJSON Dictlayerdata_Dict_WordsItem_SensesItem where
   parseJSON =
     Core.withObject
       "Dictlayerdata_Dict_WordsItem_SensesItem"
@@ -1839,10 +1770,7 @@ instance
             Core.<*> (o Core..:? "synonyms")
       )
 
-instance
-  Core.ToJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem
-  where
+instance Core.ToJSON Dictlayerdata_Dict_WordsItem_SensesItem where
   toJSON Dictlayerdata_Dict_WordsItem_SensesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -1850,8 +1778,7 @@ instance
             ("definitions" Core..=) Core.<$> definitions,
             ("partOfSpeech" Core..=) Core.<$> partOfSpeech,
             ("pronunciation" Core..=) Core.<$> pronunciation,
-            ("pronunciationUrl" Core..=)
-              Core.<$> pronunciationUrl,
+            ("pronunciationUrl" Core..=) Core.<$> pronunciationUrl,
             ("source" Core..=) Core.<$> source,
             ("syllabification" Core..=) Core.<$> syllabification,
             ("synonyms" Core..=) Core.<$> synonyms
@@ -1861,9 +1788,7 @@ instance
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem = Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
-  { -- |
-    type' :: (Core.Maybe Core.Text),
-    -- |
+  { type' :: (Core.Maybe Core.Text),
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1873,7 +1798,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem ::
   Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
 newDictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem =
   Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
-    { type' = Core.Nothing,
+    { type' =
+        Core.Nothing,
       value = Core.Nothing
     }
 
@@ -1886,28 +1812,26 @@ instance
       "Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "value")
       )
 
 instance
   Core.ToJSON
     Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem
   where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("type" Core..=) Core.<$> type',
-              ("value" Core..=) Core.<$> value
-            ]
-        )
+  toJSON Dictlayerdata_Dict_WordsItem_SensesItem_ConjugationsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("type" Core..=) Core.<$> type',
+            ("value" Core..=) Core.<$> value
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem = Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
-  { -- |
-    definition :: (Core.Maybe Core.Text),
-    -- |
+  { definition :: (Core.Maybe Core.Text),
     examples ::
       ( Core.Maybe
           [Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem]
@@ -1920,7 +1844,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem ::
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
 newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem =
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
-    { definition = Core.Nothing,
+    { definition =
+        Core.Nothing,
       examples = Core.Nothing
     }
 
@@ -1934,31 +1859,28 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
             Core.<$> (o Core..:? "definition")
-              Core.<*> (o Core..:? "examples")
+            Core.<*> (o Core..:? "examples")
       )
 
 instance
   Core.ToJSON
     Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem
   where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("definition" Core..=) Core.<$> definition,
-              ("examples" Core..=) Core.<$> examples
-            ]
-        )
+  toJSON Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("definition" Core..=) Core.<$> definition,
+            ("examples" Core..=) Core.<$> examples
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem = Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
-  { -- |
-    source ::
+  { source ::
       ( Core.Maybe
           Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
       ),
-    -- |
     text :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1968,7 +1890,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem ::
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
 newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem =
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
-    { source = Core.Nothing,
+    { source =
+        Core.Nothing,
       text = Core.Nothing
     }
 
@@ -1981,7 +1904,8 @@ instance
       "Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem
-            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "source")
+            Core.<*> (o Core..:? "text")
       )
 
 instance
@@ -2000,9 +1924,7 @@ instance
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source = Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2012,7 +1934,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source :
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
 newDictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source =
   Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
-    { attribution = Core.Nothing,
+    { attribution =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -2026,7 +1949,7 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_DefinitionsItem_ExamplesItem_Source
             Core.<$> (o Core..:? "attribution")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
@@ -2045,9 +1968,7 @@ instance
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_Source = Dictlayerdata_Dict_WordsItem_SensesItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2057,7 +1978,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_Source ::
   Dictlayerdata_Dict_WordsItem_SensesItem_Source
 newDictlayerdata_Dict_WordsItem_SensesItem_Source =
   Dictlayerdata_Dict_WordsItem_SensesItem_Source
-    { attribution = Core.Nothing,
+    { attribution =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -2071,31 +1993,25 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_Source
             Core.<$> (o Core..:? "attribution")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem_Source
-  where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem_Source {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("attribution" Core..=) Core.<$> attribution,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON Dictlayerdata_Dict_WordsItem_SensesItem_Source where
+  toJSON Dictlayerdata_Dict_WordsItem_SensesItem_Source {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("attribution" Core..=) Core.<$> attribution,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem = Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
-  { -- |
-    source ::
+  { source ::
       ( Core.Maybe
           Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
       ),
-    -- |
     text :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2105,7 +2021,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem ::
   Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
 newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem =
   Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
-    { source = Core.Nothing,
+    { source =
+        Core.Nothing,
       text = Core.Nothing
     }
 
@@ -2118,28 +2035,26 @@ instance
       "Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem"
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
-            Core.<$> (o Core..:? "source") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "source")
+            Core.<*> (o Core..:? "text")
       )
 
 instance
   Core.ToJSON
     Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem
   where
-  toJSON
-    Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("source" Core..=) Core.<$> source,
-              ("text" Core..=) Core.<$> text
-            ]
-        )
+  toJSON Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("source" Core..=) Core.<$> source,
+            ("text" Core..=) Core.<$> text
+          ]
+      )
 
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source = Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2149,7 +2064,8 @@ newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source ::
   Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
 newDictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source =
   Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
-    { attribution = Core.Nothing,
+    { attribution =
+        Core.Nothing,
       url = Core.Nothing
     }
 
@@ -2163,7 +2079,7 @@ instance
       ( \o ->
           Dictlayerdata_Dict_WordsItem_SensesItem_SynonymsItem_Source
             Core.<$> (o Core..:? "attribution")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "url")
       )
 
 instance
@@ -2183,9 +2099,7 @@ instance
 --
 -- /See:/ 'newDictlayerdata_Dict_WordsItem_Source' smart constructor.
 data Dictlayerdata_Dict_WordsItem_Source = Dictlayerdata_Dict_WordsItem_Source
-  { -- |
-    attribution :: (Core.Maybe Core.Text),
-    -- |
+  { attribution :: (Core.Maybe Core.Text),
     url :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2199,10 +2113,7 @@ newDictlayerdata_Dict_WordsItem_Source =
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Dictlayerdata_Dict_WordsItem_Source
-  where
+instance Core.FromJSON Dictlayerdata_Dict_WordsItem_Source where
   parseJSON =
     Core.withObject
       "Dictlayerdata_Dict_WordsItem_Source"
@@ -2212,10 +2123,7 @@ instance
             Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    Dictlayerdata_Dict_WordsItem_Source
-  where
+instance Core.ToJSON Dictlayerdata_Dict_WordsItem_Source where
   toJSON Dictlayerdata_Dict_WordsItem_Source {..} =
     Core.object
       ( Core.catMaybes
@@ -2227,11 +2135,9 @@ instance
 --
 -- /See:/ 'newDiscoveryclusters' smart constructor.
 data Discoveryclusters = Discoveryclusters
-  { -- |
-    clusters :: (Core.Maybe [Discoveryclusters_ClustersItem]),
+  { clusters :: (Core.Maybe [Discoveryclusters_ClustersItem]),
     -- | Resorce type.
     kind :: (Core.Maybe Core.Text),
-    -- |
     totalClusters :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2270,20 +2176,14 @@ instance Core.ToJSON Discoveryclusters where
 --
 -- /See:/ 'newDiscoveryclusters_ClustersItem' smart constructor.
 data Discoveryclusters_ClustersItem = Discoveryclusters_ClustersItem
-  { -- |
-    bannerWithContentContainer ::
+  { bannerWithContentContainer ::
       ( Core.Maybe
           Discoveryclusters_ClustersItem_Banner_with_content_container
       ),
-    -- |
     subTitle :: (Core.Maybe Core.Text),
-    -- |
     title :: (Core.Maybe Core.Text),
-    -- |
     totalVolumes :: (Core.Maybe Core.Int32),
-    -- |
     uid :: (Core.Maybe Core.Text),
-    -- |
     volumes :: (Core.Maybe [Volume])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2293,7 +2193,8 @@ newDiscoveryclusters_ClustersItem ::
   Discoveryclusters_ClustersItem
 newDiscoveryclusters_ClustersItem =
   Discoveryclusters_ClustersItem
-    { bannerWithContentContainer = Core.Nothing,
+    { bannerWithContentContainer =
+        Core.Nothing,
       subTitle = Core.Nothing,
       title = Core.Nothing,
       totalVolumes = Core.Nothing,
@@ -2332,17 +2233,11 @@ instance Core.ToJSON Discoveryclusters_ClustersItem where
 --
 -- /See:/ 'newDiscoveryclusters_ClustersItem_Banner_with_content_container' smart constructor.
 data Discoveryclusters_ClustersItem_Banner_with_content_container = Discoveryclusters_ClustersItem_Banner_with_content_container
-  { -- |
-    fillColorArgb :: (Core.Maybe Core.Text),
-    -- |
+  { fillColorArgb :: (Core.Maybe Core.Text),
     imageUrl :: (Core.Maybe Core.Text),
-    -- |
     maskColorArgb :: (Core.Maybe Core.Text),
-    -- |
     moreButtonText :: (Core.Maybe Core.Text),
-    -- |
     moreButtonUrl :: (Core.Maybe Core.Text),
-    -- |
     textColorArgb :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2352,7 +2247,8 @@ newDiscoveryclusters_ClustersItem_Banner_with_content_container ::
   Discoveryclusters_ClustersItem_Banner_with_content_container
 newDiscoveryclusters_ClustersItem_Banner_with_content_container =
   Discoveryclusters_ClustersItem_Banner_with_content_container
-    { fillColorArgb = Core.Nothing,
+    { fillColorArgb =
+        Core.Nothing,
       imageUrl = Core.Nothing,
       maskColorArgb = Core.Nothing,
       moreButtonText = Core.Nothing,
@@ -2370,11 +2266,11 @@ instance
       ( \o ->
           Discoveryclusters_ClustersItem_Banner_with_content_container
             Core.<$> (o Core..:? "fillColorArgb")
-              Core.<*> (o Core..:? "imageUrl")
-              Core.<*> (o Core..:? "maskColorArgb")
-              Core.<*> (o Core..:? "moreButtonText")
-              Core.<*> (o Core..:? "moreButtonUrl")
-              Core.<*> (o Core..:? "textColorArgb")
+            Core.<*> (o Core..:? "imageUrl")
+            Core.<*> (o Core..:? "maskColorArgb")
+            Core.<*> (o Core..:? "moreButtonText")
+            Core.<*> (o Core..:? "moreButtonUrl")
+            Core.<*> (o Core..:? "textColorArgb")
       )
 
 instance
@@ -2468,12 +2364,10 @@ instance Core.ToJSON DownloadAccessRestriction where
     Core.object
       ( Core.catMaybes
           [ ("deviceAllowed" Core..=) Core.<$> deviceAllowed,
-            ("downloadsAcquired" Core..=)
-              Core.<$> downloadsAcquired,
+            ("downloadsAcquired" Core..=) Core.<$> downloadsAcquired,
             ("justAcquired" Core..=) Core.<$> justAcquired,
             ("kind" Core..=) Core.<$> kind,
-            ("maxDownloadDevices" Core..=)
-              Core.<$> maxDownloadDevices,
+            ("maxDownloadDevices" Core..=) Core.<$> maxDownloadDevices,
             ("message" Core..=) Core.<$> message,
             ("nonce" Core..=) Core.<$> nonce,
             ("reasonCode" Core..=) Core.<$> reasonCode,
@@ -2498,7 +2392,10 @@ data DownloadAccesses = DownloadAccesses
 newDownloadAccesses ::
   DownloadAccesses
 newDownloadAccesses =
-  DownloadAccesses {downloadAccessList = Core.Nothing, kind = Core.Nothing}
+  DownloadAccesses
+    { downloadAccessList = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON DownloadAccesses where
   parseJSON =
@@ -2514,8 +2411,7 @@ instance Core.ToJSON DownloadAccesses where
   toJSON DownloadAccesses {..} =
     Core.object
       ( Core.catMaybes
-          [ ("downloadAccessList" Core..=)
-              Core.<$> downloadAccessList,
+          [ ("downloadAccessList" Core..=) Core.<$> downloadAccessList,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -2532,8 +2428,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -2551,7 +2446,8 @@ data FamilyInfo = FamilyInfo
 -- | Creates a value of 'FamilyInfo' with the minimum fields required to make a request.
 newFamilyInfo ::
   FamilyInfo
-newFamilyInfo = FamilyInfo {kind = Core.Nothing, membership = Core.Nothing}
+newFamilyInfo =
+  FamilyInfo {kind = Core.Nothing, membership = Core.Nothing}
 
 instance Core.FromJSON FamilyInfo where
   parseJSON =
@@ -2582,7 +2478,6 @@ data FamilyInfo_Membership = FamilyInfo_Membership
     ageGroup :: (Core.Maybe Core.Text),
     -- | The maximum allowed maturity rating for the user.
     allowedMaturityRating :: (Core.Maybe Core.Text),
-    -- |
     isInFamily :: (Core.Maybe Core.Bool),
     -- | The role of the user in the family.
     role' :: (Core.Maybe Core.Text)
@@ -2618,11 +2513,9 @@ instance Core.ToJSON FamilyInfo_Membership where
   toJSON FamilyInfo_Membership {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acquirePermission" Core..=)
-              Core.<$> acquirePermission,
+          [ ("acquirePermission" Core..=) Core.<$> acquirePermission,
             ("ageGroup" Core..=) Core.<$> ageGroup,
-            ("allowedMaturityRating" Core..=)
-              Core.<$> allowedMaturityRating,
+            ("allowedMaturityRating" Core..=) Core.<$> allowedMaturityRating,
             ("isInFamily" Core..=) Core.<$> isInFamily,
             ("role" Core..=) Core.<$> role'
           ]
@@ -2704,11 +2597,8 @@ instance Core.ToJSON GeoAnnotationdata where
 --
 -- /See:/ 'newGeolayerdata' smart constructor.
 data Geolayerdata = Geolayerdata
-  { -- |
-    common :: (Core.Maybe Geolayerdata_Common),
-    -- |
+  { common :: (Core.Maybe Geolayerdata_Common),
     geo :: (Core.Maybe Geolayerdata_Geo),
-    -- |
     kind :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2717,7 +2607,11 @@ data Geolayerdata = Geolayerdata
 newGeolayerdata ::
   Geolayerdata
 newGeolayerdata =
-  Geolayerdata {common = Core.Nothing, geo = Core.Nothing, kind = Core.Nothing}
+  Geolayerdata
+    { common = Core.Nothing,
+      geo = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON Geolayerdata where
   parseJSON =
@@ -2865,9 +2759,7 @@ instance Core.ToJSON Geolayerdata_Geo where
 --
 -- /See:/ 'newGeolayerdata_Geo_Viewport' smart constructor.
 data Geolayerdata_Geo_Viewport = Geolayerdata_Geo_Viewport
-  { -- |
-    hi :: (Core.Maybe Geolayerdata_Geo_Viewport_Hi),
-    -- |
+  { hi :: (Core.Maybe Geolayerdata_Geo_Viewport_Hi),
     lo :: (Core.Maybe Geolayerdata_Geo_Viewport_Lo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2884,24 +2776,21 @@ instance Core.FromJSON Geolayerdata_Geo_Viewport where
       "Geolayerdata_Geo_Viewport"
       ( \o ->
           Geolayerdata_Geo_Viewport
-            Core.<$> (o Core..:? "hi") Core.<*> (o Core..:? "lo")
+            Core.<$> (o Core..:? "hi")
+            Core.<*> (o Core..:? "lo")
       )
 
 instance Core.ToJSON Geolayerdata_Geo_Viewport where
   toJSON Geolayerdata_Geo_Viewport {..} =
     Core.object
       ( Core.catMaybes
-          [ ("hi" Core..=) Core.<$> hi,
-            ("lo" Core..=) Core.<$> lo
-          ]
+          [("hi" Core..=) Core.<$> hi, ("lo" Core..=) Core.<$> lo]
       )
 
 --
 -- /See:/ 'newGeolayerdata_Geo_Viewport_Hi' smart constructor.
 data Geolayerdata_Geo_Viewport_Hi = Geolayerdata_Geo_Viewport_Hi
-  { -- |
-    latitude :: (Core.Maybe Core.Double),
-    -- |
+  { latitude :: (Core.Maybe Core.Double),
     longitude :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2937,9 +2826,7 @@ instance Core.ToJSON Geolayerdata_Geo_Viewport_Hi where
 --
 -- /See:/ 'newGeolayerdata_Geo_Viewport_Lo' smart constructor.
 data Geolayerdata_Geo_Viewport_Lo = Geolayerdata_Geo_Viewport_Lo
-  { -- |
-    latitude :: (Core.Maybe Core.Double),
-    -- |
+  { latitude :: (Core.Maybe Core.Double),
     longitude :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3092,11 +2979,9 @@ instance Core.ToJSON Layersummary where
   toJSON Layersummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("annotationCount" Core..=)
-              Core.<$> annotationCount,
+          [ ("annotationCount" Core..=) Core.<$> annotationCount,
             ("annotationTypes" Core..=) Core.<$> annotationTypes,
-            ("annotationsDataLink" Core..=)
-              Core.<$> annotationsDataLink,
+            ("annotationsDataLink" Core..=) Core.<$> annotationsDataLink,
             ("annotationsLink" Core..=) Core.<$> annotationsLink,
             ("contentVersion" Core..=) Core.<$> contentVersion,
             ("dataCount" Core..=) Core.<$> dataCount,
@@ -3132,30 +3017,24 @@ instance Core.FromJSON Metadata where
       "Metadata"
       ( \o ->
           Metadata
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Metadata where
   toJSON Metadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 --
 -- /See:/ 'newMetadata_ItemsItem' smart constructor.
 data Metadata_ItemsItem = Metadata_ItemsItem
-  { -- |
-    downloadUrl :: (Core.Maybe Core.Text),
-    -- |
+  { downloadUrl :: (Core.Maybe Core.Text),
     encryptedKey :: (Core.Maybe Core.Text),
-    -- |
     language :: (Core.Maybe Core.Text),
-    -- |
     size :: (Core.Maybe Core.Int64),
-    -- |
     version :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3181,12 +3060,8 @@ instance Core.FromJSON Metadata_ItemsItem where
             Core.<$> (o Core..:? "download_url")
             Core.<*> (o Core..:? "encrypted_key")
             Core.<*> (o Core..:? "language")
-            Core.<*> ( o Core..:? "size"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "version"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "size" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "version" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Metadata_ItemsItem where
@@ -3197,45 +3072,30 @@ instance Core.ToJSON Metadata_ItemsItem where
             ("encrypted_key" Core..=) Core.<$> encryptedKey,
             ("language" Core..=) Core.<$> language,
             ("size" Core..=) Core.. Core.AsText Core.<$> size,
-            ("version" Core..=) Core.. Core.AsText
-              Core.<$> version
+            ("version" Core..=) Core.. Core.AsText Core.<$> version
           ]
       )
 
 --
 -- /See:/ 'newNotification' smart constructor.
 data Notification = Notification
-  { -- |
-    body :: (Core.Maybe Core.Text),
+  { body :: (Core.Maybe Core.Text),
     -- | The list of crm experiment ids.
     crmExperimentIds :: (Core.Maybe [Core.Int64]),
-    -- |
     docId :: (Core.Maybe Core.Text),
-    -- |
     docType :: (Core.Maybe Core.Text),
-    -- |
     dontShowNotification :: (Core.Maybe Core.Bool),
-    -- |
     iconUrl :: (Core.Maybe Core.Text),
-    -- |
     isDocumentMature :: (Core.Maybe Core.Bool),
     -- | Resource type.
     kind :: (Core.Maybe Core.Text),
-    -- |
     notificationGroup :: (Core.Maybe Core.Text),
-    -- |
     notificationType :: (Core.Maybe Core.Text),
-    -- |
     pcampaignId :: (Core.Maybe Core.Text),
-    -- |
     reason :: (Core.Maybe Core.Text),
-    -- |
     showNotificationSettingsAction :: (Core.Maybe Core.Bool),
-    -- |
     targetUrl :: (Core.Maybe Core.Text),
-    -- |
     timeToExpireMs :: (Core.Maybe Core.Int64),
-    -- |
     title :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3270,7 +3130,8 @@ instance Core.FromJSON Notification where
       ( \o ->
           Notification
             Core.<$> (o Core..:? "body")
-            Core.<*> ( o Core..:? "crmExperimentIds"
+            Core.<*> ( o
+                         Core..:? "crmExperimentIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "doc_id")
@@ -3285,9 +3146,7 @@ instance Core.FromJSON Notification where
             Core.<*> (o Core..:? "reason")
             Core.<*> (o Core..:? "show_notification_settings_action")
             Core.<*> (o Core..:? "targetUrl")
-            Core.<*> ( o Core..:? "timeToExpireMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "timeToExpireMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "title")
       )
 
@@ -3301,22 +3160,19 @@ instance Core.ToJSON Notification where
               Core.<$> crmExperimentIds,
             ("doc_id" Core..=) Core.<$> docId,
             ("doc_type" Core..=) Core.<$> docType,
-            ("dont_show_notification" Core..=)
-              Core.<$> dontShowNotification,
+            ("dont_show_notification" Core..=) Core.<$> dontShowNotification,
             ("iconUrl" Core..=) Core.<$> iconUrl,
-            ("is_document_mature" Core..=)
-              Core.<$> isDocumentMature,
+            ("is_document_mature" Core..=) Core.<$> isDocumentMature,
             ("kind" Core..=) Core.<$> kind,
-            ("notificationGroup" Core..=)
-              Core.<$> notificationGroup,
-            ("notification_type" Core..=)
-              Core.<$> notificationType,
+            ("notificationGroup" Core..=) Core.<$> notificationGroup,
+            ("notification_type" Core..=) Core.<$> notificationType,
             ("pcampaign_id" Core..=) Core.<$> pcampaignId,
             ("reason" Core..=) Core.<$> reason,
             ("show_notification_settings_action" Core..=)
               Core.<$> showNotificationSettingsAction,
             ("targetUrl" Core..=) Core.<$> targetUrl,
-            ("timeToExpireMs" Core..=) Core.. Core.AsText
+            ("timeToExpireMs" Core..=)
+              Core.. Core.AsText
               Core.<$> timeToExpireMs,
             ("title" Core..=) Core.<$> title
           ]
@@ -3342,29 +3198,22 @@ instance Core.FromJSON Offers where
     Core.withObject
       "Offers"
       ( \o ->
-          Offers
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+          Offers Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON Offers where
   toJSON Offers {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 --
 -- /See:/ 'newOffers_ItemsItem' smart constructor.
 data Offers_ItemsItem = Offers_ItemsItem
-  { -- |
-    artUrl :: (Core.Maybe Core.Text),
-    -- |
+  { artUrl :: (Core.Maybe Core.Text),
     gservicesKey :: (Core.Maybe Core.Text),
-    -- |
     id :: (Core.Maybe Core.Text),
-    -- |
     items :: (Core.Maybe [Offers_ItemsItem_ItemsItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3406,17 +3255,11 @@ instance Core.ToJSON Offers_ItemsItem where
 --
 -- /See:/ 'newOffers_ItemsItem_ItemsItem' smart constructor.
 data Offers_ItemsItem_ItemsItem = Offers_ItemsItem_ItemsItem
-  { -- |
-    author :: (Core.Maybe Core.Text),
-    -- |
+  { author :: (Core.Maybe Core.Text),
     canonicalVolumeLink :: (Core.Maybe Core.Text),
-    -- |
     coverUrl :: (Core.Maybe Core.Text),
-    -- |
     description :: (Core.Maybe Core.Text),
-    -- |
     title :: (Core.Maybe Core.Text),
-    -- |
     volumeId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3453,8 +3296,7 @@ instance Core.ToJSON Offers_ItemsItem_ItemsItem where
     Core.object
       ( Core.catMaybes
           [ ("author" Core..=) Core.<$> author,
-            ("canonicalVolumeLink" Core..=)
-              Core.<$> canonicalVolumeLink,
+            ("canonicalVolumeLink" Core..=) Core.<$> canonicalVolumeLink,
             ("coverUrl" Core..=) Core.<$> coverUrl,
             ("description" Core..=) Core.<$> description,
             ("title" Core..=) Core.<$> title,
@@ -3515,8 +3357,7 @@ instance Core.ToJSON ReadingPosition where
   toJSON ReadingPosition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("epubCfiPosition" Core..=)
-              Core.<$> epubCfiPosition,
+          [ ("epubCfiPosition" Core..=) Core.<$> epubCfiPosition,
             ("gbImagePosition" Core..=) Core.<$> gbImagePosition,
             ("gbTextPosition" Core..=) Core.<$> gbTextPosition,
             ("kind" Core..=) Core.<$> kind,
@@ -3563,8 +3404,7 @@ instance Core.ToJSON RequestAccessData where
   toJSON RequestAccessData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("concurrentAccess" Core..=)
-              Core.<$> concurrentAccess,
+          [ ("concurrentAccess" Core..=) Core.<$> concurrentAccess,
             ("downloadAccess" Core..=) Core.<$> downloadAccess,
             ("kind" Core..=) Core.<$> kind
           ]
@@ -3666,16 +3506,12 @@ instance Core.FromJSON Review_Author where
   parseJSON =
     Core.withObject
       "Review_Author"
-      ( \o ->
-          Review_Author Core.<$> (o Core..:? "displayName")
-      )
+      (\o -> Review_Author Core.<$> (o Core..:? "displayName"))
 
 instance Core.ToJSON Review_Author where
   toJSON Review_Author {..} =
     Core.object
-      ( Core.catMaybes
-          [("displayName" Core..=) Core.<$> displayName]
-      )
+      (Core.catMaybes [("displayName" Core..=) Core.<$> displayName])
 
 -- | Information regarding the source of this review, when the review is not from a Google Books user.
 --
@@ -3716,8 +3552,7 @@ instance Core.ToJSON Review_Source where
     Core.object
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
-            ("extraDescription" Core..=)
-              Core.<$> extraDescription,
+            ("extraDescription" Core..=) Core.<$> extraDescription,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -3727,7 +3562,6 @@ instance Core.ToJSON Review_Source where
 data Series = Series
   { -- | Resource type.
     kind :: (Core.Maybe Core.Text),
-    -- |
     series :: (Core.Maybe [Series_SeriesItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3742,8 +3576,7 @@ instance Core.FromJSON Series where
     Core.withObject
       "Series"
       ( \o ->
-          Series
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "series")
+          Series Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "series")
       )
 
 instance Core.ToJSON Series where
@@ -3758,25 +3591,15 @@ instance Core.ToJSON Series where
 --
 -- /See:/ 'newSeries_SeriesItem' smart constructor.
 data Series_SeriesItem = Series_SeriesItem
-  { -- |
-    bannerImageUrl :: (Core.Maybe Core.Text),
-    -- |
+  { bannerImageUrl :: (Core.Maybe Core.Text),
     eligibleForSubscription :: (Core.Maybe Core.Bool),
-    -- |
     imageUrl :: (Core.Maybe Core.Text),
-    -- |
     isComplete :: (Core.Maybe Core.Bool),
-    -- |
     seriesFormatType :: (Core.Maybe Core.Text),
-    -- |
     seriesId :: (Core.Maybe Core.Text),
-    -- |
     seriesSubscriptionReleaseInfo :: (Core.Maybe Series_SeriesItem_SeriesSubscriptionReleaseInfo),
-    -- |
     seriesType :: (Core.Maybe Core.Text),
-    -- |
     subscriptionId :: (Core.Maybe Core.Text),
-    -- |
     title :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3825,8 +3648,7 @@ instance Core.ToJSON Series_SeriesItem where
               Core.<$> eligibleForSubscription,
             ("imageUrl" Core..=) Core.<$> imageUrl,
             ("isComplete" Core..=) Core.<$> isComplete,
-            ("seriesFormatType" Core..=)
-              Core.<$> seriesFormatType,
+            ("seriesFormatType" Core..=) Core.<$> seriesFormatType,
             ("seriesId" Core..=) Core.<$> seriesId,
             ("seriesSubscriptionReleaseInfo" Core..=)
               Core.<$> seriesSubscriptionReleaseInfo,
@@ -3839,19 +3661,15 @@ instance Core.ToJSON Series_SeriesItem where
 --
 -- /See:/ 'newSeries_SeriesItem_SeriesSubscriptionReleaseInfo' smart constructor.
 data Series_SeriesItem_SeriesSubscriptionReleaseInfo = Series_SeriesItem_SeriesSubscriptionReleaseInfo
-  { -- |
-    cancelTime :: (Core.Maybe Core.Text),
-    -- |
+  { cancelTime :: (Core.Maybe Core.Text),
     currentReleaseInfo ::
       ( Core.Maybe
           Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
       ),
-    -- |
     nextReleaseInfo ::
       ( Core.Maybe
           Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
       ),
-    -- |
     seriesSubscriptionType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3861,7 +3679,8 @@ newSeries_SeriesItem_SeriesSubscriptionReleaseInfo ::
   Series_SeriesItem_SeriesSubscriptionReleaseInfo
 newSeries_SeriesItem_SeriesSubscriptionReleaseInfo =
   Series_SeriesItem_SeriesSubscriptionReleaseInfo
-    { cancelTime = Core.Nothing,
+    { cancelTime =
+        Core.Nothing,
       currentReleaseInfo = Core.Nothing,
       nextReleaseInfo = Core.Nothing,
       seriesSubscriptionType = Core.Nothing
@@ -3877,38 +3696,32 @@ instance
       ( \o ->
           Series_SeriesItem_SeriesSubscriptionReleaseInfo
             Core.<$> (o Core..:? "cancelTime")
-              Core.<*> (o Core..:? "currentReleaseInfo")
-              Core.<*> (o Core..:? "nextReleaseInfo")
-              Core.<*> (o Core..:? "seriesSubscriptionType")
+            Core.<*> (o Core..:? "currentReleaseInfo")
+            Core.<*> (o Core..:? "nextReleaseInfo")
+            Core.<*> (o Core..:? "seriesSubscriptionType")
       )
 
 instance
   Core.ToJSON
     Series_SeriesItem_SeriesSubscriptionReleaseInfo
   where
-  toJSON
-    Series_SeriesItem_SeriesSubscriptionReleaseInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("cancelTime" Core..=) Core.<$> cancelTime,
-              ("currentReleaseInfo" Core..=)
-                Core.<$> currentReleaseInfo,
-              ("nextReleaseInfo" Core..=) Core.<$> nextReleaseInfo,
-              ("seriesSubscriptionType" Core..=)
-                Core.<$> seriesSubscriptionType
-            ]
-        )
+  toJSON Series_SeriesItem_SeriesSubscriptionReleaseInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cancelTime" Core..=) Core.<$> cancelTime,
+            ("currentReleaseInfo" Core..=) Core.<$> currentReleaseInfo,
+            ("nextReleaseInfo" Core..=) Core.<$> nextReleaseInfo,
+            ("seriesSubscriptionType" Core..=)
+              Core.<$> seriesSubscriptionType
+          ]
+      )
 
 --
 -- /See:/ 'newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo' smart constructor.
 data Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo = Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
-  { -- |
-    amountInMicros :: (Core.Maybe Core.Double),
-    -- |
+  { amountInMicros :: (Core.Maybe Core.Double),
     currencyCode :: (Core.Maybe Core.Text),
-    -- |
     releaseNumber :: (Core.Maybe Core.Text),
-    -- |
     releaseTime :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3918,7 +3731,8 @@ newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo ::
   Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
 newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo =
   Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
-    { amountInMicros = Core.Nothing,
+    { amountInMicros =
+        Core.Nothing,
       currencyCode = Core.Nothing,
       releaseNumber = Core.Nothing,
       releaseTime = Core.Nothing
@@ -3934,9 +3748,9 @@ instance
       ( \o ->
           Series_SeriesItem_SeriesSubscriptionReleaseInfo_CurrentReleaseInfo
             Core.<$> (o Core..:? "amountInMicros")
-              Core.<*> (o Core..:? "currencyCode")
-              Core.<*> (o Core..:? "releaseNumber")
-              Core.<*> (o Core..:? "releaseTime")
+            Core.<*> (o Core..:? "currencyCode")
+            Core.<*> (o Core..:? "releaseNumber")
+            Core.<*> (o Core..:? "releaseTime")
       )
 
 instance
@@ -3957,13 +3771,9 @@ instance
 --
 -- /See:/ 'newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo' smart constructor.
 data Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo = Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
-  { -- |
-    amountInMicros :: (Core.Maybe Core.Double),
-    -- |
+  { amountInMicros :: (Core.Maybe Core.Double),
     currencyCode :: (Core.Maybe Core.Text),
-    -- |
     releaseNumber :: (Core.Maybe Core.Text),
-    -- |
     releaseTime :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3973,7 +3783,8 @@ newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo ::
   Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
 newSeries_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo =
   Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
-    { amountInMicros = Core.Nothing,
+    { amountInMicros =
+        Core.Nothing,
       currencyCode = Core.Nothing,
       releaseNumber = Core.Nothing,
       releaseTime = Core.Nothing
@@ -3989,9 +3800,9 @@ instance
       ( \o ->
           Series_SeriesItem_SeriesSubscriptionReleaseInfo_NextReleaseInfo
             Core.<$> (o Core..:? "amountInMicros")
-              Core.<*> (o Core..:? "currencyCode")
-              Core.<*> (o Core..:? "releaseNumber")
-              Core.<*> (o Core..:? "releaseTime")
+            Core.<*> (o Core..:? "currencyCode")
+            Core.<*> (o Core..:? "releaseNumber")
+            Core.<*> (o Core..:? "releaseTime")
       )
 
 instance
@@ -4014,9 +3825,7 @@ instance
 data Seriesmembership = Seriesmembership
   { -- | Resorce type.
     kind :: (Core.Maybe Core.Text),
-    -- |
     member :: (Core.Maybe [Volume]),
-    -- |
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4059,7 +3868,6 @@ data Usersettings = Usersettings
     kind :: (Core.Maybe Core.Text),
     -- | User settings in sub-objects, each for different purposes.
     notesExport :: (Core.Maybe Usersettings_NotesExport),
-    -- |
     notification :: (Core.Maybe Usersettings_Notification)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4099,9 +3907,7 @@ instance Core.ToJSON Usersettings where
 --
 -- /See:/ 'newUsersettings_NotesExport' smart constructor.
 data Usersettings_NotesExport = Usersettings_NotesExport
-  { -- |
-    folderName :: (Core.Maybe Core.Text),
-    -- |
+  { folderName :: (Core.Maybe Core.Text),
     isEnabled :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4110,7 +3916,10 @@ data Usersettings_NotesExport = Usersettings_NotesExport
 newUsersettings_NotesExport ::
   Usersettings_NotesExport
 newUsersettings_NotesExport =
-  Usersettings_NotesExport {folderName = Core.Nothing, isEnabled = Core.Nothing}
+  Usersettings_NotesExport
+    { folderName = Core.Nothing,
+      isEnabled = Core.Nothing
+    }
 
 instance Core.FromJSON Usersettings_NotesExport where
   parseJSON =
@@ -4134,15 +3943,10 @@ instance Core.ToJSON Usersettings_NotesExport where
 --
 -- /See:/ 'newUsersettings_Notification' smart constructor.
 data Usersettings_Notification = Usersettings_Notification
-  { -- |
-    matchMyInterests :: (Core.Maybe Usersettings_Notification_MatchMyInterests),
-    -- |
+  { matchMyInterests :: (Core.Maybe Usersettings_Notification_MatchMyInterests),
     moreFromAuthors :: (Core.Maybe Usersettings_Notification_MoreFromAuthors),
-    -- |
     moreFromSeries :: (Core.Maybe Usersettings_Notification_MoreFromSeries),
-    -- |
     priceDrop :: (Core.Maybe Usersettings_Notification_PriceDrop),
-    -- |
     rewardExpirations :: (Core.Maybe Usersettings_Notification_RewardExpirations)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4176,21 +3980,18 @@ instance Core.ToJSON Usersettings_Notification where
   toJSON Usersettings_Notification {..} =
     Core.object
       ( Core.catMaybes
-          [ ("matchMyInterests" Core..=)
-              Core.<$> matchMyInterests,
+          [ ("matchMyInterests" Core..=) Core.<$> matchMyInterests,
             ("moreFromAuthors" Core..=) Core.<$> moreFromAuthors,
             ("moreFromSeries" Core..=) Core.<$> moreFromSeries,
             ("priceDrop" Core..=) Core.<$> priceDrop,
-            ("rewardExpirations" Core..=)
-              Core.<$> rewardExpirations
+            ("rewardExpirations" Core..=) Core.<$> rewardExpirations
           ]
       )
 
 --
 -- /See:/ 'newUsersettings_Notification_MatchMyInterests' smart constructor.
 newtype Usersettings_Notification_MatchMyInterests = Usersettings_Notification_MatchMyInterests
-  { -- |
-    optedState :: (Core.Maybe Core.Text)
+  { optedState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4198,12 +3999,12 @@ newtype Usersettings_Notification_MatchMyInterests = Usersettings_Notification_M
 newUsersettings_Notification_MatchMyInterests ::
   Usersettings_Notification_MatchMyInterests
 newUsersettings_Notification_MatchMyInterests =
-  Usersettings_Notification_MatchMyInterests {optedState = Core.Nothing}
+  Usersettings_Notification_MatchMyInterests
+    { optedState =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Usersettings_Notification_MatchMyInterests
-  where
+instance Core.FromJSON Usersettings_Notification_MatchMyInterests where
   parseJSON =
     Core.withObject
       "Usersettings_Notification_MatchMyInterests"
@@ -4212,21 +4013,15 @@ instance
             Core.<$> (o Core..:? "opted_state")
       )
 
-instance
-  Core.ToJSON
-    Usersettings_Notification_MatchMyInterests
-  where
+instance Core.ToJSON Usersettings_Notification_MatchMyInterests where
   toJSON Usersettings_Notification_MatchMyInterests {..} =
     Core.object
-      ( Core.catMaybes
-          [("opted_state" Core..=) Core.<$> optedState]
-      )
+      (Core.catMaybes [("opted_state" Core..=) Core.<$> optedState])
 
 --
 -- /See:/ 'newUsersettings_Notification_MoreFromAuthors' smart constructor.
 newtype Usersettings_Notification_MoreFromAuthors = Usersettings_Notification_MoreFromAuthors
-  { -- |
-    optedState :: (Core.Maybe Core.Text)
+  { optedState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4234,12 +4029,12 @@ newtype Usersettings_Notification_MoreFromAuthors = Usersettings_Notification_Mo
 newUsersettings_Notification_MoreFromAuthors ::
   Usersettings_Notification_MoreFromAuthors
 newUsersettings_Notification_MoreFromAuthors =
-  Usersettings_Notification_MoreFromAuthors {optedState = Core.Nothing}
+  Usersettings_Notification_MoreFromAuthors
+    { optedState =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Usersettings_Notification_MoreFromAuthors
-  where
+instance Core.FromJSON Usersettings_Notification_MoreFromAuthors where
   parseJSON =
     Core.withObject
       "Usersettings_Notification_MoreFromAuthors"
@@ -4248,21 +4043,15 @@ instance
             Core.<$> (o Core..:? "opted_state")
       )
 
-instance
-  Core.ToJSON
-    Usersettings_Notification_MoreFromAuthors
-  where
+instance Core.ToJSON Usersettings_Notification_MoreFromAuthors where
   toJSON Usersettings_Notification_MoreFromAuthors {..} =
     Core.object
-      ( Core.catMaybes
-          [("opted_state" Core..=) Core.<$> optedState]
-      )
+      (Core.catMaybes [("opted_state" Core..=) Core.<$> optedState])
 
 --
 -- /See:/ 'newUsersettings_Notification_MoreFromSeries' smart constructor.
 newtype Usersettings_Notification_MoreFromSeries = Usersettings_Notification_MoreFromSeries
-  { -- |
-    optedState :: (Core.Maybe Core.Text)
+  { optedState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4270,12 +4059,12 @@ newtype Usersettings_Notification_MoreFromSeries = Usersettings_Notification_Mor
 newUsersettings_Notification_MoreFromSeries ::
   Usersettings_Notification_MoreFromSeries
 newUsersettings_Notification_MoreFromSeries =
-  Usersettings_Notification_MoreFromSeries {optedState = Core.Nothing}
+  Usersettings_Notification_MoreFromSeries
+    { optedState =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Usersettings_Notification_MoreFromSeries
-  where
+instance Core.FromJSON Usersettings_Notification_MoreFromSeries where
   parseJSON =
     Core.withObject
       "Usersettings_Notification_MoreFromSeries"
@@ -4284,21 +4073,15 @@ instance
             Core.<$> (o Core..:? "opted_state")
       )
 
-instance
-  Core.ToJSON
-    Usersettings_Notification_MoreFromSeries
-  where
+instance Core.ToJSON Usersettings_Notification_MoreFromSeries where
   toJSON Usersettings_Notification_MoreFromSeries {..} =
     Core.object
-      ( Core.catMaybes
-          [("opted_state" Core..=) Core.<$> optedState]
-      )
+      (Core.catMaybes [("opted_state" Core..=) Core.<$> optedState])
 
 --
 -- /See:/ 'newUsersettings_Notification_PriceDrop' smart constructor.
 newtype Usersettings_Notification_PriceDrop = Usersettings_Notification_PriceDrop
-  { -- |
-    optedState :: (Core.Maybe Core.Text)
+  { optedState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4308,10 +4091,7 @@ newUsersettings_Notification_PriceDrop ::
 newUsersettings_Notification_PriceDrop =
   Usersettings_Notification_PriceDrop {optedState = Core.Nothing}
 
-instance
-  Core.FromJSON
-    Usersettings_Notification_PriceDrop
-  where
+instance Core.FromJSON Usersettings_Notification_PriceDrop where
   parseJSON =
     Core.withObject
       "Usersettings_Notification_PriceDrop"
@@ -4320,21 +4100,15 @@ instance
             Core.<$> (o Core..:? "opted_state")
       )
 
-instance
-  Core.ToJSON
-    Usersettings_Notification_PriceDrop
-  where
+instance Core.ToJSON Usersettings_Notification_PriceDrop where
   toJSON Usersettings_Notification_PriceDrop {..} =
     Core.object
-      ( Core.catMaybes
-          [("opted_state" Core..=) Core.<$> optedState]
-      )
+      (Core.catMaybes [("opted_state" Core..=) Core.<$> optedState])
 
 --
 -- /See:/ 'newUsersettings_Notification_RewardExpirations' smart constructor.
 newtype Usersettings_Notification_RewardExpirations = Usersettings_Notification_RewardExpirations
-  { -- |
-    optedState :: (Core.Maybe Core.Text)
+  { optedState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4342,12 +4116,12 @@ newtype Usersettings_Notification_RewardExpirations = Usersettings_Notification_
 newUsersettings_Notification_RewardExpirations ::
   Usersettings_Notification_RewardExpirations
 newUsersettings_Notification_RewardExpirations =
-  Usersettings_Notification_RewardExpirations {optedState = Core.Nothing}
+  Usersettings_Notification_RewardExpirations
+    { optedState =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Usersettings_Notification_RewardExpirations
-  where
+instance Core.FromJSON Usersettings_Notification_RewardExpirations where
   parseJSON =
     Core.withObject
       "Usersettings_Notification_RewardExpirations"
@@ -4356,16 +4130,10 @@ instance
             Core.<$> (o Core..:? "opted_state")
       )
 
-instance
-  Core.ToJSON
-    Usersettings_Notification_RewardExpirations
-  where
-  toJSON
-    Usersettings_Notification_RewardExpirations {..} =
-      Core.object
-        ( Core.catMaybes
-            [("opted_state" Core..=) Core.<$> optedState]
-        )
+instance Core.ToJSON Usersettings_Notification_RewardExpirations where
+  toJSON Usersettings_Notification_RewardExpirations {..} =
+    Core.object
+      (Core.catMaybes [("opted_state" Core..=) Core.<$> optedState])
 
 --
 -- /See:/ 'newVolume' smart constructor.
@@ -4532,8 +4300,7 @@ instance Core.ToJSON Volume_AccessInfo where
   toJSON Volume_AccessInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accessViewStatus" Core..=)
-              Core.<$> accessViewStatus,
+          [ ("accessViewStatus" Core..=) Core.<$> accessViewStatus,
             ("country" Core..=) Core.<$> country,
             ("downloadAccess" Core..=) Core.<$> downloadAccess,
             ("driveImportedContentLink" Core..=)
@@ -4544,10 +4311,8 @@ instance Core.ToJSON Volume_AccessInfo where
               Core.<$> explicitOfflineLicenseManagement,
             ("pdf" Core..=) Core.<$> pdf,
             ("publicDomain" Core..=) Core.<$> publicDomain,
-            ("quoteSharingAllowed" Core..=)
-              Core.<$> quoteSharingAllowed,
-            ("textToSpeechPermission" Core..=)
-              Core.<$> textToSpeechPermission,
+            ("quoteSharingAllowed" Core..=) Core.<$> quoteSharingAllowed,
+            ("textToSpeechPermission" Core..=) Core.<$> textToSpeechPermission,
             ("viewOrderUrl" Core..=) Core.<$> viewOrderUrl,
             ("viewability" Core..=) Core.<$> viewability,
             ("webReaderLink" Core..=) Core.<$> webReaderLink
@@ -4660,14 +4425,11 @@ instance Core.FromJSON Volume_LayerInfo where
   parseJSON =
     Core.withObject
       "Volume_LayerInfo"
-      ( \o ->
-          Volume_LayerInfo Core.<$> (o Core..:? "layers")
-      )
+      (\o -> Volume_LayerInfo Core.<$> (o Core..:? "layers"))
 
 instance Core.ToJSON Volume_LayerInfo where
   toJSON Volume_LayerInfo {..} =
-    Core.object
-      (Core.catMaybes [("layers" Core..=) Core.<$> layers])
+    Core.object (Core.catMaybes [("layers" Core..=) Core.<$> layers])
 
 --
 -- /See:/ 'newVolume_LayerInfo_LayersItem' smart constructor.
@@ -4720,23 +4482,19 @@ newtype Volume_RecommendedInfo = Volume_RecommendedInfo
 -- | Creates a value of 'Volume_RecommendedInfo' with the minimum fields required to make a request.
 newVolume_RecommendedInfo ::
   Volume_RecommendedInfo
-newVolume_RecommendedInfo = Volume_RecommendedInfo {explanation = Core.Nothing}
+newVolume_RecommendedInfo =
+  Volume_RecommendedInfo {explanation = Core.Nothing}
 
 instance Core.FromJSON Volume_RecommendedInfo where
   parseJSON =
     Core.withObject
       "Volume_RecommendedInfo"
-      ( \o ->
-          Volume_RecommendedInfo
-            Core.<$> (o Core..:? "explanation")
-      )
+      (\o -> Volume_RecommendedInfo Core.<$> (o Core..:? "explanation"))
 
 instance Core.ToJSON Volume_RecommendedInfo where
   toJSON Volume_RecommendedInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("explanation" Core..=) Core.<$> explanation]
-      )
+      (Core.catMaybes [("explanation" Core..=) Core.<$> explanation])
 
 -- | Any information about a volume related to the eBookstore and\/or purchaseability. This information can depend on the country where the request originates from (i.e. books may not be for sale in certain countries).
 --
@@ -4822,7 +4580,10 @@ data Volume_SaleInfo_ListPrice = Volume_SaleInfo_ListPrice
 newVolume_SaleInfo_ListPrice ::
   Volume_SaleInfo_ListPrice
 newVolume_SaleInfo_ListPrice =
-  Volume_SaleInfo_ListPrice {amount = Core.Nothing, currencyCode = Core.Nothing}
+  Volume_SaleInfo_ListPrice
+    { amount = Core.Nothing,
+      currencyCode = Core.Nothing
+    }
 
 instance Core.FromJSON Volume_SaleInfo_ListPrice where
   parseJSON =
@@ -4888,8 +4649,7 @@ instance Core.ToJSON Volume_SaleInfo_OffersItem where
   toJSON Volume_SaleInfo_OffersItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("finskyOfferType" Core..=)
-              Core.<$> finskyOfferType,
+          [ ("finskyOfferType" Core..=) Core.<$> finskyOfferType,
             ("giftable" Core..=) Core.<$> giftable,
             ("listPrice" Core..=) Core.<$> listPrice,
             ("rentalDuration" Core..=) Core.<$> rentalDuration,
@@ -4901,9 +4661,7 @@ instance Core.ToJSON Volume_SaleInfo_OffersItem where
 --
 -- /See:/ 'newVolume_SaleInfo_OffersItem_ListPrice' smart constructor.
 data Volume_SaleInfo_OffersItem_ListPrice = Volume_SaleInfo_OffersItem_ListPrice
-  { -- |
-    amountInMicros :: (Core.Maybe Core.Double),
-    -- |
+  { amountInMicros :: (Core.Maybe Core.Double),
     currencyCode :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4913,14 +4671,12 @@ newVolume_SaleInfo_OffersItem_ListPrice ::
   Volume_SaleInfo_OffersItem_ListPrice
 newVolume_SaleInfo_OffersItem_ListPrice =
   Volume_SaleInfo_OffersItem_ListPrice
-    { amountInMicros = Core.Nothing,
+    { amountInMicros =
+        Core.Nothing,
       currencyCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volume_SaleInfo_OffersItem_ListPrice
-  where
+instance Core.FromJSON Volume_SaleInfo_OffersItem_ListPrice where
   parseJSON =
     Core.withObject
       "Volume_SaleInfo_OffersItem_ListPrice"
@@ -4930,10 +4686,7 @@ instance
             Core.<*> (o Core..:? "currencyCode")
       )
 
-instance
-  Core.ToJSON
-    Volume_SaleInfo_OffersItem_ListPrice
-  where
+instance Core.ToJSON Volume_SaleInfo_OffersItem_ListPrice where
   toJSON Volume_SaleInfo_OffersItem_ListPrice {..} =
     Core.object
       ( Core.catMaybes
@@ -4946,9 +4699,7 @@ instance
 --
 -- /See:/ 'newVolume_SaleInfo_OffersItem_RentalDuration' smart constructor.
 data Volume_SaleInfo_OffersItem_RentalDuration = Volume_SaleInfo_OffersItem_RentalDuration
-  { -- |
-    count :: (Core.Maybe Core.Double),
-    -- |
+  { count :: (Core.Maybe Core.Double),
     unit :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4962,37 +4713,28 @@ newVolume_SaleInfo_OffersItem_RentalDuration =
       unit = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volume_SaleInfo_OffersItem_RentalDuration
-  where
+instance Core.FromJSON Volume_SaleInfo_OffersItem_RentalDuration where
   parseJSON =
     Core.withObject
       "Volume_SaleInfo_OffersItem_RentalDuration"
       ( \o ->
           Volume_SaleInfo_OffersItem_RentalDuration
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "unit")
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "unit")
       )
 
-instance
-  Core.ToJSON
-    Volume_SaleInfo_OffersItem_RentalDuration
-  where
+instance Core.ToJSON Volume_SaleInfo_OffersItem_RentalDuration where
   toJSON Volume_SaleInfo_OffersItem_RentalDuration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("count" Core..=) Core.<$> count,
-            ("unit" Core..=) Core.<$> unit
-          ]
+          [("count" Core..=) Core.<$> count, ("unit" Core..=) Core.<$> unit]
       )
 
 -- | Offer retail (=discounted) price in Micros
 --
 -- /See:/ 'newVolume_SaleInfo_OffersItem_RetailPrice' smart constructor.
 data Volume_SaleInfo_OffersItem_RetailPrice = Volume_SaleInfo_OffersItem_RetailPrice
-  { -- |
-    amountInMicros :: (Core.Maybe Core.Double),
-    -- |
+  { amountInMicros :: (Core.Maybe Core.Double),
     currencyCode :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5002,14 +4744,12 @@ newVolume_SaleInfo_OffersItem_RetailPrice ::
   Volume_SaleInfo_OffersItem_RetailPrice
 newVolume_SaleInfo_OffersItem_RetailPrice =
   Volume_SaleInfo_OffersItem_RetailPrice
-    { amountInMicros = Core.Nothing,
+    { amountInMicros =
+        Core.Nothing,
       currencyCode = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volume_SaleInfo_OffersItem_RetailPrice
-  where
+instance Core.FromJSON Volume_SaleInfo_OffersItem_RetailPrice where
   parseJSON =
     Core.withObject
       "Volume_SaleInfo_OffersItem_RetailPrice"
@@ -5019,10 +4759,7 @@ instance
             Core.<*> (o Core..:? "currencyCode")
       )
 
-instance
-  Core.ToJSON
-    Volume_SaleInfo_OffersItem_RetailPrice
-  where
+instance Core.ToJSON Volume_SaleInfo_OffersItem_RetailPrice where
   toJSON Volume_SaleInfo_OffersItem_RetailPrice {..} =
     Core.object
       ( Core.catMaybes
@@ -5082,23 +4819,19 @@ newtype Volume_SearchInfo = Volume_SearchInfo
 -- | Creates a value of 'Volume_SearchInfo' with the minimum fields required to make a request.
 newVolume_SearchInfo ::
   Volume_SearchInfo
-newVolume_SearchInfo = Volume_SearchInfo {textSnippet = Core.Nothing}
+newVolume_SearchInfo =
+  Volume_SearchInfo {textSnippet = Core.Nothing}
 
 instance Core.FromJSON Volume_SearchInfo where
   parseJSON =
     Core.withObject
       "Volume_SearchInfo"
-      ( \o ->
-          Volume_SearchInfo
-            Core.<$> (o Core..:? "textSnippet")
-      )
+      (\o -> Volume_SearchInfo Core.<$> (o Core..:? "textSnippet"))
 
 instance Core.ToJSON Volume_SearchInfo where
   toJSON Volume_SearchInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("textSnippet" Core..=) Core.<$> textSnippet]
-      )
+      (Core.catMaybes [("textSnippet" Core..=) Core.<$> textSnippet])
 
 -- | User specific information related to this volume. (e.g. page this user last read or whether they purchased this book)
 --
@@ -5140,7 +4873,6 @@ data Volume_UserInfo = Volume_UserInfo
     review :: (Core.Maybe Review),
     -- | Timestamp when this volume was last modified by a user action, such as a reading position update, volume purchase or writing a review. (RFC 3339 UTC date-time format).
     updated :: (Core.Maybe Core.Text),
-    -- |
     userUploadedVolumeInfo :: (Core.Maybe Volume_UserInfo_UserUploadedVolumeInfo)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5207,12 +4939,9 @@ instance Core.ToJSON Volume_UserInfo where
             ("copy" Core..=) Core.<$> copy,
             ("entitlementType" Core..=) Core.<$> entitlementType,
             ("familySharing" Core..=) Core.<$> familySharing,
-            ("isFamilySharedFromUser" Core..=)
-              Core.<$> isFamilySharedFromUser,
-            ("isFamilySharedToUser" Core..=)
-              Core.<$> isFamilySharedToUser,
-            ("isFamilySharingAllowed" Core..=)
-              Core.<$> isFamilySharingAllowed,
+            ("isFamilySharedFromUser" Core..=) Core.<$> isFamilySharedFromUser,
+            ("isFamilySharedToUser" Core..=) Core.<$> isFamilySharedToUser,
+            ("isFamilySharingAllowed" Core..=) Core.<$> isFamilySharingAllowed,
             ("isFamilySharingDisabledByFop" Core..=)
               Core.<$> isFamilySharingDisabledByFop,
             ("isInMyBooks" Core..=) Core.<$> isInMyBooks,
@@ -5233,13 +4962,9 @@ instance Core.ToJSON Volume_UserInfo where
 --
 -- /See:/ 'newVolume_UserInfo_Copy' smart constructor.
 data Volume_UserInfo_Copy = Volume_UserInfo_Copy
-  { -- |
-    allowedCharacterCount :: (Core.Maybe Core.Int32),
-    -- |
+  { allowedCharacterCount :: (Core.Maybe Core.Int32),
     limitType :: (Core.Maybe Core.Text),
-    -- |
     remainingCharacterCount :: (Core.Maybe Core.Int32),
-    -- |
     updated :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5271,8 +4996,7 @@ instance Core.ToJSON Volume_UserInfo_Copy where
   toJSON Volume_UserInfo_Copy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedCharacterCount" Core..=)
-              Core.<$> allowedCharacterCount,
+          [ ("allowedCharacterCount" Core..=) Core.<$> allowedCharacterCount,
             ("limitType" Core..=) Core.<$> limitType,
             ("remainingCharacterCount" Core..=)
               Core.<$> remainingCharacterCount,
@@ -5319,8 +5043,7 @@ instance Core.ToJSON Volume_UserInfo_FamilySharing where
     Core.object
       ( Core.catMaybes
           [ ("familyRole" Core..=) Core.<$> familyRole,
-            ("isSharingAllowed" Core..=)
-              Core.<$> isSharingAllowed,
+            ("isSharingAllowed" Core..=) Core.<$> isSharingAllowed,
             ("isSharingDisabledByFop" Core..=)
               Core.<$> isSharingDisabledByFop
           ]
@@ -5330,9 +5053,7 @@ instance Core.ToJSON Volume_UserInfo_FamilySharing where
 --
 -- /See:/ 'newVolume_UserInfo_RentalPeriod' smart constructor.
 data Volume_UserInfo_RentalPeriod = Volume_UserInfo_RentalPeriod
-  { -- |
-    endUtcSec :: (Core.Maybe Core.Int64),
-    -- |
+  { endUtcSec :: (Core.Maybe Core.Int64),
     startUtcSec :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5352,30 +5073,23 @@ instance Core.FromJSON Volume_UserInfo_RentalPeriod where
       "Volume_UserInfo_RentalPeriod"
       ( \o ->
           Volume_UserInfo_RentalPeriod
-            Core.<$> ( o Core..:? "endUtcSec"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "startUtcSec"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "endUtcSec" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "startUtcSec" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Volume_UserInfo_RentalPeriod where
   toJSON Volume_UserInfo_RentalPeriod {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endUtcSec" Core..=) Core.. Core.AsText
-              Core.<$> endUtcSec,
-            ("startUtcSec" Core..=) Core.. Core.AsText
-              Core.<$> startUtcSec
+          [ ("endUtcSec" Core..=) Core.. Core.AsText Core.<$> endUtcSec,
+            ("startUtcSec" Core..=) Core.. Core.AsText Core.<$> startUtcSec
           ]
       )
 
 --
 -- /See:/ 'newVolume_UserInfo_UserUploadedVolumeInfo' smart constructor.
 newtype Volume_UserInfo_UserUploadedVolumeInfo = Volume_UserInfo_UserUploadedVolumeInfo
-  { -- |
-    processingState :: (Core.Maybe Core.Text)
+  { processingState :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5383,12 +5097,12 @@ newtype Volume_UserInfo_UserUploadedVolumeInfo = Volume_UserInfo_UserUploadedVol
 newVolume_UserInfo_UserUploadedVolumeInfo ::
   Volume_UserInfo_UserUploadedVolumeInfo
 newVolume_UserInfo_UserUploadedVolumeInfo =
-  Volume_UserInfo_UserUploadedVolumeInfo {processingState = Core.Nothing}
+  Volume_UserInfo_UserUploadedVolumeInfo
+    { processingState =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Volume_UserInfo_UserUploadedVolumeInfo
-  where
+instance Core.FromJSON Volume_UserInfo_UserUploadedVolumeInfo where
   parseJSON =
     Core.withObject
       "Volume_UserInfo_UserUploadedVolumeInfo"
@@ -5397,16 +5111,11 @@ instance
             Core.<$> (o Core..:? "processingState")
       )
 
-instance
-  Core.ToJSON
-    Volume_UserInfo_UserUploadedVolumeInfo
-  where
+instance Core.ToJSON Volume_UserInfo_UserUploadedVolumeInfo where
   toJSON Volume_UserInfo_UserUploadedVolumeInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("processingState" Core..=)
-              Core.<$> processingState
-          ]
+          [("processingState" Core..=) Core.<$> processingState]
       )
 
 -- | General volume information.
@@ -5441,7 +5150,6 @@ data Volume_VolumeInfo = Volume_VolumeInfo
     language :: (Core.Maybe Core.Text),
     -- | The main category to which this volume belongs. It will be the category from the categories list returned below that has the highest weight.
     mainCategory :: (Core.Maybe Core.Text),
-    -- |
     maturityRating :: (Core.Maybe Core.Text),
     -- | Total number of pages as per publisher metadata.
     pageCount :: (Core.Maybe Core.Int32),
@@ -5463,7 +5171,6 @@ data Volume_VolumeInfo = Volume_VolumeInfo
     readingModes :: (Core.Maybe Volume_VolumeInfo_ReadingModes),
     -- | Total number of sample pages as per publisher metadata.
     samplePageCount :: (Core.Maybe Core.Int32),
-    -- |
     seriesInfo :: (Core.Maybe Volumeseriesinfo),
     -- | Volume subtitle. (In LITE projection.)
     subtitle :: (Core.Maybe Core.Text),
@@ -5547,31 +5254,26 @@ instance Core.ToJSON Volume_VolumeInfo where
   toJSON Volume_VolumeInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowAnonLogging" Core..=)
-              Core.<$> allowAnonLogging,
+          [ ("allowAnonLogging" Core..=) Core.<$> allowAnonLogging,
             ("authors" Core..=) Core.<$> authors,
             ("averageRating" Core..=) Core.<$> averageRating,
-            ("canonicalVolumeLink" Core..=)
-              Core.<$> canonicalVolumeLink,
+            ("canonicalVolumeLink" Core..=) Core.<$> canonicalVolumeLink,
             ("categories" Core..=) Core.<$> categories,
             ("comicsContent" Core..=) Core.<$> comicsContent,
             ("contentVersion" Core..=) Core.<$> contentVersion,
             ("description" Core..=) Core.<$> description,
             ("dimensions" Core..=) Core.<$> dimensions,
             ("imageLinks" Core..=) Core.<$> imageLinks,
-            ("industryIdentifiers" Core..=)
-              Core.<$> industryIdentifiers,
+            ("industryIdentifiers" Core..=) Core.<$> industryIdentifiers,
             ("infoLink" Core..=) Core.<$> infoLink,
             ("language" Core..=) Core.<$> language,
             ("mainCategory" Core..=) Core.<$> mainCategory,
             ("maturityRating" Core..=) Core.<$> maturityRating,
             ("pageCount" Core..=) Core.<$> pageCount,
-            ("panelizationSummary" Core..=)
-              Core.<$> panelizationSummary,
+            ("panelizationSummary" Core..=) Core.<$> panelizationSummary,
             ("previewLink" Core..=) Core.<$> previewLink,
             ("printType" Core..=) Core.<$> printType,
-            ("printedPageCount" Core..=)
-              Core.<$> printedPageCount,
+            ("printedPageCount" Core..=) Core.<$> printedPageCount,
             ("publishedDate" Core..=) Core.<$> publishedDate,
             ("publisher" Core..=) Core.<$> publisher,
             ("ratingsCount" Core..=) Core.<$> ratingsCount,
@@ -5701,14 +5403,12 @@ newVolume_VolumeInfo_IndustryIdentifiersItem ::
   Volume_VolumeInfo_IndustryIdentifiersItem
 newVolume_VolumeInfo_IndustryIdentifiersItem =
   Volume_VolumeInfo_IndustryIdentifiersItem
-    { identifier = Core.Nothing,
+    { identifier =
+        Core.Nothing,
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volume_VolumeInfo_IndustryIdentifiersItem
-  where
+instance Core.FromJSON Volume_VolumeInfo_IndustryIdentifiersItem where
   parseJSON =
     Core.withObject
       "Volume_VolumeInfo_IndustryIdentifiersItem"
@@ -5718,10 +5418,7 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    Volume_VolumeInfo_IndustryIdentifiersItem
-  where
+instance Core.ToJSON Volume_VolumeInfo_IndustryIdentifiersItem where
   toJSON Volume_VolumeInfo_IndustryIdentifiersItem {..} =
     Core.object
       ( Core.catMaybes
@@ -5734,13 +5431,9 @@ instance
 --
 -- /See:/ 'newVolume_VolumeInfo_PanelizationSummary' smart constructor.
 data Volume_VolumeInfo_PanelizationSummary = Volume_VolumeInfo_PanelizationSummary
-  { -- |
-    containsEpubBubbles :: (Core.Maybe Core.Bool),
-    -- |
+  { containsEpubBubbles :: (Core.Maybe Core.Bool),
     containsImageBubbles :: (Core.Maybe Core.Bool),
-    -- |
     epubBubbleVersion :: (Core.Maybe Core.Text),
-    -- |
     imageBubbleVersion :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5750,16 +5443,14 @@ newVolume_VolumeInfo_PanelizationSummary ::
   Volume_VolumeInfo_PanelizationSummary
 newVolume_VolumeInfo_PanelizationSummary =
   Volume_VolumeInfo_PanelizationSummary
-    { containsEpubBubbles = Core.Nothing,
+    { containsEpubBubbles =
+        Core.Nothing,
       containsImageBubbles = Core.Nothing,
       epubBubbleVersion = Core.Nothing,
       imageBubbleVersion = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volume_VolumeInfo_PanelizationSummary
-  where
+instance Core.FromJSON Volume_VolumeInfo_PanelizationSummary where
   parseJSON =
     Core.withObject
       "Volume_VolumeInfo_PanelizationSummary"
@@ -5771,21 +5462,14 @@ instance
             Core.<*> (o Core..:? "imageBubbleVersion")
       )
 
-instance
-  Core.ToJSON
-    Volume_VolumeInfo_PanelizationSummary
-  where
+instance Core.ToJSON Volume_VolumeInfo_PanelizationSummary where
   toJSON Volume_VolumeInfo_PanelizationSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("containsEpubBubbles" Core..=)
-              Core.<$> containsEpubBubbles,
-            ("containsImageBubbles" Core..=)
-              Core.<$> containsImageBubbles,
-            ("epubBubbleVersion" Core..=)
-              Core.<$> epubBubbleVersion,
-            ("imageBubbleVersion" Core..=)
-              Core.<$> imageBubbleVersion
+          [ ("containsEpubBubbles" Core..=) Core.<$> containsEpubBubbles,
+            ("containsImageBubbles" Core..=) Core.<$> containsImageBubbles,
+            ("epubBubbleVersion" Core..=) Core.<$> epubBubbleVersion,
+            ("imageBubbleVersion" Core..=) Core.<$> imageBubbleVersion
           ]
       )
 
@@ -5793,9 +5477,7 @@ instance
 --
 -- /See:/ 'newVolume_VolumeInfo_ReadingModes' smart constructor.
 data Volume_VolumeInfo_ReadingModes = Volume_VolumeInfo_ReadingModes
-  { -- |
-    image :: (Core.Maybe Core.Bool),
-    -- |
+  { image :: (Core.Maybe Core.Bool),
     text :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5804,7 +5486,10 @@ data Volume_VolumeInfo_ReadingModes = Volume_VolumeInfo_ReadingModes
 newVolume_VolumeInfo_ReadingModes ::
   Volume_VolumeInfo_ReadingModes
 newVolume_VolumeInfo_ReadingModes =
-  Volume_VolumeInfo_ReadingModes {image = Core.Nothing, text = Core.Nothing}
+  Volume_VolumeInfo_ReadingModes
+    { image = Core.Nothing,
+      text = Core.Nothing
+    }
 
 instance Core.FromJSON Volume_VolumeInfo_ReadingModes where
   parseJSON =
@@ -5812,16 +5497,15 @@ instance Core.FromJSON Volume_VolumeInfo_ReadingModes where
       "Volume_VolumeInfo_ReadingModes"
       ( \o ->
           Volume_VolumeInfo_ReadingModes
-            Core.<$> (o Core..:? "image") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "image")
+            Core.<*> (o Core..:? "text")
       )
 
 instance Core.ToJSON Volume_VolumeInfo_ReadingModes where
   toJSON Volume_VolumeInfo_ReadingModes {..} =
     Core.object
       ( Core.catMaybes
-          [ ("image" Core..=) Core.<$> image,
-            ("text" Core..=) Core.<$> text
-          ]
+          [("image" Core..=) Core.<$> image, ("text" Core..=) Core.<$> text]
       )
 
 --
@@ -5831,7 +5515,6 @@ data Volume2 = Volume2
     items :: (Core.Maybe [Volume]),
     -- | Resource type.
     kind :: (Core.Maybe Core.Text),
-    -- |
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5948,10 +5631,8 @@ instance Core.ToJSON Volumeannotation where
   toJSON Volumeannotation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("annotationDataId" Core..=)
-              Core.<$> annotationDataId,
-            ("annotationDataLink" Core..=)
-              Core.<$> annotationDataLink,
+          [ ("annotationDataId" Core..=) Core.<$> annotationDataId,
+            ("annotationDataLink" Core..=) Core.<$> annotationDataLink,
             ("annotationType" Core..=) Core.<$> annotationType,
             ("contentRanges" Core..=) Core.<$> contentRanges,
             ("data" Core..=) Core.<$> data',
@@ -6085,7 +5766,11 @@ data Volumes = Volumes
 newVolumes ::
   Volumes
 newVolumes =
-  Volumes {items = Core.Nothing, kind = Core.Nothing, totalItems = Core.Nothing}
+  Volumes
+    { items = Core.Nothing,
+      kind = Core.Nothing,
+      totalItems = Core.Nothing
+    }
 
 instance Core.FromJSON Volumes where
   parseJSON =
@@ -6117,7 +5802,6 @@ data Volumeseriesinfo = Volumeseriesinfo
     kind :: (Core.Maybe Core.Text),
     -- | Short book title in the context of the series.
     shortSeriesBookTitle :: (Core.Maybe Core.Text),
-    -- |
     volumeSeries :: (Core.Maybe [Volumeseriesinfo_VolumeSeriesItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6149,11 +5833,9 @@ instance Core.ToJSON Volumeseriesinfo where
   toJSON Volumeseriesinfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bookDisplayNumber" Core..=)
-              Core.<$> bookDisplayNumber,
+          [ ("bookDisplayNumber" Core..=) Core.<$> bookDisplayNumber,
             ("kind" Core..=) Core.<$> kind,
-            ("shortSeriesBookTitle" Core..=)
-              Core.<$> shortSeriesBookTitle,
+            ("shortSeriesBookTitle" Core..=) Core.<$> shortSeriesBookTitle,
             ("volumeSeries" Core..=) Core.<$> volumeSeries
           ]
       )
@@ -6183,10 +5865,7 @@ newVolumeseriesinfo_VolumeSeriesItem =
       seriesId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volumeseriesinfo_VolumeSeriesItem
-  where
+instance Core.FromJSON Volumeseriesinfo_VolumeSeriesItem where
   parseJSON =
     Core.withObject
       "Volumeseriesinfo_VolumeSeriesItem"
@@ -6198,10 +5877,7 @@ instance
             Core.<*> (o Core..:? "seriesId")
       )
 
-instance
-  Core.ToJSON
-    Volumeseriesinfo_VolumeSeriesItem
-  where
+instance Core.ToJSON Volumeseriesinfo_VolumeSeriesItem where
   toJSON Volumeseriesinfo_VolumeSeriesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -6215,9 +5891,7 @@ instance
 --
 -- /See:/ 'newVolumeseriesinfo_VolumeSeriesItem_IssueItem' smart constructor.
 data Volumeseriesinfo_VolumeSeriesItem_IssueItem = Volumeseriesinfo_VolumeSeriesItem_IssueItem
-  { -- |
-    issueDisplayNumber :: (Core.Maybe Core.Text),
-    -- |
+  { issueDisplayNumber :: (Core.Maybe Core.Text),
     issueOrderNumber :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6227,14 +5901,12 @@ newVolumeseriesinfo_VolumeSeriesItem_IssueItem ::
   Volumeseriesinfo_VolumeSeriesItem_IssueItem
 newVolumeseriesinfo_VolumeSeriesItem_IssueItem =
   Volumeseriesinfo_VolumeSeriesItem_IssueItem
-    { issueDisplayNumber = Core.Nothing,
+    { issueDisplayNumber =
+        Core.Nothing,
       issueOrderNumber = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Volumeseriesinfo_VolumeSeriesItem_IssueItem
-  where
+instance Core.FromJSON Volumeseriesinfo_VolumeSeriesItem_IssueItem where
   parseJSON =
     Core.withObject
       "Volumeseriesinfo_VolumeSeriesItem_IssueItem"
@@ -6244,17 +5916,11 @@ instance
             Core.<*> (o Core..:? "issueOrderNumber")
       )
 
-instance
-  Core.ToJSON
-    Volumeseriesinfo_VolumeSeriesItem_IssueItem
-  where
-  toJSON
-    Volumeseriesinfo_VolumeSeriesItem_IssueItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("issueDisplayNumber" Core..=)
-                Core.<$> issueDisplayNumber,
-              ("issueOrderNumber" Core..=)
-                Core.<$> issueOrderNumber
-            ]
-        )
+instance Core.ToJSON Volumeseriesinfo_VolumeSeriesItem_IssueItem where
+  toJSON Volumeseriesinfo_VolumeSeriesItem_IssueItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("issueDisplayNumber" Core..=) Core.<$> issueDisplayNumber,
+            ("issueOrderNumber" Core..=) Core.<$> issueOrderNumber
+          ]
+      )

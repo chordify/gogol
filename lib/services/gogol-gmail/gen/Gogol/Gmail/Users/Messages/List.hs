@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Messages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Messages.List
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.messages.list@ method which the
 -- 'GmailUsersMessagesList' request conforms to.
@@ -75,7 +73,7 @@ data GmailUsersMessagesList = GmailUsersMessagesList
     callback :: (Core.Maybe Core.Text),
     -- | Include messages from @SPAM@ and @TRASH@ in the results.
     includeSpamTrash :: Core.Bool,
-    -- | Only return messages with labels that match all of the specified label IDs.
+    -- | Only return messages with labels that match all of the specified label IDs. Messages in a thread might have labels that other messages in the same thread don\'t have. To learn more, see <https://developers.google.com/gmail/api/guides/labels#manage_labels_on_messages_threads Manage labels on messages and threads>.
     labelIds :: (Core.Maybe [Core.Text]),
     -- | Maximum number of messages to return. This field defaults to 100. The maximum allowed value for this field is 500.
     maxResults :: Core.Word32,
@@ -114,11 +112,7 @@ instance Core.GoogleRequest GmailUsersMessagesList where
   type Rs GmailUsersMessagesList = ListMessagesResponse
   type
     Scopes GmailUsersMessagesList =
-      '[ Gmail'FullControl,
-         Gmail'Metadata,
-         Gmail'Modify,
-         Gmail'Readonly
-       ]
+      '[Gmail'FullControl, Gmail'Metadata, Gmail'Modify, Gmail'Readonly]
   requestClient GmailUsersMessagesList {..} =
     go
       userId
@@ -137,7 +131,5 @@ instance Core.GoogleRequest GmailUsersMessagesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersMessagesListResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesListResource)
           Core.mempty

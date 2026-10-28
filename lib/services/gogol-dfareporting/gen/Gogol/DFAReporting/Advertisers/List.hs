@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Advertisers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Advertisers.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.advertisers.list@ method which the
 -- 'DFAReportingAdvertisersList' request conforms to.
@@ -54,41 +52,21 @@ type DFAReportingAdvertisersListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParams "advertiserGroupIds" Core.Int64
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParams
-              "floodlightConfigurationIds"
-              Core.Int64
+    Core.:> Core.QueryParams "floodlightConfigurationIds" Core.Int64
     Core.:> Core.QueryParams "ids" Core.Int64
-    Core.:> Core.QueryParam
-              "includeAdvertisersWithoutGroupsOnly"
-              Core.Bool
+    Core.:> Core.QueryParam "includeAdvertisersWithoutGroupsOnly" Core.Bool
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "onlyParent" Core.Bool
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              AdvertisersListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              AdvertisersListSortOrder
-    Core.:> Core.QueryParam
-              "status"
-              AdvertisersListStatus
-    Core.:> Core.QueryParam
-              "subaccountId"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              AdvertisersListResponse
+    Core.:> Core.QueryParam "sortField" AdvertisersListSortField
+    Core.:> Core.QueryParam "sortOrder" AdvertisersListSortOrder
+    Core.:> Core.QueryParam "status" AdvertisersListStatus
+    Core.:> Core.QueryParam "subaccountId" Core.Int64
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] AdvertisersListResponse
 
 -- | Retrieves a list of advertisers, possibly filtered. This method supports paging.
 --
@@ -160,13 +138,8 @@ newDFAReportingAdvertisersList profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertisersList
-  where
-  type
-    Rs DFAReportingAdvertisersList =
-      AdvertisersListResponse
+instance Core.GoogleRequest DFAReportingAdvertisersList where
+  type Rs DFAReportingAdvertisersList = AdvertisersListResponse
   type
     Scopes DFAReportingAdvertisersList =
       '[Dfatrafficking'FullControl]
@@ -195,7 +168,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdvertisersListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAdvertisersListResource)
           Core.mempty

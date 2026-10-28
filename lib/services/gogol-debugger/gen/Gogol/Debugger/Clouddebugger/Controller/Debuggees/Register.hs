@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Registers the debuggee with the controller service. All agents attached to the same application must call this method with exactly the same request content to get back the same stable @debuggee_id@. Agents should call this method again whenever @google.rpc.Code.NOT_FOUND@ is returned from any controller method. This protocol allows the controller service to disable debuggees, recover from data loss, or change the @debuggee_id@ format. Agents must handle @debuggee_id@ value changing upon re-registration.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.controller.debuggees.register@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.controller.debuggees.register@.
 module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
   ( -- * Resource
     ClouddebuggerControllerDebuggeesRegisterResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Controller.Debuggees.Register
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.controller.debuggees.register@ method which the
 -- 'ClouddebuggerControllerDebuggeesRegister' request conforms to.
@@ -101,25 +99,21 @@ instance
       RegisterDebuggeeResponse
   type
     Scopes ClouddebuggerControllerDebuggeesRegister =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerControllerDebuggeesRegister {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerControllerDebuggeesRegisterResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerControllerDebuggeesRegister {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClouddebuggerControllerDebuggeesRegisterResource
+          )
+          Core.mempty

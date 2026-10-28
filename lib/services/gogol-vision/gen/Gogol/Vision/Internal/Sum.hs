@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Vision.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Vision.Internal.Sum
@@ -1113,7 +1111,7 @@ module Gogol.Vision.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -2415,7 +2413,7 @@ pattern GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Spoof
   #-}
 
--- | Likelihood that this image contains violent content.
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
 newtype GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p1beta1SafeSearchAnnotation_Violence :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3399,7 +3397,7 @@ pattern GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Spoof
   #-}
 
--- | Likelihood that this image contains violent content.
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
 newtype GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p2beta1SafeSearchAnnotation_Violence :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -4343,7 +4341,7 @@ pattern GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Spoof
   #-}
 
--- | Likelihood that this image contains violent content.
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
 newtype GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p3beta1SafeSearchAnnotation_Violence :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -5287,7 +5285,7 @@ pattern GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof_VERYLIKELY = Google
   GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Spoof
   #-}
 
--- | Likelihood that this image contains violent content.
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
 newtype GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence = GoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence {fromGoogleCloudVisionV1p4beta1SafeSearchAnnotation_Violence :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -5813,7 +5811,7 @@ pattern SafeSearchAnnotation_Spoof_VERYLIKELY = SafeSearchAnnotation_Spoof "VERY
   SafeSearchAnnotation_Spoof
   #-}
 
--- | Likelihood that this image contains violent content.
+-- | Likelihood that this image contains violent content. Violent content may include death, serious harm, or injury to individuals or groups of individuals.
 newtype SafeSearchAnnotation_Violence = SafeSearchAnnotation_Violence {fromSafeSearchAnnotation_Violence :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype

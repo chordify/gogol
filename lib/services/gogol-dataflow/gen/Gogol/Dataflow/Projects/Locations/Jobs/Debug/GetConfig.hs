@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.Debug.GetConfig
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.debug.getConfig@ method which the
 -- 'DataflowProjectsLocationsJobsDebugGetConfig' request conforms to.
@@ -60,12 +58,8 @@ type DataflowProjectsLocationsJobsDebugGetConfigResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GetDebugConfigRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GetDebugConfigResponse
+    Core.:> Core.ReqBody '[Core.JSON] GetDebugConfigRequest
+    Core.:> Core.Post '[Core.JSON] GetDebugConfigResponse
 
 -- | Get encoded debug configuration for component. Not cacheable.
 --
@@ -103,18 +97,22 @@ newDataflowProjectsLocationsJobsDebugGetConfig ::
   -- |  The project id. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsJobsDebugGetConfig
-newDataflowProjectsLocationsJobsDebugGetConfig jobId location payload projectId =
-  DataflowProjectsLocationsJobsDebugGetConfig
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsDebugGetConfig
+  jobId
+  location
+  payload
+  projectId =
+    DataflowProjectsLocationsJobsDebugGetConfig
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -124,32 +122,25 @@ instance
     Rs DataflowProjectsLocationsJobsDebugGetConfig =
       GetDebugConfigResponse
   type
-    Scopes
-      DataflowProjectsLocationsJobsDebugGetConfig =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsJobsDebugGetConfig {..} =
-      go
-        projectId
-        location
-        jobId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsJobsDebugGetConfigResource
-            )
-            Core.mempty
+    Scopes DataflowProjectsLocationsJobsDebugGetConfig =
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsJobsDebugGetConfig {..} =
+    go
+      projectId
+      location
+      jobId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataflowProjectsLocationsJobsDebugGetConfigResource
+          )
+          Core.mempty

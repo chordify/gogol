@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudFunctions.Types
@@ -37,6 +35,10 @@ module Gogol.CloudFunctions.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AbortFunctionUpgradeRequest
+    AbortFunctionUpgradeRequest (..),
+    newAbortFunctionUpgradeRequest,
+
     -- ** AuditConfig
     AuditConfig (..),
     newAuditConfig,
@@ -47,6 +49,10 @@ module Gogol.CloudFunctions.Types
 
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
+
+    -- ** AutomaticUpdatePolicy
+    AutomaticUpdatePolicy (..),
+    newAutomaticUpdatePolicy,
 
     -- ** Binding
     Binding (..),
@@ -62,6 +68,18 @@ module Gogol.CloudFunctions.Types
     -- ** BuildConfig_EnvironmentVariables
     BuildConfig_EnvironmentVariables (..),
     newBuildConfig_EnvironmentVariables,
+
+    -- ** CommitFunctionUpgradeRequest
+    CommitFunctionUpgradeRequest (..),
+    newCommitFunctionUpgradeRequest,
+
+    -- ** Date
+    Date (..),
+    newDate,
+
+    -- ** DetachFunctionRequest
+    DetachFunctionRequest (..),
+    newDetachFunctionRequest,
 
     -- ** EventFilter
     EventFilter (..),
@@ -104,13 +122,26 @@ module Gogol.CloudFunctions.Types
     GenerateUploadUrlRequest (..),
     newGenerateUploadUrlRequest,
 
+    -- ** GenerateUploadUrlRequest_Environment
+    GenerateUploadUrlRequest_Environment (..),
+
     -- ** GenerateUploadUrlResponse
     GenerateUploadUrlResponse (..),
     newGenerateUploadUrlResponse,
 
+    -- ** GoogleCloudFunctionsV2LocationMetadata
+    GoogleCloudFunctionsV2LocationMetadata (..),
+    newGoogleCloudFunctionsV2LocationMetadata,
+
+    -- ** GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem
+    GoogleCloudFunctionsV2LocationMetadata_EnvironmentsItem (..),
+
     -- ** GoogleCloudFunctionsV2OperationMetadata
     GoogleCloudFunctionsV2OperationMetadata (..),
     newGoogleCloudFunctionsV2OperationMetadata,
+
+    -- ** GoogleCloudFunctionsV2OperationMetadata_OperationType
+    GoogleCloudFunctionsV2OperationMetadata_OperationType (..),
 
     -- ** GoogleCloudFunctionsV2OperationMetadata_RequestResource
     GoogleCloudFunctionsV2OperationMetadata_RequestResource (..),
@@ -132,56 +163,6 @@ module Gogol.CloudFunctions.Types
 
     -- ** GoogleCloudFunctionsV2StateMessage_Severity
     GoogleCloudFunctionsV2StateMessage_Severity (..),
-
-    -- ** GoogleCloudFunctionsV2alphaOperationMetadata
-    GoogleCloudFunctionsV2alphaOperationMetadata (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata,
-
-    -- ** GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2alphaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2alphaOperationMetadata_RequestResource,
-
-    -- ** GoogleCloudFunctionsV2alphaStage
-    GoogleCloudFunctionsV2alphaStage (..),
-    newGoogleCloudFunctionsV2alphaStage,
-
-    -- ** GoogleCloudFunctionsV2alphaStage_Name
-    GoogleCloudFunctionsV2alphaStage_Name (..),
-
-    -- ** GoogleCloudFunctionsV2alphaStage_State
-    GoogleCloudFunctionsV2alphaStage_State (..),
-
-    -- ** GoogleCloudFunctionsV2alphaStateMessage
-    GoogleCloudFunctionsV2alphaStateMessage (..),
-    newGoogleCloudFunctionsV2alphaStateMessage,
-
-    -- ** GoogleCloudFunctionsV2alphaStateMessage_Severity
-    GoogleCloudFunctionsV2alphaStateMessage_Severity (..),
-
-    -- ** GoogleCloudFunctionsV2betaOperationMetadata
-    GoogleCloudFunctionsV2betaOperationMetadata (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata,
-
-    -- ** GoogleCloudFunctionsV2betaOperationMetadata_RequestResource
-    GoogleCloudFunctionsV2betaOperationMetadata_RequestResource (..),
-    newGoogleCloudFunctionsV2betaOperationMetadata_RequestResource,
-
-    -- ** GoogleCloudFunctionsV2betaStage
-    GoogleCloudFunctionsV2betaStage (..),
-    newGoogleCloudFunctionsV2betaStage,
-
-    -- ** GoogleCloudFunctionsV2betaStage_Name
-    GoogleCloudFunctionsV2betaStage_Name (..),
-
-    -- ** GoogleCloudFunctionsV2betaStage_State
-    GoogleCloudFunctionsV2betaStage_State (..),
-
-    -- ** GoogleCloudFunctionsV2betaStateMessage
-    GoogleCloudFunctionsV2betaStateMessage (..),
-    newGoogleCloudFunctionsV2betaStateMessage,
-
-    -- ** GoogleCloudFunctionsV2betaStateMessage_Severity
-    GoogleCloudFunctionsV2betaStateMessage_Severity (..),
 
     -- ** ListFunctionsResponse
     ListFunctionsResponse (..),
@@ -211,6 +192,10 @@ module Gogol.CloudFunctions.Types
     Location_Metadata (..),
     newLocation_Metadata,
 
+    -- ** OnDeployUpdatePolicy
+    OnDeployUpdatePolicy (..),
+    newOnDeployUpdatePolicy,
+
     -- ** Operation
     Operation (..),
     newOperation,
@@ -238,9 +223,17 @@ module Gogol.CloudFunctions.Types
     Policy (..),
     newPolicy,
 
+    -- ** RedirectFunctionUpgradeTrafficRequest
+    RedirectFunctionUpgradeTrafficRequest (..),
+    newRedirectFunctionUpgradeTrafficRequest,
+
     -- ** RepoSource
     RepoSource (..),
     newRepoSource,
+
+    -- ** RollbackFunctionUpgradeTrafficRequest
+    RollbackFunctionUpgradeTrafficRequest (..),
+    newRollbackFunctionUpgradeTrafficRequest,
 
     -- ** Runtime
     Runtime (..),
@@ -285,6 +278,10 @@ module Gogol.CloudFunctions.Types
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
 
+    -- ** SetupFunctionUpgradeConfigRequest
+    SetupFunctionUpgradeConfigRequest (..),
+    newSetupFunctionUpgradeConfigRequest,
+
     -- ** Source
     Source (..),
     newSource,
@@ -312,12 +309,19 @@ module Gogol.CloudFunctions.Types
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** UpgradeInfo
+    UpgradeInfo (..),
+    newUpgradeInfo,
+
+    -- ** UpgradeInfo_UpgradeState
+    UpgradeInfo_UpgradeState (..),
   )
 where
 
 import Gogol.CloudFunctions.Internal.Product
 import Gogol.CloudFunctions.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Cloud Functions API. This contains the host and root path used as a starting point for constructing service requests.
 cloudFunctionsService :: Core.ServiceConfig
@@ -327,4 +331,5 @@ cloudFunctionsService =
     "cloudfunctions.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetSslProxies.SetProxyHeader
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetSslProxies.SetProxyHeader
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetSslProxies.setProxyHeader@ method which the
 -- 'ComputeTargetSslProxiesSetProxyHeader' request conforms to.
@@ -60,9 +58,7 @@ type ComputeTargetSslProxiesSetProxyHeaderResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TargetSslProxiesSetProxyHeaderRequest
+    Core.:> Core.ReqBody '[Core.JSON] TargetSslProxiesSetProxyHeaderRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Changes the ProxyHeaderType for TargetSslProxy.
@@ -99,48 +95,44 @@ newComputeTargetSslProxiesSetProxyHeader ::
   -- |  Name of the TargetSslProxy resource whose ProxyHeader is to be set. See 'targetSslProxy'.
   Core.Text ->
   ComputeTargetSslProxiesSetProxyHeader
-newComputeTargetSslProxiesSetProxyHeader payload project targetSslProxy =
-  ComputeTargetSslProxiesSetProxyHeader
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      targetSslProxy = targetSslProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeTargetSslProxiesSetProxyHeader
+  payload
+  project
+  targetSslProxy =
     ComputeTargetSslProxiesSetProxyHeader
-  where
-  type
-    Rs ComputeTargetSslProxiesSetProxyHeader =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        targetSslProxy = targetSslProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeTargetSslProxiesSetProxyHeader where
+  type Rs ComputeTargetSslProxiesSetProxyHeader = Operation
   type
     Scopes ComputeTargetSslProxiesSetProxyHeader =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeTargetSslProxiesSetProxyHeader {..} =
-      go
-        project
-        targetSslProxy
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeTargetSslProxiesSetProxyHeaderResource
-            )
-            Core.mempty
+  requestClient ComputeTargetSslProxiesSetProxyHeader {..} =
+    go
+      project
+      targetSslProxy
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeTargetSslProxiesSetProxyHeaderResource
+          )
+          Core.mempty

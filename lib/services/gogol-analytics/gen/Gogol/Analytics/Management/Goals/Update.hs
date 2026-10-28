@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Goals.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Goals.Update
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.goals.update@ method which the
 -- 'AnalyticsManagementGoalsUpdate' request conforms to.
@@ -90,23 +88,23 @@ newAnalyticsManagementGoalsUpdate ::
   -- |  Web property ID to update the goal. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementGoalsUpdate
-newAnalyticsManagementGoalsUpdate accountId goalId payload profileId webPropertyId =
-  AnalyticsManagementGoalsUpdate
-    { accountId = accountId,
-      goalId = goalId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementGoalsUpdate
+  accountId
+  goalId
+  payload
+  profileId
+  webPropertyId =
     AnalyticsManagementGoalsUpdate
-  where
+      { accountId = accountId,
+        goalId = goalId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementGoalsUpdate where
   type Rs AnalyticsManagementGoalsUpdate = Goal
-  type
-    Scopes AnalyticsManagementGoalsUpdate =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementGoalsUpdate = '[Analytics'Edit]
   requestClient AnalyticsManagementGoalsUpdate {..} =
     go
       accountId
@@ -119,7 +117,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementGoalsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementGoalsUpdateResource)
           Core.mempty

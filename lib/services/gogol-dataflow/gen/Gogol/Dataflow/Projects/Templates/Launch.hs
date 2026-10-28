@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Templates.Launch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Launch a template.
+-- Launches a template. To launch a template, we recommend using @projects.locations.templates.launch@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.launch@ is not recommended, because jobs launched from the template will always start in @us-central1@.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.templates.launch@.
 module Gogol.Dataflow.Projects.Templates.Launch
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Templates.Launch
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.templates.launch@ method which the
 -- 'DataflowProjectsTemplatesLaunch' request conforms to.
@@ -53,23 +51,17 @@ type DataflowProjectsTemplatesLaunchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "dynamicTemplate.gcsPath" Core.Text
-    Core.:> Core.QueryParam
-              "dynamicTemplate.stagingLocation"
-              Core.Text
+    Core.:> Core.QueryParam "dynamicTemplate.stagingLocation" Core.Text
     Core.:> Core.QueryParam "gcsPath" Core.Text
     Core.:> Core.QueryParam "location" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "validateOnly" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              LaunchTemplateParameters
-    Core.:> Core.Post
-              '[Core.JSON]
-              LaunchTemplateResponse
+    Core.:> Core.ReqBody '[Core.JSON] LaunchTemplateParameters
+    Core.:> Core.Post '[Core.JSON] LaunchTemplateResponse
 
--- | Launch a template.
+-- | Launches a template. To launch a template, we recommend using @projects.locations.templates.launch@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.launch@ is not recommended, because jobs launched from the template will always start in @us-central1@.
 --
 -- /See:/ 'newDataflowProjectsTemplatesLaunch' smart constructor.
 data DataflowProjectsTemplatesLaunch = DataflowProjectsTemplatesLaunch
@@ -79,11 +71,11 @@ data DataflowProjectsTemplatesLaunch = DataflowProjectsTemplatesLaunch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Path to dynamic template spec file on Cloud Storage. The file must be a Json serialized DynamicTemplateFieSpec object.
+    -- | Path to the dynamic template specification file on Cloud Storage. The file must be a JSON serialized @DynamicTemplateFileSpec@ object.
     dynamicTemplateGcsPath :: (Core.Maybe Core.Text),
     -- | Cloud Storage path for staging dependencies. Must be a valid Cloud Storage URL, beginning with @gs:\/\/@.
     dynamicTemplateStagingLocation :: (Core.Maybe Core.Text),
-    -- | A Cloud Storage path to the template from which to create the job. Must be valid Cloud Storage URL, beginning with \'gs:\/\/\'.
+    -- | A Cloud Storage path to the template to use to create the job. Must be valid Cloud Storage URL, beginning with @gs:\/\/@.
     gcsPath :: (Core.Maybe Core.Text),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) to which to direct the request.
     location :: (Core.Maybe Core.Text),
@@ -123,20 +115,11 @@ newDataflowProjectsTemplatesLaunch payload projectId =
       validateOnly = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataflowProjectsTemplatesLaunch
-  where
-  type
-    Rs DataflowProjectsTemplatesLaunch =
-      LaunchTemplateResponse
+instance Core.GoogleRequest DataflowProjectsTemplatesLaunch where
+  type Rs DataflowProjectsTemplatesLaunch = LaunchTemplateResponse
   type
     Scopes DataflowProjectsTemplatesLaunch =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient DataflowProjectsTemplatesLaunch {..} =
     go
       projectId
@@ -156,7 +139,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataflowProjectsTemplatesLaunchResource
-          )
+          (Core.Proxy :: Core.Proxy DataflowProjectsTemplatesLaunchResource)
           Core.mempty

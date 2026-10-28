@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SQLAdmin.Internal.Product
@@ -30,9 +28,25 @@ module Gogol.SQLAdmin.Internal.Product
     AclEntry (..),
     newAclEntry,
 
+    -- * AcquireSsrsLeaseContext
+    AcquireSsrsLeaseContext (..),
+    newAcquireSsrsLeaseContext,
+
+    -- * AdvancedMachineFeatures
+    AdvancedMachineFeatures (..),
+    newAdvancedMachineFeatures,
+
     -- * ApiWarning
     ApiWarning (..),
     newApiWarning,
+
+    -- * AvailableDatabaseVersion
+    AvailableDatabaseVersion (..),
+    newAvailableDatabaseVersion,
+
+    -- * Backup
+    Backup (..),
+    newBackup,
 
     -- * BackupConfiguration
     BackupConfiguration (..),
@@ -41,6 +55,10 @@ module Gogol.SQLAdmin.Internal.Product
     -- * BackupContext
     BackupContext (..),
     newBackupContext,
+
+    -- * BackupReencryptionConfig
+    BackupReencryptionConfig (..),
+    newBackupReencryptionConfig,
 
     -- * BackupRetentionSettings
     BackupRetentionSettings (..),
@@ -66,6 +84,10 @@ module Gogol.SQLAdmin.Internal.Product
     ConnectSettings (..),
     newConnectSettings,
 
+    -- * DataCacheConfig
+    DataCacheConfig (..),
+    newDataCacheConfig,
+
     -- * Database
     Database (..),
     newDatabase,
@@ -82,9 +104,17 @@ module Gogol.SQLAdmin.Internal.Product
     DatabaseInstance_FailoverReplica (..),
     newDatabaseInstance_FailoverReplica,
 
+    -- * DatabaseInstance_Tags
+    DatabaseInstance_Tags (..),
+    newDatabaseInstance_Tags,
+
     -- * DatabasesListResponse
     DatabasesListResponse (..),
     newDatabasesListResponse,
+
+    -- * DemoteContext
+    DemoteContext (..),
+    newDemoteContext,
 
     -- * DemoteMasterConfiguration
     DemoteMasterConfiguration (..),
@@ -110,6 +140,14 @@ module Gogol.SQLAdmin.Internal.Product
     DiskEncryptionStatus (..),
     newDiskEncryptionStatus,
 
+    -- * DnsNameMapping
+    DnsNameMapping (..),
+    newDnsNameMapping,
+
+    -- * Empty
+    Empty (..),
+    newEmpty,
+
     -- * ExportContext
     ExportContext (..),
     newExportContext,
@@ -130,6 +168,18 @@ module Gogol.SQLAdmin.Internal.Product
     ExportContext_SqlExportOptions_MysqlExportOptions (..),
     newExportContext_SqlExportOptions_MysqlExportOptions,
 
+    -- * ExportContext_SqlExportOptions_PostgresExportOptions
+    ExportContext_SqlExportOptions_PostgresExportOptions (..),
+    newExportContext_SqlExportOptions_PostgresExportOptions,
+
+    -- * ExportContext_TdeExportOptions
+    ExportContext_TdeExportOptions (..),
+    newExportContext_TdeExportOptions,
+
+    -- * ExternalSyncSelectedObject
+    ExternalSyncSelectedObject (..),
+    newExternalSyncSelectedObject,
+
     -- * FailoverContext
     FailoverContext (..),
     newFailoverContext,
@@ -141,6 +191,10 @@ module Gogol.SQLAdmin.Internal.Product
     -- * FlagsListResponse
     FlagsListResponse (..),
     newFlagsListResponse,
+
+    -- * GeminiInstanceConfig
+    GeminiInstanceConfig (..),
+    newGeminiInstanceConfig,
 
     -- * GenerateEphemeralCertRequest
     GenerateEphemeralCertRequest (..),
@@ -166,6 +220,18 @@ module Gogol.SQLAdmin.Internal.Product
     ImportContext_CsvImportOptions (..),
     newImportContext_CsvImportOptions,
 
+    -- * ImportContext_SqlImportOptions
+    ImportContext_SqlImportOptions (..),
+    newImportContext_SqlImportOptions,
+
+    -- * ImportContext_SqlImportOptions_PostgresImportOptions
+    ImportContext_SqlImportOptions_PostgresImportOptions (..),
+    newImportContext_SqlImportOptions_PostgresImportOptions,
+
+    -- * ImportContext_TdeImportOptions
+    ImportContext_TdeImportOptions (..),
+    newImportContext_TdeImportOptions,
+
     -- * InsightsConfig
     InsightsConfig (..),
     newInsightsConfig,
@@ -174,6 +240,10 @@ module Gogol.SQLAdmin.Internal.Product
     InstanceReference (..),
     newInstanceReference,
 
+    -- * InstancesAcquireSsrsLeaseRequest
+    InstancesAcquireSsrsLeaseRequest (..),
+    newInstancesAcquireSsrsLeaseRequest,
+
     -- * InstancesCloneRequest
     InstancesCloneRequest (..),
     newInstancesCloneRequest,
@@ -181,6 +251,10 @@ module Gogol.SQLAdmin.Internal.Product
     -- * InstancesDemoteMasterRequest
     InstancesDemoteMasterRequest (..),
     newInstancesDemoteMasterRequest,
+
+    -- * InstancesDemoteRequest
+    InstancesDemoteRequest (..),
+    newInstancesDemoteRequest,
 
     -- * InstancesExportRequest
     InstancesExportRequest (..),
@@ -202,6 +276,14 @@ module Gogol.SQLAdmin.Internal.Product
     InstancesListServerCasResponse (..),
     newInstancesListServerCasResponse,
 
+    -- * InstancesListServerCertificatesResponse
+    InstancesListServerCertificatesResponse (..),
+    newInstancesListServerCertificatesResponse,
+
+    -- * InstancesReencryptRequest
+    InstancesReencryptRequest (..),
+    newInstancesReencryptRequest,
+
     -- * InstancesRestoreBackupRequest
     InstancesRestoreBackupRequest (..),
     newInstancesRestoreBackupRequest,
@@ -210,9 +292,17 @@ module Gogol.SQLAdmin.Internal.Product
     InstancesRotateServerCaRequest (..),
     newInstancesRotateServerCaRequest,
 
+    -- * InstancesRotateServerCertificateRequest
+    InstancesRotateServerCertificateRequest (..),
+    newInstancesRotateServerCertificateRequest,
+
     -- * InstancesTruncateLogRequest
     InstancesTruncateLogRequest (..),
     newInstancesTruncateLogRequest,
+
+    -- * Interval
+    Interval (..),
+    newInterval,
 
     -- * IpConfiguration
     IpConfiguration (..),
@@ -221,6 +311,10 @@ module Gogol.SQLAdmin.Internal.Product
     -- * IpMapping
     IpMapping (..),
     newIpMapping,
+
+    -- * ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- * LocationPreference
     LocationPreference (..),
@@ -274,9 +368,21 @@ module Gogol.SQLAdmin.Internal.Product
     PerformDiskShrinkContext (..),
     newPerformDiskShrinkContext,
 
+    -- * PscAutoConnectionConfig
+    PscAutoConnectionConfig (..),
+    newPscAutoConnectionConfig,
+
+    -- * PscConfig
+    PscConfig (..),
+    newPscConfig,
+
     -- * ReplicaConfiguration
     ReplicaConfiguration (..),
     newReplicaConfiguration,
+
+    -- * ReplicationCluster
+    ReplicationCluster (..),
+    newReplicationCluster,
 
     -- * Reschedule
     Reschedule (..),
@@ -289,6 +395,14 @@ module Gogol.SQLAdmin.Internal.Product
     -- * RotateServerCaContext
     RotateServerCaContext (..),
     newRotateServerCaContext,
+
+    -- * RotateServerCertificateContext
+    RotateServerCertificateContext (..),
+    newRotateServerCertificateContext,
+
+    -- * SelectedObjects
+    SelectedObjects (..),
+    newSelectedObjects,
 
     -- * Settings
     Settings (..),
@@ -306,9 +420,21 @@ module Gogol.SQLAdmin.Internal.Product
     SqlExternalSyncSettingError (..),
     newSqlExternalSyncSettingError,
 
+    -- * SqlInstancesAcquireSsrsLeaseResponse
+    SqlInstancesAcquireSsrsLeaseResponse (..),
+    newSqlInstancesAcquireSsrsLeaseResponse,
+
     -- * SqlInstancesGetDiskShrinkConfigResponse
     SqlInstancesGetDiskShrinkConfigResponse (..),
     newSqlInstancesGetDiskShrinkConfigResponse,
+
+    -- * SqlInstancesGetLatestRecoveryTimeResponse
+    SqlInstancesGetLatestRecoveryTimeResponse (..),
+    newSqlInstancesGetLatestRecoveryTimeResponse,
+
+    -- * SqlInstancesReleaseSsrsLeaseResponse
+    SqlInstancesReleaseSsrsLeaseResponse (..),
+    newSqlInstancesReleaseSsrsLeaseResponse,
 
     -- * SqlInstancesRescheduleMaintenanceRequestBody
     SqlInstancesRescheduleMaintenanceRequestBody (..),
@@ -349,6 +475,10 @@ module Gogol.SQLAdmin.Internal.Product
     -- * SqlServerUserDetails
     SqlServerUserDetails (..),
     newSqlServerUserDetails,
+
+    -- * SqlSubOperationType
+    SqlSubOperationType (..),
+    newSqlSubOperationType,
 
     -- * SslCert
     SslCert (..),
@@ -404,7 +534,7 @@ module Gogol.SQLAdmin.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Internal.Sum
 
 -- | An entry for an Access Control list.
@@ -456,6 +586,85 @@ instance Core.ToJSON AclEntry where
           ]
       )
 
+-- | Acquire SSRS lease context.
+--
+-- /See:/ 'newAcquireSsrsLeaseContext' smart constructor.
+data AcquireSsrsLeaseContext = AcquireSsrsLeaseContext
+  { -- | Lease duration needed for SSRS setup.
+    duration :: (Core.Maybe Core.Duration),
+    -- | The report database to be used for SSRS setup.
+    reportDatabase :: (Core.Maybe Core.Text),
+    -- | The username to be used as the service login to connect to the report database for SSRS setup.
+    serviceLogin :: (Core.Maybe Core.Text),
+    -- | The username to be used as the setup login to connect to the database server for SSRS setup.
+    setupLogin :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AcquireSsrsLeaseContext' with the minimum fields required to make a request.
+newAcquireSsrsLeaseContext ::
+  AcquireSsrsLeaseContext
+newAcquireSsrsLeaseContext =
+  AcquireSsrsLeaseContext
+    { duration = Core.Nothing,
+      reportDatabase = Core.Nothing,
+      serviceLogin = Core.Nothing,
+      setupLogin = Core.Nothing
+    }
+
+instance Core.FromJSON AcquireSsrsLeaseContext where
+  parseJSON =
+    Core.withObject
+      "AcquireSsrsLeaseContext"
+      ( \o ->
+          AcquireSsrsLeaseContext
+            Core.<$> (o Core..:? "duration")
+            Core.<*> (o Core..:? "reportDatabase")
+            Core.<*> (o Core..:? "serviceLogin")
+            Core.<*> (o Core..:? "setupLogin")
+      )
+
+instance Core.ToJSON AcquireSsrsLeaseContext where
+  toJSON AcquireSsrsLeaseContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("reportDatabase" Core..=) Core.<$> reportDatabase,
+            ("serviceLogin" Core..=) Core.<$> serviceLogin,
+            ("setupLogin" Core..=) Core.<$> setupLogin
+          ]
+      )
+
+-- | Specifies options for controlling advanced machine features.
+--
+-- /See:/ 'newAdvancedMachineFeatures' smart constructor.
+newtype AdvancedMachineFeatures = AdvancedMachineFeatures
+  { -- | The number of threads per physical core.
+    threadsPerCore :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdvancedMachineFeatures' with the minimum fields required to make a request.
+newAdvancedMachineFeatures ::
+  AdvancedMachineFeatures
+newAdvancedMachineFeatures =
+  AdvancedMachineFeatures {threadsPerCore = Core.Nothing}
+
+instance Core.FromJSON AdvancedMachineFeatures where
+  parseJSON =
+    Core.withObject
+      "AdvancedMachineFeatures"
+      ( \o ->
+          AdvancedMachineFeatures Core.<$> (o Core..:? "threadsPerCore")
+      )
+
+instance Core.ToJSON AdvancedMachineFeatures where
+  toJSON AdvancedMachineFeatures {..} =
+    Core.object
+      ( Core.catMaybes
+          [("threadsPerCore" Core..=) Core.<$> threadsPerCore]
+      )
+
 -- | An Admin API warning message.
 --
 -- /See:/ 'newApiWarning' smart constructor.
@@ -500,6 +709,194 @@ instance Core.ToJSON ApiWarning where
           ]
       )
 
+-- | An available database version. It can be a major or a minor version.
+--
+-- /See:/ 'newAvailableDatabaseVersion' smart constructor.
+data AvailableDatabaseVersion = AvailableDatabaseVersion
+  { -- | The database version\'s display name.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The version\'s major version name.
+    majorVersion :: (Core.Maybe Core.Text),
+    -- | The database version name. For MySQL 8.0, this string provides the database major and minor version.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AvailableDatabaseVersion' with the minimum fields required to make a request.
+newAvailableDatabaseVersion ::
+  AvailableDatabaseVersion
+newAvailableDatabaseVersion =
+  AvailableDatabaseVersion
+    { displayName = Core.Nothing,
+      majorVersion = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON AvailableDatabaseVersion where
+  parseJSON =
+    Core.withObject
+      "AvailableDatabaseVersion"
+      ( \o ->
+          AvailableDatabaseVersion
+            Core.<$> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "majorVersion")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON AvailableDatabaseVersion where
+  toJSON AvailableDatabaseVersion {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("majorVersion" Core..=) Core.<$> majorVersion,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | A backup resource.
+--
+-- /See:/ 'newBackup' smart constructor.
+data Backup = Backup
+  { -- | Output only. This output contains the following values: start/time: All database writes up to this time are available. end/time: Any database writes after this time aren\'t available.
+    backupInterval :: (Core.Maybe Interval),
+    -- | Output only. Specifies the kind of backup, PHYSICAL or DEFAULT_SNAPSHOT.
+    backupKind :: (Core.Maybe Backup_BackupKind),
+    -- | Output only. The mapping to backup run resource used for IAM validations.
+    backupRun :: (Core.Maybe Core.Text),
+    -- | The description of this backup.
+    description :: (Core.Maybe Core.Text),
+    -- | Output only. Information about why the backup operation fails (for example, when the backup state fails).
+    error :: (Core.Maybe OperationError),
+    -- | Backup expiration time. A UTC timestamp of when this backup expired.
+    expiryTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the source database instance.
+    instance' :: (Core.Maybe Core.Text),
+    -- | Optional. Output only. Timestamp in UTC of when the instance associated with this backup is deleted.
+    instanceDeletionTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Output only. The instance setting of the source instance that\'s associated with this backup.
+    instanceSettings :: (Core.Maybe DatabaseInstance),
+    -- | Output only. This is always @sql#backup@.
+    kind :: (Core.Maybe Core.Text),
+    -- | Output only. This output contains the encryption configuration for a backup and the resource name of the KMS key for disk encryption.
+    kmsKey :: (Core.Maybe Core.Text),
+    -- | Output only. This output contains the encryption status for a backup and the version of the KMS key that\'s used to encrypt the Cloud SQL instance.
+    kmsKeyVersion :: (Core.Maybe Core.Text),
+    -- | The storage location of the backups. The location can be multi-regional.
+    location :: (Core.Maybe Core.Text),
+    -- | Output only. The maximum chargeable bytes for the backup.
+    maxChargeableBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. The resource name of the backup. Format: projects\/{project}\/backups\/{backup}.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. This status indicates whether the backup satisfies PZI. The status is reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. This status indicates whether the backup satisfies PZS. The status is reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Output only. The URI of this resource.
+    selfLink :: (Core.Maybe Core.Text),
+    -- | Output only. The status of this backup.
+    state :: (Core.Maybe Backup_State),
+    -- | Output only. This output contains a backup time zone. If a Cloud SQL for SQL Server instance has a different time zone from the backup\'s time zone, then the restore to the instance doesn\'t happen.
+    timeZone :: (Core.Maybe Core.Text),
+    -- | Input only. The time-to-live (TTL) interval for this resource (in days). For example: ttlDays:7, means 7 days from the current time. The expiration time can\'t exceed 365 days from the time that the backup is created.
+    ttlDays :: (Core.Maybe Core.Int64),
+    -- | Output only. The type of this backup. The type can be \"AUTOMATED\", \"ON_DEMAND\" or “FINAL”.
+    type' :: (Core.Maybe Backup_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Backup' with the minimum fields required to make a request.
+newBackup ::
+  Backup
+newBackup =
+  Backup
+    { backupInterval = Core.Nothing,
+      backupKind = Core.Nothing,
+      backupRun = Core.Nothing,
+      description = Core.Nothing,
+      error = Core.Nothing,
+      expiryTime = Core.Nothing,
+      instance' = Core.Nothing,
+      instanceDeletionTime = Core.Nothing,
+      instanceSettings = Core.Nothing,
+      kind = Core.Nothing,
+      kmsKey = Core.Nothing,
+      kmsKeyVersion = Core.Nothing,
+      location = Core.Nothing,
+      maxChargeableBytes = Core.Nothing,
+      name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      selfLink = Core.Nothing,
+      state = Core.Nothing,
+      timeZone = Core.Nothing,
+      ttlDays = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON Backup where
+  parseJSON =
+    Core.withObject
+      "Backup"
+      ( \o ->
+          Backup
+            Core.<$> (o Core..:? "backupInterval")
+            Core.<*> (o Core..:? "backupKind")
+            Core.<*> (o Core..:? "backupRun")
+            Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "expiryTime")
+            Core.<*> (o Core..:? "instance")
+            Core.<*> (o Core..:? "instanceDeletionTime")
+            Core.<*> (o Core..:? "instanceSettings")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "kmsKey")
+            Core.<*> (o Core..:? "kmsKeyVersion")
+            Core.<*> (o Core..:? "location")
+            Core.<*> ( o
+                         Core..:? "maxChargeableBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "selfLink")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "timeZone")
+            Core.<*> (o Core..:? "ttlDays" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON Backup where
+  toJSON Backup {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backupInterval" Core..=) Core.<$> backupInterval,
+            ("backupKind" Core..=) Core.<$> backupKind,
+            ("backupRun" Core..=) Core.<$> backupRun,
+            ("description" Core..=) Core.<$> description,
+            ("error" Core..=) Core.<$> error,
+            ("expiryTime" Core..=) Core.<$> expiryTime,
+            ("instance" Core..=) Core.<$> instance',
+            ("instanceDeletionTime" Core..=) Core.<$> instanceDeletionTime,
+            ("instanceSettings" Core..=) Core.<$> instanceSettings,
+            ("kind" Core..=) Core.<$> kind,
+            ("kmsKey" Core..=) Core.<$> kmsKey,
+            ("kmsKeyVersion" Core..=) Core.<$> kmsKeyVersion,
+            ("location" Core..=) Core.<$> location,
+            ("maxChargeableBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxChargeableBytes,
+            ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
+            ("selfLink" Core..=) Core.<$> selfLink,
+            ("state" Core..=) Core.<$> state,
+            ("timeZone" Core..=) Core.<$> timeZone,
+            ("ttlDays" Core..=) Core.. Core.AsText Core.<$> ttlDays,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
 -- | Database instance backup configuration.
 --
 -- /See:/ 'newBackupConfiguration' smart constructor.
@@ -514,14 +911,16 @@ data BackupConfiguration = BackupConfiguration
     kind :: (Core.Maybe Core.Text),
     -- | Location of the backup
     location :: (Core.Maybe Core.Text),
-    -- | (Postgres only) Whether point in time recovery is enabled.
+    -- | Whether point in time recovery is enabled.
     pointInTimeRecoveryEnabled :: (Core.Maybe Core.Bool),
     -- | Reserved for future use.
     replicationLogArchivingEnabled :: (Core.Maybe Core.Bool),
     -- | Start time for the daily backup configuration in UTC timezone in the 24 hour format - @HH:MM@.
     startTime :: (Core.Maybe Core.Text),
     -- | The number of days of transaction logs we retain for point in time restore, from 1-7.
-    transactionLogRetentionDays :: (Core.Maybe Core.Int32)
+    transactionLogRetentionDays :: (Core.Maybe Core.Int32),
+    -- | Output only. This value contains the storage location of transactional logs used to perform point-in-time recovery (PITR) for the database.
+    transactionalLogStorageState :: (Core.Maybe BackupConfiguration_TransactionalLogStorageState)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -538,7 +937,8 @@ newBackupConfiguration =
       pointInTimeRecoveryEnabled = Core.Nothing,
       replicationLogArchivingEnabled = Core.Nothing,
       startTime = Core.Nothing,
-      transactionLogRetentionDays = Core.Nothing
+      transactionLogRetentionDays = Core.Nothing,
+      transactionalLogStorageState = Core.Nothing
     }
 
 instance Core.FromJSON BackupConfiguration where
@@ -556,6 +956,7 @@ instance Core.FromJSON BackupConfiguration where
             Core.<*> (o Core..:? "replicationLogArchivingEnabled")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "transactionLogRetentionDays")
+            Core.<*> (o Core..:? "transactionalLogStorageState")
       )
 
 instance Core.ToJSON BackupConfiguration where
@@ -564,8 +965,7 @@ instance Core.ToJSON BackupConfiguration where
       ( Core.catMaybes
           [ ("backupRetentionSettings" Core..=)
               Core.<$> backupRetentionSettings,
-            ("binaryLogEnabled" Core..=)
-              Core.<$> binaryLogEnabled,
+            ("binaryLogEnabled" Core..=) Core.<$> binaryLogEnabled,
             ("enabled" Core..=) Core.<$> enabled,
             ("kind" Core..=) Core.<$> kind,
             ("location" Core..=) Core.<$> location,
@@ -575,7 +975,9 @@ instance Core.ToJSON BackupConfiguration where
               Core.<$> replicationLogArchivingEnabled,
             ("startTime" Core..=) Core.<$> startTime,
             ("transactionLogRetentionDays" Core..=)
-              Core.<$> transactionLogRetentionDays
+              Core.<$> transactionLogRetentionDays,
+            ("transactionalLogStorageState" Core..=)
+              Core.<$> transactionalLogStorageState
           ]
       )
 
@@ -586,14 +988,21 @@ data BackupContext = BackupContext
   { -- | The identifier of the backup.
     backupId :: (Core.Maybe Core.Int64),
     -- | This is always @sql#backupContext@.
-    kind :: (Core.Maybe Core.Text)
+    kind :: (Core.Maybe Core.Text),
+    -- | The name of the backup. Format: projects\/{project}\/backups\/{backup}
+    name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BackupContext' with the minimum fields required to make a request.
 newBackupContext ::
   BackupContext
-newBackupContext = BackupContext {backupId = Core.Nothing, kind = Core.Nothing}
+newBackupContext =
+  BackupContext
+    { backupId = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON BackupContext where
   parseJSON =
@@ -601,19 +1010,57 @@ instance Core.FromJSON BackupContext where
       "BackupContext"
       ( \o ->
           BackupContext
-            Core.<$> ( o Core..:? "backupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "backupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON BackupContext where
   toJSON BackupContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backupId" Core..=) Core.. Core.AsText
-              Core.<$> backupId,
-            ("kind" Core..=) Core.<$> kind
+          [ ("backupId" Core..=) Core.. Core.AsText Core.<$> backupId,
+            ("kind" Core..=) Core.<$> kind,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Backup Reencryption Config
+--
+-- /See:/ 'newBackupReencryptionConfig' smart constructor.
+data BackupReencryptionConfig = BackupReencryptionConfig
+  { -- | Backup re-encryption limit
+    backupLimit :: (Core.Maybe Core.Int32),
+    -- | Type of backups users want to re-encrypt.
+    backupType :: (Core.Maybe BackupReencryptionConfig_BackupType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BackupReencryptionConfig' with the minimum fields required to make a request.
+newBackupReencryptionConfig ::
+  BackupReencryptionConfig
+newBackupReencryptionConfig =
+  BackupReencryptionConfig
+    { backupLimit = Core.Nothing,
+      backupType = Core.Nothing
+    }
+
+instance Core.FromJSON BackupReencryptionConfig where
+  parseJSON =
+    Core.withObject
+      "BackupReencryptionConfig"
+      ( \o ->
+          BackupReencryptionConfig
+            Core.<$> (o Core..:? "backupLimit")
+            Core.<*> (o Core..:? "backupType")
+      )
+
+instance Core.ToJSON BackupReencryptionConfig where
+  toJSON BackupReencryptionConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backupLimit" Core..=) Core.<$> backupLimit,
+            ("backupType" Core..=) Core.<$> backupType
           ]
       )
 
@@ -651,8 +1098,7 @@ instance Core.ToJSON BackupRetentionSettings where
   toJSON BackupRetentionSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("retainedBackups" Core..=)
-              Core.<$> retainedBackups,
+          [ ("retainedBackups" Core..=) Core.<$> retainedBackups,
             ("retentionUnit" Core..=) Core.<$> retentionUnit
           ]
       )
@@ -683,6 +1129,8 @@ data BackupRun = BackupRun
     kind :: (Core.Maybe Core.Text),
     -- | Location of the backups.
     location :: (Core.Maybe Core.Text),
+    -- | Output only. The maximum chargeable bytes for the backup.
+    maxChargeableBytes :: (Core.Maybe Core.Int64),
     -- | The URI of this resource.
     selfLink :: (Core.Maybe Core.Text),
     -- | The time the backup operation actually started in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
@@ -714,6 +1162,7 @@ newBackupRun =
       instance' = Core.Nothing,
       kind = Core.Nothing,
       location = Core.Nothing,
+      maxChargeableBytes = Core.Nothing,
       selfLink = Core.Nothing,
       startTime = Core.Nothing,
       status = Core.Nothing,
@@ -739,6 +1188,10 @@ instance Core.FromJSON BackupRun where
             Core.<*> (o Core..:? "instance")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "location")
+            Core.<*> ( o
+                         Core..:? "maxChargeableBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
@@ -755,8 +1208,7 @@ instance Core.ToJSON BackupRun where
             ("description" Core..=) Core.<$> description,
             ("diskEncryptionConfiguration" Core..=)
               Core.<$> diskEncryptionConfiguration,
-            ("diskEncryptionStatus" Core..=)
-              Core.<$> diskEncryptionStatus,
+            ("diskEncryptionStatus" Core..=) Core.<$> diskEncryptionStatus,
             ("endTime" Core..=) Core.<$> endTime,
             ("enqueuedTime" Core..=) Core.<$> enqueuedTime,
             ("error" Core..=) Core.<$> error,
@@ -764,13 +1216,15 @@ instance Core.ToJSON BackupRun where
             ("instance" Core..=) Core.<$> instance',
             ("kind" Core..=) Core.<$> kind,
             ("location" Core..=) Core.<$> location,
+            ("maxChargeableBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> maxChargeableBytes,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
             ("timeZone" Core..=) Core.<$> timeZone,
             ("type" Core..=) Core.<$> type',
-            ("windowStartTime" Core..=)
-              Core.<$> windowStartTime
+            ("windowStartTime" Core..=) Core.<$> windowStartTime
           ]
       )
 
@@ -848,9 +1302,7 @@ instance Core.FromJSON BinLogCoordinates where
       ( \o ->
           BinLogCoordinates
             Core.<$> (o Core..:? "binLogFileName")
-            Core.<*> ( o Core..:? "binLogPosition"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "binLogPosition" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
       )
 
@@ -859,7 +1311,8 @@ instance Core.ToJSON BinLogCoordinates where
     Core.object
       ( Core.catMaybes
           [ ("binLogFileName" Core..=) Core.<$> binLogFileName,
-            ("binLogPosition" Core..=) Core.. Core.AsText
+            ("binLogPosition" Core..=)
+              Core.. Core.AsText
               Core.<$> binLogPosition,
             ("kind" Core..=) Core.<$> kind
           ]
@@ -882,7 +1335,11 @@ data CloneContext = CloneContext
     -- | Reserved for future use.
     pitrTimestampMs :: (Core.Maybe Core.Int64),
     -- | Timestamp, if specified, identifies the time to which the source instance is cloned.
-    pointInTime :: (Core.Maybe Core.DateTime)
+    pointInTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Copy clone and point-in-time recovery clone of a regional instance in the specified zones. If not specified, clone to the same secondary zone as the source instance. This value cannot be the same as the preferred_zone field. This field applies to all DB types.
+    preferredSecondaryZone :: (Core.Maybe Core.Text),
+    -- | Optional. Copy clone and point-in-time recovery clone of an instance to the specified zone. If no zone is specified, clone to the same primary zone as the source instance. This field applies to all DB types.
+    preferredZone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -897,7 +1354,9 @@ newCloneContext =
       destinationInstanceName = Core.Nothing,
       kind = Core.Nothing,
       pitrTimestampMs = Core.Nothing,
-      pointInTime = Core.Nothing
+      pointInTime = Core.Nothing,
+      preferredSecondaryZone = Core.Nothing,
+      preferredZone = Core.Nothing
     }
 
 instance Core.FromJSON CloneContext where
@@ -911,27 +1370,28 @@ instance Core.FromJSON CloneContext where
             Core.<*> (o Core..:? "databaseNames")
             Core.<*> (o Core..:? "destinationInstanceName")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "pitrTimestampMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "pitrTimestampMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "pointInTime")
+            Core.<*> (o Core..:? "preferredSecondaryZone")
+            Core.<*> (o Core..:? "preferredZone")
       )
 
 instance Core.ToJSON CloneContext where
   toJSON CloneContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allocatedIpRange" Core..=)
-              Core.<$> allocatedIpRange,
-            ("binLogCoordinates" Core..=)
-              Core.<$> binLogCoordinates,
+          [ ("allocatedIpRange" Core..=) Core.<$> allocatedIpRange,
+            ("binLogCoordinates" Core..=) Core.<$> binLogCoordinates,
             ("databaseNames" Core..=) Core.<$> databaseNames,
             ("destinationInstanceName" Core..=)
               Core.<$> destinationInstanceName,
             ("kind" Core..=) Core.<$> kind,
-            ("pitrTimestampMs" Core..=) Core.. Core.AsText
+            ("pitrTimestampMs" Core..=)
+              Core.. Core.AsText
               Core.<$> pitrTimestampMs,
-            ("pointInTime" Core..=) Core.<$> pointInTime
+            ("pointInTime" Core..=) Core.<$> pointInTime,
+            ("preferredSecondaryZone" Core..=) Core.<$> preferredSecondaryZone,
+            ("preferredZone" Core..=) Core.<$> preferredZone
           ]
       )
 
@@ -941,16 +1401,26 @@ instance Core.ToJSON CloneContext where
 data ConnectSettings = ConnectSettings
   { -- | @SECOND_GEN@: Cloud SQL database instance. @EXTERNAL@: A database server that is not managed by Google. This property is read-only; use the @tier@ property in the @settings@ object to determine the database type.
     backendType :: (Core.Maybe ConnectSettings_BackendType),
+    -- | Custom subject alternative names for the server certificate.
+    customSubjectAlternativeNames :: (Core.Maybe [Core.Text]),
     -- | The database engine type and version. The @databaseVersion@ field cannot be changed after instance creation. MySQL instances: @MYSQL_8_0@, @MYSQL_5_7@ (default), or @MYSQL_5_6@. PostgreSQL instances: @POSTGRES_9_6@, @POSTGRES_10@, @POSTGRES_11@, @POSTGRES_12@ (default), @POSTGRES_13@, or @POSTGRES_14@. SQL Server instances: @SQLSERVER_2017_STANDARD@ (default), @SQLSERVER_2017_ENTERPRISE@, @SQLSERVER_2017_EXPRESS@, @SQLSERVER_2017_WEB@, @SQLSERVER_2019_STANDARD@, @SQLSERVER_2019_ENTERPRISE@, @SQLSERVER_2019_EXPRESS@, or @SQLSERVER_2019_WEB@.
     databaseVersion :: (Core.Maybe ConnectSettings_DatabaseVersion),
+    -- | The dns name of the instance.
+    dnsName :: (Core.Maybe Core.Text),
+    -- | Output only. The list of DNS names used by this instance.
+    dnsNames :: (Core.Maybe [DnsNameMapping]),
     -- | The assigned IP addresses for the instance.
     ipAddresses :: (Core.Maybe [IpMapping]),
     -- | This is always @sql#connectSettings@.
     kind :: (Core.Maybe Core.Text),
+    -- | Whether PSC connectivity is enabled for this instance.
+    pscEnabled :: (Core.Maybe Core.Bool),
     -- | The cloud region for the instance. For example, @us-central1@, @europe-west1@. The region cannot be changed after instance creation.
     region :: (Core.Maybe Core.Text),
     -- | SSL configuration.
-    serverCaCert :: (Core.Maybe SslCert)
+    serverCaCert :: (Core.Maybe SslCert),
+    -- | Specify what type of CA is used for the server certificate.
+    serverCaMode :: (Core.Maybe ConnectSettings_ServerCaMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -960,11 +1430,16 @@ newConnectSettings ::
 newConnectSettings =
   ConnectSettings
     { backendType = Core.Nothing,
+      customSubjectAlternativeNames = Core.Nothing,
       databaseVersion = Core.Nothing,
+      dnsName = Core.Nothing,
+      dnsNames = Core.Nothing,
       ipAddresses = Core.Nothing,
       kind = Core.Nothing,
+      pscEnabled = Core.Nothing,
       region = Core.Nothing,
-      serverCaCert = Core.Nothing
+      serverCaCert = Core.Nothing,
+      serverCaMode = Core.Nothing
     }
 
 instance Core.FromJSON ConnectSettings where
@@ -974,11 +1449,16 @@ instance Core.FromJSON ConnectSettings where
       ( \o ->
           ConnectSettings
             Core.<$> (o Core..:? "backendType")
+            Core.<*> (o Core..:? "customSubjectAlternativeNames")
             Core.<*> (o Core..:? "databaseVersion")
+            Core.<*> (o Core..:? "dnsName")
+            Core.<*> (o Core..:? "dnsNames")
             Core.<*> (o Core..:? "ipAddresses")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "pscEnabled")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "serverCaCert")
+            Core.<*> (o Core..:? "serverCaMode")
       )
 
 instance Core.ToJSON ConnectSettings where
@@ -986,12 +1466,46 @@ instance Core.ToJSON ConnectSettings where
     Core.object
       ( Core.catMaybes
           [ ("backendType" Core..=) Core.<$> backendType,
+            ("customSubjectAlternativeNames" Core..=)
+              Core.<$> customSubjectAlternativeNames,
             ("databaseVersion" Core..=) Core.<$> databaseVersion,
+            ("dnsName" Core..=) Core.<$> dnsName,
+            ("dnsNames" Core..=) Core.<$> dnsNames,
             ("ipAddresses" Core..=) Core.<$> ipAddresses,
             ("kind" Core..=) Core.<$> kind,
+            ("pscEnabled" Core..=) Core.<$> pscEnabled,
             ("region" Core..=) Core.<$> region,
-            ("serverCaCert" Core..=) Core.<$> serverCaCert
+            ("serverCaCert" Core..=) Core.<$> serverCaCert,
+            ("serverCaMode" Core..=) Core.<$> serverCaMode
           ]
+      )
+
+-- | Data cache configurations.
+--
+-- /See:/ 'newDataCacheConfig' smart constructor.
+newtype DataCacheConfig = DataCacheConfig
+  { -- | Whether data cache is enabled for the instance.
+    dataCacheEnabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataCacheConfig' with the minimum fields required to make a request.
+newDataCacheConfig ::
+  DataCacheConfig
+newDataCacheConfig =
+  DataCacheConfig {dataCacheEnabled = Core.Nothing}
+
+instance Core.FromJSON DataCacheConfig where
+  parseJSON =
+    Core.withObject
+      "DataCacheConfig"
+      (\o -> DataCacheConfig Core.<$> (o Core..:? "dataCacheEnabled"))
+
+instance Core.ToJSON DataCacheConfig where
+  toJSON DataCacheConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("dataCacheEnabled" Core..=) Core.<$> dataCacheEnabled]
       )
 
 -- | Represents a SQL database on the Cloud SQL instance.
@@ -1014,7 +1528,6 @@ data Database = Database
     project :: (Core.Maybe Core.Text),
     -- | The URI of this resource.
     selfLink :: (Core.Maybe Core.Text),
-    -- |
     sqlserverDatabaseDetails :: (Core.Maybe SqlServerDatabaseDetails)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1083,7 +1596,8 @@ data DatabaseFlags = DatabaseFlags
 -- | Creates a value of 'DatabaseFlags' with the minimum fields required to make a request.
 newDatabaseFlags ::
   DatabaseFlags
-newDatabaseFlags = DatabaseFlags {name = Core.Nothing, value = Core.Nothing}
+newDatabaseFlags =
+  DatabaseFlags {name = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON DatabaseFlags where
   parseJSON =
@@ -1091,23 +1605,22 @@ instance Core.FromJSON DatabaseFlags where
       "DatabaseFlags"
       ( \o ->
           DatabaseFlags
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON DatabaseFlags where
   toJSON DatabaseFlags {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'newDatabaseInstance' smart constructor.
 data DatabaseInstance = DatabaseInstance
-  { -- | List all maintenance versions applicable on the instance
+  { -- | Output only. List all maintenance versions applicable on the instance
     availableMaintenanceVersions :: (Core.Maybe [Core.Text]),
     -- | The backend type. @SECOND_GEN@: Cloud SQL database instance. @EXTERNAL@: A database server that is not managed by Google. This property is read-only; use the @tier@ property in the @settings@ object to determine the database type.
     backendType :: (Core.Maybe DatabaseInstance_BackendType),
@@ -1125,12 +1638,20 @@ data DatabaseInstance = DatabaseInstance
     diskEncryptionConfiguration :: (Core.Maybe DiskEncryptionConfiguration),
     -- | Disk encryption status specific to an instance.
     diskEncryptionStatus :: (Core.Maybe DiskEncryptionStatus),
+    -- | Output only. The dns name of the instance.
+    dnsName :: (Core.Maybe Core.Text),
+    -- | Output only. The list of DNS names used by this instance.
+    dnsNames :: (Core.Maybe [DnsNameMapping]),
     -- | This field is deprecated and will be removed from a future version of the API. Use the @settings.settingsVersion@ field instead.
     etag :: (Core.Maybe Core.Text),
     -- | The name and status of the failover replica.
     failoverReplica :: (Core.Maybe DatabaseInstance_FailoverReplica),
     -- | The Compute Engine zone that the instance is currently serving from. This value could be different from the zone that was specified when the instance was created if the instance has failed over to its secondary zone. WARNING: Changing this might restart the instance.
     gceZone :: (Core.Maybe Core.Text),
+    -- | Gemini instance configuration.
+    geminiConfig :: (Core.Maybe GeminiInstanceConfig),
+    -- | Input only. Determines whether an in-place major version upgrade of replicas happens when an in-place major version upgrade of a primary instance is initiated.
+    includeReplicasForMajorVersionUpgrade :: (Core.Maybe Core.Bool),
     -- | The instance type.
     instanceType :: (Core.Maybe DatabaseInstance_InstanceType),
     -- | The assigned IP addresses for the instance.
@@ -1151,17 +1672,25 @@ data DatabaseInstance = DatabaseInstance
     onPremisesConfiguration :: (Core.Maybe OnPremisesConfiguration),
     -- | This field represents the report generated by the proactive database wellness job for OutOfDisk issues. * Writers: * the proactive database wellness job for OOD. * Readers: * the proactive database wellness job
     outOfDiskReport :: (Core.Maybe SqlOutOfDiskReport),
+    -- | Output only. DEPRECATED: please use write_endpoint instead.
+    primaryDnsName :: (Core.Maybe Core.Text),
     -- | The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
     project :: (Core.Maybe Core.Text),
-    -- | The geographical region. Can be: * @us-central@ (@FIRST_GEN@ instances only) * @us-central1@ (@SECOND_GEN@ instances only) * @asia-east1@ or @europe-west1@. Defaults to @us-central@ or @us-central1@ depending on the instance type. The region cannot be changed after instance creation.
+    -- | Output only. The link to service attachment of PSC instance.
+    pscServiceAttachmentLink :: (Core.Maybe Core.Text),
+    -- | The geographical region of the Cloud SQL instance. It can be one of the <https://cloud.google.com/sql/docs/mysql/locations#location-r regions> where Cloud SQL operates: For example, @asia-east1@, @europe-west1@, and @us-central1@. The default value is @us-central1@.
     region :: (Core.Maybe Core.Text),
     -- | Configuration specific to failover replicas and read replicas.
     replicaConfiguration :: (Core.Maybe ReplicaConfiguration),
     -- | The replicas of the instance.
     replicaNames :: (Core.Maybe [Core.Text]),
+    -- | Optional. A primary instance and disaster recovery (DR) replica pair. A DR replica is a cross-region replica that you designate for failover in the event that the primary instance experiences regional failure. Applicable to MySQL and PostgreSQL.
+    replicationCluster :: (Core.Maybe ReplicationCluster),
     -- | Initial root password. Use only on creation. You must set root passwords before you can connect to PostgreSQL instances.
     rootPassword :: (Core.Maybe Core.Text),
-    -- | The status indicating if instance satisfiesPzs. Reserved for future use.
+    -- | Output only. This status indicates whether the instance satisfies PZI. The status is reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | This status indicates whether the instance satisfies PZS. The status is reserved for future use.
     satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | The start time of any upcoming scheduled maintenance for this instance.
     scheduledMaintenance :: (Core.Maybe SqlScheduledMaintenance),
@@ -1175,10 +1704,19 @@ data DatabaseInstance = DatabaseInstance
     serviceAccountEmailAddress :: (Core.Maybe Core.Text),
     -- | The user settings.
     settings :: (Core.Maybe Settings),
+    sqlNetworkArchitecture :: (Core.Maybe DatabaseInstance_SqlNetworkArchitecture),
     -- | The current serving state of the Cloud SQL instance.
     state :: (Core.Maybe DatabaseInstance_State),
     -- | If the instance state is SUSPENDED, the reason for the suspension.
-    suspensionReason :: (Core.Maybe [DatabaseInstance_SuspensionReasonItem])
+    suspensionReason :: (Core.Maybe [DatabaseInstance_SuspensionReasonItem]),
+    -- | Input only. Whether Cloud SQL is enabled to switch storing point-in-time recovery log files from a data disk to Cloud Storage.
+    switchTransactionLogsToCloudStorageEnabled :: (Core.Maybe Core.Bool),
+    -- | Optional. Input only. Immutable. Tag keys and tag values that are bound to this instance. You must represent each item in the map as: @\"\" : \"\"@. For example, a single resource can have the following tags: @\"123\/environment\": \"production\", \"123\/costCenter\": \"marketing\",@ For more information on tag creation and management, see https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-overview.
+    tags :: (Core.Maybe DatabaseInstance_Tags),
+    -- | Output only. All database versions that are available for upgrade.
+    upgradableDatabaseVersions :: (Core.Maybe [AvailableDatabaseVersion]),
+    -- | Output only. The dns name of the primary instance in a replication group.
+    writeEndpoint :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1196,9 +1734,13 @@ newDatabaseInstance =
       databaseVersion = Core.Nothing,
       diskEncryptionConfiguration = Core.Nothing,
       diskEncryptionStatus = Core.Nothing,
+      dnsName = Core.Nothing,
+      dnsNames = Core.Nothing,
       etag = Core.Nothing,
       failoverReplica = Core.Nothing,
       gceZone = Core.Nothing,
+      geminiConfig = Core.Nothing,
+      includeReplicasForMajorVersionUpgrade = Core.Nothing,
       instanceType = Core.Nothing,
       ipAddresses = Core.Nothing,
       ipv6Address = Core.Nothing,
@@ -1209,11 +1751,15 @@ newDatabaseInstance =
       name = Core.Nothing,
       onPremisesConfiguration = Core.Nothing,
       outOfDiskReport = Core.Nothing,
+      primaryDnsName = Core.Nothing,
       project = Core.Nothing,
+      pscServiceAttachmentLink = Core.Nothing,
       region = Core.Nothing,
       replicaConfiguration = Core.Nothing,
       replicaNames = Core.Nothing,
+      replicationCluster = Core.Nothing,
       rootPassword = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
       satisfiesPzs = Core.Nothing,
       scheduledMaintenance = Core.Nothing,
       secondaryGceZone = Core.Nothing,
@@ -1221,8 +1767,13 @@ newDatabaseInstance =
       serverCaCert = Core.Nothing,
       serviceAccountEmailAddress = Core.Nothing,
       settings = Core.Nothing,
+      sqlNetworkArchitecture = Core.Nothing,
       state = Core.Nothing,
-      suspensionReason = Core.Nothing
+      suspensionReason = Core.Nothing,
+      switchTransactionLogsToCloudStorageEnabled = Core.Nothing,
+      tags = Core.Nothing,
+      upgradableDatabaseVersions = Core.Nothing,
+      writeEndpoint = Core.Nothing
     }
 
 instance Core.FromJSON DatabaseInstance where
@@ -1235,33 +1786,37 @@ instance Core.FromJSON DatabaseInstance where
             Core.<*> (o Core..:? "backendType")
             Core.<*> (o Core..:? "connectionName")
             Core.<*> (o Core..:? "createTime")
-            Core.<*> ( o Core..:? "currentDiskSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "currentDiskSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "databaseInstalledVersion")
             Core.<*> (o Core..:? "databaseVersion")
             Core.<*> (o Core..:? "diskEncryptionConfiguration")
             Core.<*> (o Core..:? "diskEncryptionStatus")
+            Core.<*> (o Core..:? "dnsName")
+            Core.<*> (o Core..:? "dnsNames")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "failoverReplica")
             Core.<*> (o Core..:? "gceZone")
+            Core.<*> (o Core..:? "geminiConfig")
+            Core.<*> (o Core..:? "includeReplicasForMajorVersionUpgrade")
             Core.<*> (o Core..:? "instanceType")
             Core.<*> (o Core..:? "ipAddresses")
             Core.<*> (o Core..:? "ipv6Address")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "maintenanceVersion")
             Core.<*> (o Core..:? "masterInstanceName")
-            Core.<*> ( o Core..:? "maxDiskSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxDiskSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "onPremisesConfiguration")
             Core.<*> (o Core..:? "outOfDiskReport")
+            Core.<*> (o Core..:? "primaryDnsName")
             Core.<*> (o Core..:? "project")
+            Core.<*> (o Core..:? "pscServiceAttachmentLink")
             Core.<*> (o Core..:? "region")
             Core.<*> (o Core..:? "replicaConfiguration")
             Core.<*> (o Core..:? "replicaNames")
+            Core.<*> (o Core..:? "replicationCluster")
             Core.<*> (o Core..:? "rootPassword")
+            Core.<*> (o Core..:? "satisfiesPzi")
             Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "scheduledMaintenance")
             Core.<*> (o Core..:? "secondaryGceZone")
@@ -1269,8 +1824,13 @@ instance Core.FromJSON DatabaseInstance where
             Core.<*> (o Core..:? "serverCaCert")
             Core.<*> (o Core..:? "serviceAccountEmailAddress")
             Core.<*> (o Core..:? "settings")
+            Core.<*> (o Core..:? "sqlNetworkArchitecture")
             Core.<*> (o Core..:? "state")
             Core.<*> (o Core..:? "suspensionReason")
+            Core.<*> (o Core..:? "switchTransactionLogsToCloudStorageEnabled")
+            Core.<*> (o Core..:? "tags")
+            Core.<*> (o Core..:? "upgradableDatabaseVersions")
+            Core.<*> (o Core..:? "writeEndpoint")
       )
 
 instance Core.ToJSON DatabaseInstance where
@@ -1282,51 +1842,61 @@ instance Core.ToJSON DatabaseInstance where
             ("backendType" Core..=) Core.<$> backendType,
             ("connectionName" Core..=) Core.<$> connectionName,
             ("createTime" Core..=) Core.<$> createTime,
-            ("currentDiskSize" Core..=) Core.. Core.AsText
+            ("currentDiskSize" Core..=)
+              Core.. Core.AsText
               Core.<$> currentDiskSize,
             ("databaseInstalledVersion" Core..=)
               Core.<$> databaseInstalledVersion,
             ("databaseVersion" Core..=) Core.<$> databaseVersion,
             ("diskEncryptionConfiguration" Core..=)
               Core.<$> diskEncryptionConfiguration,
-            ("diskEncryptionStatus" Core..=)
-              Core.<$> diskEncryptionStatus,
+            ("diskEncryptionStatus" Core..=) Core.<$> diskEncryptionStatus,
+            ("dnsName" Core..=) Core.<$> dnsName,
+            ("dnsNames" Core..=) Core.<$> dnsNames,
             ("etag" Core..=) Core.<$> etag,
             ("failoverReplica" Core..=) Core.<$> failoverReplica,
             ("gceZone" Core..=) Core.<$> gceZone,
+            ("geminiConfig" Core..=) Core.<$> geminiConfig,
+            ("includeReplicasForMajorVersionUpgrade" Core..=)
+              Core.<$> includeReplicasForMajorVersionUpgrade,
             ("instanceType" Core..=) Core.<$> instanceType,
             ("ipAddresses" Core..=) Core.<$> ipAddresses,
             ("ipv6Address" Core..=) Core.<$> ipv6Address,
             ("kind" Core..=) Core.<$> kind,
-            ("maintenanceVersion" Core..=)
-              Core.<$> maintenanceVersion,
-            ("masterInstanceName" Core..=)
-              Core.<$> masterInstanceName,
-            ("maxDiskSize" Core..=) Core.. Core.AsText
-              Core.<$> maxDiskSize,
+            ("maintenanceVersion" Core..=) Core.<$> maintenanceVersion,
+            ("masterInstanceName" Core..=) Core.<$> masterInstanceName,
+            ("maxDiskSize" Core..=) Core.. Core.AsText Core.<$> maxDiskSize,
             ("name" Core..=) Core.<$> name,
             ("onPremisesConfiguration" Core..=)
               Core.<$> onPremisesConfiguration,
             ("outOfDiskReport" Core..=) Core.<$> outOfDiskReport,
+            ("primaryDnsName" Core..=) Core.<$> primaryDnsName,
             ("project" Core..=) Core.<$> project,
+            ("pscServiceAttachmentLink" Core..=)
+              Core.<$> pscServiceAttachmentLink,
             ("region" Core..=) Core.<$> region,
-            ("replicaConfiguration" Core..=)
-              Core.<$> replicaConfiguration,
+            ("replicaConfiguration" Core..=) Core.<$> replicaConfiguration,
             ("replicaNames" Core..=) Core.<$> replicaNames,
+            ("replicationCluster" Core..=) Core.<$> replicationCluster,
             ("rootPassword" Core..=) Core.<$> rootPassword,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
             ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
-            ("scheduledMaintenance" Core..=)
-              Core.<$> scheduledMaintenance,
-            ("secondaryGceZone" Core..=)
-              Core.<$> secondaryGceZone,
+            ("scheduledMaintenance" Core..=) Core.<$> scheduledMaintenance,
+            ("secondaryGceZone" Core..=) Core.<$> secondaryGceZone,
             ("selfLink" Core..=) Core.<$> selfLink,
             ("serverCaCert" Core..=) Core.<$> serverCaCert,
             ("serviceAccountEmailAddress" Core..=)
               Core.<$> serviceAccountEmailAddress,
             ("settings" Core..=) Core.<$> settings,
+            ("sqlNetworkArchitecture" Core..=) Core.<$> sqlNetworkArchitecture,
             ("state" Core..=) Core.<$> state,
-            ("suspensionReason" Core..=)
-              Core.<$> suspensionReason
+            ("suspensionReason" Core..=) Core.<$> suspensionReason,
+            ("switchTransactionLogsToCloudStorageEnabled" Core..=)
+              Core.<$> switchTransactionLogsToCloudStorageEnabled,
+            ("tags" Core..=) Core.<$> tags,
+            ("upgradableDatabaseVersions" Core..=)
+              Core.<$> upgradableDatabaseVersions,
+            ("writeEndpoint" Core..=) Core.<$> writeEndpoint
           ]
       )
 
@@ -1350,10 +1920,7 @@ newDatabaseInstance_FailoverReplica =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatabaseInstance_FailoverReplica
-  where
+instance Core.FromJSON DatabaseInstance_FailoverReplica where
   parseJSON =
     Core.withObject
       "DatabaseInstance_FailoverReplica"
@@ -1371,6 +1938,31 @@ instance Core.ToJSON DatabaseInstance_FailoverReplica where
             ("name" Core..=) Core.<$> name
           ]
       )
+
+-- | Optional. Input only. Immutable. Tag keys and tag values that are bound to this instance. You must represent each item in the map as: @\"\" : \"\"@. For example, a single resource can have the following tags: @\"123\/environment\": \"production\", \"123\/costCenter\": \"marketing\",@ For more information on tag creation and management, see https:\/\/cloud.google.com\/resource-manager\/docs\/tags\/tags-overview.
+--
+-- /See:/ 'newDatabaseInstance_Tags' smart constructor.
+newtype DatabaseInstance_Tags = DatabaseInstance_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DatabaseInstance_Tags' with the minimum fields required to make a request.
+newDatabaseInstance_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  DatabaseInstance_Tags
+newDatabaseInstance_Tags additional =
+  DatabaseInstance_Tags {additional = additional}
+
+instance Core.FromJSON DatabaseInstance_Tags where
+  parseJSON =
+    Core.withObject
+      "DatabaseInstance_Tags"
+      (\o -> DatabaseInstance_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DatabaseInstance_Tags where
+  toJSON DatabaseInstance_Tags {..} = Core.toJSON additional
 
 -- | Database list response.
 --
@@ -1395,15 +1987,54 @@ instance Core.FromJSON DatabasesListResponse where
       "DatabasesListResponse"
       ( \o ->
           DatabasesListResponse
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON DatabasesListResponse where
   toJSON DatabasesListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
+      )
+
+-- | This context is used to demote an existing standalone instance to be a Cloud SQL read replica for an external database server.
+--
+-- /See:/ 'newDemoteContext' smart constructor.
+data DemoteContext = DemoteContext
+  { -- | This is always @sql#demoteContext@.
+    kind :: (Core.Maybe Core.Text),
+    -- | Required. The name of the instance which acts as the on-premises primary instance in the replication setup.
+    sourceRepresentativeInstanceName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DemoteContext' with the minimum fields required to make a request.
+newDemoteContext ::
+  DemoteContext
+newDemoteContext =
+  DemoteContext
+    { kind = Core.Nothing,
+      sourceRepresentativeInstanceName = Core.Nothing
+    }
+
+instance Core.FromJSON DemoteContext where
+  parseJSON =
+    Core.withObject
+      "DemoteContext"
+      ( \o ->
+          DemoteContext
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "sourceRepresentativeInstanceName")
+      )
+
+instance Core.ToJSON DemoteContext where
+  toJSON DemoteContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kind" Core..=) Core.<$> kind,
+            ("sourceRepresentativeInstanceName" Core..=)
+              Core.<$> sourceRepresentativeInstanceName
           ]
       )
 
@@ -1494,14 +2125,10 @@ instance Core.ToJSON DemoteMasterContext where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("masterInstanceName" Core..=)
-              Core.<$> masterInstanceName,
-            ("replicaConfiguration" Core..=)
-              Core.<$> replicaConfiguration,
-            ("skipReplicationSetup" Core..=)
-              Core.<$> skipReplicationSetup,
-            ("verifyGtidConsistency" Core..=)
-              Core.<$> verifyGtidConsistency
+            ("masterInstanceName" Core..=) Core.<$> masterInstanceName,
+            ("replicaConfiguration" Core..=) Core.<$> replicaConfiguration,
+            ("skipReplicationSetup" Core..=) Core.<$> skipReplicationSetup,
+            ("verifyGtidConsistency" Core..=) Core.<$> verifyGtidConsistency
           ]
       )
 
@@ -1513,7 +2140,7 @@ data DemoteMasterMySqlReplicaConfiguration = DemoteMasterMySqlReplicaConfigurati
     caCertificate :: (Core.Maybe Core.Text),
     -- | PEM representation of the replica\'s x509 certificate.
     clientCertificate :: (Core.Maybe Core.Text),
-    -- | PEM representation of the replica\'s private key. The corresponsing public key is encoded in the client\'s certificate. The format of the replica\'s private key can be either PKCS #1 or PKCS #8.
+    -- | PEM representation of the replica\'s private key. The corresponding public key is encoded in the client\'s certificate. The format of the replica\'s private key can be either PKCS #1 or PKCS #8.
     clientKey :: (Core.Maybe Core.Text),
     -- | This is always @sql#demoteMasterMysqlReplicaConfiguration@.
     kind :: (Core.Maybe Core.Text),
@@ -1529,7 +2156,8 @@ newDemoteMasterMySqlReplicaConfiguration ::
   DemoteMasterMySqlReplicaConfiguration
 newDemoteMasterMySqlReplicaConfiguration =
   DemoteMasterMySqlReplicaConfiguration
-    { caCertificate = Core.Nothing,
+    { caCertificate =
+        Core.Nothing,
       clientCertificate = Core.Nothing,
       clientKey = Core.Nothing,
       kind = Core.Nothing,
@@ -1537,10 +2165,7 @@ newDemoteMasterMySqlReplicaConfiguration =
       username = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DemoteMasterMySqlReplicaConfiguration
-  where
+instance Core.FromJSON DemoteMasterMySqlReplicaConfiguration where
   parseJSON =
     Core.withObject
       "DemoteMasterMySqlReplicaConfiguration"
@@ -1554,16 +2179,12 @@ instance
             Core.<*> (o Core..:? "username")
       )
 
-instance
-  Core.ToJSON
-    DemoteMasterMySqlReplicaConfiguration
-  where
+instance Core.ToJSON DemoteMasterMySqlReplicaConfiguration where
   toJSON DemoteMasterMySqlReplicaConfiguration {..} =
     Core.object
       ( Core.catMaybes
           [ ("caCertificate" Core..=) Core.<$> caCertificate,
-            ("clientCertificate" Core..=)
-              Core.<$> clientCertificate,
+            ("clientCertificate" Core..=) Core.<$> clientCertificate,
             ("clientKey" Core..=) Core.<$> clientKey,
             ("kind" Core..=) Core.<$> kind,
             ("password" Core..=) Core.<$> password,
@@ -1630,7 +2251,10 @@ data DiskEncryptionConfiguration = DiskEncryptionConfiguration
 newDiskEncryptionConfiguration ::
   DiskEncryptionConfiguration
 newDiskEncryptionConfiguration =
-  DiskEncryptionConfiguration {kind = Core.Nothing, kmsKeyName = Core.Nothing}
+  DiskEncryptionConfiguration
+    { kind = Core.Nothing,
+      kmsKeyName = Core.Nothing
+    }
 
 instance Core.FromJSON DiskEncryptionConfiguration where
   parseJSON =
@@ -1666,7 +2290,10 @@ data DiskEncryptionStatus = DiskEncryptionStatus
 newDiskEncryptionStatus ::
   DiskEncryptionStatus
 newDiskEncryptionStatus =
-  DiskEncryptionStatus {kind = Core.Nothing, kmsKeyVersionName = Core.Nothing}
+  DiskEncryptionStatus
+    { kind = Core.Nothing,
+      kmsKeyVersionName = Core.Nothing
+    }
 
 instance Core.FromJSON DiskEncryptionStatus where
   parseJSON =
@@ -1683,10 +2310,70 @@ instance Core.ToJSON DiskEncryptionStatus where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("kmsKeyVersionName" Core..=)
-              Core.<$> kmsKeyVersionName
+            ("kmsKeyVersionName" Core..=) Core.<$> kmsKeyVersionName
           ]
       )
+
+-- | DNS metadata.
+--
+-- /See:/ 'newDnsNameMapping' smart constructor.
+data DnsNameMapping = DnsNameMapping
+  { -- | Output only. The connection type of the DNS name.
+    connectionType :: (Core.Maybe DnsNameMapping_ConnectionType),
+    -- | Output only. The scope that the DNS name applies to.
+    dnsScope :: (Core.Maybe DnsNameMapping_DnsScope),
+    -- | The DNS name.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DnsNameMapping' with the minimum fields required to make a request.
+newDnsNameMapping ::
+  DnsNameMapping
+newDnsNameMapping =
+  DnsNameMapping
+    { connectionType = Core.Nothing,
+      dnsScope = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON DnsNameMapping where
+  parseJSON =
+    Core.withObject
+      "DnsNameMapping"
+      ( \o ->
+          DnsNameMapping
+            Core.<$> (o Core..:? "connectionType")
+            Core.<*> (o Core..:? "dnsScope")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON DnsNameMapping where
+  toJSON DnsNameMapping {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("connectionType" Core..=) Core.<$> connectionType,
+            ("dnsScope" Core..=) Core.<$> dnsScope,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
+--
+-- /See:/ 'newEmpty' smart constructor.
+data Empty = Empty
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+newEmpty ::
+  Empty
+newEmpty = Empty
+
+instance Core.FromJSON Empty where
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
+
+instance Core.ToJSON Empty where
+  toJSON = Core.const Core.emptyObject
 
 -- | Database instance export context.
 --
@@ -1696,7 +2383,7 @@ data ExportContext = ExportContext
     bakExportOptions :: (Core.Maybe ExportContext_BakExportOptions),
     -- | Options for exporting data as CSV. @MySQL@ and @PostgreSQL@ instances only.
     csvExportOptions :: (Core.Maybe ExportContext_CsvExportOptions),
-    -- | Databases to be exported. @MySQL instances:@ If @fileType@ is @SQL@ and no database is specified, all databases are exported, except for the @mysql@ system database. If @fileType@ is @CSV@, you can specify one database, either by using this property or by using the @csvExportOptions.selectQuery@ property, which takes precedence over this property. @PostgreSQL instances:@ You must specify one database to be exported. If @fileType@ is @CSV@, this database must match the one specified in the @csvExportOptions.selectQuery@ property. @SQL Server instances:@ You must specify one database to be exported, and the @fileType@ must be @BAK@.
+    -- | Databases to be exported. @MySQL instances:@ If @fileType@ is @SQL@ and no database is specified, all databases are exported, except for the @mysql@ system database. If @fileType@ is @CSV@, you can specify one database, either by using this property or by using the @csvExportOptions.selectQuery@ property, which takes precedence over this property. @PostgreSQL instances:@ If you don\'t specify a database by name, all user databases in the instance are exported. This excludes system databases and Cloud SQL databases used to manage internal operations. Exporting all user databases is only available for directory-formatted parallel export. If @fileType@ is @CSV@, this database must match the one specified in the @csvExportOptions.selectQuery@ property. @SQL Server instances:@ You must specify one database to be exported, and the @fileType@ must be @BAK@.
     databases :: (Core.Maybe [Core.Text]),
     -- | The file type for the specified uri.
     fileType :: (Core.Maybe ExportContext_FileType),
@@ -1706,6 +2393,8 @@ data ExportContext = ExportContext
     offload :: (Core.Maybe Core.Bool),
     -- | Options for exporting data as SQL statements.
     sqlExportOptions :: (Core.Maybe ExportContext_SqlExportOptions),
+    -- | Optional. Export parameters specific to SQL Server TDE certificates
+    tdeExportOptions :: (Core.Maybe ExportContext_TdeExportOptions),
     -- | The path to the file in Google Cloud Storage where the export will be stored. The URI is in the form @gs:\/\/bucketName\/fileName@. If the file already exists, the request succeeds, but the operation fails. If @fileType@ is @SQL@ and the filename ends with .gz, the contents are compressed.
     uri :: (Core.Maybe Core.Text)
   }
@@ -1723,6 +2412,7 @@ newExportContext =
       kind = Core.Nothing,
       offload = Core.Nothing,
       sqlExportOptions = Core.Nothing,
+      tdeExportOptions = Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -1739,6 +2429,7 @@ instance Core.FromJSON ExportContext where
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "offload")
             Core.<*> (o Core..:? "sqlExportOptions")
+            Core.<*> (o Core..:? "tdeExportOptions")
             Core.<*> (o Core..:? "uri")
       )
 
@@ -1746,16 +2437,14 @@ instance Core.ToJSON ExportContext where
   toJSON ExportContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bakExportOptions" Core..=)
-              Core.<$> bakExportOptions,
-            ("csvExportOptions" Core..=)
-              Core.<$> csvExportOptions,
+          [ ("bakExportOptions" Core..=) Core.<$> bakExportOptions,
+            ("csvExportOptions" Core..=) Core.<$> csvExportOptions,
             ("databases" Core..=) Core.<$> databases,
             ("fileType" Core..=) Core.<$> fileType,
             ("kind" Core..=) Core.<$> kind,
             ("offload" Core..=) Core.<$> offload,
-            ("sqlExportOptions" Core..=)
-              Core.<$> sqlExportOptions,
+            ("sqlExportOptions" Core..=) Core.<$> sqlExportOptions,
+            ("tdeExportOptions" Core..=) Core.<$> tdeExportOptions,
             ("uri" Core..=) Core.<$> uri
           ]
       )
@@ -1764,7 +2453,17 @@ instance Core.ToJSON ExportContext where
 --
 -- /See:/ 'newExportContext_BakExportOptions' smart constructor.
 data ExportContext_BakExportOptions = ExportContext_BakExportOptions
-  { -- | Option for specifying how many stripes to use for the export. If blank, and the value of the striped field is true, the number of stripes is automatically chosen.
+  { -- | Type of this bak file will be export, FULL or DIFF, SQL Server only
+    bakType :: (Core.Maybe ExportContext_BakExportOptions_BakType),
+    -- | Deprecated: copy/only is deprecated. Use differential/base instead
+    copyOnly :: (Core.Maybe Core.Bool),
+    -- | Whether or not the backup can be used as a differential base copy_only backup can not be served as differential base
+    differentialBase :: (Core.Maybe Core.Bool),
+    -- | Optional. The end timestamp when transaction log will be included in the export operation. <https://tools.ietf.org/html/rfc3339 RFC 3339> format (for example, @2023-10-01T16:19:00.094@) in UTC. When omitted, all available logs until current time will be included. Only applied to Cloud SQL for SQL Server.
+    exportLogEndTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. The begin timestamp when transaction log will be included in the export operation. <https://tools.ietf.org/html/rfc3339 RFC 3339> format (for example, @2023-10-01T16:19:00.094@) in UTC. When omitted, all available logs from the beginning of retention period will be included. Only applied to Cloud SQL for SQL Server.
+    exportLogStartTime :: (Core.Maybe Core.DateTime),
+    -- | Option for specifying how many stripes to use for the export. If blank, and the value of the striped field is true, the number of stripes is automatically chosen.
     stripeCount :: (Core.Maybe Core.Int32),
     -- | Whether or not the export should be striped.
     striped :: (Core.Maybe Core.Bool)
@@ -1776,7 +2475,12 @@ newExportContext_BakExportOptions ::
   ExportContext_BakExportOptions
 newExportContext_BakExportOptions =
   ExportContext_BakExportOptions
-    { stripeCount = Core.Nothing,
+    { bakType = Core.Nothing,
+      copyOnly = Core.Nothing,
+      differentialBase = Core.Nothing,
+      exportLogEndTime = Core.Nothing,
+      exportLogStartTime = Core.Nothing,
+      stripeCount = Core.Nothing,
       striped = Core.Nothing
     }
 
@@ -1786,7 +2490,12 @@ instance Core.FromJSON ExportContext_BakExportOptions where
       "ExportContext_BakExportOptions"
       ( \o ->
           ExportContext_BakExportOptions
-            Core.<$> (o Core..:? "stripeCount")
+            Core.<$> (o Core..:? "bakType")
+            Core.<*> (o Core..:? "copyOnly")
+            Core.<*> (o Core..:? "differentialBase")
+            Core.<*> (o Core..:? "exportLogEndTime")
+            Core.<*> (o Core..:? "exportLogStartTime")
+            Core.<*> (o Core..:? "stripeCount")
             Core.<*> (o Core..:? "striped")
       )
 
@@ -1794,7 +2503,12 @@ instance Core.ToJSON ExportContext_BakExportOptions where
   toJSON ExportContext_BakExportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("stripeCount" Core..=) Core.<$> stripeCount,
+          [ ("bakType" Core..=) Core.<$> bakType,
+            ("copyOnly" Core..=) Core.<$> copyOnly,
+            ("differentialBase" Core..=) Core.<$> differentialBase,
+            ("exportLogEndTime" Core..=) Core.<$> exportLogEndTime,
+            ("exportLogStartTime" Core..=) Core.<$> exportLogStartTime,
+            ("stripeCount" Core..=) Core.<$> stripeCount,
             ("striped" Core..=) Core.<$> striped
           ]
       )
@@ -1845,12 +2559,9 @@ instance Core.ToJSON ExportContext_CsvExportOptions where
   toJSON ExportContext_CsvExportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("escapeCharacter" Core..=)
-              Core.<$> escapeCharacter,
-            ("fieldsTerminatedBy" Core..=)
-              Core.<$> fieldsTerminatedBy,
-            ("linesTerminatedBy" Core..=)
-              Core.<$> linesTerminatedBy,
+          [ ("escapeCharacter" Core..=) Core.<$> escapeCharacter,
+            ("fieldsTerminatedBy" Core..=) Core.<$> fieldsTerminatedBy,
+            ("linesTerminatedBy" Core..=) Core.<$> linesTerminatedBy,
             ("quoteCharacter" Core..=) Core.<$> quoteCharacter,
             ("selectQuery" Core..=) Core.<$> selectQuery
           ]
@@ -1862,10 +2573,16 @@ instance Core.ToJSON ExportContext_CsvExportOptions where
 data ExportContext_SqlExportOptions = ExportContext_SqlExportOptions
   { -- | Options for exporting from MySQL.
     mysqlExportOptions :: (Core.Maybe ExportContext_SqlExportOptions_MysqlExportOptions),
+    -- | Optional. Whether or not the export should be parallel.
+    parallel :: (Core.Maybe Core.Bool),
+    -- | Options for exporting from a Cloud SQL for PostgreSQL instance.
+    postgresExportOptions :: (Core.Maybe ExportContext_SqlExportOptions_PostgresExportOptions),
     -- | Export only schemas.
     schemaOnly :: (Core.Maybe Core.Bool),
     -- | Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database. For PostgreSQL instances, you can specify only one table.
-    tables :: (Core.Maybe [Core.Text])
+    tables :: (Core.Maybe [Core.Text]),
+    -- | Optional. The number of threads to use for parallel export.
+    threads :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1875,8 +2592,11 @@ newExportContext_SqlExportOptions ::
 newExportContext_SqlExportOptions =
   ExportContext_SqlExportOptions
     { mysqlExportOptions = Core.Nothing,
+      parallel = Core.Nothing,
+      postgresExportOptions = Core.Nothing,
       schemaOnly = Core.Nothing,
-      tables = Core.Nothing
+      tables = Core.Nothing,
+      threads = Core.Nothing
     }
 
 instance Core.FromJSON ExportContext_SqlExportOptions where
@@ -1886,18 +2606,23 @@ instance Core.FromJSON ExportContext_SqlExportOptions where
       ( \o ->
           ExportContext_SqlExportOptions
             Core.<$> (o Core..:? "mysqlExportOptions")
+            Core.<*> (o Core..:? "parallel")
+            Core.<*> (o Core..:? "postgresExportOptions")
             Core.<*> (o Core..:? "schemaOnly")
             Core.<*> (o Core..:? "tables")
+            Core.<*> (o Core..:? "threads")
       )
 
 instance Core.ToJSON ExportContext_SqlExportOptions where
   toJSON ExportContext_SqlExportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mysqlExportOptions" Core..=)
-              Core.<$> mysqlExportOptions,
+          [ ("mysqlExportOptions" Core..=) Core.<$> mysqlExportOptions,
+            ("parallel" Core..=) Core.<$> parallel,
+            ("postgresExportOptions" Core..=) Core.<$> postgresExportOptions,
             ("schemaOnly" Core..=) Core.<$> schemaOnly,
-            ("tables" Core..=) Core.<$> tables
+            ("tables" Core..=) Core.<$> tables,
+            ("threads" Core..=) Core.<$> threads
           ]
       )
 
@@ -1914,7 +2639,10 @@ newtype ExportContext_SqlExportOptions_MysqlExportOptions = ExportContext_SqlExp
 newExportContext_SqlExportOptions_MysqlExportOptions ::
   ExportContext_SqlExportOptions_MysqlExportOptions
 newExportContext_SqlExportOptions_MysqlExportOptions =
-  ExportContext_SqlExportOptions_MysqlExportOptions {masterData = Core.Nothing}
+  ExportContext_SqlExportOptions_MysqlExportOptions
+    { masterData =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -1932,12 +2660,132 @@ instance
   Core.ToJSON
     ExportContext_SqlExportOptions_MysqlExportOptions
   where
-  toJSON
-    ExportContext_SqlExportOptions_MysqlExportOptions {..} =
-      Core.object
-        ( Core.catMaybes
-            [("masterData" Core..=) Core.<$> masterData]
-        )
+  toJSON ExportContext_SqlExportOptions_MysqlExportOptions {..} =
+    Core.object
+      (Core.catMaybes [("masterData" Core..=) Core.<$> masterData])
+
+-- | Options for exporting from a Cloud SQL for PostgreSQL instance.
+--
+-- /See:/ 'newExportContext_SqlExportOptions_PostgresExportOptions' smart constructor.
+data ExportContext_SqlExportOptions_PostgresExportOptions = ExportContext_SqlExportOptions_PostgresExportOptions
+  { -- | Optional. Use this option to include DROP SQL statements. These statements are used to delete database objects before running the import operation.
+    clean :: (Core.Maybe Core.Bool),
+    -- | Optional. Option to include an IF EXISTS SQL statement with each DROP statement produced by clean.
+    ifExists :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExportContext_SqlExportOptions_PostgresExportOptions' with the minimum fields required to make a request.
+newExportContext_SqlExportOptions_PostgresExportOptions ::
+  ExportContext_SqlExportOptions_PostgresExportOptions
+newExportContext_SqlExportOptions_PostgresExportOptions =
+  ExportContext_SqlExportOptions_PostgresExportOptions
+    { clean =
+        Core.Nothing,
+      ifExists = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ExportContext_SqlExportOptions_PostgresExportOptions
+  where
+  parseJSON =
+    Core.withObject
+      "ExportContext_SqlExportOptions_PostgresExportOptions"
+      ( \o ->
+          ExportContext_SqlExportOptions_PostgresExportOptions
+            Core.<$> (o Core..:? "clean")
+            Core.<*> (o Core..:? "ifExists")
+      )
+
+instance
+  Core.ToJSON
+    ExportContext_SqlExportOptions_PostgresExportOptions
+  where
+  toJSON ExportContext_SqlExportOptions_PostgresExportOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clean" Core..=) Core.<$> clean,
+            ("ifExists" Core..=) Core.<$> ifExists
+          ]
+      )
+
+-- | Optional. Export parameters specific to SQL Server TDE certificates
+--
+-- /See:/ 'newExportContext_TdeExportOptions' smart constructor.
+data ExportContext_TdeExportOptions = ExportContext_TdeExportOptions
+  { -- | Required. Path to the TDE certificate public key in the form gs:\/\/bucketName\/fileName. The instance must have write access to the bucket. Applicable only for SQL Server instances.
+    certificatePath :: (Core.Maybe Core.Text),
+    -- | Required. Certificate name. Applicable only for SQL Server instances.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Password that encrypts the private key.
+    privateKeyPassword :: (Core.Maybe Core.Text),
+    -- | Required. Path to the TDE certificate private key in the form gs:\/\/bucketName\/fileName. The instance must have write access to the location. Applicable only for SQL Server instances.
+    privateKeyPath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExportContext_TdeExportOptions' with the minimum fields required to make a request.
+newExportContext_TdeExportOptions ::
+  ExportContext_TdeExportOptions
+newExportContext_TdeExportOptions =
+  ExportContext_TdeExportOptions
+    { certificatePath = Core.Nothing,
+      name = Core.Nothing,
+      privateKeyPassword = Core.Nothing,
+      privateKeyPath = Core.Nothing
+    }
+
+instance Core.FromJSON ExportContext_TdeExportOptions where
+  parseJSON =
+    Core.withObject
+      "ExportContext_TdeExportOptions"
+      ( \o ->
+          ExportContext_TdeExportOptions
+            Core.<$> (o Core..:? "certificatePath")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "privateKeyPassword")
+            Core.<*> (o Core..:? "privateKeyPath")
+      )
+
+instance Core.ToJSON ExportContext_TdeExportOptions where
+  toJSON ExportContext_TdeExportOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificatePath" Core..=) Core.<$> certificatePath,
+            ("name" Core..=) Core.<$> name,
+            ("privateKeyPassword" Core..=) Core.<$> privateKeyPassword,
+            ("privateKeyPath" Core..=) Core.<$> privateKeyPath
+          ]
+      )
+
+-- | The selected object that Cloud SQL migrates.
+--
+-- /See:/ 'newExternalSyncSelectedObject' smart constructor.
+newtype ExternalSyncSelectedObject = ExternalSyncSelectedObject
+  { -- | The name of the database that Cloud SQL migrates.
+    database :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalSyncSelectedObject' with the minimum fields required to make a request.
+newExternalSyncSelectedObject ::
+  ExternalSyncSelectedObject
+newExternalSyncSelectedObject =
+  ExternalSyncSelectedObject {database = Core.Nothing}
+
+instance Core.FromJSON ExternalSyncSelectedObject where
+  parseJSON =
+    Core.withObject
+      "ExternalSyncSelectedObject"
+      ( \o ->
+          ExternalSyncSelectedObject Core.<$> (o Core..:? "database")
+      )
+
+instance Core.ToJSON ExternalSyncSelectedObject where
+  toJSON ExternalSyncSelectedObject {..} =
+    Core.object
+      (Core.catMaybes [("database" Core..=) Core.<$> database])
 
 -- | Database instance failover context.
 --
@@ -1954,7 +2802,10 @@ data FailoverContext = FailoverContext
 newFailoverContext ::
   FailoverContext
 newFailoverContext =
-  FailoverContext {kind = Core.Nothing, settingsVersion = Core.Nothing}
+  FailoverContext
+    { kind = Core.Nothing,
+      settingsVersion = Core.Nothing
+    }
 
 instance Core.FromJSON FailoverContext where
   parseJSON =
@@ -1963,9 +2814,7 @@ instance Core.FromJSON FailoverContext where
       ( \o ->
           FailoverContext
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "settingsVersion"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "settingsVersion" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON FailoverContext where
@@ -1973,7 +2822,8 @@ instance Core.ToJSON FailoverContext where
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("settingsVersion" Core..=) Core.. Core.AsText
+            ("settingsVersion" Core..=)
+              Core.. Core.AsText
               Core.<$> settingsVersion
           ]
       )
@@ -2028,19 +2878,16 @@ instance Core.FromJSON Flag where
       "Flag"
       ( \o ->
           Flag
-            Core.<$> ( o Core..:? "allowedIntValues"
+            Core.<$> ( o
+                         Core..:? "allowedIntValues"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "allowedStringValues")
             Core.<*> (o Core..:? "appliesTo")
             Core.<*> (o Core..:? "inBeta")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "maxValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "minValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxValue" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "requiresRestart")
             Core.<*> (o Core..:? "type")
@@ -2053,15 +2900,12 @@ instance Core.ToJSON Flag where
           [ ("allowedIntValues" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> allowedIntValues,
-            ("allowedStringValues" Core..=)
-              Core.<$> allowedStringValues,
+            ("allowedStringValues" Core..=) Core.<$> allowedStringValues,
             ("appliesTo" Core..=) Core.<$> appliesTo,
             ("inBeta" Core..=) Core.<$> inBeta,
             ("kind" Core..=) Core.<$> kind,
-            ("maxValue" Core..=) Core.. Core.AsText
-              Core.<$> maxValue,
-            ("minValue" Core..=) Core.. Core.AsText
-              Core.<$> minValue,
+            ("maxValue" Core..=) Core.. Core.AsText Core.<$> maxValue,
+            ("minValue" Core..=) Core.. Core.AsText Core.<$> minValue,
             ("name" Core..=) Core.<$> name,
             ("requiresRestart" Core..=) Core.<$> requiresRestart,
             ("type" Core..=) Core.<$> type'
@@ -2091,15 +2935,75 @@ instance Core.FromJSON FlagsListResponse where
       "FlagsListResponse"
       ( \o ->
           FlagsListResponse
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON FlagsListResponse where
   toJSON FlagsListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
+      )
+
+-- | Gemini instance configuration.
+--
+-- /See:/ 'newGeminiInstanceConfig' smart constructor.
+data GeminiInstanceConfig = GeminiInstanceConfig
+  { -- | Output only. Whether the active query is enabled.
+    activeQueryEnabled :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether Gemini is enabled.
+    entitled :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether the flag recommender is enabled.
+    flagRecommenderEnabled :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether the vacuum management is enabled.
+    googleVacuumMgmtEnabled :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether the index advisor is enabled.
+    indexAdvisorEnabled :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether canceling the out-of-memory (OOM) session is enabled.
+    oomSessionCancelEnabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GeminiInstanceConfig' with the minimum fields required to make a request.
+newGeminiInstanceConfig ::
+  GeminiInstanceConfig
+newGeminiInstanceConfig =
+  GeminiInstanceConfig
+    { activeQueryEnabled = Core.Nothing,
+      entitled = Core.Nothing,
+      flagRecommenderEnabled = Core.Nothing,
+      googleVacuumMgmtEnabled = Core.Nothing,
+      indexAdvisorEnabled = Core.Nothing,
+      oomSessionCancelEnabled = Core.Nothing
+    }
+
+instance Core.FromJSON GeminiInstanceConfig where
+  parseJSON =
+    Core.withObject
+      "GeminiInstanceConfig"
+      ( \o ->
+          GeminiInstanceConfig
+            Core.<$> (o Core..:? "activeQueryEnabled")
+            Core.<*> (o Core..:? "entitled")
+            Core.<*> (o Core..:? "flagRecommenderEnabled")
+            Core.<*> (o Core..:? "googleVacuumMgmtEnabled")
+            Core.<*> (o Core..:? "indexAdvisorEnabled")
+            Core.<*> (o Core..:? "oomSessionCancelEnabled")
+      )
+
+instance Core.ToJSON GeminiInstanceConfig where
+  toJSON GeminiInstanceConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("activeQueryEnabled" Core..=) Core.<$> activeQueryEnabled,
+            ("entitled" Core..=) Core.<$> entitled,
+            ("flagRecommenderEnabled" Core..=) Core.<$> flagRecommenderEnabled,
+            ("googleVacuumMgmtEnabled" Core..=)
+              Core.<$> googleVacuumMgmtEnabled,
+            ("indexAdvisorEnabled" Core..=) Core.<$> indexAdvisorEnabled,
+            ("oomSessionCancelEnabled" Core..=)
+              Core.<$> oomSessionCancelEnabled
           ]
       )
 
@@ -2179,9 +3083,7 @@ instance Core.FromJSON GenerateEphemeralCertResponse where
 instance Core.ToJSON GenerateEphemeralCertResponse where
   toJSON GenerateEphemeralCertResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("ephemeralCert" Core..=) Core.<$> ephemeralCert]
-      )
+      (Core.catMaybes [("ephemeralCert" Core..=) Core.<$> ephemeralCert])
 
 -- | Database instance import context.
 --
@@ -2191,7 +3093,7 @@ data ImportContext = ImportContext
     bakImportOptions :: (Core.Maybe ImportContext_BakImportOptions),
     -- | Options for importing data as CSV.
     csvImportOptions :: (Core.Maybe ImportContext_CsvImportOptions),
-    -- | The target database for the import. If @fileType@ is @SQL@, this field is required only if the import file does not specify a database, and is overridden by any database specification in the import file. If @fileType@ is @CSV@, one database must be specified.
+    -- | The target database for the import. If @fileType@ is @SQL@, this field is required only if the import file does not specify a database, and is overridden by any database specification in the import file. For entire instance parallel import operations, the database is overridden by the database name stored in subdirectory name. If @fileType@ is @CSV@, one database must be specified.
     database :: (Core.Maybe Core.Text),
     -- | The file type for the specified uri.\`SQL@: The file contains SQL statements. \\@CSV\`: The file contains CSV data.
     fileType :: (Core.Maybe ImportContext_FileType),
@@ -2199,6 +3101,10 @@ data ImportContext = ImportContext
     importUser :: (Core.Maybe Core.Text),
     -- | This is always @sql#importContext@.
     kind :: (Core.Maybe Core.Text),
+    -- | Optional. Options for importing data from SQL statements.
+    sqlImportOptions :: (Core.Maybe ImportContext_SqlImportOptions),
+    -- | Optional. Import parameters specific to SQL Server TDE certificates
+    tdeImportOptions :: (Core.Maybe ImportContext_TdeImportOptions),
     -- | Path to the import file in Cloud Storage, in the form @gs:\/\/bucketName\/fileName@. Compressed gzip files (.gz) are supported when @fileType@ is @SQL@. The instance must have write permissions to the bucket and read access to the file.
     uri :: (Core.Maybe Core.Text)
   }
@@ -2215,6 +3121,8 @@ newImportContext =
       fileType = Core.Nothing,
       importUser = Core.Nothing,
       kind = Core.Nothing,
+      sqlImportOptions = Core.Nothing,
+      tdeImportOptions = Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -2230,6 +3138,8 @@ instance Core.FromJSON ImportContext where
             Core.<*> (o Core..:? "fileType")
             Core.<*> (o Core..:? "importUser")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "sqlImportOptions")
+            Core.<*> (o Core..:? "tdeImportOptions")
             Core.<*> (o Core..:? "uri")
       )
 
@@ -2237,14 +3147,14 @@ instance Core.ToJSON ImportContext where
   toJSON ImportContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bakImportOptions" Core..=)
-              Core.<$> bakImportOptions,
-            ("csvImportOptions" Core..=)
-              Core.<$> csvImportOptions,
+          [ ("bakImportOptions" Core..=) Core.<$> bakImportOptions,
+            ("csvImportOptions" Core..=) Core.<$> csvImportOptions,
             ("database" Core..=) Core.<$> database,
             ("fileType" Core..=) Core.<$> fileType,
             ("importUser" Core..=) Core.<$> importUser,
             ("kind" Core..=) Core.<$> kind,
+            ("sqlImportOptions" Core..=) Core.<$> sqlImportOptions,
+            ("tdeImportOptions" Core..=) Core.<$> tdeImportOptions,
             ("uri" Core..=) Core.<$> uri
           ]
       )
@@ -2253,8 +3163,17 @@ instance Core.ToJSON ImportContext where
 --
 -- /See:/ 'newImportContext_BakImportOptions' smart constructor.
 data ImportContext_BakImportOptions = ImportContext_BakImportOptions
-  { -- |
+  { -- | Type of the bak content, FULL or DIFF
+    bakType :: (Core.Maybe ImportContext_BakImportOptions_BakType),
     encryptionOptions :: (Core.Maybe ImportContext_BakImportOptions_EncryptionOptions),
+    -- | Whether or not the backup importing will restore database with NORECOVERY option Applies only to Cloud SQL for SQL Server.
+    noRecovery :: (Core.Maybe Core.Bool),
+    -- | Whether or not the backup importing request will just bring database online without downloading Bak content only one of \"no/recovery\" and \"recovery/only\" can be true otherwise error will return. Applies only to Cloud SQL for SQL Server.
+    recoveryOnly :: (Core.Maybe Core.Bool),
+    -- | Optional. The timestamp when the import should stop. This timestamp is in the <https://tools.ietf.org/html/rfc3339 RFC 3339> format (for example, @2023-10-01T16:19:00.094@). This field is equivalent to the STOPAT keyword and applies to Cloud SQL for SQL Server only.
+    stopAt :: (Core.Maybe Core.DateTime),
+    -- | Optional. The marked transaction where the import should stop. This field is equivalent to the STOPATMARK keyword and applies to Cloud SQL for SQL Server only.
+    stopAtMark :: (Core.Maybe Core.Text),
     -- | Whether or not the backup set being restored is striped. Applies only to Cloud SQL for SQL Server.
     striped :: (Core.Maybe Core.Bool)
   }
@@ -2265,7 +3184,12 @@ newImportContext_BakImportOptions ::
   ImportContext_BakImportOptions
 newImportContext_BakImportOptions =
   ImportContext_BakImportOptions
-    { encryptionOptions = Core.Nothing,
+    { bakType = Core.Nothing,
+      encryptionOptions = Core.Nothing,
+      noRecovery = Core.Nothing,
+      recoveryOnly = Core.Nothing,
+      stopAt = Core.Nothing,
+      stopAtMark = Core.Nothing,
       striped = Core.Nothing
     }
 
@@ -2275,7 +3199,12 @@ instance Core.FromJSON ImportContext_BakImportOptions where
       "ImportContext_BakImportOptions"
       ( \o ->
           ImportContext_BakImportOptions
-            Core.<$> (o Core..:? "encryptionOptions")
+            Core.<$> (o Core..:? "bakType")
+            Core.<*> (o Core..:? "encryptionOptions")
+            Core.<*> (o Core..:? "noRecovery")
+            Core.<*> (o Core..:? "recoveryOnly")
+            Core.<*> (o Core..:? "stopAt")
+            Core.<*> (o Core..:? "stopAtMark")
             Core.<*> (o Core..:? "striped")
       )
 
@@ -2283,8 +3212,12 @@ instance Core.ToJSON ImportContext_BakImportOptions where
   toJSON ImportContext_BakImportOptions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("encryptionOptions" Core..=)
-              Core.<$> encryptionOptions,
+          [ ("bakType" Core..=) Core.<$> bakType,
+            ("encryptionOptions" Core..=) Core.<$> encryptionOptions,
+            ("noRecovery" Core..=) Core.<$> noRecovery,
+            ("recoveryOnly" Core..=) Core.<$> recoveryOnly,
+            ("stopAt" Core..=) Core.<$> stopAt,
+            ("stopAtMark" Core..=) Core.<$> stopAtMark,
             ("striped" Core..=) Core.<$> striped
           ]
       )
@@ -2294,6 +3227,8 @@ instance Core.ToJSON ImportContext_BakImportOptions where
 data ImportContext_BakImportOptions_EncryptionOptions = ImportContext_BakImportOptions_EncryptionOptions
   { -- | Path to the Certificate (.cer) in Cloud Storage, in the form @gs:\/\/bucketName\/fileName@. The instance must have write permissions to the bucket and read access to the file.
     certPath :: (Core.Maybe Core.Text),
+    -- | Optional. Whether the imported file remains encrypted.
+    keepEncrypted :: (Core.Maybe Core.Bool),
     -- | Password that encrypts the private key
     pvkPassword :: (Core.Maybe Core.Text),
     -- | Path to the Certificate Private Key (.pvk) in Cloud Storage, in the form @gs:\/\/bucketName\/fileName@. The instance must have write permissions to the bucket and read access to the file.
@@ -2306,7 +3241,9 @@ newImportContext_BakImportOptions_EncryptionOptions ::
   ImportContext_BakImportOptions_EncryptionOptions
 newImportContext_BakImportOptions_EncryptionOptions =
   ImportContext_BakImportOptions_EncryptionOptions
-    { certPath = Core.Nothing,
+    { certPath =
+        Core.Nothing,
+      keepEncrypted = Core.Nothing,
       pvkPassword = Core.Nothing,
       pvkPath = Core.Nothing
     }
@@ -2321,23 +3258,24 @@ instance
       ( \o ->
           ImportContext_BakImportOptions_EncryptionOptions
             Core.<$> (o Core..:? "certPath")
-              Core.<*> (o Core..:? "pvkPassword")
-              Core.<*> (o Core..:? "pvkPath")
+            Core.<*> (o Core..:? "keepEncrypted")
+            Core.<*> (o Core..:? "pvkPassword")
+            Core.<*> (o Core..:? "pvkPath")
       )
 
 instance
   Core.ToJSON
     ImportContext_BakImportOptions_EncryptionOptions
   where
-  toJSON
-    ImportContext_BakImportOptions_EncryptionOptions {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("certPath" Core..=) Core.<$> certPath,
-              ("pvkPassword" Core..=) Core.<$> pvkPassword,
-              ("pvkPath" Core..=) Core.<$> pvkPath
-            ]
-        )
+  toJSON ImportContext_BakImportOptions_EncryptionOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certPath" Core..=) Core.<$> certPath,
+            ("keepEncrypted" Core..=) Core.<$> keepEncrypted,
+            ("pvkPassword" Core..=) Core.<$> pvkPassword,
+            ("pvkPath" Core..=) Core.<$> pvkPath
+          ]
+      )
 
 -- | Options for importing data as CSV.
 --
@@ -2391,12 +3329,149 @@ instance Core.ToJSON ImportContext_CsvImportOptions where
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
             ("escapeCharacter" Core..=) Core.<$> escapeCharacter,
-            ("fieldsTerminatedBy" Core..=)
-              Core.<$> fieldsTerminatedBy,
-            ("linesTerminatedBy" Core..=)
-              Core.<$> linesTerminatedBy,
+            ("fieldsTerminatedBy" Core..=) Core.<$> fieldsTerminatedBy,
+            ("linesTerminatedBy" Core..=) Core.<$> linesTerminatedBy,
             ("quoteCharacter" Core..=) Core.<$> quoteCharacter,
             ("table" Core..=) Core.<$> table
+          ]
+      )
+
+-- | Optional. Options for importing data from SQL statements.
+--
+-- /See:/ 'newImportContext_SqlImportOptions' smart constructor.
+data ImportContext_SqlImportOptions = ImportContext_SqlImportOptions
+  { -- | Optional. Whether or not the import should be parallel.
+    parallel :: (Core.Maybe Core.Bool),
+    -- | Optional. Options for importing from a Cloud SQL for PostgreSQL instance.
+    postgresImportOptions :: (Core.Maybe ImportContext_SqlImportOptions_PostgresImportOptions),
+    -- | Optional. The number of threads to use for parallel import.
+    threads :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImportContext_SqlImportOptions' with the minimum fields required to make a request.
+newImportContext_SqlImportOptions ::
+  ImportContext_SqlImportOptions
+newImportContext_SqlImportOptions =
+  ImportContext_SqlImportOptions
+    { parallel = Core.Nothing,
+      postgresImportOptions = Core.Nothing,
+      threads = Core.Nothing
+    }
+
+instance Core.FromJSON ImportContext_SqlImportOptions where
+  parseJSON =
+    Core.withObject
+      "ImportContext_SqlImportOptions"
+      ( \o ->
+          ImportContext_SqlImportOptions
+            Core.<$> (o Core..:? "parallel")
+            Core.<*> (o Core..:? "postgresImportOptions")
+            Core.<*> (o Core..:? "threads")
+      )
+
+instance Core.ToJSON ImportContext_SqlImportOptions where
+  toJSON ImportContext_SqlImportOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("parallel" Core..=) Core.<$> parallel,
+            ("postgresImportOptions" Core..=) Core.<$> postgresImportOptions,
+            ("threads" Core..=) Core.<$> threads
+          ]
+      )
+
+-- | Optional. Options for importing from a Cloud SQL for PostgreSQL instance.
+--
+-- /See:/ 'newImportContext_SqlImportOptions_PostgresImportOptions' smart constructor.
+data ImportContext_SqlImportOptions_PostgresImportOptions = ImportContext_SqlImportOptions_PostgresImportOptions
+  { -- | Optional. The --clean flag for the pg_restore utility. This flag applies only if you enabled Cloud SQL to import files in parallel.
+    clean :: (Core.Maybe Core.Bool),
+    -- | Optional. The --if-exists flag for the pg_restore utility. This flag applies only if you enabled Cloud SQL to import files in parallel.
+    ifExists :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImportContext_SqlImportOptions_PostgresImportOptions' with the minimum fields required to make a request.
+newImportContext_SqlImportOptions_PostgresImportOptions ::
+  ImportContext_SqlImportOptions_PostgresImportOptions
+newImportContext_SqlImportOptions_PostgresImportOptions =
+  ImportContext_SqlImportOptions_PostgresImportOptions
+    { clean =
+        Core.Nothing,
+      ifExists = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    ImportContext_SqlImportOptions_PostgresImportOptions
+  where
+  parseJSON =
+    Core.withObject
+      "ImportContext_SqlImportOptions_PostgresImportOptions"
+      ( \o ->
+          ImportContext_SqlImportOptions_PostgresImportOptions
+            Core.<$> (o Core..:? "clean")
+            Core.<*> (o Core..:? "ifExists")
+      )
+
+instance
+  Core.ToJSON
+    ImportContext_SqlImportOptions_PostgresImportOptions
+  where
+  toJSON ImportContext_SqlImportOptions_PostgresImportOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("clean" Core..=) Core.<$> clean,
+            ("ifExists" Core..=) Core.<$> ifExists
+          ]
+      )
+
+-- | Optional. Import parameters specific to SQL Server TDE certificates
+--
+-- /See:/ 'newImportContext_TdeImportOptions' smart constructor.
+data ImportContext_TdeImportOptions = ImportContext_TdeImportOptions
+  { -- | Required. Path to the TDE certificate public key in the form gs:\/\/bucketName\/fileName. The instance must have read access to the file. Applicable only for SQL Server instances.
+    certificatePath :: (Core.Maybe Core.Text),
+    -- | Required. Certificate name. Applicable only for SQL Server instances.
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Password that encrypts the private key.
+    privateKeyPassword :: (Core.Maybe Core.Text),
+    -- | Required. Path to the TDE certificate private key in the form gs:\/\/bucketName\/fileName. The instance must have read access to the file. Applicable only for SQL Server instances.
+    privateKeyPath :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImportContext_TdeImportOptions' with the minimum fields required to make a request.
+newImportContext_TdeImportOptions ::
+  ImportContext_TdeImportOptions
+newImportContext_TdeImportOptions =
+  ImportContext_TdeImportOptions
+    { certificatePath = Core.Nothing,
+      name = Core.Nothing,
+      privateKeyPassword = Core.Nothing,
+      privateKeyPath = Core.Nothing
+    }
+
+instance Core.FromJSON ImportContext_TdeImportOptions where
+  parseJSON =
+    Core.withObject
+      "ImportContext_TdeImportOptions"
+      ( \o ->
+          ImportContext_TdeImportOptions
+            Core.<$> (o Core..:? "certificatePath")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "privateKeyPassword")
+            Core.<*> (o Core..:? "privateKeyPath")
+      )
+
+instance Core.ToJSON ImportContext_TdeImportOptions where
+  toJSON ImportContext_TdeImportOptions {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificatePath" Core..=) Core.<$> certificatePath,
+            ("name" Core..=) Core.<$> name,
+            ("privateKeyPassword" Core..=) Core.<$> privateKeyPassword,
+            ("privateKeyPath" Core..=) Core.<$> privateKeyPath
           ]
       )
 
@@ -2446,16 +3521,11 @@ instance Core.ToJSON InsightsConfig where
   toJSON InsightsConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("queryInsightsEnabled" Core..=)
-              Core.<$> queryInsightsEnabled,
-            ("queryPlansPerMinute" Core..=)
-              Core.<$> queryPlansPerMinute,
-            ("queryStringLength" Core..=)
-              Core.<$> queryStringLength,
-            ("recordApplicationTags" Core..=)
-              Core.<$> recordApplicationTags,
-            ("recordClientAddress" Core..=)
-              Core.<$> recordClientAddress
+          [ ("queryInsightsEnabled" Core..=) Core.<$> queryInsightsEnabled,
+            ("queryPlansPerMinute" Core..=) Core.<$> queryPlansPerMinute,
+            ("queryStringLength" Core..=) Core.<$> queryStringLength,
+            ("recordApplicationTags" Core..=) Core.<$> recordApplicationTags,
+            ("recordClientAddress" Core..=) Core.<$> recordClientAddress
           ]
       )
 
@@ -2503,6 +3573,42 @@ instance Core.ToJSON InstanceReference where
           ]
       )
 
+-- | Request to acquire a lease for SSRS.
+--
+-- /See:/ 'newInstancesAcquireSsrsLeaseRequest' smart constructor.
+newtype InstancesAcquireSsrsLeaseRequest = InstancesAcquireSsrsLeaseRequest
+  { -- | Contains details about the acquire SSRS lease operation.
+    acquireSsrsLeaseContext :: (Core.Maybe AcquireSsrsLeaseContext)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesAcquireSsrsLeaseRequest' with the minimum fields required to make a request.
+newInstancesAcquireSsrsLeaseRequest ::
+  InstancesAcquireSsrsLeaseRequest
+newInstancesAcquireSsrsLeaseRequest =
+  InstancesAcquireSsrsLeaseRequest
+    { acquireSsrsLeaseContext =
+        Core.Nothing
+    }
+
+instance Core.FromJSON InstancesAcquireSsrsLeaseRequest where
+  parseJSON =
+    Core.withObject
+      "InstancesAcquireSsrsLeaseRequest"
+      ( \o ->
+          InstancesAcquireSsrsLeaseRequest
+            Core.<$> (o Core..:? "acquireSsrsLeaseContext")
+      )
+
+instance Core.ToJSON InstancesAcquireSsrsLeaseRequest where
+  toJSON InstancesAcquireSsrsLeaseRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("acquireSsrsLeaseContext" Core..=)
+              Core.<$> acquireSsrsLeaseContext
+          ]
+      )
+
 -- | Database instance clone request.
 --
 -- /See:/ 'newInstancesCloneRequest' smart constructor.
@@ -2515,23 +3621,19 @@ newtype InstancesCloneRequest = InstancesCloneRequest
 -- | Creates a value of 'InstancesCloneRequest' with the minimum fields required to make a request.
 newInstancesCloneRequest ::
   InstancesCloneRequest
-newInstancesCloneRequest = InstancesCloneRequest {cloneContext = Core.Nothing}
+newInstancesCloneRequest =
+  InstancesCloneRequest {cloneContext = Core.Nothing}
 
 instance Core.FromJSON InstancesCloneRequest where
   parseJSON =
     Core.withObject
       "InstancesCloneRequest"
-      ( \o ->
-          InstancesCloneRequest
-            Core.<$> (o Core..:? "cloneContext")
-      )
+      (\o -> InstancesCloneRequest Core.<$> (o Core..:? "cloneContext"))
 
 instance Core.ToJSON InstancesCloneRequest where
   toJSON InstancesCloneRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("cloneContext" Core..=) Core.<$> cloneContext]
-      )
+      (Core.catMaybes [("cloneContext" Core..=) Core.<$> cloneContext])
 
 -- | Database demote primary instance request.
 --
@@ -2561,10 +3663,36 @@ instance Core.ToJSON InstancesDemoteMasterRequest where
   toJSON InstancesDemoteMasterRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("demoteMasterContext" Core..=)
-              Core.<$> demoteMasterContext
-          ]
+          [("demoteMasterContext" Core..=) Core.<$> demoteMasterContext]
       )
+
+-- | This request is used to demote an existing standalone instance to be a Cloud SQL read replica for an external database server.
+--
+-- /See:/ 'newInstancesDemoteRequest' smart constructor.
+newtype InstancesDemoteRequest = InstancesDemoteRequest
+  { -- | Required. Contains details about the demote operation.
+    demoteContext :: (Core.Maybe DemoteContext)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesDemoteRequest' with the minimum fields required to make a request.
+newInstancesDemoteRequest ::
+  InstancesDemoteRequest
+newInstancesDemoteRequest =
+  InstancesDemoteRequest {demoteContext = Core.Nothing}
+
+instance Core.FromJSON InstancesDemoteRequest where
+  parseJSON =
+    Core.withObject
+      "InstancesDemoteRequest"
+      ( \o ->
+          InstancesDemoteRequest Core.<$> (o Core..:? "demoteContext")
+      )
+
+instance Core.ToJSON InstancesDemoteRequest where
+  toJSON InstancesDemoteRequest {..} =
+    Core.object
+      (Core.catMaybes [("demoteContext" Core..=) Core.<$> demoteContext])
 
 -- | Database instance export request.
 --
@@ -2586,16 +3714,13 @@ instance Core.FromJSON InstancesExportRequest where
     Core.withObject
       "InstancesExportRequest"
       ( \o ->
-          InstancesExportRequest
-            Core.<$> (o Core..:? "exportContext")
+          InstancesExportRequest Core.<$> (o Core..:? "exportContext")
       )
 
 instance Core.ToJSON InstancesExportRequest where
   toJSON InstancesExportRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("exportContext" Core..=) Core.<$> exportContext]
-      )
+      (Core.catMaybes [("exportContext" Core..=) Core.<$> exportContext])
 
 -- | Instance failover request.
 --
@@ -2617,17 +3742,14 @@ instance Core.FromJSON InstancesFailoverRequest where
     Core.withObject
       "InstancesFailoverRequest"
       ( \o ->
-          InstancesFailoverRequest
-            Core.<$> (o Core..:? "failoverContext")
+          InstancesFailoverRequest Core.<$> (o Core..:? "failoverContext")
       )
 
 instance Core.ToJSON InstancesFailoverRequest where
   toJSON InstancesFailoverRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failoverContext" Core..=)
-              Core.<$> failoverContext
-          ]
+          [("failoverContext" Core..=) Core.<$> failoverContext]
       )
 
 -- | Database instance import request.
@@ -2650,16 +3772,13 @@ instance Core.FromJSON InstancesImportRequest where
     Core.withObject
       "InstancesImportRequest"
       ( \o ->
-          InstancesImportRequest
-            Core.<$> (o Core..:? "importContext")
+          InstancesImportRequest Core.<$> (o Core..:? "importContext")
       )
 
 instance Core.ToJSON InstancesImportRequest where
   toJSON InstancesImportRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("importContext" Core..=) Core.<$> importContext]
-      )
+      (Core.catMaybes [("importContext" Core..=) Core.<$> importContext])
 
 -- | Database instances list response.
 --
@@ -2714,8 +3833,7 @@ instance Core.ToJSON InstancesListResponse where
 --
 -- /See:/ 'newInstancesListServerCasResponse' smart constructor.
 data InstancesListServerCasResponse = InstancesListServerCasResponse
-  { -- |
-    activeVersion :: (Core.Maybe Core.Text),
+  { activeVersion :: (Core.Maybe Core.Text),
     -- | List of server CA certificates for the instance.
     certs :: (Core.Maybe [SslCert]),
     -- | This is always @sql#instancesListServerCas@.
@@ -2754,12 +3872,102 @@ instance Core.ToJSON InstancesListServerCasResponse where
           ]
       )
 
+-- | Instances ListServerCertificates response.
+--
+-- /See:/ 'newInstancesListServerCertificatesResponse' smart constructor.
+data InstancesListServerCertificatesResponse = InstancesListServerCertificatesResponse
+  { -- | The @sha1_fingerprint@ of the active certificate from @server_certs@.
+    activeVersion :: (Core.Maybe Core.Text),
+    -- | List of server CA certificates for the instance.
+    caCerts :: (Core.Maybe [SslCert]),
+    -- | This is always @sql#instancesListServerCertificates@.
+    kind :: (Core.Maybe Core.Text),
+    -- | List of server certificates for the instance, signed by the corresponding CA from the @ca_certs@ list.
+    serverCerts :: (Core.Maybe [SslCert])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesListServerCertificatesResponse' with the minimum fields required to make a request.
+newInstancesListServerCertificatesResponse ::
+  InstancesListServerCertificatesResponse
+newInstancesListServerCertificatesResponse =
+  InstancesListServerCertificatesResponse
+    { activeVersion =
+        Core.Nothing,
+      caCerts = Core.Nothing,
+      kind = Core.Nothing,
+      serverCerts = Core.Nothing
+    }
+
+instance Core.FromJSON InstancesListServerCertificatesResponse where
+  parseJSON =
+    Core.withObject
+      "InstancesListServerCertificatesResponse"
+      ( \o ->
+          InstancesListServerCertificatesResponse
+            Core.<$> (o Core..:? "activeVersion")
+            Core.<*> (o Core..:? "caCerts")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "serverCerts")
+      )
+
+instance Core.ToJSON InstancesListServerCertificatesResponse where
+  toJSON InstancesListServerCertificatesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("activeVersion" Core..=) Core.<$> activeVersion,
+            ("caCerts" Core..=) Core.<$> caCerts,
+            ("kind" Core..=) Core.<$> kind,
+            ("serverCerts" Core..=) Core.<$> serverCerts
+          ]
+      )
+
+-- | Database Instance reencrypt request.
+--
+-- /See:/ 'newInstancesReencryptRequest' smart constructor.
+newtype InstancesReencryptRequest = InstancesReencryptRequest
+  { -- | Configuration specific to backup re-encryption
+    backupReencryptionConfig :: (Core.Maybe BackupReencryptionConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesReencryptRequest' with the minimum fields required to make a request.
+newInstancesReencryptRequest ::
+  InstancesReencryptRequest
+newInstancesReencryptRequest =
+  InstancesReencryptRequest
+    { backupReencryptionConfig =
+        Core.Nothing
+    }
+
+instance Core.FromJSON InstancesReencryptRequest where
+  parseJSON =
+    Core.withObject
+      "InstancesReencryptRequest"
+      ( \o ->
+          InstancesReencryptRequest
+            Core.<$> (o Core..:? "backupReencryptionConfig")
+      )
+
+instance Core.ToJSON InstancesReencryptRequest where
+  toJSON InstancesReencryptRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backupReencryptionConfig" Core..=)
+              Core.<$> backupReencryptionConfig
+          ]
+      )
+
 -- | Database instance restore backup request.
 --
 -- /See:/ 'newInstancesRestoreBackupRequest' smart constructor.
-newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
-  { -- | Parameters required to perform the restore backup operation.
-    restoreBackupContext :: (Core.Maybe RestoreBackupContext)
+data InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
+  { -- | The name of the backup that\'s used to restore a Cloud SQL instance: Format: projects\/{project-id}\/backups\/{backup-uid}. Only one of restore/backup/context, backup, backupdr_backup can be passed to the input.
+    backup :: (Core.Maybe Core.Text),
+    -- | Parameters required to perform the restore backup operation.
+    restoreBackupContext :: (Core.Maybe RestoreBackupContext),
+    -- | Optional. By using this parameter, Cloud SQL overrides any instance settings stored in the backup you are restoring from. You can\'t change the instance\'s major database version and you can only increase the disk size. You can use this field to restore new instances only. This field is not applicable for restore to existing instances.
+    restoreInstanceSettings :: (Core.Maybe DatabaseInstance)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2767,7 +3975,11 @@ newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
 newInstancesRestoreBackupRequest ::
   InstancesRestoreBackupRequest
 newInstancesRestoreBackupRequest =
-  InstancesRestoreBackupRequest {restoreBackupContext = Core.Nothing}
+  InstancesRestoreBackupRequest
+    { backup = Core.Nothing,
+      restoreBackupContext = Core.Nothing,
+      restoreInstanceSettings = Core.Nothing
+    }
 
 instance Core.FromJSON InstancesRestoreBackupRequest where
   parseJSON =
@@ -2775,15 +3987,19 @@ instance Core.FromJSON InstancesRestoreBackupRequest where
       "InstancesRestoreBackupRequest"
       ( \o ->
           InstancesRestoreBackupRequest
-            Core.<$> (o Core..:? "restoreBackupContext")
+            Core.<$> (o Core..:? "backup")
+            Core.<*> (o Core..:? "restoreBackupContext")
+            Core.<*> (o Core..:? "restoreInstanceSettings")
       )
 
 instance Core.ToJSON InstancesRestoreBackupRequest where
   toJSON InstancesRestoreBackupRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("restoreBackupContext" Core..=)
-              Core.<$> restoreBackupContext
+          [ ("backup" Core..=) Core.<$> backup,
+            ("restoreBackupContext" Core..=) Core.<$> restoreBackupContext,
+            ("restoreInstanceSettings" Core..=)
+              Core.<$> restoreInstanceSettings
           ]
       )
 
@@ -2800,7 +4016,10 @@ newtype InstancesRotateServerCaRequest = InstancesRotateServerCaRequest
 newInstancesRotateServerCaRequest ::
   InstancesRotateServerCaRequest
 newInstancesRotateServerCaRequest =
-  InstancesRotateServerCaRequest {rotateServerCaContext = Core.Nothing}
+  InstancesRotateServerCaRequest
+    { rotateServerCaContext =
+        Core.Nothing
+    }
 
 instance Core.FromJSON InstancesRotateServerCaRequest where
   parseJSON =
@@ -2815,8 +4034,42 @@ instance Core.ToJSON InstancesRotateServerCaRequest where
   toJSON InstancesRotateServerCaRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("rotateServerCaContext" Core..=)
-              Core.<$> rotateServerCaContext
+          [("rotateServerCaContext" Core..=) Core.<$> rotateServerCaContext]
+      )
+
+-- | Rotate server certificate request.
+--
+-- /See:/ 'newInstancesRotateServerCertificateRequest' smart constructor.
+newtype InstancesRotateServerCertificateRequest = InstancesRotateServerCertificateRequest
+  { -- | Optional. Contains details about the rotate server certificate operation.
+    rotateServerCertificateContext :: (Core.Maybe RotateServerCertificateContext)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InstancesRotateServerCertificateRequest' with the minimum fields required to make a request.
+newInstancesRotateServerCertificateRequest ::
+  InstancesRotateServerCertificateRequest
+newInstancesRotateServerCertificateRequest =
+  InstancesRotateServerCertificateRequest
+    { rotateServerCertificateContext =
+        Core.Nothing
+    }
+
+instance Core.FromJSON InstancesRotateServerCertificateRequest where
+  parseJSON =
+    Core.withObject
+      "InstancesRotateServerCertificateRequest"
+      ( \o ->
+          InstancesRotateServerCertificateRequest
+            Core.<$> (o Core..:? "rotateServerCertificateContext")
+      )
+
+instance Core.ToJSON InstancesRotateServerCertificateRequest where
+  toJSON InstancesRotateServerCertificateRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("rotateServerCertificateContext" Core..=)
+              Core.<$> rotateServerCertificateContext
           ]
       )
 
@@ -2848,8 +4101,42 @@ instance Core.ToJSON InstancesTruncateLogRequest where
   toJSON InstancesTruncateLogRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("truncateLogContext" Core..=)
-              Core.<$> truncateLogContext
+          [("truncateLogContext" Core..=) Core.<$> truncateLogContext]
+      )
+
+-- | Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+--
+-- /See:/ 'newInterval' smart constructor.
+data Interval = Interval
+  { -- | Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Interval' with the minimum fields required to make a request.
+newInterval ::
+  Interval
+newInterval =
+  Interval {endTime = Core.Nothing, startTime = Core.Nothing}
+
+instance Core.FromJSON Interval where
+  parseJSON =
+    Core.withObject
+      "Interval"
+      ( \o ->
+          Interval
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON Interval where
+  toJSON Interval {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime
           ]
       )
 
@@ -2861,14 +4148,24 @@ data IpConfiguration = IpConfiguration
     allocatedIpRange :: (Core.Maybe Core.Text),
     -- | The list of external networks that are allowed to connect to the instance using the IP. In \'CIDR\' notation, also known as \'slash\' notation (for example: @157.197.200.0\/24@).
     authorizedNetworks :: (Core.Maybe [AclEntry]),
+    -- | Optional. Custom Subject Alternative Name(SAN)s for a Cloud SQL instance.
+    customSubjectAlternativeNames :: (Core.Maybe [Core.Text]),
     -- | Controls connectivity to private IP instances from Google services, such as BigQuery.
     enablePrivatePathForGoogleCloudServices :: (Core.Maybe Core.Bool),
     -- | Whether the instance is assigned a public IP address or not.
     ipv4Enabled :: (Core.Maybe Core.Bool),
     -- | The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP. For example, @\/projects\/myProject\/global\/networks\/default@. This setting can be updated, but it cannot be removed after it is set.
     privateNetwork :: (Core.Maybe Core.Text),
-    -- | Whether SSL connections over IP are enforced or not.
-    requireSsl :: (Core.Maybe Core.Bool)
+    -- | PSC settings for this instance.
+    pscConfig :: (Core.Maybe PscConfig),
+    -- | Use @ssl_mode@ instead. Whether SSL\/TLS connections over IP are enforced. If set to false, then allow both non-SSL\/non-TLS and SSL\/TLS connections. For SSL\/TLS connections, the client certificate won\'t be verified. If set to true, then only allow connections encrypted with SSL\/TLS and with valid client certificates. If you want to enforce SSL\/TLS without enforcing the requirement for valid client certificates, then use the @ssl_mode@ flag instead of the @require_ssl@ flag.
+    requireSsl :: (Core.Maybe Core.Bool),
+    -- | Specify what type of CA is used for the server certificate.
+    serverCaMode :: (Core.Maybe IpConfiguration_ServerCaMode),
+    -- | Optional. The resource name of the server CA pool for an instance with @CUSTOMER_MANAGED_CAS_CA@ as the @server_ca_mode@. Format: projects\/{PROJECT}\/locations\/{REGION}\/caPools\/{CA/POOL/ID}
+    serverCaPool :: (Core.Maybe Core.Text),
+    -- | Specify how SSL\/TLS is enforced in database connections. If you must use the @require_ssl@ flag for backward compatibility, then only the following value pairs are valid: For PostgreSQL and MySQL: * @ssl_mode=ALLOW_UNENCRYPTED_AND_ENCRYPTED@ and @require_ssl=false@ * @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=false@ * @ssl_mode=TRUSTED_CLIENT_CERTIFICATE_REQUIRED@ and @require_ssl=true@ For SQL Server: * @ssl_mode=ALLOW_UNENCRYPTED_AND_ENCRYPTED@ and @require_ssl=false@ * @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=true@ The value of @ssl_mode@ has priority over the value of @require_ssl@. For example, for the pair @ssl_mode=ENCRYPTED_ONLY@ and @require_ssl=false@, @ssl_mode=ENCRYPTED_ONLY@ means accept only SSL connections, while @require_ssl=false@ means accept both non-SSL and SSL connections. In this case, MySQL and PostgreSQL databases respect @ssl_mode@ and accepts only SSL connections.
+    sslMode :: (Core.Maybe IpConfiguration_SslMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2879,10 +4176,15 @@ newIpConfiguration =
   IpConfiguration
     { allocatedIpRange = Core.Nothing,
       authorizedNetworks = Core.Nothing,
+      customSubjectAlternativeNames = Core.Nothing,
       enablePrivatePathForGoogleCloudServices = Core.Nothing,
       ipv4Enabled = Core.Nothing,
       privateNetwork = Core.Nothing,
-      requireSsl = Core.Nothing
+      pscConfig = Core.Nothing,
+      requireSsl = Core.Nothing,
+      serverCaMode = Core.Nothing,
+      serverCaPool = Core.Nothing,
+      sslMode = Core.Nothing
     }
 
 instance Core.FromJSON IpConfiguration where
@@ -2893,31 +4195,38 @@ instance Core.FromJSON IpConfiguration where
           IpConfiguration
             Core.<$> (o Core..:? "allocatedIpRange")
             Core.<*> (o Core..:? "authorizedNetworks")
-            Core.<*> ( o
-                         Core..:? "enablePrivatePathForGoogleCloudServices"
-                     )
+            Core.<*> (o Core..:? "customSubjectAlternativeNames")
+            Core.<*> (o Core..:? "enablePrivatePathForGoogleCloudServices")
             Core.<*> (o Core..:? "ipv4Enabled")
             Core.<*> (o Core..:? "privateNetwork")
+            Core.<*> (o Core..:? "pscConfig")
             Core.<*> (o Core..:? "requireSsl")
+            Core.<*> (o Core..:? "serverCaMode")
+            Core.<*> (o Core..:? "serverCaPool")
+            Core.<*> (o Core..:? "sslMode")
       )
 
 instance Core.ToJSON IpConfiguration where
   toJSON IpConfiguration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allocatedIpRange" Core..=)
-              Core.<$> allocatedIpRange,
-            ("authorizedNetworks" Core..=)
-              Core.<$> authorizedNetworks,
+          [ ("allocatedIpRange" Core..=) Core.<$> allocatedIpRange,
+            ("authorizedNetworks" Core..=) Core.<$> authorizedNetworks,
+            ("customSubjectAlternativeNames" Core..=)
+              Core.<$> customSubjectAlternativeNames,
             ("enablePrivatePathForGoogleCloudServices" Core..=)
               Core.<$> enablePrivatePathForGoogleCloudServices,
             ("ipv4Enabled" Core..=) Core.<$> ipv4Enabled,
             ("privateNetwork" Core..=) Core.<$> privateNetwork,
-            ("requireSsl" Core..=) Core.<$> requireSsl
+            ("pscConfig" Core..=) Core.<$> pscConfig,
+            ("requireSsl" Core..=) Core.<$> requireSsl,
+            ("serverCaMode" Core..=) Core.<$> serverCaMode,
+            ("serverCaPool" Core..=) Core.<$> serverCaPool,
+            ("sslMode" Core..=) Core.<$> sslMode
           ]
       )
 
--- | Database instance IP Mapping.
+-- | Database instance IP mapping
 --
 -- /See:/ 'newIpMapping' smart constructor.
 data IpMapping = IpMapping
@@ -2961,6 +4270,50 @@ instance Core.ToJSON IpMapping where
           ]
       )
 
+-- | The response payload containing a list of the backups.
+--
+-- /See:/ 'newListBackupsResponse' smart constructor.
+data ListBackupsResponse = ListBackupsResponse
+  { -- | A list of backups.
+    backups :: (Core.Maybe [Backup]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, then there aren\'t subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | If a region isn\'t unavailable or if an unknown error occurs, then a warning message is returned.
+    warnings :: (Core.Maybe [ApiWarning])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListBackupsResponse' with the minimum fields required to make a request.
+newListBackupsResponse ::
+  ListBackupsResponse
+newListBackupsResponse =
+  ListBackupsResponse
+    { backups = Core.Nothing,
+      nextPageToken = Core.Nothing,
+      warnings = Core.Nothing
+    }
+
+instance Core.FromJSON ListBackupsResponse where
+  parseJSON =
+    Core.withObject
+      "ListBackupsResponse"
+      ( \o ->
+          ListBackupsResponse
+            Core.<$> (o Core..:? "backups")
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "warnings")
+      )
+
+instance Core.ToJSON ListBackupsResponse where
+  toJSON ListBackupsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("backups" Core..=) Core.<$> backups,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
+
 -- | Preferred location. This specifies where a Cloud SQL instance is located. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.
 --
 -- /See:/ 'newLocationPreference' smart constructor.
@@ -2969,7 +4322,7 @@ data LocationPreference = LocationPreference
     followGaeApplication :: (Core.Maybe Core.Text),
     -- | This is always @sql#locationPreference@.
     kind :: (Core.Maybe Core.Text),
-    -- | The preferred Compute Engine zone for the secondary\/failover (for example: us-central1-a, us-central1-b, etc.).
+    -- | The preferred Compute Engine zone for the secondary\/failover (for example: us-central1-a, us-central1-b, etc.). To disable this field, set it to \'no/secondary/zone\'.
     secondaryZone :: (Core.Maybe Core.Text),
     -- | The preferred Compute Engine zone (for example: us-central1-a, us-central1-b, etc.). WARNING: Changing this might restart the instance.
     zone :: (Core.Maybe Core.Text)
@@ -3003,8 +4356,7 @@ instance Core.ToJSON LocationPreference where
   toJSON LocationPreference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("followGaeApplication" Core..=)
-              Core.<$> followGaeApplication,
+          [ ("followGaeApplication" Core..=) Core.<$> followGaeApplication,
             ("kind" Core..=) Core.<$> kind,
             ("secondaryZone" Core..=) Core.<$> secondaryZone,
             ("zone" Core..=) Core.<$> zone
@@ -3015,13 +4367,13 @@ instance Core.ToJSON LocationPreference where
 --
 -- /See:/ 'newMaintenanceWindow' smart constructor.
 data MaintenanceWindow = MaintenanceWindow
-  { -- | day of week (1-7), starting on Monday.
+  { -- | Day of week - @MONDAY@, @TUESDAY@, @WEDNESDAY@, @THURSDAY@, @FRIDAY@, @SATURDAY@, or @SUNDAY@. Specify in the UTC time zone. Returned in output as an integer, 1 to 7, where @1@ equals Monday.
     day :: (Core.Maybe Core.Int32),
-    -- | hour of day - 0 to 23.
+    -- | Hour of day - 0 to 23. Specify in the UTC time zone.
     hour :: (Core.Maybe Core.Int32),
     -- | This is always @sql#maintenanceWindow@.
     kind :: (Core.Maybe Core.Text),
-    -- | Maintenance timing setting: @canary@ (Earlier) or @stable@ (Later). <https://cloud.google.com/sql/docs/mysql/instance-settings#maintenance-timing-2ndgen Learn more>.
+    -- | Maintenance timing settings: @canary@, @stable@, or @week5@. For more information, see <https://cloud.google.com/sql/docs/mysql/maintenance About maintenance on Cloud SQL instances>.
     updateTrack :: (Core.Maybe MaintenanceWindow_UpdateTrack)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3068,7 +4420,7 @@ data MySqlReplicaConfiguration = MySqlReplicaConfiguration
     caCertificate :: (Core.Maybe Core.Text),
     -- | PEM representation of the replica\'s x509 certificate.
     clientCertificate :: (Core.Maybe Core.Text),
-    -- | PEM representation of the replica\'s private key. The corresponsing public key is encoded in the client\'s certificate.
+    -- | PEM representation of the replica\'s private key. The corresponding public key is encoded in the client\'s certificate.
     clientKey :: (Core.Maybe Core.Text),
     -- | Seconds to wait between connect retries. MySQL\'s default is 60 seconds.
     connectRetryInterval :: (Core.Maybe Core.Int32),
@@ -3119,7 +4471,8 @@ instance Core.FromJSON MySqlReplicaConfiguration where
             Core.<*> (o Core..:? "connectRetryInterval")
             Core.<*> (o Core..:? "dumpFilePath")
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "masterHeartbeatPeriod"
+            Core.<*> ( o
+                         Core..:? "masterHeartbeatPeriod"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "password")
@@ -3133,14 +4486,13 @@ instance Core.ToJSON MySqlReplicaConfiguration where
     Core.object
       ( Core.catMaybes
           [ ("caCertificate" Core..=) Core.<$> caCertificate,
-            ("clientCertificate" Core..=)
-              Core.<$> clientCertificate,
+            ("clientCertificate" Core..=) Core.<$> clientCertificate,
             ("clientKey" Core..=) Core.<$> clientKey,
-            ("connectRetryInterval" Core..=)
-              Core.<$> connectRetryInterval,
+            ("connectRetryInterval" Core..=) Core.<$> connectRetryInterval,
             ("dumpFilePath" Core..=) Core.<$> dumpFilePath,
             ("kind" Core..=) Core.<$> kind,
-            ("masterHeartbeatPeriod" Core..=) Core.. Core.AsText
+            ("masterHeartbeatPeriod" Core..=)
+              Core.. Core.AsText
               Core.<$> masterHeartbeatPeriod,
             ("password" Core..=) Core.<$> password,
             ("sslCipher" Core..=) Core.<$> sslCipher,
@@ -3162,24 +4514,20 @@ newtype MySqlSyncConfig = MySqlSyncConfig
 -- | Creates a value of 'MySqlSyncConfig' with the minimum fields required to make a request.
 newMySqlSyncConfig ::
   MySqlSyncConfig
-newMySqlSyncConfig = MySqlSyncConfig {initialSyncFlags = Core.Nothing}
+newMySqlSyncConfig =
+  MySqlSyncConfig {initialSyncFlags = Core.Nothing}
 
 instance Core.FromJSON MySqlSyncConfig where
   parseJSON =
     Core.withObject
       "MySqlSyncConfig"
-      ( \o ->
-          MySqlSyncConfig
-            Core.<$> (o Core..:? "initialSyncFlags")
-      )
+      (\o -> MySqlSyncConfig Core.<$> (o Core..:? "initialSyncFlags"))
 
 instance Core.ToJSON MySqlSyncConfig where
   toJSON MySqlSyncConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("initialSyncFlags" Core..=)
-              Core.<$> initialSyncFlags
-          ]
+          [("initialSyncFlags" Core..=) Core.<$> initialSyncFlags]
       )
 
 -- | On-premises instance configuration.
@@ -3190,7 +4538,7 @@ data OnPremisesConfiguration = OnPremisesConfiguration
     caCertificate :: (Core.Maybe Core.Text),
     -- | PEM representation of the replica\'s x509 certificate.
     clientCertificate :: (Core.Maybe Core.Text),
-    -- | PEM representation of the replica\'s private key. The corresponsing public key is encoded in the client\'s certificate.
+    -- | PEM representation of the replica\'s private key. The corresponding public key is encoded in the client\'s certificate.
     clientKey :: (Core.Maybe Core.Text),
     -- | The dump file to create the Cloud SQL replica.
     dumpFilePath :: (Core.Maybe Core.Text),
@@ -3200,8 +4548,12 @@ data OnPremisesConfiguration = OnPremisesConfiguration
     kind :: (Core.Maybe Core.Text),
     -- | The password for connecting to on-premises instance.
     password :: (Core.Maybe Core.Text),
+    -- | Optional. A list of objects that the user selects for replication from an external source instance.
+    selectedObjects :: (Core.Maybe [SelectedObjects]),
     -- | The reference to Cloud SQL instance if the source is Cloud SQL.
     sourceInstance :: (Core.Maybe InstanceReference),
+    -- | Optional. SSL option for replica connection to the on-premises source.
+    sslOption :: (Core.Maybe OnPremisesConfiguration_SslOption),
     -- | The username for connecting to on-premises instance.
     username :: (Core.Maybe Core.Text)
   }
@@ -3219,7 +4571,9 @@ newOnPremisesConfiguration =
       hostPort = Core.Nothing,
       kind = Core.Nothing,
       password = Core.Nothing,
+      selectedObjects = Core.Nothing,
       sourceInstance = Core.Nothing,
+      sslOption = Core.Nothing,
       username = Core.Nothing
     }
 
@@ -3236,7 +4590,9 @@ instance Core.FromJSON OnPremisesConfiguration where
             Core.<*> (o Core..:? "hostPort")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "password")
+            Core.<*> (o Core..:? "selectedObjects")
             Core.<*> (o Core..:? "sourceInstance")
+            Core.<*> (o Core..:? "sslOption")
             Core.<*> (o Core..:? "username")
       )
 
@@ -3245,14 +4601,15 @@ instance Core.ToJSON OnPremisesConfiguration where
     Core.object
       ( Core.catMaybes
           [ ("caCertificate" Core..=) Core.<$> caCertificate,
-            ("clientCertificate" Core..=)
-              Core.<$> clientCertificate,
+            ("clientCertificate" Core..=) Core.<$> clientCertificate,
             ("clientKey" Core..=) Core.<$> clientKey,
             ("dumpFilePath" Core..=) Core.<$> dumpFilePath,
             ("hostPort" Core..=) Core.<$> hostPort,
             ("kind" Core..=) Core.<$> kind,
             ("password" Core..=) Core.<$> password,
+            ("selectedObjects" Core..=) Core.<$> selectedObjects,
             ("sourceInstance" Core..=) Core.<$> sourceInstance,
+            ("sslOption" Core..=) Core.<$> sslOption,
             ("username" Core..=) Core.<$> username
           ]
       )
@@ -3261,7 +4618,11 @@ instance Core.ToJSON OnPremisesConfiguration where
 --
 -- /See:/ 'newOperation' smart constructor.
 data Operation = Operation
-  { -- | The context for backup operation, if applicable.
+  { -- | The context for acquire SSRS lease operation, if applicable.
+    acquireSsrsLeaseContext :: (Core.Maybe AcquireSsrsLeaseContext),
+    -- | An Admin API warning message.
+    apiWarning :: (Core.Maybe ApiWarning),
+    -- | The context for backup operation, if applicable.
     backupContext :: (Core.Maybe BackupContext),
     -- | The time this operation finished in UTC timezone in <https://tools.ietf.org/html/rfc3339 RFC 3339> format, for example @2012-11-15T16:19:00.094Z@.
     endTime :: (Core.Maybe Core.DateTime),
@@ -3285,9 +4646,10 @@ data Operation = Operation
     startTime :: (Core.Maybe Core.DateTime),
     -- | The status of an operation.
     status :: (Core.Maybe Operation_Status),
-    -- | Name of the database instance related to this operation.
+    -- | Optional. The sub operation based on the operation type.
+    subOperationType :: (Core.Maybe SqlSubOperationType),
+    -- | Name of the resource on which this operation runs.
     targetId :: (Core.Maybe Core.Text),
-    -- |
     targetLink :: (Core.Maybe Core.Text),
     -- | The project ID of the target instance related to this operation.
     targetProject :: (Core.Maybe Core.Text),
@@ -3301,7 +4663,9 @@ newOperation ::
   Operation
 newOperation =
   Operation
-    { backupContext = Core.Nothing,
+    { acquireSsrsLeaseContext = Core.Nothing,
+      apiWarning = Core.Nothing,
+      backupContext = Core.Nothing,
       endTime = Core.Nothing,
       error = Core.Nothing,
       exportContext = Core.Nothing,
@@ -3313,6 +4677,7 @@ newOperation =
       selfLink = Core.Nothing,
       startTime = Core.Nothing,
       status = Core.Nothing,
+      subOperationType = Core.Nothing,
       targetId = Core.Nothing,
       targetLink = Core.Nothing,
       targetProject = Core.Nothing,
@@ -3325,7 +4690,9 @@ instance Core.FromJSON Operation where
       "Operation"
       ( \o ->
           Operation
-            Core.<$> (o Core..:? "backupContext")
+            Core.<$> (o Core..:? "acquireSsrsLeaseContext")
+            Core.<*> (o Core..:? "apiWarning")
+            Core.<*> (o Core..:? "backupContext")
             Core.<*> (o Core..:? "endTime")
             Core.<*> (o Core..:? "error")
             Core.<*> (o Core..:? "exportContext")
@@ -3337,6 +4704,7 @@ instance Core.FromJSON Operation where
             Core.<*> (o Core..:? "selfLink")
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "status")
+            Core.<*> (o Core..:? "subOperationType")
             Core.<*> (o Core..:? "targetId")
             Core.<*> (o Core..:? "targetLink")
             Core.<*> (o Core..:? "targetProject")
@@ -3347,7 +4715,10 @@ instance Core.ToJSON Operation where
   toJSON Operation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backupContext" Core..=) Core.<$> backupContext,
+          [ ("acquireSsrsLeaseContext" Core..=)
+              Core.<$> acquireSsrsLeaseContext,
+            ("apiWarning" Core..=) Core.<$> apiWarning,
+            ("backupContext" Core..=) Core.<$> backupContext,
             ("endTime" Core..=) Core.<$> endTime,
             ("error" Core..=) Core.<$> error,
             ("exportContext" Core..=) Core.<$> exportContext,
@@ -3359,6 +4730,7 @@ instance Core.ToJSON Operation where
             ("selfLink" Core..=) Core.<$> selfLink,
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
+            ("subOperationType" Core..=) Core.<$> subOperationType,
             ("targetId" Core..=) Core.<$> targetId,
             ("targetLink" Core..=) Core.<$> targetLink,
             ("targetProject" Core..=) Core.<$> targetProject,
@@ -3433,7 +4805,8 @@ instance Core.FromJSON OperationErrors where
       "OperationErrors"
       ( \o ->
           OperationErrors
-            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "errors")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON OperationErrors where
@@ -3451,7 +4824,7 @@ instance Core.ToJSON OperationErrors where
 data OperationMetadata = OperationMetadata
   { -- | Output only. API version used to start the operation.
     apiVersion :: (Core.Maybe Core.Text),
-    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to @Code.CANCELLED@.
+    -- | Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have google.longrunning.Operation.error value with a google.rpc.Status.code of @1@, corresponding to @Code.CANCELLED@.
     cancelRequested :: (Core.Maybe Core.Bool),
     -- | Output only. The time the operation was created.
     createTime :: (Core.Maybe Core.DateTime),
@@ -3568,7 +4941,10 @@ data PasswordStatus = PasswordStatus
 newPasswordStatus ::
   PasswordStatus
 newPasswordStatus =
-  PasswordStatus {locked = Core.Nothing, passwordExpirationTime = Core.Nothing}
+  PasswordStatus
+    { locked = Core.Nothing,
+      passwordExpirationTime = Core.Nothing
+    }
 
 instance Core.FromJSON PasswordStatus where
   parseJSON =
@@ -3596,6 +4972,8 @@ instance Core.ToJSON PasswordStatus where
 data PasswordValidationPolicy = PasswordValidationPolicy
   { -- | The complexity of the password.
     complexity :: (Core.Maybe PasswordValidationPolicy_Complexity),
+    -- | This field is deprecated and will be removed in a future version of the API.
+    disallowCompromisedCredentials :: (Core.Maybe Core.Bool),
     -- | Disallow username as a part of the password.
     disallowUsernameSubstring :: (Core.Maybe Core.Bool),
     -- | Whether the password policy is enabled or not.
@@ -3615,6 +4993,7 @@ newPasswordValidationPolicy ::
 newPasswordValidationPolicy =
   PasswordValidationPolicy
     { complexity = Core.Nothing,
+      disallowCompromisedCredentials = Core.Nothing,
       disallowUsernameSubstring = Core.Nothing,
       enablePasswordPolicy = Core.Nothing,
       minLength = Core.Nothing,
@@ -3629,6 +5008,7 @@ instance Core.FromJSON PasswordValidationPolicy where
       ( \o ->
           PasswordValidationPolicy
             Core.<$> (o Core..:? "complexity")
+            Core.<*> (o Core..:? "disallowCompromisedCredentials")
             Core.<*> (o Core..:? "disallowUsernameSubstring")
             Core.<*> (o Core..:? "enablePasswordPolicy")
             Core.<*> (o Core..:? "minLength")
@@ -3641,13 +5021,13 @@ instance Core.ToJSON PasswordValidationPolicy where
     Core.object
       ( Core.catMaybes
           [ ("complexity" Core..=) Core.<$> complexity,
+            ("disallowCompromisedCredentials" Core..=)
+              Core.<$> disallowCompromisedCredentials,
             ("disallowUsernameSubstring" Core..=)
               Core.<$> disallowUsernameSubstring,
-            ("enablePasswordPolicy" Core..=)
-              Core.<$> enablePasswordPolicy,
+            ("enablePasswordPolicy" Core..=) Core.<$> enablePasswordPolicy,
             ("minLength" Core..=) Core.<$> minLength,
-            ("passwordChangeInterval" Core..=)
-              Core.<$> passwordChangeInterval,
+            ("passwordChangeInterval" Core..=) Core.<$> passwordChangeInterval,
             ("reuseInterval" Core..=) Core.<$> reuseInterval
           ]
       )
@@ -3673,17 +5053,115 @@ instance Core.FromJSON PerformDiskShrinkContext where
       "PerformDiskShrinkContext"
       ( \o ->
           PerformDiskShrinkContext
-            Core.<$> ( o Core..:? "targetSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "targetSizeGb" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PerformDiskShrinkContext where
   toJSON PerformDiskShrinkContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("targetSizeGb" Core..=) Core.. Core.AsText
+          [ ("targetSizeGb" Core..=)
+              Core.. Core.AsText
               Core.<$> targetSizeGb
+          ]
+      )
+
+-- | Settings for an automatically-setup Private Service Connect consumer endpoint that is used to connect to a Cloud SQL instance.
+--
+-- /See:/ 'newPscAutoConnectionConfig' smart constructor.
+data PscAutoConnectionConfig = PscAutoConnectionConfig
+  { -- | The consumer network of this consumer endpoint. This must be a resource path that includes both the host project and the network name. For example, @projects\/project1\/global\/networks\/network1@. The consumer host project of this network might be different from the consumer service project.
+    consumerNetwork :: (Core.Maybe Core.Text),
+    -- | The connection policy status of the consumer network.
+    consumerNetworkStatus :: (Core.Maybe Core.Text),
+    -- | This is the project ID of consumer service project of this consumer endpoint. Optional. This is only applicable if consumer_network is a shared vpc network.
+    consumerProject :: (Core.Maybe Core.Text),
+    -- | The IP address of the consumer endpoint.
+    ipAddress :: (Core.Maybe Core.Text),
+    -- | The connection status of the consumer endpoint.
+    status :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PscAutoConnectionConfig' with the minimum fields required to make a request.
+newPscAutoConnectionConfig ::
+  PscAutoConnectionConfig
+newPscAutoConnectionConfig =
+  PscAutoConnectionConfig
+    { consumerNetwork = Core.Nothing,
+      consumerNetworkStatus = Core.Nothing,
+      consumerProject = Core.Nothing,
+      ipAddress = Core.Nothing,
+      status = Core.Nothing
+    }
+
+instance Core.FromJSON PscAutoConnectionConfig where
+  parseJSON =
+    Core.withObject
+      "PscAutoConnectionConfig"
+      ( \o ->
+          PscAutoConnectionConfig
+            Core.<$> (o Core..:? "consumerNetwork")
+            Core.<*> (o Core..:? "consumerNetworkStatus")
+            Core.<*> (o Core..:? "consumerProject")
+            Core.<*> (o Core..:? "ipAddress")
+            Core.<*> (o Core..:? "status")
+      )
+
+instance Core.ToJSON PscAutoConnectionConfig where
+  toJSON PscAutoConnectionConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consumerNetwork" Core..=) Core.<$> consumerNetwork,
+            ("consumerNetworkStatus" Core..=) Core.<$> consumerNetworkStatus,
+            ("consumerProject" Core..=) Core.<$> consumerProject,
+            ("ipAddress" Core..=) Core.<$> ipAddress,
+            ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | PSC settings for a Cloud SQL instance.
+--
+-- /See:/ 'newPscConfig' smart constructor.
+data PscConfig = PscConfig
+  { -- | Optional. The list of consumer projects that are allow-listed for PSC connections to this instance. This instance can be connected to with PSC from any network in these projects. Each consumer project in this list may be represented by a project number (numeric) or by a project id (alphanumeric).
+    allowedConsumerProjects :: (Core.Maybe [Core.Text]),
+    -- | Optional. The list of settings for requested Private Service Connect consumer endpoints that can be used to connect to this Cloud SQL instance.
+    pscAutoConnections :: (Core.Maybe [PscAutoConnectionConfig]),
+    -- | Whether PSC connectivity is enabled for this instance.
+    pscEnabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PscConfig' with the minimum fields required to make a request.
+newPscConfig ::
+  PscConfig
+newPscConfig =
+  PscConfig
+    { allowedConsumerProjects = Core.Nothing,
+      pscAutoConnections = Core.Nothing,
+      pscEnabled = Core.Nothing
+    }
+
+instance Core.FromJSON PscConfig where
+  parseJSON =
+    Core.withObject
+      "PscConfig"
+      ( \o ->
+          PscConfig
+            Core.<$> (o Core..:? "allowedConsumerProjects")
+            Core.<*> (o Core..:? "pscAutoConnections")
+            Core.<*> (o Core..:? "pscEnabled")
+      )
+
+instance Core.ToJSON PscConfig where
+  toJSON PscConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowedConsumerProjects" Core..=)
+              Core.<$> allowedConsumerProjects,
+            ("pscAutoConnections" Core..=) Core.<$> pscAutoConnections,
+            ("pscEnabled" Core..=) Core.<$> pscEnabled
           ]
       )
 
@@ -3691,7 +5169,9 @@ instance Core.ToJSON PerformDiskShrinkContext where
 --
 -- /See:/ 'newReplicaConfiguration' smart constructor.
 data ReplicaConfiguration = ReplicaConfiguration
-  { -- | Specifies if the replica is the failover target. If the field is set to @true@, the replica will be designated as a failover replica. In case the primary instance fails, the replica instance will be promoted as the new primary instance. Only one replica can be specified as failover target, and the replica has to be in different zone with the primary instance.
+  { -- | Optional. Specifies if a SQL Server replica is a cascadable replica. A cascadable replica is a SQL Server cross region replica that supports replica(s) under it.
+    cascadableReplica :: (Core.Maybe Core.Bool),
+    -- | Specifies if the replica is the failover target. If the field is set to @true@, the replica will be designated as a failover replica. In case the primary instance fails, the replica instance will be promoted as the new primary instance. Only one replica can be specified as failover target, and the replica has to be in different zone with the primary instance.
     failoverTarget :: (Core.Maybe Core.Bool),
     -- | This is always @sql#replicaConfiguration@.
     kind :: (Core.Maybe Core.Text),
@@ -3705,7 +5185,8 @@ newReplicaConfiguration ::
   ReplicaConfiguration
 newReplicaConfiguration =
   ReplicaConfiguration
-    { failoverTarget = Core.Nothing,
+    { cascadableReplica = Core.Nothing,
+      failoverTarget = Core.Nothing,
       kind = Core.Nothing,
       mysqlReplicaConfiguration = Core.Nothing
     }
@@ -3716,7 +5197,8 @@ instance Core.FromJSON ReplicaConfiguration where
       "ReplicaConfiguration"
       ( \o ->
           ReplicaConfiguration
-            Core.<$> (o Core..:? "failoverTarget")
+            Core.<$> (o Core..:? "cascadableReplica")
+            Core.<*> (o Core..:? "failoverTarget")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "mysqlReplicaConfiguration")
       )
@@ -3725,10 +5207,55 @@ instance Core.ToJSON ReplicaConfiguration where
   toJSON ReplicaConfiguration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failoverTarget" Core..=) Core.<$> failoverTarget,
+          [ ("cascadableReplica" Core..=) Core.<$> cascadableReplica,
+            ("failoverTarget" Core..=) Core.<$> failoverTarget,
             ("kind" Core..=) Core.<$> kind,
             ("mysqlReplicaConfiguration" Core..=)
               Core.<$> mysqlReplicaConfiguration
+          ]
+      )
+
+-- | A primary instance and disaster recovery (DR) replica pair. A DR replica is a cross-region replica that you designate for failover in the event that the primary instance experiences regional failure. Applicable to MySQL and PostgreSQL.
+--
+-- /See:/ 'newReplicationCluster' smart constructor.
+data ReplicationCluster = ReplicationCluster
+  { -- | Output only. Read-only field that indicates whether the replica is a DR replica. This field is not set if the instance is a primary instance.
+    drReplica :: (Core.Maybe Core.Bool),
+    -- | Optional. If the instance is a primary instance, then this field identifies the disaster recovery (DR) replica. A DR replica is an optional configuration for Enterprise Plus edition instances. If the instance is a read replica, then the field is not set. Set this field to a replica name to designate a DR replica for a primary instance. Remove the replica name to remove the DR replica designation.
+    failoverDrReplicaName :: (Core.Maybe Core.Text),
+    -- | Output only. If set, this field indicates this instance has a private service access (PSA) DNS endpoint that is pointing to the primary instance of the cluster. If this instance is the primary, then the DNS endpoint points to this instance. After a switchover or replica failover operation, this DNS endpoint points to the promoted instance. This is a read-only field, returned to the user as information. This field can exist even if a standalone instance doesn\'t have a DR replica yet or the DR replica is deleted.
+    psaWriteEndpoint :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReplicationCluster' with the minimum fields required to make a request.
+newReplicationCluster ::
+  ReplicationCluster
+newReplicationCluster =
+  ReplicationCluster
+    { drReplica = Core.Nothing,
+      failoverDrReplicaName = Core.Nothing,
+      psaWriteEndpoint = Core.Nothing
+    }
+
+instance Core.FromJSON ReplicationCluster where
+  parseJSON =
+    Core.withObject
+      "ReplicationCluster"
+      ( \o ->
+          ReplicationCluster
+            Core.<$> (o Core..:? "drReplica")
+            Core.<*> (o Core..:? "failoverDrReplicaName")
+            Core.<*> (o Core..:? "psaWriteEndpoint")
+      )
+
+instance Core.ToJSON ReplicationCluster where
+  toJSON ReplicationCluster {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("drReplica" Core..=) Core.<$> drReplica,
+            ("failoverDrReplicaName" Core..=) Core.<$> failoverDrReplicaName,
+            ("psaWriteEndpoint" Core..=) Core.<$> psaWriteEndpoint
           ]
       )
 
@@ -3746,7 +5273,10 @@ data Reschedule = Reschedule
 newReschedule ::
   Reschedule
 newReschedule =
-  Reschedule {rescheduleType = Core.Nothing, scheduleTime = Core.Nothing}
+  Reschedule
+    { rescheduleType = Core.Nothing,
+      scheduleTime = Core.Nothing
+    }
 
 instance Core.FromJSON Reschedule where
   parseJSON =
@@ -3799,9 +5329,7 @@ instance Core.FromJSON RestoreBackupContext where
       "RestoreBackupContext"
       ( \o ->
           RestoreBackupContext
-            Core.<$> ( o Core..:? "backupRunId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "backupRunId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "instanceId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "project")
@@ -3811,8 +5339,7 @@ instance Core.ToJSON RestoreBackupContext where
   toJSON RestoreBackupContext {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backupRunId" Core..=) Core.. Core.AsText
-              Core.<$> backupRunId,
+          [ ("backupRunId" Core..=) Core.. Core.AsText Core.<$> backupRunId,
             ("instanceId" Core..=) Core.<$> instanceId,
             ("kind" Core..=) Core.<$> kind,
             ("project" Core..=) Core.<$> project
@@ -3834,7 +5361,10 @@ data RotateServerCaContext = RotateServerCaContext
 newRotateServerCaContext ::
   RotateServerCaContext
 newRotateServerCaContext =
-  RotateServerCaContext {kind = Core.Nothing, nextVersion = Core.Nothing}
+  RotateServerCaContext
+    { kind = Core.Nothing,
+      nextVersion = Core.Nothing
+    }
 
 instance Core.FromJSON RotateServerCaContext where
   parseJSON =
@@ -3855,6 +5385,70 @@ instance Core.ToJSON RotateServerCaContext where
           ]
       )
 
+-- | Instance rotate server certificate context.
+--
+-- /See:/ 'newRotateServerCertificateContext' smart constructor.
+data RotateServerCertificateContext = RotateServerCertificateContext
+  { -- | Optional. This is always @sql#rotateServerCertificateContext@.
+    kind :: (Core.Maybe Core.Text),
+    -- | The fingerprint of the next version to be rotated to. If left unspecified, will be rotated to the most recently added server certificate version.
+    nextVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RotateServerCertificateContext' with the minimum fields required to make a request.
+newRotateServerCertificateContext ::
+  RotateServerCertificateContext
+newRotateServerCertificateContext =
+  RotateServerCertificateContext
+    { kind = Core.Nothing,
+      nextVersion = Core.Nothing
+    }
+
+instance Core.FromJSON RotateServerCertificateContext where
+  parseJSON =
+    Core.withObject
+      "RotateServerCertificateContext"
+      ( \o ->
+          RotateServerCertificateContext
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "nextVersion")
+      )
+
+instance Core.ToJSON RotateServerCertificateContext where
+  toJSON RotateServerCertificateContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kind" Core..=) Core.<$> kind,
+            ("nextVersion" Core..=) Core.<$> nextVersion
+          ]
+      )
+
+-- | A list of objects that the user selects for replication from an external source instance.
+--
+-- /See:/ 'newSelectedObjects' smart constructor.
+newtype SelectedObjects = SelectedObjects
+  { -- | Required. The name of the database to migrate.
+    database :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SelectedObjects' with the minimum fields required to make a request.
+newSelectedObjects ::
+  SelectedObjects
+newSelectedObjects = SelectedObjects {database = Core.Nothing}
+
+instance Core.FromJSON SelectedObjects where
+  parseJSON =
+    Core.withObject
+      "SelectedObjects"
+      (\o -> SelectedObjects Core.<$> (o Core..:? "database"))
+
+instance Core.ToJSON SelectedObjects where
+  toJSON SelectedObjects {..} =
+    Core.object
+      (Core.catMaybes [("database" Core..=) Core.<$> database])
+
 -- | Database instance settings.
 --
 -- /See:/ 'newSettings' smart constructor.
@@ -3863,6 +5457,8 @@ data Settings = Settings
     activationPolicy :: (Core.Maybe Settings_ActivationPolicy),
     -- | Active Directory configuration, relevant only for Cloud SQL for SQL Server.
     activeDirectoryConfig :: (Core.Maybe SqlActiveDirectoryConfig),
+    -- | Specifies advanced machine configuration for the instances relevant only for SQL Server.
+    advancedMachineFeatures :: (Core.Maybe AdvancedMachineFeatures),
     -- | The App Engine app IDs that can access this instance. (Deprecated) Applied to First Generation instances only.
     authorizedGaeApplications :: (Core.Maybe [Core.Text]),
     -- | Availability type. Potential values: * @ZONAL@: The instance serves data from only one zone. Outages in that zone affect data accessibility. * @REGIONAL@: The instance can serve data from more than one zone in a region (it is highly available).\/ For more information, see <https://cloud.google.com/sql/docs/mysql/high-availability Overview of the High Availability Configuration>.
@@ -3875,6 +5471,8 @@ data Settings = Settings
     connectorEnforcement :: (Core.Maybe Settings_ConnectorEnforcement),
     -- | Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property was only applicable to First Generation instances.
     crashSafeReplicationEnabled :: (Core.Maybe Core.Bool),
+    -- | Configuration for data cache.
+    dataCacheConfig :: (Core.Maybe DataCacheConfig),
     -- | The size of data disk, in GB. The data disk size minimum is 10GB.
     dataDiskSizeGb :: (Core.Maybe Core.Int64),
     -- | The type of data disk: @PD_SSD@ (default) or @PD_HDD@. Not used for First Generation instances.
@@ -3887,6 +5485,12 @@ data Settings = Settings
     deletionProtectionEnabled :: (Core.Maybe Core.Bool),
     -- | Deny maintenance periods
     denyMaintenancePeriods :: (Core.Maybe [DenyMaintenancePeriod]),
+    -- | Optional. The edition of the instance.
+    edition :: (Core.Maybe Settings_Edition),
+    -- | Optional. By default, Cloud SQL instances have schema extraction disabled for Dataplex. When this parameter is set to true, schema extraction for Dataplex on Cloud SQL instances is activated.
+    enableDataplexIntegration :: (Core.Maybe Core.Bool),
+    -- | Optional. When this parameter is set to true, Cloud SQL instances can connect to Vertex AI to pass requests for real-time predictions and insights to the AI. The default value is false. This applies only to Cloud SQL for PostgreSQL instances.
+    enableGoogleMlIntegration :: (Core.Maybe Core.Bool),
     -- | Insights configuration, for now relevant only for Postgres.
     insightsConfig :: (Core.Maybe InsightsConfig),
     -- | The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.
@@ -3901,8 +5505,12 @@ data Settings = Settings
     passwordValidationPolicy :: (Core.Maybe PasswordValidationPolicy),
     -- | The pricing plan for this instance. This can be either @PER_USE@ or @PACKAGE@. Only @PER_USE@ is supported for Second Generation instances.
     pricingPlan :: (Core.Maybe Settings_PricingPlan),
+    -- | Optional. Configuration value for recreation of replica after certain replication lag
+    replicationLagMaxSeconds :: (Core.Maybe Core.Int32),
     -- | The type of replication this instance uses. This can be either @ASYNCHRONOUS@ or @SYNCHRONOUS@. (Deprecated) This property was only applicable to First Generation instances.
     replicationType :: (Core.Maybe Settings_ReplicationType),
+    -- | Optional. When this parameter is set to true, Cloud SQL retains backups of the instance even after the instance is deleted. The ON_DEMAND backup will be retained until customer deletes the backup or the project. The AUTOMATED backup will be retained based on the backups retention setting.
+    retainBackupsOnDelete :: (Core.Maybe Core.Bool),
     -- | The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.
     settingsVersion :: (Core.Maybe Core.Int64),
     -- | SQL Server specific audit configuration.
@@ -3927,18 +5535,23 @@ newSettings =
   Settings
     { activationPolicy = Core.Nothing,
       activeDirectoryConfig = Core.Nothing,
+      advancedMachineFeatures = Core.Nothing,
       authorizedGaeApplications = Core.Nothing,
       availabilityType = Core.Nothing,
       backupConfiguration = Core.Nothing,
       collation = Core.Nothing,
       connectorEnforcement = Core.Nothing,
       crashSafeReplicationEnabled = Core.Nothing,
+      dataCacheConfig = Core.Nothing,
       dataDiskSizeGb = Core.Nothing,
       dataDiskType = Core.Nothing,
       databaseFlags = Core.Nothing,
       databaseReplicationEnabled = Core.Nothing,
       deletionProtectionEnabled = Core.Nothing,
       denyMaintenancePeriods = Core.Nothing,
+      edition = Core.Nothing,
+      enableDataplexIntegration = Core.Nothing,
+      enableGoogleMlIntegration = Core.Nothing,
       insightsConfig = Core.Nothing,
       ipConfiguration = Core.Nothing,
       kind = Core.Nothing,
@@ -3946,7 +5559,9 @@ newSettings =
       maintenanceWindow = Core.Nothing,
       passwordValidationPolicy = Core.Nothing,
       pricingPlan = Core.Nothing,
+      replicationLagMaxSeconds = Core.Nothing,
       replicationType = Core.Nothing,
+      retainBackupsOnDelete = Core.Nothing,
       settingsVersion = Core.Nothing,
       sqlServerAuditConfig = Core.Nothing,
       storageAutoResize = Core.Nothing,
@@ -3964,20 +5579,23 @@ instance Core.FromJSON Settings where
           Settings
             Core.<$> (o Core..:? "activationPolicy")
             Core.<*> (o Core..:? "activeDirectoryConfig")
+            Core.<*> (o Core..:? "advancedMachineFeatures")
             Core.<*> (o Core..:? "authorizedGaeApplications")
             Core.<*> (o Core..:? "availabilityType")
             Core.<*> (o Core..:? "backupConfiguration")
             Core.<*> (o Core..:? "collation")
             Core.<*> (o Core..:? "connectorEnforcement")
             Core.<*> (o Core..:? "crashSafeReplicationEnabled")
-            Core.<*> ( o Core..:? "dataDiskSizeGb"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dataCacheConfig")
+            Core.<*> (o Core..:? "dataDiskSizeGb" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dataDiskType")
             Core.<*> (o Core..:? "databaseFlags")
             Core.<*> (o Core..:? "databaseReplicationEnabled")
             Core.<*> (o Core..:? "deletionProtectionEnabled")
             Core.<*> (o Core..:? "denyMaintenancePeriods")
+            Core.<*> (o Core..:? "edition")
+            Core.<*> (o Core..:? "enableDataplexIntegration")
+            Core.<*> (o Core..:? "enableGoogleMlIntegration")
             Core.<*> (o Core..:? "insightsConfig")
             Core.<*> (o Core..:? "ipConfiguration")
             Core.<*> (o Core..:? "kind")
@@ -3985,13 +5603,14 @@ instance Core.FromJSON Settings where
             Core.<*> (o Core..:? "maintenanceWindow")
             Core.<*> (o Core..:? "passwordValidationPolicy")
             Core.<*> (o Core..:? "pricingPlan")
+            Core.<*> (o Core..:? "replicationLagMaxSeconds")
             Core.<*> (o Core..:? "replicationType")
-            Core.<*> ( o Core..:? "settingsVersion"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "retainBackupsOnDelete")
+            Core.<*> (o Core..:? "settingsVersion" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "sqlServerAuditConfig")
             Core.<*> (o Core..:? "storageAutoResize")
-            Core.<*> ( o Core..:? "storageAutoResizeLimit"
+            Core.<*> ( o
+                         Core..:? "storageAutoResizeLimit"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "tier")
@@ -4003,22 +5622,21 @@ instance Core.ToJSON Settings where
   toJSON Settings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activationPolicy" Core..=)
-              Core.<$> activationPolicy,
-            ("activeDirectoryConfig" Core..=)
-              Core.<$> activeDirectoryConfig,
+          [ ("activationPolicy" Core..=) Core.<$> activationPolicy,
+            ("activeDirectoryConfig" Core..=) Core.<$> activeDirectoryConfig,
+            ("advancedMachineFeatures" Core..=)
+              Core.<$> advancedMachineFeatures,
             ("authorizedGaeApplications" Core..=)
               Core.<$> authorizedGaeApplications,
-            ("availabilityType" Core..=)
-              Core.<$> availabilityType,
-            ("backupConfiguration" Core..=)
-              Core.<$> backupConfiguration,
+            ("availabilityType" Core..=) Core.<$> availabilityType,
+            ("backupConfiguration" Core..=) Core.<$> backupConfiguration,
             ("collation" Core..=) Core.<$> collation,
-            ("connectorEnforcement" Core..=)
-              Core.<$> connectorEnforcement,
+            ("connectorEnforcement" Core..=) Core.<$> connectorEnforcement,
             ("crashSafeReplicationEnabled" Core..=)
               Core.<$> crashSafeReplicationEnabled,
-            ("dataDiskSizeGb" Core..=) Core.. Core.AsText
+            ("dataCacheConfig" Core..=) Core.<$> dataCacheConfig,
+            ("dataDiskSizeGb" Core..=)
+              Core.. Core.AsText
               Core.<$> dataDiskSizeGb,
             ("dataDiskType" Core..=) Core.<$> dataDiskType,
             ("databaseFlags" Core..=) Core.<$> databaseFlags,
@@ -4026,26 +5644,31 @@ instance Core.ToJSON Settings where
               Core.<$> databaseReplicationEnabled,
             ("deletionProtectionEnabled" Core..=)
               Core.<$> deletionProtectionEnabled,
-            ("denyMaintenancePeriods" Core..=)
-              Core.<$> denyMaintenancePeriods,
+            ("denyMaintenancePeriods" Core..=) Core.<$> denyMaintenancePeriods,
+            ("edition" Core..=) Core.<$> edition,
+            ("enableDataplexIntegration" Core..=)
+              Core.<$> enableDataplexIntegration,
+            ("enableGoogleMlIntegration" Core..=)
+              Core.<$> enableGoogleMlIntegration,
             ("insightsConfig" Core..=) Core.<$> insightsConfig,
             ("ipConfiguration" Core..=) Core.<$> ipConfiguration,
             ("kind" Core..=) Core.<$> kind,
-            ("locationPreference" Core..=)
-              Core.<$> locationPreference,
-            ("maintenanceWindow" Core..=)
-              Core.<$> maintenanceWindow,
+            ("locationPreference" Core..=) Core.<$> locationPreference,
+            ("maintenanceWindow" Core..=) Core.<$> maintenanceWindow,
             ("passwordValidationPolicy" Core..=)
               Core.<$> passwordValidationPolicy,
             ("pricingPlan" Core..=) Core.<$> pricingPlan,
+            ("replicationLagMaxSeconds" Core..=)
+              Core.<$> replicationLagMaxSeconds,
             ("replicationType" Core..=) Core.<$> replicationType,
-            ("settingsVersion" Core..=) Core.. Core.AsText
+            ("retainBackupsOnDelete" Core..=) Core.<$> retainBackupsOnDelete,
+            ("settingsVersion" Core..=)
+              Core.. Core.AsText
               Core.<$> settingsVersion,
-            ("sqlServerAuditConfig" Core..=)
-              Core.<$> sqlServerAuditConfig,
-            ("storageAutoResize" Core..=)
-              Core.<$> storageAutoResize,
-            ("storageAutoResizeLimit" Core..=) Core.. Core.AsText
+            ("sqlServerAuditConfig" Core..=) Core.<$> sqlServerAuditConfig,
+            ("storageAutoResize" Core..=) Core.<$> storageAutoResize,
+            ("storageAutoResizeLimit" Core..=)
+              Core.. Core.AsText
               Core.<$> storageAutoResizeLimit,
             ("tier" Core..=) Core.<$> tier,
             ("timeZone" Core..=) Core.<$> timeZone,
@@ -4057,8 +5680,7 @@ instance Core.ToJSON Settings where
 --
 -- /See:/ 'newSettings_UserLabels' smart constructor.
 newtype Settings_UserLabels = Settings_UserLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4074,14 +5696,10 @@ instance Core.FromJSON Settings_UserLabels where
   parseJSON =
     Core.withObject
       "Settings_UserLabels"
-      ( \o ->
-          Settings_UserLabels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Settings_UserLabels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Settings_UserLabels where
-  toJSON Settings_UserLabels {..} =
-    Core.toJSON additional
+  toJSON Settings_UserLabels {..} = Core.toJSON additional
 
 -- | Active Directory configuration, relevant only for Cloud SQL for SQL Server.
 --
@@ -4098,7 +5716,10 @@ data SqlActiveDirectoryConfig = SqlActiveDirectoryConfig
 newSqlActiveDirectoryConfig ::
   SqlActiveDirectoryConfig
 newSqlActiveDirectoryConfig =
-  SqlActiveDirectoryConfig {domain = Core.Nothing, kind = Core.Nothing}
+  SqlActiveDirectoryConfig
+    { domain = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON SqlActiveDirectoryConfig where
   parseJSON =
@@ -4106,7 +5727,8 @@ instance Core.FromJSON SqlActiveDirectoryConfig where
       "SqlActiveDirectoryConfig"
       ( \o ->
           SqlActiveDirectoryConfig
-            Core.<$> (o Core..:? "domain") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "domain")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON SqlActiveDirectoryConfig where
@@ -4162,12 +5784,43 @@ instance Core.ToJSON SqlExternalSyncSettingError where
           ]
       )
 
+-- | Response for the acquire SSRS lease request.
+--
+-- /See:/ 'newSqlInstancesAcquireSsrsLeaseResponse' smart constructor.
+newtype SqlInstancesAcquireSsrsLeaseResponse = SqlInstancesAcquireSsrsLeaseResponse
+  { -- | The unique identifier for this operation.
+    operationId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SqlInstancesAcquireSsrsLeaseResponse' with the minimum fields required to make a request.
+newSqlInstancesAcquireSsrsLeaseResponse ::
+  SqlInstancesAcquireSsrsLeaseResponse
+newSqlInstancesAcquireSsrsLeaseResponse =
+  SqlInstancesAcquireSsrsLeaseResponse {operationId = Core.Nothing}
+
+instance Core.FromJSON SqlInstancesAcquireSsrsLeaseResponse where
+  parseJSON =
+    Core.withObject
+      "SqlInstancesAcquireSsrsLeaseResponse"
+      ( \o ->
+          SqlInstancesAcquireSsrsLeaseResponse
+            Core.<$> (o Core..:? "operationId")
+      )
+
+instance Core.ToJSON SqlInstancesAcquireSsrsLeaseResponse where
+  toJSON SqlInstancesAcquireSsrsLeaseResponse {..} =
+    Core.object
+      (Core.catMaybes [("operationId" Core..=) Core.<$> operationId])
+
 -- | Instance get disk shrink config response.
 --
 -- /See:/ 'newSqlInstancesGetDiskShrinkConfigResponse' smart constructor.
 data SqlInstancesGetDiskShrinkConfigResponse = SqlInstancesGetDiskShrinkConfigResponse
   { -- | This is always @sql#getDiskShrinkConfig@.
     kind :: (Core.Maybe Core.Text),
+    -- | Additional message to customers.
+    message :: (Core.Maybe Core.Text),
     -- | The minimum size to which a disk can be shrunk in GigaBytes.
     minimalTargetSizeGb :: (Core.Maybe Core.Int64)
   }
@@ -4179,36 +5832,103 @@ newSqlInstancesGetDiskShrinkConfigResponse ::
 newSqlInstancesGetDiskShrinkConfigResponse =
   SqlInstancesGetDiskShrinkConfigResponse
     { kind = Core.Nothing,
+      message = Core.Nothing,
       minimalTargetSizeGb = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SqlInstancesGetDiskShrinkConfigResponse
-  where
+instance Core.FromJSON SqlInstancesGetDiskShrinkConfigResponse where
   parseJSON =
     Core.withObject
       "SqlInstancesGetDiskShrinkConfigResponse"
       ( \o ->
           SqlInstancesGetDiskShrinkConfigResponse
             Core.<$> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "minimalTargetSizeGb"
+            Core.<*> (o Core..:? "message")
+            Core.<*> ( o
+                         Core..:? "minimalTargetSizeGb"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
 
-instance
-  Core.ToJSON
-    SqlInstancesGetDiskShrinkConfigResponse
-  where
+instance Core.ToJSON SqlInstancesGetDiskShrinkConfigResponse where
   toJSON SqlInstancesGetDiskShrinkConfigResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("minimalTargetSizeGb" Core..=) Core.. Core.AsText
+            ("message" Core..=) Core.<$> message,
+            ("minimalTargetSizeGb" Core..=)
+              Core.. Core.AsText
               Core.<$> minimalTargetSizeGb
           ]
       )
+
+-- | Instance get latest recovery time response.
+--
+-- /See:/ 'newSqlInstancesGetLatestRecoveryTimeResponse' smart constructor.
+data SqlInstancesGetLatestRecoveryTimeResponse = SqlInstancesGetLatestRecoveryTimeResponse
+  { -- | This is always @sql#getLatestRecoveryTime@.
+    kind :: (Core.Maybe Core.Text),
+    -- | Timestamp, identifies the latest recovery time of the source instance.
+    latestRecoveryTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SqlInstancesGetLatestRecoveryTimeResponse' with the minimum fields required to make a request.
+newSqlInstancesGetLatestRecoveryTimeResponse ::
+  SqlInstancesGetLatestRecoveryTimeResponse
+newSqlInstancesGetLatestRecoveryTimeResponse =
+  SqlInstancesGetLatestRecoveryTimeResponse
+    { kind = Core.Nothing,
+      latestRecoveryTime = Core.Nothing
+    }
+
+instance Core.FromJSON SqlInstancesGetLatestRecoveryTimeResponse where
+  parseJSON =
+    Core.withObject
+      "SqlInstancesGetLatestRecoveryTimeResponse"
+      ( \o ->
+          SqlInstancesGetLatestRecoveryTimeResponse
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "latestRecoveryTime")
+      )
+
+instance Core.ToJSON SqlInstancesGetLatestRecoveryTimeResponse where
+  toJSON SqlInstancesGetLatestRecoveryTimeResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kind" Core..=) Core.<$> kind,
+            ("latestRecoveryTime" Core..=) Core.<$> latestRecoveryTime
+          ]
+      )
+
+-- | Response for the release SSRS lease request.
+--
+-- /See:/ 'newSqlInstancesReleaseSsrsLeaseResponse' smart constructor.
+newtype SqlInstancesReleaseSsrsLeaseResponse = SqlInstancesReleaseSsrsLeaseResponse
+  { -- | The unique identifier for this operation.
+    operationId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SqlInstancesReleaseSsrsLeaseResponse' with the minimum fields required to make a request.
+newSqlInstancesReleaseSsrsLeaseResponse ::
+  SqlInstancesReleaseSsrsLeaseResponse
+newSqlInstancesReleaseSsrsLeaseResponse =
+  SqlInstancesReleaseSsrsLeaseResponse {operationId = Core.Nothing}
+
+instance Core.FromJSON SqlInstancesReleaseSsrsLeaseResponse where
+  parseJSON =
+    Core.withObject
+      "SqlInstancesReleaseSsrsLeaseResponse"
+      ( \o ->
+          SqlInstancesReleaseSsrsLeaseResponse
+            Core.<$> (o Core..:? "operationId")
+      )
+
+instance Core.ToJSON SqlInstancesReleaseSsrsLeaseResponse where
+  toJSON SqlInstancesReleaseSsrsLeaseResponse {..} =
+    Core.object
+      (Core.catMaybes [("operationId" Core..=) Core.<$> operationId])
 
 -- | Reschedule options for maintenance windows.
 --
@@ -4223,12 +5943,12 @@ newtype SqlInstancesRescheduleMaintenanceRequestBody = SqlInstancesRescheduleMai
 newSqlInstancesRescheduleMaintenanceRequestBody ::
   SqlInstancesRescheduleMaintenanceRequestBody
 newSqlInstancesRescheduleMaintenanceRequestBody =
-  SqlInstancesRescheduleMaintenanceRequestBody {reschedule = Core.Nothing}
+  SqlInstancesRescheduleMaintenanceRequestBody
+    { reschedule =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    SqlInstancesRescheduleMaintenanceRequestBody
-  where
+instance Core.FromJSON SqlInstancesRescheduleMaintenanceRequestBody where
   parseJSON =
     Core.withObject
       "SqlInstancesRescheduleMaintenanceRequestBody"
@@ -4237,16 +5957,10 @@ instance
             Core.<$> (o Core..:? "reschedule")
       )
 
-instance
-  Core.ToJSON
-    SqlInstancesRescheduleMaintenanceRequestBody
-  where
-  toJSON
-    SqlInstancesRescheduleMaintenanceRequestBody {..} =
-      Core.object
-        ( Core.catMaybes
-            [("reschedule" Core..=) Core.<$> reschedule]
-        )
+instance Core.ToJSON SqlInstancesRescheduleMaintenanceRequestBody where
+  toJSON SqlInstancesRescheduleMaintenanceRequestBody {..} =
+    Core.object
+      (Core.catMaybes [("reschedule" Core..=) Core.<$> reschedule])
 
 -- | Instance reset replica size request.
 --
@@ -4257,35 +5971,32 @@ data SqlInstancesResetReplicaSizeRequest = SqlInstancesResetReplicaSizeRequest
 -- | Creates a value of 'SqlInstancesResetReplicaSizeRequest' with the minimum fields required to make a request.
 newSqlInstancesResetReplicaSizeRequest ::
   SqlInstancesResetReplicaSizeRequest
-newSqlInstancesResetReplicaSizeRequest = SqlInstancesResetReplicaSizeRequest
+newSqlInstancesResetReplicaSizeRequest =
+  SqlInstancesResetReplicaSizeRequest
 
-instance
-  Core.FromJSON
-    SqlInstancesResetReplicaSizeRequest
-  where
+instance Core.FromJSON SqlInstancesResetReplicaSizeRequest where
   parseJSON =
     Core.withObject
       "SqlInstancesResetReplicaSizeRequest"
-      ( \o ->
-          Core.pure SqlInstancesResetReplicaSizeRequest
-      )
+      (\o -> Core.pure SqlInstancesResetReplicaSizeRequest)
 
-instance
-  Core.ToJSON
-    SqlInstancesResetReplicaSizeRequest
-  where
+instance Core.ToJSON SqlInstancesResetReplicaSizeRequest where
   toJSON = Core.const Core.emptyObject
 
 -- | Instance start external sync request.
 --
 -- /See:/ 'newSqlInstancesStartExternalSyncRequest' smart constructor.
 data SqlInstancesStartExternalSyncRequest = SqlInstancesStartExternalSyncRequest
-  { -- | MySQL-specific settings for start external sync.
+  { -- | Optional. MigrationType configures the migration to use physical files or logical dump files. If not set, then the logical dump file configuration is used. Valid values are @LOGICAL@ or @PHYSICAL@. Only applicable to MySQL.
+    migrationType :: (Core.Maybe SqlInstancesStartExternalSyncRequest_MigrationType),
+    -- | MySQL-specific settings for start external sync.
     mysqlSyncConfig :: (Core.Maybe MySqlSyncConfig),
     -- | Whether to skip the verification step (VESS).
     skipVerification :: (Core.Maybe Core.Bool),
     -- | External sync mode.
-    syncMode :: (Core.Maybe SqlInstancesStartExternalSyncRequest_SyncMode)
+    syncMode :: (Core.Maybe SqlInstancesStartExternalSyncRequest_SyncMode),
+    -- | Optional. Parallel level for initial data sync. Currently only applicable for MySQL.
+    syncParallelLevel :: (Core.Maybe SqlInstancesStartExternalSyncRequest_SyncParallelLevel)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4294,37 +6005,36 @@ newSqlInstancesStartExternalSyncRequest ::
   SqlInstancesStartExternalSyncRequest
 newSqlInstancesStartExternalSyncRequest =
   SqlInstancesStartExternalSyncRequest
-    { mysqlSyncConfig = Core.Nothing,
+    { migrationType =
+        Core.Nothing,
+      mysqlSyncConfig = Core.Nothing,
       skipVerification = Core.Nothing,
-      syncMode = Core.Nothing
+      syncMode = Core.Nothing,
+      syncParallelLevel = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SqlInstancesStartExternalSyncRequest
-  where
+instance Core.FromJSON SqlInstancesStartExternalSyncRequest where
   parseJSON =
     Core.withObject
       "SqlInstancesStartExternalSyncRequest"
       ( \o ->
           SqlInstancesStartExternalSyncRequest
-            Core.<$> (o Core..:? "mysqlSyncConfig")
+            Core.<$> (o Core..:? "migrationType")
+            Core.<*> (o Core..:? "mysqlSyncConfig")
             Core.<*> (o Core..:? "skipVerification")
             Core.<*> (o Core..:? "syncMode")
+            Core.<*> (o Core..:? "syncParallelLevel")
       )
 
-instance
-  Core.ToJSON
-    SqlInstancesStartExternalSyncRequest
-  where
+instance Core.ToJSON SqlInstancesStartExternalSyncRequest where
   toJSON SqlInstancesStartExternalSyncRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("mysqlSyncConfig" Core..=)
-              Core.<$> mysqlSyncConfig,
-            ("skipVerification" Core..=)
-              Core.<$> skipVerification,
-            ("syncMode" Core..=) Core.<$> syncMode
+          [ ("migrationType" Core..=) Core.<$> migrationType,
+            ("mysqlSyncConfig" Core..=) Core.<$> mysqlSyncConfig,
+            ("skipVerification" Core..=) Core.<$> skipVerification,
+            ("syncMode" Core..=) Core.<$> syncMode,
+            ("syncParallelLevel" Core..=) Core.<$> syncParallelLevel
           ]
       )
 
@@ -4332,10 +6042,22 @@ instance
 --
 -- /See:/ 'newSqlInstancesVerifyExternalSyncSettingsRequest' smart constructor.
 data SqlInstancesVerifyExternalSyncSettingsRequest = SqlInstancesVerifyExternalSyncSettingsRequest
-  { -- | Optional. MySQL-specific settings for start external sync.
+  { -- | Optional. MigrationType configures the migration to use physical files or logical dump files. If not set, then the logical dump file configuration is used. Valid values are @LOGICAL@ or @PHYSICAL@. Only applicable to MySQL.
+    migrationType ::
+      ( Core.Maybe
+          SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+      ),
+    -- | Optional. MySQL-specific settings for start external sync.
     mysqlSyncConfig :: (Core.Maybe MySqlSyncConfig),
+    -- | Optional. Migrate only the specified objects from the source instance. If this field is empty, then migrate all objects.
+    selectedObjects :: (Core.Maybe [ExternalSyncSelectedObject]),
     -- | External sync mode
     syncMode :: (Core.Maybe SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode),
+    -- | Optional. Parallel level for initial data sync. Only applicable for PostgreSQL.
+    syncParallelLevel ::
+      ( Core.Maybe
+          SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+      ),
     -- | Flag to enable verifying connection only
     verifyConnectionOnly :: (Core.Maybe Core.Bool),
     -- | Optional. Flag to verify settings required by replication setup only
@@ -4348,8 +6070,12 @@ newSqlInstancesVerifyExternalSyncSettingsRequest ::
   SqlInstancesVerifyExternalSyncSettingsRequest
 newSqlInstancesVerifyExternalSyncSettingsRequest =
   SqlInstancesVerifyExternalSyncSettingsRequest
-    { mysqlSyncConfig = Core.Nothing,
+    { migrationType =
+        Core.Nothing,
+      mysqlSyncConfig = Core.Nothing,
+      selectedObjects = Core.Nothing,
       syncMode = Core.Nothing,
+      syncParallelLevel = Core.Nothing,
       verifyConnectionOnly = Core.Nothing,
       verifyReplicationOnly = Core.Nothing
     }
@@ -4363,29 +6089,28 @@ instance
       "SqlInstancesVerifyExternalSyncSettingsRequest"
       ( \o ->
           SqlInstancesVerifyExternalSyncSettingsRequest
-            Core.<$> (o Core..:? "mysqlSyncConfig")
-              Core.<*> (o Core..:? "syncMode")
-              Core.<*> (o Core..:? "verifyConnectionOnly")
-              Core.<*> (o Core..:? "verifyReplicationOnly")
+            Core.<$> (o Core..:? "migrationType")
+            Core.<*> (o Core..:? "mysqlSyncConfig")
+            Core.<*> (o Core..:? "selectedObjects")
+            Core.<*> (o Core..:? "syncMode")
+            Core.<*> (o Core..:? "syncParallelLevel")
+            Core.<*> (o Core..:? "verifyConnectionOnly")
+            Core.<*> (o Core..:? "verifyReplicationOnly")
       )
 
-instance
-  Core.ToJSON
-    SqlInstancesVerifyExternalSyncSettingsRequest
-  where
-  toJSON
-    SqlInstancesVerifyExternalSyncSettingsRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("mysqlSyncConfig" Core..=)
-                Core.<$> mysqlSyncConfig,
-              ("syncMode" Core..=) Core.<$> syncMode,
-              ("verifyConnectionOnly" Core..=)
-                Core.<$> verifyConnectionOnly,
-              ("verifyReplicationOnly" Core..=)
-                Core.<$> verifyReplicationOnly
-            ]
-        )
+instance Core.ToJSON SqlInstancesVerifyExternalSyncSettingsRequest where
+  toJSON SqlInstancesVerifyExternalSyncSettingsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("migrationType" Core..=) Core.<$> migrationType,
+            ("mysqlSyncConfig" Core..=) Core.<$> mysqlSyncConfig,
+            ("selectedObjects" Core..=) Core.<$> selectedObjects,
+            ("syncMode" Core..=) Core.<$> syncMode,
+            ("syncParallelLevel" Core..=) Core.<$> syncParallelLevel,
+            ("verifyConnectionOnly" Core..=) Core.<$> verifyConnectionOnly,
+            ("verifyReplicationOnly" Core..=) Core.<$> verifyReplicationOnly
+          ]
+      )
 
 -- | Instance verify external sync settings response.
 --
@@ -4405,7 +6130,8 @@ newSqlInstancesVerifyExternalSyncSettingsResponse ::
   SqlInstancesVerifyExternalSyncSettingsResponse
 newSqlInstancesVerifyExternalSyncSettingsResponse =
   SqlInstancesVerifyExternalSyncSettingsResponse
-    { errors = Core.Nothing,
+    { errors =
+        Core.Nothing,
       kind = Core.Nothing,
       warnings = Core.Nothing
     }
@@ -4419,23 +6145,20 @@ instance
       "SqlInstancesVerifyExternalSyncSettingsResponse"
       ( \o ->
           SqlInstancesVerifyExternalSyncSettingsResponse
-            Core.<$> (o Core..:? "errors") Core.<*> (o Core..:? "kind")
-              Core.<*> (o Core..:? "warnings")
+            Core.<$> (o Core..:? "errors")
+            Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "warnings")
       )
 
-instance
-  Core.ToJSON
-    SqlInstancesVerifyExternalSyncSettingsResponse
-  where
-  toJSON
-    SqlInstancesVerifyExternalSyncSettingsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("errors" Core..=) Core.<$> errors,
-              ("kind" Core..=) Core.<$> kind,
-              ("warnings" Core..=) Core.<$> warnings
-            ]
-        )
+instance Core.ToJSON SqlInstancesVerifyExternalSyncSettingsResponse where
+  toJSON SqlInstancesVerifyExternalSyncSettingsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("errors" Core..=) Core.<$> errors,
+            ("kind" Core..=) Core.<$> kind,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
+      )
 
 -- | This message wraps up the information written by out-of-disk detection job.
 --
@@ -4453,7 +6176,8 @@ newSqlOutOfDiskReport ::
   SqlOutOfDiskReport
 newSqlOutOfDiskReport =
   SqlOutOfDiskReport
-    { sqlMinRecommendedIncreaseSizeGb = Core.Nothing,
+    { sqlMinRecommendedIncreaseSizeGb =
+        Core.Nothing,
       sqlOutOfDiskState = Core.Nothing
     }
 
@@ -4473,8 +6197,7 @@ instance Core.ToJSON SqlOutOfDiskReport where
       ( Core.catMaybes
           [ ("sqlMinRecommendedIncreaseSizeGb" Core..=)
               Core.<$> sqlMinRecommendedIncreaseSizeGb,
-            ("sqlOutOfDiskState" Core..=)
-              Core.<$> sqlOutOfDiskState
+            ("sqlOutOfDiskState" Core..=) Core.<$> sqlOutOfDiskState
           ]
       )
 
@@ -4482,8 +6205,7 @@ instance Core.ToJSON SqlOutOfDiskReport where
 --
 -- /See:/ 'newSqlScheduledMaintenance' smart constructor.
 data SqlScheduledMaintenance = SqlScheduledMaintenance
-  { -- |
-    canDefer :: (Core.Maybe Core.Bool),
+  { canDefer :: (Core.Maybe Core.Bool),
     -- | If the scheduled maintenance can be rescheduled.
     canReschedule :: (Core.Maybe Core.Bool),
     -- | Maintenance cannot be rescheduled to start beyond this deadline.
@@ -4522,8 +6244,7 @@ instance Core.ToJSON SqlScheduledMaintenance where
       ( Core.catMaybes
           [ ("canDefer" Core..=) Core.<$> canDefer,
             ("canReschedule" Core..=) Core.<$> canReschedule,
-            ("scheduleDeadlineTime" Core..=)
-              Core.<$> scheduleDeadlineTime,
+            ("scheduleDeadlineTime" Core..=) Core.<$> scheduleDeadlineTime,
             ("startTime" Core..=) Core.<$> startTime
           ]
       )
@@ -4572,8 +6293,7 @@ instance Core.ToJSON SqlServerAuditConfig where
       ( Core.catMaybes
           [ ("bucket" Core..=) Core.<$> bucket,
             ("kind" Core..=) Core.<$> kind,
-            ("retentionInterval" Core..=)
-              Core.<$> retentionInterval,
+            ("retentionInterval" Core..=) Core.<$> retentionInterval,
             ("uploadInterval" Core..=) Core.<$> uploadInterval
           ]
       )
@@ -4612,8 +6332,7 @@ instance Core.ToJSON SqlServerDatabaseDetails where
   toJSON SqlServerDatabaseDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("compatibilityLevel" Core..=)
-              Core.<$> compatibilityLevel,
+          [ ("compatibilityLevel" Core..=) Core.<$> compatibilityLevel,
             ("recoveryModel" Core..=) Core.<$> recoveryModel
           ]
       )
@@ -4633,7 +6352,10 @@ data SqlServerUserDetails = SqlServerUserDetails
 newSqlServerUserDetails ::
   SqlServerUserDetails
 newSqlServerUserDetails =
-  SqlServerUserDetails {disabled = Core.Nothing, serverRoles = Core.Nothing}
+  SqlServerUserDetails
+    { disabled = Core.Nothing,
+      serverRoles = Core.Nothing
+    }
 
 instance Core.FromJSON SqlServerUserDetails where
   parseJSON =
@@ -4652,6 +6374,36 @@ instance Core.ToJSON SqlServerUserDetails where
           [ ("disabled" Core..=) Core.<$> disabled,
             ("serverRoles" Core..=) Core.<$> serverRoles
           ]
+      )
+
+-- | The sub operation type based on the operation type.
+--
+-- /See:/ 'newSqlSubOperationType' smart constructor.
+newtype SqlSubOperationType = SqlSubOperationType
+  { -- | The type of maintenance to be performed on the instance.
+    maintenanceType :: (Core.Maybe SqlSubOperationType_MaintenanceType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SqlSubOperationType' with the minimum fields required to make a request.
+newSqlSubOperationType ::
+  SqlSubOperationType
+newSqlSubOperationType =
+  SqlSubOperationType {maintenanceType = Core.Nothing}
+
+instance Core.FromJSON SqlSubOperationType where
+  parseJSON =
+    Core.withObject
+      "SqlSubOperationType"
+      ( \o ->
+          SqlSubOperationType Core.<$> (o Core..:? "maintenanceType")
+      )
+
+instance Core.ToJSON SqlSubOperationType where
+  toJSON SqlSubOperationType {..} =
+    Core.object
+      ( Core.catMaybes
+          [("maintenanceType" Core..=) Core.<$> maintenanceType]
       )
 
 -- | SslCerts Resource
@@ -4717,16 +6469,14 @@ instance Core.ToJSON SslCert where
     Core.object
       ( Core.catMaybes
           [ ("cert" Core..=) Core.<$> cert,
-            ("certSerialNumber" Core..=)
-              Core.<$> certSerialNumber,
+            ("certSerialNumber" Core..=) Core.<$> certSerialNumber,
             ("commonName" Core..=) Core.<$> commonName,
             ("createTime" Core..=) Core.<$> createTime,
             ("expirationTime" Core..=) Core.<$> expirationTime,
             ("instance" Core..=) Core.<$> instance',
             ("kind" Core..=) Core.<$> kind,
             ("selfLink" Core..=) Core.<$> selfLink,
-            ("sha1Fingerprint" Core..=)
-              Core.<$> sha1Fingerprint
+            ("sha1Fingerprint" Core..=) Core.<$> sha1Fingerprint
           ]
       )
 
@@ -4745,7 +6495,10 @@ data SslCertDetail = SslCertDetail
 newSslCertDetail ::
   SslCertDetail
 newSslCertDetail =
-  SslCertDetail {certInfo = Core.Nothing, certPrivateKey = Core.Nothing}
+  SslCertDetail
+    { certInfo = Core.Nothing,
+      certPrivateKey = Core.Nothing
+    }
 
 instance Core.FromJSON SslCertDetail where
   parseJSON =
@@ -4817,23 +6570,19 @@ newtype SslCertsInsertRequest = SslCertsInsertRequest
 -- | Creates a value of 'SslCertsInsertRequest' with the minimum fields required to make a request.
 newSslCertsInsertRequest ::
   SslCertsInsertRequest
-newSslCertsInsertRequest = SslCertsInsertRequest {commonName = Core.Nothing}
+newSslCertsInsertRequest =
+  SslCertsInsertRequest {commonName = Core.Nothing}
 
 instance Core.FromJSON SslCertsInsertRequest where
   parseJSON =
     Core.withObject
       "SslCertsInsertRequest"
-      ( \o ->
-          SslCertsInsertRequest
-            Core.<$> (o Core..:? "commonName")
-      )
+      (\o -> SslCertsInsertRequest Core.<$> (o Core..:? "commonName"))
 
 instance Core.ToJSON SslCertsInsertRequest where
   toJSON SslCertsInsertRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("commonName" Core..=) Core.<$> commonName]
-      )
+      (Core.catMaybes [("commonName" Core..=) Core.<$> commonName])
 
 -- | SslCert insert response.
 --
@@ -4907,16 +6656,15 @@ instance Core.FromJSON SslCertsListResponse where
       "SslCertsListResponse"
       ( \o ->
           SslCertsListResponse
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON SslCertsListResponse where
   toJSON SslCertsListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 -- | Initial sync flags for certain Cloud SQL APIs. Currently used for the MySQL external server initial dump.
@@ -4941,16 +6689,15 @@ instance Core.FromJSON SyncFlags where
       "SyncFlags"
       ( \o ->
           SyncFlags
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON SyncFlags where
   toJSON SyncFlags {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | A Google Cloud SQL service tier resource.
@@ -4988,9 +6735,7 @@ instance Core.FromJSON Tier where
       "Tier"
       ( \o ->
           Tier
-            Core.<$> ( o Core..:? "DiskQuota"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "DiskQuota" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "RAM" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "region")
@@ -5001,8 +6746,7 @@ instance Core.ToJSON Tier where
   toJSON Tier {..} =
     Core.object
       ( Core.catMaybes
-          [ ("DiskQuota" Core..=) Core.. Core.AsText
-              Core.<$> diskQuota,
+          [ ("DiskQuota" Core..=) Core.. Core.AsText Core.<$> diskQuota,
             ("RAM" Core..=) Core.. Core.AsText Core.<$> rAM,
             ("kind" Core..=) Core.<$> kind,
             ("region" Core..=) Core.<$> region,
@@ -5033,16 +6777,15 @@ instance Core.FromJSON TiersListResponse where
       "TiersListResponse"
       ( \o ->
           TiersListResponse
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON TiersListResponse where
   toJSON TiersListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 -- | Database Instance truncate log context.
@@ -5068,7 +6811,8 @@ instance Core.FromJSON TruncateLogContext where
       "TruncateLogContext"
       ( \o ->
           TruncateLogContext
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "logType")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "logType")
       )
 
 instance Core.ToJSON TruncateLogContext where
@@ -5102,7 +6846,6 @@ data User = User
     passwordPolicy :: (Core.Maybe UserPasswordValidationPolicy),
     -- | The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable. Can be omitted for @update@ because it is already specified on the URL.
     project :: (Core.Maybe Core.Text),
-    -- |
     sqlserverUserDetails :: (Core.Maybe SqlServerUserDetails),
     -- | The user type. It determines the method to authenticate the user during login. The default is the database\'s built-in user type.
     type' :: (Core.Maybe User_Type)
@@ -5150,8 +6893,7 @@ instance Core.ToJSON User where
   toJSON User {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dualPasswordType" Core..=)
-              Core.<$> dualPasswordType,
+          [ ("dualPasswordType" Core..=) Core.<$> dualPasswordType,
             ("etag" Core..=) Core.<$> etag,
             ("host" Core..=) Core.<$> host,
             ("instance" Core..=) Core.<$> instance',
@@ -5160,8 +6902,7 @@ instance Core.ToJSON User where
             ("password" Core..=) Core.<$> password,
             ("passwordPolicy" Core..=) Core.<$> passwordPolicy,
             ("project" Core..=) Core.<$> project,
-            ("sqlserverUserDetails" Core..=)
-              Core.<$> sqlserverUserDetails,
+            ("sqlserverUserDetails" Core..=) Core.<$> sqlserverUserDetails,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -5188,7 +6929,8 @@ newUserPasswordValidationPolicy ::
   UserPasswordValidationPolicy
 newUserPasswordValidationPolicy =
   UserPasswordValidationPolicy
-    { allowedFailedAttempts = Core.Nothing,
+    { allowedFailedAttempts =
+        Core.Nothing,
       enableFailedAttemptsCheck = Core.Nothing,
       enablePasswordVerification = Core.Nothing,
       passwordExpirationDuration = Core.Nothing,
@@ -5212,8 +6954,7 @@ instance Core.ToJSON UserPasswordValidationPolicy where
   toJSON UserPasswordValidationPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedFailedAttempts" Core..=)
-              Core.<$> allowedFailedAttempts,
+          [ ("allowedFailedAttempts" Core..=) Core.<$> allowedFailedAttempts,
             ("enableFailedAttemptsCheck" Core..=)
               Core.<$> enableFailedAttemptsCheck,
             ("enablePasswordVerification" Core..=)

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.OAuth2.Tokeninfo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -38,7 +36,7 @@ module Gogol.OAuth2.Tokeninfo
 where
 
 import Gogol.OAuth2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @oauth2.tokeninfo@ method which the
 -- 'OAuth2Tokeninfo' request conforms to.
@@ -54,9 +52,7 @@ type OAuth2TokeninfoMethod =
 --
 -- /See:/ 'newOAuth2Tokeninfo' smart constructor.
 data OAuth2Tokeninfo = OAuth2Tokeninfo
-  { -- |
-    accessToken :: (Core.Maybe Core.Text),
-    -- |
+  { accessToken :: (Core.Maybe Core.Text),
     idToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -65,17 +61,16 @@ data OAuth2Tokeninfo = OAuth2Tokeninfo
 newOAuth2Tokeninfo ::
   OAuth2Tokeninfo
 newOAuth2Tokeninfo =
-  OAuth2Tokeninfo {accessToken = Core.Nothing, idToken = Core.Nothing}
+  OAuth2Tokeninfo
+    { accessToken = Core.Nothing,
+      idToken = Core.Nothing
+    }
 
 instance Core.GoogleRequest OAuth2Tokeninfo where
   type Rs OAuth2Tokeninfo = Tokeninfo
   type Scopes OAuth2Tokeninfo = '[]
   requestClient OAuth2Tokeninfo {..} =
-    go
-      accessToken
-      idToken
-      (Core.Just Core.AltJSON)
-      oAuth2Service
+    go accessToken idToken (Core.Just Core.AltJSON) oAuth2Service
     where
       go =
         Core.buildClient

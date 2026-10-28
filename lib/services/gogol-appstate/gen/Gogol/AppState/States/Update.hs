@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppState.States.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppState.States.Update
 where
 
 import Gogol.AppState.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appstate.states.update@ method which the
 -- 'AppStateStatesUpdate' request conforms to.
@@ -83,9 +81,7 @@ newAppStateStatesUpdate payload stateKey =
 
 instance Core.GoogleRequest AppStateStatesUpdate where
   type Rs AppStateStatesUpdate = WriteResult
-  type
-    Scopes AppStateStatesUpdate =
-      '[Appstate'FullControl]
+  type Scopes AppStateStatesUpdate = '[Appstate'FullControl]
   requestClient AppStateStatesUpdate {..} =
     go
       stateKey
@@ -96,7 +92,5 @@ instance Core.GoogleRequest AppStateStatesUpdate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AppStateStatesUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy AppStateStatesUpdateResource)
           Core.mempty

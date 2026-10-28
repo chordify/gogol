@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudKMS.Internal.Sum
@@ -62,12 +60,22 @@ module Gogol.CloudKMS.Internal.Sum
         ..
       ),
 
+    -- * AutokeyConfig_State
+    AutokeyConfig_State
+      ( AutokeyConfig_State_STATEUNSPECIFIED,
+        AutokeyConfig_State_Active,
+        AutokeyConfig_State_KEYPROJECTDELETED,
+        AutokeyConfig_State_Uninitialized,
+        ..
+      ),
+
     -- * CryptoKey_Purpose
     CryptoKey_Purpose
       ( CryptoKey_Purpose_CRYPTOKEYPURPOSEUNSPECIFIED,
         CryptoKey_Purpose_ENCRYPTDECRYPT,
         CryptoKey_Purpose_ASYMMETRICSIGN,
         CryptoKey_Purpose_ASYMMETRICDECRYPT,
+        CryptoKey_Purpose_RAWENCRYPTDECRYPT,
         CryptoKey_Purpose_Mac,
         ..
       ),
@@ -76,6 +84,12 @@ module Gogol.CloudKMS.Internal.Sum
     CryptoKeyVersion_Algorithm
       ( CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION,
+        CryptoKeyVersion_Algorithm_AES128GCM,
+        CryptoKeyVersion_Algorithm_AES256GCM,
+        CryptoKeyVersion_Algorithm_AES128CBC,
+        CryptoKeyVersion_Algorithm_AES256CBC,
+        CryptoKeyVersion_Algorithm_AES128CTR,
+        CryptoKeyVersion_Algorithm_AES256CTR,
         CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_3072_SHA256,
         CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -97,12 +111,15 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersion_Algorithm_EC_SIGN_P256_SHA256,
         CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384,
         CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256,
+        CryptoKeyVersion_Algorithm_EC_SIGN_ED25519,
         CryptoKeyVersion_Algorithm_HMAC_SHA256,
         CryptoKeyVersion_Algorithm_HMAC_SHA1,
         CryptoKeyVersion_Algorithm_HMAC_SHA384,
         CryptoKeyVersion_Algorithm_HMAC_SHA512,
         CryptoKeyVersion_Algorithm_HMAC_SHA224,
         CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65,
+        CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -136,6 +153,12 @@ module Gogol.CloudKMS.Internal.Sum
     CryptoKeyVersionTemplate_Algorithm
       ( CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION,
+        CryptoKeyVersionTemplate_Algorithm_AES128GCM,
+        CryptoKeyVersionTemplate_Algorithm_AES256GCM,
+        CryptoKeyVersionTemplate_Algorithm_AES128CBC,
+        CryptoKeyVersionTemplate_Algorithm_AES256CBC,
+        CryptoKeyVersionTemplate_Algorithm_AES128CTR,
+        CryptoKeyVersionTemplate_Algorithm_AES256CTR,
         CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_3072_SHA256,
         CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -157,12 +180,15 @@ module Gogol.CloudKMS.Internal.Sum
         CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P256_SHA256,
         CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384,
         CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256,
+        CryptoKeyVersionTemplate_Algorithm_EC_SIGN_ED25519,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
         CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
         CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65,
+        CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -218,6 +244,12 @@ module Gogol.CloudKMS.Internal.Sum
     ImportCryptoKeyVersionRequest_Algorithm
       ( ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION,
+        ImportCryptoKeyVersionRequest_Algorithm_AES128GCM,
+        ImportCryptoKeyVersionRequest_Algorithm_AES256GCM,
+        ImportCryptoKeyVersionRequest_Algorithm_AES128CBC,
+        ImportCryptoKeyVersionRequest_Algorithm_AES256CBC,
+        ImportCryptoKeyVersionRequest_Algorithm_AES128CTR,
+        ImportCryptoKeyVersionRequest_Algorithm_AES256CTR,
         ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_3072_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -239,12 +271,15 @@ module Gogol.CloudKMS.Internal.Sum
         ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P256_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384,
         ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256,
+        ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_ED25519,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
         ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
         ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65,
+        ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -276,6 +311,23 @@ module Gogol.CloudKMS.Internal.Sum
         ImportJob_State_PENDINGGENERATION,
         ImportJob_State_Active,
         ImportJob_State_Expired,
+        ..
+      ),
+
+    -- * KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+    KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+      ( KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONUNSPECIFIED,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDSUPPORT,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSERVICE,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_THIRDPARTYDATAREQUEST,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDREVIEW,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDACCESS,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSYSTEMOPERATION,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONNOTEXPECTED,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDCUSTOMERINITIATEDACCESS,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDGOOGLEINITIATEDSYSTEMOPERATION,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLERESPONSETOPRODUCTIONALERT,
+        KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERAUTHORIZEDWORKFLOWSERVICING,
         ..
       ),
 
@@ -311,6 +363,12 @@ module Gogol.CloudKMS.Internal.Sum
     PublicKey_Algorithm
       ( PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
         PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION,
+        PublicKey_Algorithm_AES128GCM,
+        PublicKey_Algorithm_AES256GCM,
+        PublicKey_Algorithm_AES128CBC,
+        PublicKey_Algorithm_AES256CBC,
+        PublicKey_Algorithm_AES128CTR,
+        PublicKey_Algorithm_AES256CTR,
         PublicKey_Algorithm_RSA_SIGN_PSS_2048_SHA256,
         PublicKey_Algorithm_RSA_SIGN_PSS_3072_SHA256,
         PublicKey_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -332,12 +390,15 @@ module Gogol.CloudKMS.Internal.Sum
         PublicKey_Algorithm_EC_SIGN_P256_SHA256,
         PublicKey_Algorithm_EC_SIGN_P384_SHA384,
         PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256,
+        PublicKey_Algorithm_EC_SIGN_ED25519,
         PublicKey_Algorithm_HMAC_SHA256,
         PublicKey_Algorithm_HMAC_SHA1,
         PublicKey_Algorithm_HMAC_SHA384,
         PublicKey_Algorithm_HMAC_SHA512,
         PublicKey_Algorithm_HMAC_SHA224,
         PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+        PublicKey_Algorithm_PQ_SIGN_ML_DSA_65,
+        PublicKey_Algorithm_PQSIGNSLHDSASHA2128S,
         ..
       ),
 
@@ -348,6 +409,42 @@ module Gogol.CloudKMS.Internal.Sum
         PublicKey_ProtectionLevel_Hsm,
         PublicKey_ProtectionLevel_External,
         PublicKey_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * PublicKey_PublicKeyFormat
+    PublicKey_PublicKeyFormat
+      ( PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+        PublicKey_PublicKeyFormat_Pem,
+        PublicKey_PublicKeyFormat_NISTPQC,
+        ..
+      ),
+
+    -- * RawDecryptResponse_ProtectionLevel
+    RawDecryptResponse_ProtectionLevel
+      ( RawDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+        RawDecryptResponse_ProtectionLevel_Software,
+        RawDecryptResponse_ProtectionLevel_Hsm,
+        RawDecryptResponse_ProtectionLevel_External,
+        RawDecryptResponse_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * RawEncryptResponse_ProtectionLevel
+    RawEncryptResponse_ProtectionLevel
+      ( RawEncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+        RawEncryptResponse_ProtectionLevel_Software,
+        RawEncryptResponse_ProtectionLevel_Hsm,
+        RawEncryptResponse_ProtectionLevel_External,
+        RawEncryptResponse_ProtectionLevel_EXTERNALVPC,
+        ..
+      ),
+
+    -- * ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+      ( ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+        ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem,
+        ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC,
         ..
       ),
 
@@ -367,7 +464,7 @@ module Gogol.CloudKMS.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -517,6 +614,43 @@ pattern AuditLogConfig_LogType_DATAREAD = AuditLogConfig_LogType "DATA_READ"
   AuditLogConfig_LogType
   #-}
 
+-- | Output only. The state for the AutokeyConfig.
+newtype AutokeyConfig_State = AutokeyConfig_State {fromAutokeyConfig_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The state of the AutokeyConfig is unspecified.
+pattern AutokeyConfig_State_STATEUNSPECIFIED :: AutokeyConfig_State
+pattern AutokeyConfig_State_STATEUNSPECIFIED = AutokeyConfig_State "STATE_UNSPECIFIED"
+
+-- | The AutokeyConfig is currently active.
+pattern AutokeyConfig_State_Active :: AutokeyConfig_State
+pattern AutokeyConfig_State_Active = AutokeyConfig_State "ACTIVE"
+
+-- | A previously configured key project has been deleted and the current AutokeyConfig is unusable.
+pattern AutokeyConfig_State_KEYPROJECTDELETED :: AutokeyConfig_State
+pattern AutokeyConfig_State_KEYPROJECTDELETED = AutokeyConfig_State "KEY_PROJECT_DELETED"
+
+-- | The AutokeyConfig is not yet initialized or has been reset to its default uninitialized state.
+pattern AutokeyConfig_State_Uninitialized :: AutokeyConfig_State
+pattern AutokeyConfig_State_Uninitialized = AutokeyConfig_State "UNINITIALIZED"
+
+{-# COMPLETE
+  AutokeyConfig_State_STATEUNSPECIFIED,
+  AutokeyConfig_State_Active,
+  AutokeyConfig_State_KEYPROJECTDELETED,
+  AutokeyConfig_State_Uninitialized,
+  AutokeyConfig_State
+  #-}
+
 -- | Immutable. The immutable purpose of this CryptoKey.
 newtype CryptoKey_Purpose = CryptoKey_Purpose {fromCryptoKey_Purpose :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -546,6 +680,10 @@ pattern CryptoKey_Purpose_ASYMMETRICSIGN = CryptoKey_Purpose "ASYMMETRIC_SIGN"
 pattern CryptoKey_Purpose_ASYMMETRICDECRYPT :: CryptoKey_Purpose
 pattern CryptoKey_Purpose_ASYMMETRICDECRYPT = CryptoKey_Purpose "ASYMMETRIC_DECRYPT"
 
+-- | CryptoKeys with this purpose may be used with RawEncrypt and RawDecrypt. This purpose is meant to be used for interoperable symmetric encryption and does not support automatic CryptoKey rotation.
+pattern CryptoKey_Purpose_RAWENCRYPTDECRYPT :: CryptoKey_Purpose
+pattern CryptoKey_Purpose_RAWENCRYPTDECRYPT = CryptoKey_Purpose "RAW_ENCRYPT_DECRYPT"
+
 -- | CryptoKeys with this purpose may be used with MacSign.
 pattern CryptoKey_Purpose_Mac :: CryptoKey_Purpose
 pattern CryptoKey_Purpose_Mac = CryptoKey_Purpose "MAC"
@@ -555,6 +693,7 @@ pattern CryptoKey_Purpose_Mac = CryptoKey_Purpose "MAC"
   CryptoKey_Purpose_ENCRYPTDECRYPT,
   CryptoKey_Purpose_ASYMMETRICSIGN,
   CryptoKey_Purpose_ASYMMETRICDECRYPT,
+  CryptoKey_Purpose_RAWENCRYPTDECRYPT,
   CryptoKey_Purpose_Mac,
   CryptoKey_Purpose
   #-}
@@ -579,6 +718,30 @@ pattern CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED = Crypto
 -- | Creates symmetric encryption keys.
 pattern CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION = CryptoKeyVersion_Algorithm "GOOGLE_SYMMETRIC_ENCRYPTION"
+
+-- | AES-GCM (Galois Counter Mode) using 128-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES128GCM :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES128GCM = CryptoKeyVersion_Algorithm "AES_128_GCM"
+
+-- | AES-GCM (Galois Counter Mode) using 256-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES256GCM :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES256GCM = CryptoKeyVersion_Algorithm "AES_256_GCM"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES128CBC :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES128CBC = CryptoKeyVersion_Algorithm "AES_128_CBC"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES256CBC :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES256CBC = CryptoKeyVersion_Algorithm "AES_256_CBC"
+
+-- | AES-CTR (Counter Mode) using 128-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES128CTR :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES128CTR = CryptoKeyVersion_Algorithm "AES_128_CTR"
+
+-- | AES-CTR (Counter Mode) using 256-bit keys.
+pattern CryptoKeyVersion_Algorithm_AES256CTR :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_AES256CTR = CryptoKeyVersion_Algorithm "AES_256_CTR"
 
 -- | RSASSA-PSS 2048 bit key with a SHA256 digest.
 pattern CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_2048_SHA256 :: CryptoKeyVersion_Algorithm
@@ -652,17 +815,21 @@ pattern CryptoKeyVersion_Algorithm_RSA_DECRYPT_OAEP_3072_SHA1 = CryptoKeyVersion
 pattern CryptoKeyVersion_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 = CryptoKeyVersion_Algorithm "RSA_DECRYPT_OAEP_4096_SHA1"
 
--- | ECDSA on the NIST P-256 curve with a SHA256 digest.
+-- | ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_P256_SHA256 :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_P256_SHA256 = CryptoKeyVersion_Algorithm "EC_SIGN_P256_SHA256"
 
--- | ECDSA on the NIST P-384 curve with a SHA384 digest.
+-- | ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384 :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384 = CryptoKeyVersion_Algorithm "EC_SIGN_P384_SHA384"
 
--- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level.
+-- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256 :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256 = CryptoKeyVersion_Algorithm "EC_SIGN_SECP256K1_SHA256"
+
+-- | EdDSA on the Curve25519 in pure mode (taking data as input).
+pattern CryptoKeyVersion_Algorithm_EC_SIGN_ED25519 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_EC_SIGN_ED25519 = CryptoKeyVersion_Algorithm "EC_SIGN_ED25519"
 
 -- | HMAC-SHA256 signing with a 256 bit key.
 pattern CryptoKeyVersion_Algorithm_HMAC_SHA256 :: CryptoKeyVersion_Algorithm
@@ -688,9 +855,23 @@ pattern CryptoKeyVersion_Algorithm_HMAC_SHA224 = CryptoKeyVersion_Algorithm "HMA
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersion_Algorithm
 pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersion_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65 :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65 = CryptoKeyVersion_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S :: CryptoKeyVersion_Algorithm
+pattern CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S = CryptoKeyVersion_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   CryptoKeyVersion_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   CryptoKeyVersion_Algorithm_GOOGLESYMMETRICENCRYPTION,
+  CryptoKeyVersion_Algorithm_AES128GCM,
+  CryptoKeyVersion_Algorithm_AES256GCM,
+  CryptoKeyVersion_Algorithm_AES128CBC,
+  CryptoKeyVersion_Algorithm_AES256CBC,
+  CryptoKeyVersion_Algorithm_AES128CTR,
+  CryptoKeyVersion_Algorithm_AES256CTR,
   CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_2048_SHA256,
   CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_3072_SHA256,
   CryptoKeyVersion_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -712,12 +893,15 @@ pattern CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersio
   CryptoKeyVersion_Algorithm_EC_SIGN_P256_SHA256,
   CryptoKeyVersion_Algorithm_EC_SIGN_P384_SHA384,
   CryptoKeyVersion_Algorithm_EC_SIGN_SECP256K1_SHA256,
+  CryptoKeyVersion_Algorithm_EC_SIGN_ED25519,
   CryptoKeyVersion_Algorithm_HMAC_SHA256,
   CryptoKeyVersion_Algorithm_HMAC_SHA1,
   CryptoKeyVersion_Algorithm_HMAC_SHA384,
   CryptoKeyVersion_Algorithm_HMAC_SHA512,
   CryptoKeyVersion_Algorithm_HMAC_SHA224,
   CryptoKeyVersion_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  CryptoKeyVersion_Algorithm_PQ_SIGN_ML_DSA_65,
+  CryptoKeyVersion_Algorithm_PQSIGNSLHDSASHA2128S,
   CryptoKeyVersion_Algorithm
   #-}
 
@@ -792,7 +976,7 @@ pattern CryptoKeyVersion_State_Enabled = CryptoKeyVersion_State "ENABLED"
 pattern CryptoKeyVersion_State_Disabled :: CryptoKeyVersion_State
 pattern CryptoKeyVersion_State_Disabled = CryptoKeyVersion_State "DISABLED"
 
--- | This version is destroyed, and the key material is no longer stored. This version may only become ENABLED again if this version is reimport_eligible and the original key material is reimported with a call to KeyManagementService.ImportCryptoKeyVersion.
+-- | This key material of this version is destroyed and no longer stored. This version may only become ENABLED again if this version is reimport_eligible and the original key material is reimported with a call to KeyManagementService.ImportCryptoKeyVersion.
 pattern CryptoKeyVersion_State_Destroyed :: CryptoKeyVersion_State
 pattern CryptoKeyVersion_State_Destroyed = CryptoKeyVersion_State "DESTROYED"
 
@@ -855,6 +1039,30 @@ pattern CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED 
 -- | Creates symmetric encryption keys.
 pattern CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION = CryptoKeyVersionTemplate_Algorithm "GOOGLE_SYMMETRIC_ENCRYPTION"
+
+-- | AES-GCM (Galois Counter Mode) using 128-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES128GCM :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES128GCM = CryptoKeyVersionTemplate_Algorithm "AES_128_GCM"
+
+-- | AES-GCM (Galois Counter Mode) using 256-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES256GCM :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES256GCM = CryptoKeyVersionTemplate_Algorithm "AES_256_GCM"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES128CBC :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES128CBC = CryptoKeyVersionTemplate_Algorithm "AES_128_CBC"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES256CBC :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES256CBC = CryptoKeyVersionTemplate_Algorithm "AES_256_CBC"
+
+-- | AES-CTR (Counter Mode) using 128-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES128CTR :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES128CTR = CryptoKeyVersionTemplate_Algorithm "AES_128_CTR"
+
+-- | AES-CTR (Counter Mode) using 256-bit keys.
+pattern CryptoKeyVersionTemplate_Algorithm_AES256CTR :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_AES256CTR = CryptoKeyVersionTemplate_Algorithm "AES_256_CTR"
 
 -- | RSASSA-PSS 2048 bit key with a SHA256 digest.
 pattern CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_2048_SHA256 :: CryptoKeyVersionTemplate_Algorithm
@@ -928,17 +1136,21 @@ pattern CryptoKeyVersionTemplate_Algorithm_RSA_DECRYPT_OAEP_3072_SHA1 = CryptoKe
 pattern CryptoKeyVersionTemplate_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 = CryptoKeyVersionTemplate_Algorithm "RSA_DECRYPT_OAEP_4096_SHA1"
 
--- | ECDSA on the NIST P-256 curve with a SHA256 digest.
+-- | ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P256_SHA256 :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P256_SHA256 = CryptoKeyVersionTemplate_Algorithm "EC_SIGN_P256_SHA256"
 
--- | ECDSA on the NIST P-384 curve with a SHA384 digest.
+-- | ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384 :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384 = CryptoKeyVersionTemplate_Algorithm "EC_SIGN_P384_SHA384"
 
--- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level.
+-- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256 :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256 = CryptoKeyVersionTemplate_Algorithm "EC_SIGN_SECP256K1_SHA256"
+
+-- | EdDSA on the Curve25519 in pure mode (taking data as input).
+pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_ED25519 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_EC_SIGN_ED25519 = CryptoKeyVersionTemplate_Algorithm "EC_SIGN_ED25519"
 
 -- | HMAC-SHA256 signing with a 256 bit key.
 pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256 :: CryptoKeyVersionTemplate_Algorithm
@@ -964,9 +1176,23 @@ pattern CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224 = CryptoKeyVersionTemplat
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION :: CryptoKeyVersionTemplate_Algorithm
 pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoKeyVersionTemplate_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65 :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65 = CryptoKeyVersionTemplate_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S :: CryptoKeyVersionTemplate_Algorithm
+pattern CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S = CryptoKeyVersionTemplate_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   CryptoKeyVersionTemplate_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   CryptoKeyVersionTemplate_Algorithm_GOOGLESYMMETRICENCRYPTION,
+  CryptoKeyVersionTemplate_Algorithm_AES128GCM,
+  CryptoKeyVersionTemplate_Algorithm_AES256GCM,
+  CryptoKeyVersionTemplate_Algorithm_AES128CBC,
+  CryptoKeyVersionTemplate_Algorithm_AES256CBC,
+  CryptoKeyVersionTemplate_Algorithm_AES128CTR,
+  CryptoKeyVersionTemplate_Algorithm_AES256CTR,
   CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_2048_SHA256,
   CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_3072_SHA256,
   CryptoKeyVersionTemplate_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -988,12 +1214,15 @@ pattern CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION = CryptoK
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P256_SHA256,
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_P384_SHA384,
   CryptoKeyVersionTemplate_Algorithm_EC_SIGN_SECP256K1_SHA256,
+  CryptoKeyVersionTemplate_Algorithm_EC_SIGN_ED25519,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA256,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA1,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA384,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA512,
   CryptoKeyVersionTemplate_Algorithm_HMAC_SHA224,
   CryptoKeyVersionTemplate_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  CryptoKeyVersionTemplate_Algorithm_PQ_SIGN_ML_DSA_65,
+  CryptoKeyVersionTemplate_Algorithm_PQSIGNSLHDSASHA2128S,
   CryptoKeyVersionTemplate_Algorithm
   #-}
 
@@ -1218,6 +1447,30 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECI
 pattern ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION = ImportCryptoKeyVersionRequest_Algorithm "GOOGLE_SYMMETRIC_ENCRYPTION"
 
+-- | AES-GCM (Galois Counter Mode) using 128-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128GCM :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128GCM = ImportCryptoKeyVersionRequest_Algorithm "AES_128_GCM"
+
+-- | AES-GCM (Galois Counter Mode) using 256-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256GCM :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256GCM = ImportCryptoKeyVersionRequest_Algorithm "AES_256_GCM"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128CBC :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128CBC = ImportCryptoKeyVersionRequest_Algorithm "AES_128_CBC"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256CBC :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256CBC = ImportCryptoKeyVersionRequest_Algorithm "AES_256_CBC"
+
+-- | AES-CTR (Counter Mode) using 128-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128CTR :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES128CTR = ImportCryptoKeyVersionRequest_Algorithm "AES_128_CTR"
+
+-- | AES-CTR (Counter Mode) using 256-bit keys.
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256CTR :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_AES256CTR = ImportCryptoKeyVersionRequest_Algorithm "AES_256_CTR"
+
 -- | RSASSA-PSS 2048 bit key with a SHA256 digest.
 pattern ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_2048_SHA256 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_2048_SHA256 = ImportCryptoKeyVersionRequest_Algorithm "RSA_SIGN_PSS_2048_SHA256"
@@ -1290,17 +1543,21 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_RSA_DECRYPT_OAEP_3072_SHA1 = Imp
 pattern ImportCryptoKeyVersionRequest_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 = ImportCryptoKeyVersionRequest_Algorithm "RSA_DECRYPT_OAEP_4096_SHA1"
 
--- | ECDSA on the NIST P-256 curve with a SHA256 digest.
+-- | ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P256_SHA256 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P256_SHA256 = ImportCryptoKeyVersionRequest_Algorithm "EC_SIGN_P256_SHA256"
 
--- | ECDSA on the NIST P-384 curve with a SHA384 digest.
+-- | ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384 = ImportCryptoKeyVersionRequest_Algorithm "EC_SIGN_P384_SHA384"
 
--- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level.
+-- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256 :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256 = ImportCryptoKeyVersionRequest_Algorithm "EC_SIGN_SECP256K1_SHA256"
+
+-- | EdDSA on the Curve25519 in pure mode (taking data as input).
+pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_ED25519 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_ED25519 = ImportCryptoKeyVersionRequest_Algorithm "EC_SIGN_ED25519"
 
 -- | HMAC-SHA256 signing with a 256 bit key.
 pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256 :: ImportCryptoKeyVersionRequest_Algorithm
@@ -1326,9 +1583,23 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224 = ImportCryptoKeyVer
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION :: ImportCryptoKeyVersionRequest_Algorithm
 pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = ImportCryptoKeyVersionRequest_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65 :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65 = ImportCryptoKeyVersionRequest_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S :: ImportCryptoKeyVersionRequest_Algorithm
+pattern ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S = ImportCryptoKeyVersionRequest_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   ImportCryptoKeyVersionRequest_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   ImportCryptoKeyVersionRequest_Algorithm_GOOGLESYMMETRICENCRYPTION,
+  ImportCryptoKeyVersionRequest_Algorithm_AES128GCM,
+  ImportCryptoKeyVersionRequest_Algorithm_AES256GCM,
+  ImportCryptoKeyVersionRequest_Algorithm_AES128CBC,
+  ImportCryptoKeyVersionRequest_Algorithm_AES256CBC,
+  ImportCryptoKeyVersionRequest_Algorithm_AES128CTR,
+  ImportCryptoKeyVersionRequest_Algorithm_AES256CTR,
   ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_2048_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_3072_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -1350,12 +1621,15 @@ pattern ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION = Im
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P256_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_P384_SHA384,
   ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_SECP256K1_SHA256,
+  ImportCryptoKeyVersionRequest_Algorithm_EC_SIGN_ED25519,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA256,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA1,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA384,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA512,
   ImportCryptoKeyVersionRequest_Algorithm_HMAC_SHA224,
   ImportCryptoKeyVersionRequest_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  ImportCryptoKeyVersionRequest_Algorithm_PQ_SIGN_ML_DSA_65,
+  ImportCryptoKeyVersionRequest_Algorithm_PQSIGNSLHDSASHA2128S,
   ImportCryptoKeyVersionRequest_Algorithm
   #-}
 
@@ -1488,6 +1762,82 @@ pattern ImportJob_State_Expired = ImportJob_State "EXPIRED"
   ImportJob_State_Active,
   ImportJob_State_Expired,
   ImportJob_State
+  #-}
+
+newtype KeyAccessJustificationsPolicy_AllowedAccessReasonsItem = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem {fromKeyAccessJustificationsPolicy_AllowedAccessReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified access reason.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONUNSPECIFIED :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONUNSPECIFIED = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "REASON_UNSPECIFIED"
+
+-- | Customer-initiated support.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDSUPPORT :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDSUPPORT = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "CUSTOMER_INITIATED_SUPPORT"
+
+-- | Google-initiated access for system management and troubleshooting.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSERVICE :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSERVICE = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "GOOGLE_INITIATED_SERVICE"
+
+-- | Google-initiated access in response to a legal request or legal process.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_THIRDPARTYDATAREQUEST :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_THIRDPARTYDATAREQUEST = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "THIRD_PARTY_DATA_REQUEST"
+
+-- | Google-initiated access for security, fraud, abuse, or compliance purposes.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDREVIEW :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDREVIEW = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "GOOGLE_INITIATED_REVIEW"
+
+-- | Customer uses their account to perform any access to their own data which their IAM policy authorizes.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDACCESS :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDACCESS = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "CUSTOMER_INITIATED_ACCESS"
+
+-- | Google systems access customer data to help optimize the structure of the data or quality for future uses by the customer.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSYSTEMOPERATION :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSYSTEMOPERATION = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "GOOGLE_INITIATED_SYSTEM_OPERATION"
+
+-- | No reason is expected for this key request.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONNOTEXPECTED :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONNOTEXPECTED = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "REASON_NOT_EXPECTED"
+
+-- | Customer uses their account to perform any access to their own data which their IAM policy authorizes, and one of the following is true: * A Google administrator has reset the root-access account associated with the user\'s organization within the past 7 days. * A Google-initiated emergency access operation has interacted with a resource in the same project or folder as the currently accessed resource within the past 7 days.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDCUSTOMERINITIATEDACCESS :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDCUSTOMERINITIATEDACCESS = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "MODIFIED_CUSTOMER_INITIATED_ACCESS"
+
+-- | Google systems access customer data to help optimize the structure of the data or quality for future uses by the customer, and one of the following is true: * A Google administrator has reset the root-access account associated with the user\'s organization within the past 7 days. * A Google-initiated emergency access operation has interacted with a resource in the same project or folder as the currently accessed resource within the past 7 days.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDGOOGLEINITIATEDSYSTEMOPERATION :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDGOOGLEINITIATEDSYSTEMOPERATION = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "MODIFIED_GOOGLE_INITIATED_SYSTEM_OPERATION"
+
+-- | Google-initiated access to maintain system reliability.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLERESPONSETOPRODUCTIONALERT :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLERESPONSETOPRODUCTIONALERT = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"
+
+-- | One of the following operations is being executed while simultaneously encountering an internal technical issue which prevented a more precise justification code from being generated: * Your account has been used to perform any access to your own data which your IAM policy authorizes. * An automated Google system operates on encrypted customer data which your IAM policy authorizes. * Customer-initiated Google support access. * Google-initiated support access to protect system reliability.
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERAUTHORIZEDWORKFLOWSERVICING :: KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+pattern KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERAUTHORIZEDWORKFLOWSERVICING = KeyAccessJustificationsPolicy_AllowedAccessReasonsItem "CUSTOMER_AUTHORIZED_WORKFLOW_SERVICING"
+
+{-# COMPLETE
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONUNSPECIFIED,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDSUPPORT,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSERVICE,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_THIRDPARTYDATAREQUEST,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDREVIEW,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERINITIATEDACCESS,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLEINITIATEDSYSTEMOPERATION,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_REASONNOTEXPECTED,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDCUSTOMERINITIATEDACCESS,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_MODIFIEDGOOGLEINITIATEDSYSTEMOPERATION,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_GOOGLERESPONSETOPRODUCTIONALERT,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem_CUSTOMERAUTHORIZEDWORKFLOWSERVICING,
+  KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
   #-}
 
 -- | Output only. The format of the attestation data.
@@ -1627,6 +1977,30 @@ pattern PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED = PublicKey_Alg
 pattern PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION = PublicKey_Algorithm "GOOGLE_SYMMETRIC_ENCRYPTION"
 
+-- | AES-GCM (Galois Counter Mode) using 128-bit keys.
+pattern PublicKey_Algorithm_AES128GCM :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES128GCM = PublicKey_Algorithm "AES_128_GCM"
+
+-- | AES-GCM (Galois Counter Mode) using 256-bit keys.
+pattern PublicKey_Algorithm_AES256GCM :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES256GCM = PublicKey_Algorithm "AES_256_GCM"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 128-bit keys.
+pattern PublicKey_Algorithm_AES128CBC :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES128CBC = PublicKey_Algorithm "AES_128_CBC"
+
+-- | AES-CBC (Cipher Block Chaining Mode) using 256-bit keys.
+pattern PublicKey_Algorithm_AES256CBC :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES256CBC = PublicKey_Algorithm "AES_256_CBC"
+
+-- | AES-CTR (Counter Mode) using 128-bit keys.
+pattern PublicKey_Algorithm_AES128CTR :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES128CTR = PublicKey_Algorithm "AES_128_CTR"
+
+-- | AES-CTR (Counter Mode) using 256-bit keys.
+pattern PublicKey_Algorithm_AES256CTR :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_AES256CTR = PublicKey_Algorithm "AES_256_CTR"
+
 -- | RSASSA-PSS 2048 bit key with a SHA256 digest.
 pattern PublicKey_Algorithm_RSA_SIGN_PSS_2048_SHA256 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_RSA_SIGN_PSS_2048_SHA256 = PublicKey_Algorithm "RSA_SIGN_PSS_2048_SHA256"
@@ -1699,17 +2073,21 @@ pattern PublicKey_Algorithm_RSA_DECRYPT_OAEP_3072_SHA1 = PublicKey_Algorithm "RS
 pattern PublicKey_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_RSA_DECRYPT_OAEP_4096_SHA1 = PublicKey_Algorithm "RSA_DECRYPT_OAEP_4096_SHA1"
 
--- | ECDSA on the NIST P-256 curve with a SHA256 digest.
+-- | ECDSA on the NIST P-256 curve with a SHA256 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern PublicKey_Algorithm_EC_SIGN_P256_SHA256 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EC_SIGN_P256_SHA256 = PublicKey_Algorithm "EC_SIGN_P256_SHA256"
 
--- | ECDSA on the NIST P-384 curve with a SHA384 digest.
+-- | ECDSA on the NIST P-384 curve with a SHA384 digest. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern PublicKey_Algorithm_EC_SIGN_P384_SHA384 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EC_SIGN_P384_SHA384 = PublicKey_Algorithm "EC_SIGN_P384_SHA384"
 
--- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level.
+-- | ECDSA on the non-NIST secp256k1 curve. This curve is only supported for HSM protection level. Other hash functions can also be used: https:\/\/cloud.google.com\/kms\/docs\/create-validate-signatures#ecdsa/support/for/other/hash_algorithms
 pattern PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256 :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256 = PublicKey_Algorithm "EC_SIGN_SECP256K1_SHA256"
+
+-- | EdDSA on the Curve25519 in pure mode (taking data as input).
+pattern PublicKey_Algorithm_EC_SIGN_ED25519 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_EC_SIGN_ED25519 = PublicKey_Algorithm "EC_SIGN_ED25519"
 
 -- | HMAC-SHA256 signing with a 256 bit key.
 pattern PublicKey_Algorithm_HMAC_SHA256 :: PublicKey_Algorithm
@@ -1735,9 +2113,23 @@ pattern PublicKey_Algorithm_HMAC_SHA224 = PublicKey_Algorithm "HMAC_SHA224"
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION :: PublicKey_Algorithm
 pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "EXTERNAL_SYMMETRIC_ENCRYPTION"
 
+-- | The post-quantum Module-Lattice-Based Digital Signature Algorithm, at security level 3. Randomized version.
+pattern PublicKey_Algorithm_PQ_SIGN_ML_DSA_65 :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_PQ_SIGN_ML_DSA_65 = PublicKey_Algorithm "PQ_SIGN_ML_DSA_65"
+
+-- | The post-quantum stateless hash-based digital signature algorithm, at security level 1. Randomized version.
+pattern PublicKey_Algorithm_PQSIGNSLHDSASHA2128S :: PublicKey_Algorithm
+pattern PublicKey_Algorithm_PQSIGNSLHDSASHA2128S = PublicKey_Algorithm "PQ_SIGN_SLH_DSA_SHA2_128S"
+
 {-# COMPLETE
   PublicKey_Algorithm_CRYPTOKEYVERSIONALGORITHMUNSPECIFIED,
   PublicKey_Algorithm_GOOGLESYMMETRICENCRYPTION,
+  PublicKey_Algorithm_AES128GCM,
+  PublicKey_Algorithm_AES256GCM,
+  PublicKey_Algorithm_AES128CBC,
+  PublicKey_Algorithm_AES256CBC,
+  PublicKey_Algorithm_AES128CTR,
+  PublicKey_Algorithm_AES256CTR,
   PublicKey_Algorithm_RSA_SIGN_PSS_2048_SHA256,
   PublicKey_Algorithm_RSA_SIGN_PSS_3072_SHA256,
   PublicKey_Algorithm_RSA_SIGN_PSS_4096_SHA256,
@@ -1759,12 +2151,15 @@ pattern PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION = PublicKey_Algorithm "E
   PublicKey_Algorithm_EC_SIGN_P256_SHA256,
   PublicKey_Algorithm_EC_SIGN_P384_SHA384,
   PublicKey_Algorithm_EC_SIGN_SECP256K1_SHA256,
+  PublicKey_Algorithm_EC_SIGN_ED25519,
   PublicKey_Algorithm_HMAC_SHA256,
   PublicKey_Algorithm_HMAC_SHA1,
   PublicKey_Algorithm_HMAC_SHA384,
   PublicKey_Algorithm_HMAC_SHA512,
   PublicKey_Algorithm_HMAC_SHA224,
   PublicKey_Algorithm_EXTERNALSYMMETRICENCRYPTION,
+  PublicKey_Algorithm_PQ_SIGN_ML_DSA_65,
+  PublicKey_Algorithm_PQSIGNSLHDSASHA2128S,
   PublicKey_Algorithm
   #-}
 
@@ -1808,6 +2203,154 @@ pattern PublicKey_ProtectionLevel_EXTERNALVPC = PublicKey_ProtectionLevel "EXTER
   PublicKey_ProtectionLevel_External,
   PublicKey_ProtectionLevel_EXTERNALVPC,
   PublicKey_ProtectionLevel
+  #-}
+
+-- | The PublicKey format specified by the customer through the public/key/format field.
+newtype PublicKey_PublicKeyFormat = PublicKey_PublicKeyFormat {fromPublicKey_PublicKeyFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If the public/key/format field is not specified: - For PQC algorithms, an error will be returned. - For non-PQC algorithms, the default format is PEM, and the field pem will be populated. Otherwise, the public key will be exported through the public_key field in the requested format.
+pattern PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED = PublicKey_PublicKeyFormat "PUBLIC_KEY_FORMAT_UNSPECIFIED"
+
+-- | The returned public key will be encoded in PEM format. See the <https://tools.ietf.org/html/rfc7468 RFC7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13) for more information.
+pattern PublicKey_PublicKeyFormat_Pem :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_Pem = PublicKey_PublicKeyFormat "PEM"
+
+-- | This is supported only for PQC algorithms. The key material is returned in the format defined by NIST PQC standards (FIPS 203, FIPS 204, and FIPS 205).
+pattern PublicKey_PublicKeyFormat_NISTPQC :: PublicKey_PublicKeyFormat
+pattern PublicKey_PublicKeyFormat_NISTPQC = PublicKey_PublicKeyFormat "NIST_PQC"
+
+{-# COMPLETE
+  PublicKey_PublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+  PublicKey_PublicKeyFormat_Pem,
+  PublicKey_PublicKeyFormat_NISTPQC,
+  PublicKey_PublicKeyFormat
+  #-}
+
+-- | The ProtectionLevel of the CryptoKeyVersion used in decryption.
+newtype RawDecryptResponse_ProtectionLevel = RawDecryptResponse_ProtectionLevel {fromRawDecryptResponse_ProtectionLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern RawDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: RawDecryptResponse_ProtectionLevel
+pattern RawDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED = RawDecryptResponse_ProtectionLevel "PROTECTION_LEVEL_UNSPECIFIED"
+
+-- | Crypto operations are performed in software.
+pattern RawDecryptResponse_ProtectionLevel_Software :: RawDecryptResponse_ProtectionLevel
+pattern RawDecryptResponse_ProtectionLevel_Software = RawDecryptResponse_ProtectionLevel "SOFTWARE"
+
+-- | Crypto operations are performed in a Hardware Security Module.
+pattern RawDecryptResponse_ProtectionLevel_Hsm :: RawDecryptResponse_ProtectionLevel
+pattern RawDecryptResponse_ProtectionLevel_Hsm = RawDecryptResponse_ProtectionLevel "HSM"
+
+-- | Crypto operations are performed by an external key manager.
+pattern RawDecryptResponse_ProtectionLevel_External :: RawDecryptResponse_ProtectionLevel
+pattern RawDecryptResponse_ProtectionLevel_External = RawDecryptResponse_ProtectionLevel "EXTERNAL"
+
+-- | Crypto operations are performed in an EKM-over-VPC backend.
+pattern RawDecryptResponse_ProtectionLevel_EXTERNALVPC :: RawDecryptResponse_ProtectionLevel
+pattern RawDecryptResponse_ProtectionLevel_EXTERNALVPC = RawDecryptResponse_ProtectionLevel "EXTERNAL_VPC"
+
+{-# COMPLETE
+  RawDecryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+  RawDecryptResponse_ProtectionLevel_Software,
+  RawDecryptResponse_ProtectionLevel_Hsm,
+  RawDecryptResponse_ProtectionLevel_External,
+  RawDecryptResponse_ProtectionLevel_EXTERNALVPC,
+  RawDecryptResponse_ProtectionLevel
+  #-}
+
+-- | The ProtectionLevel of the CryptoKeyVersion used in encryption.
+newtype RawEncryptResponse_ProtectionLevel = RawEncryptResponse_ProtectionLevel {fromRawEncryptResponse_ProtectionLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern RawEncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED :: RawEncryptResponse_ProtectionLevel
+pattern RawEncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED = RawEncryptResponse_ProtectionLevel "PROTECTION_LEVEL_UNSPECIFIED"
+
+-- | Crypto operations are performed in software.
+pattern RawEncryptResponse_ProtectionLevel_Software :: RawEncryptResponse_ProtectionLevel
+pattern RawEncryptResponse_ProtectionLevel_Software = RawEncryptResponse_ProtectionLevel "SOFTWARE"
+
+-- | Crypto operations are performed in a Hardware Security Module.
+pattern RawEncryptResponse_ProtectionLevel_Hsm :: RawEncryptResponse_ProtectionLevel
+pattern RawEncryptResponse_ProtectionLevel_Hsm = RawEncryptResponse_ProtectionLevel "HSM"
+
+-- | Crypto operations are performed by an external key manager.
+pattern RawEncryptResponse_ProtectionLevel_External :: RawEncryptResponse_ProtectionLevel
+pattern RawEncryptResponse_ProtectionLevel_External = RawEncryptResponse_ProtectionLevel "EXTERNAL"
+
+-- | Crypto operations are performed in an EKM-over-VPC backend.
+pattern RawEncryptResponse_ProtectionLevel_EXTERNALVPC :: RawEncryptResponse_ProtectionLevel
+pattern RawEncryptResponse_ProtectionLevel_EXTERNALVPC = RawEncryptResponse_ProtectionLevel "EXTERNAL_VPC"
+
+{-# COMPLETE
+  RawEncryptResponse_ProtectionLevel_PROTECTIONLEVELUNSPECIFIED,
+  RawEncryptResponse_ProtectionLevel_Software,
+  RawEncryptResponse_ProtectionLevel_Hsm,
+  RawEncryptResponse_ProtectionLevel_External,
+  RawEncryptResponse_ProtectionLevel_EXTERNALVPC,
+  RawEncryptResponse_ProtectionLevel
+  #-}
+
+-- | Optional. The PublicKey format specified by the user. This field is required for PQC algorithms. If specified, the public key will be exported through the public_key field in the requested format. Otherwise, the pem field will be populated for non-PQC algorithms, and an error will be returned for PQC algorithms.
+newtype ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat {fromProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If the public/key/format field is not specified: - For PQC algorithms, an error will be returned. - For non-PQC algorithms, the default format is PEM, and the field pem will be populated. Otherwise, the public key will be exported through the public_key field in the requested format.
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "PUBLIC_KEY_FORMAT_UNSPECIFIED"
+
+-- | The returned public key will be encoded in PEM format. See the <https://tools.ietf.org/html/rfc7468 RFC7468> sections for <https://tools.ietf.org/html/rfc7468#section-2 General Considerations> and [Textual Encoding of Subject Public Key Info] (https:\/\/tools.ietf.org\/html\/rfc7468#section-13) for more information.
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "PEM"
+
+-- | This is supported only for PQC algorithms. The key material is returned in the format defined by NIST PQC standards (FIPS 203, FIPS 204, and FIPS 205).
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC :: ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+pattern ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC = ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat "NIST_PQC"
+
+{-# COMPLETE
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_PUBLICKEYFORMATUNSPECIFIED,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_Pem,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat_NISTPQC,
+  ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
   #-}
 
 -- | The fields to include in the response.

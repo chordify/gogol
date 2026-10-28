@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Projects.GroupStats.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudErrorReporting.Projects.GroupStats.List
 where
 
 import Gogol.CloudErrorReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouderrorreporting.projects.groupStats.list@ method which the
 -- 'CloudErrorReportingProjectsGroupStatsList' request conforms to.
@@ -50,36 +48,24 @@ type CloudErrorReportingProjectsGroupStatsListResource =
     Core.:> "groupStats"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "alignment"
-              ProjectsGroupStatsListAlignment
+    Core.:> Core.QueryParam "alignment" ProjectsGroupStatsListAlignment
     Core.:> Core.QueryParam "alignmentTime" Core.DateTime
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "groupId" Core.Text
     Core.:> Core.QueryParam "order" ProjectsGroupStatsListOrder
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "serviceFilter.resourceType"
-              Core.Text
+    Core.:> Core.QueryParam "serviceFilter.resourceType" Core.Text
     Core.:> Core.QueryParam "serviceFilter.service" Core.Text
-    Core.:> Core.QueryParam
-              "serviceFilter.version"
-              Core.Text
+    Core.:> Core.QueryParam "serviceFilter.version" Core.Text
     Core.:> Core.QueryParam
               "timeRange.period"
               ProjectsGroupStatsListTimeRangePeriod
-    Core.:> Core.QueryParam
-              "timedCountDuration"
-              Core.Duration
+    Core.:> Core.QueryParam "timedCountDuration" Core.Duration
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListGroupStatsResponse
+    Core.:> Core.Get '[Core.JSON] ListGroupStatsResponse
 
 -- | Lists the specified groups.
 --
@@ -95,7 +81,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     alignmentTime :: (Core.Maybe Core.DateTime),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. List all ErrorGroupStats with these IDs.
+    -- | Optional. List all ErrorGroupStats with these IDs. The @group_id@ is a unique identifier for a particular error group. The identifier is derived from key parts of the error-log content and is treated as Service Data. For information about how Service Data is handled, see [Google Cloud Privacy Notice] (https:\/\/cloud.google.com\/terms\/cloud-privacy-notice).
     groupId :: (Core.Maybe [Core.Text]),
     -- | Optional. The sort order in which the results are returned. Default is @COUNT_DESC@.
     order :: (Core.Maybe ProjectsGroupStatsListOrder),
@@ -103,7 +89,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
     pageSize :: (Core.Maybe Core.Int32),
     -- | Optional. A next/page/token provided by a previous response. To view additional results, pass this token along with the identical query parameters as the first request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. Examples: @projects\/my-project-123@, @projects\/5551234@.
+    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. It may also include a location, such as @projects\/{projectID}\/locations\/{location}@ where @{location}@ is a cloud region. Examples: @projects\/my-project-123@, @projects\/5551234@, @projects\/my-project-123\/locations\/us-central1@, @projects\/5551234\/locations\/us-central1@. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified. Use @-@ as a wildcard to request group stats from all regions.
     projectName :: Core.Text,
     -- | Optional. The exact value to match against </error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type ServiceContext.resource_type>.
     serviceFilterResourceType :: (Core.Maybe Core.Text),
@@ -124,7 +110,7 @@ data CloudErrorReportingProjectsGroupStatsList = CloudErrorReportingProjectsGrou
 
 -- | Creates a value of 'CloudErrorReportingProjectsGroupStatsList' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsGroupStatsList ::
-  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. Examples: @projects\/my-project-123@, @projects\/5551234@. See 'projectName'.
+  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectNumber}@, where @{projectID}@ and @{projectNumber}@ can be found in the <https://support.google.com/cloud/answer/6158840 Google Cloud console>. It may also include a location, such as @projects\/{projectID}\/locations\/{location}@ where @{location}@ is a cloud region. Examples: @projects\/my-project-123@, @projects\/5551234@, @projects\/my-project-123\/locations\/us-central1@, @projects\/5551234\/locations\/us-central1@. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified. Use @-@ as a wildcard to request group stats from all regions. See 'projectName'.
   Core.Text ->
   CloudErrorReportingProjectsGroupStatsList
 newCloudErrorReportingProjectsGroupStatsList projectName =
@@ -158,33 +144,31 @@ instance
   type
     Scopes CloudErrorReportingProjectsGroupStatsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudErrorReportingProjectsGroupStatsList {..} =
-      go
-        projectName
-        xgafv
-        accessToken
-        alignment
-        alignmentTime
-        callback
-        (groupId Core.^. Core._Default)
-        order
-        pageSize
-        pageToken
-        serviceFilterResourceType
-        serviceFilterService
-        serviceFilterVersion
-        timeRangePeriod
-        timedCountDuration
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudErrorReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudErrorReportingProjectsGroupStatsListResource
-            )
-            Core.mempty
+  requestClient CloudErrorReportingProjectsGroupStatsList {..} =
+    go
+      projectName
+      xgafv
+      accessToken
+      alignment
+      alignmentTime
+      callback
+      (groupId Core.^. Core._Default)
+      order
+      pageSize
+      pageToken
+      serviceFilterResourceType
+      serviceFilterService
+      serviceFilterVersion
+      timeRangePeriod
+      timedCountDuration
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudErrorReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudErrorReportingProjectsGroupStatsListResource
+          )
+          Core.mempty

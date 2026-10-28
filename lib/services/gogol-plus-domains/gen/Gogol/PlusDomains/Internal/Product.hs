@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlusDomains.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PlusDomains.Internal.Product
@@ -277,7 +275,7 @@ module Gogol.PlusDomains.Internal.Product
 where
 
 import Gogol.PlusDomains.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newAcl' smart constructor.
@@ -321,8 +319,7 @@ instance Core.ToJSON Acl where
     Core.object
       ( Core.catMaybes
           [ ("description" Core..=) Core.<$> description,
-            ("domainRestricted" Core..=)
-              Core.<$> domainRestricted,
+            ("domainRestricted" Core..=) Core.<$> domainRestricted,
             ("items" Core..=) Core.<$> items,
             Core.Just ("kind" Core..= kind)
           ]
@@ -538,12 +535,12 @@ newtype Activity_Actor_ClientSpecificActorInfo = Activity_Actor_ClientSpecificAc
 newActivity_Actor_ClientSpecificActorInfo ::
   Activity_Actor_ClientSpecificActorInfo
 newActivity_Actor_ClientSpecificActorInfo =
-  Activity_Actor_ClientSpecificActorInfo {youtubeActorInfo = Core.Nothing}
+  Activity_Actor_ClientSpecificActorInfo
+    { youtubeActorInfo =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Activity_Actor_ClientSpecificActorInfo
-  where
+instance Core.FromJSON Activity_Actor_ClientSpecificActorInfo where
   parseJSON =
     Core.withObject
       "Activity_Actor_ClientSpecificActorInfo"
@@ -552,16 +549,11 @@ instance
             Core.<$> (o Core..:? "youtubeActorInfo")
       )
 
-instance
-  Core.ToJSON
-    Activity_Actor_ClientSpecificActorInfo
-  where
+instance Core.ToJSON Activity_Actor_ClientSpecificActorInfo where
   toJSON Activity_Actor_ClientSpecificActorInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("youtubeActorInfo" Core..=)
-              Core.<$> youtubeActorInfo
-          ]
+          [("youtubeActorInfo" Core..=) Core.<$> youtubeActorInfo]
       )
 
 -- | Actor info specific to YouTube clients.
@@ -578,7 +570,8 @@ newActivity_Actor_ClientSpecificActorInfo_YoutubeActorInfo ::
   Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo
 newActivity_Actor_ClientSpecificActorInfo_YoutubeActorInfo =
   Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo
-    { channelId = Core.Nothing
+    { channelId =
+        Core.Nothing
     }
 
 instance
@@ -597,12 +590,9 @@ instance
   Core.ToJSON
     Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo
   where
-  toJSON
-    Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [("channelId" Core..=) Core.<$> channelId]
-        )
+  toJSON Activity_Actor_ClientSpecificActorInfo_YoutubeActorInfo {..} =
+    Core.object
+      (Core.catMaybes [("channelId" Core..=) Core.<$> channelId])
 
 -- | The image representation of the actor.
 --
@@ -622,14 +612,11 @@ instance Core.FromJSON Activity_Actor_Image where
   parseJSON =
     Core.withObject
       "Activity_Actor_Image"
-      ( \o ->
-          Activity_Actor_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Activity_Actor_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Activity_Actor_Image where
   toJSON Activity_Actor_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | An object representation of the individual components of name.
 --
@@ -646,7 +633,10 @@ data Activity_Actor_Name = Activity_Actor_Name
 newActivity_Actor_Name ::
   Activity_Actor_Name
 newActivity_Actor_Name =
-  Activity_Actor_Name {familyName = Core.Nothing, givenName = Core.Nothing}
+  Activity_Actor_Name
+    { familyName = Core.Nothing,
+      givenName = Core.Nothing
+    }
 
 instance Core.FromJSON Activity_Actor_Name where
   parseJSON =
@@ -687,16 +677,13 @@ instance Core.FromJSON Activity_Actor_Verification where
     Core.withObject
       "Activity_Actor_Verification"
       ( \o ->
-          Activity_Actor_Verification
-            Core.<$> (o Core..:? "adHocVerified")
+          Activity_Actor_Verification Core.<$> (o Core..:? "adHocVerified")
       )
 
 instance Core.ToJSON Activity_Actor_Verification where
   toJSON Activity_Actor_Verification {..} =
     Core.object
-      ( Core.catMaybes
-          [("adHocVerified" Core..=) Core.<$> adHocVerified]
-      )
+      (Core.catMaybes [("adHocVerified" Core..=) Core.<$> adHocVerified])
 
 -- | The object of this activity.
 --
@@ -860,7 +847,8 @@ newActivity_Object_Actor_ClientSpecificActorInfo ::
   Activity_Object_Actor_ClientSpecificActorInfo
 newActivity_Object_Actor_ClientSpecificActorInfo =
   Activity_Object_Actor_ClientSpecificActorInfo
-    { youtubeActorInfo = Core.Nothing
+    { youtubeActorInfo =
+        Core.Nothing
     }
 
 instance
@@ -875,18 +863,12 @@ instance
             Core.<$> (o Core..:? "youtubeActorInfo")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_Actor_ClientSpecificActorInfo
-  where
-  toJSON
-    Activity_Object_Actor_ClientSpecificActorInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("youtubeActorInfo" Core..=)
-                Core.<$> youtubeActorInfo
-            ]
-        )
+instance Core.ToJSON Activity_Object_Actor_ClientSpecificActorInfo where
+  toJSON Activity_Object_Actor_ClientSpecificActorInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [("youtubeActorInfo" Core..=) Core.<$> youtubeActorInfo]
+      )
 
 -- | Actor info specific to YouTube clients.
 --
@@ -902,7 +884,8 @@ newActivity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo ::
   Activity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo
 newActivity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo =
   Activity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo
-    { channelId = Core.Nothing
+    { channelId =
+        Core.Nothing
     }
 
 instance
@@ -924,9 +907,7 @@ instance
   toJSON
     Activity_Object_Actor_ClientSpecificActorInfo_YoutubeActorInfo {..} =
       Core.object
-        ( Core.catMaybes
-            [("channelId" Core..=) Core.<$> channelId]
-        )
+        (Core.catMaybes [("channelId" Core..=) Core.<$> channelId])
 
 -- | The image representation of the original actor.
 --
@@ -947,15 +928,11 @@ instance Core.FromJSON Activity_Object_Actor_Image where
   parseJSON =
     Core.withObject
       "Activity_Object_Actor_Image"
-      ( \o ->
-          Activity_Object_Actor_Image
-            Core.<$> (o Core..:? "url")
-      )
+      (\o -> Activity_Object_Actor_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Activity_Object_Actor_Image where
   toJSON Activity_Object_Actor_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Verification status of actor.
 --
@@ -972,10 +949,7 @@ newActivity_Object_Actor_Verification ::
 newActivity_Object_Actor_Verification =
   Activity_Object_Actor_Verification {adHocVerified = Core.Nothing}
 
-instance
-  Core.FromJSON
-    Activity_Object_Actor_Verification
-  where
+instance Core.FromJSON Activity_Object_Actor_Verification where
   parseJSON =
     Core.withObject
       "Activity_Object_Actor_Verification"
@@ -984,15 +958,10 @@ instance
             Core.<$> (o Core..:? "adHocVerified")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_Actor_Verification
-  where
+instance Core.ToJSON Activity_Object_Actor_Verification where
   toJSON Activity_Object_Actor_Verification {..} =
     Core.object
-      ( Core.catMaybes
-          [("adHocVerified" Core..=) Core.<$> adHocVerified]
-      )
+      (Core.catMaybes [("adHocVerified" Core..=) Core.<$> adHocVerified])
 
 --
 -- /See:/ 'newActivity_Object_AttachmentsItem' smart constructor.
@@ -1041,10 +1010,7 @@ newActivity_Object_AttachmentsItem =
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_Object_AttachmentsItem
-  where
+instance Core.FromJSON Activity_Object_AttachmentsItem where
   parseJSON =
     Core.withObject
       "Activity_Object_AttachmentsItem"
@@ -1073,8 +1039,7 @@ instance Core.ToJSON Activity_Object_AttachmentsItem where
             ("id" Core..=) Core.<$> id,
             ("image" Core..=) Core.<$> image,
             ("objectType" Core..=) Core.<$> objectType,
-            ("previewThumbnails" Core..=)
-              Core.<$> previewThumbnails,
+            ("previewThumbnails" Core..=) Core.<$> previewThumbnails,
             ("thumbnails" Core..=) Core.<$> thumbnails,
             ("url" Core..=) Core.<$> url
           ]
@@ -1100,28 +1065,21 @@ newActivity_Object_AttachmentsItem_Embed =
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_Object_AttachmentsItem_Embed
-  where
+instance Core.FromJSON Activity_Object_AttachmentsItem_Embed where
   parseJSON =
     Core.withObject
       "Activity_Object_AttachmentsItem_Embed"
       ( \o ->
           Activity_Object_AttachmentsItem_Embed
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_AttachmentsItem_Embed
-  where
+instance Core.ToJSON Activity_Object_AttachmentsItem_Embed where
   toJSON Activity_Object_AttachmentsItem_Embed {..} =
     Core.object
       ( Core.catMaybes
-          [ ("type" Core..=) Core.<$> type',
-            ("url" Core..=) Core.<$> url
-          ]
+          [("type" Core..=) Core.<$> type', ("url" Core..=) Core.<$> url]
       )
 
 -- | The full image URL for photo attachments.
@@ -1150,10 +1108,7 @@ newActivity_Object_AttachmentsItem_FullImage =
       width = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_Object_AttachmentsItem_FullImage
-  where
+instance Core.FromJSON Activity_Object_AttachmentsItem_FullImage where
   parseJSON =
     Core.withObject
       "Activity_Object_AttachmentsItem_FullImage"
@@ -1165,10 +1120,7 @@ instance
             Core.<*> (o Core..:? "width")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_AttachmentsItem_FullImage
-  where
+instance Core.ToJSON Activity_Object_AttachmentsItem_FullImage where
   toJSON Activity_Object_AttachmentsItem_FullImage {..} =
     Core.object
       ( Core.catMaybes
@@ -1205,10 +1157,7 @@ newActivity_Object_AttachmentsItem_Image =
       width = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_Object_AttachmentsItem_Image
-  where
+instance Core.FromJSON Activity_Object_AttachmentsItem_Image where
   parseJSON =
     Core.withObject
       "Activity_Object_AttachmentsItem_Image"
@@ -1220,10 +1169,7 @@ instance
             Core.<*> (o Core..:? "width")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_AttachmentsItem_Image
-  where
+instance Core.ToJSON Activity_Object_AttachmentsItem_Image where
   toJSON Activity_Object_AttachmentsItem_Image {..} =
     Core.object
       ( Core.catMaybes
@@ -1246,7 +1192,10 @@ newtype Activity_Object_AttachmentsItem_PreviewThumbnailsItem = Activity_Object_
 newActivity_Object_AttachmentsItem_PreviewThumbnailsItem ::
   Activity_Object_AttachmentsItem_PreviewThumbnailsItem
 newActivity_Object_AttachmentsItem_PreviewThumbnailsItem =
-  Activity_Object_AttachmentsItem_PreviewThumbnailsItem {url = Core.Nothing}
+  Activity_Object_AttachmentsItem_PreviewThumbnailsItem
+    { url =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -1264,10 +1213,8 @@ instance
   Core.ToJSON
     Activity_Object_AttachmentsItem_PreviewThumbnailsItem
   where
-  toJSON
-    Activity_Object_AttachmentsItem_PreviewThumbnailsItem {..} =
-      Core.object
-        (Core.catMaybes [("url" Core..=) Core.<$> url])
+  toJSON Activity_Object_AttachmentsItem_PreviewThumbnailsItem {..} =
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 --
 -- /See:/ 'newActivity_Object_AttachmentsItem_ThumbnailsItem' smart constructor.
@@ -1286,7 +1233,8 @@ newActivity_Object_AttachmentsItem_ThumbnailsItem ::
   Activity_Object_AttachmentsItem_ThumbnailsItem
 newActivity_Object_AttachmentsItem_ThumbnailsItem =
   Activity_Object_AttachmentsItem_ThumbnailsItem
-    { description = Core.Nothing,
+    { description =
+        Core.Nothing,
       image = Core.Nothing,
       url = Core.Nothing
     }
@@ -1301,23 +1249,19 @@ instance
       ( \o ->
           Activity_Object_AttachmentsItem_ThumbnailsItem
             Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "image")
-              Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "image")
+            Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    Activity_Object_AttachmentsItem_ThumbnailsItem
-  where
-  toJSON
-    Activity_Object_AttachmentsItem_ThumbnailsItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("image" Core..=) Core.<$> image,
-              ("url" Core..=) Core.<$> url
-            ]
-        )
+instance Core.ToJSON Activity_Object_AttachmentsItem_ThumbnailsItem where
+  toJSON Activity_Object_AttachmentsItem_ThumbnailsItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("image" Core..=) Core.<$> image,
+            ("url" Core..=) Core.<$> url
+          ]
+      )
 
 -- | Image resource.
 --
@@ -1339,7 +1283,8 @@ newActivity_Object_AttachmentsItem_ThumbnailsItem_Image ::
   Activity_Object_AttachmentsItem_ThumbnailsItem_Image
 newActivity_Object_AttachmentsItem_ThumbnailsItem_Image =
   Activity_Object_AttachmentsItem_ThumbnailsItem_Image
-    { height = Core.Nothing,
+    { height =
+        Core.Nothing,
       type' = Core.Nothing,
       url = Core.Nothing,
       width = Core.Nothing
@@ -1354,25 +1299,25 @@ instance
       "Activity_Object_AttachmentsItem_ThumbnailsItem_Image"
       ( \o ->
           Activity_Object_AttachmentsItem_ThumbnailsItem_Image
-            Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "type")
-              Core.<*> (o Core..:? "url")
-              Core.<*> (o Core..:? "width")
+            Core.<$> (o Core..:? "height")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "url")
+            Core.<*> (o Core..:? "width")
       )
 
 instance
   Core.ToJSON
     Activity_Object_AttachmentsItem_ThumbnailsItem_Image
   where
-  toJSON
-    Activity_Object_AttachmentsItem_ThumbnailsItem_Image {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("height" Core..=) Core.<$> height,
-              ("type" Core..=) Core.<$> type',
-              ("url" Core..=) Core.<$> url,
-              ("width" Core..=) Core.<$> width
-            ]
-        )
+  toJSON Activity_Object_AttachmentsItem_ThumbnailsItem_Image {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("height" Core..=) Core.<$> height,
+            ("type" Core..=) Core.<$> type',
+            ("url" Core..=) Core.<$> url,
+            ("width" Core..=) Core.<$> width
+          ]
+      )
 
 -- | People who +1\'d this activity.
 --
@@ -1389,7 +1334,10 @@ data Activity_Object_Plusoners = Activity_Object_Plusoners
 newActivity_Object_Plusoners ::
   Activity_Object_Plusoners
 newActivity_Object_Plusoners =
-  Activity_Object_Plusoners {selfLink = Core.Nothing, totalItems = Core.Nothing}
+  Activity_Object_Plusoners
+    { selfLink = Core.Nothing,
+      totalItems = Core.Nothing
+    }
 
 instance Core.FromJSON Activity_Object_Plusoners where
   parseJSON =
@@ -1425,7 +1373,10 @@ data Activity_Object_Replies = Activity_Object_Replies
 newActivity_Object_Replies ::
   Activity_Object_Replies
 newActivity_Object_Replies =
-  Activity_Object_Replies {selfLink = Core.Nothing, totalItems = Core.Nothing}
+  Activity_Object_Replies
+    { selfLink = Core.Nothing,
+      totalItems = Core.Nothing
+    }
 
 instance Core.FromJSON Activity_Object_Replies where
   parseJSON =
@@ -1461,7 +1412,10 @@ data Activity_Object_Resharers = Activity_Object_Resharers
 newActivity_Object_Resharers ::
   Activity_Object_Resharers
 newActivity_Object_Resharers =
-  Activity_Object_Resharers {selfLink = Core.Nothing, totalItems = Core.Nothing}
+  Activity_Object_Resharers
+    { selfLink = Core.Nothing,
+      totalItems = Core.Nothing
+    }
 
 instance Core.FromJSON Activity_Object_Resharers where
   parseJSON =
@@ -1511,10 +1465,7 @@ newActivity_Object_StatusForViewer =
       resharingDisabled = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    Activity_Object_StatusForViewer
-  where
+instance Core.FromJSON Activity_Object_StatusForViewer where
   parseJSON =
     Core.withObject
       "Activity_Object_StatusForViewer"
@@ -1535,8 +1486,7 @@ instance Core.ToJSON Activity_Object_StatusForViewer where
             ("canPlusone" Core..=) Core.<$> canPlusone,
             ("canUpdate" Core..=) Core.<$> canUpdate,
             ("isPlusOned" Core..=) Core.<$> isPlusOned,
-            ("resharingDisabled" Core..=)
-              Core.<$> resharingDisabled
+            ("resharingDisabled" Core..=) Core.<$> resharingDisabled
           ]
       )
 
@@ -1558,14 +1508,11 @@ instance Core.FromJSON Activity_Provider where
   parseJSON =
     Core.withObject
       "Activity_Provider"
-      ( \o ->
-          Activity_Provider Core.<$> (o Core..:? "title")
-      )
+      (\o -> Activity_Provider Core.<$> (o Core..:? "title"))
 
 instance Core.ToJSON Activity_Provider where
   toJSON Activity_Provider {..} =
-    Core.object
-      (Core.catMaybes [("title" Core..=) Core.<$> title])
+    Core.object (Core.catMaybes [("title" Core..=) Core.<$> title])
 
 --
 -- /See:/ 'newActivityFeed' smart constructor.
@@ -1828,16 +1775,12 @@ instance Core.FromJSON Circle_People where
   parseJSON =
     Core.withObject
       "Circle_People"
-      ( \o ->
-          Circle_People Core.<$> (o Core..:? "totalItems")
-      )
+      (\o -> Circle_People Core.<$> (o Core..:? "totalItems"))
 
 instance Core.ToJSON Circle_People where
   toJSON Circle_People {..} =
     Core.object
-      ( Core.catMaybes
-          [("totalItems" Core..=) Core.<$> totalItems]
-      )
+      (Core.catMaybes [("totalItems" Core..=) Core.<$> totalItems])
 
 --
 -- /See:/ 'newCircleFeed' smart constructor.
@@ -2064,12 +2007,12 @@ newtype Comment_Actor_ClientSpecificActorInfo = Comment_Actor_ClientSpecificActo
 newComment_Actor_ClientSpecificActorInfo ::
   Comment_Actor_ClientSpecificActorInfo
 newComment_Actor_ClientSpecificActorInfo =
-  Comment_Actor_ClientSpecificActorInfo {youtubeActorInfo = Core.Nothing}
+  Comment_Actor_ClientSpecificActorInfo
+    { youtubeActorInfo =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    Comment_Actor_ClientSpecificActorInfo
-  where
+instance Core.FromJSON Comment_Actor_ClientSpecificActorInfo where
   parseJSON =
     Core.withObject
       "Comment_Actor_ClientSpecificActorInfo"
@@ -2078,16 +2021,11 @@ instance
             Core.<$> (o Core..:? "youtubeActorInfo")
       )
 
-instance
-  Core.ToJSON
-    Comment_Actor_ClientSpecificActorInfo
-  where
+instance Core.ToJSON Comment_Actor_ClientSpecificActorInfo where
   toJSON Comment_Actor_ClientSpecificActorInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("youtubeActorInfo" Core..=)
-              Core.<$> youtubeActorInfo
-          ]
+          [("youtubeActorInfo" Core..=) Core.<$> youtubeActorInfo]
       )
 
 -- | Actor info specific to YouTube clients.
@@ -2104,7 +2042,8 @@ newComment_Actor_ClientSpecificActorInfo_YoutubeActorInfo ::
   Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo
 newComment_Actor_ClientSpecificActorInfo_YoutubeActorInfo =
   Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo
-    { channelId = Core.Nothing
+    { channelId =
+        Core.Nothing
     }
 
 instance
@@ -2123,12 +2062,9 @@ instance
   Core.ToJSON
     Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo
   where
-  toJSON
-    Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [("channelId" Core..=) Core.<$> channelId]
-        )
+  toJSON Comment_Actor_ClientSpecificActorInfo_YoutubeActorInfo {..} =
+    Core.object
+      (Core.catMaybes [("channelId" Core..=) Core.<$> channelId])
 
 -- | The image representation of this actor.
 --
@@ -2148,14 +2084,11 @@ instance Core.FromJSON Comment_Actor_Image where
   parseJSON =
     Core.withObject
       "Comment_Actor_Image"
-      ( \o ->
-          Comment_Actor_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Comment_Actor_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Comment_Actor_Image where
   toJSON Comment_Actor_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Verification status of actor.
 --
@@ -2177,16 +2110,13 @@ instance Core.FromJSON Comment_Actor_Verification where
     Core.withObject
       "Comment_Actor_Verification"
       ( \o ->
-          Comment_Actor_Verification
-            Core.<$> (o Core..:? "adHocVerified")
+          Comment_Actor_Verification Core.<$> (o Core..:? "adHocVerified")
       )
 
 instance Core.ToJSON Comment_Actor_Verification where
   toJSON Comment_Actor_Verification {..} =
     Core.object
-      ( Core.catMaybes
-          [("adHocVerified" Core..=) Core.<$> adHocVerified]
-      )
+      (Core.catMaybes [("adHocVerified" Core..=) Core.<$> adHocVerified])
 
 --
 -- /See:/ 'newComment_InReplyToItem' smart constructor.
@@ -2210,16 +2140,15 @@ instance Core.FromJSON Comment_InReplyToItem where
       "Comment_InReplyToItem"
       ( \o ->
           Comment_InReplyToItem
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON Comment_InReplyToItem where
   toJSON Comment_InReplyToItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("url" Core..=) Core.<$> url
-          ]
+          [("id" Core..=) Core.<$> id, ("url" Core..=) Core.<$> url]
       )
 
 -- | The object of this comment.
@@ -2263,8 +2192,7 @@ instance Core.ToJSON Comment_Object where
       ( Core.catMaybes
           [ ("content" Core..=) Core.<$> content,
             Core.Just ("objectType" Core..= objectType),
-            ("originalContent" Core..=)
-              Core.<$> originalContent
+            ("originalContent" Core..=) Core.<$> originalContent
           ]
       )
 
@@ -2286,16 +2214,12 @@ instance Core.FromJSON Comment_Plusoners where
   parseJSON =
     Core.withObject
       "Comment_Plusoners"
-      ( \o ->
-          Comment_Plusoners Core.<$> (o Core..:? "totalItems")
-      )
+      (\o -> Comment_Plusoners Core.<$> (o Core..:? "totalItems"))
 
 instance Core.ToJSON Comment_Plusoners where
   toJSON Comment_Plusoners {..} =
     Core.object
-      ( Core.catMaybes
-          [("totalItems" Core..=) Core.<$> totalItems]
-      )
+      (Core.catMaybes [("totalItems" Core..=) Core.<$> totalItems])
 
 --
 -- /See:/ 'newCommentFeed' smart constructor.
@@ -2449,16 +2373,12 @@ instance Core.FromJSON Media where
             Core.<*> (o Core..:? "mediaCreatedTime")
             Core.<*> (o Core..:? "mediaUrl")
             Core.<*> (o Core..:? "published")
-            Core.<*> ( o Core..:? "sizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "streams")
             Core.<*> (o Core..:? "summary")
             Core.<*> (o Core..:? "updated")
             Core.<*> (o Core..:? "url")
-            Core.<*> ( o Core..:? "videoDuration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "videoDuration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "videoStatus")
             Core.<*> (o Core..:? "width")
       )
@@ -2474,17 +2394,16 @@ instance Core.ToJSON Media where
             ("height" Core..=) Core.<$> height,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
-            ("mediaCreatedTime" Core..=)
-              Core.<$> mediaCreatedTime,
+            ("mediaCreatedTime" Core..=) Core.<$> mediaCreatedTime,
             ("mediaUrl" Core..=) Core.<$> mediaUrl,
             ("published" Core..=) Core.<$> published,
-            ("sizeBytes" Core..=) Core.. Core.AsText
-              Core.<$> sizeBytes,
+            ("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes,
             ("streams" Core..=) Core.<$> streams,
             ("summary" Core..=) Core.<$> summary,
             ("updated" Core..=) Core.<$> updated,
             ("url" Core..=) Core.<$> url,
-            ("videoDuration" Core..=) Core.. Core.AsText
+            ("videoDuration" Core..=)
+              Core.. Core.AsText
               Core.<$> videoDuration,
             ("videoStatus" Core..=) Core.<$> videoStatus,
             ("width" Core..=) Core.<$> width
@@ -2558,14 +2477,11 @@ instance Core.FromJSON Media_Author_Image where
   parseJSON =
     Core.withObject
       "Media_Author_Image"
-      ( \o ->
-          Media_Author_Image Core.<$> (o Core..:? "url")
-      )
+      (\o -> Media_Author_Image Core.<$> (o Core..:? "url"))
 
 instance Core.ToJSON Media_Author_Image where
   toJSON Media_Author_Image {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Exif information of the media item.
 --
@@ -2589,8 +2505,7 @@ instance Core.FromJSON Media_Exif where
 
 instance Core.ToJSON Media_Exif where
   toJSON Media_Exif {..} =
-    Core.object
-      (Core.catMaybes [("time" Core..=) Core.<$> time])
+    Core.object (Core.catMaybes [("time" Core..=) Core.<$> time])
 
 --
 -- /See:/ 'newPeopleFeed' smart constructor.
@@ -2817,8 +2732,7 @@ instance Core.ToJSON Person where
             ("organizations" Core..=) Core.<$> organizations,
             ("placesLived" Core..=) Core.<$> placesLived,
             ("plusOneCount" Core..=) Core.<$> plusOneCount,
-            ("relationshipStatus" Core..=)
-              Core.<$> relationshipStatus,
+            ("relationshipStatus" Core..=) Core.<$> relationshipStatus,
             ("skills" Core..=) Core.<$> skills,
             ("tagline" Core..=) Core.<$> tagline,
             ("url" Core..=) Core.<$> url,
@@ -2906,8 +2820,7 @@ instance Core.ToJSON Person_Cover_CoverInfo where
   toJSON Person_Cover_CoverInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("leftImageOffset" Core..=)
-              Core.<$> leftImageOffset,
+          [ ("leftImageOffset" Core..=) Core.<$> leftImageOffset,
             ("topImageOffset" Core..=) Core.<$> topImageOffset
           ]
       )
@@ -2979,7 +2892,8 @@ instance Core.FromJSON Person_EmailsItem where
       "Person_EmailsItem"
       ( \o ->
           Person_EmailsItem
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Person_EmailsItem where
@@ -3005,7 +2919,8 @@ data Person_Image = Person_Image
 -- | Creates a value of 'Person_Image' with the minimum fields required to make a request.
 newPerson_Image ::
   Person_Image
-newPerson_Image = Person_Image {isDefault = Core.Nothing, url = Core.Nothing}
+newPerson_Image =
+  Person_Image {isDefault = Core.Nothing, url = Core.Nothing}
 
 instance Core.FromJSON Person_Image where
   parseJSON =
@@ -3013,7 +2928,8 @@ instance Core.FromJSON Person_Image where
       "Person_Image"
       ( \o ->
           Person_Image
-            Core.<$> (o Core..:? "isDefault") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "isDefault")
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON Person_Image where
@@ -3172,7 +3088,10 @@ data Person_PlacesLivedItem = Person_PlacesLivedItem
 newPerson_PlacesLivedItem ::
   Person_PlacesLivedItem
 newPerson_PlacesLivedItem =
-  Person_PlacesLivedItem {primary = Core.Nothing, value = Core.Nothing}
+  Person_PlacesLivedItem
+    { primary = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON Person_PlacesLivedItem where
   parseJSON =
@@ -3180,7 +3099,8 @@ instance Core.FromJSON Person_PlacesLivedItem where
       "Person_PlacesLivedItem"
       ( \o ->
           Person_PlacesLivedItem
-            Core.<$> (o Core..:? "primary") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "primary")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Person_PlacesLivedItem where
@@ -3307,16 +3227,12 @@ instance Core.FromJSON Place_Address where
   parseJSON =
     Core.withObject
       "Place_Address"
-      ( \o ->
-          Place_Address Core.<$> (o Core..:? "formatted")
-      )
+      (\o -> Place_Address Core.<$> (o Core..:? "formatted"))
 
 instance Core.ToJSON Place_Address where
   toJSON Place_Address {..} =
     Core.object
-      ( Core.catMaybes
-          [("formatted" Core..=) Core.<$> formatted]
-      )
+      (Core.catMaybes [("formatted" Core..=) Core.<$> formatted])
 
 -- | The position of the place.
 --

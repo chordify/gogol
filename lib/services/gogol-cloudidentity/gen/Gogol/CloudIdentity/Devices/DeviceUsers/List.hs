@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Devices.DeviceUsers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.List
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.devices.deviceUsers.list@ method which the
 -- 'CloudIdentityDevicesDeviceUsersList' request conforms to.
@@ -112,18 +110,13 @@ newCloudIdentityDevicesDeviceUsersList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudIdentityDevicesDeviceUsersList
-  where
+instance Core.GoogleRequest CloudIdentityDevicesDeviceUsersList where
   type
     Rs CloudIdentityDevicesDeviceUsersList =
       GoogleAppsCloudidentityDevicesV1ListDeviceUsersResponse
   type
     Scopes CloudIdentityDevicesDeviceUsersList =
-      '[ CloudIdentity'Devices,
-         CloudIdentity'Devices'Readonly
-       ]
+      '[CloudIdentity'Devices, CloudIdentity'Devices'Readonly]
   requestClient CloudIdentityDevicesDeviceUsersList {..} =
     go
       parent
@@ -143,7 +136,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudIdentityDevicesDeviceUsersListResource
+              Core.Proxy CloudIdentityDevicesDeviceUsersListResource
           )
           Core.mempty

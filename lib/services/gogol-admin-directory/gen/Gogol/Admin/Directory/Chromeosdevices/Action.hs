@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Chromeosdevices.Action
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. /Warning:/ * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the <https://support.google.com/chrome/a/answer/3523633 help center>.
+-- Use </admin-sdk/directory/reference/rest/v1/customer.devices.chromeos/batchChangeStatus BatchChangeChromeOsDeviceStatus> instead. Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. /Warning:/ * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the <https://support.google.com/chrome/a/answer/3523633 help center>.
 --
 -- /See:/ <https://developers.google.com/admin-sdk/ Admin SDK API Reference> for @directory.chromeosdevices.action@.
 module Gogol.Admin.Directory.Chromeosdevices.Action
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Chromeosdevices.Action
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.chromeosdevices.action@ method which the
 -- 'DirectoryChromeosdevicesAction' request conforms to.
@@ -60,12 +58,10 @@ type DirectoryChromeosdevicesActionResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ChromeOsDeviceAction
+    Core.:> Core.ReqBody '[Core.JSON] ChromeOsDeviceAction
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. /Warning:/ * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the <https://support.google.com/chrome/a/answer/3523633 help center>.
+-- | Use </admin-sdk/directory/reference/rest/v1/customer.devices.chromeos/batchChangeStatus BatchChangeChromeOsDeviceStatus> instead. Takes an action that affects a Chrome OS Device. This includes deprovisioning, disabling, and re-enabling devices. /Warning:/ * Deprovisioning a device will stop device policy syncing and remove device-level printers. After a device is deprovisioned, it must be wiped before it can be re-enrolled. * Lost or stolen devices should use the disable action. * Re-enabling a disabled device will consume a device license. If you do not have sufficient licenses available when completing the re-enable action, you will receive an error. For more information about deprovisioning and disabling devices, visit the <https://support.google.com/chrome/a/answer/3523633 help center>.
 --
 -- /See:/ 'newDirectoryChromeosdevicesAction' smart constructor.
 data DirectoryChromeosdevicesAction = DirectoryChromeosdevicesAction
@@ -109,10 +105,7 @@ newDirectoryChromeosdevicesAction customerId payload resourceId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DirectoryChromeosdevicesAction
-  where
+instance Core.GoogleRequest DirectoryChromeosdevicesAction where
   type Rs DirectoryChromeosdevicesAction = ()
   type
     Scopes DirectoryChromeosdevicesAction =
@@ -132,7 +125,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryChromeosdevicesActionResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryChromeosdevicesActionResource)
           Core.mempty

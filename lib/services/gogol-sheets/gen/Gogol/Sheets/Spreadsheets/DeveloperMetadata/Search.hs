@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.DeveloperMetadata.Search
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.developerMetadata.search@ method which the
@@ -55,12 +53,8 @@ type SheetsSpreadsheetsDeveloperMetadataSearchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SearchDeveloperMetadataRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              SearchDeveloperMetadataResponse
+    Core.:> Core.ReqBody '[Core.JSON] SearchDeveloperMetadataRequest
+    Core.:> Core.Post '[Core.JSON] SearchDeveloperMetadataResponse
 
 -- | Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a DeveloperMetadataLookup object, this will return all DeveloperMetadata entries selected by it. If the DataFilter represents a location in a spreadsheet, this will return all developer metadata associated with locations intersecting that region.
 --
@@ -110,27 +104,22 @@ instance
       SearchDeveloperMetadataResponse
   type
     Scopes SheetsSpreadsheetsDeveloperMetadataSearch =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
-  requestClient
-    SheetsSpreadsheetsDeveloperMetadataSearch {..} =
-      go
-        spreadsheetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sheetsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SheetsSpreadsheetsDeveloperMetadataSearchResource
-            )
-            Core.mempty
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
+  requestClient SheetsSpreadsheetsDeveloperMetadataSearch {..} =
+    go
+      spreadsheetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sheetsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SheetsSpreadsheetsDeveloperMetadataSearchResource
+          )
+          Core.mempty

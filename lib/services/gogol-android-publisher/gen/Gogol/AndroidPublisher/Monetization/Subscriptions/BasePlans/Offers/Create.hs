@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.Offers.Create
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.basePlans.offers.create@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate' request conforms to.
@@ -58,18 +56,12 @@ type AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "offerId" Core.Text
-    Core.:> Core.QueryParam
-              "regionsVersion.version"
-              Core.Text
+    Core.:> Core.QueryParam "regionsVersion.version" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SubscriptionOffer
-    Core.:> Core.Post
-              '[Core.JSON]
-              SubscriptionOffer
+    Core.:> Core.ReqBody '[Core.JSON] SubscriptionOffer
+    Core.:> Core.Post '[Core.JSON] SubscriptionOffer
 
 -- | Creates a new subscription offer. Only auto-renewing base plans can have subscription offers. The offer state will be DRAFT until it is activated.
 --
@@ -91,7 +83,7 @@ data AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate = AndroidPub
     payload :: SubscriptionOffer,
     -- | Required. The parent subscription (ID) for which the offer should be created. Must be equal to the product_id field on the SubscriptionOffer resource.
     productId :: Core.Text,
-    -- | Required. A string representing version of the available regions being used for the specified resource. The current version is 2022\/02.
+    -- | Required. A string representing the version of available regions being used for the specified resource. Regional prices for the resource have to be specified according to the information published in <https://support.google.com/googleplay/android-developer/answer/10532353 this article>. Each time the supported locations substantially change, the version will be incremented. Using this field will ensure that creating and updating the resource with an older region\'s version and set of regional prices and currencies will succeed even though a new version is available. The latest version is 2022\/02.
     regionsVersionVersion :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -111,20 +103,26 @@ newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate ::
   -- |  Required. The parent subscription (ID) for which the offer should be created. Must be equal to the product_id field on the SubscriptionOffer resource. See 'productId'.
   Core.Text ->
   AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate
-newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate basePlanId packageName payload productId =
-  AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      basePlanId = basePlanId,
-      callback = Core.Nothing,
-      offerId = Core.Nothing,
-      packageName = packageName,
-      payload = payload,
-      productId = productId,
-      regionsVersionVersion = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate
+  basePlanId
+  packageName
+  payload
+  productId =
+    AndroidPublisherMonetizationSubscriptionsBasePlansOffersCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        basePlanId = basePlanId,
+        callback = Core.Nothing,
+        offerId = Core.Nothing,
+        packageName = packageName,
+        payload = payload,
+        productId = productId,
+        regionsVersionVersion =
+          Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

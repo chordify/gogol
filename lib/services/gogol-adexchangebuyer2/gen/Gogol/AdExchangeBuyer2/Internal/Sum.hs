@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdExchangeBuyer2.Internal.Sum
@@ -159,6 +157,7 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
         Creative_AttributesItem_INBANNERVIDEO,
         Creative_AttributesItem_RENDERINGSIZELESSADX,
         Creative_AttributesItem_OMSDK_1_0,
+        Creative_AttributesItem_RENDERINGPLAYABLE,
         ..
       ),
 
@@ -616,6 +615,7 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
         PublisherProfileMobileApplication_AppStore_Samsung,
         PublisherProfileMobileApplication_AppStore_Vivo,
         PublisherProfileMobileApplication_AppStore_Xiaomi,
+        PublisherProfileMobileApplication_AppStore_LGTV,
         ..
       ),
 
@@ -683,7 +683,7 @@ module Gogol.AdExchangeBuyer2.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -1232,6 +1232,10 @@ pattern Creative_AttributesItem_RENDERINGSIZELESSADX = Creative_AttributesItem "
 pattern Creative_AttributesItem_OMSDK_1_0 :: Creative_AttributesItem
 pattern Creative_AttributesItem_OMSDK_1_0 = Creative_AttributesItem "OMSDK_1_0"
 
+-- | The creative is considered a playable display creative.
+pattern Creative_AttributesItem_RENDERINGPLAYABLE :: Creative_AttributesItem
+pattern Creative_AttributesItem_RENDERINGPLAYABLE = Creative_AttributesItem "RENDERING_PLAYABLE"
+
 {-# COMPLETE
   Creative_AttributesItem_ATTRIBUTEUNSPECIFIED,
   Creative_AttributesItem_IMAGERICHMEDIA,
@@ -1271,6 +1275,7 @@ pattern Creative_AttributesItem_OMSDK_1_0 = Creative_AttributesItem "OMSDK_1_0"
   Creative_AttributesItem_INBANNERVIDEO,
   Creative_AttributesItem_RENDERINGSIZELESSADX,
   Creative_AttributesItem_OMSDK_1_0,
+  Creative_AttributesItem_RENDERINGPLAYABLE,
   Creative_AttributesItem
   #-}
 
@@ -3232,6 +3237,10 @@ pattern PublisherProfileMobileApplication_AppStore_Vivo = PublisherProfileMobile
 pattern PublisherProfileMobileApplication_AppStore_Xiaomi :: PublisherProfileMobileApplication_AppStore
 pattern PublisherProfileMobileApplication_AppStore_Xiaomi = PublisherProfileMobileApplication_AppStore "XIAOMI"
 
+-- | LG TV
+pattern PublisherProfileMobileApplication_AppStore_LGTV :: PublisherProfileMobileApplication_AppStore
+pattern PublisherProfileMobileApplication_AppStore_LGTV = PublisherProfileMobileApplication_AppStore "LG_TV"
+
 {-# COMPLETE
   PublisherProfileMobileApplication_AppStore_APPSTORETYPEUNSPECIFIED,
   PublisherProfileMobileApplication_AppStore_APPLEITUNES,
@@ -3246,6 +3255,7 @@ pattern PublisherProfileMobileApplication_AppStore_Xiaomi = PublisherProfileMobi
   PublisherProfileMobileApplication_AppStore_Samsung,
   PublisherProfileMobileApplication_AppStore_Vivo,
   PublisherProfileMobileApplication_AppStore_Xiaomi,
+  PublisherProfileMobileApplication_AppStore_LGTV,
   PublisherProfileMobileApplication_AppStore
   #-}
 

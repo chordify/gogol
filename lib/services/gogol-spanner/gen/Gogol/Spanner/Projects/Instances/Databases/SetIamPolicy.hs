@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on a database or backup resource. Replaces any existing policy. Authorization requires @spanner.databases.setIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.setIamPolicy@ permission on resource.
+-- Sets the access control policy on a database or backup resource. Replaces any existing policy. Authorization requires @spanner.databases.setIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.setIamPolicy@ permission on resource. For backup schedules, authorization requires @spanner.backupSchedules.setIamPolicy@ permission on resource.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instances.databases.setIamPolicy@.
 module Gogol.Spanner.Projects.Instances.Databases.SetIamPolicy
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.SetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.setIamPolicy@ method which the
@@ -56,7 +54,7 @@ type SpannerProjectsInstancesDatabasesSetIamPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Sets the access control policy on a database or backup resource. Replaces any existing policy. Authorization requires @spanner.databases.setIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.setIamPolicy@ permission on resource.
+-- | Sets the access control policy on a database or backup resource. Replaces any existing policy. Authorization requires @spanner.databases.setIamPolicy@ permission on resource. For backups, authorization requires @spanner.backups.setIamPolicy@ permission on resource. For backup schedules, authorization requires @spanner.backupSchedules.setIamPolicy@ permission on resource.
 --
 -- /See:/ 'newSpannerProjectsInstancesDatabasesSetIamPolicy' smart constructor.
 data SpannerProjectsInstancesDatabasesSetIamPolicy = SpannerProjectsInstancesDatabasesSetIamPolicy
@@ -86,7 +84,8 @@ newSpannerProjectsInstancesDatabasesSetIamPolicy ::
   SpannerProjectsInstancesDatabasesSetIamPolicy
 newSpannerProjectsInstancesDatabasesSetIamPolicy payload resource =
   SpannerProjectsInstancesDatabasesSetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -99,30 +98,25 @@ instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesSetIamPolicy
   where
+  type Rs SpannerProjectsInstancesDatabasesSetIamPolicy = Policy
   type
-    Rs SpannerProjectsInstancesDatabasesSetIamPolicy =
-      Policy
-  type
-    Scopes
-      SpannerProjectsInstancesDatabasesSetIamPolicy =
+    Scopes SpannerProjectsInstancesDatabasesSetIamPolicy =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstancesDatabasesSetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesSetIamPolicyResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesSetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstancesDatabasesSetIamPolicyResource
+          )
+          Core.mempty

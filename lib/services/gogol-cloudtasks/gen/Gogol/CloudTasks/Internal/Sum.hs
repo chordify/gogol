@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudTasks.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudTasks.Internal.Sum
@@ -67,6 +65,19 @@ module Gogol.CloudTasks.Internal.Sum
         ..
       ),
 
+    -- * HttpTarget_HttpMethod
+    HttpTarget_HttpMethod
+      ( HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
+        HttpTarget_HttpMethod_Post',
+        HttpTarget_HttpMethod_Get',
+        HttpTarget_HttpMethod_Head',
+        HttpTarget_HttpMethod_Put',
+        HttpTarget_HttpMethod_Delete',
+        HttpTarget_HttpMethod_Patch',
+        HttpTarget_HttpMethod_Options,
+        ..
+      ),
+
     -- * Queue_State
     Queue_State
       ( Queue_State_STATEUNSPECIFIED,
@@ -92,6 +103,22 @@ module Gogol.CloudTasks.Internal.Sum
         ..
       ),
 
+    -- * UriOverride_Scheme
+    UriOverride_Scheme
+      ( UriOverride_Scheme_SCHEMEUNSPECIFIED,
+        UriOverride_Scheme_Http,
+        UriOverride_Scheme_Https,
+        ..
+      ),
+
+    -- * UriOverride_UriOverrideEnforceMode
+    UriOverride_UriOverrideEnforceMode
+      ( UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED,
+        UriOverride_UriOverrideEnforceMode_IFNOTEXISTS,
+        UriOverride_UriOverrideEnforceMode_Always,
+        ..
+      ),
+
     -- * ProjectsLocationsQueuesTasksGetResponseView
     ProjectsLocationsQueuesTasksGetResponseView
       ( ProjectsLocationsQueuesTasksGetResponseView_VIEWUNSPECIFIED,
@@ -110,7 +137,7 @@ module Gogol.CloudTasks.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -285,6 +312,63 @@ pattern HttpRequest_HttpMethod_Options = HttpRequest_HttpMethod "OPTIONS"
   HttpRequest_HttpMethod
   #-}
 
+-- | The HTTP method to use for the request. When specified, it overrides HttpRequest for the task. Note that if the value is set to HttpMethod the HttpRequest of the task will be ignored at execution time.
+newtype HttpTarget_HttpMethod = HttpTarget_HttpMethod {fromHttpTarget_HttpMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | HTTP method unspecified
+pattern HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED = HttpTarget_HttpMethod "HTTP_METHOD_UNSPECIFIED"
+
+-- | HTTP POST
+pattern HttpTarget_HttpMethod_Post' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Post' = HttpTarget_HttpMethod "POST"
+
+-- | HTTP GET
+pattern HttpTarget_HttpMethod_Get' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Get' = HttpTarget_HttpMethod "GET"
+
+-- | HTTP HEAD
+pattern HttpTarget_HttpMethod_Head' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Head' = HttpTarget_HttpMethod "HEAD"
+
+-- | HTTP PUT
+pattern HttpTarget_HttpMethod_Put' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Put' = HttpTarget_HttpMethod "PUT"
+
+-- | HTTP DELETE
+pattern HttpTarget_HttpMethod_Delete' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Delete' = HttpTarget_HttpMethod "DELETE"
+
+-- | HTTP PATCH
+pattern HttpTarget_HttpMethod_Patch' :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Patch' = HttpTarget_HttpMethod "PATCH"
+
+-- | HTTP OPTIONS
+pattern HttpTarget_HttpMethod_Options :: HttpTarget_HttpMethod
+pattern HttpTarget_HttpMethod_Options = HttpTarget_HttpMethod "OPTIONS"
+
+{-# COMPLETE
+  HttpTarget_HttpMethod_HTTPMETHODUNSPECIFIED,
+  HttpTarget_HttpMethod_Post',
+  HttpTarget_HttpMethod_Get',
+  HttpTarget_HttpMethod_Head',
+  HttpTarget_HttpMethod_Put',
+  HttpTarget_HttpMethod_Delete',
+  HttpTarget_HttpMethod_Patch',
+  HttpTarget_HttpMethod_Options,
+  HttpTarget_HttpMethod
+  #-}
+
 -- | Output only. The state of the queue. @state@ can only be changed by calling PauseQueue, ResumeQueue, or uploading <https://cloud.google.com/appengine/docs/python/config/queueref queue.yaml\/xml>. UpdateQueue cannot be used to change @state@.
 newtype Queue_State = Queue_State {fromQueue_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -384,6 +468,70 @@ pattern Task_View_Full = Task_View "FULL"
   Task_View_Basic,
   Task_View_Full,
   Task_View
+  #-}
+
+-- | Scheme override. When specified, the task URI scheme is replaced by the provided value (HTTP or HTTPS).
+newtype UriOverride_Scheme = UriOverride_Scheme {fromUriOverride_Scheme :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Scheme unspecified. Defaults to HTTPS.
+pattern UriOverride_Scheme_SCHEMEUNSPECIFIED :: UriOverride_Scheme
+pattern UriOverride_Scheme_SCHEMEUNSPECIFIED = UriOverride_Scheme "SCHEME_UNSPECIFIED"
+
+-- | Convert the scheme to HTTP, e.g., https:\/\/www.google.ca will change to http:\/\/www.google.ca.
+pattern UriOverride_Scheme_Http :: UriOverride_Scheme
+pattern UriOverride_Scheme_Http = UriOverride_Scheme "HTTP"
+
+-- | Convert the scheme to HTTPS, e.g., http:\/\/www.google.ca will change to https:\/\/www.google.ca.
+pattern UriOverride_Scheme_Https :: UriOverride_Scheme
+pattern UriOverride_Scheme_Https = UriOverride_Scheme "HTTPS"
+
+{-# COMPLETE
+  UriOverride_Scheme_SCHEMEUNSPECIFIED,
+  UriOverride_Scheme_Http,
+  UriOverride_Scheme_Https,
+  UriOverride_Scheme
+  #-}
+
+-- | URI Override Enforce Mode When specified, determines the Target UriOverride mode. If not specified, it defaults to ALWAYS.
+newtype UriOverride_UriOverrideEnforceMode = UriOverride_UriOverrideEnforceMode {fromUriOverride_UriOverrideEnforceMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | UriOverrideEnforceMode Unspecified. Defaults to ALWAYS.
+pattern UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED :: UriOverride_UriOverrideEnforceMode
+pattern UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED = UriOverride_UriOverrideEnforceMode "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED"
+
+-- | In the IF/NOT/EXISTS mode, queue-level configuration is only applied where task-level configuration does not exist.
+pattern UriOverride_UriOverrideEnforceMode_IFNOTEXISTS :: UriOverride_UriOverrideEnforceMode
+pattern UriOverride_UriOverrideEnforceMode_IFNOTEXISTS = UriOverride_UriOverrideEnforceMode "IF_NOT_EXISTS"
+
+-- | In the ALWAYS mode, queue-level configuration overrides all task-level configuration
+pattern UriOverride_UriOverrideEnforceMode_Always :: UriOverride_UriOverrideEnforceMode
+pattern UriOverride_UriOverrideEnforceMode_Always = UriOverride_UriOverrideEnforceMode "ALWAYS"
+
+{-# COMPLETE
+  UriOverride_UriOverrideEnforceMode_URIOVERRIDEENFORCEMODEUNSPECIFIED,
+  UriOverride_UriOverrideEnforceMode_IFNOTEXISTS,
+  UriOverride_UriOverrideEnforceMode_Always,
+  UriOverride_UriOverrideEnforceMode
   #-}
 
 -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.

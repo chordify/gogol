@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Experiments.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Experiments.Insert
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.experiments.insert@ method which the
 -- 'AnalyticsManagementExperimentsInsert' request conforms to.
@@ -85,38 +83,35 @@ newAnalyticsManagementExperimentsInsert ::
   -- |  Web property ID to create the experiment for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementExperimentsInsert
-newAnalyticsManagementExperimentsInsert accountId payload profileId webPropertyId =
-  AnalyticsManagementExperimentsInsert
-    { accountId = accountId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementExperimentsInsert
+  accountId
+  payload
+  profileId
+  webPropertyId =
     AnalyticsManagementExperimentsInsert
-  where
-  type
-    Rs AnalyticsManagementExperimentsInsert =
-      Experiment
+      { accountId = accountId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementExperimentsInsert where
+  type Rs AnalyticsManagementExperimentsInsert = Experiment
   type
     Scopes AnalyticsManagementExperimentsInsert =
       '[Analytics'FullControl, Analytics'Edit]
-  requestClient
-    AnalyticsManagementExperimentsInsert {..} =
-      go
-        accountId
-        webPropertyId
-        profileId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementExperimentsInsertResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementExperimentsInsert {..} =
+    go
+      accountId
+      webPropertyId
+      profileId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementExperimentsInsertResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetPools.GetHealth
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetPools.GetHealth
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetPools.getHealth@ method which the
 -- 'ComputeTargetPoolsGetHealth' request conforms to.
@@ -61,9 +59,7 @@ type ComputeTargetPoolsGetHealthResource =
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] InstanceReference
-    Core.:> Core.Post
-              '[Core.JSON]
-              TargetPoolInstanceHealth
+    Core.:> Core.Post '[Core.JSON] TargetPoolInstanceHealth
 
 -- | Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
 --
@@ -114,19 +110,11 @@ newComputeTargetPoolsGetHealth payload project region targetPool =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeTargetPoolsGetHealth
-  where
-  type
-    Rs ComputeTargetPoolsGetHealth =
-      TargetPoolInstanceHealth
+instance Core.GoogleRequest ComputeTargetPoolsGetHealth where
+  type Rs ComputeTargetPoolsGetHealth = TargetPoolInstanceHealth
   type
     Scopes ComputeTargetPoolsGetHealth =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
   requestClient ComputeTargetPoolsGetHealth {..} =
     go
       project
@@ -143,7 +131,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeTargetPoolsGetHealthResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeTargetPoolsGetHealthResource)
           Core.mempty

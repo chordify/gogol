@@ -7,11 +7,13 @@
 *.imports
 
 # Dirs
+.direnv
+.stack-work
 bin
 dist
+dist-newstyle
+result
 vendor
-.stack-work
-.direnv
 
 # CTAGS
 TAGS
@@ -35,3 +37,9 @@ tags
 
 # Go
 *.go
+
+# Direnv
+.env
+
+# Git pre-commit hooks
+/.pre-commit-config.yaml

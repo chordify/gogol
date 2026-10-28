@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -88,6 +86,36 @@ module Gogol.BinaryAuthorization
     BinaryAuthorizationProjectsGetPolicy (..),
     newBinaryAuthorizationProjectsGetPolicy,
 
+    -- ** binaryauthorization.projects.platforms.gke.policies.evaluate
+    BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluateResource,
+    BinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate (..),
+    newBinaryAuthorizationProjectsPlatformsGkePoliciesEvaluate,
+
+    -- ** binaryauthorization.projects.platforms.policies.create
+    BinaryAuthorizationProjectsPlatformsPoliciesCreateResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesCreate (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesCreate,
+
+    -- ** binaryauthorization.projects.platforms.policies.delete
+    BinaryAuthorizationProjectsPlatformsPoliciesDeleteResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesDelete (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesDelete,
+
+    -- ** binaryauthorization.projects.platforms.policies.get
+    BinaryAuthorizationProjectsPlatformsPoliciesGetResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesGet (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesGet,
+
+    -- ** binaryauthorization.projects.platforms.policies.list
+    BinaryAuthorizationProjectsPlatformsPoliciesListResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesList (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesList,
+
+    -- ** binaryauthorization.projects.platforms.policies.replacePlatformPolicy
+    BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicyResource,
+    BinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy (..),
+    newBinaryAuthorizationProjectsPlatformsPoliciesReplacePlatformPolicy,
+
     -- ** binaryauthorization.projects.policy.getIamPolicy
     BinaryAuthorizationProjectsPolicyGetIamPolicyResource,
     BinaryAuthorizationProjectsPolicyGetIamPolicy (..),
@@ -132,9 +160,21 @@ module Gogol.BinaryAuthorization
     AdmissionWhitelistPattern (..),
     newAdmissionWhitelistPattern,
 
+    -- ** AllowlistResult
+    AllowlistResult (..),
+    newAllowlistResult,
+
+    -- ** AttestationAuthenticator
+    AttestationAuthenticator (..),
+    newAttestationAuthenticator,
+
     -- ** AttestationOccurrence
     AttestationOccurrence (..),
     newAttestationOccurrence,
+
+    -- ** AttestationSource
+    AttestationSource (..),
+    newAttestationSource,
 
     -- ** Attestor
     Attestor (..),
@@ -148,17 +188,78 @@ module Gogol.BinaryAuthorization
     Binding (..),
     newBinding,
 
+    -- ** Check
+    Check (..),
+    newCheck,
+
+    -- ** CheckResult
+    CheckResult (..),
+    newCheckResult,
+
+    -- ** CheckResults
+    CheckResults (..),
+    newCheckResults,
+
+    -- ** CheckSet
+    CheckSet (..),
+    newCheckSet,
+
+    -- ** CheckSetResult
+    CheckSetResult (..),
+    newCheckSetResult,
+
     -- ** Empty
     Empty (..),
     newEmpty,
+
+    -- ** EvaluateGkePolicyRequest
+    EvaluateGkePolicyRequest (..),
+    newEvaluateGkePolicyRequest,
+
+    -- ** EvaluateGkePolicyRequest_Resource
+    EvaluateGkePolicyRequest_Resource (..),
+    newEvaluateGkePolicyRequest_Resource,
+
+    -- ** EvaluateGkePolicyResponse
+    EvaluateGkePolicyResponse (..),
+    newEvaluateGkePolicyResponse,
+
+    -- ** EvaluateGkePolicyResponse_Verdict
+    EvaluateGkePolicyResponse_Verdict (..),
+
+    -- ** EvaluationResult
+    EvaluationResult (..),
+    newEvaluationResult,
+
+    -- ** EvaluationResult_Verdict
+    EvaluationResult_Verdict (..),
 
     -- ** Expr
     Expr (..),
     newExpr,
 
+    -- ** GkePolicy
+    GkePolicy (..),
+    newGkePolicy,
+
     -- ** IamPolicy
     IamPolicy (..),
     newIamPolicy,
+
+    -- ** ImageAllowlist
+    ImageAllowlist (..),
+    newImageAllowlist,
+
+    -- ** ImageFreshnessCheck
+    ImageFreshnessCheck (..),
+    newImageFreshnessCheck,
+
+    -- ** ImageResult
+    ImageResult (..),
+    newImageResult,
+
+    -- ** ImageResult_Verdict
+    ImageResult_Verdict (..),
 
     -- ** Jwt
     Jwt (..),
@@ -168,12 +269,31 @@ module Gogol.BinaryAuthorization
     ListAttestorsResponse (..),
     newListAttestorsResponse,
 
+    -- ** ListPlatformPoliciesResponse
+    ListPlatformPoliciesResponse (..),
+    newListPlatformPoliciesResponse,
+
     -- ** PkixPublicKey
     PkixPublicKey (..),
     newPkixPublicKey,
 
     -- ** PkixPublicKey_SignatureAlgorithm
     PkixPublicKey_SignatureAlgorithm (..),
+
+    -- ** PkixPublicKeySet
+    PkixPublicKeySet (..),
+    newPkixPublicKeySet,
+
+    -- ** PlatformPolicy
+    PlatformPolicy (..),
+    newPlatformPolicy,
+
+    -- ** PodResult
+    PodResult (..),
+    newPodResult,
+
+    -- ** PodResult_Verdict
+    PodResult_Verdict (..),
 
     -- ** Policy
     Policy (..),
@@ -198,6 +318,10 @@ module Gogol.BinaryAuthorization
     Policy_KubernetesServiceAccountAdmissionRules (..),
     newPolicy_KubernetesServiceAccountAdmissionRules,
 
+    -- ** Scope
+    Scope (..),
+    newScope,
+
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -206,6 +330,30 @@ module Gogol.BinaryAuthorization
     Signature (..),
     newSignature,
 
+    -- ** SigstoreAuthority
+    SigstoreAuthority (..),
+    newSigstoreAuthority,
+
+    -- ** SigstorePublicKey
+    SigstorePublicKey (..),
+    newSigstorePublicKey,
+
+    -- ** SigstorePublicKeySet
+    SigstorePublicKeySet (..),
+    newSigstorePublicKeySet,
+
+    -- ** SigstoreSignatureCheck
+    SigstoreSignatureCheck (..),
+    newSigstoreSignatureCheck,
+
+    -- ** SimpleSigningAttestationCheck
+    SimpleSigningAttestationCheck (..),
+    newSimpleSigningAttestationCheck,
+
+    -- ** SlsaCheck
+    SlsaCheck (..),
+    newSlsaCheck,
+
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -213,6 +361,10 @@ module Gogol.BinaryAuthorization
     -- ** TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- ** TrustedDirectoryCheck
+    TrustedDirectoryCheck (..),
+    newTrustedDirectoryCheck,
 
     -- ** UserOwnedGrafeasNote
     UserOwnedGrafeasNote (..),
@@ -228,6 +380,23 @@ module Gogol.BinaryAuthorization
 
     -- ** ValidateAttestationOccurrenceResponse_Result
     ValidateAttestationOccurrenceResponse_Result (..),
+
+    -- ** VerificationRule
+    VerificationRule (..),
+    newVerificationRule,
+
+    -- ** VerificationRule_TrustedBuilder
+    VerificationRule_TrustedBuilder (..),
+
+    -- ** VulnerabilityCheck
+    VulnerabilityCheck (..),
+    newVulnerabilityCheck,
+
+    -- ** VulnerabilityCheck_MaximumFixableSeverity
+    VulnerabilityCheck_MaximumFixableSeverity (..),
+
+    -- ** VulnerabilityCheck_MaximumUnfixableSeverity
+    VulnerabilityCheck_MaximumUnfixableSeverity (..),
   )
 where
 
@@ -241,6 +410,12 @@ import Gogol.BinaryAuthorization.Projects.Attestors.TestIamPermissions
 import Gogol.BinaryAuthorization.Projects.Attestors.Update
 import Gogol.BinaryAuthorization.Projects.Attestors.ValidateAttestationOccurrence
 import Gogol.BinaryAuthorization.Projects.GetPolicy
+import Gogol.BinaryAuthorization.Projects.Platforms.Gke.Policies.Evaluate
+import Gogol.BinaryAuthorization.Projects.Platforms.Policies.Create
+import Gogol.BinaryAuthorization.Projects.Platforms.Policies.Delete
+import Gogol.BinaryAuthorization.Projects.Platforms.Policies.Get
+import Gogol.BinaryAuthorization.Projects.Platforms.Policies.List
+import Gogol.BinaryAuthorization.Projects.Platforms.Policies.ReplacePlatformPolicy
 import Gogol.BinaryAuthorization.Projects.Policy.GetIamPolicy
 import Gogol.BinaryAuthorization.Projects.Policy.SetIamPolicy
 import Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions

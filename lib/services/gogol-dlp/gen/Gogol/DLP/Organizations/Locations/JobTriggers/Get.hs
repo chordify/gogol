@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.Locations.JobTriggers.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- Gets a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.locations.jobTriggers.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.locations.jobTriggers.get@.
 module Gogol.DLP.Organizations.Locations.JobTriggers.Get
   ( -- * Resource
     DLPOrganizationsLocationsJobTriggersGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.Locations.JobTriggers.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.locations.jobTriggers.get@ method which the
 -- 'DLPOrganizationsLocationsJobTriggersGet' request conforms to.
@@ -55,7 +53,7 @@ type DLPOrganizationsLocationsJobTriggersGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2JobTrigger
 
--- | Gets a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- | Gets a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
 -- /See:/ 'newDLPOrganizationsLocationsJobTriggersGet' smart constructor.
 data DLPOrganizationsLocationsJobTriggersGet = DLPOrganizationsLocationsJobTriggersGet
@@ -89,32 +87,27 @@ newDLPOrganizationsLocationsJobTriggersGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsLocationsJobTriggersGet
-  where
+instance Core.GoogleRequest DLPOrganizationsLocationsJobTriggersGet where
   type
     Rs DLPOrganizationsLocationsJobTriggersGet =
       GooglePrivacyDlpV2JobTrigger
   type
     Scopes DLPOrganizationsLocationsJobTriggersGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsLocationsJobTriggersGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsLocationsJobTriggersGetResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsLocationsJobTriggersGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsLocationsJobTriggersGetResource
+          )
+          Core.mempty

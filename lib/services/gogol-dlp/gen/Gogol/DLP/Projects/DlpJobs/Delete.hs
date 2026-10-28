@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.DlpJobs.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.dlpJobs.delete@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.dlpJobs.delete@.
 module Gogol.DLP.Projects.DlpJobs.Delete
   ( -- * Resource
     DLPProjectsDlpJobsDeleteResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.DlpJobs.Delete
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.dlpJobs.delete@ method which the
 -- 'DLPProjectsDlpJobsDelete' request conforms to.
@@ -55,7 +53,7 @@ type DLPProjectsDlpJobsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
--- | Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/dlp\/docs\/inspecting-storage and https:\/\/cloud.google.com\/dlp\/docs\/compute-risk-analysis to learn more.
+-- | Deletes a long-running DlpJob. This method indicates that the client is no longer interested in the DlpJob result. The job will be canceled if possible. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/inspecting-storage and https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/compute-risk-analysis to learn more.
 --
 -- /See:/ 'newDLPProjectsDlpJobsDelete' smart constructor.
 data DLPProjectsDlpJobsDelete = DLPProjectsDlpJobsDelete
@@ -90,12 +88,8 @@ newDLPProjectsDlpJobsDelete name =
     }
 
 instance Core.GoogleRequest DLPProjectsDlpJobsDelete where
-  type
-    Rs DLPProjectsDlpJobsDelete =
-      GoogleProtobufEmpty
-  type
-    Scopes DLPProjectsDlpJobsDelete =
-      '[CloudPlatform'FullControl]
+  type Rs DLPProjectsDlpJobsDelete = GoogleProtobufEmpty
+  type Scopes DLPProjectsDlpJobsDelete = '[CloudPlatform'FullControl]
   requestClient DLPProjectsDlpJobsDelete {..} =
     go
       name
@@ -109,7 +103,5 @@ instance Core.GoogleRequest DLPProjectsDlpJobsDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DLPProjectsDlpJobsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy DLPProjectsDlpJobsDeleteResource)
           Core.mempty

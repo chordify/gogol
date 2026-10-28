@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsLicensing.Licensing.LicenseAssignments.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsLicensing.Licensing.LicenseAssignments.Patch
 where
 
 import Gogol.AppsLicensing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @licensing.licenseAssignments.patch@ method which the
 -- 'LicensingLicenseAssignmentsPatch' request conforms to.
@@ -112,16 +110,9 @@ newLicensingLicenseAssignmentsPatch payload productId skuId userId =
       userId = userId
     }
 
-instance
-  Core.GoogleRequest
-    LicensingLicenseAssignmentsPatch
-  where
-  type
-    Rs LicensingLicenseAssignmentsPatch =
-      LicenseAssignment
-  type
-    Scopes LicensingLicenseAssignmentsPatch =
-      '[Apps'Licensing]
+instance Core.GoogleRequest LicensingLicenseAssignmentsPatch where
+  type Rs LicensingLicenseAssignmentsPatch = LicenseAssignment
+  type Scopes LicensingLicenseAssignmentsPatch = '[Apps'Licensing]
   requestClient LicensingLicenseAssignmentsPatch {..} =
     go
       productId
@@ -138,7 +129,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LicensingLicenseAssignmentsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy LicensingLicenseAssignmentsPatchResource)
           Core.mempty

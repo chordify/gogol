@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExperienceReport.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdExperienceReport.Internal.Product
@@ -41,7 +39,7 @@ module Gogol.AdExperienceReport.Internal.Product
 where
 
 import Gogol.AdExperienceReport.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A site\'s Ad Experience Report summary on a single platform.
 --
@@ -97,8 +95,7 @@ instance Core.ToJSON PlatformSummary where
   toJSON PlatformSummary {..} =
     Core.object
       ( Core.catMaybes
-          [ ("betterAdsStatus" Core..=)
-              Core.<$> betterAdsStatus,
+          [ ("betterAdsStatus" Core..=) Core.<$> betterAdsStatus,
             ("enforcementTime" Core..=) Core.<$> enforcementTime,
             ("filterStatus" Core..=) Core.<$> filterStatus,
             ("lastChangeTime" Core..=) Core.<$> lastChangeTime,
@@ -172,8 +169,7 @@ instance Core.FromJSON ViolatingSitesResponse where
     Core.withObject
       "ViolatingSitesResponse"
       ( \o ->
-          ViolatingSitesResponse
-            Core.<$> (o Core..:? "violatingSites")
+          ViolatingSitesResponse Core.<$> (o Core..:? "violatingSites")
       )
 
 instance Core.ToJSON ViolatingSitesResponse where

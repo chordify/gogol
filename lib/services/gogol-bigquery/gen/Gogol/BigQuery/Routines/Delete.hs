@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Routines.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Routines.Delete
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.routines.delete@ method which the
 -- 'BigQueryRoutinesDelete' request conforms to.
@@ -53,6 +51,11 @@ type BigQueryRoutinesDeleteResource =
     Core.:> Core.Capture "datasetId" Core.Text
     Core.:> "routines"
     Core.:> Core.Capture "routineId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
@@ -60,12 +63,22 @@ type BigQueryRoutinesDeleteResource =
 --
 -- /See:/ 'newBigQueryRoutinesDelete' smart constructor.
 data BigQueryRoutinesDelete = BigQueryRoutinesDelete
-  { -- | Required. Dataset ID of the routine to delete
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Dataset ID of the routine to delete
     datasetId :: Core.Text,
     -- | Required. Project ID of the routine to delete
     projectId :: Core.Text,
     -- | Required. Routine ID of the routine to delete
-    routineId :: Core.Text
+    routineId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -80,9 +93,14 @@ newBigQueryRoutinesDelete ::
   BigQueryRoutinesDelete
 newBigQueryRoutinesDelete datasetId projectId routineId =
   BigQueryRoutinesDelete
-    { datasetId = datasetId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      datasetId = datasetId,
       projectId = projectId,
-      routineId = routineId
+      routineId = routineId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryRoutinesDelete where
@@ -95,12 +113,15 @@ instance Core.GoogleRequest BigQueryRoutinesDelete where
       projectId
       datasetId
       routineId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryRoutinesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy BigQueryRoutinesDeleteResource)
           Core.mempty

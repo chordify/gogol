@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.InboundSamlSsoProfiles.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an InboundSamlSsoProfile for a customer.
+-- Creates an InboundSamlSsoProfile for a customer. When the target customer has enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>, the @Operation@ in the response will have @\"done\": false@, it will not have a response, and the metadata will have @\"state\": \"awaiting-multi-party-approval\"@.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.inboundSamlSsoProfiles.create@.
 module Gogol.CloudIdentity.InboundSamlSsoProfiles.Create
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.InboundSamlSsoProfiles.Create
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.inboundSamlSsoProfiles.create@ method which the
 -- 'CloudIdentityInboundSamlSsoProfilesCreate' request conforms to.
@@ -56,7 +54,7 @@ type CloudIdentityInboundSamlSsoProfilesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] InboundSamlSsoProfile
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates an InboundSamlSsoProfile for a customer.
+-- | Creates an InboundSamlSsoProfile for a customer. When the target customer has enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>, the @Operation@ in the response will have @\"done\": false@, it will not have a response, and the metadata will have @\"state\": \"awaiting-multi-party-approval\"@.
 --
 -- /See:/ 'newCloudIdentityInboundSamlSsoProfilesCreate' smart constructor.
 data CloudIdentityInboundSamlSsoProfilesCreate = CloudIdentityInboundSamlSsoProfilesCreate
@@ -94,28 +92,24 @@ instance
   Core.GoogleRequest
     CloudIdentityInboundSamlSsoProfilesCreate
   where
-  type
-    Rs CloudIdentityInboundSamlSsoProfilesCreate =
-      Operation
+  type Rs CloudIdentityInboundSamlSsoProfilesCreate = Operation
   type
     Scopes CloudIdentityInboundSamlSsoProfilesCreate =
-      '[CloudPlatform'FullControl]
-  requestClient
-    CloudIdentityInboundSamlSsoProfilesCreate {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudIdentityService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIdentityInboundSamlSsoProfilesCreateResource
-            )
-            Core.mempty
+      '[CloudIdentity'Inboundsso, CloudPlatform'FullControl]
+  requestClient CloudIdentityInboundSamlSsoProfilesCreate {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudIdentityService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudIdentityInboundSamlSsoProfilesCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.SetShieldedInstanceIntegrityPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.setShieldedInstanceIntegrityPolicy@ method which the
 -- 'ComputeInstancesSetShieldedInstanceIntegrityPolicy' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstancesSetShieldedInstanceIntegrityPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ShieldedInstanceIntegrityPolicy
+    Core.:> Core.ReqBody '[Core.JSON] ShieldedInstanceIntegrityPolicy
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
@@ -104,31 +100,34 @@ newComputeInstancesSetShieldedInstanceIntegrityPolicy ::
   -- |  The name of the zone for this request. See 'zone'.
   Core.Text ->
   ComputeInstancesSetShieldedInstanceIntegrityPolicy
-newComputeInstancesSetShieldedInstanceIntegrityPolicy instance' payload project zone =
-  ComputeInstancesSetShieldedInstanceIntegrityPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instance' = instance',
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newComputeInstancesSetShieldedInstanceIntegrityPolicy
+  instance'
+  payload
+  project
+  zone =
+    ComputeInstancesSetShieldedInstanceIntegrityPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instance' = instance',
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ComputeInstancesSetShieldedInstanceIntegrityPolicy
   where
   type
-    Rs
-      ComputeInstancesSetShieldedInstanceIntegrityPolicy =
+    Rs ComputeInstancesSetShieldedInstanceIntegrityPolicy =
       Operation
   type
-    Scopes
-      ComputeInstancesSetShieldedInstanceIntegrityPolicy =
+    Scopes ComputeInstancesSetShieldedInstanceIntegrityPolicy =
       '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     ComputeInstancesSetShieldedInstanceIntegrityPolicy {..} =

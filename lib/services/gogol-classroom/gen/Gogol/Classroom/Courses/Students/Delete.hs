@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.Students.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.Students.Delete
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.students.delete@ method which the
 -- 'ClassroomCoursesStudentsDelete' request conforms to.
@@ -97,14 +95,9 @@ newClassroomCoursesStudentsDelete courseId userId =
       userId = userId
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesStudentsDelete
-  where
+instance Core.GoogleRequest ClassroomCoursesStudentsDelete where
   type Rs ClassroomCoursesStudentsDelete = Empty
-  type
-    Scopes ClassroomCoursesStudentsDelete =
-      '[Classroom'Rosters]
+  type Scopes ClassroomCoursesStudentsDelete = '[Classroom'Rosters]
   requestClient ClassroomCoursesStudentsDelete {..} =
     go
       courseId
@@ -119,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ClassroomCoursesStudentsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ClassroomCoursesStudentsDeleteResource)
           Core.mempty

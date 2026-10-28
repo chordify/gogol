@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
 where
 
 import Gogol.AndroidDeviceProvisioning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.claimAsync@ method which the
 -- 'AndroidDeviceProvisioningPartnersDevicesClaimAsync' request conforms to.
@@ -86,28 +84,29 @@ newAndroidDeviceProvisioningPartnersDevicesClaimAsync ::
   -- |  Multipart request metadata. See 'payload'.
   ClaimDevicesRequest ->
   AndroidDeviceProvisioningPartnersDevicesClaimAsync
-newAndroidDeviceProvisioningPartnersDevicesClaimAsync partnerId payload =
-  AndroidDeviceProvisioningPartnersDevicesClaimAsync
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      partnerId = partnerId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidDeviceProvisioningPartnersDevicesClaimAsync
+  partnerId
+  payload =
+    AndroidDeviceProvisioningPartnersDevicesClaimAsync
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        partnerId = partnerId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidDeviceProvisioningPartnersDevicesClaimAsync
   where
   type
-    Rs
-      AndroidDeviceProvisioningPartnersDevicesClaimAsync =
+    Rs AndroidDeviceProvisioningPartnersDevicesClaimAsync =
       Operation
   type
-    Scopes
-      AndroidDeviceProvisioningPartnersDevicesClaimAsync =
+    Scopes AndroidDeviceProvisioningPartnersDevicesClaimAsync =
       '[]
   requestClient
     AndroidDeviceProvisioningPartnersDevicesClaimAsync {..} =

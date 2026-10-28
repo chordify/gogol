@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.DeidentifyTemplates.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.deidentifyTemplates.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.deidentifyTemplates.patch@.
 module Gogol.DLP.Projects.DeidentifyTemplates.Patch
   ( -- * Resource
     DLPProjectsDeidentifyTemplatesPatchResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.DeidentifyTemplates.Patch
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.deidentifyTemplates.patch@ method which the
 -- 'DLPProjectsDeidentifyTemplatesPatch' request conforms to.
@@ -56,11 +54,9 @@ type DLPProjectsDeidentifyTemplatesPatchResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GooglePrivacyDlpV2DeidentifyTemplate
+    Core.:> Core.Patch '[Core.JSON] GooglePrivacyDlpV2DeidentifyTemplate
 
--- | Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- | Updates the DeidentifyTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
 -- /See:/ 'newDLPProjectsDeidentifyTemplatesPatch' smart constructor.
 data DLPProjectsDeidentifyTemplatesPatch = DLPProjectsDeidentifyTemplatesPatch
@@ -99,10 +95,7 @@ newDLPProjectsDeidentifyTemplatesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsDeidentifyTemplatesPatch
-  where
+instance Core.GoogleRequest DLPProjectsDeidentifyTemplatesPatch where
   type
     Rs DLPProjectsDeidentifyTemplatesPatch =
       GooglePrivacyDlpV2DeidentifyTemplate
@@ -124,7 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DLPProjectsDeidentifyTemplatesPatchResource
+              Core.Proxy DLPProjectsDeidentifyTemplatesPatchResource
           )
           Core.mempty

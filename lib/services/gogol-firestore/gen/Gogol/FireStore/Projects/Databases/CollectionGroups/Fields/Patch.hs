@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.Patch
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.fields.patch@ method which the
 -- 'FireStoreProjectsDatabasesCollectionGroupsFieldsPatch' request conforms to.
@@ -67,8 +65,8 @@ data FireStoreProjectsDatabasesCollectionGroupsFieldsPatch = FireStoreProjectsDa
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. A field name of the form @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@ A field path may be a simple field name, e.g. @address@ or a path to fields within map_value , e.g. @address.city@, or a special field path. The only valid special field is @*@, which represents any field. Field paths may be quoted using
-    -- @(backtick). The only character that needs to be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include:@/@,@.@, \`\`\` (backtick),@[@,@]@, as well as any ascii symbolic characters. Examples: (Note: Comments here are written in markdown syntax, so there is an additional layer of backticks to represent a code block)@\`address.city\`@represents a field named@address.city@, not the map key@city@in the field@address@.@\`/\`@represents a field named@/@, not any field. A special@Field@contains the default indexing settings for all fields. This field\'s resource name is:@projects\/{project/id}\/databases\/{database/id}\/collectionGroups\/__default__\/fields\//@Indexes defined on this@Field@will be applied to all fields which do not have their own@Field\` index configuration.
+    -- | Required. A field name of the form: @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@ A field path can be a simple field name, e.g. @address@ or a path to fields within @map_value@ , e.g. @address.city@, or a special field path. The only valid special field is @*@, which represents any field. Field paths can be quoted using @\`@ (backtick). The only character that must be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include: @*@, @.@, @\`@ (backtick), @[@, @]@, as well as any ascii symbolic characters. Examples: @\`address.city\`@ represents a field named @address.city@, not the map key @city@ in the field @address@. @\`*\`@ represents a field named @*@, not any field. A special @Field@ contains the default indexing settings for all fields. This field\'s resource name is:
+    -- @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/__default__\/fields\/*@ Indexes defined on this @Field@ will be applied to all fields which do not have their own @Field@ index configuration.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleFirestoreAdminV1Field,
@@ -83,35 +81,36 @@ data FireStoreProjectsDatabasesCollectionGroupsFieldsPatch = FireStoreProjectsDa
 
 -- | Creates a value of 'FireStoreProjectsDatabasesCollectionGroupsFieldsPatch' with the minimum fields required to make a request.
 newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch ::
-  -- |  Required. A field name of the form @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@ A field path may be a simple field name, e.g. @address@ or a path to fields within map_value , e.g. @address.city@, or a special field path. The only valid special field is @*@, which represents any field. Field paths may be quoted using
-  -- @(backtick). The only character that needs to be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include:@/@,@.@, \`\`\` (backtick),@[@,@]@, as well as any ascii symbolic characters. Examples: (Note: Comments here are written in markdown syntax, so there is an additional layer of backticks to represent a code block)@\`address.city\`@represents a field named@address.city@, not the map key@city@in the field@address@.@\`/\`@represents a field named@/@, not any field. A special@Field@contains the default indexing settings for all fields. This field\'s resource name is:@projects\/{project/id}\/databases\/{database/id}\/collectionGroups\/__default__\/fields\//@Indexes defined on this@Field@will be applied to all fields which do not have their own@Field\` index configuration. See 'name'.
+  -- |  Required. A field name of the form: @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/{collection_id}\/fields\/{field_path}@ A field path can be a simple field name, e.g. @address@ or a path to fields within @map_value@ , e.g. @address.city@, or a special field path. The only valid special field is @*@, which represents any field. Field paths can be quoted using @\`@ (backtick). The only character that must be escaped within a quoted field path is the backtick character itself, escaped using a backslash. Special characters in field paths that must be quoted include: @*@, @.@, @\`@ (backtick), @[@, @]@, as well as any ascii symbolic characters. Examples: @\`address.city\`@ represents a field named @address.city@, not the map key @city@ in the field @address@. @\`*\`@ represents a field named @*@, not any field. A special @Field@ contains the default indexing settings for all fields. This field\'s resource name is:
+  -- @projects\/{project_id}\/databases\/{database_id}\/collectionGroups\/__default__\/fields\/*@ Indexes defined on this @Field@ will be applied to all fields which do not have their own @Field@ index configuration. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleFirestoreAdminV1Field ->
   FireStoreProjectsDatabasesCollectionGroupsFieldsPatch
-newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch name payload =
-  FireStoreProjectsDatabasesCollectionGroupsFieldsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newFireStoreProjectsDatabasesCollectionGroupsFieldsPatch
+  name
+  payload =
+    FireStoreProjectsDatabasesCollectionGroupsFieldsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesCollectionGroupsFieldsPatch
   where
   type
-    Rs
-      FireStoreProjectsDatabasesCollectionGroupsFieldsPatch =
+    Rs FireStoreProjectsDatabasesCollectionGroupsFieldsPatch =
       GoogleLongrunningOperation
   type
-    Scopes
-      FireStoreProjectsDatabasesCollectionGroupsFieldsPatch =
+    Scopes FireStoreProjectsDatabasesCollectionGroupsFieldsPatch =
       '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesCollectionGroupsFieldsPatch {..} =

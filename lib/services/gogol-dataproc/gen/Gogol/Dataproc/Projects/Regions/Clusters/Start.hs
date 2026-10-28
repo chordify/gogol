@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.Start
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Start
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.start@ method which the
 -- 'DataprocProjectsRegionsClustersStart' request conforms to.
@@ -97,48 +95,45 @@ newDataprocProjectsRegionsClustersStart ::
   -- |  Required. The Dataproc region in which to handle the request. See 'region'.
   Core.Text ->
   DataprocProjectsRegionsClustersStart
-newDataprocProjectsRegionsClustersStart clusterName payload projectId region =
-  DataprocProjectsRegionsClustersStart
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterName = clusterName,
-      payload = payload,
-      projectId = projectId,
-      region = region,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDataprocProjectsRegionsClustersStart
+  clusterName
+  payload
+  projectId
+  region =
     DataprocProjectsRegionsClustersStart
-  where
-  type
-    Rs DataprocProjectsRegionsClustersStart =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterName = clusterName,
+        payload = payload,
+        projectId = projectId,
+        region = region,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DataprocProjectsRegionsClustersStart where
+  type Rs DataprocProjectsRegionsClustersStart = Operation
   type
     Scopes DataprocProjectsRegionsClustersStart =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersStart {..} =
-      go
-        projectId
-        region
-        clusterName
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersStartResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsClustersStart {..} =
+    go
+      projectId
+      region
+      clusterName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsClustersStartResource
+          )
+          Core.mempty

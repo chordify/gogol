@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Mirror.Timeline.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Mirror.Timeline.Update
 where
 
 import Gogol.Mirror.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @mirror.timeline.update@ method which the
 -- 'MirrorTimelineUpdate' request conforms to.
@@ -53,14 +51,14 @@ type MirrorTimelineUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] TimelineItem
     Core.:> Core.Put '[Core.JSON] TimelineItem
     Core.:<|> "upload"
-      Core.:> "mirror"
-      Core.:> "v1"
-      Core.:> "timeline"
-      Core.:> Core.Capture "id" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] TimelineItem
-      Core.:> Core.Put '[Core.JSON] TimelineItem
+    Core.:> "mirror"
+    Core.:> "v1"
+    Core.:> "timeline"
+    Core.:> Core.Capture "id" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] TimelineItem
+    Core.:> Core.Put '[Core.JSON] TimelineItem
 
 -- | Updates a timeline item in place.
 --
@@ -89,42 +87,28 @@ instance Core.GoogleRequest MirrorTimelineUpdate where
     Scopes MirrorTimelineUpdate =
       '[Glass'Location, Glass'Timeline]
   requestClient MirrorTimelineUpdate {..} =
-    go
-      id
-      (Core.Just Core.AltJSON)
-      payload
-      mirrorService
+    go id (Core.Just Core.AltJSON) payload mirrorService
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorTimelineUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy MirrorTimelineUpdateResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload MirrorTimelineUpdate)
-  where
-  type
-    Rs (Core.MediaUpload MirrorTimelineUpdate) =
-      TimelineItem
+instance Core.GoogleRequest (Core.MediaUpload MirrorTimelineUpdate) where
+  type Rs (Core.MediaUpload MirrorTimelineUpdate) = TimelineItem
   type
     Scopes (Core.MediaUpload MirrorTimelineUpdate) =
       Core.Scopes MirrorTimelineUpdate
-  requestClient
-    (Core.MediaUpload MirrorTimelineUpdate {..} body) =
-      go
-        id
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        mirrorService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy MirrorTimelineUpdateResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload MirrorTimelineUpdate {..} body) =
+    go
+      id
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      mirrorService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy MirrorTimelineUpdateResource)
+          Core.mempty

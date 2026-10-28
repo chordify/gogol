@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.GlobalNetworkEndpointGroups.AttachNetworkEndpoints
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.globalNetworkEndpointGroups.attachNetworkEndpoints@ method which the
 -- 'ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints' request conforms to.
@@ -99,26 +97,30 @@ newComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints ::
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
   ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints
-newComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints networkEndpointGroup payload project =
-  ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      networkEndpointGroup = networkEndpointGroup,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints
+  networkEndpointGroup
+  payload
+  project =
+    ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        networkEndpointGroup =
+          networkEndpointGroup,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints
   where
   type
-    Rs
-      ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints =
+    Rs ComputeGlobalNetworkEndpointGroupsAttachNetworkEndpoints =
       Operation
   type
     Scopes

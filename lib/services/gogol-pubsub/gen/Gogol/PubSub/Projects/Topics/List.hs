@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Topics.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Topics.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.list@ method which the
@@ -68,9 +66,9 @@ data PubSubProjectsTopicsList = PubSubProjectsTopicsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Maximum number of topics to return.
+    -- | Optional. Maximum number of topics to return.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | The value returned by the last @ListTopicsResponse@; indicates that this is a continuation of a prior @ListTopics@ call, and that the system should return the next page of data.
+    -- | Optional. The value returned by the last @ListTopicsResponse@; indicates that this is a continuation of a prior @ListTopics@ call, and that the system should return the next page of data.
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The name of the project in which to list topics. Format is @projects\/{project-id}@.
     project :: Core.Text,
@@ -118,7 +116,5 @@ instance Core.GoogleRequest PubSubProjectsTopicsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsTopicsListResource
-          )
+          (Core.Proxy :: Core.Proxy PubSubProjectsTopicsListResource)
           Core.mempty

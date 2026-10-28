@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SQLAdmin.Types
@@ -42,6 +40,14 @@ module Gogol.SQLAdmin.Types
     AclEntry (..),
     newAclEntry,
 
+    -- ** AcquireSsrsLeaseContext
+    AcquireSsrsLeaseContext (..),
+    newAcquireSsrsLeaseContext,
+
+    -- ** AdvancedMachineFeatures
+    AdvancedMachineFeatures (..),
+    newAdvancedMachineFeatures,
+
     -- ** ApiWarning
     ApiWarning (..),
     newApiWarning,
@@ -49,13 +55,40 @@ module Gogol.SQLAdmin.Types
     -- ** ApiWarning_Code
     ApiWarning_Code (..),
 
+    -- ** AvailableDatabaseVersion
+    AvailableDatabaseVersion (..),
+    newAvailableDatabaseVersion,
+
+    -- ** Backup
+    Backup (..),
+    newBackup,
+
+    -- ** Backup_BackupKind
+    Backup_BackupKind (..),
+
+    -- ** Backup_State
+    Backup_State (..),
+
+    -- ** Backup_Type
+    Backup_Type (..),
+
     -- ** BackupConfiguration
     BackupConfiguration (..),
     newBackupConfiguration,
 
+    -- ** BackupConfiguration_TransactionalLogStorageState
+    BackupConfiguration_TransactionalLogStorageState (..),
+
     -- ** BackupContext
     BackupContext (..),
     newBackupContext,
+
+    -- ** BackupReencryptionConfig
+    BackupReencryptionConfig (..),
+    newBackupReencryptionConfig,
+
+    -- ** BackupReencryptionConfig_BackupType
+    BackupReencryptionConfig_BackupType (..),
 
     -- ** BackupRetentionSettings
     BackupRetentionSettings (..),
@@ -99,6 +132,13 @@ module Gogol.SQLAdmin.Types
     -- ** ConnectSettings_DatabaseVersion
     ConnectSettings_DatabaseVersion (..),
 
+    -- ** ConnectSettings_ServerCaMode
+    ConnectSettings_ServerCaMode (..),
+
+    -- ** DataCacheConfig
+    DataCacheConfig (..),
+    newDataCacheConfig,
+
     -- ** Database
     Database (..),
     newDatabase,
@@ -124,15 +164,26 @@ module Gogol.SQLAdmin.Types
     -- ** DatabaseInstance_InstanceType
     DatabaseInstance_InstanceType (..),
 
+    -- ** DatabaseInstance_SqlNetworkArchitecture
+    DatabaseInstance_SqlNetworkArchitecture (..),
+
     -- ** DatabaseInstance_State
     DatabaseInstance_State (..),
 
     -- ** DatabaseInstance_SuspensionReasonItem
     DatabaseInstance_SuspensionReasonItem (..),
 
+    -- ** DatabaseInstance_Tags
+    DatabaseInstance_Tags (..),
+    newDatabaseInstance_Tags,
+
     -- ** DatabasesListResponse
     DatabasesListResponse (..),
     newDatabasesListResponse,
+
+    -- ** DemoteContext
+    DemoteContext (..),
+    newDemoteContext,
 
     -- ** DemoteMasterConfiguration
     DemoteMasterConfiguration (..),
@@ -158,6 +209,20 @@ module Gogol.SQLAdmin.Types
     DiskEncryptionStatus (..),
     newDiskEncryptionStatus,
 
+    -- ** DnsNameMapping
+    DnsNameMapping (..),
+    newDnsNameMapping,
+
+    -- ** DnsNameMapping_ConnectionType
+    DnsNameMapping_ConnectionType (..),
+
+    -- ** DnsNameMapping_DnsScope
+    DnsNameMapping_DnsScope (..),
+
+    -- ** Empty
+    Empty (..),
+    newEmpty,
+
     -- ** ExportContext
     ExportContext (..),
     newExportContext,
@@ -165,6 +230,9 @@ module Gogol.SQLAdmin.Types
     -- ** ExportContext_BakExportOptions
     ExportContext_BakExportOptions (..),
     newExportContext_BakExportOptions,
+
+    -- ** ExportContext_BakExportOptions_BakType
+    ExportContext_BakExportOptions_BakType (..),
 
     -- ** ExportContext_CsvExportOptions
     ExportContext_CsvExportOptions (..),
@@ -180,6 +248,18 @@ module Gogol.SQLAdmin.Types
     -- ** ExportContext_SqlExportOptions_MysqlExportOptions
     ExportContext_SqlExportOptions_MysqlExportOptions (..),
     newExportContext_SqlExportOptions_MysqlExportOptions,
+
+    -- ** ExportContext_SqlExportOptions_PostgresExportOptions
+    ExportContext_SqlExportOptions_PostgresExportOptions (..),
+    newExportContext_SqlExportOptions_PostgresExportOptions,
+
+    -- ** ExportContext_TdeExportOptions
+    ExportContext_TdeExportOptions (..),
+    newExportContext_TdeExportOptions,
+
+    -- ** ExternalSyncSelectedObject
+    ExternalSyncSelectedObject (..),
+    newExternalSyncSelectedObject,
 
     -- ** FailoverContext
     FailoverContext (..),
@@ -199,6 +279,10 @@ module Gogol.SQLAdmin.Types
     FlagsListResponse (..),
     newFlagsListResponse,
 
+    -- ** GeminiInstanceConfig
+    GeminiInstanceConfig (..),
+    newGeminiInstanceConfig,
+
     -- ** GenerateEphemeralCertRequest
     GenerateEphemeralCertRequest (..),
     newGenerateEphemeralCertRequest,
@@ -215,6 +299,9 @@ module Gogol.SQLAdmin.Types
     ImportContext_BakImportOptions (..),
     newImportContext_BakImportOptions,
 
+    -- ** ImportContext_BakImportOptions_BakType
+    ImportContext_BakImportOptions_BakType (..),
+
     -- ** ImportContext_BakImportOptions_EncryptionOptions
     ImportContext_BakImportOptions_EncryptionOptions (..),
     newImportContext_BakImportOptions_EncryptionOptions,
@@ -226,6 +313,18 @@ module Gogol.SQLAdmin.Types
     -- ** ImportContext_FileType
     ImportContext_FileType (..),
 
+    -- ** ImportContext_SqlImportOptions
+    ImportContext_SqlImportOptions (..),
+    newImportContext_SqlImportOptions,
+
+    -- ** ImportContext_SqlImportOptions_PostgresImportOptions
+    ImportContext_SqlImportOptions_PostgresImportOptions (..),
+    newImportContext_SqlImportOptions_PostgresImportOptions,
+
+    -- ** ImportContext_TdeImportOptions
+    ImportContext_TdeImportOptions (..),
+    newImportContext_TdeImportOptions,
+
     -- ** InsightsConfig
     InsightsConfig (..),
     newInsightsConfig,
@@ -234,6 +333,10 @@ module Gogol.SQLAdmin.Types
     InstanceReference (..),
     newInstanceReference,
 
+    -- ** InstancesAcquireSsrsLeaseRequest
+    InstancesAcquireSsrsLeaseRequest (..),
+    newInstancesAcquireSsrsLeaseRequest,
+
     -- ** InstancesCloneRequest
     InstancesCloneRequest (..),
     newInstancesCloneRequest,
@@ -241,6 +344,10 @@ module Gogol.SQLAdmin.Types
     -- ** InstancesDemoteMasterRequest
     InstancesDemoteMasterRequest (..),
     newInstancesDemoteMasterRequest,
+
+    -- ** InstancesDemoteRequest
+    InstancesDemoteRequest (..),
+    newInstancesDemoteRequest,
 
     -- ** InstancesExportRequest
     InstancesExportRequest (..),
@@ -262,6 +369,14 @@ module Gogol.SQLAdmin.Types
     InstancesListServerCasResponse (..),
     newInstancesListServerCasResponse,
 
+    -- ** InstancesListServerCertificatesResponse
+    InstancesListServerCertificatesResponse (..),
+    newInstancesListServerCertificatesResponse,
+
+    -- ** InstancesReencryptRequest
+    InstancesReencryptRequest (..),
+    newInstancesReencryptRequest,
+
     -- ** InstancesRestoreBackupRequest
     InstancesRestoreBackupRequest (..),
     newInstancesRestoreBackupRequest,
@@ -270,13 +385,27 @@ module Gogol.SQLAdmin.Types
     InstancesRotateServerCaRequest (..),
     newInstancesRotateServerCaRequest,
 
+    -- ** InstancesRotateServerCertificateRequest
+    InstancesRotateServerCertificateRequest (..),
+    newInstancesRotateServerCertificateRequest,
+
     -- ** InstancesTruncateLogRequest
     InstancesTruncateLogRequest (..),
     newInstancesTruncateLogRequest,
 
+    -- ** Interval
+    Interval (..),
+    newInterval,
+
     -- ** IpConfiguration
     IpConfiguration (..),
     newIpConfiguration,
+
+    -- ** IpConfiguration_ServerCaMode
+    IpConfiguration_ServerCaMode (..),
+
+    -- ** IpConfiguration_SslMode
+    IpConfiguration_SslMode (..),
 
     -- ** IpMapping
     IpMapping (..),
@@ -284,6 +413,10 @@ module Gogol.SQLAdmin.Types
 
     -- ** IpMapping_Type
     IpMapping_Type (..),
+
+    -- ** ListBackupsResponse
+    ListBackupsResponse (..),
+    newListBackupsResponse,
 
     -- ** LocationPreference
     LocationPreference (..),
@@ -307,6 +440,9 @@ module Gogol.SQLAdmin.Types
     -- ** OnPremisesConfiguration
     OnPremisesConfiguration (..),
     newOnPremisesConfiguration,
+
+    -- ** OnPremisesConfiguration_SslOption
+    OnPremisesConfiguration_SslOption (..),
 
     -- ** Operation
     Operation (..),
@@ -349,9 +485,21 @@ module Gogol.SQLAdmin.Types
     PerformDiskShrinkContext (..),
     newPerformDiskShrinkContext,
 
+    -- ** PscAutoConnectionConfig
+    PscAutoConnectionConfig (..),
+    newPscAutoConnectionConfig,
+
+    -- ** PscConfig
+    PscConfig (..),
+    newPscConfig,
+
     -- ** ReplicaConfiguration
     ReplicaConfiguration (..),
     newReplicaConfiguration,
+
+    -- ** ReplicationCluster
+    ReplicationCluster (..),
+    newReplicationCluster,
 
     -- ** Reschedule
     Reschedule (..),
@@ -368,6 +516,14 @@ module Gogol.SQLAdmin.Types
     RotateServerCaContext (..),
     newRotateServerCaContext,
 
+    -- ** RotateServerCertificateContext
+    RotateServerCertificateContext (..),
+    newRotateServerCertificateContext,
+
+    -- ** SelectedObjects
+    SelectedObjects (..),
+    newSelectedObjects,
+
     -- ** Settings
     Settings (..),
     newSettings,
@@ -383,6 +539,9 @@ module Gogol.SQLAdmin.Types
 
     -- ** Settings_DataDiskType
     Settings_DataDiskType (..),
+
+    -- ** Settings_Edition
+    Settings_Edition (..),
 
     -- ** Settings_PricingPlan
     Settings_PricingPlan (..),
@@ -405,9 +564,21 @@ module Gogol.SQLAdmin.Types
     -- ** SqlExternalSyncSettingError_Type
     SqlExternalSyncSettingError_Type (..),
 
+    -- ** SqlInstancesAcquireSsrsLeaseResponse
+    SqlInstancesAcquireSsrsLeaseResponse (..),
+    newSqlInstancesAcquireSsrsLeaseResponse,
+
     -- ** SqlInstancesGetDiskShrinkConfigResponse
     SqlInstancesGetDiskShrinkConfigResponse (..),
     newSqlInstancesGetDiskShrinkConfigResponse,
+
+    -- ** SqlInstancesGetLatestRecoveryTimeResponse
+    SqlInstancesGetLatestRecoveryTimeResponse (..),
+    newSqlInstancesGetLatestRecoveryTimeResponse,
+
+    -- ** SqlInstancesReleaseSsrsLeaseResponse
+    SqlInstancesReleaseSsrsLeaseResponse (..),
+    newSqlInstancesReleaseSsrsLeaseResponse,
 
     -- ** SqlInstancesRescheduleMaintenanceRequestBody
     SqlInstancesRescheduleMaintenanceRequestBody (..),
@@ -421,15 +592,27 @@ module Gogol.SQLAdmin.Types
     SqlInstancesStartExternalSyncRequest (..),
     newSqlInstancesStartExternalSyncRequest,
 
+    -- ** SqlInstancesStartExternalSyncRequest_MigrationType
+    SqlInstancesStartExternalSyncRequest_MigrationType (..),
+
     -- ** SqlInstancesStartExternalSyncRequest_SyncMode
     SqlInstancesStartExternalSyncRequest_SyncMode (..),
+
+    -- ** SqlInstancesStartExternalSyncRequest_SyncParallelLevel
+    SqlInstancesStartExternalSyncRequest_SyncParallelLevel (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest
     SqlInstancesVerifyExternalSyncSettingsRequest (..),
     newSqlInstancesVerifyExternalSyncSettingsRequest,
 
+    -- ** SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType
+    SqlInstancesVerifyExternalSyncSettingsRequest_MigrationType (..),
+
     -- ** SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode
     SqlInstancesVerifyExternalSyncSettingsRequest_SyncMode (..),
+
+    -- ** SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel
+    SqlInstancesVerifyExternalSyncSettingsRequest_SyncParallelLevel (..),
 
     -- ** SqlInstancesVerifyExternalSyncSettingsResponse
     SqlInstancesVerifyExternalSyncSettingsResponse (..),
@@ -457,6 +640,13 @@ module Gogol.SQLAdmin.Types
     -- ** SqlServerUserDetails
     SqlServerUserDetails (..),
     newSqlServerUserDetails,
+
+    -- ** SqlSubOperationType
+    SqlSubOperationType (..),
+    newSqlSubOperationType,
+
+    -- ** SqlSubOperationType_MaintenanceType
+    SqlSubOperationType_MaintenanceType (..),
 
     -- ** SslCert
     SslCert (..),
@@ -518,7 +708,7 @@ module Gogol.SQLAdmin.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Internal.Product
 import Gogol.SQLAdmin.Internal.Sum
 
@@ -530,7 +720,9 @@ sQLAdminService =
     "sqladmin.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your Google SQL Service instances
-type Sqlservice'Admin = "https://www.googleapis.com/auth/sqlservice.admin"
+type Sqlservice'Admin =
+  "https://www.googleapis.com/auth/sqlservice.admin"

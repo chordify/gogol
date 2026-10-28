@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQueryDataTransfer.Projects.Locations.TransferConfigs.Patch
 where
 
 import Gogol.BigQueryDataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquerydatatransfer.projects.locations.transferConfigs.patch@ method which the
 -- 'BigQueryDataTransferProjectsLocationsTransferConfigsPatch' request conforms to.
@@ -68,11 +66,11 @@ data BigQueryDataTransferProjectsLocationsTransferConfigsPatch = BigQueryDataTra
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source_scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
+    -- | Deprecated: Authorization code was required when @transferConfig.dataSourceId@ is \'youtube/channel\' but it is no longer used in any data sources. Use @version_info@ instead. Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, make a request to the following URL: https:\/\/bigquery.cloud.google.com\/datatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
     authorizationCode :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the transfer config. Transfer config names have the form @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@. Where @config_id@ is usually a uuid, even though it is not guaranteed or required. The name is ignored when creating a transfer config.
+    -- | Identifier. The resource name of the transfer config. Transfer config names have the form either @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/transferConfigs\/{config_id}@, where @config_id@ is usually a UUID, even though it is not guaranteed or required. The name is ignored when creating a transfer config.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: TransferConfig,
@@ -84,40 +82,42 @@ data BigQueryDataTransferProjectsLocationsTransferConfigsPatch = BigQueryDataTra
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Optional version info. This is required only if @transferConfig.dataSourceId@ is not \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
+    -- | Optional version info. This parameter replaces @authorization_code@ which is no longer used in any data sources. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' /or/ new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, make a request to the following URL: https:\/\/bigquery.cloud.google.com\/datatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to update the transfer config.
     versionInfo :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryDataTransferProjectsLocationsTransferConfigsPatch' with the minimum fields required to make a request.
 newBigQueryDataTransferProjectsLocationsTransferConfigsPatch ::
-  -- |  The resource name of the transfer config. Transfer config names have the form @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@. Where @config_id@ is usually a uuid, even though it is not guaranteed or required. The name is ignored when creating a transfer config. See 'name'.
+  -- |  Identifier. The resource name of the transfer config. Transfer config names have the form either @projects\/{project_id}\/locations\/{region}\/transferConfigs\/{config_id}@ or @projects\/{project_id}\/transferConfigs\/{config_id}@, where @config_id@ is usually a UUID, even though it is not guaranteed or required. The name is ignored when creating a transfer config. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   TransferConfig ->
   BigQueryDataTransferProjectsLocationsTransferConfigsPatch
-newBigQueryDataTransferProjectsLocationsTransferConfigsPatch name payload =
-  BigQueryDataTransferProjectsLocationsTransferConfigsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      authorizationCode = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      serviceAccountName = Core.Nothing,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      versionInfo = Core.Nothing
-    }
+newBigQueryDataTransferProjectsLocationsTransferConfigsPatch
+  name
+  payload =
+    BigQueryDataTransferProjectsLocationsTransferConfigsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        authorizationCode = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        serviceAccountName = Core.Nothing,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        versionInfo = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BigQueryDataTransferProjectsLocationsTransferConfigsPatch
   where
   type
-    Rs
-      BigQueryDataTransferProjectsLocationsTransferConfigsPatch =
+    Rs BigQueryDataTransferProjectsLocationsTransferConfigsPatch =
       TransferConfig
   type
     Scopes

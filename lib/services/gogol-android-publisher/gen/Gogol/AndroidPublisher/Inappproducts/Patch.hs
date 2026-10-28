@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches an in-app product (i.e. a managed product or a subscriptions).
+-- Patches an in-app product (a managed product or a subscription). This method should no longer be used to update subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.patch@.
 module Gogol.AndroidPublisher.Inappproducts.Patch
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Inappproducts.Patch
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.inappproducts.patch@ method which the
 -- 'AndroidPublisherInappproductsPatch' request conforms to.
@@ -55,13 +53,16 @@ type AndroidPublisherInappproductsPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "autoConvertMissingPrices" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "latencyTolerance"
+              InappproductsPatchLatencyTolerance
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] InAppProduct
     Core.:> Core.Patch '[Core.JSON] InAppProduct
 
--- | Patches an in-app product (i.e. a managed product or a subscriptions).
+-- | Patches an in-app product (a managed product or a subscription). This method should no longer be used to update subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ 'newAndroidPublisherInappproductsPatch' smart constructor.
 data AndroidPublisherInappproductsPatch = AndroidPublisherInappproductsPatch
@@ -73,6 +74,8 @@ data AndroidPublisherInappproductsPatch = AndroidPublisherInappproductsPatch
     autoConvertMissingPrices :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+    latencyTolerance :: (Core.Maybe InappproductsPatchLatencyTolerance),
     -- | Package name of the app.
     packageName :: Core.Text,
     -- | Multipart request metadata.
@@ -101,6 +104,7 @@ newAndroidPublisherInappproductsPatch packageName payload sku =
       accessToken = Core.Nothing,
       autoConvertMissingPrices = Core.Nothing,
       callback = Core.Nothing,
+      latencyTolerance = Core.Nothing,
       packageName = packageName,
       payload = payload,
       sku = sku,
@@ -108,13 +112,8 @@ newAndroidPublisherInappproductsPatch packageName payload sku =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsPatch
-  where
-  type
-    Rs AndroidPublisherInappproductsPatch =
-      InAppProduct
+instance Core.GoogleRequest AndroidPublisherInappproductsPatch where
+  type Rs AndroidPublisherInappproductsPatch = InAppProduct
   type
     Scopes AndroidPublisherInappproductsPatch =
       '[Androidpublisher'FullControl]
@@ -126,6 +125,7 @@ instance
       accessToken
       autoConvertMissingPrices
       callback
+      latencyTolerance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -135,7 +135,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AndroidPublisherInappproductsPatchResource
+              Core.Proxy AndroidPublisherInappproductsPatchResource
           )
           Core.mempty

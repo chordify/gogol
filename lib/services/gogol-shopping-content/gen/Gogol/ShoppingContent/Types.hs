@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ShoppingContent.Types
@@ -53,6 +51,10 @@ module Gogol.ShoppingContent.Types
     AccountAutomaticImprovements (..),
     newAccountAutomaticImprovements,
 
+    -- ** AccountBusinessIdentity
+    AccountBusinessIdentity (..),
+    newAccountBusinessIdentity,
+
     -- ** AccountBusinessInformation
     AccountBusinessInformation (..),
     newAccountBusinessInformation,
@@ -80,6 +82,10 @@ module Gogol.ShoppingContent.Types
     AccountIdentifier (..),
     newAccountIdentifier,
 
+    -- ** AccountIdentityType
+    AccountIdentityType (..),
+    newAccountIdentityType,
+
     -- ** AccountImageImprovements
     AccountImageImprovements (..),
     newAccountImageImprovements,
@@ -87,6 +93,17 @@ module Gogol.ShoppingContent.Types
     -- ** AccountImageImprovementsSettings
     AccountImageImprovementsSettings (..),
     newAccountImageImprovementsSettings,
+
+    -- ** AccountIssue
+    AccountIssue (..),
+    newAccountIssue,
+
+    -- ** AccountIssueImpact
+    AccountIssueImpact (..),
+    newAccountIssueImpact,
+
+    -- ** AccountIssueImpact_Severity
+    AccountIssueImpact_Severity (..),
 
     -- ** AccountItemUpdates
     AccountItemUpdates (..),
@@ -242,17 +259,29 @@ module Gogol.ShoppingContent.Types
     AccounttaxListResponse (..),
     newAccounttaxListResponse,
 
-    -- ** ActivateBuyOnGoogleProgramRequest
-    ActivateBuyOnGoogleProgramRequest (..),
-    newActivateBuyOnGoogleProgramRequest,
+    -- ** Action
+    Action (..),
+    newAction,
+
+    -- ** ActionFlow
+    ActionFlow (..),
+    newActionFlow,
+
+    -- ** ActionInput
+    ActionInput (..),
+    newActionInput,
+
+    -- ** ActionReason
+    ActionReason (..),
+    newActionReason,
 
     -- ** Address
     Address (..),
     newAddress,
 
-    -- ** Amount
-    Amount (..),
-    newAmount,
+    -- ** AlternateDisputeResolution
+    AlternateDisputeResolution (..),
+    newAlternateDisputeResolution,
 
     -- ** AttributionSettings
     AttributionSettings (..),
@@ -285,33 +314,39 @@ module Gogol.ShoppingContent.Types
     Brand (..),
     newBrand,
 
+    -- ** Breakdown
+    Breakdown (..),
+    newBreakdown,
+
+    -- ** BreakdownRegion
+    BreakdownRegion (..),
+    newBreakdownRegion,
+
+    -- ** BuiltInSimpleAction
+    BuiltInSimpleAction (..),
+    newBuiltInSimpleAction,
+
+    -- ** BuiltInSimpleAction_Type
+    BuiltInSimpleAction_Type (..),
+
+    -- ** BuiltInSimpleActionAdditionalContent
+    BuiltInSimpleActionAdditionalContent (..),
+    newBuiltInSimpleActionAdditionalContent,
+
+    -- ** BuiltInUserInputAction
+    BuiltInUserInputAction (..),
+    newBuiltInUserInputAction,
+
     -- ** BusinessDayConfig
     BusinessDayConfig (..),
     newBusinessDayConfig,
 
-    -- ** BuyOnGoogleProgramStatus
-    BuyOnGoogleProgramStatus (..),
-    newBuyOnGoogleProgramStatus,
+    -- ** Callout
+    Callout (..),
+    newCallout,
 
-    -- ** BuyOnGoogleProgramStatus_BusinessModelItem
-    BuyOnGoogleProgramStatus_BusinessModelItem (..),
-
-    -- ** BuyOnGoogleProgramStatus_OnlineSalesChannel
-    BuyOnGoogleProgramStatus_OnlineSalesChannel (..),
-
-    -- ** BuyOnGoogleProgramStatus_ParticipationStage
-    BuyOnGoogleProgramStatus_ParticipationStage (..),
-
-    -- ** CaptureOrderRequest
-    CaptureOrderRequest (..),
-    newCaptureOrderRequest,
-
-    -- ** CaptureOrderResponse
-    CaptureOrderResponse (..),
-    newCaptureOrderResponse,
-
-    -- ** CaptureOrderResponse_ExecutionStatus
-    CaptureOrderResponse_ExecutionStatus (..),
+    -- ** Callout_StyleHint
+    Callout_StyleHint (..),
 
     -- ** CarrierRate
     CarrierRate (..),
@@ -320,6 +355,26 @@ module Gogol.ShoppingContent.Types
     -- ** CarriersCarrier
     CarriersCarrier (..),
     newCarriersCarrier,
+
+    -- ** CheckoutSettings
+    CheckoutSettings (..),
+    newCheckoutSettings,
+
+    -- ** CheckoutSettings_EffectiveEnrollmentState
+    CheckoutSettings_EffectiveEnrollmentState (..),
+
+    -- ** CheckoutSettings_EffectiveReviewState
+    CheckoutSettings_EffectiveReviewState (..),
+
+    -- ** CheckoutSettings_EnrollmentState
+    CheckoutSettings_EnrollmentState (..),
+
+    -- ** CheckoutSettings_ReviewState
+    CheckoutSettings_ReviewState (..),
+
+    -- ** CloudExportAdditionalProperties
+    CloudExportAdditionalProperties (..),
+    newCloudExportAdditionalProperties,
 
     -- ** Collection
     Collection (..),
@@ -341,6 +396,13 @@ module Gogol.ShoppingContent.Types
     CollectionStatusItemLevelIssue (..),
     newCollectionStatusItemLevelIssue,
 
+    -- ** CompetitiveVisibility
+    CompetitiveVisibility (..),
+    newCompetitiveVisibility,
+
+    -- ** CompetitiveVisibility_TrafficSource
+    CompetitiveVisibility_TrafficSource (..),
+
     -- ** ConversionSource
     ConversionSource (..),
     newConversionSource,
@@ -355,10 +417,6 @@ module Gogol.ShoppingContent.Types
     -- ** CustomAttribute
     CustomAttribute (..),
     newCustomAttribute,
-
-    -- ** CustomerReturnReason
-    CustomerReturnReason (..),
-    newCustomerReturnReason,
 
     -- ** CutoffTime
     CutoffTime (..),
@@ -456,6 +514,10 @@ module Gogol.ShoppingContent.Types
     DeliveryTime (..),
     newDeliveryTime,
 
+    -- ** Distance
+    Distance (..),
+    newDistance,
+
     -- ** ECommercePlatformLinkInfo
     ECommercePlatformLinkInfo (..),
     newECommercePlatformLinkInfo,
@@ -467,6 +529,13 @@ module Gogol.ShoppingContent.Types
     -- ** Errors
     Errors (..),
     newErrors,
+
+    -- ** ExternalAction
+    ExternalAction (..),
+    newExternalAction,
+
+    -- ** ExternalAction_Type
+    ExternalAction_Type (..),
 
     -- ** FreeListingsProgramStatus
     FreeListingsProgramStatus (..),
@@ -491,6 +560,10 @@ module Gogol.ShoppingContent.Types
     -- ** FreeListingsProgramStatusReviewIneligibilityReasonDetails
     FreeListingsProgramStatusReviewIneligibilityReasonDetails (..),
     newFreeListingsProgramStatusReviewIneligibilityReasonDetails,
+
+    -- ** FreeShippingThreshold
+    FreeShippingThreshold (..),
+    newFreeShippingThreshold,
 
     -- ** GenerateRecommendationsResponse
     GenerateRecommendationsResponse (..),
@@ -520,24 +593,52 @@ module Gogol.ShoppingContent.Types
     HolidaysHoliday (..),
     newHolidaysHoliday,
 
-    -- ** InapplicabilityDetails
-    InapplicabilityDetails (..),
-    newInapplicabilityDetails,
+    -- ** InputField
+    InputField (..),
+    newInputField,
 
-    -- ** InapplicabilityDetails_InapplicableReason
-    InapplicabilityDetails_InapplicableReason (..),
+    -- ** InputFieldCheckboxInput
+    InputFieldCheckboxInput (..),
+    newInputFieldCheckboxInput,
+
+    -- ** InputFieldChoiceInput
+    InputFieldChoiceInput (..),
+    newInputFieldChoiceInput,
+
+    -- ** InputFieldChoiceInputChoiceInputOption
+    InputFieldChoiceInputChoiceInputOption (..),
+    newInputFieldChoiceInputChoiceInputOption,
+
+    -- ** InputFieldTextInput
+    InputFieldTextInput (..),
+    newInputFieldTextInput,
+
+    -- ** InputFieldTextInput_Type
+    InputFieldTextInput_Type (..),
+
+    -- ** InputValue
+    InputValue (..),
+    newInputValue,
+
+    -- ** InputValueCheckboxInputValue
+    InputValueCheckboxInputValue (..),
+    newInputValueCheckboxInputValue,
+
+    -- ** InputValueChoiceInputValue
+    InputValueChoiceInputValue (..),
+    newInputValueChoiceInputValue,
+
+    -- ** InputValueTextInputValue
+    InputValueTextInputValue (..),
+    newInputValueTextInputValue,
+
+    -- ** InsertCheckoutSettingsRequest
+    InsertCheckoutSettingsRequest (..),
+    newInsertCheckoutSettingsRequest,
 
     -- ** Installment
     Installment (..),
     newInstallment,
-
-    -- ** InvoiceSummary
-    InvoiceSummary (..),
-    newInvoiceSummary,
-
-    -- ** InvoiceSummaryAdditionalChargeSummary
-    InvoiceSummaryAdditionalChargeSummary (..),
-    newInvoiceSummaryAdditionalChargeSummary,
 
     -- ** LabelIds
     LabelIds (..),
@@ -554,6 +655,10 @@ module Gogol.ShoppingContent.Types
     -- ** LiaInventorySettings
     LiaInventorySettings (..),
     newLiaInventorySettings,
+
+    -- ** LiaOmnichannelExperience
+    LiaOmnichannelExperience (..),
+    newLiaOmnichannelExperience,
 
     -- ** LiaOnDisplayToOrderSettings
     LiaOnDisplayToOrderSettings (..),
@@ -647,21 +752,13 @@ module Gogol.ShoppingContent.Types
     ListMethodQuotasResponse (..),
     newListMethodQuotasResponse,
 
+    -- ** ListPromotionResponse
+    ListPromotionResponse (..),
+    newListPromotionResponse,
+
     -- ** ListRegionsResponse
     ListRegionsResponse (..),
     newListRegionsResponse,
-
-    -- ** ListRepricingProductReportsResponse
-    ListRepricingProductReportsResponse (..),
-    newListRepricingProductReportsResponse,
-
-    -- ** ListRepricingRuleReportsResponse
-    ListRepricingRuleReportsResponse (..),
-    newListRepricingRuleReportsResponse,
-
-    -- ** ListRepricingRulesResponse
-    ListRepricingRulesResponse (..),
-    newListRepricingRulesResponse,
 
     -- ** ListReturnPolicyOnlineResponse
     ListReturnPolicyOnlineResponse (..),
@@ -691,25 +788,13 @@ module Gogol.ShoppingContent.Types
     LocationIdSet (..),
     newLocationIdSet,
 
-    -- ** LoyaltyPoints
-    LoyaltyPoints (..),
-    newLoyaltyPoints,
+    -- ** LoyaltyProgram
+    LoyaltyProgram (..),
+    newLoyaltyProgram,
 
     -- ** MerchantCenterDestination
     MerchantCenterDestination (..),
     newMerchantCenterDestination,
-
-    -- ** MerchantOrderReturn
-    MerchantOrderReturn (..),
-    newMerchantOrderReturn,
-
-    -- ** MerchantOrderReturnItem
-    MerchantOrderReturnItem (..),
-    newMerchantOrderReturnItem,
-
-    -- ** MerchantRejectionReason
-    MerchantRejectionReason (..),
-    newMerchantRejectionReason,
 
     -- ** MethodQuota
     MethodQuota (..),
@@ -726,126 +811,6 @@ module Gogol.ShoppingContent.Types
     -- ** MinimumOrderValueTableStoreCodeSetWithMov
     MinimumOrderValueTableStoreCodeSetWithMov (..),
     newMinimumOrderValueTableStoreCodeSetWithMov,
-
-    -- ** MonetaryAmount
-    MonetaryAmount (..),
-    newMonetaryAmount,
-
-    -- ** OnboardBuyOnGoogleProgramRequest
-    OnboardBuyOnGoogleProgramRequest (..),
-    newOnboardBuyOnGoogleProgramRequest,
-
-    -- ** Order
-    Order (..),
-    newOrder,
-
-    -- ** OrderAddress
-    OrderAddress (..),
-    newOrderAddress,
-
-    -- ** OrderCancellation
-    OrderCancellation (..),
-    newOrderCancellation,
-
-    -- ** OrderCustomer
-    OrderCustomer (..),
-    newOrderCustomer,
-
-    -- ** OrderCustomerLoyaltyInfo
-    OrderCustomerLoyaltyInfo (..),
-    newOrderCustomerLoyaltyInfo,
-
-    -- ** OrderCustomerMarketingRightsInfo
-    OrderCustomerMarketingRightsInfo (..),
-    newOrderCustomerMarketingRightsInfo,
-
-    -- ** OrderDeliveryDetails
-    OrderDeliveryDetails (..),
-    newOrderDeliveryDetails,
-
-    -- ** OrderLineItem
-    OrderLineItem (..),
-    newOrderLineItem,
-
-    -- ** OrderLineItemAdjustment
-    OrderLineItemAdjustment (..),
-    newOrderLineItemAdjustment,
-
-    -- ** OrderLineItemProduct
-    OrderLineItemProduct (..),
-    newOrderLineItemProduct,
-
-    -- ** OrderLineItemProductFee
-    OrderLineItemProductFee (..),
-    newOrderLineItemProductFee,
-
-    -- ** OrderLineItemProductVariantAttribute
-    OrderLineItemProductVariantAttribute (..),
-    newOrderLineItemProductVariantAttribute,
-
-    -- ** OrderLineItemReturnInfo
-    OrderLineItemReturnInfo (..),
-    newOrderLineItemReturnInfo,
-
-    -- ** OrderLineItemShippingDetails
-    OrderLineItemShippingDetails (..),
-    newOrderLineItemShippingDetails,
-
-    -- ** OrderLineItemShippingDetailsMethod
-    OrderLineItemShippingDetailsMethod (..),
-    newOrderLineItemShippingDetailsMethod,
-
-    -- ** OrderMerchantProvidedAnnotation
-    OrderMerchantProvidedAnnotation (..),
-    newOrderMerchantProvidedAnnotation,
-
-    -- ** OrderOrderAnnotation
-    OrderOrderAnnotation (..),
-    newOrderOrderAnnotation,
-
-    -- ** OrderPickupDetails
-    OrderPickupDetails (..),
-    newOrderPickupDetails,
-
-    -- ** OrderPickupDetailsCollector
-    OrderPickupDetailsCollector (..),
-    newOrderPickupDetailsCollector,
-
-    -- ** OrderPromotion
-    OrderPromotion (..),
-    newOrderPromotion,
-
-    -- ** OrderPromotionItem
-    OrderPromotionItem (..),
-    newOrderPromotionItem,
-
-    -- ** OrderRefund
-    OrderRefund (..),
-    newOrderRefund,
-
-    -- ** OrderReportDisbursement
-    OrderReportDisbursement (..),
-    newOrderReportDisbursement,
-
-    -- ** OrderReportTransaction
-    OrderReportTransaction (..),
-    newOrderReportTransaction,
-
-    -- ** OrderReturn
-    OrderReturn (..),
-    newOrderReturn,
-
-    -- ** OrderShipment
-    OrderShipment (..),
-    newOrderShipment,
-
-    -- ** OrderShipmentLineItemShipment
-    OrderShipmentLineItemShipment (..),
-    newOrderShipmentLineItemShipment,
-
-    -- ** OrderShipmentScheduledDeliveryDetails
-    OrderShipmentScheduledDeliveryDetails (..),
-    newOrderShipmentScheduledDeliveryDetails,
 
     -- ** OrderTrackingSignal
     OrderTrackingSignal (..),
@@ -865,254 +830,6 @@ module Gogol.ShoppingContent.Types
 
     -- ** OrderTrackingSignalShippingInfo_ShippingStatus
     OrderTrackingSignalShippingInfo_ShippingStatus (..),
-
-    -- ** OrderinvoicesCreateChargeInvoiceRequest
-    OrderinvoicesCreateChargeInvoiceRequest (..),
-    newOrderinvoicesCreateChargeInvoiceRequest,
-
-    -- ** OrderinvoicesCreateChargeInvoiceResponse
-    OrderinvoicesCreateChargeInvoiceResponse (..),
-    newOrderinvoicesCreateChargeInvoiceResponse,
-
-    -- ** OrderinvoicesCreateRefundInvoiceRequest
-    OrderinvoicesCreateRefundInvoiceRequest (..),
-    newOrderinvoicesCreateRefundInvoiceRequest,
-
-    -- ** OrderinvoicesCreateRefundInvoiceResponse
-    OrderinvoicesCreateRefundInvoiceResponse (..),
-    newOrderinvoicesCreateRefundInvoiceResponse,
-
-    -- ** OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption,
-
-    -- ** OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption,
-
-    -- ** OrderreportsListDisbursementsResponse
-    OrderreportsListDisbursementsResponse (..),
-    newOrderreportsListDisbursementsResponse,
-
-    -- ** OrderreportsListTransactionsResponse
-    OrderreportsListTransactionsResponse (..),
-    newOrderreportsListTransactionsResponse,
-
-    -- ** OrderreturnsAcknowledgeRequest
-    OrderreturnsAcknowledgeRequest (..),
-    newOrderreturnsAcknowledgeRequest,
-
-    -- ** OrderreturnsAcknowledgeResponse
-    OrderreturnsAcknowledgeResponse (..),
-    newOrderreturnsAcknowledgeResponse,
-
-    -- ** OrderreturnsCreateOrderReturnRequest
-    OrderreturnsCreateOrderReturnRequest (..),
-    newOrderreturnsCreateOrderReturnRequest,
-
-    -- ** OrderreturnsCreateOrderReturnResponse
-    OrderreturnsCreateOrderReturnResponse (..),
-    newOrderreturnsCreateOrderReturnResponse,
-
-    -- ** OrderreturnsLineItem
-    OrderreturnsLineItem (..),
-    newOrderreturnsLineItem,
-
-    -- ** OrderreturnsListResponse
-    OrderreturnsListResponse (..),
-    newOrderreturnsListResponse,
-
-    -- ** OrderreturnsPartialRefund
-    OrderreturnsPartialRefund (..),
-    newOrderreturnsPartialRefund,
-
-    -- ** OrderreturnsProcessRequest
-    OrderreturnsProcessRequest (..),
-    newOrderreturnsProcessRequest,
-
-    -- ** OrderreturnsProcessResponse
-    OrderreturnsProcessResponse (..),
-    newOrderreturnsProcessResponse,
-
-    -- ** OrderreturnsRefundOperation
-    OrderreturnsRefundOperation (..),
-    newOrderreturnsRefundOperation,
-
-    -- ** OrderreturnsRejectOperation
-    OrderreturnsRejectOperation (..),
-    newOrderreturnsRejectOperation,
-
-    -- ** OrderreturnsReturnItem
-    OrderreturnsReturnItem (..),
-    newOrderreturnsReturnItem,
-
-    -- ** OrdersAcknowledgeRequest
-    OrdersAcknowledgeRequest (..),
-    newOrdersAcknowledgeRequest,
-
-    -- ** OrdersAcknowledgeResponse
-    OrdersAcknowledgeResponse (..),
-    newOrdersAcknowledgeResponse,
-
-    -- ** OrdersAdvanceTestOrderResponse
-    OrdersAdvanceTestOrderResponse (..),
-    newOrdersAdvanceTestOrderResponse,
-
-    -- ** OrdersCancelLineItemRequest
-    OrdersCancelLineItemRequest (..),
-    newOrdersCancelLineItemRequest,
-
-    -- ** OrdersCancelLineItemResponse
-    OrdersCancelLineItemResponse (..),
-    newOrdersCancelLineItemResponse,
-
-    -- ** OrdersCancelRequest
-    OrdersCancelRequest (..),
-    newOrdersCancelRequest,
-
-    -- ** OrdersCancelResponse
-    OrdersCancelResponse (..),
-    newOrdersCancelResponse,
-
-    -- ** OrdersCancelTestOrderByCustomerRequest
-    OrdersCancelTestOrderByCustomerRequest (..),
-    newOrdersCancelTestOrderByCustomerRequest,
-
-    -- ** OrdersCancelTestOrderByCustomerResponse
-    OrdersCancelTestOrderByCustomerResponse (..),
-    newOrdersCancelTestOrderByCustomerResponse,
-
-    -- ** OrdersCreateTestOrderRequest
-    OrdersCreateTestOrderRequest (..),
-    newOrdersCreateTestOrderRequest,
-
-    -- ** OrdersCreateTestOrderResponse
-    OrdersCreateTestOrderResponse (..),
-    newOrdersCreateTestOrderResponse,
-
-    -- ** OrdersCreateTestReturnRequest
-    OrdersCreateTestReturnRequest (..),
-    newOrdersCreateTestReturnRequest,
-
-    -- ** OrdersCreateTestReturnResponse
-    OrdersCreateTestReturnResponse (..),
-    newOrdersCreateTestReturnResponse,
-
-    -- ** OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (..),
-    newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem,
-
-    -- ** OrdersCustomBatchRequestEntryRefundItemItem
-    OrdersCustomBatchRequestEntryRefundItemItem (..),
-    newOrdersCustomBatchRequestEntryRefundItemItem,
-
-    -- ** OrdersCustomBatchRequestEntryRefundItemShipping
-    OrdersCustomBatchRequestEntryRefundItemShipping (..),
-    newOrdersCustomBatchRequestEntryRefundItemShipping,
-
-    -- ** OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (..),
-    newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo,
-
-    -- ** OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails (..),
-    newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails,
-
-    -- ** OrdersGetByMerchantOrderIdResponse
-    OrdersGetByMerchantOrderIdResponse (..),
-    newOrdersGetByMerchantOrderIdResponse,
-
-    -- ** OrdersGetTestOrderTemplateResponse
-    OrdersGetTestOrderTemplateResponse (..),
-    newOrdersGetTestOrderTemplateResponse,
-
-    -- ** OrdersInStoreRefundLineItemRequest
-    OrdersInStoreRefundLineItemRequest (..),
-    newOrdersInStoreRefundLineItemRequest,
-
-    -- ** OrdersInStoreRefundLineItemResponse
-    OrdersInStoreRefundLineItemResponse (..),
-    newOrdersInStoreRefundLineItemResponse,
-
-    -- ** OrdersListResponse
-    OrdersListResponse (..),
-    newOrdersListResponse,
-
-    -- ** OrdersRefundItemRequest
-    OrdersRefundItemRequest (..),
-    newOrdersRefundItemRequest,
-
-    -- ** OrdersRefundItemResponse
-    OrdersRefundItemResponse (..),
-    newOrdersRefundItemResponse,
-
-    -- ** OrdersRefundOrderRequest
-    OrdersRefundOrderRequest (..),
-    newOrdersRefundOrderRequest,
-
-    -- ** OrdersRefundOrderResponse
-    OrdersRefundOrderResponse (..),
-    newOrdersRefundOrderResponse,
-
-    -- ** OrdersRejectReturnLineItemRequest
-    OrdersRejectReturnLineItemRequest (..),
-    newOrdersRejectReturnLineItemRequest,
-
-    -- ** OrdersRejectReturnLineItemResponse
-    OrdersRejectReturnLineItemResponse (..),
-    newOrdersRejectReturnLineItemResponse,
-
-    -- ** OrdersReturnRefundLineItemRequest
-    OrdersReturnRefundLineItemRequest (..),
-    newOrdersReturnRefundLineItemRequest,
-
-    -- ** OrdersReturnRefundLineItemResponse
-    OrdersReturnRefundLineItemResponse (..),
-    newOrdersReturnRefundLineItemResponse,
-
-    -- ** OrdersSetLineItemMetadataRequest
-    OrdersSetLineItemMetadataRequest (..),
-    newOrdersSetLineItemMetadataRequest,
-
-    -- ** OrdersSetLineItemMetadataResponse
-    OrdersSetLineItemMetadataResponse (..),
-    newOrdersSetLineItemMetadataResponse,
-
-    -- ** OrdersShipLineItemsRequest
-    OrdersShipLineItemsRequest (..),
-    newOrdersShipLineItemsRequest,
-
-    -- ** OrdersShipLineItemsResponse
-    OrdersShipLineItemsResponse (..),
-    newOrdersShipLineItemsResponse,
-
-    -- ** OrdersUpdateLineItemShippingDetailsRequest
-    OrdersUpdateLineItemShippingDetailsRequest (..),
-    newOrdersUpdateLineItemShippingDetailsRequest,
-
-    -- ** OrdersUpdateLineItemShippingDetailsResponse
-    OrdersUpdateLineItemShippingDetailsResponse (..),
-    newOrdersUpdateLineItemShippingDetailsResponse,
-
-    -- ** OrdersUpdateMerchantOrderIdRequest
-    OrdersUpdateMerchantOrderIdRequest (..),
-    newOrdersUpdateMerchantOrderIdRequest,
-
-    -- ** OrdersUpdateMerchantOrderIdResponse
-    OrdersUpdateMerchantOrderIdResponse (..),
-    newOrdersUpdateMerchantOrderIdResponse,
-
-    -- ** OrdersUpdateShipmentRequest
-    OrdersUpdateShipmentRequest (..),
-    newOrdersUpdateShipmentRequest,
-
-    -- ** OrdersUpdateShipmentResponse
-    OrdersUpdateShipmentResponse (..),
-    newOrdersUpdateShipmentResponse,
-
-    -- ** PauseBuyOnGoogleProgramRequest
-    PauseBuyOnGoogleProgramRequest (..),
-    newPauseBuyOnGoogleProgramRequest,
 
     -- ** PaymentServiceProviderLinkInfo
     PaymentServiceProviderLinkInfo (..),
@@ -1206,13 +923,16 @@ module Gogol.ShoppingContent.Types
     PriceInsights (..),
     newPriceInsights,
 
+    -- ** PriceInsights_Effectiveness
+    PriceInsights_Effectiveness (..),
+
     -- ** Product
     Product (..),
     newProduct,
 
-    -- ** ProductAmount
-    ProductAmount (..),
-    newProductAmount,
+    -- ** ProductCertification
+    ProductCertification (..),
+    newProductCertification,
 
     -- ** ProductCluster
     ProductCluster (..),
@@ -1244,6 +964,17 @@ module Gogol.ShoppingContent.Types
     ProductId (..),
     newProductId,
 
+    -- ** ProductIssue
+    ProductIssue (..),
+    newProductIssue,
+
+    -- ** ProductIssueImpact
+    ProductIssueImpact (..),
+    newProductIssueImpact,
+
+    -- ** ProductIssueImpact_Severity
+    ProductIssueImpact_Severity (..),
+
     -- ** ProductProductDetail
     ProductProductDetail (..),
     newProductProductDetail,
@@ -1272,9 +1003,24 @@ module Gogol.ShoppingContent.Types
     ProductStatusItemLevelIssue (..),
     newProductStatusItemLevelIssue,
 
+    -- ** ProductStructuredDescription
+    ProductStructuredDescription (..),
+    newProductStructuredDescription,
+
+    -- ** ProductStructuredTitle
+    ProductStructuredTitle (..),
+    newProductStructuredTitle,
+
     -- ** ProductSubscriptionCost
     ProductSubscriptionCost (..),
     newProductSubscriptionCost,
+
+    -- ** ProductSustainabilityIncentive
+    ProductSustainabilityIncentive (..),
+    newProductSustainabilityIncentive,
+
+    -- ** ProductSustainabilityIncentive_Type
+    ProductSustainabilityIncentive_Type (..),
 
     -- ** ProductTax
     ProductTax (..),
@@ -1297,6 +1043,9 @@ module Gogol.ShoppingContent.Types
 
     -- ** ProductView_Channel
     ProductView_Channel (..),
+
+    -- ** ProductView_ClickPotential
+    ProductView_ClickPotential (..),
 
     -- ** ProductViewItemIssue
     ProductViewItemIssue (..),
@@ -1428,10 +1177,6 @@ module Gogol.ShoppingContent.Types
     -- ** RecommendationDescription_Type
     RecommendationDescription_Type (..),
 
-    -- ** RefundReason
-    RefundReason (..),
-    newRefundReason,
-
     -- ** Region
     Region (..),
     newRegion,
@@ -1468,6 +1213,34 @@ module Gogol.ShoppingContent.Types
     RegionalinventoryCustomBatchResponseEntry (..),
     newRegionalinventoryCustomBatchResponseEntry,
 
+    -- ** RenderAccountIssuesRequestPayload
+    RenderAccountIssuesRequestPayload (..),
+    newRenderAccountIssuesRequestPayload,
+
+    -- ** RenderAccountIssuesRequestPayload_ContentOption
+    RenderAccountIssuesRequestPayload_ContentOption (..),
+
+    -- ** RenderAccountIssuesRequestPayload_UserInputActionOption
+    RenderAccountIssuesRequestPayload_UserInputActionOption (..),
+
+    -- ** RenderAccountIssuesResponse
+    RenderAccountIssuesResponse (..),
+    newRenderAccountIssuesResponse,
+
+    -- ** RenderProductIssuesRequestPayload
+    RenderProductIssuesRequestPayload (..),
+    newRenderProductIssuesRequestPayload,
+
+    -- ** RenderProductIssuesRequestPayload_ContentOption
+    RenderProductIssuesRequestPayload_ContentOption (..),
+
+    -- ** RenderProductIssuesRequestPayload_UserInputActionOption
+    RenderProductIssuesRequestPayload_UserInputActionOption (..),
+
+    -- ** RenderProductIssuesResponse
+    RenderProductIssuesResponse (..),
+    newRenderProductIssuesResponse,
+
     -- ** ReportInteractionRequest
     ReportInteractionRequest (..),
     newReportInteractionRequest,
@@ -1479,70 +1252,6 @@ module Gogol.ShoppingContent.Types
     ReportRow (..),
     newReportRow,
 
-    -- ** RepricingProductReport
-    RepricingProductReport (..),
-    newRepricingProductReport,
-
-    -- ** RepricingProductReport_Type
-    RepricingProductReport_Type (..),
-
-    -- ** RepricingProductReportBuyboxWinningProductStats
-    RepricingProductReportBuyboxWinningProductStats (..),
-    newRepricingProductReportBuyboxWinningProductStats,
-
-    -- ** RepricingRule
-    RepricingRule (..),
-    newRepricingRule,
-
-    -- ** RepricingRule_Type
-    RepricingRule_Type (..),
-
-    -- ** RepricingRuleCostOfGoodsSaleRule
-    RepricingRuleCostOfGoodsSaleRule (..),
-    newRepricingRuleCostOfGoodsSaleRule,
-
-    -- ** RepricingRuleEffectiveTime
-    RepricingRuleEffectiveTime (..),
-    newRepricingRuleEffectiveTime,
-
-    -- ** RepricingRuleEffectiveTimeFixedTimePeriod
-    RepricingRuleEffectiveTimeFixedTimePeriod (..),
-    newRepricingRuleEffectiveTimeFixedTimePeriod,
-
-    -- ** RepricingRuleEligibleOfferMatcher
-    RepricingRuleEligibleOfferMatcher (..),
-    newRepricingRuleEligibleOfferMatcher,
-
-    -- ** RepricingRuleEligibleOfferMatcher_MatcherOption
-    RepricingRuleEligibleOfferMatcher_MatcherOption (..),
-
-    -- ** RepricingRuleEligibleOfferMatcherStringMatcher
-    RepricingRuleEligibleOfferMatcherStringMatcher (..),
-    newRepricingRuleEligibleOfferMatcherStringMatcher,
-
-    -- ** RepricingRuleReport
-    RepricingRuleReport (..),
-    newRepricingRuleReport,
-
-    -- ** RepricingRuleReport_Type
-    RepricingRuleReport_Type (..),
-
-    -- ** RepricingRuleReportBuyboxWinningRuleStats
-    RepricingRuleReportBuyboxWinningRuleStats (..),
-    newRepricingRuleReportBuyboxWinningRuleStats,
-
-    -- ** RepricingRuleRestriction
-    RepricingRuleRestriction (..),
-    newRepricingRuleRestriction,
-
-    -- ** RepricingRuleRestrictionBoundary
-    RepricingRuleRestrictionBoundary (..),
-    newRepricingRuleRestrictionBoundary,
-
-    -- ** RepricingRuleStatsBasedRule
-    RepricingRuleStatsBasedRule (..),
-    newRepricingRuleStatsBasedRule,
-
     -- ** RequestPhoneVerificationRequest
     RequestPhoneVerificationRequest (..),
     newRequestPhoneVerificationRequest,
@@ -1553,10 +1262,6 @@ module Gogol.ShoppingContent.Types
     -- ** RequestPhoneVerificationResponse
     RequestPhoneVerificationResponse (..),
     newRequestPhoneVerificationResponse,
-
-    -- ** RequestReviewBuyOnGoogleProgramRequest
-    RequestReviewBuyOnGoogleProgramRequest (..),
-    newRequestReviewBuyOnGoogleProgramRequest,
 
     -- ** RequestReviewFreeListingsRequest
     RequestReviewFreeListingsRequest (..),
@@ -1624,18 +1329,6 @@ module Gogol.ShoppingContent.Types
     ReturnPolicySeasonalOverride (..),
     newReturnPolicySeasonalOverride,
 
-    -- ** ReturnPricingInfo
-    ReturnPricingInfo (..),
-    newReturnPricingInfo,
-
-    -- ** ReturnShipment
-    ReturnShipment (..),
-    newReturnShipment,
-
-    -- ** ReturnShippingLabel
-    ReturnShippingLabel (..),
-    newReturnShippingLabel,
-
     -- ** ReturnaddressCustomBatchRequest
     ReturnaddressCustomBatchRequest (..),
     newReturnaddressCustomBatchRequest,
@@ -1699,49 +1392,17 @@ module Gogol.ShoppingContent.Types
     Service (..),
     newService,
 
-    -- ** SettlementReport
-    SettlementReport (..),
-    newSettlementReport,
+    -- ** ServiceStoreConfig
+    ServiceStoreConfig (..),
+    newServiceStoreConfig,
 
-    -- ** SettlementTransaction
-    SettlementTransaction (..),
-    newSettlementTransaction,
+    -- ** ServiceStoreConfigCutoffConfig
+    ServiceStoreConfigCutoffConfig (..),
+    newServiceStoreConfigCutoffConfig,
 
-    -- ** SettlementTransactionAmount
-    SettlementTransactionAmount (..),
-    newSettlementTransactionAmount,
-
-    -- ** SettlementTransactionAmountCommission
-    SettlementTransactionAmountCommission (..),
-    newSettlementTransactionAmountCommission,
-
-    -- ** SettlementTransactionIdentifiers
-    SettlementTransactionIdentifiers (..),
-    newSettlementTransactionIdentifiers,
-
-    -- ** SettlementTransactionTransaction
-    SettlementTransactionTransaction (..),
-    newSettlementTransactionTransaction,
-
-    -- ** SettlementreportsListResponse
-    SettlementreportsListResponse (..),
-    newSettlementreportsListResponse,
-
-    -- ** SettlementtransactionsListResponse
-    SettlementtransactionsListResponse (..),
-    newSettlementtransactionsListResponse,
-
-    -- ** ShipmentInvoice
-    ShipmentInvoice (..),
-    newShipmentInvoice,
-
-    -- ** ShipmentInvoiceLineItemInvoice
-    ShipmentInvoiceLineItemInvoice (..),
-    newShipmentInvoiceLineItemInvoice,
-
-    -- ** ShipmentTrackingInfo
-    ShipmentTrackingInfo (..),
-    newShipmentTrackingInfo,
+    -- ** ServiceStoreConfigCutoffConfigLocalCutoffTime
+    ServiceStoreConfigCutoffConfigLocalCutoffTime (..),
+    newServiceStoreConfigCutoffConfigLocalCutoffTime,
 
     -- ** ShippingSettings
     ShippingSettings (..),
@@ -1807,33 +1468,12 @@ module Gogol.ShoppingContent.Types
     Table (..),
     newTable,
 
-    -- ** TestOrder
-    TestOrder (..),
-    newTestOrder,
+    -- ** TextWithTooltip
+    TextWithTooltip (..),
+    newTextWithTooltip,
 
-    -- ** TestOrderAddress
-    TestOrderAddress (..),
-    newTestOrderAddress,
-
-    -- ** TestOrderDeliveryDetails
-    TestOrderDeliveryDetails (..),
-    newTestOrderDeliveryDetails,
-
-    -- ** TestOrderLineItem
-    TestOrderLineItem (..),
-    newTestOrderLineItem,
-
-    -- ** TestOrderLineItemProduct
-    TestOrderLineItemProduct (..),
-    newTestOrderLineItemProduct,
-
-    -- ** TestOrderPickupDetails
-    TestOrderPickupDetails (..),
-    newTestOrderPickupDetails,
-
-    -- ** TestOrderPickupDetailsPickupPerson
-    TestOrderPickupDetailsPickupPerson (..),
-    newTestOrderPickupDetailsPickupPerson,
+    -- ** TextWithTooltip_TooltipIconStyle
+    TextWithTooltip_TooltipIconStyle (..),
 
     -- ** TimePeriod
     TimePeriod (..),
@@ -1842,6 +1482,10 @@ module Gogol.ShoppingContent.Types
     -- ** TimeZone
     TimeZone (..),
     newTimeZone,
+
+    -- ** TopicTrends
+    TopicTrends (..),
+    newTopicTrends,
 
     -- ** TransitTable
     TransitTable (..),
@@ -1855,21 +1499,21 @@ module Gogol.ShoppingContent.Types
     TransitTableTransitTimeRowTransitTimeValue (..),
     newTransitTableTransitTimeRowTransitTimeValue,
 
+    -- ** TriggerActionPayload
+    TriggerActionPayload (..),
+    newTriggerActionPayload,
+
+    -- ** TriggerActionResponse
+    TriggerActionResponse (..),
+    newTriggerActionResponse,
+
     -- ** UndeleteConversionSourceRequest
     UndeleteConversionSourceRequest (..),
     newUndeleteConversionSourceRequest,
 
-    -- ** UnitInvoice
-    UnitInvoice (..),
-    newUnitInvoice,
-
-    -- ** UnitInvoiceAdditionalCharge
-    UnitInvoiceAdditionalCharge (..),
-    newUnitInvoiceAdditionalCharge,
-
-    -- ** UnitInvoiceTaxLine
-    UnitInvoiceTaxLine (..),
-    newUnitInvoiceTaxLine,
+    -- ** UrlSettings
+    UrlSettings (..),
+    newUrlSettings,
 
     -- ** Value
     Value (..),
@@ -1907,28 +1551,10 @@ module Gogol.ShoppingContent.Types
 
     -- ** AccountsListView
     AccountsListView (..),
-
-    -- ** OrderreturnsListOrderBy
-    OrderreturnsListOrderBy (..),
-
-    -- ** OrderreturnsListShipmentStates
-    OrderreturnsListShipmentStates (..),
-
-    -- ** OrderreturnsListShipmentStatus
-    OrderreturnsListShipmentStatus (..),
-
-    -- ** OrderreturnsListShipmentTypes
-    OrderreturnsListShipmentTypes (..),
-
-    -- ** OrdersGettestordertemplateTemplateName
-    OrdersGettestordertemplateTemplateName (..),
-
-    -- ** OrdersListStatuses
-    OrdersListStatuses (..),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Internal.Product
 import Gogol.ShoppingContent.Internal.Sum
 
@@ -1940,4 +1566,5 @@ shoppingContentService =
     "shoppingcontent.googleapis.com"
 
 -- | Manage your product listings and accounts for Google Shopping
-type Content'FullControl = "https://www.googleapis.com/auth/content"
+type Content'FullControl =
+  "https://www.googleapis.com/auth/content"

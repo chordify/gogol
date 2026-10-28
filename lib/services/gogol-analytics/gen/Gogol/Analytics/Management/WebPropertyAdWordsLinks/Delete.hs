@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.WebPropertyAdWordsLinks.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.WebPropertyAdWordsLinks.Delete
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.webPropertyAdWordsLinks.delete@ method which the
 -- 'AnalyticsManagementWebPropertyAdWordsLinksDelete' request conforms to.
@@ -79,38 +77,38 @@ newAnalyticsManagementWebPropertyAdWordsLinksDelete ::
   -- |  Web property ID to delete the Google Ads link for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementWebPropertyAdWordsLinksDelete
-newAnalyticsManagementWebPropertyAdWordsLinksDelete accountId webPropertyAdWordsLinkId webPropertyId =
-  AnalyticsManagementWebPropertyAdWordsLinksDelete
-    { accountId = accountId,
-      webPropertyAdWordsLinkId = webPropertyAdWordsLinkId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementWebPropertyAdWordsLinksDelete
+  accountId
+  webPropertyAdWordsLinkId
+  webPropertyId =
+    AnalyticsManagementWebPropertyAdWordsLinksDelete
+      { accountId =
+          accountId,
+        webPropertyAdWordsLinkId =
+          webPropertyAdWordsLinkId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementWebPropertyAdWordsLinksDelete
   where
+  type Rs AnalyticsManagementWebPropertyAdWordsLinksDelete = ()
   type
-    Rs
-      AnalyticsManagementWebPropertyAdWordsLinksDelete =
-      ()
-  type
-    Scopes
-      AnalyticsManagementWebPropertyAdWordsLinksDelete =
+    Scopes AnalyticsManagementWebPropertyAdWordsLinksDelete =
       '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementWebPropertyAdWordsLinksDelete {..} =
-      go
-        accountId
-        webPropertyId
-        webPropertyAdWordsLinkId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementWebPropertyAdWordsLinksDeleteResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementWebPropertyAdWordsLinksDelete {..} =
+    go
+      accountId
+      webPropertyId
+      webPropertyAdWordsLinkId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AnalyticsManagementWebPropertyAdWordsLinksDeleteResource
+          )
+          Core.mempty

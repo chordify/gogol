@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Locations.Batches.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Locations.Batches.List
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.locations.batches.list@ method which the
 -- 'DataprocProjectsLocationsBatchesList' request conforms to.
@@ -70,7 +68,7 @@ data DataprocProjectsLocationsBatchesList = DataprocProjectsLocationsBatchesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. A filter for the batches to return in the response.A filter is a logical expression constraining the values of various fields in each batch resource. Filters are case sensitive, and may contain multiple clauses combined with logical operators (AND\/OR). Supported fields are batch/id, batch/uuid, state, and create/time.e.g. state = RUNNING and create/time \< \"2023-01-01T00:00:00Z\" filters for batches in state RUNNING that were created before 2023-01-01See https:\/\/google.aip.dev\/assets\/misc\/ebnf-filtering.txt for a detailed description of the filter syntax and a list of supported comparisons.
+    -- | Optional. A filter for the batches to return in the response.A filter is a logical expression constraining the values of various fields in each batch resource. Filters are case sensitive, and may contain multiple clauses combined with logical operators (AND\/OR). Supported fields are batch/id, batch/uuid, state, create/time, and labels.e.g. state = RUNNING and create/time \< \"2023-01-01T00:00:00Z\" filters for batches in state RUNNING that were created before 2023-01-01. state = RUNNING and labels.environment=production filters for batches in state in a RUNNING state that have a production environment label.See https:\/\/google.aip.dev\/assets\/misc\/ebnf-filtering.txt for a detailed description of the filter syntax and a list of supported comparisons.
     filter :: (Core.Maybe Core.Text),
     -- | Optional. Field(s) on which to sort the list of batches.Currently the only supported sort orders are unspecified (empty) and create_time desc to sort by most recently created batches first.See https:\/\/google.aip.dev\/132#ordering for more details.
     orderBy :: (Core.Maybe Core.Text),
@@ -106,36 +104,29 @@ newDataprocProjectsLocationsBatchesList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataprocProjectsLocationsBatchesList
-  where
-  type
-    Rs DataprocProjectsLocationsBatchesList =
-      ListBatchesResponse
+instance Core.GoogleRequest DataprocProjectsLocationsBatchesList where
+  type Rs DataprocProjectsLocationsBatchesList = ListBatchesResponse
   type
     Scopes DataprocProjectsLocationsBatchesList =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsLocationsBatchesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        orderBy
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsLocationsBatchesListResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsLocationsBatchesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      orderBy
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsLocationsBatchesListResource
+          )
+          Core.mempty

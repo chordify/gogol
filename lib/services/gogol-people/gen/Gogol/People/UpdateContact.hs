@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.UpdateContact
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,16 +39,13 @@ module Gogol.People.UpdateContact
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.updateContact@ method which the
 -- 'PeoplePeopleUpdateContact' request conforms to.
 type PeoplePeopleUpdateContactResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resourceName"
-              "updateContact"
-              Core.Text
+    Core.:> Core.CaptureMode "resourceName" "updateContact" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -114,9 +109,7 @@ newPeoplePeopleUpdateContact payload resourceName =
 
 instance Core.GoogleRequest PeoplePeopleUpdateContact where
   type Rs PeoplePeopleUpdateContact = Person
-  type
-    Scopes PeoplePeopleUpdateContact =
-      '[Contacts'FullControl]
+  type Scopes PeoplePeopleUpdateContact = '[Contacts'FullControl]
   requestClient PeoplePeopleUpdateContact {..} =
     go
       resourceName
@@ -134,7 +127,5 @@ instance Core.GoogleRequest PeoplePeopleUpdateContact where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleUpdateContactResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleUpdateContactResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.TimeSeries.Query
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Queries time series using Monitoring Query Language.
+-- Queries time series by using Monitoring Query Language (MQL). We recommend using PromQL instead of MQL. For more information about the status of MQL, see the MQL deprecation notice (https:\/\/cloud.google.com\/stackdriver\/docs\/deprecations\/mql).
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.projects.timeSeries.query@.
 module Gogol.Monitoring.Projects.TimeSeries.Query
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.TimeSeries.Query
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.timeSeries.query@ method which the
 -- 'MonitoringProjectsTimeSeriesQuery' request conforms to.
@@ -57,7 +55,7 @@ type MonitoringProjectsTimeSeriesQueryResource =
     Core.:> Core.ReqBody '[Core.JSON] QueryTimeSeriesRequest
     Core.:> Core.Post '[Core.JSON] QueryTimeSeriesResponse
 
--- | Queries time series using Monitoring Query Language.
+-- | Queries time series by using Monitoring Query Language (MQL). We recommend using PromQL instead of MQL. For more information about the status of MQL, see the MQL deprecation notice (https:\/\/cloud.google.com\/stackdriver\/docs\/deprecations\/mql).
 --
 -- /See:/ 'newMonitoringProjectsTimeSeriesQuery' smart constructor.
 data MonitoringProjectsTimeSeriesQuery = MonitoringProjectsTimeSeriesQuery
@@ -96,13 +94,8 @@ newMonitoringProjectsTimeSeriesQuery name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsTimeSeriesQuery
-  where
-  type
-    Rs MonitoringProjectsTimeSeriesQuery =
-      QueryTimeSeriesResponse
+instance Core.GoogleRequest MonitoringProjectsTimeSeriesQuery where
+  type Rs MonitoringProjectsTimeSeriesQuery = QueryTimeSeriesResponse
   type
     Scopes MonitoringProjectsTimeSeriesQuery =
       '[ CloudPlatform'FullControl,

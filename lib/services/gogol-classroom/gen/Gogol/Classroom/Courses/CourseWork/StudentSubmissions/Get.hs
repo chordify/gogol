@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Get
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.get@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsGet' request conforms to.
@@ -92,29 +90,31 @@ newClassroomCoursesCourseWorkStudentSubmissionsGet ::
   -- |  Identifier of the student submission. See 'id'.
   Core.Text ->
   ClassroomCoursesCourseWorkStudentSubmissionsGet
-newClassroomCoursesCourseWorkStudentSubmissionsGet courseId courseWorkId id =
-  ClassroomCoursesCourseWorkStudentSubmissionsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      id = id,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClassroomCoursesCourseWorkStudentSubmissionsGet
+  courseId
+  courseWorkId
+  id =
+    ClassroomCoursesCourseWorkStudentSubmissionsGet
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        courseId = courseId,
+        courseWorkId = courseWorkId,
+        id = id,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkStudentSubmissionsGet
   where
   type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsGet =
+    Rs ClassroomCoursesCourseWorkStudentSubmissionsGet =
       StudentSubmission
   type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsGet =
+    Scopes ClassroomCoursesCourseWorkStudentSubmissionsGet =
       '[ Classroom'Coursework'Me,
          Classroom'Coursework'Me'Readonly,
          Classroom'Coursework'Students,
@@ -122,24 +122,22 @@ instance
          Classroom'StudentSubmissions'Me'Readonly,
          Classroom'StudentSubmissions'Students'Readonly
        ]
-  requestClient
-    ClassroomCoursesCourseWorkStudentSubmissionsGet {..} =
-      go
-        courseId
-        courseWorkId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkStudentSubmissionsGetResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesCourseWorkStudentSubmissionsGet {..} =
+    go
+      courseId
+      courseWorkId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomCoursesCourseWorkStudentSubmissionsGetResource
+          )
+          Core.mempty

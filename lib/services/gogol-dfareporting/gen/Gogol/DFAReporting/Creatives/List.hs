@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Creatives.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Creatives.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.creatives.list@ method which the
 -- 'DFAReportingCreativesList' request conforms to.
@@ -62,34 +60,16 @@ type DFAReportingCreativesListResource =
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParams
-              "renderingIds"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "searchString"
-              Core.Text
+    Core.:> Core.QueryParams "renderingIds" Core.Int64
+    Core.:> Core.QueryParam "searchString" Core.Text
     Core.:> Core.QueryParams "sizeIds" Core.Int64
-    Core.:> Core.QueryParam
-              "sortField"
-              CreativesListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              CreativesListSortOrder
-    Core.:> Core.QueryParam
-              "studioCreativeId"
-              Core.Int64
-    Core.:> Core.QueryParams
-              "types"
-              CreativesListTypes
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
+    Core.:> Core.QueryParam "sortField" CreativesListSortField
+    Core.:> Core.QueryParam "sortOrder" CreativesListSortOrder
+    Core.:> Core.QueryParam "studioCreativeId" Core.Int64
+    Core.:> Core.QueryParams "types" CreativesListTypes
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get
               '[Core.JSON]
               CreativesListResponse
@@ -177,9 +157,7 @@ newDFAReportingCreativesList profileId =
     }
 
 instance Core.GoogleRequest DFAReportingCreativesList where
-  type
-    Rs DFAReportingCreativesList =
-      CreativesListResponse
+  type Rs DFAReportingCreativesList = CreativesListResponse
   type
     Scopes DFAReportingCreativesList =
       '[Dfatrafficking'FullControl]
@@ -212,7 +190,5 @@ instance Core.GoogleRequest DFAReportingCreativesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCreativesListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCreativesListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Jobs.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Jobs.Internal.Sum
@@ -370,14 +368,6 @@ module Gogol.Jobs.Internal.Sum
         ..
       ),
 
-    -- * NamespacedDebugInput_TestingMode
-    NamespacedDebugInput_TestingMode
-      ( NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED,
-        NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF,
-        NamespacedDebugInput_TestingMode_TESTINGMODEALLON,
-        ..
-      ),
-
     -- * ProcessingOptions_HtmlSanitization
     ProcessingOptions_HtmlSanitization
       ( ProcessingOptions_HtmlSanitization_HTMLSANITIZATIONUNSPECIFIED,
@@ -393,6 +383,7 @@ module Gogol.Jobs.Internal.Sum
         SearchJobsRequest_DiversificationLevel_Simple,
         SearchJobsRequest_DiversificationLevel_ONEPERCOMPANY,
         SearchJobsRequest_DiversificationLevel_TWOPERCOMPANY,
+        SearchJobsRequest_DiversificationLevel_MAXTHREEPERCOMPANY,
         SearchJobsRequest_DiversificationLevel_DIVERSIFYBYLOOSERSIMILARITY,
         ..
       ),
@@ -413,6 +404,16 @@ module Gogol.Jobs.Internal.Sum
         SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHDISABLED,
         SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHALL,
         SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHTITLEONLY,
+        ..
+      ),
+
+    -- * SearchJobsRequest_RelevanceThreshold
+    SearchJobsRequest_RelevanceThreshold
+      ( SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED,
+        SearchJobsRequest_RelevanceThreshold_Lowest,
+        SearchJobsRequest_RelevanceThreshold_Low,
+        SearchJobsRequest_RelevanceThreshold_Medium,
+        SearchJobsRequest_RelevanceThreshold_High,
         ..
       ),
 
@@ -453,7 +454,7 @@ module Gogol.Jobs.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -1939,7 +1940,7 @@ pattern Location_LocationType_STREETADDRESS = Location_LocationType "STREET_ADDR
   Location_LocationType
   #-}
 
--- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or latlng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
+-- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or lat_lng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
 -- used for job search requests.
 newtype LocationFilter_TelecommutePreference = LocationFilter_TelecommutePreference {fromLocationFilter_TelecommutePreference :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1975,38 +1976,6 @@ pattern LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED = LocationF
   LocationFilter_TelecommutePreference_TELECOMMUTEALLOWED,
   LocationFilter_TelecommutePreference_TELECOMMUTEJOBSEXCLUDED,
   LocationFilter_TelecommutePreference
-  #-}
-
--- | Sets different testing modes. See the documentation in the TestingMode message for more information.
-newtype NamespacedDebugInput_TestingMode = NamespacedDebugInput_TestingMode {fromNamespacedDebugInput_TestingMode :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED :: NamespacedDebugInput_TestingMode
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED = NamespacedDebugInput_TestingMode "TESTING_MODE_UNSPECIFIED"
-
--- |
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF :: NamespacedDebugInput_TestingMode
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF = NamespacedDebugInput_TestingMode "TESTING_MODE_ALL_OFF"
-
--- |
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLON :: NamespacedDebugInput_TestingMode
-pattern NamespacedDebugInput_TestingMode_TESTINGMODEALLON = NamespacedDebugInput_TestingMode "TESTING_MODE_ALL_ON"
-
-{-# COMPLETE
-  NamespacedDebugInput_TestingMode_TESTINGMODEUNSPECIFIED,
-  NamespacedDebugInput_TestingMode_TESTINGMODEALLOFF,
-  NamespacedDebugInput_TestingMode_TESTINGMODEALLON,
-  NamespacedDebugInput_TestingMode
   #-}
 
 -- | Option for job HTML content sanitization. Applied fields are: * description * applicationInfo.instruction * incentives * qualifications * responsibilities HTML tags in these fields may be stripped if sanitiazation isn\'t disabled. Defaults to HtmlSanitization.SIMPLE/FORMATTING/ONLY.
@@ -2074,6 +2043,10 @@ pattern SearchJobsRequest_DiversificationLevel_ONEPERCOMPANY = SearchJobsRequest
 pattern SearchJobsRequest_DiversificationLevel_TWOPERCOMPANY :: SearchJobsRequest_DiversificationLevel
 pattern SearchJobsRequest_DiversificationLevel_TWOPERCOMPANY = SearchJobsRequest_DiversificationLevel "TWO_PER_COMPANY"
 
+-- | Similar to ONE/PER/COMPANY, but it allows at most three jobs in the same company to be shown at once, the other jobs under same company are dropped.
+pattern SearchJobsRequest_DiversificationLevel_MAXTHREEPERCOMPANY :: SearchJobsRequest_DiversificationLevel
+pattern SearchJobsRequest_DiversificationLevel_MAXTHREEPERCOMPANY = SearchJobsRequest_DiversificationLevel "MAX_THREE_PER_COMPANY"
+
 -- | The result list is ordered such that somewhat similar results are pushed to the end of the last page of the search results. This option is recommended if SIMPLE diversification does not diversify enough.
 pattern SearchJobsRequest_DiversificationLevel_DIVERSIFYBYLOOSERSIMILARITY :: SearchJobsRequest_DiversificationLevel
 pattern SearchJobsRequest_DiversificationLevel_DIVERSIFYBYLOOSERSIMILARITY = SearchJobsRequest_DiversificationLevel "DIVERSIFY_BY_LOOSER_SIMILARITY"
@@ -2084,6 +2057,7 @@ pattern SearchJobsRequest_DiversificationLevel_DIVERSIFYBYLOOSERSIMILARITY = Sea
   SearchJobsRequest_DiversificationLevel_Simple,
   SearchJobsRequest_DiversificationLevel_ONEPERCOMPANY,
   SearchJobsRequest_DiversificationLevel_TWOPERCOMPANY,
+  SearchJobsRequest_DiversificationLevel_MAXTHREEPERCOMPANY,
   SearchJobsRequest_DiversificationLevel_DIVERSIFYBYLOOSERSIMILARITY,
   SearchJobsRequest_DiversificationLevel
   #-}
@@ -2165,6 +2139,48 @@ pattern SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHTITLEONLY = SearchJobsReq
   SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHALL,
   SearchJobsRequest_KeywordMatchMode_KEYWORDMATCHTITLEONLY,
   SearchJobsRequest_KeywordMatchMode
+  #-}
+
+-- | Optional. The relevance threshold of the search results. Default to Google defined threshold, leveraging a balance of precision and recall to deliver both highly accurate results and comprehensive coverage of relevant information.
+newtype SearchJobsRequest_RelevanceThreshold = SearchJobsRequest_RelevanceThreshold {fromSearchJobsRequest_RelevanceThreshold :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. In this case, server behavior defaults to Google defined threshold.
+pattern SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED = SearchJobsRequest_RelevanceThreshold "RELEVANCE_THRESHOLD_UNSPECIFIED"
+
+-- | Lowest relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Lowest :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Lowest = SearchJobsRequest_RelevanceThreshold "LOWEST"
+
+-- | Low relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Low :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Low = SearchJobsRequest_RelevanceThreshold "LOW"
+
+-- | Medium relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_Medium :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_Medium = SearchJobsRequest_RelevanceThreshold "MEDIUM"
+
+-- | High relevance threshold.
+pattern SearchJobsRequest_RelevanceThreshold_High :: SearchJobsRequest_RelevanceThreshold
+pattern SearchJobsRequest_RelevanceThreshold_High = SearchJobsRequest_RelevanceThreshold "HIGH"
+
+{-# COMPLETE
+  SearchJobsRequest_RelevanceThreshold_RELEVANCETHRESHOLDUNSPECIFIED,
+  SearchJobsRequest_RelevanceThreshold_Lowest,
+  SearchJobsRequest_RelevanceThreshold_Low,
+  SearchJobsRequest_RelevanceThreshold_Medium,
+  SearchJobsRequest_RelevanceThreshold_High,
+  SearchJobsRequest_RelevanceThreshold
   #-}
 
 -- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.

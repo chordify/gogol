@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Subnetworks.ExpandIpCidrRange
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Subnetworks.ExpandIpCidrRange
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.subnetworks.expandIpCidrRange@ method which the
 -- 'ComputeSubnetworksExpandIpCidrRange' request conforms to.
@@ -61,9 +59,7 @@ type ComputeSubnetworksExpandIpCidrRangeResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SubnetworksExpandIpCidrRangeRequest
+    Core.:> Core.ReqBody '[Core.JSON] SubnetworksExpandIpCidrRangeRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Expands the IP CIDR range of the subnetwork to a specified value.
@@ -104,27 +100,26 @@ newComputeSubnetworksExpandIpCidrRange ::
   -- |  Name of the Subnetwork resource to update. See 'subnetwork'.
   Core.Text ->
   ComputeSubnetworksExpandIpCidrRange
-newComputeSubnetworksExpandIpCidrRange payload project region subnetwork =
-  ComputeSubnetworksExpandIpCidrRange
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      subnetwork = subnetwork,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeSubnetworksExpandIpCidrRange
+  payload
+  project
+  region
+  subnetwork =
     ComputeSubnetworksExpandIpCidrRange
-  where
-  type
-    Rs ComputeSubnetworksExpandIpCidrRange =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        subnetwork = subnetwork,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeSubnetworksExpandIpCidrRange where
+  type Rs ComputeSubnetworksExpandIpCidrRange = Operation
   type
     Scopes ComputeSubnetworksExpandIpCidrRange =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -146,7 +141,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeSubnetworksExpandIpCidrRangeResource
+              Core.Proxy ComputeSubnetworksExpandIpCidrRangeResource
           )
           Core.mempty

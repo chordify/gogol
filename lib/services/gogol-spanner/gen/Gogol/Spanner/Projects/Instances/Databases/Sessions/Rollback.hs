@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.Instances.Databases.Sessions.Rollback
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spanner.Projects.Instances.Databases.Sessions.Rollback
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instances.databases.sessions.rollback@ method which the
@@ -84,46 +82,44 @@ newSpannerProjectsInstancesDatabasesSessionsRollback ::
   -- |  Required. The session in which the transaction to roll back is running. See 'session'.
   Core.Text ->
   SpannerProjectsInstancesDatabasesSessionsRollback
-newSpannerProjectsInstancesDatabasesSessionsRollback payload session =
-  SpannerProjectsInstancesDatabasesSessionsRollback
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      session = session,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSpannerProjectsInstancesDatabasesSessionsRollback
+  payload
+  session =
+    SpannerProjectsInstancesDatabasesSessionsRollback
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        session = session,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SpannerProjectsInstancesDatabasesSessionsRollback
   where
+  type Rs SpannerProjectsInstancesDatabasesSessionsRollback = Empty
   type
-    Rs
-      SpannerProjectsInstancesDatabasesSessionsRollback =
-      Empty
-  type
-    Scopes
-      SpannerProjectsInstancesDatabasesSessionsRollback =
+    Scopes SpannerProjectsInstancesDatabasesSessionsRollback =
       '[CloudPlatform'FullControl, Spanner'Data]
-  requestClient
-    SpannerProjectsInstancesDatabasesSessionsRollback {..} =
-      go
-        session
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstancesDatabasesSessionsRollbackResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstancesDatabasesSessionsRollback {..} =
+    go
+      session
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                SpannerProjectsInstancesDatabasesSessionsRollbackResource
+          )
+          Core.mempty

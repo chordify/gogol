@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Users.MakeAdmin
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Users.MakeAdmin
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.users.makeAdmin@ method which the
 -- 'DirectoryUsersMakeAdmin' request conforms to.
@@ -101,9 +99,7 @@ newDirectoryUsersMakeAdmin payload userKey =
 
 instance Core.GoogleRequest DirectoryUsersMakeAdmin where
   type Rs DirectoryUsersMakeAdmin = ()
-  type
-    Scopes DirectoryUsersMakeAdmin =
-      '[Admin'Directory'User]
+  type Scopes DirectoryUsersMakeAdmin = '[Admin'Directory'User]
   requestClient DirectoryUsersMakeAdmin {..} =
     go
       userKey
@@ -118,7 +114,5 @@ instance Core.GoogleRequest DirectoryUsersMakeAdmin where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryUsersMakeAdminResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryUsersMakeAdminResource)
           Core.mempty

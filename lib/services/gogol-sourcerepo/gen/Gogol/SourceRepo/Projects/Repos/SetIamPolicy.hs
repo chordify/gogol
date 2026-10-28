@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SourceRepo.Projects.Repos.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on the specified resource. Replaces any existing policy.
+-- Sets the IAM policy on the specified resource. Replaces any existing policy.
 --
--- /See:/ <https://cloud.google.com/source-repositories/docs/apis Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.setIamPolicy@.
+-- /See:/ <https://cloud.google.com/source-repositories/docs Cloud Source Repositories API Reference> for @sourcerepo.projects.repos.setIamPolicy@.
 module Gogol.SourceRepo.Projects.Repos.SetIamPolicy
   ( -- * Resource
     SourceRepoProjectsReposSetIamPolicyResource,
@@ -39,7 +37,7 @@ module Gogol.SourceRepo.Projects.Repos.SetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SourceRepo.Types
 
 -- | A resource alias for @sourcerepo.projects.repos.setIamPolicy@ method which the
@@ -56,7 +54,7 @@ type SourceRepoProjectsReposSetIamPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Sets the access control policy on the specified resource. Replaces any existing policy.
+-- | Sets the IAM policy on the specified resource. Replaces any existing policy.
 --
 -- /See:/ 'newSourceRepoProjectsReposSetIamPolicy' smart constructor.
 data SourceRepoProjectsReposSetIamPolicy = SourceRepoProjectsReposSetIamPolicy
@@ -95,10 +93,7 @@ newSourceRepoProjectsReposSetIamPolicy payload resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SourceRepoProjectsReposSetIamPolicy
-  where
+instance Core.GoogleRequest SourceRepoProjectsReposSetIamPolicy where
   type Rs SourceRepoProjectsReposSetIamPolicy = Policy
   type
     Scopes SourceRepoProjectsReposSetIamPolicy =
@@ -118,7 +113,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                SourceRepoProjectsReposSetIamPolicyResource
+              Core.Proxy SourceRepoProjectsReposSetIamPolicyResource
           )
           Core.mempty

@@ -1,14 +1,16 @@
 cabal-version:      2.2
 name:               gogol-dataproc
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Cloud Dataproc SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
@@ -37,7 +39,7 @@ flag field-selectors
   manual:      True
 
 library
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
@@ -57,14 +59,65 @@ library
     Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.SetIamPolicy
     Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.TestIamPermissions
     Gogol.Dataproc.Projects.Locations.AutoscalingPolicies.Update
+    Gogol.Dataproc.Projects.Locations.Batches.Analyze
     Gogol.Dataproc.Projects.Locations.Batches.Create
     Gogol.Dataproc.Projects.Locations.Batches.Delete
     Gogol.Dataproc.Projects.Locations.Batches.Get
     Gogol.Dataproc.Projects.Locations.Batches.List
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Access
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessEnvironmentInfo
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessJob
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessSqlPlan
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessSqlQuery
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessStageAttempt
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.AccessStageRddGraph
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Search
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchExecutors
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchExecutorStageSummary
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchJobs
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchSqlQueries
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStageAttempts
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStageAttemptTasks
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SearchStages
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeExecutors
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeJobs
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeStageAttemptTasks
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.SummarizeStages
+    Gogol.Dataproc.Projects.Locations.Batches.SparkApplications.Write
     Gogol.Dataproc.Projects.Locations.Operations.Cancel
     Gogol.Dataproc.Projects.Locations.Operations.Delete
     Gogol.Dataproc.Projects.Locations.Operations.Get
     Gogol.Dataproc.Projects.Locations.Operations.List
+    Gogol.Dataproc.Projects.Locations.Sessions.Create
+    Gogol.Dataproc.Projects.Locations.Sessions.Delete
+    Gogol.Dataproc.Projects.Locations.Sessions.Get
+    Gogol.Dataproc.Projects.Locations.Sessions.List
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Access
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessEnvironmentInfo
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessJob
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessSqlPlan
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessSqlQuery
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessStageAttempt
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.AccessStageRddGraph
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Search
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchExecutors
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchExecutorStageSummary
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchJobs
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchSqlQueries
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStageAttempts
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStageAttemptTasks
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SearchStages
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeExecutors
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeJobs
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeStageAttemptTasks
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.SummarizeStages
+    Gogol.Dataproc.Projects.Locations.Sessions.SparkApplications.Write
+    Gogol.Dataproc.Projects.Locations.Sessions.Terminate
+    Gogol.Dataproc.Projects.Locations.SessionTemplates.Create
+    Gogol.Dataproc.Projects.Locations.SessionTemplates.Delete
+    Gogol.Dataproc.Projects.Locations.SessionTemplates.Get
+    Gogol.Dataproc.Projects.Locations.SessionTemplates.List
+    Gogol.Dataproc.Projects.Locations.SessionTemplates.Patch
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Create
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Delete
     Gogol.Dataproc.Projects.Locations.WorkflowTemplates.Get
@@ -92,6 +145,7 @@ library
     Gogol.Dataproc.Projects.Regions.Clusters.List
     Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
     Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Get
+    Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Repair
     Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Resize
     Gogol.Dataproc.Projects.Regions.Clusters.Patch
     Gogol.Dataproc.Projects.Regions.Clusters.Repair
@@ -132,6 +186,4 @@ library
     Gogol.Dataproc.Internal.Product
     Gogol.Dataproc.Internal.Sum
 
-  build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+  build-depends:    gogol-core ^>=1.0.0

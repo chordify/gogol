@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceUser.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceUser.Internal.Product
@@ -296,7 +294,7 @@ module Gogol.ServiceUser.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceUser.Internal.Sum
 
 -- | Api is a light-weight descriptor for an API Interface.
@@ -427,8 +425,7 @@ instance Core.ToJSON AuthProvider where
     Core.object
       ( Core.catMaybes
           [ ("audiences" Core..=) Core.<$> audiences,
-            ("authorizationUrl" Core..=)
-              Core.<$> authorizationUrl,
+            ("authorizationUrl" Core..=) Core.<$> authorizationUrl,
             ("id" Core..=) Core.<$> id,
             ("issuer" Core..=) Core.<$> issuer,
             ("jwksUri" Core..=) Core.<$> jwksUri
@@ -461,7 +458,10 @@ data AuthRequirement = AuthRequirement
 newAuthRequirement ::
   AuthRequirement
 newAuthRequirement =
-  AuthRequirement {audiences = Core.Nothing, providerId = Core.Nothing}
+  AuthRequirement
+    { audiences = Core.Nothing,
+      providerId = Core.Nothing
+    }
 
 instance Core.FromJSON AuthRequirement where
   parseJSON =
@@ -609,22 +609,19 @@ newtype AuthorizationConfig = AuthorizationConfig
 -- | Creates a value of 'AuthorizationConfig' with the minimum fields required to make a request.
 newAuthorizationConfig ::
   AuthorizationConfig
-newAuthorizationConfig = AuthorizationConfig {provider = Core.Nothing}
+newAuthorizationConfig =
+  AuthorizationConfig {provider = Core.Nothing}
 
 instance Core.FromJSON AuthorizationConfig where
   parseJSON =
     Core.withObject
       "AuthorizationConfig"
-      ( \o ->
-          AuthorizationConfig Core.<$> (o Core..:? "provider")
-      )
+      (\o -> AuthorizationConfig Core.<$> (o Core..:? "provider"))
 
 instance Core.ToJSON AuthorizationConfig where
   toJSON AuthorizationConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("provider" Core..=) Core.<$> provider]
-      )
+      (Core.catMaybes [("provider" Core..=) Core.<$> provider])
 
 -- | @Backend@ defines the backend configuration for a service.
 --
@@ -650,8 +647,7 @@ instance Core.FromJSON Backend where
 
 instance Core.ToJSON Backend where
   toJSON Backend {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A backend rule provides configuration for an individual API element.
 --
@@ -741,17 +737,13 @@ instance Core.FromJSON Billing where
   parseJSON =
     Core.withObject
       "Billing"
-      ( \o ->
-          Billing Core.<$> (o Core..:? "consumerDestinations")
-      )
+      (\o -> Billing Core.<$> (o Core..:? "consumerDestinations"))
 
 instance Core.ToJSON Billing where
   toJSON Billing {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations
-          ]
+          [("consumerDestinations" Core..=) Core.<$> consumerDestinations]
       )
 
 -- | Configuration of a specific billing destination (Currently only support bill against consumer project).
@@ -769,7 +761,10 @@ data BillingDestination = BillingDestination
 newBillingDestination ::
   BillingDestination
 newBillingDestination =
-  BillingDestination {metrics = Core.Nothing, monitoredResource = Core.Nothing}
+  BillingDestination
+    { metrics = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON BillingDestination where
   parseJSON =
@@ -786,8 +781,7 @@ instance Core.ToJSON BillingDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -842,8 +836,7 @@ instance Core.FromJSON Context where
 
 instance Core.ToJSON Context where
   toJSON Context {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A context rule provides information about the context for an individual API element.
 --
@@ -926,9 +919,7 @@ instance Core.FromJSON Control where
 instance Core.ToJSON Control where
   toJSON Control {..} =
     Core.object
-      ( Core.catMaybes
-          [("environment" Core..=) Core.<$> environment]
-      )
+      (Core.catMaybes [("environment" Core..=) Core.<$> environment])
 
 -- | Customize service error responses. For example, list any service specific protobuf types that can appear in error detail lists of error responses.
 --
@@ -953,7 +944,8 @@ data CustomError = CustomError
 -- | Creates a value of 'CustomError' with the minimum fields required to make a request.
 newCustomError ::
   CustomError
-newCustomError = CustomError {rules = Core.Nothing, types = Core.Nothing}
+newCustomError =
+  CustomError {rules = Core.Nothing, types = Core.Nothing}
 
 instance Core.FromJSON CustomError where
   parseJSON =
@@ -961,7 +953,8 @@ instance Core.FromJSON CustomError where
       "CustomError"
       ( \o ->
           CustomError
-            Core.<$> (o Core..:? "rules") Core.<*> (o Core..:? "types")
+            Core.<$> (o Core..:? "rules")
+            Core.<*> (o Core..:? "types")
       )
 
 instance Core.ToJSON CustomError where
@@ -990,7 +983,10 @@ data CustomErrorRule = CustomErrorRule
 newCustomErrorRule ::
   CustomErrorRule
 newCustomErrorRule =
-  CustomErrorRule {isErrorType = Core.Nothing, selector = Core.Nothing}
+  CustomErrorRule
+    { isErrorType = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON CustomErrorRule where
   parseJSON =
@@ -1034,16 +1030,15 @@ instance Core.FromJSON CustomHttpPattern where
       "CustomHttpPattern"
       ( \o ->
           CustomHttpPattern
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "path")
+            Core.<$> (o Core..:? "kind")
+            Core.<*> (o Core..:? "path")
       )
 
 instance Core.ToJSON CustomHttpPattern where
   toJSON CustomHttpPattern {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("path" Core..=) Core.<$> path
-          ]
+          [("kind" Core..=) Core.<$> kind, ("path" Core..=) Core.<$> path]
       )
 
 -- | Request message for DisableService method.
@@ -1124,8 +1119,7 @@ instance Core.ToJSON Documentation where
   toJSON Documentation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentationRootUrl" Core..=)
-              Core.<$> documentationRootUrl,
+          [ ("documentationRootUrl" Core..=) Core.<$> documentationRootUrl,
             ("overview" Core..=) Core.<$> overview,
             ("pages" Core..=) Core.<$> pages,
             ("rules" Core..=) Core.<$> rules,
@@ -1337,7 +1331,11 @@ data EnumValue = EnumValue
 newEnumValue ::
   EnumValue
 newEnumValue =
-  EnumValue {name = Core.Nothing, number = Core.Nothing, options = Core.Nothing}
+  EnumValue
+    { name = Core.Nothing,
+      number = Core.Nothing,
+      options = Core.Nothing
+    }
 
 instance Core.FromJSON EnumValue where
   parseJSON =
@@ -1378,16 +1376,12 @@ instance Core.FromJSON Experimental where
   parseJSON =
     Core.withObject
       "Experimental"
-      ( \o ->
-          Experimental Core.<$> (o Core..:? "authorization")
-      )
+      (\o -> Experimental Core.<$> (o Core..:? "authorization"))
 
 instance Core.ToJSON Experimental where
   toJSON Experimental {..} =
     Core.object
-      ( Core.catMaybes
-          [("authorization" Core..=) Core.<$> authorization]
-      )
+      (Core.catMaybes [("authorization" Core..=) Core.<$> authorization])
 
 -- | A single field of a message type.
 --
@@ -1487,7 +1481,10 @@ data Http = Http
 newHttp ::
   Http
 newHttp =
-  Http {fullyDecodeReservedExpansion = Core.Nothing, rules = Core.Nothing}
+  Http
+    { fullyDecodeReservedExpansion = Core.Nothing,
+      rules = Core.Nothing
+    }
 
 instance Core.FromJSON Http where
   parseJSON =
@@ -1628,7 +1625,6 @@ instance Core.ToJSON Http where
 --     -   Fields referred by the path template. They are passed via the URL path.
 --     -   Fields referred by the HttpRule.body. They are passed via the HTTP request body.
 --     -   All other fields are passed via the URL query parameters, and the parameter name is the field path in the request message. A repeated field can be represented as multiple query parameters under the same name.
---
 -- 2.  If HttpRule.body is \"*\", there is no URL query parameter, all fields are passed via URL path and HTTP request body.
 -- 3.  If HttpRule.body is omitted, there is no HTTP request body, all fields are passed via URL path and URL query parameters.
 --
@@ -1749,8 +1745,7 @@ instance Core.ToJSON HttpRule where
   toJSON HttpRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalBindings" Core..=)
-              Core.<$> additionalBindings,
+          [ ("additionalBindings" Core..=) Core.<$> additionalBindings,
             ("body" Core..=) Core.<$> body,
             ("custom" Core..=) Core.<$> custom,
             ("delete" Core..=) Core.<$> delete,
@@ -1961,10 +1956,8 @@ instance Core.ToJSON Logging where
   toJSON Logging {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -1983,7 +1976,10 @@ data LoggingDestination = LoggingDestination
 newLoggingDestination ::
   LoggingDestination
 newLoggingDestination =
-  LoggingDestination {logs = Core.Nothing, monitoredResource = Core.Nothing}
+  LoggingDestination
+    { logs = Core.Nothing,
+      monitoredResource = Core.Nothing
+    }
 
 instance Core.FromJSON LoggingDestination where
   parseJSON =
@@ -2000,8 +1996,7 @@ instance Core.ToJSON LoggingDestination where
     Core.object
       ( Core.catMaybes
           [ ("logs" Core..=) Core.<$> logs,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -2061,11 +2056,9 @@ instance Core.ToJSON Method where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("options" Core..=) Core.<$> options,
-            ("requestStreaming" Core..=)
-              Core.<$> requestStreaming,
+            ("requestStreaming" Core..=) Core.<$> requestStreaming,
             ("requestTypeUrl" Core..=) Core.<$> requestTypeUrl,
-            ("responseStreaming" Core..=)
-              Core.<$> responseStreaming,
+            ("responseStreaming" Core..=) Core.<$> responseStreaming,
             ("responseTypeUrl" Core..=) Core.<$> responseTypeUrl,
             ("syntax" Core..=) Core.<$> syntax
           ]
@@ -2268,7 +2261,8 @@ data MetricRule = MetricRule
 -- | Creates a value of 'MetricRule' with the minimum fields required to make a request.
 newMetricRule ::
   MetricRule
-newMetricRule = MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
+newMetricRule =
+  MetricRule {metricCosts = Core.Nothing, selector = Core.Nothing}
 
 instance Core.FromJSON MetricRule where
   parseJSON =
@@ -2295,8 +2289,7 @@ instance Core.ToJSON MetricRule where
 --
 -- /See:/ 'newMetricRule_MetricCosts' smart constructor.
 newtype MetricRule_MetricCosts = MetricRule_MetricCosts
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2312,14 +2305,10 @@ instance Core.FromJSON MetricRule_MetricCosts where
   parseJSON =
     Core.withObject
       "MetricRule_MetricCosts"
-      ( \o ->
-          MetricRule_MetricCosts
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> MetricRule_MetricCosts Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON MetricRule_MetricCosts where
-  toJSON MetricRule_MetricCosts {..} =
-    Core.toJSON additional
+  toJSON MetricRule_MetricCosts {..} = Core.toJSON additional
 
 -- | Declares an API Interface to be included in this interface. The including interface must redeclare all the methods from the included interface, but documentation and options are inherited as follows:
 --
@@ -2405,17 +2394,14 @@ instance Core.FromJSON Mixin where
     Core.withObject
       "Mixin"
       ( \o ->
-          Mixin
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
+          Mixin Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "root")
       )
 
 instance Core.ToJSON Mixin where
   toJSON Mixin {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("root" Core..=) Core.<$> root
-          ]
+          [("name" Core..=) Core.<$> name, ("root" Core..=) Core.<$> root]
       )
 
 -- | An object that describes the schema of a MonitoredResource object using a type name and a set of labels. For example, the monitored resource descriptor for Google Compute Engine VM instances has a type of @\"gce_instance\"@ and specifies the use of the labels @\"instance_id\"@ and @\"zone\"@ to identify particular VM instances.
@@ -2539,10 +2525,8 @@ instance Core.ToJSON Monitoring where
   toJSON Monitoring {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consumerDestinations" Core..=)
-              Core.<$> consumerDestinations,
-            ("producerDestinations" Core..=)
-              Core.<$> producerDestinations
+          [ ("consumerDestinations" Core..=) Core.<$> consumerDestinations,
+            ("producerDestinations" Core..=) Core.<$> producerDestinations
           ]
       )
 
@@ -2581,8 +2565,7 @@ instance Core.ToJSON MonitoringDestination where
     Core.object
       ( Core.catMaybes
           [ ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResource" Core..=)
-              Core.<$> monitoredResource
+            ("monitoredResource" Core..=) Core.<$> monitoredResource
           ]
       )
 
@@ -2611,24 +2594,20 @@ newtype OAuthRequirements = OAuthRequirements
 -- | Creates a value of 'OAuthRequirements' with the minimum fields required to make a request.
 newOAuthRequirements ::
   OAuthRequirements
-newOAuthRequirements = OAuthRequirements {canonicalScopes = Core.Nothing}
+newOAuthRequirements =
+  OAuthRequirements {canonicalScopes = Core.Nothing}
 
 instance Core.FromJSON OAuthRequirements where
   parseJSON =
     Core.withObject
       "OAuthRequirements"
-      ( \o ->
-          OAuthRequirements
-            Core.<$> (o Core..:? "canonicalScopes")
-      )
+      (\o -> OAuthRequirements Core.<$> (o Core..:? "canonicalScopes"))
 
 instance Core.ToJSON OAuthRequirements where
   toJSON OAuthRequirements {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canonicalScopes" Core..=)
-              Core.<$> canonicalScopes
-          ]
+          [("canonicalScopes" Core..=) Core.<$> canonicalScopes]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -2699,19 +2678,17 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
 -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
@@ -2727,19 +2704,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | The metadata associated with a long running operation resource.
 --
@@ -2783,8 +2758,7 @@ instance Core.ToJSON OperationMetadata where
   toJSON OperationMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("progressPercentage" Core..=)
-              Core.<$> progressPercentage,
+          [ ("progressPercentage" Core..=) Core.<$> progressPercentage,
             ("resourceNames" Core..=) Core.<$> resourceNames,
             ("startTime" Core..=) Core.<$> startTime,
             ("steps" Core..=) Core.<$> steps
@@ -2812,17 +2786,14 @@ instance Core.FromJSON Option where
     Core.withObject
       "Option"
       ( \o ->
-          Option
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+          Option Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Option where
   toJSON Option {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | The option\'s value packed in an Any message. If the value is a primitive, the corresponding wrapper type defined in google\/protobuf\/wrappers.proto should be used. If the value is an enum, it should be stored as an int32 value using the google.protobuf.Int32Value type.
@@ -2845,9 +2816,7 @@ instance Core.FromJSON Option_Value where
   parseJSON =
     Core.withObject
       "Option_Value"
-      ( \o ->
-          Option_Value Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Option_Value Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Option_Value where
   toJSON Option_Value {..} = Core.toJSON additional
@@ -2869,7 +2838,11 @@ data Page = Page
 newPage ::
   Page
 newPage =
-  Page {content = Core.Nothing, name = Core.Nothing, subpages = Core.Nothing}
+  Page
+    { content = Core.Nothing,
+      name = Core.Nothing,
+      subpages = Core.Nothing
+    }
 
 instance Core.FromJSON Page where
   parseJSON =
@@ -2917,7 +2890,8 @@ instance Core.FromJSON PublishedService where
       "PublishedService"
       ( \o ->
           PublishedService
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "service")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "service")
       )
 
 instance Core.ToJSON PublishedService where
@@ -3075,18 +3049,12 @@ instance Core.FromJSON QuotaLimit where
       "QuotaLimit"
       ( \o ->
           QuotaLimit
-            Core.<$> ( o Core..:? "defaultLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "defaultLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "duration")
-            Core.<*> ( o Core..:? "freeTier"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "freeTier" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxLimit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "metric")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "unit")
@@ -3097,15 +3065,12 @@ instance Core.ToJSON QuotaLimit where
   toJSON QuotaLimit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultLimit" Core..=) Core.. Core.AsText
-              Core.<$> defaultLimit,
+          [ ("defaultLimit" Core..=) Core.. Core.AsText Core.<$> defaultLimit,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
             ("duration" Core..=) Core.<$> duration,
-            ("freeTier" Core..=) Core.. Core.AsText
-              Core.<$> freeTier,
-            ("maxLimit" Core..=) Core.. Core.AsText
-              Core.<$> maxLimit,
+            ("freeTier" Core..=) Core.. Core.AsText Core.<$> freeTier,
+            ("maxLimit" Core..=) Core.. Core.AsText Core.<$> maxLimit,
             ("metric" Core..=) Core.<$> metric,
             ("name" Core..=) Core.<$> name,
             ("unit" Core..=) Core.<$> unit,
@@ -3117,8 +3082,7 @@ instance Core.ToJSON QuotaLimit where
 --
 -- /See:/ 'newQuotaLimit_Values' smart constructor.
 newtype QuotaLimit_Values = QuotaLimit_Values
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3127,15 +3091,14 @@ newQuotaLimit_Values ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Int64 ->
   QuotaLimit_Values
-newQuotaLimit_Values additional = QuotaLimit_Values {additional = additional}
+newQuotaLimit_Values additional =
+  QuotaLimit_Values {additional = additional}
 
 instance Core.FromJSON QuotaLimit_Values where
   parseJSON =
     Core.withObject
       "QuotaLimit_Values"
-      ( \o ->
-          QuotaLimit_Values Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> QuotaLimit_Values Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON QuotaLimit_Values where
   toJSON QuotaLimit_Values {..} = Core.toJSON additional
@@ -3155,7 +3118,10 @@ data SearchServicesResponse = SearchServicesResponse
 newSearchServicesResponse ::
   SearchServicesResponse
 newSearchServicesResponse =
-  SearchServicesResponse {nextPageToken = Core.Nothing, services = Core.Nothing}
+  SearchServicesResponse
+    { nextPageToken = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON SearchServicesResponse where
   parseJSON =
@@ -3355,16 +3321,13 @@ instance Core.ToJSON Service where
             ("logging" Core..=) Core.<$> logging,
             ("logs" Core..=) Core.<$> logs,
             ("metrics" Core..=) Core.<$> metrics,
-            ("monitoredResources" Core..=)
-              Core.<$> monitoredResources,
+            ("monitoredResources" Core..=) Core.<$> monitoredResources,
             ("monitoring" Core..=) Core.<$> monitoring,
             ("name" Core..=) Core.<$> name,
-            ("producerProjectId" Core..=)
-              Core.<$> producerProjectId,
+            ("producerProjectId" Core..=) Core.<$> producerProjectId,
             ("quota" Core..=) Core.<$> quota,
             ("sourceInfo" Core..=) Core.<$> sourceInfo,
-            ("systemParameters" Core..=)
-              Core.<$> systemParameters,
+            ("systemParameters" Core..=) Core.<$> systemParameters,
             ("systemTypes" Core..=) Core.<$> systemTypes,
             ("title" Core..=) Core.<$> title,
             ("types" Core..=) Core.<$> types,
@@ -3390,16 +3353,12 @@ instance Core.FromJSON SourceContext where
   parseJSON =
     Core.withObject
       "SourceContext"
-      ( \o ->
-          SourceContext Core.<$> (o Core..:? "fileName")
-      )
+      (\o -> SourceContext Core.<$> (o Core..:? "fileName"))
 
 instance Core.ToJSON SourceContext where
   toJSON SourceContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("fileName" Core..=) Core.<$> fileName]
-      )
+      (Core.catMaybes [("fileName" Core..=) Core.<$> fileName])
 
 -- | Source information used to create a Service Config
 --
@@ -3419,16 +3378,12 @@ instance Core.FromJSON SourceInfo where
   parseJSON =
     Core.withObject
       "SourceInfo"
-      ( \o ->
-          SourceInfo Core.<$> (o Core..:? "sourceFiles")
-      )
+      (\o -> SourceInfo Core.<$> (o Core..:? "sourceFiles"))
 
 instance Core.ToJSON SourceInfo where
   toJSON SourceInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("sourceFiles" Core..=) Core.<$> sourceFiles]
-      )
+      (Core.catMaybes [("sourceFiles" Core..=) Core.<$> sourceFiles])
 
 --
 -- /See:/ 'newSourceInfo_SourceFilesItem' smart constructor.
@@ -3451,13 +3406,11 @@ instance Core.FromJSON SourceInfo_SourceFilesItem where
     Core.withObject
       "SourceInfo_SourceFilesItem"
       ( \o ->
-          SourceInfo_SourceFilesItem
-            Core.<$> (Core.parseJSONObject o)
+          SourceInfo_SourceFilesItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SourceInfo_SourceFilesItem where
-  toJSON SourceInfo_SourceFilesItem {..} =
-    Core.toJSON additional
+  toJSON SourceInfo_SourceFilesItem {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. The error model is designed to be:
 --
@@ -3503,7 +3456,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -3539,19 +3496,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents the status of one operation step.
 --
@@ -3628,8 +3583,7 @@ instance Core.ToJSON SystemParameter where
       ( Core.catMaybes
           [ ("httpHeader" Core..=) Core.<$> httpHeader,
             ("name" Core..=) Core.<$> name,
-            ("urlQueryParameter" Core..=)
-              Core.<$> urlQueryParameter
+            ("urlQueryParameter" Core..=) Core.<$> urlQueryParameter
           ]
       )
 
@@ -3650,7 +3604,10 @@ data SystemParameterRule = SystemParameterRule
 newSystemParameterRule ::
   SystemParameterRule
 newSystemParameterRule =
-  SystemParameterRule {parameters = Core.Nothing, selector = Core.Nothing}
+  SystemParameterRule
+    { parameters = Core.Nothing,
+      selector = Core.Nothing
+    }
 
 instance Core.FromJSON SystemParameterRule where
   parseJSON =
@@ -3715,14 +3672,11 @@ instance Core.FromJSON SystemParameters where
   parseJSON =
     Core.withObject
       "SystemParameters"
-      ( \o ->
-          SystemParameters Core.<$> (o Core..:? "rules")
-      )
+      (\o -> SystemParameters Core.<$> (o Core..:? "rules"))
 
 instance Core.ToJSON SystemParameters where
   toJSON SystemParameters {..} =
-    Core.object
-      (Core.catMaybes [("rules" Core..=) Core.<$> rules])
+    Core.object (Core.catMaybes [("rules" Core..=) Core.<$> rules])
 
 -- | A protocol buffer message type.
 --
@@ -3893,7 +3847,6 @@ instance Core.ToJSON UsageRule where
           [ ("allowUnregisteredCalls" Core..=)
               Core.<$> allowUnregisteredCalls,
             ("selector" Core..=) Core.<$> selector,
-            ("skipServiceControl" Core..=)
-              Core.<$> skipServiceControl
+            ("skipServiceControl" Core..=) Core.<$> skipServiceControl
           ]
       )

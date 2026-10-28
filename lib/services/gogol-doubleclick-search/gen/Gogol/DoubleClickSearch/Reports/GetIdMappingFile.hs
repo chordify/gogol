@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickSearch.Reports.GetIdMappingFile
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DoubleClickSearch.Reports.GetIdMappingFile
 where
 
 import Gogol.DoubleClickSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclicksearch.reports.getIdMappingFile@ method which the
 -- 'DoubleClickSearchReportsGetIdMappingFile' request conforms to.
@@ -60,19 +58,19 @@ type DoubleClickSearchReportsGetIdMappingFileResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] IdMappingFile
     Core.:<|> "doubleclicksearch"
-      Core.:> "v2"
-      Core.:> "agency"
-      Core.:> Core.Capture "agencyId" Core.Int64
-      Core.:> "advertiser"
-      Core.:> Core.Capture "advertiserId" Core.Int64
-      Core.:> "idmapping"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v2"
+    Core.:> "agency"
+    Core.:> Core.Capture "agencyId" Core.Int64
+    Core.:> "advertiser"
+    Core.:> Core.Capture "advertiserId" Core.Int64
+    Core.:> "idmapping"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Downloads a csv file(encoded in UTF-8) that contains ID mappings between legacy SA360 and new SA360. The file includes all children entities of the given advertiser(e.g. engine accounts, campaigns, ad groups, etc.) that exist in both legacy SA360 and new SA360.
 --
@@ -117,55 +115,43 @@ instance
   Core.GoogleRequest
     DoubleClickSearchReportsGetIdMappingFile
   where
-  type
-    Rs DoubleClickSearchReportsGetIdMappingFile =
-      IdMappingFile
+  type Rs DoubleClickSearchReportsGetIdMappingFile = IdMappingFile
   type
     Scopes DoubleClickSearchReportsGetIdMappingFile =
       '[Doubleclicksearch'FullControl]
-  requestClient
-    DoubleClickSearchReportsGetIdMappingFile {..} =
-      go
-        agencyId
-        advertiserId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        doubleClickSearchService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DoubleClickSearchReportsGetIdMappingFileResource
-            )
-            Core.mempty
+  requestClient DoubleClickSearchReportsGetIdMappingFile {..} =
+    go
+      agencyId
+      advertiserId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      doubleClickSearchService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DoubleClickSearchReportsGetIdMappingFileResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaDownload
-        DoubleClickSearchReportsGetIdMappingFile
-    )
+    (Core.MediaDownload DoubleClickSearchReportsGetIdMappingFile)
   where
   type
     Rs
-      ( Core.MediaDownload
-          DoubleClickSearchReportsGetIdMappingFile
-      ) =
+      (Core.MediaDownload DoubleClickSearchReportsGetIdMappingFile) =
       Core.Stream
   type
     Scopes
-      ( Core.MediaDownload
-          DoubleClickSearchReportsGetIdMappingFile
-      ) =
+      (Core.MediaDownload DoubleClickSearchReportsGetIdMappingFile) =
       Core.Scopes DoubleClickSearchReportsGetIdMappingFile
   requestClient
-    ( Core.MediaDownload
-        DoubleClickSearchReportsGetIdMappingFile {..}
-      ) =
+    (Core.MediaDownload DoubleClickSearchReportsGetIdMappingFile {..}) =
       go
         agencyId
         advertiserId
@@ -180,7 +166,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  DoubleClickSearchReportsGetIdMappingFileResource
+                Core.Proxy DoubleClickSearchReportsGetIdMappingFileResource
             )
             Core.mempty

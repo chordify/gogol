@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.NotificationChannels.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.NotificationChannels.Delete
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.notificationChannels.delete@ method which the
 -- 'MonitoringProjectsNotificationChannelsDelete' request conforms to.
@@ -66,7 +64,7 @@ data MonitoringProjectsNotificationChannelsDelete = MonitoringProjectsNotificati
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.
+    -- | If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, this operation will fail if the notification channel is referenced by existing alerting policies.
     force :: (Core.Maybe Core.Bool),
     -- | Required. The channel for which to execute the request. The format is: projects\/[PROJECT/ID/OR/NUMBER]\/notificationChannels\/[CHANNEL/ID]
     name :: Core.Text,
@@ -84,7 +82,8 @@ newMonitoringProjectsNotificationChannelsDelete ::
   MonitoringProjectsNotificationChannelsDelete
 newMonitoringProjectsNotificationChannelsDelete name =
   MonitoringProjectsNotificationChannelsDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       force = Core.Nothing,
@@ -97,30 +96,25 @@ instance
   Core.GoogleRequest
     MonitoringProjectsNotificationChannelsDelete
   where
+  type Rs MonitoringProjectsNotificationChannelsDelete = Empty
   type
-    Rs MonitoringProjectsNotificationChannelsDelete =
-      Empty
-  type
-    Scopes
-      MonitoringProjectsNotificationChannelsDelete =
+    Scopes MonitoringProjectsNotificationChannelsDelete =
       '[CloudPlatform'FullControl, Monitoring'FullControl]
-  requestClient
-    MonitoringProjectsNotificationChannelsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        force
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringProjectsNotificationChannelsDeleteResource
-            )
-            Core.mempty
+  requestClient MonitoringProjectsNotificationChannelsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      force
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringProjectsNotificationChannelsDeleteResource
+          )
+          Core.mempty

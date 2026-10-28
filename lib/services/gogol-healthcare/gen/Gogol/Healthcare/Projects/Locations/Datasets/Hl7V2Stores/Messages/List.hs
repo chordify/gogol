@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.List
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.messages.list@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList' request conforms to.
@@ -83,7 +81,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList = HealthcareProj
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from the previous List request, if any.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Name of the HL7v2 store to retrieve messages from.
+    -- | Required. Name of the HL7v2 store to retrieve messages from.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -96,36 +94,37 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList = HealthcareProj
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList ::
-  -- |  Name of the HL7v2 store to retrieve messages from. See 'parent'.
+  -- |  Required. Name of the HL7v2 store to retrieve messages from. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList
-newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList parent =
-  HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      filter = Core.Nothing,
-      orderBy = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      view = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList
+  parent =
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        filter = Core.Nothing,
+        orderBy = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        view = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList =
+    Rs HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList =
       ListMessagesResponse
   type
     Scopes
       HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesList {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Deidentify
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.deidentify@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresDeidentify' request conforms to.
@@ -68,7 +66,7 @@ data HealthcareProjectsLocationsDatasetsFhirStoresDeidentify = HealthcareProject
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: DeidentifyFhirStoreRequest,
-    -- | Source FHIR store resource name. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    -- | Required. Source FHIR store resource name. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
     sourceStore :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -81,32 +79,33 @@ data HealthcareProjectsLocationsDatasetsFhirStoresDeidentify = HealthcareProject
 newHealthcareProjectsLocationsDatasetsFhirStoresDeidentify ::
   -- |  Multipart request metadata. See 'payload'.
   DeidentifyFhirStoreRequest ->
-  -- |  Source FHIR store resource name. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'sourceStore'.
+  -- |  Required. Source FHIR store resource name. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. See 'sourceStore'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresDeidentify
-newHealthcareProjectsLocationsDatasetsFhirStoresDeidentify payload sourceStore =
-  HealthcareProjectsLocationsDatasetsFhirStoresDeidentify
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      sourceStore = sourceStore,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsFhirStoresDeidentify
+  payload
+  sourceStore =
+    HealthcareProjectsLocationsDatasetsFhirStoresDeidentify
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        sourceStore = sourceStore,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsFhirStoresDeidentify
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresDeidentify =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresDeidentify =
       Operation
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresDeidentify =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresDeidentify =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresDeidentify {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Run
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Run
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.testCases.run@ method which the
 -- 'DialogFlowProjectsLocationsAgentsTestCasesRun' request conforms to.
@@ -68,7 +66,7 @@ data DialogFlowProjectsLocationsAgentsTestCasesRun = DialogFlowProjectsLocations
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Format of test case name to run: @projects\/\/locations\/ \/agents\/\/testCases\/@.
+    -- | Required. Format of test case name to run: @projects\/\/locations\/\/agents\/\/testCases\/@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudDialogflowCxV3RunTestCaseRequest,
@@ -81,14 +79,15 @@ data DialogFlowProjectsLocationsAgentsTestCasesRun = DialogFlowProjectsLocations
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsTestCasesRun' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsTestCasesRun ::
-  -- |  Required. Format of test case name to run: @projects\/\/locations\/ \/agents\/\/testCases\/@. See 'name'.
+  -- |  Required. Format of test case name to run: @projects\/\/locations\/\/agents\/\/testCases\/@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3RunTestCaseRequest ->
   DialogFlowProjectsLocationsAgentsTestCasesRun
 newDialogFlowProjectsLocationsAgentsTestCasesRun name payload =
   DialogFlowProjectsLocationsAgentsTestCasesRun
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -105,26 +104,23 @@ instance
     Rs DialogFlowProjectsLocationsAgentsTestCasesRun =
       GoogleLongrunningOperation
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsTestCasesRun =
+    Scopes DialogFlowProjectsLocationsAgentsTestCasesRun =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsTestCasesRun {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsTestCasesRunResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsTestCasesRun {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsTestCasesRunResource
+          )
+          Core.mempty

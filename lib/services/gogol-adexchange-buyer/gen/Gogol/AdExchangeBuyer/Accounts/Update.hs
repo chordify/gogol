@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Accounts.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Accounts.Update
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.accounts.update@ method which the
 -- 'AdExchangeBuyerAccountsUpdate' request conforms to.
@@ -49,9 +47,7 @@ type AdExchangeBuyerAccountsUpdateResource =
     Core.:> "v1.4"
     Core.:> "accounts"
     Core.:> Core.Capture "id" Core.Int32
-    Core.:> Core.QueryParam
-              "confirmUnsafeAccountChange"
-              Core.Bool
+    Core.:> Core.QueryParam "confirmUnsafeAccountChange" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Account
     Core.:> Core.Put '[Core.JSON] Account
@@ -78,19 +74,15 @@ newAdExchangeBuyerAccountsUpdate ::
   AdExchangeBuyerAccountsUpdate
 newAdExchangeBuyerAccountsUpdate id payload =
   AdExchangeBuyerAccountsUpdate
-    { confirmUnsafeAccountChange = Core.Nothing,
+    { confirmUnsafeAccountChange =
+        Core.Nothing,
       id = id,
       payload = payload
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerAccountsUpdate
-  where
+instance Core.GoogleRequest AdExchangeBuyerAccountsUpdate where
   type Rs AdExchangeBuyerAccountsUpdate = Account
-  type
-    Scopes AdExchangeBuyerAccountsUpdate =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerAccountsUpdate = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerAccountsUpdate {..} =
     go
       id
@@ -101,7 +93,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerAccountsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerAccountsUpdateResource)
           Core.mempty

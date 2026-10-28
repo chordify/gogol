@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Projects.Locations.Buckets.Views.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a view on a log bucket..
+-- Gets a view on a log bucket.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.locations.buckets.views.get@.
 module Gogol.Logging.Projects.Locations.Buckets.Views.Get
@@ -40,7 +38,7 @@ module Gogol.Logging.Projects.Locations.Buckets.Views.Get
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.projects.locations.buckets.views.get@ method which the
 -- 'LoggingProjectsLocationsBucketsViewsGet' request conforms to.
@@ -55,7 +53,7 @@ type LoggingProjectsLocationsBucketsViewsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] LogView
 
--- | Gets a view on a log bucket..
+-- | Gets a view on a log bucket.
 --
 -- /See:/ 'newLoggingProjectsLocationsBucketsViewsGet' smart constructor.
 data LoggingProjectsLocationsBucketsViewsGet = LoggingProjectsLocationsBucketsViewsGet
@@ -89,13 +87,8 @@ newLoggingProjectsLocationsBucketsViewsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingProjectsLocationsBucketsViewsGet
-  where
-  type
-    Rs LoggingProjectsLocationsBucketsViewsGet =
-      LogView
+instance Core.GoogleRequest LoggingProjectsLocationsBucketsViewsGet where
+  type Rs LoggingProjectsLocationsBucketsViewsGet = LogView
   type
     Scopes LoggingProjectsLocationsBucketsViewsGet =
       '[ CloudPlatform'FullControl,
@@ -103,22 +96,20 @@ instance
          Logging'Admin,
          Logging'Read
        ]
-  requestClient
-    LoggingProjectsLocationsBucketsViewsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingProjectsLocationsBucketsViewsGetResource
-            )
-            Core.mempty
+  requestClient LoggingProjectsLocationsBucketsViewsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingProjectsLocationsBucketsViewsGetResource
+          )
+          Core.mempty

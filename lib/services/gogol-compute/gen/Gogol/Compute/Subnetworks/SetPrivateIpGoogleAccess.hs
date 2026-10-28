@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Subnetworks.SetPrivateIpGoogleAccess
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Subnetworks.SetPrivateIpGoogleAccess
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.subnetworks.setPrivateIpGoogleAccess@ method which the
 -- 'ComputeSubnetworksSetPrivateIpGoogleAccess' request conforms to.
@@ -104,51 +102,50 @@ newComputeSubnetworksSetPrivateIpGoogleAccess ::
   -- |  Name of the Subnetwork resource. See 'subnetwork'.
   Core.Text ->
   ComputeSubnetworksSetPrivateIpGoogleAccess
-newComputeSubnetworksSetPrivateIpGoogleAccess payload project region subnetwork =
-  ComputeSubnetworksSetPrivateIpGoogleAccess
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      subnetwork = subnetwork,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeSubnetworksSetPrivateIpGoogleAccess
+  payload
+  project
+  region
+  subnetwork =
+    ComputeSubnetworksSetPrivateIpGoogleAccess
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        subnetwork = subnetwork,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeSubnetworksSetPrivateIpGoogleAccess
   where
+  type Rs ComputeSubnetworksSetPrivateIpGoogleAccess = Operation
   type
-    Rs ComputeSubnetworksSetPrivateIpGoogleAccess =
-      Operation
-  type
-    Scopes
-      ComputeSubnetworksSetPrivateIpGoogleAccess =
+    Scopes ComputeSubnetworksSetPrivateIpGoogleAccess =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeSubnetworksSetPrivateIpGoogleAccess {..} =
-      go
-        project
-        region
-        subnetwork
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeSubnetworksSetPrivateIpGoogleAccessResource
-            )
-            Core.mempty
+  requestClient ComputeSubnetworksSetPrivateIpGoogleAccess {..} =
+    go
+      project
+      region
+      subnetwork
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeSubnetworksSetPrivateIpGoogleAccessResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidManagement.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidManagement.Internal.Sum
@@ -41,6 +39,15 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * AdvancedSecurityOverrides_ContentProtectionPolicy
+    AdvancedSecurityOverrides_ContentProtectionPolicy
+      ( AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONPOLICYUNSPECIFIED,
+        AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONDISABLED,
+        AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONENFORCED,
+        AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONUSERCHOICE,
+        ..
+      ),
+
     -- * AdvancedSecurityOverrides_DeveloperSettings
     AdvancedSecurityOverrides_DeveloperSettings
       ( AdvancedSecurityOverrides_DeveloperSettings_DEVELOPERSETTINGSUNSPECIFIED,
@@ -54,6 +61,15 @@ module Gogol.AndroidManagement.Internal.Sum
       ( AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_GOOGLEPLAYPROTECTVERIFYAPPSUNSPECIFIED,
         AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_VERIFYAPPSENFORCED,
         AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_VERIFYAPPSUSERCHOICE,
+        ..
+      ),
+
+    -- * AdvancedSecurityOverrides_MtePolicy
+    AdvancedSecurityOverrides_MtePolicy
+      ( AdvancedSecurityOverrides_MtePolicy_MTEPOLICYUNSPECIFIED,
+        AdvancedSecurityOverrides_MtePolicy_MTEUSERCHOICE,
+        AdvancedSecurityOverrides_MtePolicy_MTEENFORCED,
+        AdvancedSecurityOverrides_MtePolicy_MTEDISABLED,
         ..
       ),
 
@@ -141,6 +157,13 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * ApplicationPolicy_CredentialProviderPolicy
+    ApplicationPolicy_CredentialProviderPolicy
+      ( ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERPOLICYUNSPECIFIED,
+        ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERALLOWED,
+        ..
+      ),
+
     -- * ApplicationPolicy_DefaultPermissionPolicy
     ApplicationPolicy_DefaultPermissionPolicy
       ( ApplicationPolicy_DefaultPermissionPolicy_PERMISSIONPOLICYUNSPECIFIED,
@@ -161,6 +184,7 @@ module Gogol.AndroidManagement.Internal.Sum
         ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP,
         ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS,
         ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS,
+        ApplicationPolicy_DelegatedScopesItem_CERTSELECTION,
         ..
       ),
 
@@ -173,6 +197,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ApplicationPolicy_InstallType_Available,
         ApplicationPolicy_InstallType_REQUIREDFORSETUP,
         ApplicationPolicy_InstallType_Kiosk,
+        ..
+      ),
+
+    -- * ApplicationPolicy_UserControlSettings
+    ApplicationPolicy_UserControlSettings
+      ( ApplicationPolicy_UserControlSettings_USERCONTROLSETTINGSUNSPECIFIED,
+        ApplicationPolicy_UserControlSettings_USERCONTROLALLOWED,
+        ApplicationPolicy_UserControlSettings_USERCONTROLDISALLOWED,
         ..
       ),
 
@@ -198,6 +230,14 @@ module Gogol.AndroidManagement.Internal.Sum
       ( ApplicationReport_State_APPLICATIONSTATEUNSPECIFIED,
         ApplicationReport_State_Removed,
         ApplicationReport_State_Installed,
+        ..
+      ),
+
+    -- * ApplicationReport_UserFacingType
+    ApplicationReport_UserFacingType
+      ( ApplicationReport_UserFacingType_USERFACINGTYPEUNSPECIFIED,
+        ApplicationReport_UserFacingType_NOTUSERFACING,
+        ApplicationReport_UserFacingType_USERFACING,
         ..
       ),
 
@@ -237,6 +277,8 @@ module Gogol.AndroidManagement.Internal.Sum
         Command_Type_Reboot,
         Command_Type_RELINQUISHOWNERSHIP,
         Command_Type_CLEARAPPDATA,
+        Command_Type_STARTLOSTMODE,
+        Command_Type_STOPLOSTMODE,
         ..
       ),
 
@@ -245,6 +287,16 @@ module Gogol.AndroidManagement.Internal.Sum
       ( CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODESTATUSUNKNOWN,
         CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODEDISABLED,
         CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODEENABLED,
+        ..
+      ),
+
+    -- * CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+    CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+      ( CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSTATUSUNSPECIFIED,
+        CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONDISABLED,
+        CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSUCCEEDED,
+        CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONNOTSUPPORTED,
+        CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONFAILED,
         ..
       ),
 
@@ -270,6 +322,7 @@ module Gogol.AndroidManagement.Internal.Sum
       ( CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEUNSPECIFIED,
         CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED,
         CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED,
+        CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWEDEXCEPTSYSTEM,
         ..
       ),
 
@@ -288,6 +341,9 @@ module Gogol.AndroidManagement.Internal.Sum
         Device_AppliedState_Disabled,
         Device_AppliedState_Deleted,
         Device_AppliedState_Provisioning,
+        Device_AppliedState_Lost,
+        Device_AppliedState_PREPARINGFORMIGRATION,
+        Device_AppliedState_DEACTIVATEDBYDEVICEFINANCE,
         ..
       ),
 
@@ -314,6 +370,87 @@ module Gogol.AndroidManagement.Internal.Sum
         Device_State_Disabled,
         Device_State_Deleted,
         Device_State_Provisioning,
+        Device_State_Lost,
+        Device_State_PREPARINGFORMIGRATION,
+        Device_State_DEACTIVATEDBYDEVICEFINANCE,
+        ..
+      ),
+
+    -- * DeviceConnectivityManagement_ConfigureWifi
+    DeviceConnectivityManagement_ConfigureWifi
+      ( DeviceConnectivityManagement_ConfigureWifi_CONFIGUREWIFIUNSPECIFIED,
+        DeviceConnectivityManagement_ConfigureWifi_ALLOWCONFIGURINGWIFI,
+        DeviceConnectivityManagement_ConfigureWifi_DISALLOWADDWIFICONFIG,
+        DeviceConnectivityManagement_ConfigureWifi_DISALLOWCONFIGURINGWIFI,
+        ..
+      ),
+
+    -- * DeviceConnectivityManagement_TetheringSettings
+    DeviceConnectivityManagement_TetheringSettings
+      ( DeviceConnectivityManagement_TetheringSettings_TETHERINGSETTINGSUNSPECIFIED,
+        DeviceConnectivityManagement_TetheringSettings_ALLOWALLTETHERING,
+        DeviceConnectivityManagement_TetheringSettings_DISALLOWWIFITETHERING,
+        DeviceConnectivityManagement_TetheringSettings_DISALLOWALLTETHERING,
+        ..
+      ),
+
+    -- * DeviceConnectivityManagement_UsbDataAccess
+    DeviceConnectivityManagement_UsbDataAccess
+      ( DeviceConnectivityManagement_UsbDataAccess_USBDATAACCESSUNSPECIFIED,
+        DeviceConnectivityManagement_UsbDataAccess_ALLOWUSBDATATRANSFER,
+        DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBFILETRANSFER,
+        DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBDATATRANSFER,
+        ..
+      ),
+
+    -- * DeviceConnectivityManagement_WifiDirectSettings
+    DeviceConnectivityManagement_WifiDirectSettings
+      ( DeviceConnectivityManagement_WifiDirectSettings_WIFIDIRECTSETTINGSUNSPECIFIED,
+        DeviceConnectivityManagement_WifiDirectSettings_ALLOWWIFIDIRECT,
+        DeviceConnectivityManagement_WifiDirectSettings_DISALLOWWIFIDIRECT,
+        ..
+      ),
+
+    -- * DeviceRadioState_AirplaneModeState
+    DeviceRadioState_AirplaneModeState
+      ( DeviceRadioState_AirplaneModeState_AIRPLANEMODESTATEUNSPECIFIED,
+        DeviceRadioState_AirplaneModeState_AIRPLANEMODEUSERCHOICE,
+        DeviceRadioState_AirplaneModeState_AIRPLANEMODEDISABLED,
+        ..
+      ),
+
+    -- * DeviceRadioState_CellularTwoGState
+    DeviceRadioState_CellularTwoGState
+      ( DeviceRadioState_CellularTwoGState_CELLULARTWOGSTATEUNSPECIFIED,
+        DeviceRadioState_CellularTwoGState_CELLULARTWOGUSERCHOICE,
+        DeviceRadioState_CellularTwoGState_CELLULARTWOGDISABLED,
+        ..
+      ),
+
+    -- * DeviceRadioState_MinimumWifiSecurityLevel
+    DeviceRadioState_MinimumWifiSecurityLevel
+      ( DeviceRadioState_MinimumWifiSecurityLevel_MINIMUMWIFISECURITYLEVELUNSPECIFIED,
+        DeviceRadioState_MinimumWifiSecurityLevel_OPENNETWORKSECURITY,
+        DeviceRadioState_MinimumWifiSecurityLevel_PERSONALNETWORKSECURITY,
+        DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISENETWORKSECURITY,
+        DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISEBIT192NETWORKSECURITY,
+        ..
+      ),
+
+    -- * DeviceRadioState_UltraWidebandState
+    DeviceRadioState_UltraWidebandState
+      ( DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDSTATEUNSPECIFIED,
+        DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDUSERCHOICE,
+        DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDDISABLED,
+        ..
+      ),
+
+    -- * DeviceRadioState_WifiState
+    DeviceRadioState_WifiState
+      ( DeviceRadioState_WifiState_WIFISTATEUNSPECIFIED,
+        DeviceRadioState_WifiState_WIFISTATEUSERCHOICE,
+        DeviceRadioState_WifiState_WIFIENABLED,
+        DeviceRadioState_WifiState_WIFIDISABLED,
         ..
       ),
 
@@ -344,6 +481,7 @@ module Gogol.AndroidManagement.Internal.Sum
       ( EnrollmentToken_AllowPersonalUsage_ALLOWPERSONALUSAGEUNSPECIFIED,
         EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEALLOWED,
         EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWED,
+        EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS,
         ..
       ),
 
@@ -355,6 +493,63 @@ module Gogol.AndroidManagement.Internal.Sum
         Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
         Enterprise_EnabledNotificationTypesItem_Command,
         Enterprise_EnabledNotificationTypesItem_USAGELOGS,
+        Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE,
+        ..
+      ),
+
+    -- * Enterprise_EnterpriseType
+    Enterprise_EnterpriseType
+      ( Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED,
+        Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN,
+        Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGoogleDomainType
+    Enterprise_ManagedGoogleDomainType
+      ( Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED,
+        Enterprise_ManagedGoogleDomainType_TYPETEAM,
+        Enterprise_ManagedGoogleDomainType_TYPEDOMAIN,
+        ..
+      ),
+
+    -- * Enterprise_ManagedGooglePlayAccountsEnterpriseType
+    Enterprise_ManagedGooglePlayAccountsEnterpriseType
+      ( Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED,
+        Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED,
+        Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED,
+        ..
+      ),
+
+    -- * GoogleAuthenticationSettings_GoogleAuthenticationRequired
+    GoogleAuthenticationSettings_GoogleAuthenticationRequired
+      ( GoogleAuthenticationSettings_GoogleAuthenticationRequired_GOOGLEAUTHENTICATIONREQUIREDUNSPECIFIED,
+        GoogleAuthenticationSettings_GoogleAuthenticationRequired_NOTREQUIRED,
+        GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required,
+        ..
+      ),
+
+    -- * InstallConstraint_ChargingConstraint
+    InstallConstraint_ChargingConstraint
+      ( InstallConstraint_ChargingConstraint_CHARGINGCONSTRAINTUNSPECIFIED,
+        InstallConstraint_ChargingConstraint_CHARGINGNOTREQUIRED,
+        InstallConstraint_ChargingConstraint_INSTALLONLYWHENCHARGING,
+        ..
+      ),
+
+    -- * InstallConstraint_DeviceIdleConstraint
+    InstallConstraint_DeviceIdleConstraint
+      ( InstallConstraint_DeviceIdleConstraint_DEVICEIDLECONSTRAINTUNSPECIFIED,
+        InstallConstraint_DeviceIdleConstraint_DEVICEIDLENOTREQUIRED,
+        InstallConstraint_DeviceIdleConstraint_INSTALLONLYWHENDEVICEIDLE,
+        ..
+      ),
+
+    -- * InstallConstraint_NetworkTypeConstraint
+    InstallConstraint_NetworkTypeConstraint
+      ( InstallConstraint_NetworkTypeConstraint_NETWORKTYPECONSTRAINTUNSPECIFIED,
+        InstallConstraint_NetworkTypeConstraint_INSTALLONANYNETWORK,
+        InstallConstraint_NetworkTypeConstraint_INSTALLONLYONUNMETEREDNETWORK,
         ..
       ),
 
@@ -433,6 +628,15 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * MigrationToken_ManagementMode
+    MigrationToken_ManagementMode
+      ( MigrationToken_ManagementMode_MANAGEMENTMODEUNSPECIFIED,
+        MigrationToken_ManagementMode_WORKPROFILEPERSONALLYOWNED,
+        MigrationToken_ManagementMode_WORKPROFILECOMPANYOWNED,
+        MigrationToken_ManagementMode_FULLYMANAGED,
+        ..
+      ),
+
     -- * NonComplianceDetail_InstallationFailureReason
     NonComplianceDetail_InstallationFailureReason
       ( NonComplianceDetail_InstallationFailureReason_INSTALLATIONFAILUREREASONUNSPECIFIED,
@@ -446,6 +650,8 @@ module Gogol.AndroidManagement.Internal.Sum
         NonComplianceDetail_InstallationFailureReason_NOLICENSESREMAINING,
         NonComplianceDetail_InstallationFailureReason_NOTENROLLED,
         NonComplianceDetail_InstallationFailureReason_USERINVALID,
+        NonComplianceDetail_InstallationFailureReason_NETWORKERRORUNRELIABLECONNECTION,
+        NonComplianceDetail_InstallationFailureReason_INSUFFICIENTSTORAGE,
         ..
       ),
 
@@ -462,6 +668,7 @@ module Gogol.AndroidManagement.Internal.Sum
         NonComplianceDetail_NonComplianceReason_Pending,
         NonComplianceDetail_NonComplianceReason_APPINCOMPATIBLE,
         NonComplianceDetail_NonComplianceReason_APPNOTUPDATED,
+        NonComplianceDetail_NonComplianceReason_DEVICEINCOMPATIBLE,
         ..
       ),
 
@@ -473,6 +680,9 @@ module Gogol.AndroidManagement.Internal.Sum
         NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT,
         NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE,
         NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL,
+        NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDENTERPRISECONFIG,
+        NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIUSERSHOULDREMOVENETWORK,
+        NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIKEYPAIRALIASNOTCORRESPONDINGTOEXISTINGKEY,
         ..
       ),
 
@@ -489,6 +699,7 @@ module Gogol.AndroidManagement.Internal.Sum
         NonComplianceDetailCondition_NonComplianceReason_Pending,
         NonComplianceDetailCondition_NonComplianceReason_APPINCOMPATIBLE,
         NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED,
+        NonComplianceDetailCondition_NonComplianceReason_DEVICEINCOMPATIBLE,
         ..
       ),
 
@@ -594,6 +805,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * PersonalUsagePolicies_PrivateSpacePolicy
+    PersonalUsagePolicies_PrivateSpacePolicy
+      ( PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEPOLICYUNSPECIFIED,
+        PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEALLOWED,
+        PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEDISALLOWED,
+        ..
+      ),
+
     -- * Policy_AndroidDevicePolicyTracksItem
     Policy_AndroidDevicePolicyTracksItem
       ( Policy_AndroidDevicePolicyTracksItem_APPTRACKUNSPECIFIED,
@@ -612,6 +831,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * Policy_AssistContentPolicy
+    Policy_AssistContentPolicy
+      ( Policy_AssistContentPolicy_ASSISTCONTENTPOLICYUNSPECIFIED,
+        Policy_AssistContentPolicy_ASSISTCONTENTDISALLOWED,
+        Policy_AssistContentPolicy_ASSISTCONTENTALLOWED,
+        ..
+      ),
+
     -- * Policy_AutoDateAndTimeZone
     Policy_AutoDateAndTimeZone
       ( Policy_AutoDateAndTimeZone_AUTODATEANDTIMEZONEUNSPECIFIED,
@@ -626,6 +853,14 @@ module Gogol.AndroidManagement.Internal.Sum
         Policy_CameraAccess_CAMERAACCESSUSERCHOICE,
         Policy_CameraAccess_CAMERAACCESSDISABLED,
         Policy_CameraAccess_CAMERAACCESSENFORCED,
+        ..
+      ),
+
+    -- * Policy_CredentialProviderPolicyDefault
+    Policy_CredentialProviderPolicyDefault
+      ( Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERPOLICYDEFAULTUNSPECIFIED,
+        Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWED,
+        Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWEDEXCEPTSYSTEM,
         ..
       ),
 
@@ -658,6 +893,7 @@ module Gogol.AndroidManagement.Internal.Sum
         Policy_KeyguardDisabledFeaturesItem_Face,
         Policy_KeyguardDisabledFeaturesItem_Iris,
         Policy_KeyguardDisabledFeaturesItem_Biometrics,
+        Policy_KeyguardDisabledFeaturesItem_Shortcuts,
         Policy_KeyguardDisabledFeaturesItem_ALLFEATURES,
         ..
       ),
@@ -700,6 +936,14 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * Policy_PrintingPolicy
+    Policy_PrintingPolicy
+      ( Policy_PrintingPolicy_PRINTINGPOLICYUNSPECIFIED,
+        Policy_PrintingPolicy_PRINTINGDISALLOWED,
+        Policy_PrintingPolicy_PRINTINGALLOWED,
+        ..
+      ),
+
     -- * Policy_StayOnPluggedModesItem
     Policy_StayOnPluggedModesItem
       ( Policy_StayOnPluggedModesItem_BATTERYPLUGGEDMODEUNSPECIFIED,
@@ -731,6 +975,39 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * ProvisioningInfo_ManagementMode
+    ProvisioningInfo_ManagementMode
+      ( ProvisioningInfo_ManagementMode_MANAGEMENTMODEUNSPECIFIED,
+        ProvisioningInfo_ManagementMode_DEVICEOWNER,
+        ProvisioningInfo_ManagementMode_PROFILEOWNER,
+        ..
+      ),
+
+    -- * ProvisioningInfo_Ownership
+    ProvisioningInfo_Ownership
+      ( ProvisioningInfo_Ownership_OWNERSHIPUNSPECIFIED,
+        ProvisioningInfo_Ownership_COMPANYOWNED,
+        ProvisioningInfo_Ownership_PERSONALLYOWNED,
+        ..
+      ),
+
+    -- * ScreenBrightnessSettings_ScreenBrightnessMode
+    ScreenBrightnessSettings_ScreenBrightnessMode
+      ( ScreenBrightnessSettings_ScreenBrightnessMode_SCREENBRIGHTNESSMODEUNSPECIFIED,
+        ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSUSERCHOICE,
+        ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSAUTOMATIC,
+        ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSFIXED,
+        ..
+      ),
+
+    -- * ScreenTimeoutSettings_ScreenTimeoutMode
+    ScreenTimeoutSettings_ScreenTimeoutMode
+      ( ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTMODEUNSPECIFIED,
+        ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTUSERCHOICE,
+        ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTENFORCED,
+        ..
+      ),
+
     -- * SecurityPosture_DevicePosture
     SecurityPosture_DevicePosture
       ( SecurityPosture_DevicePosture_POSTUREUNSPECIFIED,
@@ -745,6 +1022,41 @@ module Gogol.AndroidManagement.Internal.Sum
       ( SigninDetail_AllowPersonalUsage_ALLOWPERSONALUSAGEUNSPECIFIED,
         SigninDetail_AllowPersonalUsage_PERSONALUSAGEALLOWED,
         SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWED,
+        SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS,
+        ..
+      ),
+
+    -- * SigninDetail_DefaultStatus
+    SigninDetail_DefaultStatus
+      ( SigninDetail_DefaultStatus_SIGNINDETAILDEFAULTSTATUSUNSPECIFIED,
+        SigninDetail_DefaultStatus_SIGNINDETAILISDEFAULT,
+        SigninDetail_DefaultStatus_SIGNINDETAILISNOTDEFAULT,
+        ..
+      ),
+
+    -- * StartLostModeStatus_Status
+    StartLostModeStatus_Status
+      ( StartLostModeStatus_Status_STATUSUNSPECIFIED,
+        StartLostModeStatus_Status_Success,
+        StartLostModeStatus_Status_RESETPASSWORDRECENTLY,
+        StartLostModeStatus_Status_USEREXITLOSTMODERECENTLY,
+        StartLostModeStatus_Status_ALREADYINLOSTMODE,
+        ..
+      ),
+
+    -- * StopLostModeStatus_Status
+    StopLostModeStatus_Status
+      ( StopLostModeStatus_Status_STATUSUNSPECIFIED,
+        StopLostModeStatus_Status_Success,
+        StopLostModeStatus_Status_NOTINLOSTMODE,
+        ..
+      ),
+
+    -- * StopLostModeUserAttemptEvent_Status
+    StopLostModeUserAttemptEvent_Status
+      ( StopLostModeUserAttemptEvent_Status_STATUSUNSPECIFIED,
+        StopLostModeUserAttemptEvent_Status_ATTEMPTSUCCEEDED,
+        StopLostModeUserAttemptEvent_Status_ATTEMPTFAILED,
         ..
       ),
 
@@ -813,6 +1125,10 @@ module Gogol.AndroidManagement.Internal.Sum
         UsageLogEvent_EventType_WIPEFAILURE,
         UsageLogEvent_EventType_Connect,
         UsageLogEvent_EventType_Dns,
+        UsageLogEvent_EventType_STOPLOSTMODEUSERATTEMPT,
+        UsageLogEvent_EventType_LOSTMODEOUTGOINGPHONECALL,
+        UsageLogEvent_EventType_LOSTMODELOCATION,
+        UsageLogEvent_EventType_ENROLLMENTCOMPLETE,
         ..
       ),
 
@@ -844,6 +1160,23 @@ module Gogol.AndroidManagement.Internal.Sum
         ..
       ),
 
+    -- * WifiRoamingSetting_WifiRoamingMode
+    WifiRoamingSetting_WifiRoamingMode
+      ( WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGMODEUNSPECIFIED,
+        WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDISABLED,
+        WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDEFAULT,
+        WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGAGGRESSIVE,
+        ..
+      ),
+
+    -- * WifiSsidPolicy_WifiSsidPolicyType
+    WifiSsidPolicy_WifiSsidPolicyType
+      ( WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDPOLICYTYPEUNSPECIFIED,
+        WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDDENYLIST,
+        WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDALLOWLIST,
+        ..
+      ),
+
     -- * EnterprisesDevicesDeleteWipeDataFlags
     EnterprisesDevicesDeleteWipeDataFlags
       ( EnterprisesDevicesDeleteWipeDataFlags_WIPEDATAFLAGUNSPECIFIED,
@@ -861,7 +1194,7 @@ module Gogol.AndroidManagement.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -890,7 +1223,7 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv
   #-}
 
--- | Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https:\/\/www.commoncriteriaportal.org\/) (CC). Enabling Common Criteria Mode increases certain security components on a device, including AES-GCM encryption of Bluetooth Long Term Keys, and Wi-Fi configuration stores.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required.
+-- | Controls Common Criteria Mode—security standards defined in the Common Criteria for Information Technology Security Evaluation (https:\/\/www.commoncriteriaportal.org\/) (CC). Enabling Common Criteria Mode increases certain security components on a device, see CommonCriteriaMode for details.Warning: Common Criteria Mode enforces a strict security model typically only required for IT products used in national security systems and other highly sensitive organizations. Standard device use may be affected. Only enabled if required. If Common Criteria Mode is turned off after being enabled previously, all user-configured Wi-Fi networks may be lost and any enterprise-configured Wi-Fi networks that require user input may need to be reconfigured.
 newtype AdvancedSecurityOverrides_CommonCriteriaMode = AdvancedSecurityOverrides_CommonCriteriaMode {fromAdvancedSecurityOverrides_CommonCriteriaMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -920,6 +1253,43 @@ pattern AdvancedSecurityOverrides_CommonCriteriaMode_COMMONCRITERIAMODEENABLED =
   AdvancedSecurityOverrides_CommonCriteriaMode_COMMONCRITERIAMODEDISABLED,
   AdvancedSecurityOverrides_CommonCriteriaMode_COMMONCRITERIAMODEENABLED,
   AdvancedSecurityOverrides_CommonCriteriaMode
+  #-}
+
+-- | Optional. Controls whether content protection, which scans for deceptive apps, is enabled. This is supported on Android 15 and above.
+newtype AdvancedSecurityOverrides_ContentProtectionPolicy = AdvancedSecurityOverrides_ContentProtectionPolicy {fromAdvancedSecurityOverrides_ContentProtectionPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to CONTENT/PROTECTION/DISABLED.
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONPOLICYUNSPECIFIED :: AdvancedSecurityOverrides_ContentProtectionPolicy
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONPOLICYUNSPECIFIED = AdvancedSecurityOverrides_ContentProtectionPolicy "CONTENT_PROTECTION_POLICY_UNSPECIFIED"
+
+-- | Content protection is disabled and the user cannot change this.
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONDISABLED :: AdvancedSecurityOverrides_ContentProtectionPolicy
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONDISABLED = AdvancedSecurityOverrides_ContentProtectionPolicy "CONTENT_PROTECTION_DISABLED"
+
+-- | Content protection is enabled and the user cannot change this.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONENFORCED :: AdvancedSecurityOverrides_ContentProtectionPolicy
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONENFORCED = AdvancedSecurityOverrides_ContentProtectionPolicy "CONTENT_PROTECTION_ENFORCED"
+
+-- | Content protection is not controlled by the policy. The user is allowed to choose the behavior of content protection.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONUSERCHOICE :: AdvancedSecurityOverrides_ContentProtectionPolicy
+pattern AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONUSERCHOICE = AdvancedSecurityOverrides_ContentProtectionPolicy "CONTENT_PROTECTION_USER_CHOICE"
+
+{-# COMPLETE
+  AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONPOLICYUNSPECIFIED,
+  AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONDISABLED,
+  AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONENFORCED,
+  AdvancedSecurityOverrides_ContentProtectionPolicy_CONTENTPROTECTIONUSERCHOICE,
+  AdvancedSecurityOverrides_ContentProtectionPolicy
   #-}
 
 -- | Controls access to developer settings: developer options and safe boot. Replaces safeBootDisabled (deprecated) and debuggingFeaturesAllowed (deprecated).
@@ -984,6 +1354,43 @@ pattern AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_VERIFYAPPSUSERCHOI
   AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_VERIFYAPPSENFORCED,
   AdvancedSecurityOverrides_GooglePlayProtectVerifyApps_VERIFYAPPSUSERCHOICE,
   AdvancedSecurityOverrides_GooglePlayProtectVerifyApps
+  #-}
+
+-- | Optional. Controls Memory Tagging Extension (MTE) (https:\/\/source.android.com\/docs\/security\/test\/memory-safety\/arm-mte) on the device. The device needs to be rebooted to apply changes to the MTE policy.
+newtype AdvancedSecurityOverrides_MtePolicy = AdvancedSecurityOverrides_MtePolicy {fromAdvancedSecurityOverrides_MtePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to MTE/USER/CHOICE.
+pattern AdvancedSecurityOverrides_MtePolicy_MTEPOLICYUNSPECIFIED :: AdvancedSecurityOverrides_MtePolicy
+pattern AdvancedSecurityOverrides_MtePolicy_MTEPOLICYUNSPECIFIED = AdvancedSecurityOverrides_MtePolicy "MTE_POLICY_UNSPECIFIED"
+
+-- | The user can choose to enable or disable MTE on the device if the device supports this.
+pattern AdvancedSecurityOverrides_MtePolicy_MTEUSERCHOICE :: AdvancedSecurityOverrides_MtePolicy
+pattern AdvancedSecurityOverrides_MtePolicy_MTEUSERCHOICE = AdvancedSecurityOverrides_MtePolicy "MTE_USER_CHOICE"
+
+-- | MTE is enabled on the device and the user is not allowed to change this setting. This can be set on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT/MODE is reported for other management modes. A nonComplianceDetail with DEVICE/INCOMPATIBLE is reported if the device does not support MTE.Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14.
+pattern AdvancedSecurityOverrides_MtePolicy_MTEENFORCED :: AdvancedSecurityOverrides_MtePolicy
+pattern AdvancedSecurityOverrides_MtePolicy_MTEENFORCED = AdvancedSecurityOverrides_MtePolicy "MTE_ENFORCED"
+
+-- | MTE is disabled on the device and the user is not allowed to change this setting. This applies only on fully managed devices. In other cases, a nonComplianceDetail with MANAGEMENT/MODE is reported. A nonComplianceDetail with DEVICE/INCOMPATIBLE is reported if the device does not support MTE.Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14.
+pattern AdvancedSecurityOverrides_MtePolicy_MTEDISABLED :: AdvancedSecurityOverrides_MtePolicy
+pattern AdvancedSecurityOverrides_MtePolicy_MTEDISABLED = AdvancedSecurityOverrides_MtePolicy "MTE_DISABLED"
+
+{-# COMPLETE
+  AdvancedSecurityOverrides_MtePolicy_MTEPOLICYUNSPECIFIED,
+  AdvancedSecurityOverrides_MtePolicy_MTEUSERCHOICE,
+  AdvancedSecurityOverrides_MtePolicy_MTEENFORCED,
+  AdvancedSecurityOverrides_MtePolicy_MTEDISABLED,
+  AdvancedSecurityOverrides_MtePolicy
   #-}
 
 -- | The policy for untrusted apps (apps from unknown sources) enforced on the device. Replaces install/unknown/sources_allowed (deprecated).
@@ -1281,7 +1688,7 @@ newtype ApplicationPolicy_AutoUpdateMode = ApplicationPolicy_AutoUpdateMode {fro
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEMODEUNSPECIFIED :: ApplicationPolicy_AutoUpdateMode
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEMODEUNSPECIFIED = ApplicationPolicy_AutoUpdateMode "AUTO_UPDATE_MODE_UNSPECIFIED"
 
--- | The app is automatically updated with low priority to minimize the impact on the user.The app is updated when all of the following constraints are met: The device is not actively used. The device is connected to an unmetered network. The device is charging.The device is notified about a new update within 24 hours after it is published by the developer, after which the app is updated the next time the constraints above are met.
+-- | The default update mode.The app is automatically updated with low priority to minimize the impact on the user.The app is updated when all of the following constraints are met: The device is not actively used. The device is connected to an unmetered network. The device is charging. The app to be updated is not running in the foreground.The device is notified about a new update within 24 hours after it is published by the developer, after which the app is updated the next time the constraints above are met.
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEDEFAULT :: ApplicationPolicy_AutoUpdateMode
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEDEFAULT = ApplicationPolicy_AutoUpdateMode "AUTO_UPDATE_DEFAULT"
 
@@ -1289,7 +1696,7 @@ pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEDEFAULT = ApplicationPolicy_A
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEPOSTPONED :: ApplicationPolicy_AutoUpdateMode
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEPOSTPONED = ApplicationPolicy_AutoUpdateMode "AUTO_UPDATE_POSTPONED"
 
--- | The app is updated as soon as possible. No constraints are applied.The device is notified immediately about a new update after it becomes available.
+-- | The app is updated as soon as possible. No constraints are applied.The device is notified as soon as possible about a new update after it becomes available./NOTE:/ Updates to apps with larger deployments across Android\'s ecosystem can take up to 24h.
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEHIGHPRIORITY :: ApplicationPolicy_AutoUpdateMode
 pattern ApplicationPolicy_AutoUpdateMode_AUTOUPDATEHIGHPRIORITY = ApplicationPolicy_AutoUpdateMode "AUTO_UPDATE_HIGH_PRIORITY"
 
@@ -1333,6 +1740,33 @@ pattern ApplicationPolicy_ConnectedWorkAndPersonalApp_CONNECTEDWORKANDPERSONALAP
   ApplicationPolicy_ConnectedWorkAndPersonalApp
   #-}
 
+-- | Optional. Whether the app is allowed to act as a credential provider on Android 14 and above.
+newtype ApplicationPolicy_CredentialProviderPolicy = ApplicationPolicy_CredentialProviderPolicy {fromApplicationPolicy_CredentialProviderPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. The behaviour is governed by credentialProviderPolicyDefault.
+pattern ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERPOLICYUNSPECIFIED :: ApplicationPolicy_CredentialProviderPolicy
+pattern ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERPOLICYUNSPECIFIED = ApplicationPolicy_CredentialProviderPolicy "CREDENTIAL_PROVIDER_POLICY_UNSPECIFIED"
+
+-- | App is allowed to act as a credential provider.
+pattern ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERALLOWED :: ApplicationPolicy_CredentialProviderPolicy
+pattern ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERALLOWED = ApplicationPolicy_CredentialProviderPolicy "CREDENTIAL_PROVIDER_ALLOWED"
+
+{-# COMPLETE
+  ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERPOLICYUNSPECIFIED,
+  ApplicationPolicy_CredentialProviderPolicy_CREDENTIALPROVIDERALLOWED,
+  ApplicationPolicy_CredentialProviderPolicy
+  #-}
+
 -- | The default policy for all permissions requested by the app. If specified, this overrides the policy-level default/permission/policy which applies to all apps. It does not override the permission_grants which applies to all apps.
 newtype ApplicationPolicy_DefaultPermissionPolicy = ApplicationPolicy_DefaultPermissionPolicy {fromApplicationPolicy_DefaultPermissionPolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -1354,7 +1788,7 @@ pattern ApplicationPolicy_DefaultPermissionPolicy_PERMISSIONPOLICYUNSPECIFIED = 
 pattern ApplicationPolicy_DefaultPermissionPolicy_Prompt :: ApplicationPolicy_DefaultPermissionPolicy
 pattern ApplicationPolicy_DefaultPermissionPolicy_Prompt = ApplicationPolicy_DefaultPermissionPolicy "PROMPT"
 
--- | Automatically grant a permission.
+-- | Automatically grant a permission.On Android 12 and above, READ/SMS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#READ/SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS/FINE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/FINE/LOCATION) ACCESS/BACKGROUND/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/BACKGROUND/LOCATION) ACCESS/COARSE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/COARSE/LOCATION) CAMERA (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#CAMERA) RECORD/AUDIO (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#RECORD/AUDIO) ACTIVITY/RECOGNITION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACTIVITY/RECOGNITION) BODY/SENSORS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#BODY/SENSORS)
 pattern ApplicationPolicy_DefaultPermissionPolicy_Grant :: ApplicationPolicy_DefaultPermissionPolicy
 pattern ApplicationPolicy_DefaultPermissionPolicy_Grant = ApplicationPolicy_DefaultPermissionPolicy "GRANT"
 
@@ -1386,27 +1820,27 @@ newtype ApplicationPolicy_DelegatedScopesItem = ApplicationPolicy_DelegatedScope
 pattern ApplicationPolicy_DelegatedScopesItem_DELEGATEDSCOPEUNSPECIFIED :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_DELEGATEDSCOPEUNSPECIFIED = ApplicationPolicy_DelegatedScopesItem "DELEGATED_SCOPE_UNSPECIFIED"
 
--- | Grants access to certificate installation and management.
+-- | Grants access to certificate installation and management. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_CERTINSTALL :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_CERTINSTALL = ApplicationPolicy_DelegatedScopesItem "CERT_INSTALL"
 
--- | Grants access to managed configurations management.
+-- | Grants access to managed configurations management. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_MANAGEDCONFIGURATIONS :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_MANAGEDCONFIGURATIONS = ApplicationPolicy_DelegatedScopesItem "MANAGED_CONFIGURATIONS"
 
--- | Grants access to blocking uninstallation.
+-- | Grants access to blocking uninstallation. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_BLOCKUNINSTALL :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_BLOCKUNINSTALL = ApplicationPolicy_DelegatedScopesItem "BLOCK_UNINSTALL"
 
--- | Grants access to permission policy and permission grant state.
+-- | Grants access to permission policy and permission grant state. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_PERMISSIONGRANT :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_PERMISSIONGRANT = ApplicationPolicy_DelegatedScopesItem "PERMISSION_GRANT"
 
--- | Grants access to package access state.
+-- | Grants access to package access state. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_PACKAGEACCESS :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_PACKAGEACCESS = ApplicationPolicy_DelegatedScopesItem "PACKAGE_ACCESS"
 
--- | Grants access for enabling system apps.
+-- | Grants access for enabling system apps. This scope can be delegated to multiple applications.
 pattern ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP = ApplicationPolicy_DelegatedScopesItem "ENABLE_SYSTEM_APP"
 
@@ -1418,6 +1852,11 @@ pattern ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS = ApplicationP
 pattern ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS :: ApplicationPolicy_DelegatedScopesItem
 pattern ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS = ApplicationPolicy_DelegatedScopesItem "SECURITY_LOGS"
 
+-- | Grants access to selection of KeyChain certificates on behalf of requesting apps. Once granted, the delegated application will start receiving DelegatedAdminReceiver#onChoosePrivateKeyAlias (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DelegatedAdminReceiver#onChoosePrivateKeyAlias%28android.content.Context,%20android.content.Intent,%20int,%20android.net.Uri,%20java.lang.String%29). Allows the delegated application to call grantKeyPairToApp (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#grantKeyPairToApp%28android.content.ComponentName,%20java.lang.String,%20java.lang.String%29) and revokeKeyPairFromApp (https:\/\/developer.android.com\/reference\/android\/app\/admin\/DevicePolicyManager#revokeKeyPairFromApp%28android.content.ComponentName,%20java.lang.String,%20java.lang.String%29) methods. This scope can be delegated to at most one application. choosePrivateKeyRules must be empty and privateKeySelectionEnabled has no effect if certificate selection
+-- is delegated to an application.
+pattern ApplicationPolicy_DelegatedScopesItem_CERTSELECTION :: ApplicationPolicy_DelegatedScopesItem
+pattern ApplicationPolicy_DelegatedScopesItem_CERTSELECTION = ApplicationPolicy_DelegatedScopesItem "CERT_SELECTION"
+
 {-# COMPLETE
   ApplicationPolicy_DelegatedScopesItem_DELEGATEDSCOPEUNSPECIFIED,
   ApplicationPolicy_DelegatedScopesItem_CERTINSTALL,
@@ -1428,6 +1867,7 @@ pattern ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS = ApplicationPolicy_D
   ApplicationPolicy_DelegatedScopesItem_ENABLESYSTEMAPP,
   ApplicationPolicy_DelegatedScopesItem_NETWORKACTIVITYLOGS,
   ApplicationPolicy_DelegatedScopesItem_SECURITYLOGS,
+  ApplicationPolicy_DelegatedScopesItem_CERTSELECTION,
   ApplicationPolicy_DelegatedScopesItem
   #-}
 
@@ -1452,11 +1892,11 @@ pattern ApplicationPolicy_InstallType_INSTALLTYPEUNSPECIFIED = ApplicationPolicy
 pattern ApplicationPolicy_InstallType_Preinstalled :: ApplicationPolicy_InstallType
 pattern ApplicationPolicy_InstallType_Preinstalled = ApplicationPolicy_InstallType "PREINSTALLED"
 
--- | The app is automatically installed and can\'t be removed by the user.
+-- | The app is automatically installed regardless of a set maintenance window and can\'t be removed by the user.
 pattern ApplicationPolicy_InstallType_FORCEINSTALLED :: ApplicationPolicy_InstallType
 pattern ApplicationPolicy_InstallType_FORCEINSTALLED = ApplicationPolicy_InstallType "FORCE_INSTALLED"
 
--- | The app is blocked and can\'t be installed. If the app was installed under a previous policy, it will be uninstalled.
+-- | The app is blocked and can\'t be installed. If the app was installed under a previous policy, it will be uninstalled. This also blocks its instant app functionality.
 pattern ApplicationPolicy_InstallType_Blocked :: ApplicationPolicy_InstallType
 pattern ApplicationPolicy_InstallType_Blocked = ApplicationPolicy_InstallType "BLOCKED"
 
@@ -1481,6 +1921,38 @@ pattern ApplicationPolicy_InstallType_Kiosk = ApplicationPolicy_InstallType "KIO
   ApplicationPolicy_InstallType_REQUIREDFORSETUP,
   ApplicationPolicy_InstallType_Kiosk,
   ApplicationPolicy_InstallType
+  #-}
+
+-- | Optional. Specifies whether user control is permitted for the app. User control includes user actions like force-stopping and clearing app data. Supported on Android 11 and above.
+newtype ApplicationPolicy_UserControlSettings = ApplicationPolicy_UserControlSettings {fromApplicationPolicy_UserControlSettings :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Uses the default behaviour of the app to determine if user control is allowed or disallowed. For most apps, user control is allowed by default, but for some critical apps such as companion apps (extensionConfig set to true), kiosk apps and other critical system apps, user control is disallowed.
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLSETTINGSUNSPECIFIED :: ApplicationPolicy_UserControlSettings
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLSETTINGSUNSPECIFIED = ApplicationPolicy_UserControlSettings "USER_CONTROL_SETTINGS_UNSPECIFIED"
+
+-- | User control is allowed for the app. Kiosk apps can use this to allow user control.
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLALLOWED :: ApplicationPolicy_UserControlSettings
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLALLOWED = ApplicationPolicy_UserControlSettings "USER_CONTROL_ALLOWED"
+
+-- | User control is disallowed for the app. API_LEVEL is reported if the Android version is less than 11.
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLDISALLOWED :: ApplicationPolicy_UserControlSettings
+pattern ApplicationPolicy_UserControlSettings_USERCONTROLDISALLOWED = ApplicationPolicy_UserControlSettings "USER_CONTROL_DISALLOWED"
+
+{-# COMPLETE
+  ApplicationPolicy_UserControlSettings_USERCONTROLSETTINGSUNSPECIFIED,
+  ApplicationPolicy_UserControlSettings_USERCONTROLALLOWED,
+  ApplicationPolicy_UserControlSettings_USERCONTROLDISALLOWED,
+  ApplicationPolicy_UserControlSettings
   #-}
 
 -- | Specifies whether the app installed in the work profile is allowed to add widgets to the home screen.
@@ -1582,6 +2054,38 @@ pattern ApplicationReport_State_Installed = ApplicationReport_State "INSTALLED"
   ApplicationReport_State_Removed,
   ApplicationReport_State_Installed,
   ApplicationReport_State
+  #-}
+
+-- | Whether the app is user facing.
+newtype ApplicationReport_UserFacingType = ApplicationReport_UserFacingType {fromApplicationReport_UserFacingType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | App user facing type is unspecified.
+pattern ApplicationReport_UserFacingType_USERFACINGTYPEUNSPECIFIED :: ApplicationReport_UserFacingType
+pattern ApplicationReport_UserFacingType_USERFACINGTYPEUNSPECIFIED = ApplicationReport_UserFacingType "USER_FACING_TYPE_UNSPECIFIED"
+
+-- | App is not user facing.
+pattern ApplicationReport_UserFacingType_NOTUSERFACING :: ApplicationReport_UserFacingType
+pattern ApplicationReport_UserFacingType_NOTUSERFACING = ApplicationReport_UserFacingType "NOT_USER_FACING"
+
+-- | App is user facing.
+pattern ApplicationReport_UserFacingType_USERFACING :: ApplicationReport_UserFacingType
+pattern ApplicationReport_UserFacingType_USERFACING = ApplicationReport_UserFacingType "USER_FACING"
+
+{-# COMPLETE
+  ApplicationReport_UserFacingType_USERFACINGTYPEUNSPECIFIED,
+  ApplicationReport_UserFacingType_NOTUSERFACING,
+  ApplicationReport_UserFacingType_USERFACING,
+  ApplicationReport_UserFacingType
   #-}
 
 -- | Specifies the scope of this BlockAction. Only applicable to devices that are company-owned.
@@ -1736,6 +2240,14 @@ pattern Command_Type_RELINQUISHOWNERSHIP = Command_Type "RELINQUISH_OWNERSHIP"
 pattern Command_Type_CLEARAPPDATA :: Command_Type
 pattern Command_Type_CLEARAPPDATA = Command_Type "CLEAR_APP_DATA"
 
+-- | Puts the device into lost mode. Only supported on fully managed devices or organization-owned devices with a managed profile. See also start/lost/mode_params.
+pattern Command_Type_STARTLOSTMODE :: Command_Type
+pattern Command_Type_STARTLOSTMODE = Command_Type "START_LOST_MODE"
+
+-- | Takes the device out of lost mode. Only supported on fully managed devices or organization-owned devices with a managed profile. See also stop/lost/mode_params.
+pattern Command_Type_STOPLOSTMODE :: Command_Type
+pattern Command_Type_STOPLOSTMODE = Command_Type "STOP_LOST_MODE"
+
 {-# COMPLETE
   Command_Type_COMMANDTYPEUNSPECIFIED,
   Command_Type_Lock,
@@ -1743,6 +2255,8 @@ pattern Command_Type_CLEARAPPDATA = Command_Type "CLEAR_APP_DATA"
   Command_Type_Reboot,
   Command_Type_RELINQUISHOWNERSHIP,
   Command_Type_CLEARAPPDATA,
+  Command_Type_STARTLOSTMODE,
+  Command_Type_STOPLOSTMODE,
   Command_Type
   #-}
 
@@ -1776,6 +2290,48 @@ pattern CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODEENABLE
   CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODEDISABLED,
   CommonCriteriaModeInfo_CommonCriteriaModeStatus_COMMONCRITERIAMODEENABLED,
   CommonCriteriaModeInfo_CommonCriteriaModeStatus
+  #-}
+
+-- | Output only. The status of policy signature verification.
+newtype CommonCriteriaModeInfo_PolicySignatureVerificationStatus = CommonCriteriaModeInfo_PolicySignatureVerificationStatus {fromCommonCriteriaModeInfo_PolicySignatureVerificationStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. The verification status has not been reported. This is set only if statusReportingSettings.commonCriteriaModeEnabled is false.
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSTATUSUNSPECIFIED :: CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSTATUSUNSPECIFIED = CommonCriteriaModeInfo_PolicySignatureVerificationStatus "POLICY_SIGNATURE_VERIFICATION_STATUS_UNSPECIFIED"
+
+-- | Policy signature verification is disabled on the device as common/criteria/mode is set to false.
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONDISABLED :: CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONDISABLED = CommonCriteriaModeInfo_PolicySignatureVerificationStatus "POLICY_SIGNATURE_VERIFICATION_DISABLED"
+
+-- | Policy signature verification succeeded.
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSUCCEEDED :: CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSUCCEEDED = CommonCriteriaModeInfo_PolicySignatureVerificationStatus "POLICY_SIGNATURE_VERIFICATION_SUCCEEDED"
+
+-- | Policy signature verification is not supported, e.g. because the device has been enrolled with a CloudDPC version that does not support the policy signature verification.
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONNOTSUPPORTED :: CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONNOTSUPPORTED = CommonCriteriaModeInfo_PolicySignatureVerificationStatus "POLICY_SIGNATURE_VERIFICATION_NOT_SUPPORTED"
+
+-- | The policy signature verification failed. The policy has not been applied.
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONFAILED :: CommonCriteriaModeInfo_PolicySignatureVerificationStatus
+pattern CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONFAILED = CommonCriteriaModeInfo_PolicySignatureVerificationStatus "POLICY_SIGNATURE_VERIFICATION_FAILED"
+
+{-# COMPLETE
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSTATUSUNSPECIFIED,
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONDISABLED,
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONSUCCEEDED,
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONNOTSUPPORTED,
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus_POLICYSIGNATUREVERIFICATIONFAILED,
+  CommonCriteriaModeInfo_PolicySignatureVerificationStatus
   #-}
 
 -- | Whether text copied from one profile (personal or work) can be pasted in the other profile.
@@ -1847,7 +2403,7 @@ pattern CrossProfilePolicies_CrossProfileDataSharing_CROSSPROFILEDATASHARINGALLO
   CrossProfilePolicies_CrossProfileDataSharing
   #-}
 
--- | Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.
+-- | Whether personal apps can access contacts stored in the work profile.See also exemptions/to/show/work/contacts/in/personal_profile.
 newtype CrossProfilePolicies_ShowWorkContactsInPersonalProfile = CrossProfilePolicies_ShowWorkContactsInPersonalProfile {fromCrossProfilePolicies_ShowWorkContactsInPersonalProfile :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -1860,22 +2416,27 @@ newtype CrossProfilePolicies_ShowWorkContactsInPersonalProfile = CrossProfilePol
       Core.FromJSONKey
     )
 
--- | Unspecified. Defaults to SHOW/WORK/CONTACTS/IN/PERSONAL/PROFILE/ALLOWED.
+-- | Unspecified. Defaults to SHOW/WORK/CONTACTS/IN/PERSONAL/PROFILE/ALLOWED.When this is set, exemptions/to/show/work/contacts/in/personal_profile must not be set.
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEUNSPECIFIED :: CrossProfilePolicies_ShowWorkContactsInPersonalProfile
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEUNSPECIFIED = CrossProfilePolicies_ShowWorkContactsInPersonalProfile "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED"
 
--- | Prevents work profile contacts from appearing in personal profile contact searches and incoming calls
+-- | Prevents personal apps from accessing work profile contacts and looking up work contacts.When this is set, personal apps specified in exemptions/to/show/work/contacts/in/personal/profile are allowlisted and can access work profile contacts directly.Supported on Android 7.0 and above. A nonComplianceDetail with API/LEVEL is reported if the Android version is less than 7.0.
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED :: CrossProfilePolicies_ShowWorkContactsInPersonalProfile
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED = CrossProfilePolicies_ShowWorkContactsInPersonalProfile "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED"
 
--- | Default. Allows work profile contacts to appear in personal profile contact searches and incoming calls
+-- | Default. Allows apps in the personal profile to access work profile contacts including contact searches and incoming calls.When this is set, personal apps specified in exemptions/to/show/work/contacts/in/personal/profile are blocklisted and can not access work profile contacts directly.Supported on Android 7.0 and above. A nonComplianceDetail with API/LEVEL is reported if the Android version is less than 7.0.
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED :: CrossProfilePolicies_ShowWorkContactsInPersonalProfile
 pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED = CrossProfilePolicies_ShowWorkContactsInPersonalProfile "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED"
+
+-- | Prevents most personal apps from accessing work profile contacts including contact searches and incoming calls, except for the OEM default Dialer, Messages, and Contacts apps. Neither user-configured Dialer, Messages, and Contacts apps, nor any other system or play installed apps, will be able to query work contacts directly.When this is set, personal apps specified in exemptions/to/show/work/contacts/in/personal/profile are allowlisted and can access work profile contacts.Supported on Android 14 and above. If this is set on a device with Android version less than 14, the behaviour falls back to SHOW/WORK/CONTACTS/IN/PERSONAL/PROFILE/DISALLOWED and a nonComplianceDetail with API/LEVEL is reported.
+pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWEDEXCEPTSYSTEM :: CrossProfilePolicies_ShowWorkContactsInPersonalProfile
+pattern CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWEDEXCEPTSYSTEM = CrossProfilePolicies_ShowWorkContactsInPersonalProfile "SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM"
 
 {-# COMPLETE
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEUNSPECIFIED,
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWED,
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEALLOWED,
+  CrossProfilePolicies_ShowWorkContactsInPersonalProfile_SHOWWORKCONTACTSINPERSONALPROFILEDISALLOWEDEXCEPTSYSTEM,
   CrossProfilePolicies_ShowWorkContactsInPersonalProfile
   #-}
 
@@ -1944,12 +2505,27 @@ pattern Device_AppliedState_Deleted = Device_AppliedState "DELETED"
 pattern Device_AppliedState_Provisioning :: Device_AppliedState
 pattern Device_AppliedState_Provisioning = Device_AppliedState "PROVISIONING"
 
+-- | The device is lost. This state is only possible on organization-owned devices.
+pattern Device_AppliedState_Lost :: Device_AppliedState
+pattern Device_AppliedState_Lost = Device_AppliedState "LOST"
+
+-- | The device is preparing for migrating to Android Management API. No further action is needed for the migration to continue.
+pattern Device_AppliedState_PREPARINGFORMIGRATION :: Device_AppliedState
+pattern Device_AppliedState_PREPARINGFORMIGRATION = Device_AppliedState "PREPARING_FOR_MIGRATION"
+
+-- | This is a financed device that has been \"locked\" by the financing agent. This means certain policy settings have been applied which limit device functionality until the device has been \"unlocked\" by the financing agent. The device will continue to apply policy settings excluding those overridden by the financing agent. When the device is \"locked\", the state is reported in appliedState as DEACTIVATED/BY/DEVICE_FINANCE.
+pattern Device_AppliedState_DEACTIVATEDBYDEVICEFINANCE :: Device_AppliedState
+pattern Device_AppliedState_DEACTIVATEDBYDEVICEFINANCE = Device_AppliedState "DEACTIVATED_BY_DEVICE_FINANCE"
+
 {-# COMPLETE
   Device_AppliedState_DEVICESTATEUNSPECIFIED,
   Device_AppliedState_Active,
   Device_AppliedState_Disabled,
   Device_AppliedState_Deleted,
   Device_AppliedState_Provisioning,
+  Device_AppliedState_Lost,
+  Device_AppliedState_PREPARINGFORMIGRATION,
+  Device_AppliedState_DEACTIVATEDBYDEVICEFINANCE,
   Device_AppliedState
   #-}
 
@@ -2050,13 +2626,346 @@ pattern Device_State_Deleted = Device_State "DELETED"
 pattern Device_State_Provisioning :: Device_State
 pattern Device_State_Provisioning = Device_State "PROVISIONING"
 
+-- | The device is lost. This state is only possible on organization-owned devices.
+pattern Device_State_Lost :: Device_State
+pattern Device_State_Lost = Device_State "LOST"
+
+-- | The device is preparing for migrating to Android Management API. No further action is needed for the migration to continue.
+pattern Device_State_PREPARINGFORMIGRATION :: Device_State
+pattern Device_State_PREPARINGFORMIGRATION = Device_State "PREPARING_FOR_MIGRATION"
+
+-- | This is a financed device that has been \"locked\" by the financing agent. This means certain policy settings have been applied which limit device functionality until the device has been \"unlocked\" by the financing agent. The device will continue to apply policy settings excluding those overridden by the financing agent. When the device is \"locked\", the state is reported in appliedState as DEACTIVATED/BY/DEVICE_FINANCE.
+pattern Device_State_DEACTIVATEDBYDEVICEFINANCE :: Device_State
+pattern Device_State_DEACTIVATEDBYDEVICEFINANCE = Device_State "DEACTIVATED_BY_DEVICE_FINANCE"
+
 {-# COMPLETE
   Device_State_DEVICESTATEUNSPECIFIED,
   Device_State_Active,
   Device_State_Disabled,
   Device_State_Deleted,
   Device_State_Provisioning,
+  Device_State_Lost,
+  Device_State_PREPARINGFORMIGRATION,
+  Device_State_DEACTIVATEDBYDEVICEFINANCE,
   Device_State
+  #-}
+
+-- | Controls Wi-Fi configuring privileges. Based on the option set, user will have either full or limited or no control in configuring Wi-Fi networks.
+newtype DeviceConnectivityManagement_ConfigureWifi = DeviceConnectivityManagement_ConfigureWifi {fromDeviceConnectivityManagement_ConfigureWifi :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to ALLOW/CONFIGURING/WIFI unless wifiConfigDisabled is set to true. If wifiConfigDisabled is set to true, this is equivalent to DISALLOW/CONFIGURING/WIFI.
+pattern DeviceConnectivityManagement_ConfigureWifi_CONFIGUREWIFIUNSPECIFIED :: DeviceConnectivityManagement_ConfigureWifi
+pattern DeviceConnectivityManagement_ConfigureWifi_CONFIGUREWIFIUNSPECIFIED = DeviceConnectivityManagement_ConfigureWifi "CONFIGURE_WIFI_UNSPECIFIED"
+
+-- | The user is allowed to configure Wi-Fi. wifiConfigDisabled is ignored.
+pattern DeviceConnectivityManagement_ConfigureWifi_ALLOWCONFIGURINGWIFI :: DeviceConnectivityManagement_ConfigureWifi
+pattern DeviceConnectivityManagement_ConfigureWifi_ALLOWCONFIGURINGWIFI = DeviceConnectivityManagement_ConfigureWifi "ALLOW_CONFIGURING_WIFI"
+
+-- | Adding new Wi-Fi configurations is disallowed. The user is only able to switch between already configured networks. Supported on Android 13 and above, on fully managed devices and work profiles on company-owned devices. If the setting is not supported, ALLOW/CONFIGURING/WIFI is set. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13. wifiConfigDisabled is ignored.
+pattern DeviceConnectivityManagement_ConfigureWifi_DISALLOWADDWIFICONFIG :: DeviceConnectivityManagement_ConfigureWifi
+pattern DeviceConnectivityManagement_ConfigureWifi_DISALLOWADDWIFICONFIG = DeviceConnectivityManagement_ConfigureWifi "DISALLOW_ADD_WIFI_CONFIG"
+
+-- | Disallows configuring Wi-Fi networks. The setting wifiConfigDisabled is ignored when this value is set. Supported on fully managed devices and work profile on company-owned devices, on all supported API levels. For fully managed devices, setting this removes all configured networks and retains only the networks configured using openNetworkConfiguration policy. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. Note: If a network connection can\'t be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled).
+pattern DeviceConnectivityManagement_ConfigureWifi_DISALLOWCONFIGURINGWIFI :: DeviceConnectivityManagement_ConfigureWifi
+pattern DeviceConnectivityManagement_ConfigureWifi_DISALLOWCONFIGURINGWIFI = DeviceConnectivityManagement_ConfigureWifi "DISALLOW_CONFIGURING_WIFI"
+
+{-# COMPLETE
+  DeviceConnectivityManagement_ConfigureWifi_CONFIGUREWIFIUNSPECIFIED,
+  DeviceConnectivityManagement_ConfigureWifi_ALLOWCONFIGURINGWIFI,
+  DeviceConnectivityManagement_ConfigureWifi_DISALLOWADDWIFICONFIG,
+  DeviceConnectivityManagement_ConfigureWifi_DISALLOWCONFIGURINGWIFI,
+  DeviceConnectivityManagement_ConfigureWifi
+  #-}
+
+-- | Controls tethering settings. Based on the value set, the user is partially or fully disallowed from using different forms of tethering.
+newtype DeviceConnectivityManagement_TetheringSettings = DeviceConnectivityManagement_TetheringSettings {fromDeviceConnectivityManagement_TetheringSettings :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to ALLOW/ALL/TETHERING unless tetheringConfigDisabled is set to true. If tetheringConfigDisabled is set to true, this is equivalent to DISALLOW/ALL/TETHERING.
+pattern DeviceConnectivityManagement_TetheringSettings_TETHERINGSETTINGSUNSPECIFIED :: DeviceConnectivityManagement_TetheringSettings
+pattern DeviceConnectivityManagement_TetheringSettings_TETHERINGSETTINGSUNSPECIFIED = DeviceConnectivityManagement_TetheringSettings "TETHERING_SETTINGS_UNSPECIFIED"
+
+-- | Allows configuration and use of all forms of tethering. tetheringConfigDisabled is ignored.
+pattern DeviceConnectivityManagement_TetheringSettings_ALLOWALLTETHERING :: DeviceConnectivityManagement_TetheringSettings
+pattern DeviceConnectivityManagement_TetheringSettings_ALLOWALLTETHERING = DeviceConnectivityManagement_TetheringSettings "ALLOW_ALL_TETHERING"
+
+-- | Disallows the user from using Wi-Fi tethering. Supported on company owned devices running Android 13 and above. If the setting is not supported, ALLOW/ALL/TETHERING will be set. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13. tetheringConfigDisabled is ignored.
+pattern DeviceConnectivityManagement_TetheringSettings_DISALLOWWIFITETHERING :: DeviceConnectivityManagement_TetheringSettings
+pattern DeviceConnectivityManagement_TetheringSettings_DISALLOWWIFITETHERING = DeviceConnectivityManagement_TetheringSettings "DISALLOW_WIFI_TETHERING"
+
+-- | Disallows all forms of tethering. Supported on fully managed devices and work profile on company-owned devices, on all supported android versions. The setting tetheringConfigDisabled is ignored.
+pattern DeviceConnectivityManagement_TetheringSettings_DISALLOWALLTETHERING :: DeviceConnectivityManagement_TetheringSettings
+pattern DeviceConnectivityManagement_TetheringSettings_DISALLOWALLTETHERING = DeviceConnectivityManagement_TetheringSettings "DISALLOW_ALL_TETHERING"
+
+{-# COMPLETE
+  DeviceConnectivityManagement_TetheringSettings_TETHERINGSETTINGSUNSPECIFIED,
+  DeviceConnectivityManagement_TetheringSettings_ALLOWALLTETHERING,
+  DeviceConnectivityManagement_TetheringSettings_DISALLOWWIFITETHERING,
+  DeviceConnectivityManagement_TetheringSettings_DISALLOWALLTETHERING,
+  DeviceConnectivityManagement_TetheringSettings
+  #-}
+
+-- | Controls what files and\/or data can be transferred via USB. Supported only on company-owned devices.
+newtype DeviceConnectivityManagement_UsbDataAccess = DeviceConnectivityManagement_UsbDataAccess {fromDeviceConnectivityManagement_UsbDataAccess :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to DISALLOW/USB/FILE_TRANSFER.
+pattern DeviceConnectivityManagement_UsbDataAccess_USBDATAACCESSUNSPECIFIED :: DeviceConnectivityManagement_UsbDataAccess
+pattern DeviceConnectivityManagement_UsbDataAccess_USBDATAACCESSUNSPECIFIED = DeviceConnectivityManagement_UsbDataAccess "USB_DATA_ACCESS_UNSPECIFIED"
+
+-- | All types of USB data transfers are allowed. usbFileTransferDisabled is ignored.
+pattern DeviceConnectivityManagement_UsbDataAccess_ALLOWUSBDATATRANSFER :: DeviceConnectivityManagement_UsbDataAccess
+pattern DeviceConnectivityManagement_UsbDataAccess_ALLOWUSBDATATRANSFER = DeviceConnectivityManagement_UsbDataAccess "ALLOW_USB_DATA_TRANSFER"
+
+-- | Transferring files over USB is disallowed. Other types of USB data connections, such as mouse and keyboard connection, are allowed. usbFileTransferDisabled is ignored.
+pattern DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBFILETRANSFER :: DeviceConnectivityManagement_UsbDataAccess
+pattern DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBFILETRANSFER = DeviceConnectivityManagement_UsbDataAccess "DISALLOW_USB_FILE_TRANSFER"
+
+-- | When set, all types of USB data transfers are prohibited. Supported for devices running Android 12 or above with USB HAL 1.3 or above. If the setting is not supported, DISALLOW/USB/FILE/TRANSFER will be set. A nonComplianceDetail with API/LEVEL is reported if the Android version is less than 12. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not have USB HAL 1.3 or above. usbFileTransferDisabled is ignored.
+pattern DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBDATATRANSFER :: DeviceConnectivityManagement_UsbDataAccess
+pattern DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBDATATRANSFER = DeviceConnectivityManagement_UsbDataAccess "DISALLOW_USB_DATA_TRANSFER"
+
+{-# COMPLETE
+  DeviceConnectivityManagement_UsbDataAccess_USBDATAACCESSUNSPECIFIED,
+  DeviceConnectivityManagement_UsbDataAccess_ALLOWUSBDATATRANSFER,
+  DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBFILETRANSFER,
+  DeviceConnectivityManagement_UsbDataAccess_DISALLOWUSBDATATRANSFER,
+  DeviceConnectivityManagement_UsbDataAccess
+  #-}
+
+-- | Controls configuring and using Wi-Fi direct settings. Supported on company-owned devices running Android 13 and above.
+newtype DeviceConnectivityManagement_WifiDirectSettings = DeviceConnectivityManagement_WifiDirectSettings {fromDeviceConnectivityManagement_WifiDirectSettings :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to ALLOW/WIFI/DIRECT
+pattern DeviceConnectivityManagement_WifiDirectSettings_WIFIDIRECTSETTINGSUNSPECIFIED :: DeviceConnectivityManagement_WifiDirectSettings
+pattern DeviceConnectivityManagement_WifiDirectSettings_WIFIDIRECTSETTINGSUNSPECIFIED = DeviceConnectivityManagement_WifiDirectSettings "WIFI_DIRECT_SETTINGS_UNSPECIFIED"
+
+-- | The user is allowed to use Wi-Fi direct.
+pattern DeviceConnectivityManagement_WifiDirectSettings_ALLOWWIFIDIRECT :: DeviceConnectivityManagement_WifiDirectSettings
+pattern DeviceConnectivityManagement_WifiDirectSettings_ALLOWWIFIDIRECT = DeviceConnectivityManagement_WifiDirectSettings "ALLOW_WIFI_DIRECT"
+
+-- | The user is not allowed to use Wi-Fi direct. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceConnectivityManagement_WifiDirectSettings_DISALLOWWIFIDIRECT :: DeviceConnectivityManagement_WifiDirectSettings
+pattern DeviceConnectivityManagement_WifiDirectSettings_DISALLOWWIFIDIRECT = DeviceConnectivityManagement_WifiDirectSettings "DISALLOW_WIFI_DIRECT"
+
+{-# COMPLETE
+  DeviceConnectivityManagement_WifiDirectSettings_WIFIDIRECTSETTINGSUNSPECIFIED,
+  DeviceConnectivityManagement_WifiDirectSettings_ALLOWWIFIDIRECT,
+  DeviceConnectivityManagement_WifiDirectSettings_DISALLOWWIFIDIRECT,
+  DeviceConnectivityManagement_WifiDirectSettings
+  #-}
+
+-- | Controls whether airplane mode can be toggled by the user or not.
+newtype DeviceRadioState_AirplaneModeState = DeviceRadioState_AirplaneModeState {fromDeviceRadioState_AirplaneModeState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to AIRPLANE/MODE/USER_CHOICE.
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODESTATEUNSPECIFIED :: DeviceRadioState_AirplaneModeState
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODESTATEUNSPECIFIED = DeviceRadioState_AirplaneModeState "AIRPLANE_MODE_STATE_UNSPECIFIED"
+
+-- | The user is allowed to toggle airplane mode on or off.
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODEUSERCHOICE :: DeviceRadioState_AirplaneModeState
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODEUSERCHOICE = DeviceRadioState_AirplaneModeState "AIRPLANE_MODE_USER_CHOICE"
+
+-- | Airplane mode is disabled. The user is not allowed to toggle airplane mode on. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 9.
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODEDISABLED :: DeviceRadioState_AirplaneModeState
+pattern DeviceRadioState_AirplaneModeState_AIRPLANEMODEDISABLED = DeviceRadioState_AirplaneModeState "AIRPLANE_MODE_DISABLED"
+
+{-# COMPLETE
+  DeviceRadioState_AirplaneModeState_AIRPLANEMODESTATEUNSPECIFIED,
+  DeviceRadioState_AirplaneModeState_AIRPLANEMODEUSERCHOICE,
+  DeviceRadioState_AirplaneModeState_AIRPLANEMODEDISABLED,
+  DeviceRadioState_AirplaneModeState
+  #-}
+
+-- | Controls whether cellular 2G setting can be toggled by the user or not.
+newtype DeviceRadioState_CellularTwoGState = DeviceRadioState_CellularTwoGState {fromDeviceRadioState_CellularTwoGState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to CELLULAR/TWO/G/USER/CHOICE.
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGSTATEUNSPECIFIED :: DeviceRadioState_CellularTwoGState
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGSTATEUNSPECIFIED = DeviceRadioState_CellularTwoGState "CELLULAR_TWO_G_STATE_UNSPECIFIED"
+
+-- | The user is allowed to toggle cellular 2G on or off.
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGUSERCHOICE :: DeviceRadioState_CellularTwoGState
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGUSERCHOICE = DeviceRadioState_CellularTwoGState "CELLULAR_TWO_G_USER_CHOICE"
+
+-- | Cellular 2G is disabled. The user is not allowed to toggle cellular 2G on via settings. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14.
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGDISABLED :: DeviceRadioState_CellularTwoGState
+pattern DeviceRadioState_CellularTwoGState_CELLULARTWOGDISABLED = DeviceRadioState_CellularTwoGState "CELLULAR_TWO_G_DISABLED"
+
+{-# COMPLETE
+  DeviceRadioState_CellularTwoGState_CELLULARTWOGSTATEUNSPECIFIED,
+  DeviceRadioState_CellularTwoGState_CELLULARTWOGUSERCHOICE,
+  DeviceRadioState_CellularTwoGState_CELLULARTWOGDISABLED,
+  DeviceRadioState_CellularTwoGState
+  #-}
+
+-- | The minimum required security level of Wi-Fi networks that the device can connect to.
+newtype DeviceRadioState_MinimumWifiSecurityLevel = DeviceRadioState_MinimumWifiSecurityLevel {fromDeviceRadioState_MinimumWifiSecurityLevel :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Defaults to OPEN/NETWORK/SECURITY, which means the device will be able to connect to all types of Wi-Fi networks.
+pattern DeviceRadioState_MinimumWifiSecurityLevel_MINIMUMWIFISECURITYLEVELUNSPECIFIED :: DeviceRadioState_MinimumWifiSecurityLevel
+pattern DeviceRadioState_MinimumWifiSecurityLevel_MINIMUMWIFISECURITYLEVELUNSPECIFIED = DeviceRadioState_MinimumWifiSecurityLevel "MINIMUM_WIFI_SECURITY_LEVEL_UNSPECIFIED"
+
+-- | The device will be able to connect to all types of Wi-Fi networks.
+pattern DeviceRadioState_MinimumWifiSecurityLevel_OPENNETWORKSECURITY :: DeviceRadioState_MinimumWifiSecurityLevel
+pattern DeviceRadioState_MinimumWifiSecurityLevel_OPENNETWORKSECURITY = DeviceRadioState_MinimumWifiSecurityLevel "OPEN_NETWORK_SECURITY"
+
+-- | A personal network such as WEP, WPA2-PSK is the minimum required security. The device will not be able to connect to open wifi networks. This is stricter than OPEN/NETWORK/SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceRadioState_MinimumWifiSecurityLevel_PERSONALNETWORKSECURITY :: DeviceRadioState_MinimumWifiSecurityLevel
+pattern DeviceRadioState_MinimumWifiSecurityLevel_PERSONALNETWORKSECURITY = DeviceRadioState_MinimumWifiSecurityLevel "PERSONAL_NETWORK_SECURITY"
+
+-- | An enterprise EAP network is the minimum required security level. The device will not be able to connect to Wi-Fi network below this security level. This is stricter than PERSONAL/NETWORK/SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISENETWORKSECURITY :: DeviceRadioState_MinimumWifiSecurityLevel
+pattern DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISENETWORKSECURITY = DeviceRadioState_MinimumWifiSecurityLevel "ENTERPRISE_NETWORK_SECURITY"
+
+-- | A 192-bit enterprise network is the minimum required security level. The device will not be able to connect to Wi-Fi network below this security level. This is stricter than ENTERPRISE/NETWORK/SECURITY. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISEBIT192NETWORKSECURITY :: DeviceRadioState_MinimumWifiSecurityLevel
+pattern DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISEBIT192NETWORKSECURITY = DeviceRadioState_MinimumWifiSecurityLevel "ENTERPRISE_BIT192_NETWORK_SECURITY"
+
+{-# COMPLETE
+  DeviceRadioState_MinimumWifiSecurityLevel_MINIMUMWIFISECURITYLEVELUNSPECIFIED,
+  DeviceRadioState_MinimumWifiSecurityLevel_OPENNETWORKSECURITY,
+  DeviceRadioState_MinimumWifiSecurityLevel_PERSONALNETWORKSECURITY,
+  DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISENETWORKSECURITY,
+  DeviceRadioState_MinimumWifiSecurityLevel_ENTERPRISEBIT192NETWORKSECURITY,
+  DeviceRadioState_MinimumWifiSecurityLevel
+  #-}
+
+-- | Controls the state of the ultra wideband setting and whether the user can toggle it on or off.
+newtype DeviceRadioState_UltraWidebandState = DeviceRadioState_UltraWidebandState {fromDeviceRadioState_UltraWidebandState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to ULTRA/WIDEBAND/USER_CHOICE.
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDSTATEUNSPECIFIED :: DeviceRadioState_UltraWidebandState
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDSTATEUNSPECIFIED = DeviceRadioState_UltraWidebandState "ULTRA_WIDEBAND_STATE_UNSPECIFIED"
+
+-- | The user is allowed to toggle ultra wideband on or off.
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDUSERCHOICE :: DeviceRadioState_UltraWidebandState
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDUSERCHOICE = DeviceRadioState_UltraWidebandState "ULTRA_WIDEBAND_USER_CHOICE"
+
+-- | Ultra wideband is disabled. The user is not allowed to toggle ultra wideband on via settings. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14.
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDDISABLED :: DeviceRadioState_UltraWidebandState
+pattern DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDDISABLED = DeviceRadioState_UltraWidebandState "ULTRA_WIDEBAND_DISABLED"
+
+{-# COMPLETE
+  DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDSTATEUNSPECIFIED,
+  DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDUSERCHOICE,
+  DeviceRadioState_UltraWidebandState_ULTRAWIDEBANDDISABLED,
+  DeviceRadioState_UltraWidebandState
+  #-}
+
+-- | Controls current state of Wi-Fi and if user can change its state.
+newtype DeviceRadioState_WifiState = DeviceRadioState_WifiState {fromDeviceRadioState_WifiState :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to WIFI/STATE/USER_CHOICE
+pattern DeviceRadioState_WifiState_WIFISTATEUNSPECIFIED :: DeviceRadioState_WifiState
+pattern DeviceRadioState_WifiState_WIFISTATEUNSPECIFIED = DeviceRadioState_WifiState "WIFI_STATE_UNSPECIFIED"
+
+-- | User is allowed to enable\/disable Wi-Fi.
+pattern DeviceRadioState_WifiState_WIFISTATEUSERCHOICE :: DeviceRadioState_WifiState
+pattern DeviceRadioState_WifiState_WIFISTATEUSERCHOICE = DeviceRadioState_WifiState "WIFI_STATE_USER_CHOICE"
+
+-- | Wi-Fi is on and the user is not allowed to turn it off. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceRadioState_WifiState_WIFIENABLED :: DeviceRadioState_WifiState
+pattern DeviceRadioState_WifiState_WIFIENABLED = DeviceRadioState_WifiState "WIFI_ENABLED"
+
+-- | Wi-Fi is off and the user is not allowed to turn it on. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 13.
+pattern DeviceRadioState_WifiState_WIFIDISABLED :: DeviceRadioState_WifiState
+pattern DeviceRadioState_WifiState_WIFIDISABLED = DeviceRadioState_WifiState "WIFI_DISABLED"
+
+{-# COMPLETE
+  DeviceRadioState_WifiState_WIFISTATEUNSPECIFIED,
+  DeviceRadioState_WifiState_WIFISTATEUSERCHOICE,
+  DeviceRadioState_WifiState_WIFIENABLED,
+  DeviceRadioState_WifiState_WIFIDISABLED,
+  DeviceRadioState_WifiState
   #-}
 
 -- | Encryption status from DevicePolicyManager.
@@ -2178,10 +3087,15 @@ pattern EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEALLOWED = EnrollmentToke
 pattern EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWED :: EnrollmentToken_AllowPersonalUsage
 pattern EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWED = EnrollmentToken_AllowPersonalUsage "PERSONAL_USAGE_DISALLOWED"
 
+-- | Device is not associated with a single user, and thus both personal usage and corporate identity authentication are not expected. Important: This setting is mandatory for dedicated device enrollment and it is a breaking change. This change needs to be implemented before January 2025.For additional details see the dedicated device provisioning guide (https:\/\/developers.google.com\/android\/management\/provision-device#company-owned/devices/for/work/use_only).
+pattern EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS :: EnrollmentToken_AllowPersonalUsage
+pattern EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS = EnrollmentToken_AllowPersonalUsage "PERSONAL_USAGE_DISALLOWED_USERLESS"
+
 {-# COMPLETE
   EnrollmentToken_AllowPersonalUsage_ALLOWPERSONALUSAGEUNSPECIFIED,
   EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEALLOWED,
   EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWED,
+  EnrollmentToken_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS,
   EnrollmentToken_AllowPersonalUsage
   #-}
 
@@ -2221,6 +3135,10 @@ pattern Enterprise_EnabledNotificationTypesItem_Command = Enterprise_EnabledNoti
 pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS :: Enterprise_EnabledNotificationTypesItem
 pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS = Enterprise_EnabledNotificationTypesItem "USAGE_LOGS"
 
+-- | A notification sent when an enterprise is upgraded.Note: This feature is not generally available.
+pattern Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE :: Enterprise_EnabledNotificationTypesItem
+pattern Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE = Enterprise_EnabledNotificationTypesItem "ENTERPRISE_UPGRADE"
+
 {-# COMPLETE
   Enterprise_EnabledNotificationTypesItem_NOTIFICATIONTYPEUNSPECIFIED,
   Enterprise_EnabledNotificationTypesItem_Enrollment,
@@ -2228,7 +3146,232 @@ pattern Enterprise_EnabledNotificationTypesItem_USAGELOGS = Enterprise_EnabledNo
   Enterprise_EnabledNotificationTypesItem_STATUSREPORT,
   Enterprise_EnabledNotificationTypesItem_Command,
   Enterprise_EnabledNotificationTypesItem_USAGELOGS,
+  Enterprise_EnabledNotificationTypesItem_ENTERPRISEUPGRADE,
   Enterprise_EnabledNotificationTypesItem
+  #-}
+
+-- | Output only. The type of the enterprise.
+newtype Enterprise_EnterpriseType = Enterprise_EnterpriseType {fromEnterprise_EnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED = Enterprise_EnterpriseType "ENTERPRISE_TYPE_UNSPECIFIED"
+
+-- | The enterprise belongs to a managed Google domain (https:\/\/developers.google.com\/android\/work\/terminology#managed/google/domain).
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN = Enterprise_EnterpriseType "MANAGED_GOOGLE_DOMAIN"
+
+-- | The enterprise is a managed Google Play Accounts enterprise (https:\/\/developers.google.com\/android\/work\/terminology#managed/google/play/accounts/enterprise).
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE :: Enterprise_EnterpriseType
+pattern Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE = Enterprise_EnterpriseType "MANAGED_GOOGLE_PLAY_ACCOUNTS_ENTERPRISE"
+
+{-# COMPLETE
+  Enterprise_EnterpriseType_ENTERPRISETYPEUNSPECIFIED,
+  Enterprise_EnterpriseType_MANAGEDGOOGLEDOMAIN,
+  Enterprise_EnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISE,
+  Enterprise_EnterpriseType
+  #-}
+
+-- | Output only. The type of managed Google domain.
+newtype Enterprise_ManagedGoogleDomainType = Enterprise_ManagedGoogleDomainType {fromEnterprise_ManagedGoogleDomainType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google domain type is not specified.
+pattern Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED = Enterprise_ManagedGoogleDomainType "MANAGED_GOOGLE_DOMAIN_TYPE_UNSPECIFIED"
+
+-- | The managed Google domain is an email-verified team.
+pattern Enterprise_ManagedGoogleDomainType_TYPETEAM :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TYPETEAM = Enterprise_ManagedGoogleDomainType "TYPE_TEAM"
+
+-- | The managed Google domain is domain-verified.
+pattern Enterprise_ManagedGoogleDomainType_TYPEDOMAIN :: Enterprise_ManagedGoogleDomainType
+pattern Enterprise_ManagedGoogleDomainType_TYPEDOMAIN = Enterprise_ManagedGoogleDomainType "TYPE_DOMAIN"
+
+{-# COMPLETE
+  Enterprise_ManagedGoogleDomainType_MANAGEDGOOGLEDOMAINTYPEUNSPECIFIED,
+  Enterprise_ManagedGoogleDomainType_TYPETEAM,
+  Enterprise_ManagedGoogleDomainType_TYPEDOMAIN,
+  Enterprise_ManagedGoogleDomainType
+  #-}
+
+-- | Output only. The type of a managed Google Play Accounts enterprise.
+newtype Enterprise_ManagedGooglePlayAccountsEnterpriseType = Enterprise_ManagedGooglePlayAccountsEnterpriseType {fromEnterprise_ManagedGooglePlayAccountsEnterpriseType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | The managed Google Play Accounts enterprise type is not specified.
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "MANAGED_GOOGLE_PLAY_ACCOUNTS_ENTERPRISE_TYPE_UNSPECIFIED"
+
+-- | The enterprise is customer-managed
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "CUSTOMER_MANAGED"
+
+-- | The enterprise is EMM-managed (deprecated).
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED :: Enterprise_ManagedGooglePlayAccountsEnterpriseType
+pattern Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED = Enterprise_ManagedGooglePlayAccountsEnterpriseType "EMM_MANAGED"
+
+{-# COMPLETE
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_MANAGEDGOOGLEPLAYACCOUNTSENTERPRISETYPEUNSPECIFIED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_CUSTOMERMANAGED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType_EMMMANAGED,
+  Enterprise_ManagedGooglePlayAccountsEnterpriseType
+  #-}
+
+-- | Output only. Whether users need to be authenticated by Google during the enrollment process. IT admin can specify if Google authentication is enabled for the enterprise for knowledge worker devices. This value can be set only via the Google Admin Console. Google authentication can be used with signin/url In the case where Google authentication is required and a signin/url is specified, Google authentication will be launched before signin_url.
+newtype GoogleAuthenticationSettings_GoogleAuthenticationRequired = GoogleAuthenticationSettings_GoogleAuthenticationRequired {fromGoogleAuthenticationSettings_GoogleAuthenticationRequired :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_GOOGLEAUTHENTICATIONREQUIREDUNSPECIFIED :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_GOOGLEAUTHENTICATIONREQUIREDUNSPECIFIED = GoogleAuthenticationSettings_GoogleAuthenticationRequired "GOOGLE_AUTHENTICATION_REQUIRED_UNSPECIFIED"
+
+-- | Google authentication is not required.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_NOTREQUIRED :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_NOTREQUIRED = GoogleAuthenticationSettings_GoogleAuthenticationRequired "NOT_REQUIRED"
+
+-- | User is required to be successfully authenticated by Google.
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required :: GoogleAuthenticationSettings_GoogleAuthenticationRequired
+pattern GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required = GoogleAuthenticationSettings_GoogleAuthenticationRequired "REQUIRED"
+
+{-# COMPLETE
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_GOOGLEAUTHENTICATIONREQUIREDUNSPECIFIED,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_NOTREQUIRED,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired_Required,
+  GoogleAuthenticationSettings_GoogleAuthenticationRequired
+  #-}
+
+-- | Optional. Charging constraint.
+newtype InstallConstraint_ChargingConstraint = InstallConstraint_ChargingConstraint {fromInstallConstraint_ChargingConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Default to CHARGING/NOT/REQUIRED.
+pattern InstallConstraint_ChargingConstraint_CHARGINGCONSTRAINTUNSPECIFIED :: InstallConstraint_ChargingConstraint
+pattern InstallConstraint_ChargingConstraint_CHARGINGCONSTRAINTUNSPECIFIED = InstallConstraint_ChargingConstraint "CHARGING_CONSTRAINT_UNSPECIFIED"
+
+-- | Device doesn\'t have to be charging.
+pattern InstallConstraint_ChargingConstraint_CHARGINGNOTREQUIRED :: InstallConstraint_ChargingConstraint
+pattern InstallConstraint_ChargingConstraint_CHARGINGNOTREQUIRED = InstallConstraint_ChargingConstraint "CHARGING_NOT_REQUIRED"
+
+-- | Device has to be charging.
+pattern InstallConstraint_ChargingConstraint_INSTALLONLYWHENCHARGING :: InstallConstraint_ChargingConstraint
+pattern InstallConstraint_ChargingConstraint_INSTALLONLYWHENCHARGING = InstallConstraint_ChargingConstraint "INSTALL_ONLY_WHEN_CHARGING"
+
+{-# COMPLETE
+  InstallConstraint_ChargingConstraint_CHARGINGCONSTRAINTUNSPECIFIED,
+  InstallConstraint_ChargingConstraint_CHARGINGNOTREQUIRED,
+  InstallConstraint_ChargingConstraint_INSTALLONLYWHENCHARGING,
+  InstallConstraint_ChargingConstraint
+  #-}
+
+-- | Optional. Device idle constraint.
+newtype InstallConstraint_DeviceIdleConstraint = InstallConstraint_DeviceIdleConstraint {fromInstallConstraint_DeviceIdleConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Default to DEVICE/IDLE/NOT_REQUIRED.
+pattern InstallConstraint_DeviceIdleConstraint_DEVICEIDLECONSTRAINTUNSPECIFIED :: InstallConstraint_DeviceIdleConstraint
+pattern InstallConstraint_DeviceIdleConstraint_DEVICEIDLECONSTRAINTUNSPECIFIED = InstallConstraint_DeviceIdleConstraint "DEVICE_IDLE_CONSTRAINT_UNSPECIFIED"
+
+-- | Device doesn\'t have to be idle, app can be installed while the user is interacting with the device.
+pattern InstallConstraint_DeviceIdleConstraint_DEVICEIDLENOTREQUIRED :: InstallConstraint_DeviceIdleConstraint
+pattern InstallConstraint_DeviceIdleConstraint_DEVICEIDLENOTREQUIRED = InstallConstraint_DeviceIdleConstraint "DEVICE_IDLE_NOT_REQUIRED"
+
+-- | Device has to be idle.
+pattern InstallConstraint_DeviceIdleConstraint_INSTALLONLYWHENDEVICEIDLE :: InstallConstraint_DeviceIdleConstraint
+pattern InstallConstraint_DeviceIdleConstraint_INSTALLONLYWHENDEVICEIDLE = InstallConstraint_DeviceIdleConstraint "INSTALL_ONLY_WHEN_DEVICE_IDLE"
+
+{-# COMPLETE
+  InstallConstraint_DeviceIdleConstraint_DEVICEIDLECONSTRAINTUNSPECIFIED,
+  InstallConstraint_DeviceIdleConstraint_DEVICEIDLENOTREQUIRED,
+  InstallConstraint_DeviceIdleConstraint_INSTALLONLYWHENDEVICEIDLE,
+  InstallConstraint_DeviceIdleConstraint
+  #-}
+
+-- | Optional. Network type constraint.
+newtype InstallConstraint_NetworkTypeConstraint = InstallConstraint_NetworkTypeConstraint {fromInstallConstraint_NetworkTypeConstraint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Default to INSTALL/ON/ANY_NETWORK.
+pattern InstallConstraint_NetworkTypeConstraint_NETWORKTYPECONSTRAINTUNSPECIFIED :: InstallConstraint_NetworkTypeConstraint
+pattern InstallConstraint_NetworkTypeConstraint_NETWORKTYPECONSTRAINTUNSPECIFIED = InstallConstraint_NetworkTypeConstraint "NETWORK_TYPE_CONSTRAINT_UNSPECIFIED"
+
+-- | Any active networks (Wi-Fi, cellular, etc.).
+pattern InstallConstraint_NetworkTypeConstraint_INSTALLONANYNETWORK :: InstallConstraint_NetworkTypeConstraint
+pattern InstallConstraint_NetworkTypeConstraint_INSTALLONANYNETWORK = InstallConstraint_NetworkTypeConstraint "INSTALL_ON_ANY_NETWORK"
+
+-- | Any unmetered network (e.g. Wi-FI).
+pattern InstallConstraint_NetworkTypeConstraint_INSTALLONLYONUNMETEREDNETWORK :: InstallConstraint_NetworkTypeConstraint
+pattern InstallConstraint_NetworkTypeConstraint_INSTALLONLYONUNMETEREDNETWORK = InstallConstraint_NetworkTypeConstraint "INSTALL_ONLY_ON_UNMETERED_NETWORK"
+
+{-# COMPLETE
+  InstallConstraint_NetworkTypeConstraint_NETWORKTYPECONSTRAINTUNSPECIFIED,
+  InstallConstraint_NetworkTypeConstraint_INSTALLONANYNETWORK,
+  InstallConstraint_NetworkTypeConstraint_INSTALLONLYONUNMETEREDNETWORK,
+  InstallConstraint_NetworkTypeConstraint
   #-}
 
 -- | The severity of the app state.
@@ -2542,6 +3685,43 @@ pattern MemoryEvent_EventType_EXTERNALSTORAGEMEASURED = MemoryEvent_EventType "E
   MemoryEvent_EventType
   #-}
 
+-- | Required. Immutable. The management mode of the device or profile being migrated.
+newtype MigrationToken_ManagementMode = MigrationToken_ManagementMode {fromMigrationToken_ManagementMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value must not be used.
+pattern MigrationToken_ManagementMode_MANAGEMENTMODEUNSPECIFIED :: MigrationToken_ManagementMode
+pattern MigrationToken_ManagementMode_MANAGEMENTMODEUNSPECIFIED = MigrationToken_ManagementMode "MANAGEMENT_MODE_UNSPECIFIED"
+
+-- | A work profile on a personally owned device. Supported only on devices running Android 9 and above.
+pattern MigrationToken_ManagementMode_WORKPROFILEPERSONALLYOWNED :: MigrationToken_ManagementMode
+pattern MigrationToken_ManagementMode_WORKPROFILEPERSONALLYOWNED = MigrationToken_ManagementMode "WORK_PROFILE_PERSONALLY_OWNED"
+
+-- | A work profile on a company-owned device. Supported only on devices running Android 11 and above.
+pattern MigrationToken_ManagementMode_WORKPROFILECOMPANYOWNED :: MigrationToken_ManagementMode
+pattern MigrationToken_ManagementMode_WORKPROFILECOMPANYOWNED = MigrationToken_ManagementMode "WORK_PROFILE_COMPANY_OWNED"
+
+-- | A fully-managed device. Supported only on devices running Android 9 and above.
+pattern MigrationToken_ManagementMode_FULLYMANAGED :: MigrationToken_ManagementMode
+pattern MigrationToken_ManagementMode_FULLYMANAGED = MigrationToken_ManagementMode "FULLY_MANAGED"
+
+{-# COMPLETE
+  MigrationToken_ManagementMode_MANAGEMENTMODEUNSPECIFIED,
+  MigrationToken_ManagementMode_WORKPROFILEPERSONALLYOWNED,
+  MigrationToken_ManagementMode_WORKPROFILECOMPANYOWNED,
+  MigrationToken_ManagementMode_FULLYMANAGED,
+  MigrationToken_ManagementMode
+  #-}
+
 -- | If package/name is set and the non-compliance reason is APP/NOT/INSTALLED or APP/NOT_UPDATED, the detailed reason the app can\'t be installed or updated.
 newtype NonComplianceDetail_InstallationFailureReason = NonComplianceDetail_InstallationFailureReason {fromNonComplianceDetail_InstallationFailureReason :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -2599,6 +3779,14 @@ pattern NonComplianceDetail_InstallationFailureReason_NOTENROLLED = NonComplianc
 pattern NonComplianceDetail_InstallationFailureReason_USERINVALID :: NonComplianceDetail_InstallationFailureReason
 pattern NonComplianceDetail_InstallationFailureReason_USERINVALID = NonComplianceDetail_InstallationFailureReason "USER_INVALID"
 
+-- | A network error on the user\'s device has prevented the install from succeeding. This usually happens when the device\'s internet connectivity is degraded, unavailable or there\'s a network configuration issue. Please ensure the device has access to full internet connectivity on a network that meets Android Enterprise Network Requirements (https:\/\/support.google.com\/work\/android\/answer\/10513641). App install or update will automatically resume once this is the case.
+pattern NonComplianceDetail_InstallationFailureReason_NETWORKERRORUNRELIABLECONNECTION :: NonComplianceDetail_InstallationFailureReason
+pattern NonComplianceDetail_InstallationFailureReason_NETWORKERRORUNRELIABLECONNECTION = NonComplianceDetail_InstallationFailureReason "NETWORK_ERROR_UNRELIABLE_CONNECTION"
+
+-- | The user\'s device does not have sufficient storage space to install the app. This can be resolved by clearing up storage space on the device. App install or update will automatically resume once the device has sufficient storage.
+pattern NonComplianceDetail_InstallationFailureReason_INSUFFICIENTSTORAGE :: NonComplianceDetail_InstallationFailureReason
+pattern NonComplianceDetail_InstallationFailureReason_INSUFFICIENTSTORAGE = NonComplianceDetail_InstallationFailureReason "INSUFFICIENT_STORAGE"
+
 {-# COMPLETE
   NonComplianceDetail_InstallationFailureReason_INSTALLATIONFAILUREREASONUNSPECIFIED,
   NonComplianceDetail_InstallationFailureReason_INSTALLATIONFAILUREREASONUNKNOWN,
@@ -2611,6 +3799,8 @@ pattern NonComplianceDetail_InstallationFailureReason_USERINVALID = NonComplianc
   NonComplianceDetail_InstallationFailureReason_NOLICENSESREMAINING,
   NonComplianceDetail_InstallationFailureReason_NOTENROLLED,
   NonComplianceDetail_InstallationFailureReason_USERINVALID,
+  NonComplianceDetail_InstallationFailureReason_NETWORKERRORUNRELIABLECONNECTION,
+  NonComplianceDetail_InstallationFailureReason_INSUFFICIENTSTORAGE,
   NonComplianceDetail_InstallationFailureReason
   #-}
 
@@ -2627,7 +3817,7 @@ newtype NonComplianceDetail_NonComplianceReason = NonComplianceDetail_NonComplia
       Core.FromJSONKey
     )
 
--- | This value is disallowed.
+-- | This value is not used.
 pattern NonComplianceDetail_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED :: NonComplianceDetail_NonComplianceReason
 pattern NonComplianceDetail_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED = NonComplianceDetail_NonComplianceReason "NON_COMPLIANCE_REASON_UNSPECIFIED"
 
@@ -2635,7 +3825,7 @@ pattern NonComplianceDetail_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED =
 pattern NonComplianceDetail_NonComplianceReason_APILEVEL :: NonComplianceDetail_NonComplianceReason
 pattern NonComplianceDetail_NonComplianceReason_APILEVEL = NonComplianceDetail_NonComplianceReason "API_LEVEL"
 
--- | The management mode (profile owner, device owner, etc.) doesn\'t support the setting.
+-- | The management mode (such as fully managed or work profile) doesn\'t support the setting.
 pattern NonComplianceDetail_NonComplianceReason_MANAGEMENTMODE :: NonComplianceDetail_NonComplianceReason
 pattern NonComplianceDetail_NonComplianceReason_MANAGEMENTMODE = NonComplianceDetail_NonComplianceReason "MANAGEMENT_MODE"
 
@@ -2671,6 +3861,10 @@ pattern NonComplianceDetail_NonComplianceReason_APPINCOMPATIBLE = NonComplianceD
 pattern NonComplianceDetail_NonComplianceReason_APPNOTUPDATED :: NonComplianceDetail_NonComplianceReason
 pattern NonComplianceDetail_NonComplianceReason_APPNOTUPDATED = NonComplianceDetail_NonComplianceReason "APP_NOT_UPDATED"
 
+-- | The device is incompatible with the policy requirements.
+pattern NonComplianceDetail_NonComplianceReason_DEVICEINCOMPATIBLE :: NonComplianceDetail_NonComplianceReason
+pattern NonComplianceDetail_NonComplianceReason_DEVICEINCOMPATIBLE = NonComplianceDetail_NonComplianceReason "DEVICE_INCOMPATIBLE"
+
 {-# COMPLETE
   NonComplianceDetail_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED,
   NonComplianceDetail_NonComplianceReason_APILEVEL,
@@ -2683,6 +3877,7 @@ pattern NonComplianceDetail_NonComplianceReason_APPNOTUPDATED = NonComplianceDet
   NonComplianceDetail_NonComplianceReason_Pending,
   NonComplianceDetail_NonComplianceReason_APPINCOMPATIBLE,
   NonComplianceDetail_NonComplianceReason_APPNOTUPDATED,
+  NonComplianceDetail_NonComplianceReason_DEVICEINCOMPATIBLE,
   NonComplianceDetail_NonComplianceReason
   #-}
 
@@ -2723,6 +3918,18 @@ pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE = No
 pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL :: NonComplianceDetail_SpecificNonComplianceReason
 pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_API_LEVEL"
 
+-- | The enterprise Wi-Fi network is missing either the root CA or domain name. nonComplianceReason is set to INVALID_VALUE.
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDENTERPRISECONFIG :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDENTERPRISECONFIG = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_INVALID_ENTERPRISE_CONFIG"
+
+-- | User needs to remove the configured Wi-Fi network manually. This is applicable only on work profiles on personally-owned devices. nonComplianceReason is set to USER_ACTION.
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIUSERSHOULDREMOVENETWORK :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIUSERSHOULDREMOVENETWORK = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_USER_SHOULD_REMOVE_NETWORK"
+
+-- | Key pair alias specified via ClientCertKeyPairAlias (https:\/\/chromium.googlesource.com\/chromium\/src\/+\/main\/components\/onc\/docs\/onc/spec.md#eap-type) field in openNetworkConfiguration does not correspond to an existing key installed on the device. nonComplianceReason is set to INVALID/VALUE.
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIKEYPAIRALIASNOTCORRESPONDINGTOEXISTINGKEY :: NonComplianceDetail_SpecificNonComplianceReason
+pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIKEYPAIRALIASNOTCORRESPONDINGTOEXISTINGKEY = NonComplianceDetail_SpecificNonComplianceReason "ONC_WIFI_KEY_PAIR_ALIAS_NOT_CORRESPONDING_TO_EXISTING_KEY"
+
 {-# COMPLETE
   NonComplianceDetail_SpecificNonComplianceReason_SPECIFICNONCOMPLIANCEREASONUNSPECIFIED,
   NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESUSERCREDENTIALSCONFIRMATIONREQUIRED,
@@ -2730,6 +3937,9 @@ pattern NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL = NonCom
   NonComplianceDetail_SpecificNonComplianceReason_PASSWORDPOLICIESPASSWORDNOTSUFFICIENT,
   NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDVALUE,
   NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIAPILEVEL,
+  NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIINVALIDENTERPRISECONFIG,
+  NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIUSERSHOULDREMOVENETWORK,
+  NonComplianceDetail_SpecificNonComplianceReason_ONCWIFIKEYPAIRALIASNOTCORRESPONDINGTOEXISTINGKEY,
   NonComplianceDetail_SpecificNonComplianceReason
   #-}
 
@@ -2746,7 +3956,7 @@ newtype NonComplianceDetailCondition_NonComplianceReason = NonComplianceDetailCo
       Core.FromJSONKey
     )
 
--- | This value is disallowed.
+-- | This value is not used.
 pattern NonComplianceDetailCondition_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED :: NonComplianceDetailCondition_NonComplianceReason
 pattern NonComplianceDetailCondition_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED = NonComplianceDetailCondition_NonComplianceReason "NON_COMPLIANCE_REASON_UNSPECIFIED"
 
@@ -2754,7 +3964,7 @@ pattern NonComplianceDetailCondition_NonComplianceReason_NONCOMPLIANCEREASONUNSP
 pattern NonComplianceDetailCondition_NonComplianceReason_APILEVEL :: NonComplianceDetailCondition_NonComplianceReason
 pattern NonComplianceDetailCondition_NonComplianceReason_APILEVEL = NonComplianceDetailCondition_NonComplianceReason "API_LEVEL"
 
--- | The management mode (profile owner, device owner, etc.) doesn\'t support the setting.
+-- | The management mode (such as fully managed or work profile) doesn\'t support the setting.
 pattern NonComplianceDetailCondition_NonComplianceReason_MANAGEMENTMODE :: NonComplianceDetailCondition_NonComplianceReason
 pattern NonComplianceDetailCondition_NonComplianceReason_MANAGEMENTMODE = NonComplianceDetailCondition_NonComplianceReason "MANAGEMENT_MODE"
 
@@ -2790,6 +4000,10 @@ pattern NonComplianceDetailCondition_NonComplianceReason_APPINCOMPATIBLE = NonCo
 pattern NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED :: NonComplianceDetailCondition_NonComplianceReason
 pattern NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED = NonComplianceDetailCondition_NonComplianceReason "APP_NOT_UPDATED"
 
+-- | The device is incompatible with the policy requirements.
+pattern NonComplianceDetailCondition_NonComplianceReason_DEVICEINCOMPATIBLE :: NonComplianceDetailCondition_NonComplianceReason
+pattern NonComplianceDetailCondition_NonComplianceReason_DEVICEINCOMPATIBLE = NonComplianceDetailCondition_NonComplianceReason "DEVICE_INCOMPATIBLE"
+
 {-# COMPLETE
   NonComplianceDetailCondition_NonComplianceReason_NONCOMPLIANCEREASONUNSPECIFIED,
   NonComplianceDetailCondition_NonComplianceReason_APILEVEL,
@@ -2802,6 +4016,7 @@ pattern NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED = NonComp
   NonComplianceDetailCondition_NonComplianceReason_Pending,
   NonComplianceDetailCondition_NonComplianceReason_APPINCOMPATIBLE,
   NonComplianceDetailCondition_NonComplianceReason_APPNOTUPDATED,
+  NonComplianceDetailCondition_NonComplianceReason_DEVICEINCOMPATIBLE,
   NonComplianceDetailCondition_NonComplianceReason
   #-}
 
@@ -3142,7 +4357,7 @@ pattern PermissionGrant_Policy_PERMISSIONPOLICYUNSPECIFIED = PermissionGrant_Pol
 pattern PermissionGrant_Policy_Prompt :: PermissionGrant_Policy
 pattern PermissionGrant_Policy_Prompt = PermissionGrant_Policy "PROMPT"
 
--- | Automatically grant a permission.
+-- | Automatically grant a permission.On Android 12 and above, READ/SMS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#READ/SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS/FINE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/FINE/LOCATION) ACCESS/BACKGROUND/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/BACKGROUND/LOCATION) ACCESS/COARSE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/COARSE/LOCATION) CAMERA (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#CAMERA) RECORD/AUDIO (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#RECORD/AUDIO) ACTIVITY/RECOGNITION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACTIVITY/RECOGNITION) BODY/SENSORS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#BODY/SENSORS)
 pattern PermissionGrant_Policy_Grant :: PermissionGrant_Policy
 pattern PermissionGrant_Policy_Grant = PermissionGrant_Policy "GRANT"
 
@@ -3175,7 +4390,7 @@ newtype PersonalApplicationPolicy_InstallType = PersonalApplicationPolicy_Instal
 pattern PersonalApplicationPolicy_InstallType_INSTALLTYPEUNSPECIFIED :: PersonalApplicationPolicy_InstallType
 pattern PersonalApplicationPolicy_InstallType_INSTALLTYPEUNSPECIFIED = PersonalApplicationPolicy_InstallType "INSTALL_TYPE_UNSPECIFIED"
 
--- | The app is blocked and can\'t be installed in the personal profile.
+-- | The app is blocked and can\'t be installed in the personal profile. If the app was previously installed in the device, it will be uninstalled.
 pattern PersonalApplicationPolicy_InstallType_Blocked :: PersonalApplicationPolicy_InstallType
 pattern PersonalApplicationPolicy_InstallType_Blocked = PersonalApplicationPolicy_InstallType "BLOCKED"
 
@@ -3227,6 +4442,38 @@ pattern PersonalUsagePolicies_PersonalPlayStoreMode_Allowlist = PersonalUsagePol
   PersonalUsagePolicies_PersonalPlayStoreMode
   #-}
 
+-- | Optional. Controls whether a private space is allowed on the device.
+newtype PersonalUsagePolicies_PrivateSpacePolicy = PersonalUsagePolicies_PrivateSpacePolicy {fromPersonalUsagePolicies_PrivateSpacePolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to PRIVATE/SPACE/ALLOWED.
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEPOLICYUNSPECIFIED :: PersonalUsagePolicies_PrivateSpacePolicy
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEPOLICYUNSPECIFIED = PersonalUsagePolicies_PrivateSpacePolicy "PRIVATE_SPACE_POLICY_UNSPECIFIED"
+
+-- | Users can create a private space profile.
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEALLOWED :: PersonalUsagePolicies_PrivateSpacePolicy
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEALLOWED = PersonalUsagePolicies_PrivateSpacePolicy "PRIVATE_SPACE_ALLOWED"
+
+-- | Users cannot create a private space profile. Supported only for company-owned devices with a work profile. Caution: Any existing private space will be removed.
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEDISALLOWED :: PersonalUsagePolicies_PrivateSpacePolicy
+pattern PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEDISALLOWED = PersonalUsagePolicies_PrivateSpacePolicy "PRIVATE_SPACE_DISALLOWED"
+
+{-# COMPLETE
+  PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEPOLICYUNSPECIFIED,
+  PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEALLOWED,
+  PersonalUsagePolicies_PrivateSpacePolicy_PRIVATESPACEDISALLOWED,
+  PersonalUsagePolicies_PrivateSpacePolicy
+  #-}
+
 newtype Policy_AndroidDevicePolicyTracksItem = Policy_AndroidDevicePolicyTracksItem {fromPolicy_AndroidDevicePolicyTracksItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3258,7 +4505,7 @@ pattern Policy_AndroidDevicePolicyTracksItem_Beta = Policy_AndroidDevicePolicyTr
   Policy_AndroidDevicePolicyTracksItem
   #-}
 
--- | Deprecated. Use autoUpdateMode instead.When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect.The app auto update policy, which controls when automatic app updates can be applied.
+-- | Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency.When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect.The app auto update policy, which controls when automatic app updates can be applied.
 newtype Policy_AppAutoUpdatePolicy = Policy_AppAutoUpdatePolicy {fromPolicy_AppAutoUpdatePolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3298,6 +4545,38 @@ pattern Policy_AppAutoUpdatePolicy_Always = Policy_AppAutoUpdatePolicy "ALWAYS"
   Policy_AppAutoUpdatePolicy_WIFIONLY,
   Policy_AppAutoUpdatePolicy_Always,
   Policy_AppAutoUpdatePolicy
+  #-}
+
+-- | Optional. Controls whether AssistContent (https:\/\/developer.android.com\/reference\/android\/app\/assist\/AssistContent) is allowed to be sent to a privileged app such as an assistant app. AssistContent includes screenshots and information about an app, such as package name. This is supported on Android 15 and above.
+newtype Policy_AssistContentPolicy = Policy_AssistContentPolicy {fromPolicy_AssistContentPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to ASSIST/CONTENT/ALLOWED.
+pattern Policy_AssistContentPolicy_ASSISTCONTENTPOLICYUNSPECIFIED :: Policy_AssistContentPolicy
+pattern Policy_AssistContentPolicy_ASSISTCONTENTPOLICYUNSPECIFIED = Policy_AssistContentPolicy "ASSIST_CONTENT_POLICY_UNSPECIFIED"
+
+-- | Assist content is blocked from being sent to a privileged app.Supported on Android 15 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 15.
+pattern Policy_AssistContentPolicy_ASSISTCONTENTDISALLOWED :: Policy_AssistContentPolicy
+pattern Policy_AssistContentPolicy_ASSISTCONTENTDISALLOWED = Policy_AssistContentPolicy "ASSIST_CONTENT_DISALLOWED"
+
+-- | Assist content is allowed to be sent to a privileged app.Supported on Android 15 and above.
+pattern Policy_AssistContentPolicy_ASSISTCONTENTALLOWED :: Policy_AssistContentPolicy
+pattern Policy_AssistContentPolicy_ASSISTCONTENTALLOWED = Policy_AssistContentPolicy "ASSIST_CONTENT_ALLOWED"
+
+{-# COMPLETE
+  Policy_AssistContentPolicy_ASSISTCONTENTPOLICYUNSPECIFIED,
+  Policy_AssistContentPolicy_ASSISTCONTENTDISALLOWED,
+  Policy_AssistContentPolicy_ASSISTCONTENTALLOWED,
+  Policy_AssistContentPolicy
   #-}
 
 -- | Whether auto date, time, and time zone are enabled on a company-owned device. If this is set, then autoTimeRequired is ignored.
@@ -3369,6 +4648,38 @@ pattern Policy_CameraAccess_CAMERAACCESSENFORCED = Policy_CameraAccess "CAMERA_A
   Policy_CameraAccess
   #-}
 
+-- | Controls which apps are allowed to act as credential providers on Android 14 and above. These apps store credentials, see this (https:\/\/developer.android.com\/training\/sign-in\/passkeys) and this (https:\/\/developer.android.com\/reference\/androidx\/credentials\/CredentialManager) for details. See also credentialProviderPolicy.
+newtype Policy_CredentialProviderPolicyDefault = Policy_CredentialProviderPolicyDefault {fromPolicy_CredentialProviderPolicyDefault :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to CREDENTIAL/PROVIDER/DEFAULT_DISALLOWED.
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERPOLICYDEFAULTUNSPECIFIED :: Policy_CredentialProviderPolicyDefault
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERPOLICYDEFAULTUNSPECIFIED = Policy_CredentialProviderPolicyDefault "CREDENTIAL_PROVIDER_POLICY_DEFAULT_UNSPECIFIED"
+
+-- | Apps with credentialProviderPolicy unspecified are not allowed to act as a credential provider.
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWED :: Policy_CredentialProviderPolicyDefault
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWED = Policy_CredentialProviderPolicyDefault "CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED"
+
+-- | Apps with credentialProviderPolicy unspecified are not allowed to act as a credential provider except for the OEM default credential providers. OEM default credential providers are always allowed to act as credential providers.
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWEDEXCEPTSYSTEM :: Policy_CredentialProviderPolicyDefault
+pattern Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWEDEXCEPTSYSTEM = Policy_CredentialProviderPolicyDefault "CREDENTIAL_PROVIDER_DEFAULT_DISALLOWED_EXCEPT_SYSTEM"
+
+{-# COMPLETE
+  Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERPOLICYDEFAULTUNSPECIFIED,
+  Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWED,
+  Policy_CredentialProviderPolicyDefault_CREDENTIALPROVIDERDEFAULTDISALLOWEDEXCEPTSYSTEM,
+  Policy_CredentialProviderPolicyDefault
+  #-}
+
 -- | The default permission policy for runtime permission requests.
 newtype Policy_DefaultPermissionPolicy = Policy_DefaultPermissionPolicy {fromPolicy_DefaultPermissionPolicy :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -3390,7 +4701,7 @@ pattern Policy_DefaultPermissionPolicy_PERMISSIONPOLICYUNSPECIFIED = Policy_Defa
 pattern Policy_DefaultPermissionPolicy_Prompt :: Policy_DefaultPermissionPolicy
 pattern Policy_DefaultPermissionPolicy_Prompt = Policy_DefaultPermissionPolicy "PROMPT"
 
--- | Automatically grant a permission.
+-- | Automatically grant a permission.On Android 12 and above, READ/SMS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#READ/SMS) and following sensor-related permissions can only be granted on fully managed devices: ACCESS/FINE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/FINE/LOCATION) ACCESS/BACKGROUND/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/BACKGROUND/LOCATION) ACCESS/COARSE/LOCATION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACCESS/COARSE/LOCATION) CAMERA (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#CAMERA) RECORD/AUDIO (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#RECORD/AUDIO) ACTIVITY/RECOGNITION (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#ACTIVITY/RECOGNITION) BODY/SENSORS (https:\/\/developer.android.com\/reference\/android\/Manifest.permission#BODY/SENSORS)
 pattern Policy_DefaultPermissionPolicy_Grant :: Policy_DefaultPermissionPolicy
 pattern Policy_DefaultPermissionPolicy_Grant = Policy_DefaultPermissionPolicy "GRANT"
 
@@ -3490,6 +4801,10 @@ pattern Policy_KeyguardDisabledFeaturesItem_Iris = Policy_KeyguardDisabledFeatur
 pattern Policy_KeyguardDisabledFeaturesItem_Biometrics :: Policy_KeyguardDisabledFeaturesItem
 pattern Policy_KeyguardDisabledFeaturesItem_Biometrics = Policy_KeyguardDisabledFeaturesItem "BIOMETRICS"
 
+-- | Disable all shortcuts on secure keyguard screen on Android 14 and above.
+pattern Policy_KeyguardDisabledFeaturesItem_Shortcuts :: Policy_KeyguardDisabledFeaturesItem
+pattern Policy_KeyguardDisabledFeaturesItem_Shortcuts = Policy_KeyguardDisabledFeaturesItem "SHORTCUTS"
+
 -- | Disable all current and future keyguard customizations.
 pattern Policy_KeyguardDisabledFeaturesItem_ALLFEATURES :: Policy_KeyguardDisabledFeaturesItem
 pattern Policy_KeyguardDisabledFeaturesItem_ALLFEATURES = Policy_KeyguardDisabledFeaturesItem "ALL_FEATURES"
@@ -3505,6 +4820,7 @@ pattern Policy_KeyguardDisabledFeaturesItem_ALLFEATURES = Policy_KeyguardDisable
   Policy_KeyguardDisabledFeaturesItem_Face,
   Policy_KeyguardDisabledFeaturesItem_Iris,
   Policy_KeyguardDisabledFeaturesItem_Biometrics,
+  Policy_KeyguardDisabledFeaturesItem_Shortcuts,
   Policy_KeyguardDisabledFeaturesItem_ALLFEATURES,
   Policy_KeyguardDisabledFeaturesItem
   #-}
@@ -3667,6 +4983,38 @@ pattern Policy_PreferentialNetworkService_PREFERENTIALNETWORKSERVICEENABLED = Po
   Policy_PreferentialNetworkService
   #-}
 
+-- | Optional. Controls whether printing is allowed. This is supported on devices running Android 9 and above. .
+newtype Policy_PrintingPolicy = Policy_PrintingPolicy {fromPolicy_PrintingPolicy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to PRINTING_ALLOWED.
+pattern Policy_PrintingPolicy_PRINTINGPOLICYUNSPECIFIED :: Policy_PrintingPolicy
+pattern Policy_PrintingPolicy_PRINTINGPOLICYUNSPECIFIED = Policy_PrintingPolicy "PRINTING_POLICY_UNSPECIFIED"
+
+-- | Printing is disallowed. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 9.
+pattern Policy_PrintingPolicy_PRINTINGDISALLOWED :: Policy_PrintingPolicy
+pattern Policy_PrintingPolicy_PRINTINGDISALLOWED = Policy_PrintingPolicy "PRINTING_DISALLOWED"
+
+-- | Printing is allowed.
+pattern Policy_PrintingPolicy_PRINTINGALLOWED :: Policy_PrintingPolicy
+pattern Policy_PrintingPolicy_PRINTINGALLOWED = Policy_PrintingPolicy "PRINTING_ALLOWED"
+
+{-# COMPLETE
+  Policy_PrintingPolicy_PRINTINGPOLICYUNSPECIFIED,
+  Policy_PrintingPolicy_PRINTINGDISALLOWED,
+  Policy_PrintingPolicy_PRINTINGALLOWED,
+  Policy_PrintingPolicy
+  #-}
+
 newtype Policy_StayOnPluggedModesItem = Policy_StayOnPluggedModesItem {fromPolicy_StayOnPluggedModesItem :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3720,15 +5068,15 @@ newtype PostureDetail_SecurityRisk = PostureDetail_SecurityRisk {fromPostureDeta
 pattern PostureDetail_SecurityRisk_SECURITYRISKUNSPECIFIED :: PostureDetail_SecurityRisk
 pattern PostureDetail_SecurityRisk_SECURITYRISKUNSPECIFIED = PostureDetail_SecurityRisk "SECURITY_RISK_UNSPECIFIED"
 
--- | SafetyNet detects that the device is running an unknown OS (basicIntegrity check succeeds but ctsProfileMatch fails).
+-- | Play Integrity API detects that the device is running an unknown OS (basicIntegrity check succeeds but ctsProfileMatch fails).
 pattern PostureDetail_SecurityRisk_UNKNOWNOS :: PostureDetail_SecurityRisk
 pattern PostureDetail_SecurityRisk_UNKNOWNOS = PostureDetail_SecurityRisk "UNKNOWN_OS"
 
--- | SafetyNet detects that the device is running a compromised OS (basicIntegrity check fails).
+-- | Play Integrity API detects that the device is running a compromised OS (basicIntegrity check fails).
 pattern PostureDetail_SecurityRisk_COMPROMISEDOS :: PostureDetail_SecurityRisk
 pattern PostureDetail_SecurityRisk_COMPROMISEDOS = PostureDetail_SecurityRisk "COMPROMISED_OS"
 
--- | SafetyNet detects that the device does not have a strong guarantee of system integrity, such as a hardware-backed keystore (https:\/\/developer.android.com\/training\/articles\/security-key-attestation).
+-- | Play Integrity API detects that the device does not have a strong guarantee of system integrity, if the MEETS/STRONG/INTEGRITY label doesn\'t show in the device integrity field (https:\/\/developer.android.com\/google\/play\/integrity\/verdicts#device-integrity-field).
 pattern PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED :: PostureDetail_SecurityRisk
 pattern PostureDetail_SecurityRisk_HARDWAREBACKEDEVALUATIONFAILED = PostureDetail_SecurityRisk "HARDWARE_BACKED_EVALUATION_FAILED"
 
@@ -3797,6 +5145,139 @@ pattern PowerManagementEvent_EventType_Shutdown = PowerManagementEvent_EventType
   PowerManagementEvent_EventType
   #-}
 
+-- | The management mode of the device or profile.
+newtype ProvisioningInfo_ManagementMode = ProvisioningInfo_ManagementMode {fromProvisioningInfo_ManagementMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is disallowed.
+pattern ProvisioningInfo_ManagementMode_MANAGEMENTMODEUNSPECIFIED :: ProvisioningInfo_ManagementMode
+pattern ProvisioningInfo_ManagementMode_MANAGEMENTMODEUNSPECIFIED = ProvisioningInfo_ManagementMode "MANAGEMENT_MODE_UNSPECIFIED"
+
+-- | Device owner. Android Device Policy has full control over the device.
+pattern ProvisioningInfo_ManagementMode_DEVICEOWNER :: ProvisioningInfo_ManagementMode
+pattern ProvisioningInfo_ManagementMode_DEVICEOWNER = ProvisioningInfo_ManagementMode "DEVICE_OWNER"
+
+-- | Profile owner. Android Device Policy has control over a managed profile on the device.
+pattern ProvisioningInfo_ManagementMode_PROFILEOWNER :: ProvisioningInfo_ManagementMode
+pattern ProvisioningInfo_ManagementMode_PROFILEOWNER = ProvisioningInfo_ManagementMode "PROFILE_OWNER"
+
+{-# COMPLETE
+  ProvisioningInfo_ManagementMode_MANAGEMENTMODEUNSPECIFIED,
+  ProvisioningInfo_ManagementMode_DEVICEOWNER,
+  ProvisioningInfo_ManagementMode_PROFILEOWNER,
+  ProvisioningInfo_ManagementMode
+  #-}
+
+-- | Ownership of the managed device.
+newtype ProvisioningInfo_Ownership = ProvisioningInfo_Ownership {fromProvisioningInfo_Ownership :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Ownership is unspecified.
+pattern ProvisioningInfo_Ownership_OWNERSHIPUNSPECIFIED :: ProvisioningInfo_Ownership
+pattern ProvisioningInfo_Ownership_OWNERSHIPUNSPECIFIED = ProvisioningInfo_Ownership "OWNERSHIP_UNSPECIFIED"
+
+-- | Device is company-owned.
+pattern ProvisioningInfo_Ownership_COMPANYOWNED :: ProvisioningInfo_Ownership
+pattern ProvisioningInfo_Ownership_COMPANYOWNED = ProvisioningInfo_Ownership "COMPANY_OWNED"
+
+-- | Device is personally-owned.
+pattern ProvisioningInfo_Ownership_PERSONALLYOWNED :: ProvisioningInfo_Ownership
+pattern ProvisioningInfo_Ownership_PERSONALLYOWNED = ProvisioningInfo_Ownership "PERSONALLY_OWNED"
+
+{-# COMPLETE
+  ProvisioningInfo_Ownership_OWNERSHIPUNSPECIFIED,
+  ProvisioningInfo_Ownership_COMPANYOWNED,
+  ProvisioningInfo_Ownership_PERSONALLYOWNED,
+  ProvisioningInfo_Ownership
+  #-}
+
+-- | Optional. Controls the screen brightness mode.
+newtype ScreenBrightnessSettings_ScreenBrightnessMode = ScreenBrightnessSettings_ScreenBrightnessMode {fromScreenBrightnessSettings_ScreenBrightnessMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to BRIGHTNESS/USER/CHOICE.
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_SCREENBRIGHTNESSMODEUNSPECIFIED :: ScreenBrightnessSettings_ScreenBrightnessMode
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_SCREENBRIGHTNESSMODEUNSPECIFIED = ScreenBrightnessSettings_ScreenBrightnessMode "SCREEN_BRIGHTNESS_MODE_UNSPECIFIED"
+
+-- | The user is allowed to configure the screen brightness. screenBrightness must not be set.
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSUSERCHOICE :: ScreenBrightnessSettings_ScreenBrightnessMode
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSUSERCHOICE = ScreenBrightnessSettings_ScreenBrightnessMode "BRIGHTNESS_USER_CHOICE"
+
+-- | The screen brightness mode is automatic in which the brightness is automatically adjusted and the user is not allowed to configure the screen brightness. screenBrightness can still be set and it is taken into account while the brightness is automatically adjusted. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSAUTOMATIC :: ScreenBrightnessSettings_ScreenBrightnessMode
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSAUTOMATIC = ScreenBrightnessSettings_ScreenBrightnessMode "BRIGHTNESS_AUTOMATIC"
+
+-- | The screen brightness mode is fixed in which the brightness is set to screenBrightness and the user is not allowed to configure the screen brightness. screenBrightness must be set. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSFIXED :: ScreenBrightnessSettings_ScreenBrightnessMode
+pattern ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSFIXED = ScreenBrightnessSettings_ScreenBrightnessMode "BRIGHTNESS_FIXED"
+
+{-# COMPLETE
+  ScreenBrightnessSettings_ScreenBrightnessMode_SCREENBRIGHTNESSMODEUNSPECIFIED,
+  ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSUSERCHOICE,
+  ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSAUTOMATIC,
+  ScreenBrightnessSettings_ScreenBrightnessMode_BRIGHTNESSFIXED,
+  ScreenBrightnessSettings_ScreenBrightnessMode
+  #-}
+
+-- | Optional. Controls whether the user is allowed to configure the screen timeout.
+newtype ScreenTimeoutSettings_ScreenTimeoutMode = ScreenTimeoutSettings_ScreenTimeoutMode {fromScreenTimeoutSettings_ScreenTimeoutMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to SCREEN/TIMEOUT/USER_CHOICE.
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTMODEUNSPECIFIED :: ScreenTimeoutSettings_ScreenTimeoutMode
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTMODEUNSPECIFIED = ScreenTimeoutSettings_ScreenTimeoutMode "SCREEN_TIMEOUT_MODE_UNSPECIFIED"
+
+-- | The user is allowed to configure the screen timeout. screenTimeout must not be set.
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTUSERCHOICE :: ScreenTimeoutSettings_ScreenTimeoutMode
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTUSERCHOICE = ScreenTimeoutSettings_ScreenTimeoutMode "SCREEN_TIMEOUT_USER_CHOICE"
+
+-- | The screen timeout is set to screenTimeout and the user is not allowed to configure the timeout. screenTimeout must be set. Supported on Android 9 and above on fully managed devices. A NonComplianceDetail with API_LEVEL is reported if the Android version is less than 9. Supported on work profiles on company-owned devices on Android 15 and above.
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTENFORCED :: ScreenTimeoutSettings_ScreenTimeoutMode
+pattern ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTENFORCED = ScreenTimeoutSettings_ScreenTimeoutMode "SCREEN_TIMEOUT_ENFORCED"
+
+{-# COMPLETE
+  ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTMODEUNSPECIFIED,
+  ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTUSERCHOICE,
+  ScreenTimeoutSettings_ScreenTimeoutMode_SCREENTIMEOUTENFORCED,
+  ScreenTimeoutSettings_ScreenTimeoutMode
+  #-}
+
 -- | Device\'s security posture value.
 newtype SecurityPosture_DevicePosture = SecurityPosture_DevicePosture {fromSecurityPosture_DevicePosture :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -3859,11 +5340,154 @@ pattern SigninDetail_AllowPersonalUsage_PERSONALUSAGEALLOWED = SigninDetail_Allo
 pattern SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWED :: SigninDetail_AllowPersonalUsage
 pattern SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWED = SigninDetail_AllowPersonalUsage "PERSONAL_USAGE_DISALLOWED"
 
+-- | Device is not associated with a single user, and thus both personal usage and corporate identity authentication are not expected. Important: This setting is mandatory for dedicated device enrollment and it is a breaking change. This change needs to be implemented before January 2025.For additional details see the dedicated device provisioning guide (https:\/\/developers.google.com\/android\/management\/provision-device#company-owned/devices/for/work/use_only).
+pattern SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS :: SigninDetail_AllowPersonalUsage
+pattern SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS = SigninDetail_AllowPersonalUsage "PERSONAL_USAGE_DISALLOWED_USERLESS"
+
 {-# COMPLETE
   SigninDetail_AllowPersonalUsage_ALLOWPERSONALUSAGEUNSPECIFIED,
   SigninDetail_AllowPersonalUsage_PERSONALUSAGEALLOWED,
   SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWED,
+  SigninDetail_AllowPersonalUsage_PERSONALUSAGEDISALLOWEDUSERLESS,
   SigninDetail_AllowPersonalUsage
+  #-}
+
+-- | Optional. Whether the sign-in URL should be used by default for the enterprise. The SigninDetail with defaultStatus set to SIGNIN/DETAIL/IS/DEFAULT is used for Google account enrollment method. Only one of an enterprise\'s signinDetails can have defaultStatus set to SIGNIN/DETAIL/IS/DEFAULT. If an Enterprise has at least one signinDetails and none of them have defaultStatus set to SIGNIN/DETAIL/IS/DEFAULT then the first one from the list is selected and has set defaultStatus to SIGNIN/DETAIL/IS/DEFAULT. If no signinDetails specified for the Enterprise then the Google Account device enrollment will fail.
+newtype SigninDetail_DefaultStatus = SigninDetail_DefaultStatus {fromSigninDetail_DefaultStatus :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Equivalent to SIGNIN/DETAIL/IS/NOT/DEFAULT.
+pattern SigninDetail_DefaultStatus_SIGNINDETAILDEFAULTSTATUSUNSPECIFIED :: SigninDetail_DefaultStatus
+pattern SigninDetail_DefaultStatus_SIGNINDETAILDEFAULTSTATUSUNSPECIFIED = SigninDetail_DefaultStatus "SIGNIN_DETAIL_DEFAULT_STATUS_UNSPECIFIED"
+
+-- | The sign-in URL will be used by default for the enterprise.
+pattern SigninDetail_DefaultStatus_SIGNINDETAILISDEFAULT :: SigninDetail_DefaultStatus
+pattern SigninDetail_DefaultStatus_SIGNINDETAILISDEFAULT = SigninDetail_DefaultStatus "SIGNIN_DETAIL_IS_DEFAULT"
+
+-- | The sign-in URL will not be used by default for the enterprise.
+pattern SigninDetail_DefaultStatus_SIGNINDETAILISNOTDEFAULT :: SigninDetail_DefaultStatus
+pattern SigninDetail_DefaultStatus_SIGNINDETAILISNOTDEFAULT = SigninDetail_DefaultStatus "SIGNIN_DETAIL_IS_NOT_DEFAULT"
+
+{-# COMPLETE
+  SigninDetail_DefaultStatus_SIGNINDETAILDEFAULTSTATUSUNSPECIFIED,
+  SigninDetail_DefaultStatus_SIGNINDETAILISDEFAULT,
+  SigninDetail_DefaultStatus_SIGNINDETAILISNOTDEFAULT,
+  SigninDetail_DefaultStatus
+  #-}
+
+-- | The status. See StartLostModeStatus.
+newtype StartLostModeStatus_Status = StartLostModeStatus_Status {fromStartLostModeStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value is not used.
+pattern StartLostModeStatus_Status_STATUSUNSPECIFIED :: StartLostModeStatus_Status
+pattern StartLostModeStatus_Status_STATUSUNSPECIFIED = StartLostModeStatus_Status "STATUS_UNSPECIFIED"
+
+-- | The device was put into lost mode.
+pattern StartLostModeStatus_Status_Success :: StartLostModeStatus_Status
+pattern StartLostModeStatus_Status_Success = StartLostModeStatus_Status "SUCCESS"
+
+-- | The device could not be put into lost mode because the admin reset the device\'s password recently.
+pattern StartLostModeStatus_Status_RESETPASSWORDRECENTLY :: StartLostModeStatus_Status
+pattern StartLostModeStatus_Status_RESETPASSWORDRECENTLY = StartLostModeStatus_Status "RESET_PASSWORD_RECENTLY"
+
+-- | The device could not be put into lost mode because the user exited lost mode recently.
+pattern StartLostModeStatus_Status_USEREXITLOSTMODERECENTLY :: StartLostModeStatus_Status
+pattern StartLostModeStatus_Status_USEREXITLOSTMODERECENTLY = StartLostModeStatus_Status "USER_EXIT_LOST_MODE_RECENTLY"
+
+-- | The device is already in lost mode.
+pattern StartLostModeStatus_Status_ALREADYINLOSTMODE :: StartLostModeStatus_Status
+pattern StartLostModeStatus_Status_ALREADYINLOSTMODE = StartLostModeStatus_Status "ALREADY_IN_LOST_MODE"
+
+{-# COMPLETE
+  StartLostModeStatus_Status_STATUSUNSPECIFIED,
+  StartLostModeStatus_Status_Success,
+  StartLostModeStatus_Status_RESETPASSWORDRECENTLY,
+  StartLostModeStatus_Status_USEREXITLOSTMODERECENTLY,
+  StartLostModeStatus_Status_ALREADYINLOSTMODE,
+  StartLostModeStatus_Status
+  #-}
+
+-- | The status. See StopLostModeStatus.
+newtype StopLostModeStatus_Status = StopLostModeStatus_Status {fromStopLostModeStatus_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. This value is not used.
+pattern StopLostModeStatus_Status_STATUSUNSPECIFIED :: StopLostModeStatus_Status
+pattern StopLostModeStatus_Status_STATUSUNSPECIFIED = StopLostModeStatus_Status "STATUS_UNSPECIFIED"
+
+-- | The device was taken out of lost mode.
+pattern StopLostModeStatus_Status_Success :: StopLostModeStatus_Status
+pattern StopLostModeStatus_Status_Success = StopLostModeStatus_Status "SUCCESS"
+
+-- | The device is not in lost mode.
+pattern StopLostModeStatus_Status_NOTINLOSTMODE :: StopLostModeStatus_Status
+pattern StopLostModeStatus_Status_NOTINLOSTMODE = StopLostModeStatus_Status "NOT_IN_LOST_MODE"
+
+{-# COMPLETE
+  StopLostModeStatus_Status_STATUSUNSPECIFIED,
+  StopLostModeStatus_Status_Success,
+  StopLostModeStatus_Status_NOTINLOSTMODE,
+  StopLostModeStatus_Status
+  #-}
+
+-- | The status of the attempt to stop lost mode.
+newtype StopLostModeUserAttemptEvent_Status = StopLostModeUserAttemptEvent_Status {fromStopLostModeUserAttemptEvent_Status :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | This value is not used.
+pattern StopLostModeUserAttemptEvent_Status_STATUSUNSPECIFIED :: StopLostModeUserAttemptEvent_Status
+pattern StopLostModeUserAttemptEvent_Status_STATUSUNSPECIFIED = StopLostModeUserAttemptEvent_Status "STATUS_UNSPECIFIED"
+
+-- | Indicates that the user successfully stopped lost mode.
+pattern StopLostModeUserAttemptEvent_Status_ATTEMPTSUCCEEDED :: StopLostModeUserAttemptEvent_Status
+pattern StopLostModeUserAttemptEvent_Status_ATTEMPTSUCCEEDED = StopLostModeUserAttemptEvent_Status "ATTEMPT_SUCCEEDED"
+
+-- | Indicates that the user\'s attempt to stop lost mode failed.
+pattern StopLostModeUserAttemptEvent_Status_ATTEMPTFAILED :: StopLostModeUserAttemptEvent_Status
+pattern StopLostModeUserAttemptEvent_Status_ATTEMPTFAILED = StopLostModeUserAttemptEvent_Status "ATTEMPT_FAILED"
+
+{-# COMPLETE
+  StopLostModeUserAttemptEvent_Status_STATUSUNSPECIFIED,
+  StopLostModeUserAttemptEvent_Status_ATTEMPTSUCCEEDED,
+  StopLostModeUserAttemptEvent_Status_ATTEMPTFAILED,
+  StopLostModeUserAttemptEvent_Status
   #-}
 
 -- | The type of system update to configure.
@@ -3891,7 +5515,7 @@ pattern SystemUpdate_Type_Automatic = SystemUpdate_Type "AUTOMATIC"
 pattern SystemUpdate_Type_Windowed :: SystemUpdate_Type
 pattern SystemUpdate_Type_Windowed = SystemUpdate_Type "WINDOWED"
 
--- | Postpone automatic install up to a maximum of 30 days.
+-- | Postpone automatic install up to a maximum of 30 days. This policy does not affect security updates (e.g. monthly security patches).
 pattern SystemUpdate_Type_Postpone :: SystemUpdate_Type
 pattern SystemUpdate_Type_Postpone = SystemUpdate_Type "POSTPONE"
 
@@ -4132,6 +5756,22 @@ pattern UsageLogEvent_EventType_Connect = UsageLogEvent_EventType "CONNECT"
 pattern UsageLogEvent_EventType_Dns :: UsageLogEvent_EventType
 pattern UsageLogEvent_EventType_Dns = UsageLogEvent_EventType "DNS"
 
+-- | Indicates stopLostModeUserAttemptEvent has been set.
+pattern UsageLogEvent_EventType_STOPLOSTMODEUSERATTEMPT :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_STOPLOSTMODEUSERATTEMPT = UsageLogEvent_EventType "STOP_LOST_MODE_USER_ATTEMPT"
+
+-- | Indicates lostModeOutgoingPhoneCallEvent has been set.
+pattern UsageLogEvent_EventType_LOSTMODEOUTGOINGPHONECALL :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_LOSTMODEOUTGOINGPHONECALL = UsageLogEvent_EventType "LOST_MODE_OUTGOING_PHONE_CALL"
+
+-- | Indicates lostModeLocationEvent has been set.
+pattern UsageLogEvent_EventType_LOSTMODELOCATION :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_LOSTMODELOCATION = UsageLogEvent_EventType "LOST_MODE_LOCATION"
+
+-- | Indicates enrollment/complete/event has been set.
+pattern UsageLogEvent_EventType_ENROLLMENTCOMPLETE :: UsageLogEvent_EventType
+pattern UsageLogEvent_EventType_ENROLLMENTCOMPLETE = UsageLogEvent_EventType "ENROLLMENT_COMPLETE"
+
 {-# COMPLETE
   UsageLogEvent_EventType_EVENTTYPEUNSPECIFIED,
   UsageLogEvent_EventType_ADBSHELLCOMMAND,
@@ -4161,6 +5801,10 @@ pattern UsageLogEvent_EventType_Dns = UsageLogEvent_EventType "DNS"
   UsageLogEvent_EventType_WIPEFAILURE,
   UsageLogEvent_EventType_Connect,
   UsageLogEvent_EventType_Dns,
+  UsageLogEvent_EventType_STOPLOSTMODEUSERATTEMPT,
+  UsageLogEvent_EventType_LOSTMODEOUTGOINGPHONECALL,
+  UsageLogEvent_EventType_LOSTMODELOCATION,
+  UsageLogEvent_EventType_ENROLLMENTCOMPLETE,
   UsageLogEvent_EventType
   #-}
 
@@ -4276,6 +5920,75 @@ pattern WebToken_PermissionsItem_APPROVEAPPS = WebToken_PermissionsItem "APPROVE
   WebToken_PermissionsItem_WEBTOKENPERMISSIONUNSPECIFIED,
   WebToken_PermissionsItem_APPROVEAPPS,
   WebToken_PermissionsItem
+  #-}
+
+-- | Required. Wi-Fi roaming mode for the specified SSID.
+newtype WifiRoamingSetting_WifiRoamingMode = WifiRoamingSetting_WifiRoamingMode {fromWifiRoamingSetting_WifiRoamingMode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Defaults to WIFI/ROAMING/DEFAULT.
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGMODEUNSPECIFIED :: WifiRoamingSetting_WifiRoamingMode
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGMODEUNSPECIFIED = WifiRoamingSetting_WifiRoamingMode "WIFI_ROAMING_MODE_UNSPECIFIED"
+
+-- | Wi-Fi roaming is disabled. Supported on Android 15 and above on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT/MODE is reported for other management modes. A nonComplianceDetail with API/LEVEL is reported if the Android version is less than 15.
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDISABLED :: WifiRoamingSetting_WifiRoamingMode
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDISABLED = WifiRoamingSetting_WifiRoamingMode "WIFI_ROAMING_DISABLED"
+
+-- | Default Wi-Fi roaming mode of the device.
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDEFAULT :: WifiRoamingSetting_WifiRoamingMode
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDEFAULT = WifiRoamingSetting_WifiRoamingMode "WIFI_ROAMING_DEFAULT"
+
+-- | Aggressive roaming mode which allows quicker Wi-Fi roaming. Supported on Android 15 and above on fully managed devices and work profiles on company-owned devices. A nonComplianceDetail with MANAGEMENT/MODE is reported for other management modes. A nonComplianceDetail with API/LEVEL is reported if the Android version is less than 15. A nonComplianceDetail with DEVICE_INCOMPATIBLE is reported if the device does not support aggressive roaming mode.
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGAGGRESSIVE :: WifiRoamingSetting_WifiRoamingMode
+pattern WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGAGGRESSIVE = WifiRoamingSetting_WifiRoamingMode "WIFI_ROAMING_AGGRESSIVE"
+
+{-# COMPLETE
+  WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGMODEUNSPECIFIED,
+  WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDISABLED,
+  WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGDEFAULT,
+  WifiRoamingSetting_WifiRoamingMode_WIFIROAMINGAGGRESSIVE,
+  WifiRoamingSetting_WifiRoamingMode
+  #-}
+
+-- | Type of the Wi-Fi SSID policy to be applied.
+newtype WifiSsidPolicy_WifiSsidPolicyType = WifiSsidPolicy_WifiSsidPolicyType {fromWifiSsidPolicy_WifiSsidPolicyType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Defaults to WIFI/SSID/DENYLIST. wifiSsids must not be set. There are no restrictions on which SSID the device can connect to.
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDPOLICYTYPEUNSPECIFIED :: WifiSsidPolicy_WifiSsidPolicyType
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDPOLICYTYPEUNSPECIFIED = WifiSsidPolicy_WifiSsidPolicyType "WIFI_SSID_POLICY_TYPE_UNSPECIFIED"
+
+-- | The device cannot connect to any Wi-Fi network whose SSID is in wifiSsids, but can connect to other networks.
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDDENYLIST :: WifiSsidPolicy_WifiSsidPolicyType
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDDENYLIST = WifiSsidPolicy_WifiSsidPolicyType "WIFI_SSID_DENYLIST"
+
+-- | The device can make Wi-Fi connections only to the SSIDs in wifiSsids. wifiSsids must not be empty. The device will not be able to connect to any other Wi-Fi network.
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDALLOWLIST :: WifiSsidPolicy_WifiSsidPolicyType
+pattern WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDALLOWLIST = WifiSsidPolicy_WifiSsidPolicyType "WIFI_SSID_ALLOWLIST"
+
+{-# COMPLETE
+  WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDPOLICYTYPEUNSPECIFIED,
+  WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDDENYLIST,
+  WifiSsidPolicy_WifiSsidPolicyType_WIFISSIDALLOWLIST,
+  WifiSsidPolicy_WifiSsidPolicyType
   #-}
 
 -- | Optional flags that control the device wiping behavior.

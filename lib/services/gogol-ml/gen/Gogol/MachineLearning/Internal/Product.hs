@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.MachineLearning.Internal.Product
@@ -417,7 +415,7 @@ module Gogol.MachineLearning.Internal.Product
 where
 
 import Gogol.MachineLearning.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Message that represents an arbitrary HTTP body. It should only be used for payload formats that can\'t be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { \/\/ A unique request id. string request/id = 1; \/\/ The raw HTTP body is bound to this field. google.api.HttpBody http/body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream
 -- google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged.
@@ -480,10 +478,7 @@ newGoogleApi__HttpBody_ExtensionsItem ::
 newGoogleApi__HttpBody_ExtensionsItem additional =
   GoogleApi__HttpBody_ExtensionsItem {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleApi__HttpBody_ExtensionsItem
-  where
+instance Core.FromJSON GoogleApi__HttpBody_ExtensionsItem where
   parseJSON =
     Core.withObject
       "GoogleApi__HttpBody_ExtensionsItem"
@@ -492,10 +487,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleApi__HttpBody_ExtensionsItem
-  where
+instance Core.ToJSON GoogleApi__HttpBody_ExtensionsItem where
   toJSON GoogleApi__HttpBody_ExtensionsItem {..} =
     Core.toJSON additional
 
@@ -512,7 +504,8 @@ newGoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig ::
   GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
 newGoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig =
   GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
-    { useElapsedTime = Core.Nothing
+    { useElapsedTime =
+        Core.Nothing
     }
 
 instance
@@ -552,7 +545,8 @@ newGoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig ::
   GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
 newGoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig =
   GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
-    { useElapsedTime = Core.Nothing
+    { useElapsedTime =
+        Core.Nothing
     }
 
 instance
@@ -594,7 +588,8 @@ newGoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric ::
   GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
 newGoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric =
   GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
-    { objectiveValue = Core.Nothing,
+    { objectiveValue =
+        Core.Nothing,
       trainingStep = Core.Nothing
     }
 
@@ -608,9 +603,7 @@ instance
       ( \o ->
           GoogleCloudMlV1_HyperparameterOutput_HyperparameterMetric
             Core.<$> (o Core..:? "objectiveValue")
-              Core.<*> ( o Core..:? "trainingStep"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "trainingStep" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
@@ -622,8 +615,7 @@ instance
       Core.object
         ( Core.catMaybes
             [ ("objectiveValue" Core..=) Core.<$> objectiveValue,
-              ("trainingStep" Core..=) Core.. Core.AsText
-                Core.<$> trainingStep
+              ("trainingStep" Core..=) Core.. Core.AsText Core.<$> trainingStep
             ]
         )
 
@@ -647,22 +639,17 @@ newGoogleCloudMlV1_Measurement_Metric =
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1_Measurement_Metric
-  where
+instance Core.FromJSON GoogleCloudMlV1_Measurement_Metric where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1_Measurement_Metric"
       ( \o ->
           GoogleCloudMlV1_Measurement_Metric
-            Core.<$> (o Core..:? "metric") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "metric")
+            Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1_Measurement_Metric
-  where
+instance Core.ToJSON GoogleCloudMlV1_Measurement_Metric where
   toJSON GoogleCloudMlV1_Measurement_Metric {..} =
     Core.object
       ( Core.catMaybes
@@ -684,7 +671,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -705,8 +693,7 @@ instance
   where
   toJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_CategoricalValueSpec {..} =
-      Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+      Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 --
 -- /See:/ 'newGoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec' smart constructor.
@@ -721,7 +708,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -742,8 +730,7 @@ instance
   where
   toJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_DiscreteValueSpec {..} =
-      Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+      Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 --
 -- /See:/ 'newGoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec' smart constructor.
@@ -760,7 +747,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
-    { maxValue = Core.Nothing,
+    { maxValue =
+        Core.Nothing,
       minValue = Core.Nothing
     }
 
@@ -774,21 +762,20 @@ instance
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
             Core.<$> (o Core..:? "maxValue")
-              Core.<*> (o Core..:? "minValue")
+            Core.<*> (o Core..:? "minValue")
       )
 
 instance
   Core.ToJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec
   where
-  toJSON
-    GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("maxValue" Core..=) Core.<$> maxValue,
-              ("minValue" Core..=) Core.<$> minValue
-            ]
-        )
+  toJSON GoogleCloudMlV1_StudyConfigParameterSpec_DoubleValueSpec {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxValue" Core..=) Core.<$> maxValue,
+            ("minValue" Core..=) Core.<$> minValue
+          ]
+      )
 
 --
 -- /See:/ 'newGoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec' smart constructor.
@@ -805,7 +792,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
-    { maxValue = Core.Nothing,
+    { maxValue =
+        Core.Nothing,
       minValue = Core.Nothing
     }
 
@@ -818,12 +806,8 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec
-            Core.<$> ( o Core..:? "maxValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> ( o Core..:? "minValue"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<$> (o Core..:? "maxValue" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minValue" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
@@ -834,10 +818,8 @@ instance
     GoogleCloudMlV1_StudyConfigParameterSpec_IntegerValueSpec {..} =
       Core.object
         ( Core.catMaybes
-            [ ("maxValue" Core..=) Core.. Core.AsText
-                Core.<$> maxValue,
-              ("minValue" Core..=) Core.. Core.AsText
-                Core.<$> minValue
+            [ ("maxValue" Core..=) Core.. Core.AsText Core.<$> maxValue,
+              ("minValue" Core..=) Core.. Core.AsText Core.<$> minValue
             ]
         )
 
@@ -855,7 +837,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec :
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -876,8 +859,7 @@ instance
   where
   toJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec {..} =
-      Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+      Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Represents the spec to match discrete values from parent parameter.
 --
@@ -893,7 +875,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -914,8 +897,7 @@ instance
   where
   toJSON
     GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec {..} =
-      Core.object
-        (Core.catMaybes [("values" Core..=) Core.<$> values])
+      Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | Represents the spec to match integer values from parent parameter.
 --
@@ -931,7 +913,8 @@ newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec ::
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
 newGoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec =
   GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
-    { values = Core.Nothing
+    { values =
+        Core.Nothing
     }
 
 instance
@@ -943,7 +926,8 @@ instance
       "GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
-            Core.<$> ( o Core..:? "values"
+            Core.<$> ( o
+                         Core..:? "values"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -956,9 +940,7 @@ instance
     GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec {..} =
       Core.object
         ( Core.catMaybes
-            [ ("values" Core..=) Core.. Core.fmap Core.AsText
-                Core.<$> values
-            ]
+            [("values" Core..=) Core.. Core.fmap Core.AsText Core.<$> values]
         )
 
 -- | Represents a metric to optimize.
@@ -981,22 +963,17 @@ newGoogleCloudMlV1_StudyConfig_MetricSpec =
       metric = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1_StudyConfig_MetricSpec
-  where
+instance Core.FromJSON GoogleCloudMlV1_StudyConfig_MetricSpec where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1_StudyConfig_MetricSpec"
       ( \o ->
           GoogleCloudMlV1_StudyConfig_MetricSpec
-            Core.<$> (o Core..:? "goal") Core.<*> (o Core..:? "metric")
+            Core.<$> (o Core..:? "goal")
+            Core.<*> (o Core..:? "metric")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1_StudyConfig_MetricSpec
-  where
+instance Core.ToJSON GoogleCloudMlV1_StudyConfig_MetricSpec where
   toJSON GoogleCloudMlV1_StudyConfig_MetricSpec {..} =
     Core.object
       ( Core.catMaybes
@@ -1033,17 +1010,14 @@ data GoogleCloudMlV1_StudyConfig_ParameterSpec = GoogleCloudMlV1_StudyConfig_Par
       ),
     -- | Required. The parameter name must be unique amongst all ParameterSpecs.
     parameter :: (Core.Maybe Core.Text),
-    -- |
     parentCategoricalValues ::
       ( Core.Maybe
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentCategoricalValueSpec
       ),
-    -- |
     parentDiscreteValues ::
       ( Core.Maybe
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentDiscreteValueSpec
       ),
-    -- |
     parentIntValues ::
       ( Core.Maybe
           GoogleCloudMlV1_StudyConfigParameterSpec_MatchingParentIntValueSpec
@@ -1060,7 +1034,8 @@ newGoogleCloudMlV1_StudyConfig_ParameterSpec ::
   GoogleCloudMlV1_StudyConfig_ParameterSpec
 newGoogleCloudMlV1_StudyConfig_ParameterSpec =
   GoogleCloudMlV1_StudyConfig_ParameterSpec
-    { categoricalValueSpec = Core.Nothing,
+    { categoricalValueSpec =
+        Core.Nothing,
       childParameterSpecs = Core.Nothing,
       discreteValueSpec = Core.Nothing,
       doubleValueSpec = Core.Nothing,
@@ -1073,10 +1048,7 @@ newGoogleCloudMlV1_StudyConfig_ParameterSpec =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1_StudyConfig_ParameterSpec
-  where
+instance Core.FromJSON GoogleCloudMlV1_StudyConfig_ParameterSpec where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1_StudyConfig_ParameterSpec"
@@ -1095,27 +1067,19 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1_StudyConfig_ParameterSpec
-  where
+instance Core.ToJSON GoogleCloudMlV1_StudyConfig_ParameterSpec where
   toJSON GoogleCloudMlV1_StudyConfig_ParameterSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("categoricalValueSpec" Core..=)
-              Core.<$> categoricalValueSpec,
-            ("childParameterSpecs" Core..=)
-              Core.<$> childParameterSpecs,
-            ("discreteValueSpec" Core..=)
-              Core.<$> discreteValueSpec,
+          [ ("categoricalValueSpec" Core..=) Core.<$> categoricalValueSpec,
+            ("childParameterSpecs" Core..=) Core.<$> childParameterSpecs,
+            ("discreteValueSpec" Core..=) Core.<$> discreteValueSpec,
             ("doubleValueSpec" Core..=) Core.<$> doubleValueSpec,
-            ("integerValueSpec" Core..=)
-              Core.<$> integerValueSpec,
+            ("integerValueSpec" Core..=) Core.<$> integerValueSpec,
             ("parameter" Core..=) Core.<$> parameter,
             ("parentCategoricalValues" Core..=)
               Core.<$> parentCategoricalValues,
-            ("parentDiscreteValues" Core..=)
-              Core.<$> parentDiscreteValues,
+            ("parentDiscreteValues" Core..=) Core.<$> parentDiscreteValues,
             ("parentIntValues" Core..=) Core.<$> parentIntValues,
             ("scaleType" Core..=) Core.<$> scaleType,
             ("type" Core..=) Core.<$> type'
@@ -1148,19 +1112,14 @@ newGoogleCloudMlV1_Trial_Parameter =
       stringValue = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1_Trial_Parameter
-  where
+instance Core.FromJSON GoogleCloudMlV1_Trial_Parameter where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1_Trial_Parameter"
       ( \o ->
           GoogleCloudMlV1_Trial_Parameter
             Core.<$> (o Core..:? "floatValue")
-            Core.<*> ( o Core..:? "intValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "intValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "parameter")
             Core.<*> (o Core..:? "stringValue")
       )
@@ -1170,8 +1129,7 @@ instance Core.ToJSON GoogleCloudMlV1_Trial_Parameter where
     Core.object
       ( Core.catMaybes
           [ ("floatValue" Core..=) Core.<$> floatValue,
-            ("intValue" Core..=) Core.. Core.AsText
-              Core.<$> intValue,
+            ("intValue" Core..=) Core.. Core.AsText Core.<$> intValue,
             ("parameter" Core..=) Core.<$> parameter,
             ("stringValue" Core..=) Core.<$> stringValue
           ]
@@ -1197,25 +1155,17 @@ newGoogleCloudMlV1__AcceleratorConfig =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__AcceleratorConfig
-  where
+instance Core.FromJSON GoogleCloudMlV1__AcceleratorConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__AcceleratorConfig"
       ( \o ->
           GoogleCloudMlV1__AcceleratorConfig
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__AcceleratorConfig
-  where
+instance Core.ToJSON GoogleCloudMlV1__AcceleratorConfig where
   toJSON GoogleCloudMlV1__AcceleratorConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -1237,12 +1187,12 @@ newtype GoogleCloudMlV1__AddTrialMeasurementRequest = GoogleCloudMlV1__AddTrialM
 newGoogleCloudMlV1__AddTrialMeasurementRequest ::
   GoogleCloudMlV1__AddTrialMeasurementRequest
 newGoogleCloudMlV1__AddTrialMeasurementRequest =
-  GoogleCloudMlV1__AddTrialMeasurementRequest {measurement = Core.Nothing}
+  GoogleCloudMlV1__AddTrialMeasurementRequest
+    { measurement =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__AddTrialMeasurementRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__AddTrialMeasurementRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__AddTrialMeasurementRequest"
@@ -1251,16 +1201,10 @@ instance
             Core.<$> (o Core..:? "measurement")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__AddTrialMeasurementRequest
-  where
-  toJSON
-    GoogleCloudMlV1__AddTrialMeasurementRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [("measurement" Core..=) Core.<$> measurement]
-        )
+instance Core.ToJSON GoogleCloudMlV1__AddTrialMeasurementRequest where
+  toJSON GoogleCloudMlV1__AddTrialMeasurementRequest {..} =
+    Core.object
+      (Core.catMaybes [("measurement" Core..=) Core.<$> measurement])
 
 -- | Options for automatically scaling a model.
 --
@@ -1311,12 +1255,10 @@ instance Core.ToJSON GoogleCloudMlV1__AutoScaling where
 --
 -- /See:/ 'newGoogleCloudMlV1__AutomatedStoppingConfig' smart constructor.
 data GoogleCloudMlV1__AutomatedStoppingConfig = GoogleCloudMlV1__AutomatedStoppingConfig
-  { -- |
-    decayCurveStoppingConfig ::
+  { decayCurveStoppingConfig ::
       ( Core.Maybe
           GoogleCloudMlV1_AutomatedStoppingConfig_DecayCurveAutomatedStoppingConfig
       ),
-    -- |
     medianAutomatedStoppingConfig ::
       ( Core.Maybe
           GoogleCloudMlV1_AutomatedStoppingConfig_MedianAutomatedStoppingConfig
@@ -1329,14 +1271,12 @@ newGoogleCloudMlV1__AutomatedStoppingConfig ::
   GoogleCloudMlV1__AutomatedStoppingConfig
 newGoogleCloudMlV1__AutomatedStoppingConfig =
   GoogleCloudMlV1__AutomatedStoppingConfig
-    { decayCurveStoppingConfig = Core.Nothing,
+    { decayCurveStoppingConfig =
+        Core.Nothing,
       medianAutomatedStoppingConfig = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__AutomatedStoppingConfig
-  where
+instance Core.FromJSON GoogleCloudMlV1__AutomatedStoppingConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__AutomatedStoppingConfig"
@@ -1346,10 +1286,7 @@ instance
             Core.<*> (o Core..:? "medianAutomatedStoppingConfig")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__AutomatedStoppingConfig
-  where
+instance Core.ToJSON GoogleCloudMlV1__AutomatedStoppingConfig where
   toJSON GoogleCloudMlV1__AutomatedStoppingConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -1386,10 +1323,7 @@ newGoogleCloudMlV1__BuiltInAlgorithmOutput =
       runtimeVersion = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__BuiltInAlgorithmOutput
-  where
+instance Core.FromJSON GoogleCloudMlV1__BuiltInAlgorithmOutput where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__BuiltInAlgorithmOutput"
@@ -1401,10 +1335,7 @@ instance
             Core.<*> (o Core..:? "runtimeVersion")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__BuiltInAlgorithmOutput
-  where
+instance Core.ToJSON GoogleCloudMlV1__BuiltInAlgorithmOutput where
   toJSON GoogleCloudMlV1__BuiltInAlgorithmOutput {..} =
     Core.object
       ( Core.catMaybes
@@ -1424,21 +1355,16 @@ data GoogleCloudMlV1__CancelJobRequest = GoogleCloudMlV1__CancelJobRequest
 -- | Creates a value of 'GoogleCloudMlV1__CancelJobRequest' with the minimum fields required to make a request.
 newGoogleCloudMlV1__CancelJobRequest ::
   GoogleCloudMlV1__CancelJobRequest
-newGoogleCloudMlV1__CancelJobRequest = GoogleCloudMlV1__CancelJobRequest
+newGoogleCloudMlV1__CancelJobRequest =
+  GoogleCloudMlV1__CancelJobRequest
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__CancelJobRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__CancelJobRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__CancelJobRequest"
       (\o -> Core.pure GoogleCloudMlV1__CancelJobRequest)
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__CancelJobRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__CancelJobRequest where
   toJSON = Core.const Core.emptyObject
 
 --
@@ -1449,7 +1375,6 @@ data GoogleCloudMlV1__Capability = GoogleCloudMlV1__Capability
       ( Core.Maybe
           [GoogleCloudMlV1__Capability_AvailableAcceleratorsItem]
       ),
-    -- |
     type' :: (Core.Maybe GoogleCloudMlV1__Capability_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1477,8 +1402,7 @@ instance Core.ToJSON GoogleCloudMlV1__Capability where
   toJSON GoogleCloudMlV1__Capability {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableAccelerators" Core..=)
-              Core.<$> availableAccelerators,
+          [ ("availableAccelerators" Core..=) Core.<$> availableAccelerators,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -1501,7 +1425,8 @@ newGoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata ::
   GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata
 newGoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata =
   GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       study = Core.Nothing,
       trial = Core.Nothing
     }
@@ -1516,23 +1441,22 @@ instance
       ( \o ->
           GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata
             Core.<$> (o Core..:? "createTime")
-              Core.<*> (o Core..:? "study")
-              Core.<*> (o Core..:? "trial")
+            Core.<*> (o Core..:? "study")
+            Core.<*> (o Core..:? "trial")
       )
 
 instance
   Core.ToJSON
     GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata
   where
-  toJSON
-    GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("createTime" Core..=) Core.<$> createTime,
-              ("study" Core..=) Core.<$> study,
-              ("trial" Core..=) Core.<$> trial
-            ]
-        )
+  toJSON GoogleCloudMlV1__CheckTrialEarlyStoppingStateMetatdata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("study" Core..=) Core.<$> study,
+            ("trial" Core..=) Core.<$> trial
+          ]
+      )
 
 -- | The request message for the CheckTrialEarlyStoppingState service method.
 --
@@ -1554,8 +1478,7 @@ instance
     Core.withObject
       "GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest"
       ( \o ->
-          Core.pure
-            GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest
+          Core.pure GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest
       )
 
 instance
@@ -1582,7 +1505,8 @@ newGoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse ::
   GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
 newGoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse =
   GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
-    { endTime = Core.Nothing,
+    { endTime =
+        Core.Nothing,
       shouldStop = Core.Nothing,
       startTime = Core.Nothing
     }
@@ -1597,23 +1521,22 @@ instance
       ( \o ->
           GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
             Core.<$> (o Core..:? "endTime")
-              Core.<*> (o Core..:? "shouldStop")
-              Core.<*> (o Core..:? "startTime")
+            Core.<*> (o Core..:? "shouldStop")
+            Core.<*> (o Core..:? "startTime")
       )
 
 instance
   Core.ToJSON
     GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse
   where
-  toJSON
-    GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("endTime" Core..=) Core.<$> endTime,
-              ("shouldStop" Core..=) Core.<$> shouldStop,
-              ("startTime" Core..=) Core.<$> startTime
-            ]
-        )
+  toJSON GoogleCloudMlV1__CheckTrialEarlyStoppingStateResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("shouldStop" Core..=) Core.<$> shouldStop,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
 
 -- | The request message for the CompleteTrial service method.
 --
@@ -1633,15 +1556,13 @@ newGoogleCloudMlV1__CompleteTrialRequest ::
   GoogleCloudMlV1__CompleteTrialRequest
 newGoogleCloudMlV1__CompleteTrialRequest =
   GoogleCloudMlV1__CompleteTrialRequest
-    { finalMeasurement = Core.Nothing,
+    { finalMeasurement =
+        Core.Nothing,
       infeasibleReason = Core.Nothing,
       trialInfeasible = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__CompleteTrialRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__CompleteTrialRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__CompleteTrialRequest"
@@ -1652,19 +1573,13 @@ instance
             Core.<*> (o Core..:? "trialInfeasible")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__CompleteTrialRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__CompleteTrialRequest where
   toJSON GoogleCloudMlV1__CompleteTrialRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("finalMeasurement" Core..=)
-              Core.<$> finalMeasurement,
-            ("infeasibleReason" Core..=)
-              Core.<$> infeasibleReason,
-            ("trialInfeasible" Core..=)
-              Core.<$> trialInfeasible
+          [ ("finalMeasurement" Core..=) Core.<$> finalMeasurement,
+            ("infeasibleReason" Core..=) Core.<$> infeasibleReason,
+            ("trialInfeasible" Core..=) Core.<$> trialInfeasible
           ]
       )
 
@@ -1687,17 +1602,14 @@ instance Core.FromJSON GoogleCloudMlV1__Config where
     Core.withObject
       "GoogleCloudMlV1__Config"
       ( \o ->
-          GoogleCloudMlV1__Config
-            Core.<$> (o Core..:? "tpuServiceAccount")
+          GoogleCloudMlV1__Config Core.<$> (o Core..:? "tpuServiceAccount")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Config where
   toJSON GoogleCloudMlV1__Config {..} =
     Core.object
       ( Core.catMaybes
-          [ ("tpuServiceAccount" Core..=)
-              Core.<$> tpuServiceAccount
-          ]
+          [("tpuServiceAccount" Core..=) Core.<$> tpuServiceAccount]
       )
 
 -- | Represents a network port in a single container. This message is a subset of the <https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#containerport-v1-core Kubernetes ContainerPort v1 core specification>.
@@ -1727,9 +1639,7 @@ instance Core.FromJSON GoogleCloudMlV1__ContainerPort where
 instance Core.ToJSON GoogleCloudMlV1__ContainerPort where
   toJSON GoogleCloudMlV1__ContainerPort {..} =
     Core.object
-      ( Core.catMaybes
-          [("containerPort" Core..=) Core.<$> containerPort]
-      )
+      (Core.catMaybes [("containerPort" Core..=) Core.<$> containerPort])
 
 -- | Specification of a custom container for serving predictions. This message is a subset of the <https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#container-v1-core Kubernetes Container v1 core specification>.
 --
@@ -1843,10 +1753,7 @@ newGoogleCloudMlV1__EncryptionConfig ::
 newGoogleCloudMlV1__EncryptionConfig =
   GoogleCloudMlV1__EncryptionConfig {kmsKeyName = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__EncryptionConfig
-  where
+instance Core.FromJSON GoogleCloudMlV1__EncryptionConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__EncryptionConfig"
@@ -1855,15 +1762,10 @@ instance
             Core.<$> (o Core..:? "kmsKeyName")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__EncryptionConfig
-  where
+instance Core.ToJSON GoogleCloudMlV1__EncryptionConfig where
   toJSON GoogleCloudMlV1__EncryptionConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("kmsKeyName" Core..=) Core.<$> kmsKeyName]
-      )
+      (Core.catMaybes [("kmsKeyName" Core..=) Core.<$> kmsKeyName])
 
 -- | Represents an environment variable to be made available in a container. This message is a subset of the <https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#envvar-v1-core Kubernetes EnvVar v1 core specification>.
 --
@@ -1880,7 +1782,10 @@ data GoogleCloudMlV1__EnvVar = GoogleCloudMlV1__EnvVar
 newGoogleCloudMlV1__EnvVar ::
   GoogleCloudMlV1__EnvVar
 newGoogleCloudMlV1__EnvVar =
-  GoogleCloudMlV1__EnvVar {name = Core.Nothing, value = Core.Nothing}
+  GoogleCloudMlV1__EnvVar
+    { name = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleCloudMlV1__EnvVar where
   parseJSON =
@@ -1888,16 +1793,15 @@ instance Core.FromJSON GoogleCloudMlV1__EnvVar where
       "GoogleCloudMlV1__EnvVar"
       ( \o ->
           GoogleCloudMlV1__EnvVar
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__EnvVar where
   toJSON GoogleCloudMlV1__EnvVar {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | Request for explanations to be issued against a trained model.
@@ -1915,24 +1819,18 @@ newGoogleCloudMlV1__ExplainRequest ::
 newGoogleCloudMlV1__ExplainRequest =
   GoogleCloudMlV1__ExplainRequest {httpBody = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ExplainRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__ExplainRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ExplainRequest"
       ( \o ->
-          GoogleCloudMlV1__ExplainRequest
-            Core.<$> (o Core..:? "httpBody")
+          GoogleCloudMlV1__ExplainRequest Core.<$> (o Core..:? "httpBody")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__ExplainRequest where
   toJSON GoogleCloudMlV1__ExplainRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("httpBody" Core..=) Core.<$> httpBody]
-      )
+      (Core.catMaybes [("httpBody" Core..=) Core.<$> httpBody])
 
 -- | Message holding configuration options for explaining model predictions. There are three feature attribution methods supported for TensorFlow models: integrated gradients, sampled Shapley, and XRAI. </ai-platform/prediction/docs/ai-explanations/overview Learn more about feature attributions.>
 --
@@ -1952,15 +1850,13 @@ newGoogleCloudMlV1__ExplanationConfig ::
   GoogleCloudMlV1__ExplanationConfig
 newGoogleCloudMlV1__ExplanationConfig =
   GoogleCloudMlV1__ExplanationConfig
-    { integratedGradientsAttribution = Core.Nothing,
+    { integratedGradientsAttribution =
+        Core.Nothing,
       sampledShapleyAttribution = Core.Nothing,
       xraiAttribution = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ExplanationConfig
-  where
+instance Core.FromJSON GoogleCloudMlV1__ExplanationConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ExplanationConfig"
@@ -1971,10 +1867,7 @@ instance
             Core.<*> (o Core..:? "xraiAttribution")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ExplanationConfig
-  where
+instance Core.ToJSON GoogleCloudMlV1__ExplanationConfig where
   toJSON GoogleCloudMlV1__ExplanationConfig {..} =
     Core.object
       ( Core.catMaybes
@@ -1982,8 +1875,7 @@ instance
               Core.<$> integratedGradientsAttribution,
             ("sampledShapleyAttribution" Core..=)
               Core.<$> sampledShapleyAttribution,
-            ("xraiAttribution" Core..=)
-              Core.<$> xraiAttribution
+            ("xraiAttribution" Core..=) Core.<$> xraiAttribution
           ]
       )
 
@@ -1991,8 +1883,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudMlV1__GetConfigResponse' smart constructor.
 data GoogleCloudMlV1__GetConfigResponse = GoogleCloudMlV1__GetConfigResponse
-  { -- |
-    config :: (Core.Maybe GoogleCloudMlV1__Config),
+  { config :: (Core.Maybe GoogleCloudMlV1__Config),
     -- | The service account Cloud ML uses to access resources in the project.
     serviceAccount :: (Core.Maybe Core.Text),
     -- | The project number for @service_account@.
@@ -2010,10 +1901,7 @@ newGoogleCloudMlV1__GetConfigResponse =
       serviceAccountProject = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__GetConfigResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__GetConfigResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__GetConfigResponse"
@@ -2021,21 +1909,20 @@ instance
           GoogleCloudMlV1__GetConfigResponse
             Core.<$> (o Core..:? "config")
             Core.<*> (o Core..:? "serviceAccount")
-            Core.<*> ( o Core..:? "serviceAccountProject"
+            Core.<*> ( o
+                         Core..:? "serviceAccountProject"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__GetConfigResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__GetConfigResponse where
   toJSON GoogleCloudMlV1__GetConfigResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("serviceAccountProject" Core..=) Core.. Core.AsText
+            ("serviceAccountProject" Core..=)
+              Core.. Core.AsText
               Core.<$> serviceAccountProject
           ]
       )
@@ -2090,10 +1977,7 @@ newGoogleCloudMlV1__HyperparameterOutput =
       webAccessUris = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__HyperparameterOutput
-  where
+instance Core.FromJSON GoogleCloudMlV1__HyperparameterOutput where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__HyperparameterOutput"
@@ -2111,21 +1995,16 @@ instance
             Core.<*> (o Core..:? "webAccessUris")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__HyperparameterOutput
-  where
+instance Core.ToJSON GoogleCloudMlV1__HyperparameterOutput where
   toJSON GoogleCloudMlV1__HyperparameterOutput {..} =
     Core.object
       ( Core.catMaybes
           [ ("allMetrics" Core..=) Core.<$> allMetrics,
-            ("builtInAlgorithmOutput" Core..=)
-              Core.<$> builtInAlgorithmOutput,
+            ("builtInAlgorithmOutput" Core..=) Core.<$> builtInAlgorithmOutput,
             ("endTime" Core..=) Core.<$> endTime,
             ("finalMetric" Core..=) Core.<$> finalMetric,
             ("hyperparameters" Core..=) Core.<$> hyperparameters,
-            ("isTrialStoppedEarly" Core..=)
-              Core.<$> isTrialStoppedEarly,
+            ("isTrialStoppedEarly" Core..=) Core.<$> isTrialStoppedEarly,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
             ("trialId" Core..=) Core.<$> trialId,
@@ -2137,8 +2016,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudMlV1__HyperparameterOutput_Hyperparameters' smart constructor.
 newtype GoogleCloudMlV1__HyperparameterOutput_Hyperparameters = GoogleCloudMlV1__HyperparameterOutput_Hyperparameters
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2149,7 +2027,8 @@ newGoogleCloudMlV1__HyperparameterOutput_Hyperparameters ::
   GoogleCloudMlV1__HyperparameterOutput_Hyperparameters
 newGoogleCloudMlV1__HyperparameterOutput_Hyperparameters additional =
   GoogleCloudMlV1__HyperparameterOutput_Hyperparameters
-    { additional = additional
+    { additional =
+        additional
     }
 
 instance
@@ -2168,16 +2047,14 @@ instance
   Core.ToJSON
     GoogleCloudMlV1__HyperparameterOutput_Hyperparameters
   where
-  toJSON
-    GoogleCloudMlV1__HyperparameterOutput_Hyperparameters {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudMlV1__HyperparameterOutput_Hyperparameters {..} =
+    Core.toJSON additional
 
 -- | URIs for accessing <https://cloud.google.com/ai-platform/training/docs/monitor-debug-interactive-shell interactive shells> (one URI for each training node). Only available if this trial is part of a hyperparameter tuning job and the job\'s training/input.enable/web_access is @true@. The keys are names of each node in the training job; for example, @master-replica-0@ for the master node, @worker-replica-0@ for the first worker, and @ps-replica-0@ for the first parameter server. The values are the URIs for each node\'s interactive shell.
 --
 -- /See:/ 'newGoogleCloudMlV1__HyperparameterOutput_WebAccessUris' smart constructor.
 newtype GoogleCloudMlV1__HyperparameterOutput_WebAccessUris = GoogleCloudMlV1__HyperparameterOutput_WebAccessUris
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2187,7 +2064,10 @@ newGoogleCloudMlV1__HyperparameterOutput_WebAccessUris ::
   Core.HashMap Core.Text Core.Text ->
   GoogleCloudMlV1__HyperparameterOutput_WebAccessUris
 newGoogleCloudMlV1__HyperparameterOutput_WebAccessUris additional =
-  GoogleCloudMlV1__HyperparameterOutput_WebAccessUris {additional = additional}
+  GoogleCloudMlV1__HyperparameterOutput_WebAccessUris
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -2205,9 +2085,8 @@ instance
   Core.ToJSON
     GoogleCloudMlV1__HyperparameterOutput_WebAccessUris
   where
-  toJSON
-    GoogleCloudMlV1__HyperparameterOutput_WebAccessUris {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudMlV1__HyperparameterOutput_WebAccessUris {..} =
+    Core.toJSON additional
 
 -- | Represents a set of hyperparameters to optimize.
 --
@@ -2250,10 +2129,7 @@ newGoogleCloudMlV1__HyperparameterSpec =
       resumePreviousJobId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__HyperparameterSpec
-  where
+instance Core.FromJSON GoogleCloudMlV1__HyperparameterSpec where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__HyperparameterSpec"
@@ -2270,10 +2146,7 @@ instance
             Core.<*> (o Core..:? "resumePreviousJobId")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__HyperparameterSpec
-  where
+instance Core.ToJSON GoogleCloudMlV1__HyperparameterSpec where
   toJSON GoogleCloudMlV1__HyperparameterSpec {..} =
     Core.object
       ( Core.catMaybes
@@ -2284,12 +2157,10 @@ instance
             ("hyperparameterMetricTag" Core..=)
               Core.<$> hyperparameterMetricTag,
             ("maxFailedTrials" Core..=) Core.<$> maxFailedTrials,
-            ("maxParallelTrials" Core..=)
-              Core.<$> maxParallelTrials,
+            ("maxParallelTrials" Core..=) Core.<$> maxParallelTrials,
             ("maxTrials" Core..=) Core.<$> maxTrials,
             ("params" Core..=) Core.<$> params,
-            ("resumePreviousJobId" Core..=)
-              Core.<$> resumePreviousJobId
+            ("resumePreviousJobId" Core..=) Core.<$> resumePreviousJobId
           ]
       )
 
@@ -2307,7 +2178,8 @@ newGoogleCloudMlV1__IntegratedGradientsAttribution ::
   GoogleCloudMlV1__IntegratedGradientsAttribution
 newGoogleCloudMlV1__IntegratedGradientsAttribution =
   GoogleCloudMlV1__IntegratedGradientsAttribution
-    { numIntegralSteps = Core.Nothing
+    { numIntegralSteps =
+        Core.Nothing
     }
 
 instance
@@ -2326,14 +2198,11 @@ instance
   Core.ToJSON
     GoogleCloudMlV1__IntegratedGradientsAttribution
   where
-  toJSON
-    GoogleCloudMlV1__IntegratedGradientsAttribution {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("numIntegralSteps" Core..=)
-                Core.<$> numIntegralSteps
-            ]
-        )
+  toJSON GoogleCloudMlV1__IntegratedGradientsAttribution {..} =
+    Core.object
+      ( Core.catMaybes
+          [("numIntegralSteps" Core..=) Core.<$> numIntegralSteps]
+      )
 
 -- | Represents a training or prediction job.
 --
@@ -2399,9 +2268,7 @@ instance Core.FromJSON GoogleCloudMlV1__Job where
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "jobId")
-            Core.<*> ( o Core..:? "jobPosition"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "jobPosition" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "predictionInput")
             Core.<*> (o Core..:? "predictionOutput")
@@ -2420,12 +2287,10 @@ instance Core.ToJSON GoogleCloudMlV1__Job where
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("etag" Core..=) Core.<$> etag,
             ("jobId" Core..=) Core.<$> jobId,
-            ("jobPosition" Core..=) Core.. Core.AsText
-              Core.<$> jobPosition,
+            ("jobPosition" Core..=) Core.. Core.AsText Core.<$> jobPosition,
             ("labels" Core..=) Core.<$> labels,
             ("predictionInput" Core..=) Core.<$> predictionInput,
-            ("predictionOutput" Core..=)
-              Core.<$> predictionOutput,
+            ("predictionOutput" Core..=) Core.<$> predictionOutput,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
             ("trainingInput" Core..=) Core.<$> trainingInput,
@@ -2437,8 +2302,7 @@ instance Core.ToJSON GoogleCloudMlV1__Job where
 --
 -- /See:/ 'newGoogleCloudMlV1__Job_Labels' smart constructor.
 newtype GoogleCloudMlV1__Job_Labels = GoogleCloudMlV1__Job_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2455,13 +2319,11 @@ instance Core.FromJSON GoogleCloudMlV1__Job_Labels where
     Core.withObject
       "GoogleCloudMlV1__Job_Labels"
       ( \o ->
-          GoogleCloudMlV1__Job_Labels
-            Core.<$> (Core.parseJSONObject o)
+          GoogleCloudMlV1__Job_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Job_Labels where
-  toJSON GoogleCloudMlV1__Job_Labels {..} =
-    Core.toJSON additional
+  toJSON GoogleCloudMlV1__Job_Labels {..} = Core.toJSON additional
 
 -- | Response message for the ListJobs method.
 --
@@ -2483,10 +2345,7 @@ newGoogleCloudMlV1__ListJobsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListJobsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListJobsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListJobsResponse"
@@ -2496,10 +2355,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListJobsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListJobsResponse where
   toJSON GoogleCloudMlV1__ListJobsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2527,10 +2383,7 @@ newGoogleCloudMlV1__ListLocationsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListLocationsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListLocationsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListLocationsResponse"
@@ -2540,10 +2393,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListLocationsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListLocationsResponse where
   toJSON GoogleCloudMlV1__ListLocationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2572,10 +2422,7 @@ newGoogleCloudMlV1__ListModelsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListModelsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListModelsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListModelsResponse"
@@ -2585,10 +2432,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListModelsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListModelsResponse where
   toJSON GoogleCloudMlV1__ListModelsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2609,21 +2453,13 @@ newGoogleCloudMlV1__ListOptimalTrialsRequest ::
 newGoogleCloudMlV1__ListOptimalTrialsRequest =
   GoogleCloudMlV1__ListOptimalTrialsRequest
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListOptimalTrialsRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListOptimalTrialsRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListOptimalTrialsRequest"
-      ( \o ->
-          Core.pure GoogleCloudMlV1__ListOptimalTrialsRequest
-      )
+      (\o -> Core.pure GoogleCloudMlV1__ListOptimalTrialsRequest)
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListOptimalTrialsRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListOptimalTrialsRequest where
   toJSON = Core.const Core.emptyObject
 
 -- | The response message for the ListOptimalTrials method.
@@ -2641,10 +2477,7 @@ newGoogleCloudMlV1__ListOptimalTrialsResponse ::
 newGoogleCloudMlV1__ListOptimalTrialsResponse =
   GoogleCloudMlV1__ListOptimalTrialsResponse {trials = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListOptimalTrialsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListOptimalTrialsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListOptimalTrialsResponse"
@@ -2653,13 +2486,9 @@ instance
             Core.<$> (o Core..:? "trials")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListOptimalTrialsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListOptimalTrialsResponse where
   toJSON GoogleCloudMlV1__ListOptimalTrialsResponse {..} =
-    Core.object
-      (Core.catMaybes [("trials" Core..=) Core.<$> trials])
+    Core.object (Core.catMaybes [("trials" Core..=) Core.<$> trials])
 
 --
 -- /See:/ 'newGoogleCloudMlV1__ListStudiesResponse' smart constructor.
@@ -2675,10 +2504,7 @@ newGoogleCloudMlV1__ListStudiesResponse ::
 newGoogleCloudMlV1__ListStudiesResponse =
   GoogleCloudMlV1__ListStudiesResponse {studies = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListStudiesResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListStudiesResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListStudiesResponse"
@@ -2687,15 +2513,10 @@ instance
             Core.<$> (o Core..:? "studies")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListStudiesResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListStudiesResponse where
   toJSON GoogleCloudMlV1__ListStudiesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("studies" Core..=) Core.<$> studies]
-      )
+      (Core.catMaybes [("studies" Core..=) Core.<$> studies])
 
 -- | The response message for the ListTrials method.
 --
@@ -2712,25 +2533,17 @@ newGoogleCloudMlV1__ListTrialsResponse ::
 newGoogleCloudMlV1__ListTrialsResponse =
   GoogleCloudMlV1__ListTrialsResponse {trials = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListTrialsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListTrialsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListTrialsResponse"
       ( \o ->
-          GoogleCloudMlV1__ListTrialsResponse
-            Core.<$> (o Core..:? "trials")
+          GoogleCloudMlV1__ListTrialsResponse Core.<$> (o Core..:? "trials")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListTrialsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListTrialsResponse where
   toJSON GoogleCloudMlV1__ListTrialsResponse {..} =
-    Core.object
-      (Core.catMaybes [("trials" Core..=) Core.<$> trials])
+    Core.object (Core.catMaybes [("trials" Core..=) Core.<$> trials])
 
 -- | Response message for the ListVersions method.
 --
@@ -2748,14 +2561,12 @@ newGoogleCloudMlV1__ListVersionsResponse ::
   GoogleCloudMlV1__ListVersionsResponse
 newGoogleCloudMlV1__ListVersionsResponse =
   GoogleCloudMlV1__ListVersionsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       versions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__ListVersionsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__ListVersionsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__ListVersionsResponse"
@@ -2765,10 +2576,7 @@ instance
             Core.<*> (o Core..:? "versions")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__ListVersionsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__ListVersionsResponse where
   toJSON GoogleCloudMlV1__ListVersionsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2782,7 +2590,6 @@ instance
 data GoogleCloudMlV1__Location = GoogleCloudMlV1__Location
   { -- | Capabilities available in the location.
     capabilities :: (Core.Maybe [GoogleCloudMlV1__Capability]),
-    -- |
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2791,7 +2598,10 @@ data GoogleCloudMlV1__Location = GoogleCloudMlV1__Location
 newGoogleCloudMlV1__Location ::
   GoogleCloudMlV1__Location
 newGoogleCloudMlV1__Location =
-  GoogleCloudMlV1__Location {capabilities = Core.Nothing, name = Core.Nothing}
+  GoogleCloudMlV1__Location
+    { capabilities = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleCloudMlV1__Location where
   parseJSON =
@@ -2832,14 +2642,12 @@ instance Core.FromJSON GoogleCloudMlV1__ManualScaling where
     Core.withObject
       "GoogleCloudMlV1__ManualScaling"
       ( \o ->
-          GoogleCloudMlV1__ManualScaling
-            Core.<$> (o Core..:? "nodes")
+          GoogleCloudMlV1__ManualScaling Core.<$> (o Core..:? "nodes")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__ManualScaling where
   toJSON GoogleCloudMlV1__ManualScaling {..} =
-    Core.object
-      (Core.catMaybes [("nodes" Core..=) Core.<$> nodes])
+    Core.object (Core.catMaybes [("nodes" Core..=) Core.<$> nodes])
 
 -- | A message representing a measurement.
 --
@@ -2872,9 +2680,7 @@ instance Core.FromJSON GoogleCloudMlV1__Measurement where
           GoogleCloudMlV1__Measurement
             Core.<$> (o Core..:? "elapsedTime")
             Core.<*> (o Core..:? "metrics")
-            Core.<*> ( o Core..:? "stepCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "stepCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Measurement where
@@ -2883,8 +2689,7 @@ instance Core.ToJSON GoogleCloudMlV1__Measurement where
       ( Core.catMaybes
           [ ("elapsedTime" Core..=) Core.<$> elapsedTime,
             ("metrics" Core..=) Core.<$> metrics,
-            ("stepCount" Core..=) Core.. Core.AsText
-              Core.<$> stepCount
+            ("stepCount" Core..=) Core.. Core.AsText Core.<$> stepCount
           ]
       )
 
@@ -2903,7 +2708,10 @@ data GoogleCloudMlV1__MetricSpec = GoogleCloudMlV1__MetricSpec
 newGoogleCloudMlV1__MetricSpec ::
   GoogleCloudMlV1__MetricSpec
 newGoogleCloudMlV1__MetricSpec =
-  GoogleCloudMlV1__MetricSpec {name = Core.Nothing, target = Core.Nothing}
+  GoogleCloudMlV1__MetricSpec
+    { name = Core.Nothing,
+      target = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleCloudMlV1__MetricSpec where
   parseJSON =
@@ -2911,7 +2719,8 @@ instance Core.FromJSON GoogleCloudMlV1__MetricSpec where
       "GoogleCloudMlV1__MetricSpec"
       ( \o ->
           GoogleCloudMlV1__MetricSpec
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "target")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "target")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__MetricSpec where
@@ -2998,8 +2807,7 @@ instance Core.ToJSON GoogleCloudMlV1__Model where
 --
 -- /See:/ 'newGoogleCloudMlV1__Model_Labels' smart constructor.
 newtype GoogleCloudMlV1__Model_Labels = GoogleCloudMlV1__Model_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3016,13 +2824,11 @@ instance Core.FromJSON GoogleCloudMlV1__Model_Labels where
     Core.withObject
       "GoogleCloudMlV1__Model_Labels"
       ( \o ->
-          GoogleCloudMlV1__Model_Labels
-            Core.<$> (Core.parseJSONObject o)
+          GoogleCloudMlV1__Model_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Model_Labels where
-  toJSON GoogleCloudMlV1__Model_Labels {..} =
-    Core.toJSON additional
+  toJSON GoogleCloudMlV1__Model_Labels {..} = Core.toJSON additional
 
 -- | Represents the metadata of the long-running operation.
 --
@@ -3065,10 +2871,7 @@ newGoogleCloudMlV1__OperationMetadata =
       version = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__OperationMetadata
-  where
+instance Core.FromJSON GoogleCloudMlV1__OperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__OperationMetadata"
@@ -3080,17 +2883,12 @@ instance
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "modelName")
             Core.<*> (o Core..:? "operationType")
-            Core.<*> ( o Core..:? "projectNumber"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "projectNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "startTime")
             Core.<*> (o Core..:? "version")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__OperationMetadata
-  where
+instance Core.ToJSON GoogleCloudMlV1__OperationMetadata where
   toJSON GoogleCloudMlV1__OperationMetadata {..} =
     Core.object
       ( Core.catMaybes
@@ -3101,7 +2899,8 @@ instance
             ("labels" Core..=) Core.<$> labels,
             ("modelName" Core..=) Core.<$> modelName,
             ("operationType" Core..=) Core.<$> operationType,
-            ("projectNumber" Core..=) Core.. Core.AsText
+            ("projectNumber" Core..=)
+              Core.. Core.AsText
               Core.<$> projectNumber,
             ("startTime" Core..=) Core.<$> startTime,
             ("version" Core..=) Core.<$> version
@@ -3112,8 +2911,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudMlV1__OperationMetadata_Labels' smart constructor.
 newtype GoogleCloudMlV1__OperationMetadata_Labels = GoogleCloudMlV1__OperationMetadata_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3123,12 +2921,12 @@ newGoogleCloudMlV1__OperationMetadata_Labels ::
   Core.HashMap Core.Text Core.Text ->
   GoogleCloudMlV1__OperationMetadata_Labels
 newGoogleCloudMlV1__OperationMetadata_Labels additional =
-  GoogleCloudMlV1__OperationMetadata_Labels {additional = additional}
+  GoogleCloudMlV1__OperationMetadata_Labels
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__OperationMetadata_Labels
-  where
+instance Core.FromJSON GoogleCloudMlV1__OperationMetadata_Labels where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__OperationMetadata_Labels"
@@ -3137,10 +2935,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__OperationMetadata_Labels
-  where
+instance Core.ToJSON GoogleCloudMlV1__OperationMetadata_Labels where
   toJSON GoogleCloudMlV1__OperationMetadata_Labels {..} =
     Core.toJSON additional
 
@@ -3198,8 +2993,7 @@ instance Core.ToJSON GoogleCloudMlV1__ParameterSpec where
   toJSON GoogleCloudMlV1__ParameterSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("categoricalValues" Core..=)
-              Core.<$> categoricalValues,
+          [ ("categoricalValues" Core..=) Core.<$> categoricalValues,
             ("discreteValues" Core..=) Core.<$> discreteValues,
             ("maxValue" Core..=) Core.<$> maxValue,
             ("minValue" Core..=) Core.<$> minValue,
@@ -3224,24 +3018,18 @@ newGoogleCloudMlV1__PredictRequest ::
 newGoogleCloudMlV1__PredictRequest =
   GoogleCloudMlV1__PredictRequest {httpBody = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__PredictRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__PredictRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__PredictRequest"
       ( \o ->
-          GoogleCloudMlV1__PredictRequest
-            Core.<$> (o Core..:? "httpBody")
+          GoogleCloudMlV1__PredictRequest Core.<$> (o Core..:? "httpBody")
       )
 
 instance Core.ToJSON GoogleCloudMlV1__PredictRequest where
   toJSON GoogleCloudMlV1__PredictRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("httpBody" Core..=) Core.<$> httpBody]
-      )
+      (Core.catMaybes [("httpBody" Core..=) Core.<$> httpBody])
 
 -- | Represents input parameters for a prediction job.
 --
@@ -3293,23 +3081,16 @@ newGoogleCloudMlV1__PredictionInput =
       versionName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__PredictionInput
-  where
+instance Core.FromJSON GoogleCloudMlV1__PredictionInput where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__PredictionInput"
       ( \o ->
           GoogleCloudMlV1__PredictionInput
-            Core.<$> ( o Core..:? "batchSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "batchSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "dataFormat")
             Core.<*> (o Core..:? "inputPaths")
-            Core.<*> ( o Core..:? "maxWorkerCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxWorkerCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "modelName")
             Core.<*> (o Core..:? "outputDataFormat")
             Core.<*> (o Core..:? "outputPath")
@@ -3324,15 +3105,14 @@ instance Core.ToJSON GoogleCloudMlV1__PredictionInput where
   toJSON GoogleCloudMlV1__PredictionInput {..} =
     Core.object
       ( Core.catMaybes
-          [ ("batchSize" Core..=) Core.. Core.AsText
-              Core.<$> batchSize,
+          [ ("batchSize" Core..=) Core.. Core.AsText Core.<$> batchSize,
             ("dataFormat" Core..=) Core.<$> dataFormat,
             ("inputPaths" Core..=) Core.<$> inputPaths,
-            ("maxWorkerCount" Core..=) Core.. Core.AsText
+            ("maxWorkerCount" Core..=)
+              Core.. Core.AsText
               Core.<$> maxWorkerCount,
             ("modelName" Core..=) Core.<$> modelName,
-            ("outputDataFormat" Core..=)
-              Core.<$> outputDataFormat,
+            ("outputDataFormat" Core..=) Core.<$> outputDataFormat,
             ("outputPath" Core..=) Core.<$> outputPath,
             ("region" Core..=) Core.<$> region,
             ("runtimeVersion" Core..=) Core.<$> runtimeVersion,
@@ -3368,37 +3148,27 @@ newGoogleCloudMlV1__PredictionOutput =
       predictionCount = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__PredictionOutput
-  where
+instance Core.FromJSON GoogleCloudMlV1__PredictionOutput where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__PredictionOutput"
       ( \o ->
           GoogleCloudMlV1__PredictionOutput
-            Core.<$> ( o Core..:? "errorCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "errorCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "nodeHours")
             Core.<*> (o Core..:? "outputPath")
-            Core.<*> ( o Core..:? "predictionCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "predictionCount" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__PredictionOutput
-  where
+instance Core.ToJSON GoogleCloudMlV1__PredictionOutput where
   toJSON GoogleCloudMlV1__PredictionOutput {..} =
     Core.object
       ( Core.catMaybes
-          [ ("errorCount" Core..=) Core.. Core.AsText
-              Core.<$> errorCount,
+          [ ("errorCount" Core..=) Core.. Core.AsText Core.<$> errorCount,
             ("nodeHours" Core..=) Core.<$> nodeHours,
             ("outputPath" Core..=) Core.<$> outputPath,
-            ("predictionCount" Core..=) Core.. Core.AsText
+            ("predictionCount" Core..=)
+              Core.. Core.AsText
               Core.<$> predictionCount
           ]
       )
@@ -3453,11 +3223,9 @@ instance Core.ToJSON GoogleCloudMlV1__ReplicaConfig where
   toJSON GoogleCloudMlV1__ReplicaConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorConfig" Core..=)
-              Core.<$> acceleratorConfig,
+          [ ("acceleratorConfig" Core..=) Core.<$> acceleratorConfig,
             ("containerArgs" Core..=) Core.<$> containerArgs,
-            ("containerCommand" Core..=)
-              Core.<$> containerCommand,
+            ("containerCommand" Core..=) Core.<$> containerCommand,
             ("diskConfig" Core..=) Core.<$> diskConfig,
             ("imageUri" Core..=) Core.<$> imageUri,
             ("tpuTfVersion" Core..=) Core.<$> tpuTfVersion
@@ -3480,14 +3248,12 @@ newGoogleCloudMlV1__RequestLoggingConfig ::
   GoogleCloudMlV1__RequestLoggingConfig
 newGoogleCloudMlV1__RequestLoggingConfig =
   GoogleCloudMlV1__RequestLoggingConfig
-    { bigqueryTableName = Core.Nothing,
+    { bigqueryTableName =
+        Core.Nothing,
       samplingPercentage = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__RequestLoggingConfig
-  where
+instance Core.FromJSON GoogleCloudMlV1__RequestLoggingConfig where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__RequestLoggingConfig"
@@ -3497,17 +3263,12 @@ instance
             Core.<*> (o Core..:? "samplingPercentage")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__RequestLoggingConfig
-  where
+instance Core.ToJSON GoogleCloudMlV1__RequestLoggingConfig where
   toJSON GoogleCloudMlV1__RequestLoggingConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bigqueryTableName" Core..=)
-              Core.<$> bigqueryTableName,
-            ("samplingPercentage" Core..=)
-              Core.<$> samplingPercentage
+          [ ("bigqueryTableName" Core..=) Core.<$> bigqueryTableName,
+            ("samplingPercentage" Core..=) Core.<$> samplingPercentage
           ]
       )
 
@@ -3528,7 +3289,10 @@ data GoogleCloudMlV1__RouteMap = GoogleCloudMlV1__RouteMap
 newGoogleCloudMlV1__RouteMap ::
   GoogleCloudMlV1__RouteMap
 newGoogleCloudMlV1__RouteMap =
-  GoogleCloudMlV1__RouteMap {health = Core.Nothing, predict = Core.Nothing}
+  GoogleCloudMlV1__RouteMap
+    { health = Core.Nothing,
+      predict = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleCloudMlV1__RouteMap where
   parseJSON =
@@ -3562,12 +3326,12 @@ newtype GoogleCloudMlV1__SampledShapleyAttribution = GoogleCloudMlV1__SampledSha
 newGoogleCloudMlV1__SampledShapleyAttribution ::
   GoogleCloudMlV1__SampledShapleyAttribution
 newGoogleCloudMlV1__SampledShapleyAttribution =
-  GoogleCloudMlV1__SampledShapleyAttribution {numPaths = Core.Nothing}
+  GoogleCloudMlV1__SampledShapleyAttribution
+    { numPaths =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__SampledShapleyAttribution
-  where
+instance Core.FromJSON GoogleCloudMlV1__SampledShapleyAttribution where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__SampledShapleyAttribution"
@@ -3576,15 +3340,10 @@ instance
             Core.<$> (o Core..:? "numPaths")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__SampledShapleyAttribution
-  where
+instance Core.ToJSON GoogleCloudMlV1__SampledShapleyAttribution where
   toJSON GoogleCloudMlV1__SampledShapleyAttribution {..} =
     Core.object
-      ( Core.catMaybes
-          [("numPaths" Core..=) Core.<$> numPaths]
-      )
+      (Core.catMaybes [("numPaths" Core..=) Core.<$> numPaths])
 
 -- | All parameters related to scheduling of training jobs.
 --
@@ -3643,21 +3402,13 @@ newGoogleCloudMlV1__SetDefaultVersionRequest ::
 newGoogleCloudMlV1__SetDefaultVersionRequest =
   GoogleCloudMlV1__SetDefaultVersionRequest
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__SetDefaultVersionRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__SetDefaultVersionRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__SetDefaultVersionRequest"
-      ( \o ->
-          Core.pure GoogleCloudMlV1__SetDefaultVersionRequest
-      )
+      (\o -> Core.pure GoogleCloudMlV1__SetDefaultVersionRequest)
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__SetDefaultVersionRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__SetDefaultVersionRequest where
   toJSON = Core.const Core.emptyObject
 
 --
@@ -3668,21 +3419,16 @@ data GoogleCloudMlV1__StopTrialRequest = GoogleCloudMlV1__StopTrialRequest
 -- | Creates a value of 'GoogleCloudMlV1__StopTrialRequest' with the minimum fields required to make a request.
 newGoogleCloudMlV1__StopTrialRequest ::
   GoogleCloudMlV1__StopTrialRequest
-newGoogleCloudMlV1__StopTrialRequest = GoogleCloudMlV1__StopTrialRequest
+newGoogleCloudMlV1__StopTrialRequest =
+  GoogleCloudMlV1__StopTrialRequest
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__StopTrialRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__StopTrialRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__StopTrialRequest"
       (\o -> Core.pure GoogleCloudMlV1__StopTrialRequest)
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__StopTrialRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__StopTrialRequest where
   toJSON = Core.const Core.emptyObject
 
 -- | A message representing a Study.
@@ -3815,10 +3561,7 @@ newGoogleCloudMlV1__SuggestTrialsMetadata =
       suggestionCount = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__SuggestTrialsMetadata
-  where
+instance Core.FromJSON GoogleCloudMlV1__SuggestTrialsMetadata where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__SuggestTrialsMetadata"
@@ -3830,18 +3573,14 @@ instance
             Core.<*> (o Core..:? "suggestionCount")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__SuggestTrialsMetadata
-  where
+instance Core.ToJSON GoogleCloudMlV1__SuggestTrialsMetadata where
   toJSON GoogleCloudMlV1__SuggestTrialsMetadata {..} =
     Core.object
       ( Core.catMaybes
           [ ("clientId" Core..=) Core.<$> clientId,
             ("createTime" Core..=) Core.<$> createTime,
             ("study" Core..=) Core.<$> study,
-            ("suggestionCount" Core..=)
-              Core.<$> suggestionCount
+            ("suggestionCount" Core..=) Core.<$> suggestionCount
           ]
       )
 
@@ -3865,10 +3604,7 @@ newGoogleCloudMlV1__SuggestTrialsRequest =
       suggestionCount = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__SuggestTrialsRequest
-  where
+instance Core.FromJSON GoogleCloudMlV1__SuggestTrialsRequest where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__SuggestTrialsRequest"
@@ -3878,16 +3614,12 @@ instance
             Core.<*> (o Core..:? "suggestionCount")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__SuggestTrialsRequest
-  where
+instance Core.ToJSON GoogleCloudMlV1__SuggestTrialsRequest where
   toJSON GoogleCloudMlV1__SuggestTrialsRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("clientId" Core..=) Core.<$> clientId,
-            ("suggestionCount" Core..=)
-              Core.<$> suggestionCount
+            ("suggestionCount" Core..=) Core.<$> suggestionCount
           ]
       )
 
@@ -3917,10 +3649,7 @@ newGoogleCloudMlV1__SuggestTrialsResponse =
       trials = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__SuggestTrialsResponse
-  where
+instance Core.FromJSON GoogleCloudMlV1__SuggestTrialsResponse where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__SuggestTrialsResponse"
@@ -3932,10 +3661,7 @@ instance
             Core.<*> (o Core..:? "trials")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__SuggestTrialsResponse
-  where
+instance Core.ToJSON GoogleCloudMlV1__SuggestTrialsResponse where
   toJSON GoogleCloudMlV1__SuggestTrialsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -4048,9 +3774,7 @@ instance Core.FromJSON GoogleCloudMlV1__TrainingInput where
             Core.<*> (o Core..:? "enableWebAccess")
             Core.<*> (o Core..:? "encryptionConfig")
             Core.<*> (o Core..:? "evaluatorConfig")
-            Core.<*> ( o Core..:? "evaluatorCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "evaluatorCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "evaluatorType")
             Core.<*> (o Core..:? "hyperparameters")
             Core.<*> (o Core..:? "jobDir")
@@ -4059,7 +3783,8 @@ instance Core.FromJSON GoogleCloudMlV1__TrainingInput where
             Core.<*> (o Core..:? "network")
             Core.<*> (o Core..:? "packageUris")
             Core.<*> (o Core..:? "parameterServerConfig")
-            Core.<*> ( o Core..:? "parameterServerCount"
+            Core.<*> ( o
+                         Core..:? "parameterServerCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "parameterServerType")
@@ -4072,9 +3797,7 @@ instance Core.FromJSON GoogleCloudMlV1__TrainingInput where
             Core.<*> (o Core..:? "serviceAccount")
             Core.<*> (o Core..:? "useChiefInTfConfig")
             Core.<*> (o Core..:? "workerConfig")
-            Core.<*> ( o Core..:? "workerCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "workerCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "workerType")
       )
 
@@ -4084,10 +3807,10 @@ instance Core.ToJSON GoogleCloudMlV1__TrainingInput where
       ( Core.catMaybes
           [ ("args" Core..=) Core.<$> args,
             ("enableWebAccess" Core..=) Core.<$> enableWebAccess,
-            ("encryptionConfig" Core..=)
-              Core.<$> encryptionConfig,
+            ("encryptionConfig" Core..=) Core.<$> encryptionConfig,
             ("evaluatorConfig" Core..=) Core.<$> evaluatorConfig,
-            ("evaluatorCount" Core..=) Core.. Core.AsText
+            ("evaluatorCount" Core..=)
+              Core.. Core.AsText
               Core.<$> evaluatorCount,
             ("evaluatorType" Core..=) Core.<$> evaluatorType,
             ("hyperparameters" Core..=) Core.<$> hyperparameters,
@@ -4096,12 +3819,11 @@ instance Core.ToJSON GoogleCloudMlV1__TrainingInput where
             ("masterType" Core..=) Core.<$> masterType,
             ("network" Core..=) Core.<$> network,
             ("packageUris" Core..=) Core.<$> packageUris,
-            ("parameterServerConfig" Core..=)
-              Core.<$> parameterServerConfig,
-            ("parameterServerCount" Core..=) Core.. Core.AsText
+            ("parameterServerConfig" Core..=) Core.<$> parameterServerConfig,
+            ("parameterServerCount" Core..=)
+              Core.. Core.AsText
               Core.<$> parameterServerCount,
-            ("parameterServerType" Core..=)
-              Core.<$> parameterServerType,
+            ("parameterServerType" Core..=) Core.<$> parameterServerType,
             ("pythonModule" Core..=) Core.<$> pythonModule,
             ("pythonVersion" Core..=) Core.<$> pythonVersion,
             ("region" Core..=) Core.<$> region,
@@ -4109,11 +3831,9 @@ instance Core.ToJSON GoogleCloudMlV1__TrainingInput where
             ("scaleTier" Core..=) Core.<$> scaleTier,
             ("scheduling" Core..=) Core.<$> scheduling,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("useChiefInTfConfig" Core..=)
-              Core.<$> useChiefInTfConfig,
+            ("useChiefInTfConfig" Core..=) Core.<$> useChiefInTfConfig,
             ("workerConfig" Core..=) Core.<$> workerConfig,
-            ("workerCount" Core..=) Core.. Core.AsText
-              Core.<$> workerCount,
+            ("workerCount" Core..=) Core.. Core.AsText Core.<$> workerCount,
             ("workerType" Core..=) Core.<$> workerType
           ]
       )
@@ -4146,7 +3866,8 @@ newGoogleCloudMlV1__TrainingOutput ::
   GoogleCloudMlV1__TrainingOutput
 newGoogleCloudMlV1__TrainingOutput =
   GoogleCloudMlV1__TrainingOutput
-    { builtInAlgorithmOutput = Core.Nothing,
+    { builtInAlgorithmOutput =
+        Core.Nothing,
       completedTrialCount = Core.Nothing,
       consumedMLUnits = Core.Nothing,
       hyperparameterMetricTag = Core.Nothing,
@@ -4156,17 +3877,15 @@ newGoogleCloudMlV1__TrainingOutput =
       webAccessUris = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__TrainingOutput
-  where
+instance Core.FromJSON GoogleCloudMlV1__TrainingOutput where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__TrainingOutput"
       ( \o ->
           GoogleCloudMlV1__TrainingOutput
             Core.<$> (o Core..:? "builtInAlgorithmOutput")
-            Core.<*> ( o Core..:? "completedTrialCount"
+            Core.<*> ( o
+                         Core..:? "completedTrialCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "consumedMLUnits")
@@ -4183,13 +3902,13 @@ instance Core.ToJSON GoogleCloudMlV1__TrainingOutput where
       ( Core.catMaybes
           [ ("builtInAlgorithmOutput" Core..=)
               Core.<$> builtInAlgorithmOutput,
-            ("completedTrialCount" Core..=) Core.. Core.AsText
+            ("completedTrialCount" Core..=)
+              Core.. Core.AsText
               Core.<$> completedTrialCount,
             ("consumedMLUnits" Core..=) Core.<$> consumedMLUnits,
             ("hyperparameterMetricTag" Core..=)
               Core.<$> hyperparameterMetricTag,
-            ("isBuiltInAlgorithmJob" Core..=)
-              Core.<$> isBuiltInAlgorithmJob,
+            ("isBuiltInAlgorithmJob" Core..=) Core.<$> isBuiltInAlgorithmJob,
             ("isHyperparameterTuningJob" Core..=)
               Core.<$> isHyperparameterTuningJob,
             ("trials" Core..=) Core.<$> trials,
@@ -4201,8 +3920,7 @@ instance Core.ToJSON GoogleCloudMlV1__TrainingOutput where
 --
 -- /See:/ 'newGoogleCloudMlV1__TrainingOutput_WebAccessUris' smart constructor.
 newtype GoogleCloudMlV1__TrainingOutput_WebAccessUris = GoogleCloudMlV1__TrainingOutput_WebAccessUris
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4212,7 +3930,10 @@ newGoogleCloudMlV1__TrainingOutput_WebAccessUris ::
   Core.HashMap Core.Text Core.Text ->
   GoogleCloudMlV1__TrainingOutput_WebAccessUris
 newGoogleCloudMlV1__TrainingOutput_WebAccessUris additional =
-  GoogleCloudMlV1__TrainingOutput_WebAccessUris {additional = additional}
+  GoogleCloudMlV1__TrainingOutput_WebAccessUris
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -4226,13 +3947,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudMlV1__TrainingOutput_WebAccessUris
-  where
-  toJSON
-    GoogleCloudMlV1__TrainingOutput_WebAccessUris {..} =
-      Core.toJSON additional
+instance Core.ToJSON GoogleCloudMlV1__TrainingOutput_WebAccessUris where
+  toJSON GoogleCloudMlV1__TrainingOutput_WebAccessUris {..} =
+    Core.toJSON additional
 
 -- | A message representing a trial.
 --
@@ -4302,17 +4019,14 @@ instance Core.ToJSON GoogleCloudMlV1__Trial where
       ( Core.catMaybes
           [ ("clientId" Core..=) Core.<$> clientId,
             ("endTime" Core..=) Core.<$> endTime,
-            ("finalMeasurement" Core..=)
-              Core.<$> finalMeasurement,
-            ("infeasibleReason" Core..=)
-              Core.<$> infeasibleReason,
+            ("finalMeasurement" Core..=) Core.<$> finalMeasurement,
+            ("infeasibleReason" Core..=) Core.<$> infeasibleReason,
             ("measurements" Core..=) Core.<$> measurements,
             ("name" Core..=) Core.<$> name,
             ("parameters" Core..=) Core.<$> parameters,
             ("startTime" Core..=) Core.<$> startTime,
             ("state" Core..=) Core.<$> state,
-            ("trialInfeasible" Core..=)
-              Core.<$> trialInfeasible
+            ("trialInfeasible" Core..=) Core.<$> trialInfeasible
           ]
       )
 
@@ -4447,8 +4161,7 @@ instance Core.ToJSON GoogleCloudMlV1__Version where
   toJSON GoogleCloudMlV1__Version {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorConfig" Core..=)
-              Core.<$> acceleratorConfig,
+          [ ("acceleratorConfig" Core..=) Core.<$> acceleratorConfig,
             ("autoScaling" Core..=) Core.<$> autoScaling,
             ("container" Core..=) Core.<$> container,
             ("createTime" Core..=) Core.<$> createTime,
@@ -4456,15 +4169,12 @@ instance Core.ToJSON GoogleCloudMlV1__Version where
             ("description" Core..=) Core.<$> description,
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("etag" Core..=) Core.<$> etag,
-            ("explanationConfig" Core..=)
-              Core.<$> explanationConfig,
+            ("explanationConfig" Core..=) Core.<$> explanationConfig,
             ("framework" Core..=) Core.<$> framework,
             ("isDefault" Core..=) Core.<$> isDefault,
             ("labels" Core..=) Core.<$> labels,
-            ("lastMigrationModelId" Core..=)
-              Core.<$> lastMigrationModelId,
-            ("lastMigrationTime" Core..=)
-              Core.<$> lastMigrationTime,
+            ("lastMigrationModelId" Core..=) Core.<$> lastMigrationModelId,
+            ("lastMigrationTime" Core..=) Core.<$> lastMigrationTime,
             ("lastUseTime" Core..=) Core.<$> lastUseTime,
             ("machineType" Core..=) Core.<$> machineType,
             ("manualScaling" Core..=) Core.<$> manualScaling,
@@ -4472,8 +4182,7 @@ instance Core.ToJSON GoogleCloudMlV1__Version where
             ("packageUris" Core..=) Core.<$> packageUris,
             ("predictionClass" Core..=) Core.<$> predictionClass,
             ("pythonVersion" Core..=) Core.<$> pythonVersion,
-            ("requestLoggingConfig" Core..=)
-              Core.<$> requestLoggingConfig,
+            ("requestLoggingConfig" Core..=) Core.<$> requestLoggingConfig,
             ("routes" Core..=) Core.<$> routes,
             ("runtimeVersion" Core..=) Core.<$> runtimeVersion,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
@@ -4485,8 +4194,7 @@ instance Core.ToJSON GoogleCloudMlV1__Version where
 --
 -- /See:/ 'newGoogleCloudMlV1__Version_Labels' smart constructor.
 newtype GoogleCloudMlV1__Version_Labels = GoogleCloudMlV1__Version_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4498,21 +4206,16 @@ newGoogleCloudMlV1__Version_Labels ::
 newGoogleCloudMlV1__Version_Labels additional =
   GoogleCloudMlV1__Version_Labels {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__Version_Labels
-  where
+instance Core.FromJSON GoogleCloudMlV1__Version_Labels where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__Version_Labels"
       ( \o ->
-          GoogleCloudMlV1__Version_Labels
-            Core.<$> (Core.parseJSONObject o)
+          GoogleCloudMlV1__Version_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleCloudMlV1__Version_Labels where
-  toJSON GoogleCloudMlV1__Version_Labels {..} =
-    Core.toJSON additional
+  toJSON GoogleCloudMlV1__Version_Labels {..} = Core.toJSON additional
 
 -- | Attributes credit by computing the XRAI taking advantage of the model\'s fully differentiable structure. Refer to this paper for more details: https:\/\/arxiv.org\/abs\/1906.02825 Currently only implemented for models with natural image inputs.
 --
@@ -4529,10 +4232,7 @@ newGoogleCloudMlV1__XraiAttribution ::
 newGoogleCloudMlV1__XraiAttribution =
   GoogleCloudMlV1__XraiAttribution {numIntegralSteps = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudMlV1__XraiAttribution
-  where
+instance Core.FromJSON GoogleCloudMlV1__XraiAttribution where
   parseJSON =
     Core.withObject
       "GoogleCloudMlV1__XraiAttribution"
@@ -4545,9 +4245,7 @@ instance Core.ToJSON GoogleCloudMlV1__XraiAttribution where
   toJSON GoogleCloudMlV1__XraiAttribution {..} =
     Core.object
       ( Core.catMaybes
-          [ ("numIntegralSteps" Core..=)
-              Core.<$> numIntegralSteps
-          ]
+          [("numIntegralSteps" Core..=) Core.<$> numIntegralSteps]
       )
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
@@ -4585,8 +4283,7 @@ instance Core.ToJSON GoogleIamV1__AuditConfig where
   toJSON GoogleIamV1__AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -4625,8 +4322,7 @@ instance Core.ToJSON GoogleIamV1__AuditLogConfig where
   toJSON GoogleIamV1__AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -4638,10 +4334,12 @@ data GoogleIamV1__Binding = GoogleIamV1__Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe GoogleType__Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4677,9 +4375,9 @@ instance Core.ToJSON GoogleIamV1__Binding where
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newGoogleIamV1__Policy' smart constructor.
 data GoogleIamV1__Policy = GoogleIamV1__Policy
@@ -4749,10 +4447,7 @@ newGoogleIamV1__SetIamPolicyRequest =
       updateMask = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleIamV1__SetIamPolicyRequest
-  where
+instance Core.FromJSON GoogleIamV1__SetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GoogleIamV1__SetIamPolicyRequest"
@@ -4784,12 +4479,12 @@ newtype GoogleIamV1__TestIamPermissionsRequest = GoogleIamV1__TestIamPermissions
 newGoogleIamV1__TestIamPermissionsRequest ::
   GoogleIamV1__TestIamPermissionsRequest
 newGoogleIamV1__TestIamPermissionsRequest =
-  GoogleIamV1__TestIamPermissionsRequest {permissions = Core.Nothing}
+  GoogleIamV1__TestIamPermissionsRequest
+    { permissions =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleIamV1__TestIamPermissionsRequest
-  where
+instance Core.FromJSON GoogleIamV1__TestIamPermissionsRequest where
   parseJSON =
     Core.withObject
       "GoogleIamV1__TestIamPermissionsRequest"
@@ -4798,15 +4493,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1__TestIamPermissionsRequest
-  where
+instance Core.ToJSON GoogleIamV1__TestIamPermissionsRequest where
   toJSON GoogleIamV1__TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -4821,12 +4511,12 @@ newtype GoogleIamV1__TestIamPermissionsResponse = GoogleIamV1__TestIamPermission
 newGoogleIamV1__TestIamPermissionsResponse ::
   GoogleIamV1__TestIamPermissionsResponse
 newGoogleIamV1__TestIamPermissionsResponse =
-  GoogleIamV1__TestIamPermissionsResponse {permissions = Core.Nothing}
+  GoogleIamV1__TestIamPermissionsResponse
+    { permissions =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleIamV1__TestIamPermissionsResponse
-  where
+instance Core.FromJSON GoogleIamV1__TestIamPermissionsResponse where
   parseJSON =
     Core.withObject
       "GoogleIamV1__TestIamPermissionsResponse"
@@ -4835,15 +4525,10 @@ instance
             Core.<$> (o Core..:? "permissions")
       )
 
-instance
-  Core.ToJSON
-    GoogleIamV1__TestIamPermissionsResponse
-  where
+instance Core.ToJSON GoogleIamV1__TestIamPermissionsResponse where
   toJSON GoogleIamV1__TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | The response message for Operations.ListOperations.
 --
@@ -4861,14 +4546,12 @@ newGoogleLongrunning__ListOperationsResponse ::
   GoogleLongrunning__ListOperationsResponse
 newGoogleLongrunning__ListOperationsResponse =
   GoogleLongrunning__ListOperationsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       operations = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleLongrunning__ListOperationsResponse
-  where
+instance Core.FromJSON GoogleLongrunning__ListOperationsResponse where
   parseJSON =
     Core.withObject
       "GoogleLongrunning__ListOperationsResponse"
@@ -4878,10 +4561,7 @@ instance
             Core.<*> (o Core..:? "operations")
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunning__ListOperationsResponse
-  where
+instance Core.ToJSON GoogleLongrunning__ListOperationsResponse where
   toJSON GoogleLongrunning__ListOperationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -4902,7 +4582,7 @@ data GoogleLongrunning__Operation = GoogleLongrunning__Operation
     metadata :: (Core.Maybe GoogleLongrunning__Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe GoogleLongrunning__Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4961,10 +4641,7 @@ newGoogleLongrunning__Operation_Metadata ::
 newGoogleLongrunning__Operation_Metadata additional =
   GoogleLongrunning__Operation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunning__Operation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunning__Operation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunning__Operation_Metadata"
@@ -4973,14 +4650,11 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunning__Operation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunning__Operation_Metadata where
   toJSON GoogleLongrunning__Operation_Metadata {..} =
     Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newGoogleLongrunning__Operation_Response' smart constructor.
 newtype GoogleLongrunning__Operation_Response = GoogleLongrunning__Operation_Response
@@ -4997,10 +4671,7 @@ newGoogleLongrunning__Operation_Response ::
 newGoogleLongrunning__Operation_Response additional =
   GoogleLongrunning__Operation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunning__Operation_Response
-  where
+instance Core.FromJSON GoogleLongrunning__Operation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunning__Operation_Response"
@@ -5009,10 +4680,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunning__Operation_Response
-  where
+instance Core.ToJSON GoogleLongrunning__Operation_Response where
   toJSON GoogleLongrunning__Operation_Response {..} =
     Core.toJSON additional
 
@@ -5101,13 +4769,11 @@ instance Core.FromJSON GoogleRpc__Status_DetailsItem where
     Core.withObject
       "GoogleRpc__Status_DetailsItem"
       ( \o ->
-          GoogleRpc__Status_DetailsItem
-            Core.<$> (Core.parseJSONObject o)
+          GoogleRpc__Status_DetailsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON GoogleRpc__Status_DetailsItem where
-  toJSON GoogleRpc__Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON GoogleRpc__Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https:\/\/github.com\/google\/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() \< 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != \'private\' && document.type != \'internal\'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"\'New message received at \' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are
 -- determined by the service that evaluates it. See the service documentation for additional information.

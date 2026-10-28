@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.PhotoSequence.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StreetViewPublish.PhotoSequence.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photoSequence.delete@ method which the
@@ -90,30 +88,25 @@ newStreetViewPublishPhotoSequenceDelete sequenceId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StreetViewPublishPhotoSequenceDelete
-  where
+instance Core.GoogleRequest StreetViewPublishPhotoSequenceDelete where
   type Rs StreetViewPublishPhotoSequenceDelete = Empty
   type
     Scopes StreetViewPublishPhotoSequenceDelete =
       '[Streetviewpublish'FullControl]
-  requestClient
-    StreetViewPublishPhotoSequenceDelete {..} =
-      go
-        sequenceId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        streetViewPublishService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StreetViewPublishPhotoSequenceDeleteResource
-            )
-            Core.mempty
+  requestClient StreetViewPublishPhotoSequenceDelete {..} =
+    go
+      sequenceId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      streetViewPublishService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StreetViewPublishPhotoSequenceDeleteResource
+          )
+          Core.mempty

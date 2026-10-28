@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DeploymentManager.Deployments.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DeploymentManager.Deployments.Insert
 where
 
 import Gogol.DeploymentManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @deploymentmanager.deployments.insert@ method which the
 -- 'DeploymentManagerDeploymentsInsert' request conforms to.
@@ -54,9 +52,8 @@ type DeploymentManagerDeploymentsInsertResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "createPolicy"
-              DeploymentsInsertCreatePolicy
+    Core.:> Core.QueryParam "createPolicy" DeploymentsInsertCreatePolicy
+    Core.:> Core.QueryParam "header.bypassBillingFilter" Core.Bool
     Core.:> Core.QueryParam "preview" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -76,6 +73,7 @@ data DeploymentManagerDeploymentsInsert = DeploymentManagerDeploymentsInsert
     callback :: (Core.Maybe Core.Text),
     -- | Sets the policy to use for creating new resources.
     createPolicy :: DeploymentsInsertCreatePolicy,
+    headerBypassBillingFilter :: (Core.Maybe Core.Bool),
     -- | Multipart request metadata.
     payload :: Deployment,
     -- | If set to true, creates a deployment and creates \"shell\" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. After previewing a deployment, you can deploy your resources by making a request with the @update()@ method or you can use the @cancelPreview()@ method to cancel the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
@@ -102,6 +100,7 @@ newDeploymentManagerDeploymentsInsert payload project =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       createPolicy = DeploymentsInsertCreatePolicy_CREATEORACQUIRE,
+      headerBypassBillingFilter = Core.Nothing,
       payload = payload,
       preview = Core.Nothing,
       project = project,
@@ -109,13 +108,8 @@ newDeploymentManagerDeploymentsInsert payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DeploymentManagerDeploymentsInsert
-  where
-  type
-    Rs DeploymentManagerDeploymentsInsert =
-      Operation
+instance Core.GoogleRequest DeploymentManagerDeploymentsInsert where
+  type Rs DeploymentManagerDeploymentsInsert = Operation
   type
     Scopes DeploymentManagerDeploymentsInsert =
       '[CloudPlatform'FullControl, Ndev'Cloudman]
@@ -126,6 +120,7 @@ instance
       accessToken
       callback
       (Core.Just createPolicy)
+      headerBypassBillingFilter
       preview
       uploadType
       uploadProtocol
@@ -136,7 +131,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DeploymentManagerDeploymentsInsertResource
+              Core.Proxy DeploymentManagerDeploymentsInsertResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DataFusion.Projects.Locations.Instances.DnsPeerings.Create
 where
 
 import Gogol.DataFusion.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datafusion.projects.locations.instances.dnsPeerings.create@ method which the
 -- 'DataFusionProjectsLocationsInstancesDnsPeeringsCreate' request conforms to.
@@ -88,29 +86,30 @@ newDataFusionProjectsLocationsInstancesDnsPeeringsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   DnsPeering ->
   DataFusionProjectsLocationsInstancesDnsPeeringsCreate
-newDataFusionProjectsLocationsInstancesDnsPeeringsCreate parent payload =
-  DataFusionProjectsLocationsInstancesDnsPeeringsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dnsPeeringId = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataFusionProjectsLocationsInstancesDnsPeeringsCreate
+  parent
+  payload =
+    DataFusionProjectsLocationsInstancesDnsPeeringsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dnsPeeringId = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DataFusionProjectsLocationsInstancesDnsPeeringsCreate
   where
   type
-    Rs
-      DataFusionProjectsLocationsInstancesDnsPeeringsCreate =
+    Rs DataFusionProjectsLocationsInstancesDnsPeeringsCreate =
       DnsPeering
   type
-    Scopes
-      DataFusionProjectsLocationsInstancesDnsPeeringsCreate =
+    Scopes DataFusionProjectsLocationsInstancesDnsPeeringsCreate =
       '[CloudPlatform'FullControl]
   requestClient
     DataFusionProjectsLocationsInstancesDnsPeeringsCreate {..} =

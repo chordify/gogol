@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AlertCenter.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AlertCenter.Internal.Sum
@@ -30,6 +28,25 @@ module Gogol.AlertCenter.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * AbuseDetected_VariationType
+    AbuseDetected_VariationType
+      ( AbuseDetected_VariationType_ABUSEDETECTEDVARIATIONTYPEUNSPECIFIED,
+        AbuseDetected_VariationType_DRIVEABUSIVECONTENT,
+        AbuseDetected_VariationType_LIMITEDDISABLE,
+        ..
+      ),
+
+    -- * AccessApproval_JustificationReasonItem
+    AccessApproval_JustificationReasonItem
+      ( AccessApproval_JustificationReasonItem_JUSTIFICATIONUNSPECIFIED,
+        AccessApproval_JustificationReasonItem_CUSTOMERINITIATEDSUPPORT,
+        AccessApproval_JustificationReasonItem_GOOGLEINITIATEDREVIEW,
+        AccessApproval_JustificationReasonItem_GOOGLEINITIATEDSERVICE,
+        AccessApproval_JustificationReasonItem_THIRDPARTYDATAREQUEST,
+        AccessApproval_JustificationReasonItem_GOOGLERESPONSETOPRODUCTIONALERT,
         ..
       ),
 
@@ -98,6 +115,16 @@ module Gogol.AlertCenter.Internal.Sum
     RuleViolationInfo_DataSource
       ( RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED,
         RuleViolationInfo_DataSource_Drive,
+        RuleViolationInfo_DataSource_Chrome,
+        RuleViolationInfo_DataSource_Chat,
+        ..
+      ),
+
+    -- * RuleViolationInfo_EventType
+    RuleViolationInfo_EventType
+      ( RuleViolationInfo_EventType_EVENTTYPEUNSPECIFIED,
+        RuleViolationInfo_EventType_ACCESSBLOCKED,
+        RuleViolationInfo_EventType_SHARINGBLOCKED,
         ..
       ),
 
@@ -106,7 +133,22 @@ module Gogol.AlertCenter.Internal.Sum
       ( RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+        RuleViolationInfo_SuppressedActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY,
+        RuleViolationInfo_SuppressedActionTypesItem_DRIVEAPPLYDRIVELABELS,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEDOWNLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEDOWNLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEUPLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEUPLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKPAGEPRINT,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNPAGEPRINT,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKURLVISITED,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNURLVISITED,
+        RuleViolationInfo_SuppressedActionTypesItem_CHROMESTORECONTENT,
         RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE,
+        RuleViolationInfo_SuppressedActionTypesItem_CHATBLOCKCONTENT,
+        RuleViolationInfo_SuppressedActionTypesItem_CHATWARNUSER,
         RuleViolationInfo_SuppressedActionTypesItem_Alert,
         RuleViolationInfo_SuppressedActionTypesItem_RULEACTIVATE,
         RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE,
@@ -117,6 +159,13 @@ module Gogol.AlertCenter.Internal.Sum
     RuleViolationInfo_Trigger
       ( RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED,
         RuleViolationInfo_Trigger_DRIVESHARE,
+        RuleViolationInfo_Trigger_CHROMEFILEDOWNLOAD,
+        RuleViolationInfo_Trigger_CHROMEFILEUPLOAD,
+        RuleViolationInfo_Trigger_CHROMEWEBCONTENTUPLOAD,
+        RuleViolationInfo_Trigger_CHATMESSAGESENT,
+        RuleViolationInfo_Trigger_CHATATTACHMENTUPLOADED,
+        RuleViolationInfo_Trigger_CHROMEPAGEPRINT,
+        RuleViolationInfo_Trigger_CHROMEURLVISITED,
         ..
       ),
 
@@ -125,7 +174,22 @@ module Gogol.AlertCenter.Internal.Sum
       ( RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
         RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+        RuleViolationInfo_TriggeredActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY,
+        RuleViolationInfo_TriggeredActionTypesItem_DRIVEAPPLYDRIVELABELS,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEDOWNLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEDOWNLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEUPLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEUPLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKPAGEPRINT,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNPAGEPRINT,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKURLVISITED,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNURLVISITED,
+        RuleViolationInfo_TriggeredActionTypesItem_CHROMESTORECONTENT,
         RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE,
+        RuleViolationInfo_TriggeredActionTypesItem_CHATBLOCKCONTENT,
+        RuleViolationInfo_TriggeredActionTypesItem_CHATWARNUSER,
         RuleViolationInfo_TriggeredActionTypesItem_Alert,
         RuleViolationInfo_TriggeredActionTypesItem_RULEACTIVATE,
         RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,
@@ -169,7 +233,7 @@ module Gogol.AlertCenter.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -196,6 +260,84 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Variation of AbuseDetected alerts. The variation/type determines the texts displayed the alert details. This differs from sub/alert/id because each sub alert can have multiple variation/types, representing different stages of the alert.
+newtype AbuseDetected_VariationType = AbuseDetected_VariationType {fromAbuseDetected_VariationType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | AbuseDetected alert variation type unspecified. No alert should be unspecified.
+pattern AbuseDetected_VariationType_ABUSEDETECTEDVARIATIONTYPEUNSPECIFIED :: AbuseDetected_VariationType
+pattern AbuseDetected_VariationType_ABUSEDETECTEDVARIATIONTYPEUNSPECIFIED = AbuseDetected_VariationType "ABUSE_DETECTED_VARIATION_TYPE_UNSPECIFIED"
+
+-- | Variation displayed for Drive abusive content alerts.
+pattern AbuseDetected_VariationType_DRIVEABUSIVECONTENT :: AbuseDetected_VariationType
+pattern AbuseDetected_VariationType_DRIVEABUSIVECONTENT = AbuseDetected_VariationType "DRIVE_ABUSIVE_CONTENT"
+
+-- | Variation displayed for Limited Disable alerts, when a Google service is disabled for a user, totally or partially, due to the user\'s abusive behavior.
+pattern AbuseDetected_VariationType_LIMITEDDISABLE :: AbuseDetected_VariationType
+pattern AbuseDetected_VariationType_LIMITEDDISABLE = AbuseDetected_VariationType "LIMITED_DISABLE"
+
+{-# COMPLETE
+  AbuseDetected_VariationType_ABUSEDETECTEDVARIATIONTYPEUNSPECIFIED,
+  AbuseDetected_VariationType_DRIVEABUSIVECONTENT,
+  AbuseDetected_VariationType_LIMITEDDISABLE,
+  AbuseDetected_VariationType
+  #-}
+
+newtype AccessApproval_JustificationReasonItem = AccessApproval_JustificationReasonItem {fromAccessApproval_JustificationReasonItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Justification unspecified
+pattern AccessApproval_JustificationReasonItem_JUSTIFICATIONUNSPECIFIED :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_JUSTIFICATIONUNSPECIFIED = AccessApproval_JustificationReasonItem "JUSTIFICATION_UNSPECIFIED"
+
+-- | Customer Initiated Support
+pattern AccessApproval_JustificationReasonItem_CUSTOMERINITIATEDSUPPORT :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_CUSTOMERINITIATEDSUPPORT = AccessApproval_JustificationReasonItem "CUSTOMER_INITIATED_SUPPORT"
+
+-- | Google Initiated Review
+pattern AccessApproval_JustificationReasonItem_GOOGLEINITIATEDREVIEW :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_GOOGLEINITIATEDREVIEW = AccessApproval_JustificationReasonItem "GOOGLE_INITIATED_REVIEW"
+
+-- | Google Initiated Service
+pattern AccessApproval_JustificationReasonItem_GOOGLEINITIATEDSERVICE :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_GOOGLEINITIATEDSERVICE = AccessApproval_JustificationReasonItem "GOOGLE_INITIATED_SERVICE"
+
+-- | Third Party Data Request
+pattern AccessApproval_JustificationReasonItem_THIRDPARTYDATAREQUEST :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_THIRDPARTYDATAREQUEST = AccessApproval_JustificationReasonItem "THIRD_PARTY_DATA_REQUEST"
+
+-- | Google Response to Production Alert
+pattern AccessApproval_JustificationReasonItem_GOOGLERESPONSETOPRODUCTIONALERT :: AccessApproval_JustificationReasonItem
+pattern AccessApproval_JustificationReasonItem_GOOGLERESPONSETOPRODUCTIONALERT = AccessApproval_JustificationReasonItem "GOOGLE_RESPONSE_TO_PRODUCTION_ALERT"
+
+{-# COMPLETE
+  AccessApproval_JustificationReasonItem_JUSTIFICATIONUNSPECIFIED,
+  AccessApproval_JustificationReasonItem_CUSTOMERINITIATEDSUPPORT,
+  AccessApproval_JustificationReasonItem_GOOGLEINITIATEDREVIEW,
+  AccessApproval_JustificationReasonItem_GOOGLEINITIATEDSERVICE,
+  AccessApproval_JustificationReasonItem_THIRDPARTYDATAREQUEST,
+  AccessApproval_JustificationReasonItem_GOOGLERESPONSETOPRODUCTIONALERT,
+  AccessApproval_JustificationReasonItem
   #-}
 
 -- | The reason why this account is receiving an account suspension warning.
@@ -476,10 +618,52 @@ pattern RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED = RuleViolationInfo_D
 pattern RuleViolationInfo_DataSource_Drive :: RuleViolationInfo_DataSource
 pattern RuleViolationInfo_DataSource_Drive = RuleViolationInfo_DataSource "DRIVE"
 
+-- | Chrome data source.
+pattern RuleViolationInfo_DataSource_Chrome :: RuleViolationInfo_DataSource
+pattern RuleViolationInfo_DataSource_Chrome = RuleViolationInfo_DataSource "CHROME"
+
+-- | Chat data source.
+pattern RuleViolationInfo_DataSource_Chat :: RuleViolationInfo_DataSource
+pattern RuleViolationInfo_DataSource_Chat = RuleViolationInfo_DataSource "CHAT"
+
 {-# COMPLETE
   RuleViolationInfo_DataSource_DATASOURCEUNSPECIFIED,
   RuleViolationInfo_DataSource_Drive,
+  RuleViolationInfo_DataSource_Chrome,
+  RuleViolationInfo_DataSource_Chat,
   RuleViolationInfo_DataSource
+  #-}
+
+-- | Event associated with this alert after applying the rule.
+newtype RuleViolationInfo_EventType = RuleViolationInfo_EventType {fromRuleViolationInfo_EventType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Event type wasn\'t set.
+pattern RuleViolationInfo_EventType_EVENTTYPEUNSPECIFIED :: RuleViolationInfo_EventType
+pattern RuleViolationInfo_EventType_EVENTTYPEUNSPECIFIED = RuleViolationInfo_EventType "EVENT_TYPE_UNSPECIFIED"
+
+-- | An access attempt was blocked.
+pattern RuleViolationInfo_EventType_ACCESSBLOCKED :: RuleViolationInfo_EventType
+pattern RuleViolationInfo_EventType_ACCESSBLOCKED = RuleViolationInfo_EventType "ACCESS_BLOCKED"
+
+-- | A sharing attempt was blocked.
+pattern RuleViolationInfo_EventType_SHARINGBLOCKED :: RuleViolationInfo_EventType
+pattern RuleViolationInfo_EventType_SHARINGBLOCKED = RuleViolationInfo_EventType "SHARING_BLOCKED"
+
+{-# COMPLETE
+  RuleViolationInfo_EventType_EVENTTYPEUNSPECIFIED,
+  RuleViolationInfo_EventType_ACCESSBLOCKED,
+  RuleViolationInfo_EventType_SHARINGBLOCKED,
+  RuleViolationInfo_EventType
   #-}
 
 newtype RuleViolationInfo_SuppressedActionTypesItem = RuleViolationInfo_SuppressedActionTypesItem {fromRuleViolationInfo_SuppressedActionTypesItem :: Core.Text}
@@ -506,9 +690,69 @@ pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING = 
 pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING :: RuleViolationInfo_SuppressedActionTypesItem
 pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING = RuleViolationInfo_SuppressedActionTypesItem "DRIVE_WARN_ON_EXTERNAL_SHARING"
 
+-- | Disable download, print, and copy for commenters and viewers in drive.
+pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY = RuleViolationInfo_SuppressedActionTypesItem "DRIVE_RESTRICT_DOWNLOAD_PRINT_COPY"
+
+-- | Apply customer specified Drive labels to the file.
+pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEAPPLYDRIVELABELS :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_DRIVEAPPLYDRIVELABELS = RuleViolationInfo_SuppressedActionTypesItem "DRIVE_APPLY_DRIVE_LABELS"
+
+-- | Chrome actions. Block file download.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEDOWNLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEDOWNLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_BLOCK_FILE_DOWNLOAD"
+
+-- | Warn user about downloaded file.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEDOWNLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEDOWNLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_WARN_FILE_DOWNLOAD"
+
+-- | Block file upload.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEUPLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEUPLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_BLOCK_FILE_UPLOAD"
+
+-- | Warn user about uploaded file.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEUPLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEUPLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_WARN_FILE_UPLOAD"
+
+-- | Block web content upload.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_BLOCK_WEB_CONTENT_UPLOAD"
+
+-- | Warn user about uploaded web content.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD = RuleViolationInfo_SuppressedActionTypesItem "CHROME_WARN_WEB_CONTENT_UPLOAD"
+
+-- | Block page print.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKPAGEPRINT :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKPAGEPRINT = RuleViolationInfo_SuppressedActionTypesItem "CHROME_BLOCK_PAGE_PRINT"
+
+-- | Warn user about printed page.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNPAGEPRINT :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNPAGEPRINT = RuleViolationInfo_SuppressedActionTypesItem "CHROME_WARN_PAGE_PRINT"
+
+-- | Block Chrome URL visit.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKURLVISITED :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKURLVISITED = RuleViolationInfo_SuppressedActionTypesItem "CHROME_BLOCK_URL_VISITED"
+
+-- | Warn user about Chrome URL visited.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNURLVISITED :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNURLVISITED = RuleViolationInfo_SuppressedActionTypesItem "CHROME_WARN_URL_VISITED"
+
+-- | Store the content that violated the rule.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMESTORECONTENT :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHROMESTORECONTENT = RuleViolationInfo_SuppressedActionTypesItem "CHROME_STORE_CONTENT"
+
 -- | Delete web protect evidence file
 pattern RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE :: RuleViolationInfo_SuppressedActionTypesItem
 pattern RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE = RuleViolationInfo_SuppressedActionTypesItem "DELETE_WEBPROTECT_EVIDENCE"
+
+-- | Chat actions. Block Chat content to be sent out.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHATBLOCKCONTENT :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHATBLOCKCONTENT = RuleViolationInfo_SuppressedActionTypesItem "CHAT_BLOCK_CONTENT"
+
+-- | Warn end user about Chat content.
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHATWARNUSER :: RuleViolationInfo_SuppressedActionTypesItem
+pattern RuleViolationInfo_SuppressedActionTypesItem_CHATWARNUSER = RuleViolationInfo_SuppressedActionTypesItem "CHAT_WARN_USER"
 
 -- | Send alert.
 pattern RuleViolationInfo_SuppressedActionTypesItem_Alert :: RuleViolationInfo_SuppressedActionTypesItem
@@ -526,7 +770,22 @@ pattern RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE = RuleViolati
   RuleViolationInfo_SuppressedActionTypesItem_ACTIONTYPEUNSPECIFIED,
   RuleViolationInfo_SuppressedActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
   RuleViolationInfo_SuppressedActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+  RuleViolationInfo_SuppressedActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY,
+  RuleViolationInfo_SuppressedActionTypesItem_DRIVEAPPLYDRIVELABELS,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEDOWNLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEDOWNLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKFILEUPLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNFILEUPLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKPAGEPRINT,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNPAGEPRINT,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEBLOCKURLVISITED,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMEWARNURLVISITED,
+  RuleViolationInfo_SuppressedActionTypesItem_CHROMESTORECONTENT,
   RuleViolationInfo_SuppressedActionTypesItem_DELETEWEBPROTECTEVIDENCE,
+  RuleViolationInfo_SuppressedActionTypesItem_CHATBLOCKCONTENT,
+  RuleViolationInfo_SuppressedActionTypesItem_CHATWARNUSER,
   RuleViolationInfo_SuppressedActionTypesItem_Alert,
   RuleViolationInfo_SuppressedActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_SuppressedActionTypesItem_RULEDEACTIVATE,
@@ -554,9 +813,44 @@ pattern RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED = RuleViolationInfo_Trigger
 pattern RuleViolationInfo_Trigger_DRIVESHARE :: RuleViolationInfo_Trigger
 pattern RuleViolationInfo_Trigger_DRIVESHARE = RuleViolationInfo_Trigger "DRIVE_SHARE"
 
+-- | A file being downloaded in a Chrome browser.
+pattern RuleViolationInfo_Trigger_CHROMEFILEDOWNLOAD :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHROMEFILEDOWNLOAD = RuleViolationInfo_Trigger "CHROME_FILE_DOWNLOAD"
+
+-- | A file being uploaded from a Chrome browser.
+pattern RuleViolationInfo_Trigger_CHROMEFILEUPLOAD :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHROMEFILEUPLOAD = RuleViolationInfo_Trigger "CHROME_FILE_UPLOAD"
+
+-- | Web content being uploaded from a Chrome browser.
+pattern RuleViolationInfo_Trigger_CHROMEWEBCONTENTUPLOAD :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHROMEWEBCONTENTUPLOAD = RuleViolationInfo_Trigger "CHROME_WEB_CONTENT_UPLOAD"
+
+-- | A Chat message is sent.
+pattern RuleViolationInfo_Trigger_CHATMESSAGESENT :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHATMESSAGESENT = RuleViolationInfo_Trigger "CHAT_MESSAGE_SENT"
+
+-- | A Chat attachment is uploaded.
+pattern RuleViolationInfo_Trigger_CHATATTACHMENTUPLOADED :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHATATTACHMENTUPLOADED = RuleViolationInfo_Trigger "CHAT_ATTACHMENT_UPLOADED"
+
+-- | A page is being printed by Chrome.
+pattern RuleViolationInfo_Trigger_CHROMEPAGEPRINT :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHROMEPAGEPRINT = RuleViolationInfo_Trigger "CHROME_PAGE_PRINT"
+
+-- | A URL is visited within Chrome.
+pattern RuleViolationInfo_Trigger_CHROMEURLVISITED :: RuleViolationInfo_Trigger
+pattern RuleViolationInfo_Trigger_CHROMEURLVISITED = RuleViolationInfo_Trigger "CHROME_URL_VISITED"
+
 {-# COMPLETE
   RuleViolationInfo_Trigger_TRIGGERUNSPECIFIED,
   RuleViolationInfo_Trigger_DRIVESHARE,
+  RuleViolationInfo_Trigger_CHROMEFILEDOWNLOAD,
+  RuleViolationInfo_Trigger_CHROMEFILEUPLOAD,
+  RuleViolationInfo_Trigger_CHROMEWEBCONTENTUPLOAD,
+  RuleViolationInfo_Trigger_CHATMESSAGESENT,
+  RuleViolationInfo_Trigger_CHATATTACHMENTUPLOADED,
+  RuleViolationInfo_Trigger_CHROMEPAGEPRINT,
+  RuleViolationInfo_Trigger_CHROMEURLVISITED,
   RuleViolationInfo_Trigger
   #-}
 
@@ -584,9 +878,69 @@ pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING = R
 pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING :: RuleViolationInfo_TriggeredActionTypesItem
 pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING = RuleViolationInfo_TriggeredActionTypesItem "DRIVE_WARN_ON_EXTERNAL_SHARING"
 
+-- | Disable download, print, and copy for commenters and viewers in drive.
+pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY = RuleViolationInfo_TriggeredActionTypesItem "DRIVE_RESTRICT_DOWNLOAD_PRINT_COPY"
+
+-- | Apply customer specified Drive labels to the file.
+pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEAPPLYDRIVELABELS :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_DRIVEAPPLYDRIVELABELS = RuleViolationInfo_TriggeredActionTypesItem "DRIVE_APPLY_DRIVE_LABELS"
+
+-- | Chrome actions. Block file download.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEDOWNLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEDOWNLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_BLOCK_FILE_DOWNLOAD"
+
+-- | Warn user about downloaded file.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEDOWNLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEDOWNLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_WARN_FILE_DOWNLOAD"
+
+-- | Block file upload.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEUPLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEUPLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_BLOCK_FILE_UPLOAD"
+
+-- | Warn user about uploaded file.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEUPLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEUPLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_WARN_FILE_UPLOAD"
+
+-- | Block web content upload.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_BLOCK_WEB_CONTENT_UPLOAD"
+
+-- | Warn user about uploaded web content.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD = RuleViolationInfo_TriggeredActionTypesItem "CHROME_WARN_WEB_CONTENT_UPLOAD"
+
+-- | Block page print.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKPAGEPRINT :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKPAGEPRINT = RuleViolationInfo_TriggeredActionTypesItem "CHROME_BLOCK_PAGE_PRINT"
+
+-- | Warn user about printed page.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNPAGEPRINT :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNPAGEPRINT = RuleViolationInfo_TriggeredActionTypesItem "CHROME_WARN_PAGE_PRINT"
+
+-- | Block Chrome URL visit.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKURLVISITED :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKURLVISITED = RuleViolationInfo_TriggeredActionTypesItem "CHROME_BLOCK_URL_VISITED"
+
+-- | Warn user about Chrome URL visited.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNURLVISITED :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNURLVISITED = RuleViolationInfo_TriggeredActionTypesItem "CHROME_WARN_URL_VISITED"
+
+-- | Store the content that violated the rule.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMESTORECONTENT :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHROMESTORECONTENT = RuleViolationInfo_TriggeredActionTypesItem "CHROME_STORE_CONTENT"
+
 -- | Delete web protect evidence file
 pattern RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE :: RuleViolationInfo_TriggeredActionTypesItem
 pattern RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE = RuleViolationInfo_TriggeredActionTypesItem "DELETE_WEBPROTECT_EVIDENCE"
+
+-- | Chat actions. Block Chat content to be sent out.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHATBLOCKCONTENT :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHATBLOCKCONTENT = RuleViolationInfo_TriggeredActionTypesItem "CHAT_BLOCK_CONTENT"
+
+-- | Warn end user about Chat content.
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHATWARNUSER :: RuleViolationInfo_TriggeredActionTypesItem
+pattern RuleViolationInfo_TriggeredActionTypesItem_CHATWARNUSER = RuleViolationInfo_TriggeredActionTypesItem "CHAT_WARN_USER"
 
 -- | Send alert.
 pattern RuleViolationInfo_TriggeredActionTypesItem_Alert :: RuleViolationInfo_TriggeredActionTypesItem
@@ -604,7 +958,22 @@ pattern RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE = RuleViolatio
   RuleViolationInfo_TriggeredActionTypesItem_ACTIONTYPEUNSPECIFIED,
   RuleViolationInfo_TriggeredActionTypesItem_DRIVEBLOCKEXTERNALSHARING,
   RuleViolationInfo_TriggeredActionTypesItem_DRIVEWARNONEXTERNALSHARING,
+  RuleViolationInfo_TriggeredActionTypesItem_DRIVERESTRICTDOWNLOADPRINTCOPY,
+  RuleViolationInfo_TriggeredActionTypesItem_DRIVEAPPLYDRIVELABELS,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEDOWNLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEDOWNLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKFILEUPLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNFILEUPLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKWEBCONTENTUPLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNWEBCONTENTUPLOAD,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKPAGEPRINT,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNPAGEPRINT,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEBLOCKURLVISITED,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMEWARNURLVISITED,
+  RuleViolationInfo_TriggeredActionTypesItem_CHROMESTORECONTENT,
   RuleViolationInfo_TriggeredActionTypesItem_DELETEWEBPROTECTEVIDENCE,
+  RuleViolationInfo_TriggeredActionTypesItem_CHATBLOCKCONTENT,
+  RuleViolationInfo_TriggeredActionTypesItem_CHATWARNUSER,
   RuleViolationInfo_TriggeredActionTypesItem_Alert,
   RuleViolationInfo_TriggeredActionTypesItem_RULEACTIVATE,
   RuleViolationInfo_TriggeredActionTypesItem_RULEDEACTIVATE,

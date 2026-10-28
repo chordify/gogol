@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Enables apps to fetch information and perform actions in Google Chat. Authentication is a prerequisite for using the Google Chat REST API.
+-- The Google Chat API lets you build Chat apps to integrate your services with Google Chat and manage Chat resources such as spaces, members, and messages.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference>
 module Gogol.Chat
@@ -34,14 +32,33 @@ module Gogol.Chat
     chatService,
 
     -- * OAuth Scopes
+    Chat'Admin'Delete,
+    Chat'Admin'Memberships,
+    Chat'Admin'Memberships'Readonly,
+    Chat'Admin'Spaces,
+    Chat'Admin'Spaces'Readonly,
+    Chat'App'Delete,
+    Chat'App'Memberships,
+    Chat'App'Spaces,
+    Chat'App'Spaces'Create,
     Chat'Bot,
+    Chat'Delete,
+    Chat'Import,
     Chat'Memberships,
+    Chat'Memberships'App,
     Chat'Memberships'Readonly,
     Chat'Messages,
     Chat'Messages'Create,
+    Chat'Messages'Reactions,
+    Chat'Messages'Reactions'Create,
+    Chat'Messages'Reactions'Readonly,
     Chat'Messages'Readonly,
     Chat'Spaces,
+    Chat'Spaces'Create,
     Chat'Spaces'Readonly,
+    Chat'Users'Readstate,
+    Chat'Users'Readstate'Readonly,
+    Chat'Users'Spacesettings,
 
     -- * Resources
 
@@ -49,6 +66,31 @@ module Gogol.Chat
     ChatMediaDownloadResource,
     ChatMediaDownload (..),
     newChatMediaDownload,
+
+    -- ** chat.media.upload
+    ChatMediaUploadResource,
+    ChatMediaUpload (..),
+    newChatMediaUpload,
+
+    -- ** chat.spaces.completeImport
+    ChatSpacesCompleteImportResource,
+    ChatSpacesCompleteImport (..),
+    newChatSpacesCompleteImport,
+
+    -- ** chat.spaces.create
+    ChatSpacesCreateResource,
+    ChatSpacesCreate (..),
+    newChatSpacesCreate,
+
+    -- ** chat.spaces.delete
+    ChatSpacesDeleteResource,
+    ChatSpacesDelete (..),
+    newChatSpacesDelete,
+
+    -- ** chat.spaces.findDirectMessage
+    ChatSpacesFindDirectMessageResource,
+    ChatSpacesFindDirectMessage (..),
+    newChatSpacesFindDirectMessage,
 
     -- ** chat.spaces.get
     ChatSpacesGetResource,
@@ -60,6 +102,16 @@ module Gogol.Chat
     ChatSpacesList (..),
     newChatSpacesList,
 
+    -- ** chat.spaces.members.create
+    ChatSpacesMembersCreateResource,
+    ChatSpacesMembersCreate (..),
+    newChatSpacesMembersCreate,
+
+    -- ** chat.spaces.members.delete
+    ChatSpacesMembersDeleteResource,
+    ChatSpacesMembersDelete (..),
+    newChatSpacesMembersDelete,
+
     -- ** chat.spaces.members.get
     ChatSpacesMembersGetResource,
     ChatSpacesMembersGet (..),
@@ -69,6 +121,11 @@ module Gogol.Chat
     ChatSpacesMembersListResource,
     ChatSpacesMembersList (..),
     newChatSpacesMembersList,
+
+    -- ** chat.spaces.members.patch
+    ChatSpacesMembersPatchResource,
+    ChatSpacesMembersPatch (..),
+    newChatSpacesMembersPatch,
 
     -- ** chat.spaces.messages.attachments.get
     ChatSpacesMessagesAttachmentsGetResource,
@@ -90,20 +147,101 @@ module Gogol.Chat
     ChatSpacesMessagesGet (..),
     newChatSpacesMessagesGet,
 
+    -- ** chat.spaces.messages.list
+    ChatSpacesMessagesListResource,
+    ChatSpacesMessagesList (..),
+    newChatSpacesMessagesList,
+
     -- ** chat.spaces.messages.patch
     ChatSpacesMessagesPatchResource,
     ChatSpacesMessagesPatch (..),
     newChatSpacesMessagesPatch,
+
+    -- ** chat.spaces.messages.reactions.create
+    ChatSpacesMessagesReactionsCreateResource,
+    ChatSpacesMessagesReactionsCreate (..),
+    newChatSpacesMessagesReactionsCreate,
+
+    -- ** chat.spaces.messages.reactions.delete
+    ChatSpacesMessagesReactionsDeleteResource,
+    ChatSpacesMessagesReactionsDelete (..),
+    newChatSpacesMessagesReactionsDelete,
+
+    -- ** chat.spaces.messages.reactions.list
+    ChatSpacesMessagesReactionsListResource,
+    ChatSpacesMessagesReactionsList (..),
+    newChatSpacesMessagesReactionsList,
 
     -- ** chat.spaces.messages.update
     ChatSpacesMessagesUpdateResource,
     ChatSpacesMessagesUpdate (..),
     newChatSpacesMessagesUpdate,
 
+    -- ** chat.spaces.patch
+    ChatSpacesPatchResource,
+    ChatSpacesPatch (..),
+    newChatSpacesPatch,
+
+    -- ** chat.spaces.search
+    ChatSpacesSearchResource,
+    ChatSpacesSearch (..),
+    newChatSpacesSearch,
+
+    -- ** chat.spaces.setup
+    ChatSpacesSetupResource,
+    ChatSpacesSetup (..),
+    newChatSpacesSetup,
+
+    -- ** chat.spaces.spaceEvents.get
+    ChatSpacesSpaceEventsGetResource,
+    ChatSpacesSpaceEventsGet (..),
+    newChatSpacesSpaceEventsGet,
+
+    -- ** chat.spaces.spaceEvents.list
+    ChatSpacesSpaceEventsListResource,
+    ChatSpacesSpaceEventsList (..),
+    newChatSpacesSpaceEventsList,
+
+    -- ** chat.users.spaces.getSpaceReadState
+    ChatUsersSpacesGetSpaceReadStateResource,
+    ChatUsersSpacesGetSpaceReadState (..),
+    newChatUsersSpacesGetSpaceReadState,
+
+    -- ** chat.users.spaces.spaceNotificationSetting.get
+    ChatUsersSpacesSpaceNotificationSettingGetResource,
+    ChatUsersSpacesSpaceNotificationSettingGet (..),
+    newChatUsersSpacesSpaceNotificationSettingGet,
+
+    -- ** chat.users.spaces.spaceNotificationSetting.patch
+    ChatUsersSpacesSpaceNotificationSettingPatchResource,
+    ChatUsersSpacesSpaceNotificationSettingPatch (..),
+    newChatUsersSpacesSpaceNotificationSettingPatch,
+
+    -- ** chat.users.spaces.threads.getThreadReadState
+    ChatUsersSpacesThreadsGetThreadReadStateResource,
+    ChatUsersSpacesThreadsGetThreadReadState (..),
+    newChatUsersSpacesThreadsGetThreadReadState,
+
+    -- ** chat.users.spaces.updateSpaceReadState
+    ChatUsersSpacesUpdateSpaceReadStateResource,
+    ChatUsersSpacesUpdateSpaceReadState (..),
+    newChatUsersSpacesUpdateSpaceReadState,
+
     -- * Types
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
+
+    -- ** AccessSettings_AccessState
+    AccessSettings_AccessState (..),
+
+    -- ** AccessoryWidget
+    AccessoryWidget (..),
+    newAccessoryWidget,
 
     -- ** ActionParameter
     ActionParameter (..),
@@ -129,6 +267,17 @@ module Gogol.Chat
 
     -- ** Annotation_Type
     Annotation_Type (..),
+
+    -- ** AppCommandMetadata
+    AppCommandMetadata (..),
+    newAppCommandMetadata,
+
+    -- ** AppCommandMetadata_AppCommandType
+    AppCommandMetadata_AppCommandType (..),
+
+    -- ** AttachedGif
+    AttachedGif (..),
+    newAttachedGif,
 
     -- ** Attachment
     Attachment (..),
@@ -168,6 +317,14 @@ module Gogol.Chat
     ChatAppLogEntry (..),
     newChatAppLogEntry,
 
+    -- ** ChatClientDataSourceMarkup
+    ChatClientDataSourceMarkup (..),
+    newChatClientDataSourceMarkup,
+
+    -- ** ChatSpaceLinkData
+    ChatSpaceLinkData (..),
+    newChatSpaceLinkData,
+
     -- ** Color
     Color (..),
     newColor,
@@ -190,6 +347,22 @@ module Gogol.Chat
     -- ** CommonEventObject_Platform
     CommonEventObject_Platform (..),
 
+    -- ** CompleteImportSpaceRequest
+    CompleteImportSpaceRequest (..),
+    newCompleteImportSpaceRequest,
+
+    -- ** CompleteImportSpaceResponse
+    CompleteImportSpaceResponse (..),
+    newCompleteImportSpaceResponse,
+
+    -- ** CustomEmoji
+    CustomEmoji (..),
+    newCustomEmoji,
+
+    -- ** CustomEmojiMetadata
+    CustomEmojiMetadata (..),
+    newCustomEmojiMetadata,
+
     -- ** DateInput
     DateInput (..),
     newDateInput,
@@ -197,6 +370,13 @@ module Gogol.Chat
     -- ** DateTimeInput
     DateTimeInput (..),
     newDateTimeInput,
+
+    -- ** DeletionMetadata
+    DeletionMetadata (..),
+    newDeletionMetadata,
+
+    -- ** DeletionMetadata_DeletionType
+    DeletionMetadata_DeletionType (..),
 
     -- ** DeprecatedEvent
     DeprecatedEvent (..),
@@ -219,6 +399,18 @@ module Gogol.Chat
     -- ** DriveDataRef
     DriveDataRef (..),
     newDriveDataRef,
+
+    -- ** DriveLinkData
+    DriveLinkData (..),
+    newDriveLinkData,
+
+    -- ** Emoji
+    Emoji (..),
+    newEmoji,
+
+    -- ** EmojiReactionSummary
+    EmojiReactionSummary (..),
+    newEmojiReactionSummary,
 
     -- ** Empty
     Empty (..),
@@ -253,6 +445,9 @@ module Gogol.Chat
     GoogleAppsCardV1Button (..),
     newGoogleAppsCardV1Button,
 
+    -- ** GoogleAppsCardV1Button_Type
+    GoogleAppsCardV1Button_Type (..),
+
     -- ** GoogleAppsCardV1ButtonList
     GoogleAppsCardV1ButtonList (..),
     newGoogleAppsCardV1ButtonList,
@@ -263,6 +458,9 @@ module Gogol.Chat
 
     -- ** GoogleAppsCardV1Card_DisplayStyle
     GoogleAppsCardV1Card_DisplayStyle (..),
+
+    -- ** GoogleAppsCardV1Card_SectionDividerStyle
+    GoogleAppsCardV1Card_SectionDividerStyle (..),
 
     -- ** GoogleAppsCardV1CardAction
     GoogleAppsCardV1CardAction (..),
@@ -278,6 +476,49 @@ module Gogol.Chat
 
     -- ** GoogleAppsCardV1CardHeader_ImageType
     GoogleAppsCardV1CardHeader_ImageType (..),
+
+    -- ** GoogleAppsCardV1Carousel
+    GoogleAppsCardV1Carousel (..),
+    newGoogleAppsCardV1Carousel,
+
+    -- ** GoogleAppsCardV1CarouselCard
+    GoogleAppsCardV1CarouselCard (..),
+    newGoogleAppsCardV1CarouselCard,
+
+    -- ** GoogleAppsCardV1Chip
+    GoogleAppsCardV1Chip (..),
+    newGoogleAppsCardV1Chip,
+
+    -- ** GoogleAppsCardV1ChipList
+    GoogleAppsCardV1ChipList (..),
+    newGoogleAppsCardV1ChipList,
+
+    -- ** GoogleAppsCardV1ChipList_Layout
+    GoogleAppsCardV1ChipList_Layout (..),
+
+    -- ** GoogleAppsCardV1CollapseControl
+    GoogleAppsCardV1CollapseControl (..),
+    newGoogleAppsCardV1CollapseControl,
+
+    -- ** GoogleAppsCardV1CollapseControl_HorizontalAlignment
+    GoogleAppsCardV1CollapseControl_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Column
+    GoogleAppsCardV1Column (..),
+    newGoogleAppsCardV1Column,
+
+    -- ** GoogleAppsCardV1Column_HorizontalAlignment
+    GoogleAppsCardV1Column_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Column_HorizontalSizeStyle
+    GoogleAppsCardV1Column_HorizontalSizeStyle (..),
+
+    -- ** GoogleAppsCardV1Column_VerticalAlignment
+    GoogleAppsCardV1Column_VerticalAlignment (..),
+
+    -- ** GoogleAppsCardV1Columns
+    GoogleAppsCardV1Columns (..),
+    newGoogleAppsCardV1Columns,
 
     -- ** GoogleAppsCardV1DateTimePicker
     GoogleAppsCardV1DateTimePicker (..),
@@ -327,6 +568,14 @@ module Gogol.Chat
     -- ** GoogleAppsCardV1ImageCropStyle_Type
     GoogleAppsCardV1ImageCropStyle_Type (..),
 
+    -- ** GoogleAppsCardV1MaterialIcon
+    GoogleAppsCardV1MaterialIcon (..),
+    newGoogleAppsCardV1MaterialIcon,
+
+    -- ** GoogleAppsCardV1NestedWidget
+    GoogleAppsCardV1NestedWidget (..),
+    newGoogleAppsCardV1NestedWidget,
+
     -- ** GoogleAppsCardV1OnClick
     GoogleAppsCardV1OnClick (..),
     newGoogleAppsCardV1OnClick,
@@ -340,6 +589,21 @@ module Gogol.Chat
 
     -- ** GoogleAppsCardV1OpenLink_OpenAs
     GoogleAppsCardV1OpenLink_OpenAs (..),
+
+    -- ** GoogleAppsCardV1OverflowMenu
+    GoogleAppsCardV1OverflowMenu (..),
+    newGoogleAppsCardV1OverflowMenu,
+
+    -- ** GoogleAppsCardV1OverflowMenuItem
+    GoogleAppsCardV1OverflowMenuItem (..),
+    newGoogleAppsCardV1OverflowMenuItem,
+
+    -- ** GoogleAppsCardV1PlatformDataSource
+    GoogleAppsCardV1PlatformDataSource (..),
+    newGoogleAppsCardV1PlatformDataSource,
+
+    -- ** GoogleAppsCardV1PlatformDataSource_CommonDataSource
+    GoogleAppsCardV1PlatformDataSource_CommonDataSource (..),
 
     -- ** GoogleAppsCardV1Section
     GoogleAppsCardV1Section (..),
@@ -382,9 +646,31 @@ module Gogol.Chat
     GoogleAppsCardV1TextParagraph (..),
     newGoogleAppsCardV1TextParagraph,
 
+    -- ** GoogleAppsCardV1Validation
+    GoogleAppsCardV1Validation (..),
+    newGoogleAppsCardV1Validation,
+
+    -- ** GoogleAppsCardV1Validation_InputType
+    GoogleAppsCardV1Validation_InputType (..),
+
     -- ** GoogleAppsCardV1Widget
     GoogleAppsCardV1Widget (..),
     newGoogleAppsCardV1Widget,
+
+    -- ** GoogleAppsCardV1Widget_HorizontalAlignment
+    GoogleAppsCardV1Widget_HorizontalAlignment (..),
+
+    -- ** GoogleAppsCardV1Widgets
+    GoogleAppsCardV1Widgets (..),
+    newGoogleAppsCardV1Widgets,
+
+    -- ** Group
+    Group (..),
+    newGroup,
+
+    -- ** HostAppDataSourceMarkup
+    HostAppDataSourceMarkup (..),
+    newHostAppDataSourceMarkup,
 
     -- ** Image
     Image (..),
@@ -412,6 +698,18 @@ module Gogol.Chat
     ListMembershipsResponse (..),
     newListMembershipsResponse,
 
+    -- ** ListMessagesResponse
+    ListMessagesResponse (..),
+    newListMessagesResponse,
+
+    -- ** ListReactionsResponse
+    ListReactionsResponse (..),
+    newListReactionsResponse,
+
+    -- ** ListSpaceEventsResponse
+    ListSpaceEventsResponse (..),
+    newListSpaceEventsResponse,
+
     -- ** ListSpacesResponse
     ListSpacesResponse (..),
     newListSpacesResponse,
@@ -434,9 +732,61 @@ module Gogol.Chat
     -- ** Membership_State
     Membership_State (..),
 
+    -- ** MembershipBatchCreatedEventData
+    MembershipBatchCreatedEventData (..),
+    newMembershipBatchCreatedEventData,
+
+    -- ** MembershipBatchDeletedEventData
+    MembershipBatchDeletedEventData (..),
+    newMembershipBatchDeletedEventData,
+
+    -- ** MembershipBatchUpdatedEventData
+    MembershipBatchUpdatedEventData (..),
+    newMembershipBatchUpdatedEventData,
+
+    -- ** MembershipCount
+    MembershipCount (..),
+    newMembershipCount,
+
+    -- ** MembershipCreatedEventData
+    MembershipCreatedEventData (..),
+    newMembershipCreatedEventData,
+
+    -- ** MembershipDeletedEventData
+    MembershipDeletedEventData (..),
+    newMembershipDeletedEventData,
+
+    -- ** MembershipUpdatedEventData
+    MembershipUpdatedEventData (..),
+    newMembershipUpdatedEventData,
+
     -- ** Message
     Message (..),
     newMessage,
+
+    -- ** MessageBatchCreatedEventData
+    MessageBatchCreatedEventData (..),
+    newMessageBatchCreatedEventData,
+
+    -- ** MessageBatchDeletedEventData
+    MessageBatchDeletedEventData (..),
+    newMessageBatchDeletedEventData,
+
+    -- ** MessageBatchUpdatedEventData
+    MessageBatchUpdatedEventData (..),
+    newMessageBatchUpdatedEventData,
+
+    -- ** MessageCreatedEventData
+    MessageCreatedEventData (..),
+    newMessageCreatedEventData,
+
+    -- ** MessageDeletedEventData
+    MessageDeletedEventData (..),
+    newMessageDeletedEventData,
+
+    -- ** MessageUpdatedEventData
+    MessageUpdatedEventData (..),
+    newMessageUpdatedEventData,
 
     -- ** OnClick
     OnClick (..),
@@ -446,9 +796,60 @@ module Gogol.Chat
     OpenLink (..),
     newOpenLink,
 
+    -- ** PermissionSetting
+    PermissionSetting (..),
+    newPermissionSetting,
+
+    -- ** PermissionSettings
+    PermissionSettings (..),
+    newPermissionSettings,
+
+    -- ** QuotedMessageMetadata
+    QuotedMessageMetadata (..),
+    newQuotedMessageMetadata,
+
+    -- ** Reaction
+    Reaction (..),
+    newReaction,
+
+    -- ** ReactionBatchCreatedEventData
+    ReactionBatchCreatedEventData (..),
+    newReactionBatchCreatedEventData,
+
+    -- ** ReactionBatchDeletedEventData
+    ReactionBatchDeletedEventData (..),
+    newReactionBatchDeletedEventData,
+
+    -- ** ReactionCreatedEventData
+    ReactionCreatedEventData (..),
+    newReactionCreatedEventData,
+
+    -- ** ReactionDeletedEventData
+    ReactionDeletedEventData (..),
+    newReactionDeletedEventData,
+
+    -- ** RichLinkMetadata
+    RichLinkMetadata (..),
+    newRichLinkMetadata,
+
+    -- ** RichLinkMetadata_RichLinkType
+    RichLinkMetadata_RichLinkType (..),
+
+    -- ** SearchSpacesResponse
+    SearchSpacesResponse (..),
+    newSearchSpacesResponse,
+
     -- ** Section
     Section (..),
     newSection,
+
+    -- ** SelectionItems
+    SelectionItems (..),
+    newSelectionItems,
+
+    -- ** SetUpSpaceRequest
+    SetUpSpaceRequest (..),
+    newSetUpSpaceRequest,
 
     -- ** SlashCommand
     SlashCommand (..),
@@ -465,15 +866,54 @@ module Gogol.Chat
     Space (..),
     newSpace,
 
+    -- ** Space_PredefinedPermissionSettings
+    Space_PredefinedPermissionSettings (..),
+
+    -- ** Space_SpaceHistoryState
+    Space_SpaceHistoryState (..),
+
     -- ** Space_SpaceThreadingState
     Space_SpaceThreadingState (..),
+
+    -- ** Space_SpaceType
+    Space_SpaceType (..),
 
     -- ** Space_Type
     Space_Type (..),
 
+    -- ** SpaceBatchUpdatedEventData
+    SpaceBatchUpdatedEventData (..),
+    newSpaceBatchUpdatedEventData,
+
+    -- ** SpaceDataSource
+    SpaceDataSource (..),
+    newSpaceDataSource,
+
     -- ** SpaceDetails
     SpaceDetails (..),
     newSpaceDetails,
+
+    -- ** SpaceEvent
+    SpaceEvent (..),
+    newSpaceEvent,
+
+    -- ** SpaceNotificationSetting
+    SpaceNotificationSetting (..),
+    newSpaceNotificationSetting,
+
+    -- ** SpaceNotificationSetting_MuteSetting
+    SpaceNotificationSetting_MuteSetting (..),
+
+    -- ** SpaceNotificationSetting_NotificationSetting
+    SpaceNotificationSetting_NotificationSetting (..),
+
+    -- ** SpaceReadState
+    SpaceReadState (..),
+    newSpaceReadState,
+
+    -- ** SpaceUpdatedEventData
+    SpaceUpdatedEventData (..),
+    newSpaceUpdatedEventData,
 
     -- ** Status
     Status (..),
@@ -499,6 +939,10 @@ module Gogol.Chat
     Thread (..),
     newThread,
 
+    -- ** ThreadReadState
+    ThreadReadState (..),
+    newThreadReadState,
+
     -- ** TimeInput
     TimeInput (..),
     newTimeInput,
@@ -506,6 +950,18 @@ module Gogol.Chat
     -- ** TimeZone
     TimeZone (..),
     newTimeZone,
+
+    -- ** UpdatedWidget
+    UpdatedWidget (..),
+    newUpdatedWidget,
+
+    -- ** UploadAttachmentRequest
+    UploadAttachmentRequest (..),
+    newUploadAttachmentRequest,
+
+    -- ** UploadAttachmentResponse
+    UploadAttachmentResponse (..),
+    newUploadAttachmentResponse,
 
     -- ** User
     User (..),
@@ -531,14 +987,36 @@ module Gogol.Chat
 where
 
 import Gogol.Chat.Media.Download
+import Gogol.Chat.Media.Upload
+import Gogol.Chat.Spaces.CompleteImport
+import Gogol.Chat.Spaces.Create
+import Gogol.Chat.Spaces.Delete
+import Gogol.Chat.Spaces.FindDirectMessage
 import Gogol.Chat.Spaces.Get
 import Gogol.Chat.Spaces.List
+import Gogol.Chat.Spaces.Members.Create
+import Gogol.Chat.Spaces.Members.Delete
 import Gogol.Chat.Spaces.Members.Get
 import Gogol.Chat.Spaces.Members.List
+import Gogol.Chat.Spaces.Members.Patch
 import Gogol.Chat.Spaces.Messages.Attachments.Get
 import Gogol.Chat.Spaces.Messages.Create
 import Gogol.Chat.Spaces.Messages.Delete
 import Gogol.Chat.Spaces.Messages.Get
+import Gogol.Chat.Spaces.Messages.List
 import Gogol.Chat.Spaces.Messages.Patch
+import Gogol.Chat.Spaces.Messages.Reactions.Create
+import Gogol.Chat.Spaces.Messages.Reactions.Delete
+import Gogol.Chat.Spaces.Messages.Reactions.List
 import Gogol.Chat.Spaces.Messages.Update
+import Gogol.Chat.Spaces.Patch
+import Gogol.Chat.Spaces.Search
+import Gogol.Chat.Spaces.Setup
+import Gogol.Chat.Spaces.SpaceEvents.Get
+import Gogol.Chat.Spaces.SpaceEvents.List
 import Gogol.Chat.Types
+import Gogol.Chat.Users.Spaces.GetSpaceReadState
+import Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Get
+import Gogol.Chat.Users.Spaces.SpaceNotificationSetting.Patch
+import Gogol.Chat.Users.Spaces.Threads.GetThreadReadState
+import Gogol.Chat.Users.Spaces.UpdateSpaceReadState

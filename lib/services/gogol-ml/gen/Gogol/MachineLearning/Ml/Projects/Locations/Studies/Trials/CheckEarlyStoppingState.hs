@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.CheckEarlyStoppingState
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.CheckEarlyStop
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.locations.studies.trials.checkEarlyStoppingState@ method which the
 -- 'MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState' request conforms to.
 type MlProjectsLocationsStudiesTrialsCheckEarlyStoppingStateResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "name"
-              "checkEarlyStoppingState"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "checkEarlyStoppingState" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -89,28 +84,29 @@ newMlProjectsLocationsStudiesTrialsCheckEarlyStoppingState ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudMlV1__CheckTrialEarlyStoppingStateRequest ->
   MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState
-newMlProjectsLocationsStudiesTrialsCheckEarlyStoppingState name payload =
-  MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newMlProjectsLocationsStudiesTrialsCheckEarlyStoppingState
+  name
+  payload =
+    MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState
   where
   type
-    Rs
-      MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState =
+    Rs MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState =
       GoogleLongrunning__Operation
   type
-    Scopes
-      MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState =
+    Scopes MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState =
       '[CloudPlatform'FullControl]
   requestClient
     MlProjectsLocationsStudiesTrialsCheckEarlyStoppingState {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceBroker.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,29 +39,22 @@ module Gogol.ServiceBroker.TestIamPermissions
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceBroker.Types
 
 -- | A resource alias for @servicebroker.testIamPermissions@ method which the
 -- 'ServiceBrokerTestIamPermissions' request conforms to.
 type ServiceBrokerTestIamPermissionsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "testIamPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleIamV1__TestIamPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleIamV1__TestIamPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] GoogleIamV1__TestIamPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] GoogleIamV1__TestIamPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.
 --
@@ -106,10 +97,7 @@ newServiceBrokerTestIamPermissions payload resource =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ServiceBrokerTestIamPermissions
-  where
+instance Core.GoogleRequest ServiceBrokerTestIamPermissions where
   type
     Rs ServiceBrokerTestIamPermissions =
       GoogleIamV1__TestIamPermissionsResponse
@@ -130,7 +118,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ServiceBrokerTestIamPermissionsResource
-          )
+          (Core.Proxy :: Core.Proxy ServiceBrokerTestIamPermissionsResource)
           Core.mempty

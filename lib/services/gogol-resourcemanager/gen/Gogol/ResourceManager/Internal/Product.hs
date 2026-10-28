@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ResourceManager.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ResourceManager.Internal.Product
@@ -105,6 +103,10 @@ module Gogol.ResourceManager.Internal.Product
     -- * Folder
     Folder (..),
     newFolder,
+
+    -- * Folder_Tags
+    Folder_Tags (..),
+    newFolder_Tags,
 
     -- * FolderOperation
     FolderOperation (..),
@@ -202,6 +204,10 @@ module Gogol.ResourceManager.Internal.Product
     Project_Labels (..),
     newProject_Labels,
 
+    -- * Project_Tags
+    Project_Tags (..),
+    newProject_Tags,
+
     -- * ProjectCreationStatus
     ProjectCreationStatus (..),
     newProjectCreationStatus,
@@ -296,7 +302,7 @@ module Gogol.ResourceManager.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ResourceManager.Internal.Sum
 
 -- | Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs. If there are AuditConfigs for both @allServices@ and a specific service, the union of the two AuditConfigs is used for that service: the log/types specified in each AuditConfig are enabled, and the exempted/members in each AuditLogConfig are exempted. Example Policy with multiple AuditConfigs: { \"audit/configs\": [ { \"service\": \"allServices\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\", \"exempted/members\": [ \"user:jose\@example.com\" ] }, { \"log/type\": \"DATA/WRITE\" }, { \"log/type\": \"ADMIN/READ\" } ] }, { \"service\": \"sampleservice.googleapis.com\", \"audit/log/configs\": [ { \"log/type\": \"DATA/READ\" }, { \"log/type\": \"DATA/WRITE\", \"exempted/members\": [ \"user:aliya\@example.com\" ] } ] } ] } For sampleservice, this policy enables DATA/READ, DATA/WRITE and
@@ -315,7 +321,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -331,8 +340,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -352,7 +360,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -368,8 +379,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -381,10 +391,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -443,10 +455,14 @@ newCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation ::
   CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
 newCloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation =
   CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
-    { destinationParent = Core.Nothing,
-      displayName = Core.Nothing,
-      operationType = Core.Nothing,
-      sourceParent = Core.Nothing
+    { destinationParent =
+        Core.Nothing,
+      displayName =
+        Core.Nothing,
+      operationType =
+        Core.Nothing,
+      sourceParent =
+        Core.Nothing
     }
 
 instance
@@ -459,9 +475,9 @@ instance
       ( \o ->
           CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation
             Core.<$> (o Core..:? "destinationParent")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "operationType")
-              Core.<*> (o Core..:? "sourceParent")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "operationType")
+            Core.<*> (o Core..:? "sourceParent")
       )
 
 instance
@@ -472,8 +488,7 @@ instance
     CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation {..} =
       Core.object
         ( Core.catMaybes
-            [ ("destinationParent" Core..=)
-                Core.<$> destinationParent,
+            [ ("destinationParent" Core..=) Core.<$> destinationParent,
               ("displayName" Core..=) Core.<$> displayName,
               ("operationType" Core..=) Core.<$> operationType,
               ("sourceParent" Core..=) Core.<$> sourceParent
@@ -503,10 +518,13 @@ newCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation ::
   CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
 newCloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation =
   CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
-    { destinationParent = Core.Nothing,
+    { destinationParent =
+        Core.Nothing,
       displayName = Core.Nothing,
-      operationType = Core.Nothing,
-      sourceParent = Core.Nothing
+      operationType =
+        Core.Nothing,
+      sourceParent =
+        Core.Nothing
     }
 
 instance
@@ -519,9 +537,9 @@ instance
       ( \o ->
           CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation
             Core.<$> (o Core..:? "destinationParent")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "operationType")
-              Core.<*> (o Core..:? "sourceParent")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "operationType")
+            Core.<*> (o Core..:? "sourceParent")
       )
 
 instance
@@ -532,8 +550,7 @@ instance
     CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation {..} =
       Core.object
         ( Core.catMaybes
-            [ ("destinationParent" Core..=)
-                Core.<$> destinationParent,
+            [ ("destinationParent" Core..=) Core.<$> destinationParent,
               ("displayName" Core..=) Core.<$> displayName,
               ("operationType" Core..=) Core.<$> operationType,
               ("sourceParent" Core..=) Core.<$> sourceParent
@@ -555,7 +572,10 @@ data CreateFolderMetadata = CreateFolderMetadata
 newCreateFolderMetadata ::
   CreateFolderMetadata
 newCreateFolderMetadata =
-  CreateFolderMetadata {displayName = Core.Nothing, parent = Core.Nothing}
+  CreateFolderMetadata
+    { displayName = Core.Nothing,
+      parent = Core.Nothing
+    }
 
 instance Core.FromJSON CreateFolderMetadata where
   parseJSON =
@@ -806,13 +826,13 @@ instance Core.ToJSON DeleteTagValueMetadata where
 data EffectiveTag = EffectiveTag
   { -- | Indicates the inheritance status of a tag value attached to the given resource. If the tag value is inherited from one of the resource\'s ancestors, inherited will be true. If false, then the tag value is directly attached to the resource, inherited will be false.
     inherited :: (Core.Maybe Core.Bool),
-    -- | The namespaced_name of the TagKey. Now only supported in the format of @{organization_id}\/{tag_key_short_name}@. Other formats will be supported when we add non-org parented tags.
+    -- | The namespaced name of the TagKey. Can be in the form @{organization_id}\/{tag_key_short_name}@ or @{project_id}\/{tag_key_short_name}@ or @{project_number}\/{tag_key_short_name}@.
     namespacedTagKey :: (Core.Maybe Core.Text),
-    -- | Namespaced name of the TagValue. Now only supported in the format @{organization_id}\/{tag_key_short_name}\/{tag_value_short_name}@. Other formats will be supported when we add non-org parented tags.
+    -- | The namespaced name of the TagValue. Can be in the form @{organization_id}\/{tag_key_short_name}\/{tag_value_short_name}@ or @{project_id}\/{tag_key_short_name}\/{tag_value_short_name}@ or @{project_number}\/{tag_key_short_name}\/{tag_value_short_name}@.
     namespacedTagValue :: (Core.Maybe Core.Text),
     -- | The name of the TagKey, in the format @tagKeys\/{id}@, such as @tagKeys\/123@.
     tagKey :: (Core.Maybe Core.Text),
-    -- | The parent name of the tag key. Must be in the format @organizations\/{organization_id}@.
+    -- | The parent name of the tag key. Must be in the format @organizations\/{organization_id}@ or @projects\/{project_number}@
     tagKeyParentName :: (Core.Maybe Core.Text),
     -- | Resource name for TagValue in the format @tagValues\/456@.
     tagValue :: (Core.Maybe Core.Text)
@@ -851,13 +871,10 @@ instance Core.ToJSON EffectiveTag where
     Core.object
       ( Core.catMaybes
           [ ("inherited" Core..=) Core.<$> inherited,
-            ("namespacedTagKey" Core..=)
-              Core.<$> namespacedTagKey,
-            ("namespacedTagValue" Core..=)
-              Core.<$> namespacedTagValue,
+            ("namespacedTagKey" Core..=) Core.<$> namespacedTagKey,
+            ("namespacedTagValue" Core..=) Core.<$> namespacedTagValue,
             ("tagKey" Core..=) Core.<$> tagKey,
-            ("tagKeyParentName" Core..=)
-              Core.<$> tagKeyParentName,
+            ("tagKeyParentName" Core..=) Core.<$> tagKeyParentName,
             ("tagValue" Core..=) Core.<$> tagValue
           ]
       )
@@ -874,8 +891,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -948,6 +964,8 @@ data Folder = Folder
     parent :: (Core.Maybe Core.Text),
     -- | Output only. The lifecycle state of the folder. Updates to the state must be performed using DeleteFolder and UndeleteFolder.
     state :: (Core.Maybe Folder_State),
+    -- | Optional. Input only. Immutable. Tag keys\/values directly bound to this folder. Each item in the map must be expressed as \" : \". For example: \"123\/environment\" : \"production\", \"123\/costCenter\" : \"marketing\" Note: Currently this field is in Preview.
+    tags :: (Core.Maybe Folder_Tags),
     -- | Output only. Timestamp when the folder was last modified.
     updateTime :: (Core.Maybe Core.DateTime)
   }
@@ -965,6 +983,7 @@ newFolder =
       name = Core.Nothing,
       parent = Core.Nothing,
       state = Core.Nothing,
+      tags = Core.Nothing,
       updateTime = Core.Nothing
     }
 
@@ -981,6 +1000,7 @@ instance Core.FromJSON Folder where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -995,9 +1015,34 @@ instance Core.ToJSON Folder where
             ("name" Core..=) Core.<$> name,
             ("parent" Core..=) Core.<$> parent,
             ("state" Core..=) Core.<$> state,
+            ("tags" Core..=) Core.<$> tags,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
+
+-- | Optional. Input only. Immutable. Tag keys\/values directly bound to this folder. Each item in the map must be expressed as \" : \". For example: \"123\/environment\" : \"production\", \"123\/costCenter\" : \"marketing\" Note: Currently this field is in Preview.
+--
+-- /See:/ 'newFolder_Tags' smart constructor.
+newtype Folder_Tags = Folder_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Folder_Tags' with the minimum fields required to make a request.
+newFolder_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Folder_Tags
+newFolder_Tags additional = Folder_Tags {additional = additional}
+
+instance Core.FromJSON Folder_Tags where
+  parseJSON =
+    Core.withObject
+      "Folder_Tags"
+      (\o -> Folder_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Folder_Tags where
+  toJSON Folder_Tags {..} = Core.toJSON additional
 
 -- | Metadata describing a long running folder operation
 --
@@ -1041,8 +1086,7 @@ instance Core.ToJSON FolderOperation where
   toJSON FolderOperation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destinationParent" Core..=)
-              Core.<$> destinationParent,
+          [ ("destinationParent" Core..=) Core.<$> destinationParent,
             ("displayName" Core..=) Core.<$> displayName,
             ("operationType" Core..=) Core.<$> operationType,
             ("sourceParent" Core..=) Core.<$> sourceParent
@@ -1061,15 +1105,15 @@ newtype FolderOperationError = FolderOperationError
 -- | Creates a value of 'FolderOperationError' with the minimum fields required to make a request.
 newFolderOperationError ::
   FolderOperationError
-newFolderOperationError = FolderOperationError {errorMessageId = Core.Nothing}
+newFolderOperationError =
+  FolderOperationError {errorMessageId = Core.Nothing}
 
 instance Core.FromJSON FolderOperationError where
   parseJSON =
     Core.withObject
       "FolderOperationError"
       ( \o ->
-          FolderOperationError
-            Core.<$> (o Core..:? "errorMessageId")
+          FolderOperationError Core.<$> (o Core..:? "errorMessageId")
       )
 
 instance Core.ToJSON FolderOperationError where
@@ -1091,22 +1135,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -1120,15 +1161,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -1253,7 +1294,10 @@ data ListFoldersResponse = ListFoldersResponse
 newListFoldersResponse ::
   ListFoldersResponse
 newListFoldersResponse =
-  ListFoldersResponse {folders = Core.Nothing, nextPageToken = Core.Nothing}
+  ListFoldersResponse
+    { folders = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListFoldersResponse where
   parseJSON =
@@ -1289,7 +1333,10 @@ data ListLiensResponse = ListLiensResponse
 newListLiensResponse ::
   ListLiensResponse
 newListLiensResponse =
-  ListLiensResponse {liens = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLiensResponse
+    { liens = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLiensResponse where
   parseJSON =
@@ -1325,7 +1372,10 @@ data ListProjectsResponse = ListProjectsResponse
 newListProjectsResponse ::
   ListProjectsResponse
 newListProjectsResponse =
-  ListProjectsResponse {nextPageToken = Core.Nothing, projects = Core.Nothing}
+  ListProjectsResponse
+    { nextPageToken = Core.Nothing,
+      projects = Core.Nothing
+    }
 
 instance Core.FromJSON ListProjectsResponse where
   parseJSON =
@@ -1400,7 +1450,10 @@ data ListTagHoldsResponse = ListTagHoldsResponse
 newListTagHoldsResponse ::
   ListTagHoldsResponse
 newListTagHoldsResponse =
-  ListTagHoldsResponse {nextPageToken = Core.Nothing, tagHolds = Core.Nothing}
+  ListTagHoldsResponse
+    { nextPageToken = Core.Nothing,
+      tagHolds = Core.Nothing
+    }
 
 instance Core.FromJSON ListTagHoldsResponse where
   parseJSON =
@@ -1436,7 +1489,10 @@ data ListTagKeysResponse = ListTagKeysResponse
 newListTagKeysResponse ::
   ListTagKeysResponse
 newListTagKeysResponse =
-  ListTagKeysResponse {nextPageToken = Core.Nothing, tagKeys = Core.Nothing}
+  ListTagKeysResponse
+    { nextPageToken = Core.Nothing,
+      tagKeys = Core.Nothing
+    }
 
 instance Core.FromJSON ListTagKeysResponse where
   parseJSON =
@@ -1472,7 +1528,10 @@ data ListTagValuesResponse = ListTagValuesResponse
 newListTagValuesResponse ::
   ListTagValuesResponse
 newListTagValuesResponse =
-  ListTagValuesResponse {nextPageToken = Core.Nothing, tagValues = Core.Nothing}
+  ListTagValuesResponse
+    { nextPageToken = Core.Nothing,
+      tagValues = Core.Nothing
+    }
 
 instance Core.FromJSON ListTagValuesResponse where
   parseJSON =
@@ -1531,8 +1590,7 @@ instance Core.ToJSON MoveFolderMetadata where
   toJSON MoveFolderMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destinationParent" Core..=)
-              Core.<$> destinationParent,
+          [ ("destinationParent" Core..=) Core.<$> destinationParent,
             ("displayName" Core..=) Core.<$> displayName,
             ("sourceParent" Core..=) Core.<$> sourceParent
           ]
@@ -1550,24 +1608,22 @@ newtype MoveFolderRequest = MoveFolderRequest
 -- | Creates a value of 'MoveFolderRequest' with the minimum fields required to make a request.
 newMoveFolderRequest ::
   MoveFolderRequest
-newMoveFolderRequest = MoveFolderRequest {destinationParent = Core.Nothing}
+newMoveFolderRequest =
+  MoveFolderRequest {destinationParent = Core.Nothing}
 
 instance Core.FromJSON MoveFolderRequest where
   parseJSON =
     Core.withObject
       "MoveFolderRequest"
       ( \o ->
-          MoveFolderRequest
-            Core.<$> (o Core..:? "destinationParent")
+          MoveFolderRequest Core.<$> (o Core..:? "destinationParent")
       )
 
 instance Core.ToJSON MoveFolderRequest where
   toJSON MoveFolderRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destinationParent" Core..=)
-              Core.<$> destinationParent
-          ]
+          [("destinationParent" Core..=) Core.<$> destinationParent]
       )
 
 -- | A status object which is used as the @metadata@ field for the Operation returned by MoveProject.
@@ -1602,24 +1658,22 @@ newtype MoveProjectRequest = MoveProjectRequest
 -- | Creates a value of 'MoveProjectRequest' with the minimum fields required to make a request.
 newMoveProjectRequest ::
   MoveProjectRequest
-newMoveProjectRequest = MoveProjectRequest {destinationParent = Core.Nothing}
+newMoveProjectRequest =
+  MoveProjectRequest {destinationParent = Core.Nothing}
 
 instance Core.FromJSON MoveProjectRequest where
   parseJSON =
     Core.withObject
       "MoveProjectRequest"
       ( \o ->
-          MoveProjectRequest
-            Core.<$> (o Core..:? "destinationParent")
+          MoveProjectRequest Core.<$> (o Core..:? "destinationParent")
       )
 
 instance Core.ToJSON MoveProjectRequest where
   toJSON MoveProjectRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destinationParent" Core..=)
-              Core.<$> destinationParent
-          ]
+          [("destinationParent" Core..=) Core.<$> destinationParent]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -1634,7 +1688,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1690,21 +1744,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1718,19 +1770,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | The root node in the resource hierarchy to which a particular entity\'s (a company, for example) resources belong.
 --
@@ -1792,8 +1842,7 @@ instance Core.ToJSON Organization where
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
             ("deleteTime" Core..=) Core.<$> deleteTime,
-            ("directoryCustomerId" Core..=)
-              Core.<$> directoryCustomerId,
+            ("directoryCustomerId" Core..=) Core.<$> directoryCustomerId,
             ("displayName" Core..=) Core.<$> displayName,
             ("etag" Core..=) Core.<$> etag,
             ("name" Core..=) Core.<$> name,
@@ -1802,9 +1851,9 @@ instance Core.ToJSON Organization where
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -1876,6 +1925,8 @@ data Project = Project
     projectId :: (Core.Maybe Core.Text),
     -- | Output only. The project lifecycle state.
     state :: (Core.Maybe Project_State),
+    -- | Optional. Input only. Immutable. Tag keys\/values directly bound to this project. Each item in the map must be expressed as \" : \". For example: \"123\/environment\" : \"production\", \"123\/costCenter\" : \"marketing\" Note: Currently this field is in Preview.
+    tags :: (Core.Maybe Project_Tags),
     -- | Output only. The most recent time this resource was modified.
     updateTime :: (Core.Maybe Core.DateTime)
   }
@@ -1895,6 +1946,7 @@ newProject =
       parent = Core.Nothing,
       projectId = Core.Nothing,
       state = Core.Nothing,
+      tags = Core.Nothing,
       updateTime = Core.Nothing
     }
 
@@ -1913,6 +1965,7 @@ instance Core.FromJSON Project where
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "projectId")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "tags")
             Core.<*> (o Core..:? "updateTime")
       )
 
@@ -1929,6 +1982,7 @@ instance Core.ToJSON Project where
             ("parent" Core..=) Core.<$> parent,
             ("projectId" Core..=) Core.<$> projectId,
             ("state" Core..=) Core.<$> state,
+            ("tags" Core..=) Core.<$> tags,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
@@ -1937,8 +1991,7 @@ instance Core.ToJSON Project where
 --
 -- /See:/ 'newProject_Labels' smart constructor.
 newtype Project_Labels = Project_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1947,18 +2000,41 @@ newProject_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Project_Labels
-newProject_Labels additional = Project_Labels {additional = additional}
+newProject_Labels additional =
+  Project_Labels {additional = additional}
 
 instance Core.FromJSON Project_Labels where
   parseJSON =
     Core.withObject
       "Project_Labels"
-      ( \o ->
-          Project_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Project_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Project_Labels where
   toJSON Project_Labels {..} = Core.toJSON additional
+
+-- | Optional. Input only. Immutable. Tag keys\/values directly bound to this project. Each item in the map must be expressed as \" : \". For example: \"123\/environment\" : \"production\", \"123\/costCenter\" : \"marketing\" Note: Currently this field is in Preview.
+--
+-- /See:/ 'newProject_Tags' smart constructor.
+newtype Project_Tags = Project_Tags
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Project_Tags' with the minimum fields required to make a request.
+newProject_Tags ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  Project_Tags
+newProject_Tags additional = Project_Tags {additional = additional}
+
+instance Core.FromJSON Project_Tags where
+  parseJSON =
+    Core.withObject
+      "Project_Tags"
+      (\o -> Project_Tags Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Project_Tags where
+  toJSON Project_Tags {..} = Core.toJSON additional
 
 -- | A status object which is used as the @metadata@ field for the Operation returned by CreateProject. It provides insight for when significant phases of Project creation have completed.
 --
@@ -2019,7 +2095,10 @@ data SearchFoldersResponse = SearchFoldersResponse
 newSearchFoldersResponse ::
   SearchFoldersResponse
 newSearchFoldersResponse =
-  SearchFoldersResponse {folders = Core.Nothing, nextPageToken = Core.Nothing}
+  SearchFoldersResponse
+    { folders = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON SearchFoldersResponse where
   parseJSON =
@@ -2094,7 +2173,10 @@ data SearchProjectsResponse = SearchProjectsResponse
 newSearchProjectsResponse ::
   SearchProjectsResponse
 newSearchProjectsResponse =
-  SearchProjectsResponse {nextPageToken = Core.Nothing, projects = Core.Nothing}
+  SearchProjectsResponse
+    { nextPageToken = Core.Nothing,
+      projects = Core.Nothing
+    }
 
 instance Core.FromJSON SearchProjectsResponse where
   parseJSON =
@@ -2130,7 +2212,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -2168,7 +2253,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2204,19 +2293,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
 --
@@ -2227,7 +2314,9 @@ data TagBinding = TagBinding
     -- | The full resource name of the resource the TagValue is bound to. E.g. @\/\/cloudresourcemanager.googleapis.com\/projects\/123@
     parent :: (Core.Maybe Core.Text),
     -- | The TagValue of the TagBinding. Must be of the form @tagValues\/456@.
-    tagValue :: (Core.Maybe Core.Text)
+    tagValue :: (Core.Maybe Core.Text),
+    -- | The namespaced name for the TagValue of the TagBinding. Must be in the format @{parent_id}\/{tag_key_short_name}\/{short_name}@. For methods that support TagValue namespaced name, only one of tag/value/namespaced/name or tag/value may be filled. Requests with both fields will be rejected.
+    tagValueNamespacedName :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2238,7 +2327,8 @@ newTagBinding =
   TagBinding
     { name = Core.Nothing,
       parent = Core.Nothing,
-      tagValue = Core.Nothing
+      tagValue = Core.Nothing,
+      tagValueNamespacedName = Core.Nothing
     }
 
 instance Core.FromJSON TagBinding where
@@ -2250,6 +2340,7 @@ instance Core.FromJSON TagBinding where
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
             Core.<*> (o Core..:? "tagValue")
+            Core.<*> (o Core..:? "tagValueNamespacedName")
       )
 
 instance Core.ToJSON TagBinding where
@@ -2258,7 +2349,9 @@ instance Core.ToJSON TagBinding where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("parent" Core..=) Core.<$> parent,
-            ("tagValue" Core..=) Core.<$> tagValue
+            ("tagValue" Core..=) Core.<$> tagValue,
+            ("tagValueNamespacedName" Core..=)
+              Core.<$> tagValueNamespacedName
           ]
       )
 
@@ -2330,7 +2423,7 @@ data TagKey = TagKey
     name :: (Core.Maybe Core.Text),
     -- | Output only. Immutable. Namespaced name of the TagKey.
     namespacedName :: (Core.Maybe Core.Text),
-    -- | Immutable. The resource name of the new TagKey\'s parent. Must be of the form @organizations\/{org_id}@.
+    -- | Immutable. The resource name of the TagKey\'s parent. A TagKey can be parented by an Organization or a Project. For a TagKey parented by an Organization, its parent must be in the form @organizations\/{org_id}@. For a TagKey parented by a Project, its parent can be in the form @projects\/{project_id}@ or @projects\/{project_number}@.
     parent :: (Core.Maybe Core.Text),
     -- | Optional. A purpose denotes that this Tag is intended for use in policies of a specific policy engine, and will involve that policy engine in management operations involving this Tag. A purpose does not grant a policy engine exclusive rights to the Tag, and it may be referenced by other policy engines. A purpose cannot be changed once set.
     purpose :: (Core.Maybe TagKey_Purpose),
@@ -2399,8 +2492,7 @@ instance Core.ToJSON TagKey where
 --
 -- /See:/ 'newTagKey_PurposeData' smart constructor.
 newtype TagKey_PurposeData = TagKey_PurposeData
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2409,19 +2501,17 @@ newTagKey_PurposeData ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   TagKey_PurposeData
-newTagKey_PurposeData additional = TagKey_PurposeData {additional = additional}
+newTagKey_PurposeData additional =
+  TagKey_PurposeData {additional = additional}
 
 instance Core.FromJSON TagKey_PurposeData where
   parseJSON =
     Core.withObject
       "TagKey_PurposeData"
-      ( \o ->
-          TagKey_PurposeData Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TagKey_PurposeData Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TagKey_PurposeData where
-  toJSON TagKey_PurposeData {..} =
-    Core.toJSON additional
+  toJSON TagKey_PurposeData {..} = Core.toJSON additional
 
 -- | A TagValue is a child of a particular TagKey. This is used to group cloud resources for the purpose of controlling them using policies.
 --
@@ -2435,7 +2525,7 @@ data TagValue = TagValue
     etag :: (Core.Maybe Core.Text),
     -- | Immutable. Resource name for TagValue in the format @tagValues\/456@.
     name :: (Core.Maybe Core.Text),
-    -- | Output only. Namespaced name of the TagValue. Now only supported in the format @{organization_id}\/{tag_key_short_name}\/{short_name}@. Other formats will be supported when we add non-org parented tags.
+    -- | Output only. The namespaced name of the TagValue. Can be in the form @{organization_id}\/{tag_key_short_name}\/{tag_value_short_name}@ or @{project_id}\/{tag_key_short_name}\/{tag_value_short_name}@ or @{project_number}\/{tag_key_short_name}\/{tag_value_short_name}@.
     namespacedName :: (Core.Maybe Core.Text),
     -- | Immutable. The resource name of the new TagValue\'s parent TagKey. Must be of the form @tagKeys\/{tag_key_id}@.
     parent :: (Core.Maybe Core.Text),
@@ -2512,16 +2602,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -2543,16 +2630,13 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | A status object which is used as the @metadata@ field for the @Operation@ returned by @UndeleteFolder@.
 --

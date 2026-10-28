@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Mirror.Timeline.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Mirror.Timeline.Insert
 where
 
 import Gogol.Mirror.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @mirror.timeline.insert@ method which the
 -- 'MirrorTimelineInsert' request conforms to.
@@ -52,13 +50,13 @@ type MirrorTimelineInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] TimelineItem
     Core.:> Core.Post '[Core.JSON] TimelineItem
     Core.:<|> "upload"
-      Core.:> "mirror"
-      Core.:> "v1"
-      Core.:> "timeline"
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] TimelineItem
-      Core.:> Core.Post '[Core.JSON] TimelineItem
+    Core.:> "mirror"
+    Core.:> "v1"
+    Core.:> "timeline"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] TimelineItem
+    Core.:> Core.Post '[Core.JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
 --
@@ -74,7 +72,8 @@ newMirrorTimelineInsert ::
   -- |  Multipart request metadata. See 'payload'.
   TimelineItem ->
   MirrorTimelineInsert
-newMirrorTimelineInsert payload = MirrorTimelineInsert {payload = payload}
+newMirrorTimelineInsert payload =
+  MirrorTimelineInsert {payload = payload}
 
 instance Core.GoogleRequest MirrorTimelineInsert where
   type Rs MirrorTimelineInsert = TimelineItem
@@ -86,33 +85,23 @@ instance Core.GoogleRequest MirrorTimelineInsert where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorTimelineInsertResource
-          )
+          (Core.Proxy :: Core.Proxy MirrorTimelineInsertResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload MirrorTimelineInsert)
-  where
-  type
-    Rs (Core.MediaUpload MirrorTimelineInsert) =
-      TimelineItem
+instance Core.GoogleRequest (Core.MediaUpload MirrorTimelineInsert) where
+  type Rs (Core.MediaUpload MirrorTimelineInsert) = TimelineItem
   type
     Scopes (Core.MediaUpload MirrorTimelineInsert) =
       Core.Scopes MirrorTimelineInsert
-  requestClient
-    (Core.MediaUpload MirrorTimelineInsert {..} body) =
-      go
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        mirrorService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy MirrorTimelineInsertResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload MirrorTimelineInsert {..} body) =
+    go
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      mirrorService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy MirrorTimelineInsertResource)
+          Core.mempty

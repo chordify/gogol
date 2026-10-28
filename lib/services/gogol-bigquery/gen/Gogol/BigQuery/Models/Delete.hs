@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Models.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Models.Delete
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.models.delete@ method which the
 -- 'BigQueryModelsDelete' request conforms to.
@@ -53,6 +51,11 @@ type BigQueryModelsDeleteResource =
     Core.:> Core.Capture "datasetId" Core.Text
     Core.:> "models"
     Core.:> Core.Capture "modelId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
@@ -60,12 +63,22 @@ type BigQueryModelsDeleteResource =
 --
 -- /See:/ 'newBigQueryModelsDelete' smart constructor.
 data BigQueryModelsDelete = BigQueryModelsDelete
-  { -- | Required. Dataset ID of the model to delete.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Dataset ID of the model to delete.
     datasetId :: Core.Text,
     -- | Required. Model ID of the model to delete.
     modelId :: Core.Text,
     -- | Required. Project ID of the model to delete.
-    projectId :: Core.Text
+    projectId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -80,9 +93,14 @@ newBigQueryModelsDelete ::
   BigQueryModelsDelete
 newBigQueryModelsDelete datasetId modelId projectId =
   BigQueryModelsDelete
-    { datasetId = datasetId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      datasetId = datasetId,
       modelId = modelId,
-      projectId = projectId
+      projectId = projectId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryModelsDelete where
@@ -95,12 +113,15 @@ instance Core.GoogleRequest BigQueryModelsDelete where
       projectId
       datasetId
       modelId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryModelsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy BigQueryModelsDeleteResource)
           Core.mempty

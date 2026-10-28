@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestResults.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.ContinuousTestRes
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.environments.continuousTestResults.list@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList' request conforms to.
@@ -74,7 +72,7 @@ data DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList = Di
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from a previous list request.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The environment to list results for. Format: @projects\/\/locations\/\/agents\/\/ environments\/@.
+    -- | Required. The environment to list results for. Format: @projects\/\/locations\/\/agents\/\/environments\/@.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -85,20 +83,25 @@ data DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList = Di
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList ::
-  -- |  Required. The environment to list results for. Format: @projects\/\/locations\/\/agents\/\/ environments\/@. See 'parent'.
+  -- |  Required. The environment to list results for. Format: @projects\/\/locations\/\/agents\/\/environments\/@. See 'parent'.
   Core.Text ->
   DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList
-newDialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList parent =
-  DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList
+  parent =
+    DialogFlowProjectsLocationsAgentsEnvironmentsContinuousTestResultsList
+      { xgafv =
+          Core.Nothing,
+        accessToken =
+          Core.Nothing,
+        callback = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        parent = parent,
+        uploadType =
+          Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

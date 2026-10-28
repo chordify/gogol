@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -93,10 +91,20 @@ module Gogol.File
     FileProjectsLocationsInstancesPatch (..),
     newFileProjectsLocationsInstancesPatch,
 
+    -- ** file.projects.locations.instances.promoteReplica
+    FileProjectsLocationsInstancesPromoteReplicaResource,
+    FileProjectsLocationsInstancesPromoteReplica (..),
+    newFileProjectsLocationsInstancesPromoteReplica,
+
     -- ** file.projects.locations.instances.restore
     FileProjectsLocationsInstancesRestoreResource,
     FileProjectsLocationsInstancesRestore (..),
     newFileProjectsLocationsInstancesRestore,
+
+    -- ** file.projects.locations.instances.revert
+    FileProjectsLocationsInstancesRevertResource,
+    FileProjectsLocationsInstancesRevert (..),
+    newFileProjectsLocationsInstancesRevert,
 
     -- ** file.projects.locations.instances.snapshots.create
     FileProjectsLocationsInstancesSnapshotsCreateResource,
@@ -157,6 +165,9 @@ module Gogol.File
     Backup (..),
     newBackup,
 
+    -- ** Backup_FileSystemProtocol
+    Backup_FileSystemProtocol (..),
+
     -- ** Backup_Labels
     Backup_Labels (..),
     newBackup_Labels,
@@ -166,6 +177,10 @@ module Gogol.File
 
     -- ** Backup_State
     Backup_State (..),
+
+    -- ** Backup_Tags
+    Backup_Tags (..),
+    newBackup_Tags,
 
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
@@ -190,6 +205,10 @@ module Gogol.File
     -- ** FileShareConfig
     FileShareConfig (..),
     newFileShareConfig,
+
+    -- ** FixedIOPS
+    FixedIOPS (..),
+    newFixedIOPS,
 
     -- ** GoogleCloudSaasacceleratorManagementProvidersV1Instance
     GoogleCloudSaasacceleratorManagementProvidersV1Instance (..),
@@ -262,6 +281,10 @@ module Gogol.File
     GoogleCloudSaasacceleratorManagementProvidersV1SloMetadata (..),
     newGoogleCloudSaasacceleratorManagementProvidersV1SloMetadata,
 
+    -- ** IOPSPerTB
+    IOPSPerTB (..),
+    newIOPSPerTB,
+
     -- ** Instance
     Instance (..),
     newInstance,
@@ -270,11 +293,18 @@ module Gogol.File
     Instance_Labels (..),
     newInstance_Labels,
 
+    -- ** Instance_Protocol
+    Instance_Protocol (..),
+
     -- ** Instance_State
     Instance_State (..),
 
     -- ** Instance_SuspensionReasonsItem
     Instance_SuspensionReasonsItem (..),
+
+    -- ** Instance_Tags
+    Instance_Tags (..),
+    newInstance_Tags,
 
     -- ** Instance_Tier
     Instance_Tier (..),
@@ -362,9 +392,42 @@ module Gogol.File
     OperationMetadata (..),
     newOperationMetadata,
 
+    -- ** PerformanceConfig
+    PerformanceConfig (..),
+    newPerformanceConfig,
+
+    -- ** PerformanceLimits
+    PerformanceLimits (..),
+    newPerformanceLimits,
+
+    -- ** PromoteReplicaRequest
+    PromoteReplicaRequest (..),
+    newPromoteReplicaRequest,
+
+    -- ** ReplicaConfig
+    ReplicaConfig (..),
+    newReplicaConfig,
+
+    -- ** ReplicaConfig_State
+    ReplicaConfig_State (..),
+
+    -- ** ReplicaConfig_StateReasonsItem
+    ReplicaConfig_StateReasonsItem (..),
+
+    -- ** Replication
+    Replication (..),
+    newReplication,
+
+    -- ** Replication_Role
+    Replication_Role (..),
+
     -- ** RestoreInstanceRequest
     RestoreInstanceRequest (..),
     newRestoreInstanceRequest,
+
+    -- ** RevertInstanceRequest
+    RevertInstanceRequest (..),
+    newRevertInstanceRequest,
 
     -- ** Schedule
     Schedule (..),
@@ -383,6 +446,10 @@ module Gogol.File
 
     -- ** Snapshot_State
     Snapshot_State (..),
+
+    -- ** Snapshot_Tags
+    Snapshot_Tags (..),
+    newSnapshot_Tags,
 
     -- ** Status
     Status (..),
@@ -420,7 +487,9 @@ import Gogol.File.Projects.Locations.Instances.Delete
 import Gogol.File.Projects.Locations.Instances.Get
 import Gogol.File.Projects.Locations.Instances.List
 import Gogol.File.Projects.Locations.Instances.Patch
+import Gogol.File.Projects.Locations.Instances.PromoteReplica
 import Gogol.File.Projects.Locations.Instances.Restore
+import Gogol.File.Projects.Locations.Instances.Revert
 import Gogol.File.Projects.Locations.Instances.Snapshots.Create
 import Gogol.File.Projects.Locations.Instances.Snapshots.Delete
 import Gogol.File.Projects.Locations.Instances.Snapshots.Get

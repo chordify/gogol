@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Column.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Column.Insert
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.column.insert@ method which the
 -- 'FusionTablesColumnInsert' request conforms to.
@@ -77,19 +75,11 @@ newFusionTablesColumnInsert payload tableId =
 
 instance Core.GoogleRequest FusionTablesColumnInsert where
   type Rs FusionTablesColumnInsert = Column
-  type
-    Scopes FusionTablesColumnInsert =
-      '[Fusiontables'FullControl]
+  type Scopes FusionTablesColumnInsert = '[Fusiontables'FullControl]
   requestClient FusionTablesColumnInsert {..} =
-    go
-      tableId
-      (Core.Just Core.AltJSON)
-      payload
-      fusionTablesService
+    go tableId (Core.Just Core.AltJSON) payload fusionTablesService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesColumnInsertResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesColumnInsertResource)
           Core.mempty

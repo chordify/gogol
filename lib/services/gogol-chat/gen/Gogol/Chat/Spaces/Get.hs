@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns a space. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope.
+-- Returns details about a space. For an example, see <https://developers.google.com/workspace/chat/get-spaces Get details about a space>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> You can authenticate and authorize this method with administrator privileges by setting the @use_admin_access@ field in the request.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.get@.
 module Gogol.Chat.Spaces.Get
@@ -40,7 +38,7 @@ module Gogol.Chat.Spaces.Get
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.get@ method which the
 -- 'ChatSpacesGet' request conforms to.
@@ -52,10 +50,11 @@ type ChatSpacesGetResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "useAdminAccess" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Space
 
--- | Returns a space. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.spaces@ or @chat.spaces.readonly@ authorization scope.
+-- | Returns details about a space. For an example, see <https://developers.google.com/workspace/chat/get-spaces Get details about a space>. Supports the following types of <https://developers.google.com/workspace/chat/authenticate-authorize authentication>: - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-app App authentication> - <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user User authentication> You can authenticate and authorize this method with administrator privileges by setting the @use_admin_access@ field in the request.
 --
 -- /See:/ 'newChatSpacesGet' smart constructor.
 data ChatSpacesGet = ChatSpacesGet
@@ -65,18 +64,20 @@ data ChatSpacesGet = ChatSpacesGet
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Resource name of the space, in the form \"spaces\/*\". Format: spaces\/{space}
+    -- | Required. Resource name of the space, in the form @spaces\/{space}@. Format: @spaces\/{space}@
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
-    uploadProtocol :: (Core.Maybe Core.Text)
+    uploadProtocol :: (Core.Maybe Core.Text),
+    -- | Optional. When @true@, the method runs using the user\'s Google Workspace administrator privileges. The calling user must be a Google Workspace administrator with the <https://support.google.com/a/answer/13369245 manage chat and spaces conversations privilege>. Requires the @chat.admin.spaces@ or @chat.admin.spaces.readonly@ <https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes OAuth 2.0 scopes>.
+    useAdminAccess :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ChatSpacesGet' with the minimum fields required to make a request.
 newChatSpacesGet ::
-  -- |  Required. Resource name of the space, in the form \"spaces\/*\". Format: spaces\/{space} See 'name'.
+  -- |  Required. Resource name of the space, in the form @spaces\/{space}@. Format: @spaces\/{space}@ See 'name'.
   Core.Text ->
   ChatSpacesGet
 newChatSpacesGet name =
@@ -86,14 +87,21 @@ newChatSpacesGet name =
       callback = Core.Nothing,
       name = name,
       uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
+      uploadProtocol = Core.Nothing,
+      useAdminAccess = Core.Nothing
     }
 
 instance Core.GoogleRequest ChatSpacesGet where
   type Rs ChatSpacesGet = Space
   type
     Scopes ChatSpacesGet =
-      '[Chat'Bot, Chat'Spaces, Chat'Spaces'Readonly]
+      '[ Chat'Admin'Spaces,
+         Chat'Admin'Spaces'Readonly,
+         Chat'App'Spaces,
+         Chat'Bot,
+         Chat'Spaces,
+         Chat'Spaces'Readonly
+       ]
   requestClient ChatSpacesGet {..} =
     go
       name
@@ -102,6 +110,7 @@ instance Core.GoogleRequest ChatSpacesGet where
       callback
       uploadType
       uploadProtocol
+      useAdminAccess
       (Core.Just Core.AltJSON)
       chatService
     where

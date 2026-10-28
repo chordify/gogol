@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Campaigns.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Campaigns.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.campaigns.list@ method which the
 -- 'DFAReportingCampaignsList' request conforms to.
@@ -55,39 +53,21 @@ type DFAReportingCampaignsListResource =
     Core.:> Core.QueryParams "advertiserGroupIds" Core.Int64
     Core.:> Core.QueryParams "advertiserIds" Core.Int64
     Core.:> Core.QueryParam "archived" Core.Bool
-    Core.:> Core.QueryParam
-              "atLeastOneOptimizationActivity"
-              Core.Bool
+    Core.:> Core.QueryParam "atLeastOneOptimizationActivity" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParams "excludedIds" Core.Int64
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "maxResults" Core.Int32
-    Core.:> Core.QueryParam
-              "overriddenEventTagId"
-              Core.Int64
+    Core.:> Core.QueryParam "overriddenEventTagId" Core.Int64
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              CampaignsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              CampaignsListSortOrder
-    Core.:> Core.QueryParam
-              "subaccountId"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              CampaignsListResponse
+    Core.:> Core.QueryParam "sortField" CampaignsListSortField
+    Core.:> Core.QueryParam "sortOrder" CampaignsListSortOrder
+    Core.:> Core.QueryParam "subaccountId" Core.Int64
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] CampaignsListResponse
 
 -- | Retrieves a list of campaigns, possibly filtered. This method supports paging.
 --
@@ -163,9 +143,7 @@ newDFAReportingCampaignsList profileId =
     }
 
 instance Core.GoogleRequest DFAReportingCampaignsList where
-  type
-    Rs DFAReportingCampaignsList =
-      CampaignsListResponse
+  type Rs DFAReportingCampaignsList = CampaignsListResponse
   type
     Scopes DFAReportingCampaignsList =
       '[Dfatrafficking'FullControl]
@@ -195,7 +173,5 @@ instance Core.GoogleRequest DFAReportingCampaignsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCampaignsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCampaignsListResource)
           Core.mempty

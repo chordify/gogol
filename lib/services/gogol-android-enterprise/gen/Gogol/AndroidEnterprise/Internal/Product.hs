@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidEnterprise.Internal.Product
@@ -110,10 +108,6 @@ module Gogol.AndroidEnterprise.Internal.Product
     ConfigurationVariables (..),
     newConfigurationVariables,
 
-    -- * CreateEnrollmentTokenResponse
-    CreateEnrollmentTokenResponse (..),
-    newCreateEnrollmentTokenResponse,
-
     -- * Device
     Device (..),
     newDevice,
@@ -134,6 +128,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     DevicesListResponse (..),
     newDevicesListResponse,
 
+    -- * EnrollmentToken
+    EnrollmentToken (..),
+    newEnrollmentToken,
+
     -- * Enterprise
     Enterprise (..),
     newEnterprise,
@@ -145,6 +143,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     -- * EnterpriseAuthenticationAppLinkConfig
     EnterpriseAuthenticationAppLinkConfig (..),
     newEnterpriseAuthenticationAppLinkConfig,
+
+    -- * EnterpriseUpgradeEvent
+    EnterpriseUpgradeEvent (..),
+    newEnterpriseUpgradeEvent,
 
     -- * EnterprisesListResponse
     EnterprisesListResponse (..),
@@ -161,6 +163,10 @@ module Gogol.AndroidEnterprise.Internal.Product
     -- * EntitlementsListResponse
     EntitlementsListResponse (..),
     newEntitlementsListResponse,
+
+    -- * GenerateEnterpriseUpgradeUrlResponse
+    GenerateEnterpriseUpgradeUrlResponse (..),
+    newGenerateEnterpriseUpgradeUrlResponse,
 
     -- * GoogleAuthenticationSettings
     GoogleAuthenticationSettings (..),
@@ -377,7 +383,7 @@ module Gogol.AndroidEnterprise.Internal.Product
 where
 
 import Gogol.AndroidEnterprise.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | This represents an enterprise admin who can manage the enterprise in the managed Google Play store.
 --
@@ -401,8 +407,7 @@ instance Core.FromJSON Administrator where
 
 instance Core.ToJSON Administrator where
   toJSON Administrator {..} =
-    Core.object
-      (Core.catMaybes [("email" Core..=) Core.<$> email])
+    Core.object (Core.catMaybes [("email" Core..=) Core.<$> email])
 
 -- | A token authorizing an admin to access an iframe.
 --
@@ -416,20 +421,18 @@ newtype AdministratorWebToken = AdministratorWebToken
 -- | Creates a value of 'AdministratorWebToken' with the minimum fields required to make a request.
 newAdministratorWebToken ::
   AdministratorWebToken
-newAdministratorWebToken = AdministratorWebToken {token = Core.Nothing}
+newAdministratorWebToken =
+  AdministratorWebToken {token = Core.Nothing}
 
 instance Core.FromJSON AdministratorWebToken where
   parseJSON =
     Core.withObject
       "AdministratorWebToken"
-      ( \o ->
-          AdministratorWebToken Core.<$> (o Core..:? "token")
-      )
+      (\o -> AdministratorWebToken Core.<$> (o Core..:? "token"))
 
 instance Core.ToJSON AdministratorWebToken where
   toJSON AdministratorWebToken {..} =
-    Core.object
-      (Core.catMaybes [("token" Core..=) Core.<$> token])
+    Core.object (Core.catMaybes [("token" Core..=) Core.<$> token])
 
 -- | Specification for a token used to generate iframes. The token specifies what data the admin is allowed to modify and the URI the iframe is allowed to communiate with.
 --
@@ -489,8 +492,7 @@ instance Core.ToJSON AdministratorWebTokenSpec where
   toJSON AdministratorWebTokenSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("managedConfigurations" Core..=)
-              Core.<$> managedConfigurations,
+          [ ("managedConfigurations" Core..=) Core.<$> managedConfigurations,
             ("parent" Core..=) Core.<$> parent,
             ("permission" Core..=) Core.<$> permission,
             ("playSearch" Core..=) Core.<$> playSearch,
@@ -513,7 +515,10 @@ newtype AdministratorWebTokenSpecManagedConfigurations = AdministratorWebTokenSp
 newAdministratorWebTokenSpecManagedConfigurations ::
   AdministratorWebTokenSpecManagedConfigurations
 newAdministratorWebTokenSpecManagedConfigurations =
-  AdministratorWebTokenSpecManagedConfigurations {enabled = Core.Nothing}
+  AdministratorWebTokenSpecManagedConfigurations
+    { enabled =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -527,16 +532,10 @@ instance
             Core.<$> (o Core..:? "enabled")
       )
 
-instance
-  Core.ToJSON
-    AdministratorWebTokenSpecManagedConfigurations
-  where
-  toJSON
-    AdministratorWebTokenSpecManagedConfigurations {..} =
-      Core.object
-        ( Core.catMaybes
-            [("enabled" Core..=) Core.<$> enabled]
-        )
+instance Core.ToJSON AdministratorWebTokenSpecManagedConfigurations where
+  toJSON AdministratorWebTokenSpecManagedConfigurations {..} =
+    Core.object
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 --
 -- /See:/ 'newAdministratorWebTokenSpecPlaySearch' smart constructor.
@@ -557,10 +556,7 @@ newAdministratorWebTokenSpecPlaySearch =
       enabled = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AdministratorWebTokenSpecPlaySearch
-  where
+instance Core.FromJSON AdministratorWebTokenSpecPlaySearch where
   parseJSON =
     Core.withObject
       "AdministratorWebTokenSpecPlaySearch"
@@ -570,10 +566,7 @@ instance
             Core.<*> (o Core..:? "enabled")
       )
 
-instance
-  Core.ToJSON
-    AdministratorWebTokenSpecPlaySearch
-  where
+instance Core.ToJSON AdministratorWebTokenSpecPlaySearch where
   toJSON AdministratorWebTokenSpecPlaySearch {..} =
     Core.object
       ( Core.catMaybes
@@ -596,10 +589,7 @@ newAdministratorWebTokenSpecPrivateApps ::
 newAdministratorWebTokenSpecPrivateApps =
   AdministratorWebTokenSpecPrivateApps {enabled = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AdministratorWebTokenSpecPrivateApps
-  where
+instance Core.FromJSON AdministratorWebTokenSpecPrivateApps where
   parseJSON =
     Core.withObject
       "AdministratorWebTokenSpecPrivateApps"
@@ -608,15 +598,10 @@ instance
             Core.<$> (o Core..:? "enabled")
       )
 
-instance
-  Core.ToJSON
-    AdministratorWebTokenSpecPrivateApps
-  where
+instance Core.ToJSON AdministratorWebTokenSpecPrivateApps where
   toJSON AdministratorWebTokenSpecPrivateApps {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 --
 -- /See:/ 'newAdministratorWebTokenSpecStoreBuilder' smart constructor.
@@ -632,10 +617,7 @@ newAdministratorWebTokenSpecStoreBuilder ::
 newAdministratorWebTokenSpecStoreBuilder =
   AdministratorWebTokenSpecStoreBuilder {enabled = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AdministratorWebTokenSpecStoreBuilder
-  where
+instance Core.FromJSON AdministratorWebTokenSpecStoreBuilder where
   parseJSON =
     Core.withObject
       "AdministratorWebTokenSpecStoreBuilder"
@@ -644,15 +626,10 @@ instance
             Core.<$> (o Core..:? "enabled")
       )
 
-instance
-  Core.ToJSON
-    AdministratorWebTokenSpecStoreBuilder
-  where
+instance Core.ToJSON AdministratorWebTokenSpecStoreBuilder where
   toJSON AdministratorWebTokenSpecStoreBuilder {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 --
 -- /See:/ 'newAdministratorWebTokenSpecWebApps' smart constructor.
@@ -668,24 +645,18 @@ newAdministratorWebTokenSpecWebApps ::
 newAdministratorWebTokenSpecWebApps =
   AdministratorWebTokenSpecWebApps {enabled = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AdministratorWebTokenSpecWebApps
-  where
+instance Core.FromJSON AdministratorWebTokenSpecWebApps where
   parseJSON =
     Core.withObject
       "AdministratorWebTokenSpecWebApps"
       ( \o ->
-          AdministratorWebTokenSpecWebApps
-            Core.<$> (o Core..:? "enabled")
+          AdministratorWebTokenSpecWebApps Core.<$> (o Core..:? "enabled")
       )
 
 instance Core.ToJSON AdministratorWebTokenSpecWebApps where
   toJSON AdministratorWebTokenSpecWebApps {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 --
 -- /See:/ 'newAdministratorWebTokenSpecZeroTouch' smart constructor.
@@ -701,27 +672,18 @@ newAdministratorWebTokenSpecZeroTouch ::
 newAdministratorWebTokenSpecZeroTouch =
   AdministratorWebTokenSpecZeroTouch {enabled = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AdministratorWebTokenSpecZeroTouch
-  where
+instance Core.FromJSON AdministratorWebTokenSpecZeroTouch where
   parseJSON =
     Core.withObject
       "AdministratorWebTokenSpecZeroTouch"
       ( \o ->
-          AdministratorWebTokenSpecZeroTouch
-            Core.<$> (o Core..:? "enabled")
+          AdministratorWebTokenSpecZeroTouch Core.<$> (o Core..:? "enabled")
       )
 
-instance
-  Core.ToJSON
-    AdministratorWebTokenSpecZeroTouch
-  where
+instance Core.ToJSON AdministratorWebTokenSpecZeroTouch where
   toJSON AdministratorWebTokenSpecZeroTouch {..} =
     Core.object
-      ( Core.catMaybes
-          [("enabled" Core..=) Core.<$> enabled]
-      )
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
 
 -- | Represents the list of app restrictions available to be pre-configured for the product.
 --
@@ -738,7 +700,10 @@ data AppRestrictionsSchema = AppRestrictionsSchema
 newAppRestrictionsSchema ::
   AppRestrictionsSchema
 newAppRestrictionsSchema =
-  AppRestrictionsSchema {kind = Core.Nothing, restrictions = Core.Nothing}
+  AppRestrictionsSchema
+    { kind = Core.Nothing,
+      restrictions = Core.Nothing
+    }
 
 instance Core.FromJSON AppRestrictionsSchema where
   parseJSON =
@@ -774,24 +739,18 @@ newAppRestrictionsSchemaChangeEvent ::
 newAppRestrictionsSchemaChangeEvent =
   AppRestrictionsSchemaChangeEvent {productId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AppRestrictionsSchemaChangeEvent
-  where
+instance Core.FromJSON AppRestrictionsSchemaChangeEvent where
   parseJSON =
     Core.withObject
       "AppRestrictionsSchemaChangeEvent"
       ( \o ->
-          AppRestrictionsSchemaChangeEvent
-            Core.<$> (o Core..:? "productId")
+          AppRestrictionsSchemaChangeEvent Core.<$> (o Core..:? "productId")
       )
 
 instance Core.ToJSON AppRestrictionsSchemaChangeEvent where
   toJSON AppRestrictionsSchemaChangeEvent {..} =
     Core.object
-      ( Core.catMaybes
-          [("productId" Core..=) Core.<$> productId]
-      )
+      (Core.catMaybes [("productId" Core..=) Core.<$> productId])
 
 -- | A restriction in the App Restriction Schema represents a piece of configuration that may be pre-applied.
 --
@@ -831,10 +790,7 @@ newAppRestrictionsSchemaRestriction =
       title = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AppRestrictionsSchemaRestriction
-  where
+instance Core.FromJSON AppRestrictionsSchemaRestriction where
   parseJSON =
     Core.withObject
       "AppRestrictionsSchemaRestriction"
@@ -859,8 +815,7 @@ instance Core.ToJSON AppRestrictionsSchemaRestriction where
             ("entry" Core..=) Core.<$> entry,
             ("entryValue" Core..=) Core.<$> entryValue,
             ("key" Core..=) Core.<$> key,
-            ("nestedRestriction" Core..=)
-              Core.<$> nestedRestriction,
+            ("nestedRestriction" Core..=) Core.<$> nestedRestriction,
             ("restrictionType" Core..=) Core.<$> restrictionType,
             ("title" Core..=) Core.<$> title
           ]
@@ -888,7 +843,8 @@ newAppRestrictionsSchemaRestrictionRestrictionValue ::
   AppRestrictionsSchemaRestrictionRestrictionValue
 newAppRestrictionsSchemaRestrictionRestrictionValue =
   AppRestrictionsSchemaRestrictionRestrictionValue
-    { type' = Core.Nothing,
+    { type' =
+        Core.Nothing,
       valueBool = Core.Nothing,
       valueInteger = Core.Nothing,
       valueMultiselect = Core.Nothing,
@@ -904,28 +860,27 @@ instance
       "AppRestrictionsSchemaRestrictionRestrictionValue"
       ( \o ->
           AppRestrictionsSchemaRestrictionRestrictionValue
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "valueBool")
-              Core.<*> (o Core..:? "valueInteger")
-              Core.<*> (o Core..:? "valueMultiselect")
-              Core.<*> (o Core..:? "valueString")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "valueBool")
+            Core.<*> (o Core..:? "valueInteger")
+            Core.<*> (o Core..:? "valueMultiselect")
+            Core.<*> (o Core..:? "valueString")
       )
 
 instance
   Core.ToJSON
     AppRestrictionsSchemaRestrictionRestrictionValue
   where
-  toJSON
-    AppRestrictionsSchemaRestrictionRestrictionValue {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("type" Core..=) Core.<$> type',
-              ("valueBool" Core..=) Core.<$> valueBool,
-              ("valueInteger" Core..=) Core.<$> valueInteger,
-              ("valueMultiselect" Core..=)
-                Core.<$> valueMultiselect,
-              ("valueString" Core..=) Core.<$> valueString
-            ]
-        )
+  toJSON AppRestrictionsSchemaRestrictionRestrictionValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("type" Core..=) Core.<$> type',
+            ("valueBool" Core..=) Core.<$> valueBool,
+            ("valueInteger" Core..=) Core.<$> valueInteger,
+            ("valueMultiselect" Core..=) Core.<$> valueMultiselect,
+            ("valueString" Core..=) Core.<$> valueString
+          ]
+      )
 
 -- | List of states set by the app.
 --
@@ -942,7 +897,10 @@ data AppState = AppState
 newAppState ::
   AppState
 newAppState =
-  AppState {keyedAppState = Core.Nothing, packageName = Core.Nothing}
+  AppState
+    { keyedAppState = Core.Nothing,
+      packageName = Core.Nothing
+    }
 
 instance Core.FromJSON AppState where
   parseJSON =
@@ -981,16 +939,12 @@ instance Core.FromJSON AppUpdateEvent where
   parseJSON =
     Core.withObject
       "AppUpdateEvent"
-      ( \o ->
-          AppUpdateEvent Core.<$> (o Core..:? "productId")
-      )
+      (\o -> AppUpdateEvent Core.<$> (o Core..:? "productId"))
 
 instance Core.ToJSON AppUpdateEvent where
   toJSON AppUpdateEvent {..} =
     Core.object
-      ( Core.catMaybes
-          [("productId" Core..=) Core.<$> productId]
-      )
+      (Core.catMaybes [("productId" Core..=) Core.<$> productId])
 
 -- | This represents a single version of the app.
 --
@@ -998,6 +952,8 @@ instance Core.ToJSON AppUpdateEvent where
 data AppVersion = AppVersion
   { -- | True if this version is a production APK.
     isProduction :: (Core.Maybe Core.Bool),
+    -- | The SDK version this app targets, as specified in the manifest of the APK. See http:\/\/developer.android.com\/guide\/topics\/manifest\/uses-sdk-element.html
+    targetSdkVersion :: (Core.Maybe Core.Int32),
     -- | Deprecated, use trackId instead.
     track :: (Core.Maybe AppVersion_Track),
     -- | Track ids that the app version is published in. Replaces the track field (deprecated), but doesn\'t include the production track (see isProduction instead).
@@ -1015,6 +971,7 @@ newAppVersion ::
 newAppVersion =
   AppVersion
     { isProduction = Core.Nothing,
+      targetSdkVersion = Core.Nothing,
       track = Core.Nothing,
       trackId = Core.Nothing,
       versionCode = Core.Nothing,
@@ -1028,6 +985,7 @@ instance Core.FromJSON AppVersion where
       ( \o ->
           AppVersion
             Core.<$> (o Core..:? "isProduction")
+            Core.<*> (o Core..:? "targetSdkVersion")
             Core.<*> (o Core..:? "track")
             Core.<*> (o Core..:? "trackId")
             Core.<*> (o Core..:? "versionCode")
@@ -1039,6 +997,7 @@ instance Core.ToJSON AppVersion where
     Core.object
       ( Core.catMaybes
           [ ("isProduction" Core..=) Core.<$> isProduction,
+            ("targetSdkVersion" Core..=) Core.<$> targetSdkVersion,
             ("track" Core..=) Core.<$> track,
             ("trackId" Core..=) Core.<$> trackId,
             ("versionCode" Core..=) Core.<$> versionCode,
@@ -1064,16 +1023,12 @@ instance Core.FromJSON ApprovalUrlInfo where
   parseJSON =
     Core.withObject
       "ApprovalUrlInfo"
-      ( \o ->
-          ApprovalUrlInfo Core.<$> (o Core..:? "approvalUrl")
-      )
+      (\o -> ApprovalUrlInfo Core.<$> (o Core..:? "approvalUrl"))
 
 instance Core.ToJSON ApprovalUrlInfo where
   toJSON ApprovalUrlInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("approvalUrl" Core..=) Core.<$> approvalUrl]
-      )
+      (Core.catMaybes [("approvalUrl" Core..=) Core.<$> approvalUrl])
 
 -- | An AuthenticationToken is used by the EMM\'s device policy client on a device to provision the given EMM-managed user on that device.
 --
@@ -1093,14 +1048,11 @@ instance Core.FromJSON AuthenticationToken where
   parseJSON =
     Core.withObject
       "AuthenticationToken"
-      ( \o ->
-          AuthenticationToken Core.<$> (o Core..:? "token")
-      )
+      (\o -> AuthenticationToken Core.<$> (o Core..:? "token"))
 
 instance Core.ToJSON AuthenticationToken where
   toJSON AuthenticationToken {..} =
-    Core.object
-      (Core.catMaybes [("token" Core..=) Core.<$> token])
+    Core.object (Core.catMaybes [("token" Core..=) Core.<$> token])
 
 -- | The auto-install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
 --
@@ -1144,8 +1096,7 @@ instance Core.ToJSON AutoInstallConstraint where
               Core.<$> chargingStateConstraint,
             ("deviceIdleStateConstraint" Core..=)
               Core.<$> deviceIdleStateConstraint,
-            ("networkTypeConstraint" Core..=)
-              Core.<$> networkTypeConstraint
+            ("networkTypeConstraint" Core..=) Core.<$> networkTypeConstraint
           ]
       )
 
@@ -1154,7 +1105,7 @@ instance Core.ToJSON AutoInstallConstraint where
 data AutoInstallPolicy = AutoInstallPolicy
   { -- | The constraints for auto-installing the app. You can specify a maximum of one constraint.
     autoInstallConstraint :: (Core.Maybe [AutoInstallConstraint]),
-    -- | The auto-install mode. If unset defaults to \"doNotAutoInstall\".
+    -- | The auto-install mode. If unset, defaults to \"doNotAutoInstall\". An app is automatically installed regardless of a set maintenance window.
     autoInstallMode :: (Core.Maybe AutoInstallPolicy_AutoInstallMode),
     -- | The priority of the install, as an unsigned integer. A lower number means higher priority.
     autoInstallPriority :: (Core.Maybe Core.Int32),
@@ -1190,13 +1141,10 @@ instance Core.ToJSON AutoInstallPolicy where
   toJSON AutoInstallPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoInstallConstraint" Core..=)
-              Core.<$> autoInstallConstraint,
+          [ ("autoInstallConstraint" Core..=) Core.<$> autoInstallConstraint,
             ("autoInstallMode" Core..=) Core.<$> autoInstallMode,
-            ("autoInstallPriority" Core..=)
-              Core.<$> autoInstallPriority,
-            ("minimumVersionCode" Core..=)
-              Core.<$> minimumVersionCode
+            ("autoInstallPriority" Core..=) Core.<$> autoInstallPriority,
+            ("minimumVersionCode" Core..=) Core.<$> minimumVersionCode
           ]
       )
 
@@ -1215,7 +1163,10 @@ data ConfigurationVariables = ConfigurationVariables
 newConfigurationVariables ::
   ConfigurationVariables
 newConfigurationVariables =
-  ConfigurationVariables {mcmId = Core.Nothing, variableSet = Core.Nothing}
+  ConfigurationVariables
+    { mcmId = Core.Nothing,
+      variableSet = Core.Nothing
+    }
 
 instance Core.FromJSON ConfigurationVariables where
   parseJSON =
@@ -1233,39 +1184,6 @@ instance Core.ToJSON ConfigurationVariables where
       ( Core.catMaybes
           [ ("mcmId" Core..=) Core.<$> mcmId,
             ("variableSet" Core..=) Core.<$> variableSet
-          ]
-      )
-
--- | Response message for create enrollment token.
---
--- /See:/ 'newCreateEnrollmentTokenResponse' smart constructor.
-newtype CreateEnrollmentTokenResponse = CreateEnrollmentTokenResponse
-  { -- | Enrollment token.
-    enrollmentToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CreateEnrollmentTokenResponse' with the minimum fields required to make a request.
-newCreateEnrollmentTokenResponse ::
-  CreateEnrollmentTokenResponse
-newCreateEnrollmentTokenResponse =
-  CreateEnrollmentTokenResponse {enrollmentToken = Core.Nothing}
-
-instance Core.FromJSON CreateEnrollmentTokenResponse where
-  parseJSON =
-    Core.withObject
-      "CreateEnrollmentTokenResponse"
-      ( \o ->
-          CreateEnrollmentTokenResponse
-            Core.<$> (o Core..:? "enrollmentToken")
-      )
-
-instance Core.ToJSON CreateEnrollmentTokenResponse where
-  toJSON CreateEnrollmentTokenResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("enrollmentToken" Core..=)
-              Core.<$> enrollmentToken
           ]
       )
 
@@ -1291,7 +1209,7 @@ data Device = Device
     product :: (Core.Maybe Core.Text),
     -- | The device report updated with the latest app states.
     report :: (Core.Maybe DeviceReport),
-    -- | Retail brand for the device, if set. See https:\/\/developer.android.com\/reference\/android\/os\/Build.html#BRAND
+    -- | Retail brand for the device, if set. See android.os.Build.BRAND
     retailBrand :: (Core.Maybe Core.Text),
     -- | API compatibility version.
     sdkVersion :: (Core.Maybe Core.Int32)
@@ -1341,8 +1259,7 @@ instance Core.ToJSON Device where
       ( Core.catMaybes
           [ ("androidId" Core..=) Core.<$> androidId,
             ("device" Core..=) Core.<$> device,
-            ("latestBuildFingerprint" Core..=)
-              Core.<$> latestBuildFingerprint,
+            ("latestBuildFingerprint" Core..=) Core.<$> latestBuildFingerprint,
             ("maker" Core..=) Core.<$> maker,
             ("managementType" Core..=) Core.<$> managementType,
             ("model" Core..=) Core.<$> model,
@@ -1381,7 +1298,8 @@ instance Core.FromJSON DeviceReport where
       ( \o ->
           DeviceReport
             Core.<$> (o Core..:? "appState")
-            Core.<*> ( o Core..:? "lastUpdatedTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "lastUpdatedTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1459,16 +1377,12 @@ instance Core.FromJSON DeviceState where
   parseJSON =
     Core.withObject
       "DeviceState"
-      ( \o ->
-          DeviceState Core.<$> (o Core..:? "accountState")
-      )
+      (\o -> DeviceState Core.<$> (o Core..:? "accountState"))
 
 instance Core.ToJSON DeviceState where
   toJSON DeviceState {..} =
     Core.object
-      ( Core.catMaybes
-          [("accountState" Core..=) Core.<$> accountState]
-      )
+      (Core.catMaybes [("accountState" Core..=) Core.<$> accountState])
 
 --
 -- /See:/ 'newDevicesListResponse' smart constructor.
@@ -1487,14 +1401,55 @@ instance Core.FromJSON DevicesListResponse where
   parseJSON =
     Core.withObject
       "DevicesListResponse"
-      ( \o ->
-          DevicesListResponse Core.<$> (o Core..:? "device")
-      )
+      (\o -> DevicesListResponse Core.<$> (o Core..:? "device"))
 
 instance Core.ToJSON DevicesListResponse where
   toJSON DevicesListResponse {..} =
+    Core.object (Core.catMaybes [("device" Core..=) Core.<$> device])
+
+-- | A token used to enroll a device.
+--
+-- /See:/ 'newEnrollmentToken' smart constructor.
+data EnrollmentToken = EnrollmentToken
+  { -- | [Optional] The length of time the enrollment token is valid, ranging from 1 minute to <https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/util/Durations.html#MAX_VALUE Durations.MAX_VALUE>, approximately 10,000 years. If not specified, the default duration is 1 hour.
+    duration :: (Core.Maybe Core.Duration),
+    -- | [Required] The type of the enrollment token.
+    enrollmentTokenType :: (Core.Maybe EnrollmentToken_EnrollmentTokenType),
+    -- | The token value that\'s passed to the device and authorizes the device to enroll. This is a read-only field generated by the server.
+    token :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnrollmentToken' with the minimum fields required to make a request.
+newEnrollmentToken ::
+  EnrollmentToken
+newEnrollmentToken =
+  EnrollmentToken
+    { duration = Core.Nothing,
+      enrollmentTokenType = Core.Nothing,
+      token = Core.Nothing
+    }
+
+instance Core.FromJSON EnrollmentToken where
+  parseJSON =
+    Core.withObject
+      "EnrollmentToken"
+      ( \o ->
+          EnrollmentToken
+            Core.<$> (o Core..:? "duration")
+            Core.<*> (o Core..:? "enrollmentTokenType")
+            Core.<*> (o Core..:? "token")
+      )
+
+instance Core.ToJSON EnrollmentToken where
+  toJSON EnrollmentToken {..} =
     Core.object
-      (Core.catMaybes [("device" Core..=) Core.<$> device])
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("enrollmentTokenType" Core..=) Core.<$> enrollmentTokenType,
+            ("token" Core..=) Core.<$> token
+          ]
+      )
 
 -- | An Enterprises resource represents the binding between an EMM and a specific organization. That binding can be instantiated in one of two different ways using this API as follows: - For Google managed domain customers, the process involves using Enterprises.enroll and Enterprises.setAccount (in conjunction with artifacts obtained from the Admin console and the Google API Console) and submitted to the EMM through a more-or-less manual process. - For managed Google Play Accounts customers, the process involves using Enterprises.generateSignupUrl and Enterprises.completeSignup in conjunction with the managed Google Play sign-up UI (Google-provided mechanism) to create the binding without manual steps. As an EMM, you can support either or both approaches in your EMM console. See Create an Enterprise for details.
 --
@@ -1502,10 +1457,14 @@ instance Core.ToJSON DevicesListResponse where
 data Enterprise = Enterprise
   { -- | Admins of the enterprise. This is only supported for enterprises created via the EMM-initiated flow.
     administrator :: (Core.Maybe [Administrator]),
+    -- | The type of the enterprise.
+    enterpriseType :: (Core.Maybe Enterprise_EnterpriseType),
     -- | Output only. Settings for Google-provided user authentication.
     googleAuthenticationSettings :: (Core.Maybe GoogleAuthenticationSettings),
     -- | The unique ID for the enterprise.
     id :: (Core.Maybe Core.Text),
+    -- | The type of managed Google domain
+    managedGoogleDomainType :: (Core.Maybe Enterprise_ManagedGoogleDomainType),
     -- | The name of the enterprise, for example, \"Example, Inc\".
     name :: (Core.Maybe Core.Text),
     -- | The enterprise\'s primary domain, such as \"example.com\".
@@ -1519,8 +1478,10 @@ newEnterprise ::
 newEnterprise =
   Enterprise
     { administrator = Core.Nothing,
+      enterpriseType = Core.Nothing,
       googleAuthenticationSettings = Core.Nothing,
       id = Core.Nothing,
+      managedGoogleDomainType = Core.Nothing,
       name = Core.Nothing,
       primaryDomain = Core.Nothing
     }
@@ -1532,8 +1493,10 @@ instance Core.FromJSON Enterprise where
       ( \o ->
           Enterprise
             Core.<$> (o Core..:? "administrator")
+            Core.<*> (o Core..:? "enterpriseType")
             Core.<*> (o Core..:? "googleAuthenticationSettings")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "managedGoogleDomainType")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "primaryDomain")
       )
@@ -1543,9 +1506,12 @@ instance Core.ToJSON Enterprise where
     Core.object
       ( Core.catMaybes
           [ ("administrator" Core..=) Core.<$> administrator,
+            ("enterpriseType" Core..=) Core.<$> enterpriseType,
             ("googleAuthenticationSettings" Core..=)
               Core.<$> googleAuthenticationSettings,
             ("id" Core..=) Core.<$> id,
+            ("managedGoogleDomainType" Core..=)
+              Core.<$> managedGoogleDomainType,
             ("name" Core..=) Core.<$> name,
             ("primaryDomain" Core..=) Core.<$> primaryDomain
           ]
@@ -1563,23 +1529,19 @@ newtype EnterpriseAccount = EnterpriseAccount
 -- | Creates a value of 'EnterpriseAccount' with the minimum fields required to make a request.
 newEnterpriseAccount ::
   EnterpriseAccount
-newEnterpriseAccount = EnterpriseAccount {accountEmail = Core.Nothing}
+newEnterpriseAccount =
+  EnterpriseAccount {accountEmail = Core.Nothing}
 
 instance Core.FromJSON EnterpriseAccount where
   parseJSON =
     Core.withObject
       "EnterpriseAccount"
-      ( \o ->
-          EnterpriseAccount
-            Core.<$> (o Core..:? "accountEmail")
-      )
+      (\o -> EnterpriseAccount Core.<$> (o Core..:? "accountEmail"))
 
 instance Core.ToJSON EnterpriseAccount where
   toJSON EnterpriseAccount {..} =
     Core.object
-      ( Core.catMaybes
-          [("accountEmail" Core..=) Core.<$> accountEmail]
-      )
+      (Core.catMaybes [("accountEmail" Core..=) Core.<$> accountEmail])
 
 -- | An authentication URL configuration for the authenticator app of an identity provider.
 --
@@ -1596,25 +1558,45 @@ newEnterpriseAuthenticationAppLinkConfig ::
 newEnterpriseAuthenticationAppLinkConfig =
   EnterpriseAuthenticationAppLinkConfig {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    EnterpriseAuthenticationAppLinkConfig
-  where
+instance Core.FromJSON EnterpriseAuthenticationAppLinkConfig where
   parseJSON =
     Core.withObject
       "EnterpriseAuthenticationAppLinkConfig"
       ( \o ->
-          EnterpriseAuthenticationAppLinkConfig
-            Core.<$> (o Core..:? "uri")
+          EnterpriseAuthenticationAppLinkConfig Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    EnterpriseAuthenticationAppLinkConfig
-  where
+instance Core.ToJSON EnterpriseAuthenticationAppLinkConfig where
   toJSON EnterpriseAuthenticationAppLinkConfig {..} =
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+
+-- | An event generated when an enterprise is upgraded. __Note:__ This feature is not generally available.
+--
+-- /See:/ 'newEnterpriseUpgradeEvent' smart constructor.
+newtype EnterpriseUpgradeEvent = EnterpriseUpgradeEvent
+  { -- | The upgrade state.
+    upgradeState :: (Core.Maybe EnterpriseUpgradeEvent_UpgradeState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EnterpriseUpgradeEvent' with the minimum fields required to make a request.
+newEnterpriseUpgradeEvent ::
+  EnterpriseUpgradeEvent
+newEnterpriseUpgradeEvent =
+  EnterpriseUpgradeEvent {upgradeState = Core.Nothing}
+
+instance Core.FromJSON EnterpriseUpgradeEvent where
+  parseJSON =
+    Core.withObject
+      "EnterpriseUpgradeEvent"
+      ( \o ->
+          EnterpriseUpgradeEvent Core.<$> (o Core..:? "upgradeState")
+      )
+
+instance Core.ToJSON EnterpriseUpgradeEvent where
+  toJSON EnterpriseUpgradeEvent {..} =
     Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+      (Core.catMaybes [("upgradeState" Core..=) Core.<$> upgradeState])
 
 --
 -- /See:/ 'newEnterprisesListResponse' smart constructor.
@@ -1627,23 +1609,19 @@ newtype EnterprisesListResponse = EnterprisesListResponse
 -- | Creates a value of 'EnterprisesListResponse' with the minimum fields required to make a request.
 newEnterprisesListResponse ::
   EnterprisesListResponse
-newEnterprisesListResponse = EnterprisesListResponse {enterprise = Core.Nothing}
+newEnterprisesListResponse =
+  EnterprisesListResponse {enterprise = Core.Nothing}
 
 instance Core.FromJSON EnterprisesListResponse where
   parseJSON =
     Core.withObject
       "EnterprisesListResponse"
-      ( \o ->
-          EnterprisesListResponse
-            Core.<$> (o Core..:? "enterprise")
-      )
+      (\o -> EnterprisesListResponse Core.<$> (o Core..:? "enterprise"))
 
 instance Core.ToJSON EnterprisesListResponse where
   toJSON EnterprisesListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("enterprise" Core..=) Core.<$> enterprise]
-      )
+      (Core.catMaybes [("enterprise" Core..=) Core.<$> enterprise])
 
 --
 -- /See:/ 'newEnterprisesSendTestPushNotificationResponse' smart constructor.
@@ -1660,14 +1638,12 @@ newEnterprisesSendTestPushNotificationResponse ::
   EnterprisesSendTestPushNotificationResponse
 newEnterprisesSendTestPushNotificationResponse =
   EnterprisesSendTestPushNotificationResponse
-    { messageId = Core.Nothing,
+    { messageId =
+        Core.Nothing,
       topicName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    EnterprisesSendTestPushNotificationResponse
-  where
+instance Core.FromJSON EnterprisesSendTestPushNotificationResponse where
   parseJSON =
     Core.withObject
       "EnterprisesSendTestPushNotificationResponse"
@@ -1677,21 +1653,16 @@ instance
             Core.<*> (o Core..:? "topicName")
       )
 
-instance
-  Core.ToJSON
-    EnterprisesSendTestPushNotificationResponse
-  where
-  toJSON
-    EnterprisesSendTestPushNotificationResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("messageId" Core..=) Core.<$> messageId,
-              ("topicName" Core..=) Core.<$> topicName
-            ]
-        )
+instance Core.ToJSON EnterprisesSendTestPushNotificationResponse where
+  toJSON EnterprisesSendTestPushNotificationResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("messageId" Core..=) Core.<$> messageId,
+            ("topicName" Core..=) Core.<$> topicName
+          ]
+      )
 
--- | The presence of an Entitlements resource indicates that a user has the right to use a particular app. Entitlements are user specific, not device specific. This allows a user with an entitlement to an app to install the app on all their devices. It\'s also possible for a user to hold an entitlement to an app without installing the app on any device. The API can be used to create an entitlement. As an option, you can also use the API to trigger the installation of an app on all a user\'s managed devices at the same time the entitlement is created. If the app is free, creating the entitlement also creates a group license for that app. For paid apps, creating the entitlement consumes one license, and that license remains consumed until the entitlement is removed. If the enterprise hasn\'t purchased enough licenses, then no entitlement is created and the installation fails. An entitlement is also not created for an app if the app requires permissions that the enterprise hasn\'t accepted. If an entitlement is
--- deleted, the app may be uninstalled from a user\'s device. As a best practice, uninstall the app by calling Installs.delete() before deleting the entitlement. Entitlements for apps that a user pays for on an unmanaged profile have \"userPurchase\" as the entitlement reason. These entitlements cannot be removed via the API.
+-- | /Deprecated:/ New integrations cannot use this method and can refer to our new recommendations.
 --
 -- /See:/ 'newEntitlement' smart constructor.
 data Entitlement = Entitlement
@@ -1705,7 +1676,8 @@ data Entitlement = Entitlement
 -- | Creates a value of 'Entitlement' with the minimum fields required to make a request.
 newEntitlement ::
   Entitlement
-newEntitlement = Entitlement {productId = Core.Nothing, reason = Core.Nothing}
+newEntitlement =
+  Entitlement {productId = Core.Nothing, reason = Core.Nothing}
 
 instance Core.FromJSON Entitlement where
   parseJSON =
@@ -1745,16 +1717,40 @@ instance Core.FromJSON EntitlementsListResponse where
     Core.withObject
       "EntitlementsListResponse"
       ( \o ->
-          EntitlementsListResponse
-            Core.<$> (o Core..:? "entitlement")
+          EntitlementsListResponse Core.<$> (o Core..:? "entitlement")
       )
 
 instance Core.ToJSON EntitlementsListResponse where
   toJSON EntitlementsListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("entitlement" Core..=) Core.<$> entitlement]
+      (Core.catMaybes [("entitlement" Core..=) Core.<$> entitlement])
+
+-- | Response message for generating a URL to upgrade an existing managed Google Play Accounts enterprise to a managed Google domain. __Note:__ This feature is not generally available.
+--
+-- /See:/ 'newGenerateEnterpriseUpgradeUrlResponse' smart constructor.
+newtype GenerateEnterpriseUpgradeUrlResponse = GenerateEnterpriseUpgradeUrlResponse
+  { -- | A URL for an enterprise admin to upgrade their enterprise. The page can\'t be rendered in an iframe.
+    url :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GenerateEnterpriseUpgradeUrlResponse' with the minimum fields required to make a request.
+newGenerateEnterpriseUpgradeUrlResponse ::
+  GenerateEnterpriseUpgradeUrlResponse
+newGenerateEnterpriseUpgradeUrlResponse =
+  GenerateEnterpriseUpgradeUrlResponse {url = Core.Nothing}
+
+instance Core.FromJSON GenerateEnterpriseUpgradeUrlResponse where
+  parseJSON =
+    Core.withObject
+      "GenerateEnterpriseUpgradeUrlResponse"
+      ( \o ->
+          GenerateEnterpriseUpgradeUrlResponse Core.<$> (o Core..:? "url")
       )
+
+instance Core.ToJSON GenerateEnterpriseUpgradeUrlResponse where
+  toJSON GenerateEnterpriseUpgradeUrlResponse {..} =
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 -- | Contains settings for Google-provided user authentication.
 --
@@ -1775,7 +1771,8 @@ newGoogleAuthenticationSettings ::
   GoogleAuthenticationSettings
 newGoogleAuthenticationSettings =
   GoogleAuthenticationSettings
-    { dedicatedDevicesAllowed = Core.Nothing,
+    { dedicatedDevicesAllowed =
+        Core.Nothing,
       googleAuthenticationRequired = Core.Nothing
     }
 
@@ -1800,7 +1797,7 @@ instance Core.ToJSON GoogleAuthenticationSettings where
           ]
       )
 
--- | Group license objects allow you to keep track of licenses (called entitlements) for both free and paid apps. For a free app, a group license is created when an enterprise admin first approves the product in Google Play or when the first entitlement for the product is created for a user via the API. For a paid app, a group license object is only created when an enterprise admin purchases the product in Google Play for the first time. Use the API to query group licenses. A Grouplicenses resource includes the total number of licenses purchased (paid apps only) and the total number of licenses currently in use. In other words, the total number of Entitlements that exist for the product. Only one group license object is created per product and group license objects are never deleted. If a product is unapproved, its group license remains. This allows enterprise admins to keep track of any remaining entitlements for the product.
+-- | /Deprecated:/ New integrations cannot use this method and can refer to our new recommendations
 --
 -- /See:/ 'newGroupLicense' smart constructor.
 data GroupLicense = GroupLicense
@@ -1850,8 +1847,7 @@ instance Core.ToJSON GroupLicense where
   toJSON GroupLicense {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acquisitionKind" Core..=)
-              Core.<$> acquisitionKind,
+          [ ("acquisitionKind" Core..=) Core.<$> acquisitionKind,
             ("approval" Core..=) Core.<$> approval,
             ("numProvisioned" Core..=) Core.<$> numProvisioned,
             ("numPurchased" Core..=) Core.<$> numPurchased,
@@ -1878,15 +1874,11 @@ instance Core.FromJSON GroupLicenseUsersListResponse where
   parseJSON =
     Core.withObject
       "GroupLicenseUsersListResponse"
-      ( \o ->
-          GroupLicenseUsersListResponse
-            Core.<$> (o Core..:? "user")
-      )
+      (\o -> GroupLicenseUsersListResponse Core.<$> (o Core..:? "user"))
 
 instance Core.ToJSON GroupLicenseUsersListResponse where
   toJSON GroupLicenseUsersListResponse {..} =
-    Core.object
-      (Core.catMaybes [("user" Core..=) Core.<$> user])
+    Core.object (Core.catMaybes [("user" Core..=) Core.<$> user])
 
 --
 -- /See:/ 'newGroupLicensesListResponse' smart constructor.
@@ -1907,16 +1899,13 @@ instance Core.FromJSON GroupLicensesListResponse where
     Core.withObject
       "GroupLicensesListResponse"
       ( \o ->
-          GroupLicensesListResponse
-            Core.<$> (o Core..:? "groupLicense")
+          GroupLicensesListResponse Core.<$> (o Core..:? "groupLicense")
       )
 
 instance Core.ToJSON GroupLicensesListResponse where
   toJSON GroupLicensesListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("groupLicense" Core..=) Core.<$> groupLicense]
-      )
+      (Core.catMaybes [("groupLicense" Core..=) Core.<$> groupLicense])
 
 -- | The existence of an Installs resource indicates that an app is installed on a particular device (or that an install is pending). The API can be used to create an install resource using the update method. This triggers the actual install of the app on the device. If the user does not already have an entitlement for the app, then an attempt is made to create one. If this fails (for example, because the app is not free and there is no available license), then the creation of the install fails. The API can also be used to update an installed app. If the update method is used on an existing install, then the app will be updated to the latest available version. Note that it is not possible to force the installation of a specific version of an app: the version code is read-only. If a user installs an app themselves (as permitted by the enterprise), then again an install resource and possibly an entitlement resource are automatically created. The API can also be used to delete an install resource, which triggers the
 -- removal of the app from the device. Note that deleting an install does not automatically remove the corresponding entitlement, even if there are no remaining installs. The install resource will also be deleted if the user uninstalls the app themselves.
@@ -2028,22 +2017,19 @@ newtype InstallsListResponse = InstallsListResponse
 -- | Creates a value of 'InstallsListResponse' with the minimum fields required to make a request.
 newInstallsListResponse ::
   InstallsListResponse
-newInstallsListResponse = InstallsListResponse {install = Core.Nothing}
+newInstallsListResponse =
+  InstallsListResponse {install = Core.Nothing}
 
 instance Core.FromJSON InstallsListResponse where
   parseJSON =
     Core.withObject
       "InstallsListResponse"
-      ( \o ->
-          InstallsListResponse Core.<$> (o Core..:? "install")
-      )
+      (\o -> InstallsListResponse Core.<$> (o Core..:? "install"))
 
 instance Core.ToJSON InstallsListResponse where
   toJSON InstallsListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("install" Core..=) Core.<$> install]
-      )
+      (Core.catMaybes [("install" Core..=) Core.<$> install])
 
 -- | Represents a keyed app state containing a key, timestamp, severity level, optional description, and optional data.
 --
@@ -2084,7 +2070,8 @@ instance Core.FromJSON KeyedAppState where
             Core.<*> (o Core..:? "key")
             Core.<*> (o Core..:? "message")
             Core.<*> (o Core..:? "severity")
-            Core.<*> ( o Core..:? "stateTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "stateTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -2097,7 +2084,8 @@ instance Core.ToJSON KeyedAppState where
             ("key" Core..=) Core.<$> key,
             ("message" Core..=) Core.<$> message,
             ("severity" Core..=) Core.<$> severity,
-            ("stateTimestampMillis" Core..=) Core.. Core.AsText
+            ("stateTimestampMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> stateTimestampMillis
           ]
       )
@@ -2116,7 +2104,8 @@ data LocalizedText = LocalizedText
 -- | Creates a value of 'LocalizedText' with the minimum fields required to make a request.
 newLocalizedText ::
   LocalizedText
-newLocalizedText = LocalizedText {locale = Core.Nothing, text = Core.Nothing}
+newLocalizedText =
+  LocalizedText {locale = Core.Nothing, text = Core.Nothing}
 
 instance Core.FromJSON LocalizedText where
   parseJSON =
@@ -2124,7 +2113,8 @@ instance Core.FromJSON LocalizedText where
       "LocalizedText"
       ( \o ->
           LocalizedText
-            Core.<$> (o Core..:? "locale") Core.<*> (o Core..:? "text")
+            Core.<$> (o Core..:? "locale")
+            Core.<*> (o Core..:? "text")
       )
 
 instance Core.ToJSON LocalizedText where
@@ -2162,10 +2152,9 @@ instance Core.FromJSON MaintenanceWindow where
       "MaintenanceWindow"
       ( \o ->
           MaintenanceWindow
-            Core.<$> ( o Core..:? "durationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "startTimeAfterMidnightMs"
+            Core.<$> (o Core..:? "durationMs" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "startTimeAfterMidnightMs"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -2174,15 +2163,14 @@ instance Core.ToJSON MaintenanceWindow where
   toJSON MaintenanceWindow {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationMs" Core..=) Core.. Core.AsText
-              Core.<$> durationMs,
+          [ ("durationMs" Core..=) Core.. Core.AsText Core.<$> durationMs,
             ("startTimeAfterMidnightMs" Core..=)
               Core.. Core.AsText
               Core.<$> startTimeAfterMidnightMs
           ]
       )
 
--- | A managed configuration resource contains the set of managed properties defined by the app developer in the app\'s managed configurations schema, as well as any configuration variables defined for the user.
+-- | /Deprecated:/ New integrations cannot use this method and can refer to our new recommendations
 --
 -- /See:/ 'newManagedConfiguration' smart constructor.
 data ManagedConfiguration = ManagedConfiguration
@@ -2245,13 +2233,11 @@ newManagedConfigurationsForDeviceListResponse ::
   ManagedConfigurationsForDeviceListResponse
 newManagedConfigurationsForDeviceListResponse =
   ManagedConfigurationsForDeviceListResponse
-    { managedConfigurationForDevice = Core.Nothing
+    { managedConfigurationForDevice =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedConfigurationsForDeviceListResponse
-  where
+instance Core.FromJSON ManagedConfigurationsForDeviceListResponse where
   parseJSON =
     Core.withObject
       "ManagedConfigurationsForDeviceListResponse"
@@ -2260,10 +2246,7 @@ instance
             Core.<$> (o Core..:? "managedConfigurationForDevice")
       )
 
-instance
-  Core.ToJSON
-    ManagedConfigurationsForDeviceListResponse
-  where
+instance Core.ToJSON ManagedConfigurationsForDeviceListResponse where
   toJSON ManagedConfigurationsForDeviceListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2285,13 +2268,11 @@ newManagedConfigurationsForUserListResponse ::
   ManagedConfigurationsForUserListResponse
 newManagedConfigurationsForUserListResponse =
   ManagedConfigurationsForUserListResponse
-    { managedConfigurationForUser = Core.Nothing
+    { managedConfigurationForUser =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedConfigurationsForUserListResponse
-  where
+instance Core.FromJSON ManagedConfigurationsForUserListResponse where
   parseJSON =
     Core.withObject
       "ManagedConfigurationsForUserListResponse"
@@ -2300,10 +2281,7 @@ instance
             Core.<$> (o Core..:? "managedConfigurationForUser")
       )
 
-instance
-  Core.ToJSON
-    ManagedConfigurationsForUserListResponse
-  where
+instance Core.ToJSON ManagedConfigurationsForUserListResponse where
   toJSON ManagedConfigurationsForUserListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2330,7 +2308,8 @@ newManagedConfigurationsSettings ::
   ManagedConfigurationsSettings
 newManagedConfigurationsSettings =
   ManagedConfigurationsSettings
-    { lastUpdatedTimestampMillis = Core.Nothing,
+    { lastUpdatedTimestampMillis =
+        Core.Nothing,
       mcmId = Core.Nothing,
       name = Core.Nothing
     }
@@ -2341,7 +2320,8 @@ instance Core.FromJSON ManagedConfigurationsSettings where
       "ManagedConfigurationsSettings"
       ( \o ->
           ManagedConfigurationsSettings
-            Core.<$> ( o Core..:? "lastUpdatedTimestampMillis"
+            Core.<$> ( o
+                         Core..:? "lastUpdatedTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "mcmId")
@@ -2373,13 +2353,11 @@ newManagedConfigurationsSettingsListResponse ::
   ManagedConfigurationsSettingsListResponse
 newManagedConfigurationsSettingsListResponse =
   ManagedConfigurationsSettingsListResponse
-    { managedConfigurationsSettings = Core.Nothing
+    { managedConfigurationsSettings =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ManagedConfigurationsSettingsListResponse
-  where
+instance Core.FromJSON ManagedConfigurationsSettingsListResponse where
   parseJSON =
     Core.withObject
       "ManagedConfigurationsSettingsListResponse"
@@ -2388,10 +2366,7 @@ instance
             Core.<$> (o Core..:? "managedConfigurationsSettings")
       )
 
-instance
-  Core.ToJSON
-    ManagedConfigurationsSettingsListResponse
-  where
+instance Core.ToJSON ManagedConfigurationsSettingsListResponse where
   toJSON ManagedConfigurationsSettingsListResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2457,12 +2432,10 @@ instance Core.ToJSON ManagedProperty where
           [ ("key" Core..=) Core.<$> key,
             ("valueBool" Core..=) Core.<$> valueBool,
             ("valueBundle" Core..=) Core.<$> valueBundle,
-            ("valueBundleArray" Core..=)
-              Core.<$> valueBundleArray,
+            ("valueBundleArray" Core..=) Core.<$> valueBundleArray,
             ("valueInteger" Core..=) Core.<$> valueInteger,
             ("valueString" Core..=) Core.<$> valueString,
-            ("valueStringArray" Core..=)
-              Core.<$> valueStringArray
+            ("valueStringArray" Core..=) Core.<$> valueStringArray
           ]
       )
 
@@ -2486,17 +2459,14 @@ instance Core.FromJSON ManagedPropertyBundle where
     Core.withObject
       "ManagedPropertyBundle"
       ( \o ->
-          ManagedPropertyBundle
-            Core.<$> (o Core..:? "managedProperty")
+          ManagedPropertyBundle Core.<$> (o Core..:? "managedProperty")
       )
 
 instance Core.ToJSON ManagedPropertyBundle where
   toJSON ManagedPropertyBundle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("managedProperty" Core..=)
-              Core.<$> managedProperty
-          ]
+          [("managedProperty" Core..=) Core.<$> managedProperty]
       )
 
 -- | An event generated when a new device is ready to be managed.
@@ -2586,11 +2556,9 @@ instance Core.ToJSON NewPermissionsEvent where
   toJSON NewPermissionsEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("approvedPermissions" Core..=)
-              Core.<$> approvedPermissions,
+          [ ("approvedPermissions" Core..=) Core.<$> approvedPermissions,
             ("productId" Core..=) Core.<$> productId,
-            ("requestedPermissions" Core..=)
-              Core.<$> requestedPermissions
+            ("requestedPermissions" Core..=) Core.<$> requestedPermissions
           ]
       )
 
@@ -2606,6 +2574,8 @@ data Notification = Notification
     deviceReportUpdateEvent :: (Core.Maybe DeviceReportUpdateEvent),
     -- | The ID of the enterprise for which the notification is sent. This will always be present.
     enterpriseId :: (Core.Maybe Core.Text),
+    -- | Notifications about enterprise upgrade. __Note:__ This feature is not generally available.
+    enterpriseUpgradeEvent :: (Core.Maybe EnterpriseUpgradeEvent),
     -- | Notifications about an app installation failure.
     installFailureEvent :: (Core.Maybe InstallFailureEvent),
     -- | Notifications about new devices.
@@ -2632,6 +2602,7 @@ newNotification =
       appUpdateEvent = Core.Nothing,
       deviceReportUpdateEvent = Core.Nothing,
       enterpriseId = Core.Nothing,
+      enterpriseUpgradeEvent = Core.Nothing,
       installFailureEvent = Core.Nothing,
       newDeviceEvent' = Core.Nothing,
       newPermissionsEvent' = Core.Nothing,
@@ -2651,15 +2622,14 @@ instance Core.FromJSON Notification where
             Core.<*> (o Core..:? "appUpdateEvent")
             Core.<*> (o Core..:? "deviceReportUpdateEvent")
             Core.<*> (o Core..:? "enterpriseId")
+            Core.<*> (o Core..:? "enterpriseUpgradeEvent")
             Core.<*> (o Core..:? "installFailureEvent")
             Core.<*> (o Core..:? "newDeviceEvent")
             Core.<*> (o Core..:? "newPermissionsEvent")
             Core.<*> (o Core..:? "notificationType")
             Core.<*> (o Core..:? "productApprovalEvent")
             Core.<*> (o Core..:? "productAvailabilityChangeEvent")
-            Core.<*> ( o Core..:? "timestampMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "timestampMillis" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Notification where
@@ -2672,18 +2642,16 @@ instance Core.ToJSON Notification where
             ("deviceReportUpdateEvent" Core..=)
               Core.<$> deviceReportUpdateEvent,
             ("enterpriseId" Core..=) Core.<$> enterpriseId,
-            ("installFailureEvent" Core..=)
-              Core.<$> installFailureEvent,
+            ("enterpriseUpgradeEvent" Core..=) Core.<$> enterpriseUpgradeEvent,
+            ("installFailureEvent" Core..=) Core.<$> installFailureEvent,
             ("newDeviceEvent" Core..=) Core.<$> newDeviceEvent',
-            ("newPermissionsEvent" Core..=)
-              Core.<$> newPermissionsEvent',
-            ("notificationType" Core..=)
-              Core.<$> notificationType,
-            ("productApprovalEvent" Core..=)
-              Core.<$> productApprovalEvent,
+            ("newPermissionsEvent" Core..=) Core.<$> newPermissionsEvent',
+            ("notificationType" Core..=) Core.<$> notificationType,
+            ("productApprovalEvent" Core..=) Core.<$> productApprovalEvent,
             ("productAvailabilityChangeEvent" Core..=)
               Core.<$> productAvailabilityChangeEvent,
-            ("timestampMillis" Core..=) Core.. Core.AsText
+            ("timestampMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> timestampMillis
           ]
       )
@@ -2723,8 +2691,7 @@ instance Core.ToJSON NotificationSet where
     Core.object
       ( Core.catMaybes
           [ ("notification" Core..=) Core.<$> notification,
-            ("notificationSetId" Core..=)
-              Core.<$> notificationSetId
+            ("notificationSetId" Core..=) Core.<$> notificationSetId
           ]
       )
 
@@ -2820,12 +2787,14 @@ instance Core.ToJSON Permission where
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
-  { -- | Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, this field has no effect. \"choiceToTheUser\" allows the device\'s user to configure the app update policy. \"always\" enables auto updates. \"never\" disables auto updates. \"wifiOnly\" enables auto updates only when the device is connected to wifi.
+  { -- | Controls when automatic app updates on the device can be applied. Recommended alternative: autoUpdateMode which is set per app, provides greater flexibility around update frequency. When autoUpdateMode is set to AUTO/UPDATE/POSTPONED or AUTO/UPDATE/HIGH_PRIORITY, autoUpdatePolicy has no effect. - choiceToTheUser allows the device\'s user to configure the app update policy. - always enables auto updates. - never disables auto updates. - wifiOnly enables auto updates only when the device is connected to wifi. /Important:/ Changes to app update policies don\'t affect updates that are in progress. Any policy changes will apply to subsequent app updates.
     autoUpdatePolicy :: (Core.Maybe Policy_AutoUpdatePolicy),
     -- | Whether the device reports app states to the EMM. The default value is \"deviceReportDisabled\".
     deviceReportPolicy :: (Core.Maybe Policy_DeviceReportPolicy),
     -- | The maintenance window defining when apps running in the foreground should be updated.
     maintenanceWindow :: (Core.Maybe MaintenanceWindow),
+    -- | An identifier for the policy that will be passed with the app install feedback sent from the Play Store.
+    policyId :: (Core.Maybe Core.Text),
     -- | The availability granted to the device for the specified products. \"all\" gives the device access to all products, regardless of approval status. \"all\" does not enable automatic visibility of \"alpha\" or \"beta\" tracks. \"whitelist\" grants the device access the products specified in productPolicy[]. Only products that are approved or products that were previously approved (products with revoked approval) by the enterprise can be whitelisted. If no value is provided, the availability set at the user level is applied by default.
     productAvailabilityPolicy :: (Core.Maybe Policy_ProductAvailabilityPolicy),
     -- | The list of product policies. The productAvailabilityPolicy needs to be set to WHITELIST or ALL for the product policies to be applied.
@@ -2841,6 +2810,7 @@ newPolicy =
     { autoUpdatePolicy = Core.Nothing,
       deviceReportPolicy = Core.Nothing,
       maintenanceWindow = Core.Nothing,
+      policyId = Core.Nothing,
       productAvailabilityPolicy = Core.Nothing,
       productPolicy = Core.Nothing
     }
@@ -2854,6 +2824,7 @@ instance Core.FromJSON Policy where
             Core.<$> (o Core..:? "autoUpdatePolicy")
             Core.<*> (o Core..:? "deviceReportPolicy")
             Core.<*> (o Core..:? "maintenanceWindow")
+            Core.<*> (o Core..:? "policyId")
             Core.<*> (o Core..:? "productAvailabilityPolicy")
             Core.<*> (o Core..:? "productPolicy")
       )
@@ -2862,12 +2833,10 @@ instance Core.ToJSON Policy where
   toJSON Policy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoUpdatePolicy" Core..=)
-              Core.<$> autoUpdatePolicy,
-            ("deviceReportPolicy" Core..=)
-              Core.<$> deviceReportPolicy,
-            ("maintenanceWindow" Core..=)
-              Core.<$> maintenanceWindow,
+          [ ("autoUpdatePolicy" Core..=) Core.<$> autoUpdatePolicy,
+            ("deviceReportPolicy" Core..=) Core.<$> deviceReportPolicy,
+            ("maintenanceWindow" Core..=) Core.<$> maintenanceWindow,
+            ("policyId" Core..=) Core.<$> policyId,
             ("productAvailabilityPolicy" Core..=)
               Core.<$> productAvailabilityPolicy,
             ("productPolicy" Core..=) Core.<$> productPolicy
@@ -2902,6 +2871,8 @@ data Product = Product
     distributionChannel :: (Core.Maybe Product_DistributionChannel),
     -- | Noteworthy features (if any) of this product.
     features :: (Core.Maybe [Product_FeaturesItem]),
+    -- | The localized full app store description, if available.
+    fullDescription :: (Core.Maybe Core.Text),
     -- | A link to an image that can be used as an icon for the product. This image is suitable for use at up to 512px x 512px.
     iconUrl :: (Core.Maybe Core.Text),
     -- | The approximate time (within 7 days) the app was last published, expressed in milliseconds since epoch.
@@ -2948,6 +2919,7 @@ newProduct =
       detailsUrl = Core.Nothing,
       distributionChannel = Core.Nothing,
       features = Core.Nothing,
+      fullDescription = Core.Nothing,
       iconUrl = Core.Nothing,
       lastUpdatedTimestampMillis = Core.Nothing,
       minAndroidSdkVersion = Core.Nothing,
@@ -2981,8 +2953,10 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "detailsUrl")
             Core.<*> (o Core..:? "distributionChannel")
             Core.<*> (o Core..:? "features")
+            Core.<*> (o Core..:? "fullDescription")
             Core.<*> (o Core..:? "iconUrl")
-            Core.<*> ( o Core..:? "lastUpdatedTimestampMillis"
+            Core.<*> ( o
+                         Core..:? "lastUpdatedTimestampMillis"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "minAndroidSdkVersion")
@@ -3002,36 +2976,31 @@ instance Core.ToJSON Product where
   toJSON Product {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appRestrictionsSchema" Core..=)
-              Core.<$> appRestrictionsSchema,
+          [ ("appRestrictionsSchema" Core..=) Core.<$> appRestrictionsSchema,
             ("appTracks" Core..=) Core.<$> appTracks,
             ("appVersion" Core..=) Core.<$> appVersion,
             ("authorName" Core..=) Core.<$> authorName,
-            ("availableCountries" Core..=)
-              Core.<$> availableCountries,
+            ("availableCountries" Core..=) Core.<$> availableCountries,
             ("availableTracks" Core..=) Core.<$> availableTracks,
             ("category" Core..=) Core.<$> category,
             ("contentRating" Core..=) Core.<$> contentRating,
             ("description" Core..=) Core.<$> description,
             ("detailsUrl" Core..=) Core.<$> detailsUrl,
-            ("distributionChannel" Core..=)
-              Core.<$> distributionChannel,
+            ("distributionChannel" Core..=) Core.<$> distributionChannel,
             ("features" Core..=) Core.<$> features,
+            ("fullDescription" Core..=) Core.<$> fullDescription,
             ("iconUrl" Core..=) Core.<$> iconUrl,
             ("lastUpdatedTimestampMillis" Core..=)
               Core.. Core.AsText
               Core.<$> lastUpdatedTimestampMillis,
-            ("minAndroidSdkVersion" Core..=)
-              Core.<$> minAndroidSdkVersion,
+            ("minAndroidSdkVersion" Core..=) Core.<$> minAndroidSdkVersion,
             ("permissions" Core..=) Core.<$> permissions,
             ("productId" Core..=) Core.<$> productId,
             ("productPricing" Core..=) Core.<$> productPricing,
             ("recentChanges" Core..=) Core.<$> recentChanges,
-            ("requiresContainerApp" Core..=)
-              Core.<$> requiresContainerApp,
+            ("requiresContainerApp" Core..=) Core.<$> requiresContainerApp,
             ("screenshotUrls" Core..=) Core.<$> screenshotUrls,
-            ("signingCertificate" Core..=)
-              Core.<$> signingCertificate,
+            ("signingCertificate" Core..=) Core.<$> signingCertificate,
             ("smallIconUrl" Core..=) Core.<$> smallIconUrl,
             ("title" Core..=) Core.<$> title,
             ("workDetailsUrl" Core..=) Core.<$> workDetailsUrl
@@ -3053,7 +3022,10 @@ data ProductApprovalEvent = ProductApprovalEvent
 newProductApprovalEvent ::
   ProductApprovalEvent
 newProductApprovalEvent =
-  ProductApprovalEvent {approved = Core.Nothing, productId = Core.Nothing}
+  ProductApprovalEvent
+    { approved = Core.Nothing,
+      productId = Core.Nothing
+    }
 
 instance Core.FromJSON ProductApprovalEvent where
   parseJSON =
@@ -3108,8 +3080,7 @@ instance Core.ToJSON ProductAvailabilityChangeEvent where
   toJSON ProductAvailabilityChangeEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availabilityStatus" Core..=)
-              Core.<$> availabilityStatus,
+          [ ("availabilityStatus" Core..=) Core.<$> availabilityStatus,
             ("productId" Core..=) Core.<$> productId
           ]
       )
@@ -3129,7 +3100,10 @@ data ProductPermission = ProductPermission
 newProductPermission ::
   ProductPermission
 newProductPermission =
-  ProductPermission {permissionId = Core.Nothing, state = Core.Nothing}
+  ProductPermission
+    { permissionId = Core.Nothing,
+      state = Core.Nothing
+    }
 
 instance Core.FromJSON ProductPermission where
   parseJSON =
@@ -3165,7 +3139,10 @@ data ProductPermissions = ProductPermissions
 newProductPermissions ::
   ProductPermissions
 newProductPermissions =
-  ProductPermissions {permission = Core.Nothing, productId = Core.Nothing}
+  ProductPermissions
+    { permission = Core.Nothing,
+      productId = Core.Nothing
+    }
 
 instance Core.FromJSON ProductPermissions where
   parseJSON =
@@ -3192,9 +3169,9 @@ instance Core.ToJSON ProductPermissions where
 data ProductPolicy = ProductPolicy
   { -- | The auto-install policy for the product.
     autoInstallPolicy :: (Core.Maybe AutoInstallPolicy),
-    -- | The auto-update mode for the product.
+    -- | The auto-update mode for the product. When autoUpdateMode is used, it always takes precedence over the user\'s choice. So when a user makes changes to the device settings manually, these changes are ignored.
     autoUpdateMode :: (Core.Maybe ProductPolicy_AutoUpdateMode),
-    -- | An authentication URL configuration for the authenticator app of an identity provider. This helps to launch the identity provider\'s authenticator app during the authentication happening in a private app using Android WebView. Authenticator app should already be the <https://developer.android.com/training/app-links/verify-site-associations default handler> for the authentication url on the device.
+    -- | An authentication URL configuration for the authenticator app of an identity provider. This helps to launch the identity provider\'s authenticator app during the authentication happening in a private app using Android WebView. Authenticator app should already be the default handler for the authentication url on the device.
     enterpriseAuthenticationAppLinkConfigs :: (Core.Maybe [EnterpriseAuthenticationAppLinkConfig]),
     -- | The managed configuration for the product.
     managedConfiguration :: (Core.Maybe ManagedConfiguration),
@@ -3240,13 +3217,11 @@ instance Core.ToJSON ProductPolicy where
   toJSON ProductPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("autoInstallPolicy" Core..=)
-              Core.<$> autoInstallPolicy,
+          [ ("autoInstallPolicy" Core..=) Core.<$> autoInstallPolicy,
             ("autoUpdateMode" Core..=) Core.<$> autoUpdateMode,
             ("enterpriseAuthenticationAppLinkConfigs" Core..=)
               Core.<$> enterpriseAuthenticationAppLinkConfigs,
-            ("managedConfiguration" Core..=)
-              Core.<$> managedConfiguration,
+            ("managedConfiguration" Core..=) Core.<$> managedConfiguration,
             ("productId" Core..=) Core.<$> productId,
             ("trackIds" Core..=) Core.<$> trackIds,
             ("tracks" Core..=) Core.<$> tracks
@@ -3292,10 +3267,8 @@ instance Core.ToJSON ProductSet where
     Core.object
       ( Core.catMaybes
           [ ("productId" Core..=) Core.<$> productId,
-            ("productSetBehavior" Core..=)
-              Core.<$> productSetBehavior,
-            ("productVisibility" Core..=)
-              Core.<$> productVisibility
+            ("productSetBehavior" Core..=) Core.<$> productSetBehavior,
+            ("productVisibility" Core..=) Core.<$> productVisibility
           ]
       )
 
@@ -3332,10 +3305,8 @@ instance Core.ToJSON ProductSigningCertificate where
   toJSON ProductSigningCertificate {..} =
     Core.object
       ( Core.catMaybes
-          [ ("certificateHashSha1" Core..=)
-              Core.<$> certificateHashSha1,
-            ("certificateHashSha256" Core..=)
-              Core.<$> certificateHashSha256
+          [ ("certificateHashSha1" Core..=) Core.<$> certificateHashSha1,
+            ("certificateHashSha256" Core..=) Core.<$> certificateHashSha256
           ]
       )
 
@@ -3416,10 +3387,8 @@ instance Core.ToJSON ProductsApproveRequest where
   toJSON ProductsApproveRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("approvalUrlInfo" Core..=)
-              Core.<$> approvalUrlInfo,
-            ("approvedPermissions" Core..=)
-              Core.<$> approvedPermissions
+          [ ("approvalUrlInfo" Core..=) Core.<$> approvalUrlInfo,
+            ("approvedPermissions" Core..=) Core.<$> approvedPermissions
           ]
       )
 
@@ -3437,25 +3406,17 @@ newProductsGenerateApprovalUrlResponse ::
 newProductsGenerateApprovalUrlResponse =
   ProductsGenerateApprovalUrlResponse {url = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ProductsGenerateApprovalUrlResponse
-  where
+instance Core.FromJSON ProductsGenerateApprovalUrlResponse where
   parseJSON =
     Core.withObject
       "ProductsGenerateApprovalUrlResponse"
       ( \o ->
-          ProductsGenerateApprovalUrlResponse
-            Core.<$> (o Core..:? "url")
+          ProductsGenerateApprovalUrlResponse Core.<$> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    ProductsGenerateApprovalUrlResponse
-  where
+instance Core.ToJSON ProductsGenerateApprovalUrlResponse where
   toJSON ProductsGenerateApprovalUrlResponse {..} =
-    Core.object
-      (Core.catMaybes [("url" Core..=) Core.<$> url])
+    Core.object (Core.catMaybes [("url" Core..=) Core.<$> url])
 
 --
 -- /See:/ 'newProductsListResponse' smart constructor.
@@ -3496,8 +3457,7 @@ instance Core.ToJSON ProductsListResponse where
       ( Core.catMaybes
           [ ("pageInfo" Core..=) Core.<$> pageInfo,
             ("product" Core..=) Core.<$> product,
-            ("tokenPagination" Core..=)
-              Core.<$> tokenPagination
+            ("tokenPagination" Core..=) Core.<$> tokenPagination
           ]
       )
 
@@ -3515,7 +3475,8 @@ data ServiceAccount = ServiceAccount
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 newServiceAccount ::
   ServiceAccount
-newServiceAccount = ServiceAccount {key = Core.Nothing, name = Core.Nothing}
+newServiceAccount =
+  ServiceAccount {key = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON ServiceAccount where
   parseJSON =
@@ -3523,19 +3484,18 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON ServiceAccount where
   toJSON ServiceAccount {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("key" Core..=) Core.<$> key, ("name" Core..=) Core.<$> name]
       )
 
--- | Credentials that can be used to authenticate as a service account.
+-- | /Deprecated:/ New integrations cannot use this method and can refer to our new recommendations
 --
 -- /See:/ 'newServiceAccountKey' smart constructor.
 data ServiceAccountKey = ServiceAccountKey
@@ -3611,9 +3571,7 @@ instance Core.ToJSON ServiceAccountKeysListResponse where
   toJSON ServiceAccountKeysListResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("serviceAccountKey" Core..=)
-              Core.<$> serviceAccountKey
-          ]
+          [("serviceAccountKey" Core..=) Core.<$> serviceAccountKey]
       )
 
 -- | A resource returned by the GenerateSignupUrl API, which contains the Signup URL and Completion Token.
@@ -3654,8 +3612,7 @@ instance Core.ToJSON SignupInfo where
   toJSON SignupInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("completionToken" Core..=)
-              Core.<$> completionToken,
+          [ ("completionToken" Core..=) Core.<$> completionToken,
             ("kind" Core..=) Core.<$> kind,
             ("url" Core..=) Core.<$> url
           ]
@@ -3725,7 +3682,10 @@ data StoreLayout = StoreLayout
 newStoreLayout ::
   StoreLayout
 newStoreLayout =
-  StoreLayout {homepageId = Core.Nothing, storeLayoutType = Core.Nothing}
+  StoreLayout
+    { homepageId = Core.Nothing,
+      storeLayoutType = Core.Nothing
+    }
 
 instance Core.FromJSON StoreLayout where
   parseJSON =
@@ -3742,8 +3702,7 @@ instance Core.ToJSON StoreLayout where
     Core.object
       ( Core.catMaybes
           [ ("homepageId" Core..=) Core.<$> homepageId,
-            ("storeLayoutType" Core..=)
-              Core.<$> storeLayoutType
+            ("storeLayoutType" Core..=) Core.<$> storeLayoutType
           ]
       )
 
@@ -3761,24 +3720,18 @@ newStoreLayoutClustersListResponse ::
 newStoreLayoutClustersListResponse =
   StoreLayoutClustersListResponse {cluster = Core.Nothing}
 
-instance
-  Core.FromJSON
-    StoreLayoutClustersListResponse
-  where
+instance Core.FromJSON StoreLayoutClustersListResponse where
   parseJSON =
     Core.withObject
       "StoreLayoutClustersListResponse"
       ( \o ->
-          StoreLayoutClustersListResponse
-            Core.<$> (o Core..:? "cluster")
+          StoreLayoutClustersListResponse Core.<$> (o Core..:? "cluster")
       )
 
 instance Core.ToJSON StoreLayoutClustersListResponse where
   toJSON StoreLayoutClustersListResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("cluster" Core..=) Core.<$> cluster]
-      )
+      (Core.catMaybes [("cluster" Core..=) Core.<$> cluster])
 
 --
 -- /See:/ 'newStoreLayoutPagesListResponse' smart constructor.
@@ -3798,15 +3751,11 @@ instance Core.FromJSON StoreLayoutPagesListResponse where
   parseJSON =
     Core.withObject
       "StoreLayoutPagesListResponse"
-      ( \o ->
-          StoreLayoutPagesListResponse
-            Core.<$> (o Core..:? "page")
-      )
+      (\o -> StoreLayoutPagesListResponse Core.<$> (o Core..:? "page"))
 
 instance Core.ToJSON StoreLayoutPagesListResponse where
   toJSON StoreLayoutPagesListResponse {..} =
-    Core.object
-      (Core.catMaybes [("page" Core..=) Core.<$> page])
+    Core.object (Core.catMaybes [("page" Core..=) Core.<$> page])
 
 -- | Definition of a managed Google Play store page, made of a localized name and links to other pages. A page also contains clusters defined as a subcollection.
 --
@@ -3825,7 +3774,11 @@ data StorePage = StorePage
 newStorePage ::
   StorePage
 newStorePage =
-  StorePage {id = Core.Nothing, link = Core.Nothing, name = Core.Nothing}
+  StorePage
+    { id = Core.Nothing,
+      link = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON StorePage where
   parseJSON =
@@ -3854,7 +3807,6 @@ instance Core.ToJSON StorePage where
 data TokenPagination = TokenPagination
   { -- | Tokens to pass to the standard list field \'page/token\'. Whenever available, tokens are preferred over manipulating start/index.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     previousPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3883,8 +3835,7 @@ instance Core.ToJSON TokenPagination where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("previousPageToken" Core..=)
-              Core.<$> previousPageToken
+            ("previousPageToken" Core..=) Core.<$> previousPageToken
           ]
       )
 
@@ -3902,7 +3853,8 @@ data TrackInfo = TrackInfo
 -- | Creates a value of 'TrackInfo' with the minimum fields required to make a request.
 newTrackInfo ::
   TrackInfo
-newTrackInfo = TrackInfo {trackAlias = Core.Nothing, trackId = Core.Nothing}
+newTrackInfo =
+  TrackInfo {trackAlias = Core.Nothing, trackId = Core.Nothing}
 
 instance Core.FromJSON TrackInfo where
   parseJSON =
@@ -3973,8 +3925,7 @@ instance Core.ToJSON User where
   toJSON User {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountIdentifier" Core..=)
-              Core.<$> accountIdentifier,
+          [ ("accountIdentifier" Core..=) Core.<$> accountIdentifier,
             ("accountType" Core..=) Core.<$> accountType,
             ("displayName" Core..=) Core.<$> displayName,
             ("id" Core..=) Core.<$> id,
@@ -4000,14 +3951,11 @@ instance Core.FromJSON UsersListResponse where
   parseJSON =
     Core.withObject
       "UsersListResponse"
-      ( \o ->
-          UsersListResponse Core.<$> (o Core..:? "user")
-      )
+      (\o -> UsersListResponse Core.<$> (o Core..:? "user"))
 
 instance Core.ToJSON UsersListResponse where
   toJSON UsersListResponse {..} =
-    Core.object
-      (Core.catMaybes [("user" Core..=) Core.<$> user])
+    Core.object (Core.catMaybes [("user" Core..=) Core.<$> user])
 
 -- | A variable set is a key-value pair of EMM-provided placeholders and its corresponding value, which is attributed to a user. For example, $FIRSTNAME could be a placeholder, and its value could be Alice. Placeholders should start with a \'$\' sign and should be alphanumeric only.
 --
@@ -4091,9 +4039,7 @@ instance Core.FromJSON WebApp where
             Core.<*> (o Core..:? "isPublished")
             Core.<*> (o Core..:? "startUrl")
             Core.<*> (o Core..:? "title")
-            Core.<*> ( o Core..:? "versionCode"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "versionCode" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "webAppId")
       )
 
@@ -4106,8 +4052,7 @@ instance Core.ToJSON WebApp where
             ("isPublished" Core..=) Core.<$> isPublished,
             ("startUrl" Core..=) Core.<$> startUrl,
             ("title" Core..=) Core.<$> title,
-            ("versionCode" Core..=) Core.. Core.AsText
-              Core.<$> versionCode,
+            ("versionCode" Core..=) Core.. Core.AsText Core.<$> versionCode,
             ("webAppId" Core..=) Core.<$> webAppId
           ]
       )
@@ -4135,9 +4080,7 @@ instance Core.FromJSON WebAppIcon where
 instance Core.ToJSON WebAppIcon where
   toJSON WebAppIcon {..} =
     Core.object
-      ( Core.catMaybes
-          [("imageData" Core..=) Core.<$> imageData]
-      )
+      (Core.catMaybes [("imageData" Core..=) Core.<$> imageData])
 
 --
 -- /See:/ 'newWebAppsListResponse' smart constructor.
@@ -4156,11 +4099,8 @@ instance Core.FromJSON WebAppsListResponse where
   parseJSON =
     Core.withObject
       "WebAppsListResponse"
-      ( \o ->
-          WebAppsListResponse Core.<$> (o Core..:? "webApp")
-      )
+      (\o -> WebAppsListResponse Core.<$> (o Core..:? "webApp"))
 
 instance Core.ToJSON WebAppsListResponse where
   toJSON WebAppsListResponse {..} =
-    Core.object
-      (Core.catMaybes [("webApp" Core..=) Core.<$> webApp])
+    Core.object (Core.catMaybes [("webApp" Core..=) Core.<$> webApp])

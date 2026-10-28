@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Buckets.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Buckets.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.buckets.insert@ method which the
@@ -49,9 +47,8 @@ type StorageBucketsInsertResource =
     Core.:> "v1"
     Core.:> "b"
     Core.:> Core.QueryParam "project" Core.Text
-    Core.:> Core.QueryParam
-              "predefinedAcl"
-              BucketsInsertPredefinedAcl
+    Core.:> Core.QueryParam "enableObjectRetention" Core.Bool
+    Core.:> Core.QueryParam "predefinedAcl" BucketsInsertPredefinedAcl
     Core.:> Core.QueryParam
               "predefinedDefaultObjectAcl"
               BucketsInsertPredefinedDefaultObjectAcl
@@ -66,7 +63,9 @@ type StorageBucketsInsertResource =
 --
 -- /See:/ 'newStorageBucketsInsert' smart constructor.
 data StorageBucketsInsert = StorageBucketsInsert
-  { -- | Multipart request metadata.
+  { -- | When set to true, object retention is enabled for this bucket.
+    enableObjectRetention :: Core.Bool,
+    -- | Multipart request metadata.
     payload :: Bucket,
     -- | Apply a predefined set of access controls to this bucket.
     predefinedAcl :: (Core.Maybe BucketsInsertPredefinedAcl),
@@ -92,7 +91,8 @@ newStorageBucketsInsert ::
   StorageBucketsInsert
 newStorageBucketsInsert payload project =
   StorageBucketsInsert
-    { payload = payload,
+    { enableObjectRetention = Core.False,
+      payload = payload,
       predefinedAcl = Core.Nothing,
       predefinedDefaultObjectAcl = Core.Nothing,
       project = project,
@@ -112,6 +112,7 @@ instance Core.GoogleRequest StorageBucketsInsert where
   requestClient StorageBucketsInsert {..} =
     go
       (Core.Just project)
+      (Core.Just enableObjectRetention)
       predefinedAcl
       predefinedDefaultObjectAcl
       projection
@@ -123,7 +124,5 @@ instance Core.GoogleRequest StorageBucketsInsert where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy StorageBucketsInsertResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdSense.Types
@@ -152,6 +150,10 @@ module Gogol.AdSense.Types
     ListPaymentsResponse (..),
     newListPaymentsResponse,
 
+    -- ** ListPolicyIssuesResponse
+    ListPolicyIssuesResponse (..),
+    newListPolicyIssuesResponse,
+
     -- ** ListSavedReportsResponse
     ListSavedReportsResponse (..),
     newListSavedReportsResponse,
@@ -167,6 +169,23 @@ module Gogol.AdSense.Types
     -- ** Payment
     Payment (..),
     newPayment,
+
+    -- ** PolicyIssue
+    PolicyIssue (..),
+    newPolicyIssue,
+
+    -- ** PolicyIssue_Action
+    PolicyIssue_Action (..),
+
+    -- ** PolicyIssue_EntityType
+    PolicyIssue_EntityType (..),
+
+    -- ** PolicyTopic
+    PolicyTopic (..),
+    newPolicyTopic,
+
+    -- ** PolicyTopic_Type
+    PolicyTopic_Type (..),
 
     -- ** ReportResult
     ReportResult (..),
@@ -235,7 +254,7 @@ where
 
 import Gogol.AdSense.Internal.Product
 import Gogol.AdSense.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the AdSense Management API. This contains the host and root path used as a starting point for constructing service requests.
 adSenseService :: Core.ServiceConfig
@@ -245,7 +264,9 @@ adSenseService =
     "adsense.googleapis.com"
 
 -- | View and manage your AdSense data
-type Adsense'FullControl = "https://www.googleapis.com/auth/adsense"
+type Adsense'FullControl =
+  "https://www.googleapis.com/auth/adsense"
 
 -- | View your AdSense data
-type Adsense'Readonly = "https://www.googleapis.com/auth/adsense.readonly"
+type Adsense'Readonly =
+  "https://www.googleapis.com/auth/adsense.readonly"

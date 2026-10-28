@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Operations.Projects.Operations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@. NOTE: the @name@ binding allows API services to override the binding to use different resource name schemes, such as @users\/*\/operations@. To override the binding, API services can add a binding such as @\"\/v1\/{name=users\/*}\/operations\"@ to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
+-- Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.operations.projects.operations.list@.
 module Gogol.BigtableAdmin.Operations.Projects.Operations.List
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Operations.Projects.Operations.List
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.operations.projects.operations.list@ method which the
 -- 'BigtableAdminOperationsProjectsOperationsList' request conforms to.
@@ -59,7 +57,7 @@ type BigtableAdminOperationsProjectsOperationsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListOperationsResponse
 
--- | Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@. NOTE: the @name@ binding allows API services to override the binding to use different resource name schemes, such as @users\/*\/operations@. To override the binding, API services can add a binding such as @\"\/v1\/{name=users\/*}\/operations\"@ to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.
+-- | Lists operations that match the specified filter in the request. If the server doesn\'t support this method, it returns @UNIMPLEMENTED@.
 --
 -- /See:/ 'newBigtableAdminOperationsProjectsOperationsList' smart constructor.
 data BigtableAdminOperationsProjectsOperationsList = BigtableAdminOperationsProjectsOperationsList
@@ -91,7 +89,8 @@ newBigtableAdminOperationsProjectsOperationsList ::
   BigtableAdminOperationsProjectsOperationsList
 newBigtableAdminOperationsProjectsOperationsList name =
   BigtableAdminOperationsProjectsOperationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -110,8 +109,7 @@ instance
     Rs BigtableAdminOperationsProjectsOperationsList =
       ListOperationsResponse
   type
-    Scopes
-      BigtableAdminOperationsProjectsOperationsList =
+    Scopes BigtableAdminOperationsProjectsOperationsList =
       '[ Bigtable'Admin,
          Bigtable'Admin'Cluster,
          Bigtable'Admin'Instance,
@@ -120,25 +118,23 @@ instance
          CloudPlatform'FullControl,
          CloudPlatform'ReadOnly
        ]
-  requestClient
-    BigtableAdminOperationsProjectsOperationsList {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        filter
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminOperationsProjectsOperationsListResource
-            )
-            Core.mempty
+  requestClient BigtableAdminOperationsProjectsOperationsList {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      filter
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BigtableAdminOperationsProjectsOperationsListResource
+          )
+          Core.mempty

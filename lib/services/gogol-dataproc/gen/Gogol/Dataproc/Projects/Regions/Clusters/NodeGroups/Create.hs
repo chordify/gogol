@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.NodeGroups.Create
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.nodeGroups.create@ method which the
 -- 'DataprocProjectsRegionsClustersNodeGroupsCreate' request conforms to.
@@ -52,6 +50,7 @@ type DataprocProjectsRegionsClustersNodeGroupsCreateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "nodeGroupId" Core.Text
+    Core.:> Core.QueryParam "parentOperationId" Core.Text
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -73,9 +72,11 @@ data DataprocProjectsRegionsClustersNodeGroupsCreate = DataprocProjectsRegionsCl
     nodeGroupId :: (Core.Maybe Core.Text),
     -- | Required. The parent resource where this node group will be created. Format: projects\/{project}\/regions\/{region}\/clusters\/{cluster}
     parent :: Core.Text,
+    -- | Optional. operation id of the parent operation sending the create request
+    parentOperationId :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: NodeGroup,
-    -- | Optional. A unique ID used to identify the request. If the server receives two CreateNodeGroupRequest (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequests) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https:\/\/en.wikipedia.org\/wiki\/Universally/unique/identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
+    -- | Optional. A unique ID used to identify the request. If the server receives two CreateNodeGroupRequest (https:\/\/cloud.google.com\/dataproc\/docs\/reference\/rpc\/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateNodeGroupRequest) with the same ID, the second request is ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https:\/\/en.wikipedia.org\/wiki\/Universally/unique/identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters.
     requestId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -93,11 +94,13 @@ newDataprocProjectsRegionsClustersNodeGroupsCreate ::
   DataprocProjectsRegionsClustersNodeGroupsCreate
 newDataprocProjectsRegionsClustersNodeGroupsCreate parent payload =
   DataprocProjectsRegionsClustersNodeGroupsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       nodeGroupId = Core.Nothing,
       parent = parent,
+      parentOperationId = Core.Nothing,
       payload = payload,
       requestId = Core.Nothing,
       uploadType = Core.Nothing,
@@ -108,33 +111,28 @@ instance
   Core.GoogleRequest
     DataprocProjectsRegionsClustersNodeGroupsCreate
   where
+  type Rs DataprocProjectsRegionsClustersNodeGroupsCreate = Operation
   type
-    Rs
-      DataprocProjectsRegionsClustersNodeGroupsCreate =
-      Operation
-  type
-    Scopes
-      DataprocProjectsRegionsClustersNodeGroupsCreate =
+    Scopes DataprocProjectsRegionsClustersNodeGroupsCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersNodeGroupsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        nodeGroupId
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersNodeGroupsCreateResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsClustersNodeGroupsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      nodeGroupId
+      parentOperationId
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsClustersNodeGroupsCreateResource
+          )
+          Core.mempty

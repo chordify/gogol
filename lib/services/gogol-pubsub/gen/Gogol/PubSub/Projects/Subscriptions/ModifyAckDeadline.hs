@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,17 +37,14 @@ module Gogol.PubSub.Projects.Subscriptions.ModifyAckDeadline
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.subscriptions.modifyAckDeadline@ method which the
 -- 'PubSubProjectsSubscriptionsModifyAckDeadline' request conforms to.
 type PubSubProjectsSubscriptionsModifyAckDeadlineResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "subscription"
-              "modifyAckDeadline"
-              Core.Text
+    Core.:> Core.CaptureMode "subscription" "modifyAckDeadline" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -87,45 +82,43 @@ newPubSubProjectsSubscriptionsModifyAckDeadline ::
   -- |  Required. The name of the subscription. Format is @projects\/{project}\/subscriptions\/{sub}@. See 'subscription'.
   Core.Text ->
   PubSubProjectsSubscriptionsModifyAckDeadline
-newPubSubProjectsSubscriptionsModifyAckDeadline payload subscription =
-  PubSubProjectsSubscriptionsModifyAckDeadline
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      subscription = subscription,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newPubSubProjectsSubscriptionsModifyAckDeadline
+  payload
+  subscription =
+    PubSubProjectsSubscriptionsModifyAckDeadline
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        subscription = subscription,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     PubSubProjectsSubscriptionsModifyAckDeadline
   where
+  type Rs PubSubProjectsSubscriptionsModifyAckDeadline = Empty
   type
-    Rs PubSubProjectsSubscriptionsModifyAckDeadline =
-      Empty
-  type
-    Scopes
-      PubSubProjectsSubscriptionsModifyAckDeadline =
+    Scopes PubSubProjectsSubscriptionsModifyAckDeadline =
       '[CloudPlatform'FullControl, Pubsub'FullControl]
-  requestClient
-    PubSubProjectsSubscriptionsModifyAckDeadline {..} =
-      go
-        subscription
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        pubSubService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PubSubProjectsSubscriptionsModifyAckDeadlineResource
-            )
-            Core.mempty
+  requestClient PubSubProjectsSubscriptionsModifyAckDeadline {..} =
+    go
+      subscription
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      pubSubService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PubSubProjectsSubscriptionsModifyAckDeadlineResource
+          )
+          Core.mempty

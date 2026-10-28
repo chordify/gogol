@@ -11,7 +11,7 @@ module Gogol.Internal.Multipart where
 
 import Control.Monad.IO.Class (MonadIO (..))
 import Data.ByteString (ByteString)
-import qualified Data.ByteString as BS
+import Data.ByteString qualified as BS
 import Data.ByteString.Builder.Extra (byteStringCopy)
 import Gogol.Types (GBody (..))
 import Network.HTTP.Client
@@ -37,7 +37,7 @@ import Network.HTTP.Types (Header, hContentType)
 
 newtype Boundary = Boundary ByteString
 
-genBoundary :: MonadIO m => m Boundary
+genBoundary :: (MonadIO m) => m Boundary
 genBoundary = Boundary <$> liftIO webkitBoundary
 
 multipartHeader :: Boundary -> Header

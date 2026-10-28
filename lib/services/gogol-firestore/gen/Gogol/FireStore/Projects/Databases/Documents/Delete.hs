@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.Delete
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.delete@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsDelete' request conforms to.
@@ -51,9 +49,7 @@ type FireStoreProjectsDatabasesDocumentsDeleteResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currentDocument.exists" Core.Bool
-    Core.:> Core.QueryParam
-              "currentDocument.updateTime"
-              Core.DateTime
+    Core.:> Core.QueryParam "currentDocument.updateTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -103,30 +99,26 @@ instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesDocumentsDelete
   where
-  type
-    Rs FireStoreProjectsDatabasesDocumentsDelete =
-      Empty
+  type Rs FireStoreProjectsDatabasesDocumentsDelete = Empty
   type
     Scopes FireStoreProjectsDatabasesDocumentsDelete =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        currentDocumentExists
-        currentDocumentUpdateTime
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsDeleteResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      currentDocumentExists
+      currentDocumentUpdateTime
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FireStoreProjectsDatabasesDocumentsDeleteResource
+          )
+          Core.mempty

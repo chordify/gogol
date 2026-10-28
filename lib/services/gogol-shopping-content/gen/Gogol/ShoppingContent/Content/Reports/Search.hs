@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Reports.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves merchant performance mertrics matching the search query and optionally segmented by selected dimensions.
+-- Retrieves merchant performance metrics matching the search query and optionally segmented by selected dimensions.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.reports.search@.
 module Gogol.ShoppingContent.Content.Reports.Search
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Reports.Search
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.reports.search@ method which the
@@ -59,7 +57,7 @@ type ContentReportsSearchResource =
     Core.:> Core.ReqBody '[Core.JSON] SearchRequest
     Core.:> Core.Post '[Core.JSON] SearchResponse
 
--- | Retrieves merchant performance mertrics matching the search query and optionally segmented by selected dimensions.
+-- | Retrieves merchant performance metrics matching the search query and optionally segmented by selected dimensions.
 --
 -- /See:/ 'newContentReportsSearch' smart constructor.
 data ContentReportsSearch = ContentReportsSearch
@@ -100,9 +98,7 @@ newContentReportsSearch merchantId payload =
 
 instance Core.GoogleRequest ContentReportsSearch where
   type Rs ContentReportsSearch = SearchResponse
-  type
-    Scopes ContentReportsSearch =
-      '[Content'FullControl]
+  type Scopes ContentReportsSearch = '[Content'FullControl]
   requestClient ContentReportsSearch {..} =
     go
       merchantId
@@ -117,7 +113,5 @@ instance Core.GoogleRequest ContentReportsSearch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentReportsSearchResource
-          )
+          (Core.Proxy :: Core.Proxy ContentReportsSearchResource)
           Core.mempty

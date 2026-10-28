@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.PublisherProfiles.Get
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.publisherProfiles.get@ method which the
 -- 'AdExchangeBuyer2AccountsPublisherProfilesGet' request conforms to.
@@ -86,16 +84,19 @@ newAdExchangeBuyer2AccountsPublisherProfilesGet ::
   -- |  The id for the publisher profile to get. See 'publisherProfileId'.
   Core.Text ->
   AdExchangeBuyer2AccountsPublisherProfilesGet
-newAdExchangeBuyer2AccountsPublisherProfilesGet accountId publisherProfileId =
-  AdExchangeBuyer2AccountsPublisherProfilesGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      publisherProfileId = publisherProfileId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsPublisherProfilesGet
+  accountId
+  publisherProfileId =
+    AdExchangeBuyer2AccountsPublisherProfilesGet
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        publisherProfileId = publisherProfileId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -105,26 +106,23 @@ instance
     Rs AdExchangeBuyer2AccountsPublisherProfilesGet =
       PublisherProfile
   type
-    Scopes
-      AdExchangeBuyer2AccountsPublisherProfilesGet =
+    Scopes AdExchangeBuyer2AccountsPublisherProfilesGet =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsPublisherProfilesGet {..} =
-      go
-        accountId
-        publisherProfileId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsPublisherProfilesGetResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsPublisherProfilesGet {..} =
+    go
+      accountId
+      publisherProfileId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsPublisherProfilesGetResource
+          )
+          Core.mempty

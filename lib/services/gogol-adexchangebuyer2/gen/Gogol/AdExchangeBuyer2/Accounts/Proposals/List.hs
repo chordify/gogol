@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Proposals.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Proposals.List
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.proposals.list@ method which the
 -- 'AdExchangeBuyer2AccountsProposalsList' request conforms to.
@@ -53,9 +51,7 @@ type AdExchangeBuyer2AccountsProposalsListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "filter" Core.Text
-    Core.:> Core.QueryParam
-              "filterSyntax"
-              AccountsProposalsListFilterSyntax
+    Core.:> Core.QueryParam "filterSyntax" AccountsProposalsListFilterSyntax
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -109,36 +105,31 @@ newAdExchangeBuyer2AccountsProposalsList accountId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyer2AccountsProposalsList
-  where
+instance Core.GoogleRequest AdExchangeBuyer2AccountsProposalsList where
   type
     Rs AdExchangeBuyer2AccountsProposalsList =
       ListProposalsResponse
   type
     Scopes AdExchangeBuyer2AccountsProposalsList =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsProposalsList {..} =
-      go
-        accountId
-        xgafv
-        accessToken
-        callback
-        filter
-        filterSyntax
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsProposalsListResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsProposalsList {..} =
+    go
+      accountId
+      xgafv
+      accessToken
+      callback
+      filter
+      filterSyntax
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsProposalsListResource
+          )
+          Core.mempty

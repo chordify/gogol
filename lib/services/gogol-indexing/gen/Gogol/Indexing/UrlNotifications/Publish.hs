@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Indexing.UrlNotifications.Publish
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Notifies that a URL has been updated or deleted.
 --
--- /See:/ <https://developers.google.com/search/apis/indexing-api/ Indexing API Reference> for @indexing.urlNotifications.publish@.
+-- /See:/ <https://developers.google.com/search/apis/indexing-api/ Web Search Indexing API Reference> for @indexing.urlNotifications.publish@.
 module Gogol.Indexing.UrlNotifications.Publish
   ( -- * Resource
     IndexingUrlNotificationsPublishResource,
@@ -40,7 +38,7 @@ module Gogol.Indexing.UrlNotifications.Publish
 where
 
 import Gogol.Indexing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @indexing.urlNotifications.publish@ method which the
 -- 'IndexingUrlNotificationsPublish' request conforms to.
@@ -90,10 +88,7 @@ newIndexingUrlNotificationsPublish payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    IndexingUrlNotificationsPublish
-  where
+instance Core.GoogleRequest IndexingUrlNotificationsPublish where
   type
     Rs IndexingUrlNotificationsPublish =
       PublishUrlNotificationResponse
@@ -113,7 +108,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy IndexingUrlNotificationsPublishResource
-          )
+          (Core.Proxy :: Core.Proxy IndexingUrlNotificationsPublishResource)
           Core.mempty

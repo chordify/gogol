@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.StorageTransfer.Internal.Product
@@ -86,6 +84,10 @@ module Gogol.StorageTransfer.Internal.Product
     GoogleServiceAccount (..),
     newGoogleServiceAccount,
 
+    -- * HdfsData
+    HdfsData (..),
+    newHdfsData,
+
     -- * HttpData
     HttpData (..),
     newHttpData,
@@ -137,6 +139,10 @@ module Gogol.StorageTransfer.Internal.Product
     -- * PosixFilesystem
     PosixFilesystem (..),
     newPosixFilesystem,
+
+    -- * ReplicationSpec
+    ReplicationSpec (..),
+    newReplicationSpec,
 
     -- * ResumeTransferOperationRequest
     ResumeTransferOperationRequest (..),
@@ -196,10 +202,10 @@ module Gogol.StorageTransfer.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StorageTransfer.Internal.Sum
 
--- | Represents an On-Premises Agent pool.
+-- | Represents an agent pool.
 --
 -- /See:/ 'newAgentPool' smart constructor.
 data AgentPool = AgentPool
@@ -263,7 +269,10 @@ data AwsAccessKey = AwsAccessKey
 newAwsAccessKey ::
   AwsAccessKey
 newAwsAccessKey =
-  AwsAccessKey {accessKeyId = Core.Nothing, secretAccessKey = Core.Nothing}
+  AwsAccessKey
+    { accessKeyId = Core.Nothing,
+      secretAccessKey = Core.Nothing
+    }
 
 instance Core.FromJSON AwsAccessKey where
   parseJSON =
@@ -280,8 +289,7 @@ instance Core.ToJSON AwsAccessKey where
     Core.object
       ( Core.catMaybes
           [ ("accessKeyId" Core..=) Core.<$> accessKeyId,
-            ("secretAccessKey" Core..=)
-              Core.<$> secretAccessKey
+            ("secretAccessKey" Core..=) Core.<$> secretAccessKey
           ]
       )
 
@@ -347,6 +355,12 @@ data AwsS3Data = AwsS3Data
     awsAccessKey :: (Core.Maybe AwsAccessKey),
     -- | Required. S3 Bucket name (see <https://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html Creating a bucket>).
     bucketName :: (Core.Maybe Core.Text),
+    -- | Optional. The CloudFront distribution domain name pointing to this bucket, to use when fetching. See <https://cloud.google.com/storage-transfer/docs/s3-cloudfront Transfer from S3 via CloudFront> for more information. Format: @https:\/\/{id}.cloudfront.net@ or any valid custom domain. Must begin with @https:\/\/@.
+    cloudfrontDomain :: (Core.Maybe Core.Text),
+    -- | Optional. The Resource name of a secret in Secret Manager. AWS credentials must be stored in Secret Manager in JSON format: { \"access/key/id\": \"ACCESS/KEY/ID\", \"secret/access/key\": \"SECRET/ACCESS/KEY\" } GoogleServiceAccount must be granted @roles\/secretmanager.secretAccessor@ for the resource. See [Configure access to a source: Amazon S3] (https:\/\/cloud.google.com\/storage-transfer\/docs\/source-amazon-s3#secret/manager) for more information. If @credentials_secret@ is specified, do not specify role/arn or aws/access/key. Format: @projects\/{project_number}\/secrets\/{secret_name}@
+    credentialsSecret :: (Core.Maybe Core.Text),
+    -- | Egress bytes over a Google-managed private network. This network is shared between other users of Storage Transfer Service.
+    managedPrivateNetwork :: (Core.Maybe Core.Bool),
     -- | Root path to transfer objects. Must be an empty string or full path name that ends with a \'\/\'. This field is treated as an object prefix. As such, it should generally not begin with a \'\/\'.
     path :: (Core.Maybe Core.Text),
     -- | The Amazon Resource Name (ARN) of the role to support temporary credentials via @AssumeRoleWithWebIdentity@. For more information about ARNs, see <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns IAM ARNs>. When a role ARN is provided, Transfer Service fetches temporary credentials for the session using a @AssumeRoleWithWebIdentity@ call for the provided role using the GoogleServiceAccount for this project.
@@ -361,6 +375,9 @@ newAwsS3Data =
   AwsS3Data
     { awsAccessKey = Core.Nothing,
       bucketName = Core.Nothing,
+      cloudfrontDomain = Core.Nothing,
+      credentialsSecret = Core.Nothing,
+      managedPrivateNetwork = Core.Nothing,
       path = Core.Nothing,
       roleArn = Core.Nothing
     }
@@ -373,6 +390,9 @@ instance Core.FromJSON AwsS3Data where
           AwsS3Data
             Core.<$> (o Core..:? "awsAccessKey")
             Core.<*> (o Core..:? "bucketName")
+            Core.<*> (o Core..:? "cloudfrontDomain")
+            Core.<*> (o Core..:? "credentialsSecret")
+            Core.<*> (o Core..:? "managedPrivateNetwork")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "roleArn")
       )
@@ -383,6 +403,9 @@ instance Core.ToJSON AwsS3Data where
       ( Core.catMaybes
           [ ("awsAccessKey" Core..=) Core.<$> awsAccessKey,
             ("bucketName" Core..=) Core.<$> bucketName,
+            ("cloudfrontDomain" Core..=) Core.<$> cloudfrontDomain,
+            ("credentialsSecret" Core..=) Core.<$> credentialsSecret,
+            ("managedPrivateNetwork" Core..=) Core.<$> managedPrivateNetwork,
             ("path" Core..=) Core.<$> path,
             ("roleArn" Core..=) Core.<$> roleArn
           ]
@@ -396,6 +419,8 @@ data AzureBlobStorageData = AzureBlobStorageData
     azureCredentials :: (Core.Maybe AzureCredentials),
     -- | Required. The container to transfer from the Azure Storage account.
     container :: (Core.Maybe Core.Text),
+    -- | Optional. The Resource name of a secret in Secret Manager. The Azure SAS token must be stored in Secret Manager in JSON format: { \"sas/token\" : \"SAS/TOKEN\" } GoogleServiceAccount must be granted @roles\/secretmanager.secretAccessor@ for the resource. See [Configure access to a source: Microsoft Azure Blob Storage] (https:\/\/cloud.google.com\/storage-transfer\/docs\/source-microsoft-azure#secret/manager) for more information. If @credentials_secret@ is specified, do not specify azure/credentials. Format: @projects\/{project_number}\/secrets\/{secret_name}@
+    credentialsSecret :: (Core.Maybe Core.Text),
     -- | Root path to transfer objects. Must be an empty string or full path name that ends with a \'\/\'. This field is treated as an object prefix. As such, it should generally not begin with a \'\/\'.
     path :: (Core.Maybe Core.Text),
     -- | Required. The name of the Azure Storage account.
@@ -410,6 +435,7 @@ newAzureBlobStorageData =
   AzureBlobStorageData
     { azureCredentials = Core.Nothing,
       container = Core.Nothing,
+      credentialsSecret = Core.Nothing,
       path = Core.Nothing,
       storageAccount = Core.Nothing
     }
@@ -422,6 +448,7 @@ instance Core.FromJSON AzureBlobStorageData where
           AzureBlobStorageData
             Core.<$> (o Core..:? "azureCredentials")
             Core.<*> (o Core..:? "container")
+            Core.<*> (o Core..:? "credentialsSecret")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "storageAccount")
       )
@@ -430,9 +457,9 @@ instance Core.ToJSON AzureBlobStorageData where
   toJSON AzureBlobStorageData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("azureCredentials" Core..=)
-              Core.<$> azureCredentials,
+          [ ("azureCredentials" Core..=) Core.<$> azureCredentials,
             ("container" Core..=) Core.<$> container,
+            ("credentialsSecret" Core..=) Core.<$> credentialsSecret,
             ("path" Core..=) Core.<$> path,
             ("storageAccount" Core..=) Core.<$> storageAccount
           ]
@@ -456,16 +483,12 @@ instance Core.FromJSON AzureCredentials where
   parseJSON =
     Core.withObject
       "AzureCredentials"
-      ( \o ->
-          AzureCredentials Core.<$> (o Core..:? "sasToken")
-      )
+      (\o -> AzureCredentials Core.<$> (o Core..:? "sasToken"))
 
 instance Core.ToJSON AzureCredentials where
   toJSON AzureCredentials {..} =
     Core.object
-      ( Core.catMaybes
-          [("sasToken" Core..=) Core.<$> sasToken]
-      )
+      (Core.catMaybes [("sasToken" Core..=) Core.<$> sasToken])
 
 -- | Specifies a bandwidth limit for an agent pool.
 --
@@ -487,18 +510,14 @@ instance Core.FromJSON BandwidthLimit where
       "BandwidthLimit"
       ( \o ->
           BandwidthLimit
-            Core.<$> ( o Core..:? "limitMbps"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "limitMbps" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON BandwidthLimit where
   toJSON BandwidthLimit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("limitMbps" Core..=) Core.. Core.AsText
-              Core.<$> limitMbps
-          ]
+          [("limitMbps" Core..=) Core.. Core.AsText Core.<$> limitMbps]
       )
 
 -- | The request message for Operations.CancelOperation.
@@ -537,7 +556,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -572,8 +596,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -644,9 +667,7 @@ instance Core.FromJSON ErrorSummary where
       ( \o ->
           ErrorSummary
             Core.<$> (o Core..:? "errorCode")
-            Core.<*> ( o Core..:? "errorCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "errorCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errorLogEntries")
       )
 
@@ -655,10 +676,8 @@ instance Core.ToJSON ErrorSummary where
     Core.object
       ( Core.catMaybes
           [ ("errorCode" Core..=) Core.<$> errorCode,
-            ("errorCount" Core..=) Core.. Core.AsText
-              Core.<$> errorCount,
-            ("errorLogEntries" Core..=)
-              Core.<$> errorLogEntries
+            ("errorCount" Core..=) Core.. Core.AsText Core.<$> errorCount,
+            ("errorLogEntries" Core..=) Core.<$> errorLogEntries
           ]
       )
 
@@ -702,8 +721,7 @@ instance Core.ToJSON EventStream where
       ( Core.catMaybes
           [ ("eventStreamExpirationTime" Core..=)
               Core.<$> eventStreamExpirationTime,
-            ("eventStreamStartTime" Core..=)
-              Core.<$> eventStreamStartTime,
+            ("eventStreamStartTime" Core..=) Core.<$> eventStreamStartTime,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -714,6 +732,8 @@ instance Core.ToJSON EventStream where
 data GcsData = GcsData
   { -- | Required. Cloud Storage bucket name. Must meet </storage/docs/naming#requirements Bucket Name Requirements>.
     bucketName :: (Core.Maybe Core.Text),
+    -- | Preview. Enables the transfer of managed folders between Cloud Storage buckets. Set this option on the gcs/data/source. If set to true: - Managed folders in the source bucket are transferred to the destination bucket. - Managed folders in the destination bucket are overwritten. Other OVERWRITE options are not supported. See </storage-transfer/docs/managed-folders Transfer Cloud Storage managed folders>.
+    managedFolderTransferEnabled :: (Core.Maybe Core.Bool),
     -- | Root path to transfer objects. Must be an empty string or full path name that ends with a \'\/\'. This field is treated as an object prefix. As such, it should generally not begin with a \'\/\'. The root path value must meet </storage/docs/naming#objectnames Object Name Requirements>.
     path :: (Core.Maybe Core.Text)
   }
@@ -722,7 +742,12 @@ data GcsData = GcsData
 -- | Creates a value of 'GcsData' with the minimum fields required to make a request.
 newGcsData ::
   GcsData
-newGcsData = GcsData {bucketName = Core.Nothing, path = Core.Nothing}
+newGcsData =
+  GcsData
+    { bucketName = Core.Nothing,
+      managedFolderTransferEnabled = Core.Nothing,
+      path = Core.Nothing
+    }
 
 instance Core.FromJSON GcsData where
   parseJSON =
@@ -731,6 +756,7 @@ instance Core.FromJSON GcsData where
       ( \o ->
           GcsData
             Core.<$> (o Core..:? "bucketName")
+            Core.<*> (o Core..:? "managedFolderTransferEnabled")
             Core.<*> (o Core..:? "path")
       )
 
@@ -739,6 +765,8 @@ instance Core.ToJSON GcsData where
     Core.object
       ( Core.catMaybes
           [ ("bucketName" Core..=) Core.<$> bucketName,
+            ("managedFolderTransferEnabled" Core..=)
+              Core.<$> managedFolderTransferEnabled,
             ("path" Core..=) Core.<$> path
           ]
       )
@@ -758,7 +786,10 @@ data GoogleServiceAccount = GoogleServiceAccount
 newGoogleServiceAccount ::
   GoogleServiceAccount
 newGoogleServiceAccount =
-  GoogleServiceAccount {accountEmail = Core.Nothing, subjectId = Core.Nothing}
+  GoogleServiceAccount
+    { accountEmail = Core.Nothing,
+      subjectId = Core.Nothing
+    }
 
 instance Core.FromJSON GoogleServiceAccount where
   parseJSON =
@@ -778,6 +809,30 @@ instance Core.ToJSON GoogleServiceAccount where
             ("subjectId" Core..=) Core.<$> subjectId
           ]
       )
+
+-- | An HdfsData resource specifies a path within an HDFS entity (e.g. a cluster). All cluster-specific settings, such as namenodes and ports, are configured on the transfer agents servicing requests, so HdfsData only contains the root path to the data in our transfer.
+--
+-- /See:/ 'newHdfsData' smart constructor.
+newtype HdfsData = HdfsData
+  { -- | Root path to transfer files.
+    path :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HdfsData' with the minimum fields required to make a request.
+newHdfsData ::
+  HdfsData
+newHdfsData = HdfsData {path = Core.Nothing}
+
+instance Core.FromJSON HdfsData where
+  parseJSON =
+    Core.withObject
+      "HdfsData"
+      (\o -> HdfsData Core.<$> (o Core..:? "path"))
+
+instance Core.ToJSON HdfsData where
+  toJSON HdfsData {..} =
+    Core.object (Core.catMaybes [("path" Core..=) Core.<$> path])
 
 -- | An HttpData resource specifies a list of objects on the web to be transferred over HTTP. The information of the objects to be transferred is contained in a file referenced by a URL. The first line in the file must be @\"TsvHttpData-1.0\"@, which specifies the format of the file. Subsequent lines specify the information of the list of objects, one object per list entry. Each entry has the following tab-delimited fields: * __HTTP URL__ — The location of the object. * __Length__ — The size of the object in bytes. * __MD5__ — The base64-encoded MD5 hash of the object. For an example of a valid TSV file, see <https://cloud.google.com/storage-transfer/docs/create-url-list Transferring data from URLs>. When transferring data based on a URL list, keep the following in mind: * When an object located at @http(s):\/\/hostname:port\/@ is transferred to a data sink, the name of the object at the data sink is @\/@. * If the specified size of an object does not match the actual size of the object fetched, the object is not
 -- transferred. * If the specified MD5 does not match the MD5 computed from the transferred bytes, the object transfer fails. * Ensure that each URL you specify is publicly accessible. For example, in Cloud Storage you can [share an object publicly] (\/storage\/docs\/cloud-console#_sharingdata) and get a link to it. * Storage Transfer Service obeys @robots.txt@ rules and requires the source HTTP server to support @Range@ requests and to return a @Content-Length@ header in each response. * ObjectConditions have no effect when filtering objects to transfer.
@@ -803,9 +858,7 @@ instance Core.FromJSON HttpData where
 instance Core.ToJSON HttpData where
   toJSON HttpData {..} =
     Core.object
-      ( Core.catMaybes
-          [("listUrl" Core..=) Core.<$> listUrl]
-      )
+      (Core.catMaybes [("listUrl" Core..=) Core.<$> listUrl])
 
 -- | Response from ListAgentPools.
 --
@@ -924,15 +977,15 @@ instance Core.ToJSON ListTransferJobsResponse where
           ]
       )
 
--- | Specifies the logging behavior for transfer operations. For cloud-to-cloud transfers, logs are sent to Cloud Logging. See <https://cloud.google.com/storage-transfer/docs/read-transfer-logs Read transfer logs> for details. For transfers to or from a POSIX file system, logs are stored in the Cloud Storage bucket that is the source or sink of the transfer. See [Managing Transfer for on-premises jobs] (https:\/\/cloud.google.com\/storage-transfer\/docs\/managing-on-prem-jobs#viewing-logs) for details.
+-- | Specifies the logging behavior for transfer operations. Logs can be sent to Cloud Logging for all transfer types. See <https://cloud.google.com/storage-transfer/docs/read-transfer-logs Read transfer logs> for details.
 --
 -- /See:/ 'newLoggingConfig' smart constructor.
 data LoggingConfig = LoggingConfig
-  { -- | For transfers with a PosixFilesystem source, this option enables the Cloud Storage transfer logs for this transfer.
+  { -- | For PosixFilesystem transfers, enables <https://cloud.google.com/storage-transfer/docs/on-prem-transfer-log-format file system transfer logs> instead of, or in addition to, Cloud Logging. This option ignores [LoggableAction] and [LoggableActionState]. If these are set, Cloud Logging will also be enabled for this transfer.
     enableOnpremGcsTransferLogs :: (Core.Maybe Core.Bool),
-    -- | States in which @log_actions@ are logged. If empty, no logs are generated. Not supported for transfers with PosixFilesystem data sources; use enable/onprem/gcs/transfer/logs instead.
+    -- | States in which @log_actions@ are logged. If empty, no logs are generated.
     logActionStates :: (Core.Maybe [LoggingConfig_LogActionStatesItem]),
-    -- | Specifies the actions to be logged. If empty, no logs are generated. Not supported for transfers with PosixFilesystem data sources; use enable/onprem/gcs/transfer/logs instead.
+    -- | Specifies the actions to be logged. If empty, no logs are generated.
     logActions :: (Core.Maybe [LoggingConfig_LogActionsItem])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -987,7 +1040,7 @@ data MetadataOptions = MetadataOptions
     symlink :: (Core.Maybe MetadataOptions_Symlink),
     -- | Specifies how each object\'s temporary hold status should be preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TEMPORARY/HOLD/PRESERVE.
     temporaryHold :: (Core.Maybe MetadataOptions_TemporaryHold),
-    -- | Specifies how each object\'s @timeCreated@ metadata is preserved for transfers between Google Cloud Storage buckets. If unspecified, the default behavior is the same as TIME/CREATED/SKIP.
+    -- | Specifies how each object\'s @timeCreated@ metadata is preserved for transfers. If unspecified, the default behavior is the same as TIME/CREATED/SKIP. This behavior is supported for transfers to Cloud Storage buckets from Cloud Storage, Amazon S3, S3-compatible storage, and Azure sources.
     timeCreated :: (Core.Maybe MetadataOptions_TimeCreated),
     -- | Specifies how each file\'s POSIX user ID (UID) attribute should be handled by the transfer. By default, UID is not preserved. Only applicable to transfers involving POSIX file systems, and ignored for other transfers.
     uid :: (Core.Maybe MetadataOptions_Uid)
@@ -1139,13 +1192,10 @@ instance Core.ToJSON ObjectConditions where
   toJSON ObjectConditions {..} =
     Core.object
       ( Core.catMaybes
-          [ ("excludePrefixes" Core..=)
-              Core.<$> excludePrefixes,
+          [ ("excludePrefixes" Core..=) Core.<$> excludePrefixes,
             ("includePrefixes" Core..=) Core.<$> includePrefixes,
-            ("lastModifiedBefore" Core..=)
-              Core.<$> lastModifiedBefore,
-            ("lastModifiedSince" Core..=)
-              Core.<$> lastModifiedSince,
+            ("lastModifiedBefore" Core..=) Core.<$> lastModifiedBefore,
+            ("lastModifiedSince" Core..=) Core.<$> lastModifiedSince,
             ("maxTimeElapsedSinceLastModification" Core..=)
               Core.<$> maxTimeElapsedSinceLastModification,
             ("minTimeElapsedSinceLastModification" Core..=)
@@ -1165,7 +1215,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned unique name. The format of @name@ is @transferOperations\/some\/unique\/name@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1221,21 +1271,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1249,19 +1297,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Request passed to PauseTransferOperation.
 --
@@ -1301,16 +1347,60 @@ instance Core.FromJSON PosixFilesystem where
   parseJSON =
     Core.withObject
       "PosixFilesystem"
-      ( \o ->
-          PosixFilesystem
-            Core.<$> (o Core..:? "rootDirectory")
-      )
+      (\o -> PosixFilesystem Core.<$> (o Core..:? "rootDirectory"))
 
 instance Core.ToJSON PosixFilesystem where
   toJSON PosixFilesystem {..} =
     Core.object
+      (Core.catMaybes [("rootDirectory" Core..=) Core.<$> rootDirectory])
+
+-- | Specifies the configuration for a cross-bucket replication job. Cross-bucket replication copies new or updated objects from a source Cloud Storage bucket to a destination Cloud Storage bucket. Existing objects in the source bucket are not copied by a new cross-bucket replication job.
+--
+-- /See:/ 'newReplicationSpec' smart constructor.
+data ReplicationSpec = ReplicationSpec
+  { -- | The Cloud Storage bucket to which to replicate objects.
+    gcsDataSink :: (Core.Maybe GcsData),
+    -- | The Cloud Storage bucket from which to replicate objects.
+    gcsDataSource :: (Core.Maybe GcsData),
+    -- | Object conditions that determine which objects are transferred. For replication jobs, only @include_prefixes@ and @exclude_prefixes@ are supported.
+    objectConditions :: (Core.Maybe ObjectConditions),
+    -- | Specifies the metadata options to be applied during replication. Delete options are not supported. If a delete option is specified, the request fails with an INVALID_ARGUMENT error.
+    transferOptions :: (Core.Maybe TransferOptions)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReplicationSpec' with the minimum fields required to make a request.
+newReplicationSpec ::
+  ReplicationSpec
+newReplicationSpec =
+  ReplicationSpec
+    { gcsDataSink = Core.Nothing,
+      gcsDataSource = Core.Nothing,
+      objectConditions = Core.Nothing,
+      transferOptions = Core.Nothing
+    }
+
+instance Core.FromJSON ReplicationSpec where
+  parseJSON =
+    Core.withObject
+      "ReplicationSpec"
+      ( \o ->
+          ReplicationSpec
+            Core.<$> (o Core..:? "gcsDataSink")
+            Core.<*> (o Core..:? "gcsDataSource")
+            Core.<*> (o Core..:? "objectConditions")
+            Core.<*> (o Core..:? "transferOptions")
+      )
+
+instance Core.ToJSON ReplicationSpec where
+  toJSON ReplicationSpec {..} =
+    Core.object
       ( Core.catMaybes
-          [("rootDirectory" Core..=) Core.<$> rootDirectory]
+          [ ("gcsDataSink" Core..=) Core.<$> gcsDataSink,
+            ("gcsDataSource" Core..=) Core.<$> gcsDataSource,
+            ("objectConditions" Core..=) Core.<$> objectConditions,
+            ("transferOptions" Core..=) Core.<$> transferOptions
+          ]
       )
 
 -- | Request passed to ResumeTransferOperation.
@@ -1345,23 +1435,19 @@ newtype RunTransferJobRequest = RunTransferJobRequest
 -- | Creates a value of 'RunTransferJobRequest' with the minimum fields required to make a request.
 newRunTransferJobRequest ::
   RunTransferJobRequest
-newRunTransferJobRequest = RunTransferJobRequest {projectId = Core.Nothing}
+newRunTransferJobRequest =
+  RunTransferJobRequest {projectId = Core.Nothing}
 
 instance Core.FromJSON RunTransferJobRequest where
   parseJSON =
     Core.withObject
       "RunTransferJobRequest"
-      ( \o ->
-          RunTransferJobRequest
-            Core.<$> (o Core..:? "projectId")
-      )
+      (\o -> RunTransferJobRequest Core.<$> (o Core..:? "projectId"))
 
 instance Core.ToJSON RunTransferJobRequest where
   toJSON RunTransferJobRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("projectId" Core..=) Core.<$> projectId]
-      )
+      (Core.catMaybes [("projectId" Core..=) Core.<$> projectId])
 
 -- | S3CompatibleMetadata contains the metadata fields that apply to the basic types of S3-compatible data providers.
 --
@@ -1416,7 +1502,7 @@ instance Core.ToJSON S3CompatibleMetadata where
 --
 -- /See:/ 'newSchedule' smart constructor.
 data Schedule = Schedule
-  { -- | The time in UTC that no further transfer operations are scheduled. Combined with schedule/end/date, @end_time_of_day@ specifies the end date and time for starting new transfer operations. This field must be greater than or equal to the timestamp corresponding to the combintation of schedule/start/date and start/time/of/day, and is subject to the following: * If @end_time_of_day@ is not set and @schedule_end_date@ is set, then a default value of @23:59:59@ is used for @end_time_of_day@. * If @end_time_of_day@ is set and @schedule_end_date@ is not set, then INVALID/ARGUMENT is returned.
+  { -- | The time in UTC that no further transfer operations are scheduled. Combined with schedule/end/date, @end_time_of_day@ specifies the end date and time for starting new transfer operations. This field must be greater than or equal to the timestamp corresponding to the combination of schedule/start/date and start/time/of/day, and is subject to the following: * If @end_time_of_day@ is not set and @schedule_end_date@ is set, then a default value of @23:59:59@ is used for @end_time_of_day@. * If @end_time_of_day@ is set and @schedule_end_date@ is not set, then INVALID/ARGUMENT is returned.
     endTimeOfDay :: (Core.Maybe TimeOfDay'),
     -- | Interval between the start of each scheduled TransferOperation. If unspecified, the default value is 24 hours. This value may not be less than 1 hour.
     repeatInterval :: (Core.Maybe Core.Duration),
@@ -1461,8 +1547,7 @@ instance Core.ToJSON Schedule where
           [ ("endTimeOfDay" Core..=) Core.<$> endTimeOfDay,
             ("repeatInterval" Core..=) Core.<$> repeatInterval,
             ("scheduleEndDate" Core..=) Core.<$> scheduleEndDate,
-            ("scheduleStartDate" Core..=)
-              Core.<$> scheduleStartDate,
+            ("scheduleStartDate" Core..=) Core.<$> scheduleStartDate,
             ("startTimeOfDay" Core..=) Core.<$> startTimeOfDay
           ]
       )
@@ -1484,7 +1569,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1520,31 +1609,29 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and @google.protobuf.Timestamp@.
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1666,67 +1753,85 @@ instance Core.FromJSON TransferCounters where
       "TransferCounters"
       ( \o ->
           TransferCounters
-            Core.<$> ( o Core..:? "bytesCopiedToSink"
+            Core.<$> (o Core..:? "bytesCopiedToSink" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "bytesDeletedFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesDeletedFromSink"
+            Core.<*> ( o
+                         Core..:? "bytesDeletedFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesDeletedFromSource"
+            Core.<*> ( o
+                         Core..:? "bytesFailedToDeleteFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesFailedToDeleteFromSink"
+            Core.<*> ( o
+                         Core..:? "bytesFoundFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesFoundFromSource"
+            Core.<*> ( o
+                         Core..:? "bytesFoundOnlyFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesFoundOnlyFromSink"
+            Core.<*> ( o
+                         Core..:? "bytesFromSourceFailed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesFromSourceFailed"
+            Core.<*> ( o
+                         Core..:? "bytesFromSourceSkippedBySync"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "bytesFromSourceSkippedBySync"
+            Core.<*> ( o
+                         Core..:? "directoriesFailedToListFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "directoriesFailedToListFromSource"
+            Core.<*> ( o
+                         Core..:? "directoriesFoundFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "directoriesFoundFromSource"
+            Core.<*> ( o
+                         Core..:? "directoriesSuccessfullyListedFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "directoriesSuccessfullyListedFromSource"
+            Core.<*> ( o
+                         Core..:? "intermediateObjectsCleanedUp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "intermediateObjectsCleanedUp"
+            Core.<*> ( o
+                         Core..:? "intermediateObjectsFailedCleanedUp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "intermediateObjectsFailedCleanedUp"
+            Core.<*> ( o
+                         Core..:? "objectsCopiedToSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsCopiedToSink"
+            Core.<*> ( o
+                         Core..:? "objectsDeletedFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsDeletedFromSink"
+            Core.<*> ( o
+                         Core..:? "objectsDeletedFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsDeletedFromSource"
+            Core.<*> ( o
+                         Core..:? "objectsFailedToDeleteFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsFailedToDeleteFromSink"
+            Core.<*> ( o
+                         Core..:? "objectsFoundFromSource"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsFoundFromSource"
+            Core.<*> ( o
+                         Core..:? "objectsFoundOnlyFromSink"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsFoundOnlyFromSink"
+            Core.<*> ( o
+                         Core..:? "objectsFromSourceFailed"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "objectsFromSourceFailed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "objectsFromSourceSkippedBySync"
+            Core.<*> ( o
+                         Core..:? "objectsFromSourceSkippedBySync"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -1735,20 +1840,26 @@ instance Core.ToJSON TransferCounters where
   toJSON TransferCounters {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bytesCopiedToSink" Core..=) Core.. Core.AsText
+          [ ("bytesCopiedToSink" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesCopiedToSink,
-            ("bytesDeletedFromSink" Core..=) Core.. Core.AsText
+            ("bytesDeletedFromSink" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesDeletedFromSink,
-            ("bytesDeletedFromSource" Core..=) Core.. Core.AsText
+            ("bytesDeletedFromSource" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesDeletedFromSource,
             ("bytesFailedToDeleteFromSink" Core..=)
               Core.. Core.AsText
               Core.<$> bytesFailedToDeleteFromSink,
-            ("bytesFoundFromSource" Core..=) Core.. Core.AsText
+            ("bytesFoundFromSource" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesFoundFromSource,
-            ("bytesFoundOnlyFromSink" Core..=) Core.. Core.AsText
+            ("bytesFoundOnlyFromSink" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesFoundOnlyFromSink,
-            ("bytesFromSourceFailed" Core..=) Core.. Core.AsText
+            ("bytesFromSourceFailed" Core..=)
+              Core.. Core.AsText
               Core.<$> bytesFromSourceFailed,
             ("bytesFromSourceSkippedBySync" Core..=)
               Core.. Core.AsText
@@ -1768,9 +1879,11 @@ instance Core.ToJSON TransferCounters where
             ("intermediateObjectsFailedCleanedUp" Core..=)
               Core.. Core.AsText
               Core.<$> intermediateObjectsFailedCleanedUp,
-            ("objectsCopiedToSink" Core..=) Core.. Core.AsText
+            ("objectsCopiedToSink" Core..=)
+              Core.. Core.AsText
               Core.<$> objectsCopiedToSink,
-            ("objectsDeletedFromSink" Core..=) Core.. Core.AsText
+            ("objectsDeletedFromSink" Core..=)
+              Core.. Core.AsText
               Core.<$> objectsDeletedFromSink,
             ("objectsDeletedFromSource" Core..=)
               Core.. Core.AsText
@@ -1778,7 +1891,8 @@ instance Core.ToJSON TransferCounters where
             ("objectsFailedToDeleteFromSink" Core..=)
               Core.. Core.AsText
               Core.<$> objectsFailedToDeleteFromSink,
-            ("objectsFoundFromSource" Core..=) Core.. Core.AsText
+            ("objectsFoundFromSource" Core..=)
+              Core.. Core.AsText
               Core.<$> objectsFoundFromSource,
             ("objectsFoundOnlyFromSink" Core..=)
               Core.. Core.AsText
@@ -1812,10 +1926,12 @@ data TransferJob = TransferJob
     loggingConfig :: (Core.Maybe LoggingConfig),
     -- | A unique name (within the transfer project) assigned when the job is created. If this field is empty in a CreateTransferJobRequest, Storage Transfer Service assigns a unique name. Otherwise, the specified name is used as the unique name for this job. If the specified name is in use by a job, the creation request fails with an ALREADY/EXISTS error. This name must start with @\"transferJobs\/\"@ prefix and end with a letter or a number, and should be no more than 128 characters. For transfers involving PosixFilesystem, this name must start with @transferJobs\/OPI@ specifically. For all other transfer types, this name must not start with @transferJobs\/OPI@. Non-PosixFilesystem example: @\"transferJobs\/^(?!OPI)[A-Za-z0-9-._~]*[A-Za-z0-9]$\"@ PosixFilesystem example: @\"transferJobs\/OPI^[A-Za-z0-9-._~]*[A-Za-z0-9]$\"@ Applications must not rely on the enforcement of naming requirements involving OPI. Invalid job names fail with an INVALID/ARGUMENT error.
     name :: (Core.Maybe Core.Text),
-    -- | Notification configuration. This is not supported for transfers involving PosixFilesystem.
+    -- | Notification configuration.
     notificationConfig :: (Core.Maybe NotificationConfig),
     -- | The ID of the Google Cloud project that owns the job.
     projectId :: (Core.Maybe Core.Text),
+    -- | Replication specification.
+    replicationSpec :: (Core.Maybe ReplicationSpec),
     -- | Specifies schedule for the transfer job. This is an optional field. When the field is not set, the job never executes a transfer, unless you invoke RunTransferJob or update the job to have a non-empty schedule.
     schedule :: (Core.Maybe Schedule),
     -- | Status of the job. This value MUST be specified for @CreateTransferJobRequests@. __Note:__ The effect of the new job status takes place during a subsequent job run. For example, if you change the job status from ENABLED to DISABLED, and an operation spawned by the transfer is running, the status change would not affect the current operation.
@@ -1840,6 +1956,7 @@ newTransferJob =
       name = Core.Nothing,
       notificationConfig = Core.Nothing,
       projectId = Core.Nothing,
+      replicationSpec = Core.Nothing,
       schedule = Core.Nothing,
       status = Core.Nothing,
       transferSpec = Core.Nothing
@@ -1861,6 +1978,7 @@ instance Core.FromJSON TransferJob where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
             Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "replicationSpec")
             Core.<*> (o Core..:? "schedule")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "transferSpec")
@@ -1874,15 +1992,13 @@ instance Core.ToJSON TransferJob where
             ("deletionTime" Core..=) Core.<$> deletionTime,
             ("description" Core..=) Core.<$> description,
             ("eventStream" Core..=) Core.<$> eventStream,
-            ("lastModificationTime" Core..=)
-              Core.<$> lastModificationTime,
-            ("latestOperationName" Core..=)
-              Core.<$> latestOperationName,
+            ("lastModificationTime" Core..=) Core.<$> lastModificationTime,
+            ("latestOperationName" Core..=) Core.<$> latestOperationName,
             ("loggingConfig" Core..=) Core.<$> loggingConfig,
             ("name" Core..=) Core.<$> name,
-            ("notificationConfig" Core..=)
-              Core.<$> notificationConfig,
+            ("notificationConfig" Core..=) Core.<$> notificationConfig,
             ("projectId" Core..=) Core.<$> projectId,
+            ("replicationSpec" Core..=) Core.<$> replicationSpec,
             ("schedule" Core..=) Core.<$> schedule,
             ("status" Core..=) Core.<$> status,
             ("transferSpec" Core..=) Core.<$> transferSpec
@@ -1907,16 +2023,12 @@ instance Core.FromJSON TransferManifest where
   parseJSON =
     Core.withObject
       "TransferManifest"
-      ( \o ->
-          TransferManifest Core.<$> (o Core..:? "location")
-      )
+      (\o -> TransferManifest Core.<$> (o Core..:? "location"))
 
 instance Core.ToJSON TransferManifest where
   toJSON TransferManifest {..} =
     Core.object
-      ( Core.catMaybes
-          [("location" Core..=) Core.<$> location]
-      )
+      (Core.catMaybes [("location" Core..=) Core.<$> location])
 
 -- | A description of the execution of a transfer.
 --
@@ -1993,8 +2105,7 @@ instance Core.ToJSON TransferOperation where
             ("errorBreakdowns" Core..=) Core.<$> errorBreakdowns,
             ("loggingConfig" Core..=) Core.<$> loggingConfig,
             ("name" Core..=) Core.<$> name,
-            ("notificationConfig" Core..=)
-              Core.<$> notificationConfig,
+            ("notificationConfig" Core..=) Core.<$> notificationConfig,
             ("projectId" Core..=) Core.<$> projectId,
             ("startTime" Core..=) Core.<$> startTime,
             ("status" Core..=) Core.<$> status,
@@ -2013,7 +2124,7 @@ data TransferOptions = TransferOptions
     deleteObjectsUniqueInSink :: (Core.Maybe Core.Bool),
     -- | Represents the selected metadata options for a transfer job.
     metadataOptions :: (Core.Maybe MetadataOptions),
-    -- | When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are ovewritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
+    -- | When to overwrite objects that already exist in the sink. The default is that only objects that are different from the source are overwritten. If true, all objects in the sink whose name matches an object in the source are overwritten with the source object.
     overwriteObjectsAlreadyExistingInSink :: (Core.Maybe Core.Bool),
     -- | When to overwrite objects that already exist in the sink. If not set, overwrite behavior is determined by overwrite/objects/already/existing/in_sink.
     overwriteWhen :: (Core.Maybe TransferOptions_OverwriteWhen)
@@ -2025,7 +2136,8 @@ newTransferOptions ::
   TransferOptions
 newTransferOptions =
   TransferOptions
-    { deleteObjectsFromSourceAfterTransfer = Core.Nothing,
+    { deleteObjectsFromSourceAfterTransfer =
+        Core.Nothing,
       deleteObjectsUniqueInSink = Core.Nothing,
       metadataOptions = Core.Nothing,
       overwriteObjectsAlreadyExistingInSink = Core.Nothing,
@@ -2074,8 +2186,10 @@ data TransferSpec = TransferSpec
     gcsDataSink :: (Core.Maybe GcsData),
     -- | A Cloud Storage data source.
     gcsDataSource :: (Core.Maybe GcsData),
-    -- | Cloud Storage intermediate data location.
+    -- | For transfers between file systems, specifies a Cloud Storage bucket to be used as an intermediate location through which to transfer data. See <https://cloud.google.com/storage-transfer/docs/file-to-file Transfer data between file systems> for more information.
     gcsIntermediateDataLocation :: (Core.Maybe GcsData),
+    -- | An HDFS cluster data source.
+    hdfsDataSource :: (Core.Maybe HdfsData),
     -- | An HTTP URL data source.
     httpDataSource :: (Core.Maybe HttpData),
     -- | Only objects that satisfy these object conditions are included in the set of data source and data sink objects. Object conditions based on objects\' \"last modification time\" do not exclude objects in a data sink.
@@ -2106,6 +2220,7 @@ newTransferSpec =
       gcsDataSink = Core.Nothing,
       gcsDataSource = Core.Nothing,
       gcsIntermediateDataLocation = Core.Nothing,
+      hdfsDataSource = Core.Nothing,
       httpDataSource = Core.Nothing,
       objectConditions = Core.Nothing,
       posixDataSink = Core.Nothing,
@@ -2128,6 +2243,7 @@ instance Core.FromJSON TransferSpec where
             Core.<*> (o Core..:? "gcsDataSink")
             Core.<*> (o Core..:? "gcsDataSource")
             Core.<*> (o Core..:? "gcsIntermediateDataLocation")
+            Core.<*> (o Core..:? "hdfsDataSource")
             Core.<*> (o Core..:? "httpDataSource")
             Core.<*> (o Core..:? "objectConditions")
             Core.<*> (o Core..:? "posixDataSink")
@@ -2151,19 +2267,15 @@ instance Core.ToJSON TransferSpec where
             ("gcsDataSource" Core..=) Core.<$> gcsDataSource,
             ("gcsIntermediateDataLocation" Core..=)
               Core.<$> gcsIntermediateDataLocation,
+            ("hdfsDataSource" Core..=) Core.<$> hdfsDataSource,
             ("httpDataSource" Core..=) Core.<$> httpDataSource,
-            ("objectConditions" Core..=)
-              Core.<$> objectConditions,
+            ("objectConditions" Core..=) Core.<$> objectConditions,
             ("posixDataSink" Core..=) Core.<$> posixDataSink,
             ("posixDataSource" Core..=) Core.<$> posixDataSource,
-            ("sinkAgentPoolName" Core..=)
-              Core.<$> sinkAgentPoolName,
-            ("sourceAgentPoolName" Core..=)
-              Core.<$> sourceAgentPoolName,
-            ("transferManifest" Core..=)
-              Core.<$> transferManifest,
-            ("transferOptions" Core..=)
-              Core.<$> transferOptions
+            ("sinkAgentPoolName" Core..=) Core.<$> sinkAgentPoolName,
+            ("sourceAgentPoolName" Core..=) Core.<$> sourceAgentPoolName,
+            ("transferManifest" Core..=) Core.<$> transferManifest,
+            ("transferOptions" Core..=) Core.<$> transferOptions
           ]
       )
 

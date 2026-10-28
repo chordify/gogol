@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Buckets.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Buckets.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.buckets.update@ method which the
@@ -51,9 +49,7 @@ type StorageBucketsUpdateResource =
     Core.:> Core.Capture "bucket" Core.Text
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam
-              "predefinedAcl"
-              BucketsUpdatePredefinedAcl
+    Core.:> Core.QueryParam "predefinedAcl" BucketsUpdatePredefinedAcl
     Core.:> Core.QueryParam
               "predefinedDefaultObjectAcl"
               BucketsUpdatePredefinedDefaultObjectAcl
@@ -130,7 +126,5 @@ instance Core.GoogleRequest StorageBucketsUpdate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageBucketsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy StorageBucketsUpdateResource)
           Core.mempty

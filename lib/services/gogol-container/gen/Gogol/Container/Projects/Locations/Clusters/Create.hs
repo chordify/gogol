@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project\'s <https://cloud.google.com/compute/docs/networks-and-firewalls#networks default network>. One firewall is added for the cluster. After cluster creation, the Kubelet creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project\'s global metadata indicating which CIDR range the cluster is using.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.create@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.create@.
 module Gogol.Container.Projects.Locations.Clusters.Create
   ( -- * Resource
     ContainerProjectsLocationsClustersCreateResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.Create
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.create@ method which the
 -- 'ContainerProjectsLocationsClustersCreate' request conforms to.
@@ -100,29 +98,25 @@ instance
   Core.GoogleRequest
     ContainerProjectsLocationsClustersCreate
   where
-  type
-    Rs ContainerProjectsLocationsClustersCreate =
-      Operation
+  type Rs ContainerProjectsLocationsClustersCreate = Operation
   type
     Scopes ContainerProjectsLocationsClustersCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersCreateResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsLocationsClustersCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsLocationsClustersCreateResource
+          )
+          Core.mempty

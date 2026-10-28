@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Patch
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.patch@ method which the
 -- 'HealthcareProjectsLocationsDatasetsPatch' request conforms to.
@@ -67,11 +65,11 @@ data HealthcareProjectsLocationsDatasetsPatch = HealthcareProjectsLocationsDatas
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
+    -- | Identifier. Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Dataset,
-    -- | The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+    -- | Required. The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,7 +80,7 @@ data HealthcareProjectsLocationsDatasetsPatch = HealthcareProjectsLocationsDatas
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsPatch ::
-  -- |  Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@. See 'name'.
+  -- |  Identifier. Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Dataset ->
@@ -103,30 +101,26 @@ instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsPatch
   where
-  type
-    Rs HealthcareProjectsLocationsDatasetsPatch =
-      Dataset
+  type Rs HealthcareProjectsLocationsDatasetsPatch = Dataset
   type
     Scopes HealthcareProjectsLocationsDatasetsPatch =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsPatchResource
-            )
-            Core.mempty
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient HealthcareProjectsLocationsDatasetsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      healthcareService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy HealthcareProjectsLocationsDatasetsPatchResource
+          )
+          Core.mempty

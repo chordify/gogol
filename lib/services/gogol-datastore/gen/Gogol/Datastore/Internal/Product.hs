@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Datastore.Internal.Product
@@ -57,6 +55,10 @@ module Gogol.Datastore.Internal.Product
     -- * ArrayValue
     ArrayValue (..),
     newArrayValue,
+
+    -- * Avg
+    Avg (..),
+    newAvg,
 
     -- * BeginTransactionRequest
     BeginTransactionRequest (..),
@@ -98,9 +100,29 @@ module Gogol.Datastore.Internal.Product
     EntityResult (..),
     newEntityResult,
 
+    -- * ExecutionStats
+    ExecutionStats (..),
+    newExecutionStats,
+
+    -- * ExecutionStats_DebugStats
+    ExecutionStats_DebugStats (..),
+    newExecutionStats_DebugStats,
+
+    -- * ExplainMetrics
+    ExplainMetrics (..),
+    newExplainMetrics,
+
+    -- * ExplainOptions
+    ExplainOptions (..),
+    newExplainOptions,
+
     -- * Filter
     Filter (..),
     newFilter,
+
+    -- * FindNearest
+    FindNearest (..),
+    newFindNearest,
 
     -- * GoogleDatastoreAdminV1CommonMetadata
     GoogleDatastoreAdminV1CommonMetadata (..),
@@ -274,6 +296,14 @@ module Gogol.Datastore.Internal.Product
     PathElement (..),
     newPathElement,
 
+    -- * PlanSummary
+    PlanSummary (..),
+    newPlanSummary,
+
+    -- * PlanSummary_IndexesUsedItem
+    PlanSummary_IndexesUsedItem (..),
+    newPlanSummary_IndexesUsedItem,
+
     -- * Projection
     Projection (..),
     newProjection,
@@ -282,6 +312,10 @@ module Gogol.Datastore.Internal.Product
     PropertyFilter (..),
     newPropertyFilter,
 
+    -- * PropertyMask
+    PropertyMask (..),
+    newPropertyMask,
+
     -- * PropertyOrder
     PropertyOrder (..),
     newPropertyOrder,
@@ -289,6 +323,10 @@ module Gogol.Datastore.Internal.Product
     -- * PropertyReference
     PropertyReference (..),
     newPropertyReference,
+
+    -- * PropertyTransform
+    PropertyTransform (..),
+    newPropertyTransform,
 
     -- * Query
     Query (..),
@@ -350,6 +388,10 @@ module Gogol.Datastore.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * Sum
+    Sum (..),
+    newSum,
+
     -- * TransactionOptions
     TransactionOptions (..),
     newTransactionOptions,
@@ -361,7 +403,7 @@ module Gogol.Datastore.Internal.Product
 where
 
 import Gogol.Datastore.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Defines an aggregation that produces a single result.
 --
@@ -369,15 +411,25 @@ import qualified Gogol.Prelude as Core
 data Aggregation = Aggregation
   { -- | Optional. Optional name of the property to store the result of the aggregation. If not provided, Datastore will pick a default name following the format @property_@. For example: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2), COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) OVER ( ... );@ becomes: @AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2) AS property_1, COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) AS property_2 OVER ( ... );@ Requires: * Must be unique across all aggregation aliases. * Conform to entity property name limitations.
     alias :: (Core.Maybe Core.Text),
+    -- | Average aggregator.
+    avg :: (Core.Maybe Avg),
     -- | Count aggregator.
-    count :: (Core.Maybe Count)
+    count :: (Core.Maybe Count),
+    -- | Sum aggregator.
+    sum :: (Core.Maybe Sum)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Aggregation' with the minimum fields required to make a request.
 newAggregation ::
   Aggregation
-newAggregation = Aggregation {alias = Core.Nothing, count = Core.Nothing}
+newAggregation =
+  Aggregation
+    { alias = Core.Nothing,
+      avg = Core.Nothing,
+      count = Core.Nothing,
+      sum = Core.Nothing
+    }
 
 instance Core.FromJSON Aggregation where
   parseJSON =
@@ -385,7 +437,10 @@ instance Core.FromJSON Aggregation where
       "Aggregation"
       ( \o ->
           Aggregation
-            Core.<$> (o Core..:? "alias") Core.<*> (o Core..:? "count")
+            Core.<$> (o Core..:? "alias")
+            Core.<*> (o Core..:? "avg")
+            Core.<*> (o Core..:? "count")
+            Core.<*> (o Core..:? "sum")
       )
 
 instance Core.ToJSON Aggregation where
@@ -393,7 +448,9 @@ instance Core.ToJSON Aggregation where
     Core.object
       ( Core.catMaybes
           [ ("alias" Core..=) Core.<$> alias,
-            ("count" Core..=) Core.<$> count
+            ("avg" Core..=) Core.<$> avg,
+            ("count" Core..=) Core.<$> count,
+            ("sum" Core..=) Core.<$> sum
           ]
       )
 
@@ -412,7 +469,10 @@ data AggregationQuery = AggregationQuery
 newAggregationQuery ::
   AggregationQuery
 newAggregationQuery =
-  AggregationQuery {aggregations = Core.Nothing, nestedQuery = Core.Nothing}
+  AggregationQuery
+    { aggregations = Core.Nothing,
+      nestedQuery = Core.Nothing
+    }
 
 instance Core.FromJSON AggregationQuery where
   parseJSON =
@@ -445,32 +505,29 @@ newtype AggregationResult = AggregationResult
 -- | Creates a value of 'AggregationResult' with the minimum fields required to make a request.
 newAggregationResult ::
   AggregationResult
-newAggregationResult = AggregationResult {aggregateProperties = Core.Nothing}
+newAggregationResult =
+  AggregationResult {aggregateProperties = Core.Nothing}
 
 instance Core.FromJSON AggregationResult where
   parseJSON =
     Core.withObject
       "AggregationResult"
       ( \o ->
-          AggregationResult
-            Core.<$> (o Core..:? "aggregateProperties")
+          AggregationResult Core.<$> (o Core..:? "aggregateProperties")
       )
 
 instance Core.ToJSON AggregationResult where
   toJSON AggregationResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregateProperties" Core..=)
-              Core.<$> aggregateProperties
-          ]
+          [("aggregateProperties" Core..=) Core.<$> aggregateProperties]
       )
 
 -- | The result of the aggregation functions, ex: @COUNT(*) AS total_entities@. The key is the alias assigned to the aggregation function on input and the size of this map equals the number of aggregation functions in the query.
 --
 -- /See:/ 'newAggregationResult_AggregateProperties' smart constructor.
 newtype AggregationResult_AggregateProperties = AggregationResult_AggregateProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Value)
+  { additional :: (Core.HashMap Core.Text Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -482,10 +539,7 @@ newAggregationResult_AggregateProperties ::
 newAggregationResult_AggregateProperties additional =
   AggregationResult_AggregateProperties {additional = additional}
 
-instance
-  Core.FromJSON
-    AggregationResult_AggregateProperties
-  where
+instance Core.FromJSON AggregationResult_AggregateProperties where
   parseJSON =
     Core.withObject
       "AggregationResult_AggregateProperties"
@@ -494,10 +548,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    AggregationResult_AggregateProperties
-  where
+instance Core.ToJSON AggregationResult_AggregateProperties where
   toJSON AggregationResult_AggregateProperties {..} =
     Core.toJSON additional
 
@@ -539,8 +590,7 @@ instance Core.ToJSON AggregationResultBatch where
   toJSON AggregationResultBatch {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregationResults" Core..=)
-              Core.<$> aggregationResults,
+          [ ("aggregationResults" Core..=) Core.<$> aggregationResults,
             ("moreResults" Core..=) Core.<$> moreResults,
             ("readTime" Core..=) Core.<$> readTime
           ]
@@ -561,7 +611,10 @@ data AllocateIdsRequest = AllocateIdsRequest
 newAllocateIdsRequest ::
   AllocateIdsRequest
 newAllocateIdsRequest =
-  AllocateIdsRequest {databaseId = Core.Nothing, keys = Core.Nothing}
+  AllocateIdsRequest
+    { databaseId = Core.Nothing,
+      keys = Core.Nothing
+    }
 
 instance Core.FromJSON AllocateIdsRequest where
   parseJSON =
@@ -600,14 +653,11 @@ instance Core.FromJSON AllocateIdsResponse where
   parseJSON =
     Core.withObject
       "AllocateIdsResponse"
-      ( \o ->
-          AllocateIdsResponse Core.<$> (o Core..:? "keys")
-      )
+      (\o -> AllocateIdsResponse Core.<$> (o Core..:? "keys"))
 
 instance Core.ToJSON AllocateIdsResponse where
   toJSON AllocateIdsResponse {..} =
-    Core.object
-      (Core.catMaybes [("keys" Core..=) Core.<$> keys])
+    Core.object (Core.catMaybes [("keys" Core..=) Core.<$> keys])
 
 -- | An array value.
 --
@@ -631,8 +681,32 @@ instance Core.FromJSON ArrayValue where
 
 instance Core.ToJSON ArrayValue where
   toJSON ArrayValue {..} =
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
+
+-- | Average of the values of the requested property. * Only numeric values will be aggregated. All non-numeric values including @NULL@ are skipped. * If the aggregated values contain @NaN@, returns @NaN@. Infinity math follows IEEE-754 standards. * If the aggregated value set is empty, returns @NULL@. * Always returns the result as a double.
+--
+-- /See:/ 'newAvg' smart constructor.
+newtype Avg = Avg
+  { -- | The property to aggregate on.
+    property :: (Core.Maybe PropertyReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Avg' with the minimum fields required to make a request.
+newAvg ::
+  Avg
+newAvg = Avg {property = Core.Nothing}
+
+instance Core.FromJSON Avg where
+  parseJSON =
+    Core.withObject
+      "Avg"
+      (\o -> Avg Core.<$> (o Core..:? "property"))
+
+instance Core.ToJSON Avg where
+  toJSON Avg {..} =
     Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+      (Core.catMaybes [("property" Core..=) Core.<$> property])
 
 -- | The request for Datastore.BeginTransaction.
 --
@@ -669,8 +743,7 @@ instance Core.ToJSON BeginTransactionRequest where
     Core.object
       ( Core.catMaybes
           [ ("databaseId" Core..=) Core.<$> databaseId,
-            ("transactionOptions" Core..=)
-              Core.<$> transactionOptions
+            ("transactionOptions" Core..=) Core.<$> transactionOptions
           ]
       )
 
@@ -694,16 +767,13 @@ instance Core.FromJSON BeginTransactionResponse where
     Core.withObject
       "BeginTransactionResponse"
       ( \o ->
-          BeginTransactionResponse
-            Core.<$> (o Core..:? "transaction")
+          BeginTransactionResponse Core.<$> (o Core..:? "transaction")
       )
 
 instance Core.ToJSON BeginTransactionResponse where
   toJSON BeginTransactionResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("transaction" Core..=) Core.<$> transaction]
-      )
+      (Core.catMaybes [("transaction" Core..=) Core.<$> transaction])
 
 -- | The request for Datastore.Commit.
 --
@@ -754,8 +824,7 @@ instance Core.ToJSON CommitRequest where
           [ ("databaseId" Core..=) Core.<$> databaseId,
             ("mode" Core..=) Core.<$> mode,
             ("mutations" Core..=) Core.<$> mutations,
-            ("singleUseTransaction" Core..=)
-              Core.<$> singleUseTransaction,
+            ("singleUseTransaction" Core..=) Core.<$> singleUseTransaction,
             ("transaction" Core..=) Core.<$> transaction
           ]
       )
@@ -800,8 +869,7 @@ instance Core.ToJSON CommitResponse where
       ( Core.catMaybes
           [ ("commitTime" Core..=) Core.<$> commitTime,
             ("indexUpdates" Core..=) Core.<$> indexUpdates,
-            ("mutationResults" Core..=)
-              Core.<$> mutationResults
+            ("mutationResults" Core..=) Core.<$> mutationResults
           ]
       )
 
@@ -819,7 +887,8 @@ data CompositeFilter = CompositeFilter
 -- | Creates a value of 'CompositeFilter' with the minimum fields required to make a request.
 newCompositeFilter ::
   CompositeFilter
-newCompositeFilter = CompositeFilter {filters = Core.Nothing, op = Core.Nothing}
+newCompositeFilter =
+  CompositeFilter {filters = Core.Nothing, op = Core.Nothing}
 
 instance Core.FromJSON CompositeFilter where
   parseJSON =
@@ -827,16 +896,15 @@ instance Core.FromJSON CompositeFilter where
       "CompositeFilter"
       ( \o ->
           CompositeFilter
-            Core.<$> (o Core..:? "filters") Core.<*> (o Core..:? "op")
+            Core.<$> (o Core..:? "filters")
+            Core.<*> (o Core..:? "op")
       )
 
 instance Core.ToJSON CompositeFilter where
   toJSON CompositeFilter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("filters" Core..=) Core.<$> filters,
-            ("op" Core..=) Core.<$> op
-          ]
+          [("filters" Core..=) Core.<$> filters, ("op" Core..=) Core.<$> op]
       )
 
 -- | Count of entities that match the query. The @COUNT(*)@ aggregation function operates on the entire entity so it does not require a field reference.
@@ -859,9 +927,7 @@ instance Core.FromJSON Count where
       "Count"
       ( \o ->
           Count
-            Core.<$> ( o Core..:? "upTo"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "upTo" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Count where
@@ -883,13 +949,12 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
 
--- | A Datastore data object. An entity is limited to 1 megabyte when stored. That /roughly/ corresponds to a limit of 1 megabyte for the serialized form of this message.
+-- | A Datastore data object. Must not exceed 1 MiB - 4 bytes.
 --
 -- /See:/ 'newEntity' smart constructor.
 data Entity = Entity
@@ -928,8 +993,7 @@ instance Core.ToJSON Entity where
 --
 -- /See:/ 'newEntity_Properties' smart constructor.
 newtype Entity_Properties = Entity_Properties
-  { -- |
-    additional :: (Core.HashMap Core.Text Value)
+  { additional :: (Core.HashMap Core.Text Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -938,15 +1002,14 @@ newEntity_Properties ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Value ->
   Entity_Properties
-newEntity_Properties additional = Entity_Properties {additional = additional}
+newEntity_Properties additional =
+  Entity_Properties {additional = additional}
 
 instance Core.FromJSON Entity_Properties where
   parseJSON =
     Core.withObject
       "Entity_Properties"
-      ( \o ->
-          Entity_Properties Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Entity_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Entity_Properties where
   toJSON Entity_Properties {..} = Core.toJSON additional
@@ -990,9 +1053,7 @@ instance Core.FromJSON EntityResult where
             Core.<*> (o Core..:? "cursor")
             Core.<*> (o Core..:? "entity")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "version"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "version" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON EntityResult where
@@ -1003,10 +1064,154 @@ instance Core.ToJSON EntityResult where
             ("cursor" Core..=) Core.<$> cursor,
             ("entity" Core..=) Core.<$> entity,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("version" Core..=) Core.. Core.AsText
-              Core.<$> version
+            ("version" Core..=) Core.. Core.AsText Core.<$> version
           ]
       )
+
+-- | Execution statistics for the query.
+--
+-- /See:/ 'newExecutionStats' smart constructor.
+data ExecutionStats = ExecutionStats
+  { -- | Debugging statistics from the execution of the query. Note that the debugging stats are subject to change as Firestore evolves. It could include: { \"indexes/entries/scanned\": \"1000\", \"documents/scanned\": \"20\", \"billing/details\" : { \"documents/billable\": \"20\", \"index/entries/billable\": \"1000\", \"min/query_cost\": \"0\" } }
+    debugStats :: (Core.Maybe ExecutionStats_DebugStats),
+    -- | Total time to execute the query in the backend.
+    executionDuration :: (Core.Maybe Core.Duration),
+    -- | Total billable read operations.
+    readOperations :: (Core.Maybe Core.Int64),
+    -- | Total number of results returned, including documents, projections, aggregation results, keys.
+    resultsReturned :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExecutionStats' with the minimum fields required to make a request.
+newExecutionStats ::
+  ExecutionStats
+newExecutionStats =
+  ExecutionStats
+    { debugStats = Core.Nothing,
+      executionDuration = Core.Nothing,
+      readOperations = Core.Nothing,
+      resultsReturned = Core.Nothing
+    }
+
+instance Core.FromJSON ExecutionStats where
+  parseJSON =
+    Core.withObject
+      "ExecutionStats"
+      ( \o ->
+          ExecutionStats
+            Core.<$> (o Core..:? "debugStats")
+            Core.<*> (o Core..:? "executionDuration")
+            Core.<*> (o Core..:? "readOperations" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "resultsReturned" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ExecutionStats where
+  toJSON ExecutionStats {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("debugStats" Core..=) Core.<$> debugStats,
+            ("executionDuration" Core..=) Core.<$> executionDuration,
+            ("readOperations" Core..=)
+              Core.. Core.AsText
+              Core.<$> readOperations,
+            ("resultsReturned" Core..=)
+              Core.. Core.AsText
+              Core.<$> resultsReturned
+          ]
+      )
+
+-- | Debugging statistics from the execution of the query. Note that the debugging stats are subject to change as Firestore evolves. It could include: { \"indexes/entries/scanned\": \"1000\", \"documents/scanned\": \"20\", \"billing/details\" : { \"documents/billable\": \"20\", \"index/entries/billable\": \"1000\", \"min/query_cost\": \"0\" } }
+--
+-- /See:/ 'newExecutionStats_DebugStats' smart constructor.
+newtype ExecutionStats_DebugStats = ExecutionStats_DebugStats
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExecutionStats_DebugStats' with the minimum fields required to make a request.
+newExecutionStats_DebugStats ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  ExecutionStats_DebugStats
+newExecutionStats_DebugStats additional =
+  ExecutionStats_DebugStats {additional = additional}
+
+instance Core.FromJSON ExecutionStats_DebugStats where
+  parseJSON =
+    Core.withObject
+      "ExecutionStats_DebugStats"
+      ( \o ->
+          ExecutionStats_DebugStats Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ExecutionStats_DebugStats where
+  toJSON ExecutionStats_DebugStats {..} = Core.toJSON additional
+
+-- | Explain metrics for the query.
+--
+-- /See:/ 'newExplainMetrics' smart constructor.
+data ExplainMetrics = ExplainMetrics
+  { -- | Aggregated stats from the execution of the query. Only present when ExplainOptions.analyze is set to true.
+    executionStats :: (Core.Maybe ExecutionStats),
+    -- | Planning phase information for the query.
+    planSummary :: (Core.Maybe PlanSummary)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExplainMetrics' with the minimum fields required to make a request.
+newExplainMetrics ::
+  ExplainMetrics
+newExplainMetrics =
+  ExplainMetrics
+    { executionStats = Core.Nothing,
+      planSummary = Core.Nothing
+    }
+
+instance Core.FromJSON ExplainMetrics where
+  parseJSON =
+    Core.withObject
+      "ExplainMetrics"
+      ( \o ->
+          ExplainMetrics
+            Core.<$> (o Core..:? "executionStats")
+            Core.<*> (o Core..:? "planSummary")
+      )
+
+instance Core.ToJSON ExplainMetrics where
+  toJSON ExplainMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("executionStats" Core..=) Core.<$> executionStats,
+            ("planSummary" Core..=) Core.<$> planSummary
+          ]
+      )
+
+-- | Explain options for the query.
+--
+-- /See:/ 'newExplainOptions' smart constructor.
+newtype ExplainOptions = ExplainOptions
+  { -- | Optional. Whether to execute this query. When false (the default), the query will be planned, returning only metrics from the planning stages. When true, the query will be planned and executed, returning the full query results along with both planning and execution stage metrics.
+    analyze :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExplainOptions' with the minimum fields required to make a request.
+newExplainOptions ::
+  ExplainOptions
+newExplainOptions = ExplainOptions {analyze = Core.Nothing}
+
+instance Core.FromJSON ExplainOptions where
+  parseJSON =
+    Core.withObject
+      "ExplainOptions"
+      (\o -> ExplainOptions Core.<$> (o Core..:? "analyze"))
+
+instance Core.ToJSON ExplainOptions where
+  toJSON ExplainOptions {..} =
+    Core.object
+      (Core.catMaybes [("analyze" Core..=) Core.<$> analyze])
 
 -- | A holder for any type of filter.
 --
@@ -1023,7 +1228,10 @@ data Filter = Filter
 newFilter ::
   Filter
 newFilter =
-  Filter {compositeFilter = Core.Nothing, propertyFilter = Core.Nothing}
+  Filter
+    { compositeFilter = Core.Nothing,
+      propertyFilter = Core.Nothing
+    }
 
 instance Core.FromJSON Filter where
   parseJSON =
@@ -1039,9 +1247,67 @@ instance Core.ToJSON Filter where
   toJSON Filter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("compositeFilter" Core..=)
-              Core.<$> compositeFilter,
+          [ ("compositeFilter" Core..=) Core.<$> compositeFilter,
             ("propertyFilter" Core..=) Core.<$> propertyFilter
+          ]
+      )
+
+-- | Nearest Neighbors search config. The ordering provided by FindNearest supersedes the order_by stage. If multiple documents have the same vector distance, the returned document order is not guaranteed to be stable between queries.
+--
+-- /See:/ 'newFindNearest' smart constructor.
+data FindNearest = FindNearest
+  { -- | Required. The Distance Measure to use, required.
+    distanceMeasure :: (Core.Maybe FindNearest_DistanceMeasure),
+    -- | Optional. Optional name of the field to output the result of the vector distance calculation. Must conform to entity property limitations.
+    distanceResultProperty :: (Core.Maybe Core.Text),
+    -- | Optional. Option to specify a threshold for which no less similar documents will be returned. The behavior of the specified @distance_measure@ will affect the meaning of the distance threshold. Since DOT/PRODUCT distances increase when the vectors are more similar, the comparison is inverted. * For EUCLIDEAN, COSINE: WHERE distance \<= distance/threshold * For DOT/PRODUCT: WHERE distance >= distance/threshold
+    distanceThreshold :: (Core.Maybe Core.Double),
+    -- | Required. The number of nearest neighbors to return. Must be a positive integer of no more than 100.
+    limit :: (Core.Maybe Core.Int32),
+    -- | Required. The query vector that we are searching on. Must be a vector of no more than 2048 dimensions.
+    queryVector :: (Core.Maybe Value),
+    -- | Required. An indexed vector property to search upon. Only documents which contain vectors whose dimensionality match the query_vector can be returned.
+    vectorProperty :: (Core.Maybe PropertyReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FindNearest' with the minimum fields required to make a request.
+newFindNearest ::
+  FindNearest
+newFindNearest =
+  FindNearest
+    { distanceMeasure = Core.Nothing,
+      distanceResultProperty = Core.Nothing,
+      distanceThreshold = Core.Nothing,
+      limit = Core.Nothing,
+      queryVector = Core.Nothing,
+      vectorProperty = Core.Nothing
+    }
+
+instance Core.FromJSON FindNearest where
+  parseJSON =
+    Core.withObject
+      "FindNearest"
+      ( \o ->
+          FindNearest
+            Core.<$> (o Core..:? "distanceMeasure")
+            Core.<*> (o Core..:? "distanceResultProperty")
+            Core.<*> (o Core..:? "distanceThreshold")
+            Core.<*> (o Core..:? "limit")
+            Core.<*> (o Core..:? "queryVector")
+            Core.<*> (o Core..:? "vectorProperty")
+      )
+
+instance Core.ToJSON FindNearest where
+  toJSON FindNearest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("distanceMeasure" Core..=) Core.<$> distanceMeasure,
+            ("distanceResultProperty" Core..=) Core.<$> distanceResultProperty,
+            ("distanceThreshold" Core..=) Core.<$> distanceThreshold,
+            ("limit" Core..=) Core.<$> limit,
+            ("queryVector" Core..=) Core.<$> queryVector,
+            ("vectorProperty" Core..=) Core.<$> vectorProperty
           ]
       )
 
@@ -1074,10 +1340,7 @@ newGoogleDatastoreAdminV1CommonMetadata =
       state = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1CommonMetadata
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1CommonMetadata where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1CommonMetadata"
@@ -1090,10 +1353,7 @@ instance
             Core.<*> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1CommonMetadata
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1CommonMetadata where
   toJSON GoogleDatastoreAdminV1CommonMetadata {..} =
     Core.object
       ( Core.catMaybes
@@ -1109,8 +1369,7 @@ instance
 --
 -- /See:/ 'newGoogleDatastoreAdminV1CommonMetadata_Labels' smart constructor.
 newtype GoogleDatastoreAdminV1CommonMetadata_Labels = GoogleDatastoreAdminV1CommonMetadata_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1120,12 +1379,12 @@ newGoogleDatastoreAdminV1CommonMetadata_Labels ::
   Core.HashMap Core.Text Core.Text ->
   GoogleDatastoreAdminV1CommonMetadata_Labels
 newGoogleDatastoreAdminV1CommonMetadata_Labels additional =
-  GoogleDatastoreAdminV1CommonMetadata_Labels {additional = additional}
+  GoogleDatastoreAdminV1CommonMetadata_Labels
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1CommonMetadata_Labels
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1CommonMetadata_Labels where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1CommonMetadata_Labels"
@@ -1134,13 +1393,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1CommonMetadata_Labels
-  where
-  toJSON
-    GoogleDatastoreAdminV1CommonMetadata_Labels {..} =
-      Core.toJSON additional
+instance Core.ToJSON GoogleDatastoreAdminV1CommonMetadata_Labels where
+  toJSON GoogleDatastoreAdminV1CommonMetadata_Labels {..} =
+    Core.toJSON additional
 
 -- | Metadata for Datastore to Firestore migration operations. The DatastoreFirestoreMigration operation is not started by the end-user via an explicit \"creation\" method. This is an intentional deviation from the LRO design pattern. This singleton resource can be accessed at: \"projects\/{project_id}\/operations\/datastore-firestore-migration\"
 --
@@ -1164,7 +1419,8 @@ newGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata ::
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata
 newGoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata =
   GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata
-    { migrationState = Core.Nothing,
+    { migrationState =
+        Core.Nothing,
       migrationStep = Core.Nothing
     }
 
@@ -1178,7 +1434,7 @@ instance
       ( \o ->
           GoogleDatastoreAdminV1DatastoreFirestoreMigrationMetadata
             Core.<$> (o Core..:? "migrationState")
-              Core.<*> (o Core..:? "migrationStep")
+            Core.<*> (o Core..:? "migrationStep")
       )
 
 instance
@@ -1214,10 +1470,7 @@ newGoogleDatastoreAdminV1EntityFilter =
       namespaceIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1EntityFilter
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1EntityFilter where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1EntityFilter"
@@ -1227,10 +1480,7 @@ instance
             Core.<*> (o Core..:? "namespaceIds")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1EntityFilter
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1EntityFilter where
   toJSON GoogleDatastoreAdminV1EntityFilter {..} =
     Core.object
       ( Core.catMaybes
@@ -1261,17 +1511,15 @@ newGoogleDatastoreAdminV1ExportEntitiesMetadata ::
   GoogleDatastoreAdminV1ExportEntitiesMetadata
 newGoogleDatastoreAdminV1ExportEntitiesMetadata =
   GoogleDatastoreAdminV1ExportEntitiesMetadata
-    { common = Core.Nothing,
+    { common =
+        Core.Nothing,
       entityFilter = Core.Nothing,
       outputUrlPrefix = Core.Nothing,
       progressBytes = Core.Nothing,
       progressEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ExportEntitiesMetadata
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ExportEntitiesMetadata where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ExportEntitiesMetadata"
@@ -1284,22 +1532,17 @@ instance
             Core.<*> (o Core..:? "progressEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ExportEntitiesMetadata
-  where
-  toJSON
-    GoogleDatastoreAdminV1ExportEntitiesMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("common" Core..=) Core.<$> common,
-              ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("outputUrlPrefix" Core..=) Core.<$> outputUrlPrefix,
-              ("progressBytes" Core..=) Core.<$> progressBytes,
-              ("progressEntities" Core..=)
-                Core.<$> progressEntities
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1ExportEntitiesMetadata where
+  toJSON GoogleDatastoreAdminV1ExportEntitiesMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("outputUrlPrefix" Core..=) Core.<$> outputUrlPrefix,
+            ("progressBytes" Core..=) Core.<$> progressBytes,
+            ("progressEntities" Core..=) Core.<$> progressEntities
+          ]
+      )
 
 -- | The request for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
 --
@@ -1319,15 +1562,13 @@ newGoogleDatastoreAdminV1ExportEntitiesRequest ::
   GoogleDatastoreAdminV1ExportEntitiesRequest
 newGoogleDatastoreAdminV1ExportEntitiesRequest =
   GoogleDatastoreAdminV1ExportEntitiesRequest
-    { entityFilter = Core.Nothing,
+    { entityFilter =
+        Core.Nothing,
       labels = Core.Nothing,
       outputUrlPrefix = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ExportEntitiesRequest
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ExportEntitiesRequest where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ExportEntitiesRequest"
@@ -1338,27 +1579,21 @@ instance
             Core.<*> (o Core..:? "outputUrlPrefix")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ExportEntitiesRequest
-  where
-  toJSON
-    GoogleDatastoreAdminV1ExportEntitiesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("labels" Core..=) Core.<$> labels,
-              ("outputUrlPrefix" Core..=)
-                Core.<$> outputUrlPrefix
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1ExportEntitiesRequest where
+  toJSON GoogleDatastoreAdminV1ExportEntitiesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("labels" Core..=) Core.<$> labels,
+            ("outputUrlPrefix" Core..=) Core.<$> outputUrlPrefix
+          ]
+      )
 
 -- | Client-assigned labels.
 --
 -- /See:/ 'newGoogleDatastoreAdminV1ExportEntitiesRequest_Labels' smart constructor.
 newtype GoogleDatastoreAdminV1ExportEntitiesRequest_Labels = GoogleDatastoreAdminV1ExportEntitiesRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1368,7 +1603,10 @@ newGoogleDatastoreAdminV1ExportEntitiesRequest_Labels ::
   Core.HashMap Core.Text Core.Text ->
   GoogleDatastoreAdminV1ExportEntitiesRequest_Labels
 newGoogleDatastoreAdminV1ExportEntitiesRequest_Labels additional =
-  GoogleDatastoreAdminV1ExportEntitiesRequest_Labels {additional = additional}
+  GoogleDatastoreAdminV1ExportEntitiesRequest_Labels
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -1386,9 +1624,8 @@ instance
   Core.ToJSON
     GoogleDatastoreAdminV1ExportEntitiesRequest_Labels
   where
-  toJSON
-    GoogleDatastoreAdminV1ExportEntitiesRequest_Labels {..} =
-      Core.toJSON additional
+  toJSON GoogleDatastoreAdminV1ExportEntitiesRequest_Labels {..} =
+    Core.toJSON additional
 
 -- | The response for google.datastore.admin.v1.DatastoreAdmin.ExportEntities.
 --
@@ -1403,12 +1640,12 @@ newtype GoogleDatastoreAdminV1ExportEntitiesResponse = GoogleDatastoreAdminV1Exp
 newGoogleDatastoreAdminV1ExportEntitiesResponse ::
   GoogleDatastoreAdminV1ExportEntitiesResponse
 newGoogleDatastoreAdminV1ExportEntitiesResponse =
-  GoogleDatastoreAdminV1ExportEntitiesResponse {outputUrl = Core.Nothing}
+  GoogleDatastoreAdminV1ExportEntitiesResponse
+    { outputUrl =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ExportEntitiesResponse
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ExportEntitiesResponse where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ExportEntitiesResponse"
@@ -1417,16 +1654,10 @@ instance
             Core.<$> (o Core..:? "outputUrl")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ExportEntitiesResponse
-  where
-  toJSON
-    GoogleDatastoreAdminV1ExportEntitiesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputUrl" Core..=) Core.<$> outputUrl]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1ExportEntitiesResponse where
+  toJSON GoogleDatastoreAdminV1ExportEntitiesResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputUrl" Core..=) Core.<$> outputUrl])
 
 -- | Metadata for ImportEntities operations.
 --
@@ -1450,17 +1681,15 @@ newGoogleDatastoreAdminV1ImportEntitiesMetadata ::
   GoogleDatastoreAdminV1ImportEntitiesMetadata
 newGoogleDatastoreAdminV1ImportEntitiesMetadata =
   GoogleDatastoreAdminV1ImportEntitiesMetadata
-    { common = Core.Nothing,
+    { common =
+        Core.Nothing,
       entityFilter = Core.Nothing,
       inputUrl = Core.Nothing,
       progressBytes = Core.Nothing,
       progressEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ImportEntitiesMetadata
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ImportEntitiesMetadata where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ImportEntitiesMetadata"
@@ -1473,22 +1702,17 @@ instance
             Core.<*> (o Core..:? "progressEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ImportEntitiesMetadata
-  where
-  toJSON
-    GoogleDatastoreAdminV1ImportEntitiesMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("common" Core..=) Core.<$> common,
-              ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("inputUrl" Core..=) Core.<$> inputUrl,
-              ("progressBytes" Core..=) Core.<$> progressBytes,
-              ("progressEntities" Core..=)
-                Core.<$> progressEntities
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1ImportEntitiesMetadata where
+  toJSON GoogleDatastoreAdminV1ImportEntitiesMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("inputUrl" Core..=) Core.<$> inputUrl,
+            ("progressBytes" Core..=) Core.<$> progressBytes,
+            ("progressEntities" Core..=) Core.<$> progressEntities
+          ]
+      )
 
 -- | The request for google.datastore.admin.v1.DatastoreAdmin.ImportEntities.
 --
@@ -1508,15 +1732,13 @@ newGoogleDatastoreAdminV1ImportEntitiesRequest ::
   GoogleDatastoreAdminV1ImportEntitiesRequest
 newGoogleDatastoreAdminV1ImportEntitiesRequest =
   GoogleDatastoreAdminV1ImportEntitiesRequest
-    { entityFilter = Core.Nothing,
+    { entityFilter =
+        Core.Nothing,
       inputUrl = Core.Nothing,
       labels = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ImportEntitiesRequest
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ImportEntitiesRequest where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ImportEntitiesRequest"
@@ -1527,26 +1749,21 @@ instance
             Core.<*> (o Core..:? "labels")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ImportEntitiesRequest
-  where
-  toJSON
-    GoogleDatastoreAdminV1ImportEntitiesRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("inputUrl" Core..=) Core.<$> inputUrl,
-              ("labels" Core..=) Core.<$> labels
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1ImportEntitiesRequest where
+  toJSON GoogleDatastoreAdminV1ImportEntitiesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("inputUrl" Core..=) Core.<$> inputUrl,
+            ("labels" Core..=) Core.<$> labels
+          ]
+      )
 
 -- | Client-assigned labels.
 --
 -- /See:/ 'newGoogleDatastoreAdminV1ImportEntitiesRequest_Labels' smart constructor.
 newtype GoogleDatastoreAdminV1ImportEntitiesRequest_Labels = GoogleDatastoreAdminV1ImportEntitiesRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1556,7 +1773,10 @@ newGoogleDatastoreAdminV1ImportEntitiesRequest_Labels ::
   Core.HashMap Core.Text Core.Text ->
   GoogleDatastoreAdminV1ImportEntitiesRequest_Labels
 newGoogleDatastoreAdminV1ImportEntitiesRequest_Labels additional =
-  GoogleDatastoreAdminV1ImportEntitiesRequest_Labels {additional = additional}
+  GoogleDatastoreAdminV1ImportEntitiesRequest_Labels
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -1574,9 +1794,8 @@ instance
   Core.ToJSON
     GoogleDatastoreAdminV1ImportEntitiesRequest_Labels
   where
-  toJSON
-    GoogleDatastoreAdminV1ImportEntitiesRequest_Labels {..} =
-      Core.toJSON additional
+  toJSON GoogleDatastoreAdminV1ImportEntitiesRequest_Labels {..} =
+    Core.toJSON additional
 
 -- | Datastore composite index definition.
 --
@@ -1655,15 +1874,13 @@ newGoogleDatastoreAdminV1IndexOperationMetadata ::
   GoogleDatastoreAdminV1IndexOperationMetadata
 newGoogleDatastoreAdminV1IndexOperationMetadata =
   GoogleDatastoreAdminV1IndexOperationMetadata
-    { common = Core.Nothing,
+    { common =
+        Core.Nothing,
       indexId = Core.Nothing,
       progressEntities = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1IndexOperationMetadata
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1IndexOperationMetadata where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1IndexOperationMetadata"
@@ -1674,20 +1891,15 @@ instance
             Core.<*> (o Core..:? "progressEntities")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1IndexOperationMetadata
-  where
-  toJSON
-    GoogleDatastoreAdminV1IndexOperationMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("common" Core..=) Core.<$> common,
-              ("indexId" Core..=) Core.<$> indexId,
-              ("progressEntities" Core..=)
-                Core.<$> progressEntities
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1IndexOperationMetadata where
+  toJSON GoogleDatastoreAdminV1IndexOperationMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("indexId" Core..=) Core.<$> indexId,
+            ("progressEntities" Core..=) Core.<$> progressEntities
+          ]
+      )
 
 -- | A property of an index.
 --
@@ -1709,10 +1921,7 @@ newGoogleDatastoreAdminV1IndexedProperty =
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1IndexedProperty
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1IndexedProperty where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1IndexedProperty"
@@ -1722,10 +1931,7 @@ instance
             Core.<*> (o Core..:? "name")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1IndexedProperty
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1IndexedProperty where
   toJSON GoogleDatastoreAdminV1IndexedProperty {..} =
     Core.object
       ( Core.catMaybes
@@ -1754,10 +1960,7 @@ newGoogleDatastoreAdminV1ListIndexesResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1ListIndexesResponse
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1ListIndexesResponse where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1ListIndexesResponse"
@@ -1767,10 +1970,7 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1ListIndexesResponse
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1ListIndexesResponse where
   toJSON GoogleDatastoreAdminV1ListIndexesResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1797,15 +1997,13 @@ newGoogleDatastoreAdminV1MigrationProgressEvent ::
   GoogleDatastoreAdminV1MigrationProgressEvent
 newGoogleDatastoreAdminV1MigrationProgressEvent =
   GoogleDatastoreAdminV1MigrationProgressEvent
-    { prepareStepDetails = Core.Nothing,
+    { prepareStepDetails =
+        Core.Nothing,
       redirectWritesStepDetails = Core.Nothing,
       step = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1MigrationProgressEvent
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1MigrationProgressEvent where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1MigrationProgressEvent"
@@ -1816,21 +2014,16 @@ instance
             Core.<*> (o Core..:? "step")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1MigrationProgressEvent
-  where
-  toJSON
-    GoogleDatastoreAdminV1MigrationProgressEvent {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("prepareStepDetails" Core..=)
-                Core.<$> prepareStepDetails,
-              ("redirectWritesStepDetails" Core..=)
-                Core.<$> redirectWritesStepDetails,
-              ("step" Core..=) Core.<$> step
-            ]
-        )
+instance Core.ToJSON GoogleDatastoreAdminV1MigrationProgressEvent where
+  toJSON GoogleDatastoreAdminV1MigrationProgressEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("prepareStepDetails" Core..=) Core.<$> prepareStepDetails,
+            ("redirectWritesStepDetails" Core..=)
+              Core.<$> redirectWritesStepDetails,
+            ("step" Core..=) Core.<$> step
+          ]
+      )
 
 -- | An event signifying a change in state of a <https://cloud.google.com/datastore/docs/upgrade-to-firestore migration from Cloud Datastore to Cloud Firestore in Datastore mode>.
 --
@@ -1847,10 +2040,7 @@ newGoogleDatastoreAdminV1MigrationStateEvent ::
 newGoogleDatastoreAdminV1MigrationStateEvent =
   GoogleDatastoreAdminV1MigrationStateEvent {state = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1MigrationStateEvent
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1MigrationStateEvent where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1MigrationStateEvent"
@@ -1859,13 +2049,9 @@ instance
             Core.<$> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1MigrationStateEvent
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1MigrationStateEvent where
   toJSON GoogleDatastoreAdminV1MigrationStateEvent {..} =
-    Core.object
-      (Core.catMaybes [("state" Core..=) Core.<$> state])
+    Core.object (Core.catMaybes [("state" Core..=) Core.<$> state])
 
 -- | Details for the @PREPARE@ step.
 --
@@ -1883,12 +2069,12 @@ newtype GoogleDatastoreAdminV1PrepareStepDetails = GoogleDatastoreAdminV1Prepare
 newGoogleDatastoreAdminV1PrepareStepDetails ::
   GoogleDatastoreAdminV1PrepareStepDetails
 newGoogleDatastoreAdminV1PrepareStepDetails =
-  GoogleDatastoreAdminV1PrepareStepDetails {concurrencyMode = Core.Nothing}
+  GoogleDatastoreAdminV1PrepareStepDetails
+    { concurrencyMode =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1PrepareStepDetails
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1PrepareStepDetails where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1PrepareStepDetails"
@@ -1897,16 +2083,11 @@ instance
             Core.<$> (o Core..:? "concurrencyMode")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1PrepareStepDetails
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1PrepareStepDetails where
   toJSON GoogleDatastoreAdminV1PrepareStepDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("concurrencyMode" Core..=)
-              Core.<$> concurrencyMode
-          ]
+          [("concurrencyMode" Core..=) Core.<$> concurrencyMode]
       )
 
 -- | Measures the progress of a particular metric.
@@ -1935,21 +2116,19 @@ instance Core.FromJSON GoogleDatastoreAdminV1Progress where
       "GoogleDatastoreAdminV1Progress"
       ( \o ->
           GoogleDatastoreAdminV1Progress
-            Core.<$> ( o Core..:? "workCompleted"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "workEstimated"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "workCompleted" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "workEstimated" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON GoogleDatastoreAdminV1Progress where
   toJSON GoogleDatastoreAdminV1Progress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("workCompleted" Core..=) Core.. Core.AsText
+          [ ("workCompleted" Core..=)
+              Core.. Core.AsText
               Core.<$> workCompleted,
-            ("workEstimated" Core..=) Core.. Core.AsText
+            ("workEstimated" Core..=)
+              Core.. Core.AsText
               Core.<$> workEstimated
           ]
       )
@@ -1958,7 +2137,7 @@ instance Core.ToJSON GoogleDatastoreAdminV1Progress where
 --
 -- /See:/ 'newGoogleDatastoreAdminV1RedirectWritesStepDetails' smart constructor.
 newtype GoogleDatastoreAdminV1RedirectWritesStepDetails = GoogleDatastoreAdminV1RedirectWritesStepDetails
-  { -- | Ths concurrency mode for this database.
+  { -- | The concurrency mode for this database.
     concurrencyMode ::
       ( Core.Maybe
           GoogleDatastoreAdminV1RedirectWritesStepDetails_ConcurrencyMode
@@ -1971,7 +2150,8 @@ newGoogleDatastoreAdminV1RedirectWritesStepDetails ::
   GoogleDatastoreAdminV1RedirectWritesStepDetails
 newGoogleDatastoreAdminV1RedirectWritesStepDetails =
   GoogleDatastoreAdminV1RedirectWritesStepDetails
-    { concurrencyMode = Core.Nothing
+    { concurrencyMode =
+        Core.Nothing
     }
 
 instance
@@ -1990,14 +2170,11 @@ instance
   Core.ToJSON
     GoogleDatastoreAdminV1RedirectWritesStepDetails
   where
-  toJSON
-    GoogleDatastoreAdminV1RedirectWritesStepDetails {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("concurrencyMode" Core..=)
-                Core.<$> concurrencyMode
-            ]
-        )
+  toJSON GoogleDatastoreAdminV1RedirectWritesStepDetails {..} =
+    Core.object
+      ( Core.catMaybes
+          [("concurrencyMode" Core..=) Core.<$> concurrencyMode]
+      )
 
 -- | Metadata common to all Datastore Admin operations.
 --
@@ -2031,10 +2208,7 @@ newGoogleDatastoreAdminV1beta1CommonMetadata =
       state = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1beta1CommonMetadata
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1beta1CommonMetadata where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1beta1CommonMetadata"
@@ -2047,10 +2221,7 @@ instance
             Core.<*> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1beta1CommonMetadata
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1beta1CommonMetadata where
   toJSON GoogleDatastoreAdminV1beta1CommonMetadata {..} =
     Core.object
       ( Core.catMaybes
@@ -2066,8 +2237,7 @@ instance
 --
 -- /See:/ 'newGoogleDatastoreAdminV1beta1CommonMetadata_Labels' smart constructor.
 newtype GoogleDatastoreAdminV1beta1CommonMetadata_Labels = GoogleDatastoreAdminV1beta1CommonMetadata_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2077,7 +2247,10 @@ newGoogleDatastoreAdminV1beta1CommonMetadata_Labels ::
   Core.HashMap Core.Text Core.Text ->
   GoogleDatastoreAdminV1beta1CommonMetadata_Labels
 newGoogleDatastoreAdminV1beta1CommonMetadata_Labels additional =
-  GoogleDatastoreAdminV1beta1CommonMetadata_Labels {additional = additional}
+  GoogleDatastoreAdminV1beta1CommonMetadata_Labels
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -2095,9 +2268,8 @@ instance
   Core.ToJSON
     GoogleDatastoreAdminV1beta1CommonMetadata_Labels
   where
-  toJSON
-    GoogleDatastoreAdminV1beta1CommonMetadata_Labels {..} =
-      Core.toJSON additional
+  toJSON GoogleDatastoreAdminV1beta1CommonMetadata_Labels {..} =
+    Core.toJSON additional
 
 -- | Identifies a subset of entities in a project. This is specified as combinations of kinds and namespaces (either or both of which may be all, as described in the following examples). Example usage: Entire project: kinds=[], namespace/ids=[] Kinds Foo and Bar in all namespaces: kinds=[\'Foo\', \'Bar\'], namespace/ids=[] Kinds Foo and Bar only in the default namespace: kinds=[\'Foo\', \'Bar\'], namespace/ids=[\'\'] Kinds Foo and Bar in both the default and Baz namespaces: kinds=[\'Foo\', \'Bar\'], namespace/ids=[\'\', \'Baz\'] The entire Baz namespace: kinds=[], namespace_ids=[\'Baz\']
 --
@@ -2119,10 +2291,7 @@ newGoogleDatastoreAdminV1beta1EntityFilter =
       namespaceIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1beta1EntityFilter
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1beta1EntityFilter where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1beta1EntityFilter"
@@ -2132,10 +2301,7 @@ instance
             Core.<*> (o Core..:? "namespaceIds")
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1beta1EntityFilter
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1beta1EntityFilter where
   toJSON GoogleDatastoreAdminV1beta1EntityFilter {..} =
     Core.object
       ( Core.catMaybes
@@ -2166,7 +2332,8 @@ newGoogleDatastoreAdminV1beta1ExportEntitiesMetadata ::
   GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
 newGoogleDatastoreAdminV1beta1ExportEntitiesMetadata =
   GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
-    { common = Core.Nothing,
+    { common =
+        Core.Nothing,
       entityFilter = Core.Nothing,
       outputUrlPrefix = Core.Nothing,
       progressBytes = Core.Nothing,
@@ -2183,28 +2350,26 @@ instance
       ( \o ->
           GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
             Core.<$> (o Core..:? "common")
-              Core.<*> (o Core..:? "entityFilter")
-              Core.<*> (o Core..:? "outputUrlPrefix")
-              Core.<*> (o Core..:? "progressBytes")
-              Core.<*> (o Core..:? "progressEntities")
+            Core.<*> (o Core..:? "entityFilter")
+            Core.<*> (o Core..:? "outputUrlPrefix")
+            Core.<*> (o Core..:? "progressBytes")
+            Core.<*> (o Core..:? "progressEntities")
       )
 
 instance
   Core.ToJSON
     GoogleDatastoreAdminV1beta1ExportEntitiesMetadata
   where
-  toJSON
-    GoogleDatastoreAdminV1beta1ExportEntitiesMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("common" Core..=) Core.<$> common,
-              ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("outputUrlPrefix" Core..=) Core.<$> outputUrlPrefix,
-              ("progressBytes" Core..=) Core.<$> progressBytes,
-              ("progressEntities" Core..=)
-                Core.<$> progressEntities
-            ]
-        )
+  toJSON GoogleDatastoreAdminV1beta1ExportEntitiesMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("outputUrlPrefix" Core..=) Core.<$> outputUrlPrefix,
+            ("progressBytes" Core..=) Core.<$> progressBytes,
+            ("progressEntities" Core..=) Core.<$> progressEntities
+          ]
+      )
 
 -- | The response for google.datastore.admin.v1beta1.DatastoreAdmin.ExportEntities.
 --
@@ -2219,7 +2384,10 @@ newtype GoogleDatastoreAdminV1beta1ExportEntitiesResponse = GoogleDatastoreAdmin
 newGoogleDatastoreAdminV1beta1ExportEntitiesResponse ::
   GoogleDatastoreAdminV1beta1ExportEntitiesResponse
 newGoogleDatastoreAdminV1beta1ExportEntitiesResponse =
-  GoogleDatastoreAdminV1beta1ExportEntitiesResponse {outputUrl = Core.Nothing}
+  GoogleDatastoreAdminV1beta1ExportEntitiesResponse
+    { outputUrl =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -2237,12 +2405,9 @@ instance
   Core.ToJSON
     GoogleDatastoreAdminV1beta1ExportEntitiesResponse
   where
-  toJSON
-    GoogleDatastoreAdminV1beta1ExportEntitiesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("outputUrl" Core..=) Core.<$> outputUrl]
-        )
+  toJSON GoogleDatastoreAdminV1beta1ExportEntitiesResponse {..} =
+    Core.object
+      (Core.catMaybes [("outputUrl" Core..=) Core.<$> outputUrl])
 
 -- | Metadata for ImportEntities operations.
 --
@@ -2266,7 +2431,8 @@ newGoogleDatastoreAdminV1beta1ImportEntitiesMetadata ::
   GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
 newGoogleDatastoreAdminV1beta1ImportEntitiesMetadata =
   GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
-    { common = Core.Nothing,
+    { common =
+        Core.Nothing,
       entityFilter = Core.Nothing,
       inputUrl = Core.Nothing,
       progressBytes = Core.Nothing,
@@ -2283,28 +2449,26 @@ instance
       ( \o ->
           GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
             Core.<$> (o Core..:? "common")
-              Core.<*> (o Core..:? "entityFilter")
-              Core.<*> (o Core..:? "inputUrl")
-              Core.<*> (o Core..:? "progressBytes")
-              Core.<*> (o Core..:? "progressEntities")
+            Core.<*> (o Core..:? "entityFilter")
+            Core.<*> (o Core..:? "inputUrl")
+            Core.<*> (o Core..:? "progressBytes")
+            Core.<*> (o Core..:? "progressEntities")
       )
 
 instance
   Core.ToJSON
     GoogleDatastoreAdminV1beta1ImportEntitiesMetadata
   where
-  toJSON
-    GoogleDatastoreAdminV1beta1ImportEntitiesMetadata {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("common" Core..=) Core.<$> common,
-              ("entityFilter" Core..=) Core.<$> entityFilter,
-              ("inputUrl" Core..=) Core.<$> inputUrl,
-              ("progressBytes" Core..=) Core.<$> progressBytes,
-              ("progressEntities" Core..=)
-                Core.<$> progressEntities
-            ]
-        )
+  toJSON GoogleDatastoreAdminV1beta1ImportEntitiesMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("common" Core..=) Core.<$> common,
+            ("entityFilter" Core..=) Core.<$> entityFilter,
+            ("inputUrl" Core..=) Core.<$> inputUrl,
+            ("progressBytes" Core..=) Core.<$> progressBytes,
+            ("progressEntities" Core..=) Core.<$> progressEntities
+          ]
+      )
 
 -- | Measures the progress of a particular metric.
 --
@@ -2326,33 +2490,25 @@ newGoogleDatastoreAdminV1beta1Progress =
       workEstimated = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleDatastoreAdminV1beta1Progress
-  where
+instance Core.FromJSON GoogleDatastoreAdminV1beta1Progress where
   parseJSON =
     Core.withObject
       "GoogleDatastoreAdminV1beta1Progress"
       ( \o ->
           GoogleDatastoreAdminV1beta1Progress
-            Core.<$> ( o Core..:? "workCompleted"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "workEstimated"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "workCompleted" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "workEstimated" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    GoogleDatastoreAdminV1beta1Progress
-  where
+instance Core.ToJSON GoogleDatastoreAdminV1beta1Progress where
   toJSON GoogleDatastoreAdminV1beta1Progress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("workCompleted" Core..=) Core.. Core.AsText
+          [ ("workCompleted" Core..=)
+              Core.. Core.AsText
               Core.<$> workCompleted,
-            ("workEstimated" Core..=) Core.. Core.AsText
+            ("workEstimated" Core..=)
+              Core.. Core.AsText
               Core.<$> workEstimated
           ]
       )
@@ -2373,14 +2529,12 @@ newGoogleLongrunningListOperationsResponse ::
   GoogleLongrunningListOperationsResponse
 newGoogleLongrunningListOperationsResponse =
   GoogleLongrunningListOperationsResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       operations = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleLongrunningListOperationsResponse
-  where
+instance Core.FromJSON GoogleLongrunningListOperationsResponse where
   parseJSON =
     Core.withObject
       "GoogleLongrunningListOperationsResponse"
@@ -2390,10 +2544,7 @@ instance
             Core.<*> (o Core..:? "operations")
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningListOperationsResponse
-  where
+instance Core.ToJSON GoogleLongrunningListOperationsResponse where
   toJSON GoogleLongrunningListOperationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2414,7 +2565,7 @@ data GoogleLongrunningOperation = GoogleLongrunningOperation
     metadata :: (Core.Maybe GoogleLongrunningOperation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe GoogleLongrunningOperation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2473,10 +2624,7 @@ newGoogleLongrunningOperation_Metadata ::
 newGoogleLongrunningOperation_Metadata additional =
   GoogleLongrunningOperation_Metadata {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Metadata where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Metadata"
@@ -2485,14 +2633,11 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Metadata
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Metadata where
   toJSON GoogleLongrunningOperation_Metadata {..} =
     Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newGoogleLongrunningOperation_Response' smart constructor.
 newtype GoogleLongrunningOperation_Response = GoogleLongrunningOperation_Response
@@ -2509,10 +2654,7 @@ newGoogleLongrunningOperation_Response ::
 newGoogleLongrunningOperation_Response additional =
   GoogleLongrunningOperation_Response {additional = additional}
 
-instance
-  Core.FromJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.FromJSON GoogleLongrunningOperation_Response where
   parseJSON =
     Core.withObject
       "GoogleLongrunningOperation_Response"
@@ -2521,10 +2663,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    GoogleLongrunningOperation_Response
-  where
+instance Core.ToJSON GoogleLongrunningOperation_Response where
   toJSON GoogleLongrunningOperation_Response {..} =
     Core.toJSON additional
 
@@ -2572,8 +2711,7 @@ instance Core.ToJSON GqlQuery where
       ( Core.catMaybes
           [ ("allowLiterals" Core..=) Core.<$> allowLiterals,
             ("namedBindings" Core..=) Core.<$> namedBindings,
-            ("positionalBindings" Core..=)
-              Core.<$> positionalBindings,
+            ("positionalBindings" Core..=) Core.<$> positionalBindings,
             ("queryString" Core..=) Core.<$> queryString
           ]
       )
@@ -2582,8 +2720,7 @@ instance Core.ToJSON GqlQuery where
 --
 -- /See:/ 'newGqlQuery_NamedBindings' smart constructor.
 newtype GqlQuery_NamedBindings = GqlQuery_NamedBindings
-  { -- |
-    additional :: (Core.HashMap Core.Text GqlQueryParameter)
+  { additional :: (Core.HashMap Core.Text GqlQueryParameter)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2599,14 +2736,10 @@ instance Core.FromJSON GqlQuery_NamedBindings where
   parseJSON =
     Core.withObject
       "GqlQuery_NamedBindings"
-      ( \o ->
-          GqlQuery_NamedBindings
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> GqlQuery_NamedBindings Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON GqlQuery_NamedBindings where
-  toJSON GqlQuery_NamedBindings {..} =
-    Core.toJSON additional
+  toJSON GqlQuery_NamedBindings {..} = Core.toJSON additional
 
 -- | A binding parameter for a GQL query.
 --
@@ -2631,7 +2764,8 @@ instance Core.FromJSON GqlQueryParameter where
       "GqlQueryParameter"
       ( \o ->
           GqlQueryParameter
-            Core.<$> (o Core..:? "cursor") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "cursor")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON GqlQueryParameter where
@@ -2700,8 +2834,7 @@ instance Core.FromJSON KindExpression where
 
 instance Core.ToJSON KindExpression where
   toJSON KindExpression {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | An object that represents a latitude\/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
 --
@@ -2717,7 +2850,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -2746,6 +2880,8 @@ data LookupRequest = LookupRequest
     databaseId :: (Core.Maybe Core.Text),
     -- | Required. Keys of entities to look up.
     keys :: (Core.Maybe [Key]),
+    -- | The properties to return. Defaults to returning all properties. If this field is set and an entity has a property not referenced in the mask, it will be absent from LookupResponse.found.entity.properties. The entity\'s key is always returned.
+    propertyMask :: (Core.Maybe PropertyMask),
     -- | The options for this lookup request.
     readOptions :: (Core.Maybe ReadOptions)
   }
@@ -2758,6 +2894,7 @@ newLookupRequest =
   LookupRequest
     { databaseId = Core.Nothing,
       keys = Core.Nothing,
+      propertyMask = Core.Nothing,
       readOptions = Core.Nothing
     }
 
@@ -2769,6 +2906,7 @@ instance Core.FromJSON LookupRequest where
           LookupRequest
             Core.<$> (o Core..:? "databaseId")
             Core.<*> (o Core..:? "keys")
+            Core.<*> (o Core..:? "propertyMask")
             Core.<*> (o Core..:? "readOptions")
       )
 
@@ -2778,6 +2916,7 @@ instance Core.ToJSON LookupRequest where
       ( Core.catMaybes
           [ ("databaseId" Core..=) Core.<$> databaseId,
             ("keys" Core..=) Core.<$> keys,
+            ("propertyMask" Core..=) Core.<$> propertyMask,
             ("readOptions" Core..=) Core.<$> readOptions
           ]
       )
@@ -2842,10 +2981,16 @@ instance Core.ToJSON LookupResponse where
 data Mutation = Mutation
   { -- | The version of the entity that this mutation is being applied to. If this does not match the current version on the server, the mutation conflicts.
     baseVersion :: (Core.Maybe Core.Int64),
+    -- | The strategy to use when a conflict is detected. Defaults to @SERVER_VALUE@. If this is set, then @conflict_detection_strategy@ must also be set.
+    conflictResolutionStrategy :: (Core.Maybe Mutation_ConflictResolutionStrategy),
     -- | The key of the entity to delete. The entity may or may not already exist. Must have a complete key path and must not be reserved\/read-only.
     delete :: (Core.Maybe Key),
     -- | The entity to insert. The entity must not already exist. The entity key\'s final path element may be incomplete.
     insert :: (Core.Maybe Entity),
+    -- | The properties to write in this mutation. None of the properties in the mask may have a reserved name, except for @__key__@. This field is ignored for @delete@. If the entity already exists, only properties referenced in the mask are updated, others are left untouched. Properties referenced in the mask but not in the entity are deleted.
+    propertyMask :: (Core.Maybe PropertyMask),
+    -- | Optional. The transforms to perform on the entity. This field can be set only when the operation is @insert@, @update@, or @upsert@. If present, the transforms are be applied to the entity regardless of the property mask, in order, after the operation.
+    propertyTransforms :: (Core.Maybe [PropertyTransform]),
     -- | The entity to update. The entity must already exist. Must have a complete key path.
     update :: (Core.Maybe Entity),
     -- | The update time of the entity that this mutation is being applied to. If this does not match the current update time on the server, the mutation conflicts.
@@ -2861,8 +3006,11 @@ newMutation ::
 newMutation =
   Mutation
     { baseVersion = Core.Nothing,
+      conflictResolutionStrategy = Core.Nothing,
       delete = Core.Nothing,
       insert = Core.Nothing,
+      propertyMask = Core.Nothing,
+      propertyTransforms = Core.Nothing,
       update = Core.Nothing,
       updateTime = Core.Nothing,
       upsert = Core.Nothing
@@ -2874,11 +3022,12 @@ instance Core.FromJSON Mutation where
       "Mutation"
       ( \o ->
           Mutation
-            Core.<$> ( o Core..:? "baseVersion"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "baseVersion" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "conflictResolutionStrategy")
             Core.<*> (o Core..:? "delete")
             Core.<*> (o Core..:? "insert")
+            Core.<*> (o Core..:? "propertyMask")
+            Core.<*> (o Core..:? "propertyTransforms")
             Core.<*> (o Core..:? "update")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "upsert")
@@ -2888,10 +3037,13 @@ instance Core.ToJSON Mutation where
   toJSON Mutation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("baseVersion" Core..=) Core.. Core.AsText
-              Core.<$> baseVersion,
+          [ ("baseVersion" Core..=) Core.. Core.AsText Core.<$> baseVersion,
+            ("conflictResolutionStrategy" Core..=)
+              Core.<$> conflictResolutionStrategy,
             ("delete" Core..=) Core.<$> delete,
             ("insert" Core..=) Core.<$> insert,
+            ("propertyMask" Core..=) Core.<$> propertyMask,
+            ("propertyTransforms" Core..=) Core.<$> propertyTransforms,
             ("update" Core..=) Core.<$> update,
             ("updateTime" Core..=) Core.<$> updateTime,
             ("upsert" Core..=) Core.<$> upsert
@@ -2908,6 +3060,8 @@ data MutationResult = MutationResult
     createTime :: (Core.Maybe Core.DateTime),
     -- | The automatically allocated key. Set only when the mutation allocated a key.
     key :: (Core.Maybe Key),
+    -- | The results of applying each PropertyTransform, in the same order of the request.
+    transformResults :: (Core.Maybe [Value]),
     -- | The update time of the entity on the server after processing the mutation. If the mutation doesn\'t change anything on the server, then the timestamp will be the update timestamp of the current entity. This field will not be set after a \'delete\'.
     updateTime :: (Core.Maybe Core.DateTime),
     -- | The version of the entity on the server after processing the mutation. If the mutation doesn\'t change anything on the server, then the version will be the version of the current entity or, if no entity is present, a version that is strictly greater than the version of any previous entity and less than the version of any possible future entity.
@@ -2923,6 +3077,7 @@ newMutationResult =
     { conflictDetected = Core.Nothing,
       createTime = Core.Nothing,
       key = Core.Nothing,
+      transformResults = Core.Nothing,
       updateTime = Core.Nothing,
       version = Core.Nothing
     }
@@ -2936,23 +3091,21 @@ instance Core.FromJSON MutationResult where
             Core.<$> (o Core..:? "conflictDetected")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "key")
+            Core.<*> (o Core..:? "transformResults")
             Core.<*> (o Core..:? "updateTime")
-            Core.<*> ( o Core..:? "version"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "version" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MutationResult where
   toJSON MutationResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conflictDetected" Core..=)
-              Core.<$> conflictDetected,
+          [ ("conflictDetected" Core..=) Core.<$> conflictDetected,
             ("createTime" Core..=) Core.<$> createTime,
             ("key" Core..=) Core.<$> key,
+            ("transformResults" Core..=) Core.<$> transformResults,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("version" Core..=) Core.. Core.AsText
-              Core.<$> version
+            ("version" Core..=) Core.. Core.AsText Core.<$> version
           ]
       )
 
@@ -3017,7 +3170,11 @@ data PathElement = PathElement
 newPathElement ::
   PathElement
 newPathElement =
-  PathElement {id = Core.Nothing, kind = Core.Nothing, name = Core.Nothing}
+  PathElement
+    { id = Core.Nothing,
+      kind = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON PathElement where
   parseJSON =
@@ -3039,6 +3196,58 @@ instance Core.ToJSON PathElement where
             ("name" Core..=) Core.<$> name
           ]
       )
+
+-- | Planning phase information for the query.
+--
+-- /See:/ 'newPlanSummary' smart constructor.
+newtype PlanSummary = PlanSummary
+  { -- | The indexes selected for the query. For example: [ {\"query/scope\": \"Collection\", \"properties\": \"(foo ASC, __name__ ASC)\"}, {\"query/scope\": \"Collection\", \"properties\": \"(bar ASC, __name__ ASC)\"} ]
+    indexesUsed :: (Core.Maybe [PlanSummary_IndexesUsedItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlanSummary' with the minimum fields required to make a request.
+newPlanSummary ::
+  PlanSummary
+newPlanSummary = PlanSummary {indexesUsed = Core.Nothing}
+
+instance Core.FromJSON PlanSummary where
+  parseJSON =
+    Core.withObject
+      "PlanSummary"
+      (\o -> PlanSummary Core.<$> (o Core..:? "indexesUsed"))
+
+instance Core.ToJSON PlanSummary where
+  toJSON PlanSummary {..} =
+    Core.object
+      (Core.catMaybes [("indexesUsed" Core..=) Core.<$> indexesUsed])
+
+--
+-- /See:/ 'newPlanSummary_IndexesUsedItem' smart constructor.
+newtype PlanSummary_IndexesUsedItem = PlanSummary_IndexesUsedItem
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PlanSummary_IndexesUsedItem' with the minimum fields required to make a request.
+newPlanSummary_IndexesUsedItem ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  PlanSummary_IndexesUsedItem
+newPlanSummary_IndexesUsedItem additional =
+  PlanSummary_IndexesUsedItem {additional = additional}
+
+instance Core.FromJSON PlanSummary_IndexesUsedItem where
+  parseJSON =
+    Core.withObject
+      "PlanSummary_IndexesUsedItem"
+      ( \o ->
+          PlanSummary_IndexesUsedItem Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON PlanSummary_IndexesUsedItem where
+  toJSON PlanSummary_IndexesUsedItem {..} = Core.toJSON additional
 
 -- | A representation of a property in a projection.
 --
@@ -3063,9 +3272,7 @@ instance Core.FromJSON Projection where
 instance Core.ToJSON Projection where
   toJSON Projection {..} =
     Core.object
-      ( Core.catMaybes
-          [("property" Core..=) Core.<$> property]
-      )
+      (Core.catMaybes [("property" Core..=) Core.<$> property])
 
 -- | A filter on a specific property.
 --
@@ -3111,6 +3318,30 @@ instance Core.ToJSON PropertyFilter where
           ]
       )
 
+-- | The set of arbitrarily nested property paths used to restrict an operation to only a subset of properties in an entity.
+--
+-- /See:/ 'newPropertyMask' smart constructor.
+newtype PropertyMask = PropertyMask
+  { -- | The paths to the properties covered by this mask. A path is a list of property names separated by dots (@.@), for example @foo.bar@ means the property @bar@ inside the entity property @foo@ inside the entity associated with this path. If a property name contains a dot @.@ or a backslash @\\@, then that name must be escaped. A path must not be empty, and may not reference a value inside an array value.
+    paths :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PropertyMask' with the minimum fields required to make a request.
+newPropertyMask ::
+  PropertyMask
+newPropertyMask = PropertyMask {paths = Core.Nothing}
+
+instance Core.FromJSON PropertyMask where
+  parseJSON =
+    Core.withObject
+      "PropertyMask"
+      (\o -> PropertyMask Core.<$> (o Core..:? "paths"))
+
+instance Core.ToJSON PropertyMask where
+  toJSON PropertyMask {..} =
+    Core.object (Core.catMaybes [("paths" Core..=) Core.<$> paths])
+
 -- | The desired order for a specific property.
 --
 -- /See:/ 'newPropertyOrder' smart constructor.
@@ -3151,7 +3382,7 @@ instance Core.ToJSON PropertyOrder where
 --
 -- /See:/ 'newPropertyReference' smart constructor.
 newtype PropertyReference = PropertyReference
-  { -- | The name of the property. If name includes \".\"s, it may be interpreted as a property name path.
+  { -- | A reference to a property. Requires: * MUST be a dot-delimited (@.@) string of segments, where each segment conforms to entity property name limitations.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3165,16 +3396,77 @@ instance Core.FromJSON PropertyReference where
   parseJSON =
     Core.withObject
       "PropertyReference"
-      ( \o ->
-          PropertyReference Core.<$> (o Core..:? "name")
-      )
+      (\o -> PropertyReference Core.<$> (o Core..:? "name"))
 
 instance Core.ToJSON PropertyReference where
   toJSON PropertyReference {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
--- | A query for entities.
+-- | A transformation of an entity property.
+--
+-- /See:/ 'newPropertyTransform' smart constructor.
+data PropertyTransform = PropertyTransform
+  { -- | Appends the given elements in order if they are not already present in the current property value. If the property is not an array, or if the property does not yet exist, it is first set to the empty array. Equivalent numbers of different types (e.g. 3L and 3.0) are considered equal when checking if a value is missing. NaN is equal to NaN, and the null value is equal to the null value. If the input contains multiple equivalent values, only the first will be considered. The corresponding transform result will be the null value.
+    appendMissingElements :: (Core.Maybe ArrayValue),
+    -- | Adds the given value to the property\'s current value. This must be an integer or a double value. If the property is not an integer or double, or if the property does not yet exist, the transformation will set the property to the given value. If either of the given value or the current property value are doubles, both values will be interpreted as doubles. Double arithmetic and representation of double values follows IEEE 754 semantics. If there is positive\/negative integer overflow, the property is resolved to the largest magnitude positive\/negative integer.
+    increment :: (Core.Maybe Value),
+    -- | Sets the property to the maximum of its current value and the given value. This must be an integer or a double value. If the property is not an integer or double, or if the property does not yet exist, the transformation will set the property to the given value. If a maximum operation is applied where the property and the input value are of mixed types (that is - one is an integer and one is a double) the property takes on the type of the larger operand. If the operands are equivalent (e.g. 3 and 3.0), the property does not change. 0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and zero input value is always the stored value. The maximum of any numeric value x and NaN is NaN.
+    maximum :: (Core.Maybe Value),
+    -- | Sets the property to the minimum of its current value and the given value. This must be an integer or a double value. If the property is not an integer or double, or if the property does not yet exist, the transformation will set the property to the input value. If a minimum operation is applied where the property and the input value are of mixed types (that is - one is an integer and one is a double) the property takes on the type of the smaller operand. If the operands are equivalent (e.g. 3 and 3.0), the property does not change. 0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and zero input value is always the stored value. The minimum of any numeric value x and NaN is NaN.
+    minimum :: (Core.Maybe Value),
+    -- | Optional. The name of the property. Property paths (a list of property names separated by dots (@.@)) may be used to refer to properties inside entity values. For example @foo.bar@ means the property @bar@ inside the entity property @foo@. If a property name contains a dot @.@ or a backlslash @\\@, then that name must be escaped.
+    property :: (Core.Maybe Core.Text),
+    -- | Removes all of the given elements from the array in the property. If the property is not an array, or if the property does not yet exist, it is set to the empty array. Equivalent numbers of different types (e.g. 3L and 3.0) are considered equal when deciding whether an element should be removed. NaN is equal to NaN, and the null value is equal to the null value. This will remove all equivalent values if there are duplicates. The corresponding transform result will be the null value.
+    removeAllFromArray :: (Core.Maybe ArrayValue),
+    -- | Sets the property to the given server value.
+    setToServerValue :: (Core.Maybe PropertyTransform_SetToServerValue)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PropertyTransform' with the minimum fields required to make a request.
+newPropertyTransform ::
+  PropertyTransform
+newPropertyTransform =
+  PropertyTransform
+    { appendMissingElements = Core.Nothing,
+      increment = Core.Nothing,
+      maximum = Core.Nothing,
+      minimum = Core.Nothing,
+      property = Core.Nothing,
+      removeAllFromArray = Core.Nothing,
+      setToServerValue = Core.Nothing
+    }
+
+instance Core.FromJSON PropertyTransform where
+  parseJSON =
+    Core.withObject
+      "PropertyTransform"
+      ( \o ->
+          PropertyTransform
+            Core.<$> (o Core..:? "appendMissingElements")
+            Core.<*> (o Core..:? "increment")
+            Core.<*> (o Core..:? "maximum")
+            Core.<*> (o Core..:? "minimum")
+            Core.<*> (o Core..:? "property")
+            Core.<*> (o Core..:? "removeAllFromArray")
+            Core.<*> (o Core..:? "setToServerValue")
+      )
+
+instance Core.ToJSON PropertyTransform where
+  toJSON PropertyTransform {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("appendMissingElements" Core..=) Core.<$> appendMissingElements,
+            ("increment" Core..=) Core.<$> increment,
+            ("maximum" Core..=) Core.<$> maximum,
+            ("minimum" Core..=) Core.<$> minimum,
+            ("property" Core..=) Core.<$> property,
+            ("removeAllFromArray" Core..=) Core.<$> removeAllFromArray,
+            ("setToServerValue" Core..=) Core.<$> setToServerValue
+          ]
+      )
+
+-- | A query for entities. The query stages are executed in the following order: 1. kind 2. filter 3. projection 4. order + start/cursor + end/cursor 5. offset 6. limit 7. find_nearest
 --
 -- /See:/ 'newQuery' smart constructor.
 data Query = Query
@@ -3184,6 +3476,8 @@ data Query = Query
     endCursor :: (Core.Maybe Core.Base64),
     -- | The filter to apply.
     filter :: (Core.Maybe Filter),
+    -- | Optional. A potential Nearest Neighbors Search. Applies after all other filters and ordering. Finds the closest vector embeddings to the given query vector.
+    findNearest :: (Core.Maybe FindNearest),
     -- | The kinds to query (if empty, returns entities of all kinds). Currently at most 1 kind may be specified.
     kind :: (Core.Maybe [KindExpression]),
     -- | The maximum number of results to return. Applies after all other constraints. Optional. Unspecified is interpreted as no limit. Must be >= 0 if specified.
@@ -3207,6 +3501,7 @@ newQuery =
     { distinctOn = Core.Nothing,
       endCursor = Core.Nothing,
       filter = Core.Nothing,
+      findNearest = Core.Nothing,
       kind = Core.Nothing,
       limit = Core.Nothing,
       offset = Core.Nothing,
@@ -3224,6 +3519,7 @@ instance Core.FromJSON Query where
             Core.<$> (o Core..:? "distinctOn")
             Core.<*> (o Core..:? "endCursor")
             Core.<*> (o Core..:? "filter")
+            Core.<*> (o Core..:? "findNearest")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "limit")
             Core.<*> (o Core..:? "offset")
@@ -3239,6 +3535,7 @@ instance Core.ToJSON Query where
           [ ("distinctOn" Core..=) Core.<$> distinctOn,
             ("endCursor" Core..=) Core.<$> endCursor,
             ("filter" Core..=) Core.<$> filter,
+            ("findNearest" Core..=) Core.<$> findNearest,
             ("kind" Core..=) Core.<$> kind,
             ("limit" Core..=) Core.<$> limit,
             ("offset" Core..=) Core.<$> offset,
@@ -3299,9 +3596,7 @@ instance Core.FromJSON QueryResultBatch where
             Core.<*> (o Core..:? "readTime")
             Core.<*> (o Core..:? "skippedCursor")
             Core.<*> (o Core..:? "skippedResults")
-            Core.<*> ( o Core..:? "snapshotVersion"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "snapshotVersion" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON QueryResultBatch where
@@ -3309,14 +3604,14 @@ instance Core.ToJSON QueryResultBatch where
     Core.object
       ( Core.catMaybes
           [ ("endCursor" Core..=) Core.<$> endCursor,
-            ("entityResultType" Core..=)
-              Core.<$> entityResultType,
+            ("entityResultType" Core..=) Core.<$> entityResultType,
             ("entityResults" Core..=) Core.<$> entityResults,
             ("moreResults" Core..=) Core.<$> moreResults,
             ("readTime" Core..=) Core.<$> readTime,
             ("skippedCursor" Core..=) Core.<$> skippedCursor,
             ("skippedResults" Core..=) Core.<$> skippedResults,
-            ("snapshotVersion" Core..=) Core.. Core.AsText
+            ("snapshotVersion" Core..=)
+              Core.. Core.AsText
               Core.<$> snapshotVersion
           ]
       )
@@ -3325,7 +3620,7 @@ instance Core.ToJSON QueryResultBatch where
 --
 -- /See:/ 'newReadOnly' smart constructor.
 newtype ReadOnly = ReadOnly
-  { -- | Reads entities at the given time. This may not be older than 60 seconds.
+  { -- | Reads entities at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
     readTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3344,9 +3639,7 @@ instance Core.FromJSON ReadOnly where
 instance Core.ToJSON ReadOnly where
   toJSON ReadOnly {..} =
     Core.object
-      ( Core.catMaybes
-          [("readTime" Core..=) Core.<$> readTime]
-      )
+      (Core.catMaybes [("readTime" Core..=) Core.<$> readTime])
 
 -- | The options shared by read requests.
 --
@@ -3356,7 +3649,7 @@ data ReadOptions = ReadOptions
     newTransaction' :: (Core.Maybe TransactionOptions),
     -- | The non-transactional read consistency to use.
     readConsistency :: (Core.Maybe ReadOptions_ReadConsistency),
-    -- | Reads entities as they were at the given time. This may not be older than 270 seconds. This value is only supported for Cloud Firestore in Datastore mode.
+    -- | Reads entities as they were at the given time. This value is only supported for Cloud Firestore in Datastore mode. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
     readTime :: (Core.Maybe Core.DateTime),
     -- | The identifier of the transaction in which to read. A transaction identifier is returned by a call to Datastore.BeginTransaction.
     transaction :: (Core.Maybe Core.Base64)
@@ -3415,18 +3708,13 @@ instance Core.FromJSON ReadWrite where
   parseJSON =
     Core.withObject
       "ReadWrite"
-      ( \o ->
-          ReadWrite
-            Core.<$> (o Core..:? "previousTransaction")
-      )
+      (\o -> ReadWrite Core.<$> (o Core..:? "previousTransaction"))
 
 instance Core.ToJSON ReadWrite where
   toJSON ReadWrite {..} =
     Core.object
       ( Core.catMaybes
-          [ ("previousTransaction" Core..=)
-              Core.<$> previousTransaction
-          ]
+          [("previousTransaction" Core..=) Core.<$> previousTransaction]
       )
 
 -- | The request for Datastore.ReserveIds.
@@ -3500,7 +3788,10 @@ data RollbackRequest = RollbackRequest
 newRollbackRequest ::
   RollbackRequest
 newRollbackRequest =
-  RollbackRequest {databaseId = Core.Nothing, transaction = Core.Nothing}
+  RollbackRequest
+    { databaseId = Core.Nothing,
+      transaction = Core.Nothing
+    }
 
 instance Core.FromJSON RollbackRequest where
   parseJSON =
@@ -3549,6 +3840,8 @@ data RunAggregationQueryRequest = RunAggregationQueryRequest
     aggregationQuery :: (Core.Maybe AggregationQuery),
     -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
     databaseId :: (Core.Maybe Core.Text),
+    -- | Optional. Explain options for the query. If set, additional query statistics will be returned. If not, only query results will be returned.
+    explainOptions :: (Core.Maybe ExplainOptions),
     -- | The GQL query to run. This query must be an aggregation query.
     gqlQuery :: (Core.Maybe GqlQuery),
     -- | Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
@@ -3565,6 +3858,7 @@ newRunAggregationQueryRequest =
   RunAggregationQueryRequest
     { aggregationQuery = Core.Nothing,
       databaseId = Core.Nothing,
+      explainOptions = Core.Nothing,
       gqlQuery = Core.Nothing,
       partitionId = Core.Nothing,
       readOptions = Core.Nothing
@@ -3578,6 +3872,7 @@ instance Core.FromJSON RunAggregationQueryRequest where
           RunAggregationQueryRequest
             Core.<$> (o Core..:? "aggregationQuery")
             Core.<*> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "explainOptions")
             Core.<*> (o Core..:? "gqlQuery")
             Core.<*> (o Core..:? "partitionId")
             Core.<*> (o Core..:? "readOptions")
@@ -3587,9 +3882,9 @@ instance Core.ToJSON RunAggregationQueryRequest where
   toJSON RunAggregationQueryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregationQuery" Core..=)
-              Core.<$> aggregationQuery,
+          [ ("aggregationQuery" Core..=) Core.<$> aggregationQuery,
             ("databaseId" Core..=) Core.<$> databaseId,
+            ("explainOptions" Core..=) Core.<$> explainOptions,
             ("gqlQuery" Core..=) Core.<$> gqlQuery,
             ("partitionId" Core..=) Core.<$> partitionId,
             ("readOptions" Core..=) Core.<$> readOptions
@@ -3602,6 +3897,8 @@ instance Core.ToJSON RunAggregationQueryRequest where
 data RunAggregationQueryResponse = RunAggregationQueryResponse
   { -- | A batch of aggregation results. Always present.
     batch :: (Core.Maybe AggregationResultBatch),
+    -- | Query explain metrics. This is only present when the RunAggregationQueryRequest.explain_options is provided, and it is sent only once with the last response in the stream.
+    explainMetrics :: (Core.Maybe ExplainMetrics),
     -- | The parsed form of the @GqlQuery@ from the request, if it was set.
     query :: (Core.Maybe AggregationQuery),
     -- | The identifier of the transaction that was started as part of this RunAggregationQuery request. Set only when ReadOptions.new/transaction was set in RunAggregationQueryRequest.read/options.
@@ -3615,6 +3912,7 @@ newRunAggregationQueryResponse ::
 newRunAggregationQueryResponse =
   RunAggregationQueryResponse
     { batch = Core.Nothing,
+      explainMetrics = Core.Nothing,
       query = Core.Nothing,
       transaction = Core.Nothing
     }
@@ -3626,6 +3924,7 @@ instance Core.FromJSON RunAggregationQueryResponse where
       ( \o ->
           RunAggregationQueryResponse
             Core.<$> (o Core..:? "batch")
+            Core.<*> (o Core..:? "explainMetrics")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "transaction")
       )
@@ -3635,6 +3934,7 @@ instance Core.ToJSON RunAggregationQueryResponse where
     Core.object
       ( Core.catMaybes
           [ ("batch" Core..=) Core.<$> batch,
+            ("explainMetrics" Core..=) Core.<$> explainMetrics,
             ("query" Core..=) Core.<$> query,
             ("transaction" Core..=) Core.<$> transaction
           ]
@@ -3646,10 +3946,14 @@ instance Core.ToJSON RunAggregationQueryResponse where
 data RunQueryRequest = RunQueryRequest
   { -- | The ID of the database against which to make the request. \'(default)\' is not allowed; please use empty string \'\' to refer the default database.
     databaseId :: (Core.Maybe Core.Text),
+    -- | Optional. Explain options for the query. If set, additional query statistics will be returned. If not, only query results will be returned.
+    explainOptions :: (Core.Maybe ExplainOptions),
     -- | The GQL query to run. This query must be a non-aggregation query.
     gqlQuery :: (Core.Maybe GqlQuery),
     -- | Entities are partitioned into subsets, identified by a partition ID. Queries are scoped to a single partition. This partition ID is normalized with the standard default context partition ID.
     partitionId :: (Core.Maybe PartitionId),
+    -- | The properties to return. This field must not be set for a projection query. See LookupRequest.property_mask.
+    propertyMask :: (Core.Maybe PropertyMask),
     -- | The query to run.
     query :: (Core.Maybe Query),
     -- | The options for this query.
@@ -3663,8 +3967,10 @@ newRunQueryRequest ::
 newRunQueryRequest =
   RunQueryRequest
     { databaseId = Core.Nothing,
+      explainOptions = Core.Nothing,
       gqlQuery = Core.Nothing,
       partitionId = Core.Nothing,
+      propertyMask = Core.Nothing,
       query = Core.Nothing,
       readOptions = Core.Nothing
     }
@@ -3676,8 +3982,10 @@ instance Core.FromJSON RunQueryRequest where
       ( \o ->
           RunQueryRequest
             Core.<$> (o Core..:? "databaseId")
+            Core.<*> (o Core..:? "explainOptions")
             Core.<*> (o Core..:? "gqlQuery")
             Core.<*> (o Core..:? "partitionId")
+            Core.<*> (o Core..:? "propertyMask")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "readOptions")
       )
@@ -3687,8 +3995,10 @@ instance Core.ToJSON RunQueryRequest where
     Core.object
       ( Core.catMaybes
           [ ("databaseId" Core..=) Core.<$> databaseId,
+            ("explainOptions" Core..=) Core.<$> explainOptions,
             ("gqlQuery" Core..=) Core.<$> gqlQuery,
             ("partitionId" Core..=) Core.<$> partitionId,
+            ("propertyMask" Core..=) Core.<$> propertyMask,
             ("query" Core..=) Core.<$> query,
             ("readOptions" Core..=) Core.<$> readOptions
           ]
@@ -3698,8 +4008,10 @@ instance Core.ToJSON RunQueryRequest where
 --
 -- /See:/ 'newRunQueryResponse' smart constructor.
 data RunQueryResponse = RunQueryResponse
-  { -- | A batch of query results (always present).
+  { -- | A batch of query results. This is always present unless running a query under explain-only mode: RunQueryRequest.explain_options was provided and ExplainOptions.analyze was set to false.
     batch :: (Core.Maybe QueryResultBatch),
+    -- | Query explain metrics. This is only present when the RunQueryRequest.explain_options is provided, and it is sent only once with the last response in the stream.
+    explainMetrics :: (Core.Maybe ExplainMetrics),
     -- | The parsed form of the @GqlQuery@ from the request, if it was set.
     query :: (Core.Maybe Query),
     -- | The identifier of the transaction that was started as part of this RunQuery request. Set only when ReadOptions.new/transaction was set in RunQueryRequest.read/options.
@@ -3713,6 +4025,7 @@ newRunQueryResponse ::
 newRunQueryResponse =
   RunQueryResponse
     { batch = Core.Nothing,
+      explainMetrics = Core.Nothing,
       query = Core.Nothing,
       transaction = Core.Nothing
     }
@@ -3724,6 +4037,7 @@ instance Core.FromJSON RunQueryResponse where
       ( \o ->
           RunQueryResponse
             Core.<$> (o Core..:? "batch")
+            Core.<*> (o Core..:? "explainMetrics")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "transaction")
       )
@@ -3733,6 +4047,7 @@ instance Core.ToJSON RunQueryResponse where
     Core.object
       ( Core.catMaybes
           [ ("batch" Core..=) Core.<$> batch,
+            ("explainMetrics" Core..=) Core.<$> explainMetrics,
             ("query" Core..=) Core.<$> query,
             ("transaction" Core..=) Core.<$> transaction
           ]
@@ -3755,7 +4070,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -3791,19 +4110,42 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | Sum of the values of the requested property. * Only numeric values will be aggregated. All non-numeric values including @NULL@ are skipped. * If the aggregated values contain @NaN@, returns @NaN@. Infinity math follows IEEE-754 standards. * If the aggregated value set is empty, returns 0. * Returns a 64-bit integer if all aggregated numbers are integers and the sum result does not overflow. Otherwise, the result is returned as a double. Note that even if all the aggregated values are integers, the result is returned as a double if it cannot fit within a 64-bit signed integer. When this occurs, the returned value will lose precision. * When underflow occurs, floating-point aggregation is non-deterministic. This means that running the same query repeatedly without any changes to the underlying values could produce slightly different results each time. In those cases, values should be stored as integers over floating-point numbers.
+--
+-- /See:/ 'newSum' smart constructor.
+newtype Sum = Sum
+  { -- | The property to aggregate on.
+    property :: (Core.Maybe PropertyReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Sum' with the minimum fields required to make a request.
+newSum ::
+  Sum
+newSum = Sum {property = Core.Nothing}
+
+instance Core.FromJSON Sum where
+  parseJSON =
+    Core.withObject
+      "Sum"
+      (\o -> Sum Core.<$> (o Core..:? "property"))
+
+instance Core.ToJSON Sum where
+  toJSON Sum {..} =
+    Core.object
+      (Core.catMaybes [("property" Core..=) Core.<$> property])
 
 -- | Options for beginning a new transaction. Transactions can be created explicitly with calls to Datastore.BeginTransaction or implicitly by setting ReadOptions.new_transaction in read requests.
 --
@@ -3820,7 +4162,10 @@ data TransactionOptions = TransactionOptions
 newTransactionOptions ::
   TransactionOptions
 newTransactionOptions =
-  TransactionOptions {readOnly = Core.Nothing, readWrite = Core.Nothing}
+  TransactionOptions
+    { readOnly = Core.Nothing,
+      readWrite = Core.Nothing
+    }
 
 instance Core.FromJSON TransactionOptions where
   parseJSON =
@@ -3907,9 +4252,7 @@ instance Core.FromJSON Value where
             Core.<*> (o Core..:? "entityValue")
             Core.<*> (o Core..:? "excludeFromIndexes")
             Core.<*> (o Core..:? "geoPointValue")
-            Core.<*> ( o Core..:? "integerValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "integerValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "keyValue")
             Core.<*> (o Core..:? "meaning")
             Core.<*> (o Core..:? "nullValue")
@@ -3926,11 +4269,9 @@ instance Core.ToJSON Value where
             ("booleanValue" Core..=) Core.<$> booleanValue,
             ("doubleValue" Core..=) Core.<$> doubleValue,
             ("entityValue" Core..=) Core.<$> entityValue,
-            ("excludeFromIndexes" Core..=)
-              Core.<$> excludeFromIndexes,
+            ("excludeFromIndexes" Core..=) Core.<$> excludeFromIndexes,
             ("geoPointValue" Core..=) Core.<$> geoPointValue,
-            ("integerValue" Core..=) Core.. Core.AsText
-              Core.<$> integerValue,
+            ("integerValue" Core..=) Core.. Core.AsText Core.<$> integerValue,
             ("keyValue" Core..=) Core.<$> keyValue,
             ("meaning" Core..=) Core.<$> meaning,
             ("nullValue" Core..=) Core.<$> nullValue,

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.OSLogin.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.OSLogin.Internal.Product
@@ -53,7 +51,7 @@ module Gogol.OSLogin.Internal.Product
 where
 
 import Gogol.OSLogin.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -67,8 +65,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -160,8 +157,7 @@ instance Core.ToJSON LoginProfile where
 --
 -- /See:/ 'newLoginProfile_SshPublicKeys' smart constructor.
 newtype LoginProfile_SshPublicKeys = LoginProfile_SshPublicKeys
-  { -- |
-    additional :: (Core.HashMap Core.Text SshPublicKey)
+  { additional :: (Core.HashMap Core.Text SshPublicKey)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -178,13 +174,11 @@ instance Core.FromJSON LoginProfile_SshPublicKeys where
     Core.withObject
       "LoginProfile_SshPublicKeys"
       ( \o ->
-          LoginProfile_SshPublicKeys
-            Core.<$> (Core.parseJSONObject o)
+          LoginProfile_SshPublicKeys Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON LoginProfile_SshPublicKeys where
-  toJSON LoginProfile_SshPublicKeys {..} =
-    Core.toJSON additional
+  toJSON LoginProfile_SshPublicKeys {..} = Core.toJSON additional
 
 -- | The POSIX account information associated with a Google account.
 --
@@ -261,8 +255,7 @@ instance Core.ToJSON PosixAccount where
             ("gid" Core..=) Core.. Core.AsText Core.<$> gid,
             ("homeDirectory" Core..=) Core.<$> homeDirectory,
             ("name" Core..=) Core.<$> name,
-            ("operatingSystemType" Core..=)
-              Core.<$> operatingSystemType,
+            ("operatingSystemType" Core..=) Core.<$> operatingSystemType,
             ("primary" Core..=) Core.<$> primary,
             ("shell" Core..=) Core.<$> shell,
             ("systemId" Core..=) Core.<$> systemId,
@@ -303,7 +296,8 @@ instance Core.FromJSON SshPublicKey where
       "SshPublicKey"
       ( \o ->
           SshPublicKey
-            Core.<$> ( o Core..:? "expirationTimeUsec"
+            Core.<$> ( o
+                         Core..:? "expirationTimeUsec"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "fingerprint")
@@ -315,7 +309,8 @@ instance Core.ToJSON SshPublicKey where
   toJSON SshPublicKey {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expirationTimeUsec" Core..=) Core.. Core.AsText
+          [ ("expirationTimeUsec" Core..=)
+              Core.. Core.AsText
               Core.<$> expirationTimeUsec,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("key" Core..=) Core.<$> key,

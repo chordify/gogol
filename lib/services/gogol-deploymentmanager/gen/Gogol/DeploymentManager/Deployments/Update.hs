@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DeploymentManager.Deployments.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DeploymentManager.Deployments.Update
 where
 
 import Gogol.DeploymentManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @deploymentmanager.deployments.update@ method which the
 -- 'DeploymentManagerDeploymentsUpdate' request conforms to.
@@ -55,12 +53,9 @@ type DeploymentManagerDeploymentsUpdateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "createPolicy"
-              DeploymentsUpdateCreatePolicy
-    Core.:> Core.QueryParam
-              "deletePolicy"
-              DeploymentsUpdateDeletePolicy
+    Core.:> Core.QueryParam "createPolicy" DeploymentsUpdateCreatePolicy
+    Core.:> Core.QueryParam "deletePolicy" DeploymentsUpdateDeletePolicy
+    Core.:> Core.QueryParam "header.bypassBillingFilter" Core.Bool
     Core.:> Core.QueryParam "preview" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
@@ -84,6 +79,7 @@ data DeploymentManagerDeploymentsUpdate = DeploymentManagerDeploymentsUpdate
     deletePolicy :: DeploymentsUpdateDeletePolicy,
     -- | The name of the deployment for this request.
     deployment :: Core.Text,
+    headerBypassBillingFilter :: (Core.Maybe Core.Bool),
     -- | Multipart request metadata.
     payload :: Deployment,
     -- | If set to true, updates the deployment and creates and updates the \"shell\" resources but does not actually alter or instantiate these resources. This allows you to preview what your deployment will look like. You can use this intent to preview how an update would affect your deployment. You must provide a @target.config@ with a configuration if this is set to true. After previewing a deployment, you can deploy your resources by making a request with the @update()@ or you can @cancelPreview()@ to remove the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
@@ -114,6 +110,7 @@ newDeploymentManagerDeploymentsUpdate deployment payload project =
       createPolicy = DeploymentsUpdateCreatePolicy_CREATEORACQUIRE,
       deletePolicy = DeploymentsUpdateDeletePolicy_Delete',
       deployment = deployment,
+      headerBypassBillingFilter = Core.Nothing,
       payload = payload,
       preview = Core.False,
       project = project,
@@ -121,13 +118,8 @@ newDeploymentManagerDeploymentsUpdate deployment payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DeploymentManagerDeploymentsUpdate
-  where
-  type
-    Rs DeploymentManagerDeploymentsUpdate =
-      Operation
+instance Core.GoogleRequest DeploymentManagerDeploymentsUpdate where
+  type Rs DeploymentManagerDeploymentsUpdate = Operation
   type
     Scopes DeploymentManagerDeploymentsUpdate =
       '[CloudPlatform'FullControl, Ndev'Cloudman]
@@ -140,6 +132,7 @@ instance
       callback
       (Core.Just createPolicy)
       (Core.Just deletePolicy)
+      headerBypassBillingFilter
       (Core.Just preview)
       uploadType
       uploadProtocol
@@ -150,7 +143,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DeploymentManagerDeploymentsUpdateResource
+              Core.Proxy DeploymentManagerDeploymentsUpdateResource
           )
           Core.mempty

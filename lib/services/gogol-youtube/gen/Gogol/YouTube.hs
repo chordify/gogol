@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -224,6 +222,11 @@ module Gogol.YouTube
     YouTubeLiveChatMessagesList (..),
     newYouTubeLiveChatMessagesList,
 
+    -- ** youtube.liveChatMessages.transition
+    YouTubeLiveChatMessagesTransitionResource,
+    YouTubeLiveChatMessagesTransition (..),
+    newYouTubeLiveChatMessagesTransition,
+
     -- ** youtube.liveChatModerators.delete
     YouTubeLiveChatModeratorsDeleteResource,
     YouTubeLiveChatModeratorsDelete (..),
@@ -268,6 +271,26 @@ module Gogol.YouTube
     YouTubeMembershipsLevelsListResource,
     YouTubeMembershipsLevelsList (..),
     newYouTubeMembershipsLevelsList,
+
+    -- ** youtube.playlistImages.delete
+    YouTubePlaylistImagesDeleteResource,
+    YouTubePlaylistImagesDelete (..),
+    newYouTubePlaylistImagesDelete,
+
+    -- ** youtube.playlistImages.insert
+    YouTubePlaylistImagesInsertResource,
+    YouTubePlaylistImagesInsert (..),
+    newYouTubePlaylistImagesInsert,
+
+    -- ** youtube.playlistImages.list
+    YouTubePlaylistImagesListResource,
+    YouTubePlaylistImagesList (..),
+    newYouTubePlaylistImagesList,
+
+    -- ** youtube.playlistImages.update
+    YouTubePlaylistImagesUpdateResource,
+    YouTubePlaylistImagesUpdate (..),
+    newYouTubePlaylistImagesUpdate,
 
     -- ** youtube.playlistItems.delete
     YouTubePlaylistItemsDeleteResource,
@@ -373,6 +396,11 @@ module Gogol.YouTube
     YouTubeVideoCategoriesListResource,
     YouTubeVideoCategoriesList (..),
     newYouTubeVideoCategoriesList,
+
+    -- ** youtube.videoTrainability.get
+    YouTubeVideoTrainabilityGetResource,
+    YouTubeVideoTrainabilityGet (..),
+    newYouTubeVideoTrainabilityGet,
 
     -- ** youtube.videos.delete
     YouTubeVideosDeleteResource,
@@ -665,6 +693,20 @@ module Gogol.YouTube
     ChannelToStoreLinkDetails (..),
     newChannelToStoreLinkDetails,
 
+    -- ** ChannelToStoreLinkDetailsBillingDetails
+    ChannelToStoreLinkDetailsBillingDetails (..),
+    newChannelToStoreLinkDetailsBillingDetails,
+
+    -- ** ChannelToStoreLinkDetailsBillingDetails_BillingStatus
+    ChannelToStoreLinkDetailsBillingDetails_BillingStatus (..),
+
+    -- ** ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails
+    ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails (..),
+    newChannelToStoreLinkDetailsMerchantAffiliateProgramDetails,
+
+    -- ** ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails_Status
+    ChannelToStoreLinkDetailsMerchantAffiliateProgramDetails_Status (..),
+
     -- ** ChannelTopicDetails
     ChannelTopicDetails (..),
     newChannelTopicDetails,
@@ -931,6 +973,13 @@ module Gogol.YouTube
     -- ** Cuepoint_CueType
     Cuepoint_CueType (..),
 
+    -- ** CuepointSchedule
+    CuepointSchedule (..),
+    newCuepointSchedule,
+
+    -- ** CuepointSchedule_ScheduleStrategy
+    CuepointSchedule_ScheduleStrategy (..),
+
     -- ** Entity
     Entity (..),
     newEntity,
@@ -1023,6 +1072,10 @@ module Gogol.YouTube
     -- ** LiveBroadcastListResponse
     LiveBroadcastListResponse (..),
     newLiveBroadcastListResponse,
+
+    -- ** LiveBroadcastMonetizationDetails
+    LiveBroadcastMonetizationDetails (..),
+    newLiveBroadcastMonetizationDetails,
 
     -- ** LiveBroadcastSnippet
     LiveBroadcastSnippet (..),
@@ -1117,6 +1170,21 @@ module Gogol.YouTube
     -- ** LiveChatNewSponsorDetails
     LiveChatNewSponsorDetails (..),
     newLiveChatNewSponsorDetails,
+
+    -- ** LiveChatPollDetails
+    LiveChatPollDetails (..),
+    newLiveChatPollDetails,
+
+    -- ** LiveChatPollDetails_Status
+    LiveChatPollDetails_Status (..),
+
+    -- ** LiveChatPollDetailsPollMetadata
+    LiveChatPollDetailsPollMetadata (..),
+    newLiveChatPollDetailsPollMetadata,
+
+    -- ** LiveChatPollDetailsPollMetadataPollOption
+    LiveChatPollDetailsPollMetadataPollOption (..),
+    newLiveChatPollDetailsPollMetadataPollOption,
 
     -- ** LiveChatSuperChatDetails
     LiveChatSuperChatDetails (..),
@@ -1241,6 +1309,21 @@ module Gogol.YouTube
     PlaylistContentDetails (..),
     newPlaylistContentDetails,
 
+    -- ** PlaylistImage
+    PlaylistImage (..),
+    newPlaylistImage,
+
+    -- ** PlaylistImageListResponse
+    PlaylistImageListResponse (..),
+    newPlaylistImageListResponse,
+
+    -- ** PlaylistImageSnippet
+    PlaylistImageSnippet (..),
+    newPlaylistImageSnippet,
+
+    -- ** PlaylistImageSnippet_Type
+    PlaylistImageSnippet_Type (..),
+
     -- ** PlaylistItem
     PlaylistItem (..),
     newPlaylistItem,
@@ -1283,6 +1366,9 @@ module Gogol.YouTube
     -- ** PlaylistStatus
     PlaylistStatus (..),
     newPlaylistStatus,
+
+    -- ** PlaylistStatus_PodcastStatus
+    PlaylistStatus_PodcastStatus (..),
 
     -- ** PlaylistStatus_PrivacyStatus
     PlaylistStatus_PrivacyStatus (..),
@@ -1501,6 +1587,10 @@ module Gogol.YouTube
     VideoMonetizationDetails (..),
     newVideoMonetizationDetails,
 
+    -- ** VideoPaidProductPlacementDetails
+    VideoPaidProductPlacementDetails (..),
+    newVideoPaidProductPlacementDetails,
+
     -- ** VideoPlayer
     VideoPlayer (..),
     newVideoPlayer,
@@ -1588,6 +1678,10 @@ module Gogol.YouTube
     VideoTopicDetails (..),
     newVideoTopicDetails,
 
+    -- ** VideoTrainability
+    VideoTrainability (..),
+    newVideoTrainability,
+
     -- ** WatchSettings
     WatchSettings (..),
     newWatchSettings,
@@ -1615,6 +1709,9 @@ module Gogol.YouTube
 
     -- ** LiveBroadcastsTransitionBroadcastStatus
     LiveBroadcastsTransitionBroadcastStatus (..),
+
+    -- ** LiveChatMessagesTransitionStatus
+    LiveChatMessagesTransitionStatus (..),
 
     -- ** MembersListMode
     MembersListMode (..),
@@ -1648,6 +1745,9 @@ module Gogol.YouTube
 
     -- ** SearchListVideoLicense
     SearchListVideoLicense (..),
+
+    -- ** SearchListVideoPaidProductPlacement
+    SearchListVideoPaidProductPlacement (..),
 
     -- ** SearchListVideoSyndicated
     SearchListVideoSyndicated (..),
@@ -1711,6 +1811,7 @@ import Gogol.YouTube.LiveChatBans.Insert
 import Gogol.YouTube.LiveChatMessages.Delete
 import Gogol.YouTube.LiveChatMessages.Insert
 import Gogol.YouTube.LiveChatMessages.List
+import Gogol.YouTube.LiveChatMessages.Transition
 import Gogol.YouTube.LiveChatModerators.Delete
 import Gogol.YouTube.LiveChatModerators.Insert
 import Gogol.YouTube.LiveChatModerators.List
@@ -1720,6 +1821,10 @@ import Gogol.YouTube.LiveStreams.List
 import Gogol.YouTube.LiveStreams.Update
 import Gogol.YouTube.Members.List
 import Gogol.YouTube.MembershipsLevels.List
+import Gogol.YouTube.PlaylistImages.Delete
+import Gogol.YouTube.PlaylistImages.Insert
+import Gogol.YouTube.PlaylistImages.List
+import Gogol.YouTube.PlaylistImages.Update
 import Gogol.YouTube.PlaylistItems.Delete
 import Gogol.YouTube.PlaylistItems.Insert
 import Gogol.YouTube.PlaylistItems.List
@@ -1743,6 +1848,7 @@ import Gogol.YouTube.Types
 import Gogol.YouTube.V3.UpdateCommentThreads
 import Gogol.YouTube.VideoAbuseReportReasons.List
 import Gogol.YouTube.VideoCategories.List
+import Gogol.YouTube.VideoTrainability.Get
 import Gogol.YouTube.Videos.Delete
 import Gogol.YouTube.Videos.GetRating
 import Gogol.YouTube.Videos.Insert

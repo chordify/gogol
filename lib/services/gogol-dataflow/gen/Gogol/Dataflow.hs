@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -36,8 +34,6 @@ module Gogol.Dataflow
     -- * OAuth Scopes
     CloudPlatform'FullControl,
     Compute'FullControl,
-    Compute'Readonly,
-    Userinfo'Email,
 
     -- * Resources
 
@@ -277,6 +273,10 @@ module Gogol.Dataflow
     -- ** AutoscalingSettings_Algorithm
     AutoscalingSettings_Algorithm (..),
 
+    -- ** Base2Exponent
+    Base2Exponent (..),
+    newBase2Exponent,
+
     -- ** BigQueryIODetails
     BigQueryIODetails (..),
     newBigQueryIODetails,
@@ -284,6 +284,22 @@ module Gogol.Dataflow
     -- ** BigTableIODetails
     BigTableIODetails (..),
     newBigTableIODetails,
+
+    -- ** BoundedTrie
+    BoundedTrie (..),
+    newBoundedTrie,
+
+    -- ** BoundedTrieNode
+    BoundedTrieNode (..),
+    newBoundedTrieNode,
+
+    -- ** BoundedTrieNode_Children
+    BoundedTrieNode_Children (..),
+    newBoundedTrieNode_Children,
+
+    -- ** BucketOptions
+    BucketOptions (..),
+    newBucketOptions,
 
     -- ** CPUTime
     CPUTime (..),
@@ -353,6 +369,25 @@ module Gogol.Dataflow
     DataDiskAssignment (..),
     newDataDiskAssignment,
 
+    -- ** DataSamplingConfig
+    DataSamplingConfig (..),
+    newDataSamplingConfig,
+
+    -- ** DataSamplingConfig_BehaviorsItem
+    DataSamplingConfig_BehaviorsItem (..),
+
+    -- ** DataSamplingReport
+    DataSamplingReport (..),
+    newDataSamplingReport,
+
+    -- ** DataflowGaugeValue
+    DataflowGaugeValue (..),
+    newDataflowGaugeValue,
+
+    -- ** DataflowHistogramValue
+    DataflowHistogramValue (..),
+    newDataflowHistogramValue,
+
     -- ** DatastoreIODetails
     DatastoreIODetails (..),
     newDatastoreIODetails,
@@ -406,6 +441,9 @@ module Gogol.Dataflow
     -- ** Environment_ShuffleMode
     Environment_ShuffleMode (..),
 
+    -- ** Environment_StreamingMode
+    Environment_StreamingMode (..),
+
     -- ** Environment_UserAgent
     Environment_UserAgent (..),
     newEnvironment_UserAgent,
@@ -457,6 +495,9 @@ module Gogol.Dataflow
     -- ** FlexTemplateRuntimeEnvironment_IpConfiguration
     FlexTemplateRuntimeEnvironment_IpConfiguration (..),
 
+    -- ** FlexTemplateRuntimeEnvironment_StreamingMode
+    FlexTemplateRuntimeEnvironment_StreamingMode (..),
+
     -- ** FloatingPointList
     FloatingPointList (..),
     newFloatingPointList,
@@ -464,6 +505,14 @@ module Gogol.Dataflow
     -- ** FloatingPointMean
     FloatingPointMean (..),
     newFloatingPointMean,
+
+    -- ** GPUUsage
+    GPUUsage (..),
+    newGPUUsage,
+
+    -- ** GPUUtilization
+    GPUUtilization (..),
+    newGPUUtilization,
 
     -- ** GetDebugConfigRequest
     GetDebugConfigRequest (..),
@@ -644,6 +693,10 @@ module Gogol.Dataflow
     LeaseWorkItemResponse_UnifiedWorkerResponse (..),
     newLeaseWorkItemResponse_UnifiedWorkerResponse,
 
+    -- ** Linear
+    Linear (..),
+    newLinear,
+
     -- ** ListJobMessagesResponse
     ListJobMessagesResponse (..),
     newListJobMessagesResponse,
@@ -680,6 +733,14 @@ module Gogol.Dataflow
     MetricUpdate (..),
     newMetricUpdate,
 
+    -- ** MetricValue
+    MetricValue (..),
+    newMetricValue,
+
+    -- ** MetricValue_MetricLabels
+    MetricValue_MetricLabels (..),
+    newMetricValue_MetricLabels,
+
     -- ** MountedDataDisk
     MountedDataDisk (..),
     newMountedDataDisk,
@@ -694,6 +755,10 @@ module Gogol.Dataflow
 
     -- ** NameAndKind_Kind
     NameAndKind_Kind (..),
+
+    -- ** OutlierStats
+    OutlierStats (..),
+    newOutlierStats,
 
     -- ** Package
     Package (..),
@@ -726,6 +791,10 @@ module Gogol.Dataflow
     -- ** ParameterMetadata_ParamType
     ParameterMetadata_ParamType (..),
 
+    -- ** ParameterMetadataEnumOption
+    ParameterMetadataEnumOption (..),
+    newParameterMetadataEnumOption,
+
     -- ** PartialGroupByKeyInstruction
     PartialGroupByKeyInstruction (..),
     newPartialGroupByKeyInstruction,
@@ -737,6 +806,14 @@ module Gogol.Dataflow
     -- ** PartialGroupByKeyInstruction_ValueCombiningFn
     PartialGroupByKeyInstruction_ValueCombiningFn (..),
     newPartialGroupByKeyInstruction_ValueCombiningFn,
+
+    -- ** PerStepNamespaceMetrics
+    PerStepNamespaceMetrics (..),
+    newPerStepNamespaceMetrics,
+
+    -- ** PerWorkerMetrics
+    PerWorkerMetrics (..),
+    newPerWorkerMetrics,
 
     -- ** PipelineDescription
     PipelineDescription (..),
@@ -813,9 +890,16 @@ module Gogol.Dataflow
     -- ** RuntimeEnvironment_IpConfiguration
     RuntimeEnvironment_IpConfiguration (..),
 
+    -- ** RuntimeEnvironment_StreamingMode
+    RuntimeEnvironment_StreamingMode (..),
+
     -- ** RuntimeMetadata
     RuntimeMetadata (..),
     newRuntimeMetadata,
+
+    -- ** RuntimeUpdatableParams
+    RuntimeUpdatableParams (..),
+    newRuntimeUpdatableParams,
 
     -- ** SDKInfo
     SDKInfo (..),
@@ -823,6 +907,16 @@ module Gogol.Dataflow
 
     -- ** SDKInfo_Language
     SDKInfo_Language (..),
+
+    -- ** SdkBug
+    SdkBug (..),
+    newSdkBug,
+
+    -- ** SdkBug_Severity
+    SdkBug_Severity (..),
+
+    -- ** SdkBug_Type
+    SdkBug_Type (..),
 
     -- ** SdkHarnessContainerImage
     SdkHarnessContainerImage (..),
@@ -865,6 +959,10 @@ module Gogol.Dataflow
     -- ** SeqMapTaskOutputInfo
     SeqMapTaskOutputInfo (..),
     newSeqMapTaskOutputInfo,
+
+    -- ** ServiceResources
+    ServiceResources (..),
+    newServiceResources,
 
     -- ** ShellTask
     ShellTask (..),
@@ -1064,6 +1162,18 @@ module Gogol.Dataflow
     -- ** StreamingConfigTask_UserStepToStateFamilyNameMap
     StreamingConfigTask_UserStepToStateFamilyNameMap (..),
     newStreamingConfigTask_UserStepToStateFamilyNameMap,
+
+    -- ** StreamingOperationalLimits
+    StreamingOperationalLimits (..),
+    newStreamingOperationalLimits,
+
+    -- ** StreamingScalingReport
+    StreamingScalingReport (..),
+    newStreamingScalingReport,
+
+    -- ** StreamingScalingReportResponse
+    StreamingScalingReportResponse (..),
+    newStreamingScalingReportResponse,
 
     -- ** StreamingSetupTask
     StreamingSetupTask (..),

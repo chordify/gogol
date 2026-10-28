@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DFAReporting.Internal.Sum
@@ -202,6 +200,13 @@ module Gogol.DFAReporting.Internal.Sum
         BillingRate_UnitOfMeasure_Cpc,
         BillingRate_UnitOfMeasure_EA,
         BillingRate_UnitOfMeasure_P2C,
+        ..
+      ),
+
+    -- * Conversion_AdUserDataConsent
+    Conversion_AdUserDataConsent
+      ( Conversion_AdUserDataConsent_Granted,
+        Conversion_AdUserDataConsent_Denied,
         ..
       ),
 
@@ -829,13 +834,13 @@ module Gogol.DFAReporting.Internal.Sum
 
     -- * DayPartTargeting_DaysOfWeekItem
     DayPartTargeting_DaysOfWeekItem
-      ( DayPartTargeting_DaysOfWeekItem_Monday,
+      ( DayPartTargeting_DaysOfWeekItem_Sunday,
+        DayPartTargeting_DaysOfWeekItem_Monday,
         DayPartTargeting_DaysOfWeekItem_Tuesday,
         DayPartTargeting_DaysOfWeekItem_Wednesday,
         DayPartTargeting_DaysOfWeekItem_Thursday,
         DayPartTargeting_DaysOfWeekItem_Friday,
         DayPartTargeting_DaysOfWeekItem_Saturday,
-        DayPartTargeting_DaysOfWeekItem_Sunday,
         ..
       ),
 
@@ -1119,8 +1124,8 @@ module Gogol.DFAReporting.Internal.Sum
 
     -- * FloodlightConfiguration_FirstDayOfWeek
     FloodlightConfiguration_FirstDayOfWeek
-      ( FloodlightConfiguration_FirstDayOfWeek_Monday,
-        FloodlightConfiguration_FirstDayOfWeek_Sunday,
+      ( FloodlightConfiguration_FirstDayOfWeek_Sunday,
+        FloodlightConfiguration_FirstDayOfWeek_Monday,
         ..
       ),
 
@@ -1184,6 +1189,7 @@ module Gogol.DFAReporting.Internal.Sum
         MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
         MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
         MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+        MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
         ..
       ),
 
@@ -1205,6 +1211,7 @@ module Gogol.DFAReporting.Internal.Sum
         MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
         MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
         MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+        MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
         ..
       ),
 
@@ -1226,6 +1233,7 @@ module Gogol.DFAReporting.Internal.Sum
         MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
         MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
         MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+        MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
         ..
       ),
 
@@ -1285,31 +1293,6 @@ module Gogol.DFAReporting.Internal.Sum
       ( OrderContact_ContactType_PLANNINGORDERCONTACTBUYERCONTACT,
         OrderContact_ContactType_PLANNINGORDERCONTACTBUYERBILLINGCONTACT,
         OrderContact_ContactType_PLANNINGORDERCONTACTSELLERCONTACT,
-        ..
-      ),
-
-    -- * OrderDocument_Type
-    OrderDocument_Type
-      ( OrderDocument_Type_PLANNINGORDERTYPEINSERTIONORDER,
-        OrderDocument_Type_PLANNINGORDERTYPECHANGEORDER,
-        ..
-      ),
-
-    -- * PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition
-      ( PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED,
-        PathFilter_PathMatchPosition_Any,
-        PathFilter_PathMatchPosition_First,
-        PathFilter_PathMatchPosition_Last,
-        ..
-      ),
-
-    -- * PathReportDimensionValue_MatchType
-    PathReportDimensionValue_MatchType
-      ( PathReportDimensionValue_MatchType_Exact,
-        PathReportDimensionValue_MatchType_BEGINSWITH,
-        PathReportDimensionValue_MatchType_Contains,
-        PathReportDimensionValue_MatchType_WILDCARDEXPRESSION,
         ..
       ),
 
@@ -1548,8 +1531,7 @@ module Gogol.DFAReporting.Internal.Sum
         Report_Type_PATHTOCONVERSION,
         Report_Type_CROSSDIMENSIONREACH,
         Report_Type_Floodlight,
-        Report_Type_Path,
-        Report_Type_PATHATTRIBUTION,
+        Report_Type_CROSSMEDIAREACH,
         ..
       ),
 
@@ -1665,12 +1647,33 @@ module Gogol.DFAReporting.Internal.Sum
         ..
       ),
 
+    -- * TvCampaignSummary_Type
+    TvCampaignSummary_Type
+      ( TvCampaignSummary_Type_CAMPAIGNCOMPONENTTYPEUNSPECIFIED,
+        TvCampaignSummary_Type_Company,
+        TvCampaignSummary_Type_Brand,
+        TvCampaignSummary_Type_Product,
+        TvCampaignSummary_Type_Campaign,
+        ..
+      ),
+
+    -- * TvCampaignTimepoint_DateWindow
+    TvCampaignTimepoint_DateWindow
+      ( TvCampaignTimepoint_DateWindow_WEEKSUNSPECIFIED,
+        TvCampaignTimepoint_DateWindow_WEEKSONE,
+        TvCampaignTimepoint_DateWindow_WEEKSFOUR,
+        TvCampaignTimepoint_DateWindow_WEEKSEIGHT,
+        TvCampaignTimepoint_DateWindow_WEEKSTWELVE,
+        ..
+      ),
+
     -- * UniversalAdId_Registry
     UniversalAdId_Registry
       ( UniversalAdId_Registry_Other,
         UniversalAdId_Registry_ADIDOFFICIAL,
         UniversalAdId_Registry_Clearcast,
         UniversalAdId_Registry_Dcm,
+        UniversalAdId_Registry_Arpp,
         ..
       ),
 
@@ -1794,14 +1797,6 @@ module Gogol.DFAReporting.Internal.Sum
         UserRolePermission_Availability_ACCOUNTALWAYS,
         UserRolePermission_Availability_SUBACCOUNTANDACCOUNTALWAYS,
         UserRolePermission_Availability_USERPROFILEONLY,
-        ..
-      ),
-
-    -- * UvarFilter_Match
-    UvarFilter_Match
-      ( UvarFilter_Match_Unspecified,
-        UvarFilter_Match_Exact,
-        UvarFilter_Match_Contains,
         ..
       ),
 
@@ -2043,6 +2038,8 @@ module Gogol.DFAReporting.Internal.Sum
         ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY,
         ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK,
         ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK,
+        ChangeLogsListObjectType_OBJECTCONVERSIONDOMAIN,
+        ChangeLogsListObjectType_OBJECTACCOUNTCONVERSIONDOMAIN,
         ..
       ),
 
@@ -2298,20 +2295,6 @@ module Gogol.DFAReporting.Internal.Sum
         MobileAppsListDirectories_SAMSUNGTVAPPSTORE,
         MobileAppsListDirectories_ANDROIDTVAPPSTORE,
         MobileAppsListDirectories_GENERICCTVAPPSTORE,
-        ..
-      ),
-
-    -- * OrderDocumentsListSortField
-    OrderDocumentsListSortField
-      ( OrderDocumentsListSortField_ID,
-        OrderDocumentsListSortField_Name,
-        ..
-      ),
-
-    -- * OrderDocumentsListSortOrder
-    OrderDocumentsListSortOrder
-      ( OrderDocumentsListSortOrder_Ascending,
-        OrderDocumentsListSortOrder_Descending,
         ..
       ),
 
@@ -2599,7 +2582,7 @@ module Gogol.DFAReporting.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -2641,11 +2624,11 @@ newtype Account_AccountProfile = Account_AccountProfile {fromAccount_AccountProf
       Core.FromJSONKey
     )
 
--- |
+-- | Basic profile has fewer features and lower CPM.
 pattern Account_AccountProfile_ACCOUNTPROFILEBASIC :: Account_AccountProfile
 pattern Account_AccountProfile_ACCOUNTPROFILEBASIC = Account_AccountProfile "ACCOUNT_PROFILE_BASIC"
 
--- |
+-- | Standard profile as a higher CPM and all the features.
 pattern Account_AccountProfile_ACCOUNTPROFILESTANDARD :: Account_AccountProfile
 pattern Account_AccountProfile_ACCOUNTPROFILESTANDARD = Account_AccountProfile "ACCOUNT_PROFILE_STANDARD"
 
@@ -2668,35 +2651,27 @@ newtype Account_ActiveAdsLimitTier = Account_ActiveAdsLimitTier {fromAccount_Act
       Core.FromJSONKey
     )
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER40K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER40K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_40K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER75K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER75K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_75K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER100K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER100K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_100K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER200K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER200K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_200K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER300K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER300K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_300K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER500K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER500K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_500K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER750K :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER750K = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_750K"
 
--- |
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER1M :: Account_ActiveAdsLimitTier
 pattern Account_ActiveAdsLimitTier_ACTIVEADSTIER1M = Account_ActiveAdsLimitTier "ACTIVE_ADS_TIER_1M"
 
@@ -2725,35 +2700,27 @@ newtype AccountActiveAdSummary_ActiveAdsLimitTier = AccountActiveAdSummary_Activ
       Core.FromJSONKey
     )
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER40K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER40K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_40K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER75K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER75K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_75K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER100K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER100K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_100K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER200K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER200K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_200K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER300K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER300K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_300K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER500K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER500K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_500K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER750K :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER750K = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_750K"
 
--- |
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER1M :: AccountActiveAdSummary_ActiveAdsLimitTier
 pattern AccountActiveAdSummary_ActiveAdsLimitTier_ACTIVEADSTIER1M = AccountActiveAdSummary_ActiveAdsLimitTier "ACTIVE_ADS_TIER_1M"
 
@@ -2781,11 +2748,11 @@ newtype AccountPermission_AccountProfilesItem = AccountPermission_AccountProfile
       Core.FromJSONKey
     )
 
--- |
+-- | Basic profile has fewer features and lower CPM.
 pattern AccountPermission_AccountProfilesItem_ACCOUNTPROFILEBASIC :: AccountPermission_AccountProfilesItem
 pattern AccountPermission_AccountProfilesItem_ACCOUNTPROFILEBASIC = AccountPermission_AccountProfilesItem "ACCOUNT_PROFILE_BASIC"
 
--- |
+-- | Standard profile as a higher CPM and all the features.
 pattern AccountPermission_AccountProfilesItem_ACCOUNTPROFILESTANDARD :: AccountPermission_AccountProfilesItem
 pattern AccountPermission_AccountProfilesItem_ACCOUNTPROFILESTANDARD = AccountPermission_AccountProfilesItem "ACCOUNT_PROFILE_STANDARD"
 
@@ -2808,11 +2775,9 @@ newtype AccountPermission_Level = AccountPermission_Level {fromAccountPermission
       Core.FromJSONKey
     )
 
--- |
 pattern AccountPermission_Level_User :: AccountPermission_Level
 pattern AccountPermission_Level_User = AccountPermission_Level "USER"
 
--- |
 pattern AccountPermission_Level_Administrator :: AccountPermission_Level
 pattern AccountPermission_Level_Administrator = AccountPermission_Level "ADMINISTRATOR"
 
@@ -2835,15 +2800,15 @@ newtype AccountUserProfile_TraffickerType = AccountUserProfile_TraffickerType {f
       Core.FromJSONKey
     )
 
--- |
+-- | Internal profile, but is not a trafficker.
 pattern AccountUserProfile_TraffickerType_INTERNALNONTRAFFICKER :: AccountUserProfile_TraffickerType
 pattern AccountUserProfile_TraffickerType_INTERNALNONTRAFFICKER = AccountUserProfile_TraffickerType "INTERNAL_NON_TRAFFICKER"
 
--- |
+-- | Internal profile who is a trafficker.
 pattern AccountUserProfile_TraffickerType_INTERNALTRAFFICKER :: AccountUserProfile_TraffickerType
 pattern AccountUserProfile_TraffickerType_INTERNALTRAFFICKER = AccountUserProfile_TraffickerType "INTERNAL_TRAFFICKER"
 
--- |
+-- | External profile who is a trafficker.
 pattern AccountUserProfile_TraffickerType_EXTERNALTRAFFICKER :: AccountUserProfile_TraffickerType
 pattern AccountUserProfile_TraffickerType_EXTERNALTRAFFICKER = AccountUserProfile_TraffickerType "EXTERNAL_TRAFFICKER"
 
@@ -2867,19 +2832,19 @@ newtype AccountUserProfile_UserAccessType = AccountUserProfile_UserAccessType {f
       Core.FromJSONKey
     )
 
--- |
+-- | Normal user managed by the customer.
 pattern AccountUserProfile_UserAccessType_NORMALUSER :: AccountUserProfile_UserAccessType
 pattern AccountUserProfile_UserAccessType_NORMALUSER = AccountUserProfile_UserAccessType "NORMAL_USER"
 
--- |
+-- | Super user managed by internal support teams.
 pattern AccountUserProfile_UserAccessType_SUPERUSER :: AccountUserProfile_UserAccessType
 pattern AccountUserProfile_UserAccessType_SUPERUSER = AccountUserProfile_UserAccessType "SUPER_USER"
 
--- |
+-- | Internal administrator having super user access to only a specific set of networks.
 pattern AccountUserProfile_UserAccessType_INTERNALADMINISTRATOR :: AccountUserProfile_UserAccessType
 pattern AccountUserProfile_UserAccessType_INTERNALADMINISTRATOR = AccountUserProfile_UserAccessType "INTERNAL_ADMINISTRATOR"
 
--- |
+-- | A super-user without permission to mutate any data.
 pattern AccountUserProfile_UserAccessType_READONLYSUPERUSER :: AccountUserProfile_UserAccessType
 pattern AccountUserProfile_UserAccessType_READONLYSUPERUSER = AccountUserProfile_UserAccessType "READ_ONLY_SUPER_USER"
 
@@ -2904,27 +2869,23 @@ newtype Ad_Compatibility = Ad_Compatibility {fromAd_Compatibility :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Ad_Compatibility_Display :: Ad_Compatibility
 pattern Ad_Compatibility_Display = Ad_Compatibility "DISPLAY"
 
--- |
 pattern Ad_Compatibility_DISPLAYINTERSTITIAL :: Ad_Compatibility
 pattern Ad_Compatibility_DISPLAYINTERSTITIAL = Ad_Compatibility "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Ad_Compatibility_App :: Ad_Compatibility
 pattern Ad_Compatibility_App = Ad_Compatibility "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Ad_Compatibility_APPINTERSTITIAL :: Ad_Compatibility
 pattern Ad_Compatibility_APPINTERSTITIAL = Ad_Compatibility "APP_INTERSTITIAL"
 
--- |
 pattern Ad_Compatibility_INSTREAMVIDEO :: Ad_Compatibility
 pattern Ad_Compatibility_INSTREAMVIDEO = Ad_Compatibility "IN_STREAM_VIDEO"
 
--- |
 pattern Ad_Compatibility_INSTREAMAUDIO :: Ad_Compatibility
 pattern Ad_Compatibility_INSTREAMAUDIO = Ad_Compatibility "IN_STREAM_AUDIO"
 
@@ -2951,23 +2912,18 @@ newtype Ad_Type = Ad_Type {fromAd_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Ad_Type_ADSERVINGSTANDARDAD :: Ad_Type
 pattern Ad_Type_ADSERVINGSTANDARDAD = Ad_Type "AD_SERVING_STANDARD_AD"
 
--- |
 pattern Ad_Type_ADSERVINGDEFAULTAD :: Ad_Type
 pattern Ad_Type_ADSERVINGDEFAULTAD = Ad_Type "AD_SERVING_DEFAULT_AD"
 
--- |
 pattern Ad_Type_ADSERVINGCLICKTRACKER :: Ad_Type
 pattern Ad_Type_ADSERVINGCLICKTRACKER = Ad_Type "AD_SERVING_CLICK_TRACKER"
 
--- |
 pattern Ad_Type_ADSERVINGTRACKING :: Ad_Type
 pattern Ad_Type_ADSERVINGTRACKING = Ad_Type "AD_SERVING_TRACKING"
 
--- |
 pattern Ad_Type_ADSERVINGBRANDSAFEAD :: Ad_Type
 pattern Ad_Type_ADSERVINGBRANDSAFEAD = Ad_Type "AD_SERVING_BRAND_SAFE_AD"
 
@@ -2993,27 +2949,23 @@ newtype AdSlot_Compatibility = AdSlot_Compatibility {fromAdSlot_Compatibility ::
       Core.FromJSONKey
     )
 
--- |
 pattern AdSlot_Compatibility_Display :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_Display = AdSlot_Compatibility "DISPLAY"
 
--- |
 pattern AdSlot_Compatibility_DISPLAYINTERSTITIAL :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_DISPLAYINTERSTITIAL = AdSlot_Compatibility "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern AdSlot_Compatibility_App :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_App = AdSlot_Compatibility "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern AdSlot_Compatibility_APPINTERSTITIAL :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_APPINTERSTITIAL = AdSlot_Compatibility "APP_INTERSTITIAL"
 
--- |
 pattern AdSlot_Compatibility_INSTREAMVIDEO :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_INSTREAMVIDEO = AdSlot_Compatibility "IN_STREAM_VIDEO"
 
--- |
 pattern AdSlot_Compatibility_INSTREAMAUDIO :: AdSlot_Compatibility
 pattern AdSlot_Compatibility_INSTREAMAUDIO = AdSlot_Compatibility "IN_STREAM_AUDIO"
 
@@ -3040,11 +2992,9 @@ newtype AdSlot_PaymentSourceType = AdSlot_PaymentSourceType {fromAdSlot_PaymentS
       Core.FromJSONKey
     )
 
--- |
 pattern AdSlot_PaymentSourceType_PLANNINGPAYMENTSOURCETYPEAGENCYPAID :: AdSlot_PaymentSourceType
 pattern AdSlot_PaymentSourceType_PLANNINGPAYMENTSOURCETYPEAGENCYPAID = AdSlot_PaymentSourceType "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID"
 
--- |
 pattern AdSlot_PaymentSourceType_PLANNINGPAYMENTSOURCETYPEPUBLISHERPAID :: AdSlot_PaymentSourceType
 pattern AdSlot_PaymentSourceType_PLANNINGPAYMENTSOURCETYPEPUBLISHERPAID = AdSlot_PaymentSourceType "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
 
@@ -3067,11 +3017,11 @@ newtype Advertiser_Status = Advertiser_Status {fromAdvertiser_Status :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
+-- | Approved (ads can deliver)
 pattern Advertiser_Status_Approved :: Advertiser_Status
 pattern Advertiser_Status_Approved = Advertiser_Status "APPROVED"
 
--- |
+-- | On-hold (all ads are stopped)
 pattern Advertiser_Status_ONHOLD :: Advertiser_Status
 pattern Advertiser_Status_ONHOLD = Advertiser_Status "ON_HOLD"
 
@@ -3094,15 +3044,12 @@ newtype BillingProfile_InvoiceLevel = BillingProfile_InvoiceLevel {fromBillingPr
       Core.FromJSONKey
     )
 
--- |
 pattern BillingProfile_InvoiceLevel_ACCOUNTLEVEL :: BillingProfile_InvoiceLevel
 pattern BillingProfile_InvoiceLevel_ACCOUNTLEVEL = BillingProfile_InvoiceLevel "ACCOUNT_LEVEL"
 
--- |
 pattern BillingProfile_InvoiceLevel_ADVERTISERLEVEL :: BillingProfile_InvoiceLevel
 pattern BillingProfile_InvoiceLevel_ADVERTISERLEVEL = BillingProfile_InvoiceLevel "ADVERTISER_LEVEL"
 
--- |
 pattern BillingProfile_InvoiceLevel_CAMPAIGNLEVEL :: BillingProfile_InvoiceLevel
 pattern BillingProfile_InvoiceLevel_CAMPAIGNLEVEL = BillingProfile_InvoiceLevel "CAMPAIGN_LEVEL"
 
@@ -3126,15 +3073,12 @@ newtype BillingProfile_Status = BillingProfile_Status {fromBillingProfile_Status
       Core.FromJSONKey
     )
 
--- |
 pattern BillingProfile_Status_UNDERREVIEW :: BillingProfile_Status
 pattern BillingProfile_Status_UNDERREVIEW = BillingProfile_Status "UNDER_REVIEW"
 
--- |
 pattern BillingProfile_Status_Active :: BillingProfile_Status
 pattern BillingProfile_Status_Active = BillingProfile_Status "ACTIVE"
 
--- |
 pattern BillingProfile_Status_Archived :: BillingProfile_Status
 pattern BillingProfile_Status_Archived = BillingProfile_Status "ARCHIVED"
 
@@ -3158,131 +3102,99 @@ newtype BillingRate_Type = BillingRate_Type {fromBillingRate_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern BillingRate_Type_ADSERVING :: BillingRate_Type
 pattern BillingRate_Type_ADSERVING = BillingRate_Type "AD_SERVING"
 
--- |
 pattern BillingRate_Type_Clicks :: BillingRate_Type
 pattern BillingRate_Type_Clicks = BillingRate_Type "CLICKS"
 
--- |
 pattern BillingRate_Type_MINIMUMSERVICE :: BillingRate_Type
 pattern BillingRate_Type_MINIMUMSERVICE = BillingRate_Type "MINIMUM_SERVICE"
 
--- |
 pattern BillingRate_Type_PATHTOCONVERSION :: BillingRate_Type
 pattern BillingRate_Type_PATHTOCONVERSION = BillingRate_Type "PATH_TO_CONVERSION"
 
--- |
 pattern BillingRate_Type_RICHMEDIAINPAGE :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIAINPAGE = BillingRate_Type "RICH_MEDIA_INPAGE"
 
--- |
 pattern BillingRate_Type_RICHMEDIAEXPANDING :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIAEXPANDING = BillingRate_Type "RICH_MEDIA_EXPANDING"
 
--- |
 pattern BillingRate_Type_RICHMEDIAFLOATING :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIAFLOATING = BillingRate_Type "RICH_MEDIA_FLOATING"
 
--- |
 pattern BillingRate_Type_RICHMEDIAVIDEO :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIAVIDEO = BillingRate_Type "RICH_MEDIA_VIDEO"
 
--- |
 pattern BillingRate_Type_RICHMEDIATEASER :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIATEASER = BillingRate_Type "RICH_MEDIA_TEASER"
 
--- |
 pattern BillingRate_Type_RICHMEDIAVPAID :: BillingRate_Type
 pattern BillingRate_Type_RICHMEDIAVPAID = BillingRate_Type "RICH_MEDIA_VPAID"
 
--- |
 pattern BillingRate_Type_INSTREAMVIDEO :: BillingRate_Type
 pattern BillingRate_Type_INSTREAMVIDEO = BillingRate_Type "INSTREAM_VIDEO"
 
--- |
 pattern BillingRate_Type_Pixel :: BillingRate_Type
 pattern BillingRate_Type_Pixel = BillingRate_Type "PIXEL"
 
--- |
 pattern BillingRate_Type_Tracking :: BillingRate_Type
 pattern BillingRate_Type_Tracking = BillingRate_Type "TRACKING"
 
--- |
 pattern BillingRate_Type_TRAFFICKINGFEATURE :: BillingRate_Type
 pattern BillingRate_Type_TRAFFICKINGFEATURE = BillingRate_Type "TRAFFICKING_FEATURE"
 
--- |
 pattern BillingRate_Type_CUSTOMREPORTS :: BillingRate_Type
 pattern BillingRate_Type_CUSTOMREPORTS = BillingRate_Type "CUSTOM_REPORTS"
 
--- |
 pattern BillingRate_Type_EXPOSURETOCONVERSION :: BillingRate_Type
 pattern BillingRate_Type_EXPOSURETOCONVERSION = BillingRate_Type "EXPOSURE_TO_CONVERSION"
 
--- |
 pattern BillingRate_Type_DATATRANSFER :: BillingRate_Type
 pattern BillingRate_Type_DATATRANSFER = BillingRate_Type "DATA_TRANSFER"
 
--- |
 pattern BillingRate_Type_DATATRANSFERSETUP :: BillingRate_Type
 pattern BillingRate_Type_DATATRANSFERSETUP = BillingRate_Type "DATA_TRANSFER_SETUP"
 
--- |
 pattern BillingRate_Type_Startup :: BillingRate_Type
 pattern BillingRate_Type_Startup = BillingRate_Type "STARTUP"
 
--- |
 pattern BillingRate_Type_STATEMENTOFWORK :: BillingRate_Type
 pattern BillingRate_Type_STATEMENTOFWORK = BillingRate_Type "STATEMENT_OF_WORK"
 
--- |
 pattern BillingRate_Type_PROVIDEDLIST :: BillingRate_Type
 pattern BillingRate_Type_PROVIDEDLIST = BillingRate_Type "PROVIDED_LIST"
 
--- |
 pattern BillingRate_Type_PROVIDEDLISTSETUP :: BillingRate_Type
 pattern BillingRate_Type_PROVIDEDLISTSETUP = BillingRate_Type "PROVIDED_LIST_SETUP"
 
--- |
 pattern BillingRate_Type_ENHANCEDFORMATS :: BillingRate_Type
 pattern BillingRate_Type_ENHANCEDFORMATS = BillingRate_Type "ENHANCED_FORMATS"
 
--- |
 pattern BillingRate_Type_TRACKINGADIMPRESSIONS :: BillingRate_Type
 pattern BillingRate_Type_TRACKINGADIMPRESSIONS = BillingRate_Type "TRACKING_AD_IMPRESSIONS"
 
--- |
 pattern BillingRate_Type_TRACKINGADCLICKS :: BillingRate_Type
 pattern BillingRate_Type_TRACKINGADCLICKS = BillingRate_Type "TRACKING_AD_CLICKS"
 
--- |
 pattern BillingRate_Type_NIELSENDIGITALADRATINGSFEE :: BillingRate_Type
 pattern BillingRate_Type_NIELSENDIGITALADRATINGSFEE = BillingRate_Type "NIELSEN_DIGITAL_AD_RATINGS_FEE"
 
--- |
 pattern BillingRate_Type_INSTREAMVIDEOREDIRECT :: BillingRate_Type
 pattern BillingRate_Type_INSTREAMVIDEOREDIRECT = BillingRate_Type "INSTREAM_VIDEO_REDIRECT"
 
--- |
 pattern BillingRate_Type_INSTREAMVIDEOVPAID :: BillingRate_Type
 pattern BillingRate_Type_INSTREAMVIDEOVPAID = BillingRate_Type "INSTREAM_VIDEO_VPAID"
 
--- |
 pattern BillingRate_Type_DISPLAYADSERVING :: BillingRate_Type
 pattern BillingRate_Type_DISPLAYADSERVING = BillingRate_Type "DISPLAY_AD_SERVING"
 
--- |
 pattern BillingRate_Type_VIDEOADSERVING :: BillingRate_Type
 pattern BillingRate_Type_VIDEOADSERVING = BillingRate_Type "VIDEO_AD_SERVING"
 
--- |
 pattern BillingRate_Type_AUDIOADSERVING :: BillingRate_Type
 pattern BillingRate_Type_AUDIOADSERVING = BillingRate_Type "AUDIO_AD_SERVING"
 
--- |
 pattern BillingRate_Type_ADVANCEDDISPLAYADSERVING :: BillingRate_Type
 pattern BillingRate_Type_ADVANCEDDISPLAYADSERVING = BillingRate_Type "ADVANCED_DISPLAY_AD_SERVING"
 
@@ -3335,19 +3247,15 @@ newtype BillingRate_UnitOfMeasure = BillingRate_UnitOfMeasure {fromBillingRate_U
       Core.FromJSONKey
     )
 
--- |
 pattern BillingRate_UnitOfMeasure_Cpm :: BillingRate_UnitOfMeasure
 pattern BillingRate_UnitOfMeasure_Cpm = BillingRate_UnitOfMeasure "CPM"
 
--- |
 pattern BillingRate_UnitOfMeasure_Cpc :: BillingRate_UnitOfMeasure
 pattern BillingRate_UnitOfMeasure_Cpc = BillingRate_UnitOfMeasure "CPC"
 
--- |
 pattern BillingRate_UnitOfMeasure_EA :: BillingRate_UnitOfMeasure
 pattern BillingRate_UnitOfMeasure_EA = BillingRate_UnitOfMeasure "EA"
 
--- |
 pattern BillingRate_UnitOfMeasure_P2C :: BillingRate_UnitOfMeasure
 pattern BillingRate_UnitOfMeasure_P2C = BillingRate_UnitOfMeasure "P2C"
 
@@ -3357,6 +3265,33 @@ pattern BillingRate_UnitOfMeasure_P2C = BillingRate_UnitOfMeasure "P2C"
   BillingRate_UnitOfMeasure_EA,
   BillingRate_UnitOfMeasure_P2C,
   BillingRate_UnitOfMeasure
+  #-}
+
+-- | This represents consent for ad user data.
+newtype Conversion_AdUserDataConsent = Conversion_AdUserDataConsent {fromConversion_AdUserDataConsent :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Granted.
+pattern Conversion_AdUserDataConsent_Granted :: Conversion_AdUserDataConsent
+pattern Conversion_AdUserDataConsent_Granted = Conversion_AdUserDataConsent "GRANTED"
+
+-- | Denied.
+pattern Conversion_AdUserDataConsent_Denied :: Conversion_AdUserDataConsent
+pattern Conversion_AdUserDataConsent_Denied = Conversion_AdUserDataConsent "DENIED"
+
+{-# COMPLETE
+  Conversion_AdUserDataConsent_Granted,
+  Conversion_AdUserDataConsent_Denied,
+  Conversion_AdUserDataConsent
   #-}
 
 -- | The error code.
@@ -3372,19 +3307,15 @@ newtype ConversionError_Code = ConversionError_Code {fromConversionError_Code ::
       Core.FromJSONKey
     )
 
--- |
 pattern ConversionError_Code_INVALIDARGUMENT :: ConversionError_Code
 pattern ConversionError_Code_INVALIDARGUMENT = ConversionError_Code "INVALID_ARGUMENT"
 
--- |
 pattern ConversionError_Code_Internal :: ConversionError_Code
 pattern ConversionError_Code_Internal = ConversionError_Code "INTERNAL"
 
--- |
 pattern ConversionError_Code_PERMISSIONDENIED :: ConversionError_Code
 pattern ConversionError_Code_PERMISSIONDENIED = ConversionError_Code "PERMISSION_DENIED"
 
--- |
 pattern ConversionError_Code_NOTFOUND :: ConversionError_Code
 pattern ConversionError_Code_NOTFOUND = ConversionError_Code "NOT_FOUND"
 
@@ -3409,19 +3340,19 @@ newtype Creative_ArtworkType = Creative_ArtworkType {fromCreative_ArtworkType ::
       Core.FromJSONKey
     )
 
--- |
+-- | The creative is a Flash creative.
 pattern Creative_ArtworkType_ARTWORKTYPEFLASH :: Creative_ArtworkType
 pattern Creative_ArtworkType_ARTWORKTYPEFLASH = Creative_ArtworkType "ARTWORK_TYPE_FLASH"
 
--- |
+-- | The creative is HTML5.
 pattern Creative_ArtworkType_ARTWORK_TYPE_HTML5 :: Creative_ArtworkType
 pattern Creative_ArtworkType_ARTWORK_TYPE_HTML5 = Creative_ArtworkType "ARTWORK_TYPE_HTML5"
 
--- |
+-- | The creative is HTML5 if available, Flash otherwise.
 pattern Creative_ArtworkType_ARTWORKTYPEMIXED :: Creative_ArtworkType
 pattern Creative_ArtworkType_ARTWORKTYPEMIXED = Creative_ArtworkType "ARTWORK_TYPE_MIXED"
 
--- |
+-- | The creative is Image.
 pattern Creative_ArtworkType_ARTWORKTYPEIMAGE :: Creative_ArtworkType
 pattern Creative_ArtworkType_ARTWORKTYPEIMAGE = Creative_ArtworkType "ARTWORK_TYPE_IMAGE"
 
@@ -3446,23 +3377,23 @@ newtype Creative_AuthoringSource = Creative_AuthoringSource {fromCreative_Author
       Core.FromJSONKey
     )
 
--- |
+-- | DCM-UI or external API used to author the creative.
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDCM :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDCM = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_DCM"
 
--- |
+-- | DBM-UI used to author the creative.
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDBM :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEDBM = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_DBM"
 
--- |
+-- | Studio-UI used to author the creative.
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCESTUDIO :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCESTUDIO = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_STUDIO"
 
--- |
+-- | Google Web Designer used to author the creative.
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEGWD = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_GWD"
 
--- |
+-- | ACS-UI used to author the creative.
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS :: Creative_AuthoringSource
 pattern Creative_AuthoringSource_CREATIVEAUTHORINGSOURCEACS = Creative_AuthoringSource "CREATIVE_AUTHORING_SOURCE_ACS"
 
@@ -3488,11 +3419,9 @@ newtype Creative_AuthoringTool = Creative_AuthoringTool {fromCreative_AuthoringT
       Core.FromJSONKey
     )
 
--- |
 pattern Creative_AuthoringTool_Ninja :: Creative_AuthoringTool
 pattern Creative_AuthoringTool_Ninja = Creative_AuthoringTool "NINJA"
 
--- |
 pattern Creative_AuthoringTool_Swiffy :: Creative_AuthoringTool
 pattern Creative_AuthoringTool_Swiffy = Creative_AuthoringTool "SWIFFY"
 
@@ -3514,267 +3443,202 @@ newtype Creative_BackupImageFeaturesItem = Creative_BackupImageFeaturesItem {fro
       Core.FromJSONKey
     )
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSFONTFACE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSFONTFACE = Creative_BackupImageFeaturesItem "CSS_FONT_FACE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSBACKGROUNDSIZE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSBACKGROUNDSIZE = Creative_BackupImageFeaturesItem "CSS_BACKGROUND_SIZE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSBORDERIMAGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSBORDERIMAGE = Creative_BackupImageFeaturesItem "CSS_BORDER_IMAGE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSBORDERRADIUS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSBORDERRADIUS = Creative_BackupImageFeaturesItem "CSS_BORDER_RADIUS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSBOXSHADOW :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSBOXSHADOW = Creative_BackupImageFeaturesItem "CSS_BOX_SHADOW"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSFLEXBOX :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSFLEXBOX = Creative_BackupImageFeaturesItem "CSS_FLEX_BOX"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSHSLA :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSHSLA = Creative_BackupImageFeaturesItem "CSS_HSLA"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSMULTIPLEBGS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSMULTIPLEBGS = Creative_BackupImageFeaturesItem "CSS_MULTIPLE_BGS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSOPACITY :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSOPACITY = Creative_BackupImageFeaturesItem "CSS_OPACITY"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSRGBA :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSRGBA = Creative_BackupImageFeaturesItem "CSS_RGBA"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSTEXTSHADOW :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSTEXTSHADOW = Creative_BackupImageFeaturesItem "CSS_TEXT_SHADOW"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSANIMATIONS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSANIMATIONS = Creative_BackupImageFeaturesItem "CSS_ANIMATIONS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSCOLUMNS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSCOLUMNS = Creative_BackupImageFeaturesItem "CSS_COLUMNS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSGENERATEDCONTENT :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSGENERATEDCONTENT = Creative_BackupImageFeaturesItem "CSS_GENERATED_CONTENT"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSGRADIENTS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSGRADIENTS = Creative_BackupImageFeaturesItem "CSS_GRADIENTS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSREFLECTIONS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSREFLECTIONS = Creative_BackupImageFeaturesItem "CSS_REFLECTIONS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSTRANSFORMS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSTRANSFORMS = Creative_BackupImageFeaturesItem "CSS_TRANSFORMS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSTRANSFORMS3D :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSTRANSFORMS3D = Creative_BackupImageFeaturesItem "CSS_TRANSFORMS3D"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CSSTRANSITIONS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CSSTRANSITIONS = Creative_BackupImageFeaturesItem "CSS_TRANSITIONS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_APPLICATIONCACHE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_APPLICATIONCACHE = Creative_BackupImageFeaturesItem "APPLICATION_CACHE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Canvas :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Canvas = Creative_BackupImageFeaturesItem "CANVAS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_CANVASTEXT :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_CANVASTEXT = Creative_BackupImageFeaturesItem "CANVAS_TEXT"
 
--- |
 pattern Creative_BackupImageFeaturesItem_DRAGANDDROP :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_DRAGANDDROP = Creative_BackupImageFeaturesItem "DRAG_AND_DROP"
 
--- |
 pattern Creative_BackupImageFeaturesItem_HASHCHANGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_HASHCHANGE = Creative_BackupImageFeaturesItem "HASH_CHANGE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_History :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_History = Creative_BackupImageFeaturesItem "HISTORY"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Audio :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Audio = Creative_BackupImageFeaturesItem "AUDIO"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Video :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Video = Creative_BackupImageFeaturesItem "VIDEO"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INDEXEDDB :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INDEXEDDB = Creative_BackupImageFeaturesItem "INDEXED_DB"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRAUTOCOMPLETE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRAUTOCOMPLETE = Creative_BackupImageFeaturesItem "INPUT_ATTR_AUTOCOMPLETE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRAUTOFOCUS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRAUTOFOCUS = Creative_BackupImageFeaturesItem "INPUT_ATTR_AUTOFOCUS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRLIST :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRLIST = Creative_BackupImageFeaturesItem "INPUT_ATTR_LIST"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRPLACEHOLDER :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRPLACEHOLDER = Creative_BackupImageFeaturesItem "INPUT_ATTR_PLACEHOLDER"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMAX :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMAX = Creative_BackupImageFeaturesItem "INPUT_ATTR_MAX"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMIN :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMIN = Creative_BackupImageFeaturesItem "INPUT_ATTR_MIN"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMULTIPLE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRMULTIPLE = Creative_BackupImageFeaturesItem "INPUT_ATTR_MULTIPLE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRPATTERN :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRPATTERN = Creative_BackupImageFeaturesItem "INPUT_ATTR_PATTERN"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRREQUIRED :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRREQUIRED = Creative_BackupImageFeaturesItem "INPUT_ATTR_REQUIRED"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTATTRSTEP :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTATTRSTEP = Creative_BackupImageFeaturesItem "INPUT_ATTR_STEP"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPESEARCH :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPESEARCH = Creative_BackupImageFeaturesItem "INPUT_TYPE_SEARCH"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPETEL :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPETEL = Creative_BackupImageFeaturesItem "INPUT_TYPE_TEL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEURL :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEURL = Creative_BackupImageFeaturesItem "INPUT_TYPE_URL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEEMAIL :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEEMAIL = Creative_BackupImageFeaturesItem "INPUT_TYPE_EMAIL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATETIME :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATETIME = Creative_BackupImageFeaturesItem "INPUT_TYPE_DATETIME"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATE = Creative_BackupImageFeaturesItem "INPUT_TYPE_DATE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEMONTH :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEMONTH = Creative_BackupImageFeaturesItem "INPUT_TYPE_MONTH"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEWEEK :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEWEEK = Creative_BackupImageFeaturesItem "INPUT_TYPE_WEEK"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPETIME :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPETIME = Creative_BackupImageFeaturesItem "INPUT_TYPE_TIME"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATETIMELOCAL :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPEDATETIMELOCAL = Creative_BackupImageFeaturesItem "INPUT_TYPE_DATETIME_LOCAL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPENUMBER :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPENUMBER = Creative_BackupImageFeaturesItem "INPUT_TYPE_NUMBER"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPERANGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPERANGE = Creative_BackupImageFeaturesItem "INPUT_TYPE_RANGE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INPUTTYPECOLOR :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INPUTTYPECOLOR = Creative_BackupImageFeaturesItem "INPUT_TYPE_COLOR"
 
--- |
 pattern Creative_BackupImageFeaturesItem_LOCALSTORAGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_LOCALSTORAGE = Creative_BackupImageFeaturesItem "LOCAL_STORAGE"
 
--- |
+-- | POST_MESSAGE always required due to html5 implementation.
 pattern Creative_BackupImageFeaturesItem_POSTMESSAGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_POSTMESSAGE = Creative_BackupImageFeaturesItem "POST_MESSAGE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_SESSIONSTORAGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_SESSIONSTORAGE = Creative_BackupImageFeaturesItem "SESSION_STORAGE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_WEBSOCKETS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_WEBSOCKETS = Creative_BackupImageFeaturesItem "WEB_SOCKETS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_WEBSQLDATABASE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_WEBSQLDATABASE = Creative_BackupImageFeaturesItem "WEB_SQL_DATABASE"
 
--- |
 pattern Creative_BackupImageFeaturesItem_WEBWORKERS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_WEBWORKERS = Creative_BackupImageFeaturesItem "WEB_WORKERS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_GEOLOCATION :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_GEOLOCATION = Creative_BackupImageFeaturesItem "GEO_LOCATION"
 
--- |
 pattern Creative_BackupImageFeaturesItem_INLINESVG :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_INLINESVG = Creative_BackupImageFeaturesItem "INLINE_SVG"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Smil :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Smil = Creative_BackupImageFeaturesItem "SMIL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_SVGHREF :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_SVGHREF = Creative_BackupImageFeaturesItem "SVG_HREF"
 
--- |
 pattern Creative_BackupImageFeaturesItem_SVGCLIPPATHS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_SVGCLIPPATHS = Creative_BackupImageFeaturesItem "SVG_CLIP_PATHS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Touch :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Touch = Creative_BackupImageFeaturesItem "TOUCH"
 
--- |
 pattern Creative_BackupImageFeaturesItem_Webgl :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_Webgl = Creative_BackupImageFeaturesItem "WEBGL"
 
--- |
 pattern Creative_BackupImageFeaturesItem_SVGFILTERS :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_SVGFILTERS = Creative_BackupImageFeaturesItem "SVG_FILTERS"
 
--- |
 pattern Creative_BackupImageFeaturesItem_SVGFEIMAGE :: Creative_BackupImageFeaturesItem
 pattern Creative_BackupImageFeaturesItem_SVGFEIMAGE = Creative_BackupImageFeaturesItem "SVG_FE_IMAGE"
 
@@ -3860,27 +3724,23 @@ newtype Creative_CompatibilityItem = Creative_CompatibilityItem {fromCreative_Co
       Core.FromJSONKey
     )
 
--- |
 pattern Creative_CompatibilityItem_Display :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_Display = Creative_CompatibilityItem "DISPLAY"
 
--- |
 pattern Creative_CompatibilityItem_DISPLAYINTERSTITIAL :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_DISPLAYINTERSTITIAL = Creative_CompatibilityItem "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Creative_CompatibilityItem_App :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_App = Creative_CompatibilityItem "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Creative_CompatibilityItem_APPINTERSTITIAL :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_APPINTERSTITIAL = Creative_CompatibilityItem "APP_INTERSTITIAL"
 
--- |
 pattern Creative_CompatibilityItem_INSTREAMVIDEO :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_INSTREAMVIDEO = Creative_CompatibilityItem "IN_STREAM_VIDEO"
 
--- |
 pattern Creative_CompatibilityItem_INSTREAMAUDIO :: Creative_CompatibilityItem
 pattern Creative_CompatibilityItem_INSTREAMAUDIO = Creative_CompatibilityItem "IN_STREAM_AUDIO"
 
@@ -3894,7 +3754,7 @@ pattern Creative_CompatibilityItem_INSTREAMAUDIO = Creative_CompatibilityItem "I
   Creative_CompatibilityItem
   #-}
 
--- | Type of this creative. This is a required field. Applicable to all creative types. /Note:/ FLASH/INPAGE, HTML5/BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
+-- | Required. Type of this creative. Applicable to all creative types. /Note:/ FLASH/INPAGE, HTML5/BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
 newtype Creative_Type = Creative_Type {fromCreative_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3907,103 +3767,78 @@ newtype Creative_Type = Creative_Type {fromCreative_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Creative_Type_Image :: Creative_Type
 pattern Creative_Type_Image = Creative_Type "IMAGE"
 
--- |
 pattern Creative_Type_DISPLAYREDIRECT :: Creative_Type
 pattern Creative_Type_DISPLAYREDIRECT = Creative_Type "DISPLAY_REDIRECT"
 
--- |
 pattern Creative_Type_CUSTOMDISPLAY :: Creative_Type
 pattern Creative_Type_CUSTOMDISPLAY = Creative_Type "CUSTOM_DISPLAY"
 
--- |
 pattern Creative_Type_INTERNALREDIRECT :: Creative_Type
 pattern Creative_Type_INTERNALREDIRECT = Creative_Type "INTERNAL_REDIRECT"
 
--- |
 pattern Creative_Type_CUSTOMDISPLAYINTERSTITIAL :: Creative_Type
 pattern Creative_Type_CUSTOMDISPLAYINTERSTITIAL = Creative_Type "CUSTOM_DISPLAY_INTERSTITIAL"
 
--- |
 pattern Creative_Type_INTERSTITIALINTERNALREDIRECT :: Creative_Type
 pattern Creative_Type_INTERSTITIALINTERNALREDIRECT = Creative_Type "INTERSTITIAL_INTERNAL_REDIRECT"
 
--- |
 pattern Creative_Type_TRACKINGTEXT :: Creative_Type
 pattern Creative_Type_TRACKINGTEXT = Creative_Type "TRACKING_TEXT"
 
--- |
 pattern Creative_Type_RICHMEDIADISPLAYBANNER :: Creative_Type
 pattern Creative_Type_RICHMEDIADISPLAYBANNER = Creative_Type "RICH_MEDIA_DISPLAY_BANNER"
 
--- |
 pattern Creative_Type_RICHMEDIAINPAGEFLOATING :: Creative_Type
 pattern Creative_Type_RICHMEDIAINPAGEFLOATING = Creative_Type "RICH_MEDIA_INPAGE_FLOATING"
 
--- |
 pattern Creative_Type_RICHMEDIAIMEXPAND :: Creative_Type
 pattern Creative_Type_RICHMEDIAIMEXPAND = Creative_Type "RICH_MEDIA_IM_EXPAND"
 
--- |
 pattern Creative_Type_RICHMEDIADISPLAYEXPANDING :: Creative_Type
 pattern Creative_Type_RICHMEDIADISPLAYEXPANDING = Creative_Type "RICH_MEDIA_DISPLAY_EXPANDING"
 
--- |
 pattern Creative_Type_RICHMEDIADISPLAYINTERSTITIAL :: Creative_Type
 pattern Creative_Type_RICHMEDIADISPLAYINTERSTITIAL = Creative_Type "RICH_MEDIA_DISPLAY_INTERSTITIAL"
 
--- |
 pattern Creative_Type_RICHMEDIADISPLAYMULTIFLOATINGINTERSTITIAL :: Creative_Type
 pattern Creative_Type_RICHMEDIADISPLAYMULTIFLOATINGINTERSTITIAL = Creative_Type "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
 
--- |
 pattern Creative_Type_RICHMEDIAMOBILEINAPP :: Creative_Type
 pattern Creative_Type_RICHMEDIAMOBILEINAPP = Creative_Type "RICH_MEDIA_MOBILE_IN_APP"
 
--- |
 pattern Creative_Type_FLASHINPAGE :: Creative_Type
 pattern Creative_Type_FLASHINPAGE = Creative_Type "FLASH_INPAGE"
 
--- |
 pattern Creative_Type_INSTREAMVIDEO :: Creative_Type
 pattern Creative_Type_INSTREAMVIDEO = Creative_Type "INSTREAM_VIDEO"
 
--- |
 pattern Creative_Type_VPAIDLINEARVIDEO :: Creative_Type
 pattern Creative_Type_VPAIDLINEARVIDEO = Creative_Type "VPAID_LINEAR_VIDEO"
 
--- |
 pattern Creative_Type_VPAIDNONLINEARVIDEO :: Creative_Type
 pattern Creative_Type_VPAIDNONLINEARVIDEO = Creative_Type "VPAID_NON_LINEAR_VIDEO"
 
--- |
 pattern Creative_Type_INSTREAMVIDEOREDIRECT :: Creative_Type
 pattern Creative_Type_INSTREAMVIDEOREDIRECT = Creative_Type "INSTREAM_VIDEO_REDIRECT"
 
--- |
 pattern Creative_Type_RICHMEDIAPEELDOWN :: Creative_Type
 pattern Creative_Type_RICHMEDIAPEELDOWN = Creative_Type "RICH_MEDIA_PEEL_DOWN"
 
--- |
 pattern Creative_Type_HTML5BANNER :: Creative_Type
 pattern Creative_Type_HTML5BANNER = Creative_Type "HTML5_BANNER"
 
--- |
 pattern Creative_Type_Display :: Creative_Type
 pattern Creative_Type_Display = Creative_Type "DISPLAY"
 
--- |
 pattern Creative_Type_DISPLAYIMAGEGALLERY :: Creative_Type
 pattern Creative_Type_DISPLAYIMAGEGALLERY = Creative_Type "DISPLAY_IMAGE_GALLERY"
 
--- |
 pattern Creative_Type_BRANDSAFEDEFAULTINSTREAMVIDEO :: Creative_Type
 pattern Creative_Type_BRANDSAFEDEFAULTINSTREAMVIDEO = Creative_Type "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
 
--- |
 pattern Creative_Type_INSTREAMAUDIO :: Creative_Type
 pattern Creative_Type_INSTREAMAUDIO = Creative_Type "INSTREAM_AUDIO"
 
@@ -4049,19 +3884,15 @@ newtype CreativeAsset_Alignment = CreativeAsset_Alignment {fromCreativeAsset_Ali
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAsset_Alignment_ALIGNMENTTOP :: CreativeAsset_Alignment
 pattern CreativeAsset_Alignment_ALIGNMENTTOP = CreativeAsset_Alignment "ALIGNMENT_TOP"
 
--- |
 pattern CreativeAsset_Alignment_ALIGNMENTRIGHT :: CreativeAsset_Alignment
 pattern CreativeAsset_Alignment_ALIGNMENTRIGHT = CreativeAsset_Alignment "ALIGNMENT_RIGHT"
 
--- |
 pattern CreativeAsset_Alignment_ALIGNMENTBOTTOM :: CreativeAsset_Alignment
 pattern CreativeAsset_Alignment_ALIGNMENTBOTTOM = CreativeAsset_Alignment "ALIGNMENT_BOTTOM"
 
--- |
 pattern CreativeAsset_Alignment_ALIGNMENTLEFT :: CreativeAsset_Alignment
 pattern CreativeAsset_Alignment_ALIGNMENTLEFT = CreativeAsset_Alignment "ALIGNMENT_LEFT"
 
@@ -4086,19 +3917,19 @@ newtype CreativeAsset_ArtworkType = CreativeAsset_ArtworkType {fromCreativeAsset
       Core.FromJSONKey
     )
 
--- |
+-- | The creative is a Flash creative.
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEFLASH :: CreativeAsset_ArtworkType
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEFLASH = CreativeAsset_ArtworkType "ARTWORK_TYPE_FLASH"
 
--- |
+-- | The creative is HTML5.
 pattern CreativeAsset_ArtworkType_ARTWORK_TYPE_HTML5 :: CreativeAsset_ArtworkType
 pattern CreativeAsset_ArtworkType_ARTWORK_TYPE_HTML5 = CreativeAsset_ArtworkType "ARTWORK_TYPE_HTML5"
 
--- |
+-- | The creative is HTML5 if available, Flash otherwise.
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEMIXED :: CreativeAsset_ArtworkType
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEMIXED = CreativeAsset_ArtworkType "ARTWORK_TYPE_MIXED"
 
--- |
+-- | The creative is Image.
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEIMAGE :: CreativeAsset_ArtworkType
 pattern CreativeAsset_ArtworkType_ARTWORKTYPEIMAGE = CreativeAsset_ArtworkType "ARTWORK_TYPE_IMAGE"
 
@@ -4123,19 +3954,19 @@ newtype CreativeAsset_ChildAssetType = CreativeAsset_ChildAssetType {fromCreativ
       Core.FromJSONKey
     )
 
--- |
+-- | swf files
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEFLASH :: CreativeAsset_ChildAssetType
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEFLASH = CreativeAsset_ChildAssetType "CHILD_ASSET_TYPE_FLASH"
 
--- |
+-- | flv and any other video files types
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEVIDEO :: CreativeAsset_ChildAssetType
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEVIDEO = CreativeAsset_ChildAssetType "CHILD_ASSET_TYPE_VIDEO"
 
--- |
+-- | image files
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEIMAGE :: CreativeAsset_ChildAssetType
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEIMAGE = CreativeAsset_ChildAssetType "CHILD_ASSET_TYPE_IMAGE"
 
--- |
+-- | rest of the supported file types .txt, .xml etc.
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEDATA :: CreativeAsset_ChildAssetType
 pattern CreativeAsset_ChildAssetType_CHILDASSETTYPEDATA = CreativeAsset_ChildAssetType "CHILD_ASSET_TYPE_DATA"
 
@@ -4159,267 +3990,202 @@ newtype CreativeAsset_DetectedFeaturesItem = CreativeAsset_DetectedFeaturesItem 
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSFONTFACE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSFONTFACE = CreativeAsset_DetectedFeaturesItem "CSS_FONT_FACE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSBACKGROUNDSIZE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSBACKGROUNDSIZE = CreativeAsset_DetectedFeaturesItem "CSS_BACKGROUND_SIZE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSBORDERIMAGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSBORDERIMAGE = CreativeAsset_DetectedFeaturesItem "CSS_BORDER_IMAGE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSBORDERRADIUS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSBORDERRADIUS = CreativeAsset_DetectedFeaturesItem "CSS_BORDER_RADIUS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSBOXSHADOW :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSBOXSHADOW = CreativeAsset_DetectedFeaturesItem "CSS_BOX_SHADOW"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSFLEXBOX :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSFLEXBOX = CreativeAsset_DetectedFeaturesItem "CSS_FLEX_BOX"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSHSLA :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSHSLA = CreativeAsset_DetectedFeaturesItem "CSS_HSLA"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSMULTIPLEBGS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSMULTIPLEBGS = CreativeAsset_DetectedFeaturesItem "CSS_MULTIPLE_BGS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSOPACITY :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSOPACITY = CreativeAsset_DetectedFeaturesItem "CSS_OPACITY"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSRGBA :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSRGBA = CreativeAsset_DetectedFeaturesItem "CSS_RGBA"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSTEXTSHADOW :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSTEXTSHADOW = CreativeAsset_DetectedFeaturesItem "CSS_TEXT_SHADOW"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSANIMATIONS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSANIMATIONS = CreativeAsset_DetectedFeaturesItem "CSS_ANIMATIONS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSCOLUMNS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSCOLUMNS = CreativeAsset_DetectedFeaturesItem "CSS_COLUMNS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSGENERATEDCONTENT :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSGENERATEDCONTENT = CreativeAsset_DetectedFeaturesItem "CSS_GENERATED_CONTENT"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSGRADIENTS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSGRADIENTS = CreativeAsset_DetectedFeaturesItem "CSS_GRADIENTS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSREFLECTIONS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSREFLECTIONS = CreativeAsset_DetectedFeaturesItem "CSS_REFLECTIONS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSFORMS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSFORMS = CreativeAsset_DetectedFeaturesItem "CSS_TRANSFORMS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSFORMS3D :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSFORMS3D = CreativeAsset_DetectedFeaturesItem "CSS_TRANSFORMS3D"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSITIONS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CSSTRANSITIONS = CreativeAsset_DetectedFeaturesItem "CSS_TRANSITIONS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_APPLICATIONCACHE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_APPLICATIONCACHE = CreativeAsset_DetectedFeaturesItem "APPLICATION_CACHE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Canvas :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Canvas = CreativeAsset_DetectedFeaturesItem "CANVAS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_CANVASTEXT :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_CANVASTEXT = CreativeAsset_DetectedFeaturesItem "CANVAS_TEXT"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_DRAGANDDROP :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_DRAGANDDROP = CreativeAsset_DetectedFeaturesItem "DRAG_AND_DROP"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_HASHCHANGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_HASHCHANGE = CreativeAsset_DetectedFeaturesItem "HASH_CHANGE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_History :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_History = CreativeAsset_DetectedFeaturesItem "HISTORY"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Audio :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Audio = CreativeAsset_DetectedFeaturesItem "AUDIO"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Video :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Video = CreativeAsset_DetectedFeaturesItem "VIDEO"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INDEXEDDB :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INDEXEDDB = CreativeAsset_DetectedFeaturesItem "INDEXED_DB"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRAUTOCOMPLETE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRAUTOCOMPLETE = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_AUTOCOMPLETE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRAUTOFOCUS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRAUTOFOCUS = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_AUTOFOCUS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRLIST :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRLIST = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_LIST"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRPLACEHOLDER :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRPLACEHOLDER = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_PLACEHOLDER"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMAX :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMAX = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_MAX"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMIN :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMIN = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_MIN"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMULTIPLE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRMULTIPLE = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_MULTIPLE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRPATTERN :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRPATTERN = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_PATTERN"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRREQUIRED :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRREQUIRED = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_REQUIRED"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRSTEP :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTATTRSTEP = CreativeAsset_DetectedFeaturesItem "INPUT_ATTR_STEP"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPESEARCH :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPESEARCH = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_SEARCH"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPETEL :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPETEL = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_TEL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEURL :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEURL = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_URL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEEMAIL :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEEMAIL = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_EMAIL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATETIME :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATETIME = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_DATETIME"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATE = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_DATE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEMONTH :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEMONTH = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_MONTH"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEWEEK :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEWEEK = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_WEEK"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPETIME :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPETIME = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_TIME"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATETIMELOCAL :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPEDATETIMELOCAL = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_DATETIME_LOCAL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPENUMBER :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPENUMBER = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_NUMBER"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPERANGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPERANGE = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_RANGE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPECOLOR :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INPUTTYPECOLOR = CreativeAsset_DetectedFeaturesItem "INPUT_TYPE_COLOR"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_LOCALSTORAGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_LOCALSTORAGE = CreativeAsset_DetectedFeaturesItem "LOCAL_STORAGE"
 
--- |
+-- | POST_MESSAGE always required due to html5 implementation.
 pattern CreativeAsset_DetectedFeaturesItem_POSTMESSAGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_POSTMESSAGE = CreativeAsset_DetectedFeaturesItem "POST_MESSAGE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_SESSIONSTORAGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_SESSIONSTORAGE = CreativeAsset_DetectedFeaturesItem "SESSION_STORAGE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_WEBSOCKETS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_WEBSOCKETS = CreativeAsset_DetectedFeaturesItem "WEB_SOCKETS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_WEBSQLDATABASE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_WEBSQLDATABASE = CreativeAsset_DetectedFeaturesItem "WEB_SQL_DATABASE"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_WEBWORKERS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_WEBWORKERS = CreativeAsset_DetectedFeaturesItem "WEB_WORKERS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_GEOLOCATION :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_GEOLOCATION = CreativeAsset_DetectedFeaturesItem "GEO_LOCATION"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_INLINESVG :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_INLINESVG = CreativeAsset_DetectedFeaturesItem "INLINE_SVG"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Smil :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Smil = CreativeAsset_DetectedFeaturesItem "SMIL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_SVGHREF :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_SVGHREF = CreativeAsset_DetectedFeaturesItem "SVG_HREF"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_SVGCLIPPATHS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_SVGCLIPPATHS = CreativeAsset_DetectedFeaturesItem "SVG_CLIP_PATHS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Touch :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Touch = CreativeAsset_DetectedFeaturesItem "TOUCH"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_Webgl :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_Webgl = CreativeAsset_DetectedFeaturesItem "WEBGL"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_SVGFILTERS :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_SVGFILTERS = CreativeAsset_DetectedFeaturesItem "SVG_FILTERS"
 
--- |
 pattern CreativeAsset_DetectedFeaturesItem_SVGFEIMAGE :: CreativeAsset_DetectedFeaturesItem
 pattern CreativeAsset_DetectedFeaturesItem_SVGFEIMAGE = CreativeAsset_DetectedFeaturesItem "SVG_FE_IMAGE"
 
@@ -4506,43 +4272,43 @@ newtype CreativeAsset_DisplayType = CreativeAsset_DisplayType {fromCreativeAsset
       Core.FromJSONKey
     )
 
--- |
+-- | Asset exists in a box and stays within the box.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEINPAGE :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEINPAGE = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_INPAGE"
 
--- |
+-- | Asset exists at a self described location on the page.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLOATING :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLOATING = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_FLOATING"
 
--- |
+-- | Special display type for IM clients.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEOVERLAY :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEOVERLAY = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_OVERLAY"
 
--- |
+-- | Asset changes size.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEEXPANDING :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEEXPANDING = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_EXPANDING"
 
--- |
+-- | Not applicable for HTML5.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLASHINFLASH :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLASHINFLASH = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH"
 
--- |
+-- | Not applicable for HTML5.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLASHINFLASHEXPANDING :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEFLASHINFLASHEXPANDING = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_FLASH_IN_FLASH_EXPANDING"
 
--- |
+-- | Asset sits on the top right and expands.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEPEELDOWN :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEPEELDOWN = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_PEEL_DOWN"
 
--- |
+-- | VPAID linear asset.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEVPAIDLINEAR :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEVPAIDLINEAR = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_VPAID_LINEAR"
 
--- |
+-- | VPAID non linear asset.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEVPAIDNONLINEAR :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEVPAIDNONLINEAR = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR"
 
--- |
+-- | Backdrop (skin) asset.
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEBACKDROP :: CreativeAsset_DisplayType
 pattern CreativeAsset_DisplayType_ASSETDISPLAYTYPEBACKDROP = CreativeAsset_DisplayType "ASSET_DISPLAY_TYPE_BACKDROP"
 
@@ -4573,15 +4339,15 @@ newtype CreativeAsset_DurationType = CreativeAsset_DurationType {fromCreativeAss
       Core.FromJSONKey
     )
 
--- |
+-- | Asset is displayed for the single run of the time line.
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPEAUTO :: CreativeAsset_DurationType
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPEAUTO = CreativeAsset_DurationType "ASSET_DURATION_TYPE_AUTO"
 
--- |
+-- | Asset is displayed indefinitely and it loops on the timeline.
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPENONE :: CreativeAsset_DurationType
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPENONE = CreativeAsset_DurationType "ASSET_DURATION_TYPE_NONE"
 
--- |
+-- | User entered duration value in seconds.
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPECUSTOM :: CreativeAsset_DurationType
 pattern CreativeAsset_DurationType_ASSETDURATIONTYPECUSTOM = CreativeAsset_DurationType "ASSET_DURATION_TYPE_CUSTOM"
 
@@ -4605,15 +4371,12 @@ newtype CreativeAsset_Orientation = CreativeAsset_Orientation {fromCreativeAsset
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAsset_Orientation_Landscape :: CreativeAsset_Orientation
 pattern CreativeAsset_Orientation_Landscape = CreativeAsset_Orientation "LANDSCAPE"
 
--- |
 pattern CreativeAsset_Orientation_Portrait :: CreativeAsset_Orientation
 pattern CreativeAsset_Orientation_Portrait = CreativeAsset_Orientation "PORTRAIT"
 
--- |
 pattern CreativeAsset_Orientation_Square :: CreativeAsset_Orientation
 pattern CreativeAsset_Orientation_Square = CreativeAsset_Orientation "SQUARE"
 
@@ -4637,15 +4400,15 @@ newtype CreativeAsset_PositionLeftUnit = CreativeAsset_PositionLeftUnit {fromCre
       Core.FromJSONKey
     )
 
--- |
+-- | Pixels on a screen.
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPIXEL :: CreativeAsset_PositionLeftUnit
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPIXEL = CreativeAsset_PositionLeftUnit "OFFSET_UNIT_PIXEL"
 
--- |
+-- | Percent offset for center asset (rather than top and left).
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPERCENT :: CreativeAsset_PositionLeftUnit
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPERCENT = CreativeAsset_PositionLeftUnit "OFFSET_UNIT_PERCENT"
 
--- |
+-- | Pixel offset for center of asset from center of browser window.
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPIXELFROMCENTER :: CreativeAsset_PositionLeftUnit
 pattern CreativeAsset_PositionLeftUnit_OFFSETUNITPIXELFROMCENTER = CreativeAsset_PositionLeftUnit "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
@@ -4669,15 +4432,15 @@ newtype CreativeAsset_PositionTopUnit = CreativeAsset_PositionTopUnit {fromCreat
       Core.FromJSONKey
     )
 
--- |
+-- | Pixels on a screen.
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPIXEL :: CreativeAsset_PositionTopUnit
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPIXEL = CreativeAsset_PositionTopUnit "OFFSET_UNIT_PIXEL"
 
--- |
+-- | Percent offset for center asset (rather than top and left).
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPERCENT :: CreativeAsset_PositionTopUnit
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPERCENT = CreativeAsset_PositionTopUnit "OFFSET_UNIT_PERCENT"
 
--- |
+-- | Pixel offset for center of asset from center of browser window.
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPIXELFROMCENTER :: CreativeAsset_PositionTopUnit
 pattern CreativeAsset_PositionTopUnit_OFFSETUNITPIXELFROMCENTER = CreativeAsset_PositionTopUnit "OFFSET_UNIT_PIXEL_FROM_CENTER"
 
@@ -4702,43 +4465,33 @@ newtype CreativeAsset_Role = CreativeAsset_Role {fromCreativeAsset_Role :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAsset_Role_Primary :: CreativeAsset_Role
 pattern CreativeAsset_Role_Primary = CreativeAsset_Role "PRIMARY"
 
--- |
 pattern CreativeAsset_Role_BACKUPIMAGE :: CreativeAsset_Role
 pattern CreativeAsset_Role_BACKUPIMAGE = CreativeAsset_Role "BACKUP_IMAGE"
 
--- |
 pattern CreativeAsset_Role_ADDITIONALIMAGE :: CreativeAsset_Role
 pattern CreativeAsset_Role_ADDITIONALIMAGE = CreativeAsset_Role "ADDITIONAL_IMAGE"
 
--- |
 pattern CreativeAsset_Role_ADDITIONALFLASH :: CreativeAsset_Role
 pattern CreativeAsset_Role_ADDITIONALFLASH = CreativeAsset_Role "ADDITIONAL_FLASH"
 
--- |
 pattern CreativeAsset_Role_PARENTVIDEO :: CreativeAsset_Role
 pattern CreativeAsset_Role_PARENTVIDEO = CreativeAsset_Role "PARENT_VIDEO"
 
--- |
 pattern CreativeAsset_Role_TRANSCODEDVIDEO :: CreativeAsset_Role
 pattern CreativeAsset_Role_TRANSCODEDVIDEO = CreativeAsset_Role "TRANSCODED_VIDEO"
 
--- |
 pattern CreativeAsset_Role_Other :: CreativeAsset_Role
 pattern CreativeAsset_Role_Other = CreativeAsset_Role "OTHER"
 
--- |
 pattern CreativeAsset_Role_ALTERNATEVIDEO :: CreativeAsset_Role
 pattern CreativeAsset_Role_ALTERNATEVIDEO = CreativeAsset_Role "ALTERNATE_VIDEO"
 
--- |
 pattern CreativeAsset_Role_PARENTAUDIO :: CreativeAsset_Role
 pattern CreativeAsset_Role_PARENTAUDIO = CreativeAsset_Role "PARENT_AUDIO"
 
--- |
 pattern CreativeAsset_Role_TRANSCODEDAUDIO :: CreativeAsset_Role
 pattern CreativeAsset_Role_TRANSCODEDAUDIO = CreativeAsset_Role "TRANSCODED_AUDIO"
 
@@ -4769,11 +4522,11 @@ newtype CreativeAsset_StartTimeType = CreativeAsset_StartTimeType {fromCreativeA
       Core.FromJSONKey
     )
 
--- |
+-- | Asset is not automatically displayed.
 pattern CreativeAsset_StartTimeType_ASSETSTARTTIMETYPENONE :: CreativeAsset_StartTimeType
 pattern CreativeAsset_StartTimeType_ASSETSTARTTIMETYPENONE = CreativeAsset_StartTimeType "ASSET_START_TIME_TYPE_NONE"
 
--- |
+-- | Asset is automatically displayed after a fixed period of time.
 pattern CreativeAsset_StartTimeType_ASSETSTARTTIMETYPECUSTOM :: CreativeAsset_StartTimeType
 pattern CreativeAsset_StartTimeType_ASSETSTARTTIMETYPECUSTOM = CreativeAsset_StartTimeType "ASSET_START_TIME_TYPE_CUSTOM"
 
@@ -4796,15 +4549,15 @@ newtype CreativeAsset_WindowMode = CreativeAsset_WindowMode {fromCreativeAsset_W
       Core.FromJSONKey
     )
 
--- |
+-- | Allows overlapping of Html and SWF content.
 pattern CreativeAsset_WindowMode_Opaque :: CreativeAsset_WindowMode
 pattern CreativeAsset_WindowMode_Opaque = CreativeAsset_WindowMode "OPAQUE"
 
--- |
+-- | Default
 pattern CreativeAsset_WindowMode_Window :: CreativeAsset_WindowMode
 pattern CreativeAsset_WindowMode_Window = CreativeAsset_WindowMode "WINDOW"
 
--- |
+-- | Used for non-square borders. Allows overlapping of Html and SWF content.
 pattern CreativeAsset_WindowMode_Transparent :: CreativeAsset_WindowMode
 pattern CreativeAsset_WindowMode_Transparent = CreativeAsset_WindowMode "TRANSPARENT"
 
@@ -4828,27 +4581,21 @@ newtype CreativeAssetId_Type = CreativeAssetId_Type {fromCreativeAssetId_Type ::
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAssetId_Type_Image :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_Image = CreativeAssetId_Type "IMAGE"
 
--- |
 pattern CreativeAssetId_Type_Flash :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_Flash = CreativeAssetId_Type "FLASH"
 
--- |
 pattern CreativeAssetId_Type_Video :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_Video = CreativeAssetId_Type "VIDEO"
 
--- |
 pattern CreativeAssetId_Type_Html :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_Html = CreativeAssetId_Type "HTML"
 
--- |
 pattern CreativeAssetId_Type_HTMLIMAGE :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_HTMLIMAGE = CreativeAssetId_Type "HTML_IMAGE"
 
--- |
 pattern CreativeAssetId_Type_Audio :: CreativeAssetId_Type
 pattern CreativeAssetId_Type_Audio = CreativeAssetId_Type "AUDIO"
 
@@ -4874,267 +4621,202 @@ newtype CreativeAssetMetadata_DetectedFeaturesItem = CreativeAssetMetadata_Detec
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSFONTFACE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSFONTFACE = CreativeAssetMetadata_DetectedFeaturesItem "CSS_FONT_FACE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBACKGROUNDSIZE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBACKGROUNDSIZE = CreativeAssetMetadata_DetectedFeaturesItem "CSS_BACKGROUND_SIZE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBORDERIMAGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBORDERIMAGE = CreativeAssetMetadata_DetectedFeaturesItem "CSS_BORDER_IMAGE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBORDERRADIUS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBORDERRADIUS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_BORDER_RADIUS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBOXSHADOW :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSBOXSHADOW = CreativeAssetMetadata_DetectedFeaturesItem "CSS_BOX_SHADOW"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSFLEXBOX :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSFLEXBOX = CreativeAssetMetadata_DetectedFeaturesItem "CSS_FLEX_BOX"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSHSLA :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSHSLA = CreativeAssetMetadata_DetectedFeaturesItem "CSS_HSLA"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSMULTIPLEBGS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSMULTIPLEBGS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_MULTIPLE_BGS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSOPACITY :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSOPACITY = CreativeAssetMetadata_DetectedFeaturesItem "CSS_OPACITY"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSRGBA :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSRGBA = CreativeAssetMetadata_DetectedFeaturesItem "CSS_RGBA"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTEXTSHADOW :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTEXTSHADOW = CreativeAssetMetadata_DetectedFeaturesItem "CSS_TEXT_SHADOW"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSANIMATIONS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSANIMATIONS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_ANIMATIONS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSCOLUMNS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSCOLUMNS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_COLUMNS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSGENERATEDCONTENT :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSGENERATEDCONTENT = CreativeAssetMetadata_DetectedFeaturesItem "CSS_GENERATED_CONTENT"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSGRADIENTS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSGRADIENTS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_GRADIENTS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSREFLECTIONS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSREFLECTIONS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_REFLECTIONS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSFORMS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSFORMS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_TRANSFORMS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSFORMS3D :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSFORMS3D = CreativeAssetMetadata_DetectedFeaturesItem "CSS_TRANSFORMS3D"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSITIONS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CSSTRANSITIONS = CreativeAssetMetadata_DetectedFeaturesItem "CSS_TRANSITIONS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_APPLICATIONCACHE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_APPLICATIONCACHE = CreativeAssetMetadata_DetectedFeaturesItem "APPLICATION_CACHE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Canvas :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Canvas = CreativeAssetMetadata_DetectedFeaturesItem "CANVAS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CANVASTEXT :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_CANVASTEXT = CreativeAssetMetadata_DetectedFeaturesItem "CANVAS_TEXT"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_DRAGANDDROP :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_DRAGANDDROP = CreativeAssetMetadata_DetectedFeaturesItem "DRAG_AND_DROP"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_HASHCHANGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_HASHCHANGE = CreativeAssetMetadata_DetectedFeaturesItem "HASH_CHANGE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_History :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_History = CreativeAssetMetadata_DetectedFeaturesItem "HISTORY"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Audio :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Audio = CreativeAssetMetadata_DetectedFeaturesItem "AUDIO"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Video :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Video = CreativeAssetMetadata_DetectedFeaturesItem "VIDEO"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INDEXEDDB :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INDEXEDDB = CreativeAssetMetadata_DetectedFeaturesItem "INDEXED_DB"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRAUTOCOMPLETE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRAUTOCOMPLETE = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_AUTOCOMPLETE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRAUTOFOCUS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRAUTOFOCUS = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_AUTOFOCUS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRLIST :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRLIST = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_LIST"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRPLACEHOLDER :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRPLACEHOLDER = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_PLACEHOLDER"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMAX :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMAX = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_MAX"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMIN :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMIN = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_MIN"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMULTIPLE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRMULTIPLE = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_MULTIPLE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRPATTERN :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRPATTERN = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_PATTERN"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRREQUIRED :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRREQUIRED = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_REQUIRED"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRSTEP :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTATTRSTEP = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_ATTR_STEP"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPESEARCH :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPESEARCH = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_SEARCH"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPETEL :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPETEL = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_TEL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEURL :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEURL = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_URL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEEMAIL :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEEMAIL = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_EMAIL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATETIME :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATETIME = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_DATETIME"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATE = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_DATE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEMONTH :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEMONTH = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_MONTH"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEWEEK :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEWEEK = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_WEEK"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPETIME :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPETIME = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_TIME"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATETIMELOCAL :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPEDATETIMELOCAL = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_DATETIME_LOCAL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPENUMBER :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPENUMBER = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_NUMBER"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPERANGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPERANGE = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_RANGE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPECOLOR :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INPUTTYPECOLOR = CreativeAssetMetadata_DetectedFeaturesItem "INPUT_TYPE_COLOR"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_LOCALSTORAGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_LOCALSTORAGE = CreativeAssetMetadata_DetectedFeaturesItem "LOCAL_STORAGE"
 
--- |
+-- | POST_MESSAGE always required due to html5 implementation.
 pattern CreativeAssetMetadata_DetectedFeaturesItem_POSTMESSAGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_POSTMESSAGE = CreativeAssetMetadata_DetectedFeaturesItem "POST_MESSAGE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SESSIONSTORAGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SESSIONSTORAGE = CreativeAssetMetadata_DetectedFeaturesItem "SESSION_STORAGE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBSOCKETS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBSOCKETS = CreativeAssetMetadata_DetectedFeaturesItem "WEB_SOCKETS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBSQLDATABASE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBSQLDATABASE = CreativeAssetMetadata_DetectedFeaturesItem "WEB_SQL_DATABASE"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBWORKERS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_WEBWORKERS = CreativeAssetMetadata_DetectedFeaturesItem "WEB_WORKERS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_GEOLOCATION :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_GEOLOCATION = CreativeAssetMetadata_DetectedFeaturesItem "GEO_LOCATION"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INLINESVG :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_INLINESVG = CreativeAssetMetadata_DetectedFeaturesItem "INLINE_SVG"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Smil :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Smil = CreativeAssetMetadata_DetectedFeaturesItem "SMIL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGHREF :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGHREF = CreativeAssetMetadata_DetectedFeaturesItem "SVG_HREF"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGCLIPPATHS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGCLIPPATHS = CreativeAssetMetadata_DetectedFeaturesItem "SVG_CLIP_PATHS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Touch :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Touch = CreativeAssetMetadata_DetectedFeaturesItem "TOUCH"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Webgl :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_Webgl = CreativeAssetMetadata_DetectedFeaturesItem "WEBGL"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGFILTERS :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGFILTERS = CreativeAssetMetadata_DetectedFeaturesItem "SVG_FILTERS"
 
--- |
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGFEIMAGE :: CreativeAssetMetadata_DetectedFeaturesItem
 pattern CreativeAssetMetadata_DetectedFeaturesItem_SVGFEIMAGE = CreativeAssetMetadata_DetectedFeaturesItem "SVG_FE_IMAGE"
 
@@ -5220,107 +4902,107 @@ newtype CreativeAssetMetadata_WarnedValidationRulesItem = CreativeAssetMetadata_
       Core.FromJSONKey
     )
 
--- |
+-- | Click tag initialization detected but not at the top level of the primary html file.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGNONTOPLEVEL :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGNONTOPLEVEL = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_NON_TOP_LEVEL"
 
--- |
+-- | No click tag detected.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGMISSING :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGMISSING = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_MISSING"
 
--- |
+-- | More than one click tag detected.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGMORETHANONE :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGMORETHANONE = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_MORE_THAN_ONE"
 
--- |
+-- | Click tag invalid (failed url validation).
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_INVALID"
 
--- |
+-- | Orphaned asset not referenced.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ORPHANEDASSET :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ORPHANEDASSET = CreativeAssetMetadata_WarnedValidationRulesItem "ORPHANED_ASSET"
 
--- |
+-- | Primary html file missing.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_PRIMARYHTMLMISSING :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_PRIMARYHTMLMISSING = CreativeAssetMetadata_WarnedValidationRulesItem "PRIMARY_HTML_MISSING"
 
--- |
+-- | Reference to a third-party resource.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_EXTERNALFILEREFERENCED :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_EXTERNALFILEREFERENCED = CreativeAssetMetadata_WarnedValidationRulesItem "EXTERNAL_FILE_REFERENCED"
 
--- |
+-- | Reference to INAPP MRAID feature.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MRAIDREFERENCED :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MRAIDREFERENCED = CreativeAssetMetadata_WarnedValidationRulesItem "MRAID_REFERENCED"
 
--- |
+-- | Reference to INAPP ADMOB feature.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ADMOBREFERENCED :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ADMOBREFERENCED = CreativeAssetMetadata_WarnedValidationRulesItem "ADMOB_REFERENCED"
 
--- |
+-- | Invalid file type referenced.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_FILETYPEINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_FILETYPEINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "FILE_TYPE_INVALID"
 
--- |
+-- | Invalid zip passed in
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ZIPINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ZIPINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "ZIP_INVALID"
 
--- |
+-- | A relative file was linked to that wasn\'t included in zip.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_LINKEDFILENOTFOUND :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_LINKEDFILENOTFOUND = CreativeAssetMetadata_WarnedValidationRulesItem "LINKED_FILE_NOT_FOUND"
 
--- |
+-- | Max flash version at 11.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MAX_FLASH_VERSION_11 :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MAX_FLASH_VERSION_11 = CreativeAssetMetadata_WarnedValidationRulesItem "MAX_FLASH_VERSION_11"
 
--- |
+-- | Whether the asset uses secure urls or not.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_NOTSSLCOMPLIANT :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_NOTSSLCOMPLIANT = CreativeAssetMetadata_WarnedValidationRulesItem "NOT_SSL_COMPLIANT"
 
--- |
+-- | File detail empty.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_FILEDETAILEMPTY :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_FILEDETAILEMPTY = CreativeAssetMetadata_WarnedValidationRulesItem "FILE_DETAIL_EMPTY"
 
--- |
+-- | Asset is not valid and could not be processed.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ASSETINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ASSETINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "ASSET_INVALID"
 
--- |
+-- | GWD properties are invalid.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_GWDPROPERTIESINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_GWDPROPERTIESINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "GWD_PROPERTIES_INVALID"
 
--- |
+-- | Unsupported Enabler methods in DCM.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ENABLERUNSUPPORTEDMETHODDCM :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ENABLERUNSUPPORTEDMETHODDCM = CreativeAssetMetadata_WarnedValidationRulesItem "ENABLER_UNSUPPORTED_METHOD_DCM"
 
--- |
+-- | Asset ad format is unsupported in DCM.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ASSETFORMATUNSUPPORTEDDCM :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_ASSETFORMATUNSUPPORTEDDCM = CreativeAssetMetadata_WarnedValidationRulesItem "ASSET_FORMAT_UNSUPPORTED_DCM"
 
--- |
+-- | Component is unsupported in DCM.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_COMPONENTUNSUPPORTEDDCM :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_COMPONENTUNSUPPORTEDDCM = CreativeAssetMetadata_WarnedValidationRulesItem "COMPONENT_UNSUPPORTED_DCM"
 
--- |
+-- | Html5 feature is unsupported.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_HTML5FEATUREUNSUPPORTED :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_HTML5FEATUREUNSUPPORTED = CreativeAssetMetadata_WarnedValidationRulesItem "HTML5_FEATURE_UNSUPPORTED"
 
--- |
+-- | Click tag defined in GWD asset. GWD-published creatives should use exit events instead of defining var clickTag. Defined var clickTags are a symptom of an unsupported workflow, and an error should be thrown.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINGWD :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINGWD = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_IN_GWD"
 
--- |
+-- | Whether the asset has hard coded click tag url(s).
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGHARDCODED :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGHARDCODED = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_HARD_CODED"
 
--- |
+-- | Whether an SVG block could not be parsed.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_SVGINVALID :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_SVGINVALID = CreativeAssetMetadata_WarnedValidationRulesItem "SVG_INVALID"
 
--- |
+-- | Click tag defined in rich media asset. Rich media creatives should use exit events instead of defining var clickTag. Defined var clickTags are a symptom of an unsupported workflow, and an error should be thrown.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_CLICKTAGINRICHMEDIA = CreativeAssetMetadata_WarnedValidationRulesItem "CLICK_TAG_IN_RICH_MEDIA"
 
--- |
+-- | Rich media primary asset is missing the Enabler reference.
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE :: CreativeAssetMetadata_WarnedValidationRulesItem
 pattern CreativeAssetMetadata_WarnedValidationRulesItem_MISSINGENABLERREFERENCE = CreativeAssetMetadata_WarnedValidationRulesItem "MISSING_ENABLER_REFERENCE"
 
@@ -5367,15 +5049,12 @@ newtype CreativeCustomEvent_AdvertiserCustomEventType = CreativeCustomEvent_Adve
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTTIMER :: CreativeCustomEvent_AdvertiserCustomEventType
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTTIMER = CreativeCustomEvent_AdvertiserCustomEventType "ADVERTISER_EVENT_TIMER"
 
--- |
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTEXIT :: CreativeCustomEvent_AdvertiserCustomEventType
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTEXIT = CreativeCustomEvent_AdvertiserCustomEventType "ADVERTISER_EVENT_EXIT"
 
--- |
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTCOUNTER :: CreativeCustomEvent_AdvertiserCustomEventType
 pattern CreativeCustomEvent_AdvertiserCustomEventType_ADVERTISEREVENTCOUNTER = CreativeCustomEvent_AdvertiserCustomEventType "ADVERTISER_EVENT_COUNTER"
 
@@ -5399,19 +5078,19 @@ newtype CreativeCustomEvent_ArtworkType = CreativeCustomEvent_ArtworkType {fromC
       Core.FromJSONKey
     )
 
--- |
+-- | The creative is a Flash creative.
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEFLASH :: CreativeCustomEvent_ArtworkType
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEFLASH = CreativeCustomEvent_ArtworkType "ARTWORK_TYPE_FLASH"
 
--- |
+-- | The creative is HTML5.
 pattern CreativeCustomEvent_ArtworkType_ARTWORK_TYPE_HTML5 :: CreativeCustomEvent_ArtworkType
 pattern CreativeCustomEvent_ArtworkType_ARTWORK_TYPE_HTML5 = CreativeCustomEvent_ArtworkType "ARTWORK_TYPE_HTML5"
 
--- |
+-- | The creative is HTML5 if available, Flash otherwise.
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEMIXED :: CreativeCustomEvent_ArtworkType
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEMIXED = CreativeCustomEvent_ArtworkType "ARTWORK_TYPE_MIXED"
 
--- |
+-- | The creative is Image.
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEIMAGE :: CreativeCustomEvent_ArtworkType
 pattern CreativeCustomEvent_ArtworkType_ARTWORKTYPEIMAGE = CreativeCustomEvent_ArtworkType "ARTWORK_TYPE_IMAGE"
 
@@ -5436,23 +5115,23 @@ newtype CreativeCustomEvent_TargetType = CreativeCustomEvent_TargetType {fromCre
       Core.FromJSONKey
     )
 
--- |
+-- | New tab
 pattern CreativeCustomEvent_TargetType_TARGETBLANK :: CreativeCustomEvent_TargetType
 pattern CreativeCustomEvent_TargetType_TARGETBLANK = CreativeCustomEvent_TargetType "TARGET_BLANK"
 
--- |
+-- | Current tab
 pattern CreativeCustomEvent_TargetType_TARGETTOP :: CreativeCustomEvent_TargetType
 pattern CreativeCustomEvent_TargetType_TARGETTOP = CreativeCustomEvent_TargetType "TARGET_TOP"
 
--- |
+-- | Same frame
 pattern CreativeCustomEvent_TargetType_TARGETSELF :: CreativeCustomEvent_TargetType
 pattern CreativeCustomEvent_TargetType_TARGETSELF = CreativeCustomEvent_TargetType "TARGET_SELF"
 
--- |
+-- | Parent frame
 pattern CreativeCustomEvent_TargetType_TARGETPARENT :: CreativeCustomEvent_TargetType
 pattern CreativeCustomEvent_TargetType_TARGETPARENT = CreativeCustomEvent_TargetType "TARGET_PARENT"
 
--- |
+-- | New window with properties specified in window_properties
 pattern CreativeCustomEvent_TargetType_TARGETPOPUP :: CreativeCustomEvent_TargetType
 pattern CreativeCustomEvent_TargetType_TARGETPOPUP = CreativeCustomEvent_TargetType "TARGET_POPUP"
 
@@ -5478,11 +5157,9 @@ newtype CreativeGroupAssignment_CreativeGroupNumber = CreativeGroupAssignment_Cr
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeGroupAssignment_CreativeGroupNumber_CREATIVEGROUPONE :: CreativeGroupAssignment_CreativeGroupNumber
 pattern CreativeGroupAssignment_CreativeGroupNumber_CREATIVEGROUPONE = CreativeGroupAssignment_CreativeGroupNumber "CREATIVE_GROUP_ONE"
 
--- |
 pattern CreativeGroupAssignment_CreativeGroupNumber_CREATIVEGROUPTWO :: CreativeGroupAssignment_CreativeGroupNumber
 pattern CreativeGroupAssignment_CreativeGroupNumber_CREATIVEGROUPTWO = CreativeGroupAssignment_CreativeGroupNumber "CREATIVE_GROUP_TWO"
 
@@ -5505,23 +5182,18 @@ newtype CreativeOptimizationConfiguration_OptimizationModel = CreativeOptimizati
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeOptimizationConfiguration_OptimizationModel_Click :: CreativeOptimizationConfiguration_OptimizationModel
 pattern CreativeOptimizationConfiguration_OptimizationModel_Click = CreativeOptimizationConfiguration_OptimizationModel "CLICK"
 
--- |
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTCLICK :: CreativeOptimizationConfiguration_OptimizationModel
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTCLICK = CreativeOptimizationConfiguration_OptimizationModel "POST_CLICK"
 
--- |
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTIMPRESSION :: CreativeOptimizationConfiguration_OptimizationModel
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTIMPRESSION = CreativeOptimizationConfiguration_OptimizationModel "POST_IMPRESSION"
 
--- |
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTCLICKANDIMPRESSION :: CreativeOptimizationConfiguration_OptimizationModel
 pattern CreativeOptimizationConfiguration_OptimizationModel_POSTCLICKANDIMPRESSION = CreativeOptimizationConfiguration_OptimizationModel "POST_CLICK_AND_IMPRESSION"
 
--- |
 pattern CreativeOptimizationConfiguration_OptimizationModel_VIDEOCOMPLETION :: CreativeOptimizationConfiguration_OptimizationModel
 pattern CreativeOptimizationConfiguration_OptimizationModel_VIDEOCOMPLETION = CreativeOptimizationConfiguration_OptimizationModel "VIDEO_COMPLETION"
 
@@ -5547,11 +5219,11 @@ newtype CreativeRotation_Type = CreativeRotation_Type {fromCreativeRotation_Type
       Core.FromJSONKey
     )
 
--- |
+-- | The weights of each creative in the rotation should be sequential starting at 1. The user may adjust the order.
 pattern CreativeRotation_Type_CREATIVEROTATIONTYPESEQUENTIAL :: CreativeRotation_Type
 pattern CreativeRotation_Type_CREATIVEROTATIONTYPESEQUENTIAL = CreativeRotation_Type "CREATIVE_ROTATION_TYPE_SEQUENTIAL"
 
--- |
+-- | The weights are calculated according to the ad\'s CreativeRoationWeightStrategy.
 pattern CreativeRotation_Type_CREATIVEROTATIONTYPERANDOM :: CreativeRotation_Type
 pattern CreativeRotation_Type_CREATIVEROTATIONTYPERANDOM = CreativeRotation_Type "CREATIVE_ROTATION_TYPE_RANDOM"
 
@@ -5574,19 +5246,19 @@ newtype CreativeRotation_WeightCalculationStrategy = CreativeRotation_WeightCalc
       Core.FromJSONKey
     )
 
--- |
+-- | The creative weights should all be equal to 1. This is the default value for all ads with a rotation type of Random.
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYEQUAL :: CreativeRotation_WeightCalculationStrategy
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYEQUAL = CreativeRotation_WeightCalculationStrategy "WEIGHT_STRATEGY_EQUAL"
 
--- |
+-- | The creative weights can be any user provided positive integer.
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYCUSTOM :: CreativeRotation_WeightCalculationStrategy
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYCUSTOM = CreativeRotation_WeightCalculationStrategy "WEIGHT_STRATEGY_CUSTOM"
 
--- |
+-- | The weights will be automatically calculated giving preference to the creative that has the highest CTR. The CTR for campaigns that are optimized for clicks = clicks\/impressions. The CTR for campaigns that are optimized for view-through or click through is sum(activities + floodlight weight)\/impressions.
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYHIGHESTCTR :: CreativeRotation_WeightCalculationStrategy
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYHIGHESTCTR = CreativeRotation_WeightCalculationStrategy "WEIGHT_STRATEGY_HIGHEST_CTR"
 
--- |
+-- | The creative weights will be automatically calculated using a formula that could not possibly be explained in these comments. The value will be within some predetermined range (probably 0 - 1,000,000).
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYOPTIMIZED :: CreativeRotation_WeightCalculationStrategy
 pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYOPTIMIZED = CreativeRotation_WeightCalculationStrategy "WEIGHT_STRATEGY_OPTIMIZED"
 
@@ -5598,7 +5270,7 @@ pattern CreativeRotation_WeightCalculationStrategy_WEIGHTSTRATEGYOPTIMIZED = Cre
   CreativeRotation_WeightCalculationStrategy
   #-}
 
--- | The type of custom floodlight variable to supply a value for. These map to the \"u[1-20]=\" in the tags.
+-- | The type of custom floodlight variable to supply a value for. These map to the \"u[1-100]=\" in the tags.
 newtype CustomFloodlightVariable_Type = CustomFloodlightVariable_Type {fromCustomFloodlightVariable_Type :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -5611,403 +5283,303 @@ newtype CustomFloodlightVariable_Type = CustomFloodlightVariable_Type {fromCusto
       Core.FromJSONKey
     )
 
--- |
 pattern CustomFloodlightVariable_Type_U1 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U1 = CustomFloodlightVariable_Type "U1"
 
--- |
 pattern CustomFloodlightVariable_Type_U2 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U2 = CustomFloodlightVariable_Type "U2"
 
--- |
 pattern CustomFloodlightVariable_Type_U3 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U3 = CustomFloodlightVariable_Type "U3"
 
--- |
 pattern CustomFloodlightVariable_Type_U4 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U4 = CustomFloodlightVariable_Type "U4"
 
--- |
 pattern CustomFloodlightVariable_Type_U5 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U5 = CustomFloodlightVariable_Type "U5"
 
--- |
 pattern CustomFloodlightVariable_Type_U6 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U6 = CustomFloodlightVariable_Type "U6"
 
--- |
 pattern CustomFloodlightVariable_Type_U7 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U7 = CustomFloodlightVariable_Type "U7"
 
--- |
 pattern CustomFloodlightVariable_Type_U8 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U8 = CustomFloodlightVariable_Type "U8"
 
--- |
 pattern CustomFloodlightVariable_Type_U9 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U9 = CustomFloodlightVariable_Type "U9"
 
--- |
 pattern CustomFloodlightVariable_Type_U10 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U10 = CustomFloodlightVariable_Type "U10"
 
--- |
 pattern CustomFloodlightVariable_Type_U11 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U11 = CustomFloodlightVariable_Type "U11"
 
--- |
 pattern CustomFloodlightVariable_Type_U12 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U12 = CustomFloodlightVariable_Type "U12"
 
--- |
 pattern CustomFloodlightVariable_Type_U13 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U13 = CustomFloodlightVariable_Type "U13"
 
--- |
 pattern CustomFloodlightVariable_Type_U14 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U14 = CustomFloodlightVariable_Type "U14"
 
--- |
 pattern CustomFloodlightVariable_Type_U15 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U15 = CustomFloodlightVariable_Type "U15"
 
--- |
 pattern CustomFloodlightVariable_Type_U16 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U16 = CustomFloodlightVariable_Type "U16"
 
--- |
 pattern CustomFloodlightVariable_Type_U17 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U17 = CustomFloodlightVariable_Type "U17"
 
--- |
 pattern CustomFloodlightVariable_Type_U18 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U18 = CustomFloodlightVariable_Type "U18"
 
--- |
 pattern CustomFloodlightVariable_Type_U19 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U19 = CustomFloodlightVariable_Type "U19"
 
--- |
 pattern CustomFloodlightVariable_Type_U20 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U20 = CustomFloodlightVariable_Type "U20"
 
--- |
 pattern CustomFloodlightVariable_Type_U21 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U21 = CustomFloodlightVariable_Type "U21"
 
--- |
 pattern CustomFloodlightVariable_Type_U22 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U22 = CustomFloodlightVariable_Type "U22"
 
--- |
 pattern CustomFloodlightVariable_Type_U23 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U23 = CustomFloodlightVariable_Type "U23"
 
--- |
 pattern CustomFloodlightVariable_Type_U24 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U24 = CustomFloodlightVariable_Type "U24"
 
--- |
 pattern CustomFloodlightVariable_Type_U25 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U25 = CustomFloodlightVariable_Type "U25"
 
--- |
 pattern CustomFloodlightVariable_Type_U26 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U26 = CustomFloodlightVariable_Type "U26"
 
--- |
 pattern CustomFloodlightVariable_Type_U27 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U27 = CustomFloodlightVariable_Type "U27"
 
--- |
 pattern CustomFloodlightVariable_Type_U28 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U28 = CustomFloodlightVariable_Type "U28"
 
--- |
 pattern CustomFloodlightVariable_Type_U29 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U29 = CustomFloodlightVariable_Type "U29"
 
--- |
 pattern CustomFloodlightVariable_Type_U30 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U30 = CustomFloodlightVariable_Type "U30"
 
--- |
 pattern CustomFloodlightVariable_Type_U31 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U31 = CustomFloodlightVariable_Type "U31"
 
--- |
 pattern CustomFloodlightVariable_Type_U32 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U32 = CustomFloodlightVariable_Type "U32"
 
--- |
 pattern CustomFloodlightVariable_Type_U33 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U33 = CustomFloodlightVariable_Type "U33"
 
--- |
 pattern CustomFloodlightVariable_Type_U34 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U34 = CustomFloodlightVariable_Type "U34"
 
--- |
 pattern CustomFloodlightVariable_Type_U35 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U35 = CustomFloodlightVariable_Type "U35"
 
--- |
 pattern CustomFloodlightVariable_Type_U36 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U36 = CustomFloodlightVariable_Type "U36"
 
--- |
 pattern CustomFloodlightVariable_Type_U37 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U37 = CustomFloodlightVariable_Type "U37"
 
--- |
 pattern CustomFloodlightVariable_Type_U38 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U38 = CustomFloodlightVariable_Type "U38"
 
--- |
 pattern CustomFloodlightVariable_Type_U39 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U39 = CustomFloodlightVariable_Type "U39"
 
--- |
 pattern CustomFloodlightVariable_Type_U40 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U40 = CustomFloodlightVariable_Type "U40"
 
--- |
 pattern CustomFloodlightVariable_Type_U41 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U41 = CustomFloodlightVariable_Type "U41"
 
--- |
 pattern CustomFloodlightVariable_Type_U42 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U42 = CustomFloodlightVariable_Type "U42"
 
--- |
 pattern CustomFloodlightVariable_Type_U43 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U43 = CustomFloodlightVariable_Type "U43"
 
--- |
 pattern CustomFloodlightVariable_Type_U44 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U44 = CustomFloodlightVariable_Type "U44"
 
--- |
 pattern CustomFloodlightVariable_Type_U45 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U45 = CustomFloodlightVariable_Type "U45"
 
--- |
 pattern CustomFloodlightVariable_Type_U46 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U46 = CustomFloodlightVariable_Type "U46"
 
--- |
 pattern CustomFloodlightVariable_Type_U47 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U47 = CustomFloodlightVariable_Type "U47"
 
--- |
 pattern CustomFloodlightVariable_Type_U48 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U48 = CustomFloodlightVariable_Type "U48"
 
--- |
 pattern CustomFloodlightVariable_Type_U49 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U49 = CustomFloodlightVariable_Type "U49"
 
--- |
 pattern CustomFloodlightVariable_Type_U50 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U50 = CustomFloodlightVariable_Type "U50"
 
--- |
 pattern CustomFloodlightVariable_Type_U51 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U51 = CustomFloodlightVariable_Type "U51"
 
--- |
 pattern CustomFloodlightVariable_Type_U52 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U52 = CustomFloodlightVariable_Type "U52"
 
--- |
 pattern CustomFloodlightVariable_Type_U53 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U53 = CustomFloodlightVariable_Type "U53"
 
--- |
 pattern CustomFloodlightVariable_Type_U54 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U54 = CustomFloodlightVariable_Type "U54"
 
--- |
 pattern CustomFloodlightVariable_Type_U55 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U55 = CustomFloodlightVariable_Type "U55"
 
--- |
 pattern CustomFloodlightVariable_Type_U56 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U56 = CustomFloodlightVariable_Type "U56"
 
--- |
 pattern CustomFloodlightVariable_Type_U57 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U57 = CustomFloodlightVariable_Type "U57"
 
--- |
 pattern CustomFloodlightVariable_Type_U58 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U58 = CustomFloodlightVariable_Type "U58"
 
--- |
 pattern CustomFloodlightVariable_Type_U59 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U59 = CustomFloodlightVariable_Type "U59"
 
--- |
 pattern CustomFloodlightVariable_Type_U60 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U60 = CustomFloodlightVariable_Type "U60"
 
--- |
 pattern CustomFloodlightVariable_Type_U61 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U61 = CustomFloodlightVariable_Type "U61"
 
--- |
 pattern CustomFloodlightVariable_Type_U62 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U62 = CustomFloodlightVariable_Type "U62"
 
--- |
 pattern CustomFloodlightVariable_Type_U63 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U63 = CustomFloodlightVariable_Type "U63"
 
--- |
 pattern CustomFloodlightVariable_Type_U64 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U64 = CustomFloodlightVariable_Type "U64"
 
--- |
 pattern CustomFloodlightVariable_Type_U65 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U65 = CustomFloodlightVariable_Type "U65"
 
--- |
 pattern CustomFloodlightVariable_Type_U66 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U66 = CustomFloodlightVariable_Type "U66"
 
--- |
 pattern CustomFloodlightVariable_Type_U67 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U67 = CustomFloodlightVariable_Type "U67"
 
--- |
 pattern CustomFloodlightVariable_Type_U68 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U68 = CustomFloodlightVariable_Type "U68"
 
--- |
 pattern CustomFloodlightVariable_Type_U69 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U69 = CustomFloodlightVariable_Type "U69"
 
--- |
 pattern CustomFloodlightVariable_Type_U70 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U70 = CustomFloodlightVariable_Type "U70"
 
--- |
 pattern CustomFloodlightVariable_Type_U71 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U71 = CustomFloodlightVariable_Type "U71"
 
--- |
 pattern CustomFloodlightVariable_Type_U72 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U72 = CustomFloodlightVariable_Type "U72"
 
--- |
 pattern CustomFloodlightVariable_Type_U73 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U73 = CustomFloodlightVariable_Type "U73"
 
--- |
 pattern CustomFloodlightVariable_Type_U74 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U74 = CustomFloodlightVariable_Type "U74"
 
--- |
 pattern CustomFloodlightVariable_Type_U75 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U75 = CustomFloodlightVariable_Type "U75"
 
--- |
 pattern CustomFloodlightVariable_Type_U76 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U76 = CustomFloodlightVariable_Type "U76"
 
--- |
 pattern CustomFloodlightVariable_Type_U77 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U77 = CustomFloodlightVariable_Type "U77"
 
--- |
 pattern CustomFloodlightVariable_Type_U78 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U78 = CustomFloodlightVariable_Type "U78"
 
--- |
 pattern CustomFloodlightVariable_Type_U79 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U79 = CustomFloodlightVariable_Type "U79"
 
--- |
 pattern CustomFloodlightVariable_Type_U80 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U80 = CustomFloodlightVariable_Type "U80"
 
--- |
 pattern CustomFloodlightVariable_Type_U81 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U81 = CustomFloodlightVariable_Type "U81"
 
--- |
 pattern CustomFloodlightVariable_Type_U82 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U82 = CustomFloodlightVariable_Type "U82"
 
--- |
 pattern CustomFloodlightVariable_Type_U83 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U83 = CustomFloodlightVariable_Type "U83"
 
--- |
 pattern CustomFloodlightVariable_Type_U84 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U84 = CustomFloodlightVariable_Type "U84"
 
--- |
 pattern CustomFloodlightVariable_Type_U85 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U85 = CustomFloodlightVariable_Type "U85"
 
--- |
 pattern CustomFloodlightVariable_Type_U86 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U86 = CustomFloodlightVariable_Type "U86"
 
--- |
 pattern CustomFloodlightVariable_Type_U87 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U87 = CustomFloodlightVariable_Type "U87"
 
--- |
 pattern CustomFloodlightVariable_Type_U88 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U88 = CustomFloodlightVariable_Type "U88"
 
--- |
 pattern CustomFloodlightVariable_Type_U89 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U89 = CustomFloodlightVariable_Type "U89"
 
--- |
 pattern CustomFloodlightVariable_Type_U90 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U90 = CustomFloodlightVariable_Type "U90"
 
--- |
 pattern CustomFloodlightVariable_Type_U91 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U91 = CustomFloodlightVariable_Type "U91"
 
--- |
 pattern CustomFloodlightVariable_Type_U92 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U92 = CustomFloodlightVariable_Type "U92"
 
--- |
 pattern CustomFloodlightVariable_Type_U93 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U93 = CustomFloodlightVariable_Type "U93"
 
--- |
 pattern CustomFloodlightVariable_Type_U94 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U94 = CustomFloodlightVariable_Type "U94"
 
--- |
 pattern CustomFloodlightVariable_Type_U95 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U95 = CustomFloodlightVariable_Type "U95"
 
--- |
 pattern CustomFloodlightVariable_Type_U96 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U96 = CustomFloodlightVariable_Type "U96"
 
--- |
 pattern CustomFloodlightVariable_Type_U97 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U97 = CustomFloodlightVariable_Type "U97"
 
--- |
 pattern CustomFloodlightVariable_Type_U98 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U98 = CustomFloodlightVariable_Type "U98"
 
--- |
 pattern CustomFloodlightVariable_Type_U99 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U99 = CustomFloodlightVariable_Type "U99"
 
--- |
 pattern CustomFloodlightVariable_Type_U100 :: CustomFloodlightVariable_Type
 pattern CustomFloodlightVariable_Type_U100 = CustomFloodlightVariable_Type "U100"
 
@@ -6128,71 +5700,54 @@ newtype DateRange_RelativeDateRange = DateRange_RelativeDateRange {fromDateRange
       Core.FromJSONKey
     )
 
--- |
 pattern DateRange_RelativeDateRange_Today :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_Today = DateRange_RelativeDateRange "TODAY"
 
--- |
 pattern DateRange_RelativeDateRange_Yesterday :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_Yesterday = DateRange_RelativeDateRange "YESTERDAY"
 
--- |
 pattern DateRange_RelativeDateRange_WEEKTODATE :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_WEEKTODATE = DateRange_RelativeDateRange "WEEK_TO_DATE"
 
--- |
 pattern DateRange_RelativeDateRange_MONTHTODATE :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_MONTHTODATE = DateRange_RelativeDateRange "MONTH_TO_DATE"
 
--- |
 pattern DateRange_RelativeDateRange_QUARTERTODATE :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_QUARTERTODATE = DateRange_RelativeDateRange "QUARTER_TO_DATE"
 
--- |
 pattern DateRange_RelativeDateRange_YEARTODATE :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_YEARTODATE = DateRange_RelativeDateRange "YEAR_TO_DATE"
 
--- |
 pattern DateRange_RelativeDateRange_PREVIOUSWEEK :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_PREVIOUSWEEK = DateRange_RelativeDateRange "PREVIOUS_WEEK"
 
--- |
 pattern DateRange_RelativeDateRange_PREVIOUSMONTH :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_PREVIOUSMONTH = DateRange_RelativeDateRange "PREVIOUS_MONTH"
 
--- |
 pattern DateRange_RelativeDateRange_PREVIOUSQUARTER :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_PREVIOUSQUARTER = DateRange_RelativeDateRange "PREVIOUS_QUARTER"
 
--- |
 pattern DateRange_RelativeDateRange_PREVIOUSYEAR :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_PREVIOUSYEAR = DateRange_RelativeDateRange "PREVIOUS_YEAR"
 
--- |
 pattern DateRange_RelativeDateRange_LAST7DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST7DAYS = DateRange_RelativeDateRange "LAST_7_DAYS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST30DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST30DAYS = DateRange_RelativeDateRange "LAST_30_DAYS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST90DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST90DAYS = DateRange_RelativeDateRange "LAST_90_DAYS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST365DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST365DAYS = DateRange_RelativeDateRange "LAST_365_DAYS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST24MONTHS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST24MONTHS = DateRange_RelativeDateRange "LAST_24_MONTHS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST14DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST14DAYS = DateRange_RelativeDateRange "LAST_14_DAYS"
 
--- |
 pattern DateRange_RelativeDateRange_LAST60DAYS :: DateRange_RelativeDateRange
 pattern DateRange_RelativeDateRange_LAST60DAYS = DateRange_RelativeDateRange "LAST_60_DAYS"
 
@@ -6229,42 +5784,35 @@ newtype DayPartTargeting_DaysOfWeekItem = DayPartTargeting_DaysOfWeekItem {fromD
       Core.FromJSONKey
     )
 
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Monday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Monday = DayPartTargeting_DaysOfWeekItem "MONDAY"
-
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Tuesday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Tuesday = DayPartTargeting_DaysOfWeekItem "TUESDAY"
-
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Wednesday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Wednesday = DayPartTargeting_DaysOfWeekItem "WEDNESDAY"
-
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Thursday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Thursday = DayPartTargeting_DaysOfWeekItem "THURSDAY"
-
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Friday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Friday = DayPartTargeting_DaysOfWeekItem "FRIDAY"
-
--- |
-pattern DayPartTargeting_DaysOfWeekItem_Saturday :: DayPartTargeting_DaysOfWeekItem
-pattern DayPartTargeting_DaysOfWeekItem_Saturday = DayPartTargeting_DaysOfWeekItem "SATURDAY"
-
--- |
 pattern DayPartTargeting_DaysOfWeekItem_Sunday :: DayPartTargeting_DaysOfWeekItem
 pattern DayPartTargeting_DaysOfWeekItem_Sunday = DayPartTargeting_DaysOfWeekItem "SUNDAY"
 
+pattern DayPartTargeting_DaysOfWeekItem_Monday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Monday = DayPartTargeting_DaysOfWeekItem "MONDAY"
+
+pattern DayPartTargeting_DaysOfWeekItem_Tuesday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Tuesday = DayPartTargeting_DaysOfWeekItem "TUESDAY"
+
+pattern DayPartTargeting_DaysOfWeekItem_Wednesday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Wednesday = DayPartTargeting_DaysOfWeekItem "WEDNESDAY"
+
+pattern DayPartTargeting_DaysOfWeekItem_Thursday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Thursday = DayPartTargeting_DaysOfWeekItem "THURSDAY"
+
+pattern DayPartTargeting_DaysOfWeekItem_Friday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Friday = DayPartTargeting_DaysOfWeekItem "FRIDAY"
+
+pattern DayPartTargeting_DaysOfWeekItem_Saturday :: DayPartTargeting_DaysOfWeekItem
+pattern DayPartTargeting_DaysOfWeekItem_Saturday = DayPartTargeting_DaysOfWeekItem "SATURDAY"
+
 {-# COMPLETE
+  DayPartTargeting_DaysOfWeekItem_Sunday,
   DayPartTargeting_DaysOfWeekItem_Monday,
   DayPartTargeting_DaysOfWeekItem_Tuesday,
   DayPartTargeting_DaysOfWeekItem_Wednesday,
   DayPartTargeting_DaysOfWeekItem_Thursday,
   DayPartTargeting_DaysOfWeekItem_Friday,
   DayPartTargeting_DaysOfWeekItem_Saturday,
-  DayPartTargeting_DaysOfWeekItem_Sunday,
   DayPartTargeting_DaysOfWeekItem
   #-}
 
@@ -6281,67 +5829,51 @@ newtype DeliverySchedule_Priority = DeliverySchedule_Priority {fromDeliverySched
       Core.FromJSONKey
     )
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_01 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_01 = DeliverySchedule_Priority "AD_PRIORITY_01"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_02 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_02 = DeliverySchedule_Priority "AD_PRIORITY_02"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_03 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_03 = DeliverySchedule_Priority "AD_PRIORITY_03"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_04 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_04 = DeliverySchedule_Priority "AD_PRIORITY_04"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_05 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_05 = DeliverySchedule_Priority "AD_PRIORITY_05"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_06 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_06 = DeliverySchedule_Priority "AD_PRIORITY_06"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_07 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_07 = DeliverySchedule_Priority "AD_PRIORITY_07"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_08 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_08 = DeliverySchedule_Priority "AD_PRIORITY_08"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_09 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_09 = DeliverySchedule_Priority "AD_PRIORITY_09"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_10 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_10 = DeliverySchedule_Priority "AD_PRIORITY_10"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_11 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_11 = DeliverySchedule_Priority "AD_PRIORITY_11"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_12 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_12 = DeliverySchedule_Priority "AD_PRIORITY_12"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_13 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_13 = DeliverySchedule_Priority "AD_PRIORITY_13"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_14 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_14 = DeliverySchedule_Priority "AD_PRIORITY_14"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_15 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_15 = DeliverySchedule_Priority "AD_PRIORITY_15"
 
--- |
 pattern DeliverySchedule_Priority_AD_PRIORITY_16 :: DeliverySchedule_Priority
 pattern DeliverySchedule_Priority_AD_PRIORITY_16 = DeliverySchedule_Priority "AD_PRIORITY_16"
 
@@ -6378,19 +5910,15 @@ newtype DimensionValue_MatchType = DimensionValue_MatchType {fromDimensionValue_
       Core.FromJSONKey
     )
 
--- |
 pattern DimensionValue_MatchType_Exact :: DimensionValue_MatchType
 pattern DimensionValue_MatchType_Exact = DimensionValue_MatchType "EXACT"
 
--- |
 pattern DimensionValue_MatchType_BEGINSWITH :: DimensionValue_MatchType
 pattern DimensionValue_MatchType_BEGINSWITH = DimensionValue_MatchType "BEGINS_WITH"
 
--- |
 pattern DimensionValue_MatchType_Contains :: DimensionValue_MatchType
 pattern DimensionValue_MatchType_Contains = DimensionValue_MatchType "CONTAINS"
 
--- |
 pattern DimensionValue_MatchType_WILDCARDEXPRESSION :: DimensionValue_MatchType
 pattern DimensionValue_MatchType_WILDCARDEXPRESSION = DimensionValue_MatchType "WILDCARD_EXPRESSION"
 
@@ -6414,19 +5942,15 @@ newtype DirectorySite_InpageTagFormatsItem = DirectorySite_InpageTagFormatsItem 
       Core.FromJSONKey
     )
 
--- |
 pattern DirectorySite_InpageTagFormatsItem_Standard :: DirectorySite_InpageTagFormatsItem
 pattern DirectorySite_InpageTagFormatsItem_Standard = DirectorySite_InpageTagFormatsItem "STANDARD"
 
--- |
 pattern DirectorySite_InpageTagFormatsItem_IFRAMEJAVASCRIPTINPAGE :: DirectorySite_InpageTagFormatsItem
 pattern DirectorySite_InpageTagFormatsItem_IFRAMEJAVASCRIPTINPAGE = DirectorySite_InpageTagFormatsItem "IFRAME_JAVASCRIPT_INPAGE"
 
--- |
 pattern DirectorySite_InpageTagFormatsItem_INTERNALREDIRECTINPAGE :: DirectorySite_InpageTagFormatsItem
 pattern DirectorySite_InpageTagFormatsItem_INTERNALREDIRECTINPAGE = DirectorySite_InpageTagFormatsItem "INTERNAL_REDIRECT_INPAGE"
 
--- |
 pattern DirectorySite_InpageTagFormatsItem_JAVASCRIPTINPAGE :: DirectorySite_InpageTagFormatsItem
 pattern DirectorySite_InpageTagFormatsItem_JAVASCRIPTINPAGE = DirectorySite_InpageTagFormatsItem "JAVASCRIPT_INPAGE"
 
@@ -6450,15 +5974,12 @@ newtype DirectorySite_InterstitialTagFormatsItem = DirectorySite_InterstitialTag
       Core.FromJSONKey
     )
 
--- |
 pattern DirectorySite_InterstitialTagFormatsItem_IFRAMEJAVASCRIPTINTERSTITIAL :: DirectorySite_InterstitialTagFormatsItem
 pattern DirectorySite_InterstitialTagFormatsItem_IFRAMEJAVASCRIPTINTERSTITIAL = DirectorySite_InterstitialTagFormatsItem "IFRAME_JAVASCRIPT_INTERSTITIAL"
 
--- |
 pattern DirectorySite_InterstitialTagFormatsItem_INTERNALREDIRECTINTERSTITIAL :: DirectorySite_InterstitialTagFormatsItem
 pattern DirectorySite_InterstitialTagFormatsItem_INTERNALREDIRECTINTERSTITIAL = DirectorySite_InterstitialTagFormatsItem "INTERNAL_REDIRECT_INTERSTITIAL"
 
--- |
 pattern DirectorySite_InterstitialTagFormatsItem_JAVASCRIPTINTERSTITIAL :: DirectorySite_InterstitialTagFormatsItem
 pattern DirectorySite_InterstitialTagFormatsItem_JAVASCRIPTINTERSTITIAL = DirectorySite_InterstitialTagFormatsItem "JAVASCRIPT_INTERSTITIAL"
 
@@ -6482,19 +6003,15 @@ newtype DynamicTargetingKey_ObjectType = DynamicTargetingKey_ObjectType {fromDyn
       Core.FromJSONKey
     )
 
--- |
 pattern DynamicTargetingKey_ObjectType_OBJECTADVERTISER :: DynamicTargetingKey_ObjectType
 pattern DynamicTargetingKey_ObjectType_OBJECTADVERTISER = DynamicTargetingKey_ObjectType "OBJECT_ADVERTISER"
 
--- |
 pattern DynamicTargetingKey_ObjectType_OBJECTAD :: DynamicTargetingKey_ObjectType
 pattern DynamicTargetingKey_ObjectType_OBJECTAD = DynamicTargetingKey_ObjectType "OBJECT_AD"
 
--- |
 pattern DynamicTargetingKey_ObjectType_OBJECTCREATIVE :: DynamicTargetingKey_ObjectType
 pattern DynamicTargetingKey_ObjectType_OBJECTCREATIVE = DynamicTargetingKey_ObjectType "OBJECT_CREATIVE"
 
--- |
 pattern DynamicTargetingKey_ObjectType_OBJECTPLACEMENT :: DynamicTargetingKey_ObjectType
 pattern DynamicTargetingKey_ObjectType_OBJECTPLACEMENT = DynamicTargetingKey_ObjectType "OBJECT_PLACEMENT"
 
@@ -6519,31 +6036,24 @@ newtype EncryptionInfo_EncryptionEntityType = EncryptionInfo_EncryptionEntityTyp
       Core.FromJSONKey
     )
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_ENCRYPTIONENTITYTYPEUNKNOWN :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_ENCRYPTIONENTITYTYPEUNKNOWN = EncryptionInfo_EncryptionEntityType "ENCRYPTION_ENTITY_TYPE_UNKNOWN"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_DCMACCOUNT :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_DCMACCOUNT = EncryptionInfo_EncryptionEntityType "DCM_ACCOUNT"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_DCMADVERTISER :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_DCMADVERTISER = EncryptionInfo_EncryptionEntityType "DCM_ADVERTISER"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_DBMPARTNER :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_DBMPARTNER = EncryptionInfo_EncryptionEntityType "DBM_PARTNER"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_DBMADVERTISER :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_DBMADVERTISER = EncryptionInfo_EncryptionEntityType "DBM_ADVERTISER"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_ADWORDSCUSTOMER :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_ADWORDSCUSTOMER = EncryptionInfo_EncryptionEntityType "ADWORDS_CUSTOMER"
 
--- |
 pattern EncryptionInfo_EncryptionEntityType_DFPNETWORKCODE :: EncryptionInfo_EncryptionEntityType
 pattern EncryptionInfo_EncryptionEntityType_DFPNETWORKCODE = EncryptionInfo_EncryptionEntityType "DFP_NETWORK_CODE"
 
@@ -6571,15 +6081,12 @@ newtype EncryptionInfo_EncryptionSource = EncryptionInfo_EncryptionSource {fromE
       Core.FromJSONKey
     )
 
--- |
 pattern EncryptionInfo_EncryptionSource_ENCRYPTIONSCOPEUNKNOWN :: EncryptionInfo_EncryptionSource
 pattern EncryptionInfo_EncryptionSource_ENCRYPTIONSCOPEUNKNOWN = EncryptionInfo_EncryptionSource "ENCRYPTION_SCOPE_UNKNOWN"
 
--- |
 pattern EncryptionInfo_EncryptionSource_ADSERVING :: EncryptionInfo_EncryptionSource
 pattern EncryptionInfo_EncryptionSource_ADSERVING = EncryptionInfo_EncryptionSource "AD_SERVING"
 
--- |
 pattern EncryptionInfo_EncryptionSource_DATATRANSFER :: EncryptionInfo_EncryptionSource
 pattern EncryptionInfo_EncryptionSource_DATATRANSFER = EncryptionInfo_EncryptionSource "DATA_TRANSFER"
 
@@ -6603,11 +6110,11 @@ newtype EventTag_SiteFilterType = EventTag_SiteFilterType {fromEventTag_SiteFilt
       Core.FromJSONKey
     )
 
--- |
+-- | The event tag should only ever fire on specified sites.
 pattern EventTag_SiteFilterType_Allowlist :: EventTag_SiteFilterType
 pattern EventTag_SiteFilterType_Allowlist = EventTag_SiteFilterType "ALLOWLIST"
 
--- |
+-- | The event tag should fire on all sites EXCEPT the specified sites.
 pattern EventTag_SiteFilterType_Blocklist :: EventTag_SiteFilterType
 pattern EventTag_SiteFilterType_Blocklist = EventTag_SiteFilterType "BLOCKLIST"
 
@@ -6630,11 +6137,9 @@ newtype EventTag_Status = EventTag_Status {fromEventTag_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern EventTag_Status_Enabled :: EventTag_Status
 pattern EventTag_Status_Enabled = EventTag_Status "ENABLED"
 
--- |
 pattern EventTag_Status_Disabled :: EventTag_Status
 pattern EventTag_Status_Disabled = EventTag_Status "DISABLED"
 
@@ -6657,15 +6162,15 @@ newtype EventTag_Type = EventTag_Type {fromEventTag_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
+-- | A third-party pixel for impression tracking.
 pattern EventTag_Type_IMPRESSIONIMAGEEVENTTAG :: EventTag_Type
 pattern EventTag_Type_IMPRESSIONIMAGEEVENTTAG = EventTag_Type "IMPRESSION_IMAGE_EVENT_TAG"
 
--- |
+-- | A third-party JavaScript URL for impression tracking.
 pattern EventTag_Type_IMPRESSIONJAVASCRIPTEVENTTAG :: EventTag_Type
 pattern EventTag_Type_IMPRESSIONJAVASCRIPTEVENTTAG = EventTag_Type "IMPRESSION_JAVASCRIPT_EVENT_TAG"
 
--- |
+-- | A third-party URL for click tracking that redirects to the landing page.
 pattern EventTag_Type_CLICKTHROUGHEVENTTAG :: EventTag_Type
 pattern EventTag_Type_CLICKTHROUGHEVENTTAG = EventTag_Type "CLICK_THROUGH_EVENT_TAG"
 
@@ -6689,11 +6194,9 @@ newtype File_Format = File_Format {fromFile_Format :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern File_Format_Csv :: File_Format
 pattern File_Format_Csv = File_Format "CSV"
 
--- |
 pattern File_Format_Excel :: File_Format
 pattern File_Format_Excel = File_Format "EXCEL"
 
@@ -6716,23 +6219,18 @@ newtype File_Status = File_Status {fromFile_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern File_Status_Processing :: File_Status
 pattern File_Status_Processing = File_Status "PROCESSING"
 
--- |
 pattern File_Status_REPORTAVAILABLE :: File_Status
 pattern File_Status_REPORTAVAILABLE = File_Status "REPORT_AVAILABLE"
 
--- |
 pattern File_Status_Failed :: File_Status
 pattern File_Status_Failed = File_Status "FAILED"
 
--- |
 pattern File_Status_Cancelled :: File_Status
 pattern File_Status_Cancelled = File_Status "CANCELLED"
 
--- |
 pattern File_Status_Queued :: File_Status
 pattern File_Status_Queued = File_Status "QUEUED"
 
@@ -6758,23 +6256,18 @@ newtype FloodlightActivity_CacheBustingType = FloodlightActivity_CacheBustingTyp
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_CacheBustingType_Javascript :: FloodlightActivity_CacheBustingType
 pattern FloodlightActivity_CacheBustingType_Javascript = FloodlightActivity_CacheBustingType "JAVASCRIPT"
 
--- |
 pattern FloodlightActivity_CacheBustingType_ACTIVESERVERPAGE :: FloodlightActivity_CacheBustingType
 pattern FloodlightActivity_CacheBustingType_ACTIVESERVERPAGE = FloodlightActivity_CacheBustingType "ACTIVE_SERVER_PAGE"
 
--- |
 pattern FloodlightActivity_CacheBustingType_Jsp :: FloodlightActivity_CacheBustingType
 pattern FloodlightActivity_CacheBustingType_Jsp = FloodlightActivity_CacheBustingType "JSP"
 
--- |
 pattern FloodlightActivity_CacheBustingType_Php :: FloodlightActivity_CacheBustingType
 pattern FloodlightActivity_CacheBustingType_Php = FloodlightActivity_CacheBustingType "PHP"
 
--- |
 pattern FloodlightActivity_CacheBustingType_COLDFUSION :: FloodlightActivity_CacheBustingType
 pattern FloodlightActivity_CacheBustingType_COLDFUSION = FloodlightActivity_CacheBustingType "COLD_FUSION"
 
@@ -6800,23 +6293,23 @@ newtype FloodlightActivity_CountingMethod = FloodlightActivity_CountingMethod {f
       Core.FromJSONKey
     )
 
--- |
+-- | Count every conversion.
 pattern FloodlightActivity_CountingMethod_STANDARDCOUNTING :: FloodlightActivity_CountingMethod
 pattern FloodlightActivity_CountingMethod_STANDARDCOUNTING = FloodlightActivity_CountingMethod "STANDARD_COUNTING"
 
--- |
+-- | Count the first conversion for each unique user during each 24-hour day, from midnight to midnight, Eastern Time.
 pattern FloodlightActivity_CountingMethod_UNIQUECOUNTING :: FloodlightActivity_CountingMethod
 pattern FloodlightActivity_CountingMethod_UNIQUECOUNTING = FloodlightActivity_CountingMethod "UNIQUE_COUNTING"
 
--- |
+-- | Count one conversion per user per session. Session length is set by the site where the Spotlight tag is deployed.
 pattern FloodlightActivity_CountingMethod_SESSIONCOUNTING :: FloodlightActivity_CountingMethod
 pattern FloodlightActivity_CountingMethod_SESSIONCOUNTING = FloodlightActivity_CountingMethod "SESSION_COUNTING"
 
--- |
+-- | Count all conversions, plus the total number of sales that take place and the total revenue for these transactions.
 pattern FloodlightActivity_CountingMethod_TRANSACTIONSCOUNTING :: FloodlightActivity_CountingMethod
 pattern FloodlightActivity_CountingMethod_TRANSACTIONSCOUNTING = FloodlightActivity_CountingMethod "TRANSACTIONS_COUNTING"
 
--- |
+-- | Count each conversion, plus the total number of items sold and the total revenue for these sales.
 pattern FloodlightActivity_CountingMethod_ITEMSSOLDCOUNTING :: FloodlightActivity_CountingMethod
 pattern FloodlightActivity_CountingMethod_ITEMSSOLDCOUNTING = FloodlightActivity_CountingMethod "ITEMS_SOLD_COUNTING"
 
@@ -6842,11 +6335,9 @@ newtype FloodlightActivity_FloodlightActivityGroupType = FloodlightActivity_Floo
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_FloodlightActivityGroupType_Counter :: FloodlightActivity_FloodlightActivityGroupType
 pattern FloodlightActivity_FloodlightActivityGroupType_Counter = FloodlightActivity_FloodlightActivityGroupType "COUNTER"
 
--- |
 pattern FloodlightActivity_FloodlightActivityGroupType_Sale :: FloodlightActivity_FloodlightActivityGroupType
 pattern FloodlightActivity_FloodlightActivityGroupType_Sale = FloodlightActivity_FloodlightActivityGroupType "SALE"
 
@@ -6869,15 +6360,12 @@ newtype FloodlightActivity_FloodlightTagType = FloodlightActivity_FloodlightTagT
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_FloodlightTagType_Iframe :: FloodlightActivity_FloodlightTagType
 pattern FloodlightActivity_FloodlightTagType_Iframe = FloodlightActivity_FloodlightTagType "IFRAME"
 
--- |
 pattern FloodlightActivity_FloodlightTagType_Image :: FloodlightActivity_FloodlightTagType
 pattern FloodlightActivity_FloodlightTagType_Image = FloodlightActivity_FloodlightTagType "IMAGE"
 
--- |
 pattern FloodlightActivity_FloodlightTagType_GLOBALSITETAG :: FloodlightActivity_FloodlightTagType
 pattern FloodlightActivity_FloodlightTagType_GLOBALSITETAG = FloodlightActivity_FloodlightTagType "GLOBAL_SITE_TAG"
 
@@ -6901,19 +6389,15 @@ newtype FloodlightActivity_Status = FloodlightActivity_Status {fromFloodlightAct
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_Status_Active :: FloodlightActivity_Status
 pattern FloodlightActivity_Status_Active = FloodlightActivity_Status "ACTIVE"
 
--- |
 pattern FloodlightActivity_Status_ARCHIVEDANDDISABLED :: FloodlightActivity_Status
 pattern FloodlightActivity_Status_ARCHIVEDANDDISABLED = FloodlightActivity_Status "ARCHIVED_AND_DISABLED"
 
--- |
 pattern FloodlightActivity_Status_Archived :: FloodlightActivity_Status
 pattern FloodlightActivity_Status_Archived = FloodlightActivity_Status "ARCHIVED"
 
--- |
 pattern FloodlightActivity_Status_DISABLEDPOLICY :: FloodlightActivity_Status
 pattern FloodlightActivity_Status_DISABLEDPOLICY = FloodlightActivity_Status "DISABLED_POLICY"
 
@@ -6938,11 +6422,9 @@ newtype FloodlightActivity_TagFormat = FloodlightActivity_TagFormat {fromFloodli
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_TagFormat_Html :: FloodlightActivity_TagFormat
 pattern FloodlightActivity_TagFormat_Html = FloodlightActivity_TagFormat "HTML"
 
--- |
 pattern FloodlightActivity_TagFormat_Xhtml :: FloodlightActivity_TagFormat
 pattern FloodlightActivity_TagFormat_Xhtml = FloodlightActivity_TagFormat "XHTML"
 
@@ -6964,403 +6446,303 @@ newtype FloodlightActivity_UserDefinedVariableTypesItem = FloodlightActivity_Use
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U1 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U1 = FloodlightActivity_UserDefinedVariableTypesItem "U1"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U2 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U2 = FloodlightActivity_UserDefinedVariableTypesItem "U2"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U3 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U3 = FloodlightActivity_UserDefinedVariableTypesItem "U3"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U4 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U4 = FloodlightActivity_UserDefinedVariableTypesItem "U4"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U5 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U5 = FloodlightActivity_UserDefinedVariableTypesItem "U5"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U6 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U6 = FloodlightActivity_UserDefinedVariableTypesItem "U6"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U7 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U7 = FloodlightActivity_UserDefinedVariableTypesItem "U7"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U8 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U8 = FloodlightActivity_UserDefinedVariableTypesItem "U8"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U9 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U9 = FloodlightActivity_UserDefinedVariableTypesItem "U9"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U10 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U10 = FloodlightActivity_UserDefinedVariableTypesItem "U10"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U11 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U11 = FloodlightActivity_UserDefinedVariableTypesItem "U11"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U12 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U12 = FloodlightActivity_UserDefinedVariableTypesItem "U12"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U13 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U13 = FloodlightActivity_UserDefinedVariableTypesItem "U13"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U14 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U14 = FloodlightActivity_UserDefinedVariableTypesItem "U14"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U15 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U15 = FloodlightActivity_UserDefinedVariableTypesItem "U15"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U16 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U16 = FloodlightActivity_UserDefinedVariableTypesItem "U16"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U17 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U17 = FloodlightActivity_UserDefinedVariableTypesItem "U17"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U18 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U18 = FloodlightActivity_UserDefinedVariableTypesItem "U18"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U19 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U19 = FloodlightActivity_UserDefinedVariableTypesItem "U19"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U20 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U20 = FloodlightActivity_UserDefinedVariableTypesItem "U20"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U21 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U21 = FloodlightActivity_UserDefinedVariableTypesItem "U21"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U22 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U22 = FloodlightActivity_UserDefinedVariableTypesItem "U22"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U23 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U23 = FloodlightActivity_UserDefinedVariableTypesItem "U23"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U24 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U24 = FloodlightActivity_UserDefinedVariableTypesItem "U24"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U25 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U25 = FloodlightActivity_UserDefinedVariableTypesItem "U25"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U26 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U26 = FloodlightActivity_UserDefinedVariableTypesItem "U26"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U27 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U27 = FloodlightActivity_UserDefinedVariableTypesItem "U27"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U28 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U28 = FloodlightActivity_UserDefinedVariableTypesItem "U28"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U29 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U29 = FloodlightActivity_UserDefinedVariableTypesItem "U29"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U30 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U30 = FloodlightActivity_UserDefinedVariableTypesItem "U30"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U31 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U31 = FloodlightActivity_UserDefinedVariableTypesItem "U31"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U32 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U32 = FloodlightActivity_UserDefinedVariableTypesItem "U32"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U33 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U33 = FloodlightActivity_UserDefinedVariableTypesItem "U33"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U34 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U34 = FloodlightActivity_UserDefinedVariableTypesItem "U34"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U35 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U35 = FloodlightActivity_UserDefinedVariableTypesItem "U35"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U36 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U36 = FloodlightActivity_UserDefinedVariableTypesItem "U36"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U37 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U37 = FloodlightActivity_UserDefinedVariableTypesItem "U37"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U38 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U38 = FloodlightActivity_UserDefinedVariableTypesItem "U38"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U39 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U39 = FloodlightActivity_UserDefinedVariableTypesItem "U39"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U40 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U40 = FloodlightActivity_UserDefinedVariableTypesItem "U40"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U41 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U41 = FloodlightActivity_UserDefinedVariableTypesItem "U41"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U42 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U42 = FloodlightActivity_UserDefinedVariableTypesItem "U42"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U43 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U43 = FloodlightActivity_UserDefinedVariableTypesItem "U43"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U44 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U44 = FloodlightActivity_UserDefinedVariableTypesItem "U44"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U45 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U45 = FloodlightActivity_UserDefinedVariableTypesItem "U45"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U46 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U46 = FloodlightActivity_UserDefinedVariableTypesItem "U46"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U47 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U47 = FloodlightActivity_UserDefinedVariableTypesItem "U47"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U48 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U48 = FloodlightActivity_UserDefinedVariableTypesItem "U48"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U49 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U49 = FloodlightActivity_UserDefinedVariableTypesItem "U49"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U50 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U50 = FloodlightActivity_UserDefinedVariableTypesItem "U50"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U51 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U51 = FloodlightActivity_UserDefinedVariableTypesItem "U51"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U52 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U52 = FloodlightActivity_UserDefinedVariableTypesItem "U52"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U53 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U53 = FloodlightActivity_UserDefinedVariableTypesItem "U53"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U54 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U54 = FloodlightActivity_UserDefinedVariableTypesItem "U54"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U55 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U55 = FloodlightActivity_UserDefinedVariableTypesItem "U55"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U56 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U56 = FloodlightActivity_UserDefinedVariableTypesItem "U56"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U57 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U57 = FloodlightActivity_UserDefinedVariableTypesItem "U57"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U58 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U58 = FloodlightActivity_UserDefinedVariableTypesItem "U58"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U59 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U59 = FloodlightActivity_UserDefinedVariableTypesItem "U59"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U60 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U60 = FloodlightActivity_UserDefinedVariableTypesItem "U60"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U61 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U61 = FloodlightActivity_UserDefinedVariableTypesItem "U61"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U62 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U62 = FloodlightActivity_UserDefinedVariableTypesItem "U62"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U63 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U63 = FloodlightActivity_UserDefinedVariableTypesItem "U63"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U64 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U64 = FloodlightActivity_UserDefinedVariableTypesItem "U64"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U65 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U65 = FloodlightActivity_UserDefinedVariableTypesItem "U65"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U66 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U66 = FloodlightActivity_UserDefinedVariableTypesItem "U66"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U67 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U67 = FloodlightActivity_UserDefinedVariableTypesItem "U67"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U68 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U68 = FloodlightActivity_UserDefinedVariableTypesItem "U68"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U69 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U69 = FloodlightActivity_UserDefinedVariableTypesItem "U69"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U70 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U70 = FloodlightActivity_UserDefinedVariableTypesItem "U70"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U71 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U71 = FloodlightActivity_UserDefinedVariableTypesItem "U71"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U72 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U72 = FloodlightActivity_UserDefinedVariableTypesItem "U72"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U73 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U73 = FloodlightActivity_UserDefinedVariableTypesItem "U73"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U74 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U74 = FloodlightActivity_UserDefinedVariableTypesItem "U74"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U75 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U75 = FloodlightActivity_UserDefinedVariableTypesItem "U75"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U76 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U76 = FloodlightActivity_UserDefinedVariableTypesItem "U76"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U77 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U77 = FloodlightActivity_UserDefinedVariableTypesItem "U77"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U78 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U78 = FloodlightActivity_UserDefinedVariableTypesItem "U78"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U79 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U79 = FloodlightActivity_UserDefinedVariableTypesItem "U79"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U80 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U80 = FloodlightActivity_UserDefinedVariableTypesItem "U80"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U81 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U81 = FloodlightActivity_UserDefinedVariableTypesItem "U81"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U82 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U82 = FloodlightActivity_UserDefinedVariableTypesItem "U82"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U83 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U83 = FloodlightActivity_UserDefinedVariableTypesItem "U83"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U84 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U84 = FloodlightActivity_UserDefinedVariableTypesItem "U84"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U85 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U85 = FloodlightActivity_UserDefinedVariableTypesItem "U85"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U86 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U86 = FloodlightActivity_UserDefinedVariableTypesItem "U86"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U87 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U87 = FloodlightActivity_UserDefinedVariableTypesItem "U87"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U88 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U88 = FloodlightActivity_UserDefinedVariableTypesItem "U88"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U89 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U89 = FloodlightActivity_UserDefinedVariableTypesItem "U89"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U90 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U90 = FloodlightActivity_UserDefinedVariableTypesItem "U90"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U91 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U91 = FloodlightActivity_UserDefinedVariableTypesItem "U91"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U92 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U92 = FloodlightActivity_UserDefinedVariableTypesItem "U92"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U93 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U93 = FloodlightActivity_UserDefinedVariableTypesItem "U93"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U94 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U94 = FloodlightActivity_UserDefinedVariableTypesItem "U94"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U95 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U95 = FloodlightActivity_UserDefinedVariableTypesItem "U95"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U96 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U96 = FloodlightActivity_UserDefinedVariableTypesItem "U96"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U97 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U97 = FloodlightActivity_UserDefinedVariableTypesItem "U97"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U98 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U98 = FloodlightActivity_UserDefinedVariableTypesItem "U98"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U99 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U99 = FloodlightActivity_UserDefinedVariableTypesItem "U99"
 
--- |
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U100 :: FloodlightActivity_UserDefinedVariableTypesItem
 pattern FloodlightActivity_UserDefinedVariableTypesItem_U100 = FloodlightActivity_UserDefinedVariableTypesItem "U100"
 
@@ -7481,11 +6863,9 @@ newtype FloodlightActivityGroup_Type = FloodlightActivityGroup_Type {fromFloodli
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivityGroup_Type_Counter :: FloodlightActivityGroup_Type
 pattern FloodlightActivityGroup_Type_Counter = FloodlightActivityGroup_Type "COUNTER"
 
--- |
 pattern FloodlightActivityGroup_Type_Sale :: FloodlightActivityGroup_Type
 pattern FloodlightActivityGroup_Type_Sale = FloodlightActivityGroup_Type "SALE"
 
@@ -7495,7 +6875,6 @@ pattern FloodlightActivityGroup_Type_Sale = FloodlightActivityGroup_Type "SALE"
   FloodlightActivityGroup_Type
   #-}
 
--- | Day that will be counted as the first day of the week in reports. This is a required field.
 newtype FloodlightConfiguration_FirstDayOfWeek = FloodlightConfiguration_FirstDayOfWeek {fromFloodlightConfiguration_FirstDayOfWeek :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -7508,17 +6887,15 @@ newtype FloodlightConfiguration_FirstDayOfWeek = FloodlightConfiguration_FirstDa
       Core.FromJSONKey
     )
 
--- |
-pattern FloodlightConfiguration_FirstDayOfWeek_Monday :: FloodlightConfiguration_FirstDayOfWeek
-pattern FloodlightConfiguration_FirstDayOfWeek_Monday = FloodlightConfiguration_FirstDayOfWeek "MONDAY"
-
--- |
 pattern FloodlightConfiguration_FirstDayOfWeek_Sunday :: FloodlightConfiguration_FirstDayOfWeek
 pattern FloodlightConfiguration_FirstDayOfWeek_Sunday = FloodlightConfiguration_FirstDayOfWeek "SUNDAY"
 
+pattern FloodlightConfiguration_FirstDayOfWeek_Monday :: FloodlightConfiguration_FirstDayOfWeek
+pattern FloodlightConfiguration_FirstDayOfWeek_Monday = FloodlightConfiguration_FirstDayOfWeek "MONDAY"
+
 {-# COMPLETE
-  FloodlightConfiguration_FirstDayOfWeek_Monday,
   FloodlightConfiguration_FirstDayOfWeek_Sunday,
+  FloodlightConfiguration_FirstDayOfWeek_Monday,
   FloodlightConfiguration_FirstDayOfWeek
   #-}
 
@@ -7535,15 +6912,12 @@ newtype FloodlightConfiguration_NaturalSearchConversionAttributionOption = Flood
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_EXCLUDENATURALSEARCHCONVERSIONATTRIBUTION :: FloodlightConfiguration_NaturalSearchConversionAttributionOption
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_EXCLUDENATURALSEARCHCONVERSIONATTRIBUTION = FloodlightConfiguration_NaturalSearchConversionAttributionOption "EXCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
 
--- |
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_INCLUDENATURALSEARCHCONVERSIONATTRIBUTION :: FloodlightConfiguration_NaturalSearchConversionAttributionOption
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_INCLUDENATURALSEARCHCONVERSIONATTRIBUTION = FloodlightConfiguration_NaturalSearchConversionAttributionOption "INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION"
 
--- |
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_INCLUDENATURALSEARCHTIEREDCONVERSIONATTRIBUTION :: FloodlightConfiguration_NaturalSearchConversionAttributionOption
 pattern FloodlightConfiguration_NaturalSearchConversionAttributionOption_INCLUDENATURALSEARCHTIEREDCONVERSIONATTRIBUTION = FloodlightConfiguration_NaturalSearchConversionAttributionOption "INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION"
 
@@ -7567,11 +6941,11 @@ newtype FsCommand_PositionOption = FsCommand_PositionOption {fromFsCommand_Posit
       Core.FromJSONKey
     )
 
--- |
+-- | Center of the window Corresponds to \"center\" in UI
 pattern FsCommand_PositionOption_Centered :: FsCommand_PositionOption
 pattern FsCommand_PositionOption_Centered = FsCommand_PositionOption "CENTERED"
 
--- |
+-- | user-defined distance from top left-hand corner of the window Corresponds to \"top-left\" in UI
 pattern FsCommand_PositionOption_DISTANCEFROMTOPLEFTCORNER :: FsCommand_PositionOption
 pattern FsCommand_PositionOption_DISTANCEFROMTOPLEFTCORNER = FsCommand_PositionOption "DISTANCE_FROM_TOP_LEFT_CORNER"
 
@@ -7594,11 +6968,9 @@ newtype InventoryItem_Type = InventoryItem_Type {fromInventoryItem_Type :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern InventoryItem_Type_PLANNINGPLACEMENTTYPEREGULAR :: InventoryItem_Type
 pattern InventoryItem_Type_PLANNINGPLACEMENTTYPEREGULAR = InventoryItem_Type "PLANNING_PLACEMENT_TYPE_REGULAR"
 
--- |
 pattern InventoryItem_Type_PLANNINGPLACEMENTTYPECREDIT :: InventoryItem_Type
 pattern InventoryItem_Type_PLANNINGPLACEMENTTYPECREDIT = InventoryItem_Type "PLANNING_PLACEMENT_TYPE_CREDIT"
 
@@ -7621,15 +6993,12 @@ newtype Invoice_InvoiceType = Invoice_InvoiceType {fromInvoice_InvoiceType :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern Invoice_InvoiceType_INVOICETYPEUNSPECIFIED :: Invoice_InvoiceType
 pattern Invoice_InvoiceType_INVOICETYPEUNSPECIFIED = Invoice_InvoiceType "INVOICE_TYPE_UNSPECIFIED"
 
--- |
 pattern Invoice_InvoiceType_INVOICETYPECREDIT :: Invoice_InvoiceType
 pattern Invoice_InvoiceType_INVOICETYPECREDIT = Invoice_InvoiceType "INVOICE_TYPE_CREDIT"
 
--- |
 pattern Invoice_InvoiceType_INVOICETYPEINVOICE :: Invoice_InvoiceType
 pattern Invoice_InvoiceType_INVOICETYPEINVOICE = Invoice_InvoiceType "INVOICE_TYPE_INVOICE"
 
@@ -7653,31 +7022,24 @@ newtype ListPopulationTerm_Operator = ListPopulationTerm_Operator {fromListPopul
       Core.FromJSONKey
     )
 
--- |
 pattern ListPopulationTerm_Operator_NUMEQUALS :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_NUMEQUALS = ListPopulationTerm_Operator "NUM_EQUALS"
 
--- |
 pattern ListPopulationTerm_Operator_NUMLESSTHAN :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_NUMLESSTHAN = ListPopulationTerm_Operator "NUM_LESS_THAN"
 
--- |
 pattern ListPopulationTerm_Operator_NUMLESSTHANEQUAL :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_NUMLESSTHANEQUAL = ListPopulationTerm_Operator "NUM_LESS_THAN_EQUAL"
 
--- |
 pattern ListPopulationTerm_Operator_NUMGREATERTHAN :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_NUMGREATERTHAN = ListPopulationTerm_Operator "NUM_GREATER_THAN"
 
--- |
 pattern ListPopulationTerm_Operator_NUMGREATERTHANEQUAL :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_NUMGREATERTHANEQUAL = ListPopulationTerm_Operator "NUM_GREATER_THAN_EQUAL"
 
--- |
 pattern ListPopulationTerm_Operator_STRINGEQUALS :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_STRINGEQUALS = ListPopulationTerm_Operator "STRING_EQUALS"
 
--- |
 pattern ListPopulationTerm_Operator_STRINGCONTAINS :: ListPopulationTerm_Operator
 pattern ListPopulationTerm_Operator_STRINGCONTAINS = ListPopulationTerm_Operator "STRING_CONTAINS"
 
@@ -7705,15 +7067,12 @@ newtype ListPopulationTerm_Type = ListPopulationTerm_Type {fromListPopulationTer
       Core.FromJSONKey
     )
 
--- |
 pattern ListPopulationTerm_Type_CUSTOMVARIABLETERM :: ListPopulationTerm_Type
 pattern ListPopulationTerm_Type_CUSTOMVARIABLETERM = ListPopulationTerm_Type "CUSTOM_VARIABLE_TERM"
 
--- |
 pattern ListPopulationTerm_Type_LISTMEMBERSHIPTERM :: ListPopulationTerm_Type
 pattern ListPopulationTerm_Type_LISTMEMBERSHIPTERM = ListPopulationTerm_Type "LIST_MEMBERSHIP_TERM"
 
--- |
 pattern ListPopulationTerm_Type_REFERRERTERM :: ListPopulationTerm_Type
 pattern ListPopulationTerm_Type_REFERRERTERM = ListPopulationTerm_Type "REFERRER_TERM"
 
@@ -7724,7 +7083,7 @@ pattern ListPopulationTerm_Type_REFERRERTERM = ListPopulationTerm_Type "REFERRER
   ListPopulationTerm_Type
   #-}
 
--- | .
+-- | Status of the partner link.
 newtype MeasurementPartnerAdvertiserLink_LinkStatus = MeasurementPartnerAdvertiserLink_LinkStatus {fromMeasurementPartnerAdvertiserLink_LinkStatus :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -7737,37 +7096,41 @@ newtype MeasurementPartnerAdvertiserLink_LinkStatus = MeasurementPartnerAdvertis
       Core.FromJSONKey
     )
 
--- |
+-- | Unlinked.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKED :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKED = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_UNLINKED"
 
--- |
+-- | Linked successfully
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKED :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKED = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINKED"
 
--- |
+-- | Link pending for wrapping.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKPENDING :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKPENDING = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINK_PENDING"
 
--- |
+-- | Linking failure.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKFAILURE :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKFAILURE = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINK_FAILURE"
 
--- |
+-- | Link opt-out by user.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT"
 
--- |
+-- | Link opt-out pending sync.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT_PENDING"
 
--- |
+-- | Link wrap answer pending.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_LINK_WRAPPING_PENDING"
 
--- |
+-- | Mode change pending.
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING :: MeasurementPartnerAdvertiserLink_LinkStatus
 pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_MODE_CHANGE_PENDING"
+
+-- | Partner unlink pending.
+pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING :: MeasurementPartnerAdvertiserLink_LinkStatus
+pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING = MeasurementPartnerAdvertiserLink_LinkStatus "MEASUREMENT_PARTNER_UNLINK_PENDING"
 
 {-# COMPLETE
   MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKED,
@@ -7778,6 +7141,7 @@ pattern MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERMODECHANGE
   MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
   MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
   MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+  MeasurementPartnerAdvertiserLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
   MeasurementPartnerAdvertiserLink_LinkStatus
   #-}
 
@@ -7794,15 +7158,12 @@ newtype MeasurementPartnerAdvertiserLink_MeasurementPartner = MeasurementPartner
       Core.FromJSONKey
     )
 
--- |
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_None :: MeasurementPartnerAdvertiserLink_MeasurementPartner
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_None = MeasurementPartnerAdvertiserLink_MeasurementPartner "NONE"
 
--- |
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerAdvertiserLink_MeasurementPartner
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerAdvertiserLink_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
--- |
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerAdvertiserLink_MeasurementPartner
 pattern MeasurementPartnerAdvertiserLink_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerAdvertiserLink_MeasurementPartner "DOUBLE_VERIFY"
 
@@ -7826,37 +7187,41 @@ newtype MeasurementPartnerCampaignLink_LinkStatus = MeasurementPartnerCampaignLi
       Core.FromJSONKey
     )
 
--- |
+-- | Unlinked.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKED :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKED = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_UNLINKED"
 
--- |
+-- | Linked successfully
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKED :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKED = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINKED"
 
--- |
+-- | Link pending for wrapping.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKPENDING :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKPENDING = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINK_PENDING"
 
--- |
+-- | Linking failure.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKFAILURE :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKFAILURE = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINK_FAILURE"
 
--- |
+-- | Link opt-out by user.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT"
 
--- |
+-- | Link opt-out pending sync.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT_PENDING"
 
--- |
+-- | Link wrap answer pending.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_LINK_WRAPPING_PENDING"
 
--- |
+-- | Mode change pending.
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING :: MeasurementPartnerCampaignLink_LinkStatus
 pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_MODE_CHANGE_PENDING"
+
+-- | Partner unlink pending.
+pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING :: MeasurementPartnerCampaignLink_LinkStatus
+pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING = MeasurementPartnerCampaignLink_LinkStatus "MEASUREMENT_PARTNER_UNLINK_PENDING"
 
 {-# COMPLETE
   MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKED,
@@ -7867,6 +7232,7 @@ pattern MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPE
   MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
   MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
   MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+  MeasurementPartnerCampaignLink_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
   MeasurementPartnerCampaignLink_LinkStatus
   #-}
 
@@ -7883,15 +7249,12 @@ newtype MeasurementPartnerCampaignLink_MeasurementPartner = MeasurementPartnerCa
       Core.FromJSONKey
     )
 
--- |
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_None :: MeasurementPartnerCampaignLink_MeasurementPartner
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_None = MeasurementPartnerCampaignLink_MeasurementPartner "NONE"
 
--- |
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerCampaignLink_MeasurementPartner
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerCampaignLink_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
--- |
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerCampaignLink_MeasurementPartner
 pattern MeasurementPartnerCampaignLink_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerCampaignLink_MeasurementPartner "DOUBLE_VERIFY"
 
@@ -7915,37 +7278,41 @@ newtype MeasurementPartnerWrappingData_LinkStatus = MeasurementPartnerWrappingDa
       Core.FromJSONKey
     )
 
--- |
+-- | Unlinked.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKED :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKED = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_UNLINKED"
 
--- |
+-- | Linked successfully
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKED :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKED = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINKED"
 
--- |
+-- | Link pending for wrapping.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKPENDING :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKPENDING = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINK_PENDING"
 
--- |
+-- | Linking failure.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKFAILURE :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKFAILURE = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINK_FAILURE"
 
--- |
+-- | Link opt-out by user.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUT = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT"
 
--- |
+-- | Link opt-out pending sync.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINK_OPT_OUT_PENDING"
 
--- |
+-- | Link wrap answer pending.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_LINK_WRAPPING_PENDING"
 
--- |
+-- | Mode change pending.
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING :: MeasurementPartnerWrappingData_LinkStatus
 pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_MODE_CHANGE_PENDING"
+
+-- | Partner unlink pending.
+pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING :: MeasurementPartnerWrappingData_LinkStatus
+pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING = MeasurementPartnerWrappingData_LinkStatus "MEASUREMENT_PARTNER_UNLINK_PENDING"
 
 {-# COMPLETE
   MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKED,
@@ -7956,6 +7323,7 @@ pattern MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERMODECHANGEPE
   MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKOPTOUTPENDING,
   MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERLINKWRAPPINGPENDING,
   MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERMODECHANGEPENDING,
+  MeasurementPartnerWrappingData_LinkStatus_MEASUREMENTPARTNERUNLINKPENDING,
   MeasurementPartnerWrappingData_LinkStatus
   #-}
 
@@ -7972,15 +7340,12 @@ newtype MeasurementPartnerWrappingData_MeasurementPartner = MeasurementPartnerWr
       Core.FromJSONKey
     )
 
--- |
 pattern MeasurementPartnerWrappingData_MeasurementPartner_None :: MeasurementPartnerWrappingData_MeasurementPartner
 pattern MeasurementPartnerWrappingData_MeasurementPartner_None = MeasurementPartnerWrappingData_MeasurementPartner "NONE"
 
--- |
 pattern MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE :: MeasurementPartnerWrappingData_MeasurementPartner
 pattern MeasurementPartnerWrappingData_MeasurementPartner_INTEGRALADSCIENCE = MeasurementPartnerWrappingData_MeasurementPartner "INTEGRAL_AD_SCIENCE"
 
--- |
 pattern MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY :: MeasurementPartnerWrappingData_MeasurementPartner
 pattern MeasurementPartnerWrappingData_MeasurementPartner_DOUBLEVERIFY = MeasurementPartnerWrappingData_MeasurementPartner "DOUBLE_VERIFY"
 
@@ -8004,59 +7369,45 @@ newtype MeasurementPartnerWrappingData_TagWrappingMode = MeasurementPartnerWrapp
       Core.FromJSONKey
     )
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_None :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_None = MeasurementPartnerWrappingData_TagWrappingMode "NONE"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Blocking :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Blocking = MeasurementPartnerWrappingData_TagWrappingMode "BLOCKING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Monitoring :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Monitoring = MeasurementPartnerWrappingData_TagWrappingMode "MONITORING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_MONITORINGREADONLY = MeasurementPartnerWrappingData_TagWrappingMode "MONITORING_READ_ONLY"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VIDEOPIXELMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VIDEOPIXELMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "VIDEO_PIXEL_MONITORING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Tracking :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_Tracking = MeasurementPartnerWrappingData_TagWrappingMode "TRACKING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_MONITORING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDBLOCKING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_BLOCKING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "NON_VPAID_MONITORING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYMONITORING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_MONITORING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYBLOCKING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_BLOCKING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDONLYFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_ONLY_FILTERING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_VPAIDFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "VPAID_FILTERING"
 
--- |
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING :: MeasurementPartnerWrappingData_TagWrappingMode
 pattern MeasurementPartnerWrappingData_TagWrappingMode_NONVPAIDFILTERING = MeasurementPartnerWrappingData_TagWrappingMode "NON_VPAID_FILTERING"
 
@@ -8091,47 +7442,36 @@ newtype MobileApp_Directory = MobileApp_Directory {fromMobileApp_Directory :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern MobileApp_Directory_Unknown :: MobileApp_Directory
 pattern MobileApp_Directory_Unknown = MobileApp_Directory "UNKNOWN"
 
--- |
 pattern MobileApp_Directory_APPLEAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_APPLEAPPSTORE = MobileApp_Directory "APPLE_APP_STORE"
 
--- |
 pattern MobileApp_Directory_GOOGLEPLAYSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_GOOGLEPLAYSTORE = MobileApp_Directory "GOOGLE_PLAY_STORE"
 
--- |
 pattern MobileApp_Directory_ROKUAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_ROKUAPPSTORE = MobileApp_Directory "ROKU_APP_STORE"
 
--- |
 pattern MobileApp_Directory_AMAZONFIRETVAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_AMAZONFIRETVAPPSTORE = MobileApp_Directory "AMAZON_FIRETV_APP_STORE"
 
--- |
 pattern MobileApp_Directory_PLAYSTATIONAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_PLAYSTATIONAPPSTORE = MobileApp_Directory "PLAYSTATION_APP_STORE"
 
--- |
 pattern MobileApp_Directory_APPLETVAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_APPLETVAPPSTORE = MobileApp_Directory "APPLE_TV_APP_STORE"
 
--- |
 pattern MobileApp_Directory_XBOXAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_XBOXAPPSTORE = MobileApp_Directory "XBOX_APP_STORE"
 
--- |
 pattern MobileApp_Directory_SAMSUNGTVAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_SAMSUNGTVAPPSTORE = MobileApp_Directory "SAMSUNG_TV_APP_STORE"
 
--- |
 pattern MobileApp_Directory_ANDROIDTVAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_ANDROIDTVAPPSTORE = MobileApp_Directory "ANDROID_TV_APP_STORE"
 
--- |
 pattern MobileApp_Directory_GENERICCTVAPPSTORE :: MobileApp_Directory
 pattern MobileApp_Directory_GENERICCTVAPPSTORE = MobileApp_Directory "GENERIC_CTV_APP_STORE"
 
@@ -8163,15 +7503,15 @@ newtype ObjectFilter_Status = ObjectFilter_Status {fromObjectFilter_Status :: Co
       Core.FromJSONKey
     )
 
--- |
+-- | Profile has access to none of the objects.
 pattern ObjectFilter_Status_None :: ObjectFilter_Status
 pattern ObjectFilter_Status_None = ObjectFilter_Status "NONE"
 
--- |
+-- | Profile has access to only specific objects.
 pattern ObjectFilter_Status_Assigned :: ObjectFilter_Status
 pattern ObjectFilter_Status_Assigned = ObjectFilter_Status "ASSIGNED"
 
--- |
+-- | Profile has access to all objects.
 pattern ObjectFilter_Status_All :: ObjectFilter_Status
 pattern ObjectFilter_Status_All = ObjectFilter_Status "ALL"
 
@@ -8195,15 +7535,12 @@ newtype OrderContact_ContactType = OrderContact_ContactType {fromOrderContact_Co
       Core.FromJSONKey
     )
 
--- |
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTBUYERCONTACT :: OrderContact_ContactType
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTBUYERCONTACT = OrderContact_ContactType "PLANNING_ORDER_CONTACT_BUYER_CONTACT"
 
--- |
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTBUYERBILLINGCONTACT :: OrderContact_ContactType
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTBUYERBILLINGCONTACT = OrderContact_ContactType "PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT"
 
--- |
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTSELLERCONTACT :: OrderContact_ContactType
 pattern OrderContact_ContactType_PLANNINGORDERCONTACTSELLERCONTACT = OrderContact_ContactType "PLANNING_ORDER_CONTACT_SELLER_CONTACT"
 
@@ -8212,107 +7549,6 @@ pattern OrderContact_ContactType_PLANNINGORDERCONTACTSELLERCONTACT = OrderContac
   OrderContact_ContactType_PLANNINGORDERCONTACTBUYERBILLINGCONTACT,
   OrderContact_ContactType_PLANNINGORDERCONTACTSELLERCONTACT,
   OrderContact_ContactType
-  #-}
-
--- | Type of this order document
-newtype OrderDocument_Type = OrderDocument_Type {fromOrderDocument_Type :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern OrderDocument_Type_PLANNINGORDERTYPEINSERTIONORDER :: OrderDocument_Type
-pattern OrderDocument_Type_PLANNINGORDERTYPEINSERTIONORDER = OrderDocument_Type "PLANNING_ORDER_TYPE_INSERTION_ORDER"
-
--- |
-pattern OrderDocument_Type_PLANNINGORDERTYPECHANGEORDER :: OrderDocument_Type
-pattern OrderDocument_Type_PLANNINGORDERTYPECHANGEORDER = OrderDocument_Type "PLANNING_ORDER_TYPE_CHANGE_ORDER"
-
-{-# COMPLETE
-  OrderDocument_Type_PLANNINGORDERTYPEINSERTIONORDER,
-  OrderDocument_Type_PLANNINGORDERTYPECHANGEORDER,
-  OrderDocument_Type
-  #-}
-
--- | Determines how the \'value\' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'/\' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions (\'dfa:paidSearch/\') allow a matchType other than EXACT.
-newtype PathFilter_PathMatchPosition = PathFilter_PathMatchPosition {fromPathFilter_PathMatchPosition :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED = PathFilter_PathMatchPosition "PATH_MATCH_POSITION_UNSPECIFIED"
-
--- |
-pattern PathFilter_PathMatchPosition_Any :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_Any = PathFilter_PathMatchPosition "ANY"
-
--- |
-pattern PathFilter_PathMatchPosition_First :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_First = PathFilter_PathMatchPosition "FIRST"
-
--- |
-pattern PathFilter_PathMatchPosition_Last :: PathFilter_PathMatchPosition
-pattern PathFilter_PathMatchPosition_Last = PathFilter_PathMatchPosition "LAST"
-
-{-# COMPLETE
-  PathFilter_PathMatchPosition_PATHMATCHPOSITIONUNSPECIFIED,
-  PathFilter_PathMatchPosition_Any,
-  PathFilter_PathMatchPosition_First,
-  PathFilter_PathMatchPosition_Last,
-  PathFilter_PathMatchPosition
-  #-}
-
--- | Determines how the \'value\' field is matched when filtering. If not specified, defaults to EXACT. If set to WILDCARD_EXPRESSION, \'/\' is allowed as a placeholder for variable length character sequences, and it can be escaped with a backslash. Note, only paid search dimensions (\'dfa:paidSearch/\') allow a matchType other than EXACT.
-newtype PathReportDimensionValue_MatchType = PathReportDimensionValue_MatchType {fromPathReportDimensionValue_MatchType :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern PathReportDimensionValue_MatchType_Exact :: PathReportDimensionValue_MatchType
-pattern PathReportDimensionValue_MatchType_Exact = PathReportDimensionValue_MatchType "EXACT"
-
--- |
-pattern PathReportDimensionValue_MatchType_BEGINSWITH :: PathReportDimensionValue_MatchType
-pattern PathReportDimensionValue_MatchType_BEGINSWITH = PathReportDimensionValue_MatchType "BEGINS_WITH"
-
--- |
-pattern PathReportDimensionValue_MatchType_Contains :: PathReportDimensionValue_MatchType
-pattern PathReportDimensionValue_MatchType_Contains = PathReportDimensionValue_MatchType "CONTAINS"
-
--- |
-pattern PathReportDimensionValue_MatchType_WILDCARDEXPRESSION :: PathReportDimensionValue_MatchType
-pattern PathReportDimensionValue_MatchType_WILDCARDEXPRESSION = PathReportDimensionValue_MatchType "WILDCARD_EXPRESSION"
-
-{-# COMPLETE
-  PathReportDimensionValue_MatchType_Exact,
-  PathReportDimensionValue_MatchType_BEGINSWITH,
-  PathReportDimensionValue_MatchType_Contains,
-  PathReportDimensionValue_MatchType_WILDCARDEXPRESSION,
-  PathReportDimensionValue_MatchType
   #-}
 
 -- | Whether this placement is active, inactive, archived or permanently archived.
@@ -8328,23 +7564,18 @@ newtype Placement_ActiveStatus = Placement_ActiveStatus {fromPlacement_ActiveSta
       Core.FromJSONKey
     )
 
--- |
 pattern Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN :: Placement_ActiveStatus
 pattern Placement_ActiveStatus_PLACEMENTSTATUSUNKNOWN = Placement_ActiveStatus "PLACEMENT_STATUS_UNKNOWN"
 
--- |
 pattern Placement_ActiveStatus_PLACEMENTSTATUSACTIVE :: Placement_ActiveStatus
 pattern Placement_ActiveStatus_PLACEMENTSTATUSACTIVE = Placement_ActiveStatus "PLACEMENT_STATUS_ACTIVE"
 
--- |
 pattern Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE :: Placement_ActiveStatus
 pattern Placement_ActiveStatus_PLACEMENTSTATUSINACTIVE = Placement_ActiveStatus "PLACEMENT_STATUS_INACTIVE"
 
--- |
 pattern Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED :: Placement_ActiveStatus
 pattern Placement_ActiveStatus_PLACEMENTSTATUSARCHIVED = Placement_ActiveStatus "PLACEMENT_STATUS_ARCHIVED"
 
--- |
 pattern Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: Placement_ActiveStatus
 pattern Placement_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = Placement_ActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
 
@@ -8370,27 +7601,23 @@ newtype Placement_Compatibility = Placement_Compatibility {fromPlacement_Compati
       Core.FromJSONKey
     )
 
--- |
 pattern Placement_Compatibility_Display :: Placement_Compatibility
 pattern Placement_Compatibility_Display = Placement_Compatibility "DISPLAY"
 
--- |
 pattern Placement_Compatibility_DISPLAYINTERSTITIAL :: Placement_Compatibility
 pattern Placement_Compatibility_DISPLAYINTERSTITIAL = Placement_Compatibility "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Placement_Compatibility_App :: Placement_Compatibility
 pattern Placement_Compatibility_App = Placement_Compatibility "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern Placement_Compatibility_APPINTERSTITIAL :: Placement_Compatibility
 pattern Placement_Compatibility_APPINTERSTITIAL = Placement_Compatibility "APP_INTERSTITIAL"
 
--- |
 pattern Placement_Compatibility_INSTREAMVIDEO :: Placement_Compatibility
 pattern Placement_Compatibility_INSTREAMVIDEO = Placement_Compatibility "IN_STREAM_VIDEO"
 
--- |
 pattern Placement_Compatibility_INSTREAMAUDIO :: Placement_Compatibility
 pattern Placement_Compatibility_INSTREAMAUDIO = Placement_Compatibility "IN_STREAM_AUDIO"
 
@@ -8417,11 +7644,9 @@ newtype Placement_PaymentSource = Placement_PaymentSource {fromPlacement_Payment
       Core.FromJSONKey
     )
 
--- |
 pattern Placement_PaymentSource_PLACEMENTAGENCYPAID :: Placement_PaymentSource
 pattern Placement_PaymentSource_PLACEMENTAGENCYPAID = Placement_PaymentSource "PLACEMENT_AGENCY_PAID"
 
--- |
 pattern Placement_PaymentSource_PLACEMENTPUBLISHERPAID :: Placement_PaymentSource
 pattern Placement_PaymentSource_PLACEMENTPUBLISHERPAID = Placement_PaymentSource "PLACEMENT_PUBLISHER_PAID"
 
@@ -8444,27 +7669,27 @@ newtype Placement_Status = Placement_Status {fromPlacement_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
+-- | Placement is not yet reviewed by publisher.
 pattern Placement_Status_PENDINGREVIEW :: Placement_Status
 pattern Placement_Status_PENDINGREVIEW = Placement_Status "PENDING_REVIEW"
 
--- |
+-- | Placement Ad Serving fee is accepted by publisher
 pattern Placement_Status_PAYMENTACCEPTED :: Placement_Status
 pattern Placement_Status_PAYMENTACCEPTED = Placement_Status "PAYMENT_ACCEPTED"
 
--- |
+-- | Placement Ad Serving fee is rejected by publisher
 pattern Placement_Status_PAYMENTREJECTED :: Placement_Status
 pattern Placement_Status_PAYMENTREJECTED = Placement_Status "PAYMENT_REJECTED"
 
--- |
+-- | Advertisers has accepted rejection of placement ad serving fee. This will suppress future notification on DDMM UI
 pattern Placement_Status_ACKNOWLEDGEREJECTION :: Placement_Status
 pattern Placement_Status_ACKNOWLEDGEREJECTION = Placement_Status "ACKNOWLEDGE_REJECTION"
 
--- |
+-- | Advertisers has accepted acceptance of placement ad serving fee. This will suppress future notification on DDMM UI
 pattern Placement_Status_ACKNOWLEDGEACCEPTANCE :: Placement_Status
 pattern Placement_Status_ACKNOWLEDGEACCEPTANCE = Placement_Status "ACKNOWLEDGE_ACCEPTANCE"
 
--- |
+-- | Advertisers is still working on placement not yet ready for Publisher review; default status for pub-paid placements
 pattern Placement_Status_Draft :: Placement_Status
 pattern Placement_Status_Draft = Placement_Status "DRAFT"
 
@@ -8490,83 +7715,63 @@ newtype Placement_TagFormatsItem = Placement_TagFormatsItem {fromPlacement_TagFo
       Core.FromJSONKey
     )
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGSTANDARD :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGSTANDARD = Placement_TagFormatsItem "PLACEMENT_TAG_STANDARD"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEJAVASCRIPT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEJAVASCRIPT = Placement_TagFormatsItem "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEILAYER :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEILAYER = Placement_TagFormatsItem "PLACEMENT_TAG_IFRAME_ILAYER"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERNALREDIRECT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERNALREDIRECT = Placement_TagFormatsItem "PLACEMENT_TAG_INTERNAL_REDIRECT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGJAVASCRIPT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGJAVASCRIPT = Placement_TagFormatsItem "PLACEMENT_TAG_JAVASCRIPT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT = Placement_TagFormatsItem "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT = Placement_TagFormatsItem "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALJAVASCRIPT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALJAVASCRIPT = Placement_TagFormatsItem "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGCLICKCOMMANDS :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGCLICKCOMMANDS = Placement_TagFormatsItem "PLACEMENT_TAG_CLICK_COMMANDS"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINSTREAMVIDEOPREFETCH :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINSTREAMVIDEOPREFETCH = Placement_TagFormatsItem "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKING :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKING = Placement_TagFormatsItem "PLACEMENT_TAG_TRACKING"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGIFRAME :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGIFRAME = Placement_TagFormatsItem "PLACEMENT_TAG_TRACKING_IFRAME"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGJAVASCRIPT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGJAVASCRIPT = Placement_TagFormatsItem "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 = Placement_TagFormatsItem "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY = Placement_TagFormatsItem "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGJAVASCRIPTLEGACY :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGJAVASCRIPTLEGACY = Placement_TagFormatsItem "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY = Placement_TagFormatsItem "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY = Placement_TagFormatsItem "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 = Placement_TagFormatsItem "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
 
--- |
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT :: Placement_TagFormatsItem
 pattern Placement_TagFormatsItem_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT = Placement_TagFormatsItem "PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT"
 
@@ -8607,19 +7812,16 @@ newtype Placement_VpaidAdapterChoice = Placement_VpaidAdapterChoice {fromPlaceme
       Core.FromJSONKey
     )
 
--- |
+-- | DEFAULT means Google chooses which adapter, if any, to serve.
 pattern Placement_VpaidAdapterChoice_Default :: Placement_VpaidAdapterChoice
 pattern Placement_VpaidAdapterChoice_Default = Placement_VpaidAdapterChoice "DEFAULT"
 
--- |
 pattern Placement_VpaidAdapterChoice_Flash :: Placement_VpaidAdapterChoice
 pattern Placement_VpaidAdapterChoice_Flash = Placement_VpaidAdapterChoice "FLASH"
 
--- |
 pattern Placement_VpaidAdapterChoice_HTML5 :: Placement_VpaidAdapterChoice
 pattern Placement_VpaidAdapterChoice_HTML5 = Placement_VpaidAdapterChoice "HTML5"
 
--- |
 pattern Placement_VpaidAdapterChoice_Both :: Placement_VpaidAdapterChoice
 pattern Placement_VpaidAdapterChoice_Both = Placement_VpaidAdapterChoice "BOTH"
 
@@ -8644,23 +7846,18 @@ newtype PlacementGroup_ActiveStatus = PlacementGroup_ActiveStatus {fromPlacement
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementGroup_ActiveStatus
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_UNKNOWN"
 
--- |
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementGroup_ActiveStatus
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSACTIVE = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_ACTIVE"
 
--- |
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementGroup_ActiveStatus
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_INACTIVE"
 
--- |
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementGroup_ActiveStatus
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_ARCHIVED"
 
--- |
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementGroup_ActiveStatus
 pattern PlacementGroup_ActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementGroup_ActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
 
@@ -8686,11 +7883,11 @@ newtype PlacementGroup_PlacementGroupType = PlacementGroup_PlacementGroupType {f
       Core.FromJSONKey
     )
 
--- |
+-- | A simple group of site-placements (tags). Basically acts as a single pricing point for a group of tags.
 pattern PlacementGroup_PlacementGroupType_PLACEMENTPACKAGE :: PlacementGroup_PlacementGroupType
 pattern PlacementGroup_PlacementGroupType_PLACEMENTPACKAGE = PlacementGroup_PlacementGroupType "PLACEMENT_PACKAGE"
 
--- |
+-- | A group of site-placements (tags) that not only acts as a single pricing point but also assumes that all the tags in it will be served at the same time. This kind of group requires one of its assigned site-placements to be marked as primary for reporting purposes.
 pattern PlacementGroup_PlacementGroupType_PLACEMENTROADBLOCK :: PlacementGroup_PlacementGroupType
 pattern PlacementGroup_PlacementGroupType_PLACEMENTROADBLOCK = PlacementGroup_PlacementGroupType "PLACEMENT_ROADBLOCK"
 
@@ -8713,11 +7910,11 @@ newtype PopupWindowProperties_PositionType = PopupWindowProperties_PositionType 
       Core.FromJSONKey
     )
 
--- |
+-- | window positioning at center.
 pattern PopupWindowProperties_PositionType_Center :: PopupWindowProperties_PositionType
 pattern PopupWindowProperties_PositionType_Center = PopupWindowProperties_PositionType "CENTER"
 
--- |
+-- | window positioning by upper left corner coordinates.
 pattern PopupWindowProperties_PositionType_Coordinates :: PopupWindowProperties_PositionType
 pattern PopupWindowProperties_PositionType_Coordinates = PopupWindowProperties_PositionType "COORDINATES"
 
@@ -8740,15 +7937,12 @@ newtype Pricing_CapCostType = Pricing_CapCostType {fromPricing_CapCostType :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPENONE :: Pricing_CapCostType
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPENONE = Pricing_CapCostType "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
 
--- |
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPEMONTHLY :: Pricing_CapCostType
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPEMONTHLY = Pricing_CapCostType "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY"
 
--- |
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPECUMULATIVE :: Pricing_CapCostType
 pattern Pricing_CapCostType_PLANNINGPLACEMENTCAPCOSTTYPECUMULATIVE = Pricing_CapCostType "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE"
 
@@ -8772,11 +7966,11 @@ newtype Pricing_GroupType = Pricing_GroupType {fromPricing_GroupType :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
+-- | A placement package represents \"package pricing\": Pricing and flight information is defined on the package, not on its child placements. The placements in a package do not need to be on the same page.
 pattern Pricing_GroupType_PLANNINGPLACEMENTGROUPTYPEPACKAGE :: Pricing_GroupType
 pattern Pricing_GroupType_PLANNINGPLACEMENTGROUPTYPEPACKAGE = Pricing_GroupType "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE"
 
--- |
+-- | A roadblock represents a set of placements that are all the same page. One of the child placements is designated as the \"primary\" placement for reporting purposes.
 pattern Pricing_GroupType_PLANNINGPLACEMENTGROUPTYPEROADBLOCK :: Pricing_GroupType
 pattern Pricing_GroupType_PLANNINGPLACEMENTGROUPTYPEROADBLOCK = Pricing_GroupType "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
 
@@ -8799,35 +7993,27 @@ newtype Pricing_PricingType = Pricing_PricingType {fromPricing_PricingType :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEIMPRESSIONS :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEIMPRESSIONS = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPM :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPM = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_CPM"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECLICKS :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECLICKS = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_CLICKS"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPC :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPC = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_CPC"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPA :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPA = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_CPA"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEFLATRATEIMPRESSIONS :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEFLATRATEIMPRESSIONS = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEFLATRATECLICKS :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPEFLATRATECLICKS = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS"
 
--- |
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPMACTIVEVIEW :: Pricing_PricingType
 pattern Pricing_PricingType_PLANNINGPLACEMENTPRICINGTYPECPMACTIVEVIEW = Pricing_PricingType "PLANNING_PLACEMENT_PRICING_TYPE_CPM_ACTIVEVIEW"
 
@@ -8856,15 +8042,12 @@ newtype PricingSchedule_CapCostOption = PricingSchedule_CapCostOption {fromPrici
       Core.FromJSONKey
     )
 
--- |
 pattern PricingSchedule_CapCostOption_CAPCOSTNONE :: PricingSchedule_CapCostOption
 pattern PricingSchedule_CapCostOption_CAPCOSTNONE = PricingSchedule_CapCostOption "CAP_COST_NONE"
 
--- |
 pattern PricingSchedule_CapCostOption_CAPCOSTMONTHLY :: PricingSchedule_CapCostOption
 pattern PricingSchedule_CapCostOption_CAPCOSTMONTHLY = PricingSchedule_CapCostOption "CAP_COST_MONTHLY"
 
--- |
 pattern PricingSchedule_CapCostOption_CAPCOSTCUMULATIVE :: PricingSchedule_CapCostOption
 pattern PricingSchedule_CapCostOption_CAPCOSTCUMULATIVE = PricingSchedule_CapCostOption "CAP_COST_CUMULATIVE"
 
@@ -8888,27 +8071,21 @@ newtype PricingSchedule_PricingType = PricingSchedule_PricingType {fromPricingSc
       Core.FromJSONKey
     )
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPECPM :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPECPM = PricingSchedule_PricingType "PRICING_TYPE_CPM"
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPECPC :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPECPC = PricingSchedule_PricingType "PRICING_TYPE_CPC"
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPECPA :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPECPA = PricingSchedule_PricingType "PRICING_TYPE_CPA"
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPEFLATRATEIMPRESSIONS :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPEFLATRATEIMPRESSIONS = PricingSchedule_PricingType "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPEFLATRATECLICKS :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPEFLATRATECLICKS = PricingSchedule_PricingType "PRICING_TYPE_FLAT_RATE_CLICKS"
 
--- |
 pattern PricingSchedule_PricingType_PRICINGTYPECPMACTIVEVIEW :: PricingSchedule_PricingType
 pattern PricingSchedule_PricingType_PRICINGTYPECPMACTIVEVIEW = PricingSchedule_PricingType "PRICING_TYPE_CPM_ACTIVEVIEW"
 
@@ -8935,31 +8112,24 @@ newtype Project_AudienceAgeGroup = Project_AudienceAgeGroup {fromProject_Audienc
       Core.FromJSONKey
     )
 
--- |
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_18_24 :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_18_24 = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_18_24"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_25_34 :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_25_34 = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_25_34"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_35_44 :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_35_44 = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_35_44"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_45_54 :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_45_54 = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_45_54"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_55_64 :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNING_AUDIENCE_AGE_55_64 = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_55_64"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNINGAUDIENCEAGE65ORMORE :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNINGAUDIENCEAGE65ORMORE = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_65_OR_MORE"
 
--- |
 pattern Project_AudienceAgeGroup_PLANNINGAUDIENCEAGEUNKNOWN :: Project_AudienceAgeGroup
 pattern Project_AudienceAgeGroup_PLANNINGAUDIENCEAGEUNKNOWN = Project_AudienceAgeGroup "PLANNING_AUDIENCE_AGE_UNKNOWN"
 
@@ -8987,11 +8157,9 @@ newtype Project_AudienceGender = Project_AudienceGender {fromProject_AudienceGen
       Core.FromJSONKey
     )
 
--- |
 pattern Project_AudienceGender_PLANNINGAUDIENCEGENDERMALE :: Project_AudienceGender
 pattern Project_AudienceGender_PLANNINGAUDIENCEGENDERMALE = Project_AudienceGender "PLANNING_AUDIENCE_GENDER_MALE"
 
--- |
 pattern Project_AudienceGender_PLANNINGAUDIENCEGENDERFEMALE :: Project_AudienceGender
 pattern Project_AudienceGender_PLANNINGAUDIENCEGENDERFEMALE = Project_AudienceGender "PLANNING_AUDIENCE_GENDER_FEMALE"
 
@@ -9014,11 +8182,9 @@ newtype Recipient_DeliveryType = Recipient_DeliveryType {fromRecipient_DeliveryT
       Core.FromJSONKey
     )
 
--- |
 pattern Recipient_DeliveryType_Link :: Recipient_DeliveryType
 pattern Recipient_DeliveryType_Link = Recipient_DeliveryType "LINK"
 
--- |
 pattern Recipient_DeliveryType_Attachment :: Recipient_DeliveryType
 pattern Recipient_DeliveryType_Attachment = Recipient_DeliveryType "ATTACHMENT"
 
@@ -9041,47 +8207,47 @@ newtype RemarketingList_ListSource = RemarketingList_ListSource {fromRemarketing
       Core.FromJSONKey
     )
 
--- |
+-- | covers sources not supported in DCM other than those listed below
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEOTHER :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEOTHER = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_OTHER"
 
--- |
+-- | ADX
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEADX :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEADX = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_ADX"
 
--- |
+-- | DFP
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDFP :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDFP = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_DFP"
 
--- |
+-- | XFP
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEXFP :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEXFP = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_XFP"
 
--- |
+-- | DoubleClick Campaign Manager
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDFA :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDFA = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_DFA"
 
--- |
+-- | Google Analytics Premium
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEGA :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEGA = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_GA"
 
--- |
+-- | Youtube
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEYOUTUBE :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEYOUTUBE = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_YOUTUBE"
 
--- |
+-- | DoubleClick Bid Manager
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDBM :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDBM = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_DBM"
 
--- |
+-- | G+
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEGPLUS :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEGPLUS = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_GPLUS"
 
--- |
+-- | DoubleClick Audience Center
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDMP :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEDMP = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_DMP"
 
--- |
+-- | Playstore
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEPLAYSTORE :: RemarketingList_ListSource
 pattern RemarketingList_ListSource_REMARKETINGLISTSOURCEPLAYSTORE = RemarketingList_ListSource "REMARKETING_LIST_SOURCE_PLAY_STORE"
 
@@ -9113,19 +8279,15 @@ newtype Report_CrossDimensionReachCriteria_Dimension = Report_CrossDimensionReac
       Core.FromJSONKey
     )
 
--- |
 pattern Report_CrossDimensionReachCriteria_Dimension_Advertiser :: Report_CrossDimensionReachCriteria_Dimension
 pattern Report_CrossDimensionReachCriteria_Dimension_Advertiser = Report_CrossDimensionReachCriteria_Dimension "ADVERTISER"
 
--- |
 pattern Report_CrossDimensionReachCriteria_Dimension_Campaign :: Report_CrossDimensionReachCriteria_Dimension
 pattern Report_CrossDimensionReachCriteria_Dimension_Campaign = Report_CrossDimensionReachCriteria_Dimension "CAMPAIGN"
 
--- |
 pattern Report_CrossDimensionReachCriteria_Dimension_SITEBYADVERTISER :: Report_CrossDimensionReachCriteria_Dimension
 pattern Report_CrossDimensionReachCriteria_Dimension_SITEBYADVERTISER = Report_CrossDimensionReachCriteria_Dimension "SITE_BY_ADVERTISER"
 
--- |
 pattern Report_CrossDimensionReachCriteria_Dimension_SITEBYCAMPAIGN :: Report_CrossDimensionReachCriteria_Dimension
 pattern Report_CrossDimensionReachCriteria_Dimension_SITEBYCAMPAIGN = Report_CrossDimensionReachCriteria_Dimension "SITE_BY_CAMPAIGN"
 
@@ -9150,11 +8312,9 @@ newtype Report_Delivery_EmailOwnerDeliveryType = Report_Delivery_EmailOwnerDeliv
       Core.FromJSONKey
     )
 
--- |
 pattern Report_Delivery_EmailOwnerDeliveryType_Link :: Report_Delivery_EmailOwnerDeliveryType
 pattern Report_Delivery_EmailOwnerDeliveryType_Link = Report_Delivery_EmailOwnerDeliveryType "LINK"
 
--- |
 pattern Report_Delivery_EmailOwnerDeliveryType_Attachment :: Report_Delivery_EmailOwnerDeliveryType
 pattern Report_Delivery_EmailOwnerDeliveryType_Attachment = Report_Delivery_EmailOwnerDeliveryType "ATTACHMENT"
 
@@ -9177,11 +8337,9 @@ newtype Report_Format = Report_Format {fromReport_Format :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Report_Format_Csv :: Report_Format
 pattern Report_Format_Csv = Report_Format "CSV"
 
--- |
 pattern Report_Format_Excel :: Report_Format
 pattern Report_Format_Excel = Report_Format "EXCEL"
 
@@ -9203,31 +8361,24 @@ newtype Report_Schedule_RepeatsOnWeekDaysItem = Report_Schedule_RepeatsOnWeekDay
       Core.FromJSONKey
     )
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Sunday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Sunday = Report_Schedule_RepeatsOnWeekDaysItem "SUNDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Monday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Monday = Report_Schedule_RepeatsOnWeekDaysItem "MONDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Tuesday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Tuesday = Report_Schedule_RepeatsOnWeekDaysItem "TUESDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Wednesday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Wednesday = Report_Schedule_RepeatsOnWeekDaysItem "WEDNESDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Thursday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Thursday = Report_Schedule_RepeatsOnWeekDaysItem "THURSDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Friday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Friday = Report_Schedule_RepeatsOnWeekDaysItem "FRIDAY"
 
--- |
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Saturday :: Report_Schedule_RepeatsOnWeekDaysItem
 pattern Report_Schedule_RepeatsOnWeekDaysItem_Saturday = Report_Schedule_RepeatsOnWeekDaysItem "SATURDAY"
 
@@ -9255,11 +8406,9 @@ newtype Report_Schedule_RunsOnDayOfMonth = Report_Schedule_RunsOnDayOfMonth {fro
       Core.FromJSONKey
     )
 
--- |
 pattern Report_Schedule_RunsOnDayOfMonth_DAYOFMONTH :: Report_Schedule_RunsOnDayOfMonth
 pattern Report_Schedule_RunsOnDayOfMonth_DAYOFMONTH = Report_Schedule_RunsOnDayOfMonth "DAY_OF_MONTH"
 
--- |
 pattern Report_Schedule_RunsOnDayOfMonth_WEEKOFMONTH :: Report_Schedule_RunsOnDayOfMonth
 pattern Report_Schedule_RunsOnDayOfMonth_WEEKOFMONTH = Report_Schedule_RunsOnDayOfMonth "WEEK_OF_MONTH"
 
@@ -9282,33 +8431,23 @@ newtype Report_Type = Report_Type {fromReport_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Report_Type_Standard :: Report_Type
 pattern Report_Type_Standard = Report_Type "STANDARD"
 
--- |
 pattern Report_Type_Reach :: Report_Type
 pattern Report_Type_Reach = Report_Type "REACH"
 
--- |
 pattern Report_Type_PATHTOCONVERSION :: Report_Type
 pattern Report_Type_PATHTOCONVERSION = Report_Type "PATH_TO_CONVERSION"
 
--- |
 pattern Report_Type_CROSSDIMENSIONREACH :: Report_Type
 pattern Report_Type_CROSSDIMENSIONREACH = Report_Type "CROSS_DIMENSION_REACH"
 
--- |
 pattern Report_Type_Floodlight :: Report_Type
 pattern Report_Type_Floodlight = Report_Type "FLOODLIGHT"
 
--- |
-pattern Report_Type_Path :: Report_Type
-pattern Report_Type_Path = Report_Type "PATH"
-
--- |
-pattern Report_Type_PATHATTRIBUTION :: Report_Type
-pattern Report_Type_PATHATTRIBUTION = Report_Type "PATH_ATTRIBUTION"
+pattern Report_Type_CROSSMEDIAREACH :: Report_Type
+pattern Report_Type_CROSSMEDIAREACH = Report_Type "CROSS_MEDIA_REACH"
 
 {-# COMPLETE
   Report_Type_Standard,
@@ -9316,8 +8455,7 @@ pattern Report_Type_PATHATTRIBUTION = Report_Type "PATH_ATTRIBUTION"
   Report_Type_PATHTOCONVERSION,
   Report_Type_CROSSDIMENSIONREACH,
   Report_Type_Floodlight,
-  Report_Type_Path,
-  Report_Type_PATHATTRIBUTION,
+  Report_Type_CROSSMEDIAREACH,
   Report_Type
   #-}
 
@@ -9334,11 +8472,9 @@ newtype SiteContact_ContactType = SiteContact_ContactType {fromSiteContact_Conta
       Core.FromJSONKey
     )
 
--- |
 pattern SiteContact_ContactType_SALESPERSON :: SiteContact_ContactType
 pattern SiteContact_ContactType_SALESPERSON = SiteContact_ContactType "SALES_PERSON"
 
--- |
 pattern SiteContact_ContactType_Trafficker :: SiteContact_ContactType
 pattern SiteContact_ContactType_Trafficker = SiteContact_ContactType "TRAFFICKER"
 
@@ -9361,19 +8497,16 @@ newtype SiteSettings_VpaidAdapterChoiceTemplate = SiteSettings_VpaidAdapterChoic
       Core.FromJSONKey
     )
 
--- |
+-- | DEFAULT means Google chooses which adapter, if any, to serve.
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Default :: SiteSettings_VpaidAdapterChoiceTemplate
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Default = SiteSettings_VpaidAdapterChoiceTemplate "DEFAULT"
 
--- |
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Flash :: SiteSettings_VpaidAdapterChoiceTemplate
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Flash = SiteSettings_VpaidAdapterChoiceTemplate "FLASH"
 
--- |
 pattern SiteSettings_VpaidAdapterChoiceTemplate_HTML5 :: SiteSettings_VpaidAdapterChoiceTemplate
 pattern SiteSettings_VpaidAdapterChoiceTemplate_HTML5 = SiteSettings_VpaidAdapterChoiceTemplate "HTML5"
 
--- |
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Both :: SiteSettings_VpaidAdapterChoiceTemplate
 pattern SiteSettings_VpaidAdapterChoiceTemplate_Both = SiteSettings_VpaidAdapterChoiceTemplate "BOTH"
 
@@ -9398,15 +8531,12 @@ newtype SiteVideoSettings_Orientation = SiteVideoSettings_Orientation {fromSiteV
       Core.FromJSONKey
     )
 
--- |
 pattern SiteVideoSettings_Orientation_Any :: SiteVideoSettings_Orientation
 pattern SiteVideoSettings_Orientation_Any = SiteVideoSettings_Orientation "ANY"
 
--- |
 pattern SiteVideoSettings_Orientation_Landscape :: SiteVideoSettings_Orientation
 pattern SiteVideoSettings_Orientation_Landscape = SiteVideoSettings_Orientation "LANDSCAPE"
 
--- |
 pattern SiteVideoSettings_Orientation_Portrait :: SiteVideoSettings_Orientation
 pattern SiteVideoSettings_Orientation_Portrait = SiteVideoSettings_Orientation "PORTRAIT"
 
@@ -9430,11 +8560,9 @@ newtype SortedDimension_SortOrder = SortedDimension_SortOrder {fromSortedDimensi
       Core.FromJSONKey
     )
 
--- |
 pattern SortedDimension_SortOrder_Ascending :: SortedDimension_SortOrder
 pattern SortedDimension_SortOrder_Ascending = SortedDimension_SortOrder "ASCENDING"
 
--- |
 pattern SortedDimension_SortOrder_Descending :: SortedDimension_SortOrder
 pattern SortedDimension_SortOrder_Descending = SortedDimension_SortOrder "DESCENDING"
 
@@ -9457,83 +8585,63 @@ newtype TagData_Format = TagData_Format {fromTagData_Format :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern TagData_Format_PLACEMENTTAGSTANDARD :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGSTANDARD = TagData_Format "PLACEMENT_TAG_STANDARD"
 
--- |
 pattern TagData_Format_PLACEMENTTAGIFRAMEJAVASCRIPT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGIFRAMEJAVASCRIPT = TagData_Format "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGIFRAMEILAYER :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGIFRAMEILAYER = TagData_Format "PLACEMENT_TAG_IFRAME_ILAYER"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERNALREDIRECT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERNALREDIRECT = TagData_Format "PLACEMENT_TAG_INTERNAL_REDIRECT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGJAVASCRIPT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGJAVASCRIPT = TagData_Format "PLACEMENT_TAG_JAVASCRIPT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT = TagData_Format "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT = TagData_Format "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALJAVASCRIPT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALJAVASCRIPT = TagData_Format "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
 
--- |
 pattern TagData_Format_PLACEMENTTAGCLICKCOMMANDS :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGCLICKCOMMANDS = TagData_Format "PLACEMENT_TAG_CLICK_COMMANDS"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINSTREAMVIDEOPREFETCH :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINSTREAMVIDEOPREFETCH = TagData_Format "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
 
--- |
 pattern TagData_Format_PLACEMENTTAGTRACKING :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGTRACKING = TagData_Format "PLACEMENT_TAG_TRACKING"
 
--- |
 pattern TagData_Format_PLACEMENTTAGTRACKINGIFRAME :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGTRACKINGIFRAME = TagData_Format "PLACEMENT_TAG_TRACKING_IFRAME"
 
--- |
 pattern TagData_Format_PLACEMENTTAGTRACKINGJAVASCRIPT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGTRACKINGJAVASCRIPT = TagData_Format "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
--- |
 pattern TagData_Format_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 :: TagData_Format
 pattern TagData_Format_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 = TagData_Format "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
 
--- |
 pattern TagData_Format_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY = TagData_Format "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern TagData_Format_PLACEMENTTAGJAVASCRIPTLEGACY :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGJAVASCRIPTLEGACY = TagData_Format "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY = TagData_Format "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY = TagData_Format "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
 
--- |
 pattern TagData_Format_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 :: TagData_Format
 pattern TagData_Format_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 = TagData_Format "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
 
--- |
 pattern TagData_Format_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT :: TagData_Format
 pattern TagData_Format_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT = TagData_Format "PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT"
 
@@ -9574,15 +8682,15 @@ newtype TagSetting_KeywordOption = TagSetting_KeywordOption {fromTagSetting_Keyw
       Core.FromJSONKey
     )
 
--- |
+-- | Creates DART ad tags with a placeholder, such as kw=[keyword] and a list of keywords. The site trafficker must replace [keyword] with the keywords targeted by an ad.
 pattern TagSetting_KeywordOption_PLACEHOLDERWITHLISTOFKEYWORDS :: TagSetting_KeywordOption
 pattern TagSetting_KeywordOption_PLACEHOLDERWITHLISTOFKEYWORDS = TagSetting_KeywordOption "PLACEHOLDER_WITH_LIST_OF_KEYWORDS"
 
--- |
+-- | Creates DART ad tags that do not have a placeholder for keywords and creates a list of keywords separately from the DART ad tags. Use this option if the site uses a keyword referrer or is a site that uses DART for Publishers.
 pattern TagSetting_KeywordOption_Ignore :: TagSetting_KeywordOption
 pattern TagSetting_KeywordOption_Ignore = TagSetting_KeywordOption "IGNORE"
 
--- |
+-- | Results in unique tag generation for each relevant keyword during tag export. For example, an ad with three keywords will generate three tags with each tag having its kw= parameter filled in with the relevant keyword values.
 pattern TagSetting_KeywordOption_GENERATESEPARATETAGFOREACHKEYWORD :: TagSetting_KeywordOption
 pattern TagSetting_KeywordOption_GENERATESEPARATETAGFOREACHKEYWORD = TagSetting_KeywordOption "GENERATE_SEPARATE_TAG_FOR_EACH_KEYWORD"
 
@@ -9606,15 +8714,15 @@ newtype TargetWindow_TargetWindowOption = TargetWindow_TargetWindowOption {fromT
       Core.FromJSONKey
     )
 
--- |
+-- | Open up a new window to display the backup image Corresponds to \"_blank\" in html
 pattern TargetWindow_TargetWindowOption_NEWWINDOW :: TargetWindow_TargetWindowOption
 pattern TargetWindow_TargetWindowOption_NEWWINDOW = TargetWindow_TargetWindowOption "NEW_WINDOW"
 
--- |
+-- | Use the current window to display the backup image Corresponds to \"_top\" in html
 pattern TargetWindow_TargetWindowOption_CURRENTWINDOW :: TargetWindow_TargetWindowOption
 pattern TargetWindow_TargetWindowOption_CURRENTWINDOW = TargetWindow_TargetWindowOption "CURRENT_WINDOW"
 
--- |
+-- | User-defined HTML used to display the backup image Corresponds to \"other\"
 pattern TargetWindow_TargetWindowOption_Custom :: TargetWindow_TargetWindowOption
 pattern TargetWindow_TargetWindowOption_Custom = TargetWindow_TargetWindowOption "CUSTOM"
 
@@ -9638,47 +8746,47 @@ newtype TargetableRemarketingList_ListSource = TargetableRemarketingList_ListSou
       Core.FromJSONKey
     )
 
--- |
+-- | covers sources not supported in DCM other than those listed below
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEOTHER :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEOTHER = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_OTHER"
 
--- |
+-- | ADX
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEADX :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEADX = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_ADX"
 
--- |
+-- | DFP
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDFP :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDFP = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_DFP"
 
--- |
+-- | XFP
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEXFP :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEXFP = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_XFP"
 
--- |
+-- | DoubleClick Campaign Manager
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDFA :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDFA = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_DFA"
 
--- |
+-- | Google Analytics Premium
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEGA :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEGA = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_GA"
 
--- |
+-- | Youtube
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEYOUTUBE :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEYOUTUBE = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_YOUTUBE"
 
--- |
+-- | DoubleClick Bid Manager
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDBM :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDBM = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_DBM"
 
--- |
+-- | G+
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEGPLUS :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEGPLUS = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_GPLUS"
 
--- |
+-- | DoubleClick Audience Center
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDMP :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEDMP = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_DMP"
 
--- |
+-- | Playstore
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEPLAYSTORE :: TargetableRemarketingList_ListSource
 pattern TargetableRemarketingList_ListSource_REMARKETINGLISTSOURCEPLAYSTORE = TargetableRemarketingList_ListSource "REMARKETING_LIST_SOURCE_PLAY_STORE"
 
@@ -9710,79 +8818,79 @@ newtype ThirdPartyTrackingUrl_ThirdPartyUrlType = ThirdPartyTrackingUrl_ThirdPar
       Core.FromJSONKey
     )
 
--- |
+-- | Used to count impressions of the ad after video buffering is complete.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_Impression :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_Impression = ThirdPartyTrackingUrl_ThirdPartyUrlType "IMPRESSION"
 
--- |
+-- | Used to track user clicks on the video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_CLICKTRACKING :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_CLICKTRACKING = ThirdPartyTrackingUrl_ThirdPartyUrlType "CLICK_TRACKING"
 
--- |
+-- | Used to track the number of times a user starts a video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSTART :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSTART = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_START"
 
--- |
+-- | Used to track the number of times the video plays to 25% of its length.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOFIRSTQUARTILE :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOFIRSTQUARTILE = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_FIRST_QUARTILE"
 
--- |
+-- | Used to track the number of times the video plays to 50% of its length.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOMIDPOINT :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOMIDPOINT = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_MIDPOINT"
 
--- |
+-- | Used to track the number of times the video plays to 75% of its length.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOTHIRDQUARTILE :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOTHIRDQUARTILE = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_THIRD_QUARTILE"
 
--- |
+-- | Used to track the number of times the video plays to the end.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOCOMPLETE :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOCOMPLETE = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_COMPLETE"
 
--- |
+-- | Used to track the number of times a user mutes the video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOMUTE :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOMUTE = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_MUTE"
 
--- |
+-- | Used to track the number of times a user pauses the video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOPAUSE :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOPAUSE = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_PAUSE"
 
--- |
+-- | Used to track the number of times a user replays the video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOREWIND :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOREWIND = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_REWIND"
 
--- |
+-- | Used to track the number of times a user expands the video to full-screen size.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOFULLSCREEN :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOFULLSCREEN = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_FULLSCREEN"
 
--- |
+-- | Used to track the number of times a user stops the video.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSTOP :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSTOP = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_STOP"
 
--- |
+-- | Used to track the number of times a user performs a custom click, such as clicking on a video hot spot.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOCUSTOM :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOCUSTOM = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_CUSTOM"
 
--- |
+-- | Used for DFA6 compatibility, this is deprecating in favor of event tags.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_Survey :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_Survey = ThirdPartyTrackingUrl_ThirdPartyUrlType "SURVEY"
 
--- |
+-- | Used by Studio RichMediaCreative, maps to its thirdPartyImpressionsUrl
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIAIMPRESSION :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIAIMPRESSION = ThirdPartyTrackingUrl_ThirdPartyUrlType "RICH_MEDIA_IMPRESSION"
 
--- |
+-- | Used by Studio RichMediaCreative, maps to its thirdPartyRichMediaImpressionsUrl
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIARMIMPRESSION :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIARMIMPRESSION = ThirdPartyTrackingUrl_ThirdPartyUrlType "RICH_MEDIA_RM_IMPRESSION"
 
--- |
+-- | Used by Studio RichMediaCreative, maps to its thirdPartyBackupImageImpressionsUrl
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIABACKUPIMPRESSION :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_RICHMEDIABACKUPIMPRESSION = ThirdPartyTrackingUrl_ThirdPartyUrlType "RICH_MEDIA_BACKUP_IMPRESSION"
 
--- |
+-- | Used to track the number of times the video was skipped.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSKIP :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOSKIP = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_SKIP"
 
--- |
+-- | Used to track the number of times the video plays to an offset determined by the user.
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOPROGRESS :: ThirdPartyTrackingUrl_ThirdPartyUrlType
 pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOPROGRESS = ThirdPartyTrackingUrl_ThirdPartyUrlType "VIDEO_PROGRESS"
 
@@ -9809,6 +8917,90 @@ pattern ThirdPartyTrackingUrl_ThirdPartyUrlType_VIDEOPROGRESS = ThirdPartyTracki
   ThirdPartyTrackingUrl_ThirdPartyUrlType
   #-}
 
+-- | \"CampaignComponentType\" of this TV campaign.
+newtype TvCampaignSummary_Type = TvCampaignSummary_Type {fromTvCampaignSummary_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Required to exist; do not use.
+pattern TvCampaignSummary_Type_CAMPAIGNCOMPONENTTYPEUNSPECIFIED :: TvCampaignSummary_Type
+pattern TvCampaignSummary_Type_CAMPAIGNCOMPONENTTYPEUNSPECIFIED = TvCampaignSummary_Type "CAMPAIGN_COMPONENT_TYPE_UNSPECIFIED"
+
+-- | Company.
+pattern TvCampaignSummary_Type_Company :: TvCampaignSummary_Type
+pattern TvCampaignSummary_Type_Company = TvCampaignSummary_Type "COMPANY"
+
+-- | Brand.
+pattern TvCampaignSummary_Type_Brand :: TvCampaignSummary_Type
+pattern TvCampaignSummary_Type_Brand = TvCampaignSummary_Type "BRAND"
+
+-- | Product.
+pattern TvCampaignSummary_Type_Product :: TvCampaignSummary_Type
+pattern TvCampaignSummary_Type_Product = TvCampaignSummary_Type "PRODUCT"
+
+-- | Campaign.
+pattern TvCampaignSummary_Type_Campaign :: TvCampaignSummary_Type
+pattern TvCampaignSummary_Type_Campaign = TvCampaignSummary_Type "CAMPAIGN"
+
+{-# COMPLETE
+  TvCampaignSummary_Type_CAMPAIGNCOMPONENTTYPEUNSPECIFIED,
+  TvCampaignSummary_Type_Company,
+  TvCampaignSummary_Type_Brand,
+  TvCampaignSummary_Type_Product,
+  TvCampaignSummary_Type_Campaign,
+  TvCampaignSummary_Type
+  #-}
+
+-- | The date window of the timepoint.
+newtype TvCampaignTimepoint_DateWindow = TvCampaignTimepoint_DateWindow {fromTvCampaignTimepoint_DateWindow :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, should never be set.
+pattern TvCampaignTimepoint_DateWindow_WEEKSUNSPECIFIED :: TvCampaignTimepoint_DateWindow
+pattern TvCampaignTimepoint_DateWindow_WEEKSUNSPECIFIED = TvCampaignTimepoint_DateWindow "WEEKS_UNSPECIFIED"
+
+-- | One week.
+pattern TvCampaignTimepoint_DateWindow_WEEKSONE :: TvCampaignTimepoint_DateWindow
+pattern TvCampaignTimepoint_DateWindow_WEEKSONE = TvCampaignTimepoint_DateWindow "WEEKS_ONE"
+
+-- | Four weeks.
+pattern TvCampaignTimepoint_DateWindow_WEEKSFOUR :: TvCampaignTimepoint_DateWindow
+pattern TvCampaignTimepoint_DateWindow_WEEKSFOUR = TvCampaignTimepoint_DateWindow "WEEKS_FOUR"
+
+-- | Eight weeks.
+pattern TvCampaignTimepoint_DateWindow_WEEKSEIGHT :: TvCampaignTimepoint_DateWindow
+pattern TvCampaignTimepoint_DateWindow_WEEKSEIGHT = TvCampaignTimepoint_DateWindow "WEEKS_EIGHT"
+
+-- | Twelve weeks.
+pattern TvCampaignTimepoint_DateWindow_WEEKSTWELVE :: TvCampaignTimepoint_DateWindow
+pattern TvCampaignTimepoint_DateWindow_WEEKSTWELVE = TvCampaignTimepoint_DateWindow "WEEKS_TWELVE"
+
+{-# COMPLETE
+  TvCampaignTimepoint_DateWindow_WEEKSUNSPECIFIED,
+  TvCampaignTimepoint_DateWindow_WEEKSONE,
+  TvCampaignTimepoint_DateWindow_WEEKSFOUR,
+  TvCampaignTimepoint_DateWindow_WEEKSEIGHT,
+  TvCampaignTimepoint_DateWindow_WEEKSTWELVE,
+  TvCampaignTimepoint_DateWindow
+  #-}
+
 -- | Registry used for the Ad ID value.
 newtype UniversalAdId_Registry = UniversalAdId_Registry {fromUniversalAdId_Registry :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -9822,27 +9014,27 @@ newtype UniversalAdId_Registry = UniversalAdId_Registry {fromUniversalAdId_Regis
       Core.FromJSONKey
     )
 
--- |
 pattern UniversalAdId_Registry_Other :: UniversalAdId_Registry
 pattern UniversalAdId_Registry_Other = UniversalAdId_Registry "OTHER"
 
--- |
 pattern UniversalAdId_Registry_ADIDOFFICIAL :: UniversalAdId_Registry
 pattern UniversalAdId_Registry_ADIDOFFICIAL = UniversalAdId_Registry "AD_ID_OFFICIAL"
 
--- |
 pattern UniversalAdId_Registry_Clearcast :: UniversalAdId_Registry
 pattern UniversalAdId_Registry_Clearcast = UniversalAdId_Registry "CLEARCAST"
 
--- |
 pattern UniversalAdId_Registry_Dcm :: UniversalAdId_Registry
 pattern UniversalAdId_Registry_Dcm = UniversalAdId_Registry "DCM"
+
+pattern UniversalAdId_Registry_Arpp :: UniversalAdId_Registry
+pattern UniversalAdId_Registry_Arpp = UniversalAdId_Registry "ARPP"
 
 {-# COMPLETE
   UniversalAdId_Registry_Other,
   UniversalAdId_Registry_ADIDOFFICIAL,
   UniversalAdId_Registry_Clearcast,
   UniversalAdId_Registry_Dcm,
+  UniversalAdId_Registry_Arpp,
   UniversalAdId_Registry
   #-}
 
@@ -9859,11 +9051,9 @@ newtype UserDefinedVariableConfiguration_DataType = UserDefinedVariableConfigura
       Core.FromJSONKey
     )
 
--- |
 pattern UserDefinedVariableConfiguration_DataType_String :: UserDefinedVariableConfiguration_DataType
 pattern UserDefinedVariableConfiguration_DataType_String = UserDefinedVariableConfiguration_DataType "STRING"
 
--- |
 pattern UserDefinedVariableConfiguration_DataType_Number :: UserDefinedVariableConfiguration_DataType
 pattern UserDefinedVariableConfiguration_DataType_Number = UserDefinedVariableConfiguration_DataType "NUMBER"
 
@@ -9886,403 +9076,303 @@ newtype UserDefinedVariableConfiguration_VariableType = UserDefinedVariableConfi
       Core.FromJSONKey
     )
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U1 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U1 = UserDefinedVariableConfiguration_VariableType "U1"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U2 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U2 = UserDefinedVariableConfiguration_VariableType "U2"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U3 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U3 = UserDefinedVariableConfiguration_VariableType "U3"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U4 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U4 = UserDefinedVariableConfiguration_VariableType "U4"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U5 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U5 = UserDefinedVariableConfiguration_VariableType "U5"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U6 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U6 = UserDefinedVariableConfiguration_VariableType "U6"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U7 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U7 = UserDefinedVariableConfiguration_VariableType "U7"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U8 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U8 = UserDefinedVariableConfiguration_VariableType "U8"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U9 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U9 = UserDefinedVariableConfiguration_VariableType "U9"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U10 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U10 = UserDefinedVariableConfiguration_VariableType "U10"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U11 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U11 = UserDefinedVariableConfiguration_VariableType "U11"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U12 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U12 = UserDefinedVariableConfiguration_VariableType "U12"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U13 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U13 = UserDefinedVariableConfiguration_VariableType "U13"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U14 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U14 = UserDefinedVariableConfiguration_VariableType "U14"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U15 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U15 = UserDefinedVariableConfiguration_VariableType "U15"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U16 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U16 = UserDefinedVariableConfiguration_VariableType "U16"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U17 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U17 = UserDefinedVariableConfiguration_VariableType "U17"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U18 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U18 = UserDefinedVariableConfiguration_VariableType "U18"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U19 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U19 = UserDefinedVariableConfiguration_VariableType "U19"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U20 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U20 = UserDefinedVariableConfiguration_VariableType "U20"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U21 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U21 = UserDefinedVariableConfiguration_VariableType "U21"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U22 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U22 = UserDefinedVariableConfiguration_VariableType "U22"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U23 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U23 = UserDefinedVariableConfiguration_VariableType "U23"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U24 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U24 = UserDefinedVariableConfiguration_VariableType "U24"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U25 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U25 = UserDefinedVariableConfiguration_VariableType "U25"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U26 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U26 = UserDefinedVariableConfiguration_VariableType "U26"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U27 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U27 = UserDefinedVariableConfiguration_VariableType "U27"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U28 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U28 = UserDefinedVariableConfiguration_VariableType "U28"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U29 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U29 = UserDefinedVariableConfiguration_VariableType "U29"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U30 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U30 = UserDefinedVariableConfiguration_VariableType "U30"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U31 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U31 = UserDefinedVariableConfiguration_VariableType "U31"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U32 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U32 = UserDefinedVariableConfiguration_VariableType "U32"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U33 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U33 = UserDefinedVariableConfiguration_VariableType "U33"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U34 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U34 = UserDefinedVariableConfiguration_VariableType "U34"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U35 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U35 = UserDefinedVariableConfiguration_VariableType "U35"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U36 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U36 = UserDefinedVariableConfiguration_VariableType "U36"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U37 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U37 = UserDefinedVariableConfiguration_VariableType "U37"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U38 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U38 = UserDefinedVariableConfiguration_VariableType "U38"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U39 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U39 = UserDefinedVariableConfiguration_VariableType "U39"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U40 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U40 = UserDefinedVariableConfiguration_VariableType "U40"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U41 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U41 = UserDefinedVariableConfiguration_VariableType "U41"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U42 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U42 = UserDefinedVariableConfiguration_VariableType "U42"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U43 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U43 = UserDefinedVariableConfiguration_VariableType "U43"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U44 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U44 = UserDefinedVariableConfiguration_VariableType "U44"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U45 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U45 = UserDefinedVariableConfiguration_VariableType "U45"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U46 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U46 = UserDefinedVariableConfiguration_VariableType "U46"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U47 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U47 = UserDefinedVariableConfiguration_VariableType "U47"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U48 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U48 = UserDefinedVariableConfiguration_VariableType "U48"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U49 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U49 = UserDefinedVariableConfiguration_VariableType "U49"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U50 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U50 = UserDefinedVariableConfiguration_VariableType "U50"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U51 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U51 = UserDefinedVariableConfiguration_VariableType "U51"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U52 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U52 = UserDefinedVariableConfiguration_VariableType "U52"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U53 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U53 = UserDefinedVariableConfiguration_VariableType "U53"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U54 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U54 = UserDefinedVariableConfiguration_VariableType "U54"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U55 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U55 = UserDefinedVariableConfiguration_VariableType "U55"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U56 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U56 = UserDefinedVariableConfiguration_VariableType "U56"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U57 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U57 = UserDefinedVariableConfiguration_VariableType "U57"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U58 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U58 = UserDefinedVariableConfiguration_VariableType "U58"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U59 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U59 = UserDefinedVariableConfiguration_VariableType "U59"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U60 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U60 = UserDefinedVariableConfiguration_VariableType "U60"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U61 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U61 = UserDefinedVariableConfiguration_VariableType "U61"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U62 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U62 = UserDefinedVariableConfiguration_VariableType "U62"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U63 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U63 = UserDefinedVariableConfiguration_VariableType "U63"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U64 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U64 = UserDefinedVariableConfiguration_VariableType "U64"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U65 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U65 = UserDefinedVariableConfiguration_VariableType "U65"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U66 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U66 = UserDefinedVariableConfiguration_VariableType "U66"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U67 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U67 = UserDefinedVariableConfiguration_VariableType "U67"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U68 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U68 = UserDefinedVariableConfiguration_VariableType "U68"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U69 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U69 = UserDefinedVariableConfiguration_VariableType "U69"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U70 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U70 = UserDefinedVariableConfiguration_VariableType "U70"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U71 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U71 = UserDefinedVariableConfiguration_VariableType "U71"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U72 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U72 = UserDefinedVariableConfiguration_VariableType "U72"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U73 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U73 = UserDefinedVariableConfiguration_VariableType "U73"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U74 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U74 = UserDefinedVariableConfiguration_VariableType "U74"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U75 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U75 = UserDefinedVariableConfiguration_VariableType "U75"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U76 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U76 = UserDefinedVariableConfiguration_VariableType "U76"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U77 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U77 = UserDefinedVariableConfiguration_VariableType "U77"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U78 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U78 = UserDefinedVariableConfiguration_VariableType "U78"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U79 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U79 = UserDefinedVariableConfiguration_VariableType "U79"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U80 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U80 = UserDefinedVariableConfiguration_VariableType "U80"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U81 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U81 = UserDefinedVariableConfiguration_VariableType "U81"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U82 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U82 = UserDefinedVariableConfiguration_VariableType "U82"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U83 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U83 = UserDefinedVariableConfiguration_VariableType "U83"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U84 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U84 = UserDefinedVariableConfiguration_VariableType "U84"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U85 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U85 = UserDefinedVariableConfiguration_VariableType "U85"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U86 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U86 = UserDefinedVariableConfiguration_VariableType "U86"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U87 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U87 = UserDefinedVariableConfiguration_VariableType "U87"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U88 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U88 = UserDefinedVariableConfiguration_VariableType "U88"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U89 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U89 = UserDefinedVariableConfiguration_VariableType "U89"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U90 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U90 = UserDefinedVariableConfiguration_VariableType "U90"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U91 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U91 = UserDefinedVariableConfiguration_VariableType "U91"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U92 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U92 = UserDefinedVariableConfiguration_VariableType "U92"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U93 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U93 = UserDefinedVariableConfiguration_VariableType "U93"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U94 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U94 = UserDefinedVariableConfiguration_VariableType "U94"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U95 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U95 = UserDefinedVariableConfiguration_VariableType "U95"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U96 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U96 = UserDefinedVariableConfiguration_VariableType "U96"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U97 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U97 = UserDefinedVariableConfiguration_VariableType "U97"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U98 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U98 = UserDefinedVariableConfiguration_VariableType "U98"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U99 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U99 = UserDefinedVariableConfiguration_VariableType "U99"
 
--- |
 pattern UserDefinedVariableConfiguration_VariableType_U100 :: UserDefinedVariableConfiguration_VariableType
 pattern UserDefinedVariableConfiguration_VariableType_U100 = UserDefinedVariableConfiguration_VariableType "U100"
 
@@ -10403,27 +9493,27 @@ newtype UserRolePermission_Availability = UserRolePermission_Availability {fromU
       Core.FromJSONKey
     )
 
--- |
+-- | Not available by default.
 pattern UserRolePermission_Availability_NOTAVAILABLEBYDEFAULT :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_NOTAVAILABLEBYDEFAULT = UserRolePermission_Availability "NOT_AVAILABLE_BY_DEFAULT"
 
--- |
+-- | Available by default to accounts only.
 pattern UserRolePermission_Availability_ACCOUNTBYDEFAULT :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_ACCOUNTBYDEFAULT = UserRolePermission_Availability "ACCOUNT_BY_DEFAULT"
 
--- |
+-- | Available by default to both accounts and subaccounts.
 pattern UserRolePermission_Availability_SUBACCOUNTANDACCOUNTBYDEFAULT :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_SUBACCOUNTANDACCOUNTBYDEFAULT = UserRolePermission_Availability "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
 
--- |
+-- | Always available to accounts.
 pattern UserRolePermission_Availability_ACCOUNTALWAYS :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_ACCOUNTALWAYS = UserRolePermission_Availability "ACCOUNT_ALWAYS"
 
--- |
+-- | Always available to both accounts and subaccounts.
 pattern UserRolePermission_Availability_SUBACCOUNTANDACCOUNTALWAYS :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_SUBACCOUNTANDACCOUNTALWAYS = UserRolePermission_Availability "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
 
--- |
+-- | Available for user profile permissions only.
 pattern UserRolePermission_Availability_USERPROFILEONLY :: UserRolePermission_Availability
 pattern UserRolePermission_Availability_USERPROFILEONLY = UserRolePermission_Availability "USER_PROFILE_ONLY"
 
@@ -10435,38 +9525,6 @@ pattern UserRolePermission_Availability_USERPROFILEONLY = UserRolePermission_Ava
   UserRolePermission_Availability_SUBACCOUNTANDACCOUNTALWAYS,
   UserRolePermission_Availability_USERPROFILEONLY,
   UserRolePermission_Availability
-  #-}
-
--- | Indicates how the filter should be matched to the values.
-newtype UvarFilter_Match = UvarFilter_Match {fromUvarFilter_Match :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern UvarFilter_Match_Unspecified :: UvarFilter_Match
-pattern UvarFilter_Match_Unspecified = UvarFilter_Match "UNSPECIFIED"
-
--- |
-pattern UvarFilter_Match_Exact :: UvarFilter_Match
-pattern UvarFilter_Match_Exact = UvarFilter_Match "EXACT"
-
--- |
-pattern UvarFilter_Match_Contains :: UvarFilter_Match
-pattern UvarFilter_Match_Contains = UvarFilter_Match "CONTAINS"
-
-{-# COMPLETE
-  UvarFilter_Match_Unspecified,
-  UvarFilter_Match_Exact,
-  UvarFilter_Match_Contains,
-  UvarFilter_Match
   #-}
 
 -- | File type of the video format.
@@ -10482,23 +9540,18 @@ newtype VideoFormat_FileType = VideoFormat_FileType {fromVideoFormat_FileType ::
       Core.FromJSONKey
     )
 
--- |
 pattern VideoFormat_FileType_Flv :: VideoFormat_FileType
 pattern VideoFormat_FileType_Flv = VideoFormat_FileType "FLV"
 
--- |
 pattern VideoFormat_FileType_Threegpp :: VideoFormat_FileType
 pattern VideoFormat_FileType_Threegpp = VideoFormat_FileType "THREEGPP"
 
--- |
 pattern VideoFormat_FileType_MP4 :: VideoFormat_FileType
 pattern VideoFormat_FileType_MP4 = VideoFormat_FileType "MP4"
 
--- |
 pattern VideoFormat_FileType_Webm :: VideoFormat_FileType
 pattern VideoFormat_FileType_Webm = VideoFormat_FileType "WEBM"
 
--- |
 pattern VideoFormat_FileType_M3U8 :: VideoFormat_FileType
 pattern VideoFormat_FileType_M3U8 = VideoFormat_FileType "M3U8"
 
@@ -10524,15 +9577,12 @@ newtype VideoSettings_Orientation = VideoSettings_Orientation {fromVideoSettings
       Core.FromJSONKey
     )
 
--- |
 pattern VideoSettings_Orientation_Any :: VideoSettings_Orientation
 pattern VideoSettings_Orientation_Any = VideoSettings_Orientation "ANY"
 
--- |
 pattern VideoSettings_Orientation_Landscape :: VideoSettings_Orientation
 pattern VideoSettings_Orientation_Landscape = VideoSettings_Orientation "LANDSCAPE"
 
--- |
 pattern VideoSettings_Orientation_Portrait :: VideoSettings_Orientation
 pattern VideoSettings_Orientation_Portrait = VideoSettings_Orientation "PORTRAIT"
 
@@ -10556,11 +9606,9 @@ newtype AccountUserProfilesListSortField = AccountUserProfilesListSortField {fro
       Core.FromJSONKey
     )
 
--- |
 pattern AccountUserProfilesListSortField_ID :: AccountUserProfilesListSortField
 pattern AccountUserProfilesListSortField_ID = AccountUserProfilesListSortField "ID"
 
--- |
 pattern AccountUserProfilesListSortField_Name :: AccountUserProfilesListSortField
 pattern AccountUserProfilesListSortField_Name = AccountUserProfilesListSortField "NAME"
 
@@ -10583,11 +9631,11 @@ newtype AccountUserProfilesListSortOrder = AccountUserProfilesListSortOrder {fro
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AccountUserProfilesListSortOrder_Ascending :: AccountUserProfilesListSortOrder
 pattern AccountUserProfilesListSortOrder_Ascending = AccountUserProfilesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AccountUserProfilesListSortOrder_Descending :: AccountUserProfilesListSortOrder
 pattern AccountUserProfilesListSortOrder_Descending = AccountUserProfilesListSortOrder "DESCENDING"
 
@@ -10610,11 +9658,9 @@ newtype AccountsListSortField = AccountsListSortField {fromAccountsListSortField
       Core.FromJSONKey
     )
 
--- |
 pattern AccountsListSortField_ID :: AccountsListSortField
 pattern AccountsListSortField_ID = AccountsListSortField "ID"
 
--- |
 pattern AccountsListSortField_Name :: AccountsListSortField
 pattern AccountsListSortField_Name = AccountsListSortField "NAME"
 
@@ -10637,11 +9683,11 @@ newtype AccountsListSortOrder = AccountsListSortOrder {fromAccountsListSortOrder
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AccountsListSortOrder_Ascending :: AccountsListSortOrder
 pattern AccountsListSortOrder_Ascending = AccountsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AccountsListSortOrder_Descending :: AccountsListSortOrder
 pattern AccountsListSortOrder_Descending = AccountsListSortOrder "DESCENDING"
 
@@ -10664,27 +9710,23 @@ newtype AdsListCompatibility = AdsListCompatibility {fromAdsListCompatibility ::
       Core.FromJSONKey
     )
 
--- |
 pattern AdsListCompatibility_Display :: AdsListCompatibility
 pattern AdsListCompatibility_Display = AdsListCompatibility "DISPLAY"
 
--- |
 pattern AdsListCompatibility_DISPLAYINTERSTITIAL :: AdsListCompatibility
 pattern AdsListCompatibility_DISPLAYINTERSTITIAL = AdsListCompatibility "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern AdsListCompatibility_App :: AdsListCompatibility
 pattern AdsListCompatibility_App = AdsListCompatibility "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern AdsListCompatibility_APPINTERSTITIAL :: AdsListCompatibility
 pattern AdsListCompatibility_APPINTERSTITIAL = AdsListCompatibility "APP_INTERSTITIAL"
 
--- |
 pattern AdsListCompatibility_INSTREAMVIDEO :: AdsListCompatibility
 pattern AdsListCompatibility_INSTREAMVIDEO = AdsListCompatibility "IN_STREAM_VIDEO"
 
--- |
 pattern AdsListCompatibility_INSTREAMAUDIO :: AdsListCompatibility
 pattern AdsListCompatibility_INSTREAMAUDIO = AdsListCompatibility "IN_STREAM_AUDIO"
 
@@ -10711,11 +9753,9 @@ newtype AdsListSortField = AdsListSortField {fromAdsListSortField :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern AdsListSortField_ID :: AdsListSortField
 pattern AdsListSortField_ID = AdsListSortField "ID"
 
--- |
 pattern AdsListSortField_Name :: AdsListSortField
 pattern AdsListSortField_Name = AdsListSortField "NAME"
 
@@ -10738,11 +9778,11 @@ newtype AdsListSortOrder = AdsListSortOrder {fromAdsListSortOrder :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AdsListSortOrder_Ascending :: AdsListSortOrder
 pattern AdsListSortOrder_Ascending = AdsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AdsListSortOrder_Descending :: AdsListSortOrder
 pattern AdsListSortOrder_Descending = AdsListSortOrder "DESCENDING"
 
@@ -10765,23 +9805,18 @@ newtype AdsListType = AdsListType {fromAdsListType :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern AdsListType_ADSERVINGSTANDARDAD :: AdsListType
 pattern AdsListType_ADSERVINGSTANDARDAD = AdsListType "AD_SERVING_STANDARD_AD"
 
--- |
 pattern AdsListType_ADSERVINGDEFAULTAD :: AdsListType
 pattern AdsListType_ADSERVINGDEFAULTAD = AdsListType "AD_SERVING_DEFAULT_AD"
 
--- |
 pattern AdsListType_ADSERVINGCLICKTRACKER :: AdsListType
 pattern AdsListType_ADSERVINGCLICKTRACKER = AdsListType "AD_SERVING_CLICK_TRACKER"
 
--- |
 pattern AdsListType_ADSERVINGTRACKING :: AdsListType
 pattern AdsListType_ADSERVINGTRACKING = AdsListType "AD_SERVING_TRACKING"
 
--- |
 pattern AdsListType_ADSERVINGBRANDSAFEAD :: AdsListType
 pattern AdsListType_ADSERVINGBRANDSAFEAD = AdsListType "AD_SERVING_BRAND_SAFE_AD"
 
@@ -10807,11 +9842,9 @@ newtype AdvertiserGroupsListSortField = AdvertiserGroupsListSortField {fromAdver
       Core.FromJSONKey
     )
 
--- |
 pattern AdvertiserGroupsListSortField_ID :: AdvertiserGroupsListSortField
 pattern AdvertiserGroupsListSortField_ID = AdvertiserGroupsListSortField "ID"
 
--- |
 pattern AdvertiserGroupsListSortField_Name :: AdvertiserGroupsListSortField
 pattern AdvertiserGroupsListSortField_Name = AdvertiserGroupsListSortField "NAME"
 
@@ -10834,11 +9867,11 @@ newtype AdvertiserGroupsListSortOrder = AdvertiserGroupsListSortOrder {fromAdver
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AdvertiserGroupsListSortOrder_Ascending :: AdvertiserGroupsListSortOrder
 pattern AdvertiserGroupsListSortOrder_Ascending = AdvertiserGroupsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AdvertiserGroupsListSortOrder_Descending :: AdvertiserGroupsListSortOrder
 pattern AdvertiserGroupsListSortOrder_Descending = AdvertiserGroupsListSortOrder "DESCENDING"
 
@@ -10861,11 +9894,9 @@ newtype AdvertiserLandingPagesListSortField = AdvertiserLandingPagesListSortFiel
       Core.FromJSONKey
     )
 
--- |
 pattern AdvertiserLandingPagesListSortField_ID :: AdvertiserLandingPagesListSortField
 pattern AdvertiserLandingPagesListSortField_ID = AdvertiserLandingPagesListSortField "ID"
 
--- |
 pattern AdvertiserLandingPagesListSortField_Name :: AdvertiserLandingPagesListSortField
 pattern AdvertiserLandingPagesListSortField_Name = AdvertiserLandingPagesListSortField "NAME"
 
@@ -10888,11 +9919,11 @@ newtype AdvertiserLandingPagesListSortOrder = AdvertiserLandingPagesListSortOrde
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AdvertiserLandingPagesListSortOrder_Ascending :: AdvertiserLandingPagesListSortOrder
 pattern AdvertiserLandingPagesListSortOrder_Ascending = AdvertiserLandingPagesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AdvertiserLandingPagesListSortOrder_Descending :: AdvertiserLandingPagesListSortOrder
 pattern AdvertiserLandingPagesListSortOrder_Descending = AdvertiserLandingPagesListSortOrder "DESCENDING"
 
@@ -10915,11 +9946,9 @@ newtype AdvertisersListSortField = AdvertisersListSortField {fromAdvertisersList
       Core.FromJSONKey
     )
 
--- |
 pattern AdvertisersListSortField_ID :: AdvertisersListSortField
 pattern AdvertisersListSortField_ID = AdvertisersListSortField "ID"
 
--- |
 pattern AdvertisersListSortField_Name :: AdvertisersListSortField
 pattern AdvertisersListSortField_Name = AdvertisersListSortField "NAME"
 
@@ -10942,11 +9971,11 @@ newtype AdvertisersListSortOrder = AdvertisersListSortOrder {fromAdvertisersList
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern AdvertisersListSortOrder_Ascending :: AdvertisersListSortOrder
 pattern AdvertisersListSortOrder_Ascending = AdvertisersListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern AdvertisersListSortOrder_Descending :: AdvertisersListSortOrder
 pattern AdvertisersListSortOrder_Descending = AdvertisersListSortOrder "DESCENDING"
 
@@ -10969,11 +9998,11 @@ newtype AdvertisersListStatus = AdvertisersListStatus {fromAdvertisersListStatus
       Core.FromJSONKey
     )
 
--- |
+-- | Approved (ads can deliver)
 pattern AdvertisersListStatus_Approved :: AdvertisersListStatus
 pattern AdvertisersListStatus_Approved = AdvertisersListStatus "APPROVED"
 
--- |
+-- | On-hold (all ads are stopped)
 pattern AdvertisersListStatus_ONHOLD :: AdvertisersListStatus
 pattern AdvertisersListStatus_ONHOLD = AdvertisersListStatus "ON_HOLD"
 
@@ -10996,11 +10025,9 @@ newtype BillingProfilesListSortField = BillingProfilesListSortField {fromBilling
       Core.FromJSONKey
     )
 
--- |
 pattern BillingProfilesListSortField_ID :: BillingProfilesListSortField
 pattern BillingProfilesListSortField_ID = BillingProfilesListSortField "ID"
 
--- |
 pattern BillingProfilesListSortField_Name :: BillingProfilesListSortField
 pattern BillingProfilesListSortField_Name = BillingProfilesListSortField "NAME"
 
@@ -11023,11 +10050,11 @@ newtype BillingProfilesListSortOrder = BillingProfilesListSortOrder {fromBilling
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern BillingProfilesListSortOrder_Ascending :: BillingProfilesListSortOrder
 pattern BillingProfilesListSortOrder_Ascending = BillingProfilesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern BillingProfilesListSortOrder_Descending :: BillingProfilesListSortOrder
 pattern BillingProfilesListSortOrder_Descending = BillingProfilesListSortOrder "DESCENDING"
 
@@ -11050,15 +10077,12 @@ newtype BillingProfilesListStatus = BillingProfilesListStatus {fromBillingProfil
       Core.FromJSONKey
     )
 
--- |
 pattern BillingProfilesListStatus_UNDERREVIEW :: BillingProfilesListStatus
 pattern BillingProfilesListStatus_UNDERREVIEW = BillingProfilesListStatus "UNDER_REVIEW"
 
--- |
 pattern BillingProfilesListStatus_Active :: BillingProfilesListStatus
 pattern BillingProfilesListStatus_Active = BillingProfilesListStatus "ACTIVE"
 
--- |
 pattern BillingProfilesListStatus_Archived :: BillingProfilesListStatus
 pattern BillingProfilesListStatus_Archived = BillingProfilesListStatus "ARCHIVED"
 
@@ -11082,11 +10106,11 @@ newtype CampaignCreativeAssociationsListSortOrder = CampaignCreativeAssociations
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CampaignCreativeAssociationsListSortOrder_Ascending :: CampaignCreativeAssociationsListSortOrder
 pattern CampaignCreativeAssociationsListSortOrder_Ascending = CampaignCreativeAssociationsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CampaignCreativeAssociationsListSortOrder_Descending :: CampaignCreativeAssociationsListSortOrder
 pattern CampaignCreativeAssociationsListSortOrder_Descending = CampaignCreativeAssociationsListSortOrder "DESCENDING"
 
@@ -11109,11 +10133,9 @@ newtype CampaignsListSortField = CampaignsListSortField {fromCampaignsListSortFi
       Core.FromJSONKey
     )
 
--- |
 pattern CampaignsListSortField_ID :: CampaignsListSortField
 pattern CampaignsListSortField_ID = CampaignsListSortField "ID"
 
--- |
 pattern CampaignsListSortField_Name :: CampaignsListSortField
 pattern CampaignsListSortField_Name = CampaignsListSortField "NAME"
 
@@ -11136,11 +10158,11 @@ newtype CampaignsListSortOrder = CampaignsListSortOrder {fromCampaignsListSortOr
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CampaignsListSortOrder_Ascending :: CampaignsListSortOrder
 pattern CampaignsListSortOrder_Ascending = CampaignsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CampaignsListSortOrder_Descending :: CampaignsListSortOrder
 pattern CampaignsListSortOrder_Descending = CampaignsListSortOrder "DESCENDING"
 
@@ -11163,71 +10185,54 @@ newtype ChangeLogsListAction = ChangeLogsListAction {fromChangeLogsListAction ::
       Core.FromJSONKey
     )
 
--- |
 pattern ChangeLogsListAction_ACTIONCREATE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONCREATE = ChangeLogsListAction "ACTION_CREATE"
 
--- |
 pattern ChangeLogsListAction_ACTIONUPDATE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONUPDATE = ChangeLogsListAction "ACTION_UPDATE"
 
--- |
 pattern ChangeLogsListAction_ACTIONDELETE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONDELETE = ChangeLogsListAction "ACTION_DELETE"
 
--- |
 pattern ChangeLogsListAction_ACTIONENABLE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONENABLE = ChangeLogsListAction "ACTION_ENABLE"
 
--- |
 pattern ChangeLogsListAction_ACTIONDISABLE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONDISABLE = ChangeLogsListAction "ACTION_DISABLE"
 
--- |
 pattern ChangeLogsListAction_ACTIONADD :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONADD = ChangeLogsListAction "ACTION_ADD"
 
--- |
 pattern ChangeLogsListAction_ACTIONREMOVE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONREMOVE = ChangeLogsListAction "ACTION_REMOVE"
 
--- |
 pattern ChangeLogsListAction_ACTIONMARKASDEFAULT :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONMARKASDEFAULT = ChangeLogsListAction "ACTION_MARK_AS_DEFAULT"
 
--- |
 pattern ChangeLogsListAction_ACTIONASSOCIATE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONASSOCIATE = ChangeLogsListAction "ACTION_ASSOCIATE"
 
--- |
 pattern ChangeLogsListAction_ACTIONASSIGN :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONASSIGN = ChangeLogsListAction "ACTION_ASSIGN"
 
--- |
 pattern ChangeLogsListAction_ACTIONUNASSIGN :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONUNASSIGN = ChangeLogsListAction "ACTION_UNASSIGN"
 
--- |
 pattern ChangeLogsListAction_ACTIONSEND :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONSEND = ChangeLogsListAction "ACTION_SEND"
 
--- |
 pattern ChangeLogsListAction_ACTIONLINK :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONLINK = ChangeLogsListAction "ACTION_LINK"
 
--- |
 pattern ChangeLogsListAction_ACTIONUNLINK :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONUNLINK = ChangeLogsListAction "ACTION_UNLINK"
 
--- |
 pattern ChangeLogsListAction_ACTIONPUSH :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONPUSH = ChangeLogsListAction "ACTION_PUSH"
 
--- |
 pattern ChangeLogsListAction_ACTIONEMAILTAGS :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONEMAILTAGS = ChangeLogsListAction "ACTION_EMAIL_TAGS"
 
--- |
 pattern ChangeLogsListAction_ACTIONSHARE :: ChangeLogsListAction
 pattern ChangeLogsListAction_ACTIONSHARE = ChangeLogsListAction "ACTION_SHARE"
 
@@ -11265,169 +10270,134 @@ newtype ChangeLogsListObjectType = ChangeLogsListObjectType {fromChangeLogsListO
       Core.FromJSONKey
     )
 
--- |
 pattern ChangeLogsListObjectType_OBJECTADVERTISER :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTADVERTISER = ChangeLogsListObjectType "OBJECT_ADVERTISER"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTCONFIGURATION :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTCONFIGURATION = ChangeLogsListObjectType "OBJECT_FLOODLIGHT_CONFIGURATION"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTAD :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTAD = ChangeLogsListObjectType "OBJECT_AD"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTACTVITY :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTACTVITY = ChangeLogsListObjectType "OBJECT_FLOODLIGHT_ACTVITY"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCAMPAIGN :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCAMPAIGN = ChangeLogsListObjectType "OBJECT_CAMPAIGN"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTACTIVITYGROUP :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTACTIVITYGROUP = ChangeLogsListObjectType "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCREATIVE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCREATIVE = ChangeLogsListObjectType "OBJECT_CREATIVE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTPLACEMENT :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTPLACEMENT = ChangeLogsListObjectType "OBJECT_PLACEMENT"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTDFASITE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTDFASITE = ChangeLogsListObjectType "OBJECT_DFA_SITE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTUSERROLE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTUSERROLE = ChangeLogsListObjectType "OBJECT_USER_ROLE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTUSERPROFILE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTUSERPROFILE = ChangeLogsListObjectType "OBJECT_USER_PROFILE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTADVERTISERGROUP :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTADVERTISERGROUP = ChangeLogsListObjectType "OBJECT_ADVERTISER_GROUP"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTACCOUNT :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTACCOUNT = ChangeLogsListObjectType "OBJECT_ACCOUNT"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTSUBACCOUNT :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTSUBACCOUNT = ChangeLogsListObjectType "OBJECT_SUBACCOUNT"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTRICHMEDIACREATIVE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTRICHMEDIACREATIVE = ChangeLogsListObjectType "OBJECT_RICHMEDIA_CREATIVE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTINSTREAMCREATIVE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTINSTREAMCREATIVE = ChangeLogsListObjectType "OBJECT_INSTREAM_CREATIVE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTMEDIAORDER :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTMEDIAORDER = ChangeLogsListObjectType "OBJECT_MEDIA_ORDER"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCONTENTCATEGORY :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCONTENTCATEGORY = ChangeLogsListObjectType "OBJECT_CONTENT_CATEGORY"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTPLACEMENTSTRATEGY :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTPLACEMENTSTRATEGY = ChangeLogsListObjectType "OBJECT_PLACEMENT_STRATEGY"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTSDSITE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTSDSITE = ChangeLogsListObjectType "OBJECT_SD_SITE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTSIZE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTSIZE = ChangeLogsListObjectType "OBJECT_SIZE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCREATIVEGROUP :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCREATIVEGROUP = ChangeLogsListObjectType "OBJECT_CREATIVE_GROUP"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCREATIVEASSET :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCREATIVEASSET = ChangeLogsListObjectType "OBJECT_CREATIVE_ASSET"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTUSERPROFILEFILTER :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTUSERPROFILEFILTER = ChangeLogsListObjectType "OBJECT_USER_PROFILE_FILTER"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTLANDINGPAGE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTLANDINGPAGE = ChangeLogsListObjectType "OBJECT_LANDING_PAGE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCREATIVEFIELD :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCREATIVEFIELD = ChangeLogsListObjectType "OBJECT_CREATIVE_FIELD"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTREMARKETINGLIST :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTREMARKETINGLIST = ChangeLogsListObjectType "OBJECT_REMARKETING_LIST"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTPROVIDEDLISTCLIENT :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTPROVIDEDLISTCLIENT = ChangeLogsListObjectType "OBJECT_PROVIDED_LIST_CLIENT"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTEVENTTAG :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTEVENTTAG = ChangeLogsListObjectType "OBJECT_EVENT_TAG"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTCREATIVEBUNDLE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTCREATIVEBUNDLE = ChangeLogsListObjectType "OBJECT_CREATIVE_BUNDLE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTBILLINGACCOUNTGROUP :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTBILLINGACCOUNTGROUP = ChangeLogsListObjectType "OBJECT_BILLING_ACCOUNT_GROUP"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTBILLINGFEATURE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTBILLINGFEATURE = ChangeLogsListObjectType "OBJECT_BILLING_FEATURE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTRATECARD :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTRATECARD = ChangeLogsListObjectType "OBJECT_RATE_CARD"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTACCOUNTBILLINGFEATURE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTACCOUNTBILLINGFEATURE = ChangeLogsListObjectType "OBJECT_ACCOUNT_BILLING_FEATURE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTBILLINGMINIMUMFEE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTBILLINGMINIMUMFEE = ChangeLogsListObjectType "OBJECT_BILLING_MINIMUM_FEE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTBILLINGPROFILE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTBILLINGPROFILE = ChangeLogsListObjectType "OBJECT_BILLING_PROFILE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTPLAYSTORELINK :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTPLAYSTORELINK = ChangeLogsListObjectType "OBJECT_PLAYSTORE_LINK"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTTARGETINGTEMPLATE :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTTARGETINGTEMPLATE = ChangeLogsListObjectType "OBJECT_TARGETING_TEMPLATE"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY = ChangeLogsListObjectType "OBJECT_SEARCH_LIFT_STUDY"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK = ChangeLogsListObjectType "OBJECT_FLOODLIGHT_DV360_LINK"
 
--- |
 pattern ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK :: ChangeLogsListObjectType
 pattern ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK = ChangeLogsListObjectType "OBJECT_ADVERTISER_CUSTOMER_LINK"
+
+pattern ChangeLogsListObjectType_OBJECTCONVERSIONDOMAIN :: ChangeLogsListObjectType
+pattern ChangeLogsListObjectType_OBJECTCONVERSIONDOMAIN = ChangeLogsListObjectType "OBJECT_CONVERSION_DOMAIN"
+
+pattern ChangeLogsListObjectType_OBJECTACCOUNTCONVERSIONDOMAIN :: ChangeLogsListObjectType
+pattern ChangeLogsListObjectType_OBJECTACCOUNTCONVERSIONDOMAIN = ChangeLogsListObjectType "OBJECT_ACCOUNT_CONVERSION_DOMAIN"
 
 {-# COMPLETE
   ChangeLogsListObjectType_OBJECTADVERTISER,
@@ -11471,6 +10441,8 @@ pattern ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK = ChangeLogsListOb
   ChangeLogsListObjectType_OBJECTSEARCHLIFTSTUDY,
   ChangeLogsListObjectType_OBJECTFLOODLIGHTDV360LINK,
   ChangeLogsListObjectType_OBJECTADVERTISERCUSTOMERLINK,
+  ChangeLogsListObjectType_OBJECTCONVERSIONDOMAIN,
+  ChangeLogsListObjectType_OBJECTACCOUNTCONVERSIONDOMAIN,
   ChangeLogsListObjectType
   #-}
 
@@ -11487,11 +10459,9 @@ newtype ContentCategoriesListSortField = ContentCategoriesListSortField {fromCon
       Core.FromJSONKey
     )
 
--- |
 pattern ContentCategoriesListSortField_ID :: ContentCategoriesListSortField
 pattern ContentCategoriesListSortField_ID = ContentCategoriesListSortField "ID"
 
--- |
 pattern ContentCategoriesListSortField_Name :: ContentCategoriesListSortField
 pattern ContentCategoriesListSortField_Name = ContentCategoriesListSortField "NAME"
 
@@ -11514,11 +10484,11 @@ newtype ContentCategoriesListSortOrder = ContentCategoriesListSortOrder {fromCon
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern ContentCategoriesListSortOrder_Ascending :: ContentCategoriesListSortOrder
 pattern ContentCategoriesListSortOrder_Ascending = ContentCategoriesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern ContentCategoriesListSortOrder_Descending :: ContentCategoriesListSortOrder
 pattern ContentCategoriesListSortOrder_Descending = ContentCategoriesListSortOrder "DESCENDING"
 
@@ -11541,11 +10511,9 @@ newtype CreativeFieldValuesListSortField = CreativeFieldValuesListSortField {fro
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeFieldValuesListSortField_ID :: CreativeFieldValuesListSortField
 pattern CreativeFieldValuesListSortField_ID = CreativeFieldValuesListSortField "ID"
 
--- |
 pattern CreativeFieldValuesListSortField_Value :: CreativeFieldValuesListSortField
 pattern CreativeFieldValuesListSortField_Value = CreativeFieldValuesListSortField "VALUE"
 
@@ -11568,11 +10536,11 @@ newtype CreativeFieldValuesListSortOrder = CreativeFieldValuesListSortOrder {fro
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CreativeFieldValuesListSortOrder_Ascending :: CreativeFieldValuesListSortOrder
 pattern CreativeFieldValuesListSortOrder_Ascending = CreativeFieldValuesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CreativeFieldValuesListSortOrder_Descending :: CreativeFieldValuesListSortOrder
 pattern CreativeFieldValuesListSortOrder_Descending = CreativeFieldValuesListSortOrder "DESCENDING"
 
@@ -11595,11 +10563,9 @@ newtype CreativeFieldsListSortField = CreativeFieldsListSortField {fromCreativeF
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeFieldsListSortField_ID :: CreativeFieldsListSortField
 pattern CreativeFieldsListSortField_ID = CreativeFieldsListSortField "ID"
 
--- |
 pattern CreativeFieldsListSortField_Name :: CreativeFieldsListSortField
 pattern CreativeFieldsListSortField_Name = CreativeFieldsListSortField "NAME"
 
@@ -11622,11 +10588,11 @@ newtype CreativeFieldsListSortOrder = CreativeFieldsListSortOrder {fromCreativeF
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CreativeFieldsListSortOrder_Ascending :: CreativeFieldsListSortOrder
 pattern CreativeFieldsListSortOrder_Ascending = CreativeFieldsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CreativeFieldsListSortOrder_Descending :: CreativeFieldsListSortOrder
 pattern CreativeFieldsListSortOrder_Descending = CreativeFieldsListSortOrder "DESCENDING"
 
@@ -11649,11 +10615,9 @@ newtype CreativeGroupsListSortField = CreativeGroupsListSortField {fromCreativeG
       Core.FromJSONKey
     )
 
--- |
 pattern CreativeGroupsListSortField_ID :: CreativeGroupsListSortField
 pattern CreativeGroupsListSortField_ID = CreativeGroupsListSortField "ID"
 
--- |
 pattern CreativeGroupsListSortField_Name :: CreativeGroupsListSortField
 pattern CreativeGroupsListSortField_Name = CreativeGroupsListSortField "NAME"
 
@@ -11676,11 +10640,11 @@ newtype CreativeGroupsListSortOrder = CreativeGroupsListSortOrder {fromCreativeG
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CreativeGroupsListSortOrder_Ascending :: CreativeGroupsListSortOrder
 pattern CreativeGroupsListSortOrder_Ascending = CreativeGroupsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CreativeGroupsListSortOrder_Descending :: CreativeGroupsListSortOrder
 pattern CreativeGroupsListSortOrder_Descending = CreativeGroupsListSortOrder "DESCENDING"
 
@@ -11703,11 +10667,9 @@ newtype CreativesListSortField = CreativesListSortField {fromCreativesListSortFi
       Core.FromJSONKey
     )
 
--- |
 pattern CreativesListSortField_ID :: CreativesListSortField
 pattern CreativesListSortField_ID = CreativesListSortField "ID"
 
--- |
 pattern CreativesListSortField_Name :: CreativesListSortField
 pattern CreativesListSortField_Name = CreativesListSortField "NAME"
 
@@ -11730,11 +10692,11 @@ newtype CreativesListSortOrder = CreativesListSortOrder {fromCreativesListSortOr
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern CreativesListSortOrder_Ascending :: CreativesListSortOrder
 pattern CreativesListSortOrder_Ascending = CreativesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern CreativesListSortOrder_Descending :: CreativesListSortOrder
 pattern CreativesListSortOrder_Descending = CreativesListSortOrder "DESCENDING"
 
@@ -11757,103 +10719,78 @@ newtype CreativesListTypes = CreativesListTypes {fromCreativesListTypes :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern CreativesListTypes_Image :: CreativesListTypes
 pattern CreativesListTypes_Image = CreativesListTypes "IMAGE"
 
--- |
 pattern CreativesListTypes_DISPLAYREDIRECT :: CreativesListTypes
 pattern CreativesListTypes_DISPLAYREDIRECT = CreativesListTypes "DISPLAY_REDIRECT"
 
--- |
 pattern CreativesListTypes_CUSTOMDISPLAY :: CreativesListTypes
 pattern CreativesListTypes_CUSTOMDISPLAY = CreativesListTypes "CUSTOM_DISPLAY"
 
--- |
 pattern CreativesListTypes_INTERNALREDIRECT :: CreativesListTypes
 pattern CreativesListTypes_INTERNALREDIRECT = CreativesListTypes "INTERNAL_REDIRECT"
 
--- |
 pattern CreativesListTypes_CUSTOMDISPLAYINTERSTITIAL :: CreativesListTypes
 pattern CreativesListTypes_CUSTOMDISPLAYINTERSTITIAL = CreativesListTypes "CUSTOM_DISPLAY_INTERSTITIAL"
 
--- |
 pattern CreativesListTypes_INTERSTITIALINTERNALREDIRECT :: CreativesListTypes
 pattern CreativesListTypes_INTERSTITIALINTERNALREDIRECT = CreativesListTypes "INTERSTITIAL_INTERNAL_REDIRECT"
 
--- |
 pattern CreativesListTypes_TRACKINGTEXT :: CreativesListTypes
 pattern CreativesListTypes_TRACKINGTEXT = CreativesListTypes "TRACKING_TEXT"
 
--- |
 pattern CreativesListTypes_RICHMEDIADISPLAYBANNER :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIADISPLAYBANNER = CreativesListTypes "RICH_MEDIA_DISPLAY_BANNER"
 
--- |
 pattern CreativesListTypes_RICHMEDIAINPAGEFLOATING :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIAINPAGEFLOATING = CreativesListTypes "RICH_MEDIA_INPAGE_FLOATING"
 
--- |
 pattern CreativesListTypes_RICHMEDIAIMEXPAND :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIAIMEXPAND = CreativesListTypes "RICH_MEDIA_IM_EXPAND"
 
--- |
 pattern CreativesListTypes_RICHMEDIADISPLAYEXPANDING :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIADISPLAYEXPANDING = CreativesListTypes "RICH_MEDIA_DISPLAY_EXPANDING"
 
--- |
 pattern CreativesListTypes_RICHMEDIADISPLAYINTERSTITIAL :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIADISPLAYINTERSTITIAL = CreativesListTypes "RICH_MEDIA_DISPLAY_INTERSTITIAL"
 
--- |
 pattern CreativesListTypes_RICHMEDIADISPLAYMULTIFLOATINGINTERSTITIAL :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIADISPLAYMULTIFLOATINGINTERSTITIAL = CreativesListTypes "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
 
--- |
 pattern CreativesListTypes_RICHMEDIAMOBILEINAPP :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIAMOBILEINAPP = CreativesListTypes "RICH_MEDIA_MOBILE_IN_APP"
 
--- |
 pattern CreativesListTypes_FLASHINPAGE :: CreativesListTypes
 pattern CreativesListTypes_FLASHINPAGE = CreativesListTypes "FLASH_INPAGE"
 
--- |
 pattern CreativesListTypes_INSTREAMVIDEO :: CreativesListTypes
 pattern CreativesListTypes_INSTREAMVIDEO = CreativesListTypes "INSTREAM_VIDEO"
 
--- |
 pattern CreativesListTypes_VPAIDLINEARVIDEO :: CreativesListTypes
 pattern CreativesListTypes_VPAIDLINEARVIDEO = CreativesListTypes "VPAID_LINEAR_VIDEO"
 
--- |
 pattern CreativesListTypes_VPAIDNONLINEARVIDEO :: CreativesListTypes
 pattern CreativesListTypes_VPAIDNONLINEARVIDEO = CreativesListTypes "VPAID_NON_LINEAR_VIDEO"
 
--- |
 pattern CreativesListTypes_INSTREAMVIDEOREDIRECT :: CreativesListTypes
 pattern CreativesListTypes_INSTREAMVIDEOREDIRECT = CreativesListTypes "INSTREAM_VIDEO_REDIRECT"
 
--- |
 pattern CreativesListTypes_RICHMEDIAPEELDOWN :: CreativesListTypes
 pattern CreativesListTypes_RICHMEDIAPEELDOWN = CreativesListTypes "RICH_MEDIA_PEEL_DOWN"
 
--- |
 pattern CreativesListTypes_HTML5BANNER :: CreativesListTypes
 pattern CreativesListTypes_HTML5BANNER = CreativesListTypes "HTML5_BANNER"
 
--- |
 pattern CreativesListTypes_Display :: CreativesListTypes
 pattern CreativesListTypes_Display = CreativesListTypes "DISPLAY"
 
--- |
 pattern CreativesListTypes_DISPLAYIMAGEGALLERY :: CreativesListTypes
 pattern CreativesListTypes_DISPLAYIMAGEGALLERY = CreativesListTypes "DISPLAY_IMAGE_GALLERY"
 
--- |
 pattern CreativesListTypes_BRANDSAFEDEFAULTINSTREAMVIDEO :: CreativesListTypes
 pattern CreativesListTypes_BRANDSAFEDEFAULTINSTREAMVIDEO = CreativesListTypes "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
 
--- |
 pattern CreativesListTypes_INSTREAMAUDIO :: CreativesListTypes
 pattern CreativesListTypes_INSTREAMAUDIO = CreativesListTypes "INSTREAM_AUDIO"
 
@@ -11899,11 +10836,9 @@ newtype DirectorySitesListSortField = DirectorySitesListSortField {fromDirectory
       Core.FromJSONKey
     )
 
--- |
 pattern DirectorySitesListSortField_ID :: DirectorySitesListSortField
 pattern DirectorySitesListSortField_ID = DirectorySitesListSortField "ID"
 
--- |
 pattern DirectorySitesListSortField_Name :: DirectorySitesListSortField
 pattern DirectorySitesListSortField_Name = DirectorySitesListSortField "NAME"
 
@@ -11926,11 +10861,11 @@ newtype DirectorySitesListSortOrder = DirectorySitesListSortOrder {fromDirectory
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern DirectorySitesListSortOrder_Ascending :: DirectorySitesListSortOrder
 pattern DirectorySitesListSortOrder_Ascending = DirectorySitesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern DirectorySitesListSortOrder_Descending :: DirectorySitesListSortOrder
 pattern DirectorySitesListSortOrder_Descending = DirectorySitesListSortOrder "DESCENDING"
 
@@ -11940,7 +10875,7 @@ pattern DirectorySitesListSortOrder_Descending = DirectorySitesListSortOrder "DE
   DirectorySitesListSortOrder
   #-}
 
--- | Type of the object of this dynamic targeting key. This is a required field.
+-- | Required. Type of the object of this dynamic targeting key. This is a required field.
 newtype DynamicTargetingKeysDeleteObjectType = DynamicTargetingKeysDeleteObjectType {fromDynamicTargetingKeysDeleteObjectType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -11953,19 +10888,15 @@ newtype DynamicTargetingKeysDeleteObjectType = DynamicTargetingKeysDeleteObjectT
       Core.FromJSONKey
     )
 
--- |
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTADVERTISER :: DynamicTargetingKeysDeleteObjectType
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTADVERTISER = DynamicTargetingKeysDeleteObjectType "OBJECT_ADVERTISER"
 
--- |
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTAD :: DynamicTargetingKeysDeleteObjectType
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTAD = DynamicTargetingKeysDeleteObjectType "OBJECT_AD"
 
--- |
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTCREATIVE :: DynamicTargetingKeysDeleteObjectType
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTCREATIVE = DynamicTargetingKeysDeleteObjectType "OBJECT_CREATIVE"
 
--- |
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTPLACEMENT :: DynamicTargetingKeysDeleteObjectType
 pattern DynamicTargetingKeysDeleteObjectType_OBJECTPLACEMENT = DynamicTargetingKeysDeleteObjectType "OBJECT_PLACEMENT"
 
@@ -11990,19 +10921,15 @@ newtype DynamicTargetingKeysListObjectType = DynamicTargetingKeysListObjectType 
       Core.FromJSONKey
     )
 
--- |
 pattern DynamicTargetingKeysListObjectType_OBJECTADVERTISER :: DynamicTargetingKeysListObjectType
 pattern DynamicTargetingKeysListObjectType_OBJECTADVERTISER = DynamicTargetingKeysListObjectType "OBJECT_ADVERTISER"
 
--- |
 pattern DynamicTargetingKeysListObjectType_OBJECTAD :: DynamicTargetingKeysListObjectType
 pattern DynamicTargetingKeysListObjectType_OBJECTAD = DynamicTargetingKeysListObjectType "OBJECT_AD"
 
--- |
 pattern DynamicTargetingKeysListObjectType_OBJECTCREATIVE :: DynamicTargetingKeysListObjectType
 pattern DynamicTargetingKeysListObjectType_OBJECTCREATIVE = DynamicTargetingKeysListObjectType "OBJECT_CREATIVE"
 
--- |
 pattern DynamicTargetingKeysListObjectType_OBJECTPLACEMENT :: DynamicTargetingKeysListObjectType
 pattern DynamicTargetingKeysListObjectType_OBJECTPLACEMENT = DynamicTargetingKeysListObjectType "OBJECT_PLACEMENT"
 
@@ -12027,15 +10954,15 @@ newtype EventTagsListEventTagTypes = EventTagsListEventTagTypes {fromEventTagsLi
       Core.FromJSONKey
     )
 
--- |
+-- | A third-party pixel for impression tracking.
 pattern EventTagsListEventTagTypes_IMPRESSIONIMAGEEVENTTAG :: EventTagsListEventTagTypes
 pattern EventTagsListEventTagTypes_IMPRESSIONIMAGEEVENTTAG = EventTagsListEventTagTypes "IMPRESSION_IMAGE_EVENT_TAG"
 
--- |
+-- | A third-party JavaScript URL for impression tracking.
 pattern EventTagsListEventTagTypes_IMPRESSIONJAVASCRIPTEVENTTAG :: EventTagsListEventTagTypes
 pattern EventTagsListEventTagTypes_IMPRESSIONJAVASCRIPTEVENTTAG = EventTagsListEventTagTypes "IMPRESSION_JAVASCRIPT_EVENT_TAG"
 
--- |
+-- | A third-party URL for click tracking that redirects to the landing page.
 pattern EventTagsListEventTagTypes_CLICKTHROUGHEVENTTAG :: EventTagsListEventTagTypes
 pattern EventTagsListEventTagTypes_CLICKTHROUGHEVENTTAG = EventTagsListEventTagTypes "CLICK_THROUGH_EVENT_TAG"
 
@@ -12059,11 +10986,9 @@ newtype EventTagsListSortField = EventTagsListSortField {fromEventTagsListSortFi
       Core.FromJSONKey
     )
 
--- |
 pattern EventTagsListSortField_ID :: EventTagsListSortField
 pattern EventTagsListSortField_ID = EventTagsListSortField "ID"
 
--- |
 pattern EventTagsListSortField_Name :: EventTagsListSortField
 pattern EventTagsListSortField_Name = EventTagsListSortField "NAME"
 
@@ -12086,11 +11011,11 @@ newtype EventTagsListSortOrder = EventTagsListSortOrder {fromEventTagsListSortOr
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern EventTagsListSortOrder_Ascending :: EventTagsListSortOrder
 pattern EventTagsListSortOrder_Ascending = EventTagsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern EventTagsListSortOrder_Descending :: EventTagsListSortOrder
 pattern EventTagsListSortOrder_Descending = EventTagsListSortOrder "DESCENDING"
 
@@ -12199,11 +11124,9 @@ newtype FloodlightActivitiesListFloodlightActivityGroupType = FloodlightActiviti
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivitiesListFloodlightActivityGroupType_Counter :: FloodlightActivitiesListFloodlightActivityGroupType
 pattern FloodlightActivitiesListFloodlightActivityGroupType_Counter = FloodlightActivitiesListFloodlightActivityGroupType "COUNTER"
 
--- |
 pattern FloodlightActivitiesListFloodlightActivityGroupType_Sale :: FloodlightActivitiesListFloodlightActivityGroupType
 pattern FloodlightActivitiesListFloodlightActivityGroupType_Sale = FloodlightActivitiesListFloodlightActivityGroupType "SALE"
 
@@ -12226,11 +11149,9 @@ newtype FloodlightActivitiesListSortField = FloodlightActivitiesListSortField {f
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivitiesListSortField_ID :: FloodlightActivitiesListSortField
 pattern FloodlightActivitiesListSortField_ID = FloodlightActivitiesListSortField "ID"
 
--- |
 pattern FloodlightActivitiesListSortField_Name :: FloodlightActivitiesListSortField
 pattern FloodlightActivitiesListSortField_Name = FloodlightActivitiesListSortField "NAME"
 
@@ -12253,11 +11174,11 @@ newtype FloodlightActivitiesListSortOrder = FloodlightActivitiesListSortOrder {f
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern FloodlightActivitiesListSortOrder_Ascending :: FloodlightActivitiesListSortOrder
 pattern FloodlightActivitiesListSortOrder_Ascending = FloodlightActivitiesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern FloodlightActivitiesListSortOrder_Descending :: FloodlightActivitiesListSortOrder
 pattern FloodlightActivitiesListSortOrder_Descending = FloodlightActivitiesListSortOrder "DESCENDING"
 
@@ -12280,11 +11201,9 @@ newtype FloodlightActivityGroupsListSortField = FloodlightActivityGroupsListSort
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivityGroupsListSortField_ID :: FloodlightActivityGroupsListSortField
 pattern FloodlightActivityGroupsListSortField_ID = FloodlightActivityGroupsListSortField "ID"
 
--- |
 pattern FloodlightActivityGroupsListSortField_Name :: FloodlightActivityGroupsListSortField
 pattern FloodlightActivityGroupsListSortField_Name = FloodlightActivityGroupsListSortField "NAME"
 
@@ -12307,11 +11226,11 @@ newtype FloodlightActivityGroupsListSortOrder = FloodlightActivityGroupsListSort
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern FloodlightActivityGroupsListSortOrder_Ascending :: FloodlightActivityGroupsListSortOrder
 pattern FloodlightActivityGroupsListSortOrder_Ascending = FloodlightActivityGroupsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern FloodlightActivityGroupsListSortOrder_Descending :: FloodlightActivityGroupsListSortOrder
 pattern FloodlightActivityGroupsListSortOrder_Descending = FloodlightActivityGroupsListSortOrder "DESCENDING"
 
@@ -12334,11 +11253,9 @@ newtype FloodlightActivityGroupsListType = FloodlightActivityGroupsListType {fro
       Core.FromJSONKey
     )
 
--- |
 pattern FloodlightActivityGroupsListType_Counter :: FloodlightActivityGroupsListType
 pattern FloodlightActivityGroupsListType_Counter = FloodlightActivityGroupsListType "COUNTER"
 
--- |
 pattern FloodlightActivityGroupsListType_Sale :: FloodlightActivityGroupsListType
 pattern FloodlightActivityGroupsListType_Sale = FloodlightActivityGroupsListType "SALE"
 
@@ -12361,11 +11278,9 @@ newtype InventoryItemsListSortField = InventoryItemsListSortField {fromInventory
       Core.FromJSONKey
     )
 
--- |
 pattern InventoryItemsListSortField_ID :: InventoryItemsListSortField
 pattern InventoryItemsListSortField_ID = InventoryItemsListSortField "ID"
 
--- |
 pattern InventoryItemsListSortField_Name :: InventoryItemsListSortField
 pattern InventoryItemsListSortField_Name = InventoryItemsListSortField "NAME"
 
@@ -12388,11 +11303,11 @@ newtype InventoryItemsListSortOrder = InventoryItemsListSortOrder {fromInventory
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern InventoryItemsListSortOrder_Ascending :: InventoryItemsListSortOrder
 pattern InventoryItemsListSortOrder_Ascending = InventoryItemsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern InventoryItemsListSortOrder_Descending :: InventoryItemsListSortOrder
 pattern InventoryItemsListSortOrder_Descending = InventoryItemsListSortOrder "DESCENDING"
 
@@ -12415,11 +11330,9 @@ newtype InventoryItemsListType = InventoryItemsListType {fromInventoryItemsListT
       Core.FromJSONKey
     )
 
--- |
 pattern InventoryItemsListType_PLANNINGPLACEMENTTYPEREGULAR :: InventoryItemsListType
 pattern InventoryItemsListType_PLANNINGPLACEMENTTYPEREGULAR = InventoryItemsListType "PLANNING_PLACEMENT_TYPE_REGULAR"
 
--- |
 pattern InventoryItemsListType_PLANNINGPLACEMENTTYPECREDIT :: InventoryItemsListType
 pattern InventoryItemsListType_PLANNINGPLACEMENTTYPECREDIT = InventoryItemsListType "PLANNING_PLACEMENT_TYPE_CREDIT"
 
@@ -12442,47 +11355,36 @@ newtype MobileAppsListDirectories = MobileAppsListDirectories {fromMobileAppsLis
       Core.FromJSONKey
     )
 
--- |
 pattern MobileAppsListDirectories_Unknown :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_Unknown = MobileAppsListDirectories "UNKNOWN"
 
--- |
 pattern MobileAppsListDirectories_APPLEAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_APPLEAPPSTORE = MobileAppsListDirectories "APPLE_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_GOOGLEPLAYSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_GOOGLEPLAYSTORE = MobileAppsListDirectories "GOOGLE_PLAY_STORE"
 
--- |
 pattern MobileAppsListDirectories_ROKUAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_ROKUAPPSTORE = MobileAppsListDirectories "ROKU_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_AMAZONFIRETVAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_AMAZONFIRETVAPPSTORE = MobileAppsListDirectories "AMAZON_FIRETV_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_PLAYSTATIONAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_PLAYSTATIONAPPSTORE = MobileAppsListDirectories "PLAYSTATION_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_APPLETVAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_APPLETVAPPSTORE = MobileAppsListDirectories "APPLE_TV_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_XBOXAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_XBOXAPPSTORE = MobileAppsListDirectories "XBOX_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_SAMSUNGTVAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_SAMSUNGTVAPPSTORE = MobileAppsListDirectories "SAMSUNG_TV_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_ANDROIDTVAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_ANDROIDTVAPPSTORE = MobileAppsListDirectories "ANDROID_TV_APP_STORE"
 
--- |
 pattern MobileAppsListDirectories_GENERICCTVAPPSTORE :: MobileAppsListDirectories
 pattern MobileAppsListDirectories_GENERICCTVAPPSTORE = MobileAppsListDirectories "GENERIC_CTV_APP_STORE"
 
@@ -12502,60 +11404,6 @@ pattern MobileAppsListDirectories_GENERICCTVAPPSTORE = MobileAppsListDirectories
   #-}
 
 -- | Field by which to sort the list.
-newtype OrderDocumentsListSortField = OrderDocumentsListSortField {fromOrderDocumentsListSortField :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern OrderDocumentsListSortField_ID :: OrderDocumentsListSortField
-pattern OrderDocumentsListSortField_ID = OrderDocumentsListSortField "ID"
-
--- |
-pattern OrderDocumentsListSortField_Name :: OrderDocumentsListSortField
-pattern OrderDocumentsListSortField_Name = OrderDocumentsListSortField "NAME"
-
-{-# COMPLETE
-  OrderDocumentsListSortField_ID,
-  OrderDocumentsListSortField_Name,
-  OrderDocumentsListSortField
-  #-}
-
--- | Order of sorted results.
-newtype OrderDocumentsListSortOrder = OrderDocumentsListSortOrder {fromOrderDocumentsListSortOrder :: Core.Text}
-  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
-  deriving newtype
-    ( Core.Hashable,
-      Core.ToHttpApiData,
-      Core.FromHttpApiData,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromJSON,
-      Core.FromJSONKey
-    )
-
--- |
-pattern OrderDocumentsListSortOrder_Ascending :: OrderDocumentsListSortOrder
-pattern OrderDocumentsListSortOrder_Ascending = OrderDocumentsListSortOrder "ASCENDING"
-
--- |
-pattern OrderDocumentsListSortOrder_Descending :: OrderDocumentsListSortOrder
-pattern OrderDocumentsListSortOrder_Descending = OrderDocumentsListSortOrder "DESCENDING"
-
-{-# COMPLETE
-  OrderDocumentsListSortOrder_Ascending,
-  OrderDocumentsListSortOrder_Descending,
-  OrderDocumentsListSortOrder
-  #-}
-
--- | Field by which to sort the list.
 newtype OrdersListSortField = OrdersListSortField {fromOrdersListSortField :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -12568,11 +11416,9 @@ newtype OrdersListSortField = OrdersListSortField {fromOrdersListSortField :: Co
       Core.FromJSONKey
     )
 
--- |
 pattern OrdersListSortField_ID :: OrdersListSortField
 pattern OrdersListSortField_ID = OrdersListSortField "ID"
 
--- |
 pattern OrdersListSortField_Name :: OrdersListSortField
 pattern OrdersListSortField_Name = OrdersListSortField "NAME"
 
@@ -12595,11 +11441,11 @@ newtype OrdersListSortOrder = OrdersListSortOrder {fromOrdersListSortOrder :: Co
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern OrdersListSortOrder_Ascending :: OrdersListSortOrder
 pattern OrdersListSortOrder_Ascending = OrdersListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern OrdersListSortOrder_Descending :: OrdersListSortOrder
 pattern OrdersListSortOrder_Descending = OrdersListSortOrder "DESCENDING"
 
@@ -12622,23 +11468,18 @@ newtype PlacementGroupsListActiveStatus = PlacementGroupsListActiveStatus {fromP
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementGroupsListActiveStatus
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_UNKNOWN"
 
--- |
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementGroupsListActiveStatus
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSACTIVE = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_ACTIVE"
 
--- |
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementGroupsListActiveStatus
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_INACTIVE"
 
--- |
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementGroupsListActiveStatus
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_ARCHIVED"
 
--- |
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementGroupsListActiveStatus
 pattern PlacementGroupsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementGroupsListActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
 
@@ -12664,11 +11505,11 @@ newtype PlacementGroupsListPlacementGroupType = PlacementGroupsListPlacementGrou
       Core.FromJSONKey
     )
 
--- |
+-- | A simple group of site-placements (tags). Basically acts as a single pricing point for a group of tags.
 pattern PlacementGroupsListPlacementGroupType_PLACEMENTPACKAGE :: PlacementGroupsListPlacementGroupType
 pattern PlacementGroupsListPlacementGroupType_PLACEMENTPACKAGE = PlacementGroupsListPlacementGroupType "PLACEMENT_PACKAGE"
 
--- |
+-- | A group of site-placements (tags) that not only acts as a single pricing point but also assumes that all the tags in it will be served at the same time. This kind of group requires one of its assigned site-placements to be marked as primary for reporting purposes.
 pattern PlacementGroupsListPlacementGroupType_PLACEMENTROADBLOCK :: PlacementGroupsListPlacementGroupType
 pattern PlacementGroupsListPlacementGroupType_PLACEMENTROADBLOCK = PlacementGroupsListPlacementGroupType "PLACEMENT_ROADBLOCK"
 
@@ -12691,27 +11532,21 @@ newtype PlacementGroupsListPricingTypes = PlacementGroupsListPricingTypes {fromP
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPM :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPM = PlacementGroupsListPricingTypes "PRICING_TYPE_CPM"
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPC :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPC = PlacementGroupsListPricingTypes "PRICING_TYPE_CPC"
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPA :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPA = PlacementGroupsListPricingTypes "PRICING_TYPE_CPA"
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPEFLATRATEIMPRESSIONS :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPEFLATRATEIMPRESSIONS = PlacementGroupsListPricingTypes "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPEFLATRATECLICKS :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPEFLATRATECLICKS = PlacementGroupsListPricingTypes "PRICING_TYPE_FLAT_RATE_CLICKS"
 
--- |
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPMACTIVEVIEW :: PlacementGroupsListPricingTypes
 pattern PlacementGroupsListPricingTypes_PRICINGTYPECPMACTIVEVIEW = PlacementGroupsListPricingTypes "PRICING_TYPE_CPM_ACTIVEVIEW"
 
@@ -12738,11 +11573,9 @@ newtype PlacementGroupsListSortField = PlacementGroupsListSortField {fromPlaceme
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementGroupsListSortField_ID :: PlacementGroupsListSortField
 pattern PlacementGroupsListSortField_ID = PlacementGroupsListSortField "ID"
 
--- |
 pattern PlacementGroupsListSortField_Name :: PlacementGroupsListSortField
 pattern PlacementGroupsListSortField_Name = PlacementGroupsListSortField "NAME"
 
@@ -12765,11 +11598,11 @@ newtype PlacementGroupsListSortOrder = PlacementGroupsListSortOrder {fromPlaceme
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern PlacementGroupsListSortOrder_Ascending :: PlacementGroupsListSortOrder
 pattern PlacementGroupsListSortOrder_Ascending = PlacementGroupsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern PlacementGroupsListSortOrder_Descending :: PlacementGroupsListSortOrder
 pattern PlacementGroupsListSortOrder_Descending = PlacementGroupsListSortOrder "DESCENDING"
 
@@ -12792,11 +11625,9 @@ newtype PlacementStrategiesListSortField = PlacementStrategiesListSortField {fro
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementStrategiesListSortField_ID :: PlacementStrategiesListSortField
 pattern PlacementStrategiesListSortField_ID = PlacementStrategiesListSortField "ID"
 
--- |
 pattern PlacementStrategiesListSortField_Name :: PlacementStrategiesListSortField
 pattern PlacementStrategiesListSortField_Name = PlacementStrategiesListSortField "NAME"
 
@@ -12819,11 +11650,11 @@ newtype PlacementStrategiesListSortOrder = PlacementStrategiesListSortOrder {fro
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern PlacementStrategiesListSortOrder_Ascending :: PlacementStrategiesListSortOrder
 pattern PlacementStrategiesListSortOrder_Ascending = PlacementStrategiesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern PlacementStrategiesListSortOrder_Descending :: PlacementStrategiesListSortOrder
 pattern PlacementStrategiesListSortOrder_Descending = PlacementStrategiesListSortOrder "DESCENDING"
 
@@ -12846,83 +11677,63 @@ newtype PlacementsGeneratetagsTagFormats = PlacementsGeneratetagsTagFormats {fro
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGSTANDARD :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGSTANDARD = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_STANDARD"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEJAVASCRIPT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEJAVASCRIPT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEILAYER :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEILAYER = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_IFRAME_ILAYER"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERNALREDIRECT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERNALREDIRECT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERNAL_REDIRECT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGJAVASCRIPT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGJAVASCRIPT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_JAVASCRIPT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALINTERNALREDIRECT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALJAVASCRIPT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALJAVASCRIPT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGCLICKCOMMANDS :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGCLICKCOMMANDS = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_CLICK_COMMANDS"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINSTREAMVIDEOPREFETCH :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINSTREAMVIDEOPREFETCH = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKING :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKING = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_TRACKING"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGIFRAME :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGIFRAME = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_TRACKING_IFRAME"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGJAVASCRIPT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGJAVASCRIPT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3 = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_3"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGIFRAMEJAVASCRIPTLEGACY = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGJAVASCRIPTLEGACY :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGJAVASCRIPTLEGACY = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_JAVASCRIPT_LEGACY"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALIFRAMEJAVASCRIPTLEGACY = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT_LEGACY"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGINTERSTITIALJAVASCRIPTLEGACY = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT_LEGACY"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4 = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH_VAST_4"
 
--- |
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT :: PlacementsGeneratetagsTagFormats
 pattern PlacementsGeneratetagsTagFormats_PLACEMENTTAGTRACKINGTHIRDPARTYMEASUREMENT = PlacementsGeneratetagsTagFormats "PLACEMENT_TAG_TRACKING_THIRD_PARTY_MEASUREMENT"
 
@@ -12963,23 +11774,18 @@ newtype PlacementsListActiveStatus = PlacementsListActiveStatus {fromPlacementsL
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN :: PlacementsListActiveStatus
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSUNKNOWN = PlacementsListActiveStatus "PLACEMENT_STATUS_UNKNOWN"
 
--- |
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE :: PlacementsListActiveStatus
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSACTIVE = PlacementsListActiveStatus "PLACEMENT_STATUS_ACTIVE"
 
--- |
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE :: PlacementsListActiveStatus
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSINACTIVE = PlacementsListActiveStatus "PLACEMENT_STATUS_INACTIVE"
 
--- |
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED :: PlacementsListActiveStatus
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSARCHIVED = PlacementsListActiveStatus "PLACEMENT_STATUS_ARCHIVED"
 
--- |
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED :: PlacementsListActiveStatus
 pattern PlacementsListActiveStatus_PLACEMENTSTATUSPERMANENTLYARCHIVED = PlacementsListActiveStatus "PLACEMENT_STATUS_PERMANENTLY_ARCHIVED"
 
@@ -13005,27 +11811,23 @@ newtype PlacementsListCompatibilities = PlacementsListCompatibilities {fromPlace
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsListCompatibilities_Display :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_Display = PlacementsListCompatibilities "DISPLAY"
 
--- |
 pattern PlacementsListCompatibilities_DISPLAYINTERSTITIAL :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_DISPLAYINTERSTITIAL = PlacementsListCompatibilities "DISPLAY_INTERSTITIAL"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern PlacementsListCompatibilities_App :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_App = PlacementsListCompatibilities "APP"
 
--- |
+-- | Deprecated enum value. No longer supported.
 pattern PlacementsListCompatibilities_APPINTERSTITIAL :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_APPINTERSTITIAL = PlacementsListCompatibilities "APP_INTERSTITIAL"
 
--- |
 pattern PlacementsListCompatibilities_INSTREAMVIDEO :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_INSTREAMVIDEO = PlacementsListCompatibilities "IN_STREAM_VIDEO"
 
--- |
 pattern PlacementsListCompatibilities_INSTREAMAUDIO :: PlacementsListCompatibilities
 pattern PlacementsListCompatibilities_INSTREAMAUDIO = PlacementsListCompatibilities "IN_STREAM_AUDIO"
 
@@ -13052,11 +11854,9 @@ newtype PlacementsListPaymentSource = PlacementsListPaymentSource {fromPlacement
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsListPaymentSource_PLACEMENTAGENCYPAID :: PlacementsListPaymentSource
 pattern PlacementsListPaymentSource_PLACEMENTAGENCYPAID = PlacementsListPaymentSource "PLACEMENT_AGENCY_PAID"
 
--- |
 pattern PlacementsListPaymentSource_PLACEMENTPUBLISHERPAID :: PlacementsListPaymentSource
 pattern PlacementsListPaymentSource_PLACEMENTPUBLISHERPAID = PlacementsListPaymentSource "PLACEMENT_PUBLISHER_PAID"
 
@@ -13079,27 +11879,21 @@ newtype PlacementsListPricingTypes = PlacementsListPricingTypes {fromPlacementsL
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPECPM :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPECPM = PlacementsListPricingTypes "PRICING_TYPE_CPM"
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPECPC :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPECPC = PlacementsListPricingTypes "PRICING_TYPE_CPC"
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPECPA :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPECPA = PlacementsListPricingTypes "PRICING_TYPE_CPA"
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPEFLATRATEIMPRESSIONS :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPEFLATRATEIMPRESSIONS = PlacementsListPricingTypes "PRICING_TYPE_FLAT_RATE_IMPRESSIONS"
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPEFLATRATECLICKS :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPEFLATRATECLICKS = PlacementsListPricingTypes "PRICING_TYPE_FLAT_RATE_CLICKS"
 
--- |
 pattern PlacementsListPricingTypes_PRICINGTYPECPMACTIVEVIEW :: PlacementsListPricingTypes
 pattern PlacementsListPricingTypes_PRICINGTYPECPMACTIVEVIEW = PlacementsListPricingTypes "PRICING_TYPE_CPM_ACTIVEVIEW"
 
@@ -13126,11 +11920,9 @@ newtype PlacementsListSortField = PlacementsListSortField {fromPlacementsListSor
       Core.FromJSONKey
     )
 
--- |
 pattern PlacementsListSortField_ID :: PlacementsListSortField
 pattern PlacementsListSortField_ID = PlacementsListSortField "ID"
 
--- |
 pattern PlacementsListSortField_Name :: PlacementsListSortField
 pattern PlacementsListSortField_Name = PlacementsListSortField "NAME"
 
@@ -13153,11 +11945,11 @@ newtype PlacementsListSortOrder = PlacementsListSortOrder {fromPlacementsListSor
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern PlacementsListSortOrder_Ascending :: PlacementsListSortOrder
 pattern PlacementsListSortOrder_Ascending = PlacementsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern PlacementsListSortOrder_Descending :: PlacementsListSortOrder
 pattern PlacementsListSortOrder_Descending = PlacementsListSortOrder "DESCENDING"
 
@@ -13180,11 +11972,9 @@ newtype ProjectsListSortField = ProjectsListSortField {fromProjectsListSortField
       Core.FromJSONKey
     )
 
--- |
 pattern ProjectsListSortField_ID :: ProjectsListSortField
 pattern ProjectsListSortField_ID = ProjectsListSortField "ID"
 
--- |
 pattern ProjectsListSortField_Name :: ProjectsListSortField
 pattern ProjectsListSortField_Name = ProjectsListSortField "NAME"
 
@@ -13207,11 +11997,11 @@ newtype ProjectsListSortOrder = ProjectsListSortOrder {fromProjectsListSortOrder
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern ProjectsListSortOrder_Ascending :: ProjectsListSortOrder
 pattern ProjectsListSortOrder_Ascending = ProjectsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern ProjectsListSortOrder_Descending :: ProjectsListSortOrder
 pattern ProjectsListSortOrder_Descending = ProjectsListSortOrder "DESCENDING"
 
@@ -13234,11 +12024,9 @@ newtype RemarketingListsListSortField = RemarketingListsListSortField {fromRemar
       Core.FromJSONKey
     )
 
--- |
 pattern RemarketingListsListSortField_ID :: RemarketingListsListSortField
 pattern RemarketingListsListSortField_ID = RemarketingListsListSortField "ID"
 
--- |
 pattern RemarketingListsListSortField_Name :: RemarketingListsListSortField
 pattern RemarketingListsListSortField_Name = RemarketingListsListSortField "NAME"
 
@@ -13261,11 +12049,11 @@ newtype RemarketingListsListSortOrder = RemarketingListsListSortOrder {fromRemar
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern RemarketingListsListSortOrder_Ascending :: RemarketingListsListSortOrder
 pattern RemarketingListsListSortOrder_Ascending = RemarketingListsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern RemarketingListsListSortOrder_Descending :: RemarketingListsListSortOrder
 pattern RemarketingListsListSortOrder_Descending = RemarketingListsListSortOrder "DESCENDING"
 
@@ -13288,11 +12076,9 @@ newtype ReportsFilesListSortField = ReportsFilesListSortField {fromReportsFilesL
       Core.FromJSONKey
     )
 
--- |
 pattern ReportsFilesListSortField_ID :: ReportsFilesListSortField
 pattern ReportsFilesListSortField_ID = ReportsFilesListSortField "ID"
 
--- |
 pattern ReportsFilesListSortField_LASTMODIFIEDTIME :: ReportsFilesListSortField
 pattern ReportsFilesListSortField_LASTMODIFIEDTIME = ReportsFilesListSortField "LAST_MODIFIED_TIME"
 
@@ -13428,11 +12214,9 @@ newtype SitesListSortField = SitesListSortField {fromSitesListSortField :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern SitesListSortField_ID :: SitesListSortField
 pattern SitesListSortField_ID = SitesListSortField "ID"
 
--- |
 pattern SitesListSortField_Name :: SitesListSortField
 pattern SitesListSortField_Name = SitesListSortField "NAME"
 
@@ -13455,11 +12239,11 @@ newtype SitesListSortOrder = SitesListSortOrder {fromSitesListSortOrder :: Core.
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern SitesListSortOrder_Ascending :: SitesListSortOrder
 pattern SitesListSortOrder_Ascending = SitesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern SitesListSortOrder_Descending :: SitesListSortOrder
 pattern SitesListSortOrder_Descending = SitesListSortOrder "DESCENDING"
 
@@ -13482,11 +12266,9 @@ newtype SubaccountsListSortField = SubaccountsListSortField {fromSubaccountsList
       Core.FromJSONKey
     )
 
--- |
 pattern SubaccountsListSortField_ID :: SubaccountsListSortField
 pattern SubaccountsListSortField_ID = SubaccountsListSortField "ID"
 
--- |
 pattern SubaccountsListSortField_Name :: SubaccountsListSortField
 pattern SubaccountsListSortField_Name = SubaccountsListSortField "NAME"
 
@@ -13509,11 +12291,11 @@ newtype SubaccountsListSortOrder = SubaccountsListSortOrder {fromSubaccountsList
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern SubaccountsListSortOrder_Ascending :: SubaccountsListSortOrder
 pattern SubaccountsListSortOrder_Ascending = SubaccountsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern SubaccountsListSortOrder_Descending :: SubaccountsListSortOrder
 pattern SubaccountsListSortOrder_Descending = SubaccountsListSortOrder "DESCENDING"
 
@@ -13536,11 +12318,9 @@ newtype TargetableRemarketingListsListSortField = TargetableRemarketingListsList
       Core.FromJSONKey
     )
 
--- |
 pattern TargetableRemarketingListsListSortField_ID :: TargetableRemarketingListsListSortField
 pattern TargetableRemarketingListsListSortField_ID = TargetableRemarketingListsListSortField "ID"
 
--- |
 pattern TargetableRemarketingListsListSortField_Name :: TargetableRemarketingListsListSortField
 pattern TargetableRemarketingListsListSortField_Name = TargetableRemarketingListsListSortField "NAME"
 
@@ -13563,11 +12343,11 @@ newtype TargetableRemarketingListsListSortOrder = TargetableRemarketingListsList
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern TargetableRemarketingListsListSortOrder_Ascending :: TargetableRemarketingListsListSortOrder
 pattern TargetableRemarketingListsListSortOrder_Ascending = TargetableRemarketingListsListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern TargetableRemarketingListsListSortOrder_Descending :: TargetableRemarketingListsListSortOrder
 pattern TargetableRemarketingListsListSortOrder_Descending = TargetableRemarketingListsListSortOrder "DESCENDING"
 
@@ -13590,11 +12370,9 @@ newtype TargetingTemplatesListSortField = TargetingTemplatesListSortField {fromT
       Core.FromJSONKey
     )
 
--- |
 pattern TargetingTemplatesListSortField_ID :: TargetingTemplatesListSortField
 pattern TargetingTemplatesListSortField_ID = TargetingTemplatesListSortField "ID"
 
--- |
 pattern TargetingTemplatesListSortField_Name :: TargetingTemplatesListSortField
 pattern TargetingTemplatesListSortField_Name = TargetingTemplatesListSortField "NAME"
 
@@ -13617,11 +12395,11 @@ newtype TargetingTemplatesListSortOrder = TargetingTemplatesListSortOrder {fromT
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern TargetingTemplatesListSortOrder_Ascending :: TargetingTemplatesListSortOrder
 pattern TargetingTemplatesListSortOrder_Ascending = TargetingTemplatesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern TargetingTemplatesListSortOrder_Descending :: TargetingTemplatesListSortOrder
 pattern TargetingTemplatesListSortOrder_Descending = TargetingTemplatesListSortOrder "DESCENDING"
 
@@ -13644,11 +12422,9 @@ newtype UserRolesListSortField = UserRolesListSortField {fromUserRolesListSortFi
       Core.FromJSONKey
     )
 
--- |
 pattern UserRolesListSortField_ID :: UserRolesListSortField
 pattern UserRolesListSortField_ID = UserRolesListSortField "ID"
 
--- |
 pattern UserRolesListSortField_Name :: UserRolesListSortField
 pattern UserRolesListSortField_Name = UserRolesListSortField "NAME"
 
@@ -13671,11 +12447,11 @@ newtype UserRolesListSortOrder = UserRolesListSortOrder {fromUserRolesListSortOr
       Core.FromJSONKey
     )
 
--- |
+-- | Ascending order.
 pattern UserRolesListSortOrder_Ascending :: UserRolesListSortOrder
 pattern UserRolesListSortOrder_Ascending = UserRolesListSortOrder "ASCENDING"
 
--- |
+-- | Descending order.
 pattern UserRolesListSortOrder_Descending :: UserRolesListSortOrder
 pattern UserRolesListSortOrder_Descending = UserRolesListSortOrder "DESCENDING"
 

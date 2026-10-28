@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,26 @@
 
 -- |
 -- Module      : Gogol.Classroom.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Classroom.Internal.Product
-  ( -- * Announcement
+  ( -- * AddOnAttachment
+    AddOnAttachment (..),
+    newAddOnAttachment,
+
+    -- * AddOnAttachmentStudentSubmission
+    AddOnAttachmentStudentSubmission (..),
+    newAddOnAttachmentStudentSubmission,
+
+    -- * AddOnContext
+    AddOnContext (..),
+    newAddOnContext,
+
+    -- * Announcement
     Announcement (..),
     newAnnouncement,
 
@@ -45,6 +55,10 @@ module Gogol.Classroom.Internal.Product
     -- * CloudPubsubTopic
     CloudPubsubTopic (..),
     newCloudPubsubTopic,
+
+    -- * CopyHistory
+    CopyHistory (..),
+    newCopyHistory,
 
     -- * Course
     Course (..),
@@ -78,6 +92,10 @@ module Gogol.Classroom.Internal.Product
     CourseWorkMaterial (..),
     newCourseWorkMaterial,
 
+    -- * Criterion
+    Criterion (..),
+    newCriterion,
+
     -- * Date
     Date (..),
     newDate,
@@ -89,6 +107,10 @@ module Gogol.Classroom.Internal.Product
     -- * DriveFolder
     DriveFolder (..),
     newDriveFolder,
+
+    -- * EmbedUri
+    EmbedUri (..),
+    newEmbedUri,
 
     -- * Empty
     Empty (..),
@@ -134,9 +156,17 @@ module Gogol.Classroom.Internal.Product
     Invitation (..),
     newInvitation,
 
+    -- * Level
+    Level (..),
+    newLevel,
+
     -- * Link
     Link (..),
     newLink,
+
+    -- * ListAddOnAttachmentsResponse
+    ListAddOnAttachmentsResponse (..),
+    newListAddOnAttachmentsResponse,
 
     -- * ListAnnouncementsResponse
     ListAnnouncementsResponse (..),
@@ -169,6 +199,10 @@ module Gogol.Classroom.Internal.Product
     -- * ListInvitationsResponse
     ListInvitationsResponse (..),
     newListInvitationsResponse,
+
+    -- * ListRubricsResponse
+    ListRubricsResponse (..),
+    newListRubricsResponse,
 
     -- * ListStudentSubmissionsResponse
     ListStudentSubmissionsResponse (..),
@@ -230,6 +264,14 @@ module Gogol.Classroom.Internal.Product
     ReturnStudentSubmissionRequest (..),
     newReturnStudentSubmissionRequest,
 
+    -- * Rubric
+    Rubric (..),
+    newRubric,
+
+    -- * RubricGrade
+    RubricGrade (..),
+    newRubricGrade,
+
     -- * SharedDriveFile
     SharedDriveFile (..),
     newSharedDriveFile,
@@ -246,9 +288,21 @@ module Gogol.Classroom.Internal.Product
     Student (..),
     newStudent,
 
+    -- * StudentContext
+    StudentContext (..),
+    newStudentContext,
+
     -- * StudentSubmission
     StudentSubmission (..),
     newStudentSubmission,
+
+    -- * StudentSubmission_AssignedRubricGrades
+    StudentSubmission_AssignedRubricGrades (..),
+    newStudentSubmission_AssignedRubricGrades,
+
+    -- * StudentSubmission_DraftRubricGrades
+    StudentSubmission_DraftRubricGrades (..),
+    newStudentSubmission_DraftRubricGrades,
 
     -- * SubmissionHistory
     SubmissionHistory (..),
@@ -257,6 +311,10 @@ module Gogol.Classroom.Internal.Product
     -- * Teacher
     Teacher (..),
     newTeacher,
+
+    -- * TeacherContext
+    TeacherContext (..),
+    newTeacherContext,
 
     -- * TimeOfDay'
     TimeOfDay' (..),
@@ -281,7 +339,194 @@ module Gogol.Classroom.Internal.Product
 where
 
 import Gogol.Classroom.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | An add-on attachment on a post.
+--
+-- /See:/ 'newAddOnAttachment' smart constructor.
+data AddOnAttachment = AddOnAttachment
+  { -- | Output only. Identifiers of attachments that were previous copies of this attachment. If the attachment was previously copied by virtue of its parent post being copied, this enumerates the identifiers of attachments that were its previous copies in ascending chronological order of copy.
+    copyHistory :: (Core.Maybe [CopyHistory]),
+    -- | Immutable. Identifier of the course.
+    courseId :: (Core.Maybe Core.Text),
+    -- | Date, in UTC, that work on this attachment is due. This must be specified if @due_time@ is specified.
+    dueDate :: (Core.Maybe Date),
+    -- | Time of day, in UTC, that work on this attachment is due. This must be specified if @due_date@ is specified.
+    dueTime :: (Core.Maybe TimeOfDay'),
+    -- | Immutable. Classroom-assigned identifier for this attachment, unique per post.
+    id :: (Core.Maybe Core.Text),
+    -- | Immutable. Identifier of the @Announcement@, @CourseWork@, or @CourseWorkMaterial@ under which the attachment is attached. Unique per course.
+    itemId :: (Core.Maybe Core.Text),
+    -- | Maximum grade for this attachment. Can only be set if @studentWorkReviewUri@ is set. Set to a non-zero value to indicate that the attachment supports grade passback. If set, this must be a non-negative integer value. When set to zero, the attachment will not support grade passback.
+    maxPoints :: (Core.Maybe Core.Double),
+    -- | Immutable. Deprecated, use @item_id@ instead.
+    postId :: (Core.Maybe Core.Text),
+    -- | Required. URI to show the student view of the attachment. The URI will be opened in an iframe with the @courseId@, @itemId@, @itemType@, and @attachmentId@ query parameters set.
+    studentViewUri :: (Core.Maybe EmbedUri),
+    -- | URI for the teacher to see student work on the attachment, if applicable. The URI will be opened in an iframe with the @courseId@, @itemId@, @itemType@, @attachmentId@, and @submissionId@ query parameters set. This is the same @submissionId@ returned in the <//devsite.google.com/classroom/reference/rest/v1/AddOnContext#StudentContext AddOnContext.studentContext> field when a student views the attachment. If the URI is omitted or removed, @max_points@ will also be discarded.
+    studentWorkReviewUri :: (Core.Maybe EmbedUri),
+    -- | Required. URI to show the teacher view of the attachment. The URI will be opened in an iframe with the @courseId@, @itemId@, @itemType@, and @attachmentId@ query parameters set.
+    teacherViewUri :: (Core.Maybe EmbedUri),
+    -- | Required. Title of this attachment. The title must be between 1 and 1000 characters.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddOnAttachment' with the minimum fields required to make a request.
+newAddOnAttachment ::
+  AddOnAttachment
+newAddOnAttachment =
+  AddOnAttachment
+    { copyHistory = Core.Nothing,
+      courseId = Core.Nothing,
+      dueDate = Core.Nothing,
+      dueTime = Core.Nothing,
+      id = Core.Nothing,
+      itemId = Core.Nothing,
+      maxPoints = Core.Nothing,
+      postId = Core.Nothing,
+      studentViewUri = Core.Nothing,
+      studentWorkReviewUri = Core.Nothing,
+      teacherViewUri = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON AddOnAttachment where
+  parseJSON =
+    Core.withObject
+      "AddOnAttachment"
+      ( \o ->
+          AddOnAttachment
+            Core.<$> (o Core..:? "copyHistory")
+            Core.<*> (o Core..:? "courseId")
+            Core.<*> (o Core..:? "dueDate")
+            Core.<*> (o Core..:? "dueTime")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "maxPoints")
+            Core.<*> (o Core..:? "postId")
+            Core.<*> (o Core..:? "studentViewUri")
+            Core.<*> (o Core..:? "studentWorkReviewUri")
+            Core.<*> (o Core..:? "teacherViewUri")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON AddOnAttachment where
+  toJSON AddOnAttachment {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("copyHistory" Core..=) Core.<$> copyHistory,
+            ("courseId" Core..=) Core.<$> courseId,
+            ("dueDate" Core..=) Core.<$> dueDate,
+            ("dueTime" Core..=) Core.<$> dueTime,
+            ("id" Core..=) Core.<$> id,
+            ("itemId" Core..=) Core.<$> itemId,
+            ("maxPoints" Core..=) Core.<$> maxPoints,
+            ("postId" Core..=) Core.<$> postId,
+            ("studentViewUri" Core..=) Core.<$> studentViewUri,
+            ("studentWorkReviewUri" Core..=) Core.<$> studentWorkReviewUri,
+            ("teacherViewUri" Core..=) Core.<$> teacherViewUri,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | Payload for grade update requests.
+--
+-- /See:/ 'newAddOnAttachmentStudentSubmission' smart constructor.
+data AddOnAttachmentStudentSubmission = AddOnAttachmentStudentSubmission
+  { -- | Student grade on this attachment. If unset, no grade was set.
+    pointsEarned :: (Core.Maybe Core.Double),
+    -- | Submission state of add-on attachment\'s parent post (i.e. assignment).
+    postSubmissionState :: (Core.Maybe AddOnAttachmentStudentSubmission_PostSubmissionState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddOnAttachmentStudentSubmission' with the minimum fields required to make a request.
+newAddOnAttachmentStudentSubmission ::
+  AddOnAttachmentStudentSubmission
+newAddOnAttachmentStudentSubmission =
+  AddOnAttachmentStudentSubmission
+    { pointsEarned = Core.Nothing,
+      postSubmissionState = Core.Nothing
+    }
+
+instance Core.FromJSON AddOnAttachmentStudentSubmission where
+  parseJSON =
+    Core.withObject
+      "AddOnAttachmentStudentSubmission"
+      ( \o ->
+          AddOnAttachmentStudentSubmission
+            Core.<$> (o Core..:? "pointsEarned")
+            Core.<*> (o Core..:? "postSubmissionState")
+      )
+
+instance Core.ToJSON AddOnAttachmentStudentSubmission where
+  toJSON AddOnAttachmentStudentSubmission {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("pointsEarned" Core..=) Core.<$> pointsEarned,
+            ("postSubmissionState" Core..=) Core.<$> postSubmissionState
+          ]
+      )
+
+-- | Attachment-relevant metadata for Classroom add-ons in the context of a specific post.
+--
+-- /See:/ 'newAddOnContext' smart constructor.
+data AddOnContext = AddOnContext
+  { -- | Immutable. Identifier of the course.
+    courseId :: (Core.Maybe Core.Text),
+    -- | Immutable. Identifier of the @Announcement@, @CourseWork@, or @CourseWorkMaterial@ under which the attachment is attached.
+    itemId :: (Core.Maybe Core.Text),
+    -- | Immutable. Deprecated, use @item_id@ instead.
+    postId :: (Core.Maybe Core.Text),
+    -- | Add-on context corresponding to the requesting user\'s role as a student. Its presence implies that the requesting user is a student in the course.
+    studentContext :: (Core.Maybe StudentContext),
+    -- | Optional. Whether the post allows the teacher to see student work and passback grades.
+    supportsStudentWork :: (Core.Maybe Core.Bool),
+    -- | Add-on context corresponding to the requesting user\'s role as a teacher. Its presence implies that the requesting user is a teacher in the course.
+    teacherContext :: (Core.Maybe TeacherContext)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AddOnContext' with the minimum fields required to make a request.
+newAddOnContext ::
+  AddOnContext
+newAddOnContext =
+  AddOnContext
+    { courseId = Core.Nothing,
+      itemId = Core.Nothing,
+      postId = Core.Nothing,
+      studentContext = Core.Nothing,
+      supportsStudentWork = Core.Nothing,
+      teacherContext = Core.Nothing
+    }
+
+instance Core.FromJSON AddOnContext where
+  parseJSON =
+    Core.withObject
+      "AddOnContext"
+      ( \o ->
+          AddOnContext
+            Core.<$> (o Core..:? "courseId")
+            Core.<*> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "postId")
+            Core.<*> (o Core..:? "studentContext")
+            Core.<*> (o Core..:? "supportsStudentWork")
+            Core.<*> (o Core..:? "teacherContext")
+      )
+
+instance Core.ToJSON AddOnContext where
+  toJSON AddOnContext {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("courseId" Core..=) Core.<$> courseId,
+            ("itemId" Core..=) Core.<$> itemId,
+            ("postId" Core..=) Core.<$> postId,
+            ("studentContext" Core..=) Core.<$> studentContext,
+            ("supportsStudentWork" Core..=) Core.<$> supportsStudentWork,
+            ("teacherContext" Core..=) Core.<$> teacherContext
+          ]
+      )
 
 -- | Announcement created by a teacher for students of the course
 --
@@ -391,17 +636,13 @@ instance Core.FromJSON Assignment where
   parseJSON =
     Core.withObject
       "Assignment"
-      ( \o ->
-          Assignment Core.<$> (o Core..:? "studentWorkFolder")
-      )
+      (\o -> Assignment Core.<$> (o Core..:? "studentWorkFolder"))
 
 instance Core.ToJSON Assignment where
   toJSON Assignment {..} =
     Core.object
       ( Core.catMaybes
-          [ ("studentWorkFolder" Core..=)
-              Core.<$> studentWorkFolder
-          ]
+          [("studentWorkFolder" Core..=) Core.<$> studentWorkFolder]
       )
 
 -- | Student work for an assignment.
@@ -416,23 +657,19 @@ newtype AssignmentSubmission = AssignmentSubmission
 -- | Creates a value of 'AssignmentSubmission' with the minimum fields required to make a request.
 newAssignmentSubmission ::
   AssignmentSubmission
-newAssignmentSubmission = AssignmentSubmission {attachments = Core.Nothing}
+newAssignmentSubmission =
+  AssignmentSubmission {attachments = Core.Nothing}
 
 instance Core.FromJSON AssignmentSubmission where
   parseJSON =
     Core.withObject
       "AssignmentSubmission"
-      ( \o ->
-          AssignmentSubmission
-            Core.<$> (o Core..:? "attachments")
-      )
+      (\o -> AssignmentSubmission Core.<$> (o Core..:? "attachments"))
 
 instance Core.ToJSON AssignmentSubmission where
   toJSON AssignmentSubmission {..} =
     Core.object
-      ( Core.catMaybes
-          [("attachments" Core..=) Core.<$> attachments]
-      )
+      (Core.catMaybes [("attachments" Core..=) Core.<$> attachments])
 
 -- | Attachment added to student assignment work. When creating attachments, setting the @form@ field is not supported.
 --
@@ -501,15 +738,60 @@ instance Core.FromJSON CloudPubsubTopic where
   parseJSON =
     Core.withObject
       "CloudPubsubTopic"
-      ( \o ->
-          CloudPubsubTopic Core.<$> (o Core..:? "topicName")
-      )
+      (\o -> CloudPubsubTopic Core.<$> (o Core..:? "topicName"))
 
 instance Core.ToJSON CloudPubsubTopic where
   toJSON CloudPubsubTopic {..} =
     Core.object
+      (Core.catMaybes [("topicName" Core..=) Core.<$> topicName])
+
+-- | Identifier of a previous copy of a given attachment.
+--
+-- /See:/ 'newCopyHistory' smart constructor.
+data CopyHistory = CopyHistory
+  { -- | Immutable. Identifier of the attachment.
+    attachmentId :: (Core.Maybe Core.Text),
+    -- | Immutable. Identifier of the course.
+    courseId :: (Core.Maybe Core.Text),
+    -- | Immutable. Identifier of the @Announcement@, @CourseWork@, or @CourseWorkMaterial@ under which the attachment is attached.
+    itemId :: (Core.Maybe Core.Text),
+    -- | Immutable. Deprecated, use @item_id@ instead.
+    postId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CopyHistory' with the minimum fields required to make a request.
+newCopyHistory ::
+  CopyHistory
+newCopyHistory =
+  CopyHistory
+    { attachmentId = Core.Nothing,
+      courseId = Core.Nothing,
+      itemId = Core.Nothing,
+      postId = Core.Nothing
+    }
+
+instance Core.FromJSON CopyHistory where
+  parseJSON =
+    Core.withObject
+      "CopyHistory"
+      ( \o ->
+          CopyHistory
+            Core.<$> (o Core..:? "attachmentId")
+            Core.<*> (o Core..:? "courseId")
+            Core.<*> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "postId")
+      )
+
+instance Core.ToJSON CopyHistory where
+  toJSON CopyHistory {..} =
+    Core.object
       ( Core.catMaybes
-          [("topicName" Core..=) Core.<$> topicName]
+          [ ("attachmentId" Core..=) Core.<$> attachmentId,
+            ("courseId" Core..=) Core.<$> courseId,
+            ("itemId" Core..=) Core.<$> itemId,
+            ("postId" Core..=) Core.<$> postId
+          ]
       )
 
 -- | A Course in Classroom.
@@ -518,7 +800,7 @@ instance Core.ToJSON CloudPubsubTopic where
 data Course = Course
   { -- | Absolute link to this course in the Classroom web UI. Read-only.
     alternateLink :: (Core.Maybe Core.Text),
-    -- | The Calendar ID for a calendar that all course members can see, to which Classroom adds events for course work and announcements in the course. Read-only.
+    -- | The Calendar ID for a calendar that all course members can see, to which Classroom adds events for course work and announcements in the course. The Calendar for a course is created asynchronously when the course is set to @CourseState.ACTIVE@ for the first time (at creation time or when it is updated to @ACTIVE@ through the UI or the API). The Calendar ID will not be populated until the creation process is completed. Read-only.
     calendarId :: (Core.Maybe Core.Text),
     -- | The email address of a Google group containing all members of the course. This group does not accept email and can only be used for permissions. Read-only.
     courseGroupEmail :: (Core.Maybe Core.Text),
@@ -616,28 +898,22 @@ instance Core.ToJSON Course where
       ( Core.catMaybes
           [ ("alternateLink" Core..=) Core.<$> alternateLink,
             ("calendarId" Core..=) Core.<$> calendarId,
-            ("courseGroupEmail" Core..=)
-              Core.<$> courseGroupEmail,
-            ("courseMaterialSets" Core..=)
-              Core.<$> courseMaterialSets,
+            ("courseGroupEmail" Core..=) Core.<$> courseGroupEmail,
+            ("courseMaterialSets" Core..=) Core.<$> courseMaterialSets,
             ("courseState" Core..=) Core.<$> courseState,
             ("creationTime" Core..=) Core.<$> creationTime,
             ("description" Core..=) Core.<$> description,
-            ("descriptionHeading" Core..=)
-              Core.<$> descriptionHeading,
+            ("descriptionHeading" Core..=) Core.<$> descriptionHeading,
             ("enrollmentCode" Core..=) Core.<$> enrollmentCode,
-            ("gradebookSettings" Core..=)
-              Core.<$> gradebookSettings,
-            ("guardiansEnabled" Core..=)
-              Core.<$> guardiansEnabled,
+            ("gradebookSettings" Core..=) Core.<$> gradebookSettings,
+            ("guardiansEnabled" Core..=) Core.<$> guardiansEnabled,
             ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
             ("ownerId" Core..=) Core.<$> ownerId,
             ("room" Core..=) Core.<$> room,
             ("section" Core..=) Core.<$> section,
             ("teacherFolder" Core..=) Core.<$> teacherFolder,
-            ("teacherGroupEmail" Core..=)
-              Core.<$> teacherGroupEmail,
+            ("teacherGroupEmail" Core..=) Core.<$> teacherGroupEmail,
             ("updateTime" Core..=) Core.<$> updateTime
           ]
       )
@@ -664,8 +940,7 @@ instance Core.FromJSON CourseAlias where
 
 instance Core.ToJSON CourseAlias where
   toJSON CourseAlias {..} =
-    Core.object
-      (Core.catMaybes [("alias" Core..=) Core.<$> alias])
+    Core.object (Core.catMaybes [("alias" Core..=) Core.<$> alias])
 
 -- | A material attached to a course as part of a material set.
 --
@@ -764,23 +1039,19 @@ newtype CourseRosterChangesInfo = CourseRosterChangesInfo
 -- | Creates a value of 'CourseRosterChangesInfo' with the minimum fields required to make a request.
 newCourseRosterChangesInfo ::
   CourseRosterChangesInfo
-newCourseRosterChangesInfo = CourseRosterChangesInfo {courseId = Core.Nothing}
+newCourseRosterChangesInfo =
+  CourseRosterChangesInfo {courseId = Core.Nothing}
 
 instance Core.FromJSON CourseRosterChangesInfo where
   parseJSON =
     Core.withObject
       "CourseRosterChangesInfo"
-      ( \o ->
-          CourseRosterChangesInfo
-            Core.<$> (o Core..:? "courseId")
-      )
+      (\o -> CourseRosterChangesInfo Core.<$> (o Core..:? "courseId"))
 
 instance Core.ToJSON CourseRosterChangesInfo where
   toJSON CourseRosterChangesInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("courseId" Core..=) Core.<$> courseId]
-      )
+      (Core.catMaybes [("courseId" Core..=) Core.<$> courseId])
 
 -- | Course work created by a teacher for students of the course.
 --
@@ -917,8 +1188,7 @@ instance Core.ToJSON CourseWork where
               Core.<$> individualStudentsOptions,
             ("materials" Core..=) Core.<$> materials,
             ("maxPoints" Core..=) Core.<$> maxPoints,
-            ("multipleChoiceQuestion" Core..=)
-              Core.<$> multipleChoiceQuestion,
+            ("multipleChoiceQuestion" Core..=) Core.<$> multipleChoiceQuestion,
             ("scheduledTime" Core..=) Core.<$> scheduledTime,
             ("state" Core..=) Core.<$> state,
             ("submissionModificationMode" Core..=)
@@ -942,23 +1212,19 @@ newtype CourseWorkChangesInfo = CourseWorkChangesInfo
 -- | Creates a value of 'CourseWorkChangesInfo' with the minimum fields required to make a request.
 newCourseWorkChangesInfo ::
   CourseWorkChangesInfo
-newCourseWorkChangesInfo = CourseWorkChangesInfo {courseId = Core.Nothing}
+newCourseWorkChangesInfo =
+  CourseWorkChangesInfo {courseId = Core.Nothing}
 
 instance Core.FromJSON CourseWorkChangesInfo where
   parseJSON =
     Core.withObject
       "CourseWorkChangesInfo"
-      ( \o ->
-          CourseWorkChangesInfo
-            Core.<$> (o Core..:? "courseId")
-      )
+      (\o -> CourseWorkChangesInfo Core.<$> (o Core..:? "courseId"))
 
 instance Core.ToJSON CourseWorkChangesInfo where
   toJSON CourseWorkChangesInfo {..} =
     Core.object
-      ( Core.catMaybes
-          [("courseId" Core..=) Core.<$> courseId]
-      )
+      (Core.catMaybes [("courseId" Core..=) Core.<$> courseId])
 
 -- | Course work material created by a teacher for students of the course
 --
@@ -1060,6 +1326,55 @@ instance Core.ToJSON CourseWorkMaterial where
           ]
       )
 
+-- | A rubric criterion. Each criterion is a dimension on which performance is rated.
+--
+-- /See:/ 'newCriterion' smart constructor.
+data Criterion = Criterion
+  { -- | The description of the criterion.
+    description :: (Core.Maybe Core.Text),
+    -- | The criterion ID. On creation, an ID is assigned.
+    id :: (Core.Maybe Core.Text),
+    -- | The list of levels within this criterion.
+    levels :: (Core.Maybe [Level]),
+    -- | The title of the criterion.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Criterion' with the minimum fields required to make a request.
+newCriterion ::
+  Criterion
+newCriterion =
+  Criterion
+    { description = Core.Nothing,
+      id = Core.Nothing,
+      levels = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON Criterion where
+  parseJSON =
+    Core.withObject
+      "Criterion"
+      ( \o ->
+          Criterion
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "levels")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON Criterion where
+  toJSON Criterion {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("id" Core..=) Core.<$> id,
+            ("levels" Core..=) Core.<$> levels,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
 -- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
 --
 -- /See:/ 'newDate' smart constructor.
@@ -1076,7 +1391,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -1192,6 +1512,30 @@ instance Core.ToJSON DriveFolder where
           ]
       )
 
+-- | URI to be iframed after being populated with query parameters.
+--
+-- /See:/ 'newEmbedUri' smart constructor.
+newtype EmbedUri = EmbedUri
+  { -- | Required. URI to be iframed after being populated with query parameters. This must be a valid UTF-8 string containing between 1 and 1800 characters.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EmbedUri' with the minimum fields required to make a request.
+newEmbedUri ::
+  EmbedUri
+newEmbedUri = EmbedUri {uri = Core.Nothing}
+
+instance Core.FromJSON EmbedUri where
+  parseJSON =
+    Core.withObject
+      "EmbedUri"
+      (\o -> EmbedUri Core.<$> (o Core..:? "uri"))
+
+instance Core.ToJSON EmbedUri where
+  toJSON EmbedUri {..} =
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
@@ -1204,8 +1548,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1250,8 +1593,7 @@ instance Core.ToJSON Feed where
       ( Core.catMaybes
           [ ("courseRosterChangesInfo" Core..=)
               Core.<$> courseRosterChangesInfo,
-            ("courseWorkChangesInfo" Core..=)
-              Core.<$> courseWorkChangesInfo,
+            ("courseWorkChangesInfo" Core..=) Core.<$> courseWorkChangesInfo,
             ("feedType" Core..=) Core.<$> feedType
           ]
       )
@@ -1323,16 +1665,12 @@ instance Core.FromJSON GlobalPermission where
   parseJSON =
     Core.withObject
       "GlobalPermission"
-      ( \o ->
-          GlobalPermission Core.<$> (o Core..:? "permission")
-      )
+      (\o -> GlobalPermission Core.<$> (o Core..:? "permission"))
 
 instance Core.ToJSON GlobalPermission where
   toJSON GlobalPermission {..} =
     Core.object
-      ( Core.catMaybes
-          [("permission" Core..=) Core.<$> permission]
-      )
+      (Core.catMaybes [("permission" Core..=) Core.<$> permission])
 
 -- | Details for a grade category in a course. Coursework may have zero or one grade category, and the category may be used in computing the overall grade. See the <https://support.google.com/edu/classroom/answer/9184995 help center article> for details.
 --
@@ -1476,11 +1814,9 @@ instance Core.ToJSON GradebookSettings where
   toJSON GradebookSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calculationType" Core..=)
-              Core.<$> calculationType,
+          [ ("calculationType" Core..=) Core.<$> calculationType,
             ("displaySetting" Core..=) Core.<$> displaySetting,
-            ("gradeCategories" Core..=)
-              Core.<$> gradeCategories
+            ("gradeCategories" Core..=) Core.<$> gradeCategories
           ]
       )
 
@@ -1528,8 +1864,7 @@ instance Core.ToJSON Guardian where
       ( Core.catMaybes
           [ ("guardianId" Core..=) Core.<$> guardianId,
             ("guardianProfile" Core..=) Core.<$> guardianProfile,
-            ("invitedEmailAddress" Core..=)
-              Core.<$> invitedEmailAddress,
+            ("invitedEmailAddress" Core..=) Core.<$> invitedEmailAddress,
             ("studentId" Core..=) Core.<$> studentId
           ]
       )
@@ -1582,8 +1917,7 @@ instance Core.ToJSON GuardianInvitation where
       ( Core.catMaybes
           [ ("creationTime" Core..=) Core.<$> creationTime,
             ("invitationId" Core..=) Core.<$> invitationId,
-            ("invitedEmailAddress" Core..=)
-              Core.<$> invitedEmailAddress,
+            ("invitedEmailAddress" Core..=) Core.<$> invitedEmailAddress,
             ("state" Core..=) Core.<$> state,
             ("studentId" Core..=) Core.<$> studentId
           ]
@@ -1609,16 +1943,13 @@ instance Core.FromJSON IndividualStudentsOptions where
     Core.withObject
       "IndividualStudentsOptions"
       ( \o ->
-          IndividualStudentsOptions
-            Core.<$> (o Core..:? "studentIds")
+          IndividualStudentsOptions Core.<$> (o Core..:? "studentIds")
       )
 
 instance Core.ToJSON IndividualStudentsOptions where
   toJSON IndividualStudentsOptions {..} =
     Core.object
-      ( Core.catMaybes
-          [("studentIds" Core..=) Core.<$> studentIds]
-      )
+      (Core.catMaybes [("studentIds" Core..=) Core.<$> studentIds])
 
 -- | An invitation to join a course.
 --
@@ -1669,6 +2000,55 @@ instance Core.ToJSON Invitation where
           ]
       )
 
+-- | A level of the criterion.
+--
+-- /See:/ 'newLevel' smart constructor.
+data Level = Level
+  { -- | The description of the level.
+    description :: (Core.Maybe Core.Text),
+    -- | The level ID. On creation, an ID is assigned.
+    id :: (Core.Maybe Core.Text),
+    -- | Optional points associated with this level. If set, all levels within the rubric must specify points and the value must be distinct across all levels within a single criterion. 0 is distinct from no points.
+    points :: (Core.Maybe Core.Double),
+    -- | The title of the level. If the level has no points set, title must be set.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Level' with the minimum fields required to make a request.
+newLevel ::
+  Level
+newLevel =
+  Level
+    { description = Core.Nothing,
+      id = Core.Nothing,
+      points = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON Level where
+  parseJSON =
+    Core.withObject
+      "Level"
+      ( \o ->
+          Level
+            Core.<$> (o Core..:? "description")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "points")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON Level where
+  toJSON Level {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("description" Core..=) Core.<$> description,
+            ("id" Core..=) Core.<$> id,
+            ("points" Core..=) Core.<$> points,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
 -- | URL item.
 --
 -- /See:/ 'newLink' smart constructor.
@@ -1686,7 +2066,11 @@ data Link = Link
 newLink ::
   Link
 newLink =
-  Link {thumbnailUrl = Core.Nothing, title = Core.Nothing, url = Core.Nothing}
+  Link
+    { thumbnailUrl = Core.Nothing,
+      title = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON Link where
   parseJSON =
@@ -1706,6 +2090,45 @@ instance Core.ToJSON Link where
           [ ("thumbnailUrl" Core..=) Core.<$> thumbnailUrl,
             ("title" Core..=) Core.<$> title,
             ("url" Core..=) Core.<$> url
+          ]
+      )
+
+-- | Response when listing add-on attachments.
+--
+-- /See:/ 'newListAddOnAttachmentsResponse' smart constructor.
+data ListAddOnAttachmentsResponse = ListAddOnAttachmentsResponse
+  { -- | Attachments under the given post.
+    addOnAttachments :: (Core.Maybe [AddOnAttachment]),
+    -- | A token, which can be sent as @pageToken@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListAddOnAttachmentsResponse' with the minimum fields required to make a request.
+newListAddOnAttachmentsResponse ::
+  ListAddOnAttachmentsResponse
+newListAddOnAttachmentsResponse =
+  ListAddOnAttachmentsResponse
+    { addOnAttachments = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListAddOnAttachmentsResponse where
+  parseJSON =
+    Core.withObject
+      "ListAddOnAttachmentsResponse"
+      ( \o ->
+          ListAddOnAttachmentsResponse
+            Core.<$> (o Core..:? "addOnAttachments")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListAddOnAttachmentsResponse where
+  toJSON ListAddOnAttachmentsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("addOnAttachments" Core..=) Core.<$> addOnAttachments,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
 
@@ -1821,8 +2244,7 @@ instance Core.ToJSON ListCourseWorkMaterialResponse where
   toJSON ListCourseWorkMaterialResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("courseWorkMaterial" Core..=)
-              Core.<$> courseWorkMaterial,
+          [ ("courseWorkMaterial" Core..=) Core.<$> courseWorkMaterial,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1881,7 +2303,10 @@ data ListCoursesResponse = ListCoursesResponse
 newListCoursesResponse ::
   ListCoursesResponse
 newListCoursesResponse =
-  ListCoursesResponse {courses = Core.Nothing, nextPageToken = Core.Nothing}
+  ListCoursesResponse
+    { courses = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListCoursesResponse where
   parseJSON =
@@ -1918,14 +2343,12 @@ newListGuardianInvitationsResponse ::
   ListGuardianInvitationsResponse
 newListGuardianInvitationsResponse =
   ListGuardianInvitationsResponse
-    { guardianInvitations = Core.Nothing,
+    { guardianInvitations =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListGuardianInvitationsResponse
-  where
+instance Core.FromJSON ListGuardianInvitationsResponse where
   parseJSON =
     Core.withObject
       "ListGuardianInvitationsResponse"
@@ -1939,8 +2362,7 @@ instance Core.ToJSON ListGuardianInvitationsResponse where
   toJSON ListGuardianInvitationsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("guardianInvitations" Core..=)
-              Core.<$> guardianInvitations,
+          [ ("guardianInvitations" Core..=) Core.<$> guardianInvitations,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1960,7 +2382,10 @@ data ListGuardiansResponse = ListGuardiansResponse
 newListGuardiansResponse ::
   ListGuardiansResponse
 newListGuardiansResponse =
-  ListGuardiansResponse {guardians = Core.Nothing, nextPageToken = Core.Nothing}
+  ListGuardiansResponse
+    { guardians = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListGuardiansResponse where
   parseJSON =
@@ -2020,6 +2445,45 @@ instance Core.ToJSON ListInvitationsResponse where
           ]
       )
 
+-- | Response when listing rubrics.
+--
+-- /See:/ 'newListRubricsResponse' smart constructor.
+data ListRubricsResponse = ListRubricsResponse
+  { -- | Token identifying the next page of results to return. If empty, no further results are available.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | Rubrics that match the request.
+    rubrics :: (Core.Maybe [Rubric])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListRubricsResponse' with the minimum fields required to make a request.
+newListRubricsResponse ::
+  ListRubricsResponse
+newListRubricsResponse =
+  ListRubricsResponse
+    { nextPageToken = Core.Nothing,
+      rubrics = Core.Nothing
+    }
+
+instance Core.FromJSON ListRubricsResponse where
+  parseJSON =
+    Core.withObject
+      "ListRubricsResponse"
+      ( \o ->
+          ListRubricsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "rubrics")
+      )
+
+instance Core.ToJSON ListRubricsResponse where
+  toJSON ListRubricsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("rubrics" Core..=) Core.<$> rubrics
+          ]
+      )
+
 -- | Response when listing student submissions.
 --
 -- /See:/ 'newListStudentSubmissionsResponse' smart constructor.
@@ -2055,8 +2519,7 @@ instance Core.ToJSON ListStudentSubmissionsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("studentSubmissions" Core..=)
-              Core.<$> studentSubmissions
+            ("studentSubmissions" Core..=) Core.<$> studentSubmissions
           ]
       )
 
@@ -2075,7 +2538,10 @@ data ListStudentsResponse = ListStudentsResponse
 newListStudentsResponse ::
   ListStudentsResponse
 newListStudentsResponse =
-  ListStudentsResponse {nextPageToken = Core.Nothing, students = Core.Nothing}
+  ListStudentsResponse
+    { nextPageToken = Core.Nothing,
+      students = Core.Nothing
+    }
 
 instance Core.FromJSON ListStudentsResponse where
   parseJSON =
@@ -2111,7 +2577,10 @@ data ListTeachersResponse = ListTeachersResponse
 newListTeachersResponse ::
   ListTeachersResponse
 newListTeachersResponse =
-  ListTeachersResponse {nextPageToken = Core.Nothing, teachers = Core.Nothing}
+  ListTeachersResponse
+    { nextPageToken = Core.Nothing,
+      teachers = Core.Nothing
+    }
 
 instance Core.FromJSON ListTeachersResponse where
   parseJSON =
@@ -2147,7 +2616,10 @@ data ListTopicResponse = ListTopicResponse
 newListTopicResponse ::
   ListTopicResponse
 newListTopicResponse =
-  ListTopicResponse {nextPageToken = Core.Nothing, topic = Core.Nothing}
+  ListTopicResponse
+    { nextPageToken = Core.Nothing,
+      topic = Core.Nothing
+    }
 
 instance Core.FromJSON ListTopicResponse where
   parseJSON =
@@ -2237,10 +2709,7 @@ newModifyAnnouncementAssigneesRequest =
       modifyIndividualStudentsOptions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyAnnouncementAssigneesRequest
-  where
+instance Core.FromJSON ModifyAnnouncementAssigneesRequest where
   parseJSON =
     Core.withObject
       "ModifyAnnouncementAssigneesRequest"
@@ -2250,10 +2719,7 @@ instance
             Core.<*> (o Core..:? "modifyIndividualStudentsOptions")
       )
 
-instance
-  Core.ToJSON
-    ModifyAnnouncementAssigneesRequest
-  where
+instance Core.ToJSON ModifyAnnouncementAssigneesRequest where
   toJSON ModifyAnnouncementAssigneesRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -2283,8 +2749,7 @@ instance Core.FromJSON ModifyAttachmentsRequest where
     Core.withObject
       "ModifyAttachmentsRequest"
       ( \o ->
-          ModifyAttachmentsRequest
-            Core.<$> (o Core..:? "addAttachments")
+          ModifyAttachmentsRequest Core.<$> (o Core..:? "addAttachments")
       )
 
 instance Core.ToJSON ModifyAttachmentsRequest where
@@ -2314,10 +2779,7 @@ newModifyCourseWorkAssigneesRequest =
       modifyIndividualStudentsOptions = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyCourseWorkAssigneesRequest
-  where
+instance Core.FromJSON ModifyCourseWorkAssigneesRequest where
   parseJSON =
     Core.withObject
       "ModifyCourseWorkAssigneesRequest"
@@ -2357,10 +2819,7 @@ newModifyIndividualStudentsOptions =
       removeStudentIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ModifyIndividualStudentsOptions
-  where
+instance Core.FromJSON ModifyIndividualStudentsOptions where
   parseJSON =
     Core.withObject
       "ModifyIndividualStudentsOptions"
@@ -2375,8 +2834,7 @@ instance Core.ToJSON ModifyIndividualStudentsOptions where
     Core.object
       ( Core.catMaybes
           [ ("addStudentIds" Core..=) Core.<$> addStudentIds,
-            ("removeStudentIds" Core..=)
-              Core.<$> removeStudentIds
+            ("removeStudentIds" Core..=) Core.<$> removeStudentIds
           ]
       )
 
@@ -2392,23 +2850,19 @@ newtype MultipleChoiceQuestion = MultipleChoiceQuestion
 -- | Creates a value of 'MultipleChoiceQuestion' with the minimum fields required to make a request.
 newMultipleChoiceQuestion ::
   MultipleChoiceQuestion
-newMultipleChoiceQuestion = MultipleChoiceQuestion {choices = Core.Nothing}
+newMultipleChoiceQuestion =
+  MultipleChoiceQuestion {choices = Core.Nothing}
 
 instance Core.FromJSON MultipleChoiceQuestion where
   parseJSON =
     Core.withObject
       "MultipleChoiceQuestion"
-      ( \o ->
-          MultipleChoiceQuestion
-            Core.<$> (o Core..:? "choices")
-      )
+      (\o -> MultipleChoiceQuestion Core.<$> (o Core..:? "choices"))
 
 instance Core.ToJSON MultipleChoiceQuestion where
   toJSON MultipleChoiceQuestion {..} =
     Core.object
-      ( Core.catMaybes
-          [("choices" Core..=) Core.<$> choices]
-      )
+      (Core.catMaybes [("choices" Core..=) Core.<$> choices])
 
 -- | Student work for a multiple-choice question.
 --
@@ -2422,21 +2876,18 @@ newtype MultipleChoiceSubmission = MultipleChoiceSubmission
 -- | Creates a value of 'MultipleChoiceSubmission' with the minimum fields required to make a request.
 newMultipleChoiceSubmission ::
   MultipleChoiceSubmission
-newMultipleChoiceSubmission = MultipleChoiceSubmission {answer = Core.Nothing}
+newMultipleChoiceSubmission =
+  MultipleChoiceSubmission {answer = Core.Nothing}
 
 instance Core.FromJSON MultipleChoiceSubmission where
   parseJSON =
     Core.withObject
       "MultipleChoiceSubmission"
-      ( \o ->
-          MultipleChoiceSubmission
-            Core.<$> (o Core..:? "answer")
-      )
+      (\o -> MultipleChoiceSubmission Core.<$> (o Core..:? "answer"))
 
 instance Core.ToJSON MultipleChoiceSubmission where
   toJSON MultipleChoiceSubmission {..} =
-    Core.object
-      (Core.catMaybes [("answer" Core..=) Core.<$> answer])
+    Core.object (Core.catMaybes [("answer" Core..=) Core.<$> answer])
 
 -- | Details of the user\'s name.
 --
@@ -2491,12 +2942,10 @@ data ReclaimStudentSubmissionRequest = ReclaimStudentSubmissionRequest
 -- | Creates a value of 'ReclaimStudentSubmissionRequest' with the minimum fields required to make a request.
 newReclaimStudentSubmissionRequest ::
   ReclaimStudentSubmissionRequest
-newReclaimStudentSubmissionRequest = ReclaimStudentSubmissionRequest
+newReclaimStudentSubmissionRequest =
+  ReclaimStudentSubmissionRequest
 
-instance
-  Core.FromJSON
-    ReclaimStudentSubmissionRequest
-  where
+instance Core.FromJSON ReclaimStudentSubmissionRequest where
   parseJSON =
     Core.withObject
       "ReclaimStudentSubmissionRequest"
@@ -2547,8 +2996,7 @@ instance Core.ToJSON Registration where
   toJSON Registration {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cloudPubsubTopic" Core..=)
-              Core.<$> cloudPubsubTopic,
+          [ ("cloudPubsubTopic" Core..=) Core.<$> cloudPubsubTopic,
             ("expiryTime" Core..=) Core.<$> expiryTime,
             ("feed" Core..=) Core.<$> feed,
             ("registrationId" Core..=) Core.<$> registrationId
@@ -2575,6 +3023,114 @@ instance Core.FromJSON ReturnStudentSubmissionRequest where
 instance Core.ToJSON ReturnStudentSubmissionRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | The rubric of the course work. A rubric is a scoring guide used to evaluate student work and give feedback. For further details, see </classroom/rubrics/limitations Rubrics structure and known limitations>.
+--
+-- /See:/ 'newRubric' smart constructor.
+data Rubric = Rubric
+  { -- | Identifier of the course. Read-only.
+    courseId :: (Core.Maybe Core.Text),
+    -- | Identifier for the course work this corresponds to. Read-only.
+    courseWorkId :: (Core.Maybe Core.Text),
+    -- | Output only. Timestamp when this rubric was created. Read-only.
+    creationTime :: (Core.Maybe Core.DateTime),
+    -- | List of criteria. Each criterion is a dimension on which performance is rated.
+    criteria :: (Core.Maybe [Criterion]),
+    -- | Classroom-assigned identifier for the rubric. This is unique among rubrics for the relevant course work. Read-only.
+    id :: (Core.Maybe Core.Text),
+    -- | Input only. Immutable. Google Sheets ID of the spreadsheet. This spreadsheet must contain formatted rubric settings. See <https://support.google.com/edu/classroom/answer/9335069 Create or reuse a rubric for an assignment>. Use of this field requires the @https:\/\/www.googleapis.com\/auth\/spreadsheets.readonly@ or @https:\/\/www.googleapis.com\/auth\/spreadsheets@ scope.
+    sourceSpreadsheetId :: (Core.Maybe Core.Text),
+    -- | Output only. Timestamp of the most recent change to this rubric. Read-only.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Rubric' with the minimum fields required to make a request.
+newRubric ::
+  Rubric
+newRubric =
+  Rubric
+    { courseId = Core.Nothing,
+      courseWorkId = Core.Nothing,
+      creationTime = Core.Nothing,
+      criteria = Core.Nothing,
+      id = Core.Nothing,
+      sourceSpreadsheetId = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON Rubric where
+  parseJSON =
+    Core.withObject
+      "Rubric"
+      ( \o ->
+          Rubric
+            Core.<$> (o Core..:? "courseId")
+            Core.<*> (o Core..:? "courseWorkId")
+            Core.<*> (o Core..:? "creationTime")
+            Core.<*> (o Core..:? "criteria")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "sourceSpreadsheetId")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON Rubric where
+  toJSON Rubric {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("courseId" Core..=) Core.<$> courseId,
+            ("courseWorkId" Core..=) Core.<$> courseWorkId,
+            ("creationTime" Core..=) Core.<$> creationTime,
+            ("criteria" Core..=) Core.<$> criteria,
+            ("id" Core..=) Core.<$> id,
+            ("sourceSpreadsheetId" Core..=) Core.<$> sourceSpreadsheetId,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | A rubric grade set for the student submission. There is at most one entry per rubric criterion.
+--
+-- /See:/ 'newRubricGrade' smart constructor.
+data RubricGrade = RubricGrade
+  { -- | Optional. Criterion ID.
+    criterionId :: (Core.Maybe Core.Text),
+    -- | Optional. Optional level ID of the selected level. If empty, no level was selected.
+    levelId :: (Core.Maybe Core.Text),
+    -- | Optional. Optional points assigned for this criterion, typically based on the level. Levels might or might not have points. If unset, no points were set for this criterion.
+    points :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RubricGrade' with the minimum fields required to make a request.
+newRubricGrade ::
+  RubricGrade
+newRubricGrade =
+  RubricGrade
+    { criterionId = Core.Nothing,
+      levelId = Core.Nothing,
+      points = Core.Nothing
+    }
+
+instance Core.FromJSON RubricGrade where
+  parseJSON =
+    Core.withObject
+      "RubricGrade"
+      ( \o ->
+          RubricGrade
+            Core.<$> (o Core..:? "criterionId")
+            Core.<*> (o Core..:? "levelId")
+            Core.<*> (o Core..:? "points")
+      )
+
+instance Core.ToJSON RubricGrade where
+  toJSON RubricGrade {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("criterionId" Core..=) Core.<$> criterionId,
+            ("levelId" Core..=) Core.<$> levelId,
+            ("points" Core..=) Core.<$> points
+          ]
+      )
+
 -- | Drive file that is used as material for course work.
 --
 -- /See:/ 'newSharedDriveFile' smart constructor.
@@ -2590,7 +3146,10 @@ data SharedDriveFile = SharedDriveFile
 newSharedDriveFile ::
   SharedDriveFile
 newSharedDriveFile =
-  SharedDriveFile {driveFile = Core.Nothing, shareMode = Core.Nothing}
+  SharedDriveFile
+    { driveFile = Core.Nothing,
+      shareMode = Core.Nothing
+    }
 
 instance Core.FromJSON SharedDriveFile where
   parseJSON =
@@ -2623,20 +3182,18 @@ newtype ShortAnswerSubmission = ShortAnswerSubmission
 -- | Creates a value of 'ShortAnswerSubmission' with the minimum fields required to make a request.
 newShortAnswerSubmission ::
   ShortAnswerSubmission
-newShortAnswerSubmission = ShortAnswerSubmission {answer = Core.Nothing}
+newShortAnswerSubmission =
+  ShortAnswerSubmission {answer = Core.Nothing}
 
 instance Core.FromJSON ShortAnswerSubmission where
   parseJSON =
     Core.withObject
       "ShortAnswerSubmission"
-      ( \o ->
-          ShortAnswerSubmission Core.<$> (o Core..:? "answer")
-      )
+      (\o -> ShortAnswerSubmission Core.<$> (o Core..:? "answer"))
 
 instance Core.ToJSON ShortAnswerSubmission where
   toJSON ShortAnswerSubmission {..} =
-    Core.object
-      (Core.catMaybes [("answer" Core..=) Core.<$> answer])
+    Core.object (Core.catMaybes [("answer" Core..=) Core.<$> answer])
 
 -- | The history of each state this submission has been in.
 --
@@ -2726,13 +3283,37 @@ instance Core.ToJSON Student where
       ( Core.catMaybes
           [ ("courseId" Core..=) Core.<$> courseId,
             ("profile" Core..=) Core.<$> profile,
-            ("studentWorkFolder" Core..=)
-              Core.<$> studentWorkFolder,
+            ("studentWorkFolder" Core..=) Core.<$> studentWorkFolder,
             ("userId" Core..=) Core.<$> userId
           ]
       )
 
--- | Student submission for course work. StudentSubmission items are generated when a CourseWork item is created. StudentSubmissions that have never been accessed (i.e. with @state@ = NEW) may not have a creation time or update time.
+-- | Role-specific context if the requesting user is a student.
+--
+-- /See:/ 'newStudentContext' smart constructor.
+newtype StudentContext = StudentContext
+  { -- | Requesting user\'s submission id to be used for grade passback and to identify the student when showing student work to the teacher. This is set exactly when @supportsStudentWork@ is @true@.
+    submissionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StudentContext' with the minimum fields required to make a request.
+newStudentContext ::
+  StudentContext
+newStudentContext = StudentContext {submissionId = Core.Nothing}
+
+instance Core.FromJSON StudentContext where
+  parseJSON =
+    Core.withObject
+      "StudentContext"
+      (\o -> StudentContext Core.<$> (o Core..:? "submissionId"))
+
+instance Core.ToJSON StudentContext where
+  toJSON StudentContext {..} =
+    Core.object
+      (Core.catMaybes [("submissionId" Core..=) Core.<$> submissionId])
+
+-- | Student submission for course work. @StudentSubmission@ items are generated when a @CourseWork@ item is created. Student submissions that have never been accessed (i.e. with @state@ = NEW) may not have a creation time or update time.
 --
 -- /See:/ 'newStudentSubmission' smart constructor.
 data StudentSubmission = StudentSubmission
@@ -2740,6 +3321,8 @@ data StudentSubmission = StudentSubmission
     alternateLink :: (Core.Maybe Core.Text),
     -- | Optional grade. If unset, no grade was set. This value must be non-negative. Decimal (that is, non-integer) values are allowed, but are rounded to two decimal places. This may be modified only by course teachers.
     assignedGrade :: (Core.Maybe Core.Double),
+    -- | Assigned rubric grades based on the rubric\'s Criteria. This map is empty if there is no rubric attached to this course work or if a rubric is attached, but no grades have been set on any Criteria. Entries are only populated for grades that have been set. Key: The rubric\'s criterion ID. Read-only.
+    assignedRubricGrades :: (Core.Maybe StudentSubmission_AssignedRubricGrades),
     -- | Submission content when course/work/type is ASSIGNMENT. Students can modify this content using ModifyAttachments.
     assignmentSubmission :: (Core.Maybe AssignmentSubmission),
     -- | Whether this student submission is associated with the Developer Console project making the request. See CreateCourseWork for more details. Read-only.
@@ -2754,6 +3337,8 @@ data StudentSubmission = StudentSubmission
     creationTime :: (Core.Maybe Core.DateTime),
     -- | Optional pending grade. If unset, no grade was set. This value must be non-negative. Decimal (that is, non-integer) values are allowed, but are rounded to two decimal places. This is only visible to and modifiable by course teachers.
     draftGrade :: (Core.Maybe Core.Double),
+    -- | Pending rubric grades based on the rubric\'s criteria. This map is empty if there is no rubric attached to this course work or if a rubric is attached, but no grades have been set on any criteria. Entries are only populated for grades that have been set. Key: The rubric\'s criterion ID. Read-only.
+    draftRubricGrades :: (Core.Maybe StudentSubmission_DraftRubricGrades),
     -- | Classroom-assigned Identifier for the student submission. This is unique among submissions for the relevant course work. Read-only.
     id :: (Core.Maybe Core.Text),
     -- | Whether this submission is late. Read-only.
@@ -2780,6 +3365,7 @@ newStudentSubmission =
   StudentSubmission
     { alternateLink = Core.Nothing,
       assignedGrade = Core.Nothing,
+      assignedRubricGrades = Core.Nothing,
       assignmentSubmission = Core.Nothing,
       associatedWithDeveloper = Core.Nothing,
       courseId = Core.Nothing,
@@ -2787,6 +3373,7 @@ newStudentSubmission =
       courseWorkType = Core.Nothing,
       creationTime = Core.Nothing,
       draftGrade = Core.Nothing,
+      draftRubricGrades = Core.Nothing,
       id = Core.Nothing,
       late = Core.Nothing,
       multipleChoiceSubmission = Core.Nothing,
@@ -2805,6 +3392,7 @@ instance Core.FromJSON StudentSubmission where
           StudentSubmission
             Core.<$> (o Core..:? "alternateLink")
             Core.<*> (o Core..:? "assignedGrade")
+            Core.<*> (o Core..:? "assignedRubricGrades")
             Core.<*> (o Core..:? "assignmentSubmission")
             Core.<*> (o Core..:? "associatedWithDeveloper")
             Core.<*> (o Core..:? "courseId")
@@ -2812,6 +3400,7 @@ instance Core.FromJSON StudentSubmission where
             Core.<*> (o Core..:? "courseWorkType")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "draftGrade")
+            Core.<*> (o Core..:? "draftRubricGrades")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "late")
             Core.<*> (o Core..:? "multipleChoiceSubmission")
@@ -2828,8 +3417,8 @@ instance Core.ToJSON StudentSubmission where
       ( Core.catMaybes
           [ ("alternateLink" Core..=) Core.<$> alternateLink,
             ("assignedGrade" Core..=) Core.<$> assignedGrade,
-            ("assignmentSubmission" Core..=)
-              Core.<$> assignmentSubmission,
+            ("assignedRubricGrades" Core..=) Core.<$> assignedRubricGrades,
+            ("assignmentSubmission" Core..=) Core.<$> assignmentSubmission,
             ("associatedWithDeveloper" Core..=)
               Core.<$> associatedWithDeveloper,
             ("courseId" Core..=) Core.<$> courseId,
@@ -2837,19 +3426,76 @@ instance Core.ToJSON StudentSubmission where
             ("courseWorkType" Core..=) Core.<$> courseWorkType,
             ("creationTime" Core..=) Core.<$> creationTime,
             ("draftGrade" Core..=) Core.<$> draftGrade,
+            ("draftRubricGrades" Core..=) Core.<$> draftRubricGrades,
             ("id" Core..=) Core.<$> id,
             ("late" Core..=) Core.<$> late,
             ("multipleChoiceSubmission" Core..=)
               Core.<$> multipleChoiceSubmission,
-            ("shortAnswerSubmission" Core..=)
-              Core.<$> shortAnswerSubmission,
+            ("shortAnswerSubmission" Core..=) Core.<$> shortAnswerSubmission,
             ("state" Core..=) Core.<$> state,
-            ("submissionHistory" Core..=)
-              Core.<$> submissionHistory,
+            ("submissionHistory" Core..=) Core.<$> submissionHistory,
             ("updateTime" Core..=) Core.<$> updateTime,
             ("userId" Core..=) Core.<$> userId
           ]
       )
+
+-- | Assigned rubric grades based on the rubric\'s Criteria. This map is empty if there is no rubric attached to this course work or if a rubric is attached, but no grades have been set on any Criteria. Entries are only populated for grades that have been set. Key: The rubric\'s criterion ID. Read-only.
+--
+-- /See:/ 'newStudentSubmission_AssignedRubricGrades' smart constructor.
+newtype StudentSubmission_AssignedRubricGrades = StudentSubmission_AssignedRubricGrades
+  { additional :: (Core.HashMap Core.Text RubricGrade)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StudentSubmission_AssignedRubricGrades' with the minimum fields required to make a request.
+newStudentSubmission_AssignedRubricGrades ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text RubricGrade ->
+  StudentSubmission_AssignedRubricGrades
+newStudentSubmission_AssignedRubricGrades additional =
+  StudentSubmission_AssignedRubricGrades {additional = additional}
+
+instance Core.FromJSON StudentSubmission_AssignedRubricGrades where
+  parseJSON =
+    Core.withObject
+      "StudentSubmission_AssignedRubricGrades"
+      ( \o ->
+          StudentSubmission_AssignedRubricGrades
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON StudentSubmission_AssignedRubricGrades where
+  toJSON StudentSubmission_AssignedRubricGrades {..} =
+    Core.toJSON additional
+
+-- | Pending rubric grades based on the rubric\'s criteria. This map is empty if there is no rubric attached to this course work or if a rubric is attached, but no grades have been set on any criteria. Entries are only populated for grades that have been set. Key: The rubric\'s criterion ID. Read-only.
+--
+-- /See:/ 'newStudentSubmission_DraftRubricGrades' smart constructor.
+newtype StudentSubmission_DraftRubricGrades = StudentSubmission_DraftRubricGrades
+  { additional :: (Core.HashMap Core.Text RubricGrade)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StudentSubmission_DraftRubricGrades' with the minimum fields required to make a request.
+newStudentSubmission_DraftRubricGrades ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text RubricGrade ->
+  StudentSubmission_DraftRubricGrades
+newStudentSubmission_DraftRubricGrades additional =
+  StudentSubmission_DraftRubricGrades {additional = additional}
+
+instance Core.FromJSON StudentSubmission_DraftRubricGrades where
+  parseJSON =
+    Core.withObject
+      "StudentSubmission_DraftRubricGrades"
+      ( \o ->
+          StudentSubmission_DraftRubricGrades
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON StudentSubmission_DraftRubricGrades where
+  toJSON StudentSubmission_DraftRubricGrades {..} =
+    Core.toJSON additional
 
 -- | The history of the submission. This currently includes state and grade histories.
 --
@@ -2866,7 +3512,10 @@ data SubmissionHistory = SubmissionHistory
 newSubmissionHistory ::
   SubmissionHistory
 newSubmissionHistory =
-  SubmissionHistory {gradeHistory = Core.Nothing, stateHistory = Core.Nothing}
+  SubmissionHistory
+    { gradeHistory = Core.Nothing,
+      stateHistory = Core.Nothing
+    }
 
 instance Core.FromJSON SubmissionHistory where
   parseJSON =
@@ -2931,17 +3580,37 @@ instance Core.ToJSON Teacher where
           ]
       )
 
+-- | Role-specific context if the requesting user is a teacher.
+--
+-- /See:/ 'newTeacherContext' smart constructor.
+data TeacherContext = TeacherContext
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TeacherContext' with the minimum fields required to make a request.
+newTeacherContext ::
+  TeacherContext
+newTeacherContext = TeacherContext
+
+instance Core.FromJSON TeacherContext where
+  parseJSON =
+    Core.withObject
+      "TeacherContext"
+      (\o -> Core.pure TeacherContext)
+
+instance Core.ToJSON TeacherContext where
+  toJSON = Core.const Core.emptyObject
+
 -- | Represents a time of day. The date and time zone are either not significant or are specified elsewhere. An API may choose to allow leap seconds. Related types are google.type.Date and @google.protobuf.Timestamp@.
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3104,8 +3773,7 @@ instance Core.ToJSON UserProfile where
             ("name" Core..=) Core.<$> name,
             ("permissions" Core..=) Core.<$> permissions,
             ("photoUrl" Core..=) Core.<$> photoUrl,
-            ("verifiedTeacher" Core..=)
-              Core.<$> verifiedTeacher
+            ("verifiedTeacher" Core..=) Core.<$> verifiedTeacher
           ]
       )
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.JobTriggers.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- Updates a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.jobTriggers.patch@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.jobTriggers.patch@.
 module Gogol.DLP.Projects.Locations.JobTriggers.Patch
   ( -- * Resource
     DLPProjectsLocationsJobTriggersPatchResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.JobTriggers.Patch
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.jobTriggers.patch@ method which the
 -- 'DLPProjectsLocationsJobTriggersPatch' request conforms to.
@@ -53,12 +51,10 @@ type DLPProjectsLocationsJobTriggersPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2UpdateJobTriggerRequest
+    Core.:> Core.ReqBody '[Core.JSON] GooglePrivacyDlpV2UpdateJobTriggerRequest
     Core.:> Core.Patch '[Core.JSON] GooglePrivacyDlpV2JobTrigger
 
--- | Updates a job trigger. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- | Updates a job trigger. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsJobTriggersPatch' smart constructor.
 data DLPProjectsLocationsJobTriggersPatch = DLPProjectsLocationsJobTriggersPatch
@@ -97,33 +93,28 @@ newDLPProjectsLocationsJobTriggersPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsJobTriggersPatch
-  where
+instance Core.GoogleRequest DLPProjectsLocationsJobTriggersPatch where
   type
     Rs DLPProjectsLocationsJobTriggersPatch =
       GooglePrivacyDlpV2JobTrigger
   type
     Scopes DLPProjectsLocationsJobTriggersPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsJobTriggersPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsJobTriggersPatchResource
-            )
-            Core.mempty
+  requestClient DLPProjectsLocationsJobTriggersPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPProjectsLocationsJobTriggersPatchResource
+          )
+          Core.mempty

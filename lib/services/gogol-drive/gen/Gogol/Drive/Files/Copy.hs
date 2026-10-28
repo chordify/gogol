@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Files.Copy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
+-- Creates a copy of a file and applies any requested updates with patch semantics.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.files.copy@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.files.copy@.
 module Gogol.Drive.Files.Copy
   ( -- * Resource
     DriveFilesCopyResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Files.Copy
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.files.copy@ method which the
 -- 'DriveFilesCopy' request conforms to.
@@ -50,6 +48,9 @@ type DriveFilesCopyResource =
     Core.:> "files"
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> "copy"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "enforceSingleParent" Core.Bool
     Core.:> Core.QueryParam "ignoreDefaultVisibility" Core.Bool
     Core.:> Core.QueryParam "includeLabels" Core.Text
@@ -58,21 +59,29 @@ type DriveFilesCopyResource =
     Core.:> Core.QueryParam "ocrLanguage" Core.Text
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] File
     Core.:> Core.Post '[Core.JSON] File
 
--- | Creates a copy of a file and applies any requested updates with patch semantics. Folders cannot be copied.
+-- | Creates a copy of a file and applies any requested updates with patch semantics.
 --
 -- /See:/ 'newDriveFilesCopy' smart constructor.
 data DriveFilesCopy = DriveFilesCopy
-  { -- | Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Deprecated. Copying files into multiple folders is no longer supported. Use shortcuts instead.
     enforceSingleParent :: Core.Bool,
     -- | The ID of the file.
     fileId :: Core.Text,
     -- | Whether to ignore the domain\'s default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
     ignoreDefaultVisibility :: Core.Bool,
-    -- | A comma-separated list of IDs of labels to include in the labelInfo part of the response.
+    -- | A comma-separated list of IDs of labels to include in the @labelInfo@ part of the response.
     includeLabels :: (Core.Maybe Core.Text),
     -- | Specifies which additional view\'s permissions to include in the response. Only \'published\' is supported.
     includePermissionsForView :: (Core.Maybe Core.Text),
@@ -84,8 +93,12 @@ data DriveFilesCopy = DriveFilesCopy
     payload :: File,
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
-    -- | Deprecated use supportsAllDrives instead.
-    supportsTeamDrives :: Core.Bool
+    -- | Deprecated: Use @supportsAllDrives@ instead.
+    supportsTeamDrives :: Core.Bool,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -98,7 +111,10 @@ newDriveFilesCopy ::
   DriveFilesCopy
 newDriveFilesCopy fileId payload =
   DriveFilesCopy
-    { enforceSingleParent = Core.False,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      enforceSingleParent = Core.False,
       fileId = fileId,
       ignoreDefaultVisibility = Core.False,
       includeLabels = Core.Nothing,
@@ -107,7 +123,9 @@ newDriveFilesCopy fileId payload =
       ocrLanguage = Core.Nothing,
       payload = payload,
       supportsAllDrives = Core.False,
-      supportsTeamDrives = Core.False
+      supportsTeamDrives = Core.False,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest DriveFilesCopy where
@@ -122,6 +140,9 @@ instance Core.GoogleRequest DriveFilesCopy where
   requestClient DriveFilesCopy {..} =
     go
       fileId
+      xgafv
+      accessToken
+      callback
       (Core.Just enforceSingleParent)
       (Core.Just ignoreDefaultVisibility)
       includeLabels
@@ -130,6 +151,8 @@ instance Core.GoogleRequest DriveFilesCopy where
       ocrLanguage
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       payload
       driveService

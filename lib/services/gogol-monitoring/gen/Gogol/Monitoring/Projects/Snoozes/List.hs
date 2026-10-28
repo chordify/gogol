@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.Snoozes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Projects.Snoozes.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.snoozes.list@ method which the
 -- 'MonitoringProjectsSnoozesList' request conforms to.
@@ -69,7 +67,7 @@ data MonitoringProjectsSnoozesList = MonitoringProjectsSnoozesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. Optional filter to restrict results to the given criteria. The following fields are supported. interval.start/time interval.end/timeFor example: @interval.start_time > \"2022-03-11T00:00:00-08:00\" AND interval.end_time \< \"2022-03-12T00:00:00-08:00\"@
+    -- | Optional. Optional filter to restrict results to the given criteria. The following fields are supported. interval.start/time interval.end/timeFor example: interval.start/time > \"2022-03-11T00:00:00-08:00\" AND interval.end/time \< \"2022-03-12T00:00:00-08:00\"
     filter :: (Core.Maybe Core.Text),
     -- | Optional. The maximum number of results to return for a single query. The server may further constrain the maximum number of results returned in a single page. The value should be in the range 1, 1000. If the value given is outside this range, the server will decide the number of results to be returned.
     pageSize :: (Core.Maybe Core.Int32),
@@ -102,13 +100,8 @@ newMonitoringProjectsSnoozesList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringProjectsSnoozesList
-  where
-  type
-    Rs MonitoringProjectsSnoozesList =
-      ListSnoozesResponse
+instance Core.GoogleRequest MonitoringProjectsSnoozesList where
+  type Rs MonitoringProjectsSnoozesList = ListSnoozesResponse
   type
     Scopes MonitoringProjectsSnoozesList =
       '[ CloudPlatform'FullControl,
@@ -131,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MonitoringProjectsSnoozesListResource
-          )
+          (Core.Proxy :: Core.Proxy MonitoringProjectsSnoozesListResource)
           Core.mempty

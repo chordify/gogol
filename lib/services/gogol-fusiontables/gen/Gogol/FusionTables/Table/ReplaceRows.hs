@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Table.ReplaceRows
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Table.ReplaceRows
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.table.replaceRows@ method which the
 -- 'FusionTablesTableReplaceRows' request conforms to.
@@ -58,20 +56,20 @@ type FusionTablesTableReplaceRowsResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Task
     Core.:<|> "upload"
-      Core.:> "fusiontables"
-      Core.:> "v2"
-      Core.:> "tables"
-      Core.:> Core.Capture "tableId" Core.Text
-      Core.:> "replace"
-      Core.:> Core.QueryParam "delimiter" Core.Text
-      Core.:> Core.QueryParam "encoding" Core.Text
-      Core.:> Core.QueryParam "endLine" Core.Int32
-      Core.:> Core.QueryParam "isStrict" Core.Bool
-      Core.:> Core.QueryParam "startLine" Core.Int32
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Task
+    Core.:> "fusiontables"
+    Core.:> "v2"
+    Core.:> "tables"
+    Core.:> Core.Capture "tableId" Core.Text
+    Core.:> "replace"
+    Core.:> Core.QueryParam "delimiter" Core.Text
+    Core.:> Core.QueryParam "encoding" Core.Text
+    Core.:> Core.QueryParam "endLine" Core.Int32
+    Core.:> Core.QueryParam "isStrict" Core.Bool
+    Core.:> Core.QueryParam "startLine" Core.Int32
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until all replacement rows are ready.
 --
@@ -107,10 +105,7 @@ newFusionTablesTableReplaceRows tableId =
       tableId = tableId
     }
 
-instance
-  Core.GoogleRequest
-    FusionTablesTableReplaceRows
-  where
+instance Core.GoogleRequest FusionTablesTableReplaceRows where
   type Rs FusionTablesTableReplaceRows = Task
   type
     Scopes FusionTablesTableReplaceRows =
@@ -128,28 +123,19 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTableReplaceRowsResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTableReplaceRowsResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload FusionTablesTableReplaceRows)
   where
+  type Rs (Core.MediaUpload FusionTablesTableReplaceRows) = Task
   type
-    Rs
-      (Core.MediaUpload FusionTablesTableReplaceRows) =
-      Task
-  type
-    Scopes
-      (Core.MediaUpload FusionTablesTableReplaceRows) =
+    Scopes (Core.MediaUpload FusionTablesTableReplaceRows) =
       Core.Scopes FusionTablesTableReplaceRows
   requestClient
-    ( Core.MediaUpload
-        FusionTablesTableReplaceRows {..}
-        body
-      ) =
+    (Core.MediaUpload FusionTablesTableReplaceRows {..} body) =
       go
         tableId
         delimiter
@@ -164,7 +150,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy FusionTablesTableReplaceRowsResource
-            )
+            (Core.Proxy :: Core.Proxy FusionTablesTableReplaceRowsResource)
             Core.mempty

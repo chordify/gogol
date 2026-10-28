@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.BatchWrite
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.BatchWrite
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.batchWrite@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsBatchWrite' request conforms to.
@@ -87,7 +85,8 @@ newFireStoreProjectsDatabasesDocumentsBatchWrite ::
   FireStoreProjectsDatabasesDocumentsBatchWrite
 newFireStoreProjectsDatabasesDocumentsBatchWrite database payload =
   FireStoreProjectsDatabasesDocumentsBatchWrite
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       database = database,
@@ -104,26 +103,23 @@ instance
     Rs FireStoreProjectsDatabasesDocumentsBatchWrite =
       BatchWriteResponse
   type
-    Scopes
-      FireStoreProjectsDatabasesDocumentsBatchWrite =
+    Scopes FireStoreProjectsDatabasesDocumentsBatchWrite =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsBatchWrite {..} =
-      go
-        database
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsBatchWriteResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsBatchWrite {..} =
+    go
+      database
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FireStoreProjectsDatabasesDocumentsBatchWriteResource
+          )
+          Core.mempty

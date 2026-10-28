@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FirebaseDynamicLinks.ManagedShortLinks.Create
 where
 
 import Gogol.FirebaseDynamicLinks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firebasedynamiclinks.managedShortLinks.create@ method which the
 -- 'FirebaseDynamicLinksManagedShortLinksCreate' request conforms to.
@@ -53,9 +51,7 @@ type FirebaseDynamicLinksManagedShortLinksCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CreateManagedShortLinkRequest
+    Core.:> Core.ReqBody '[Core.JSON] CreateManagedShortLinkRequest
     Core.:> Core.Post '[Core.JSON] CreateManagedShortLinkResponse
 
 -- | Creates a managed short Dynamic Link given either a valid long Dynamic Link or details such as Dynamic Link domain, Android and iOS app information. The created short Dynamic Link will not expire. This differs from CreateShortDynamicLink in the following ways: - The request will also contain a name for the link (non unique name for the front end). - The response must be authenticated with an auth token (generated with the admin service account). - The link will appear in the FDL list of links in the console front end. The Dynamic Link domain in the request must be owned by requester\'s Firebase project.
@@ -100,25 +96,22 @@ instance
     Rs FirebaseDynamicLinksManagedShortLinksCreate =
       CreateManagedShortLinkResponse
   type
-    Scopes
-      FirebaseDynamicLinksManagedShortLinksCreate =
+    Scopes FirebaseDynamicLinksManagedShortLinksCreate =
       '[Firebase'FullControl]
-  requestClient
-    FirebaseDynamicLinksManagedShortLinksCreate {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        firebaseDynamicLinksService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FirebaseDynamicLinksManagedShortLinksCreateResource
-            )
-            Core.mempty
+  requestClient FirebaseDynamicLinksManagedShortLinksCreate {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      firebaseDynamicLinksService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FirebaseDynamicLinksManagedShortLinksCreateResource
+          )
+          Core.mempty

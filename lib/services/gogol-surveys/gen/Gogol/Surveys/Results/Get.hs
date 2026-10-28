@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Surveys.Results.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Surveys.Results.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Surveys.Types
 
 -- | A resource alias for @surveys.results.get@ method which the
@@ -54,12 +52,12 @@ type SurveysResultsGetResource =
     Core.:> Core.ReqBody '[Core.JSON] ResultsGetRequest
     Core.:> Core.Get '[Core.JSON] SurveyResults
     Core.:<|> "surveys"
-      Core.:> "v2"
-      Core.:> "surveys"
-      Core.:> Core.Capture "surveyUrlId" Core.Text
-      Core.:> "results"
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "v2"
+    Core.:> "surveys"
+    Core.:> Core.Capture "surveyUrlId" Core.Text
+    Core.:> "results"
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Retrieves any survey results that have been produced so far. Results are formatted as an Excel file. You must add \"?alt=media\" to the URL as an argument to get results.
 --
@@ -86,40 +84,24 @@ instance Core.GoogleRequest SurveysResultsGet where
   type Rs SurveysResultsGet = SurveyResults
   type
     Scopes SurveysResultsGet =
-      '[ Surveys'FullControl,
-         Surveys'Readonly,
-         Userinfo'Email
-       ]
+      '[Surveys'FullControl, Surveys'Readonly, Userinfo'Email]
   requestClient SurveysResultsGet {..} =
-    go
-      surveyUrlId
-      (Core.Just Core.AltJSON)
-      payload
-      surveysService
+    go surveyUrlId (Core.Just Core.AltJSON) payload surveysService
     where
       go Core.:<|> _ =
         Core.buildClient
           (Core.Proxy :: Core.Proxy SurveysResultsGetResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaDownload SurveysResultsGet)
-  where
-  type
-    Rs (Core.MediaDownload SurveysResultsGet) =
-      Core.Stream
+instance Core.GoogleRequest (Core.MediaDownload SurveysResultsGet) where
+  type Rs (Core.MediaDownload SurveysResultsGet) = Core.Stream
   type
     Scopes (Core.MediaDownload SurveysResultsGet) =
       Core.Scopes SurveysResultsGet
-  requestClient
-    (Core.MediaDownload SurveysResultsGet {..}) =
-      go
-        surveyUrlId
-        (Core.Just Core.AltMedia)
-        surveysService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            (Core.Proxy :: Core.Proxy SurveysResultsGetResource)
-            Core.mempty
+  requestClient (Core.MediaDownload SurveysResultsGet {..}) =
+    go surveyUrlId (Core.Just Core.AltMedia) surveysService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy SurveysResultsGetResource)
+          Core.mempty

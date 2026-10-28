@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.rollback@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.nodePools.rollback@.
 module Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
   ( -- * Resource
     ContainerProjectsZonesClustersNodePoolsRollbackResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Zones.Clusters.NodePools.Rollback
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.zones.clusters.nodePools.rollback@ method which the
 -- 'ContainerProjectsZonesClustersNodePoolsRollback' request conforms to.
@@ -60,9 +58,7 @@ type ContainerProjectsZonesClustersNodePoolsRollbackResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RollbackNodePoolUpgradeRequest
+    Core.:> Core.ReqBody '[Core.JSON] RollbackNodePoolUpgradeRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed.
@@ -105,52 +101,52 @@ newContainerProjectsZonesClustersNodePoolsRollback ::
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field. See 'zone'.
   Core.Text ->
   ContainerProjectsZonesClustersNodePoolsRollback
-newContainerProjectsZonesClustersNodePoolsRollback clusterId nodePoolId payload projectId zone =
-  ContainerProjectsZonesClustersNodePoolsRollback
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      nodePoolId = nodePoolId,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newContainerProjectsZonesClustersNodePoolsRollback
+  clusterId
+  nodePoolId
+  payload
+  projectId
+  zone =
+    ContainerProjectsZonesClustersNodePoolsRollback
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        nodePoolId = nodePoolId,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ContainerProjectsZonesClustersNodePoolsRollback
   where
+  type Rs ContainerProjectsZonesClustersNodePoolsRollback = Operation
   type
-    Rs
-      ContainerProjectsZonesClustersNodePoolsRollback =
-      Operation
-  type
-    Scopes
-      ContainerProjectsZonesClustersNodePoolsRollback =
+    Scopes ContainerProjectsZonesClustersNodePoolsRollback =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsZonesClustersNodePoolsRollback {..} =
-      go
-        projectId
-        zone
-        clusterId
-        nodePoolId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsZonesClustersNodePoolsRollbackResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsZonesClustersNodePoolsRollback {..} =
+    go
+      projectId
+      zone
+      clusterId
+      nodePoolId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsZonesClustersNodePoolsRollbackResource
+          )
+          Core.mempty

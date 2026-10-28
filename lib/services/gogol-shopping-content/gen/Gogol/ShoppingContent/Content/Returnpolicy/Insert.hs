@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Returnpolicy.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Returnpolicy.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.returnpolicy.insert@ method which the
@@ -99,9 +97,7 @@ newContentReturnpolicyInsert merchantId payload =
 
 instance Core.GoogleRequest ContentReturnpolicyInsert where
   type Rs ContentReturnpolicyInsert = ReturnPolicy
-  type
-    Scopes ContentReturnpolicyInsert =
-      '[Content'FullControl]
+  type Scopes ContentReturnpolicyInsert = '[Content'FullControl]
   requestClient ContentReturnpolicyInsert {..} =
     go
       merchantId
@@ -116,7 +112,5 @@ instance Core.GoogleRequest ContentReturnpolicyInsert where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentReturnpolicyInsertResource
-          )
+          (Core.Proxy :: Core.Proxy ContentReturnpolicyInsertResource)
           Core.mempty

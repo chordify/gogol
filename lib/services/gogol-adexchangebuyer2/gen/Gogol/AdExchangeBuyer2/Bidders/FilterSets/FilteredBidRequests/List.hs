@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBidRequests.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Bidders.FilterSets.FilteredBidRequests.List
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.bidders.filterSets.filteredBidRequests.list@ method which the
 -- 'AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList' request conforms to.
@@ -86,25 +84,26 @@ newAdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList ::
   -- |  Name of the filter set that should be applied to the requested metrics. For example: - For a bidder-level filter set for bidder 123: @bidders\/123\/filterSets\/abc@ - For an account-level filter set for the buyer account representing bidder 123: @bidders\/123\/accounts\/123\/filterSets\/abc@ - For an account-level filter set for the child seat buyer account 456 whose bidder is 123: @bidders\/123\/accounts\/456\/filterSets\/abc@ See 'filterSetName'.
   Core.Text ->
   AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList
-newAdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList filterSetName =
-  AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      filterSetName = filterSetName,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList
+  filterSetName =
+    AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        filterSetName = filterSetName,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList
   where
   type
-    Rs
-      AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList =
+    Rs AdExchangeBuyer2BiddersFilterSetsFilteredBidRequestsList =
       ListFilteredBidRequestsResponse
   type
     Scopes

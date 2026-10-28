@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.ActionResults.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.RemoteBuildExecution.ActionResults.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.actionResults.update@ method which the
@@ -53,18 +51,12 @@ type RemoteBuildExecutionActionResultsUpdateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "resultsCachePolicy.priority"
-              Core.Int32
+    Core.:> Core.QueryParam "resultsCachePolicy.priority" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2ActionResult
-    Core.:> Core.Put
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2ActionResult
+    Core.:> Core.ReqBody '[Core.JSON] BuildBazelRemoteExecutionV2ActionResult
+    Core.:> Core.Put '[Core.JSON] BuildBazelRemoteExecutionV2ActionResult
 
 -- | Upload a new execution result. In order to allow the server to perform access control based on the type of action, and to assist with client debugging, the client MUST first upload the Action that produced the result, along with its Command, into the @ContentAddressableStorage@. Server implementations MAY modify the @UpdateActionResultRequest.action_result@ and return an equivalent value. Errors: * @INVALID_ARGUMENT@: One or more arguments are invalid. * @FAILED_PRECONDITION@: One or more errors occurred in updating the action result, such as a missing command or action. * @RESOURCE_EXHAUSTED@: There is insufficient storage space to add the entry to the cache.
 --
@@ -104,50 +96,49 @@ newRemoteBuildExecutionActionResultsUpdate ::
   -- |  The size of the blob, in bytes. See 'sizeBytes'.
   Core.Int64 ->
   RemoteBuildExecutionActionResultsUpdate
-newRemoteBuildExecutionActionResultsUpdate hash instanceName payload sizeBytes =
-  RemoteBuildExecutionActionResultsUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      hash = hash,
-      instanceName = instanceName,
-      payload = payload,
-      resultsCachePolicyPriority = Core.Nothing,
-      sizeBytes = sizeBytes,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newRemoteBuildExecutionActionResultsUpdate
+  hash
+  instanceName
+  payload
+  sizeBytes =
     RemoteBuildExecutionActionResultsUpdate
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        hash = hash,
+        instanceName = instanceName,
+        payload = payload,
+        resultsCachePolicyPriority = Core.Nothing,
+        sizeBytes = sizeBytes,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest RemoteBuildExecutionActionResultsUpdate where
   type
     Rs RemoteBuildExecutionActionResultsUpdate =
       BuildBazelRemoteExecutionV2ActionResult
   type
     Scopes RemoteBuildExecutionActionResultsUpdate =
       '[CloudPlatform'FullControl]
-  requestClient
-    RemoteBuildExecutionActionResultsUpdate {..} =
-      go
-        instanceName
-        hash
-        sizeBytes
-        xgafv
-        accessToken
-        callback
-        resultsCachePolicyPriority
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        remoteBuildExecutionService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RemoteBuildExecutionActionResultsUpdateResource
-            )
-            Core.mempty
+  requestClient RemoteBuildExecutionActionResultsUpdate {..} =
+    go
+      instanceName
+      hash
+      sizeBytes
+      xgafv
+      accessToken
+      callback
+      resultsCachePolicyPriority
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      remoteBuildExecutionService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RemoteBuildExecutionActionResultsUpdateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesConfiguration.AchievementConfigurations.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GamesConfiguration.AchievementConfigurations.Delete
 where
 
 import Gogol.GamesConfiguration.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.delete@ method which the
 -- 'GamesConfigurationAchievementConfigurationsDelete' request conforms to.
@@ -83,7 +81,8 @@ newGamesConfigurationAchievementConfigurationsDelete ::
   GamesConfigurationAchievementConfigurationsDelete
 newGamesConfigurationAchievementConfigurationsDelete achievementId =
   GamesConfigurationAchievementConfigurationsDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       achievementId = achievementId,
       callback = Core.Nothing,
@@ -95,30 +94,25 @@ instance
   Core.GoogleRequest
     GamesConfigurationAchievementConfigurationsDelete
   where
+  type Rs GamesConfigurationAchievementConfigurationsDelete = ()
   type
-    Rs
-      GamesConfigurationAchievementConfigurationsDelete =
-      ()
-  type
-    Scopes
-      GamesConfigurationAchievementConfigurationsDelete =
+    Scopes GamesConfigurationAchievementConfigurationsDelete =
       '[Androidpublisher'FullControl]
-  requestClient
-    GamesConfigurationAchievementConfigurationsDelete {..} =
-      go
-        achievementId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        gamesConfigurationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesConfigurationAchievementConfigurationsDeleteResource
-            )
-            Core.mempty
+  requestClient GamesConfigurationAchievementConfigurationsDelete {..} =
+    go
+      achievementId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gamesConfigurationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                GamesConfigurationAchievementConfigurationsDeleteResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.BinaryAuthorization.Internal.Sum
@@ -50,6 +48,33 @@ module Gogol.BinaryAuthorization.Internal.Sum
         ..
       ),
 
+    -- * EvaluateGkePolicyResponse_Verdict
+    EvaluateGkePolicyResponse_Verdict
+      ( EvaluateGkePolicyResponse_Verdict_VERDICTUNSPECIFIED,
+        EvaluateGkePolicyResponse_Verdict_Conformant,
+        EvaluateGkePolicyResponse_Verdict_NONCONFORMANT,
+        EvaluateGkePolicyResponse_Verdict_Error',
+        ..
+      ),
+
+    -- * EvaluationResult_Verdict
+    EvaluationResult_Verdict
+      ( EvaluationResult_Verdict_CHECKVERDICTUNSPECIFIED,
+        EvaluationResult_Verdict_Conformant,
+        EvaluationResult_Verdict_NONCONFORMANT,
+        EvaluationResult_Verdict_Error',
+        ..
+      ),
+
+    -- * ImageResult_Verdict
+    ImageResult_Verdict
+      ( ImageResult_Verdict_IMAGEVERDICTUNSPECIFIED,
+        ImageResult_Verdict_Conformant,
+        ImageResult_Verdict_NONCONFORMANT,
+        ImageResult_Verdict_Error',
+        ..
+      ),
+
     -- * PkixPublicKey_SignatureAlgorithm
     PkixPublicKey_SignatureAlgorithm
       ( PkixPublicKey_SignatureAlgorithm_SIGNATUREALGORITHMUNSPECIFIED,
@@ -74,6 +99,15 @@ module Gogol.BinaryAuthorization.Internal.Sum
         ..
       ),
 
+    -- * PodResult_Verdict
+    PodResult_Verdict
+      ( PodResult_Verdict_PODVERDICTUNSPECIFIED,
+        PodResult_Verdict_Conformant,
+        PodResult_Verdict_NONCONFORMANT,
+        PodResult_Verdict_Error',
+        ..
+      ),
+
     -- * Policy_GlobalPolicyEvaluationMode
     Policy_GlobalPolicyEvaluationMode
       ( Policy_GlobalPolicyEvaluationMode_GLOBALPOLICYEVALUATIONMODEUNSPECIFIED,
@@ -89,10 +123,43 @@ module Gogol.BinaryAuthorization.Internal.Sum
         ValidateAttestationOccurrenceResponse_Result_ATTESTATIONNOTVERIFIABLE,
         ..
       ),
+
+    -- * VerificationRule_TrustedBuilder
+    VerificationRule_TrustedBuilder
+      ( VerificationRule_TrustedBuilder_BUILDERUNSPECIFIED,
+        VerificationRule_TrustedBuilder_GOOGLECLOUDBUILD,
+        ..
+      ),
+
+    -- * VulnerabilityCheck_MaximumFixableSeverity
+    VulnerabilityCheck_MaximumFixableSeverity
+      ( VulnerabilityCheck_MaximumFixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED,
+        VulnerabilityCheck_MaximumFixableSeverity_BLOCKALL,
+        VulnerabilityCheck_MaximumFixableSeverity_Minimal,
+        VulnerabilityCheck_MaximumFixableSeverity_Low,
+        VulnerabilityCheck_MaximumFixableSeverity_Medium,
+        VulnerabilityCheck_MaximumFixableSeverity_High,
+        VulnerabilityCheck_MaximumFixableSeverity_Critical,
+        VulnerabilityCheck_MaximumFixableSeverity_ALLOWALL,
+        ..
+      ),
+
+    -- * VulnerabilityCheck_MaximumUnfixableSeverity
+    VulnerabilityCheck_MaximumUnfixableSeverity
+      ( VulnerabilityCheck_MaximumUnfixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED,
+        VulnerabilityCheck_MaximumUnfixableSeverity_BLOCKALL,
+        VulnerabilityCheck_MaximumUnfixableSeverity_Minimal,
+        VulnerabilityCheck_MaximumUnfixableSeverity_Low,
+        VulnerabilityCheck_MaximumUnfixableSeverity_Medium,
+        VulnerabilityCheck_MaximumUnfixableSeverity_High,
+        VulnerabilityCheck_MaximumUnfixableSeverity_Critical,
+        VulnerabilityCheck_MaximumUnfixableSeverity_ALLOWALL,
+        ..
+      ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -170,7 +237,7 @@ newtype AdmissionRule_EvaluationMode = AdmissionRule_EvaluationMode {fromAdmissi
 pattern AdmissionRule_EvaluationMode_EVALUATIONMODEUNSPECIFIED :: AdmissionRule_EvaluationMode
 pattern AdmissionRule_EvaluationMode_EVALUATIONMODEUNSPECIFIED = AdmissionRule_EvaluationMode "EVALUATION_MODE_UNSPECIFIED"
 
--- | This rule allows all all pod creations.
+-- | This rule allows all pod creations.
 pattern AdmissionRule_EvaluationMode_ALWAYSALLOW :: AdmissionRule_EvaluationMode
 pattern AdmissionRule_EvaluationMode_ALWAYSALLOW = AdmissionRule_EvaluationMode "ALWAYS_ALLOW"
 
@@ -188,6 +255,117 @@ pattern AdmissionRule_EvaluationMode_ALWAYSDENY = AdmissionRule_EvaluationMode "
   AdmissionRule_EvaluationMode_REQUIREATTESTATION,
   AdmissionRule_EvaluationMode_ALWAYSDENY,
   AdmissionRule_EvaluationMode
+  #-}
+
+-- | The result of evaluating all Pods in the request.
+newtype EvaluateGkePolicyResponse_Verdict = EvaluateGkePolicyResponse_Verdict {fromEvaluateGkePolicyResponse_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should never be used.
+pattern EvaluateGkePolicyResponse_Verdict_VERDICTUNSPECIFIED :: EvaluateGkePolicyResponse_Verdict
+pattern EvaluateGkePolicyResponse_Verdict_VERDICTUNSPECIFIED = EvaluateGkePolicyResponse_Verdict "VERDICT_UNSPECIFIED"
+
+-- | All Pods in the request conform to the policy.
+pattern EvaluateGkePolicyResponse_Verdict_Conformant :: EvaluateGkePolicyResponse_Verdict
+pattern EvaluateGkePolicyResponse_Verdict_Conformant = EvaluateGkePolicyResponse_Verdict "CONFORMANT"
+
+-- | At least one Pod does not conform to the policy.
+pattern EvaluateGkePolicyResponse_Verdict_NONCONFORMANT :: EvaluateGkePolicyResponse_Verdict
+pattern EvaluateGkePolicyResponse_Verdict_NONCONFORMANT = EvaluateGkePolicyResponse_Verdict "NON_CONFORMANT"
+
+-- | Encountered at least one error evaluating a Pod and all other Pods conform to the policy. Non-conformance has precedence over errors.
+pattern EvaluateGkePolicyResponse_Verdict_Error' :: EvaluateGkePolicyResponse_Verdict
+pattern EvaluateGkePolicyResponse_Verdict_Error' = EvaluateGkePolicyResponse_Verdict "ERROR"
+
+{-# COMPLETE
+  EvaluateGkePolicyResponse_Verdict_VERDICTUNSPECIFIED,
+  EvaluateGkePolicyResponse_Verdict_Conformant,
+  EvaluateGkePolicyResponse_Verdict_NONCONFORMANT,
+  EvaluateGkePolicyResponse_Verdict_Error',
+  EvaluateGkePolicyResponse_Verdict
+  #-}
+
+-- | The result of evaluating this check.
+newtype EvaluationResult_Verdict = EvaluationResult_Verdict {fromEvaluationResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should never be used.
+pattern EvaluationResult_Verdict_CHECKVERDICTUNSPECIFIED :: EvaluationResult_Verdict
+pattern EvaluationResult_Verdict_CHECKVERDICTUNSPECIFIED = EvaluationResult_Verdict "CHECK_VERDICT_UNSPECIFIED"
+
+-- | The check was successfully evaluated and the image satisfied the check.
+pattern EvaluationResult_Verdict_Conformant :: EvaluationResult_Verdict
+pattern EvaluationResult_Verdict_Conformant = EvaluationResult_Verdict "CONFORMANT"
+
+-- | The check was successfully evaluated and the image did not satisfy the check.
+pattern EvaluationResult_Verdict_NONCONFORMANT :: EvaluationResult_Verdict
+pattern EvaluationResult_Verdict_NONCONFORMANT = EvaluationResult_Verdict "NON_CONFORMANT"
+
+-- | The check was not successfully evaluated.
+pattern EvaluationResult_Verdict_Error' :: EvaluationResult_Verdict
+pattern EvaluationResult_Verdict_Error' = EvaluationResult_Verdict "ERROR"
+
+{-# COMPLETE
+  EvaluationResult_Verdict_CHECKVERDICTUNSPECIFIED,
+  EvaluationResult_Verdict_Conformant,
+  EvaluationResult_Verdict_NONCONFORMANT,
+  EvaluationResult_Verdict_Error',
+  EvaluationResult_Verdict
+  #-}
+
+-- | The result of evaluating this image.
+newtype ImageResult_Verdict = ImageResult_Verdict {fromImageResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should never be used.
+pattern ImageResult_Verdict_IMAGEVERDICTUNSPECIFIED :: ImageResult_Verdict
+pattern ImageResult_Verdict_IMAGEVERDICTUNSPECIFIED = ImageResult_Verdict "IMAGE_VERDICT_UNSPECIFIED"
+
+-- | Image conforms to the policy.
+pattern ImageResult_Verdict_Conformant :: ImageResult_Verdict
+pattern ImageResult_Verdict_Conformant = ImageResult_Verdict "CONFORMANT"
+
+-- | Image does not conform to the policy.
+pattern ImageResult_Verdict_NONCONFORMANT :: ImageResult_Verdict
+pattern ImageResult_Verdict_NONCONFORMANT = ImageResult_Verdict "NON_CONFORMANT"
+
+-- | Error evaluating the image. Non-conformance has precedence over errors.
+pattern ImageResult_Verdict_Error' :: ImageResult_Verdict
+pattern ImageResult_Verdict_Error' = ImageResult_Verdict "ERROR"
+
+{-# COMPLETE
+  ImageResult_Verdict_IMAGEVERDICTUNSPECIFIED,
+  ImageResult_Verdict_Conformant,
+  ImageResult_Verdict_NONCONFORMANT,
+  ImageResult_Verdict_Error',
+  ImageResult_Verdict
   #-}
 
 -- | The signature algorithm used to verify a message against a signature using this key. These signature algorithm must match the structure and any object identifiers encoded in @public_key_pem@ (i.e. this algorithm must match that of the public key).
@@ -302,6 +480,43 @@ pattern PkixPublicKey_SignatureAlgorithm_EC_SIGN_P521_SHA512 = PkixPublicKey_Sig
   PkixPublicKey_SignatureAlgorithm
   #-}
 
+-- | The result of evaluating this Pod.
+newtype PodResult_Verdict = PodResult_Verdict {fromPodResult_Verdict :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified. This should never be used.
+pattern PodResult_Verdict_PODVERDICTUNSPECIFIED :: PodResult_Verdict
+pattern PodResult_Verdict_PODVERDICTUNSPECIFIED = PodResult_Verdict "POD_VERDICT_UNSPECIFIED"
+
+-- | All images conform to the policy.
+pattern PodResult_Verdict_Conformant :: PodResult_Verdict
+pattern PodResult_Verdict_Conformant = PodResult_Verdict "CONFORMANT"
+
+-- | At least one image does not conform to the policy.
+pattern PodResult_Verdict_NONCONFORMANT :: PodResult_Verdict
+pattern PodResult_Verdict_NONCONFORMANT = PodResult_Verdict "NON_CONFORMANT"
+
+-- | Encountered at least one error evaluating an image and all other images with non-error verdicts conform to the policy. Non-conformance has precedence over errors.
+pattern PodResult_Verdict_Error' :: PodResult_Verdict
+pattern PodResult_Verdict_Error' = PodResult_Verdict "ERROR"
+
+{-# COMPLETE
+  PodResult_Verdict_PODVERDICTUNSPECIFIED,
+  PodResult_Verdict_Conformant,
+  PodResult_Verdict_NONCONFORMANT,
+  PodResult_Verdict_Error',
+  PodResult_Verdict
+  #-}
+
 -- | Optional. Controls the evaluation of a Google-maintained global admission policy for common system-level images. Images not covered by the global policy will be subject to the project admission policy. This setting has no effect when specified inside a global admission policy.
 newtype Policy_GlobalPolicyEvaluationMode = Policy_GlobalPolicyEvaluationMode {fromPolicy_GlobalPolicyEvaluationMode :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -315,7 +530,7 @@ newtype Policy_GlobalPolicyEvaluationMode = Policy_GlobalPolicyEvaluationMode {f
       Core.FromJSONKey
     )
 
--- | Not specified: DISABLE is assumed.
+-- | Not specified: @DISABLE@ is assumed.
 pattern Policy_GlobalPolicyEvaluationMode_GLOBALPOLICYEVALUATIONMODEUNSPECIFIED :: Policy_GlobalPolicyEvaluationMode
 pattern Policy_GlobalPolicyEvaluationMode_GLOBALPOLICYEVALUATIONMODEUNSPECIFIED = Policy_GlobalPolicyEvaluationMode "GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED"
 
@@ -364,4 +579,145 @@ pattern ValidateAttestationOccurrenceResponse_Result_ATTESTATIONNOTVERIFIABLE = 
   ValidateAttestationOccurrenceResponse_Result_Verified,
   ValidateAttestationOccurrenceResponse_Result_ATTESTATIONNOTVERIFIABLE,
   ValidateAttestationOccurrenceResponse_Result
+  #-}
+
+-- | Each verification rule is used for evaluation against provenances generated by a specific builder (group). For some of the builders, such as the Google Cloud Build, users don\'t need to explicitly specify their roots of trust in the policy since the evaluation service can automatically fetch them based on the builder (group).
+newtype VerificationRule_TrustedBuilder = VerificationRule_TrustedBuilder {fromVerificationRule_TrustedBuilder :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Should never happen.
+pattern VerificationRule_TrustedBuilder_BUILDERUNSPECIFIED :: VerificationRule_TrustedBuilder
+pattern VerificationRule_TrustedBuilder_BUILDERUNSPECIFIED = VerificationRule_TrustedBuilder "BUILDER_UNSPECIFIED"
+
+-- | The whole Google Cloud Build (GCB) builder group, including all GCB builder types.
+pattern VerificationRule_TrustedBuilder_GOOGLECLOUDBUILD :: VerificationRule_TrustedBuilder
+pattern VerificationRule_TrustedBuilder_GOOGLECLOUDBUILD = VerificationRule_TrustedBuilder "GOOGLE_CLOUD_BUILD"
+
+{-# COMPLETE
+  VerificationRule_TrustedBuilder_BUILDERUNSPECIFIED,
+  VerificationRule_TrustedBuilder_GOOGLECLOUDBUILD,
+  VerificationRule_TrustedBuilder
+  #-}
+
+-- | Required. The threshold for severity for which a fix is currently available. This field is required and must be set.
+newtype VulnerabilityCheck_MaximumFixableSeverity = VulnerabilityCheck_MaximumFixableSeverity {fromVulnerabilityCheck_MaximumFixableSeverity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern VulnerabilityCheck_MaximumFixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED = VulnerabilityCheck_MaximumFixableSeverity "MAXIMUM_ALLOWED_SEVERITY_UNSPECIFIED"
+
+-- | Block any vulnerability.
+pattern VulnerabilityCheck_MaximumFixableSeverity_BLOCKALL :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_BLOCKALL = VulnerabilityCheck_MaximumFixableSeverity "BLOCK_ALL"
+
+-- | Allow only minimal severity.
+pattern VulnerabilityCheck_MaximumFixableSeverity_Minimal :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_Minimal = VulnerabilityCheck_MaximumFixableSeverity "MINIMAL"
+
+-- | Allow only low severity and lower.
+pattern VulnerabilityCheck_MaximumFixableSeverity_Low :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_Low = VulnerabilityCheck_MaximumFixableSeverity "LOW"
+
+-- | Allow medium severity and lower.
+pattern VulnerabilityCheck_MaximumFixableSeverity_Medium :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_Medium = VulnerabilityCheck_MaximumFixableSeverity "MEDIUM"
+
+-- | Allow high severity and lower.
+pattern VulnerabilityCheck_MaximumFixableSeverity_High :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_High = VulnerabilityCheck_MaximumFixableSeverity "HIGH"
+
+-- | Allow critical severity and lower.
+pattern VulnerabilityCheck_MaximumFixableSeverity_Critical :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_Critical = VulnerabilityCheck_MaximumFixableSeverity "CRITICAL"
+
+-- | Allow all severity, even vulnerability with unspecified severity.
+pattern VulnerabilityCheck_MaximumFixableSeverity_ALLOWALL :: VulnerabilityCheck_MaximumFixableSeverity
+pattern VulnerabilityCheck_MaximumFixableSeverity_ALLOWALL = VulnerabilityCheck_MaximumFixableSeverity "ALLOW_ALL"
+
+{-# COMPLETE
+  VulnerabilityCheck_MaximumFixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED,
+  VulnerabilityCheck_MaximumFixableSeverity_BLOCKALL,
+  VulnerabilityCheck_MaximumFixableSeverity_Minimal,
+  VulnerabilityCheck_MaximumFixableSeverity_Low,
+  VulnerabilityCheck_MaximumFixableSeverity_Medium,
+  VulnerabilityCheck_MaximumFixableSeverity_High,
+  VulnerabilityCheck_MaximumFixableSeverity_Critical,
+  VulnerabilityCheck_MaximumFixableSeverity_ALLOWALL,
+  VulnerabilityCheck_MaximumFixableSeverity
+  #-}
+
+-- | Required. The threshold for severity for which a fix isn\'t currently available. This field is required and must be set.
+newtype VulnerabilityCheck_MaximumUnfixableSeverity = VulnerabilityCheck_MaximumUnfixableSeverity {fromVulnerabilityCheck_MaximumUnfixableSeverity :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED = VulnerabilityCheck_MaximumUnfixableSeverity "MAXIMUM_ALLOWED_SEVERITY_UNSPECIFIED"
+
+-- | Block any vulnerability.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_BLOCKALL :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_BLOCKALL = VulnerabilityCheck_MaximumUnfixableSeverity "BLOCK_ALL"
+
+-- | Allow only minimal severity.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Minimal :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Minimal = VulnerabilityCheck_MaximumUnfixableSeverity "MINIMAL"
+
+-- | Allow only low severity and lower.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Low :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Low = VulnerabilityCheck_MaximumUnfixableSeverity "LOW"
+
+-- | Allow medium severity and lower.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Medium :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Medium = VulnerabilityCheck_MaximumUnfixableSeverity "MEDIUM"
+
+-- | Allow high severity and lower.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_High :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_High = VulnerabilityCheck_MaximumUnfixableSeverity "HIGH"
+
+-- | Allow critical severity and lower.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Critical :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_Critical = VulnerabilityCheck_MaximumUnfixableSeverity "CRITICAL"
+
+-- | Allow all severity, even vulnerability with unspecified severity.
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_ALLOWALL :: VulnerabilityCheck_MaximumUnfixableSeverity
+pattern VulnerabilityCheck_MaximumUnfixableSeverity_ALLOWALL = VulnerabilityCheck_MaximumUnfixableSeverity "ALLOW_ALL"
+
+{-# COMPLETE
+  VulnerabilityCheck_MaximumUnfixableSeverity_MAXIMUMALLOWEDSEVERITYUNSPECIFIED,
+  VulnerabilityCheck_MaximumUnfixableSeverity_BLOCKALL,
+  VulnerabilityCheck_MaximumUnfixableSeverity_Minimal,
+  VulnerabilityCheck_MaximumUnfixableSeverity_Low,
+  VulnerabilityCheck_MaximumUnfixableSeverity_Medium,
+  VulnerabilityCheck_MaximumUnfixableSeverity_High,
+  VulnerabilityCheck_MaximumUnfixableSeverity_Critical,
+  VulnerabilityCheck_MaximumUnfixableSeverity_ALLOWALL,
+  VulnerabilityCheck_MaximumUnfixableSeverity
   #-}

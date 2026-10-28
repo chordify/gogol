@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Messages.Import
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Imports a message into only this user\'s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn\'t perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message. Note: This function doesn\'t trigger forwarding rules or filters set up by the user.
+-- Imports a message into only this user\'s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn\'t perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message.
 --
 -- /See:/ <https://developers.google.com/gmail/api/ Gmail API Reference> for @gmail.users.messages.import@.
 module Gogol.Gmail.Users.Messages.Import
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Messages.Import
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.messages.import@ method which the
 -- 'GmailUsersMessagesImport' request conforms to.
@@ -66,33 +64,29 @@ type GmailUsersMessagesImportResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Post '[Core.JSON] Message
     Core.:<|> "upload"
-      Core.:> "gmail"
-      Core.:> "v1"
-      Core.:> "users"
-      Core.:> Core.Capture "userId" Core.Text
-      Core.:> "messages"
-      Core.:> "import"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "deleted" Core.Bool
-      Core.:> Core.QueryParam
-                "internalDateSource"
-                UsersMessagesImportInternalDateSource
-      Core.:> Core.QueryParam "neverMarkSpam" Core.Bool
-      Core.:> Core.QueryParam "processForCalendar" Core.Bool
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.Multipart
-      Core.:> Core.MultipartRelated
-                '[Core.JSON]
-                Message
-      Core.:> Core.Post '[Core.JSON] Message
+    Core.:> "gmail"
+    Core.:> "v1"
+    Core.:> "users"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "messages"
+    Core.:> "import"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "deleted" Core.Bool
+    Core.:> Core.QueryParam
+              "internalDateSource"
+              UsersMessagesImportInternalDateSource
+    Core.:> Core.QueryParam "neverMarkSpam" Core.Bool
+    Core.:> Core.QueryParam "processForCalendar" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Message
+    Core.:> Core.Post '[Core.JSON] Message
 
--- | Imports a message into only this user\'s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn\'t perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message. Note: This function doesn\'t trigger forwarding rules or filters set up by the user.
+-- | Imports a message into only this user\'s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. This method doesn\'t perform SPF checks, so it might not work for some spam messages, such as those attempting to perform domain spoofing. This method does not send a message.
 --
 -- /See:/ 'newGmailUsersMessagesImport' smart constructor.
 data GmailUsersMessagesImport = GmailUsersMessagesImport
@@ -132,7 +126,8 @@ newGmailUsersMessagesImport payload =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       deleted = Core.False,
-      internalDateSource = UsersMessagesImportInternalDateSource_DateHeader,
+      internalDateSource =
+        UsersMessagesImportInternalDateSource_DateHeader,
       neverMarkSpam = Core.False,
       payload = payload,
       processForCalendar = Core.False,
@@ -164,44 +159,36 @@ instance Core.GoogleRequest GmailUsersMessagesImport where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersMessagesImportResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesImportResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload GmailUsersMessagesImport)
   where
+  type Rs (Core.MediaUpload GmailUsersMessagesImport) = Message
   type
-    Rs (Core.MediaUpload GmailUsersMessagesImport) =
-      Message
-  type
-    Scopes
-      (Core.MediaUpload GmailUsersMessagesImport) =
+    Scopes (Core.MediaUpload GmailUsersMessagesImport) =
       Core.Scopes GmailUsersMessagesImport
-  requestClient
-    (Core.MediaUpload GmailUsersMessagesImport {..} body) =
-      go
-        userId
-        xgafv
-        accessToken
-        callback
-        (Core.Just deleted)
-        (Core.Just internalDateSource)
-        (Core.Just neverMarkSpam)
-        (Core.Just processForCalendar)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        gmailService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy GmailUsersMessagesImportResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload GmailUsersMessagesImport {..} body) =
+    go
+      userId
+      xgafv
+      accessToken
+      callback
+      (Core.Just deleted)
+      (Core.Just internalDateSource)
+      (Core.Just neverMarkSpam)
+      (Core.Just processForCalendar)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      gmailService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesImportResource)
+          Core.mempty

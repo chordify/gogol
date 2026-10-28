@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Projects.Locations.StoredInfoTypes.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.projects.locations.storedInfoTypes.get@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.projects.locations.storedInfoTypes.get@.
 module Gogol.DLP.Projects.Locations.StoredInfoTypes.Get
   ( -- * Resource
     DLPProjectsLocationsStoredInfoTypesGetResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Projects.Locations.StoredInfoTypes.Get
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.projects.locations.storedInfoTypes.get@ method which the
 -- 'DLPProjectsLocationsStoredInfoTypesGet' request conforms to.
@@ -53,11 +51,9 @@ type DLPProjectsLocationsStoredInfoTypesGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GooglePrivacyDlpV2StoredInfoType
+    Core.:> Core.Get '[Core.JSON] GooglePrivacyDlpV2StoredInfoType
 
--- | Gets a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Gets a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPProjectsLocationsStoredInfoTypesGet' smart constructor.
 data DLPProjectsLocationsStoredInfoTypesGet = DLPProjectsLocationsStoredInfoTypesGet
@@ -91,32 +87,27 @@ newDLPProjectsLocationsStoredInfoTypesGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPProjectsLocationsStoredInfoTypesGet
-  where
+instance Core.GoogleRequest DLPProjectsLocationsStoredInfoTypesGet where
   type
     Rs DLPProjectsLocationsStoredInfoTypesGet =
       GooglePrivacyDlpV2StoredInfoType
   type
     Scopes DLPProjectsLocationsStoredInfoTypesGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPProjectsLocationsStoredInfoTypesGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPProjectsLocationsStoredInfoTypesGetResource
-            )
-            Core.mempty
+  requestClient DLPProjectsLocationsStoredInfoTypesGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPProjectsLocationsStoredInfoTypesGetResource
+          )
+          Core.mempty

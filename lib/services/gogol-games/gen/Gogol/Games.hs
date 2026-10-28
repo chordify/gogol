@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Games
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Play games service allows developers to enhance games with social leaderboards, achievements, game state, sign-in with Google, and more.
+-- The Google Play Games Service allows developers to enhance games with social leaderboards, achievements, game state, sign-in with Google, and more.
 --
 -- /See:/ <https://developers.google.com/games/ Google Play Game Services Reference>
 module Gogol.Games
@@ -34,10 +32,21 @@ module Gogol.Games
     gamesService,
 
     -- * OAuth Scopes
+    Androidpublisher'FullControl,
     Drive'Appdata,
     Games'FullControl,
 
     -- * Resources
+
+    -- ** games.accesstokens.generatePlayGroupingApiToken
+    GamesAccesstokensGeneratePlayGroupingApiTokenResource,
+    GamesAccesstokensGeneratePlayGroupingApiToken (..),
+    newGamesAccesstokensGeneratePlayGroupingApiToken,
+
+    -- ** games.accesstokens.generateRecallPlayGroupingApiToken
+    GamesAccesstokensGenerateRecallPlayGroupingApiTokenResource,
+    GamesAccesstokensGenerateRecallPlayGroupingApiToken (..),
+    newGamesAccesstokensGenerateRecallPlayGroupingApiToken,
 
     -- ** games.achievementDefinitions.list
     GamesAchievementDefinitionsListResource,
@@ -148,6 +157,36 @@ module Gogol.Games
     GamesPlayersListResource,
     GamesPlayersList (..),
     newGamesPlayersList,
+
+    -- ** games.recall.gamesPlayerTokens
+    GamesRecallGamesPlayerTokensResource,
+    GamesRecallGamesPlayerTokens (..),
+    newGamesRecallGamesPlayerTokens,
+
+    -- ** games.recall.lastTokenFromAllDeveloperGames
+    GamesRecallLastTokenFromAllDeveloperGamesResource,
+    GamesRecallLastTokenFromAllDeveloperGames (..),
+    newGamesRecallLastTokenFromAllDeveloperGames,
+
+    -- ** games.recall.linkPersona
+    GamesRecallLinkPersonaResource,
+    GamesRecallLinkPersona (..),
+    newGamesRecallLinkPersona,
+
+    -- ** games.recall.resetPersona
+    GamesRecallResetPersonaResource,
+    GamesRecallResetPersona (..),
+    newGamesRecallResetPersona,
+
+    -- ** games.recall.retrieveTokens
+    GamesRecallRetrieveTokensResource,
+    GamesRecallRetrieveTokens (..),
+    newGamesRecallRetrieveTokens,
+
+    -- ** games.recall.unlinkPersona
+    GamesRecallUnlinkPersonaResource,
+    GamesRecallUnlinkPersona (..),
+    newGamesRecallUnlinkPersona,
 
     -- ** games.revisions.check
     GamesRevisionsCheckResource,
@@ -334,6 +373,10 @@ module Gogol.Games
     EventUpdateResponse (..),
     newEventUpdateResponse,
 
+    -- ** GamePlayerToken
+    GamePlayerToken (..),
+    newGamePlayerToken,
+
     -- ** GamesAchievementIncrement
     GamesAchievementIncrement (..),
     newGamesAchievementIncrement,
@@ -341,6 +384,14 @@ module Gogol.Games
     -- ** GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- ** GeneratePlayGroupingApiTokenResponse
+    GeneratePlayGroupingApiTokenResponse (..),
+    newGeneratePlayGroupingApiTokenResponse,
+
+    -- ** GenerateRecallPlayGroupingApiTokenResponse
+    GenerateRecallPlayGroupingApiTokenResponse (..),
+    newGenerateRecallPlayGroupingApiTokenResponse,
 
     -- ** GetMultipleApplicationPlayerIdsResponse
     GetMultipleApplicationPlayerIdsResponse (..),
@@ -395,9 +446,30 @@ module Gogol.Games
     LeaderboardScores (..),
     newLeaderboardScores,
 
+    -- ** LinkPersonaRequest
+    LinkPersonaRequest (..),
+    newLinkPersonaRequest,
+
+    -- ** LinkPersonaRequest_CardinalityConstraint
+    LinkPersonaRequest_CardinalityConstraint (..),
+
+    -- ** LinkPersonaRequest_ConflictingLinksResolutionPolicy
+    LinkPersonaRequest_ConflictingLinksResolutionPolicy (..),
+
+    -- ** LinkPersonaResponse
+    LinkPersonaResponse (..),
+    newLinkPersonaResponse,
+
+    -- ** LinkPersonaResponse_State
+    LinkPersonaResponse_State (..),
+
     -- ** MetagameConfig
     MetagameConfig (..),
     newMetagameConfig,
+
+    -- ** PlayGroupingApiToken
+    PlayGroupingApiToken (..),
+    newPlayGroupingApiToken,
 
     -- ** Player
     Player (..),
@@ -481,6 +553,30 @@ module Gogol.Games
     -- ** ProfileSettings_FriendsListVisibility
     ProfileSettings_FriendsListVisibility (..),
 
+    -- ** RecallToken
+    RecallToken (..),
+    newRecallToken,
+
+    -- ** ResetPersonaRequest
+    ResetPersonaRequest (..),
+    newResetPersonaRequest,
+
+    -- ** ResetPersonaResponse
+    ResetPersonaResponse (..),
+    newResetPersonaResponse,
+
+    -- ** RetrieveDeveloperGamesLastPlayerTokenResponse
+    RetrieveDeveloperGamesLastPlayerTokenResponse (..),
+    newRetrieveDeveloperGamesLastPlayerTokenResponse,
+
+    -- ** RetrieveGamesPlayerTokensResponse
+    RetrieveGamesPlayerTokensResponse (..),
+    newRetrieveGamesPlayerTokensResponse,
+
+    -- ** RetrievePlayerTokensResponse
+    RetrievePlayerTokensResponse (..),
+    newRetrievePlayerTokensResponse,
+
     -- ** RevisionCheckResponse
     RevisionCheckResponse (..),
     newRevisionCheckResponse,
@@ -514,6 +610,14 @@ module Gogol.Games
     -- ** StatsResponse
     StatsResponse (..),
     newStatsResponse,
+
+    -- ** UnlinkPersonaRequest
+    UnlinkPersonaRequest (..),
+    newUnlinkPersonaRequest,
+
+    -- ** UnlinkPersonaResponse
+    UnlinkPersonaResponse (..),
+    newUnlinkPersonaResponse,
 
     -- ** AchievementsListState
     AchievementsListState (..),
@@ -550,6 +654,8 @@ module Gogol.Games
   )
 where
 
+import Gogol.Games.Accesstokens.GeneratePlayGroupingApiToken
+import Gogol.Games.Accesstokens.GenerateRecallPlayGroupingApiToken
 import Gogol.Games.AchievementDefinitions.List
 import Gogol.Games.Achievements.Increment
 import Gogol.Games.Achievements.List
@@ -572,6 +678,12 @@ import Gogol.Games.Players.Get
 import Gogol.Games.Players.GetMultipleApplicationPlayerIds
 import Gogol.Games.Players.GetScopedPlayerIds
 import Gogol.Games.Players.List
+import Gogol.Games.Recall.GamesPlayerTokens
+import Gogol.Games.Recall.LastTokenFromAllDeveloperGames
+import Gogol.Games.Recall.LinkPersona
+import Gogol.Games.Recall.ResetPersona
+import Gogol.Games.Recall.RetrieveTokens
+import Gogol.Games.Recall.UnlinkPersona
 import Gogol.Games.Revisions.Check
 import Gogol.Games.Scores.Get
 import Gogol.Games.Scores.List

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Jobs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Jobs.List
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.jobs.list@ method which the
 -- 'BigQueryJobsList' request conforms to.
@@ -50,7 +48,10 @@ type BigQueryJobsListResource =
     Core.:> "projects"
     Core.:> Core.Capture "projectId" Core.Text
     Core.:> "jobs"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "allUsers" Core.Bool
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "maxCreationTime" Core.Word64
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "minCreationTime" Core.Word64
@@ -58,6 +59,8 @@ type BigQueryJobsListResource =
     Core.:> Core.QueryParam "parentJobId" Core.Text
     Core.:> Core.QueryParam "projection" JobsListProjection
     Core.:> Core.QueryParams "stateFilter" JobsListStateFilter
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] JobList
 
@@ -65,35 +68,48 @@ type BigQueryJobsListResource =
 --
 -- /See:/ 'newBigQueryJobsList' smart constructor.
 data BigQueryJobsList = BigQueryJobsList
-  { -- | Whether to display jobs owned by all users in the project. Default false
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | Whether to display jobs owned by all users in the project. Default False.
     allUsers :: (Core.Maybe Core.Bool),
-    -- | Max value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created before or at this timestamp are returned
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Max value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created before or at this timestamp are returned.
     maxCreationTime :: (Core.Maybe Core.Word64),
-    -- | Maximum number of results to return
+    -- | The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
     maxResults :: (Core.Maybe Core.Word32),
-    -- | Min value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created after or at this timestamp are returned
+    -- | Min value for job creation time, in milliseconds since the POSIX epoch. If set, only jobs created after or at this timestamp are returned.
     minCreationTime :: (Core.Maybe Core.Word64),
-    -- | Page token, returned by a previous call, to request the next page of results
+    -- | Page token, returned by a previous call, to request the next page of results.
     pageToken :: (Core.Maybe Core.Text),
-    -- | If set, retrieves only jobs whose parent is this job. Otherwise, retrieves only jobs which have no parent
+    -- | If set, show only child jobs of the specified parent. Otherwise, show all top-level jobs.
     parentJobId :: (Core.Maybe Core.Text),
-    -- | Project ID of the jobs to list
+    -- | Project ID of the jobs to list.
     projectId :: Core.Text,
     -- | Restrict information returned to a set of selected fields
     projection :: (Core.Maybe JobsListProjection),
     -- | Filter for job state
-    stateFilter :: (Core.Maybe [JobsListStateFilter])
+    stateFilter :: (Core.Maybe [JobsListStateFilter]),
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryJobsList' with the minimum fields required to make a request.
 newBigQueryJobsList ::
-  -- |  Project ID of the jobs to list See 'projectId'.
+  -- |  Project ID of the jobs to list. See 'projectId'.
   Core.Text ->
   BigQueryJobsList
 newBigQueryJobsList projectId =
   BigQueryJobsList
-    { allUsers = Core.Nothing,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      allUsers = Core.Nothing,
+      callback = Core.Nothing,
       maxCreationTime = Core.Nothing,
       maxResults = Core.Nothing,
       minCreationTime = Core.Nothing,
@@ -101,7 +117,9 @@ newBigQueryJobsList projectId =
       parentJobId = Core.Nothing,
       projectId = projectId,
       projection = Core.Nothing,
-      stateFilter = Core.Nothing
+      stateFilter = Core.Nothing,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryJobsList where
@@ -115,7 +133,10 @@ instance Core.GoogleRequest BigQueryJobsList where
   requestClient BigQueryJobsList {..} =
     go
       projectId
+      xgafv
+      accessToken
       allUsers
+      callback
       maxCreationTime
       maxResults
       minCreationTime
@@ -123,6 +144,8 @@ instance Core.GoogleRequest BigQueryJobsList where
       parentJobId
       projection
       (stateFilter Core.^. Core._Default)
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where

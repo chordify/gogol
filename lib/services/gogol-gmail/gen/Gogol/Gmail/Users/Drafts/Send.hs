@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Drafts.Send
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Drafts.Send
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.drafts.send@ method which the
 -- 'GmailUsersDraftsSend' request conforms to.
@@ -60,21 +58,21 @@ type GmailUsersDraftsSendResource =
     Core.:> Core.ReqBody '[Core.JSON] Draft
     Core.:> Core.Post '[Core.JSON] Message
     Core.:<|> "upload"
-      Core.:> "gmail"
-      Core.:> "v1"
-      Core.:> "users"
-      Core.:> Core.Capture "userId" Core.Text
-      Core.:> "drafts"
-      Core.:> "send"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Draft
-      Core.:> Core.Post '[Core.JSON] Message
+    Core.:> "gmail"
+    Core.:> "v1"
+    Core.:> "users"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "drafts"
+    Core.:> "send"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Draft
+    Core.:> Core.Post '[Core.JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the @To@, @Cc@, and @Bcc@ headers.
 --
@@ -136,39 +134,29 @@ instance Core.GoogleRequest GmailUsersDraftsSend where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersDraftsSendResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersDraftsSendResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload GmailUsersDraftsSend)
-  where
-  type
-    Rs (Core.MediaUpload GmailUsersDraftsSend) =
-      Message
+instance Core.GoogleRequest (Core.MediaUpload GmailUsersDraftsSend) where
+  type Rs (Core.MediaUpload GmailUsersDraftsSend) = Message
   type
     Scopes (Core.MediaUpload GmailUsersDraftsSend) =
       Core.Scopes GmailUsersDraftsSend
-  requestClient
-    (Core.MediaUpload GmailUsersDraftsSend {..} body) =
-      go
-        userId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        gmailService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy GmailUsersDraftsSendResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload GmailUsersDraftsSend {..} body) =
+    go
+      userId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      gmailService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy GmailUsersDraftsSendResource)
+          Core.mempty

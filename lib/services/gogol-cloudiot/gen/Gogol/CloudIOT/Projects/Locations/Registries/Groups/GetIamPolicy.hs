@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Groups.GetIamPolicy
 where
 
 import Gogol.CloudIOT.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudiot.projects.locations.registries.groups.getIamPolicy@ method which the
 -- 'CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy' request conforms to.
@@ -84,28 +82,29 @@ newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
-newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy payload resource =
-  CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
+  payload
+  resource =
+    CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy
   where
   type
-    Rs
-      CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy =
+    Rs CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy =
       Policy
   type
-    Scopes
-      CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy =
+    Scopes CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy =
       '[CloudPlatform'FullControl, Cloudiot'FullControl]
   requestClient
     CloudIOTProjectsLocationsRegistriesGroupsGetIamPolicy {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickSearch.Conversion.GetByCustomerId
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DoubleClickSearch.Conversion.GetByCustomerId
 where
 
 import Gogol.DoubleClickSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclicksearch.conversion.getByCustomerId@ method which the
 -- 'DoubleClickSearchConversionGetByCustomerId' request conforms to.
@@ -63,21 +61,11 @@ type DoubleClickSearchConversionGetByCustomerIdResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "campaignId" Core.Int64
     Core.:> Core.QueryParam "criterionId" Core.Int64
-    Core.:> Core.QueryParam
-              "engineAccountId"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ConversionList
+    Core.:> Core.QueryParam "engineAccountId" Core.Int64
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ConversionList
 
 -- | Retrieves a list of conversions from a DoubleClick Search engine account.
 --
@@ -133,65 +121,65 @@ newDoubleClickSearchConversionGetByCustomerId ::
   -- |  The 0-based starting index for retrieving conversions results. See 'startRow'.
   Core.Word32 ->
   DoubleClickSearchConversionGetByCustomerId
-newDoubleClickSearchConversionGetByCustomerId customerId endDate rowCount startDate startRow =
-  DoubleClickSearchConversionGetByCustomerId
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      adGroupId = Core.Nothing,
-      adId = Core.Nothing,
-      advertiserId = Core.Nothing,
-      agencyId = Core.Nothing,
-      callback = Core.Nothing,
-      campaignId = Core.Nothing,
-      criterionId = Core.Nothing,
-      customerId = customerId,
-      endDate = endDate,
-      engineAccountId = Core.Nothing,
-      rowCount = rowCount,
-      startDate = startDate,
-      startRow = startRow,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDoubleClickSearchConversionGetByCustomerId
+  customerId
+  endDate
+  rowCount
+  startDate
+  startRow =
+    DoubleClickSearchConversionGetByCustomerId
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        adGroupId = Core.Nothing,
+        adId = Core.Nothing,
+        advertiserId = Core.Nothing,
+        agencyId = Core.Nothing,
+        callback = Core.Nothing,
+        campaignId = Core.Nothing,
+        criterionId = Core.Nothing,
+        customerId = customerId,
+        endDate = endDate,
+        engineAccountId = Core.Nothing,
+        rowCount = rowCount,
+        startDate = startDate,
+        startRow = startRow,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DoubleClickSearchConversionGetByCustomerId
   where
+  type Rs DoubleClickSearchConversionGetByCustomerId = ConversionList
   type
-    Rs DoubleClickSearchConversionGetByCustomerId =
-      ConversionList
-  type
-    Scopes
-      DoubleClickSearchConversionGetByCustomerId =
+    Scopes DoubleClickSearchConversionGetByCustomerId =
       '[Doubleclicksearch'FullControl]
-  requestClient
-    DoubleClickSearchConversionGetByCustomerId {..} =
-      go
-        customerId
-        (Core.Just endDate)
-        (Core.Just rowCount)
-        (Core.Just startDate)
-        (Core.Just startRow)
-        xgafv
-        accessToken
-        adGroupId
-        adId
-        advertiserId
-        agencyId
-        callback
-        campaignId
-        criterionId
-        engineAccountId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        doubleClickSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DoubleClickSearchConversionGetByCustomerIdResource
-            )
-            Core.mempty
+  requestClient DoubleClickSearchConversionGetByCustomerId {..} =
+    go
+      customerId
+      (Core.Just endDate)
+      (Core.Just rowCount)
+      (Core.Just startDate)
+      (Core.Just startRow)
+      xgafv
+      accessToken
+      adGroupId
+      adId
+      advertiserId
+      agencyId
+      callback
+      campaignId
+      criterionId
+      engineAccountId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      doubleClickSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DoubleClickSearchConversionGetByCustomerIdResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Databases.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Inserts a resource containing information about a database inside a Cloud SQL instance.
+-- Inserts a resource containing information about a database inside a Cloud SQL instance. __Note:__ You can\'t modify the default character set and collation.
 --
 -- /See:/ <https://developers.google.com/cloud-sql/ Cloud SQL Admin API Reference> for @sql.databases.insert@.
 module Gogol.SQLAdmin.Sql.Databases.Insert
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Databases.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.databases.insert@ method which the
@@ -60,7 +58,7 @@ type SqlDatabasesInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Database
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Inserts a resource containing information about a database inside a Cloud SQL instance.
+-- | Inserts a resource containing information about a database inside a Cloud SQL instance. __Note:__ You can\'t modify the default character set and collation.
 --
 -- /See:/ 'newSqlDatabasesInsert' smart constructor.
 data SqlDatabasesInsert = SqlDatabasesInsert

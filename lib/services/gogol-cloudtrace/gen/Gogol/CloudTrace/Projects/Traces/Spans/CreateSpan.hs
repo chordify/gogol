@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudTrace.Projects.Traces.Spans.CreateSpan
 where
 
 import Gogol.CloudTrace.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudtrace.projects.traces.spans.createSpan@ method which the
 -- 'CloudTraceProjectsTracesSpansCreateSpan' request conforms to.
@@ -95,33 +93,26 @@ newCloudTraceProjectsTracesSpansCreateSpan name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudTraceProjectsTracesSpansCreateSpan
-  where
-  type
-    Rs CloudTraceProjectsTracesSpansCreateSpan =
-      Span
+instance Core.GoogleRequest CloudTraceProjectsTracesSpansCreateSpan where
+  type Rs CloudTraceProjectsTracesSpansCreateSpan = Span
   type
     Scopes CloudTraceProjectsTracesSpansCreateSpan =
       '[CloudPlatform'FullControl, Trace'Append]
-  requestClient
-    CloudTraceProjectsTracesSpansCreateSpan {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudTraceService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudTraceProjectsTracesSpansCreateSpanResource
-            )
-            Core.mempty
+  requestClient CloudTraceProjectsTracesSpansCreateSpan {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudTraceService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudTraceProjectsTracesSpansCreateSpanResource
+          )
+          Core.mempty

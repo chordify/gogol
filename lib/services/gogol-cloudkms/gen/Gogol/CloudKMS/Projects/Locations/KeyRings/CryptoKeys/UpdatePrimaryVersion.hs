@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersion
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,25 +38,20 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.UpdatePrimaryVersio
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.updatePrimaryVersion@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion' request conforms to.
 type CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersionResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "name"
-              "updatePrimaryVersion"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "updatePrimaryVersion" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UpdateCryptoKeyPrimaryVersionRequest
+    Core.:> Core.ReqBody '[Core.JSON] UpdateCryptoKeyPrimaryVersionRequest
     Core.:> Core.Post '[Core.JSON] CryptoKey
 
 -- | Update the version of a CryptoKey that will be used in Encrypt. Returns an error if called on a key whose purpose is not ENCRYPT_DECRYPT.
@@ -89,16 +82,19 @@ newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion ::
   -- |  Multipart request metadata. See 'payload'.
   UpdateCryptoKeyPrimaryVersionRequest ->
   CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
-newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion name payload =
-  CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
+  name
+  payload =
+    CloudKMSProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

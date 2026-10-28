@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Edits.Deobfuscationfiles.Upload
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Edits.Deobfuscationfiles.Upload
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.edits.deobfuscationfiles.upload@ method which the
 -- 'AndroidPublisherEditsDeobfuscationfilesUpload' request conforms to.
@@ -63,35 +61,29 @@ type AndroidPublisherEditsDeobfuscationfilesUploadResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              DeobfuscationFilesUploadResponse
+    Core.:> Core.Post '[Core.JSON] DeobfuscationFilesUploadResponse
     Core.:<|> "upload"
-      Core.:> "androidpublisher"
-      Core.:> "v3"
-      Core.:> "applications"
-      Core.:> Core.Capture "packageName" Core.Text
-      Core.:> "edits"
-      Core.:> Core.Capture "editId" Core.Text
-      Core.:> "apks"
-      Core.:> Core.Capture "apkVersionCode" Core.Int32
-      Core.:> "deobfuscationFiles"
-      Core.:> Core.Capture
-                "deobfuscationFileType"
-                EditsDeobfuscationfilesUploadDeobfuscationFileType
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post
-                '[Core.JSON]
-                DeobfuscationFilesUploadResponse
+    Core.:> "androidpublisher"
+    Core.:> "v3"
+    Core.:> "applications"
+    Core.:> Core.Capture "packageName" Core.Text
+    Core.:> "edits"
+    Core.:> Core.Capture "editId" Core.Text
+    Core.:> "apks"
+    Core.:> Core.Capture "apkVersionCode" Core.Int32
+    Core.:> "deobfuscationFiles"
+    Core.:> Core.Capture
+              "deobfuscationFileType"
+              EditsDeobfuscationfilesUploadDeobfuscationFileType
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] DeobfuscationFilesUploadResponse
 
 -- | Uploads a new deobfuscation file and attaches to the specified APK.
 --
@@ -129,18 +121,23 @@ newAndroidPublisherEditsDeobfuscationfilesUpload ::
   -- |  Unique identifier for the Android app. See 'packageName'.
   Core.Text ->
   AndroidPublisherEditsDeobfuscationfilesUpload
-newAndroidPublisherEditsDeobfuscationfilesUpload apkVersionCode deobfuscationFileType editId packageName =
-  AndroidPublisherEditsDeobfuscationfilesUpload
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      apkVersionCode = apkVersionCode,
-      callback = Core.Nothing,
-      deobfuscationFileType = deobfuscationFileType,
-      editId = editId,
-      packageName = packageName,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherEditsDeobfuscationfilesUpload
+  apkVersionCode
+  deobfuscationFileType
+  editId
+  packageName =
+    AndroidPublisherEditsDeobfuscationfilesUpload
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        apkVersionCode = apkVersionCode,
+        callback = Core.Nothing,
+        deobfuscationFileType = deobfuscationFileType,
+        editId = editId,
+        packageName = packageName,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -150,51 +147,41 @@ instance
     Rs AndroidPublisherEditsDeobfuscationfilesUpload =
       DeobfuscationFilesUploadResponse
   type
-    Scopes
-      AndroidPublisherEditsDeobfuscationfilesUpload =
+    Scopes AndroidPublisherEditsDeobfuscationfilesUpload =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherEditsDeobfuscationfilesUpload {..} =
-      go
-        packageName
-        editId
-        apkVersionCode
-        deobfuscationFileType
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsDeobfuscationfilesUploadResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherEditsDeobfuscationfilesUpload {..} =
+    go
+      packageName
+      editId
+      apkVersionCode
+      deobfuscationFileType
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherEditsDeobfuscationfilesUploadResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaUpload
-        AndroidPublisherEditsDeobfuscationfilesUpload
-    )
+    (Core.MediaUpload AndroidPublisherEditsDeobfuscationfilesUpload)
   where
   type
     Rs
-      ( Core.MediaUpload
-          AndroidPublisherEditsDeobfuscationfilesUpload
-      ) =
+      (Core.MediaUpload AndroidPublisherEditsDeobfuscationfilesUpload) =
       DeobfuscationFilesUploadResponse
   type
     Scopes
-      ( Core.MediaUpload
-          AndroidPublisherEditsDeobfuscationfilesUpload
-      ) =
-      Core.Scopes
-        AndroidPublisherEditsDeobfuscationfilesUpload
+      (Core.MediaUpload AndroidPublisherEditsDeobfuscationfilesUpload) =
+      Core.Scopes AndroidPublisherEditsDeobfuscationfilesUpload
   requestClient
     ( Core.MediaUpload
         AndroidPublisherEditsDeobfuscationfilesUpload {..}
@@ -218,7 +205,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherEditsDeobfuscationfilesUploadResource
+                Core.Proxy AndroidPublisherEditsDeobfuscationfilesUploadResource
             )
             Core.mempty

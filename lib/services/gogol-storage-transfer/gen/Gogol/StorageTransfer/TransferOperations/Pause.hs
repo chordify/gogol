@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StorageTransfer.TransferOperations.Pause
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StorageTransfer.TransferOperations.Pause
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StorageTransfer.Types
 
 -- | A resource alias for @storagetransfer.transferOperations.pause@ method which the
@@ -53,9 +51,7 @@ type StorageTransferTransferOperationsPauseResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              PauseTransferOperationRequest
+    Core.:> Core.ReqBody '[Core.JSON] PauseTransferOperationRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Pauses a transfer operation.
@@ -97,33 +93,26 @@ newStorageTransferTransferOperationsPause name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageTransferTransferOperationsPause
-  where
-  type
-    Rs StorageTransferTransferOperationsPause =
-      Empty
+instance Core.GoogleRequest StorageTransferTransferOperationsPause where
+  type Rs StorageTransferTransferOperationsPause = Empty
   type
     Scopes StorageTransferTransferOperationsPause =
       '[CloudPlatform'FullControl]
-  requestClient
-    StorageTransferTransferOperationsPause {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        storageTransferService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  StorageTransferTransferOperationsPauseResource
-            )
-            Core.mempty
+  requestClient StorageTransferTransferOperationsPause {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      storageTransferService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy StorageTransferTransferOperationsPauseResource
+          )
+          Core.mempty

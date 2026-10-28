@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Monitoring.UptimeCheckIps.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the list of IP addresses that checkers run from
+-- Returns the list of IP addresses that checkers run from.
 --
 -- /See:/ <https://cloud.google.com/monitoring/api/ Cloud Monitoring API Reference> for @monitoring.uptimeCheckIps.list@.
 module Gogol.Monitoring.UptimeCheckIps.List
@@ -40,7 +38,7 @@ module Gogol.Monitoring.UptimeCheckIps.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.uptimeCheckIps.list@ method which the
 -- 'MonitoringUptimeCheckIpsList' request conforms to.
@@ -57,7 +55,7 @@ type MonitoringUptimeCheckIpsListResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListUptimeCheckIpsResponse
 
--- | Returns the list of IP addresses that checkers run from
+-- | Returns the list of IP addresses that checkers run from.
 --
 -- /See:/ 'newMonitoringUptimeCheckIpsList' smart constructor.
 data MonitoringUptimeCheckIpsList = MonitoringUptimeCheckIpsList
@@ -92,13 +90,8 @@ newMonitoringUptimeCheckIpsList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringUptimeCheckIpsList
-  where
-  type
-    Rs MonitoringUptimeCheckIpsList =
-      ListUptimeCheckIpsResponse
+instance Core.GoogleRequest MonitoringUptimeCheckIpsList where
+  type Rs MonitoringUptimeCheckIpsList = ListUptimeCheckIpsResponse
   type
     Scopes MonitoringUptimeCheckIpsList =
       '[ CloudPlatform'FullControl,
@@ -119,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MonitoringUptimeCheckIpsListResource
-          )
+          (Core.Proxy :: Core.Proxy MonitoringUptimeCheckIpsListResource)
           Core.mempty

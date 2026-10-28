@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionInstanceGroups.SetNamedPorts
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionInstanceGroups.SetNamedPorts
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionInstanceGroups.setNamedPorts@ method which the
 -- 'ComputeRegionInstanceGroupsSetNamedPorts' request conforms to.
@@ -104,50 +102,50 @@ newComputeRegionInstanceGroupsSetNamedPorts ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionInstanceGroupsSetNamedPorts
-newComputeRegionInstanceGroupsSetNamedPorts instanceGroup payload project region =
-  ComputeRegionInstanceGroupsSetNamedPorts
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroup = instanceGroup,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionInstanceGroupsSetNamedPorts
+  instanceGroup
+  payload
+  project
+  region =
+    ComputeRegionInstanceGroupsSetNamedPorts
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroup = instanceGroup,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionInstanceGroupsSetNamedPorts
   where
-  type
-    Rs ComputeRegionInstanceGroupsSetNamedPorts =
-      Operation
+  type Rs ComputeRegionInstanceGroupsSetNamedPorts = Operation
   type
     Scopes ComputeRegionInstanceGroupsSetNamedPorts =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeRegionInstanceGroupsSetNamedPorts {..} =
-      go
-        project
-        region
-        instanceGroup
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionInstanceGroupsSetNamedPortsResource
-            )
-            Core.mempty
+  requestClient ComputeRegionInstanceGroupsSetNamedPorts {..} =
+    go
+      project
+      region
+      instanceGroup
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionInstanceGroupsSetNamedPortsResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a custom channel. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product.
+-- Updates a custom channel. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method.
 --
 -- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @adsense.accounts.adclients.customchannels.patch@.
 module Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Adclients.Customchannels.Patch
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.adclients.customchannels.patch@ method which the
 -- 'AdSenseAccountsAdclientsCustomchannelsPatch' request conforms to.
@@ -57,7 +55,7 @@ type AdSenseAccountsAdclientsCustomchannelsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] CustomChannel
     Core.:> Core.Patch '[Core.JSON] CustomChannel
 
--- | Updates a custom channel. This method can only be used by projects enabled for the <https://developers.google.com/adsense/platforms/ AdSense for Platforms> product.
+-- | Updates a custom channel. This method can be called only by a restricted set of projects, which are usually owned by <https://developers.google.com/adsense/platforms/ AdSense for Platforms> publishers. Contact your account manager if you need to use this method.
 --
 -- /See:/ 'newAdSenseAccountsAdclientsCustomchannelsPatch' smart constructor.
 data AdSenseAccountsAdclientsCustomchannelsPatch = AdSenseAccountsAdclientsCustomchannelsPatch
@@ -103,31 +101,26 @@ instance
   Core.GoogleRequest
     AdSenseAccountsAdclientsCustomchannelsPatch
   where
+  type Rs AdSenseAccountsAdclientsCustomchannelsPatch = CustomChannel
   type
-    Rs AdSenseAccountsAdclientsCustomchannelsPatch =
-      CustomChannel
-  type
-    Scopes
-      AdSenseAccountsAdclientsCustomchannelsPatch =
+    Scopes AdSenseAccountsAdclientsCustomchannelsPatch =
       '[Adsense'FullControl]
-  requestClient
-    AdSenseAccountsAdclientsCustomchannelsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adSenseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdSenseAccountsAdclientsCustomchannelsPatchResource
-            )
-            Core.mempty
+  requestClient AdSenseAccountsAdclientsCustomchannelsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adSenseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdSenseAccountsAdclientsCustomchannelsPatchResource
+          )
+          Core.mempty

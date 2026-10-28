@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.PhotoSequences.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.StreetViewPublish.PhotoSequences.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.StreetViewPublish.Types
 
 -- | A resource alias for @streetviewpublish.photoSequences.list@ method which the
@@ -68,7 +66,7 @@ data StreetViewPublishPhotoSequencesList = StreetViewPublishPhotoSequencesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. The filter expression. For example: @imagery_type=SPHERICAL@. The filters supported are: @imagery_type@, @processing_state@, @min_latitude@, @max_latitude@, @min_longitude@, @max_longitude@, and @filename_query@. See https:\/\/google.aip.dev\/160 for more information. Filename queries should sent as a Phrase in order to support multple words and special characters by adding escaped quotes. Ex: filename_query=\"example of a phrase.mp4\"
+    -- | Optional. The filter expression. For example: @imagery_type=SPHERICAL@. The filters supported are: @imagery_type@, @processing_state@, @min_latitude@, @max_latitude@, @min_longitude@, @max_longitude@, @filename_query@, @min_capture_time_seconds@, \`max/capture/time/seconds. See https:\/\/google.aip.dev\/160 for more information. Filename queries should sent as a Phrase in order to support multiple words and special characters by adding escaped quotes. Ex: filename/query=\"example of a phrase.mp4\"
     filter :: (Core.Maybe Core.Text),
     -- | Optional. The maximum number of photo sequences to return. @pageSize@ must be non-negative. If @pageSize@ is zero or is not provided, the default page size of 100 is used. The number of photo sequences returned in the response may be less than @pageSize@ if the number of matches is less than @pageSize@. This is currently unimplemented but is in process.
     pageSize :: (Core.Maybe Core.Int32),
@@ -96,10 +94,7 @@ newStreetViewPublishPhotoSequencesList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StreetViewPublishPhotoSequencesList
-  where
+instance Core.GoogleRequest StreetViewPublishPhotoSequencesList where
   type
     Rs StreetViewPublishPhotoSequencesList =
       ListPhotoSequencesResponse
@@ -122,7 +117,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                StreetViewPublishPhotoSequencesListResource
+              Core.Proxy StreetViewPublishPhotoSequencesListResource
           )
           Core.mempty

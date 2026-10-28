@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AccessContextManager.Types
@@ -49,9 +47,21 @@ module Gogol.AccessContextManager.Types
     AccessPolicy (..),
     newAccessPolicy,
 
+    -- ** AccessScope
+    AccessScope (..),
+    newAccessScope,
+
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
+
     -- ** ApiOperation
     ApiOperation (..),
     newApiOperation,
+
+    -- ** Application
+    Application (..),
+    newApplication,
 
     -- ** AuditConfig
     AuditConfig (..),
@@ -92,6 +102,10 @@ module Gogol.AccessContextManager.Types
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** ClientScope
+    ClientScope (..),
+    newClientScope,
+
     -- ** CommitServicePerimetersRequest
     CommitServicePerimetersRequest (..),
     newCommitServicePerimetersRequest,
@@ -125,9 +139,16 @@ module Gogol.AccessContextManager.Types
     -- ** EgressFrom_IdentityType
     EgressFrom_IdentityType (..),
 
+    -- ** EgressFrom_SourceRestriction
+    EgressFrom_SourceRestriction (..),
+
     -- ** EgressPolicy
     EgressPolicy (..),
     newEgressPolicy,
+
+    -- ** EgressSource
+    EgressSource (..),
+    newEgressSource,
 
     -- ** EgressTo
     EgressTo (..),
@@ -200,6 +221,10 @@ module Gogol.AccessContextManager.Types
     ListServicePerimetersResponse (..),
     newListServicePerimetersResponse,
 
+    -- ** ListSupportedServicesResponse
+    ListSupportedServicesResponse (..),
+    newListSupportedServicesResponse,
+
     -- ** MethodSelector
     MethodSelector (..),
     newMethodSelector,
@@ -243,6 +268,10 @@ module Gogol.AccessContextManager.Types
     ReplaceServicePerimetersResponse (..),
     newReplaceServicePerimetersResponse,
 
+    -- ** ScopedAccessSettings
+    ScopedAccessSettings (..),
+    newScopedAccessSettings,
+
     -- ** ServicePerimeter
     ServicePerimeter (..),
     newServicePerimeter,
@@ -253,6 +282,13 @@ module Gogol.AccessContextManager.Types
     -- ** ServicePerimeterConfig
     ServicePerimeterConfig (..),
     newServicePerimeterConfig,
+
+    -- ** SessionSettings
+    SessionSettings (..),
+    newSessionSettings,
+
+    -- ** SessionSettings_SessionReauthMethod
+    SessionSettings_SessionReauthMethod (..),
 
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
@@ -266,6 +302,16 @@ module Gogol.AccessContextManager.Types
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SupportedService
+    SupportedService (..),
+    newSupportedService,
+
+    -- ** SupportedService_ServiceSupportStage
+    SupportedService_ServiceSupportStage (..),
+
+    -- ** SupportedService_SupportStage
+    SupportedService_SupportStage (..),
+
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -278,6 +324,14 @@ module Gogol.AccessContextManager.Types
     VpcAccessibleServices (..),
     newVpcAccessibleServices,
 
+    -- ** VpcNetworkSource
+    VpcNetworkSource (..),
+    newVpcNetworkSource,
+
+    -- ** VpcSubNetwork
+    VpcSubNetwork (..),
+    newVpcSubNetwork,
+
     -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
     AccessPoliciesAccessLevelsGetAccessLevelFormat (..),
 
@@ -288,7 +342,7 @@ where
 
 import Gogol.AccessContextManager.Internal.Product
 import Gogol.AccessContextManager.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Access Context Manager API. This contains the host and root path used as a starting point for constructing service requests.
 accessContextManagerService :: Core.ServiceConfig
@@ -298,4 +352,5 @@ accessContextManagerService =
     "accesscontextmanager.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

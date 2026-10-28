@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.UpdateShieldedInstanceConfig
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.UpdateShieldedInstanceConfig
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.updateShieldedInstanceConfig@ method which the
 -- 'ComputeInstancesUpdateShieldedInstanceConfig' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstancesUpdateShieldedInstanceConfigResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ShieldedInstanceConfig
+    Core.:> Core.ReqBody '[Core.JSON] ShieldedInstanceConfig
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
@@ -104,51 +100,51 @@ newComputeInstancesUpdateShieldedInstanceConfig ::
   -- |  The name of the zone for this request. See 'zone'.
   Core.Text ->
   ComputeInstancesUpdateShieldedInstanceConfig
-newComputeInstancesUpdateShieldedInstanceConfig instance' payload project zone =
-  ComputeInstancesUpdateShieldedInstanceConfig
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instance' = instance',
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newComputeInstancesUpdateShieldedInstanceConfig
+  instance'
+  payload
+  project
+  zone =
+    ComputeInstancesUpdateShieldedInstanceConfig
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instance' = instance',
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ComputeInstancesUpdateShieldedInstanceConfig
   where
+  type Rs ComputeInstancesUpdateShieldedInstanceConfig = Operation
   type
-    Rs ComputeInstancesUpdateShieldedInstanceConfig =
-      Operation
-  type
-    Scopes
-      ComputeInstancesUpdateShieldedInstanceConfig =
+    Scopes ComputeInstancesUpdateShieldedInstanceConfig =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeInstancesUpdateShieldedInstanceConfig {..} =
-      go
-        project
-        zone
-        instance'
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeInstancesUpdateShieldedInstanceConfigResource
-            )
-            Core.mempty
+  requestClient ComputeInstancesUpdateShieldedInstanceConfig {..} =
+    go
+      project
+      zone
+      instance'
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeInstancesUpdateShieldedInstanceConfigResource
+          )
+          Core.mempty

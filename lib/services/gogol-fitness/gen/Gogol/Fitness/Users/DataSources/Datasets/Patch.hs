@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fitness.Users.DataSources.Datasets.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Fitness.Users.DataSources.Datasets.Patch
 where
 
 import Gogol.Fitness.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fitness.users.dataSources.datasets.patch@ method which the
 -- 'FitnessUsersDataSourcesDatasetsPatch' request conforms to.
@@ -98,26 +96,25 @@ newFitnessUsersDataSourcesDatasetsPatch ::
   -- |  Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
   Core.Text ->
   FitnessUsersDataSourcesDatasetsPatch
-newFitnessUsersDataSourcesDatasetsPatch dataSourceId datasetId payload userId =
-  FitnessUsersDataSourcesDatasetsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dataSourceId = dataSourceId,
-      datasetId = datasetId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
-
-instance
-  Core.GoogleRequest
+newFitnessUsersDataSourcesDatasetsPatch
+  dataSourceId
+  datasetId
+  payload
+  userId =
     FitnessUsersDataSourcesDatasetsPatch
-  where
-  type
-    Rs FitnessUsersDataSourcesDatasetsPatch =
-      Dataset
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dataSourceId = dataSourceId,
+        datasetId = datasetId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
+
+instance Core.GoogleRequest FitnessUsersDataSourcesDatasetsPatch where
+  type Rs FitnessUsersDataSourcesDatasetsPatch = Dataset
   type
     Scopes FitnessUsersDataSourcesDatasetsPatch =
       '[ Fitness'Activity'Write,
@@ -132,25 +129,23 @@ instance
          Fitness'ReproductiveHealth'Write,
          Fitness'Sleep'Write
        ]
-  requestClient
-    FitnessUsersDataSourcesDatasetsPatch {..} =
-      go
-        userId
-        dataSourceId
-        datasetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fitnessService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FitnessUsersDataSourcesDatasetsPatchResource
-            )
-            Core.mempty
+  requestClient FitnessUsersDataSourcesDatasetsPatch {..} =
+    go
+      userId
+      dataSourceId
+      datasetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      fitnessService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FitnessUsersDataSourcesDatasetsPatchResource
+          )
+          Core.mempty

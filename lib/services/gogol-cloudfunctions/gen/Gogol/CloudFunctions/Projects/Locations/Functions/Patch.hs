@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.Patch
 where
 
 import Gogol.CloudFunctions.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.patch@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsPatch' request conforms to.
@@ -71,7 +69,7 @@ data CloudFunctionsProjectsLocationsFunctionsPatch = CloudFunctionsProjectsLocat
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Function,
-    -- | The list of fields to be updated. If no field mask is provided, all provided fields in the request will be updated.
+    -- | The list of fields to be updated. If no field mask is provided, all fields will be updated.
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -89,7 +87,8 @@ newCloudFunctionsProjectsLocationsFunctionsPatch ::
   CloudFunctionsProjectsLocationsFunctionsPatch
 newCloudFunctionsProjectsLocationsFunctionsPatch name payload =
   CloudFunctionsProjectsLocationsFunctionsPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -103,31 +102,26 @@ instance
   Core.GoogleRequest
     CloudFunctionsProjectsLocationsFunctionsPatch
   where
+  type Rs CloudFunctionsProjectsLocationsFunctionsPatch = Operation
   type
-    Rs CloudFunctionsProjectsLocationsFunctionsPatch =
-      Operation
-  type
-    Scopes
-      CloudFunctionsProjectsLocationsFunctionsPatch =
+    Scopes CloudFunctionsProjectsLocationsFunctionsPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudFunctionsProjectsLocationsFunctionsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudFunctionsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudFunctionsProjectsLocationsFunctionsPatchResource
-            )
-            Core.mempty
+  requestClient CloudFunctionsProjectsLocationsFunctionsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudFunctionsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudFunctionsProjectsLocationsFunctionsPatchResource
+          )
+          Core.mempty

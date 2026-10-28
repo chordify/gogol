@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Organizations.TimeSeries.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Monitoring.Organizations.TimeSeries.List
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.organizations.timeSeries.list@ method which the
 -- 'MonitoringOrganizationsTimeSeriesList' request conforms to.
@@ -50,15 +48,11 @@ type MonitoringOrganizationsTimeSeriesListResource =
     Core.:> "timeSeries"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "aggregation.alignmentPeriod"
-              Core.Duration
+    Core.:> Core.QueryParam "aggregation.alignmentPeriod" Core.Duration
     Core.:> Core.QueryParam
               "aggregation.crossSeriesReducer"
               OrganizationsTimeSeriesListAggregationCrossSeriesReducer
-    Core.:> Core.QueryParams
-              "aggregation.groupByFields"
-              Core.Text
+    Core.:> Core.QueryParams "aggregation.groupByFields" Core.Text
     Core.:> Core.QueryParam
               "aggregation.perSeriesAligner"
               OrganizationsTimeSeriesListAggregationPerSeriesAligner
@@ -81,21 +75,13 @@ type MonitoringOrganizationsTimeSeriesListResource =
     Core.:> Core.QueryParam
               "secondaryAggregation.perSeriesAligner"
               OrganizationsTimeSeriesListSecondaryAggregationPerSeriesAligner
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam
               "view"
               OrganizationsTimeSeriesListView
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListTimeSeriesResponse
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ListTimeSeriesResponse
 
 -- | Lists time series that match a filter.
 --
@@ -185,10 +171,7 @@ newMonitoringOrganizationsTimeSeriesList name =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MonitoringOrganizationsTimeSeriesList
-  where
+instance Core.GoogleRequest MonitoringOrganizationsTimeSeriesList where
   type
     Rs MonitoringOrganizationsTimeSeriesList =
       ListTimeSeriesResponse
@@ -198,39 +181,35 @@ instance
          Monitoring'FullControl,
          Monitoring'Read
        ]
-  requestClient
-    MonitoringOrganizationsTimeSeriesList {..} =
-      go
-        name
-        xgafv
-        accessToken
-        aggregationAlignmentPeriod
-        aggregationCrossSeriesReducer
-        (aggregationGroupByFields Core.^. Core._Default)
-        aggregationPerSeriesAligner
-        callback
-        filter
-        intervalEndTime
-        intervalStartTime
-        orderBy
-        pageSize
-        pageToken
-        secondaryAggregationAlignmentPeriod
-        secondaryAggregationCrossSeriesReducer
-        ( secondaryAggregationGroupByFields
-            Core.^. Core._Default
-        )
-        secondaryAggregationPerSeriesAligner
-        uploadType
-        uploadProtocol
-        view
-        (Core.Just Core.AltJSON)
-        monitoringService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MonitoringOrganizationsTimeSeriesListResource
-            )
-            Core.mempty
+  requestClient MonitoringOrganizationsTimeSeriesList {..} =
+    go
+      name
+      xgafv
+      accessToken
+      aggregationAlignmentPeriod
+      aggregationCrossSeriesReducer
+      (aggregationGroupByFields Core.^. Core._Default)
+      aggregationPerSeriesAligner
+      callback
+      filter
+      intervalEndTime
+      intervalStartTime
+      orderBy
+      pageSize
+      pageToken
+      secondaryAggregationAlignmentPeriod
+      secondaryAggregationCrossSeriesReducer
+      (secondaryAggregationGroupByFields Core.^. Core._Default)
+      secondaryAggregationPerSeriesAligner
+      uploadType
+      uploadProtocol
+      view
+      (Core.Just Core.AltJSON)
+      monitoringService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MonitoringOrganizationsTimeSeriesListResource
+          )
+          Core.mempty

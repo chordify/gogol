@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Creatives.Watch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.Watch
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.watch@ method which the
 -- 'AdExchangeBuyer2AccountsCreativesWatch' request conforms to.
@@ -91,46 +89,42 @@ newAdExchangeBuyer2AccountsCreativesWatch ::
   -- |  Multipart request metadata. See 'payload'.
   WatchCreativeRequest ->
   AdExchangeBuyer2AccountsCreativesWatch
-newAdExchangeBuyer2AccountsCreativesWatch accountId creativeId payload =
-  AdExchangeBuyer2AccountsCreativesWatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      creativeId = creativeId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAdExchangeBuyer2AccountsCreativesWatch
+  accountId
+  creativeId
+  payload =
     AdExchangeBuyer2AccountsCreativesWatch
-  where
-  type
-    Rs AdExchangeBuyer2AccountsCreativesWatch =
-      Empty
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        creativeId = creativeId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest AdExchangeBuyer2AccountsCreativesWatch where
+  type Rs AdExchangeBuyer2AccountsCreativesWatch = Empty
   type
     Scopes AdExchangeBuyer2AccountsCreativesWatch =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsCreativesWatch {..} =
-      go
-        accountId
-        creativeId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsCreativesWatchResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsCreativesWatch {..} =
+    go
+      accountId
+      creativeId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsCreativesWatchResource
+          )
+          Core.mempty

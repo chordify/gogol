@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.Values.Append
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.Values.Append
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.append@ method which the
@@ -70,9 +68,7 @@ type SheetsSpreadsheetsValuesAppendResource =
               SpreadsheetsValuesAppendValueInputOption
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] ValueRange
-    Core.:> Core.Post
-              '[Core.JSON]
-              AppendValuesResponse
+    Core.:> Core.Post '[Core.JSON] AppendValuesResponse
 
 -- | Appends values to a spreadsheet. The input range is used to search for existing data and find a \"table\" within that range. Values will be appended to the next row of the table, starting with the first column of the table. See the </sheets/api/guides/values#appending_values guide> and </sheets/api/samples/writing#append_values sample code> for specific details of how tables are detected and data is appended. The caller must specify the spreadsheet ID, range, and a valueInputOption. The @valueInputOption@ only controls how the input data will be added to the sheet (column-wise or row-wise), it does not influence what cell the data starts being written to.
 --
@@ -133,19 +129,11 @@ newSheetsSpreadsheetsValuesAppend payload range spreadsheetId =
       valueInputOption = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SheetsSpreadsheetsValuesAppend
-  where
-  type
-    Rs SheetsSpreadsheetsValuesAppend =
-      AppendValuesResponse
+instance Core.GoogleRequest SheetsSpreadsheetsValuesAppend where
+  type Rs SheetsSpreadsheetsValuesAppend = AppendValuesResponse
   type
     Scopes SheetsSpreadsheetsValuesAppend =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
   requestClient SheetsSpreadsheetsValuesAppend {..} =
     go
       spreadsheetId
@@ -166,7 +154,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SheetsSpreadsheetsValuesAppendResource
-          )
+          (Core.Proxy :: Core.Proxy SheetsSpreadsheetsValuesAppendResource)
           Core.mempty

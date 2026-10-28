@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Catalogs.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.List
 where
 
 import Gogol.CloudPrivateCatalogProducer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.list@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsList' request conforms to.
@@ -98,34 +96,29 @@ newCloudPrivateCatalogProducerCatalogsList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudPrivateCatalogProducerCatalogsList
-  where
+instance Core.GoogleRequest CloudPrivateCatalogProducerCatalogsList where
   type
     Rs CloudPrivateCatalogProducerCatalogsList =
       GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse
   type
     Scopes CloudPrivateCatalogProducerCatalogsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudPrivateCatalogProducerCatalogsList {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        parent
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerCatalogsListResource
-            )
-            Core.mempty
+  requestClient CloudPrivateCatalogProducerCatalogsList {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      parent
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudPrivateCatalogProducerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudPrivateCatalogProducerCatalogsListResource
+          )
+          Core.mempty

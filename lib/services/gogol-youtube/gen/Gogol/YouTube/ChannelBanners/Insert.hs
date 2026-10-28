@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.ChannelBanners.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.ChannelBanners.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.channelBanners.insert@ method which the
@@ -54,37 +52,29 @@ type YouTubeChannelBannersInsertResource =
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "channelId" Core.Text
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwnerChannel"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] ChannelBannerResource
     Core.:> Core.Post '[Core.JSON] ChannelBannerResource
     Core.:<|> "upload"
-      Core.:> "youtube"
-      Core.:> "v3"
-      Core.:> "channelBanners"
-      Core.:> "insert"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "channelId" Core.Text
-      Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-      Core.:> Core.QueryParam
-                "onBehalfOfContentOwnerChannel"
-                Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated
-                '[Core.JSON]
-                ChannelBannerResource
-      Core.:> Core.Post
-                '[Core.JSON]
-                ChannelBannerResource
+    Core.:> "youtube"
+    Core.:> "v3"
+    Core.:> "channelBanners"
+    Core.:> "insert"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "channelId" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] ChannelBannerResource
+    Core.:> Core.Post '[Core.JSON] ChannelBannerResource
 
 -- | Inserts a new resource into this collection.
 --
@@ -130,19 +120,11 @@ newYouTubeChannelBannersInsert payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeChannelBannersInsert
-  where
-  type
-    Rs YouTubeChannelBannersInsert =
-      ChannelBannerResource
+instance Core.GoogleRequest YouTubeChannelBannersInsert where
+  type Rs YouTubeChannelBannersInsert = ChannelBannerResource
   type
     Scopes YouTubeChannelBannersInsert =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Upload
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Upload]
   requestClient YouTubeChannelBannersInsert {..} =
     go
       xgafv
@@ -159,9 +141,7 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeChannelBannersInsertResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeChannelBannersInsertResource)
           Core.mempty
 
 instance
@@ -169,18 +149,13 @@ instance
     (Core.MediaUpload YouTubeChannelBannersInsert)
   where
   type
-    Rs
-      (Core.MediaUpload YouTubeChannelBannersInsert) =
+    Rs (Core.MediaUpload YouTubeChannelBannersInsert) =
       ChannelBannerResource
   type
-    Scopes
-      (Core.MediaUpload YouTubeChannelBannersInsert) =
+    Scopes (Core.MediaUpload YouTubeChannelBannersInsert) =
       Core.Scopes YouTubeChannelBannersInsert
   requestClient
-    ( Core.MediaUpload
-        YouTubeChannelBannersInsert {..}
-        body
-      ) =
+    (Core.MediaUpload YouTubeChannelBannersInsert {..} body) =
       go
         xgafv
         accessToken
@@ -198,7 +173,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy YouTubeChannelBannersInsertResource
-            )
+            (Core.Proxy :: Core.Proxy YouTubeChannelBannersInsertResource)
             Core.mempty

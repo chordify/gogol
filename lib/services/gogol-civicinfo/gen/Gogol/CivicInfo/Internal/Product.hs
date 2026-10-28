@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CivicInfo.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CivicInfo.Internal.Product
@@ -45,6 +43,14 @@ module Gogol.CivicInfo.Internal.Product
     -- * Contest
     Contest (..),
     newContest,
+
+    -- * DivisionByAddressResponse
+    DivisionByAddressResponse (..),
+    newDivisionByAddressResponse,
+
+    -- * DivisionByAddressResponse_Divisions
+    DivisionByAddressResponse_Divisions (..),
+    newDivisionByAddressResponse_Divisions,
 
     -- * DivisionSearchResponse
     DivisionSearchResponse (..),
@@ -70,21 +76,9 @@ module Gogol.CivicInfo.Internal.Product
     ElectoralDistrict (..),
     newElectoralDistrict,
 
-    -- * FeatureIdProto
-    FeatureIdProto (..),
-    newFeatureIdProto,
-
-    -- * GeocodingSummary
-    GeocodingSummary (..),
-    newGeocodingSummary,
-
     -- * GeographicDivision
     GeographicDivision (..),
     newGeographicDivision,
-
-    -- * MessageSet
-    MessageSet (..),
-    newMessageSet,
 
     -- * Office
     Office (..),
@@ -133,7 +127,7 @@ module Gogol.CivicInfo.Internal.Product
 where
 
 import Gogol.CivicInfo.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Describes information about a regional election administrative area.
 --
@@ -179,8 +173,7 @@ instance Core.ToJSON AdministrationRegion where
       ( Core.catMaybes
           [ ("electionAdministrationBody" Core..=)
               Core.<$> electionAdministrationBody,
-            ("local_jurisdiction" Core..=)
-              Core.<$> localJurisdiction,
+            ("local_jurisdiction" Core..=) Core.<$> localJurisdiction,
             ("name" Core..=) Core.<$> name,
             ("sources" Core..=) Core.<$> sources
           ]
@@ -272,26 +265,19 @@ instance Core.ToJSON AdministrativeBody where
   toJSON AdministrativeBody {..} =
     Core.object
       ( Core.catMaybes
-          [ ("absenteeVotingInfoUrl" Core..=)
-              Core.<$> absenteeVotingInfoUrl,
+          [ ("absenteeVotingInfoUrl" Core..=) Core.<$> absenteeVotingInfoUrl,
             ("ballotInfoUrl" Core..=) Core.<$> ballotInfoUrl,
-            ("correspondenceAddress" Core..=)
-              Core.<$> correspondenceAddress,
+            ("correspondenceAddress" Core..=) Core.<$> correspondenceAddress,
             ("electionInfoUrl" Core..=) Core.<$> electionInfoUrl,
-            ("electionNoticeText" Core..=)
-              Core.<$> electionNoticeText,
-            ("electionNoticeUrl" Core..=)
-              Core.<$> electionNoticeUrl,
-            ("electionOfficials" Core..=)
-              Core.<$> electionOfficials,
+            ("electionNoticeText" Core..=) Core.<$> electionNoticeText,
+            ("electionNoticeUrl" Core..=) Core.<$> electionNoticeUrl,
+            ("electionOfficials" Core..=) Core.<$> electionOfficials,
             ("electionRegistrationConfirmationUrl" Core..=)
               Core.<$> electionRegistrationConfirmationUrl,
             ("electionRegistrationUrl" Core..=)
               Core.<$> electionRegistrationUrl,
-            ("electionRulesUrl" Core..=)
-              Core.<$> electionRulesUrl,
-            ("hoursOfOperation" Core..=)
-              Core.<$> hoursOfOperation,
+            ("electionRulesUrl" Core..=) Core.<$> electionRulesUrl,
+            ("hoursOfOperation" Core..=) Core.<$> hoursOfOperation,
             ("name" Core..=) Core.<$> name,
             ("physicalAddress" Core..=) Core.<$> physicalAddress,
             ("voter_services" Core..=) Core.<$> voterServices,
@@ -348,9 +334,7 @@ instance Core.FromJSON Candidate where
             Core.<*> (o Core..:? "channels")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "name")
-            Core.<*> ( o Core..:? "orderOnBallot"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "orderOnBallot" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "party")
             Core.<*> (o Core..:? "phone")
             Core.<*> (o Core..:? "photoUrl")
@@ -364,7 +348,8 @@ instance Core.ToJSON Candidate where
             ("channels" Core..=) Core.<$> channels,
             ("email" Core..=) Core.<$> email,
             ("name" Core..=) Core.<$> name,
-            ("orderOnBallot" Core..=) Core.. Core.AsText
+            ("orderOnBallot" Core..=)
+              Core.. Core.AsText
               Core.<$> orderOnBallot,
             ("party" Core..=) Core.<$> party,
             ("phone" Core..=) Core.<$> phone,
@@ -393,17 +378,14 @@ instance Core.FromJSON Channel where
     Core.withObject
       "Channel"
       ( \o ->
-          Channel
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "type")
+          Channel Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON Channel where
   toJSON Channel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("id" Core..=) Core.<$> id, ("type" Core..=) Core.<$> type']
       )
 
 -- | Information about a contest that appears on a voter\'s ballot.
@@ -498,20 +480,14 @@ instance Core.FromJSON Contest where
       "Contest"
       ( \o ->
           Contest
-            Core.<$> ( o Core..:? "ballotPlacement"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "ballotPlacement" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ballotTitle")
             Core.<*> (o Core..:? "candidates")
             Core.<*> (o Core..:? "district")
             Core.<*> (o Core..:? "electorateSpecifications")
             Core.<*> (o Core..:? "level")
-            Core.<*> ( o Core..:? "numberElected"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "numberVotingFor"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numberElected" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "numberVotingFor" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "office")
             Core.<*> (o Core..:? "primaryParties")
             Core.<*> (o Core..:? "referendumBallotResponses")
@@ -534,7 +510,8 @@ instance Core.ToJSON Contest where
   toJSON Contest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ballotPlacement" Core..=) Core.. Core.AsText
+          [ ("ballotPlacement" Core..=)
+              Core.. Core.AsText
               Core.<$> ballotPlacement,
             ("ballotTitle" Core..=) Core.<$> ballotTitle,
             ("candidates" Core..=) Core.<$> candidates,
@@ -542,25 +519,24 @@ instance Core.ToJSON Contest where
             ("electorateSpecifications" Core..=)
               Core.<$> electorateSpecifications,
             ("level" Core..=) Core.<$> level,
-            ("numberElected" Core..=) Core.. Core.AsText
+            ("numberElected" Core..=)
+              Core.. Core.AsText
               Core.<$> numberElected,
-            ("numberVotingFor" Core..=) Core.. Core.AsText
+            ("numberVotingFor" Core..=)
+              Core.. Core.AsText
               Core.<$> numberVotingFor,
             ("office" Core..=) Core.<$> office,
             ("primaryParties" Core..=) Core.<$> primaryParties,
             ("referendumBallotResponses" Core..=)
               Core.<$> referendumBallotResponses,
             ("referendumBrief" Core..=) Core.<$> referendumBrief,
-            ("referendumConStatement" Core..=)
-              Core.<$> referendumConStatement,
+            ("referendumConStatement" Core..=) Core.<$> referendumConStatement,
             ("referendumEffectOfAbstain" Core..=)
               Core.<$> referendumEffectOfAbstain,
             ("referendumPassageThreshold" Core..=)
               Core.<$> referendumPassageThreshold,
-            ("referendumProStatement" Core..=)
-              Core.<$> referendumProStatement,
-            ("referendumSubtitle" Core..=)
-              Core.<$> referendumSubtitle,
+            ("referendumProStatement" Core..=) Core.<$> referendumProStatement,
+            ("referendumSubtitle" Core..=) Core.<$> referendumSubtitle,
             ("referendumText" Core..=) Core.<$> referendumText,
             ("referendumTitle" Core..=) Core.<$> referendumTitle,
             ("referendumUrl" Core..=) Core.<$> referendumUrl,
@@ -571,13 +547,77 @@ instance Core.ToJSON Contest where
           ]
       )
 
+--
+-- /See:/ 'newDivisionByAddressResponse' smart constructor.
+data DivisionByAddressResponse = DivisionByAddressResponse
+  { divisions :: (Core.Maybe DivisionByAddressResponse_Divisions),
+    -- | The normalized version of the requested address.
+    normalizedInput :: (Core.Maybe SimpleAddressType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DivisionByAddressResponse' with the minimum fields required to make a request.
+newDivisionByAddressResponse ::
+  DivisionByAddressResponse
+newDivisionByAddressResponse =
+  DivisionByAddressResponse
+    { divisions = Core.Nothing,
+      normalizedInput = Core.Nothing
+    }
+
+instance Core.FromJSON DivisionByAddressResponse where
+  parseJSON =
+    Core.withObject
+      "DivisionByAddressResponse"
+      ( \o ->
+          DivisionByAddressResponse
+            Core.<$> (o Core..:? "divisions")
+            Core.<*> (o Core..:? "normalizedInput")
+      )
+
+instance Core.ToJSON DivisionByAddressResponse where
+  toJSON DivisionByAddressResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("divisions" Core..=) Core.<$> divisions,
+            ("normalizedInput" Core..=) Core.<$> normalizedInput
+          ]
+      )
+
+--
+-- /See:/ 'newDivisionByAddressResponse_Divisions' smart constructor.
+newtype DivisionByAddressResponse_Divisions = DivisionByAddressResponse_Divisions
+  { additional :: (Core.HashMap Core.Text GeographicDivision)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DivisionByAddressResponse_Divisions' with the minimum fields required to make a request.
+newDivisionByAddressResponse_Divisions ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text GeographicDivision ->
+  DivisionByAddressResponse_Divisions
+newDivisionByAddressResponse_Divisions additional =
+  DivisionByAddressResponse_Divisions {additional = additional}
+
+instance Core.FromJSON DivisionByAddressResponse_Divisions where
+  parseJSON =
+    Core.withObject
+      "DivisionByAddressResponse_Divisions"
+      ( \o ->
+          DivisionByAddressResponse_Divisions
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DivisionByAddressResponse_Divisions where
+  toJSON DivisionByAddressResponse_Divisions {..} =
+    Core.toJSON additional
+
 -- | The result of a division search query.
 --
 -- /See:/ 'newDivisionSearchResponse' smart constructor.
 data DivisionSearchResponse = DivisionSearchResponse
   { -- | Identifies what kind of resource this is. Value: the fixed string \"civicinfo#divisionSearchResponse\".
     kind :: Core.Text,
-    -- |
     results :: (Core.Maybe [DivisionSearchResult])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -597,9 +637,7 @@ instance Core.FromJSON DivisionSearchResponse where
       "DivisionSearchResponse"
       ( \o ->
           DivisionSearchResponse
-            Core.<$> ( o Core..:? "kind"
-                         Core..!= "civicinfo#divisionSearchResponse"
-                     )
+            Core.<$> (o Core..:? "kind" Core..!= "civicinfo#divisionSearchResponse")
             Core.<*> (o Core..:? "results")
       )
 
@@ -668,7 +706,6 @@ data Election = Election
     name :: (Core.Maybe Core.Text),
     -- | The political division of the election. Represented as an OCD Division ID. Voters within these political jurisdictions are covered by this election. This is typically a state such as ocd-division\/country:us\/state:ca or for the midterms or general election the entire US (i.e. ocd-division\/country:us).
     ocdDivisionId :: (Core.Maybe Core.Text),
-    -- |
     shapeLookupBehavior :: (Core.Maybe Election_ShapeLookupBehavior)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -706,8 +743,7 @@ instance Core.ToJSON Election where
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("name" Core..=) Core.<$> name,
             ("ocdDivisionId" Core..=) Core.<$> ocdDivisionId,
-            ("shapeLookupBehavior" Core..=)
-              Core.<$> shapeLookupBehavior
+            ("shapeLookupBehavior" Core..=) Core.<$> shapeLookupBehavior
           ]
       )
 
@@ -760,8 +796,7 @@ instance Core.ToJSON ElectionOfficial where
           [ ("emailAddress" Core..=) Core.<$> emailAddress,
             ("faxNumber" Core..=) Core.<$> faxNumber,
             ("name" Core..=) Core.<$> name,
-            ("officePhoneNumber" Core..=)
-              Core.<$> officePhoneNumber,
+            ("officePhoneNumber" Core..=) Core.<$> officePhoneNumber,
             ("title" Core..=) Core.<$> title
           ]
       )
@@ -793,9 +828,7 @@ instance Core.FromJSON ElectionsQueryResponse where
       ( \o ->
           ElectionsQueryResponse
             Core.<$> (o Core..:? "elections")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "civicinfo#electionsQueryResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "civicinfo#electionsQueryResponse")
       )
 
 instance Core.ToJSON ElectionsQueryResponse where
@@ -851,113 +884,6 @@ instance Core.ToJSON ElectoralDistrict where
           ]
       )
 
--- | A globally unique identifier associated with each feature. We use 128-bit identifiers so that we have lots of bits available to distinguish between features. The feature id currently consists of a 64-bit \"cell id\" that __sometimes__ corresponds to the approximate centroid of the feature, plus a 64-bit fingerprint of other identifying information. See more on each respective field in its comments. Feature ids are first assigned when the data is created in MapFacts. After initial creation of the feature, they are immutable. This means that the only properties that you should rely on are that they are unique, and that cell_ids often - but not always - preserve spatial locality. The degree of locality varies as the feature undergoes geometry changes, and should not in general be considered a firm guarantee of the location of any particular feature. In fact, some locationless features have randomized cell IDs! Consumers of FeatureProtos from Mapfacts are guaranteed that fprints in the id field of features will
--- be globally unique. Using the fprint allows consumers who don\'t need the spatial benefit of cell ids to uniquely identify features in a 64-bit address space. This property is not guaranteed for other sources of FeatureProtos.
---
--- /See:/ 'newFeatureIdProto' smart constructor.
-data FeatureIdProto = FeatureIdProto
-  { -- | The S2CellId corresponding to the approximate location of this feature as of when it was first created. This can be of variable accuracy, ranging from the exact centroid of the feature at creation, a very large S2 Cell, or even being completely randomized for locationless features. Cell ids have the nice property that they follow a space-filling curve over the surface of the earth. (See s2cellid.h for details.) WARNING: Clients should only use cell IDs to perform spatial locality optimizations. There is no strict guarantee that the cell ID of a feature is related to the current geometry of the feature in any way.
-    cellId :: (Core.Maybe Core.Word64),
-    -- | A 64-bit fingerprint used to identify features. Most clients should rely on MapFacts or OneRing to choose fingerprints. If creating new fprints, the strategy should be chosen so that the chance of collision is remote or non-existent, and the distribution should be reasonably uniform. For example, if the source data assigns unique ids to features, then a fingerprint of the provider name, version, and source id is sufficient.
-    fprint :: (Core.Maybe Core.Word64),
-    -- | A place for clients to attach arbitrary data to a feature ID. Never set in MapFacts.
-    temporaryData :: (Core.Maybe MessageSet)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'FeatureIdProto' with the minimum fields required to make a request.
-newFeatureIdProto ::
-  FeatureIdProto
-newFeatureIdProto =
-  FeatureIdProto
-    { cellId = Core.Nothing,
-      fprint = Core.Nothing,
-      temporaryData = Core.Nothing
-    }
-
-instance Core.FromJSON FeatureIdProto where
-  parseJSON =
-    Core.withObject
-      "FeatureIdProto"
-      ( \o ->
-          FeatureIdProto
-            Core.<$> ( o Core..:? "cellId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "fprint"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "temporaryData")
-      )
-
-instance Core.ToJSON FeatureIdProto where
-  toJSON FeatureIdProto {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("cellId" Core..=) Core.. Core.AsText
-              Core.<$> cellId,
-            ("fprint" Core..=) Core.. Core.AsText
-              Core.<$> fprint,
-            ("temporaryData" Core..=) Core.<$> temporaryData
-          ]
-      )
-
--- | Detailed summary of the result from geocoding an address
---
--- /See:/ 'newGeocodingSummary' smart constructor.
-data GeocodingSummary = GeocodingSummary
-  { -- | Represents the best estimate of whether or not the input address was fully understood and the address is correctly componentized. Mirrors the same-name field in geostore.staging.AddressLinkupScoringProto.
-    addressUnderstood :: (Core.Maybe Core.Bool),
-    -- | The ID of the FeatureProto returned by the geocoder
-    featureId :: (Core.Maybe FeatureIdProto),
-    -- | The feature type for the FeatureProto returned by the geocoder
-    featureType :: (Core.Maybe GeocodingSummary_FeatureType),
-    -- | Precision of the center point (lat\/long) of the geocoded FeatureProto
-    positionPrecisionMeters :: (Core.Maybe Core.Double),
-    -- | The query sent to the geocoder
-    queryString :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'GeocodingSummary' with the minimum fields required to make a request.
-newGeocodingSummary ::
-  GeocodingSummary
-newGeocodingSummary =
-  GeocodingSummary
-    { addressUnderstood = Core.Nothing,
-      featureId = Core.Nothing,
-      featureType = Core.Nothing,
-      positionPrecisionMeters = Core.Nothing,
-      queryString = Core.Nothing
-    }
-
-instance Core.FromJSON GeocodingSummary where
-  parseJSON =
-    Core.withObject
-      "GeocodingSummary"
-      ( \o ->
-          GeocodingSummary
-            Core.<$> (o Core..:? "addressUnderstood")
-            Core.<*> (o Core..:? "featureId")
-            Core.<*> (o Core..:? "featureType")
-            Core.<*> (o Core..:? "positionPrecisionMeters")
-            Core.<*> (o Core..:? "queryString")
-      )
-
-instance Core.ToJSON GeocodingSummary where
-  toJSON GeocodingSummary {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("addressUnderstood" Core..=)
-              Core.<$> addressUnderstood,
-            ("featureId" Core..=) Core.<$> featureId,
-            ("featureType" Core..=) Core.<$> featureType,
-            ("positionPrecisionMeters" Core..=)
-              Core.<$> positionPrecisionMeters,
-            ("queryString" Core..=) Core.<$> queryString
-          ]
-      )
-
 -- | Describes a political geography.
 --
 -- /See:/ 'newGeographicDivision' smart constructor.
@@ -1001,26 +927,6 @@ instance Core.ToJSON GeographicDivision where
             ("officeIndices" Core..=) Core.<$> officeIndices
           ]
       )
-
--- | This is proto2\'s version of MessageSet.
---
--- /See:/ 'newMessageSet' smart constructor.
-data MessageSet = MessageSet
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MessageSet' with the minimum fields required to make a request.
-newMessageSet ::
-  MessageSet
-newMessageSet = MessageSet
-
-instance Core.FromJSON MessageSet where
-  parseJSON =
-    Core.withObject
-      "MessageSet"
-      (\o -> Core.pure MessageSet)
-
-instance Core.ToJSON MessageSet where
-  toJSON = Core.const Core.emptyObject
 
 -- | Information about an Office held by one or more Officials.
 --
@@ -1091,8 +997,6 @@ data Official = Official
     channels :: (Core.Maybe [Channel]),
     -- | The direct email addresses for the official.
     emails :: (Core.Maybe [Core.Text]),
-    -- | Detailed summary about the official\'s address\'s geocoding
-    geocodingSummaries :: (Core.Maybe [GeocodingSummary]),
     -- | The official\'s name.
     name :: (Core.Maybe Core.Text),
     -- | The full name of the party the official belongs to.
@@ -1114,7 +1018,6 @@ newOfficial =
     { address = Core.Nothing,
       channels = Core.Nothing,
       emails = Core.Nothing,
-      geocodingSummaries = Core.Nothing,
       name = Core.Nothing,
       party = Core.Nothing,
       phones = Core.Nothing,
@@ -1131,7 +1034,6 @@ instance Core.FromJSON Official where
             Core.<$> (o Core..:? "address")
             Core.<*> (o Core..:? "channels")
             Core.<*> (o Core..:? "emails")
-            Core.<*> (o Core..:? "geocodingSummaries")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "party")
             Core.<*> (o Core..:? "phones")
@@ -1146,8 +1048,6 @@ instance Core.ToJSON Official where
           [ ("address" Core..=) Core.<$> address,
             ("channels" Core..=) Core.<$> channels,
             ("emails" Core..=) Core.<$> emails,
-            ("geocodingSummaries" Core..=)
-              Core.<$> geocodingSummaries,
             ("name" Core..=) Core.<$> name,
             ("party" Core..=) Core.<$> party,
             ("phones" Core..=) Core.<$> phones,
@@ -1298,9 +1198,7 @@ instance Core.FromJSON Precinct where
           Precinct
             Core.<$> (o Core..:? "administrationRegionId")
             Core.<*> (o Core..:? "contestId")
-            Core.<*> ( o Core..:? "datasetId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "datasetId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "earlyVoteSiteId")
             Core.<*> (o Core..:? "electoralDistrictId")
             Core.<*> (o Core..:? "id")
@@ -1321,20 +1219,16 @@ instance Core.ToJSON Precinct where
           [ ("administrationRegionId" Core..=)
               Core.<$> administrationRegionId,
             ("contestId" Core..=) Core.<$> contestId,
-            ("datasetId" Core..=) Core.. Core.AsText
-              Core.<$> datasetId,
+            ("datasetId" Core..=) Core.. Core.AsText Core.<$> datasetId,
             ("earlyVoteSiteId" Core..=) Core.<$> earlyVoteSiteId,
-            ("electoralDistrictId" Core..=)
-              Core.<$> electoralDistrictId,
+            ("electoralDistrictId" Core..=) Core.<$> electoralDistrictId,
             ("id" Core..=) Core.<$> id,
             ("mailOnly" Core..=) Core.<$> mailOnly,
             ("name" Core..=) Core.<$> name,
             ("number" Core..=) Core.<$> number,
             ("ocdId" Core..=) Core.<$> ocdId,
-            ("pollingLocationId" Core..=)
-              Core.<$> pollingLocationId,
-            ("spatialBoundaryId" Core..=)
-              Core.<$> spatialBoundaryId,
+            ("pollingLocationId" Core..=) Core.<$> pollingLocationId,
+            ("spatialBoundaryId" Core..=) Core.<$> spatialBoundaryId,
             ("splitName" Core..=) Core.<$> splitName,
             ("ward" Core..=) Core.<$> ward
           ]
@@ -1387,8 +1281,7 @@ instance Core.ToJSON RepresentativeInfoData where
 --
 -- /See:/ 'newRepresentativeInfoData_Divisions' smart constructor.
 newtype RepresentativeInfoData_Divisions = RepresentativeInfoData_Divisions
-  { -- |
-    additional :: (Core.HashMap Core.Text GeographicDivision)
+  { additional :: (Core.HashMap Core.Text GeographicDivision)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1400,16 +1293,12 @@ newRepresentativeInfoData_Divisions ::
 newRepresentativeInfoData_Divisions additional =
   RepresentativeInfoData_Divisions {additional = additional}
 
-instance
-  Core.FromJSON
-    RepresentativeInfoData_Divisions
-  where
+instance Core.FromJSON RepresentativeInfoData_Divisions where
   parseJSON =
     Core.withObject
       "RepresentativeInfoData_Divisions"
       ( \o ->
-          RepresentativeInfoData_Divisions
-            Core.<$> (Core.parseJSONObject o)
+          RepresentativeInfoData_Divisions Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON RepresentativeInfoData_Divisions where
@@ -1452,9 +1341,7 @@ instance Core.FromJSON RepresentativeInfoResponse where
       ( \o ->
           RepresentativeInfoResponse
             Core.<$> (o Core..:? "divisions")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "civicinfo#representativeInfoResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "civicinfo#representativeInfoResponse")
             Core.<*> (o Core..:? "normalizedInput")
             Core.<*> (o Core..:? "offices")
             Core.<*> (o Core..:? "officials")
@@ -1476,8 +1363,7 @@ instance Core.ToJSON RepresentativeInfoResponse where
 --
 -- /See:/ 'newRepresentativeInfoResponse_Divisions' smart constructor.
 newtype RepresentativeInfoResponse_Divisions = RepresentativeInfoResponse_Divisions
-  { -- |
-    additional :: (Core.HashMap Core.Text GeographicDivision)
+  { additional :: (Core.HashMap Core.Text GeographicDivision)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1489,10 +1375,7 @@ newRepresentativeInfoResponse_Divisions ::
 newRepresentativeInfoResponse_Divisions additional =
   RepresentativeInfoResponse_Divisions {additional = additional}
 
-instance
-  Core.FromJSON
-    RepresentativeInfoResponse_Divisions
-  where
+instance Core.FromJSON RepresentativeInfoResponse_Divisions where
   parseJSON =
     Core.withObject
       "RepresentativeInfoResponse_Divisions"
@@ -1501,10 +1384,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RepresentativeInfoResponse_Divisions
-  where
+instance Core.ToJSON RepresentativeInfoResponse_Divisions where
   toJSON RepresentativeInfoResponse_Divisions {..} =
     Core.toJSON additional
 
@@ -1594,7 +1474,8 @@ instance Core.FromJSON Source where
       "Source"
       ( \o ->
           Source
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "official")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "official")
       )
 
 instance Core.ToJSON Source where
@@ -1628,9 +1509,8 @@ data VoterInfoResponse = VoterInfoResponse
     otherElections :: (Core.Maybe [Election]),
     -- | Locations where the voter is eligible to vote on election day.
     pollingLocations :: (Core.Maybe [PollingLocation]),
-    -- |
     precinctId :: (Core.Maybe Core.Text),
-    -- | The precincts that match this voter\'s address. Will only be returned for project IDs which have been whitelisted as \"partner projects\".
+    -- | The precincts that match this voter\'s address. Will only be returned for project IDs which have been allowlisted as \"partner projects\".
     precincts :: (Core.Maybe [Precinct]),
     -- | Local Election Information for the state that the voter votes in. For the US, there will only be one element in this array.
     state :: (Core.Maybe [AdministrationRegion])
@@ -1666,9 +1546,7 @@ instance Core.FromJSON VoterInfoResponse where
             Core.<*> (o Core..:? "dropOffLocations")
             Core.<*> (o Core..:? "earlyVoteSites")
             Core.<*> (o Core..:? "election")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "civicinfo#voterInfoResponse"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "civicinfo#voterInfoResponse")
             Core.<*> (o Core..:? "mailOnly")
             Core.<*> (o Core..:? "normalizedInput")
             Core.<*> (o Core..:? "otherElections")
@@ -1683,16 +1561,14 @@ instance Core.ToJSON VoterInfoResponse where
     Core.object
       ( Core.catMaybes
           [ ("contests" Core..=) Core.<$> contests,
-            ("dropOffLocations" Core..=)
-              Core.<$> dropOffLocations,
+            ("dropOffLocations" Core..=) Core.<$> dropOffLocations,
             ("earlyVoteSites" Core..=) Core.<$> earlyVoteSites,
             ("election" Core..=) Core.<$> election,
             Core.Just ("kind" Core..= kind),
             ("mailOnly" Core..=) Core.<$> mailOnly,
             ("normalizedInput" Core..=) Core.<$> normalizedInput,
             ("otherElections" Core..=) Core.<$> otherElections,
-            ("pollingLocations" Core..=)
-              Core.<$> pollingLocations,
+            ("pollingLocations" Core..=) Core.<$> pollingLocations,
             ("precinctId" Core..=) Core.<$> precinctId,
             ("precincts" Core..=) Core.<$> precincts,
             ("state" Core..=) Core.<$> state

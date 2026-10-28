@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DNS.Internal.Sum
@@ -147,7 +145,7 @@ module Gogol.DNS.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -189,11 +187,9 @@ newtype Change_Status = Change_Status {fromChange_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Change_Status_Pending :: Change_Status
 pattern Change_Status_Pending = Change_Status "PENDING"
 
--- |
 pattern Change_Status_Done :: Change_Status
 pattern Change_Status_Done = Change_Status "DONE"
 
@@ -216,23 +212,18 @@ newtype DnsKey_Algorithm = DnsKey_Algorithm {fromDnsKey_Algorithm :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern DnsKey_Algorithm_RSASHA1 :: DnsKey_Algorithm
 pattern DnsKey_Algorithm_RSASHA1 = DnsKey_Algorithm "RSASHA1"
 
--- |
 pattern DnsKey_Algorithm_RSASHA256 :: DnsKey_Algorithm
 pattern DnsKey_Algorithm_RSASHA256 = DnsKey_Algorithm "RSASHA256"
 
--- |
 pattern DnsKey_Algorithm_RSASHA512 :: DnsKey_Algorithm
 pattern DnsKey_Algorithm_RSASHA512 = DnsKey_Algorithm "RSASHA512"
 
--- |
 pattern DnsKey_Algorithm_ECDSAP256SHA256 :: DnsKey_Algorithm
 pattern DnsKey_Algorithm_ECDSAP256SHA256 = DnsKey_Algorithm "ECDSAP256SHA256"
 
--- |
 pattern DnsKey_Algorithm_ECDSAP384SHA384 :: DnsKey_Algorithm
 pattern DnsKey_Algorithm_ECDSAP384SHA384 = DnsKey_Algorithm "ECDSAP384SHA384"
 
@@ -258,11 +249,9 @@ newtype DnsKey_Type = DnsKey_Type {fromDnsKey_Type :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern DnsKey_Type_KEYSIGNING :: DnsKey_Type
 pattern DnsKey_Type_KEYSIGNING = DnsKey_Type "KEY_SIGNING"
 
--- |
 pattern DnsKey_Type_ZONESIGNING :: DnsKey_Type
 pattern DnsKey_Type_ZONESIGNING = DnsKey_Type "ZONE_SIGNING"
 
@@ -285,15 +274,12 @@ newtype DnsKeyDigest_Type = DnsKeyDigest_Type {fromDnsKeyDigest_Type :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
 pattern DnsKeyDigest_Type_SHA1 :: DnsKeyDigest_Type
 pattern DnsKeyDigest_Type_SHA1 = DnsKeyDigest_Type "SHA1"
 
--- |
 pattern DnsKeyDigest_Type_SHA256 :: DnsKeyDigest_Type
 pattern DnsKeyDigest_Type_SHA256 = DnsKeyDigest_Type "SHA256"
 
--- |
 pattern DnsKeyDigest_Type_SHA384 :: DnsKeyDigest_Type
 pattern DnsKeyDigest_Type_SHA384 = DnsKeyDigest_Type "SHA384"
 
@@ -317,23 +303,18 @@ newtype DnsKeySpec_Algorithm = DnsKeySpec_Algorithm {fromDnsKeySpec_Algorithm ::
       Core.FromJSONKey
     )
 
--- |
 pattern DnsKeySpec_Algorithm_RSASHA1 :: DnsKeySpec_Algorithm
 pattern DnsKeySpec_Algorithm_RSASHA1 = DnsKeySpec_Algorithm "RSASHA1"
 
--- |
 pattern DnsKeySpec_Algorithm_RSASHA256 :: DnsKeySpec_Algorithm
 pattern DnsKeySpec_Algorithm_RSASHA256 = DnsKeySpec_Algorithm "RSASHA256"
 
--- |
 pattern DnsKeySpec_Algorithm_RSASHA512 :: DnsKeySpec_Algorithm
 pattern DnsKeySpec_Algorithm_RSASHA512 = DnsKeySpec_Algorithm "RSASHA512"
 
--- |
 pattern DnsKeySpec_Algorithm_ECDSAP256SHA256 :: DnsKeySpec_Algorithm
 pattern DnsKeySpec_Algorithm_ECDSAP256SHA256 = DnsKeySpec_Algorithm "ECDSAP256SHA256"
 
--- |
 pattern DnsKeySpec_Algorithm_ECDSAP384SHA384 :: DnsKeySpec_Algorithm
 pattern DnsKeySpec_Algorithm_ECDSAP384SHA384 = DnsKeySpec_Algorithm "ECDSAP384SHA384"
 
@@ -359,11 +340,9 @@ newtype DnsKeySpec_KeyType = DnsKeySpec_KeyType {fromDnsKeySpec_KeyType :: Core.
       Core.FromJSONKey
     )
 
--- |
 pattern DnsKeySpec_KeyType_KEYSIGNING :: DnsKeySpec_KeyType
 pattern DnsKeySpec_KeyType_KEYSIGNING = DnsKeySpec_KeyType "KEY_SIGNING"
 
--- |
 pattern DnsKeySpec_KeyType_ZONESIGNING :: DnsKeySpec_KeyType
 pattern DnsKeySpec_KeyType_ZONESIGNING = DnsKeySpec_KeyType "ZONE_SIGNING"
 
@@ -386,11 +365,9 @@ newtype ManagedZone_Visibility = ManagedZone_Visibility {fromManagedZone_Visibil
       Core.FromJSONKey
     )
 
--- |
 pattern ManagedZone_Visibility_Public :: ManagedZone_Visibility
 pattern ManagedZone_Visibility_Public = ManagedZone_Visibility "PUBLIC"
 
--- |
 pattern ManagedZone_Visibility_Private :: ManagedZone_Visibility
 pattern ManagedZone_Visibility_Private = ManagedZone_Visibility "PRIVATE"
 
@@ -413,11 +390,9 @@ newtype ManagedZoneDnsSecConfig_NonExistence = ManagedZoneDnsSecConfig_NonExiste
       Core.FromJSONKey
     )
 
--- |
 pattern ManagedZoneDnsSecConfig_NonExistence_Nsec :: ManagedZoneDnsSecConfig_NonExistence
 pattern ManagedZoneDnsSecConfig_NonExistence_Nsec = ManagedZoneDnsSecConfig_NonExistence "NSEC"
 
--- |
 pattern ManagedZoneDnsSecConfig_NonExistence_NSEC3 :: ManagedZoneDnsSecConfig_NonExistence
 pattern ManagedZoneDnsSecConfig_NonExistence_NSEC3 = ManagedZoneDnsSecConfig_NonExistence "NSEC3"
 
@@ -499,11 +474,9 @@ newtype Operation_Status = Operation_Status {fromOperation_Status :: Core.Text}
       Core.FromJSONKey
     )
 
--- |
 pattern Operation_Status_Pending :: Operation_Status
 pattern Operation_Status_Pending = Operation_Status "PENDING"
 
--- |
 pattern Operation_Status_Done :: Operation_Status
 pattern Operation_Status_Done = Operation_Status "DONE"
 
@@ -553,7 +526,6 @@ newtype ResponsePolicyRule_Behavior = ResponsePolicyRule_Behavior {fromResponseP
       Core.FromJSONKey
     )
 
--- |
 pattern ResponsePolicyRule_Behavior_BEHAVIORUNSPECIFIED :: ResponsePolicyRule_Behavior
 pattern ResponsePolicyRule_Behavior_BEHAVIORUNSPECIFIED = ResponsePolicyRule_Behavior "BEHAVIOR_UNSPECIFIED"
 
@@ -580,7 +552,6 @@ newtype ChangesListSortBy = ChangesListSortBy {fromChangesListSortBy :: Core.Tex
       Core.FromJSONKey
     )
 
--- |
 pattern ChangesListSortBy_CHANGESEQUENCE :: ChangesListSortBy
 pattern ChangesListSortBy_CHANGESEQUENCE = ChangesListSortBy "CHANGE_SEQUENCE"
 
@@ -602,11 +573,9 @@ newtype ManagedZoneOperationsListSortBy = ManagedZoneOperationsListSortBy {fromM
       Core.FromJSONKey
     )
 
--- |
 pattern ManagedZoneOperationsListSortBy_STARTTIME :: ManagedZoneOperationsListSortBy
 pattern ManagedZoneOperationsListSortBy_STARTTIME = ManagedZoneOperationsListSortBy "START_TIME"
 
--- |
 pattern ManagedZoneOperationsListSortBy_ID :: ManagedZoneOperationsListSortBy
 pattern ManagedZoneOperationsListSortBy_ID = ManagedZoneOperationsListSortBy "ID"
 

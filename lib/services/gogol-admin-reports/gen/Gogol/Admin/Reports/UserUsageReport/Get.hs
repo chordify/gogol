@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.UserUsageReport.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Reports.UserUsageReport.Get
 where
 
 import Gogol.Admin.Reports.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reports.userUsageReport.get@ method which the
 -- 'ReportsUserUsageReportGet' request conforms to.
@@ -64,13 +62,9 @@ type ReportsUserUsageReportGetResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "parameters" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              UsageReports
+    Core.:> Core.Get '[Core.JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties and statistics for a set of users with the account. For more information, see the User Usage Report guide. For more information about the user report\'s parameters, see the Users Usage parameters reference guides.
 --
@@ -84,7 +78,7 @@ data ReportsUserUsageReportGet = ReportsUserUsageReportGet
     callback :: (Core.Maybe Core.Text),
     -- | The unique ID of the customer to retrieve data for.
     customerId :: (Core.Maybe Core.Text),
-    -- | Represents the date the usage occurred, based on GMT-7:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
+    -- | Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@.
     date :: Core.Text,
     -- | The @filters@ query string is a comma-separated list of an application\'s event parameters where the parameter\'s value is manipulated by a relational operator. The @filters@ query string includes the name of the application whose usage is returned in the report. The application values for the Users Usage Report include @accounts@, @docs@, and @gmail@. Filters are in the form @[application name]:parameter name[parameter value],...@. In this example, the @\<>@ \'not equal to\' operator is URL-encoded in the request\'s query string (%3C%3E): GET https:\/\/www.googleapis.com\/admin\/reports\/v1\/usage\/users\/all\/dates\/2013-03-03 ?parameters=accounts:last/login/time &filters=accounts:last/login/time%3C%3E2010-10-28T10:26:35.000Z The relational operators include: - @==@ - \'equal to\'. - @\<>@ - \'not equal to\'. It is URL-encoded (%3C%3E). - @\<@ - \'less than\'. It is URL-encoded (%3C). - @\<=@ - \'less than or equal to\'. It is URL-encoded (%3C=). - @>@ - \'greater than\'. It is URL-encoded (%3E). - @>=@ -
     -- \'greater than or equal to\'. It is URL-encoded (%3E=).
@@ -110,7 +104,7 @@ data ReportsUserUsageReportGet = ReportsUserUsageReportGet
 
 -- | Creates a value of 'ReportsUserUsageReportGet' with the minimum fields required to make a request.
 newReportsUserUsageReportGet ::
-  -- |  Represents the date the usage occurred, based on GMT-7:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
+  -- |  Represents the date the usage occurred, based on UTC-8:00 (Pacific Standard Time). The timestamp is in the <https://en.wikipedia.org/wiki/ISO_8601 ISO 8601 format>, @yyyy-mm-dd@. See 'date'.
   Core.Text ->
   -- |  Represents the profile ID or the user email for which the data should be filtered. Can be @all@ for all information, or @userKey@ for a user\'s unique Google Workspace profile ID or their primary email address. Must not be a deleted user. For a deleted user, call @users.list@ in Directory API with @showDeleted=true@, then use the returned @ID@ as the @userKey@. See 'userKey'.
   Core.Text ->
@@ -159,7 +153,5 @@ instance Core.GoogleRequest ReportsUserUsageReportGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ReportsUserUsageReportGetResource
-          )
+          (Core.Proxy :: Core.Proxy ReportsUserUsageReportGetResource)
           Core.mempty

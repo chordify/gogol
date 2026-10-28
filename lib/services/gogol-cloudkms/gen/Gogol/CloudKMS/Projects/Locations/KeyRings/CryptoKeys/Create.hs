@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.CryptoKeys.Create
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.cryptoKeys.create@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate' request conforms to.
@@ -52,9 +50,7 @@ type CloudKMSProjectsLocationsKeyRingsCryptoKeysCreateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "cryptoKeyId" Core.Text
-    Core.:> Core.QueryParam
-              "skipInitialVersionCreation"
-              Core.Bool
+    Core.:> Core.QueryParam "skipInitialVersionCreation" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -95,7 +91,8 @@ newCloudKMSProjectsLocationsKeyRingsCryptoKeysCreate ::
   CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate
 newCloudKMSProjectsLocationsKeyRingsCryptoKeysCreate parent payload =
   CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       cryptoKeyId = Core.Nothing,
@@ -111,32 +108,29 @@ instance
     CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate
   where
   type
-    Rs
-      CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate =
+    Rs CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate =
       CryptoKey
   type
-    Scopes
-      CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate =
+    Scopes CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        cryptoKeyId
-        skipInitialVersionCreation
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsKeyRingsCryptoKeysCreateResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsKeyRingsCryptoKeysCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      cryptoKeyId
+      skipInitialVersionCreation
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                CloudKMSProjectsLocationsKeyRingsCryptoKeysCreateResource
+          )
+          Core.mempty

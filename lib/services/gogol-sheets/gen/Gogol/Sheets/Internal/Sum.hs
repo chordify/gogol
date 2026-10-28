@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Sheets.Internal.Sum
@@ -224,6 +222,7 @@ module Gogol.Sheets.Internal.Sum
         BooleanCondition_Type_Boolean,
         BooleanCondition_Type_TEXTNOTEQ,
         BooleanCondition_Type_DATENOTEQ,
+        BooleanCondition_Type_FILTEREXPRESSION,
         ..
       ),
 
@@ -427,6 +426,7 @@ module Gogol.Sheets.Internal.Sum
         DataExecutionStatus_ErrorCode_OBJECTNOTFOUND,
         DataExecutionStatus_ErrorCode_OBJECTINERRORSTATE,
         DataExecutionStatus_ErrorCode_OBJECTSPECINVALID,
+        DataExecutionStatus_ErrorCode_DATAEXECUTIONCANCELLED,
         ..
       ),
 
@@ -435,6 +435,7 @@ module Gogol.Sheets.Internal.Sum
       ( DataExecutionStatus_State_DATAEXECUTIONSTATEUNSPECIFIED,
         DataExecutionStatus_State_NOTSTARTED,
         DataExecutionStatus_State_Running,
+        DataExecutionStatus_State_Cancelling,
         DataExecutionStatus_State_Succeeded,
         DataExecutionStatus_State_Failed,
         ..
@@ -736,6 +737,7 @@ module Gogol.Sheets.Internal.Sum
         PivotValue_SummarizeFunction_Var,
         PivotValue_SummarizeFunction_Varp,
         PivotValue_SummarizeFunction_Custom,
+        PivotValue_SummarizeFunction_None,
         ..
       ),
 
@@ -750,6 +752,25 @@ module Gogol.Sheets.Internal.Sum
         PointStyle_Shape_Star,
         PointStyle_Shape_Triangle,
         PointStyle_Shape_XMARK,
+        ..
+      ),
+
+    -- * RefreshCancellationStatus_ErrorCode
+    RefreshCancellationStatus_ErrorCode
+      ( RefreshCancellationStatus_ErrorCode_REFRESHCANCELLATIONERRORCODEUNSPECIFIED,
+        RefreshCancellationStatus_ErrorCode_EXECUTIONNOTFOUND,
+        RefreshCancellationStatus_ErrorCode_CANCELPERMISSIONDENIED,
+        RefreshCancellationStatus_ErrorCode_QUERYEXECUTIONCOMPLETED,
+        RefreshCancellationStatus_ErrorCode_CONCURRENTCANCELLATION,
+        RefreshCancellationStatus_ErrorCode_CANCELOTHERERROR,
+        ..
+      ),
+
+    -- * RefreshCancellationStatus_State
+    RefreshCancellationStatus_State
+      ( RefreshCancellationStatus_State_REFRESHCANCELLATIONSTATEUNSPECIFIED,
+        RefreshCancellationStatus_State_CANCELSUCCEEDED,
+        RefreshCancellationStatus_State_CANCELFAILED,
         ..
       ),
 
@@ -969,7 +990,7 @@ module Gogol.Sheets.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -1438,7 +1459,7 @@ newtype BatchGetValuesByDataFilterRequest_ValueRenderOption = BatchGetValuesByDa
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_FORMATTEDVALUE :: BatchGetValuesByDataFilterRequest_ValueRenderOption
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_FORMATTEDVALUE = BatchGetValuesByDataFilterRequest_ValueRenderOption "FORMATTED_VALUE"
 
@@ -1446,7 +1467,7 @@ pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_FORMATTEDVALUE = Bat
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_UNFORMATTEDVALUE :: BatchGetValuesByDataFilterRequest_ValueRenderOption
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_UNFORMATTEDVALUE = BatchGetValuesByDataFilterRequest_ValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_Formula :: BatchGetValuesByDataFilterRequest_ValueRenderOption
 pattern BatchGetValuesByDataFilterRequest_ValueRenderOption_Formula = BatchGetValuesByDataFilterRequest_ValueRenderOption "FORMULA"
 
@@ -1497,7 +1518,7 @@ newtype BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption = BatchUp
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_FORMATTEDVALUE :: BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_FORMATTEDVALUE = BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption "FORMATTED_VALUE"
 
@@ -1505,7 +1526,7 @@ pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_FORMATTED
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_UNFORMATTEDVALUE :: BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_UNFORMATTEDVALUE = BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_Formula :: BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption_Formula = BatchUpdateValuesByDataFilterRequest_ResponseValueRenderOption "FORMULA"
 
@@ -1588,7 +1609,7 @@ newtype BatchUpdateValuesRequest_ResponseValueRenderOption = BatchUpdateValuesRe
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_FORMATTEDVALUE :: BatchUpdateValuesRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_FORMATTEDVALUE = BatchUpdateValuesRequest_ResponseValueRenderOption "FORMATTED_VALUE"
 
@@ -1596,7 +1617,7 @@ pattern BatchUpdateValuesRequest_ResponseValueRenderOption_FORMATTEDVALUE = Batc
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_UNFORMATTEDVALUE :: BatchUpdateValuesRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_UNFORMATTEDVALUE = BatchUpdateValuesRequest_ResponseValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_Formula :: BatchUpdateValuesRequest_ResponseValueRenderOption
 pattern BatchUpdateValuesRequest_ResponseValueRenderOption_Formula = BatchUpdateValuesRequest_ResponseValueRenderOption "FORMULA"
 
@@ -1780,6 +1801,10 @@ pattern BooleanCondition_Type_TEXTNOTEQ = BooleanCondition_Type "TEXT_NOT_EQ"
 pattern BooleanCondition_Type_DATENOTEQ :: BooleanCondition_Type
 pattern BooleanCondition_Type_DATENOTEQ = BooleanCondition_Type "DATE_NOT_EQ"
 
+-- | The cell\'s value must follow the pattern specified. Requires a single ConditionValue.
+pattern BooleanCondition_Type_FILTEREXPRESSION :: BooleanCondition_Type
+pattern BooleanCondition_Type_FILTEREXPRESSION = BooleanCondition_Type "FILTER_EXPRESSION"
+
 {-# COMPLETE
   BooleanCondition_Type_CONDITIONTYPEUNSPECIFIED,
   BooleanCondition_Type_NUMBERGREATER,
@@ -1813,6 +1838,7 @@ pattern BooleanCondition_Type_DATENOTEQ = BooleanCondition_Type "DATE_NOT_EQ"
   BooleanCondition_Type_Boolean,
   BooleanCondition_Type_TEXTNOTEQ,
   BooleanCondition_Type_DATENOTEQ,
+  BooleanCondition_Type_FILTEREXPRESSION,
   BooleanCondition_Type
   #-}
 
@@ -2672,6 +2698,10 @@ pattern DataExecutionStatus_ErrorCode_OBJECTINERRORSTATE = DataExecutionStatus_E
 pattern DataExecutionStatus_ErrorCode_OBJECTSPECINVALID :: DataExecutionStatus_ErrorCode
 pattern DataExecutionStatus_ErrorCode_OBJECTSPECINVALID = DataExecutionStatus_ErrorCode "OBJECT_SPEC_INVALID"
 
+-- | The data execution has been cancelled.
+pattern DataExecutionStatus_ErrorCode_DATAEXECUTIONCANCELLED :: DataExecutionStatus_ErrorCode
+pattern DataExecutionStatus_ErrorCode_DATAEXECUTIONCANCELLED = DataExecutionStatus_ErrorCode "DATA_EXECUTION_CANCELLED"
+
 {-# COMPLETE
   DataExecutionStatus_ErrorCode_DATAEXECUTIONERRORCODEUNSPECIFIED,
   DataExecutionStatus_ErrorCode_TIMEDOUT,
@@ -2692,6 +2722,7 @@ pattern DataExecutionStatus_ErrorCode_OBJECTSPECINVALID = DataExecutionStatus_Er
   DataExecutionStatus_ErrorCode_OBJECTNOTFOUND,
   DataExecutionStatus_ErrorCode_OBJECTINERRORSTATE,
   DataExecutionStatus_ErrorCode_OBJECTSPECINVALID,
+  DataExecutionStatus_ErrorCode_DATAEXECUTIONCANCELLED,
   DataExecutionStatus_ErrorCode
   #-}
 
@@ -2720,6 +2751,10 @@ pattern DataExecutionStatus_State_NOTSTARTED = DataExecutionStatus_State "NOT_ST
 pattern DataExecutionStatus_State_Running :: DataExecutionStatus_State
 pattern DataExecutionStatus_State_Running = DataExecutionStatus_State "RUNNING"
 
+-- | The data execution is currently being cancelled.
+pattern DataExecutionStatus_State_Cancelling :: DataExecutionStatus_State
+pattern DataExecutionStatus_State_Cancelling = DataExecutionStatus_State "CANCELLING"
+
 -- | The data execution has completed successfully.
 pattern DataExecutionStatus_State_Succeeded :: DataExecutionStatus_State
 pattern DataExecutionStatus_State_Succeeded = DataExecutionStatus_State "SUCCEEDED"
@@ -2732,6 +2767,7 @@ pattern DataExecutionStatus_State_Failed = DataExecutionStatus_State "FAILED"
   DataExecutionStatus_State_DATAEXECUTIONSTATEUNSPECIFIED,
   DataExecutionStatus_State_NOTSTARTED,
   DataExecutionStatus_State_Running,
+  DataExecutionStatus_State_Cancelling,
   DataExecutionStatus_State_Succeeded,
   DataExecutionStatus_State_Failed,
   DataExecutionStatus_State
@@ -3260,7 +3296,7 @@ pattern DeveloperMetadataLookup_LocationType_Spreadsheet = DeveloperMetadataLook
   DeveloperMetadataLookup_LocationType
   #-}
 
--- | Limits the selected developer metadata to that which has a matching DeveloperMetadata.visibility. If left unspecified, all developer metadata visibile to the requesting project is considered.
+-- | Limits the selected developer metadata to that which has a matching DeveloperMetadata.visibility. If left unspecified, all developer metadata visible to the requesting project is considered.
 newtype DeveloperMetadataLookup_Visibility = DeveloperMetadataLookup_Visibility {fromDeveloperMetadataLookup_Visibility :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -3988,6 +4024,10 @@ pattern PivotValue_SummarizeFunction_Varp = PivotValue_SummarizeFunction "VARP"
 pattern PivotValue_SummarizeFunction_Custom :: PivotValue_SummarizeFunction
 pattern PivotValue_SummarizeFunction_Custom = PivotValue_SummarizeFunction "CUSTOM"
 
+-- | Indicates that the value is already summarized, and the summarization function is not explicitly specified. Used for Looker data source pivot tables where the value is already summarized.
+pattern PivotValue_SummarizeFunction_None :: PivotValue_SummarizeFunction
+pattern PivotValue_SummarizeFunction_None = PivotValue_SummarizeFunction "NONE"
+
 {-# COMPLETE
   PivotValue_SummarizeFunction_PIVOTSTANDARDVALUEFUNCTIONUNSPECIFIED,
   PivotValue_SummarizeFunction_Sum,
@@ -4004,6 +4044,7 @@ pattern PivotValue_SummarizeFunction_Custom = PivotValue_SummarizeFunction "CUST
   PivotValue_SummarizeFunction_Var,
   PivotValue_SummarizeFunction_Varp,
   PivotValue_SummarizeFunction_Custom,
+  PivotValue_SummarizeFunction_None,
   PivotValue_SummarizeFunction
   #-}
 
@@ -4067,6 +4108,85 @@ pattern PointStyle_Shape_XMARK = PointStyle_Shape "X_MARK"
   PointStyle_Shape_Triangle,
   PointStyle_Shape_XMARK,
   PointStyle_Shape
+  #-}
+
+-- | The error code.
+newtype RefreshCancellationStatus_ErrorCode = RefreshCancellationStatus_ErrorCode {fromRefreshCancellationStatus_ErrorCode :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, do not use.
+pattern RefreshCancellationStatus_ErrorCode_REFRESHCANCELLATIONERRORCODEUNSPECIFIED :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_REFRESHCANCELLATIONERRORCODEUNSPECIFIED = RefreshCancellationStatus_ErrorCode "REFRESH_CANCELLATION_ERROR_CODE_UNSPECIFIED"
+
+-- | Execution to be cancelled not found in the query engine or in Sheets.
+pattern RefreshCancellationStatus_ErrorCode_EXECUTIONNOTFOUND :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_EXECUTIONNOTFOUND = RefreshCancellationStatus_ErrorCode "EXECUTION_NOT_FOUND"
+
+-- | The user does not have permission to cancel the query.
+pattern RefreshCancellationStatus_ErrorCode_CANCELPERMISSIONDENIED :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_CANCELPERMISSIONDENIED = RefreshCancellationStatus_ErrorCode "CANCEL_PERMISSION_DENIED"
+
+-- | The query execution has already completed and thus could not be cancelled.
+pattern RefreshCancellationStatus_ErrorCode_QUERYEXECUTIONCOMPLETED :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_QUERYEXECUTIONCOMPLETED = RefreshCancellationStatus_ErrorCode "QUERY_EXECUTION_COMPLETED"
+
+-- | There is already another cancellation in process.
+pattern RefreshCancellationStatus_ErrorCode_CONCURRENTCANCELLATION :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_CONCURRENTCANCELLATION = RefreshCancellationStatus_ErrorCode "CONCURRENT_CANCELLATION"
+
+-- | All other errors.
+pattern RefreshCancellationStatus_ErrorCode_CANCELOTHERERROR :: RefreshCancellationStatus_ErrorCode
+pattern RefreshCancellationStatus_ErrorCode_CANCELOTHERERROR = RefreshCancellationStatus_ErrorCode "CANCEL_OTHER_ERROR"
+
+{-# COMPLETE
+  RefreshCancellationStatus_ErrorCode_REFRESHCANCELLATIONERRORCODEUNSPECIFIED,
+  RefreshCancellationStatus_ErrorCode_EXECUTIONNOTFOUND,
+  RefreshCancellationStatus_ErrorCode_CANCELPERMISSIONDENIED,
+  RefreshCancellationStatus_ErrorCode_QUERYEXECUTIONCOMPLETED,
+  RefreshCancellationStatus_ErrorCode_CONCURRENTCANCELLATION,
+  RefreshCancellationStatus_ErrorCode_CANCELOTHERERROR,
+  RefreshCancellationStatus_ErrorCode
+  #-}
+
+-- | The state of a call to cancel a refresh in Sheets.
+newtype RefreshCancellationStatus_State = RefreshCancellationStatus_State {fromRefreshCancellationStatus_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value, do not use.
+pattern RefreshCancellationStatus_State_REFRESHCANCELLATIONSTATEUNSPECIFIED :: RefreshCancellationStatus_State
+pattern RefreshCancellationStatus_State_REFRESHCANCELLATIONSTATEUNSPECIFIED = RefreshCancellationStatus_State "REFRESH_CANCELLATION_STATE_UNSPECIFIED"
+
+-- | The API call to Sheets to cancel a refresh has succeeded. This does not mean that the cancel happened successfully, but that the call has been made successfully.
+pattern RefreshCancellationStatus_State_CANCELSUCCEEDED :: RefreshCancellationStatus_State
+pattern RefreshCancellationStatus_State_CANCELSUCCEEDED = RefreshCancellationStatus_State "CANCEL_SUCCEEDED"
+
+-- | The API call to Sheets to cancel a refresh has failed.
+pattern RefreshCancellationStatus_State_CANCELFAILED :: RefreshCancellationStatus_State
+pattern RefreshCancellationStatus_State_CANCELFAILED = RefreshCancellationStatus_State "CANCEL_FAILED"
+
+{-# COMPLETE
+  RefreshCancellationStatus_State_REFRESHCANCELLATIONSTATEUNSPECIFIED,
+  RefreshCancellationStatus_State_CANCELSUCCEEDED,
+  RefreshCancellationStatus_State_CANCELFAILED,
+  RefreshCancellationStatus_State
   #-}
 
 -- | The aggregation type for key and baseline chart data in scorecard chart. This field is not supported for data source charts. Use the ChartData.aggregateType field of the key/value/data or baseline/value/data instead for data source charts. This field is optional.
@@ -4615,7 +4735,7 @@ newtype SpreadsheetsValuesAppendResponseValueRenderOption = SpreadsheetsValuesAp
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_FORMATTEDVALUE :: SpreadsheetsValuesAppendResponseValueRenderOption
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_FORMATTEDVALUE = SpreadsheetsValuesAppendResponseValueRenderOption "FORMATTED_VALUE"
 
@@ -4623,7 +4743,7 @@ pattern SpreadsheetsValuesAppendResponseValueRenderOption_FORMATTEDVALUE = Sprea
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_UNFORMATTEDVALUE :: SpreadsheetsValuesAppendResponseValueRenderOption
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_UNFORMATTEDVALUE = SpreadsheetsValuesAppendResponseValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_Formula :: SpreadsheetsValuesAppendResponseValueRenderOption
 pattern SpreadsheetsValuesAppendResponseValueRenderOption_Formula = SpreadsheetsValuesAppendResponseValueRenderOption "FORMULA"
 
@@ -4738,7 +4858,7 @@ newtype SpreadsheetsValuesBatchGetValueRenderOption = SpreadsheetsValuesBatchGet
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern SpreadsheetsValuesBatchGetValueRenderOption_FORMATTEDVALUE :: SpreadsheetsValuesBatchGetValueRenderOption
 pattern SpreadsheetsValuesBatchGetValueRenderOption_FORMATTEDVALUE = SpreadsheetsValuesBatchGetValueRenderOption "FORMATTED_VALUE"
 
@@ -4746,7 +4866,7 @@ pattern SpreadsheetsValuesBatchGetValueRenderOption_FORMATTEDVALUE = Spreadsheet
 pattern SpreadsheetsValuesBatchGetValueRenderOption_UNFORMATTEDVALUE :: SpreadsheetsValuesBatchGetValueRenderOption
 pattern SpreadsheetsValuesBatchGetValueRenderOption_UNFORMATTEDVALUE = SpreadsheetsValuesBatchGetValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern SpreadsheetsValuesBatchGetValueRenderOption_Formula :: SpreadsheetsValuesBatchGetValueRenderOption
 pattern SpreadsheetsValuesBatchGetValueRenderOption_Formula = SpreadsheetsValuesBatchGetValueRenderOption "FORMULA"
 
@@ -4829,7 +4949,7 @@ newtype SpreadsheetsValuesGetValueRenderOption = SpreadsheetsValuesGetValueRende
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern SpreadsheetsValuesGetValueRenderOption_FORMATTEDVALUE :: SpreadsheetsValuesGetValueRenderOption
 pattern SpreadsheetsValuesGetValueRenderOption_FORMATTEDVALUE = SpreadsheetsValuesGetValueRenderOption "FORMATTED_VALUE"
 
@@ -4837,7 +4957,7 @@ pattern SpreadsheetsValuesGetValueRenderOption_FORMATTEDVALUE = SpreadsheetsValu
 pattern SpreadsheetsValuesGetValueRenderOption_UNFORMATTEDVALUE :: SpreadsheetsValuesGetValueRenderOption
 pattern SpreadsheetsValuesGetValueRenderOption_UNFORMATTEDVALUE = SpreadsheetsValuesGetValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern SpreadsheetsValuesGetValueRenderOption_Formula :: SpreadsheetsValuesGetValueRenderOption
 pattern SpreadsheetsValuesGetValueRenderOption_Formula = SpreadsheetsValuesGetValueRenderOption "FORMULA"
 
@@ -4888,7 +5008,7 @@ newtype SpreadsheetsValuesUpdateResponseValueRenderOption = SpreadsheetsValuesUp
       Core.FromJSONKey
     )
 
--- | Values will be calculated & formatted in the reply according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
+-- | Values will be calculated & formatted in the response according to the cell\'s formatting. Formatting is based on the spreadsheet\'s locale, not the requesting user\'s locale. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then @A2@ would return @\"$1.23\"@.
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_FORMATTEDVALUE :: SpreadsheetsValuesUpdateResponseValueRenderOption
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_FORMATTEDVALUE = SpreadsheetsValuesUpdateResponseValueRenderOption "FORMATTED_VALUE"
 
@@ -4896,7 +5016,7 @@ pattern SpreadsheetsValuesUpdateResponseValueRenderOption_FORMATTEDVALUE = Sprea
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_UNFORMATTEDVALUE :: SpreadsheetsValuesUpdateResponseValueRenderOption
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_UNFORMATTEDVALUE = SpreadsheetsValuesUpdateResponseValueRenderOption "UNFORMATTED_VALUE"
 
--- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@.
+-- | Values will not be calculated. The reply will include the formulas. For example, if @A1@ is @1.23@ and @A2@ is @=A1@ and formatted as currency, then A2 would return @\"=A1\"@. Sheets treats date and time values as decimal values. This lets you perform arithmetic on them in formulas. For more information on interpreting date and time values, see <https://developers.google.com/sheets/api/guides/formats#about_date_time_values About date & time values>.
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_Formula :: SpreadsheetsValuesUpdateResponseValueRenderOption
 pattern SpreadsheetsValuesUpdateResponseValueRenderOption_Formula = SpreadsheetsValuesUpdateResponseValueRenderOption "FORMULA"
 

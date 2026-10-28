@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Run.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Run.Types
@@ -40,6 +38,30 @@ module Gogol.Run.Types
     -- ** GoogleCloudRunV2BinaryAuthorization
     GoogleCloudRunV2BinaryAuthorization (..),
     newGoogleCloudRunV2BinaryAuthorization,
+
+    -- ** GoogleCloudRunV2BuildConfig
+    GoogleCloudRunV2BuildConfig (..),
+    newGoogleCloudRunV2BuildConfig,
+
+    -- ** GoogleCloudRunV2BuildConfig_EnvironmentVariables
+    GoogleCloudRunV2BuildConfig_EnvironmentVariables (..),
+    newGoogleCloudRunV2BuildConfig_EnvironmentVariables,
+
+    -- ** GoogleCloudRunV2BuildInfo
+    GoogleCloudRunV2BuildInfo (..),
+    newGoogleCloudRunV2BuildInfo,
+
+    -- ** GoogleCloudRunV2BuildpacksBuild
+    GoogleCloudRunV2BuildpacksBuild (..),
+    newGoogleCloudRunV2BuildpacksBuild,
+
+    -- ** GoogleCloudRunV2BuildpacksBuild_EnvironmentVariables
+    GoogleCloudRunV2BuildpacksBuild_EnvironmentVariables (..),
+    newGoogleCloudRunV2BuildpacksBuild_EnvironmentVariables,
+
+    -- ** GoogleCloudRunV2CancelExecutionRequest
+    GoogleCloudRunV2CancelExecutionRequest (..),
+    newGoogleCloudRunV2CancelExecutionRequest,
 
     -- ** GoogleCloudRunV2CloudSqlInstance
     GoogleCloudRunV2CloudSqlInstance (..),
@@ -68,9 +90,24 @@ module Gogol.Run.Types
     GoogleCloudRunV2Container (..),
     newGoogleCloudRunV2Container,
 
+    -- ** GoogleCloudRunV2ContainerOverride
+    GoogleCloudRunV2ContainerOverride (..),
+    newGoogleCloudRunV2ContainerOverride,
+
     -- ** GoogleCloudRunV2ContainerPort
     GoogleCloudRunV2ContainerPort (..),
     newGoogleCloudRunV2ContainerPort,
+
+    -- ** GoogleCloudRunV2DockerBuild
+    GoogleCloudRunV2DockerBuild (..),
+    newGoogleCloudRunV2DockerBuild,
+
+    -- ** GoogleCloudRunV2EmptyDirVolumeSource
+    GoogleCloudRunV2EmptyDirVolumeSource (..),
+    newGoogleCloudRunV2EmptyDirVolumeSource,
+
+    -- ** GoogleCloudRunV2EmptyDirVolumeSource_Medium
+    GoogleCloudRunV2EmptyDirVolumeSource_Medium (..),
 
     -- ** GoogleCloudRunV2EnvVar
     GoogleCloudRunV2EnvVar (..),
@@ -99,6 +136,9 @@ module Gogol.Run.Types
     GoogleCloudRunV2ExecutionReference (..),
     newGoogleCloudRunV2ExecutionReference,
 
+    -- ** GoogleCloudRunV2ExecutionReference_CompletionStatus
+    GoogleCloudRunV2ExecutionReference_CompletionStatus (..),
+
     -- ** GoogleCloudRunV2ExecutionTemplate
     GoogleCloudRunV2ExecutionTemplate (..),
     newGoogleCloudRunV2ExecutionTemplate,
@@ -111,6 +151,25 @@ module Gogol.Run.Types
     GoogleCloudRunV2ExecutionTemplate_Labels (..),
     newGoogleCloudRunV2ExecutionTemplate_Labels,
 
+    -- ** GoogleCloudRunV2ExportImageRequest
+    GoogleCloudRunV2ExportImageRequest (..),
+    newGoogleCloudRunV2ExportImageRequest,
+
+    -- ** GoogleCloudRunV2ExportImageResponse
+    GoogleCloudRunV2ExportImageResponse (..),
+    newGoogleCloudRunV2ExportImageResponse,
+
+    -- ** GoogleCloudRunV2ExportStatusResponse
+    GoogleCloudRunV2ExportStatusResponse (..),
+    newGoogleCloudRunV2ExportStatusResponse,
+
+    -- ** GoogleCloudRunV2ExportStatusResponse_OperationState
+    GoogleCloudRunV2ExportStatusResponse_OperationState (..),
+
+    -- ** GoogleCloudRunV2GCSVolumeSource
+    GoogleCloudRunV2GCSVolumeSource (..),
+    newGoogleCloudRunV2GCSVolumeSource,
+
     -- ** GoogleCloudRunV2GRPCAction
     GoogleCloudRunV2GRPCAction (..),
     newGoogleCloudRunV2GRPCAction,
@@ -122,6 +181,27 @@ module Gogol.Run.Types
     -- ** GoogleCloudRunV2HTTPHeader
     GoogleCloudRunV2HTTPHeader (..),
     newGoogleCloudRunV2HTTPHeader,
+
+    -- ** GoogleCloudRunV2ImageExportStatus
+    GoogleCloudRunV2ImageExportStatus (..),
+    newGoogleCloudRunV2ImageExportStatus,
+
+    -- ** GoogleCloudRunV2ImageExportStatus_ExportJobState
+    GoogleCloudRunV2ImageExportStatus_ExportJobState (..),
+
+    -- ** GoogleCloudRunV2InstanceSplit
+    GoogleCloudRunV2InstanceSplit (..),
+    newGoogleCloudRunV2InstanceSplit,
+
+    -- ** GoogleCloudRunV2InstanceSplit_Type
+    GoogleCloudRunV2InstanceSplit_Type (..),
+
+    -- ** GoogleCloudRunV2InstanceSplitStatus
+    GoogleCloudRunV2InstanceSplitStatus (..),
+    newGoogleCloudRunV2InstanceSplitStatus,
+
+    -- ** GoogleCloudRunV2InstanceSplitStatus_Type
+    GoogleCloudRunV2InstanceSplitStatus_Type (..),
 
     -- ** GoogleCloudRunV2Job
     GoogleCloudRunV2Job (..),
@@ -157,6 +237,30 @@ module Gogol.Run.Types
     -- ** GoogleCloudRunV2ListTasksResponse
     GoogleCloudRunV2ListTasksResponse (..),
     newGoogleCloudRunV2ListTasksResponse,
+
+    -- ** GoogleCloudRunV2ListWorkerPoolsResponse
+    GoogleCloudRunV2ListWorkerPoolsResponse (..),
+    newGoogleCloudRunV2ListWorkerPoolsResponse,
+
+    -- ** GoogleCloudRunV2Metadata
+    GoogleCloudRunV2Metadata (..),
+    newGoogleCloudRunV2Metadata,
+
+    -- ** GoogleCloudRunV2NFSVolumeSource
+    GoogleCloudRunV2NFSVolumeSource (..),
+    newGoogleCloudRunV2NFSVolumeSource,
+
+    -- ** GoogleCloudRunV2NetworkInterface
+    GoogleCloudRunV2NetworkInterface (..),
+    newGoogleCloudRunV2NetworkInterface,
+
+    -- ** GoogleCloudRunV2NodeSelector
+    GoogleCloudRunV2NodeSelector (..),
+    newGoogleCloudRunV2NodeSelector,
+
+    -- ** GoogleCloudRunV2Overrides
+    GoogleCloudRunV2Overrides (..),
+    newGoogleCloudRunV2Overrides,
 
     -- ** GoogleCloudRunV2Probe
     GoogleCloudRunV2Probe (..),
@@ -195,6 +299,10 @@ module Gogol.Run.Types
     GoogleCloudRunV2RevisionScaling (..),
     newGoogleCloudRunV2RevisionScaling,
 
+    -- ** GoogleCloudRunV2RevisionScalingStatus
+    GoogleCloudRunV2RevisionScalingStatus (..),
+    newGoogleCloudRunV2RevisionScalingStatus,
+
     -- ** GoogleCloudRunV2RevisionTemplate
     GoogleCloudRunV2RevisionTemplate (..),
     newGoogleCloudRunV2RevisionTemplate,
@@ -202,6 +310,9 @@ module Gogol.Run.Types
     -- ** GoogleCloudRunV2RevisionTemplate_Annotations
     GoogleCloudRunV2RevisionTemplate_Annotations (..),
     newGoogleCloudRunV2RevisionTemplate_Annotations,
+
+    -- ** GoogleCloudRunV2RevisionTemplate_EncryptionKeyRevocationAction
+    GoogleCloudRunV2RevisionTemplate_EncryptionKeyRevocationAction (..),
 
     -- ** GoogleCloudRunV2RevisionTemplate_ExecutionEnvironment
     GoogleCloudRunV2RevisionTemplate_ExecutionEnvironment (..),
@@ -239,6 +350,29 @@ module Gogol.Run.Types
 
     -- ** GoogleCloudRunV2Service_LaunchStage
     GoogleCloudRunV2Service_LaunchStage (..),
+
+    -- ** GoogleCloudRunV2ServiceMesh
+    GoogleCloudRunV2ServiceMesh (..),
+    newGoogleCloudRunV2ServiceMesh,
+
+    -- ** GoogleCloudRunV2ServiceScaling
+    GoogleCloudRunV2ServiceScaling (..),
+    newGoogleCloudRunV2ServiceScaling,
+
+    -- ** GoogleCloudRunV2ServiceScaling_ScalingMode
+    GoogleCloudRunV2ServiceScaling_ScalingMode (..),
+
+    -- ** GoogleCloudRunV2StorageSource
+    GoogleCloudRunV2StorageSource (..),
+    newGoogleCloudRunV2StorageSource,
+
+    -- ** GoogleCloudRunV2SubmitBuildRequest
+    GoogleCloudRunV2SubmitBuildRequest (..),
+    newGoogleCloudRunV2SubmitBuildRequest,
+
+    -- ** GoogleCloudRunV2SubmitBuildResponse
+    GoogleCloudRunV2SubmitBuildResponse (..),
+    newGoogleCloudRunV2SubmitBuildResponse,
 
     -- ** GoogleCloudRunV2TCPSocketAction
     GoogleCloudRunV2TCPSocketAction (..),
@@ -302,6 +436,284 @@ module Gogol.Run.Types
 
     -- ** GoogleCloudRunV2VpcAccess_Egress
     GoogleCloudRunV2VpcAccess_Egress (..),
+
+    -- ** GoogleCloudRunV2WorkerPool
+    GoogleCloudRunV2WorkerPool (..),
+    newGoogleCloudRunV2WorkerPool,
+
+    -- ** GoogleCloudRunV2WorkerPool_Annotations
+    GoogleCloudRunV2WorkerPool_Annotations (..),
+    newGoogleCloudRunV2WorkerPool_Annotations,
+
+    -- ** GoogleCloudRunV2WorkerPool_Labels
+    GoogleCloudRunV2WorkerPool_Labels (..),
+    newGoogleCloudRunV2WorkerPool_Labels,
+
+    -- ** GoogleCloudRunV2WorkerPool_LaunchStage
+    GoogleCloudRunV2WorkerPool_LaunchStage (..),
+
+    -- ** GoogleCloudRunV2WorkerPoolRevisionTemplate
+    GoogleCloudRunV2WorkerPoolRevisionTemplate (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate,
+
+    -- ** GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate_Annotations,
+
+    -- ** GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_EncryptionKeyRevocationAction (..),
+
+    -- ** GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels
+    GoogleCloudRunV2WorkerPoolRevisionTemplate_Labels (..),
+    newGoogleCloudRunV2WorkerPoolRevisionTemplate_Labels,
+
+    -- ** GoogleCloudRunV2WorkerPoolScaling
+    GoogleCloudRunV2WorkerPoolScaling (..),
+    newGoogleCloudRunV2WorkerPoolScaling,
+
+    -- ** GoogleCloudRunV2WorkerPoolScaling_ScalingMode
+    GoogleCloudRunV2WorkerPoolScaling_ScalingMode (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1ApprovalConfig
+    GoogleDevtoolsCloudbuildV1ApprovalConfig (..),
+    newGoogleDevtoolsCloudbuildV1ApprovalConfig,
+
+    -- ** GoogleDevtoolsCloudbuildV1ApprovalResult
+    GoogleDevtoolsCloudbuildV1ApprovalResult (..),
+    newGoogleDevtoolsCloudbuildV1ApprovalResult,
+
+    -- ** GoogleDevtoolsCloudbuildV1ApprovalResult_Decision
+    GoogleDevtoolsCloudbuildV1ApprovalResult_Decision (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1ArtifactObjects
+    GoogleDevtoolsCloudbuildV1ArtifactObjects (..),
+    newGoogleDevtoolsCloudbuildV1ArtifactObjects,
+
+    -- ** GoogleDevtoolsCloudbuildV1Artifacts
+    GoogleDevtoolsCloudbuildV1Artifacts (..),
+    newGoogleDevtoolsCloudbuildV1Artifacts,
+
+    -- ** GoogleDevtoolsCloudbuildV1Build
+    GoogleDevtoolsCloudbuildV1Build (..),
+    newGoogleDevtoolsCloudbuildV1Build,
+
+    -- ** GoogleDevtoolsCloudbuildV1Build_Status
+    GoogleDevtoolsCloudbuildV1Build_Status (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1Build_Substitutions
+    GoogleDevtoolsCloudbuildV1Build_Substitutions (..),
+    newGoogleDevtoolsCloudbuildV1Build_Substitutions,
+
+    -- ** GoogleDevtoolsCloudbuildV1Build_Timing
+    GoogleDevtoolsCloudbuildV1Build_Timing (..),
+    newGoogleDevtoolsCloudbuildV1Build_Timing,
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildApproval
+    GoogleDevtoolsCloudbuildV1BuildApproval (..),
+    newGoogleDevtoolsCloudbuildV1BuildApproval,
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildApproval_State
+    GoogleDevtoolsCloudbuildV1BuildApproval_State (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOperationMetadata
+    GoogleDevtoolsCloudbuildV1BuildOperationMetadata (..),
+    newGoogleDevtoolsCloudbuildV1BuildOperationMetadata,
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions
+    GoogleDevtoolsCloudbuildV1BuildOptions (..),
+    newGoogleDevtoolsCloudbuildV1BuildOptions,
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior
+    GoogleDevtoolsCloudbuildV1BuildOptions_DefaultLogsBucketBehavior (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption
+    GoogleDevtoolsCloudbuildV1BuildOptions_LogStreamingOption (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_Logging
+    GoogleDevtoolsCloudbuildV1BuildOptions_Logging (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_MachineType
+    GoogleDevtoolsCloudbuildV1BuildOptions_MachineType (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption
+    GoogleDevtoolsCloudbuildV1BuildOptions_RequestedVerifyOption (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem
+    GoogleDevtoolsCloudbuildV1BuildOptions_SourceProvenanceHashItem (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption
+    GoogleDevtoolsCloudbuildV1BuildOptions_SubstitutionOption (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildStep
+    GoogleDevtoolsCloudbuildV1BuildStep (..),
+    newGoogleDevtoolsCloudbuildV1BuildStep,
+
+    -- ** GoogleDevtoolsCloudbuildV1BuildStep_Status
+    GoogleDevtoolsCloudbuildV1BuildStep_Status (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1BuiltImage
+    GoogleDevtoolsCloudbuildV1BuiltImage (..),
+    newGoogleDevtoolsCloudbuildV1BuiltImage,
+
+    -- ** GoogleDevtoolsCloudbuildV1ConnectedRepository
+    GoogleDevtoolsCloudbuildV1ConnectedRepository (..),
+    newGoogleDevtoolsCloudbuildV1ConnectedRepository,
+
+    -- ** GoogleDevtoolsCloudbuildV1Dependency
+    GoogleDevtoolsCloudbuildV1Dependency (..),
+    newGoogleDevtoolsCloudbuildV1Dependency,
+
+    -- ** GoogleDevtoolsCloudbuildV1DeveloperConnectConfig
+    GoogleDevtoolsCloudbuildV1DeveloperConnectConfig (..),
+    newGoogleDevtoolsCloudbuildV1DeveloperConnectConfig,
+
+    -- ** GoogleDevtoolsCloudbuildV1FailureInfo
+    GoogleDevtoolsCloudbuildV1FailureInfo (..),
+    newGoogleDevtoolsCloudbuildV1FailureInfo,
+
+    -- ** GoogleDevtoolsCloudbuildV1FailureInfo_Type
+    GoogleDevtoolsCloudbuildV1FailureInfo_Type (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1FileHashes
+    GoogleDevtoolsCloudbuildV1FileHashes (..),
+    newGoogleDevtoolsCloudbuildV1FileHashes,
+
+    -- ** GoogleDevtoolsCloudbuildV1GitConfig
+    GoogleDevtoolsCloudbuildV1GitConfig (..),
+    newGoogleDevtoolsCloudbuildV1GitConfig,
+
+    -- ** GoogleDevtoolsCloudbuildV1GitSource
+    GoogleDevtoolsCloudbuildV1GitSource (..),
+    newGoogleDevtoolsCloudbuildV1GitSource,
+
+    -- ** GoogleDevtoolsCloudbuildV1GitSourceDependency
+    GoogleDevtoolsCloudbuildV1GitSourceDependency (..),
+    newGoogleDevtoolsCloudbuildV1GitSourceDependency,
+
+    -- ** GoogleDevtoolsCloudbuildV1GitSourceRepository
+    GoogleDevtoolsCloudbuildV1GitSourceRepository (..),
+    newGoogleDevtoolsCloudbuildV1GitSourceRepository,
+
+    -- ** GoogleDevtoolsCloudbuildV1GoModule
+    GoogleDevtoolsCloudbuildV1GoModule (..),
+    newGoogleDevtoolsCloudbuildV1GoModule,
+
+    -- ** GoogleDevtoolsCloudbuildV1Hash
+    GoogleDevtoolsCloudbuildV1Hash (..),
+    newGoogleDevtoolsCloudbuildV1Hash,
+
+    -- ** GoogleDevtoolsCloudbuildV1Hash_Type
+    GoogleDevtoolsCloudbuildV1Hash_Type (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1HttpConfig
+    GoogleDevtoolsCloudbuildV1HttpConfig (..),
+    newGoogleDevtoolsCloudbuildV1HttpConfig,
+
+    -- ** GoogleDevtoolsCloudbuildV1InlineSecret
+    GoogleDevtoolsCloudbuildV1InlineSecret (..),
+    newGoogleDevtoolsCloudbuildV1InlineSecret,
+
+    -- ** GoogleDevtoolsCloudbuildV1InlineSecret_EnvMap
+    GoogleDevtoolsCloudbuildV1InlineSecret_EnvMap (..),
+    newGoogleDevtoolsCloudbuildV1InlineSecret_EnvMap,
+
+    -- ** GoogleDevtoolsCloudbuildV1MavenArtifact
+    GoogleDevtoolsCloudbuildV1MavenArtifact (..),
+    newGoogleDevtoolsCloudbuildV1MavenArtifact,
+
+    -- ** GoogleDevtoolsCloudbuildV1NpmPackage
+    GoogleDevtoolsCloudbuildV1NpmPackage (..),
+    newGoogleDevtoolsCloudbuildV1NpmPackage,
+
+    -- ** GoogleDevtoolsCloudbuildV1PoolOption
+    GoogleDevtoolsCloudbuildV1PoolOption (..),
+    newGoogleDevtoolsCloudbuildV1PoolOption,
+
+    -- ** GoogleDevtoolsCloudbuildV1PythonPackage
+    GoogleDevtoolsCloudbuildV1PythonPackage (..),
+    newGoogleDevtoolsCloudbuildV1PythonPackage,
+
+    -- ** GoogleDevtoolsCloudbuildV1RepoSource
+    GoogleDevtoolsCloudbuildV1RepoSource (..),
+    newGoogleDevtoolsCloudbuildV1RepoSource,
+
+    -- ** GoogleDevtoolsCloudbuildV1RepoSource_Substitutions
+    GoogleDevtoolsCloudbuildV1RepoSource_Substitutions (..),
+    newGoogleDevtoolsCloudbuildV1RepoSource_Substitutions,
+
+    -- ** GoogleDevtoolsCloudbuildV1Results
+    GoogleDevtoolsCloudbuildV1Results (..),
+    newGoogleDevtoolsCloudbuildV1Results,
+
+    -- ** GoogleDevtoolsCloudbuildV1Secret
+    GoogleDevtoolsCloudbuildV1Secret (..),
+    newGoogleDevtoolsCloudbuildV1Secret,
+
+    -- ** GoogleDevtoolsCloudbuildV1Secret_SecretEnv
+    GoogleDevtoolsCloudbuildV1Secret_SecretEnv (..),
+    newGoogleDevtoolsCloudbuildV1Secret_SecretEnv,
+
+    -- ** GoogleDevtoolsCloudbuildV1SecretManagerSecret
+    GoogleDevtoolsCloudbuildV1SecretManagerSecret (..),
+    newGoogleDevtoolsCloudbuildV1SecretManagerSecret,
+
+    -- ** GoogleDevtoolsCloudbuildV1Secrets
+    GoogleDevtoolsCloudbuildV1Secrets (..),
+    newGoogleDevtoolsCloudbuildV1Secrets,
+
+    -- ** GoogleDevtoolsCloudbuildV1Source
+    GoogleDevtoolsCloudbuildV1Source (..),
+    newGoogleDevtoolsCloudbuildV1Source,
+
+    -- ** GoogleDevtoolsCloudbuildV1SourceProvenance
+    GoogleDevtoolsCloudbuildV1SourceProvenance (..),
+    newGoogleDevtoolsCloudbuildV1SourceProvenance,
+
+    -- ** GoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes
+    GoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes (..),
+    newGoogleDevtoolsCloudbuildV1SourceProvenance_FileHashes,
+
+    -- ** GoogleDevtoolsCloudbuildV1StorageSource
+    GoogleDevtoolsCloudbuildV1StorageSource (..),
+    newGoogleDevtoolsCloudbuildV1StorageSource,
+
+    -- ** GoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher
+    GoogleDevtoolsCloudbuildV1StorageSource_SourceFetcher (..),
+
+    -- ** GoogleDevtoolsCloudbuildV1StorageSourceManifest
+    GoogleDevtoolsCloudbuildV1StorageSourceManifest (..),
+    newGoogleDevtoolsCloudbuildV1StorageSourceManifest,
+
+    -- ** GoogleDevtoolsCloudbuildV1TimeSpan
+    GoogleDevtoolsCloudbuildV1TimeSpan (..),
+    newGoogleDevtoolsCloudbuildV1TimeSpan,
+
+    -- ** GoogleDevtoolsCloudbuildV1UploadedGoModule
+    GoogleDevtoolsCloudbuildV1UploadedGoModule (..),
+    newGoogleDevtoolsCloudbuildV1UploadedGoModule,
+
+    -- ** GoogleDevtoolsCloudbuildV1UploadedMavenArtifact
+    GoogleDevtoolsCloudbuildV1UploadedMavenArtifact (..),
+    newGoogleDevtoolsCloudbuildV1UploadedMavenArtifact,
+
+    -- ** GoogleDevtoolsCloudbuildV1UploadedNpmPackage
+    GoogleDevtoolsCloudbuildV1UploadedNpmPackage (..),
+    newGoogleDevtoolsCloudbuildV1UploadedNpmPackage,
+
+    -- ** GoogleDevtoolsCloudbuildV1UploadedPythonPackage
+    GoogleDevtoolsCloudbuildV1UploadedPythonPackage (..),
+    newGoogleDevtoolsCloudbuildV1UploadedPythonPackage,
+
+    -- ** GoogleDevtoolsCloudbuildV1Volume
+    GoogleDevtoolsCloudbuildV1Volume (..),
+    newGoogleDevtoolsCloudbuildV1Volume,
+
+    -- ** GoogleDevtoolsCloudbuildV1Warning
+    GoogleDevtoolsCloudbuildV1Warning (..),
+    newGoogleDevtoolsCloudbuildV1Warning,
+
+    -- ** GoogleDevtoolsCloudbuildV1Warning_Priority
+    GoogleDevtoolsCloudbuildV1Warning_Priority (..),
 
     -- ** GoogleIamV1AuditConfig
     GoogleIamV1AuditConfig (..),
@@ -369,10 +781,18 @@ module Gogol.Run.Types
     -- ** GoogleTypeExpr
     GoogleTypeExpr (..),
     newGoogleTypeExpr,
+
+    -- ** Proto2BridgeMessageSet
+    Proto2BridgeMessageSet (..),
+    newProto2BridgeMessageSet,
+
+    -- ** UtilStatusProto
+    UtilStatusProto (..),
+    newUtilStatusProto,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Internal.Product
 import Gogol.Run.Internal.Sum
 
@@ -384,4 +804,5 @@ runService =
     "run.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

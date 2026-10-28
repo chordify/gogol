@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Topics.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing topic. Note that certain properties of a topic are not modifiable.
+-- Updates an existing topic by updating the fields specified in the update mask. Note that certain properties of a topic are not modifiable.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.patch@.
 module Gogol.PubSub.Projects.Topics.Patch
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Topics.Patch
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.patch@ method which the
@@ -56,7 +54,7 @@ type PubSubProjectsTopicsPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] UpdateTopicRequest
     Core.:> Core.Patch '[Core.JSON] Topic
 
--- | Updates an existing topic. Note that certain properties of a topic are not modifiable.
+-- | Updates an existing topic by updating the fields specified in the update mask. Note that certain properties of a topic are not modifiable.
 --
 -- /See:/ 'newPubSubProjectsTopicsPatch' smart constructor.
 data PubSubProjectsTopicsPatch = PubSubProjectsTopicsPatch
@@ -114,7 +112,5 @@ instance Core.GoogleRequest PubSubProjectsTopicsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsTopicsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy PubSubProjectsTopicsPatchResource)
           Core.mempty

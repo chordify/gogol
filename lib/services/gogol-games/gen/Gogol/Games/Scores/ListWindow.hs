@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Scores.ListWindow
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Scores.ListWindow
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.scores.listWindow@ method which the
 -- 'GamesScoresListWindow' request conforms to.
@@ -89,7 +87,7 @@ data GamesScoresListWindow = GamesScoresListWindow
     resultsAbove :: (Core.Maybe Core.Int32),
     -- | True if the top scores should be returned when the player is not in the leaderboard. Defaults to true.
     returnTopIfAbsent :: (Core.Maybe Core.Bool),
-    -- | The time span for the scores and ranks you\'re requesting.
+    -- | Required. The time span for the scores and ranks you\'re requesting.
     timeSpan :: ScoresListWindowTimeSpan,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -104,7 +102,7 @@ newGamesScoresListWindow ::
   ScoresListWindowCollection ->
   -- |  The ID of the leaderboard. See 'leaderboardId'.
   Core.Text ->
-  -- |  The time span for the scores and ranks you\'re requesting. See 'timeSpan'.
+  -- |  Required. The time span for the scores and ranks you\'re requesting. See 'timeSpan'.
   ScoresListWindowTimeSpan ->
   GamesScoresListWindow
 newGamesScoresListWindow collection leaderboardId timeSpan =
@@ -126,9 +124,7 @@ newGamesScoresListWindow collection leaderboardId timeSpan =
 
 instance Core.GoogleRequest GamesScoresListWindow where
   type Rs GamesScoresListWindow = LeaderboardScores
-  type
-    Scopes GamesScoresListWindow =
-      '[Games'FullControl]
+  type Scopes GamesScoresListWindow = '[Games'FullControl]
   requestClient GamesScoresListWindow {..} =
     go
       leaderboardId
@@ -149,7 +145,5 @@ instance Core.GoogleRequest GamesScoresListWindow where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesScoresListWindowResource
-          )
+          (Core.Proxy :: Core.Proxy GamesScoresListWindowResource)
           Core.mempty

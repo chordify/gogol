@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseHosting
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -32,6 +30,10 @@
 module Gogol.FirebaseHosting
   ( -- * Configuration
     firebaseHostingService,
+
+    -- * OAuth Scopes
+    CloudPlatform'FullControl,
+    Firebase'FullControl,
 
     -- * Resources
 
@@ -50,6 +52,16 @@ module Gogol.FirebaseHosting
     FirebaseHostingOperationsList (..),
     newFirebaseHostingOperationsList,
 
+    -- ** firebasehosting.projects.sites.customDomains.operations.cancel
+    FirebaseHostingProjectsSitesCustomDomainsOperationsCancelResource,
+    FirebaseHostingProjectsSitesCustomDomainsOperationsCancel (..),
+    newFirebaseHostingProjectsSitesCustomDomainsOperationsCancel,
+
+    -- ** firebasehosting.projects.sites.customDomains.operations.delete
+    FirebaseHostingProjectsSitesCustomDomainsOperationsDeleteResource,
+    FirebaseHostingProjectsSitesCustomDomainsOperationsDelete (..),
+    newFirebaseHostingProjectsSitesCustomDomainsOperationsDelete,
+
     -- * Types
 
     -- ** Xgafv
@@ -59,13 +71,59 @@ module Gogol.FirebaseHosting
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** CertVerification
+    CertVerification (..),
+    newCertVerification,
+
+    -- ** CustomDomainMetadata
+    CustomDomainMetadata (..),
+    newCustomDomainMetadata,
+
+    -- ** CustomDomainMetadata_CertState
+    CustomDomainMetadata_CertState (..),
+
+    -- ** CustomDomainMetadata_HostState
+    CustomDomainMetadata_HostState (..),
+
+    -- ** CustomDomainMetadata_OwnershipState
+    CustomDomainMetadata_OwnershipState (..),
+
+    -- ** DnsRecord
+    DnsRecord (..),
+    newDnsRecord,
+
+    -- ** DnsRecord_RequiredAction
+    DnsRecord_RequiredAction (..),
+
+    -- ** DnsRecord_Type
+    DnsRecord_Type (..),
+
+    -- ** DnsRecordSet
+    DnsRecordSet (..),
+    newDnsRecordSet,
+
+    -- ** DnsUpdates
+    DnsUpdates (..),
+    newDnsUpdates,
+
     -- ** Empty
     Empty (..),
     newEmpty,
 
+    -- ** HttpUpdate
+    HttpUpdate (..),
+    newHttpUpdate,
+
     -- ** ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- ** LiveMigrationStep
+    LiveMigrationStep (..),
+    newLiveMigrationStep,
+
+    -- ** LiveMigrationStep_State
+    LiveMigrationStep_State (..),
 
     -- ** Operation
     Operation (..),
@@ -92,4 +150,6 @@ where
 import Gogol.FirebaseHosting.Operations.Cancel
 import Gogol.FirebaseHosting.Operations.Delete
 import Gogol.FirebaseHosting.Operations.List
+import Gogol.FirebaseHosting.Projects.Sites.CustomDomains.Operations.Cancel
+import Gogol.FirebaseHosting.Projects.Sites.CustomDomains.Operations.Delete
 import Gogol.FirebaseHosting.Types

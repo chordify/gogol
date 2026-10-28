@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.Get
 where
 
 import Gogol.CloudFunctions.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.get@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsGet' request conforms to.
@@ -50,6 +48,7 @@ type CloudFunctionsProjectsLocationsFunctionsGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "revision" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,6 +66,8 @@ data CloudFunctionsProjectsLocationsFunctionsGet = CloudFunctionsProjectsLocatio
     callback :: (Core.Maybe Core.Text),
     -- | Required. The name of the function which details should be obtained.
     name :: Core.Text,
+    -- | Optional. The optional version of the 1st gen function whose details should be obtained. The version of a 1st gen function is an integer that starts from 1 and gets incremented on redeployments. GCF may keep historical configs for old versions of 1st gen function. This field can be specified to fetch the historical configs. This field is valid only for GCF 1st gen function.
+    revision :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -85,6 +86,7 @@ newCloudFunctionsProjectsLocationsFunctionsGet name =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
+      revision = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -93,29 +95,25 @@ instance
   Core.GoogleRequest
     CloudFunctionsProjectsLocationsFunctionsGet
   where
+  type Rs CloudFunctionsProjectsLocationsFunctionsGet = Function
   type
-    Rs CloudFunctionsProjectsLocationsFunctionsGet =
-      Function
-  type
-    Scopes
-      CloudFunctionsProjectsLocationsFunctionsGet =
+    Scopes CloudFunctionsProjectsLocationsFunctionsGet =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudFunctionsProjectsLocationsFunctionsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudFunctionsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudFunctionsProjectsLocationsFunctionsGetResource
-            )
-            Core.mempty
+  requestClient CloudFunctionsProjectsLocationsFunctionsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      revision
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudFunctionsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudFunctionsProjectsLocationsFunctionsGetResource
+          )
+          Core.mempty

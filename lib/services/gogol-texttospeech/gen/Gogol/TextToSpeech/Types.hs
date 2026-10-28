@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TextToSpeech.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TextToSpeech.Types
@@ -37,6 +35,10 @@ module Gogol.TextToSpeech.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** AdvancedVoiceOptions
+    AdvancedVoiceOptions (..),
+    newAdvancedVoiceOptions,
+
     -- ** AudioConfig
     AudioConfig (..),
     newAudioConfig,
@@ -47,6 +49,17 @@ module Gogol.TextToSpeech.Types
     -- ** CancelOperationRequest
     CancelOperationRequest (..),
     newCancelOperationRequest,
+
+    -- ** CustomPronunciationParams
+    CustomPronunciationParams (..),
+    newCustomPronunciationParams,
+
+    -- ** CustomPronunciationParams_PhoneticEncoding
+    CustomPronunciationParams_PhoneticEncoding (..),
+
+    -- ** CustomPronunciations
+    CustomPronunciations (..),
+    newCustomPronunciations,
 
     -- ** CustomVoiceParams
     CustomVoiceParams (..),
@@ -70,6 +83,10 @@ module Gogol.TextToSpeech.Types
     -- ** ListVoicesResponse
     ListVoicesResponse (..),
     newListVoicesResponse,
+
+    -- ** MultiSpeakerMarkup
+    MultiSpeakerMarkup (..),
+    newMultiSpeakerMarkup,
 
     -- ** Operation
     Operation (..),
@@ -111,12 +128,20 @@ module Gogol.TextToSpeech.Types
     SynthesizeSpeechResponse (..),
     newSynthesizeSpeechResponse,
 
+    -- ** Turn
+    Turn (..),
+    newTurn,
+
     -- ** Voice
     Voice (..),
     newVoice,
 
     -- ** Voice_SsmlGender
     Voice_SsmlGender (..),
+
+    -- ** VoiceCloneParams
+    VoiceCloneParams (..),
+    newVoiceCloneParams,
 
     -- ** VoiceSelectionParams
     VoiceSelectionParams (..),
@@ -127,7 +152,7 @@ module Gogol.TextToSpeech.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TextToSpeech.Internal.Product
 import Gogol.TextToSpeech.Internal.Sum
 
@@ -139,4 +164,5 @@ textToSpeechService =
     "texttospeech.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

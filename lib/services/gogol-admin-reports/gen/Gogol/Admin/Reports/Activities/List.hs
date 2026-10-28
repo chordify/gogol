@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Reports.Activities.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Reports.Activities.List
 where
 
 import Gogol.Admin.Reports.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reports.activities.list@ method which the
 -- 'ReportsActivitiesList' request conforms to.
@@ -52,9 +50,7 @@ type ReportsActivitiesListResource =
     Core.:> "users"
     Core.:> Core.Capture "userKey" Core.Text
     Core.:> "applications"
-    Core.:> Core.Capture
-              "applicationName"
-              ActivitiesListApplicationName
+    Core.:> Core.Capture "applicationName" ActivitiesListApplicationName
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "actorIpAddress" Core.Text
@@ -67,21 +63,11 @@ type ReportsActivitiesListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "orgUnitID" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "startTime"
-              Core.Text
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              Activities
+    Core.:> Core.QueryParam "startTime" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer\'s account and application such as the Admin console application or the Google Drive application. For more information, see the guides for administrator and Google Drive activity reports. For more information about the activity report\'s parameters, see the activity parameters reference guides.
 --
@@ -106,7 +92,7 @@ data ReportsActivitiesList = ReportsActivitiesList
     -- | The @filters@ query string is a comma-separated list composed of event parameters manipulated by relational operators. Event parameters are in the form @{parameter1 name}{relational operator}{parameter1 value},{parameter2 name}{relational operator}{parameter2 value},...@ These event parameters are associated with a specific @eventName@. An empty report is returned if the request\'s parameter doesn\'t belong to the @eventName@. For more information about the available @eventName@ fields for each application and their associated parameters, go to the <#applicationname ApplicationName> table, then click through to the Activity Events page in the Appendix for the application you want. In the following Drive activity examples, the returned list consists of all @edit@ events where the @doc_id@ parameter value matches the conditions defined by the relational operator. In the first example, the request returns all edited documents with a @doc_id@ value equal to @12345@. In the second example, the report returns any
     -- edited documents where the @doc_id@ value is not equal to @98765@. The @\<>@ operator is URL-encoded in the request\'s query string (@%3C%3E@): @GET...&eventName=edit&filters=doc_id==12345 GET...&eventName=edit&filters=doc_id%3C%3E98765@ A @filters@ query supports these relational operators: * @==@—\'equal to\'. * @\<>@—\'not equal to\'. Must be URL-encoded (%3C%3E). * @\<@—\'less than\'. Must be URL-encoded (%3C). * @\<=@—\'less than or equal to\'. Must be URL-encoded (%3C=). * @>@—\'greater than\'. Must be URL-encoded (%3E). * @>=@—\'greater than or equal to\'. Must be URL-encoded (%3E=). __Note:__ The API doesn\'t accept multiple values of the same parameter. If a parameter is supplied more than once in the API request, the API only accepts the last value of that parameter. In addition, if an invalid parameter is supplied in the API request, the API ignores that parameter and returns the response corresponding to the remaining valid parameters. If no parameters are requested, all parameters are returned.
     filters :: (Core.Maybe Core.Text),
-    -- | Comma separated group ids (obfuscated) on which user activities are filtered, i.e. the response will contain activities for only those users that are a part of at least one of the group ids mentioned here. Format: \"id:abc123,id:xyz456\"
+    -- | Comma separated group ids (obfuscated) on which user activities are filtered, i.e. the response will contain activities for only those users that are a part of at least one of the group ids mentioned here. Format: \"id:abc123,id:xyz456\" /Important:/ To filter by groups, you must explicitly add the groups to your filtering groups allowlist. For more information about adding groups to filtering groups allowlist, see <https://support.google.com/a/answer/11482175 Filter results by Google Group>
     groupIdFilter :: (Core.Maybe Core.Text),
     -- | Determines how many activity records are shown on each response page. For example, if the request sets @maxResults=1@ and the report has two activities, the report has two pages. The response\'s @nextPageToken@ property has the token to the second page. The @maxResults@ query string is optional in the request. The default value is 1000.
     maxResults :: Core.Int32,
@@ -155,9 +141,7 @@ newReportsActivitiesList applicationName userKey =
 
 instance Core.GoogleRequest ReportsActivitiesList where
   type Rs ReportsActivitiesList = Activities
-  type
-    Scopes ReportsActivitiesList =
-      '[Admin'Reports'Audit'Readonly]
+  type Scopes ReportsActivitiesList = '[Admin'Reports'Audit'Readonly]
   requestClient ReportsActivitiesList {..} =
     go
       userKey
@@ -182,7 +166,5 @@ instance Core.GoogleRequest ReportsActivitiesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ReportsActivitiesListResource
-          )
+          (Core.Proxy :: Core.Proxy ReportsActivitiesListResource)
           Core.mempty

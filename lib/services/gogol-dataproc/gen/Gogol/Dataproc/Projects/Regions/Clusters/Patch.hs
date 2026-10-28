@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Patch
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.patch@ method which the
 -- 'DataprocProjectsRegionsClustersPatch' request conforms to.
@@ -55,9 +53,7 @@ type DataprocProjectsRegionsClustersPatchResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "gracefulDecommissionTimeout"
-              Core.Duration
+    Core.:> Core.QueryParam "gracefulDecommissionTimeout" Core.Duration
     Core.:> Core.QueryParam "requestId" Core.Text
     Core.:> Core.QueryParam "updateMask" Core.FieldMask
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -108,54 +104,51 @@ newDataprocProjectsRegionsClustersPatch ::
   -- |  Required. The Dataproc region in which to handle the request. See 'region'.
   Core.Text ->
   DataprocProjectsRegionsClustersPatch
-newDataprocProjectsRegionsClustersPatch clusterName payload projectId region =
-  DataprocProjectsRegionsClustersPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterName = clusterName,
-      gracefulDecommissionTimeout = Core.Nothing,
-      payload = payload,
-      projectId = projectId,
-      region = region,
-      requestId = Core.Nothing,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDataprocProjectsRegionsClustersPatch
+  clusterName
+  payload
+  projectId
+  region =
     DataprocProjectsRegionsClustersPatch
-  where
-  type
-    Rs DataprocProjectsRegionsClustersPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterName = clusterName,
+        gracefulDecommissionTimeout = Core.Nothing,
+        payload = payload,
+        projectId = projectId,
+        region = region,
+        requestId = Core.Nothing,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DataprocProjectsRegionsClustersPatch where
+  type Rs DataprocProjectsRegionsClustersPatch = Operation
   type
     Scopes DataprocProjectsRegionsClustersPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    DataprocProjectsRegionsClustersPatch {..} =
-      go
-        projectId
-        region
-        clusterName
-        xgafv
-        accessToken
-        callback
-        gracefulDecommissionTimeout
-        requestId
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dataprocService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataprocProjectsRegionsClustersPatchResource
-            )
-            Core.mempty
+  requestClient DataprocProjectsRegionsClustersPatch {..} =
+    go
+      projectId
+      region
+      clusterName
+      xgafv
+      accessToken
+      callback
+      gracefulDecommissionTimeout
+      requestId
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dataprocService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataprocProjectsRegionsClustersPatchResource
+          )
+          Core.mempty

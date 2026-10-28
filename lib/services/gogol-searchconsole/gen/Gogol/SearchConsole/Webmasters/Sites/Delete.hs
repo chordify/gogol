@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Webmasters.Sites.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Removes a site from the set of the user\'s Search Console sites.
 --
--- /See:/ <https://developers.google.com/webmaster-tools/search-console-api/ Google Search Console API Reference> for @webmasters.sites.delete@.
+-- /See:/ <https://developers.google.com/webmaster-tools/about Google Search Console API Reference> for @webmasters.sites.delete@.
 module Gogol.SearchConsole.Webmasters.Sites.Delete
   ( -- * Resource
     WebmastersSitesDeleteResource,
@@ -39,7 +37,7 @@ module Gogol.SearchConsole.Webmasters.Sites.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Types
 
 -- | A resource alias for @webmasters.sites.delete@ method which the
@@ -93,9 +91,7 @@ newWebmastersSitesDelete siteUrl =
 
 instance Core.GoogleRequest WebmastersSitesDelete where
   type Rs WebmastersSitesDelete = ()
-  type
-    Scopes WebmastersSitesDelete =
-      '[Webmasters'FullControl]
+  type Scopes WebmastersSitesDelete = '[Webmasters'FullControl]
   requestClient WebmastersSitesDelete {..} =
     go
       siteUrl
@@ -109,7 +105,5 @@ instance Core.GoogleRequest WebmastersSitesDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitesDeleteResource)
           Core.mempty

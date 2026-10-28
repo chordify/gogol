@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Testing.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Testing.Internal.Product
@@ -86,6 +84,10 @@ module Gogol.Testing.Internal.Product
     AppBundle (..),
     newAppBundle,
 
+    -- * CancelDeviceSessionRequest
+    CancelDeviceSessionRequest (..),
+    newCancelDeviceSessionRequest,
+
     -- * CancelTestMatrixResponse
     CancelTestMatrixResponse (..),
     newCancelTestMatrixResponse,
@@ -114,9 +116,21 @@ module Gogol.Testing.Internal.Product
     DeviceIpBlockCatalog (..),
     newDeviceIpBlockCatalog,
 
+    -- * DeviceSession
+    DeviceSession (..),
+    newDeviceSession,
+
+    -- * DirectAccessVersionInfo
+    DirectAccessVersionInfo (..),
+    newDirectAccessVersionInfo,
+
     -- * Distribution
     Distribution (..),
     newDistribution,
+
+    -- * Empty
+    Empty (..),
+    newEmpty,
 
     -- * Environment
     Environment (..),
@@ -170,6 +184,10 @@ module Gogol.Testing.Internal.Product
     IosModel (..),
     newIosModel,
 
+    -- * IosRoboTest
+    IosRoboTest (..),
+    newIosRoboTest,
+
     -- * IosRuntimeConfiguration
     IosRuntimeConfiguration (..),
     newIosRuntimeConfiguration,
@@ -190,9 +208,17 @@ module Gogol.Testing.Internal.Product
     IosXcTest (..),
     newIosXcTest,
 
+    -- * LabInfo
+    LabInfo (..),
+    newLabInfo,
+
     -- * LauncherActivityIntent
     LauncherActivityIntent (..),
     newLauncherActivityIntent,
+
+    -- * ListDeviceSessionsResponse
+    ListDeviceSessionsResponse (..),
+    newListDeviceSessionsResponse,
 
     -- * Locale
     Locale (..),
@@ -201,6 +227,10 @@ module Gogol.Testing.Internal.Product
     -- * ManualSharding
     ManualSharding (..),
     newManualSharding,
+
+    -- * MatrixErrorDetail
+    MatrixErrorDetail (..),
+    newMatrixErrorDetail,
 
     -- * Metadata
     Metadata (..),
@@ -213,6 +243,10 @@ module Gogol.Testing.Internal.Product
     -- * NetworkConfigurationCatalog
     NetworkConfigurationCatalog (..),
     newNetworkConfigurationCatalog,
+
+    -- * NoActivityIntent
+    NoActivityIntent (..),
+    newNoActivityIntent,
 
     -- * ObbFile
     ObbFile (..),
@@ -250,6 +284,14 @@ module Gogol.Testing.Internal.Product
     RoboStartingIntent (..),
     newRoboStartingIntent,
 
+    -- * Service
+    Service (..),
+    newService,
+
+    -- * SessionStateEvent
+    SessionStateEvent (..),
+    newSessionStateEvent,
+
     -- * Shard
     Shard (..),
     newShard,
@@ -257,6 +299,10 @@ module Gogol.Testing.Internal.Product
     -- * ShardingOption
     ShardingOption (..),
     newShardingOption,
+
+    -- * SmartSharding
+    SmartSharding (..),
+    newSmartSharding,
 
     -- * StartActivityIntent
     StartActivityIntent (..),
@@ -318,13 +364,17 @@ module Gogol.Testing.Internal.Product
     UsesFeature (..),
     newUsesFeature,
 
+    -- * UsesPermissionTag
+    UsesPermissionTag (..),
+    newUsesPermissionTag,
+
     -- * XcodeVersion
     XcodeVersion (..),
     newXcodeVersion,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Internal.Sum
 
 -- | Identifies an account and how to log into it.
@@ -350,9 +400,7 @@ instance Core.FromJSON Account where
 instance Core.ToJSON Account where
   toJSON Account {..} =
     Core.object
-      ( Core.catMaybes
-          [("googleAuto" Core..=) Core.<$> googleAuto]
-      )
+      (Core.catMaybes [("googleAuto" Core..=) Core.<$> googleAuto])
 
 -- | A single Android device.
 --
@@ -397,8 +445,7 @@ instance Core.ToJSON AndroidDevice where
     Core.object
       ( Core.catMaybes
           [ ("androidModelId" Core..=) Core.<$> androidModelId,
-            ("androidVersionId" Core..=)
-              Core.<$> androidVersionId,
+            ("androidVersionId" Core..=) Core.<$> androidVersionId,
             ("locale" Core..=) Core.<$> locale,
             ("orientation" Core..=) Core.<$> orientation
           ]
@@ -443,8 +490,7 @@ instance Core.ToJSON AndroidDeviceCatalog where
     Core.object
       ( Core.catMaybes
           [ ("models" Core..=) Core.<$> models,
-            ("runtimeConfiguration" Core..=)
-              Core.<$> runtimeConfiguration,
+            ("runtimeConfiguration" Core..=) Core.<$> runtimeConfiguration,
             ("versions" Core..=) Core.<$> versions
           ]
       )
@@ -461,16 +507,14 @@ newtype AndroidDeviceList = AndroidDeviceList
 -- | Creates a value of 'AndroidDeviceList' with the minimum fields required to make a request.
 newAndroidDeviceList ::
   AndroidDeviceList
-newAndroidDeviceList = AndroidDeviceList {androidDevices = Core.Nothing}
+newAndroidDeviceList =
+  AndroidDeviceList {androidDevices = Core.Nothing}
 
 instance Core.FromJSON AndroidDeviceList where
   parseJSON =
     Core.withObject
       "AndroidDeviceList"
-      ( \o ->
-          AndroidDeviceList
-            Core.<$> (o Core..:? "androidDevices")
-      )
+      (\o -> AndroidDeviceList Core.<$> (o Core..:? "androidDevices"))
 
 instance Core.ToJSON AndroidDeviceList where
   toJSON AndroidDeviceList {..} =
@@ -544,8 +588,7 @@ instance Core.ToJSON AndroidInstrumentationTest where
           [ ("appApk" Core..=) Core.<$> appApk,
             ("appBundle" Core..=) Core.<$> appBundle,
             ("appPackageId" Core..=) Core.<$> appPackageId,
-            ("orchestratorOption" Core..=)
-              Core.<$> orchestratorOption,
+            ("orchestratorOption" Core..=) Core.<$> orchestratorOption,
             ("shardingOption" Core..=) Core.<$> shardingOption,
             ("testApk" Core..=) Core.<$> testApk,
             ("testPackageId" Core..=) Core.<$> testPackageId,
@@ -596,10 +639,8 @@ instance Core.ToJSON AndroidMatrix where
   toJSON AndroidMatrix {..} =
     Core.object
       ( Core.catMaybes
-          [ ("androidModelIds" Core..=)
-              Core.<$> androidModelIds,
-            ("androidVersionIds" Core..=)
-              Core.<$> androidVersionIds,
+          [ ("androidModelIds" Core..=) Core.<$> androidModelIds,
+            ("androidVersionIds" Core..=) Core.<$> androidVersionIds,
             ("locales" Core..=) Core.<$> locales,
             ("orientations" Core..=) Core.<$> orientations
           ]
@@ -619,6 +660,8 @@ data AndroidModel = AndroidModel
     formFactor :: (Core.Maybe AndroidModel_FormFactor),
     -- | The unique opaque id for this model. Use this for invoking the TestExecutionService.
     id :: (Core.Maybe Core.Text),
+    -- | Output only. Lab info of this device.
+    labInfo :: (Core.Maybe LabInfo),
     -- | True if and only if tests with this model are recorded by stitching together screenshots. See use/low/spec/video/recording in device config.
     lowFpsVideoRecording :: (Core.Maybe Core.Bool),
     -- | The manufacturer of this device.
@@ -654,6 +697,7 @@ newAndroidModel =
       form = Core.Nothing,
       formFactor = Core.Nothing,
       id = Core.Nothing,
+      labInfo = Core.Nothing,
       lowFpsVideoRecording = Core.Nothing,
       manufacturer = Core.Nothing,
       name = Core.Nothing,
@@ -678,6 +722,7 @@ instance Core.FromJSON AndroidModel where
             Core.<*> (o Core..:? "form")
             Core.<*> (o Core..:? "formFactor")
             Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "labInfo")
             Core.<*> (o Core..:? "lowFpsVideoRecording")
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "name")
@@ -700,8 +745,8 @@ instance Core.ToJSON AndroidModel where
             ("form" Core..=) Core.<$> form,
             ("formFactor" Core..=) Core.<$> formFactor,
             ("id" Core..=) Core.<$> id,
-            ("lowFpsVideoRecording" Core..=)
-              Core.<$> lowFpsVideoRecording,
+            ("labInfo" Core..=) Core.<$> labInfo,
+            ("lowFpsVideoRecording" Core..=) Core.<$> lowFpsVideoRecording,
             ("manufacturer" Core..=) Core.<$> manufacturer,
             ("name" Core..=) Core.<$> name,
             ("perVersionInfo" Core..=) Core.<$> perVersionInfo,
@@ -709,8 +754,7 @@ instance Core.ToJSON AndroidModel where
             ("screenX" Core..=) Core.<$> screenX,
             ("screenY" Core..=) Core.<$> screenY,
             ("supportedAbis" Core..=) Core.<$> supportedAbis,
-            ("supportedVersionIds" Core..=)
-              Core.<$> supportedVersionIds,
+            ("supportedVersionIds" Core..=) Core.<$> supportedVersionIds,
             ("tags" Core..=) Core.<$> tags,
             ("thumbnailUrl" Core..=) Core.<$> thumbnailUrl
           ]
@@ -784,16 +828,14 @@ instance Core.ToJSON AndroidRoboTest where
       ( Core.catMaybes
           [ ("appApk" Core..=) Core.<$> appApk,
             ("appBundle" Core..=) Core.<$> appBundle,
-            ("appInitialActivity" Core..=)
-              Core.<$> appInitialActivity,
+            ("appInitialActivity" Core..=) Core.<$> appInitialActivity,
             ("appPackageId" Core..=) Core.<$> appPackageId,
             ("maxDepth" Core..=) Core.<$> maxDepth,
             ("maxSteps" Core..=) Core.<$> maxSteps,
             ("roboDirectives" Core..=) Core.<$> roboDirectives,
             ("roboMode" Core..=) Core.<$> roboMode,
             ("roboScript" Core..=) Core.<$> roboScript,
-            ("startingIntents" Core..=)
-              Core.<$> startingIntents
+            ("startingIntents" Core..=) Core.<$> startingIntents
           ]
       )
 
@@ -989,12 +1031,11 @@ instance Core.ToJSON Apk where
           ]
       )
 
--- | Android application details based on application manifest and apk archive contents.
+-- | Android application details based on application manifest and archive contents.
 --
 -- /See:/ 'newApkDetail' smart constructor.
 newtype ApkDetail = ApkDetail
-  { -- |
-    apkManifest :: (Core.Maybe ApkManifest)
+  { apkManifest :: (Core.Maybe ApkManifest)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1007,16 +1048,12 @@ instance Core.FromJSON ApkDetail where
   parseJSON =
     Core.withObject
       "ApkDetail"
-      ( \o ->
-          ApkDetail Core.<$> (o Core..:? "apkManifest")
-      )
+      (\o -> ApkDetail Core.<$> (o Core..:? "apkManifest"))
 
 instance Core.ToJSON ApkDetail where
   toJSON ApkDetail {..} =
     Core.object
-      ( Core.catMaybes
-          [("apkManifest" Core..=) Core.<$> apkManifest]
-      )
+      (Core.catMaybes [("apkManifest" Core..=) Core.<$> apkManifest])
 
 -- | An Android app manifest. See http:\/\/developer.android.com\/guide\/topics\/manifest\/manifest-intro.html
 --
@@ -1024,7 +1061,6 @@ instance Core.ToJSON ApkDetail where
 data ApkManifest = ApkManifest
   { -- | User-readable name for the application.
     applicationLabel :: (Core.Maybe Core.Text),
-    -- |
     intentFilters :: (Core.Maybe [IntentFilter]),
     -- | Maximum API level on which the application is designed to run.
     maxSdkVersion :: (Core.Maybe Core.Int32),
@@ -1034,12 +1070,15 @@ data ApkManifest = ApkManifest
     minSdkVersion :: (Core.Maybe Core.Int32),
     -- | Full Java-style package name for this application, e.g. \"com.example.foo\".
     packageName :: (Core.Maybe Core.Text),
+    -- | Services contained in the tag.
+    services :: (Core.Maybe [Service]),
     -- | Specifies the API Level on which the application is designed to run.
     targetSdkVersion :: (Core.Maybe Core.Int32),
     -- | Feature usage tags defined in the manifest.
     usesFeature :: (Core.Maybe [UsesFeature]),
-    -- | Permissions declared to be used by the application
     usesPermission :: (Core.Maybe [Core.Text]),
+    -- | Permissions declared to be used by the application
+    usesPermissionTags :: (Core.Maybe [UsesPermissionTag]),
     -- | Version number used internally by the app.
     versionCode :: (Core.Maybe Core.Int64),
     -- | Version number shown to users.
@@ -1058,9 +1097,11 @@ newApkManifest =
       metadata = Core.Nothing,
       minSdkVersion = Core.Nothing,
       packageName = Core.Nothing,
+      services = Core.Nothing,
       targetSdkVersion = Core.Nothing,
       usesFeature = Core.Nothing,
       usesPermission = Core.Nothing,
+      usesPermissionTags = Core.Nothing,
       versionCode = Core.Nothing,
       versionName = Core.Nothing
     }
@@ -1077,12 +1118,12 @@ instance Core.FromJSON ApkManifest where
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "minSdkVersion")
             Core.<*> (o Core..:? "packageName")
+            Core.<*> (o Core..:? "services")
             Core.<*> (o Core..:? "targetSdkVersion")
             Core.<*> (o Core..:? "usesFeature")
             Core.<*> (o Core..:? "usesPermission")
-            Core.<*> ( o Core..:? "versionCode"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "usesPermissionTags")
+            Core.<*> (o Core..:? "versionCode" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "versionName")
       )
 
@@ -1090,19 +1131,18 @@ instance Core.ToJSON ApkManifest where
   toJSON ApkManifest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicationLabel" Core..=)
-              Core.<$> applicationLabel,
+          [ ("applicationLabel" Core..=) Core.<$> applicationLabel,
             ("intentFilters" Core..=) Core.<$> intentFilters,
             ("maxSdkVersion" Core..=) Core.<$> maxSdkVersion,
             ("metadata" Core..=) Core.<$> metadata,
             ("minSdkVersion" Core..=) Core.<$> minSdkVersion,
             ("packageName" Core..=) Core.<$> packageName,
-            ("targetSdkVersion" Core..=)
-              Core.<$> targetSdkVersion,
+            ("services" Core..=) Core.<$> services,
+            ("targetSdkVersion" Core..=) Core.<$> targetSdkVersion,
             ("usesFeature" Core..=) Core.<$> usesFeature,
             ("usesPermission" Core..=) Core.<$> usesPermission,
-            ("versionCode" Core..=) Core.. Core.AsText
-              Core.<$> versionCode,
+            ("usesPermissionTags" Core..=) Core.<$> usesPermissionTags,
+            ("versionCode" Core..=) Core.. Core.AsText Core.<$> versionCode,
             ("versionName" Core..=) Core.<$> versionName
           ]
       )
@@ -1125,9 +1165,7 @@ instance Core.FromJSON AppBundle where
   parseJSON =
     Core.withObject
       "AppBundle"
-      ( \o ->
-          AppBundle Core.<$> (o Core..:? "bundleLocation")
-      )
+      (\o -> AppBundle Core.<$> (o Core..:? "bundleLocation"))
 
 instance Core.ToJSON AppBundle where
   toJSON AppBundle {..} =
@@ -1135,6 +1173,26 @@ instance Core.ToJSON AppBundle where
       ( Core.catMaybes
           [("bundleLocation" Core..=) Core.<$> bundleLocation]
       )
+
+-- | The request object for cancelling a Device Session.
+--
+-- /See:/ 'newCancelDeviceSessionRequest' smart constructor.
+data CancelDeviceSessionRequest = CancelDeviceSessionRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelDeviceSessionRequest' with the minimum fields required to make a request.
+newCancelDeviceSessionRequest ::
+  CancelDeviceSessionRequest
+newCancelDeviceSessionRequest = CancelDeviceSessionRequest
+
+instance Core.FromJSON CancelDeviceSessionRequest where
+  parseJSON =
+    Core.withObject
+      "CancelDeviceSessionRequest"
+      (\o -> Core.pure CancelDeviceSessionRequest)
+
+instance Core.ToJSON CancelDeviceSessionRequest where
+  toJSON = Core.const Core.emptyObject
 
 -- | Response containing the current state of the specified test matrix.
 --
@@ -1155,17 +1213,12 @@ instance Core.FromJSON CancelTestMatrixResponse where
   parseJSON =
     Core.withObject
       "CancelTestMatrixResponse"
-      ( \o ->
-          CancelTestMatrixResponse
-            Core.<$> (o Core..:? "testState")
-      )
+      (\o -> CancelTestMatrixResponse Core.<$> (o Core..:? "testState"))
 
 instance Core.ToJSON CancelTestMatrixResponse where
   toJSON CancelTestMatrixResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("testState" Core..=) Core.<$> testState]
-      )
+      (Core.catMaybes [("testState" Core..=) Core.<$> testState])
 
 -- | Information about the client which invoked the test.
 --
@@ -1198,8 +1251,7 @@ instance Core.ToJSON ClientInfo where
   toJSON ClientInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clientInfoDetails" Core..=)
-              Core.<$> clientInfoDetails,
+          [ ("clientInfoDetails" Core..=) Core.<$> clientInfoDetails,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -1227,16 +1279,15 @@ instance Core.FromJSON ClientInfoDetail where
       "ClientInfoDetail"
       ( \o ->
           ClientInfoDetail
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ClientInfoDetail where
   toJSON ClientInfoDetail {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
@@ -1255,7 +1306,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -1292,7 +1348,8 @@ data DeviceFile = DeviceFile
 -- | Creates a value of 'DeviceFile' with the minimum fields required to make a request.
 newDeviceFile ::
   DeviceFile
-newDeviceFile = DeviceFile {obbFile = Core.Nothing, regularFile = Core.Nothing}
+newDeviceFile =
+  DeviceFile {obbFile = Core.Nothing, regularFile = Core.Nothing}
 
 instance Core.FromJSON DeviceFile where
   parseJSON =
@@ -1369,22 +1426,137 @@ newtype DeviceIpBlockCatalog = DeviceIpBlockCatalog
 -- | Creates a value of 'DeviceIpBlockCatalog' with the minimum fields required to make a request.
 newDeviceIpBlockCatalog ::
   DeviceIpBlockCatalog
-newDeviceIpBlockCatalog = DeviceIpBlockCatalog {ipBlocks = Core.Nothing}
+newDeviceIpBlockCatalog =
+  DeviceIpBlockCatalog {ipBlocks = Core.Nothing}
 
 instance Core.FromJSON DeviceIpBlockCatalog where
   parseJSON =
     Core.withObject
       "DeviceIpBlockCatalog"
-      ( \o ->
-          DeviceIpBlockCatalog
-            Core.<$> (o Core..:? "ipBlocks")
-      )
+      (\o -> DeviceIpBlockCatalog Core.<$> (o Core..:? "ipBlocks"))
 
 instance Core.ToJSON DeviceIpBlockCatalog where
   toJSON DeviceIpBlockCatalog {..} =
     Core.object
+      (Core.catMaybes [("ipBlocks" Core..=) Core.<$> ipBlocks])
+
+-- | Protobuf message describing the device message, used from several RPCs.
+--
+-- /See:/ 'newDeviceSession' smart constructor.
+data DeviceSession = DeviceSession
+  { -- | Output only. The timestamp that the session first became ACTIVE.
+    activeStartTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The requested device
+    androidDevice :: (Core.Maybe AndroidDevice),
+    -- | Output only. The time that the Session was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The title of the DeviceSession to be presented in the UI.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Optional. If the device is still in use at this time, any connections will be ended and the SessionState will transition from ACTIVE to FINISHED.
+    expireTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The interval of time that this device must be interacted with before it transitions from ACTIVE to TIMEOUT_INACTIVITY.
+    inactivityTimeout :: (Core.Maybe Core.Duration),
+    -- | Optional. Name of the DeviceSession, e.g. \"projects\/{project/id}\/deviceSessions\/{session/id}\"
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. Current state of the DeviceSession.
+    state :: (Core.Maybe DeviceSession_State),
+    -- | Output only. The historical state transitions of the session_state message including the current session state.
+    stateHistories :: (Core.Maybe [SessionStateEvent]),
+    -- | Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the UpdateDeviceSession RPC. Default: 15 minutes.
+    ttl :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeviceSession' with the minimum fields required to make a request.
+newDeviceSession ::
+  DeviceSession
+newDeviceSession =
+  DeviceSession
+    { activeStartTime = Core.Nothing,
+      androidDevice = Core.Nothing,
+      createTime = Core.Nothing,
+      displayName = Core.Nothing,
+      expireTime = Core.Nothing,
+      inactivityTimeout = Core.Nothing,
+      name = Core.Nothing,
+      state = Core.Nothing,
+      stateHistories = Core.Nothing,
+      ttl = Core.Nothing
+    }
+
+instance Core.FromJSON DeviceSession where
+  parseJSON =
+    Core.withObject
+      "DeviceSession"
+      ( \o ->
+          DeviceSession
+            Core.<$> (o Core..:? "activeStartTime")
+            Core.<*> (o Core..:? "androidDevice")
+            Core.<*> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "expireTime")
+            Core.<*> (o Core..:? "inactivityTimeout")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "stateHistories")
+            Core.<*> (o Core..:? "ttl")
+      )
+
+instance Core.ToJSON DeviceSession where
+  toJSON DeviceSession {..} =
+    Core.object
       ( Core.catMaybes
-          [("ipBlocks" Core..=) Core.<$> ipBlocks]
+          [ ("activeStartTime" Core..=) Core.<$> activeStartTime,
+            ("androidDevice" Core..=) Core.<$> androidDevice,
+            ("createTime" Core..=) Core.<$> createTime,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("expireTime" Core..=) Core.<$> expireTime,
+            ("inactivityTimeout" Core..=) Core.<$> inactivityTimeout,
+            ("name" Core..=) Core.<$> name,
+            ("state" Core..=) Core.<$> state,
+            ("stateHistories" Core..=) Core.<$> stateHistories,
+            ("ttl" Core..=) Core.<$> ttl
+          ]
+      )
+
+-- | Denotes whether Direct Access is supported, and by which client versions. DirectAccessService is currently available as a preview to select developers. You can register today on behalf of you and your team at https:\/\/developer.android.com\/studio\/preview\/android-device-streaming
+--
+-- /See:/ 'newDirectAccessVersionInfo' smart constructor.
+data DirectAccessVersionInfo = DirectAccessVersionInfo
+  { -- | Whether direct access is supported at all. Clients are expected to filter down the device list to only android models and versions which support Direct Access when that is the user intent.
+    directAccessSupported :: (Core.Maybe Core.Bool),
+    -- | Output only. Indicates client-device compatibility, where a device is known to work only with certain workarounds implemented in the Android Studio client. Expected format \"major.minor.micro.patch\", e.g. \"5921.22.2211.8881706\".
+    minimumAndroidStudioVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DirectAccessVersionInfo' with the minimum fields required to make a request.
+newDirectAccessVersionInfo ::
+  DirectAccessVersionInfo
+newDirectAccessVersionInfo =
+  DirectAccessVersionInfo
+    { directAccessSupported = Core.Nothing,
+      minimumAndroidStudioVersion = Core.Nothing
+    }
+
+instance Core.FromJSON DirectAccessVersionInfo where
+  parseJSON =
+    Core.withObject
+      "DirectAccessVersionInfo"
+      ( \o ->
+          DirectAccessVersionInfo
+            Core.<$> (o Core..:? "directAccessSupported")
+            Core.<*> (o Core..:? "minimumAndroidStudioVersion")
+      )
+
+instance Core.ToJSON DirectAccessVersionInfo where
+  toJSON DirectAccessVersionInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("directAccessSupported" Core..=) Core.<$> directAccessSupported,
+            ("minimumAndroidStudioVersion" Core..=)
+              Core.<$> minimumAndroidStudioVersion
+          ]
       )
 
 -- | Data about the relative number of devices running a given configuration of the Android platform.
@@ -1402,7 +1574,10 @@ data Distribution = Distribution
 newDistribution ::
   Distribution
 newDistribution =
-  Distribution {marketShare = Core.Nothing, measurementTime = Core.Nothing}
+  Distribution
+    { marketShare = Core.Nothing,
+      measurementTime = Core.Nothing
+    }
 
 instance Core.FromJSON Distribution where
   parseJSON =
@@ -1419,10 +1594,26 @@ instance Core.ToJSON Distribution where
     Core.object
       ( Core.catMaybes
           [ ("marketShare" Core..=) Core.<$> marketShare,
-            ("measurementTime" Core..=)
-              Core.<$> measurementTime
+            ("measurementTime" Core..=) Core.<$> measurementTime
           ]
       )
+
+-- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
+--
+-- /See:/ 'newEmpty' smart constructor.
+data Empty = Empty
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Empty' with the minimum fields required to make a request.
+newEmpty ::
+  Empty
+newEmpty = Empty
+
+instance Core.FromJSON Empty where
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
+
+instance Core.ToJSON Empty where
+  toJSON = Core.const Core.emptyObject
 
 -- | The environment in which the test is run.
 --
@@ -1439,7 +1630,10 @@ data Environment = Environment
 newEnvironment ::
   Environment
 newEnvironment =
-  Environment {androidDevice = Core.Nothing, iosDevice = Core.Nothing}
+  Environment
+    { androidDevice = Core.Nothing,
+      iosDevice = Core.Nothing
+    }
 
 instance Core.FromJSON Environment where
   parseJSON =
@@ -1498,8 +1692,7 @@ instance Core.ToJSON EnvironmentMatrix where
   toJSON EnvironmentMatrix {..} =
     Core.object
       ( Core.catMaybes
-          [ ("androidDeviceList" Core..=)
-              Core.<$> androidDeviceList,
+          [ ("androidDeviceList" Core..=) Core.<$> androidDeviceList,
             ("androidMatrix" Core..=) Core.<$> androidMatrix,
             ("iosDeviceList" Core..=) Core.<$> iosDeviceList
           ]
@@ -1528,16 +1721,15 @@ instance Core.FromJSON EnvironmentVariable where
       "EnvironmentVariable"
       ( \o ->
           EnvironmentVariable
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON EnvironmentVariable where
   toJSON EnvironmentVariable {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )
 
 -- | A reference to a file, used for user inputs.
@@ -1558,22 +1750,18 @@ instance Core.FromJSON FileReference where
   parseJSON =
     Core.withObject
       "FileReference"
-      ( \o ->
-          FileReference Core.<$> (o Core..:? "gcsPath")
-      )
+      (\o -> FileReference Core.<$> (o Core..:? "gcsPath"))
 
 instance Core.ToJSON FileReference where
   toJSON FileReference {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsPath" Core..=) Core.<$> gcsPath]
-      )
+      (Core.catMaybes [("gcsPath" Core..=) Core.<$> gcsPath])
 
--- | Response containing the details of the specified Android application APK.
+-- | Response containing the details of the specified Android application.
 --
 -- /See:/ 'newGetApkDetailsResponse' smart constructor.
 newtype GetApkDetailsResponse = GetApkDetailsResponse
-  { -- | Details of the Android APK.
+  { -- | Details of the Android App.
     apkDetail :: (Core.Maybe ApkDetail)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1581,23 +1769,19 @@ newtype GetApkDetailsResponse = GetApkDetailsResponse
 -- | Creates a value of 'GetApkDetailsResponse' with the minimum fields required to make a request.
 newGetApkDetailsResponse ::
   GetApkDetailsResponse
-newGetApkDetailsResponse = GetApkDetailsResponse {apkDetail = Core.Nothing}
+newGetApkDetailsResponse =
+  GetApkDetailsResponse {apkDetail = Core.Nothing}
 
 instance Core.FromJSON GetApkDetailsResponse where
   parseJSON =
     Core.withObject
       "GetApkDetailsResponse"
-      ( \o ->
-          GetApkDetailsResponse
-            Core.<$> (o Core..:? "apkDetail")
-      )
+      (\o -> GetApkDetailsResponse Core.<$> (o Core..:? "apkDetail"))
 
 instance Core.ToJSON GetApkDetailsResponse where
   toJSON GetApkDetailsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("apkDetail" Core..=) Core.<$> apkDetail]
-      )
+      (Core.catMaybes [("apkDetail" Core..=) Core.<$> apkDetail])
 
 -- | Enables automatic Google account login. If set, the service automatically generates a Google test account and adds it to the device, before executing the test. Note that test accounts might be reused. Many applications show their full set of functionalities when an account is present on the device. Logging into the device with these generated accounts allows testing more functionalities.
 --
@@ -1612,9 +1796,7 @@ newGoogleAuto = GoogleAuto
 
 instance Core.FromJSON GoogleAuto where
   parseJSON =
-    Core.withObject
-      "GoogleAuto"
-      (\o -> Core.pure GoogleAuto)
+    Core.withObject "GoogleAuto" (\o -> Core.pure GoogleAuto)
 
 instance Core.ToJSON GoogleAuto where
   toJSON = Core.const Core.emptyObject
@@ -1637,16 +1819,12 @@ instance Core.FromJSON GoogleCloudStorage where
   parseJSON =
     Core.withObject
       "GoogleCloudStorage"
-      ( \o ->
-          GoogleCloudStorage Core.<$> (o Core..:? "gcsPath")
-      )
+      (\o -> GoogleCloudStorage Core.<$> (o Core..:? "gcsPath"))
 
 instance Core.ToJSON GoogleCloudStorage where
   toJSON GoogleCloudStorage {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsPath" Core..=) Core.<$> gcsPath]
-      )
+      (Core.catMaybes [("gcsPath" Core..=) Core.<$> gcsPath])
 
 -- | The section of an tag. https:\/\/developer.android.com\/guide\/topics\/manifest\/intent-filter-element.html
 --
@@ -1784,8 +1962,7 @@ instance Core.ToJSON IosDeviceCatalog where
     Core.object
       ( Core.catMaybes
           [ ("models" Core..=) Core.<$> models,
-            ("runtimeConfiguration" Core..=)
-              Core.<$> runtimeConfiguration,
+            ("runtimeConfiguration" Core..=) Core.<$> runtimeConfiguration,
             ("versions" Core..=) Core.<$> versions,
             ("xcodeVersions" Core..=) Core.<$> xcodeVersions
           ]
@@ -1853,16 +2030,12 @@ instance Core.FromJSON IosDeviceList where
   parseJSON =
     Core.withObject
       "IosDeviceList"
-      ( \o ->
-          IosDeviceList Core.<$> (o Core..:? "iosDevices")
-      )
+      (\o -> IosDeviceList Core.<$> (o Core..:? "iosDevices"))
 
 instance Core.ToJSON IosDeviceList where
   toJSON IosDeviceList {..} =
     Core.object
-      ( Core.catMaybes
-          [("iosDevices" Core..=) Core.<$> iosDevices]
-      )
+      (Core.catMaybes [("iosDevices" Core..=) Core.<$> iosDevices])
 
 -- | A description of an iOS device tests may be run on.
 --
@@ -1930,8 +2103,7 @@ instance Core.ToJSON IosModel where
   toJSON IosModel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceCapabilities" Core..=)
-              Core.<$> deviceCapabilities,
+          [ ("deviceCapabilities" Core..=) Core.<$> deviceCapabilities,
             ("formFactor" Core..=) Core.<$> formFactor,
             ("id" Core..=) Core.<$> id,
             ("name" Core..=) Core.<$> name,
@@ -1939,9 +2111,52 @@ instance Core.ToJSON IosModel where
             ("screenDensity" Core..=) Core.<$> screenDensity,
             ("screenX" Core..=) Core.<$> screenX,
             ("screenY" Core..=) Core.<$> screenY,
-            ("supportedVersionIds" Core..=)
-              Core.<$> supportedVersionIds,
+            ("supportedVersionIds" Core..=) Core.<$> supportedVersionIds,
             ("tags" Core..=) Core.<$> tags
+          ]
+      )
+
+-- | A test that explores an iOS application on an iOS device.
+--
+-- /See:/ 'newIosRoboTest' smart constructor.
+data IosRoboTest = IosRoboTest
+  { -- | The bundle ID for the app-under-test. This is determined by examining the application\'s \"Info.plist\" file.
+    appBundleId :: (Core.Maybe Core.Text),
+    -- | Required. The ipa stored at this file should be used to run the test.
+    appIpa :: (Core.Maybe FileReference),
+    -- | An optional Roboscript to customize the crawl. See https:\/\/firebase.google.com\/docs\/test-lab\/android\/robo-scripts-reference for more information about Roboscripts. The maximum allowed file size of the roboscript is 10MiB.
+    roboScript :: (Core.Maybe FileReference)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'IosRoboTest' with the minimum fields required to make a request.
+newIosRoboTest ::
+  IosRoboTest
+newIosRoboTest =
+  IosRoboTest
+    { appBundleId = Core.Nothing,
+      appIpa = Core.Nothing,
+      roboScript = Core.Nothing
+    }
+
+instance Core.FromJSON IosRoboTest where
+  parseJSON =
+    Core.withObject
+      "IosRoboTest"
+      ( \o ->
+          IosRoboTest
+            Core.<$> (o Core..:? "appBundleId")
+            Core.<*> (o Core..:? "appIpa")
+            Core.<*> (o Core..:? "roboScript")
+      )
+
+instance Core.ToJSON IosRoboTest where
+  toJSON IosRoboTest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("appBundleId" Core..=) Core.<$> appBundleId,
+            ("appIpa" Core..=) Core.<$> appIpa,
+            ("roboScript" Core..=) Core.<$> roboScript
           ]
       )
 
@@ -1960,7 +2175,10 @@ data IosRuntimeConfiguration = IosRuntimeConfiguration
 newIosRuntimeConfiguration ::
   IosRuntimeConfiguration
 newIosRuntimeConfiguration =
-  IosRuntimeConfiguration {locales = Core.Nothing, orientations = Core.Nothing}
+  IosRuntimeConfiguration
+    { locales = Core.Nothing,
+      orientations = Core.Nothing
+    }
 
 instance Core.FromJSON IosRuntimeConfiguration where
   parseJSON =
@@ -2184,6 +2402,42 @@ instance Core.ToJSON IosXcTest where
           ]
       )
 
+-- | Lab specific information for a device.
+--
+-- /See:/ 'newLabInfo' smart constructor.
+data LabInfo = LabInfo
+  { -- | Lab name where the device is hosted. If empty, the device is hosted in a Google owned lab.
+    name :: (Core.Maybe Core.Text),
+    -- | The Unicode country\/region code (CLDR) of the lab where the device is hosted. E.g. \"US\" for United States, \"CH\" for Switzerland.
+    regionCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LabInfo' with the minimum fields required to make a request.
+newLabInfo ::
+  LabInfo
+newLabInfo =
+  LabInfo {name = Core.Nothing, regionCode = Core.Nothing}
+
+instance Core.FromJSON LabInfo where
+  parseJSON =
+    Core.withObject
+      "LabInfo"
+      ( \o ->
+          LabInfo
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "regionCode")
+      )
+
+instance Core.ToJSON LabInfo where
+  toJSON LabInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("regionCode" Core..=) Core.<$> regionCode
+          ]
+      )
+
 -- | Specifies an intent that starts the main launcher activity.
 --
 -- /See:/ 'newLauncherActivityIntent' smart constructor.
@@ -2203,6 +2457,45 @@ instance Core.FromJSON LauncherActivityIntent where
 
 instance Core.ToJSON LauncherActivityIntent where
   toJSON = Core.const Core.emptyObject
+
+-- | A list of device sessions.
+--
+-- /See:/ 'newListDeviceSessionsResponse' smart constructor.
+data ListDeviceSessionsResponse = ListDeviceSessionsResponse
+  { -- | The sessions matching the specified filter in the given cloud project.
+    deviceSessions :: (Core.Maybe [DeviceSession]),
+    -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListDeviceSessionsResponse' with the minimum fields required to make a request.
+newListDeviceSessionsResponse ::
+  ListDeviceSessionsResponse
+newListDeviceSessionsResponse =
+  ListDeviceSessionsResponse
+    { deviceSessions = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListDeviceSessionsResponse where
+  parseJSON =
+    Core.withObject
+      "ListDeviceSessionsResponse"
+      ( \o ->
+          ListDeviceSessionsResponse
+            Core.<$> (o Core..:? "deviceSessions")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListDeviceSessionsResponse where
+  toJSON ListDeviceSessionsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceSessions" Core..=) Core.<$> deviceSessions,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | A location\/region designation for language.
 --
@@ -2257,7 +2550,7 @@ instance Core.ToJSON Locale where
 --
 -- /See:/ 'newManualSharding' smart constructor.
 newtype ManualSharding = ManualSharding
-  { -- | Required. Group of packages, classes, and\/or test methods to be run for each manually-created shard. You must specify at least one shard if this field is present. When you select one or more physical devices, the number of repeated test/targets/for_shard must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 100. When you select only x86 virtual devices, it must be \<= 500.
+  { -- | Required. Group of packages, classes, and\/or test methods to be run for each manually-created shard. You must specify at least one shard if this field is present. When you select one or more physical devices, the number of repeated test/targets/for_shard must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 200. When you select only x86 virtual devices, it must be \<= 500.
     testTargetsForShard :: (Core.Maybe [TestTargetsForShard])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2265,23 +2558,55 @@ newtype ManualSharding = ManualSharding
 -- | Creates a value of 'ManualSharding' with the minimum fields required to make a request.
 newManualSharding ::
   ManualSharding
-newManualSharding = ManualSharding {testTargetsForShard = Core.Nothing}
+newManualSharding =
+  ManualSharding {testTargetsForShard = Core.Nothing}
 
 instance Core.FromJSON ManualSharding where
   parseJSON =
     Core.withObject
       "ManualSharding"
-      ( \o ->
-          ManualSharding
-            Core.<$> (o Core..:? "testTargetsForShard")
-      )
+      (\o -> ManualSharding Core.<$> (o Core..:? "testTargetsForShard"))
 
 instance Core.ToJSON ManualSharding where
   toJSON ManualSharding {..} =
     Core.object
       ( Core.catMaybes
-          [ ("testTargetsForShard" Core..=)
-              Core.<$> testTargetsForShard
+          [("testTargetsForShard" Core..=) Core.<$> testTargetsForShard]
+      )
+
+-- | Describes a single error or issue with a matrix.
+--
+-- /See:/ 'newMatrixErrorDetail' smart constructor.
+data MatrixErrorDetail = MatrixErrorDetail
+  { -- | Output only. A human-readable message about how the error in the TestMatrix. Expands on the @reason@ field with additional details and possible options to fix the issue.
+    message :: (Core.Maybe Core.Text),
+    -- | Output only. The reason for the error. This is a constant value in UPPER/SNAKE/CASE that identifies the cause of the error.
+    reason :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MatrixErrorDetail' with the minimum fields required to make a request.
+newMatrixErrorDetail ::
+  MatrixErrorDetail
+newMatrixErrorDetail =
+  MatrixErrorDetail {message = Core.Nothing, reason = Core.Nothing}
+
+instance Core.FromJSON MatrixErrorDetail where
+  parseJSON =
+    Core.withObject
+      "MatrixErrorDetail"
+      ( \o ->
+          MatrixErrorDetail
+            Core.<$> (o Core..:? "message")
+            Core.<*> (o Core..:? "reason")
+      )
+
+instance Core.ToJSON MatrixErrorDetail where
+  toJSON MatrixErrorDetail {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("message" Core..=) Core.<$> message,
+            ("reason" Core..=) Core.<$> reason
           ]
       )
 
@@ -2307,16 +2632,15 @@ instance Core.FromJSON Metadata where
       "Metadata"
       ( \o ->
           Metadata
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Metadata where
   toJSON Metadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 --
@@ -2365,8 +2689,7 @@ instance Core.ToJSON NetworkConfiguration where
 --
 -- /See:/ 'newNetworkConfigurationCatalog' smart constructor.
 newtype NetworkConfigurationCatalog = NetworkConfigurationCatalog
-  { -- |
-    configurations :: (Core.Maybe [NetworkConfiguration])
+  { configurations :: (Core.Maybe [NetworkConfiguration])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2381,8 +2704,7 @@ instance Core.FromJSON NetworkConfigurationCatalog where
     Core.withObject
       "NetworkConfigurationCatalog"
       ( \o ->
-          NetworkConfigurationCatalog
-            Core.<$> (o Core..:? "configurations")
+          NetworkConfigurationCatalog Core.<$> (o Core..:? "configurations")
       )
 
 instance Core.ToJSON NetworkConfigurationCatalog where
@@ -2391,6 +2713,26 @@ instance Core.ToJSON NetworkConfigurationCatalog where
       ( Core.catMaybes
           [("configurations" Core..=) Core.<$> configurations]
       )
+
+-- | Skips the starting activity
+--
+-- /See:/ 'newNoActivityIntent' smart constructor.
+data NoActivityIntent = NoActivityIntent
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NoActivityIntent' with the minimum fields required to make a request.
+newNoActivityIntent ::
+  NoActivityIntent
+newNoActivityIntent = NoActivityIntent
+
+instance Core.FromJSON NoActivityIntent where
+  parseJSON =
+    Core.withObject
+      "NoActivityIntent"
+      (\o -> Core.pure NoActivityIntent)
+
+instance Core.ToJSON NoActivityIntent where
+  toJSON = Core.const Core.emptyObject
 
 -- | An opaque binary blob file to install on the device before the test starts.
 --
@@ -2406,7 +2748,8 @@ data ObbFile = ObbFile
 -- | Creates a value of 'ObbFile' with the minimum fields required to make a request.
 newObbFile ::
   ObbFile
-newObbFile = ObbFile {obb = Core.Nothing, obbFileName = Core.Nothing}
+newObbFile =
+  ObbFile {obb = Core.Nothing, obbFileName = Core.Nothing}
 
 instance Core.FromJSON ObbFile where
   parseJSON =
@@ -2444,7 +2787,11 @@ data Orientation = Orientation
 newOrientation ::
   Orientation
 newOrientation =
-  Orientation {id = Core.Nothing, name = Core.Nothing, tags = Core.Nothing}
+  Orientation
+    { id = Core.Nothing,
+      name = Core.Nothing,
+      tags = Core.Nothing
+    }
 
 instance Core.FromJSON Orientation where
   parseJSON =
@@ -2473,6 +2820,10 @@ instance Core.ToJSON Orientation where
 data PerAndroidVersionInfo = PerAndroidVersionInfo
   { -- | The number of online devices for an Android version.
     deviceCapacity :: (Core.Maybe PerAndroidVersionInfo_DeviceCapacity),
+    -- | Output only. Identifies supported clients for DirectAccess for this Android version.
+    directAccessVersionInfo :: (Core.Maybe DirectAccessVersionInfo),
+    -- | Output only. The estimated wait time for a single interactive device session using Direct Access.
+    interactiveDeviceAvailabilityEstimate :: (Core.Maybe Core.Duration),
     -- | An Android version.
     versionId :: (Core.Maybe Core.Text)
   }
@@ -2484,6 +2835,8 @@ newPerAndroidVersionInfo ::
 newPerAndroidVersionInfo =
   PerAndroidVersionInfo
     { deviceCapacity = Core.Nothing,
+      directAccessVersionInfo = Core.Nothing,
+      interactiveDeviceAvailabilityEstimate = Core.Nothing,
       versionId = Core.Nothing
     }
 
@@ -2494,6 +2847,8 @@ instance Core.FromJSON PerAndroidVersionInfo where
       ( \o ->
           PerAndroidVersionInfo
             Core.<$> (o Core..:? "deviceCapacity")
+            Core.<*> (o Core..:? "directAccessVersionInfo")
+            Core.<*> (o Core..:? "interactiveDeviceAvailabilityEstimate")
             Core.<*> (o Core..:? "versionId")
       )
 
@@ -2502,6 +2857,10 @@ instance Core.ToJSON PerAndroidVersionInfo where
     Core.object
       ( Core.catMaybes
           [ ("deviceCapacity" Core..=) Core.<$> deviceCapacity,
+            ("directAccessVersionInfo" Core..=)
+              Core.<$> directAccessVersionInfo,
+            ("interactiveDeviceAvailabilityEstimate" Core..=)
+              Core.<$> interactiveDeviceAvailabilityEstimate,
             ("versionId" Core..=) Core.<$> versionId
           ]
       )
@@ -2521,7 +2880,10 @@ data PerIosVersionInfo = PerIosVersionInfo
 newPerIosVersionInfo ::
   PerIosVersionInfo
 newPerIosVersionInfo =
-  PerIosVersionInfo {deviceCapacity = Core.Nothing, versionId = Core.Nothing}
+  PerIosVersionInfo
+    { deviceCapacity = Core.Nothing,
+      versionId = Core.Nothing
+    }
 
 instance Core.FromJSON PerIosVersionInfo where
   parseJSON =
@@ -2558,7 +2920,8 @@ newProvidedSoftwareCatalog ::
   ProvidedSoftwareCatalog
 newProvidedSoftwareCatalog =
   ProvidedSoftwareCatalog
-    { androidxOrchestratorVersion = Core.Nothing,
+    { androidxOrchestratorVersion =
+        Core.Nothing,
       orchestratorVersion = Core.Nothing
     }
 
@@ -2578,8 +2941,7 @@ instance Core.ToJSON ProvidedSoftwareCatalog where
       ( Core.catMaybes
           [ ("androidxOrchestratorVersion" Core..=)
               Core.<$> androidxOrchestratorVersion,
-            ("orchestratorVersion" Core..=)
-              Core.<$> orchestratorVersion
+            ("orchestratorVersion" Core..=) Core.<$> orchestratorVersion
           ]
       )
 
@@ -2597,7 +2959,8 @@ data RegularFile = RegularFile
 -- | Creates a value of 'RegularFile' with the minimum fields required to make a request.
 newRegularFile ::
   RegularFile
-newRegularFile = RegularFile {content = Core.Nothing, devicePath = Core.Nothing}
+newRegularFile =
+  RegularFile {content = Core.Nothing, devicePath = Core.Nothing}
 
 instance Core.FromJSON RegularFile where
   parseJSON =
@@ -2660,13 +3023,10 @@ instance Core.ToJSON ResultStorage where
   toJSON ResultStorage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("googleCloudStorage" Core..=)
-              Core.<$> googleCloudStorage,
+          [ ("googleCloudStorage" Core..=) Core.<$> googleCloudStorage,
             ("resultsUrl" Core..=) Core.<$> resultsUrl,
-            ("toolResultsExecution" Core..=)
-              Core.<$> toolResultsExecution,
-            ("toolResultsHistory" Core..=)
-              Core.<$> toolResultsHistory
+            ("toolResultsExecution" Core..=) Core.<$> toolResultsExecution,
+            ("toolResultsHistory" Core..=) Core.<$> toolResultsHistory
           ]
       )
 
@@ -2720,6 +3080,8 @@ instance Core.ToJSON RoboDirective where
 data RoboStartingIntent = RoboStartingIntent
   { -- | An intent that starts the main launcher activity.
     launcherActivity :: (Core.Maybe LauncherActivityIntent),
+    -- | Skips the starting activity
+    noActivity :: (Core.Maybe NoActivityIntent),
     -- | An intent that starts an activity with specific details.
     startActivity :: (Core.Maybe StartActivityIntent),
     -- | Timeout in seconds for each intent.
@@ -2733,6 +3095,7 @@ newRoboStartingIntent ::
 newRoboStartingIntent =
   RoboStartingIntent
     { launcherActivity = Core.Nothing,
+      noActivity = Core.Nothing,
       startActivity = Core.Nothing,
       timeout = Core.Nothing
     }
@@ -2744,6 +3107,7 @@ instance Core.FromJSON RoboStartingIntent where
       ( \o ->
           RoboStartingIntent
             Core.<$> (o Core..:? "launcherActivity")
+            Core.<*> (o Core..:? "noActivity")
             Core.<*> (o Core..:? "startActivity")
             Core.<*> (o Core..:? "timeout")
       )
@@ -2752,10 +3116,90 @@ instance Core.ToJSON RoboStartingIntent where
   toJSON RoboStartingIntent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("launcherActivity" Core..=)
-              Core.<$> launcherActivity,
+          [ ("launcherActivity" Core..=) Core.<$> launcherActivity,
+            ("noActivity" Core..=) Core.<$> noActivity,
             ("startActivity" Core..=) Core.<$> startActivity,
             ("timeout" Core..=) Core.<$> timeout
+          ]
+      )
+
+-- | The section of an tag. https:\/\/developer.android.com\/guide\/topics\/manifest\/service-element
+--
+-- /See:/ 'newService' smart constructor.
+data Service = Service
+  { -- | Intent filters in the service
+    intentFilter :: (Core.Maybe [IntentFilter]),
+    -- | The android:name value
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Service' with the minimum fields required to make a request.
+newService ::
+  Service
+newService =
+  Service {intentFilter = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON Service where
+  parseJSON =
+    Core.withObject
+      "Service"
+      ( \o ->
+          Service
+            Core.<$> (o Core..:? "intentFilter")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Service where
+  toJSON Service {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("intentFilter" Core..=) Core.<$> intentFilter,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | A message encapsulating a series of Session states and the time that the DeviceSession first entered those states.
+--
+-- /See:/ 'newSessionStateEvent' smart constructor.
+data SessionStateEvent = SessionStateEvent
+  { -- | Output only. The time that the session_state first encountered that state.
+    eventTime :: (Core.Maybe Core.DateTime),
+    -- | Output only. The session_state tracked by this event
+    sessionState :: (Core.Maybe SessionStateEvent_SessionState),
+    -- | Output only. A human-readable message to explain the state.
+    stateMessage :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SessionStateEvent' with the minimum fields required to make a request.
+newSessionStateEvent ::
+  SessionStateEvent
+newSessionStateEvent =
+  SessionStateEvent
+    { eventTime = Core.Nothing,
+      sessionState = Core.Nothing,
+      stateMessage = Core.Nothing
+    }
+
+instance Core.FromJSON SessionStateEvent where
+  parseJSON =
+    Core.withObject
+      "SessionStateEvent"
+      ( \o ->
+          SessionStateEvent
+            Core.<$> (o Core..:? "eventTime")
+            Core.<*> (o Core..:? "sessionState")
+            Core.<*> (o Core..:? "stateMessage")
+      )
+
+instance Core.ToJSON SessionStateEvent where
+  toJSON SessionStateEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("eventTime" Core..=) Core.<$> eventTime,
+            ("sessionState" Core..=) Core.<$> sessionState,
+            ("stateMessage" Core..=) Core.<$> stateMessage
           ]
       )
 
@@ -2763,7 +3207,9 @@ instance Core.ToJSON RoboStartingIntent where
 --
 -- /See:/ 'newShard' smart constructor.
 data Shard = Shard
-  { -- | Output only. The total number of shards.
+  { -- | Output only. The estimated shard duration based on previous test case timing records, if available.
+    estimatedShardDuration :: (Core.Maybe Core.Duration),
+    -- | Output only. The total number of shards.
     numShards :: (Core.Maybe Core.Int32),
     -- | Output only. The index of the shard among all the shards.
     shardIndex :: (Core.Maybe Core.Int32),
@@ -2777,7 +3223,8 @@ newShard ::
   Shard
 newShard =
   Shard
-    { numShards = Core.Nothing,
+    { estimatedShardDuration = Core.Nothing,
+      numShards = Core.Nothing,
       shardIndex = Core.Nothing,
       testTargetsForShard = Core.Nothing
     }
@@ -2788,7 +3235,8 @@ instance Core.FromJSON Shard where
       "Shard"
       ( \o ->
           Shard
-            Core.<$> (o Core..:? "numShards")
+            Core.<$> (o Core..:? "estimatedShardDuration")
+            Core.<*> (o Core..:? "numShards")
             Core.<*> (o Core..:? "shardIndex")
             Core.<*> (o Core..:? "testTargetsForShard")
       )
@@ -2797,10 +3245,11 @@ instance Core.ToJSON Shard where
   toJSON Shard {..} =
     Core.object
       ( Core.catMaybes
-          [ ("numShards" Core..=) Core.<$> numShards,
+          [ ("estimatedShardDuration" Core..=)
+              Core.<$> estimatedShardDuration,
+            ("numShards" Core..=) Core.<$> numShards,
             ("shardIndex" Core..=) Core.<$> shardIndex,
-            ("testTargetsForShard" Core..=)
-              Core.<$> testTargetsForShard
+            ("testTargetsForShard" Core..=) Core.<$> testTargetsForShard
           ]
       )
 
@@ -2810,6 +3259,8 @@ instance Core.ToJSON Shard where
 data ShardingOption = ShardingOption
   { -- | Shards test cases into the specified groups of packages, classes, and\/or methods.
     manualSharding :: (Core.Maybe ManualSharding),
+    -- | Shards test based on previous test case timing records.
+    smartSharding :: (Core.Maybe SmartSharding),
     -- | Uniformly shards test cases given a total number of shards.
     uniformSharding :: (Core.Maybe UniformSharding)
   }
@@ -2819,7 +3270,11 @@ data ShardingOption = ShardingOption
 newShardingOption ::
   ShardingOption
 newShardingOption =
-  ShardingOption {manualSharding = Core.Nothing, uniformSharding = Core.Nothing}
+  ShardingOption
+    { manualSharding = Core.Nothing,
+      smartSharding = Core.Nothing,
+      uniformSharding = Core.Nothing
+    }
 
 instance Core.FromJSON ShardingOption where
   parseJSON =
@@ -2828,6 +3283,7 @@ instance Core.FromJSON ShardingOption where
       ( \o ->
           ShardingOption
             Core.<$> (o Core..:? "manualSharding")
+            Core.<*> (o Core..:? "smartSharding")
             Core.<*> (o Core..:? "uniformSharding")
       )
 
@@ -2836,9 +3292,40 @@ instance Core.ToJSON ShardingOption where
     Core.object
       ( Core.catMaybes
           [ ("manualSharding" Core..=) Core.<$> manualSharding,
-            ("uniformSharding" Core..=)
-              Core.<$> uniformSharding
+            ("smartSharding" Core..=) Core.<$> smartSharding,
+            ("uniformSharding" Core..=) Core.<$> uniformSharding
           ]
+      )
+
+-- | Shards test based on previous test case timing records.
+--
+-- /See:/ 'newSmartSharding' smart constructor.
+newtype SmartSharding = SmartSharding
+  { -- | The amount of time tests within a shard should take. Default: 300 seconds (5 minutes). The minimum allowed: 120 seconds (2 minutes). The shard count is dynamically set based on time, up to the maximum shard limit (described below). To guarantee at least one test case for each shard, the number of shards will not exceed the number of test cases. Shard duration will be exceeded if: - The maximum shard limit is reached and there is more calculated test time remaining to allocate into shards. - Any individual test is estimated to be longer than the targeted shard duration. Shard duration is not guaranteed because smart sharding uses test case history and default durations which may not be accurate. The rules for finding the test case timing records are: - If the service has processed a test case in the last 30 days, the record of the latest successful test case will be used. - For new test cases, the average duration of other known test cases will be used. - If there are no previous test case timing records
+    -- available, the default test case duration is 15 seconds. Because the actual shard duration can exceed the targeted shard duration, we recommend that you set the targeted value at least 5 minutes less than the maximum allowed test timeout (45 minutes for physical devices and 60 minutes for virtual), or that you use the custom test timeout value that you set. This approach avoids cancelling the shard before all tests can finish. Note that there is a limit for maximum number of shards. When you select one or more physical devices, the number of shards must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 200. When you select only x86 virtual devices, it must be \<= 500. To guarantee at least one test case for per shard, the number of shards will not exceed the number of test cases. Each shard created counts toward daily test quota.
+    targetedShardDuration :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SmartSharding' with the minimum fields required to make a request.
+newSmartSharding ::
+  SmartSharding
+newSmartSharding =
+  SmartSharding {targetedShardDuration = Core.Nothing}
+
+instance Core.FromJSON SmartSharding where
+  parseJSON =
+    Core.withObject
+      "SmartSharding"
+      ( \o ->
+          SmartSharding Core.<$> (o Core..:? "targetedShardDuration")
+      )
+
+instance Core.ToJSON SmartSharding where
+  toJSON SmartSharding {..} =
+    Core.object
+      ( Core.catMaybes
+          [("targetedShardDuration" Core..=) Core.<$> targetedShardDuration]
       )
 
 -- | A starting intent specified by an action, uri, and categories.
@@ -2902,18 +3389,13 @@ instance Core.FromJSON SystraceSetup where
   parseJSON =
     Core.withObject
       "SystraceSetup"
-      ( \o ->
-          SystraceSetup
-            Core.<$> (o Core..:? "durationSeconds")
-      )
+      (\o -> SystraceSetup Core.<$> (o Core..:? "durationSeconds"))
 
 instance Core.ToJSON SystraceSetup where
   toJSON SystraceSetup {..} =
     Core.object
       ( Core.catMaybes
-          [ ("durationSeconds" Core..=)
-              Core.<$> durationSeconds
-          ]
+          [("durationSeconds" Core..=) Core.<$> durationSeconds]
       )
 
 -- | Additional details about the progress of the running test.
@@ -2931,7 +3413,10 @@ data TestDetails = TestDetails
 newTestDetails ::
   TestDetails
 newTestDetails =
-  TestDetails {errorMessage = Core.Nothing, progressMessages = Core.Nothing}
+  TestDetails
+    { errorMessage = Core.Nothing,
+      progressMessages = Core.Nothing
+    }
 
 instance Core.FromJSON TestDetails where
   parseJSON =
@@ -2948,8 +3433,7 @@ instance Core.ToJSON TestDetails where
     Core.object
       ( Core.catMaybes
           [ ("errorMessage" Core..=) Core.<$> errorMessage,
-            ("progressMessages" Core..=)
-              Core.<$> progressMessages
+            ("progressMessages" Core..=) Core.<$> progressMessages
           ]
       )
 
@@ -2999,16 +3483,12 @@ instance Core.ToJSON TestEnvironmentCatalog where
   toJSON TestEnvironmentCatalog {..} =
     Core.object
       ( Core.catMaybes
-          [ ("androidDeviceCatalog" Core..=)
-              Core.<$> androidDeviceCatalog,
-            ("deviceIpBlockCatalog" Core..=)
-              Core.<$> deviceIpBlockCatalog,
-            ("iosDeviceCatalog" Core..=)
-              Core.<$> iosDeviceCatalog,
+          [ ("androidDeviceCatalog" Core..=) Core.<$> androidDeviceCatalog,
+            ("deviceIpBlockCatalog" Core..=) Core.<$> deviceIpBlockCatalog,
+            ("iosDeviceCatalog" Core..=) Core.<$> iosDeviceCatalog,
             ("networkConfigurationCatalog" Core..=)
               Core.<$> networkConfigurationCatalog,
-            ("softwareCatalog" Core..=)
-              Core.<$> softwareCatalog
+            ("softwareCatalog" Core..=) Core.<$> softwareCatalog
           ]
       )
 
@@ -3085,11 +3565,9 @@ instance Core.ToJSON TestExecution where
             ("shard" Core..=) Core.<$> shard,
             ("state" Core..=) Core.<$> state,
             ("testDetails" Core..=) Core.<$> testDetails,
-            ("testSpecification" Core..=)
-              Core.<$> testSpecification,
+            ("testSpecification" Core..=) Core.<$> testSpecification,
             ("timestamp" Core..=) Core.<$> timestamp,
-            ("toolResultsStep" Core..=)
-              Core.<$> toolResultsStep
+            ("toolResultsStep" Core..=) Core.<$> toolResultsStep
           ]
       )
 
@@ -3101,6 +3579,8 @@ data TestMatrix = TestMatrix
     clientInfo :: (Core.Maybe ClientInfo),
     -- | Required. The devices the tests are being executed on.
     environmentMatrix :: (Core.Maybe EnvironmentMatrix),
+    -- | Output only. Details about why a matrix was deemed invalid. If multiple checks can be safely performed, they will be reported but no assumptions should be made about the length of this list.
+    extendedInvalidMatrixDetails :: (Core.Maybe [MatrixErrorDetail]),
     -- | If true, only a single attempt at most will be made to run each execution\/shard in the matrix. Flaky test attempts are not affected. Normally, 2 or more attempts are made if a potential infrastructure issue is detected. This feature is for latency sensitive workloads. The incidence of execution failures may be significantly greater for fail-fast matrices and support is more limited because of that expectation.
     failFast :: (Core.Maybe Core.Bool),
     -- | The number of times a TestExecution should be re-attempted if one or more of its test cases fail for any reason. The maximum number of reruns allowed is 10. Default is 0, which implies no reruns.
@@ -3133,6 +3613,7 @@ newTestMatrix =
   TestMatrix
     { clientInfo = Core.Nothing,
       environmentMatrix = Core.Nothing,
+      extendedInvalidMatrixDetails = Core.Nothing,
       failFast = Core.Nothing,
       flakyTestAttempts = Core.Nothing,
       invalidMatrixDetails = Core.Nothing,
@@ -3154,6 +3635,7 @@ instance Core.FromJSON TestMatrix where
           TestMatrix
             Core.<$> (o Core..:? "clientInfo")
             Core.<*> (o Core..:? "environmentMatrix")
+            Core.<*> (o Core..:? "extendedInvalidMatrixDetails")
             Core.<*> (o Core..:? "failFast")
             Core.<*> (o Core..:? "flakyTestAttempts")
             Core.<*> (o Core..:? "invalidMatrixDetails")
@@ -3172,21 +3654,19 @@ instance Core.ToJSON TestMatrix where
     Core.object
       ( Core.catMaybes
           [ ("clientInfo" Core..=) Core.<$> clientInfo,
-            ("environmentMatrix" Core..=)
-              Core.<$> environmentMatrix,
+            ("environmentMatrix" Core..=) Core.<$> environmentMatrix,
+            ("extendedInvalidMatrixDetails" Core..=)
+              Core.<$> extendedInvalidMatrixDetails,
             ("failFast" Core..=) Core.<$> failFast,
-            ("flakyTestAttempts" Core..=)
-              Core.<$> flakyTestAttempts,
-            ("invalidMatrixDetails" Core..=)
-              Core.<$> invalidMatrixDetails,
+            ("flakyTestAttempts" Core..=) Core.<$> flakyTestAttempts,
+            ("invalidMatrixDetails" Core..=) Core.<$> invalidMatrixDetails,
             ("outcomeSummary" Core..=) Core.<$> outcomeSummary,
             ("projectId" Core..=) Core.<$> projectId,
             ("resultStorage" Core..=) Core.<$> resultStorage,
             ("state" Core..=) Core.<$> state,
             ("testExecutions" Core..=) Core.<$> testExecutions,
             ("testMatrixId" Core..=) Core.<$> testMatrixId,
-            ("testSpecification" Core..=)
-              Core.<$> testSpecification,
+            ("testSpecification" Core..=) Core.<$> testSpecification,
             ("timestamp" Core..=) Core.<$> timestamp
           ]
       )
@@ -3197,7 +3677,7 @@ instance Core.ToJSON TestMatrix where
 data TestSetup = TestSetup
   { -- | The device will be logged in on this account for the duration of the test.
     account :: (Core.Maybe Account),
-    -- | APKs to install in addition to those being directly tested. Currently capped at 100.
+    -- | APKs to install in addition to those being directly tested. These will be installed after the app under test. Currently capped at 100.
     additionalApks :: (Core.Maybe [Apk]),
     -- | List of directories on the device to upload to GCS at the end of the test; they must be absolute paths under \/sdcard, \/storage or \/data\/local\/tmp. Path names are restricted to characters a-z A-Z 0-9 _ - . + and \/ Note: The paths \/sdcard and \/data will be made available and treated as implicit path substitutions. E.g. if \/sdcard on a particular device does not map to external storage, the system will replace it with the external storage path prefix for that device.
     directoriesToPull :: (Core.Maybe [Core.Text]),
@@ -3207,9 +3687,11 @@ data TestSetup = TestSetup
     environmentVariables :: (Core.Maybe [EnvironmentVariable]),
     -- | List of files to push to the device before starting the test.
     filesToPush :: (Core.Maybe [DeviceFile]),
+    -- | Optional. Initial setup APKs to install before the app under test is installed. Currently capped at 100.
+    initialSetupApks :: (Core.Maybe [Apk]),
     -- | The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
     networkProfile :: (Core.Maybe Core.Text),
-    -- | Deprecated: Systrace uses Python 2 which has been sunset 2020-01-01. Support of Systrace may stop at any time, at which point no Systrace file will be provided in the results. Systrace configuration for the run. If set a systrace will be taken, starting on test start and lasting for the configured duration. The systrace file thus obtained is put in the results bucket together with the other artifacts from the run.
+    -- | Systrace configuration for the run. Deprecated: Systrace used Python 2 which was sunsetted on 2020-01-01. Systrace is no longer supported in the Cloud Testing API, and no Systrace file will be provided in the results.
     systrace :: (Core.Maybe SystraceSetup)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3225,6 +3707,7 @@ newTestSetup =
       dontAutograntPermissions = Core.Nothing,
       environmentVariables = Core.Nothing,
       filesToPush = Core.Nothing,
+      initialSetupApks = Core.Nothing,
       networkProfile = Core.Nothing,
       systrace = Core.Nothing
     }
@@ -3241,6 +3724,7 @@ instance Core.FromJSON TestSetup where
             Core.<*> (o Core..:? "dontAutograntPermissions")
             Core.<*> (o Core..:? "environmentVariables")
             Core.<*> (o Core..:? "filesToPush")
+            Core.<*> (o Core..:? "initialSetupApks")
             Core.<*> (o Core..:? "networkProfile")
             Core.<*> (o Core..:? "systrace")
       )
@@ -3251,13 +3735,12 @@ instance Core.ToJSON TestSetup where
       ( Core.catMaybes
           [ ("account" Core..=) Core.<$> account,
             ("additionalApks" Core..=) Core.<$> additionalApks,
-            ("directoriesToPull" Core..=)
-              Core.<$> directoriesToPull,
+            ("directoriesToPull" Core..=) Core.<$> directoriesToPull,
             ("dontAutograntPermissions" Core..=)
               Core.<$> dontAutograntPermissions,
-            ("environmentVariables" Core..=)
-              Core.<$> environmentVariables,
+            ("environmentVariables" Core..=) Core.<$> environmentVariables,
             ("filesToPush" Core..=) Core.<$> filesToPush,
+            ("initialSetupApks" Core..=) Core.<$> initialSetupApks,
             ("networkProfile" Core..=) Core.<$> networkProfile,
             ("systrace" Core..=) Core.<$> systrace
           ]
@@ -3277,6 +3760,8 @@ data TestSpecification = TestSpecification
     disablePerformanceMetrics :: (Core.Maybe Core.Bool),
     -- | Disables video recording. May reduce test latency.
     disableVideoRecording :: (Core.Maybe Core.Bool),
+    -- | An iOS Robo test.
+    iosRoboTest :: (Core.Maybe IosRoboTest),
     -- | An iOS application with a test loop.
     iosTestLoop :: (Core.Maybe IosTestLoop),
     -- | Test setup requirements for iOS.
@@ -3300,6 +3785,7 @@ newTestSpecification =
       androidTestLoop = Core.Nothing,
       disablePerformanceMetrics = Core.Nothing,
       disableVideoRecording = Core.Nothing,
+      iosRoboTest = Core.Nothing,
       iosTestLoop = Core.Nothing,
       iosTestSetup = Core.Nothing,
       iosXcTest = Core.Nothing,
@@ -3318,6 +3804,7 @@ instance Core.FromJSON TestSpecification where
             Core.<*> (o Core..:? "androidTestLoop")
             Core.<*> (o Core..:? "disablePerformanceMetrics")
             Core.<*> (o Core..:? "disableVideoRecording")
+            Core.<*> (o Core..:? "iosRoboTest")
             Core.<*> (o Core..:? "iosTestLoop")
             Core.<*> (o Core..:? "iosTestSetup")
             Core.<*> (o Core..:? "iosXcTest")
@@ -3335,8 +3822,8 @@ instance Core.ToJSON TestSpecification where
             ("androidTestLoop" Core..=) Core.<$> androidTestLoop,
             ("disablePerformanceMetrics" Core..=)
               Core.<$> disablePerformanceMetrics,
-            ("disableVideoRecording" Core..=)
-              Core.<$> disableVideoRecording,
+            ("disableVideoRecording" Core..=) Core.<$> disableVideoRecording,
+            ("iosRoboTest" Core..=) Core.<$> iosRoboTest,
             ("iosTestLoop" Core..=) Core.<$> iosTestLoop,
             ("iosTestSetup" Core..=) Core.<$> iosTestSetup,
             ("iosXcTest" Core..=) Core.<$> iosXcTest,
@@ -3357,23 +3844,19 @@ newtype TestTargetsForShard = TestTargetsForShard
 -- | Creates a value of 'TestTargetsForShard' with the minimum fields required to make a request.
 newTestTargetsForShard ::
   TestTargetsForShard
-newTestTargetsForShard = TestTargetsForShard {testTargets = Core.Nothing}
+newTestTargetsForShard =
+  TestTargetsForShard {testTargets = Core.Nothing}
 
 instance Core.FromJSON TestTargetsForShard where
   parseJSON =
     Core.withObject
       "TestTargetsForShard"
-      ( \o ->
-          TestTargetsForShard
-            Core.<$> (o Core..:? "testTargets")
-      )
+      (\o -> TestTargetsForShard Core.<$> (o Core..:? "testTargets"))
 
 instance Core.ToJSON TestTargetsForShard where
   toJSON TestTargetsForShard {..} =
     Core.object
-      ( Core.catMaybes
-          [("testTargets" Core..=) Core.<$> testTargets]
-      )
+      (Core.catMaybes [("testTargets" Core..=) Core.<$> testTargets])
 
 -- | Represents a tool results execution resource. This has the results of a TestMatrix.
 --
@@ -3434,7 +3917,10 @@ data ToolResultsHistory = ToolResultsHistory
 newToolResultsHistory ::
   ToolResultsHistory
 newToolResultsHistory =
-  ToolResultsHistory {historyId = Core.Nothing, projectId = Core.Nothing}
+  ToolResultsHistory
+    { historyId = Core.Nothing,
+      projectId = Core.Nothing
+    }
 
 instance Core.FromJSON ToolResultsHistory where
   parseJSON =
@@ -3553,10 +4039,8 @@ instance Core.ToJSON TrafficRule where
           [ ("bandwidth" Core..=) Core.<$> bandwidth,
             ("burst" Core..=) Core.<$> burst,
             ("delay" Core..=) Core.<$> delay,
-            ("packetDuplicationRatio" Core..=)
-              Core.<$> packetDuplicationRatio,
-            ("packetLossRatio" Core..=)
-              Core.<$> packetLossRatio
+            ("packetDuplicationRatio" Core..=) Core.<$> packetDuplicationRatio,
+            ("packetLossRatio" Core..=) Core.<$> packetLossRatio
           ]
       )
 
@@ -3564,7 +4048,7 @@ instance Core.ToJSON TrafficRule where
 --
 -- /See:/ 'newUniformSharding' smart constructor.
 newtype UniformSharding = UniformSharding
-  { -- | Required. The total number of shards to create. This must always be a positive number that is no greater than the total number of test cases. When you select one or more physical devices, the number of shards must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 100. When you select only x86 virtual devices, it must be \<= 500.
+  { -- | Required. The total number of shards to create. This must always be a positive number that is no greater than the total number of test cases. When you select one or more physical devices, the number of shards must be \<= 50. When you select one or more ARM virtual devices, it must be \<= 200. When you select only x86 virtual devices, it must be \<= 500.
     numShards :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3578,16 +4062,12 @@ instance Core.FromJSON UniformSharding where
   parseJSON =
     Core.withObject
       "UniformSharding"
-      ( \o ->
-          UniformSharding Core.<$> (o Core..:? "numShards")
-      )
+      (\o -> UniformSharding Core.<$> (o Core..:? "numShards"))
 
 instance Core.ToJSON UniformSharding where
   toJSON UniformSharding {..} =
     Core.object
-      ( Core.catMaybes
-          [("numShards" Core..=) Core.<$> numShards]
-      )
+      (Core.catMaybes [("numShards" Core..=) Core.<$> numShards])
 
 -- | A tag within a manifest. https:\/\/developer.android.com\/guide\/topics\/manifest\/uses-feature-element.html
 --
@@ -3603,7 +4083,8 @@ data UsesFeature = UsesFeature
 -- | Creates a value of 'UsesFeature' with the minimum fields required to make a request.
 newUsesFeature ::
   UsesFeature
-newUsesFeature = UsesFeature {isRequired = Core.Nothing, name = Core.Nothing}
+newUsesFeature =
+  UsesFeature {isRequired = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON UsesFeature where
   parseJSON =
@@ -3624,6 +4105,45 @@ instance Core.ToJSON UsesFeature where
           ]
       )
 
+-- | The tag within a manifest. https:\/\/developer.android.com\/guide\/topics\/manifest\/uses-permission-element.html
+--
+-- /See:/ 'newUsesPermissionTag' smart constructor.
+data UsesPermissionTag = UsesPermissionTag
+  { -- | The android:name value
+    maxSdkVersion :: (Core.Maybe Core.Int32),
+    -- | The android:name value
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UsesPermissionTag' with the minimum fields required to make a request.
+newUsesPermissionTag ::
+  UsesPermissionTag
+newUsesPermissionTag =
+  UsesPermissionTag
+    { maxSdkVersion = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance Core.FromJSON UsesPermissionTag where
+  parseJSON =
+    Core.withObject
+      "UsesPermissionTag"
+      ( \o ->
+          UsesPermissionTag
+            Core.<$> (o Core..:? "maxSdkVersion")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON UsesPermissionTag where
+  toJSON UsesPermissionTag {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxSdkVersion" Core..=) Core.<$> maxSdkVersion,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | An Xcode version that an iOS version is compatible with.
 --
 -- /See:/ 'newXcodeVersion' smart constructor.
@@ -3638,7 +4158,8 @@ data XcodeVersion = XcodeVersion
 -- | Creates a value of 'XcodeVersion' with the minimum fields required to make a request.
 newXcodeVersion ::
   XcodeVersion
-newXcodeVersion = XcodeVersion {tags = Core.Nothing, version = Core.Nothing}
+newXcodeVersion =
+  XcodeVersion {tags = Core.Nothing, version = Core.Nothing}
 
 instance Core.FromJSON XcodeVersion where
   parseJSON =
@@ -3646,7 +4167,8 @@ instance Core.FromJSON XcodeVersion where
       "XcodeVersion"
       ( \o ->
           XcodeVersion
-            Core.<$> (o Core..:? "tags") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "tags")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON XcodeVersion where

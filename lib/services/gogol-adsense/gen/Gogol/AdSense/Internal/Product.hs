@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdSense.Internal.Product
@@ -122,6 +120,10 @@ module Gogol.AdSense.Internal.Product
     ListPaymentsResponse (..),
     newListPaymentsResponse,
 
+    -- * ListPolicyIssuesResponse
+    ListPolicyIssuesResponse (..),
+    newListPolicyIssuesResponse,
+
     -- * ListSavedReportsResponse
     ListSavedReportsResponse (..),
     newListSavedReportsResponse,
@@ -137,6 +139,14 @@ module Gogol.AdSense.Internal.Product
     -- * Payment
     Payment (..),
     newPayment,
+
+    -- * PolicyIssue
+    PolicyIssue (..),
+    newPolicyIssue,
+
+    -- * PolicyTopic
+    PolicyTopic (..),
+    newPolicyTopic,
 
     -- * ReportResult
     ReportResult (..),
@@ -165,7 +175,7 @@ module Gogol.AdSense.Internal.Product
 where
 
 import Gogol.AdSense.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Representation of an account.
 --
@@ -246,7 +256,10 @@ data AdBlockingRecoveryTag = AdBlockingRecoveryTag
 newAdBlockingRecoveryTag ::
   AdBlockingRecoveryTag
 newAdBlockingRecoveryTag =
-  AdBlockingRecoveryTag {errorProtectionCode = Core.Nothing, tag = Core.Nothing}
+  AdBlockingRecoveryTag
+    { errorProtectionCode = Core.Nothing,
+      tag = Core.Nothing
+    }
 
 instance Core.FromJSON AdBlockingRecoveryTag where
   parseJSON =
@@ -262,8 +275,7 @@ instance Core.ToJSON AdBlockingRecoveryTag where
   toJSON AdBlockingRecoveryTag {..} =
     Core.object
       ( Core.catMaybes
-          [ ("errorProtectionCode" Core..=)
-              Core.<$> errorProtectionCode,
+          [ ("errorProtectionCode" Core..=) Core.<$> errorProtectionCode,
             ("tag" Core..=) Core.<$> tag
           ]
       )
@@ -312,8 +324,7 @@ instance Core.ToJSON AdClient where
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("productCode" Core..=) Core.<$> productCode,
-            ("reportingDimensionId" Core..=)
-              Core.<$> reportingDimensionId,
+            ("reportingDimensionId" Core..=) Core.<$> reportingDimensionId,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -374,7 +385,7 @@ data AdUnit = AdUnit
     name :: (Core.Maybe Core.Text),
     -- | Output only. Unique ID of the ad unit as used in the @AD_UNIT_ID@ reporting dimension.
     reportingDimensionId :: (Core.Maybe Core.Text),
-    -- | State of the ad unit.
+    -- | Required. State of the ad unit.
     state :: (Core.Maybe AdUnit_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -408,12 +419,10 @@ instance Core.ToJSON AdUnit where
   toJSON AdUnit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentAdsSettings" Core..=)
-              Core.<$> contentAdsSettings,
+          [ ("contentAdsSettings" Core..=) Core.<$> contentAdsSettings,
             ("displayName" Core..=) Core.<$> displayName,
             ("name" Core..=) Core.<$> name,
-            ("reportingDimensionId" Core..=)
-              Core.<$> reportingDimensionId,
+            ("reportingDimensionId" Core..=) Core.<$> reportingDimensionId,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -440,8 +449,7 @@ instance Core.FromJSON AdUnitAdCode where
 
 instance Core.ToJSON AdUnitAdCode where
   toJSON AdUnitAdCode {..} =
-    Core.object
-      (Core.catMaybes [("adCode" Core..=) Core.<$> adCode])
+    Core.object (Core.catMaybes [("adCode" Core..=) Core.<$> adCode])
 
 -- | Representation of an alert.
 --
@@ -514,8 +522,7 @@ instance Core.FromJSON Cell where
 
 instance Core.ToJSON Cell where
   toJSON Cell {..} =
-    Core.object
-      (Core.catMaybes [("value" Core..=) Core.<$> value])
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
 
 -- | Settings specific to content ads (AFC).
 --
@@ -540,16 +547,15 @@ instance Core.FromJSON ContentAdsSettings where
       "ContentAdsSettings"
       ( \o ->
           ContentAdsSettings
-            Core.<$> (o Core..:? "size") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "size")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON ContentAdsSettings where
   toJSON ContentAdsSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("size" Core..=) Core.<$> size,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("size" Core..=) Core.<$> size, ("type" Core..=) Core.<$> type']
       )
 
 -- | Representation of a custom channel.
@@ -597,8 +603,7 @@ instance Core.ToJSON CustomChannel where
           [ ("active" Core..=) Core.<$> active,
             ("displayName" Core..=) Core.<$> displayName,
             ("name" Core..=) Core.<$> name,
-            ("reportingDimensionId" Core..=)
-              Core.<$> reportingDimensionId
+            ("reportingDimensionId" Core..=) Core.<$> reportingDimensionId
           ]
       )
 
@@ -618,7 +623,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -653,8 +663,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -768,14 +777,10 @@ instance Core.FromJSON HttpBody_ExtensionsItem where
   parseJSON =
     Core.withObject
       "HttpBody_ExtensionsItem"
-      ( \o ->
-          HttpBody_ExtensionsItem
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> HttpBody_ExtensionsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON HttpBody_ExtensionsItem where
-  toJSON HttpBody_ExtensionsItem {..} =
-    Core.toJSON additional
+  toJSON HttpBody_ExtensionsItem {..} = Core.toJSON additional
 
 -- | Response definition for the account list rpc.
 --
@@ -792,7 +797,10 @@ data ListAccountsResponse = ListAccountsResponse
 newListAccountsResponse ::
   ListAccountsResponse
 newListAccountsResponse =
-  ListAccountsResponse {accounts = Core.Nothing, nextPageToken = Core.Nothing}
+  ListAccountsResponse
+    { accounts = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListAccountsResponse where
   parseJSON =
@@ -828,7 +836,10 @@ data ListAdClientsResponse = ListAdClientsResponse
 newListAdClientsResponse ::
   ListAdClientsResponse
 newListAdClientsResponse =
-  ListAdClientsResponse {adClients = Core.Nothing, nextPageToken = Core.Nothing}
+  ListAdClientsResponse
+    { adClients = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListAdClientsResponse where
   parseJSON =
@@ -864,7 +875,10 @@ data ListAdUnitsResponse = ListAdUnitsResponse
 newListAdUnitsResponse ::
   ListAdUnitsResponse
 newListAdUnitsResponse =
-  ListAdUnitsResponse {adUnits = Core.Nothing, nextPageToken = Core.Nothing}
+  ListAdUnitsResponse
+    { adUnits = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListAdUnitsResponse where
   parseJSON =
@@ -903,14 +917,11 @@ instance Core.FromJSON ListAlertsResponse where
   parseJSON =
     Core.withObject
       "ListAlertsResponse"
-      ( \o ->
-          ListAlertsResponse Core.<$> (o Core..:? "alerts")
-      )
+      (\o -> ListAlertsResponse Core.<$> (o Core..:? "alerts"))
 
 instance Core.ToJSON ListAlertsResponse where
   toJSON ListAlertsResponse {..} =
-    Core.object
-      (Core.catMaybes [("alerts" Core..=) Core.<$> alerts])
+    Core.object (Core.catMaybes [("alerts" Core..=) Core.<$> alerts])
 
 -- | Response definition for the child account list rpc.
 --
@@ -1049,10 +1060,7 @@ newListLinkedCustomChannelsResponse =
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListLinkedCustomChannelsResponse
-  where
+instance Core.FromJSON ListLinkedCustomChannelsResponse where
   parseJSON =
     Core.withObject
       "ListLinkedCustomChannelsResponse"
@@ -1083,22 +1091,57 @@ newtype ListPaymentsResponse = ListPaymentsResponse
 -- | Creates a value of 'ListPaymentsResponse' with the minimum fields required to make a request.
 newListPaymentsResponse ::
   ListPaymentsResponse
-newListPaymentsResponse = ListPaymentsResponse {payments = Core.Nothing}
+newListPaymentsResponse =
+  ListPaymentsResponse {payments = Core.Nothing}
 
 instance Core.FromJSON ListPaymentsResponse where
   parseJSON =
     Core.withObject
       "ListPaymentsResponse"
-      ( \o ->
-          ListPaymentsResponse
-            Core.<$> (o Core..:? "payments")
-      )
+      (\o -> ListPaymentsResponse Core.<$> (o Core..:? "payments"))
 
 instance Core.ToJSON ListPaymentsResponse where
   toJSON ListPaymentsResponse {..} =
     Core.object
+      (Core.catMaybes [("payments" Core..=) Core.<$> payments])
+
+-- | Response definition for the policy issues list rpc. Policy issues are reported only if the publisher has at least one AFC ad client in READY or GETTING_READY state. If the publisher has no such AFC ad client, the response will be an empty list.
+--
+-- /See:/ 'newListPolicyIssuesResponse' smart constructor.
+data ListPolicyIssuesResponse = ListPolicyIssuesResponse
+  { -- | Continuation token used to page through policy issues. To retrieve the next page of the results, set the next request\'s \"page_token\" value to this.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The policy issues returned in the list response.
+    policyIssues :: (Core.Maybe [PolicyIssue])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListPolicyIssuesResponse' with the minimum fields required to make a request.
+newListPolicyIssuesResponse ::
+  ListPolicyIssuesResponse
+newListPolicyIssuesResponse =
+  ListPolicyIssuesResponse
+    { nextPageToken = Core.Nothing,
+      policyIssues = Core.Nothing
+    }
+
+instance Core.FromJSON ListPolicyIssuesResponse where
+  parseJSON =
+    Core.withObject
+      "ListPolicyIssuesResponse"
+      ( \o ->
+          ListPolicyIssuesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "policyIssues")
+      )
+
+instance Core.ToJSON ListPolicyIssuesResponse where
+  toJSON ListPolicyIssuesResponse {..} =
+    Core.object
       ( Core.catMaybes
-          [("payments" Core..=) Core.<$> payments]
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("policyIssues" Core..=) Core.<$> policyIssues
+          ]
       )
 
 -- | Response definition for the saved reports list rpc.
@@ -1155,7 +1198,10 @@ data ListSitesResponse = ListSitesResponse
 newListSitesResponse ::
   ListSitesResponse
 newListSitesResponse =
-  ListSitesResponse {nextPageToken = Core.Nothing, sites = Core.Nothing}
+  ListSitesResponse
+    { nextPageToken = Core.Nothing,
+      sites = Core.Nothing
+    }
 
 instance Core.FromJSON ListSitesResponse where
   parseJSON =
@@ -1232,7 +1278,11 @@ data Payment = Payment
 newPayment ::
   Payment
 newPayment =
-  Payment {amount = Core.Nothing, date = Core.Nothing, name = Core.Nothing}
+  Payment
+    { amount = Core.Nothing,
+      date = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON Payment where
   parseJSON =
@@ -1252,6 +1302,141 @@ instance Core.ToJSON Payment where
           [ ("amount" Core..=) Core.<$> amount,
             ("date" Core..=) Core.<$> date,
             ("name" Core..=) Core.<$> name
+          ]
+      )
+
+-- | Representation of a policy issue for a single entity (site, site-section, or page). All issues for a single entity are represented by a single PolicyIssue resource, though that PolicyIssue can have multiple causes (or \"topics\") that can change over time. Policy issues are removed if there are no issues detected recently or if there\'s a recent successful appeal for the entity.
+--
+-- /See:/ 'newPolicyIssue' smart constructor.
+data PolicyIssue = PolicyIssue
+  { -- | Required. The most severe action taken on the entity over the past seven days.
+    action :: (Core.Maybe PolicyIssue_Action),
+    -- | Optional. List of ad clients associated with the policy issue (either as the primary ad client or an associated host\/secondary ad client). In the latter case, this will be an ad client that is not owned by the current account.
+    adClients :: (Core.Maybe [Core.Text]),
+    -- | Required. Total number of ad requests affected by the policy violations over the past seven days.
+    adRequestCount :: (Core.Maybe Core.Int64),
+    -- | Required. Type of the entity indicating if the entity is a site, site-section, or page.
+    entityType :: (Core.Maybe PolicyIssue_EntityType),
+    -- | Required. The date (in the America\/Los_Angeles timezone) when policy violations were first detected on the entity.
+    firstDetectedDate :: (Core.Maybe Date),
+    -- | Required. The date (in the America\/Los_Angeles timezone) when policy violations were last detected on the entity.
+    lastDetectedDate :: (Core.Maybe Date),
+    -- | Required. Resource name of the entity with policy issues. Format: accounts\/{account}\/policyIssues\/{policy_issue}
+    name :: (Core.Maybe Core.Text),
+    -- | Required. Unordered list. The policy topics that this entity was found to violate over the past seven days.
+    policyTopics :: (Core.Maybe [PolicyTopic]),
+    -- | Required. Hostname\/domain of the entity (for example \"foo.com\" or \"www.foo.com\"). This /should/ be a bare domain\/host name without any protocol. This will be present for all policy issues.
+    site :: (Core.Maybe Core.Text),
+    -- | Optional. Prefix of the site-section having policy issues (For example \"foo.com\/bar-section\"). This will be present if the @entity_type@ is @SITE_SECTION@ and will be absent for other entity types.
+    siteSection :: (Core.Maybe Core.Text),
+    -- | Optional. URI of the page having policy violations (for example \"foo.com\/bar\" or \"www.foo.com\/bar\"). This will be present if the @entity_type@ is @PAGE@ and will be absent for other entity types.
+    uri :: (Core.Maybe Core.Text),
+    -- | Optional. The date (in the America\/Los_Angeles timezone) when the entity will have ad serving demand restricted or ad serving disabled. This is present only for issues with a @WARNED@ enforcement action. See https:\/\/support.google.com\/adsense\/answer\/11066888.
+    warningEscalationDate :: (Core.Maybe Date)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PolicyIssue' with the minimum fields required to make a request.
+newPolicyIssue ::
+  PolicyIssue
+newPolicyIssue =
+  PolicyIssue
+    { action = Core.Nothing,
+      adClients = Core.Nothing,
+      adRequestCount = Core.Nothing,
+      entityType = Core.Nothing,
+      firstDetectedDate = Core.Nothing,
+      lastDetectedDate = Core.Nothing,
+      name = Core.Nothing,
+      policyTopics = Core.Nothing,
+      site = Core.Nothing,
+      siteSection = Core.Nothing,
+      uri = Core.Nothing,
+      warningEscalationDate = Core.Nothing
+    }
+
+instance Core.FromJSON PolicyIssue where
+  parseJSON =
+    Core.withObject
+      "PolicyIssue"
+      ( \o ->
+          PolicyIssue
+            Core.<$> (o Core..:? "action")
+            Core.<*> (o Core..:? "adClients")
+            Core.<*> (o Core..:? "adRequestCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "entityType")
+            Core.<*> (o Core..:? "firstDetectedDate")
+            Core.<*> (o Core..:? "lastDetectedDate")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "policyTopics")
+            Core.<*> (o Core..:? "site")
+            Core.<*> (o Core..:? "siteSection")
+            Core.<*> (o Core..:? "uri")
+            Core.<*> (o Core..:? "warningEscalationDate")
+      )
+
+instance Core.ToJSON PolicyIssue where
+  toJSON PolicyIssue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("action" Core..=) Core.<$> action,
+            ("adClients" Core..=) Core.<$> adClients,
+            ("adRequestCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> adRequestCount,
+            ("entityType" Core..=) Core.<$> entityType,
+            ("firstDetectedDate" Core..=) Core.<$> firstDetectedDate,
+            ("lastDetectedDate" Core..=) Core.<$> lastDetectedDate,
+            ("name" Core..=) Core.<$> name,
+            ("policyTopics" Core..=) Core.<$> policyTopics,
+            ("site" Core..=) Core.<$> site,
+            ("siteSection" Core..=) Core.<$> siteSection,
+            ("uri" Core..=) Core.<$> uri,
+            ("warningEscalationDate" Core..=) Core.<$> warningEscalationDate
+          ]
+      )
+
+-- | Information about a particular policy topic. A policy topic represents a single class of policy issue that can impact ad serving for your site. For example, sexual content or having ads that obscure your content. A single policy issue can have multiple policy topics for a single entity.
+--
+-- /See:/ 'newPolicyTopic' smart constructor.
+data PolicyTopic = PolicyTopic
+  { -- | Required. Deprecated. Policy topics no longer have a \"must-fix\" classification.
+    mustFix :: (Core.Maybe Core.Bool),
+    -- | Required. The policy topic. For example, \"sexual-content\" or \"ads-obscuring-content\".\"
+    topic :: (Core.Maybe Core.Text),
+    -- | Optional. The type of policy topic. For example, \"POLICY\" represents all the policy topics that are related to the Google Publisher Policy (GPP). See https:\/\/support.google.com\/adsense\/answer\/15689616.
+    type' :: (Core.Maybe PolicyTopic_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PolicyTopic' with the minimum fields required to make a request.
+newPolicyTopic ::
+  PolicyTopic
+newPolicyTopic =
+  PolicyTopic
+    { mustFix = Core.Nothing,
+      topic = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON PolicyTopic where
+  parseJSON =
+    Core.withObject
+      "PolicyTopic"
+      ( \o ->
+          PolicyTopic
+            Core.<$> (o Core..:? "mustFix")
+            Core.<*> (o Core..:? "topic")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON PolicyTopic where
+  toJSON PolicyTopic {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("mustFix" Core..=) Core.<$> mustFix,
+            ("topic" Core..=) Core.<$> topic,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
@@ -1304,9 +1489,7 @@ instance Core.FromJSON ReportResult where
             Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "rows")
             Core.<*> (o Core..:? "startDate")
-            Core.<*> ( o Core..:? "totalMatchedRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalMatchedRows" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "totals")
             Core.<*> (o Core..:? "warnings")
       )
@@ -1320,7 +1503,8 @@ instance Core.ToJSON ReportResult where
             ("headers" Core..=) Core.<$> headers,
             ("rows" Core..=) Core.<$> rows,
             ("startDate" Core..=) Core.<$> startDate,
-            ("totalMatchedRows" Core..=) Core.. Core.AsText
+            ("totalMatchedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> totalMatchedRows,
             ("totals" Core..=) Core.<$> totals,
             ("warnings" Core..=) Core.<$> warnings
@@ -1343,14 +1527,11 @@ newRow = Row {cells = Core.Nothing}
 
 instance Core.FromJSON Row where
   parseJSON =
-    Core.withObject
-      "Row"
-      (\o -> Row Core.<$> (o Core..:? "cells"))
+    Core.withObject "Row" (\o -> Row Core.<$> (o Core..:? "cells"))
 
 instance Core.ToJSON Row where
   toJSON Row {..} =
-    Core.object
-      (Core.catMaybes [("cells" Core..=) Core.<$> cells])
+    Core.object (Core.catMaybes [("cells" Core..=) Core.<$> cells])
 
 -- | Representation of a saved report.
 --
@@ -1366,7 +1547,8 @@ data SavedReport = SavedReport
 -- | Creates a value of 'SavedReport' with the minimum fields required to make a request.
 newSavedReport ::
   SavedReport
-newSavedReport = SavedReport {name = Core.Nothing, title = Core.Nothing}
+newSavedReport =
+  SavedReport {name = Core.Nothing, title = Core.Nothing}
 
 instance Core.FromJSON SavedReport where
   parseJSON =
@@ -1374,16 +1556,15 @@ instance Core.FromJSON SavedReport where
       "SavedReport"
       ( \o ->
           SavedReport
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "title")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "title")
       )
 
 instance Core.ToJSON SavedReport where
   toJSON SavedReport {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("title" Core..=) Core.<$> title
-          ]
+          [("name" Core..=) Core.<$> name, ("title" Core..=) Core.<$> title]
       )
 
 -- | Representation of a Site.
@@ -1435,8 +1616,7 @@ instance Core.ToJSON Site where
           [ ("autoAdsEnabled" Core..=) Core.<$> autoAdsEnabled,
             ("domain" Core..=) Core.<$> domain,
             ("name" Core..=) Core.<$> name,
-            ("reportingDimensionId" Core..=)
-              Core.<$> reportingDimensionId,
+            ("reportingDimensionId" Core..=) Core.<$> reportingDimensionId,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -1445,9 +1625,9 @@ instance Core.ToJSON Site where
 --
 -- /See:/ 'newTimeZone' smart constructor.
 data TimeZone = TimeZone
-  { -- | IANA Time Zone Database time zone, e.g. \"America\/New_York\".
+  { -- | IANA Time Zone Database time zone. For example \"America\/New_York\".
     id :: (Core.Maybe Core.Text),
-    -- | Optional. IANA Time Zone Database version number, e.g. \"2019a\".
+    -- | Optional. IANA Time Zone Database version number. For example \"2019a\".
     version :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1463,16 +1643,15 @@ instance Core.FromJSON TimeZone where
       "TimeZone"
       ( \o ->
           TimeZone
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON TimeZone where
   toJSON TimeZone {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("version" Core..=) Core.<$> version
-          ]
+          [("id" Core..=) Core.<$> id, ("version" Core..=) Core.<$> version]
       )
 
 -- | Representation of a URL channel. URL channels allow you to track the performance of particular pages in your site; see <https://support.google.com/adsense/answer/2923836 URL channels> for more information.
@@ -1514,8 +1693,7 @@ instance Core.ToJSON UrlChannel where
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("reportingDimensionId" Core..=)
-              Core.<$> reportingDimensionId,
+            ("reportingDimensionId" Core..=) Core.<$> reportingDimensionId,
             ("uriPattern" Core..=) Core.<$> uriPattern
           ]
       )

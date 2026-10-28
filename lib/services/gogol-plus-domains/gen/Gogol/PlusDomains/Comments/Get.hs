@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlusDomains.Comments.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.PlusDomains.Comments.Get
 where
 
 import Gogol.PlusDomains.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @plusDomains.comments.get@ method which the
 -- 'PlusDomainsCommentsGet' request conforms to.
@@ -75,14 +73,9 @@ instance Core.GoogleRequest PlusDomainsCommentsGet where
     Scopes PlusDomainsCommentsGet =
       '[Plus'Login, Plus'Stream'Read]
   requestClient PlusDomainsCommentsGet {..} =
-    go
-      commentId
-      (Core.Just Core.AltJSON)
-      plusDomainsService
+    go commentId (Core.Just Core.AltJSON) plusDomainsService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PlusDomainsCommentsGetResource
-          )
+          (Core.Proxy :: Core.Proxy PlusDomainsCommentsGetResource)
           Core.mempty

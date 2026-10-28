@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.BatchUpdate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.BatchUpdate
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.batchUpdate@ method which the
@@ -47,19 +45,14 @@ import Gogol.Sheets.Types
 type SheetsSpreadsheetsBatchUpdateResource =
   "v4"
     Core.:> "spreadsheets"
-    Core.:> Core.CaptureMode
-              "spreadsheetId"
-              "batchUpdate"
-              Core.Text
+    Core.:> Core.CaptureMode "spreadsheetId" "batchUpdate" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchUpdateSpreadsheetRequest
+    Core.:> Core.ReqBody '[Core.JSON] BatchUpdateSpreadsheetRequest
     Core.:> Core.Post '[Core.JSON] BatchUpdateSpreadsheetResponse
 
 -- | Applies one or more updates to the spreadsheet. Each request is validated before being applied. If any request is not valid then the entire request will fail and nothing will be applied. Some requests have replies to give you some information about how they are applied. The replies will mirror the requests. For example, if you applied 4 updates and the 3rd one had a reply, then the response will have 2 empty replies, the actual reply, and another empty reply, in that order. Due to the collaborative nature of spreadsheets, it is not guaranteed that the spreadsheet will reflect exactly your changes after this completes, however it is guaranteed that the updates in the request will be applied together atomically. Your changes may be altered with respect to collaborator changes. If there are no collaborators, the spreadsheet should reflect your changes.
@@ -101,19 +94,13 @@ newSheetsSpreadsheetsBatchUpdate payload spreadsheetId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SheetsSpreadsheetsBatchUpdate
-  where
+instance Core.GoogleRequest SheetsSpreadsheetsBatchUpdate where
   type
     Rs SheetsSpreadsheetsBatchUpdate =
       BatchUpdateSpreadsheetResponse
   type
     Scopes SheetsSpreadsheetsBatchUpdate =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
   requestClient SheetsSpreadsheetsBatchUpdate {..} =
     go
       spreadsheetId
@@ -128,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SheetsSpreadsheetsBatchUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy SheetsSpreadsheetsBatchUpdateResource)
           Core.mempty

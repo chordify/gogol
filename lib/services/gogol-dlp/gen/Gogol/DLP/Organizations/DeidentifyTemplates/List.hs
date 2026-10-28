@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.DeidentifyTemplates.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists DeidentifyTemplates. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- Lists DeidentifyTemplates. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.deidentifyTemplates.list@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.deidentifyTemplates.list@.
 module Gogol.DLP.Organizations.DeidentifyTemplates.List
   ( -- * Resource
     DLPOrganizationsDeidentifyTemplatesListResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.DeidentifyTemplates.List
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.deidentifyTemplates.list@ method which the
 -- 'DLPOrganizationsDeidentifyTemplatesList' request conforms to.
@@ -62,7 +60,7 @@ type DLPOrganizationsDeidentifyTemplatesListResource =
               '[Core.JSON]
               GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
 
--- | Lists DeidentifyTemplates. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates-deid to learn more.
+-- | Lists DeidentifyTemplates. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates-deid to learn more.
 --
 -- /See:/ 'newDLPOrganizationsDeidentifyTemplatesList' smart constructor.
 data DLPOrganizationsDeidentifyTemplatesList = DLPOrganizationsDeidentifyTemplatesList
@@ -74,13 +72,13 @@ data DLPOrganizationsDeidentifyTemplatesList = DLPOrganizationsDeidentifyTemplat
     callback :: (Core.Maybe Core.Text),
     -- | Deprecated. This field has no effect.
     locationId :: (Core.Maybe Core.Text),
-    -- | Comma separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case-insensitive, default sorting order is ascending, redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the template was created. - @update_time@: corresponds to the time the template was last updated. - @name@: corresponds to the template\'s name. - @display_name@: corresponds to the template\'s display name.
+    -- | Comma-separated list of fields to order by, followed by @asc@ or @desc@ postfix. This list is case insensitive. The default sorting order is ascending. Redundant space characters are insignificant. Example: @name asc,update_time, create_time desc@ Supported fields are: - @create_time@: corresponds to the time the template was created. - @update_time@: corresponds to the time the template was last updated. - @name@: corresponds to the template\'s name. - @display_name@: corresponds to the template\'s display name.
     orderBy :: (Core.Maybe Core.Text),
-    -- | Size of the page, can be limited by the server. If zero server returns a page of max size 100.
+    -- | Size of the page. This value can be limited by the server. If zero server returns a page of max size 100.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | Page token to continue retrieval. Comes from previous call to @ListDeidentifyTemplates@.
+    -- | Page token to continue retrieval. Comes from the previous call to @ListDeidentifyTemplates@.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT/ID + Organizations scope, location specified: @organizations\/@ORG/ID@\/locations\/@LOCATION/ID + Organizations scope, no location specified (defaults to global): @organizations\/@ORG/ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ + Organizations scope, location specified: @organizations\/{org_id}\/locations\/{location_id}@ + Organizations scope, no location specified (defaults to global): @organizations\/{org_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -91,7 +89,7 @@ data DLPOrganizationsDeidentifyTemplatesList = DLPOrganizationsDeidentifyTemplat
 
 -- | Creates a value of 'DLPOrganizationsDeidentifyTemplatesList' with the minimum fields required to make a request.
 newDLPOrganizationsDeidentifyTemplatesList ::
-  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT/ID + Organizations scope, location specified: @organizations\/@ORG/ID@\/locations\/@LOCATION/ID + Organizations scope, no location specified (defaults to global): @organizations\/@ORG/ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on the scope of the request (project or organization) and whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ + Organizations scope, location specified: @organizations\/{org_id}\/locations\/{location_id}@ + Organizations scope, no location specified (defaults to global): @organizations\/{org_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   DLPOrganizationsDeidentifyTemplatesList
 newDLPOrganizationsDeidentifyTemplatesList parent =
@@ -108,36 +106,31 @@ newDLPOrganizationsDeidentifyTemplatesList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsDeidentifyTemplatesList
-  where
+instance Core.GoogleRequest DLPOrganizationsDeidentifyTemplatesList where
   type
     Rs DLPOrganizationsDeidentifyTemplatesList =
       GooglePrivacyDlpV2ListDeidentifyTemplatesResponse
   type
     Scopes DLPOrganizationsDeidentifyTemplatesList =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsDeidentifyTemplatesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        locationId
-        orderBy
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsDeidentifyTemplatesListResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsDeidentifyTemplatesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      locationId
+      orderBy
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsDeidentifyTemplatesListResource
+          )
+          Core.mempty

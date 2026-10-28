@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Webproperties.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Webproperties.List
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.webproperties.list@ method which the
 -- 'AnalyticsManagementWebpropertiesList' request conforms to.
@@ -81,32 +79,22 @@ newAnalyticsManagementWebpropertiesList accountId =
       startIndex = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementWebpropertiesList
-  where
-  type
-    Rs AnalyticsManagementWebpropertiesList =
-      Webproperties
+instance Core.GoogleRequest AnalyticsManagementWebpropertiesList where
+  type Rs AnalyticsManagementWebpropertiesList = Webproperties
   type
     Scopes AnalyticsManagementWebpropertiesList =
-      '[ Analytics'FullControl,
-         Analytics'Edit,
-         Analytics'Readonly
-       ]
-  requestClient
-    AnalyticsManagementWebpropertiesList {..} =
-      go
-        accountId
-        maxResults
-        startIndex
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementWebpropertiesListResource
-            )
-            Core.mempty
+      '[Analytics'FullControl, Analytics'Edit, Analytics'Readonly]
+  requestClient AnalyticsManagementWebpropertiesList {..} =
+    go
+      accountId
+      maxResults
+      startIndex
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementWebpropertiesListResource
+          )
+          Core.mempty

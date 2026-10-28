@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Tables.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Tables.Delete
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.tables.delete@ method which the
 -- 'BigQueryTablesDelete' request conforms to.
@@ -53,6 +51,11 @@ type BigQueryTablesDeleteResource =
     Core.:> Core.Capture "datasetId" Core.Text
     Core.:> "tables"
     Core.:> Core.Capture "tableId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
@@ -60,29 +63,44 @@ type BigQueryTablesDeleteResource =
 --
 -- /See:/ 'newBigQueryTablesDelete' smart constructor.
 data BigQueryTablesDelete = BigQueryTablesDelete
-  { -- | Dataset ID of the table to delete
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Dataset ID of the table to delete
     datasetId :: Core.Text,
-    -- | Project ID of the table to delete
+    -- | Required. Project ID of the table to delete
     projectId :: Core.Text,
-    -- | Table ID of the table to delete
-    tableId :: Core.Text
+    -- | Required. Table ID of the table to delete
+    tableId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryTablesDelete' with the minimum fields required to make a request.
 newBigQueryTablesDelete ::
-  -- |  Dataset ID of the table to delete See 'datasetId'.
+  -- |  Required. Dataset ID of the table to delete See 'datasetId'.
   Core.Text ->
-  -- |  Project ID of the table to delete See 'projectId'.
+  -- |  Required. Project ID of the table to delete See 'projectId'.
   Core.Text ->
-  -- |  Table ID of the table to delete See 'tableId'.
+  -- |  Required. Table ID of the table to delete See 'tableId'.
   Core.Text ->
   BigQueryTablesDelete
 newBigQueryTablesDelete datasetId projectId tableId =
   BigQueryTablesDelete
-    { datasetId = datasetId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      datasetId = datasetId,
       projectId = projectId,
-      tableId = tableId
+      tableId = tableId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryTablesDelete where
@@ -95,12 +113,15 @@ instance Core.GoogleRequest BigQueryTablesDelete where
       projectId
       datasetId
       tableId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BigQueryTablesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy BigQueryTablesDeleteResource)
           Core.mempty

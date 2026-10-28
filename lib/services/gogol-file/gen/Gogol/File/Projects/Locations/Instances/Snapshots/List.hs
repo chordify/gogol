@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File.Projects.Locations.Instances.Snapshots.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.File.Projects.Locations.Instances.Snapshots.List
 where
 
 import Gogol.File.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @file.projects.locations.instances.snapshots.list@ method which the
 -- 'FileProjectsLocationsInstancesSnapshotsList' request conforms to.
@@ -55,6 +53,7 @@ type FileProjectsLocationsInstancesSnapshotsListResource =
     Core.:> Core.QueryParam "orderBy" Core.Text
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
+    Core.:> Core.QueryParam "returnPartialSuccess" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -80,6 +79,8 @@ data FileProjectsLocationsInstancesSnapshotsList = FileProjectsLocationsInstance
     pageToken :: (Core.Maybe Core.Text),
     -- | Required. The instance for which to retrieve snapshot information, in the format @projects\/{project_id}\/locations\/{location}\/instances\/{instance_id}@.
     parent :: Core.Text,
+    -- | Optional. If true, allow partial responses for multi-regional Aggregated List requests.
+    returnPartialSuccess :: (Core.Maybe Core.Bool),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -102,6 +103,7 @@ newFileProjectsLocationsInstancesSnapshotsList parent =
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
       parent = parent,
+      returnPartialSuccess = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
@@ -114,29 +116,27 @@ instance
     Rs FileProjectsLocationsInstancesSnapshotsList =
       ListSnapshotsResponse
   type
-    Scopes
-      FileProjectsLocationsInstancesSnapshotsList =
+    Scopes FileProjectsLocationsInstancesSnapshotsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    FileProjectsLocationsInstancesSnapshotsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        orderBy
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        fileService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FileProjectsLocationsInstancesSnapshotsListResource
-            )
-            Core.mempty
+  requestClient FileProjectsLocationsInstancesSnapshotsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      orderBy
+      pageSize
+      pageToken
+      returnPartialSuccess
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fileService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FileProjectsLocationsInstancesSnapshotsListResource
+          )
+          Core.mempty

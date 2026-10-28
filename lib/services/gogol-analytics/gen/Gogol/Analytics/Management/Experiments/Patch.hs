@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Experiments.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Experiments.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.experiments.patch@ method which the
 -- 'AnalyticsManagementExperimentsPatch' request conforms to.
@@ -90,22 +88,22 @@ newAnalyticsManagementExperimentsPatch ::
   -- |  Web property ID of the experiment to update. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementExperimentsPatch
-newAnalyticsManagementExperimentsPatch accountId experimentId payload profileId webPropertyId =
-  AnalyticsManagementExperimentsPatch
-    { accountId = accountId,
-      experimentId = experimentId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementExperimentsPatch
+  accountId
+  experimentId
+  payload
+  profileId
+  webPropertyId =
     AnalyticsManagementExperimentsPatch
-  where
-  type
-    Rs AnalyticsManagementExperimentsPatch =
-      Experiment
+      { accountId = accountId,
+        experimentId = experimentId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementExperimentsPatch where
+  type Rs AnalyticsManagementExperimentsPatch = Experiment
   type
     Scopes AnalyticsManagementExperimentsPatch =
       '[Analytics'FullControl, Analytics'Edit]
@@ -122,7 +120,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AnalyticsManagementExperimentsPatchResource
+              Core.Proxy AnalyticsManagementExperimentsPatchResource
           )
           Core.mempty

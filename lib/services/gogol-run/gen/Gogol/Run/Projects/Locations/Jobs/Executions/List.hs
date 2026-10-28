@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Jobs.Executions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists Executions from a Job.
+-- Lists Executions from a Job. Results are sorted by creation time, descending.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.jobs.executions.list@.
 module Gogol.Run.Projects.Locations.Jobs.Executions.List
@@ -39,7 +37,7 @@ module Gogol.Run.Projects.Locations.Jobs.Executions.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.jobs.executions.list@ method which the
@@ -57,11 +55,9 @@ type RunProjectsLocationsJobsExecutionsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudRunV2ListExecutionsResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudRunV2ListExecutionsResponse
 
--- | Lists Executions from a Job.
+-- | Lists Executions from a Job. Results are sorted by creation time, descending.
 --
 -- /See:/ 'newRunProjectsLocationsJobsExecutionsList' smart constructor.
 data RunProjectsLocationsJobsExecutionsList = RunProjectsLocationsJobsExecutionsList
@@ -75,7 +71,7 @@ data RunProjectsLocationsJobsExecutionsList = RunProjectsLocationsJobsExecutions
     pageSize :: (Core.Maybe Core.Int32),
     -- | A page token received from a previous call to ListExecutions. All other parameters must match.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use \"-\" instead of Job name. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}, where {project} can be project id or number.
+    -- | Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use \"-\" instead of Job name. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}@, where @{project}@ can be project id or number.
     parent :: Core.Text,
     -- | If true, returns deleted (but unexpired) resources along with active ones.
     showDeleted :: (Core.Maybe Core.Bool),
@@ -88,7 +84,7 @@ data RunProjectsLocationsJobsExecutionsList = RunProjectsLocationsJobsExecutions
 
 -- | Creates a value of 'RunProjectsLocationsJobsExecutionsList' with the minimum fields required to make a request.
 newRunProjectsLocationsJobsExecutionsList ::
-  -- |  Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use \"-\" instead of Job name. Format: projects\/{project}\/locations\/{location}\/jobs\/{job}, where {project} can be project id or number. See 'parent'.
+  -- |  Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use \"-\" instead of Job name. Format: @projects\/{project}\/locations\/{location}\/jobs\/{job}@, where @{project}@ can be project id or number. See 'parent'.
   Core.Text ->
   RunProjectsLocationsJobsExecutionsList
 newRunProjectsLocationsJobsExecutionsList parent =
@@ -104,35 +100,30 @@ newRunProjectsLocationsJobsExecutionsList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RunProjectsLocationsJobsExecutionsList
-  where
+instance Core.GoogleRequest RunProjectsLocationsJobsExecutionsList where
   type
     Rs RunProjectsLocationsJobsExecutionsList =
       GoogleCloudRunV2ListExecutionsResponse
   type
     Scopes RunProjectsLocationsJobsExecutionsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    RunProjectsLocationsJobsExecutionsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        showDeleted
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        runService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RunProjectsLocationsJobsExecutionsListResource
-            )
-            Core.mempty
+  requestClient RunProjectsLocationsJobsExecutionsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      showDeleted
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      runService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RunProjectsLocationsJobsExecutionsListResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to @indexConfig.usesAncestorConfig:false@ .
+-- Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to @indexConfig.usesAncestorConfig:false@ or @ttlConfig:*@.
 --
 -- /See:/ <https://cloud.google.com/firestore Cloud Firestore API Reference> for @firestore.projects.databases.collectionGroups.fields.list@.
 module Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.List
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Fields.List
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.fields.list@ method which the
 -- 'FireStoreProjectsDatabasesCollectionGroupsFieldsList' request conforms to.
@@ -57,11 +55,9 @@ type FireStoreProjectsDatabasesCollectionGroupsFieldsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleFirestoreAdminV1ListFieldsResponse
+    Core.:> Core.Get '[Core.JSON] GoogleFirestoreAdminV1ListFieldsResponse
 
--- | Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to @indexConfig.usesAncestorConfig:false@ .
+-- | Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to @indexConfig.usesAncestorConfig:false@ or @ttlConfig:*@.
 --
 -- /See:/ 'newFireStoreProjectsDatabasesCollectionGroupsFieldsList' smart constructor.
 data FireStoreProjectsDatabasesCollectionGroupsFieldsList = FireStoreProjectsDatabasesCollectionGroupsFieldsList
@@ -71,7 +67,7 @@ data FireStoreProjectsDatabasesCollectionGroupsFieldsList = FireStoreProjectsDat
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The filter to apply to list results. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with a filter that includes @indexConfig.usesAncestorConfig:false@ .
+    -- | The filter to apply to list results. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with a filter that includes @indexConfig.usesAncestorConfig:false@ or @ttlConfig:*@.
     filter :: (Core.Maybe Core.Text),
     -- | The number of results to return.
     pageSize :: (Core.Maybe Core.Int32),
@@ -93,7 +89,8 @@ newFireStoreProjectsDatabasesCollectionGroupsFieldsList ::
   FireStoreProjectsDatabasesCollectionGroupsFieldsList
 newFireStoreProjectsDatabasesCollectionGroupsFieldsList parent =
   FireStoreProjectsDatabasesCollectionGroupsFieldsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -109,12 +106,10 @@ instance
     FireStoreProjectsDatabasesCollectionGroupsFieldsList
   where
   type
-    Rs
-      FireStoreProjectsDatabasesCollectionGroupsFieldsList =
+    Rs FireStoreProjectsDatabasesCollectionGroupsFieldsList =
       GoogleFirestoreAdminV1ListFieldsResponse
   type
-    Scopes
-      FireStoreProjectsDatabasesCollectionGroupsFieldsList =
+    Scopes FireStoreProjectsDatabasesCollectionGroupsFieldsList =
       '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesCollectionGroupsFieldsList {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Customers.Configurations.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidDeviceProvisioning.Customers.Configurations.Patch
 where
 
 import Gogol.AndroidDeviceProvisioning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androiddeviceprovisioning.customers.configurations.patch@ method which the
 -- 'AndroidDeviceProvisioningCustomersConfigurationsPatch' request conforms to.
@@ -87,29 +85,30 @@ newAndroidDeviceProvisioningCustomersConfigurationsPatch ::
   -- |  Multipart request metadata. See 'payload'.
   Configuration ->
   AndroidDeviceProvisioningCustomersConfigurationsPatch
-newAndroidDeviceProvisioningCustomersConfigurationsPatch name payload =
-  AndroidDeviceProvisioningCustomersConfigurationsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidDeviceProvisioningCustomersConfigurationsPatch
+  name
+  payload =
+    AndroidDeviceProvisioningCustomersConfigurationsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidDeviceProvisioningCustomersConfigurationsPatch
   where
   type
-    Rs
-      AndroidDeviceProvisioningCustomersConfigurationsPatch =
+    Rs AndroidDeviceProvisioningCustomersConfigurationsPatch =
       Configuration
   type
-    Scopes
-      AndroidDeviceProvisioningCustomersConfigurationsPatch =
+    Scopes AndroidDeviceProvisioningCustomersConfigurationsPatch =
       '[]
   requestClient
     AndroidDeviceProvisioningCustomersConfigurationsPatch {..} =

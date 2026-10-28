@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.WebSecurityScanner.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.WebSecurityScanner.Internal.Product
@@ -148,7 +146,7 @@ module Gogol.WebSecurityScanner.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.WebSecurityScanner.Internal.Sum
 
 -- | Scan authentication configuration.
@@ -295,8 +293,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -412,12 +409,9 @@ instance Core.ToJSON Finding where
             ("reproductionUrl" Core..=) Core.<$> reproductionUrl,
             ("severity" Core..=) Core.<$> severity,
             ("trackingId" Core..=) Core.<$> trackingId,
-            ("violatingResource" Core..=)
-              Core.<$> violatingResource,
-            ("vulnerableHeaders" Core..=)
-              Core.<$> vulnerableHeaders,
-            ("vulnerableParameters" Core..=)
-              Core.<$> vulnerableParameters,
+            ("violatingResource" Core..=) Core.<$> violatingResource,
+            ("vulnerableHeaders" Core..=) Core.<$> vulnerableHeaders,
+            ("vulnerableParameters" Core..=) Core.<$> vulnerableParameters,
             ("xss" Core..=) Core.<$> xss,
             ("xxe" Core..=) Core.<$> xxe
           ]
@@ -438,7 +432,10 @@ data FindingTypeStats = FindingTypeStats
 newFindingTypeStats ::
   FindingTypeStats
 newFindingTypeStats =
-  FindingTypeStats {findingCount = Core.Nothing, findingType = Core.Nothing}
+  FindingTypeStats
+    { findingCount = Core.Nothing,
+      findingType = Core.Nothing
+    }
 
 instance Core.FromJSON FindingTypeStats where
   parseJSON =
@@ -551,17 +548,14 @@ instance Core.FromJSON Header where
     Core.withObject
       "Header"
       ( \o ->
-          Header
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+          Header Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Header where
   toJSON Header {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | Describes authentication configuration for Identity-Aware-Proxy (IAP).
@@ -576,15 +570,15 @@ newtype IapCredential = IapCredential
 -- | Creates a value of 'IapCredential' with the minimum fields required to make a request.
 newIapCredential ::
   IapCredential
-newIapCredential = IapCredential {iapTestServiceAccountInfo = Core.Nothing}
+newIapCredential =
+  IapCredential {iapTestServiceAccountInfo = Core.Nothing}
 
 instance Core.FromJSON IapCredential where
   parseJSON =
     Core.withObject
       "IapCredential"
       ( \o ->
-          IapCredential
-            Core.<$> (o Core..:? "iapTestServiceAccountInfo")
+          IapCredential Core.<$> (o Core..:? "iapTestServiceAccountInfo")
       )
 
 instance Core.ToJSON IapCredential where
@@ -696,9 +690,7 @@ instance Core.ToJSON ListFindingTypeStatsResponse where
   toJSON ListFindingTypeStatsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("findingTypeStats" Core..=)
-              Core.<$> findingTypeStats
-          ]
+          [("findingTypeStats" Core..=) Core.<$> findingTypeStats]
       )
 
 -- | Response for the @ListFindings@ method.
@@ -716,7 +708,10 @@ data ListFindingsResponse = ListFindingsResponse
 newListFindingsResponse ::
   ListFindingsResponse
 newListFindingsResponse =
-  ListFindingsResponse {findings = Core.Nothing, nextPageToken = Core.Nothing}
+  ListFindingsResponse
+    { findings = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListFindingsResponse where
   parseJSON =
@@ -791,7 +786,10 @@ data ListScanRunsResponse = ListScanRunsResponse
 newListScanRunsResponse ::
   ListScanRunsResponse
 newListScanRunsResponse =
-  ListScanRunsResponse {nextPageToken = Core.Nothing, scanRuns = Core.Nothing}
+  ListScanRunsResponse
+    { nextPageToken = Core.Nothing,
+      scanRuns = Core.Nothing
+    }
 
 instance Core.FromJSON ListScanRunsResponse where
   parseJSON =
@@ -870,11 +868,12 @@ data ScanConfig = ScanConfig
     exportToSecurityCommandCenter :: (Core.Maybe ScanConfig_ExportToSecurityCommandCenter),
     -- | Whether to keep scanning even if most requests return HTTP error codes.
     ignoreHttpStatusErrors :: (Core.Maybe Core.Bool),
+    latestRun :: (Core.Maybe ScanRun),
     -- | Whether the scan config is managed by Web Security Scanner, output only.
     managedScan :: (Core.Maybe Core.Bool),
     -- | The maximum QPS during scanning. A valid value ranges from 5 to 20 inclusively. If the field is unspecified or its value is set 0, server will default to 15. Other values outside of [5, 20] range will be rejected with INVALID_ARGUMENT error.
     maxQps :: (Core.Maybe Core.Int32),
-    -- | The resource name of the ScanConfig. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'. The ScanConfig IDs are generated by the system.
+    -- | Identifier. The resource name of the ScanConfig. The name follows the format of \'projects\/{projectId}\/scanConfigs\/{scanConfigId}\'. The ScanConfig IDs are generated by the system.
     name :: (Core.Maybe Core.Text),
     -- | The risk level selected for the scan
     riskLevel :: (Core.Maybe ScanConfig_RiskLevel),
@@ -884,6 +883,8 @@ data ScanConfig = ScanConfig
     startingUrls :: (Core.Maybe [Core.Text]),
     -- | Whether the scan configuration has enabled static IP address scan feature. If enabled, the scanner will access applications from static IP addresses.
     staticIpScan :: (Core.Maybe Core.Bool),
+    -- | Set of Google Cloud platforms targeted by the scan. If empty, APP_ENGINE will be used as a default.
+    targetPlatforms :: (Core.Maybe [ScanConfig_TargetPlatformsItem]),
     -- | The user agent used during scanning.
     userAgent :: (Core.Maybe ScanConfig_UserAgent)
   }
@@ -899,6 +900,7 @@ newScanConfig =
       displayName = Core.Nothing,
       exportToSecurityCommandCenter = Core.Nothing,
       ignoreHttpStatusErrors = Core.Nothing,
+      latestRun = Core.Nothing,
       managedScan = Core.Nothing,
       maxQps = Core.Nothing,
       name = Core.Nothing,
@@ -906,6 +908,7 @@ newScanConfig =
       schedule = Core.Nothing,
       startingUrls = Core.Nothing,
       staticIpScan = Core.Nothing,
+      targetPlatforms = Core.Nothing,
       userAgent = Core.Nothing
     }
 
@@ -920,6 +923,7 @@ instance Core.FromJSON ScanConfig where
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "exportToSecurityCommandCenter")
             Core.<*> (o Core..:? "ignoreHttpStatusErrors")
+            Core.<*> (o Core..:? "latestRun")
             Core.<*> (o Core..:? "managedScan")
             Core.<*> (o Core..:? "maxQps")
             Core.<*> (o Core..:? "name")
@@ -927,6 +931,7 @@ instance Core.FromJSON ScanConfig where
             Core.<*> (o Core..:? "schedule")
             Core.<*> (o Core..:? "startingUrls")
             Core.<*> (o Core..:? "staticIpScan")
+            Core.<*> (o Core..:? "targetPlatforms")
             Core.<*> (o Core..:? "userAgent")
       )
 
@@ -935,13 +940,12 @@ instance Core.ToJSON ScanConfig where
     Core.object
       ( Core.catMaybes
           [ ("authentication" Core..=) Core.<$> authentication,
-            ("blacklistPatterns" Core..=)
-              Core.<$> blacklistPatterns,
+            ("blacklistPatterns" Core..=) Core.<$> blacklistPatterns,
             ("displayName" Core..=) Core.<$> displayName,
             ("exportToSecurityCommandCenter" Core..=)
               Core.<$> exportToSecurityCommandCenter,
-            ("ignoreHttpStatusErrors" Core..=)
-              Core.<$> ignoreHttpStatusErrors,
+            ("ignoreHttpStatusErrors" Core..=) Core.<$> ignoreHttpStatusErrors,
+            ("latestRun" Core..=) Core.<$> latestRun,
             ("managedScan" Core..=) Core.<$> managedScan,
             ("maxQps" Core..=) Core.<$> maxQps,
             ("name" Core..=) Core.<$> name,
@@ -949,6 +953,7 @@ instance Core.ToJSON ScanConfig where
             ("schedule" Core..=) Core.<$> schedule,
             ("startingUrls" Core..=) Core.<$> startingUrls,
             ("staticIpScan" Core..=) Core.<$> staticIpScan,
+            ("targetPlatforms" Core..=) Core.<$> targetPlatforms,
             ("userAgent" Core..=) Core.<$> userAgent
           ]
       )
@@ -1050,12 +1055,8 @@ instance Core.FromJSON ScanRun where
             Core.<*> (o Core..:? "progressPercent")
             Core.<*> (o Core..:? "resultState")
             Core.<*> (o Core..:? "startTime")
-            Core.<*> ( o Core..:? "urlsCrawledCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "urlsTestedCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "urlsCrawledCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "urlsTestedCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "warningTraces")
       )
 
@@ -1066,15 +1067,16 @@ instance Core.ToJSON ScanRun where
           [ ("endTime" Core..=) Core.<$> endTime,
             ("errorTrace" Core..=) Core.<$> errorTrace,
             ("executionState" Core..=) Core.<$> executionState,
-            ("hasVulnerabilities" Core..=)
-              Core.<$> hasVulnerabilities,
+            ("hasVulnerabilities" Core..=) Core.<$> hasVulnerabilities,
             ("name" Core..=) Core.<$> name,
             ("progressPercent" Core..=) Core.<$> progressPercent,
             ("resultState" Core..=) Core.<$> resultState,
             ("startTime" Core..=) Core.<$> startTime,
-            ("urlsCrawledCount" Core..=) Core.. Core.AsText
+            ("urlsCrawledCount" Core..=)
+              Core.. Core.AsText
               Core.<$> urlsCrawledCount,
-            ("urlsTestedCount" Core..=) Core.. Core.AsText
+            ("urlsTestedCount" Core..=)
+              Core.. Core.AsText
               Core.<$> urlsTestedCount,
             ("warningTraces" Core..=) Core.<$> warningTraces
           ]
@@ -1121,8 +1123,7 @@ instance Core.ToJSON ScanRunErrorTrace where
           [ ("code" Core..=) Core.<$> code,
             ("mostCommonHttpErrorCode" Core..=)
               Core.<$> mostCommonHttpErrorCode,
-            ("scanConfigError" Core..=)
-              Core.<$> scanConfigError
+            ("scanConfigError" Core..=) Core.<$> scanConfigError
           ]
       )
 
@@ -1144,14 +1145,11 @@ instance Core.FromJSON ScanRunWarningTrace where
   parseJSON =
     Core.withObject
       "ScanRunWarningTrace"
-      ( \o ->
-          ScanRunWarningTrace Core.<$> (o Core..:? "code")
-      )
+      (\o -> ScanRunWarningTrace Core.<$> (o Core..:? "code"))
 
 instance Core.ToJSON ScanRunWarningTrace where
   toJSON ScanRunWarningTrace {..} =
-    Core.object
-      (Core.catMaybes [("code" Core..=) Core.<$> code])
+    Core.object (Core.catMaybes [("code" Core..=) Core.<$> code])
 
 -- | Scan schedule configuration.
 --
@@ -1168,7 +1166,10 @@ data Schedule = Schedule
 newSchedule ::
   Schedule
 newSchedule =
-  Schedule {intervalDurationDays = Core.Nothing, scheduleTime = Core.Nothing}
+  Schedule
+    { intervalDurationDays = Core.Nothing,
+      scheduleTime = Core.Nothing
+    }
 
 instance Core.FromJSON Schedule where
   parseJSON =
@@ -1184,8 +1185,7 @@ instance Core.ToJSON Schedule where
   toJSON Schedule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("intervalDurationDays" Core..=)
-              Core.<$> intervalDurationDays,
+          [ ("intervalDurationDays" Core..=) Core.<$> intervalDurationDays,
             ("scheduleTime" Core..=) Core.<$> scheduleTime
           ]
       )
@@ -1245,7 +1245,10 @@ data ViolatingResource = ViolatingResource
 newViolatingResource ::
   ViolatingResource
 newViolatingResource =
-  ViolatingResource {contentType = Core.Nothing, resourceUrl = Core.Nothing}
+  ViolatingResource
+    { contentType = Core.Nothing,
+      resourceUrl = Core.Nothing
+    }
 
 instance Core.FromJSON ViolatingResource where
   parseJSON =
@@ -1281,7 +1284,10 @@ data VulnerableHeaders = VulnerableHeaders
 newVulnerableHeaders ::
   VulnerableHeaders
 newVulnerableHeaders =
-  VulnerableHeaders {headers = Core.Nothing, missingHeaders = Core.Nothing}
+  VulnerableHeaders
+    { headers = Core.Nothing,
+      missingHeaders = Core.Nothing
+    }
 
 instance Core.FromJSON VulnerableHeaders where
   parseJSON =
@@ -1314,15 +1320,15 @@ newtype VulnerableParameters = VulnerableParameters
 -- | Creates a value of 'VulnerableParameters' with the minimum fields required to make a request.
 newVulnerableParameters ::
   VulnerableParameters
-newVulnerableParameters = VulnerableParameters {parameterNames = Core.Nothing}
+newVulnerableParameters =
+  VulnerableParameters {parameterNames = Core.Nothing}
 
 instance Core.FromJSON VulnerableParameters where
   parseJSON =
     Core.withObject
       "VulnerableParameters"
       ( \o ->
-          VulnerableParameters
-            Core.<$> (o Core..:? "parameterNames")
+          VulnerableParameters Core.<$> (o Core..:? "parameterNames")
       )
 
 instance Core.ToJSON VulnerableParameters where
@@ -1377,8 +1383,7 @@ instance Core.ToJSON Xss where
           [ ("attackVector" Core..=) Core.<$> attackVector,
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("stackTraces" Core..=) Core.<$> stackTraces,
-            ("storedXssSeedingUrl" Core..=)
-              Core.<$> storedXssSeedingUrl
+            ("storedXssSeedingUrl" Core..=) Core.<$> storedXssSeedingUrl
           ]
       )
 
@@ -1396,7 +1401,8 @@ data Xxe = Xxe
 -- | Creates a value of 'Xxe' with the minimum fields required to make a request.
 newXxe ::
   Xxe
-newXxe = Xxe {payloadLocation = Core.Nothing, payloadValue = Core.Nothing}
+newXxe =
+  Xxe {payloadLocation = Core.Nothing, payloadValue = Core.Nothing}
 
 instance Core.FromJSON Xxe where
   parseJSON =
@@ -1412,8 +1418,7 @@ instance Core.ToJSON Xxe where
   toJSON Xxe {..} =
     Core.object
       ( Core.catMaybes
-          [ ("payloadLocation" Core..=)
-              Core.<$> payloadLocation,
+          [ ("payloadLocation" Core..=) Core.<$> payloadLocation,
             ("payloadValue" Core..=) Core.<$> payloadValue
           ]
       )

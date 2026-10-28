@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Profiles.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Profiles.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.profiles.patch@ method which the
 -- 'AnalyticsManagementProfilesPatch' request conforms to.
@@ -84,22 +82,21 @@ newAnalyticsManagementProfilesPatch ::
   -- |  Web property ID to which the view (profile) belongs See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementProfilesPatch
-newAnalyticsManagementProfilesPatch accountId payload profileId webPropertyId =
-  AnalyticsManagementProfilesPatch
-    { accountId = accountId,
-      payload = payload,
-      profileId = profileId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementProfilesPatch
+  accountId
+  payload
+  profileId
+  webPropertyId =
     AnalyticsManagementProfilesPatch
-  where
+      { accountId = accountId,
+        payload = payload,
+        profileId = profileId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementProfilesPatch where
   type Rs AnalyticsManagementProfilesPatch = Profile
-  type
-    Scopes AnalyticsManagementProfilesPatch =
-      '[Analytics'Edit]
+  type Scopes AnalyticsManagementProfilesPatch = '[Analytics'Edit]
   requestClient AnalyticsManagementProfilesPatch {..} =
     go
       accountId
@@ -111,7 +108,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementProfilesPatchResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementProfilesPatchResource)
           Core.mempty

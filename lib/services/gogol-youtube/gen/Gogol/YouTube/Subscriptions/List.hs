@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Subscriptions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Subscriptions.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.subscriptions.list@ method which the
@@ -59,24 +57,14 @@ type YouTubeSubscriptionsListResource =
     Core.:> Core.QueryParam "mine" Core.Bool
     Core.:> Core.QueryParam "myRecentSubscribers" Core.Bool
     Core.:> Core.QueryParam "mySubscribers" Core.Bool
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwner"
-              Core.Text
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwnerChannel"
-              Core.Text
-    Core.:> Core.QueryParam
-              "order"
-              SubscriptionsListOrder
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
+    Core.:> Core.QueryParam "order" SubscriptionsListOrder
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SubscriptionListResponse
+    Core.:> Core.Get '[Core.JSON] SubscriptionListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -98,7 +86,6 @@ data YouTubeSubscriptionsList = YouTubeSubscriptionsList
     maxResults :: Core.Word32,
     -- | Flag for returning the subscriptions of the authenticated user.
     mine :: (Core.Maybe Core.Bool),
-    -- |
     myRecentSubscribers :: (Core.Maybe Core.Bool),
     -- | Return the subscribers of the given channel owner.
     mySubscribers :: (Core.Maybe Core.Bool),
@@ -147,9 +134,7 @@ newYouTubeSubscriptionsList part =
     }
 
 instance Core.GoogleRequest YouTubeSubscriptionsList where
-  type
-    Rs YouTubeSubscriptionsList =
-      SubscriptionListResponse
+  type Rs YouTubeSubscriptionsList = SubscriptionListResponse
   type
     Scopes YouTubeSubscriptionsList =
       '[ Youtube'FullControl,
@@ -181,7 +166,5 @@ instance Core.GoogleRequest YouTubeSubscriptionsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeSubscriptionsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeSubscriptionsListResource)
           Core.mempty

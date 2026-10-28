@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Copy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.Copy
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.backups.copy@ method which the
 -- 'BigtableAdminProjectsInstancesClustersBackupsCopy' request conforms to.
@@ -67,7 +65,7 @@ data BigtableAdminProjectsInstancesClustersBackupsCopy = BigtableAdminProjectsIn
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the destination cluster that will contain the backup copy. The cluster must already exists. Values are of the form: @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}@.
+    -- | Required. The name of the destination cluster that will contain the backup copy. The cluster must already exist. Values are of the form: @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: CopyBackupRequest,
@@ -80,14 +78,15 @@ data BigtableAdminProjectsInstancesClustersBackupsCopy = BigtableAdminProjectsIn
 
 -- | Creates a value of 'BigtableAdminProjectsInstancesClustersBackupsCopy' with the minimum fields required to make a request.
 newBigtableAdminProjectsInstancesClustersBackupsCopy ::
-  -- |  Required. The name of the destination cluster that will contain the backup copy. The cluster must already exists. Values are of the form: @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}@. See 'parent'.
+  -- |  Required. The name of the destination cluster that will contain the backup copy. The cluster must already exist. Values are of the form: @projects\/{project}\/instances\/{instance}\/clusters\/{cluster}@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   CopyBackupRequest ->
   BigtableAdminProjectsInstancesClustersBackupsCopy
 newBigtableAdminProjectsInstancesClustersBackupsCopy parent payload =
   BigtableAdminProjectsInstancesClustersBackupsCopy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -101,35 +100,32 @@ instance
     BigtableAdminProjectsInstancesClustersBackupsCopy
   where
   type
-    Rs
-      BigtableAdminProjectsInstancesClustersBackupsCopy =
+    Rs BigtableAdminProjectsInstancesClustersBackupsCopy =
       Operation
   type
-    Scopes
-      BigtableAdminProjectsInstancesClustersBackupsCopy =
+    Scopes BigtableAdminProjectsInstancesClustersBackupsCopy =
       '[ Bigtable'Admin,
          Bigtable'Admin'Table,
          CloudBigtable'Admin,
          CloudBigtable'Admin'Table,
          CloudPlatform'FullControl
        ]
-  requestClient
-    BigtableAdminProjectsInstancesClustersBackupsCopy {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        bigtableAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigtableAdminProjectsInstancesClustersBackupsCopyResource
-            )
-            Core.mempty
+  requestClient BigtableAdminProjectsInstancesClustersBackupsCopy {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      bigtableAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                BigtableAdminProjectsInstancesClustersBackupsCopyResource
+          )
+          Core.mempty

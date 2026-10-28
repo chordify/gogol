@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Patch
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.patch@ method which the
 -- 'AccessContextManagerAccessPoliciesServicePerimetersPatch' request conforms to.
@@ -67,7 +65,7 @@ data AccessContextManagerAccessPoliciesServicePerimetersPatch = AccessContextMan
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
+    -- | Identifier. Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: ServicePerimeter,
@@ -82,30 +80,32 @@ data AccessContextManagerAccessPoliciesServicePerimetersPatch = AccessContextMan
 
 -- | Creates a value of 'AccessContextManagerAccessPoliciesServicePerimetersPatch' with the minimum fields required to make a request.
 newAccessContextManagerAccessPoliciesServicePerimetersPatch ::
-  -- |  Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@. See 'name'.
+  -- |  Identifier. Resource name for the @ServicePerimeter@. Format: @accessPolicies\/{access_policy}\/servicePerimeters\/{service_perimeter}@. The @service_perimeter@ component must begin with a letter, followed by alphanumeric characters or @_@. After you create a @ServicePerimeter@, you cannot change its @name@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ServicePerimeter ->
   AccessContextManagerAccessPoliciesServicePerimetersPatch
-newAccessContextManagerAccessPoliciesServicePerimetersPatch name payload =
-  AccessContextManagerAccessPoliciesServicePerimetersPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAccessContextManagerAccessPoliciesServicePerimetersPatch
+  name
+  payload =
+    AccessContextManagerAccessPoliciesServicePerimetersPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AccessContextManagerAccessPoliciesServicePerimetersPatch
   where
   type
-    Rs
-      AccessContextManagerAccessPoliciesServicePerimetersPatch =
+    Rs AccessContextManagerAccessPoliciesServicePerimetersPatch =
       Operation
   type
     Scopes

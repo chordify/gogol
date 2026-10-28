@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GroupsMigration.Archive.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GroupsMigration.Archive.Insert
 where
 
 import Gogol.GroupsMigration.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @groupsmigration.archive.insert@ method which the
 -- 'GroupsMigrationArchiveInsert' request conforms to.
@@ -58,20 +56,20 @@ type GroupsMigrationArchiveInsertResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Groups
     Core.:<|> "upload"
-      Core.:> "groups"
-      Core.:> "v1"
-      Core.:> "groups"
-      Core.:> Core.Capture "groupId" Core.Text
-      Core.:> "archive"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Groups
+    Core.:> "groups"
+    Core.:> "v1"
+    Core.:> "groups"
+    Core.:> Core.Capture "groupId" Core.Text
+    Core.:> "archive"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
@@ -107,14 +105,9 @@ newGroupsMigrationArchiveInsert groupId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GroupsMigrationArchiveInsert
-  where
+instance Core.GoogleRequest GroupsMigrationArchiveInsert where
   type Rs GroupsMigrationArchiveInsert = Groups
-  type
-    Scopes GroupsMigrationArchiveInsert =
-      '[Apps'Groups'Migration]
+  type Scopes GroupsMigrationArchiveInsert = '[Apps'Groups'Migration]
   requestClient GroupsMigrationArchiveInsert {..} =
     go
       groupId
@@ -128,28 +121,19 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GroupsMigrationArchiveInsertResource
-          )
+          (Core.Proxy :: Core.Proxy GroupsMigrationArchiveInsertResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload GroupsMigrationArchiveInsert)
   where
+  type Rs (Core.MediaUpload GroupsMigrationArchiveInsert) = Groups
   type
-    Rs
-      (Core.MediaUpload GroupsMigrationArchiveInsert) =
-      Groups
-  type
-    Scopes
-      (Core.MediaUpload GroupsMigrationArchiveInsert) =
+    Scopes (Core.MediaUpload GroupsMigrationArchiveInsert) =
       Core.Scopes GroupsMigrationArchiveInsert
   requestClient
-    ( Core.MediaUpload
-        GroupsMigrationArchiveInsert {..}
-        body
-      ) =
+    (Core.MediaUpload GroupsMigrationArchiveInsert {..} body) =
       go
         groupId
         xgafv
@@ -164,7 +148,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy GroupsMigrationArchiveInsertResource
-            )
+            (Core.Proxy :: Core.Proxy GroupsMigrationArchiveInsertResource)
             Core.mempty

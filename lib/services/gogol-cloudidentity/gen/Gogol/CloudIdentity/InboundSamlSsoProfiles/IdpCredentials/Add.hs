@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Add
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Adds an IdpCredential. Up to 2 credentials are allowed.
+-- Adds an IdpCredential. Up to 2 credentials are allowed. When the target customer has enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>, the @Operation@ in the response will have @\"done\": false@, it will not have a response, and the metadata will have @\"state\": \"awaiting-multi-party-approval\"@.
 --
 -- /See:/ <https://cloud.google.com/identity/ Cloud Identity API Reference> for @cloudidentity.inboundSamlSsoProfiles.idpCredentials.add@.
 module Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Add
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.InboundSamlSsoProfiles.IdpCredentials.Add
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.inboundSamlSsoProfiles.idpCredentials.add@ method which the
 -- 'CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd' request conforms to.
@@ -57,7 +55,7 @@ type CloudIdentityInboundSamlSsoProfilesIdpCredentialsAddResource =
     Core.:> Core.ReqBody '[Core.JSON] AddIdpCredentialRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Adds an IdpCredential. Up to 2 credentials are allowed.
+-- | Adds an IdpCredential. Up to 2 credentials are allowed. When the target customer has enabled <https://support.google.com/a/answer/13790448 Multi-party approval for sensitive actions>, the @Operation@ in the response will have @\"done\": false@, it will not have a response, and the metadata will have @\"state\": \"awaiting-multi-party-approval\"@.
 --
 -- /See:/ 'newCloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd' smart constructor.
 data CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd = CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
@@ -85,29 +83,30 @@ newCloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd ::
   -- |  Multipart request metadata. See 'payload'.
   AddIdpCredentialRequest ->
   CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
-newCloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd parent payload =
-  CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
+  parent
+  payload =
+    CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd
   where
   type
-    Rs
-      CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd =
+    Rs CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd =
       Operation
   type
-    Scopes
-      CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd =
-      '[CloudPlatform'FullControl]
+    Scopes CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd =
+      '[CloudIdentity'Inboundsso, CloudPlatform'FullControl]
   requestClient
     CloudIdentityInboundSamlSsoProfilesIdpCredentialsAdd {..} =
       go

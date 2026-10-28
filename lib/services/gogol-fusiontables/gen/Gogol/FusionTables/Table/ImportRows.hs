@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Table.ImportRows
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Table.ImportRows
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.table.importRows@ method which the
 -- 'FusionTablesTableImportRows' request conforms to.
@@ -58,20 +56,20 @@ type FusionTablesTableImportRowsResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Import
     Core.:<|> "upload"
-      Core.:> "fusiontables"
-      Core.:> "v2"
-      Core.:> "tables"
-      Core.:> Core.Capture "tableId" Core.Text
-      Core.:> "import"
-      Core.:> Core.QueryParam "delimiter" Core.Text
-      Core.:> Core.QueryParam "encoding" Core.Text
-      Core.:> Core.QueryParam "endLine" Core.Int32
-      Core.:> Core.QueryParam "isStrict" Core.Bool
-      Core.:> Core.QueryParam "startLine" Core.Int32
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Import
+    Core.:> "fusiontables"
+    Core.:> "v2"
+    Core.:> "tables"
+    Core.:> Core.Capture "tableId" Core.Text
+    Core.:> "import"
+    Core.:> Core.QueryParam "delimiter" Core.Text
+    Core.:> Core.QueryParam "encoding" Core.Text
+    Core.:> Core.QueryParam "endLine" Core.Int32
+    Core.:> Core.QueryParam "isStrict" Core.Bool
+    Core.:> Core.QueryParam "startLine" Core.Int32
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Import
 
 -- | Imports more rows into a table.
 --
@@ -107,10 +105,7 @@ newFusionTablesTableImportRows tableId =
       tableId = tableId
     }
 
-instance
-  Core.GoogleRequest
-    FusionTablesTableImportRows
-  where
+instance Core.GoogleRequest FusionTablesTableImportRows where
   type Rs FusionTablesTableImportRows = Import
   type
     Scopes FusionTablesTableImportRows =
@@ -128,28 +123,19 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTableImportRowsResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTableImportRowsResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload FusionTablesTableImportRows)
   where
+  type Rs (Core.MediaUpload FusionTablesTableImportRows) = Import
   type
-    Rs
-      (Core.MediaUpload FusionTablesTableImportRows) =
-      Import
-  type
-    Scopes
-      (Core.MediaUpload FusionTablesTableImportRows) =
+    Scopes (Core.MediaUpload FusionTablesTableImportRows) =
       Core.Scopes FusionTablesTableImportRows
   requestClient
-    ( Core.MediaUpload
-        FusionTablesTableImportRows {..}
-        body
-      ) =
+    (Core.MediaUpload FusionTablesTableImportRows {..} body) =
       go
         tableId
         delimiter
@@ -164,7 +150,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy FusionTablesTableImportRowsResource
-            )
+            (Core.Proxy :: Core.Proxy FusionTablesTableImportRowsResource)
             Core.mempty

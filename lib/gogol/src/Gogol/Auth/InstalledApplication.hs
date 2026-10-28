@@ -37,8 +37,8 @@ where
 
 import Control.Monad.Catch (MonadCatch)
 import Control.Monad.IO.Class (MonadIO)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import GHC.TypeLits (Symbol)
 import Gogol.Auth.Scope
   ( KnownScopes (..),
@@ -48,7 +48,7 @@ import Gogol.Internal.Auth
 import Gogol.Internal.Logger (Logger)
 import Gogol.Prelude
 import Network.HTTP.Conduit (Manager)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 
 -- | Create new Installed Application credentials.
 --
@@ -95,13 +95,13 @@ redirectURI = "urn:ietf:wg:oauth:2.0:oob"
 -- construct a URL that can be used to obtain the 'OAuthCode'.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2InstalledApp#formingtheurl Forming the URL>.
-formURL :: KnownScopes (s :: [Symbol]) => OAuthClient -> proxy s -> Text
+formURL :: (KnownScopes (s :: [Symbol])) => OAuthClient -> proxy s -> Text
 formURL c = formURLWith c . scopeVals
 
 -- | 'formURL' for 'AccessType'
 --
 -- /See:/ 'formUrl'.
-formAccessTypeURL :: KnownScopes (s :: [Symbol]) => OAuthClient -> AccessType -> proxy s -> Text
+formAccessTypeURL :: (KnownScopes (s :: [Symbol])) => OAuthClient -> AccessType -> proxy s -> Text
 formAccessTypeURL c a = formAccessTypeURLWith c a . scopeVals
 
 -- | Form a URL using 'OAuthScope' values.

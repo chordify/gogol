@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ShoppingContent.Internal.Product
@@ -41,6 +39,10 @@ module Gogol.ShoppingContent.Internal.Product
     -- * AccountAutomaticImprovements
     AccountAutomaticImprovements (..),
     newAccountAutomaticImprovements,
+
+    -- * AccountBusinessIdentity
+    AccountBusinessIdentity (..),
+    newAccountBusinessIdentity,
 
     -- * AccountBusinessInformation
     AccountBusinessInformation (..),
@@ -66,6 +68,10 @@ module Gogol.ShoppingContent.Internal.Product
     AccountIdentifier (..),
     newAccountIdentifier,
 
+    -- * AccountIdentityType
+    AccountIdentityType (..),
+    newAccountIdentityType,
+
     -- * AccountImageImprovements
     AccountImageImprovements (..),
     newAccountImageImprovements,
@@ -73,6 +79,14 @@ module Gogol.ShoppingContent.Internal.Product
     -- * AccountImageImprovementsSettings
     AccountImageImprovementsSettings (..),
     newAccountImageImprovementsSettings,
+
+    -- * AccountIssue
+    AccountIssue (..),
+    newAccountIssue,
+
+    -- * AccountIssueImpact
+    AccountIssueImpact (..),
+    newAccountIssueImpact,
 
     -- * AccountItemUpdates
     AccountItemUpdates (..),
@@ -222,17 +236,29 @@ module Gogol.ShoppingContent.Internal.Product
     AccounttaxListResponse (..),
     newAccounttaxListResponse,
 
-    -- * ActivateBuyOnGoogleProgramRequest
-    ActivateBuyOnGoogleProgramRequest (..),
-    newActivateBuyOnGoogleProgramRequest,
+    -- * Action
+    Action (..),
+    newAction,
+
+    -- * ActionFlow
+    ActionFlow (..),
+    newActionFlow,
+
+    -- * ActionInput
+    ActionInput (..),
+    newActionInput,
+
+    -- * ActionReason
+    ActionReason (..),
+    newActionReason,
 
     -- * Address
     Address (..),
     newAddress,
 
-    -- * Amount
-    Amount (..),
-    newAmount,
+    -- * AlternateDisputeResolution
+    AlternateDisputeResolution (..),
+    newAlternateDisputeResolution,
 
     -- * AttributionSettings
     AttributionSettings (..),
@@ -250,21 +276,33 @@ module Gogol.ShoppingContent.Internal.Product
     Brand (..),
     newBrand,
 
+    -- * Breakdown
+    Breakdown (..),
+    newBreakdown,
+
+    -- * BreakdownRegion
+    BreakdownRegion (..),
+    newBreakdownRegion,
+
+    -- * BuiltInSimpleAction
+    BuiltInSimpleAction (..),
+    newBuiltInSimpleAction,
+
+    -- * BuiltInSimpleActionAdditionalContent
+    BuiltInSimpleActionAdditionalContent (..),
+    newBuiltInSimpleActionAdditionalContent,
+
+    -- * BuiltInUserInputAction
+    BuiltInUserInputAction (..),
+    newBuiltInUserInputAction,
+
     -- * BusinessDayConfig
     BusinessDayConfig (..),
     newBusinessDayConfig,
 
-    -- * BuyOnGoogleProgramStatus
-    BuyOnGoogleProgramStatus (..),
-    newBuyOnGoogleProgramStatus,
-
-    -- * CaptureOrderRequest
-    CaptureOrderRequest (..),
-    newCaptureOrderRequest,
-
-    -- * CaptureOrderResponse
-    CaptureOrderResponse (..),
-    newCaptureOrderResponse,
+    -- * Callout
+    Callout (..),
+    newCallout,
 
     -- * CarrierRate
     CarrierRate (..),
@@ -273,6 +311,14 @@ module Gogol.ShoppingContent.Internal.Product
     -- * CarriersCarrier
     CarriersCarrier (..),
     newCarriersCarrier,
+
+    -- * CheckoutSettings
+    CheckoutSettings (..),
+    newCheckoutSettings,
+
+    -- * CloudExportAdditionalProperties
+    CloudExportAdditionalProperties (..),
+    newCloudExportAdditionalProperties,
 
     -- * Collection
     Collection (..),
@@ -294,6 +340,10 @@ module Gogol.ShoppingContent.Internal.Product
     CollectionStatusItemLevelIssue (..),
     newCollectionStatusItemLevelIssue,
 
+    -- * CompetitiveVisibility
+    CompetitiveVisibility (..),
+    newCompetitiveVisibility,
+
     -- * ConversionSource
     ConversionSource (..),
     newConversionSource,
@@ -305,10 +355,6 @@ module Gogol.ShoppingContent.Internal.Product
     -- * CustomAttribute
     CustomAttribute (..),
     newCustomAttribute,
-
-    -- * CustomerReturnReason
-    CustomerReturnReason (..),
-    newCustomerReturnReason,
 
     -- * CutoffTime
     CutoffTime (..),
@@ -406,6 +452,10 @@ module Gogol.ShoppingContent.Internal.Product
     DeliveryTime (..),
     newDeliveryTime,
 
+    -- * Distance
+    Distance (..),
+    newDistance,
+
     -- * ECommercePlatformLinkInfo
     ECommercePlatformLinkInfo (..),
     newECommercePlatformLinkInfo,
@@ -418,6 +468,10 @@ module Gogol.ShoppingContent.Internal.Product
     Errors (..),
     newErrors,
 
+    -- * ExternalAction
+    ExternalAction (..),
+    newExternalAction,
+
     -- * FreeListingsProgramStatus
     FreeListingsProgramStatus (..),
     newFreeListingsProgramStatus,
@@ -429,6 +483,10 @@ module Gogol.ShoppingContent.Internal.Product
     -- * FreeListingsProgramStatusReviewIneligibilityReasonDetails
     FreeListingsProgramStatusReviewIneligibilityReasonDetails (..),
     newFreeListingsProgramStatusReviewIneligibilityReasonDetails,
+
+    -- * FreeShippingThreshold
+    FreeShippingThreshold (..),
+    newFreeShippingThreshold,
 
     -- * GenerateRecommendationsResponse
     GenerateRecommendationsResponse (..),
@@ -458,21 +516,49 @@ module Gogol.ShoppingContent.Internal.Product
     HolidaysHoliday (..),
     newHolidaysHoliday,
 
-    -- * InapplicabilityDetails
-    InapplicabilityDetails (..),
-    newInapplicabilityDetails,
+    -- * InputField
+    InputField (..),
+    newInputField,
+
+    -- * InputFieldCheckboxInput
+    InputFieldCheckboxInput (..),
+    newInputFieldCheckboxInput,
+
+    -- * InputFieldChoiceInput
+    InputFieldChoiceInput (..),
+    newInputFieldChoiceInput,
+
+    -- * InputFieldChoiceInputChoiceInputOption
+    InputFieldChoiceInputChoiceInputOption (..),
+    newInputFieldChoiceInputChoiceInputOption,
+
+    -- * InputFieldTextInput
+    InputFieldTextInput (..),
+    newInputFieldTextInput,
+
+    -- * InputValue
+    InputValue (..),
+    newInputValue,
+
+    -- * InputValueCheckboxInputValue
+    InputValueCheckboxInputValue (..),
+    newInputValueCheckboxInputValue,
+
+    -- * InputValueChoiceInputValue
+    InputValueChoiceInputValue (..),
+    newInputValueChoiceInputValue,
+
+    -- * InputValueTextInputValue
+    InputValueTextInputValue (..),
+    newInputValueTextInputValue,
+
+    -- * InsertCheckoutSettingsRequest
+    InsertCheckoutSettingsRequest (..),
+    newInsertCheckoutSettingsRequest,
 
     -- * Installment
     Installment (..),
     newInstallment,
-
-    -- * InvoiceSummary
-    InvoiceSummary (..),
-    newInvoiceSummary,
-
-    -- * InvoiceSummaryAdditionalChargeSummary
-    InvoiceSummaryAdditionalChargeSummary (..),
-    newInvoiceSummaryAdditionalChargeSummary,
 
     -- * LabelIds
     LabelIds (..),
@@ -489,6 +575,10 @@ module Gogol.ShoppingContent.Internal.Product
     -- * LiaInventorySettings
     LiaInventorySettings (..),
     newLiaInventorySettings,
+
+    -- * LiaOmnichannelExperience
+    LiaOmnichannelExperience (..),
+    newLiaOmnichannelExperience,
 
     -- * LiaOnDisplayToOrderSettings
     LiaOnDisplayToOrderSettings (..),
@@ -582,21 +672,13 @@ module Gogol.ShoppingContent.Internal.Product
     ListMethodQuotasResponse (..),
     newListMethodQuotasResponse,
 
+    -- * ListPromotionResponse
+    ListPromotionResponse (..),
+    newListPromotionResponse,
+
     -- * ListRegionsResponse
     ListRegionsResponse (..),
     newListRegionsResponse,
-
-    -- * ListRepricingProductReportsResponse
-    ListRepricingProductReportsResponse (..),
-    newListRepricingProductReportsResponse,
-
-    -- * ListRepricingRuleReportsResponse
-    ListRepricingRuleReportsResponse (..),
-    newListRepricingRuleReportsResponse,
-
-    -- * ListRepricingRulesResponse
-    ListRepricingRulesResponse (..),
-    newListRepricingRulesResponse,
 
     -- * ListReturnPolicyOnlineResponse
     ListReturnPolicyOnlineResponse (..),
@@ -626,25 +708,13 @@ module Gogol.ShoppingContent.Internal.Product
     LocationIdSet (..),
     newLocationIdSet,
 
-    -- * LoyaltyPoints
-    LoyaltyPoints (..),
-    newLoyaltyPoints,
+    -- * LoyaltyProgram
+    LoyaltyProgram (..),
+    newLoyaltyProgram,
 
     -- * MerchantCenterDestination
     MerchantCenterDestination (..),
     newMerchantCenterDestination,
-
-    -- * MerchantOrderReturn
-    MerchantOrderReturn (..),
-    newMerchantOrderReturn,
-
-    -- * MerchantOrderReturnItem
-    MerchantOrderReturnItem (..),
-    newMerchantOrderReturnItem,
-
-    -- * MerchantRejectionReason
-    MerchantRejectionReason (..),
-    newMerchantRejectionReason,
 
     -- * MethodQuota
     MethodQuota (..),
@@ -662,126 +732,6 @@ module Gogol.ShoppingContent.Internal.Product
     MinimumOrderValueTableStoreCodeSetWithMov (..),
     newMinimumOrderValueTableStoreCodeSetWithMov,
 
-    -- * MonetaryAmount
-    MonetaryAmount (..),
-    newMonetaryAmount,
-
-    -- * OnboardBuyOnGoogleProgramRequest
-    OnboardBuyOnGoogleProgramRequest (..),
-    newOnboardBuyOnGoogleProgramRequest,
-
-    -- * Order
-    Order (..),
-    newOrder,
-
-    -- * OrderAddress
-    OrderAddress (..),
-    newOrderAddress,
-
-    -- * OrderCancellation
-    OrderCancellation (..),
-    newOrderCancellation,
-
-    -- * OrderCustomer
-    OrderCustomer (..),
-    newOrderCustomer,
-
-    -- * OrderCustomerLoyaltyInfo
-    OrderCustomerLoyaltyInfo (..),
-    newOrderCustomerLoyaltyInfo,
-
-    -- * OrderCustomerMarketingRightsInfo
-    OrderCustomerMarketingRightsInfo (..),
-    newOrderCustomerMarketingRightsInfo,
-
-    -- * OrderDeliveryDetails
-    OrderDeliveryDetails (..),
-    newOrderDeliveryDetails,
-
-    -- * OrderLineItem
-    OrderLineItem (..),
-    newOrderLineItem,
-
-    -- * OrderLineItemAdjustment
-    OrderLineItemAdjustment (..),
-    newOrderLineItemAdjustment,
-
-    -- * OrderLineItemProduct
-    OrderLineItemProduct (..),
-    newOrderLineItemProduct,
-
-    -- * OrderLineItemProductFee
-    OrderLineItemProductFee (..),
-    newOrderLineItemProductFee,
-
-    -- * OrderLineItemProductVariantAttribute
-    OrderLineItemProductVariantAttribute (..),
-    newOrderLineItemProductVariantAttribute,
-
-    -- * OrderLineItemReturnInfo
-    OrderLineItemReturnInfo (..),
-    newOrderLineItemReturnInfo,
-
-    -- * OrderLineItemShippingDetails
-    OrderLineItemShippingDetails (..),
-    newOrderLineItemShippingDetails,
-
-    -- * OrderLineItemShippingDetailsMethod
-    OrderLineItemShippingDetailsMethod (..),
-    newOrderLineItemShippingDetailsMethod,
-
-    -- * OrderMerchantProvidedAnnotation
-    OrderMerchantProvidedAnnotation (..),
-    newOrderMerchantProvidedAnnotation,
-
-    -- * OrderOrderAnnotation
-    OrderOrderAnnotation (..),
-    newOrderOrderAnnotation,
-
-    -- * OrderPickupDetails
-    OrderPickupDetails (..),
-    newOrderPickupDetails,
-
-    -- * OrderPickupDetailsCollector
-    OrderPickupDetailsCollector (..),
-    newOrderPickupDetailsCollector,
-
-    -- * OrderPromotion
-    OrderPromotion (..),
-    newOrderPromotion,
-
-    -- * OrderPromotionItem
-    OrderPromotionItem (..),
-    newOrderPromotionItem,
-
-    -- * OrderRefund
-    OrderRefund (..),
-    newOrderRefund,
-
-    -- * OrderReportDisbursement
-    OrderReportDisbursement (..),
-    newOrderReportDisbursement,
-
-    -- * OrderReportTransaction
-    OrderReportTransaction (..),
-    newOrderReportTransaction,
-
-    -- * OrderReturn
-    OrderReturn (..),
-    newOrderReturn,
-
-    -- * OrderShipment
-    OrderShipment (..),
-    newOrderShipment,
-
-    -- * OrderShipmentLineItemShipment
-    OrderShipmentLineItemShipment (..),
-    newOrderShipmentLineItemShipment,
-
-    -- * OrderShipmentScheduledDeliveryDetails
-    OrderShipmentScheduledDeliveryDetails (..),
-    newOrderShipmentScheduledDeliveryDetails,
-
     -- * OrderTrackingSignal
     OrderTrackingSignal (..),
     newOrderTrackingSignal,
@@ -797,254 +747,6 @@ module Gogol.ShoppingContent.Internal.Product
     -- * OrderTrackingSignalShippingInfo
     OrderTrackingSignalShippingInfo (..),
     newOrderTrackingSignalShippingInfo,
-
-    -- * OrderinvoicesCreateChargeInvoiceRequest
-    OrderinvoicesCreateChargeInvoiceRequest (..),
-    newOrderinvoicesCreateChargeInvoiceRequest,
-
-    -- * OrderinvoicesCreateChargeInvoiceResponse
-    OrderinvoicesCreateChargeInvoiceResponse (..),
-    newOrderinvoicesCreateChargeInvoiceResponse,
-
-    -- * OrderinvoicesCreateRefundInvoiceRequest
-    OrderinvoicesCreateRefundInvoiceRequest (..),
-    newOrderinvoicesCreateRefundInvoiceRequest,
-
-    -- * OrderinvoicesCreateRefundInvoiceResponse
-    OrderinvoicesCreateRefundInvoiceResponse (..),
-    newOrderinvoicesCreateRefundInvoiceResponse,
-
-    -- * OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption,
-
-    -- * OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption (..),
-    newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption,
-
-    -- * OrderreportsListDisbursementsResponse
-    OrderreportsListDisbursementsResponse (..),
-    newOrderreportsListDisbursementsResponse,
-
-    -- * OrderreportsListTransactionsResponse
-    OrderreportsListTransactionsResponse (..),
-    newOrderreportsListTransactionsResponse,
-
-    -- * OrderreturnsAcknowledgeRequest
-    OrderreturnsAcknowledgeRequest (..),
-    newOrderreturnsAcknowledgeRequest,
-
-    -- * OrderreturnsAcknowledgeResponse
-    OrderreturnsAcknowledgeResponse (..),
-    newOrderreturnsAcknowledgeResponse,
-
-    -- * OrderreturnsCreateOrderReturnRequest
-    OrderreturnsCreateOrderReturnRequest (..),
-    newOrderreturnsCreateOrderReturnRequest,
-
-    -- * OrderreturnsCreateOrderReturnResponse
-    OrderreturnsCreateOrderReturnResponse (..),
-    newOrderreturnsCreateOrderReturnResponse,
-
-    -- * OrderreturnsLineItem
-    OrderreturnsLineItem (..),
-    newOrderreturnsLineItem,
-
-    -- * OrderreturnsListResponse
-    OrderreturnsListResponse (..),
-    newOrderreturnsListResponse,
-
-    -- * OrderreturnsPartialRefund
-    OrderreturnsPartialRefund (..),
-    newOrderreturnsPartialRefund,
-
-    -- * OrderreturnsProcessRequest
-    OrderreturnsProcessRequest (..),
-    newOrderreturnsProcessRequest,
-
-    -- * OrderreturnsProcessResponse
-    OrderreturnsProcessResponse (..),
-    newOrderreturnsProcessResponse,
-
-    -- * OrderreturnsRefundOperation
-    OrderreturnsRefundOperation (..),
-    newOrderreturnsRefundOperation,
-
-    -- * OrderreturnsRejectOperation
-    OrderreturnsRejectOperation (..),
-    newOrderreturnsRejectOperation,
-
-    -- * OrderreturnsReturnItem
-    OrderreturnsReturnItem (..),
-    newOrderreturnsReturnItem,
-
-    -- * OrdersAcknowledgeRequest
-    OrdersAcknowledgeRequest (..),
-    newOrdersAcknowledgeRequest,
-
-    -- * OrdersAcknowledgeResponse
-    OrdersAcknowledgeResponse (..),
-    newOrdersAcknowledgeResponse,
-
-    -- * OrdersAdvanceTestOrderResponse
-    OrdersAdvanceTestOrderResponse (..),
-    newOrdersAdvanceTestOrderResponse,
-
-    -- * OrdersCancelLineItemRequest
-    OrdersCancelLineItemRequest (..),
-    newOrdersCancelLineItemRequest,
-
-    -- * OrdersCancelLineItemResponse
-    OrdersCancelLineItemResponse (..),
-    newOrdersCancelLineItemResponse,
-
-    -- * OrdersCancelRequest
-    OrdersCancelRequest (..),
-    newOrdersCancelRequest,
-
-    -- * OrdersCancelResponse
-    OrdersCancelResponse (..),
-    newOrdersCancelResponse,
-
-    -- * OrdersCancelTestOrderByCustomerRequest
-    OrdersCancelTestOrderByCustomerRequest (..),
-    newOrdersCancelTestOrderByCustomerRequest,
-
-    -- * OrdersCancelTestOrderByCustomerResponse
-    OrdersCancelTestOrderByCustomerResponse (..),
-    newOrdersCancelTestOrderByCustomerResponse,
-
-    -- * OrdersCreateTestOrderRequest
-    OrdersCreateTestOrderRequest (..),
-    newOrdersCreateTestOrderRequest,
-
-    -- * OrdersCreateTestOrderResponse
-    OrdersCreateTestOrderResponse (..),
-    newOrdersCreateTestOrderResponse,
-
-    -- * OrdersCreateTestReturnRequest
-    OrdersCreateTestReturnRequest (..),
-    newOrdersCreateTestReturnRequest,
-
-    -- * OrdersCreateTestReturnResponse
-    OrdersCreateTestReturnResponse (..),
-    newOrdersCreateTestReturnResponse,
-
-    -- * OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem (..),
-    newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem,
-
-    -- * OrdersCustomBatchRequestEntryRefundItemItem
-    OrdersCustomBatchRequestEntryRefundItemItem (..),
-    newOrdersCustomBatchRequestEntryRefundItemItem,
-
-    -- * OrdersCustomBatchRequestEntryRefundItemShipping
-    OrdersCustomBatchRequestEntryRefundItemShipping (..),
-    newOrdersCustomBatchRequestEntryRefundItemShipping,
-
-    -- * OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo (..),
-    newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo,
-
-    -- * OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails (..),
-    newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails,
-
-    -- * OrdersGetByMerchantOrderIdResponse
-    OrdersGetByMerchantOrderIdResponse (..),
-    newOrdersGetByMerchantOrderIdResponse,
-
-    -- * OrdersGetTestOrderTemplateResponse
-    OrdersGetTestOrderTemplateResponse (..),
-    newOrdersGetTestOrderTemplateResponse,
-
-    -- * OrdersInStoreRefundLineItemRequest
-    OrdersInStoreRefundLineItemRequest (..),
-    newOrdersInStoreRefundLineItemRequest,
-
-    -- * OrdersInStoreRefundLineItemResponse
-    OrdersInStoreRefundLineItemResponse (..),
-    newOrdersInStoreRefundLineItemResponse,
-
-    -- * OrdersListResponse
-    OrdersListResponse (..),
-    newOrdersListResponse,
-
-    -- * OrdersRefundItemRequest
-    OrdersRefundItemRequest (..),
-    newOrdersRefundItemRequest,
-
-    -- * OrdersRefundItemResponse
-    OrdersRefundItemResponse (..),
-    newOrdersRefundItemResponse,
-
-    -- * OrdersRefundOrderRequest
-    OrdersRefundOrderRequest (..),
-    newOrdersRefundOrderRequest,
-
-    -- * OrdersRefundOrderResponse
-    OrdersRefundOrderResponse (..),
-    newOrdersRefundOrderResponse,
-
-    -- * OrdersRejectReturnLineItemRequest
-    OrdersRejectReturnLineItemRequest (..),
-    newOrdersRejectReturnLineItemRequest,
-
-    -- * OrdersRejectReturnLineItemResponse
-    OrdersRejectReturnLineItemResponse (..),
-    newOrdersRejectReturnLineItemResponse,
-
-    -- * OrdersReturnRefundLineItemRequest
-    OrdersReturnRefundLineItemRequest (..),
-    newOrdersReturnRefundLineItemRequest,
-
-    -- * OrdersReturnRefundLineItemResponse
-    OrdersReturnRefundLineItemResponse (..),
-    newOrdersReturnRefundLineItemResponse,
-
-    -- * OrdersSetLineItemMetadataRequest
-    OrdersSetLineItemMetadataRequest (..),
-    newOrdersSetLineItemMetadataRequest,
-
-    -- * OrdersSetLineItemMetadataResponse
-    OrdersSetLineItemMetadataResponse (..),
-    newOrdersSetLineItemMetadataResponse,
-
-    -- * OrdersShipLineItemsRequest
-    OrdersShipLineItemsRequest (..),
-    newOrdersShipLineItemsRequest,
-
-    -- * OrdersShipLineItemsResponse
-    OrdersShipLineItemsResponse (..),
-    newOrdersShipLineItemsResponse,
-
-    -- * OrdersUpdateLineItemShippingDetailsRequest
-    OrdersUpdateLineItemShippingDetailsRequest (..),
-    newOrdersUpdateLineItemShippingDetailsRequest,
-
-    -- * OrdersUpdateLineItemShippingDetailsResponse
-    OrdersUpdateLineItemShippingDetailsResponse (..),
-    newOrdersUpdateLineItemShippingDetailsResponse,
-
-    -- * OrdersUpdateMerchantOrderIdRequest
-    OrdersUpdateMerchantOrderIdRequest (..),
-    newOrdersUpdateMerchantOrderIdRequest,
-
-    -- * OrdersUpdateMerchantOrderIdResponse
-    OrdersUpdateMerchantOrderIdResponse (..),
-    newOrdersUpdateMerchantOrderIdResponse,
-
-    -- * OrdersUpdateShipmentRequest
-    OrdersUpdateShipmentRequest (..),
-    newOrdersUpdateShipmentRequest,
-
-    -- * OrdersUpdateShipmentResponse
-    OrdersUpdateShipmentResponse (..),
-    newOrdersUpdateShipmentResponse,
-
-    -- * PauseBuyOnGoogleProgramRequest
-    PauseBuyOnGoogleProgramRequest (..),
-    newPauseBuyOnGoogleProgramRequest,
 
     -- * PaymentServiceProviderLinkInfo
     PaymentServiceProviderLinkInfo (..),
@@ -1142,9 +844,9 @@ module Gogol.ShoppingContent.Internal.Product
     Product (..),
     newProduct,
 
-    -- * ProductAmount
-    ProductAmount (..),
-    newProductAmount,
+    -- * ProductCertification
+    ProductCertification (..),
+    newProductCertification,
 
     -- * ProductCluster
     ProductCluster (..),
@@ -1169,6 +871,14 @@ module Gogol.ShoppingContent.Internal.Product
     -- * ProductId
     ProductId (..),
     newProductId,
+
+    -- * ProductIssue
+    ProductIssue (..),
+    newProductIssue,
+
+    -- * ProductIssueImpact
+    ProductIssueImpact (..),
+    newProductIssueImpact,
 
     -- * ProductProductDetail
     ProductProductDetail (..),
@@ -1198,9 +908,21 @@ module Gogol.ShoppingContent.Internal.Product
     ProductStatusItemLevelIssue (..),
     newProductStatusItemLevelIssue,
 
+    -- * ProductStructuredDescription
+    ProductStructuredDescription (..),
+    newProductStructuredDescription,
+
+    -- * ProductStructuredTitle
+    ProductStructuredTitle (..),
+    newProductStructuredTitle,
+
     -- * ProductSubscriptionCost
     ProductSubscriptionCost (..),
     newProductSubscriptionCost,
+
+    -- * ProductSustainabilityIncentive
+    ProductSustainabilityIncentive (..),
+    newProductSustainabilityIncentive,
 
     -- * ProductTax
     ProductTax (..),
@@ -1318,10 +1040,6 @@ module Gogol.ShoppingContent.Internal.Product
     RecommendationDescription (..),
     newRecommendationDescription,
 
-    -- * RefundReason
-    RefundReason (..),
-    newRefundReason,
-
     -- * Region
     Region (..),
     newRegion,
@@ -1358,6 +1076,22 @@ module Gogol.ShoppingContent.Internal.Product
     RegionalinventoryCustomBatchResponseEntry (..),
     newRegionalinventoryCustomBatchResponseEntry,
 
+    -- * RenderAccountIssuesRequestPayload
+    RenderAccountIssuesRequestPayload (..),
+    newRenderAccountIssuesRequestPayload,
+
+    -- * RenderAccountIssuesResponse
+    RenderAccountIssuesResponse (..),
+    newRenderAccountIssuesResponse,
+
+    -- * RenderProductIssuesRequestPayload
+    RenderProductIssuesRequestPayload (..),
+    newRenderProductIssuesRequestPayload,
+
+    -- * RenderProductIssuesResponse
+    RenderProductIssuesResponse (..),
+    newRenderProductIssuesResponse,
+
     -- * ReportInteractionRequest
     ReportInteractionRequest (..),
     newReportInteractionRequest,
@@ -1366,58 +1100,6 @@ module Gogol.ShoppingContent.Internal.Product
     ReportRow (..),
     newReportRow,
 
-    -- * RepricingProductReport
-    RepricingProductReport (..),
-    newRepricingProductReport,
-
-    -- * RepricingProductReportBuyboxWinningProductStats
-    RepricingProductReportBuyboxWinningProductStats (..),
-    newRepricingProductReportBuyboxWinningProductStats,
-
-    -- * RepricingRule
-    RepricingRule (..),
-    newRepricingRule,
-
-    -- * RepricingRuleCostOfGoodsSaleRule
-    RepricingRuleCostOfGoodsSaleRule (..),
-    newRepricingRuleCostOfGoodsSaleRule,
-
-    -- * RepricingRuleEffectiveTime
-    RepricingRuleEffectiveTime (..),
-    newRepricingRuleEffectiveTime,
-
-    -- * RepricingRuleEffectiveTimeFixedTimePeriod
-    RepricingRuleEffectiveTimeFixedTimePeriod (..),
-    newRepricingRuleEffectiveTimeFixedTimePeriod,
-
-    -- * RepricingRuleEligibleOfferMatcher
-    RepricingRuleEligibleOfferMatcher (..),
-    newRepricingRuleEligibleOfferMatcher,
-
-    -- * RepricingRuleEligibleOfferMatcherStringMatcher
-    RepricingRuleEligibleOfferMatcherStringMatcher (..),
-    newRepricingRuleEligibleOfferMatcherStringMatcher,
-
-    -- * RepricingRuleReport
-    RepricingRuleReport (..),
-    newRepricingRuleReport,
-
-    -- * RepricingRuleReportBuyboxWinningRuleStats
-    RepricingRuleReportBuyboxWinningRuleStats (..),
-    newRepricingRuleReportBuyboxWinningRuleStats,
-
-    -- * RepricingRuleRestriction
-    RepricingRuleRestriction (..),
-    newRepricingRuleRestriction,
-
-    -- * RepricingRuleRestrictionBoundary
-    RepricingRuleRestrictionBoundary (..),
-    newRepricingRuleRestrictionBoundary,
-
-    -- * RepricingRuleStatsBasedRule
-    RepricingRuleStatsBasedRule (..),
-    newRepricingRuleStatsBasedRule,
-
     -- * RequestPhoneVerificationRequest
     RequestPhoneVerificationRequest (..),
     newRequestPhoneVerificationRequest,
@@ -1425,10 +1107,6 @@ module Gogol.ShoppingContent.Internal.Product
     -- * RequestPhoneVerificationResponse
     RequestPhoneVerificationResponse (..),
     newRequestPhoneVerificationResponse,
-
-    -- * RequestReviewBuyOnGoogleProgramRequest
-    RequestReviewBuyOnGoogleProgramRequest (..),
-    newRequestReviewBuyOnGoogleProgramRequest,
 
     -- * RequestReviewFreeListingsRequest
     RequestReviewFreeListingsRequest (..),
@@ -1477,18 +1155,6 @@ module Gogol.ShoppingContent.Internal.Product
     -- * ReturnPolicySeasonalOverride
     ReturnPolicySeasonalOverride (..),
     newReturnPolicySeasonalOverride,
-
-    -- * ReturnPricingInfo
-    ReturnPricingInfo (..),
-    newReturnPricingInfo,
-
-    -- * ReturnShipment
-    ReturnShipment (..),
-    newReturnShipment,
-
-    -- * ReturnShippingLabel
-    ReturnShippingLabel (..),
-    newReturnShippingLabel,
 
     -- * ReturnaddressCustomBatchRequest
     ReturnaddressCustomBatchRequest (..),
@@ -1550,49 +1216,17 @@ module Gogol.ShoppingContent.Internal.Product
     Service (..),
     newService,
 
-    -- * SettlementReport
-    SettlementReport (..),
-    newSettlementReport,
+    -- * ServiceStoreConfig
+    ServiceStoreConfig (..),
+    newServiceStoreConfig,
 
-    -- * SettlementTransaction
-    SettlementTransaction (..),
-    newSettlementTransaction,
+    -- * ServiceStoreConfigCutoffConfig
+    ServiceStoreConfigCutoffConfig (..),
+    newServiceStoreConfigCutoffConfig,
 
-    -- * SettlementTransactionAmount
-    SettlementTransactionAmount (..),
-    newSettlementTransactionAmount,
-
-    -- * SettlementTransactionAmountCommission
-    SettlementTransactionAmountCommission (..),
-    newSettlementTransactionAmountCommission,
-
-    -- * SettlementTransactionIdentifiers
-    SettlementTransactionIdentifiers (..),
-    newSettlementTransactionIdentifiers,
-
-    -- * SettlementTransactionTransaction
-    SettlementTransactionTransaction (..),
-    newSettlementTransactionTransaction,
-
-    -- * SettlementreportsListResponse
-    SettlementreportsListResponse (..),
-    newSettlementreportsListResponse,
-
-    -- * SettlementtransactionsListResponse
-    SettlementtransactionsListResponse (..),
-    newSettlementtransactionsListResponse,
-
-    -- * ShipmentInvoice
-    ShipmentInvoice (..),
-    newShipmentInvoice,
-
-    -- * ShipmentInvoiceLineItemInvoice
-    ShipmentInvoiceLineItemInvoice (..),
-    newShipmentInvoiceLineItemInvoice,
-
-    -- * ShipmentTrackingInfo
-    ShipmentTrackingInfo (..),
-    newShipmentTrackingInfo,
+    -- * ServiceStoreConfigCutoffConfigLocalCutoffTime
+    ServiceStoreConfigCutoffConfigLocalCutoffTime (..),
+    newServiceStoreConfigCutoffConfigLocalCutoffTime,
 
     -- * ShippingSettings
     ShippingSettings (..),
@@ -1646,33 +1280,9 @@ module Gogol.ShoppingContent.Internal.Product
     Table (..),
     newTable,
 
-    -- * TestOrder
-    TestOrder (..),
-    newTestOrder,
-
-    -- * TestOrderAddress
-    TestOrderAddress (..),
-    newTestOrderAddress,
-
-    -- * TestOrderDeliveryDetails
-    TestOrderDeliveryDetails (..),
-    newTestOrderDeliveryDetails,
-
-    -- * TestOrderLineItem
-    TestOrderLineItem (..),
-    newTestOrderLineItem,
-
-    -- * TestOrderLineItemProduct
-    TestOrderLineItemProduct (..),
-    newTestOrderLineItemProduct,
-
-    -- * TestOrderPickupDetails
-    TestOrderPickupDetails (..),
-    newTestOrderPickupDetails,
-
-    -- * TestOrderPickupDetailsPickupPerson
-    TestOrderPickupDetailsPickupPerson (..),
-    newTestOrderPickupDetailsPickupPerson,
+    -- * TextWithTooltip
+    TextWithTooltip (..),
+    newTextWithTooltip,
 
     -- * TimePeriod
     TimePeriod (..),
@@ -1681,6 +1291,10 @@ module Gogol.ShoppingContent.Internal.Product
     -- * TimeZone
     TimeZone (..),
     newTimeZone,
+
+    -- * TopicTrends
+    TopicTrends (..),
+    newTopicTrends,
 
     -- * TransitTable
     TransitTable (..),
@@ -1694,21 +1308,21 @@ module Gogol.ShoppingContent.Internal.Product
     TransitTableTransitTimeRowTransitTimeValue (..),
     newTransitTableTransitTimeRowTransitTimeValue,
 
+    -- * TriggerActionPayload
+    TriggerActionPayload (..),
+    newTriggerActionPayload,
+
+    -- * TriggerActionResponse
+    TriggerActionResponse (..),
+    newTriggerActionResponse,
+
     -- * UndeleteConversionSourceRequest
     UndeleteConversionSourceRequest (..),
     newUndeleteConversionSourceRequest,
 
-    -- * UnitInvoice
-    UnitInvoice (..),
-    newUnitInvoice,
-
-    -- * UnitInvoiceAdditionalCharge
-    UnitInvoiceAdditionalCharge (..),
-    newUnitInvoiceAdditionalCharge,
-
-    -- * UnitInvoiceTaxLine
-    UnitInvoiceTaxLine (..),
-    newUnitInvoiceTaxLine,
+    -- * UrlSettings
+    UrlSettings (..),
+    newUrlSettings,
 
     -- * Value
     Value (..),
@@ -1740,7 +1354,7 @@ module Gogol.ShoppingContent.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Internal.Sum
 
 -- | Account data. After the creation of a new account it may take a few minutes before it\'s fully operational. The methods delete, insert, and update require the admin role.
@@ -1757,6 +1371,8 @@ data Account = Account
     automaticImprovements :: (Core.Maybe AccountAutomaticImprovements),
     -- | Automatically created label IDs that are assigned to the account by CSS Center.
     automaticLabelIds :: (Core.Maybe [Core.Word64]),
+    -- | The business identity attributes can be used to self-declare attributes that let customers know more about your business.
+    businessIdentity :: (Core.Maybe AccountBusinessIdentity),
     -- | The business information of the account.
     businessInformation :: (Core.Maybe AccountBusinessInformation),
     -- | Settings for conversion tracking.
@@ -1794,6 +1410,7 @@ newAccount =
       adultContent = Core.Nothing,
       automaticImprovements = Core.Nothing,
       automaticLabelIds = Core.Nothing,
+      businessIdentity = Core.Nothing,
       businessInformation = Core.Nothing,
       conversionSettings = Core.Nothing,
       cssId = Core.Nothing,
@@ -1818,18 +1435,19 @@ instance Core.FromJSON Account where
             Core.<*> (o Core..:? "adsLinks")
             Core.<*> (o Core..:? "adultContent")
             Core.<*> (o Core..:? "automaticImprovements")
-            Core.<*> ( o Core..:? "automaticLabelIds"
+            Core.<*> ( o
+                         Core..:? "automaticLabelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
+            Core.<*> (o Core..:? "businessIdentity")
             Core.<*> (o Core..:? "businessInformation")
             Core.<*> (o Core..:? "conversionSettings")
-            Core.<*> ( o Core..:? "cssId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "cssId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "googleMyBusinessLink")
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
-            Core.<*> ( o Core..:? "labelIds"
+            Core.<*> ( o
+                         Core..:? "labelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "name")
@@ -1843,32 +1461,28 @@ instance Core.ToJSON Account where
   toJSON Account {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountManagement" Core..=)
-              Core.<$> accountManagement,
+          [ ("accountManagement" Core..=) Core.<$> accountManagement,
             ("adsLinks" Core..=) Core.<$> adsLinks,
             ("adultContent" Core..=) Core.<$> adultContent,
-            ("automaticImprovements" Core..=)
-              Core.<$> automaticImprovements,
+            ("automaticImprovements" Core..=) Core.<$> automaticImprovements,
             ("automaticLabelIds" Core..=)
               Core.. Core.fmap Core.AsText
               Core.<$> automaticLabelIds,
-            ("businessInformation" Core..=)
-              Core.<$> businessInformation,
-            ("conversionSettings" Core..=)
-              Core.<$> conversionSettings,
+            ("businessIdentity" Core..=) Core.<$> businessIdentity,
+            ("businessInformation" Core..=) Core.<$> businessInformation,
+            ("conversionSettings" Core..=) Core.<$> conversionSettings,
             ("cssId" Core..=) Core.. Core.AsText Core.<$> cssId,
-            ("googleMyBusinessLink" Core..=)
-              Core.<$> googleMyBusinessLink,
+            ("googleMyBusinessLink" Core..=) Core.<$> googleMyBusinessLink,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("kind" Core..=) Core.<$> kind,
-            ("labelIds" Core..=) Core.. Core.fmap Core.AsText
+            ("labelIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> labelIds,
             ("name" Core..=) Core.<$> name,
             ("sellerId" Core..=) Core.<$> sellerId,
             ("users" Core..=) Core.<$> users,
             ("websiteUrl" Core..=) Core.<$> websiteUrl,
-            ("youtubeChannelLinks" Core..=)
-              Core.<$> youtubeChannelLinks
+            ("youtubeChannelLinks" Core..=) Core.<$> youtubeChannelLinks
           ]
       )
 
@@ -1938,7 +1552,8 @@ data AccountAdsLink = AccountAdsLink
 -- | Creates a value of 'AccountAdsLink' with the minimum fields required to make a request.
 newAccountAdsLink ::
   AccountAdsLink
-newAccountAdsLink = AccountAdsLink {adsId = Core.Nothing, status = Core.Nothing}
+newAccountAdsLink =
+  AccountAdsLink {adsId = Core.Nothing, status = Core.Nothing}
 
 instance Core.FromJSON AccountAdsLink where
   parseJSON =
@@ -1946,9 +1561,7 @@ instance Core.FromJSON AccountAdsLink where
       "AccountAdsLink"
       ( \o ->
           AccountAdsLink
-            Core.<$> ( o Core..:? "adsId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "adsId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "status")
       )
 
@@ -1999,11 +1612,68 @@ instance Core.ToJSON AccountAutomaticImprovements where
   toJSON AccountAutomaticImprovements {..} =
     Core.object
       ( Core.catMaybes
-          [ ("imageImprovements" Core..=)
-              Core.<$> imageImprovements,
+          [ ("imageImprovements" Core..=) Core.<$> imageImprovements,
             ("itemUpdates" Core..=) Core.<$> itemUpdates,
-            ("shippingImprovements" Core..=)
-              Core.<$> shippingImprovements
+            ("shippingImprovements" Core..=) Core.<$> shippingImprovements
+          ]
+      )
+
+-- | The <https://support.google.com/merchants/answer/10342414 business identity attributes> can be used to self-declare attributes that let customers know more about your business.
+--
+-- /See:/ 'newAccountBusinessIdentity' smart constructor.
+data AccountBusinessIdentity = AccountBusinessIdentity
+  { -- | Specifies whether the business identifies itself as being black-owned. This optional field is only available for merchants with a business country set to \"US\". This field is not allowed for marketplaces or marketplace sellers.
+    blackOwned :: (Core.Maybe AccountIdentityType),
+    -- | Required. By setting this field, your business may be included in promotions for all the selected attributes. If you clear this option, it won\'t affect your identification with any of the attributes. For this field to be set, the merchant must self identify with at least one of the @AccountIdentityType@. If none are included, the request will be considered invalid.
+    includeForPromotions :: (Core.Maybe Core.Bool),
+    -- | Specifies whether the business identifies itself as being latino-owned. This optional field is only available for merchants with a business country set to \"US\". This field is not allowed for marketplaces or marketplace sellers.
+    latinoOwned :: (Core.Maybe AccountIdentityType),
+    -- | Specifies whether the business identifies itself as a small business. This optional field is only available for merchants with a business country set to \"US\". It is also not allowed for marketplaces, but it is allowed to marketplace sellers.
+    smallBusiness :: (Core.Maybe AccountIdentityType),
+    -- | Specifies whether the business identifies itself as being veteran-owned. This optional field is only available for merchants with a business country set to \"US\". This field is not allowed for marketplaces or marketplace sellers.
+    veteranOwned :: (Core.Maybe AccountIdentityType),
+    -- | Specifies whether the business identifies itself as being women-owned. This optional field is only available for merchants with a business country set to \"US\". This field is not allowed for marketplaces or marketplace sellers.
+    womenOwned :: (Core.Maybe AccountIdentityType)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccountBusinessIdentity' with the minimum fields required to make a request.
+newAccountBusinessIdentity ::
+  AccountBusinessIdentity
+newAccountBusinessIdentity =
+  AccountBusinessIdentity
+    { blackOwned = Core.Nothing,
+      includeForPromotions = Core.Nothing,
+      latinoOwned = Core.Nothing,
+      smallBusiness = Core.Nothing,
+      veteranOwned = Core.Nothing,
+      womenOwned = Core.Nothing
+    }
+
+instance Core.FromJSON AccountBusinessIdentity where
+  parseJSON =
+    Core.withObject
+      "AccountBusinessIdentity"
+      ( \o ->
+          AccountBusinessIdentity
+            Core.<$> (o Core..:? "blackOwned")
+            Core.<*> (o Core..:? "includeForPromotions")
+            Core.<*> (o Core..:? "latinoOwned")
+            Core.<*> (o Core..:? "smallBusiness")
+            Core.<*> (o Core..:? "veteranOwned")
+            Core.<*> (o Core..:? "womenOwned")
+      )
+
+instance Core.ToJSON AccountBusinessIdentity where
+  toJSON AccountBusinessIdentity {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blackOwned" Core..=) Core.<$> blackOwned,
+            ("includeForPromotions" Core..=) Core.<$> includeForPromotions,
+            ("latinoOwned" Core..=) Core.<$> latinoOwned,
+            ("smallBusiness" Core..=) Core.<$> smallBusiness,
+            ("veteranOwned" Core..=) Core.<$> veteranOwned,
+            ("womenOwned" Core..=) Core.<$> womenOwned
           ]
       )
 
@@ -2075,7 +1745,10 @@ newtype AccountConversionSettings = AccountConversionSettings
 newAccountConversionSettings ::
   AccountConversionSettings
 newAccountConversionSettings =
-  AccountConversionSettings {freeListingsAutoTaggingEnabled = Core.Nothing}
+  AccountConversionSettings
+    { freeListingsAutoTaggingEnabled =
+        Core.Nothing
+    }
 
 instance Core.FromJSON AccountConversionSettings where
   parseJSON =
@@ -2125,9 +1798,7 @@ instance Core.FromJSON AccountCredentials where
       ( \o ->
           AccountCredentials
             Core.<$> (o Core..:? "accessToken")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "purpose")
       )
 
@@ -2136,8 +1807,7 @@ instance Core.ToJSON AccountCredentials where
     Core.object
       ( Core.catMaybes
           [ ("accessToken" Core..=) Core.<$> accessToken,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("purpose" Core..=) Core.<$> purpose
           ]
       )
@@ -2242,7 +1912,10 @@ data AccountIdentifier = AccountIdentifier
 newAccountIdentifier ::
   AccountIdentifier
 newAccountIdentifier =
-  AccountIdentifier {aggregatorId = Core.Nothing, merchantId = Core.Nothing}
+  AccountIdentifier
+    { aggregatorId = Core.Nothing,
+      merchantId = Core.Nothing
+    }
 
 instance Core.FromJSON AccountIdentifier where
   parseJSON =
@@ -2250,23 +1923,45 @@ instance Core.FromJSON AccountIdentifier where
       "AccountIdentifier"
       ( \o ->
           AccountIdentifier
-            Core.<$> ( o Core..:? "aggregatorId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "aggregatorId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AccountIdentifier where
   toJSON AccountIdentifier {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregatorId" Core..=) Core.. Core.AsText
-              Core.<$> aggregatorId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId
+          [ ("aggregatorId" Core..=) Core.. Core.AsText Core.<$> aggregatorId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId
           ]
+      )
+
+-- | The account identity type used to specify attributes.
+--
+-- /See:/ 'newAccountIdentityType' smart constructor.
+newtype AccountIdentityType = AccountIdentityType
+  { -- | Optional. Indicates that the business identifies itself with a given identity type. Setting this field does not automatically mean eligibility for promotions.
+    selfIdentified :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccountIdentityType' with the minimum fields required to make a request.
+newAccountIdentityType ::
+  AccountIdentityType
+newAccountIdentityType =
+  AccountIdentityType {selfIdentified = Core.Nothing}
+
+instance Core.FromJSON AccountIdentityType where
+  parseJSON =
+    Core.withObject
+      "AccountIdentityType"
+      (\o -> AccountIdentityType Core.<$> (o Core..:? "selfIdentified"))
+
+instance Core.ToJSON AccountIdentityType where
+  toJSON AccountIdentityType {..} =
+    Core.object
+      ( Core.catMaybes
+          [("selfIdentified" Core..=) Core.<$> selfIdentified]
       )
 
 -- | This improvement will attempt to automatically correct submitted images if they don\'t meet the <https://support.google.com/merchants/answer/6324350 image requirements>, for example, removing overlays. If successful, the image will be replaced and approved. This improvement is only applied to images of disapproved offers. For more information see: <https://support.google.com/merchants/answer/9242973 Automatic image improvements>
@@ -2285,7 +1980,8 @@ newAccountImageImprovements ::
   AccountImageImprovements
 newAccountImageImprovements =
   AccountImageImprovements
-    { accountImageImprovementsSettings = Core.Nothing,
+    { accountImageImprovementsSettings =
+        Core.Nothing,
       effectiveAllowAutomaticImageImprovements = Core.Nothing
     }
 
@@ -2296,9 +1992,7 @@ instance Core.FromJSON AccountImageImprovements where
       ( \o ->
           AccountImageImprovements
             Core.<$> (o Core..:? "accountImageImprovementsSettings")
-            Core.<*> ( o
-                         Core..:? "effectiveAllowAutomaticImageImprovements"
-                     )
+            Core.<*> (o Core..:? "effectiveAllowAutomaticImageImprovements")
       )
 
 instance Core.ToJSON AccountImageImprovements where
@@ -2326,13 +2020,11 @@ newAccountImageImprovementsSettings ::
   AccountImageImprovementsSettings
 newAccountImageImprovementsSettings =
   AccountImageImprovementsSettings
-    { allowAutomaticImageImprovements = Core.Nothing
+    { allowAutomaticImageImprovements =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountImageImprovementsSettings
-  where
+instance Core.FromJSON AccountImageImprovementsSettings where
   parseJSON =
     Core.withObject
       "AccountImageImprovementsSettings"
@@ -2347,6 +2039,109 @@ instance Core.ToJSON AccountImageImprovementsSettings where
       ( Core.catMaybes
           [ ("allowAutomaticImageImprovements" Core..=)
               Core.<$> allowAutomaticImageImprovements
+          ]
+      )
+
+-- | An issue affecting specific merchant.
+--
+-- /See:/ 'newAccountIssue' smart constructor.
+data AccountIssue = AccountIssue
+  { -- | A list of actionable steps that can be executed to solve the issue. An example is requesting a re-review or providing arguments when merchant disagrees with the issue. Actions that are supported in (your) third-party application can be rendered as buttons and should be available to merchant when they expand the issue.
+    actions :: (Core.Maybe [Action]),
+    -- | Clarifies the severity of the issue. The summarizing message, if present, should be shown right under the title for each issue. It helps merchants to quickly understand the impact of the issue. The detailed breakdown helps the merchant to fully understand the impact of the issue. It can be rendered as dialog that opens when the merchant mouse over the summarized impact statement. Issues with different severity can be styled differently. They may use a different color or icon to signal the difference between @ERROR@, @WARNING@ and @INFO@.
+    impact :: (Core.Maybe AccountIssueImpact),
+    -- | Details of the issue as a pre-rendered HTML. HTML elements contain CSS classes that can be used to customize the style of the content. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @issue-detail@ - top level container for the detail of the issue * @callout-banners@ - section of the @issue-detail@ with callout banners * @callout-banner@ - single callout banner, inside @callout-banners@ * @callout-banner-info@ - callout with important information (default) * @callout-banner-warning@ - callout with a warning * @callout-banner-error@ - callout informing about an error (most severe) * @issue-content@ - section of the @issue-detail@, contains multiple @content-element@ * @content-element@ - content element such as a list, link or paragraph, inside @issue-content@ * @root-causes@ -
+    -- unordered list with items describing root causes of the issue, inside @issue-content@ * @root-causes-intro@ - intro text before the @root-causes@ list, inside @issue-content@ * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. *
+    -- @tooltip-icon@ - marks a section of the text within a @tooltip@, that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon. * @content-moderation@ - marks the paragraph that explains how the issue was identified. * @new-element@ - Present for new elements added to the pre-rendered content in the future. To make sure that a new content element does not break your style, you can hide everything with this class.
+    prerenderedContent :: (Core.Maybe Core.Text),
+    -- | Pre-rendered HTML that contains a link to the external location where the ODS can be requested and instructions for how to request it. HTML elements contain CSS classes that can be used to customize the style of this snippet. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @ods-section@* - wrapper around the out-of-court dispute resolution section * @ods-description@* - intro text for the out-of-court dispute resolution. It may contain multiple segments and a link. * @ods-param@* - wrapper around the header-value pair for parameters that merchant may need to provide during the ODS process. * @ods-routing-id@* - ods param for the Routing ID. * @ods-reference-id@* - ods param for the Routing ID. * @ods-param-header@* - header for the ODS parameter * @ods-param-value@* - value of the
+    -- ODS parameter. This value should be rendered in a way that it is easy for merchants to identify and copy. * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. * @tooltip-icon@ - marks a section of the text within a @tooltip@,
+    -- that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon.
+    prerenderedOutOfCourtDisputeSettlement :: (Core.Maybe Core.Text),
+    -- | Title of the issue.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccountIssue' with the minimum fields required to make a request.
+newAccountIssue ::
+  AccountIssue
+newAccountIssue =
+  AccountIssue
+    { actions = Core.Nothing,
+      impact = Core.Nothing,
+      prerenderedContent = Core.Nothing,
+      prerenderedOutOfCourtDisputeSettlement = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON AccountIssue where
+  parseJSON =
+    Core.withObject
+      "AccountIssue"
+      ( \o ->
+          AccountIssue
+            Core.<$> (o Core..:? "actions")
+            Core.<*> (o Core..:? "impact")
+            Core.<*> (o Core..:? "prerenderedContent")
+            Core.<*> (o Core..:? "prerenderedOutOfCourtDisputeSettlement")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON AccountIssue where
+  toJSON AccountIssue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actions" Core..=) Core.<$> actions,
+            ("impact" Core..=) Core.<$> impact,
+            ("prerenderedContent" Core..=) Core.<$> prerenderedContent,
+            ("prerenderedOutOfCourtDisputeSettlement" Core..=)
+              Core.<$> prerenderedOutOfCourtDisputeSettlement,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | Overall impact of the issue.
+--
+-- /See:/ 'newAccountIssueImpact' smart constructor.
+data AccountIssueImpact = AccountIssueImpact
+  { -- | Detailed impact breakdown. Explains the types of restriction the issue has in different shopping destinations and territory. If present, it should be rendered to the merchant. Can be shown as a mouse over dropdown or a dialog. Each breakdown item represents a group of regions with the same impact details.
+    breakdowns :: (Core.Maybe [Breakdown]),
+    -- | Optional. Message summarizing the overall impact of the issue. If present, it should be rendered to the merchant. For example: \"Disapproves 90k offers in 25 countries\"
+    message :: (Core.Maybe Core.Text),
+    -- | The severity of the issue.
+    severity :: (Core.Maybe AccountIssueImpact_Severity)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccountIssueImpact' with the minimum fields required to make a request.
+newAccountIssueImpact ::
+  AccountIssueImpact
+newAccountIssueImpact =
+  AccountIssueImpact
+    { breakdowns = Core.Nothing,
+      message = Core.Nothing,
+      severity = Core.Nothing
+    }
+
+instance Core.FromJSON AccountIssueImpact where
+  parseJSON =
+    Core.withObject
+      "AccountIssueImpact"
+      ( \o ->
+          AccountIssueImpact
+            Core.<$> (o Core..:? "breakdowns")
+            Core.<*> (o Core..:? "message")
+            Core.<*> (o Core..:? "severity")
+      )
+
+instance Core.ToJSON AccountIssueImpact where
+  toJSON AccountIssueImpact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("breakdowns" Core..=) Core.<$> breakdowns,
+            ("message" Core..=) Core.<$> message,
+            ("severity" Core..=) Core.<$> severity
           ]
       )
 
@@ -2389,9 +2184,7 @@ instance Core.FromJSON AccountItemUpdates where
             Core.<*> (o Core..:? "effectiveAllowAvailabilityUpdates")
             Core.<*> (o Core..:? "effectiveAllowConditionUpdates")
             Core.<*> (o Core..:? "effectiveAllowPriceUpdates")
-            Core.<*> ( o
-                         Core..:? "effectiveAllowStrictAvailabilityUpdates"
-                     )
+            Core.<*> (o Core..:? "effectiveAllowStrictAvailabilityUpdates")
       )
 
 instance Core.ToJSON AccountItemUpdates where
@@ -2431,7 +2224,8 @@ newAccountItemUpdatesSettings ::
   AccountItemUpdatesSettings
 newAccountItemUpdatesSettings =
   AccountItemUpdatesSettings
-    { allowAvailabilityUpdates = Core.Nothing,
+    { allowAvailabilityUpdates =
+        Core.Nothing,
       allowConditionUpdates = Core.Nothing,
       allowPriceUpdates = Core.Nothing,
       allowStrictAvailabilityUpdates = Core.Nothing
@@ -2455,10 +2249,8 @@ instance Core.ToJSON AccountItemUpdatesSettings where
       ( Core.catMaybes
           [ ("allowAvailabilityUpdates" Core..=)
               Core.<$> allowAvailabilityUpdates,
-            ("allowConditionUpdates" Core..=)
-              Core.<$> allowConditionUpdates,
-            ("allowPriceUpdates" Core..=)
-              Core.<$> allowPriceUpdates,
+            ("allowConditionUpdates" Core..=) Core.<$> allowConditionUpdates,
+            ("allowPriceUpdates" Core..=) Core.<$> allowPriceUpdates,
             ("allowStrictAvailabilityUpdates" Core..=)
               Core.<$> allowStrictAvailabilityUpdates
           ]
@@ -2499,13 +2291,9 @@ instance Core.FromJSON AccountLabel where
       "AccountLabel"
       ( \o ->
           AccountLabel
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "labelId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "labelId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "labelType")
             Core.<*> (o Core..:? "name")
       )
@@ -2514,11 +2302,9 @@ instance Core.ToJSON AccountLabel where
   toJSON AccountLabel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("description" Core..=) Core.<$> description,
-            ("labelId" Core..=) Core.. Core.AsText
-              Core.<$> labelId,
+            ("labelId" Core..=) Core.. Core.AsText Core.<$> labelId,
             ("labelType" Core..=) Core.<$> labelType,
             ("name" Core..=) Core.<$> name
           ]
@@ -2556,9 +2342,7 @@ instance Core.FromJSON AccountReturnCarrier where
       "AccountReturnCarrier"
       ( \o ->
           AccountReturnCarrier
-            Core.<$> ( o Core..:? "carrierAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "carrierAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "carrierAccountName")
             Core.<*> (o Core..:? "carrierAccountNumber")
             Core.<*> (o Core..:? "carrierCode")
@@ -2568,12 +2352,11 @@ instance Core.ToJSON AccountReturnCarrier where
   toJSON AccountReturnCarrier {..} =
     Core.object
       ( Core.catMaybes
-          [ ("carrierAccountId" Core..=) Core.. Core.AsText
+          [ ("carrierAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> carrierAccountId,
-            ("carrierAccountName" Core..=)
-              Core.<$> carrierAccountName,
-            ("carrierAccountNumber" Core..=)
-              Core.<$> carrierAccountNumber,
+            ("carrierAccountName" Core..=) Core.<$> carrierAccountName,
+            ("carrierAccountNumber" Core..=) Core.<$> carrierAccountNumber,
             ("carrierCode" Core..=) Core.<$> carrierCode
           ]
       )
@@ -2591,7 +2374,10 @@ newtype AccountShippingImprovements = AccountShippingImprovements
 newAccountShippingImprovements ::
   AccountShippingImprovements
 newAccountShippingImprovements =
-  AccountShippingImprovements {allowShippingImprovements = Core.Nothing}
+  AccountShippingImprovements
+    { allowShippingImprovements =
+        Core.Nothing
+    }
 
 instance Core.FromJSON AccountShippingImprovements where
   parseJSON =
@@ -2662,10 +2448,8 @@ instance Core.ToJSON AccountStatus where
     Core.object
       ( Core.catMaybes
           [ ("accountId" Core..=) Core.<$> accountId,
-            ("accountLevelIssues" Core..=)
-              Core.<$> accountLevelIssues,
-            ("accountManagement" Core..=)
-              Core.<$> accountManagement,
+            ("accountLevelIssues" Core..=) Core.<$> accountLevelIssues,
+            ("accountManagement" Core..=) Core.<$> accountManagement,
             ("kind" Core..=) Core.<$> kind,
             ("products" Core..=) Core.<$> products,
             ("websiteClaimed" Core..=) Core.<$> websiteClaimed
@@ -2783,9 +2567,7 @@ instance Core.FromJSON AccountStatusItemLevelIssue where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "detail")
             Core.<*> (o Core..:? "documentation")
-            Core.<*> ( o Core..:? "numItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numItems" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "resolution")
             Core.<*> (o Core..:? "servability")
       )
@@ -2799,8 +2581,7 @@ instance Core.ToJSON AccountStatusItemLevelIssue where
             ("description" Core..=) Core.<$> description,
             ("detail" Core..=) Core.<$> detail,
             ("documentation" Core..=) Core.<$> documentation,
-            ("numItems" Core..=) Core.. Core.AsText
-              Core.<$> numItems,
+            ("numItems" Core..=) Core.. Core.AsText Core.<$> numItems,
             ("resolution" Core..=) Core.<$> resolution,
             ("servability" Core..=) Core.<$> servability
           ]
@@ -2890,32 +2671,20 @@ instance Core.FromJSON AccountStatusStatistics where
       "AccountStatusStatistics"
       ( \o ->
           AccountStatusStatistics
-            Core.<$> ( o Core..:? "active"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "disapproved"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "expiring"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "pending"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "active" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "disapproved" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "expiring" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "pending" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON AccountStatusStatistics where
   toJSON AccountStatusStatistics {..} =
     Core.object
       ( Core.catMaybes
-          [ ("active" Core..=) Core.. Core.AsText
-              Core.<$> active,
-            ("disapproved" Core..=) Core.. Core.AsText
-              Core.<$> disapproved,
-            ("expiring" Core..=) Core.. Core.AsText
-              Core.<$> expiring,
-            ("pending" Core..=) Core.. Core.AsText
-              Core.<$> pending
+          [ ("active" Core..=) Core.. Core.AsText Core.<$> active,
+            ("disapproved" Core..=) Core.. Core.AsText Core.<$> disapproved,
+            ("expiring" Core..=) Core.. Core.AsText Core.<$> expiring,
+            ("pending" Core..=) Core.. Core.AsText Core.<$> pending
           ]
       )
 
@@ -2948,9 +2717,7 @@ instance Core.FromJSON AccountTax where
       "AccountTax"
       ( \o ->
           AccountTax
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "rules")
       )
@@ -2959,8 +2726,7 @@ instance Core.ToJSON AccountTax where
   toJSON AccountTax {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("kind" Core..=) Core.<$> kind,
             ("rules" Core..=) Core.<$> rules
           ]
@@ -3002,9 +2768,7 @@ instance Core.FromJSON AccountTaxTaxRule where
       ( \o ->
           AccountTaxTaxRule
             Core.<$> (o Core..:? "country")
-            Core.<*> ( o Core..:? "locationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "locationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "ratePercent")
             Core.<*> (o Core..:? "shippingTaxed")
             Core.<*> (o Core..:? "useGlobalRate")
@@ -3015,8 +2779,7 @@ instance Core.ToJSON AccountTaxTaxRule where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("locationId" Core..=) Core.. Core.AsText
-              Core.<$> locationId,
+            ("locationId" Core..=) Core.. Core.AsText Core.<$> locationId,
             ("ratePercent" Core..=) Core.<$> ratePercent,
             ("shippingTaxed" Core..=) Core.<$> shippingTaxed,
             ("useGlobalRate" Core..=) Core.<$> useGlobalRate
@@ -3036,7 +2799,7 @@ data AccountUser = AccountUser
     paymentsAnalyst :: (Core.Maybe Core.Bool),
     -- | Whether user can manage payment settings.
     paymentsManager :: (Core.Maybe Core.Bool),
-    -- | Whether user is a reporting manager.
+    -- | Whether user is a reporting manager. This role is equivalent to the Performance and insights role in Merchant Center.
     reportingManager :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3077,8 +2840,7 @@ instance Core.ToJSON AccountUser where
             ("orderManager" Core..=) Core.<$> orderManager,
             ("paymentsAnalyst" Core..=) Core.<$> paymentsAnalyst,
             ("paymentsManager" Core..=) Core.<$> paymentsManager,
-            ("reportingManager" Core..=)
-              Core.<$> reportingManager
+            ("reportingManager" Core..=) Core.<$> reportingManager
           ]
       )
 
@@ -3096,7 +2858,10 @@ data AccountYouTubeChannelLink = AccountYouTubeChannelLink
 newAccountYouTubeChannelLink ::
   AccountYouTubeChannelLink
 newAccountYouTubeChannelLink =
-  AccountYouTubeChannelLink {channelId = Core.Nothing, status = Core.Nothing}
+  AccountYouTubeChannelLink
+    { channelId = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON AccountYouTubeChannelLink where
   parseJSON =
@@ -3150,8 +2915,7 @@ instance Core.ToJSON AccountsAuthInfoResponse where
   toJSON AccountsAuthInfoResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountIdentifiers" Core..=)
-              Core.<$> accountIdentifiers,
+          [ ("accountIdentifiers" Core..=) Core.<$> accountIdentifiers,
             ("kind" Core..=) Core.<$> kind
           ]
       )
@@ -3174,15 +2938,11 @@ instance Core.FromJSON AccountsClaimWebsiteResponse where
   parseJSON =
     Core.withObject
       "AccountsClaimWebsiteResponse"
-      ( \o ->
-          AccountsClaimWebsiteResponse
-            Core.<$> (o Core..:? "kind")
-      )
+      (\o -> AccountsClaimWebsiteResponse Core.<$> (o Core..:? "kind"))
 
 instance Core.ToJSON AccountsClaimWebsiteResponse where
   toJSON AccountsClaimWebsiteResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newAccountsCustomBatchRequest' smart constructor.
@@ -3202,17 +2962,12 @@ instance Core.FromJSON AccountsCustomBatchRequest where
   parseJSON =
     Core.withObject
       "AccountsCustomBatchRequest"
-      ( \o ->
-          AccountsCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
-      )
+      (\o -> AccountsCustomBatchRequest Core.<$> (o Core..:? "entries"))
 
 instance Core.ToJSON AccountsCustomBatchRequest where
   toJSON AccountsCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch accounts request.
 --
@@ -3258,28 +3013,22 @@ newAccountsCustomBatchRequestEntry =
       view = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountsCustomBatchRequestEntry
-  where
+instance Core.FromJSON AccountsCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "AccountsCustomBatchRequestEntry"
       ( \o ->
           AccountsCustomBatchRequestEntry
             Core.<$> (o Core..:? "account")
-            Core.<*> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "batchId")
             Core.<*> (o Core..:? "force")
-            Core.<*> ( o Core..:? "labelIds"
+            Core.<*> ( o
+                         Core..:? "labelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "linkRequest")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "overwrite")
             Core.<*> (o Core..:? "view")
@@ -3290,15 +3039,14 @@ instance Core.ToJSON AccountsCustomBatchRequestEntry where
     Core.object
       ( Core.catMaybes
           [ ("account" Core..=) Core.<$> account,
-            ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+            ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("batchId" Core..=) Core.<$> batchId,
             ("force" Core..=) Core.<$> force,
-            ("labelIds" Core..=) Core.. Core.fmap Core.AsText
+            ("labelIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> labelIds,
             ("linkRequest" Core..=) Core.<$> linkRequest,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("overwrite" Core..=) Core.<$> overwrite,
             ("view" Core..=) Core.<$> view
@@ -3310,11 +3058,11 @@ instance Core.ToJSON AccountsCustomBatchRequestEntry where
 data AccountsCustomBatchRequestEntryLinkRequest = AccountsCustomBatchRequestEntryLinkRequest
   { -- | Action to perform for this link. The @\"request\"@ action is only available to select merchants. Acceptable values are: - \"@approve@\" - \"@remove@\" - \"@request@\"
     action :: (Core.Maybe Core.Text),
-    -- | Type of the link between the two accounts. Acceptable values are: - \"@channelPartner@\" - \"@eCommercePlatform@\" - \"@paymentServiceProvider@\"
+    -- | Type of the link between the two accounts. Acceptable values are: - \"@channelPartner@\" - \"@eCommercePlatform@\" - \"@paymentServiceProvider@\" - \"@localProductManager@\"
     linkType :: (Core.Maybe Core.Text),
     -- | The ID of the linked account.
     linkedAccountId :: (Core.Maybe Core.Text),
-    -- | Provided services. Acceptable values are: - \"@shoppingAdsProductManagement@\" - \"@shoppingActionsProductManagement@\" - \"@shoppingActionsOrderManagement@\" - \"@paymentProcessing@\"
+    -- | Provided services. Acceptable values are: - \"@shoppingAdsProductManagement@\" - \"@shoppingActionsProductManagement@\" - \"@shoppingActionsOrderManagement@\" - \"@paymentProcessing@\" - \"@localProductManagement@\"
     services :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3330,10 +3078,7 @@ newAccountsCustomBatchRequestEntryLinkRequest =
       services = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountsCustomBatchRequestEntryLinkRequest
-  where
+instance Core.FromJSON AccountsCustomBatchRequestEntryLinkRequest where
   parseJSON =
     Core.withObject
       "AccountsCustomBatchRequestEntryLinkRequest"
@@ -3345,10 +3090,7 @@ instance
             Core.<*> (o Core..:? "services")
       )
 
-instance
-  Core.ToJSON
-    AccountsCustomBatchRequestEntryLinkRequest
-  where
+instance Core.ToJSON AccountsCustomBatchRequestEntryLinkRequest where
   toJSON AccountsCustomBatchRequestEntryLinkRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -3373,7 +3115,10 @@ data AccountsCustomBatchResponse = AccountsCustomBatchResponse
 newAccountsCustomBatchResponse ::
   AccountsCustomBatchResponse
 newAccountsCustomBatchResponse =
-  AccountsCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  AccountsCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON AccountsCustomBatchResponse where
   parseJSON =
@@ -3381,7 +3126,8 @@ instance Core.FromJSON AccountsCustomBatchResponse where
       "AccountsCustomBatchResponse"
       ( \o ->
           AccountsCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON AccountsCustomBatchResponse where
@@ -3419,10 +3165,7 @@ newAccountsCustomBatchResponseEntry =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountsCustomBatchResponseEntry
-  where
+instance Core.FromJSON AccountsCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "AccountsCustomBatchResponseEntry"
@@ -3522,14 +3265,11 @@ instance Core.FromJSON AccountsLinkResponse where
   parseJSON =
     Core.withObject
       "AccountsLinkResponse"
-      ( \o ->
-          AccountsLinkResponse Core.<$> (o Core..:? "kind")
-      )
+      (\o -> AccountsLinkResponse Core.<$> (o Core..:? "kind"))
 
 instance Core.ToJSON AccountsLinkResponse where
   toJSON AccountsLinkResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newAccountsListLinksResponse' smart constructor.
@@ -3581,7 +3321,6 @@ data AccountsListResponse = AccountsListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of accounts.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [Account])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3637,7 +3376,8 @@ instance Core.FromJSON AccountsUpdateLabelsRequest where
       "AccountsUpdateLabelsRequest"
       ( \o ->
           AccountsUpdateLabelsRequest
-            Core.<$> ( o Core..:? "labelIds"
+            Core.<$> ( o
+                         Core..:? "labelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -3646,7 +3386,8 @@ instance Core.ToJSON AccountsUpdateLabelsRequest where
   toJSON AccountsUpdateLabelsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("labelIds" Core..=) Core.. Core.fmap Core.AsText
+          [ ("labelIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> labelIds
           ]
       )
@@ -3669,15 +3410,11 @@ instance Core.FromJSON AccountsUpdateLabelsResponse where
   parseJSON =
     Core.withObject
       "AccountsUpdateLabelsResponse"
-      ( \o ->
-          AccountsUpdateLabelsResponse
-            Core.<$> (o Core..:? "kind")
-      )
+      (\o -> AccountsUpdateLabelsResponse Core.<$> (o Core..:? "kind"))
 
 instance Core.ToJSON AccountsUpdateLabelsResponse where
   toJSON AccountsUpdateLabelsResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newAccountstatusesCustomBatchRequest' smart constructor.
@@ -3693,27 +3430,18 @@ newAccountstatusesCustomBatchRequest ::
 newAccountstatusesCustomBatchRequest =
   AccountstatusesCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    AccountstatusesCustomBatchRequest
-  where
+instance Core.FromJSON AccountstatusesCustomBatchRequest where
   parseJSON =
     Core.withObject
       "AccountstatusesCustomBatchRequest"
       ( \o ->
-          AccountstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          AccountstatusesCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
-instance
-  Core.ToJSON
-    AccountstatusesCustomBatchRequest
-  where
+instance Core.ToJSON AccountstatusesCustomBatchRequest where
   toJSON AccountstatusesCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch accountstatuses request.
 --
@@ -3744,39 +3472,27 @@ newAccountstatusesCustomBatchRequestEntry =
       method = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountstatusesCustomBatchRequestEntry
-  where
+instance Core.FromJSON AccountstatusesCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "AccountstatusesCustomBatchRequestEntry"
       ( \o ->
           AccountstatusesCustomBatchRequestEntry
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "batchId")
             Core.<*> (o Core..:? "destinations")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
       )
 
-instance
-  Core.ToJSON
-    AccountstatusesCustomBatchRequestEntry
-  where
+instance Core.ToJSON AccountstatusesCustomBatchRequestEntry where
   toJSON AccountstatusesCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("batchId" Core..=) Core.<$> batchId,
             ("destinations" Core..=) Core.<$> destinations,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method
           ]
       )
@@ -3800,22 +3516,17 @@ newAccountstatusesCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountstatusesCustomBatchResponse
-  where
+instance Core.FromJSON AccountstatusesCustomBatchResponse where
   parseJSON =
     Core.withObject
       "AccountstatusesCustomBatchResponse"
       ( \o ->
           AccountstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    AccountstatusesCustomBatchResponse
-  where
+instance Core.ToJSON AccountstatusesCustomBatchResponse where
   toJSON AccountstatusesCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -3842,15 +3553,13 @@ newAccountstatusesCustomBatchResponseEntry ::
   AccountstatusesCustomBatchResponseEntry
 newAccountstatusesCustomBatchResponseEntry =
   AccountstatusesCustomBatchResponseEntry
-    { accountStatus = Core.Nothing,
+    { accountStatus =
+        Core.Nothing,
       batchId = Core.Nothing,
       errors = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccountstatusesCustomBatchResponseEntry
-  where
+instance Core.FromJSON AccountstatusesCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "AccountstatusesCustomBatchResponseEntry"
@@ -3861,10 +3570,7 @@ instance
             Core.<*> (o Core..:? "errors")
       )
 
-instance
-  Core.ToJSON
-    AccountstatusesCustomBatchResponseEntry
-  where
+instance Core.ToJSON AccountstatusesCustomBatchResponseEntry where
   toJSON AccountstatusesCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -3881,7 +3587,6 @@ data AccountstatusesListResponse = AccountstatusesListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of account statuses.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [AccountStatus])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3936,16 +3641,13 @@ instance Core.FromJSON AccounttaxCustomBatchRequest where
     Core.withObject
       "AccounttaxCustomBatchRequest"
       ( \o ->
-          AccounttaxCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          AccounttaxCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON AccounttaxCustomBatchRequest where
   toJSON AccounttaxCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch accounttax request.
 --
@@ -3976,39 +3678,27 @@ newAccounttaxCustomBatchRequestEntry =
       method = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccounttaxCustomBatchRequestEntry
-  where
+instance Core.FromJSON AccounttaxCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "AccounttaxCustomBatchRequestEntry"
       ( \o ->
           AccounttaxCustomBatchRequestEntry
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "accountTax")
             Core.<*> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
       )
 
-instance
-  Core.ToJSON
-    AccounttaxCustomBatchRequestEntry
-  where
+instance Core.ToJSON AccounttaxCustomBatchRequestEntry where
   toJSON AccounttaxCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("accountTax" Core..=) Core.<$> accountTax,
             ("batchId" Core..=) Core.<$> batchId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method
           ]
       )
@@ -4027,7 +3717,10 @@ data AccounttaxCustomBatchResponse = AccounttaxCustomBatchResponse
 newAccounttaxCustomBatchResponse ::
   AccounttaxCustomBatchResponse
 newAccounttaxCustomBatchResponse =
-  AccounttaxCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  AccounttaxCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON AccounttaxCustomBatchResponse where
   parseJSON =
@@ -4035,7 +3728,8 @@ instance Core.FromJSON AccounttaxCustomBatchResponse where
       "AccounttaxCustomBatchResponse"
       ( \o ->
           AccounttaxCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON AccounttaxCustomBatchResponse where
@@ -4073,10 +3767,7 @@ newAccounttaxCustomBatchResponseEntry =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AccounttaxCustomBatchResponseEntry
-  where
+instance Core.FromJSON AccounttaxCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "AccounttaxCustomBatchResponseEntry"
@@ -4088,10 +3779,7 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    AccounttaxCustomBatchResponseEntry
-  where
+instance Core.ToJSON AccounttaxCustomBatchResponseEntry where
   toJSON AccounttaxCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -4109,7 +3797,6 @@ data AccounttaxListResponse = AccounttaxListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of account tax settings.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [AccountTax])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4145,31 +3832,211 @@ instance Core.ToJSON AccounttaxListResponse where
           ]
       )
 
--- | Request message for the ActivateProgram method.
+-- | An actionable step that can be executed to solve the issue.
 --
--- /See:/ 'newActivateBuyOnGoogleProgramRequest' smart constructor.
-data ActivateBuyOnGoogleProgramRequest = ActivateBuyOnGoogleProgramRequest
+-- /See:/ 'newAction' smart constructor.
+data Action = Action
+  { -- | Action implemented and performed in (your) third-party application. The application should point the merchant to the place, where they can access the corresponding functionality or provide instructions, if the specific functionality is not available.
+    builtinSimpleAction :: (Core.Maybe BuiltInSimpleAction),
+    -- | Action implemented and performed in (your) third-party application. The application needs to show an additional content and input form to the merchant as specified for given action. They can trigger the action only when they provided all required inputs.
+    builtinUserInputAction :: (Core.Maybe BuiltInUserInputAction),
+    -- | Label of the action button.
+    buttonLabel :: (Core.Maybe Core.Text),
+    -- | Action that is implemented and performed outside of (your) third-party application. The application needs to redirect the merchant to the external location where they can perform the action.
+    externalAction :: (Core.Maybe ExternalAction),
+    -- | Controlling whether the button is active or disabled. The value is \'false\' when the action was already requested or is not available. If the action is not available then a reason will be present. If (your) third-party application shows a disabled button for action that is not available, then it should also show reasons.
+    isAvailable :: (Core.Maybe Core.Bool),
+    -- | List of reasons why the action is not available. The list of reasons is empty if the action is available. If there is only one reason, it can be displayed next to the disabled button. If there are more reasons, all of them should be displayed, for example in a pop-up dialog.
+    reasons :: (Core.Maybe [ActionReason])
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ActivateBuyOnGoogleProgramRequest' with the minimum fields required to make a request.
-newActivateBuyOnGoogleProgramRequest ::
-  ActivateBuyOnGoogleProgramRequest
-newActivateBuyOnGoogleProgramRequest = ActivateBuyOnGoogleProgramRequest
+-- | Creates a value of 'Action' with the minimum fields required to make a request.
+newAction ::
+  Action
+newAction =
+  Action
+    { builtinSimpleAction = Core.Nothing,
+      builtinUserInputAction = Core.Nothing,
+      buttonLabel = Core.Nothing,
+      externalAction = Core.Nothing,
+      isAvailable = Core.Nothing,
+      reasons = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ActivateBuyOnGoogleProgramRequest
-  where
+instance Core.FromJSON Action where
   parseJSON =
     Core.withObject
-      "ActivateBuyOnGoogleProgramRequest"
-      (\o -> Core.pure ActivateBuyOnGoogleProgramRequest)
+      "Action"
+      ( \o ->
+          Action
+            Core.<$> (o Core..:? "builtinSimpleAction")
+            Core.<*> (o Core..:? "builtinUserInputAction")
+            Core.<*> (o Core..:? "buttonLabel")
+            Core.<*> (o Core..:? "externalAction")
+            Core.<*> (o Core..:? "isAvailable")
+            Core.<*> (o Core..:? "reasons")
+      )
 
-instance
-  Core.ToJSON
-    ActivateBuyOnGoogleProgramRequest
-  where
-  toJSON = Core.const Core.emptyObject
+instance Core.ToJSON Action where
+  toJSON Action {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("builtinSimpleAction" Core..=) Core.<$> builtinSimpleAction,
+            ("builtinUserInputAction" Core..=) Core.<$> builtinUserInputAction,
+            ("buttonLabel" Core..=) Core.<$> buttonLabel,
+            ("externalAction" Core..=) Core.<$> externalAction,
+            ("isAvailable" Core..=) Core.<$> isAvailable,
+            ("reasons" Core..=) Core.<$> reasons
+          ]
+      )
+
+-- | Flow that can be selected for an action. When merchant selects a flow, application should open a dialog with more information and input form.
+--
+-- /See:/ 'newActionFlow' smart constructor.
+data ActionFlow = ActionFlow
+  { -- | Label for the button to trigger the action from the action dialog. For example: \"Request review\"
+    dialogButtonLabel :: (Core.Maybe Core.Text),
+    -- | Important message to be highlighted in the request dialog. For example: \"You can only request a review for disagreeing with this issue once. If it\'s not approved, you\'ll need to fix the issue and wait a few days before you can request another review.\"
+    dialogCallout :: (Core.Maybe Callout),
+    -- | Message displayed in the request dialog. For example: \"Make sure you\'ve fixed all your country-specific issues. If not, you may have to wait 7 days to request another review\". There may be an more information to be shown in a tooltip.
+    dialogMessage :: (Core.Maybe TextWithTooltip),
+    -- | Title of the request dialog. For example: \"Before you request a review\"
+    dialogTitle :: (Core.Maybe Core.Text),
+    -- | Not for display but need to be sent back for the selected action flow.
+    id :: (Core.Maybe Core.Text),
+    -- | A list of input fields.
+    inputs :: (Core.Maybe [InputField]),
+    -- | Text value describing the intent for the action flow. It can be used as an input label if merchant needs to pick one of multiple flows. For example: \"I disagree with the issue\"
+    label :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActionFlow' with the minimum fields required to make a request.
+newActionFlow ::
+  ActionFlow
+newActionFlow =
+  ActionFlow
+    { dialogButtonLabel = Core.Nothing,
+      dialogCallout = Core.Nothing,
+      dialogMessage = Core.Nothing,
+      dialogTitle = Core.Nothing,
+      id = Core.Nothing,
+      inputs = Core.Nothing,
+      label = Core.Nothing
+    }
+
+instance Core.FromJSON ActionFlow where
+  parseJSON =
+    Core.withObject
+      "ActionFlow"
+      ( \o ->
+          ActionFlow
+            Core.<$> (o Core..:? "dialogButtonLabel")
+            Core.<*> (o Core..:? "dialogCallout")
+            Core.<*> (o Core..:? "dialogMessage")
+            Core.<*> (o Core..:? "dialogTitle")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "inputs")
+            Core.<*> (o Core..:? "label")
+      )
+
+instance Core.ToJSON ActionFlow where
+  toJSON ActionFlow {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dialogButtonLabel" Core..=) Core.<$> dialogButtonLabel,
+            ("dialogCallout" Core..=) Core.<$> dialogCallout,
+            ("dialogMessage" Core..=) Core.<$> dialogMessage,
+            ("dialogTitle" Core..=) Core.<$> dialogTitle,
+            ("id" Core..=) Core.<$> id,
+            ("inputs" Core..=) Core.<$> inputs,
+            ("label" Core..=) Core.<$> label
+          ]
+      )
+
+-- | Input provided by the merchant.
+--
+-- /See:/ 'newActionInput' smart constructor.
+data ActionInput = ActionInput
+  { -- | Required. Id of the selected action flow.
+    actionFlowId :: (Core.Maybe Core.Text),
+    -- | Required. Values for input fields.
+    inputValues :: (Core.Maybe [InputValue])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActionInput' with the minimum fields required to make a request.
+newActionInput ::
+  ActionInput
+newActionInput =
+  ActionInput
+    { actionFlowId = Core.Nothing,
+      inputValues = Core.Nothing
+    }
+
+instance Core.FromJSON ActionInput where
+  parseJSON =
+    Core.withObject
+      "ActionInput"
+      ( \o ->
+          ActionInput
+            Core.<$> (o Core..:? "actionFlowId")
+            Core.<*> (o Core..:? "inputValues")
+      )
+
+instance Core.ToJSON ActionInput where
+  toJSON ActionInput {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actionFlowId" Core..=) Core.<$> actionFlowId,
+            ("inputValues" Core..=) Core.<$> inputValues
+          ]
+      )
+
+-- | A single reason why the action is not available.
+--
+-- /See:/ 'newActionReason' smart constructor.
+data ActionReason = ActionReason
+  { -- | Optional. An action that needs to be performed to solve the problem represented by this reason. This action will always be available. Should be rendered as a link or button next to the summarizing message. For example, the review may be available only once merchant configure all required attributes. In such a situation this action can be a link to the form, where they can fill the missing attribute to unblock the main action.
+    action :: (Core.Maybe Action),
+    -- | Detailed explanation of the reason. Should be displayed as a hint if present.
+    detail :: (Core.Maybe Core.Text),
+    -- | Messages summarizing the reason, why the action is not available. For example: \"Review requested on Jan 03. Review requests can take a few days to complete.\"
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActionReason' with the minimum fields required to make a request.
+newActionReason ::
+  ActionReason
+newActionReason =
+  ActionReason
+    { action = Core.Nothing,
+      detail = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON ActionReason where
+  parseJSON =
+    Core.withObject
+      "ActionReason"
+      ( \o ->
+          ActionReason
+            Core.<$> (o Core..:? "action")
+            Core.<*> (o Core..:? "detail")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON ActionReason where
+  toJSON ActionReason {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("action" Core..=) Core.<$> action,
+            ("detail" Core..=) Core.<$> detail,
+            ("message" Core..=) Core.<$> message
+          ]
+      )
 
 --
 -- /See:/ 'newAddress' smart constructor.
@@ -4216,8 +4083,7 @@ instance Core.ToJSON Address where
   toJSON Address {..} =
     Core.object
       ( Core.catMaybes
-          [ ("administrativeArea" Core..=)
-              Core.<$> administrativeArea,
+          [ ("administrativeArea" Core..=) Core.<$> administrativeArea,
             ("city" Core..=) Core.<$> city,
             ("country" Core..=) Core.<$> country,
             ("postalCode" Core..=) Core.<$> postalCode,
@@ -4225,47 +4091,49 @@ instance Core.ToJSON Address where
           ]
       )
 
+-- | The Alternate Dispute Resolution (ADR) that may be available to merchants in some regions. If present, the link should be shown on the same page as the list of issues.
 --
--- /See:/ 'newAmount' smart constructor.
-data Amount = Amount
-  { -- | [required] The pre-tax or post-tax price depending on the location of the order.
-    priceAmount :: (Core.Maybe Price),
-    -- | [required] Tax value.
-    taxAmount :: (Core.Maybe Price)
+-- /See:/ 'newAlternateDisputeResolution' smart constructor.
+data AlternateDisputeResolution = AlternateDisputeResolution
+  { -- | The label for the alternate dispute resolution link.
+    label :: (Core.Maybe Core.Text),
+    -- | The URL pointing to a page, where merchant can request alternative dispute resolution with an <https://support.google.com/european-union-digital-services-act-redress-options/answer/13535501 external body>.
+    uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'Amount' with the minimum fields required to make a request.
-newAmount ::
-  Amount
-newAmount = Amount {priceAmount = Core.Nothing, taxAmount = Core.Nothing}
+-- | Creates a value of 'AlternateDisputeResolution' with the minimum fields required to make a request.
+newAlternateDisputeResolution ::
+  AlternateDisputeResolution
+newAlternateDisputeResolution =
+  AlternateDisputeResolution
+    { label = Core.Nothing,
+      uri = Core.Nothing
+    }
 
-instance Core.FromJSON Amount where
+instance Core.FromJSON AlternateDisputeResolution where
   parseJSON =
     Core.withObject
-      "Amount"
+      "AlternateDisputeResolution"
       ( \o ->
-          Amount
-            Core.<$> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "taxAmount")
+          AlternateDisputeResolution
+            Core.<$> (o Core..:? "label")
+            Core.<*> (o Core..:? "uri")
       )
 
-instance Core.ToJSON Amount where
-  toJSON Amount {..} =
+instance Core.ToJSON AlternateDisputeResolution where
+  toJSON AlternateDisputeResolution {..} =
     Core.object
       ( Core.catMaybes
-          [ ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("taxAmount" Core..=) Core.<$> taxAmount
-          ]
+          [("label" Core..=) Core.<$> label, ("uri" Core..=) Core.<$> uri]
       )
 
 -- | Represents attribution settings for conversion sources receiving pre-attribution data.
 --
 -- /See:/ 'newAttributionSettings' smart constructor.
 data AttributionSettings = AttributionSettings
-  { -- | Required. Lookback windows (in days) used for attribution in this source. Supported values are 7, 30, 60, 90.
+  { -- | Required. Lookback windows (in days) used for attribution in this source. Supported values are 7, 30, 40.
     attributionLookbackWindowInDays :: (Core.Maybe Core.Int32),
-    -- | Required. Attribution model.
     attributionModel :: (Core.Maybe AttributionSettings_AttributionModel),
     -- | Immutable. Unordered list. List of different conversion types a conversion event can be classified as. A standard \"purchase\" type will be automatically created if this list is empty at creation time.
     conversionType :: (Core.Maybe [AttributionSettingsConversionType])
@@ -4277,7 +4145,8 @@ newAttributionSettings ::
   AttributionSettings
 newAttributionSettings =
   AttributionSettings
-    { attributionLookbackWindowInDays = Core.Nothing,
+    { attributionLookbackWindowInDays =
+        Core.Nothing,
       attributionModel = Core.Nothing,
       conversionType = Core.Nothing
     }
@@ -4299,8 +4168,7 @@ instance Core.ToJSON AttributionSettings where
       ( Core.catMaybes
           [ ("attributionLookbackWindowInDays" Core..=)
               Core.<$> attributionLookbackWindowInDays,
-            ("attributionModel" Core..=)
-              Core.<$> attributionModel,
+            ("attributionModel" Core..=) Core.<$> attributionModel,
             ("conversionType" Core..=) Core.<$> conversionType
           ]
       )
@@ -4321,14 +4189,12 @@ newAttributionSettingsConversionType ::
   AttributionSettingsConversionType
 newAttributionSettingsConversionType =
   AttributionSettingsConversionType
-    { includeInReporting = Core.Nothing,
+    { includeInReporting =
+        Core.Nothing,
       name = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AttributionSettingsConversionType
-  where
+instance Core.FromJSON AttributionSettingsConversionType where
   parseJSON =
     Core.withObject
       "AttributionSettingsConversionType"
@@ -4338,15 +4204,11 @@ instance
             Core.<*> (o Core..:? "name")
       )
 
-instance
-  Core.ToJSON
-    AttributionSettingsConversionType
-  where
+instance Core.ToJSON AttributionSettingsConversionType where
   toJSON AttributionSettingsConversionType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("includeInReporting" Core..=)
-              Core.<$> includeInReporting,
+          [ ("includeInReporting" Core..=) Core.<$> includeInReporting,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -4398,17 +4260,11 @@ instance Core.FromJSON BestSellers where
       "BestSellers"
       ( \o ->
           BestSellers
-            Core.<$> ( o Core..:? "categoryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "categoryId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "countryCode")
-            Core.<*> ( o Core..:? "previousRank"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "previousRank" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "previousRelativeDemand")
-            Core.<*> ( o Core..:? "rank"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "rank" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "relativeDemand")
             Core.<*> (o Core..:? "relativeDemandChange")
             Core.<*> (o Core..:? "reportDate")
@@ -4419,20 +4275,15 @@ instance Core.ToJSON BestSellers where
   toJSON BestSellers {..} =
     Core.object
       ( Core.catMaybes
-          [ ("categoryId" Core..=) Core.. Core.AsText
-              Core.<$> categoryId,
+          [ ("categoryId" Core..=) Core.. Core.AsText Core.<$> categoryId,
             ("countryCode" Core..=) Core.<$> countryCode,
-            ("previousRank" Core..=) Core.. Core.AsText
-              Core.<$> previousRank,
-            ("previousRelativeDemand" Core..=)
-              Core.<$> previousRelativeDemand,
+            ("previousRank" Core..=) Core.. Core.AsText Core.<$> previousRank,
+            ("previousRelativeDemand" Core..=) Core.<$> previousRelativeDemand,
             ("rank" Core..=) Core.. Core.AsText Core.<$> rank,
             ("relativeDemand" Core..=) Core.<$> relativeDemand,
-            ("relativeDemandChange" Core..=)
-              Core.<$> relativeDemandChange,
+            ("relativeDemandChange" Core..=) Core.<$> relativeDemandChange,
             ("reportDate" Core..=) Core.<$> reportDate,
-            ("reportGranularity" Core..=)
-              Core.<$> reportGranularity
+            ("reportGranularity" Core..=) Core.<$> reportGranularity
           ]
       )
 
@@ -4458,8 +4309,199 @@ instance Core.FromJSON Brand where
 
 instance Core.ToJSON Brand where
   toJSON Brand {..} =
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
+
+-- | A detailed impact breakdown for a group of regions where the impact of the issue on different shopping destinations is the same.
+--
+-- /See:/ 'newBreakdown' smart constructor.
+data Breakdown = Breakdown
+  { -- | Human readable, localized description of issue\'s effect on different targets. Should be rendered as a list. For example: * \"Products not showing in ads\" * \"Products not showing organically\"
+    details :: (Core.Maybe [Core.Text]),
+    -- | Lists of regions. Should be rendered as a title for this group of details. The full list should be shown to merchant. If the list is too long, it is recommended to make it expandable.
+    regions :: (Core.Maybe [BreakdownRegion])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Breakdown' with the minimum fields required to make a request.
+newBreakdown ::
+  Breakdown
+newBreakdown =
+  Breakdown {details = Core.Nothing, regions = Core.Nothing}
+
+instance Core.FromJSON Breakdown where
+  parseJSON =
+    Core.withObject
+      "Breakdown"
+      ( \o ->
+          Breakdown
+            Core.<$> (o Core..:? "details")
+            Core.<*> (o Core..:? "regions")
+      )
+
+instance Core.ToJSON Breakdown where
+  toJSON Breakdown {..} =
     Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+      ( Core.catMaybes
+          [ ("details" Core..=) Core.<$> details,
+            ("regions" Core..=) Core.<$> regions
+          ]
+      )
+
+-- | Region with code and localized name.
+--
+-- /See:/ 'newBreakdownRegion' smart constructor.
+data BreakdownRegion = BreakdownRegion
+  { -- | The [CLDR territory code] (http:\/\/www.unicode.org\/repos\/cldr\/tags\/latest\/common\/main\/en.xml)
+    code :: (Core.Maybe Core.Text),
+    -- | The localized name of the region. For region with code=\'001\' the value is \'All countries\' or the equivalent in other languages.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BreakdownRegion' with the minimum fields required to make a request.
+newBreakdownRegion ::
+  BreakdownRegion
+newBreakdownRegion =
+  BreakdownRegion {code = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON BreakdownRegion where
+  parseJSON =
+    Core.withObject
+      "BreakdownRegion"
+      ( \o ->
+          BreakdownRegion
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON BreakdownRegion where
+  toJSON BreakdownRegion {..} =
+    Core.object
+      ( Core.catMaybes
+          [("code" Core..=) Core.<$> code, ("name" Core..=) Core.<$> name]
+      )
+
+-- | Action that is implemented and performed in (your) third-party application. Represents various functionality that is expected to be available to merchant and will help them with resolving the issue. The application should point the merchant to the place, where they can access the corresponding functionality. If the functionality is not supported, it is recommended to explain the situation to merchant and provide them with instructions how to solve the issue.
+--
+-- /See:/ 'newBuiltInSimpleAction' smart constructor.
+data BuiltInSimpleAction = BuiltInSimpleAction
+  { -- | Long text from an external source that should be available to the merchant. Present when the type is @SHOW_ADDITIONAL_CONTENT@.
+    additionalContent :: (Core.Maybe BuiltInSimpleActionAdditionalContent),
+    -- | The attribute that needs to be updated. Present when the type is @EDIT_ITEM_ATTRIBUTE@. This field contains a code for attribute, represented in snake_case. You can find a list of product\'s attributes, with their codes <https://support.google.com/merchants/answer/7052112 here>.
+    attributeCode :: (Core.Maybe Core.Text),
+    -- | The type of action that represents a functionality that is expected to be available in third-party application.
+    type' :: (Core.Maybe BuiltInSimpleAction_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BuiltInSimpleAction' with the minimum fields required to make a request.
+newBuiltInSimpleAction ::
+  BuiltInSimpleAction
+newBuiltInSimpleAction =
+  BuiltInSimpleAction
+    { additionalContent = Core.Nothing,
+      attributeCode = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON BuiltInSimpleAction where
+  parseJSON =
+    Core.withObject
+      "BuiltInSimpleAction"
+      ( \o ->
+          BuiltInSimpleAction
+            Core.<$> (o Core..:? "additionalContent")
+            Core.<*> (o Core..:? "attributeCode")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON BuiltInSimpleAction where
+  toJSON BuiltInSimpleAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalContent" Core..=) Core.<$> additionalContent,
+            ("attributeCode" Core..=) Core.<$> attributeCode,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Long text from external source.
+--
+-- /See:/ 'newBuiltInSimpleActionAdditionalContent' smart constructor.
+data BuiltInSimpleActionAdditionalContent = BuiltInSimpleActionAdditionalContent
+  { -- | Long text organized into paragraphs.
+    paragraphs :: (Core.Maybe [Core.Text]),
+    -- | Title of the additional content;
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BuiltInSimpleActionAdditionalContent' with the minimum fields required to make a request.
+newBuiltInSimpleActionAdditionalContent ::
+  BuiltInSimpleActionAdditionalContent
+newBuiltInSimpleActionAdditionalContent =
+  BuiltInSimpleActionAdditionalContent
+    { paragraphs = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON BuiltInSimpleActionAdditionalContent where
+  parseJSON =
+    Core.withObject
+      "BuiltInSimpleActionAdditionalContent"
+      ( \o ->
+          BuiltInSimpleActionAdditionalContent
+            Core.<$> (o Core..:? "paragraphs")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON BuiltInSimpleActionAdditionalContent where
+  toJSON BuiltInSimpleActionAdditionalContent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("paragraphs" Core..=) Core.<$> paragraphs,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | Action that is implemented and performed in (your) third-party application. The application needs to show an additional content and input form to the merchant. They can start the action only when they provided all required inputs. The application will request processing of the action by calling the <https://developers.google.com/shopping-content/reference/rest/v2.1/merchantsupport/triggeraction triggeraction method>.
+--
+-- /See:/ 'newBuiltInUserInputAction' smart constructor.
+data BuiltInUserInputAction = BuiltInUserInputAction
+  { -- | Internal details. Not for display but need to be sent back when triggering the action.
+    actionContext :: (Core.Maybe Core.Text),
+    -- | Actions may provide multiple different flows. Merchant selects one that fits best to their intent. Selecting the flow is the first step in user\'s interaction with the action. It affects what input fields will be available and required and also how the request will be processed.
+    flows :: (Core.Maybe [ActionFlow])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BuiltInUserInputAction' with the minimum fields required to make a request.
+newBuiltInUserInputAction ::
+  BuiltInUserInputAction
+newBuiltInUserInputAction =
+  BuiltInUserInputAction
+    { actionContext = Core.Nothing,
+      flows = Core.Nothing
+    }
+
+instance Core.FromJSON BuiltInUserInputAction where
+  parseJSON =
+    Core.withObject
+      "BuiltInUserInputAction"
+      ( \o ->
+          BuiltInUserInputAction
+            Core.<$> (o Core..:? "actionContext")
+            Core.<*> (o Core..:? "flows")
+      )
+
+instance Core.ToJSON BuiltInUserInputAction where
+  toJSON BuiltInUserInputAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actionContext" Core..=) Core.<$> actionContext,
+            ("flows" Core..=) Core.<$> flows
+          ]
+      )
 
 --
 -- /See:/ 'newBusinessDayConfig' smart constructor.
@@ -4472,155 +4514,53 @@ newtype BusinessDayConfig = BusinessDayConfig
 -- | Creates a value of 'BusinessDayConfig' with the minimum fields required to make a request.
 newBusinessDayConfig ::
   BusinessDayConfig
-newBusinessDayConfig = BusinessDayConfig {businessDays = Core.Nothing}
+newBusinessDayConfig =
+  BusinessDayConfig {businessDays = Core.Nothing}
 
 instance Core.FromJSON BusinessDayConfig where
   parseJSON =
     Core.withObject
       "BusinessDayConfig"
-      ( \o ->
-          BusinessDayConfig
-            Core.<$> (o Core..:? "businessDays")
-      )
+      (\o -> BusinessDayConfig Core.<$> (o Core..:? "businessDays"))
 
 instance Core.ToJSON BusinessDayConfig where
   toJSON BusinessDayConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("businessDays" Core..=) Core.<$> businessDays]
-      )
+      (Core.catMaybes [("businessDays" Core..=) Core.<$> businessDays])
 
--- | Response message for the GetProgramStatus method.
+-- | An important message that should be highlighted. Usually displayed as a banner.
 --
--- /See:/ 'newBuyOnGoogleProgramStatus' smart constructor.
-data BuyOnGoogleProgramStatus = BuyOnGoogleProgramStatus
-  { -- | The business models in which merchant participates.
-    businessModel :: (Core.Maybe [BuyOnGoogleProgramStatus_BusinessModelItem]),
-    -- | The customer service pending email. After verification this field becomes empty.
-    customerServicePendingEmail :: (Core.Maybe Core.Text),
-    -- | The pending phone number specified for BuyOnGoogle program. It might be different than account level phone number. In order to update this field the customer/service/pending/phone/region_code must also be set. After verification this field becomes empty.
-    customerServicePendingPhoneNumber :: (Core.Maybe Core.Text),
-    -- | Two letter country code for the pending phone number, for example @CA@ for Canadian numbers. See the <https://wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements ISO 3166-1 alpha-2> officially assigned codes. In order to update this field the customer/service/pending/phone/number must also be set. After verification this field becomes empty.
-    customerServicePendingPhoneRegionCode :: (Core.Maybe Core.Text),
-    -- | Output only. The customer service verified email.
-    customerServiceVerifiedEmail :: (Core.Maybe Core.Text),
-    -- | Output only. The verified phone number specified for BuyOnGoogle program. It might be different than account level phone number.
-    customerServiceVerifiedPhoneNumber :: (Core.Maybe Core.Text),
-    -- | Output only. Two letter country code for the verified phone number, for example @CA@ for Canadian numbers. See the <https://wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements ISO 3166-1 alpha-2> officially assigned codes.
-    customerServiceVerifiedPhoneRegionCode :: (Core.Maybe Core.Text),
-    -- | The channels through which the merchant is selling.
-    onlineSalesChannel :: (Core.Maybe BuyOnGoogleProgramStatus_OnlineSalesChannel),
-    -- | Output only. The current participation stage for the program.
-    participationStage :: (Core.Maybe BuyOnGoogleProgramStatus_ParticipationStage)
+-- /See:/ 'newCallout' smart constructor.
+data Callout = Callout
+  { -- | A full message that needs to be shown to the merchant.
+    fullMessage :: (Core.Maybe TextWithTooltip),
+    -- | Can be used to render messages with different severity in different styles. Snippets off all types contain important information that should be displayed to merchants.
+    styleHint :: (Core.Maybe Callout_StyleHint)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'BuyOnGoogleProgramStatus' with the minimum fields required to make a request.
-newBuyOnGoogleProgramStatus ::
-  BuyOnGoogleProgramStatus
-newBuyOnGoogleProgramStatus =
-  BuyOnGoogleProgramStatus
-    { businessModel = Core.Nothing,
-      customerServicePendingEmail = Core.Nothing,
-      customerServicePendingPhoneNumber = Core.Nothing,
-      customerServicePendingPhoneRegionCode = Core.Nothing,
-      customerServiceVerifiedEmail = Core.Nothing,
-      customerServiceVerifiedPhoneNumber = Core.Nothing,
-      customerServiceVerifiedPhoneRegionCode = Core.Nothing,
-      onlineSalesChannel = Core.Nothing,
-      participationStage = Core.Nothing
-    }
+-- | Creates a value of 'Callout' with the minimum fields required to make a request.
+newCallout ::
+  Callout
+newCallout =
+  Callout {fullMessage = Core.Nothing, styleHint = Core.Nothing}
 
-instance Core.FromJSON BuyOnGoogleProgramStatus where
+instance Core.FromJSON Callout where
   parseJSON =
     Core.withObject
-      "BuyOnGoogleProgramStatus"
+      "Callout"
       ( \o ->
-          BuyOnGoogleProgramStatus
-            Core.<$> (o Core..:? "businessModel")
-            Core.<*> (o Core..:? "customerServicePendingEmail")
-            Core.<*> (o Core..:? "customerServicePendingPhoneNumber")
-            Core.<*> (o Core..:? "customerServicePendingPhoneRegionCode")
-            Core.<*> (o Core..:? "customerServiceVerifiedEmail")
-            Core.<*> (o Core..:? "customerServiceVerifiedPhoneNumber")
-            Core.<*> (o Core..:? "customerServiceVerifiedPhoneRegionCode")
-            Core.<*> (o Core..:? "onlineSalesChannel")
-            Core.<*> (o Core..:? "participationStage")
+          Callout
+            Core.<$> (o Core..:? "fullMessage")
+            Core.<*> (o Core..:? "styleHint")
       )
 
-instance Core.ToJSON BuyOnGoogleProgramStatus where
-  toJSON BuyOnGoogleProgramStatus {..} =
+instance Core.ToJSON Callout where
+  toJSON Callout {..} =
     Core.object
       ( Core.catMaybes
-          [ ("businessModel" Core..=) Core.<$> businessModel,
-            ("customerServicePendingEmail" Core..=)
-              Core.<$> customerServicePendingEmail,
-            ("customerServicePendingPhoneNumber" Core..=)
-              Core.<$> customerServicePendingPhoneNumber,
-            ("customerServicePendingPhoneRegionCode" Core..=)
-              Core.<$> customerServicePendingPhoneRegionCode,
-            ("customerServiceVerifiedEmail" Core..=)
-              Core.<$> customerServiceVerifiedEmail,
-            ("customerServiceVerifiedPhoneNumber" Core..=)
-              Core.<$> customerServiceVerifiedPhoneNumber,
-            ("customerServiceVerifiedPhoneRegionCode" Core..=)
-              Core.<$> customerServiceVerifiedPhoneRegionCode,
-            ("onlineSalesChannel" Core..=)
-              Core.<$> onlineSalesChannel,
-            ("participationStage" Core..=)
-              Core.<$> participationStage
-          ]
-      )
-
--- | Request message for the CaptureOrder method.
---
--- /See:/ 'newCaptureOrderRequest' smart constructor.
-data CaptureOrderRequest = CaptureOrderRequest
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CaptureOrderRequest' with the minimum fields required to make a request.
-newCaptureOrderRequest ::
-  CaptureOrderRequest
-newCaptureOrderRequest = CaptureOrderRequest
-
-instance Core.FromJSON CaptureOrderRequest where
-  parseJSON =
-    Core.withObject
-      "CaptureOrderRequest"
-      (\o -> Core.pure CaptureOrderRequest)
-
-instance Core.ToJSON CaptureOrderRequest where
-  toJSON = Core.const Core.emptyObject
-
--- | Response message for the CaptureOrder method.
---
--- /See:/ 'newCaptureOrderResponse' smart constructor.
-newtype CaptureOrderResponse = CaptureOrderResponse
-  { -- | The status of the execution. Only defined if the request was successful. Acceptable values are: * \"duplicate\" * \"executed\"
-    executionStatus :: (Core.Maybe CaptureOrderResponse_ExecutionStatus)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CaptureOrderResponse' with the minimum fields required to make a request.
-newCaptureOrderResponse ::
-  CaptureOrderResponse
-newCaptureOrderResponse = CaptureOrderResponse {executionStatus = Core.Nothing}
-
-instance Core.FromJSON CaptureOrderResponse where
-  parseJSON =
-    Core.withObject
-      "CaptureOrderResponse"
-      ( \o ->
-          CaptureOrderResponse
-            Core.<$> (o Core..:? "executionStatus")
-      )
-
-instance Core.ToJSON CaptureOrderResponse where
-  toJSON CaptureOrderResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus
+          [ ("fullMessage" Core..=) Core.<$> fullMessage,
+            ("styleHint" Core..=) Core.<$> styleHint
           ]
       )
 
@@ -4677,10 +4617,8 @@ instance Core.ToJSON CarrierRate where
             ("carrierService" Core..=) Core.<$> carrierService,
             ("flatAdjustment" Core..=) Core.<$> flatAdjustment,
             ("name" Core..=) Core.<$> name,
-            ("originPostalCode" Core..=)
-              Core.<$> originPostalCode,
-            ("percentageAdjustment" Core..=)
-              Core.<$> percentageAdjustment
+            ("originPostalCode" Core..=) Core.<$> originPostalCode,
+            ("percentageAdjustment" Core..=) Core.<$> percentageAdjustment
           ]
       )
 
@@ -4729,6 +4667,145 @@ instance Core.ToJSON CarriersCarrier where
             ("eddServices" Core..=) Core.<$> eddServices,
             ("name" Core..=) Core.<$> name,
             ("services" Core..=) Core.<$> services
+          ]
+      )
+
+-- | @CheckoutSettings@ for a specific merchant ID.
+--
+-- /See:/ 'newCheckoutSettings' smart constructor.
+data CheckoutSettings = CheckoutSettings
+  { -- | Output only. The effective value of enrollment state for a given merchant ID. If account level settings are present then this value will be a copy of the account level settings. Otherwise, it will have the value of the parent account.
+    effectiveEnrollmentState :: (Core.Maybe CheckoutSettings_EffectiveEnrollmentState),
+    -- | Output only. The effective value of review state for a given merchant ID. If account level settings are present then this value will be a copy of the account level settings. Otherwise, it will have the value of the parent account.
+    effectiveReviewState :: (Core.Maybe CheckoutSettings_EffectiveReviewState),
+    -- | The effective value of @url_settings@ for a given merchant ID. If account level settings are present then this value will be a copy of the account level settings. Otherwise, it will have the value of the parent account.
+    effectiveUriSettings :: (Core.Maybe UrlSettings),
+    -- | Output only. Reflects the merchant enrollment state in @Checkout@ feature.
+    enrollmentState :: (Core.Maybe CheckoutSettings_EnrollmentState),
+    -- | Required. The ID of the account.
+    merchantId :: (Core.Maybe Core.Int64),
+    -- | Output only. Reflects the merchant review state in @Checkout@ feature. This is set based on the data quality reviews of the URL provided by the merchant. A merchant with enrollment state as @ENROLLED@ can be in the following review states: @IN_REVIEW@, @APPROVED@ or @DISAPPROVED@. A merchant must be in an enrollment_state of @ENROLLED@ before a review can begin for the merchant.
+    reviewState :: (Core.Maybe CheckoutSettings_ReviewState),
+    -- | URL settings for cart or checkout URL.
+    uriSettings :: (Core.Maybe UrlSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CheckoutSettings' with the minimum fields required to make a request.
+newCheckoutSettings ::
+  CheckoutSettings
+newCheckoutSettings =
+  CheckoutSettings
+    { effectiveEnrollmentState = Core.Nothing,
+      effectiveReviewState = Core.Nothing,
+      effectiveUriSettings = Core.Nothing,
+      enrollmentState = Core.Nothing,
+      merchantId = Core.Nothing,
+      reviewState = Core.Nothing,
+      uriSettings = Core.Nothing
+    }
+
+instance Core.FromJSON CheckoutSettings where
+  parseJSON =
+    Core.withObject
+      "CheckoutSettings"
+      ( \o ->
+          CheckoutSettings
+            Core.<$> (o Core..:? "effectiveEnrollmentState")
+            Core.<*> (o Core..:? "effectiveReviewState")
+            Core.<*> (o Core..:? "effectiveUriSettings")
+            Core.<*> (o Core..:? "enrollmentState")
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "reviewState")
+            Core.<*> (o Core..:? "uriSettings")
+      )
+
+instance Core.ToJSON CheckoutSettings where
+  toJSON CheckoutSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("effectiveEnrollmentState" Core..=)
+              Core.<$> effectiveEnrollmentState,
+            ("effectiveReviewState" Core..=) Core.<$> effectiveReviewState,
+            ("effectiveUriSettings" Core..=) Core.<$> effectiveUriSettings,
+            ("enrollmentState" Core..=) Core.<$> enrollmentState,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
+            ("reviewState" Core..=) Core.<$> reviewState,
+            ("uriSettings" Core..=) Core.<$> uriSettings
+          ]
+      )
+
+-- | Product property for the Cloud Retail API. For example, properties for a TV product could be \"Screen-Resolution\" or \"Screen-Size\".
+--
+-- /See:/ 'newCloudExportAdditionalProperties' smart constructor.
+data CloudExportAdditionalProperties = CloudExportAdditionalProperties
+  { -- | Boolean value of the given property. For example for a TV product, \"True\" or \"False\" if the screen is UHD.
+    boolValue :: (Core.Maybe Core.Bool),
+    -- | Float values of the given property. For example for a TV product 1.2345. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order.
+    floatValue :: (Core.Maybe [Core.Double]),
+    -- | Integer values of the given property. For example, 1080 for a screen resolution of a TV product. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order.
+    intValue :: (Core.Maybe [Core.Int64]),
+    -- | Maximum float value of the given property. For example for a TV product 100.00.
+    maxValue :: (Core.Maybe Core.Double),
+    -- | Minimum float value of the given property. For example for a TV product 1.00.
+    minValue :: (Core.Maybe Core.Double),
+    -- | Name of the given property. For example, \"Screen-Resolution\" for a TV product. Maximum string size is 256 characters.
+    propertyName :: (Core.Maybe Core.Text),
+    -- | Text value of the given property. For example, \"8K(UHD)\" could be a text value for a TV product. Maximum number of specified values for this field is 400. Values are stored in an arbitrary but consistent order. Maximum string size is 256 characters.
+    textValue :: (Core.Maybe [Core.Text]),
+    -- | Unit of the given property. For example, \"Pixels\" for a TV product. Maximum string size is 256 bytes.
+    unitCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CloudExportAdditionalProperties' with the minimum fields required to make a request.
+newCloudExportAdditionalProperties ::
+  CloudExportAdditionalProperties
+newCloudExportAdditionalProperties =
+  CloudExportAdditionalProperties
+    { boolValue = Core.Nothing,
+      floatValue = Core.Nothing,
+      intValue = Core.Nothing,
+      maxValue = Core.Nothing,
+      minValue = Core.Nothing,
+      propertyName = Core.Nothing,
+      textValue = Core.Nothing,
+      unitCode = Core.Nothing
+    }
+
+instance Core.FromJSON CloudExportAdditionalProperties where
+  parseJSON =
+    Core.withObject
+      "CloudExportAdditionalProperties"
+      ( \o ->
+          CloudExportAdditionalProperties
+            Core.<$> (o Core..:? "boolValue")
+            Core.<*> (o Core..:? "floatValue")
+            Core.<*> ( o
+                         Core..:? "intValue"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+            Core.<*> (o Core..:? "maxValue")
+            Core.<*> (o Core..:? "minValue")
+            Core.<*> (o Core..:? "propertyName")
+            Core.<*> (o Core..:? "textValue")
+            Core.<*> (o Core..:? "unitCode")
+      )
+
+instance Core.ToJSON CloudExportAdditionalProperties where
+  toJSON CloudExportAdditionalProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("boolValue" Core..=) Core.<$> boolValue,
+            ("floatValue" Core..=) Core.<$> floatValue,
+            ("intValue" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> intValue,
+            ("maxValue" Core..=) Core.<$> maxValue,
+            ("minValue" Core..=) Core.<$> minValue,
+            ("propertyName" Core..=) Core.<$> propertyName,
+            ("textValue" Core..=) Core.<$> textValue,
+            ("unitCode" Core..=) Core.<$> unitCode
           ]
       )
 
@@ -4919,8 +4996,7 @@ instance Core.ToJSON CollectionStatus where
           [ ("collectionLevelIssuses" Core..=)
               Core.<$> collectionLevelIssuses,
             ("creationDate" Core..=) Core.<$> creationDate,
-            ("destinationStatuses" Core..=)
-              Core.<$> destinationStatuses,
+            ("destinationStatuses" Core..=) Core.<$> destinationStatuses,
             ("id" Core..=) Core.<$> id,
             ("lastUpdateDate" Core..=) Core.<$> lastUpdateDate
           ]
@@ -4948,17 +5024,15 @@ newCollectionStatusDestinationStatus ::
   CollectionStatusDestinationStatus
 newCollectionStatusDestinationStatus =
   CollectionStatusDestinationStatus
-    { approvedCountries = Core.Nothing,
+    { approvedCountries =
+        Core.Nothing,
       destination = Core.Nothing,
       disapprovedCountries = Core.Nothing,
       pendingCountries = Core.Nothing,
       status = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CollectionStatusDestinationStatus
-  where
+instance Core.FromJSON CollectionStatusDestinationStatus where
   parseJSON =
     Core.withObject
       "CollectionStatusDestinationStatus"
@@ -4971,20 +5045,14 @@ instance
             Core.<*> (o Core..:? "status")
       )
 
-instance
-  Core.ToJSON
-    CollectionStatusDestinationStatus
-  where
+instance Core.ToJSON CollectionStatusDestinationStatus where
   toJSON CollectionStatusDestinationStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("approvedCountries" Core..=)
-              Core.<$> approvedCountries,
+          [ ("approvedCountries" Core..=) Core.<$> approvedCountries,
             ("destination" Core..=) Core.<$> destination,
-            ("disapprovedCountries" Core..=)
-              Core.<$> disapprovedCountries,
-            ("pendingCountries" Core..=)
-              Core.<$> pendingCountries,
+            ("disapprovedCountries" Core..=) Core.<$> disapprovedCountries,
+            ("pendingCountries" Core..=) Core.<$> pendingCountries,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -5019,7 +5087,8 @@ newCollectionStatusItemLevelIssue ::
   CollectionStatusItemLevelIssue
 newCollectionStatusItemLevelIssue =
   CollectionStatusItemLevelIssue
-    { applicableCountries = Core.Nothing,
+    { applicableCountries =
+        Core.Nothing,
       attributeName = Core.Nothing,
       code = Core.Nothing,
       description = Core.Nothing,
@@ -5051,8 +5120,7 @@ instance Core.ToJSON CollectionStatusItemLevelIssue where
   toJSON CollectionStatusItemLevelIssue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicableCountries" Core..=)
-              Core.<$> applicableCountries,
+          [ ("applicableCountries" Core..=) Core.<$> applicableCountries,
             ("attributeName" Core..=) Core.<$> attributeName,
             ("code" Core..=) Core.<$> code,
             ("description" Core..=) Core.<$> description,
@@ -5061,6 +5129,102 @@ instance Core.ToJSON CollectionStatusItemLevelIssue where
             ("documentation" Core..=) Core.<$> documentation,
             ("resolution" Core..=) Core.<$> resolution,
             ("servability" Core..=) Core.<$> servability
+          ]
+      )
+
+-- | Fields related to [competitive visibility reports] (https:\/\/support.google.com\/merchants\/answer\/11366442).
+--
+-- /See:/ 'newCompetitiveVisibility' smart constructor.
+data CompetitiveVisibility = CompetitiveVisibility
+  { -- | [Ads \/ organic ratio] (https:\/\/support.google.com\/merchants\/answer\/11366442#zippy=%2Cadsfree-ratio) shows how often a merchant receives impressions from Shopping ads compared to organic traffic. The number is rounded and bucketed. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    adsOrganicRatio :: (Core.Maybe Core.Double),
+    -- | Change in visibility based on impressions with respect to the start of the selected time range (or first day with non-zero impressions) for a combined set of merchants with highest visibility approximating the market. Available only in @CompetitiveVisibilityBenchmarkView@. Cannot be filtered on in the \'WHERE\' clause.
+    categoryBenchmarkVisibilityTrend :: (Core.Maybe Core.Double),
+    -- | Google product category ID to calculate the report for, represented in <https://support.google.com/merchants/answer/6324436 Google\'s product taxonomy>. Required in the @SELECT@ clause. A @WHERE@ condition on @competitive_visibility.category_id@ is required in the query.
+    categoryId :: (Core.Maybe Core.Int64),
+    -- | The country where impression appeared. Required in the @SELECT@ clause. A @WHERE@ condition on @competitive_visibility.country_code@ is required in the query.
+    countryCode :: (Core.Maybe Core.Text),
+    -- | Date of this row. Available only in @CompetitiveVisibilityBenchmarkView@ and @CompetitiveVisibilityCompetitorView@. Required in the @SELECT@ clause for @CompetitiveVisibilityMarketBenchmarkView@.
+    date :: (Core.Maybe Date),
+    -- | Domain of your competitor or your domain, if \'is/your/domain\' is true. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Required in the @SELECT@ clause for @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    domain :: (Core.Maybe Core.Text),
+    -- | Higher position rate shows how often a competitor’s offer got placed in a higher position on the page than your offer. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    higherPositionRate :: (Core.Maybe Core.Double),
+    -- | True if this row contains data for your domain. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    isYourDomain :: (Core.Maybe Core.Bool),
+    -- | Page overlap rate describes how frequently competing retailers’ offers are shown together with your offers on the same page. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    pageOverlapRate :: (Core.Maybe Core.Double),
+    -- | Position of the domain in the top merchants ranking for the selected keys (@date@, @category_id@, @country_code@, @listing_type@) based on impressions. 1 is the highest. Available only in @CompetitiveVisibilityTopMerchantView@ and @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    rank :: (Core.Maybe Core.Word64),
+    -- | Relative visibility shows how often your competitors’ offers are shown compared to your offers. In other words, this is the number of displayed impressions of a competitor retailer divided by the number of your displayed impressions during a selected time range for a selected product category and country. Available only in @CompetitiveVisibilityCompetitorView@. Cannot be filtered on in the \'WHERE\' clause.
+    relativeVisibility :: (Core.Maybe Core.Double),
+    -- | Type of impression listing. Required in the @SELECT@ clause. Cannot be filtered on in the \'WHERE\' clause.
+    trafficSource :: (Core.Maybe CompetitiveVisibility_TrafficSource),
+    -- | Change in visibility based on impressions for your domain with respect to the start of the selected time range (or first day with non-zero impressions). Available only in @CompetitiveVisibilityBenchmarkView@. Cannot be filtered on in the \'WHERE\' clause.
+    yourDomainVisibilityTrend :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CompetitiveVisibility' with the minimum fields required to make a request.
+newCompetitiveVisibility ::
+  CompetitiveVisibility
+newCompetitiveVisibility =
+  CompetitiveVisibility
+    { adsOrganicRatio = Core.Nothing,
+      categoryBenchmarkVisibilityTrend = Core.Nothing,
+      categoryId = Core.Nothing,
+      countryCode = Core.Nothing,
+      date = Core.Nothing,
+      domain = Core.Nothing,
+      higherPositionRate = Core.Nothing,
+      isYourDomain = Core.Nothing,
+      pageOverlapRate = Core.Nothing,
+      rank = Core.Nothing,
+      relativeVisibility = Core.Nothing,
+      trafficSource = Core.Nothing,
+      yourDomainVisibilityTrend = Core.Nothing
+    }
+
+instance Core.FromJSON CompetitiveVisibility where
+  parseJSON =
+    Core.withObject
+      "CompetitiveVisibility"
+      ( \o ->
+          CompetitiveVisibility
+            Core.<$> (o Core..:? "adsOrganicRatio")
+            Core.<*> (o Core..:? "categoryBenchmarkVisibilityTrend")
+            Core.<*> (o Core..:? "categoryId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "countryCode")
+            Core.<*> (o Core..:? "date")
+            Core.<*> (o Core..:? "domain")
+            Core.<*> (o Core..:? "higherPositionRate")
+            Core.<*> (o Core..:? "isYourDomain")
+            Core.<*> (o Core..:? "pageOverlapRate")
+            Core.<*> (o Core..:? "rank" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "relativeVisibility")
+            Core.<*> (o Core..:? "trafficSource")
+            Core.<*> (o Core..:? "yourDomainVisibilityTrend")
+      )
+
+instance Core.ToJSON CompetitiveVisibility where
+  toJSON CompetitiveVisibility {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adsOrganicRatio" Core..=) Core.<$> adsOrganicRatio,
+            ("categoryBenchmarkVisibilityTrend" Core..=)
+              Core.<$> categoryBenchmarkVisibilityTrend,
+            ("categoryId" Core..=) Core.. Core.AsText Core.<$> categoryId,
+            ("countryCode" Core..=) Core.<$> countryCode,
+            ("date" Core..=) Core.<$> date,
+            ("domain" Core..=) Core.<$> domain,
+            ("higherPositionRate" Core..=) Core.<$> higherPositionRate,
+            ("isYourDomain" Core..=) Core.<$> isYourDomain,
+            ("pageOverlapRate" Core..=) Core.<$> pageOverlapRate,
+            ("rank" Core..=) Core.. Core.AsText Core.<$> rank,
+            ("relativeVisibility" Core..=) Core.<$> relativeVisibility,
+            ("trafficSource" Core..=) Core.<$> trafficSource,
+            ("yourDomainVisibilityTrend" Core..=)
+              Core.<$> yourDomainVisibilityTrend
           ]
       )
 
@@ -5110,11 +5274,9 @@ instance Core.ToJSON ConversionSource where
   toJSON ConversionSource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conversionSourceId" Core..=)
-              Core.<$> conversionSourceId,
+          [ ("conversionSourceId" Core..=) Core.<$> conversionSourceId,
             ("expireTime" Core..=) Core.<$> expireTime,
-            ("googleAnalyticsLink" Core..=)
-              Core.<$> googleAnalyticsLink,
+            ("googleAnalyticsLink" Core..=) Core.<$> googleAnalyticsLink,
             ("merchantCenterDestination" Core..=)
               Core.<$> merchantCenterDestination,
             ("state" Core..=) Core.<$> state
@@ -5159,16 +5321,13 @@ instance Core.FromJSON Css where
       "Css"
       ( \o ->
           Css
-            Core.<$> ( o Core..:? "cssDomainId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "cssGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "cssDomainId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "cssGroupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "fullName")
             Core.<*> (o Core..:? "homepageUri")
-            Core.<*> ( o Core..:? "labelIds"
+            Core.<*> ( o
+                         Core..:? "labelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -5177,18 +5336,18 @@ instance Core.ToJSON Css where
   toJSON Css {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cssDomainId" Core..=) Core.. Core.AsText
-              Core.<$> cssDomainId,
-            ("cssGroupId" Core..=) Core.. Core.AsText
-              Core.<$> cssGroupId,
+          [ ("cssDomainId" Core..=) Core.. Core.AsText Core.<$> cssDomainId,
+            ("cssGroupId" Core..=) Core.. Core.AsText Core.<$> cssGroupId,
             ("displayName" Core..=) Core.<$> displayName,
             ("fullName" Core..=) Core.<$> fullName,
             ("homepageUri" Core..=) Core.<$> homepageUri,
-            ("labelIds" Core..=) Core.. Core.fmap Core.AsText
+            ("labelIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> labelIds
           ]
       )
 
+-- | A message that represents custom attributes. Exactly one of @value@ or @groupValues@ must be provided. Maximum allowed number of characters for each custom attribute is 10240 (represents sum of characters for name and value). Maximum 2500 custom attributes can be set per merchant, with total size of 102.4kB.
 --
 -- /See:/ 'newCustomAttribute' smart constructor.
 data CustomAttribute = CustomAttribute
@@ -5229,41 +5388,6 @@ instance Core.ToJSON CustomAttribute where
           [ ("groupValues" Core..=) Core.<$> groupValues,
             ("name" Core..=) Core.<$> name,
             ("value" Core..=) Core.<$> value
-          ]
-      )
-
---
--- /See:/ 'newCustomerReturnReason' smart constructor.
-data CustomerReturnReason = CustomerReturnReason
-  { -- | Description of the reason.
-    description :: (Core.Maybe Core.Text),
-    -- | Code of the return reason. Acceptable values are: - \"@betterPriceFound@\" - \"@changedMind@\" - \"@damagedOrDefectiveItem@\" - \"@didNotMatchDescription@\" - \"@doesNotFit@\" - \"@expiredItem@\" - \"@incorrectItemReceived@\" - \"@noLongerNeeded@\" - \"@notSpecified@\" - \"@orderedWrongItem@\" - \"@other@\" - \"@qualityNotExpected@\" - \"@receivedTooLate@\" - \"@undeliverable@\"
-    reasonCode :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'CustomerReturnReason' with the minimum fields required to make a request.
-newCustomerReturnReason ::
-  CustomerReturnReason
-newCustomerReturnReason =
-  CustomerReturnReason {description = Core.Nothing, reasonCode = Core.Nothing}
-
-instance Core.FromJSON CustomerReturnReason where
-  parseJSON =
-    Core.withObject
-      "CustomerReturnReason"
-      ( \o ->
-          CustomerReturnReason
-            Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "reasonCode")
-      )
-
-instance Core.ToJSON CustomerReturnReason where
-  toJSON CustomerReturnReason {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("description" Core..=) Core.<$> description,
-            ("reasonCode" Core..=) Core.<$> reasonCode
           ]
       )
 
@@ -5372,8 +5496,7 @@ instance Core.ToJSON Datafeed where
   toJSON Datafeed {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributeLanguage" Core..=)
-              Core.<$> attributeLanguage,
+          [ ("attributeLanguage" Core..=) Core.<$> attributeLanguage,
             ("contentType" Core..=) Core.<$> contentType,
             ("fetchSchedule" Core..=) Core.<$> fetchSchedule,
             ("fileName" Core..=) Core.<$> fileName,
@@ -5496,8 +5619,7 @@ instance Core.ToJSON DatafeedFormat where
   toJSON DatafeedFormat {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnDelimiter" Core..=)
-              Core.<$> columnDelimiter,
+          [ ("columnDelimiter" Core..=) Core.<$> columnDelimiter,
             ("fileEncoding" Core..=) Core.<$> fileEncoding,
             ("quotingMode" Core..=) Core.<$> quotingMode
           ]
@@ -5557,17 +5679,11 @@ instance Core.FromJSON DatafeedStatus where
       ( \o ->
           DatafeedStatus
             Core.<$> (o Core..:? "country")
-            Core.<*> ( o Core..:? "datafeedId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "datafeedId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errors")
             Core.<*> (o Core..:? "feedLabel")
-            Core.<*> ( o Core..:? "itemsTotal"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "itemsValid"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "itemsTotal" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "itemsValid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "lastUploadDate")
@@ -5580,19 +5696,15 @@ instance Core.ToJSON DatafeedStatus where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("datafeedId" Core..=) Core.. Core.AsText
-              Core.<$> datafeedId,
+            ("datafeedId" Core..=) Core.. Core.AsText Core.<$> datafeedId,
             ("errors" Core..=) Core.<$> errors,
             ("feedLabel" Core..=) Core.<$> feedLabel,
-            ("itemsTotal" Core..=) Core.. Core.AsText
-              Core.<$> itemsTotal,
-            ("itemsValid" Core..=) Core.. Core.AsText
-              Core.<$> itemsValid,
+            ("itemsTotal" Core..=) Core.. Core.AsText Core.<$> itemsTotal,
+            ("itemsValid" Core..=) Core.. Core.AsText Core.<$> itemsValid,
             ("kind" Core..=) Core.<$> kind,
             ("language" Core..=) Core.<$> language,
             ("lastUploadDate" Core..=) Core.<$> lastUploadDate,
-            ("processingStatus" Core..=)
-              Core.<$> processingStatus,
+            ("processingStatus" Core..=) Core.<$> processingStatus,
             ("warnings" Core..=) Core.<$> warnings
           ]
       )
@@ -5630,9 +5742,7 @@ instance Core.FromJSON DatafeedStatusError where
       ( \o ->
           DatafeedStatusError
             Core.<$> (o Core..:? "code")
-            Core.<*> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "examples")
             Core.<*> (o Core..:? "message")
       )
@@ -5678,9 +5788,7 @@ instance Core.FromJSON DatafeedStatusExample where
       ( \o ->
           DatafeedStatusExample
             Core.<$> (o Core..:? "itemId")
-            Core.<*> ( o Core..:? "lineNumber"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lineNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "value")
       )
 
@@ -5689,8 +5797,7 @@ instance Core.ToJSON DatafeedStatusExample where
     Core.object
       ( Core.catMaybes
           [ ("itemId" Core..=) Core.<$> itemId,
-            ("lineNumber" Core..=) Core.. Core.AsText
-              Core.<$> lineNumber,
+            ("lineNumber" Core..=) Core.. Core.AsText Core.<$> lineNumber,
             ("value" Core..=) Core.<$> value
           ]
       )
@@ -5700,11 +5807,11 @@ instance Core.ToJSON DatafeedStatusExample where
 data DatafeedTarget = DatafeedTarget
   { -- | Deprecated. Use @feedLabel@ instead. The country where the items in the feed will be included in the search index, represented as a CLDR territory code.
     country :: (Core.Maybe Core.Text),
-    -- | The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
+    -- | The list of <//support.google.com/merchants/answer/6324486 destinations to exclude> for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
     excludedDestinations :: (Core.Maybe [Core.Text]),
     -- | Feed label for the DatafeedTarget. Either @country@ or @feedLabel@ is required. If both @feedLabel@ and @country@ is specified, the values must match. Must be less than or equal to 20 uppercase letters (A-Z), numbers (0-9), and dashes (-).
     feedLabel :: (Core.Maybe Core.Text),
-    -- | The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in @excludedDestinations@.
+    -- | The list of <//support.google.com/merchants/answer/7501026 destinations to include> for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in @excludedDestinations@.
     includedDestinations :: (Core.Maybe [Core.Text]),
     -- | The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for @targets[].country@.
     language :: (Core.Maybe Core.Text),
@@ -5745,14 +5852,11 @@ instance Core.ToJSON DatafeedTarget where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("excludedDestinations" Core..=)
-              Core.<$> excludedDestinations,
+            ("excludedDestinations" Core..=) Core.<$> excludedDestinations,
             ("feedLabel" Core..=) Core.<$> feedLabel,
-            ("includedDestinations" Core..=)
-              Core.<$> includedDestinations,
+            ("includedDestinations" Core..=) Core.<$> includedDestinations,
             ("language" Core..=) Core.<$> language,
-            ("targetCountries" Core..=)
-              Core.<$> targetCountries
+            ("targetCountries" Core..=) Core.<$> targetCountries
           ]
       )
 
@@ -5775,16 +5879,13 @@ instance Core.FromJSON DatafeedsCustomBatchRequest where
     Core.withObject
       "DatafeedsCustomBatchRequest"
       ( \o ->
-          DatafeedsCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          DatafeedsCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON DatafeedsCustomBatchRequest where
   toJSON DatafeedsCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch datafeeds request.
 --
@@ -5815,10 +5916,7 @@ newDatafeedsCustomBatchRequestEntry =
       method = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatafeedsCustomBatchRequestEntry
-  where
+instance Core.FromJSON DatafeedsCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "DatafeedsCustomBatchRequestEntry"
@@ -5826,12 +5924,8 @@ instance
           DatafeedsCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "datafeed")
-            Core.<*> ( o Core..:? "datafeedId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "datafeedId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
       )
 
@@ -5841,10 +5935,8 @@ instance Core.ToJSON DatafeedsCustomBatchRequestEntry where
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("datafeed" Core..=) Core.<$> datafeed,
-            ("datafeedId" Core..=) Core.. Core.AsText
-              Core.<$> datafeedId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("datafeedId" Core..=) Core.. Core.AsText Core.<$> datafeedId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method
           ]
       )
@@ -5863,7 +5955,10 @@ data DatafeedsCustomBatchResponse = DatafeedsCustomBatchResponse
 newDatafeedsCustomBatchResponse ::
   DatafeedsCustomBatchResponse
 newDatafeedsCustomBatchResponse =
-  DatafeedsCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  DatafeedsCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON DatafeedsCustomBatchResponse where
   parseJSON =
@@ -5871,7 +5966,8 @@ instance Core.FromJSON DatafeedsCustomBatchResponse where
       "DatafeedsCustomBatchResponse"
       ( \o ->
           DatafeedsCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON DatafeedsCustomBatchResponse where
@@ -5906,10 +6002,7 @@ newDatafeedsCustomBatchResponseEntry =
       errors = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatafeedsCustomBatchResponseEntry
-  where
+instance Core.FromJSON DatafeedsCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "DatafeedsCustomBatchResponseEntry"
@@ -5920,10 +6013,7 @@ instance
             Core.<*> (o Core..:? "errors")
       )
 
-instance
-  Core.ToJSON
-    DatafeedsCustomBatchResponseEntry
-  where
+instance Core.ToJSON DatafeedsCustomBatchResponseEntry where
   toJSON DatafeedsCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -5944,21 +6034,18 @@ newtype DatafeedsFetchNowResponse = DatafeedsFetchNowResponse
 -- | Creates a value of 'DatafeedsFetchNowResponse' with the minimum fields required to make a request.
 newDatafeedsFetchNowResponse ::
   DatafeedsFetchNowResponse
-newDatafeedsFetchNowResponse = DatafeedsFetchNowResponse {kind = Core.Nothing}
+newDatafeedsFetchNowResponse =
+  DatafeedsFetchNowResponse {kind = Core.Nothing}
 
 instance Core.FromJSON DatafeedsFetchNowResponse where
   parseJSON =
     Core.withObject
       "DatafeedsFetchNowResponse"
-      ( \o ->
-          DatafeedsFetchNowResponse
-            Core.<$> (o Core..:? "kind")
-      )
+      (\o -> DatafeedsFetchNowResponse Core.<$> (o Core..:? "kind"))
 
 instance Core.ToJSON DatafeedsFetchNowResponse where
   toJSON DatafeedsFetchNowResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newDatafeedsListResponse' smart constructor.
@@ -5967,7 +6054,6 @@ data DatafeedsListResponse = DatafeedsListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of datafeeds.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [Datafeed])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6017,27 +6103,18 @@ newDatafeedstatusesCustomBatchRequest ::
 newDatafeedstatusesCustomBatchRequest =
   DatafeedstatusesCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    DatafeedstatusesCustomBatchRequest
-  where
+instance Core.FromJSON DatafeedstatusesCustomBatchRequest where
   parseJSON =
     Core.withObject
       "DatafeedstatusesCustomBatchRequest"
       ( \o ->
-          DatafeedstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          DatafeedstatusesCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
-instance
-  Core.ToJSON
-    DatafeedstatusesCustomBatchRequest
-  where
+instance Core.ToJSON DatafeedstatusesCustomBatchRequest where
   toJSON DatafeedstatusesCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch datafeedstatuses request.
 --
@@ -6074,10 +6151,7 @@ newDatafeedstatusesCustomBatchRequestEntry =
       method = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatafeedstatusesCustomBatchRequestEntry
-  where
+instance Core.FromJSON DatafeedstatusesCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "DatafeedstatusesCustomBatchRequestEntry"
@@ -6085,32 +6159,23 @@ instance
           DatafeedstatusesCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "country")
-            Core.<*> ( o Core..:? "datafeedId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "datafeedId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "feedLabel")
             Core.<*> (o Core..:? "language")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
       )
 
-instance
-  Core.ToJSON
-    DatafeedstatusesCustomBatchRequestEntry
-  where
+instance Core.ToJSON DatafeedstatusesCustomBatchRequestEntry where
   toJSON DatafeedstatusesCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("country" Core..=) Core.<$> country,
-            ("datafeedId" Core..=) Core.. Core.AsText
-              Core.<$> datafeedId,
+            ("datafeedId" Core..=) Core.. Core.AsText Core.<$> datafeedId,
             ("feedLabel" Core..=) Core.<$> feedLabel,
             ("language" Core..=) Core.<$> language,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method
           ]
       )
@@ -6134,22 +6199,17 @@ newDatafeedstatusesCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatafeedstatusesCustomBatchResponse
-  where
+instance Core.FromJSON DatafeedstatusesCustomBatchResponse where
   parseJSON =
     Core.withObject
       "DatafeedstatusesCustomBatchResponse"
       ( \o ->
           DatafeedstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    DatafeedstatusesCustomBatchResponse
-  where
+instance Core.ToJSON DatafeedstatusesCustomBatchResponse where
   toJSON DatafeedstatusesCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -6181,10 +6241,7 @@ newDatafeedstatusesCustomBatchResponseEntry =
       errors = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DatafeedstatusesCustomBatchResponseEntry
-  where
+instance Core.FromJSON DatafeedstatusesCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "DatafeedstatusesCustomBatchResponseEntry"
@@ -6195,10 +6252,7 @@ instance
             Core.<*> (o Core..:? "errors")
       )
 
-instance
-  Core.ToJSON
-    DatafeedstatusesCustomBatchResponseEntry
-  where
+instance Core.ToJSON DatafeedstatusesCustomBatchResponseEntry where
   toJSON DatafeedstatusesCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -6215,7 +6269,6 @@ data DatafeedstatusesListResponse = DatafeedstatusesListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of datafeed statuses.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [DatafeedStatus])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6267,7 +6320,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -6443,8 +6501,7 @@ instance Core.ToJSON DeliveryAreaPostalCodeRange where
   toJSON DeliveryAreaPostalCodeRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("firstPostalCode" Core..=)
-              Core.<$> firstPostalCode,
+          [ ("firstPostalCode" Core..=) Core.<$> firstPostalCode,
             ("lastPostalCode" Core..=) Core.<$> lastPostalCode
           ]
       )
@@ -6452,7 +6509,7 @@ instance Core.ToJSON DeliveryAreaPostalCodeRange where
 --
 -- /See:/ 'newDeliveryTime' smart constructor.
 data DeliveryTime = DeliveryTime
-  { -- | Business days cutoff time definition. If not configured the cutoff time will be defaulted to 8AM PST.
+  { -- | Business days cutoff time definition. If not configured, the cutoff time will be defaulted to 8AM PST. If local delivery, use Service.StoreConfig.CutoffConfig.
     cutoffTime :: (Core.Maybe CutoffTime),
     -- | The business days during which orders can be handled. If not provided, Monday to Friday business days will be assumed.
     handlingBusinessDayConfig :: (Core.Maybe BusinessDayConfig),
@@ -6518,20 +6575,50 @@ instance Core.ToJSON DeliveryTime where
             ("handlingBusinessDayConfig" Core..=)
               Core.<$> handlingBusinessDayConfig,
             ("holidayCutoffs" Core..=) Core.<$> holidayCutoffs,
-            ("maxHandlingTimeInDays" Core..=)
-              Core.<$> maxHandlingTimeInDays,
-            ("maxTransitTimeInDays" Core..=)
-              Core.<$> maxTransitTimeInDays,
-            ("minHandlingTimeInDays" Core..=)
-              Core.<$> minHandlingTimeInDays,
-            ("minTransitTimeInDays" Core..=)
-              Core.<$> minTransitTimeInDays,
+            ("maxHandlingTimeInDays" Core..=) Core.<$> maxHandlingTimeInDays,
+            ("maxTransitTimeInDays" Core..=) Core.<$> maxTransitTimeInDays,
+            ("minHandlingTimeInDays" Core..=) Core.<$> minHandlingTimeInDays,
+            ("minTransitTimeInDays" Core..=) Core.<$> minTransitTimeInDays,
             ("transitBusinessDayConfig" Core..=)
               Core.<$> transitBusinessDayConfig,
-            ("transitTimeTable" Core..=)
-              Core.<$> transitTimeTable,
+            ("transitTimeTable" Core..=) Core.<$> transitTimeTable,
             ("warehouseBasedDeliveryTimes" Core..=)
               Core.<$> warehouseBasedDeliveryTimes
+          ]
+      )
+
+-- | Distance represented by an integer and unit.
+--
+-- /See:/ 'newDistance' smart constructor.
+data Distance = Distance
+  { -- | The distance unit. Acceptable values are @None@, @Miles@, and @Kilometers@.
+    unit :: (Core.Maybe Core.Text),
+    -- | The distance represented as a number.
+    value :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Distance' with the minimum fields required to make a request.
+newDistance ::
+  Distance
+newDistance = Distance {unit = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON Distance where
+  parseJSON =
+    Core.withObject
+      "Distance"
+      ( \o ->
+          Distance
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON Distance where
+  toJSON Distance {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("unit" Core..=) Core.<$> unit,
+            ("value" Core..=) Core.. Core.AsText Core.<$> value
           ]
       )
 
@@ -6563,9 +6650,7 @@ instance Core.ToJSON ECommercePlatformLinkInfo where
   toJSON ECommercePlatformLinkInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("externalAccountId" Core..=)
-              Core.<$> externalAccountId
-          ]
+          [("externalAccountId" Core..=) Core.<$> externalAccountId]
       )
 
 -- | An error returned by the API.
@@ -6585,7 +6670,11 @@ data Error' = Error'
 newError ::
   Error'
 newError =
-  Error' {domain = Core.Nothing, message = Core.Nothing, reason = Core.Nothing}
+  Error'
+    { domain = Core.Nothing,
+      message = Core.Nothing,
+      reason = Core.Nothing
+    }
 
 instance Core.FromJSON Error' where
   parseJSON =
@@ -6625,7 +6714,11 @@ data Errors = Errors
 newErrors ::
   Errors
 newErrors =
-  Errors {code = Core.Nothing, errors = Core.Nothing, message = Core.Nothing}
+  Errors
+    { code = Core.Nothing,
+      errors = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Errors where
   parseJSON =
@@ -6646,6 +6739,40 @@ instance Core.ToJSON Errors where
             ("errors" Core..=) Core.<$> errors,
             ("message" Core..=) Core.<$> message
           ]
+      )
+
+-- | Action that is implemented and performed outside of the third-party application. It should redirect the merchant to the provided URL of an external system where they can perform the action. For example to request a review in the Merchant Center.
+--
+-- /See:/ 'newExternalAction' smart constructor.
+data ExternalAction = ExternalAction
+  { -- | The type of external action.
+    type' :: (Core.Maybe ExternalAction_Type),
+    -- | URL to external system, for example Merchant Center, where the merchant can perform the action.
+    uri :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExternalAction' with the minimum fields required to make a request.
+newExternalAction ::
+  ExternalAction
+newExternalAction =
+  ExternalAction {type' = Core.Nothing, uri = Core.Nothing}
+
+instance Core.FromJSON ExternalAction where
+  parseJSON =
+    Core.withObject
+      "ExternalAction"
+      ( \o ->
+          ExternalAction
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "uri")
+      )
+
+instance Core.ToJSON ExternalAction where
+  toJSON ExternalAction {..} =
+    Core.object
+      ( Core.catMaybes
+          [("type" Core..=) Core.<$> type', ("uri" Core..=) Core.<$> uri]
       )
 
 -- | Response message for GetFreeListingsProgramStatus.
@@ -6729,7 +6856,8 @@ newFreeListingsProgramStatusRegionStatus ::
   FreeListingsProgramStatusRegionStatus
 newFreeListingsProgramStatusRegionStatus =
   FreeListingsProgramStatusRegionStatus
-    { disapprovalDate = Core.Nothing,
+    { disapprovalDate =
+        Core.Nothing,
       eligibilityStatus = Core.Nothing,
       onboardingIssues = Core.Nothing,
       regionCodes = Core.Nothing,
@@ -6740,10 +6868,7 @@ newFreeListingsProgramStatusRegionStatus =
       reviewIssues = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FreeListingsProgramStatusRegionStatus
-  where
+instance Core.FromJSON FreeListingsProgramStatusRegionStatus where
   parseJSON =
     Core.withObject
       "FreeListingsProgramStatusRegionStatus"
@@ -6760,19 +6885,13 @@ instance
             Core.<*> (o Core..:? "reviewIssues")
       )
 
-instance
-  Core.ToJSON
-    FreeListingsProgramStatusRegionStatus
-  where
+instance Core.ToJSON FreeListingsProgramStatusRegionStatus where
   toJSON FreeListingsProgramStatusRegionStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("disapprovalDate" Core..=)
-              Core.<$> disapprovalDate,
-            ("eligibilityStatus" Core..=)
-              Core.<$> eligibilityStatus,
-            ("onboardingIssues" Core..=)
-              Core.<$> onboardingIssues,
+          [ ("disapprovalDate" Core..=) Core.<$> disapprovalDate,
+            ("eligibilityStatus" Core..=) Core.<$> eligibilityStatus,
+            ("onboardingIssues" Core..=) Core.<$> onboardingIssues,
             ("regionCodes" Core..=) Core.<$> regionCodes,
             ("reviewEligibilityStatus" Core..=)
               Core.<$> reviewEligibilityStatus,
@@ -6800,7 +6919,8 @@ newFreeListingsProgramStatusReviewIneligibilityReasonDetails ::
   FreeListingsProgramStatusReviewIneligibilityReasonDetails
 newFreeListingsProgramStatusReviewIneligibilityReasonDetails =
   FreeListingsProgramStatusReviewIneligibilityReasonDetails
-    { cooldownTime = Core.Nothing
+    { cooldownTime =
+        Core.Nothing
     }
 
 instance
@@ -6822,9 +6942,46 @@ instance
   toJSON
     FreeListingsProgramStatusReviewIneligibilityReasonDetails {..} =
       Core.object
-        ( Core.catMaybes
-            [("cooldownTime" Core..=) Core.<$> cooldownTime]
-        )
+        (Core.catMaybes [("cooldownTime" Core..=) Core.<$> cooldownTime])
+
+-- | Conditions to be met for a product to have free shipping.
+--
+-- /See:/ 'newFreeShippingThreshold' smart constructor.
+data FreeShippingThreshold = FreeShippingThreshold
+  { -- | Required. The <http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml CLDR territory code> of the country to which an item will ship.
+    country :: (Core.Maybe Core.Text),
+    -- | Required. The minimum product price for the shipping cost to become free. Represented as a number.
+    priceThreshold :: (Core.Maybe Price)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FreeShippingThreshold' with the minimum fields required to make a request.
+newFreeShippingThreshold ::
+  FreeShippingThreshold
+newFreeShippingThreshold =
+  FreeShippingThreshold
+    { country = Core.Nothing,
+      priceThreshold = Core.Nothing
+    }
+
+instance Core.FromJSON FreeShippingThreshold where
+  parseJSON =
+    Core.withObject
+      "FreeShippingThreshold"
+      ( \o ->
+          FreeShippingThreshold
+            Core.<$> (o Core..:? "country")
+            Core.<*> (o Core..:? "priceThreshold")
+      )
+
+instance Core.ToJSON FreeShippingThreshold where
+  toJSON FreeShippingThreshold {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("country" Core..=) Core.<$> country,
+            ("priceThreshold" Core..=) Core.<$> priceThreshold
+          ]
+      )
 
 -- | Response containing generated recommendations.
 --
@@ -6846,10 +7003,7 @@ newGenerateRecommendationsResponse =
       responseToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GenerateRecommendationsResponse
-  where
+instance Core.FromJSON GenerateRecommendationsResponse where
   parseJSON =
     Core.withObject
       "GenerateRecommendationsResponse"
@@ -6863,8 +7017,7 @@ instance Core.ToJSON GenerateRecommendationsResponse where
   toJSON GenerateRecommendationsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("recommendations" Core..=)
-              Core.<$> recommendations,
+          [ ("recommendations" Core..=) Core.<$> recommendations,
             ("responseToken" Core..=) Core.<$> responseToken
           ]
       )
@@ -6891,9 +7044,7 @@ instance Core.FromJSON GmbAccounts where
       "GmbAccounts"
       ( \o ->
           GmbAccounts
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "gmbAccounts")
       )
 
@@ -6901,8 +7052,7 @@ instance Core.ToJSON GmbAccounts where
   toJSON GmbAccounts {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("gmbAccounts" Core..=) Core.<$> gmbAccounts
           ]
       )
@@ -6939,9 +7089,7 @@ instance Core.FromJSON GmbAccountsGmbAccount where
       ( \o ->
           GmbAccountsGmbAccount
             Core.<$> (o Core..:? "email")
-            Core.<*> ( o Core..:? "listingCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "listingCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "type")
       )
@@ -6951,8 +7099,7 @@ instance Core.ToJSON GmbAccountsGmbAccount where
     Core.object
       ( Core.catMaybes
           [ ("email" Core..=) Core.<$> email,
-            ("listingCount" Core..=) Core.. Core.AsText
-              Core.<$> listingCount,
+            ("listingCount" Core..=) Core.. Core.AsText Core.<$> listingCount,
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type'
           ]
@@ -6988,9 +7135,7 @@ instance Core.FromJSON GoogleAnalyticsLink where
       ( \o ->
           GoogleAnalyticsLink
             Core.<$> (o Core..:? "attributionSettings")
-            Core.<*> ( o Core..:? "propertyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "propertyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "propertyName")
       )
 
@@ -6998,10 +7143,8 @@ instance Core.ToJSON GoogleAnalyticsLink where
   toJSON GoogleAnalyticsLink {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributionSettings" Core..=)
-              Core.<$> attributionSettings,
-            ("propertyId" Core..=) Core.. Core.AsText
-              Core.<$> propertyId,
+          [ ("attributionSettings" Core..=) Core.<$> attributionSettings,
+            ("propertyId" Core..=) Core.. Core.AsText Core.<$> propertyId,
             ("propertyName" Core..=) Core.<$> propertyName
           ]
       )
@@ -7054,8 +7197,7 @@ instance Core.ToJSON Headers where
       ( Core.catMaybes
           [ ("locations" Core..=) Core.<$> locations,
             ("numberOfItems" Core..=) Core.<$> numberOfItems,
-            ("postalCodeGroupNames" Core..=)
-              Core.<$> postalCodeGroupNames,
+            ("postalCodeGroupNames" Core..=) Core.<$> postalCodeGroupNames,
             ("prices" Core..=) Core.<$> prices,
             ("weights" Core..=) Core.<$> weights
           ]
@@ -7108,11 +7250,9 @@ instance Core.ToJSON HolidayCutoff where
       ( Core.catMaybes
           [ ("deadlineDate" Core..=) Core.<$> deadlineDate,
             ("deadlineHour" Core..=) Core.<$> deadlineHour,
-            ("deadlineTimezone" Core..=)
-              Core.<$> deadlineTimezone,
+            ("deadlineTimezone" Core..=) Core.<$> deadlineTimezone,
             ("holidayId" Core..=) Core.<$> holidayId,
-            ("visibleFromDate" Core..=)
-              Core.<$> visibleFromDate
+            ("visibleFromDate" Core..=) Core.<$> visibleFromDate
           ]
       )
 
@@ -7156,7 +7296,8 @@ instance Core.FromJSON HolidaysHoliday where
             Core.<$> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "date")
             Core.<*> (o Core..:? "deliveryGuaranteeDate")
-            Core.<*> ( o Core..:? "deliveryGuaranteeHour"
+            Core.<*> ( o
+                         Core..:? "deliveryGuaranteeHour"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "id")
@@ -7169,63 +7310,382 @@ instance Core.ToJSON HolidaysHoliday where
       ( Core.catMaybes
           [ ("countryCode" Core..=) Core.<$> countryCode,
             ("date" Core..=) Core.<$> date,
-            ("deliveryGuaranteeDate" Core..=)
-              Core.<$> deliveryGuaranteeDate,
-            ("deliveryGuaranteeHour" Core..=) Core.. Core.AsText
+            ("deliveryGuaranteeDate" Core..=) Core.<$> deliveryGuaranteeDate,
+            ("deliveryGuaranteeHour" Core..=)
+              Core.. Core.AsText
               Core.<$> deliveryGuaranteeHour,
             ("id" Core..=) Core.<$> id,
             ("type" Core..=) Core.<$> type'
           ]
       )
 
--- | Map of inapplicability details.
+-- | Input field that needs to be available to the merchant. If the field is marked as required, then a value needs to be provided for a successful processing of the request.
 --
--- /See:/ 'newInapplicabilityDetails' smart constructor.
-data InapplicabilityDetails = InapplicabilityDetails
-  { -- | Count of this inapplicable reason code.
-    inapplicableCount :: (Core.Maybe Core.Int64),
-    -- | Reason code this rule was not applicable.
-    inapplicableReason :: (Core.Maybe InapplicabilityDetails_InapplicableReason)
+-- /See:/ 'newInputField' smart constructor.
+data InputField = InputField
+  { -- | Input field to provide a boolean value. Corresponds to the <https://www.w3.org/TR/2012/WD-html-markup-20121025/input.checkbox.html#input.checkbox html input type=checkbox>.
+    checkboxInput :: (Core.Maybe InputFieldCheckboxInput),
+    -- | Input field to select one of the offered choices. Corresponds to the <https://www.w3.org/TR/2012/WD-html-markup-20121025/input.radio.html#input.radio html input type=radio>.
+    choiceInput :: (Core.Maybe InputFieldChoiceInput),
+    -- | Not for display but need to be sent back for the given input field.
+    id :: (Core.Maybe Core.Text),
+    -- | Input field label. There may be more information to be shown in a tooltip.
+    label :: (Core.Maybe TextWithTooltip),
+    -- | Whether the field is required. The action button needs to stay disabled till values for all required fields are provided.
+    required :: (Core.Maybe Core.Bool),
+    -- | Input field to provide text information. Corresponds to the <https://www.w3.org/TR/2012/WD-html-markup-20121025/input.text.html#input.text html input type=text> or <https://www.w3.org/TR/2012/WD-html-markup-20121025/textarea.html#textarea html textarea>.
+    textInput :: (Core.Maybe InputFieldTextInput)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'InapplicabilityDetails' with the minimum fields required to make a request.
-newInapplicabilityDetails ::
-  InapplicabilityDetails
-newInapplicabilityDetails =
-  InapplicabilityDetails
-    { inapplicableCount = Core.Nothing,
-      inapplicableReason = Core.Nothing
+-- | Creates a value of 'InputField' with the minimum fields required to make a request.
+newInputField ::
+  InputField
+newInputField =
+  InputField
+    { checkboxInput = Core.Nothing,
+      choiceInput = Core.Nothing,
+      id = Core.Nothing,
+      label = Core.Nothing,
+      required = Core.Nothing,
+      textInput = Core.Nothing
     }
 
-instance Core.FromJSON InapplicabilityDetails where
+instance Core.FromJSON InputField where
   parseJSON =
     Core.withObject
-      "InapplicabilityDetails"
+      "InputField"
       ( \o ->
-          InapplicabilityDetails
-            Core.<$> ( o Core..:? "inapplicableCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "inapplicableReason")
+          InputField
+            Core.<$> (o Core..:? "checkboxInput")
+            Core.<*> (o Core..:? "choiceInput")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "label")
+            Core.<*> (o Core..:? "required")
+            Core.<*> (o Core..:? "textInput")
       )
 
-instance Core.ToJSON InapplicabilityDetails where
-  toJSON InapplicabilityDetails {..} =
+instance Core.ToJSON InputField where
+  toJSON InputField {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inapplicableCount" Core..=) Core.. Core.AsText
-              Core.<$> inapplicableCount,
-            ("inapplicableReason" Core..=)
-              Core.<$> inapplicableReason
+          [ ("checkboxInput" Core..=) Core.<$> checkboxInput,
+            ("choiceInput" Core..=) Core.<$> choiceInput,
+            ("id" Core..=) Core.<$> id,
+            ("label" Core..=) Core.<$> label,
+            ("required" Core..=) Core.<$> required,
+            ("textInput" Core..=) Core.<$> textInput
           ]
       )
 
+-- | Checkbox input allows merchants to provide a boolean value. Corresponds to the <https://www.w3.org/TR/2012/WD-html-markup-20121025/input.checkbox.html#input.checkbox html input type=checkbox>. If merchant checks the box, the input value for the field is @true@, otherwise it is @false@. This type of input is often used as a confirmation that the merchant completed required steps before they are allowed to start the action. In such a case, the input field is marked as required and the button to trigger the action should stay disabled until the merchant checks the box.
+--
+-- /See:/ 'newInputFieldCheckboxInput' smart constructor.
+data InputFieldCheckboxInput = InputFieldCheckboxInput
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputFieldCheckboxInput' with the minimum fields required to make a request.
+newInputFieldCheckboxInput ::
+  InputFieldCheckboxInput
+newInputFieldCheckboxInput = InputFieldCheckboxInput
+
+instance Core.FromJSON InputFieldCheckboxInput where
+  parseJSON =
+    Core.withObject
+      "InputFieldCheckboxInput"
+      (\o -> Core.pure InputFieldCheckboxInput)
+
+instance Core.ToJSON InputFieldCheckboxInput where
+  toJSON = Core.const Core.emptyObject
+
+-- | Choice input allows merchants to select one of the offered choices. Some choices may be linked to additional input fields that should be displayed under or next to the choice option. The value for the additional input field needs to be provided only when the specific choice is selected by the merchant. For example, additional input field can be hidden or disabled until the merchant selects the specific choice.
+--
+-- /See:/ 'newInputFieldChoiceInput' smart constructor.
+newtype InputFieldChoiceInput = InputFieldChoiceInput
+  { -- | A list of choices. Only one option can be selected.
+    options :: (Core.Maybe [InputFieldChoiceInputChoiceInputOption])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputFieldChoiceInput' with the minimum fields required to make a request.
+newInputFieldChoiceInput ::
+  InputFieldChoiceInput
+newInputFieldChoiceInput =
+  InputFieldChoiceInput {options = Core.Nothing}
+
+instance Core.FromJSON InputFieldChoiceInput where
+  parseJSON =
+    Core.withObject
+      "InputFieldChoiceInput"
+      (\o -> InputFieldChoiceInput Core.<$> (o Core..:? "options"))
+
+instance Core.ToJSON InputFieldChoiceInput where
+  toJSON InputFieldChoiceInput {..} =
+    Core.object
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
+
+-- | A choice that merchant can select.
+--
+-- /See:/ 'newInputFieldChoiceInputChoiceInputOption' smart constructor.
+data InputFieldChoiceInputChoiceInputOption = InputFieldChoiceInputChoiceInputOption
+  { -- | Input that should be displayed when this option is selected. The additional input will not contain a @ChoiceInput@.
+    additionalInput :: (Core.Maybe InputField),
+    -- | Not for display but need to be sent back for the selected choice option.
+    id :: (Core.Maybe Core.Text),
+    -- | Short description of the choice option. There may be more information to be shown as a tooltip.
+    label :: (Core.Maybe TextWithTooltip)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputFieldChoiceInputChoiceInputOption' with the minimum fields required to make a request.
+newInputFieldChoiceInputChoiceInputOption ::
+  InputFieldChoiceInputChoiceInputOption
+newInputFieldChoiceInputChoiceInputOption =
+  InputFieldChoiceInputChoiceInputOption
+    { additionalInput =
+        Core.Nothing,
+      id = Core.Nothing,
+      label = Core.Nothing
+    }
+
+instance Core.FromJSON InputFieldChoiceInputChoiceInputOption where
+  parseJSON =
+    Core.withObject
+      "InputFieldChoiceInputChoiceInputOption"
+      ( \o ->
+          InputFieldChoiceInputChoiceInputOption
+            Core.<$> (o Core..:? "additionalInput")
+            Core.<*> (o Core..:? "id")
+            Core.<*> (o Core..:? "label")
+      )
+
+instance Core.ToJSON InputFieldChoiceInputChoiceInputOption where
+  toJSON InputFieldChoiceInputChoiceInputOption {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalInput" Core..=) Core.<$> additionalInput,
+            ("id" Core..=) Core.<$> id,
+            ("label" Core..=) Core.<$> label
+          ]
+      )
+
+-- | Text input allows merchants to provide a text value.
+--
+-- /See:/ 'newInputFieldTextInput' smart constructor.
+data InputFieldTextInput = InputFieldTextInput
+  { -- | Additional info regarding the field to be displayed to merchant. For example, warning to not include personal identifiable information. There may be more information to be shown in a tooltip.
+    additionalInfo :: (Core.Maybe TextWithTooltip),
+    -- | Text to be used as the <https://www.w3.org/TR/WCAG20-TECHS/ARIA14.html aria-label> for the input.
+    ariaLabel :: (Core.Maybe Core.Text),
+    -- | Information about the required format. If present, it should be shown close to the input field to help merchants to provide a correct value. For example: \"VAT numbers should be in a format similar to SK9999999999\"
+    formatInfo :: (Core.Maybe Core.Text),
+    -- | Type of the text input
+    type' :: (Core.Maybe InputFieldTextInput_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputFieldTextInput' with the minimum fields required to make a request.
+newInputFieldTextInput ::
+  InputFieldTextInput
+newInputFieldTextInput =
+  InputFieldTextInput
+    { additionalInfo = Core.Nothing,
+      ariaLabel = Core.Nothing,
+      formatInfo = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON InputFieldTextInput where
+  parseJSON =
+    Core.withObject
+      "InputFieldTextInput"
+      ( \o ->
+          InputFieldTextInput
+            Core.<$> (o Core..:? "additionalInfo")
+            Core.<*> (o Core..:? "ariaLabel")
+            Core.<*> (o Core..:? "formatInfo")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON InputFieldTextInput where
+  toJSON InputFieldTextInput {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("additionalInfo" Core..=) Core.<$> additionalInfo,
+            ("ariaLabel" Core..=) Core.<$> ariaLabel,
+            ("formatInfo" Core..=) Core.<$> formatInfo,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Input provided by the merchant for input field.
+--
+-- /See:/ 'newInputValue' smart constructor.
+data InputValue = InputValue
+  { -- | Value for checkbox input field.
+    checkboxInputValue :: (Core.Maybe InputValueCheckboxInputValue),
+    -- | Value for choice input field.
+    choiceInputValue :: (Core.Maybe InputValueChoiceInputValue),
+    -- | Required. Id of the corresponding input field.
+    inputFieldId :: (Core.Maybe Core.Text),
+    -- | Value for text input field.
+    textInputValue :: (Core.Maybe InputValueTextInputValue)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputValue' with the minimum fields required to make a request.
+newInputValue ::
+  InputValue
+newInputValue =
+  InputValue
+    { checkboxInputValue = Core.Nothing,
+      choiceInputValue = Core.Nothing,
+      inputFieldId = Core.Nothing,
+      textInputValue = Core.Nothing
+    }
+
+instance Core.FromJSON InputValue where
+  parseJSON =
+    Core.withObject
+      "InputValue"
+      ( \o ->
+          InputValue
+            Core.<$> (o Core..:? "checkboxInputValue")
+            Core.<*> (o Core..:? "choiceInputValue")
+            Core.<*> (o Core..:? "inputFieldId")
+            Core.<*> (o Core..:? "textInputValue")
+      )
+
+instance Core.ToJSON InputValue where
+  toJSON InputValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("checkboxInputValue" Core..=) Core.<$> checkboxInputValue,
+            ("choiceInputValue" Core..=) Core.<$> choiceInputValue,
+            ("inputFieldId" Core..=) Core.<$> inputFieldId,
+            ("textInputValue" Core..=) Core.<$> textInputValue
+          ]
+      )
+
+-- | Value for checkbox input field.
+--
+-- /See:/ 'newInputValueCheckboxInputValue' smart constructor.
+newtype InputValueCheckboxInputValue = InputValueCheckboxInputValue
+  { -- | Required. True if the merchant checked the box field. False otherwise.
+    value :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputValueCheckboxInputValue' with the minimum fields required to make a request.
+newInputValueCheckboxInputValue ::
+  InputValueCheckboxInputValue
+newInputValueCheckboxInputValue =
+  InputValueCheckboxInputValue {value = Core.Nothing}
+
+instance Core.FromJSON InputValueCheckboxInputValue where
+  parseJSON =
+    Core.withObject
+      "InputValueCheckboxInputValue"
+      (\o -> InputValueCheckboxInputValue Core.<$> (o Core..:? "value"))
+
+instance Core.ToJSON InputValueCheckboxInputValue where
+  toJSON InputValueCheckboxInputValue {..} =
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
+
+-- | Value for choice input field.
+--
+-- /See:/ 'newInputValueChoiceInputValue' smart constructor.
+newtype InputValueChoiceInputValue = InputValueChoiceInputValue
+  { -- | Required. Id of the option that was selected by the merchant.
+    choiceInputOptionId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputValueChoiceInputValue' with the minimum fields required to make a request.
+newInputValueChoiceInputValue ::
+  InputValueChoiceInputValue
+newInputValueChoiceInputValue =
+  InputValueChoiceInputValue {choiceInputOptionId = Core.Nothing}
+
+instance Core.FromJSON InputValueChoiceInputValue where
+  parseJSON =
+    Core.withObject
+      "InputValueChoiceInputValue"
+      ( \o ->
+          InputValueChoiceInputValue
+            Core.<$> (o Core..:? "choiceInputOptionId")
+      )
+
+instance Core.ToJSON InputValueChoiceInputValue where
+  toJSON InputValueChoiceInputValue {..} =
+    Core.object
+      ( Core.catMaybes
+          [("choiceInputOptionId" Core..=) Core.<$> choiceInputOptionId]
+      )
+
+-- | Value for text input field.
+--
+-- /See:/ 'newInputValueTextInputValue' smart constructor.
+newtype InputValueTextInputValue = InputValueTextInputValue
+  { -- | Required. Text provided by the merchant.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InputValueTextInputValue' with the minimum fields required to make a request.
+newInputValueTextInputValue ::
+  InputValueTextInputValue
+newInputValueTextInputValue =
+  InputValueTextInputValue {value = Core.Nothing}
+
+instance Core.FromJSON InputValueTextInputValue where
+  parseJSON =
+    Core.withObject
+      "InputValueTextInputValue"
+      (\o -> InputValueTextInputValue Core.<$> (o Core..:? "value"))
+
+instance Core.ToJSON InputValueTextInputValue where
+  toJSON InputValueTextInputValue {..} =
+    Core.object (Core.catMaybes [("value" Core..=) Core.<$> value])
+
+-- | Request message for the @InsertCheckoutSettings@ method.
+--
+-- /See:/ 'newInsertCheckoutSettingsRequest' smart constructor.
+newtype InsertCheckoutSettingsRequest = InsertCheckoutSettingsRequest
+  { -- | Required. The @UrlSettings@ for the request. The presence of URL settings indicates @Checkout@ enrollment.
+    uriSettings :: (Core.Maybe UrlSettings)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'InsertCheckoutSettingsRequest' with the minimum fields required to make a request.
+newInsertCheckoutSettingsRequest ::
+  InsertCheckoutSettingsRequest
+newInsertCheckoutSettingsRequest =
+  InsertCheckoutSettingsRequest {uriSettings = Core.Nothing}
+
+instance Core.FromJSON InsertCheckoutSettingsRequest where
+  parseJSON =
+    Core.withObject
+      "InsertCheckoutSettingsRequest"
+      ( \o ->
+          InsertCheckoutSettingsRequest Core.<$> (o Core..:? "uriSettings")
+      )
+
+instance Core.ToJSON InsertCheckoutSettingsRequest where
+  toJSON InsertCheckoutSettingsRequest {..} =
+    Core.object
+      (Core.catMaybes [("uriSettings" Core..=) Core.<$> uriSettings])
+
+-- | Details of a monthly installment payment offering. <https://support.google.com/merchants/answer/6324474 Learn more> about installments.
 --
 -- /See:/ 'newInstallment' smart constructor.
 data Installment = Installment
   { -- | The amount the buyer has to pay per month.
     amount :: (Core.Maybe Price),
+    -- | Optional. Type of installment payments. Supported values are: - \"@finance@\" - \"@lease@\"
+    creditType :: (Core.Maybe Core.Text),
+    -- | Optional. The initial down payment amount the buyer has to pay.
+    downpayment :: (Core.Maybe Price),
     -- | The number of installments the buyer has to pay.
     months :: (Core.Maybe Core.Int64)
   }
@@ -7234,7 +7694,13 @@ data Installment = Installment
 -- | Creates a value of 'Installment' with the minimum fields required to make a request.
 newInstallment ::
   Installment
-newInstallment = Installment {amount = Core.Nothing, months = Core.Nothing}
+newInstallment =
+  Installment
+    { amount = Core.Nothing,
+      creditType = Core.Nothing,
+      downpayment = Core.Nothing,
+      months = Core.Nothing
+    }
 
 instance Core.FromJSON Installment where
   parseJSON =
@@ -7243,9 +7709,9 @@ instance Core.FromJSON Installment where
       ( \o ->
           Installment
             Core.<$> (o Core..:? "amount")
-            Core.<*> ( o Core..:? "months"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creditType")
+            Core.<*> (o Core..:? "downpayment")
+            Core.<*> (o Core..:? "months" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Installment where
@@ -7253,91 +7719,9 @@ instance Core.ToJSON Installment where
     Core.object
       ( Core.catMaybes
           [ ("amount" Core..=) Core.<$> amount,
-            ("months" Core..=) Core.. Core.AsText
-              Core.<$> months
-          ]
-      )
-
---
--- /See:/ 'newInvoiceSummary' smart constructor.
-data InvoiceSummary = InvoiceSummary
-  { -- | Summary of the total amounts of the additional charges.
-    additionalChargeSummaries :: (Core.Maybe [InvoiceSummaryAdditionalChargeSummary]),
-    -- | [required] Total price for the product.
-    productTotal :: (Core.Maybe Amount)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'InvoiceSummary' with the minimum fields required to make a request.
-newInvoiceSummary ::
-  InvoiceSummary
-newInvoiceSummary =
-  InvoiceSummary
-    { additionalChargeSummaries = Core.Nothing,
-      productTotal = Core.Nothing
-    }
-
-instance Core.FromJSON InvoiceSummary where
-  parseJSON =
-    Core.withObject
-      "InvoiceSummary"
-      ( \o ->
-          InvoiceSummary
-            Core.<$> (o Core..:? "additionalChargeSummaries")
-            Core.<*> (o Core..:? "productTotal")
-      )
-
-instance Core.ToJSON InvoiceSummary where
-  toJSON InvoiceSummary {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("additionalChargeSummaries" Core..=)
-              Core.<$> additionalChargeSummaries,
-            ("productTotal" Core..=) Core.<$> productTotal
-          ]
-      )
-
---
--- /See:/ 'newInvoiceSummaryAdditionalChargeSummary' smart constructor.
-data InvoiceSummaryAdditionalChargeSummary = InvoiceSummaryAdditionalChargeSummary
-  { -- | [required] Total additional charge for this type.
-    totalAmount :: (Core.Maybe Amount),
-    -- | [required] Type of the additional charge. Acceptable values are: - \"@shipping@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'InvoiceSummaryAdditionalChargeSummary' with the minimum fields required to make a request.
-newInvoiceSummaryAdditionalChargeSummary ::
-  InvoiceSummaryAdditionalChargeSummary
-newInvoiceSummaryAdditionalChargeSummary =
-  InvoiceSummaryAdditionalChargeSummary
-    { totalAmount = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    InvoiceSummaryAdditionalChargeSummary
-  where
-  parseJSON =
-    Core.withObject
-      "InvoiceSummaryAdditionalChargeSummary"
-      ( \o ->
-          InvoiceSummaryAdditionalChargeSummary
-            Core.<$> (o Core..:? "totalAmount")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance
-  Core.ToJSON
-    InvoiceSummaryAdditionalChargeSummary
-  where
-  toJSON InvoiceSummaryAdditionalChargeSummary {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("totalAmount" Core..=) Core.<$> totalAmount,
-            ("type" Core..=) Core.<$> type'
+            ("creditType" Core..=) Core.<$> creditType,
+            ("downpayment" Core..=) Core.<$> downpayment,
+            ("months" Core..=) Core.. Core.AsText Core.<$> months
           ]
       )
 
@@ -7361,7 +7745,8 @@ instance Core.FromJSON LabelIds where
       "LabelIds"
       ( \o ->
           LabelIds
-            Core.<$> ( o Core..:? "labelIds"
+            Core.<$> ( o
+                         Core..:? "labelIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -7370,7 +7755,8 @@ instance Core.ToJSON LabelIds where
   toJSON LabelIds {..} =
     Core.object
       ( Core.catMaybes
-          [ ("labelIds" Core..=) Core.. Core.fmap Core.AsText
+          [ ("labelIds" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> labelIds
           ]
       )
@@ -7378,7 +7764,7 @@ instance Core.ToJSON LabelIds where
 --
 -- /See:/ 'newLiaAboutPageSettings' smart constructor.
 data LiaAboutPageSettings = LiaAboutPageSettings
-  { -- | The status of the verification process for the About page. Acceptable values are: - \"@active@\" - \"@inactive@\" - \"@pending@\"
+  { -- | The status of the verification process for the About page. Supported values are: - \"@active@\" - \"@inactive@\" - \"@pending@\"
     status :: (Core.Maybe Core.Text),
     -- | The URL for the About page.
     url :: (Core.Maybe Core.Text)
@@ -7397,16 +7783,15 @@ instance Core.FromJSON LiaAboutPageSettings where
       "LiaAboutPageSettings"
       ( \o ->
           LiaAboutPageSettings
-            Core.<$> (o Core..:? "status") Core.<*> (o Core..:? "url")
+            Core.<$> (o Core..:? "status")
+            Core.<*> (o Core..:? "url")
       )
 
 instance Core.ToJSON LiaAboutPageSettings where
   toJSON LiaAboutPageSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("status" Core..=) Core.<$> status,
-            ("url" Core..=) Core.<$> url
-          ]
+          [("status" Core..=) Core.<$> status, ("url" Core..=) Core.<$> url]
       )
 
 --
@@ -7420,6 +7805,8 @@ data LiaCountrySettings = LiaCountrySettings
     hostedLocalStorefrontActive :: (Core.Maybe Core.Bool),
     -- | LIA inventory verification settings.
     inventory :: (Core.Maybe LiaInventorySettings),
+    -- | The omnichannel experience configured for this country.
+    omnichannelExperience :: (Core.Maybe LiaOmnichannelExperience),
     -- | LIA \"On Display To Order\" settings.
     onDisplayToOrder :: (Core.Maybe LiaOnDisplayToOrderSettings),
     -- | The POS data provider linked with this country.
@@ -7438,6 +7825,7 @@ newLiaCountrySettings =
       country = Core.Nothing,
       hostedLocalStorefrontActive = Core.Nothing,
       inventory = Core.Nothing,
+      omnichannelExperience = Core.Nothing,
       onDisplayToOrder = Core.Nothing,
       posDataProvider = Core.Nothing,
       storePickupActive = Core.Nothing
@@ -7453,6 +7841,7 @@ instance Core.FromJSON LiaCountrySettings where
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "hostedLocalStorefrontActive")
             Core.<*> (o Core..:? "inventory")
+            Core.<*> (o Core..:? "omnichannelExperience")
             Core.<*> (o Core..:? "onDisplayToOrder")
             Core.<*> (o Core..:? "posDataProvider")
             Core.<*> (o Core..:? "storePickupActive")
@@ -7467,11 +7856,10 @@ instance Core.ToJSON LiaCountrySettings where
             ("hostedLocalStorefrontActive" Core..=)
               Core.<$> hostedLocalStorefrontActive,
             ("inventory" Core..=) Core.<$> inventory,
-            ("onDisplayToOrder" Core..=)
-              Core.<$> onDisplayToOrder,
+            ("omnichannelExperience" Core..=) Core.<$> omnichannelExperience,
+            ("onDisplayToOrder" Core..=) Core.<$> onDisplayToOrder,
             ("posDataProvider" Core..=) Core.<$> posDataProvider,
-            ("storePickupActive" Core..=)
-              Core.<$> storePickupActive
+            ("storePickupActive" Core..=) Core.<$> storePickupActive
           ]
       )
 
@@ -7494,7 +7882,8 @@ newLiaInventorySettings ::
   LiaInventorySettings
 newLiaInventorySettings =
   LiaInventorySettings
-    { inventoryVerificationContactEmail = Core.Nothing,
+    { inventoryVerificationContactEmail =
+        Core.Nothing,
       inventoryVerificationContactName = Core.Nothing,
       inventoryVerificationContactStatus = Core.Nothing,
       status = Core.Nothing
@@ -7523,6 +7912,50 @@ instance Core.ToJSON LiaInventorySettings where
             ("inventoryVerificationContactStatus" Core..=)
               Core.<$> inventoryVerificationContactStatus,
             ("status" Core..=) Core.<$> status
+          ]
+      )
+
+-- | Omnichannel experience details.
+--
+-- /See:/ 'newLiaOmnichannelExperience' smart constructor.
+data LiaOmnichannelExperience = LiaOmnichannelExperience
+  { -- | The CLDR country code (for example, \"US\").
+    country :: (Core.Maybe Core.Text),
+    -- | The Local Store Front (LSF) type for this country. Acceptable values are: - \"@ghlsf@\" (Google-Hosted Local Store Front) - \"@mhlsfBasic@\" (Merchant-Hosted Local Store Front Basic) - \"@mhlsfFull@\" (Merchant-Hosted Local Store Front Full) More details about these types can be found here.
+    lsfType :: (Core.Maybe Core.Text),
+    -- | The Pickup types for this country. Acceptable values are: - \"@pickupToday@\" - \"@pickupLater@\"
+    pickupTypes :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LiaOmnichannelExperience' with the minimum fields required to make a request.
+newLiaOmnichannelExperience ::
+  LiaOmnichannelExperience
+newLiaOmnichannelExperience =
+  LiaOmnichannelExperience
+    { country = Core.Nothing,
+      lsfType = Core.Nothing,
+      pickupTypes = Core.Nothing
+    }
+
+instance Core.FromJSON LiaOmnichannelExperience where
+  parseJSON =
+    Core.withObject
+      "LiaOmnichannelExperience"
+      ( \o ->
+          LiaOmnichannelExperience
+            Core.<$> (o Core..:? "country")
+            Core.<*> (o Core..:? "lsfType")
+            Core.<*> (o Core..:? "pickupTypes")
+      )
+
+instance Core.ToJSON LiaOmnichannelExperience where
+  toJSON LiaOmnichannelExperience {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("country" Core..=) Core.<$> country,
+            ("lsfType" Core..=) Core.<$> lsfType,
+            ("pickupTypes" Core..=) Core.<$> pickupTypes
           ]
       )
 
@@ -7559,8 +7992,7 @@ instance Core.ToJSON LiaOnDisplayToOrderSettings where
   toJSON LiaOnDisplayToOrderSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("shippingCostPolicyUrl" Core..=)
-              Core.<$> shippingCostPolicyUrl,
+          [ ("shippingCostPolicyUrl" Core..=) Core.<$> shippingCostPolicyUrl,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -7590,9 +8022,7 @@ instance Core.FromJSON LiaPosDataProvider where
       "LiaPosDataProvider"
       ( \o ->
           LiaPosDataProvider
-            Core.<$> ( o Core..:? "posDataProviderId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "posDataProviderId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "posExternalAccountId")
       )
 
@@ -7600,10 +8030,10 @@ instance Core.ToJSON LiaPosDataProvider where
   toJSON LiaPosDataProvider {..} =
     Core.object
       ( Core.catMaybes
-          [ ("posDataProviderId" Core..=) Core.. Core.AsText
+          [ ("posDataProviderId" Core..=)
+              Core.. Core.AsText
               Core.<$> posDataProviderId,
-            ("posExternalAccountId" Core..=)
-              Core.<$> posExternalAccountId
+            ("posExternalAccountId" Core..=) Core.<$> posExternalAccountId
           ]
       )
 
@@ -7636,9 +8066,7 @@ instance Core.FromJSON LiaSettings where
       "LiaSettings"
       ( \o ->
           LiaSettings
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "countrySettings")
             Core.<*> (o Core..:? "kind")
       )
@@ -7647,8 +8075,7 @@ instance Core.ToJSON LiaSettings where
   toJSON LiaSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("countrySettings" Core..=) Core.<$> countrySettings,
             ("kind" Core..=) Core.<$> kind
           ]
@@ -7673,16 +8100,13 @@ instance Core.FromJSON LiasettingsCustomBatchRequest where
     Core.withObject
       "LiasettingsCustomBatchRequest"
       ( \o ->
-          LiasettingsCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          LiasettingsCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON LiasettingsCustomBatchRequest where
   toJSON LiasettingsCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 --
 -- /See:/ 'newLiasettingsCustomBatchRequestEntry' smart constructor.
@@ -7705,6 +8129,8 @@ data LiasettingsCustomBatchRequestEntry = LiasettingsCustomBatchRequestEntry
     merchantId :: (Core.Maybe Core.Word64),
     -- | The method of the batch entry. Acceptable values are: - \"@get@\" - \"@getAccessibleGmbAccounts@\" - \"@requestGmbAccess@\" - \"@requestInventoryVerification@\" - \"@setInventoryVerificationContact@\" - \"@update@\"
     method :: (Core.Maybe Core.Text),
+    -- | The omnichannel experience for a country. Required only for SetOmnichannelExperience.
+    omnichannelExperience :: (Core.Maybe LiaOmnichannelExperience),
     -- | The ID of POS data provider. Required only for SetPosProvider.
     posDataProviderId :: (Core.Maybe Core.Word64),
     -- | The account ID by which this merchant is known to the POS provider.
@@ -7726,60 +8152,49 @@ newLiasettingsCustomBatchRequestEntry =
       liaSettings = Core.Nothing,
       merchantId = Core.Nothing,
       method = Core.Nothing,
+      omnichannelExperience = Core.Nothing,
       posDataProviderId = Core.Nothing,
       posExternalAccountId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiasettingsCustomBatchRequestEntry
-  where
+instance Core.FromJSON LiasettingsCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "LiasettingsCustomBatchRequestEntry"
       ( \o ->
           LiasettingsCustomBatchRequestEntry
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "batchId")
             Core.<*> (o Core..:? "contactEmail")
             Core.<*> (o Core..:? "contactName")
             Core.<*> (o Core..:? "country")
             Core.<*> (o Core..:? "gmbEmail")
             Core.<*> (o Core..:? "liaSettings")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
-            Core.<*> ( o Core..:? "posDataProviderId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "omnichannelExperience")
+            Core.<*> (o Core..:? "posDataProviderId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "posExternalAccountId")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsCustomBatchRequestEntry
-  where
+instance Core.ToJSON LiasettingsCustomBatchRequestEntry where
   toJSON LiasettingsCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("batchId" Core..=) Core.<$> batchId,
             ("contactEmail" Core..=) Core.<$> contactEmail,
             ("contactName" Core..=) Core.<$> contactName,
             ("country" Core..=) Core.<$> country,
             ("gmbEmail" Core..=) Core.<$> gmbEmail,
             ("liaSettings" Core..=) Core.<$> liaSettings,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
-            ("posDataProviderId" Core..=) Core.. Core.AsText
+            ("omnichannelExperience" Core..=) Core.<$> omnichannelExperience,
+            ("posDataProviderId" Core..=)
+              Core.. Core.AsText
               Core.<$> posDataProviderId,
-            ("posExternalAccountId" Core..=)
-              Core.<$> posExternalAccountId
+            ("posExternalAccountId" Core..=) Core.<$> posExternalAccountId
           ]
       )
 
@@ -7797,7 +8212,10 @@ data LiasettingsCustomBatchResponse = LiasettingsCustomBatchResponse
 newLiasettingsCustomBatchResponse ::
   LiasettingsCustomBatchResponse
 newLiasettingsCustomBatchResponse =
-  LiasettingsCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  LiasettingsCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON LiasettingsCustomBatchResponse where
   parseJSON =
@@ -7805,7 +8223,8 @@ instance Core.FromJSON LiasettingsCustomBatchResponse where
       "LiasettingsCustomBatchResponse"
       ( \o ->
           LiasettingsCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON LiasettingsCustomBatchResponse where
@@ -7830,6 +8249,8 @@ data LiasettingsCustomBatchResponseEntry = LiasettingsCustomBatchResponseEntry
     kind :: (Core.Maybe Core.Text),
     -- | The retrieved or updated Lia settings.
     liaSettings :: (Core.Maybe LiaSettings),
+    -- | The updated omnichannel experience for a country.
+    omnichannelExperience :: (Core.Maybe LiaOmnichannelExperience),
     -- | The list of POS data providers.
     posDataProviders :: (Core.Maybe [PosDataProviders])
   }
@@ -7845,13 +8266,11 @@ newLiasettingsCustomBatchResponseEntry =
       gmbAccounts = Core.Nothing,
       kind = Core.Nothing,
       liaSettings = Core.Nothing,
+      omnichannelExperience = Core.Nothing,
       posDataProviders = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiasettingsCustomBatchResponseEntry
-  where
+instance Core.FromJSON LiasettingsCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "LiasettingsCustomBatchResponseEntry"
@@ -7862,13 +8281,11 @@ instance
             Core.<*> (o Core..:? "gmbAccounts")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "liaSettings")
+            Core.<*> (o Core..:? "omnichannelExperience")
             Core.<*> (o Core..:? "posDataProviders")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsCustomBatchResponseEntry
-  where
+instance Core.ToJSON LiasettingsCustomBatchResponseEntry where
   toJSON LiasettingsCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -7877,8 +8294,8 @@ instance
             ("gmbAccounts" Core..=) Core.<$> gmbAccounts,
             ("kind" Core..=) Core.<$> kind,
             ("liaSettings" Core..=) Core.<$> liaSettings,
-            ("posDataProviders" Core..=)
-              Core.<$> posDataProviders
+            ("omnichannelExperience" Core..=) Core.<$> omnichannelExperience,
+            ("posDataProviders" Core..=) Core.<$> posDataProviders
           ]
       )
 
@@ -7899,41 +8316,32 @@ newLiasettingsGetAccessibleGmbAccountsResponse ::
   LiasettingsGetAccessibleGmbAccountsResponse
 newLiasettingsGetAccessibleGmbAccountsResponse =
   LiasettingsGetAccessibleGmbAccountsResponse
-    { accountId = Core.Nothing,
+    { accountId =
+        Core.Nothing,
       gmbAccounts = Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiasettingsGetAccessibleGmbAccountsResponse
-  where
+instance Core.FromJSON LiasettingsGetAccessibleGmbAccountsResponse where
   parseJSON =
     Core.withObject
       "LiasettingsGetAccessibleGmbAccountsResponse"
       ( \o ->
           LiasettingsGetAccessibleGmbAccountsResponse
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "gmbAccounts")
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsGetAccessibleGmbAccountsResponse
-  where
-  toJSON
-    LiasettingsGetAccessibleGmbAccountsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("accountId" Core..=) Core.. Core.AsText
-                Core.<$> accountId,
-              ("gmbAccounts" Core..=) Core.<$> gmbAccounts,
-              ("kind" Core..=) Core.<$> kind
-            ]
-        )
+instance Core.ToJSON LiasettingsGetAccessibleGmbAccountsResponse where
+  toJSON LiasettingsGetAccessibleGmbAccountsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("gmbAccounts" Core..=) Core.<$> gmbAccounts,
+            ("kind" Core..=) Core.<$> kind
+          ]
+      )
 
 --
 -- /See:/ 'newLiasettingsListPosDataProvidersResponse' smart constructor.
@@ -7954,10 +8362,7 @@ newLiasettingsListPosDataProvidersResponse =
       posDataProviders = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LiasettingsListPosDataProvidersResponse
-  where
+instance Core.FromJSON LiasettingsListPosDataProvidersResponse where
   parseJSON =
     Core.withObject
       "LiasettingsListPosDataProvidersResponse"
@@ -7967,16 +8372,12 @@ instance
             Core.<*> (o Core..:? "posDataProviders")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsListPosDataProvidersResponse
-  where
+instance Core.ToJSON LiasettingsListPosDataProvidersResponse where
   toJSON LiasettingsListPosDataProvidersResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("kind" Core..=) Core.<$> kind,
-            ("posDataProviders" Core..=)
-              Core.<$> posDataProviders
+            ("posDataProviders" Core..=) Core.<$> posDataProviders
           ]
       )
 
@@ -7987,7 +8388,6 @@ data LiasettingsListResponse = LiasettingsListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of LIA settings.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [LiaSettings])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8037,25 +8437,17 @@ newLiasettingsRequestGmbAccessResponse ::
 newLiasettingsRequestGmbAccessResponse =
   LiasettingsRequestGmbAccessResponse {kind = Core.Nothing}
 
-instance
-  Core.FromJSON
-    LiasettingsRequestGmbAccessResponse
-  where
+instance Core.FromJSON LiasettingsRequestGmbAccessResponse where
   parseJSON =
     Core.withObject
       "LiasettingsRequestGmbAccessResponse"
       ( \o ->
-          LiasettingsRequestGmbAccessResponse
-            Core.<$> (o Core..:? "kind")
+          LiasettingsRequestGmbAccessResponse Core.<$> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsRequestGmbAccessResponse
-  where
+instance Core.ToJSON LiasettingsRequestGmbAccessResponse where
   toJSON LiasettingsRequestGmbAccessResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newLiasettingsRequestInventoryVerificationResponse' smart constructor.
@@ -8069,7 +8461,10 @@ newtype LiasettingsRequestInventoryVerificationResponse = LiasettingsRequestInve
 newLiasettingsRequestInventoryVerificationResponse ::
   LiasettingsRequestInventoryVerificationResponse
 newLiasettingsRequestInventoryVerificationResponse =
-  LiasettingsRequestInventoryVerificationResponse {kind = Core.Nothing}
+  LiasettingsRequestInventoryVerificationResponse
+    { kind =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -8087,10 +8482,8 @@ instance
   Core.ToJSON
     LiasettingsRequestInventoryVerificationResponse
   where
-  toJSON
-    LiasettingsRequestInventoryVerificationResponse {..} =
-      Core.object
-        (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+  toJSON LiasettingsRequestInventoryVerificationResponse {..} =
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newLiasettingsSetInventoryVerificationContactResponse' smart constructor.
@@ -8104,7 +8497,10 @@ newtype LiasettingsSetInventoryVerificationContactResponse = LiasettingsSetInven
 newLiasettingsSetInventoryVerificationContactResponse ::
   LiasettingsSetInventoryVerificationContactResponse
 newLiasettingsSetInventoryVerificationContactResponse =
-  LiasettingsSetInventoryVerificationContactResponse {kind = Core.Nothing}
+  LiasettingsSetInventoryVerificationContactResponse
+    { kind =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -8122,10 +8518,8 @@ instance
   Core.ToJSON
     LiasettingsSetInventoryVerificationContactResponse
   where
-  toJSON
-    LiasettingsSetInventoryVerificationContactResponse {..} =
-      Core.object
-        (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+  toJSON LiasettingsSetInventoryVerificationContactResponse {..} =
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newLiasettingsSetPosDataProviderResponse' smart constructor.
@@ -8141,25 +8535,17 @@ newLiasettingsSetPosDataProviderResponse ::
 newLiasettingsSetPosDataProviderResponse =
   LiasettingsSetPosDataProviderResponse {kind = Core.Nothing}
 
-instance
-  Core.FromJSON
-    LiasettingsSetPosDataProviderResponse
-  where
+instance Core.FromJSON LiasettingsSetPosDataProviderResponse where
   parseJSON =
     Core.withObject
       "LiasettingsSetPosDataProviderResponse"
       ( \o ->
-          LiasettingsSetPosDataProviderResponse
-            Core.<$> (o Core..:? "kind")
+          LiasettingsSetPosDataProviderResponse Core.<$> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    LiasettingsSetPosDataProviderResponse
-  where
+instance Core.ToJSON LiasettingsSetPosDataProviderResponse where
   toJSON LiasettingsSetPosDataProviderResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
+    Core.object (Core.catMaybes [("kind" Core..=) Core.<$> kind])
 
 --
 -- /See:/ 'newLinkService' smart constructor.
@@ -8174,7 +8560,8 @@ data LinkService = LinkService
 -- | Creates a value of 'LinkService' with the minimum fields required to make a request.
 newLinkService ::
   LinkService
-newLinkService = LinkService {service = Core.Nothing, status = Core.Nothing}
+newLinkService =
+  LinkService {service = Core.Nothing, status = Core.Nothing}
 
 instance Core.FromJSON LinkService where
   parseJSON =
@@ -8209,7 +8596,10 @@ data LinkedAccount = LinkedAccount
 newLinkedAccount ::
   LinkedAccount
 newLinkedAccount =
-  LinkedAccount {linkedAccountId = Core.Nothing, services = Core.Nothing}
+  LinkedAccount
+    { linkedAccountId = Core.Nothing,
+      services = Core.Nothing
+    }
 
 instance Core.FromJSON LinkedAccount where
   parseJSON =
@@ -8225,8 +8615,7 @@ instance Core.ToJSON LinkedAccount where
   toJSON LinkedAccount {..} =
     Core.object
       ( Core.catMaybes
-          [ ("linkedAccountId" Core..=)
-              Core.<$> linkedAccountId,
+          [ ("linkedAccountId" Core..=) Core.<$> linkedAccountId,
             ("services" Core..=) Core.<$> services
           ]
       )
@@ -8283,12 +8672,12 @@ newtype ListAccountReturnCarrierResponse = ListAccountReturnCarrierResponse
 newListAccountReturnCarrierResponse ::
   ListAccountReturnCarrierResponse
 newListAccountReturnCarrierResponse =
-  ListAccountReturnCarrierResponse {accountReturnCarriers = Core.Nothing}
+  ListAccountReturnCarrierResponse
+    { accountReturnCarriers =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ListAccountReturnCarrierResponse
-  where
+instance Core.FromJSON ListAccountReturnCarrierResponse where
   parseJSON =
     Core.withObject
       "ListAccountReturnCarrierResponse"
@@ -8301,9 +8690,7 @@ instance Core.ToJSON ListAccountReturnCarrierResponse where
   toJSON ListAccountReturnCarrierResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountReturnCarriers" Core..=)
-              Core.<$> accountReturnCarriers
-          ]
+          [("accountReturnCarriers" Core..=) Core.<$> accountReturnCarriers]
       )
 
 -- | Response message for the ListCollectionStatuses method.
@@ -8418,8 +8805,7 @@ instance Core.ToJSON ListConversionSourcesResponse where
   toJSON ListConversionSourcesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("conversionSources" Core..=)
-              Core.<$> conversionSources,
+          [ ("conversionSources" Core..=) Core.<$> conversionSources,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -8439,7 +8825,10 @@ data ListCssesResponse = ListCssesResponse
 newListCssesResponse ::
   ListCssesResponse
 newListCssesResponse =
-  ListCssesResponse {csses = Core.Nothing, nextPageToken = Core.Nothing}
+  ListCssesResponse
+    { csses = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListCssesResponse where
   parseJSON =
@@ -8499,6 +8888,45 @@ instance Core.ToJSON ListMethodQuotasResponse where
           ]
       )
 
+-- | Response message for Promotions.List method.
+--
+-- /See:/ 'newListPromotionResponse' smart constructor.
+data ListPromotionResponse = ListPromotionResponse
+  { -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | List of all available promotions for the merchant.
+    promotions :: (Core.Maybe [Promotion])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListPromotionResponse' with the minimum fields required to make a request.
+newListPromotionResponse ::
+  ListPromotionResponse
+newListPromotionResponse =
+  ListPromotionResponse
+    { nextPageToken = Core.Nothing,
+      promotions = Core.Nothing
+    }
+
+instance Core.FromJSON ListPromotionResponse where
+  parseJSON =
+    Core.withObject
+      "ListPromotionResponse"
+      ( \o ->
+          ListPromotionResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "promotions")
+      )
+
+instance Core.ToJSON ListPromotionResponse where
+  toJSON ListPromotionResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("promotions" Core..=) Core.<$> promotions
+          ]
+      )
+
 -- | Response message for the @ListRegions@ method.
 --
 -- /See:/ 'newListRegionsResponse' smart constructor.
@@ -8514,7 +8942,10 @@ data ListRegionsResponse = ListRegionsResponse
 newListRegionsResponse ::
   ListRegionsResponse
 newListRegionsResponse =
-  ListRegionsResponse {nextPageToken = Core.Nothing, regions = Core.Nothing}
+  ListRegionsResponse
+    { nextPageToken = Core.Nothing,
+      regions = Core.Nothing
+    }
 
 instance Core.FromJSON ListRegionsResponse where
   parseJSON =
@@ -8532,134 +8963,6 @@ instance Core.ToJSON ListRegionsResponse where
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("regions" Core..=) Core.<$> regions
-          ]
-      )
-
--- | Response message for the ListRepricingProductReports method.
---
--- /See:/ 'newListRepricingProductReportsResponse' smart constructor.
-data ListRepricingProductReportsResponse = ListRepricingProductReportsResponse
-  { -- | A token for retrieving the next page. Its absence means there is no subsequent page.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | Periodic reports for the given Repricing product.
-    repricingProductReports :: (Core.Maybe [RepricingProductReport])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListRepricingProductReportsResponse' with the minimum fields required to make a request.
-newListRepricingProductReportsResponse ::
-  ListRepricingProductReportsResponse
-newListRepricingProductReportsResponse =
-  ListRepricingProductReportsResponse
-    { nextPageToken = Core.Nothing,
-      repricingProductReports = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    ListRepricingProductReportsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "ListRepricingProductReportsResponse"
-      ( \o ->
-          ListRepricingProductReportsResponse
-            Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "repricingProductReports")
-      )
-
-instance
-  Core.ToJSON
-    ListRepricingProductReportsResponse
-  where
-  toJSON ListRepricingProductReportsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("repricingProductReports" Core..=)
-              Core.<$> repricingProductReports
-          ]
-      )
-
--- | Response message for the ListRepricingRuleReports method.
---
--- /See:/ 'newListRepricingRuleReportsResponse' smart constructor.
-data ListRepricingRuleReportsResponse = ListRepricingRuleReportsResponse
-  { -- | A token for retrieving the next page. Its absence means there is no subsequent page.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | Daily reports for the given Repricing rule.
-    repricingRuleReports :: (Core.Maybe [RepricingRuleReport])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListRepricingRuleReportsResponse' with the minimum fields required to make a request.
-newListRepricingRuleReportsResponse ::
-  ListRepricingRuleReportsResponse
-newListRepricingRuleReportsResponse =
-  ListRepricingRuleReportsResponse
-    { nextPageToken = Core.Nothing,
-      repricingRuleReports = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    ListRepricingRuleReportsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "ListRepricingRuleReportsResponse"
-      ( \o ->
-          ListRepricingRuleReportsResponse
-            Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "repricingRuleReports")
-      )
-
-instance Core.ToJSON ListRepricingRuleReportsResponse where
-  toJSON ListRepricingRuleReportsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("repricingRuleReports" Core..=)
-              Core.<$> repricingRuleReports
-          ]
-      )
-
--- | Response message for the @ListRepricingRules@ method.
---
--- /See:/ 'newListRepricingRulesResponse' smart constructor.
-data ListRepricingRulesResponse = ListRepricingRulesResponse
-  { -- | A token, which can be sent as @page_token@ to retrieve the next page. If this field is omitted, there are no subsequent pages.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | The rules from the specified merchant.
-    repricingRules :: (Core.Maybe [RepricingRule])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ListRepricingRulesResponse' with the minimum fields required to make a request.
-newListRepricingRulesResponse ::
-  ListRepricingRulesResponse
-newListRepricingRulesResponse =
-  ListRepricingRulesResponse
-    { nextPageToken = Core.Nothing,
-      repricingRules = Core.Nothing
-    }
-
-instance Core.FromJSON ListRepricingRulesResponse where
-  parseJSON =
-    Core.withObject
-      "ListRepricingRulesResponse"
-      ( \o ->
-          ListRepricingRulesResponse
-            Core.<$> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "repricingRules")
-      )
-
-instance Core.ToJSON ListRepricingRulesResponse where
-  toJSON ListRepricingRulesResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("repricingRules" Core..=) Core.<$> repricingRules
           ]
       )
 
@@ -8698,27 +9001,27 @@ instance Core.ToJSON ListReturnPolicyOnlineResponse where
 --
 -- /See:/ 'newLocalInventory' smart constructor.
 data LocalInventory = LocalInventory
-  { -- | Availability of the product. For accepted attribute values, see the local product inventory feed specification.
+  { -- | The availability of the product. For accepted attribute values, see the local product inventory feed specification.
     availability :: (Core.Maybe Core.Text),
     -- | A list of custom (merchant-provided) attributes. Can also be used to submit any attribute of the feed specification in its generic form, for example, @{ \"name\": \"size type\", \"value\": \"regular\" }@.
     customAttributes :: (Core.Maybe [CustomAttribute]),
-    -- | In-store product location.
+    -- | The in-store product location.
     instoreProductLocation :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"@content#localInventory@\"
     kind :: (Core.Maybe Core.Text),
-    -- | Supported pickup method for this offer. Unless the value is \"not supported\", this field must be submitted together with @pickupSla@. For accepted attribute values, see the local product inventory feed specification.
+    -- | The supported pickup method for this offer. Unless the value is \"not supported\", this field must be submitted together with @pickupSla@. For accepted attribute values, see the local product inventory feed specification.
     pickupMethod :: (Core.Maybe Core.Text),
-    -- | Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with @pickupMethod@. For accepted attribute values, see the local product inventory feed specification.
+    -- | The expected date that an order will be ready for pickup relative to the order date. Must be submitted together with @pickupMethod@. For accepted attribute values, see the local product inventory feed specification.
     pickupSla :: (Core.Maybe Core.Text),
-    -- | Price of the product.
+    -- | The price of the product.
     price :: (Core.Maybe Price),
-    -- | Quantity of the product. Must be nonnegative.
+    -- | The quantity of the product. Must be nonnegative.
     quantity :: (Core.Maybe Core.Word32),
-    -- | Sale price of the product. Mandatory if @sale_price_effective_date@ is defined.
+    -- | The sale price of the product. Mandatory if @sale_price_effective_date@ is defined.
     salePrice :: (Core.Maybe Price),
     -- | A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates may be specified as \'null\' if undecided.
     salePriceEffectiveDate :: (Core.Maybe Core.Text),
-    -- | Required. Store code of this local inventory resource.
+    -- | Required. The store code of this local inventory resource.
     storeCode :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -8765,18 +9068,15 @@ instance Core.ToJSON LocalInventory where
     Core.object
       ( Core.catMaybes
           [ ("availability" Core..=) Core.<$> availability,
-            ("customAttributes" Core..=)
-              Core.<$> customAttributes,
-            ("instoreProductLocation" Core..=)
-              Core.<$> instoreProductLocation,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
+            ("instoreProductLocation" Core..=) Core.<$> instoreProductLocation,
             ("kind" Core..=) Core.<$> kind,
             ("pickupMethod" Core..=) Core.<$> pickupMethod,
             ("pickupSla" Core..=) Core.<$> pickupSla,
             ("price" Core..=) Core.<$> price,
             ("quantity" Core..=) Core.<$> quantity,
             ("salePrice" Core..=) Core.<$> salePrice,
-            ("salePriceEffectiveDate" Core..=)
-              Core.<$> salePriceEffectiveDate,
+            ("salePriceEffectiveDate" Core..=) Core.<$> salePriceEffectiveDate,
             ("storeCode" Core..=) Core.<$> storeCode
           ]
       )
@@ -8795,24 +9095,18 @@ newLocalinventoryCustomBatchRequest ::
 newLocalinventoryCustomBatchRequest =
   LocalinventoryCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    LocalinventoryCustomBatchRequest
-  where
+instance Core.FromJSON LocalinventoryCustomBatchRequest where
   parseJSON =
     Core.withObject
       "LocalinventoryCustomBatchRequest"
       ( \o ->
-          LocalinventoryCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          LocalinventoryCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON LocalinventoryCustomBatchRequest where
   toJSON LocalinventoryCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | Batch entry encoding a single local inventory update request.
 --
@@ -8843,10 +9137,7 @@ newLocalinventoryCustomBatchRequestEntry =
       productId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LocalinventoryCustomBatchRequestEntry
-  where
+instance Core.FromJSON LocalinventoryCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "LocalinventoryCustomBatchRequestEntry"
@@ -8854,24 +9145,18 @@ instance
           LocalinventoryCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "localInventory")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
       )
 
-instance
-  Core.ToJSON
-    LocalinventoryCustomBatchRequestEntry
-  where
+instance Core.ToJSON LocalinventoryCustomBatchRequestEntry where
   toJSON LocalinventoryCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("localInventory" Core..=) Core.<$> localInventory,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("productId" Core..=) Core.<$> productId
           ]
@@ -8896,22 +9181,17 @@ newLocalinventoryCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LocalinventoryCustomBatchResponse
-  where
+instance Core.FromJSON LocalinventoryCustomBatchResponse where
   parseJSON =
     Core.withObject
       "LocalinventoryCustomBatchResponse"
       ( \o ->
           LocalinventoryCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    LocalinventoryCustomBatchResponse
-  where
+instance Core.ToJSON LocalinventoryCustomBatchResponse where
   toJSON LocalinventoryCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -8943,10 +9223,7 @@ newLocalinventoryCustomBatchResponseEntry =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LocalinventoryCustomBatchResponseEntry
-  where
+instance Core.FromJSON LocalinventoryCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "LocalinventoryCustomBatchResponseEntry"
@@ -8957,10 +9234,7 @@ instance
             Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    LocalinventoryCustomBatchResponseEntry
-  where
+instance Core.ToJSON LocalinventoryCustomBatchResponseEntry where
   toJSON LocalinventoryCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -8987,60 +9261,77 @@ instance Core.FromJSON LocationIdSet where
   parseJSON =
     Core.withObject
       "LocationIdSet"
-      ( \o ->
-          LocationIdSet Core.<$> (o Core..:? "locationIds")
-      )
+      (\o -> LocationIdSet Core.<$> (o Core..:? "locationIds"))
 
 instance Core.ToJSON LocationIdSet where
   toJSON LocationIdSet {..} =
     Core.object
-      ( Core.catMaybes
-          [("locationIds" Core..=) Core.<$> locationIds]
-      )
+      (Core.catMaybes [("locationIds" Core..=) Core.<$> locationIds])
 
+-- | Allows the setting up of loyalty program benefits (for example price or points). https:\/\/support.google.com\/merchants\/answer\/12922446
 --
--- /See:/ 'newLoyaltyPoints' smart constructor.
-data LoyaltyPoints = LoyaltyPoints
-  { -- | Name of loyalty points program. It is recommended to limit the name to 12 full-width characters or 24 Roman characters.
-    name :: (Core.Maybe Core.Text),
-    -- | The retailer\'s loyalty points in absolute value.
-    pointsValue :: (Core.Maybe Core.Int64),
-    -- | The ratio of a point when converted to currency. Google assumes currency based on Merchant Center settings. If ratio is left out, it defaults to 1.0.
-    ratio :: (Core.Maybe Core.Double)
+-- /See:/ 'newLoyaltyProgram' smart constructor.
+data LoyaltyProgram = LoyaltyProgram
+  { -- | Optional. The cashback that can be used for future purchases.
+    cashbackForFutureUse :: (Core.Maybe Price),
+    -- | Optional. The amount of loyalty points earned on a purchase.
+    loyaltyPoints :: (Core.Maybe Core.Int64),
+    -- | Optional. A date range during which the item is eligible for member price. If not specified, the member price is always applicable. The date range is represented by a pair of ISO 8601 dates separated by a space, comma, or slash.
+    memberPriceEffectiveDate :: (Core.Maybe Core.Text),
+    -- | Optional. The price for members of the given tier (instant discount price). Must be smaller or equal to the regular price.
+    price :: (Core.Maybe Price),
+    -- | Required. The label of the loyalty program. This is an internal label that uniquely identifies the relationship between a merchant entity and a loyalty program entity. It must be provided so that system can associate the assets below (for example, price and points) with a merchant. The corresponding program must be linked to the merchant account.
+    programLabel :: (Core.Maybe Core.Text),
+    -- | Optional. The shipping label for the loyalty program. You can use this label to indicate whether this offer has the loyalty shipping benefit. If not specified, the item is not eligible for loyalty shipping for the given loyalty tier.
+    shippingLabel :: (Core.Maybe Core.Text),
+    -- | Required. The label of the tier within the loyalty program. Must match one of the labels within the program.
+    tierLabel :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'LoyaltyPoints' with the minimum fields required to make a request.
-newLoyaltyPoints ::
-  LoyaltyPoints
-newLoyaltyPoints =
-  LoyaltyPoints
-    { name = Core.Nothing,
-      pointsValue = Core.Nothing,
-      ratio = Core.Nothing
+-- | Creates a value of 'LoyaltyProgram' with the minimum fields required to make a request.
+newLoyaltyProgram ::
+  LoyaltyProgram
+newLoyaltyProgram =
+  LoyaltyProgram
+    { cashbackForFutureUse = Core.Nothing,
+      loyaltyPoints = Core.Nothing,
+      memberPriceEffectiveDate = Core.Nothing,
+      price = Core.Nothing,
+      programLabel = Core.Nothing,
+      shippingLabel = Core.Nothing,
+      tierLabel = Core.Nothing
     }
 
-instance Core.FromJSON LoyaltyPoints where
+instance Core.FromJSON LoyaltyProgram where
   parseJSON =
     Core.withObject
-      "LoyaltyPoints"
+      "LoyaltyProgram"
       ( \o ->
-          LoyaltyPoints
-            Core.<$> (o Core..:? "name")
-            Core.<*> ( o Core..:? "pointsValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "ratio")
+          LoyaltyProgram
+            Core.<$> (o Core..:? "cashbackForFutureUse")
+            Core.<*> (o Core..:? "loyaltyPoints" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "memberPriceEffectiveDate")
+            Core.<*> (o Core..:? "price")
+            Core.<*> (o Core..:? "programLabel")
+            Core.<*> (o Core..:? "shippingLabel")
+            Core.<*> (o Core..:? "tierLabel")
       )
 
-instance Core.ToJSON LoyaltyPoints where
-  toJSON LoyaltyPoints {..} =
+instance Core.ToJSON LoyaltyProgram where
+  toJSON LoyaltyProgram {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("pointsValue" Core..=) Core.. Core.AsText
-              Core.<$> pointsValue,
-            ("ratio" Core..=) Core.<$> ratio
+          [ ("cashbackForFutureUse" Core..=) Core.<$> cashbackForFutureUse,
+            ("loyaltyPoints" Core..=)
+              Core.. Core.AsText
+              Core.<$> loyaltyPoints,
+            ("memberPriceEffectiveDate" Core..=)
+              Core.<$> memberPriceEffectiveDate,
+            ("price" Core..=) Core.<$> price,
+            ("programLabel" Core..=) Core.<$> programLabel,
+            ("shippingLabel" Core..=) Core.<$> shippingLabel,
+            ("tierLabel" Core..=) Core.<$> tierLabel
           ]
       )
 
@@ -9086,215 +9377,24 @@ instance Core.ToJSON MerchantCenterDestination where
   toJSON MerchantCenterDestination {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributionSettings" Core..=)
-              Core.<$> attributionSettings,
+          [ ("attributionSettings" Core..=) Core.<$> attributionSettings,
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("destinationId" Core..=) Core.<$> destinationId,
             ("displayName" Core..=) Core.<$> displayName
           ]
       )
 
--- | Order return. Production access (all methods) requires the order manager role. Sandbox access does not.
---
--- /See:/ 'newMerchantOrderReturn' smart constructor.
-data MerchantOrderReturn = MerchantOrderReturn
-  { -- | The date of creation of the return, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | Merchant defined order ID.
-    merchantOrderId :: (Core.Maybe Core.Text),
-    -- | Google order ID.
-    orderId :: (Core.Maybe Core.Text),
-    -- | Order return ID generated by Google.
-    orderReturnId :: (Core.Maybe Core.Text),
-    -- | Items of the return.
-    returnItems :: (Core.Maybe [MerchantOrderReturnItem]),
-    -- | Information about shipping costs.
-    returnPricingInfo :: (Core.Maybe ReturnPricingInfo),
-    -- | Shipments of the return.
-    returnShipments :: (Core.Maybe [ReturnShipment])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MerchantOrderReturn' with the minimum fields required to make a request.
-newMerchantOrderReturn ::
-  MerchantOrderReturn
-newMerchantOrderReturn =
-  MerchantOrderReturn
-    { creationDate = Core.Nothing,
-      merchantOrderId = Core.Nothing,
-      orderId = Core.Nothing,
-      orderReturnId = Core.Nothing,
-      returnItems = Core.Nothing,
-      returnPricingInfo = Core.Nothing,
-      returnShipments = Core.Nothing
-    }
-
-instance Core.FromJSON MerchantOrderReturn where
-  parseJSON =
-    Core.withObject
-      "MerchantOrderReturn"
-      ( \o ->
-          MerchantOrderReturn
-            Core.<$> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "merchantOrderId")
-            Core.<*> (o Core..:? "orderId")
-            Core.<*> (o Core..:? "orderReturnId")
-            Core.<*> (o Core..:? "returnItems")
-            Core.<*> (o Core..:? "returnPricingInfo")
-            Core.<*> (o Core..:? "returnShipments")
-      )
-
-instance Core.ToJSON MerchantOrderReturn where
-  toJSON MerchantOrderReturn {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("creationDate" Core..=) Core.<$> creationDate,
-            ("merchantOrderId" Core..=) Core.<$> merchantOrderId,
-            ("orderId" Core..=) Core.<$> orderId,
-            ("orderReturnId" Core..=) Core.<$> orderReturnId,
-            ("returnItems" Core..=) Core.<$> returnItems,
-            ("returnPricingInfo" Core..=)
-              Core.<$> returnPricingInfo,
-            ("returnShipments" Core..=)
-              Core.<$> returnShipments
-          ]
-      )
-
---
--- /See:/ 'newMerchantOrderReturnItem' smart constructor.
-data MerchantOrderReturnItem = MerchantOrderReturnItem
-  { -- | The reason that the customer chooses to return an item.
-    customerReturnReason :: (Core.Maybe CustomerReturnReason),
-    -- | Product level item ID. If the returned items are of the same product, they will have the same ID.
-    itemId :: (Core.Maybe Core.Text),
-    -- | The reason that the merchant chose to reject an item return.
-    merchantRejectionReason :: (Core.Maybe MerchantRejectionReason),
-    -- | The reason that merchant chooses to accept a return item.
-    merchantReturnReason :: (Core.Maybe RefundReason),
-    -- | Product data from the time of the order placement.
-    product :: (Core.Maybe OrderLineItemProduct),
-    -- | Maximum amount that can be refunded for this return item.
-    refundableAmount :: (Core.Maybe MonetaryAmount),
-    -- | Unit level ID for the return item. Different units of the same product will have different IDs.
-    returnItemId :: (Core.Maybe Core.Text),
-    -- | IDs of the return shipments that this return item belongs to.
-    returnShipmentIds :: (Core.Maybe [Core.Text]),
-    -- | ID of the original shipment group. Provided for shipments with invoice support.
-    shipmentGroupId :: (Core.Maybe Core.Text),
-    -- | ID of the shipment unit assigned by the merchant. Provided for shipments with invoice support.
-    shipmentUnitId :: (Core.Maybe Core.Text),
-    -- | State of the item. Acceptable values are: - \"@canceled@\" - \"@new@\" - \"@received@\" - \"@refunded@\" - \"@rejected@\"
-    state :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MerchantOrderReturnItem' with the minimum fields required to make a request.
-newMerchantOrderReturnItem ::
-  MerchantOrderReturnItem
-newMerchantOrderReturnItem =
-  MerchantOrderReturnItem
-    { customerReturnReason = Core.Nothing,
-      itemId = Core.Nothing,
-      merchantRejectionReason = Core.Nothing,
-      merchantReturnReason = Core.Nothing,
-      product = Core.Nothing,
-      refundableAmount = Core.Nothing,
-      returnItemId = Core.Nothing,
-      returnShipmentIds = Core.Nothing,
-      shipmentGroupId = Core.Nothing,
-      shipmentUnitId = Core.Nothing,
-      state = Core.Nothing
-    }
-
-instance Core.FromJSON MerchantOrderReturnItem where
-  parseJSON =
-    Core.withObject
-      "MerchantOrderReturnItem"
-      ( \o ->
-          MerchantOrderReturnItem
-            Core.<$> (o Core..:? "customerReturnReason")
-            Core.<*> (o Core..:? "itemId")
-            Core.<*> (o Core..:? "merchantRejectionReason")
-            Core.<*> (o Core..:? "merchantReturnReason")
-            Core.<*> (o Core..:? "product")
-            Core.<*> (o Core..:? "refundableAmount")
-            Core.<*> (o Core..:? "returnItemId")
-            Core.<*> (o Core..:? "returnShipmentIds")
-            Core.<*> (o Core..:? "shipmentGroupId")
-            Core.<*> (o Core..:? "shipmentUnitId")
-            Core.<*> (o Core..:? "state")
-      )
-
-instance Core.ToJSON MerchantOrderReturnItem where
-  toJSON MerchantOrderReturnItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("customerReturnReason" Core..=)
-              Core.<$> customerReturnReason,
-            ("itemId" Core..=) Core.<$> itemId,
-            ("merchantRejectionReason" Core..=)
-              Core.<$> merchantRejectionReason,
-            ("merchantReturnReason" Core..=)
-              Core.<$> merchantReturnReason,
-            ("product" Core..=) Core.<$> product,
-            ("refundableAmount" Core..=)
-              Core.<$> refundableAmount,
-            ("returnItemId" Core..=) Core.<$> returnItemId,
-            ("returnShipmentIds" Core..=)
-              Core.<$> returnShipmentIds,
-            ("shipmentGroupId" Core..=) Core.<$> shipmentGroupId,
-            ("shipmentUnitId" Core..=) Core.<$> shipmentUnitId,
-            ("state" Core..=) Core.<$> state
-          ]
-      )
-
---
--- /See:/ 'newMerchantRejectionReason' smart constructor.
-data MerchantRejectionReason = MerchantRejectionReason
-  { -- | Description of the reason.
-    description :: (Core.Maybe Core.Text),
-    -- | Code of the rejection reason.
-    reasonCode :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MerchantRejectionReason' with the minimum fields required to make a request.
-newMerchantRejectionReason ::
-  MerchantRejectionReason
-newMerchantRejectionReason =
-  MerchantRejectionReason
-    { description = Core.Nothing,
-      reasonCode = Core.Nothing
-    }
-
-instance Core.FromJSON MerchantRejectionReason where
-  parseJSON =
-    Core.withObject
-      "MerchantRejectionReason"
-      ( \o ->
-          MerchantRejectionReason
-            Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "reasonCode")
-      )
-
-instance Core.ToJSON MerchantRejectionReason where
-  toJSON MerchantRejectionReason {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("description" Core..=) Core.<$> description,
-            ("reasonCode" Core..=) Core.<$> reasonCode
-          ]
-      )
-
--- | The quota information per method in the Content API. Includes only methods with current usage greater than zero for your account.
+-- | The quota information per method in the Content API.
 --
 -- /See:/ 'newMethodQuota' smart constructor.
 data MethodQuota = MethodQuota
-  { -- | The method name, for example @products.list@. Method name does not contain version because quota can be shared between different API versions of the same method.
+  { -- | Output only. The method name, for example @products.list@. Method name does not contain version because quota can be shared between different API versions of the same method.
     method :: (Core.Maybe Core.Text),
-    -- | The current quota limit per day, meaning the maximum number of calls for the method.
+    -- | Output only. The maximum number of calls allowed per day for the method.
     quotaLimit :: (Core.Maybe Core.Int64),
-    -- | The current quota usage, meaning the number of calls already made to the method.
+    -- | Output only. The maximum number of calls allowed per minute for the method.
+    quotaMinuteLimit :: (Core.Maybe Core.Int64),
+    -- | Output only. The current quota usage, meaning the number of calls already made to the method per day. Usage is reset every day at 12 PM midday UTC.
     quotaUsage :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9306,6 +9406,7 @@ newMethodQuota =
   MethodQuota
     { method = Core.Nothing,
       quotaLimit = Core.Nothing,
+      quotaMinuteLimit = Core.Nothing,
       quotaUsage = Core.Nothing
     }
 
@@ -9316,12 +9417,9 @@ instance Core.FromJSON MethodQuota where
       ( \o ->
           MethodQuota
             Core.<$> (o Core..:? "method")
-            Core.<*> ( o Core..:? "quotaLimit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "quotaUsage"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quotaLimit" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "quotaMinuteLimit" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "quotaUsage" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON MethodQuota where
@@ -9329,10 +9427,11 @@ instance Core.ToJSON MethodQuota where
     Core.object
       ( Core.catMaybes
           [ ("method" Core..=) Core.<$> method,
-            ("quotaLimit" Core..=) Core.. Core.AsText
-              Core.<$> quotaLimit,
-            ("quotaUsage" Core..=) Core.. Core.AsText
-              Core.<$> quotaUsage
+            ("quotaLimit" Core..=) Core.. Core.AsText Core.<$> quotaLimit,
+            ("quotaMinuteLimit" Core..=)
+              Core.. Core.AsText
+              Core.<$> quotaMinuteLimit,
+            ("quotaUsage" Core..=) Core.. Core.AsText Core.<$> quotaUsage
           ]
       )
 
@@ -9340,51 +9439,51 @@ instance Core.ToJSON MethodQuota where
 --
 -- /See:/ 'newMetrics' smart constructor.
 data Metrics = Metrics
-  { -- | Average order size - the average number of items in an order. __This metric cannot be segmented by product dimensions and customer/country/code.__
+  { -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Average order size - the average number of items in an order. __This metric cannot be segmented by product dimensions and customer/country/code.__
     aos :: (Core.Maybe Core.Double),
-    -- | Average order value in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) - the average value (total price of items) of all placed orders. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by product dimensions and customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Average order value in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) - the average value (total price of items) of all placed orders. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by product dimensions and customer/country/code.__
     aovMicros :: (Core.Maybe Core.Double),
     -- | Number of clicks.
     clicks :: (Core.Maybe Core.Int64),
-    -- | Number of conversions divided by the number of clicks, reported on the impression date. The metric is currently available only for the FREE/PRODUCT/LISTING program.
+    -- | Number of conversions divided by the number of clicks, reported on the impression date. The metric is currently available only for the @FREE_PRODUCT_LISTING@ program.
     conversionRate :: (Core.Maybe Core.Double),
-    -- | Value of conversions in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) attributed to the product, reported on the conversion date. The metric is currently available only for the FREE/PRODUCT/LISTING program. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response.
+    -- | Value of conversions in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) attributed to the product, reported on the conversion date. The metric is currently available only for the @FREE_PRODUCT_LISTING@ program. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response.
     conversionValueMicros :: (Core.Maybe Core.Int64),
-    -- | Number of conversions attributed to the product, reported on the conversion date. Depending on the attribution model, a conversion might be distributed across multiple clicks, where each click gets its own credit assigned. This metric is a sum of all such credits. The metric is currently available only for the FREE/PRODUCT/LISTING program.
+    -- | Number of conversions attributed to the product, reported on the conversion date. Depending on the attribution model, a conversion might be distributed across multiple clicks, where each click gets its own credit assigned. This metric is a sum of all such credits. The metric is currently available only for the @FREE_PRODUCT_LISTING@ program.
     conversions :: (Core.Maybe Core.Double),
     -- | Click-through rate - the number of clicks merchant\'s products receive (clicks) divided by the number of times the products are shown (impressions).
     ctr :: (Core.Maybe Core.Double),
-    -- | Average number of days between an order being placed and the order being fully shipped, reported on the last shipment date. __This metric cannot be segmented by product dimensions and customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Average number of days between an order being placed and the order being fully shipped, reported on the last shipment date. __This metric cannot be segmented by product dimensions and customer/country/code.__
     daysToShip :: (Core.Maybe Core.Double),
     -- | Number of times merchant\'s products are shown.
     impressions :: (Core.Maybe Core.Int64),
-    -- | Average number of days between an item being ordered and the item being __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Average number of days between an item being ordered and the item being __This metric cannot be segmented by customer/country/code.__
     itemDaysToShip :: (Core.Maybe Core.Double),
-    -- | Percentage of shipped items in relation to all finalized items (shipped or rejected by the merchant; unshipped items are not taken into account), reported on the order date. Item fill rate is lowered by merchant rejections. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Percentage of shipped items in relation to all finalized items (shipped or rejected by the merchant; unshipped items are not taken into account), reported on the order date. Item fill rate is lowered by merchant rejections. __This metric cannot be segmented by customer/country/code.__
     itemFillRate :: (Core.Maybe Core.Double),
-    -- | Total price of ordered items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros). Excludes shipping, taxes (US only), and customer cancellations that happened within 30 minutes of placing the order. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Total price of ordered items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros). Excludes shipping, taxes (US only), and customer cancellations that happened within 30 minutes of placing the order. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
     orderedItemSalesMicros :: (Core.Maybe Core.Int64),
-    -- | Number of ordered items. Excludes customer cancellations that happened within 30 minutes of placing the order. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of ordered items. Excludes customer cancellations that happened within 30 minutes of placing the order. __This metric cannot be segmented by customer/country/code.__
     orderedItems :: (Core.Maybe Core.Int64),
-    -- | Number of placed orders. Excludes customer cancellations that happened within 30 minutes of placing the order. __This metric cannot be segmented by product dimensions and customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of placed orders. Excludes customer cancellations that happened within 30 minutes of placing the order. __This metric cannot be segmented by product dimensions and customer/country/code.__
     orders :: (Core.Maybe Core.Int64),
-    -- | Number of ordered items canceled by the merchant, reported on the order date. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of ordered items canceled by the merchant, reported on the order date. __This metric cannot be segmented by customer/country/code.__
     rejectedItems :: (Core.Maybe Core.Int64),
-    -- | Total price of returned items divided by the total price of shipped items, reported on the order date. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency/code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Total price of returned items divided by the total price of shipped items, reported on the order date. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency/code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
     returnRate :: (Core.Maybe Core.Double),
-    -- | Number of ordered items sent back for return, reported on the date when the merchant accepted the return. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of ordered items sent back for return, reported on the date when the merchant accepted the return. __This metric cannot be segmented by customer/country/code.__
     returnedItems :: (Core.Maybe Core.Int64),
-    -- | Total price of ordered items sent back for return in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the date when the merchant accepted the return. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Total price of ordered items sent back for return in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the date when the merchant accepted the return. The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
     returnsMicros :: (Core.Maybe Core.Int64),
-    -- | Total price of shipped items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the order date. Excludes shipping and taxes (US only). The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Total price of shipped items in micros (1 millionth of a standard unit, 1 USD = 1000000 micros), reported on the order date. Excludes shipping and taxes (US only). The currency of the returned value is stored in the currency/code segment. If this metric is selected, \'segments.currency/code\' is automatically added to the SELECT clause in the search query (unless it is explicitly selected by the user) and the currency_code segment is populated in the response. __This metric cannot be segmented by customer/country/code.__
     shippedItemSalesMicros :: (Core.Maybe Core.Int64),
-    -- | Number of shipped items, reported on the shipment date. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of shipped items, reported on the shipment date. __This metric cannot be segmented by customer/country/code.__
     shippedItems :: (Core.Maybe Core.Int64),
-    -- | Number of fully shipped orders, reported on the last shipment date. __This metric cannot be segmented by product dimensions and customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of fully shipped orders, reported on the last shipment date. __This metric cannot be segmented by product dimensions and customer/country/code.__
     shippedOrders :: (Core.Maybe Core.Int64),
-    -- | Number of ordered items not shipped up until the end of the queried day. If a multi-day period is specified in the search query, the returned value is the average number of unshipped items over the days in the queried period. __This metric cannot be segmented by customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of ordered items not shipped up until the end of the queried day. If a multi-day period is specified in the search query, the returned value is the average number of unshipped items over the days in the queried period. __This metric cannot be segmented by customer/country/code.__
     unshippedItems :: (Core.Maybe Core.Double),
-    -- | Number of orders not shipped or partially shipped up until the end of the queried day. If a multi-day period is specified in the search query, the returned value is the average number of unshipped orders over the days in the queried period. __This metric cannot be segmented by product dimensions and customer/country/code.__
+    -- | /Deprecated/: This field is no longer supported and retrieving it returns 0 starting from May 2024. Number of orders not shipped or partially shipped up until the end of the queried day. If a multi-day period is specified in the search query, the returned value is the average number of unshipped orders over the days in the queried period. __This metric cannot be segmented by product dimensions and customer/country/code.__
     unshippedOrders :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9427,49 +9526,34 @@ instance Core.FromJSON Metrics where
           Metrics
             Core.<$> (o Core..:? "aos")
             Core.<*> (o Core..:? "aovMicros")
-            Core.<*> ( o Core..:? "clicks"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "clicks" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "conversionRate")
-            Core.<*> ( o Core..:? "conversionValueMicros"
+            Core.<*> ( o
+                         Core..:? "conversionValueMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "conversions")
             Core.<*> (o Core..:? "ctr")
             Core.<*> (o Core..:? "daysToShip")
-            Core.<*> ( o Core..:? "impressions"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "impressions" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "itemDaysToShip")
             Core.<*> (o Core..:? "itemFillRate")
-            Core.<*> ( o Core..:? "orderedItemSalesMicros"
+            Core.<*> ( o
+                         Core..:? "orderedItemSalesMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "orderedItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "orders"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "rejectedItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "orderedItems" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "orders" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "rejectedItems" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "returnRate")
-            Core.<*> ( o Core..:? "returnedItems"
+            Core.<*> (o Core..:? "returnedItems" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "returnsMicros" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "shippedItemSalesMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "returnsMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "shippedItemSalesMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "shippedItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "shippedOrders"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "shippedItems" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "shippedOrders" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "unshippedItems")
             Core.<*> (o Core..:? "unshippedOrders")
       )
@@ -9480,48 +9564,48 @@ instance Core.ToJSON Metrics where
       ( Core.catMaybes
           [ ("aos" Core..=) Core.<$> aos,
             ("aovMicros" Core..=) Core.<$> aovMicros,
-            ("clicks" Core..=) Core.. Core.AsText
-              Core.<$> clicks,
+            ("clicks" Core..=) Core.. Core.AsText Core.<$> clicks,
             ("conversionRate" Core..=) Core.<$> conversionRate,
-            ("conversionValueMicros" Core..=) Core.. Core.AsText
+            ("conversionValueMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> conversionValueMicros,
             ("conversions" Core..=) Core.<$> conversions,
             ("ctr" Core..=) Core.<$> ctr,
             ("daysToShip" Core..=) Core.<$> daysToShip,
-            ("impressions" Core..=) Core.. Core.AsText
-              Core.<$> impressions,
+            ("impressions" Core..=) Core.. Core.AsText Core.<$> impressions,
             ("itemDaysToShip" Core..=) Core.<$> itemDaysToShip,
             ("itemFillRate" Core..=) Core.<$> itemFillRate,
-            ("orderedItemSalesMicros" Core..=) Core.. Core.AsText
+            ("orderedItemSalesMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> orderedItemSalesMicros,
-            ("orderedItems" Core..=) Core.. Core.AsText
-              Core.<$> orderedItems,
-            ("orders" Core..=) Core.. Core.AsText
-              Core.<$> orders,
-            ("rejectedItems" Core..=) Core.. Core.AsText
+            ("orderedItems" Core..=) Core.. Core.AsText Core.<$> orderedItems,
+            ("orders" Core..=) Core.. Core.AsText Core.<$> orders,
+            ("rejectedItems" Core..=)
+              Core.. Core.AsText
               Core.<$> rejectedItems,
             ("returnRate" Core..=) Core.<$> returnRate,
-            ("returnedItems" Core..=) Core.. Core.AsText
+            ("returnedItems" Core..=)
+              Core.. Core.AsText
               Core.<$> returnedItems,
-            ("returnsMicros" Core..=) Core.. Core.AsText
+            ("returnsMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> returnsMicros,
-            ("shippedItemSalesMicros" Core..=) Core.. Core.AsText
+            ("shippedItemSalesMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> shippedItemSalesMicros,
-            ("shippedItems" Core..=) Core.. Core.AsText
-              Core.<$> shippedItems,
-            ("shippedOrders" Core..=) Core.. Core.AsText
+            ("shippedItems" Core..=) Core.. Core.AsText Core.<$> shippedItems,
+            ("shippedOrders" Core..=)
+              Core.. Core.AsText
               Core.<$> shippedOrders,
             ("unshippedItems" Core..=) Core.<$> unshippedItems,
-            ("unshippedOrders" Core..=)
-              Core.<$> unshippedOrders
+            ("unshippedOrders" Core..=) Core.<$> unshippedOrders
           ]
       )
 
 --
 -- /See:/ 'newMinimumOrderValueTable' smart constructor.
 newtype MinimumOrderValueTable = MinimumOrderValueTable
-  { -- |
-    storeCodeSetWithMovs :: (Core.Maybe [MinimumOrderValueTableStoreCodeSetWithMov])
+  { storeCodeSetWithMovs :: (Core.Maybe [MinimumOrderValueTableStoreCodeSetWithMov])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -9544,9 +9628,7 @@ instance Core.ToJSON MinimumOrderValueTable where
   toJSON MinimumOrderValueTable {..} =
     Core.object
       ( Core.catMaybes
-          [ ("storeCodeSetWithMovs" Core..=)
-              Core.<$> storeCodeSetWithMovs
-          ]
+          [("storeCodeSetWithMovs" Core..=) Core.<$> storeCodeSetWithMovs]
       )
 
 -- | A list of store code sets sharing the same minimum order value. At least two sets are required and the last one must be empty, which signifies \'MOV for all other stores\'. Each store code can only appear once across all the sets. All prices within a service must have the same currency.
@@ -9565,14 +9647,12 @@ newMinimumOrderValueTableStoreCodeSetWithMov ::
   MinimumOrderValueTableStoreCodeSetWithMov
 newMinimumOrderValueTableStoreCodeSetWithMov =
   MinimumOrderValueTableStoreCodeSetWithMov
-    { storeCodes = Core.Nothing,
+    { storeCodes =
+        Core.Nothing,
       value = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    MinimumOrderValueTableStoreCodeSetWithMov
-  where
+instance Core.FromJSON MinimumOrderValueTableStoreCodeSetWithMov where
   parseJSON =
     Core.withObject
       "MinimumOrderValueTableStoreCodeSetWithMov"
@@ -9582,1725 +9662,12 @@ instance
             Core.<*> (o Core..:? "value")
       )
 
-instance
-  Core.ToJSON
-    MinimumOrderValueTableStoreCodeSetWithMov
-  where
+instance Core.ToJSON MinimumOrderValueTableStoreCodeSetWithMov where
   toJSON MinimumOrderValueTableStoreCodeSetWithMov {..} =
     Core.object
       ( Core.catMaybes
           [ ("storeCodes" Core..=) Core.<$> storeCodes,
             ("value" Core..=) Core.<$> value
-          ]
-      )
-
---
--- /See:/ 'newMonetaryAmount' smart constructor.
-data MonetaryAmount = MonetaryAmount
-  { -- | The pre-tax or post-tax price depends on the location of the order. - For countries (for example, \"US\". where price attribute excludes tax, this field corresponds to the pre-tax value. - For coutries (for example, \"France\") where price attribute includes tax, this field corresponds to the post-tax value .
-    priceAmount :: (Core.Maybe Price),
-    -- | Tax value, present only for countries where price attribute excludes tax (for example, \"US\". No tax is referenced as 0 value with the corresponding @currency@.
-    taxAmount :: (Core.Maybe Price)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MonetaryAmount' with the minimum fields required to make a request.
-newMonetaryAmount ::
-  MonetaryAmount
-newMonetaryAmount =
-  MonetaryAmount {priceAmount = Core.Nothing, taxAmount = Core.Nothing}
-
-instance Core.FromJSON MonetaryAmount where
-  parseJSON =
-    Core.withObject
-      "MonetaryAmount"
-      ( \o ->
-          MonetaryAmount
-            Core.<$> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "taxAmount")
-      )
-
-instance Core.ToJSON MonetaryAmount where
-  toJSON MonetaryAmount {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("taxAmount" Core..=) Core.<$> taxAmount
-          ]
-      )
-
--- | Request message for the OnboardProgram method.
---
--- /See:/ 'newOnboardBuyOnGoogleProgramRequest' smart constructor.
-newtype OnboardBuyOnGoogleProgramRequest = OnboardBuyOnGoogleProgramRequest
-  { -- | The customer service email.
-    customerServiceEmail :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OnboardBuyOnGoogleProgramRequest' with the minimum fields required to make a request.
-newOnboardBuyOnGoogleProgramRequest ::
-  OnboardBuyOnGoogleProgramRequest
-newOnboardBuyOnGoogleProgramRequest =
-  OnboardBuyOnGoogleProgramRequest {customerServiceEmail = Core.Nothing}
-
-instance
-  Core.FromJSON
-    OnboardBuyOnGoogleProgramRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OnboardBuyOnGoogleProgramRequest"
-      ( \o ->
-          OnboardBuyOnGoogleProgramRequest
-            Core.<$> (o Core..:? "customerServiceEmail")
-      )
-
-instance Core.ToJSON OnboardBuyOnGoogleProgramRequest where
-  toJSON OnboardBuyOnGoogleProgramRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("customerServiceEmail" Core..=)
-              Core.<$> customerServiceEmail
-          ]
-      )
-
--- | Order. Production access (all methods) requires the order manager role. Sandbox access does not.
---
--- /See:/ 'newOrder' smart constructor.
-data Order = Order
-  { -- | Whether the order was acknowledged.
-    acknowledged :: (Core.Maybe Core.Bool),
-    -- | List of key-value pairs that are attached to a given order.
-    annotations :: (Core.Maybe [OrderOrderAnnotation]),
-    -- | The billing address.
-    billingAddress :: (Core.Maybe OrderAddress),
-    -- | The details of the customer who placed the order.
-    customer :: (Core.Maybe OrderCustomer),
-    -- | Delivery details for shipments of type @delivery@.
-    deliveryDetails :: (Core.Maybe OrderDeliveryDetails),
-    -- | The REST ID of the order. Globally unique.
-    id :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#order@\"
-    kind :: (Core.Maybe Core.Text),
-    -- | Line items that are ordered.
-    lineItems :: (Core.Maybe [OrderLineItem]),
-    -- |
-    merchantId :: (Core.Maybe Core.Word64),
-    -- | Merchant-provided ID of the order.
-    merchantOrderId :: (Core.Maybe Core.Text),
-    -- | The net amount for the order (price part). For example, if an order was originally for $100 and a refund was issued for $20, the net amount will be $80.
-    netPriceAmount :: (Core.Maybe Price),
-    -- | The net amount for the order (tax part). Note that in certain cases due to taxable base adjustment @netTaxAmount@ might not match to a sum of tax field across all lineItems and refunds.
-    netTaxAmount :: (Core.Maybe Price),
-    -- | The status of the payment. Acceptable values are: - \"@paymentCaptured@\" - \"@paymentRejected@\" - \"@paymentSecured@\" - \"@pendingAuthorization@\"
-    paymentStatus :: (Core.Maybe Core.Text),
-    -- | Pickup details for shipments of type @pickup@.
-    pickupDetails :: (Core.Maybe OrderPickupDetails),
-    -- | The date when the order was placed, in ISO 8601 format.
-    placedDate :: (Core.Maybe Core.Text),
-    -- | Promotions associated with the order. To determine which promotions apply to which products, check the @Promotions[].appliedItems[].lineItemId@ field against the @LineItems[].id@ field for each promotion. If a promotion is applied to more than 1 offerId, divide the discount value by the number of affected offers to determine how much discount to apply to each offerId. Examples: 1. To calculate price paid by the customer for a single line item including the discount: For each promotion, subtract the @LineItems[].adjustments[].priceAdjustment.value@ amount from the @LineItems[].Price.value@. 2. To calculate price paid by the customer for a single line item including the discount in case of multiple quantity: For each promotion, divide the @LineItems[].adjustments[].priceAdjustment.value@ by the quantity of products then subtract the resulting value from the @LineItems[].Product.Price.value@ for each quantity item. Only 1 promotion can be applied to an offerId in a given order. To refund an item which had a
-    -- promotion applied to it, make sure to refund the amount after first subtracting the promotion discount from the item price. More details about the program are here.
-    promotions :: (Core.Maybe [OrderPromotion]),
-    -- | Refunds for the order.
-    refunds :: (Core.Maybe [OrderRefund]),
-    -- | Shipments of the order.
-    shipments :: (Core.Maybe [OrderShipment]),
-    -- | The total cost of shipping for all items.
-    shippingCost :: (Core.Maybe Price),
-    -- | The tax for the total shipping cost.
-    shippingCostTax :: (Core.Maybe Price),
-    -- | The status of the order. Acceptable values are: - \"@canceled@\" - \"@delivered@\" - \"@inProgress@\" - \"@partiallyDelivered@\" - \"@partiallyReturned@\" - \"@partiallyShipped@\" - \"@pendingShipment@\" - \"@returned@\" - \"@shipped@\"
-    status :: (Core.Maybe Core.Text),
-    -- | The party responsible for collecting and remitting taxes. Acceptable values are: - \"@marketplaceFacilitator@\" - \"@merchant@\"
-    taxCollector :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Order' with the minimum fields required to make a request.
-newOrder ::
-  Order
-newOrder =
-  Order
-    { acknowledged = Core.Nothing,
-      annotations = Core.Nothing,
-      billingAddress = Core.Nothing,
-      customer = Core.Nothing,
-      deliveryDetails = Core.Nothing,
-      id = Core.Nothing,
-      kind = Core.Nothing,
-      lineItems = Core.Nothing,
-      merchantId = Core.Nothing,
-      merchantOrderId = Core.Nothing,
-      netPriceAmount = Core.Nothing,
-      netTaxAmount = Core.Nothing,
-      paymentStatus = Core.Nothing,
-      pickupDetails = Core.Nothing,
-      placedDate = Core.Nothing,
-      promotions = Core.Nothing,
-      refunds = Core.Nothing,
-      shipments = Core.Nothing,
-      shippingCost = Core.Nothing,
-      shippingCostTax = Core.Nothing,
-      status = Core.Nothing,
-      taxCollector = Core.Nothing
-    }
-
-instance Core.FromJSON Order where
-  parseJSON =
-    Core.withObject
-      "Order"
-      ( \o ->
-          Order
-            Core.<$> (o Core..:? "acknowledged")
-            Core.<*> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "billingAddress")
-            Core.<*> (o Core..:? "customer")
-            Core.<*> (o Core..:? "deliveryDetails")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lineItems")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "merchantOrderId")
-            Core.<*> (o Core..:? "netPriceAmount")
-            Core.<*> (o Core..:? "netTaxAmount")
-            Core.<*> (o Core..:? "paymentStatus")
-            Core.<*> (o Core..:? "pickupDetails")
-            Core.<*> (o Core..:? "placedDate")
-            Core.<*> (o Core..:? "promotions")
-            Core.<*> (o Core..:? "refunds")
-            Core.<*> (o Core..:? "shipments")
-            Core.<*> (o Core..:? "shippingCost")
-            Core.<*> (o Core..:? "shippingCostTax")
-            Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "taxCollector")
-      )
-
-instance Core.ToJSON Order where
-  toJSON Order {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("acknowledged" Core..=) Core.<$> acknowledged,
-            ("annotations" Core..=) Core.<$> annotations,
-            ("billingAddress" Core..=) Core.<$> billingAddress,
-            ("customer" Core..=) Core.<$> customer,
-            ("deliveryDetails" Core..=) Core.<$> deliveryDetails,
-            ("id" Core..=) Core.<$> id,
-            ("kind" Core..=) Core.<$> kind,
-            ("lineItems" Core..=) Core.<$> lineItems,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
-            ("merchantOrderId" Core..=) Core.<$> merchantOrderId,
-            ("netPriceAmount" Core..=) Core.<$> netPriceAmount,
-            ("netTaxAmount" Core..=) Core.<$> netTaxAmount,
-            ("paymentStatus" Core..=) Core.<$> paymentStatus,
-            ("pickupDetails" Core..=) Core.<$> pickupDetails,
-            ("placedDate" Core..=) Core.<$> placedDate,
-            ("promotions" Core..=) Core.<$> promotions,
-            ("refunds" Core..=) Core.<$> refunds,
-            ("shipments" Core..=) Core.<$> shipments,
-            ("shippingCost" Core..=) Core.<$> shippingCost,
-            ("shippingCostTax" Core..=) Core.<$> shippingCostTax,
-            ("status" Core..=) Core.<$> status,
-            ("taxCollector" Core..=) Core.<$> taxCollector
-          ]
-      )
-
---
--- /See:/ 'newOrderAddress' smart constructor.
-data OrderAddress = OrderAddress
-  { -- | CLDR country code (for example, \"US\").
-    country :: (Core.Maybe Core.Text),
-    -- | Strings representing the lines of the printed label for mailing the order, for example: John Smith 1600 Amphitheatre Parkway Mountain View, CA, 94043 United States
-    fullAddress :: (Core.Maybe [Core.Text]),
-    -- | Whether the address is a post office box.
-    isPostOfficeBox :: (Core.Maybe Core.Bool),
-    -- | City, town or commune. May also include dependent localities or sublocalities (for example, neighborhoods or suburbs).
-    locality :: (Core.Maybe Core.Text),
-    -- | Postal Code or ZIP (for example, \"94043\").
-    postalCode :: (Core.Maybe Core.Text),
-    -- | Name of the recipient.
-    recipientName :: (Core.Maybe Core.Text),
-    -- | Top-level administrative subdivision of the country. For example, a state like California (\"CA\") or a province like Quebec (\"QC\").
-    region :: (Core.Maybe Core.Text),
-    -- | Street-level part of the address. Use @\\n@ to add a second line.
-    streetAddress :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderAddress' with the minimum fields required to make a request.
-newOrderAddress ::
-  OrderAddress
-newOrderAddress =
-  OrderAddress
-    { country = Core.Nothing,
-      fullAddress = Core.Nothing,
-      isPostOfficeBox = Core.Nothing,
-      locality = Core.Nothing,
-      postalCode = Core.Nothing,
-      recipientName = Core.Nothing,
-      region = Core.Nothing,
-      streetAddress = Core.Nothing
-    }
-
-instance Core.FromJSON OrderAddress where
-  parseJSON =
-    Core.withObject
-      "OrderAddress"
-      ( \o ->
-          OrderAddress
-            Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "fullAddress")
-            Core.<*> (o Core..:? "isPostOfficeBox")
-            Core.<*> (o Core..:? "locality")
-            Core.<*> (o Core..:? "postalCode")
-            Core.<*> (o Core..:? "recipientName")
-            Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "streetAddress")
-      )
-
-instance Core.ToJSON OrderAddress where
-  toJSON OrderAddress {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("country" Core..=) Core.<$> country,
-            ("fullAddress" Core..=) Core.<$> fullAddress,
-            ("isPostOfficeBox" Core..=) Core.<$> isPostOfficeBox,
-            ("locality" Core..=) Core.<$> locality,
-            ("postalCode" Core..=) Core.<$> postalCode,
-            ("recipientName" Core..=) Core.<$> recipientName,
-            ("region" Core..=) Core.<$> region,
-            ("streetAddress" Core..=) Core.<$> streetAddress
-          ]
-      )
-
---
--- /See:/ 'newOrderCancellation' smart constructor.
-data OrderCancellation = OrderCancellation
-  { -- | The actor that created the cancellation. Acceptable values are: - \"@customer@\" - \"@googleBot@\" - \"@googleCustomerService@\" - \"@googlePayments@\" - \"@googleSabre@\" - \"@merchant@\"
-    actor :: (Core.Maybe Core.Text),
-    -- | Date on which the cancellation has been created, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | The quantity that was canceled.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the cancellation. Orders that are canceled with a noInventory reason will lead to the removal of the product from Buy on Google until you make an update to that product. This won\'t affect your Shopping ads. Acceptable values are: - \"@autoPostInternal@\" - \"@autoPostInvalidBillingAddress@\" - \"@autoPostNoInventory@\" - \"@autoPostPriceError@\" - \"@autoPostUndeliverableShippingAddress@\" - \"@couponAbuse@\" - \"@customerCanceled@\" - \"@customerInitiatedCancel@\" - \"@customerSupportRequested@\" - \"@failToPushOrderGoogleError@\" - \"@failToPushOrderMerchantError@\" - \"@failToPushOrderMerchantFulfillmentError@\" - \"@failToPushOrderToMerchant@\" - \"@failToPushOrderToMerchantOutOfStock@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@merchantDidNotShipOnTime@\" - \"@noInventory@\" - \"@orderTimeout@\" - \"@other@\" - \"@paymentAbuse@\" - \"@paymentDeclined@\" - \"@priceError@\" - \"@returnRefundAbuse@\" - \"@shippingPriceError@\" - \"@taxError@\" -
-    -- \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@failedToCaptureFunds@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderCancellation' with the minimum fields required to make a request.
-newOrderCancellation ::
-  OrderCancellation
-newOrderCancellation =
-  OrderCancellation
-    { actor = Core.Nothing,
-      creationDate = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrderCancellation where
-  parseJSON =
-    Core.withObject
-      "OrderCancellation"
-      ( \o ->
-          OrderCancellation
-            Core.<$> (o Core..:? "actor")
-            Core.<*> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrderCancellation where
-  toJSON OrderCancellation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("actor" Core..=) Core.<$> actor,
-            ("creationDate" Core..=) Core.<$> creationDate,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrderCustomer' smart constructor.
-data OrderCustomer = OrderCustomer
-  { -- | Full name of the customer.
-    fullName :: (Core.Maybe Core.Text),
-    -- | Email address for the merchant to send value-added tax or invoice documentation of the order. Only the last document sent is made available to the customer. For more information, see About automated VAT invoicing for Buy on Google.
-    invoiceReceivingEmail :: (Core.Maybe Core.Text),
-    -- | Loyalty program information.
-    loyaltyInfo :: (Core.Maybe OrderCustomerLoyaltyInfo),
-    -- | Customer\'s marketing preferences. Contains the marketing opt-in information that is current at the time that the merchant call. User preference selections can change from one order to the next so preferences must be checked with every order.
-    marketingRightsInfo :: (Core.Maybe OrderCustomerMarketingRightsInfo)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderCustomer' with the minimum fields required to make a request.
-newOrderCustomer ::
-  OrderCustomer
-newOrderCustomer =
-  OrderCustomer
-    { fullName = Core.Nothing,
-      invoiceReceivingEmail = Core.Nothing,
-      loyaltyInfo = Core.Nothing,
-      marketingRightsInfo = Core.Nothing
-    }
-
-instance Core.FromJSON OrderCustomer where
-  parseJSON =
-    Core.withObject
-      "OrderCustomer"
-      ( \o ->
-          OrderCustomer
-            Core.<$> (o Core..:? "fullName")
-            Core.<*> (o Core..:? "invoiceReceivingEmail")
-            Core.<*> (o Core..:? "loyaltyInfo")
-            Core.<*> (o Core..:? "marketingRightsInfo")
-      )
-
-instance Core.ToJSON OrderCustomer where
-  toJSON OrderCustomer {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fullName" Core..=) Core.<$> fullName,
-            ("invoiceReceivingEmail" Core..=)
-              Core.<$> invoiceReceivingEmail,
-            ("loyaltyInfo" Core..=) Core.<$> loyaltyInfo,
-            ("marketingRightsInfo" Core..=)
-              Core.<$> marketingRightsInfo
-          ]
-      )
-
---
--- /See:/ 'newOrderCustomerLoyaltyInfo' smart constructor.
-data OrderCustomerLoyaltyInfo = OrderCustomerLoyaltyInfo
-  { -- | The loyalty card\/membership number.
-    loyaltyNumber :: (Core.Maybe Core.Text),
-    -- | Name of card\/membership holder, this field will be populated when
-    name :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderCustomerLoyaltyInfo' with the minimum fields required to make a request.
-newOrderCustomerLoyaltyInfo ::
-  OrderCustomerLoyaltyInfo
-newOrderCustomerLoyaltyInfo =
-  OrderCustomerLoyaltyInfo {loyaltyNumber = Core.Nothing, name = Core.Nothing}
-
-instance Core.FromJSON OrderCustomerLoyaltyInfo where
-  parseJSON =
-    Core.withObject
-      "OrderCustomerLoyaltyInfo"
-      ( \o ->
-          OrderCustomerLoyaltyInfo
-            Core.<$> (o Core..:? "loyaltyNumber")
-            Core.<*> (o Core..:? "name")
-      )
-
-instance Core.ToJSON OrderCustomerLoyaltyInfo where
-  toJSON OrderCustomerLoyaltyInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("loyaltyNumber" Core..=) Core.<$> loyaltyNumber,
-            ("name" Core..=) Core.<$> name
-          ]
-      )
-
---
--- /See:/ 'newOrderCustomerMarketingRightsInfo' smart constructor.
-data OrderCustomerMarketingRightsInfo = OrderCustomerMarketingRightsInfo
-  { -- | Last known customer selection regarding marketing preferences. In certain cases this selection might not be known, so this field would be empty. If a customer selected @granted@ in their most recent order, they can be subscribed to marketing emails. Customers who have chosen @denied@ must not be subscribed, or must be unsubscribed if already opted-in. Acceptable values are: - \"@denied@\" - \"@granted@\"
-    explicitMarketingPreference :: (Core.Maybe Core.Text),
-    -- | Timestamp when last time marketing preference was updated. Could be empty, if user wasn\'t offered a selection yet.
-    lastUpdatedTimestamp :: (Core.Maybe Core.Text),
-    -- | Email address that can be used for marketing purposes. The field may be empty even if @explicitMarketingPreference@ is \'granted\'. This happens when retrieving an old order from the customer who deleted their account.
-    marketingEmailAddress :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderCustomerMarketingRightsInfo' with the minimum fields required to make a request.
-newOrderCustomerMarketingRightsInfo ::
-  OrderCustomerMarketingRightsInfo
-newOrderCustomerMarketingRightsInfo =
-  OrderCustomerMarketingRightsInfo
-    { explicitMarketingPreference = Core.Nothing,
-      lastUpdatedTimestamp = Core.Nothing,
-      marketingEmailAddress = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderCustomerMarketingRightsInfo
-  where
-  parseJSON =
-    Core.withObject
-      "OrderCustomerMarketingRightsInfo"
-      ( \o ->
-          OrderCustomerMarketingRightsInfo
-            Core.<$> (o Core..:? "explicitMarketingPreference")
-            Core.<*> (o Core..:? "lastUpdatedTimestamp")
-            Core.<*> (o Core..:? "marketingEmailAddress")
-      )
-
-instance Core.ToJSON OrderCustomerMarketingRightsInfo where
-  toJSON OrderCustomerMarketingRightsInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("explicitMarketingPreference" Core..=)
-              Core.<$> explicitMarketingPreference,
-            ("lastUpdatedTimestamp" Core..=)
-              Core.<$> lastUpdatedTimestamp,
-            ("marketingEmailAddress" Core..=)
-              Core.<$> marketingEmailAddress
-          ]
-      )
-
---
--- /See:/ 'newOrderDeliveryDetails' smart constructor.
-data OrderDeliveryDetails = OrderDeliveryDetails
-  { -- | The delivery address
-    address :: (Core.Maybe OrderAddress),
-    -- | The phone number of the person receiving the delivery.
-    phoneNumber :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderDeliveryDetails' with the minimum fields required to make a request.
-newOrderDeliveryDetails ::
-  OrderDeliveryDetails
-newOrderDeliveryDetails =
-  OrderDeliveryDetails {address = Core.Nothing, phoneNumber = Core.Nothing}
-
-instance Core.FromJSON OrderDeliveryDetails where
-  parseJSON =
-    Core.withObject
-      "OrderDeliveryDetails"
-      ( \o ->
-          OrderDeliveryDetails
-            Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "phoneNumber")
-      )
-
-instance Core.ToJSON OrderDeliveryDetails where
-  toJSON OrderDeliveryDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("address" Core..=) Core.<$> address,
-            ("phoneNumber" Core..=) Core.<$> phoneNumber
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItem' smart constructor.
-data OrderLineItem = OrderLineItem
-  { -- | Price and tax adjustments applied on the line item.
-    adjustments :: (Core.Maybe [OrderLineItemAdjustment]),
-    -- | Annotations that are attached to the line item.
-    annotations :: (Core.Maybe [OrderMerchantProvidedAnnotation]),
-    -- | Cancellations of the line item.
-    cancellations :: (Core.Maybe [OrderCancellation]),
-    -- | The ID of the line item.
-    id :: (Core.Maybe Core.Text),
-    -- | Total price for the line item. For example, if two items for $10 are purchased, the total price will be $20.
-    price :: (Core.Maybe Price),
-    -- | Product data as seen by customer from the time of the order placement. Note that certain attributes values (for example, title or gtin) might be reformatted and no longer match values submitted through product feed.
-    product :: (Core.Maybe OrderLineItemProduct),
-    -- | Number of items canceled.
-    quantityCanceled :: (Core.Maybe Core.Word32),
-    -- | Number of items delivered.
-    quantityDelivered :: (Core.Maybe Core.Word32),
-    -- | Number of items ordered.
-    quantityOrdered :: (Core.Maybe Core.Word32),
-    -- | Number of items pending.
-    quantityPending :: (Core.Maybe Core.Word32),
-    -- | Number of items ready for pickup.
-    quantityReadyForPickup :: (Core.Maybe Core.Word32),
-    -- | Number of items returned.
-    quantityReturned :: (Core.Maybe Core.Word32),
-    -- | Number of items shipped.
-    quantityShipped :: (Core.Maybe Core.Word32),
-    -- | Number of items undeliverable.
-    quantityUndeliverable :: (Core.Maybe Core.Word32),
-    -- | Details of the return policy for the line item.
-    returnInfo :: (Core.Maybe OrderLineItemReturnInfo),
-    -- | Returns of the line item.
-    returns :: (Core.Maybe [OrderReturn]),
-    -- | Details of the requested shipping for the line item.
-    shippingDetails :: (Core.Maybe OrderLineItemShippingDetails),
-    -- | Total tax amount for the line item. For example, if two items are purchased, and each have a cost tax of $2, the total tax amount will be $4.
-    tax :: (Core.Maybe Price)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItem' with the minimum fields required to make a request.
-newOrderLineItem ::
-  OrderLineItem
-newOrderLineItem =
-  OrderLineItem
-    { adjustments = Core.Nothing,
-      annotations = Core.Nothing,
-      cancellations = Core.Nothing,
-      id = Core.Nothing,
-      price = Core.Nothing,
-      product = Core.Nothing,
-      quantityCanceled = Core.Nothing,
-      quantityDelivered = Core.Nothing,
-      quantityOrdered = Core.Nothing,
-      quantityPending = Core.Nothing,
-      quantityReadyForPickup = Core.Nothing,
-      quantityReturned = Core.Nothing,
-      quantityShipped = Core.Nothing,
-      quantityUndeliverable = Core.Nothing,
-      returnInfo = Core.Nothing,
-      returns = Core.Nothing,
-      shippingDetails = Core.Nothing,
-      tax = Core.Nothing
-    }
-
-instance Core.FromJSON OrderLineItem where
-  parseJSON =
-    Core.withObject
-      "OrderLineItem"
-      ( \o ->
-          OrderLineItem
-            Core.<$> (o Core..:? "adjustments")
-            Core.<*> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "cancellations")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "product")
-            Core.<*> (o Core..:? "quantityCanceled")
-            Core.<*> (o Core..:? "quantityDelivered")
-            Core.<*> (o Core..:? "quantityOrdered")
-            Core.<*> (o Core..:? "quantityPending")
-            Core.<*> (o Core..:? "quantityReadyForPickup")
-            Core.<*> (o Core..:? "quantityReturned")
-            Core.<*> (o Core..:? "quantityShipped")
-            Core.<*> (o Core..:? "quantityUndeliverable")
-            Core.<*> (o Core..:? "returnInfo")
-            Core.<*> (o Core..:? "returns")
-            Core.<*> (o Core..:? "shippingDetails")
-            Core.<*> (o Core..:? "tax")
-      )
-
-instance Core.ToJSON OrderLineItem where
-  toJSON OrderLineItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("adjustments" Core..=) Core.<$> adjustments,
-            ("annotations" Core..=) Core.<$> annotations,
-            ("cancellations" Core..=) Core.<$> cancellations,
-            ("id" Core..=) Core.<$> id,
-            ("price" Core..=) Core.<$> price,
-            ("product" Core..=) Core.<$> product,
-            ("quantityCanceled" Core..=)
-              Core.<$> quantityCanceled,
-            ("quantityDelivered" Core..=)
-              Core.<$> quantityDelivered,
-            ("quantityOrdered" Core..=) Core.<$> quantityOrdered,
-            ("quantityPending" Core..=) Core.<$> quantityPending,
-            ("quantityReadyForPickup" Core..=)
-              Core.<$> quantityReadyForPickup,
-            ("quantityReturned" Core..=)
-              Core.<$> quantityReturned,
-            ("quantityShipped" Core..=) Core.<$> quantityShipped,
-            ("quantityUndeliverable" Core..=)
-              Core.<$> quantityUndeliverable,
-            ("returnInfo" Core..=) Core.<$> returnInfo,
-            ("returns" Core..=) Core.<$> returns,
-            ("shippingDetails" Core..=) Core.<$> shippingDetails,
-            ("tax" Core..=) Core.<$> tax
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemAdjustment' smart constructor.
-data OrderLineItemAdjustment = OrderLineItemAdjustment
-  { -- | Adjustment for total price of the line item.
-    priceAdjustment :: (Core.Maybe Price),
-    -- | Adjustment for total tax of the line item.
-    taxAdjustment :: (Core.Maybe Price),
-    -- | Type of this adjustment. Acceptable values are: - \"@promotion@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemAdjustment' with the minimum fields required to make a request.
-newOrderLineItemAdjustment ::
-  OrderLineItemAdjustment
-newOrderLineItemAdjustment =
-  OrderLineItemAdjustment
-    { priceAdjustment = Core.Nothing,
-      taxAdjustment = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON OrderLineItemAdjustment where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemAdjustment"
-      ( \o ->
-          OrderLineItemAdjustment
-            Core.<$> (o Core..:? "priceAdjustment")
-            Core.<*> (o Core..:? "taxAdjustment")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON OrderLineItemAdjustment where
-  toJSON OrderLineItemAdjustment {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("priceAdjustment" Core..=)
-              Core.<$> priceAdjustment,
-            ("taxAdjustment" Core..=) Core.<$> taxAdjustment,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemProduct' smart constructor.
-data OrderLineItemProduct = OrderLineItemProduct
-  { -- | Brand of the item.
-    brand :: (Core.Maybe Core.Text),
-    -- | Condition or state of the item. Acceptable values are: - \"@new@\" - \"@refurbished@\" - \"@used@\"
-    condition :: (Core.Maybe Core.Text),
-    -- | The two-letter ISO 639-1 language code for the item.
-    contentLanguage :: (Core.Maybe Core.Text),
-    -- | Associated fees at order creation time.
-    fees :: (Core.Maybe [OrderLineItemProductFee]),
-    -- | Global Trade Item Number (GTIN) of the item.
-    gtin :: (Core.Maybe Core.Text),
-    -- | The REST ID of the product.
-    id :: (Core.Maybe Core.Text),
-    -- | URL of an image of the item.
-    imageLink :: (Core.Maybe Core.Text),
-    -- | Shared identifier for all variants of the same product.
-    itemGroupId :: (Core.Maybe Core.Text),
-    -- | Manufacturer Part Number (MPN) of the item.
-    mpn :: (Core.Maybe Core.Text),
-    -- | An identifier of the item.
-    offerId :: (Core.Maybe Core.Text),
-    -- | Price of the item.
-    price :: (Core.Maybe Price),
-    -- | URL to the cached image shown to the user when order was placed.
-    shownImage :: (Core.Maybe Core.Text),
-    -- | The CLDR territory code of the target country of the product.
-    targetCountry :: (Core.Maybe Core.Text),
-    -- | The title of the product.
-    title :: (Core.Maybe Core.Text),
-    -- | Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.
-    variantAttributes :: (Core.Maybe [OrderLineItemProductVariantAttribute])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemProduct' with the minimum fields required to make a request.
-newOrderLineItemProduct ::
-  OrderLineItemProduct
-newOrderLineItemProduct =
-  OrderLineItemProduct
-    { brand = Core.Nothing,
-      condition = Core.Nothing,
-      contentLanguage = Core.Nothing,
-      fees = Core.Nothing,
-      gtin = Core.Nothing,
-      id = Core.Nothing,
-      imageLink = Core.Nothing,
-      itemGroupId = Core.Nothing,
-      mpn = Core.Nothing,
-      offerId = Core.Nothing,
-      price = Core.Nothing,
-      shownImage = Core.Nothing,
-      targetCountry = Core.Nothing,
-      title = Core.Nothing,
-      variantAttributes = Core.Nothing
-    }
-
-instance Core.FromJSON OrderLineItemProduct where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemProduct"
-      ( \o ->
-          OrderLineItemProduct
-            Core.<$> (o Core..:? "brand")
-            Core.<*> (o Core..:? "condition")
-            Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> (o Core..:? "fees")
-            Core.<*> (o Core..:? "gtin")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "imageLink")
-            Core.<*> (o Core..:? "itemGroupId")
-            Core.<*> (o Core..:? "mpn")
-            Core.<*> (o Core..:? "offerId")
-            Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "shownImage")
-            Core.<*> (o Core..:? "targetCountry")
-            Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "variantAttributes")
-      )
-
-instance Core.ToJSON OrderLineItemProduct where
-  toJSON OrderLineItemProduct {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("brand" Core..=) Core.<$> brand,
-            ("condition" Core..=) Core.<$> condition,
-            ("contentLanguage" Core..=) Core.<$> contentLanguage,
-            ("fees" Core..=) Core.<$> fees,
-            ("gtin" Core..=) Core.<$> gtin,
-            ("id" Core..=) Core.<$> id,
-            ("imageLink" Core..=) Core.<$> imageLink,
-            ("itemGroupId" Core..=) Core.<$> itemGroupId,
-            ("mpn" Core..=) Core.<$> mpn,
-            ("offerId" Core..=) Core.<$> offerId,
-            ("price" Core..=) Core.<$> price,
-            ("shownImage" Core..=) Core.<$> shownImage,
-            ("targetCountry" Core..=) Core.<$> targetCountry,
-            ("title" Core..=) Core.<$> title,
-            ("variantAttributes" Core..=)
-              Core.<$> variantAttributes
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemProductFee' smart constructor.
-data OrderLineItemProductFee = OrderLineItemProductFee
-  { -- | Amount of the fee.
-    amount :: (Core.Maybe Price),
-    -- | Name of the fee.
-    name :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemProductFee' with the minimum fields required to make a request.
-newOrderLineItemProductFee ::
-  OrderLineItemProductFee
-newOrderLineItemProductFee =
-  OrderLineItemProductFee {amount = Core.Nothing, name = Core.Nothing}
-
-instance Core.FromJSON OrderLineItemProductFee where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemProductFee"
-      ( \o ->
-          OrderLineItemProductFee
-            Core.<$> (o Core..:? "amount") Core.<*> (o Core..:? "name")
-      )
-
-instance Core.ToJSON OrderLineItemProductFee where
-  toJSON OrderLineItemProductFee {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("amount" Core..=) Core.<$> amount,
-            ("name" Core..=) Core.<$> name
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemProductVariantAttribute' smart constructor.
-data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute
-  { -- | The dimension of the variant.
-    dimension :: (Core.Maybe Core.Text),
-    -- | The value for the dimension.
-    value :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemProductVariantAttribute' with the minimum fields required to make a request.
-newOrderLineItemProductVariantAttribute ::
-  OrderLineItemProductVariantAttribute
-newOrderLineItemProductVariantAttribute =
-  OrderLineItemProductVariantAttribute
-    { dimension = Core.Nothing,
-      value = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderLineItemProductVariantAttribute
-  where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemProductVariantAttribute"
-      ( \o ->
-          OrderLineItemProductVariantAttribute
-            Core.<$> (o Core..:? "dimension")
-            Core.<*> (o Core..:? "value")
-      )
-
-instance
-  Core.ToJSON
-    OrderLineItemProductVariantAttribute
-  where
-  toJSON OrderLineItemProductVariantAttribute {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("dimension" Core..=) Core.<$> dimension,
-            ("value" Core..=) Core.<$> value
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemReturnInfo' smart constructor.
-data OrderLineItemReturnInfo = OrderLineItemReturnInfo
-  { -- | Required. How many days later the item can be returned.
-    daysToReturn :: (Core.Maybe Core.Int32),
-    -- | Required. Whether the item is returnable.
-    isReturnable :: (Core.Maybe Core.Bool),
-    -- | Required. URL of the item return policy.
-    policyUrl :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemReturnInfo' with the minimum fields required to make a request.
-newOrderLineItemReturnInfo ::
-  OrderLineItemReturnInfo
-newOrderLineItemReturnInfo =
-  OrderLineItemReturnInfo
-    { daysToReturn = Core.Nothing,
-      isReturnable = Core.Nothing,
-      policyUrl = Core.Nothing
-    }
-
-instance Core.FromJSON OrderLineItemReturnInfo where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemReturnInfo"
-      ( \o ->
-          OrderLineItemReturnInfo
-            Core.<$> (o Core..:? "daysToReturn")
-            Core.<*> (o Core..:? "isReturnable")
-            Core.<*> (o Core..:? "policyUrl")
-      )
-
-instance Core.ToJSON OrderLineItemReturnInfo where
-  toJSON OrderLineItemReturnInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("daysToReturn" Core..=) Core.<$> daysToReturn,
-            ("isReturnable" Core..=) Core.<$> isReturnable,
-            ("policyUrl" Core..=) Core.<$> policyUrl
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemShippingDetails' smart constructor.
-data OrderLineItemShippingDetails = OrderLineItemShippingDetails
-  { -- | Required. The delivery by date, in ISO 8601 format.
-    deliverByDate :: (Core.Maybe Core.Text),
-    -- | Required. Details of the shipping method.
-    method :: (Core.Maybe OrderLineItemShippingDetailsMethod),
-    -- | The promised time in minutes in which the order will be ready for pickup. This only applies to buy-online-pickup-in-store same-day order.
-    pickupPromiseInMinutes :: (Core.Maybe Core.Word32),
-    -- | Required. The ship by date, in ISO 8601 format.
-    shipByDate :: (Core.Maybe Core.Text),
-    -- | Type of shipment. Indicates whether @deliveryDetails@ or @pickupDetails@ is applicable for this shipment. Acceptable values are: - \"@delivery@\" - \"@pickup@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemShippingDetails' with the minimum fields required to make a request.
-newOrderLineItemShippingDetails ::
-  OrderLineItemShippingDetails
-newOrderLineItemShippingDetails =
-  OrderLineItemShippingDetails
-    { deliverByDate = Core.Nothing,
-      method = Core.Nothing,
-      pickupPromiseInMinutes = Core.Nothing,
-      shipByDate = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON OrderLineItemShippingDetails where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemShippingDetails"
-      ( \o ->
-          OrderLineItemShippingDetails
-            Core.<$> (o Core..:? "deliverByDate")
-            Core.<*> (o Core..:? "method")
-            Core.<*> (o Core..:? "pickupPromiseInMinutes")
-            Core.<*> (o Core..:? "shipByDate")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON OrderLineItemShippingDetails where
-  toJSON OrderLineItemShippingDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("deliverByDate" Core..=) Core.<$> deliverByDate,
-            ("method" Core..=) Core.<$> method,
-            ("pickupPromiseInMinutes" Core..=)
-              Core.<$> pickupPromiseInMinutes,
-            ("shipByDate" Core..=) Core.<$> shipByDate,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newOrderLineItemShippingDetailsMethod' smart constructor.
-data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
-  { -- | The carrier for the shipping. Optional. See @shipments[].carrier@ for a list of acceptable values.
-    carrier :: (Core.Maybe Core.Text),
-    -- | Required. Maximum transit time.
-    maxDaysInTransit :: (Core.Maybe Core.Word32),
-    -- | Required. The name of the shipping method.
-    methodName :: (Core.Maybe Core.Text),
-    -- | Required. Minimum transit time.
-    minDaysInTransit :: (Core.Maybe Core.Word32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderLineItemShippingDetailsMethod' with the minimum fields required to make a request.
-newOrderLineItemShippingDetailsMethod ::
-  OrderLineItemShippingDetailsMethod
-newOrderLineItemShippingDetailsMethod =
-  OrderLineItemShippingDetailsMethod
-    { carrier = Core.Nothing,
-      maxDaysInTransit = Core.Nothing,
-      methodName = Core.Nothing,
-      minDaysInTransit = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderLineItemShippingDetailsMethod
-  where
-  parseJSON =
-    Core.withObject
-      "OrderLineItemShippingDetailsMethod"
-      ( \o ->
-          OrderLineItemShippingDetailsMethod
-            Core.<$> (o Core..:? "carrier")
-            Core.<*> (o Core..:? "maxDaysInTransit")
-            Core.<*> (o Core..:? "methodName")
-            Core.<*> (o Core..:? "minDaysInTransit")
-      )
-
-instance
-  Core.ToJSON
-    OrderLineItemShippingDetailsMethod
-  where
-  toJSON OrderLineItemShippingDetailsMethod {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrier" Core..=) Core.<$> carrier,
-            ("maxDaysInTransit" Core..=)
-              Core.<$> maxDaysInTransit,
-            ("methodName" Core..=) Core.<$> methodName,
-            ("minDaysInTransit" Core..=)
-              Core.<$> minDaysInTransit
-          ]
-      )
-
---
--- /See:/ 'newOrderMerchantProvidedAnnotation' smart constructor.
-data OrderMerchantProvidedAnnotation = OrderMerchantProvidedAnnotation
-  { -- | Key for additional merchant provided (as key-value pairs) annotation about the line item.
-    key :: (Core.Maybe Core.Text),
-    -- | Value for additional merchant provided (as key-value pairs) annotation about the line item.
-    value :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderMerchantProvidedAnnotation' with the minimum fields required to make a request.
-newOrderMerchantProvidedAnnotation ::
-  OrderMerchantProvidedAnnotation
-newOrderMerchantProvidedAnnotation =
-  OrderMerchantProvidedAnnotation {key = Core.Nothing, value = Core.Nothing}
-
-instance
-  Core.FromJSON
-    OrderMerchantProvidedAnnotation
-  where
-  parseJSON =
-    Core.withObject
-      "OrderMerchantProvidedAnnotation"
-      ( \o ->
-          OrderMerchantProvidedAnnotation
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
-      )
-
-instance Core.ToJSON OrderMerchantProvidedAnnotation where
-  toJSON OrderMerchantProvidedAnnotation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
-      )
-
---
--- /See:/ 'newOrderOrderAnnotation' smart constructor.
-data OrderOrderAnnotation = OrderOrderAnnotation
-  { -- | Key for additional google provided (as key-value pairs) annotation.
-    key :: (Core.Maybe Core.Text),
-    -- | Value for additional google provided (as key-value pairs) annotation.
-    value :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderOrderAnnotation' with the minimum fields required to make a request.
-newOrderOrderAnnotation ::
-  OrderOrderAnnotation
-newOrderOrderAnnotation =
-  OrderOrderAnnotation {key = Core.Nothing, value = Core.Nothing}
-
-instance Core.FromJSON OrderOrderAnnotation where
-  parseJSON =
-    Core.withObject
-      "OrderOrderAnnotation"
-      ( \o ->
-          OrderOrderAnnotation
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
-      )
-
-instance Core.ToJSON OrderOrderAnnotation where
-  toJSON OrderOrderAnnotation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
-      )
-
---
--- /See:/ 'newOrderPickupDetails' smart constructor.
-data OrderPickupDetails = OrderPickupDetails
-  { -- | Address of the pickup location where the shipment should be sent. Note that @recipientName@ in the address is the name of the business at the pickup location.
-    address :: (Core.Maybe OrderAddress),
-    -- | Collectors authorized to pick up shipment from the pickup location.
-    collectors :: (Core.Maybe [OrderPickupDetailsCollector]),
-    -- | ID of the pickup location.
-    locationId :: (Core.Maybe Core.Text),
-    -- | The pickup type of this order. Acceptable values are: - \"@merchantStore@\" - \"@merchantStoreCurbside@\" - \"@merchantStoreLocker@\" - \"@thirdPartyPickupPoint@\" - \"@thirdPartyLocker@\"
-    pickupType :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderPickupDetails' with the minimum fields required to make a request.
-newOrderPickupDetails ::
-  OrderPickupDetails
-newOrderPickupDetails =
-  OrderPickupDetails
-    { address = Core.Nothing,
-      collectors = Core.Nothing,
-      locationId = Core.Nothing,
-      pickupType = Core.Nothing
-    }
-
-instance Core.FromJSON OrderPickupDetails where
-  parseJSON =
-    Core.withObject
-      "OrderPickupDetails"
-      ( \o ->
-          OrderPickupDetails
-            Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "collectors")
-            Core.<*> (o Core..:? "locationId")
-            Core.<*> (o Core..:? "pickupType")
-      )
-
-instance Core.ToJSON OrderPickupDetails where
-  toJSON OrderPickupDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("address" Core..=) Core.<$> address,
-            ("collectors" Core..=) Core.<$> collectors,
-            ("locationId" Core..=) Core.<$> locationId,
-            ("pickupType" Core..=) Core.<$> pickupType
-          ]
-      )
-
---
--- /See:/ 'newOrderPickupDetailsCollector' smart constructor.
-data OrderPickupDetailsCollector = OrderPickupDetailsCollector
-  { -- | Name of the person picking up the shipment.
-    name :: (Core.Maybe Core.Text),
-    -- | Phone number of the person picking up the shipment.
-    phoneNumber :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderPickupDetailsCollector' with the minimum fields required to make a request.
-newOrderPickupDetailsCollector ::
-  OrderPickupDetailsCollector
-newOrderPickupDetailsCollector =
-  OrderPickupDetailsCollector {name = Core.Nothing, phoneNumber = Core.Nothing}
-
-instance Core.FromJSON OrderPickupDetailsCollector where
-  parseJSON =
-    Core.withObject
-      "OrderPickupDetailsCollector"
-      ( \o ->
-          OrderPickupDetailsCollector
-            Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "phoneNumber")
-      )
-
-instance Core.ToJSON OrderPickupDetailsCollector where
-  toJSON OrderPickupDetailsCollector {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("phoneNumber" Core..=) Core.<$> phoneNumber
-          ]
-      )
-
---
--- /See:/ 'newOrderPromotion' smart constructor.
-data OrderPromotion = OrderPromotion
-  { -- | Items that this promotion may be applied to. If empty, there are no restrictions on applicable items and quantity. This field will also be empty for shipping promotions because shipping is not tied to any specific item.
-    applicableItems :: (Core.Maybe [OrderPromotionItem]),
-    -- | Items that this promotion have been applied to. Do not provide for @orders.createtestorder@. This field will be empty for shipping promotions because shipping is not tied to any specific item.
-    appliedItems :: (Core.Maybe [OrderPromotionItem]),
-    -- | Promotion end time in ISO 8601 format. Date, time, and offset required, for example, \"2020-01-02T09:00:00+01:00\" or \"2020-01-02T09:00:00Z\".
-    endTime :: (Core.Maybe Core.Text),
-    -- | Required. The party funding the promotion. Only @merchant@ is supported for @orders.createtestorder@. Acceptable values are: - \"@google@\" - \"@merchant@\"
-    funder :: (Core.Maybe Core.Text),
-    -- | Required. This field is used to identify promotions within merchants\' own systems.
-    merchantPromotionId :: (Core.Maybe Core.Text),
-    -- | Estimated discount applied to price. Amount is pre-tax or post-tax depending on location of order.
-    priceValue :: (Core.Maybe Price),
-    -- | A short title of the promotion to be shown on the checkout page. Do not provide for @orders.createtestorder@.
-    shortTitle :: (Core.Maybe Core.Text),
-    -- | Promotion start time in ISO 8601 format. Date, time, and offset required, for example, \"2020-01-02T09:00:00+01:00\" or \"2020-01-02T09:00:00Z\".
-    startTime :: (Core.Maybe Core.Text),
-    -- | Required. The category of the promotion. Only @moneyOff@ is supported for @orders.createtestorder@. Acceptable values are: - \"@buyMGetMoneyOff@\" - \"@buyMGetNMoneyOff@\" - \"@buyMGetNPercentOff@\" - \"@buyMGetPercentOff@\" - \"@freeGift@\" - \"@freeGiftWithItemId@\" - \"@freeGiftWithValue@\" - \"@freeShippingOvernight@\" - \"@freeShippingStandard@\" - \"@freeShippingTwoDay@\" - \"@moneyOff@\" - \"@percentOff@\" - \"@rewardPoints@\" - \"@salePrice@\"
-    subtype :: (Core.Maybe Core.Text),
-    -- | Estimated discount applied to tax (if allowed by law). Do not provide for @orders.createtestorder@.
-    taxValue :: (Core.Maybe Price),
-    -- | Required. The title of the promotion.
-    title :: (Core.Maybe Core.Text),
-    -- | Required. The scope of the promotion. Only @product@ is supported for @orders.createtestorder@. Acceptable values are: - \"@product@\" - \"@shipping@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderPromotion' with the minimum fields required to make a request.
-newOrderPromotion ::
-  OrderPromotion
-newOrderPromotion =
-  OrderPromotion
-    { applicableItems = Core.Nothing,
-      appliedItems = Core.Nothing,
-      endTime = Core.Nothing,
-      funder = Core.Nothing,
-      merchantPromotionId = Core.Nothing,
-      priceValue = Core.Nothing,
-      shortTitle = Core.Nothing,
-      startTime = Core.Nothing,
-      subtype = Core.Nothing,
-      taxValue = Core.Nothing,
-      title = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON OrderPromotion where
-  parseJSON =
-    Core.withObject
-      "OrderPromotion"
-      ( \o ->
-          OrderPromotion
-            Core.<$> (o Core..:? "applicableItems")
-            Core.<*> (o Core..:? "appliedItems")
-            Core.<*> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "funder")
-            Core.<*> (o Core..:? "merchantPromotionId")
-            Core.<*> (o Core..:? "priceValue")
-            Core.<*> (o Core..:? "shortTitle")
-            Core.<*> (o Core..:? "startTime")
-            Core.<*> (o Core..:? "subtype")
-            Core.<*> (o Core..:? "taxValue")
-            Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON OrderPromotion where
-  toJSON OrderPromotion {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("applicableItems" Core..=)
-              Core.<$> applicableItems,
-            ("appliedItems" Core..=) Core.<$> appliedItems,
-            ("endTime" Core..=) Core.<$> endTime,
-            ("funder" Core..=) Core.<$> funder,
-            ("merchantPromotionId" Core..=)
-              Core.<$> merchantPromotionId,
-            ("priceValue" Core..=) Core.<$> priceValue,
-            ("shortTitle" Core..=) Core.<$> shortTitle,
-            ("startTime" Core..=) Core.<$> startTime,
-            ("subtype" Core..=) Core.<$> subtype,
-            ("taxValue" Core..=) Core.<$> taxValue,
-            ("title" Core..=) Core.<$> title,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newOrderPromotionItem' smart constructor.
-data OrderPromotionItem = OrderPromotionItem
-  { -- | The line item ID of a product. Do not provide for @orders.createtestorder@.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | Required. Offer ID of a product. Only for @orders.createtestorder@.
-    offerId :: (Core.Maybe Core.Text),
-    -- | @orders.createtestorder@.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity of the associated product. Do not provide for @orders.createtestorder@.
-    quantity :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderPromotionItem' with the minimum fields required to make a request.
-newOrderPromotionItem ::
-  OrderPromotionItem
-newOrderPromotionItem =
-  OrderPromotionItem
-    { lineItemId = Core.Nothing,
-      offerId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing
-    }
-
-instance Core.FromJSON OrderPromotionItem where
-  parseJSON =
-    Core.withObject
-      "OrderPromotionItem"
-      ( \o ->
-          OrderPromotionItem
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "offerId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-      )
-
-instance Core.ToJSON OrderPromotionItem where
-  toJSON OrderPromotionItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("offerId" Core..=) Core.<$> offerId,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity
-          ]
-      )
-
---
--- /See:/ 'newOrderRefund' smart constructor.
-data OrderRefund = OrderRefund
-  { -- | The actor that created the refund. Acceptable values are: - \"@customer@\" - \"@googleBot@\" - \"@googleCustomerService@\" - \"@googlePayments@\" - \"@googleSabre@\" - \"@merchant@\"
-    actor :: (Core.Maybe Core.Text),
-    -- | The amount that is refunded.
-    amount :: (Core.Maybe Price),
-    -- | Date on which the item has been created, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | The reason for the refund. Acceptable values are: - \"@adjustment@\" - \"@autoPostInternal@\" - \"@autoPostInvalidBillingAddress@\" - \"@autoPostNoInventory@\" - \"@autoPostPriceError@\" - \"@autoPostUndeliverableShippingAddress@\" - \"@couponAbuse@\" - \"@courtesyAdjustment@\" - \"@customerCanceled@\" - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@customerSupportRequested@\" - \"@deliveredLateByCarrier@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@failToPushOrderGoogleError@\" - \"@failToPushOrderMerchantError@\" - \"@failToPushOrderMerchantFulfillmentError@\" - \"@failToPushOrderToMerchant@\" - \"@failToPushOrderToMerchantOutOfStock@\" - \"@feeAdjustment@\" - \"@invalidCoupon@\" - \"@lateShipmentCredit@\" - \"@malformedShippingAddress@\" - \"@merchantDidNotShipOnTime@\" - \"@noInventory@\" - \"@orderTimeout@\" - \"@other@\" - \"@paymentAbuse@\" - \"@paymentDeclined@\" - \"@priceAdjustment@\" - \"@priceError@\" - \"@productArrivedDamaged@\" -
-    -- \"@productNotAsDescribed@\" - \"@promoReallocation@\" - \"@qualityNotAsExpected@\" - \"@returnRefundAbuse@\" - \"@shippingCostAdjustment@\" - \"@shippingPriceError@\" - \"@taxAdjustment@\" - \"@taxError@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderRefund' with the minimum fields required to make a request.
-newOrderRefund ::
-  OrderRefund
-newOrderRefund =
-  OrderRefund
-    { actor = Core.Nothing,
-      amount = Core.Nothing,
-      creationDate = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrderRefund where
-  parseJSON =
-    Core.withObject
-      "OrderRefund"
-      ( \o ->
-          OrderRefund
-            Core.<$> (o Core..:? "actor")
-            Core.<*> (o Core..:? "amount")
-            Core.<*> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrderRefund where
-  toJSON OrderRefund {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("actor" Core..=) Core.<$> actor,
-            ("amount" Core..=) Core.<$> amount,
-            ("creationDate" Core..=) Core.<$> creationDate,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
--- | Order disbursement. All methods require the payment analyst role.
---
--- /See:/ 'newOrderReportDisbursement' smart constructor.
-data OrderReportDisbursement = OrderReportDisbursement
-  { -- | The disbursement amount.
-    disbursementAmount :: (Core.Maybe Price),
-    -- | The disbursement date, in ISO 8601 format.
-    disbursementCreationDate :: (Core.Maybe Core.Text),
-    -- | The date the disbursement was initiated, in ISO 8601 format.
-    disbursementDate :: (Core.Maybe Core.Text),
-    -- | The ID of the disbursement.
-    disbursementId :: (Core.Maybe Core.Text),
-    -- | The ID of the managing account.
-    merchantId :: (Core.Maybe Core.Word64)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderReportDisbursement' with the minimum fields required to make a request.
-newOrderReportDisbursement ::
-  OrderReportDisbursement
-newOrderReportDisbursement =
-  OrderReportDisbursement
-    { disbursementAmount = Core.Nothing,
-      disbursementCreationDate = Core.Nothing,
-      disbursementDate = Core.Nothing,
-      disbursementId = Core.Nothing,
-      merchantId = Core.Nothing
-    }
-
-instance Core.FromJSON OrderReportDisbursement where
-  parseJSON =
-    Core.withObject
-      "OrderReportDisbursement"
-      ( \o ->
-          OrderReportDisbursement
-            Core.<$> (o Core..:? "disbursementAmount")
-            Core.<*> (o Core..:? "disbursementCreationDate")
-            Core.<*> (o Core..:? "disbursementDate")
-            Core.<*> (o Core..:? "disbursementId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-      )
-
-instance Core.ToJSON OrderReportDisbursement where
-  toJSON OrderReportDisbursement {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("disbursementAmount" Core..=)
-              Core.<$> disbursementAmount,
-            ("disbursementCreationDate" Core..=)
-              Core.<$> disbursementCreationDate,
-            ("disbursementDate" Core..=)
-              Core.<$> disbursementDate,
-            ("disbursementId" Core..=) Core.<$> disbursementId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId
-          ]
-      )
-
---
--- /See:/ 'newOrderReportTransaction' smart constructor.
-data OrderReportTransaction = OrderReportTransaction
-  { -- | The disbursement amount.
-    disbursementAmount :: (Core.Maybe Price),
-    -- | The date the disbursement was created, in ISO 8601 format.
-    disbursementCreationDate :: (Core.Maybe Core.Text),
-    -- | The date the disbursement was initiated, in ISO 8601 format.
-    disbursementDate :: (Core.Maybe Core.Text),
-    -- | The ID of the disbursement.
-    disbursementId :: (Core.Maybe Core.Text),
-    -- | The ID of the managing account.
-    merchantId :: (Core.Maybe Core.Word64),
-    -- | Merchant-provided ID of the order.
-    merchantOrderId :: (Core.Maybe Core.Text),
-    -- | The ID of the order.
-    orderId :: (Core.Maybe Core.Text),
-    -- | Total amount for the items.
-    productAmount :: (Core.Maybe ProductAmount),
-    -- | The date of the transaction, in ISO 8601 format.
-    transactionDate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderReportTransaction' with the minimum fields required to make a request.
-newOrderReportTransaction ::
-  OrderReportTransaction
-newOrderReportTransaction =
-  OrderReportTransaction
-    { disbursementAmount = Core.Nothing,
-      disbursementCreationDate = Core.Nothing,
-      disbursementDate = Core.Nothing,
-      disbursementId = Core.Nothing,
-      merchantId = Core.Nothing,
-      merchantOrderId = Core.Nothing,
-      orderId = Core.Nothing,
-      productAmount = Core.Nothing,
-      transactionDate = Core.Nothing
-    }
-
-instance Core.FromJSON OrderReportTransaction where
-  parseJSON =
-    Core.withObject
-      "OrderReportTransaction"
-      ( \o ->
-          OrderReportTransaction
-            Core.<$> (o Core..:? "disbursementAmount")
-            Core.<*> (o Core..:? "disbursementCreationDate")
-            Core.<*> (o Core..:? "disbursementDate")
-            Core.<*> (o Core..:? "disbursementId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "merchantOrderId")
-            Core.<*> (o Core..:? "orderId")
-            Core.<*> (o Core..:? "productAmount")
-            Core.<*> (o Core..:? "transactionDate")
-      )
-
-instance Core.ToJSON OrderReportTransaction where
-  toJSON OrderReportTransaction {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("disbursementAmount" Core..=)
-              Core.<$> disbursementAmount,
-            ("disbursementCreationDate" Core..=)
-              Core.<$> disbursementCreationDate,
-            ("disbursementDate" Core..=)
-              Core.<$> disbursementDate,
-            ("disbursementId" Core..=) Core.<$> disbursementId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
-            ("merchantOrderId" Core..=) Core.<$> merchantOrderId,
-            ("orderId" Core..=) Core.<$> orderId,
-            ("productAmount" Core..=) Core.<$> productAmount,
-            ("transactionDate" Core..=)
-              Core.<$> transactionDate
-          ]
-      )
-
---
--- /See:/ 'newOrderReturn' smart constructor.
-data OrderReturn = OrderReturn
-  { -- | The actor that created the refund. Acceptable values are: - \"@customer@\" - \"@googleBot@\" - \"@googleCustomerService@\" - \"@googlePayments@\" - \"@googleSabre@\" - \"@merchant@\"
-    actor :: (Core.Maybe Core.Text),
-    -- | Date on which the item has been created, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | Quantity that is returned.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the return. Acceptable values are: - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@other@\" - \"@productArrivedDamaged@\" - \"@productNotAsDescribed@\" - \"@qualityNotAsExpected@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderReturn' with the minimum fields required to make a request.
-newOrderReturn ::
-  OrderReturn
-newOrderReturn =
-  OrderReturn
-    { actor = Core.Nothing,
-      creationDate = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrderReturn where
-  parseJSON =
-    Core.withObject
-      "OrderReturn"
-      ( \o ->
-          OrderReturn
-            Core.<$> (o Core..:? "actor")
-            Core.<*> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrderReturn where
-  toJSON OrderReturn {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("actor" Core..=) Core.<$> actor,
-            ("creationDate" Core..=) Core.<$> creationDate,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrderShipment' smart constructor.
-data OrderShipment = OrderShipment
-  { -- | The carrier handling the shipment. For supported carriers, Google includes the carrier name and tracking URL in emails to customers. For select supported carriers, Google also automatically updates the shipment status based on the provided shipment ID. /Note:/ You can also use unsupported carriers, but emails to customers won\'t include the carrier name or tracking URL, and there will be no automatic order status updates. Supported carriers for \"US\" are: - \"@ups@\" (United Parcel Service) /automatic status updates/ - \"@usps@\" (United States Postal Service) /automatic status updates/ - \"@fedex@\" (FedEx) /automatic status updates / - \"@dhl@\" (DHL eCommerce) /automatic status updates/ (US only) - \"@ontrac@\" (OnTrac) /automatic status updates / - \"@dhl express@\" (DHL Express) - \"@deliv@\" (Deliv) - \"@dynamex@\" (TForce) - \"@lasership@\" (LaserShip) - \"@mpx@\" (Military Parcel Xpress) - \"@uds@\" (United Delivery Service) - \"@efw@\" (Estes Forwarding Worldwide) - \"@jd logistics@\" (JD Logistics)
-    -- - \"@yunexpress@\" (YunExpress) - \"@china post@\" (China Post) - \"@china ems@\" (China Post Express Mail Service) - \"@singapore post@\" (Singapore Post) - \"@pos malaysia@\" (Pos Malaysia) - \"@postnl@\" (PostNL) - \"@ptt@\" (PTT Turkish Post) - \"@eub@\" (ePacket) - \"@chukou1@\" (Chukou1 Logistics) - \"@bestex@\" (Best Express) - \"@canada post@\" (Canada Post) - \"@purolator@\" (Purolator) - \"@canpar@\" (Canpar) - \"@india post@\" (India Post) - \"@blue dart@\" (Blue Dart) - \"@delhivery@\" (Delhivery) - \"@dtdc@\" (DTDC) - \"@tpc india@\" (TPC India) - \"@lso@\" (Lone Star Overnight) - \"@tww@\" (Team Worldwide) - \"@deliver-it@\" (Deliver-IT) - \"@cdl last mile@\" (CDL Last Mile) Supported carriers for FR are: - \"@la poste@\" (La Poste) /automatic status updates / - \"@colissimo@\" (Colissimo by La Poste) /automatic status updates/ - \"@ups@\" (United Parcel Service) /automatic status updates / - \"@chronopost@\" (Chronopost by La Poste) - \"@gls@\" (General Logistics Systems France) - \"@dpd@\"
-    -- (DPD Group by GeoPost) - \"@bpost@\" (Belgian Post Group) - \"@colis prive@\" (Colis Privé) - \"@boxtal@\" (Boxtal) - \"@geodis@\" (GEODIS) - \"@tnt@\" (TNT) - \"@db schenker@\" (DB Schenker) - \"@aramex@\" (Aramex)
-    carrier :: (Core.Maybe Core.Text),
-    -- | Date on which the shipment has been created, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | Date on which the shipment has been delivered, in ISO 8601 format. Present only if @status@ is @delivered@
-    deliveryDate :: (Core.Maybe Core.Text),
-    -- | The ID of the shipment.
-    id :: (Core.Maybe Core.Text),
-    -- | The line items that are shipped.
-    lineItems :: (Core.Maybe [OrderShipmentLineItemShipment]),
-    -- | Delivery details of the shipment if scheduling is needed.
-    scheduledDeliveryDetails :: (Core.Maybe OrderShipmentScheduledDeliveryDetails),
-    -- | The shipment group ID of the shipment. This is set in shiplineitems request.
-    shipmentGroupId :: (Core.Maybe Core.Text),
-    -- | The status of the shipment. Acceptable values are: - \"@delivered@\" - \"@readyForPickup@\" - \"@shipped@\" - \"@undeliverable@\"
-    status :: (Core.Maybe Core.Text),
-    -- | The tracking ID for the shipment.
-    trackingId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderShipment' with the minimum fields required to make a request.
-newOrderShipment ::
-  OrderShipment
-newOrderShipment =
-  OrderShipment
-    { carrier = Core.Nothing,
-      creationDate = Core.Nothing,
-      deliveryDate = Core.Nothing,
-      id = Core.Nothing,
-      lineItems = Core.Nothing,
-      scheduledDeliveryDetails = Core.Nothing,
-      shipmentGroupId = Core.Nothing,
-      status = Core.Nothing,
-      trackingId = Core.Nothing
-    }
-
-instance Core.FromJSON OrderShipment where
-  parseJSON =
-    Core.withObject
-      "OrderShipment"
-      ( \o ->
-          OrderShipment
-            Core.<$> (o Core..:? "carrier")
-            Core.<*> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "deliveryDate")
-            Core.<*> (o Core..:? "id")
-            Core.<*> (o Core..:? "lineItems")
-            Core.<*> (o Core..:? "scheduledDeliveryDetails")
-            Core.<*> (o Core..:? "shipmentGroupId")
-            Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "trackingId")
-      )
-
-instance Core.ToJSON OrderShipment where
-  toJSON OrderShipment {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrier" Core..=) Core.<$> carrier,
-            ("creationDate" Core..=) Core.<$> creationDate,
-            ("deliveryDate" Core..=) Core.<$> deliveryDate,
-            ("id" Core..=) Core.<$> id,
-            ("lineItems" Core..=) Core.<$> lineItems,
-            ("scheduledDeliveryDetails" Core..=)
-              Core.<$> scheduledDeliveryDetails,
-            ("shipmentGroupId" Core..=) Core.<$> shipmentGroupId,
-            ("status" Core..=) Core.<$> status,
-            ("trackingId" Core..=) Core.<$> trackingId
-          ]
-      )
-
---
--- /See:/ 'newOrderShipmentLineItemShipment' smart constructor.
-data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
-  { -- | The ID of the line item that is shipped. This value is assigned by Google when an order is created. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity that is shipped.
-    quantity :: (Core.Maybe Core.Word32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderShipmentLineItemShipment' with the minimum fields required to make a request.
-newOrderShipmentLineItemShipment ::
-  OrderShipmentLineItemShipment
-newOrderShipmentLineItemShipment =
-  OrderShipmentLineItemShipment
-    { lineItemId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing
-    }
-
-instance Core.FromJSON OrderShipmentLineItemShipment where
-  parseJSON =
-    Core.withObject
-      "OrderShipmentLineItemShipment"
-      ( \o ->
-          OrderShipmentLineItemShipment
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-      )
-
-instance Core.ToJSON OrderShipmentLineItemShipment where
-  toJSON OrderShipmentLineItemShipment {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity
-          ]
-      )
-
---
--- /See:/ 'newOrderShipmentScheduledDeliveryDetails' smart constructor.
-data OrderShipmentScheduledDeliveryDetails = OrderShipmentScheduledDeliveryDetails
-  { -- | The phone number of the carrier fulfilling the delivery. The phone number is formatted as the international notation in ITU-T Recommendation E.123 (for example, \"+41 44 668 1800\").
-    carrierPhoneNumber :: (Core.Maybe Core.Text),
-    -- | The date a shipment is scheduled for delivery, in ISO 8601 format.
-    scheduledDate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderShipmentScheduledDeliveryDetails' with the minimum fields required to make a request.
-newOrderShipmentScheduledDeliveryDetails ::
-  OrderShipmentScheduledDeliveryDetails
-newOrderShipmentScheduledDeliveryDetails =
-  OrderShipmentScheduledDeliveryDetails
-    { carrierPhoneNumber = Core.Nothing,
-      scheduledDate = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderShipmentScheduledDeliveryDetails
-  where
-  parseJSON =
-    Core.withObject
-      "OrderShipmentScheduledDeliveryDetails"
-      ( \o ->
-          OrderShipmentScheduledDeliveryDetails
-            Core.<$> (o Core..:? "carrierPhoneNumber")
-            Core.<*> (o Core..:? "scheduledDate")
-      )
-
-instance
-  Core.ToJSON
-    OrderShipmentScheduledDeliveryDetails
-  where
-  toJSON OrderShipmentScheduledDeliveryDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrierPhoneNumber" Core..=)
-              Core.<$> carrierPhoneNumber,
-            ("scheduledDate" Core..=) Core.<$> scheduledDate
           ]
       )
 
@@ -11358,12 +9725,11 @@ instance Core.FromJSON OrderTrackingSignal where
             Core.<*> (o Core..:? "deliveryPostalCode")
             Core.<*> (o Core..:? "deliveryRegionCode")
             Core.<*> (o Core..:? "lineItems")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "orderCreatedTime")
             Core.<*> (o Core..:? "orderId")
-            Core.<*> ( o Core..:? "orderTrackingSignalId"
+            Core.<*> ( o
+                         Core..:? "orderTrackingSignalId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "shipmentLineItemMapping")
@@ -11374,19 +9740,15 @@ instance Core.ToJSON OrderTrackingSignal where
   toJSON OrderTrackingSignal {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerShippingFee" Core..=)
-              Core.<$> customerShippingFee,
-            ("deliveryPostalCode" Core..=)
-              Core.<$> deliveryPostalCode,
-            ("deliveryRegionCode" Core..=)
-              Core.<$> deliveryRegionCode,
+          [ ("customerShippingFee" Core..=) Core.<$> customerShippingFee,
+            ("deliveryPostalCode" Core..=) Core.<$> deliveryPostalCode,
+            ("deliveryRegionCode" Core..=) Core.<$> deliveryRegionCode,
             ("lineItems" Core..=) Core.<$> lineItems,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
-            ("orderCreatedTime" Core..=)
-              Core.<$> orderCreatedTime,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
+            ("orderCreatedTime" Core..=) Core.<$> orderCreatedTime,
             ("orderId" Core..=) Core.<$> orderId,
-            ("orderTrackingSignalId" Core..=) Core.. Core.AsText
+            ("orderTrackingSignalId" Core..=)
+              Core.. Core.AsText
               Core.<$> orderTrackingSignalId,
             ("shipmentLineItemMapping" Core..=)
               Core.<$> shipmentLineItemMapping,
@@ -11438,10 +9800,7 @@ newOrderTrackingSignalLineItemDetails =
       upc = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    OrderTrackingSignalLineItemDetails
-  where
+instance Core.FromJSON OrderTrackingSignalLineItemDetails where
   parseJSON =
     Core.withObject
       "OrderTrackingSignalLineItemDetails"
@@ -11454,17 +9813,12 @@ instance
             Core.<*> (o Core..:? "productDescription")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productTitle")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "sku")
             Core.<*> (o Core..:? "upc")
       )
 
-instance
-  Core.ToJSON
-    OrderTrackingSignalLineItemDetails
-  where
+instance Core.ToJSON OrderTrackingSignalLineItemDetails where
   toJSON OrderTrackingSignalLineItemDetails {..} =
     Core.object
       ( Core.catMaybes
@@ -11472,12 +9826,10 @@ instance
             ("gtin" Core..=) Core.<$> gtin,
             ("lineItemId" Core..=) Core.<$> lineItemId,
             ("mpn" Core..=) Core.<$> mpn,
-            ("productDescription" Core..=)
-              Core.<$> productDescription,
+            ("productDescription" Core..=) Core.<$> productDescription,
             ("productId" Core..=) Core.<$> productId,
             ("productTitle" Core..=) Core.<$> productTitle,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("sku" Core..=) Core.<$> sku,
             ("upc" Core..=) Core.<$> upc
           ]
@@ -11501,37 +9853,29 @@ newOrderTrackingSignalShipmentLineItemMapping ::
   OrderTrackingSignalShipmentLineItemMapping
 newOrderTrackingSignalShipmentLineItemMapping =
   OrderTrackingSignalShipmentLineItemMapping
-    { lineItemId = Core.Nothing,
+    { lineItemId =
+        Core.Nothing,
       quantity = Core.Nothing,
       shipmentId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    OrderTrackingSignalShipmentLineItemMapping
-  where
+instance Core.FromJSON OrderTrackingSignalShipmentLineItemMapping where
   parseJSON =
     Core.withObject
       "OrderTrackingSignalShipmentLineItemMapping"
       ( \o ->
           OrderTrackingSignalShipmentLineItemMapping
             Core.<$> (o Core..:? "lineItemId")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "shipmentId")
       )
 
-instance
-  Core.ToJSON
-    OrderTrackingSignalShipmentLineItemMapping
-  where
+instance Core.ToJSON OrderTrackingSignalShipmentLineItemMapping where
   toJSON OrderTrackingSignalShipmentLineItemMapping {..} =
     Core.object
       ( Core.catMaybes
           [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("shipmentId" Core..=) Core.<$> shipmentId
           ]
       )
@@ -11570,7 +9914,8 @@ newOrderTrackingSignalShippingInfo ::
   OrderTrackingSignalShippingInfo
 newOrderTrackingSignalShippingInfo =
   OrderTrackingSignalShippingInfo
-    { actualDeliveryTime = Core.Nothing,
+    { actualDeliveryTime =
+        Core.Nothing,
       carrierName = Core.Nothing,
       carrierServiceName = Core.Nothing,
       earliestDeliveryPromiseTime = Core.Nothing,
@@ -11583,10 +9928,7 @@ newOrderTrackingSignalShippingInfo =
       trackingId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    OrderTrackingSignalShippingInfo
-  where
+instance Core.FromJSON OrderTrackingSignalShippingInfo where
   parseJSON =
     Core.withObject
       "OrderTrackingSignalShippingInfo"
@@ -11609,2861 +9951,21 @@ instance Core.ToJSON OrderTrackingSignalShippingInfo where
   toJSON OrderTrackingSignalShippingInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("actualDeliveryTime" Core..=)
-              Core.<$> actualDeliveryTime,
+          [ ("actualDeliveryTime" Core..=) Core.<$> actualDeliveryTime,
             ("carrierName" Core..=) Core.<$> carrierName,
-            ("carrierServiceName" Core..=)
-              Core.<$> carrierServiceName,
+            ("carrierServiceName" Core..=) Core.<$> carrierServiceName,
             ("earliestDeliveryPromiseTime" Core..=)
               Core.<$> earliestDeliveryPromiseTime,
             ("latestDeliveryPromiseTime" Core..=)
               Core.<$> latestDeliveryPromiseTime,
-            ("originPostalCode" Core..=)
-              Core.<$> originPostalCode,
-            ("originRegionCode" Core..=)
-              Core.<$> originRegionCode,
+            ("originPostalCode" Core..=) Core.<$> originPostalCode,
+            ("originRegionCode" Core..=) Core.<$> originRegionCode,
             ("shipmentId" Core..=) Core.<$> shipmentId,
             ("shippedTime" Core..=) Core.<$> shippedTime,
             ("shippingStatus" Core..=) Core.<$> shippingStatus,
             ("trackingId" Core..=) Core.<$> trackingId
           ]
       )
-
---
--- /See:/ 'newOrderinvoicesCreateChargeInvoiceRequest' smart constructor.
-data OrderinvoicesCreateChargeInvoiceRequest = OrderinvoicesCreateChargeInvoiceRequest
-  { -- | [required] The ID of the invoice.
-    invoiceId :: (Core.Maybe Core.Text),
-    -- | [required] Invoice summary.
-    invoiceSummary :: (Core.Maybe InvoiceSummary),
-    -- | [required] Invoice details per line item.
-    lineItemInvoices :: (Core.Maybe [ShipmentInvoiceLineItemInvoice]),
-    -- | [required] The ID of the operation, unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | [required] ID of the shipment group. It is assigned by the merchant in the @shipLineItems@ method and is used to group multiple line items that have the same kind of shipping charges.
-    shipmentGroupId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCreateChargeInvoiceRequest' with the minimum fields required to make a request.
-newOrderinvoicesCreateChargeInvoiceRequest ::
-  OrderinvoicesCreateChargeInvoiceRequest
-newOrderinvoicesCreateChargeInvoiceRequest =
-  OrderinvoicesCreateChargeInvoiceRequest
-    { invoiceId = Core.Nothing,
-      invoiceSummary = Core.Nothing,
-      lineItemInvoices = Core.Nothing,
-      operationId = Core.Nothing,
-      shipmentGroupId = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCreateChargeInvoiceRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCreateChargeInvoiceRequest"
-      ( \o ->
-          OrderinvoicesCreateChargeInvoiceRequest
-            Core.<$> (o Core..:? "invoiceId")
-            Core.<*> (o Core..:? "invoiceSummary")
-            Core.<*> (o Core..:? "lineItemInvoices")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "shipmentGroupId")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCreateChargeInvoiceRequest
-  where
-  toJSON OrderinvoicesCreateChargeInvoiceRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("invoiceId" Core..=) Core.<$> invoiceId,
-            ("invoiceSummary" Core..=) Core.<$> invoiceSummary,
-            ("lineItemInvoices" Core..=)
-              Core.<$> lineItemInvoices,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("shipmentGroupId" Core..=)
-              Core.<$> shipmentGroupId
-          ]
-      )
-
---
--- /See:/ 'newOrderinvoicesCreateChargeInvoiceResponse' smart constructor.
-data OrderinvoicesCreateChargeInvoiceResponse = OrderinvoicesCreateChargeInvoiceResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderinvoicesCreateChargeInvoiceResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCreateChargeInvoiceResponse' with the minimum fields required to make a request.
-newOrderinvoicesCreateChargeInvoiceResponse ::
-  OrderinvoicesCreateChargeInvoiceResponse
-newOrderinvoicesCreateChargeInvoiceResponse =
-  OrderinvoicesCreateChargeInvoiceResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCreateChargeInvoiceResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCreateChargeInvoiceResponse"
-      ( \o ->
-          OrderinvoicesCreateChargeInvoiceResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCreateChargeInvoiceResponse
-  where
-  toJSON OrderinvoicesCreateChargeInvoiceResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrderinvoicesCreateRefundInvoiceRequest' smart constructor.
-data OrderinvoicesCreateRefundInvoiceRequest = OrderinvoicesCreateRefundInvoiceRequest
-  { -- | [required] The ID of the invoice.
-    invoiceId :: (Core.Maybe Core.Text),
-    -- | [required] The ID of the operation, unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | Option to create a refund-only invoice. Exactly one of @refundOnlyOption@ or @returnOption@ must be provided.
-    refundOnlyOption ::
-      ( Core.Maybe
-          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-      ),
-    -- | Option to create an invoice for a refund and mark all items within the invoice as returned. Exactly one of @refundOnlyOption@ or @returnOption@ must be provided.
-    returnOption ::
-      ( Core.Maybe
-          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-      ),
-    -- | Invoice details for different shipment groups.
-    shipmentInvoices :: (Core.Maybe [ShipmentInvoice])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCreateRefundInvoiceRequest' with the minimum fields required to make a request.
-newOrderinvoicesCreateRefundInvoiceRequest ::
-  OrderinvoicesCreateRefundInvoiceRequest
-newOrderinvoicesCreateRefundInvoiceRequest =
-  OrderinvoicesCreateRefundInvoiceRequest
-    { invoiceId = Core.Nothing,
-      operationId = Core.Nothing,
-      refundOnlyOption = Core.Nothing,
-      returnOption = Core.Nothing,
-      shipmentInvoices = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCreateRefundInvoiceRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCreateRefundInvoiceRequest"
-      ( \o ->
-          OrderinvoicesCreateRefundInvoiceRequest
-            Core.<$> (o Core..:? "invoiceId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "refundOnlyOption")
-            Core.<*> (o Core..:? "returnOption")
-            Core.<*> (o Core..:? "shipmentInvoices")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCreateRefundInvoiceRequest
-  where
-  toJSON OrderinvoicesCreateRefundInvoiceRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("invoiceId" Core..=) Core.<$> invoiceId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("refundOnlyOption" Core..=)
-              Core.<$> refundOnlyOption,
-            ("returnOption" Core..=) Core.<$> returnOption,
-            ("shipmentInvoices" Core..=)
-              Core.<$> shipmentInvoices
-          ]
-      )
-
---
--- /See:/ 'newOrderinvoicesCreateRefundInvoiceResponse' smart constructor.
-data OrderinvoicesCreateRefundInvoiceResponse = OrderinvoicesCreateRefundInvoiceResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderinvoicesCreateRefundInvoiceResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCreateRefundInvoiceResponse' with the minimum fields required to make a request.
-newOrderinvoicesCreateRefundInvoiceResponse ::
-  OrderinvoicesCreateRefundInvoiceResponse
-newOrderinvoicesCreateRefundInvoiceResponse =
-  OrderinvoicesCreateRefundInvoiceResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCreateRefundInvoiceResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCreateRefundInvoiceResponse"
-      ( \o ->
-          OrderinvoicesCreateRefundInvoiceResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCreateRefundInvoiceResponse
-  where
-  toJSON OrderinvoicesCreateRefundInvoiceResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption' smart constructor.
-data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption = OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-  { -- | Optional description of the refund reason.
-    description :: (Core.Maybe Core.Text),
-    -- | [required] Reason for the refund. Acceptable values are: - \"@adjustment@\" - \"@autoPostInternal@\" - \"@autoPostInvalidBillingAddress@\" - \"@autoPostNoInventory@\" - \"@autoPostPriceError@\" - \"@autoPostUndeliverableShippingAddress@\" - \"@couponAbuse@\" - \"@courtesyAdjustment@\" - \"@customerCanceled@\" - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@customerSupportRequested@\" - \"@deliveredLateByCarrier@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@failToPushOrderGoogleError@\" - \"@failToPushOrderMerchantError@\" - \"@failToPushOrderMerchantFulfillmentError@\" - \"@failToPushOrderToMerchant@\" - \"@failToPushOrderToMerchantOutOfStock@\" - \"@feeAdjustment@\" - \"@invalidCoupon@\" - \"@lateShipmentCredit@\" - \"@malformedShippingAddress@\" - \"@merchantDidNotShipOnTime@\" - \"@noInventory@\" - \"@orderTimeout@\" - \"@other@\" - \"@paymentAbuse@\" - \"@paymentDeclined@\" - \"@priceAdjustment@\" - \"@priceError@\" - \"@productArrivedDamaged@\" -
-    -- \"@productNotAsDescribed@\" - \"@promoReallocation@\" - \"@qualityNotAsExpected@\" - \"@returnRefundAbuse@\" - \"@shippingCostAdjustment@\" - \"@shippingPriceError@\" - \"@taxAdjustment@\" - \"@taxError@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption' with the minimum fields required to make a request.
-newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption ::
-  OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption =
-  OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-    { description = Core.Nothing,
-      reason = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption"
-      ( \o ->
-          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-            Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "reason")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption
-  where
-  toJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("reason" Core..=) Core.<$> reason
-            ]
-        )
-
---
--- /See:/ 'newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' smart constructor.
-data OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption = OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-  { -- | Optional description of the return reason.
-    description :: (Core.Maybe Core.Text),
-    -- | [required] Reason for the return. Acceptable values are: - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@other@\" - \"@productArrivedDamaged@\" - \"@productNotAsDescribed@\" - \"@qualityNotAsExpected@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption' with the minimum fields required to make a request.
-newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption ::
-  OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-newOrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption =
-  OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-    { description = Core.Nothing,
-      reason = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-  where
-  parseJSON =
-    Core.withObject
-      "OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption"
-      ( \o ->
-          OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-            Core.<$> (o Core..:? "description")
-              Core.<*> (o Core..:? "reason")
-      )
-
-instance
-  Core.ToJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption
-  where
-  toJSON
-    OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceReturnOption {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("description" Core..=) Core.<$> description,
-              ("reason" Core..=) Core.<$> reason
-            ]
-        )
-
---
--- /See:/ 'newOrderreportsListDisbursementsResponse' smart constructor.
-data OrderreportsListDisbursementsResponse = OrderreportsListDisbursementsResponse
-  { -- | The list of disbursements.
-    disbursements :: (Core.Maybe [OrderReportDisbursement]),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreportsListDisbursementsResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of disbursements.
-    nextPageToken :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreportsListDisbursementsResponse' with the minimum fields required to make a request.
-newOrderreportsListDisbursementsResponse ::
-  OrderreportsListDisbursementsResponse
-newOrderreportsListDisbursementsResponse =
-  OrderreportsListDisbursementsResponse
-    { disbursements = Core.Nothing,
-      kind = Core.Nothing,
-      nextPageToken = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderreportsListDisbursementsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderreportsListDisbursementsResponse"
-      ( \o ->
-          OrderreportsListDisbursementsResponse
-            Core.<$> (o Core..:? "disbursements")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-      )
-
-instance
-  Core.ToJSON
-    OrderreportsListDisbursementsResponse
-  where
-  toJSON OrderreportsListDisbursementsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("disbursements" Core..=) Core.<$> disbursements,
-            ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken
-          ]
-      )
-
---
--- /See:/ 'newOrderreportsListTransactionsResponse' smart constructor.
-data OrderreportsListTransactionsResponse = OrderreportsListTransactionsResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreportsListTransactionsResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of transactions.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- | The list of transactions.
-    transactions :: (Core.Maybe [OrderReportTransaction])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreportsListTransactionsResponse' with the minimum fields required to make a request.
-newOrderreportsListTransactionsResponse ::
-  OrderreportsListTransactionsResponse
-newOrderreportsListTransactionsResponse =
-  OrderreportsListTransactionsResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      transactions = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderreportsListTransactionsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderreportsListTransactionsResponse"
-      ( \o ->
-          OrderreportsListTransactionsResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "transactions")
-      )
-
-instance
-  Core.ToJSON
-    OrderreportsListTransactionsResponse
-  where
-  toJSON OrderreportsListTransactionsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("transactions" Core..=) Core.<$> transactions
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsAcknowledgeRequest' smart constructor.
-newtype OrderreturnsAcknowledgeRequest = OrderreturnsAcknowledgeRequest
-  { -- | [required] The ID of the operation, unique across all operations for a given order return.
-    operationId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsAcknowledgeRequest' with the minimum fields required to make a request.
-newOrderreturnsAcknowledgeRequest ::
-  OrderreturnsAcknowledgeRequest
-newOrderreturnsAcknowledgeRequest =
-  OrderreturnsAcknowledgeRequest {operationId = Core.Nothing}
-
-instance Core.FromJSON OrderreturnsAcknowledgeRequest where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsAcknowledgeRequest"
-      ( \o ->
-          OrderreturnsAcknowledgeRequest
-            Core.<$> (o Core..:? "operationId")
-      )
-
-instance Core.ToJSON OrderreturnsAcknowledgeRequest where
-  toJSON OrderreturnsAcknowledgeRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [("operationId" Core..=) Core.<$> operationId]
-      )
-
---
--- /See:/ 'newOrderreturnsAcknowledgeResponse' smart constructor.
-data OrderreturnsAcknowledgeResponse = OrderreturnsAcknowledgeResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreturnsAcknowledgeResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsAcknowledgeResponse' with the minimum fields required to make a request.
-newOrderreturnsAcknowledgeResponse ::
-  OrderreturnsAcknowledgeResponse
-newOrderreturnsAcknowledgeResponse =
-  OrderreturnsAcknowledgeResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderreturnsAcknowledgeResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsAcknowledgeResponse"
-      ( \o ->
-          OrderreturnsAcknowledgeResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrderreturnsAcknowledgeResponse where
-  toJSON OrderreturnsAcknowledgeResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsCreateOrderReturnRequest' smart constructor.
-data OrderreturnsCreateOrderReturnRequest = OrderreturnsCreateOrderReturnRequest
-  { -- | The list of line items to return.
-    lineItems :: (Core.Maybe [OrderreturnsLineItem]),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The ID of the order.
-    orderId :: (Core.Maybe Core.Text),
-    -- | The way of the package being returned.
-    returnMethodType :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsCreateOrderReturnRequest' with the minimum fields required to make a request.
-newOrderreturnsCreateOrderReturnRequest ::
-  OrderreturnsCreateOrderReturnRequest
-newOrderreturnsCreateOrderReturnRequest =
-  OrderreturnsCreateOrderReturnRequest
-    { lineItems = Core.Nothing,
-      operationId = Core.Nothing,
-      orderId = Core.Nothing,
-      returnMethodType = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderreturnsCreateOrderReturnRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsCreateOrderReturnRequest"
-      ( \o ->
-          OrderreturnsCreateOrderReturnRequest
-            Core.<$> (o Core..:? "lineItems")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "orderId")
-            Core.<*> (o Core..:? "returnMethodType")
-      )
-
-instance
-  Core.ToJSON
-    OrderreturnsCreateOrderReturnRequest
-  where
-  toJSON OrderreturnsCreateOrderReturnRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItems" Core..=) Core.<$> lineItems,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("orderId" Core..=) Core.<$> orderId,
-            ("returnMethodType" Core..=)
-              Core.<$> returnMethodType
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsCreateOrderReturnResponse' smart constructor.
-data OrderreturnsCreateOrderReturnResponse = OrderreturnsCreateOrderReturnResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreturnsCreateOrderReturnResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | Created order return.
-    orderReturn :: (Core.Maybe MerchantOrderReturn)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsCreateOrderReturnResponse' with the minimum fields required to make a request.
-newOrderreturnsCreateOrderReturnResponse ::
-  OrderreturnsCreateOrderReturnResponse
-newOrderreturnsCreateOrderReturnResponse =
-  OrderreturnsCreateOrderReturnResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing,
-      orderReturn = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrderreturnsCreateOrderReturnResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsCreateOrderReturnResponse"
-      ( \o ->
-          OrderreturnsCreateOrderReturnResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "orderReturn")
-      )
-
-instance
-  Core.ToJSON
-    OrderreturnsCreateOrderReturnResponse
-  where
-  toJSON OrderreturnsCreateOrderReturnResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind,
-            ("orderReturn" Core..=) Core.<$> orderReturn
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsLineItem' smart constructor.
-data OrderreturnsLineItem = OrderreturnsLineItem
-  { -- | The ID of the line item. This value is assigned by Google when an order is created. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity of this line item.
-    quantity :: (Core.Maybe Core.Word32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsLineItem' with the minimum fields required to make a request.
-newOrderreturnsLineItem ::
-  OrderreturnsLineItem
-newOrderreturnsLineItem =
-  OrderreturnsLineItem
-    { lineItemId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsLineItem where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsLineItem"
-      ( \o ->
-          OrderreturnsLineItem
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-      )
-
-instance Core.ToJSON OrderreturnsLineItem where
-  toJSON OrderreturnsLineItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsListResponse' smart constructor.
-data OrderreturnsListResponse = OrderreturnsListResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreturnsListResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of returns.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
-    resources :: (Core.Maybe [MerchantOrderReturn])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsListResponse' with the minimum fields required to make a request.
-newOrderreturnsListResponse ::
-  OrderreturnsListResponse
-newOrderreturnsListResponse =
-  OrderreturnsListResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      resources = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsListResponse where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsListResponse"
-      ( \o ->
-          OrderreturnsListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources")
-      )
-
-instance Core.ToJSON OrderreturnsListResponse where
-  toJSON OrderreturnsListResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resources" Core..=) Core.<$> resources
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsPartialRefund' smart constructor.
-data OrderreturnsPartialRefund = OrderreturnsPartialRefund
-  { -- | The pre-tax or post-tax amount to be refunded, depending on the location of the order.
-    priceAmount :: (Core.Maybe Price),
-    -- | Tax amount to be refunded. Note: This has different meaning depending on the location of the order.
-    taxAmount :: (Core.Maybe Price)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsPartialRefund' with the minimum fields required to make a request.
-newOrderreturnsPartialRefund ::
-  OrderreturnsPartialRefund
-newOrderreturnsPartialRefund =
-  OrderreturnsPartialRefund
-    { priceAmount = Core.Nothing,
-      taxAmount = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsPartialRefund where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsPartialRefund"
-      ( \o ->
-          OrderreturnsPartialRefund
-            Core.<$> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "taxAmount")
-      )
-
-instance Core.ToJSON OrderreturnsPartialRefund where
-  toJSON OrderreturnsPartialRefund {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("taxAmount" Core..=) Core.<$> taxAmount
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsProcessRequest' smart constructor.
-data OrderreturnsProcessRequest = OrderreturnsProcessRequest
-  { -- | Option to charge the customer return shipping cost.
-    fullChargeReturnShippingCost :: (Core.Maybe Core.Bool),
-    -- | [required] The ID of the operation, unique across all operations for a given order return.
-    operationId :: (Core.Maybe Core.Text),
-    -- | Refunds for original shipping fee.
-    refundShippingFee :: (Core.Maybe OrderreturnsRefundOperation),
-    -- | The list of items to return.
-    returnItems :: (Core.Maybe [OrderreturnsReturnItem])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsProcessRequest' with the minimum fields required to make a request.
-newOrderreturnsProcessRequest ::
-  OrderreturnsProcessRequest
-newOrderreturnsProcessRequest =
-  OrderreturnsProcessRequest
-    { fullChargeReturnShippingCost = Core.Nothing,
-      operationId = Core.Nothing,
-      refundShippingFee = Core.Nothing,
-      returnItems = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsProcessRequest where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsProcessRequest"
-      ( \o ->
-          OrderreturnsProcessRequest
-            Core.<$> (o Core..:? "fullChargeReturnShippingCost")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "refundShippingFee")
-            Core.<*> (o Core..:? "returnItems")
-      )
-
-instance Core.ToJSON OrderreturnsProcessRequest where
-  toJSON OrderreturnsProcessRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fullChargeReturnShippingCost" Core..=)
-              Core.<$> fullChargeReturnShippingCost,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("refundShippingFee" Core..=)
-              Core.<$> refundShippingFee,
-            ("returnItems" Core..=) Core.<$> returnItems
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsProcessResponse' smart constructor.
-data OrderreturnsProcessResponse = OrderreturnsProcessResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#orderreturnsProcessResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsProcessResponse' with the minimum fields required to make a request.
-newOrderreturnsProcessResponse ::
-  OrderreturnsProcessResponse
-newOrderreturnsProcessResponse =
-  OrderreturnsProcessResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsProcessResponse where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsProcessResponse"
-      ( \o ->
-          OrderreturnsProcessResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrderreturnsProcessResponse where
-  toJSON OrderreturnsProcessResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsRefundOperation' smart constructor.
-data OrderreturnsRefundOperation = OrderreturnsRefundOperation
-  { -- | If true, the item will be fully refunded. Allowed only when payment_type is FOP. Merchant can choose this refund option to indicate the full remaining amount of corresponding object to be refunded to the customer through FOP.
-    fullRefund :: (Core.Maybe Core.Bool),
-    -- | If this is set, the item will be partially refunded. Merchant can choose this refund option to specify the customized amount that to be refunded to the customer.
-    partialRefund :: (Core.Maybe OrderreturnsPartialRefund),
-    -- | The payment way of issuing refund. Default value is ORIGINAL_FOP if not set.
-    paymentType :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text),
-    -- | Code of the refund reason.
-    returnRefundReason :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsRefundOperation' with the minimum fields required to make a request.
-newOrderreturnsRefundOperation ::
-  OrderreturnsRefundOperation
-newOrderreturnsRefundOperation =
-  OrderreturnsRefundOperation
-    { fullRefund = Core.Nothing,
-      partialRefund = Core.Nothing,
-      paymentType = Core.Nothing,
-      reasonText = Core.Nothing,
-      returnRefundReason = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsRefundOperation where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsRefundOperation"
-      ( \o ->
-          OrderreturnsRefundOperation
-            Core.<$> (o Core..:? "fullRefund")
-            Core.<*> (o Core..:? "partialRefund")
-            Core.<*> (o Core..:? "paymentType")
-            Core.<*> (o Core..:? "reasonText")
-            Core.<*> (o Core..:? "returnRefundReason")
-      )
-
-instance Core.ToJSON OrderreturnsRefundOperation where
-  toJSON OrderreturnsRefundOperation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fullRefund" Core..=) Core.<$> fullRefund,
-            ("partialRefund" Core..=) Core.<$> partialRefund,
-            ("paymentType" Core..=) Core.<$> paymentType,
-            ("reasonText" Core..=) Core.<$> reasonText,
-            ("returnRefundReason" Core..=)
-              Core.<$> returnRefundReason
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsRejectOperation' smart constructor.
-data OrderreturnsRejectOperation = OrderreturnsRejectOperation
-  { -- | The reason for the return.
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsRejectOperation' with the minimum fields required to make a request.
-newOrderreturnsRejectOperation ::
-  OrderreturnsRejectOperation
-newOrderreturnsRejectOperation =
-  OrderreturnsRejectOperation {reason = Core.Nothing, reasonText = Core.Nothing}
-
-instance Core.FromJSON OrderreturnsRejectOperation where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsRejectOperation"
-      ( \o ->
-          OrderreturnsRejectOperation
-            Core.<$> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrderreturnsRejectOperation where
-  toJSON OrderreturnsRejectOperation {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrderreturnsReturnItem' smart constructor.
-data OrderreturnsReturnItem = OrderreturnsReturnItem
-  { -- | Refunds the item.
-    refund :: (Core.Maybe OrderreturnsRefundOperation),
-    -- | Rejects the item.
-    reject :: (Core.Maybe OrderreturnsRejectOperation),
-    -- | Unit level ID for the return item. Different units of the same product will have different IDs.
-    returnItemId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrderreturnsReturnItem' with the minimum fields required to make a request.
-newOrderreturnsReturnItem ::
-  OrderreturnsReturnItem
-newOrderreturnsReturnItem =
-  OrderreturnsReturnItem
-    { refund = Core.Nothing,
-      reject = Core.Nothing,
-      returnItemId = Core.Nothing
-    }
-
-instance Core.FromJSON OrderreturnsReturnItem where
-  parseJSON =
-    Core.withObject
-      "OrderreturnsReturnItem"
-      ( \o ->
-          OrderreturnsReturnItem
-            Core.<$> (o Core..:? "refund")
-            Core.<*> (o Core..:? "reject")
-            Core.<*> (o Core..:? "returnItemId")
-      )
-
-instance Core.ToJSON OrderreturnsReturnItem where
-  toJSON OrderreturnsReturnItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("refund" Core..=) Core.<$> refund,
-            ("reject" Core..=) Core.<$> reject,
-            ("returnItemId" Core..=) Core.<$> returnItemId
-          ]
-      )
-
---
--- /See:/ 'newOrdersAcknowledgeRequest' smart constructor.
-newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
-  { -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersAcknowledgeRequest' with the minimum fields required to make a request.
-newOrdersAcknowledgeRequest ::
-  OrdersAcknowledgeRequest
-newOrdersAcknowledgeRequest =
-  OrdersAcknowledgeRequest {operationId = Core.Nothing}
-
-instance Core.FromJSON OrdersAcknowledgeRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersAcknowledgeRequest"
-      ( \o ->
-          OrdersAcknowledgeRequest
-            Core.<$> (o Core..:? "operationId")
-      )
-
-instance Core.ToJSON OrdersAcknowledgeRequest where
-  toJSON OrdersAcknowledgeRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [("operationId" Core..=) Core.<$> operationId]
-      )
-
---
--- /See:/ 'newOrdersAcknowledgeResponse' smart constructor.
-data OrdersAcknowledgeResponse = OrdersAcknowledgeResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersAcknowledgeResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersAcknowledgeResponse' with the minimum fields required to make a request.
-newOrdersAcknowledgeResponse ::
-  OrdersAcknowledgeResponse
-newOrdersAcknowledgeResponse =
-  OrdersAcknowledgeResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersAcknowledgeResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersAcknowledgeResponse"
-      ( \o ->
-          OrdersAcknowledgeResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersAcknowledgeResponse where
-  toJSON OrdersAcknowledgeResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersAdvanceTestOrderResponse' smart constructor.
-newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersAdvanceTestOrderResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersAdvanceTestOrderResponse' with the minimum fields required to make a request.
-newOrdersAdvanceTestOrderResponse ::
-  OrdersAdvanceTestOrderResponse
-newOrdersAdvanceTestOrderResponse =
-  OrdersAdvanceTestOrderResponse {kind = Core.Nothing}
-
-instance Core.FromJSON OrdersAdvanceTestOrderResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersAdvanceTestOrderResponse"
-      ( \o ->
-          OrdersAdvanceTestOrderResponse
-            Core.<$> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersAdvanceTestOrderResponse where
-  toJSON OrdersAdvanceTestOrderResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
-
---
--- /See:/ 'newOrdersCancelLineItemRequest' smart constructor.
-data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
-  { -- | The ID of the line item to cancel. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to cancel. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity to cancel.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the cancellation. Acceptable values are: - \"@customerInitiatedCancel@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@noInventory@\" - \"@other@\" - \"@priceError@\" - \"@shippingPriceError@\" - \"@taxError@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@failedToCaptureFunds@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelLineItemRequest' with the minimum fields required to make a request.
-newOrdersCancelLineItemRequest ::
-  OrdersCancelLineItemRequest
-newOrdersCancelLineItemRequest =
-  OrdersCancelLineItemRequest
-    { lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersCancelLineItemRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelLineItemRequest"
-      ( \o ->
-          OrdersCancelLineItemRequest
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrdersCancelLineItemRequest where
-  toJSON OrdersCancelLineItemRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrdersCancelLineItemResponse' smart constructor.
-data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersCancelLineItemResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelLineItemResponse' with the minimum fields required to make a request.
-newOrdersCancelLineItemResponse ::
-  OrdersCancelLineItemResponse
-newOrdersCancelLineItemResponse =
-  OrdersCancelLineItemResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersCancelLineItemResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelLineItemResponse"
-      ( \o ->
-          OrdersCancelLineItemResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersCancelLineItemResponse where
-  toJSON OrdersCancelLineItemResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersCancelRequest' smart constructor.
-data OrdersCancelRequest = OrdersCancelRequest
-  { -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The reason for the cancellation. Acceptable values are: - \"@customerInitiatedCancel@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@noInventory@\" - \"@other@\" - \"@priceError@\" - \"@shippingPriceError@\" - \"@taxError@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@failedToCaptureFunds@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelRequest' with the minimum fields required to make a request.
-newOrdersCancelRequest ::
-  OrdersCancelRequest
-newOrdersCancelRequest =
-  OrdersCancelRequest
-    { operationId = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersCancelRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelRequest"
-      ( \o ->
-          OrdersCancelRequest
-            Core.<$> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrdersCancelRequest where
-  toJSON OrdersCancelRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("operationId" Core..=) Core.<$> operationId,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrdersCancelResponse' smart constructor.
-data OrdersCancelResponse = OrdersCancelResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersCancelResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelResponse' with the minimum fields required to make a request.
-newOrdersCancelResponse ::
-  OrdersCancelResponse
-newOrdersCancelResponse =
-  OrdersCancelResponse {executionStatus = Core.Nothing, kind = Core.Nothing}
-
-instance Core.FromJSON OrdersCancelResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelResponse"
-      ( \o ->
-          OrdersCancelResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersCancelResponse where
-  toJSON OrdersCancelResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersCancelTestOrderByCustomerRequest' smart constructor.
-newtype OrdersCancelTestOrderByCustomerRequest = OrdersCancelTestOrderByCustomerRequest
-  { -- | The reason for the cancellation. Acceptable values are: - \"@changedMind@\" - \"@orderedWrongItem@\" - \"@other@\"
-    reason :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelTestOrderByCustomerRequest' with the minimum fields required to make a request.
-newOrdersCancelTestOrderByCustomerRequest ::
-  OrdersCancelTestOrderByCustomerRequest
-newOrdersCancelTestOrderByCustomerRequest =
-  OrdersCancelTestOrderByCustomerRequest {reason = Core.Nothing}
-
-instance
-  Core.FromJSON
-    OrdersCancelTestOrderByCustomerRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelTestOrderByCustomerRequest"
-      ( \o ->
-          OrdersCancelTestOrderByCustomerRequest
-            Core.<$> (o Core..:? "reason")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCancelTestOrderByCustomerRequest
-  where
-  toJSON OrdersCancelTestOrderByCustomerRequest {..} =
-    Core.object
-      (Core.catMaybes [("reason" Core..=) Core.<$> reason])
-
---
--- /See:/ 'newOrdersCancelTestOrderByCustomerResponse' smart constructor.
-newtype OrdersCancelTestOrderByCustomerResponse = OrdersCancelTestOrderByCustomerResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersCancelTestOrderByCustomerResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCancelTestOrderByCustomerResponse' with the minimum fields required to make a request.
-newOrdersCancelTestOrderByCustomerResponse ::
-  OrdersCancelTestOrderByCustomerResponse
-newOrdersCancelTestOrderByCustomerResponse =
-  OrdersCancelTestOrderByCustomerResponse {kind = Core.Nothing}
-
-instance
-  Core.FromJSON
-    OrdersCancelTestOrderByCustomerResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCancelTestOrderByCustomerResponse"
-      ( \o ->
-          OrdersCancelTestOrderByCustomerResponse
-            Core.<$> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCancelTestOrderByCustomerResponse
-  where
-  toJSON OrdersCancelTestOrderByCustomerResponse {..} =
-    Core.object
-      (Core.catMaybes [("kind" Core..=) Core.<$> kind])
-
---
--- /See:/ 'newOrdersCreateTestOrderRequest' smart constructor.
-data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
-  { -- | The CLDR territory code of the country of the test order to create. Affects the currency and addresses of orders created through @template_name@, or the addresses of orders created through @test_order@. Acceptable values are: - \"@US@\" - \"@FR@\" Defaults to \"@US@\".
-    country :: (Core.Maybe Core.Text),
-    -- | The test order template to use. Specify as an alternative to @testOrder@ as a shortcut for retrieving a template and then creating an order using that template. Acceptable values are: - \"@template1@\" - \"@template1a@\" - \"@template1b@\" - \"@template2@\" - \"@template3@\"
-    templateName :: (Core.Maybe Core.Text),
-    -- | The test order to create.
-    testOrder :: (Core.Maybe TestOrder)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
-newOrdersCreateTestOrderRequest ::
-  OrdersCreateTestOrderRequest
-newOrdersCreateTestOrderRequest =
-  OrdersCreateTestOrderRequest
-    { country = Core.Nothing,
-      templateName = Core.Nothing,
-      testOrder = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersCreateTestOrderRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersCreateTestOrderRequest"
-      ( \o ->
-          OrdersCreateTestOrderRequest
-            Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "templateName")
-            Core.<*> (o Core..:? "testOrder")
-      )
-
-instance Core.ToJSON OrdersCreateTestOrderRequest where
-  toJSON OrdersCreateTestOrderRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("country" Core..=) Core.<$> country,
-            ("templateName" Core..=) Core.<$> templateName,
-            ("testOrder" Core..=) Core.<$> testOrder
-          ]
-      )
-
---
--- /See:/ 'newOrdersCreateTestOrderResponse' smart constructor.
-data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersCreateTestOrderResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The ID of the newly created test order.
-    orderId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCreateTestOrderResponse' with the minimum fields required to make a request.
-newOrdersCreateTestOrderResponse ::
-  OrdersCreateTestOrderResponse
-newOrdersCreateTestOrderResponse =
-  OrdersCreateTestOrderResponse {kind = Core.Nothing, orderId = Core.Nothing}
-
-instance Core.FromJSON OrdersCreateTestOrderResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersCreateTestOrderResponse"
-      ( \o ->
-          OrdersCreateTestOrderResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "orderId")
-      )
-
-instance Core.ToJSON OrdersCreateTestOrderResponse where
-  toJSON OrdersCreateTestOrderResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("orderId" Core..=) Core.<$> orderId
-          ]
-      )
-
---
--- /See:/ 'newOrdersCreateTestReturnRequest' smart constructor.
-newtype OrdersCreateTestReturnRequest = OrdersCreateTestReturnRequest
-  { -- | Returned items.
-    items ::
-      ( Core.Maybe
-          [OrdersCustomBatchRequestEntryCreateTestReturnReturnItem]
-      )
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCreateTestReturnRequest' with the minimum fields required to make a request.
-newOrdersCreateTestReturnRequest ::
-  OrdersCreateTestReturnRequest
-newOrdersCreateTestReturnRequest =
-  OrdersCreateTestReturnRequest {items = Core.Nothing}
-
-instance Core.FromJSON OrdersCreateTestReturnRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersCreateTestReturnRequest"
-      ( \o ->
-          OrdersCreateTestReturnRequest
-            Core.<$> (o Core..:? "items")
-      )
-
-instance Core.ToJSON OrdersCreateTestReturnRequest where
-  toJSON OrdersCreateTestReturnRequest {..} =
-    Core.object
-      (Core.catMaybes [("items" Core..=) Core.<$> items])
-
---
--- /See:/ 'newOrdersCreateTestReturnResponse' smart constructor.
-data OrdersCreateTestReturnResponse = OrdersCreateTestReturnResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersCreateTestReturnResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The ID of the newly created test order return.
-    returnId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCreateTestReturnResponse' with the minimum fields required to make a request.
-newOrdersCreateTestReturnResponse ::
-  OrdersCreateTestReturnResponse
-newOrdersCreateTestReturnResponse =
-  OrdersCreateTestReturnResponse {kind = Core.Nothing, returnId = Core.Nothing}
-
-instance Core.FromJSON OrdersCreateTestReturnResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersCreateTestReturnResponse"
-      ( \o ->
-          OrdersCreateTestReturnResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "returnId")
-      )
-
-instance Core.ToJSON OrdersCreateTestReturnResponse where
-  toJSON OrdersCreateTestReturnResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("returnId" Core..=) Core.<$> returnId
-          ]
-      )
-
---
--- /See:/ 'newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem' smart constructor.
-data OrdersCustomBatchRequestEntryCreateTestReturnReturnItem = OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-  { -- | The ID of the line item to return.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | Quantity that is returned.
-    quantity :: (Core.Maybe Core.Word32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryCreateTestReturnReturnItem' with the minimum fields required to make a request.
-newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem ::
-  OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-newOrdersCustomBatchRequestEntryCreateTestReturnReturnItem =
-  OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-    { lineItemId = Core.Nothing,
-      quantity = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCustomBatchRequestEntryCreateTestReturnReturnItem"
-      ( \o ->
-          OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-            Core.<$> (o Core..:? "lineItemId")
-              Core.<*> (o Core..:? "quantity")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem
-  where
-  toJSON
-    OrdersCustomBatchRequestEntryCreateTestReturnReturnItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("lineItemId" Core..=) Core.<$> lineItemId,
-              ("quantity" Core..=) Core.<$> quantity
-            ]
-        )
-
---
--- /See:/ 'newOrdersCustomBatchRequestEntryRefundItemItem' smart constructor.
-data OrdersCustomBatchRequestEntryRefundItemItem = OrdersCustomBatchRequestEntryRefundItemItem
-  { -- | The total amount that is refunded. (for example, refunding $5 each for 2 products should be done by setting quantity to 2 and amount to 10$) In case of multiple refunds, this should be the amount you currently want to refund to the customer.
-    amount :: (Core.Maybe MonetaryAmount),
-    -- | If true, the full item will be refunded. If this is true, amount shouldn\'t be provided and will be ignored.
-    fullRefund :: (Core.Maybe Core.Bool),
-    -- | The ID of the line item. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the product. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The number of products that are refunded.
-    quantity :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryRefundItemItem' with the minimum fields required to make a request.
-newOrdersCustomBatchRequestEntryRefundItemItem ::
-  OrdersCustomBatchRequestEntryRefundItemItem
-newOrdersCustomBatchRequestEntryRefundItemItem =
-  OrdersCustomBatchRequestEntryRefundItemItem
-    { amount = Core.Nothing,
-      fullRefund = Core.Nothing,
-      lineItemId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersCustomBatchRequestEntryRefundItemItem
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCustomBatchRequestEntryRefundItemItem"
-      ( \o ->
-          OrdersCustomBatchRequestEntryRefundItemItem
-            Core.<$> (o Core..:? "amount")
-            Core.<*> (o Core..:? "fullRefund")
-            Core.<*> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCustomBatchRequestEntryRefundItemItem
-  where
-  toJSON
-    OrdersCustomBatchRequestEntryRefundItemItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("amount" Core..=) Core.<$> amount,
-              ("fullRefund" Core..=) Core.<$> fullRefund,
-              ("lineItemId" Core..=) Core.<$> lineItemId,
-              ("productId" Core..=) Core.<$> productId,
-              ("quantity" Core..=) Core.<$> quantity
-            ]
-        )
-
---
--- /See:/ 'newOrdersCustomBatchRequestEntryRefundItemShipping' smart constructor.
-data OrdersCustomBatchRequestEntryRefundItemShipping = OrdersCustomBatchRequestEntryRefundItemShipping
-  { -- | The amount that is refunded. If this is not the first refund for the shipment, this should be the newly refunded amount.
-    amount :: (Core.Maybe Price),
-    -- | If set to true, all shipping costs for the order will be refunded. If this is true, amount shouldn\'t be provided and will be ignored. If set to false, submit the amount of the partial shipping refund, excluding the shipping tax. The shipping tax is calculated and handled on Google\'s side.
-    fullRefund :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryRefundItemShipping' with the minimum fields required to make a request.
-newOrdersCustomBatchRequestEntryRefundItemShipping ::
-  OrdersCustomBatchRequestEntryRefundItemShipping
-newOrdersCustomBatchRequestEntryRefundItemShipping =
-  OrdersCustomBatchRequestEntryRefundItemShipping
-    { amount = Core.Nothing,
-      fullRefund = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersCustomBatchRequestEntryRefundItemShipping
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCustomBatchRequestEntryRefundItemShipping"
-      ( \o ->
-          OrdersCustomBatchRequestEntryRefundItemShipping
-            Core.<$> (o Core..:? "amount")
-              Core.<*> (o Core..:? "fullRefund")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCustomBatchRequestEntryRefundItemShipping
-  where
-  toJSON
-    OrdersCustomBatchRequestEntryRefundItemShipping {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("amount" Core..=) Core.<$> amount,
-              ("fullRefund" Core..=) Core.<$> fullRefund
-            ]
-        )
-
---
--- /See:/ 'newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo' smart constructor.
-data OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo = OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-  { -- | The carrier handling the shipment. See @shipments[].carrier@ in the Orders resource representation for a list of acceptable values.
-    carrier :: (Core.Maybe Core.Text),
-    -- | Required. The ID of the shipment. This is assigned by the merchant and is unique to each shipment.
-    shipmentId :: (Core.Maybe Core.Text),
-    -- | The tracking ID for the shipment.
-    trackingId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo' with the minimum fields required to make a request.
-newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo ::
-  OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-newOrdersCustomBatchRequestEntryShipLineItemsShipmentInfo =
-  OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-    { carrier = Core.Nothing,
-      shipmentId = Core.Nothing,
-      trackingId = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo"
-      ( \o ->
-          OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-            Core.<$> (o Core..:? "carrier")
-              Core.<*> (o Core..:? "shipmentId")
-              Core.<*> (o Core..:? "trackingId")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo
-  where
-  toJSON
-    OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("carrier" Core..=) Core.<$> carrier,
-              ("shipmentId" Core..=) Core.<$> shipmentId,
-              ("trackingId" Core..=) Core.<$> trackingId
-            ]
-        )
-
--- | ScheduledDeliveryDetails used to update the scheduled delivery order.
---
--- /See:/ 'newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails' smart constructor.
-data OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails = OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-  { -- | The phone number of the carrier fulfilling the delivery. The phone number should be formatted as the international notation in
-    carrierPhoneNumber :: (Core.Maybe Core.Text),
-    -- | The date a shipment is scheduled for delivery, in ISO 8601 format.
-    scheduledDate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails' with the minimum fields required to make a request.
-newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails ::
-  OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-newOrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails =
-  OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-    { carrierPhoneNumber = Core.Nothing,
-      scheduledDate = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails"
-      ( \o ->
-          OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-            Core.<$> (o Core..:? "carrierPhoneNumber")
-              Core.<*> (o Core..:? "scheduledDate")
-      )
-
-instance
-  Core.ToJSON
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-  where
-  toJSON
-    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("carrierPhoneNumber" Core..=)
-                Core.<$> carrierPhoneNumber,
-              ("scheduledDate" Core..=) Core.<$> scheduledDate
-            ]
-        )
-
---
--- /See:/ 'newOrdersGetByMerchantOrderIdResponse' smart constructor.
-data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersGetByMerchantOrderIdResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The requested order.
-    order :: (Core.Maybe Order)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersGetByMerchantOrderIdResponse' with the minimum fields required to make a request.
-newOrdersGetByMerchantOrderIdResponse ::
-  OrdersGetByMerchantOrderIdResponse
-newOrdersGetByMerchantOrderIdResponse =
-  OrdersGetByMerchantOrderIdResponse {kind = Core.Nothing, order = Core.Nothing}
-
-instance
-  Core.FromJSON
-    OrdersGetByMerchantOrderIdResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersGetByMerchantOrderIdResponse"
-      ( \o ->
-          OrdersGetByMerchantOrderIdResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "order")
-      )
-
-instance
-  Core.ToJSON
-    OrdersGetByMerchantOrderIdResponse
-  where
-  toJSON OrdersGetByMerchantOrderIdResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("order" Core..=) Core.<$> order
-          ]
-      )
-
---
--- /See:/ 'newOrdersGetTestOrderTemplateResponse' smart constructor.
-data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersGetTestOrderTemplateResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The requested test order template.
-    template :: (Core.Maybe TestOrder)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersGetTestOrderTemplateResponse' with the minimum fields required to make a request.
-newOrdersGetTestOrderTemplateResponse ::
-  OrdersGetTestOrderTemplateResponse
-newOrdersGetTestOrderTemplateResponse =
-  OrdersGetTestOrderTemplateResponse
-    { kind = Core.Nothing,
-      template = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersGetTestOrderTemplateResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersGetTestOrderTemplateResponse"
-      ( \o ->
-          OrdersGetTestOrderTemplateResponse
-            Core.<$> (o Core..:? "kind") Core.<*> (o Core..:? "template")
-      )
-
-instance
-  Core.ToJSON
-    OrdersGetTestOrderTemplateResponse
-  where
-  toJSON OrdersGetTestOrderTemplateResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("template" Core..=) Core.<$> template
-          ]
-      )
-
---
--- /See:/ 'newOrdersInStoreRefundLineItemRequest' smart constructor.
-data OrdersInStoreRefundLineItemRequest = OrdersInStoreRefundLineItemRequest
-  { -- | The ID of the line item to return. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The amount to be refunded. This may be pre-tax or post-tax depending on the location of the order. Required.
-    priceAmount :: (Core.Maybe Price),
-    -- | The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity to return and refund.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the return. Acceptable values are: - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@other@\" - \"@productArrivedDamaged@\" - \"@productNotAsDescribed@\" - \"@qualityNotAsExpected@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text),
-    -- | The amount of tax to be refunded. Required.
-    taxAmount :: (Core.Maybe Price)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersInStoreRefundLineItemRequest' with the minimum fields required to make a request.
-newOrdersInStoreRefundLineItemRequest ::
-  OrdersInStoreRefundLineItemRequest
-newOrdersInStoreRefundLineItemRequest =
-  OrdersInStoreRefundLineItemRequest
-    { lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      priceAmount = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing,
-      taxAmount = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersInStoreRefundLineItemRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersInStoreRefundLineItemRequest"
-      ( \o ->
-          OrdersInStoreRefundLineItemRequest
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-            Core.<*> (o Core..:? "taxAmount")
-      )
-
-instance
-  Core.ToJSON
-    OrdersInStoreRefundLineItemRequest
-  where
-  toJSON OrdersInStoreRefundLineItemRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText,
-            ("taxAmount" Core..=) Core.<$> taxAmount
-          ]
-      )
-
---
--- /See:/ 'newOrdersInStoreRefundLineItemResponse' smart constructor.
-data OrdersInStoreRefundLineItemResponse = OrdersInStoreRefundLineItemResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersInStoreRefundLineItemResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersInStoreRefundLineItemResponse' with the minimum fields required to make a request.
-newOrdersInStoreRefundLineItemResponse ::
-  OrdersInStoreRefundLineItemResponse
-newOrdersInStoreRefundLineItemResponse =
-  OrdersInStoreRefundLineItemResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersInStoreRefundLineItemResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersInStoreRefundLineItemResponse"
-      ( \o ->
-          OrdersInStoreRefundLineItemResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersInStoreRefundLineItemResponse
-  where
-  toJSON OrdersInStoreRefundLineItemResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersListResponse' smart constructor.
-data OrdersListResponse = OrdersListResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersListResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of orders.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
-    resources :: (Core.Maybe [Order])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
-newOrdersListResponse ::
-  OrdersListResponse
-newOrdersListResponse =
-  OrdersListResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      resources = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersListResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersListResponse"
-      ( \o ->
-          OrdersListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources")
-      )
-
-instance Core.ToJSON OrdersListResponse where
-  toJSON OrdersListResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resources" Core..=) Core.<$> resources
-          ]
-      )
-
---
--- /See:/ 'newOrdersRefundItemRequest' smart constructor.
-data OrdersRefundItemRequest = OrdersRefundItemRequest
-  { -- | The items that are refunded. Either Item or Shipping must be provided in the request.
-    items :: (Core.Maybe [OrdersCustomBatchRequestEntryRefundItemItem]),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The reason for the refund. Acceptable values are: - \"@shippingCostAdjustment@\" - \"@priceAdjustment@\" - \"@taxAdjustment@\" - \"@feeAdjustment@\" - \"@courtesyAdjustment@\" - \"@adjustment@\" - \"@customerCancelled@\" - \"@noInventory@\" - \"@productNotAsDescribed@\" - \"@undeliverableShippingAddress@\" - \"@wrongProductShipped@\" - \"@lateShipmentCredit@\" - \"@deliveredLateByCarrier@\" - \"@productArrivedDamaged@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text),
-    -- | The refund on shipping. Optional, but either Item or Shipping must be provided in the request.
-    shipping :: (Core.Maybe OrdersCustomBatchRequestEntryRefundItemShipping)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRefundItemRequest' with the minimum fields required to make a request.
-newOrdersRefundItemRequest ::
-  OrdersRefundItemRequest
-newOrdersRefundItemRequest =
-  OrdersRefundItemRequest
-    { items = Core.Nothing,
-      operationId = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing,
-      shipping = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersRefundItemRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersRefundItemRequest"
-      ( \o ->
-          OrdersRefundItemRequest
-            Core.<$> (o Core..:? "items")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-            Core.<*> (o Core..:? "shipping")
-      )
-
-instance Core.ToJSON OrdersRefundItemRequest where
-  toJSON OrdersRefundItemRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText,
-            ("shipping" Core..=) Core.<$> shipping
-          ]
-      )
-
---
--- /See:/ 'newOrdersRefundItemResponse' smart constructor.
-data OrdersRefundItemResponse = OrdersRefundItemResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersRefundItemResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRefundItemResponse' with the minimum fields required to make a request.
-newOrdersRefundItemResponse ::
-  OrdersRefundItemResponse
-newOrdersRefundItemResponse =
-  OrdersRefundItemResponse {executionStatus = Core.Nothing, kind = Core.Nothing}
-
-instance Core.FromJSON OrdersRefundItemResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersRefundItemResponse"
-      ( \o ->
-          OrdersRefundItemResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersRefundItemResponse where
-  toJSON OrdersRefundItemResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersRefundOrderRequest' smart constructor.
-data OrdersRefundOrderRequest = OrdersRefundOrderRequest
-  { -- | The amount that is refunded. If this is not the first refund for the order, this should be the newly refunded amount.
-    amount :: (Core.Maybe MonetaryAmount),
-    -- | If true, the full order will be refunded, including shipping. If this is true, amount shouldn\'t be provided and will be ignored.
-    fullRefund :: (Core.Maybe Core.Bool),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The reason for the refund. Acceptable values are: - \"@courtesyAdjustment@\" - \"@other@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRefundOrderRequest' with the minimum fields required to make a request.
-newOrdersRefundOrderRequest ::
-  OrdersRefundOrderRequest
-newOrdersRefundOrderRequest =
-  OrdersRefundOrderRequest
-    { amount = Core.Nothing,
-      fullRefund = Core.Nothing,
-      operationId = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersRefundOrderRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersRefundOrderRequest"
-      ( \o ->
-          OrdersRefundOrderRequest
-            Core.<$> (o Core..:? "amount")
-            Core.<*> (o Core..:? "fullRefund")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance Core.ToJSON OrdersRefundOrderRequest where
-  toJSON OrdersRefundOrderRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("amount" Core..=) Core.<$> amount,
-            ("fullRefund" Core..=) Core.<$> fullRefund,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrdersRefundOrderResponse' smart constructor.
-data OrdersRefundOrderResponse = OrdersRefundOrderResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersRefundOrderResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRefundOrderResponse' with the minimum fields required to make a request.
-newOrdersRefundOrderResponse ::
-  OrdersRefundOrderResponse
-newOrdersRefundOrderResponse =
-  OrdersRefundOrderResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersRefundOrderResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersRefundOrderResponse"
-      ( \o ->
-          OrdersRefundOrderResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersRefundOrderResponse where
-  toJSON OrdersRefundOrderResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersRejectReturnLineItemRequest' smart constructor.
-data OrdersRejectReturnLineItemRequest = OrdersRejectReturnLineItemRequest
-  { -- | The ID of the line item to return. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity to return and refund.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the return. Acceptable values are: - \"@damagedOrUsed@\" - \"@missingComponent@\" - \"@notEligible@\" - \"@other@\" - \"@outOfReturnWindow@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRejectReturnLineItemRequest' with the minimum fields required to make a request.
-newOrdersRejectReturnLineItemRequest ::
-  OrdersRejectReturnLineItemRequest
-newOrdersRejectReturnLineItemRequest =
-  OrdersRejectReturnLineItemRequest
-    { lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersRejectReturnLineItemRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersRejectReturnLineItemRequest"
-      ( \o ->
-          OrdersRejectReturnLineItemRequest
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-      )
-
-instance
-  Core.ToJSON
-    OrdersRejectReturnLineItemRequest
-  where
-  toJSON OrdersRejectReturnLineItemRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText
-          ]
-      )
-
---
--- /See:/ 'newOrdersRejectReturnLineItemResponse' smart constructor.
-data OrdersRejectReturnLineItemResponse = OrdersRejectReturnLineItemResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersRejectReturnLineItemResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersRejectReturnLineItemResponse' with the minimum fields required to make a request.
-newOrdersRejectReturnLineItemResponse ::
-  OrdersRejectReturnLineItemResponse
-newOrdersRejectReturnLineItemResponse =
-  OrdersRejectReturnLineItemResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersRejectReturnLineItemResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersRejectReturnLineItemResponse"
-      ( \o ->
-          OrdersRejectReturnLineItemResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersRejectReturnLineItemResponse
-  where
-  toJSON OrdersRejectReturnLineItemResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersReturnRefundLineItemRequest' smart constructor.
-data OrdersReturnRefundLineItemRequest = OrdersReturnRefundLineItemRequest
-  { -- | The ID of the line item to return. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The amount to be refunded. This may be pre-tax or post-tax depending on the location of the order. If omitted, refundless return is assumed.
-    priceAmount :: (Core.Maybe Price),
-    -- | The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | The quantity to return and refund. Quantity is required.
-    quantity :: (Core.Maybe Core.Word32),
-    -- | The reason for the return. Acceptable values are: - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@invalidCoupon@\" - \"@malformedShippingAddress@\" - \"@other@\" - \"@productArrivedDamaged@\" - \"@productNotAsDescribed@\" - \"@qualityNotAsExpected@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reason :: (Core.Maybe Core.Text),
-    -- | The explanation of the reason.
-    reasonText :: (Core.Maybe Core.Text),
-    -- | The amount of tax to be refunded. Optional, but if filled, then priceAmount must be set. Calculated automatically if not provided.
-    taxAmount :: (Core.Maybe Price)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersReturnRefundLineItemRequest' with the minimum fields required to make a request.
-newOrdersReturnRefundLineItemRequest ::
-  OrdersReturnRefundLineItemRequest
-newOrdersReturnRefundLineItemRequest =
-  OrdersReturnRefundLineItemRequest
-    { lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      priceAmount = Core.Nothing,
-      productId = Core.Nothing,
-      quantity = Core.Nothing,
-      reason = Core.Nothing,
-      reasonText = Core.Nothing,
-      taxAmount = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersReturnRefundLineItemRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersReturnRefundLineItemRequest"
-      ( \o ->
-          OrdersReturnRefundLineItemRequest
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "quantity")
-            Core.<*> (o Core..:? "reason")
-            Core.<*> (o Core..:? "reasonText")
-            Core.<*> (o Core..:? "taxAmount")
-      )
-
-instance
-  Core.ToJSON
-    OrdersReturnRefundLineItemRequest
-  where
-  toJSON OrdersReturnRefundLineItemRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("productId" Core..=) Core.<$> productId,
-            ("quantity" Core..=) Core.<$> quantity,
-            ("reason" Core..=) Core.<$> reason,
-            ("reasonText" Core..=) Core.<$> reasonText,
-            ("taxAmount" Core..=) Core.<$> taxAmount
-          ]
-      )
-
---
--- /See:/ 'newOrdersReturnRefundLineItemResponse' smart constructor.
-data OrdersReturnRefundLineItemResponse = OrdersReturnRefundLineItemResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersReturnRefundLineItemResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersReturnRefundLineItemResponse' with the minimum fields required to make a request.
-newOrdersReturnRefundLineItemResponse ::
-  OrdersReturnRefundLineItemResponse
-newOrdersReturnRefundLineItemResponse =
-  OrdersReturnRefundLineItemResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersReturnRefundLineItemResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersReturnRefundLineItemResponse"
-      ( \o ->
-          OrdersReturnRefundLineItemResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersReturnRefundLineItemResponse
-  where
-  toJSON OrdersReturnRefundLineItemResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersSetLineItemMetadataRequest' smart constructor.
-data OrdersSetLineItemMetadataRequest = OrdersSetLineItemMetadataRequest
-  { -- |
-    annotations :: (Core.Maybe [OrderMerchantProvidedAnnotation]),
-    -- | The ID of the line item to set metadata. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersSetLineItemMetadataRequest' with the minimum fields required to make a request.
-newOrdersSetLineItemMetadataRequest ::
-  OrdersSetLineItemMetadataRequest
-newOrdersSetLineItemMetadataRequest =
-  OrdersSetLineItemMetadataRequest
-    { annotations = Core.Nothing,
-      lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      productId = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersSetLineItemMetadataRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersSetLineItemMetadataRequest"
-      ( \o ->
-          OrdersSetLineItemMetadataRequest
-            Core.<$> (o Core..:? "annotations")
-            Core.<*> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "productId")
-      )
-
-instance Core.ToJSON OrdersSetLineItemMetadataRequest where
-  toJSON OrdersSetLineItemMetadataRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("annotations" Core..=) Core.<$> annotations,
-            ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("productId" Core..=) Core.<$> productId
-          ]
-      )
-
---
--- /See:/ 'newOrdersSetLineItemMetadataResponse' smart constructor.
-data OrdersSetLineItemMetadataResponse = OrdersSetLineItemMetadataResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersSetLineItemMetadataResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersSetLineItemMetadataResponse' with the minimum fields required to make a request.
-newOrdersSetLineItemMetadataResponse ::
-  OrdersSetLineItemMetadataResponse
-newOrdersSetLineItemMetadataResponse =
-  OrdersSetLineItemMetadataResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersSetLineItemMetadataResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersSetLineItemMetadataResponse"
-      ( \o ->
-          OrdersSetLineItemMetadataResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersSetLineItemMetadataResponse
-  where
-  toJSON OrdersSetLineItemMetadataResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersShipLineItemsRequest' smart constructor.
-data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest
-  { -- | Line items to ship.
-    lineItems :: (Core.Maybe [OrderShipmentLineItemShipment]),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | ID of the shipment group. Required for orders that use the orderinvoices service.
-    shipmentGroupId :: (Core.Maybe Core.Text),
-    -- | Shipment information. This field is repeated because a single line item can be shipped in several packages (and have several tracking IDs).
-    shipmentInfos ::
-      ( Core.Maybe
-          [OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo]
-      )
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersShipLineItemsRequest' with the minimum fields required to make a request.
-newOrdersShipLineItemsRequest ::
-  OrdersShipLineItemsRequest
-newOrdersShipLineItemsRequest =
-  OrdersShipLineItemsRequest
-    { lineItems = Core.Nothing,
-      operationId = Core.Nothing,
-      shipmentGroupId = Core.Nothing,
-      shipmentInfos = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersShipLineItemsRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersShipLineItemsRequest"
-      ( \o ->
-          OrdersShipLineItemsRequest
-            Core.<$> (o Core..:? "lineItems")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "shipmentGroupId")
-            Core.<*> (o Core..:? "shipmentInfos")
-      )
-
-instance Core.ToJSON OrdersShipLineItemsRequest where
-  toJSON OrdersShipLineItemsRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItems" Core..=) Core.<$> lineItems,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("shipmentGroupId" Core..=) Core.<$> shipmentGroupId,
-            ("shipmentInfos" Core..=) Core.<$> shipmentInfos
-          ]
-      )
-
---
--- /See:/ 'newOrdersShipLineItemsResponse' smart constructor.
-data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersShipLineItemsResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersShipLineItemsResponse' with the minimum fields required to make a request.
-newOrdersShipLineItemsResponse ::
-  OrdersShipLineItemsResponse
-newOrdersShipLineItemsResponse =
-  OrdersShipLineItemsResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersShipLineItemsResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersShipLineItemsResponse"
-      ( \o ->
-          OrdersShipLineItemsResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersShipLineItemsResponse where
-  toJSON OrdersShipLineItemsResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersUpdateLineItemShippingDetailsRequest' smart constructor.
-data OrdersUpdateLineItemShippingDetailsRequest = OrdersUpdateLineItemShippingDetailsRequest
-  { -- | Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated. Provided date should be within 1 year timeframe and can\'t be a date in the past.
-    deliverByDate :: (Core.Maybe Core.Text),
-    -- | The ID of the line item to set metadata. Either lineItemId or productId is required.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
-    productId :: (Core.Maybe Core.Text),
-    -- | Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated. Provided date should be within 1 year timeframe and can\'t be a date in the past.
-    shipByDate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateLineItemShippingDetailsRequest' with the minimum fields required to make a request.
-newOrdersUpdateLineItemShippingDetailsRequest ::
-  OrdersUpdateLineItemShippingDetailsRequest
-newOrdersUpdateLineItemShippingDetailsRequest =
-  OrdersUpdateLineItemShippingDetailsRequest
-    { deliverByDate = Core.Nothing,
-      lineItemId = Core.Nothing,
-      operationId = Core.Nothing,
-      productId = Core.Nothing,
-      shipByDate = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersUpdateLineItemShippingDetailsRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateLineItemShippingDetailsRequest"
-      ( \o ->
-          OrdersUpdateLineItemShippingDetailsRequest
-            Core.<$> (o Core..:? "deliverByDate")
-            Core.<*> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "shipByDate")
-      )
-
-instance
-  Core.ToJSON
-    OrdersUpdateLineItemShippingDetailsRequest
-  where
-  toJSON OrdersUpdateLineItemShippingDetailsRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("deliverByDate" Core..=) Core.<$> deliverByDate,
-            ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("productId" Core..=) Core.<$> productId,
-            ("shipByDate" Core..=) Core.<$> shipByDate
-          ]
-      )
-
---
--- /See:/ 'newOrdersUpdateLineItemShippingDetailsResponse' smart constructor.
-data OrdersUpdateLineItemShippingDetailsResponse = OrdersUpdateLineItemShippingDetailsResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersUpdateLineItemShippingDetailsResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateLineItemShippingDetailsResponse' with the minimum fields required to make a request.
-newOrdersUpdateLineItemShippingDetailsResponse ::
-  OrdersUpdateLineItemShippingDetailsResponse
-newOrdersUpdateLineItemShippingDetailsResponse =
-  OrdersUpdateLineItemShippingDetailsResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersUpdateLineItemShippingDetailsResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateLineItemShippingDetailsResponse"
-      ( \o ->
-          OrdersUpdateLineItemShippingDetailsResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersUpdateLineItemShippingDetailsResponse
-  where
-  toJSON
-    OrdersUpdateLineItemShippingDetailsResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("executionStatus" Core..=)
-                Core.<$> executionStatus,
-              ("kind" Core..=) Core.<$> kind
-            ]
-        )
-
---
--- /See:/ 'newOrdersUpdateMerchantOrderIdRequest' smart constructor.
-data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest
-  { -- | The merchant order id to be assigned to the order. Must be unique per merchant.
-    merchantOrderId :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateMerchantOrderIdRequest' with the minimum fields required to make a request.
-newOrdersUpdateMerchantOrderIdRequest ::
-  OrdersUpdateMerchantOrderIdRequest
-newOrdersUpdateMerchantOrderIdRequest =
-  OrdersUpdateMerchantOrderIdRequest
-    { merchantOrderId = Core.Nothing,
-      operationId = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersUpdateMerchantOrderIdRequest
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateMerchantOrderIdRequest"
-      ( \o ->
-          OrdersUpdateMerchantOrderIdRequest
-            Core.<$> (o Core..:? "merchantOrderId")
-            Core.<*> (o Core..:? "operationId")
-      )
-
-instance
-  Core.ToJSON
-    OrdersUpdateMerchantOrderIdRequest
-  where
-  toJSON OrdersUpdateMerchantOrderIdRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("merchantOrderId" Core..=)
-              Core.<$> merchantOrderId,
-            ("operationId" Core..=) Core.<$> operationId
-          ]
-      )
-
---
--- /See:/ 'newOrdersUpdateMerchantOrderIdResponse' smart constructor.
-data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersUpdateMerchantOrderIdResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateMerchantOrderIdResponse' with the minimum fields required to make a request.
-newOrdersUpdateMerchantOrderIdResponse ::
-  OrdersUpdateMerchantOrderIdResponse
-newOrdersUpdateMerchantOrderIdResponse =
-  OrdersUpdateMerchantOrderIdResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    OrdersUpdateMerchantOrderIdResponse
-  where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateMerchantOrderIdResponse"
-      ( \o ->
-          OrdersUpdateMerchantOrderIdResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance
-  Core.ToJSON
-    OrdersUpdateMerchantOrderIdResponse
-  where
-  toJSON OrdersUpdateMerchantOrderIdResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
---
--- /See:/ 'newOrdersUpdateShipmentRequest' smart constructor.
-data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
-  { -- | The carrier handling the shipment. Not updated if missing. See @shipments[].carrier@ in the Orders resource representation for a list of acceptable values.
-    carrier :: (Core.Maybe Core.Text),
-    -- | Date on which the shipment has been delivered, in ISO 8601 format. Optional and can be provided only if @status@ is @delivered@.
-    deliveryDate :: (Core.Maybe Core.Text),
-    -- | Date after which the pickup will expire, in ISO 8601 format. Required only when order is buy-online-pickup-in-store(BOPIS) and @status@ is @ready for pickup@.
-    lastPickupDate :: (Core.Maybe Core.Text),
-    -- | The ID of the operation. Unique across all operations for a given order.
-    operationId :: (Core.Maybe Core.Text),
-    -- | Date on which the shipment has been ready for pickup, in ISO 8601 format. Optional and can be provided only if @status@ is @ready for pickup@.
-    readyPickupDate :: (Core.Maybe Core.Text),
-    -- | Delivery details of the shipment if scheduling is needed.
-    scheduledDeliveryDetails ::
-      ( Core.Maybe
-          OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails
-      ),
-    -- | The ID of the shipment.
-    shipmentId :: (Core.Maybe Core.Text),
-    -- | New status for the shipment. Not updated if missing. Acceptable values are: - \"@delivered@\" - \"@undeliverable@\" - \"@readyForPickup@\"
-    status :: (Core.Maybe Core.Text),
-    -- | The tracking ID for the shipment. Not updated if missing.
-    trackingId :: (Core.Maybe Core.Text),
-    -- | Date on which the shipment has been undeliverable, in ISO 8601 format. Optional and can be provided only if @status@ is @undeliverable@.
-    undeliveredDate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateShipmentRequest' with the minimum fields required to make a request.
-newOrdersUpdateShipmentRequest ::
-  OrdersUpdateShipmentRequest
-newOrdersUpdateShipmentRequest =
-  OrdersUpdateShipmentRequest
-    { carrier = Core.Nothing,
-      deliveryDate = Core.Nothing,
-      lastPickupDate = Core.Nothing,
-      operationId = Core.Nothing,
-      readyPickupDate = Core.Nothing,
-      scheduledDeliveryDetails = Core.Nothing,
-      shipmentId = Core.Nothing,
-      status = Core.Nothing,
-      trackingId = Core.Nothing,
-      undeliveredDate = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersUpdateShipmentRequest where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateShipmentRequest"
-      ( \o ->
-          OrdersUpdateShipmentRequest
-            Core.<$> (o Core..:? "carrier")
-            Core.<*> (o Core..:? "deliveryDate")
-            Core.<*> (o Core..:? "lastPickupDate")
-            Core.<*> (o Core..:? "operationId")
-            Core.<*> (o Core..:? "readyPickupDate")
-            Core.<*> (o Core..:? "scheduledDeliveryDetails")
-            Core.<*> (o Core..:? "shipmentId")
-            Core.<*> (o Core..:? "status")
-            Core.<*> (o Core..:? "trackingId")
-            Core.<*> (o Core..:? "undeliveredDate")
-      )
-
-instance Core.ToJSON OrdersUpdateShipmentRequest where
-  toJSON OrdersUpdateShipmentRequest {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrier" Core..=) Core.<$> carrier,
-            ("deliveryDate" Core..=) Core.<$> deliveryDate,
-            ("lastPickupDate" Core..=) Core.<$> lastPickupDate,
-            ("operationId" Core..=) Core.<$> operationId,
-            ("readyPickupDate" Core..=) Core.<$> readyPickupDate,
-            ("scheduledDeliveryDetails" Core..=)
-              Core.<$> scheduledDeliveryDetails,
-            ("shipmentId" Core..=) Core.<$> shipmentId,
-            ("status" Core..=) Core.<$> status,
-            ("trackingId" Core..=) Core.<$> trackingId,
-            ("undeliveredDate" Core..=)
-              Core.<$> undeliveredDate
-          ]
-      )
-
---
--- /See:/ 'newOrdersUpdateShipmentResponse' smart constructor.
-data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse
-  { -- | The status of the execution. Acceptable values are: - \"@duplicate@\" - \"@executed@\"
-    executionStatus :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#ordersUpdateShipmentResponse@\".
-    kind :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'OrdersUpdateShipmentResponse' with the minimum fields required to make a request.
-newOrdersUpdateShipmentResponse ::
-  OrdersUpdateShipmentResponse
-newOrdersUpdateShipmentResponse =
-  OrdersUpdateShipmentResponse
-    { executionStatus = Core.Nothing,
-      kind = Core.Nothing
-    }
-
-instance Core.FromJSON OrdersUpdateShipmentResponse where
-  parseJSON =
-    Core.withObject
-      "OrdersUpdateShipmentResponse"
-      ( \o ->
-          OrdersUpdateShipmentResponse
-            Core.<$> (o Core..:? "executionStatus")
-            Core.<*> (o Core..:? "kind")
-      )
-
-instance Core.ToJSON OrdersUpdateShipmentResponse where
-  toJSON OrdersUpdateShipmentResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("executionStatus" Core..=)
-              Core.<$> executionStatus,
-            ("kind" Core..=) Core.<$> kind
-          ]
-      )
-
--- | Request message for the PauseProgram method.
---
--- /See:/ 'newPauseBuyOnGoogleProgramRequest' smart constructor.
-data PauseBuyOnGoogleProgramRequest = PauseBuyOnGoogleProgramRequest
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PauseBuyOnGoogleProgramRequest' with the minimum fields required to make a request.
-newPauseBuyOnGoogleProgramRequest ::
-  PauseBuyOnGoogleProgramRequest
-newPauseBuyOnGoogleProgramRequest = PauseBuyOnGoogleProgramRequest
-
-instance Core.FromJSON PauseBuyOnGoogleProgramRequest where
-  parseJSON =
-    Core.withObject
-      "PauseBuyOnGoogleProgramRequest"
-      (\o -> Core.pure PauseBuyOnGoogleProgramRequest)
-
-instance Core.ToJSON PauseBuyOnGoogleProgramRequest where
-  toJSON = Core.const Core.emptyObject
 
 -- | Additional information required for PAYMENT/SERVICE/PROVIDER link type.
 --
@@ -14481,7 +9983,8 @@ newPaymentServiceProviderLinkInfo ::
   PaymentServiceProviderLinkInfo
 newPaymentServiceProviderLinkInfo =
   PaymentServiceProviderLinkInfo
-    { externalAccountBusinessCountry = Core.Nothing,
+    { externalAccountBusinessCountry =
+        Core.Nothing,
       externalAccountId = Core.Nothing
     }
 
@@ -14501,8 +10004,7 @@ instance Core.ToJSON PaymentServiceProviderLinkInfo where
       ( Core.catMaybes
           [ ("externalAccountBusinessCountry" Core..=)
               Core.<$> externalAccountBusinessCountry,
-            ("externalAccountId" Core..=)
-              Core.<$> externalAccountId
+            ("externalAccountId" Core..=) Core.<$> externalAccountId
           ]
       )
 
@@ -14520,7 +10022,10 @@ data PickupCarrierService = PickupCarrierService
 newPickupCarrierService ::
   PickupCarrierService
 newPickupCarrierService =
-  PickupCarrierService {carrierName = Core.Nothing, serviceName = Core.Nothing}
+  PickupCarrierService
+    { carrierName = Core.Nothing,
+      serviceName = Core.Nothing
+    }
 
 instance Core.FromJSON PickupCarrierService where
   parseJSON =
@@ -14595,23 +10100,19 @@ newtype PosCustomBatchRequest = PosCustomBatchRequest
 -- | Creates a value of 'PosCustomBatchRequest' with the minimum fields required to make a request.
 newPosCustomBatchRequest ::
   PosCustomBatchRequest
-newPosCustomBatchRequest = PosCustomBatchRequest {entries = Core.Nothing}
+newPosCustomBatchRequest =
+  PosCustomBatchRequest {entries = Core.Nothing}
 
 instance Core.FromJSON PosCustomBatchRequest where
   parseJSON =
     Core.withObject
       "PosCustomBatchRequest"
-      ( \o ->
-          PosCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
-      )
+      (\o -> PosCustomBatchRequest Core.<$> (o Core..:? "entries"))
 
 instance Core.ToJSON PosCustomBatchRequest where
   toJSON PosCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 --
 -- /See:/ 'newPosCustomBatchRequestEntry' smart constructor.
@@ -14658,16 +10159,12 @@ instance Core.FromJSON PosCustomBatchRequestEntry where
           PosCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "inventory")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "sale")
             Core.<*> (o Core..:? "store")
             Core.<*> (o Core..:? "storeCode")
-            Core.<*> ( o Core..:? "targetMerchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "targetMerchantId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PosCustomBatchRequestEntry where
@@ -14676,13 +10173,13 @@ instance Core.ToJSON PosCustomBatchRequestEntry where
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("inventory" Core..=) Core.<$> inventory,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("sale" Core..=) Core.<$> sale,
             ("store" Core..=) Core.<$> store,
             ("storeCode" Core..=) Core.<$> storeCode,
-            ("targetMerchantId" Core..=) Core.. Core.AsText
+            ("targetMerchantId" Core..=)
+              Core.. Core.AsText
               Core.<$> targetMerchantId
           ]
       )
@@ -14701,7 +10198,10 @@ data PosCustomBatchResponse = PosCustomBatchResponse
 newPosCustomBatchResponse ::
   PosCustomBatchResponse
 newPosCustomBatchResponse =
-  PosCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  PosCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON PosCustomBatchResponse where
   parseJSON =
@@ -14709,7 +10209,8 @@ instance Core.FromJSON PosCustomBatchResponse where
       "PosCustomBatchResponse"
       ( \o ->
           PosCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON PosCustomBatchResponse where
@@ -14793,7 +10294,10 @@ data PosDataProviders = PosDataProviders
 newPosDataProviders ::
   PosDataProviders
 newPosDataProviders =
-  PosDataProviders {country = Core.Nothing, posDataProviders = Core.Nothing}
+  PosDataProviders
+    { country = Core.Nothing,
+      posDataProviders = Core.Nothing
+    }
 
 instance Core.FromJSON PosDataProviders where
   parseJSON =
@@ -14810,8 +10314,7 @@ instance Core.ToJSON PosDataProviders where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("posDataProviders" Core..=)
-              Core.<$> posDataProviders
+            ("posDataProviders" Core..=) Core.<$> posDataProviders
           ]
       )
 
@@ -14837,10 +10340,7 @@ newPosDataProvidersPosDataProvider =
       providerId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PosDataProvidersPosDataProvider
-  where
+instance Core.FromJSON PosDataProvidersPosDataProvider where
   parseJSON =
     Core.withObject
       "PosDataProvidersPosDataProvider"
@@ -14848,9 +10348,7 @@ instance
           PosDataProvidersPosDataProvider
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "fullName")
-            Core.<*> ( o Core..:? "providerId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "providerId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PosDataProvidersPosDataProvider where
@@ -14859,8 +10357,7 @@ instance Core.ToJSON PosDataProvidersPosDataProvider where
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
             ("fullName" Core..=) Core.<$> fullName,
-            ("providerId" Core..=) Core.. Core.AsText
-              Core.<$> providerId
+            ("providerId" Core..=) Core.. Core.AsText Core.<$> providerId
           ]
       )
 
@@ -14876,6 +10373,10 @@ data PosInventory = PosInventory
     itemId :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"@content#posInventory@\"
     kind :: (Core.Maybe Core.Text),
+    -- | Optional. Supported pickup method for this offer. Unless the value is \"not supported\", this field must be submitted together with @pickupSla@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupMethod :: (Core.Maybe Core.Text),
+    -- | Optional. Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with @pickupMethod@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupSla :: (Core.Maybe Core.Text),
     -- | Required. The current price of the item.
     price :: (Core.Maybe Price),
     -- | Required. The available quantity of the item.
@@ -14898,6 +10399,8 @@ newPosInventory =
       gtin = Core.Nothing,
       itemId = Core.Nothing,
       kind = Core.Nothing,
+      pickupMethod = Core.Nothing,
+      pickupSla = Core.Nothing,
       price = Core.Nothing,
       quantity = Core.Nothing,
       storeCode = Core.Nothing,
@@ -14915,10 +10418,10 @@ instance Core.FromJSON PosInventory where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "pickupMethod")
+            Core.<*> (o Core..:? "pickupSla")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -14928,14 +10431,14 @@ instance Core.ToJSON PosInventory where
   toJSON PosInventory {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
             ("kind" Core..=) Core.<$> kind,
+            ("pickupMethod" Core..=) Core.<$> pickupMethod,
+            ("pickupSla" Core..=) Core.<$> pickupSla,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
             ("timestamp" Core..=) Core.<$> timestamp
@@ -14951,6 +10454,10 @@ data PosInventoryRequest = PosInventoryRequest
     gtin :: (Core.Maybe Core.Text),
     -- | Required. A unique identifier for the item.
     itemId :: (Core.Maybe Core.Text),
+    -- | Optional. Supported pickup method for this offer. Unless the value is \"not supported\", this field must be submitted together with @pickupSla@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupMethod :: (Core.Maybe Core.Text),
+    -- | Optional. Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with @pickupMethod@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupSla :: (Core.Maybe Core.Text),
     -- | Required. The current price of the item.
     price :: (Core.Maybe Price),
     -- | Required. The available quantity of the item.
@@ -14972,6 +10479,8 @@ newPosInventoryRequest =
     { contentLanguage = Core.Nothing,
       gtin = Core.Nothing,
       itemId = Core.Nothing,
+      pickupMethod = Core.Nothing,
+      pickupSla = Core.Nothing,
       price = Core.Nothing,
       quantity = Core.Nothing,
       storeCode = Core.Nothing,
@@ -14988,10 +10497,10 @@ instance Core.FromJSON PosInventoryRequest where
             Core.<$> (o Core..:? "contentLanguage")
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
+            Core.<*> (o Core..:? "pickupMethod")
+            Core.<*> (o Core..:? "pickupSla")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -15001,13 +10510,13 @@ instance Core.ToJSON PosInventoryRequest where
   toJSON PosInventoryRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
+            ("pickupMethod" Core..=) Core.<$> pickupMethod,
+            ("pickupSla" Core..=) Core.<$> pickupSla,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
             ("timestamp" Core..=) Core.<$> timestamp
@@ -15025,6 +10534,10 @@ data PosInventoryResponse = PosInventoryResponse
     itemId :: (Core.Maybe Core.Text),
     -- | Identifies what kind of resource this is. Value: the fixed string \"@content#posInventoryResponse@\".
     kind :: (Core.Maybe Core.Text),
+    -- | Optional. Supported pickup method for this offer. Unless the value is \"not supported\", this field must be submitted together with @pickupSla@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupMethod :: (Core.Maybe Core.Text),
+    -- | Optional. Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with @pickupMethod@. For accepted attribute values, see the <https://support.google.com/merchants/answer/3061342 local product inventory feed specification>.
+    pickupSla :: (Core.Maybe Core.Text),
     -- | Required. The current price of the item.
     price :: (Core.Maybe Price),
     -- | Required. The available quantity of the item.
@@ -15047,6 +10560,8 @@ newPosInventoryResponse =
       gtin = Core.Nothing,
       itemId = Core.Nothing,
       kind = Core.Nothing,
+      pickupMethod = Core.Nothing,
+      pickupSla = Core.Nothing,
       price = Core.Nothing,
       quantity = Core.Nothing,
       storeCode = Core.Nothing,
@@ -15064,10 +10579,10 @@ instance Core.FromJSON PosInventoryResponse where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "pickupMethod")
+            Core.<*> (o Core..:? "pickupSla")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "timestamp")
@@ -15077,14 +10592,14 @@ instance Core.ToJSON PosInventoryResponse where
   toJSON PosInventoryResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
             ("kind" Core..=) Core.<$> kind,
+            ("pickupMethod" Core..=) Core.<$> pickupMethod,
+            ("pickupSla" Core..=) Core.<$> pickupSla,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
             ("timestamp" Core..=) Core.<$> timestamp
@@ -15096,7 +10611,6 @@ instance Core.ToJSON PosInventoryResponse where
 data PosListResponse = PosListResponse
   { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#posListResponse@\".
     kind :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [PosStore])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -15181,9 +10695,7 @@ instance Core.FromJSON PosSale where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -15194,14 +10706,12 @@ instance Core.ToJSON PosSale where
   toJSON PosSale {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
             ("kind" Core..=) Core.<$> kind,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("saleId" Core..=) Core.<$> saleId,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
@@ -15259,9 +10769,7 @@ instance Core.FromJSON PosSaleRequest where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -15272,13 +10780,11 @@ instance Core.ToJSON PosSaleRequest where
   toJSON PosSaleRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("saleId" Core..=) Core.<$> saleId,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
@@ -15340,9 +10846,7 @@ instance Core.FromJSON PosSaleResponse where
             Core.<*> (o Core..:? "itemId")
             Core.<*> (o Core..:? "kind")
             Core.<*> (o Core..:? "price")
-            Core.<*> ( o Core..:? "quantity"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantity" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "saleId")
             Core.<*> (o Core..:? "storeCode")
             Core.<*> (o Core..:? "targetCountry")
@@ -15353,14 +10857,12 @@ instance Core.ToJSON PosSaleResponse where
   toJSON PosSaleResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentLanguage" Core..=)
-              Core.<$> contentLanguage,
+          [ ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("gtin" Core..=) Core.<$> gtin,
             ("itemId" Core..=) Core.<$> itemId,
             ("kind" Core..=) Core.<$> kind,
             ("price" Core..=) Core.<$> price,
-            ("quantity" Core..=) Core.. Core.AsText
-              Core.<$> quantity,
+            ("quantity" Core..=) Core.. Core.AsText Core.<$> quantity,
             ("saleId" Core..=) Core.<$> saleId,
             ("storeCode" Core..=) Core.<$> storeCode,
             ("targetCountry" Core..=) Core.<$> targetCountry,
@@ -15376,6 +10878,11 @@ data PosStore = PosStore
     gcidCategory :: (Core.Maybe [Core.Text]),
     -- | Identifies what kind of resource this is. Value: the fixed string \"@content#posStore@\"
     kind :: (Core.Maybe Core.Text),
+    -- | Output only. The matching status of POS store and Google Business Profile store. Possible values are: - \"@matched@\": The POS store is successfully matched with the Google Business Profile store. - \"@failed@\": The POS store is not matched with the Google Business Profile store. See matching/status/hint for further details. Note that there is up to 48 hours propagation delay for changes in Merchant Center (e.g. creation of new account, accounts linking) and Google Business Profile (e.g. store address update) which may affect the matching status. In such cases, after a delay call <https://developers.google.com/shopping-content/reference/rest/v2.1/pos/list pos.list> to retrieve the updated matching status.
+    matchingStatus :: (Core.Maybe Core.Text),
+    -- | Output only. The hint of why the matching has failed. This is only set when matching_status=failed. Possible values are: - \"@linked-store-not-found@\": There aren\'t any Google Business Profile stores available for matching. Connect your Merchant Center account with the Google Business Profile account. Or add a new Google Business Profile store corresponding to the POS store. - \"@store-match-not-found@\": The provided POS store couldn\'t be matched to any of the connected Google Business Profile stores. Merchant Center account is connected correctly and stores are available on Google Business Profile, but POS store location address does not match with Google Business Profile stores\' addresses. Update POS store address or Google Business Profile store address to match correctly. - \"@store-match-unverified@\": The provided POS store couldn\'t be matched to any of the connected Google Business Profile stores, as the matched Google Business Profile store is unverified. Go through the Google Business Profile
+    -- verification process to match correctly.
+    matchingStatusHint :: (Core.Maybe Core.Text),
     -- | The store phone number.
     phoneNumber :: (Core.Maybe Core.Text),
     -- | The Google Place Id of the store location.
@@ -15398,6 +10905,8 @@ newPosStore =
   PosStore
     { gcidCategory = Core.Nothing,
       kind = Core.Nothing,
+      matchingStatus = Core.Nothing,
+      matchingStatusHint = Core.Nothing,
       phoneNumber = Core.Nothing,
       placeId = Core.Nothing,
       storeAddress = Core.Nothing,
@@ -15414,6 +10923,8 @@ instance Core.FromJSON PosStore where
           PosStore
             Core.<$> (o Core..:? "gcidCategory")
             Core.<*> (o Core..:? "kind")
+            Core.<*> (o Core..:? "matchingStatus")
+            Core.<*> (o Core..:? "matchingStatusHint")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "placeId")
             Core.<*> (o Core..:? "storeAddress")
@@ -15428,6 +10939,8 @@ instance Core.ToJSON PosStore where
       ( Core.catMaybes
           [ ("gcidCategory" Core..=) Core.<$> gcidCategory,
             ("kind" Core..=) Core.<$> kind,
+            ("matchingStatus" Core..=) Core.<$> matchingStatus,
+            ("matchingStatusHint" Core..=) Core.<$> matchingStatusHint,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
             ("placeId" Core..=) Core.<$> placeId,
             ("storeAddress" Core..=) Core.<$> storeAddress,
@@ -15476,8 +10989,7 @@ instance Core.ToJSON PostalCodeGroup where
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
             ("name" Core..=) Core.<$> name,
-            ("postalCodeRanges" Core..=)
-              Core.<$> postalCodeRanges
+            ("postalCodeRanges" Core..=) Core.<$> postalCodeRanges
           ]
       )
 
@@ -15514,10 +11026,8 @@ instance Core.ToJSON PostalCodeRange where
   toJSON PostalCodeRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("postalCodeRangeBegin" Core..=)
-              Core.<$> postalCodeRangeBegin,
-            ("postalCodeRangeEnd" Core..=)
-              Core.<$> postalCodeRangeEnd
+          [ ("postalCodeRangeBegin" Core..=) Core.<$> postalCodeRangeBegin,
+            ("postalCodeRangeEnd" Core..=) Core.<$> postalCodeRangeEnd
           ]
       )
 
@@ -15569,7 +11079,8 @@ data PriceAmount = PriceAmount
 -- | Creates a value of 'PriceAmount' with the minimum fields required to make a request.
 newPriceAmount ::
   PriceAmount
-newPriceAmount = PriceAmount {currency = Core.Nothing, value = Core.Nothing}
+newPriceAmount =
+  PriceAmount {currency = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON PriceAmount where
   parseJSON =
@@ -15620,7 +11131,8 @@ instance Core.FromJSON PriceCompetitiveness where
       ( \o ->
           PriceCompetitiveness
             Core.<$> (o Core..:? "benchmarkPriceCurrencyCode")
-            Core.<*> ( o Core..:? "benchmarkPriceMicros"
+            Core.<*> ( o
+                         Core..:? "benchmarkPriceMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "countryCode")
@@ -15632,7 +11144,8 @@ instance Core.ToJSON PriceCompetitiveness where
       ( Core.catMaybes
           [ ("benchmarkPriceCurrencyCode" Core..=)
               Core.<$> benchmarkPriceCurrencyCode,
-            ("benchmarkPriceMicros" Core..=) Core.. Core.AsText
+            ("benchmarkPriceMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> benchmarkPriceMicros,
             ("countryCode" Core..=) Core.<$> countryCode
           ]
@@ -15642,17 +11155,19 @@ instance Core.ToJSON PriceCompetitiveness where
 --
 -- /See:/ 'newPriceInsights' smart constructor.
 data PriceInsights = PriceInsights
-  { -- | The predicted change in clicks as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in clicks.
+  { -- | The predicted effectiveness of applying the price suggestion, bucketed.
+    effectiveness :: (Core.Maybe PriceInsights_Effectiveness),
+    -- | The predicted change in clicks as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in clicks.
     predictedClicksChangeFraction :: (Core.Maybe Core.Double),
     -- | The predicted change in conversions as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in conversions).
     predictedConversionsChangeFraction :: (Core.Maybe Core.Double),
-    -- | The predicted change in gross profit as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in gross profit.
+    -- | /Deprecated/: This field is no longer supported and will start returning 0. The predicted change in gross profit as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in gross profit.
     predictedGrossProfitChangeFraction :: (Core.Maybe Core.Double),
     -- | The predicted change in impressions as a fraction after introducing the suggested price compared to current active price. For example, 0.05 is a 5% predicted increase in impressions.
     predictedImpressionsChangeFraction :: (Core.Maybe Core.Double),
-    -- | The predicted monthly gross profit change currency (ISO 4217 code).
+    -- | /Deprecated/: This field is no longer supported and will start returning USD for all requests. The predicted monthly gross profit change currency (ISO 4217 code).
     predictedMonthlyGrossProfitChangeCurrencyCode :: (Core.Maybe Core.Text),
-    -- | The predicted change in gross profit in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) after introducing the suggested price for a month compared to current active price.
+    -- | /Deprecated/: This field is no longer supported and will start returning 0. The predicted change in gross profit in micros (1 millionth of a standard unit, 1 USD = 1000000 micros) after introducing the suggested price for a month compared to current active price.
     predictedMonthlyGrossProfitChangeMicros :: (Core.Maybe Core.Int64),
     -- | The suggested price currency (ISO 4217 code).
     suggestedPriceCurrencyCode :: (Core.Maybe Core.Text),
@@ -15666,7 +11181,8 @@ newPriceInsights ::
   PriceInsights
 newPriceInsights =
   PriceInsights
-    { predictedClicksChangeFraction = Core.Nothing,
+    { effectiveness = Core.Nothing,
+      predictedClicksChangeFraction = Core.Nothing,
       predictedConversionsChangeFraction = Core.Nothing,
       predictedGrossProfitChangeFraction = Core.Nothing,
       predictedImpressionsChangeFraction = Core.Nothing,
@@ -15682,18 +11198,19 @@ instance Core.FromJSON PriceInsights where
       "PriceInsights"
       ( \o ->
           PriceInsights
-            Core.<$> (o Core..:? "predictedClicksChangeFraction")
+            Core.<$> (o Core..:? "effectiveness")
+            Core.<*> (o Core..:? "predictedClicksChangeFraction")
             Core.<*> (o Core..:? "predictedConversionsChangeFraction")
             Core.<*> (o Core..:? "predictedGrossProfitChangeFraction")
             Core.<*> (o Core..:? "predictedImpressionsChangeFraction")
+            Core.<*> (o Core..:? "predictedMonthlyGrossProfitChangeCurrencyCode")
             Core.<*> ( o
-                         Core..:? "predictedMonthlyGrossProfitChangeCurrencyCode"
-                     )
-            Core.<*> ( o Core..:? "predictedMonthlyGrossProfitChangeMicros"
+                         Core..:? "predictedMonthlyGrossProfitChangeMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "suggestedPriceCurrencyCode")
-            Core.<*> ( o Core..:? "suggestedPriceMicros"
+            Core.<*> ( o
+                         Core..:? "suggestedPriceMicros"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -15702,7 +11219,8 @@ instance Core.ToJSON PriceInsights where
   toJSON PriceInsights {..} =
     Core.object
       ( Core.catMaybes
-          [ ("predictedClicksChangeFraction" Core..=)
+          [ ("effectiveness" Core..=) Core.<$> effectiveness,
+            ("predictedClicksChangeFraction" Core..=)
               Core.<$> predictedClicksChangeFraction,
             ("predictedConversionsChangeFraction" Core..=)
               Core.<$> predictedConversionsChangeFraction,
@@ -15710,16 +11228,15 @@ instance Core.ToJSON PriceInsights where
               Core.<$> predictedGrossProfitChangeFraction,
             ("predictedImpressionsChangeFraction" Core..=)
               Core.<$> predictedImpressionsChangeFraction,
-            ( "predictedMonthlyGrossProfitChangeCurrencyCode"
-                Core..=
-            )
+            ("predictedMonthlyGrossProfitChangeCurrencyCode" Core..=)
               Core.<$> predictedMonthlyGrossProfitChangeCurrencyCode,
             ("predictedMonthlyGrossProfitChangeMicros" Core..=)
               Core.. Core.AsText
               Core.<$> predictedMonthlyGrossProfitChangeMicros,
             ("suggestedPriceCurrencyCode" Core..=)
               Core.<$> suggestedPriceCurrencyCode,
-            ("suggestedPriceMicros" Core..=) Core.. Core.AsText
+            ("suggestedPriceMicros" Core..=)
+              Core.. Core.AsText
               Core.<$> suggestedPriceMicros
           ]
       )
@@ -15742,6 +11259,8 @@ data Product = Product
     adult :: (Core.Maybe Core.Bool),
     -- | Target age group of the item.
     ageGroup :: (Core.Maybe Core.Text),
+    -- | A safeguard in the <//support.google.com/merchants/answer/10295759 Automated Discounts> and <//support.google.com/merchants/answer/13949249 Dynamic Promotions> projects, ensuring that discounts on merchants\' offers do not fall below this value, thereby preserving the offer\'s value and profitability.
+    autoPricingMinPrice :: (Core.Maybe Price),
     -- | Availability status of the item.
     availability :: (Core.Maybe Core.Text),
     -- | The day a pre-ordered product becomes available for delivery, in ISO 8601 format.
@@ -15750,8 +11269,12 @@ data Product = Product
     brand :: (Core.Maybe Core.Text),
     -- | URL for the canonical version of your item\'s landing page.
     canonicalLink :: (Core.Maybe Core.Text),
+    -- | Product <https://support.google.com/merchants/answer/13528839 certification>, introduced for EU energy efficiency labeling compliance using the <https://eprel.ec.europa.eu/screen/home EU EPREL> database.
+    certifications :: (Core.Maybe [ProductCertification]),
     -- | Required. The item\'s channel (online or local). Acceptable values are: - \"@local@\" - \"@online@\"
     channel :: (Core.Maybe Core.Text),
+    -- | Extra fields to export to the Cloud Retail program.
+    cloudExportAdditionalProperties :: (Core.Maybe [CloudExportAdditionalProperties]),
     -- | Color of the item.
     color :: (Core.Maybe Core.Text),
     -- | Condition or state of the item.
@@ -15774,6 +11297,8 @@ data Product = Product
     customLabel4 :: (Core.Maybe Core.Text),
     -- | Description of the item.
     description :: (Core.Maybe Core.Text),
+    -- | The date time when an offer becomes visible in search results across Google’s YouTube surfaces, in <http://en.wikipedia.org/wiki/ISO_8601 ISO 8601> format. See <https://support.google.com/merchants/answer/13034208 Disclosure date> for more information.
+    disclosureDate :: (Core.Maybe Core.Text),
     -- | An identifier for an item for dynamic remarketing campaigns.
     displayAdsId :: (Core.Maybe Core.Text),
     -- | URL directly to your item\'s landing page for dynamic remarketing campaigns.
@@ -15786,7 +11311,7 @@ data Product = Product
     displayAdsValue :: (Core.Maybe Core.Double),
     -- | The energy efficiency class as defined in EU directive 2010\/30\/EU.
     energyEfficiencyClass :: (Core.Maybe Core.Text),
-    -- | The list of destinations to exclude for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
+    -- | The list of <//support.google.com/merchants/answer/6324486 destinations to exclude> for this target (corresponds to cleared check boxes in Merchant Center). Products that are excluded from all destinations for more than 7 days are automatically deleted.
     excludedDestinations :: (Core.Maybe [Core.Text]),
     -- | Date on which the item should expire, as specified upon insertion, in ISO 8601 format. The actual expiration date in Google Shopping is exposed in @productstatuses@ as @googleExpirationDate@ and might be earlier if @expirationDate@ is too far in the future.
     expirationDate :: (Core.Maybe Core.Text),
@@ -15794,6 +11319,8 @@ data Product = Product
     externalSellerId :: (Core.Maybe Core.Text),
     -- | Feed label for the item. Either @targetCountry@ or @feedLabel@ is required. Must be less than or equal to 20 uppercase letters (A-Z), numbers (0-9), and dashes (-).
     feedLabel :: (Core.Maybe Core.Text),
+    -- | Optional. Conditions to be met for a product to have free shipping.
+    freeShippingThreshold :: (Core.Maybe [FreeShippingThreshold]),
     -- | Target gender of the item.
     gender :: (Core.Maybe Core.Text),
     -- | Google\'s category of the item (see <https://support.google.com/merchants/answer/1705911 Google product taxonomy>). When querying products, this field will contain the user provided value. There is currently no way to get back the auto assigned google product categories through the API.
@@ -15806,7 +11333,7 @@ data Product = Product
     identifierExists :: (Core.Maybe Core.Bool),
     -- | URL of an image of the item.
     imageLink :: (Core.Maybe Core.Text),
-    -- | The list of destinations to include for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in @excludedDestinations@.
+    -- | The list of <//support.google.com/merchants/answer/7501026 destinations to include> for this target (corresponds to checked check boxes in Merchant Center). Default destinations are always included unless provided in @excludedDestinations@.
     includedDestinations :: (Core.Maybe [Core.Text]),
     -- | Number and amount of installments to pay for an item.
     installment :: (Core.Maybe Installment),
@@ -15822,8 +11349,10 @@ data Product = Product
     link :: (Core.Maybe Core.Text),
     -- | URL template for merchant hosted local storefront.
     linkTemplate :: (Core.Maybe Core.Text),
-    -- | Loyalty points that users receive after purchasing the item. Japan only.
-    loyaltyPoints :: (Core.Maybe LoyaltyPoints),
+    -- | Loyalty program information that is used to surface loyalty benefits ( for example, better pricing, points, etc) to the user of this item. This signular field points to the latest uploaded loyalty program info. This field will be deprecated in the coming weeks and should not be used in favor of the plural \'LoyaltyProgram\' field below.
+    loyaltyProgram :: (Core.Maybe LoyaltyProgram),
+    -- | Optional. A list of loyalty program information that is used to surface loyalty benefits (for example, better pricing, points, etc) to the user of this item.
+    loyaltyPrograms :: (Core.Maybe [LoyaltyProgram]),
     -- | The material of which the item is made.
     material :: (Core.Maybe Core.Text),
     -- | The energy efficiency class as defined in EU directive 2010\/30\/EU.
@@ -15896,10 +11425,16 @@ data Product = Product
     sizeType :: (Core.Maybe Core.Text),
     -- | Size of the item. Only one value is allowed. For variants with different sizes, insert a separate product for each size with the same @itemGroupId@ value (see size definition).
     sizes :: (Core.Maybe [Core.Text]),
-    -- | The source of the offer, that is, how the offer was created. Acceptable values are: - \"@api@\" - \"@crawl@\" - \"@feed@\"
+    -- | Output only. The source of the offer, that is, how the offer was created. Acceptable values are: - \"@api@\" - \"@crawl@\" - \"@feed@\"
     source :: (Core.Maybe Core.Text),
+    -- | Structured description, for algorithmically (AI)-generated descriptions.
+    structuredDescription :: (Core.Maybe ProductStructuredDescription),
+    -- | Structured title, for algorithmically (AI)-generated titles.
+    structuredTitle :: (Core.Maybe ProductStructuredTitle),
     -- | Number of periods (months or years) and amount of payment per period for an item with an associated subscription contract.
     subscriptionCost :: (Core.Maybe ProductSubscriptionCost),
+    -- | Optional. The list of sustainability incentive programs.
+    sustainabilityIncentives :: (Core.Maybe [ProductSustainabilityIncentive]),
     -- | Required. The CLDR territory code for the item\'s country of sale.
     targetCountry :: (Core.Maybe Core.Text),
     -- | The tax category of the product, used to configure detailed tax nexus in account-level tax settings.
@@ -15913,7 +11448,9 @@ data Product = Product
     -- | The preference of the denominator of the unit price.
     unitPricingBaseMeasure :: (Core.Maybe ProductUnitPricingBaseMeasure),
     -- | The measure and dimension of an item.
-    unitPricingMeasure :: (Core.Maybe ProductUnitPricingMeasure)
+    unitPricingMeasure :: (Core.Maybe ProductUnitPricingMeasure),
+    -- | URL of the 3D model of the item to provide more visuals.
+    virtualModelLink :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -15929,11 +11466,14 @@ newProduct =
       adsRedirect = Core.Nothing,
       adult = Core.Nothing,
       ageGroup = Core.Nothing,
+      autoPricingMinPrice = Core.Nothing,
       availability = Core.Nothing,
       availabilityDate = Core.Nothing,
       brand = Core.Nothing,
       canonicalLink = Core.Nothing,
+      certifications = Core.Nothing,
       channel = Core.Nothing,
+      cloudExportAdditionalProperties = Core.Nothing,
       color = Core.Nothing,
       condition = Core.Nothing,
       contentLanguage = Core.Nothing,
@@ -15945,6 +11485,7 @@ newProduct =
       customLabel3 = Core.Nothing,
       customLabel4 = Core.Nothing,
       description = Core.Nothing,
+      disclosureDate = Core.Nothing,
       displayAdsId = Core.Nothing,
       displayAdsLink = Core.Nothing,
       displayAdsSimilarIds = Core.Nothing,
@@ -15955,6 +11496,7 @@ newProduct =
       expirationDate = Core.Nothing,
       externalSellerId = Core.Nothing,
       feedLabel = Core.Nothing,
+      freeShippingThreshold = Core.Nothing,
       gender = Core.Nothing,
       googleProductCategory = Core.Nothing,
       gtin = Core.Nothing,
@@ -15969,7 +11511,8 @@ newProduct =
       lifestyleImageLinks = Core.Nothing,
       link = Core.Nothing,
       linkTemplate = Core.Nothing,
-      loyaltyPoints = Core.Nothing,
+      loyaltyProgram = Core.Nothing,
+      loyaltyPrograms = Core.Nothing,
       material = Core.Nothing,
       maxEnergyEfficiencyClass = Core.Nothing,
       maxHandlingTime = Core.Nothing,
@@ -16007,14 +11550,18 @@ newProduct =
       sizeType = Core.Nothing,
       sizes = Core.Nothing,
       source = Core.Nothing,
+      structuredDescription = Core.Nothing,
+      structuredTitle = Core.Nothing,
       subscriptionCost = Core.Nothing,
+      sustainabilityIncentives = Core.Nothing,
       targetCountry = Core.Nothing,
       taxCategory = Core.Nothing,
       taxes = Core.Nothing,
       title = Core.Nothing,
       transitTimeLabel = Core.Nothing,
       unitPricingBaseMeasure = Core.Nothing,
-      unitPricingMeasure = Core.Nothing
+      unitPricingMeasure = Core.Nothing,
+      virtualModelLink = Core.Nothing
     }
 
 instance Core.FromJSON Product where
@@ -16030,11 +11577,14 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "adsRedirect")
             Core.<*> (o Core..:? "adult")
             Core.<*> (o Core..:? "ageGroup")
+            Core.<*> (o Core..:? "autoPricingMinPrice")
             Core.<*> (o Core..:? "availability")
             Core.<*> (o Core..:? "availabilityDate")
             Core.<*> (o Core..:? "brand")
             Core.<*> (o Core..:? "canonicalLink")
+            Core.<*> (o Core..:? "certifications")
             Core.<*> (o Core..:? "channel")
+            Core.<*> (o Core..:? "cloudExportAdditionalProperties")
             Core.<*> (o Core..:? "color")
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "contentLanguage")
@@ -16046,6 +11596,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "customLabel3")
             Core.<*> (o Core..:? "customLabel4")
             Core.<*> (o Core..:? "description")
+            Core.<*> (o Core..:? "disclosureDate")
             Core.<*> (o Core..:? "displayAdsId")
             Core.<*> (o Core..:? "displayAdsLink")
             Core.<*> (o Core..:? "displayAdsSimilarIds")
@@ -16056,6 +11607,7 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "expirationDate")
             Core.<*> (o Core..:? "externalSellerId")
             Core.<*> (o Core..:? "feedLabel")
+            Core.<*> (o Core..:? "freeShippingThreshold")
             Core.<*> (o Core..:? "gender")
             Core.<*> (o Core..:? "googleProductCategory")
             Core.<*> (o Core..:? "gtin")
@@ -16070,22 +11622,17 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "lifestyleImageLinks")
             Core.<*> (o Core..:? "link")
             Core.<*> (o Core..:? "linkTemplate")
-            Core.<*> (o Core..:? "loyaltyPoints")
+            Core.<*> (o Core..:? "loyaltyProgram")
+            Core.<*> (o Core..:? "loyaltyPrograms")
             Core.<*> (o Core..:? "material")
             Core.<*> (o Core..:? "maxEnergyEfficiencyClass")
-            Core.<*> ( o Core..:? "maxHandlingTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "maxHandlingTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "minEnergyEfficiencyClass")
-            Core.<*> ( o Core..:? "minHandlingTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "minHandlingTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "mobileLink")
             Core.<*> (o Core..:? "mobileLinkTemplate")
             Core.<*> (o Core..:? "mpn")
-            Core.<*> ( o Core..:? "multipack"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "multipack" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "offerId")
             Core.<*> (o Core..:? "pattern")
             Core.<*> (o Core..:? "pause")
@@ -16102,7 +11649,8 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "promotionIds")
             Core.<*> (o Core..:? "salePrice")
             Core.<*> (o Core..:? "salePriceEffectiveDate")
-            Core.<*> ( o Core..:? "sellOnGoogleQuantity"
+            Core.<*> ( o
+                         Core..:? "sellOnGoogleQuantity"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "shipping")
@@ -16116,7 +11664,10 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "sizeType")
             Core.<*> (o Core..:? "sizes")
             Core.<*> (o Core..:? "source")
+            Core.<*> (o Core..:? "structuredDescription")
+            Core.<*> (o Core..:? "structuredTitle")
             Core.<*> (o Core..:? "subscriptionCost")
+            Core.<*> (o Core..:? "sustainabilityIncentives")
             Core.<*> (o Core..:? "targetCountry")
             Core.<*> (o Core..:? "taxCategory")
             Core.<*> (o Core..:? "taxes")
@@ -16124,87 +11675,83 @@ instance Core.FromJSON Product where
             Core.<*> (o Core..:? "transitTimeLabel")
             Core.<*> (o Core..:? "unitPricingBaseMeasure")
             Core.<*> (o Core..:? "unitPricingMeasure")
+            Core.<*> (o Core..:? "virtualModelLink")
       )
 
 instance Core.ToJSON Product where
   toJSON Product {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalImageLinks" Core..=)
-              Core.<$> additionalImageLinks,
-            ("additionalSizeType" Core..=)
-              Core.<$> additionalSizeType,
+          [ ("additionalImageLinks" Core..=) Core.<$> additionalImageLinks,
+            ("additionalSizeType" Core..=) Core.<$> additionalSizeType,
             ("adsGrouping" Core..=) Core.<$> adsGrouping,
             ("adsLabels" Core..=) Core.<$> adsLabels,
             ("adsRedirect" Core..=) Core.<$> adsRedirect,
             ("adult" Core..=) Core.<$> adult,
             ("ageGroup" Core..=) Core.<$> ageGroup,
+            ("autoPricingMinPrice" Core..=) Core.<$> autoPricingMinPrice,
             ("availability" Core..=) Core.<$> availability,
-            ("availabilityDate" Core..=)
-              Core.<$> availabilityDate,
+            ("availabilityDate" Core..=) Core.<$> availabilityDate,
             ("brand" Core..=) Core.<$> brand,
             ("canonicalLink" Core..=) Core.<$> canonicalLink,
+            ("certifications" Core..=) Core.<$> certifications,
             ("channel" Core..=) Core.<$> channel,
+            ("cloudExportAdditionalProperties" Core..=)
+              Core.<$> cloudExportAdditionalProperties,
             ("color" Core..=) Core.<$> color,
             ("condition" Core..=) Core.<$> condition,
             ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("costOfGoodsSold" Core..=) Core.<$> costOfGoodsSold,
-            ("customAttributes" Core..=)
-              Core.<$> customAttributes,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
             ("customLabel0" Core..=) Core.<$> customLabel0,
             ("customLabel1" Core..=) Core.<$> customLabel1,
             ("customLabel2" Core..=) Core.<$> customLabel2,
             ("customLabel3" Core..=) Core.<$> customLabel3,
             ("customLabel4" Core..=) Core.<$> customLabel4,
             ("description" Core..=) Core.<$> description,
+            ("disclosureDate" Core..=) Core.<$> disclosureDate,
             ("displayAdsId" Core..=) Core.<$> displayAdsId,
             ("displayAdsLink" Core..=) Core.<$> displayAdsLink,
-            ("displayAdsSimilarIds" Core..=)
-              Core.<$> displayAdsSimilarIds,
+            ("displayAdsSimilarIds" Core..=) Core.<$> displayAdsSimilarIds,
             ("displayAdsTitle" Core..=) Core.<$> displayAdsTitle,
             ("displayAdsValue" Core..=) Core.<$> displayAdsValue,
-            ("energyEfficiencyClass" Core..=)
-              Core.<$> energyEfficiencyClass,
-            ("excludedDestinations" Core..=)
-              Core.<$> excludedDestinations,
+            ("energyEfficiencyClass" Core..=) Core.<$> energyEfficiencyClass,
+            ("excludedDestinations" Core..=) Core.<$> excludedDestinations,
             ("expirationDate" Core..=) Core.<$> expirationDate,
-            ("externalSellerId" Core..=)
-              Core.<$> externalSellerId,
+            ("externalSellerId" Core..=) Core.<$> externalSellerId,
             ("feedLabel" Core..=) Core.<$> feedLabel,
+            ("freeShippingThreshold" Core..=) Core.<$> freeShippingThreshold,
             ("gender" Core..=) Core.<$> gender,
-            ("googleProductCategory" Core..=)
-              Core.<$> googleProductCategory,
+            ("googleProductCategory" Core..=) Core.<$> googleProductCategory,
             ("gtin" Core..=) Core.<$> gtin,
             ("id" Core..=) Core.<$> id,
-            ("identifierExists" Core..=)
-              Core.<$> identifierExists,
+            ("identifierExists" Core..=) Core.<$> identifierExists,
             ("imageLink" Core..=) Core.<$> imageLink,
-            ("includedDestinations" Core..=)
-              Core.<$> includedDestinations,
+            ("includedDestinations" Core..=) Core.<$> includedDestinations,
             ("installment" Core..=) Core.<$> installment,
             ("isBundle" Core..=) Core.<$> isBundle,
             ("itemGroupId" Core..=) Core.<$> itemGroupId,
             ("kind" Core..=) Core.<$> kind,
-            ("lifestyleImageLinks" Core..=)
-              Core.<$> lifestyleImageLinks,
+            ("lifestyleImageLinks" Core..=) Core.<$> lifestyleImageLinks,
             ("link" Core..=) Core.<$> link,
             ("linkTemplate" Core..=) Core.<$> linkTemplate,
-            ("loyaltyPoints" Core..=) Core.<$> loyaltyPoints,
+            ("loyaltyProgram" Core..=) Core.<$> loyaltyProgram,
+            ("loyaltyPrograms" Core..=) Core.<$> loyaltyPrograms,
             ("material" Core..=) Core.<$> material,
             ("maxEnergyEfficiencyClass" Core..=)
               Core.<$> maxEnergyEfficiencyClass,
-            ("maxHandlingTime" Core..=) Core.. Core.AsText
+            ("maxHandlingTime" Core..=)
+              Core.. Core.AsText
               Core.<$> maxHandlingTime,
             ("minEnergyEfficiencyClass" Core..=)
               Core.<$> minEnergyEfficiencyClass,
-            ("minHandlingTime" Core..=) Core.. Core.AsText
+            ("minHandlingTime" Core..=)
+              Core.. Core.AsText
               Core.<$> minHandlingTime,
             ("mobileLink" Core..=) Core.<$> mobileLink,
-            ("mobileLinkTemplate" Core..=)
-              Core.<$> mobileLinkTemplate,
+            ("mobileLinkTemplate" Core..=) Core.<$> mobileLinkTemplate,
             ("mpn" Core..=) Core.<$> mpn,
-            ("multipack" Core..=) Core.. Core.AsText
-              Core.<$> multipack,
+            ("multipack" Core..=) Core.. Core.AsText Core.<$> multipack,
             ("offerId" Core..=) Core.<$> offerId,
             ("pattern" Core..=) Core.<$> pattern',
             ("pause" Core..=) Core.<$> pause,
@@ -16213,17 +11760,16 @@ instance Core.ToJSON Product where
             ("price" Core..=) Core.<$> price,
             ("productDetails" Core..=) Core.<$> productDetails,
             ("productHeight" Core..=) Core.<$> productHeight,
-            ("productHighlights" Core..=)
-              Core.<$> productHighlights,
+            ("productHighlights" Core..=) Core.<$> productHighlights,
             ("productLength" Core..=) Core.<$> productLength,
             ("productTypes" Core..=) Core.<$> productTypes,
             ("productWeight" Core..=) Core.<$> productWeight,
             ("productWidth" Core..=) Core.<$> productWidth,
             ("promotionIds" Core..=) Core.<$> promotionIds,
             ("salePrice" Core..=) Core.<$> salePrice,
-            ("salePriceEffectiveDate" Core..=)
-              Core.<$> salePriceEffectiveDate,
-            ("sellOnGoogleQuantity" Core..=) Core.. Core.AsText
+            ("salePriceEffectiveDate" Core..=) Core.<$> salePriceEffectiveDate,
+            ("sellOnGoogleQuantity" Core..=)
+              Core.. Core.AsText
               Core.<$> sellOnGoogleQuantity,
             ("shipping" Core..=) Core.<$> shipping,
             ("shippingHeight" Core..=) Core.<$> shippingHeight,
@@ -16237,62 +11783,69 @@ instance Core.ToJSON Product where
             ("sizeType" Core..=) Core.<$> sizeType,
             ("sizes" Core..=) Core.<$> sizes,
             ("source" Core..=) Core.<$> source,
-            ("subscriptionCost" Core..=)
-              Core.<$> subscriptionCost,
+            ("structuredDescription" Core..=) Core.<$> structuredDescription,
+            ("structuredTitle" Core..=) Core.<$> structuredTitle,
+            ("subscriptionCost" Core..=) Core.<$> subscriptionCost,
+            ("sustainabilityIncentives" Core..=)
+              Core.<$> sustainabilityIncentives,
             ("targetCountry" Core..=) Core.<$> targetCountry,
             ("taxCategory" Core..=) Core.<$> taxCategory,
             ("taxes" Core..=) Core.<$> taxes,
             ("title" Core..=) Core.<$> title,
-            ("transitTimeLabel" Core..=)
-              Core.<$> transitTimeLabel,
-            ("unitPricingBaseMeasure" Core..=)
-              Core.<$> unitPricingBaseMeasure,
-            ("unitPricingMeasure" Core..=)
-              Core.<$> unitPricingMeasure
+            ("transitTimeLabel" Core..=) Core.<$> transitTimeLabel,
+            ("unitPricingBaseMeasure" Core..=) Core.<$> unitPricingBaseMeasure,
+            ("unitPricingMeasure" Core..=) Core.<$> unitPricingMeasure,
+            ("virtualModelLink" Core..=) Core.<$> virtualModelLink
           ]
       )
 
+-- | Product <https://support.google.com/merchants/answer/13528839 certification>, introduced for EU energy efficiency labeling compliance using the <https://eprel.ec.europa.eu/screen/home EU EPREL> database.
 --
--- /See:/ 'newProductAmount' smart constructor.
-data ProductAmount = ProductAmount
-  { -- | The pre-tax or post-tax price depending on the location of the order.
-    priceAmount :: (Core.Maybe Price),
-    -- | Remitted tax value.
-    remittedTaxAmount :: (Core.Maybe Price),
-    -- | Tax value.
-    taxAmount :: (Core.Maybe Price)
+-- /See:/ 'newProductCertification' smart constructor.
+data ProductCertification = ProductCertification
+  { -- | The certification authority, for example \"European_Commission\". Maximum length is 2000 characters.
+    certificationAuthority :: (Core.Maybe Core.Text),
+    -- | The certification code, for eaxample \"123456\". Maximum length is 2000 characters.
+    certificationCode :: (Core.Maybe Core.Text),
+    -- | The name of the certification, for example \"EPREL\". Maximum length is 2000 characters.
+    certificationName :: (Core.Maybe Core.Text),
+    -- | The certification value (also known as class, level or grade), for example \"A+\", \"C\", \"gold\". Maximum length is 2000 characters.
+    certificationValue :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'ProductAmount' with the minimum fields required to make a request.
-newProductAmount ::
-  ProductAmount
-newProductAmount =
-  ProductAmount
-    { priceAmount = Core.Nothing,
-      remittedTaxAmount = Core.Nothing,
-      taxAmount = Core.Nothing
+-- | Creates a value of 'ProductCertification' with the minimum fields required to make a request.
+newProductCertification ::
+  ProductCertification
+newProductCertification =
+  ProductCertification
+    { certificationAuthority = Core.Nothing,
+      certificationCode = Core.Nothing,
+      certificationName = Core.Nothing,
+      certificationValue = Core.Nothing
     }
 
-instance Core.FromJSON ProductAmount where
+instance Core.FromJSON ProductCertification where
   parseJSON =
     Core.withObject
-      "ProductAmount"
+      "ProductCertification"
       ( \o ->
-          ProductAmount
-            Core.<$> (o Core..:? "priceAmount")
-            Core.<*> (o Core..:? "remittedTaxAmount")
-            Core.<*> (o Core..:? "taxAmount")
+          ProductCertification
+            Core.<$> (o Core..:? "certificationAuthority")
+            Core.<*> (o Core..:? "certificationCode")
+            Core.<*> (o Core..:? "certificationName")
+            Core.<*> (o Core..:? "certificationValue")
       )
 
-instance Core.ToJSON ProductAmount where
-  toJSON ProductAmount {..} =
+instance Core.ToJSON ProductCertification where
+  toJSON ProductCertification {..} =
     Core.object
       ( Core.catMaybes
-          [ ("priceAmount" Core..=) Core.<$> priceAmount,
-            ("remittedTaxAmount" Core..=)
-              Core.<$> remittedTaxAmount,
-            ("taxAmount" Core..=) Core.<$> taxAmount
+          [ ("certificationAuthority" Core..=)
+              Core.<$> certificationAuthority,
+            ("certificationCode" Core..=) Core.<$> certificationCode,
+            ("certificationName" Core..=) Core.<$> certificationName,
+            ("certificationValue" Core..=) Core.<$> certificationValue
           ]
       )
 
@@ -16363,8 +11916,7 @@ instance Core.ToJSON ProductCluster where
     Core.object
       ( Core.catMaybes
           [ ("brand" Core..=) Core.<$> brand,
-            ("brandInventoryStatus" Core..=)
-              Core.<$> brandInventoryStatus,
+            ("brandInventoryStatus" Core..=) Core.<$> brandInventoryStatus,
             ("categoryL1" Core..=) Core.<$> categoryL1,
             ("categoryL2" Core..=) Core.<$> categoryL2,
             ("categoryL3" Core..=) Core.<$> categoryL3,
@@ -16410,8 +11962,7 @@ instance Core.ToJSON ProductDeliveryTime where
   toJSON ProductDeliveryTime {..} =
     Core.object
       ( Core.catMaybes
-          [ ("areaDeliveryTimes" Core..=)
-              Core.<$> areaDeliveryTimes,
+          [ ("areaDeliveryTimes" Core..=) Core.<$> areaDeliveryTimes,
             ("productId" Core..=) Core.<$> productId
           ]
       )
@@ -16436,10 +11987,7 @@ newProductDeliveryTimeAreaDeliveryTime =
       deliveryTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductDeliveryTimeAreaDeliveryTime
-  where
+instance Core.FromJSON ProductDeliveryTimeAreaDeliveryTime where
   parseJSON =
     Core.withObject
       "ProductDeliveryTimeAreaDeliveryTime"
@@ -16449,10 +11997,7 @@ instance
             Core.<*> (o Core..:? "deliveryTime")
       )
 
-instance
-  Core.ToJSON
-    ProductDeliveryTimeAreaDeliveryTime
-  where
+instance Core.ToJSON ProductDeliveryTimeAreaDeliveryTime where
   toJSON ProductDeliveryTimeAreaDeliveryTime {..} =
     Core.object
       ( Core.catMaybes
@@ -16481,7 +12026,8 @@ newProductDeliveryTimeAreaDeliveryTimeDeliveryTime ::
   ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
 newProductDeliveryTimeAreaDeliveryTimeDeliveryTime =
   ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
-    { maxHandlingTimeDays = Core.Nothing,
+    { maxHandlingTimeDays =
+        Core.Nothing,
       maxTransitTimeDays = Core.Nothing,
       minHandlingTimeDays = Core.Nothing,
       minTransitTimeDays = Core.Nothing
@@ -16497,29 +12043,24 @@ instance
       ( \o ->
           ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
             Core.<$> (o Core..:? "maxHandlingTimeDays")
-              Core.<*> (o Core..:? "maxTransitTimeDays")
-              Core.<*> (o Core..:? "minHandlingTimeDays")
-              Core.<*> (o Core..:? "minTransitTimeDays")
+            Core.<*> (o Core..:? "maxTransitTimeDays")
+            Core.<*> (o Core..:? "minHandlingTimeDays")
+            Core.<*> (o Core..:? "minTransitTimeDays")
       )
 
 instance
   Core.ToJSON
     ProductDeliveryTimeAreaDeliveryTimeDeliveryTime
   where
-  toJSON
-    ProductDeliveryTimeAreaDeliveryTimeDeliveryTime {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("maxHandlingTimeDays" Core..=)
-                Core.<$> maxHandlingTimeDays,
-              ("maxTransitTimeDays" Core..=)
-                Core.<$> maxTransitTimeDays,
-              ("minHandlingTimeDays" Core..=)
-                Core.<$> minHandlingTimeDays,
-              ("minTransitTimeDays" Core..=)
-                Core.<$> minTransitTimeDays
-            ]
-        )
+  toJSON ProductDeliveryTimeAreaDeliveryTimeDeliveryTime {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("maxHandlingTimeDays" Core..=) Core.<$> maxHandlingTimeDays,
+            ("maxTransitTimeDays" Core..=) Core.<$> maxTransitTimeDays,
+            ("minHandlingTimeDays" Core..=) Core.<$> minHandlingTimeDays,
+            ("minTransitTimeDays" Core..=) Core.<$> minTransitTimeDays
+          ]
+      )
 
 --
 -- /See:/ 'newProductDimension' smart constructor.
@@ -16543,16 +12084,15 @@ instance Core.FromJSON ProductDimension where
       "ProductDimension"
       ( \o ->
           ProductDimension
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ProductDimension where
   toJSON ProductDimension {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )
 
 -- | The Content API ID of the product.
@@ -16578,8 +12118,109 @@ instance Core.FromJSON ProductId where
 instance Core.ToJSON ProductId where
   toJSON ProductId {..} =
     Core.object
+      (Core.catMaybes [("productId" Core..=) Core.<$> productId])
+
+-- | An issue affecting specific product.
+--
+-- /See:/ 'newProductIssue' smart constructor.
+data ProductIssue = ProductIssue
+  { -- | A list of actionable steps that can be executed to solve the issue. An example is requesting a re-review or providing arguments when merchant disagrees with the issue. Actions that are supported in (your) third-party application can be rendered as buttons and should be available to merchant when they expand the issue.
+    actions :: (Core.Maybe [Action]),
+    -- | Clarifies the severity of the issue. The summarizing message, if present, should be shown right under the title for each issue. It helps merchants to quickly understand the impact of the issue. The detailed breakdown helps the merchant to fully understand the impact of the issue. It can be rendered as dialog that opens when the merchant mouse over the summarized impact statement. Issues with different severity can be styled differently. They may use a different color or icon to signal the difference between @ERROR@, @WARNING@ and @INFO@.
+    impact :: (Core.Maybe ProductIssueImpact),
+    -- | Details of the issue as a pre-rendered HTML. HTML elements contain CSS classes that can be used to customize the style of the content. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @issue-detail@ - top level container for the detail of the issue * @callout-banners@ - section of the @issue-detail@ with callout banners * @callout-banner@ - single callout banner, inside @callout-banners@ * @callout-banner-info@ - callout with important information (default) * @callout-banner-warning@ - callout with a warning * @callout-banner-error@ - callout informing about an error (most severe) * @issue-content@ - section of the @issue-detail@, contains multiple @content-element@ * @content-element@ - content element such as a list, link or paragraph, inside @issue-content@ * @root-causes@ -
+    -- unordered list with items describing root causes of the issue, inside @issue-content@ * @root-causes-intro@ - intro text before the @root-causes@ list, inside @issue-content@ * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. *
+    -- @tooltip-icon@ - marks a section of the text within a @tooltip@, that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon. * @content-moderation@ - marks the paragraph that explains how the issue was identified. * @list-intro@ - marks the paragraph that contains an intro for a list. This paragraph will be always followed by a list. * @new-element@ - Present for new elements added to the pre-rendered content in the future. To make sure that a new content element does not break your style, you can hide everything with this class.
+    prerenderedContent :: (Core.Maybe Core.Text),
+    -- | Pre-rendered HTML that contains a link to the external location where the ODS can be requested and instructions for how to request it. HTML elements contain CSS classes that can be used to customize the style of this snippet. Always sanitize the HTML before embedding it directly to your application. The sanitizer needs to allow basic HTML tags, such as: @div@, @span@, @p@, @a@, @ul@, @li@, @table@, @tr@, @td@. For example, you can use <https://www.npmjs.com/package/dompurify DOMPurify>. CSS classes: * @ods-section@* - wrapper around the out-of-court dispute resolution section * @ods-description@* - intro text for the out-of-court dispute resolution. It may contain multiple segments and a link. * @ods-param@* - wrapper around the header-value pair for parameters that merchant may need to provide during the ODS process. * @ods-routing-id@* - ods param for the Routing ID. * @ods-reference-id@* - ods param for the Routing ID. * @ods-param-header@* - header for the ODS parameter * @ods-param-value@* - value of the
+    -- ODS parameter. This value should be rendered in a way that it is easy for merchants to identify and copy. * @segment@ - section of the text, @span@ inside paragraph * @segment-attribute@ - section of the text that represents a product attribute, for example \'image_link\' * @segment-literal@ - section of the text that contains a special value, for example \'0-1000 kg\' * @segment-bold@ - section of the text that should be rendered as bold * @segment-italic@ - section of the text that should be rendered as italic * @tooltip@ - used on paragraphs that should be rendered with a tooltip. A section of the text in such a paragraph will have a class @tooltip-text@ and is intended to be shown in a mouse over dialog. If the style is not used, the @tooltip-text@ section would be shown on a new line, after the main part of the text. * @tooltip-text@ - marks a section of the text within a @tooltip@, that is intended to be shown in a mouse over dialog. * @tooltip-icon@ - marks a section of the text within a @tooltip@,
+    -- that can be replaced with a tooltip icon, for example \'?\' or \'i\'. By default, this section contains a @br@ tag, that is separating the main text and the tooltip text when the style is not used. * @tooltip-style-question@ - the tooltip shows helpful information, can use the \'?\' as an icon. * @tooltip-style-info@ - the tooltip adds additional information fitting to the context, can use the \'i\' as an icon.
+    prerenderedOutOfCourtDisputeSettlement :: (Core.Maybe Core.Text),
+    -- | Title of the issue.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductIssue' with the minimum fields required to make a request.
+newProductIssue ::
+  ProductIssue
+newProductIssue =
+  ProductIssue
+    { actions = Core.Nothing,
+      impact = Core.Nothing,
+      prerenderedContent = Core.Nothing,
+      prerenderedOutOfCourtDisputeSettlement = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON ProductIssue where
+  parseJSON =
+    Core.withObject
+      "ProductIssue"
+      ( \o ->
+          ProductIssue
+            Core.<$> (o Core..:? "actions")
+            Core.<*> (o Core..:? "impact")
+            Core.<*> (o Core..:? "prerenderedContent")
+            Core.<*> (o Core..:? "prerenderedOutOfCourtDisputeSettlement")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON ProductIssue where
+  toJSON ProductIssue {..} =
+    Core.object
       ( Core.catMaybes
-          [("productId" Core..=) Core.<$> productId]
+          [ ("actions" Core..=) Core.<$> actions,
+            ("impact" Core..=) Core.<$> impact,
+            ("prerenderedContent" Core..=) Core.<$> prerenderedContent,
+            ("prerenderedOutOfCourtDisputeSettlement" Core..=)
+              Core.<$> prerenderedOutOfCourtDisputeSettlement,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
+-- | Overall impact of product issue.
+--
+-- /See:/ 'newProductIssueImpact' smart constructor.
+data ProductIssueImpact = ProductIssueImpact
+  { -- | Detailed impact breakdown. Explains the types of restriction the issue has in different shopping destinations and territory. If present, it should be rendered to the merchant. Can be shown as a mouse over dropdown or a dialog. Each breakdown item represents a group of regions with the same impact details.
+    breakdowns :: (Core.Maybe [Breakdown]),
+    -- | Optional. Message summarizing the overall impact of the issue. If present, it should be rendered to the merchant. For example: \"Limits visibility in France\"
+    message :: (Core.Maybe Core.Text),
+    -- | The severity of the issue.
+    severity :: (Core.Maybe ProductIssueImpact_Severity)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductIssueImpact' with the minimum fields required to make a request.
+newProductIssueImpact ::
+  ProductIssueImpact
+newProductIssueImpact =
+  ProductIssueImpact
+    { breakdowns = Core.Nothing,
+      message = Core.Nothing,
+      severity = Core.Nothing
+    }
+
+instance Core.FromJSON ProductIssueImpact where
+  parseJSON =
+    Core.withObject
+      "ProductIssueImpact"
+      ( \o ->
+          ProductIssueImpact
+            Core.<$> (o Core..:? "breakdowns")
+            Core.<*> (o Core..:? "message")
+            Core.<*> (o Core..:? "severity")
+      )
+
+instance Core.ToJSON ProductIssueImpact where
+  toJSON ProductIssueImpact {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("breakdowns" Core..=) Core.<$> breakdowns,
+            ("message" Core..=) Core.<$> message,
+            ("severity" Core..=) Core.<$> severity
+          ]
       )
 
 --
@@ -16679,21 +12320,11 @@ instance Core.FromJSON ProductShipping where
           ProductShipping
             Core.<$> (o Core..:? "country")
             Core.<*> (o Core..:? "locationGroupName")
-            Core.<*> ( o Core..:? "locationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxHandlingTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "maxTransitTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "minHandlingTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "minTransitTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "locationId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxHandlingTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "maxTransitTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minHandlingTime" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minTransitTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "price")
             Core.<*> (o Core..:? "region")
@@ -16705,17 +12336,19 @@ instance Core.ToJSON ProductShipping where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("locationGroupName" Core..=)
-              Core.<$> locationGroupName,
-            ("locationId" Core..=) Core.. Core.AsText
-              Core.<$> locationId,
-            ("maxHandlingTime" Core..=) Core.. Core.AsText
+            ("locationGroupName" Core..=) Core.<$> locationGroupName,
+            ("locationId" Core..=) Core.. Core.AsText Core.<$> locationId,
+            ("maxHandlingTime" Core..=)
+              Core.. Core.AsText
               Core.<$> maxHandlingTime,
-            ("maxTransitTime" Core..=) Core.. Core.AsText
+            ("maxTransitTime" Core..=)
+              Core.. Core.AsText
               Core.<$> maxTransitTime,
-            ("minHandlingTime" Core..=) Core.. Core.AsText
+            ("minHandlingTime" Core..=)
+              Core.. Core.AsText
               Core.<$> minHandlingTime,
-            ("minTransitTime" Core..=) Core.. Core.AsText
+            ("minTransitTime" Core..=)
+              Core.. Core.AsText
               Core.<$> minTransitTime,
             ("postalCode" Core..=) Core.<$> postalCode,
             ("price" Core..=) Core.<$> price,
@@ -16738,7 +12371,10 @@ data ProductShippingDimension = ProductShippingDimension
 newProductShippingDimension ::
   ProductShippingDimension
 newProductShippingDimension =
-  ProductShippingDimension {unit = Core.Nothing, value = Core.Nothing}
+  ProductShippingDimension
+    { unit = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ProductShippingDimension where
   parseJSON =
@@ -16746,16 +12382,15 @@ instance Core.FromJSON ProductShippingDimension where
       "ProductShippingDimension"
       ( \o ->
           ProductShippingDimension
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ProductShippingDimension where
   toJSON ProductShippingDimension {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )
 
 --
@@ -16780,16 +12415,15 @@ instance Core.FromJSON ProductShippingWeight where
       "ProductShippingWeight"
       ( \o ->
           ProductShippingWeight
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ProductShippingWeight where
   toJSON ProductShippingWeight {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )
 
 -- | The status of a product, that is, information about a product computed asynchronously.
@@ -16855,10 +12489,8 @@ instance Core.ToJSON ProductStatus where
     Core.object
       ( Core.catMaybes
           [ ("creationDate" Core..=) Core.<$> creationDate,
-            ("destinationStatuses" Core..=)
-              Core.<$> destinationStatuses,
-            ("googleExpirationDate" Core..=)
-              Core.<$> googleExpirationDate,
+            ("destinationStatuses" Core..=) Core.<$> destinationStatuses,
+            ("googleExpirationDate" Core..=) Core.<$> googleExpirationDate,
             ("itemLevelIssues" Core..=) Core.<$> itemLevelIssues,
             ("kind" Core..=) Core.<$> kind,
             ("lastUpdateDate" Core..=) Core.<$> lastUpdateDate,
@@ -16879,7 +12511,7 @@ data ProductStatusDestinationStatus = ProductStatusDestinationStatus
     disapprovedCountries :: (Core.Maybe [Core.Text]),
     -- | List of country codes (ISO 3166-1 alpha-2) where the offer is pending approval.
     pendingCountries :: (Core.Maybe [Core.Text]),
-    -- | Destination approval status in @targetCountry@ of the offer.
+    -- | Deprecated. Destination approval status in @targetCountry@ of the offer.
     status :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -16913,13 +12545,10 @@ instance Core.ToJSON ProductStatusDestinationStatus where
   toJSON ProductStatusDestinationStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("approvedCountries" Core..=)
-              Core.<$> approvedCountries,
+          [ ("approvedCountries" Core..=) Core.<$> approvedCountries,
             ("destination" Core..=) Core.<$> destination,
-            ("disapprovedCountries" Core..=)
-              Core.<$> disapprovedCountries,
-            ("pendingCountries" Core..=)
-              Core.<$> pendingCountries,
+            ("disapprovedCountries" Core..=) Core.<$> disapprovedCountries,
+            ("pendingCountries" Core..=) Core.<$> pendingCountries,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -16985,8 +12614,7 @@ instance Core.ToJSON ProductStatusItemLevelIssue where
   toJSON ProductStatusItemLevelIssue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applicableCountries" Core..=)
-              Core.<$> applicableCountries,
+          [ ("applicableCountries" Core..=) Core.<$> applicableCountries,
             ("attributeName" Core..=) Core.<$> attributeName,
             ("code" Core..=) Core.<$> code,
             ("description" Core..=) Core.<$> description,
@@ -16998,12 +12626,90 @@ instance Core.ToJSON ProductStatusItemLevelIssue where
           ]
       )
 
+-- | Structured description, for algorithmically (AI)-generated descriptions. See <https://support.google.com/merchants/answer/6324468#When_to_use description> for more information.
+--
+-- /See:/ 'newProductStructuredDescription' smart constructor.
+data ProductStructuredDescription = ProductStructuredDescription
+  { -- | Required. The description text. Maximum length is 5000 characters.
+    content :: (Core.Maybe Core.Text),
+    -- | Optional. The digital source type. Acceptable values are: - \"@trained_algorithmic_media@\" - \"@default@\"
+    digitalSourceType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductStructuredDescription' with the minimum fields required to make a request.
+newProductStructuredDescription ::
+  ProductStructuredDescription
+newProductStructuredDescription =
+  ProductStructuredDescription
+    { content = Core.Nothing,
+      digitalSourceType = Core.Nothing
+    }
+
+instance Core.FromJSON ProductStructuredDescription where
+  parseJSON =
+    Core.withObject
+      "ProductStructuredDescription"
+      ( \o ->
+          ProductStructuredDescription
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "digitalSourceType")
+      )
+
+instance Core.ToJSON ProductStructuredDescription where
+  toJSON ProductStructuredDescription {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("content" Core..=) Core.<$> content,
+            ("digitalSourceType" Core..=) Core.<$> digitalSourceType
+          ]
+      )
+
+-- | Structured title, for algorithmically (AI)-generated titles. See <https://support.google.com/merchants/answer/6324415#Whentouse title> for more information.
+--
+-- /See:/ 'newProductStructuredTitle' smart constructor.
+data ProductStructuredTitle = ProductStructuredTitle
+  { -- | Required. The title text. Maximum length is 150 characters.
+    content :: (Core.Maybe Core.Text),
+    -- | Optional. The digital source type. Acceptable values are: - \"@trained_algorithmic_media@\" - \"@default@\"
+    digitalSourceType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductStructuredTitle' with the minimum fields required to make a request.
+newProductStructuredTitle ::
+  ProductStructuredTitle
+newProductStructuredTitle =
+  ProductStructuredTitle
+    { content = Core.Nothing,
+      digitalSourceType = Core.Nothing
+    }
+
+instance Core.FromJSON ProductStructuredTitle where
+  parseJSON =
+    Core.withObject
+      "ProductStructuredTitle"
+      ( \o ->
+          ProductStructuredTitle
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "digitalSourceType")
+      )
+
+instance Core.ToJSON ProductStructuredTitle where
+  toJSON ProductStructuredTitle {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("content" Core..=) Core.<$> content,
+            ("digitalSourceType" Core..=) Core.<$> digitalSourceType
+          ]
+      )
+
 --
 -- /See:/ 'newProductSubscriptionCost' smart constructor.
 data ProductSubscriptionCost = ProductSubscriptionCost
   { -- | The amount the buyer has to pay per subscription period.
     amount :: (Core.Maybe Price),
-    -- | The type of subscription period.
+    -- | The type of subscription period. - \"@month@\" - \"@year@\"
     period :: (Core.Maybe Core.Text),
     -- | The number of subscription periods the buyer has to pay.
     periodLength :: (Core.Maybe Core.Int64)
@@ -17028,9 +12734,7 @@ instance Core.FromJSON ProductSubscriptionCost where
           ProductSubscriptionCost
             Core.<$> (o Core..:? "amount")
             Core.<*> (o Core..:? "period")
-            Core.<*> ( o Core..:? "periodLength"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "periodLength" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ProductSubscriptionCost where
@@ -17039,8 +12743,51 @@ instance Core.ToJSON ProductSubscriptionCost where
       ( Core.catMaybes
           [ ("amount" Core..=) Core.<$> amount,
             ("period" Core..=) Core.<$> period,
-            ("periodLength" Core..=) Core.. Core.AsText
-              Core.<$> periodLength
+            ("periodLength" Core..=) Core.. Core.AsText Core.<$> periodLength
+          ]
+      )
+
+-- | Information regarding sustainability related incentive programs such as rebates or tax relief.
+--
+-- /See:/ 'newProductSustainabilityIncentive' smart constructor.
+data ProductSustainabilityIncentive = ProductSustainabilityIncentive
+  { -- | Optional. The fixed amount of the incentive.
+    amount :: (Core.Maybe Price),
+    -- | Optional. The percentage of the sale price that the incentive is applied to.
+    percentage :: (Core.Maybe Core.Double),
+    -- | Required. Sustainability incentive program.
+    type' :: (Core.Maybe ProductSustainabilityIncentive_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProductSustainabilityIncentive' with the minimum fields required to make a request.
+newProductSustainabilityIncentive ::
+  ProductSustainabilityIncentive
+newProductSustainabilityIncentive =
+  ProductSustainabilityIncentive
+    { amount = Core.Nothing,
+      percentage = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON ProductSustainabilityIncentive where
+  parseJSON =
+    Core.withObject
+      "ProductSustainabilityIncentive"
+      ( \o ->
+          ProductSustainabilityIncentive
+            Core.<$> (o Core..:? "amount")
+            Core.<*> (o Core..:? "percentage")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON ProductSustainabilityIncentive where
+  toJSON ProductSustainabilityIncentive {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("amount" Core..=) Core.<$> amount,
+            ("percentage" Core..=) Core.<$> percentage,
+            ("type" Core..=) Core.<$> type'
           ]
       )
 
@@ -17082,9 +12829,7 @@ instance Core.FromJSON ProductTax where
       ( \o ->
           ProductTax
             Core.<$> (o Core..:? "country")
-            Core.<*> ( o Core..:? "locationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "locationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "postalCode")
             Core.<*> (o Core..:? "rate")
             Core.<*> (o Core..:? "region")
@@ -17096,8 +12841,7 @@ instance Core.ToJSON ProductTax where
     Core.object
       ( Core.catMaybes
           [ ("country" Core..=) Core.<$> country,
-            ("locationId" Core..=) Core.. Core.AsText
-              Core.<$> locationId,
+            ("locationId" Core..=) Core.. Core.AsText Core.<$> locationId,
             ("postalCode" Core..=) Core.<$> postalCode,
             ("rate" Core..=) Core.<$> rate,
             ("region" Core..=) Core.<$> region,
@@ -17119,7 +12863,10 @@ data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure
 newProductUnitPricingBaseMeasure ::
   ProductUnitPricingBaseMeasure
 newProductUnitPricingBaseMeasure =
-  ProductUnitPricingBaseMeasure {unit = Core.Nothing, value = Core.Nothing}
+  ProductUnitPricingBaseMeasure
+    { unit = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ProductUnitPricingBaseMeasure where
   parseJSON =
@@ -17128,9 +12875,7 @@ instance Core.FromJSON ProductUnitPricingBaseMeasure where
       ( \o ->
           ProductUnitPricingBaseMeasure
             Core.<$> (o Core..:? "unit")
-            Core.<*> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ProductUnitPricingBaseMeasure where
@@ -17156,7 +12901,10 @@ data ProductUnitPricingMeasure = ProductUnitPricingMeasure
 newProductUnitPricingMeasure ::
   ProductUnitPricingMeasure
 newProductUnitPricingMeasure =
-  ProductUnitPricingMeasure {unit = Core.Nothing, value = Core.Nothing}
+  ProductUnitPricingMeasure
+    { unit = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON ProductUnitPricingMeasure where
   parseJSON =
@@ -17164,16 +12912,15 @@ instance Core.FromJSON ProductUnitPricingMeasure where
       "ProductUnitPricingMeasure"
       ( \o ->
           ProductUnitPricingMeasure
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ProductUnitPricingMeasure where
   toJSON ProductUnitPricingMeasure {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )
 
 -- | Product fields. Values are only set for fields requested explicitly in the request\'s search query.
@@ -17198,6 +12945,10 @@ data ProductView = ProductView
     categoryL5 :: (Core.Maybe Core.Text),
     -- | Channel of the product (online versus local).
     channel :: (Core.Maybe ProductView_Channel),
+    -- | Estimated performance potential compared to highest performing products of the merchant.
+    clickPotential :: (Core.Maybe ProductView_ClickPotential),
+    -- | Rank of the product based on its click potential. A product with @click_potential_rank@ 1 has the highest click potential among the merchant\'s products that fulfill the search query conditions.
+    clickPotentialRank :: (Core.Maybe Core.Int64),
     -- | Condition of the product.
     condition :: (Core.Maybe Core.Text),
     -- | The time the merchant created the product in timestamp seconds.
@@ -17251,6 +13002,8 @@ newProductView =
       categoryL4 = Core.Nothing,
       categoryL5 = Core.Nothing,
       channel = Core.Nothing,
+      clickPotential = Core.Nothing,
+      clickPotentialRank = Core.Nothing,
       condition = Core.Nothing,
       creationTime = Core.Nothing,
       currencyCode = Core.Nothing,
@@ -17286,6 +13039,11 @@ instance Core.FromJSON ProductView where
             Core.<*> (o Core..:? "categoryL4")
             Core.<*> (o Core..:? "categoryL5")
             Core.<*> (o Core..:? "channel")
+            Core.<*> (o Core..:? "clickPotential")
+            Core.<*> ( o
+                         Core..:? "clickPotentialRank"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
             Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "currencyCode")
@@ -17296,9 +13054,7 @@ instance Core.FromJSON ProductView where
             Core.<*> (o Core..:? "itemIssues")
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "offerId")
-            Core.<*> ( o Core..:? "priceMicros"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "priceMicros" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "productTypeL1")
             Core.<*> (o Core..:? "productTypeL2")
             Core.<*> (o Core..:? "productTypeL3")
@@ -17322,6 +13078,10 @@ instance Core.ToJSON ProductView where
             ("categoryL4" Core..=) Core.<$> categoryL4,
             ("categoryL5" Core..=) Core.<$> categoryL5,
             ("channel" Core..=) Core.<$> channel,
+            ("clickPotential" Core..=) Core.<$> clickPotential,
+            ("clickPotentialRank" Core..=)
+              Core.. Core.AsText
+              Core.<$> clickPotentialRank,
             ("condition" Core..=) Core.<$> condition,
             ("creationTime" Core..=) Core.<$> creationTime,
             ("currencyCode" Core..=) Core.<$> currencyCode,
@@ -17332,8 +13092,7 @@ instance Core.ToJSON ProductView where
             ("itemIssues" Core..=) Core.<$> itemIssues,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("offerId" Core..=) Core.<$> offerId,
-            ("priceMicros" Core..=) Core.. Core.AsText
-              Core.<$> priceMicros,
+            ("priceMicros" Core..=) Core.. Core.AsText Core.<$> priceMicros,
             ("productTypeL1" Core..=) Core.<$> productTypeL1,
             ("productTypeL2" Core..=) Core.<$> productTypeL2,
             ("productTypeL3" Core..=) Core.<$> productTypeL3,
@@ -17406,7 +13165,8 @@ newProductViewItemIssueIssueSeverityPerDestination ::
   ProductViewItemIssueIssueSeverityPerDestination
 newProductViewItemIssueIssueSeverityPerDestination =
   ProductViewItemIssueIssueSeverityPerDestination
-    { demotedCountries = Core.Nothing,
+    { demotedCountries =
+        Core.Nothing,
       destination = Core.Nothing,
       disapprovedCountries = Core.Nothing
     }
@@ -17421,25 +13181,22 @@ instance
       ( \o ->
           ProductViewItemIssueIssueSeverityPerDestination
             Core.<$> (o Core..:? "demotedCountries")
-              Core.<*> (o Core..:? "destination")
-              Core.<*> (o Core..:? "disapprovedCountries")
+            Core.<*> (o Core..:? "destination")
+            Core.<*> (o Core..:? "disapprovedCountries")
       )
 
 instance
   Core.ToJSON
     ProductViewItemIssueIssueSeverityPerDestination
   where
-  toJSON
-    ProductViewItemIssueIssueSeverityPerDestination {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("demotedCountries" Core..=)
-                Core.<$> demotedCountries,
-              ("destination" Core..=) Core.<$> destination,
-              ("disapprovedCountries" Core..=)
-                Core.<$> disapprovedCountries
-            ]
-        )
+  toJSON ProductViewItemIssueIssueSeverityPerDestination {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("demotedCountries" Core..=) Core.<$> demotedCountries,
+            ("destination" Core..=) Core.<$> destination,
+            ("disapprovedCountries" Core..=) Core.<$> disapprovedCountries
+          ]
+      )
 
 -- | Severity of an issue per destination in a region, and aggregated severity.
 --
@@ -17460,14 +13217,12 @@ newProductViewItemIssueItemIssueSeverity ::
   ProductViewItemIssueItemIssueSeverity
 newProductViewItemIssueItemIssueSeverity =
   ProductViewItemIssueItemIssueSeverity
-    { aggregatedSeverity = Core.Nothing,
+    { aggregatedSeverity =
+        Core.Nothing,
       severityPerDestination = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductViewItemIssueItemIssueSeverity
-  where
+instance Core.FromJSON ProductViewItemIssueItemIssueSeverity where
   parseJSON =
     Core.withObject
       "ProductViewItemIssueItemIssueSeverity"
@@ -17477,15 +13232,11 @@ instance
             Core.<*> (o Core..:? "severityPerDestination")
       )
 
-instance
-  Core.ToJSON
-    ProductViewItemIssueItemIssueSeverity
-  where
+instance Core.ToJSON ProductViewItemIssueItemIssueSeverity where
   toJSON ProductViewItemIssueItemIssueSeverity {..} =
     Core.object
       ( Core.catMaybes
-          [ ("aggregatedSeverity" Core..=)
-              Core.<$> aggregatedSeverity,
+          [ ("aggregatedSeverity" Core..=) Core.<$> aggregatedSeverity,
             ("severityPerDestination" Core..=)
               Core.<$> severityPerDestination
           ]
@@ -17494,9 +13245,11 @@ instance
 -- | Type of the item issue.
 --
 -- /See:/ 'newProductViewItemIssueItemIssueType' smart constructor.
-newtype ProductViewItemIssueItemIssueType = ProductViewItemIssueItemIssueType
+data ProductViewItemIssueItemIssueType = ProductViewItemIssueItemIssueType
   { -- | Canonical attribute name for attribute-specific issues.
-    canonicalAttribute :: (Core.Maybe Core.Text)
+    canonicalAttribute :: (Core.Maybe Core.Text),
+    -- | Error code of the issue.
+    code :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -17504,29 +13257,28 @@ newtype ProductViewItemIssueItemIssueType = ProductViewItemIssueItemIssueType
 newProductViewItemIssueItemIssueType ::
   ProductViewItemIssueItemIssueType
 newProductViewItemIssueItemIssueType =
-  ProductViewItemIssueItemIssueType {canonicalAttribute = Core.Nothing}
+  ProductViewItemIssueItemIssueType
+    { canonicalAttribute =
+        Core.Nothing,
+      code = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ProductViewItemIssueItemIssueType
-  where
+instance Core.FromJSON ProductViewItemIssueItemIssueType where
   parseJSON =
     Core.withObject
       "ProductViewItemIssueItemIssueType"
       ( \o ->
           ProductViewItemIssueItemIssueType
             Core.<$> (o Core..:? "canonicalAttribute")
+            Core.<*> (o Core..:? "code")
       )
 
-instance
-  Core.ToJSON
-    ProductViewItemIssueItemIssueType
-  where
+instance Core.ToJSON ProductViewItemIssueItemIssueType where
   toJSON ProductViewItemIssueItemIssueType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canonicalAttribute" Core..=)
-              Core.<$> canonicalAttribute
+          [ ("canonicalAttribute" Core..=) Core.<$> canonicalAttribute,
+            ("code" Core..=) Core.<$> code
           ]
       )
 
@@ -17543,7 +13295,8 @@ data ProductWeight = ProductWeight
 -- | Creates a value of 'ProductWeight' with the minimum fields required to make a request.
 newProductWeight ::
   ProductWeight
-newProductWeight = ProductWeight {unit = Core.Nothing, value = Core.Nothing}
+newProductWeight =
+  ProductWeight {unit = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON ProductWeight where
   parseJSON =
@@ -17551,16 +13304,15 @@ instance Core.FromJSON ProductWeight where
       "ProductWeight"
       ( \o ->
           ProductWeight
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "unit")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ProductWeight where
   toJSON ProductWeight {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )
 
 --
@@ -17581,17 +13333,12 @@ instance Core.FromJSON ProductsCustomBatchRequest where
   parseJSON =
     Core.withObject
       "ProductsCustomBatchRequest"
-      ( \o ->
-          ProductsCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
-      )
+      (\o -> ProductsCustomBatchRequest Core.<$> (o Core..:? "entries"))
 
 instance Core.ToJSON ProductsCustomBatchRequest where
   toJSON ProductsCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch products request.
 --
@@ -17628,22 +13375,15 @@ newProductsCustomBatchRequestEntry =
       updateMask = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductsCustomBatchRequestEntry
-  where
+instance Core.FromJSON ProductsCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "ProductsCustomBatchRequestEntry"
       ( \o ->
           ProductsCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "feedId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "feedId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "product")
             Core.<*> (o Core..:? "productId")
@@ -17655,10 +13395,8 @@ instance Core.ToJSON ProductsCustomBatchRequestEntry where
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
-            ("feedId" Core..=) Core.. Core.AsText
-              Core.<$> feedId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("feedId" Core..=) Core.. Core.AsText Core.<$> feedId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("product" Core..=) Core.<$> product,
             ("productId" Core..=) Core.<$> productId,
@@ -17680,7 +13418,10 @@ data ProductsCustomBatchResponse = ProductsCustomBatchResponse
 newProductsCustomBatchResponse ::
   ProductsCustomBatchResponse
 newProductsCustomBatchResponse =
-  ProductsCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  ProductsCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
 instance Core.FromJSON ProductsCustomBatchResponse where
   parseJSON =
@@ -17688,7 +13429,8 @@ instance Core.FromJSON ProductsCustomBatchResponse where
       "ProductsCustomBatchResponse"
       ( \o ->
           ProductsCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ProductsCustomBatchResponse where
@@ -17726,10 +13468,7 @@ newProductsCustomBatchResponseEntry =
       product = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductsCustomBatchResponseEntry
-  where
+instance Core.FromJSON ProductsCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "ProductsCustomBatchResponseEntry"
@@ -17759,7 +13498,6 @@ data ProductsListResponse = ProductsListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of products.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [Product])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -17809,27 +13547,18 @@ newProductstatusesCustomBatchRequest ::
 newProductstatusesCustomBatchRequest =
   ProductstatusesCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ProductstatusesCustomBatchRequest
-  where
+instance Core.FromJSON ProductstatusesCustomBatchRequest where
   parseJSON =
     Core.withObject
       "ProductstatusesCustomBatchRequest"
       ( \o ->
-          ProductstatusesCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          ProductstatusesCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
-instance
-  Core.ToJSON
-    ProductstatusesCustomBatchRequest
-  where
+instance Core.ToJSON ProductstatusesCustomBatchRequest where
   toJSON ProductstatusesCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch productstatuses request.
 --
@@ -17863,10 +13592,7 @@ newProductstatusesCustomBatchRequestEntry =
       productId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductstatusesCustomBatchRequestEntry
-  where
+instance Core.FromJSON ProductstatusesCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "ProductstatusesCustomBatchRequestEntry"
@@ -17875,26 +13601,19 @@ instance
             Core.<$> (o Core..:? "batchId")
             Core.<*> (o Core..:? "destinations")
             Core.<*> (o Core..:? "includeAttributes")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
       )
 
-instance
-  Core.ToJSON
-    ProductstatusesCustomBatchRequestEntry
-  where
+instance Core.ToJSON ProductstatusesCustomBatchRequestEntry where
   toJSON ProductstatusesCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("destinations" Core..=) Core.<$> destinations,
-            ("includeAttributes" Core..=)
-              Core.<$> includeAttributes,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("includeAttributes" Core..=) Core.<$> includeAttributes,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("productId" Core..=) Core.<$> productId
           ]
@@ -17919,22 +13638,17 @@ newProductstatusesCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductstatusesCustomBatchResponse
-  where
+instance Core.FromJSON ProductstatusesCustomBatchResponse where
   parseJSON =
     Core.withObject
       "ProductstatusesCustomBatchResponse"
       ( \o ->
           ProductstatusesCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    ProductstatusesCustomBatchResponse
-  where
+instance Core.ToJSON ProductstatusesCustomBatchResponse where
   toJSON ProductstatusesCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -17969,10 +13683,7 @@ newProductstatusesCustomBatchResponseEntry =
       productStatus = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ProductstatusesCustomBatchResponseEntry
-  where
+instance Core.FromJSON ProductstatusesCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "ProductstatusesCustomBatchResponseEntry"
@@ -17984,10 +13695,7 @@ instance
             Core.<*> (o Core..:? "productStatus")
       )
 
-instance
-  Core.ToJSON
-    ProductstatusesCustomBatchResponseEntry
-  where
+instance Core.ToJSON ProductstatusesCustomBatchResponseEntry where
   toJSON ProductstatusesCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -18005,7 +13713,6 @@ data ProductstatusesListResponse = ProductstatusesListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of products statuses.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [ProductStatus])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -18063,7 +13770,7 @@ data Promotion = Promotion
     genericRedemptionCode :: (Core.Maybe Core.Text),
     -- | The number of items discounted in the promotion.
     getThisQuantityDiscounted :: (Core.Maybe Core.Int32),
-    -- | Required. Output only. The REST promotion ID to uniquely identify the promotion. Content API methods that operate on promotions take this as their @promotionId@ parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The @channel@ field has a value of @\"online\"@, @\"in_store\"@, or @\"online_in_store\"@.
+    -- | Output only. The REST promotion ID to uniquely identify the promotion. Content API methods that operate on promotions take this as their @promotionId@ parameter. The REST ID for a promotion is of the form channel:contentLanguage:targetCountry:promotionId The @channel@ field has a value of @\"online\"@, @\"in_store\"@, or @\"online_in_store\"@.
     id :: (Core.Maybe Core.Text),
     -- | Product filter by item group ID for the promotion.
     itemGroupId :: (Core.Maybe [Core.Text]),
@@ -18235,25 +13942,21 @@ instance Core.ToJSON Promotion where
             ("brandExclusion" Core..=) Core.<$> brandExclusion,
             ("contentLanguage" Core..=) Core.<$> contentLanguage,
             ("couponValueType" Core..=) Core.<$> couponValueType,
-            ("freeGiftDescription" Core..=)
-              Core.<$> freeGiftDescription,
+            ("freeGiftDescription" Core..=) Core.<$> freeGiftDescription,
             ("freeGiftItemId" Core..=) Core.<$> freeGiftItemId,
             ("freeGiftValue" Core..=) Core.<$> freeGiftValue,
-            ("genericRedemptionCode" Core..=)
-              Core.<$> genericRedemptionCode,
+            ("genericRedemptionCode" Core..=) Core.<$> genericRedemptionCode,
             ("getThisQuantityDiscounted" Core..=)
               Core.<$> getThisQuantityDiscounted,
             ("id" Core..=) Core.<$> id,
             ("itemGroupId" Core..=) Core.<$> itemGroupId,
-            ("itemGroupIdExclusion" Core..=)
-              Core.<$> itemGroupIdExclusion,
+            ("itemGroupIdExclusion" Core..=) Core.<$> itemGroupIdExclusion,
             ("itemId" Core..=) Core.<$> itemId,
             ("itemIdExclusion" Core..=) Core.<$> itemIdExclusion,
             ("limitQuantity" Core..=) Core.<$> limitQuantity,
             ("limitValue" Core..=) Core.<$> limitValue,
             ("longTitle" Core..=) Core.<$> longTitle,
-            ("minimumPurchaseAmount" Core..=)
-              Core.<$> minimumPurchaseAmount,
+            ("minimumPurchaseAmount" Core..=) Core.<$> minimumPurchaseAmount,
             ("minimumPurchaseQuantity" Core..=)
               Core.<$> minimumPurchaseQuantity,
             ("moneyBudget" Core..=) Core.<$> moneyBudget,
@@ -18261,15 +13964,12 @@ instance Core.ToJSON Promotion where
             ("offerType" Core..=) Core.<$> offerType,
             ("orderLimit" Core..=) Core.<$> orderLimit,
             ("percentOff" Core..=) Core.<$> percentOff,
-            ("productApplicability" Core..=)
-              Core.<$> productApplicability,
+            ("productApplicability" Core..=) Core.<$> productApplicability,
             ("productType" Core..=) Core.<$> productType,
-            ("productTypeExclusion" Core..=)
-              Core.<$> productTypeExclusion,
+            ("productTypeExclusion" Core..=) Core.<$> productTypeExclusion,
             ("promotionDestinationIds" Core..=)
               Core.<$> promotionDestinationIds,
-            ("promotionDisplayDates" Core..=)
-              Core.<$> promotionDisplayDates,
+            ("promotionDisplayDates" Core..=) Core.<$> promotionDisplayDates,
             ("promotionDisplayTimePeriod" Core..=)
               Core.<$> promotionDisplayTimePeriod,
             ("promotionEffectiveDates" Core..=)
@@ -18279,15 +13979,11 @@ instance Core.ToJSON Promotion where
             ("promotionId" Core..=) Core.<$> promotionId,
             ("promotionStatus" Core..=) Core.<$> promotionStatus,
             ("promotionUrl" Core..=) Core.<$> promotionUrl,
-            ("redemptionChannel" Core..=)
-              Core.<$> redemptionChannel,
-            ("shippingServiceNames" Core..=)
-              Core.<$> shippingServiceNames,
-            ("storeApplicability" Core..=)
-              Core.<$> storeApplicability,
+            ("redemptionChannel" Core..=) Core.<$> redemptionChannel,
+            ("shippingServiceNames" Core..=) Core.<$> shippingServiceNames,
+            ("storeApplicability" Core..=) Core.<$> storeApplicability,
             ("storeCode" Core..=) Core.<$> storeCode,
-            ("storeCodeExclusion" Core..=)
-              Core.<$> storeCodeExclusion,
+            ("storeCodeExclusion" Core..=) Core.<$> storeCodeExclusion,
             ("targetCountry" Core..=) Core.<$> targetCountry
           ]
       )
@@ -18335,8 +14031,7 @@ instance Core.ToJSON PromotionPromotionStatus where
     Core.object
       ( Core.catMaybes
           [ ("creationDate" Core..=) Core.<$> creationDate,
-            ("destinationStatuses" Core..=)
-              Core.<$> destinationStatuses,
+            ("destinationStatuses" Core..=) Core.<$> destinationStatuses,
             ("lastUpdateDate" Core..=) Core.<$> lastUpdateDate,
             ("promotionIssue" Core..=) Core.<$> promotionIssue
           ]
@@ -18358,14 +14053,12 @@ newPromotionPromotionStatusDestinationStatus ::
   PromotionPromotionStatusDestinationStatus
 newPromotionPromotionStatusDestinationStatus =
   PromotionPromotionStatusDestinationStatus
-    { destination = Core.Nothing,
+    { destination =
+        Core.Nothing,
       status = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PromotionPromotionStatusDestinationStatus
-  where
+instance Core.FromJSON PromotionPromotionStatusDestinationStatus where
   parseJSON =
     Core.withObject
       "PromotionPromotionStatusDestinationStatus"
@@ -18375,10 +14068,7 @@ instance
             Core.<*> (o Core..:? "status")
       )
 
-instance
-  Core.ToJSON
-    PromotionPromotionStatusDestinationStatus
-  where
+instance Core.ToJSON PromotionPromotionStatusDestinationStatus where
   toJSON PromotionPromotionStatusDestinationStatus {..} =
     Core.object
       ( Core.catMaybes
@@ -18407,22 +14097,17 @@ newPromotionPromotionStatusPromotionIssue =
       detail = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PromotionPromotionStatusPromotionIssue
-  where
+instance Core.FromJSON PromotionPromotionStatusPromotionIssue where
   parseJSON =
     Core.withObject
       "PromotionPromotionStatusPromotionIssue"
       ( \o ->
           PromotionPromotionStatusPromotionIssue
-            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "detail")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "detail")
       )
 
-instance
-  Core.ToJSON
-    PromotionPromotionStatusPromotionIssue
-  where
+instance Core.ToJSON PromotionPromotionStatusPromotionIssue where
   toJSON PromotionPromotionStatusPromotionIssue {..} =
     Core.object
       ( Core.catMaybes
@@ -18471,8 +14156,7 @@ instance Core.ToJSON PubsubNotificationSettings where
       ( Core.catMaybes
           [ ("cloudTopicName" Core..=) Core.<$> cloudTopicName,
             ("kind" Core..=) Core.<$> kind,
-            ("registeredEvents" Core..=)
-              Core.<$> registeredEvents
+            ("registeredEvents" Core..=) Core.<$> registeredEvents
           ]
       )
 
@@ -18607,17 +14291,13 @@ instance Core.ToJSON Recommendation where
       ( Core.catMaybes
           [ ("additionalCallToAction" Core..=)
               Core.<$> additionalCallToAction,
-            ("additionalDescriptions" Core..=)
-              Core.<$> additionalDescriptions,
+            ("additionalDescriptions" Core..=) Core.<$> additionalDescriptions,
             ("creative" Core..=) Core.<$> creative,
-            ("defaultCallToAction" Core..=)
-              Core.<$> defaultCallToAction,
-            ("defaultDescription" Core..=)
-              Core.<$> defaultDescription,
+            ("defaultCallToAction" Core..=) Core.<$> defaultCallToAction,
+            ("defaultDescription" Core..=) Core.<$> defaultDescription,
             ("numericalImpact" Core..=) Core.<$> numericalImpact,
             ("paid" Core..=) Core.<$> paid,
-            ("recommendationName" Core..=)
-              Core.<$> recommendationName,
+            ("recommendationName" Core..=) Core.<$> recommendationName,
             ("subType" Core..=) Core.<$> subType,
             ("title" Core..=) Core.<$> title,
             ("type" Core..=) Core.<$> type'
@@ -18691,16 +14371,15 @@ instance Core.FromJSON RecommendationCreative where
       "RecommendationCreative"
       ( \o ->
           RecommendationCreative
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "uri")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance Core.ToJSON RecommendationCreative where
   toJSON RecommendationCreative {..} =
     Core.object
       ( Core.catMaybes
-          [ ("type" Core..=) Core.<$> type',
-            ("uri" Core..=) Core.<$> uri
-          ]
+          [("type" Core..=) Core.<$> type', ("uri" Core..=) Core.<$> uri]
       )
 
 -- | Google-provided description for the recommendation.
@@ -18718,7 +14397,10 @@ data RecommendationDescription = RecommendationDescription
 newRecommendationDescription ::
   RecommendationDescription
 newRecommendationDescription =
-  RecommendationDescription {text = Core.Nothing, type' = Core.Nothing}
+  RecommendationDescription
+    { text = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON RecommendationDescription where
   parseJSON =
@@ -18726,52 +14408,15 @@ instance Core.FromJSON RecommendationDescription where
       "RecommendationDescription"
       ( \o ->
           RecommendationDescription
-            Core.<$> (o Core..:? "text") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "text")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON RecommendationDescription where
   toJSON RecommendationDescription {..} =
     Core.object
       ( Core.catMaybes
-          [ ("text" Core..=) Core.<$> text,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newRefundReason' smart constructor.
-data RefundReason = RefundReason
-  { -- | Description of the reason.
-    description :: (Core.Maybe Core.Text),
-    -- | Code of the refund reason. Acceptable values are: - \"@adjustment@\" - \"@autoPostInternal@\" - \"@autoPostInvalidBillingAddress@\" - \"@autoPostNoInventory@\" - \"@autoPostPriceError@\" - \"@autoPostUndeliverableShippingAddress@\" - \"@couponAbuse@\" - \"@courtesyAdjustment@\" - \"@customerCanceled@\" - \"@customerDiscretionaryReturn@\" - \"@customerInitiatedMerchantCancel@\" - \"@customerSupportRequested@\" - \"@deliveredLateByCarrier@\" - \"@deliveredTooLate@\" - \"@expiredItem@\" - \"@failToPushOrderGoogleError@\" - \"@failToPushOrderMerchantError@\" - \"@failToPushOrderMerchantFulfillmentError@\" - \"@failToPushOrderToMerchant@\" - \"@failToPushOrderToMerchantOutOfStock@\" - \"@feeAdjustment@\" - \"@invalidCoupon@\" - \"@lateShipmentCredit@\" - \"@malformedShippingAddress@\" - \"@merchantDidNotShipOnTime@\" - \"@noInventory@\" - \"@orderTimeout@\" - \"@other@\" - \"@paymentAbuse@\" - \"@paymentDeclined@\" - \"@priceAdjustment@\" - \"@priceError@\" - \"@productArrivedDamaged@\" -
-    -- \"@productNotAsDescribed@\" - \"@promoReallocation@\" - \"@qualityNotAsExpected@\" - \"@returnRefundAbuse@\" - \"@shippingCostAdjustment@\" - \"@shippingPriceError@\" - \"@taxAdjustment@\" - \"@taxError@\" - \"@undeliverableShippingAddress@\" - \"@unsupportedPoBoxAddress@\" - \"@wrongProductShipped@\"
-    reasonCode :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RefundReason' with the minimum fields required to make a request.
-newRefundReason ::
-  RefundReason
-newRefundReason =
-  RefundReason {description = Core.Nothing, reasonCode = Core.Nothing}
-
-instance Core.FromJSON RefundReason where
-  parseJSON =
-    Core.withObject
-      "RefundReason"
-      ( \o ->
-          RefundReason
-            Core.<$> (o Core..:? "description")
-            Core.<*> (o Core..:? "reasonCode")
-      )
-
-instance Core.ToJSON RefundReason where
-  toJSON RefundReason {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("description" Core..=) Core.<$> description,
-            ("reasonCode" Core..=) Core.<$> reasonCode
-          ]
+          [("text" Core..=) Core.<$> text, ("type" Core..=) Core.<$> type']
       )
 
 -- | Represents a geographic region that you can use as a target with both the @RegionalInventory@ and @ShippingSettings@ services. You can define regions as collections of either postal codes or, in some countries, using predefined geotargets.
@@ -18817,9 +14462,7 @@ instance Core.FromJSON Region where
           Region
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "geotargetArea")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "postalCodeArea")
             Core.<*> (o Core..:? "regionId")
             Core.<*> (o Core..:? "regionalInventoryEligible")
@@ -18832,14 +14475,12 @@ instance Core.ToJSON Region where
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
             ("geotargetArea" Core..=) Core.<$> geotargetArea,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("postalCodeArea" Core..=) Core.<$> postalCodeArea,
             ("regionId" Core..=) Core.<$> regionId,
             ("regionalInventoryEligible" Core..=)
               Core.<$> regionalInventoryEligible,
-            ("shippingEligible" Core..=)
-              Core.<$> shippingEligible
+            ("shippingEligible" Core..=) Core.<$> shippingEligible
           ]
       )
 
@@ -18864,7 +14505,8 @@ instance Core.FromJSON RegionGeoTargetArea where
       "RegionGeoTargetArea"
       ( \o ->
           RegionGeoTargetArea
-            Core.<$> ( o Core..:? "geotargetCriteriaIds"
+            Core.<$> ( o
+                         Core..:? "geotargetCriteriaIds"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
@@ -18894,7 +14536,10 @@ data RegionPostalCodeArea = RegionPostalCodeArea
 newRegionPostalCodeArea ::
   RegionPostalCodeArea
 newRegionPostalCodeArea =
-  RegionPostalCodeArea {postalCodes = Core.Nothing, regionCode = Core.Nothing}
+  RegionPostalCodeArea
+    { postalCodes = Core.Nothing,
+      regionCode = Core.Nothing
+    }
 
 instance Core.FromJSON RegionPostalCodeArea where
   parseJSON =
@@ -18930,30 +14575,26 @@ data RegionPostalCodeAreaPostalCodeRange = RegionPostalCodeAreaPostalCodeRange
 newRegionPostalCodeAreaPostalCodeRange ::
   RegionPostalCodeAreaPostalCodeRange
 newRegionPostalCodeAreaPostalCodeRange =
-  RegionPostalCodeAreaPostalCodeRange {begin = Core.Nothing, end = Core.Nothing}
+  RegionPostalCodeAreaPostalCodeRange
+    { begin = Core.Nothing,
+      end = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    RegionPostalCodeAreaPostalCodeRange
-  where
+instance Core.FromJSON RegionPostalCodeAreaPostalCodeRange where
   parseJSON =
     Core.withObject
       "RegionPostalCodeAreaPostalCodeRange"
       ( \o ->
           RegionPostalCodeAreaPostalCodeRange
-            Core.<$> (o Core..:? "begin") Core.<*> (o Core..:? "end")
+            Core.<$> (o Core..:? "begin")
+            Core.<*> (o Core..:? "end")
       )
 
-instance
-  Core.ToJSON
-    RegionPostalCodeAreaPostalCodeRange
-  where
+instance Core.ToJSON RegionPostalCodeAreaPostalCodeRange where
   toJSON RegionPostalCodeAreaPostalCodeRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("begin" Core..=) Core.<$> begin,
-            ("end" Core..=) Core.<$> end
-          ]
+          [("begin" Core..=) Core.<$> begin, ("end" Core..=) Core.<$> end]
       )
 
 -- | Regional inventory resource. contains the regional name and all attributes which are overridden for the specified region.
@@ -19011,8 +14652,7 @@ instance Core.ToJSON RegionalInventory where
     Core.object
       ( Core.catMaybes
           [ ("availability" Core..=) Core.<$> availability,
-            ("customAttributes" Core..=)
-              Core.<$> customAttributes,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
             ("kind" Core..=) Core.<$> kind,
             ("price" Core..=) Core.<$> price,
             ("regionId" Core..=) Core.<$> regionId,
@@ -19036,10 +14676,7 @@ newRegionalinventoryCustomBatchRequest ::
 newRegionalinventoryCustomBatchRequest =
   RegionalinventoryCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    RegionalinventoryCustomBatchRequest
-  where
+instance Core.FromJSON RegionalinventoryCustomBatchRequest where
   parseJSON =
     Core.withObject
       "RegionalinventoryCustomBatchRequest"
@@ -19048,15 +14685,10 @@ instance
             Core.<$> (o Core..:? "entries")
       )
 
-instance
-  Core.ToJSON
-    RegionalinventoryCustomBatchRequest
-  where
+instance Core.ToJSON RegionalinventoryCustomBatchRequest where
   toJSON RegionalinventoryCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch regional inventory request.
 --
@@ -19087,38 +14719,28 @@ newRegionalinventoryCustomBatchRequestEntry =
       regionalInventory = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RegionalinventoryCustomBatchRequestEntry
-  where
+instance Core.FromJSON RegionalinventoryCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "RegionalinventoryCustomBatchRequestEntry"
       ( \o ->
           RegionalinventoryCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "regionalInventory")
       )
 
-instance
-  Core.ToJSON
-    RegionalinventoryCustomBatchRequestEntry
-  where
+instance Core.ToJSON RegionalinventoryCustomBatchRequestEntry where
   toJSON RegionalinventoryCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("productId" Core..=) Core.<$> productId,
-            ("regionalInventory" Core..=)
-              Core.<$> regionalInventory
+            ("regionalInventory" Core..=) Core.<$> regionalInventory
           ]
       )
 
@@ -19141,22 +14763,17 @@ newRegionalinventoryCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RegionalinventoryCustomBatchResponse
-  where
+instance Core.FromJSON RegionalinventoryCustomBatchResponse where
   parseJSON =
     Core.withObject
       "RegionalinventoryCustomBatchResponse"
       ( \o ->
           RegionalinventoryCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    RegionalinventoryCustomBatchResponse
-  where
+instance Core.ToJSON RegionalinventoryCustomBatchResponse where
   toJSON RegionalinventoryCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -19191,10 +14808,7 @@ newRegionalinventoryCustomBatchResponseEntry =
       regionalInventory = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RegionalinventoryCustomBatchResponseEntry
-  where
+instance Core.FromJSON RegionalinventoryCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "RegionalinventoryCustomBatchResponseEntry"
@@ -19206,18 +14820,180 @@ instance
             Core.<*> (o Core..:? "regionalInventory")
       )
 
-instance
-  Core.ToJSON
-    RegionalinventoryCustomBatchResponseEntry
-  where
+instance Core.ToJSON RegionalinventoryCustomBatchResponseEntry where
   toJSON RegionalinventoryCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("errors" Core..=) Core.<$> errors,
             ("kind" Core..=) Core.<$> kind,
-            ("regionalInventory" Core..=)
-              Core.<$> regionalInventory
+            ("regionalInventory" Core..=) Core.<$> regionalInventory
+          ]
+      )
+
+-- | The payload for configuring how the content should be rendered.
+--
+-- /See:/ 'newRenderAccountIssuesRequestPayload' smart constructor.
+data RenderAccountIssuesRequestPayload = RenderAccountIssuesRequestPayload
+  { -- | Optional. How the detailed content should be returned. Default option is to return the content as a pre-rendered HTML text.
+    contentOption :: (Core.Maybe RenderAccountIssuesRequestPayload_ContentOption),
+    -- | Optional. How actions with user input form should be handled. If not provided, actions will be returned as links that points merchant to Merchant Center where they can request the action.
+    userInputActionOption ::
+      ( Core.Maybe
+          RenderAccountIssuesRequestPayload_UserInputActionOption
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RenderAccountIssuesRequestPayload' with the minimum fields required to make a request.
+newRenderAccountIssuesRequestPayload ::
+  RenderAccountIssuesRequestPayload
+newRenderAccountIssuesRequestPayload =
+  RenderAccountIssuesRequestPayload
+    { contentOption = Core.Nothing,
+      userInputActionOption = Core.Nothing
+    }
+
+instance Core.FromJSON RenderAccountIssuesRequestPayload where
+  parseJSON =
+    Core.withObject
+      "RenderAccountIssuesRequestPayload"
+      ( \o ->
+          RenderAccountIssuesRequestPayload
+            Core.<$> (o Core..:? "contentOption")
+            Core.<*> (o Core..:? "userInputActionOption")
+      )
+
+instance Core.ToJSON RenderAccountIssuesRequestPayload where
+  toJSON RenderAccountIssuesRequestPayload {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contentOption" Core..=) Core.<$> contentOption,
+            ("userInputActionOption" Core..=) Core.<$> userInputActionOption
+          ]
+      )
+
+-- | Response containing support content and actions for listed account issues.
+--
+-- /See:/ 'newRenderAccountIssuesResponse' smart constructor.
+data RenderAccountIssuesResponse = RenderAccountIssuesResponse
+  { -- | Alternate Dispute Resolution (ADR) is deprecated. Use @prerendered_out_of_court_dispute_settlement@ instead.
+    alternateDisputeResolution :: (Core.Maybe AlternateDisputeResolution),
+    -- | List of account issues for a given account. This list can be shown with compressed, expandable items. In the compressed form, the title and impact should be shown for each issue. Once the issue is expanded, the detailed content and available actions should be rendered.
+    issues :: (Core.Maybe [AccountIssue])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RenderAccountIssuesResponse' with the minimum fields required to make a request.
+newRenderAccountIssuesResponse ::
+  RenderAccountIssuesResponse
+newRenderAccountIssuesResponse =
+  RenderAccountIssuesResponse
+    { alternateDisputeResolution =
+        Core.Nothing,
+      issues = Core.Nothing
+    }
+
+instance Core.FromJSON RenderAccountIssuesResponse where
+  parseJSON =
+    Core.withObject
+      "RenderAccountIssuesResponse"
+      ( \o ->
+          RenderAccountIssuesResponse
+            Core.<$> (o Core..:? "alternateDisputeResolution")
+            Core.<*> (o Core..:? "issues")
+      )
+
+instance Core.ToJSON RenderAccountIssuesResponse where
+  toJSON RenderAccountIssuesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alternateDisputeResolution" Core..=)
+              Core.<$> alternateDisputeResolution,
+            ("issues" Core..=) Core.<$> issues
+          ]
+      )
+
+-- | The payload for configuring how the content should be rendered.
+--
+-- /See:/ 'newRenderProductIssuesRequestPayload' smart constructor.
+data RenderProductIssuesRequestPayload = RenderProductIssuesRequestPayload
+  { -- | Optional. How the detailed content should be returned. Default option is to return the content as a pre-rendered HTML text.
+    contentOption :: (Core.Maybe RenderProductIssuesRequestPayload_ContentOption),
+    -- | Optional. How actions with user input form should be handled. If not provided, actions will be returned as links that points merchant to Merchant Center where they can request the action.
+    userInputActionOption ::
+      ( Core.Maybe
+          RenderProductIssuesRequestPayload_UserInputActionOption
+      )
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RenderProductIssuesRequestPayload' with the minimum fields required to make a request.
+newRenderProductIssuesRequestPayload ::
+  RenderProductIssuesRequestPayload
+newRenderProductIssuesRequestPayload =
+  RenderProductIssuesRequestPayload
+    { contentOption = Core.Nothing,
+      userInputActionOption = Core.Nothing
+    }
+
+instance Core.FromJSON RenderProductIssuesRequestPayload where
+  parseJSON =
+    Core.withObject
+      "RenderProductIssuesRequestPayload"
+      ( \o ->
+          RenderProductIssuesRequestPayload
+            Core.<$> (o Core..:? "contentOption")
+            Core.<*> (o Core..:? "userInputActionOption")
+      )
+
+instance Core.ToJSON RenderProductIssuesRequestPayload where
+  toJSON RenderProductIssuesRequestPayload {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contentOption" Core..=) Core.<$> contentOption,
+            ("userInputActionOption" Core..=) Core.<$> userInputActionOption
+          ]
+      )
+
+-- | Response containing support content and actions for listed product issues.
+--
+-- /See:/ 'newRenderProductIssuesResponse' smart constructor.
+data RenderProductIssuesResponse = RenderProductIssuesResponse
+  { -- | Alternate Dispute Resolution (ADR) is deprecated. Use @prerendered_out_of_court_dispute_settlement@ instead.
+    alternateDisputeResolution :: (Core.Maybe AlternateDisputeResolution),
+    -- | List of issues for a given product. This list can be shown with compressed, expandable items. In the compressed form, the title and impact should be shown for each issue. Once the issue is expanded, the detailed content and available actions should be rendered.
+    issues :: (Core.Maybe [ProductIssue])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RenderProductIssuesResponse' with the minimum fields required to make a request.
+newRenderProductIssuesResponse ::
+  RenderProductIssuesResponse
+newRenderProductIssuesResponse =
+  RenderProductIssuesResponse
+    { alternateDisputeResolution =
+        Core.Nothing,
+      issues = Core.Nothing
+    }
+
+instance Core.FromJSON RenderProductIssuesResponse where
+  parseJSON =
+    Core.withObject
+      "RenderProductIssuesResponse"
+      ( \o ->
+          RenderProductIssuesResponse
+            Core.<$> (o Core..:? "alternateDisputeResolution")
+            Core.<*> (o Core..:? "issues")
+      )
+
+instance Core.ToJSON RenderProductIssuesResponse where
+  toJSON RenderProductIssuesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("alternateDisputeResolution" Core..=)
+              Core.<$> alternateDisputeResolution,
+            ("issues" Core..=) Core.<$> issues
           ]
       )
 
@@ -19263,8 +15039,7 @@ instance Core.ToJSON ReportInteractionRequest where
   toJSON ReportInteractionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("interactionType" Core..=)
-              Core.<$> interactionType,
+          [ ("interactionType" Core..=) Core.<$> interactionType,
             ("responseToken" Core..=) Core.<$> responseToken,
             ("subtype" Core..=) Core.<$> subtype,
             ("type" Core..=) Core.<$> type'
@@ -19279,6 +15054,8 @@ data ReportRow = ReportRow
     bestSellers :: (Core.Maybe BestSellers),
     -- | Brand fields requested by the merchant in the query. Field values are only set if the merchant queries @BestSellersBrandView@.
     brand :: (Core.Maybe Brand),
+    -- | Competitive visibility fields requested by the merchant in the query. Field values are only set if the merchant queries @CompetitiveVisibilityTopMerchantView@, @CompetitiveVisibilityBenchmarkView@ or @CompetitiveVisibilityCompetitorView@.
+    competitiveVisibility :: (Core.Maybe CompetitiveVisibility),
     -- | Metrics requested by the merchant in the query. Metric values are only set for metrics requested explicitly in the query.
     metrics :: (Core.Maybe Metrics),
     -- | Price competitiveness fields requested by the merchant in the query. Field values are only set if the merchant queries @PriceCompetitivenessProductView@.
@@ -19290,7 +15067,9 @@ data ReportRow = ReportRow
     -- | Product fields requested by the merchant in the query. Field values are only set if the merchant queries @ProductView@.
     productView :: (Core.Maybe ProductView),
     -- | Segmentation dimensions requested by the merchant in the query. Dimension values are only set for dimensions requested explicitly in the query.
-    segments :: (Core.Maybe Segments)
+    segments :: (Core.Maybe Segments),
+    -- | <https://support.google.com/merchants/answer/13542370 Topic trends> fields requested by the merchant in the query. Field values are only set if the merchant queries @TopicTrendsView@.
+    topicTrends :: (Core.Maybe TopicTrends)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -19301,12 +15080,14 @@ newReportRow =
   ReportRow
     { bestSellers = Core.Nothing,
       brand = Core.Nothing,
+      competitiveVisibility = Core.Nothing,
       metrics = Core.Nothing,
       priceCompetitiveness = Core.Nothing,
       priceInsights = Core.Nothing,
       productCluster = Core.Nothing,
       productView = Core.Nothing,
-      segments = Core.Nothing
+      segments = Core.Nothing,
+      topicTrends = Core.Nothing
     }
 
 instance Core.FromJSON ReportRow where
@@ -19317,12 +15098,14 @@ instance Core.FromJSON ReportRow where
           ReportRow
             Core.<$> (o Core..:? "bestSellers")
             Core.<*> (o Core..:? "brand")
+            Core.<*> (o Core..:? "competitiveVisibility")
             Core.<*> (o Core..:? "metrics")
             Core.<*> (o Core..:? "priceCompetitiveness")
             Core.<*> (o Core..:? "priceInsights")
             Core.<*> (o Core..:? "productCluster")
             Core.<*> (o Core..:? "productView")
             Core.<*> (o Core..:? "segments")
+            Core.<*> (o Core..:? "topicTrends")
       )
 
 instance Core.ToJSON ReportRow where
@@ -19331,695 +15114,14 @@ instance Core.ToJSON ReportRow where
       ( Core.catMaybes
           [ ("bestSellers" Core..=) Core.<$> bestSellers,
             ("brand" Core..=) Core.<$> brand,
+            ("competitiveVisibility" Core..=) Core.<$> competitiveVisibility,
             ("metrics" Core..=) Core.<$> metrics,
-            ("priceCompetitiveness" Core..=)
-              Core.<$> priceCompetitiveness,
+            ("priceCompetitiveness" Core..=) Core.<$> priceCompetitiveness,
             ("priceInsights" Core..=) Core.<$> priceInsights,
             ("productCluster" Core..=) Core.<$> productCluster,
             ("productView" Core..=) Core.<$> productView,
-            ("segments" Core..=) Core.<$> segments
-          ]
-      )
-
--- | Resource that represents a daily Repricing product report. Each report contains stats for a single type of Repricing rule for a single product on a given day. If there are multiple rules of the same type for the product on that day, the report lists all the rules by rule ids, combines the stats, and paginates the results by date. To retrieve the stats of a particular rule, provide the rule_id in the request.
---
--- /See:/ 'newRepricingProductReport' smart constructor.
-data RepricingProductReport = RepricingProductReport
-  { -- | Total count of Repricer applications. This value captures how many times the rule of this type was applied to this product during this reporting period.
-    applicationCount :: (Core.Maybe Core.Int64),
-    -- | Stats specific to buybox winning rules for product report (deprecated).
-    buyboxWinningProductStats :: (Core.Maybe RepricingProductReportBuyboxWinningProductStats),
-    -- | Date of the stats in this report. The report starts and ends according to the merchant\'s timezone.
-    date :: (Core.Maybe Date),
-    -- | Maximum displayed price after repriced during this reporting period.
-    highWatermark :: (Core.Maybe PriceAmount),
-    -- | List of all reasons the rule did not apply to the product during the specified reporting period.
-    inapplicabilityDetails :: (Core.Maybe [InapplicabilityDetails]),
-    -- | Minimum displayed price after repriced during this reporting period.
-    lowWatermark :: (Core.Maybe PriceAmount),
-    -- | Total unit count of impacted products ordered while the rule was active on the date of the report. This count includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
-    orderItemCount :: (Core.Maybe Core.Int32),
-    -- | Ids of the Repricing rule for this report.
-    ruleIds :: (Core.Maybe [Core.Text]),
-    -- | Total GMV generated by impacted products while the rule was active on the date of the report. This value includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
-    totalGmv :: (Core.Maybe PriceAmount),
-    -- | Type of the rule.
-    type' :: (Core.Maybe RepricingProductReport_Type)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingProductReport' with the minimum fields required to make a request.
-newRepricingProductReport ::
-  RepricingProductReport
-newRepricingProductReport =
-  RepricingProductReport
-    { applicationCount = Core.Nothing,
-      buyboxWinningProductStats = Core.Nothing,
-      date = Core.Nothing,
-      highWatermark = Core.Nothing,
-      inapplicabilityDetails = Core.Nothing,
-      lowWatermark = Core.Nothing,
-      orderItemCount = Core.Nothing,
-      ruleIds = Core.Nothing,
-      totalGmv = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON RepricingProductReport where
-  parseJSON =
-    Core.withObject
-      "RepricingProductReport"
-      ( \o ->
-          RepricingProductReport
-            Core.<$> ( o Core..:? "applicationCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "buyboxWinningProductStats")
-            Core.<*> (o Core..:? "date")
-            Core.<*> (o Core..:? "highWatermark")
-            Core.<*> (o Core..:? "inapplicabilityDetails")
-            Core.<*> (o Core..:? "lowWatermark")
-            Core.<*> (o Core..:? "orderItemCount")
-            Core.<*> (o Core..:? "ruleIds")
-            Core.<*> (o Core..:? "totalGmv")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON RepricingProductReport where
-  toJSON RepricingProductReport {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("applicationCount" Core..=) Core.. Core.AsText
-              Core.<$> applicationCount,
-            ("buyboxWinningProductStats" Core..=)
-              Core.<$> buyboxWinningProductStats,
-            ("date" Core..=) Core.<$> date,
-            ("highWatermark" Core..=) Core.<$> highWatermark,
-            ("inapplicabilityDetails" Core..=)
-              Core.<$> inapplicabilityDetails,
-            ("lowWatermark" Core..=) Core.<$> lowWatermark,
-            ("orderItemCount" Core..=) Core.<$> orderItemCount,
-            ("ruleIds" Core..=) Core.<$> ruleIds,
-            ("totalGmv" Core..=) Core.<$> totalGmv,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | Stats specific to buybox winning rules for product report.
---
--- /See:/ 'newRepricingProductReportBuyboxWinningProductStats' smart constructor.
-newtype RepricingProductReportBuyboxWinningProductStats = RepricingProductReportBuyboxWinningProductStats
-  { -- | Number of times this product won the buybox with these rules during this time period.
-    buyboxWinsCount :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingProductReportBuyboxWinningProductStats' with the minimum fields required to make a request.
-newRepricingProductReportBuyboxWinningProductStats ::
-  RepricingProductReportBuyboxWinningProductStats
-newRepricingProductReportBuyboxWinningProductStats =
-  RepricingProductReportBuyboxWinningProductStats
-    { buyboxWinsCount = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingProductReportBuyboxWinningProductStats
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingProductReportBuyboxWinningProductStats"
-      ( \o ->
-          RepricingProductReportBuyboxWinningProductStats
-            Core.<$> (o Core..:? "buyboxWinsCount")
-      )
-
-instance
-  Core.ToJSON
-    RepricingProductReportBuyboxWinningProductStats
-  where
-  toJSON
-    RepricingProductReportBuyboxWinningProductStats {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("buyboxWinsCount" Core..=)
-                Core.<$> buyboxWinsCount
-            ]
-        )
-
--- | Represents a repricing rule. A repricing rule is used by shopping serving to adjust transactable offer prices if conditions are met.
---
--- /See:/ 'newRepricingRule' smart constructor.
-data RepricingRule = RepricingRule
-  { -- | The rule definition for TYPE/COGS/BASED. Required when the rule type is TYPE/COGS/BASED.
-    cogsBasedRule :: (Core.Maybe RepricingRuleCostOfGoodsSaleRule),
-    -- | Required. Immutable. <http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml CLDR country code> (e.g. \"US\").
-    countryCode :: (Core.Maybe Core.Text),
-    -- | Required. Time period when the rule should take effect.
-    effectiveTimePeriod :: (Core.Maybe RepricingRuleEffectiveTime),
-    -- | Required. Match criteria for the eligible offers.
-    eligibleOfferMatcher :: (Core.Maybe RepricingRuleEligibleOfferMatcher),
-    -- | Required. Immutable. The two-letter ISO 639-1 language code associated with the repricing rule.
-    languageCode :: (Core.Maybe Core.Text),
-    -- | Output only. Immutable. Merchant that owns the repricing rule.
-    merchantId :: (Core.Maybe Core.Int64),
-    -- | Represents whether a rule is paused. A paused rule will behave like a non-paused rule within CRUD operations, with the major difference that a paused rule will not be evaluated and will have no effect on offers.
-    paused :: (Core.Maybe Core.Bool),
-    -- | Required. Restriction of the rule appliance.
-    restriction :: (Core.Maybe RepricingRuleRestriction),
-    -- | Output only. Immutable. The ID to uniquely identify each repricing rule.
-    ruleId :: (Core.Maybe Core.Text),
-    -- | The rule definition for TYPE/STATS/BASED. Required when the rule type is TYPE/STATS/BASED.
-    statsBasedRule :: (Core.Maybe RepricingRuleStatsBasedRule),
-    -- | The title for the rule.
-    title :: (Core.Maybe Core.Text),
-    -- | Required. Immutable. The type of the rule.
-    type' :: (Core.Maybe RepricingRule_Type)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRule' with the minimum fields required to make a request.
-newRepricingRule ::
-  RepricingRule
-newRepricingRule =
-  RepricingRule
-    { cogsBasedRule = Core.Nothing,
-      countryCode = Core.Nothing,
-      effectiveTimePeriod = Core.Nothing,
-      eligibleOfferMatcher = Core.Nothing,
-      languageCode = Core.Nothing,
-      merchantId = Core.Nothing,
-      paused = Core.Nothing,
-      restriction = Core.Nothing,
-      ruleId = Core.Nothing,
-      statsBasedRule = Core.Nothing,
-      title = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON RepricingRule where
-  parseJSON =
-    Core.withObject
-      "RepricingRule"
-      ( \o ->
-          RepricingRule
-            Core.<$> (o Core..:? "cogsBasedRule")
-            Core.<*> (o Core..:? "countryCode")
-            Core.<*> (o Core..:? "effectiveTimePeriod")
-            Core.<*> (o Core..:? "eligibleOfferMatcher")
-            Core.<*> (o Core..:? "languageCode")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> (o Core..:? "paused")
-            Core.<*> (o Core..:? "restriction")
-            Core.<*> (o Core..:? "ruleId")
-            Core.<*> (o Core..:? "statsBasedRule")
-            Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON RepricingRule where
-  toJSON RepricingRule {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("cogsBasedRule" Core..=) Core.<$> cogsBasedRule,
-            ("countryCode" Core..=) Core.<$> countryCode,
-            ("effectiveTimePeriod" Core..=)
-              Core.<$> effectiveTimePeriod,
-            ("eligibleOfferMatcher" Core..=)
-              Core.<$> eligibleOfferMatcher,
-            ("languageCode" Core..=) Core.<$> languageCode,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
-            ("paused" Core..=) Core.<$> paused,
-            ("restriction" Core..=) Core.<$> restriction,
-            ("ruleId" Core..=) Core.<$> ruleId,
-            ("statsBasedRule" Core..=) Core.<$> statsBasedRule,
-            ("title" Core..=) Core.<$> title,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | A repricing rule that changes the sale price based on cost of goods sale.
---
--- /See:/ 'newRepricingRuleCostOfGoodsSaleRule' smart constructor.
-data RepricingRuleCostOfGoodsSaleRule = RepricingRuleCostOfGoodsSaleRule
-  { -- | The percent change against the COGS. Ex: 20 would mean to set the adjusted price 1.2X of the COGS data.
-    percentageDelta :: (Core.Maybe Core.Int32),
-    -- | The price delta against the COGS. E.g. 2 means $2 more of the COGS.
-    priceDelta :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleCostOfGoodsSaleRule' with the minimum fields required to make a request.
-newRepricingRuleCostOfGoodsSaleRule ::
-  RepricingRuleCostOfGoodsSaleRule
-newRepricingRuleCostOfGoodsSaleRule =
-  RepricingRuleCostOfGoodsSaleRule
-    { percentageDelta = Core.Nothing,
-      priceDelta = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingRuleCostOfGoodsSaleRule
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleCostOfGoodsSaleRule"
-      ( \o ->
-          RepricingRuleCostOfGoodsSaleRule
-            Core.<$> (o Core..:? "percentageDelta")
-            Core.<*> (o Core..:? "priceDelta")
-      )
-
-instance Core.ToJSON RepricingRuleCostOfGoodsSaleRule where
-  toJSON RepricingRuleCostOfGoodsSaleRule {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("percentageDelta" Core..=)
-              Core.<$> percentageDelta,
-            ("priceDelta" Core..=) Core.<$> priceDelta
-          ]
-      )
-
---
--- /See:/ 'newRepricingRuleEffectiveTime' smart constructor.
-newtype RepricingRuleEffectiveTime = RepricingRuleEffectiveTime
-  { -- | A list of fixed time periods combined with OR. The maximum number of entries is limited to 5.
-    fixedTimePeriods :: (Core.Maybe [RepricingRuleEffectiveTimeFixedTimePeriod])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleEffectiveTime' with the minimum fields required to make a request.
-newRepricingRuleEffectiveTime ::
-  RepricingRuleEffectiveTime
-newRepricingRuleEffectiveTime =
-  RepricingRuleEffectiveTime {fixedTimePeriods = Core.Nothing}
-
-instance Core.FromJSON RepricingRuleEffectiveTime where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleEffectiveTime"
-      ( \o ->
-          RepricingRuleEffectiveTime
-            Core.<$> (o Core..:? "fixedTimePeriods")
-      )
-
-instance Core.ToJSON RepricingRuleEffectiveTime where
-  toJSON RepricingRuleEffectiveTime {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fixedTimePeriods" Core..=)
-              Core.<$> fixedTimePeriods
-          ]
-      )
-
--- | Definition of a fixed time period.
---
--- /See:/ 'newRepricingRuleEffectiveTimeFixedTimePeriod' smart constructor.
-data RepricingRuleEffectiveTimeFixedTimePeriod = RepricingRuleEffectiveTimeFixedTimePeriod
-  { -- | The end time (exclusive) of the period. It can only be hour granularity.
-    endTime :: (Core.Maybe Core.DateTime),
-    -- | The start time (inclusive) of the period. It can only be hour granularity.
-    startTime :: (Core.Maybe Core.DateTime)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleEffectiveTimeFixedTimePeriod' with the minimum fields required to make a request.
-newRepricingRuleEffectiveTimeFixedTimePeriod ::
-  RepricingRuleEffectiveTimeFixedTimePeriod
-newRepricingRuleEffectiveTimeFixedTimePeriod =
-  RepricingRuleEffectiveTimeFixedTimePeriod
-    { endTime = Core.Nothing,
-      startTime = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingRuleEffectiveTimeFixedTimePeriod
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleEffectiveTimeFixedTimePeriod"
-      ( \o ->
-          RepricingRuleEffectiveTimeFixedTimePeriod
-            Core.<$> (o Core..:? "endTime")
-            Core.<*> (o Core..:? "startTime")
-      )
-
-instance
-  Core.ToJSON
-    RepricingRuleEffectiveTimeFixedTimePeriod
-  where
-  toJSON RepricingRuleEffectiveTimeFixedTimePeriod {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("endTime" Core..=) Core.<$> endTime,
-            ("startTime" Core..=) Core.<$> startTime
-          ]
-      )
-
--- | Matcher that specifies eligible offers. When the USE/FEED/ATTRIBUTE option is selected, only the repricing/rule/id attribute on the product feed is used to specify offer-rule mapping. When the CUSTOM_FILTER option is selected, only the */matcher fields are used to filter the offers for offer-rule mapping. If the CUSTOM/FILTER option is selected, an offer needs to satisfy each custom filter matcher to be eligible for a rule. Size limit: the sum of the number of entries in all the matchers should not exceed 20. For example, there can be 15 product ids and 5 brands, but not 10 product ids and 11 brands.
---
--- /See:/ 'newRepricingRuleEligibleOfferMatcher' smart constructor.
-data RepricingRuleEligibleOfferMatcher = RepricingRuleEligibleOfferMatcher
-  { -- | Filter by the brand.
-    brandMatcher :: (Core.Maybe RepricingRuleEligibleOfferMatcherStringMatcher),
-    -- | Filter by the item group id.
-    itemGroupIdMatcher :: (Core.Maybe RepricingRuleEligibleOfferMatcherStringMatcher),
-    -- | Determines whether to use the custom matchers or the product feed attribute \"repricing/rule/id\" to specify offer-rule mapping.
-    matcherOption :: (Core.Maybe RepricingRuleEligibleOfferMatcher_MatcherOption),
-    -- | Filter by the offer id.
-    offerIdMatcher :: (Core.Maybe RepricingRuleEligibleOfferMatcherStringMatcher),
-    -- | When true, the rule won\'t be applied to offers with active promotions.
-    skipWhenOnPromotion :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleEligibleOfferMatcher' with the minimum fields required to make a request.
-newRepricingRuleEligibleOfferMatcher ::
-  RepricingRuleEligibleOfferMatcher
-newRepricingRuleEligibleOfferMatcher =
-  RepricingRuleEligibleOfferMatcher
-    { brandMatcher = Core.Nothing,
-      itemGroupIdMatcher = Core.Nothing,
-      matcherOption = Core.Nothing,
-      offerIdMatcher = Core.Nothing,
-      skipWhenOnPromotion = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingRuleEligibleOfferMatcher
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleEligibleOfferMatcher"
-      ( \o ->
-          RepricingRuleEligibleOfferMatcher
-            Core.<$> (o Core..:? "brandMatcher")
-            Core.<*> (o Core..:? "itemGroupIdMatcher")
-            Core.<*> (o Core..:? "matcherOption")
-            Core.<*> (o Core..:? "offerIdMatcher")
-            Core.<*> (o Core..:? "skipWhenOnPromotion")
-      )
-
-instance
-  Core.ToJSON
-    RepricingRuleEligibleOfferMatcher
-  where
-  toJSON RepricingRuleEligibleOfferMatcher {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("brandMatcher" Core..=) Core.<$> brandMatcher,
-            ("itemGroupIdMatcher" Core..=)
-              Core.<$> itemGroupIdMatcher,
-            ("matcherOption" Core..=) Core.<$> matcherOption,
-            ("offerIdMatcher" Core..=) Core.<$> offerIdMatcher,
-            ("skipWhenOnPromotion" Core..=)
-              Core.<$> skipWhenOnPromotion
-          ]
-      )
-
--- | Matcher by string attributes.
---
--- /See:/ 'newRepricingRuleEligibleOfferMatcherStringMatcher' smart constructor.
-newtype RepricingRuleEligibleOfferMatcherStringMatcher = RepricingRuleEligibleOfferMatcherStringMatcher
-  { -- | String attributes, as long as such attribute of an offer is one of the string attribute values, the offer is considered as passing the matcher. The string matcher checks an offer for inclusivity in the string attributes, not equality. Only literal string matching is supported, no regex.
-    strAttributes :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleEligibleOfferMatcherStringMatcher' with the minimum fields required to make a request.
-newRepricingRuleEligibleOfferMatcherStringMatcher ::
-  RepricingRuleEligibleOfferMatcherStringMatcher
-newRepricingRuleEligibleOfferMatcherStringMatcher =
-  RepricingRuleEligibleOfferMatcherStringMatcher {strAttributes = Core.Nothing}
-
-instance
-  Core.FromJSON
-    RepricingRuleEligibleOfferMatcherStringMatcher
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleEligibleOfferMatcherStringMatcher"
-      ( \o ->
-          RepricingRuleEligibleOfferMatcherStringMatcher
-            Core.<$> (o Core..:? "strAttributes")
-      )
-
-instance
-  Core.ToJSON
-    RepricingRuleEligibleOfferMatcherStringMatcher
-  where
-  toJSON
-    RepricingRuleEligibleOfferMatcherStringMatcher {..} =
-      Core.object
-        ( Core.catMaybes
-            [("strAttributes" Core..=) Core.<$> strAttributes]
-        )
-
--- | Resource that represents a daily Repricing rule report. Next ID: 11
---
--- /See:/ 'newRepricingRuleReport' smart constructor.
-data RepricingRuleReport = RepricingRuleReport
-  { -- | Stats specific to buybox winning rules for rule report (deprecated).
-    buyboxWinningRuleStats :: (Core.Maybe RepricingRuleReportBuyboxWinningRuleStats),
-    -- | Date of the stats in this report. The report starts and ends according to the merchant\'s timezone.
-    date :: (Core.Maybe Date),
-    -- | List of product ids that are impacted by this rule during this reporting period. Out of stock products and products not searched for by customers are examples of non-impacted products.
-    impactedProducts :: (Core.Maybe [Core.Text]),
-    -- | List of all reasons the rule did not apply to the inapplicable products during the specified reporting period.
-    inapplicabilityDetails :: (Core.Maybe [InapplicabilityDetails]),
-    -- | List of product ids that are inapplicable to this rule during this reporting period. To get the inapplicable reason for a specific product, see RepricingProductReport.
-    inapplicableProducts :: (Core.Maybe [Core.Text]),
-    -- | Total unit count of impacted products ordered while the rule was active on the date of the report. This count includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
-    orderItemCount :: (Core.Maybe Core.Int32),
-    -- | Id of the Repricing rule for this report.
-    ruleId :: (Core.Maybe Core.Text),
-    -- | Total GMV generated by impacted products while the rule was active on the date of the report. This value includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
-    totalGmv :: (Core.Maybe PriceAmount),
-    -- | Type of the rule.
-    type' :: (Core.Maybe RepricingRuleReport_Type)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleReport' with the minimum fields required to make a request.
-newRepricingRuleReport ::
-  RepricingRuleReport
-newRepricingRuleReport =
-  RepricingRuleReport
-    { buyboxWinningRuleStats = Core.Nothing,
-      date = Core.Nothing,
-      impactedProducts = Core.Nothing,
-      inapplicabilityDetails = Core.Nothing,
-      inapplicableProducts = Core.Nothing,
-      orderItemCount = Core.Nothing,
-      ruleId = Core.Nothing,
-      totalGmv = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON RepricingRuleReport where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleReport"
-      ( \o ->
-          RepricingRuleReport
-            Core.<$> (o Core..:? "buyboxWinningRuleStats")
-            Core.<*> (o Core..:? "date")
-            Core.<*> (o Core..:? "impactedProducts")
-            Core.<*> (o Core..:? "inapplicabilityDetails")
-            Core.<*> (o Core..:? "inapplicableProducts")
-            Core.<*> (o Core..:? "orderItemCount")
-            Core.<*> (o Core..:? "ruleId")
-            Core.<*> (o Core..:? "totalGmv")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON RepricingRuleReport where
-  toJSON RepricingRuleReport {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("buyboxWinningRuleStats" Core..=)
-              Core.<$> buyboxWinningRuleStats,
-            ("date" Core..=) Core.<$> date,
-            ("impactedProducts" Core..=)
-              Core.<$> impactedProducts,
-            ("inapplicabilityDetails" Core..=)
-              Core.<$> inapplicabilityDetails,
-            ("inapplicableProducts" Core..=)
-              Core.<$> inapplicableProducts,
-            ("orderItemCount" Core..=) Core.<$> orderItemCount,
-            ("ruleId" Core..=) Core.<$> ruleId,
-            ("totalGmv" Core..=) Core.<$> totalGmv,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
--- | Stats specific to buybox winning rules for rule report.
---
--- /See:/ 'newRepricingRuleReportBuyboxWinningRuleStats' smart constructor.
-newtype RepricingRuleReportBuyboxWinningRuleStats = RepricingRuleReportBuyboxWinningRuleStats
-  { -- | Number of unique products that won the buybox with this rule during this period of time.
-    buyboxWonProductCount :: (Core.Maybe Core.Int32)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleReportBuyboxWinningRuleStats' with the minimum fields required to make a request.
-newRepricingRuleReportBuyboxWinningRuleStats ::
-  RepricingRuleReportBuyboxWinningRuleStats
-newRepricingRuleReportBuyboxWinningRuleStats =
-  RepricingRuleReportBuyboxWinningRuleStats
-    { buyboxWonProductCount = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingRuleReportBuyboxWinningRuleStats
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleReportBuyboxWinningRuleStats"
-      ( \o ->
-          RepricingRuleReportBuyboxWinningRuleStats
-            Core.<$> (o Core..:? "buyboxWonProductCount")
-      )
-
-instance
-  Core.ToJSON
-    RepricingRuleReportBuyboxWinningRuleStats
-  where
-  toJSON RepricingRuleReportBuyboxWinningRuleStats {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("buyboxWonProductCount" Core..=)
-              Core.<$> buyboxWonProductCount
-          ]
-      )
-
--- | Definition of a rule restriction. At least one of the following needs to be true: (1) use/auto/pricing/min/price is true (2) floor.price/delta exists (3) floor.percentage/delta exists If floor.price/delta and floor.percentage/delta are both set on a rule, the highest value will be chosen by the Repricer. In other words, for a product with a price of $50, if the @floor.percentage_delta@ is \"-10\" and the floor.price_delta is \"-12\", the offer price will only be lowered $5 (10% lower than the original offer price).
---
--- /See:/ 'newRepricingRuleRestriction' smart constructor.
-data RepricingRuleRestriction = RepricingRuleRestriction
-  { -- | The inclusive floor lower bound. The repricing rule only applies when new price >= floor.
-    floor :: (Core.Maybe RepricingRuleRestrictionBoundary),
-    -- | If true, use the AUTO/PRICING/MIN/PRICE offer attribute as the lower bound of the rule. If use/auto/pricing/min/price is true, then only offers with @AUTO_PRICING_MIN_PRICE@ existing on the offer will get Repricer treatment, even if a floor value is set on the rule. Also, if use/auto/pricing/min_price is true, the floor restriction will be ignored.
-    useAutoPricingMinPrice :: (Core.Maybe Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleRestriction' with the minimum fields required to make a request.
-newRepricingRuleRestriction ::
-  RepricingRuleRestriction
-newRepricingRuleRestriction =
-  RepricingRuleRestriction
-    { floor = Core.Nothing,
-      useAutoPricingMinPrice = Core.Nothing
-    }
-
-instance Core.FromJSON RepricingRuleRestriction where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleRestriction"
-      ( \o ->
-          RepricingRuleRestriction
-            Core.<$> (o Core..:? "floor")
-            Core.<*> (o Core..:? "useAutoPricingMinPrice")
-      )
-
-instance Core.ToJSON RepricingRuleRestriction where
-  toJSON RepricingRuleRestriction {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("floor" Core..=) Core.<$> floor,
-            ("useAutoPricingMinPrice" Core..=)
-              Core.<$> useAutoPricingMinPrice
-          ]
-      )
-
--- | Definition of a boundary.
---
--- /See:/ 'newRepricingRuleRestrictionBoundary' smart constructor.
-data RepricingRuleRestrictionBoundary = RepricingRuleRestrictionBoundary
-  { -- | The percentage delta relative to the offer selling price. This field is signed. It must be negative in floor. When it is used in floor, it should be > -100. For example, if an offer is selling at $10 and this field is -30 in floor, the repricing rule only applies if the calculated new price is >= $7.
-    percentageDelta :: (Core.Maybe Core.Int32),
-    -- | The price micros relative to the offer selling price. This field is signed. It must be negative in floor. For example, if an offer is selling at $10 and this field is -$2 in floor, the repricing rule only applies if the calculated new price is >= $8.
-    priceDelta :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleRestrictionBoundary' with the minimum fields required to make a request.
-newRepricingRuleRestrictionBoundary ::
-  RepricingRuleRestrictionBoundary
-newRepricingRuleRestrictionBoundary =
-  RepricingRuleRestrictionBoundary
-    { percentageDelta = Core.Nothing,
-      priceDelta = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    RepricingRuleRestrictionBoundary
-  where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleRestrictionBoundary"
-      ( \o ->
-          RepricingRuleRestrictionBoundary
-            Core.<$> (o Core..:? "percentageDelta")
-            Core.<*> (o Core..:? "priceDelta")
-      )
-
-instance Core.ToJSON RepricingRuleRestrictionBoundary where
-  toJSON RepricingRuleRestrictionBoundary {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("percentageDelta" Core..=)
-              Core.<$> percentageDelta,
-            ("priceDelta" Core..=) Core.<$> priceDelta
-          ]
-      )
-
--- | Definition of stats based rule.
---
--- /See:/ 'newRepricingRuleStatsBasedRule' smart constructor.
-data RepricingRuleStatsBasedRule = RepricingRuleStatsBasedRule
-  { -- | The percent change against the price target. Valid from 0 to 100 inclusively.
-    percentageDelta :: (Core.Maybe Core.Int32),
-    -- | The price delta against the above price target. A positive value means the price should be adjusted to be above statistical measure, and a negative value means below. Currency code must not be included.
-    priceDelta :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RepricingRuleStatsBasedRule' with the minimum fields required to make a request.
-newRepricingRuleStatsBasedRule ::
-  RepricingRuleStatsBasedRule
-newRepricingRuleStatsBasedRule =
-  RepricingRuleStatsBasedRule
-    { percentageDelta = Core.Nothing,
-      priceDelta = Core.Nothing
-    }
-
-instance Core.FromJSON RepricingRuleStatsBasedRule where
-  parseJSON =
-    Core.withObject
-      "RepricingRuleStatsBasedRule"
-      ( \o ->
-          RepricingRuleStatsBasedRule
-            Core.<$> (o Core..:? "percentageDelta")
-            Core.<*> (o Core..:? "priceDelta")
-      )
-
-instance Core.ToJSON RepricingRuleStatsBasedRule where
-  toJSON RepricingRuleStatsBasedRule {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("percentageDelta" Core..=)
-              Core.<$> percentageDelta,
-            ("priceDelta" Core..=) Core.<$> priceDelta
+            ("segments" Core..=) Core.<$> segments,
+            ("topicTrends" Core..=) Core.<$> topicTrends
           ]
       )
 
@@ -20052,10 +15154,7 @@ newRequestPhoneVerificationRequest =
       phoneVerificationMethod = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RequestPhoneVerificationRequest
-  where
+instance Core.FromJSON RequestPhoneVerificationRequest where
   parseJSON =
     Core.withObject
       "RequestPhoneVerificationRequest"
@@ -20094,10 +15193,7 @@ newRequestPhoneVerificationResponse ::
 newRequestPhoneVerificationResponse =
   RequestPhoneVerificationResponse {verificationId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    RequestPhoneVerificationResponse
-  where
+instance Core.FromJSON RequestPhoneVerificationResponse where
   parseJSON =
     Core.withObject
       "RequestPhoneVerificationResponse"
@@ -20112,35 +15208,6 @@ instance Core.ToJSON RequestPhoneVerificationResponse where
       ( Core.catMaybes
           [("verificationId" Core..=) Core.<$> verificationId]
       )
-
--- | Request message for the RequestReviewProgram method.
---
--- /See:/ 'newRequestReviewBuyOnGoogleProgramRequest' smart constructor.
-data RequestReviewBuyOnGoogleProgramRequest = RequestReviewBuyOnGoogleProgramRequest
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'RequestReviewBuyOnGoogleProgramRequest' with the minimum fields required to make a request.
-newRequestReviewBuyOnGoogleProgramRequest ::
-  RequestReviewBuyOnGoogleProgramRequest
-newRequestReviewBuyOnGoogleProgramRequest =
-  RequestReviewBuyOnGoogleProgramRequest
-
-instance
-  Core.FromJSON
-    RequestReviewBuyOnGoogleProgramRequest
-  where
-  parseJSON =
-    Core.withObject
-      "RequestReviewBuyOnGoogleProgramRequest"
-      ( \o ->
-          Core.pure RequestReviewBuyOnGoogleProgramRequest
-      )
-
-instance
-  Core.ToJSON
-    RequestReviewBuyOnGoogleProgramRequest
-  where
-  toJSON = Core.const Core.emptyObject
 
 -- | Request message for the RequestReviewFreeListings Program method.
 --
@@ -20157,10 +15224,7 @@ newRequestReviewFreeListingsRequest ::
 newRequestReviewFreeListingsRequest =
   RequestReviewFreeListingsRequest {regionCode = Core.Nothing}
 
-instance
-  Core.FromJSON
-    RequestReviewFreeListingsRequest
-  where
+instance Core.FromJSON RequestReviewFreeListingsRequest where
   parseJSON =
     Core.withObject
       "RequestReviewFreeListingsRequest"
@@ -20172,9 +15236,7 @@ instance
 instance Core.ToJSON RequestReviewFreeListingsRequest where
   toJSON RequestReviewFreeListingsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("regionCode" Core..=) Core.<$> regionCode]
-      )
+      (Core.catMaybes [("regionCode" Core..=) Core.<$> regionCode])
 
 -- | Request message for the RequestReviewShoppingAds program method.
 --
@@ -20191,24 +15253,18 @@ newRequestReviewShoppingAdsRequest ::
 newRequestReviewShoppingAdsRequest =
   RequestReviewShoppingAdsRequest {regionCode = Core.Nothing}
 
-instance
-  Core.FromJSON
-    RequestReviewShoppingAdsRequest
-  where
+instance Core.FromJSON RequestReviewShoppingAdsRequest where
   parseJSON =
     Core.withObject
       "RequestReviewShoppingAdsRequest"
       ( \o ->
-          RequestReviewShoppingAdsRequest
-            Core.<$> (o Core..:? "regionCode")
+          RequestReviewShoppingAdsRequest Core.<$> (o Core..:? "regionCode")
       )
 
 instance Core.ToJSON RequestReviewShoppingAdsRequest where
   toJSON RequestReviewShoppingAdsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("regionCode" Core..=) Core.<$> regionCode]
-      )
+      (Core.catMaybes [("regionCode" Core..=) Core.<$> regionCode])
 
 -- | Return address resource.
 --
@@ -20265,8 +15321,7 @@ instance Core.ToJSON ReturnAddress where
             ("kind" Core..=) Core.<$> kind,
             ("label" Core..=) Core.<$> label,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
-            ("returnAddressId" Core..=)
-              Core.<$> returnAddressId
+            ("returnAddressId" Core..=) Core.<$> returnAddressId
           ]
       )
 
@@ -20394,14 +15449,11 @@ instance Core.ToJSON ReturnPolicy where
             ("kind" Core..=) Core.<$> kind,
             ("label" Core..=) Core.<$> label,
             ("name" Core..=) Core.<$> name,
-            ("nonFreeReturnReasons" Core..=)
-              Core.<$> nonFreeReturnReasons,
+            ("nonFreeReturnReasons" Core..=) Core.<$> nonFreeReturnReasons,
             ("policy" Core..=) Core.<$> policy,
             ("returnPolicyId" Core..=) Core.<$> returnPolicyId,
-            ("returnShippingFee" Core..=)
-              Core.<$> returnShippingFee,
-            ("seasonalOverrides" Core..=)
-              Core.<$> seasonalOverrides
+            ("returnShippingFee" Core..=) Core.<$> returnShippingFee,
+            ("seasonalOverrides" Core..=) Core.<$> seasonalOverrides
           ]
       )
 
@@ -20500,7 +15552,10 @@ data ReturnPolicyOnlinePolicy = ReturnPolicyOnlinePolicy
 newReturnPolicyOnlinePolicy ::
   ReturnPolicyOnlinePolicy
 newReturnPolicyOnlinePolicy =
-  ReturnPolicyOnlinePolicy {days = Core.Nothing, type' = Core.Nothing}
+  ReturnPolicyOnlinePolicy
+    { days = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON ReturnPolicyOnlinePolicy where
   parseJSON =
@@ -20508,9 +15563,7 @@ instance Core.FromJSON ReturnPolicyOnlinePolicy where
       "ReturnPolicyOnlinePolicy"
       ( \o ->
           ReturnPolicyOnlinePolicy
-            Core.<$> ( o Core..:? "days"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "days" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -20543,10 +15596,7 @@ newReturnPolicyOnlineRestockingFee =
       microPercent = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnPolicyOnlineRestockingFee
-  where
+instance Core.FromJSON ReturnPolicyOnlineRestockingFee where
   parseJSON =
     Core.withObject
       "ReturnPolicyOnlineRestockingFee"
@@ -20569,7 +15619,7 @@ instance Core.ToJSON ReturnPolicyOnlineRestockingFee where
 --
 -- /See:/ 'newReturnPolicyOnlineReturnReasonCategoryInfo' smart constructor.
 data ReturnPolicyOnlineReturnReasonCategoryInfo = ReturnPolicyOnlineReturnReasonCategoryInfo
-  { -- | The corresponding return label source.
+  { -- | The corresponding return label source. If the @ReturnMethod@ field includes @BY_MAIL@, it is required to specify @ReturnLabelSource@ for both @BUYER_REMORSE@ and @ITEM_DEFECT@ return reason categories.
     returnLabelSource ::
       ( Core.Maybe
           ReturnPolicyOnlineReturnReasonCategoryInfo_ReturnLabelSource
@@ -20589,15 +15639,13 @@ newReturnPolicyOnlineReturnReasonCategoryInfo ::
   ReturnPolicyOnlineReturnReasonCategoryInfo
 newReturnPolicyOnlineReturnReasonCategoryInfo =
   ReturnPolicyOnlineReturnReasonCategoryInfo
-    { returnLabelSource = Core.Nothing,
+    { returnLabelSource =
+        Core.Nothing,
       returnReasonCategory = Core.Nothing,
       returnShippingFee = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnPolicyOnlineReturnReasonCategoryInfo
-  where
+instance Core.FromJSON ReturnPolicyOnlineReturnReasonCategoryInfo where
   parseJSON =
     Core.withObject
       "ReturnPolicyOnlineReturnReasonCategoryInfo"
@@ -20608,19 +15656,13 @@ instance
             Core.<*> (o Core..:? "returnShippingFee")
       )
 
-instance
-  Core.ToJSON
-    ReturnPolicyOnlineReturnReasonCategoryInfo
-  where
+instance Core.ToJSON ReturnPolicyOnlineReturnReasonCategoryInfo where
   toJSON ReturnPolicyOnlineReturnReasonCategoryInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("returnLabelSource" Core..=)
-              Core.<$> returnLabelSource,
-            ("returnReasonCategory" Core..=)
-              Core.<$> returnReasonCategory,
-            ("returnShippingFee" Core..=)
-              Core.<$> returnShippingFee
+          [ ("returnLabelSource" Core..=) Core.<$> returnLabelSource,
+            ("returnReasonCategory" Core..=) Core.<$> returnReasonCategory,
+            ("returnShippingFee" Core..=) Core.<$> returnShippingFee
           ]
       )
 
@@ -20644,22 +15686,17 @@ newReturnPolicyOnlineReturnShippingFee =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnPolicyOnlineReturnShippingFee
-  where
+instance Core.FromJSON ReturnPolicyOnlineReturnShippingFee where
   parseJSON =
     Core.withObject
       "ReturnPolicyOnlineReturnShippingFee"
       ( \o ->
           ReturnPolicyOnlineReturnShippingFee
-            Core.<$> (o Core..:? "fixedFee") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "fixedFee")
+            Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    ReturnPolicyOnlineReturnShippingFee
-  where
+instance Core.ToJSON ReturnPolicyOnlineReturnShippingFee where
   toJSON ReturnPolicyOnlineReturnShippingFee {..} =
     Core.object
       ( Core.catMaybes
@@ -20697,9 +15734,7 @@ instance Core.FromJSON ReturnPolicyPolicy where
       ( \o ->
           ReturnPolicyPolicy
             Core.<$> (o Core..:? "lastReturnDate")
-            Core.<*> ( o Core..:? "numberOfDays"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numberOfDays" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -20708,8 +15743,7 @@ instance Core.ToJSON ReturnPolicyPolicy where
     Core.object
       ( Core.catMaybes
           [ ("lastReturnDate" Core..=) Core.<$> lastReturnDate,
-            ("numberOfDays" Core..=) Core.. Core.AsText
-              Core.<$> numberOfDays,
+            ("numberOfDays" Core..=) Core.. Core.AsText Core.<$> numberOfDays,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -20763,173 +15797,6 @@ instance Core.ToJSON ReturnPolicySeasonalOverride where
       )
 
 --
--- /See:/ 'newReturnPricingInfo' smart constructor.
-data ReturnPricingInfo = ReturnPricingInfo
-  { -- | Default option for whether merchant should charge the customer for return shipping costs, based on customer selected return reason and merchant\'s return policy for the items being returned.
-    chargeReturnShippingFee :: (Core.Maybe Core.Bool),
-    -- | Maximum return shipping costs that may be charged to the customer depending on merchant\'s assessment of the return reason and the merchant\'s return policy for the items being returned.
-    maxReturnShippingFee :: (Core.Maybe MonetaryAmount),
-    -- | Total amount that can be refunded for the items in this return. It represents the total amount received by the merchant for the items, after applying merchant coupons.
-    refundableItemsTotalAmount :: (Core.Maybe MonetaryAmount),
-    -- | Maximum amount that can be refunded for the original shipping fee.
-    refundableShippingAmount :: (Core.Maybe MonetaryAmount),
-    -- | Total amount already refunded by the merchant. It includes all types of refunds (items, shipping, etc.) Not provided if no refund has been applied yet.
-    totalRefundedAmount :: (Core.Maybe MonetaryAmount)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ReturnPricingInfo' with the minimum fields required to make a request.
-newReturnPricingInfo ::
-  ReturnPricingInfo
-newReturnPricingInfo =
-  ReturnPricingInfo
-    { chargeReturnShippingFee = Core.Nothing,
-      maxReturnShippingFee = Core.Nothing,
-      refundableItemsTotalAmount = Core.Nothing,
-      refundableShippingAmount = Core.Nothing,
-      totalRefundedAmount = Core.Nothing
-    }
-
-instance Core.FromJSON ReturnPricingInfo where
-  parseJSON =
-    Core.withObject
-      "ReturnPricingInfo"
-      ( \o ->
-          ReturnPricingInfo
-            Core.<$> (o Core..:? "chargeReturnShippingFee")
-            Core.<*> (o Core..:? "maxReturnShippingFee")
-            Core.<*> (o Core..:? "refundableItemsTotalAmount")
-            Core.<*> (o Core..:? "refundableShippingAmount")
-            Core.<*> (o Core..:? "totalRefundedAmount")
-      )
-
-instance Core.ToJSON ReturnPricingInfo where
-  toJSON ReturnPricingInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("chargeReturnShippingFee" Core..=)
-              Core.<$> chargeReturnShippingFee,
-            ("maxReturnShippingFee" Core..=)
-              Core.<$> maxReturnShippingFee,
-            ("refundableItemsTotalAmount" Core..=)
-              Core.<$> refundableItemsTotalAmount,
-            ("refundableShippingAmount" Core..=)
-              Core.<$> refundableShippingAmount,
-            ("totalRefundedAmount" Core..=)
-              Core.<$> totalRefundedAmount
-          ]
-      )
-
---
--- /See:/ 'newReturnShipment' smart constructor.
-data ReturnShipment = ReturnShipment
-  { -- | The date of creation of the shipment, in ISO 8601 format.
-    creationDate :: (Core.Maybe Core.Text),
-    -- | The date of delivery of the shipment, in ISO 8601 format.
-    deliveryDate :: (Core.Maybe Core.Text),
-    -- | Type of the return method. Acceptable values are: - \"@byMail@\" - \"@contactCustomerSupport@\" - \"@returnless@\" - \"@inStore@\"
-    returnMethodType :: (Core.Maybe Core.Text),
-    -- | Shipment ID generated by Google.
-    shipmentId :: (Core.Maybe Core.Text),
-    -- | Tracking information of the shipment. One return shipment might be handled by several shipping carriers sequentially.
-    shipmentTrackingInfos :: (Core.Maybe [ShipmentTrackingInfo]),
-    -- | The date of shipping of the shipment, in ISO 8601 format.
-    shippingDate :: (Core.Maybe Core.Text),
-    -- | State of the shipment. Acceptable values are: - \"@completed@\" - \"@new@\" - \"@shipped@\" - \"@undeliverable@\" - \"@pending@\"
-    state :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ReturnShipment' with the minimum fields required to make a request.
-newReturnShipment ::
-  ReturnShipment
-newReturnShipment =
-  ReturnShipment
-    { creationDate = Core.Nothing,
-      deliveryDate = Core.Nothing,
-      returnMethodType = Core.Nothing,
-      shipmentId = Core.Nothing,
-      shipmentTrackingInfos = Core.Nothing,
-      shippingDate = Core.Nothing,
-      state = Core.Nothing
-    }
-
-instance Core.FromJSON ReturnShipment where
-  parseJSON =
-    Core.withObject
-      "ReturnShipment"
-      ( \o ->
-          ReturnShipment
-            Core.<$> (o Core..:? "creationDate")
-            Core.<*> (o Core..:? "deliveryDate")
-            Core.<*> (o Core..:? "returnMethodType")
-            Core.<*> (o Core..:? "shipmentId")
-            Core.<*> (o Core..:? "shipmentTrackingInfos")
-            Core.<*> (o Core..:? "shippingDate")
-            Core.<*> (o Core..:? "state")
-      )
-
-instance Core.ToJSON ReturnShipment where
-  toJSON ReturnShipment {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("creationDate" Core..=) Core.<$> creationDate,
-            ("deliveryDate" Core..=) Core.<$> deliveryDate,
-            ("returnMethodType" Core..=)
-              Core.<$> returnMethodType,
-            ("shipmentId" Core..=) Core.<$> shipmentId,
-            ("shipmentTrackingInfos" Core..=)
-              Core.<$> shipmentTrackingInfos,
-            ("shippingDate" Core..=) Core.<$> shippingDate,
-            ("state" Core..=) Core.<$> state
-          ]
-      )
-
--- | Return shipping label for a Buy on Google merchant-managed return.
---
--- /See:/ 'newReturnShippingLabel' smart constructor.
-data ReturnShippingLabel = ReturnShippingLabel
-  { -- | Name of the carrier.
-    carrier :: (Core.Maybe Core.Text),
-    -- | The URL for the return shipping label in PDF format
-    labelUri :: (Core.Maybe Core.Text),
-    -- | The tracking id of this return label.
-    trackingId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ReturnShippingLabel' with the minimum fields required to make a request.
-newReturnShippingLabel ::
-  ReturnShippingLabel
-newReturnShippingLabel =
-  ReturnShippingLabel
-    { carrier = Core.Nothing,
-      labelUri = Core.Nothing,
-      trackingId = Core.Nothing
-    }
-
-instance Core.FromJSON ReturnShippingLabel where
-  parseJSON =
-    Core.withObject
-      "ReturnShippingLabel"
-      ( \o ->
-          ReturnShippingLabel
-            Core.<$> (o Core..:? "carrier")
-            Core.<*> (o Core..:? "labelUri")
-            Core.<*> (o Core..:? "trackingId")
-      )
-
-instance Core.ToJSON ReturnShippingLabel where
-  toJSON ReturnShippingLabel {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrier" Core..=) Core.<$> carrier,
-            ("labelUri" Core..=) Core.<$> labelUri,
-            ("trackingId" Core..=) Core.<$> trackingId
-          ]
-      )
-
---
 -- /See:/ 'newReturnaddressCustomBatchRequest' smart constructor.
 newtype ReturnaddressCustomBatchRequest = ReturnaddressCustomBatchRequest
   { -- | The request entries to be processed in the batch.
@@ -20943,24 +15810,18 @@ newReturnaddressCustomBatchRequest ::
 newReturnaddressCustomBatchRequest =
   ReturnaddressCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ReturnaddressCustomBatchRequest
-  where
+instance Core.FromJSON ReturnaddressCustomBatchRequest where
   parseJSON =
     Core.withObject
       "ReturnaddressCustomBatchRequest"
       ( \o ->
-          ReturnaddressCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          ReturnaddressCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON ReturnaddressCustomBatchRequest where
   toJSON ReturnaddressCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 --
 -- /See:/ 'newReturnaddressCustomBatchRequestEntry' smart constructor.
@@ -20990,38 +15851,28 @@ newReturnaddressCustomBatchRequestEntry =
       returnAddressId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnaddressCustomBatchRequestEntry
-  where
+instance Core.FromJSON ReturnaddressCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "ReturnaddressCustomBatchRequestEntry"
       ( \o ->
           ReturnaddressCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "returnAddress")
             Core.<*> (o Core..:? "returnAddressId")
       )
 
-instance
-  Core.ToJSON
-    ReturnaddressCustomBatchRequestEntry
-  where
+instance Core.ToJSON ReturnaddressCustomBatchRequestEntry where
   toJSON ReturnaddressCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("returnAddress" Core..=) Core.<$> returnAddress,
-            ("returnAddressId" Core..=)
-              Core.<$> returnAddressId
+            ("returnAddressId" Core..=) Core.<$> returnAddressId
           ]
       )
 
@@ -21039,18 +15890,19 @@ data ReturnaddressCustomBatchResponse = ReturnaddressCustomBatchResponse
 newReturnaddressCustomBatchResponse ::
   ReturnaddressCustomBatchResponse
 newReturnaddressCustomBatchResponse =
-  ReturnaddressCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  ReturnaddressCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ReturnaddressCustomBatchResponse
-  where
+instance Core.FromJSON ReturnaddressCustomBatchResponse where
   parseJSON =
     Core.withObject
       "ReturnaddressCustomBatchResponse"
       ( \o ->
           ReturnaddressCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ReturnaddressCustomBatchResponse where
@@ -21087,10 +15939,7 @@ newReturnaddressCustomBatchResponseEntry =
       returnAddress = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnaddressCustomBatchResponseEntry
-  where
+instance Core.FromJSON ReturnaddressCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "ReturnaddressCustomBatchResponseEntry"
@@ -21102,10 +15951,7 @@ instance
             Core.<*> (o Core..:? "returnAddress")
       )
 
-instance
-  Core.ToJSON
-    ReturnaddressCustomBatchResponseEntry
-  where
+instance Core.ToJSON ReturnaddressCustomBatchResponseEntry where
   toJSON ReturnaddressCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -21123,7 +15969,6 @@ data ReturnaddressListResponse = ReturnaddressListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of addresses.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [ReturnAddress])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -21178,16 +16023,13 @@ instance Core.FromJSON ReturnpolicyCustomBatchRequest where
     Core.withObject
       "ReturnpolicyCustomBatchRequest"
       ( \o ->
-          ReturnpolicyCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          ReturnpolicyCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
 instance Core.ToJSON ReturnpolicyCustomBatchRequest where
   toJSON ReturnpolicyCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 --
 -- /See:/ 'newReturnpolicyCustomBatchRequestEntry' smart constructor.
@@ -21217,34 +16059,25 @@ newReturnpolicyCustomBatchRequestEntry =
       returnPolicyId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnpolicyCustomBatchRequestEntry
-  where
+instance Core.FromJSON ReturnpolicyCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "ReturnpolicyCustomBatchRequestEntry"
       ( \o ->
           ReturnpolicyCustomBatchRequestEntry
             Core.<$> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "returnPolicy")
             Core.<*> (o Core..:? "returnPolicyId")
       )
 
-instance
-  Core.ToJSON
-    ReturnpolicyCustomBatchRequestEntry
-  where
+instance Core.ToJSON ReturnpolicyCustomBatchRequestEntry where
   toJSON ReturnpolicyCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
             ("returnPolicy" Core..=) Core.<$> returnPolicy,
             ("returnPolicyId" Core..=) Core.<$> returnPolicyId
@@ -21265,18 +16098,19 @@ data ReturnpolicyCustomBatchResponse = ReturnpolicyCustomBatchResponse
 newReturnpolicyCustomBatchResponse ::
   ReturnpolicyCustomBatchResponse
 newReturnpolicyCustomBatchResponse =
-  ReturnpolicyCustomBatchResponse {entries = Core.Nothing, kind = Core.Nothing}
+  ReturnpolicyCustomBatchResponse
+    { entries = Core.Nothing,
+      kind = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ReturnpolicyCustomBatchResponse
-  where
+instance Core.FromJSON ReturnpolicyCustomBatchResponse where
   parseJSON =
     Core.withObject
       "ReturnpolicyCustomBatchResponse"
       ( \o ->
           ReturnpolicyCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON ReturnpolicyCustomBatchResponse where
@@ -21313,10 +16147,7 @@ newReturnpolicyCustomBatchResponseEntry =
       returnPolicy = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReturnpolicyCustomBatchResponseEntry
-  where
+instance Core.FromJSON ReturnpolicyCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "ReturnpolicyCustomBatchResponseEntry"
@@ -21328,10 +16159,7 @@ instance
             Core.<*> (o Core..:? "returnPolicy")
       )
 
-instance
-  Core.ToJSON
-    ReturnpolicyCustomBatchResponseEntry
-  where
+instance Core.ToJSON ReturnpolicyCustomBatchResponseEntry where
   toJSON ReturnpolicyCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
@@ -21347,7 +16175,6 @@ instance
 data ReturnpolicyListResponse = ReturnpolicyListResponse
   { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#returnpolicyListResponse@\".
     kind :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [ReturnPolicy])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -21356,7 +16183,10 @@ data ReturnpolicyListResponse = ReturnpolicyListResponse
 newReturnpolicyListResponse ::
   ReturnpolicyListResponse
 newReturnpolicyListResponse =
-  ReturnpolicyListResponse {kind = Core.Nothing, resources = Core.Nothing}
+  ReturnpolicyListResponse
+    { kind = Core.Nothing,
+      resources = Core.Nothing
+    }
 
 instance Core.FromJSON ReturnpolicyListResponse where
   parseJSON =
@@ -21392,20 +16222,17 @@ newRow = Row {cells = Core.Nothing}
 
 instance Core.FromJSON Row where
   parseJSON =
-    Core.withObject
-      "Row"
-      (\o -> Row Core.<$> (o Core..:? "cells"))
+    Core.withObject "Row" (\o -> Row Core.<$> (o Core..:? "cells"))
 
 instance Core.ToJSON Row where
   toJSON Row {..} =
-    Core.object
-      (Core.catMaybes [("cells" Core..=) Core.<$> cells])
+    Core.object (Core.catMaybes [("cells" Core..=) Core.<$> cells])
 
 -- | Request message for the ReportService.Search method.
 --
 -- /See:/ 'newSearchRequest' smart constructor.
 data SearchRequest = SearchRequest
-  { -- | Number of ReportRows to retrieve in a single page. Defaults to the maximum of 1000. Values above 1000 are coerced to 1000.
+  { -- | Number of ReportRows to retrieve in a single page. Defaults to 1000. Values above 5000 are coerced to 5000.
     pageSize :: (Core.Maybe Core.Int32),
     -- | Token of the page to retrieve. If not specified, the first page of results is returned. In order to request the next page of results, the value obtained from @next_page_token@ in the previous response should be used.
     pageToken :: (Core.Maybe Core.Text),
@@ -21460,7 +16287,10 @@ data SearchResponse = SearchResponse
 newSearchResponse ::
   SearchResponse
 newSearchResponse =
-  SearchResponse {nextPageToken = Core.Nothing, results = Core.Nothing}
+  SearchResponse
+    { nextPageToken = Core.Nothing,
+      results = Core.Nothing
+    }
 
 instance Core.FromJSON SearchResponse where
   parseJSON =
@@ -21611,8 +16441,7 @@ instance Core.ToJSON Segments where
             ("customLabel2" Core..=) Core.<$> customLabel2,
             ("customLabel3" Core..=) Core.<$> customLabel3,
             ("customLabel4" Core..=) Core.<$> customLabel4,
-            ("customerCountryCode" Core..=)
-              Core.<$> customerCountryCode,
+            ("customerCountryCode" Core..=) Core.<$> customerCountryCode,
             ("date" Core..=) Core.<$> date,
             ("offerId" Core..=) Core.<$> offerId,
             ("productTypeL1" Core..=) Core.<$> productTypeL1,
@@ -21649,8 +16478,10 @@ data Service = Service
     pickupService :: (Core.Maybe PickupCarrierService),
     -- | Shipping rate group definitions. Only the last one is allowed to have an empty @applicableShippingLabels@, which means \"everything else\". The other @applicableShippingLabels@ must not overlap.
     rateGroups :: (Core.Maybe [RateGroup]),
-    -- | Type of locations this service ships orders to. Acceptable values are: - \"@delivery@\" - \"@pickup@\"
-    shipmentType :: (Core.Maybe Core.Text)
+    -- | Type of locations this service ships orders to. Acceptable values are: - \"@delivery@\" - \"@pickup@ (deprecated)\" - \"@local_delivery@\" - \"@collection_point@\"
+    shipmentType :: (Core.Maybe Core.Text),
+    -- | A list of stores your products are delivered from. This is only available for the local delivery shipment type.
+    storeConfig :: (Core.Maybe ServiceStoreConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -21669,7 +16500,8 @@ newService =
       name = Core.Nothing,
       pickupService = Core.Nothing,
       rateGroups = Core.Nothing,
-      shipmentType = Core.Nothing
+      shipmentType = Core.Nothing,
+      storeConfig = Core.Nothing
     }
 
 instance Core.FromJSON Service where
@@ -21689,6 +16521,7 @@ instance Core.FromJSON Service where
             Core.<*> (o Core..:? "pickupService")
             Core.<*> (o Core..:? "rateGroups")
             Core.<*> (o Core..:? "shipmentType")
+            Core.<*> (o Core..:? "storeConfig")
       )
 
 instance Core.ToJSON Service where
@@ -21700,548 +16533,154 @@ instance Core.ToJSON Service where
             ("deliveryCountry" Core..=) Core.<$> deliveryCountry,
             ("deliveryTime" Core..=) Core.<$> deliveryTime,
             ("eligibility" Core..=) Core.<$> eligibility,
-            ("minimumOrderValue" Core..=)
-              Core.<$> minimumOrderValue,
-            ("minimumOrderValueTable" Core..=)
-              Core.<$> minimumOrderValueTable,
+            ("minimumOrderValue" Core..=) Core.<$> minimumOrderValue,
+            ("minimumOrderValueTable" Core..=) Core.<$> minimumOrderValueTable,
             ("name" Core..=) Core.<$> name,
             ("pickupService" Core..=) Core.<$> pickupService,
             ("rateGroups" Core..=) Core.<$> rateGroups,
-            ("shipmentType" Core..=) Core.<$> shipmentType
+            ("shipmentType" Core..=) Core.<$> shipmentType,
+            ("storeConfig" Core..=) Core.<$> storeConfig
           ]
       )
 
--- | Settlement reports detail order-level and item-level credits and debits between you and Google.
+-- | Stores that provide local delivery. Only valid with local delivery fulfillment.
 --
--- /See:/ 'newSettlementReport' smart constructor.
-data SettlementReport = SettlementReport
-  { -- | The end date on which all transactions are included in the report, in ISO 8601 format.
-    endDate :: (Core.Maybe Core.Text),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#settlementReport@\"
-    kind :: (Core.Maybe Core.Text),
-    -- | The residual amount from the previous invoice. This is set only if the previous invoices are not paid because of negative balance.
-    previousBalance :: (Core.Maybe Price),
-    -- | The ID of the settlement report.
-    settlementId :: (Core.Maybe Core.Text),
-    -- | The start date on which all transactions are included in the report, in ISO 8601 format.
-    startDate :: (Core.Maybe Core.Text),
-    -- | The money due to the merchant.
-    transferAmount :: (Core.Maybe Price),
-    -- | Date on which transfer for this payment was initiated by Google, in ISO 8601 format.
-    transferDate :: (Core.Maybe Core.Text),
-    -- | The list of bank identifiers used for the transfer. For example, Trace ID for Federal Automated Clearing House (ACH). This may also be known as the Wire ID.
-    transferIds :: (Core.Maybe [Core.Text])
+-- /See:/ 'newServiceStoreConfig' smart constructor.
+data ServiceStoreConfig = ServiceStoreConfig
+  { -- | Time local delivery ends for the day. This can be either @local_cutoff_time@ or @store_close_offset_hours@, if both are provided an error is thrown.
+    cutoffConfig :: (Core.Maybe ServiceStoreConfigCutoffConfig),
+    -- | Maximum delivery radius. Only needed for local delivery fulfillment type.
+    serviceRadius :: (Core.Maybe Distance),
+    -- | A list of store codes that provide local delivery. If empty, then @store_service_type@ must be @all_stores@, or an error is thrown. If not empty, then @store_service_type@ must be @selected_stores@, or an error is thrown.
+    storeCodes :: (Core.Maybe [Core.Text]),
+    -- | Indicates whether all stores listed by this merchant provide local delivery or not. Acceptable values are @all stores@ and @selected stores@
+    storeServiceType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SettlementReport' with the minimum fields required to make a request.
-newSettlementReport ::
-  SettlementReport
-newSettlementReport =
-  SettlementReport
-    { endDate = Core.Nothing,
-      kind = Core.Nothing,
-      previousBalance = Core.Nothing,
-      settlementId = Core.Nothing,
-      startDate = Core.Nothing,
-      transferAmount = Core.Nothing,
-      transferDate = Core.Nothing,
-      transferIds = Core.Nothing
+-- | Creates a value of 'ServiceStoreConfig' with the minimum fields required to make a request.
+newServiceStoreConfig ::
+  ServiceStoreConfig
+newServiceStoreConfig =
+  ServiceStoreConfig
+    { cutoffConfig = Core.Nothing,
+      serviceRadius = Core.Nothing,
+      storeCodes = Core.Nothing,
+      storeServiceType = Core.Nothing
     }
 
-instance Core.FromJSON SettlementReport where
+instance Core.FromJSON ServiceStoreConfig where
   parseJSON =
     Core.withObject
-      "SettlementReport"
+      "ServiceStoreConfig"
       ( \o ->
-          SettlementReport
-            Core.<$> (o Core..:? "endDate")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "previousBalance")
-            Core.<*> (o Core..:? "settlementId")
-            Core.<*> (o Core..:? "startDate")
-            Core.<*> (o Core..:? "transferAmount")
-            Core.<*> (o Core..:? "transferDate")
-            Core.<*> (o Core..:? "transferIds")
+          ServiceStoreConfig
+            Core.<$> (o Core..:? "cutoffConfig")
+            Core.<*> (o Core..:? "serviceRadius")
+            Core.<*> (o Core..:? "storeCodes")
+            Core.<*> (o Core..:? "storeServiceType")
       )
 
-instance Core.ToJSON SettlementReport where
-  toJSON SettlementReport {..} =
+instance Core.ToJSON ServiceStoreConfig where
+  toJSON ServiceStoreConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endDate" Core..=) Core.<$> endDate,
-            ("kind" Core..=) Core.<$> kind,
-            ("previousBalance" Core..=) Core.<$> previousBalance,
-            ("settlementId" Core..=) Core.<$> settlementId,
-            ("startDate" Core..=) Core.<$> startDate,
-            ("transferAmount" Core..=) Core.<$> transferAmount,
-            ("transferDate" Core..=) Core.<$> transferDate,
-            ("transferIds" Core..=) Core.<$> transferIds
+          [ ("cutoffConfig" Core..=) Core.<$> cutoffConfig,
+            ("serviceRadius" Core..=) Core.<$> serviceRadius,
+            ("storeCodes" Core..=) Core.<$> storeCodes,
+            ("storeServiceType" Core..=) Core.<$> storeServiceType
           ]
       )
 
--- | Settlement transactions give a detailed breakdown of the settlement report.
+-- | Time local delivery ends for the day based on the local timezone of the store. @local_cutoff_time@ and @store_close_offset_hours@ are mutually exclusive.
 --
--- /See:/ 'newSettlementTransaction' smart constructor.
-data SettlementTransaction = SettlementTransaction
-  { -- | The amount for the transaction.
-    amount :: (Core.Maybe SettlementTransactionAmount),
-    -- | Identifiers of the transaction.
-    identifiers :: (Core.Maybe SettlementTransactionIdentifiers),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#settlementTransaction@\"
-    kind :: (Core.Maybe Core.Text),
-    -- | Details of the transaction.
-    transaction :: (Core.Maybe SettlementTransactionTransaction)
+-- /See:/ 'newServiceStoreConfigCutoffConfig' smart constructor.
+data ServiceStoreConfigCutoffConfig = ServiceStoreConfigCutoffConfig
+  { -- | Time in hours and minutes in the local timezone when local delivery ends.
+    localCutoffTime :: (Core.Maybe ServiceStoreConfigCutoffConfigLocalCutoffTime),
+    -- | Merchants can opt-out of showing n+1 day local delivery when they have a shipping service configured to n day local delivery. For example, if the shipping service defines same-day delivery, and it\'s past the cut-off, setting this field to @true@ results in the calculated shipping service rate returning @NO_DELIVERY_POST_CUTOFF@. In the same example, setting this field to @false@ results in the calculated shipping time being one day. This is only for local delivery.
+    noDeliveryPostCutoff :: (Core.Maybe Core.Bool),
+    -- | Represents cutoff time as the number of hours before store closing. Mutually exclusive with other fields (hour and minute).
+    storeCloseOffsetHours :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SettlementTransaction' with the minimum fields required to make a request.
-newSettlementTransaction ::
-  SettlementTransaction
-newSettlementTransaction =
-  SettlementTransaction
-    { amount = Core.Nothing,
-      identifiers = Core.Nothing,
-      kind = Core.Nothing,
-      transaction = Core.Nothing
+-- | Creates a value of 'ServiceStoreConfigCutoffConfig' with the minimum fields required to make a request.
+newServiceStoreConfigCutoffConfig ::
+  ServiceStoreConfigCutoffConfig
+newServiceStoreConfigCutoffConfig =
+  ServiceStoreConfigCutoffConfig
+    { localCutoffTime = Core.Nothing,
+      noDeliveryPostCutoff = Core.Nothing,
+      storeCloseOffsetHours = Core.Nothing
     }
 
-instance Core.FromJSON SettlementTransaction where
+instance Core.FromJSON ServiceStoreConfigCutoffConfig where
   parseJSON =
     Core.withObject
-      "SettlementTransaction"
+      "ServiceStoreConfigCutoffConfig"
       ( \o ->
-          SettlementTransaction
-            Core.<$> (o Core..:? "amount")
-            Core.<*> (o Core..:? "identifiers")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "transaction")
+          ServiceStoreConfigCutoffConfig
+            Core.<$> (o Core..:? "localCutoffTime")
+            Core.<*> (o Core..:? "noDeliveryPostCutoff")
+            Core.<*> ( o
+                         Core..:? "storeCloseOffsetHours"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
-instance Core.ToJSON SettlementTransaction where
-  toJSON SettlementTransaction {..} =
+instance Core.ToJSON ServiceStoreConfigCutoffConfig where
+  toJSON ServiceStoreConfigCutoffConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("amount" Core..=) Core.<$> amount,
-            ("identifiers" Core..=) Core.<$> identifiers,
-            ("kind" Core..=) Core.<$> kind,
-            ("transaction" Core..=) Core.<$> transaction
+          [ ("localCutoffTime" Core..=) Core.<$> localCutoffTime,
+            ("noDeliveryPostCutoff" Core..=) Core.<$> noDeliveryPostCutoff,
+            ("storeCloseOffsetHours" Core..=)
+              Core.. Core.AsText
+              Core.<$> storeCloseOffsetHours
           ]
       )
 
+-- | Time in hours and minutes in the local timezone when local delivery ends.
 --
--- /See:/ 'newSettlementTransactionAmount' smart constructor.
-data SettlementTransactionAmount = SettlementTransactionAmount
-  { -- |
-    commission :: (Core.Maybe SettlementTransactionAmountCommission),
-    -- | The description of the event. Acceptable values are: - \"@taxWithhold@\" - \"@principal@\" - \"@principalAdjustment@\" - \"@shippingFee@\" - \"@merchantRemittedSalesTax@\" - \"@googleRemittedSalesTax@\" - \"@merchantCoupon@\" - \"@merchantCouponTax@\" - \"@merchantRemittedDisposalTax@\" - \"@googleRemittedDisposalTax@\" - \"@merchantRemittedRedemptionFee@\" - \"@googleRemittedRedemptionFee@\" - \"@eeeEcoFee@\" - \"@furnitureEcoFee@\" - \"@copyPrivateFee@\" - \"@eeeEcoFeeCommission@\" - \"@furnitureEcoFeeCommission@\" - \"@copyPrivateFeeCommission@\" - \"@principalRefund@\" - \"@principalRefundTax@\" - \"@itemCommission@\" - \"@adjustmentCommission@\" - \"@shippingFeeCommission@\" - \"@commissionRefund@\" - \"@damaged@\" - \"@damagedOrDefectiveItem@\" - \"@expiredItem@\" - \"@faultyItem@\" - \"@incorrectItemReceived@\" - \"@itemMissing@\" - \"@qualityNotExpected@\" - \"@receivedTooLate@\" - \"@storePackageMissing@\" - \"@transitPackageMissing@\" - \"@unsuccessfulDeliveryUndeliverable@\" -
-    -- \"@wrongChargeInStore@\" - \"@wrongItem@\" - \"@returns@\" - \"@undeliverable@\" - \"@issueRelatedRefundAndReplacementAmountDescription@\" - \"@refundFromMerchant@\" - \"@returnLabelShippingFee@\" - \"@lumpSumCorrection@\" - \"@pspFee@\" - \"@principalRefundDoesNotFit@\" - \"@principalRefundOrderedWrongItem@\" - \"@principalRefundQualityNotExpected@\" - \"@principalRefundBetterPriceFound@\" - \"@principalRefundNoLongerNeeded@\" - \"@principalRefundChangedMind@\" - \"@principalRefundReceivedTooLate@\" - \"@principalRefundIncorrectItemReceived@\" - \"@principalRefundDamagedOrDefectiveItem@\" - \"@principalRefundDidNotMatchDescription@\" - \"@principalRefundExpiredItem@\"
-    description :: (Core.Maybe Core.Text),
-    -- | The amount that contributes to the line item price.
-    transactionAmount :: (Core.Maybe Price),
-    -- | The type of the amount. Acceptable values are: - \"@itemPrice@\" - \"@orderPrice@\" - \"@refund@\" - \"@earlyRefund@\" - \"@courtesyRefund@\" - \"@returnRefund@\" - \"@returnLabelShippingFeeAmount@\" - \"@lumpSumCorrectionAmount@\"
-    type' :: (Core.Maybe Core.Text)
+-- /See:/ 'newServiceStoreConfigCutoffConfigLocalCutoffTime' smart constructor.
+data ServiceStoreConfigCutoffConfigLocalCutoffTime = ServiceStoreConfigCutoffConfigLocalCutoffTime
+  { -- | Hour local delivery orders must be placed by to process the same day.
+    hour :: (Core.Maybe Core.Int64),
+    -- | Minute local delivery orders must be placed by to process the same day.
+    minute :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'SettlementTransactionAmount' with the minimum fields required to make a request.
-newSettlementTransactionAmount ::
-  SettlementTransactionAmount
-newSettlementTransactionAmount =
-  SettlementTransactionAmount
-    { commission = Core.Nothing,
-      description = Core.Nothing,
-      transactionAmount = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON SettlementTransactionAmount where
-  parseJSON =
-    Core.withObject
-      "SettlementTransactionAmount"
-      ( \o ->
-          SettlementTransactionAmount
-            Core.<$> (o Core..:? "commission")
-            Core.<*> (o Core..:? "description")
-            Core.<*> (o Core..:? "transactionAmount")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON SettlementTransactionAmount where
-  toJSON SettlementTransactionAmount {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("commission" Core..=) Core.<$> commission,
-            ("description" Core..=) Core.<$> description,
-            ("transactionAmount" Core..=)
-              Core.<$> transactionAmount,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newSettlementTransactionAmountCommission' smart constructor.
-data SettlementTransactionAmountCommission = SettlementTransactionAmountCommission
-  { -- | The category of the commission. Acceptable values are: - \"@animalsAndPetSupplies@\" - \"@dogCatFoodAndCatLitter@\" - \"@apparelAndAccessories@\" - \"@shoesHandbagsAndSunglasses@\" - \"@costumesAndAccessories@\" - \"@jewelry@\" - \"@watches@\" - \"@hobbiesArtsAndCrafts@\" - \"@homeAndGarden@\" - \"@entertainmentCollectibles@\" - \"@collectibleCoins@\" - \"@sportsCollectibles@\" - \"@sportingGoods@\" - \"@toysAndGames@\" - \"@musicalInstruments@\" - \"@giftCards@\" - \"@babyAndToddler@\" - \"@babyFoodWipesAndDiapers@\" - \"@businessAndIndustrial@\" - \"@camerasOpticsAndPhotography@\" - \"@consumerElectronics@\" - \"@electronicsAccessories@\" - \"@personalComputers@\" - \"@videoGameConsoles@\" - \"@foodAndGrocery@\" - \"@beverages@\" - \"@tobaccoProducts@\" - \"@furniture@\" - \"@hardware@\" - \"@buildingMaterials@\" - \"@tools@\" - \"@healthAndPersonalCare@\" - \"@beauty@\" - \"@householdSupplies@\" - \"@kitchenAndDining@\" - \"@majorAppliances@\" - \"@luggageAndBags@\" - \"@media@\" - \"@officeSupplies@\" -
-    -- \"@softwareAndVideoGames@\" - \"@vehiclePartsAndAccessories@\" - \"@vehicleTiresAndWheels@\" - \"@vehicles@\" - \"@everythingElse@\"
-    category :: (Core.Maybe Core.Text),
-    -- | Rate of the commission in percentage.
-    rate :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SettlementTransactionAmountCommission' with the minimum fields required to make a request.
-newSettlementTransactionAmountCommission ::
-  SettlementTransactionAmountCommission
-newSettlementTransactionAmountCommission =
-  SettlementTransactionAmountCommission
-    { category = Core.Nothing,
-      rate = Core.Nothing
+-- | Creates a value of 'ServiceStoreConfigCutoffConfigLocalCutoffTime' with the minimum fields required to make a request.
+newServiceStoreConfigCutoffConfigLocalCutoffTime ::
+  ServiceStoreConfigCutoffConfigLocalCutoffTime
+newServiceStoreConfigCutoffConfigLocalCutoffTime =
+  ServiceStoreConfigCutoffConfigLocalCutoffTime
+    { hour =
+        Core.Nothing,
+      minute = Core.Nothing
     }
 
 instance
   Core.FromJSON
-    SettlementTransactionAmountCommission
+    ServiceStoreConfigCutoffConfigLocalCutoffTime
   where
   parseJSON =
     Core.withObject
-      "SettlementTransactionAmountCommission"
+      "ServiceStoreConfigCutoffConfigLocalCutoffTime"
       ( \o ->
-          SettlementTransactionAmountCommission
-            Core.<$> (o Core..:? "category") Core.<*> (o Core..:? "rate")
+          ServiceStoreConfigCutoffConfigLocalCutoffTime
+            Core.<$> (o Core..:? "hour" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "minute" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    SettlementTransactionAmountCommission
-  where
-  toJSON SettlementTransactionAmountCommission {..} =
+instance Core.ToJSON ServiceStoreConfigCutoffConfigLocalCutoffTime where
+  toJSON ServiceStoreConfigCutoffConfigLocalCutoffTime {..} =
     Core.object
       ( Core.catMaybes
-          [ ("category" Core..=) Core.<$> category,
-            ("rate" Core..=) Core.<$> rate
-          ]
-      )
-
---
--- /See:/ 'newSettlementTransactionIdentifiers' smart constructor.
-data SettlementTransactionIdentifiers = SettlementTransactionIdentifiers
-  { -- | The identifier of the adjustments, if it\'s available.
-    adjustmentId :: (Core.Maybe Core.Text),
-    -- | The merchant provided order ID.
-    merchantOrderId :: (Core.Maybe Core.Text),
-    -- | The identifier of the item.
-    orderItemId :: (Core.Maybe Core.Text),
-    -- | The unique ID of the settlement transaction entry.
-    settlementEntryId :: (Core.Maybe Core.Text),
-    -- | The shipment ids for the item.
-    shipmentIds :: (Core.Maybe [Core.Text]),
-    -- | The Google transaction ID.
-    transactionId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SettlementTransactionIdentifiers' with the minimum fields required to make a request.
-newSettlementTransactionIdentifiers ::
-  SettlementTransactionIdentifiers
-newSettlementTransactionIdentifiers =
-  SettlementTransactionIdentifiers
-    { adjustmentId = Core.Nothing,
-      merchantOrderId = Core.Nothing,
-      orderItemId = Core.Nothing,
-      settlementEntryId = Core.Nothing,
-      shipmentIds = Core.Nothing,
-      transactionId = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    SettlementTransactionIdentifiers
-  where
-  parseJSON =
-    Core.withObject
-      "SettlementTransactionIdentifiers"
-      ( \o ->
-          SettlementTransactionIdentifiers
-            Core.<$> (o Core..:? "adjustmentId")
-            Core.<*> (o Core..:? "merchantOrderId")
-            Core.<*> (o Core..:? "orderItemId")
-            Core.<*> (o Core..:? "settlementEntryId")
-            Core.<*> (o Core..:? "shipmentIds")
-            Core.<*> (o Core..:? "transactionId")
-      )
-
-instance Core.ToJSON SettlementTransactionIdentifiers where
-  toJSON SettlementTransactionIdentifiers {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("adjustmentId" Core..=) Core.<$> adjustmentId,
-            ("merchantOrderId" Core..=) Core.<$> merchantOrderId,
-            ("orderItemId" Core..=) Core.<$> orderItemId,
-            ("settlementEntryId" Core..=)
-              Core.<$> settlementEntryId,
-            ("shipmentIds" Core..=) Core.<$> shipmentIds,
-            ("transactionId" Core..=) Core.<$> transactionId
-          ]
-      )
-
---
--- /See:/ 'newSettlementTransactionTransaction' smart constructor.
-data SettlementTransactionTransaction = SettlementTransactionTransaction
-  { -- | The time on which the event occurred in ISO 8601 format.
-    postDate :: (Core.Maybe Core.Text),
-    -- | The type of the transaction that occurred. Acceptable values are: - \"@order@\" - \"@reversal@\" - \"@orderRefund@\" - \"@reversalRefund@\" - \"@issueRelatedRefundAndReplacement@\" - \"@returnLabelShippingFeeTransaction@\" - \"@reversalIssueRelatedRefundAndReplacement@\" - \"@reversalReturnLabelShippingFeeTransaction@\" - \"@lumpSumCorrectionTransaction@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SettlementTransactionTransaction' with the minimum fields required to make a request.
-newSettlementTransactionTransaction ::
-  SettlementTransactionTransaction
-newSettlementTransactionTransaction =
-  SettlementTransactionTransaction
-    { postDate = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    SettlementTransactionTransaction
-  where
-  parseJSON =
-    Core.withObject
-      "SettlementTransactionTransaction"
-      ( \o ->
-          SettlementTransactionTransaction
-            Core.<$> (o Core..:? "postDate") Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON SettlementTransactionTransaction where
-  toJSON SettlementTransactionTransaction {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("postDate" Core..=) Core.<$> postDate,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newSettlementreportsListResponse' smart constructor.
-data SettlementreportsListResponse = SettlementreportsListResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#settlementreportsListResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of returns.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
-    resources :: (Core.Maybe [SettlementReport])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SettlementreportsListResponse' with the minimum fields required to make a request.
-newSettlementreportsListResponse ::
-  SettlementreportsListResponse
-newSettlementreportsListResponse =
-  SettlementreportsListResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      resources = Core.Nothing
-    }
-
-instance Core.FromJSON SettlementreportsListResponse where
-  parseJSON =
-    Core.withObject
-      "SettlementreportsListResponse"
-      ( \o ->
-          SettlementreportsListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources")
-      )
-
-instance Core.ToJSON SettlementreportsListResponse where
-  toJSON SettlementreportsListResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resources" Core..=) Core.<$> resources
-          ]
-      )
-
---
--- /See:/ 'newSettlementtransactionsListResponse' smart constructor.
-data SettlementtransactionsListResponse = SettlementtransactionsListResponse
-  { -- | Identifies what kind of resource this is. Value: the fixed string \"@content#settlementtransactionsListResponse@\".
-    kind :: (Core.Maybe Core.Text),
-    -- | The token for the retrieval of the next page of returns.
-    nextPageToken :: (Core.Maybe Core.Text),
-    -- |
-    resources :: (Core.Maybe [SettlementTransaction])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'SettlementtransactionsListResponse' with the minimum fields required to make a request.
-newSettlementtransactionsListResponse ::
-  SettlementtransactionsListResponse
-newSettlementtransactionsListResponse =
-  SettlementtransactionsListResponse
-    { kind = Core.Nothing,
-      nextPageToken = Core.Nothing,
-      resources = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    SettlementtransactionsListResponse
-  where
-  parseJSON =
-    Core.withObject
-      "SettlementtransactionsListResponse"
-      ( \o ->
-          SettlementtransactionsListResponse
-            Core.<$> (o Core..:? "kind")
-            Core.<*> (o Core..:? "nextPageToken")
-            Core.<*> (o Core..:? "resources")
-      )
-
-instance
-  Core.ToJSON
-    SettlementtransactionsListResponse
-  where
-  toJSON SettlementtransactionsListResponse {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("kind" Core..=) Core.<$> kind,
-            ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resources" Core..=) Core.<$> resources
-          ]
-      )
-
---
--- /See:/ 'newShipmentInvoice' smart constructor.
-data ShipmentInvoice = ShipmentInvoice
-  { -- | [required] Invoice summary.
-    invoiceSummary :: (Core.Maybe InvoiceSummary),
-    -- | [required] Invoice details per line item.
-    lineItemInvoices :: (Core.Maybe [ShipmentInvoiceLineItemInvoice]),
-    -- | [required] ID of the shipment group. It is assigned by the merchant in the @shipLineItems@ method and is used to group multiple line items that have the same kind of shipping charges.
-    shipmentGroupId :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ShipmentInvoice' with the minimum fields required to make a request.
-newShipmentInvoice ::
-  ShipmentInvoice
-newShipmentInvoice =
-  ShipmentInvoice
-    { invoiceSummary = Core.Nothing,
-      lineItemInvoices = Core.Nothing,
-      shipmentGroupId = Core.Nothing
-    }
-
-instance Core.FromJSON ShipmentInvoice where
-  parseJSON =
-    Core.withObject
-      "ShipmentInvoice"
-      ( \o ->
-          ShipmentInvoice
-            Core.<$> (o Core..:? "invoiceSummary")
-            Core.<*> (o Core..:? "lineItemInvoices")
-            Core.<*> (o Core..:? "shipmentGroupId")
-      )
-
-instance Core.ToJSON ShipmentInvoice where
-  toJSON ShipmentInvoice {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("invoiceSummary" Core..=) Core.<$> invoiceSummary,
-            ("lineItemInvoices" Core..=)
-              Core.<$> lineItemInvoices,
-            ("shipmentGroupId" Core..=)
-              Core.<$> shipmentGroupId
-          ]
-      )
-
---
--- /See:/ 'newShipmentInvoiceLineItemInvoice' smart constructor.
-data ShipmentInvoiceLineItemInvoice = ShipmentInvoiceLineItemInvoice
-  { -- | ID of the line item. Either lineItemId or productId must be set.
-    lineItemId :: (Core.Maybe Core.Text),
-    -- | ID of the product. This is the REST ID used in the products service. Either lineItemId or productId must be set.
-    productId :: (Core.Maybe Core.Text),
-    -- | [required] The shipment unit ID is assigned by the merchant and defines individual quantities within a line item. The same ID can be assigned to units that are the same while units that differ must be assigned a different ID (for example: free or promotional units).
-    shipmentUnitIds :: (Core.Maybe [Core.Text]),
-    -- | [required] Invoice details for a single unit.
-    unitInvoice :: (Core.Maybe UnitInvoice)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ShipmentInvoiceLineItemInvoice' with the minimum fields required to make a request.
-newShipmentInvoiceLineItemInvoice ::
-  ShipmentInvoiceLineItemInvoice
-newShipmentInvoiceLineItemInvoice =
-  ShipmentInvoiceLineItemInvoice
-    { lineItemId = Core.Nothing,
-      productId = Core.Nothing,
-      shipmentUnitIds = Core.Nothing,
-      unitInvoice = Core.Nothing
-    }
-
-instance Core.FromJSON ShipmentInvoiceLineItemInvoice where
-  parseJSON =
-    Core.withObject
-      "ShipmentInvoiceLineItemInvoice"
-      ( \o ->
-          ShipmentInvoiceLineItemInvoice
-            Core.<$> (o Core..:? "lineItemId")
-            Core.<*> (o Core..:? "productId")
-            Core.<*> (o Core..:? "shipmentUnitIds")
-            Core.<*> (o Core..:? "unitInvoice")
-      )
-
-instance Core.ToJSON ShipmentInvoiceLineItemInvoice where
-  toJSON ShipmentInvoiceLineItemInvoice {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("lineItemId" Core..=) Core.<$> lineItemId,
-            ("productId" Core..=) Core.<$> productId,
-            ("shipmentUnitIds" Core..=) Core.<$> shipmentUnitIds,
-            ("unitInvoice" Core..=) Core.<$> unitInvoice
-          ]
-      )
-
---
--- /See:/ 'newShipmentTrackingInfo' smart constructor.
-data ShipmentTrackingInfo = ShipmentTrackingInfo
-  { -- | The shipping carrier that handles the package. Acceptable values are: - \"@boxtal@\" - \"@bpost@\" - \"@chronopost@\" - \"@colisPrive@\" - \"@colissimo@\" - \"@cxt@\" - \"@deliv@\" - \"@dhl@\" - \"@dpd@\" - \"@dynamex@\" - \"@eCourier@\" - \"@easypost@\" - \"@efw@\" - \"@fedex@\" - \"@fedexSmartpost@\" - \"@geodis@\" - \"@gls@\" - \"@googleCourier@\" - \"@gsx@\" - \"@jdLogistics@\" - \"@laPoste@\" - \"@lasership@\" - \"@manual@\" - \"@mpx@\" - \"@onTrac@\" - \"@other@\" - \"@tnt@\" - \"@uds@\" - \"@ups@\" - \"@usps@\"
-    carrier :: (Core.Maybe Core.Text),
-    -- | The tracking number for the package.
-    trackingNumber :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ShipmentTrackingInfo' with the minimum fields required to make a request.
-newShipmentTrackingInfo ::
-  ShipmentTrackingInfo
-newShipmentTrackingInfo =
-  ShipmentTrackingInfo {carrier = Core.Nothing, trackingNumber = Core.Nothing}
-
-instance Core.FromJSON ShipmentTrackingInfo where
-  parseJSON =
-    Core.withObject
-      "ShipmentTrackingInfo"
-      ( \o ->
-          ShipmentTrackingInfo
-            Core.<$> (o Core..:? "carrier")
-            Core.<*> (o Core..:? "trackingNumber")
-      )
-
-instance Core.ToJSON ShipmentTrackingInfo where
-  toJSON ShipmentTrackingInfo {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("carrier" Core..=) Core.<$> carrier,
-            ("trackingNumber" Core..=) Core.<$> trackingNumber
+          [ ("hour" Core..=) Core.. Core.AsText Core.<$> hour,
+            ("minute" Core..=) Core.. Core.AsText Core.<$> minute
           ]
       )
 
@@ -22277,9 +16716,7 @@ instance Core.FromJSON ShippingSettings where
       "ShippingSettings"
       ( \o ->
           ShippingSettings
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "postalCodeGroups")
             Core.<*> (o Core..:? "services")
             Core.<*> (o Core..:? "warehouses")
@@ -22289,10 +16726,8 @@ instance Core.ToJSON ShippingSettings where
   toJSON ShippingSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
-            ("postalCodeGroups" Core..=)
-              Core.<$> postalCodeGroups,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
+            ("postalCodeGroups" Core..=) Core.<$> postalCodeGroups,
             ("services" Core..=) Core.<$> services,
             ("warehouses" Core..=) Core.<$> warehouses
           ]
@@ -22312,27 +16747,18 @@ newShippingsettingsCustomBatchRequest ::
 newShippingsettingsCustomBatchRequest =
   ShippingsettingsCustomBatchRequest {entries = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ShippingsettingsCustomBatchRequest
-  where
+instance Core.FromJSON ShippingsettingsCustomBatchRequest where
   parseJSON =
     Core.withObject
       "ShippingsettingsCustomBatchRequest"
       ( \o ->
-          ShippingsettingsCustomBatchRequest
-            Core.<$> (o Core..:? "entries")
+          ShippingsettingsCustomBatchRequest Core.<$> (o Core..:? "entries")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsCustomBatchRequest
-  where
+instance Core.ToJSON ShippingsettingsCustomBatchRequest where
   toJSON ShippingsettingsCustomBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | A batch entry encoding a single non-batch shippingsettings request.
 --
@@ -22363,41 +16789,28 @@ newShippingsettingsCustomBatchRequestEntry =
       shippingSettings = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShippingsettingsCustomBatchRequestEntry
-  where
+instance Core.FromJSON ShippingsettingsCustomBatchRequestEntry where
   parseJSON =
     Core.withObject
       "ShippingsettingsCustomBatchRequestEntry"
       ( \o ->
           ShippingsettingsCustomBatchRequestEntry
-            Core.<$> ( o Core..:? "accountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "accountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "batchId")
-            Core.<*> ( o Core..:? "merchantId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "merchantId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "method")
             Core.<*> (o Core..:? "shippingSettings")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsCustomBatchRequestEntry
-  where
+instance Core.ToJSON ShippingsettingsCustomBatchRequestEntry where
   toJSON ShippingsettingsCustomBatchRequestEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("accountId" Core..=) Core.. Core.AsText
-              Core.<$> accountId,
+          [ ("accountId" Core..=) Core.. Core.AsText Core.<$> accountId,
             ("batchId" Core..=) Core.<$> batchId,
-            ("merchantId" Core..=) Core.. Core.AsText
-              Core.<$> merchantId,
+            ("merchantId" Core..=) Core.. Core.AsText Core.<$> merchantId,
             ("method" Core..=) Core.<$> method,
-            ("shippingSettings" Core..=)
-              Core.<$> shippingSettings
+            ("shippingSettings" Core..=) Core.<$> shippingSettings
           ]
       )
 
@@ -22420,22 +16833,17 @@ newShippingsettingsCustomBatchResponse =
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShippingsettingsCustomBatchResponse
-  where
+instance Core.FromJSON ShippingsettingsCustomBatchResponse where
   parseJSON =
     Core.withObject
       "ShippingsettingsCustomBatchResponse"
       ( \o ->
           ShippingsettingsCustomBatchResponse
-            Core.<$> (o Core..:? "entries") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "entries")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsCustomBatchResponse
-  where
+instance Core.ToJSON ShippingsettingsCustomBatchResponse where
   toJSON ShippingsettingsCustomBatchResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -22470,10 +16878,7 @@ newShippingsettingsCustomBatchResponseEntry =
       shippingSettings = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShippingsettingsCustomBatchResponseEntry
-  where
+instance Core.FromJSON ShippingsettingsCustomBatchResponseEntry where
   parseJSON =
     Core.withObject
       "ShippingsettingsCustomBatchResponseEntry"
@@ -22485,18 +16890,14 @@ instance
             Core.<*> (o Core..:? "shippingSettings")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsCustomBatchResponseEntry
-  where
+instance Core.ToJSON ShippingsettingsCustomBatchResponseEntry where
   toJSON ShippingsettingsCustomBatchResponseEntry {..} =
     Core.object
       ( Core.catMaybes
           [ ("batchId" Core..=) Core.<$> batchId,
             ("errors" Core..=) Core.<$> errors,
             ("kind" Core..=) Core.<$> kind,
-            ("shippingSettings" Core..=)
-              Core.<$> shippingSettings
+            ("shippingSettings" Core..=) Core.<$> shippingSettings
           ]
       )
 
@@ -22515,34 +16916,29 @@ newShippingsettingsGetSupportedCarriersResponse ::
   ShippingsettingsGetSupportedCarriersResponse
 newShippingsettingsGetSupportedCarriersResponse =
   ShippingsettingsGetSupportedCarriersResponse
-    { carriers = Core.Nothing,
+    { carriers =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShippingsettingsGetSupportedCarriersResponse
-  where
+instance Core.FromJSON ShippingsettingsGetSupportedCarriersResponse where
   parseJSON =
     Core.withObject
       "ShippingsettingsGetSupportedCarriersResponse"
       ( \o ->
           ShippingsettingsGetSupportedCarriersResponse
-            Core.<$> (o Core..:? "carriers") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "carriers")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsGetSupportedCarriersResponse
-  where
-  toJSON
-    ShippingsettingsGetSupportedCarriersResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("carriers" Core..=) Core.<$> carriers,
-              ("kind" Core..=) Core.<$> kind
-            ]
-        )
+instance Core.ToJSON ShippingsettingsGetSupportedCarriersResponse where
+  toJSON ShippingsettingsGetSupportedCarriersResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("carriers" Core..=) Core.<$> carriers,
+            ("kind" Core..=) Core.<$> kind
+          ]
+      )
 
 --
 -- /See:/ 'newShippingsettingsGetSupportedHolidaysResponse' smart constructor.
@@ -22559,34 +16955,29 @@ newShippingsettingsGetSupportedHolidaysResponse ::
   ShippingsettingsGetSupportedHolidaysResponse
 newShippingsettingsGetSupportedHolidaysResponse =
   ShippingsettingsGetSupportedHolidaysResponse
-    { holidays = Core.Nothing,
+    { holidays =
+        Core.Nothing,
       kind = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShippingsettingsGetSupportedHolidaysResponse
-  where
+instance Core.FromJSON ShippingsettingsGetSupportedHolidaysResponse where
   parseJSON =
     Core.withObject
       "ShippingsettingsGetSupportedHolidaysResponse"
       ( \o ->
           ShippingsettingsGetSupportedHolidaysResponse
-            Core.<$> (o Core..:? "holidays") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "holidays")
+            Core.<*> (o Core..:? "kind")
       )
 
-instance
-  Core.ToJSON
-    ShippingsettingsGetSupportedHolidaysResponse
-  where
-  toJSON
-    ShippingsettingsGetSupportedHolidaysResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("holidays" Core..=) Core.<$> holidays,
-              ("kind" Core..=) Core.<$> kind
-            ]
-        )
+instance Core.ToJSON ShippingsettingsGetSupportedHolidaysResponse where
+  toJSON ShippingsettingsGetSupportedHolidaysResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("holidays" Core..=) Core.<$> holidays,
+            ("kind" Core..=) Core.<$> kind
+          ]
+      )
 
 --
 -- /See:/ 'newShippingsettingsGetSupportedPickupServicesResponse' smart constructor.
@@ -22603,7 +16994,8 @@ newShippingsettingsGetSupportedPickupServicesResponse ::
   ShippingsettingsGetSupportedPickupServicesResponse
 newShippingsettingsGetSupportedPickupServicesResponse =
   ShippingsettingsGetSupportedPickupServicesResponse
-    { kind = Core.Nothing,
+    { kind =
+        Core.Nothing,
       pickupServices = Core.Nothing
     }
 
@@ -22617,21 +17009,20 @@ instance
       ( \o ->
           ShippingsettingsGetSupportedPickupServicesResponse
             Core.<$> (o Core..:? "kind")
-              Core.<*> (o Core..:? "pickupServices")
+            Core.<*> (o Core..:? "pickupServices")
       )
 
 instance
   Core.ToJSON
     ShippingsettingsGetSupportedPickupServicesResponse
   where
-  toJSON
-    ShippingsettingsGetSupportedPickupServicesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("kind" Core..=) Core.<$> kind,
-              ("pickupServices" Core..=) Core.<$> pickupServices
-            ]
-        )
+  toJSON ShippingsettingsGetSupportedPickupServicesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kind" Core..=) Core.<$> kind,
+            ("pickupServices" Core..=) Core.<$> pickupServices
+          ]
+      )
 
 --
 -- /See:/ 'newShippingsettingsListResponse' smart constructor.
@@ -22640,7 +17031,6 @@ data ShippingsettingsListResponse = ShippingsettingsListResponse
     kind :: (Core.Maybe Core.Text),
     -- | The token for the retrieval of the next page of shipping settings.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- |
     resources :: (Core.Maybe [ShippingSettings])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -22754,7 +17144,8 @@ newShoppingAdsProgramStatusRegionStatus ::
   ShoppingAdsProgramStatusRegionStatus
 newShoppingAdsProgramStatusRegionStatus =
   ShoppingAdsProgramStatusRegionStatus
-    { disapprovalDate = Core.Nothing,
+    { disapprovalDate =
+        Core.Nothing,
       eligibilityStatus = Core.Nothing,
       onboardingIssues = Core.Nothing,
       regionCodes = Core.Nothing,
@@ -22765,10 +17156,7 @@ newShoppingAdsProgramStatusRegionStatus =
       reviewIssues = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ShoppingAdsProgramStatusRegionStatus
-  where
+instance Core.FromJSON ShoppingAdsProgramStatusRegionStatus where
   parseJSON =
     Core.withObject
       "ShoppingAdsProgramStatusRegionStatus"
@@ -22785,19 +17173,13 @@ instance
             Core.<*> (o Core..:? "reviewIssues")
       )
 
-instance
-  Core.ToJSON
-    ShoppingAdsProgramStatusRegionStatus
-  where
+instance Core.ToJSON ShoppingAdsProgramStatusRegionStatus where
   toJSON ShoppingAdsProgramStatusRegionStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("disapprovalDate" Core..=)
-              Core.<$> disapprovalDate,
-            ("eligibilityStatus" Core..=)
-              Core.<$> eligibilityStatus,
-            ("onboardingIssues" Core..=)
-              Core.<$> onboardingIssues,
+          [ ("disapprovalDate" Core..=) Core.<$> disapprovalDate,
+            ("eligibilityStatus" Core..=) Core.<$> eligibilityStatus,
+            ("onboardingIssues" Core..=) Core.<$> onboardingIssues,
             ("regionCodes" Core..=) Core.<$> regionCodes,
             ("reviewEligibilityStatus" Core..=)
               Core.<$> reviewEligibilityStatus,
@@ -22825,7 +17207,8 @@ newShoppingAdsProgramStatusReviewIneligibilityReasonDetails ::
   ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
 newShoppingAdsProgramStatusReviewIneligibilityReasonDetails =
   ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
-    { cooldownTime = Core.Nothing
+    { cooldownTime =
+        Core.Nothing
     }
 
 instance
@@ -22844,12 +17227,9 @@ instance
   Core.ToJSON
     ShoppingAdsProgramStatusReviewIneligibilityReasonDetails
   where
-  toJSON
-    ShoppingAdsProgramStatusReviewIneligibilityReasonDetails {..} =
-      Core.object
-        ( Core.catMaybes
-            [("cooldownTime" Core..=) Core.<$> cooldownTime]
-        )
+  toJSON ShoppingAdsProgramStatusReviewIneligibilityReasonDetails {..} =
+    Core.object
+      (Core.catMaybes [("cooldownTime" Core..=) Core.<$> cooldownTime])
 
 --
 -- /See:/ 'newTable' smart constructor.
@@ -22899,451 +17279,47 @@ instance Core.ToJSON Table where
           ]
       )
 
+-- | Block of text that may contain a tooltip with more information.
 --
--- /See:/ 'newTestOrder' smart constructor.
-data TestOrder = TestOrder
-  { -- | Overrides the predefined delivery details if provided.
-    deliveryDetails :: (Core.Maybe TestOrderDeliveryDetails),
-    -- | Whether the orderinvoices service should support this order.
-    enableOrderinvoices :: (Core.Maybe Core.Bool),
-    -- | Identifies what kind of resource this is. Value: the fixed string \"@content#testOrder@\"
-    kind :: (Core.Maybe Core.Text),
-    -- | Required. Line items that are ordered. At least one line item must be provided.
-    lineItems :: (Core.Maybe [TestOrderLineItem]),
-    -- | Restricted. Do not use.
-    notificationMode :: (Core.Maybe Core.Text),
-    -- | Overrides the predefined pickup details if provided.
-    pickupDetails :: (Core.Maybe TestOrderPickupDetails),
-    -- | Required. The billing address. Acceptable values are: - \"@dwight@\" - \"@jim@\" - \"@pam@\"
-    predefinedBillingAddress :: (Core.Maybe Core.Text),
-    -- | Required. Identifier of one of the predefined delivery addresses for the delivery. Acceptable values are: - \"@dwight@\" - \"@jim@\" - \"@pam@\"
-    predefinedDeliveryAddress :: (Core.Maybe Core.Text),
-    -- | Required. Email address of the customer. Acceptable values are: - \"@pog.dwight.schrute\@gmail.com@\" - \"@pog.jim.halpert\@gmail.com@\" - \"@penpog.pam.beesly\@gmail.comding@\"
-    predefinedEmail :: (Core.Maybe Core.Text),
-    -- | Identifier of one of the predefined pickup details. Required for orders containing line items with shipping type @pickup@. Acceptable values are: - \"@dwight@\" - \"@jim@\" - \"@pam@\"
-    predefinedPickupDetails :: (Core.Maybe Core.Text),
-    -- | Promotions associated with the order.
-    promotions :: (Core.Maybe [OrderPromotion]),
-    -- | Required. The price of shipping for all items. Shipping tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.
-    shippingCost :: (Core.Maybe Price),
-    -- | Required. The requested shipping option. Acceptable values are: - \"@economy@\" - \"@expedited@\" - \"@oneDay@\" - \"@sameDay@\" - \"@standard@\" - \"@twoDay@\"
-    shippingOption :: (Core.Maybe Core.Text)
+-- /See:/ 'newTextWithTooltip' smart constructor.
+data TextWithTooltip = TextWithTooltip
+  { -- | Value of the tooltip as a simple text.
+    simpleTooltipValue :: (Core.Maybe Core.Text),
+    -- | Value of the message as a simple text.
+    simpleValue :: (Core.Maybe Core.Text),
+    -- | The suggested type of an icon for tooltip, if a tooltip is present.
+    tooltipIconStyle :: (Core.Maybe TextWithTooltip_TooltipIconStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'TestOrder' with the minimum fields required to make a request.
-newTestOrder ::
-  TestOrder
-newTestOrder =
-  TestOrder
-    { deliveryDetails = Core.Nothing,
-      enableOrderinvoices = Core.Nothing,
-      kind = Core.Nothing,
-      lineItems = Core.Nothing,
-      notificationMode = Core.Nothing,
-      pickupDetails = Core.Nothing,
-      predefinedBillingAddress = Core.Nothing,
-      predefinedDeliveryAddress = Core.Nothing,
-      predefinedEmail = Core.Nothing,
-      predefinedPickupDetails = Core.Nothing,
-      promotions = Core.Nothing,
-      shippingCost = Core.Nothing,
-      shippingOption = Core.Nothing
+-- | Creates a value of 'TextWithTooltip' with the minimum fields required to make a request.
+newTextWithTooltip ::
+  TextWithTooltip
+newTextWithTooltip =
+  TextWithTooltip
+    { simpleTooltipValue = Core.Nothing,
+      simpleValue = Core.Nothing,
+      tooltipIconStyle = Core.Nothing
     }
 
-instance Core.FromJSON TestOrder where
+instance Core.FromJSON TextWithTooltip where
   parseJSON =
     Core.withObject
-      "TestOrder"
+      "TextWithTooltip"
       ( \o ->
-          TestOrder
-            Core.<$> (o Core..:? "deliveryDetails")
-            Core.<*> (o Core..:? "enableOrderinvoices")
-            Core.<*> (o Core..:? "kind")
-            Core.<*> (o Core..:? "lineItems")
-            Core.<*> (o Core..:? "notificationMode")
-            Core.<*> (o Core..:? "pickupDetails")
-            Core.<*> (o Core..:? "predefinedBillingAddress")
-            Core.<*> (o Core..:? "predefinedDeliveryAddress")
-            Core.<*> (o Core..:? "predefinedEmail")
-            Core.<*> (o Core..:? "predefinedPickupDetails")
-            Core.<*> (o Core..:? "promotions")
-            Core.<*> (o Core..:? "shippingCost")
-            Core.<*> (o Core..:? "shippingOption")
+          TextWithTooltip
+            Core.<$> (o Core..:? "simpleTooltipValue")
+            Core.<*> (o Core..:? "simpleValue")
+            Core.<*> (o Core..:? "tooltipIconStyle")
       )
 
-instance Core.ToJSON TestOrder where
-  toJSON TestOrder {..} =
+instance Core.ToJSON TextWithTooltip where
+  toJSON TextWithTooltip {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deliveryDetails" Core..=)
-              Core.<$> deliveryDetails,
-            ("enableOrderinvoices" Core..=)
-              Core.<$> enableOrderinvoices,
-            ("kind" Core..=) Core.<$> kind,
-            ("lineItems" Core..=) Core.<$> lineItems,
-            ("notificationMode" Core..=)
-              Core.<$> notificationMode,
-            ("pickupDetails" Core..=) Core.<$> pickupDetails,
-            ("predefinedBillingAddress" Core..=)
-              Core.<$> predefinedBillingAddress,
-            ("predefinedDeliveryAddress" Core..=)
-              Core.<$> predefinedDeliveryAddress,
-            ("predefinedEmail" Core..=) Core.<$> predefinedEmail,
-            ("predefinedPickupDetails" Core..=)
-              Core.<$> predefinedPickupDetails,
-            ("promotions" Core..=) Core.<$> promotions,
-            ("shippingCost" Core..=) Core.<$> shippingCost,
-            ("shippingOption" Core..=) Core.<$> shippingOption
-          ]
-      )
-
---
--- /See:/ 'newTestOrderAddress' smart constructor.
-data TestOrderAddress = TestOrderAddress
-  { -- | CLDR country code (for example, \"US\").
-    country :: (Core.Maybe Core.Text),
-    -- | Strings representing the lines of the printed label for mailing the order, for example: John Smith 1600 Amphitheatre Parkway Mountain View, CA, 94043 United States
-    fullAddress :: (Core.Maybe [Core.Text]),
-    -- | Whether the address is a post office box.
-    isPostOfficeBox :: (Core.Maybe Core.Bool),
-    -- | City, town or commune. May also include dependent localities or sublocalities (for example, neighborhoods or suburbs).
-    locality :: (Core.Maybe Core.Text),
-    -- | Postal Code or ZIP (for example, \"94043\").
-    postalCode :: (Core.Maybe Core.Text),
-    -- | Name of the recipient.
-    recipientName :: (Core.Maybe Core.Text),
-    -- | Top-level administrative subdivision of the country. For example, a state like California (\"CA\") or a province like Quebec (\"QC\").
-    region :: (Core.Maybe Core.Text),
-    -- | Street-level part of the address. Use @\\n@ to add a second line.
-    streetAddress :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderAddress' with the minimum fields required to make a request.
-newTestOrderAddress ::
-  TestOrderAddress
-newTestOrderAddress =
-  TestOrderAddress
-    { country = Core.Nothing,
-      fullAddress = Core.Nothing,
-      isPostOfficeBox = Core.Nothing,
-      locality = Core.Nothing,
-      postalCode = Core.Nothing,
-      recipientName = Core.Nothing,
-      region = Core.Nothing,
-      streetAddress = Core.Nothing
-    }
-
-instance Core.FromJSON TestOrderAddress where
-  parseJSON =
-    Core.withObject
-      "TestOrderAddress"
-      ( \o ->
-          TestOrderAddress
-            Core.<$> (o Core..:? "country")
-            Core.<*> (o Core..:? "fullAddress")
-            Core.<*> (o Core..:? "isPostOfficeBox")
-            Core.<*> (o Core..:? "locality")
-            Core.<*> (o Core..:? "postalCode")
-            Core.<*> (o Core..:? "recipientName")
-            Core.<*> (o Core..:? "region")
-            Core.<*> (o Core..:? "streetAddress")
-      )
-
-instance Core.ToJSON TestOrderAddress where
-  toJSON TestOrderAddress {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("country" Core..=) Core.<$> country,
-            ("fullAddress" Core..=) Core.<$> fullAddress,
-            ("isPostOfficeBox" Core..=) Core.<$> isPostOfficeBox,
-            ("locality" Core..=) Core.<$> locality,
-            ("postalCode" Core..=) Core.<$> postalCode,
-            ("recipientName" Core..=) Core.<$> recipientName,
-            ("region" Core..=) Core.<$> region,
-            ("streetAddress" Core..=) Core.<$> streetAddress
-          ]
-      )
-
---
--- /See:/ 'newTestOrderDeliveryDetails' smart constructor.
-data TestOrderDeliveryDetails = TestOrderDeliveryDetails
-  { -- | The delivery address
-    address :: (Core.Maybe TestOrderAddress),
-    -- | Whether the order is scheduled delivery order.
-    isScheduledDelivery :: (Core.Maybe Core.Bool),
-    -- | The phone number of the person receiving the delivery.
-    phoneNumber :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderDeliveryDetails' with the minimum fields required to make a request.
-newTestOrderDeliveryDetails ::
-  TestOrderDeliveryDetails
-newTestOrderDeliveryDetails =
-  TestOrderDeliveryDetails
-    { address = Core.Nothing,
-      isScheduledDelivery = Core.Nothing,
-      phoneNumber = Core.Nothing
-    }
-
-instance Core.FromJSON TestOrderDeliveryDetails where
-  parseJSON =
-    Core.withObject
-      "TestOrderDeliveryDetails"
-      ( \o ->
-          TestOrderDeliveryDetails
-            Core.<$> (o Core..:? "address")
-            Core.<*> (o Core..:? "isScheduledDelivery")
-            Core.<*> (o Core..:? "phoneNumber")
-      )
-
-instance Core.ToJSON TestOrderDeliveryDetails where
-  toJSON TestOrderDeliveryDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("address" Core..=) Core.<$> address,
-            ("isScheduledDelivery" Core..=)
-              Core.<$> isScheduledDelivery,
-            ("phoneNumber" Core..=) Core.<$> phoneNumber
-          ]
-      )
-
---
--- /See:/ 'newTestOrderLineItem' smart constructor.
-data TestOrderLineItem = TestOrderLineItem
-  { -- | Required. Product data from the time of the order placement.
-    product :: (Core.Maybe TestOrderLineItemProduct),
-    -- | Required. Number of items ordered.
-    quantityOrdered :: (Core.Maybe Core.Word32),
-    -- | Required. Details of the return policy for the line item.
-    returnInfo :: (Core.Maybe OrderLineItemReturnInfo),
-    -- | Required. Details of the requested shipping for the line item.
-    shippingDetails :: (Core.Maybe OrderLineItemShippingDetails)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
-newTestOrderLineItem ::
-  TestOrderLineItem
-newTestOrderLineItem =
-  TestOrderLineItem
-    { product = Core.Nothing,
-      quantityOrdered = Core.Nothing,
-      returnInfo = Core.Nothing,
-      shippingDetails = Core.Nothing
-    }
-
-instance Core.FromJSON TestOrderLineItem where
-  parseJSON =
-    Core.withObject
-      "TestOrderLineItem"
-      ( \o ->
-          TestOrderLineItem
-            Core.<$> (o Core..:? "product")
-            Core.<*> (o Core..:? "quantityOrdered")
-            Core.<*> (o Core..:? "returnInfo")
-            Core.<*> (o Core..:? "shippingDetails")
-      )
-
-instance Core.ToJSON TestOrderLineItem where
-  toJSON TestOrderLineItem {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("product" Core..=) Core.<$> product,
-            ("quantityOrdered" Core..=) Core.<$> quantityOrdered,
-            ("returnInfo" Core..=) Core.<$> returnInfo,
-            ("shippingDetails" Core..=)
-              Core.<$> shippingDetails
-          ]
-      )
-
---
--- /See:/ 'newTestOrderLineItemProduct' smart constructor.
-data TestOrderLineItemProduct = TestOrderLineItemProduct
-  { -- | Required. Brand of the item.
-    brand :: (Core.Maybe Core.Text),
-    -- | Required. Condition or state of the item. Acceptable values are: - \"@new@\"
-    condition :: (Core.Maybe Core.Text),
-    -- | Required. The two-letter ISO 639-1 language code for the item. Acceptable values are: - \"@en@\" - \"@fr@\"
-    contentLanguage :: (Core.Maybe Core.Text),
-    -- | Fees for the item. Optional.
-    fees :: (Core.Maybe [OrderLineItemProductFee]),
-    -- | Global Trade Item Number (GTIN) of the item. Optional.
-    gtin :: (Core.Maybe Core.Text),
-    -- | Required. URL of an image of the item.
-    imageLink :: (Core.Maybe Core.Text),
-    -- | Shared identifier for all variants of the same product. Optional.
-    itemGroupId :: (Core.Maybe Core.Text),
-    -- | Manufacturer Part Number (MPN) of the item. Optional.
-    mpn :: (Core.Maybe Core.Text),
-    -- | Required. An identifier of the item.
-    offerId :: (Core.Maybe Core.Text),
-    -- | Required. The price for the product. Tax is automatically calculated for orders where marketplace facilitator tax laws are applicable. Otherwise, tax settings from Merchant Center are applied.
-    price :: (Core.Maybe Price),
-    -- | Required. The CLDR territory code of the target country of the product.
-    targetCountry :: (Core.Maybe Core.Text),
-    -- | Required. The title of the product.
-    title :: (Core.Maybe Core.Text),
-    -- | Variant attributes for the item. Optional.
-    variantAttributes :: (Core.Maybe [OrderLineItemProductVariantAttribute])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderLineItemProduct' with the minimum fields required to make a request.
-newTestOrderLineItemProduct ::
-  TestOrderLineItemProduct
-newTestOrderLineItemProduct =
-  TestOrderLineItemProduct
-    { brand = Core.Nothing,
-      condition = Core.Nothing,
-      contentLanguage = Core.Nothing,
-      fees = Core.Nothing,
-      gtin = Core.Nothing,
-      imageLink = Core.Nothing,
-      itemGroupId = Core.Nothing,
-      mpn = Core.Nothing,
-      offerId = Core.Nothing,
-      price = Core.Nothing,
-      targetCountry = Core.Nothing,
-      title = Core.Nothing,
-      variantAttributes = Core.Nothing
-    }
-
-instance Core.FromJSON TestOrderLineItemProduct where
-  parseJSON =
-    Core.withObject
-      "TestOrderLineItemProduct"
-      ( \o ->
-          TestOrderLineItemProduct
-            Core.<$> (o Core..:? "brand")
-            Core.<*> (o Core..:? "condition")
-            Core.<*> (o Core..:? "contentLanguage")
-            Core.<*> (o Core..:? "fees")
-            Core.<*> (o Core..:? "gtin")
-            Core.<*> (o Core..:? "imageLink")
-            Core.<*> (o Core..:? "itemGroupId")
-            Core.<*> (o Core..:? "mpn")
-            Core.<*> (o Core..:? "offerId")
-            Core.<*> (o Core..:? "price")
-            Core.<*> (o Core..:? "targetCountry")
-            Core.<*> (o Core..:? "title")
-            Core.<*> (o Core..:? "variantAttributes")
-      )
-
-instance Core.ToJSON TestOrderLineItemProduct where
-  toJSON TestOrderLineItemProduct {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("brand" Core..=) Core.<$> brand,
-            ("condition" Core..=) Core.<$> condition,
-            ("contentLanguage" Core..=) Core.<$> contentLanguage,
-            ("fees" Core..=) Core.<$> fees,
-            ("gtin" Core..=) Core.<$> gtin,
-            ("imageLink" Core..=) Core.<$> imageLink,
-            ("itemGroupId" Core..=) Core.<$> itemGroupId,
-            ("mpn" Core..=) Core.<$> mpn,
-            ("offerId" Core..=) Core.<$> offerId,
-            ("price" Core..=) Core.<$> price,
-            ("targetCountry" Core..=) Core.<$> targetCountry,
-            ("title" Core..=) Core.<$> title,
-            ("variantAttributes" Core..=)
-              Core.<$> variantAttributes
-          ]
-      )
-
---
--- /See:/ 'newTestOrderPickupDetails' smart constructor.
-data TestOrderPickupDetails = TestOrderPickupDetails
-  { -- | Required. Code of the location defined by provider or merchant.
-    locationCode :: (Core.Maybe Core.Text),
-    -- | Required. Pickup location address.
-    pickupLocationAddress :: (Core.Maybe TestOrderAddress),
-    -- | Pickup location type. Acceptable values are: - \"@locker@\" - \"@store@\" - \"@curbside@\"
-    pickupLocationType :: (Core.Maybe Core.Text),
-    -- | Required. all pickup persons set by users.
-    pickupPersons :: (Core.Maybe [TestOrderPickupDetailsPickupPerson])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderPickupDetails' with the minimum fields required to make a request.
-newTestOrderPickupDetails ::
-  TestOrderPickupDetails
-newTestOrderPickupDetails =
-  TestOrderPickupDetails
-    { locationCode = Core.Nothing,
-      pickupLocationAddress = Core.Nothing,
-      pickupLocationType = Core.Nothing,
-      pickupPersons = Core.Nothing
-    }
-
-instance Core.FromJSON TestOrderPickupDetails where
-  parseJSON =
-    Core.withObject
-      "TestOrderPickupDetails"
-      ( \o ->
-          TestOrderPickupDetails
-            Core.<$> (o Core..:? "locationCode")
-            Core.<*> (o Core..:? "pickupLocationAddress")
-            Core.<*> (o Core..:? "pickupLocationType")
-            Core.<*> (o Core..:? "pickupPersons")
-      )
-
-instance Core.ToJSON TestOrderPickupDetails where
-  toJSON TestOrderPickupDetails {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("locationCode" Core..=) Core.<$> locationCode,
-            ("pickupLocationAddress" Core..=)
-              Core.<$> pickupLocationAddress,
-            ("pickupLocationType" Core..=)
-              Core.<$> pickupLocationType,
-            ("pickupPersons" Core..=) Core.<$> pickupPersons
-          ]
-      )
-
---
--- /See:/ 'newTestOrderPickupDetailsPickupPerson' smart constructor.
-data TestOrderPickupDetailsPickupPerson = TestOrderPickupDetailsPickupPerson
-  { -- | Required. Full name of the pickup person.
-    name :: (Core.Maybe Core.Text),
-    -- | Required. The phone number of the person picking up the items.
-    phoneNumber :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'TestOrderPickupDetailsPickupPerson' with the minimum fields required to make a request.
-newTestOrderPickupDetailsPickupPerson ::
-  TestOrderPickupDetailsPickupPerson
-newTestOrderPickupDetailsPickupPerson =
-  TestOrderPickupDetailsPickupPerson
-    { name = Core.Nothing,
-      phoneNumber = Core.Nothing
-    }
-
-instance
-  Core.FromJSON
-    TestOrderPickupDetailsPickupPerson
-  where
-  parseJSON =
-    Core.withObject
-      "TestOrderPickupDetailsPickupPerson"
-      ( \o ->
-          TestOrderPickupDetailsPickupPerson
-            Core.<$> (o Core..:? "name")
-            Core.<*> (o Core..:? "phoneNumber")
-      )
-
-instance
-  Core.ToJSON
-    TestOrderPickupDetailsPickupPerson
-  where
-  toJSON TestOrderPickupDetailsPickupPerson {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("phoneNumber" Core..=) Core.<$> phoneNumber
+          [ ("simpleTooltipValue" Core..=) Core.<$> simpleTooltipValue,
+            ("simpleValue" Core..=) Core.<$> simpleValue,
+            ("tooltipIconStyle" Core..=) Core.<$> tooltipIconStyle
           ]
       )
 
@@ -23361,7 +17337,8 @@ data TimePeriod = TimePeriod
 -- | Creates a value of 'TimePeriod' with the minimum fields required to make a request.
 newTimePeriod ::
   TimePeriod
-newTimePeriod = TimePeriod {endTime = Core.Nothing, startTime = Core.Nothing}
+newTimePeriod =
+  TimePeriod {endTime = Core.Nothing, startTime = Core.Nothing}
 
 instance Core.FromJSON TimePeriod where
   parseJSON =
@@ -23386,9 +17363,9 @@ instance Core.ToJSON TimePeriod where
 --
 -- /See:/ 'newTimeZone' smart constructor.
 data TimeZone = TimeZone
-  { -- | IANA Time Zone Database time zone, e.g. \"America\/New_York\".
+  { -- | IANA Time Zone Database time zone. For example \"America\/New_York\".
     id :: (Core.Maybe Core.Text),
-    -- | Optional. IANA Time Zone Database version number, e.g. \"2019a\".
+    -- | Optional. IANA Time Zone Database version number. For example \"2019a\".
     version :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -23404,15 +17381,93 @@ instance Core.FromJSON TimeZone where
       "TimeZone"
       ( \o ->
           TimeZone
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON TimeZone where
   toJSON TimeZone {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("version" Core..=) Core.<$> version
+          [("id" Core..=) Core.<$> id, ("version" Core..=) Core.<$> version]
+      )
+
+-- | Topic trends fields requested by the merchant in the query. Field values are only set if the merchant queries @TopicTrendsView@. Forecast data can be queried up to 13 weeks by passing a future date in the @date@ field. Historical data is measured daily, and forecasted data is projected weekly. All data points are normalized based on the highest data points returned in the response. If you make separate queries with different date ranges, you might see different values for the same date in each response. The recommended way to get a trend score of a topic is @last7_days_search_interest \/ last{$day}_days_search_interest - 1@. You can view trends for up to eight topics at a time.
+--
+-- /See:/ 'newTopicTrends' smart constructor.
+data TopicTrends = TopicTrends
+  { -- | Country trends are calculated for. Must be a two-letter country code (ISO 3166-1-alpha-2 code), for example, @“US”@.
+    customerCountryCode :: (Core.Maybe Core.Text),
+    -- | Date the trend score was retrieved.
+    date :: (Core.Maybe Date),
+    -- | Search interest in the last 120 days, with the same normalization as search_interest. This field is only present for a past date.
+    last120DaysSearchInterest :: (Core.Maybe Core.Double),
+    -- | Search interest in the last 30 days, with the same normalization as search_interest. This field is only present for a past date.
+    last30DaysSearchInterest :: (Core.Maybe Core.Double),
+    -- | Search interest in the last 7 days, with the same normalization as search_interest. This field is only present for a past date.
+    last7DaysSearchInterest :: (Core.Maybe Core.Double),
+    -- | Search interest in the last 90 days, with the same normalization as search_interest. This field is only present for a past date.
+    last90DaysSearchInterest :: (Core.Maybe Core.Double),
+    -- | Estimated search interest in the next 7 days, with the same normalization as search_interest. This field is only present for a future date.
+    next7DaysSearchInterest :: (Core.Maybe Core.Double),
+    -- | Daily search interest, normalized to the time and country to make comparisons easier, with 100 representing peak popularity (from 0 to 100) for the requested time period and location.
+    searchInterest :: (Core.Maybe Core.Double),
+    -- | Google-provided topic trends are calculated for. Only top eight topics are returned. Topic is what shoppers are searching for on Google, grouped by the same concept.
+    topic :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TopicTrends' with the minimum fields required to make a request.
+newTopicTrends ::
+  TopicTrends
+newTopicTrends =
+  TopicTrends
+    { customerCountryCode = Core.Nothing,
+      date = Core.Nothing,
+      last120DaysSearchInterest = Core.Nothing,
+      last30DaysSearchInterest = Core.Nothing,
+      last7DaysSearchInterest = Core.Nothing,
+      last90DaysSearchInterest = Core.Nothing,
+      next7DaysSearchInterest = Core.Nothing,
+      searchInterest = Core.Nothing,
+      topic = Core.Nothing
+    }
+
+instance Core.FromJSON TopicTrends where
+  parseJSON =
+    Core.withObject
+      "TopicTrends"
+      ( \o ->
+          TopicTrends
+            Core.<$> (o Core..:? "customerCountryCode")
+            Core.<*> (o Core..:? "date")
+            Core.<*> (o Core..:? "last120DaysSearchInterest")
+            Core.<*> (o Core..:? "last30DaysSearchInterest")
+            Core.<*> (o Core..:? "last7DaysSearchInterest")
+            Core.<*> (o Core..:? "last90DaysSearchInterest")
+            Core.<*> (o Core..:? "next7DaysSearchInterest")
+            Core.<*> (o Core..:? "searchInterest")
+            Core.<*> (o Core..:? "topic")
+      )
+
+instance Core.ToJSON TopicTrends where
+  toJSON TopicTrends {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("customerCountryCode" Core..=) Core.<$> customerCountryCode,
+            ("date" Core..=) Core.<$> date,
+            ("last120DaysSearchInterest" Core..=)
+              Core.<$> last120DaysSearchInterest,
+            ("last30DaysSearchInterest" Core..=)
+              Core.<$> last30DaysSearchInterest,
+            ("last7DaysSearchInterest" Core..=)
+              Core.<$> last7DaysSearchInterest,
+            ("last90DaysSearchInterest" Core..=)
+              Core.<$> last90DaysSearchInterest,
+            ("next7DaysSearchInterest" Core..=)
+              Core.<$> next7DaysSearchInterest,
+            ("searchInterest" Core..=) Core.<$> searchInterest,
+            ("topic" Core..=) Core.<$> topic
           ]
       )
 
@@ -23421,7 +17476,6 @@ instance Core.ToJSON TimeZone where
 data TransitTable = TransitTable
   { -- | A list of postal group names. The last value can be @\"all other locations\"@. Example: @[\"zone 1\", \"zone 2\", \"all other locations\"]@. The referred postal code groups must match the delivery country of the service.
     postalCodeGroupNames :: (Core.Maybe [Core.Text]),
-    -- |
     rows :: (Core.Maybe [TransitTableTransitTimeRow]),
     -- | A list of transit time labels. The last value can be @\"all other labels\"@. Example: @[\"food\", \"electronics\", \"all other labels\"]@.
     transitTimeLabels :: (Core.Maybe [Core.Text])
@@ -23453,19 +17507,16 @@ instance Core.ToJSON TransitTable where
   toJSON TransitTable {..} =
     Core.object
       ( Core.catMaybes
-          [ ("postalCodeGroupNames" Core..=)
-              Core.<$> postalCodeGroupNames,
+          [ ("postalCodeGroupNames" Core..=) Core.<$> postalCodeGroupNames,
             ("rows" Core..=) Core.<$> rows,
-            ("transitTimeLabels" Core..=)
-              Core.<$> transitTimeLabels
+            ("transitTimeLabels" Core..=) Core.<$> transitTimeLabels
           ]
       )
 
 --
 -- /See:/ 'newTransitTableTransitTimeRow' smart constructor.
 newtype TransitTableTransitTimeRow = TransitTableTransitTimeRow
-  { -- |
-    values :: (Core.Maybe [TransitTableTransitTimeRowTransitTimeValue])
+  { values :: (Core.Maybe [TransitTableTransitTimeRowTransitTimeValue])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -23479,15 +17530,11 @@ instance Core.FromJSON TransitTableTransitTimeRow where
   parseJSON =
     Core.withObject
       "TransitTableTransitTimeRow"
-      ( \o ->
-          TransitTableTransitTimeRow
-            Core.<$> (o Core..:? "values")
-      )
+      (\o -> TransitTableTransitTimeRow Core.<$> (o Core..:? "values"))
 
 instance Core.ToJSON TransitTableTransitTimeRow where
   toJSON TransitTableTransitTimeRow {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 --
 -- /See:/ 'newTransitTableTransitTimeRowTransitTimeValue' smart constructor.
@@ -23504,14 +17551,12 @@ newTransitTableTransitTimeRowTransitTimeValue ::
   TransitTableTransitTimeRowTransitTimeValue
 newTransitTableTransitTimeRowTransitTimeValue =
   TransitTableTransitTimeRowTransitTimeValue
-    { maxTransitTimeInDays = Core.Nothing,
+    { maxTransitTimeInDays =
+        Core.Nothing,
       minTransitTimeInDays = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    TransitTableTransitTimeRowTransitTimeValue
-  where
+instance Core.FromJSON TransitTableTransitTimeRowTransitTimeValue where
   parseJSON =
     Core.withObject
       "TransitTableTransitTimeRowTransitTimeValue"
@@ -23521,19 +17566,79 @@ instance
             Core.<*> (o Core..:? "minTransitTimeInDays")
       )
 
-instance
-  Core.ToJSON
-    TransitTableTransitTimeRowTransitTimeValue
-  where
+instance Core.ToJSON TransitTableTransitTimeRowTransitTimeValue where
   toJSON TransitTableTransitTimeRowTransitTimeValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("maxTransitTimeInDays" Core..=)
-              Core.<$> maxTransitTimeInDays,
-            ("minTransitTimeInDays" Core..=)
-              Core.<$> minTransitTimeInDays
+          [ ("maxTransitTimeInDays" Core..=) Core.<$> maxTransitTimeInDays,
+            ("minTransitTimeInDays" Core..=) Core.<$> minTransitTimeInDays
           ]
       )
+
+-- | The payload for the triggered action.
+--
+-- /See:/ 'newTriggerActionPayload' smart constructor.
+data TriggerActionPayload = TriggerActionPayload
+  { -- | Required. The context from the selected action. The value is obtained from rendered issues and needs to be sent back to identify the action that is being triggered.
+    actionContext :: (Core.Maybe Core.Text),
+    -- | Required. Input provided by the merchant.
+    actionInput :: (Core.Maybe ActionInput)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TriggerActionPayload' with the minimum fields required to make a request.
+newTriggerActionPayload ::
+  TriggerActionPayload
+newTriggerActionPayload =
+  TriggerActionPayload
+    { actionContext = Core.Nothing,
+      actionInput = Core.Nothing
+    }
+
+instance Core.FromJSON TriggerActionPayload where
+  parseJSON =
+    Core.withObject
+      "TriggerActionPayload"
+      ( \o ->
+          TriggerActionPayload
+            Core.<$> (o Core..:? "actionContext")
+            Core.<*> (o Core..:? "actionInput")
+      )
+
+instance Core.ToJSON TriggerActionPayload where
+  toJSON TriggerActionPayload {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actionContext" Core..=) Core.<$> actionContext,
+            ("actionInput" Core..=) Core.<$> actionInput
+          ]
+      )
+
+-- | Response informing about the started action.
+--
+-- /See:/ 'newTriggerActionResponse' smart constructor.
+newtype TriggerActionResponse = TriggerActionResponse
+  { -- | The message for merchant.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TriggerActionResponse' with the minimum fields required to make a request.
+newTriggerActionResponse ::
+  TriggerActionResponse
+newTriggerActionResponse =
+  TriggerActionResponse {message = Core.Nothing}
+
+instance Core.FromJSON TriggerActionResponse where
+  parseJSON =
+    Core.withObject
+      "TriggerActionResponse"
+      (\o -> TriggerActionResponse Core.<$> (o Core..:? "message"))
+
+instance Core.ToJSON TriggerActionResponse where
+  toJSON TriggerActionResponse {..} =
+    Core.object
+      (Core.catMaybes [("message" Core..=) Core.<$> message])
 
 -- | Request message for the UndeleteConversionSource method.
 --
@@ -23544,12 +17649,10 @@ data UndeleteConversionSourceRequest = UndeleteConversionSourceRequest
 -- | Creates a value of 'UndeleteConversionSourceRequest' with the minimum fields required to make a request.
 newUndeleteConversionSourceRequest ::
   UndeleteConversionSourceRequest
-newUndeleteConversionSourceRequest = UndeleteConversionSourceRequest
+newUndeleteConversionSourceRequest =
+  UndeleteConversionSourceRequest
 
-instance
-  Core.FromJSON
-    UndeleteConversionSourceRequest
-  where
+instance Core.FromJSON UndeleteConversionSourceRequest where
   parseJSON =
     Core.withObject
       "UndeleteConversionSourceRequest"
@@ -23558,129 +17661,42 @@ instance
 instance Core.ToJSON UndeleteConversionSourceRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | Specifications related to the @Checkout@ URL. The @UriTemplate@ is of the form @https:\/\/www.mystore.com\/checkout?item_id={id}@ where @{id}@ will be automatically replaced with data from the merchant account with this attribute <https://developers.google.com/shopping-content/reference/rest/v2.1/products#Product.FIELDS.offer_id offer_id>
 --
--- /See:/ 'newUnitInvoice' smart constructor.
-data UnitInvoice = UnitInvoice
-  { -- | Additional charges for a unit, for example, shipping costs.
-    additionalCharges :: (Core.Maybe [UnitInvoiceAdditionalCharge]),
-    -- | [required] Pre-tax or post-tax price of one unit depending on the locality of the order. /Note:/ Invoicing works on a per unit basis. The @unitPrice@ is the price of a single unit, and will be multiplied by the number of entries in @shipmentUnitId@.
-    unitPrice :: (Core.Maybe Price),
-    -- | Tax amounts to apply to the unit price.
-    unitPriceTaxes :: (Core.Maybe [UnitInvoiceTaxLine])
+-- /See:/ 'newUrlSettings' smart constructor.
+data UrlSettings = UrlSettings
+  { -- | URL template when the placeholders are expanded will redirect the buyer to the cart page on the merchant website with the selected item in cart.
+    cartUriTemplate :: (Core.Maybe Core.Text),
+    -- | URL template when the placeholders are expanded will redirect the buyer to the merchant checkout page with the item in the cart.
+    checkoutUriTemplate :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
--- | Creates a value of 'UnitInvoice' with the minimum fields required to make a request.
-newUnitInvoice ::
-  UnitInvoice
-newUnitInvoice =
-  UnitInvoice
-    { additionalCharges = Core.Nothing,
-      unitPrice = Core.Nothing,
-      unitPriceTaxes = Core.Nothing
+-- | Creates a value of 'UrlSettings' with the minimum fields required to make a request.
+newUrlSettings ::
+  UrlSettings
+newUrlSettings =
+  UrlSettings
+    { cartUriTemplate = Core.Nothing,
+      checkoutUriTemplate = Core.Nothing
     }
 
-instance Core.FromJSON UnitInvoice where
+instance Core.FromJSON UrlSettings where
   parseJSON =
     Core.withObject
-      "UnitInvoice"
+      "UrlSettings"
       ( \o ->
-          UnitInvoice
-            Core.<$> (o Core..:? "additionalCharges")
-            Core.<*> (o Core..:? "unitPrice")
-            Core.<*> (o Core..:? "unitPriceTaxes")
+          UrlSettings
+            Core.<$> (o Core..:? "cartUriTemplate")
+            Core.<*> (o Core..:? "checkoutUriTemplate")
       )
 
-instance Core.ToJSON UnitInvoice where
-  toJSON UnitInvoice {..} =
+instance Core.ToJSON UrlSettings where
+  toJSON UrlSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalCharges" Core..=)
-              Core.<$> additionalCharges,
-            ("unitPrice" Core..=) Core.<$> unitPrice,
-            ("unitPriceTaxes" Core..=) Core.<$> unitPriceTaxes
-          ]
-      )
-
---
--- /See:/ 'newUnitInvoiceAdditionalCharge' smart constructor.
-data UnitInvoiceAdditionalCharge = UnitInvoiceAdditionalCharge
-  { -- | [required] Amount of the additional charge per unit. /Note:/ Invoicing works on a per unit bases. The @additionalChargeAmount@ is the amount charged per unit, and will be multiplied by the number of entries in @shipmentUnitID@.
-    additionalChargeAmount :: (Core.Maybe Amount),
-    -- | [required] Type of the additional charge. Acceptable values are: - \"@shipping@\"
-    type' :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'UnitInvoiceAdditionalCharge' with the minimum fields required to make a request.
-newUnitInvoiceAdditionalCharge ::
-  UnitInvoiceAdditionalCharge
-newUnitInvoiceAdditionalCharge =
-  UnitInvoiceAdditionalCharge
-    { additionalChargeAmount = Core.Nothing,
-      type' = Core.Nothing
-    }
-
-instance Core.FromJSON UnitInvoiceAdditionalCharge where
-  parseJSON =
-    Core.withObject
-      "UnitInvoiceAdditionalCharge"
-      ( \o ->
-          UnitInvoiceAdditionalCharge
-            Core.<$> (o Core..:? "additionalChargeAmount")
-            Core.<*> (o Core..:? "type")
-      )
-
-instance Core.ToJSON UnitInvoiceAdditionalCharge where
-  toJSON UnitInvoiceAdditionalCharge {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("additionalChargeAmount" Core..=)
-              Core.<$> additionalChargeAmount,
-            ("type" Core..=) Core.<$> type'
-          ]
-      )
-
---
--- /See:/ 'newUnitInvoiceTaxLine' smart constructor.
-data UnitInvoiceTaxLine = UnitInvoiceTaxLine
-  { -- | [required] Tax amount for the tax type.
-    taxAmount :: (Core.Maybe Price),
-    -- | Optional name of the tax type. This should only be provided if @taxType@ is @otherFeeTax@.
-    taxName :: (Core.Maybe Core.Text),
-    -- | [required] Type of the tax. Acceptable values are: - \"@otherFee@\" - \"@otherFeeTax@\" - \"@sales@\"
-    taxType :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'UnitInvoiceTaxLine' with the minimum fields required to make a request.
-newUnitInvoiceTaxLine ::
-  UnitInvoiceTaxLine
-newUnitInvoiceTaxLine =
-  UnitInvoiceTaxLine
-    { taxAmount = Core.Nothing,
-      taxName = Core.Nothing,
-      taxType = Core.Nothing
-    }
-
-instance Core.FromJSON UnitInvoiceTaxLine where
-  parseJSON =
-    Core.withObject
-      "UnitInvoiceTaxLine"
-      ( \o ->
-          UnitInvoiceTaxLine
-            Core.<$> (o Core..:? "taxAmount")
-            Core.<*> (o Core..:? "taxName")
-            Core.<*> (o Core..:? "taxType")
-      )
-
-instance Core.ToJSON UnitInvoiceTaxLine where
-  toJSON UnitInvoiceTaxLine {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("taxAmount" Core..=) Core.<$> taxAmount,
-            ("taxName" Core..=) Core.<$> taxName,
-            ("taxType" Core..=) Core.<$> taxType
+          [ ("cartUriTemplate" Core..=) Core.<$> cartUriTemplate,
+            ("checkoutUriTemplate" Core..=) Core.<$> checkoutUriTemplate
           ]
       )
 
@@ -23730,8 +17746,7 @@ instance Core.ToJSON Value where
   toJSON Value {..} =
     Core.object
       ( Core.catMaybes
-          [ ("carrierRateName" Core..=)
-              Core.<$> carrierRateName,
+          [ ("carrierRateName" Core..=) Core.<$> carrierRateName,
             ("flatRate" Core..=) Core.<$> flatRate,
             ("noShipping" Core..=) Core.<$> noShipping,
             ("pricePercentage" Core..=) Core.<$> pricePercentage,
@@ -23779,8 +17794,7 @@ instance Core.ToJSON VerifyPhoneNumberRequest where
       ( Core.catMaybes
           [ ("phoneVerificationMethod" Core..=)
               Core.<$> phoneVerificationMethod,
-            ("verificationCode" Core..=)
-              Core.<$> verificationCode,
+            ("verificationCode" Core..=) Core.<$> verificationCode,
             ("verificationId" Core..=) Core.<$> verificationId
           ]
       )
@@ -23813,9 +17827,7 @@ instance Core.ToJSON VerifyPhoneNumberResponse where
   toJSON VerifyPhoneNumberResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("verifiedPhoneNumber" Core..=)
-              Core.<$> verifiedPhoneNumber
-          ]
+          [("verifiedPhoneNumber" Core..=) Core.<$> verifiedPhoneNumber]
       )
 
 -- | A fulfillment warehouse, which stores and handles inventory.
@@ -23855,9 +17867,7 @@ instance Core.FromJSON Warehouse where
           Warehouse
             Core.<$> (o Core..:? "businessDayConfig")
             Core.<*> (o Core..:? "cutoffTime")
-            Core.<*> ( o Core..:? "handlingDays"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "handlingDays" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "shippingAddress")
       )
@@ -23866,14 +17876,11 @@ instance Core.ToJSON Warehouse where
   toJSON Warehouse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("businessDayConfig" Core..=)
-              Core.<$> businessDayConfig,
+          [ ("businessDayConfig" Core..=) Core.<$> businessDayConfig,
             ("cutoffTime" Core..=) Core.<$> cutoffTime,
-            ("handlingDays" Core..=) Core.. Core.AsText
-              Core.<$> handlingDays,
+            ("handlingDays" Core..=) Core.. Core.AsText Core.<$> handlingDays,
             ("name" Core..=) Core.<$> name,
-            ("shippingAddress" Core..=)
-              Core.<$> shippingAddress
+            ("shippingAddress" Core..=) Core.<$> shippingAddress
           ]
       )
 
@@ -23940,10 +17947,8 @@ instance Core.ToJSON WarehouseBasedDeliveryTime where
               Core.<$> originAdministrativeArea,
             ("originCity" Core..=) Core.<$> originCity,
             ("originCountry" Core..=) Core.<$> originCountry,
-            ("originPostalCode" Core..=)
-              Core.<$> originPostalCode,
-            ("originStreetAddress" Core..=)
-              Core.<$> originStreetAddress,
+            ("originPostalCode" Core..=) Core.<$> originPostalCode,
+            ("originStreetAddress" Core..=) Core.<$> originStreetAddress,
             ("warehouseName" Core..=) Core.<$> warehouseName
           ]
       )
@@ -23970,7 +17975,8 @@ instance Core.FromJSON WarehouseCutoffTime where
       "WarehouseCutoffTime"
       ( \o ->
           WarehouseCutoffTime
-            Core.<$> (o Core..:? "hour") Core.<*> (o Core..:? "minute")
+            Core.<$> (o Core..:? "hour")
+            Core.<*> (o Core..:? "minute")
       )
 
 instance Core.ToJSON WarehouseCutoffTime where
@@ -24002,15 +18008,12 @@ instance Core.FromJSON Weight where
     Core.withObject
       "Weight"
       ( \o ->
-          Weight
-            Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
+          Weight Core.<$> (o Core..:? "unit") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Weight where
   toJSON Weight {..} =
     Core.object
       ( Core.catMaybes
-          [ ("unit" Core..=) Core.<$> unit,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("unit" Core..=) Core.<$> unit, ("value" Core..=) Core.<$> value]
       )

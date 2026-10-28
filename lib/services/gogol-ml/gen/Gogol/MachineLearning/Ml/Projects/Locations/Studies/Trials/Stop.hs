@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Stop
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.MachineLearning.Ml.Projects.Locations.Studies.Trials.Stop
 where
 
 import Gogol.MachineLearning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @ml.projects.locations.studies.trials.stop@ method which the
 -- 'MlProjectsLocationsStudiesTrialsStop' request conforms to.
@@ -53,9 +51,7 @@ type MlProjectsLocationsStudiesTrialsStopResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudMlV1__StopTrialRequest
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudMlV1__StopTrialRequest
     Core.:> Core.Post '[Core.JSON] GoogleCloudMlV1__Trial
 
 -- | Stops a trial.
@@ -97,33 +93,28 @@ newMlProjectsLocationsStudiesTrialsStop name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    MlProjectsLocationsStudiesTrialsStop
-  where
+instance Core.GoogleRequest MlProjectsLocationsStudiesTrialsStop where
   type
     Rs MlProjectsLocationsStudiesTrialsStop =
       GoogleCloudMlV1__Trial
   type
     Scopes MlProjectsLocationsStudiesTrialsStop =
       '[CloudPlatform'FullControl]
-  requestClient
-    MlProjectsLocationsStudiesTrialsStop {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        machineLearningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  MlProjectsLocationsStudiesTrialsStopResource
-            )
-            Core.mempty
+  requestClient MlProjectsLocationsStudiesTrialsStop {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      machineLearningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy MlProjectsLocationsStudiesTrialsStopResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Networks.UpdatePeering
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Networks.UpdatePeering
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networks.updatePeering@ method which the
 -- 'ComputeNetworksUpdatePeering' request conforms to.
@@ -60,9 +58,7 @@ type ComputeNetworksUpdatePeeringResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              NetworksUpdatePeeringRequest
+    Core.:> Core.ReqBody '[Core.JSON] NetworksUpdatePeeringRequest
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Updates the specified network peering with the data included in the request. You can only modify the NetworkPeering.export/custom/routes field and the NetworkPeering.import/custom/routes field.
@@ -112,10 +108,7 @@ newComputeNetworksUpdatePeering network payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeNetworksUpdatePeering
-  where
+instance Core.GoogleRequest ComputeNetworksUpdatePeering where
   type Rs ComputeNetworksUpdatePeering = Operation
   type
     Scopes ComputeNetworksUpdatePeering =
@@ -136,7 +129,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeNetworksUpdatePeeringResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeNetworksUpdatePeeringResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Orders.Refund
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Refunds a user\'s subscription or in-app purchase order. Orders older than 1 year cannot be refunded.
+-- Refunds a user\'s subscription or in-app purchase order. Orders older than 3 years cannot be refunded.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.orders.refund@.
 module Gogol.AndroidPublisher.Orders.Refund
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Orders.Refund
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.orders.refund@ method which the
 -- 'AndroidPublisherOrdersRefund' request conforms to.
@@ -60,7 +58,7 @@ type AndroidPublisherOrdersRefundResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Refunds a user\'s subscription or in-app purchase order. Orders older than 1 year cannot be refunded.
+-- | Refunds a user\'s subscription or in-app purchase order. Orders older than 3 years cannot be refunded.
 --
 -- /See:/ 'newAndroidPublisherOrdersRefund' smart constructor.
 data AndroidPublisherOrdersRefund = AndroidPublisherOrdersRefund
@@ -102,10 +100,7 @@ newAndroidPublisherOrdersRefund orderId packageName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherOrdersRefund
-  where
+instance Core.GoogleRequest AndroidPublisherOrdersRefund where
   type Rs AndroidPublisherOrdersRefund = ()
   type
     Scopes AndroidPublisherOrdersRefund =
@@ -125,7 +120,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidPublisherOrdersRefundResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidPublisherOrdersRefundResource)
           Core.mempty

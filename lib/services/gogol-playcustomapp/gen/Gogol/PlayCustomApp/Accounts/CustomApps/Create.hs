@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayCustomApp.Accounts.CustomApps.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.PlayCustomApp.Accounts.CustomApps.Create
 where
 
 import Gogol.PlayCustomApp.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @playcustomapp.accounts.customApps.create@ method which the
 -- 'PlayCustomAppAccountsCustomAppsCreate' request conforms to.
@@ -59,20 +57,20 @@ type PlayCustomAppAccountsCustomAppsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] CustomApp
     Core.:> Core.Post '[Core.JSON] CustomApp
     Core.:<|> "upload"
-      Core.:> "playcustomapp"
-      Core.:> "v1"
-      Core.:> "accounts"
-      Core.:> Core.Capture "account" Core.Int64
-      Core.:> "customApps"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] CustomApp
-      Core.:> Core.Post '[Core.JSON] CustomApp
+    Core.:> "playcustomapp"
+    Core.:> "v1"
+    Core.:> "accounts"
+    Core.:> Core.Capture "account" Core.Int64
+    Core.:> "customApps"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] CustomApp
+    Core.:> Core.Post '[Core.JSON] CustomApp
 
 -- | Creates a new custom app.
 --
@@ -113,60 +111,43 @@ newPlayCustomAppAccountsCustomAppsCreate account payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PlayCustomAppAccountsCustomAppsCreate
-  where
-  type
-    Rs PlayCustomAppAccountsCustomAppsCreate =
-      CustomApp
+instance Core.GoogleRequest PlayCustomAppAccountsCustomAppsCreate where
+  type Rs PlayCustomAppAccountsCustomAppsCreate = CustomApp
   type
     Scopes PlayCustomAppAccountsCustomAppsCreate =
       '[Androidpublisher'FullControl]
-  requestClient
-    PlayCustomAppAccountsCustomAppsCreate {..} =
-      go
-        account
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        playCustomAppService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  PlayCustomAppAccountsCustomAppsCreateResource
-            )
-            Core.mempty
+  requestClient PlayCustomAppAccountsCustomAppsCreate {..} =
+    go
+      account
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      playCustomAppService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy PlayCustomAppAccountsCustomAppsCreateResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaUpload
-        PlayCustomAppAccountsCustomAppsCreate
-    )
+    (Core.MediaUpload PlayCustomAppAccountsCustomAppsCreate)
   where
   type
-    Rs
-      ( Core.MediaUpload
-          PlayCustomAppAccountsCustomAppsCreate
-      ) =
+    Rs (Core.MediaUpload PlayCustomAppAccountsCustomAppsCreate) =
       CustomApp
   type
     Scopes
-      ( Core.MediaUpload
-          PlayCustomAppAccountsCustomAppsCreate
-      ) =
+      (Core.MediaUpload PlayCustomAppAccountsCustomAppsCreate) =
       Core.Scopes PlayCustomAppAccountsCustomAppsCreate
   requestClient
-    ( Core.MediaUpload
-        PlayCustomAppAccountsCustomAppsCreate {..}
-        body
-      ) =
+    (Core.MediaUpload PlayCustomAppAccountsCustomAppsCreate {..} body) =
       go
         account
         xgafv
@@ -183,7 +164,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  PlayCustomAppAccountsCustomAppsCreateResource
+                Core.Proxy PlayCustomAppAccountsCustomAppsCreateResource
             )
             Core.mempty

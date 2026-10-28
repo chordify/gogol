@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GamesConfiguration.LeaderboardConfigurations.Insert
 where
 
 import Gogol.GamesConfiguration.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gamesConfiguration.leaderboardConfigurations.insert@ method which the
 -- 'GamesConfigurationLeaderboardConfigurationsInsert' request conforms to.
@@ -87,46 +85,46 @@ newGamesConfigurationLeaderboardConfigurationsInsert ::
   -- |  Multipart request metadata. See 'payload'.
   LeaderboardConfiguration ->
   GamesConfigurationLeaderboardConfigurationsInsert
-newGamesConfigurationLeaderboardConfigurationsInsert applicationId payload =
-  GamesConfigurationLeaderboardConfigurationsInsert
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      applicationId = applicationId,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newGamesConfigurationLeaderboardConfigurationsInsert
+  applicationId
+  payload =
+    GamesConfigurationLeaderboardConfigurationsInsert
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        applicationId = applicationId,
+        callback = Core.Nothing,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     GamesConfigurationLeaderboardConfigurationsInsert
   where
   type
-    Rs
-      GamesConfigurationLeaderboardConfigurationsInsert =
+    Rs GamesConfigurationLeaderboardConfigurationsInsert =
       LeaderboardConfiguration
   type
-    Scopes
-      GamesConfigurationLeaderboardConfigurationsInsert =
+    Scopes GamesConfigurationLeaderboardConfigurationsInsert =
       '[Androidpublisher'FullControl]
-  requestClient
-    GamesConfigurationLeaderboardConfigurationsInsert {..} =
-      go
-        applicationId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        gamesConfigurationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesConfigurationLeaderboardConfigurationsInsertResource
-            )
-            Core.mempty
+  requestClient GamesConfigurationLeaderboardConfigurationsInsert {..} =
+    go
+      applicationId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      gamesConfigurationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                GamesConfigurationLeaderboardConfigurationsInsertResource
+          )
+          Core.mempty

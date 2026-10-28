@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Slides.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Slides.Internal.Product
@@ -390,6 +388,14 @@ module Gogol.Slides.Internal.Product
     SolidFill (..),
     newSolidFill,
 
+    -- * SpeakerSpotlight
+    SpeakerSpotlight (..),
+    newSpeakerSpotlight,
+
+    -- * SpeakerSpotlightProperties
+    SpeakerSpotlightProperties (..),
+    newSpeakerSpotlightProperties,
+
     -- * StretchedPictureFill
     StretchedPictureFill (..),
     newStretchedPictureFill,
@@ -576,7 +582,7 @@ module Gogol.Slides.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Slides.Internal.Sum
 
 -- | AffineTransform uses a 3x3 matrix with an implied last row of [ 0 0 1 ] to transform source coordinates (x,y) into destination coordinates (x\', y\') according to: x\' x = shear/y scale/y translate/y 1 [ 1 ] After transformation, x\' = scale/x * x + shear/x * y + translate/x; y\' = scale/y * y + shear/y * x + translate_y; This message is therefore composed of these six matrix elements.
@@ -660,7 +666,11 @@ data AutoText = AutoText
 newAutoText ::
   AutoText
 newAutoText =
-  AutoText {content = Core.Nothing, style = Core.Nothing, type' = Core.Nothing}
+  AutoText
+    { content = Core.Nothing,
+      style = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON AutoText where
   parseJSON =
@@ -683,15 +693,15 @@ instance Core.ToJSON AutoText where
           ]
       )
 
--- | The autofit properties of a Shape.
+-- | The autofit properties of a Shape. This property is only set for shapes that allow text.
 --
 -- /See:/ 'newAutofit' smart constructor.
 data Autofit = Autofit
-  { -- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
+  { -- | The autofit type of the shape. If the autofit type is AUTOFIT/TYPE/UNSPECIFIED, the autofit type is inherited from a parent placeholder if it exists. The field is automatically set to NONE if a request is made that might affect text fitting within its bounding text box. In this case, the font/scale is applied to the font/size and the line/spacing/reduction is applied to the line_spacing. Both properties are also reset to default values.
     autofitType :: (Core.Maybe Autofit_AutofitType),
-    -- | The font scale applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 1. For TEXT/AUTOFIT, this value multiplied by the font/size gives the font size that is rendered in the editor. This property is read-only.
+    -- | The font scale applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 1. For TEXT/AUTOFIT, this value multiplied by the font/size gives the font size that\'s rendered in the editor. This property is read-only.
     fontScale :: (Core.Maybe Core.Double),
-    -- | The line spacing reduction applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 0. For TEXT/AUTOFIT, this value subtracted from the line/spacing gives the line spacing that is rendered in the editor. This property is read-only.
+    -- | The line spacing reduction applied to the shape. For shapes with autofit/type NONE or SHAPE/AUTOFIT, this value is the default value of 0. For TEXT/AUTOFIT, this value subtracted from the line/spacing gives the line spacing that\'s rendered in the editor. This property is read-only.
     lineSpacingReduction :: (Core.Maybe Core.Double)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -723,8 +733,7 @@ instance Core.ToJSON Autofit where
       ( Core.catMaybes
           [ ("autofitType" Core..=) Core.<$> autofitType,
             ("fontScale" Core..=) Core.<$> fontScale,
-            ("lineSpacingReduction" Core..=)
-              Core.<$> lineSpacingReduction
+            ("lineSpacingReduction" Core..=) Core.<$> lineSpacingReduction
           ]
       )
 
@@ -790,10 +799,7 @@ newBatchUpdatePresentationResponse =
       writeControl = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchUpdatePresentationResponse
-  where
+instance Core.FromJSON BatchUpdatePresentationResponse where
   parseJSON =
     Core.withObject
       "BatchUpdatePresentationResponse"
@@ -885,8 +891,7 @@ instance Core.FromJSON ColorScheme where
 
 instance Core.ToJSON ColorScheme where
   toJSON ColorScheme {..} =
-    Core.object
-      (Core.catMaybes [("colors" Core..=) Core.<$> colors])
+    Core.object (Core.catMaybes [("colors" Core..=) Core.<$> colors])
 
 -- | A color and position in a gradient band.
 --
@@ -970,8 +975,7 @@ instance Core.ToJSON CreateImageRequest where
   toJSON CreateImageRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+          [ ("elementProperties" Core..=) Core.<$> elementProperties,
             ("objectId" Core..=) Core.<$> objectId,
             ("url" Core..=) Core.<$> url
           ]
@@ -989,22 +993,19 @@ newtype CreateImageResponse = CreateImageResponse
 -- | Creates a value of 'CreateImageResponse' with the minimum fields required to make a request.
 newCreateImageResponse ::
   CreateImageResponse
-newCreateImageResponse = CreateImageResponse {objectId = Core.Nothing}
+newCreateImageResponse =
+  CreateImageResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON CreateImageResponse where
   parseJSON =
     Core.withObject
       "CreateImageResponse"
-      ( \o ->
-          CreateImageResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateImageResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateImageResponse where
   toJSON CreateImageResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates a line.
 --
@@ -1049,8 +1050,7 @@ instance Core.ToJSON CreateLineRequest where
     Core.object
       ( Core.catMaybes
           [ ("category" Core..=) Core.<$> category,
-            ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+            ("elementProperties" Core..=) Core.<$> elementProperties,
             ("lineCategory" Core..=) Core.<$> lineCategory,
             ("objectId" Core..=) Core.<$> objectId
           ]
@@ -1074,16 +1074,12 @@ instance Core.FromJSON CreateLineResponse where
   parseJSON =
     Core.withObject
       "CreateLineResponse"
-      ( \o ->
-          CreateLineResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateLineResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateLineResponse where
   toJSON CreateLineResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates bullets for all of the paragraphs that overlap with the given text index range. The nesting level of each paragraph will be determined by counting leading tabs in front of each paragraph. To avoid excess space between the bullet and the corresponding paragraph, these leading tabs are removed by this request. This may change the indices of parts of the text. If the paragraph immediately before paragraphs being updated is in a list with a matching preset, the paragraphs being updated are added to that preceding list.
 --
@@ -1172,8 +1168,7 @@ instance Core.ToJSON CreateShapeRequest where
   toJSON CreateShapeRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+          [ ("elementProperties" Core..=) Core.<$> elementProperties,
             ("objectId" Core..=) Core.<$> objectId,
             ("shapeType" Core..=) Core.<$> shapeType
           ]
@@ -1191,22 +1186,19 @@ newtype CreateShapeResponse = CreateShapeResponse
 -- | Creates a value of 'CreateShapeResponse' with the minimum fields required to make a request.
 newCreateShapeResponse ::
   CreateShapeResponse
-newCreateShapeResponse = CreateShapeResponse {objectId = Core.Nothing}
+newCreateShapeResponse =
+  CreateShapeResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON CreateShapeResponse where
   parseJSON =
     Core.withObject
       "CreateShapeResponse"
-      ( \o ->
-          CreateShapeResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateShapeResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateShapeResponse where
   toJSON CreateShapeResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates an embedded Google Sheets chart. NOTE: Chart creation requires at least one of the spreadsheets.readonly, spreadsheets, drive.readonly, drive.file, or drive OAuth scopes.
 --
@@ -1255,8 +1247,7 @@ instance Core.ToJSON CreateSheetsChartRequest where
     Core.object
       ( Core.catMaybes
           [ ("chartId" Core..=) Core.<$> chartId,
-            ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+            ("elementProperties" Core..=) Core.<$> elementProperties,
             ("linkingMode" Core..=) Core.<$> linkingMode,
             ("objectId" Core..=) Core.<$> objectId,
             ("spreadsheetId" Core..=) Core.<$> spreadsheetId
@@ -1282,17 +1273,12 @@ instance Core.FromJSON CreateSheetsChartResponse where
   parseJSON =
     Core.withObject
       "CreateSheetsChartResponse"
-      ( \o ->
-          CreateSheetsChartResponse
-            Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateSheetsChartResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateSheetsChartResponse where
   toJSON CreateSheetsChartResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates a slide.
 --
@@ -1338,10 +1324,8 @@ instance Core.ToJSON CreateSlideRequest where
       ( Core.catMaybes
           [ ("insertionIndex" Core..=) Core.<$> insertionIndex,
             ("objectId" Core..=) Core.<$> objectId,
-            ("placeholderIdMappings" Core..=)
-              Core.<$> placeholderIdMappings,
-            ("slideLayoutReference" Core..=)
-              Core.<$> slideLayoutReference
+            ("placeholderIdMappings" Core..=) Core.<$> placeholderIdMappings,
+            ("slideLayoutReference" Core..=) Core.<$> slideLayoutReference
           ]
       )
 
@@ -1357,22 +1341,19 @@ newtype CreateSlideResponse = CreateSlideResponse
 -- | Creates a value of 'CreateSlideResponse' with the minimum fields required to make a request.
 newCreateSlideResponse ::
   CreateSlideResponse
-newCreateSlideResponse = CreateSlideResponse {objectId = Core.Nothing}
+newCreateSlideResponse =
+  CreateSlideResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON CreateSlideResponse where
   parseJSON =
     Core.withObject
       "CreateSlideResponse"
-      ( \o ->
-          CreateSlideResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateSlideResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateSlideResponse where
   toJSON CreateSlideResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates a new table.
 --
@@ -1417,8 +1398,7 @@ instance Core.ToJSON CreateTableRequest where
     Core.object
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
-            ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+            ("elementProperties" Core..=) Core.<$> elementProperties,
             ("objectId" Core..=) Core.<$> objectId,
             ("rows" Core..=) Core.<$> rows
           ]
@@ -1436,22 +1416,19 @@ newtype CreateTableResponse = CreateTableResponse
 -- | Creates a value of 'CreateTableResponse' with the minimum fields required to make a request.
 newCreateTableResponse ::
   CreateTableResponse
-newCreateTableResponse = CreateTableResponse {objectId = Core.Nothing}
+newCreateTableResponse =
+  CreateTableResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON CreateTableResponse where
   parseJSON =
     Core.withObject
       "CreateTableResponse"
-      ( \o ->
-          CreateTableResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateTableResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateTableResponse where
   toJSON CreateTableResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Creates a video. NOTE: Creating a video from Google Drive requires that the requesting app have at least one of the drive, drive.readonly, or drive.file OAuth scopes.
 --
@@ -1495,8 +1472,7 @@ instance Core.ToJSON CreateVideoRequest where
   toJSON CreateVideoRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("elementProperties" Core..=)
-              Core.<$> elementProperties,
+          [ ("elementProperties" Core..=) Core.<$> elementProperties,
             ("id" Core..=) Core.<$> id,
             ("objectId" Core..=) Core.<$> objectId,
             ("source" Core..=) Core.<$> source
@@ -1515,22 +1491,19 @@ newtype CreateVideoResponse = CreateVideoResponse
 -- | Creates a value of 'CreateVideoResponse' with the minimum fields required to make a request.
 newCreateVideoResponse ::
   CreateVideoResponse
-newCreateVideoResponse = CreateVideoResponse {objectId = Core.Nothing}
+newCreateVideoResponse =
+  CreateVideoResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON CreateVideoResponse where
   parseJSON =
     Core.withObject
       "CreateVideoResponse"
-      ( \o ->
-          CreateVideoResponse Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> CreateVideoResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON CreateVideoResponse where
   toJSON CreateVideoResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | The crop properties of an object enclosed in a container. For example, an Image. The crop properties is represented by the offsets of four edges which define a crop rectangle. The offsets are measured in percentage from the corresponding edges of the object\'s original bounding rectangle towards inside, relative to the object\'s original dimensions. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the object\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the object\'s original bounding rectangle. - If the left edge of the crop rectangle is on the right side of its right edge, the object will be flipped horizontally. - If the top edge of the crop rectangle is below its bottom edge, the object will be flipped vertically. - If all offsets and rotation angle is 0, the object is not cropped. After cropping, the content in the crop rectangle will be stretched
 -- to fit its container.
@@ -1599,22 +1572,19 @@ newtype DeleteObjectRequest = DeleteObjectRequest
 -- | Creates a value of 'DeleteObjectRequest' with the minimum fields required to make a request.
 newDeleteObjectRequest ::
   DeleteObjectRequest
-newDeleteObjectRequest = DeleteObjectRequest {objectId = Core.Nothing}
+newDeleteObjectRequest =
+  DeleteObjectRequest {objectId = Core.Nothing}
 
 instance Core.FromJSON DeleteObjectRequest where
   parseJSON =
     Core.withObject
       "DeleteObjectRequest"
-      ( \o ->
-          DeleteObjectRequest Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> DeleteObjectRequest Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON DeleteObjectRequest where
   toJSON DeleteObjectRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Deletes bullets from all of the paragraphs that overlap with the given text index range. The nesting level of each paragraph will be visually preserved by adding indent to the start of the corresponding paragraph.
 --
@@ -1796,7 +1766,8 @@ data Dimension = Dimension
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 newDimension ::
   Dimension
-newDimension = Dimension {magnitude = Core.Nothing, unit = Core.Nothing}
+newDimension =
+  Dimension {magnitude = Core.Nothing, unit = Core.Nothing}
 
 instance Core.FromJSON Dimension where
   parseJSON =
@@ -1833,7 +1804,10 @@ data DuplicateObjectRequest = DuplicateObjectRequest
 newDuplicateObjectRequest ::
   DuplicateObjectRequest
 newDuplicateObjectRequest =
-  DuplicateObjectRequest {objectId = Core.Nothing, objectIds = Core.Nothing}
+  DuplicateObjectRequest
+    { objectId = Core.Nothing,
+      objectIds = Core.Nothing
+    }
 
 instance Core.FromJSON DuplicateObjectRequest where
   parseJSON =
@@ -1859,8 +1833,7 @@ instance Core.ToJSON DuplicateObjectRequest where
 --
 -- /See:/ 'newDuplicateObjectRequest_ObjectIds' smart constructor.
 newtype DuplicateObjectRequest_ObjectIds = DuplicateObjectRequest_ObjectIds
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1872,16 +1845,12 @@ newDuplicateObjectRequest_ObjectIds ::
 newDuplicateObjectRequest_ObjectIds additional =
   DuplicateObjectRequest_ObjectIds {additional = additional}
 
-instance
-  Core.FromJSON
-    DuplicateObjectRequest_ObjectIds
-  where
+instance Core.FromJSON DuplicateObjectRequest_ObjectIds where
   parseJSON =
     Core.withObject
       "DuplicateObjectRequest_ObjectIds"
       ( \o ->
-          DuplicateObjectRequest_ObjectIds
-            Core.<$> (Core.parseJSONObject o)
+          DuplicateObjectRequest_ObjectIds Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DuplicateObjectRequest_ObjectIds where
@@ -1900,23 +1869,19 @@ newtype DuplicateObjectResponse = DuplicateObjectResponse
 -- | Creates a value of 'DuplicateObjectResponse' with the minimum fields required to make a request.
 newDuplicateObjectResponse ::
   DuplicateObjectResponse
-newDuplicateObjectResponse = DuplicateObjectResponse {objectId = Core.Nothing}
+newDuplicateObjectResponse =
+  DuplicateObjectResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON DuplicateObjectResponse where
   parseJSON =
     Core.withObject
       "DuplicateObjectResponse"
-      ( \o ->
-          DuplicateObjectResponse
-            Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> DuplicateObjectResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON DuplicateObjectResponse where
   toJSON DuplicateObjectResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | A PageElement kind representing a joined collection of PageElements.
 --
@@ -1941,9 +1906,7 @@ instance Core.FromJSON Group where
 instance Core.ToJSON Group where
   toJSON Group {..} =
     Core.object
-      ( Core.catMaybes
-          [("children" Core..=) Core.<$> children]
-      )
+      (Core.catMaybes [("children" Core..=) Core.<$> children])
 
 -- | Groups objects to create an object group. For example, groups PageElements to create a Group on the same page as all the children.
 --
@@ -1979,8 +1942,7 @@ instance Core.ToJSON GroupObjectsRequest where
   toJSON GroupObjectsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("childrenObjectIds" Core..=)
-              Core.<$> childrenObjectIds,
+          [ ("childrenObjectIds" Core..=) Core.<$> childrenObjectIds,
             ("groupObjectId" Core..=) Core.<$> groupObjectId
           ]
       )
@@ -1997,23 +1959,19 @@ newtype GroupObjectsResponse = GroupObjectsResponse
 -- | Creates a value of 'GroupObjectsResponse' with the minimum fields required to make a request.
 newGroupObjectsResponse ::
   GroupObjectsResponse
-newGroupObjectsResponse = GroupObjectsResponse {objectId = Core.Nothing}
+newGroupObjectsResponse =
+  GroupObjectsResponse {objectId = Core.Nothing}
 
 instance Core.FromJSON GroupObjectsResponse where
   parseJSON =
     Core.withObject
       "GroupObjectsResponse"
-      ( \o ->
-          GroupObjectsResponse
-            Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> GroupObjectsResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON GroupObjectsResponse where
   toJSON GroupObjectsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | A PageElement kind representing an image.
 --
@@ -2318,8 +2276,7 @@ instance Core.ToJSON LayoutPlaceholderIdMapping where
   toJSON LayoutPlaceholderIdMapping {..} =
     Core.object
       ( Core.catMaybes
-          [ ("layoutPlaceholder" Core..=)
-              Core.<$> layoutPlaceholder,
+          [ ("layoutPlaceholder" Core..=) Core.<$> layoutPlaceholder,
             ("layoutPlaceholderObjectId" Core..=)
               Core.<$> layoutPlaceholderObjectId,
             ("objectId" Core..=) Core.<$> objectId
@@ -2385,7 +2342,10 @@ data LayoutReference = LayoutReference
 newLayoutReference ::
   LayoutReference
 newLayoutReference =
-  LayoutReference {layoutId = Core.Nothing, predefinedLayout = Core.Nothing}
+  LayoutReference
+    { layoutId = Core.Nothing,
+      predefinedLayout = Core.Nothing
+    }
 
 instance Core.FromJSON LayoutReference where
   parseJSON =
@@ -2402,8 +2362,7 @@ instance Core.ToJSON LayoutReference where
     Core.object
       ( Core.catMaybes
           [ ("layoutId" Core..=) Core.<$> layoutId,
-            ("predefinedLayout" Core..=)
-              Core.<$> predefinedLayout
+            ("predefinedLayout" Core..=) Core.<$> predefinedLayout
           ]
       )
 
@@ -2457,7 +2416,7 @@ instance Core.ToJSON Line where
 data LineConnection = LineConnection
   { -- | The object ID of the connected page element. Some page elements, such as groups, tables, and lines do not have connection sites and therefore cannot be connected to a connector line.
     connectedObjectId :: (Core.Maybe Core.Text),
-    -- | The index of the connection site on the connected page element. In most cases, it corresponds to the predefined connection site index from the ECMA-376 standard. More information on those connection sites can be found in the description of the \"cnx\" attribute in section 20.1.9.9 and Annex H. \"Predefined DrawingML Shape and Text Geometries\" of \"Office Open XML File Formats-Fundamentals and Markup Language Reference\", part 1 of [ECMA-376 5th edition] (http:\/\/www.ecma-international.org\/publications\/standards\/Ecma-376.htm). The position of each connection site can also be viewed from Slides editor.
+    -- | The index of the connection site on the connected page element. In most cases, it corresponds to the predefined connection site index from the ECMA-376 standard. More information on those connection sites can be found in both the description of the \"cxn\" attribute in section 20.1.9.9 and \"Annex H. Example Predefined DrawingML Shape and Text Geometries\" of \"Office Open XML File Formats - Fundamentals and Markup Language Reference\", part 1 of <https://ecma-international.org/publications-and-standards/standards/ecma-376/ ECMA-376 5th edition>. The position of each connection site can also be viewed from Slides editor.
     connectionSiteIndex :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2485,10 +2444,8 @@ instance Core.ToJSON LineConnection where
   toJSON LineConnection {..} =
     Core.object
       ( Core.catMaybes
-          [ ("connectedObjectId" Core..=)
-              Core.<$> connectedObjectId,
-            ("connectionSiteIndex" Core..=)
-              Core.<$> connectionSiteIndex
+          [ ("connectedObjectId" Core..=) Core.<$> connectedObjectId,
+            ("connectionSiteIndex" Core..=) Core.<$> connectionSiteIndex
           ]
       )
 
@@ -2515,9 +2472,7 @@ instance Core.FromJSON LineFill where
 instance Core.ToJSON LineFill where
   toJSON LineFill {..} =
     Core.object
-      ( Core.catMaybes
-          [("solidFill" Core..=) Core.<$> solidFill]
-      )
+      (Core.catMaybes [("solidFill" Core..=) Core.<$> solidFill])
 
 -- | The properties of the Line. When unset, these fields default to values that match the appearance of new lines created in the Slides editor.
 --
@@ -2676,8 +2631,7 @@ instance Core.ToJSON List where
 --
 -- /See:/ 'newList_NestingLevel' smart constructor.
 newtype List_NestingLevel = List_NestingLevel
-  { -- |
-    additional :: (Core.HashMap Core.Text NestingLevel)
+  { additional :: (Core.HashMap Core.Text NestingLevel)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2686,15 +2640,14 @@ newList_NestingLevel ::
   -- |  See 'additional'.
   Core.HashMap Core.Text NestingLevel ->
   List_NestingLevel
-newList_NestingLevel additional = List_NestingLevel {additional = additional}
+newList_NestingLevel additional =
+  List_NestingLevel {additional = additional}
 
 instance Core.FromJSON List_NestingLevel where
   parseJSON =
     Core.withObject
       "List_NestingLevel"
-      ( \o ->
-          List_NestingLevel Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> List_NestingLevel Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON List_NestingLevel where
   toJSON List_NestingLevel {..} = Core.toJSON additional
@@ -2717,16 +2670,12 @@ instance Core.FromJSON MasterProperties where
   parseJSON =
     Core.withObject
       "MasterProperties"
-      ( \o ->
-          MasterProperties Core.<$> (o Core..:? "displayName")
-      )
+      (\o -> MasterProperties Core.<$> (o Core..:? "displayName"))
 
 instance Core.ToJSON MasterProperties where
   toJSON MasterProperties {..} =
     Core.object
-      ( Core.catMaybes
-          [("displayName" Core..=) Core.<$> displayName]
-      )
+      (Core.catMaybes [("displayName" Core..=) Core.<$> displayName])
 
 -- | Merges cells in a Table.
 --
@@ -2743,7 +2692,10 @@ data MergeTableCellsRequest = MergeTableCellsRequest
 newMergeTableCellsRequest ::
   MergeTableCellsRequest
 newMergeTableCellsRequest =
-  MergeTableCellsRequest {objectId = Core.Nothing, tableRange = Core.Nothing}
+  MergeTableCellsRequest
+    { objectId = Core.Nothing,
+      tableRange = Core.Nothing
+    }
 
 instance Core.FromJSON MergeTableCellsRequest where
   parseJSON =
@@ -2782,16 +2734,12 @@ instance Core.FromJSON NestingLevel where
   parseJSON =
     Core.withObject
       "NestingLevel"
-      ( \o ->
-          NestingLevel Core.<$> (o Core..:? "bulletStyle")
-      )
+      (\o -> NestingLevel Core.<$> (o Core..:? "bulletStyle"))
 
 instance Core.ToJSON NestingLevel where
   toJSON NestingLevel {..} =
     Core.object
-      ( Core.catMaybes
-          [("bulletStyle" Core..=) Core.<$> bulletStyle]
-      )
+      (Core.catMaybes [("bulletStyle" Core..=) Core.<$> bulletStyle])
 
 -- | The properties of Page that are only relevant for pages with page_type NOTES.
 --
@@ -2805,24 +2753,22 @@ newtype NotesProperties = NotesProperties
 -- | Creates a value of 'NotesProperties' with the minimum fields required to make a request.
 newNotesProperties ::
   NotesProperties
-newNotesProperties = NotesProperties {speakerNotesObjectId = Core.Nothing}
+newNotesProperties =
+  NotesProperties {speakerNotesObjectId = Core.Nothing}
 
 instance Core.FromJSON NotesProperties where
   parseJSON =
     Core.withObject
       "NotesProperties"
       ( \o ->
-          NotesProperties
-            Core.<$> (o Core..:? "speakerNotesObjectId")
+          NotesProperties Core.<$> (o Core..:? "speakerNotesObjectId")
       )
 
 instance Core.ToJSON NotesProperties where
   toJSON NotesProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("speakerNotesObjectId" Core..=)
-              Core.<$> speakerNotesObjectId
-          ]
+          [("speakerNotesObjectId" Core..=) Core.<$> speakerNotesObjectId]
       )
 
 -- | A themeable solid color value.
@@ -2879,16 +2825,12 @@ instance Core.FromJSON OptionalColor where
   parseJSON =
     Core.withObject
       "OptionalColor"
-      ( \o ->
-          OptionalColor Core.<$> (o Core..:? "opaqueColor")
-      )
+      (\o -> OptionalColor Core.<$> (o Core..:? "opaqueColor"))
 
 instance Core.ToJSON OptionalColor where
   toJSON OptionalColor {..} =
     Core.object
-      ( Core.catMaybes
-          [("opaqueColor" Core..=) Core.<$> opaqueColor]
-      )
+      (Core.catMaybes [("opaqueColor" Core..=) Core.<$> opaqueColor])
 
 -- | The outline of a PageElement. If these fields are unset, they may be inherited from a parent placeholder if it exists. If there is no parent, the fields will default to the value used for new page elements created in the Slides editor, which may depend on the page element kind.
 --
@@ -2957,16 +2899,12 @@ instance Core.FromJSON OutlineFill where
   parseJSON =
     Core.withObject
       "OutlineFill"
-      ( \o ->
-          OutlineFill Core.<$> (o Core..:? "solidFill")
-      )
+      (\o -> OutlineFill Core.<$> (o Core..:? "solidFill"))
 
 instance Core.ToJSON OutlineFill where
   toJSON OutlineFill {..} =
     Core.object
-      ( Core.catMaybes
-          [("solidFill" Core..=) Core.<$> solidFill]
-      )
+      (Core.catMaybes [("solidFill" Core..=) Core.<$> solidFill])
 
 -- | A page in a presentation.
 --
@@ -3030,18 +2968,15 @@ instance Core.ToJSON Page where
   toJSON Page {..} =
     Core.object
       ( Core.catMaybes
-          [ ("layoutProperties" Core..=)
-              Core.<$> layoutProperties,
-            ("masterProperties" Core..=)
-              Core.<$> masterProperties,
+          [ ("layoutProperties" Core..=) Core.<$> layoutProperties,
+            ("masterProperties" Core..=) Core.<$> masterProperties,
             ("notesProperties" Core..=) Core.<$> notesProperties,
             ("objectId" Core..=) Core.<$> objectId,
             ("pageElements" Core..=) Core.<$> pageElements,
             ("pageProperties" Core..=) Core.<$> pageProperties,
             ("pageType" Core..=) Core.<$> pageType,
             ("revisionId" Core..=) Core.<$> revisionId,
-            ("slideProperties" Core..=)
-              Core.<$> slideProperties
+            ("slideProperties" Core..=) Core.<$> slideProperties
           ]
       )
 
@@ -3085,8 +3020,7 @@ instance Core.ToJSON PageBackgroundFill where
       ( Core.catMaybes
           [ ("propertyState" Core..=) Core.<$> propertyState,
             ("solidFill" Core..=) Core.<$> solidFill,
-            ("stretchedPictureFill" Core..=)
-              Core.<$> stretchedPictureFill
+            ("stretchedPictureFill" Core..=) Core.<$> stretchedPictureFill
           ]
       )
 
@@ -3110,6 +3044,8 @@ data PageElement = PageElement
     sheetsChart :: (Core.Maybe SheetsChart),
     -- | The size of the page element.
     size :: (Core.Maybe Size),
+    -- | A Speaker Spotlight.
+    speakerSpotlight :: (Core.Maybe SpeakerSpotlight),
     -- | A table page element.
     table :: (Core.Maybe Table),
     -- | The title of the page element. Combined with description to display alt text. The field is not supported for Group elements.
@@ -3136,6 +3072,7 @@ newPageElement =
       shape = Core.Nothing,
       sheetsChart = Core.Nothing,
       size = Core.Nothing,
+      speakerSpotlight = Core.Nothing,
       table = Core.Nothing,
       title = Core.Nothing,
       transform = Core.Nothing,
@@ -3157,6 +3094,7 @@ instance Core.FromJSON PageElement where
             Core.<*> (o Core..:? "shape")
             Core.<*> (o Core..:? "sheetsChart")
             Core.<*> (o Core..:? "size")
+            Core.<*> (o Core..:? "speakerSpotlight")
             Core.<*> (o Core..:? "table")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "transform")
@@ -3176,6 +3114,7 @@ instance Core.ToJSON PageElement where
             ("shape" Core..=) Core.<$> shape,
             ("sheetsChart" Core..=) Core.<$> sheetsChart,
             ("size" Core..=) Core.<$> size,
+            ("speakerSpotlight" Core..=) Core.<$> speakerSpotlight,
             ("table" Core..=) Core.<$> table,
             ("title" Core..=) Core.<$> title,
             ("transform" Core..=) Core.<$> transform,
@@ -3243,7 +3182,10 @@ data PageProperties = PageProperties
 newPageProperties ::
   PageProperties
 newPageProperties =
-  PageProperties {colorScheme = Core.Nothing, pageBackgroundFill = Core.Nothing}
+  PageProperties
+    { colorScheme = Core.Nothing,
+      pageBackgroundFill = Core.Nothing
+    }
 
 instance Core.FromJSON PageProperties where
   parseJSON =
@@ -3260,8 +3202,7 @@ instance Core.ToJSON PageProperties where
     Core.object
       ( Core.catMaybes
           [ ("colorScheme" Core..=) Core.<$> colorScheme,
-            ("pageBackgroundFill" Core..=)
-              Core.<$> pageBackgroundFill
+            ("pageBackgroundFill" Core..=) Core.<$> pageBackgroundFill
           ]
       )
 
@@ -3288,7 +3229,8 @@ instance Core.FromJSON ParagraphMarker where
       "ParagraphMarker"
       ( \o ->
           ParagraphMarker
-            Core.<$> (o Core..:? "bullet") Core.<*> (o Core..:? "style")
+            Core.<$> (o Core..:? "bullet")
+            Core.<*> (o Core..:? "style")
       )
 
 instance Core.ToJSON ParagraphMarker where
@@ -3550,7 +3492,8 @@ data Recolor = Recolor
 -- | Creates a value of 'Recolor' with the minimum fields required to make a request.
 newRecolor ::
   Recolor
-newRecolor = Recolor {name = Core.Nothing, recolorStops = Core.Nothing}
+newRecolor =
+  Recolor {name = Core.Nothing, recolorStops = Core.Nothing}
 
 instance Core.FromJSON Recolor where
   parseJSON =
@@ -3590,17 +3533,12 @@ instance Core.FromJSON RefreshSheetsChartRequest where
   parseJSON =
     Core.withObject
       "RefreshSheetsChartRequest"
-      ( \o ->
-          RefreshSheetsChartRequest
-            Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> RefreshSheetsChartRequest Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON RefreshSheetsChartRequest where
   toJSON RefreshSheetsChartRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Replaces all shapes that match the given criteria with the provided image. The images replacing the shapes are rectangular after being inserted into the presentation and do not take on the forms of the shapes.
 --
@@ -3631,10 +3569,7 @@ newReplaceAllShapesWithImageRequest =
       replaceMethod = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReplaceAllShapesWithImageRequest
-  where
+instance Core.FromJSON ReplaceAllShapesWithImageRequest where
   parseJSON =
     Core.withObject
       "ReplaceAllShapesWithImageRequest"
@@ -3652,8 +3587,7 @@ instance Core.ToJSON ReplaceAllShapesWithImageRequest where
     Core.object
       ( Core.catMaybes
           [ ("containsText" Core..=) Core.<$> containsText,
-            ("imageReplaceMethod" Core..=)
-              Core.<$> imageReplaceMethod,
+            ("imageReplaceMethod" Core..=) Core.<$> imageReplaceMethod,
             ("imageUrl" Core..=) Core.<$> imageUrl,
             ("pageObjectIds" Core..=) Core.<$> pageObjectIds,
             ("replaceMethod" Core..=) Core.<$> replaceMethod
@@ -3673,12 +3607,12 @@ newtype ReplaceAllShapesWithImageResponse = ReplaceAllShapesWithImageResponse
 newReplaceAllShapesWithImageResponse ::
   ReplaceAllShapesWithImageResponse
 newReplaceAllShapesWithImageResponse =
-  ReplaceAllShapesWithImageResponse {occurrencesChanged = Core.Nothing}
+  ReplaceAllShapesWithImageResponse
+    { occurrencesChanged =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ReplaceAllShapesWithImageResponse
-  where
+instance Core.FromJSON ReplaceAllShapesWithImageResponse where
   parseJSON =
     Core.withObject
       "ReplaceAllShapesWithImageResponse"
@@ -3687,16 +3621,11 @@ instance
             Core.<$> (o Core..:? "occurrencesChanged")
       )
 
-instance
-  Core.ToJSON
-    ReplaceAllShapesWithImageResponse
-  where
+instance Core.ToJSON ReplaceAllShapesWithImageResponse where
   toJSON ReplaceAllShapesWithImageResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("occurrencesChanged" Core..=)
-              Core.<$> occurrencesChanged
-          ]
+          [("occurrencesChanged" Core..=) Core.<$> occurrencesChanged]
       )
 
 -- | Replaces all shapes that match the given criteria with the provided Google Sheets chart. The chart will be scaled and centered to fit within the bounds of the original shape. NOTE: Replacing shapes with a chart requires at least one of the spreadsheets.readonly, spreadsheets, drive.readonly, or drive OAuth scopes.
@@ -3728,10 +3657,7 @@ newReplaceAllShapesWithSheetsChartRequest =
       spreadsheetId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReplaceAllShapesWithSheetsChartRequest
-  where
+instance Core.FromJSON ReplaceAllShapesWithSheetsChartRequest where
   parseJSON =
     Core.withObject
       "ReplaceAllShapesWithSheetsChartRequest"
@@ -3744,10 +3670,7 @@ instance
             Core.<*> (o Core..:? "spreadsheetId")
       )
 
-instance
-  Core.ToJSON
-    ReplaceAllShapesWithSheetsChartRequest
-  where
+instance Core.ToJSON ReplaceAllShapesWithSheetsChartRequest where
   toJSON ReplaceAllShapesWithSheetsChartRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -3772,12 +3695,12 @@ newtype ReplaceAllShapesWithSheetsChartResponse = ReplaceAllShapesWithSheetsChar
 newReplaceAllShapesWithSheetsChartResponse ::
   ReplaceAllShapesWithSheetsChartResponse
 newReplaceAllShapesWithSheetsChartResponse =
-  ReplaceAllShapesWithSheetsChartResponse {occurrencesChanged = Core.Nothing}
+  ReplaceAllShapesWithSheetsChartResponse
+    { occurrencesChanged =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ReplaceAllShapesWithSheetsChartResponse
-  where
+instance Core.FromJSON ReplaceAllShapesWithSheetsChartResponse where
   parseJSON =
     Core.withObject
       "ReplaceAllShapesWithSheetsChartResponse"
@@ -3786,16 +3709,11 @@ instance
             Core.<$> (o Core..:? "occurrencesChanged")
       )
 
-instance
-  Core.ToJSON
-    ReplaceAllShapesWithSheetsChartResponse
-  where
+instance Core.ToJSON ReplaceAllShapesWithSheetsChartResponse where
   toJSON ReplaceAllShapesWithSheetsChartResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("occurrencesChanged" Core..=)
-              Core.<$> occurrencesChanged
-          ]
+          [("occurrencesChanged" Core..=) Core.<$> occurrencesChanged]
       )
 
 -- | Replaces all instances of text matching a criteria with replace text.
@@ -3862,17 +3780,14 @@ instance Core.FromJSON ReplaceAllTextResponse where
     Core.withObject
       "ReplaceAllTextResponse"
       ( \o ->
-          ReplaceAllTextResponse
-            Core.<$> (o Core..:? "occurrencesChanged")
+          ReplaceAllTextResponse Core.<$> (o Core..:? "occurrencesChanged")
       )
 
 instance Core.ToJSON ReplaceAllTextResponse where
   toJSON ReplaceAllTextResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("occurrencesChanged" Core..=)
-              Core.<$> occurrencesChanged
-          ]
+          [("occurrencesChanged" Core..=) Core.<$> occurrencesChanged]
       )
 
 -- | Replaces an existing image with a new image. Replacing an image removes some image effects from the existing image.
@@ -3914,8 +3829,7 @@ instance Core.ToJSON ReplaceImageRequest where
     Core.object
       ( Core.catMaybes
           [ ("imageObjectId" Core..=) Core.<$> imageObjectId,
-            ("imageReplaceMethod" Core..=)
-              Core.<$> imageReplaceMethod,
+            ("imageReplaceMethod" Core..=) Core.<$> imageReplaceMethod,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -4124,30 +4038,24 @@ instance Core.ToJSON Request' where
       ( Core.catMaybes
           [ ("createImage" Core..=) Core.<$> createImage,
             ("createLine" Core..=) Core.<$> createLine,
-            ("createParagraphBullets" Core..=)
-              Core.<$> createParagraphBullets,
+            ("createParagraphBullets" Core..=) Core.<$> createParagraphBullets,
             ("createShape" Core..=) Core.<$> createShape,
-            ("createSheetsChart" Core..=)
-              Core.<$> createSheetsChart,
+            ("createSheetsChart" Core..=) Core.<$> createSheetsChart,
             ("createSlide" Core..=) Core.<$> createSlide,
             ("createTable" Core..=) Core.<$> createTable,
             ("createVideo" Core..=) Core.<$> createVideo,
             ("deleteObject" Core..=) Core.<$> deleteObject,
-            ("deleteParagraphBullets" Core..=)
-              Core.<$> deleteParagraphBullets,
-            ("deleteTableColumn" Core..=)
-              Core.<$> deleteTableColumn,
+            ("deleteParagraphBullets" Core..=) Core.<$> deleteParagraphBullets,
+            ("deleteTableColumn" Core..=) Core.<$> deleteTableColumn,
             ("deleteTableRow" Core..=) Core.<$> deleteTableRow,
             ("deleteText" Core..=) Core.<$> deleteText,
             ("duplicateObject" Core..=) Core.<$> duplicateObject,
             ("groupObjects" Core..=) Core.<$> groupObjects,
-            ("insertTableColumns" Core..=)
-              Core.<$> insertTableColumns,
+            ("insertTableColumns" Core..=) Core.<$> insertTableColumns,
             ("insertTableRows" Core..=) Core.<$> insertTableRows,
             ("insertText" Core..=) Core.<$> insertText,
             ("mergeTableCells" Core..=) Core.<$> mergeTableCells,
-            ("refreshSheetsChart" Core..=)
-              Core.<$> refreshSheetsChart,
+            ("refreshSheetsChart" Core..=) Core.<$> refreshSheetsChart,
             ("replaceAllShapesWithImage" Core..=)
               Core.<$> replaceAllShapesWithImage,
             ("replaceAllShapesWithSheetsChart" Core..=)
@@ -4156,30 +4064,21 @@ instance Core.ToJSON Request' where
             ("replaceImage" Core..=) Core.<$> replaceImage,
             ("rerouteLine" Core..=) Core.<$> rerouteLine,
             ("ungroupObjects" Core..=) Core.<$> ungroupObjects,
-            ("unmergeTableCells" Core..=)
-              Core.<$> unmergeTableCells,
-            ("updateImageProperties" Core..=)
-              Core.<$> updateImageProperties,
-            ("updateLineCategory" Core..=)
-              Core.<$> updateLineCategory,
-            ("updateLineProperties" Core..=)
-              Core.<$> updateLineProperties,
+            ("unmergeTableCells" Core..=) Core.<$> unmergeTableCells,
+            ("updateImageProperties" Core..=) Core.<$> updateImageProperties,
+            ("updateLineCategory" Core..=) Core.<$> updateLineCategory,
+            ("updateLineProperties" Core..=) Core.<$> updateLineProperties,
             ("updatePageElementAltText" Core..=)
               Core.<$> updatePageElementAltText,
             ("updatePageElementTransform" Core..=)
               Core.<$> updatePageElementTransform,
             ("updatePageElementsZOrder" Core..=)
               Core.<$> updatePageElementsZOrder,
-            ("updatePageProperties" Core..=)
-              Core.<$> updatePageProperties,
-            ("updateParagraphStyle" Core..=)
-              Core.<$> updateParagraphStyle,
-            ("updateShapeProperties" Core..=)
-              Core.<$> updateShapeProperties,
-            ("updateSlideProperties" Core..=)
-              Core.<$> updateSlideProperties,
-            ("updateSlidesPosition" Core..=)
-              Core.<$> updateSlidesPosition,
+            ("updatePageProperties" Core..=) Core.<$> updatePageProperties,
+            ("updateParagraphStyle" Core..=) Core.<$> updateParagraphStyle,
+            ("updateShapeProperties" Core..=) Core.<$> updateShapeProperties,
+            ("updateSlideProperties" Core..=) Core.<$> updateSlideProperties,
+            ("updateSlidesPosition" Core..=) Core.<$> updateSlidesPosition,
             ("updateTableBorderProperties" Core..=)
               Core.<$> updateTableBorderProperties,
             ("updateTableCellProperties" Core..=)
@@ -4189,8 +4088,7 @@ instance Core.ToJSON Request' where
             ("updateTableRowProperties" Core..=)
               Core.<$> updateTableRowProperties,
             ("updateTextStyle" Core..=) Core.<$> updateTextStyle,
-            ("updateVideoProperties" Core..=)
-              Core.<$> updateVideoProperties
+            ("updateVideoProperties" Core..=) Core.<$> updateVideoProperties
           ]
       )
 
@@ -4212,16 +4110,12 @@ instance Core.FromJSON RerouteLineRequest where
   parseJSON =
     Core.withObject
       "RerouteLineRequest"
-      ( \o ->
-          RerouteLineRequest Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> RerouteLineRequest Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON RerouteLineRequest where
   toJSON RerouteLineRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | A single response from an update.
 --
@@ -4300,8 +4194,7 @@ instance Core.ToJSON Response where
           [ ("createImage" Core..=) Core.<$> createImage,
             ("createLine" Core..=) Core.<$> createLine,
             ("createShape" Core..=) Core.<$> createShape,
-            ("createSheetsChart" Core..=)
-              Core.<$> createSheetsChart,
+            ("createSheetsChart" Core..=) Core.<$> createSheetsChart,
             ("createSlide" Core..=) Core.<$> createSlide,
             ("createTable" Core..=) Core.<$> createTable,
             ("createVideo" Core..=) Core.<$> createVideo,
@@ -4332,7 +4225,11 @@ data RgbColor = RgbColor
 newRgbColor ::
   RgbColor
 newRgbColor =
-  RgbColor {blue = Core.Nothing, green = Core.Nothing, red = Core.Nothing}
+  RgbColor
+    { blue = Core.Nothing,
+      green = Core.Nothing,
+      red = Core.Nothing
+    }
 
 instance Core.FromJSON RgbColor where
   parseJSON =
@@ -4424,7 +4321,7 @@ instance Core.ToJSON Shadow where
           ]
       )
 
--- | A PageElement kind representing a generic shape that does not have a more specific classification.
+-- | A PageElement kind representing a generic shape that doesn\'t have a more specific classification. For more information, see <https://developers.google.com/slides/api/guides/transform Size and position page elements>.
 --
 -- /See:/ 'newShape' smart constructor.
 data Shape = Shape
@@ -4488,7 +4385,10 @@ data ShapeBackgroundFill = ShapeBackgroundFill
 newShapeBackgroundFill ::
   ShapeBackgroundFill
 newShapeBackgroundFill =
-  ShapeBackgroundFill {propertyState = Core.Nothing, solidFill = Core.Nothing}
+  ShapeBackgroundFill
+    { propertyState = Core.Nothing,
+      solidFill = Core.Nothing
+    }
 
 instance Core.FromJSON ShapeBackgroundFill where
   parseJSON =
@@ -4560,13 +4460,11 @@ instance Core.ToJSON ShapeProperties where
     Core.object
       ( Core.catMaybes
           [ ("autofit" Core..=) Core.<$> autofit,
-            ("contentAlignment" Core..=)
-              Core.<$> contentAlignment,
+            ("contentAlignment" Core..=) Core.<$> contentAlignment,
             ("link" Core..=) Core.<$> link,
             ("outline" Core..=) Core.<$> outline,
             ("shadow" Core..=) Core.<$> shadow,
-            ("shapeBackgroundFill" Core..=)
-              Core.<$> shapeBackgroundFill
+            ("shapeBackgroundFill" Core..=) Core.<$> shapeBackgroundFill
           ]
       )
 
@@ -4614,8 +4512,7 @@ instance Core.ToJSON SheetsChart where
       ( Core.catMaybes
           [ ("chartId" Core..=) Core.<$> chartId,
             ("contentUrl" Core..=) Core.<$> contentUrl,
-            ("sheetsChartProperties" Core..=)
-              Core.<$> sheetsChartProperties,
+            ("sheetsChartProperties" Core..=) Core.<$> sheetsChartProperties,
             ("spreadsheetId" Core..=) Core.<$> spreadsheetId
           ]
       )
@@ -4640,17 +4537,14 @@ instance Core.FromJSON SheetsChartProperties where
     Core.withObject
       "SheetsChartProperties"
       ( \o ->
-          SheetsChartProperties
-            Core.<$> (o Core..:? "chartImageProperties")
+          SheetsChartProperties Core.<$> (o Core..:? "chartImageProperties")
       )
 
 instance Core.ToJSON SheetsChartProperties where
   toJSON SheetsChartProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("chartImageProperties" Core..=)
-              Core.<$> chartImageProperties
-          ]
+          [("chartImageProperties" Core..=) Core.<$> chartImageProperties]
       )
 
 -- | A width and height.
@@ -4674,8 +4568,7 @@ instance Core.FromJSON Size where
     Core.withObject
       "Size"
       ( \o ->
-          Size
-            Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
+          Size Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
       )
 
 instance Core.ToJSON Size where
@@ -4750,7 +4643,8 @@ data SolidFill = SolidFill
 -- | Creates a value of 'SolidFill' with the minimum fields required to make a request.
 newSolidFill ::
   SolidFill
-newSolidFill = SolidFill {alpha = Core.Nothing, color = Core.Nothing}
+newSolidFill =
+  SolidFill {alpha = Core.Nothing, color = Core.Nothing}
 
 instance Core.FromJSON SolidFill where
   parseJSON =
@@ -4758,7 +4652,8 @@ instance Core.FromJSON SolidFill where
       "SolidFill"
       ( \o ->
           SolidFill
-            Core.<$> (o Core..:? "alpha") Core.<*> (o Core..:? "color")
+            Core.<$> (o Core..:? "alpha")
+            Core.<*> (o Core..:? "color")
       )
 
 instance Core.ToJSON SolidFill where
@@ -4767,6 +4662,78 @@ instance Core.ToJSON SolidFill where
       ( Core.catMaybes
           [ ("alpha" Core..=) Core.<$> alpha,
             ("color" Core..=) Core.<$> color
+          ]
+      )
+
+-- | A PageElement kind representing a Speaker Spotlight.
+--
+-- /See:/ 'newSpeakerSpotlight' smart constructor.
+newtype SpeakerSpotlight = SpeakerSpotlight
+  { -- | The properties of the Speaker Spotlight.
+    speakerSpotlightProperties :: (Core.Maybe SpeakerSpotlightProperties)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SpeakerSpotlight' with the minimum fields required to make a request.
+newSpeakerSpotlight ::
+  SpeakerSpotlight
+newSpeakerSpotlight =
+  SpeakerSpotlight {speakerSpotlightProperties = Core.Nothing}
+
+instance Core.FromJSON SpeakerSpotlight where
+  parseJSON =
+    Core.withObject
+      "SpeakerSpotlight"
+      ( \o ->
+          SpeakerSpotlight
+            Core.<$> (o Core..:? "speakerSpotlightProperties")
+      )
+
+instance Core.ToJSON SpeakerSpotlight where
+  toJSON SpeakerSpotlight {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("speakerSpotlightProperties" Core..=)
+              Core.<$> speakerSpotlightProperties
+          ]
+      )
+
+-- | The properties of the SpeakerSpotlight.
+--
+-- /See:/ 'newSpeakerSpotlightProperties' smart constructor.
+data SpeakerSpotlightProperties = SpeakerSpotlightProperties
+  { -- | The outline of the Speaker Spotlight. If not set, it has no outline.
+    outline :: (Core.Maybe Outline),
+    -- | The shadow of the Speaker Spotlight. If not set, it has no shadow.
+    shadow :: (Core.Maybe Shadow)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SpeakerSpotlightProperties' with the minimum fields required to make a request.
+newSpeakerSpotlightProperties ::
+  SpeakerSpotlightProperties
+newSpeakerSpotlightProperties =
+  SpeakerSpotlightProperties
+    { outline = Core.Nothing,
+      shadow = Core.Nothing
+    }
+
+instance Core.FromJSON SpeakerSpotlightProperties where
+  parseJSON =
+    Core.withObject
+      "SpeakerSpotlightProperties"
+      ( \o ->
+          SpeakerSpotlightProperties
+            Core.<$> (o Core..:? "outline")
+            Core.<*> (o Core..:? "shadow")
+      )
+
+instance Core.ToJSON SpeakerSpotlightProperties where
+  toJSON SpeakerSpotlightProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("outline" Core..=) Core.<$> outline,
+            ("shadow" Core..=) Core.<$> shadow
           ]
       )
 
@@ -4785,7 +4752,10 @@ data StretchedPictureFill = StretchedPictureFill
 newStretchedPictureFill ::
   StretchedPictureFill
 newStretchedPictureFill =
-  StretchedPictureFill {contentUrl = Core.Nothing, size = Core.Nothing}
+  StretchedPictureFill
+    { contentUrl = Core.Nothing,
+      size = Core.Nothing
+    }
 
 instance Core.FromJSON StretchedPictureFill where
   parseJSON =
@@ -4821,7 +4791,10 @@ data SubstringMatchCriteria = SubstringMatchCriteria
 newSubstringMatchCriteria ::
   SubstringMatchCriteria
 newSubstringMatchCriteria =
-  SubstringMatchCriteria {matchCase = Core.Nothing, text = Core.Nothing}
+  SubstringMatchCriteria
+    { matchCase = Core.Nothing,
+      text = Core.Nothing
+    }
 
 instance Core.FromJSON SubstringMatchCriteria where
   parseJSON =
@@ -4893,13 +4866,11 @@ instance Core.ToJSON Table where
     Core.object
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
-            ("horizontalBorderRows" Core..=)
-              Core.<$> horizontalBorderRows,
+            ("horizontalBorderRows" Core..=) Core.<$> horizontalBorderRows,
             ("rows" Core..=) Core.<$> rows,
             ("tableColumns" Core..=) Core.<$> tableColumns,
             ("tableRows" Core..=) Core.<$> tableRows,
-            ("verticalBorderRows" Core..=)
-              Core.<$> verticalBorderRows
+            ("verticalBorderRows" Core..=) Core.<$> verticalBorderRows
           ]
       )
 
@@ -4938,8 +4909,7 @@ instance Core.ToJSON TableBorderCell where
     Core.object
       ( Core.catMaybes
           [ ("location" Core..=) Core.<$> location,
-            ("tableBorderProperties" Core..=)
-              Core.<$> tableBorderProperties
+            ("tableBorderProperties" Core..=) Core.<$> tableBorderProperties
           ]
       )
 
@@ -4961,16 +4931,12 @@ instance Core.FromJSON TableBorderFill where
   parseJSON =
     Core.withObject
       "TableBorderFill"
-      ( \o ->
-          TableBorderFill Core.<$> (o Core..:? "solidFill")
-      )
+      (\o -> TableBorderFill Core.<$> (o Core..:? "solidFill"))
 
 instance Core.ToJSON TableBorderFill where
   toJSON TableBorderFill {..} =
     Core.object
-      ( Core.catMaybes
-          [("solidFill" Core..=) Core.<$> solidFill]
-      )
+      (Core.catMaybes [("solidFill" Core..=) Core.<$> solidFill])
 
 -- | The border styling properties of the TableBorderCell.
 --
@@ -5034,18 +5000,13 @@ instance Core.FromJSON TableBorderRow where
   parseJSON =
     Core.withObject
       "TableBorderRow"
-      ( \o ->
-          TableBorderRow
-            Core.<$> (o Core..:? "tableBorderCells")
-      )
+      (\o -> TableBorderRow Core.<$> (o Core..:? "tableBorderCells"))
 
 instance Core.ToJSON TableBorderRow where
   toJSON TableBorderRow {..} =
     Core.object
       ( Core.catMaybes
-          [ ("tableBorderCells" Core..=)
-              Core.<$> tableBorderCells
-          ]
+          [("tableBorderCells" Core..=) Core.<$> tableBorderCells]
       )
 
 -- | Properties and contents of each table cell.
@@ -5097,8 +5058,7 @@ instance Core.ToJSON TableCell where
           [ ("columnSpan" Core..=) Core.<$> columnSpan,
             ("location" Core..=) Core.<$> location,
             ("rowSpan" Core..=) Core.<$> rowSpan,
-            ("tableCellProperties" Core..=)
-              Core.<$> tableCellProperties,
+            ("tableCellProperties" Core..=) Core.<$> tableCellProperties,
             ("text" Core..=) Core.<$> text
           ]
       )
@@ -5157,7 +5117,10 @@ data TableCellLocation = TableCellLocation
 newTableCellLocation ::
   TableCellLocation
 newTableCellLocation =
-  TableCellLocation {columnIndex = Core.Nothing, rowIndex = Core.Nothing}
+  TableCellLocation
+    { columnIndex = Core.Nothing,
+      rowIndex = Core.Nothing
+    }
 
 instance Core.FromJSON TableCellLocation where
   parseJSON =
@@ -5212,8 +5175,7 @@ instance Core.ToJSON TableCellProperties where
   toJSON TableCellProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentAlignment" Core..=)
-              Core.<$> contentAlignment,
+          [ ("contentAlignment" Core..=) Core.<$> contentAlignment,
             ("tableCellBackgroundFill" Core..=)
               Core.<$> tableCellBackgroundFill
           ]
@@ -5231,23 +5193,19 @@ newtype TableColumnProperties = TableColumnProperties
 -- | Creates a value of 'TableColumnProperties' with the minimum fields required to make a request.
 newTableColumnProperties ::
   TableColumnProperties
-newTableColumnProperties = TableColumnProperties {columnWidth = Core.Nothing}
+newTableColumnProperties =
+  TableColumnProperties {columnWidth = Core.Nothing}
 
 instance Core.FromJSON TableColumnProperties where
   parseJSON =
     Core.withObject
       "TableColumnProperties"
-      ( \o ->
-          TableColumnProperties
-            Core.<$> (o Core..:? "columnWidth")
-      )
+      (\o -> TableColumnProperties Core.<$> (o Core..:? "columnWidth"))
 
 instance Core.ToJSON TableColumnProperties where
   toJSON TableColumnProperties {..} =
     Core.object
-      ( Core.catMaybes
-          [("columnWidth" Core..=) Core.<$> columnWidth]
-      )
+      (Core.catMaybes [("columnWidth" Core..=) Core.<$> columnWidth])
 
 -- | A table range represents a reference to a subset of a table. It\'s important to note that the cells specified by a table range do not necessarily form a rectangle. For example, let\'s say we have a 3 x 3 table where all the cells of the last row are merged together. The table looks like this: [ ] A table range with location = (0, 0), row span = 3 and column span = 2 specifies the following cells: x x [ x x x ]
 --
@@ -5333,8 +5291,7 @@ instance Core.ToJSON TableRow where
       ( Core.catMaybes
           [ ("rowHeight" Core..=) Core.<$> rowHeight,
             ("tableCells" Core..=) Core.<$> tableCells,
-            ("tableRowProperties" Core..=)
-              Core.<$> tableRowProperties
+            ("tableRowProperties" Core..=) Core.<$> tableRowProperties
           ]
       )
 
@@ -5350,23 +5307,19 @@ newtype TableRowProperties = TableRowProperties
 -- | Creates a value of 'TableRowProperties' with the minimum fields required to make a request.
 newTableRowProperties ::
   TableRowProperties
-newTableRowProperties = TableRowProperties {minRowHeight = Core.Nothing}
+newTableRowProperties =
+  TableRowProperties {minRowHeight = Core.Nothing}
 
 instance Core.FromJSON TableRowProperties where
   parseJSON =
     Core.withObject
       "TableRowProperties"
-      ( \o ->
-          TableRowProperties
-            Core.<$> (o Core..:? "minRowHeight")
-      )
+      (\o -> TableRowProperties Core.<$> (o Core..:? "minRowHeight"))
 
 instance Core.ToJSON TableRowProperties where
   toJSON TableRowProperties {..} =
     Core.object
-      ( Core.catMaybes
-          [("minRowHeight" Core..=) Core.<$> minRowHeight]
-      )
+      (Core.catMaybes [("minRowHeight" Core..=) Core.<$> minRowHeight])
 
 -- | The general text content. The text must reside in a compatible shape (e.g. text box or rectangle) or a table cell in a page.
 --
@@ -5382,7 +5335,8 @@ data TextContent = TextContent
 -- | Creates a value of 'TextContent' with the minimum fields required to make a request.
 newTextContent ::
   TextContent
-newTextContent = TextContent {lists = Core.Nothing, textElements = Core.Nothing}
+newTextContent =
+  TextContent {lists = Core.Nothing, textElements = Core.Nothing}
 
 instance Core.FromJSON TextContent where
   parseJSON =
@@ -5407,8 +5361,7 @@ instance Core.ToJSON TextContent where
 --
 -- /See:/ 'newTextContent_Lists' smart constructor.
 newtype TextContent_Lists = TextContent_Lists
-  { -- |
-    additional :: (Core.HashMap Core.Text List)
+  { additional :: (Core.HashMap Core.Text List)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5417,15 +5370,14 @@ newTextContent_Lists ::
   -- |  See 'additional'.
   Core.HashMap Core.Text List ->
   TextContent_Lists
-newTextContent_Lists additional = TextContent_Lists {additional = additional}
+newTextContent_Lists additional =
+  TextContent_Lists {additional = additional}
 
 instance Core.FromJSON TextContent_Lists where
   parseJSON =
     Core.withObject
       "TextContent_Lists"
-      ( \o ->
-          TextContent_Lists Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> TextContent_Lists Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON TextContent_Lists where
   toJSON TextContent_Lists {..} = Core.toJSON additional
@@ -5506,7 +5458,8 @@ instance Core.FromJSON TextRun where
       "TextRun"
       ( \o ->
           TextRun
-            Core.<$> (o Core..:? "content") Core.<*> (o Core..:? "style")
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "style")
       )
 
 instance Core.ToJSON TextRun where
@@ -5594,8 +5547,7 @@ instance Core.ToJSON TextStyle where
   toJSON TextStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("baselineOffset" Core..=) Core.<$> baselineOffset,
             ("bold" Core..=) Core.<$> bold,
             ("fontFamily" Core..=) Core.<$> fontFamily,
@@ -5606,8 +5558,7 @@ instance Core.ToJSON TextStyle where
             ("smallCaps" Core..=) Core.<$> smallCaps,
             ("strikethrough" Core..=) Core.<$> strikethrough,
             ("underline" Core..=) Core.<$> underline,
-            ("weightedFontFamily" Core..=)
-              Core.<$> weightedFontFamily
+            ("weightedFontFamily" Core..=) Core.<$> weightedFontFamily
           ]
       )
 
@@ -5625,7 +5576,8 @@ data ThemeColorPair = ThemeColorPair
 -- | Creates a value of 'ThemeColorPair' with the minimum fields required to make a request.
 newThemeColorPair ::
   ThemeColorPair
-newThemeColorPair = ThemeColorPair {color = Core.Nothing, type' = Core.Nothing}
+newThemeColorPair =
+  ThemeColorPair {color = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON ThemeColorPair where
   parseJSON =
@@ -5633,7 +5585,8 @@ instance Core.FromJSON ThemeColorPair where
       "ThemeColorPair"
       ( \o ->
           ThemeColorPair
-            Core.<$> (o Core..:? "color") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "color")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON ThemeColorPair where
@@ -5701,23 +5654,19 @@ newtype UngroupObjectsRequest = UngroupObjectsRequest
 -- | Creates a value of 'UngroupObjectsRequest' with the minimum fields required to make a request.
 newUngroupObjectsRequest ::
   UngroupObjectsRequest
-newUngroupObjectsRequest = UngroupObjectsRequest {objectIds = Core.Nothing}
+newUngroupObjectsRequest =
+  UngroupObjectsRequest {objectIds = Core.Nothing}
 
 instance Core.FromJSON UngroupObjectsRequest where
   parseJSON =
     Core.withObject
       "UngroupObjectsRequest"
-      ( \o ->
-          UngroupObjectsRequest
-            Core.<$> (o Core..:? "objectIds")
-      )
+      (\o -> UngroupObjectsRequest Core.<$> (o Core..:? "objectIds"))
 
 instance Core.ToJSON UngroupObjectsRequest where
   toJSON UngroupObjectsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectIds" Core..=) Core.<$> objectIds]
-      )
+      (Core.catMaybes [("objectIds" Core..=) Core.<$> objectIds])
 
 -- | Unmerges cells in a Table.
 --
@@ -5734,7 +5683,10 @@ data UnmergeTableCellsRequest = UnmergeTableCellsRequest
 newUnmergeTableCellsRequest ::
   UnmergeTableCellsRequest
 newUnmergeTableCellsRequest =
-  UnmergeTableCellsRequest {objectId = Core.Nothing, tableRange = Core.Nothing}
+  UnmergeTableCellsRequest
+    { objectId = Core.Nothing,
+      tableRange = Core.Nothing
+    }
 
 instance Core.FromJSON UnmergeTableCellsRequest where
   parseJSON =
@@ -5905,10 +5857,7 @@ newUpdatePageElementAltTextRequest =
       title = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdatePageElementAltTextRequest
-  where
+instance Core.FromJSON UpdatePageElementAltTextRequest where
   parseJSON =
     Core.withObject
       "UpdatePageElementAltTextRequest"
@@ -5952,10 +5901,7 @@ newUpdatePageElementTransformRequest =
       transform = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdatePageElementTransformRequest
-  where
+instance Core.FromJSON UpdatePageElementTransformRequest where
   parseJSON =
     Core.withObject
       "UpdatePageElementTransformRequest"
@@ -5966,10 +5912,7 @@ instance
             Core.<*> (o Core..:? "transform")
       )
 
-instance
-  Core.ToJSON
-    UpdatePageElementTransformRequest
-  where
+instance Core.ToJSON UpdatePageElementTransformRequest where
   toJSON UpdatePageElementTransformRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -5999,10 +5942,7 @@ newUpdatePageElementsZOrderRequest =
       pageElementObjectIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdatePageElementsZOrderRequest
-  where
+instance Core.FromJSON UpdatePageElementsZOrderRequest where
   parseJSON =
     Core.withObject
       "UpdatePageElementsZOrderRequest"
@@ -6017,8 +5957,7 @@ instance Core.ToJSON UpdatePageElementsZOrderRequest where
     Core.object
       ( Core.catMaybes
           [ ("operation" Core..=) Core.<$> operation,
-            ("pageElementObjectIds" Core..=)
-              Core.<$> pageElementObjectIds
+            ("pageElementObjectIds" Core..=) Core.<$> pageElementObjectIds
           ]
       )
 
@@ -6160,8 +6099,7 @@ instance Core.ToJSON UpdateShapePropertiesRequest where
       ( Core.catMaybes
           [ ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("shapeProperties" Core..=)
-              Core.<$> shapeProperties
+            ("shapeProperties" Core..=) Core.<$> shapeProperties
           ]
       )
 
@@ -6205,8 +6143,7 @@ instance Core.ToJSON UpdateSlidePropertiesRequest where
       ( Core.catMaybes
           [ ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("slideProperties" Core..=)
-              Core.<$> slideProperties
+            ("slideProperties" Core..=) Core.<$> slideProperties
           ]
       )
 
@@ -6278,10 +6215,7 @@ newUpdateTableBorderPropertiesRequest =
       tableRange = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateTableBorderPropertiesRequest
-  where
+instance Core.FromJSON UpdateTableBorderPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateTableBorderPropertiesRequest"
@@ -6294,18 +6228,14 @@ instance
             Core.<*> (o Core..:? "tableRange")
       )
 
-instance
-  Core.ToJSON
-    UpdateTableBorderPropertiesRequest
-  where
+instance Core.ToJSON UpdateTableBorderPropertiesRequest where
   toJSON UpdateTableBorderPropertiesRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("borderPosition" Core..=) Core.<$> borderPosition,
             ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("tableBorderProperties" Core..=)
-              Core.<$> tableBorderProperties,
+            ("tableBorderProperties" Core..=) Core.<$> tableBorderProperties,
             ("tableRange" Core..=) Core.<$> tableRange
           ]
       )
@@ -6336,10 +6266,7 @@ newUpdateTableCellPropertiesRequest =
       tableRange = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateTableCellPropertiesRequest
-  where
+instance Core.FromJSON UpdateTableCellPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateTableCellPropertiesRequest"
@@ -6357,8 +6284,7 @@ instance Core.ToJSON UpdateTableCellPropertiesRequest where
       ( Core.catMaybes
           [ ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("tableCellProperties" Core..=)
-              Core.<$> tableCellProperties,
+            ("tableCellProperties" Core..=) Core.<$> tableCellProperties,
             ("tableRange" Core..=) Core.<$> tableRange
           ]
       )
@@ -6389,10 +6315,7 @@ newUpdateTableColumnPropertiesRequest =
       tableColumnProperties = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateTableColumnPropertiesRequest
-  where
+instance Core.FromJSON UpdateTableColumnPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateTableColumnPropertiesRequest"
@@ -6404,18 +6327,14 @@ instance
             Core.<*> (o Core..:? "tableColumnProperties")
       )
 
-instance
-  Core.ToJSON
-    UpdateTableColumnPropertiesRequest
-  where
+instance Core.ToJSON UpdateTableColumnPropertiesRequest where
   toJSON UpdateTableColumnPropertiesRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("columnIndices" Core..=) Core.<$> columnIndices,
             ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("tableColumnProperties" Core..=)
-              Core.<$> tableColumnProperties
+            ("tableColumnProperties" Core..=) Core.<$> tableColumnProperties
           ]
       )
 
@@ -6445,10 +6364,7 @@ newUpdateTableRowPropertiesRequest =
       tableRowProperties = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateTableRowPropertiesRequest
-  where
+instance Core.FromJSON UpdateTableRowPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateTableRowPropertiesRequest"
@@ -6467,8 +6383,7 @@ instance Core.ToJSON UpdateTableRowPropertiesRequest where
           [ ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
             ("rowIndices" Core..=) Core.<$> rowIndices,
-            ("tableRowProperties" Core..=)
-              Core.<$> tableRowProperties
+            ("tableRowProperties" Core..=) Core.<$> tableRowProperties
           ]
       )
 
@@ -6566,8 +6481,7 @@ instance Core.ToJSON UpdateVideoPropertiesRequest where
       ( Core.catMaybes
           [ ("fields" Core..=) Core.<$> fields,
             ("objectId" Core..=) Core.<$> objectId,
-            ("videoProperties" Core..=)
-              Core.<$> videoProperties
+            ("videoProperties" Core..=) Core.<$> videoProperties
           ]
       )
 
@@ -6616,8 +6530,7 @@ instance Core.ToJSON Video where
           [ ("id" Core..=) Core.<$> id,
             ("source" Core..=) Core.<$> source,
             ("url" Core..=) Core.<$> url,
-            ("videoProperties" Core..=)
-              Core.<$> videoProperties
+            ("videoProperties" Core..=) Core.<$> videoProperties
           ]
       )
 
@@ -6690,7 +6603,10 @@ data WeightedFontFamily = WeightedFontFamily
 newWeightedFontFamily ::
   WeightedFontFamily
 newWeightedFontFamily =
-  WeightedFontFamily {fontFamily = Core.Nothing, weight = Core.Nothing}
+  WeightedFontFamily
+    { fontFamily = Core.Nothing,
+      weight = Core.Nothing
+    }
 
 instance Core.FromJSON WeightedFontFamily where
   parseJSON =
@@ -6734,9 +6650,7 @@ instance Core.FromJSON WordArt where
 instance Core.ToJSON WordArt where
   toJSON WordArt {..} =
     Core.object
-      ( Core.catMaybes
-          [("renderedText" Core..=) Core.<$> renderedText]
-      )
+      (Core.catMaybes [("renderedText" Core..=) Core.<$> renderedText])
 
 -- | Provides control over how write requests are executed.
 --
@@ -6756,16 +6670,11 @@ instance Core.FromJSON WriteControl where
   parseJSON =
     Core.withObject
       "WriteControl"
-      ( \o ->
-          WriteControl
-            Core.<$> (o Core..:? "requiredRevisionId")
-      )
+      (\o -> WriteControl Core.<$> (o Core..:? "requiredRevisionId"))
 
 instance Core.ToJSON WriteControl where
   toJSON WriteControl {..} =
     Core.object
       ( Core.catMaybes
-          [ ("requiredRevisionId" Core..=)
-              Core.<$> requiredRevisionId
-          ]
+          [("requiredRevisionId" Core..=) Core.<$> requiredRevisionId]
       )

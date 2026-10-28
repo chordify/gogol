@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Script.Processes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Script.Processes.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Script.Types
 
 -- | A resource alias for @script.processes.list@ method which the
@@ -54,24 +52,12 @@ type ScriptProcessesListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "userProcessFilter.deploymentId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "userProcessFilter.endTime"
-              Core.DateTime
-    Core.:> Core.QueryParam
-              "userProcessFilter.functionName"
-              Core.Text
-    Core.:> Core.QueryParam
-              "userProcessFilter.projectName"
-              Core.Text
-    Core.:> Core.QueryParam
-              "userProcessFilter.scriptId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "userProcessFilter.startTime"
-              Core.DateTime
+    Core.:> Core.QueryParam "userProcessFilter.deploymentId" Core.Text
+    Core.:> Core.QueryParam "userProcessFilter.endTime" Core.DateTime
+    Core.:> Core.QueryParam "userProcessFilter.functionName" Core.Text
+    Core.:> Core.QueryParam "userProcessFilter.projectName" Core.Text
+    Core.:> Core.QueryParam "userProcessFilter.scriptId" Core.Text
+    Core.:> Core.QueryParam "userProcessFilter.startTime" Core.DateTime
     Core.:> Core.QueryParams
               "userProcessFilter.statuses"
               ProcessesListUserProcessFilterStatuses
@@ -82,9 +68,7 @@ type ScriptProcessesListResource =
               "userProcessFilter.userAccessLevels"
               ProcessesListUserProcessFilterUserAccessLevels
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListUserProcessesResponse
+    Core.:> Core.Get '[Core.JSON] ListUserProcessesResponse
 
 -- | List information about processes made by or on behalf of a user, such as process type and current status.
 --
@@ -149,9 +133,7 @@ newScriptProcessesList =
     }
 
 instance Core.GoogleRequest ScriptProcessesList where
-  type
-    Rs ScriptProcessesList =
-      ListUserProcessesResponse
+  type Rs ScriptProcessesList = ListUserProcessesResponse
   type Scopes ScriptProcessesList = '[Script'Processes]
   requestClient ScriptProcessesList {..} =
     go
@@ -170,15 +152,11 @@ instance Core.GoogleRequest ScriptProcessesList where
       userProcessFilterStartTime
       (userProcessFilterStatuses Core.^. Core._Default)
       (userProcessFilterTypes Core.^. Core._Default)
-      ( userProcessFilterUserAccessLevels
-          Core.^. Core._Default
-      )
+      (userProcessFilterUserAccessLevels Core.^. Core._Default)
       (Core.Just Core.AltJSON)
       scriptService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ScriptProcessesListResource
-          )
+          (Core.Proxy :: Core.Proxy ScriptProcessesListResource)
           Core.mempty

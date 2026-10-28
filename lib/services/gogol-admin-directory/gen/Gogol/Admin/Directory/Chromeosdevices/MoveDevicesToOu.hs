@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Chromeosdevices.MoveDevicesToOu
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Chromeosdevices.MoveDevicesToOu
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.chromeosdevices.moveDevicesToOu@ method which the
 -- 'DirectoryChromeosdevicesMoveDevicesToOu' request conforms to.
@@ -60,9 +58,7 @@ type DirectoryChromeosdevicesMoveDevicesToOuResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ChromeOsMoveDevicesToOu
+    Core.:> Core.ReqBody '[Core.JSON] ChromeOsMoveDevicesToOu
     Core.:> Core.Post '[Core.JSON] ()
 
 -- | Moves or inserts multiple Chrome OS devices to an organizational unit. You can move up to 50 devices at once.
@@ -97,44 +93,42 @@ newDirectoryChromeosdevicesMoveDevicesToOu ::
   -- |  Multipart request metadata. See 'payload'.
   ChromeOsMoveDevicesToOu ->
   DirectoryChromeosdevicesMoveDevicesToOu
-newDirectoryChromeosdevicesMoveDevicesToOu customerId orgUnitPath payload =
-  DirectoryChromeosdevicesMoveDevicesToOu
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      customerId = customerId,
-      orgUnitPath = orgUnitPath,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDirectoryChromeosdevicesMoveDevicesToOu
+  customerId
+  orgUnitPath
+  payload =
     DirectoryChromeosdevicesMoveDevicesToOu
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        customerId = customerId,
+        orgUnitPath = orgUnitPath,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DirectoryChromeosdevicesMoveDevicesToOu where
   type Rs DirectoryChromeosdevicesMoveDevicesToOu = ()
   type
     Scopes DirectoryChromeosdevicesMoveDevicesToOu =
       '[Admin'Directory'Device'Chromeos]
-  requestClient
-    DirectoryChromeosdevicesMoveDevicesToOu {..} =
-      go
-        customerId
-        (Core.Just orgUnitPath)
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adminDirectoryService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DirectoryChromeosdevicesMoveDevicesToOuResource
-            )
-            Core.mempty
+  requestClient DirectoryChromeosdevicesMoveDevicesToOu {..} =
+    go
+      customerId
+      (Core.Just orgUnitPath)
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adminDirectoryService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DirectoryChromeosdevicesMoveDevicesToOuResource
+          )
+          Core.mempty

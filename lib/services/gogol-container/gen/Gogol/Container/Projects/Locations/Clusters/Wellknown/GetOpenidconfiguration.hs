@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfiguration
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the OIDC discovery document for the cluster. See the <https://openid.net/specs/openid-connect-discovery-1_0.html OpenID Connect Discovery 1.0 specification> for details. This API is not yet intended for general use, and is not available for all clusters.
+-- Gets the OIDC discovery document for the cluster. See the <https://openid.net/specs/openid-connect-discovery-1_0.html OpenID Connect Discovery 1.0 specification> for details.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.wellknown.getOpenidconfiguration@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.wellknown.getOpenidconfiguration@.
 module Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfiguration
   ( -- * Resource
     ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.Wellknown.GetOpenidconfigurat
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.wellknown.getOpenidconfiguration@ method which the
 -- 'ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration' request conforms to.
@@ -57,7 +55,7 @@ type ContainerProjectsLocationsClustersWellknownGetOpenidconfigurationResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GetOpenIDConfigResponse
 
--- | Gets the OIDC discovery document for the cluster. See the <https://openid.net/specs/openid-connect-discovery-1_0.html OpenID Connect Discovery 1.0 specification> for details. This API is not yet intended for general use, and is not available for all clusters.
+-- | Gets the OIDC discovery document for the cluster. See the <https://openid.net/specs/openid-connect-discovery-1_0.html OpenID Connect Discovery 1.0 specification> for details.
 --
 -- /See:/ 'newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration' smart constructor.
 data ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration = ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
@@ -81,15 +79,17 @@ newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration ::
   -- |  The cluster (project, location, cluster name) to get the discovery document for. Specified in the format @projects\/*\/locations\/*\/clusters\/*@. See 'parent'.
   Core.Text ->
   ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
-newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration parent =
-  ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
+  parent =
+    ContainerProjectsLocationsClustersWellknownGetOpenidconfiguration
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

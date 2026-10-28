@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Uploads.DeleteUploadData
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Uploads.DeleteUploadData
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.uploads.deleteUploadData@ method which the
 -- 'AnalyticsManagementUploadsDeleteUploadData' request conforms to.
@@ -87,39 +85,38 @@ newAnalyticsManagementUploadsDeleteUploadData ::
   -- |  Web property Id for the uploads to be deleted. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementUploadsDeleteUploadData
-newAnalyticsManagementUploadsDeleteUploadData accountId customDataSourceId payload webPropertyId =
-  AnalyticsManagementUploadsDeleteUploadData
-    { accountId = accountId,
-      customDataSourceId = customDataSourceId,
-      payload = payload,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementUploadsDeleteUploadData
+  accountId
+  customDataSourceId
+  payload
+  webPropertyId =
+    AnalyticsManagementUploadsDeleteUploadData
+      { accountId = accountId,
+        customDataSourceId = customDataSourceId,
+        payload = payload,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementUploadsDeleteUploadData
   where
+  type Rs AnalyticsManagementUploadsDeleteUploadData = ()
   type
-    Rs AnalyticsManagementUploadsDeleteUploadData =
-      ()
-  type
-    Scopes
-      AnalyticsManagementUploadsDeleteUploadData =
+    Scopes AnalyticsManagementUploadsDeleteUploadData =
       '[Analytics'FullControl, Analytics'Edit]
-  requestClient
-    AnalyticsManagementUploadsDeleteUploadData {..} =
-      go
-        accountId
-        webPropertyId
-        customDataSourceId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementUploadsDeleteUploadDataResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementUploadsDeleteUploadData {..} =
+    go
+      accountId
+      webPropertyId
+      customDataSourceId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementUploadsDeleteUploadDataResource
+          )
+          Core.mempty

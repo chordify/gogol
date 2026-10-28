@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ResourceManager
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -239,6 +237,11 @@ module Gogol.ResourceManager
     CloudresourcemanagerTagKeysGetIamPolicy (..),
     newCloudresourcemanagerTagKeysGetIamPolicy,
 
+    -- ** cloudresourcemanager.tagKeys.getNamespaced
+    CloudresourcemanagerTagKeysGetNamespacedResource,
+    CloudresourcemanagerTagKeysGetNamespaced (..),
+    newCloudresourcemanagerTagKeysGetNamespaced,
+
     -- ** cloudresourcemanager.tagKeys.list
     CloudresourcemanagerTagKeysListResource,
     CloudresourcemanagerTagKeysList (..),
@@ -278,6 +281,11 @@ module Gogol.ResourceManager
     CloudresourcemanagerTagValuesGetIamPolicyResource,
     CloudresourcemanagerTagValuesGetIamPolicy (..),
     newCloudresourcemanagerTagValuesGetIamPolicy,
+
+    -- ** cloudresourcemanager.tagValues.getNamespaced
+    CloudresourcemanagerTagValuesGetNamespacedResource,
+    CloudresourcemanagerTagValuesGetNamespaced (..),
+    newCloudresourcemanagerTagValuesGetNamespaced,
 
     -- ** cloudresourcemanager.tagValues.list
     CloudresourcemanagerTagValuesListResource,
@@ -411,6 +419,10 @@ module Gogol.ResourceManager
     -- ** Folder_State
     Folder_State (..),
 
+    -- ** Folder_Tags
+    Folder_Tags (..),
+    newFolder_Tags,
+
     -- ** FolderOperation
     FolderOperation (..),
     newFolderOperation,
@@ -518,6 +530,10 @@ module Gogol.ResourceManager
 
     -- ** Project_State
     Project_State (..),
+
+    -- ** Project_Tags
+    Project_Tags (..),
+    newProject_Tags,
 
     -- ** ProjectCreationStatus
     ProjectCreationStatus (..),
@@ -656,6 +672,7 @@ import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Create
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Delete
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Get
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetIamPolicy
+import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.GetNamespaced
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.Patch
 import Gogol.ResourceManager.Cloudresourcemanager.TagKeys.SetIamPolicy
@@ -664,6 +681,7 @@ import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Create
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Delete
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Get
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetIamPolicy
+import Gogol.ResourceManager.Cloudresourcemanager.TagValues.GetNamespaced
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.List
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.Patch
 import Gogol.ResourceManager.Cloudresourcemanager.TagValues.SetIamPolicy

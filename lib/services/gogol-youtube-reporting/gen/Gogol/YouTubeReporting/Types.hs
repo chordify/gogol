@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeReporting.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTubeReporting.Types
@@ -118,7 +116,7 @@ module Gogol.YouTubeReporting.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeReporting.Internal.Product
 import Gogol.YouTubeReporting.Internal.Sum
 
@@ -130,7 +128,9 @@ youTubeReportingService =
     "youtubereporting.googleapis.com"
 
 -- | View monetary and non-monetary YouTube Analytics reports for your YouTube content
-type YtAnalyticsMonetary'Readonly = "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+type YtAnalyticsMonetary'Readonly =
+  "https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
 
 -- | View YouTube Analytics reports for your YouTube content
-type YtAnalytics'Readonly = "https://www.googleapis.com/auth/yt-analytics.readonly"
+type YtAnalytics'Readonly =
+  "https://www.googleapis.com/auth/yt-analytics.readonly"

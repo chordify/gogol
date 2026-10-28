@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.Monitoring.Projects.NotificationChannels.SendVerificationCode
 where
 
 import Gogol.Monitoring.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @monitoring.projects.notificationChannels.sendVerificationCode@ method which the
 -- 'MonitoringProjectsNotificationChannelsSendVerificationCode' request conforms to.
 type MonitoringProjectsNotificationChannelsSendVerificationCodeResource =
   "v3"
-    Core.:> Core.CaptureMode
-              "name"
-              "sendVerificationCode"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "sendVerificationCode" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -89,24 +84,26 @@ newMonitoringProjectsNotificationChannelsSendVerificationCode ::
   -- |  Multipart request metadata. See 'payload'.
   SendNotificationChannelVerificationCodeRequest ->
   MonitoringProjectsNotificationChannelsSendVerificationCode
-newMonitoringProjectsNotificationChannelsSendVerificationCode name payload =
-  MonitoringProjectsNotificationChannelsSendVerificationCode
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newMonitoringProjectsNotificationChannelsSendVerificationCode
+  name
+  payload =
+    MonitoringProjectsNotificationChannelsSendVerificationCode
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     MonitoringProjectsNotificationChannelsSendVerificationCode
   where
   type
-    Rs
-      MonitoringProjectsNotificationChannelsSendVerificationCode =
+    Rs MonitoringProjectsNotificationChannelsSendVerificationCode =
       Empty
   type
     Scopes

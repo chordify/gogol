@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DriveActivity.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DriveActivity.Types
@@ -348,7 +346,7 @@ where
 
 import Gogol.DriveActivity.Internal.Product
 import Gogol.DriveActivity.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Drive Activity API. This contains the host and root path used as a starting point for constructing service requests.
 driveActivityService :: Core.ServiceConfig
@@ -358,7 +356,9 @@ driveActivityService =
     "driveactivity.googleapis.com"
 
 -- | View and add to the activity record of files in your Google Drive
-type Drive'Activity = "https://www.googleapis.com/auth/drive.activity"
+type Drive'Activity =
+  "https://www.googleapis.com/auth/drive.activity"
 
 -- | View the activity record of files in your Google Drive
-type Drive'Activity'Readonly = "https://www.googleapis.com/auth/drive.activity.readonly"
+type Drive'Activity'Readonly =
+  "https://www.googleapis.com/auth/drive.activity.readonly"

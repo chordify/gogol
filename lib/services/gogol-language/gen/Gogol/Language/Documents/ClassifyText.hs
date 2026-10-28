@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Language.Documents.ClassifyText
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,12 +38,12 @@ module Gogol.Language.Documents.ClassifyText
 where
 
 import Gogol.Language.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @language.documents.classifyText@ method which the
 -- 'LanguageDocumentsClassifyText' request conforms to.
 type LanguageDocumentsClassifyTextResource =
-  "v1"
+  "v2"
     Core.:> "documents:classifyText"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -90,18 +88,11 @@ newLanguageDocumentsClassifyText payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LanguageDocumentsClassifyText
-  where
-  type
-    Rs LanguageDocumentsClassifyText =
-      ClassifyTextResponse
+instance Core.GoogleRequest LanguageDocumentsClassifyText where
+  type Rs LanguageDocumentsClassifyText = ClassifyTextResponse
   type
     Scopes LanguageDocumentsClassifyText =
-      '[ CloudLanguage'FullControl,
-         CloudPlatform'FullControl
-       ]
+      '[CloudLanguage'FullControl, CloudPlatform'FullControl]
   requestClient LanguageDocumentsClassifyText {..} =
     go
       xgafv
@@ -115,7 +106,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LanguageDocumentsClassifyTextResource
-          )
+          (Core.Proxy :: Core.Proxy LanguageDocumentsClassifyTextResource)
           Core.mempty

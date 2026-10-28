@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.LibraryAgent.Shelves.Books.Borrow
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.LibraryAgent.Shelves.Books.Borrow
 where
 
 import Gogol.LibraryAgent.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @libraryagent.shelves.books.borrow@ method which the
 -- 'LibraryAgentShelvesBooksBorrow' request conforms to.
@@ -53,9 +51,7 @@ type LibraryAgentShelvesBooksBorrowResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleExampleLibraryagentV1Book
+    Core.:> Core.Post '[Core.JSON] GoogleExampleLibraryagentV1Book
 
 -- | Borrow a book from the library. Returns the book if it is borrowed successfully. Returns NOT_FOUND if the book does not exist in the library. Returns quota exceeded error if the amount of books borrowed exceeds allocation quota in any dimensions.
 --
@@ -91,10 +87,7 @@ newLibraryAgentShelvesBooksBorrow name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LibraryAgentShelvesBooksBorrow
-  where
+instance Core.GoogleRequest LibraryAgentShelvesBooksBorrow where
   type
     Rs LibraryAgentShelvesBooksBorrow =
       GoogleExampleLibraryagentV1Book
@@ -114,7 +107,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LibraryAgentShelvesBooksBorrowResource
-          )
+          (Core.Proxy :: Core.Proxy LibraryAgentShelvesBooksBorrowResource)
           Core.mempty

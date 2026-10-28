@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.PubSub.Projects.Topics.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates the given topic with the given name. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- Creates the given topic with the given name. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource_names).
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Cloud Pub/Sub API Reference> for @pubsub.projects.topics.create@.
 module Gogol.PubSub.Projects.Topics.Create
@@ -39,7 +37,7 @@ module Gogol.PubSub.Projects.Topics.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.PubSub.Types
 
 -- | A resource alias for @pubsub.projects.topics.create@ method which the
@@ -56,7 +54,7 @@ type PubSubProjectsTopicsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Topic
     Core.:> Core.Put '[Core.JSON] Topic
 
--- | Creates the given topic with the given name. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/admin#resource_names).
+-- | Creates the given topic with the given name. See the [resource name rules] (https:\/\/cloud.google.com\/pubsub\/docs\/pubsub-basics#resource_names).
 --
 -- /See:/ 'newPubSubProjectsTopicsCreate' smart constructor.
 data PubSubProjectsTopicsCreate = PubSubProjectsTopicsCreate
@@ -95,10 +93,7 @@ newPubSubProjectsTopicsCreate name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PubSubProjectsTopicsCreate
-  where
+instance Core.GoogleRequest PubSubProjectsTopicsCreate where
   type Rs PubSubProjectsTopicsCreate = Topic
   type
     Scopes PubSubProjectsTopicsCreate =
@@ -117,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PubSubProjectsTopicsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy PubSubProjectsTopicsCreateResource)
           Core.mempty

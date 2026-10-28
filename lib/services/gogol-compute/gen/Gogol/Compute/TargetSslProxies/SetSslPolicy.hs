@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetSslProxies.SetSslPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the SSL proxy load balancer. They do not affect the connection between the load balancer and the backends.
+-- Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the load balancer. They do not affect the connection between the load balancer and the backends.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.targetSslProxies.setSslPolicy@.
 module Gogol.Compute.TargetSslProxies.SetSslPolicy
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetSslProxies.SetSslPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetSslProxies.setSslPolicy@ method which the
 -- 'ComputeTargetSslProxiesSetSslPolicy' request conforms to.
@@ -63,7 +61,7 @@ type ComputeTargetSslProxiesSetSslPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] SslPolicyReference
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the SSL proxy load balancer. They do not affect the connection between the load balancer and the backends.
+-- | Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the load balancer. They do not affect the connection between the load balancer and the backends.
 --
 -- /See:/ 'newComputeTargetSslProxiesSetSslPolicy' smart constructor.
 data ComputeTargetSslProxiesSetSslPolicy = ComputeTargetSslProxiesSetSslPolicy
@@ -97,26 +95,24 @@ newComputeTargetSslProxiesSetSslPolicy ::
   -- |  Name of the TargetSslProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035. See 'targetSslProxy'.
   Core.Text ->
   ComputeTargetSslProxiesSetSslPolicy
-newComputeTargetSslProxiesSetSslPolicy payload project targetSslProxy =
-  ComputeTargetSslProxiesSetSslPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      targetSslProxy = targetSslProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeTargetSslProxiesSetSslPolicy
+  payload
+  project
+  targetSslProxy =
     ComputeTargetSslProxiesSetSslPolicy
-  where
-  type
-    Rs ComputeTargetSslProxiesSetSslPolicy =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        targetSslProxy = targetSslProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeTargetSslProxiesSetSslPolicy where
+  type Rs ComputeTargetSslProxiesSetSslPolicy = Operation
   type
     Scopes ComputeTargetSslProxiesSetSslPolicy =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -137,7 +133,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeTargetSslProxiesSetSslPolicyResource
+              Core.Proxy ComputeTargetSslProxiesSetSslPolicyResource
           )
           Core.mempty

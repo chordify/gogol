@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Datastore.Projects.Import
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Datastore.Projects.Import
 where
 
 import Gogol.Datastore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @datastore.projects.import@ method which the
 -- 'DatastoreProjectsImport' request conforms to.
@@ -99,9 +97,7 @@ newDatastoreProjectsImport payload projectId =
     }
 
 instance Core.GoogleRequest DatastoreProjectsImport where
-  type
-    Rs DatastoreProjectsImport =
-      GoogleLongrunningOperation
+  type Rs DatastoreProjectsImport = GoogleLongrunningOperation
   type
     Scopes DatastoreProjectsImport =
       '[CloudPlatform'FullControl, Datastore'FullControl]
@@ -119,7 +115,5 @@ instance Core.GoogleRequest DatastoreProjectsImport where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DatastoreProjectsImportResource
-          )
+          (Core.Proxy :: Core.Proxy DatastoreProjectsImportResource)
           Core.mempty

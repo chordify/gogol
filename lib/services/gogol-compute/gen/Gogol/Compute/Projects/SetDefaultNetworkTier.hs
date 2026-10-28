@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Projects.SetDefaultNetworkTier
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Projects.SetDefaultNetworkTier
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.projects.setDefaultNetworkTier@ method which the
 -- 'ComputeProjectsSetDefaultNetworkTier' request conforms to.
@@ -57,9 +55,7 @@ type ComputeProjectsSetDefaultNetworkTierResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ProjectsSetDefaultNetworkTierRequest
+    Core.:> Core.ReqBody '[Core.JSON] ProjectsSetDefaultNetworkTierRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Sets the default network tier of the project. The default network tier is used when an address\/forwardingRule\/instance is created without specifying the network tier field.
@@ -104,34 +100,27 @@ newComputeProjectsSetDefaultNetworkTier payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeProjectsSetDefaultNetworkTier
-  where
-  type
-    Rs ComputeProjectsSetDefaultNetworkTier =
-      Operation
+instance Core.GoogleRequest ComputeProjectsSetDefaultNetworkTier where
+  type Rs ComputeProjectsSetDefaultNetworkTier = Operation
   type
     Scopes ComputeProjectsSetDefaultNetworkTier =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeProjectsSetDefaultNetworkTier {..} =
-      go
-        project
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeProjectsSetDefaultNetworkTierResource
-            )
-            Core.mempty
+  requestClient ComputeProjectsSetDefaultNetworkTier {..} =
+    go
+      project
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeProjectsSetDefaultNetworkTierResource
+          )
+          Core.mempty

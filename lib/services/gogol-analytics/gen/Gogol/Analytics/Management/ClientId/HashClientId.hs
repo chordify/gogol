@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.ClientId.HashClientId
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.ClientId.HashClientId
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.clientId.hashClientId@ method which the
 -- 'AnalyticsManagementClientIdHashClientId' request conforms to.
@@ -70,27 +68,19 @@ newAnalyticsManagementClientIdHashClientId ::
 newAnalyticsManagementClientIdHashClientId payload =
   AnalyticsManagementClientIdHashClientId {payload = payload}
 
-instance
-  Core.GoogleRequest
-    AnalyticsManagementClientIdHashClientId
-  where
+instance Core.GoogleRequest AnalyticsManagementClientIdHashClientId where
   type
     Rs AnalyticsManagementClientIdHashClientId =
       HashClientIdResponse
   type
     Scopes AnalyticsManagementClientIdHashClientId =
       '[Analytics'Edit, Analytics'Readonly]
-  requestClient
-    AnalyticsManagementClientIdHashClientId {..} =
-      go
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementClientIdHashClientIdResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementClientIdHashClientId {..} =
+    go (Core.Just Core.AltJSON) payload analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementClientIdHashClientIdResource
+          )
+          Core.mempty

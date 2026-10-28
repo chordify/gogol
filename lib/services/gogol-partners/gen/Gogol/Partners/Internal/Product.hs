@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Partners.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Partners.Internal.Product
@@ -225,7 +223,7 @@ module Gogol.Partners.Internal.Product
 where
 
 import Gogol.Partners.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Information about a particular AdWords Manager Account. Read more at https:\/\/support.google.com\/adwords\/answer\/6139186
 --
@@ -242,7 +240,10 @@ data AdWordsManagerAccountInfo = AdWordsManagerAccountInfo
 newAdWordsManagerAccountInfo ::
   AdWordsManagerAccountInfo
 newAdWordsManagerAccountInfo =
-  AdWordsManagerAccountInfo {customerName = Core.Nothing, id = Core.Nothing}
+  AdWordsManagerAccountInfo
+    { customerName = Core.Nothing,
+      id = Core.Nothing
+    }
 
 instance Core.FromJSON AdWordsManagerAccountInfo where
   parseJSON =
@@ -327,7 +328,10 @@ data AnalyticsDataPoint = AnalyticsDataPoint
 newAnalyticsDataPoint ::
   AnalyticsDataPoint
 newAnalyticsDataPoint =
-  AnalyticsDataPoint {eventCount = Core.Nothing, eventLocations = Core.Nothing}
+  AnalyticsDataPoint
+    { eventCount = Core.Nothing,
+      eventLocations = Core.Nothing
+    }
 
 instance Core.FromJSON AnalyticsDataPoint where
   parseJSON =
@@ -387,10 +391,8 @@ instance Core.ToJSON AnalyticsSummary where
     Core.object
       ( Core.catMaybes
           [ ("contactsCount" Core..=) Core.<$> contactsCount,
-            ("profileViewsCount" Core..=)
-              Core.<$> profileViewsCount,
-            ("searchViewsCount" Core..=)
-              Core.<$> searchViewsCount
+            ("profileViewsCount" Core..=) Core.<$> profileViewsCount,
+            ("searchViewsCount" Core..=) Core.<$> searchViewsCount
           ]
       )
 
@@ -469,20 +471,17 @@ instance Core.ToJSON AvailableOffer where
     Core.object
       ( Core.catMaybes
           [ ("available" Core..=) Core.<$> available,
-            ("countryOfferInfos" Core..=)
-              Core.<$> countryOfferInfos,
+            ("countryOfferInfos" Core..=) Core.<$> countryOfferInfos,
             ("description" Core..=) Core.<$> description,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("maxAccountAge" Core..=) Core.<$> maxAccountAge,
             ("name" Core..=) Core.<$> name,
             ("offerLevel" Core..=) Core.<$> offerLevel,
             ("offerType" Core..=) Core.<$> offerType,
-            ("qualifiedCustomer" Core..=)
-              Core.<$> qualifiedCustomer,
+            ("qualifiedCustomer" Core..=) Core.<$> qualifiedCustomer,
             ("qualifiedCustomersComplete" Core..=)
               Core.<$> qualifiedCustomersComplete,
-            ("showSpecialOfferCopy" Core..=)
-              Core.<$> showSpecialOfferCopy,
+            ("showSpecialOfferCopy" Core..=) Core.<$> showSpecialOfferCopy,
             ("terms" Core..=) Core.<$> terms
           ]
       )
@@ -534,8 +533,7 @@ instance Core.ToJSON Certification where
     Core.object
       ( Core.catMaybes
           [ ("achieved" Core..=) Core.<$> achieved,
-            ("certificationType" Core..=)
-              Core.<$> certificationType,
+            ("certificationType" Core..=) Core.<$> certificationType,
             ("expiration" Core..=) Core.<$> expiration,
             ("lastAchieved" Core..=) Core.<$> lastAchieved,
             ("warning" Core..=) Core.<$> warning
@@ -557,7 +555,10 @@ data CertificationExamStatus = CertificationExamStatus
 newCertificationExamStatus ::
   CertificationExamStatus
 newCertificationExamStatus =
-  CertificationExamStatus {numberUsersPass = Core.Nothing, type' = Core.Nothing}
+  CertificationExamStatus
+    { numberUsersPass = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON CertificationExamStatus where
   parseJSON =
@@ -573,8 +574,7 @@ instance Core.ToJSON CertificationExamStatus where
   toJSON CertificationExamStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("numberUsersPass" Core..=)
-              Core.<$> numberUsersPass,
+          [ ("numberUsersPass" Core..=) Core.<$> numberUsersPass,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -727,7 +727,8 @@ instance Core.FromJSON Company where
             Core.<*> (o Core..:? "locations")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "originalMinMonthlyBudget")
-            Core.<*> ( o Core..:? "primaryAdwordsManagerAccountId"
+            Core.<*> ( o
+                         Core..:? "primaryAdwordsManagerAccountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "primaryLanguageCode")
@@ -744,15 +745,12 @@ instance Core.ToJSON Company where
   toJSON Company {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalWebsites" Core..=)
-              Core.<$> additionalWebsites,
+          [ ("additionalWebsites" Core..=) Core.<$> additionalWebsites,
             ("autoApprovalEmailDomains" Core..=)
               Core.<$> autoApprovalEmailDomains,
-            ("badgeAuthorityInAwn" Core..=)
-              Core.<$> badgeAuthorityInAwn,
+            ("badgeAuthorityInAwn" Core..=) Core.<$> badgeAuthorityInAwn,
             ("badgeTier" Core..=) Core.<$> badgeTier,
-            ("certificationStatuses" Core..=)
-              Core.<$> certificationStatuses,
+            ("certificationStatuses" Core..=) Core.<$> certificationStatuses,
             ("companyTypes" Core..=) Core.<$> companyTypes,
             ("convertedMinMonthlyBudget" Core..=)
               Core.<$> convertedMinMonthlyBudget,
@@ -766,15 +764,13 @@ instance Core.ToJSON Company where
             ("primaryAdwordsManagerAccountId" Core..=)
               Core.. Core.AsText
               Core.<$> primaryAdwordsManagerAccountId,
-            ("primaryLanguageCode" Core..=)
-              Core.<$> primaryLanguageCode,
+            ("primaryLanguageCode" Core..=) Core.<$> primaryLanguageCode,
             ("primaryLocation" Core..=) Core.<$> primaryLocation,
             ("profileStatus" Core..=) Core.<$> profileStatus,
             ("publicProfile" Core..=) Core.<$> publicProfile,
             ("ranks" Core..=) Core.<$> ranks,
             ("services" Core..=) Core.<$> services,
-            ("specializationStatus" Core..=)
-              Core.<$> specializationStatus,
+            ("specializationStatus" Core..=) Core.<$> specializationStatus,
             ("websiteUrl" Core..=) Core.<$> websiteUrl
           ]
       )
@@ -864,9 +860,7 @@ instance Core.FromJSON CompanyRelation where
             Core.<*> (o Core..:? "internalCompanyId")
             Core.<*> (o Core..:? "isPending")
             Core.<*> (o Core..:? "logoUrl")
-            Core.<*> ( o Core..:? "managerAccount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "managerAccount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "primaryAddress")
@@ -888,24 +882,20 @@ instance Core.ToJSON CompanyRelation where
             ("companyAdmin" Core..=) Core.<$> companyAdmin,
             ("companyId" Core..=) Core.<$> companyId,
             ("creationTime" Core..=) Core.<$> creationTime,
-            ("internalCompanyId" Core..=)
-              Core.<$> internalCompanyId,
+            ("internalCompanyId" Core..=) Core.<$> internalCompanyId,
             ("isPending" Core..=) Core.<$> isPending,
             ("logoUrl" Core..=) Core.<$> logoUrl,
-            ("managerAccount" Core..=) Core.. Core.AsText
+            ("managerAccount" Core..=)
+              Core.. Core.AsText
               Core.<$> managerAccount,
             ("name" Core..=) Core.<$> name,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
             ("primaryAddress" Core..=) Core.<$> primaryAddress,
-            ("primaryCountryCode" Core..=)
-              Core.<$> primaryCountryCode,
-            ("primaryLanguageCode" Core..=)
-              Core.<$> primaryLanguageCode,
-            ("resolvedTimestamp" Core..=)
-              Core.<$> resolvedTimestamp,
+            ("primaryCountryCode" Core..=) Core.<$> primaryCountryCode,
+            ("primaryLanguageCode" Core..=) Core.<$> primaryLanguageCode,
+            ("resolvedTimestamp" Core..=) Core.<$> resolvedTimestamp,
             ("segment" Core..=) Core.<$> segment,
-            ("specializationStatus" Core..=)
-              Core.<$> specializationStatus,
+            ("specializationStatus" Core..=) Core.<$> specializationStatus,
             ("state" Core..=) Core.<$> state,
             ("website" Core..=) Core.<$> website
           ]
@@ -954,8 +944,7 @@ instance Core.ToJSON CountryOfferInfo where
     Core.object
       ( Core.catMaybes
           [ ("getYAmount" Core..=) Core.<$> getYAmount,
-            ("offerCountryCode" Core..=)
-              Core.<$> offerCountryCode,
+            ("offerCountryCode" Core..=) Core.<$> offerCountryCode,
             ("offerType" Core..=) Core.<$> offerType,
             ("spendXAmount" Core..=) Core.<$> spendXAmount
           ]
@@ -1000,10 +989,8 @@ instance Core.ToJSON CreateLeadRequest where
     Core.object
       ( Core.catMaybes
           [ ("lead" Core..=) Core.<$> lead,
-            ("recaptchaChallenge" Core..=)
-              Core.<$> recaptchaChallenge,
-            ("requestMetadata" Core..=)
-              Core.<$> requestMetadata
+            ("recaptchaChallenge" Core..=) Core.<$> recaptchaChallenge,
+            ("requestMetadata" Core..=) Core.<$> requestMetadata
           ]
       )
 
@@ -1047,8 +1034,7 @@ instance Core.ToJSON CreateLeadResponse where
       ( Core.catMaybes
           [ ("lead" Core..=) Core.<$> lead,
             ("recaptchaStatus" Core..=) Core.<$> recaptchaStatus,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
+            ("responseMetadata" Core..=) Core.<$> responseMetadata
           ]
       )
 
@@ -1075,7 +1061,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -1160,8 +1151,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1188,16 +1178,15 @@ instance Core.FromJSON EventData where
       "EventData"
       ( \o ->
           EventData
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "values")
+            Core.<$> (o Core..:? "key")
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON EventData where
   toJSON EventData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("values" Core..=) Core.<$> values
-          ]
+          [("key" Core..=) Core.<$> key, ("values" Core..=) Core.<$> values]
       )
 
 -- | A user\'s information on a specific exam.
@@ -1274,7 +1263,10 @@ data GetCompanyResponse = GetCompanyResponse
 newGetCompanyResponse ::
   GetCompanyResponse
 newGetCompanyResponse =
-  GetCompanyResponse {company = Core.Nothing, responseMetadata = Core.Nothing}
+  GetCompanyResponse
+    { company = Core.Nothing,
+      responseMetadata = Core.Nothing
+    }
 
 instance Core.FromJSON GetCompanyResponse where
   parseJSON =
@@ -1291,8 +1283,7 @@ instance Core.ToJSON GetCompanyResponse where
     Core.object
       ( Core.catMaybes
           [ ("company" Core..=) Core.<$> company,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
+            ("responseMetadata" Core..=) Core.<$> responseMetadata
           ]
       )
 
@@ -1316,17 +1307,14 @@ instance Core.FromJSON GetPartnersStatusResponse where
     Core.withObject
       "GetPartnersStatusResponse"
       ( \o ->
-          GetPartnersStatusResponse
-            Core.<$> (o Core..:? "responseMetadata")
+          GetPartnersStatusResponse Core.<$> (o Core..:? "responseMetadata")
       )
 
 instance Core.ToJSON GetPartnersStatusResponse where
   toJSON GetPartnersStatusResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
-          ]
+          [("responseMetadata" Core..=) Core.<$> responseMetadata]
       )
 
 -- | Historical information about a Google Partners Offer.
@@ -1387,9 +1375,7 @@ instance Core.FromJSON HistoricalOffer where
           HistoricalOffer
             Core.<$> (o Core..:? "adwordsUrl")
             Core.<*> (o Core..:? "clientEmail")
-            Core.<*> ( o Core..:? "clientId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "clientId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "clientName")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "expirationTime")
@@ -1407,16 +1393,13 @@ instance Core.ToJSON HistoricalOffer where
       ( Core.catMaybes
           [ ("adwordsUrl" Core..=) Core.<$> adwordsUrl,
             ("clientEmail" Core..=) Core.<$> clientEmail,
-            ("clientId" Core..=) Core.. Core.AsText
-              Core.<$> clientId,
+            ("clientId" Core..=) Core.. Core.AsText Core.<$> clientId,
             ("clientName" Core..=) Core.<$> clientName,
             ("creationTime" Core..=) Core.<$> creationTime,
             ("expirationTime" Core..=) Core.<$> expirationTime,
-            ("lastModifiedTime" Core..=)
-              Core.<$> lastModifiedTime,
+            ("lastModifiedTime" Core..=) Core.<$> lastModifiedTime,
             ("offerCode" Core..=) Core.<$> offerCode,
-            ("offerCountryCode" Core..=)
-              Core.<$> offerCountryCode,
+            ("offerCountryCode" Core..=) Core.<$> offerCountryCode,
             ("offerType" Core..=) Core.<$> offerType,
             ("senderName" Core..=) Core.<$> senderName,
             ("status" Core..=) Core.<$> status
@@ -1437,7 +1420,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -1523,9 +1507,7 @@ instance Core.FromJSON Lead where
       "Lead"
       ( \o ->
           Lead
-            Core.<$> ( o Core..:? "adwordsCustomerId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "adwordsCustomerId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "comments")
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "email")
@@ -1546,7 +1528,8 @@ instance Core.ToJSON Lead where
   toJSON Lead {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adwordsCustomerId" Core..=) Core.. Core.AsText
+          [ ("adwordsCustomerId" Core..=)
+              Core.. Core.AsText
               Core.<$> adwordsCustomerId,
             ("comments" Core..=) Core.<$> comments,
             ("createTime" Core..=) Core.<$> createTime,
@@ -1557,8 +1540,7 @@ instance Core.ToJSON Lead where
             ("id" Core..=) Core.<$> id,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("marketingOptIn" Core..=) Core.<$> marketingOptIn,
-            ("minMonthlyBudget" Core..=)
-              Core.<$> minMonthlyBudget,
+            ("minMonthlyBudget" Core..=) Core.<$> minMonthlyBudget,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
             ("state" Core..=) Core.<$> state,
             ("type" Core..=) Core.<$> type',
@@ -1609,11 +1591,9 @@ instance Core.ToJSON ListAnalyticsResponse where
     Core.object
       ( Core.catMaybes
           [ ("analytics" Core..=) Core.<$> analytics,
-            ("analyticsSummary" Core..=)
-              Core.<$> analyticsSummary,
+            ("analyticsSummary" Core..=) Core.<$> analyticsSummary,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
+            ("responseMetadata" Core..=) Core.<$> responseMetadata
           ]
       )
 
@@ -1657,8 +1637,7 @@ instance Core.ToJSON ListCompaniesResponse where
       ( Core.catMaybes
           [ ("companies" Core..=) Core.<$> companies,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
+            ("responseMetadata" Core..=) Core.<$> responseMetadata
           ]
       )
 
@@ -1706,8 +1685,7 @@ instance Core.ToJSON ListLeadsResponse where
       ( Core.catMaybes
           [ ("leads" Core..=) Core.<$> leads,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata,
+            ("responseMetadata" Core..=) Core.<$> responseMetadata,
             ("totalSize" Core..=) Core.<$> totalSize
           ]
       )
@@ -1762,14 +1740,11 @@ instance Core.ToJSON ListOffersHistoryResponse where
   toJSON ListOffersHistoryResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("canShowEntireCompany" Core..=)
-              Core.<$> canShowEntireCompany,
+          [ ("canShowEntireCompany" Core..=) Core.<$> canShowEntireCompany,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("offers" Core..=) Core.<$> offers,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata,
-            ("showingEntireCompany" Core..=)
-              Core.<$> showingEntireCompany,
+            ("responseMetadata" Core..=) Core.<$> responseMetadata,
+            ("showingEntireCompany" Core..=) Core.<$> showingEntireCompany,
             ("totalResults" Core..=) Core.<$> totalResults
           ]
       )
@@ -1812,11 +1787,9 @@ instance Core.ToJSON ListOffersResponse where
   toJSON ListOffersResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("availableOffers" Core..=)
-              Core.<$> availableOffers,
+          [ ("availableOffers" Core..=) Core.<$> availableOffers,
             ("noOfferReason" Core..=) Core.<$> noOfferReason,
-            ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
+            ("responseMetadata" Core..=) Core.<$> responseMetadata
           ]
       )
 
@@ -1854,8 +1827,7 @@ instance Core.ToJSON ListUserStatesResponse where
   toJSON ListUserStatesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("responseMetadata" Core..=)
-              Core.<$> responseMetadata,
+          [ ("responseMetadata" Core..=) Core.<$> responseMetadata,
             ("userStates" Core..=) Core.<$> userStates
           ]
       )
@@ -1977,10 +1949,8 @@ instance Core.ToJSON Location where
       ( Core.catMaybes
           [ ("address" Core..=) Core.<$> address,
             ("addressLine" Core..=) Core.<$> addressLine,
-            ("administrativeArea" Core..=)
-              Core.<$> administrativeArea,
-            ("dependentLocality" Core..=)
-              Core.<$> dependentLocality,
+            ("administrativeArea" Core..=) Core.<$> administrativeArea,
+            ("dependentLocality" Core..=) Core.<$> dependentLocality,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("latLng" Core..=) Core.<$> latLng,
             ("locality" Core..=) Core.<$> locality,
@@ -2035,8 +2005,7 @@ instance Core.ToJSON LogMessageRequest where
           [ ("clientInfo" Core..=) Core.<$> clientInfo,
             ("details" Core..=) Core.<$> details,
             ("level" Core..=) Core.<$> level,
-            ("requestMetadata" Core..=)
-              Core.<$> requestMetadata
+            ("requestMetadata" Core..=) Core.<$> requestMetadata
           ]
       )
 
@@ -2044,8 +2013,7 @@ instance Core.ToJSON LogMessageRequest where
 --
 -- /See:/ 'newLogMessageRequest_ClientInfo' smart constructor.
 newtype LogMessageRequest_ClientInfo = LogMessageRequest_ClientInfo
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2062,13 +2030,11 @@ instance Core.FromJSON LogMessageRequest_ClientInfo where
     Core.withObject
       "LogMessageRequest_ClientInfo"
       ( \o ->
-          LogMessageRequest_ClientInfo
-            Core.<$> (Core.parseJSONObject o)
+          LogMessageRequest_ClientInfo Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON LogMessageRequest_ClientInfo where
-  toJSON LogMessageRequest_ClientInfo {..} =
-    Core.toJSON additional
+  toJSON LogMessageRequest_ClientInfo {..} = Core.toJSON additional
 
 -- | Response message for LogClientMessage.
 --
@@ -2082,24 +2048,22 @@ newtype LogMessageResponse = LogMessageResponse
 -- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
 newLogMessageResponse ::
   LogMessageResponse
-newLogMessageResponse = LogMessageResponse {responseMetadata = Core.Nothing}
+newLogMessageResponse =
+  LogMessageResponse {responseMetadata = Core.Nothing}
 
 instance Core.FromJSON LogMessageResponse where
   parseJSON =
     Core.withObject
       "LogMessageResponse"
       ( \o ->
-          LogMessageResponse
-            Core.<$> (o Core..:? "responseMetadata")
+          LogMessageResponse Core.<$> (o Core..:? "responseMetadata")
       )
 
 instance Core.ToJSON LogMessageResponse where
   toJSON LogMessageResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
-          ]
+          [("responseMetadata" Core..=) Core.<$> responseMetadata]
       )
 
 -- | Request message for LogUserEvent.
@@ -2178,24 +2142,22 @@ newtype LogUserEventResponse = LogUserEventResponse
 -- | Creates a value of 'LogUserEventResponse' with the minimum fields required to make a request.
 newLogUserEventResponse ::
   LogUserEventResponse
-newLogUserEventResponse = LogUserEventResponse {responseMetadata = Core.Nothing}
+newLogUserEventResponse =
+  LogUserEventResponse {responseMetadata = Core.Nothing}
 
 instance Core.FromJSON LogUserEventResponse where
   parseJSON =
     Core.withObject
       "LogUserEventResponse"
       ( \o ->
-          LogUserEventResponse
-            Core.<$> (o Core..:? "responseMetadata")
+          LogUserEventResponse Core.<$> (o Core..:? "responseMetadata")
       )
 
 instance Core.ToJSON LogUserEventResponse where
   toJSON LogUserEventResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("responseMetadata" Core..=)
-              Core.<$> responseMetadata
-          ]
+          [("responseMetadata" Core..=) Core.<$> responseMetadata]
       )
 
 -- | Represents an amount of money with its currency type.
@@ -2229,9 +2191,7 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> ( o Core..:? "units"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "units" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Money where
@@ -2295,9 +2255,7 @@ instance Core.FromJSON OfferCustomer where
             Core.<*> (o Core..:? "countryCode")
             Core.<*> (o Core..:? "creationTime")
             Core.<*> (o Core..:? "eligibilityDaysLeft")
-            Core.<*> ( o Core..:? "externalCid"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "externalCid" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "getYAmount")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "offerType")
@@ -2311,10 +2269,8 @@ instance Core.ToJSON OfferCustomer where
           [ ("adwordsUrl" Core..=) Core.<$> adwordsUrl,
             ("countryCode" Core..=) Core.<$> countryCode,
             ("creationTime" Core..=) Core.<$> creationTime,
-            ("eligibilityDaysLeft" Core..=)
-              Core.<$> eligibilityDaysLeft,
-            ("externalCid" Core..=) Core.. Core.AsText
-              Core.<$> externalCid,
+            ("eligibilityDaysLeft" Core..=) Core.<$> eligibilityDaysLeft,
+            ("externalCid" Core..=) Core.. Core.AsText Core.<$> externalCid,
             ("getYAmount" Core..=) Core.<$> getYAmount,
             ("name" Core..=) Core.<$> name,
             ("offerType" Core..=) Core.<$> offerType,
@@ -2369,8 +2325,7 @@ instance Core.ToJSON OptIns where
     Core.object
       ( Core.catMaybes
           [ ("marketComm" Core..=) Core.<$> marketComm,
-            ("performanceSuggestions" Core..=)
-              Core.<$> performanceSuggestions,
+            ("performanceSuggestions" Core..=) Core.<$> performanceSuggestions,
             ("phoneContact" Core..=) Core.<$> phoneContact,
             ("physicalMail" Core..=) Core.<$> physicalMail,
             ("specialOffers" Core..=) Core.<$> specialOffers
@@ -2423,8 +2378,7 @@ instance Core.ToJSON PublicProfile where
   toJSON PublicProfile {..} =
     Core.object
       ( Core.catMaybes
-          [ ("displayImageUrl" Core..=)
-              Core.<$> displayImageUrl,
+          [ ("displayImageUrl" Core..=) Core.<$> displayImageUrl,
             ("displayName" Core..=) Core.<$> displayName,
             ("id" Core..=) Core.<$> id,
             ("profileImage" Core..=) Core.<$> profileImage,
@@ -2453,8 +2407,7 @@ instance Core.FromJSON Rank where
     Core.withObject
       "Rank"
       ( \o ->
-          Rank
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+          Rank Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Rank where
@@ -2489,7 +2442,8 @@ instance Core.FromJSON RecaptchaChallenge where
       "RecaptchaChallenge"
       ( \o ->
           RecaptchaChallenge
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "response")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "response")
       )
 
 instance Core.ToJSON RecaptchaChallenge where
@@ -2549,8 +2503,7 @@ instance Core.ToJSON RequestMetadata where
       ( Core.catMaybes
           [ ("experimentIds" Core..=) Core.<$> experimentIds,
             ("locale" Core..=) Core.<$> locale,
-            ("partnersSessionId" Core..=)
-              Core.<$> partnersSessionId,
+            ("partnersSessionId" Core..=) Core.<$> partnersSessionId,
             ("trafficSource" Core..=) Core.<$> trafficSource,
             ("userOverrides" Core..=) Core.<$> userOverrides
           ]
@@ -2574,16 +2527,12 @@ instance Core.FromJSON ResponseMetadata where
   parseJSON =
     Core.withObject
       "ResponseMetadata"
-      ( \o ->
-          ResponseMetadata Core.<$> (o Core..:? "debugInfo")
-      )
+      (\o -> ResponseMetadata Core.<$> (o Core..:? "debugInfo"))
 
 instance Core.ToJSON ResponseMetadata where
   toJSON ResponseMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("debugInfo" Core..=) Core.<$> debugInfo]
-      )
+      (Core.catMaybes [("debugInfo" Core..=) Core.<$> debugInfo])
 
 -- | Agency specialization status
 --
@@ -2619,8 +2568,7 @@ instance Core.ToJSON SpecializationStatus where
   toJSON SpecializationStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("badgeSpecialization" Core..=)
-              Core.<$> badgeSpecialization,
+          [ ("badgeSpecialization" Core..=) Core.<$> badgeSpecialization,
             ("badgeSpecializationState" Core..=)
               Core.<$> badgeSpecializationState
           ]
@@ -2641,7 +2589,10 @@ data TrafficSource = TrafficSource
 newTrafficSource ::
   TrafficSource
 newTrafficSource =
-  TrafficSource {trafficSourceId = Core.Nothing, trafficSubId = Core.Nothing}
+  TrafficSource
+    { trafficSourceId = Core.Nothing,
+      trafficSubId = Core.Nothing
+    }
 
 instance Core.FromJSON TrafficSource where
   parseJSON =
@@ -2657,8 +2608,7 @@ instance Core.ToJSON TrafficSource where
   toJSON TrafficSource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("trafficSourceId" Core..=)
-              Core.<$> trafficSourceId,
+          [ ("trafficSourceId" Core..=) Core.<$> trafficSourceId,
             ("trafficSubId" Core..=) Core.<$> trafficSubId
           ]
       )
@@ -2740,8 +2690,7 @@ instance Core.ToJSON User where
           [ ("afaInfoShared" Core..=) Core.<$> afaInfoShared,
             ("availableAdwordsManagerAccounts" Core..=)
               Core.<$> availableAdwordsManagerAccounts,
-            ("certificationStatus" Core..=)
-              Core.<$> certificationStatus,
+            ("certificationStatus" Core..=) Core.<$> certificationStatus,
             ("company" Core..=) Core.<$> company,
             ("companyVerificationEmail" Core..=)
               Core.<$> companyVerificationEmail,
@@ -2857,7 +2806,8 @@ instance Core.FromJSON UserProfile where
       ( \o ->
           UserProfile
             Core.<$> (o Core..:? "address")
-            Core.<*> ( o Core..:? "adwordsManagerAccount"
+            Core.<*> ( o
+                         Core..:? "adwordsManagerAccount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "channels")
@@ -2880,7 +2830,8 @@ instance Core.ToJSON UserProfile where
     Core.object
       ( Core.catMaybes
           [ ("address" Core..=) Core.<$> address,
-            ("adwordsManagerAccount" Core..=) Core.. Core.AsText
+            ("adwordsManagerAccount" Core..=)
+              Core.. Core.AsText
               Core.<$> adwordsManagerAccount,
             ("channels" Core..=) Core.<$> channels,
             ("emailAddress" Core..=) Core.<$> emailAddress,
@@ -2893,8 +2844,7 @@ instance Core.ToJSON UserProfile where
             ("markets" Core..=) Core.<$> markets,
             ("migrateToAfa" Core..=) Core.<$> migrateToAfa,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
-            ("primaryCountryCode" Core..=)
-              Core.<$> primaryCountryCode,
+            ("primaryCountryCode" Core..=) Core.<$> primaryCountryCode,
             ("profilePublic" Core..=) Core.<$> profilePublic
           ]
       )

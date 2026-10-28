@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,14 +17,15 @@
 
 -- |
 -- Module      : Gogol.Spanner.Projects.InstanceConfigs.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an instance config and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance config. The instance config name is assigned by the caller. If the named instance config already exists, @CreateInstanceConfig@ returns @ALREADY_EXISTS@. Immediately after the request returns: * The instance config is readable via the API, with all requested attributes. The instance config\'s reconciling field is set to true. Its state is @CREATING@. While the operation is pending: * Cancelling the operation renders the instance config immediately unreadable via the API. * Except for deleting the creating resource, all other attempts to modify the instance config are rejected. Upon completion of the returned operation: * Instances can be created using the instance configuration. * The instance config\'s reconciling field becomes false. Its state becomes @READY@. The returned long-running operation will have a name of the format @\/operations\/@ and
--- can be used to track creation of the instance config. The metadata field type is CreateInstanceConfigMetadata. The response field type is InstanceConfig, if successful. Authorization requires @spanner.instanceConfigs.create@ permission on the resource parent.
+-- Creates an instance configuration and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance configuration. The instance configuration name is assigned by the caller. If the named instance configuration already exists, @CreateInstanceConfig@ returns @ALREADY_EXISTS@. Immediately after the request returns: * The instance configuration is readable via the API, with all requested attributes. The instance configuration\'s reconciling field is set to true. Its state is @CREATING@. While the operation is pending: * Cancelling the operation renders the instance configuration immediately unreadable via the API. * Except for deleting the creating resource, all other attempts to modify the instance configuration are rejected. Upon completion of the returned operation: * Instances can be created using the instance configuration. * The instance configuration\'s reconciling field becomes false. Its state becomes @READY@. The returned long-running
+-- operation will have a name of the format @\/operations\/@ and can be used to track creation of the instance configuration. The metadata field type is CreateInstanceConfigMetadata. The response field type is InstanceConfig, if successful. Authorization requires @spanner.instanceConfigs.create@ permission on the resource parent.
 --
 -- /See:/ <https://cloud.google.com/spanner/ Cloud Spanner API Reference> for @spanner.projects.instanceConfigs.create@.
 module Gogol.Spanner.Projects.InstanceConfigs.Create
@@ -40,7 +38,7 @@ module Gogol.Spanner.Projects.InstanceConfigs.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spanner.Types
 
 -- | A resource alias for @spanner.projects.instanceConfigs.create@ method which the
@@ -58,8 +56,8 @@ type SpannerProjectsInstanceConfigsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] CreateInstanceConfigRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Creates an instance config and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance config. The instance config name is assigned by the caller. If the named instance config already exists, @CreateInstanceConfig@ returns @ALREADY_EXISTS@. Immediately after the request returns: * The instance config is readable via the API, with all requested attributes. The instance config\'s reconciling field is set to true. Its state is @CREATING@. While the operation is pending: * Cancelling the operation renders the instance config immediately unreadable via the API. * Except for deleting the creating resource, all other attempts to modify the instance config are rejected. Upon completion of the returned operation: * Instances can be created using the instance configuration. * The instance config\'s reconciling field becomes false. Its state becomes @READY@. The returned long-running operation will have a name of the format @\/operations\/@ and
--- can be used to track creation of the instance config. The metadata field type is CreateInstanceConfigMetadata. The response field type is InstanceConfig, if successful. Authorization requires @spanner.instanceConfigs.create@ permission on the resource parent.
+-- | Creates an instance configuration and begins preparing it to be used. The returned long-running operation can be used to track the progress of preparing the new instance configuration. The instance configuration name is assigned by the caller. If the named instance configuration already exists, @CreateInstanceConfig@ returns @ALREADY_EXISTS@. Immediately after the request returns: * The instance configuration is readable via the API, with all requested attributes. The instance configuration\'s reconciling field is set to true. Its state is @CREATING@. While the operation is pending: * Cancelling the operation renders the instance configuration immediately unreadable via the API. * Except for deleting the creating resource, all other attempts to modify the instance configuration are rejected. Upon completion of the returned operation: * Instances can be created using the instance configuration. * The instance configuration\'s reconciling field becomes false. Its state becomes @READY@. The returned long-running
+-- operation will have a name of the format @\/operations\/@ and can be used to track creation of the instance configuration. The metadata field type is CreateInstanceConfigMetadata. The response field type is InstanceConfig, if successful. Authorization requires @spanner.instanceConfigs.create@ permission on the resource parent.
 --
 -- /See:/ 'newSpannerProjectsInstanceConfigsCreate' smart constructor.
 data SpannerProjectsInstanceConfigsCreate = SpannerProjectsInstanceConfigsCreate
@@ -69,7 +67,7 @@ data SpannerProjectsInstanceConfigsCreate = SpannerProjectsInstanceConfigsCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The name of the project in which to create the instance config. Values are of the form @projects\/@.
+    -- | Required. The name of the project in which to create the instance configuration. Values are of the form @projects\/@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: CreateInstanceConfigRequest,
@@ -82,7 +80,7 @@ data SpannerProjectsInstanceConfigsCreate = SpannerProjectsInstanceConfigsCreate
 
 -- | Creates a value of 'SpannerProjectsInstanceConfigsCreate' with the minimum fields required to make a request.
 newSpannerProjectsInstanceConfigsCreate ::
-  -- |  Required. The name of the project in which to create the instance config. Values are of the form @projects\/@. See 'parent'.
+  -- |  Required. The name of the project in which to create the instance configuration. Values are of the form @projects\/@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   CreateInstanceConfigRequest ->
@@ -98,33 +96,26 @@ newSpannerProjectsInstanceConfigsCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SpannerProjectsInstanceConfigsCreate
-  where
-  type
-    Rs SpannerProjectsInstanceConfigsCreate =
-      Operation
+instance Core.GoogleRequest SpannerProjectsInstanceConfigsCreate where
+  type Rs SpannerProjectsInstanceConfigsCreate = Operation
   type
     Scopes SpannerProjectsInstanceConfigsCreate =
       '[CloudPlatform'FullControl, Spanner'Admin]
-  requestClient
-    SpannerProjectsInstanceConfigsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        spannerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SpannerProjectsInstanceConfigsCreateResource
-            )
-            Core.mempty
+  requestClient SpannerProjectsInstanceConfigsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      spannerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SpannerProjectsInstanceConfigsCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Captions.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Captions.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.captions.update@ method which the
@@ -61,22 +59,22 @@ type YouTubeCaptionsUpdateResource =
     Core.:> Core.ReqBody '[Core.JSON] Caption
     Core.:> Core.Put '[Core.JSON] Caption
     Core.:<|> "upload"
-      Core.:> "youtube"
-      Core.:> "v3"
-      Core.:> "captions"
-      Core.:> Core.QueryParams "part" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "onBehalfOf" Core.Text
-      Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-      Core.:> Core.QueryParam "sync" Core.Bool
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Caption
-      Core.:> Core.Put '[Core.JSON] Caption
+    Core.:> "youtube"
+    Core.:> "v3"
+    Core.:> "captions"
+    Core.:> Core.QueryParams "part" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "onBehalfOf" Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
+    Core.:> Core.QueryParam "sync" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Caption
+    Core.:> Core.Put '[Core.JSON] Caption
 
 -- | Updates an existing resource.
 --
@@ -148,42 +146,35 @@ instance Core.GoogleRequest YouTubeCaptionsUpdate where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeCaptionsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeCaptionsUpdateResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload YouTubeCaptionsUpdate)
   where
-  type
-    Rs (Core.MediaUpload YouTubeCaptionsUpdate) =
-      Caption
+  type Rs (Core.MediaUpload YouTubeCaptionsUpdate) = Caption
   type
     Scopes (Core.MediaUpload YouTubeCaptionsUpdate) =
       Core.Scopes YouTubeCaptionsUpdate
-  requestClient
-    (Core.MediaUpload YouTubeCaptionsUpdate {..} body) =
-      go
-        part
-        xgafv
-        accessToken
-        callback
-        onBehalfOf
-        onBehalfOfContentOwner
-        sync
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        youTubeService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy YouTubeCaptionsUpdateResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload YouTubeCaptionsUpdate {..} body) =
+    go
+      part
+      xgafv
+      accessToken
+      callback
+      onBehalfOf
+      onBehalfOfContentOwner
+      sync
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      youTubeService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy YouTubeCaptionsUpdateResource)
+          Core.mempty

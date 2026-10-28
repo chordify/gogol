@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeReporting.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTubeReporting.Internal.Product
@@ -100,7 +98,7 @@ module Gogol.YouTubeReporting.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeReporting.Internal.Sum
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
@@ -115,8 +113,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -156,9 +153,7 @@ instance Core.FromJSON GdataBlobstore2Info where
       "GdataBlobstore2Info"
       ( \o ->
           GdataBlobstore2Info
-            Core.<$> ( o Core..:? "blobGeneration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "blobGeneration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "blobId")
             Core.<*> (o Core..:? "downloadReadHandle")
             Core.<*> (o Core..:? "readToken")
@@ -169,11 +164,11 @@ instance Core.ToJSON GdataBlobstore2Info where
   toJSON GdataBlobstore2Info {..} =
     Core.object
       ( Core.catMaybes
-          [ ("blobGeneration" Core..=) Core.. Core.AsText
+          [ ("blobGeneration" Core..=)
+              Core.. Core.AsText
               Core.<$> blobGeneration,
             ("blobId" Core..=) Core.<$> blobId,
-            ("downloadReadHandle" Core..=)
-              Core.<$> downloadReadHandle,
+            ("downloadReadHandle" Core..=) Core.<$> downloadReadHandle,
             ("readToken" Core..=) Core.<$> readToken,
             ("uploadMetadataContainer" Core..=)
               Core.<$> uploadMetadataContainer
@@ -238,9 +233,7 @@ instance Core.FromJSON GdataCompositeMedia where
             Core.<*> (o Core..:? "cosmoBinaryReference")
             Core.<*> (o Core..:? "crc32cHash")
             Core.<*> (o Core..:? "inline")
-            Core.<*> ( o Core..:? "length"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "length" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "objectId")
             Core.<*> (o Core..:? "path")
@@ -254,12 +247,10 @@ instance Core.ToJSON GdataCompositeMedia where
       ( Core.catMaybes
           [ ("blobRef" Core..=) Core.<$> blobRef,
             ("blobstore2Info" Core..=) Core.<$> blobstore2Info,
-            ("cosmoBinaryReference" Core..=)
-              Core.<$> cosmoBinaryReference,
+            ("cosmoBinaryReference" Core..=) Core.<$> cosmoBinaryReference,
             ("crc32cHash" Core..=) Core.<$> crc32cHash,
             ("inline" Core..=) Core.<$> inline,
-            ("length" Core..=) Core.. Core.AsText
-              Core.<$> length,
+            ("length" Core..=) Core.. Core.AsText Core.<$> length,
             ("md5Hash" Core..=) Core.<$> md5Hash,
             ("objectId" Core..=) Core.<$> objectId,
             ("path" Core..=) Core.<$> path,
@@ -358,13 +349,9 @@ instance Core.FromJSON GdataDiffChecksumsResponse where
       ( \o ->
           GdataDiffChecksumsResponse
             Core.<$> (o Core..:? "checksumsLocation")
-            Core.<*> ( o Core..:? "chunkSizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "chunkSizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectLocation")
-            Core.<*> ( o Core..:? "objectSizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "objectSizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectVersion")
       )
 
@@ -372,12 +359,13 @@ instance Core.ToJSON GdataDiffChecksumsResponse where
   toJSON GdataDiffChecksumsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("checksumsLocation" Core..=)
-              Core.<$> checksumsLocation,
-            ("chunkSizeBytes" Core..=) Core.. Core.AsText
+          [ ("checksumsLocation" Core..=) Core.<$> checksumsLocation,
+            ("chunkSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> chunkSizeBytes,
             ("objectLocation" Core..=) Core.<$> objectLocation,
-            ("objectSizeBytes" Core..=) Core.. Core.AsText
+            ("objectSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> objectSizeBytes,
             ("objectVersion" Core..=) Core.<$> objectVersion
           ]
@@ -403,8 +391,7 @@ instance Core.FromJSON GdataDiffDownloadResponse where
     Core.withObject
       "GdataDiffDownloadResponse"
       ( \o ->
-          GdataDiffDownloadResponse
-            Core.<$> (o Core..:? "objectLocation")
+          GdataDiffDownloadResponse Core.<$> (o Core..:? "objectLocation")
       )
 
 instance Core.ToJSON GdataDiffDownloadResponse where
@@ -523,9 +510,7 @@ instance Core.FromJSON GdataDiffVersionResponse where
       "GdataDiffVersionResponse"
       ( \o ->
           GdataDiffVersionResponse
-            Core.<$> ( o Core..:? "objectSizeBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "objectSizeBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectVersion")
       )
 
@@ -533,7 +518,8 @@ instance Core.ToJSON GdataDiffVersionResponse where
   toJSON GdataDiffVersionResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("objectSizeBytes" Core..=) Core.. Core.AsText
+          [ ("objectSizeBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> objectSizeBytes,
             ("objectVersion" Core..=) Core.<$> objectVersion
           ]
@@ -573,8 +559,7 @@ instance Core.ToJSON GdataDownloadParameters where
   toJSON GdataDownloadParameters {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowGzipCompression" Core..=)
-              Core.<$> allowGzipCompression,
+          [ ("allowGzipCompression" Core..=) Core.<$> allowGzipCompression,
             ("ignoreRange" Core..=) Core.<$> ignoreRange
           ]
       )
@@ -709,9 +694,7 @@ instance Core.FromJSON GdataMedia where
             Core.<*> (o Core..:? "hashVerified")
             Core.<*> (o Core..:? "inline")
             Core.<*> (o Core..:? "isPotentialRetry")
-            Core.<*> ( o Core..:? "length"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "length" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "md5Hash")
             Core.<*> (o Core..:? "mediaId")
             Core.<*> (o Core..:? "objectId")
@@ -719,9 +702,7 @@ instance Core.FromJSON GdataMedia where
             Core.<*> (o Core..:? "referenceType")
             Core.<*> (o Core..:? "sha1Hash")
             Core.<*> (o Core..:? "sha256Hash")
-            Core.<*> ( o Core..:? "timestamp"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "timestamp" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "token")
       )
 
@@ -730,36 +711,26 @@ instance Core.ToJSON GdataMedia where
     Core.object
       ( Core.catMaybes
           [ ("algorithm" Core..=) Core.<$> algorithm,
-            ("bigstoreObjectRef" Core..=)
-              Core.<$> bigstoreObjectRef,
+            ("bigstoreObjectRef" Core..=) Core.<$> bigstoreObjectRef,
             ("blobRef" Core..=) Core.<$> blobRef,
             ("blobstore2Info" Core..=) Core.<$> blobstore2Info,
             ("compositeMedia" Core..=) Core.<$> compositeMedia,
             ("contentType" Core..=) Core.<$> contentType,
             ("contentTypeInfo" Core..=) Core.<$> contentTypeInfo,
-            ("cosmoBinaryReference" Core..=)
-              Core.<$> cosmoBinaryReference,
+            ("cosmoBinaryReference" Core..=) Core.<$> cosmoBinaryReference,
             ("crc32cHash" Core..=) Core.<$> crc32cHash,
-            ("diffChecksumsResponse" Core..=)
-              Core.<$> diffChecksumsResponse,
-            ("diffDownloadResponse" Core..=)
-              Core.<$> diffDownloadResponse,
-            ("diffUploadRequest" Core..=)
-              Core.<$> diffUploadRequest,
-            ("diffUploadResponse" Core..=)
-              Core.<$> diffUploadResponse,
-            ("diffVersionResponse" Core..=)
-              Core.<$> diffVersionResponse,
-            ("downloadParameters" Core..=)
-              Core.<$> downloadParameters,
+            ("diffChecksumsResponse" Core..=) Core.<$> diffChecksumsResponse,
+            ("diffDownloadResponse" Core..=) Core.<$> diffDownloadResponse,
+            ("diffUploadRequest" Core..=) Core.<$> diffUploadRequest,
+            ("diffUploadResponse" Core..=) Core.<$> diffUploadResponse,
+            ("diffVersionResponse" Core..=) Core.<$> diffVersionResponse,
+            ("downloadParameters" Core..=) Core.<$> downloadParameters,
             ("filename" Core..=) Core.<$> filename,
             ("hash" Core..=) Core.<$> hash,
             ("hashVerified" Core..=) Core.<$> hashVerified,
             ("inline" Core..=) Core.<$> inline,
-            ("isPotentialRetry" Core..=)
-              Core.<$> isPotentialRetry,
-            ("length" Core..=) Core.. Core.AsText
-              Core.<$> length,
+            ("isPotentialRetry" Core..=) Core.<$> isPotentialRetry,
+            ("length" Core..=) Core.. Core.AsText Core.<$> length,
             ("md5Hash" Core..=) Core.<$> md5Hash,
             ("mediaId" Core..=) Core.<$> mediaId,
             ("objectId" Core..=) Core.<$> objectId,
@@ -767,8 +738,7 @@ instance Core.ToJSON GdataMedia where
             ("referenceType" Core..=) Core.<$> referenceType,
             ("sha1Hash" Core..=) Core.<$> sha1Hash,
             ("sha256Hash" Core..=) Core.<$> sha256Hash,
-            ("timestamp" Core..=) Core.. Core.AsText
-              Core.<$> timestamp,
+            ("timestamp" Core..=) Core.. Core.AsText Core.<$> timestamp,
             ("token" Core..=) Core.<$> token
           ]
       )
@@ -803,9 +773,7 @@ instance Core.FromJSON GdataObjectId where
       ( \o ->
           GdataObjectId
             Core.<$> (o Core..:? "bucketName")
-            Core.<*> ( o Core..:? "generation"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "generation" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "objectName")
       )
 
@@ -814,8 +782,7 @@ instance Core.ToJSON GdataObjectId where
     Core.object
       ( Core.catMaybes
           [ ("bucketName" Core..=) Core.<$> bucketName,
-            ("generation" Core..=) Core.. Core.AsText
-              Core.<$> generation,
+            ("generation" Core..=) Core.. Core.AsText Core.<$> generation,
             ("objectName" Core..=) Core.<$> objectName
           ]
       )
@@ -894,7 +861,10 @@ data ListJobsResponse = ListJobsResponse
 newListJobsResponse ::
   ListJobsResponse
 newListJobsResponse =
-  ListJobsResponse {jobs = Core.Nothing, nextPageToken = Core.Nothing}
+  ListJobsResponse
+    { jobs = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListJobsResponse where
   parseJSON =
@@ -969,7 +939,10 @@ data ListReportsResponse = ListReportsResponse
 newListReportsResponse ::
   ListReportsResponse
 newListReportsResponse =
-  ListReportsResponse {nextPageToken = Core.Nothing, reports = Core.Nothing}
+  ListReportsResponse
+    { nextPageToken = Core.Nothing,
+      reports = Core.Nothing
+    }
 
 instance Core.FromJSON ListReportsResponse where
   parseJSON =

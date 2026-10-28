@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Events.ListByPlayer
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Events.ListByPlayer
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.events.listByPlayer@ method which the
 -- 'GamesEventsListByPlayer' request conforms to.
@@ -98,12 +96,8 @@ newGamesEventsListByPlayer =
     }
 
 instance Core.GoogleRequest GamesEventsListByPlayer where
-  type
-    Rs GamesEventsListByPlayer =
-      PlayerEventListResponse
-  type
-    Scopes GamesEventsListByPlayer =
-      '[Games'FullControl]
+  type Rs GamesEventsListByPlayer = PlayerEventListResponse
+  type Scopes GamesEventsListByPlayer = '[Games'FullControl]
   requestClient GamesEventsListByPlayer {..} =
     go
       xgafv
@@ -119,7 +113,5 @@ instance Core.GoogleRequest GamesEventsListByPlayer where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesEventsListByPlayerResource
-          )
+          (Core.Proxy :: Core.Proxy GamesEventsListByPlayerResource)
           Core.mempty

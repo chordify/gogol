@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Customers.Devices.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidDeviceProvisioning.Customers.Devices.List
 where
 
 import Gogol.AndroidDeviceProvisioning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androiddeviceprovisioning.customers.devices.list@ method which the
 -- 'AndroidDeviceProvisioningCustomersDevicesList' request conforms to.
@@ -68,7 +66,7 @@ data AndroidDeviceProvisioningCustomersDevicesList = AndroidDeviceProvisioningCu
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The maximum number of devices to show in a page of results. Must be between 1 and 100 inclusive.
+    -- | Required. The maximum number of devices to show in a page of results. Must be between 1 and 100 inclusive.
     pageSize :: (Core.Maybe Core.Int64),
     -- | A token specifying which result page to return.
     pageToken :: (Core.Maybe Core.Text),
@@ -88,7 +86,8 @@ newAndroidDeviceProvisioningCustomersDevicesList ::
   AndroidDeviceProvisioningCustomersDevicesList
 newAndroidDeviceProvisioningCustomersDevicesList parent =
   AndroidDeviceProvisioningCustomersDevicesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -105,28 +104,23 @@ instance
   type
     Rs AndroidDeviceProvisioningCustomersDevicesList =
       CustomerListDevicesResponse
-  type
-    Scopes
-      AndroidDeviceProvisioningCustomersDevicesList =
-      '[]
-  requestClient
-    AndroidDeviceProvisioningCustomersDevicesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidDeviceProvisioningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidDeviceProvisioningCustomersDevicesListResource
-            )
-            Core.mempty
+  type Scopes AndroidDeviceProvisioningCustomersDevicesList = '[]
+  requestClient AndroidDeviceProvisioningCustomersDevicesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidDeviceProvisioningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidDeviceProvisioningCustomersDevicesListResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DigitalAssetLinks.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DigitalAssetLinks.Internal.Product
@@ -69,7 +67,7 @@ module Gogol.DigitalAssetLinks.Internal.Product
 where
 
 import Gogol.DigitalAssetLinks.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Describes an android app asset.
 --
@@ -86,7 +84,10 @@ data AndroidAppAsset = AndroidAppAsset
 newAndroidAppAsset ::
   AndroidAppAsset
 newAndroidAppAsset =
-  AndroidAppAsset {certificate = Core.Nothing, packageName = Core.Nothing}
+  AndroidAppAsset
+    { certificate = Core.Nothing,
+      packageName = Core.Nothing
+    }
 
 instance Core.FromJSON AndroidAppAsset where
   parseJSON =
@@ -146,16 +147,12 @@ instance Core.ToJSON Asset where
 --
 -- /See:/ 'newBulkCheckRequest' smart constructor.
 data BulkCheckRequest = BulkCheckRequest
-  { -- | Same configuration as in Check request, all statements checks will use same configurations.
-    allowGoogleInternalDataSources :: (Core.Maybe Core.Bool),
-    -- | If specified, will be used in any given template statement that doesn’t specify a relation.
+  { -- | If specified, will be used in any given template statement that doesn’t specify a relation.
     defaultRelation :: (Core.Maybe Core.Text),
     -- | If specified, will be used in any given template statement that doesn’t specify a source.
     defaultSource :: (Core.Maybe Asset),
     -- | If specified, will be used in any given template statement that doesn’t specify a target.
     defaultTarget :: (Core.Maybe Asset),
-    -- | Same configuration as in Check request, all statements checks will use same configurations.
-    skipCacheLookup :: (Core.Maybe Core.Bool),
     -- | List of statements to check. For each statement, you can omit a field if the corresponding default_* field below was supplied. Minimum 1 statement; maximum 1,000 statements. Any additional statements will be ignored.
     statements :: (Core.Maybe [StatementTemplate])
   }
@@ -166,11 +163,9 @@ newBulkCheckRequest ::
   BulkCheckRequest
 newBulkCheckRequest =
   BulkCheckRequest
-    { allowGoogleInternalDataSources = Core.Nothing,
-      defaultRelation = Core.Nothing,
+    { defaultRelation = Core.Nothing,
       defaultSource = Core.Nothing,
       defaultTarget = Core.Nothing,
-      skipCacheLookup = Core.Nothing,
       statements = Core.Nothing
     }
 
@@ -180,11 +175,9 @@ instance Core.FromJSON BulkCheckRequest where
       "BulkCheckRequest"
       ( \o ->
           BulkCheckRequest
-            Core.<$> (o Core..:? "allowGoogleInternalDataSources")
-            Core.<*> (o Core..:? "defaultRelation")
+            Core.<$> (o Core..:? "defaultRelation")
             Core.<*> (o Core..:? "defaultSource")
             Core.<*> (o Core..:? "defaultTarget")
-            Core.<*> (o Core..:? "skipCacheLookup")
             Core.<*> (o Core..:? "statements")
       )
 
@@ -192,12 +185,9 @@ instance Core.ToJSON BulkCheckRequest where
   toJSON BulkCheckRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowGoogleInternalDataSources" Core..=)
-              Core.<$> allowGoogleInternalDataSources,
-            ("defaultRelation" Core..=) Core.<$> defaultRelation,
+          [ ("defaultRelation" Core..=) Core.<$> defaultRelation,
             ("defaultSource" Core..=) Core.<$> defaultSource,
             ("defaultTarget" Core..=) Core.<$> defaultTarget,
-            ("skipCacheLookup" Core..=) Core.<$> skipCacheLookup,
             ("statements" Core..=) Core.<$> statements
           ]
       )
@@ -217,7 +207,10 @@ data BulkCheckResponse = BulkCheckResponse
 newBulkCheckResponse ::
   BulkCheckResponse
 newBulkCheckResponse =
-  BulkCheckResponse {bulkErrorCode = Core.Nothing, checkResults = Core.Nothing}
+  BulkCheckResponse
+    { bulkErrorCode = Core.Nothing,
+      checkResults = Core.Nothing
+    }
 
 instance Core.FromJSON BulkCheckResponse where
   parseJSON =
@@ -250,24 +243,20 @@ newtype CertificateInfo = CertificateInfo
 -- | Creates a value of 'CertificateInfo' with the minimum fields required to make a request.
 newCertificateInfo ::
   CertificateInfo
-newCertificateInfo = CertificateInfo {sha256Fingerprint = Core.Nothing}
+newCertificateInfo =
+  CertificateInfo {sha256Fingerprint = Core.Nothing}
 
 instance Core.FromJSON CertificateInfo where
   parseJSON =
     Core.withObject
       "CertificateInfo"
-      ( \o ->
-          CertificateInfo
-            Core.<$> (o Core..:? "sha256Fingerprint")
-      )
+      (\o -> CertificateInfo Core.<$> (o Core..:? "sha256Fingerprint"))
 
 instance Core.ToJSON CertificateInfo where
   toJSON CertificateInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sha256Fingerprint" Core..=)
-              Core.<$> sha256Fingerprint
-          ]
+          [("sha256Fingerprint" Core..=) Core.<$> sha256Fingerprint]
       )
 
 -- | Response message for the CheckAssetLinks call.
@@ -479,5 +468,4 @@ instance Core.FromJSON WebAsset where
 
 instance Core.ToJSON WebAsset where
   toJSON WebAsset {..} =
-    Core.object
-      (Core.catMaybes [("site" Core..=) Core.<$> site])
+    Core.object (Core.catMaybes [("site" Core..=) Core.<$> site])

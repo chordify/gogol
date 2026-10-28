@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQueryDataTransfer.Projects.TransferConfigs.Create
 where
 
 import Gogol.BigQueryDataTransfer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquerydatatransfer.projects.transferConfigs.create@ method which the
 -- 'BigQueryDataTransferProjectsTransferConfigsCreate' request conforms to.
@@ -68,7 +66,7 @@ data BigQueryDataTransferProjectsTransferConfigsCreate = BigQueryDataTransferPro
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source_scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
+    -- | Deprecated: Authorization code was required when @transferConfig.dataSourceId@ is \'youtube/channel\' but it is no longer used in any data sources. Use @version_info@ instead. Optional OAuth2 authorization code to use with this transfer configuration. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain authorization/code, make a request to the following URL: https:\/\/bigquery.cloud.google.com\/datatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=authorization/code&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
     authorizationCode :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -82,7 +80,7 @@ data BigQueryDataTransferProjectsTransferConfigsCreate = BigQueryDataTransferPro
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- | Optional version info. This is required only if @transferConfig.dataSourceId@ is not \'youtube/channel\' and new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, make a request to the following URL: https:\/\/www.gstatic.com\/bigquerydatatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the a data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
+    -- | Optional version info. This parameter replaces @authorization_code@ which is no longer used in any data sources. This is required only if @transferConfig.dataSourceId@ is \'youtube/channel\' /or/ new credentials are needed, as indicated by @CheckValidCreds@. In order to obtain version info, make a request to the following URL: https:\/\/bigquery.cloud.google.com\/datatransfer\/oauthz\/auth?redirect/uri=urn:ietf:wg:oauth:2.0:oob&response/type=version/info&client/id=client/id&scope=data/source/scopes * The client/id is the OAuth client/id of the data source as returned by ListDataSources method. * data/source/scopes are the scopes returned by ListDataSources method. Note that this should not be set when @service_account_name@ is used to create the transfer config.
     versionInfo :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -96,7 +94,8 @@ newBigQueryDataTransferProjectsTransferConfigsCreate ::
   BigQueryDataTransferProjectsTransferConfigsCreate
 newBigQueryDataTransferProjectsTransferConfigsCreate parent payload =
   BigQueryDataTransferProjectsTransferConfigsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       authorizationCode = Core.Nothing,
       callback = Core.Nothing,
@@ -113,33 +112,30 @@ instance
     BigQueryDataTransferProjectsTransferConfigsCreate
   where
   type
-    Rs
-      BigQueryDataTransferProjectsTransferConfigsCreate =
+    Rs BigQueryDataTransferProjectsTransferConfigsCreate =
       TransferConfig
   type
-    Scopes
-      BigQueryDataTransferProjectsTransferConfigsCreate =
+    Scopes BigQueryDataTransferProjectsTransferConfigsCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    BigQueryDataTransferProjectsTransferConfigsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        authorizationCode
-        callback
-        serviceAccountName
-        uploadType
-        uploadProtocol
-        versionInfo
-        (Core.Just Core.AltJSON)
-        payload
-        bigQueryDataTransferService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BigQueryDataTransferProjectsTransferConfigsCreateResource
-            )
-            Core.mempty
+  requestClient BigQueryDataTransferProjectsTransferConfigsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      authorizationCode
+      callback
+      serviceAccountName
+      uploadType
+      uploadProtocol
+      versionInfo
+      (Core.Just Core.AltJSON)
+      payload
+      bigQueryDataTransferService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                BigQueryDataTransferProjectsTransferConfigsCreateResource
+          )
+          Core.mempty

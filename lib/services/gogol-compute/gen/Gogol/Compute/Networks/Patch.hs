@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Compute.Networks.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
+-- Patches the specified network with the data included in the request. Only routingConfig can be modified.
 --
 -- /See:/ <https://cloud.google.com/compute/ Compute Engine API Reference> for @compute.networks.patch@.
 module Gogol.Compute.Networks.Patch
@@ -40,7 +38,7 @@ module Gogol.Compute.Networks.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networks.patch@ method which the
 -- 'ComputeNetworksPatch' request conforms to.
@@ -62,7 +60,7 @@ type ComputeNetworksPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Network
     Core.:> Core.Patch '[Core.JSON] Operation
 
--- | Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
+-- | Patches the specified network with the data included in the request. Only routingConfig can be modified.
 --
 -- /See:/ 'newComputeNetworksPatch' smart constructor.
 data ComputeNetworksPatch = ComputeNetworksPatch
@@ -130,7 +128,5 @@ instance Core.GoogleRequest ComputeNetworksPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeNetworksPatchResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeNetworksPatchResource)
           Core.mempty

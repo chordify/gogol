@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Instances.SetServiceAccount
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Instances.SetServiceAccount
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instances.setServiceAccount@ method which the
 -- 'ComputeInstancesSetServiceAccount' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstancesSetServiceAccountResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstancesSetServiceAccountRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstancesSetServiceAccountRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.
@@ -118,10 +114,7 @@ newComputeInstancesSetServiceAccount instance' payload project zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeInstancesSetServiceAccount
-  where
+instance Core.GoogleRequest ComputeInstancesSetServiceAccount where
   type Rs ComputeInstancesSetServiceAccount = Operation
   type
     Scopes ComputeInstancesSetServiceAccount =

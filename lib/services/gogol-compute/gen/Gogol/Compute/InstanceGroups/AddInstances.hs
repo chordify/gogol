@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InstanceGroups.AddInstances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InstanceGroups.AddInstances
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.instanceGroups.addInstances@ method which the
 -- 'ComputeInstanceGroupsAddInstances' request conforms to.
@@ -61,9 +59,7 @@ type ComputeInstanceGroupsAddInstancesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InstanceGroupsAddInstancesRequest
+    Core.:> Core.ReqBody '[Core.JSON] InstanceGroupsAddInstancesRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network\/subnetwork. Read Adding instances for more information.
@@ -104,24 +100,25 @@ newComputeInstanceGroupsAddInstances ::
   -- |  The name of the zone where the instance group is located. See 'zone'.
   Core.Text ->
   ComputeInstanceGroupsAddInstances
-newComputeInstanceGroupsAddInstances instanceGroup payload project zone =
-  ComputeInstanceGroupsAddInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroup = instanceGroup,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInstanceGroupsAddInstances
+  instanceGroup
+  payload
+  project
+  zone =
     ComputeInstanceGroupsAddInstances
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroup = instanceGroup,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
+
+instance Core.GoogleRequest ComputeInstanceGroupsAddInstances where
   type Rs ComputeInstanceGroupsAddInstances = Operation
   type
     Scopes ComputeInstanceGroupsAddInstances =

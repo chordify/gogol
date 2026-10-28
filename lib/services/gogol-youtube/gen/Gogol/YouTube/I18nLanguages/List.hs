@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.I18nLanguages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.I18nLanguages.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.i18nLanguages.list@ method which the
@@ -68,7 +66,6 @@ data YouTubeI18nLanguagesList = YouTubeI18nLanguagesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     hl :: Core.Text,
     -- | The /part/ parameter specifies the i18nLanguage resource properties that the API response will include. Set the parameter value to snippet.
     part :: [Core.Text],
@@ -96,9 +93,7 @@ newYouTubeI18nLanguagesList part =
     }
 
 instance Core.GoogleRequest YouTubeI18nLanguagesList where
-  type
-    Rs YouTubeI18nLanguagesList =
-      I18nLanguageListResponse
+  type Rs YouTubeI18nLanguagesList = I18nLanguageListResponse
   type
     Scopes YouTubeI18nLanguagesList =
       '[ Youtube'FullControl,
@@ -120,7 +115,5 @@ instance Core.GoogleRequest YouTubeI18nLanguagesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeI18nLanguagesListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeI18nLanguagesListResource)
           Core.mempty

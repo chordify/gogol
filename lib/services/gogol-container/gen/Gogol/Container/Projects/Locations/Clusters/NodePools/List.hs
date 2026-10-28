@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.NodePools.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Lists the node pools for a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.list@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.nodePools.list@.
 module Gogol.Container.Projects.Locations.Clusters.NodePools.List
   ( -- * Resource
     ContainerProjectsLocationsClustersNodePoolsListResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.NodePools.List
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.nodePools.list@ method which the
 -- 'ContainerProjectsLocationsClustersNodePoolsList' request conforms to.
@@ -91,7 +89,8 @@ newContainerProjectsLocationsClustersNodePoolsList ::
   ContainerProjectsLocationsClustersNodePoolsList
 newContainerProjectsLocationsClustersNodePoolsList parent =
   ContainerProjectsLocationsClustersNodePoolsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       clusterId = Core.Nothing,
@@ -107,32 +106,28 @@ instance
     ContainerProjectsLocationsClustersNodePoolsList
   where
   type
-    Rs
-      ContainerProjectsLocationsClustersNodePoolsList =
+    Rs ContainerProjectsLocationsClustersNodePoolsList =
       ListNodePoolsResponse
   type
-    Scopes
-      ContainerProjectsLocationsClustersNodePoolsList =
+    Scopes ContainerProjectsLocationsClustersNodePoolsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersNodePoolsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        clusterId
-        projectId
-        uploadType
-        uploadProtocol
-        zone
-        (Core.Just Core.AltJSON)
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersNodePoolsListResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsLocationsClustersNodePoolsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      clusterId
+      projectId
+      uploadType
+      uploadProtocol
+      zone
+      (Core.Just Core.AltJSON)
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsLocationsClustersNodePoolsListResource
+          )
+          Core.mempty

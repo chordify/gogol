@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.AdvertiserLandingPages.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an existing advertiser landing page. This method supports patch semantics.
+-- Updates an existing landing page. This method supports patch semantics.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/ Campaign Manager 360 API Reference> for @dfareporting.advertiserLandingPages.patch@.
 module Gogol.DFAReporting.AdvertiserLandingPages.Patch
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.AdvertiserLandingPages.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.advertiserLandingPages.patch@ method which the
 -- 'DFAReportingAdvertiserLandingPagesPatch' request conforms to.
@@ -60,7 +58,7 @@ type DFAReportingAdvertiserLandingPagesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] LandingPage
     Core.:> Core.Patch '[Core.JSON] LandingPage
 
--- | Updates an existing advertiser landing page. This method supports patch semantics.
+-- | Updates an existing landing page. This method supports patch semantics.
 --
 -- /See:/ 'newDFAReportingAdvertiserLandingPagesPatch' smart constructor.
 data DFAReportingAdvertiserLandingPagesPatch = DFAReportingAdvertiserLandingPagesPatch
@@ -70,7 +68,7 @@ data DFAReportingAdvertiserLandingPagesPatch = DFAReportingAdvertiserLandingPage
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | LandingPage ID.
+    -- | Required. Landing Page ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: LandingPage,
@@ -85,7 +83,7 @@ data DFAReportingAdvertiserLandingPagesPatch = DFAReportingAdvertiserLandingPage
 
 -- | Creates a value of 'DFAReportingAdvertiserLandingPagesPatch' with the minimum fields required to make a request.
 newDFAReportingAdvertiserLandingPagesPatch ::
-  -- |  LandingPage ID. See 'id'.
+  -- |  Required. Landing Page ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   LandingPage ->
@@ -104,34 +102,27 @@ newDFAReportingAdvertiserLandingPagesPatch id payload profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingAdvertiserLandingPagesPatch
-  where
-  type
-    Rs DFAReportingAdvertiserLandingPagesPatch =
-      LandingPage
+instance Core.GoogleRequest DFAReportingAdvertiserLandingPagesPatch where
+  type Rs DFAReportingAdvertiserLandingPagesPatch = LandingPage
   type
     Scopes DFAReportingAdvertiserLandingPagesPatch =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingAdvertiserLandingPagesPatch {..} =
-      go
-        profileId
-        (Core.Just id)
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingAdvertiserLandingPagesPatchResource
-            )
-            Core.mempty
+  requestClient DFAReportingAdvertiserLandingPagesPatch {..} =
+    go
+      profileId
+      (Core.Just id)
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingAdvertiserLandingPagesPatchResource
+          )
+          Core.mempty

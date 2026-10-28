@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsActivity.Activities.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsActivity.Activities.List
 where
 
 import Gogol.AppsActivity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appsactivity.activities.list@ method which the
 -- 'AppsActivityActivitiesList' request conforms to.
@@ -50,9 +48,7 @@ type AppsActivityActivitiesListResource =
     Core.:> "activities"
     Core.:> Core.QueryParam "drive.ancestorId" Core.Text
     Core.:> Core.QueryParam "drive.fileId" Core.Text
-    Core.:> Core.QueryParam
-              "groupingStrategy"
-              ActivitiesListGroupingStrategy
+    Core.:> Core.QueryParam "groupingStrategy" ActivitiesListGroupingStrategy
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "source" Core.Text
@@ -95,16 +91,9 @@ newAppsActivityActivitiesList =
       userId = "me"
     }
 
-instance
-  Core.GoogleRequest
-    AppsActivityActivitiesList
-  where
-  type
-    Rs AppsActivityActivitiesList =
-      ListActivitiesResponse
-  type
-    Scopes AppsActivityActivitiesList =
-      '[Activity'FullControl]
+instance Core.GoogleRequest AppsActivityActivitiesList where
+  type Rs AppsActivityActivitiesList = ListActivitiesResponse
+  type Scopes AppsActivityActivitiesList = '[Activity'FullControl]
   requestClient AppsActivityActivitiesList {..} =
     go
       driveAncestorId
@@ -119,7 +108,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AppsActivityActivitiesListResource
-          )
+          (Core.Proxy :: Core.Proxy AppsActivityActivitiesListResource)
           Core.mempty

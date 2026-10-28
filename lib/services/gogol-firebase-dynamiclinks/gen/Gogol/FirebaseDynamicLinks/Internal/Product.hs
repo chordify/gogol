@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseDynamicLinks.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FirebaseDynamicLinks.Internal.Product
@@ -121,7 +119,7 @@ module Gogol.FirebaseDynamicLinks.Internal.Product
 where
 
 import Gogol.FirebaseDynamicLinks.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Tracking parameters supported by Dynamic Link.
 --
@@ -157,8 +155,7 @@ instance Core.ToJSON AnalyticsInfo where
   toJSON AnalyticsInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("googlePlayAnalytics" Core..=)
-              Core.<$> googlePlayAnalytics,
+          [ ("googlePlayAnalytics" Core..=) Core.<$> googlePlayAnalytics,
             ("itunesConnectAnalytics" Core..=)
               Core.<$> itunesConnectAnalytics
           ]
@@ -206,13 +203,11 @@ instance Core.ToJSON AndroidInfo where
   toJSON AndroidInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("androidFallbackLink" Core..=)
-              Core.<$> androidFallbackLink,
+          [ ("androidFallbackLink" Core..=) Core.<$> androidFallbackLink,
             ("androidLink" Core..=) Core.<$> androidLink,
             ("androidMinPackageVersionCode" Core..=)
               Core.<$> androidMinPackageVersionCode,
-            ("androidPackageName" Core..=)
-              Core.<$> androidPackageName
+            ("androidPackageName" Core..=) Core.<$> androidPackageName
           ]
       )
 
@@ -262,8 +257,7 @@ instance Core.ToJSON CreateManagedShortLinkRequest where
   toJSON CreateManagedShortLinkRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dynamicLinkInfo" Core..=)
-              Core.<$> dynamicLinkInfo,
+          [ ("dynamicLinkInfo" Core..=) Core.<$> dynamicLinkInfo,
             ("longDynamicLink" Core..=) Core.<$> longDynamicLink,
             ("name" Core..=) Core.<$> name,
             ("sdkVersion" Core..=) Core.<$> sdkVersion,
@@ -309,8 +303,7 @@ instance Core.ToJSON CreateManagedShortLinkResponse where
   toJSON CreateManagedShortLinkResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("managedShortLink" Core..=)
-              Core.<$> managedShortLink,
+          [ ("managedShortLink" Core..=) Core.<$> managedShortLink,
             ("previewLink" Core..=) Core.<$> previewLink,
             ("warning" Core..=) Core.<$> warning
           ]
@@ -358,8 +351,7 @@ instance Core.ToJSON CreateShortDynamicLinkRequest where
   toJSON CreateShortDynamicLinkRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dynamicLinkInfo" Core..=)
-              Core.<$> dynamicLinkInfo,
+          [ ("dynamicLinkInfo" Core..=) Core.<$> dynamicLinkInfo,
             ("longDynamicLink" Core..=) Core.<$> longDynamicLink,
             ("sdkVersion" Core..=) Core.<$> sdkVersion,
             ("suffix" Core..=) Core.<$> suffix
@@ -428,18 +420,13 @@ instance Core.FromJSON DesktopInfo where
   parseJSON =
     Core.withObject
       "DesktopInfo"
-      ( \o ->
-          DesktopInfo
-            Core.<$> (o Core..:? "desktopFallbackLink")
-      )
+      (\o -> DesktopInfo Core.<$> (o Core..:? "desktopFallbackLink"))
 
 instance Core.ToJSON DesktopInfo where
   toJSON DesktopInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("desktopFallbackLink" Core..=)
-              Core.<$> desktopFallbackLink
-          ]
+          [("desktopFallbackLink" Core..=) Core.<$> desktopFallbackLink]
       )
 
 -- | Signals associated with the device making the request.
@@ -487,10 +474,12 @@ instance Core.FromJSON DeviceInfo where
             Core.<*> (o Core..:? "languageCode")
             Core.<*> (o Core..:? "languageCodeFromWebview")
             Core.<*> (o Core..:? "languageCodeRaw")
-            Core.<*> ( o Core..:? "screenResolutionHeight"
+            Core.<*> ( o
+                         Core..:? "screenResolutionHeight"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-            Core.<*> ( o Core..:? "screenResolutionWidth"
+            Core.<*> ( o
+                         Core..:? "screenResolutionWidth"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "timezone")
@@ -500,15 +489,16 @@ instance Core.ToJSON DeviceInfo where
   toJSON DeviceInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceModelName" Core..=)
-              Core.<$> deviceModelName,
+          [ ("deviceModelName" Core..=) Core.<$> deviceModelName,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("languageCodeFromWebview" Core..=)
               Core.<$> languageCodeFromWebview,
             ("languageCodeRaw" Core..=) Core.<$> languageCodeRaw,
-            ("screenResolutionHeight" Core..=) Core.. Core.AsText
+            ("screenResolutionHeight" Core..=)
+              Core.. Core.AsText
               Core.<$> screenResolutionHeight,
-            ("screenResolutionWidth" Core..=) Core.. Core.AsText
+            ("screenResolutionWidth" Core..=)
+              Core.. Core.AsText
               Core.<$> screenResolutionWidth,
             ("timezone" Core..=) Core.<$> timezone
           ]
@@ -543,9 +533,7 @@ instance Core.FromJSON DynamicLinkEventStat where
       "DynamicLinkEventStat"
       ( \o ->
           DynamicLinkEventStat
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "event")
             Core.<*> (o Core..:? "platform")
       )
@@ -626,29 +614,33 @@ instance Core.ToJSON DynamicLinkInfo where
             ("androidInfo" Core..=) Core.<$> androidInfo,
             ("desktopInfo" Core..=) Core.<$> desktopInfo,
             ("domainUriPrefix" Core..=) Core.<$> domainUriPrefix,
-            ("dynamicLinkDomain" Core..=)
-              Core.<$> dynamicLinkDomain,
+            ("dynamicLinkDomain" Core..=) Core.<$> dynamicLinkDomain,
             ("iosInfo" Core..=) Core.<$> iosInfo,
             ("link" Core..=) Core.<$> link,
             ("navigationInfo" Core..=) Core.<$> navigationInfo,
-            ("socialMetaTagInfo" Core..=)
-              Core.<$> socialMetaTagInfo
+            ("socialMetaTagInfo" Core..=) Core.<$> socialMetaTagInfo
           ]
       )
 
 -- | Analytics stats of a Dynamic Link for a given timeframe.
 --
 -- /See:/ 'newDynamicLinkStats' smart constructor.
-newtype DynamicLinkStats = DynamicLinkStats
+data DynamicLinkStats = DynamicLinkStats
   { -- | Dynamic Link event stats.
-    linkEventStats :: (Core.Maybe [DynamicLinkEventStat])
+    linkEventStats :: (Core.Maybe [DynamicLinkEventStat]),
+    -- | Optional warnings associated this API request.
+    warnings :: (Core.Maybe [DynamicLinkWarning])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DynamicLinkStats' with the minimum fields required to make a request.
 newDynamicLinkStats ::
   DynamicLinkStats
-newDynamicLinkStats = DynamicLinkStats {linkEventStats = Core.Nothing}
+newDynamicLinkStats =
+  DynamicLinkStats
+    { linkEventStats = Core.Nothing,
+      warnings = Core.Nothing
+    }
 
 instance Core.FromJSON DynamicLinkStats where
   parseJSON =
@@ -657,13 +649,16 @@ instance Core.FromJSON DynamicLinkStats where
       ( \o ->
           DynamicLinkStats
             Core.<$> (o Core..:? "linkEventStats")
+            Core.<*> (o Core..:? "warnings")
       )
 
 instance Core.ToJSON DynamicLinkStats where
   toJSON DynamicLinkStats {..} =
     Core.object
       ( Core.catMaybes
-          [("linkEventStats" Core..=) Core.<$> linkEventStats]
+          [ ("linkEventStats" Core..=) Core.<$> linkEventStats,
+            ("warnings" Core..=) Core.<$> warnings
+          ]
       )
 
 -- | Dynamic Links warning messages.
@@ -705,8 +700,7 @@ instance Core.ToJSON DynamicLinkWarning where
     Core.object
       ( Core.catMaybes
           [ ("warningCode" Core..=) Core.<$> warningCode,
-            ("warningDocumentLink" Core..=)
-              Core.<$> warningDocumentLink,
+            ("warningDocumentLink" Core..=) Core.<$> warningDocumentLink,
             ("warningMessage" Core..=) Core.<$> warningMessage
           ]
       )
@@ -727,7 +721,7 @@ data GetIosPostInstallAttributionRequest = GetIosPostInstallAttributionRequest
     retrievalMethod :: (Core.Maybe GetIosPostInstallAttributionRequest_RetrievalMethod),
     -- | Google SDK version. Version takes the form \"$major.$minor.$patch\"
     sdkVersion :: (Core.Maybe Core.Text),
-    -- | Possible unique matched link that server need to check before performing fingerprint match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.
+    -- | Possible unique matched link that server need to check before performing device heuristics match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.
     uniqueMatchLinkToCheck :: (Core.Maybe Core.Text),
     -- | Strong match page information. Disambiguates between default UI and custom page to present when strong match succeeds\/fails to find cookie.
     visualStyle :: (Core.Maybe GetIosPostInstallAttributionRequest_VisualStyle)
@@ -739,7 +733,8 @@ newGetIosPostInstallAttributionRequest ::
   GetIosPostInstallAttributionRequest
 newGetIosPostInstallAttributionRequest =
   GetIosPostInstallAttributionRequest
-    { appInstallationTime = Core.Nothing,
+    { appInstallationTime =
+        Core.Nothing,
       bundleId = Core.Nothing,
       device = Core.Nothing,
       iosVersion = Core.Nothing,
@@ -749,16 +744,14 @@ newGetIosPostInstallAttributionRequest =
       visualStyle = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GetIosPostInstallAttributionRequest
-  where
+instance Core.FromJSON GetIosPostInstallAttributionRequest where
   parseJSON =
     Core.withObject
       "GetIosPostInstallAttributionRequest"
       ( \o ->
           GetIosPostInstallAttributionRequest
-            Core.<$> ( o Core..:? "appInstallationTime"
+            Core.<$> ( o
+                         Core..:? "appInstallationTime"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "bundleId")
@@ -770,27 +763,24 @@ instance
             Core.<*> (o Core..:? "visualStyle")
       )
 
-instance
-  Core.ToJSON
-    GetIosPostInstallAttributionRequest
-  where
+instance Core.ToJSON GetIosPostInstallAttributionRequest where
   toJSON GetIosPostInstallAttributionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appInstallationTime" Core..=) Core.. Core.AsText
+          [ ("appInstallationTime" Core..=)
+              Core.. Core.AsText
               Core.<$> appInstallationTime,
             ("bundleId" Core..=) Core.<$> bundleId,
             ("device" Core..=) Core.<$> device,
             ("iosVersion" Core..=) Core.<$> iosVersion,
             ("retrievalMethod" Core..=) Core.<$> retrievalMethod,
             ("sdkVersion" Core..=) Core.<$> sdkVersion,
-            ("uniqueMatchLinkToCheck" Core..=)
-              Core.<$> uniqueMatchLinkToCheck,
+            ("uniqueMatchLinkToCheck" Core..=) Core.<$> uniqueMatchLinkToCheck,
             ("visualStyle" Core..=) Core.<$> visualStyle
           ]
       )
 
--- | Response for iSDK to execute strong match flow for post-install attribution.
+-- | Response for iSDK to execute strong match flow for post-install attribution. Information of the resolved FDL link.
 --
 -- /See:/ 'newGetIosPostInstallAttributionResponse' smart constructor.
 data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
@@ -801,13 +791,13 @@ data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
       ( Core.Maybe
           GetIosPostInstallAttributionResponse_AttributionConfidence
       ),
-    -- | The deep-link attributed post-install via one of several techniques (fingerprint, copy unique).
+    -- | The deep-link attributed post-install via one of several techniques (device heuristics, copy unique).
     deepLink :: (Core.Maybe Core.Text),
     -- | User-agent specific custom-scheme URIs for iSDK to open. This will be set according to the user-agent tha the click was originally made in. There is no Safari-equivalent custom-scheme open URLs. ie: googlechrome:\/\/www.example.com ie: firefox:\/\/open-url?url=http:\/\/www.example.com ie: opera-http:\/\/example.com
     externalBrowserDestinationLink :: (Core.Maybe Core.Text),
     -- | The link to navigate to update the app if min version is not met. This is either (in order): 1) fallback link (from ?ifl= parameter, if specified by developer) or 2) AppStore URL (from ?isi= parameter, if specified), or 3) the payload link (from required link= parameter).
     fallbackLink :: (Core.Maybe Core.Text),
-    -- | Invitation ID attributed post-install via one of several techniques (fingerprint, copy unique).
+    -- | Invitation ID attributed post-install via one of several techniques (device heuristics, copy unique).
     invitationId :: (Core.Maybe Core.Text),
     -- | Instruction for iSDK to attemmpt to perform strong match. For instance, if browser does not support\/allow cookie or outside of support browsers, this will be false.
     isStrongMatchExecutable :: (Core.Maybe Core.Bool),
@@ -815,7 +805,7 @@ data GetIosPostInstallAttributionResponse = GetIosPostInstallAttributionResponse
     matchMessage :: (Core.Maybe Core.Text),
     -- | Which IP version the request was made from.
     requestIpVersion :: (Core.Maybe GetIosPostInstallAttributionResponse_RequestIpVersion),
-    -- | Entire FDL (short or long) attributed post-install via one of several techniques (fingerprint, copy unique).
+    -- | Entire FDL (short or long) attributed post-install via one of several techniques (device heuristics, copy unique).
     requestedLink :: (Core.Maybe Core.Text),
     -- | The entire FDL, expanded from a short link. It is the same as the requested/link, if it is long. Parameters from this should not be used directly (ie: server can default utm/[campaign|medium|source] to a value when requested/link lack them, server determine the best fallback/link when requested_link specifies >1 fallback links).
     resolvedLink :: (Core.Maybe Core.Text),
@@ -837,7 +827,8 @@ newGetIosPostInstallAttributionResponse ::
   GetIosPostInstallAttributionResponse
 newGetIosPostInstallAttributionResponse =
   GetIosPostInstallAttributionResponse
-    { appMinimumVersion = Core.Nothing,
+    { appMinimumVersion =
+        Core.Nothing,
       attributionConfidence = Core.Nothing,
       deepLink = Core.Nothing,
       externalBrowserDestinationLink = Core.Nothing,
@@ -855,10 +846,7 @@ newGetIosPostInstallAttributionResponse =
       utmTerm = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GetIosPostInstallAttributionResponse
-  where
+instance Core.FromJSON GetIosPostInstallAttributionResponse where
   parseJSON =
     Core.withObject
       "GetIosPostInstallAttributionResponse"
@@ -882,17 +870,12 @@ instance
             Core.<*> (o Core..:? "utmTerm")
       )
 
-instance
-  Core.ToJSON
-    GetIosPostInstallAttributionResponse
-  where
+instance Core.ToJSON GetIosPostInstallAttributionResponse where
   toJSON GetIosPostInstallAttributionResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appMinimumVersion" Core..=)
-              Core.<$> appMinimumVersion,
-            ("attributionConfidence" Core..=)
-              Core.<$> attributionConfidence,
+          [ ("appMinimumVersion" Core..=) Core.<$> appMinimumVersion,
+            ("attributionConfidence" Core..=) Core.<$> attributionConfidence,
             ("deepLink" Core..=) Core.<$> deepLink,
             ("externalBrowserDestinationLink" Core..=)
               Core.<$> externalBrowserDestinationLink,
@@ -901,8 +884,7 @@ instance
             ("isStrongMatchExecutable" Core..=)
               Core.<$> isStrongMatchExecutable,
             ("matchMessage" Core..=) Core.<$> matchMessage,
-            ("requestIpVersion" Core..=)
-              Core.<$> requestIpVersion,
+            ("requestIpVersion" Core..=) Core.<$> requestIpVersion,
             ("requestedLink" Core..=) Core.<$> requestedLink,
             ("resolvedLink" Core..=) Core.<$> resolvedLink,
             ("utmCampaign" Core..=) Core.<$> utmCampaign,
@@ -978,7 +960,9 @@ data GetIosReopenAttributionResponse = GetIosReopenAttributionResponse
     -- | Scion source value to be propagated by iSDK to Scion at app-reopen.
     utmSource :: (Core.Maybe Core.Text),
     -- | Scion term value to be propagated by iSDK to Scion at app-reopen.
-    utmTerm :: (Core.Maybe Core.Text)
+    utmTerm :: (Core.Maybe Core.Text),
+    -- | Optional warnings associated this API request.
+    warning :: (Core.Maybe [DynamicLinkWarning])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -995,13 +979,11 @@ newGetIosReopenAttributionResponse =
       utmContent = Core.Nothing,
       utmMedium = Core.Nothing,
       utmSource = Core.Nothing,
-      utmTerm = Core.Nothing
+      utmTerm = Core.Nothing,
+      warning = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GetIosReopenAttributionResponse
-  where
+instance Core.FromJSON GetIosReopenAttributionResponse where
   parseJSON =
     Core.withObject
       "GetIosReopenAttributionResponse"
@@ -1016,6 +998,7 @@ instance
             Core.<*> (o Core..:? "utmMedium")
             Core.<*> (o Core..:? "utmSource")
             Core.<*> (o Core..:? "utmTerm")
+            Core.<*> (o Core..:? "warning")
       )
 
 instance Core.ToJSON GetIosReopenAttributionResponse where
@@ -1024,14 +1007,14 @@ instance Core.ToJSON GetIosReopenAttributionResponse where
       ( Core.catMaybes
           [ ("deepLink" Core..=) Core.<$> deepLink,
             ("invitationId" Core..=) Core.<$> invitationId,
-            ("iosMinAppVersion" Core..=)
-              Core.<$> iosMinAppVersion,
+            ("iosMinAppVersion" Core..=) Core.<$> iosMinAppVersion,
             ("resolvedLink" Core..=) Core.<$> resolvedLink,
             ("utmCampaign" Core..=) Core.<$> utmCampaign,
             ("utmContent" Core..=) Core.<$> utmContent,
             ("utmMedium" Core..=) Core.<$> utmMedium,
             ("utmSource" Core..=) Core.<$> utmSource,
-            ("utmTerm" Core..=) Core.<$> utmTerm
+            ("utmTerm" Core..=) Core.<$> utmTerm,
+            ("warning" Core..=) Core.<$> warning
           ]
       )
 
@@ -1202,10 +1185,8 @@ instance Core.ToJSON IosInfo where
             ("iosCustomScheme" Core..=) Core.<$> iosCustomScheme,
             ("iosFallbackLink" Core..=) Core.<$> iosFallbackLink,
             ("iosIpadBundleId" Core..=) Core.<$> iosIpadBundleId,
-            ("iosIpadFallbackLink" Core..=)
-              Core.<$> iosIpadFallbackLink,
-            ("iosMinimumVersion" Core..=)
-              Core.<$> iosMinimumVersion
+            ("iosIpadFallbackLink" Core..=) Core.<$> iosIpadFallbackLink,
+            ("iosMinimumVersion" Core..=) Core.<$> iosMinimumVersion
           ]
       )
 
@@ -1260,8 +1241,7 @@ instance Core.ToJSON ManagedShortLink where
     Core.object
       ( Core.catMaybes
           [ ("creationTime" Core..=) Core.<$> creationTime,
-            ("flaggedAttribute" Core..=)
-              Core.<$> flaggedAttribute,
+            ("flaggedAttribute" Core..=) Core.<$> flaggedAttribute,
             ("info" Core..=) Core.<$> info,
             ("link" Core..=) Core.<$> link,
             ("linkName" Core..=) Core.<$> linkName,
@@ -1281,24 +1261,22 @@ newtype NavigationInfo = NavigationInfo
 -- | Creates a value of 'NavigationInfo' with the minimum fields required to make a request.
 newNavigationInfo ::
   NavigationInfo
-newNavigationInfo = NavigationInfo {enableForcedRedirect = Core.Nothing}
+newNavigationInfo =
+  NavigationInfo {enableForcedRedirect = Core.Nothing}
 
 instance Core.FromJSON NavigationInfo where
   parseJSON =
     Core.withObject
       "NavigationInfo"
       ( \o ->
-          NavigationInfo
-            Core.<$> (o Core..:? "enableForcedRedirect")
+          NavigationInfo Core.<$> (o Core..:? "enableForcedRedirect")
       )
 
 instance Core.ToJSON NavigationInfo where
   toJSON NavigationInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableForcedRedirect" Core..=)
-              Core.<$> enableForcedRedirect
-          ]
+          [("enableForcedRedirect" Core..=) Core.<$> enableForcedRedirect]
       )
 
 -- | Parameters for social meta tag params. Used to set meta tag data for link previews on social sites.
@@ -1339,8 +1317,7 @@ instance Core.ToJSON SocialMetaTagInfo where
   toJSON SocialMetaTagInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("socialDescription" Core..=)
-              Core.<$> socialDescription,
+          [ ("socialDescription" Core..=) Core.<$> socialDescription,
             ("socialImageLink" Core..=) Core.<$> socialImageLink,
             ("socialTitle" Core..=) Core.<$> socialTitle
           ]
@@ -1360,7 +1337,8 @@ data Suffix = Suffix
 -- | Creates a value of 'Suffix' with the minimum fields required to make a request.
 newSuffix ::
   Suffix
-newSuffix = Suffix {customSuffix = Core.Nothing, option = Core.Nothing}
+newSuffix =
+  Suffix {customSuffix = Core.Nothing, option = Core.Nothing}
 
 instance Core.FromJSON Suffix where
   parseJSON =

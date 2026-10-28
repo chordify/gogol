@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Docs.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Docs.Internal.Product
@@ -53,6 +51,10 @@ module Gogol.Docs.Internal.Product
     -- * Body
     Body (..),
     newBody,
+
+    -- * BookmarkLink
+    BookmarkLink (..),
+    newBookmarkLink,
 
     -- * Bullet
     Bullet (..),
@@ -202,6 +204,46 @@ module Gogol.Docs.Internal.Product
     DocumentStyleSuggestionState (..),
     newDocumentStyleSuggestionState,
 
+    -- * DocumentTab
+    DocumentTab (..),
+    newDocumentTab,
+
+    -- * DocumentTab_Footers
+    DocumentTab_Footers (..),
+    newDocumentTab_Footers,
+
+    -- * DocumentTab_Footnotes
+    DocumentTab_Footnotes (..),
+    newDocumentTab_Footnotes,
+
+    -- * DocumentTab_Headers
+    DocumentTab_Headers (..),
+    newDocumentTab_Headers,
+
+    -- * DocumentTab_InlineObjects
+    DocumentTab_InlineObjects (..),
+    newDocumentTab_InlineObjects,
+
+    -- * DocumentTab_Lists
+    DocumentTab_Lists (..),
+    newDocumentTab_Lists,
+
+    -- * DocumentTab_NamedRanges
+    DocumentTab_NamedRanges (..),
+    newDocumentTab_NamedRanges,
+
+    -- * DocumentTab_PositionedObjects
+    DocumentTab_PositionedObjects (..),
+    newDocumentTab_PositionedObjects,
+
+    -- * DocumentTab_SuggestedDocumentStyleChanges
+    DocumentTab_SuggestedDocumentStyleChanges (..),
+    newDocumentTab_SuggestedDocumentStyleChanges,
+
+    -- * DocumentTab_SuggestedNamedStylesChanges
+    DocumentTab_SuggestedNamedStylesChanges (..),
+    newDocumentTab_SuggestedNamedStylesChanges,
+
     -- * EmbeddedDrawingProperties
     EmbeddedDrawingProperties (..),
     newEmbeddedDrawingProperties,
@@ -253,6 +295,10 @@ module Gogol.Docs.Internal.Product
     -- * Header
     Header (..),
     newHeader,
+
+    -- * HeadingLink
+    HeadingLink (..),
+    newHeadingLink,
 
     -- * HorizontalRule
     HorizontalRule (..),
@@ -614,6 +660,14 @@ module Gogol.Docs.Internal.Product
     SuggestedTextStyle (..),
     newSuggestedTextStyle,
 
+    -- * Tab
+    Tab (..),
+    newTab,
+
+    -- * TabProperties
+    TabProperties (..),
+    newTabProperties,
+
     -- * TabStop
     TabStop (..),
     newTabStop,
@@ -678,6 +732,10 @@ module Gogol.Docs.Internal.Product
     TableStyle (..),
     newTableStyle,
 
+    -- * TabsCriteria
+    TabsCriteria (..),
+    newTabsCriteria,
+
     -- * TextRun
     TextRun (..),
     newTextRun,
@@ -737,7 +795,7 @@ module Gogol.Docs.Internal.Product
 where
 
 import Gogol.Docs.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A ParagraphElement representing a spot in the text that\'s dynamically replaced with content that can change over time, like a page number.
 --
@@ -785,10 +843,8 @@ instance Core.ToJSON AutoText where
   toJSON AutoText {..} =
     Core.object
       ( Core.catMaybes
-          [ ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+          [ ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle,
@@ -800,8 +856,7 @@ instance Core.ToJSON AutoText where
 --
 -- /See:/ 'newAutoText_SuggestedTextStyleChanges' smart constructor.
 newtype AutoText_SuggestedTextStyleChanges = AutoText_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -813,10 +868,7 @@ newAutoText_SuggestedTextStyleChanges ::
 newAutoText_SuggestedTextStyleChanges additional =
   AutoText_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    AutoText_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON AutoText_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "AutoText_SuggestedTextStyleChanges"
@@ -825,10 +877,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    AutoText_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON AutoText_SuggestedTextStyleChanges where
   toJSON AutoText_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -854,8 +903,7 @@ instance Core.FromJSON Background where
 
 instance Core.ToJSON Background where
   toJSON Background {..} =
-    Core.object
-      (Core.catMaybes [("color" Core..=) Core.<$> color])
+    Core.object (Core.catMaybes [("color" Core..=) Core.<$> color])
 
 -- | A mask that indicates which of the fields on the base Background have been changed in this suggestion. For any field set to true, the Backgound has a new suggested value.
 --
@@ -870,7 +918,10 @@ newtype BackgroundSuggestionState = BackgroundSuggestionState
 newBackgroundSuggestionState ::
   BackgroundSuggestionState
 newBackgroundSuggestionState =
-  BackgroundSuggestionState {backgroundColorSuggested = Core.Nothing}
+  BackgroundSuggestionState
+    { backgroundColorSuggested =
+        Core.Nothing
+    }
 
 instance Core.FromJSON BackgroundSuggestionState where
   parseJSON =
@@ -996,8 +1047,40 @@ instance Core.FromJSON Body where
 instance Core.ToJSON Body where
   toJSON Body {..} =
     Core.object
+      (Core.catMaybes [("content" Core..=) Core.<$> content])
+
+-- | A reference to a bookmark in this document.
+--
+-- /See:/ 'newBookmarkLink' smart constructor.
+data BookmarkLink = BookmarkLink
+  { -- | The ID of a bookmark in this document.
+    id :: (Core.Maybe Core.Text),
+    -- | The ID of the tab containing this bookmark.
+    tabId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BookmarkLink' with the minimum fields required to make a request.
+newBookmarkLink ::
+  BookmarkLink
+newBookmarkLink =
+  BookmarkLink {id = Core.Nothing, tabId = Core.Nothing}
+
+instance Core.FromJSON BookmarkLink where
+  parseJSON =
+    Core.withObject
+      "BookmarkLink"
+      ( \o ->
+          BookmarkLink
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "tabId")
+      )
+
+instance Core.ToJSON BookmarkLink where
+  toJSON BookmarkLink {..} =
+    Core.object
       ( Core.catMaybes
-          [("content" Core..=) Core.<$> content]
+          [("id" Core..=) Core.<$> id, ("tabId" Core..=) Core.<$> tabId]
       )
 
 -- | Describes the bullet of a paragraph.
@@ -1082,10 +1165,8 @@ instance Core.ToJSON BulletSuggestionState where
   toJSON BulletSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("listIdSuggested" Core..=)
-              Core.<$> listIdSuggested,
-            ("nestingLevelSuggested" Core..=)
-              Core.<$> nestingLevelSuggested,
+          [ ("listIdSuggested" Core..=) Core.<$> listIdSuggested,
+            ("nestingLevelSuggested" Core..=) Core.<$> nestingLevelSuggested,
             ("textStyleSuggestionState" Core..=)
               Core.<$> textStyleSuggestionState
           ]
@@ -1114,9 +1195,7 @@ instance Core.FromJSON Color where
 instance Core.ToJSON Color where
   toJSON Color {..} =
     Core.object
-      ( Core.catMaybes
-          [("rgbColor" Core..=) Core.<$> rgbColor]
-      )
+      (Core.catMaybes [("rgbColor" Core..=) Core.<$> rgbColor])
 
 -- | A ParagraphElement representing a column break. A column break makes the subsequent text start at the top of the next column.
 --
@@ -1160,10 +1239,8 @@ instance Core.ToJSON ColumnBreak where
   toJSON ColumnBreak {..} =
     Core.object
       ( Core.catMaybes
-          [ ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+          [ ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -1174,8 +1251,7 @@ instance Core.ToJSON ColumnBreak where
 --
 -- /See:/ 'newColumnBreak_SuggestedTextStyleChanges' smart constructor.
 newtype ColumnBreak_SuggestedTextStyleChanges = ColumnBreak_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1187,10 +1263,7 @@ newColumnBreak_SuggestedTextStyleChanges ::
 newColumnBreak_SuggestedTextStyleChanges additional =
   ColumnBreak_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    ColumnBreak_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON ColumnBreak_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "ColumnBreak_SuggestedTextStyleChanges"
@@ -1199,10 +1272,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ColumnBreak_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON ColumnBreak_SuggestedTextStyleChanges where
   toJSON ColumnBreak_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -1240,8 +1310,7 @@ instance Core.ToJSON CreateFooterRequest where
   toJSON CreateFooterRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sectionBreakLocation" Core..=)
-              Core.<$> sectionBreakLocation,
+          [ ("sectionBreakLocation" Core..=) Core.<$> sectionBreakLocation,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -1258,23 +1327,19 @@ newtype CreateFooterResponse = CreateFooterResponse
 -- | Creates a value of 'CreateFooterResponse' with the minimum fields required to make a request.
 newCreateFooterResponse ::
   CreateFooterResponse
-newCreateFooterResponse = CreateFooterResponse {footerId = Core.Nothing}
+newCreateFooterResponse =
+  CreateFooterResponse {footerId = Core.Nothing}
 
 instance Core.FromJSON CreateFooterResponse where
   parseJSON =
     Core.withObject
       "CreateFooterResponse"
-      ( \o ->
-          CreateFooterResponse
-            Core.<$> (o Core..:? "footerId")
-      )
+      (\o -> CreateFooterResponse Core.<$> (o Core..:? "footerId"))
 
 instance Core.ToJSON CreateFooterResponse where
   toJSON CreateFooterResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("footerId" Core..=) Core.<$> footerId]
-      )
+      (Core.catMaybes [("footerId" Core..=) Core.<$> footerId])
 
 -- | Creates a Footnote segment and inserts a new FootnoteReference to it at the given location. The new Footnote segment will contain a space followed by a newline character.
 --
@@ -1310,8 +1375,7 @@ instance Core.ToJSON CreateFootnoteRequest where
   toJSON CreateFootnoteRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+          [ ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location
           ]
       )
@@ -1328,23 +1392,19 @@ newtype CreateFootnoteResponse = CreateFootnoteResponse
 -- | Creates a value of 'CreateFootnoteResponse' with the minimum fields required to make a request.
 newCreateFootnoteResponse ::
   CreateFootnoteResponse
-newCreateFootnoteResponse = CreateFootnoteResponse {footnoteId = Core.Nothing}
+newCreateFootnoteResponse =
+  CreateFootnoteResponse {footnoteId = Core.Nothing}
 
 instance Core.FromJSON CreateFootnoteResponse where
   parseJSON =
     Core.withObject
       "CreateFootnoteResponse"
-      ( \o ->
-          CreateFootnoteResponse
-            Core.<$> (o Core..:? "footnoteId")
-      )
+      (\o -> CreateFootnoteResponse Core.<$> (o Core..:? "footnoteId"))
 
 instance Core.ToJSON CreateFootnoteResponse where
   toJSON CreateFootnoteResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("footnoteId" Core..=) Core.<$> footnoteId]
-      )
+      (Core.catMaybes [("footnoteId" Core..=) Core.<$> footnoteId])
 
 -- | Creates a Header. The new header is applied to the SectionStyle at the location of the SectionBreak if specified, otherwise it is applied to the DocumentStyle. If a header of the specified type already exists, a 400 bad request error is returned.
 --
@@ -1380,8 +1440,7 @@ instance Core.ToJSON CreateHeaderRequest where
   toJSON CreateHeaderRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sectionBreakLocation" Core..=)
-              Core.<$> sectionBreakLocation,
+          [ ("sectionBreakLocation" Core..=) Core.<$> sectionBreakLocation,
             ("type" Core..=) Core.<$> type'
           ]
       )
@@ -1398,23 +1457,19 @@ newtype CreateHeaderResponse = CreateHeaderResponse
 -- | Creates a value of 'CreateHeaderResponse' with the minimum fields required to make a request.
 newCreateHeaderResponse ::
   CreateHeaderResponse
-newCreateHeaderResponse = CreateHeaderResponse {headerId = Core.Nothing}
+newCreateHeaderResponse =
+  CreateHeaderResponse {headerId = Core.Nothing}
 
 instance Core.FromJSON CreateHeaderResponse where
   parseJSON =
     Core.withObject
       "CreateHeaderResponse"
-      ( \o ->
-          CreateHeaderResponse
-            Core.<$> (o Core..:? "headerId")
-      )
+      (\o -> CreateHeaderResponse Core.<$> (o Core..:? "headerId"))
 
 instance Core.ToJSON CreateHeaderResponse where
   toJSON CreateHeaderResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("headerId" Core..=) Core.<$> headerId]
-      )
+      (Core.catMaybes [("headerId" Core..=) Core.<$> headerId])
 
 -- | Creates a NamedRange referencing the given range.
 --
@@ -1431,7 +1486,10 @@ data CreateNamedRangeRequest = CreateNamedRangeRequest
 newCreateNamedRangeRequest ::
   CreateNamedRangeRequest
 newCreateNamedRangeRequest =
-  CreateNamedRangeRequest {name = Core.Nothing, range = Core.Nothing}
+  CreateNamedRangeRequest
+    { name = Core.Nothing,
+      range = Core.Nothing
+    }
 
 instance Core.FromJSON CreateNamedRangeRequest where
   parseJSON =
@@ -1439,16 +1497,15 @@ instance Core.FromJSON CreateNamedRangeRequest where
       "CreateNamedRangeRequest"
       ( \o ->
           CreateNamedRangeRequest
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "range")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "range")
       )
 
 instance Core.ToJSON CreateNamedRangeRequest where
   toJSON CreateNamedRangeRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("range" Core..=) Core.<$> range
-          ]
+          [("name" Core..=) Core.<$> name, ("range" Core..=) Core.<$> range]
       )
 
 -- | The result of creating a named range.
@@ -1471,16 +1528,13 @@ instance Core.FromJSON CreateNamedRangeResponse where
     Core.withObject
       "CreateNamedRangeResponse"
       ( \o ->
-          CreateNamedRangeResponse
-            Core.<$> (o Core..:? "namedRangeId")
+          CreateNamedRangeResponse Core.<$> (o Core..:? "namedRangeId")
       )
 
 instance Core.ToJSON CreateNamedRangeResponse where
   toJSON CreateNamedRangeResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("namedRangeId" Core..=) Core.<$> namedRangeId]
-      )
+      (Core.catMaybes [("namedRangeId" Core..=) Core.<$> namedRangeId])
 
 -- | Creates bullets for all of the paragraphs that overlap with the given range. The nesting level of each paragraph will be determined by counting leading tabs in front of each paragraph. To avoid excess space between the bullet and the corresponding paragraph, these leading tabs are removed by this request. This may change the indices of parts of the text. If the paragraph immediately before paragraphs being updated is in a list with a matching preset, the paragraphs being updated are added to that preceding list.
 --
@@ -1521,7 +1575,7 @@ instance Core.ToJSON CreateParagraphBulletsRequest where
           ]
       )
 
--- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angle are 0, the image is not cropped.
+-- | The crop properties of an image. The crop rectangle is represented using fractional offsets from the original content\'s 4 edges. - If the offset is in the interval (0, 1), the corresponding edge of crop rectangle is positioned inside of the image\'s original bounding rectangle. - If the offset is negative or greater than 1, the corresponding edge of crop rectangle is positioned outside of the image\'s original bounding rectangle. - If all offsets and rotation angles are 0, the image is not cropped.
 --
 -- /See:/ 'newCropProperties' smart constructor.
 data CropProperties = CropProperties
@@ -1622,14 +1676,10 @@ instance Core.ToJSON CropPropertiesSuggestionState where
     Core.object
       ( Core.catMaybes
           [ ("angleSuggested" Core..=) Core.<$> angleSuggested,
-            ("offsetBottomSuggested" Core..=)
-              Core.<$> offsetBottomSuggested,
-            ("offsetLeftSuggested" Core..=)
-              Core.<$> offsetLeftSuggested,
-            ("offsetRightSuggested" Core..=)
-              Core.<$> offsetRightSuggested,
-            ("offsetTopSuggested" Core..=)
-              Core.<$> offsetTopSuggested
+            ("offsetBottomSuggested" Core..=) Core.<$> offsetBottomSuggested,
+            ("offsetLeftSuggested" Core..=) Core.<$> offsetLeftSuggested,
+            ("offsetRightSuggested" Core..=) Core.<$> offsetRightSuggested,
+            ("offsetTopSuggested" Core..=) Core.<$> offsetTopSuggested
           ]
       )
 
@@ -1645,78 +1695,95 @@ newtype DeleteContentRangeRequest = DeleteContentRangeRequest
 -- | Creates a value of 'DeleteContentRangeRequest' with the minimum fields required to make a request.
 newDeleteContentRangeRequest ::
   DeleteContentRangeRequest
-newDeleteContentRangeRequest = DeleteContentRangeRequest {range = Core.Nothing}
+newDeleteContentRangeRequest =
+  DeleteContentRangeRequest {range = Core.Nothing}
 
 instance Core.FromJSON DeleteContentRangeRequest where
   parseJSON =
     Core.withObject
       "DeleteContentRangeRequest"
-      ( \o ->
-          DeleteContentRangeRequest
-            Core.<$> (o Core..:? "range")
-      )
+      (\o -> DeleteContentRangeRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON DeleteContentRangeRequest where
   toJSON DeleteContentRangeRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | Deletes a Footer from the document.
 --
 -- /See:/ 'newDeleteFooterRequest' smart constructor.
-newtype DeleteFooterRequest = DeleteFooterRequest
+data DeleteFooterRequest = DeleteFooterRequest
   { -- | The id of the footer to delete. If this footer is defined on DocumentStyle, the reference to this footer is removed, resulting in no footer of that type for the first section of the document. If this footer is defined on a SectionStyle, the reference to this footer is removed and the footer of that type is now continued from the previous section.
-    footerId :: (Core.Maybe Core.Text)
+    footerId :: (Core.Maybe Core.Text),
+    -- | The tab that contains the footer to delete. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DeleteFooterRequest' with the minimum fields required to make a request.
 newDeleteFooterRequest ::
   DeleteFooterRequest
-newDeleteFooterRequest = DeleteFooterRequest {footerId = Core.Nothing}
+newDeleteFooterRequest =
+  DeleteFooterRequest
+    { footerId = Core.Nothing,
+      tabId = Core.Nothing
+    }
 
 instance Core.FromJSON DeleteFooterRequest where
   parseJSON =
     Core.withObject
       "DeleteFooterRequest"
       ( \o ->
-          DeleteFooterRequest Core.<$> (o Core..:? "footerId")
+          DeleteFooterRequest
+            Core.<$> (o Core..:? "footerId")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON DeleteFooterRequest where
   toJSON DeleteFooterRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("footerId" Core..=) Core.<$> footerId]
+          [ ("footerId" Core..=) Core.<$> footerId,
+            ("tabId" Core..=) Core.<$> tabId
+          ]
       )
 
 -- | Deletes a Header from the document.
 --
 -- /See:/ 'newDeleteHeaderRequest' smart constructor.
-newtype DeleteHeaderRequest = DeleteHeaderRequest
+data DeleteHeaderRequest = DeleteHeaderRequest
   { -- | The id of the header to delete. If this header is defined on DocumentStyle, the reference to this header is removed, resulting in no header of that type for the first section of the document. If this header is defined on a SectionStyle, the reference to this header is removed and the header of that type is now continued from the previous section.
-    headerId :: (Core.Maybe Core.Text)
+    headerId :: (Core.Maybe Core.Text),
+    -- | The tab containing the header to delete. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DeleteHeaderRequest' with the minimum fields required to make a request.
 newDeleteHeaderRequest ::
   DeleteHeaderRequest
-newDeleteHeaderRequest = DeleteHeaderRequest {headerId = Core.Nothing}
+newDeleteHeaderRequest =
+  DeleteHeaderRequest
+    { headerId = Core.Nothing,
+      tabId = Core.Nothing
+    }
 
 instance Core.FromJSON DeleteHeaderRequest where
   parseJSON =
     Core.withObject
       "DeleteHeaderRequest"
       ( \o ->
-          DeleteHeaderRequest Core.<$> (o Core..:? "headerId")
+          DeleteHeaderRequest
+            Core.<$> (o Core..:? "headerId")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON DeleteHeaderRequest where
   toJSON DeleteHeaderRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("headerId" Core..=) Core.<$> headerId]
+          [ ("headerId" Core..=) Core.<$> headerId,
+            ("tabId" Core..=) Core.<$> tabId
+          ]
       )
 
 -- | Deletes a NamedRange.
@@ -1726,7 +1793,9 @@ data DeleteNamedRangeRequest = DeleteNamedRangeRequest
   { -- | The name of the range(s) to delete. All named ranges with the given name will be deleted.
     name :: (Core.Maybe Core.Text),
     -- | The ID of the named range to delete.
-    namedRangeId :: (Core.Maybe Core.Text)
+    namedRangeId :: (Core.Maybe Core.Text),
+    -- | Optional. The criteria used to specify which tab(s) the range deletion should occur in. When omitted, the range deletion is applied to all tabs. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the range deletion applies to the singular tab. In a document containing multiple tabs: - If provided, the range deletion applies to the specified tabs. - If not provided, the range deletion applies to all tabs.
+    tabsCriteria :: (Core.Maybe TabsCriteria)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1734,7 +1803,11 @@ data DeleteNamedRangeRequest = DeleteNamedRangeRequest
 newDeleteNamedRangeRequest ::
   DeleteNamedRangeRequest
 newDeleteNamedRangeRequest =
-  DeleteNamedRangeRequest {name = Core.Nothing, namedRangeId = Core.Nothing}
+  DeleteNamedRangeRequest
+    { name = Core.Nothing,
+      namedRangeId = Core.Nothing,
+      tabsCriteria = Core.Nothing
+    }
 
 instance Core.FromJSON DeleteNamedRangeRequest where
   parseJSON =
@@ -1744,6 +1817,7 @@ instance Core.FromJSON DeleteNamedRangeRequest where
           DeleteNamedRangeRequest
             Core.<$> (o Core..:? "name")
             Core.<*> (o Core..:? "namedRangeId")
+            Core.<*> (o Core..:? "tabsCriteria")
       )
 
 instance Core.ToJSON DeleteNamedRangeRequest where
@@ -1751,7 +1825,8 @@ instance Core.ToJSON DeleteNamedRangeRequest where
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("namedRangeId" Core..=) Core.<$> namedRangeId
+            ("namedRangeId" Core..=) Core.<$> namedRangeId,
+            ("tabsCriteria" Core..=) Core.<$> tabsCriteria
           ]
       )
 
@@ -1775,21 +1850,21 @@ instance Core.FromJSON DeleteParagraphBulletsRequest where
     Core.withObject
       "DeleteParagraphBulletsRequest"
       ( \o ->
-          DeleteParagraphBulletsRequest
-            Core.<$> (o Core..:? "range")
+          DeleteParagraphBulletsRequest Core.<$> (o Core..:? "range")
       )
 
 instance Core.ToJSON DeleteParagraphBulletsRequest where
   toJSON DeleteParagraphBulletsRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | Deletes a PositionedObject from the document.
 --
 -- /See:/ 'newDeletePositionedObjectRequest' smart constructor.
-newtype DeletePositionedObjectRequest = DeletePositionedObjectRequest
+data DeletePositionedObjectRequest = DeletePositionedObjectRequest
   { -- | The ID of the positioned object to delete.
-    objectId :: (Core.Maybe Core.Text)
+    objectId :: (Core.Maybe Core.Text),
+    -- | The tab that the positioned object to delete is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1797,7 +1872,10 @@ newtype DeletePositionedObjectRequest = DeletePositionedObjectRequest
 newDeletePositionedObjectRequest ::
   DeletePositionedObjectRequest
 newDeletePositionedObjectRequest =
-  DeletePositionedObjectRequest {objectId = Core.Nothing}
+  DeletePositionedObjectRequest
+    { objectId = Core.Nothing,
+      tabId = Core.Nothing
+    }
 
 instance Core.FromJSON DeletePositionedObjectRequest where
   parseJSON =
@@ -1806,13 +1884,16 @@ instance Core.FromJSON DeletePositionedObjectRequest where
       ( \o ->
           DeletePositionedObjectRequest
             Core.<$> (o Core..:? "objectId")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON DeletePositionedObjectRequest where
   toJSON DeletePositionedObjectRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
+          [ ("objectId" Core..=) Core.<$> objectId,
+            ("tabId" Core..=) Core.<$> tabId
+          ]
       )
 
 -- | Deletes a column from a table.
@@ -1835,17 +1916,14 @@ instance Core.FromJSON DeleteTableColumnRequest where
     Core.withObject
       "DeleteTableColumnRequest"
       ( \o ->
-          DeleteTableColumnRequest
-            Core.<$> (o Core..:? "tableCellLocation")
+          DeleteTableColumnRequest Core.<$> (o Core..:? "tableCellLocation")
       )
 
 instance Core.ToJSON DeleteTableColumnRequest where
   toJSON DeleteTableColumnRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("tableCellLocation" Core..=)
-              Core.<$> tableCellLocation
-          ]
+          [("tableCellLocation" Core..=) Core.<$> tableCellLocation]
       )
 
 -- | Deletes a row from a table.
@@ -1868,17 +1946,14 @@ instance Core.FromJSON DeleteTableRowRequest where
     Core.withObject
       "DeleteTableRowRequest"
       ( \o ->
-          DeleteTableRowRequest
-            Core.<$> (o Core..:? "tableCellLocation")
+          DeleteTableRowRequest Core.<$> (o Core..:? "tableCellLocation")
       )
 
 instance Core.ToJSON DeleteTableRowRequest where
   toJSON DeleteTableRowRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("tableCellLocation" Core..=)
-              Core.<$> tableCellLocation
-          ]
+          [("tableCellLocation" Core..=) Core.<$> tableCellLocation]
       )
 
 -- | A magnitude in a single direction in the specified units.
@@ -1895,7 +1970,8 @@ data Dimension = Dimension
 -- | Creates a value of 'Dimension' with the minimum fields required to make a request.
 newDimension ::
   Dimension
-newDimension = Dimension {magnitude = Core.Nothing, unit = Core.Nothing}
+newDimension =
+  Dimension {magnitude = Core.Nothing, unit = Core.Nothing}
 
 instance Core.FromJSON Dimension where
   parseJSON =
@@ -1920,36 +1996,38 @@ instance Core.ToJSON Dimension where
 --
 -- /See:/ 'newDocument' smart constructor.
 data Document = Document
-  { -- | Output only. The main body of the document.
+  { -- | Output only. The main body of the document. Legacy field: Instead, use Document.tabs.documentTab.body, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     body :: (Core.Maybe Body),
     -- | Output only. The ID of the document.
     documentId :: (Core.Maybe Core.Text),
-    -- | Output only. The style of the document.
+    -- | Output only. The style of the document. Legacy field: Instead, use Document.tabs.documentTab.documentStyle, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     documentStyle :: (Core.Maybe DocumentStyle),
-    -- | Output only. The footers in the document, keyed by footer ID.
+    -- | Output only. The footers in the document, keyed by footer ID. Legacy field: Instead, use Document.tabs.documentTab.footers, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     footers :: (Core.Maybe Document_Footers),
-    -- | Output only. The footnotes in the document, keyed by footnote ID.
+    -- | Output only. The footnotes in the document, keyed by footnote ID. Legacy field: Instead, use Document.tabs.documentTab.footnotes, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     footnotes :: (Core.Maybe Document_Footnotes),
-    -- | Output only. The headers in the document, keyed by header ID.
+    -- | Output only. The headers in the document, keyed by header ID. Legacy field: Instead, use Document.tabs.documentTab.headers, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     headers :: (Core.Maybe Document_Headers),
-    -- | Output only. The inline objects in the document, keyed by object ID.
+    -- | Output only. The inline objects in the document, keyed by object ID. Legacy field: Instead, use Document.tabs.documentTab.inlineObjects, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     inlineObjects :: (Core.Maybe Document_InlineObjects),
-    -- | Output only. The lists in the document, keyed by list ID.
+    -- | Output only. The lists in the document, keyed by list ID. Legacy field: Instead, use Document.tabs.documentTab.lists, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     lists :: (Core.Maybe Document_Lists),
-    -- | Output only. The named ranges in the document, keyed by name.
+    -- | Output only. The named ranges in the document, keyed by name. Legacy field: Instead, use Document.tabs.documentTab.namedRanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     namedRanges :: (Core.Maybe Document_NamedRanges),
-    -- | Output only. The named styles of the document.
+    -- | Output only. The named styles of the document. Legacy field: Instead, use Document.tabs.documentTab.namedStyles, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     namedStyles :: (Core.Maybe NamedStyles),
-    -- | Output only. The positioned objects in the document, keyed by object ID.
+    -- | Output only. The positioned objects in the document, keyed by object ID. Legacy field: Instead, use Document.tabs.documentTab.positionedObjects, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     positionedObjects :: (Core.Maybe Document_PositionedObjects),
     -- | Output only. The revision ID of the document. Can be used in update requests to specify which revision of a document to apply updates to and how the request should behave if the document has been edited since that revision. Only populated if the user has edit access to the document. The revision ID is not a sequential number but an opaque string. The format of the revision ID might change over time. A returned revision ID is only guaranteed to be valid for 24 hours after it has been returned and cannot be shared across users. If the revision ID is unchanged between calls, then the document has not changed. Conversely, a changed ID (for the same document and user) usually means the document has been updated. However, a changed ID can also be due to internal factors such as ID format changes.
     revisionId :: (Core.Maybe Core.Text),
-    -- | Output only. The suggested changes to the style of the document, keyed by suggestion ID.
+    -- | Output only. The suggested changes to the style of the document, keyed by suggestion ID. Legacy field: Instead, use Document.tabs.documentTab.suggestedDocumentStyleChanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     suggestedDocumentStyleChanges :: (Core.Maybe Document_SuggestedDocumentStyleChanges),
-    -- | Output only. The suggested changes to the named styles of the document, keyed by suggestion ID.
+    -- | Output only. The suggested changes to the named styles of the document, keyed by suggestion ID. Legacy field: Instead, use Document.tabs.documentTab.suggestedNamedStylesChanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
     suggestedNamedStylesChanges :: (Core.Maybe Document_SuggestedNamedStylesChanges),
     -- | Output only. The suggestions view mode applied to the document. Note: When editing a document, changes must be based on a document with SUGGESTIONS_INLINE.
     suggestionsViewMode :: (Core.Maybe Document_SuggestionsViewMode),
+    -- | Tabs that are part of a document. Tabs can contain child tabs, a tab nested within another tab. Child tabs are represented by the Tab.childTabs field.
+    tabs :: (Core.Maybe [Tab]),
     -- | The title of the document.
     title :: (Core.Maybe Core.Text)
   }
@@ -1975,6 +2053,7 @@ newDocument =
       suggestedDocumentStyleChanges = Core.Nothing,
       suggestedNamedStylesChanges = Core.Nothing,
       suggestionsViewMode = Core.Nothing,
+      tabs = Core.Nothing,
       title = Core.Nothing
     }
 
@@ -1999,6 +2078,7 @@ instance Core.FromJSON Document where
             Core.<*> (o Core..:? "suggestedDocumentStyleChanges")
             Core.<*> (o Core..:? "suggestedNamedStylesChanges")
             Core.<*> (o Core..:? "suggestionsViewMode")
+            Core.<*> (o Core..:? "tabs")
             Core.<*> (o Core..:? "title")
       )
 
@@ -2016,25 +2096,23 @@ instance Core.ToJSON Document where
             ("lists" Core..=) Core.<$> lists,
             ("namedRanges" Core..=) Core.<$> namedRanges,
             ("namedStyles" Core..=) Core.<$> namedStyles,
-            ("positionedObjects" Core..=)
-              Core.<$> positionedObjects,
+            ("positionedObjects" Core..=) Core.<$> positionedObjects,
             ("revisionId" Core..=) Core.<$> revisionId,
             ("suggestedDocumentStyleChanges" Core..=)
               Core.<$> suggestedDocumentStyleChanges,
             ("suggestedNamedStylesChanges" Core..=)
               Core.<$> suggestedNamedStylesChanges,
-            ("suggestionsViewMode" Core..=)
-              Core.<$> suggestionsViewMode,
+            ("suggestionsViewMode" Core..=) Core.<$> suggestionsViewMode,
+            ("tabs" Core..=) Core.<$> tabs,
             ("title" Core..=) Core.<$> title
           ]
       )
 
--- | Output only. The footers in the document, keyed by footer ID.
+-- | Output only. The footers in the document, keyed by footer ID. Legacy field: Instead, use Document.tabs.documentTab.footers, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_Footers' smart constructor.
 newtype Document_Footers = Document_Footers
-  { -- |
-    additional :: (Core.HashMap Core.Text Footer)
+  { additional :: (Core.HashMap Core.Text Footer)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2043,25 +2121,23 @@ newDocument_Footers ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Footer ->
   Document_Footers
-newDocument_Footers additional = Document_Footers {additional = additional}
+newDocument_Footers additional =
+  Document_Footers {additional = additional}
 
 instance Core.FromJSON Document_Footers where
   parseJSON =
     Core.withObject
       "Document_Footers"
-      ( \o ->
-          Document_Footers Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_Footers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_Footers where
   toJSON Document_Footers {..} = Core.toJSON additional
 
--- | Output only. The footnotes in the document, keyed by footnote ID.
+-- | Output only. The footnotes in the document, keyed by footnote ID. Legacy field: Instead, use Document.tabs.documentTab.footnotes, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_Footnotes' smart constructor.
 newtype Document_Footnotes = Document_Footnotes
-  { -- |
-    additional :: (Core.HashMap Core.Text Footnote)
+  { additional :: (Core.HashMap Core.Text Footnote)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2070,26 +2146,23 @@ newDocument_Footnotes ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Footnote ->
   Document_Footnotes
-newDocument_Footnotes additional = Document_Footnotes {additional = additional}
+newDocument_Footnotes additional =
+  Document_Footnotes {additional = additional}
 
 instance Core.FromJSON Document_Footnotes where
   parseJSON =
     Core.withObject
       "Document_Footnotes"
-      ( \o ->
-          Document_Footnotes Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_Footnotes Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_Footnotes where
-  toJSON Document_Footnotes {..} =
-    Core.toJSON additional
+  toJSON Document_Footnotes {..} = Core.toJSON additional
 
--- | Output only. The headers in the document, keyed by header ID.
+-- | Output only. The headers in the document, keyed by header ID. Legacy field: Instead, use Document.tabs.documentTab.headers, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_Headers' smart constructor.
 newtype Document_Headers = Document_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Header)
+  { additional :: (Core.HashMap Core.Text Header)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2098,25 +2171,23 @@ newDocument_Headers ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Header ->
   Document_Headers
-newDocument_Headers additional = Document_Headers {additional = additional}
+newDocument_Headers additional =
+  Document_Headers {additional = additional}
 
 instance Core.FromJSON Document_Headers where
   parseJSON =
     Core.withObject
       "Document_Headers"
-      ( \o ->
-          Document_Headers Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_Headers where
   toJSON Document_Headers {..} = Core.toJSON additional
 
--- | Output only. The inline objects in the document, keyed by object ID.
+-- | Output only. The inline objects in the document, keyed by object ID. Legacy field: Instead, use Document.tabs.documentTab.inlineObjects, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_InlineObjects' smart constructor.
 newtype Document_InlineObjects = Document_InlineObjects
-  { -- |
-    additional :: (Core.HashMap Core.Text InlineObject)
+  { additional :: (Core.HashMap Core.Text InlineObject)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2132,21 +2203,16 @@ instance Core.FromJSON Document_InlineObjects where
   parseJSON =
     Core.withObject
       "Document_InlineObjects"
-      ( \o ->
-          Document_InlineObjects
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_InlineObjects Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_InlineObjects where
-  toJSON Document_InlineObjects {..} =
-    Core.toJSON additional
+  toJSON Document_InlineObjects {..} = Core.toJSON additional
 
--- | Output only. The lists in the document, keyed by list ID.
+-- | Output only. The lists in the document, keyed by list ID. Legacy field: Instead, use Document.tabs.documentTab.lists, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_Lists' smart constructor.
 newtype Document_Lists = Document_Lists
-  { -- |
-    additional :: (Core.HashMap Core.Text List)
+  { additional :: (Core.HashMap Core.Text List)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2155,25 +2221,23 @@ newDocument_Lists ::
   -- |  See 'additional'.
   Core.HashMap Core.Text List ->
   Document_Lists
-newDocument_Lists additional = Document_Lists {additional = additional}
+newDocument_Lists additional =
+  Document_Lists {additional = additional}
 
 instance Core.FromJSON Document_Lists where
   parseJSON =
     Core.withObject
       "Document_Lists"
-      ( \o ->
-          Document_Lists Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_Lists Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_Lists where
   toJSON Document_Lists {..} = Core.toJSON additional
 
--- | Output only. The named ranges in the document, keyed by name.
+-- | Output only. The named ranges in the document, keyed by name. Legacy field: Instead, use Document.tabs.documentTab.namedRanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_NamedRanges' smart constructor.
 newtype Document_NamedRanges = Document_NamedRanges
-  { -- |
-    additional :: (Core.HashMap Core.Text NamedRanges)
+  { additional :: (Core.HashMap Core.Text NamedRanges)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2189,21 +2253,16 @@ instance Core.FromJSON Document_NamedRanges where
   parseJSON =
     Core.withObject
       "Document_NamedRanges"
-      ( \o ->
-          Document_NamedRanges
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Document_NamedRanges Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Document_NamedRanges where
-  toJSON Document_NamedRanges {..} =
-    Core.toJSON additional
+  toJSON Document_NamedRanges {..} = Core.toJSON additional
 
--- | Output only. The positioned objects in the document, keyed by object ID.
+-- | Output only. The positioned objects in the document, keyed by object ID. Legacy field: Instead, use Document.tabs.documentTab.positionedObjects, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_PositionedObjects' smart constructor.
 newtype Document_PositionedObjects = Document_PositionedObjects
-  { -- |
-    additional :: (Core.HashMap Core.Text PositionedObject)
+  { additional :: (Core.HashMap Core.Text PositionedObject)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2220,20 +2279,17 @@ instance Core.FromJSON Document_PositionedObjects where
     Core.withObject
       "Document_PositionedObjects"
       ( \o ->
-          Document_PositionedObjects
-            Core.<$> (Core.parseJSONObject o)
+          Document_PositionedObjects Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Document_PositionedObjects where
-  toJSON Document_PositionedObjects {..} =
-    Core.toJSON additional
+  toJSON Document_PositionedObjects {..} = Core.toJSON additional
 
--- | Output only. The suggested changes to the style of the document, keyed by suggestion ID.
+-- | Output only. The suggested changes to the style of the document, keyed by suggestion ID. Legacy field: Instead, use Document.tabs.documentTab.suggestedDocumentStyleChanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_SuggestedDocumentStyleChanges' smart constructor.
 newtype Document_SuggestedDocumentStyleChanges = Document_SuggestedDocumentStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedDocumentStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedDocumentStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2245,10 +2301,7 @@ newDocument_SuggestedDocumentStyleChanges ::
 newDocument_SuggestedDocumentStyleChanges additional =
   Document_SuggestedDocumentStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    Document_SuggestedDocumentStyleChanges
-  where
+instance Core.FromJSON Document_SuggestedDocumentStyleChanges where
   parseJSON =
     Core.withObject
       "Document_SuggestedDocumentStyleChanges"
@@ -2257,19 +2310,15 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    Document_SuggestedDocumentStyleChanges
-  where
+instance Core.ToJSON Document_SuggestedDocumentStyleChanges where
   toJSON Document_SuggestedDocumentStyleChanges {..} =
     Core.toJSON additional
 
--- | Output only. The suggested changes to the named styles of the document, keyed by suggestion ID.
+-- | Output only. The suggested changes to the named styles of the document, keyed by suggestion ID. Legacy field: Instead, use Document.tabs.documentTab.suggestedNamedStylesChanges, which exposes the actual document content from all tabs when the includeTabsContent parameter is set to @true@. If @false@ or unset, this field contains information about the first tab in the document.
 --
 -- /See:/ 'newDocument_SuggestedNamedStylesChanges' smart constructor.
 newtype Document_SuggestedNamedStylesChanges = Document_SuggestedNamedStylesChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedNamedStyles)
+  { additional :: (Core.HashMap Core.Text SuggestedNamedStyles)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2281,10 +2330,7 @@ newDocument_SuggestedNamedStylesChanges ::
 newDocument_SuggestedNamedStylesChanges additional =
   Document_SuggestedNamedStylesChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    Document_SuggestedNamedStylesChanges
-  where
+instance Core.FromJSON Document_SuggestedNamedStylesChanges where
   parseJSON =
     Core.withObject
       "Document_SuggestedNamedStylesChanges"
@@ -2293,10 +2339,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    Document_SuggestedNamedStylesChanges
-  where
+instance Core.ToJSON Document_SuggestedNamedStylesChanges where
   toJSON Document_SuggestedNamedStylesChanges {..} =
     Core.toJSON additional
 
@@ -2318,6 +2361,8 @@ data DocumentStyle = DocumentStyle
     firstPageFooterId :: (Core.Maybe Core.Text),
     -- | The ID of the header used only for the first page. If not set then a unique header for the first page does not exist. The value of use/first/page/header/footer determines whether to use the default/header/id or this value for the header on the first page. If not set, there\'s no first page header. This property is read-only.
     firstPageHeaderId :: (Core.Maybe Core.Text),
+    -- | Optional. Indicates whether to flip the dimensions of the page_size, which allows changing the page orientation between portrait and landscape.
+    flipPageOrientation :: (Core.Maybe Core.Bool),
     -- | The bottom page margin. Updating the bottom page margin on the document style clears the bottom page margin on all section styles.
     marginBottom :: (Core.Maybe Dimension),
     -- | The amount of space between the bottom of the page and the contents of the footer.
@@ -2334,7 +2379,7 @@ data DocumentStyle = DocumentStyle
     pageNumberStart :: (Core.Maybe Core.Int32),
     -- | The size of a page in the document.
     pageSize :: (Core.Maybe Size),
-    -- | Indicates whether DocumentStyle margin/header, SectionStyle margin/header and DocumentStyle margin/footer, SectionStyle margin/footer are respected. When false, the default values in the Docs editor for header and footer margin are used. This property is read-only.
+    -- | Indicates whether DocumentStyle margin/header, SectionStyle margin/header and DocumentStyle margin/footer, SectionStyle margin/footer are respected. When false, the default values in the Docs editor for header and footer margin is used. This property is read-only.
     useCustomHeaderFooterMargins :: (Core.Maybe Core.Bool),
     -- | Indicates whether to use the even page header \/ footer IDs for the even pages.
     useEvenPageHeaderFooter :: (Core.Maybe Core.Bool),
@@ -2355,6 +2400,7 @@ newDocumentStyle =
       evenPageHeaderId = Core.Nothing,
       firstPageFooterId = Core.Nothing,
       firstPageHeaderId = Core.Nothing,
+      flipPageOrientation = Core.Nothing,
       marginBottom = Core.Nothing,
       marginFooter = Core.Nothing,
       marginHeader = Core.Nothing,
@@ -2381,6 +2427,7 @@ instance Core.FromJSON DocumentStyle where
             Core.<*> (o Core..:? "evenPageHeaderId")
             Core.<*> (o Core..:? "firstPageFooterId")
             Core.<*> (o Core..:? "firstPageHeaderId")
+            Core.<*> (o Core..:? "flipPageOrientation")
             Core.<*> (o Core..:? "marginBottom")
             Core.<*> (o Core..:? "marginFooter")
             Core.<*> (o Core..:? "marginHeader")
@@ -2401,14 +2448,11 @@ instance Core.ToJSON DocumentStyle where
           [ ("background" Core..=) Core.<$> background,
             ("defaultFooterId" Core..=) Core.<$> defaultFooterId,
             ("defaultHeaderId" Core..=) Core.<$> defaultHeaderId,
-            ("evenPageFooterId" Core..=)
-              Core.<$> evenPageFooterId,
-            ("evenPageHeaderId" Core..=)
-              Core.<$> evenPageHeaderId,
-            ("firstPageFooterId" Core..=)
-              Core.<$> firstPageFooterId,
-            ("firstPageHeaderId" Core..=)
-              Core.<$> firstPageHeaderId,
+            ("evenPageFooterId" Core..=) Core.<$> evenPageFooterId,
+            ("evenPageHeaderId" Core..=) Core.<$> evenPageHeaderId,
+            ("firstPageFooterId" Core..=) Core.<$> firstPageFooterId,
+            ("firstPageHeaderId" Core..=) Core.<$> firstPageHeaderId,
+            ("flipPageOrientation" Core..=) Core.<$> flipPageOrientation,
             ("marginBottom" Core..=) Core.<$> marginBottom,
             ("marginFooter" Core..=) Core.<$> marginFooter,
             ("marginHeader" Core..=) Core.<$> marginHeader,
@@ -2444,6 +2488,8 @@ data DocumentStyleSuggestionState = DocumentStyleSuggestionState
     firstPageFooterIdSuggested :: (Core.Maybe Core.Bool),
     -- | Indicates if there was a suggested change to first/page/header_id.
     firstPageHeaderIdSuggested :: (Core.Maybe Core.Bool),
+    -- | Optional. Indicates if there was a suggested change to flip/page/orientation.
+    flipPageOrientationSuggested :: (Core.Maybe Core.Bool),
     -- | Indicates if there was a suggested change to margin_bottom.
     marginBottomSuggested :: (Core.Maybe Core.Bool),
     -- | Indicates if there was a suggested change to margin_footer.
@@ -2474,13 +2520,15 @@ newDocumentStyleSuggestionState ::
   DocumentStyleSuggestionState
 newDocumentStyleSuggestionState =
   DocumentStyleSuggestionState
-    { backgroundSuggestionState = Core.Nothing,
+    { backgroundSuggestionState =
+        Core.Nothing,
       defaultFooterIdSuggested = Core.Nothing,
       defaultHeaderIdSuggested = Core.Nothing,
       evenPageFooterIdSuggested = Core.Nothing,
       evenPageHeaderIdSuggested = Core.Nothing,
       firstPageFooterIdSuggested = Core.Nothing,
       firstPageHeaderIdSuggested = Core.Nothing,
+      flipPageOrientationSuggested = Core.Nothing,
       marginBottomSuggested = Core.Nothing,
       marginFooterSuggested = Core.Nothing,
       marginHeaderSuggested = Core.Nothing,
@@ -2507,6 +2555,7 @@ instance Core.FromJSON DocumentStyleSuggestionState where
             Core.<*> (o Core..:? "evenPageHeaderIdSuggested")
             Core.<*> (o Core..:? "firstPageFooterIdSuggested")
             Core.<*> (o Core..:? "firstPageHeaderIdSuggested")
+            Core.<*> (o Core..:? "flipPageOrientationSuggested")
             Core.<*> (o Core..:? "marginBottomSuggested")
             Core.<*> (o Core..:? "marginFooterSuggested")
             Core.<*> (o Core..:? "marginHeaderSuggested")
@@ -2538,18 +2587,14 @@ instance Core.ToJSON DocumentStyleSuggestionState where
               Core.<$> firstPageFooterIdSuggested,
             ("firstPageHeaderIdSuggested" Core..=)
               Core.<$> firstPageHeaderIdSuggested,
-            ("marginBottomSuggested" Core..=)
-              Core.<$> marginBottomSuggested,
-            ("marginFooterSuggested" Core..=)
-              Core.<$> marginFooterSuggested,
-            ("marginHeaderSuggested" Core..=)
-              Core.<$> marginHeaderSuggested,
-            ("marginLeftSuggested" Core..=)
-              Core.<$> marginLeftSuggested,
-            ("marginRightSuggested" Core..=)
-              Core.<$> marginRightSuggested,
-            ("marginTopSuggested" Core..=)
-              Core.<$> marginTopSuggested,
+            ("flipPageOrientationSuggested" Core..=)
+              Core.<$> flipPageOrientationSuggested,
+            ("marginBottomSuggested" Core..=) Core.<$> marginBottomSuggested,
+            ("marginFooterSuggested" Core..=) Core.<$> marginFooterSuggested,
+            ("marginHeaderSuggested" Core..=) Core.<$> marginHeaderSuggested,
+            ("marginLeftSuggested" Core..=) Core.<$> marginLeftSuggested,
+            ("marginRightSuggested" Core..=) Core.<$> marginRightSuggested,
+            ("marginTopSuggested" Core..=) Core.<$> marginTopSuggested,
             ("pageNumberStartSuggested" Core..=)
               Core.<$> pageNumberStartSuggested,
             ("pageSizeSuggestionState" Core..=)
@@ -2562,6 +2607,337 @@ instance Core.ToJSON DocumentStyleSuggestionState where
               Core.<$> useFirstPageHeaderFooterSuggested
           ]
       )
+
+-- | A tab with document contents.
+--
+-- /See:/ 'newDocumentTab' smart constructor.
+data DocumentTab = DocumentTab
+  { -- | The main body of the document tab.
+    body :: (Core.Maybe Body),
+    -- | The style of the document tab.
+    documentStyle :: (Core.Maybe DocumentStyle),
+    -- | The footers in the document tab, keyed by footer ID.
+    footers :: (Core.Maybe DocumentTab_Footers),
+    -- | The footnotes in the document tab, keyed by footnote ID.
+    footnotes :: (Core.Maybe DocumentTab_Footnotes),
+    -- | The headers in the document tab, keyed by header ID.
+    headers :: (Core.Maybe DocumentTab_Headers),
+    -- | The inline objects in the document tab, keyed by object ID.
+    inlineObjects :: (Core.Maybe DocumentTab_InlineObjects),
+    -- | The lists in the document tab, keyed by list ID.
+    lists :: (Core.Maybe DocumentTab_Lists),
+    -- | The named ranges in the document tab, keyed by name.
+    namedRanges :: (Core.Maybe DocumentTab_NamedRanges),
+    -- | The named styles of the document tab.
+    namedStyles :: (Core.Maybe NamedStyles),
+    -- | The positioned objects in the document tab, keyed by object ID.
+    positionedObjects :: (Core.Maybe DocumentTab_PositionedObjects),
+    -- | The suggested changes to the style of the document tab, keyed by suggestion ID.
+    suggestedDocumentStyleChanges :: (Core.Maybe DocumentTab_SuggestedDocumentStyleChanges),
+    -- | The suggested changes to the named styles of the document tab, keyed by suggestion ID.
+    suggestedNamedStylesChanges :: (Core.Maybe DocumentTab_SuggestedNamedStylesChanges)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab' with the minimum fields required to make a request.
+newDocumentTab ::
+  DocumentTab
+newDocumentTab =
+  DocumentTab
+    { body = Core.Nothing,
+      documentStyle = Core.Nothing,
+      footers = Core.Nothing,
+      footnotes = Core.Nothing,
+      headers = Core.Nothing,
+      inlineObjects = Core.Nothing,
+      lists = Core.Nothing,
+      namedRanges = Core.Nothing,
+      namedStyles = Core.Nothing,
+      positionedObjects = Core.Nothing,
+      suggestedDocumentStyleChanges = Core.Nothing,
+      suggestedNamedStylesChanges = Core.Nothing
+    }
+
+instance Core.FromJSON DocumentTab where
+  parseJSON =
+    Core.withObject
+      "DocumentTab"
+      ( \o ->
+          DocumentTab
+            Core.<$> (o Core..:? "body")
+            Core.<*> (o Core..:? "documentStyle")
+            Core.<*> (o Core..:? "footers")
+            Core.<*> (o Core..:? "footnotes")
+            Core.<*> (o Core..:? "headers")
+            Core.<*> (o Core..:? "inlineObjects")
+            Core.<*> (o Core..:? "lists")
+            Core.<*> (o Core..:? "namedRanges")
+            Core.<*> (o Core..:? "namedStyles")
+            Core.<*> (o Core..:? "positionedObjects")
+            Core.<*> (o Core..:? "suggestedDocumentStyleChanges")
+            Core.<*> (o Core..:? "suggestedNamedStylesChanges")
+      )
+
+instance Core.ToJSON DocumentTab where
+  toJSON DocumentTab {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("body" Core..=) Core.<$> body,
+            ("documentStyle" Core..=) Core.<$> documentStyle,
+            ("footers" Core..=) Core.<$> footers,
+            ("footnotes" Core..=) Core.<$> footnotes,
+            ("headers" Core..=) Core.<$> headers,
+            ("inlineObjects" Core..=) Core.<$> inlineObjects,
+            ("lists" Core..=) Core.<$> lists,
+            ("namedRanges" Core..=) Core.<$> namedRanges,
+            ("namedStyles" Core..=) Core.<$> namedStyles,
+            ("positionedObjects" Core..=) Core.<$> positionedObjects,
+            ("suggestedDocumentStyleChanges" Core..=)
+              Core.<$> suggestedDocumentStyleChanges,
+            ("suggestedNamedStylesChanges" Core..=)
+              Core.<$> suggestedNamedStylesChanges
+          ]
+      )
+
+-- | The footers in the document tab, keyed by footer ID.
+--
+-- /See:/ 'newDocumentTab_Footers' smart constructor.
+newtype DocumentTab_Footers = DocumentTab_Footers
+  { additional :: (Core.HashMap Core.Text Footer)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_Footers' with the minimum fields required to make a request.
+newDocumentTab_Footers ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Footer ->
+  DocumentTab_Footers
+newDocumentTab_Footers additional =
+  DocumentTab_Footers {additional = additional}
+
+instance Core.FromJSON DocumentTab_Footers where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_Footers"
+      (\o -> DocumentTab_Footers Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DocumentTab_Footers where
+  toJSON DocumentTab_Footers {..} = Core.toJSON additional
+
+-- | The footnotes in the document tab, keyed by footnote ID.
+--
+-- /See:/ 'newDocumentTab_Footnotes' smart constructor.
+newtype DocumentTab_Footnotes = DocumentTab_Footnotes
+  { additional :: (Core.HashMap Core.Text Footnote)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_Footnotes' with the minimum fields required to make a request.
+newDocumentTab_Footnotes ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Footnote ->
+  DocumentTab_Footnotes
+newDocumentTab_Footnotes additional =
+  DocumentTab_Footnotes {additional = additional}
+
+instance Core.FromJSON DocumentTab_Footnotes where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_Footnotes"
+      (\o -> DocumentTab_Footnotes Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DocumentTab_Footnotes where
+  toJSON DocumentTab_Footnotes {..} = Core.toJSON additional
+
+-- | The headers in the document tab, keyed by header ID.
+--
+-- /See:/ 'newDocumentTab_Headers' smart constructor.
+newtype DocumentTab_Headers = DocumentTab_Headers
+  { additional :: (Core.HashMap Core.Text Header)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_Headers' with the minimum fields required to make a request.
+newDocumentTab_Headers ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Header ->
+  DocumentTab_Headers
+newDocumentTab_Headers additional =
+  DocumentTab_Headers {additional = additional}
+
+instance Core.FromJSON DocumentTab_Headers where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_Headers"
+      (\o -> DocumentTab_Headers Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DocumentTab_Headers where
+  toJSON DocumentTab_Headers {..} = Core.toJSON additional
+
+-- | The inline objects in the document tab, keyed by object ID.
+--
+-- /See:/ 'newDocumentTab_InlineObjects' smart constructor.
+newtype DocumentTab_InlineObjects = DocumentTab_InlineObjects
+  { additional :: (Core.HashMap Core.Text InlineObject)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_InlineObjects' with the minimum fields required to make a request.
+newDocumentTab_InlineObjects ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text InlineObject ->
+  DocumentTab_InlineObjects
+newDocumentTab_InlineObjects additional =
+  DocumentTab_InlineObjects {additional = additional}
+
+instance Core.FromJSON DocumentTab_InlineObjects where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_InlineObjects"
+      ( \o ->
+          DocumentTab_InlineObjects Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DocumentTab_InlineObjects where
+  toJSON DocumentTab_InlineObjects {..} = Core.toJSON additional
+
+-- | The lists in the document tab, keyed by list ID.
+--
+-- /See:/ 'newDocumentTab_Lists' smart constructor.
+newtype DocumentTab_Lists = DocumentTab_Lists
+  { additional :: (Core.HashMap Core.Text List)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_Lists' with the minimum fields required to make a request.
+newDocumentTab_Lists ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text List ->
+  DocumentTab_Lists
+newDocumentTab_Lists additional =
+  DocumentTab_Lists {additional = additional}
+
+instance Core.FromJSON DocumentTab_Lists where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_Lists"
+      (\o -> DocumentTab_Lists Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DocumentTab_Lists where
+  toJSON DocumentTab_Lists {..} = Core.toJSON additional
+
+-- | The named ranges in the document tab, keyed by name.
+--
+-- /See:/ 'newDocumentTab_NamedRanges' smart constructor.
+newtype DocumentTab_NamedRanges = DocumentTab_NamedRanges
+  { additional :: (Core.HashMap Core.Text NamedRanges)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_NamedRanges' with the minimum fields required to make a request.
+newDocumentTab_NamedRanges ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text NamedRanges ->
+  DocumentTab_NamedRanges
+newDocumentTab_NamedRanges additional =
+  DocumentTab_NamedRanges {additional = additional}
+
+instance Core.FromJSON DocumentTab_NamedRanges where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_NamedRanges"
+      (\o -> DocumentTab_NamedRanges Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON DocumentTab_NamedRanges where
+  toJSON DocumentTab_NamedRanges {..} = Core.toJSON additional
+
+-- | The positioned objects in the document tab, keyed by object ID.
+--
+-- /See:/ 'newDocumentTab_PositionedObjects' smart constructor.
+newtype DocumentTab_PositionedObjects = DocumentTab_PositionedObjects
+  { additional :: (Core.HashMap Core.Text PositionedObject)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_PositionedObjects' with the minimum fields required to make a request.
+newDocumentTab_PositionedObjects ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text PositionedObject ->
+  DocumentTab_PositionedObjects
+newDocumentTab_PositionedObjects additional =
+  DocumentTab_PositionedObjects {additional = additional}
+
+instance Core.FromJSON DocumentTab_PositionedObjects where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_PositionedObjects"
+      ( \o ->
+          DocumentTab_PositionedObjects Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DocumentTab_PositionedObjects where
+  toJSON DocumentTab_PositionedObjects {..} = Core.toJSON additional
+
+-- | The suggested changes to the style of the document tab, keyed by suggestion ID.
+--
+-- /See:/ 'newDocumentTab_SuggestedDocumentStyleChanges' smart constructor.
+newtype DocumentTab_SuggestedDocumentStyleChanges = DocumentTab_SuggestedDocumentStyleChanges
+  { additional :: (Core.HashMap Core.Text SuggestedDocumentStyle)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_SuggestedDocumentStyleChanges' with the minimum fields required to make a request.
+newDocumentTab_SuggestedDocumentStyleChanges ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text SuggestedDocumentStyle ->
+  DocumentTab_SuggestedDocumentStyleChanges
+newDocumentTab_SuggestedDocumentStyleChanges additional =
+  DocumentTab_SuggestedDocumentStyleChanges
+    { additional =
+        additional
+    }
+
+instance Core.FromJSON DocumentTab_SuggestedDocumentStyleChanges where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_SuggestedDocumentStyleChanges"
+      ( \o ->
+          DocumentTab_SuggestedDocumentStyleChanges
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DocumentTab_SuggestedDocumentStyleChanges where
+  toJSON DocumentTab_SuggestedDocumentStyleChanges {..} =
+    Core.toJSON additional
+
+-- | The suggested changes to the named styles of the document tab, keyed by suggestion ID.
+--
+-- /See:/ 'newDocumentTab_SuggestedNamedStylesChanges' smart constructor.
+newtype DocumentTab_SuggestedNamedStylesChanges = DocumentTab_SuggestedNamedStylesChanges
+  { additional :: (Core.HashMap Core.Text SuggestedNamedStyles)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DocumentTab_SuggestedNamedStylesChanges' with the minimum fields required to make a request.
+newDocumentTab_SuggestedNamedStylesChanges ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text SuggestedNamedStyles ->
+  DocumentTab_SuggestedNamedStylesChanges
+newDocumentTab_SuggestedNamedStylesChanges additional =
+  DocumentTab_SuggestedNamedStylesChanges {additional = additional}
+
+instance Core.FromJSON DocumentTab_SuggestedNamedStylesChanges where
+  parseJSON =
+    Core.withObject
+      "DocumentTab_SuggestedNamedStylesChanges"
+      ( \o ->
+          DocumentTab_SuggestedNamedStylesChanges
+            Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON DocumentTab_SuggestedNamedStylesChanges where
+  toJSON DocumentTab_SuggestedNamedStylesChanges {..} =
+    Core.toJSON additional
 
 -- | The properties of an embedded drawing and used to differentiate the object type. An embedded drawing is one that\'s created and edited within a document. Note that extensive details are not supported.
 --
@@ -2595,21 +2971,13 @@ newEmbeddedDrawingPropertiesSuggestionState ::
 newEmbeddedDrawingPropertiesSuggestionState =
   EmbeddedDrawingPropertiesSuggestionState
 
-instance
-  Core.FromJSON
-    EmbeddedDrawingPropertiesSuggestionState
-  where
+instance Core.FromJSON EmbeddedDrawingPropertiesSuggestionState where
   parseJSON =
     Core.withObject
       "EmbeddedDrawingPropertiesSuggestionState"
-      ( \o ->
-          Core.pure EmbeddedDrawingPropertiesSuggestionState
-      )
+      (\o -> Core.pure EmbeddedDrawingPropertiesSuggestionState)
 
-instance
-  Core.ToJSON
-    EmbeddedDrawingPropertiesSuggestionState
-  where
+instance Core.ToJSON EmbeddedDrawingPropertiesSuggestionState where
   toJSON = Core.const Core.emptyObject
 
 -- | An embedded object in the document.
@@ -2685,11 +3053,9 @@ instance Core.ToJSON EmbeddedObject where
           [ ("description" Core..=) Core.<$> description,
             ("embeddedDrawingProperties" Core..=)
               Core.<$> embeddedDrawingProperties,
-            ("embeddedObjectBorder" Core..=)
-              Core.<$> embeddedObjectBorder,
+            ("embeddedObjectBorder" Core..=) Core.<$> embeddedObjectBorder,
             ("imageProperties" Core..=) Core.<$> imageProperties,
-            ("linkedContentReference" Core..=)
-              Core.<$> linkedContentReference,
+            ("linkedContentReference" Core..=) Core.<$> linkedContentReference,
             ("marginBottom" Core..=) Core.<$> marginBottom,
             ("marginLeft" Core..=) Core.<$> marginLeft,
             ("marginRight" Core..=) Core.<$> marginRight,
@@ -2768,16 +3134,14 @@ newEmbeddedObjectBorderSuggestionState ::
   EmbeddedObjectBorderSuggestionState
 newEmbeddedObjectBorderSuggestionState =
   EmbeddedObjectBorderSuggestionState
-    { colorSuggested = Core.Nothing,
+    { colorSuggested =
+        Core.Nothing,
       dashStyleSuggested = Core.Nothing,
       propertyStateSuggested = Core.Nothing,
       widthSuggested = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    EmbeddedObjectBorderSuggestionState
-  where
+instance Core.FromJSON EmbeddedObjectBorderSuggestionState where
   parseJSON =
     Core.withObject
       "EmbeddedObjectBorderSuggestionState"
@@ -2789,18 +3153,13 @@ instance
             Core.<*> (o Core..:? "widthSuggested")
       )
 
-instance
-  Core.ToJSON
-    EmbeddedObjectBorderSuggestionState
-  where
+instance Core.ToJSON EmbeddedObjectBorderSuggestionState where
   toJSON EmbeddedObjectBorderSuggestionState {..} =
     Core.object
       ( Core.catMaybes
           [ ("colorSuggested" Core..=) Core.<$> colorSuggested,
-            ("dashStyleSuggested" Core..=)
-              Core.<$> dashStyleSuggested,
-            ("propertyStateSuggested" Core..=)
-              Core.<$> propertyStateSuggested,
+            ("dashStyleSuggested" Core..=) Core.<$> dashStyleSuggested,
+            ("propertyStateSuggested" Core..=) Core.<$> propertyStateSuggested,
             ("widthSuggested" Core..=) Core.<$> widthSuggested
           ]
       )
@@ -2839,7 +3198,8 @@ newEmbeddedObjectSuggestionState ::
   EmbeddedObjectSuggestionState
 newEmbeddedObjectSuggestionState =
   EmbeddedObjectSuggestionState
-    { descriptionSuggested = Core.Nothing,
+    { descriptionSuggested =
+        Core.Nothing,
       embeddedDrawingPropertiesSuggestionState = Core.Nothing,
       embeddedObjectBorderSuggestionState = Core.Nothing,
       imagePropertiesSuggestionState = Core.Nothing,
@@ -2859,9 +3219,7 @@ instance Core.FromJSON EmbeddedObjectSuggestionState where
       ( \o ->
           EmbeddedObjectSuggestionState
             Core.<$> (o Core..:? "descriptionSuggested")
-            Core.<*> ( o
-                         Core..:? "embeddedDrawingPropertiesSuggestionState"
-                     )
+            Core.<*> (o Core..:? "embeddedDrawingPropertiesSuggestionState")
             Core.<*> (o Core..:? "embeddedObjectBorderSuggestionState")
             Core.<*> (o Core..:? "imagePropertiesSuggestionState")
             Core.<*> (o Core..:? "linkedContentReferenceSuggestionState")
@@ -2877,8 +3235,7 @@ instance Core.ToJSON EmbeddedObjectSuggestionState where
   toJSON EmbeddedObjectSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("descriptionSuggested" Core..=)
-              Core.<$> descriptionSuggested,
+          [ ("descriptionSuggested" Core..=) Core.<$> descriptionSuggested,
             ("embeddedDrawingPropertiesSuggestionState" Core..=)
               Core.<$> embeddedDrawingPropertiesSuggestionState,
             ("embeddedObjectBorderSuggestionState" Core..=)
@@ -2887,16 +3244,11 @@ instance Core.ToJSON EmbeddedObjectSuggestionState where
               Core.<$> imagePropertiesSuggestionState,
             ("linkedContentReferenceSuggestionState" Core..=)
               Core.<$> linkedContentReferenceSuggestionState,
-            ("marginBottomSuggested" Core..=)
-              Core.<$> marginBottomSuggested,
-            ("marginLeftSuggested" Core..=)
-              Core.<$> marginLeftSuggested,
-            ("marginRightSuggested" Core..=)
-              Core.<$> marginRightSuggested,
-            ("marginTopSuggested" Core..=)
-              Core.<$> marginTopSuggested,
-            ("sizeSuggestionState" Core..=)
-              Core.<$> sizeSuggestionState,
+            ("marginBottomSuggested" Core..=) Core.<$> marginBottomSuggested,
+            ("marginLeftSuggested" Core..=) Core.<$> marginLeftSuggested,
+            ("marginRightSuggested" Core..=) Core.<$> marginRightSuggested,
+            ("marginTopSuggested" Core..=) Core.<$> marginTopSuggested,
+            ("sizeSuggestionState" Core..=) Core.<$> sizeSuggestionState,
             ("titleSuggested" Core..=) Core.<$> titleSuggested
           ]
       )
@@ -2904,16 +3256,22 @@ instance Core.ToJSON EmbeddedObjectSuggestionState where
 -- | Location at the end of a body, header, footer or footnote. The location is immediately before the last newline in the document segment.
 --
 -- /See:/ 'newEndOfSegmentLocation' smart constructor.
-newtype EndOfSegmentLocation = EndOfSegmentLocation
+data EndOfSegmentLocation = EndOfSegmentLocation
   { -- | The ID of the header, footer or footnote the location is in. An empty segment ID signifies the document\'s body.
-    segmentId :: (Core.Maybe Core.Text)
+    segmentId :: (Core.Maybe Core.Text),
+    -- | The tab that the location is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'EndOfSegmentLocation' with the minimum fields required to make a request.
 newEndOfSegmentLocation ::
   EndOfSegmentLocation
-newEndOfSegmentLocation = EndOfSegmentLocation {segmentId = Core.Nothing}
+newEndOfSegmentLocation =
+  EndOfSegmentLocation
+    { segmentId = Core.Nothing,
+      tabId = Core.Nothing
+    }
 
 instance Core.FromJSON EndOfSegmentLocation where
   parseJSON =
@@ -2922,13 +3280,16 @@ instance Core.FromJSON EndOfSegmentLocation where
       ( \o ->
           EndOfSegmentLocation
             Core.<$> (o Core..:? "segmentId")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON EndOfSegmentLocation where
   toJSON EndOfSegmentLocation {..} =
     Core.object
       ( Core.catMaybes
-          [("segmentId" Core..=) Core.<$> segmentId]
+          [ ("segmentId" Core..=) Core.<$> segmentId,
+            ("tabId" Core..=) Core.<$> tabId
+          ]
       )
 
 -- | A ParagraphElement representing an equation.
@@ -2965,10 +3326,8 @@ instance Core.ToJSON Equation where
   toJSON Equation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds
+          [ ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds
           ]
       )
 
@@ -3021,7 +3380,8 @@ data Footnote = Footnote
 -- | Creates a value of 'Footnote' with the minimum fields required to make a request.
 newFootnote ::
   Footnote
-newFootnote = Footnote {content = Core.Nothing, footnoteId = Core.Nothing}
+newFootnote =
+  Footnote {content = Core.Nothing, footnoteId = Core.Nothing}
 
 instance Core.FromJSON Footnote where
   parseJSON =
@@ -3094,10 +3454,8 @@ instance Core.ToJSON FootnoteReference where
       ( Core.catMaybes
           [ ("footnoteId" Core..=) Core.<$> footnoteId,
             ("footnoteNumber" Core..=) Core.<$> footnoteNumber,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -3108,8 +3466,7 @@ instance Core.ToJSON FootnoteReference where
 --
 -- /See:/ 'newFootnoteReference_SuggestedTextStyleChanges' smart constructor.
 newtype FootnoteReference_SuggestedTextStyleChanges = FootnoteReference_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3119,12 +3476,12 @@ newFootnoteReference_SuggestedTextStyleChanges ::
   Core.HashMap Core.Text SuggestedTextStyle ->
   FootnoteReference_SuggestedTextStyleChanges
 newFootnoteReference_SuggestedTextStyleChanges additional =
-  FootnoteReference_SuggestedTextStyleChanges {additional = additional}
+  FootnoteReference_SuggestedTextStyleChanges
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    FootnoteReference_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON FootnoteReference_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "FootnoteReference_SuggestedTextStyleChanges"
@@ -3133,13 +3490,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    FootnoteReference_SuggestedTextStyleChanges
-  where
-  toJSON
-    FootnoteReference_SuggestedTextStyleChanges {..} =
-      Core.toJSON additional
+instance Core.ToJSON FootnoteReference_SuggestedTextStyleChanges where
+  toJSON FootnoteReference_SuggestedTextStyleChanges {..} =
+    Core.toJSON additional
 
 -- | A document header.
 --
@@ -3174,6 +3527,40 @@ instance Core.ToJSON Header where
           [ ("content" Core..=) Core.<$> content,
             ("headerId" Core..=) Core.<$> headerId
           ]
+      )
+
+-- | A reference to a heading in this document.
+--
+-- /See:/ 'newHeadingLink' smart constructor.
+data HeadingLink = HeadingLink
+  { -- | The ID of a heading in this document.
+    id :: (Core.Maybe Core.Text),
+    -- | The ID of the tab containing this heading.
+    tabId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HeadingLink' with the minimum fields required to make a request.
+newHeadingLink ::
+  HeadingLink
+newHeadingLink =
+  HeadingLink {id = Core.Nothing, tabId = Core.Nothing}
+
+instance Core.FromJSON HeadingLink where
+  parseJSON =
+    Core.withObject
+      "HeadingLink"
+      ( \o ->
+          HeadingLink
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "tabId")
+      )
+
+instance Core.ToJSON HeadingLink where
+  toJSON HeadingLink {..} =
+    Core.object
+      ( Core.catMaybes
+          [("id" Core..=) Core.<$> id, ("tabId" Core..=) Core.<$> tabId]
       )
 
 -- | A ParagraphElement representing a horizontal line.
@@ -3218,10 +3605,8 @@ instance Core.ToJSON HorizontalRule where
   toJSON HorizontalRule {..} =
     Core.object
       ( Core.catMaybes
-          [ ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+          [ ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -3232,8 +3617,7 @@ instance Core.ToJSON HorizontalRule where
 --
 -- /See:/ 'newHorizontalRule_SuggestedTextStyleChanges' smart constructor.
 newtype HorizontalRule_SuggestedTextStyleChanges = HorizontalRule_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3245,10 +3629,7 @@ newHorizontalRule_SuggestedTextStyleChanges ::
 newHorizontalRule_SuggestedTextStyleChanges additional =
   HorizontalRule_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    HorizontalRule_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON HorizontalRule_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "HorizontalRule_SuggestedTextStyleChanges"
@@ -3257,10 +3638,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    HorizontalRule_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON HorizontalRule_SuggestedTextStyleChanges where
   toJSON HorizontalRule_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -3383,18 +3761,13 @@ instance Core.ToJSON ImagePropertiesSuggestionState where
     Core.object
       ( Core.catMaybes
           [ ("angleSuggested" Core..=) Core.<$> angleSuggested,
-            ("brightnessSuggested" Core..=)
-              Core.<$> brightnessSuggested,
-            ("contentUriSuggested" Core..=)
-              Core.<$> contentUriSuggested,
-            ("contrastSuggested" Core..=)
-              Core.<$> contrastSuggested,
+            ("brightnessSuggested" Core..=) Core.<$> brightnessSuggested,
+            ("contentUriSuggested" Core..=) Core.<$> contentUriSuggested,
+            ("contrastSuggested" Core..=) Core.<$> contrastSuggested,
             ("cropPropertiesSuggestionState" Core..=)
               Core.<$> cropPropertiesSuggestionState,
-            ("sourceUriSuggested" Core..=)
-              Core.<$> sourceUriSuggested,
-            ("transparencySuggested" Core..=)
-              Core.<$> transparencySuggested
+            ("sourceUriSuggested" Core..=) Core.<$> sourceUriSuggested,
+            ("transparencySuggested" Core..=) Core.<$> transparencySuggested
           ]
       )
 
@@ -3447,12 +3820,10 @@ instance Core.ToJSON InlineObject where
           [ ("inlineObjectProperties" Core..=)
               Core.<$> inlineObjectProperties,
             ("objectId" Core..=) Core.<$> objectId,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
             ("suggestedInlineObjectPropertiesChanges" Core..=)
               Core.<$> suggestedInlineObjectPropertiesChanges,
-            ("suggestedInsertionId" Core..=)
-              Core.<$> suggestedInsertionId
+            ("suggestedInsertionId" Core..=) Core.<$> suggestedInsertionId
           ]
       )
 
@@ -3460,18 +3831,22 @@ instance Core.ToJSON InlineObject where
 --
 -- /See:/ 'newInlineObject_SuggestedInlineObjectPropertiesChanges' smart constructor.
 newtype InlineObject_SuggestedInlineObjectPropertiesChanges = InlineObject_SuggestedInlineObjectPropertiesChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedInlineObjectProperties)
+  { additional :: (Core.HashMap Core.Text SuggestedInlineObjectProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'InlineObject_SuggestedInlineObjectPropertiesChanges' with the minimum fields required to make a request.
 newInlineObject_SuggestedInlineObjectPropertiesChanges ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text SuggestedInlineObjectProperties ->
+  Core.HashMap
+    Core.Text
+    SuggestedInlineObjectProperties ->
   InlineObject_SuggestedInlineObjectPropertiesChanges
 newInlineObject_SuggestedInlineObjectPropertiesChanges additional =
-  InlineObject_SuggestedInlineObjectPropertiesChanges {additional = additional}
+  InlineObject_SuggestedInlineObjectPropertiesChanges
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -3489,9 +3864,8 @@ instance
   Core.ToJSON
     InlineObject_SuggestedInlineObjectPropertiesChanges
   where
-  toJSON
-    InlineObject_SuggestedInlineObjectPropertiesChanges {..} =
-      Core.toJSON additional
+  toJSON InlineObject_SuggestedInlineObjectPropertiesChanges {..} =
+    Core.toJSON additional
 
 -- | A ParagraphElement that contains an InlineObject.
 --
@@ -3540,10 +3914,8 @@ instance Core.ToJSON InlineObjectElement where
     Core.object
       ( Core.catMaybes
           [ ("inlineObjectId" Core..=) Core.<$> inlineObjectId,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -3554,8 +3926,7 @@ instance Core.ToJSON InlineObjectElement where
 --
 -- /See:/ 'newInlineObjectElement_SuggestedTextStyleChanges' smart constructor.
 newtype InlineObjectElement_SuggestedTextStyleChanges = InlineObjectElement_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3565,7 +3936,10 @@ newInlineObjectElement_SuggestedTextStyleChanges ::
   Core.HashMap Core.Text SuggestedTextStyle ->
   InlineObjectElement_SuggestedTextStyleChanges
 newInlineObjectElement_SuggestedTextStyleChanges additional =
-  InlineObjectElement_SuggestedTextStyleChanges {additional = additional}
+  InlineObjectElement_SuggestedTextStyleChanges
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -3579,13 +3953,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    InlineObjectElement_SuggestedTextStyleChanges
-  where
-  toJSON
-    InlineObjectElement_SuggestedTextStyleChanges {..} =
-      Core.toJSON additional
+instance Core.ToJSON InlineObjectElement_SuggestedTextStyleChanges where
+  toJSON InlineObjectElement_SuggestedTextStyleChanges {..} =
+    Core.toJSON additional
 
 -- | Properties of an InlineObject.
 --
@@ -3607,8 +3977,7 @@ instance Core.FromJSON InlineObjectProperties where
     Core.withObject
       "InlineObjectProperties"
       ( \o ->
-          InlineObjectProperties
-            Core.<$> (o Core..:? "embeddedObject")
+          InlineObjectProperties Core.<$> (o Core..:? "embeddedObject")
       )
 
 instance Core.ToJSON InlineObjectProperties where
@@ -3632,13 +4001,11 @@ newInlineObjectPropertiesSuggestionState ::
   InlineObjectPropertiesSuggestionState
 newInlineObjectPropertiesSuggestionState =
   InlineObjectPropertiesSuggestionState
-    { embeddedObjectSuggestionState = Core.Nothing
+    { embeddedObjectSuggestionState =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    InlineObjectPropertiesSuggestionState
-  where
+instance Core.FromJSON InlineObjectPropertiesSuggestionState where
   parseJSON =
     Core.withObject
       "InlineObjectPropertiesSuggestionState"
@@ -3647,10 +4014,7 @@ instance
             Core.<$> (o Core..:? "embeddedObjectSuggestionState")
       )
 
-instance
-  Core.ToJSON
-    InlineObjectPropertiesSuggestionState
-  where
+instance Core.ToJSON InlineObjectPropertiesSuggestionState where
   toJSON InlineObjectPropertiesSuggestionState {..} =
     Core.object
       ( Core.catMaybes
@@ -3701,8 +4065,7 @@ instance Core.ToJSON InsertInlineImageRequest where
   toJSON InsertInlineImageRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+          [ ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location,
             ("objectSize" Core..=) Core.<$> objectSize,
             ("uri" Core..=) Core.<$> uri
@@ -3728,17 +4091,12 @@ instance Core.FromJSON InsertInlineImageResponse where
   parseJSON =
     Core.withObject
       "InsertInlineImageResponse"
-      ( \o ->
-          InsertInlineImageResponse
-            Core.<$> (o Core..:? "objectId")
-      )
+      (\o -> InsertInlineImageResponse Core.<$> (o Core..:? "objectId"))
 
 instance Core.ToJSON InsertInlineImageResponse where
   toJSON InsertInlineImageResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | The result of inserting an embedded Google Sheets chart.
 --
@@ -3755,24 +4113,18 @@ newInsertInlineSheetsChartResponse ::
 newInsertInlineSheetsChartResponse =
   InsertInlineSheetsChartResponse {objectId = Core.Nothing}
 
-instance
-  Core.FromJSON
-    InsertInlineSheetsChartResponse
-  where
+instance Core.FromJSON InsertInlineSheetsChartResponse where
   parseJSON =
     Core.withObject
       "InsertInlineSheetsChartResponse"
       ( \o ->
-          InsertInlineSheetsChartResponse
-            Core.<$> (o Core..:? "objectId")
+          InsertInlineSheetsChartResponse Core.<$> (o Core..:? "objectId")
       )
 
 instance Core.ToJSON InsertInlineSheetsChartResponse where
   toJSON InsertInlineSheetsChartResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Inserts a page break followed by a newline at the specified location.
 --
@@ -3808,8 +4160,7 @@ instance Core.ToJSON InsertPageBreakRequest where
   toJSON InsertPageBreakRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+          [ ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location
           ]
       )
@@ -3852,8 +4203,7 @@ instance Core.ToJSON InsertSectionBreakRequest where
   toJSON InsertSectionBreakRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+          [ ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location,
             ("sectionType" Core..=) Core.<$> sectionType
           ]
@@ -3894,8 +4244,7 @@ instance Core.ToJSON InsertTableColumnRequest where
     Core.object
       ( Core.catMaybes
           [ ("insertRight" Core..=) Core.<$> insertRight,
-            ("tableCellLocation" Core..=)
-              Core.<$> tableCellLocation
+            ("tableCellLocation" Core..=) Core.<$> tableCellLocation
           ]
       )
 
@@ -3942,8 +4291,7 @@ instance Core.ToJSON InsertTableRequest where
     Core.object
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
-            ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+            ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location,
             ("rows" Core..=) Core.<$> rows
           ]
@@ -3984,8 +4332,7 @@ instance Core.ToJSON InsertTableRowRequest where
     Core.object
       ( Core.catMaybes
           [ ("insertBelow" Core..=) Core.<$> insertBelow,
-            ("tableCellLocation" Core..=)
-              Core.<$> tableCellLocation
+            ("tableCellLocation" Core..=) Core.<$> tableCellLocation
           ]
       )
 
@@ -4027,8 +4374,7 @@ instance Core.ToJSON InsertTextRequest where
   toJSON InsertTextRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("endOfSegmentLocation" Core..=)
-              Core.<$> endOfSegmentLocation,
+          [ ("endOfSegmentLocation" Core..=) Core.<$> endOfSegmentLocation,
             ("location" Core..=) Core.<$> location,
             ("text" Core..=) Core.<$> text
           ]
@@ -4038,10 +4384,16 @@ instance Core.ToJSON InsertTextRequest where
 --
 -- /See:/ 'newLink' smart constructor.
 data Link = Link
-  { -- | The ID of a bookmark in this document.
+  { -- | A bookmark in this document. In documents containing a single tab, links to bookmarks within the singular tab continue to return Link.bookmarkId when the includeTabsContent parameter is set to @false@ or unset. Otherwise, this field is returned.
+    bookmark :: (Core.Maybe BookmarkLink),
+    -- | The ID of a bookmark in this document. Legacy field: Instead, set includeTabsContent to @true@ and use Link.bookmark for read and write operations. This field is only returned when includeTabsContent is set to @false@ in documents containing a single tab and links to a bookmark within the singular tab. Otherwise, Link.bookmark is returned. If this field is used in a write request, the bookmark is considered to be from the tab ID specified in the request. If a tab ID is not specified in the request, it is considered to be from the first tab in the document.
     bookmarkId :: (Core.Maybe Core.Text),
-    -- | The ID of a heading in this document.
+    -- | A heading in this document. In documents containing a single tab, links to headings within the singular tab continue to return Link.headingId when the includeTabsContent parameter is set to @false@ or unset. Otherwise, this field is returned.
+    heading :: (Core.Maybe HeadingLink),
+    -- | The ID of a heading in this document. Legacy field: Instead, set includeTabsContent to @true@ and use Link.heading for read and write operations. This field is only returned when includeTabsContent is set to @false@ in documents containing a single tab and links to a heading within the singular tab. Otherwise, Link.heading is returned. If this field is used in a write request, the heading is considered to be from the tab ID specified in the request. If a tab ID is not specified in the request, it is considered to be from the first tab in the document.
     headingId :: (Core.Maybe Core.Text),
+    -- | The ID of a tab in this document.
+    tabId :: (Core.Maybe Core.Text),
     -- | An external URL.
     url :: (Core.Maybe Core.Text)
   }
@@ -4051,7 +4403,14 @@ data Link = Link
 newLink ::
   Link
 newLink =
-  Link {bookmarkId = Core.Nothing, headingId = Core.Nothing, url = Core.Nothing}
+  Link
+    { bookmark = Core.Nothing,
+      bookmarkId = Core.Nothing,
+      heading = Core.Nothing,
+      headingId = Core.Nothing,
+      tabId = Core.Nothing,
+      url = Core.Nothing
+    }
 
 instance Core.FromJSON Link where
   parseJSON =
@@ -4059,8 +4418,11 @@ instance Core.FromJSON Link where
       "Link"
       ( \o ->
           Link
-            Core.<$> (o Core..:? "bookmarkId")
+            Core.<$> (o Core..:? "bookmark")
+            Core.<*> (o Core..:? "bookmarkId")
+            Core.<*> (o Core..:? "heading")
             Core.<*> (o Core..:? "headingId")
+            Core.<*> (o Core..:? "tabId")
             Core.<*> (o Core..:? "url")
       )
 
@@ -4068,8 +4430,11 @@ instance Core.ToJSON Link where
   toJSON Link {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bookmarkId" Core..=) Core.<$> bookmarkId,
+          [ ("bookmark" Core..=) Core.<$> bookmark,
+            ("bookmarkId" Core..=) Core.<$> bookmarkId,
+            ("heading" Core..=) Core.<$> heading,
             ("headingId" Core..=) Core.<$> headingId,
+            ("tabId" Core..=) Core.<$> tabId,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -4102,9 +4467,7 @@ instance Core.ToJSON LinkedContentReference where
   toJSON LinkedContentReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sheetsChartReference" Core..=)
-              Core.<$> sheetsChartReference
-          ]
+          [("sheetsChartReference" Core..=) Core.<$> sheetsChartReference]
       )
 
 -- | A mask that indicates which of the fields on the base LinkedContentReference have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
@@ -4121,13 +4484,11 @@ newLinkedContentReferenceSuggestionState ::
   LinkedContentReferenceSuggestionState
 newLinkedContentReferenceSuggestionState =
   LinkedContentReferenceSuggestionState
-    { sheetsChartReferenceSuggestionState = Core.Nothing
+    { sheetsChartReferenceSuggestionState =
+        Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    LinkedContentReferenceSuggestionState
-  where
+instance Core.FromJSON LinkedContentReferenceSuggestionState where
   parseJSON =
     Core.withObject
       "LinkedContentReferenceSuggestionState"
@@ -4136,10 +4497,7 @@ instance
             Core.<$> (o Core..:? "sheetsChartReferenceSuggestionState")
       )
 
-instance
-  Core.ToJSON
-    LinkedContentReferenceSuggestionState
-  where
+instance Core.ToJSON LinkedContentReferenceSuggestionState where
   toJSON LinkedContentReferenceSuggestionState {..} =
     Core.object
       ( Core.catMaybes
@@ -4191,10 +4549,8 @@ instance Core.ToJSON List where
     Core.object
       ( Core.catMaybes
           [ ("listProperties" Core..=) Core.<$> listProperties,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionId" Core..=)
-              Core.<$> suggestedInsertionId,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionId" Core..=) Core.<$> suggestedInsertionId,
             ("suggestedListPropertiesChanges" Core..=)
               Core.<$> suggestedListPropertiesChanges
           ]
@@ -4204,8 +4560,7 @@ instance Core.ToJSON List where
 --
 -- /See:/ 'newList_SuggestedListPropertiesChanges' smart constructor.
 newtype List_SuggestedListPropertiesChanges = List_SuggestedListPropertiesChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedListProperties)
+  { additional :: (Core.HashMap Core.Text SuggestedListProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4217,10 +4572,7 @@ newList_SuggestedListPropertiesChanges ::
 newList_SuggestedListPropertiesChanges additional =
   List_SuggestedListPropertiesChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    List_SuggestedListPropertiesChanges
-  where
+instance Core.FromJSON List_SuggestedListPropertiesChanges where
   parseJSON =
     Core.withObject
       "List_SuggestedListPropertiesChanges"
@@ -4229,10 +4581,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    List_SuggestedListPropertiesChanges
-  where
+instance Core.ToJSON List_SuggestedListPropertiesChanges where
   toJSON List_SuggestedListPropertiesChanges {..} =
     Core.toJSON additional
 
@@ -4254,16 +4603,12 @@ instance Core.FromJSON ListProperties where
   parseJSON =
     Core.withObject
       "ListProperties"
-      ( \o ->
-          ListProperties Core.<$> (o Core..:? "nestingLevels")
-      )
+      (\o -> ListProperties Core.<$> (o Core..:? "nestingLevels"))
 
 instance Core.ToJSON ListProperties where
   toJSON ListProperties {..} =
     Core.object
-      ( Core.catMaybes
-          [("nestingLevels" Core..=) Core.<$> nestingLevels]
-      )
+      (Core.catMaybes [("nestingLevels" Core..=) Core.<$> nestingLevels])
 
 -- | A mask that indicates which of the fields on the base ListProperties have been changed in this suggestion. For any field set to true, there\'s a new suggested value.
 --
@@ -4278,7 +4623,10 @@ newtype ListPropertiesSuggestionState = ListPropertiesSuggestionState
 newListPropertiesSuggestionState ::
   ListPropertiesSuggestionState
 newListPropertiesSuggestionState =
-  ListPropertiesSuggestionState {nestingLevelsSuggestionStates = Core.Nothing}
+  ListPropertiesSuggestionState
+    { nestingLevelsSuggestionStates =
+        Core.Nothing
+    }
 
 instance Core.FromJSON ListPropertiesSuggestionState where
   parseJSON =
@@ -4305,14 +4653,21 @@ data Location = Location
   { -- | The zero-based index, in UTF-16 code units. The index is relative to the beginning of the segment specified by segment_id.
     index :: (Core.Maybe Core.Int32),
     -- | The ID of the header, footer or footnote the location is in. An empty segment ID signifies the document\'s body.
-    segmentId :: (Core.Maybe Core.Text)
+    segmentId :: (Core.Maybe Core.Text),
+    -- | The tab that the location is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Location' with the minimum fields required to make a request.
 newLocation ::
   Location
-newLocation = Location {index = Core.Nothing, segmentId = Core.Nothing}
+newLocation =
+  Location
+    { index = Core.Nothing,
+      segmentId = Core.Nothing,
+      tabId = Core.Nothing
+    }
 
 instance Core.FromJSON Location where
   parseJSON =
@@ -4322,6 +4677,7 @@ instance Core.FromJSON Location where
           Location
             Core.<$> (o Core..:? "index")
             Core.<*> (o Core..:? "segmentId")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON Location where
@@ -4329,7 +4685,8 @@ instance Core.ToJSON Location where
     Core.object
       ( Core.catMaybes
           [ ("index" Core..=) Core.<$> index,
-            ("segmentId" Core..=) Core.<$> segmentId
+            ("segmentId" Core..=) Core.<$> segmentId,
+            ("tabId" Core..=) Core.<$> tabId
           ]
       )
 
@@ -4345,23 +4702,19 @@ newtype MergeTableCellsRequest = MergeTableCellsRequest
 -- | Creates a value of 'MergeTableCellsRequest' with the minimum fields required to make a request.
 newMergeTableCellsRequest ::
   MergeTableCellsRequest
-newMergeTableCellsRequest = MergeTableCellsRequest {tableRange = Core.Nothing}
+newMergeTableCellsRequest =
+  MergeTableCellsRequest {tableRange = Core.Nothing}
 
 instance Core.FromJSON MergeTableCellsRequest where
   parseJSON =
     Core.withObject
       "MergeTableCellsRequest"
-      ( \o ->
-          MergeTableCellsRequest
-            Core.<$> (o Core..:? "tableRange")
-      )
+      (\o -> MergeTableCellsRequest Core.<$> (o Core..:? "tableRange"))
 
 instance Core.ToJSON MergeTableCellsRequest where
   toJSON MergeTableCellsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("tableRange" Core..=) Core.<$> tableRange]
-      )
+      (Core.catMaybes [("tableRange" Core..=) Core.<$> tableRange])
 
 -- | A collection of Ranges with the same named range ID. Named ranges allow developers to associate parts of a document with an arbitrary user-defined label so their contents can be programmatically read or edited later. A document can contain multiple named ranges with the same name, but every named range has a unique ID. A named range is created with a single Range, and content inserted inside a named range generally expands that range. However, certain document changes can cause the range to be split into multiple ranges. Named ranges are not private. All applications and collaborators that have access to the document can see its named ranges.
 --
@@ -4421,7 +4774,8 @@ data NamedRanges = NamedRanges
 -- | Creates a value of 'NamedRanges' with the minimum fields required to make a request.
 newNamedRanges ::
   NamedRanges
-newNamedRanges = NamedRanges {name = Core.Nothing, namedRanges = Core.Nothing}
+newNamedRanges =
+  NamedRanges {name = Core.Nothing, namedRanges = Core.Nothing}
 
 instance Core.FromJSON NamedRanges where
   parseJSON =
@@ -4554,8 +4908,7 @@ instance Core.FromJSON NamedStyles where
 
 instance Core.ToJSON NamedStyles where
   toJSON NamedStyles {..} =
-    Core.object
-      (Core.catMaybes [("styles" Core..=) Core.<$> styles])
+    Core.object (Core.catMaybes [("styles" Core..=) Core.<$> styles])
 
 -- | The suggestion state of a NamedStyles message.
 --
@@ -4599,9 +4952,9 @@ data NestingLevel = NestingLevel
     -- | The format string used by bullets at this level of nesting. The glyph format contains one or more placeholders, and these placeholders are replaced with the appropriate values depending on the glyph/type or glyph/symbol. The placeholders follow the pattern @%[nesting_level]@. Furthermore, placeholders can have prefixes and suffixes. Thus, the glyph format follows the pattern @%[nesting_level]@. Note that the prefix and suffix are optional and can be arbitrary strings. For example, the glyph format @%0.@ indicates that the rendered glyph will replace the placeholder with the corresponding glyph for nesting level 0 followed by a period as the suffix. So a list with a glyph type of UPPER_ALPHA and glyph format @%0.@ at nesting level 0 will result in a list with rendered glyphs @A.@ @B.@ @C.@ The glyph format can contain placeholders for the current nesting level as well as placeholders for parent nesting levels. For example, a list can have a glyph format of @%0.@ at nesting level 0 and a glyph format of
     -- @%0.%1.@ at nesting level 1. Assuming both nesting levels have DECIMAL glyph types, this would result in a list with rendered glyphs @1.@ @2.@ @2.1.@ @2.2.@ @3.@ For nesting levels that are ordered, the string that replaces a placeholder in the glyph format for a particular paragraph depends on the paragraph\'s order within the list.
     glyphFormat :: (Core.Maybe Core.Text),
-    -- | A custom glyph symbol used by bullets when paragraphs at this level of nesting are unordered. The glyph symbol replaces placeholders within the glyph/format. For example, if the glyph/symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is @%0@, the rendered glyph would be the solid circle.
+    -- | A custom glyph symbol used by bullets when paragraphs at this level of nesting is unordered. The glyph symbol replaces placeholders within the glyph/format. For example, if the glyph/symbol is the solid circle corresponding to Unicode U+25cf code point and the glyph_format is @%0@, the rendered glyph would be the solid circle.
     glyphSymbol :: (Core.Maybe Core.Text),
-    -- | The type of glyph used by bullets when paragraphs at this level of nesting are ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to list item\'s order within the list.
+    -- | The type of glyph used by bullets when paragraphs at this level of nesting is ordered. The glyph type determines the type of glyph used to replace placeholders within the glyph/format when paragraphs at this level of nesting are ordered. For example, if the nesting level is 0, the glyph/format is @%0.@ and the glyph type is DECIMAL, then the rendered glyph would replace the placeholder @%0@ in the glyph format with a number corresponding to the list item\'s order within the list.
     glyphType :: (Core.Maybe NestingLevel_GlyphType),
     -- | The amount of indentation for the first line of paragraphs at this level of nesting.
     indentFirstLine :: (Core.Maybe Dimension),
@@ -4649,8 +5002,7 @@ instance Core.ToJSON NestingLevel where
   toJSON NestingLevel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bulletAlignment" Core..=)
-              Core.<$> bulletAlignment,
+          [ ("bulletAlignment" Core..=) Core.<$> bulletAlignment,
             ("glyphFormat" Core..=) Core.<$> glyphFormat,
             ("glyphSymbol" Core..=) Core.<$> glyphSymbol,
             ("glyphType" Core..=) Core.<$> glyphType,
@@ -4689,7 +5041,8 @@ newNestingLevelSuggestionState ::
   NestingLevelSuggestionState
 newNestingLevelSuggestionState =
   NestingLevelSuggestionState
-    { bulletAlignmentSuggested = Core.Nothing,
+    { bulletAlignmentSuggested =
+        Core.Nothing,
       glyphFormatSuggested = Core.Nothing,
       glyphSymbolSuggested = Core.Nothing,
       glyphTypeSuggested = Core.Nothing,
@@ -4721,18 +5074,13 @@ instance Core.ToJSON NestingLevelSuggestionState where
       ( Core.catMaybes
           [ ("bulletAlignmentSuggested" Core..=)
               Core.<$> bulletAlignmentSuggested,
-            ("glyphFormatSuggested" Core..=)
-              Core.<$> glyphFormatSuggested,
-            ("glyphSymbolSuggested" Core..=)
-              Core.<$> glyphSymbolSuggested,
-            ("glyphTypeSuggested" Core..=)
-              Core.<$> glyphTypeSuggested,
+            ("glyphFormatSuggested" Core..=) Core.<$> glyphFormatSuggested,
+            ("glyphSymbolSuggested" Core..=) Core.<$> glyphSymbolSuggested,
+            ("glyphTypeSuggested" Core..=) Core.<$> glyphTypeSuggested,
             ("indentFirstLineSuggested" Core..=)
               Core.<$> indentFirstLineSuggested,
-            ("indentStartSuggested" Core..=)
-              Core.<$> indentStartSuggested,
-            ("startNumberSuggested" Core..=)
-              Core.<$> startNumberSuggested,
+            ("indentStartSuggested" Core..=) Core.<$> indentStartSuggested,
+            ("startNumberSuggested" Core..=) Core.<$> startNumberSuggested,
             ("textStyleSuggestionState" Core..=)
               Core.<$> textStyleSuggestionState
           ]
@@ -4756,16 +5104,12 @@ instance Core.FromJSON ObjectReferences where
   parseJSON =
     Core.withObject
       "ObjectReferences"
-      ( \o ->
-          ObjectReferences Core.<$> (o Core..:? "objectIds")
-      )
+      (\o -> ObjectReferences Core.<$> (o Core..:? "objectIds"))
 
 instance Core.ToJSON ObjectReferences where
   toJSON ObjectReferences {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectIds" Core..=) Core.<$> objectIds]
-      )
+      (Core.catMaybes [("objectIds" Core..=) Core.<$> objectIds])
 
 -- | A color that can either be fully opaque or fully transparent.
 --
@@ -4789,8 +5133,7 @@ instance Core.FromJSON OptionalColor where
 
 instance Core.ToJSON OptionalColor where
   toJSON OptionalColor {..} =
-    Core.object
-      (Core.catMaybes [("color" Core..=) Core.<$> color])
+    Core.object (Core.catMaybes [("color" Core..=) Core.<$> color])
 
 -- | A ParagraphElement representing a page break. A page break makes the subsequent text start at the top of the next page.
 --
@@ -4834,10 +5177,8 @@ instance Core.ToJSON PageBreak where
   toJSON PageBreak {..} =
     Core.object
       ( Core.catMaybes
-          [ ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+          [ ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -4848,8 +5189,7 @@ instance Core.ToJSON PageBreak where
 --
 -- /See:/ 'newPageBreak_SuggestedTextStyleChanges' smart constructor.
 newtype PageBreak_SuggestedTextStyleChanges = PageBreak_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4861,10 +5201,7 @@ newPageBreak_SuggestedTextStyleChanges ::
 newPageBreak_SuggestedTextStyleChanges additional =
   PageBreak_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    PageBreak_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON PageBreak_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "PageBreak_SuggestedTextStyleChanges"
@@ -4873,10 +5210,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    PageBreak_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON PageBreak_SuggestedTextStyleChanges where
   toJSON PageBreak_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -4937,10 +5271,8 @@ instance Core.ToJSON Paragraph where
           [ ("bullet" Core..=) Core.<$> bullet,
             ("elements" Core..=) Core.<$> elements,
             ("paragraphStyle" Core..=) Core.<$> paragraphStyle,
-            ("positionedObjectIds" Core..=)
-              Core.<$> positionedObjectIds,
-            ("suggestedBulletChanges" Core..=)
-              Core.<$> suggestedBulletChanges,
+            ("positionedObjectIds" Core..=) Core.<$> positionedObjectIds,
+            ("suggestedBulletChanges" Core..=) Core.<$> suggestedBulletChanges,
             ("suggestedParagraphStyleChanges" Core..=)
               Core.<$> suggestedParagraphStyleChanges,
             ("suggestedPositionedObjectIds" Core..=)
@@ -4952,8 +5284,7 @@ instance Core.ToJSON Paragraph where
 --
 -- /See:/ 'newParagraph_SuggestedBulletChanges' smart constructor.
 newtype Paragraph_SuggestedBulletChanges = Paragraph_SuggestedBulletChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedBullet)
+  { additional :: (Core.HashMap Core.Text SuggestedBullet)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4965,16 +5296,12 @@ newParagraph_SuggestedBulletChanges ::
 newParagraph_SuggestedBulletChanges additional =
   Paragraph_SuggestedBulletChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    Paragraph_SuggestedBulletChanges
-  where
+instance Core.FromJSON Paragraph_SuggestedBulletChanges where
   parseJSON =
     Core.withObject
       "Paragraph_SuggestedBulletChanges"
       ( \o ->
-          Paragraph_SuggestedBulletChanges
-            Core.<$> (Core.parseJSONObject o)
+          Paragraph_SuggestedBulletChanges Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Paragraph_SuggestedBulletChanges where
@@ -4985,8 +5312,7 @@ instance Core.ToJSON Paragraph_SuggestedBulletChanges where
 --
 -- /See:/ 'newParagraph_SuggestedParagraphStyleChanges' smart constructor.
 newtype Paragraph_SuggestedParagraphStyleChanges = Paragraph_SuggestedParagraphStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedParagraphStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedParagraphStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4998,10 +5324,7 @@ newParagraph_SuggestedParagraphStyleChanges ::
 newParagraph_SuggestedParagraphStyleChanges additional =
   Paragraph_SuggestedParagraphStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    Paragraph_SuggestedParagraphStyleChanges
-  where
+instance Core.FromJSON Paragraph_SuggestedParagraphStyleChanges where
   parseJSON =
     Core.withObject
       "Paragraph_SuggestedParagraphStyleChanges"
@@ -5010,10 +5333,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    Paragraph_SuggestedParagraphStyleChanges
-  where
+instance Core.ToJSON Paragraph_SuggestedParagraphStyleChanges where
   toJSON Paragraph_SuggestedParagraphStyleChanges {..} =
     Core.toJSON additional
 
@@ -5021,8 +5341,7 @@ instance
 --
 -- /See:/ 'newParagraph_SuggestedPositionedObjectIds' smart constructor.
 newtype Paragraph_SuggestedPositionedObjectIds = Paragraph_SuggestedPositionedObjectIds
-  { -- |
-    additional :: (Core.HashMap Core.Text ObjectReferences)
+  { additional :: (Core.HashMap Core.Text ObjectReferences)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5034,10 +5353,7 @@ newParagraph_SuggestedPositionedObjectIds ::
 newParagraph_SuggestedPositionedObjectIds additional =
   Paragraph_SuggestedPositionedObjectIds {additional = additional}
 
-instance
-  Core.FromJSON
-    Paragraph_SuggestedPositionedObjectIds
-  where
+instance Core.FromJSON Paragraph_SuggestedPositionedObjectIds where
   parseJSON =
     Core.withObject
       "Paragraph_SuggestedPositionedObjectIds"
@@ -5046,10 +5362,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    Paragraph_SuggestedPositionedObjectIds
-  where
+instance Core.ToJSON Paragraph_SuggestedPositionedObjectIds where
   toJSON Paragraph_SuggestedPositionedObjectIds {..} =
     Core.toJSON additional
 
@@ -5180,11 +5493,9 @@ instance Core.ToJSON ParagraphElement where
             ("columnBreak" Core..=) Core.<$> columnBreak,
             ("endIndex" Core..=) Core.<$> endIndex,
             ("equation" Core..=) Core.<$> equation,
-            ("footnoteReference" Core..=)
-              Core.<$> footnoteReference,
+            ("footnoteReference" Core..=) Core.<$> footnoteReference,
             ("horizontalRule" Core..=) Core.<$> horizontalRule,
-            ("inlineObjectElement" Core..=)
-              Core.<$> inlineObjectElement,
+            ("inlineObjectElement" Core..=) Core.<$> inlineObjectElement,
             ("pageBreak" Core..=) Core.<$> pageBreak,
             ("person" Core..=) Core.<$> person,
             ("richLink" Core..=) Core.<$> richLink,
@@ -5308,8 +5619,7 @@ instance Core.ToJSON ParagraphStyle where
     Core.object
       ( Core.catMaybes
           [ ("alignment" Core..=) Core.<$> alignment,
-            ("avoidWidowAndOrphan" Core..=)
-              Core.<$> avoidWidowAndOrphan,
+            ("avoidWidowAndOrphan" Core..=) Core.<$> avoidWidowAndOrphan,
             ("borderBetween" Core..=) Core.<$> borderBetween,
             ("borderBottom" Core..=) Core.<$> borderBottom,
             ("borderLeft" Core..=) Core.<$> borderLeft,
@@ -5320,8 +5630,7 @@ instance Core.ToJSON ParagraphStyle where
             ("indentEnd" Core..=) Core.<$> indentEnd,
             ("indentFirstLine" Core..=) Core.<$> indentFirstLine,
             ("indentStart" Core..=) Core.<$> indentStart,
-            ("keepLinesTogether" Core..=)
-              Core.<$> keepLinesTogether,
+            ("keepLinesTogether" Core..=) Core.<$> keepLinesTogether,
             ("keepWithNext" Core..=) Core.<$> keepWithNext,
             ("lineSpacing" Core..=) Core.<$> lineSpacing,
             ("namedStyleType" Core..=) Core.<$> namedStyleType,
@@ -5444,48 +5753,32 @@ instance Core.ToJSON ParagraphStyleSuggestionState where
   toJSON ParagraphStyleSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("alignmentSuggested" Core..=)
-              Core.<$> alignmentSuggested,
+          [ ("alignmentSuggested" Core..=) Core.<$> alignmentSuggested,
             ("avoidWidowAndOrphanSuggested" Core..=)
               Core.<$> avoidWidowAndOrphanSuggested,
-            ("borderBetweenSuggested" Core..=)
-              Core.<$> borderBetweenSuggested,
-            ("borderBottomSuggested" Core..=)
-              Core.<$> borderBottomSuggested,
-            ("borderLeftSuggested" Core..=)
-              Core.<$> borderLeftSuggested,
-            ("borderRightSuggested" Core..=)
-              Core.<$> borderRightSuggested,
-            ("borderTopSuggested" Core..=)
-              Core.<$> borderTopSuggested,
-            ("directionSuggested" Core..=)
-              Core.<$> directionSuggested,
-            ("headingIdSuggested" Core..=)
-              Core.<$> headingIdSuggested,
-            ("indentEndSuggested" Core..=)
-              Core.<$> indentEndSuggested,
+            ("borderBetweenSuggested" Core..=) Core.<$> borderBetweenSuggested,
+            ("borderBottomSuggested" Core..=) Core.<$> borderBottomSuggested,
+            ("borderLeftSuggested" Core..=) Core.<$> borderLeftSuggested,
+            ("borderRightSuggested" Core..=) Core.<$> borderRightSuggested,
+            ("borderTopSuggested" Core..=) Core.<$> borderTopSuggested,
+            ("directionSuggested" Core..=) Core.<$> directionSuggested,
+            ("headingIdSuggested" Core..=) Core.<$> headingIdSuggested,
+            ("indentEndSuggested" Core..=) Core.<$> indentEndSuggested,
             ("indentFirstLineSuggested" Core..=)
               Core.<$> indentFirstLineSuggested,
-            ("indentStartSuggested" Core..=)
-              Core.<$> indentStartSuggested,
+            ("indentStartSuggested" Core..=) Core.<$> indentStartSuggested,
             ("keepLinesTogetherSuggested" Core..=)
               Core.<$> keepLinesTogetherSuggested,
-            ("keepWithNextSuggested" Core..=)
-              Core.<$> keepWithNextSuggested,
-            ("lineSpacingSuggested" Core..=)
-              Core.<$> lineSpacingSuggested,
+            ("keepWithNextSuggested" Core..=) Core.<$> keepWithNextSuggested,
+            ("lineSpacingSuggested" Core..=) Core.<$> lineSpacingSuggested,
             ("namedStyleTypeSuggested" Core..=)
               Core.<$> namedStyleTypeSuggested,
             ("pageBreakBeforeSuggested" Core..=)
               Core.<$> pageBreakBeforeSuggested,
-            ("shadingSuggestionState" Core..=)
-              Core.<$> shadingSuggestionState,
-            ("spaceAboveSuggested" Core..=)
-              Core.<$> spaceAboveSuggested,
-            ("spaceBelowSuggested" Core..=)
-              Core.<$> spaceBelowSuggested,
-            ("spacingModeSuggested" Core..=)
-              Core.<$> spacingModeSuggested
+            ("shadingSuggestionState" Core..=) Core.<$> shadingSuggestionState,
+            ("spaceAboveSuggested" Core..=) Core.<$> spaceAboveSuggested,
+            ("spaceBelowSuggested" Core..=) Core.<$> spaceBelowSuggested,
+            ("spacingModeSuggested" Core..=) Core.<$> spacingModeSuggested
           ]
       )
 
@@ -5540,12 +5833,9 @@ instance Core.ToJSON Person where
     Core.object
       ( Core.catMaybes
           [ ("personId" Core..=) Core.<$> personId,
-            ("personProperties" Core..=)
-              Core.<$> personProperties,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("personProperties" Core..=) Core.<$> personProperties,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -5556,8 +5846,7 @@ instance Core.ToJSON Person where
 --
 -- /See:/ 'newPerson_SuggestedTextStyleChanges' smart constructor.
 newtype Person_SuggestedTextStyleChanges = Person_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5569,16 +5858,12 @@ newPerson_SuggestedTextStyleChanges ::
 newPerson_SuggestedTextStyleChanges additional =
   Person_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    Person_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON Person_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "Person_SuggestedTextStyleChanges"
       ( \o ->
-          Person_SuggestedTextStyleChanges
-            Core.<$> (Core.parseJSONObject o)
+          Person_SuggestedTextStyleChanges Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON Person_SuggestedTextStyleChanges where
@@ -5608,16 +5893,15 @@ instance Core.FromJSON PersonProperties where
       "PersonProperties"
       ( \o ->
           PersonProperties
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON PersonProperties where
   toJSON PersonProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("email" Core..=) Core.<$> email,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("email" Core..=) Core.<$> email, ("name" Core..=) Core.<$> name]
       )
 
 -- | Updates the number of pinned table header rows in a table.
@@ -5654,10 +5938,8 @@ instance Core.ToJSON PinTableHeaderRowsRequest where
   toJSON PinTableHeaderRowsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("pinnedHeaderRowsCount" Core..=)
-              Core.<$> pinnedHeaderRowsCount,
-            ("tableStartLocation" Core..=)
-              Core.<$> tableStartLocation
+          [ ("pinnedHeaderRowsCount" Core..=) Core.<$> pinnedHeaderRowsCount,
+            ("tableStartLocation" Core..=) Core.<$> tableStartLocation
           ]
       )
 
@@ -5703,9 +5985,7 @@ instance Core.FromJSON PositionedObject where
             Core.<*> (o Core..:? "positionedObjectProperties")
             Core.<*> (o Core..:? "suggestedDeletionIds")
             Core.<*> (o Core..:? "suggestedInsertionId")
-            Core.<*> ( o
-                         Core..:? "suggestedPositionedObjectPropertiesChanges"
-                     )
+            Core.<*> (o Core..:? "suggestedPositionedObjectPropertiesChanges")
       )
 
 instance Core.ToJSON PositionedObject where
@@ -5715,13 +5995,9 @@ instance Core.ToJSON PositionedObject where
           [ ("objectId" Core..=) Core.<$> objectId,
             ("positionedObjectProperties" Core..=)
               Core.<$> positionedObjectProperties,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionId" Core..=)
-              Core.<$> suggestedInsertionId,
-            ( "suggestedPositionedObjectPropertiesChanges"
-                Core..=
-            )
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionId" Core..=) Core.<$> suggestedInsertionId,
+            ("suggestedPositionedObjectPropertiesChanges" Core..=)
               Core.<$> suggestedPositionedObjectPropertiesChanges
           ]
       )
@@ -5730,20 +6006,23 @@ instance Core.ToJSON PositionedObject where
 --
 -- /See:/ 'newPositionedObject_SuggestedPositionedObjectPropertiesChanges' smart constructor.
 newtype PositionedObject_SuggestedPositionedObjectPropertiesChanges = PositionedObject_SuggestedPositionedObjectPropertiesChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedPositionedObjectProperties)
+  { additional :: (Core.HashMap Core.Text SuggestedPositionedObjectProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'PositionedObject_SuggestedPositionedObjectPropertiesChanges' with the minimum fields required to make a request.
 newPositionedObject_SuggestedPositionedObjectPropertiesChanges ::
   -- |  See 'additional'.
-  Core.HashMap Core.Text SuggestedPositionedObjectProperties ->
+  Core.HashMap
+    Core.Text
+    SuggestedPositionedObjectProperties ->
   PositionedObject_SuggestedPositionedObjectPropertiesChanges
-newPositionedObject_SuggestedPositionedObjectPropertiesChanges additional =
-  PositionedObject_SuggestedPositionedObjectPropertiesChanges
-    { additional = additional
-    }
+newPositionedObject_SuggestedPositionedObjectPropertiesChanges
+  additional =
+    PositionedObject_SuggestedPositionedObjectPropertiesChanges
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -5827,15 +6106,13 @@ newPositionedObjectPositioningSuggestionState ::
   PositionedObjectPositioningSuggestionState
 newPositionedObjectPositioningSuggestionState =
   PositionedObjectPositioningSuggestionState
-    { layoutSuggested = Core.Nothing,
+    { layoutSuggested =
+        Core.Nothing,
       leftOffsetSuggested = Core.Nothing,
       topOffsetSuggested = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PositionedObjectPositioningSuggestionState
-  where
+instance Core.FromJSON PositionedObjectPositioningSuggestionState where
   parseJSON =
     Core.withObject
       "PositionedObjectPositioningSuggestionState"
@@ -5846,19 +6123,13 @@ instance
             Core.<*> (o Core..:? "topOffsetSuggested")
       )
 
-instance
-  Core.ToJSON
-    PositionedObjectPositioningSuggestionState
-  where
+instance Core.ToJSON PositionedObjectPositioningSuggestionState where
   toJSON PositionedObjectPositioningSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("layoutSuggested" Core..=)
-              Core.<$> layoutSuggested,
-            ("leftOffsetSuggested" Core..=)
-              Core.<$> leftOffsetSuggested,
-            ("topOffsetSuggested" Core..=)
-              Core.<$> topOffsetSuggested
+          [ ("layoutSuggested" Core..=) Core.<$> layoutSuggested,
+            ("leftOffsetSuggested" Core..=) Core.<$> leftOffsetSuggested,
+            ("topOffsetSuggested" Core..=) Core.<$> topOffsetSuggested
           ]
       )
 
@@ -5917,14 +6188,12 @@ newPositionedObjectPropertiesSuggestionState ::
   PositionedObjectPropertiesSuggestionState
 newPositionedObjectPropertiesSuggestionState =
   PositionedObjectPropertiesSuggestionState
-    { embeddedObjectSuggestionState = Core.Nothing,
+    { embeddedObjectSuggestionState =
+        Core.Nothing,
       positioningSuggestionState = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    PositionedObjectPropertiesSuggestionState
-  where
+instance Core.FromJSON PositionedObjectPropertiesSuggestionState where
   parseJSON =
     Core.withObject
       "PositionedObjectPropertiesSuggestionState"
@@ -5934,10 +6203,7 @@ instance
             Core.<*> (o Core..:? "positioningSuggestionState")
       )
 
-instance
-  Core.ToJSON
-    PositionedObjectPropertiesSuggestionState
-  where
+instance Core.ToJSON PositionedObjectPropertiesSuggestionState where
   toJSON PositionedObjectPropertiesSuggestionState {..} =
     Core.object
       ( Core.catMaybes
@@ -5957,7 +6223,9 @@ data Range = Range
     -- | The ID of the header, footer, or footnote that this range is contained in. An empty segment ID signifies the document\'s body.
     segmentId :: (Core.Maybe Core.Text),
     -- | The zero-based start index of this range, in UTF-16 code units. In all current uses, a start index must be provided. This field is an Int32Value in order to accommodate future use cases with open-ended ranges.
-    startIndex :: (Core.Maybe Core.Int32)
+    startIndex :: (Core.Maybe Core.Int32),
+    -- | The tab that contains this range. When omitted, the request applies to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5968,7 +6236,8 @@ newRange =
   Range
     { endIndex = Core.Nothing,
       segmentId = Core.Nothing,
-      startIndex = Core.Nothing
+      startIndex = Core.Nothing,
+      tabId = Core.Nothing
     }
 
 instance Core.FromJSON Range where
@@ -5980,6 +6249,7 @@ instance Core.FromJSON Range where
             Core.<$> (o Core..:? "endIndex")
             Core.<*> (o Core..:? "segmentId")
             Core.<*> (o Core..:? "startIndex")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON Range where
@@ -5988,7 +6258,8 @@ instance Core.ToJSON Range where
       ( Core.catMaybes
           [ ("endIndex" Core..=) Core.<$> endIndex,
             ("segmentId" Core..=) Core.<$> segmentId,
-            ("startIndex" Core..=) Core.<$> startIndex
+            ("startIndex" Core..=) Core.<$> startIndex,
+            ("tabId" Core..=) Core.<$> tabId
           ]
       )
 
@@ -5999,7 +6270,9 @@ data ReplaceAllTextRequest = ReplaceAllTextRequest
   { -- | Finds text in the document matching this substring.
     containsText :: (Core.Maybe SubstringMatchCriteria),
     -- | The text that will replace the matched text.
-    replaceText :: (Core.Maybe Core.Text)
+    replaceText :: (Core.Maybe Core.Text),
+    -- | Optional. The criteria used to specify in which tabs the replacement occurs. When omitted, the replacement applies to all tabs. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the replacement applies to the singular tab. In a document containing multiple tabs: - If provided, the replacement applies to the specified tabs. - If omitted, the replacement applies to all tabs.
+    tabsCriteria :: (Core.Maybe TabsCriteria)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6009,7 +6282,8 @@ newReplaceAllTextRequest ::
 newReplaceAllTextRequest =
   ReplaceAllTextRequest
     { containsText = Core.Nothing,
-      replaceText = Core.Nothing
+      replaceText = Core.Nothing,
+      tabsCriteria = Core.Nothing
     }
 
 instance Core.FromJSON ReplaceAllTextRequest where
@@ -6020,6 +6294,7 @@ instance Core.FromJSON ReplaceAllTextRequest where
           ReplaceAllTextRequest
             Core.<$> (o Core..:? "containsText")
             Core.<*> (o Core..:? "replaceText")
+            Core.<*> (o Core..:? "tabsCriteria")
       )
 
 instance Core.ToJSON ReplaceAllTextRequest where
@@ -6027,7 +6302,8 @@ instance Core.ToJSON ReplaceAllTextRequest where
     Core.object
       ( Core.catMaybes
           [ ("containsText" Core..=) Core.<$> containsText,
-            ("replaceText" Core..=) Core.<$> replaceText
+            ("replaceText" Core..=) Core.<$> replaceText,
+            ("tabsCriteria" Core..=) Core.<$> tabsCriteria
           ]
       )
 
@@ -6051,17 +6327,14 @@ instance Core.FromJSON ReplaceAllTextResponse where
     Core.withObject
       "ReplaceAllTextResponse"
       ( \o ->
-          ReplaceAllTextResponse
-            Core.<$> (o Core..:? "occurrencesChanged")
+          ReplaceAllTextResponse Core.<$> (o Core..:? "occurrencesChanged")
       )
 
 instance Core.ToJSON ReplaceAllTextResponse where
   toJSON ReplaceAllTextResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("occurrencesChanged" Core..=)
-              Core.<$> occurrencesChanged
-          ]
+          [("occurrencesChanged" Core..=) Core.<$> occurrencesChanged]
       )
 
 -- | Replaces an existing image with a new image. Replacing an image removes some image effects from the existing image in order to mirror the behavior of the Docs editor.
@@ -6072,6 +6345,8 @@ data ReplaceImageRequest = ReplaceImageRequest
     imageObjectId :: (Core.Maybe Core.Text),
     -- | The replacement method.
     imageReplaceMethod :: (Core.Maybe ReplaceImageRequest_ImageReplaceMethod),
+    -- | The tab that the image to be replaced is in. When omitted, the request is applied to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If omitted, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text),
     -- | The URI of the new image. The image is fetched once at insertion time and a copy is stored for display inside the document. Images must be less than 50MB, cannot exceed 25 megapixels, and must be in PNG, JPEG, or GIF format. The provided URI can\'t surpass 2 KB in length. The URI is saved with the image, and exposed through the ImageProperties.source_uri field.
     uri :: (Core.Maybe Core.Text)
   }
@@ -6084,6 +6359,7 @@ newReplaceImageRequest =
   ReplaceImageRequest
     { imageObjectId = Core.Nothing,
       imageReplaceMethod = Core.Nothing,
+      tabId = Core.Nothing,
       uri = Core.Nothing
     }
 
@@ -6095,6 +6371,7 @@ instance Core.FromJSON ReplaceImageRequest where
           ReplaceImageRequest
             Core.<$> (o Core..:? "imageObjectId")
             Core.<*> (o Core..:? "imageReplaceMethod")
+            Core.<*> (o Core..:? "tabId")
             Core.<*> (o Core..:? "uri")
       )
 
@@ -6103,8 +6380,8 @@ instance Core.ToJSON ReplaceImageRequest where
     Core.object
       ( Core.catMaybes
           [ ("imageObjectId" Core..=) Core.<$> imageObjectId,
-            ("imageReplaceMethod" Core..=)
-              Core.<$> imageReplaceMethod,
+            ("imageReplaceMethod" Core..=) Core.<$> imageReplaceMethod,
+            ("tabId" Core..=) Core.<$> tabId,
             ("uri" Core..=) Core.<$> uri
           ]
       )
@@ -6117,6 +6394,8 @@ data ReplaceNamedRangeContentRequest = ReplaceNamedRangeContentRequest
     namedRangeId :: (Core.Maybe Core.Text),
     -- | The name of the NamedRanges whose content will be replaced. If there are multiple named ranges with the given name, then the content of each one will be replaced. If there are no named ranges with the given name, then the request will be a no-op.
     namedRangeName :: (Core.Maybe Core.Text),
+    -- | Optional. The criteria used to specify in which tabs the replacement occurs. When omitted, the replacement applies to all tabs. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the replacement applies to the singular tab. In a document containing multiple tabs: - If provided, the replacement applies to the specified tabs. - If omitted, the replacement applies to all tabs.
+    tabsCriteria :: (Core.Maybe TabsCriteria),
     -- | Replaces the content of the specified named range(s) with the given text.
     text :: (Core.Maybe Core.Text)
   }
@@ -6129,13 +6408,11 @@ newReplaceNamedRangeContentRequest =
   ReplaceNamedRangeContentRequest
     { namedRangeId = Core.Nothing,
       namedRangeName = Core.Nothing,
+      tabsCriteria = Core.Nothing,
       text = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ReplaceNamedRangeContentRequest
-  where
+instance Core.FromJSON ReplaceNamedRangeContentRequest where
   parseJSON =
     Core.withObject
       "ReplaceNamedRangeContentRequest"
@@ -6143,6 +6420,7 @@ instance
           ReplaceNamedRangeContentRequest
             Core.<$> (o Core..:? "namedRangeId")
             Core.<*> (o Core..:? "namedRangeName")
+            Core.<*> (o Core..:? "tabsCriteria")
             Core.<*> (o Core..:? "text")
       )
 
@@ -6152,6 +6430,7 @@ instance Core.ToJSON ReplaceNamedRangeContentRequest where
       ( Core.catMaybes
           [ ("namedRangeId" Core..=) Core.<$> namedRangeId,
             ("namedRangeName" Core..=) Core.<$> namedRangeName,
+            ("tabsCriteria" Core..=) Core.<$> tabsCriteria,
             ("text" Core..=) Core.<$> text
           ]
       )
@@ -6317,56 +6596,38 @@ instance Core.ToJSON Request' where
           [ ("createFooter" Core..=) Core.<$> createFooter,
             ("createFootnote" Core..=) Core.<$> createFootnote,
             ("createHeader" Core..=) Core.<$> createHeader,
-            ("createNamedRange" Core..=)
-              Core.<$> createNamedRange,
-            ("createParagraphBullets" Core..=)
-              Core.<$> createParagraphBullets,
-            ("deleteContentRange" Core..=)
-              Core.<$> deleteContentRange,
+            ("createNamedRange" Core..=) Core.<$> createNamedRange,
+            ("createParagraphBullets" Core..=) Core.<$> createParagraphBullets,
+            ("deleteContentRange" Core..=) Core.<$> deleteContentRange,
             ("deleteFooter" Core..=) Core.<$> deleteFooter,
             ("deleteHeader" Core..=) Core.<$> deleteHeader,
-            ("deleteNamedRange" Core..=)
-              Core.<$> deleteNamedRange,
-            ("deleteParagraphBullets" Core..=)
-              Core.<$> deleteParagraphBullets,
-            ("deletePositionedObject" Core..=)
-              Core.<$> deletePositionedObject,
-            ("deleteTableColumn" Core..=)
-              Core.<$> deleteTableColumn,
+            ("deleteNamedRange" Core..=) Core.<$> deleteNamedRange,
+            ("deleteParagraphBullets" Core..=) Core.<$> deleteParagraphBullets,
+            ("deletePositionedObject" Core..=) Core.<$> deletePositionedObject,
+            ("deleteTableColumn" Core..=) Core.<$> deleteTableColumn,
             ("deleteTableRow" Core..=) Core.<$> deleteTableRow,
-            ("insertInlineImage" Core..=)
-              Core.<$> insertInlineImage,
+            ("insertInlineImage" Core..=) Core.<$> insertInlineImage,
             ("insertPageBreak" Core..=) Core.<$> insertPageBreak,
-            ("insertSectionBreak" Core..=)
-              Core.<$> insertSectionBreak,
+            ("insertSectionBreak" Core..=) Core.<$> insertSectionBreak,
             ("insertTable" Core..=) Core.<$> insertTable,
-            ("insertTableColumn" Core..=)
-              Core.<$> insertTableColumn,
+            ("insertTableColumn" Core..=) Core.<$> insertTableColumn,
             ("insertTableRow" Core..=) Core.<$> insertTableRow,
             ("insertText" Core..=) Core.<$> insertText,
             ("mergeTableCells" Core..=) Core.<$> mergeTableCells,
-            ("pinTableHeaderRows" Core..=)
-              Core.<$> pinTableHeaderRows,
+            ("pinTableHeaderRows" Core..=) Core.<$> pinTableHeaderRows,
             ("replaceAllText" Core..=) Core.<$> replaceAllText,
             ("replaceImage" Core..=) Core.<$> replaceImage,
             ("replaceNamedRangeContent" Core..=)
               Core.<$> replaceNamedRangeContent,
-            ("unmergeTableCells" Core..=)
-              Core.<$> unmergeTableCells,
-            ("updateDocumentStyle" Core..=)
-              Core.<$> updateDocumentStyle,
-            ("updateParagraphStyle" Core..=)
-              Core.<$> updateParagraphStyle,
-            ("updateSectionStyle" Core..=)
-              Core.<$> updateSectionStyle,
-            ("updateTableCellStyle" Core..=)
-              Core.<$> updateTableCellStyle,
+            ("unmergeTableCells" Core..=) Core.<$> unmergeTableCells,
+            ("updateDocumentStyle" Core..=) Core.<$> updateDocumentStyle,
+            ("updateParagraphStyle" Core..=) Core.<$> updateParagraphStyle,
+            ("updateSectionStyle" Core..=) Core.<$> updateSectionStyle,
+            ("updateTableCellStyle" Core..=) Core.<$> updateTableCellStyle,
             ("updateTableColumnProperties" Core..=)
               Core.<$> updateTableColumnProperties,
-            ("updateTableRowStyle" Core..=)
-              Core.<$> updateTableRowStyle,
-            ("updateTextStyle" Core..=)
-              Core.<$> updateTextStyle
+            ("updateTableRowStyle" Core..=) Core.<$> updateTableRowStyle,
+            ("updateTextStyle" Core..=) Core.<$> updateTextStyle
           ]
       )
 
@@ -6427,10 +6688,8 @@ instance Core.ToJSON Response where
           [ ("createFooter" Core..=) Core.<$> createFooter,
             ("createFootnote" Core..=) Core.<$> createFootnote,
             ("createHeader" Core..=) Core.<$> createHeader,
-            ("createNamedRange" Core..=)
-              Core.<$> createNamedRange,
-            ("insertInlineImage" Core..=)
-              Core.<$> insertInlineImage,
+            ("createNamedRange" Core..=) Core.<$> createNamedRange,
+            ("insertInlineImage" Core..=) Core.<$> insertInlineImage,
             ("insertInlineSheetsChart" Core..=)
               Core.<$> insertInlineSheetsChart,
             ("replaceAllText" Core..=) Core.<$> replaceAllText
@@ -6454,7 +6713,11 @@ data RgbColor = RgbColor
 newRgbColor ::
   RgbColor
 newRgbColor =
-  RgbColor {blue = Core.Nothing, green = Core.Nothing, red = Core.Nothing}
+  RgbColor
+    { blue = Core.Nothing,
+      green = Core.Nothing,
+      red = Core.Nothing
+    }
 
 instance Core.FromJSON RgbColor where
   parseJSON =
@@ -6528,12 +6791,9 @@ instance Core.ToJSON RichLink where
     Core.object
       ( Core.catMaybes
           [ ("richLinkId" Core..=) Core.<$> richLinkId,
-            ("richLinkProperties" Core..=)
-              Core.<$> richLinkProperties,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("richLinkProperties" Core..=) Core.<$> richLinkProperties,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -6544,8 +6804,7 @@ instance Core.ToJSON RichLink where
 --
 -- /See:/ 'newRichLink_SuggestedTextStyleChanges' smart constructor.
 newtype RichLink_SuggestedTextStyleChanges = RichLink_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6557,10 +6816,7 @@ newRichLink_SuggestedTextStyleChanges ::
 newRichLink_SuggestedTextStyleChanges additional =
   RichLink_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    RichLink_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON RichLink_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "RichLink_SuggestedTextStyleChanges"
@@ -6569,10 +6825,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    RichLink_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON RichLink_SuggestedTextStyleChanges where
   toJSON RichLink_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -6659,10 +6912,8 @@ instance Core.ToJSON SectionBreak where
     Core.object
       ( Core.catMaybes
           [ ("sectionStyle" Core..=) Core.<$> sectionStyle,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds
           ]
       )
 
@@ -6681,7 +6932,10 @@ data SectionColumnProperties = SectionColumnProperties
 newSectionColumnProperties ::
   SectionColumnProperties
 newSectionColumnProperties =
-  SectionColumnProperties {paddingEnd = Core.Nothing, width = Core.Nothing}
+  SectionColumnProperties
+    { paddingEnd = Core.Nothing,
+      width = Core.Nothing
+    }
 
 instance Core.FromJSON SectionColumnProperties where
   parseJSON =
@@ -6724,6 +6978,8 @@ data SectionStyle = SectionStyle
     firstPageFooterId :: (Core.Maybe Core.Text),
     -- | The ID of the header used only for the first page of the section. If use/first/page/header/footer is true, this value is used for the header on the first page of the section. If it\'s false, the header on the first page of the section uses the default/header/id. If unset, the value inherits from the previous SectionBreak\'s SectionStyle. If the value is unset in the first SectionBreak, it inherits from DocumentStyle\'s first/page/header_id. This property is read-only.
     firstPageHeaderId :: (Core.Maybe Core.Text),
+    -- | Optional. Indicates whether to flip the dimensions of DocumentStyle\'s page/size for this section, which allows changing the page orientation between portrait and landscape. If unset, the value inherits from DocumentStyle\'s flip/page_orientation. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
+    flipPageOrientation :: (Core.Maybe Core.Bool),
     -- | The bottom page margin of the section. If unset, the value defaults to margin_bottom from DocumentStyle. When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
     marginBottom :: (Core.Maybe Dimension),
     -- | The footer margin of the section. If unset, the value defaults to margin/footer from DocumentStyle. If updated, use/custom/header/footer/margins is set to true on DocumentStyle. The value of use/custom/header/footer_margins on DocumentStyle indicates if a footer margin is being respected for this section When updating this property, setting a concrete value is required. Unsetting this property results in a 400 bad request error.
@@ -6759,6 +7015,7 @@ newSectionStyle =
       evenPageHeaderId = Core.Nothing,
       firstPageFooterId = Core.Nothing,
       firstPageHeaderId = Core.Nothing,
+      flipPageOrientation = Core.Nothing,
       marginBottom = Core.Nothing,
       marginFooter = Core.Nothing,
       marginHeader = Core.Nothing,
@@ -6785,6 +7042,7 @@ instance Core.FromJSON SectionStyle where
             Core.<*> (o Core..:? "evenPageHeaderId")
             Core.<*> (o Core..:? "firstPageFooterId")
             Core.<*> (o Core..:? "firstPageHeaderId")
+            Core.<*> (o Core..:? "flipPageOrientation")
             Core.<*> (o Core..:? "marginBottom")
             Core.<*> (o Core..:? "marginFooter")
             Core.<*> (o Core..:? "marginHeader")
@@ -6800,22 +7058,16 @@ instance Core.ToJSON SectionStyle where
   toJSON SectionStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnProperties" Core..=)
-              Core.<$> columnProperties,
-            ("columnSeparatorStyle" Core..=)
-              Core.<$> columnSeparatorStyle,
-            ("contentDirection" Core..=)
-              Core.<$> contentDirection,
+          [ ("columnProperties" Core..=) Core.<$> columnProperties,
+            ("columnSeparatorStyle" Core..=) Core.<$> columnSeparatorStyle,
+            ("contentDirection" Core..=) Core.<$> contentDirection,
             ("defaultFooterId" Core..=) Core.<$> defaultFooterId,
             ("defaultHeaderId" Core..=) Core.<$> defaultHeaderId,
-            ("evenPageFooterId" Core..=)
-              Core.<$> evenPageFooterId,
-            ("evenPageHeaderId" Core..=)
-              Core.<$> evenPageHeaderId,
-            ("firstPageFooterId" Core..=)
-              Core.<$> firstPageFooterId,
-            ("firstPageHeaderId" Core..=)
-              Core.<$> firstPageHeaderId,
+            ("evenPageFooterId" Core..=) Core.<$> evenPageFooterId,
+            ("evenPageHeaderId" Core..=) Core.<$> evenPageHeaderId,
+            ("firstPageFooterId" Core..=) Core.<$> firstPageFooterId,
+            ("firstPageHeaderId" Core..=) Core.<$> firstPageHeaderId,
+            ("flipPageOrientation" Core..=) Core.<$> flipPageOrientation,
             ("marginBottom" Core..=) Core.<$> marginBottom,
             ("marginFooter" Core..=) Core.<$> marginFooter,
             ("marginHeader" Core..=) Core.<$> marginHeader,
@@ -6847,17 +7099,13 @@ instance Core.FromJSON Shading where
   parseJSON =
     Core.withObject
       "Shading"
-      ( \o ->
-          Shading Core.<$> (o Core..:? "backgroundColor")
-      )
+      (\o -> Shading Core.<$> (o Core..:? "backgroundColor"))
 
 instance Core.ToJSON Shading where
   toJSON Shading {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor
-          ]
+          [("backgroundColor" Core..=) Core.<$> backgroundColor]
       )
 
 -- | A mask that indicates which of the fields on the base Shading have been changed in this suggested change. For any field set to true, there\'s a new suggested value.
@@ -6908,7 +7156,10 @@ data SheetsChartReference = SheetsChartReference
 newSheetsChartReference ::
   SheetsChartReference
 newSheetsChartReference =
-  SheetsChartReference {chartId = Core.Nothing, spreadsheetId = Core.Nothing}
+  SheetsChartReference
+    { chartId = Core.Nothing,
+      spreadsheetId = Core.Nothing
+    }
 
 instance Core.FromJSON SheetsChartReference where
   parseJSON =
@@ -6945,14 +7196,12 @@ newSheetsChartReferenceSuggestionState ::
   SheetsChartReferenceSuggestionState
 newSheetsChartReferenceSuggestionState =
   SheetsChartReferenceSuggestionState
-    { chartIdSuggested = Core.Nothing,
+    { chartIdSuggested =
+        Core.Nothing,
       spreadsheetIdSuggested = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SheetsChartReferenceSuggestionState
-  where
+instance Core.FromJSON SheetsChartReferenceSuggestionState where
   parseJSON =
     Core.withObject
       "SheetsChartReferenceSuggestionState"
@@ -6962,15 +7211,11 @@ instance
             Core.<*> (o Core..:? "spreadsheetIdSuggested")
       )
 
-instance
-  Core.ToJSON
-    SheetsChartReferenceSuggestionState
-  where
+instance Core.ToJSON SheetsChartReferenceSuggestionState where
   toJSON SheetsChartReferenceSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("chartIdSuggested" Core..=)
-              Core.<$> chartIdSuggested,
+          [ ("chartIdSuggested" Core..=) Core.<$> chartIdSuggested,
             ("spreadsheetIdSuggested" Core..=)
               Core.<$> spreadsheetIdSuggested
           ]
@@ -6997,8 +7242,7 @@ instance Core.FromJSON Size where
     Core.withObject
       "Size"
       ( \o ->
-          Size
-            Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
+          Size Core.<$> (o Core..:? "height") Core.<*> (o Core..:? "width")
       )
 
 instance Core.ToJSON Size where
@@ -7044,8 +7288,7 @@ instance Core.ToJSON SizeSuggestionState where
   toJSON SizeSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("heightSuggested" Core..=)
-              Core.<$> heightSuggested,
+          [ ("heightSuggested" Core..=) Core.<$> heightSuggested,
             ("widthSuggested" Core..=) Core.<$> widthSuggested
           ]
       )
@@ -7105,8 +7348,7 @@ instance Core.ToJSON StructuralElement where
             ("sectionBreak" Core..=) Core.<$> sectionBreak,
             ("startIndex" Core..=) Core.<$> startIndex,
             ("table" Core..=) Core.<$> table,
-            ("tableOfContents" Core..=)
-              Core.<$> tableOfContents
+            ("tableOfContents" Core..=) Core.<$> tableOfContents
           ]
       )
 
@@ -7125,7 +7367,10 @@ data SubstringMatchCriteria = SubstringMatchCriteria
 newSubstringMatchCriteria ::
   SubstringMatchCriteria
 newSubstringMatchCriteria =
-  SubstringMatchCriteria {matchCase = Core.Nothing, text = Core.Nothing}
+  SubstringMatchCriteria
+    { matchCase = Core.Nothing,
+      text = Core.Nothing
+    }
 
 instance Core.FromJSON SubstringMatchCriteria where
   parseJSON =
@@ -7161,7 +7406,10 @@ data SuggestedBullet = SuggestedBullet
 newSuggestedBullet ::
   SuggestedBullet
 newSuggestedBullet =
-  SuggestedBullet {bullet = Core.Nothing, bulletSuggestionState = Core.Nothing}
+  SuggestedBullet
+    { bullet = Core.Nothing,
+      bulletSuggestionState = Core.Nothing
+    }
 
 instance Core.FromJSON SuggestedBullet where
   parseJSON =
@@ -7178,8 +7426,7 @@ instance Core.ToJSON SuggestedBullet where
     Core.object
       ( Core.catMaybes
           [ ("bullet" Core..=) Core.<$> bullet,
-            ("bulletSuggestionState" Core..=)
-              Core.<$> bulletSuggestionState
+            ("bulletSuggestionState" Core..=) Core.<$> bulletSuggestionState
           ]
       )
 
@@ -7239,14 +7486,12 @@ newSuggestedInlineObjectProperties ::
   SuggestedInlineObjectProperties
 newSuggestedInlineObjectProperties =
   SuggestedInlineObjectProperties
-    { inlineObjectProperties = Core.Nothing,
+    { inlineObjectProperties =
+        Core.Nothing,
       inlineObjectPropertiesSuggestionState = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SuggestedInlineObjectProperties
-  where
+instance Core.FromJSON SuggestedInlineObjectProperties where
   parseJSON =
     Core.withObject
       "SuggestedInlineObjectProperties"
@@ -7403,29 +7648,22 @@ newSuggestedPositionedObjectProperties ::
   SuggestedPositionedObjectProperties
 newSuggestedPositionedObjectProperties =
   SuggestedPositionedObjectProperties
-    { positionedObjectProperties = Core.Nothing,
+    { positionedObjectProperties =
+        Core.Nothing,
       positionedObjectPropertiesSuggestionState = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SuggestedPositionedObjectProperties
-  where
+instance Core.FromJSON SuggestedPositionedObjectProperties where
   parseJSON =
     Core.withObject
       "SuggestedPositionedObjectProperties"
       ( \o ->
           SuggestedPositionedObjectProperties
             Core.<$> (o Core..:? "positionedObjectProperties")
-            Core.<*> ( o
-                         Core..:? "positionedObjectPropertiesSuggestionState"
-                     )
+            Core.<*> (o Core..:? "positionedObjectPropertiesSuggestionState")
       )
 
-instance
-  Core.ToJSON
-    SuggestedPositionedObjectProperties
-  where
+instance Core.ToJSON SuggestedPositionedObjectProperties where
   toJSON SuggestedPositionedObjectProperties {..} =
     Core.object
       ( Core.catMaybes
@@ -7556,6 +7794,104 @@ instance Core.ToJSON SuggestedTextStyle where
           ]
       )
 
+-- | A tab in a document.
+--
+-- /See:/ 'newTab' smart constructor.
+data Tab = Tab
+  { -- | The child tabs nested within this tab.
+    childTabs :: (Core.Maybe [Tab]),
+    -- | A tab with document contents, like text and images.
+    documentTab :: (Core.Maybe DocumentTab),
+    -- | The properties of the tab, like ID and title.
+    tabProperties :: (Core.Maybe TabProperties)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Tab' with the minimum fields required to make a request.
+newTab ::
+  Tab
+newTab =
+  Tab
+    { childTabs = Core.Nothing,
+      documentTab = Core.Nothing,
+      tabProperties = Core.Nothing
+    }
+
+instance Core.FromJSON Tab where
+  parseJSON =
+    Core.withObject
+      "Tab"
+      ( \o ->
+          Tab
+            Core.<$> (o Core..:? "childTabs")
+            Core.<*> (o Core..:? "documentTab")
+            Core.<*> (o Core..:? "tabProperties")
+      )
+
+instance Core.ToJSON Tab where
+  toJSON Tab {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("childTabs" Core..=) Core.<$> childTabs,
+            ("documentTab" Core..=) Core.<$> documentTab,
+            ("tabProperties" Core..=) Core.<$> tabProperties
+          ]
+      )
+
+-- | Properties of a tab.
+--
+-- /See:/ 'newTabProperties' smart constructor.
+data TabProperties = TabProperties
+  { -- | The zero-based index of the tab within the parent.
+    index :: (Core.Maybe Core.Int32),
+    -- | Output only. The depth of the tab within the document. Root-level tabs start at 0.
+    nestingLevel :: (Core.Maybe Core.Int32),
+    -- | Optional. The ID of the parent tab. Empty when the current tab is a root-level tab, which means it doesn\'t have any parents.
+    parentTabId :: (Core.Maybe Core.Text),
+    -- | Output only. The ID of the tab. This field can\'t be changed.
+    tabId :: (Core.Maybe Core.Text),
+    -- | The user-visible name of the tab.
+    title :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TabProperties' with the minimum fields required to make a request.
+newTabProperties ::
+  TabProperties
+newTabProperties =
+  TabProperties
+    { index = Core.Nothing,
+      nestingLevel = Core.Nothing,
+      parentTabId = Core.Nothing,
+      tabId = Core.Nothing,
+      title = Core.Nothing
+    }
+
+instance Core.FromJSON TabProperties where
+  parseJSON =
+    Core.withObject
+      "TabProperties"
+      ( \o ->
+          TabProperties
+            Core.<$> (o Core..:? "index")
+            Core.<*> (o Core..:? "nestingLevel")
+            Core.<*> (o Core..:? "parentTabId")
+            Core.<*> (o Core..:? "tabId")
+            Core.<*> (o Core..:? "title")
+      )
+
+instance Core.ToJSON TabProperties where
+  toJSON TabProperties {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("index" Core..=) Core.<$> index,
+            ("nestingLevel" Core..=) Core.<$> nestingLevel,
+            ("parentTabId" Core..=) Core.<$> parentTabId,
+            ("tabId" Core..=) Core.<$> tabId,
+            ("title" Core..=) Core.<$> title
+          ]
+      )
+
 -- | A tab stop within a paragraph.
 --
 -- /See:/ 'newTabStop' smart constructor.
@@ -7570,7 +7906,8 @@ data TabStop = TabStop
 -- | Creates a value of 'TabStop' with the minimum fields required to make a request.
 newTabStop ::
   TabStop
-newTabStop = TabStop {alignment = Core.Nothing, offset = Core.Nothing}
+newTabStop =
+  TabStop {alignment = Core.Nothing, offset = Core.Nothing}
 
 instance Core.FromJSON TabStop where
   parseJSON =
@@ -7643,10 +7980,8 @@ instance Core.ToJSON Table where
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
             ("rows" Core..=) Core.<$> rows,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("tableRows" Core..=) Core.<$> tableRows,
             ("tableStyle" Core..=) Core.<$> tableStyle
           ]
@@ -7709,10 +8044,8 @@ instance Core.ToJSON TableCell where
           [ ("content" Core..=) Core.<$> content,
             ("endIndex" Core..=) Core.<$> endIndex,
             ("startIndex" Core..=) Core.<$> startIndex,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTableCellStyleChanges" Core..=)
               Core.<$> suggestedTableCellStyleChanges,
             ("tableCellStyle" Core..=) Core.<$> tableCellStyle
@@ -7723,8 +8056,7 @@ instance Core.ToJSON TableCell where
 --
 -- /See:/ 'newTableCell_SuggestedTableCellStyleChanges' smart constructor.
 newtype TableCell_SuggestedTableCellStyleChanges = TableCell_SuggestedTableCellStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTableCellStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTableCellStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7736,10 +8068,7 @@ newTableCell_SuggestedTableCellStyleChanges ::
 newTableCell_SuggestedTableCellStyleChanges additional =
   TableCell_SuggestedTableCellStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    TableCell_SuggestedTableCellStyleChanges
-  where
+instance Core.FromJSON TableCell_SuggestedTableCellStyleChanges where
   parseJSON =
     Core.withObject
       "TableCell_SuggestedTableCellStyleChanges"
@@ -7748,10 +8077,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TableCell_SuggestedTableCellStyleChanges
-  where
+instance Core.ToJSON TableCell_SuggestedTableCellStyleChanges where
   toJSON TableCell_SuggestedTableCellStyleChanges {..} =
     Core.toJSON additional
 
@@ -7839,8 +8165,7 @@ instance Core.ToJSON TableCellLocation where
       ( Core.catMaybes
           [ ("columnIndex" Core..=) Core.<$> columnIndex,
             ("rowIndex" Core..=) Core.<$> rowIndex,
-            ("tableStartLocation" Core..=)
-              Core.<$> tableStartLocation
+            ("tableStartLocation" Core..=) Core.<$> tableStartLocation
           ]
       )
 
@@ -7918,15 +8243,13 @@ instance Core.ToJSON TableCellStyle where
   toJSON TableCellStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("borderBottom" Core..=) Core.<$> borderBottom,
             ("borderLeft" Core..=) Core.<$> borderLeft,
             ("borderRight" Core..=) Core.<$> borderRight,
             ("borderTop" Core..=) Core.<$> borderTop,
             ("columnSpan" Core..=) Core.<$> columnSpan,
-            ("contentAlignment" Core..=)
-              Core.<$> contentAlignment,
+            ("contentAlignment" Core..=) Core.<$> contentAlignment,
             ("paddingBottom" Core..=) Core.<$> paddingBottom,
             ("paddingLeft" Core..=) Core.<$> paddingLeft,
             ("paddingRight" Core..=) Core.<$> paddingRight,
@@ -7971,7 +8294,8 @@ newTableCellStyleSuggestionState ::
   TableCellStyleSuggestionState
 newTableCellStyleSuggestionState =
   TableCellStyleSuggestionState
-    { backgroundColorSuggested = Core.Nothing,
+    { backgroundColorSuggested =
+        Core.Nothing,
       borderBottomSuggested = Core.Nothing,
       borderLeftSuggested = Core.Nothing,
       borderRightSuggested = Core.Nothing,
@@ -8011,28 +8335,18 @@ instance Core.ToJSON TableCellStyleSuggestionState where
       ( Core.catMaybes
           [ ("backgroundColorSuggested" Core..=)
               Core.<$> backgroundColorSuggested,
-            ("borderBottomSuggested" Core..=)
-              Core.<$> borderBottomSuggested,
-            ("borderLeftSuggested" Core..=)
-              Core.<$> borderLeftSuggested,
-            ("borderRightSuggested" Core..=)
-              Core.<$> borderRightSuggested,
-            ("borderTopSuggested" Core..=)
-              Core.<$> borderTopSuggested,
-            ("columnSpanSuggested" Core..=)
-              Core.<$> columnSpanSuggested,
+            ("borderBottomSuggested" Core..=) Core.<$> borderBottomSuggested,
+            ("borderLeftSuggested" Core..=) Core.<$> borderLeftSuggested,
+            ("borderRightSuggested" Core..=) Core.<$> borderRightSuggested,
+            ("borderTopSuggested" Core..=) Core.<$> borderTopSuggested,
+            ("columnSpanSuggested" Core..=) Core.<$> columnSpanSuggested,
             ("contentAlignmentSuggested" Core..=)
               Core.<$> contentAlignmentSuggested,
-            ("paddingBottomSuggested" Core..=)
-              Core.<$> paddingBottomSuggested,
-            ("paddingLeftSuggested" Core..=)
-              Core.<$> paddingLeftSuggested,
-            ("paddingRightSuggested" Core..=)
-              Core.<$> paddingRightSuggested,
-            ("paddingTopSuggested" Core..=)
-              Core.<$> paddingTopSuggested,
-            ("rowSpanSuggested" Core..=)
-              Core.<$> rowSpanSuggested
+            ("paddingBottomSuggested" Core..=) Core.<$> paddingBottomSuggested,
+            ("paddingLeftSuggested" Core..=) Core.<$> paddingLeftSuggested,
+            ("paddingRightSuggested" Core..=) Core.<$> paddingRightSuggested,
+            ("paddingTopSuggested" Core..=) Core.<$> paddingTopSuggested,
+            ("rowSpanSuggested" Core..=) Core.<$> rowSpanSuggested
           ]
       )
 
@@ -8051,7 +8365,10 @@ data TableColumnProperties = TableColumnProperties
 newTableColumnProperties ::
   TableColumnProperties
 newTableColumnProperties =
-  TableColumnProperties {width = Core.Nothing, widthType = Core.Nothing}
+  TableColumnProperties
+    { width = Core.Nothing,
+      widthType = Core.Nothing
+    }
 
 instance Core.FromJSON TableColumnProperties where
   parseJSON =
@@ -8111,10 +8428,8 @@ instance Core.ToJSON TableOfContents where
     Core.object
       ( Core.catMaybes
           [ ("content" Core..=) Core.<$> content,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds
           ]
       )
 
@@ -8158,8 +8473,7 @@ instance Core.ToJSON TableRange where
       ( Core.catMaybes
           [ ("columnSpan" Core..=) Core.<$> columnSpan,
             ("rowSpan" Core..=) Core.<$> rowSpan,
-            ("tableCellLocation" Core..=)
-              Core.<$> tableCellLocation
+            ("tableCellLocation" Core..=) Core.<$> tableCellLocation
           ]
       )
 
@@ -8219,10 +8533,8 @@ instance Core.ToJSON TableRow where
       ( Core.catMaybes
           [ ("endIndex" Core..=) Core.<$> endIndex,
             ("startIndex" Core..=) Core.<$> startIndex,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTableRowStyleChanges" Core..=)
               Core.<$> suggestedTableRowStyleChanges,
             ("tableCells" Core..=) Core.<$> tableCells,
@@ -8234,8 +8546,7 @@ instance Core.ToJSON TableRow where
 --
 -- /See:/ 'newTableRow_SuggestedTableRowStyleChanges' smart constructor.
 newtype TableRow_SuggestedTableRowStyleChanges = TableRow_SuggestedTableRowStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTableRowStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTableRowStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8247,10 +8558,7 @@ newTableRow_SuggestedTableRowStyleChanges ::
 newTableRow_SuggestedTableRowStyleChanges additional =
   TableRow_SuggestedTableRowStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    TableRow_SuggestedTableRowStyleChanges
-  where
+instance Core.FromJSON TableRow_SuggestedTableRowStyleChanges where
   parseJSON =
     Core.withObject
       "TableRow_SuggestedTableRowStyleChanges"
@@ -8259,10 +8567,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TableRow_SuggestedTableRowStyleChanges
-  where
+instance Core.ToJSON TableRow_SuggestedTableRowStyleChanges where
   toJSON TableRow_SuggestedTableRowStyleChanges {..} =
     Core.toJSON additional
 
@@ -8323,7 +8628,10 @@ newtype TableRowStyleSuggestionState = TableRowStyleSuggestionState
 newTableRowStyleSuggestionState ::
   TableRowStyleSuggestionState
 newTableRowStyleSuggestionState =
-  TableRowStyleSuggestionState {minRowHeightSuggested = Core.Nothing}
+  TableRowStyleSuggestionState
+    { minRowHeightSuggested =
+        Core.Nothing
+    }
 
 instance Core.FromJSON TableRowStyleSuggestionState where
   parseJSON =
@@ -8338,9 +8646,7 @@ instance Core.ToJSON TableRowStyleSuggestionState where
   toJSON TableRowStyleSuggestionState {..} =
     Core.object
       ( Core.catMaybes
-          [ ("minRowHeightSuggested" Core..=)
-              Core.<$> minRowHeightSuggested
-          ]
+          [("minRowHeightSuggested" Core..=) Core.<$> minRowHeightSuggested]
       )
 
 -- | Styles that apply to a table.
@@ -8361,19 +8667,38 @@ instance Core.FromJSON TableStyle where
   parseJSON =
     Core.withObject
       "TableStyle"
-      ( \o ->
-          TableStyle
-            Core.<$> (o Core..:? "tableColumnProperties")
-      )
+      (\o -> TableStyle Core.<$> (o Core..:? "tableColumnProperties"))
 
 instance Core.ToJSON TableStyle where
   toJSON TableStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("tableColumnProperties" Core..=)
-              Core.<$> tableColumnProperties
-          ]
+          [("tableColumnProperties" Core..=) Core.<$> tableColumnProperties]
       )
+
+-- | A criteria that specifies in which tabs a request executes.
+--
+-- /See:/ 'newTabsCriteria' smart constructor.
+newtype TabsCriteria = TabsCriteria
+  { -- | The list of tab IDs in which the request executes.
+    tabIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TabsCriteria' with the minimum fields required to make a request.
+newTabsCriteria ::
+  TabsCriteria
+newTabsCriteria = TabsCriteria {tabIds = Core.Nothing}
+
+instance Core.FromJSON TabsCriteria where
+  parseJSON =
+    Core.withObject
+      "TabsCriteria"
+      (\o -> TabsCriteria Core.<$> (o Core..:? "tabIds"))
+
+instance Core.ToJSON TabsCriteria where
+  toJSON TabsCriteria {..} =
+    Core.object (Core.catMaybes [("tabIds" Core..=) Core.<$> tabIds])
 
 -- | A ParagraphElement that represents a run of text that all has the same styling.
 --
@@ -8422,10 +8747,8 @@ instance Core.ToJSON TextRun where
     Core.object
       ( Core.catMaybes
           [ ("content" Core..=) Core.<$> content,
-            ("suggestedDeletionIds" Core..=)
-              Core.<$> suggestedDeletionIds,
-            ("suggestedInsertionIds" Core..=)
-              Core.<$> suggestedInsertionIds,
+            ("suggestedDeletionIds" Core..=) Core.<$> suggestedDeletionIds,
+            ("suggestedInsertionIds" Core..=) Core.<$> suggestedInsertionIds,
             ("suggestedTextStyleChanges" Core..=)
               Core.<$> suggestedTextStyleChanges,
             ("textStyle" Core..=) Core.<$> textStyle
@@ -8436,8 +8759,7 @@ instance Core.ToJSON TextRun where
 --
 -- /See:/ 'newTextRun_SuggestedTextStyleChanges' smart constructor.
 newtype TextRun_SuggestedTextStyleChanges = TextRun_SuggestedTextStyleChanges
-  { -- |
-    additional :: (Core.HashMap Core.Text SuggestedTextStyle)
+  { additional :: (Core.HashMap Core.Text SuggestedTextStyle)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8449,10 +8771,7 @@ newTextRun_SuggestedTextStyleChanges ::
 newTextRun_SuggestedTextStyleChanges additional =
   TextRun_SuggestedTextStyleChanges {additional = additional}
 
-instance
-  Core.FromJSON
-    TextRun_SuggestedTextStyleChanges
-  where
+instance Core.FromJSON TextRun_SuggestedTextStyleChanges where
   parseJSON =
     Core.withObject
       "TextRun_SuggestedTextStyleChanges"
@@ -8461,10 +8780,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    TextRun_SuggestedTextStyleChanges
-  where
+instance Core.ToJSON TextRun_SuggestedTextStyleChanges where
   toJSON TextRun_SuggestedTextStyleChanges {..} =
     Core.toJSON additional
 
@@ -8539,8 +8855,7 @@ instance Core.ToJSON TextStyle where
   toJSON TextStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("baselineOffset" Core..=) Core.<$> baselineOffset,
             ("bold" Core..=) Core.<$> bold,
             ("fontSize" Core..=) Core.<$> fontSize,
@@ -8550,8 +8865,7 @@ instance Core.ToJSON TextStyle where
             ("smallCaps" Core..=) Core.<$> smallCaps,
             ("strikethrough" Core..=) Core.<$> strikethrough,
             ("underline" Core..=) Core.<$> underline,
-            ("weightedFontFamily" Core..=)
-              Core.<$> weightedFontFamily
+            ("weightedFontFamily" Core..=) Core.<$> weightedFontFamily
           ]
       )
 
@@ -8630,18 +8944,14 @@ instance Core.ToJSON TextStyleSuggestionState where
             ("baselineOffsetSuggested" Core..=)
               Core.<$> baselineOffsetSuggested,
             ("boldSuggested" Core..=) Core.<$> boldSuggested,
-            ("fontSizeSuggested" Core..=)
-              Core.<$> fontSizeSuggested,
+            ("fontSizeSuggested" Core..=) Core.<$> fontSizeSuggested,
             ("foregroundColorSuggested" Core..=)
               Core.<$> foregroundColorSuggested,
             ("italicSuggested" Core..=) Core.<$> italicSuggested,
             ("linkSuggested" Core..=) Core.<$> linkSuggested,
-            ("smallCapsSuggested" Core..=)
-              Core.<$> smallCapsSuggested,
-            ("strikethroughSuggested" Core..=)
-              Core.<$> strikethroughSuggested,
-            ("underlineSuggested" Core..=)
-              Core.<$> underlineSuggested,
+            ("smallCapsSuggested" Core..=) Core.<$> smallCapsSuggested,
+            ("strikethroughSuggested" Core..=) Core.<$> strikethroughSuggested,
+            ("underlineSuggested" Core..=) Core.<$> underlineSuggested,
             ("weightedFontFamilySuggested" Core..=)
               Core.<$> weightedFontFamilySuggested
           ]
@@ -8667,16 +8977,13 @@ instance Core.FromJSON UnmergeTableCellsRequest where
     Core.withObject
       "UnmergeTableCellsRequest"
       ( \o ->
-          UnmergeTableCellsRequest
-            Core.<$> (o Core..:? "tableRange")
+          UnmergeTableCellsRequest Core.<$> (o Core..:? "tableRange")
       )
 
 instance Core.ToJSON UnmergeTableCellsRequest where
   toJSON UnmergeTableCellsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("tableRange" Core..=) Core.<$> tableRange]
-      )
+      (Core.catMaybes [("tableRange" Core..=) Core.<$> tableRange])
 
 -- | Updates the DocumentStyle.
 --
@@ -8685,7 +8992,9 @@ data UpdateDocumentStyleRequest = UpdateDocumentStyleRequest
   { -- | The styles to set on the document. Certain document style changes may cause other changes in order to mirror the behavior of the Docs editor. See the documentation of DocumentStyle for more information.
     documentStyle :: (Core.Maybe DocumentStyle),
     -- | The fields that should be updated. At least one field must be specified. The root @document_style@ is implied and should not be specified. A single @\"*\"@ can be used as short-hand for listing every field. For example to update the background, set @fields@ to @\"background\"@.
-    fields :: (Core.Maybe Core.FieldMask)
+    fields :: (Core.Maybe Core.FieldMask),
+    -- | The tab that contains the style to update. When omitted, the request applies to the first tab. In a document containing a single tab: - If provided, must match the singular tab\'s ID. - If omitted, the request applies to the singular tab. In a document containing multiple tabs: - If provided, the request applies to the specified tab. - If not provided, the request applies to the first tab in the document.
+    tabId :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8695,7 +9004,8 @@ newUpdateDocumentStyleRequest ::
 newUpdateDocumentStyleRequest =
   UpdateDocumentStyleRequest
     { documentStyle = Core.Nothing,
-      fields = Core.Nothing
+      fields = Core.Nothing,
+      tabId = Core.Nothing
     }
 
 instance Core.FromJSON UpdateDocumentStyleRequest where
@@ -8706,6 +9016,7 @@ instance Core.FromJSON UpdateDocumentStyleRequest where
           UpdateDocumentStyleRequest
             Core.<$> (o Core..:? "documentStyle")
             Core.<*> (o Core..:? "fields")
+            Core.<*> (o Core..:? "tabId")
       )
 
 instance Core.ToJSON UpdateDocumentStyleRequest where
@@ -8713,7 +9024,8 @@ instance Core.ToJSON UpdateDocumentStyleRequest where
     Core.object
       ( Core.catMaybes
           [ ("documentStyle" Core..=) Core.<$> documentStyle,
-            ("fields" Core..=) Core.<$> fields
+            ("fields" Core..=) Core.<$> fields,
+            ("tabId" Core..=) Core.<$> tabId
           ]
       )
 
@@ -8850,8 +9162,7 @@ instance Core.ToJSON UpdateTableCellStyleRequest where
           [ ("fields" Core..=) Core.<$> fields,
             ("tableCellStyle" Core..=) Core.<$> tableCellStyle,
             ("tableRange" Core..=) Core.<$> tableRange,
-            ("tableStartLocation" Core..=)
-              Core.<$> tableStartLocation
+            ("tableStartLocation" Core..=) Core.<$> tableStartLocation
           ]
       )
 
@@ -8881,10 +9192,7 @@ newUpdateTableColumnPropertiesRequest =
       tableStartLocation = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateTableColumnPropertiesRequest
-  where
+instance Core.FromJSON UpdateTableColumnPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateTableColumnPropertiesRequest"
@@ -8896,19 +9204,14 @@ instance
             Core.<*> (o Core..:? "tableStartLocation")
       )
 
-instance
-  Core.ToJSON
-    UpdateTableColumnPropertiesRequest
-  where
+instance Core.ToJSON UpdateTableColumnPropertiesRequest where
   toJSON UpdateTableColumnPropertiesRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("columnIndices" Core..=) Core.<$> columnIndices,
             ("fields" Core..=) Core.<$> fields,
-            ("tableColumnProperties" Core..=)
-              Core.<$> tableColumnProperties,
-            ("tableStartLocation" Core..=)
-              Core.<$> tableStartLocation
+            ("tableColumnProperties" Core..=) Core.<$> tableColumnProperties,
+            ("tableStartLocation" Core..=) Core.<$> tableStartLocation
           ]
       )
 
@@ -8957,8 +9260,7 @@ instance Core.ToJSON UpdateTableRowStyleRequest where
           [ ("fields" Core..=) Core.<$> fields,
             ("rowIndices" Core..=) Core.<$> rowIndices,
             ("tableRowStyle" Core..=) Core.<$> tableRowStyle,
-            ("tableStartLocation" Core..=)
-              Core.<$> tableStartLocation
+            ("tableStartLocation" Core..=) Core.<$> tableStartLocation
           ]
       )
 
@@ -9021,7 +9323,10 @@ data WeightedFontFamily = WeightedFontFamily
 newWeightedFontFamily ::
   WeightedFontFamily
 newWeightedFontFamily =
-  WeightedFontFamily {fontFamily = Core.Nothing, weight = Core.Nothing}
+  WeightedFontFamily
+    { fontFamily = Core.Nothing,
+      weight = Core.Nothing
+    }
 
 instance Core.FromJSON WeightedFontFamily where
   parseJSON =
@@ -9076,9 +9381,7 @@ instance Core.ToJSON WriteControl where
   toJSON WriteControl {..} =
     Core.object
       ( Core.catMaybes
-          [ ("requiredRevisionId" Core..=)
-              Core.<$> requiredRevisionId,
-            ("targetRevisionId" Core..=)
-              Core.<$> targetRevisionId
+          [ ("requiredRevisionId" Core..=) Core.<$> requiredRevisionId,
+            ("targetRevisionId" Core..=) Core.<$> targetRevisionId
           ]
       )

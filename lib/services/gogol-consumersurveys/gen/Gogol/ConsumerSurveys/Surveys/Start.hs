@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Surveys.Start
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ConsumerSurveys.Surveys.Start
 where
 
 import Gogol.ConsumerSurveys.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @consumersurveys.surveys.start@ method which the
 -- 'ConsumerSurveysSurveysStart' request conforms to.
@@ -60,7 +58,6 @@ type ConsumerSurveysSurveysStartResource =
 data ConsumerSurveysSurveysStart = ConsumerSurveysSurveysStart
   { -- | Multipart request metadata.
     payload :: SurveysStartRequest,
-    -- |
     resourceId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -73,15 +70,13 @@ newConsumerSurveysSurveysStart ::
   Core.Text ->
   ConsumerSurveysSurveysStart
 newConsumerSurveysSurveysStart payload resourceId =
-  ConsumerSurveysSurveysStart {payload = payload, resourceId = resourceId}
+  ConsumerSurveysSurveysStart
+    { payload = payload,
+      resourceId = resourceId
+    }
 
-instance
-  Core.GoogleRequest
-    ConsumerSurveysSurveysStart
-  where
-  type
-    Rs ConsumerSurveysSurveysStart =
-      SurveysStartResponse
+instance Core.GoogleRequest ConsumerSurveysSurveysStart where
+  type Rs ConsumerSurveysSurveysStart = SurveysStartResponse
   type
     Scopes ConsumerSurveysSurveysStart =
       '[Consumersurveys'FullControl, Userinfo'Email]
@@ -94,7 +89,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysStartResource
-          )
+          (Core.Proxy :: Core.Proxy ConsumerSurveysSurveysStartResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.TargetableRemarketingLists.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.TargetableRemarketingLists.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.targetableRemarketingLists.list@ method which the
 -- 'DFAReportingTargetableRemarketingListsList' request conforms to.
@@ -58,12 +56,8 @@ type DFAReportingTargetableRemarketingListsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "name" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              TargetableRemarketingListsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              TargetableRemarketingListsListSortOrder
+    Core.:> Core.QueryParam "sortField" TargetableRemarketingListsListSortField
+    Core.:> Core.QueryParam "sortOrder" TargetableRemarketingListsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -81,7 +75,7 @@ data DFAReportingTargetableRemarketingListsList = DFAReportingTargetableRemarket
     accessToken :: (Core.Maybe Core.Text),
     -- | Select only active or only inactive targetable remarketing lists.
     active :: (Core.Maybe Core.Bool),
-    -- | Select only targetable remarketing lists targetable by these advertisers.
+    -- | Required. Select only targetable remarketing lists targetable by these advertisers.
     advertiserId :: Core.Int64,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -106,27 +100,31 @@ data DFAReportingTargetableRemarketingListsList = DFAReportingTargetableRemarket
 
 -- | Creates a value of 'DFAReportingTargetableRemarketingListsList' with the minimum fields required to make a request.
 newDFAReportingTargetableRemarketingListsList ::
-  -- |  Select only targetable remarketing lists targetable by these advertisers. See 'advertiserId'.
+  -- |  Required. Select only targetable remarketing lists targetable by these advertisers. See 'advertiserId'.
   Core.Int64 ->
   -- |  User profile ID associated with this request. See 'profileId'.
   Core.Int64 ->
   DFAReportingTargetableRemarketingListsList
-newDFAReportingTargetableRemarketingListsList advertiserId profileId =
-  DFAReportingTargetableRemarketingListsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      active = Core.Nothing,
-      advertiserId = advertiserId,
-      callback = Core.Nothing,
-      maxResults = 1000,
-      name = Core.Nothing,
-      pageToken = Core.Nothing,
-      profileId = profileId,
-      sortField = TargetableRemarketingListsListSortField_ID,
-      sortOrder = TargetableRemarketingListsListSortOrder_Ascending,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDFAReportingTargetableRemarketingListsList
+  advertiserId
+  profileId =
+    DFAReportingTargetableRemarketingListsList
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        active = Core.Nothing,
+        advertiserId = advertiserId,
+        callback = Core.Nothing,
+        maxResults = 1000,
+        name = Core.Nothing,
+        pageToken = Core.Nothing,
+        profileId = profileId,
+        sortField =
+          TargetableRemarketingListsListSortField_ID,
+        sortOrder =
+          TargetableRemarketingListsListSortOrder_Ascending,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -136,32 +134,29 @@ instance
     Rs DFAReportingTargetableRemarketingListsList =
       TargetableRemarketingListsListResponse
   type
-    Scopes
-      DFAReportingTargetableRemarketingListsList =
+    Scopes DFAReportingTargetableRemarketingListsList =
       '[Dfatrafficking'FullControl]
-  requestClient
-    DFAReportingTargetableRemarketingListsList {..} =
-      go
-        profileId
-        (Core.Just advertiserId)
-        xgafv
-        accessToken
-        active
-        callback
-        (Core.Just maxResults)
-        name
-        pageToken
-        (Core.Just sortField)
-        (Core.Just sortOrder)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dFAReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DFAReportingTargetableRemarketingListsListResource
-            )
-            Core.mempty
+  requestClient DFAReportingTargetableRemarketingListsList {..} =
+    go
+      profileId
+      (Core.Just advertiserId)
+      xgafv
+      accessToken
+      active
+      callback
+      (Core.Just maxResults)
+      name
+      pageToken
+      (Core.Just sortField)
+      (Core.Just sortOrder)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dFAReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DFAReportingTargetableRemarketingListsListResource
+          )
+          Core.mempty

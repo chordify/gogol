@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.IAM
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls.
+-- Manages identity and access control for Google Cloud resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Enabling this API also enables the IAM Service Account Credentials API (iamcredentials.googleapis.com). However, disabling this API doesn\'t disable the IAM Service Account Credentials API.
 --
 -- /See:/ <https://cloud.google.com/iam/ Identity and Access Management (IAM) API Reference>
 module Gogol.IAM
@@ -72,6 +70,17 @@ module Gogol.IAM
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** CloudControl2SharedOperationsReconciliationOperationMetadata
+    CloudControl2SharedOperationsReconciliationOperationMetadata (..),
+    newCloudControl2SharedOperationsReconciliationOperationMetadata,
+
+    -- ** CloudControl2SharedOperationsReconciliationOperationMetadata_ExclusiveAction
+    CloudControl2SharedOperationsReconciliationOperationMetadata_ExclusiveAction (..),
+
+    -- ** GoogleCloudCommonOperationMetadata
+    GoogleCloudCommonOperationMetadata (..),
+    newGoogleCloudCommonOperationMetadata,
 
     -- ** GoogleIamAdminV1AuditData
     GoogleIamAdminV1AuditData (..),
@@ -123,6 +132,22 @@ module Gogol.IAM
     -- ** GoogleIamV2PolicyRule
     GoogleIamV2PolicyRule (..),
     newGoogleIamV2PolicyRule,
+
+    -- ** GoogleIamV3OperationMetadata
+    GoogleIamV3OperationMetadata (..),
+    newGoogleIamV3OperationMetadata,
+
+    -- ** GoogleIamV3alphaOperationMetadata
+    GoogleIamV3alphaOperationMetadata (..),
+    newGoogleIamV3alphaOperationMetadata,
+
+    -- ** GoogleIamV3betaOperationMetadata
+    GoogleIamV3betaOperationMetadata (..),
+    newGoogleIamV3betaOperationMetadata,
+
+    -- ** GoogleIamV3mainOperationMetadata
+    GoogleIamV3mainOperationMetadata (..),
+    newGoogleIamV3mainOperationMetadata,
 
     -- ** GoogleLongrunningOperation
     GoogleLongrunningOperation (..),

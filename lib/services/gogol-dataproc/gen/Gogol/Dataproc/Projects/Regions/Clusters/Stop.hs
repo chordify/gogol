@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataproc.Projects.Regions.Clusters.Stop
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataproc.Projects.Regions.Clusters.Stop
 where
 
 import Gogol.Dataproc.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataproc.projects.regions.clusters.stop@ method which the
 -- 'DataprocProjectsRegionsClustersStop' request conforms to.
@@ -97,26 +95,25 @@ newDataprocProjectsRegionsClustersStop ::
   -- |  Required. The Dataproc region in which to handle the request. See 'region'.
   Core.Text ->
   DataprocProjectsRegionsClustersStop
-newDataprocProjectsRegionsClustersStop clusterName payload projectId region =
-  DataprocProjectsRegionsClustersStop
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterName = clusterName,
-      payload = payload,
-      projectId = projectId,
-      region = region,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDataprocProjectsRegionsClustersStop
+  clusterName
+  payload
+  projectId
+  region =
     DataprocProjectsRegionsClustersStop
-  where
-  type
-    Rs DataprocProjectsRegionsClustersStop =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterName = clusterName,
+        payload = payload,
+        projectId = projectId,
+        region = region,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DataprocProjectsRegionsClustersStop where
+  type Rs DataprocProjectsRegionsClustersStop = Operation
   type
     Scopes DataprocProjectsRegionsClustersStop =
       '[CloudPlatform'FullControl]
@@ -137,7 +134,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DataprocProjectsRegionsClustersStopResource
+              Core.Proxy DataprocProjectsRegionsClustersStopResource
           )
           Core.mempty

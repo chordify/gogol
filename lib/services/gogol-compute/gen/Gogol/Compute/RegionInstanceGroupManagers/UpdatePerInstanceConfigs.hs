@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionInstanceGroupManagers.UpdatePerInstanceConfigs
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionInstanceGroupManagers.updatePerInstanceConfigs@ method which the
 -- 'ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs' request conforms to.
@@ -104,27 +102,32 @@ newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs ::
   -- |  Name of the region scoping this request, should conform to RFC1035. See 'region'.
   Core.Text ->
   ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs
-newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs instanceGroupManager payload project region =
-  ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      instanceGroupManager = instanceGroupManager,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs
+  instanceGroupManager
+  payload
+  project
+  region =
+    ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        instanceGroupManager =
+          instanceGroupManager,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs
   where
   type
-    Rs
-      ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs =
+    Rs ComputeRegionInstanceGroupManagersUpdatePerInstanceConfigs =
       Operation
   type
     Scopes

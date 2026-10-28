@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Conversionsources.Undelete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Conversionsources.Undelete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.conversionsources.undelete@ method which the
@@ -49,19 +47,14 @@ type ContentConversionsourcesUndeleteResource =
     Core.:> "v2.1"
     Core.:> Core.Capture "merchantId" Core.Int64
     Core.:> "conversionsources"
-    Core.:> Core.CaptureMode
-              "conversionSourceId"
-              "undelete"
-              Core.Text
+    Core.:> Core.CaptureMode "conversionSourceId" "undelete" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UndeleteConversionSourceRequest
+    Core.:> Core.ReqBody '[Core.JSON] UndeleteConversionSourceRequest
     Core.:> Core.Post '[Core.JSON] ()
 
 -- | Re-enables an archived conversion source.
@@ -96,22 +89,22 @@ newContentConversionsourcesUndelete ::
   -- |  Multipart request metadata. See 'payload'.
   UndeleteConversionSourceRequest ->
   ContentConversionsourcesUndelete
-newContentConversionsourcesUndelete conversionSourceId merchantId payload =
-  ContentConversionsourcesUndelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      conversionSourceId = conversionSourceId,
-      merchantId = merchantId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newContentConversionsourcesUndelete
+  conversionSourceId
+  merchantId
+  payload =
     ContentConversionsourcesUndelete
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        conversionSourceId = conversionSourceId,
+        merchantId = merchantId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ContentConversionsourcesUndelete where
   type Rs ContentConversionsourcesUndelete = ()
   type
     Scopes ContentConversionsourcesUndelete =
@@ -131,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ContentConversionsourcesUndeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ContentConversionsourcesUndeleteResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SiteVerification.WebResource.GetToken
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SiteVerification.WebResource.GetToken
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SiteVerification.Types
 
 -- | A resource alias for @siteVerification.webResource.getToken@ method which the
@@ -52,9 +50,7 @@ type SiteVerificationWebResourceGetTokenResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               SiteVerificationWebResourceGettokenRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              SiteVerificationWebResourceGettokenResponse
+    Core.:> Core.Post '[Core.JSON] SiteVerificationWebResourceGettokenResponse
 
 -- | Get a verification token for placing on a website or domain.
 --
@@ -73,28 +69,19 @@ newSiteVerificationWebResourceGetToken ::
 newSiteVerificationWebResourceGetToken payload =
   SiteVerificationWebResourceGetToken {payload = payload}
 
-instance
-  Core.GoogleRequest
-    SiteVerificationWebResourceGetToken
-  where
+instance Core.GoogleRequest SiteVerificationWebResourceGetToken where
   type
     Rs SiteVerificationWebResourceGetToken =
       SiteVerificationWebResourceGettokenResponse
   type
     Scopes SiteVerificationWebResourceGetToken =
-      '[ Siteverification'FullControl,
-         Siteverification'VerifyOnly
-       ]
+      '[Siteverification'FullControl, Siteverification'VerifyOnly]
   requestClient SiteVerificationWebResourceGetToken {..} =
-    go
-      (Core.Just Core.AltJSON)
-      payload
-      siteVerificationService
+    go (Core.Just Core.AltJSON) payload siteVerificationService
     where
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                SiteVerificationWebResourceGetTokenResource
+              Core.Proxy SiteVerificationWebResourceGetTokenResource
           )
           Core.mempty

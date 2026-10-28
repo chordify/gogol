@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Template.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Template.Delete
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.template.delete@ method which the
 -- 'FusionTablesTemplateDelete' request conforms to.
@@ -73,12 +71,12 @@ newFusionTablesTemplateDelete ::
   Core.Int32 ->
   FusionTablesTemplateDelete
 newFusionTablesTemplateDelete tableId templateId =
-  FusionTablesTemplateDelete {tableId = tableId, templateId = templateId}
+  FusionTablesTemplateDelete
+    { tableId = tableId,
+      templateId = templateId
+    }
 
-instance
-  Core.GoogleRequest
-    FusionTablesTemplateDelete
-  where
+instance Core.GoogleRequest FusionTablesTemplateDelete where
   type Rs FusionTablesTemplateDelete = ()
   type
     Scopes FusionTablesTemplateDelete =
@@ -92,7 +90,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTemplateDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTemplateDeleteResource)
           Core.mempty

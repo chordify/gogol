@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spanner.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Spanner.Internal.Sum
@@ -68,11 +66,28 @@ module Gogol.Spanner.Internal.Sum
         ..
       ),
 
+    -- * CreateBackupEncryptionConfig_EncryptionType
+    CreateBackupEncryptionConfig_EncryptionType
+      ( CreateBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+        CreateBackupEncryptionConfig_EncryptionType_USEDATABASEENCRYPTION,
+        CreateBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+        CreateBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+        ..
+      ),
+
     -- * CreateDatabaseRequest_DatabaseDialect
     CreateDatabaseRequest_DatabaseDialect
       ( CreateDatabaseRequest_DatabaseDialect_DATABASEDIALECTUNSPECIFIED,
         CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL,
         CreateDatabaseRequest_DatabaseDialect_Postgresql,
+        ..
+      ),
+
+    -- * CreateInstanceMetadata_ExpectedFulfillmentPeriod
+    CreateInstanceMetadata_ExpectedFulfillmentPeriod
+      ( CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED,
+        CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL,
+        CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED,
         ..
       ),
 
@@ -116,6 +131,8 @@ module Gogol.Spanner.Internal.Sum
       ( ExecuteSqlRequest_QueryMode_Normal,
         ExecuteSqlRequest_QueryMode_Plan,
         ExecuteSqlRequest_QueryMode_Profile,
+        ExecuteSqlRequest_QueryMode_WITHSTATS,
+        ExecuteSqlRequest_QueryMode_WITHPLANANDSTATS,
         ..
       ),
 
@@ -124,6 +141,23 @@ module Gogol.Spanner.Internal.Sum
       ( FreeInstanceMetadata_ExpireBehavior_EXPIREBEHAVIORUNSPECIFIED,
         FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED,
         FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD,
+        ..
+      ),
+
+    -- * Instance_DefaultBackupScheduleType
+    Instance_DefaultBackupScheduleType
+      ( Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED,
+        Instance_DefaultBackupScheduleType_None,
+        Instance_DefaultBackupScheduleType_Automatic,
+        ..
+      ),
+
+    -- * Instance_Edition
+    Instance_Edition
+      ( Instance_Edition_EDITIONUNSPECIFIED,
+        Instance_Edition_Standard,
+        Instance_Edition_Enterprise,
+        Instance_Edition_ENTERPRISEPLUS,
         ..
       ),
 
@@ -161,11 +195,28 @@ module Gogol.Spanner.Internal.Sum
         ..
       ),
 
+    -- * InstanceConfig_QuorumType
+    InstanceConfig_QuorumType
+      ( InstanceConfig_QuorumType_QUORUMTYPEUNSPECIFIED,
+        InstanceConfig_QuorumType_Region,
+        InstanceConfig_QuorumType_DUALREGION,
+        InstanceConfig_QuorumType_MULTIREGION,
+        ..
+      ),
+
     -- * InstanceConfig_State
     InstanceConfig_State
       ( InstanceConfig_State_STATEUNSPECIFIED,
         InstanceConfig_State_Creating,
         InstanceConfig_State_Ready,
+        ..
+      ),
+
+    -- * InstancePartition_State
+    InstancePartition_State
+      ( InstancePartition_State_STATEUNSPECIFIED,
+        InstancePartition_State_Creating,
+        InstancePartition_State_Ready,
         ..
       ),
 
@@ -185,6 +236,30 @@ module Gogol.Spanner.Internal.Sum
         ..
       ),
 
+    -- * QuorumInfo_Initiator
+    QuorumInfo_Initiator
+      ( QuorumInfo_Initiator_INITIATORUNSPECIFIED,
+        QuorumInfo_Initiator_Google,
+        QuorumInfo_Initiator_User,
+        ..
+      ),
+
+    -- * ReadRequest_LockHint
+    ReadRequest_LockHint
+      ( ReadRequest_LockHint_LOCKHINTUNSPECIFIED,
+        ReadRequest_LockHint_LOCKHINTSHARED,
+        ReadRequest_LockHint_LOCKHINTEXCLUSIVE,
+        ..
+      ),
+
+    -- * ReadRequest_OrderBy
+    ReadRequest_OrderBy
+      ( ReadRequest_OrderBy_ORDERBYUNSPECIFIED,
+        ReadRequest_OrderBy_ORDERBYPRIMARYKEY,
+        ReadRequest_OrderBy_ORDERBYNOORDER,
+        ..
+      ),
+
     -- * ReadWrite_ReadLockMode
     ReadWrite_ReadLockMode
       ( ReadWrite_ReadLockMode_READLOCKMODEUNSPECIFIED,
@@ -199,6 +274,14 @@ module Gogol.Spanner.Internal.Sum
         ReplicaInfo_Type_READWRITE,
         ReplicaInfo_Type_READONLY,
         ReplicaInfo_Type_Witness,
+        ..
+      ),
+
+    -- * ReplicaSelection_Type
+    ReplicaSelection_Type
+      ( ReplicaSelection_Type_TYPEUNSPECIFIED,
+        ReplicaSelection_Type_READWRITE,
+        ReplicaSelection_Type_READONLY,
         ..
       ),
 
@@ -240,6 +323,7 @@ module Gogol.Spanner.Internal.Sum
         Type_Code_Bool,
         Type_Code_INT64,
         Type_Code_FLOAT64,
+        Type_Code_FLOAT32,
         Type_Code_Timestamp,
         Type_Code_Date,
         Type_Code_String,
@@ -250,6 +334,7 @@ module Gogol.Spanner.Internal.Sum
         Type_Code_Json,
         Type_Code_Proto,
         Type_Code_Enum',
+        Type_Code_Interval,
         ..
       ),
 
@@ -258,6 +343,15 @@ module Gogol.Spanner.Internal.Sum
       ( Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
         Type_TypeAnnotation_PGNUMERIC,
         Type_TypeAnnotation_PGJSONB,
+        Type_TypeAnnotation_PGOID,
+        ..
+      ),
+
+    -- * UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+    UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+      ( UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED,
+        UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL,
+        UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED,
         ..
       ),
 
@@ -296,7 +390,7 @@ module Gogol.Spanner.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -468,6 +562,43 @@ pattern CopyBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION = Co
   CopyBackupEncryptionConfig_EncryptionType
   #-}
 
+-- | Required. The encryption type of the backup.
+newtype CreateBackupEncryptionConfig_EncryptionType = CreateBackupEncryptionConfig_EncryptionType {fromCreateBackupEncryptionConfig_EncryptionType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified. Do not use.
+pattern CreateBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED :: CreateBackupEncryptionConfig_EncryptionType
+pattern CreateBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED = CreateBackupEncryptionConfig_EncryptionType "ENCRYPTION_TYPE_UNSPECIFIED"
+
+-- | Use the same encryption configuration as the database. This is the default option when encryption_config is empty. For example, if the database is using @Customer_Managed_Encryption@, the backup will be using the same Cloud KMS key as the database.
+pattern CreateBackupEncryptionConfig_EncryptionType_USEDATABASEENCRYPTION :: CreateBackupEncryptionConfig_EncryptionType
+pattern CreateBackupEncryptionConfig_EncryptionType_USEDATABASEENCRYPTION = CreateBackupEncryptionConfig_EncryptionType "USE_DATABASE_ENCRYPTION"
+
+-- | Use Google default encryption.
+pattern CreateBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION :: CreateBackupEncryptionConfig_EncryptionType
+pattern CreateBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION = CreateBackupEncryptionConfig_EncryptionType "GOOGLE_DEFAULT_ENCRYPTION"
+
+-- | Use customer managed encryption. If specified, @kms_key_name@ must contain a valid Cloud KMS key.
+pattern CreateBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION :: CreateBackupEncryptionConfig_EncryptionType
+pattern CreateBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION = CreateBackupEncryptionConfig_EncryptionType "CUSTOMER_MANAGED_ENCRYPTION"
+
+{-# COMPLETE
+  CreateBackupEncryptionConfig_EncryptionType_ENCRYPTIONTYPEUNSPECIFIED,
+  CreateBackupEncryptionConfig_EncryptionType_USEDATABASEENCRYPTION,
+  CreateBackupEncryptionConfig_EncryptionType_GOOGLEDEFAULTENCRYPTION,
+  CreateBackupEncryptionConfig_EncryptionType_CUSTOMERMANAGEDENCRYPTION,
+  CreateBackupEncryptionConfig_EncryptionType
+  #-}
+
 -- | Optional. The dialect of the Cloud Spanner Database.
 newtype CreateDatabaseRequest_DatabaseDialect = CreateDatabaseRequest_DatabaseDialect {fromCreateDatabaseRequest_DatabaseDialect :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -498,6 +629,38 @@ pattern CreateDatabaseRequest_DatabaseDialect_Postgresql = CreateDatabaseRequest
   CreateDatabaseRequest_DatabaseDialect_GOOGLESTANDARDSQL,
   CreateDatabaseRequest_DatabaseDialect_Postgresql,
   CreateDatabaseRequest_DatabaseDialect
+  #-}
+
+-- | The expected fulfillment period of this create operation.
+newtype CreateInstanceMetadata_ExpectedFulfillmentPeriod = CreateInstanceMetadata_ExpectedFulfillmentPeriod {fromCreateInstanceMetadata_ExpectedFulfillmentPeriod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED :: CreateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED = CreateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_UNSPECIFIED"
+
+-- | Normal fulfillment period. The operation is expected to complete within minutes.
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL :: CreateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL = CreateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_NORMAL"
+
+-- | Extended fulfillment period. It can take up to an hour for the operation to complete.
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED :: CreateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED = CreateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_EXTENDED"
+
+{-# COMPLETE
+  CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED,
+  CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL,
+  CreateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED,
+  CreateInstanceMetadata_ExpectedFulfillmentPeriod
   #-}
 
 -- | Output only. The dialect of the Cloud Spanner Database.
@@ -664,14 +827,24 @@ pattern ExecuteSqlRequest_QueryMode_Normal = ExecuteSqlRequest_QueryMode "NORMAL
 pattern ExecuteSqlRequest_QueryMode_Plan :: ExecuteSqlRequest_QueryMode
 pattern ExecuteSqlRequest_QueryMode_Plan = ExecuteSqlRequest_QueryMode "PLAN"
 
--- | This mode returns both the query plan and the execution statistics along with the results.
+-- | This mode returns the query plan, overall execution statistics, operator level execution statistics along with the results. This has a performance overhead compared to the other modes. It is not recommended to use this mode for production traffic.
 pattern ExecuteSqlRequest_QueryMode_Profile :: ExecuteSqlRequest_QueryMode
 pattern ExecuteSqlRequest_QueryMode_Profile = ExecuteSqlRequest_QueryMode "PROFILE"
+
+-- | This mode returns the overall (but not operator-level) execution statistics along with the results.
+pattern ExecuteSqlRequest_QueryMode_WITHSTATS :: ExecuteSqlRequest_QueryMode
+pattern ExecuteSqlRequest_QueryMode_WITHSTATS = ExecuteSqlRequest_QueryMode "WITH_STATS"
+
+-- | This mode returns the query plan, overall (but not operator-level) execution statistics along with the results.
+pattern ExecuteSqlRequest_QueryMode_WITHPLANANDSTATS :: ExecuteSqlRequest_QueryMode
+pattern ExecuteSqlRequest_QueryMode_WITHPLANANDSTATS = ExecuteSqlRequest_QueryMode "WITH_PLAN_AND_STATS"
 
 {-# COMPLETE
   ExecuteSqlRequest_QueryMode_Normal,
   ExecuteSqlRequest_QueryMode_Plan,
   ExecuteSqlRequest_QueryMode_Profile,
+  ExecuteSqlRequest_QueryMode_WITHSTATS,
+  ExecuteSqlRequest_QueryMode_WITHPLANANDSTATS,
   ExecuteSqlRequest_QueryMode
   #-}
 
@@ -705,6 +878,75 @@ pattern FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD = FreeInstanc
   FreeInstanceMetadata_ExpireBehavior_FREETOPROVISIONED,
   FreeInstanceMetadata_ExpireBehavior_REMOVEAFTERGRACEPERIOD,
   FreeInstanceMetadata_ExpireBehavior
+  #-}
+
+-- | Optional. Controls the default backup schedule behavior for new databases within the instance. By default, a backup schedule is created automatically when a new database is created in a new instance. Note that the @AUTOMATIC@ value isn\'t permitted for free instances, as backups and backup schedules aren\'t supported for free instances. In the @GetInstance@ or @ListInstances@ response, if the value of @default_backup_schedule_type@ isn\'t set, or set to @NONE@, Spanner doesn\'t create a default backup schedule for new databases in the instance.
+newtype Instance_DefaultBackupScheduleType = Instance_DefaultBackupScheduleType {fromInstance_DefaultBackupScheduleType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED :: Instance_DefaultBackupScheduleType
+pattern Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED = Instance_DefaultBackupScheduleType "DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED"
+
+-- | A default backup schedule isn\'t created automatically when a new database is created in the instance.
+pattern Instance_DefaultBackupScheduleType_None :: Instance_DefaultBackupScheduleType
+pattern Instance_DefaultBackupScheduleType_None = Instance_DefaultBackupScheduleType "NONE"
+
+-- | A default backup schedule is created automatically when a new database is created in the instance. The default backup schedule creates a full backup every 24 hours. These full backups are retained for 7 days. You can edit or delete the default backup schedule once it\'s created.
+pattern Instance_DefaultBackupScheduleType_Automatic :: Instance_DefaultBackupScheduleType
+pattern Instance_DefaultBackupScheduleType_Automatic = Instance_DefaultBackupScheduleType "AUTOMATIC"
+
+{-# COMPLETE
+  Instance_DefaultBackupScheduleType_DEFAULTBACKUPSCHEDULETYPEUNSPECIFIED,
+  Instance_DefaultBackupScheduleType_None,
+  Instance_DefaultBackupScheduleType_Automatic,
+  Instance_DefaultBackupScheduleType
+  #-}
+
+-- | Optional. The @Edition@ of the current instance.
+newtype Instance_Edition = Instance_Edition {fromInstance_Edition :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Edition not specified.
+pattern Instance_Edition_EDITIONUNSPECIFIED :: Instance_Edition
+pattern Instance_Edition_EDITIONUNSPECIFIED = Instance_Edition "EDITION_UNSPECIFIED"
+
+-- | Standard edition.
+pattern Instance_Edition_Standard :: Instance_Edition
+pattern Instance_Edition_Standard = Instance_Edition "STANDARD"
+
+-- | Enterprise edition.
+pattern Instance_Edition_Enterprise :: Instance_Edition
+pattern Instance_Edition_Enterprise = Instance_Edition "ENTERPRISE"
+
+-- | Enterprise Plus edition.
+pattern Instance_Edition_ENTERPRISEPLUS :: Instance_Edition
+pattern Instance_Edition_ENTERPRISEPLUS = Instance_Edition "ENTERPRISE_PLUS"
+
+{-# COMPLETE
+  Instance_Edition_EDITIONUNSPECIFIED,
+  Instance_Edition_Standard,
+  Instance_Edition_Enterprise,
+  Instance_Edition_ENTERPRISEPLUS,
+  Instance_Edition
   #-}
 
 -- | The @InstanceType@ of the current instance.
@@ -771,7 +1013,7 @@ pattern Instance_State_Ready = Instance_State "READY"
   Instance_State
   #-}
 
--- | Output only. Whether this instance config is a Google or User Managed Configuration.
+-- | Output only. Whether this instance configuration is a Google-managed or user-managed configuration.
 newtype InstanceConfig_ConfigType = InstanceConfig_ConfigType {fromInstanceConfig_ConfigType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -788,11 +1030,11 @@ newtype InstanceConfig_ConfigType = InstanceConfig_ConfigType {fromInstanceConfi
 pattern InstanceConfig_ConfigType_TYPEUNSPECIFIED :: InstanceConfig_ConfigType
 pattern InstanceConfig_ConfigType_TYPEUNSPECIFIED = InstanceConfig_ConfigType "TYPE_UNSPECIFIED"
 
--- | Google managed configuration.
+-- | Google-managed configuration.
 pattern InstanceConfig_ConfigType_GOOGLEMANAGED :: InstanceConfig_ConfigType
 pattern InstanceConfig_ConfigType_GOOGLEMANAGED = InstanceConfig_ConfigType "GOOGLE_MANAGED"
 
--- | User managed configuration.
+-- | User-managed configuration.
 pattern InstanceConfig_ConfigType_USERMANAGED :: InstanceConfig_ConfigType
 pattern InstanceConfig_ConfigType_USERMANAGED = InstanceConfig_ConfigType "USER_MANAGED"
 
@@ -803,7 +1045,7 @@ pattern InstanceConfig_ConfigType_USERMANAGED = InstanceConfig_ConfigType "USER_
   InstanceConfig_ConfigType
   #-}
 
--- | Output only. Describes whether free instances are available to be created in this instance config.
+-- | Output only. Describes whether free instances are available to be created in this instance configuration.
 newtype InstanceConfig_FreeInstanceAvailability = InstanceConfig_FreeInstanceAvailability {fromInstanceConfig_FreeInstanceAvailability :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -820,19 +1062,19 @@ newtype InstanceConfig_FreeInstanceAvailability = InstanceConfig_FreeInstanceAva
 pattern InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED :: InstanceConfig_FreeInstanceAvailability
 pattern InstanceConfig_FreeInstanceAvailability_FREEINSTANCEAVAILABILITYUNSPECIFIED = InstanceConfig_FreeInstanceAvailability "FREE_INSTANCE_AVAILABILITY_UNSPECIFIED"
 
--- | Indicates that free instances are available to be created in this instance config.
+-- | Indicates that free instances are available to be created in this instance configuration.
 pattern InstanceConfig_FreeInstanceAvailability_Available :: InstanceConfig_FreeInstanceAvailability
 pattern InstanceConfig_FreeInstanceAvailability_Available = InstanceConfig_FreeInstanceAvailability "AVAILABLE"
 
--- | Indicates that free instances are not supported in this instance config.
+-- | Indicates that free instances are not supported in this instance configuration.
 pattern InstanceConfig_FreeInstanceAvailability_Unsupported :: InstanceConfig_FreeInstanceAvailability
 pattern InstanceConfig_FreeInstanceAvailability_Unsupported = InstanceConfig_FreeInstanceAvailability "UNSUPPORTED"
 
--- | Indicates that free instances are currently not available to be created in this instance config.
+-- | Indicates that free instances are currently not available to be created in this instance configuration.
 pattern InstanceConfig_FreeInstanceAvailability_Disabled :: InstanceConfig_FreeInstanceAvailability
 pattern InstanceConfig_FreeInstanceAvailability_Disabled = InstanceConfig_FreeInstanceAvailability "DISABLED"
 
--- | Indicates that additional free instances cannot be created in this instance config because the project has reached its limit of free instances.
+-- | Indicates that additional free instances cannot be created in this instance configuration because the project has reached its limit of free instances.
 pattern InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED :: InstanceConfig_FreeInstanceAvailability
 pattern InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED = InstanceConfig_FreeInstanceAvailability "QUOTA_EXCEEDED"
 
@@ -845,7 +1087,44 @@ pattern InstanceConfig_FreeInstanceAvailability_QUOTAEXCEEDED = InstanceConfig_F
   InstanceConfig_FreeInstanceAvailability
   #-}
 
--- | Output only. The current instance config state.
+-- | Output only. The @QuorumType@ of the instance configuration.
+newtype InstanceConfig_QuorumType = InstanceConfig_QuorumType {fromInstanceConfig_QuorumType :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Quorum type not specified.
+pattern InstanceConfig_QuorumType_QUORUMTYPEUNSPECIFIED :: InstanceConfig_QuorumType
+pattern InstanceConfig_QuorumType_QUORUMTYPEUNSPECIFIED = InstanceConfig_QuorumType "QUORUM_TYPE_UNSPECIFIED"
+
+-- | An instance configuration tagged with @REGION@ quorum type forms a write quorum in a single region.
+pattern InstanceConfig_QuorumType_Region :: InstanceConfig_QuorumType
+pattern InstanceConfig_QuorumType_Region = InstanceConfig_QuorumType "REGION"
+
+-- | An instance configuration tagged with the @DUAL_REGION@ quorum type forms a write quorum with exactly two read-write regions in a multi-region configuration. This instance configuration requires failover in the event of regional failures.
+pattern InstanceConfig_QuorumType_DUALREGION :: InstanceConfig_QuorumType
+pattern InstanceConfig_QuorumType_DUALREGION = InstanceConfig_QuorumType "DUAL_REGION"
+
+-- | An instance configuration tagged with the @MULTI_REGION@ quorum type forms a write quorum from replicas that are spread across more than one region in a multi-region configuration.
+pattern InstanceConfig_QuorumType_MULTIREGION :: InstanceConfig_QuorumType
+pattern InstanceConfig_QuorumType_MULTIREGION = InstanceConfig_QuorumType "MULTI_REGION"
+
+{-# COMPLETE
+  InstanceConfig_QuorumType_QUORUMTYPEUNSPECIFIED,
+  InstanceConfig_QuorumType_Region,
+  InstanceConfig_QuorumType_DUALREGION,
+  InstanceConfig_QuorumType_MULTIREGION,
+  InstanceConfig_QuorumType
+  #-}
+
+-- | Output only. The current instance configuration state. Applicable only for @USER_MANAGED@ configurations.
 newtype InstanceConfig_State = InstanceConfig_State {fromInstanceConfig_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
   deriving newtype
@@ -862,11 +1141,11 @@ newtype InstanceConfig_State = InstanceConfig_State {fromInstanceConfig_State ::
 pattern InstanceConfig_State_STATEUNSPECIFIED :: InstanceConfig_State
 pattern InstanceConfig_State_STATEUNSPECIFIED = InstanceConfig_State "STATE_UNSPECIFIED"
 
--- | The instance config is still being created.
+-- | The instance configuration is still being created.
 pattern InstanceConfig_State_Creating :: InstanceConfig_State
 pattern InstanceConfig_State_Creating = InstanceConfig_State "CREATING"
 
--- | The instance config is fully created and ready to be used to create instances.
+-- | The instance configuration is fully created and ready to be used to create instances.
 pattern InstanceConfig_State_Ready :: InstanceConfig_State
 pattern InstanceConfig_State_Ready = InstanceConfig_State "READY"
 
@@ -875,6 +1154,38 @@ pattern InstanceConfig_State_Ready = InstanceConfig_State "READY"
   InstanceConfig_State_Creating,
   InstanceConfig_State_Ready,
   InstanceConfig_State
+  #-}
+
+-- | Output only. The current instance partition state.
+newtype InstancePartition_State = InstancePartition_State {fromInstancePartition_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern InstancePartition_State_STATEUNSPECIFIED :: InstancePartition_State
+pattern InstancePartition_State_STATEUNSPECIFIED = InstancePartition_State "STATE_UNSPECIFIED"
+
+-- | The instance partition is still being created. Resources may not be available yet, and operations such as creating placements using this instance partition may not work.
+pattern InstancePartition_State_Creating :: InstancePartition_State
+pattern InstancePartition_State_Creating = InstancePartition_State "CREATING"
+
+-- | The instance partition is fully created and ready to do work such as creating placements and using in databases.
+pattern InstancePartition_State_Ready :: InstancePartition_State
+pattern InstancePartition_State_Ready = InstancePartition_State "READY"
+
+{-# COMPLETE
+  InstancePartition_State_STATEUNSPECIFIED,
+  InstancePartition_State_Creating,
+  InstancePartition_State_Ready,
+  InstancePartition_State
   #-}
 
 -- | The aggregation function used to aggregate each key bucket
@@ -939,6 +1250,103 @@ pattern PlanNode_Kind_Scalar = PlanNode_Kind "SCALAR"
   PlanNode_Kind_Relational,
   PlanNode_Kind_Scalar,
   PlanNode_Kind
+  #-}
+
+-- | Output only. Whether this @ChangeQuorum@ is Google or User initiated.
+newtype QuorumInfo_Initiator = QuorumInfo_Initiator {fromQuorumInfo_Initiator :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Unspecified.
+pattern QuorumInfo_Initiator_INITIATORUNSPECIFIED :: QuorumInfo_Initiator
+pattern QuorumInfo_Initiator_INITIATORUNSPECIFIED = QuorumInfo_Initiator "INITIATOR_UNSPECIFIED"
+
+-- | @ChangeQuorum@ initiated by Google.
+pattern QuorumInfo_Initiator_Google :: QuorumInfo_Initiator
+pattern QuorumInfo_Initiator_Google = QuorumInfo_Initiator "GOOGLE"
+
+-- | @ChangeQuorum@ initiated by User.
+pattern QuorumInfo_Initiator_User :: QuorumInfo_Initiator
+pattern QuorumInfo_Initiator_User = QuorumInfo_Initiator "USER"
+
+{-# COMPLETE
+  QuorumInfo_Initiator_INITIATORUNSPECIFIED,
+  QuorumInfo_Initiator_Google,
+  QuorumInfo_Initiator_User,
+  QuorumInfo_Initiator
+  #-}
+
+-- | Optional. Lock Hint for the request, it can only be used with read-write transactions.
+newtype ReadRequest_LockHint = ReadRequest_LockHint {fromReadRequest_LockHint :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. LOCK/HINT/UNSPECIFIED is equivalent to LOCK/HINT/SHARED.
+pattern ReadRequest_LockHint_LOCKHINTUNSPECIFIED :: ReadRequest_LockHint
+pattern ReadRequest_LockHint_LOCKHINTUNSPECIFIED = ReadRequest_LockHint "LOCK_HINT_UNSPECIFIED"
+
+-- | Acquire shared locks. By default when you perform a read as part of a read-write transaction, Spanner acquires shared read locks, which allows other reads to still access the data until your transaction is ready to commit. When your transaction is committing and writes are being applied, the transaction attempts to upgrade to an exclusive lock for any data you are writing. For more information about locks, see <https://cloud.google.com/spanner/docs/introspection/lock-statistics#explain-lock-modes Lock modes>.
+pattern ReadRequest_LockHint_LOCKHINTSHARED :: ReadRequest_LockHint
+pattern ReadRequest_LockHint_LOCKHINTSHARED = ReadRequest_LockHint "LOCK_HINT_SHARED"
+
+-- | Acquire exclusive locks. Requesting exclusive locks is beneficial if you observe high write contention, which means you notice that multiple transactions are concurrently trying to read and write to the same data, resulting in a large number of aborts. This problem occurs when two transactions initially acquire shared locks and then both try to upgrade to exclusive locks at the same time. In this situation both transactions are waiting for the other to give up their lock, resulting in a deadlocked situation. Spanner is able to detect this occurring and force one of the transactions to abort. However, this is a slow and expensive operation and results in lower performance. In this case it makes sense to acquire exclusive locks at the start of the transaction because then when multiple transactions try to act on the same data, they automatically get serialized. Each transaction waits its turn to acquire the lock and avoids getting into deadlock situations. Because the exclusive lock hint is just a hint, it
+-- should not be considered equivalent to a mutex. In other words, you should not use Spanner exclusive locks as a mutual exclusion mechanism for the execution of code outside of Spanner. __Note:__ Request exclusive locks judiciously because they block others from reading that data for the entire transaction, rather than just when the writes are being performed. Unless you observe high write contention, you should use the default of shared read locks so you don\'t prematurely block other clients from reading the data that you\'re writing to.
+pattern ReadRequest_LockHint_LOCKHINTEXCLUSIVE :: ReadRequest_LockHint
+pattern ReadRequest_LockHint_LOCKHINTEXCLUSIVE = ReadRequest_LockHint "LOCK_HINT_EXCLUSIVE"
+
+{-# COMPLETE
+  ReadRequest_LockHint_LOCKHINTUNSPECIFIED,
+  ReadRequest_LockHint_LOCKHINTSHARED,
+  ReadRequest_LockHint_LOCKHINTEXCLUSIVE,
+  ReadRequest_LockHint
+  #-}
+
+-- | Optional. Order for the returned rows. By default, Spanner will return result rows in primary key order except for PartitionRead requests. For applications that do not require rows to be returned in primary key (@ORDER_BY_PRIMARY_KEY@) order, setting @ORDER_BY_NO_ORDER@ option allows Spanner to optimize row retrieval, resulting in lower latencies in certain cases (e.g. bulk point lookups).
+newtype ReadRequest_OrderBy = ReadRequest_OrderBy {fromReadRequest_OrderBy :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default value. ORDER/BY/UNSPECIFIED is equivalent to ORDER/BY/PRIMARY_KEY.
+pattern ReadRequest_OrderBy_ORDERBYUNSPECIFIED :: ReadRequest_OrderBy
+pattern ReadRequest_OrderBy_ORDERBYUNSPECIFIED = ReadRequest_OrderBy "ORDER_BY_UNSPECIFIED"
+
+-- | Read rows are returned in primary key order. In the event that this option is used in conjunction with the @partition_token@ field, the API will return an @INVALID_ARGUMENT@ error.
+pattern ReadRequest_OrderBy_ORDERBYPRIMARYKEY :: ReadRequest_OrderBy
+pattern ReadRequest_OrderBy_ORDERBYPRIMARYKEY = ReadRequest_OrderBy "ORDER_BY_PRIMARY_KEY"
+
+-- | Read rows are returned in any order.
+pattern ReadRequest_OrderBy_ORDERBYNOORDER :: ReadRequest_OrderBy
+pattern ReadRequest_OrderBy_ORDERBYNOORDER = ReadRequest_OrderBy "ORDER_BY_NO_ORDER"
+
+{-# COMPLETE
+  ReadRequest_OrderBy_ORDERBYUNSPECIFIED,
+  ReadRequest_OrderBy_ORDERBYPRIMARYKEY,
+  ReadRequest_OrderBy_ORDERBYNOORDER,
+  ReadRequest_OrderBy
   #-}
 
 -- | Read lock mode for the transaction.
@@ -1008,6 +1416,38 @@ pattern ReplicaInfo_Type_Witness = ReplicaInfo_Type "WITNESS"
   ReplicaInfo_Type_READONLY,
   ReplicaInfo_Type_Witness,
   ReplicaInfo_Type
+  #-}
+
+-- | The type of replica.
+newtype ReplicaSelection_Type = ReplicaSelection_Type {fromReplicaSelection_Type :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern ReplicaSelection_Type_TYPEUNSPECIFIED :: ReplicaSelection_Type
+pattern ReplicaSelection_Type_TYPEUNSPECIFIED = ReplicaSelection_Type "TYPE_UNSPECIFIED"
+
+-- | Read-write replicas support both reads and writes.
+pattern ReplicaSelection_Type_READWRITE :: ReplicaSelection_Type
+pattern ReplicaSelection_Type_READWRITE = ReplicaSelection_Type "READ_WRITE"
+
+-- | Read-only replicas only support reads (not writes).
+pattern ReplicaSelection_Type_READONLY :: ReplicaSelection_Type
+pattern ReplicaSelection_Type_READONLY = ReplicaSelection_Type "READ_ONLY"
+
+{-# COMPLETE
+  ReplicaSelection_Type_TYPEUNSPECIFIED,
+  ReplicaSelection_Type_READWRITE,
+  ReplicaSelection_Type_READONLY,
+  ReplicaSelection_Type
   #-}
 
 -- | Priority for the request.
@@ -1167,6 +1607,10 @@ pattern Type_Code_INT64 = Type_Code "INT64"
 pattern Type_Code_FLOAT64 :: Type_Code
 pattern Type_Code_FLOAT64 = Type_Code "FLOAT64"
 
+-- | Encoded as @number@, or the strings @\"NaN\"@, @\"Infinity\"@, or @\"-Infinity\"@.
+pattern Type_Code_FLOAT32 :: Type_Code
+pattern Type_Code_FLOAT32 = Type_Code "FLOAT32"
+
 -- | Encoded as @string@ in RFC 3339 timestamp format. The time zone must be present, and must be @\"Z\"@. If the schema has the column option @allow_commit_timestamp=true@, the placeholder string @\"spanner.commit_timestamp()\"@ can be used to instruct the system to insert the commit timestamp associated with the transaction commit.
 pattern Type_Code_Timestamp :: Type_Code
 pattern Type_Code_Timestamp = Type_Code "TIMESTAMP"
@@ -1207,11 +1651,16 @@ pattern Type_Code_Proto = Type_Code "PROTO"
 pattern Type_Code_Enum' :: Type_Code
 pattern Type_Code_Enum' = Type_Code "ENUM"
 
+-- | Encoded as @string@, in @ISO8601@ duration format - @P[n]Y[n]M[n]DT[n]H[n]M[n[.fraction]]S@ where @n@ is an integer. For example, @P1Y2M3DT4H5M6.5S@ represents time duration of 1 year, 2 months, 3 days, 4 hours, 5 minutes, and 6.5 seconds.
+pattern Type_Code_Interval :: Type_Code
+pattern Type_Code_Interval = Type_Code "INTERVAL"
+
 {-# COMPLETE
   Type_Code_TYPECODEUNSPECIFIED,
   Type_Code_Bool,
   Type_Code_INT64,
   Type_Code_FLOAT64,
+  Type_Code_FLOAT32,
   Type_Code_Timestamp,
   Type_Code_Date,
   Type_Code_String,
@@ -1222,6 +1671,7 @@ pattern Type_Code_Enum' = Type_Code "ENUM"
   Type_Code_Json,
   Type_Code_Proto,
   Type_Code_Enum',
+  Type_Code_Interval,
   Type_Code
   #-}
 
@@ -1250,11 +1700,48 @@ pattern Type_TypeAnnotation_PGNUMERIC = Type_TypeAnnotation "PG_NUMERIC"
 pattern Type_TypeAnnotation_PGJSONB :: Type_TypeAnnotation
 pattern Type_TypeAnnotation_PGJSONB = Type_TypeAnnotation "PG_JSONB"
 
+-- | PostgreSQL compatible OID type. This annotation can be used by a client interacting with PostgreSQL-enabled Spanner database to specify that a value should be treated using the semantics of the OID type.
+pattern Type_TypeAnnotation_PGOID :: Type_TypeAnnotation
+pattern Type_TypeAnnotation_PGOID = Type_TypeAnnotation "PG_OID"
+
 {-# COMPLETE
   Type_TypeAnnotation_TYPEANNOTATIONCODEUNSPECIFIED,
   Type_TypeAnnotation_PGNUMERIC,
   Type_TypeAnnotation_PGJSONB,
+  Type_TypeAnnotation_PGOID,
   Type_TypeAnnotation
+  #-}
+
+-- | The expected fulfillment period of this update operation.
+newtype UpdateInstanceMetadata_ExpectedFulfillmentPeriod = UpdateInstanceMetadata_ExpectedFulfillmentPeriod {fromUpdateInstanceMetadata_ExpectedFulfillmentPeriod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Not specified.
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED :: UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED = UpdateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_UNSPECIFIED"
+
+-- | Normal fulfillment period. The operation is expected to complete within minutes.
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL :: UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL = UpdateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_NORMAL"
+
+-- | Extended fulfillment period. It can take up to an hour for the operation to complete.
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED :: UpdateInstanceMetadata_ExpectedFulfillmentPeriod
+pattern UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED = UpdateInstanceMetadata_ExpectedFulfillmentPeriod "FULFILLMENT_PERIOD_EXTENDED"
+
+{-# COMPLETE
+  UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODUNSPECIFIED,
+  UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODNORMAL,
+  UpdateInstanceMetadata_ExpectedFulfillmentPeriod_FULFILLMENTPERIODEXTENDED,
+  UpdateInstanceMetadata_ExpectedFulfillmentPeriod
   #-}
 
 -- | The unit for the key: e.g. \'key\' or \'chunk\'.

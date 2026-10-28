@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spectrum.Paws.VerifyDevice
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spectrum.Paws.VerifyDevice
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.verifyDevice@ method which the
@@ -71,16 +69,12 @@ newSpectrumPawsVerifyDevice payload =
   SpectrumPawsVerifyDevice {payload = payload}
 
 instance Core.GoogleRequest SpectrumPawsVerifyDevice where
-  type
-    Rs SpectrumPawsVerifyDevice =
-      PawsVerifyDeviceResponse
+  type Rs SpectrumPawsVerifyDevice = PawsVerifyDeviceResponse
   type Scopes SpectrumPawsVerifyDevice = '[]
   requestClient SpectrumPawsVerifyDevice {..} =
     go (Core.Just Core.AltJSON) payload spectrumService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SpectrumPawsVerifyDeviceResource
-          )
+          (Core.Proxy :: Core.Proxy SpectrumPawsVerifyDeviceResource)
           Core.mempty

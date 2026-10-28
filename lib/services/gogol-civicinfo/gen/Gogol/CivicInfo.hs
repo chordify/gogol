@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CivicInfo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -34,6 +32,11 @@ module Gogol.CivicInfo
     civicInfoService,
 
     -- * Resources
+
+    -- ** civicinfo.divisions.queryDivisionByAddress
+    CivicInfoDivisionsQueryDivisionByAddressResource,
+    CivicInfoDivisionsQueryDivisionByAddress (..),
+    newCivicInfoDivisionsQueryDivisionByAddress,
 
     -- ** civicinfo.divisions.search
     CivicInfoDivisionsSearchResource,
@@ -91,6 +94,14 @@ module Gogol.CivicInfo
     -- ** Contest_RolesItem
     Contest_RolesItem (..),
 
+    -- ** DivisionByAddressResponse
+    DivisionByAddressResponse (..),
+    newDivisionByAddressResponse,
+
+    -- ** DivisionByAddressResponse_Divisions
+    DivisionByAddressResponse_Divisions (..),
+    newDivisionByAddressResponse_Divisions,
+
     -- ** DivisionSearchResponse
     DivisionSearchResponse (..),
     newDivisionSearchResponse,
@@ -121,24 +132,9 @@ module Gogol.CivicInfo
     -- ** ElectoralDistrict_Scope
     ElectoralDistrict_Scope (..),
 
-    -- ** FeatureIdProto
-    FeatureIdProto (..),
-    newFeatureIdProto,
-
-    -- ** GeocodingSummary
-    GeocodingSummary (..),
-    newGeocodingSummary,
-
-    -- ** GeocodingSummary_FeatureType
-    GeocodingSummary_FeatureType (..),
-
     -- ** GeographicDivision
     GeographicDivision (..),
     newGeographicDivision,
-
-    -- ** MessageSet
-    MessageSet (..),
-    newMessageSet,
 
     -- ** Office
     Office (..),
@@ -204,6 +200,7 @@ module Gogol.CivicInfo
   )
 where
 
+import Gogol.CivicInfo.Divisions.QueryDivisionByAddress
 import Gogol.CivicInfo.Divisions.Search
 import Gogol.CivicInfo.Elections.ElectionQuery
 import Gogol.CivicInfo.Elections.VoterInfoQuery

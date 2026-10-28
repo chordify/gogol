@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AccessContextManager.AccessPolicies.ServicePerimeters.Commit
 where
 
 import Gogol.AccessContextManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accesscontextmanager.accessPolicies.servicePerimeters.commit@ method which the
 -- 'AccessContextManagerAccessPoliciesServicePerimetersCommit' request conforms to.
@@ -54,9 +52,7 @@ type AccessContextManagerAccessPoliciesServicePerimetersCommitResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CommitServicePerimetersRequest
+    Core.:> Core.ReqBody '[Core.JSON] CommitServicePerimetersRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Commits the dry-run specification for all the service perimeters in an access policy. A commit operation on a service perimeter involves copying its @spec@ field to the @status@ field of the service perimeter. Only service perimeters with @use_explicit_dry_run_spec@ field set to true are affected by a commit operation. The long-running operation from this RPC has a successful status after the dry-run specifications for all the service perimeters have been committed. If a commit fails, it causes the long-running operation to return an error response and the entire commit operation is cancelled. When successful, the Operation.response field contains CommitServicePerimetersResponse. The @dry_run@ and the @spec@ fields are cleared after a successful commit operation.
@@ -87,24 +83,26 @@ newAccessContextManagerAccessPoliciesServicePerimetersCommit ::
   -- |  Multipart request metadata. See 'payload'.
   CommitServicePerimetersRequest ->
   AccessContextManagerAccessPoliciesServicePerimetersCommit
-newAccessContextManagerAccessPoliciesServicePerimetersCommit parent payload =
-  AccessContextManagerAccessPoliciesServicePerimetersCommit
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAccessContextManagerAccessPoliciesServicePerimetersCommit
+  parent
+  payload =
+    AccessContextManagerAccessPoliciesServicePerimetersCommit
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AccessContextManagerAccessPoliciesServicePerimetersCommit
   where
   type
-    Rs
-      AccessContextManagerAccessPoliciesServicePerimetersCommit =
+    Rs AccessContextManagerAccessPoliciesServicePerimetersCommit =
       Operation
   type
     Scopes

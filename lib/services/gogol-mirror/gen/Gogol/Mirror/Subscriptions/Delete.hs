@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Mirror.Subscriptions.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Mirror.Subscriptions.Delete
 where
 
 import Gogol.Mirror.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @mirror.subscriptions.delete@ method which the
 -- 'MirrorSubscriptionsDelete' request conforms to.
@@ -66,19 +64,16 @@ newMirrorSubscriptionsDelete ::
   -- |  The ID of the subscription. See 'id'.
   Core.Text ->
   MirrorSubscriptionsDelete
-newMirrorSubscriptionsDelete id = MirrorSubscriptionsDelete {id = id}
+newMirrorSubscriptionsDelete id =
+  MirrorSubscriptionsDelete {id = id}
 
 instance Core.GoogleRequest MirrorSubscriptionsDelete where
   type Rs MirrorSubscriptionsDelete = ()
-  type
-    Scopes MirrorSubscriptionsDelete =
-      '[Glass'Timeline]
+  type Scopes MirrorSubscriptionsDelete = '[Glass'Timeline]
   requestClient MirrorSubscriptionsDelete {..} =
     go id (Core.Just Core.AltJSON) mirrorService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy MirrorSubscriptionsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy MirrorSubscriptionsDeleteResource)
           Core.mempty

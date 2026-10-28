@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Devices.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Devices.Update
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.devices.update@ method which the
 -- 'AndroidEnterpriseDevicesUpdate' request conforms to.
@@ -101,24 +99,25 @@ newAndroidEnterpriseDevicesUpdate ::
   -- |  The ID of the user. See 'userId'.
   Core.Text ->
   AndroidEnterpriseDevicesUpdate
-newAndroidEnterpriseDevicesUpdate deviceId enterpriseId payload userId =
-  AndroidEnterpriseDevicesUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      enterpriseId = enterpriseId,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidEnterpriseDevicesUpdate
+  deviceId
+  enterpriseId
+  payload
+  userId =
     AndroidEnterpriseDevicesUpdate
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        deviceId = deviceId,
+        enterpriseId = enterpriseId,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
+
+instance Core.GoogleRequest AndroidEnterpriseDevicesUpdate where
   type Rs AndroidEnterpriseDevicesUpdate = Device
   type
     Scopes AndroidEnterpriseDevicesUpdate =
@@ -140,7 +139,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidEnterpriseDevicesUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidEnterpriseDevicesUpdateResource)
           Core.mempty

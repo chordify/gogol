@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.GamesConfiguration.AchievementConfigurations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.GamesConfiguration.AchievementConfigurations.List
 where
 
 import Gogol.GamesConfiguration.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gamesConfiguration.achievementConfigurations.list@ method which the
 -- 'GamesConfigurationAchievementConfigurationsList' request conforms to.
@@ -58,9 +56,7 @@ type GamesConfigurationAchievementConfigurationsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              AchievementConfigurationListResponse
+    Core.:> Core.Get '[Core.JSON] AchievementConfigurationListResponse
 
 -- | Returns a list of the achievement configurations in this application.
 --
@@ -92,7 +88,8 @@ newGamesConfigurationAchievementConfigurationsList ::
   GamesConfigurationAchievementConfigurationsList
 newGamesConfigurationAchievementConfigurationsList applicationId =
   GamesConfigurationAchievementConfigurationsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       applicationId = applicationId,
       callback = Core.Nothing,
@@ -107,31 +104,27 @@ instance
     GamesConfigurationAchievementConfigurationsList
   where
   type
-    Rs
-      GamesConfigurationAchievementConfigurationsList =
+    Rs GamesConfigurationAchievementConfigurationsList =
       AchievementConfigurationListResponse
   type
-    Scopes
-      GamesConfigurationAchievementConfigurationsList =
+    Scopes GamesConfigurationAchievementConfigurationsList =
       '[Androidpublisher'FullControl]
-  requestClient
-    GamesConfigurationAchievementConfigurationsList {..} =
-      go
-        applicationId
-        xgafv
-        accessToken
-        callback
-        maxResults
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        gamesConfigurationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GamesConfigurationAchievementConfigurationsListResource
-            )
-            Core.mempty
+  requestClient GamesConfigurationAchievementConfigurationsList {..} =
+    go
+      applicationId
+      xgafv
+      accessToken
+      callback
+      maxResults
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      gamesConfigurationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GamesConfigurationAchievementConfigurationsListResource
+          )
+          Core.mempty

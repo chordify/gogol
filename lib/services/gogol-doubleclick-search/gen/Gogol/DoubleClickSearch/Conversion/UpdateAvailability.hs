@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickSearch.Conversion.UpdateAvailability
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DoubleClickSearch.Conversion.UpdateAvailability
 where
 
 import Gogol.DoubleClickSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclicksearch.conversion.updateAvailability@ method which the
 -- 'DoubleClickSearchConversionUpdateAvailability' request conforms to.
@@ -84,7 +82,8 @@ newDoubleClickSearchConversionUpdateAvailability ::
   DoubleClickSearchConversionUpdateAvailability
 newDoubleClickSearchConversionUpdateAvailability payload =
   DoubleClickSearchConversionUpdateAvailability
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -100,25 +99,22 @@ instance
     Rs DoubleClickSearchConversionUpdateAvailability =
       UpdateAvailabilityResponse
   type
-    Scopes
-      DoubleClickSearchConversionUpdateAvailability =
+    Scopes DoubleClickSearchConversionUpdateAvailability =
       '[Doubleclicksearch'FullControl]
-  requestClient
-    DoubleClickSearchConversionUpdateAvailability {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        doubleClickSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DoubleClickSearchConversionUpdateAvailabilityResource
-            )
-            Core.mempty
+  requestClient DoubleClickSearchConversionUpdateAvailability {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      doubleClickSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DoubleClickSearchConversionUpdateAvailabilityResource
+          )
+          Core.mempty

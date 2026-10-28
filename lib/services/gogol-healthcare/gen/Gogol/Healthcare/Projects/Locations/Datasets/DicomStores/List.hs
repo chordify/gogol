@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.List
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.list@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresList' request conforms to.
@@ -76,7 +74,7 @@ data HealthcareProjectsLocationsDatasetsDicomStoresList = HealthcareProjectsLoca
     pageSize :: (Core.Maybe Core.Int32),
     -- | The next/page/token value returned from the previous List request, if any.
     pageToken :: (Core.Maybe Core.Text),
-    -- | Name of the dataset.
+    -- | Required. Name of the dataset.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -87,12 +85,13 @@ data HealthcareProjectsLocationsDatasetsDicomStoresList = HealthcareProjectsLoca
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresList' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresList ::
-  -- |  Name of the dataset. See 'parent'.
+  -- |  Required. Name of the dataset. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsDicomStoresList
 newHealthcareProjectsLocationsDatasetsDicomStoresList parent =
   HealthcareProjectsLocationsDatasetsDicomStoresList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       filter = Core.Nothing,
@@ -108,13 +107,11 @@ instance
     HealthcareProjectsLocationsDatasetsDicomStoresList
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresList =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresList =
       ListDicomStoresResponse
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresList =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresList =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresList {..} =
       go

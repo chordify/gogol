@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
 where
 
 import Gogol.AndroidDeviceProvisioning.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androiddeviceprovisioning.partners.devices.metadata@ method which the
 -- 'AndroidDeviceProvisioningPartnersDevicesMetadata' request conforms to.
@@ -57,9 +55,7 @@ type AndroidDeviceProvisioningPartnersDevicesMetadataResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              UpdateDeviceMetadataRequest
+    Core.:> Core.ReqBody '[Core.JSON] UpdateDeviceMetadataRequest
     Core.:> Core.Post '[Core.JSON] DeviceMetadata
 
 -- | Updates reseller metadata associated with the device. Android devices only.
@@ -94,48 +90,47 @@ newAndroidDeviceProvisioningPartnersDevicesMetadata ::
   -- |  Multipart request metadata. See 'payload'.
   UpdateDeviceMetadataRequest ->
   AndroidDeviceProvisioningPartnersDevicesMetadata
-newAndroidDeviceProvisioningPartnersDevicesMetadata deviceId metadataOwnerId payload =
-  AndroidDeviceProvisioningPartnersDevicesMetadata
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      metadataOwnerId = metadataOwnerId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidDeviceProvisioningPartnersDevicesMetadata
+  deviceId
+  metadataOwnerId
+  payload =
+    AndroidDeviceProvisioningPartnersDevicesMetadata
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        deviceId = deviceId,
+        metadataOwnerId = metadataOwnerId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidDeviceProvisioningPartnersDevicesMetadata
   where
   type
-    Rs
-      AndroidDeviceProvisioningPartnersDevicesMetadata =
+    Rs AndroidDeviceProvisioningPartnersDevicesMetadata =
       DeviceMetadata
-  type
-    Scopes
-      AndroidDeviceProvisioningPartnersDevicesMetadata =
-      '[]
-  requestClient
-    AndroidDeviceProvisioningPartnersDevicesMetadata {..} =
-      go
-        metadataOwnerId
-        deviceId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        androidDeviceProvisioningService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidDeviceProvisioningPartnersDevicesMetadataResource
-            )
-            Core.mempty
+  type Scopes AndroidDeviceProvisioningPartnersDevicesMetadata = '[]
+  requestClient AndroidDeviceProvisioningPartnersDevicesMetadata {..} =
+    go
+      metadataOwnerId
+      deviceId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      androidDeviceProvisioningService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AndroidDeviceProvisioningPartnersDevicesMetadataResource
+          )
+          Core.mempty

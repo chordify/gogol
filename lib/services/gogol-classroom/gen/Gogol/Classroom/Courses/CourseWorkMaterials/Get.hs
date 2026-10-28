@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWorkMaterials.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWorkMaterials.Get
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWorkMaterials.get@ method which the
 -- 'ClassroomCoursesCourseWorkMaterialsGet' request conforms to.
@@ -97,35 +95,28 @@ newClassroomCoursesCourseWorkMaterialsGet courseId id =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesCourseWorkMaterialsGet
-  where
-  type
-    Rs ClassroomCoursesCourseWorkMaterialsGet =
-      CourseWorkMaterial
+instance Core.GoogleRequest ClassroomCoursesCourseWorkMaterialsGet where
+  type Rs ClassroomCoursesCourseWorkMaterialsGet = CourseWorkMaterial
   type
     Scopes ClassroomCoursesCourseWorkMaterialsGet =
       '[ Classroom'Courseworkmaterials,
          Classroom'Courseworkmaterials'Readonly
        ]
-  requestClient
-    ClassroomCoursesCourseWorkMaterialsGet {..} =
-      go
-        courseId
-        id
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomCoursesCourseWorkMaterialsGetResource
-            )
-            Core.mempty
+  requestClient ClassroomCoursesCourseWorkMaterialsGet {..} =
+    go
+      courseId
+      id
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomCoursesCourseWorkMaterialsGetResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceConsumerManagement
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -127,6 +125,14 @@ module Gogol.ServiceConsumerManagement
     -- ** ApplyTenantProjectConfigRequest
     ApplyTenantProjectConfigRequest (..),
     newApplyTenantProjectConfigRequest,
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AttachTenantProjectRequest
     AttachTenantProjectRequest (..),
@@ -268,6 +274,10 @@ module Gogol.ServiceConsumerManagement
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Field
     Field (..),
     newField,
@@ -278,9 +288,17 @@ module Gogol.ServiceConsumerManagement
     -- ** Field_Kind
     Field_Kind (..),
 
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
+
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** Http
     Http (..),
@@ -340,6 +358,10 @@ module Gogol.ServiceConsumerManagement
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -363,6 +385,9 @@ module Gogol.ServiceConsumerManagement
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -465,6 +490,10 @@ module Gogol.ServiceConsumerManagement
     -- ** SearchTenancyUnitsResponse
     SearchTenancyUnitsResponse (..),
     newSearchTenancyUnitsResponse,
+
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
 
     -- ** Service
     Service (..),

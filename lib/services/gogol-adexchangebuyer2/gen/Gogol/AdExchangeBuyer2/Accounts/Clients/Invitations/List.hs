@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.List
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.clients.invitations.list@ method which the
 -- 'AdExchangeBuyer2AccountsClientsInvitationsList' request conforms to.
@@ -59,9 +57,7 @@ type AdExchangeBuyer2AccountsClientsInvitationsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListClientUserInvitationsResponse
+    Core.:> Core.Get '[Core.JSON] ListClientUserInvitationsResponse
 
 -- | Lists all the client users invitations for a client with a given account ID.
 --
@@ -95,50 +91,49 @@ newAdExchangeBuyer2AccountsClientsInvitationsList ::
   -- |  Numerical account ID of the client buyer to list invitations for. (required) You must either specify a string representation of a numerical account identifier or the @-@ character to list all the invitations for all the clients of a given sponsor buyer. See 'clientAccountId'.
   Core.Text ->
   AdExchangeBuyer2AccountsClientsInvitationsList
-newAdExchangeBuyer2AccountsClientsInvitationsList accountId clientAccountId =
-  AdExchangeBuyer2AccountsClientsInvitationsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      clientAccountId = clientAccountId,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsClientsInvitationsList
+  accountId
+  clientAccountId =
+    AdExchangeBuyer2AccountsClientsInvitationsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        clientAccountId = clientAccountId,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsClientsInvitationsList
   where
   type
-    Rs
-      AdExchangeBuyer2AccountsClientsInvitationsList =
+    Rs AdExchangeBuyer2AccountsClientsInvitationsList =
       ListClientUserInvitationsResponse
   type
-    Scopes
-      AdExchangeBuyer2AccountsClientsInvitationsList =
+    Scopes AdExchangeBuyer2AccountsClientsInvitationsList =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsClientsInvitationsList {..} =
-      go
-        accountId
-        clientAccountId
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsClientsInvitationsListResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsClientsInvitationsList {..} =
+    go
+      accountId
+      clientAccountId
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsClientsInvitationsListResource
+          )
+          Core.mempty

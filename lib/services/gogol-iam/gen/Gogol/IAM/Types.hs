@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAM.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.IAM.Types
@@ -36,6 +34,17 @@ module Gogol.IAM.Types
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** CloudControl2SharedOperationsReconciliationOperationMetadata
+    CloudControl2SharedOperationsReconciliationOperationMetadata (..),
+    newCloudControl2SharedOperationsReconciliationOperationMetadata,
+
+    -- ** CloudControl2SharedOperationsReconciliationOperationMetadata_ExclusiveAction
+    CloudControl2SharedOperationsReconciliationOperationMetadata_ExclusiveAction (..),
+
+    -- ** GoogleCloudCommonOperationMetadata
+    GoogleCloudCommonOperationMetadata (..),
+    newGoogleCloudCommonOperationMetadata,
 
     -- ** GoogleIamAdminV1AuditData
     GoogleIamAdminV1AuditData (..),
@@ -88,6 +97,22 @@ module Gogol.IAM.Types
     GoogleIamV2PolicyRule (..),
     newGoogleIamV2PolicyRule,
 
+    -- ** GoogleIamV3OperationMetadata
+    GoogleIamV3OperationMetadata (..),
+    newGoogleIamV3OperationMetadata,
+
+    -- ** GoogleIamV3alphaOperationMetadata
+    GoogleIamV3alphaOperationMetadata (..),
+    newGoogleIamV3alphaOperationMetadata,
+
+    -- ** GoogleIamV3betaOperationMetadata
+    GoogleIamV3betaOperationMetadata (..),
+    newGoogleIamV3betaOperationMetadata,
+
+    -- ** GoogleIamV3mainOperationMetadata
+    GoogleIamV3mainOperationMetadata (..),
+    newGoogleIamV3mainOperationMetadata,
+
     -- ** GoogleLongrunningOperation
     GoogleLongrunningOperation (..),
     newGoogleLongrunningOperation,
@@ -116,7 +141,7 @@ where
 
 import Gogol.IAM.Internal.Product
 import Gogol.IAM.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Identity and Access Management (IAM) API. This contains the host and root path used as a starting point for constructing service requests.
 iAMService :: Core.ServiceConfig
@@ -126,4 +151,5 @@ iAMService =
     "iam.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

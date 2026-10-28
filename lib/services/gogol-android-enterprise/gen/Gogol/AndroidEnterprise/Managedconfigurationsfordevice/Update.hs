@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Managedconfigurationsfordevice.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Managedconfigurationsfordevice.Update
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.managedconfigurationsfordevice.update@ method which the
 -- 'AndroidEnterpriseManagedconfigurationsfordeviceUpdate' request conforms to.
@@ -54,21 +52,15 @@ type AndroidEnterpriseManagedconfigurationsfordeviceUpdateResource =
     Core.:> "devices"
     Core.:> Core.Capture "deviceId" Core.Text
     Core.:> "managedConfigurationsForDevice"
-    Core.:> Core.Capture
-              "managedConfigurationForDeviceId"
-              Core.Text
+    Core.:> Core.Capture "managedConfigurationForDeviceId" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ManagedConfiguration
-    Core.:> Core.Put
-              '[Core.JSON]
-              ManagedConfiguration
+    Core.:> Core.ReqBody '[Core.JSON] ManagedConfiguration
+    Core.:> Core.Put '[Core.JSON] ManagedConfiguration
 
 -- | Adds or updates a per-device managed configuration for an app for the specified device.
 --
@@ -110,31 +102,36 @@ newAndroidEnterpriseManagedconfigurationsfordeviceUpdate ::
   -- |  The ID of the user. See 'userId'.
   Core.Text ->
   AndroidEnterpriseManagedconfigurationsfordeviceUpdate
-newAndroidEnterpriseManagedconfigurationsfordeviceUpdate deviceId enterpriseId managedConfigurationForDeviceId payload userId =
-  AndroidEnterpriseManagedconfigurationsfordeviceUpdate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      enterpriseId = enterpriseId,
-      managedConfigurationForDeviceId = managedConfigurationForDeviceId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
+newAndroidEnterpriseManagedconfigurationsfordeviceUpdate
+  deviceId
+  enterpriseId
+  managedConfigurationForDeviceId
+  payload
+  userId =
+    AndroidEnterpriseManagedconfigurationsfordeviceUpdate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        deviceId = deviceId,
+        enterpriseId = enterpriseId,
+        managedConfigurationForDeviceId =
+          managedConfigurationForDeviceId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
 
 instance
   Core.GoogleRequest
     AndroidEnterpriseManagedconfigurationsfordeviceUpdate
   where
   type
-    Rs
-      AndroidEnterpriseManagedconfigurationsfordeviceUpdate =
+    Rs AndroidEnterpriseManagedconfigurationsfordeviceUpdate =
       ManagedConfiguration
   type
-    Scopes
-      AndroidEnterpriseManagedconfigurationsfordeviceUpdate =
+    Scopes AndroidEnterpriseManagedconfigurationsfordeviceUpdate =
       '[Androidenterprise'FullControl]
   requestClient
     AndroidEnterpriseManagedconfigurationsfordeviceUpdate {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceManagement.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceManagement.Types
@@ -50,6 +48,14 @@ module Gogol.ServiceManagement.Types
 
     -- ** Api_Syntax
     Api_Syntax (..),
+
+    -- ** Aspect
+    Aspect (..),
+    newAspect,
+
+    -- ** Aspect_Spec
+    Aspect_Spec (..),
+    newAspect_Spec,
 
     -- ** AuditConfig
     AuditConfig (..),
@@ -223,6 +229,10 @@ module Gogol.ServiceManagement.Types
     EnumValue (..),
     newEnumValue,
 
+    -- ** ExperimentalFeatures
+    ExperimentalFeatures (..),
+    newExperimentalFeatures,
+
     -- ** Expr
     Expr (..),
     newExpr,
@@ -236,6 +246,10 @@ module Gogol.ServiceManagement.Types
 
     -- ** Field_Kind
     Field_Kind (..),
+
+    -- ** FieldPolicy
+    FieldPolicy (..),
+    newFieldPolicy,
 
     -- ** FlowErrorDetails
     FlowErrorDetails (..),
@@ -268,6 +282,10 @@ module Gogol.ServiceManagement.Types
     -- ** GoSettings
     GoSettings (..),
     newGoSettings,
+
+    -- ** GoSettings_RenamedServices
+    GoSettings_RenamedServices (..),
+    newGoSettings_RenamedServices,
 
     -- ** Http
     Http (..),
@@ -339,6 +357,10 @@ module Gogol.ServiceManagement.Types
     -- ** Method_Syntax
     Method_Syntax (..),
 
+    -- ** MethodPolicy
+    MethodPolicy (..),
+    newMethodPolicy,
+
     -- ** MethodSettings
     MethodSettings (..),
     newMethodSettings,
@@ -362,6 +384,9 @@ module Gogol.ServiceManagement.Types
 
     -- ** MetricDescriptorMetadata_LaunchStage
     MetricDescriptorMetadata_LaunchStage (..),
+
+    -- ** MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem
+    MetricDescriptorMetadata_TimeSeriesResourceHierarchyLevelItem (..),
 
     -- ** MetricRule
     MetricRule (..),
@@ -476,6 +501,10 @@ module Gogol.ServiceManagement.Types
     RubySettings (..),
     newRubySettings,
 
+    -- ** SelectiveGapicGeneration
+    SelectiveGapicGeneration (..),
+    newSelectiveGapicGeneration,
+
     -- ** Service
     Service (..),
     newService,
@@ -574,7 +603,7 @@ module Gogol.ServiceManagement.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceManagement.Internal.Product
 import Gogol.ServiceManagement.Internal.Sum
 
@@ -586,13 +615,17 @@ serviceManagementService =
     "servicemanagement.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View your data across Google Cloud services and see the email address of your Google Account
-type CloudPlatform'ReadOnly = "https://www.googleapis.com/auth/cloud-platform.read-only"
+type CloudPlatform'ReadOnly =
+  "https://www.googleapis.com/auth/cloud-platform.read-only"
 
 -- | Manage your Google API service configuration
-type Service'Management = "https://www.googleapis.com/auth/service.management"
+type Service'Management =
+  "https://www.googleapis.com/auth/service.management"
 
 -- | View your Google API service configuration
-type Service'Management'Readonly = "https://www.googleapis.com/auth/service.management.readonly"
+type Service'Management'Readonly =
+  "https://www.googleapis.com/auth/service.management.readonly"

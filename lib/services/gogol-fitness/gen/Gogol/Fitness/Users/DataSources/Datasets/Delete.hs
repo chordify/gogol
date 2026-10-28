@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fitness.Users.DataSources.Datasets.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Fitness.Users.DataSources.Datasets.Delete
 where
 
 import Gogol.Fitness.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fitness.users.dataSources.datasets.delete@ method which the
 -- 'FitnessUsersDataSourcesDatasetsDelete' request conforms to.
@@ -93,22 +91,22 @@ newFitnessUsersDataSourcesDatasetsDelete ::
   -- |  Delete a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time. See 'userId'.
   Core.Text ->
   FitnessUsersDataSourcesDatasetsDelete
-newFitnessUsersDataSourcesDatasetsDelete dataSourceId datasetId userId =
-  FitnessUsersDataSourcesDatasetsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dataSourceId = dataSourceId,
-      datasetId = datasetId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
-
-instance
-  Core.GoogleRequest
+newFitnessUsersDataSourcesDatasetsDelete
+  dataSourceId
+  datasetId
+  userId =
     FitnessUsersDataSourcesDatasetsDelete
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dataSourceId = dataSourceId,
+        datasetId = datasetId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
+
+instance Core.GoogleRequest FitnessUsersDataSourcesDatasetsDelete where
   type Rs FitnessUsersDataSourcesDatasetsDelete = ()
   type
     Scopes FitnessUsersDataSourcesDatasetsDelete =
@@ -124,24 +122,22 @@ instance
          Fitness'ReproductiveHealth'Write,
          Fitness'Sleep'Write
        ]
-  requestClient
-    FitnessUsersDataSourcesDatasetsDelete {..} =
-      go
-        userId
-        dataSourceId
-        datasetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        fitnessService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FitnessUsersDataSourcesDatasetsDeleteResource
-            )
-            Core.mempty
+  requestClient FitnessUsersDataSourcesDatasetsDelete {..} =
+    go
+      userId
+      dataSourceId
+      datasetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fitnessService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FitnessUsersDataSourcesDatasetsDeleteResource
+          )
+          Core.mempty

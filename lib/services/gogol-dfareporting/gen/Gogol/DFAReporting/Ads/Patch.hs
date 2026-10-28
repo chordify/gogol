@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Ads.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Ads.Patch
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.ads.patch@ method which the
 -- 'DFAReportingAdsPatch' request conforms to.
@@ -70,7 +68,7 @@ data DFAReportingAdsPatch = DFAReportingAdsPatch
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Ad ID.
+    -- | Required. RemarketingList ID.
     id :: Core.Int64,
     -- | Multipart request metadata.
     payload :: Ad,
@@ -85,7 +83,7 @@ data DFAReportingAdsPatch = DFAReportingAdsPatch
 
 -- | Creates a value of 'DFAReportingAdsPatch' with the minimum fields required to make a request.
 newDFAReportingAdsPatch ::
-  -- |  Ad ID. See 'id'.
+  -- |  Required. RemarketingList ID. See 'id'.
   Core.Int64 ->
   -- |  Multipart request metadata. See 'payload'.
   Ad ->
@@ -106,9 +104,7 @@ newDFAReportingAdsPatch id payload profileId =
 
 instance Core.GoogleRequest DFAReportingAdsPatch where
   type Rs DFAReportingAdsPatch = Ad
-  type
-    Scopes DFAReportingAdsPatch =
-      '[Dfatrafficking'FullControl]
+  type Scopes DFAReportingAdsPatch = '[Dfatrafficking'FullControl]
   requestClient DFAReportingAdsPatch {..} =
     go
       profileId
@@ -124,7 +120,5 @@ instance Core.GoogleRequest DFAReportingAdsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingAdsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingAdsPatchResource)
           Core.mempty

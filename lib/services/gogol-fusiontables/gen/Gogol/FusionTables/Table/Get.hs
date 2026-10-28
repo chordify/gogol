@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Table.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Table.Get
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.table.get@ method which the
 -- 'FusionTablesTableGet' request conforms to.
@@ -66,7 +64,8 @@ newFusionTablesTableGet ::
   -- |  Identifier for the table being requested. See 'tableId'.
   Core.Text ->
   FusionTablesTableGet
-newFusionTablesTableGet tableId = FusionTablesTableGet {tableId = tableId}
+newFusionTablesTableGet tableId =
+  FusionTablesTableGet {tableId = tableId}
 
 instance Core.GoogleRequest FusionTablesTableGet where
   type Rs FusionTablesTableGet = Table
@@ -74,14 +73,9 @@ instance Core.GoogleRequest FusionTablesTableGet where
     Scopes FusionTablesTableGet =
       '[Fusiontables'FullControl, Fusiontables'Readonly]
   requestClient FusionTablesTableGet {..} =
-    go
-      tableId
-      (Core.Just Core.AltJSON)
-      fusionTablesService
+    go tableId (Core.Just Core.AltJSON) fusionTablesService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTableGetResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTableGetResource)
           Core.mempty

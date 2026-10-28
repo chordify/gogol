@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Blogger.Posts.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Blogger.Posts.List
 where
 
 import Gogol.Blogger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @blogger.posts.list@ method which the
 -- 'BloggerPostsList' request conforms to.
@@ -59,15 +57,11 @@ type BloggerPostsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "orderBy" PostsListOrderBy
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "sortOption"
-              PostsListSortOption
+    Core.:> Core.QueryParam "sortOption" PostsListSortOption
     Core.:> Core.QueryParam "startDate" Core.Text
     Core.:> Core.QueryParams "status" PostsListStatus
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "view" PostsListView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] PostList
@@ -80,35 +74,24 @@ data BloggerPostsList = BloggerPostsList
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- |
     blogId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     endDate :: (Core.Maybe Core.Text),
-    -- |
     fetchBodies :: Core.Bool,
-    -- |
     fetchImages :: (Core.Maybe Core.Bool),
-    -- |
     labels :: (Core.Maybe Core.Text),
-    -- |
     maxResults :: (Core.Maybe Core.Word32),
-    -- |
     orderBy :: PostsListOrderBy,
-    -- |
     pageToken :: (Core.Maybe Core.Text),
     -- | Sort direction applied to post list.
     sortOption :: PostsListSortOption,
-    -- |
     startDate :: (Core.Maybe Core.Text),
-    -- |
     status :: (Core.Maybe [PostsListStatus]),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
     uploadProtocol :: (Core.Maybe Core.Text),
-    -- |
     view :: (Core.Maybe PostsListView)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

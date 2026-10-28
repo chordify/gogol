@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Locations.Clusters.SetLocations
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the locations for a specific cluster. Deprecated. Use <https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update projects.locations.clusters.update> instead.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.setLocations@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.locations.clusters.setLocations@.
 module Gogol.Container.Projects.Locations.Clusters.SetLocations
   ( -- * Resource
     ContainerProjectsLocationsClustersSetLocationsResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Locations.Clusters.SetLocations
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.locations.clusters.setLocations@ method which the
 -- 'ContainerProjectsLocationsClustersSetLocations' request conforms to.
@@ -86,7 +84,8 @@ newContainerProjectsLocationsClustersSetLocations ::
   ContainerProjectsLocationsClustersSetLocations
 newContainerProjectsLocationsClustersSetLocations name payload =
   ContainerProjectsLocationsClustersSetLocations
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -99,31 +98,25 @@ instance
   Core.GoogleRequest
     ContainerProjectsLocationsClustersSetLocations
   where
+  type Rs ContainerProjectsLocationsClustersSetLocations = Operation
   type
-    Rs
-      ContainerProjectsLocationsClustersSetLocations =
-      Operation
-  type
-    Scopes
-      ContainerProjectsLocationsClustersSetLocations =
+    Scopes ContainerProjectsLocationsClustersSetLocations =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsLocationsClustersSetLocations {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsLocationsClustersSetLocationsResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsLocationsClustersSetLocations {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsLocationsClustersSetLocationsResource
+          )
+          Core.mempty

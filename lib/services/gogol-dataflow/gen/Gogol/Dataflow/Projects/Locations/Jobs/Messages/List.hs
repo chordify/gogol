@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.Messages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.Messages.List
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.messages.list@ method which the
 -- 'DataflowProjectsLocationsJobsMessagesList' request conforms to.
@@ -64,13 +62,9 @@ type DataflowProjectsLocationsJobsMessagesListResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListJobMessagesResponse
+    Core.:> Core.Get '[Core.JSON] ListJobMessagesResponse
 
 -- | Request the job status. To request the status of a job, we recommend using @projects.locations.jobs.messages.list@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.jobs.messages.list@ is not recommended, as you can only request the status of jobs that are running in @us-central1@.
 --
@@ -114,22 +108,25 @@ newDataflowProjectsLocationsJobsMessagesList ::
   -- |  A project id. See 'projectId'.
   Core.Text ->
   DataflowProjectsLocationsJobsMessagesList
-newDataflowProjectsLocationsJobsMessagesList jobId location projectId =
-  DataflowProjectsLocationsJobsMessagesList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      endTime = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      minimumImportance = Core.Nothing,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      projectId = projectId,
-      startTime = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsMessagesList
+  jobId
+  location
+  projectId =
+    DataflowProjectsLocationsJobsMessagesList
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        endTime = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        minimumImportance = Core.Nothing,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        projectId = projectId,
+        startTime = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -140,34 +137,28 @@ instance
       ListJobMessagesResponse
   type
     Scopes DataflowProjectsLocationsJobsMessagesList =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
-  requestClient
-    DataflowProjectsLocationsJobsMessagesList {..} =
-      go
-        projectId
-        location
-        jobId
-        xgafv
-        accessToken
-        callback
-        endTime
-        minimumImportance
-        pageSize
-        pageToken
-        startTime
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dataflowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DataflowProjectsLocationsJobsMessagesListResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl]
+  requestClient DataflowProjectsLocationsJobsMessagesList {..} =
+    go
+      projectId
+      location
+      jobId
+      xgafv
+      accessToken
+      callback
+      endTime
+      minimumImportance
+      pageSize
+      pageToken
+      startTime
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dataflowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DataflowProjectsLocationsJobsMessagesListResource
+          )
+          Core.mempty

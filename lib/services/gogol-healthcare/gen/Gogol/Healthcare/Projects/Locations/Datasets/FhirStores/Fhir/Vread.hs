@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Vread
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.FhirStores.Fhir.Vread
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.fhirStores.fhir.vread@ method which the
 -- 'HealthcareProjectsLocationsDatasetsFhirStoresFhirVread' request conforms to.
@@ -65,7 +63,7 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirVread = HealthcareProjects
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the resource version to retrieve.
+    -- | Required. The name of the resource version to retrieve.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,12 +74,13 @@ data HealthcareProjectsLocationsDatasetsFhirStoresFhirVread = HealthcareProjects
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsFhirStoresFhirVread' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsFhirStoresFhirVread ::
-  -- |  The name of the resource version to retrieve. See 'name'.
+  -- |  Required. The name of the resource version to retrieve. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsFhirStoresFhirVread
 newHealthcareProjectsLocationsDatasetsFhirStoresFhirVread name =
   HealthcareProjectsLocationsDatasetsFhirStoresFhirVread
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,13 +93,11 @@ instance
     HealthcareProjectsLocationsDatasetsFhirStoresFhirVread
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsFhirStoresFhirVread =
+    Rs HealthcareProjectsLocationsDatasetsFhirStoresFhirVread =
       HttpBody
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsFhirStoresFhirVread =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsFhirStoresFhirVread =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsFhirStoresFhirVread {..} =
       go

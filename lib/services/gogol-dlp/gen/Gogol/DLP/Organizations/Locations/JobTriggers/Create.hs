@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.Locations.JobTriggers.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a job trigger to run DLP actions such as scanning storage for sensitive information on a set schedule. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- Creates a job trigger to run DLP actions such as scanning storage for sensitive information on a set schedule. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.locations.jobTriggers.create@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.locations.jobTriggers.create@.
 module Gogol.DLP.Organizations.Locations.JobTriggers.Create
   ( -- * Resource
     DLPOrganizationsLocationsJobTriggersCreateResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.Locations.JobTriggers.Create
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.locations.jobTriggers.create@ method which the
 -- 'DLPOrganizationsLocationsJobTriggersCreate' request conforms to.
@@ -54,12 +52,10 @@ type DLPOrganizationsLocationsJobTriggersCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GooglePrivacyDlpV2CreateJobTriggerRequest
+    Core.:> Core.ReqBody '[Core.JSON] GooglePrivacyDlpV2CreateJobTriggerRequest
     Core.:> Core.Post '[Core.JSON] GooglePrivacyDlpV2JobTrigger
 
--- | Creates a job trigger to run DLP actions such as scanning storage for sensitive information on a set schedule. See https:\/\/cloud.google.com\/dlp\/docs\/creating-job-triggers to learn more.
+-- | Creates a job trigger to run DLP actions such as scanning storage for sensitive information on a set schedule. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-job-triggers to learn more.
 --
 -- /See:/ 'newDLPOrganizationsLocationsJobTriggersCreate' smart constructor.
 data DLPOrganizationsLocationsJobTriggersCreate = DLPOrganizationsLocationsJobTriggersCreate
@@ -69,7 +65,7 @@ data DLPOrganizationsLocationsJobTriggersCreate = DLPOrganizationsLocationsJobTr
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
+    -- | Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: GooglePrivacyDlpV2CreateJobTriggerRequest,
@@ -82,7 +78,7 @@ data DLPOrganizationsLocationsJobTriggersCreate = DLPOrganizationsLocationsJobTr
 
 -- | Creates a value of 'DLPOrganizationsLocationsJobTriggersCreate' with the minimum fields required to make a request.
 newDLPOrganizationsLocationsJobTriggersCreate ::
-  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/dlp/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/@PROJECT/ID@\/locations\/@LOCATION/ID + Projects scope, no location specified (defaults to global): @projects\/@PROJECT_ID The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
+  -- |  Required. Parent resource name. The format of this value varies depending on whether you have <https://cloud.google.com/sensitive-data-protection/docs/specifying-location specified a processing location>: + Projects scope, location specified: @projects\/{project_id}\/locations\/{location_id}@ + Projects scope, no location specified (defaults to global): @projects\/{project_id}@ The following example @parent@ string specifies a parent project with the identifier @example-project@, and specifies the @europe-west3@ location for processing data: parent=projects\/example-project\/locations\/europe-west3 See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GooglePrivacyDlpV2CreateJobTriggerRequest ->
@@ -106,26 +102,23 @@ instance
     Rs DLPOrganizationsLocationsJobTriggersCreate =
       GooglePrivacyDlpV2JobTrigger
   type
-    Scopes
-      DLPOrganizationsLocationsJobTriggersCreate =
+    Scopes DLPOrganizationsLocationsJobTriggersCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsLocationsJobTriggersCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsLocationsJobTriggersCreateResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsLocationsJobTriggersCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsLocationsJobTriggersCreateResource
+          )
+          Core.mempty

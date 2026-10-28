@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.UpdateContactPhoto
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.People.UpdateContactPhoto
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.updateContactPhoto@ method which the
 -- 'PeoplePeopleUpdateContactPhoto' request conforms to.
 type PeoplePeopleUpdateContactPhotoResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resourceName"
-              "updateContactPhoto"
-              Core.Text
+    Core.:> Core.CaptureMode "resourceName" "updateContactPhoto" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -98,13 +93,8 @@ newPeoplePeopleUpdateContactPhoto payload resourceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeoplePeopleUpdateContactPhoto
-  where
-  type
-    Rs PeoplePeopleUpdateContactPhoto =
-      UpdateContactPhotoResponse
+instance Core.GoogleRequest PeoplePeopleUpdateContactPhoto where
+  type Rs PeoplePeopleUpdateContactPhoto = UpdateContactPhotoResponse
   type
     Scopes PeoplePeopleUpdateContactPhoto =
       '[Contacts'FullControl]
@@ -122,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleUpdateContactPhotoResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleUpdateContactPhotoResource)
           Core.mempty

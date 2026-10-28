@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudSearch.Settings.Searchapplications.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudSearch.Settings.Searchapplications.Delete
 where
 
 import Gogol.CloudSearch.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudsearch.settings.searchapplications.delete@ method which the
 -- 'CloudSearchSettingsSearchapplicationsDelete' request conforms to.
@@ -51,9 +49,7 @@ type CloudSearchSettingsSearchapplicationsDeleteResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "debugOptions.enableDebugging"
-              Core.Bool
+    Core.:> Core.QueryParam "debugOptions.enableDebugging" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -100,33 +96,28 @@ instance
   Core.GoogleRequest
     CloudSearchSettingsSearchapplicationsDelete
   where
+  type Rs CloudSearchSettingsSearchapplicationsDelete = Operation
   type
-    Rs CloudSearchSettingsSearchapplicationsDelete =
-      Operation
-  type
-    Scopes
-      CloudSearchSettingsSearchapplicationsDelete =
+    Scopes CloudSearchSettingsSearchapplicationsDelete =
       '[ CloudSearch'FullControl,
          CloudSearch'Settings,
          CloudSearch'Settings'Query
        ]
-  requestClient
-    CloudSearchSettingsSearchapplicationsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        debugOptionsEnableDebugging
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudSearchService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudSearchSettingsSearchapplicationsDeleteResource
-            )
-            Core.mempty
+  requestClient CloudSearchSettingsSearchapplicationsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      debugOptionsEnableDebugging
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudSearchService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudSearchSettingsSearchapplicationsDeleteResource
+          )
+          Core.mempty

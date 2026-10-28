@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetPools.AddInstance
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetPools.AddInstance
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetPools.addInstance@ method which the
 -- 'ComputeTargetPoolsAddInstance' request conforms to.
@@ -61,9 +59,7 @@ type ComputeTargetPoolsAddInstanceResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TargetPoolsAddInstanceRequest
+    Core.:> Core.ReqBody '[Core.JSON] TargetPoolsAddInstanceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Adds an instance to a target pool.
@@ -118,10 +114,7 @@ newComputeTargetPoolsAddInstance payload project region targetPool =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeTargetPoolsAddInstance
-  where
+instance Core.GoogleRequest ComputeTargetPoolsAddInstance where
   type Rs ComputeTargetPoolsAddInstance = Operation
   type
     Scopes ComputeTargetPoolsAddInstance =
@@ -143,7 +136,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeTargetPoolsAddInstanceResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeTargetPoolsAddInstanceResource)
           Core.mempty

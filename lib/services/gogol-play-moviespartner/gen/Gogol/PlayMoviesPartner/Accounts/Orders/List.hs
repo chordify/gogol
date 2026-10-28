@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Accounts.Orders.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -42,7 +40,7 @@ module Gogol.PlayMoviesPartner.Accounts.Orders.List
 where
 
 import Gogol.PlayMoviesPartner.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @playmoviespartner.accounts.orders.list@ method which the
 -- 'PlayMoviesPartnerAccountsOrdersList' request conforms to.
@@ -64,14 +62,10 @@ type PlayMoviesPartnerAccountsOrdersListResource =
     Core.:> Core.QueryParams "status" Core.Text
     Core.:> Core.QueryParams "studioNames" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParams "videoIds" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListOrdersResponse
+    Core.:> Core.Get '[Core.JSON] ListOrdersResponse
 
 -- | List Orders owned or managed by the partner.
 --
@@ -139,13 +133,8 @@ newPlayMoviesPartnerAccountsOrdersList accountId =
       videoIds = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PlayMoviesPartnerAccountsOrdersList
-  where
-  type
-    Rs PlayMoviesPartnerAccountsOrdersList =
-      ListOrdersResponse
+instance Core.GoogleRequest PlayMoviesPartnerAccountsOrdersList where
+  type Rs PlayMoviesPartnerAccountsOrdersList = ListOrdersResponse
   type
     Scopes PlayMoviesPartnerAccountsOrdersList =
       '[PlaymoviesPartner'Readonly]
@@ -173,7 +162,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                PlayMoviesPartnerAccountsOrdersListResource
+              Core.Proxy PlayMoviesPartnerAccountsOrdersListResource
           )
           Core.mempty

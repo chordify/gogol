@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Mirror.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Mirror.Internal.Product
@@ -109,19 +107,15 @@ module Gogol.Mirror.Internal.Product
 where
 
 import Gogol.Mirror.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Represents an account passed into the Account Manager on Glass.
 --
 -- /See:/ 'newAccount' smart constructor.
 data Account = Account
-  { -- |
-    authTokens :: (Core.Maybe [AuthToken]),
-    -- |
+  { authTokens :: (Core.Maybe [AuthToken]),
     features :: (Core.Maybe [Core.Text]),
-    -- |
     password :: (Core.Maybe Core.Text),
-    -- |
     userData :: (Core.Maybe [UserData])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -205,8 +199,7 @@ instance Core.ToJSON Attachment where
           [ ("contentType" Core..=) Core.<$> contentType,
             ("contentUrl" Core..=) Core.<$> contentUrl,
             ("id" Core..=) Core.<$> id,
-            ("isProcessingContent" Core..=)
-              Core.<$> isProcessingContent
+            ("isProcessingContent" Core..=) Core.<$> isProcessingContent
           ]
       )
 
@@ -237,9 +230,7 @@ instance Core.FromJSON AttachmentsListResponse where
       ( \o ->
           AttachmentsListResponse
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "mirror#attachmentsList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "mirror#attachmentsList")
       )
 
 instance Core.ToJSON AttachmentsListResponse where
@@ -254,9 +245,7 @@ instance Core.ToJSON AttachmentsListResponse where
 --
 -- /See:/ 'newAuthToken' smart constructor.
 data AuthToken = AuthToken
-  { -- |
-    authToken :: (Core.Maybe Core.Text),
-    -- |
+  { authToken :: (Core.Maybe Core.Text),
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -264,7 +253,8 @@ data AuthToken = AuthToken
 -- | Creates a value of 'AuthToken' with the minimum fields required to make a request.
 newAuthToken ::
   AuthToken
-newAuthToken = AuthToken {authToken = Core.Nothing, type' = Core.Nothing}
+newAuthToken =
+  AuthToken {authToken = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON AuthToken where
   parseJSON =
@@ -309,8 +299,7 @@ instance Core.FromJSON Command where
 
 instance Core.ToJSON Command where
   toJSON Command {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | A person or group that can be used as a creator or a contact.
 --
@@ -418,7 +407,10 @@ data ContactsListResponse = ContactsListResponse
 newContactsListResponse ::
   ContactsListResponse
 newContactsListResponse =
-  ContactsListResponse {items = Core.Nothing, kind = "mirror#contacts"}
+  ContactsListResponse
+    { items = Core.Nothing,
+      kind = "mirror#contacts"
+    }
 
 instance Core.FromJSON ContactsListResponse where
   parseJSON =
@@ -523,7 +515,10 @@ data LocationsListResponse = LocationsListResponse
 newLocationsListResponse ::
   LocationsListResponse
 newLocationsListResponse =
-  LocationsListResponse {items = Core.Nothing, kind = "mirror#locationsList"}
+  LocationsListResponse
+    { items = Core.Nothing,
+      kind = "mirror#locationsList"
+    }
 
 instance Core.FromJSON LocationsListResponse where
   parseJSON =
@@ -600,12 +595,10 @@ instance Core.ToJSON MenuItem where
     Core.object
       ( Core.catMaybes
           [ ("action" Core..=) Core.<$> action,
-            ("contextual_command" Core..=)
-              Core.<$> contextualCommand,
+            ("contextual_command" Core..=) Core.<$> contextualCommand,
             ("id" Core..=) Core.<$> id,
             ("payload" Core..=) Core.<$> payload,
-            ("removeWhenSelected" Core..=)
-              Core.<$> removeWhenSelected,
+            ("removeWhenSelected" Core..=) Core.<$> removeWhenSelected,
             ("values" Core..=) Core.<$> values
           ]
       )
@@ -730,7 +723,10 @@ data NotificationConfig = NotificationConfig
 newNotificationConfig ::
   NotificationConfig
 newNotificationConfig =
-  NotificationConfig {deliveryTime = Core.Nothing, level = Core.Nothing}
+  NotificationConfig
+    { deliveryTime = Core.Nothing,
+      level = Core.Nothing
+    }
 
 instance Core.FromJSON NotificationConfig where
   parseJSON =
@@ -770,7 +766,11 @@ data Setting = Setting
 newSetting ::
   Setting
 newSetting =
-  Setting {id = Core.Nothing, kind = "mirror#setting", value = Core.Nothing}
+  Setting
+    { id = Core.Nothing,
+      kind = "mirror#setting",
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON Setting where
   parseJSON =
@@ -896,9 +896,7 @@ instance Core.FromJSON SubscriptionsListResponse where
       ( \o ->
           SubscriptionsListResponse
             Core.<$> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "mirror#subscriptionsList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "mirror#subscriptionsList")
       )
 
 instance Core.ToJSON SubscriptionsListResponse where
@@ -1168,7 +1166,8 @@ data UserAction = UserAction
 -- | Creates a value of 'UserAction' with the minimum fields required to make a request.
 newUserAction ::
   UserAction
-newUserAction = UserAction {payload = Core.Nothing, type' = Core.Nothing}
+newUserAction =
+  UserAction {payload = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON UserAction where
   parseJSON =
@@ -1176,7 +1175,8 @@ instance Core.FromJSON UserAction where
       "UserAction"
       ( \o ->
           UserAction
-            Core.<$> (o Core..:? "payload") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "payload")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON UserAction where
@@ -1191,9 +1191,7 @@ instance Core.ToJSON UserAction where
 --
 -- /See:/ 'newUserData' smart constructor.
 data UserData = UserData
-  { -- |
-    key :: (Core.Maybe Core.Text),
-    -- |
+  { key :: (Core.Maybe Core.Text),
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1208,15 +1206,12 @@ instance Core.FromJSON UserData where
     Core.withObject
       "UserData"
       ( \o ->
-          UserData
-            Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+          UserData Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON UserData where
   toJSON UserData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("key" Core..=) Core.<$> key,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
       )

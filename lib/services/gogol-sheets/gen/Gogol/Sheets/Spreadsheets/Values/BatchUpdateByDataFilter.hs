@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.Values.BatchUpdateByDataFilter
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchUpdateByDataFilter@ method which the
@@ -55,12 +53,8 @@ type SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchUpdateValuesByDataFilterRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchUpdateValuesByDataFilterResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchUpdateValuesByDataFilterRequest
+    Core.:> Core.Post '[Core.JSON] BatchUpdateValuesByDataFilterResponse
 
 -- | Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOption, and one or more DataFilterValueRanges.
 --
@@ -90,49 +84,45 @@ newSheetsSpreadsheetsValuesBatchUpdateByDataFilter ::
   -- |  The ID of the spreadsheet to update. See 'spreadsheetId'.
   Core.Text ->
   SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-newSheetsSpreadsheetsValuesBatchUpdateByDataFilter payload spreadsheetId =
-  SheetsSpreadsheetsValuesBatchUpdateByDataFilter
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      spreadsheetId = spreadsheetId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSheetsSpreadsheetsValuesBatchUpdateByDataFilter
+  payload
+  spreadsheetId =
+    SheetsSpreadsheetsValuesBatchUpdateByDataFilter
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        spreadsheetId = spreadsheetId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SheetsSpreadsheetsValuesBatchUpdateByDataFilter
   where
   type
-    Rs
-      SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
+    Rs SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
       BatchUpdateValuesByDataFilterResponse
   type
-    Scopes
-      SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
-  requestClient
-    SheetsSpreadsheetsValuesBatchUpdateByDataFilter {..} =
-      go
-        spreadsheetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sheetsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource
-            )
-            Core.mempty
+    Scopes SheetsSpreadsheetsValuesBatchUpdateByDataFilter =
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
+  requestClient SheetsSpreadsheetsValuesBatchUpdateByDataFilter {..} =
+    go
+      spreadsheetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sheetsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SheetsSpreadsheetsValuesBatchUpdateByDataFilterResource
+          )
+          Core.mempty

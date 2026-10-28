@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.RemarketingAudience.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.RemarketingAudience.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.remarketingAudience.patch@ method which the
 -- 'AnalyticsManagementRemarketingAudiencePatch' request conforms to.
@@ -84,13 +82,18 @@ newAnalyticsManagementRemarketingAudiencePatch ::
   -- |  The web property ID of the remarketing audience to update. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementRemarketingAudiencePatch
-newAnalyticsManagementRemarketingAudiencePatch accountId payload remarketingAudienceId webPropertyId =
-  AnalyticsManagementRemarketingAudiencePatch
-    { accountId = accountId,
-      payload = payload,
-      remarketingAudienceId = remarketingAudienceId,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementRemarketingAudiencePatch
+  accountId
+  payload
+  remarketingAudienceId
+  webPropertyId =
+    AnalyticsManagementRemarketingAudiencePatch
+      { accountId =
+          accountId,
+        payload = payload,
+        remarketingAudienceId = remarketingAudienceId,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
@@ -100,23 +103,20 @@ instance
     Rs AnalyticsManagementRemarketingAudiencePatch =
       RemarketingAudience
   type
-    Scopes
-      AnalyticsManagementRemarketingAudiencePatch =
+    Scopes AnalyticsManagementRemarketingAudiencePatch =
       '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementRemarketingAudiencePatch {..} =
-      go
-        accountId
-        webPropertyId
-        remarketingAudienceId
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementRemarketingAudiencePatchResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementRemarketingAudiencePatch {..} =
+    go
+      accountId
+      webPropertyId
+      remarketingAudienceId
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementRemarketingAudiencePatchResource
+          )
+          Core.mempty

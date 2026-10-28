@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.reclaim@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsReclaim' request conforms to.
@@ -58,9 +56,7 @@ type ClassroomCoursesCourseWorkStudentSubmissionsReclaimResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ReclaimStudentSubmissionRequest
+    Core.:> Core.ReqBody '[Core.JSON] ReclaimStudentSubmissionRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Reclaims a student submission on behalf of the student that owns it. Reclaiming a student submission transfers ownership of attached Drive files to the student and updates the submission state. Only the student that owns the requested student submission may call this method, and only for a student submission that has been turned in. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or course work, unsubmit the requested student submission, or for access errors. * @FAILED_PRECONDITION@ if the student submission has not been turned in. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course, course work, or student submission does not exist.
@@ -99,30 +95,31 @@ newClassroomCoursesCourseWorkStudentSubmissionsReclaim ::
   -- |  Multipart request metadata. See 'payload'.
   ReclaimStudentSubmissionRequest ->
   ClassroomCoursesCourseWorkStudentSubmissionsReclaim
-newClassroomCoursesCourseWorkStudentSubmissionsReclaim courseId courseWorkId id payload =
-  ClassroomCoursesCourseWorkStudentSubmissionsReclaim
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      id = id,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClassroomCoursesCourseWorkStudentSubmissionsReclaim
+  courseId
+  courseWorkId
+  id
+  payload =
+    ClassroomCoursesCourseWorkStudentSubmissionsReclaim
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        courseId = courseId,
+        courseWorkId = courseWorkId,
+        id = id,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkStudentSubmissionsReclaim
   where
+  type Rs ClassroomCoursesCourseWorkStudentSubmissionsReclaim = Empty
   type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsReclaim =
-      Empty
-  type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsReclaim =
+    Scopes ClassroomCoursesCourseWorkStudentSubmissionsReclaim =
       '[Classroom'Coursework'Me]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsReclaim {..} =

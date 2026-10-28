@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.CloudProfiler.Projects.Profiles.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation.
+-- UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./
 --
 -- /See:/ <https://cloud.google.com/profiler/ Cloud Profiler API Reference> for @cloudprofiler.projects.profiles.patch@.
 module Gogol.CloudProfiler.Projects.Profiles.Patch
@@ -40,7 +38,7 @@ module Gogol.CloudProfiler.Projects.Profiles.Patch
 where
 
 import Gogol.CloudProfiler.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprofiler.projects.profiles.patch@ method which the
 -- 'CloudProfilerProjectsProfilesPatch' request conforms to.
@@ -57,7 +55,7 @@ type CloudProfilerProjectsProfilesPatchResource =
     Core.:> Core.ReqBody '[Core.JSON] Profile
     Core.:> Core.Patch '[Core.JSON] Profile
 
--- | UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation.
+-- | UpdateProfile updates the profile bytes and labels on the profile resource created in the online mode. Updating the bytes for profiles created in the offline mode is currently not supported: the profile content must be provided at the time of the profile creation. /Direct use of this API is discouraged, please use a <https://cloud.google.com/profiler/docs/about-profiler#profiling_agent supported profiler agent> instead for profile collection./
 --
 -- /See:/ 'newCloudProfilerProjectsProfilesPatch' smart constructor.
 data CloudProfilerProjectsProfilesPatch = CloudProfilerProjectsProfilesPatch
@@ -99,10 +97,7 @@ newCloudProfilerProjectsProfilesPatch name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudProfilerProjectsProfilesPatch
-  where
+instance Core.GoogleRequest CloudProfilerProjectsProfilesPatch where
   type Rs CloudProfilerProjectsProfilesPatch = Profile
   type
     Scopes CloudProfilerProjectsProfilesPatch =
@@ -126,7 +121,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudProfilerProjectsProfilesPatchResource
+              Core.Proxy CloudProfilerProjectsProfilesPatchResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TPU.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.TPU.Internal.Product
@@ -34,17 +32,37 @@ module Gogol.TPU.Internal.Product
     AcceleratorType (..),
     newAcceleratorType,
 
+    -- * AcceptedData
+    AcceptedData (..),
+    newAcceptedData,
+
     -- * AccessConfig
     AccessConfig (..),
     newAccessConfig,
+
+    -- * ActiveData
+    ActiveData (..),
+    newActiveData,
 
     -- * AttachedDisk
     AttachedDisk (..),
     newAttachedDisk,
 
+    -- * CreatingData
+    CreatingData (..),
+    newCreatingData,
+
+    -- * DeletingData
+    DeletingData (..),
+    newDeletingData,
+
     -- * Empty
     Empty (..),
     newEmpty,
+
+    -- * FailedData
+    FailedData (..),
+    newFailedData,
 
     -- * GenerateServiceIdentityRequest
     GenerateServiceIdentityRequest (..),
@@ -62,6 +80,10 @@ module Gogol.TPU.Internal.Product
     GetGuestAttributesResponse (..),
     newGetGuestAttributesResponse,
 
+    -- * Guaranteed
+    Guaranteed (..),
+    newGuaranteed,
+
     -- * GuestAttributes
     GuestAttributes (..),
     newGuestAttributes,
@@ -73,6 +95,10 @@ module Gogol.TPU.Internal.Product
     -- * GuestAttributesValue
     GuestAttributesValue (..),
     newGuestAttributesValue,
+
+    -- * Interval
+    Interval (..),
+    newInterval,
 
     -- * ListAcceleratorTypesResponse
     ListAcceleratorTypesResponse (..),
@@ -90,6 +116,10 @@ module Gogol.TPU.Internal.Product
     ListOperationsResponse (..),
     newListOperationsResponse,
 
+    -- * ListQueuedResourcesResponse
+    ListQueuedResourcesResponse (..),
+    newListQueuedResourcesResponse,
+
     -- * ListRuntimeVersionsResponse
     ListRuntimeVersionsResponse (..),
     newListRuntimeVersionsResponse,
@@ -105,6 +135,10 @@ module Gogol.TPU.Internal.Product
     -- * Location_Metadata
     Location_Metadata (..),
     newLocation_Metadata,
+
+    -- * MultisliceParams
+    MultisliceParams (..),
+    newMultisliceParams,
 
     -- * NetworkConfig
     NetworkConfig (..),
@@ -126,6 +160,10 @@ module Gogol.TPU.Internal.Product
     Node_Metadata (..),
     newNode_Metadata,
 
+    -- * NodeSpec
+    NodeSpec (..),
+    newNodeSpec,
+
     -- * Operation
     Operation (..),
     newOperation,
@@ -141,6 +179,26 @@ module Gogol.TPU.Internal.Product
     -- * OperationMetadata
     OperationMetadata (..),
     newOperationMetadata,
+
+    -- * ProvisioningData
+    ProvisioningData (..),
+    newProvisioningData,
+
+    -- * QueuedResource
+    QueuedResource (..),
+    newQueuedResource,
+
+    -- * QueuedResourceState
+    QueuedResourceState (..),
+    newQueuedResourceState,
+
+    -- * QueueingPolicy
+    QueueingPolicy (..),
+    newQueueingPolicy,
+
+    -- * ResetQueuedResourceRequest
+    ResetQueuedResourceRequest (..),
+    newResetQueuedResourceRequest,
 
     -- * RuntimeVersion
     RuntimeVersion (..),
@@ -162,6 +220,10 @@ module Gogol.TPU.Internal.Product
     ShieldedInstanceConfig (..),
     newShieldedInstanceConfig,
 
+    -- * Spot
+    Spot (..),
+    newSpot,
+
     -- * StartNodeRequest
     StartNodeRequest (..),
     newStartNodeRequest,
@@ -178,13 +240,25 @@ module Gogol.TPU.Internal.Product
     StopNodeRequest (..),
     newStopNodeRequest,
 
+    -- * SuspendedData
+    SuspendedData (..),
+    newSuspendedData,
+
+    -- * SuspendingData
+    SuspendingData (..),
+    newSuspendingData,
+
     -- * Symptom
     Symptom (..),
     newSymptom,
+
+    -- * Tpu
+    Tpu (..),
+    newTpu,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TPU.Internal.Sum
 
 -- | A TPU accelerator configuration.
@@ -210,7 +284,8 @@ instance Core.FromJSON AcceleratorConfig where
       "AcceleratorConfig"
       ( \o ->
           AcceleratorConfig
-            Core.<$> (o Core..:? "topology") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "topology")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON AcceleratorConfig where
@@ -230,7 +305,7 @@ data AcceleratorType = AcceleratorType
     acceleratorConfigs :: (Core.Maybe [AcceleratorConfig]),
     -- | The resource name.
     name :: (Core.Maybe Core.Text),
-    -- | the accelerator type.
+    -- | The accelerator type.
     type' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -260,12 +335,29 @@ instance Core.ToJSON AcceleratorType where
   toJSON AcceleratorType {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorConfigs" Core..=)
-              Core.<$> acceleratorConfigs,
+          [ ("acceleratorConfigs" Core..=) Core.<$> acceleratorConfigs,
             ("name" Core..=) Core.<$> name,
             ("type" Core..=) Core.<$> type'
           ]
       )
+
+-- | Further data for the accepted state.
+--
+-- /See:/ 'newAcceptedData' smart constructor.
+data AcceptedData = AcceptedData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AcceptedData' with the minimum fields required to make a request.
+newAcceptedData ::
+  AcceptedData
+newAcceptedData = AcceptedData
+
+instance Core.FromJSON AcceptedData where
+  parseJSON =
+    Core.withObject "AcceptedData" (\o -> Core.pure AcceptedData)
+
+instance Core.ToJSON AcceptedData where
+  toJSON = Core.const Core.emptyObject
 
 -- | An access config attached to the TPU worker.
 --
@@ -285,16 +377,30 @@ instance Core.FromJSON AccessConfig where
   parseJSON =
     Core.withObject
       "AccessConfig"
-      ( \o ->
-          AccessConfig Core.<$> (o Core..:? "externalIp")
-      )
+      (\o -> AccessConfig Core.<$> (o Core..:? "externalIp"))
 
 instance Core.ToJSON AccessConfig where
   toJSON AccessConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("externalIp" Core..=) Core.<$> externalIp]
-      )
+      (Core.catMaybes [("externalIp" Core..=) Core.<$> externalIp])
+
+-- | Further data for the active state.
+--
+-- /See:/ 'newActiveData' smart constructor.
+data ActiveData = ActiveData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ActiveData' with the minimum fields required to make a request.
+newActiveData ::
+  ActiveData
+newActiveData = ActiveData
+
+instance Core.FromJSON ActiveData where
+  parseJSON =
+    Core.withObject "ActiveData" (\o -> Core.pure ActiveData)
+
+instance Core.ToJSON ActiveData where
+  toJSON = Core.const Core.emptyObject
 
 -- | A node-attached disk resource. Next ID: 8;
 --
@@ -310,7 +416,8 @@ data AttachedDisk = AttachedDisk
 -- | Creates a value of 'AttachedDisk' with the minimum fields required to make a request.
 newAttachedDisk ::
   AttachedDisk
-newAttachedDisk = AttachedDisk {mode = Core.Nothing, sourceDisk = Core.Nothing}
+newAttachedDisk =
+  AttachedDisk {mode = Core.Nothing, sourceDisk = Core.Nothing}
 
 instance Core.FromJSON AttachedDisk where
   parseJSON =
@@ -331,6 +438,42 @@ instance Core.ToJSON AttachedDisk where
           ]
       )
 
+-- | Further data for the creating state.
+--
+-- /See:/ 'newCreatingData' smart constructor.
+data CreatingData = CreatingData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CreatingData' with the minimum fields required to make a request.
+newCreatingData ::
+  CreatingData
+newCreatingData = CreatingData
+
+instance Core.FromJSON CreatingData where
+  parseJSON =
+    Core.withObject "CreatingData" (\o -> Core.pure CreatingData)
+
+instance Core.ToJSON CreatingData where
+  toJSON = Core.const Core.emptyObject
+
+-- | Further data for the deleting state.
+--
+-- /See:/ 'newDeletingData' smart constructor.
+data DeletingData = DeletingData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DeletingData' with the minimum fields required to make a request.
+newDeletingData ::
+  DeletingData
+newDeletingData = DeletingData
+
+instance Core.FromJSON DeletingData where
+  parseJSON =
+    Core.withObject "DeletingData" (\o -> Core.pure DeletingData)
+
+instance Core.ToJSON DeletingData where
+  toJSON = Core.const Core.emptyObject
+
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
 -- /See:/ 'newEmpty' smart constructor.
@@ -343,11 +486,34 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Further data for the failed state.
+--
+-- /See:/ 'newFailedData' smart constructor.
+newtype FailedData = FailedData
+  { -- | Output only. The error that caused the queued resource to enter the FAILED state.
+    error :: (Core.Maybe Status)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FailedData' with the minimum fields required to make a request.
+newFailedData ::
+  FailedData
+newFailedData = FailedData {error = Core.Nothing}
+
+instance Core.FromJSON FailedData where
+  parseJSON =
+    Core.withObject
+      "FailedData"
+      (\o -> FailedData Core.<$> (o Core..:? "error"))
+
+instance Core.ToJSON FailedData where
+  toJSON FailedData {..} =
+    Core.object (Core.catMaybes [("error" Core..=) Core.<$> error])
 
 -- | Request for GenerateServiceIdentity.
 --
@@ -384,24 +550,18 @@ newGenerateServiceIdentityResponse ::
 newGenerateServiceIdentityResponse =
   GenerateServiceIdentityResponse {identity = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GenerateServiceIdentityResponse
-  where
+instance Core.FromJSON GenerateServiceIdentityResponse where
   parseJSON =
     Core.withObject
       "GenerateServiceIdentityResponse"
       ( \o ->
-          GenerateServiceIdentityResponse
-            Core.<$> (o Core..:? "identity")
+          GenerateServiceIdentityResponse Core.<$> (o Core..:? "identity")
       )
 
 instance Core.ToJSON GenerateServiceIdentityResponse where
   toJSON GenerateServiceIdentityResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("identity" Core..=) Core.<$> identity]
-      )
+      (Core.catMaybes [("identity" Core..=) Core.<$> identity])
 
 -- | Request for GetGuestAttributes.
 --
@@ -418,7 +578,10 @@ data GetGuestAttributesRequest = GetGuestAttributesRequest
 newGetGuestAttributesRequest ::
   GetGuestAttributesRequest
 newGetGuestAttributesRequest =
-  GetGuestAttributesRequest {queryPath = Core.Nothing, workerIds = Core.Nothing}
+  GetGuestAttributesRequest
+    { queryPath = Core.Nothing,
+      workerIds = Core.Nothing
+    }
 
 instance Core.FromJSON GetGuestAttributesRequest where
   parseJSON =
@@ -459,18 +622,40 @@ instance Core.FromJSON GetGuestAttributesResponse where
     Core.withObject
       "GetGuestAttributesResponse"
       ( \o ->
-          GetGuestAttributesResponse
-            Core.<$> (o Core..:? "guestAttributes")
+          GetGuestAttributesResponse Core.<$> (o Core..:? "guestAttributes")
       )
 
 instance Core.ToJSON GetGuestAttributesResponse where
   toJSON GetGuestAttributesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("guestAttributes" Core..=)
-              Core.<$> guestAttributes
-          ]
+          [("guestAttributes" Core..=) Core.<$> guestAttributes]
       )
+
+-- | Guaranteed tier definition.
+--
+-- /See:/ 'newGuaranteed' smart constructor.
+newtype Guaranteed = Guaranteed
+  { -- | Optional. Defines the minimum duration of the guarantee. If specified, the requested resources will only be provisioned if they can be allocated for at least the given duration.
+    minDuration :: (Core.Maybe Core.Duration)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Guaranteed' with the minimum fields required to make a request.
+newGuaranteed ::
+  Guaranteed
+newGuaranteed = Guaranteed {minDuration = Core.Nothing}
+
+instance Core.FromJSON Guaranteed where
+  parseJSON =
+    Core.withObject
+      "Guaranteed"
+      (\o -> Guaranteed Core.<$> (o Core..:? "minDuration"))
+
+instance Core.ToJSON Guaranteed where
+  toJSON Guaranteed {..} =
+    Core.object
+      (Core.catMaybes [("minDuration" Core..=) Core.<$> minDuration])
 
 -- | A guest attributes.
 --
@@ -487,7 +672,10 @@ data GuestAttributes = GuestAttributes
 newGuestAttributes ::
   GuestAttributes
 newGuestAttributes =
-  GuestAttributes {queryPath = Core.Nothing, queryValue = Core.Nothing}
+  GuestAttributes
+    { queryPath = Core.Nothing,
+      queryValue = Core.Nothing
+    }
 
 instance Core.FromJSON GuestAttributes where
   parseJSON =
@@ -564,20 +752,54 @@ newtype GuestAttributesValue = GuestAttributesValue
 -- | Creates a value of 'GuestAttributesValue' with the minimum fields required to make a request.
 newGuestAttributesValue ::
   GuestAttributesValue
-newGuestAttributesValue = GuestAttributesValue {items = Core.Nothing}
+newGuestAttributesValue =
+  GuestAttributesValue {items = Core.Nothing}
 
 instance Core.FromJSON GuestAttributesValue where
   parseJSON =
     Core.withObject
       "GuestAttributesValue"
-      ( \o ->
-          GuestAttributesValue Core.<$> (o Core..:? "items")
-      )
+      (\o -> GuestAttributesValue Core.<$> (o Core..:? "items"))
 
 instance Core.ToJSON GuestAttributesValue where
   toJSON GuestAttributesValue {..} =
+    Core.object (Core.catMaybes [("items" Core..=) Core.<$> items])
+
+-- | Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+--
+-- /See:/ 'newInterval' smart constructor.
+data Interval = Interval
+  { -- | Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
+    endTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
+    startTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Interval' with the minimum fields required to make a request.
+newInterval ::
+  Interval
+newInterval =
+  Interval {endTime = Core.Nothing, startTime = Core.Nothing}
+
+instance Core.FromJSON Interval where
+  parseJSON =
+    Core.withObject
+      "Interval"
+      ( \o ->
+          Interval
+            Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "startTime")
+      )
+
+instance Core.ToJSON Interval where
+  toJSON Interval {..} =
     Core.object
-      (Core.catMaybes [("items" Core..=) Core.<$> items])
+      ( Core.catMaybes
+          [ ("endTime" Core..=) Core.<$> endTime,
+            ("startTime" Core..=) Core.<$> startTime
+          ]
+      )
 
 -- | Response for ListAcceleratorTypes.
 --
@@ -617,8 +839,7 @@ instance Core.ToJSON ListAcceleratorTypesResponse where
   toJSON ListAcceleratorTypesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorTypes" Core..=)
-              Core.<$> acceleratorTypes,
+          [ ("acceleratorTypes" Core..=) Core.<$> acceleratorTypes,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("unreachable" Core..=) Core.<$> unreachable
           ]
@@ -639,7 +860,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -743,6 +967,50 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
+-- | Response for ListQueuedResources.
+--
+-- /See:/ 'newListQueuedResourcesResponse' smart constructor.
+data ListQueuedResourcesResponse = ListQueuedResourcesResponse
+  { -- | The next page token or empty if none.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The listed queued resources.
+    queuedResources :: (Core.Maybe [QueuedResource]),
+    -- | Locations that could not be reached.
+    unreachable :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListQueuedResourcesResponse' with the minimum fields required to make a request.
+newListQueuedResourcesResponse ::
+  ListQueuedResourcesResponse
+newListQueuedResourcesResponse =
+  ListQueuedResourcesResponse
+    { nextPageToken = Core.Nothing,
+      queuedResources = Core.Nothing,
+      unreachable = Core.Nothing
+    }
+
+instance Core.FromJSON ListQueuedResourcesResponse where
+  parseJSON =
+    Core.withObject
+      "ListQueuedResourcesResponse"
+      ( \o ->
+          ListQueuedResourcesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "queuedResources")
+            Core.<*> (o Core..:? "unreachable")
+      )
+
+instance Core.ToJSON ListQueuedResourcesResponse where
+  toJSON ListQueuedResourcesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("queuedResources" Core..=) Core.<$> queuedResources,
+            ("unreachable" Core..=) Core.<$> unreachable
+          ]
+      )
+
 -- | Response for ListRuntimeVersions.
 --
 -- /See:/ 'newListRuntimeVersionsResponse' smart constructor.
@@ -787,7 +1055,7 @@ instance Core.ToJSON ListRuntimeVersionsResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -845,8 +1113,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -855,15 +1122,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -882,18 +1148,56 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
+
+-- | Parameters to specify for multislice QueuedResource requests. This message must be populated in case of multislice requests instead of node_id.
+--
+-- /See:/ 'newMultisliceParams' smart constructor.
+data MultisliceParams = MultisliceParams
+  { -- | Required. Number of nodes with this spec. The system will attempt to provision \"node_count\" nodes as part of the request. This needs to be > 1.
+    nodeCount :: (Core.Maybe Core.Int32),
+    -- | Optional. Prefix of node/ids in case of multislice request. Should follow the @^[A-Za-z0-9_.~+%-]+$@ regex format. If node/count = 3 and node/id/prefix = \"np\", node ids of nodes created will be \"np-0\", \"np-1\", \"np-2\". If this field is not provided we use queued/resource/id as the node/id/prefix.
+    nodeIdPrefix :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'MultisliceParams' with the minimum fields required to make a request.
+newMultisliceParams ::
+  MultisliceParams
+newMultisliceParams =
+  MultisliceParams
+    { nodeCount = Core.Nothing,
+      nodeIdPrefix = Core.Nothing
+    }
+
+instance Core.FromJSON MultisliceParams where
+  parseJSON =
+    Core.withObject
+      "MultisliceParams"
+      ( \o ->
+          MultisliceParams
+            Core.<$> (o Core..:? "nodeCount")
+            Core.<*> (o Core..:? "nodeIdPrefix")
+      )
+
+instance Core.ToJSON MultisliceParams where
+  toJSON MultisliceParams {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nodeCount" Core..=) Core.<$> nodeCount,
+            ("nodeIdPrefix" Core..=) Core.<$> nodeIdPrefix
+          ]
+      )
 
 -- | Network related configurations.
 --
@@ -905,6 +1209,8 @@ data NetworkConfig = NetworkConfig
     enableExternalIps :: (Core.Maybe Core.Bool),
     -- | The name of the network for the TPU node. It must be a preexisting Google Compute Engine network. If none is provided, \"default\" will be used.
     network :: (Core.Maybe Core.Text),
+    -- | Optional. Specifies networking queue count for TPU VM instance\'s network interface.
+    queueCount :: (Core.Maybe Core.Int32),
     -- | The name of the subnetwork for the TPU node. It must be a preexisting Google Compute Engine subnetwork. If none is provided, \"default\" will be used.
     subnetwork :: (Core.Maybe Core.Text)
   }
@@ -918,6 +1224,7 @@ newNetworkConfig =
     { canIpForward = Core.Nothing,
       enableExternalIps = Core.Nothing,
       network = Core.Nothing,
+      queueCount = Core.Nothing,
       subnetwork = Core.Nothing
     }
 
@@ -930,6 +1237,7 @@ instance Core.FromJSON NetworkConfig where
             Core.<$> (o Core..:? "canIpForward")
             Core.<*> (o Core..:? "enableExternalIps")
             Core.<*> (o Core..:? "network")
+            Core.<*> (o Core..:? "queueCount")
             Core.<*> (o Core..:? "subnetwork")
       )
 
@@ -938,9 +1246,9 @@ instance Core.ToJSON NetworkConfig where
     Core.object
       ( Core.catMaybes
           [ ("canIpForward" Core..=) Core.<$> canIpForward,
-            ("enableExternalIps" Core..=)
-              Core.<$> enableExternalIps,
+            ("enableExternalIps" Core..=) Core.<$> enableExternalIps,
             ("network" Core..=) Core.<$> network,
+            ("queueCount" Core..=) Core.<$> queueCount,
             ("subnetwork" Core..=) Core.<$> subnetwork
           ]
       )
@@ -995,7 +1303,7 @@ instance Core.ToJSON NetworkEndpoint where
 data Node = Node
   { -- | The AccleratorConfig for the TPU Node.
     acceleratorConfig :: (Core.Maybe AcceleratorConfig),
-    -- | Required. The type of hardware accelerators associated with this node.
+    -- | Optional. The type of hardware accelerators associated with this node.
     acceleratorType :: (Core.Maybe Core.Text),
     -- | Output only. The API version that created this Node.
     apiVersion :: (Core.Maybe Node_ApiVersion),
@@ -1017,12 +1325,18 @@ data Node = Node
     labels :: (Core.Maybe Node_Labels),
     -- | Custom metadata to apply to the TPU Node. Can set startup-script and shutdown-script
     metadata :: (Core.Maybe Node_Metadata),
+    -- | Output only. Whether the Node belongs to a Multislice group.
+    multisliceNode :: (Core.Maybe Core.Bool),
     -- | Output only. Immutable. The name of the TPU.
     name :: (Core.Maybe Core.Text),
-    -- | Network configurations for the TPU node.
+    -- | Network configurations for the TPU node. network/config and network/configs are mutually exclusive, you can only specify one of them. If both are specified, an error will be returned.
     networkConfig :: (Core.Maybe NetworkConfig),
+    -- | Optional. Repeated network configurations for the TPU node. This field is used to specify multiple networks configs for the TPU node. network/config and network/configs are mutually exclusive, you can only specify one of them. If both are specified, an error will be returned.
+    networkConfigs :: (Core.Maybe [NetworkConfig]),
     -- | Output only. The network endpoints where TPU workers can be accessed and sent work. It is recommended that runtime clients of the node reach out to the 0th entry in this map first.
     networkEndpoints :: (Core.Maybe [NetworkEndpoint]),
+    -- | Output only. The qualified name of the QueuedResource that requested this Node.
+    queuedResource :: (Core.Maybe Core.Text),
     -- | Required. The runtime version running in the Node.
     runtimeVersion :: (Core.Maybe Core.Text),
     -- | The scheduling options for this node.
@@ -1057,9 +1371,12 @@ newNode =
       id = Core.Nothing,
       labels = Core.Nothing,
       metadata = Core.Nothing,
+      multisliceNode = Core.Nothing,
       name = Core.Nothing,
       networkConfig = Core.Nothing,
+      networkConfigs = Core.Nothing,
       networkEndpoints = Core.Nothing,
+      queuedResource = Core.Nothing,
       runtimeVersion = Core.Nothing,
       schedulingConfig = Core.Nothing,
       serviceAccount = Core.Nothing,
@@ -1087,9 +1404,12 @@ instance Core.FromJSON Node where
             Core.<*> (o Core..:? "id" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "metadata")
+            Core.<*> (o Core..:? "multisliceNode")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "networkConfig")
+            Core.<*> (o Core..:? "networkConfigs")
             Core.<*> (o Core..:? "networkEndpoints")
+            Core.<*> (o Core..:? "queuedResource")
             Core.<*> (o Core..:? "runtimeVersion")
             Core.<*> (o Core..:? "schedulingConfig")
             Core.<*> (o Core..:? "serviceAccount")
@@ -1103,8 +1423,7 @@ instance Core.ToJSON Node where
   toJSON Node {..} =
     Core.object
       ( Core.catMaybes
-          [ ("acceleratorConfig" Core..=)
-              Core.<$> acceleratorConfig,
+          [ ("acceleratorConfig" Core..=) Core.<$> acceleratorConfig,
             ("acceleratorType" Core..=) Core.<$> acceleratorType,
             ("apiVersion" Core..=) Core.<$> apiVersion,
             ("cidrBlock" Core..=) Core.<$> cidrBlock,
@@ -1112,21 +1431,20 @@ instance Core.ToJSON Node where
             ("dataDisks" Core..=) Core.<$> dataDisks,
             ("description" Core..=) Core.<$> description,
             ("health" Core..=) Core.<$> health,
-            ("healthDescription" Core..=)
-              Core.<$> healthDescription,
+            ("healthDescription" Core..=) Core.<$> healthDescription,
             ("id" Core..=) Core.. Core.AsText Core.<$> id,
             ("labels" Core..=) Core.<$> labels,
             ("metadata" Core..=) Core.<$> metadata,
+            ("multisliceNode" Core..=) Core.<$> multisliceNode,
             ("name" Core..=) Core.<$> name,
             ("networkConfig" Core..=) Core.<$> networkConfig,
-            ("networkEndpoints" Core..=)
-              Core.<$> networkEndpoints,
+            ("networkConfigs" Core..=) Core.<$> networkConfigs,
+            ("networkEndpoints" Core..=) Core.<$> networkEndpoints,
+            ("queuedResource" Core..=) Core.<$> queuedResource,
             ("runtimeVersion" Core..=) Core.<$> runtimeVersion,
-            ("schedulingConfig" Core..=)
-              Core.<$> schedulingConfig,
+            ("schedulingConfig" Core..=) Core.<$> schedulingConfig,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("shieldedInstanceConfig" Core..=)
-              Core.<$> shieldedInstanceConfig,
+            ("shieldedInstanceConfig" Core..=) Core.<$> shieldedInstanceConfig,
             ("state" Core..=) Core.<$> state,
             ("symptoms" Core..=) Core.<$> symptoms,
             ("tags" Core..=) Core.<$> tags
@@ -1137,8 +1455,7 @@ instance Core.ToJSON Node where
 --
 -- /See:/ 'newNode_Labels' smart constructor.
 newtype Node_Labels = Node_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1153,9 +1470,7 @@ instance Core.FromJSON Node_Labels where
   parseJSON =
     Core.withObject
       "Node_Labels"
-      ( \o ->
-          Node_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Node_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Node_Labels where
   toJSON Node_Labels {..} = Core.toJSON additional
@@ -1164,8 +1479,7 @@ instance Core.ToJSON Node_Labels where
 --
 -- /See:/ 'newNode_Metadata' smart constructor.
 newtype Node_Metadata = Node_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1174,18 +1488,66 @@ newNode_Metadata ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Node_Metadata
-newNode_Metadata additional = Node_Metadata {additional = additional}
+newNode_Metadata additional =
+  Node_Metadata {additional = additional}
 
 instance Core.FromJSON Node_Metadata where
   parseJSON =
     Core.withObject
       "Node_Metadata"
-      ( \o ->
-          Node_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Node_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Node_Metadata where
   toJSON Node_Metadata {..} = Core.toJSON additional
+
+-- | Details of the TPU node(s) being requested. Users can request either a single node or multiple nodes. NodeSpec provides the specification for node(s) to be created.
+--
+-- /See:/ 'newNodeSpec' smart constructor.
+data NodeSpec = NodeSpec
+  { -- | Optional. Fields to specify in case of multislice request.
+    multisliceParams :: (Core.Maybe MultisliceParams),
+    -- | Required. The node.
+    node :: (Core.Maybe Node),
+    -- | Optional. The unqualified resource name. Should follow the @^[A-Za-z0-9_.~+%-]+$@ regex format. This is only specified when requesting a single node. In case of multislice requests, multislice_params must be populated instead.
+    nodeId :: (Core.Maybe Core.Text),
+    -- | Required. The parent resource name.
+    parent :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'NodeSpec' with the minimum fields required to make a request.
+newNodeSpec ::
+  NodeSpec
+newNodeSpec =
+  NodeSpec
+    { multisliceParams = Core.Nothing,
+      node = Core.Nothing,
+      nodeId = Core.Nothing,
+      parent = Core.Nothing
+    }
+
+instance Core.FromJSON NodeSpec where
+  parseJSON =
+    Core.withObject
+      "NodeSpec"
+      ( \o ->
+          NodeSpec
+            Core.<$> (o Core..:? "multisliceParams")
+            Core.<*> (o Core..:? "node")
+            Core.<*> (o Core..:? "nodeId")
+            Core.<*> (o Core..:? "parent")
+      )
+
+instance Core.ToJSON NodeSpec where
+  toJSON NodeSpec {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("multisliceParams" Core..=) Core.<$> multisliceParams,
+            ("node" Core..=) Core.<$> node,
+            ("nodeId" Core..=) Core.<$> nodeId,
+            ("parent" Core..=) Core.<$> parent
+          ]
+      )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -1199,7 +1561,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1255,21 +1617,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1283,19 +1643,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Metadata describing an Operation
 --
@@ -1361,6 +1719,248 @@ instance Core.ToJSON OperationMetadata where
           ]
       )
 
+-- | Further data for the provisioning state.
+--
+-- /See:/ 'newProvisioningData' smart constructor.
+data ProvisioningData = ProvisioningData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ProvisioningData' with the minimum fields required to make a request.
+newProvisioningData ::
+  ProvisioningData
+newProvisioningData = ProvisioningData
+
+instance Core.FromJSON ProvisioningData where
+  parseJSON =
+    Core.withObject
+      "ProvisioningData"
+      (\o -> Core.pure ProvisioningData)
+
+instance Core.ToJSON ProvisioningData where
+  toJSON = Core.const Core.emptyObject
+
+-- | A QueuedResource represents a request for resources that will be placed in a queue and fulfilled when the necessary resources are available.
+--
+-- /See:/ 'newQueuedResource' smart constructor.
+data QueuedResource = QueuedResource
+  { -- | Output only. The time when the QueuedResource was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. The Guaranteed tier
+    guaranteed :: (Core.Maybe Guaranteed),
+    -- | Output only. Immutable. The name of the QueuedResource.
+    name :: (Core.Maybe Core.Text),
+    -- | Optional. The queueing policy of the QueuedRequest.
+    queueingPolicy :: (Core.Maybe QueueingPolicy),
+    -- | Optional. Name of the reservation in which the resource should be provisioned. Format: projects\/{project}\/locations\/{zone}\/reservations\/{reservation}
+    reservationName :: (Core.Maybe Core.Text),
+    -- | Optional. The Spot tier.
+    spot :: (Core.Maybe Spot),
+    -- | Output only. State of the QueuedResource request.
+    state :: (Core.Maybe QueuedResourceState),
+    -- | Optional. Defines a TPU resource.
+    tpu :: (Core.Maybe Tpu)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueuedResource' with the minimum fields required to make a request.
+newQueuedResource ::
+  QueuedResource
+newQueuedResource =
+  QueuedResource
+    { createTime = Core.Nothing,
+      guaranteed = Core.Nothing,
+      name = Core.Nothing,
+      queueingPolicy = Core.Nothing,
+      reservationName = Core.Nothing,
+      spot = Core.Nothing,
+      state = Core.Nothing,
+      tpu = Core.Nothing
+    }
+
+instance Core.FromJSON QueuedResource where
+  parseJSON =
+    Core.withObject
+      "QueuedResource"
+      ( \o ->
+          QueuedResource
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "guaranteed")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "queueingPolicy")
+            Core.<*> (o Core..:? "reservationName")
+            Core.<*> (o Core..:? "spot")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "tpu")
+      )
+
+instance Core.ToJSON QueuedResource where
+  toJSON QueuedResource {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("guaranteed" Core..=) Core.<$> guaranteed,
+            ("name" Core..=) Core.<$> name,
+            ("queueingPolicy" Core..=) Core.<$> queueingPolicy,
+            ("reservationName" Core..=) Core.<$> reservationName,
+            ("spot" Core..=) Core.<$> spot,
+            ("state" Core..=) Core.<$> state,
+            ("tpu" Core..=) Core.<$> tpu
+          ]
+      )
+
+-- | QueuedResourceState defines the details of the QueuedResource request.
+--
+-- /See:/ 'newQueuedResourceState' smart constructor.
+data QueuedResourceState = QueuedResourceState
+  { -- | Output only. Further data for the accepted state.
+    acceptedData :: (Core.Maybe AcceptedData),
+    -- | Output only. Further data for the active state.
+    activeData :: (Core.Maybe ActiveData),
+    -- | Output only. Further data for the creating state.
+    creatingData :: (Core.Maybe CreatingData),
+    -- | Output only. Further data for the deleting state.
+    deletingData :: (Core.Maybe DeletingData),
+    -- | Output only. Further data for the failed state.
+    failedData :: (Core.Maybe FailedData),
+    -- | Output only. Further data for the provisioning state.
+    provisioningData :: (Core.Maybe ProvisioningData),
+    -- | Output only. State of the QueuedResource request.
+    state :: (Core.Maybe QueuedResourceState_State),
+    -- | Output only. The initiator of the QueuedResources\'s current state. Used to indicate whether the SUSPENDING\/SUSPENDED state was initiated by the user or the service.
+    stateInitiator :: (Core.Maybe QueuedResourceState_StateInitiator),
+    -- | Output only. Further data for the suspended state.
+    suspendedData :: (Core.Maybe SuspendedData),
+    -- | Output only. Further data for the suspending state.
+    suspendingData :: (Core.Maybe SuspendingData)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueuedResourceState' with the minimum fields required to make a request.
+newQueuedResourceState ::
+  QueuedResourceState
+newQueuedResourceState =
+  QueuedResourceState
+    { acceptedData = Core.Nothing,
+      activeData = Core.Nothing,
+      creatingData = Core.Nothing,
+      deletingData = Core.Nothing,
+      failedData = Core.Nothing,
+      provisioningData = Core.Nothing,
+      state = Core.Nothing,
+      stateInitiator = Core.Nothing,
+      suspendedData = Core.Nothing,
+      suspendingData = Core.Nothing
+    }
+
+instance Core.FromJSON QueuedResourceState where
+  parseJSON =
+    Core.withObject
+      "QueuedResourceState"
+      ( \o ->
+          QueuedResourceState
+            Core.<$> (o Core..:? "acceptedData")
+            Core.<*> (o Core..:? "activeData")
+            Core.<*> (o Core..:? "creatingData")
+            Core.<*> (o Core..:? "deletingData")
+            Core.<*> (o Core..:? "failedData")
+            Core.<*> (o Core..:? "provisioningData")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "stateInitiator")
+            Core.<*> (o Core..:? "suspendedData")
+            Core.<*> (o Core..:? "suspendingData")
+      )
+
+instance Core.ToJSON QueuedResourceState where
+  toJSON QueuedResourceState {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("acceptedData" Core..=) Core.<$> acceptedData,
+            ("activeData" Core..=) Core.<$> activeData,
+            ("creatingData" Core..=) Core.<$> creatingData,
+            ("deletingData" Core..=) Core.<$> deletingData,
+            ("failedData" Core..=) Core.<$> failedData,
+            ("provisioningData" Core..=) Core.<$> provisioningData,
+            ("state" Core..=) Core.<$> state,
+            ("stateInitiator" Core..=) Core.<$> stateInitiator,
+            ("suspendedData" Core..=) Core.<$> suspendedData,
+            ("suspendingData" Core..=) Core.<$> suspendingData
+          ]
+      )
+
+-- | Defines the policy of the QueuedRequest.
+--
+-- /See:/ 'newQueueingPolicy' smart constructor.
+data QueueingPolicy = QueueingPolicy
+  { -- | Optional. A relative time after which resources may be created.
+    validAfterDuration :: (Core.Maybe Core.Duration),
+    -- | Optional. An absolute time after which resources may be created.
+    validAfterTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. An absolute time interval within which resources may be created.
+    validInterval :: (Core.Maybe Interval),
+    -- | Optional. A relative time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+    validUntilDuration :: (Core.Maybe Core.Duration),
+    -- | Optional. An absolute time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+    validUntilTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueueingPolicy' with the minimum fields required to make a request.
+newQueueingPolicy ::
+  QueueingPolicy
+newQueueingPolicy =
+  QueueingPolicy
+    { validAfterDuration = Core.Nothing,
+      validAfterTime = Core.Nothing,
+      validInterval = Core.Nothing,
+      validUntilDuration = Core.Nothing,
+      validUntilTime = Core.Nothing
+    }
+
+instance Core.FromJSON QueueingPolicy where
+  parseJSON =
+    Core.withObject
+      "QueueingPolicy"
+      ( \o ->
+          QueueingPolicy
+            Core.<$> (o Core..:? "validAfterDuration")
+            Core.<*> (o Core..:? "validAfterTime")
+            Core.<*> (o Core..:? "validInterval")
+            Core.<*> (o Core..:? "validUntilDuration")
+            Core.<*> (o Core..:? "validUntilTime")
+      )
+
+instance Core.ToJSON QueueingPolicy where
+  toJSON QueueingPolicy {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("validAfterDuration" Core..=) Core.<$> validAfterDuration,
+            ("validAfterTime" Core..=) Core.<$> validAfterTime,
+            ("validInterval" Core..=) Core.<$> validInterval,
+            ("validUntilDuration" Core..=) Core.<$> validUntilDuration,
+            ("validUntilTime" Core..=) Core.<$> validUntilTime
+          ]
+      )
+
+-- | Request for ResetQueuedResource.
+--
+-- /See:/ 'newResetQueuedResourceRequest' smart constructor.
+data ResetQueuedResourceRequest = ResetQueuedResourceRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ResetQueuedResourceRequest' with the minimum fields required to make a request.
+newResetQueuedResourceRequest ::
+  ResetQueuedResourceRequest
+newResetQueuedResourceRequest = ResetQueuedResourceRequest
+
+instance Core.FromJSON ResetQueuedResourceRequest where
+  parseJSON =
+    Core.withObject
+      "ResetQueuedResourceRequest"
+      (\o -> Core.pure ResetQueuedResourceRequest)
+
+instance Core.ToJSON ResetQueuedResourceRequest where
+  toJSON = Core.const Core.emptyObject
+
 -- | A runtime version that a Node can be configured with.
 --
 -- /See:/ 'newRuntimeVersion' smart constructor.
@@ -1375,7 +1975,8 @@ data RuntimeVersion = RuntimeVersion
 -- | Creates a value of 'RuntimeVersion' with the minimum fields required to make a request.
 newRuntimeVersion ::
   RuntimeVersion
-newRuntimeVersion = RuntimeVersion {name = Core.Nothing, version = Core.Nothing}
+newRuntimeVersion =
+  RuntimeVersion {name = Core.Nothing, version = Core.Nothing}
 
 instance Core.FromJSON RuntimeVersion where
   parseJSON =
@@ -1383,7 +1984,8 @@ instance Core.FromJSON RuntimeVersion where
       "RuntimeVersion"
       ( \o ->
           RuntimeVersion
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON RuntimeVersion where
@@ -1402,7 +2004,9 @@ data SchedulingConfig = SchedulingConfig
   { -- | Defines whether the node is preemptible.
     preemptible :: (Core.Maybe Core.Bool),
     -- | Whether the node is created under a reservation.
-    reserved :: (Core.Maybe Core.Bool)
+    reserved :: (Core.Maybe Core.Bool),
+    -- | Optional. Defines whether the node is Spot VM.
+    spot :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1410,7 +2014,11 @@ data SchedulingConfig = SchedulingConfig
 newSchedulingConfig ::
   SchedulingConfig
 newSchedulingConfig =
-  SchedulingConfig {preemptible = Core.Nothing, reserved = Core.Nothing}
+  SchedulingConfig
+    { preemptible = Core.Nothing,
+      reserved = Core.Nothing,
+      spot = Core.Nothing
+    }
 
 instance Core.FromJSON SchedulingConfig where
   parseJSON =
@@ -1420,6 +2028,7 @@ instance Core.FromJSON SchedulingConfig where
           SchedulingConfig
             Core.<$> (o Core..:? "preemptible")
             Core.<*> (o Core..:? "reserved")
+            Core.<*> (o Core..:? "spot")
       )
 
 instance Core.ToJSON SchedulingConfig where
@@ -1427,7 +2036,8 @@ instance Core.ToJSON SchedulingConfig where
     Core.object
       ( Core.catMaybes
           [ ("preemptible" Core..=) Core.<$> preemptible,
-            ("reserved" Core..=) Core.<$> reserved
+            ("reserved" Core..=) Core.<$> reserved,
+            ("spot" Core..=) Core.<$> spot
           ]
       )
 
@@ -1445,7 +2055,8 @@ data ServiceAccount = ServiceAccount
 -- | Creates a value of 'ServiceAccount' with the minimum fields required to make a request.
 newServiceAccount ::
   ServiceAccount
-newServiceAccount = ServiceAccount {email = Core.Nothing, scope = Core.Nothing}
+newServiceAccount =
+  ServiceAccount {email = Core.Nothing, scope = Core.Nothing}
 
 instance Core.FromJSON ServiceAccount where
   parseJSON =
@@ -1453,7 +2064,8 @@ instance Core.FromJSON ServiceAccount where
       "ServiceAccount"
       ( \o ->
           ServiceAccount
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "scope")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "scope")
       )
 
 instance Core.ToJSON ServiceAccount where
@@ -1483,14 +2095,11 @@ instance Core.FromJSON ServiceIdentity where
   parseJSON =
     Core.withObject
       "ServiceIdentity"
-      ( \o ->
-          ServiceIdentity Core.<$> (o Core..:? "email")
-      )
+      (\o -> ServiceIdentity Core.<$> (o Core..:? "email"))
 
 instance Core.ToJSON ServiceIdentity where
   toJSON ServiceIdentity {..} =
-    Core.object
-      (Core.catMaybes [("email" Core..=) Core.<$> email])
+    Core.object (Core.catMaybes [("email" Core..=) Core.<$> email])
 
 -- | A set of Shielded Instance options.
 --
@@ -1512,18 +2121,32 @@ instance Core.FromJSON ShieldedInstanceConfig where
     Core.withObject
       "ShieldedInstanceConfig"
       ( \o ->
-          ShieldedInstanceConfig
-            Core.<$> (o Core..:? "enableSecureBoot")
+          ShieldedInstanceConfig Core.<$> (o Core..:? "enableSecureBoot")
       )
 
 instance Core.ToJSON ShieldedInstanceConfig where
   toJSON ShieldedInstanceConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableSecureBoot" Core..=)
-              Core.<$> enableSecureBoot
-          ]
+          [("enableSecureBoot" Core..=) Core.<$> enableSecureBoot]
       )
+
+-- | Spot tier definition.
+--
+-- /See:/ 'newSpot' smart constructor.
+data Spot = Spot
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Spot' with the minimum fields required to make a request.
+newSpot ::
+  Spot
+newSpot = Spot
+
+instance Core.FromJSON Spot where
+  parseJSON = Core.withObject "Spot" (\o -> Core.pure Spot)
+
+instance Core.ToJSON Spot where
+  toJSON = Core.const Core.emptyObject
 
 -- | Request for StartNode.
 --
@@ -1562,7 +2185,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1598,19 +2225,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request for StopNode.
 --
@@ -1630,6 +2255,44 @@ instance Core.FromJSON StopNodeRequest where
       (\o -> Core.pure StopNodeRequest)
 
 instance Core.ToJSON StopNodeRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Further data for the suspended state.
+--
+-- /See:/ 'newSuspendedData' smart constructor.
+data SuspendedData = SuspendedData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SuspendedData' with the minimum fields required to make a request.
+newSuspendedData ::
+  SuspendedData
+newSuspendedData = SuspendedData
+
+instance Core.FromJSON SuspendedData where
+  parseJSON =
+    Core.withObject "SuspendedData" (\o -> Core.pure SuspendedData)
+
+instance Core.ToJSON SuspendedData where
+  toJSON = Core.const Core.emptyObject
+
+-- | Further data for the suspending state.
+--
+-- /See:/ 'newSuspendingData' smart constructor.
+data SuspendingData = SuspendingData
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SuspendingData' with the minimum fields required to make a request.
+newSuspendingData ::
+  SuspendingData
+newSuspendingData = SuspendingData
+
+instance Core.FromJSON SuspendingData where
+  parseJSON =
+    Core.withObject
+      "SuspendingData"
+      (\o -> Core.pure SuspendingData)
+
+instance Core.ToJSON SuspendingData where
   toJSON = Core.const Core.emptyObject
 
 -- | A Symptom instance.
@@ -1680,3 +2343,28 @@ instance Core.ToJSON Symptom where
             ("workerId" Core..=) Core.<$> workerId
           ]
       )
+
+-- | Details of the TPU resource(s) being requested.
+--
+-- /See:/ 'newTpu' smart constructor.
+newtype Tpu = Tpu
+  { -- | Optional. The TPU node(s) being requested.
+    nodeSpec :: (Core.Maybe [NodeSpec])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Tpu' with the minimum fields required to make a request.
+newTpu ::
+  Tpu
+newTpu = Tpu {nodeSpec = Core.Nothing}
+
+instance Core.FromJSON Tpu where
+  parseJSON =
+    Core.withObject
+      "Tpu"
+      (\o -> Tpu Core.<$> (o Core..:? "nodeSpec"))
+
+instance Core.ToJSON Tpu where
+  toJSON Tpu {..} =
+    Core.object
+      (Core.catMaybes [("nodeSpec" Core..=) Core.<$> nodeSpec])

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.Values.BatchClearByDataFilter
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.batchClearByDataFilter@ method which the
@@ -55,12 +53,8 @@ type SheetsSpreadsheetsValuesBatchClearByDataFilterResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              BatchClearValuesByDataFilterRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              BatchClearValuesByDataFilterResponse
+    Core.:> Core.ReqBody '[Core.JSON] BatchClearValuesByDataFilterRequest
+    Core.:> Core.Post '[Core.JSON] BatchClearValuesByDataFilterResponse
 
 -- | Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more DataFilters. Ranges matching any of the specified data filters will be cleared. Only values are cleared -- all other properties of the cell (such as formatting, data validation, etc..) are kept.
 --
@@ -90,49 +84,45 @@ newSheetsSpreadsheetsValuesBatchClearByDataFilter ::
   -- |  The ID of the spreadsheet to update. See 'spreadsheetId'.
   Core.Text ->
   SheetsSpreadsheetsValuesBatchClearByDataFilter
-newSheetsSpreadsheetsValuesBatchClearByDataFilter payload spreadsheetId =
-  SheetsSpreadsheetsValuesBatchClearByDataFilter
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      spreadsheetId = spreadsheetId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newSheetsSpreadsheetsValuesBatchClearByDataFilter
+  payload
+  spreadsheetId =
+    SheetsSpreadsheetsValuesBatchClearByDataFilter
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        spreadsheetId = spreadsheetId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     SheetsSpreadsheetsValuesBatchClearByDataFilter
   where
   type
-    Rs
-      SheetsSpreadsheetsValuesBatchClearByDataFilter =
+    Rs SheetsSpreadsheetsValuesBatchClearByDataFilter =
       BatchClearValuesByDataFilterResponse
   type
-    Scopes
-      SheetsSpreadsheetsValuesBatchClearByDataFilter =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
-  requestClient
-    SheetsSpreadsheetsValuesBatchClearByDataFilter {..} =
-      go
-        spreadsheetId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sheetsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SheetsSpreadsheetsValuesBatchClearByDataFilterResource
-            )
-            Core.mempty
+    Scopes SheetsSpreadsheetsValuesBatchClearByDataFilter =
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
+  requestClient SheetsSpreadsheetsValuesBatchClearByDataFilter {..} =
+    go
+      spreadsheetId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sheetsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SheetsSpreadsheetsValuesBatchClearByDataFilterResource
+          )
+          Core.mempty

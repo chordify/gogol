@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets the billing information for a project. The current authenticated user must have the @resourcemanager.projects.get@ permission for the project, which can be granted by assigning the <https://cloud.google.com/iam/docs/understanding-roles#predefined_roles Project Viewer> role.
 --
--- /See:/ <https://cloud.google.com/billing/ Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
+-- /See:/ <https://cloud.google.com/billing/docs/apis Cloud Billing API Reference> for @cloudbilling.projects.getBillingInfo@.
 module Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
   ( -- * Resource
     CloudbillingProjectsGetBillingInfoResource,
@@ -40,7 +38,7 @@ module Gogol.Billing.Cloudbilling.Projects.GetBillingInfo
 where
 
 import Gogol.Billing.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudbilling.projects.getBillingInfo@ method which the
 -- 'CloudbillingProjectsGetBillingInfo' request conforms to.
@@ -90,13 +88,8 @@ newCloudbillingProjectsGetBillingInfo name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudbillingProjectsGetBillingInfo
-  where
-  type
-    Rs CloudbillingProjectsGetBillingInfo =
-      ProjectBillingInfo
+instance Core.GoogleRequest CloudbillingProjectsGetBillingInfo where
+  type Rs CloudbillingProjectsGetBillingInfo = ProjectBillingInfo
   type
     Scopes CloudbillingProjectsGetBillingInfo =
       '[ CloudBilling'FullControl,
@@ -117,7 +110,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudbillingProjectsGetBillingInfoResource
+              Core.Proxy CloudbillingProjectsGetBillingInfoResource
           )
           Core.mempty

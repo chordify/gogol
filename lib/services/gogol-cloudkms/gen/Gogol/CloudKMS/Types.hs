@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudKMS.Types
@@ -71,6 +69,13 @@ module Gogol.CloudKMS.Types
     -- ** AuditLogConfig_LogType
     AuditLogConfig_LogType (..),
 
+    -- ** AutokeyConfig
+    AutokeyConfig (..),
+    newAutokeyConfig,
+
+    -- ** AutokeyConfig_State
+    AutokeyConfig_State (..),
+
     -- ** Binding
     Binding (..),
     newBinding,
@@ -82,6 +87,10 @@ module Gogol.CloudKMS.Types
     -- ** CertificateChains
     CertificateChains (..),
     newCertificateChains,
+
+    -- ** ChecksummedData
+    ChecksummedData (..),
+    newChecksummedData,
 
     -- ** CryptoKey
     CryptoKey (..),
@@ -197,6 +206,17 @@ module Gogol.CloudKMS.Types
     -- ** ImportJob_State
     ImportJob_State (..),
 
+    -- ** KeyAccessJustificationsPolicy
+    KeyAccessJustificationsPolicy (..),
+    newKeyAccessJustificationsPolicy,
+
+    -- ** KeyAccessJustificationsPolicy_AllowedAccessReasonsItem
+    KeyAccessJustificationsPolicy_AllowedAccessReasonsItem (..),
+
+    -- ** KeyHandle
+    KeyHandle (..),
+    newKeyHandle,
+
     -- ** KeyOperationAttestation
     KeyOperationAttestation (..),
     newKeyOperationAttestation,
@@ -223,6 +243,10 @@ module Gogol.CloudKMS.Types
     -- ** ListImportJobsResponse
     ListImportJobsResponse (..),
     newListImportJobsResponse,
+
+    -- ** ListKeyHandlesResponse
+    ListKeyHandlesResponse (..),
+    newListKeyHandlesResponse,
 
     -- ** ListKeyRingsResponse
     ListKeyRingsResponse (..),
@@ -270,6 +294,18 @@ module Gogol.CloudKMS.Types
     -- ** MacVerifyResponse_ProtectionLevel
     MacVerifyResponse_ProtectionLevel (..),
 
+    -- ** Operation
+    Operation (..),
+    newOperation,
+
+    -- ** Operation_Metadata
+    Operation_Metadata (..),
+    newOperation_Metadata,
+
+    -- ** Operation_Response
+    Operation_Response (..),
+    newOperation_Response,
+
     -- ** Policy
     Policy (..),
     newPolicy,
@@ -284,6 +320,31 @@ module Gogol.CloudKMS.Types
     -- ** PublicKey_ProtectionLevel
     PublicKey_ProtectionLevel (..),
 
+    -- ** PublicKey_PublicKeyFormat
+    PublicKey_PublicKeyFormat (..),
+
+    -- ** RawDecryptRequest
+    RawDecryptRequest (..),
+    newRawDecryptRequest,
+
+    -- ** RawDecryptResponse
+    RawDecryptResponse (..),
+    newRawDecryptResponse,
+
+    -- ** RawDecryptResponse_ProtectionLevel
+    RawDecryptResponse_ProtectionLevel (..),
+
+    -- ** RawEncryptRequest
+    RawEncryptRequest (..),
+    newRawEncryptRequest,
+
+    -- ** RawEncryptResponse
+    RawEncryptResponse (..),
+    newRawEncryptResponse,
+
+    -- ** RawEncryptResponse_ProtectionLevel
+    RawEncryptResponse_ProtectionLevel (..),
+
     -- ** RestoreCryptoKeyVersionRequest
     RestoreCryptoKeyVersionRequest (..),
     newRestoreCryptoKeyVersionRequest,
@@ -295,6 +356,18 @@ module Gogol.CloudKMS.Types
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
+
+    -- ** ShowEffectiveAutokeyConfigResponse
+    ShowEffectiveAutokeyConfigResponse (..),
+    newShowEffectiveAutokeyConfigResponse,
+
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
 
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
@@ -308,9 +381,16 @@ module Gogol.CloudKMS.Types
     UpdateCryptoKeyPrimaryVersionRequest (..),
     newUpdateCryptoKeyPrimaryVersionRequest,
 
+    -- ** VerifyConnectivityResponse
+    VerifyConnectivityResponse (..),
+    newVerifyConnectivityResponse,
+
     -- ** WrappingPublicKey
     WrappingPublicKey (..),
     newWrappingPublicKey,
+
+    -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat
+    ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsGetPublicKeyPublicKeyFormat (..),
 
     -- ** ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView
     ProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsListView (..),
@@ -322,7 +402,7 @@ where
 
 import Gogol.CloudKMS.Internal.Product
 import Gogol.CloudKMS.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Cloud Key Management Service (KMS) API. This contains the host and root path used as a starting point for constructing service requests.
 cloudKMSService :: Core.ServiceConfig
@@ -332,7 +412,9 @@ cloudKMSService =
     "cloudkms.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | View and manage your keys and secrets stored in Cloud Key Management Service
-type Cloudkms'FullControl = "https://www.googleapis.com/auth/cloudkms"
+type Cloudkms'FullControl =
+  "https://www.googleapis.com/auth/cloudkms"

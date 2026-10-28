@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.Attestors.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
+-- Deletes an attestor. Returns @NOT_FOUND@ if the attestor does not exist.
 --
 -- /See:/ <https://cloud.google.com/binary-authorization/ Binary Authorization API Reference> for @binaryauthorization.projects.attestors.delete@.
 module Gogol.BinaryAuthorization.Projects.Attestors.Delete
@@ -40,7 +38,7 @@ module Gogol.BinaryAuthorization.Projects.Attestors.Delete
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.delete@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsDelete' request conforms to.
@@ -55,7 +53,7 @@ type BinaryAuthorizationProjectsAttestorsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Empty
 
--- | Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
+-- | Deletes an attestor. Returns @NOT_FOUND@ if the attestor does not exist.
 --
 -- /See:/ 'newBinaryAuthorizationProjectsAttestorsDelete' smart constructor.
 data BinaryAuthorizationProjectsAttestorsDelete = BinaryAuthorizationProjectsAttestorsDelete
@@ -93,29 +91,24 @@ instance
   Core.GoogleRequest
     BinaryAuthorizationProjectsAttestorsDelete
   where
+  type Rs BinaryAuthorizationProjectsAttestorsDelete = Empty
   type
-    Rs BinaryAuthorizationProjectsAttestorsDelete =
-      Empty
-  type
-    Scopes
-      BinaryAuthorizationProjectsAttestorsDelete =
+    Scopes BinaryAuthorizationProjectsAttestorsDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    BinaryAuthorizationProjectsAttestorsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationProjectsAttestorsDeleteResource
-            )
-            Core.mempty
+  requestClient BinaryAuthorizationProjectsAttestorsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      binaryAuthorizationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BinaryAuthorizationProjectsAttestorsDeleteResource
+          )
+          Core.mempty

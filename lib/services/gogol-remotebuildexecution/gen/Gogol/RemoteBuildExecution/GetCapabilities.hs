@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.GetCapabilities
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.RemoteBuildExecution.GetCapabilities
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.getCapabilities@ method which the
@@ -54,9 +52,7 @@ type RemoteBuildExecutionGetCapabilitiesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2ServerCapabilities
+    Core.:> Core.Get '[Core.JSON] BuildBazelRemoteExecutionV2ServerCapabilities
 
 -- | GetCapabilities returns the server capabilities configuration of the remote endpoint. Only the capabilities of the services supported by the endpoint will be returned: * Execution + CAS + Action Cache endpoints should return both CacheCapabilities and ExecutionCapabilities. * Execution only endpoints should return ExecutionCapabilities. * CAS + Action Cache only endpoints should return CacheCapabilities.
 --
@@ -92,10 +88,7 @@ newRemoteBuildExecutionGetCapabilities instanceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RemoteBuildExecutionGetCapabilities
-  where
+instance Core.GoogleRequest RemoteBuildExecutionGetCapabilities where
   type
     Rs RemoteBuildExecutionGetCapabilities =
       BuildBazelRemoteExecutionV2ServerCapabilities
@@ -116,7 +109,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                RemoteBuildExecutionGetCapabilitiesResource
+              Core.Proxy RemoteBuildExecutionGetCapabilitiesResource
           )
           Core.mempty

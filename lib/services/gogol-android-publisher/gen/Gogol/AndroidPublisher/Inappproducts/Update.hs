@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Inappproducts.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates an in-app product (i.e. a managed product or a subscriptions).
+-- Updates an in-app product (a managed product or a subscription). This method should no longer be used to update subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.inappproducts.update@.
 module Gogol.AndroidPublisher.Inappproducts.Update
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Inappproducts.Update
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.inappproducts.update@ method which the
 -- 'AndroidPublisherInappproductsUpdate' request conforms to.
@@ -56,13 +54,16 @@ type AndroidPublisherInappproductsUpdateResource =
     Core.:> Core.QueryParam "allowMissing" Core.Bool
     Core.:> Core.QueryParam "autoConvertMissingPrices" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam
+              "latencyTolerance"
+              InappproductsUpdateLatencyTolerance
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] InAppProduct
     Core.:> Core.Put '[Core.JSON] InAppProduct
 
--- | Updates an in-app product (i.e. a managed product or a subscriptions).
+-- | Updates an in-app product (a managed product or a subscription). This method should no longer be used to update subscriptions. See <https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html this article> for more information.
 --
 -- /See:/ 'newAndroidPublisherInappproductsUpdate' smart constructor.
 data AndroidPublisherInappproductsUpdate = AndroidPublisherInappproductsUpdate
@@ -76,6 +77,8 @@ data AndroidPublisherInappproductsUpdate = AndroidPublisherInappproductsUpdate
     autoConvertMissingPrices :: (Core.Maybe Core.Bool),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    -- | Optional. The latency tolerance for the propagation of this product update. Defaults to latency-sensitive.
+    latencyTolerance :: (Core.Maybe InappproductsUpdateLatencyTolerance),
     -- | Package name of the app.
     packageName :: Core.Text,
     -- | Multipart request metadata.
@@ -105,6 +108,7 @@ newAndroidPublisherInappproductsUpdate packageName payload sku =
       allowMissing = Core.Nothing,
       autoConvertMissingPrices = Core.Nothing,
       callback = Core.Nothing,
+      latencyTolerance = Core.Nothing,
       packageName = packageName,
       payload = payload,
       sku = sku,
@@ -112,13 +116,8 @@ newAndroidPublisherInappproductsUpdate packageName payload sku =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherInappproductsUpdate
-  where
-  type
-    Rs AndroidPublisherInappproductsUpdate =
-      InAppProduct
+instance Core.GoogleRequest AndroidPublisherInappproductsUpdate where
+  type Rs AndroidPublisherInappproductsUpdate = InAppProduct
   type
     Scopes AndroidPublisherInappproductsUpdate =
       '[Androidpublisher'FullControl]
@@ -131,6 +130,7 @@ instance
       allowMissing
       autoConvertMissingPrices
       callback
+      latencyTolerance
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -140,7 +140,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AndroidPublisherInappproductsUpdateResource
+              Core.Proxy AndroidPublisherInappproductsUpdateResource
           )
           Core.mempty

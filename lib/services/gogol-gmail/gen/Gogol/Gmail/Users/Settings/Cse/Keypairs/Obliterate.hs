@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Settings.Cse.Keypairs.Obliterate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Settings.Cse.Keypairs.Obliterate
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.settings.cse.keypairs.obliterate@ method which the
 -- 'GmailUsersSettingsCseKeypairsObliterate' request conforms to.
@@ -59,9 +57,7 @@ type GmailUsersSettingsCseKeypairsObliterateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ObliterateCseKeyPairRequest
+    Core.:> Core.ReqBody '[Core.JSON] ObliterateCseKeyPairRequest
     Core.:> Core.Post '[Core.JSON] ()
 
 -- | Deletes a client-side encryption key pair permanently and immediately. You can only permanently delete key pairs that have been turned off for more than 30 days. To turn off a key pair, use the DisableCseKeyPair method. Gmail can\'t restore or decrypt any messages that were encrypted by an obliterated key. Authenticated users and Google Workspace administrators lose access to reading the encrypted messages.
@@ -106,32 +102,27 @@ newGmailUsersSettingsCseKeypairsObliterate keyPairId payload =
       userId = "me"
     }
 
-instance
-  Core.GoogleRequest
-    GmailUsersSettingsCseKeypairsObliterate
-  where
+instance Core.GoogleRequest GmailUsersSettingsCseKeypairsObliterate where
   type Rs GmailUsersSettingsCseKeypairsObliterate = ()
   type
     Scopes GmailUsersSettingsCseKeypairsObliterate =
       '[Gmail'Settings'Basic, Gmail'Settings'Sharing]
-  requestClient
-    GmailUsersSettingsCseKeypairsObliterate {..} =
-      go
-        userId
-        keyPairId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        gmailService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  GmailUsersSettingsCseKeypairsObliterateResource
-            )
-            Core.mempty
+  requestClient GmailUsersSettingsCseKeypairsObliterate {..} =
+    go
+      userId
+      keyPairId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      gmailService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy GmailUsersSettingsCseKeypairsObliterateResource
+          )
+          Core.mempty

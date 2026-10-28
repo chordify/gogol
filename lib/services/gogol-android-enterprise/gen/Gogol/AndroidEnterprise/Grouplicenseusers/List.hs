@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Grouplicenseusers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Grouplicenseusers.List
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.grouplicenseusers.list@ method which the
 -- 'AndroidEnterpriseGrouplicenseusersList' request conforms to.
@@ -58,9 +56,7 @@ type AndroidEnterpriseGrouplicenseusersListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GroupLicenseUsersListResponse
+    Core.:> Core.Get '[Core.JSON] GroupLicenseUsersListResponse
 
 -- | Retrieves the IDs of the users who have been granted entitlements under the license. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
@@ -90,44 +86,41 @@ newAndroidEnterpriseGrouplicenseusersList ::
   -- |  The ID of the product the group license is for, e.g. \"app:com.google.android.gm\". See 'groupLicenseId'.
   Core.Text ->
   AndroidEnterpriseGrouplicenseusersList
-newAndroidEnterpriseGrouplicenseusersList enterpriseId groupLicenseId =
-  AndroidEnterpriseGrouplicenseusersList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      enterpriseId = enterpriseId,
-      groupLicenseId = groupLicenseId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidEnterpriseGrouplicenseusersList
+  enterpriseId
+  groupLicenseId =
     AndroidEnterpriseGrouplicenseusersList
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        enterpriseId = enterpriseId,
+        groupLicenseId = groupLicenseId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest AndroidEnterpriseGrouplicenseusersList where
   type
     Rs AndroidEnterpriseGrouplicenseusersList =
       GroupLicenseUsersListResponse
   type
     Scopes AndroidEnterpriseGrouplicenseusersList =
       '[Androidenterprise'FullControl]
-  requestClient
-    AndroidEnterpriseGrouplicenseusersList {..} =
-      go
-        enterpriseId
-        groupLicenseId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidEnterpriseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidEnterpriseGrouplicenseusersListResource
-            )
-            Core.mempty
+  requestClient AndroidEnterpriseGrouplicenseusersList {..} =
+    go
+      enterpriseId
+      groupLicenseId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidEnterpriseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidEnterpriseGrouplicenseusersListResource
+          )
+          Core.mempty

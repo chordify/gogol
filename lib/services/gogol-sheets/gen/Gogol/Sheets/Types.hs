@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Sheets.Types
@@ -323,6 +321,18 @@ module Gogol.Sheets.Types
 
     -- ** BubbleChartSpec_LegendPosition
     BubbleChartSpec_LegendPosition (..),
+
+    -- ** CancelDataSourceRefreshRequest
+    CancelDataSourceRefreshRequest (..),
+    newCancelDataSourceRefreshRequest,
+
+    -- ** CancelDataSourceRefreshResponse
+    CancelDataSourceRefreshResponse (..),
+    newCancelDataSourceRefreshResponse,
+
+    -- ** CancelDataSourceRefreshStatus
+    CancelDataSourceRefreshStatus (..),
+    newCancelDataSourceRefreshStatus,
 
     -- ** CandlestickChartSpec
     CandlestickChartSpec (..),
@@ -845,6 +855,10 @@ module Gogol.Sheets.Types
     Link (..),
     newLink,
 
+    -- ** LookerDataSourceSpec
+    LookerDataSourceSpec (..),
+    newLookerDataSourceSpec,
+
     -- ** ManualRule
     ManualRule (..),
     newManualRule,
@@ -978,6 +992,16 @@ module Gogol.Sheets.Types
     -- ** RandomizeRangeRequest
     RandomizeRangeRequest (..),
     newRandomizeRangeRequest,
+
+    -- ** RefreshCancellationStatus
+    RefreshCancellationStatus (..),
+    newRefreshCancellationStatus,
+
+    -- ** RefreshCancellationStatus_ErrorCode
+    RefreshCancellationStatus_ErrorCode (..),
+
+    -- ** RefreshCancellationStatus_State
+    RefreshCancellationStatus_State (..),
 
     -- ** RefreshDataSourceObjectExecutionStatus
     RefreshDataSourceObjectExecutionStatus (..),
@@ -1308,7 +1332,7 @@ module Gogol.Sheets.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Internal.Product
 import Gogol.Sheets.Internal.Sum
 
@@ -1326,10 +1350,13 @@ type Drive'FullControl = "https://www.googleapis.com/auth/drive"
 type Drive'File = "https://www.googleapis.com/auth/drive.file"
 
 -- | See and download all your Google Drive files
-type Drive'Readonly = "https://www.googleapis.com/auth/drive.readonly"
+type Drive'Readonly =
+  "https://www.googleapis.com/auth/drive.readonly"
 
 -- | See, edit, create, and delete all your Google Sheets spreadsheets
-type Spreadsheets'FullControl = "https://www.googleapis.com/auth/spreadsheets"
+type Spreadsheets'FullControl =
+  "https://www.googleapis.com/auth/spreadsheets"
 
 -- | See all your Google Sheets spreadsheets
-type Spreadsheets'Readonly = "https://www.googleapis.com/auth/spreadsheets.readonly"
+type Spreadsheets'Readonly =
+  "https://www.googleapis.com/auth/spreadsheets.readonly"

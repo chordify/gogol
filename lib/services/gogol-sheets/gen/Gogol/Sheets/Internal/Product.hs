@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Sheets.Internal.Product
@@ -245,6 +243,18 @@ module Gogol.Sheets.Internal.Product
     -- * BubbleChartSpec
     BubbleChartSpec (..),
     newBubbleChartSpec,
+
+    -- * CancelDataSourceRefreshRequest
+    CancelDataSourceRefreshRequest (..),
+    newCancelDataSourceRefreshRequest,
+
+    -- * CancelDataSourceRefreshResponse
+    CancelDataSourceRefreshResponse (..),
+    newCancelDataSourceRefreshResponse,
+
+    -- * CancelDataSourceRefreshStatus
+    CancelDataSourceRefreshStatus (..),
+    newCancelDataSourceRefreshStatus,
 
     -- * CandlestickChartSpec
     CandlestickChartSpec (..),
@@ -662,6 +672,10 @@ module Gogol.Sheets.Internal.Product
     Link (..),
     newLink,
 
+    -- * LookerDataSourceSpec
+    LookerDataSourceSpec (..),
+    newLookerDataSourceSpec,
+
     -- * ManualRule
     ManualRule (..),
     newManualRule,
@@ -765,6 +779,10 @@ module Gogol.Sheets.Internal.Product
     -- * RandomizeRangeRequest
     RandomizeRangeRequest (..),
     newRandomizeRangeRequest,
+
+    -- * RefreshCancellationStatus
+    RefreshCancellationStatus (..),
+    newRefreshCancellationStatus,
 
     -- * RefreshDataSourceObjectExecutionStatus
     RefreshDataSourceObjectExecutionStatus (..),
@@ -1020,7 +1038,7 @@ module Gogol.Sheets.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Internal.Sum
 
 -- | Adds a new banded range to the spreadsheet.
@@ -1035,23 +1053,19 @@ newtype AddBandingRequest = AddBandingRequest
 -- | Creates a value of 'AddBandingRequest' with the minimum fields required to make a request.
 newAddBandingRequest ::
   AddBandingRequest
-newAddBandingRequest = AddBandingRequest {bandedRange = Core.Nothing}
+newAddBandingRequest =
+  AddBandingRequest {bandedRange = Core.Nothing}
 
 instance Core.FromJSON AddBandingRequest where
   parseJSON =
     Core.withObject
       "AddBandingRequest"
-      ( \o ->
-          AddBandingRequest
-            Core.<$> (o Core..:? "bandedRange")
-      )
+      (\o -> AddBandingRequest Core.<$> (o Core..:? "bandedRange"))
 
 instance Core.ToJSON AddBandingRequest where
   toJSON AddBandingRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("bandedRange" Core..=) Core.<$> bandedRange]
-      )
+      (Core.catMaybes [("bandedRange" Core..=) Core.<$> bandedRange])
 
 -- | The result of adding a banded range.
 --
@@ -1065,23 +1079,19 @@ newtype AddBandingResponse = AddBandingResponse
 -- | Creates a value of 'AddBandingResponse' with the minimum fields required to make a request.
 newAddBandingResponse ::
   AddBandingResponse
-newAddBandingResponse = AddBandingResponse {bandedRange = Core.Nothing}
+newAddBandingResponse =
+  AddBandingResponse {bandedRange = Core.Nothing}
 
 instance Core.FromJSON AddBandingResponse where
   parseJSON =
     Core.withObject
       "AddBandingResponse"
-      ( \o ->
-          AddBandingResponse
-            Core.<$> (o Core..:? "bandedRange")
-      )
+      (\o -> AddBandingResponse Core.<$> (o Core..:? "bandedRange"))
 
 instance Core.ToJSON AddBandingResponse where
   toJSON AddBandingResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("bandedRange" Core..=) Core.<$> bandedRange]
-      )
+      (Core.catMaybes [("bandedRange" Core..=) Core.<$> bandedRange])
 
 -- | Adds a chart to a sheet in the spreadsheet.
 --
@@ -1101,14 +1111,11 @@ instance Core.FromJSON AddChartRequest where
   parseJSON =
     Core.withObject
       "AddChartRequest"
-      ( \o ->
-          AddChartRequest Core.<$> (o Core..:? "chart")
-      )
+      (\o -> AddChartRequest Core.<$> (o Core..:? "chart"))
 
 instance Core.ToJSON AddChartRequest where
   toJSON AddChartRequest {..} =
-    Core.object
-      (Core.catMaybes [("chart" Core..=) Core.<$> chart])
+    Core.object (Core.catMaybes [("chart" Core..=) Core.<$> chart])
 
 -- | The result of adding a chart to a spreadsheet.
 --
@@ -1128,14 +1135,11 @@ instance Core.FromJSON AddChartResponse where
   parseJSON =
     Core.withObject
       "AddChartResponse"
-      ( \o ->
-          AddChartResponse Core.<$> (o Core..:? "chart")
-      )
+      (\o -> AddChartResponse Core.<$> (o Core..:? "chart"))
 
 instance Core.ToJSON AddChartResponse where
   toJSON AddChartResponse {..} =
-    Core.object
-      (Core.catMaybes [("chart" Core..=) Core.<$> chart])
+    Core.object (Core.catMaybes [("chart" Core..=) Core.<$> chart])
 
 -- | Adds a new conditional format rule at the given index. All subsequent rules\' indexes are incremented.
 --
@@ -1152,30 +1156,29 @@ data AddConditionalFormatRuleRequest = AddConditionalFormatRuleRequest
 newAddConditionalFormatRuleRequest ::
   AddConditionalFormatRuleRequest
 newAddConditionalFormatRuleRequest =
-  AddConditionalFormatRuleRequest {index = Core.Nothing, rule = Core.Nothing}
+  AddConditionalFormatRuleRequest
+    { index = Core.Nothing,
+      rule = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    AddConditionalFormatRuleRequest
-  where
+instance Core.FromJSON AddConditionalFormatRuleRequest where
   parseJSON =
     Core.withObject
       "AddConditionalFormatRuleRequest"
       ( \o ->
           AddConditionalFormatRuleRequest
-            Core.<$> (o Core..:? "index") Core.<*> (o Core..:? "rule")
+            Core.<$> (o Core..:? "index")
+            Core.<*> (o Core..:? "rule")
       )
 
 instance Core.ToJSON AddConditionalFormatRuleRequest where
   toJSON AddConditionalFormatRuleRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("index" Core..=) Core.<$> index,
-            ("rule" Core..=) Core.<$> rule
-          ]
+          [("index" Core..=) Core.<$> index, ("rule" Core..=) Core.<$> rule]
       )
 
--- | Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional @bigquery.readonly@ OAuth scope.
+-- | Adds a data source. After the data source is added successfully, an associated DATA_SOURCE sheet is created and an execution is triggered to refresh the sheet to read data from the data source. The request requires an additional @bigquery.readonly@ OAuth scope if you are adding a BigQuery data source.
 --
 -- /See:/ 'newAddDataSourceRequest' smart constructor.
 newtype AddDataSourceRequest = AddDataSourceRequest
@@ -1187,23 +1190,19 @@ newtype AddDataSourceRequest = AddDataSourceRequest
 -- | Creates a value of 'AddDataSourceRequest' with the minimum fields required to make a request.
 newAddDataSourceRequest ::
   AddDataSourceRequest
-newAddDataSourceRequest = AddDataSourceRequest {dataSource = Core.Nothing}
+newAddDataSourceRequest =
+  AddDataSourceRequest {dataSource = Core.Nothing}
 
 instance Core.FromJSON AddDataSourceRequest where
   parseJSON =
     Core.withObject
       "AddDataSourceRequest"
-      ( \o ->
-          AddDataSourceRequest
-            Core.<$> (o Core..:? "dataSource")
-      )
+      (\o -> AddDataSourceRequest Core.<$> (o Core..:? "dataSource"))
 
 instance Core.ToJSON AddDataSourceRequest where
   toJSON AddDataSourceRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataSource" Core..=) Core.<$> dataSource]
-      )
+      (Core.catMaybes [("dataSource" Core..=) Core.<$> dataSource])
 
 -- | The result of adding a data source.
 --
@@ -1239,8 +1238,7 @@ instance Core.ToJSON AddDataSourceResponse where
   toJSON AddDataSourceResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+          [ ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSource" Core..=) Core.<$> dataSource
           ]
       )
@@ -1257,21 +1255,18 @@ newtype AddDimensionGroupRequest = AddDimensionGroupRequest
 -- | Creates a value of 'AddDimensionGroupRequest' with the minimum fields required to make a request.
 newAddDimensionGroupRequest ::
   AddDimensionGroupRequest
-newAddDimensionGroupRequest = AddDimensionGroupRequest {range = Core.Nothing}
+newAddDimensionGroupRequest =
+  AddDimensionGroupRequest {range = Core.Nothing}
 
 instance Core.FromJSON AddDimensionGroupRequest where
   parseJSON =
     Core.withObject
       "AddDimensionGroupRequest"
-      ( \o ->
-          AddDimensionGroupRequest
-            Core.<$> (o Core..:? "range")
-      )
+      (\o -> AddDimensionGroupRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON AddDimensionGroupRequest where
   toJSON AddDimensionGroupRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | The result of adding a group.
 --
@@ -1293,17 +1288,14 @@ instance Core.FromJSON AddDimensionGroupResponse where
     Core.withObject
       "AddDimensionGroupResponse"
       ( \o ->
-          AddDimensionGroupResponse
-            Core.<$> (o Core..:? "dimensionGroups")
+          AddDimensionGroupResponse Core.<$> (o Core..:? "dimensionGroups")
       )
 
 instance Core.ToJSON AddDimensionGroupResponse where
   toJSON AddDimensionGroupResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionGroups" Core..=)
-              Core.<$> dimensionGroups
-          ]
+          [("dimensionGroups" Core..=) Core.<$> dimensionGroups]
       )
 
 -- | Adds a filter view.
@@ -1318,20 +1310,18 @@ newtype AddFilterViewRequest = AddFilterViewRequest
 -- | Creates a value of 'AddFilterViewRequest' with the minimum fields required to make a request.
 newAddFilterViewRequest ::
   AddFilterViewRequest
-newAddFilterViewRequest = AddFilterViewRequest {filter = Core.Nothing}
+newAddFilterViewRequest =
+  AddFilterViewRequest {filter = Core.Nothing}
 
 instance Core.FromJSON AddFilterViewRequest where
   parseJSON =
     Core.withObject
       "AddFilterViewRequest"
-      ( \o ->
-          AddFilterViewRequest Core.<$> (o Core..:? "filter")
-      )
+      (\o -> AddFilterViewRequest Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON AddFilterViewRequest where
   toJSON AddFilterViewRequest {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | The result of adding a filter view.
 --
@@ -1345,20 +1335,18 @@ newtype AddFilterViewResponse = AddFilterViewResponse
 -- | Creates a value of 'AddFilterViewResponse' with the minimum fields required to make a request.
 newAddFilterViewResponse ::
   AddFilterViewResponse
-newAddFilterViewResponse = AddFilterViewResponse {filter = Core.Nothing}
+newAddFilterViewResponse =
+  AddFilterViewResponse {filter = Core.Nothing}
 
 instance Core.FromJSON AddFilterViewResponse where
   parseJSON =
     Core.withObject
       "AddFilterViewResponse"
-      ( \o ->
-          AddFilterViewResponse Core.<$> (o Core..:? "filter")
-      )
+      (\o -> AddFilterViewResponse Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON AddFilterViewResponse where
   toJSON AddFilterViewResponse {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | Adds a named range to the spreadsheet.
 --
@@ -1372,23 +1360,19 @@ newtype AddNamedRangeRequest = AddNamedRangeRequest
 -- | Creates a value of 'AddNamedRangeRequest' with the minimum fields required to make a request.
 newAddNamedRangeRequest ::
   AddNamedRangeRequest
-newAddNamedRangeRequest = AddNamedRangeRequest {namedRange = Core.Nothing}
+newAddNamedRangeRequest =
+  AddNamedRangeRequest {namedRange = Core.Nothing}
 
 instance Core.FromJSON AddNamedRangeRequest where
   parseJSON =
     Core.withObject
       "AddNamedRangeRequest"
-      ( \o ->
-          AddNamedRangeRequest
-            Core.<$> (o Core..:? "namedRange")
-      )
+      (\o -> AddNamedRangeRequest Core.<$> (o Core..:? "namedRange"))
 
 instance Core.ToJSON AddNamedRangeRequest where
   toJSON AddNamedRangeRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("namedRange" Core..=) Core.<$> namedRange]
-      )
+      (Core.catMaybes [("namedRange" Core..=) Core.<$> namedRange])
 
 -- | The result of adding a named range.
 --
@@ -1402,23 +1386,19 @@ newtype AddNamedRangeResponse = AddNamedRangeResponse
 -- | Creates a value of 'AddNamedRangeResponse' with the minimum fields required to make a request.
 newAddNamedRangeResponse ::
   AddNamedRangeResponse
-newAddNamedRangeResponse = AddNamedRangeResponse {namedRange = Core.Nothing}
+newAddNamedRangeResponse =
+  AddNamedRangeResponse {namedRange = Core.Nothing}
 
 instance Core.FromJSON AddNamedRangeResponse where
   parseJSON =
     Core.withObject
       "AddNamedRangeResponse"
-      ( \o ->
-          AddNamedRangeResponse
-            Core.<$> (o Core..:? "namedRange")
-      )
+      (\o -> AddNamedRangeResponse Core.<$> (o Core..:? "namedRange"))
 
 instance Core.ToJSON AddNamedRangeResponse where
   toJSON AddNamedRangeResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("namedRange" Core..=) Core.<$> namedRange]
-      )
+      (Core.catMaybes [("namedRange" Core..=) Core.<$> namedRange])
 
 -- | Adds a new protected range.
 --
@@ -1440,8 +1420,7 @@ instance Core.FromJSON AddProtectedRangeRequest where
     Core.withObject
       "AddProtectedRangeRequest"
       ( \o ->
-          AddProtectedRangeRequest
-            Core.<$> (o Core..:? "protectedRange")
+          AddProtectedRangeRequest Core.<$> (o Core..:? "protectedRange")
       )
 
 instance Core.ToJSON AddProtectedRangeRequest where
@@ -1471,8 +1450,7 @@ instance Core.FromJSON AddProtectedRangeResponse where
     Core.withObject
       "AddProtectedRangeResponse"
       ( \o ->
-          AddProtectedRangeResponse
-            Core.<$> (o Core..:? "protectedRange")
+          AddProtectedRangeResponse Core.<$> (o Core..:? "protectedRange")
       )
 
 instance Core.ToJSON AddProtectedRangeResponse where
@@ -1500,16 +1478,12 @@ instance Core.FromJSON AddSheetRequest where
   parseJSON =
     Core.withObject
       "AddSheetRequest"
-      ( \o ->
-          AddSheetRequest Core.<$> (o Core..:? "properties")
-      )
+      (\o -> AddSheetRequest Core.<$> (o Core..:? "properties"))
 
 instance Core.ToJSON AddSheetRequest where
   toJSON AddSheetRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("properties" Core..=) Core.<$> properties]
-      )
+      (Core.catMaybes [("properties" Core..=) Core.<$> properties])
 
 -- | The result of adding a sheet.
 --
@@ -1529,16 +1503,12 @@ instance Core.FromJSON AddSheetResponse where
   parseJSON =
     Core.withObject
       "AddSheetResponse"
-      ( \o ->
-          AddSheetResponse Core.<$> (o Core..:? "properties")
-      )
+      (\o -> AddSheetResponse Core.<$> (o Core..:? "properties"))
 
 instance Core.ToJSON AddSheetResponse where
   toJSON AddSheetResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("properties" Core..=) Core.<$> properties]
-      )
+      (Core.catMaybes [("properties" Core..=) Core.<$> properties])
 
 -- | Adds a slicer to a sheet in the spreadsheet.
 --
@@ -1558,14 +1528,11 @@ instance Core.FromJSON AddSlicerRequest where
   parseJSON =
     Core.withObject
       "AddSlicerRequest"
-      ( \o ->
-          AddSlicerRequest Core.<$> (o Core..:? "slicer")
-      )
+      (\o -> AddSlicerRequest Core.<$> (o Core..:? "slicer"))
 
 instance Core.ToJSON AddSlicerRequest where
   toJSON AddSlicerRequest {..} =
-    Core.object
-      (Core.catMaybes [("slicer" Core..=) Core.<$> slicer])
+    Core.object (Core.catMaybes [("slicer" Core..=) Core.<$> slicer])
 
 -- | The result of adding a slicer to a spreadsheet.
 --
@@ -1585,14 +1552,11 @@ instance Core.FromJSON AddSlicerResponse where
   parseJSON =
     Core.withObject
       "AddSlicerResponse"
-      ( \o ->
-          AddSlicerResponse Core.<$> (o Core..:? "slicer")
-      )
+      (\o -> AddSlicerResponse Core.<$> (o Core..:? "slicer"))
 
 instance Core.ToJSON AddSlicerResponse where
   toJSON AddSlicerResponse {..} =
-    Core.object
-      (Core.catMaybes [("slicer" Core..=) Core.<$> slicer])
+    Core.object (Core.catMaybes [("slicer" Core..=) Core.<$> slicer])
 
 -- | Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
 --
@@ -1765,10 +1729,8 @@ instance Core.ToJSON AutoFillRequest where
     Core.object
       ( Core.catMaybes
           [ ("range" Core..=) Core.<$> range,
-            ("sourceAndDestination" Core..=)
-              Core.<$> sourceAndDestination,
-            ("useAlternateSeries" Core..=)
-              Core.<$> useAlternateSeries
+            ("sourceAndDestination" Core..=) Core.<$> sourceAndDestination,
+            ("useAlternateSeries" Core..=) Core.<$> useAlternateSeries
           ]
       )
 
@@ -1788,7 +1750,8 @@ newAutoResizeDimensionsRequest ::
   AutoResizeDimensionsRequest
 newAutoResizeDimensionsRequest =
   AutoResizeDimensionsRequest
-    { dataSourceSheetDimensions = Core.Nothing,
+    { dataSourceSheetDimensions =
+        Core.Nothing,
       dimensions = Core.Nothing
     }
 
@@ -1816,7 +1779,7 @@ instance Core.ToJSON AutoResizeDimensionsRequest where
 --
 -- /See:/ 'newBandedRange' smart constructor.
 data BandedRange = BandedRange
-  { -- | The id of the banded range.
+  { -- | The ID of the banded range.
     bandedRangeId :: (Core.Maybe Core.Int32),
     -- | Properties for column bands. These properties are applied on a column- by-column basis throughout all the columns in the range. At least one of row/properties or column/properties must be specified.
     columnProperties :: (Core.Maybe BandingProperties),
@@ -1855,8 +1818,7 @@ instance Core.ToJSON BandedRange where
     Core.object
       ( Core.catMaybes
           [ ("bandedRangeId" Core..=) Core.<$> bandedRangeId,
-            ("columnProperties" Core..=)
-              Core.<$> columnProperties,
+            ("columnProperties" Core..=) Core.<$> columnProperties,
             ("range" Core..=) Core.<$> range,
             ("rowProperties" Core..=) Core.<$> rowProperties
           ]
@@ -1921,17 +1883,13 @@ instance Core.ToJSON BandingProperties where
     Core.object
       ( Core.catMaybes
           [ ("firstBandColor" Core..=) Core.<$> firstBandColor,
-            ("firstBandColorStyle" Core..=)
-              Core.<$> firstBandColorStyle,
+            ("firstBandColorStyle" Core..=) Core.<$> firstBandColorStyle,
             ("footerColor" Core..=) Core.<$> footerColor,
-            ("footerColorStyle" Core..=)
-              Core.<$> footerColorStyle,
+            ("footerColorStyle" Core..=) Core.<$> footerColorStyle,
             ("headerColor" Core..=) Core.<$> headerColor,
-            ("headerColorStyle" Core..=)
-              Core.<$> headerColorStyle,
+            ("headerColorStyle" Core..=) Core.<$> headerColorStyle,
             ("secondBandColor" Core..=) Core.<$> secondBandColor,
-            ("secondBandColorStyle" Core..=)
-              Core.<$> secondBandColorStyle
+            ("secondBandColorStyle" Core..=) Core.<$> secondBandColorStyle
           ]
       )
 
@@ -1996,12 +1954,10 @@ instance Core.ToJSON BaselineValueFormat where
           [ ("comparisonType" Core..=) Core.<$> comparisonType,
             ("description" Core..=) Core.<$> description,
             ("negativeColor" Core..=) Core.<$> negativeColor,
-            ("negativeColorStyle" Core..=)
-              Core.<$> negativeColorStyle,
+            ("negativeColorStyle" Core..=) Core.<$> negativeColorStyle,
             ("position" Core..=) Core.<$> position,
             ("positiveColor" Core..=) Core.<$> positiveColor,
-            ("positiveColorStyle" Core..=)
-              Core.<$> positiveColorStyle,
+            ("positiveColorStyle" Core..=) Core.<$> positiveColorStyle,
             ("textFormat" Core..=) Core.<$> textFormat
           ]
       )
@@ -2055,10 +2011,8 @@ instance Core.ToJSON BasicChartAxis where
           [ ("format" Core..=) Core.<$> format,
             ("position" Core..=) Core.<$> position,
             ("title" Core..=) Core.<$> title,
-            ("titleTextPosition" Core..=)
-              Core.<$> titleTextPosition,
-            ("viewWindowOptions" Core..=)
-              Core.<$> viewWindowOptions
+            ("titleTextPosition" Core..=) Core.<$> titleTextPosition,
+            ("viewWindowOptions" Core..=) Core.<$> viewWindowOptions
           ]
       )
 
@@ -2251,14 +2205,12 @@ instance Core.ToJSON BasicChartSpec where
             ("compareMode" Core..=) Core.<$> compareMode,
             ("domains" Core..=) Core.<$> domains,
             ("headerCount" Core..=) Core.<$> headerCount,
-            ("interpolateNulls" Core..=)
-              Core.<$> interpolateNulls,
+            ("interpolateNulls" Core..=) Core.<$> interpolateNulls,
             ("legendPosition" Core..=) Core.<$> legendPosition,
             ("lineSmoothing" Core..=) Core.<$> lineSmoothing,
             ("series" Core..=) Core.<$> series,
             ("stackedType" Core..=) Core.<$> stackedType,
-            ("threeDimensional" Core..=)
-              Core.<$> threeDimensional,
+            ("threeDimensional" Core..=) Core.<$> threeDimensional,
             ("totalDataLabel" Core..=) Core.<$> totalDataLabel
           ]
       )
@@ -2316,8 +2268,7 @@ instance Core.ToJSON BasicFilter where
 --
 -- /See:/ 'newBasicFilter_Criteria' smart constructor.
 newtype BasicFilter_Criteria = BasicFilter_Criteria
-  { -- |
-    additional :: (Core.HashMap Core.Text FilterCriteria)
+  { additional :: (Core.HashMap Core.Text FilterCriteria)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2333,14 +2284,10 @@ instance Core.FromJSON BasicFilter_Criteria where
   parseJSON =
     Core.withObject
       "BasicFilter_Criteria"
-      ( \o ->
-          BasicFilter_Criteria
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> BasicFilter_Criteria Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON BasicFilter_Criteria where
-  toJSON BasicFilter_Criteria {..} =
-    Core.toJSON additional
+  toJSON BasicFilter_Criteria {..} = Core.toJSON additional
 
 -- | Style override settings for a single series data point.
 --
@@ -2350,7 +2297,7 @@ data BasicSeriesDataPointStyleOverride = BasicSeriesDataPointStyleOverride
     color :: (Core.Maybe Color),
     -- | Color of the series data point. If empty, the series default is used. If color is also set, this field takes precedence.
     colorStyle :: (Core.Maybe ColorStyle),
-    -- | Zero based index of the series data point.
+    -- | The zero-based index of the series data point.
     index :: (Core.Maybe Core.Int32),
     -- | Point style of the series data point. Valid only if the chartType is AREA, LINE, or SCATTER. COMBO charts are also supported if the series chart type is AREA, LINE, or SCATTER. If empty, the series default is used.
     pointStyle :: (Core.Maybe PointStyle)
@@ -2368,10 +2315,7 @@ newBasicSeriesDataPointStyleOverride =
       pointStyle = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BasicSeriesDataPointStyleOverride
-  where
+instance Core.FromJSON BasicSeriesDataPointStyleOverride where
   parseJSON =
     Core.withObject
       "BasicSeriesDataPointStyleOverride"
@@ -2383,10 +2327,7 @@ instance
             Core.<*> (o Core..:? "pointStyle")
       )
 
-instance
-  Core.ToJSON
-    BasicSeriesDataPointStyleOverride
-  where
+instance Core.ToJSON BasicSeriesDataPointStyleOverride where
   toJSON BasicSeriesDataPointStyleOverride {..} =
     Core.object
       ( Core.catMaybes
@@ -2412,10 +2353,7 @@ newBatchClearValuesByDataFilterRequest ::
 newBatchClearValuesByDataFilterRequest =
   BatchClearValuesByDataFilterRequest {dataFilters = Core.Nothing}
 
-instance
-  Core.FromJSON
-    BatchClearValuesByDataFilterRequest
-  where
+instance Core.FromJSON BatchClearValuesByDataFilterRequest where
   parseJSON =
     Core.withObject
       "BatchClearValuesByDataFilterRequest"
@@ -2424,15 +2362,10 @@ instance
             Core.<$> (o Core..:? "dataFilters")
       )
 
-instance
-  Core.ToJSON
-    BatchClearValuesByDataFilterRequest
-  where
+instance Core.ToJSON BatchClearValuesByDataFilterRequest where
   toJSON BatchClearValuesByDataFilterRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataFilters" Core..=) Core.<$> dataFilters]
-      )
+      (Core.catMaybes [("dataFilters" Core..=) Core.<$> dataFilters])
 
 -- | The response when clearing a range of values selected with DataFilters in a spreadsheet.
 --
@@ -2450,14 +2383,12 @@ newBatchClearValuesByDataFilterResponse ::
   BatchClearValuesByDataFilterResponse
 newBatchClearValuesByDataFilterResponse =
   BatchClearValuesByDataFilterResponse
-    { clearedRanges = Core.Nothing,
+    { clearedRanges =
+        Core.Nothing,
       spreadsheetId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchClearValuesByDataFilterResponse
-  where
+instance Core.FromJSON BatchClearValuesByDataFilterResponse where
   parseJSON =
     Core.withObject
       "BatchClearValuesByDataFilterResponse"
@@ -2467,10 +2398,7 @@ instance
             Core.<*> (o Core..:? "spreadsheetId")
       )
 
-instance
-  Core.ToJSON
-    BatchClearValuesByDataFilterResponse
-  where
+instance Core.ToJSON BatchClearValuesByDataFilterResponse where
   toJSON BatchClearValuesByDataFilterResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2491,21 +2419,18 @@ newtype BatchClearValuesRequest = BatchClearValuesRequest
 -- | Creates a value of 'BatchClearValuesRequest' with the minimum fields required to make a request.
 newBatchClearValuesRequest ::
   BatchClearValuesRequest
-newBatchClearValuesRequest = BatchClearValuesRequest {ranges = Core.Nothing}
+newBatchClearValuesRequest =
+  BatchClearValuesRequest {ranges = Core.Nothing}
 
 instance Core.FromJSON BatchClearValuesRequest where
   parseJSON =
     Core.withObject
       "BatchClearValuesRequest"
-      ( \o ->
-          BatchClearValuesRequest
-            Core.<$> (o Core..:? "ranges")
-      )
+      (\o -> BatchClearValuesRequest Core.<$> (o Core..:? "ranges"))
 
 instance Core.ToJSON BatchClearValuesRequest where
   toJSON BatchClearValuesRequest {..} =
-    Core.object
-      (Core.catMaybes [("ranges" Core..=) Core.<$> ranges])
+    Core.object (Core.catMaybes [("ranges" Core..=) Core.<$> ranges])
 
 -- | The response when clearing a range of values in a spreadsheet.
 --
@@ -2572,10 +2497,7 @@ newBatchGetValuesByDataFilterRequest =
       valueRenderOption = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchGetValuesByDataFilterRequest
-  where
+instance Core.FromJSON BatchGetValuesByDataFilterRequest where
   parseJSON =
     Core.withObject
       "BatchGetValuesByDataFilterRequest"
@@ -2587,19 +2509,14 @@ instance
             Core.<*> (o Core..:? "valueRenderOption")
       )
 
-instance
-  Core.ToJSON
-    BatchGetValuesByDataFilterRequest
-  where
+instance Core.ToJSON BatchGetValuesByDataFilterRequest where
   toJSON BatchGetValuesByDataFilterRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("dataFilters" Core..=) Core.<$> dataFilters,
-            ("dateTimeRenderOption" Core..=)
-              Core.<$> dateTimeRenderOption,
+            ("dateTimeRenderOption" Core..=) Core.<$> dateTimeRenderOption,
             ("majorDimension" Core..=) Core.<$> majorDimension,
-            ("valueRenderOption" Core..=)
-              Core.<$> valueRenderOption
+            ("valueRenderOption" Core..=) Core.<$> valueRenderOption
           ]
       )
 
@@ -2623,10 +2540,7 @@ newBatchGetValuesByDataFilterResponse =
       valueRanges = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchGetValuesByDataFilterResponse
-  where
+instance Core.FromJSON BatchGetValuesByDataFilterResponse where
   parseJSON =
     Core.withObject
       "BatchGetValuesByDataFilterResponse"
@@ -2636,10 +2550,7 @@ instance
             Core.<*> (o Core..:? "valueRanges")
       )
 
-instance
-  Core.ToJSON
-    BatchGetValuesByDataFilterResponse
-  where
+instance Core.ToJSON BatchGetValuesByDataFilterResponse where
   toJSON BatchGetValuesByDataFilterResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -2707,7 +2618,8 @@ newBatchUpdateSpreadsheetRequest ::
   BatchUpdateSpreadsheetRequest
 newBatchUpdateSpreadsheetRequest =
   BatchUpdateSpreadsheetRequest
-    { includeSpreadsheetInResponse = Core.Nothing,
+    { includeSpreadsheetInResponse =
+        Core.Nothing,
       requests = Core.Nothing,
       responseIncludeGridData = Core.Nothing,
       responseRanges = Core.Nothing
@@ -2778,8 +2690,7 @@ instance Core.ToJSON BatchUpdateSpreadsheetResponse where
       ( Core.catMaybes
           [ ("replies" Core..=) Core.<$> replies,
             ("spreadsheetId" Core..=) Core.<$> spreadsheetId,
-            ("updatedSpreadsheet" Core..=)
-              Core.<$> updatedSpreadsheet
+            ("updatedSpreadsheet" Core..=) Core.<$> updatedSpreadsheet
           ]
       )
 
@@ -2818,10 +2729,7 @@ newBatchUpdateValuesByDataFilterRequest =
       valueInputOption = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchUpdateValuesByDataFilterRequest
-  where
+instance Core.FromJSON BatchUpdateValuesByDataFilterRequest where
   parseJSON =
     Core.withObject
       "BatchUpdateValuesByDataFilterRequest"
@@ -2834,10 +2742,7 @@ instance
             Core.<*> (o Core..:? "valueInputOption")
       )
 
-instance
-  Core.ToJSON
-    BatchUpdateValuesByDataFilterRequest
-  where
+instance Core.ToJSON BatchUpdateValuesByDataFilterRequest where
   toJSON BatchUpdateValuesByDataFilterRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -2848,8 +2753,7 @@ instance
               Core.<$> responseDateTimeRenderOption,
             ("responseValueRenderOption" Core..=)
               Core.<$> responseValueRenderOption,
-            ("valueInputOption" Core..=)
-              Core.<$> valueInputOption
+            ("valueInputOption" Core..=) Core.<$> valueInputOption
           ]
       )
 
@@ -2885,10 +2789,7 @@ newBatchUpdateValuesByDataFilterResponse =
       totalUpdatedSheets = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchUpdateValuesByDataFilterResponse
-  where
+instance Core.FromJSON BatchUpdateValuesByDataFilterResponse where
   parseJSON =
     Core.withObject
       "BatchUpdateValuesByDataFilterResponse"
@@ -2902,23 +2803,16 @@ instance
             Core.<*> (o Core..:? "totalUpdatedSheets")
       )
 
-instance
-  Core.ToJSON
-    BatchUpdateValuesByDataFilterResponse
-  where
+instance Core.ToJSON BatchUpdateValuesByDataFilterResponse where
   toJSON BatchUpdateValuesByDataFilterResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("responses" Core..=) Core.<$> responses,
             ("spreadsheetId" Core..=) Core.<$> spreadsheetId,
-            ("totalUpdatedCells" Core..=)
-              Core.<$> totalUpdatedCells,
-            ("totalUpdatedColumns" Core..=)
-              Core.<$> totalUpdatedColumns,
-            ("totalUpdatedRows" Core..=)
-              Core.<$> totalUpdatedRows,
-            ("totalUpdatedSheets" Core..=)
-              Core.<$> totalUpdatedSheets
+            ("totalUpdatedCells" Core..=) Core.<$> totalUpdatedCells,
+            ("totalUpdatedColumns" Core..=) Core.<$> totalUpdatedColumns,
+            ("totalUpdatedRows" Core..=) Core.<$> totalUpdatedRows,
+            ("totalUpdatedSheets" Core..=) Core.<$> totalUpdatedSheets
           ]
       )
 
@@ -2975,8 +2869,7 @@ instance Core.ToJSON BatchUpdateValuesRequest where
               Core.<$> responseDateTimeRenderOption,
             ("responseValueRenderOption" Core..=)
               Core.<$> responseValueRenderOption,
-            ("valueInputOption" Core..=)
-              Core.<$> valueInputOption
+            ("valueInputOption" Core..=) Core.<$> valueInputOption
           ]
       )
 
@@ -3032,14 +2925,10 @@ instance Core.ToJSON BatchUpdateValuesResponse where
       ( Core.catMaybes
           [ ("responses" Core..=) Core.<$> responses,
             ("spreadsheetId" Core..=) Core.<$> spreadsheetId,
-            ("totalUpdatedCells" Core..=)
-              Core.<$> totalUpdatedCells,
-            ("totalUpdatedColumns" Core..=)
-              Core.<$> totalUpdatedColumns,
-            ("totalUpdatedRows" Core..=)
-              Core.<$> totalUpdatedRows,
-            ("totalUpdatedSheets" Core..=)
-              Core.<$> totalUpdatedSheets
+            ("totalUpdatedCells" Core..=) Core.<$> totalUpdatedCells,
+            ("totalUpdatedColumns" Core..=) Core.<$> totalUpdatedColumns,
+            ("totalUpdatedRows" Core..=) Core.<$> totalUpdatedRows,
+            ("totalUpdatedSheets" Core..=) Core.<$> totalUpdatedSheets
           ]
       )
 
@@ -3047,7 +2936,7 @@ instance Core.ToJSON BatchUpdateValuesResponse where
 --
 -- /See:/ 'newBigQueryDataSourceSpec' smart constructor.
 data BigQueryDataSourceSpec = BigQueryDataSourceSpec
-  { -- | The ID of a BigQuery enabled GCP project with a billing account attached. For any queries executed against the data source, the project is charged.
+  { -- | The ID of a BigQuery enabled Google Cloud project with a billing account attached. For any queries executed against the data source, the project is charged.
     projectId :: (Core.Maybe Core.Text),
     -- | A BigQueryQuerySpec.
     querySpec :: (Core.Maybe BigQueryQuerySpec),
@@ -3105,18 +2994,14 @@ instance Core.FromJSON BigQueryQuerySpec where
   parseJSON =
     Core.withObject
       "BigQueryQuerySpec"
-      ( \o ->
-          BigQueryQuerySpec Core.<$> (o Core..:? "rawQuery")
-      )
+      (\o -> BigQueryQuerySpec Core.<$> (o Core..:? "rawQuery"))
 
 instance Core.ToJSON BigQueryQuerySpec where
   toJSON BigQueryQuerySpec {..} =
     Core.object
-      ( Core.catMaybes
-          [("rawQuery" Core..=) Core.<$> rawQuery]
-      )
+      (Core.catMaybes [("rawQuery" Core..=) Core.<$> rawQuery])
 
--- | Specifies a BigQuery table definition. Only <https://cloud.google.com/bigquery/docs/tables-intro native tables> is allowed.
+-- | Specifies a BigQuery table definition. Only <https://cloud.google.com/bigquery/docs/tables-intro native tables> are allowed.
 --
 -- /See:/ 'newBigQueryTableSpec' smart constructor.
 data BigQueryTableSpec = BigQueryTableSpec
@@ -3183,7 +3068,8 @@ instance Core.FromJSON BooleanCondition where
       "BooleanCondition"
       ( \o ->
           BooleanCondition
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "values")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "values")
       )
 
 instance Core.ToJSON BooleanCondition where
@@ -3201,7 +3087,7 @@ instance Core.ToJSON BooleanCondition where
 data BooleanRule = BooleanRule
   { -- | The condition of the rule. If the condition evaluates to true, the format is applied.
     condition :: (Core.Maybe BooleanCondition),
-    -- | The format to apply. Conditional formatting can only apply a subset of formatting: bold, italic, strikethrough, foreground color & background color.
+    -- | The format to apply. Conditional formatting can only apply a subset of formatting: bold, italic, strikethrough, foreground color and, background color.
     format :: (Core.Maybe CellFormat)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3209,7 +3095,8 @@ data BooleanRule = BooleanRule
 -- | Creates a value of 'BooleanRule' with the minimum fields required to make a request.
 newBooleanRule ::
   BooleanRule
-newBooleanRule = BooleanRule {condition = Core.Nothing, format = Core.Nothing}
+newBooleanRule =
+  BooleanRule {condition = Core.Nothing, format = Core.Nothing}
 
 instance Core.FromJSON BooleanRule where
   parseJSON =
@@ -3402,15 +3289,11 @@ instance Core.ToJSON BubbleChartSpec where
   toJSON BubbleChartSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bubbleBorderColor" Core..=)
-              Core.<$> bubbleBorderColor,
-            ("bubbleBorderColorStyle" Core..=)
-              Core.<$> bubbleBorderColorStyle,
+          [ ("bubbleBorderColor" Core..=) Core.<$> bubbleBorderColor,
+            ("bubbleBorderColorStyle" Core..=) Core.<$> bubbleBorderColorStyle,
             ("bubbleLabels" Core..=) Core.<$> bubbleLabels,
-            ("bubbleMaxRadiusSize" Core..=)
-              Core.<$> bubbleMaxRadiusSize,
-            ("bubbleMinRadiusSize" Core..=)
-              Core.<$> bubbleMinRadiusSize,
+            ("bubbleMaxRadiusSize" Core..=) Core.<$> bubbleMaxRadiusSize,
+            ("bubbleMinRadiusSize" Core..=) Core.<$> bubbleMinRadiusSize,
             ("bubbleOpacity" Core..=) Core.<$> bubbleOpacity,
             ("bubbleSizes" Core..=) Core.<$> bubbleSizes,
             ("bubbleTextStyle" Core..=) Core.<$> bubbleTextStyle,
@@ -3418,6 +3301,118 @@ instance Core.ToJSON BubbleChartSpec where
             ("groupIds" Core..=) Core.<$> groupIds,
             ("legendPosition" Core..=) Core.<$> legendPosition,
             ("series" Core..=) Core.<$> series
+          ]
+      )
+
+-- | Cancels one or multiple refreshes of data source objects in the spreadsheet by the specified references. The request requires an additional @bigquery.readonly@ OAuth scope if you are cancelling a refresh on a BigQuery data source.
+--
+-- /See:/ 'newCancelDataSourceRefreshRequest' smart constructor.
+data CancelDataSourceRefreshRequest = CancelDataSourceRefreshRequest
+  { -- | Reference to a DataSource. If specified, cancels all associated data source object refreshes for this data source.
+    dataSourceId :: (Core.Maybe Core.Text),
+    -- | Cancels all existing data source object refreshes for all data sources in the spreadsheet.
+    isAll :: (Core.Maybe Core.Bool),
+    -- | References to data source objects whose refreshes are to be cancelled.
+    references :: (Core.Maybe DataSourceObjectReferences)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelDataSourceRefreshRequest' with the minimum fields required to make a request.
+newCancelDataSourceRefreshRequest ::
+  CancelDataSourceRefreshRequest
+newCancelDataSourceRefreshRequest =
+  CancelDataSourceRefreshRequest
+    { dataSourceId = Core.Nothing,
+      isAll = Core.Nothing,
+      references = Core.Nothing
+    }
+
+instance Core.FromJSON CancelDataSourceRefreshRequest where
+  parseJSON =
+    Core.withObject
+      "CancelDataSourceRefreshRequest"
+      ( \o ->
+          CancelDataSourceRefreshRequest
+            Core.<$> (o Core..:? "dataSourceId")
+            Core.<*> (o Core..:? "isAll")
+            Core.<*> (o Core..:? "references")
+      )
+
+instance Core.ToJSON CancelDataSourceRefreshRequest where
+  toJSON CancelDataSourceRefreshRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("dataSourceId" Core..=) Core.<$> dataSourceId,
+            ("isAll" Core..=) Core.<$> isAll,
+            ("references" Core..=) Core.<$> references
+          ]
+      )
+
+-- | The response from cancelling one or multiple data source object refreshes.
+--
+-- /See:/ 'newCancelDataSourceRefreshResponse' smart constructor.
+newtype CancelDataSourceRefreshResponse = CancelDataSourceRefreshResponse
+  { -- | The cancellation statuses of refreshes of all data source objects specified in the request. If is_all is specified, the field contains only those in failure status. Refreshing and canceling refresh the same data source object is also not allowed in the same @batchUpdate@.
+    statuses :: (Core.Maybe [CancelDataSourceRefreshStatus])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelDataSourceRefreshResponse' with the minimum fields required to make a request.
+newCancelDataSourceRefreshResponse ::
+  CancelDataSourceRefreshResponse
+newCancelDataSourceRefreshResponse =
+  CancelDataSourceRefreshResponse {statuses = Core.Nothing}
+
+instance Core.FromJSON CancelDataSourceRefreshResponse where
+  parseJSON =
+    Core.withObject
+      "CancelDataSourceRefreshResponse"
+      ( \o ->
+          CancelDataSourceRefreshResponse Core.<$> (o Core..:? "statuses")
+      )
+
+instance Core.ToJSON CancelDataSourceRefreshResponse where
+  toJSON CancelDataSourceRefreshResponse {..} =
+    Core.object
+      (Core.catMaybes [("statuses" Core..=) Core.<$> statuses])
+
+-- | The status of cancelling a single data source object refresh.
+--
+-- /See:/ 'newCancelDataSourceRefreshStatus' smart constructor.
+data CancelDataSourceRefreshStatus = CancelDataSourceRefreshStatus
+  { -- | Reference to the data source object whose refresh is being cancelled.
+    reference :: (Core.Maybe DataSourceObjectReference),
+    -- | The cancellation status.
+    refreshCancellationStatus :: (Core.Maybe RefreshCancellationStatus)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CancelDataSourceRefreshStatus' with the minimum fields required to make a request.
+newCancelDataSourceRefreshStatus ::
+  CancelDataSourceRefreshStatus
+newCancelDataSourceRefreshStatus =
+  CancelDataSourceRefreshStatus
+    { reference = Core.Nothing,
+      refreshCancellationStatus = Core.Nothing
+    }
+
+instance Core.FromJSON CancelDataSourceRefreshStatus where
+  parseJSON =
+    Core.withObject
+      "CancelDataSourceRefreshStatus"
+      ( \o ->
+          CancelDataSourceRefreshStatus
+            Core.<$> (o Core..:? "reference")
+            Core.<*> (o Core..:? "refreshCancellationStatus")
+      )
+
+instance Core.ToJSON CancelDataSourceRefreshStatus where
+  toJSON CancelDataSourceRefreshStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("reference" Core..=) Core.<$> reference,
+            ("refreshCancellationStatus" Core..=)
+              Core.<$> refreshCancellationStatus
           ]
       )
 
@@ -3444,7 +3439,8 @@ instance Core.FromJSON CandlestickChartSpec where
       "CandlestickChartSpec"
       ( \o ->
           CandlestickChartSpec
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "domain")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "domain")
       )
 
 instance Core.ToJSON CandlestickChartSpec where
@@ -3528,7 +3524,8 @@ instance Core.FromJSON CandlestickDomain where
       "CandlestickDomain"
       ( \o ->
           CandlestickDomain
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "reversed")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "reversed")
       )
 
 instance Core.ToJSON CandlestickDomain where
@@ -3558,14 +3555,11 @@ instance Core.FromJSON CandlestickSeries where
   parseJSON =
     Core.withObject
       "CandlestickSeries"
-      ( \o ->
-          CandlestickSeries Core.<$> (o Core..:? "data")
-      )
+      (\o -> CandlestickSeries Core.<$> (o Core..:? "data"))
 
 instance Core.ToJSON CandlestickSeries where
   toJSON CandlestickSeries {..} =
-    Core.object
-      (Core.catMaybes [("data" Core..=) Core.<$> data'])
+    Core.object (Core.catMaybes [("data" Core..=) Core.<$> data'])
 
 -- | Data about a specific cell.
 --
@@ -3641,8 +3635,7 @@ instance Core.ToJSON CellData where
   toJSON CellData {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataSourceFormula" Core..=)
-              Core.<$> dataSourceFormula,
+          [ ("dataSourceFormula" Core..=) Core.<$> dataSourceFormula,
             ("dataSourceTable" Core..=) Core.<$> dataSourceTable,
             ("dataValidation" Core..=) Core.<$> dataValidation,
             ("effectiveFormat" Core..=) Core.<$> effectiveFormat,
@@ -3652,10 +3645,8 @@ instance Core.ToJSON CellData where
             ("note" Core..=) Core.<$> note,
             ("pivotTable" Core..=) Core.<$> pivotTable,
             ("textFormatRuns" Core..=) Core.<$> textFormatRuns,
-            ("userEnteredFormat" Core..=)
-              Core.<$> userEnteredFormat,
-            ("userEnteredValue" Core..=)
-              Core.<$> userEnteredValue
+            ("userEnteredFormat" Core..=) Core.<$> userEnteredFormat,
+            ("userEnteredValue" Core..=) Core.<$> userEnteredValue
           ]
       )
 
@@ -3733,22 +3724,17 @@ instance Core.ToJSON CellFormat where
   toJSON CellFormat {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
-            ("backgroundColorStyle" Core..=)
-              Core.<$> backgroundColorStyle,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
+            ("backgroundColorStyle" Core..=) Core.<$> backgroundColorStyle,
             ("borders" Core..=) Core.<$> borders,
-            ("horizontalAlignment" Core..=)
-              Core.<$> horizontalAlignment,
-            ("hyperlinkDisplayType" Core..=)
-              Core.<$> hyperlinkDisplayType,
+            ("horizontalAlignment" Core..=) Core.<$> horizontalAlignment,
+            ("hyperlinkDisplayType" Core..=) Core.<$> hyperlinkDisplayType,
             ("numberFormat" Core..=) Core.<$> numberFormat,
             ("padding" Core..=) Core.<$> padding,
             ("textDirection" Core..=) Core.<$> textDirection,
             ("textFormat" Core..=) Core.<$> textFormat,
             ("textRotation" Core..=) Core.<$> textRotation,
-            ("verticalAlignment" Core..=)
-              Core.<$> verticalAlignment,
+            ("verticalAlignment" Core..=) Core.<$> verticalAlignment,
             ("wrapStrategy" Core..=) Core.<$> wrapStrategy
           ]
       )
@@ -3812,7 +3798,10 @@ data ChartCustomNumberFormatOptions = ChartCustomNumberFormatOptions
 newChartCustomNumberFormatOptions ::
   ChartCustomNumberFormatOptions
 newChartCustomNumberFormatOptions =
-  ChartCustomNumberFormatOptions {prefix = Core.Nothing, suffix = Core.Nothing}
+  ChartCustomNumberFormatOptions
+    { prefix = Core.Nothing,
+      suffix = Core.Nothing
+    }
 
 instance Core.FromJSON ChartCustomNumberFormatOptions where
   parseJSON =
@@ -3820,7 +3809,8 @@ instance Core.FromJSON ChartCustomNumberFormatOptions where
       "ChartCustomNumberFormatOptions"
       ( \o ->
           ChartCustomNumberFormatOptions
-            Core.<$> (o Core..:? "prefix") Core.<*> (o Core..:? "suffix")
+            Core.<$> (o Core..:? "prefix")
+            Core.<*> (o Core..:? "suffix")
       )
 
 instance Core.ToJSON ChartCustomNumberFormatOptions where
@@ -3899,14 +3889,11 @@ instance Core.FromJSON ChartDateTimeRule where
   parseJSON =
     Core.withObject
       "ChartDateTimeRule"
-      ( \o ->
-          ChartDateTimeRule Core.<$> (o Core..:? "type")
-      )
+      (\o -> ChartDateTimeRule Core.<$> (o Core..:? "type"))
 
 instance Core.ToJSON ChartDateTimeRule where
   toJSON ChartDateTimeRule {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | An optional setting on the ChartData of the domain of a data source chart that defines buckets for the values in the domain rather than breaking out each individual value. For example, when plotting a data source chart, you can specify a histogram rule on the domain (it should only contain numeric values), grouping its values into buckets. Any values of a chart series that fall into the same bucket are aggregated based on the aggregate_type.
 --
@@ -3923,7 +3910,10 @@ data ChartGroupRule = ChartGroupRule
 newChartGroupRule ::
   ChartGroupRule
 newChartGroupRule =
-  ChartGroupRule {dateTimeRule = Core.Nothing, histogramRule = Core.Nothing}
+  ChartGroupRule
+    { dateTimeRule = Core.Nothing,
+      histogramRule = Core.Nothing
+    }
 
 instance Core.FromJSON ChartGroupRule where
   parseJSON =
@@ -4006,16 +3996,12 @@ instance Core.FromJSON ChartSourceRange where
   parseJSON =
     Core.withObject
       "ChartSourceRange"
-      ( \o ->
-          ChartSourceRange Core.<$> (o Core..:? "sources")
-      )
+      (\o -> ChartSourceRange Core.<$> (o Core..:? "sources"))
 
 instance Core.ToJSON ChartSourceRange where
   toJSON ChartSourceRange {..} =
     Core.object
-      ( Core.catMaybes
-          [("sources" Core..=) Core.<$> sources]
-      )
+      (Core.catMaybes [("sources" Core..=) Core.<$> sources])
 
 -- | The specifications of a chart.
 --
@@ -4141,12 +4127,10 @@ instance Core.ToJSON ChartSpec where
       ( Core.catMaybes
           [ ("altText" Core..=) Core.<$> altText,
             ("backgroundColor" Core..=) Core.<$> backgroundColor,
-            ("backgroundColorStyle" Core..=)
-              Core.<$> backgroundColorStyle,
+            ("backgroundColorStyle" Core..=) Core.<$> backgroundColorStyle,
             ("basicChart" Core..=) Core.<$> basicChart,
             ("bubbleChart" Core..=) Core.<$> bubbleChart,
-            ("candlestickChart" Core..=)
-              Core.<$> candlestickChart,
+            ("candlestickChart" Core..=) Core.<$> candlestickChart,
             ("dataSourceChartProperties" Core..=)
               Core.<$> dataSourceChartProperties,
             ("filterSpecs" Core..=) Core.<$> filterSpecs,
@@ -4160,14 +4144,11 @@ instance Core.ToJSON ChartSpec where
             ("scorecardChart" Core..=) Core.<$> scorecardChart,
             ("sortSpecs" Core..=) Core.<$> sortSpecs,
             ("subtitle" Core..=) Core.<$> subtitle,
-            ("subtitleTextFormat" Core..=)
-              Core.<$> subtitleTextFormat,
-            ("subtitleTextPosition" Core..=)
-              Core.<$> subtitleTextPosition,
+            ("subtitleTextFormat" Core..=) Core.<$> subtitleTextFormat,
+            ("subtitleTextPosition" Core..=) Core.<$> subtitleTextPosition,
             ("title" Core..=) Core.<$> title,
             ("titleTextFormat" Core..=) Core.<$> titleTextFormat,
-            ("titleTextPosition" Core..=)
-              Core.<$> titleTextPosition,
+            ("titleTextPosition" Core..=) Core.<$> titleTextPosition,
             ("treemapChart" Core..=) Core.<$> treemapChart,
             ("waterfallChart" Core..=) Core.<$> waterfallChart
           ]
@@ -4185,23 +4166,19 @@ newtype ClearBasicFilterRequest = ClearBasicFilterRequest
 -- | Creates a value of 'ClearBasicFilterRequest' with the minimum fields required to make a request.
 newClearBasicFilterRequest ::
   ClearBasicFilterRequest
-newClearBasicFilterRequest = ClearBasicFilterRequest {sheetId = Core.Nothing}
+newClearBasicFilterRequest =
+  ClearBasicFilterRequest {sheetId = Core.Nothing}
 
 instance Core.FromJSON ClearBasicFilterRequest where
   parseJSON =
     Core.withObject
       "ClearBasicFilterRequest"
-      ( \o ->
-          ClearBasicFilterRequest
-            Core.<$> (o Core..:? "sheetId")
-      )
+      (\o -> ClearBasicFilterRequest Core.<$> (o Core..:? "sheetId"))
 
 instance Core.ToJSON ClearBasicFilterRequest where
   toJSON ClearBasicFilterRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("sheetId" Core..=) Core.<$> sheetId]
-      )
+      (Core.catMaybes [("sheetId" Core..=) Core.<$> sheetId])
 
 -- | The request for clearing a range of values in a spreadsheet.
 --
@@ -4262,7 +4239,7 @@ instance Core.ToJSON ClearValuesResponse where
           ]
       )
 
--- | Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to\/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of @java.awt.Color@ in Java; it can also be trivially provided to UIColor\'s @+colorWithRed:green:blue:alpha@ method in iOS; and, with just a little work, it can be easily formatted into a CSS @rgba()@ string in JavaScript. This reference page doesn\'t carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; \/\/ ... public static java.awt.Color fromProto(Color
+-- | Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of @java.awt.Color@ in Java; it can also be trivially provided to UIColor\'s @+colorWithRed:green:blue:alpha@ method in iOS; and, with just a little work, it can be easily formatted into a CSS @rgba()@ string in JavaScript. This reference page doesn\'t have information about the absolute color space that should be used to interpret the RGB value—for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most @1e-5@. Example (Java): import com.google.type.Color; \/\/ ... public static java.awt.Color fromProto(Color
 -- protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red \/ denominator) .setGreen(green \/ denominator) .setBlue(blue \/ denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) \/ denominator) .build()); } return resultBuilder.build(); } \/\/ ... Example (iOS \/ Obj-C): \/\/ ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha/wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha/wrapper != nil) { alpha = [alpha/wrapper value]; }
 -- return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha \<= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } \/\/ ... Example (JavaScript): \/\/ ... var protoToCssColor = function(rgb/color) { var redFrac = rgb/color.red || 0.0; var greenFrac = rgb/color.green || 0.0; var blueFrac = rgb/color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!(\'alpha\' in rgb/color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(\',\'); return [\'rgba(\', rgbParams, \',\', alphaFrac, \')\'].join(\'\'); }; var rgbToCssColor =
 -- function(red, green, blue) { var rgbNumber = new Number((red \<\< 16) | (green \<\< 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = [\'#\']; for (var i = 0; i \< missingZeros; i++) { resultBuilder.push(\'0\'); } resultBuilder.push(hexString); return resultBuilder.join(\'\'); }; \/\/ ...
@@ -4328,7 +4305,8 @@ data ColorStyle = ColorStyle
 -- | Creates a value of 'ColorStyle' with the minimum fields required to make a request.
 newColorStyle ::
   ColorStyle
-newColorStyle = ColorStyle {rgbColor = Core.Nothing, themeColor = Core.Nothing}
+newColorStyle =
+  ColorStyle {rgbColor = Core.Nothing, themeColor = Core.Nothing}
 
 instance Core.FromJSON ColorStyle where
   parseJSON =
@@ -4364,7 +4342,10 @@ data ConditionValue = ConditionValue
 newConditionValue ::
   ConditionValue
 newConditionValue =
-  ConditionValue {relativeDate = Core.Nothing, userEnteredValue = Core.Nothing}
+  ConditionValue
+    { relativeDate = Core.Nothing,
+      userEnteredValue = Core.Nothing
+    }
 
 instance Core.FromJSON ConditionValue where
   parseJSON =
@@ -4381,8 +4362,7 @@ instance Core.ToJSON ConditionValue where
     Core.object
       ( Core.catMaybes
           [ ("relativeDate" Core..=) Core.<$> relativeDate,
-            ("userEnteredValue" Core..=)
-              Core.<$> userEnteredValue
+            ("userEnteredValue" Core..=) Core.<$> userEnteredValue
           ]
       )
 
@@ -4473,8 +4453,7 @@ instance Core.ToJSON CopyPasteRequest where
     Core.object
       ( Core.catMaybes
           [ ("destination" Core..=) Core.<$> destination,
-            ("pasteOrientation" Core..=)
-              Core.<$> pasteOrientation,
+            ("pasteOrientation" Core..=) Core.<$> pasteOrientation,
             ("pasteType" Core..=) Core.<$> pasteType,
             ("source" Core..=) Core.<$> source
           ]
@@ -4493,12 +4472,12 @@ newtype CopySheetToAnotherSpreadsheetRequest = CopySheetToAnotherSpreadsheetRequ
 newCopySheetToAnotherSpreadsheetRequest ::
   CopySheetToAnotherSpreadsheetRequest
 newCopySheetToAnotherSpreadsheetRequest =
-  CopySheetToAnotherSpreadsheetRequest {destinationSpreadsheetId = Core.Nothing}
+  CopySheetToAnotherSpreadsheetRequest
+    { destinationSpreadsheetId =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    CopySheetToAnotherSpreadsheetRequest
-  where
+instance Core.FromJSON CopySheetToAnotherSpreadsheetRequest where
   parseJSON =
     Core.withObject
       "CopySheetToAnotherSpreadsheetRequest"
@@ -4507,10 +4486,7 @@ instance
             Core.<$> (o Core..:? "destinationSpreadsheetId")
       )
 
-instance
-  Core.ToJSON
-    CopySheetToAnotherSpreadsheetRequest
-  where
+instance Core.ToJSON CopySheetToAnotherSpreadsheetRequest where
   toJSON CopySheetToAnotherSpreadsheetRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -4547,9 +4523,7 @@ instance Core.ToJSON CreateDeveloperMetadataRequest where
   toJSON CreateDeveloperMetadataRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("developerMetadata" Core..=)
-              Core.<$> developerMetadata
-          ]
+          [("developerMetadata" Core..=) Core.<$> developerMetadata]
       )
 
 -- | The response from creating developer metadata.
@@ -4567,10 +4541,7 @@ newCreateDeveloperMetadataResponse ::
 newCreateDeveloperMetadataResponse =
   CreateDeveloperMetadataResponse {developerMetadata = Core.Nothing}
 
-instance
-  Core.FromJSON
-    CreateDeveloperMetadataResponse
-  where
+instance Core.FromJSON CreateDeveloperMetadataResponse where
   parseJSON =
     Core.withObject
       "CreateDeveloperMetadataResponse"
@@ -4583,9 +4554,7 @@ instance Core.ToJSON CreateDeveloperMetadataResponse where
   toJSON CreateDeveloperMetadataResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("developerMetadata" Core..=)
-              Core.<$> developerMetadata
-          ]
+          [("developerMetadata" Core..=) Core.<$> developerMetadata]
       )
 
 -- | Moves data from the source to the destination.
@@ -4812,8 +4781,7 @@ instance Core.ToJSON DataLabel where
   toJSON DataLabel {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customLabelData" Core..=)
-              Core.<$> customLabelData,
+          [ ("customLabelData" Core..=) Core.<$> customLabelData,
             ("placement" Core..=) Core.<$> placement,
             ("textFormat" Core..=) Core.<$> textFormat,
             ("type" Core..=) Core.<$> type'
@@ -4862,8 +4830,7 @@ instance Core.ToJSON DataSource where
   toJSON DataSource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calculatedColumns" Core..=)
-              Core.<$> calculatedColumns,
+          [ ("calculatedColumns" Core..=) Core.<$> calculatedColumns,
             ("dataSourceId" Core..=) Core.<$> dataSourceId,
             ("sheetId" Core..=) Core.<$> sheetId,
             ("spec" Core..=) Core.<$> spec
@@ -4904,8 +4871,7 @@ instance Core.ToJSON DataSourceChartProperties where
   toJSON DataSourceChartProperties {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+          [ ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSourceId" Core..=) Core.<$> dataSourceId
           ]
       )
@@ -4925,7 +4891,10 @@ data DataSourceColumn = DataSourceColumn
 newDataSourceColumn ::
   DataSourceColumn
 newDataSourceColumn =
-  DataSourceColumn {formula = Core.Nothing, reference = Core.Nothing}
+  DataSourceColumn
+    { formula = Core.Nothing,
+      reference = Core.Nothing
+    }
 
 instance Core.FromJSON DataSourceColumn where
   parseJSON =
@@ -4958,21 +4927,18 @@ newtype DataSourceColumnReference = DataSourceColumnReference
 -- | Creates a value of 'DataSourceColumnReference' with the minimum fields required to make a request.
 newDataSourceColumnReference ::
   DataSourceColumnReference
-newDataSourceColumnReference = DataSourceColumnReference {name = Core.Nothing}
+newDataSourceColumnReference =
+  DataSourceColumnReference {name = Core.Nothing}
 
 instance Core.FromJSON DataSourceColumnReference where
   parseJSON =
     Core.withObject
       "DataSourceColumnReference"
-      ( \o ->
-          DataSourceColumnReference
-            Core.<$> (o Core..:? "name")
-      )
+      (\o -> DataSourceColumnReference Core.<$> (o Core..:? "name"))
 
 instance Core.ToJSON DataSourceColumnReference where
   toJSON DataSourceColumnReference {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | A data source formula.
 --
@@ -5008,8 +4974,7 @@ instance Core.ToJSON DataSourceFormula where
   toJSON DataSourceFormula {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+          [ ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSourceId" Core..=) Core.<$> dataSourceId
           ]
       )
@@ -5061,8 +5026,7 @@ instance Core.ToJSON DataSourceObjectReference where
     Core.object
       ( Core.catMaybes
           [ ("chartId" Core..=) Core.<$> chartId,
-            ("dataSourceFormulaCell" Core..=)
-              Core.<$> dataSourceFormulaCell,
+            ("dataSourceFormulaCell" Core..=) Core.<$> dataSourceFormulaCell,
             ("dataSourcePivotTableAnchorCell" Core..=)
               Core.<$> dataSourcePivotTableAnchorCell,
             ("dataSourceTableAnchorCell" Core..=)
@@ -5091,16 +5055,13 @@ instance Core.FromJSON DataSourceObjectReferences where
     Core.withObject
       "DataSourceObjectReferences"
       ( \o ->
-          DataSourceObjectReferences
-            Core.<$> (o Core..:? "references")
+          DataSourceObjectReferences Core.<$> (o Core..:? "references")
       )
 
 instance Core.ToJSON DataSourceObjectReferences where
   toJSON DataSourceObjectReferences {..} =
     Core.object
-      ( Core.catMaybes
-          [("references" Core..=) Core.<$> references]
-      )
+      (Core.catMaybes [("references" Core..=) Core.<$> references])
 
 -- | A parameter in a data source\'s query. The parameter allows the user to pass in values from the spreadsheet into a query.
 --
@@ -5166,22 +5127,19 @@ instance Core.FromJSON DataSourceRefreshDailySchedule where
     Core.withObject
       "DataSourceRefreshDailySchedule"
       ( \o ->
-          DataSourceRefreshDailySchedule
-            Core.<$> (o Core..:? "startTime")
+          DataSourceRefreshDailySchedule Core.<$> (o Core..:? "startTime")
       )
 
 instance Core.ToJSON DataSourceRefreshDailySchedule where
   toJSON DataSourceRefreshDailySchedule {..} =
     Core.object
-      ( Core.catMaybes
-          [("startTime" Core..=) Core.<$> startTime]
-      )
+      (Core.catMaybes [("startTime" Core..=) Core.<$> startTime])
 
 -- | A monthly schedule for data to refresh on specific days in the month in a given time interval.
 --
 -- /See:/ 'newDataSourceRefreshMonthlySchedule' smart constructor.
 data DataSourceRefreshMonthlySchedule = DataSourceRefreshMonthlySchedule
-  { -- | Days of the month to refresh. Only 1-28 are supported, mapping to the 1st to the 28th day. At lesat one day must be specified.
+  { -- | Days of the month to refresh. Only 1-28 are supported, mapping to the 1st to the 28th day. At least one day must be specified.
     daysOfMonth :: (Core.Maybe [Core.Int32]),
     -- | The start time of a time interval in which a data source refresh is scheduled. Only @hours@ part is used. The time interval size defaults to that in the Sheets editor.
     startTime :: (Core.Maybe TimeOfDay')
@@ -5197,10 +5155,7 @@ newDataSourceRefreshMonthlySchedule =
       startTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DataSourceRefreshMonthlySchedule
-  where
+instance Core.FromJSON DataSourceRefreshMonthlySchedule where
   parseJSON =
     Core.withObject
       "DataSourceRefreshMonthlySchedule"
@@ -5219,7 +5174,7 @@ instance Core.ToJSON DataSourceRefreshMonthlySchedule where
           ]
       )
 
--- | Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8am , the refresh will take place between 8am and 12pm every day.
+-- | Schedule for refreshing the data source. Data sources in the spreadsheet are refreshed within a time interval. You can specify the start time by clicking the Scheduled Refresh button in the Sheets editor, but the interval is fixed at 4 hours. For example, if you specify a start time of 8 AM , the refresh will take place between 8 AM and 12 PM every day.
 --
 -- /See:/ 'newDataSourceRefreshSchedule' smart constructor.
 data DataSourceRefreshSchedule = DataSourceRefreshSchedule
@@ -5298,10 +5253,7 @@ newDataSourceRefreshWeeklySchedule =
       startTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DataSourceRefreshWeeklySchedule
-  where
+instance Core.FromJSON DataSourceRefreshWeeklySchedule where
   parseJSON =
     Core.withObject
       "DataSourceRefreshWeeklySchedule"
@@ -5354,8 +5306,7 @@ instance Core.ToJSON DataSourceSheetDimensionRange where
   toJSON DataSourceSheetDimensionRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnReferences" Core..=)
-              Core.<$> columnReferences,
+          [ ("columnReferences" Core..=) Core.<$> columnReferences,
             ("sheetId" Core..=) Core.<$> sheetId
           ]
       )
@@ -5399,8 +5350,7 @@ instance Core.ToJSON DataSourceSheetProperties where
     Core.object
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
-            ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+            ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSourceId" Core..=) Core.<$> dataSourceId
           ]
       )
@@ -5411,6 +5361,8 @@ instance Core.ToJSON DataSourceSheetProperties where
 data DataSourceSpec = DataSourceSpec
   { -- | A BigQueryDataSourceSpec.
     bigQuery :: (Core.Maybe BigQueryDataSourceSpec),
+    -- | A LookerDatasourceSpec.
+    looker :: (Core.Maybe LookerDataSourceSpec),
     -- | The parameters of the data source, used when querying the data source.
     parameters :: (Core.Maybe [DataSourceParameter])
   }
@@ -5420,7 +5372,11 @@ data DataSourceSpec = DataSourceSpec
 newDataSourceSpec ::
   DataSourceSpec
 newDataSourceSpec =
-  DataSourceSpec {bigQuery = Core.Nothing, parameters = Core.Nothing}
+  DataSourceSpec
+    { bigQuery = Core.Nothing,
+      looker = Core.Nothing,
+      parameters = Core.Nothing
+    }
 
 instance Core.FromJSON DataSourceSpec where
   parseJSON =
@@ -5429,6 +5385,7 @@ instance Core.FromJSON DataSourceSpec where
       ( \o ->
           DataSourceSpec
             Core.<$> (o Core..:? "bigQuery")
+            Core.<*> (o Core..:? "looker")
             Core.<*> (o Core..:? "parameters")
       )
 
@@ -5437,6 +5394,7 @@ instance Core.ToJSON DataSourceSpec where
     Core.object
       ( Core.catMaybes
           [ ("bigQuery" Core..=) Core.<$> bigQuery,
+            ("looker" Core..=) Core.<$> looker,
             ("parameters" Core..=) Core.<$> parameters
           ]
       )
@@ -5495,11 +5453,9 @@ instance Core.ToJSON DataSourceTable where
   toJSON DataSourceTable {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnSelectionType" Core..=)
-              Core.<$> columnSelectionType,
+          [ ("columnSelectionType" Core..=) Core.<$> columnSelectionType,
             ("columns" Core..=) Core.<$> columns,
-            ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+            ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSourceId" Core..=) Core.<$> dataSourceId,
             ("filterSpecs" Core..=) Core.<$> filterSpecs,
             ("rowLimit" Core..=) Core.<$> rowLimit,
@@ -5578,8 +5534,7 @@ instance Core.FromJSON DateTimeRule where
 
 instance Core.ToJSON DateTimeRule where
   toJSON DateTimeRule {..} =
-    Core.object
-      (Core.catMaybes [("type" Core..=) Core.<$> type'])
+    Core.object (Core.catMaybes [("type" Core..=) Core.<$> type'])
 
 -- | Removes the banded range with the given ID from the spreadsheet.
 --
@@ -5593,23 +5548,19 @@ newtype DeleteBandingRequest = DeleteBandingRequest
 -- | Creates a value of 'DeleteBandingRequest' with the minimum fields required to make a request.
 newDeleteBandingRequest ::
   DeleteBandingRequest
-newDeleteBandingRequest = DeleteBandingRequest {bandedRangeId = Core.Nothing}
+newDeleteBandingRequest =
+  DeleteBandingRequest {bandedRangeId = Core.Nothing}
 
 instance Core.FromJSON DeleteBandingRequest where
   parseJSON =
     Core.withObject
       "DeleteBandingRequest"
-      ( \o ->
-          DeleteBandingRequest
-            Core.<$> (o Core..:? "bandedRangeId")
-      )
+      (\o -> DeleteBandingRequest Core.<$> (o Core..:? "bandedRangeId"))
 
 instance Core.ToJSON DeleteBandingRequest where
   toJSON DeleteBandingRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("bandedRangeId" Core..=) Core.<$> bandedRangeId]
-      )
+      (Core.catMaybes [("bandedRangeId" Core..=) Core.<$> bandedRangeId])
 
 -- | Deletes a conditional format rule at the given index. All subsequent rules\' indexes are decremented.
 --
@@ -5631,22 +5582,17 @@ newDeleteConditionalFormatRuleRequest =
       sheetId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DeleteConditionalFormatRuleRequest
-  where
+instance Core.FromJSON DeleteConditionalFormatRuleRequest where
   parseJSON =
     Core.withObject
       "DeleteConditionalFormatRuleRequest"
       ( \o ->
           DeleteConditionalFormatRuleRequest
-            Core.<$> (o Core..:? "index") Core.<*> (o Core..:? "sheetId")
+            Core.<$> (o Core..:? "index")
+            Core.<*> (o Core..:? "sheetId")
       )
 
-instance
-  Core.ToJSON
-    DeleteConditionalFormatRuleRequest
-  where
+instance Core.ToJSON DeleteConditionalFormatRuleRequest where
   toJSON DeleteConditionalFormatRuleRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -5670,25 +5616,17 @@ newDeleteConditionalFormatRuleResponse ::
 newDeleteConditionalFormatRuleResponse =
   DeleteConditionalFormatRuleResponse {rule = Core.Nothing}
 
-instance
-  Core.FromJSON
-    DeleteConditionalFormatRuleResponse
-  where
+instance Core.FromJSON DeleteConditionalFormatRuleResponse where
   parseJSON =
     Core.withObject
       "DeleteConditionalFormatRuleResponse"
       ( \o ->
-          DeleteConditionalFormatRuleResponse
-            Core.<$> (o Core..:? "rule")
+          DeleteConditionalFormatRuleResponse Core.<$> (o Core..:? "rule")
       )
 
-instance
-  Core.ToJSON
-    DeleteConditionalFormatRuleResponse
-  where
+instance Core.ToJSON DeleteConditionalFormatRuleResponse where
   toJSON DeleteConditionalFormatRuleResponse {..} =
-    Core.object
-      (Core.catMaybes [("rule" Core..=) Core.<$> rule])
+    Core.object (Core.catMaybes [("rule" Core..=) Core.<$> rule])
 
 -- | Deletes a data source. The request also deletes the associated data source sheet, and unlinks all associated data source objects.
 --
@@ -5710,16 +5648,13 @@ instance Core.FromJSON DeleteDataSourceRequest where
     Core.withObject
       "DeleteDataSourceRequest"
       ( \o ->
-          DeleteDataSourceRequest
-            Core.<$> (o Core..:? "dataSourceId")
+          DeleteDataSourceRequest Core.<$> (o Core..:? "dataSourceId")
       )
 
 instance Core.ToJSON DeleteDataSourceRequest where
   toJSON DeleteDataSourceRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataSourceId" Core..=) Core.<$> dataSourceId]
-      )
+      (Core.catMaybes [("dataSourceId" Core..=) Core.<$> dataSourceId])
 
 -- | A request to delete developer metadata.
 --
@@ -5741,16 +5676,13 @@ instance Core.FromJSON DeleteDeveloperMetadataRequest where
     Core.withObject
       "DeleteDeveloperMetadataRequest"
       ( \o ->
-          DeleteDeveloperMetadataRequest
-            Core.<$> (o Core..:? "dataFilter")
+          DeleteDeveloperMetadataRequest Core.<$> (o Core..:? "dataFilter")
       )
 
 instance Core.ToJSON DeleteDeveloperMetadataRequest where
   toJSON DeleteDeveloperMetadataRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataFilter" Core..=) Core.<$> dataFilter]
-      )
+      (Core.catMaybes [("dataFilter" Core..=) Core.<$> dataFilter])
 
 -- | The response from deleting developer metadata.
 --
@@ -5765,12 +5697,12 @@ newtype DeleteDeveloperMetadataResponse = DeleteDeveloperMetadataResponse
 newDeleteDeveloperMetadataResponse ::
   DeleteDeveloperMetadataResponse
 newDeleteDeveloperMetadataResponse =
-  DeleteDeveloperMetadataResponse {deletedDeveloperMetadata = Core.Nothing}
+  DeleteDeveloperMetadataResponse
+    { deletedDeveloperMetadata =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    DeleteDeveloperMetadataResponse
-  where
+instance Core.FromJSON DeleteDeveloperMetadataResponse where
   parseJSON =
     Core.withObject
       "DeleteDeveloperMetadataResponse"
@@ -5807,15 +5739,11 @@ instance Core.FromJSON DeleteDimensionGroupRequest where
   parseJSON =
     Core.withObject
       "DeleteDimensionGroupRequest"
-      ( \o ->
-          DeleteDimensionGroupRequest
-            Core.<$> (o Core..:? "range")
-      )
+      (\o -> DeleteDimensionGroupRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON DeleteDimensionGroupRequest where
   toJSON DeleteDimensionGroupRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | The result of deleting a group.
 --
@@ -5845,9 +5773,7 @@ instance Core.ToJSON DeleteDimensionGroupResponse where
   toJSON DeleteDimensionGroupResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dimensionGroups" Core..=)
-              Core.<$> dimensionGroups
-          ]
+          [("dimensionGroups" Core..=) Core.<$> dimensionGroups]
       )
 
 -- | Deletes the dimensions from the sheet.
@@ -5862,20 +5788,18 @@ newtype DeleteDimensionRequest = DeleteDimensionRequest
 -- | Creates a value of 'DeleteDimensionRequest' with the minimum fields required to make a request.
 newDeleteDimensionRequest ::
   DeleteDimensionRequest
-newDeleteDimensionRequest = DeleteDimensionRequest {range = Core.Nothing}
+newDeleteDimensionRequest =
+  DeleteDimensionRequest {range = Core.Nothing}
 
 instance Core.FromJSON DeleteDimensionRequest where
   parseJSON =
     Core.withObject
       "DeleteDimensionRequest"
-      ( \o ->
-          DeleteDimensionRequest Core.<$> (o Core..:? "range")
-      )
+      (\o -> DeleteDimensionRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON DeleteDimensionRequest where
   toJSON DeleteDimensionRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | Removes rows within this range that contain values in the specified columns that are duplicates of values in any previous row. Rows with identical values but different letter cases, formatting, or formulas are considered to be duplicates. This request also removes duplicate rows hidden from view (for example, due to a filter). When removing duplicates, the first instance of each duplicate row scanning from the top downwards is kept in the resulting range. Content outside of the specified range isn\'t removed, and rows considered duplicates do not have to be adjacent to each other in the range.
 --
@@ -5911,8 +5835,7 @@ instance Core.ToJSON DeleteDuplicatesRequest where
   toJSON DeleteDuplicatesRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("comparisonColumns" Core..=)
-              Core.<$> comparisonColumns,
+          [ ("comparisonColumns" Core..=) Core.<$> comparisonColumns,
             ("range" Core..=) Core.<$> range
           ]
       )
@@ -5970,16 +5893,13 @@ instance Core.FromJSON DeleteEmbeddedObjectRequest where
     Core.withObject
       "DeleteEmbeddedObjectRequest"
       ( \o ->
-          DeleteEmbeddedObjectRequest
-            Core.<$> (o Core..:? "objectId")
+          DeleteEmbeddedObjectRequest Core.<$> (o Core..:? "objectId")
       )
 
 instance Core.ToJSON DeleteEmbeddedObjectRequest where
   toJSON DeleteEmbeddedObjectRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("objectId" Core..=) Core.<$> objectId]
-      )
+      (Core.catMaybes [("objectId" Core..=) Core.<$> objectId])
 
 -- | Deletes a particular filter view.
 --
@@ -5993,23 +5913,19 @@ newtype DeleteFilterViewRequest = DeleteFilterViewRequest
 -- | Creates a value of 'DeleteFilterViewRequest' with the minimum fields required to make a request.
 newDeleteFilterViewRequest ::
   DeleteFilterViewRequest
-newDeleteFilterViewRequest = DeleteFilterViewRequest {filterId = Core.Nothing}
+newDeleteFilterViewRequest =
+  DeleteFilterViewRequest {filterId = Core.Nothing}
 
 instance Core.FromJSON DeleteFilterViewRequest where
   parseJSON =
     Core.withObject
       "DeleteFilterViewRequest"
-      ( \o ->
-          DeleteFilterViewRequest
-            Core.<$> (o Core..:? "filterId")
-      )
+      (\o -> DeleteFilterViewRequest Core.<$> (o Core..:? "filterId"))
 
 instance Core.ToJSON DeleteFilterViewRequest where
   toJSON DeleteFilterViewRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("filterId" Core..=) Core.<$> filterId]
-      )
+      (Core.catMaybes [("filterId" Core..=) Core.<$> filterId])
 
 -- | Removes the named range with the given ID from the spreadsheet.
 --
@@ -6031,16 +5947,13 @@ instance Core.FromJSON DeleteNamedRangeRequest where
     Core.withObject
       "DeleteNamedRangeRequest"
       ( \o ->
-          DeleteNamedRangeRequest
-            Core.<$> (o Core..:? "namedRangeId")
+          DeleteNamedRangeRequest Core.<$> (o Core..:? "namedRangeId")
       )
 
 instance Core.ToJSON DeleteNamedRangeRequest where
   toJSON DeleteNamedRangeRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("namedRangeId" Core..=) Core.<$> namedRangeId]
-      )
+      (Core.catMaybes [("namedRangeId" Core..=) Core.<$> namedRangeId])
 
 -- | Deletes the protected range with the given ID.
 --
@@ -6070,9 +5983,7 @@ instance Core.ToJSON DeleteProtectedRangeRequest where
   toJSON DeleteProtectedRangeRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("protectedRangeId" Core..=)
-              Core.<$> protectedRangeId
-          ]
+          [("protectedRangeId" Core..=) Core.<$> protectedRangeId]
       )
 
 -- | Deletes a range of cells, shifting other cells into the deleted area.
@@ -6090,7 +6001,10 @@ data DeleteRangeRequest = DeleteRangeRequest
 newDeleteRangeRequest ::
   DeleteRangeRequest
 newDeleteRangeRequest =
-  DeleteRangeRequest {range = Core.Nothing, shiftDimension = Core.Nothing}
+  DeleteRangeRequest
+    { range = Core.Nothing,
+      shiftDimension = Core.Nothing
+    }
 
 instance Core.FromJSON DeleteRangeRequest where
   parseJSON =
@@ -6129,16 +6043,12 @@ instance Core.FromJSON DeleteSheetRequest where
   parseJSON =
     Core.withObject
       "DeleteSheetRequest"
-      ( \o ->
-          DeleteSheetRequest Core.<$> (o Core..:? "sheetId")
-      )
+      (\o -> DeleteSheetRequest Core.<$> (o Core..:? "sheetId"))
 
 instance Core.ToJSON DeleteSheetRequest where
   toJSON DeleteSheetRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("sheetId" Core..=) Core.<$> sheetId]
-      )
+      (Core.catMaybes [("sheetId" Core..=) Core.<$> sheetId])
 
 -- | Developer metadata associated with a location or object in a spreadsheet. Developer metadata may be used to associate arbitrary data with various parts of a spreadsheet and will remain associated at those locations as they move around and the spreadsheet is edited. For example, if developer metadata is associated with row 5 and another row is then subsequently inserted above row 5, that original metadata will still be associated with the row it was first associated with (what is now row 6). If the associated object is deleted its metadata is deleted too.
 --
@@ -6259,7 +6169,7 @@ data DeveloperMetadataLookup = DeveloperMetadataLookup
     metadataLocation :: (Core.Maybe DeveloperMetadataLocation),
     -- | Limits the selected developer metadata to that which has a matching DeveloperMetadata.metadata_value.
     metadataValue :: (Core.Maybe Core.Text),
-    -- | Limits the selected developer metadata to that which has a matching DeveloperMetadata.visibility. If left unspecified, all developer metadata visibile to the requesting project is considered.
+    -- | Limits the selected developer metadata to that which has a matching DeveloperMetadata.visibility. If left unspecified, all developer metadata visible to the requesting project is considered.
     visibility :: (Core.Maybe DeveloperMetadataLookup_Visibility)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6302,8 +6212,7 @@ instance Core.ToJSON DeveloperMetadataLookup where
             ("locationType" Core..=) Core.<$> locationType,
             ("metadataId" Core..=) Core.<$> metadataId,
             ("metadataKey" Core..=) Core.<$> metadataKey,
-            ("metadataLocation" Core..=)
-              Core.<$> metadataLocation,
+            ("metadataLocation" Core..=) Core.<$> metadataLocation,
             ("metadataValue" Core..=) Core.<$> metadataValue,
             ("visibility" Core..=) Core.<$> visibility
           ]
@@ -6401,8 +6310,7 @@ instance Core.ToJSON DimensionProperties where
       ( Core.catMaybes
           [ ("dataSourceColumnReference" Core..=)
               Core.<$> dataSourceColumnReference,
-            ("developerMetadata" Core..=)
-              Core.<$> developerMetadata,
+            ("developerMetadata" Core..=) Core.<$> developerMetadata,
             ("hiddenByFilter" Core..=) Core.<$> hiddenByFilter,
             ("hiddenByUser" Core..=) Core.<$> hiddenByUser,
             ("pixelSize" Core..=) Core.<$> pixelSize
@@ -6478,16 +6386,13 @@ instance Core.FromJSON DuplicateFilterViewRequest where
     Core.withObject
       "DuplicateFilterViewRequest"
       ( \o ->
-          DuplicateFilterViewRequest
-            Core.<$> (o Core..:? "filterId")
+          DuplicateFilterViewRequest Core.<$> (o Core..:? "filterId")
       )
 
 instance Core.ToJSON DuplicateFilterViewRequest where
   toJSON DuplicateFilterViewRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("filterId" Core..=) Core.<$> filterId]
-      )
+      (Core.catMaybes [("filterId" Core..=) Core.<$> filterId])
 
 -- | The result of a filter view being duplicated.
 --
@@ -6508,15 +6413,11 @@ instance Core.FromJSON DuplicateFilterViewResponse where
   parseJSON =
     Core.withObject
       "DuplicateFilterViewResponse"
-      ( \o ->
-          DuplicateFilterViewResponse
-            Core.<$> (o Core..:? "filter")
-      )
+      (\o -> DuplicateFilterViewResponse Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON DuplicateFilterViewResponse where
   toJSON DuplicateFilterViewResponse {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | Duplicates the contents of a sheet.
 --
@@ -6560,8 +6461,7 @@ instance Core.ToJSON DuplicateSheetRequest where
   toJSON DuplicateSheetRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("insertSheetIndex" Core..=)
-              Core.<$> insertSheetIndex,
+          [ ("insertSheetIndex" Core..=) Core.<$> insertSheetIndex,
             ("newSheetId" Core..=) Core.<$> newSheetId',
             ("newSheetName" Core..=) Core.<$> newSheetName',
             ("sourceSheetId" Core..=) Core.<$> sourceSheetId
@@ -6580,23 +6480,19 @@ newtype DuplicateSheetResponse = DuplicateSheetResponse
 -- | Creates a value of 'DuplicateSheetResponse' with the minimum fields required to make a request.
 newDuplicateSheetResponse ::
   DuplicateSheetResponse
-newDuplicateSheetResponse = DuplicateSheetResponse {properties = Core.Nothing}
+newDuplicateSheetResponse =
+  DuplicateSheetResponse {properties = Core.Nothing}
 
 instance Core.FromJSON DuplicateSheetResponse where
   parseJSON =
     Core.withObject
       "DuplicateSheetResponse"
-      ( \o ->
-          DuplicateSheetResponse
-            Core.<$> (o Core..:? "properties")
-      )
+      (\o -> DuplicateSheetResponse Core.<$> (o Core..:? "properties"))
 
 instance Core.ToJSON DuplicateSheetResponse where
   toJSON DuplicateSheetResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("properties" Core..=) Core.<$> properties]
-      )
+      (Core.catMaybes [("properties" Core..=) Core.<$> properties])
 
 -- | The editors of a protected range.
 --
@@ -6636,8 +6532,7 @@ instance Core.ToJSON Editors where
   toJSON Editors {..} =
     Core.object
       ( Core.catMaybes
-          [ ("domainUsersCanEdit" Core..=)
-              Core.<$> domainUsersCanEdit,
+          [ ("domainUsersCanEdit" Core..=) Core.<$> domainUsersCanEdit,
             ("groups" Core..=) Core.<$> groups,
             ("users" Core..=) Core.<$> users
           ]
@@ -6707,7 +6602,10 @@ data EmbeddedObjectBorder = EmbeddedObjectBorder
 newEmbeddedObjectBorder ::
   EmbeddedObjectBorder
 newEmbeddedObjectBorder =
-  EmbeddedObjectBorder {color = Core.Nothing, colorStyle = Core.Nothing}
+  EmbeddedObjectBorder
+    { color = Core.Nothing,
+      colorStyle = Core.Nothing
+    }
 
 instance Core.FromJSON EmbeddedObjectBorder where
   parseJSON =
@@ -6786,7 +6684,8 @@ data ErrorValue = ErrorValue
 -- | Creates a value of 'ErrorValue' with the minimum fields required to make a request.
 newErrorValue ::
   ErrorValue
-newErrorValue = ErrorValue {message = Core.Nothing, type' = Core.Nothing}
+newErrorValue =
+  ErrorValue {message = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON ErrorValue where
   parseJSON =
@@ -6794,7 +6693,8 @@ instance Core.FromJSON ErrorValue where
       "ErrorValue"
       ( \o ->
           ErrorValue
-            Core.<$> (o Core..:? "message") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "message")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON ErrorValue where
@@ -6912,12 +6812,10 @@ instance Core.ToJSON FilterCriteria where
       ( Core.catMaybes
           [ ("condition" Core..=) Core.<$> condition,
             ("hiddenValues" Core..=) Core.<$> hiddenValues,
-            ("visibleBackgroundColor" Core..=)
-              Core.<$> visibleBackgroundColor,
+            ("visibleBackgroundColor" Core..=) Core.<$> visibleBackgroundColor,
             ("visibleBackgroundColorStyle" Core..=)
               Core.<$> visibleBackgroundColorStyle,
-            ("visibleForegroundColor" Core..=)
-              Core.<$> visibleForegroundColor,
+            ("visibleForegroundColor" Core..=) Core.<$> visibleForegroundColor,
             ("visibleForegroundColorStyle" Core..=)
               Core.<$> visibleForegroundColorStyle
           ]
@@ -6927,7 +6825,7 @@ instance Core.ToJSON FilterCriteria where
 --
 -- /See:/ 'newFilterSpec' smart constructor.
 data FilterSpec = FilterSpec
-  { -- | The column index.
+  { -- | The zero-based column index.
     columnIndex :: (Core.Maybe Core.Int32),
     -- | Reference to a data source column.
     dataSourceColumnReference :: (Core.Maybe DataSourceColumnReference),
@@ -7036,8 +6934,7 @@ instance Core.ToJSON FilterView where
 --
 -- /See:/ 'newFilterView_Criteria' smart constructor.
 newtype FilterView_Criteria = FilterView_Criteria
-  { -- |
-    additional :: (Core.HashMap Core.Text FilterCriteria)
+  { additional :: (Core.HashMap Core.Text FilterCriteria)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -7053,14 +6950,10 @@ instance Core.FromJSON FilterView_Criteria where
   parseJSON =
     Core.withObject
       "FilterView_Criteria"
-      ( \o ->
-          FilterView_Criteria
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> FilterView_Criteria Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON FilterView_Criteria where
-  toJSON FilterView_Criteria {..} =
-    Core.toJSON additional
+  toJSON FilterView_Criteria {..} = Core.toJSON additional
 
 -- | Finds and replaces data in cells over a range, sheet, or all sheets.
 --
@@ -7182,10 +7075,8 @@ instance Core.ToJSON FindReplaceResponse where
   toJSON FindReplaceResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("formulasChanged" Core..=)
-              Core.<$> formulasChanged,
-            ("occurrencesChanged" Core..=)
-              Core.<$> occurrencesChanged,
+          [ ("formulasChanged" Core..=) Core.<$> formulasChanged,
+            ("occurrencesChanged" Core..=) Core.<$> occurrencesChanged,
             ("rowsChanged" Core..=) Core.<$> rowsChanged,
             ("sheetsChanged" Core..=) Core.<$> sheetsChanged,
             ("valuesChanged" Core..=) Core.<$> valuesChanged
@@ -7212,10 +7103,7 @@ newGetSpreadsheetByDataFilterRequest =
       includeGridData = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GetSpreadsheetByDataFilterRequest
-  where
+instance Core.FromJSON GetSpreadsheetByDataFilterRequest where
   parseJSON =
     Core.withObject
       "GetSpreadsheetByDataFilterRequest"
@@ -7225,16 +7113,12 @@ instance
             Core.<*> (o Core..:? "includeGridData")
       )
 
-instance
-  Core.ToJSON
-    GetSpreadsheetByDataFilterRequest
-  where
+instance Core.ToJSON GetSpreadsheetByDataFilterRequest where
   toJSON GetSpreadsheetByDataFilterRequest {..} =
     Core.object
       ( Core.catMaybes
           [ ("dataFilters" Core..=) Core.<$> dataFilters,
-            ("includeGridData" Core..=)
-              Core.<$> includeGridData
+            ("includeGridData" Core..=) Core.<$> includeGridData
           ]
       )
 
@@ -7437,13 +7321,11 @@ instance Core.ToJSON GridProperties where
           [ ("columnCount" Core..=) Core.<$> columnCount,
             ("columnGroupControlAfter" Core..=)
               Core.<$> columnGroupControlAfter,
-            ("frozenColumnCount" Core..=)
-              Core.<$> frozenColumnCount,
+            ("frozenColumnCount" Core..=) Core.<$> frozenColumnCount,
             ("frozenRowCount" Core..=) Core.<$> frozenRowCount,
             ("hideGridlines" Core..=) Core.<$> hideGridlines,
             ("rowCount" Core..=) Core.<$> rowCount,
-            ("rowGroupControlAfter" Core..=)
-              Core.<$> rowGroupControlAfter
+            ("rowGroupControlAfter" Core..=) Core.<$> rowGroupControlAfter
           ]
       )
 
@@ -7496,8 +7378,7 @@ instance Core.ToJSON GridRange where
           [ ("endColumnIndex" Core..=) Core.<$> endColumnIndex,
             ("endRowIndex" Core..=) Core.<$> endRowIndex,
             ("sheetId" Core..=) Core.<$> sheetId,
-            ("startColumnIndex" Core..=)
-              Core.<$> startColumnIndex,
+            ("startColumnIndex" Core..=) Core.<$> startColumnIndex,
             ("startRowIndex" Core..=) Core.<$> startRowIndex
           ]
       )
@@ -7550,11 +7431,9 @@ instance Core.ToJSON HistogramChartSpec where
       ( Core.catMaybes
           [ ("bucketSize" Core..=) Core.<$> bucketSize,
             ("legendPosition" Core..=) Core.<$> legendPosition,
-            ("outlierPercentile" Core..=)
-              Core.<$> outlierPercentile,
+            ("outlierPercentile" Core..=) Core.<$> outlierPercentile,
             ("series" Core..=) Core.<$> series,
-            ("showItemDividers" Core..=)
-              Core.<$> showItemDividers
+            ("showItemDividers" Core..=) Core.<$> showItemDividers
           ]
       )
 
@@ -7681,8 +7560,7 @@ instance Core.ToJSON InsertDimensionRequest where
   toJSON InsertDimensionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("inheritFromBefore" Core..=)
-              Core.<$> inheritFromBefore,
+          [ ("inheritFromBefore" Core..=) Core.<$> inheritFromBefore,
             ("range" Core..=) Core.<$> range
           ]
       )
@@ -7691,7 +7569,7 @@ instance Core.ToJSON InsertDimensionRequest where
 --
 -- /See:/ 'newInsertRangeRequest' smart constructor.
 data InsertRangeRequest = InsertRangeRequest
-  { -- | The range to insert new cells into.
+  { -- | The range to insert new cells into. The range is constrained to the current sheet boundaries.
     range :: (Core.Maybe GridRange),
     -- | The dimension which will be shifted when inserting cells. If ROWS, existing cells will be shifted down. If COLUMNS, existing cells will be shifted right.
     shiftDimension :: (Core.Maybe InsertRangeRequest_ShiftDimension)
@@ -7702,7 +7580,10 @@ data InsertRangeRequest = InsertRangeRequest
 newInsertRangeRequest ::
   InsertRangeRequest
 newInsertRangeRequest =
-  InsertRangeRequest {range = Core.Nothing, shiftDimension = Core.Nothing}
+  InsertRangeRequest
+    { range = Core.Nothing,
+      shiftDimension = Core.Nothing
+    }
 
 instance Core.FromJSON InsertRangeRequest where
   parseJSON =
@@ -7786,7 +7667,8 @@ data Interval = Interval
 -- | Creates a value of 'Interval' with the minimum fields required to make a request.
 newInterval ::
   Interval
-newInterval = Interval {endTime = Core.Nothing, startTime = Core.Nothing}
+newInterval =
+  Interval {endTime = Core.Nothing, startTime = Core.Nothing}
 
 instance Core.FromJSON Interval where
   parseJSON =
@@ -7841,8 +7723,7 @@ instance Core.ToJSON IterativeCalculationSettings where
   toJSON IterativeCalculationSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("convergenceThreshold" Core..=)
-              Core.<$> convergenceThreshold,
+          [ ("convergenceThreshold" Core..=) Core.<$> convergenceThreshold,
             ("maxIterations" Core..=) Core.<$> maxIterations
           ]
       )
@@ -7862,7 +7743,10 @@ data KeyValueFormat = KeyValueFormat
 newKeyValueFormat ::
   KeyValueFormat
 newKeyValueFormat =
-  KeyValueFormat {position = Core.Nothing, textFormat = Core.Nothing}
+  KeyValueFormat
+    { position = Core.Nothing,
+      textFormat = Core.Nothing
+    }
 
 instance Core.FromJSON KeyValueFormat where
   parseJSON =
@@ -7897,7 +7781,8 @@ data LineStyle = LineStyle
 -- | Creates a value of 'LineStyle' with the minimum fields required to make a request.
 newLineStyle ::
   LineStyle
-newLineStyle = LineStyle {type' = Core.Nothing, width = Core.Nothing}
+newLineStyle =
+  LineStyle {type' = Core.Nothing, width = Core.Nothing}
 
 instance Core.FromJSON LineStyle where
   parseJSON =
@@ -7905,7 +7790,8 @@ instance Core.FromJSON LineStyle where
       "LineStyle"
       ( \o ->
           LineStyle
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "width")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "width")
       )
 
 instance Core.ToJSON LineStyle where
@@ -7933,14 +7819,55 @@ newLink = Link {uri = Core.Nothing}
 
 instance Core.FromJSON Link where
   parseJSON =
-    Core.withObject
-      "Link"
-      (\o -> Link Core.<$> (o Core..:? "uri"))
+    Core.withObject "Link" (\o -> Link Core.<$> (o Core..:? "uri"))
 
 instance Core.ToJSON Link where
   toJSON Link {..} =
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+
+-- | The specification of a Looker data source.
+--
+-- /See:/ 'newLookerDataSourceSpec' smart constructor.
+data LookerDataSourceSpec = LookerDataSourceSpec
+  { -- | Name of a Looker model explore.
+    explore :: (Core.Maybe Core.Text),
+    -- | A Looker instance URL.
+    instanceUri :: (Core.Maybe Core.Text),
+    -- | Name of a Looker model.
+    model :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'LookerDataSourceSpec' with the minimum fields required to make a request.
+newLookerDataSourceSpec ::
+  LookerDataSourceSpec
+newLookerDataSourceSpec =
+  LookerDataSourceSpec
+    { explore = Core.Nothing,
+      instanceUri = Core.Nothing,
+      model = Core.Nothing
+    }
+
+instance Core.FromJSON LookerDataSourceSpec where
+  parseJSON =
+    Core.withObject
+      "LookerDataSourceSpec"
+      ( \o ->
+          LookerDataSourceSpec
+            Core.<$> (o Core..:? "explore")
+            Core.<*> (o Core..:? "instanceUri")
+            Core.<*> (o Core..:? "model")
+      )
+
+instance Core.ToJSON LookerDataSourceSpec where
+  toJSON LookerDataSourceSpec {..} =
     Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+      ( Core.catMaybes
+          [ ("explore" Core..=) Core.<$> explore,
+            ("instanceUri" Core..=) Core.<$> instanceUri,
+            ("model" Core..=) Core.<$> model
+          ]
+      )
 
 -- | Allows you to manually organize the values in a source data column into buckets with names of your choosing. For example, a pivot table that aggregates population by state: +-------+-------------------+ | State | SUM of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR | 2.9 | ... +-------+-------------------+ could be turned into a pivot table that aggregates population by time zone by providing a list of groups (for example, groupName = \'Central\', items = [\'AL\', \'AR\', \'IA\', ...]) to a manual group rule. Note that a similar effect could be achieved by adding a time zone column to the source data and adjusting the pivot table. +-----------+-------------------+ | Time Zone | SUM of Population | +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | | Mountain | 17.4 | ... +-----------+-------------------+
 --
@@ -7964,8 +7891,7 @@ instance Core.FromJSON ManualRule where
 
 instance Core.ToJSON ManualRule where
   toJSON ManualRule {..} =
-    Core.object
-      (Core.catMaybes [("groups" Core..=) Core.<$> groups])
+    Core.object (Core.catMaybes [("groups" Core..=) Core.<$> groups])
 
 -- | A group name and a list of items from the source data that should be placed in the group with this name.
 --
@@ -8038,8 +7964,7 @@ instance Core.ToJSON MatchedDeveloperMetadata where
     Core.object
       ( Core.catMaybes
           [ ("dataFilters" Core..=) Core.<$> dataFilters,
-            ("developerMetadata" Core..=)
-              Core.<$> developerMetadata
+            ("developerMetadata" Core..=) Core.<$> developerMetadata
           ]
       )
 
@@ -8058,7 +7983,10 @@ data MatchedValueRange = MatchedValueRange
 newMatchedValueRange ::
   MatchedValueRange
 newMatchedValueRange =
-  MatchedValueRange {dataFilters = Core.Nothing, valueRange = Core.Nothing}
+  MatchedValueRange
+    { dataFilters = Core.Nothing,
+      valueRange = Core.Nothing
+    }
 
 instance Core.FromJSON MatchedValueRange where
   parseJSON =
@@ -8130,7 +8058,10 @@ data MoveDimensionRequest = MoveDimensionRequest
 newMoveDimensionRequest ::
   MoveDimensionRequest
 newMoveDimensionRequest =
-  MoveDimensionRequest {destinationIndex = Core.Nothing, source = Core.Nothing}
+  MoveDimensionRequest
+    { destinationIndex = Core.Nothing,
+      source = Core.Nothing
+    }
 
 instance Core.FromJSON MoveDimensionRequest where
   parseJSON =
@@ -8146,8 +8077,7 @@ instance Core.ToJSON MoveDimensionRequest where
   toJSON MoveDimensionRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destinationIndex" Core..=)
-              Core.<$> destinationIndex,
+          [ ("destinationIndex" Core..=) Core.<$> destinationIndex,
             ("source" Core..=) Core.<$> source
           ]
       )
@@ -8210,7 +8140,8 @@ data NumberFormat = NumberFormat
 -- | Creates a value of 'NumberFormat' with the minimum fields required to make a request.
 newNumberFormat ::
   NumberFormat
-newNumberFormat = NumberFormat {pattern' = Core.Nothing, type' = Core.Nothing}
+newNumberFormat =
+  NumberFormat {pattern' = Core.Nothing, type' = Core.Nothing}
 
 instance Core.FromJSON NumberFormat where
   parseJSON =
@@ -8218,7 +8149,8 @@ instance Core.FromJSON NumberFormat where
       "NumberFormat"
       ( \o ->
           NumberFormat
-            Core.<$> (o Core..:? "pattern") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "pattern")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON NumberFormat where
@@ -8293,10 +8225,8 @@ instance Core.ToJSON OrgChartSpec where
             ("nodeColorStyle" Core..=) Core.<$> nodeColorStyle,
             ("nodeSize" Core..=) Core.<$> nodeSize,
             ("parentLabels" Core..=) Core.<$> parentLabels,
-            ("selectedNodeColor" Core..=)
-              Core.<$> selectedNodeColor,
-            ("selectedNodeColorStyle" Core..=)
-              Core.<$> selectedNodeColorStyle,
+            ("selectedNodeColor" Core..=) Core.<$> selectedNodeColor,
+            ("selectedNodeColorStyle" Core..=) Core.<$> selectedNodeColorStyle,
             ("tooltips" Core..=) Core.<$> tooltips
           ]
       )
@@ -8508,8 +8438,7 @@ instance Core.ToJSON PieChartSpec where
             ("legendPosition" Core..=) Core.<$> legendPosition,
             ("pieHole" Core..=) Core.<$> pieHole,
             ("series" Core..=) Core.<$> series,
-            ("threeDimensional" Core..=)
-              Core.<$> threeDimensional
+            ("threeDimensional" Core..=) Core.<$> threeDimensional
           ]
       )
 
@@ -8552,8 +8481,7 @@ instance Core.ToJSON PivotFilterCriteria where
     Core.object
       ( Core.catMaybes
           [ ("condition" Core..=) Core.<$> condition,
-            ("visibleByDefault" Core..=)
-              Core.<$> visibleByDefault,
+            ("visibleByDefault" Core..=) Core.<$> visibleByDefault,
             ("visibleValues" Core..=) Core.<$> visibleValues
           ]
       )
@@ -8562,7 +8490,7 @@ instance Core.ToJSON PivotFilterCriteria where
 --
 -- /See:/ 'newPivotFilterSpec' smart constructor.
 data PivotFilterSpec = PivotFilterSpec
-  { -- | The column offset of the source range.
+  { -- | The zero-based column offset of the source range.
     columnOffsetIndex :: (Core.Maybe Core.Int32),
     -- | The reference to the data source column.
     dataSourceColumnReference :: (Core.Maybe DataSourceColumnReference),
@@ -8596,8 +8524,7 @@ instance Core.ToJSON PivotFilterSpec where
   toJSON PivotFilterSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnOffsetIndex" Core..=)
-              Core.<$> columnOffsetIndex,
+          [ ("columnOffsetIndex" Core..=) Core.<$> columnOffsetIndex,
             ("dataSourceColumnReference" Core..=)
               Core.<$> dataSourceColumnReference,
             ("filterCriteria" Core..=) Core.<$> filterCriteria
@@ -8678,8 +8605,7 @@ instance Core.ToJSON PivotGroup where
             ("repeatHeadings" Core..=) Core.<$> repeatHeadings,
             ("showTotals" Core..=) Core.<$> showTotals,
             ("sortOrder" Core..=) Core.<$> sortOrder,
-            ("sourceColumnOffset" Core..=)
-              Core.<$> sourceColumnOffset,
+            ("sourceColumnOffset" Core..=) Core.<$> sourceColumnOffset,
             ("valueBucket" Core..=) Core.<$> valueBucket,
             ("valueMetadata" Core..=) Core.<$> valueMetadata
           ]
@@ -8700,7 +8626,10 @@ data PivotGroupLimit = PivotGroupLimit
 newPivotGroupLimit ::
   PivotGroupLimit
 newPivotGroupLimit =
-  PivotGroupLimit {applyOrder = Core.Nothing, countLimit = Core.Nothing}
+  PivotGroupLimit
+    { applyOrder = Core.Nothing,
+      countLimit = Core.Nothing
+    }
 
 instance Core.FromJSON PivotGroupLimit where
   parseJSON =
@@ -8780,7 +8709,10 @@ data PivotGroupSortValueBucket = PivotGroupSortValueBucket
 newPivotGroupSortValueBucket ::
   PivotGroupSortValueBucket
 newPivotGroupSortValueBucket =
-  PivotGroupSortValueBucket {buckets = Core.Nothing, valuesIndex = Core.Nothing}
+  PivotGroupSortValueBucket
+    { buckets = Core.Nothing,
+      valuesIndex = Core.Nothing
+    }
 
 instance Core.FromJSON PivotGroupSortValueBucket where
   parseJSON =
@@ -8816,7 +8748,10 @@ data PivotGroupValueMetadata = PivotGroupValueMetadata
 newPivotGroupValueMetadata ::
   PivotGroupValueMetadata
 newPivotGroupValueMetadata =
-  PivotGroupValueMetadata {collapsed = Core.Nothing, value = Core.Nothing}
+  PivotGroupValueMetadata
+    { collapsed = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON PivotGroupValueMetadata where
   parseJSON =
@@ -8901,8 +8836,7 @@ instance Core.ToJSON PivotTable where
       ( Core.catMaybes
           [ ("columns" Core..=) Core.<$> columns,
             ("criteria" Core..=) Core.<$> criteria,
-            ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+            ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSourceId" Core..=) Core.<$> dataSourceId,
             ("filterSpecs" Core..=) Core.<$> filterSpecs,
             ("rows" Core..=) Core.<$> rows,
@@ -8916,8 +8850,7 @@ instance Core.ToJSON PivotTable where
 --
 -- /See:/ 'newPivotTable_Criteria' smart constructor.
 newtype PivotTable_Criteria = PivotTable_Criteria
-  { -- |
-    additional :: (Core.HashMap Core.Text PivotFilterCriteria)
+  { additional :: (Core.HashMap Core.Text PivotFilterCriteria)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -8933,14 +8866,10 @@ instance Core.FromJSON PivotTable_Criteria where
   parseJSON =
     Core.withObject
       "PivotTable_Criteria"
-      ( \o ->
-          PivotTable_Criteria
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> PivotTable_Criteria Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON PivotTable_Criteria where
-  toJSON PivotTable_Criteria {..} =
-    Core.toJSON additional
+  toJSON PivotTable_Criteria {..} = Core.toJSON additional
 
 -- | The definition of how a value in a pivot table should be calculated.
 --
@@ -8992,16 +8921,13 @@ instance Core.ToJSON PivotValue where
   toJSON PivotValue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("calculatedDisplayType" Core..=)
-              Core.<$> calculatedDisplayType,
+          [ ("calculatedDisplayType" Core..=) Core.<$> calculatedDisplayType,
             ("dataSourceColumnReference" Core..=)
               Core.<$> dataSourceColumnReference,
             ("formula" Core..=) Core.<$> formula,
             ("name" Core..=) Core.<$> name,
-            ("sourceColumnOffset" Core..=)
-              Core.<$> sourceColumnOffset,
-            ("summarizeFunction" Core..=)
-              Core.<$> summarizeFunction
+            ("sourceColumnOffset" Core..=) Core.<$> sourceColumnOffset,
+            ("summarizeFunction" Core..=) Core.<$> summarizeFunction
           ]
       )
 
@@ -9019,7 +8945,8 @@ data PointStyle = PointStyle
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
 newPointStyle ::
   PointStyle
-newPointStyle = PointStyle {shape = Core.Nothing, size = Core.Nothing}
+newPointStyle =
+  PointStyle {shape = Core.Nothing, size = Core.Nothing}
 
 instance Core.FromJSON PointStyle where
   parseJSON =
@@ -9027,16 +8954,15 @@ instance Core.FromJSON PointStyle where
       "PointStyle"
       ( \o ->
           PointStyle
-            Core.<$> (o Core..:? "shape") Core.<*> (o Core..:? "size")
+            Core.<$> (o Core..:? "shape")
+            Core.<*> (o Core..:? "size")
       )
 
 instance Core.ToJSON PointStyle where
   toJSON PointStyle {..} =
     Core.object
       ( Core.catMaybes
-          [ ("shape" Core..=) Core.<$> shape,
-            ("size" Core..=) Core.<$> size
-          ]
+          [("shape" Core..=) Core.<$> shape, ("size" Core..=) Core.<$> size]
       )
 
 -- | A protected range.
@@ -9057,7 +8983,7 @@ data ProtectedRange = ProtectedRange
     requestingUserCanEdit :: (Core.Maybe Core.Bool),
     -- | The list of unprotected ranges within a protected sheet. Unprotected ranges are only supported on protected sheets.
     unprotectedRanges :: (Core.Maybe [GridRange]),
-    -- | True if this protected range will show a warning when editing. Warning-based protection means that every user can edit data in the protected range, except editing will prompt a warning asking the user to confirm the edit. When writing: if this field is true, then editors is ignored. Additionally, if this field is changed from true to false and the @editors@ field is not set (nor included in the field mask), then the editors will be set to all the editors in the document.
+    -- | True if this protected range will show a warning when editing. Warning-based protection means that every user can edit data in the protected range, except editing will prompt a warning asking the user to confirm the edit. When writing: if this field is true, then editors are ignored. Additionally, if this field is changed from true to false and the @editors@ field is not set (nor included in the field mask), then the editors will be set to all the editors in the document.
     warningOnly :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -9100,13 +9026,10 @@ instance Core.ToJSON ProtectedRange where
           [ ("description" Core..=) Core.<$> description,
             ("editors" Core..=) Core.<$> editors,
             ("namedRangeId" Core..=) Core.<$> namedRangeId,
-            ("protectedRangeId" Core..=)
-              Core.<$> protectedRangeId,
+            ("protectedRangeId" Core..=) Core.<$> protectedRangeId,
             ("range" Core..=) Core.<$> range,
-            ("requestingUserCanEdit" Core..=)
-              Core.<$> requestingUserCanEdit,
-            ("unprotectedRanges" Core..=)
-              Core.<$> unprotectedRanges,
+            ("requestingUserCanEdit" Core..=) Core.<$> requestingUserCanEdit,
+            ("unprotectedRanges" Core..=) Core.<$> unprotectedRanges,
             ("warningOnly" Core..=) Core.<$> warningOnly
           ]
       )
@@ -9123,20 +9046,57 @@ newtype RandomizeRangeRequest = RandomizeRangeRequest
 -- | Creates a value of 'RandomizeRangeRequest' with the minimum fields required to make a request.
 newRandomizeRangeRequest ::
   RandomizeRangeRequest
-newRandomizeRangeRequest = RandomizeRangeRequest {range = Core.Nothing}
+newRandomizeRangeRequest =
+  RandomizeRangeRequest {range = Core.Nothing}
 
 instance Core.FromJSON RandomizeRangeRequest where
   parseJSON =
     Core.withObject
       "RandomizeRangeRequest"
-      ( \o ->
-          RandomizeRangeRequest Core.<$> (o Core..:? "range")
-      )
+      (\o -> RandomizeRangeRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON RandomizeRangeRequest where
   toJSON RandomizeRangeRequest {..} =
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
+
+-- | The status of a refresh cancellation. You can send a cancel request to explicitly cancel one or multiple data source object refreshes.
+--
+-- /See:/ 'newRefreshCancellationStatus' smart constructor.
+data RefreshCancellationStatus = RefreshCancellationStatus
+  { -- | The error code.
+    errorCode :: (Core.Maybe RefreshCancellationStatus_ErrorCode),
+    -- | The state of a call to cancel a refresh in Sheets.
+    state :: (Core.Maybe RefreshCancellationStatus_State)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RefreshCancellationStatus' with the minimum fields required to make a request.
+newRefreshCancellationStatus ::
+  RefreshCancellationStatus
+newRefreshCancellationStatus =
+  RefreshCancellationStatus
+    { errorCode = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON RefreshCancellationStatus where
+  parseJSON =
+    Core.withObject
+      "RefreshCancellationStatus"
+      ( \o ->
+          RefreshCancellationStatus
+            Core.<$> (o Core..:? "errorCode")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON RefreshCancellationStatus where
+  toJSON RefreshCancellationStatus {..} =
     Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+      ( Core.catMaybes
+          [ ("errorCode" Core..=) Core.<$> errorCode,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
 
 -- | The execution status of refreshing one data source object.
 --
@@ -9154,14 +9114,12 @@ newRefreshDataSourceObjectExecutionStatus ::
   RefreshDataSourceObjectExecutionStatus
 newRefreshDataSourceObjectExecutionStatus =
   RefreshDataSourceObjectExecutionStatus
-    { dataExecutionStatus = Core.Nothing,
+    { dataExecutionStatus =
+        Core.Nothing,
       reference = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    RefreshDataSourceObjectExecutionStatus
-  where
+instance Core.FromJSON RefreshDataSourceObjectExecutionStatus where
   parseJSON =
     Core.withObject
       "RefreshDataSourceObjectExecutionStatus"
@@ -9171,20 +9129,16 @@ instance
             Core.<*> (o Core..:? "reference")
       )
 
-instance
-  Core.ToJSON
-    RefreshDataSourceObjectExecutionStatus
-  where
+instance Core.ToJSON RefreshDataSourceObjectExecutionStatus where
   toJSON RefreshDataSourceObjectExecutionStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+          [ ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("reference" Core..=) Core.<$> reference
           ]
       )
 
--- | Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional @bigquery.readonly@ OAuth scope. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
+-- | Refreshes one or multiple data source objects in the spreadsheet by the specified references. The request requires an additional @bigquery.readonly@ OAuth scope if you are refreshing a BigQuery data source. If there are multiple refresh requests referencing the same data source objects in one batch, only the last refresh request is processed, and all those requests will have the same response accordingly.
 --
 -- /See:/ 'newRefreshDataSourceRequest' smart constructor.
 data RefreshDataSourceRequest = RefreshDataSourceRequest
@@ -9252,17 +9206,12 @@ instance Core.FromJSON RefreshDataSourceResponse where
   parseJSON =
     Core.withObject
       "RefreshDataSourceResponse"
-      ( \o ->
-          RefreshDataSourceResponse
-            Core.<$> (o Core..:? "statuses")
-      )
+      (\o -> RefreshDataSourceResponse Core.<$> (o Core..:? "statuses"))
 
 instance Core.ToJSON RefreshDataSourceResponse where
   toJSON RefreshDataSourceResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("statuses" Core..=) Core.<$> statuses]
-      )
+      (Core.catMaybes [("statuses" Core..=) Core.<$> statuses])
 
 -- | Updates all cells in the range to the values in the given Cell object. Only the fields listed in the fields field are updated; others are unchanged. If writing a cell with a formula, the formula\'s ranges will automatically increment for each field in the range. For example, if writing a cell with formula @=A1@ into range B2:C4, B2 would be @=A1@, B3 would be @=A2@, B4 would be @=A3@, C2 would be @=B1@, C3 would be @=B2@, C4 would be @=B3@. To keep the formula\'s ranges static, use the @$@ indicator. For example, use the formula @=$A$1@ to prevent both the row and the column from incrementing.
 --
@@ -9340,6 +9289,8 @@ data Request' = Request'
     autoFill :: (Core.Maybe AutoFillRequest),
     -- | Automatically resizes one or more dimensions based on the contents of the cells in that dimension.
     autoResizeDimensions :: (Core.Maybe AutoResizeDimensionsRequest),
+    -- | Cancels refreshes of one or multiple data sources and associated dbobjects.
+    cancelDataSourceRefresh :: (Core.Maybe CancelDataSourceRefreshRequest),
     -- | Clears the basic filter on a sheet.
     clearBasicFilter :: (Core.Maybe ClearBasicFilterRequest),
     -- | Copies data from one area and pastes it to another.
@@ -9392,7 +9343,7 @@ data Request' = Request'
     pasteData :: (Core.Maybe PasteDataRequest),
     -- | Randomizes the order of the rows in a range.
     randomizeRange :: (Core.Maybe RandomizeRangeRequest),
-    -- | Refreshs one or multiple data sources and associated dbobjects.
+    -- | Refreshes one or multiple data sources and associated dbobjects.
     refreshDataSource :: (Core.Maybe RefreshDataSourceRequest),
     -- | Repeats a single cell across a range.
     repeatCell :: (Core.Maybe RepeatCellRequest),
@@ -9464,6 +9415,7 @@ newRequest =
       appendDimension = Core.Nothing,
       autoFill = Core.Nothing,
       autoResizeDimensions = Core.Nothing,
+      cancelDataSourceRefresh = Core.Nothing,
       clearBasicFilter = Core.Nothing,
       copyPaste = Core.Nothing,
       createDeveloperMetadata = Core.Nothing,
@@ -9537,6 +9489,7 @@ instance Core.FromJSON Request' where
             Core.<*> (o Core..:? "appendDimension")
             Core.<*> (o Core..:? "autoFill")
             Core.<*> (o Core..:? "autoResizeDimensions")
+            Core.<*> (o Core..:? "cancelDataSourceRefresh")
             Core.<*> (o Core..:? "clearBasicFilter")
             Core.<*> (o Core..:? "copyPaste")
             Core.<*> (o Core..:? "createDeveloperMetadata")
@@ -9599,21 +9552,19 @@ instance Core.ToJSON Request' where
             ("addConditionalFormatRule" Core..=)
               Core.<$> addConditionalFormatRule,
             ("addDataSource" Core..=) Core.<$> addDataSource,
-            ("addDimensionGroup" Core..=)
-              Core.<$> addDimensionGroup,
+            ("addDimensionGroup" Core..=) Core.<$> addDimensionGroup,
             ("addFilterView" Core..=) Core.<$> addFilterView,
             ("addNamedRange" Core..=) Core.<$> addNamedRange,
-            ("addProtectedRange" Core..=)
-              Core.<$> addProtectedRange,
+            ("addProtectedRange" Core..=) Core.<$> addProtectedRange,
             ("addSheet" Core..=) Core.<$> addSheet,
             ("addSlicer" Core..=) Core.<$> addSlicer,
             ("appendCells" Core..=) Core.<$> appendCells,
             ("appendDimension" Core..=) Core.<$> appendDimension,
             ("autoFill" Core..=) Core.<$> autoFill,
-            ("autoResizeDimensions" Core..=)
-              Core.<$> autoResizeDimensions,
-            ("clearBasicFilter" Core..=)
-              Core.<$> clearBasicFilter,
+            ("autoResizeDimensions" Core..=) Core.<$> autoResizeDimensions,
+            ("cancelDataSourceRefresh" Core..=)
+              Core.<$> cancelDataSourceRefresh,
+            ("clearBasicFilter" Core..=) Core.<$> clearBasicFilter,
             ("copyPaste" Core..=) Core.<$> copyPaste,
             ("createDeveloperMetadata" Core..=)
               Core.<$> createDeveloperMetadata,
@@ -9621,27 +9572,19 @@ instance Core.ToJSON Request' where
             ("deleteBanding" Core..=) Core.<$> deleteBanding,
             ("deleteConditionalFormatRule" Core..=)
               Core.<$> deleteConditionalFormatRule,
-            ("deleteDataSource" Core..=)
-              Core.<$> deleteDataSource,
+            ("deleteDataSource" Core..=) Core.<$> deleteDataSource,
             ("deleteDeveloperMetadata" Core..=)
               Core.<$> deleteDeveloperMetadata,
             ("deleteDimension" Core..=) Core.<$> deleteDimension,
-            ("deleteDimensionGroup" Core..=)
-              Core.<$> deleteDimensionGroup,
-            ("deleteDuplicates" Core..=)
-              Core.<$> deleteDuplicates,
-            ("deleteEmbeddedObject" Core..=)
-              Core.<$> deleteEmbeddedObject,
-            ("deleteFilterView" Core..=)
-              Core.<$> deleteFilterView,
-            ("deleteNamedRange" Core..=)
-              Core.<$> deleteNamedRange,
-            ("deleteProtectedRange" Core..=)
-              Core.<$> deleteProtectedRange,
+            ("deleteDimensionGroup" Core..=) Core.<$> deleteDimensionGroup,
+            ("deleteDuplicates" Core..=) Core.<$> deleteDuplicates,
+            ("deleteEmbeddedObject" Core..=) Core.<$> deleteEmbeddedObject,
+            ("deleteFilterView" Core..=) Core.<$> deleteFilterView,
+            ("deleteNamedRange" Core..=) Core.<$> deleteNamedRange,
+            ("deleteProtectedRange" Core..=) Core.<$> deleteProtectedRange,
             ("deleteRange" Core..=) Core.<$> deleteRange,
             ("deleteSheet" Core..=) Core.<$> deleteSheet,
-            ("duplicateFilterView" Core..=)
-              Core.<$> duplicateFilterView,
+            ("duplicateFilterView" Core..=) Core.<$> duplicateFilterView,
             ("duplicateSheet" Core..=) Core.<$> duplicateSheet,
             ("findReplace" Core..=) Core.<$> findReplace,
             ("insertDimension" Core..=) Core.<$> insertDimension,
@@ -9650,12 +9593,10 @@ instance Core.ToJSON Request' where
             ("moveDimension" Core..=) Core.<$> moveDimension,
             ("pasteData" Core..=) Core.<$> pasteData,
             ("randomizeRange" Core..=) Core.<$> randomizeRange,
-            ("refreshDataSource" Core..=)
-              Core.<$> refreshDataSource,
+            ("refreshDataSource" Core..=) Core.<$> refreshDataSource,
             ("repeatCell" Core..=) Core.<$> repeatCell,
             ("setBasicFilter" Core..=) Core.<$> setBasicFilter,
-            ("setDataValidation" Core..=)
-              Core.<$> setDataValidation,
+            ("setDataValidation" Core..=) Core.<$> setDataValidation,
             ("sortRange" Core..=) Core.<$> sortRange,
             ("textToColumns" Core..=) Core.<$> textToColumns,
             ("trimWhitespace" Core..=) Core.<$> trimWhitespace,
@@ -9666,28 +9607,21 @@ instance Core.ToJSON Request' where
             ("updateChartSpec" Core..=) Core.<$> updateChartSpec,
             ("updateConditionalFormatRule" Core..=)
               Core.<$> updateConditionalFormatRule,
-            ("updateDataSource" Core..=)
-              Core.<$> updateDataSource,
+            ("updateDataSource" Core..=) Core.<$> updateDataSource,
             ("updateDeveloperMetadata" Core..=)
               Core.<$> updateDeveloperMetadata,
-            ("updateDimensionGroup" Core..=)
-              Core.<$> updateDimensionGroup,
+            ("updateDimensionGroup" Core..=) Core.<$> updateDimensionGroup,
             ("updateDimensionProperties" Core..=)
               Core.<$> updateDimensionProperties,
             ("updateEmbeddedObjectBorder" Core..=)
               Core.<$> updateEmbeddedObjectBorder,
             ("updateEmbeddedObjectPosition" Core..=)
               Core.<$> updateEmbeddedObjectPosition,
-            ("updateFilterView" Core..=)
-              Core.<$> updateFilterView,
-            ("updateNamedRange" Core..=)
-              Core.<$> updateNamedRange,
-            ("updateProtectedRange" Core..=)
-              Core.<$> updateProtectedRange,
-            ("updateSheetProperties" Core..=)
-              Core.<$> updateSheetProperties,
-            ("updateSlicerSpec" Core..=)
-              Core.<$> updateSlicerSpec,
+            ("updateFilterView" Core..=) Core.<$> updateFilterView,
+            ("updateNamedRange" Core..=) Core.<$> updateNamedRange,
+            ("updateProtectedRange" Core..=) Core.<$> updateProtectedRange,
+            ("updateSheetProperties" Core..=) Core.<$> updateSheetProperties,
+            ("updateSlicerSpec" Core..=) Core.<$> updateSlicerSpec,
             ("updateSpreadsheetProperties" Core..=)
               Core.<$> updateSpreadsheetProperties
           ]
@@ -9715,6 +9649,8 @@ data Response = Response
     addSheet :: (Core.Maybe AddSheetResponse),
     -- | A reply from adding a slicer.
     addSlicer :: (Core.Maybe AddSlicerResponse),
+    -- | A reply from cancelling data source object refreshes.
+    cancelDataSourceRefresh :: (Core.Maybe CancelDataSourceRefreshResponse),
     -- | A reply from creating a developer metadata entry.
     createDeveloperMetadata :: (Core.Maybe CreateDeveloperMetadataResponse),
     -- | A reply from deleting a conditional format rule.
@@ -9760,6 +9696,7 @@ newResponse =
       addProtectedRange = Core.Nothing,
       addSheet = Core.Nothing,
       addSlicer = Core.Nothing,
+      cancelDataSourceRefresh = Core.Nothing,
       createDeveloperMetadata = Core.Nothing,
       deleteConditionalFormatRule = Core.Nothing,
       deleteDeveloperMetadata = Core.Nothing,
@@ -9791,6 +9728,7 @@ instance Core.FromJSON Response where
             Core.<*> (o Core..:? "addProtectedRange")
             Core.<*> (o Core..:? "addSheet")
             Core.<*> (o Core..:? "addSlicer")
+            Core.<*> (o Core..:? "cancelDataSourceRefresh")
             Core.<*> (o Core..:? "createDeveloperMetadata")
             Core.<*> (o Core..:? "deleteConditionalFormatRule")
             Core.<*> (o Core..:? "deleteDeveloperMetadata")
@@ -9814,35 +9752,30 @@ instance Core.ToJSON Response where
           [ ("addBanding" Core..=) Core.<$> addBanding,
             ("addChart" Core..=) Core.<$> addChart,
             ("addDataSource" Core..=) Core.<$> addDataSource,
-            ("addDimensionGroup" Core..=)
-              Core.<$> addDimensionGroup,
+            ("addDimensionGroup" Core..=) Core.<$> addDimensionGroup,
             ("addFilterView" Core..=) Core.<$> addFilterView,
             ("addNamedRange" Core..=) Core.<$> addNamedRange,
-            ("addProtectedRange" Core..=)
-              Core.<$> addProtectedRange,
+            ("addProtectedRange" Core..=) Core.<$> addProtectedRange,
             ("addSheet" Core..=) Core.<$> addSheet,
             ("addSlicer" Core..=) Core.<$> addSlicer,
+            ("cancelDataSourceRefresh" Core..=)
+              Core.<$> cancelDataSourceRefresh,
             ("createDeveloperMetadata" Core..=)
               Core.<$> createDeveloperMetadata,
             ("deleteConditionalFormatRule" Core..=)
               Core.<$> deleteConditionalFormatRule,
             ("deleteDeveloperMetadata" Core..=)
               Core.<$> deleteDeveloperMetadata,
-            ("deleteDimensionGroup" Core..=)
-              Core.<$> deleteDimensionGroup,
-            ("deleteDuplicates" Core..=)
-              Core.<$> deleteDuplicates,
-            ("duplicateFilterView" Core..=)
-              Core.<$> duplicateFilterView,
+            ("deleteDimensionGroup" Core..=) Core.<$> deleteDimensionGroup,
+            ("deleteDuplicates" Core..=) Core.<$> deleteDuplicates,
+            ("duplicateFilterView" Core..=) Core.<$> duplicateFilterView,
             ("duplicateSheet" Core..=) Core.<$> duplicateSheet,
             ("findReplace" Core..=) Core.<$> findReplace,
-            ("refreshDataSource" Core..=)
-              Core.<$> refreshDataSource,
+            ("refreshDataSource" Core..=) Core.<$> refreshDataSource,
             ("trimWhitespace" Core..=) Core.<$> trimWhitespace,
             ("updateConditionalFormatRule" Core..=)
               Core.<$> updateConditionalFormatRule,
-            ("updateDataSource" Core..=)
-              Core.<$> updateDataSource,
+            ("updateDataSource" Core..=) Core.<$> updateDataSource,
             ("updateDeveloperMetadata" Core..=)
               Core.<$> updateDeveloperMetadata,
             ("updateEmbeddedObjectPosition" Core..=)
@@ -9872,8 +9805,7 @@ instance Core.FromJSON RowData where
 
 instance Core.ToJSON RowData where
   toJSON RowData {..} =
-    Core.object
-      (Core.catMaybes [("values" Core..=) Core.<$> values])
+    Core.object (Core.catMaybes [("values" Core..=) Core.<$> values])
 
 -- | A scorecard chart. Scorecard charts are used to highlight key performance indicators, known as KPIs, on the spreadsheet. A scorecard chart can represent things like total sales, average cost, or a top selling item. You can specify a single data value, or aggregate over a range of data. Percentage or absolute difference from a baseline value can be highlighted, like changes over time.
 --
@@ -9934,16 +9866,12 @@ instance Core.ToJSON ScorecardChartSpec where
     Core.object
       ( Core.catMaybes
           [ ("aggregateType" Core..=) Core.<$> aggregateType,
-            ("baselineValueData" Core..=)
-              Core.<$> baselineValueData,
-            ("baselineValueFormat" Core..=)
-              Core.<$> baselineValueFormat,
-            ("customFormatOptions" Core..=)
-              Core.<$> customFormatOptions,
+            ("baselineValueData" Core..=) Core.<$> baselineValueData,
+            ("baselineValueFormat" Core..=) Core.<$> baselineValueFormat,
+            ("customFormatOptions" Core..=) Core.<$> customFormatOptions,
             ("keyValueData" Core..=) Core.<$> keyValueData,
             ("keyValueFormat" Core..=) Core.<$> keyValueFormat,
-            ("numberFormatSource" Core..=)
-              Core.<$> numberFormatSource,
+            ("numberFormatSource" Core..=) Core.<$> numberFormatSource,
             ("scaleFactor" Core..=) Core.<$> scaleFactor
           ]
       )
@@ -9968,16 +9896,13 @@ instance Core.FromJSON SearchDeveloperMetadataRequest where
     Core.withObject
       "SearchDeveloperMetadataRequest"
       ( \o ->
-          SearchDeveloperMetadataRequest
-            Core.<$> (o Core..:? "dataFilters")
+          SearchDeveloperMetadataRequest Core.<$> (o Core..:? "dataFilters")
       )
 
 instance Core.ToJSON SearchDeveloperMetadataRequest where
   toJSON SearchDeveloperMetadataRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataFilters" Core..=) Core.<$> dataFilters]
-      )
+      (Core.catMaybes [("dataFilters" Core..=) Core.<$> dataFilters])
 
 -- | A reply to a developer metadata search request.
 --
@@ -9992,12 +9917,12 @@ newtype SearchDeveloperMetadataResponse = SearchDeveloperMetadataResponse
 newSearchDeveloperMetadataResponse ::
   SearchDeveloperMetadataResponse
 newSearchDeveloperMetadataResponse =
-  SearchDeveloperMetadataResponse {matchedDeveloperMetadata = Core.Nothing}
+  SearchDeveloperMetadataResponse
+    { matchedDeveloperMetadata =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    SearchDeveloperMetadataResponse
-  where
+instance Core.FromJSON SearchDeveloperMetadataResponse where
   parseJSON =
     Core.withObject
       "SearchDeveloperMetadataResponse"
@@ -10027,26 +9952,26 @@ newtype SetBasicFilterRequest = SetBasicFilterRequest
 -- | Creates a value of 'SetBasicFilterRequest' with the minimum fields required to make a request.
 newSetBasicFilterRequest ::
   SetBasicFilterRequest
-newSetBasicFilterRequest = SetBasicFilterRequest {filter = Core.Nothing}
+newSetBasicFilterRequest =
+  SetBasicFilterRequest {filter = Core.Nothing}
 
 instance Core.FromJSON SetBasicFilterRequest where
   parseJSON =
     Core.withObject
       "SetBasicFilterRequest"
-      ( \o ->
-          SetBasicFilterRequest Core.<$> (o Core..:? "filter")
-      )
+      (\o -> SetBasicFilterRequest Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON SetBasicFilterRequest where
   toJSON SetBasicFilterRequest {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | Sets a data validation rule to every cell in the range. To clear validation in a range, call this with no rule specified.
 --
 -- /See:/ 'newSetDataValidationRequest' smart constructor.
 data SetDataValidationRequest = SetDataValidationRequest
-  { -- | The range the data validation rule should apply to.
+  { -- | Optional. If true, the data validation rule will be applied to the filtered rows as well.
+    filteredRowsIncluded :: (Core.Maybe Core.Bool),
+    -- | The range the data validation rule should apply to.
     range :: (Core.Maybe GridRange),
     -- | The data validation rule to set on each cell in the range, or empty to clear the data validation in the range.
     rule :: (Core.Maybe DataValidationRule)
@@ -10057,7 +9982,11 @@ data SetDataValidationRequest = SetDataValidationRequest
 newSetDataValidationRequest ::
   SetDataValidationRequest
 newSetDataValidationRequest =
-  SetDataValidationRequest {range = Core.Nothing, rule = Core.Nothing}
+  SetDataValidationRequest
+    { filteredRowsIncluded = Core.Nothing,
+      range = Core.Nothing,
+      rule = Core.Nothing
+    }
 
 instance Core.FromJSON SetDataValidationRequest where
   parseJSON =
@@ -10065,14 +9994,17 @@ instance Core.FromJSON SetDataValidationRequest where
       "SetDataValidationRequest"
       ( \o ->
           SetDataValidationRequest
-            Core.<$> (o Core..:? "range") Core.<*> (o Core..:? "rule")
+            Core.<$> (o Core..:? "filteredRowsIncluded")
+            Core.<*> (o Core..:? "range")
+            Core.<*> (o Core..:? "rule")
       )
 
 instance Core.ToJSON SetDataValidationRequest where
   toJSON SetDataValidationRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("range" Core..=) Core.<$> range,
+          [ ("filteredRowsIncluded" Core..=) Core.<$> filteredRowsIncluded,
+            ("range" Core..=) Core.<$> range,
             ("rule" Core..=) Core.<$> rule
           ]
       )
@@ -10159,11 +10091,9 @@ instance Core.ToJSON Sheet where
             ("basicFilter" Core..=) Core.<$> basicFilter,
             ("charts" Core..=) Core.<$> charts,
             ("columnGroups" Core..=) Core.<$> columnGroups,
-            ("conditionalFormats" Core..=)
-              Core.<$> conditionalFormats,
+            ("conditionalFormats" Core..=) Core.<$> conditionalFormats,
             ("data" Core..=) Core.<$> data',
-            ("developerMetadata" Core..=)
-              Core.<$> developerMetadata,
+            ("developerMetadata" Core..=) Core.<$> developerMetadata,
             ("filterViews" Core..=) Core.<$> filterViews,
             ("merges" Core..=) Core.<$> merges,
             ("properties" Core..=) Core.<$> properties,
@@ -10183,7 +10113,7 @@ data SheetProperties = SheetProperties
     gridProperties :: (Core.Maybe GridProperties),
     -- | True if the sheet is hidden in the UI, false if it\'s visible.
     hidden :: (Core.Maybe Core.Bool),
-    -- | The index of the sheet within the spreadsheet. When adding or updating sheet properties, if this field is excluded then the sheet is added or moved to the end of the sheet list. When updating sheet indices or inserting sheets, movement is considered in \"before the move\" indexes. For example, if there were 3 sheets (S1, S2, S3) in order to move S1 ahead of S2 the index would have to be set to 2. A sheet index update request is ignored if the requested index is identical to the sheets current index or if the requested new index is equal to the current sheet index + 1.
+    -- | The index of the sheet within the spreadsheet. When adding or updating sheet properties, if this field is excluded then the sheet is added or moved to the end of the sheet list. When updating sheet indices or inserting sheets, movement is considered in \"before the move\" indexes. For example, if there were three sheets (S1, S2, S3) in order to move S1 ahead of S2 the index would have to be set to 2. A sheet index update request is ignored if the requested index is identical to the sheets current index or if the requested new index is equal to the current sheet index + 1.
     index :: (Core.Maybe Core.Int32),
     -- | True if the sheet is an RTL sheet instead of an LTR sheet.
     rightToLeft :: (Core.Maybe Core.Bool),
@@ -10270,7 +10200,11 @@ data Slicer = Slicer
 newSlicer ::
   Slicer
 newSlicer =
-  Slicer {position = Core.Nothing, slicerId = Core.Nothing, spec = Core.Nothing}
+  Slicer
+    { position = Core.Nothing,
+      slicerId = Core.Nothing,
+      spec = Core.Nothing
+    }
 
 instance Core.FromJSON Slicer where
   parseJSON =
@@ -10303,7 +10237,7 @@ data SlicerSpec = SlicerSpec
     backgroundColor :: (Core.Maybe Color),
     -- | The background color of the slicer. If background_color is also set, this field takes precedence.
     backgroundColorStyle :: (Core.Maybe ColorStyle),
-    -- | The column index in the data table on which the filter is applied to.
+    -- | The zero-based column index in the data table on which the filter is applied to.
     columnIndex :: (Core.Maybe Core.Int32),
     -- | The data range of the slicer.
     dataRange :: (Core.Maybe GridRange),
@@ -10355,16 +10289,13 @@ instance Core.ToJSON SlicerSpec where
   toJSON SlicerSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("applyToPivotTables" Core..=)
-              Core.<$> applyToPivotTables,
+          [ ("applyToPivotTables" Core..=) Core.<$> applyToPivotTables,
             ("backgroundColor" Core..=) Core.<$> backgroundColor,
-            ("backgroundColorStyle" Core..=)
-              Core.<$> backgroundColorStyle,
+            ("backgroundColorStyle" Core..=) Core.<$> backgroundColorStyle,
             ("columnIndex" Core..=) Core.<$> columnIndex,
             ("dataRange" Core..=) Core.<$> dataRange,
             ("filterCriteria" Core..=) Core.<$> filterCriteria,
-            ("horizontalAlignment" Core..=)
-              Core.<$> horizontalAlignment,
+            ("horizontalAlignment" Core..=) Core.<$> horizontalAlignment,
             ("textFormat" Core..=) Core.<$> textFormat,
             ("title" Core..=) Core.<$> title
           ]
@@ -10460,16 +10391,13 @@ instance Core.ToJSON SortSpec where
   toJSON SortSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
-            ("backgroundColorStyle" Core..=)
-              Core.<$> backgroundColorStyle,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
+            ("backgroundColorStyle" Core..=) Core.<$> backgroundColorStyle,
             ("dataSourceColumnReference" Core..=)
               Core.<$> dataSourceColumnReference,
             ("dimensionIndex" Core..=) Core.<$> dimensionIndex,
             ("foregroundColor" Core..=) Core.<$> foregroundColor,
-            ("foregroundColorStyle" Core..=)
-              Core.<$> foregroundColorStyle,
+            ("foregroundColorStyle" Core..=) Core.<$> foregroundColorStyle,
             ("sortOrder" Core..=) Core.<$> sortOrder
           ]
       )
@@ -10576,11 +10504,9 @@ instance Core.ToJSON Spreadsheet where
   toJSON Spreadsheet {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataSourceSchedules" Core..=)
-              Core.<$> dataSourceSchedules,
+          [ ("dataSourceSchedules" Core..=) Core.<$> dataSourceSchedules,
             ("dataSources" Core..=) Core.<$> dataSources,
-            ("developerMetadata" Core..=)
-              Core.<$> developerMetadata,
+            ("developerMetadata" Core..=) Core.<$> developerMetadata,
             ("namedRanges" Core..=) Core.<$> namedRanges,
             ("properties" Core..=) Core.<$> properties,
             ("sheets" Core..=) Core.<$> sheets,
@@ -10597,6 +10523,8 @@ data SpreadsheetProperties = SpreadsheetProperties
     autoRecalc :: (Core.Maybe SpreadsheetProperties_AutoRecalc),
     -- | The default format of all cells in the spreadsheet. CellData.effectiveFormat will not be set if the cell\'s format is equal to this default format. This field is read-only.
     defaultFormat :: (Core.Maybe CellFormat),
+    -- | Whether to allow external URL access for image and import functions. Read only when true. When false, you can set to true. This value will be bypassed and always return true if the admin has enabled the <https://support.google.com/a?p=url_allowlist allowlisting feature>.
+    importFunctionsExternalUrlAccessAllowed :: (Core.Maybe Core.Bool),
     -- | Determines whether and how circular references are resolved with iterative calculation. Absence of this field means that circular references result in calculation errors.
     iterativeCalculationSettings :: (Core.Maybe IterativeCalculationSettings),
     -- | The locale of the spreadsheet in one of the following formats: * an ISO 639-1 language code such as @en@ * an ISO 639-2 language code such as @fil@, if no 639-1 code exists * a combination of the ISO language code and country code, such as @en_US@ Note: when updating this field, not all locales\/languages are supported.
@@ -10617,6 +10545,7 @@ newSpreadsheetProperties =
   SpreadsheetProperties
     { autoRecalc = Core.Nothing,
       defaultFormat = Core.Nothing,
+      importFunctionsExternalUrlAccessAllowed = Core.Nothing,
       iterativeCalculationSettings = Core.Nothing,
       locale = Core.Nothing,
       spreadsheetTheme = Core.Nothing,
@@ -10632,6 +10561,7 @@ instance Core.FromJSON SpreadsheetProperties where
           SpreadsheetProperties
             Core.<$> (o Core..:? "autoRecalc")
             Core.<*> (o Core..:? "defaultFormat")
+            Core.<*> (o Core..:? "importFunctionsExternalUrlAccessAllowed")
             Core.<*> (o Core..:? "iterativeCalculationSettings")
             Core.<*> (o Core..:? "locale")
             Core.<*> (o Core..:? "spreadsheetTheme")
@@ -10645,11 +10575,12 @@ instance Core.ToJSON SpreadsheetProperties where
       ( Core.catMaybes
           [ ("autoRecalc" Core..=) Core.<$> autoRecalc,
             ("defaultFormat" Core..=) Core.<$> defaultFormat,
+            ("importFunctionsExternalUrlAccessAllowed" Core..=)
+              Core.<$> importFunctionsExternalUrlAccessAllowed,
             ("iterativeCalculationSettings" Core..=)
               Core.<$> iterativeCalculationSettings,
             ("locale" Core..=) Core.<$> locale,
-            ("spreadsheetTheme" Core..=)
-              Core.<$> spreadsheetTheme,
+            ("spreadsheetTheme" Core..=) Core.<$> spreadsheetTheme,
             ("timeZone" Core..=) Core.<$> timeZone,
             ("title" Core..=) Core.<$> title
           ]
@@ -10689,8 +10620,7 @@ instance Core.ToJSON SpreadsheetTheme where
   toJSON SpreadsheetTheme {..} =
     Core.object
       ( Core.catMaybes
-          [ ("primaryFontFamily" Core..=)
-              Core.<$> primaryFontFamily,
+          [ ("primaryFontFamily" Core..=) Core.<$> primaryFontFamily,
             ("themeColors" Core..=) Core.<$> themeColors
           ]
       )
@@ -10761,8 +10691,7 @@ instance Core.ToJSON TextFormat where
             ("fontFamily" Core..=) Core.<$> fontFamily,
             ("fontSize" Core..=) Core.<$> fontSize,
             ("foregroundColor" Core..=) Core.<$> foregroundColor,
-            ("foregroundColorStyle" Core..=)
-              Core.<$> foregroundColorStyle,
+            ("foregroundColorStyle" Core..=) Core.<$> foregroundColorStyle,
             ("italic" Core..=) Core.<$> italic,
             ("link" Core..=) Core.<$> link,
             ("strikethrough" Core..=) Core.<$> strikethrough,
@@ -10776,7 +10705,7 @@ instance Core.ToJSON TextFormat where
 data TextFormatRun = TextFormatRun
   { -- | The format of this run. Absent values inherit the cell\'s format.
     format :: (Core.Maybe TextFormat),
-    -- | The character index where this run starts.
+    -- | The zero-based character index where this run starts, in UTF-16 code units.
     startIndex :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -10824,18 +10753,13 @@ instance Core.FromJSON TextPosition where
   parseJSON =
     Core.withObject
       "TextPosition"
-      ( \o ->
-          TextPosition
-            Core.<$> (o Core..:? "horizontalAlignment")
-      )
+      (\o -> TextPosition Core.<$> (o Core..:? "horizontalAlignment"))
 
 instance Core.ToJSON TextPosition where
   toJSON TextPosition {..} =
     Core.object
       ( Core.catMaybes
-          [ ("horizontalAlignment" Core..=)
-              Core.<$> horizontalAlignment
-          ]
+          [("horizontalAlignment" Core..=) Core.<$> horizontalAlignment]
       )
 
 -- | The rotation applied to text in a cell.
@@ -10852,7 +10776,8 @@ data TextRotation = TextRotation
 -- | Creates a value of 'TextRotation' with the minimum fields required to make a request.
 newTextRotation ::
   TextRotation
-newTextRotation = TextRotation {angle = Core.Nothing, vertical = Core.Nothing}
+newTextRotation =
+  TextRotation {angle = Core.Nothing, vertical = Core.Nothing}
 
 instance Core.FromJSON TextRotation where
   parseJSON =
@@ -10957,13 +10882,13 @@ instance Core.ToJSON ThemeColorPair where
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -11061,17 +10986,13 @@ instance Core.ToJSON TreemapChartColorScale where
     Core.object
       ( Core.catMaybes
           [ ("maxValueColor" Core..=) Core.<$> maxValueColor,
-            ("maxValueColorStyle" Core..=)
-              Core.<$> maxValueColorStyle,
+            ("maxValueColorStyle" Core..=) Core.<$> maxValueColorStyle,
             ("midValueColor" Core..=) Core.<$> midValueColor,
-            ("midValueColorStyle" Core..=)
-              Core.<$> midValueColorStyle,
+            ("midValueColorStyle" Core..=) Core.<$> midValueColorStyle,
             ("minValueColor" Core..=) Core.<$> minValueColor,
-            ("minValueColorStyle" Core..=)
-              Core.<$> minValueColorStyle,
+            ("minValueColorStyle" Core..=) Core.<$> minValueColorStyle,
             ("noDataColor" Core..=) Core.<$> noDataColor,
-            ("noDataColorStyle" Core..=)
-              Core.<$> noDataColorStyle
+            ("noDataColorStyle" Core..=) Core.<$> noDataColorStyle
           ]
       )
 
@@ -11156,8 +11077,7 @@ instance Core.ToJSON TreemapChartSpec where
           [ ("colorData" Core..=) Core.<$> colorData,
             ("colorScale" Core..=) Core.<$> colorScale,
             ("headerColor" Core..=) Core.<$> headerColor,
-            ("headerColorStyle" Core..=)
-              Core.<$> headerColorStyle,
+            ("headerColorStyle" Core..=) Core.<$> headerColorStyle,
             ("hideTooltips" Core..=) Core.<$> hideTooltips,
             ("hintedLevels" Core..=) Core.<$> hintedLevels,
             ("labels" Core..=) Core.<$> labels,
@@ -11182,20 +11102,18 @@ newtype TrimWhitespaceRequest = TrimWhitespaceRequest
 -- | Creates a value of 'TrimWhitespaceRequest' with the minimum fields required to make a request.
 newTrimWhitespaceRequest ::
   TrimWhitespaceRequest
-newTrimWhitespaceRequest = TrimWhitespaceRequest {range = Core.Nothing}
+newTrimWhitespaceRequest =
+  TrimWhitespaceRequest {range = Core.Nothing}
 
 instance Core.FromJSON TrimWhitespaceRequest where
   parseJSON =
     Core.withObject
       "TrimWhitespaceRequest"
-      ( \o ->
-          TrimWhitespaceRequest Core.<$> (o Core..:? "range")
-      )
+      (\o -> TrimWhitespaceRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON TrimWhitespaceRequest where
   toJSON TrimWhitespaceRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | The result of trimming whitespace in cells.
 --
@@ -11217,17 +11135,14 @@ instance Core.FromJSON TrimWhitespaceResponse where
     Core.withObject
       "TrimWhitespaceResponse"
       ( \o ->
-          TrimWhitespaceResponse
-            Core.<$> (o Core..:? "cellsChangedCount")
+          TrimWhitespaceResponse Core.<$> (o Core..:? "cellsChangedCount")
       )
 
 instance Core.ToJSON TrimWhitespaceResponse where
   toJSON TrimWhitespaceResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cellsChangedCount" Core..=)
-              Core.<$> cellsChangedCount
-          ]
+          [("cellsChangedCount" Core..=) Core.<$> cellsChangedCount]
       )
 
 -- | Unmerges cells in the given range.
@@ -11248,14 +11163,11 @@ instance Core.FromJSON UnmergeCellsRequest where
   parseJSON =
     Core.withObject
       "UnmergeCellsRequest"
-      ( \o ->
-          UnmergeCellsRequest Core.<$> (o Core..:? "range")
-      )
+      (\o -> UnmergeCellsRequest Core.<$> (o Core..:? "range"))
 
 instance Core.ToJSON UnmergeCellsRequest where
   toJSON UnmergeCellsRequest {..} =
-    Core.object
-      (Core.catMaybes [("range" Core..=) Core.<$> range])
+    Core.object (Core.catMaybes [("range" Core..=) Core.<$> range])
 
 -- | Updates properties of the supplied banded range.
 --
@@ -11272,7 +11184,10 @@ data UpdateBandingRequest = UpdateBandingRequest
 newUpdateBandingRequest ::
   UpdateBandingRequest
 newUpdateBandingRequest =
-  UpdateBandingRequest {bandedRange = Core.Nothing, fields = Core.Nothing}
+  UpdateBandingRequest
+    { bandedRange = Core.Nothing,
+      fields = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateBandingRequest where
   parseJSON =
@@ -11421,7 +11336,10 @@ data UpdateChartSpecRequest = UpdateChartSpecRequest
 newUpdateChartSpecRequest ::
   UpdateChartSpecRequest
 newUpdateChartSpecRequest =
-  UpdateChartSpecRequest {chartId = Core.Nothing, spec = Core.Nothing}
+  UpdateChartSpecRequest
+    { chartId = Core.Nothing,
+      spec = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateChartSpecRequest where
   parseJSON =
@@ -11429,7 +11347,8 @@ instance Core.FromJSON UpdateChartSpecRequest where
       "UpdateChartSpecRequest"
       ( \o ->
           UpdateChartSpecRequest
-            Core.<$> (o Core..:? "chartId") Core.<*> (o Core..:? "spec")
+            Core.<$> (o Core..:? "chartId")
+            Core.<*> (o Core..:? "spec")
       )
 
 instance Core.ToJSON UpdateChartSpecRequest where
@@ -11467,10 +11386,7 @@ newUpdateConditionalFormatRuleRequest =
       sheetId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateConditionalFormatRuleRequest
-  where
+instance Core.FromJSON UpdateConditionalFormatRuleRequest where
   parseJSON =
     Core.withObject
       "UpdateConditionalFormatRuleRequest"
@@ -11482,10 +11398,7 @@ instance
             Core.<*> (o Core..:? "sheetId")
       )
 
-instance
-  Core.ToJSON
-    UpdateConditionalFormatRuleRequest
-  where
+instance Core.ToJSON UpdateConditionalFormatRuleRequest where
   toJSON UpdateConditionalFormatRuleRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -11522,10 +11435,7 @@ newUpdateConditionalFormatRuleResponse =
       oldRule = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateConditionalFormatRuleResponse
-  where
+instance Core.FromJSON UpdateConditionalFormatRuleResponse where
   parseJSON =
     Core.withObject
       "UpdateConditionalFormatRuleResponse"
@@ -11537,10 +11447,7 @@ instance
             Core.<*> (o Core..:? "oldRule")
       )
 
-instance
-  Core.ToJSON
-    UpdateConditionalFormatRuleResponse
-  where
+instance Core.ToJSON UpdateConditionalFormatRuleResponse where
   toJSON UpdateConditionalFormatRuleResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -11551,7 +11458,7 @@ instance
           ]
       )
 
--- | Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional @bigquery.readonly@ OAuth scope.
+-- | Updates a data source. After the data source is updated successfully, an execution is triggered to refresh the associated DATA_SOURCE sheet to read data from the updated data source. The request requires an additional @bigquery.readonly@ OAuth scope if you are updating a BigQuery data source.
 --
 -- /See:/ 'newUpdateDataSourceRequest' smart constructor.
 data UpdateDataSourceRequest = UpdateDataSourceRequest
@@ -11566,7 +11473,10 @@ data UpdateDataSourceRequest = UpdateDataSourceRequest
 newUpdateDataSourceRequest ::
   UpdateDataSourceRequest
 newUpdateDataSourceRequest =
-  UpdateDataSourceRequest {dataSource = Core.Nothing, fields = Core.Nothing}
+  UpdateDataSourceRequest
+    { dataSource = Core.Nothing,
+      fields = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateDataSourceRequest where
   parseJSON =
@@ -11621,8 +11531,7 @@ instance Core.ToJSON UpdateDataSourceResponse where
   toJSON UpdateDataSourceResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataExecutionStatus" Core..=)
-              Core.<$> dataExecutionStatus,
+          [ ("dataExecutionStatus" Core..=) Core.<$> dataExecutionStatus,
             ("dataSource" Core..=) Core.<$> dataSource
           ]
       )
@@ -11666,8 +11575,7 @@ instance Core.ToJSON UpdateDeveloperMetadataRequest where
     Core.object
       ( Core.catMaybes
           [ ("dataFilters" Core..=) Core.<$> dataFilters,
-            ("developerMetadata" Core..=)
-              Core.<$> developerMetadata,
+            ("developerMetadata" Core..=) Core.<$> developerMetadata,
             ("fields" Core..=) Core.<$> fields
           ]
       )
@@ -11687,10 +11595,7 @@ newUpdateDeveloperMetadataResponse ::
 newUpdateDeveloperMetadataResponse =
   UpdateDeveloperMetadataResponse {developerMetadata = Core.Nothing}
 
-instance
-  Core.FromJSON
-    UpdateDeveloperMetadataResponse
-  where
+instance Core.FromJSON UpdateDeveloperMetadataResponse where
   parseJSON =
     Core.withObject
       "UpdateDeveloperMetadataResponse"
@@ -11703,9 +11608,7 @@ instance Core.ToJSON UpdateDeveloperMetadataResponse where
   toJSON UpdateDeveloperMetadataResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("developerMetadata" Core..=)
-              Core.<$> developerMetadata
-          ]
+          [("developerMetadata" Core..=) Core.<$> developerMetadata]
       )
 
 -- | Updates the state of the specified group.
@@ -11767,16 +11670,14 @@ newUpdateDimensionPropertiesRequest ::
   UpdateDimensionPropertiesRequest
 newUpdateDimensionPropertiesRequest =
   UpdateDimensionPropertiesRequest
-    { dataSourceSheetRange = Core.Nothing,
+    { dataSourceSheetRange =
+        Core.Nothing,
       fields = Core.Nothing,
       properties = Core.Nothing,
       range = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateDimensionPropertiesRequest
-  where
+instance Core.FromJSON UpdateDimensionPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateDimensionPropertiesRequest"
@@ -11792,8 +11693,7 @@ instance Core.ToJSON UpdateDimensionPropertiesRequest where
   toJSON UpdateDimensionPropertiesRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dataSourceSheetRange" Core..=)
-              Core.<$> dataSourceSheetRange,
+          [ ("dataSourceSheetRange" Core..=) Core.<$> dataSourceSheetRange,
             ("fields" Core..=) Core.<$> fields,
             ("properties" Core..=) Core.<$> properties,
             ("range" Core..=) Core.<$> range
@@ -11823,10 +11723,7 @@ newUpdateEmbeddedObjectBorderRequest =
       objectId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateEmbeddedObjectBorderRequest
-  where
+instance Core.FromJSON UpdateEmbeddedObjectBorderRequest where
   parseJSON =
     Core.withObject
       "UpdateEmbeddedObjectBorderRequest"
@@ -11837,10 +11734,7 @@ instance
             Core.<*> (o Core..:? "objectId")
       )
 
-instance
-  Core.ToJSON
-    UpdateEmbeddedObjectBorderRequest
-  where
+instance Core.ToJSON UpdateEmbeddedObjectBorderRequest where
   toJSON UpdateEmbeddedObjectBorderRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -11873,10 +11767,7 @@ newUpdateEmbeddedObjectPositionRequest =
       objectId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateEmbeddedObjectPositionRequest
-  where
+instance Core.FromJSON UpdateEmbeddedObjectPositionRequest where
   parseJSON =
     Core.withObject
       "UpdateEmbeddedObjectPositionRequest"
@@ -11887,10 +11778,7 @@ instance
             Core.<*> (o Core..:? "objectId")
       )
 
-instance
-  Core.ToJSON
-    UpdateEmbeddedObjectPositionRequest
-  where
+instance Core.ToJSON UpdateEmbeddedObjectPositionRequest where
   toJSON UpdateEmbeddedObjectPositionRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -11915,10 +11803,7 @@ newUpdateEmbeddedObjectPositionResponse ::
 newUpdateEmbeddedObjectPositionResponse =
   UpdateEmbeddedObjectPositionResponse {position = Core.Nothing}
 
-instance
-  Core.FromJSON
-    UpdateEmbeddedObjectPositionResponse
-  where
+instance Core.FromJSON UpdateEmbeddedObjectPositionResponse where
   parseJSON =
     Core.withObject
       "UpdateEmbeddedObjectPositionResponse"
@@ -11927,15 +11812,10 @@ instance
             Core.<$> (o Core..:? "position")
       )
 
-instance
-  Core.ToJSON
-    UpdateEmbeddedObjectPositionResponse
-  where
+instance Core.ToJSON UpdateEmbeddedObjectPositionResponse where
   toJSON UpdateEmbeddedObjectPositionResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("position" Core..=) Core.<$> position]
-      )
+      (Core.catMaybes [("position" Core..=) Core.<$> position])
 
 -- | Updates properties of the filter view.
 --
@@ -11952,7 +11832,10 @@ data UpdateFilterViewRequest = UpdateFilterViewRequest
 newUpdateFilterViewRequest ::
   UpdateFilterViewRequest
 newUpdateFilterViewRequest =
-  UpdateFilterViewRequest {fields = Core.Nothing, filter = Core.Nothing}
+  UpdateFilterViewRequest
+    { fields = Core.Nothing,
+      filter = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateFilterViewRequest where
   parseJSON =
@@ -11960,7 +11843,8 @@ instance Core.FromJSON UpdateFilterViewRequest where
       "UpdateFilterViewRequest"
       ( \o ->
           UpdateFilterViewRequest
-            Core.<$> (o Core..:? "fields") Core.<*> (o Core..:? "filter")
+            Core.<$> (o Core..:? "fields")
+            Core.<*> (o Core..:? "filter")
       )
 
 instance Core.ToJSON UpdateFilterViewRequest where
@@ -11987,7 +11871,10 @@ data UpdateNamedRangeRequest = UpdateNamedRangeRequest
 newUpdateNamedRangeRequest ::
   UpdateNamedRangeRequest
 newUpdateNamedRangeRequest =
-  UpdateNamedRangeRequest {fields = Core.Nothing, namedRange = Core.Nothing}
+  UpdateNamedRangeRequest
+    { fields = Core.Nothing,
+      namedRange = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateNamedRangeRequest where
   parseJSON =
@@ -12150,10 +12037,7 @@ newUpdateSpreadsheetPropertiesRequest =
       properties = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateSpreadsheetPropertiesRequest
-  where
+instance Core.FromJSON UpdateSpreadsheetPropertiesRequest where
   parseJSON =
     Core.withObject
       "UpdateSpreadsheetPropertiesRequest"
@@ -12163,10 +12047,7 @@ instance
             Core.<*> (o Core..:? "properties")
       )
 
-instance
-  Core.ToJSON
-    UpdateSpreadsheetPropertiesRequest
-  where
+instance Core.ToJSON UpdateSpreadsheetPropertiesRequest where
   toJSON UpdateSpreadsheetPropertiesRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -12207,10 +12088,7 @@ newUpdateValuesByDataFilterResponse =
       updatedRows = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    UpdateValuesByDataFilterResponse
-  where
+instance Core.FromJSON UpdateValuesByDataFilterResponse where
   parseJSON =
     Core.withObject
       "UpdateValuesByDataFilterResponse"
@@ -12392,7 +12270,7 @@ data WaterfallChartCustomSubtotal = WaterfallChartCustomSubtotal
     dataIsSubtotal :: (Core.Maybe Core.Bool),
     -- | A label for the subtotal column.
     label :: (Core.Maybe Core.Text),
-    -- | The 0-based index of a data point within the series. If data/is/subtotal is true, the data point at this index is the subtotal. Otherwise, the subtotal appears after the data point with this index. A series can have multiple subtotals at arbitrary indices, but subtotals do not affect the indices of the data points. For example, if a series has three data points, their indices will always be 0, 1, and 2, regardless of how many subtotals exist on the series or what data points they are associated with.
+    -- | The zero-based index of a data point within the series. If data/is/subtotal is true, the data point at this index is the subtotal. Otherwise, the subtotal appears after the data point with this index. A series can have multiple subtotals at arbitrary indices, but subtotals do not affect the indices of the data points. For example, if a series has three data points, their indices will always be 0, 1, and 2, regardless of how many subtotals exist on the series or what data points they are associated with.
     subtotalIndex :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -12443,7 +12321,10 @@ data WaterfallChartDomain = WaterfallChartDomain
 newWaterfallChartDomain ::
   WaterfallChartDomain
 newWaterfallChartDomain =
-  WaterfallChartDomain {data' = Core.Nothing, reversed = Core.Nothing}
+  WaterfallChartDomain
+    { data' = Core.Nothing,
+      reversed = Core.Nothing
+    }
 
 instance Core.FromJSON WaterfallChartDomain where
   parseJSON =
@@ -12451,7 +12332,8 @@ instance Core.FromJSON WaterfallChartDomain where
       "WaterfallChartDomain"
       ( \o ->
           WaterfallChartDomain
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "reversed")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "reversed")
       )
 
 instance Core.ToJSON WaterfallChartDomain where
@@ -12517,18 +12399,13 @@ instance Core.ToJSON WaterfallChartSeries where
   toJSON WaterfallChartSeries {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customSubtotals" Core..=)
-              Core.<$> customSubtotals,
+          [ ("customSubtotals" Core..=) Core.<$> customSubtotals,
             ("data" Core..=) Core.<$> data',
             ("dataLabel" Core..=) Core.<$> dataLabel,
-            ("hideTrailingSubtotal" Core..=)
-              Core.<$> hideTrailingSubtotal,
-            ("negativeColumnsStyle" Core..=)
-              Core.<$> negativeColumnsStyle,
-            ("positiveColumnsStyle" Core..=)
-              Core.<$> positiveColumnsStyle,
-            ("subtotalColumnsStyle" Core..=)
-              Core.<$> subtotalColumnsStyle
+            ("hideTrailingSubtotal" Core..=) Core.<$> hideTrailingSubtotal,
+            ("negativeColumnsStyle" Core..=) Core.<$> negativeColumnsStyle,
+            ("positiveColumnsStyle" Core..=) Core.<$> positiveColumnsStyle,
+            ("subtotalColumnsStyle" Core..=) Core.<$> subtotalColumnsStyle
           ]
       )
 
@@ -12586,13 +12463,10 @@ instance Core.ToJSON WaterfallChartSpec where
   toJSON WaterfallChartSpec {..} =
     Core.object
       ( Core.catMaybes
-          [ ("connectorLineStyle" Core..=)
-              Core.<$> connectorLineStyle,
+          [ ("connectorLineStyle" Core..=) Core.<$> connectorLineStyle,
             ("domain" Core..=) Core.<$> domain,
-            ("firstValueIsTotal" Core..=)
-              Core.<$> firstValueIsTotal,
-            ("hideConnectorLines" Core..=)
-              Core.<$> hideConnectorLines,
+            ("firstValueIsTotal" Core..=) Core.<$> firstValueIsTotal,
+            ("hideConnectorLines" Core..=) Core.<$> hideConnectorLines,
             ("series" Core..=) Core.<$> series,
             ("stackedType" Core..=) Core.<$> stackedType,
             ("totalDataLabel" Core..=) Core.<$> totalDataLabel

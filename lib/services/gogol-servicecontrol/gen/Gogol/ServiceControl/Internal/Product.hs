@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceControl.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ServiceControl.Internal.Product
@@ -90,6 +88,10 @@ module Gogol.ServiceControl.Internal.Product
     CheckResponse (..),
     newCheckResponse,
 
+    -- * CheckResponse_DynamicMetadata
+    CheckResponse_DynamicMetadata (..),
+    newCheckResponse_DynamicMetadata,
+
     -- * CheckResponse_Headers
     CheckResponse_Headers (..),
     newCheckResponse_Headers,
@@ -134,6 +136,10 @@ module Gogol.ServiceControl.Internal.Product
     ReportResponse (..),
     newReportResponse,
 
+    -- * ReportResponse_Extensions
+    ReportResponse_Extensions (..),
+    newReportResponse_Extensions,
+
     -- * Request'
     Request' (..),
     newRequest,
@@ -177,6 +183,18 @@ module Gogol.ServiceControl.Internal.Product
     -- * ServiceAccountDelegationInfo
     ServiceAccountDelegationInfo (..),
     newServiceAccountDelegationInfo,
+
+    -- * ServiceDelegationHistory
+    ServiceDelegationHistory (..),
+    newServiceDelegationHistory,
+
+    -- * ServiceMetadata
+    ServiceMetadata (..),
+    newServiceMetadata,
+
+    -- * ServiceMetadata_JobMetadata
+    ServiceMetadata_JobMetadata (..),
+    newServiceMetadata_JobMetadata,
 
     -- * SpanContext
     SpanContext (..),
@@ -230,13 +248,21 @@ module Gogol.ServiceControl.Internal.Product
     V2LogEntrySourceLocation (..),
     newV2LogEntrySourceLocation,
 
+    -- * V2ResourceEvent
+    V2ResourceEvent (..),
+    newV2ResourceEvent,
+
+    -- * V2ResourceEvent_Payload
+    V2ResourceEvent_Payload (..),
+    newV2ResourceEvent_Payload,
+
     -- * ViolationInfo
     ViolationInfo (..),
     newViolationInfo,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceControl.Internal.Sum
 
 -- | This message defines attributes associated with API operations, such as a network API request. The terminology is based on the conventions used by Google APIs, Istio, and OpenAPI.
@@ -373,21 +399,16 @@ newAttributeContext_ExtensionsItem ::
 newAttributeContext_ExtensionsItem additional =
   AttributeContext_ExtensionsItem {additional = additional}
 
-instance
-  Core.FromJSON
-    AttributeContext_ExtensionsItem
-  where
+instance Core.FromJSON AttributeContext_ExtensionsItem where
   parseJSON =
     Core.withObject
       "AttributeContext_ExtensionsItem"
       ( \o ->
-          AttributeContext_ExtensionsItem
-            Core.<$> (Core.parseJSONObject o)
+          AttributeContext_ExtensionsItem Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON AttributeContext_ExtensionsItem where
-  toJSON AttributeContext_ExtensionsItem {..} =
-    Core.toJSON additional
+  toJSON AttributeContext_ExtensionsItem {..} = Core.toJSON additional
 
 -- | Common audit log format for Google Cloud Platform API operations.
 --
@@ -458,9 +479,7 @@ instance Core.FromJSON AuditLog where
             Core.<*> (o Core..:? "authorizationInfo")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "methodName")
-            Core.<*> ( o Core..:? "numResponseItems"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "numResponseItems" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "policyViolationInfo")
             Core.<*> (o Core..:? "request")
             Core.<*> (o Core..:? "requestMetadata")
@@ -477,23 +496,19 @@ instance Core.ToJSON AuditLog where
   toJSON AuditLog {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authenticationInfo" Core..=)
-              Core.<$> authenticationInfo,
-            ("authorizationInfo" Core..=)
-              Core.<$> authorizationInfo,
+          [ ("authenticationInfo" Core..=) Core.<$> authenticationInfo,
+            ("authorizationInfo" Core..=) Core.<$> authorizationInfo,
             ("metadata" Core..=) Core.<$> metadata,
             ("methodName" Core..=) Core.<$> methodName,
-            ("numResponseItems" Core..=) Core.. Core.AsText
+            ("numResponseItems" Core..=)
+              Core.. Core.AsText
               Core.<$> numResponseItems,
-            ("policyViolationInfo" Core..=)
-              Core.<$> policyViolationInfo,
+            ("policyViolationInfo" Core..=) Core.<$> policyViolationInfo,
             ("request" Core..=) Core.<$> request',
             ("requestMetadata" Core..=) Core.<$> requestMetadata,
-            ("resourceLocation" Core..=)
-              Core.<$> resourceLocation,
+            ("resourceLocation" Core..=) Core.<$> resourceLocation,
             ("resourceName" Core..=) Core.<$> resourceName,
-            ("resourceOriginalState" Core..=)
-              Core.<$> resourceOriginalState,
+            ("resourceOriginalState" Core..=) Core.<$> resourceOriginalState,
             ("response" Core..=) Core.<$> response,
             ("serviceData" Core..=) Core.<$> serviceData,
             ("serviceName" Core..=) Core.<$> serviceName,
@@ -515,15 +530,14 @@ newAuditLog_Metadata ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   AuditLog_Metadata
-newAuditLog_Metadata additional = AuditLog_Metadata {additional = additional}
+newAuditLog_Metadata additional =
+  AuditLog_Metadata {additional = additional}
 
 instance Core.FromJSON AuditLog_Metadata where
   parseJSON =
     Core.withObject
       "AuditLog_Metadata"
-      ( \o ->
-          AuditLog_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> AuditLog_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON AuditLog_Metadata where
   toJSON AuditLog_Metadata {..} = Core.toJSON additional
@@ -542,15 +556,14 @@ newAuditLog_Request ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   AuditLog_Request
-newAuditLog_Request additional = AuditLog_Request {additional = additional}
+newAuditLog_Request additional =
+  AuditLog_Request {additional = additional}
 
 instance Core.FromJSON AuditLog_Request where
   parseJSON =
     Core.withObject
       "AuditLog_Request"
-      ( \o ->
-          AuditLog_Request Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> AuditLog_Request Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON AuditLog_Request where
   toJSON AuditLog_Request {..} = Core.toJSON additional
@@ -577,13 +590,11 @@ instance Core.FromJSON AuditLog_ResourceOriginalState where
     Core.withObject
       "AuditLog_ResourceOriginalState"
       ( \o ->
-          AuditLog_ResourceOriginalState
-            Core.<$> (Core.parseJSONObject o)
+          AuditLog_ResourceOriginalState Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON AuditLog_ResourceOriginalState where
-  toJSON AuditLog_ResourceOriginalState {..} =
-    Core.toJSON additional
+  toJSON AuditLog_ResourceOriginalState {..} = Core.toJSON additional
 
 -- | The operation response. This may not include all response elements, such as those that are too large, privacy-sensitive, or duplicated elsewhere in the log record. It should never include user-generated data, such as file contents. When the JSON object represented here has a proto equivalent, the proto name will be indicated in the @\@type@ property.
 --
@@ -599,15 +610,14 @@ newAuditLog_Response ::
   -- |  Properties of the object. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   AuditLog_Response
-newAuditLog_Response additional = AuditLog_Response {additional = additional}
+newAuditLog_Response additional =
+  AuditLog_Response {additional = additional}
 
 instance Core.FromJSON AuditLog_Response where
   parseJSON =
     Core.withObject
       "AuditLog_Response"
-      ( \o ->
-          AuditLog_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> AuditLog_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON AuditLog_Response where
   toJSON AuditLog_Response {..} = Core.toJSON additional
@@ -633,14 +643,10 @@ instance Core.FromJSON AuditLog_ServiceData where
   parseJSON =
     Core.withObject
       "AuditLog_ServiceData"
-      ( \o ->
-          AuditLog_ServiceData
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> AuditLog_ServiceData Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON AuditLog_ServiceData where
-  toJSON AuditLog_ServiceData {..} =
-    Core.toJSON additional
+  toJSON AuditLog_ServiceData {..} = Core.toJSON additional
 
 -- | This message defines request authentication attributes. Terminology is based on the JSON Web Token (JWT) standard, but the terms also correlate to concepts in other standards.
 --
@@ -716,9 +722,7 @@ instance Core.FromJSON Auth_Claims where
   parseJSON =
     Core.withObject
       "Auth_Claims"
-      ( \o ->
-          Auth_Claims Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Auth_Claims Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Auth_Claims where
   toJSON Auth_Claims {..} = Core.toJSON additional
@@ -737,6 +741,8 @@ data AuthenticationInfo = AuthenticationInfo
     serviceAccountDelegationInfo :: (Core.Maybe [ServiceAccountDelegationInfo]),
     -- | The name of the service account key used to create or exchange credentials for authenticating the service account making the request. This is a scheme-less URI full resource name. For example: \"\/\/iam.googleapis.com\/projects\/{PROJECT_ID}\/serviceAccounts\/{ACCOUNT}\/keys\/{key}\"
     serviceAccountKeyName :: (Core.Maybe Core.Text),
+    -- | Records the history of delegated resource access across Google services.
+    serviceDelegationHistory :: (Core.Maybe ServiceDelegationHistory),
     -- | The third party identification (if any) of the authenticated user making the request. When the JSON object represented here has a proto equivalent, the proto name will be indicated in the @\@type@ property.
     thirdPartyPrincipal :: (Core.Maybe AuthenticationInfo_ThirdPartyPrincipal)
   }
@@ -752,6 +758,7 @@ newAuthenticationInfo =
       principalSubject = Core.Nothing,
       serviceAccountDelegationInfo = Core.Nothing,
       serviceAccountKeyName = Core.Nothing,
+      serviceDelegationHistory = Core.Nothing,
       thirdPartyPrincipal = Core.Nothing
     }
 
@@ -766,6 +773,7 @@ instance Core.FromJSON AuthenticationInfo where
             Core.<*> (o Core..:? "principalSubject")
             Core.<*> (o Core..:? "serviceAccountDelegationInfo")
             Core.<*> (o Core..:? "serviceAccountKeyName")
+            Core.<*> (o Core..:? "serviceDelegationHistory")
             Core.<*> (o Core..:? "thirdPartyPrincipal")
       )
 
@@ -773,17 +781,15 @@ instance Core.ToJSON AuthenticationInfo where
   toJSON AuthenticationInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authoritySelector" Core..=)
-              Core.<$> authoritySelector,
+          [ ("authoritySelector" Core..=) Core.<$> authoritySelector,
             ("principalEmail" Core..=) Core.<$> principalEmail,
-            ("principalSubject" Core..=)
-              Core.<$> principalSubject,
+            ("principalSubject" Core..=) Core.<$> principalSubject,
             ("serviceAccountDelegationInfo" Core..=)
               Core.<$> serviceAccountDelegationInfo,
-            ("serviceAccountKeyName" Core..=)
-              Core.<$> serviceAccountKeyName,
-            ("thirdPartyPrincipal" Core..=)
-              Core.<$> thirdPartyPrincipal
+            ("serviceAccountKeyName" Core..=) Core.<$> serviceAccountKeyName,
+            ("serviceDelegationHistory" Core..=)
+              Core.<$> serviceDelegationHistory,
+            ("thirdPartyPrincipal" Core..=) Core.<$> thirdPartyPrincipal
           ]
       )
 
@@ -804,10 +810,7 @@ newAuthenticationInfo_ThirdPartyPrincipal ::
 newAuthenticationInfo_ThirdPartyPrincipal additional =
   AuthenticationInfo_ThirdPartyPrincipal {additional = additional}
 
-instance
-  Core.FromJSON
-    AuthenticationInfo_ThirdPartyPrincipal
-  where
+instance Core.FromJSON AuthenticationInfo_ThirdPartyPrincipal where
   parseJSON =
     Core.withObject
       "AuthenticationInfo_ThirdPartyPrincipal"
@@ -816,10 +819,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    AuthenticationInfo_ThirdPartyPrincipal
-  where
+instance Core.ToJSON AuthenticationInfo_ThirdPartyPrincipal where
   toJSON AuthenticationInfo_ThirdPartyPrincipal {..} =
     Core.toJSON additional
 
@@ -831,6 +831,8 @@ data AuthorizationInfo = AuthorizationInfo
     granted :: (Core.Maybe Core.Bool),
     -- | The required IAM permission.
     permission :: (Core.Maybe Core.Text),
+    -- | The type of the permission that was checked. For data access audit logs this corresponds with the permission type that must be enabled in the project\/folder\/organization IAM policy in order for the log to be written.
+    permissionType :: (Core.Maybe AuthorizationInfo_PermissionType),
     -- | The resource being accessed, as a REST-style or cloud resource string. For example: bigquery.googleapis.com\/projects\/PROJECTID\/datasets\/DATASETID or projects\/PROJECTID\/datasets\/DATASETID
     resource :: (Core.Maybe Core.Text),
     -- | Resource attributes used in IAM condition evaluation. This field contains resource attributes like resource type and resource name. To get the whole view of the attributes used in IAM condition evaluation, the user must also look into @AuditLog.request_metadata.request_attributes@.
@@ -845,6 +847,7 @@ newAuthorizationInfo =
   AuthorizationInfo
     { granted = Core.Nothing,
       permission = Core.Nothing,
+      permissionType = Core.Nothing,
       resource = Core.Nothing,
       resourceAttributes = Core.Nothing
     }
@@ -857,6 +860,7 @@ instance Core.FromJSON AuthorizationInfo where
           AuthorizationInfo
             Core.<$> (o Core..:? "granted")
             Core.<*> (o Core..:? "permission")
+            Core.<*> (o Core..:? "permissionType")
             Core.<*> (o Core..:? "resource")
             Core.<*> (o Core..:? "resourceAttributes")
       )
@@ -867,9 +871,9 @@ instance Core.ToJSON AuthorizationInfo where
       ( Core.catMaybes
           [ ("granted" Core..=) Core.<$> granted,
             ("permission" Core..=) Core.<$> permission,
+            ("permissionType" Core..=) Core.<$> permissionType,
             ("resource" Core..=) Core.<$> resource,
-            ("resourceAttributes" Core..=)
-              Core.<$> resourceAttributes
+            ("resourceAttributes" Core..=) Core.<$> resourceAttributes
           ]
       )
 
@@ -918,8 +922,7 @@ instance Core.ToJSON CheckRequest where
           [ ("attributes" Core..=) Core.<$> attributes,
             ("flags" Core..=) Core.<$> flags,
             ("resources" Core..=) Core.<$> resources,
-            ("serviceConfigId" Core..=)
-              Core.<$> serviceConfigId
+            ("serviceConfigId" Core..=) Core.<$> serviceConfigId
           ]
       )
 
@@ -927,7 +930,9 @@ instance Core.ToJSON CheckRequest where
 --
 -- /See:/ 'newCheckResponse' smart constructor.
 data CheckResponse = CheckResponse
-  { -- | Returns a set of request contexts generated from the @CheckRequest@.
+  { -- | Optional response metadata that will be emitted as dynamic metadata to be consumed by the caller of ServiceController. For compatibility with the ext_authz interface.
+    dynamicMetadata :: (Core.Maybe CheckResponse_DynamicMetadata),
+    -- | Returns a set of request contexts generated from the @CheckRequest@.
     headers :: (Core.Maybe CheckResponse_Headers),
     -- | Operation is allowed when this field is not set. Any non-\'OK\' status indicates a denial; google.rpc.Status.details would contain additional details about the denial.
     status :: (Core.Maybe Status)
@@ -937,7 +942,12 @@ data CheckResponse = CheckResponse
 -- | Creates a value of 'CheckResponse' with the minimum fields required to make a request.
 newCheckResponse ::
   CheckResponse
-newCheckResponse = CheckResponse {headers = Core.Nothing, status = Core.Nothing}
+newCheckResponse =
+  CheckResponse
+    { dynamicMetadata = Core.Nothing,
+      headers = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON CheckResponse where
   parseJSON =
@@ -945,7 +955,8 @@ instance Core.FromJSON CheckResponse where
       "CheckResponse"
       ( \o ->
           CheckResponse
-            Core.<$> (o Core..:? "headers")
+            Core.<$> (o Core..:? "dynamicMetadata")
+            Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "status")
       )
 
@@ -953,17 +964,45 @@ instance Core.ToJSON CheckResponse where
   toJSON CheckResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("headers" Core..=) Core.<$> headers,
+          [ ("dynamicMetadata" Core..=) Core.<$> dynamicMetadata,
+            ("headers" Core..=) Core.<$> headers,
             ("status" Core..=) Core.<$> status
           ]
       )
+
+-- | Optional response metadata that will be emitted as dynamic metadata to be consumed by the caller of ServiceController. For compatibility with the ext_authz interface.
+--
+-- /See:/ 'newCheckResponse_DynamicMetadata' smart constructor.
+newtype CheckResponse_DynamicMetadata = CheckResponse_DynamicMetadata
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CheckResponse_DynamicMetadata' with the minimum fields required to make a request.
+newCheckResponse_DynamicMetadata ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  CheckResponse_DynamicMetadata
+newCheckResponse_DynamicMetadata additional =
+  CheckResponse_DynamicMetadata {additional = additional}
+
+instance Core.FromJSON CheckResponse_DynamicMetadata where
+  parseJSON =
+    Core.withObject
+      "CheckResponse_DynamicMetadata"
+      ( \o ->
+          CheckResponse_DynamicMetadata Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON CheckResponse_DynamicMetadata where
+  toJSON CheckResponse_DynamicMetadata {..} = Core.toJSON additional
 
 -- | Returns a set of request contexts generated from the @CheckRequest@.
 --
 -- /See:/ 'newCheckResponse_Headers' smart constructor.
 newtype CheckResponse_Headers = CheckResponse_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -979,14 +1018,10 @@ instance Core.FromJSON CheckResponse_Headers where
   parseJSON =
     Core.withObject
       "CheckResponse_Headers"
-      ( \o ->
-          CheckResponse_Headers
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> CheckResponse_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON CheckResponse_Headers where
-  toJSON CheckResponse_Headers {..} =
-    Core.toJSON additional
+  toJSON CheckResponse_Headers {..} = Core.toJSON additional
 
 -- | First party identity principal.
 --
@@ -1023,8 +1058,7 @@ instance Core.ToJSON FirstPartyPrincipal where
     Core.object
       ( Core.catMaybes
           [ ("principalEmail" Core..=) Core.<$> principalEmail,
-            ("serviceMetadata" Core..=)
-              Core.<$> serviceMetadata
+            ("serviceMetadata" Core..=) Core.<$> serviceMetadata
           ]
       )
 
@@ -1045,10 +1079,7 @@ newFirstPartyPrincipal_ServiceMetadata ::
 newFirstPartyPrincipal_ServiceMetadata additional =
   FirstPartyPrincipal_ServiceMetadata {additional = additional}
 
-instance
-  Core.FromJSON
-    FirstPartyPrincipal_ServiceMetadata
-  where
+instance Core.FromJSON FirstPartyPrincipal_ServiceMetadata where
   parseJSON =
     Core.withObject
       "FirstPartyPrincipal_ServiceMetadata"
@@ -1057,10 +1088,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    FirstPartyPrincipal_ServiceMetadata
-  where
+instance Core.ToJSON FirstPartyPrincipal_ServiceMetadata where
   toJSON FirstPartyPrincipal_ServiceMetadata {..} =
     Core.toJSON additional
 
@@ -1068,9 +1096,9 @@ instance
 --
 -- /See:/ 'newOrgPolicyViolationInfo' smart constructor.
 data OrgPolicyViolationInfo = OrgPolicyViolationInfo
-  { -- | Optional. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request. This payload should not contain any core content.
+  { -- | Optional. Deprecated. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request.
     payload :: (Core.Maybe OrgPolicyViolationInfo_Payload),
-    -- | Optional. Tags referenced on the resource at the time of evaluation. These also include the federated tags, if they are supplied in the CheckOrgPolicy or CheckCustomConstraints Requests. Optional field as of now. These tags are the Cloud tags that are available on the resource during the policy evaluation and will be available as part of the OrgPolicy check response for logging purposes.
+    -- | Optional. Deprecated. Tags referenced on the resource at the time of evaluation.
     resourceTags :: (Core.Maybe OrgPolicyViolationInfo_ResourceTags),
     -- | Optional. Resource type that the orgpolicy is checked against. Example: compute.googleapis.com\/Instance, store.googleapis.com\/bucket
     resourceType :: (Core.Maybe Core.Text),
@@ -1113,7 +1141,7 @@ instance Core.ToJSON OrgPolicyViolationInfo where
           ]
       )
 
--- | Optional. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request. This payload should not contain any core content.
+-- | Optional. Deprecated. Resource payload that is currently in scope and is subjected to orgpolicy conditions. This payload may be the subset of the actual Resource that may come in the request.
 --
 -- /See:/ 'newOrgPolicyViolationInfo_Payload' smart constructor.
 newtype OrgPolicyViolationInfo_Payload = OrgPolicyViolationInfo_Payload
@@ -1135,20 +1163,17 @@ instance Core.FromJSON OrgPolicyViolationInfo_Payload where
     Core.withObject
       "OrgPolicyViolationInfo_Payload"
       ( \o ->
-          OrgPolicyViolationInfo_Payload
-            Core.<$> (Core.parseJSONObject o)
+          OrgPolicyViolationInfo_Payload Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON OrgPolicyViolationInfo_Payload where
-  toJSON OrgPolicyViolationInfo_Payload {..} =
-    Core.toJSON additional
+  toJSON OrgPolicyViolationInfo_Payload {..} = Core.toJSON additional
 
--- | Optional. Tags referenced on the resource at the time of evaluation. These also include the federated tags, if they are supplied in the CheckOrgPolicy or CheckCustomConstraints Requests. Optional field as of now. These tags are the Cloud tags that are available on the resource during the policy evaluation and will be available as part of the OrgPolicy check response for logging purposes.
+-- | Optional. Deprecated. Tags referenced on the resource at the time of evaluation.
 --
 -- /See:/ 'newOrgPolicyViolationInfo_ResourceTags' smart constructor.
 newtype OrgPolicyViolationInfo_ResourceTags = OrgPolicyViolationInfo_ResourceTags
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1160,10 +1185,7 @@ newOrgPolicyViolationInfo_ResourceTags ::
 newOrgPolicyViolationInfo_ResourceTags additional =
   OrgPolicyViolationInfo_ResourceTags {additional = additional}
 
-instance
-  Core.FromJSON
-    OrgPolicyViolationInfo_ResourceTags
-  where
+instance Core.FromJSON OrgPolicyViolationInfo_ResourceTags where
   parseJSON =
     Core.withObject
       "OrgPolicyViolationInfo_ResourceTags"
@@ -1172,10 +1194,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    OrgPolicyViolationInfo_ResourceTags
-  where
+instance Core.ToJSON OrgPolicyViolationInfo_ResourceTags where
   toJSON OrgPolicyViolationInfo_ResourceTags {..} =
     Core.toJSON additional
 
@@ -1216,9 +1235,7 @@ instance Core.FromJSON Peer where
           Peer
             Core.<$> (o Core..:? "ip")
             Core.<*> (o Core..:? "labels")
-            Core.<*> ( o Core..:? "port"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "port" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "principal")
             Core.<*> (o Core..:? "regionCode")
       )
@@ -1239,8 +1256,7 @@ instance Core.ToJSON Peer where
 --
 -- /See:/ 'newPeer_Labels' smart constructor.
 newtype Peer_Labels = Peer_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1255,9 +1271,7 @@ instance Core.FromJSON Peer_Labels where
   parseJSON =
     Core.withObject
       "Peer_Labels"
-      ( \o ->
-          Peer_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Peer_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Peer_Labels where
   toJSON Peer_Labels {..} = Core.toJSON additional
@@ -1282,8 +1296,7 @@ instance Core.FromJSON PolicyViolationInfo where
     Core.withObject
       "PolicyViolationInfo"
       ( \o ->
-          PolicyViolationInfo
-            Core.<$> (o Core..:? "orgPolicyViolationInfo")
+          PolicyViolationInfo Core.<$> (o Core..:? "orgPolicyViolationInfo")
       )
 
 instance Core.ToJSON PolicyViolationInfo where
@@ -1310,7 +1323,10 @@ data ReportRequest = ReportRequest
 newReportRequest ::
   ReportRequest
 newReportRequest =
-  ReportRequest {operations = Core.Nothing, serviceConfigId = Core.Nothing}
+  ReportRequest
+    { operations = Core.Nothing,
+      serviceConfigId = Core.Nothing
+    }
 
 instance Core.FromJSON ReportRequest where
   parseJSON =
@@ -1327,30 +1343,62 @@ instance Core.ToJSON ReportRequest where
     Core.object
       ( Core.catMaybes
           [ ("operations" Core..=) Core.<$> operations,
-            ("serviceConfigId" Core..=)
-              Core.<$> serviceConfigId
+            ("serviceConfigId" Core..=) Core.<$> serviceConfigId
           ]
       )
 
--- | Response message for the Report method. If the request contains any invalid data, the server returns an RPC error.
+-- | Response message for the Report method.
 --
 -- /See:/ 'newReportResponse' smart constructor.
-data ReportResponse = ReportResponse
+newtype ReportResponse = ReportResponse
+  { -- | The extension field to store serialized OTel responses. e.g. ExportLogsServiceResponse, ExportMetricsServiceResponse.
+    extensions :: (Core.Maybe ReportResponse_Extensions)
+  }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'ReportResponse' with the minimum fields required to make a request.
 newReportResponse ::
   ReportResponse
-newReportResponse = ReportResponse
+newReportResponse = ReportResponse {extensions = Core.Nothing}
 
 instance Core.FromJSON ReportResponse where
   parseJSON =
     Core.withObject
       "ReportResponse"
-      (\o -> Core.pure ReportResponse)
+      (\o -> ReportResponse Core.<$> (o Core..:? "extensions"))
 
 instance Core.ToJSON ReportResponse where
-  toJSON = Core.const Core.emptyObject
+  toJSON ReportResponse {..} =
+    Core.object
+      (Core.catMaybes [("extensions" Core..=) Core.<$> extensions])
+
+-- | The extension field to store serialized OTel responses. e.g. ExportLogsServiceResponse, ExportMetricsServiceResponse.
+--
+-- /See:/ 'newReportResponse_Extensions' smart constructor.
+newtype ReportResponse_Extensions = ReportResponse_Extensions
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReportResponse_Extensions' with the minimum fields required to make a request.
+newReportResponse_Extensions ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  ReportResponse_Extensions
+newReportResponse_Extensions additional =
+  ReportResponse_Extensions {additional = additional}
+
+instance Core.FromJSON ReportResponse_Extensions where
+  parseJSON =
+    Core.withObject
+      "ReportResponse_Extensions"
+      ( \o ->
+          ReportResponse_Extensions Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ReportResponse_Extensions where
+  toJSON ReportResponse_Extensions {..} = Core.toJSON additional
 
 -- | This message defines attributes for an HTTP request. If the actual request is not an HTTP request, the runtime system should try to map the actual request to an equivalent HTTP request.
 --
@@ -1366,6 +1414,8 @@ data Request' = Request'
     id :: (Core.Maybe Core.Text),
     -- | The HTTP request method, such as @GET@, @POST@.
     method :: (Core.Maybe Core.Text),
+    -- | The values from Origin header from the HTTP request, such as \"https:\/\/console.cloud.google.com\". Modern browsers can only have one origin. Special browsers and\/or HTTP clients may require multiple origins.
+    origin :: (Core.Maybe Core.Text),
     -- | The HTTP URL path, excluding the query parameters.
     path :: (Core.Maybe Core.Text),
     -- | The network protocol used with the request, such as \"http\/1.1\", \"spdy\/3\", \"h2\", \"h2c\", \"webrtc\", \"tcp\", \"udp\", \"quic\". See https:\/\/www.iana.org\/assignments\/tls-extensiontype-values\/tls-extensiontype-values.xhtml#alpn-protocol-ids for details.
@@ -1393,6 +1443,7 @@ newRequest =
       host = Core.Nothing,
       id = Core.Nothing,
       method = Core.Nothing,
+      origin = Core.Nothing,
       path = Core.Nothing,
       protocol = Core.Nothing,
       query = Core.Nothing,
@@ -1413,14 +1464,13 @@ instance Core.FromJSON Request' where
             Core.<*> (o Core..:? "host")
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "method")
+            Core.<*> (o Core..:? "origin")
             Core.<*> (o Core..:? "path")
             Core.<*> (o Core..:? "protocol")
             Core.<*> (o Core..:? "query")
             Core.<*> (o Core..:? "reason")
             Core.<*> (o Core..:? "scheme")
-            Core.<*> ( o Core..:? "size"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "size" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "time")
       )
 
@@ -1433,6 +1483,7 @@ instance Core.ToJSON Request' where
             ("host" Core..=) Core.<$> host,
             ("id" Core..=) Core.<$> id,
             ("method" Core..=) Core.<$> method,
+            ("origin" Core..=) Core.<$> origin,
             ("path" Core..=) Core.<$> path,
             ("protocol" Core..=) Core.<$> protocol,
             ("query" Core..=) Core.<$> query,
@@ -1447,8 +1498,7 @@ instance Core.ToJSON Request' where
 --
 -- /See:/ 'newRequest_Headers' smart constructor.
 newtype Request_Headers = Request_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1457,15 +1507,14 @@ newRequest_Headers ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Request_Headers
-newRequest_Headers additional = Request_Headers {additional = additional}
+newRequest_Headers additional =
+  Request_Headers {additional = additional}
 
 instance Core.FromJSON Request_Headers where
   parseJSON =
     Core.withObject
       "Request_Headers"
-      ( \o ->
-          Request_Headers Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Request_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Request_Headers where
   toJSON Request_Headers {..} = Core.toJSON additional
@@ -1520,10 +1569,8 @@ instance Core.ToJSON RequestMetadata where
             ("callerNetwork" Core..=) Core.<$> callerNetwork,
             ("callerSuppliedUserAgent" Core..=)
               Core.<$> callerSuppliedUserAgent,
-            ("destinationAttributes" Core..=)
-              Core.<$> destinationAttributes,
-            ("requestAttributes" Core..=)
-              Core.<$> requestAttributes
+            ("destinationAttributes" Core..=) Core.<$> destinationAttributes,
+            ("requestAttributes" Core..=) Core.<$> requestAttributes
           ]
       )
 
@@ -1620,8 +1667,7 @@ instance Core.ToJSON Resource where
 --
 -- /See:/ 'newResource_Annotations' smart constructor.
 newtype Resource_Annotations = Resource_Annotations
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1637,21 +1683,16 @@ instance Core.FromJSON Resource_Annotations where
   parseJSON =
     Core.withObject
       "Resource_Annotations"
-      ( \o ->
-          Resource_Annotations
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Resource_Annotations Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Resource_Annotations where
-  toJSON Resource_Annotations {..} =
-    Core.toJSON additional
+  toJSON Resource_Annotations {..} = Core.toJSON additional
 
 -- | The labels or tags on the resource, such as AWS resource tags and Kubernetes resource labels.
 --
 -- /See:/ 'newResource_Labels' smart constructor.
 newtype Resource_Labels = Resource_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1660,15 +1701,14 @@ newResource_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Resource_Labels
-newResource_Labels additional = Resource_Labels {additional = additional}
+newResource_Labels additional =
+  Resource_Labels {additional = additional}
 
 instance Core.FromJSON Resource_Labels where
   parseJSON =
     Core.withObject
       "Resource_Labels"
-      ( \o ->
-          Resource_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Resource_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Resource_Labels where
   toJSON Resource_Labels {..} = Core.toJSON additional
@@ -1677,9 +1717,9 @@ instance Core.ToJSON Resource_Labels where
 --
 -- /See:/ 'newResourceInfo' smart constructor.
 data ResourceInfo = ResourceInfo
-  { -- | Optional. The identifier of the container of this resource. For Google Cloud APIs, the resource container must be one of the following formats: - @projects\/@ - @folders\/@ - @organizations\/@ For the policy enforcement on the container level (VPCSC and Location Policy check), this field takes precedence on the container extracted from name when presents.
+  { -- | Optional. The identifier of the container of this resource. For Google Cloud APIs, the resource container must be one of the following formats: - @projects\/@ - @folders\/@ - @organizations\/@ Required for the policy enforcement on the container level (e.g. VPCSC, Location Policy check, Org Policy check).
     container :: (Core.Maybe Core.Text),
-    -- | Optional. The location of the resource. The value must be a valid zone, region or multiregion. For example: \"europe-west4\" or \"northamerica-northeast1-a\"
+    -- | Optional. The location of the resource, it must be a valid zone, region or multiregion, for example: \"europe-west4\", \"northamerica-northeast1-a\". Required for location policy check.
     location :: (Core.Maybe Core.Text),
     -- | The name of the resource referenced in the request.
     name :: (Core.Maybe Core.Text),
@@ -1761,10 +1801,8 @@ instance Core.ToJSON ResourceLocation where
   toJSON ResourceLocation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("currentLocations" Core..=)
-              Core.<$> currentLocations,
-            ("originalLocations" Core..=)
-              Core.<$> originalLocations
+          [ ("currentLocations" Core..=) Core.<$> currentLocations,
+            ("originalLocations" Core..=) Core.<$> originalLocations
           ]
       )
 
@@ -1804,13 +1842,9 @@ instance Core.FromJSON Response where
       ( \o ->
           Response
             Core.<$> (o Core..:? "backendLatency")
-            Core.<*> ( o Core..:? "code"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "code" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "headers")
-            Core.<*> ( o Core..:? "size"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "size" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "time")
       )
 
@@ -1830,8 +1864,7 @@ instance Core.ToJSON Response where
 --
 -- /See:/ 'newResponse_Headers' smart constructor.
 newtype Response_Headers = Response_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1840,15 +1873,14 @@ newResponse_Headers ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Response_Headers
-newResponse_Headers additional = Response_Headers {additional = additional}
+newResponse_Headers additional =
+  Response_Headers {additional = additional}
 
 instance Core.FromJSON Response_Headers where
   parseJSON =
     Core.withObject
       "Response_Headers"
-      ( \o ->
-          Response_Headers Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Response_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Response_Headers where
   toJSON Response_Headers {..} = Core.toJSON additional
@@ -1891,14 +1923,122 @@ instance Core.ToJSON ServiceAccountDelegationInfo where
   toJSON ServiceAccountDelegationInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("firstPartyPrincipal" Core..=)
-              Core.<$> firstPartyPrincipal,
-            ("principalSubject" Core..=)
-              Core.<$> principalSubject,
-            ("thirdPartyPrincipal" Core..=)
-              Core.<$> thirdPartyPrincipal
+          [ ("firstPartyPrincipal" Core..=) Core.<$> firstPartyPrincipal,
+            ("principalSubject" Core..=) Core.<$> principalSubject,
+            ("thirdPartyPrincipal" Core..=) Core.<$> thirdPartyPrincipal
           ]
       )
+
+-- | The history of delegation across multiple services as the result of the original user\'s action. Such as \"service A uses its own account to do something for user B\". This differs from ServiceAccountDelegationInfo, which only tracks the history of direct token exchanges (impersonation).
+--
+-- /See:/ 'newServiceDelegationHistory' smart constructor.
+data ServiceDelegationHistory = ServiceDelegationHistory
+  { -- | The original end user who initiated the request to GCP.
+    originalPrincipal :: (Core.Maybe Core.Text),
+    -- | Data identifying the service specific jobs or units of work that were involved in a chain of service calls.
+    serviceMetadata :: (Core.Maybe [ServiceMetadata])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceDelegationHistory' with the minimum fields required to make a request.
+newServiceDelegationHistory ::
+  ServiceDelegationHistory
+newServiceDelegationHistory =
+  ServiceDelegationHistory
+    { originalPrincipal = Core.Nothing,
+      serviceMetadata = Core.Nothing
+    }
+
+instance Core.FromJSON ServiceDelegationHistory where
+  parseJSON =
+    Core.withObject
+      "ServiceDelegationHistory"
+      ( \o ->
+          ServiceDelegationHistory
+            Core.<$> (o Core..:? "originalPrincipal")
+            Core.<*> (o Core..:? "serviceMetadata")
+      )
+
+instance Core.ToJSON ServiceDelegationHistory where
+  toJSON ServiceDelegationHistory {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("originalPrincipal" Core..=) Core.<$> originalPrincipal,
+            ("serviceMetadata" Core..=) Core.<$> serviceMetadata
+          ]
+      )
+
+-- | Metadata describing the service and additional service specific information used to identify the job or unit of work at hand.
+--
+-- /See:/ 'newServiceMetadata' smart constructor.
+data ServiceMetadata = ServiceMetadata
+  { -- | Additional metadata provided by service teams to describe service specific job information that was triggered by the original principal.
+    jobMetadata :: (Core.Maybe ServiceMetadata_JobMetadata),
+    -- | A string representing the principal/subject associated with the identity. For most identities, the format will be @principal:\/\/iam.googleapis.com\/{identity pool name}\/subject\/{subject)@ except for some GKE identities (GKE/WORKLOAD, FREEFORM, GKE/HUB/WORKLOAD) that are still in the legacy format @serviceAccount:{identity pool name}[{subject}]@ If the identity is a Google account (e.g. workspace user account or service account), this will be the email of the prefixed by @serviceAccount:@. For example: @serviceAccount:my-service-account\@project-1.iam.gserviceaccount.com@. If the identity is an individual user, the identity will be formatted as: @user:user_ABC\@email.com@.
+    principalSubject :: (Core.Maybe Core.Text),
+    -- | The service\'s fully qualified domain name, e.g. \"dataproc.googleapis.com\".
+    serviceDomain :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceMetadata' with the minimum fields required to make a request.
+newServiceMetadata ::
+  ServiceMetadata
+newServiceMetadata =
+  ServiceMetadata
+    { jobMetadata = Core.Nothing,
+      principalSubject = Core.Nothing,
+      serviceDomain = Core.Nothing
+    }
+
+instance Core.FromJSON ServiceMetadata where
+  parseJSON =
+    Core.withObject
+      "ServiceMetadata"
+      ( \o ->
+          ServiceMetadata
+            Core.<$> (o Core..:? "jobMetadata")
+            Core.<*> (o Core..:? "principalSubject")
+            Core.<*> (o Core..:? "serviceDomain")
+      )
+
+instance Core.ToJSON ServiceMetadata where
+  toJSON ServiceMetadata {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("jobMetadata" Core..=) Core.<$> jobMetadata,
+            ("principalSubject" Core..=) Core.<$> principalSubject,
+            ("serviceDomain" Core..=) Core.<$> serviceDomain
+          ]
+      )
+
+-- | Additional metadata provided by service teams to describe service specific job information that was triggered by the original principal.
+--
+-- /See:/ 'newServiceMetadata_JobMetadata' smart constructor.
+newtype ServiceMetadata_JobMetadata = ServiceMetadata_JobMetadata
+  { -- | Properties of the object.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ServiceMetadata_JobMetadata' with the minimum fields required to make a request.
+newServiceMetadata_JobMetadata ::
+  -- |  Properties of the object. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  ServiceMetadata_JobMetadata
+newServiceMetadata_JobMetadata additional =
+  ServiceMetadata_JobMetadata {additional = additional}
+
+instance Core.FromJSON ServiceMetadata_JobMetadata where
+  parseJSON =
+    Core.withObject
+      "ServiceMetadata_JobMetadata"
+      ( \o ->
+          ServiceMetadata_JobMetadata Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON ServiceMetadata_JobMetadata where
+  toJSON ServiceMetadata_JobMetadata {..} = Core.toJSON additional
 
 -- | The context of a span. This is attached to an Exemplar in Distribution values during aggregation. It contains the name of a span with format: projects\/[PROJECT/ID/OR/NUMBER]\/traces\/[TRACE/ID]\/spans\/[SPAN_ID]
 --
@@ -1923,9 +2063,7 @@ instance Core.FromJSON SpanContext where
 instance Core.ToJSON SpanContext where
   toJSON SpanContext {..} =
     Core.object
-      ( Core.catMaybes
-          [("spanName" Core..=) Core.<$> spanName]
-      )
+      (Core.catMaybes [("spanName" Core..=) Core.<$> spanName])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -1944,7 +2082,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1980,19 +2122,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Third party identity principal.
 --
@@ -2006,24 +2146,22 @@ newtype ThirdPartyPrincipal = ThirdPartyPrincipal
 -- | Creates a value of 'ThirdPartyPrincipal' with the minimum fields required to make a request.
 newThirdPartyPrincipal ::
   ThirdPartyPrincipal
-newThirdPartyPrincipal = ThirdPartyPrincipal {thirdPartyClaims = Core.Nothing}
+newThirdPartyPrincipal =
+  ThirdPartyPrincipal {thirdPartyClaims = Core.Nothing}
 
 instance Core.FromJSON ThirdPartyPrincipal where
   parseJSON =
     Core.withObject
       "ThirdPartyPrincipal"
       ( \o ->
-          ThirdPartyPrincipal
-            Core.<$> (o Core..:? "thirdPartyClaims")
+          ThirdPartyPrincipal Core.<$> (o Core..:? "thirdPartyClaims")
       )
 
 instance Core.ToJSON ThirdPartyPrincipal where
   toJSON ThirdPartyPrincipal {..} =
     Core.object
       ( Core.catMaybes
-          [ ("thirdPartyClaims" Core..=)
-              Core.<$> thirdPartyClaims
-          ]
+          [("thirdPartyClaims" Core..=) Core.<$> thirdPartyClaims]
       )
 
 -- | Metadata about third party identity.
@@ -2043,10 +2181,7 @@ newThirdPartyPrincipal_ThirdPartyClaims ::
 newThirdPartyPrincipal_ThirdPartyClaims additional =
   ThirdPartyPrincipal_ThirdPartyClaims {additional = additional}
 
-instance
-  Core.FromJSON
-    ThirdPartyPrincipal_ThirdPartyClaims
-  where
+instance Core.FromJSON ThirdPartyPrincipal_ThirdPartyClaims where
   parseJSON =
     Core.withObject
       "ThirdPartyPrincipal_ThirdPartyClaims"
@@ -2055,10 +2190,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    ThirdPartyPrincipal_ThirdPartyClaims
-  where
+instance Core.ToJSON ThirdPartyPrincipal_ThirdPartyClaims where
   toJSON ThirdPartyPrincipal_ThirdPartyClaims {..} =
     Core.toJSON additional
 
@@ -2078,7 +2210,7 @@ data V2HttpRequest = V2HttpRequest
     latency :: (Core.Maybe Core.Duration),
     -- | Protocol used for the request. Examples: \"HTTP\/1.1\", \"HTTP\/2\", \"websocket\"
     protocol :: (Core.Maybe Core.Text),
-    -- | The referer URL of the request, as defined in <http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html HTTP\/1.1 Header Field Definitions>.
+    -- | The referer URL of the request, as defined in <https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html HTTP\/1.1 Header Field Definitions>.
     referer :: (Core.Maybe Core.Text),
     -- | The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: @\"192.168.1.1\"@, @\"FE80::0202:B3FF:FE1E:8329\"@.
     remoteIp :: (Core.Maybe Core.Text),
@@ -2127,9 +2259,7 @@ instance Core.FromJSON V2HttpRequest where
       "V2HttpRequest"
       ( \o ->
           V2HttpRequest
-            Core.<$> ( o Core..:? "cacheFillBytes"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "cacheFillBytes" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "cacheHit")
             Core.<*> (o Core..:? "cacheLookup")
             Core.<*> (o Core..:? "cacheValidatedWithOriginServer")
@@ -2138,13 +2268,9 @@ instance Core.FromJSON V2HttpRequest where
             Core.<*> (o Core..:? "referer")
             Core.<*> (o Core..:? "remoteIp")
             Core.<*> (o Core..:? "requestMethod")
-            Core.<*> ( o Core..:? "requestSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "requestSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "requestUrl")
-            Core.<*> ( o Core..:? "responseSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "responseSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "serverIp")
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "userAgent")
@@ -2154,7 +2280,8 @@ instance Core.ToJSON V2HttpRequest where
   toJSON V2HttpRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cacheFillBytes" Core..=) Core.. Core.AsText
+          [ ("cacheFillBytes" Core..=)
+              Core.. Core.AsText
               Core.<$> cacheFillBytes,
             ("cacheHit" Core..=) Core.<$> cacheHit,
             ("cacheLookup" Core..=) Core.<$> cacheLookup,
@@ -2165,11 +2292,9 @@ instance Core.ToJSON V2HttpRequest where
             ("referer" Core..=) Core.<$> referer,
             ("remoteIp" Core..=) Core.<$> remoteIp,
             ("requestMethod" Core..=) Core.<$> requestMethod,
-            ("requestSize" Core..=) Core.. Core.AsText
-              Core.<$> requestSize,
+            ("requestSize" Core..=) Core.. Core.AsText Core.<$> requestSize,
             ("requestUrl" Core..=) Core.<$> requestUrl,
-            ("responseSize" Core..=) Core.. Core.AsText
-              Core.<$> responseSize,
+            ("responseSize" Core..=) Core.. Core.AsText Core.<$> responseSize,
             ("serverIp" Core..=) Core.<$> serverIp,
             ("status" Core..=) Core.<$> status,
             ("userAgent" Core..=) Core.<$> userAgent
@@ -2275,8 +2400,7 @@ instance Core.ToJSON V2LogEntry where
 --
 -- /See:/ 'newV2LogEntry_Labels' smart constructor.
 newtype V2LogEntry_Labels = V2LogEntry_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2285,15 +2409,14 @@ newV2LogEntry_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   V2LogEntry_Labels
-newV2LogEntry_Labels additional = V2LogEntry_Labels {additional = additional}
+newV2LogEntry_Labels additional =
+  V2LogEntry_Labels {additional = additional}
 
 instance Core.FromJSON V2LogEntry_Labels where
   parseJSON =
     Core.withObject
       "V2LogEntry_Labels"
-      ( \o ->
-          V2LogEntry_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> V2LogEntry_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON V2LogEntry_Labels where
   toJSON V2LogEntry_Labels {..} = Core.toJSON additional
@@ -2302,8 +2425,7 @@ instance Core.ToJSON V2LogEntry_Labels where
 --
 -- /See:/ 'newV2LogEntry_MonitoredResourceLabels' smart constructor.
 newtype V2LogEntry_MonitoredResourceLabels = V2LogEntry_MonitoredResourceLabels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2315,10 +2437,7 @@ newV2LogEntry_MonitoredResourceLabels ::
 newV2LogEntry_MonitoredResourceLabels additional =
   V2LogEntry_MonitoredResourceLabels {additional = additional}
 
-instance
-  Core.FromJSON
-    V2LogEntry_MonitoredResourceLabels
-  where
+instance Core.FromJSON V2LogEntry_MonitoredResourceLabels where
   parseJSON =
     Core.withObject
       "V2LogEntry_MonitoredResourceLabels"
@@ -2327,10 +2446,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    V2LogEntry_MonitoredResourceLabels
-  where
+instance Core.ToJSON V2LogEntry_MonitoredResourceLabels where
   toJSON V2LogEntry_MonitoredResourceLabels {..} =
     Core.toJSON additional
 
@@ -2355,14 +2471,10 @@ instance Core.FromJSON V2LogEntry_ProtoPayload where
   parseJSON =
     Core.withObject
       "V2LogEntry_ProtoPayload"
-      ( \o ->
-          V2LogEntry_ProtoPayload
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> V2LogEntry_ProtoPayload Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON V2LogEntry_ProtoPayload where
-  toJSON V2LogEntry_ProtoPayload {..} =
-    Core.toJSON additional
+  toJSON V2LogEntry_ProtoPayload {..} = Core.toJSON additional
 
 -- | The log entry payload, represented as a structure that is expressed as a JSON object.
 --
@@ -2385,14 +2497,10 @@ instance Core.FromJSON V2LogEntry_StructPayload where
   parseJSON =
     Core.withObject
       "V2LogEntry_StructPayload"
-      ( \o ->
-          V2LogEntry_StructPayload
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> V2LogEntry_StructPayload Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON V2LogEntry_StructPayload where
-  toJSON V2LogEntry_StructPayload {..} =
-    Core.toJSON additional
+  toJSON V2LogEntry_StructPayload {..} = Core.toJSON additional
 
 -- | Additional information about a potentially long-running operation with which a log entry is associated.
 --
@@ -2474,9 +2582,7 @@ instance Core.FromJSON V2LogEntrySourceLocation where
           V2LogEntrySourceLocation
             Core.<$> (o Core..:? "file")
             Core.<*> (o Core..:? "function")
-            Core.<*> ( o Core..:? "line"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "line" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON V2LogEntrySourceLocation where
@@ -2488,6 +2594,96 @@ instance Core.ToJSON V2LogEntrySourceLocation where
             ("line" Core..=) Core.. Core.AsText Core.<$> line
           ]
       )
+
+-- | Report v2 extension proto for passing the resource metadata associated with a resource create\/update\/delete\/undelete event from ESF to Chemist. ResourceEvent proto should be serialized into the ReportRequest.operations.extensions.
+--
+-- /See:/ 'newV2ResourceEvent' smart constructor.
+data V2ResourceEvent = V2ResourceEvent
+  { -- | The ESF unique context id of the api request, from which this resource event originated. This field is only needed for CAIS integration via api annotation. See go\/cais-lro-delete for more details.
+    contextId :: (Core.Maybe Core.Int64),
+    -- | The destinations field determines which backend services should handle the event. This should be specified as a comma-delimited string.
+    destinations :: (Core.Maybe Core.Text),
+    -- | The parent resource for the resource.
+    parent :: (Core.Maybe Resource),
+    -- | The api path the resource event was created in. This should match the source of the @payload@ field. For direct integrations with Chemist, this should generally be the RESPONSE. go\/resource-event-pipeline-type
+    path :: (Core.Maybe V2ResourceEvent_Path),
+    -- | The payload contains metadata associated with the resource event. A ResourceEventPayloadStatus is provided instead if the original payload cannot be returned due to a limitation (e.g. size limit).
+    payload :: (Core.Maybe V2ResourceEvent_Payload),
+    -- | The resource associated with the event.
+    resource :: (Core.Maybe Resource),
+    -- | The resource event type determines how the backend service should process the event.
+    type' :: (Core.Maybe V2ResourceEvent_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'V2ResourceEvent' with the minimum fields required to make a request.
+newV2ResourceEvent ::
+  V2ResourceEvent
+newV2ResourceEvent =
+  V2ResourceEvent
+    { contextId = Core.Nothing,
+      destinations = Core.Nothing,
+      parent = Core.Nothing,
+      path = Core.Nothing,
+      payload = Core.Nothing,
+      resource = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON V2ResourceEvent where
+  parseJSON =
+    Core.withObject
+      "V2ResourceEvent"
+      ( \o ->
+          V2ResourceEvent
+            Core.<$> (o Core..:? "contextId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "destinations")
+            Core.<*> (o Core..:? "parent")
+            Core.<*> (o Core..:? "path")
+            Core.<*> (o Core..:? "payload")
+            Core.<*> (o Core..:? "resource")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON V2ResourceEvent where
+  toJSON V2ResourceEvent {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contextId" Core..=) Core.. Core.AsText Core.<$> contextId,
+            ("destinations" Core..=) Core.<$> destinations,
+            ("parent" Core..=) Core.<$> parent,
+            ("path" Core..=) Core.<$> path,
+            ("payload" Core..=) Core.<$> payload,
+            ("resource" Core..=) Core.<$> resource,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | The payload contains metadata associated with the resource event. A ResourceEventPayloadStatus is provided instead if the original payload cannot be returned due to a limitation (e.g. size limit).
+--
+-- /See:/ 'newV2ResourceEvent_Payload' smart constructor.
+newtype V2ResourceEvent_Payload = V2ResourceEvent_Payload
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'V2ResourceEvent_Payload' with the minimum fields required to make a request.
+newV2ResourceEvent_Payload ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  V2ResourceEvent_Payload
+newV2ResourceEvent_Payload additional =
+  V2ResourceEvent_Payload {additional = additional}
+
+instance Core.FromJSON V2ResourceEvent_Payload where
+  parseJSON =
+    Core.withObject
+      "V2ResourceEvent_Payload"
+      (\o -> V2ResourceEvent_Payload Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON V2ResourceEvent_Payload where
+  toJSON V2ResourceEvent_Payload {..} = Core.toJSON additional
 
 -- | Provides information about the Policy violation info for this request.
 --

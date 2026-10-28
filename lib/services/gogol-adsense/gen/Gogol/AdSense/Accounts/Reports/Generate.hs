@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSense.Accounts.Reports.Generate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSense.Accounts.Reports.Generate
 where
 
 import Gogol.AdSense.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsense.accounts.reports.generate@ method which the
 -- 'AdSenseAccountsReportsGenerate' request conforms to.
@@ -52,46 +50,26 @@ type AdSenseAccountsReportsGenerateResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currencyCode" Core.Text
-    Core.:> Core.QueryParam
-              "dateRange"
-              AccountsReportsGenerateDateRange
-    Core.:> Core.QueryParams
-              "dimensions"
-              AccountsReportsGenerateDimensions
+    Core.:> Core.QueryParam "dateRange" AccountsReportsGenerateDateRange
+    Core.:> Core.QueryParams "dimensions" AccountsReportsGenerateDimensions
     Core.:> Core.QueryParam "endDate.day" Core.Int32
     Core.:> Core.QueryParam "endDate.month" Core.Int32
     Core.:> Core.QueryParam "endDate.year" Core.Int32
     Core.:> Core.QueryParams "filters" Core.Text
     Core.:> Core.QueryParam "languageCode" Core.Text
     Core.:> Core.QueryParam "limit" Core.Int32
-    Core.:> Core.QueryParams
-              "metrics"
-              AccountsReportsGenerateMetrics
+    Core.:> Core.QueryParams "metrics" AccountsReportsGenerateMetrics
     Core.:> Core.QueryParams "orderBy" Core.Text
     Core.:> Core.QueryParam
               "reportingTimeZone"
               AccountsReportsGenerateReportingTimeZone
-    Core.:> Core.QueryParam
-              "startDate.day"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "startDate.month"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "startDate.year"
-              Core.Int32
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ReportResult
+    Core.:> Core.QueryParam "startDate.day" Core.Int32
+    Core.:> Core.QueryParam "startDate.month" Core.Int32
+    Core.:> Core.QueryParam "startDate.year" Core.Int32
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] ReportResult
 
 -- | Generates an ad hoc report.
 --
@@ -172,10 +150,7 @@ newAdSenseAccountsReportsGenerate account =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdSenseAccountsReportsGenerate
-  where
+instance Core.GoogleRequest AdSenseAccountsReportsGenerate where
   type Rs AdSenseAccountsReportsGenerate = ReportResult
   type
     Scopes AdSenseAccountsReportsGenerate =
@@ -208,7 +183,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdSenseAccountsReportsGenerateResource
-          )
+          (Core.Proxy :: Core.Proxy AdSenseAccountsReportsGenerateResource)
           Core.mempty

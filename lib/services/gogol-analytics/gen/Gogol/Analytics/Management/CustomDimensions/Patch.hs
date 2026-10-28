@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.CustomDimensions.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.CustomDimensions.Patch
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.customDimensions.patch@ method which the
 -- 'AnalyticsManagementCustomDimensionsPatch' request conforms to.
@@ -54,9 +52,7 @@ type AnalyticsManagementCustomDimensionsPatchResource =
     Core.:> Core.Capture "webPropertyId" Core.Text
     Core.:> "customDimensions"
     Core.:> Core.Capture "customDimensionId" Core.Text
-    Core.:> Core.QueryParam
-              "ignoreCustomDataSourceLinks"
-              Core.Bool
+    Core.:> Core.QueryParam "ignoreCustomDataSourceLinks" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] CustomDimension
     Core.:> Core.Patch '[Core.JSON] CustomDimension
@@ -89,40 +85,40 @@ newAnalyticsManagementCustomDimensionsPatch ::
   -- |  Web property ID for the custom dimension to update. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementCustomDimensionsPatch
-newAnalyticsManagementCustomDimensionsPatch accountId customDimensionId payload webPropertyId =
-  AnalyticsManagementCustomDimensionsPatch
-    { accountId = accountId,
-      customDimensionId = customDimensionId,
-      ignoreCustomDataSourceLinks = Core.False,
-      payload = payload,
-      webPropertyId = webPropertyId
-    }
+newAnalyticsManagementCustomDimensionsPatch
+  accountId
+  customDimensionId
+  payload
+  webPropertyId =
+    AnalyticsManagementCustomDimensionsPatch
+      { accountId = accountId,
+        customDimensionId = customDimensionId,
+        ignoreCustomDataSourceLinks = Core.False,
+        payload = payload,
+        webPropertyId = webPropertyId
+      }
 
 instance
   Core.GoogleRequest
     AnalyticsManagementCustomDimensionsPatch
   where
-  type
-    Rs AnalyticsManagementCustomDimensionsPatch =
-      CustomDimension
+  type Rs AnalyticsManagementCustomDimensionsPatch = CustomDimension
   type
     Scopes AnalyticsManagementCustomDimensionsPatch =
       '[Analytics'Edit]
-  requestClient
-    AnalyticsManagementCustomDimensionsPatch {..} =
-      go
-        accountId
-        webPropertyId
-        customDimensionId
-        (Core.Just ignoreCustomDataSourceLinks)
-        (Core.Just Core.AltJSON)
-        payload
-        analyticsService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementCustomDimensionsPatchResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementCustomDimensionsPatch {..} =
+    go
+      accountId
+      webPropertyId
+      customDimensionId
+      (Core.Just ignoreCustomDataSourceLinks)
+      (Core.Just Core.AltJSON)
+      payload
+      analyticsService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementCustomDimensionsPatchResource
+          )
+          Core.mempty

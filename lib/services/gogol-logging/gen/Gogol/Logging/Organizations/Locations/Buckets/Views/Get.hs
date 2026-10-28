@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Organizations.Locations.Buckets.Views.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a view on a log bucket..
+-- Gets a view on a log bucket.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.locations.buckets.views.get@.
 module Gogol.Logging.Organizations.Locations.Buckets.Views.Get
@@ -40,7 +38,7 @@ module Gogol.Logging.Organizations.Locations.Buckets.Views.Get
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.organizations.locations.buckets.views.get@ method which the
 -- 'LoggingOrganizationsLocationsBucketsViewsGet' request conforms to.
@@ -55,7 +53,7 @@ type LoggingOrganizationsLocationsBucketsViewsGetResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] LogView
 
--- | Gets a view on a log bucket..
+-- | Gets a view on a log bucket.
 --
 -- /See:/ 'newLoggingOrganizationsLocationsBucketsViewsGet' smart constructor.
 data LoggingOrganizationsLocationsBucketsViewsGet = LoggingOrganizationsLocationsBucketsViewsGet
@@ -81,7 +79,8 @@ newLoggingOrganizationsLocationsBucketsViewsGet ::
   LoggingOrganizationsLocationsBucketsViewsGet
 newLoggingOrganizationsLocationsBucketsViewsGet name =
   LoggingOrganizationsLocationsBucketsViewsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,33 +92,28 @@ instance
   Core.GoogleRequest
     LoggingOrganizationsLocationsBucketsViewsGet
   where
+  type Rs LoggingOrganizationsLocationsBucketsViewsGet = LogView
   type
-    Rs LoggingOrganizationsLocationsBucketsViewsGet =
-      LogView
-  type
-    Scopes
-      LoggingOrganizationsLocationsBucketsViewsGet =
+    Scopes LoggingOrganizationsLocationsBucketsViewsGet =
       '[ CloudPlatform'FullControl,
          CloudPlatform'ReadOnly,
          Logging'Admin,
          Logging'Read
        ]
-  requestClient
-    LoggingOrganizationsLocationsBucketsViewsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingOrganizationsLocationsBucketsViewsGetResource
-            )
-            Core.mempty
+  requestClient LoggingOrganizationsLocationsBucketsViewsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingOrganizationsLocationsBucketsViewsGetResource
+          )
+          Core.mempty

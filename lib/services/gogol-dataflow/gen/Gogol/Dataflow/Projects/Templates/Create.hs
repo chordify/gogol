@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Templates.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
+-- Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API. To create a job, we recommend using @projects.locations.templates.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.create@ is not recommended, because your job will always start in @us-central1@.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.templates.create@.
 module Gogol.Dataflow.Projects.Templates.Create
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Templates.Create
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.templates.create@ method which the
 -- 'DataflowProjectsTemplatesCreate' request conforms to.
@@ -55,12 +53,10 @@ type DataflowProjectsTemplatesCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              CreateJobFromTemplateRequest
+    Core.:> Core.ReqBody '[Core.JSON] CreateJobFromTemplateRequest
     Core.:> Core.Post '[Core.JSON] Job
 
--- | Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API.
+-- | Creates a Cloud Dataflow job from a template. Do not enter confidential information when you supply string values using the API. To create a job, we recommend using @projects.locations.templates.create@ with a [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints). Using @projects.templates.create@ is not recommended, because your job will always start in @us-central1@.
 --
 -- /See:/ 'newDataflowProjectsTemplatesCreate' smart constructor.
 data DataflowProjectsTemplatesCreate = DataflowProjectsTemplatesCreate
@@ -99,18 +95,11 @@ newDataflowProjectsTemplatesCreate payload projectId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataflowProjectsTemplatesCreate
-  where
+instance Core.GoogleRequest DataflowProjectsTemplatesCreate where
   type Rs DataflowProjectsTemplatesCreate = Job
   type
     Scopes DataflowProjectsTemplatesCreate =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient DataflowProjectsTemplatesCreate {..} =
     go
       projectId
@@ -125,7 +114,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataflowProjectsTemplatesCreateResource
-          )
+          (Core.Proxy :: Core.Proxy DataflowProjectsTemplatesCreateResource)
           Core.mempty

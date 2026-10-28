@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.LibraryAgent.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.LibraryAgent.Internal.Product
@@ -45,7 +43,7 @@ module Gogol.LibraryAgent.Internal.Product
 where
 
 import Gogol.LibraryAgent.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A single book in the library.
 --
@@ -73,10 +71,7 @@ newGoogleExampleLibraryagentV1Book =
       title = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleExampleLibraryagentV1Book
-  where
+instance Core.FromJSON GoogleExampleLibraryagentV1Book where
   parseJSON =
     Core.withObject
       "GoogleExampleLibraryagentV1Book"
@@ -115,14 +110,12 @@ newGoogleExampleLibraryagentV1ListBooksResponse ::
   GoogleExampleLibraryagentV1ListBooksResponse
 newGoogleExampleLibraryagentV1ListBooksResponse =
   GoogleExampleLibraryagentV1ListBooksResponse
-    { books = Core.Nothing,
+    { books =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleExampleLibraryagentV1ListBooksResponse
-  where
+instance Core.FromJSON GoogleExampleLibraryagentV1ListBooksResponse where
   parseJSON =
     Core.withObject
       "GoogleExampleLibraryagentV1ListBooksResponse"
@@ -132,18 +125,14 @@ instance
             Core.<*> (o Core..:? "nextPageToken")
       )
 
-instance
-  Core.ToJSON
-    GoogleExampleLibraryagentV1ListBooksResponse
-  where
-  toJSON
-    GoogleExampleLibraryagentV1ListBooksResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("books" Core..=) Core.<$> books,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken
-            ]
-        )
+instance Core.ToJSON GoogleExampleLibraryagentV1ListBooksResponse where
+  toJSON GoogleExampleLibraryagentV1ListBooksResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("books" Core..=) Core.<$> books,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
 
 -- | Response message for LibraryAgent.ListShelves.
 --
@@ -161,7 +150,8 @@ newGoogleExampleLibraryagentV1ListShelvesResponse ::
   GoogleExampleLibraryagentV1ListShelvesResponse
 newGoogleExampleLibraryagentV1ListShelvesResponse =
   GoogleExampleLibraryagentV1ListShelvesResponse
-    { nextPageToken = Core.Nothing,
+    { nextPageToken =
+        Core.Nothing,
       shelves = Core.Nothing
     }
 
@@ -175,21 +165,17 @@ instance
       ( \o ->
           GoogleExampleLibraryagentV1ListShelvesResponse
             Core.<$> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "shelves")
+            Core.<*> (o Core..:? "shelves")
       )
 
-instance
-  Core.ToJSON
-    GoogleExampleLibraryagentV1ListShelvesResponse
-  where
-  toJSON
-    GoogleExampleLibraryagentV1ListShelvesResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-              ("shelves" Core..=) Core.<$> shelves
-            ]
-        )
+instance Core.ToJSON GoogleExampleLibraryagentV1ListShelvesResponse where
+  toJSON GoogleExampleLibraryagentV1ListShelvesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("shelves" Core..=) Core.<$> shelves
+          ]
+      )
 
 -- | A Shelf contains a collection of books with a theme.
 --
@@ -206,25 +192,24 @@ data GoogleExampleLibraryagentV1Shelf = GoogleExampleLibraryagentV1Shelf
 newGoogleExampleLibraryagentV1Shelf ::
   GoogleExampleLibraryagentV1Shelf
 newGoogleExampleLibraryagentV1Shelf =
-  GoogleExampleLibraryagentV1Shelf {name = Core.Nothing, theme = Core.Nothing}
+  GoogleExampleLibraryagentV1Shelf
+    { name = Core.Nothing,
+      theme = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleExampleLibraryagentV1Shelf
-  where
+instance Core.FromJSON GoogleExampleLibraryagentV1Shelf where
   parseJSON =
     Core.withObject
       "GoogleExampleLibraryagentV1Shelf"
       ( \o ->
           GoogleExampleLibraryagentV1Shelf
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "theme")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "theme")
       )
 
 instance Core.ToJSON GoogleExampleLibraryagentV1Shelf where
   toJSON GoogleExampleLibraryagentV1Shelf {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("theme" Core..=) Core.<$> theme
-          ]
+          [("name" Core..=) Core.<$> name, ("theme" Core..=) Core.<$> theme]
       )

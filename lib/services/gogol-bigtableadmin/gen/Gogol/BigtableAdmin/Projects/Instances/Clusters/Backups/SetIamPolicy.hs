@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the access control policy on a Table resource. Replaces any existing policy.
+-- Sets the access control policy on a Bigtable resource. Replaces any existing policy.
 --
 -- /See:/ <https://cloud.google.com/bigtable/ Cloud Bigtable Admin API Reference> for @bigtableadmin.projects.instances.clusters.backups.setIamPolicy@.
 module Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
@@ -40,7 +38,7 @@ module Gogol.BigtableAdmin.Projects.Instances.Clusters.Backups.SetIamPolicy
 where
 
 import Gogol.BigtableAdmin.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigtableadmin.projects.instances.clusters.backups.setIamPolicy@ method which the
 -- 'BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy' request conforms to.
@@ -56,7 +54,7 @@ type BigtableAdminProjectsInstancesClustersBackupsSetIamPolicyResource =
     Core.:> Core.ReqBody '[Core.JSON] SetIamPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
--- | Sets the access control policy on a Table resource. Replaces any existing policy.
+-- | Sets the access control policy on a Bigtable resource. Replaces any existing policy.
 --
 -- /See:/ 'newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy' smart constructor.
 data BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy = BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
@@ -84,24 +82,26 @@ newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
-newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy payload resource =
-  BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
+  payload
+  resource =
+    BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy
   where
   type
-    Rs
-      BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy =
+    Rs BigtableAdminProjectsInstancesClustersBackupsSetIamPolicy =
       Policy
   type
     Scopes

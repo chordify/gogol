@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ProximityBeacon.Beaconinfo.Getforobserved
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ProximityBeacon.Beaconinfo.Getforobserved
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ProximityBeacon.Types
 
 -- | A resource alias for @proximitybeacon.beaconinfo.getforobserved@ method which the
@@ -53,12 +51,8 @@ type ProximityBeaconBeaconinfoGetforobservedResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GetInfoForObservedBeaconsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GetInfoForObservedBeaconsResponse
+    Core.:> Core.ReqBody '[Core.JSON] GetInfoForObservedBeaconsRequest
+    Core.:> Core.Post '[Core.JSON] GetInfoForObservedBeaconsResponse
 
 -- | Given one or more beacon observations, returns any beacon information and attachments accessible to your application. Authorize by using the <https://developers.google.com/beacons/proximity/get-started#request_a_browser_api_key API key> for the application.
 --
@@ -94,32 +88,25 @@ newProximityBeaconBeaconinfoGetforobserved payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ProximityBeaconBeaconinfoGetforobserved
-  where
+instance Core.GoogleRequest ProximityBeaconBeaconinfoGetforobserved where
   type
     Rs ProximityBeaconBeaconinfoGetforobserved =
       GetInfoForObservedBeaconsResponse
-  type
-    Scopes ProximityBeaconBeaconinfoGetforobserved =
-      '[]
-  requestClient
-    ProximityBeaconBeaconinfoGetforobserved {..} =
-      go
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        proximityBeaconService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ProximityBeaconBeaconinfoGetforobservedResource
-            )
-            Core.mempty
+  type Scopes ProximityBeaconBeaconinfoGetforobserved = '[]
+  requestClient ProximityBeaconBeaconinfoGetforobserved {..} =
+    go
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      proximityBeaconService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ProximityBeaconBeaconinfoGetforobservedResource
+          )
+          Core.mempty

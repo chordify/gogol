@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IdentityToolkit.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.IdentityToolkit.Internal.Product
@@ -205,7 +203,7 @@ module Gogol.IdentityToolkit.Internal.Product
 where
 
 import Gogol.IdentityToolkit.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Response of creating the IDP authentication URL.
 --
@@ -258,7 +256,8 @@ instance Core.FromJSON CreateAuthUriResponse where
             Core.<*> (o Core..:? "authUri")
             Core.<*> (o Core..:? "captchaRequired")
             Core.<*> (o Core..:? "forExistingProvider")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#CreateAuthUriResponse"
                      )
             Core.<*> (o Core..:? "providerId")
@@ -274,8 +273,7 @@ instance Core.ToJSON CreateAuthUriResponse where
           [ ("allProviders" Core..=) Core.<$> allProviders,
             ("authUri" Core..=) Core.<$> authUri,
             ("captchaRequired" Core..=) Core.<$> captchaRequired,
-            ("forExistingProvider" Core..=)
-              Core.<$> forExistingProvider,
+            ("forExistingProvider" Core..=) Core.<$> forExistingProvider,
             Core.Just ("kind" Core..= kind),
             ("providerId" Core..=) Core.<$> providerId,
             ("registered" Core..=) Core.<$> registered,
@@ -297,7 +295,10 @@ newtype DeleteAccountResponse = DeleteAccountResponse
 newDeleteAccountResponse ::
   DeleteAccountResponse
 newDeleteAccountResponse =
-  DeleteAccountResponse {kind = "identitytoolkit#DeleteAccountResponse"}
+  DeleteAccountResponse
+    { kind =
+        "identitytoolkit#DeleteAccountResponse"
+    }
 
 instance Core.FromJSON DeleteAccountResponse where
   parseJSON =
@@ -305,15 +306,15 @@ instance Core.FromJSON DeleteAccountResponse where
       "DeleteAccountResponse"
       ( \o ->
           DeleteAccountResponse
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#DeleteAccountResponse"
                      )
       )
 
 instance Core.ToJSON DeleteAccountResponse where
   toJSON DeleteAccountResponse {..} =
-    Core.object
-      (Core.catMaybes [Core.Just ("kind" Core..= kind)])
+    Core.object (Core.catMaybes [Core.Just ("kind" Core..= kind)])
 
 -- | Response of downloading accounts in batch.
 --
@@ -333,7 +334,8 @@ newDownloadAccountResponse ::
   DownloadAccountResponse
 newDownloadAccountResponse =
   DownloadAccountResponse
-    { kind = "identitytoolkit#DownloadAccountResponse",
+    { kind =
+        "identitytoolkit#DownloadAccountResponse",
       nextPageToken = Core.Nothing,
       users = Core.Nothing
     }
@@ -344,7 +346,8 @@ instance Core.FromJSON DownloadAccountResponse where
       "DownloadAccountResponse"
       ( \o ->
           DownloadAccountResponse
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#DownloadAccountResponse"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -403,12 +406,11 @@ instance Core.FromJSON EmailLinkSigninResponse where
       ( \o ->
           EmailLinkSigninResponse
             Core.<$> (o Core..:? "email")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idToken")
             Core.<*> (o Core..:? "isNewUser")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#EmailLinkSigninResponse"
                      )
             Core.<*> (o Core..:? "localId")
@@ -420,8 +422,7 @@ instance Core.ToJSON EmailLinkSigninResponse where
     Core.object
       ( Core.catMaybes
           [ ("email" Core..=) Core.<$> email,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("idToken" Core..=) Core.<$> idToken,
             ("isNewUser" Core..=) Core.<$> isNewUser,
             Core.Just ("kind" Core..= kind),
@@ -505,7 +506,8 @@ newGetAccountInfoResponse ::
   GetAccountInfoResponse
 newGetAccountInfoResponse =
   GetAccountInfoResponse
-    { kind = "identitytoolkit#GetAccountInfoResponse",
+    { kind =
+        "identitytoolkit#GetAccountInfoResponse",
       users = Core.Nothing
     }
 
@@ -515,7 +517,8 @@ instance Core.FromJSON GetAccountInfoResponse where
       "GetAccountInfoResponse"
       ( \o ->
           GetAccountInfoResponse
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#GetAccountInfoResponse"
                      )
             Core.<*> (o Core..:? "users")
@@ -560,7 +563,8 @@ instance Core.FromJSON GetOobConfirmationCodeResponse where
       ( \o ->
           GetOobConfirmationCodeResponse
             Core.<$> (o Core..:? "email")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#GetOobConfirmationCodeResponse"
                      )
             Core.<*> (o Core..:? "oobCode")
@@ -594,7 +598,8 @@ newGetRecaptchaParamResponse ::
   GetRecaptchaParamResponse
 newGetRecaptchaParamResponse =
   GetRecaptchaParamResponse
-    { kind = "identitytoolkit#GetRecaptchaParamResponse",
+    { kind =
+        "identitytoolkit#GetRecaptchaParamResponse",
       recaptchaSiteKey = Core.Nothing,
       recaptchaStoken = Core.Nothing
     }
@@ -605,7 +610,8 @@ instance Core.FromJSON GetRecaptchaParamResponse where
       "GetRecaptchaParamResponse"
       ( \o ->
           GetRecaptchaParamResponse
-            Core.<$> ( o Core..:? "kind"
+            Core.<$> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#GetRecaptchaParamResponse"
                      )
             Core.<*> (o Core..:? "recaptchaSiteKey")
@@ -617,10 +623,8 @@ instance Core.ToJSON GetRecaptchaParamResponse where
     Core.object
       ( Core.catMaybes
           [ Core.Just ("kind" Core..= kind),
-            ("recaptchaSiteKey" Core..=)
-              Core.<$> recaptchaSiteKey,
-            ("recaptchaStoken" Core..=)
-              Core.<$> recaptchaStoken
+            ("recaptchaSiteKey" Core..=) Core.<$> recaptchaSiteKey,
+            ("recaptchaStoken" Core..=) Core.<$> recaptchaStoken
           ]
       )
 
@@ -671,7 +675,8 @@ newIdentitytoolkitRelyingpartyCreateAuthUriRequest ::
   IdentitytoolkitRelyingpartyCreateAuthUriRequest
 newIdentitytoolkitRelyingpartyCreateAuthUriRequest =
   IdentitytoolkitRelyingpartyCreateAuthUriRequest
-    { appId = Core.Nothing,
+    { appId =
+        Core.Nothing,
       authFlowType = Core.Nothing,
       clientId = Core.Nothing,
       context = Core.Nothing,
@@ -699,53 +704,53 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyCreateAuthUriRequest
             Core.<$> (o Core..:? "appId")
-              Core.<*> (o Core..:? "authFlowType")
-              Core.<*> (o Core..:? "clientId")
-              Core.<*> (o Core..:? "context")
-              Core.<*> (o Core..:? "continueUri")
-              Core.<*> (o Core..:? "customParameter")
-              Core.<*> (o Core..:? "hostedDomain")
-              Core.<*> (o Core..:? "identifier")
-              Core.<*> (o Core..:? "oauthConsumerKey")
-              Core.<*> (o Core..:? "oauthScope")
-              Core.<*> (o Core..:? "openidRealm")
-              Core.<*> (o Core..:? "otaApp")
-              Core.<*> (o Core..:? "providerId")
-              Core.<*> (o Core..:? "sessionId")
-              Core.<*> (o Core..:? "tenantId")
-              Core.<*> ( o Core..:? "tenantProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "authFlowType")
+            Core.<*> (o Core..:? "clientId")
+            Core.<*> (o Core..:? "context")
+            Core.<*> (o Core..:? "continueUri")
+            Core.<*> (o Core..:? "customParameter")
+            Core.<*> (o Core..:? "hostedDomain")
+            Core.<*> (o Core..:? "identifier")
+            Core.<*> (o Core..:? "oauthConsumerKey")
+            Core.<*> (o Core..:? "oauthScope")
+            Core.<*> (o Core..:? "openidRealm")
+            Core.<*> (o Core..:? "otaApp")
+            Core.<*> (o Core..:? "providerId")
+            Core.<*> (o Core..:? "sessionId")
+            Core.<*> (o Core..:? "tenantId")
+            Core.<*> ( o
+                         Core..:? "tenantProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyCreateAuthUriRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyCreateAuthUriRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("appId" Core..=) Core.<$> appId,
-              ("authFlowType" Core..=) Core.<$> authFlowType,
-              ("clientId" Core..=) Core.<$> clientId,
-              ("context" Core..=) Core.<$> context,
-              ("continueUri" Core..=) Core.<$> continueUri,
-              ("customParameter" Core..=) Core.<$> customParameter,
-              ("hostedDomain" Core..=) Core.<$> hostedDomain,
-              ("identifier" Core..=) Core.<$> identifier,
-              ("oauthConsumerKey" Core..=)
-                Core.<$> oauthConsumerKey,
-              ("oauthScope" Core..=) Core.<$> oauthScope,
-              ("openidRealm" Core..=) Core.<$> openidRealm,
-              ("otaApp" Core..=) Core.<$> otaApp,
-              ("providerId" Core..=) Core.<$> providerId,
-              ("sessionId" Core..=) Core.<$> sessionId,
-              ("tenantId" Core..=) Core.<$> tenantId,
-              ("tenantProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> tenantProjectNumber
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyCreateAuthUriRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("appId" Core..=) Core.<$> appId,
+            ("authFlowType" Core..=) Core.<$> authFlowType,
+            ("clientId" Core..=) Core.<$> clientId,
+            ("context" Core..=) Core.<$> context,
+            ("continueUri" Core..=) Core.<$> continueUri,
+            ("customParameter" Core..=) Core.<$> customParameter,
+            ("hostedDomain" Core..=) Core.<$> hostedDomain,
+            ("identifier" Core..=) Core.<$> identifier,
+            ("oauthConsumerKey" Core..=) Core.<$> oauthConsumerKey,
+            ("oauthScope" Core..=) Core.<$> oauthScope,
+            ("openidRealm" Core..=) Core.<$> openidRealm,
+            ("otaApp" Core..=) Core.<$> otaApp,
+            ("providerId" Core..=) Core.<$> providerId,
+            ("sessionId" Core..=) Core.<$> sessionId,
+            ("tenantId" Core..=) Core.<$> tenantId,
+            ("tenantProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> tenantProjectNumber
+          ]
+      )
 
 -- | The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client/id, response/type, scope, redirect/uri, state, oauth/token.
 --
@@ -761,10 +766,12 @@ newIdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter ::
   -- |  The customized query parameter. See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
-newIdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter additional =
-  IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
-    { additional = additional
-    }
+newIdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
+  additional =
+    IdentitytoolkitRelyingpartyCreateAuthUriRequest_CustomParameter
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -804,7 +811,8 @@ newIdentitytoolkitRelyingpartyDeleteAccountRequest ::
   IdentitytoolkitRelyingpartyDeleteAccountRequest
 newIdentitytoolkitRelyingpartyDeleteAccountRequest =
   IdentitytoolkitRelyingpartyDeleteAccountRequest
-    { delegatedProjectNumber = Core.Nothing,
+    { delegatedProjectNumber =
+        Core.Nothing,
       idToken = Core.Nothing,
       localId = Core.Nothing
     }
@@ -818,28 +826,28 @@ instance
       "IdentitytoolkitRelyingpartyDeleteAccountRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyDeleteAccountRequest
-            Core.<$> ( o Core..:? "delegatedProjectNumber"
+            Core.<$> ( o
+                         Core..:? "delegatedProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "localId")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyDeleteAccountRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyDeleteAccountRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("delegatedProjectNumber" Core..=)
-                Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("localId" Core..=) Core.<$> localId
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyDeleteAccountRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("localId" Core..=) Core.<$> localId
+          ]
+      )
 
 -- | Request to download user account in batch.
 --
@@ -861,7 +869,8 @@ newIdentitytoolkitRelyingpartyDownloadAccountRequest ::
   IdentitytoolkitRelyingpartyDownloadAccountRequest
 newIdentitytoolkitRelyingpartyDownloadAccountRequest =
   IdentitytoolkitRelyingpartyDownloadAccountRequest
-    { delegatedProjectNumber = Core.Nothing,
+    { delegatedProjectNumber =
+        Core.Nothing,
       maxResults = Core.Nothing,
       nextPageToken = Core.Nothing,
       targetProjectId = Core.Nothing
@@ -876,31 +885,30 @@ instance
       "IdentitytoolkitRelyingpartyDownloadAccountRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyDownloadAccountRequest
-            Core.<$> ( o Core..:? "delegatedProjectNumber"
+            Core.<$> ( o
+                         Core..:? "delegatedProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-              Core.<*> (o Core..:? "maxResults")
-              Core.<*> (o Core..:? "nextPageToken")
-              Core.<*> (o Core..:? "targetProjectId")
+            Core.<*> (o Core..:? "maxResults")
+            Core.<*> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "targetProjectId")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyDownloadAccountRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyDownloadAccountRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("delegatedProjectNumber" Core..=)
-                Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("maxResults" Core..=) Core.<$> maxResults,
-              ("nextPageToken" Core..=) Core.<$> nextPageToken,
-              ("targetProjectId" Core..=)
-                Core.<$> targetProjectId
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyDownloadAccountRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("maxResults" Core..=) Core.<$> maxResults,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("targetProjectId" Core..=) Core.<$> targetProjectId
+          ]
+      )
 
 -- | Request to sign in with email.
 --
@@ -920,7 +928,8 @@ newIdentitytoolkitRelyingpartyEmailLinkSigninRequest ::
   IdentitytoolkitRelyingpartyEmailLinkSigninRequest
 newIdentitytoolkitRelyingpartyEmailLinkSigninRequest =
   IdentitytoolkitRelyingpartyEmailLinkSigninRequest
-    { email = Core.Nothing,
+    { email =
+        Core.Nothing,
       idToken = Core.Nothing,
       oobCode = Core.Nothing
     }
@@ -934,23 +943,23 @@ instance
       "IdentitytoolkitRelyingpartyEmailLinkSigninRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyEmailLinkSigninRequest
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "oobCode")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "oobCode")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyEmailLinkSigninRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyEmailLinkSigninRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("email" Core..=) Core.<$> email,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("oobCode" Core..=) Core.<$> oobCode
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyEmailLinkSigninRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("email" Core..=) Core.<$> email,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("oobCode" Core..=) Core.<$> oobCode
+          ]
+      )
 
 -- | Request to get the account information.
 --
@@ -974,7 +983,8 @@ newIdentitytoolkitRelyingpartyGetAccountInfoRequest ::
   IdentitytoolkitRelyingpartyGetAccountInfoRequest
 newIdentitytoolkitRelyingpartyGetAccountInfoRequest =
   IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    { delegatedProjectNumber = Core.Nothing,
+    { delegatedProjectNumber =
+        Core.Nothing,
       email = Core.Nothing,
       idToken = Core.Nothing,
       localId = Core.Nothing,
@@ -990,32 +1000,32 @@ instance
       "IdentitytoolkitRelyingpartyGetAccountInfoRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyGetAccountInfoRequest
-            Core.<$> ( o Core..:? "delegatedProjectNumber"
+            Core.<$> ( o
+                         Core..:? "delegatedProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-              Core.<*> (o Core..:? "email")
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "localId")
-              Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "email")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "phoneNumber")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyGetAccountInfoRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyGetAccountInfoRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("delegatedProjectNumber" Core..=)
-                Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("email" Core..=) Core.<$> email,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("localId" Core..=) Core.<$> localId,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyGetAccountInfoRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("email" Core..=) Core.<$> email,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("localId" Core..=) Core.<$> localId,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber
+          ]
+      )
 
 -- | Response of getting the project configuration.
 --
@@ -1029,7 +1039,6 @@ data IdentitytoolkitRelyingpartyGetProjectConfigResponse = IdentitytoolkitRelyin
     authorizedDomains :: (Core.Maybe [Core.Text]),
     -- | Change email template.
     changeEmailTemplate :: (Core.Maybe EmailTemplate),
-    -- |
     dynamicLinksDomain :: (Core.Maybe Core.Text),
     -- | Whether anonymous user is enabled.
     enableAnonymousUser :: (Core.Maybe Core.Bool),
@@ -1053,7 +1062,8 @@ newIdentitytoolkitRelyingpartyGetProjectConfigResponse ::
   IdentitytoolkitRelyingpartyGetProjectConfigResponse
 newIdentitytoolkitRelyingpartyGetProjectConfigResponse =
   IdentitytoolkitRelyingpartyGetProjectConfigResponse
-    { allowPasswordUser = Core.Nothing,
+    { allowPasswordUser =
+        Core.Nothing,
       apiKey = Core.Nothing,
       authorizedDomains = Core.Nothing,
       changeEmailTemplate = Core.Nothing,
@@ -1077,56 +1087,47 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyGetProjectConfigResponse
             Core.<$> (o Core..:? "allowPasswordUser")
-              Core.<*> (o Core..:? "apiKey")
-              Core.<*> (o Core..:? "authorizedDomains")
-              Core.<*> (o Core..:? "changeEmailTemplate")
-              Core.<*> (o Core..:? "dynamicLinksDomain")
-              Core.<*> (o Core..:? "enableAnonymousUser")
-              Core.<*> (o Core..:? "idpConfig")
-              Core.<*> (o Core..:? "legacyResetPasswordTemplate")
-              Core.<*> (o Core..:? "projectId")
-              Core.<*> (o Core..:? "resetPasswordTemplate")
-              Core.<*> (o Core..:? "useEmailSending")
-              Core.<*> (o Core..:? "verifyEmailTemplate")
+            Core.<*> (o Core..:? "apiKey")
+            Core.<*> (o Core..:? "authorizedDomains")
+            Core.<*> (o Core..:? "changeEmailTemplate")
+            Core.<*> (o Core..:? "dynamicLinksDomain")
+            Core.<*> (o Core..:? "enableAnonymousUser")
+            Core.<*> (o Core..:? "idpConfig")
+            Core.<*> (o Core..:? "legacyResetPasswordTemplate")
+            Core.<*> (o Core..:? "projectId")
+            Core.<*> (o Core..:? "resetPasswordTemplate")
+            Core.<*> (o Core..:? "useEmailSending")
+            Core.<*> (o Core..:? "verifyEmailTemplate")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyGetProjectConfigResponse
   where
-  toJSON
-    IdentitytoolkitRelyingpartyGetProjectConfigResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("allowPasswordUser" Core..=)
-                Core.<$> allowPasswordUser,
-              ("apiKey" Core..=) Core.<$> apiKey,
-              ("authorizedDomains" Core..=)
-                Core.<$> authorizedDomains,
-              ("changeEmailTemplate" Core..=)
-                Core.<$> changeEmailTemplate,
-              ("dynamicLinksDomain" Core..=)
-                Core.<$> dynamicLinksDomain,
-              ("enableAnonymousUser" Core..=)
-                Core.<$> enableAnonymousUser,
-              ("idpConfig" Core..=) Core.<$> idpConfig,
-              ("legacyResetPasswordTemplate" Core..=)
-                Core.<$> legacyResetPasswordTemplate,
-              ("projectId" Core..=) Core.<$> projectId,
-              ("resetPasswordTemplate" Core..=)
-                Core.<$> resetPasswordTemplate,
-              ("useEmailSending" Core..=) Core.<$> useEmailSending,
-              ("verifyEmailTemplate" Core..=)
-                Core.<$> verifyEmailTemplate
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyGetProjectConfigResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowPasswordUser" Core..=) Core.<$> allowPasswordUser,
+            ("apiKey" Core..=) Core.<$> apiKey,
+            ("authorizedDomains" Core..=) Core.<$> authorizedDomains,
+            ("changeEmailTemplate" Core..=) Core.<$> changeEmailTemplate,
+            ("dynamicLinksDomain" Core..=) Core.<$> dynamicLinksDomain,
+            ("enableAnonymousUser" Core..=) Core.<$> enableAnonymousUser,
+            ("idpConfig" Core..=) Core.<$> idpConfig,
+            ("legacyResetPasswordTemplate" Core..=)
+              Core.<$> legacyResetPasswordTemplate,
+            ("projectId" Core..=) Core.<$> projectId,
+            ("resetPasswordTemplate" Core..=) Core.<$> resetPasswordTemplate,
+            ("useEmailSending" Core..=) Core.<$> useEmailSending,
+            ("verifyEmailTemplate" Core..=) Core.<$> verifyEmailTemplate
+          ]
+      )
 
 -- | Respone of getting public keys.
 --
 -- /See:/ 'newIdentitytoolkitRelyingpartyGetPublicKeysResponse' smart constructor.
 newtype IdentitytoolkitRelyingpartyGetPublicKeysResponse = IdentitytoolkitRelyingpartyGetPublicKeysResponse
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1136,7 +1137,10 @@ newIdentitytoolkitRelyingpartyGetPublicKeysResponse ::
   Core.HashMap Core.Text Core.Text ->
   IdentitytoolkitRelyingpartyGetPublicKeysResponse
 newIdentitytoolkitRelyingpartyGetPublicKeysResponse additional =
-  IdentitytoolkitRelyingpartyGetPublicKeysResponse {additional = additional}
+  IdentitytoolkitRelyingpartyGetPublicKeysResponse
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -1154,9 +1158,8 @@ instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyGetPublicKeysResponse
   where
-  toJSON
-    IdentitytoolkitRelyingpartyGetPublicKeysResponse {..} =
-      Core.toJSON additional
+  toJSON IdentitytoolkitRelyingpartyGetPublicKeysResponse {..} =
+    Core.toJSON additional
 
 -- | Request to reset the password.
 --
@@ -1178,7 +1181,8 @@ newIdentitytoolkitRelyingpartyResetPasswordRequest ::
   IdentitytoolkitRelyingpartyResetPasswordRequest
 newIdentitytoolkitRelyingpartyResetPasswordRequest =
   IdentitytoolkitRelyingpartyResetPasswordRequest
-    { email = Core.Nothing,
+    { email =
+        Core.Nothing,
       newPassword' = Core.Nothing,
       oldPassword = Core.Nothing,
       oobCode = Core.Nothing
@@ -1194,25 +1198,24 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyResetPasswordRequest
             Core.<$> (o Core..:? "email")
-              Core.<*> (o Core..:? "newPassword")
-              Core.<*> (o Core..:? "oldPassword")
-              Core.<*> (o Core..:? "oobCode")
+            Core.<*> (o Core..:? "newPassword")
+            Core.<*> (o Core..:? "oldPassword")
+            Core.<*> (o Core..:? "oobCode")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyResetPasswordRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyResetPasswordRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("email" Core..=) Core.<$> email,
-              ("newPassword" Core..=) Core.<$> newPassword',
-              ("oldPassword" Core..=) Core.<$> oldPassword,
-              ("oobCode" Core..=) Core.<$> oobCode
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyResetPasswordRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("email" Core..=) Core.<$> email,
+            ("newPassword" Core..=) Core.<$> newPassword',
+            ("oldPassword" Core..=) Core.<$> oldPassword,
+            ("oobCode" Core..=) Core.<$> oobCode
+          ]
+      )
 
 -- | Request for Identitytoolkit-SendVerificationCode
 --
@@ -1234,7 +1237,8 @@ newIdentitytoolkitRelyingpartySendVerificationCodeRequest ::
   IdentitytoolkitRelyingpartySendVerificationCodeRequest
 newIdentitytoolkitRelyingpartySendVerificationCodeRequest =
   IdentitytoolkitRelyingpartySendVerificationCodeRequest
-    { iosReceipt = Core.Nothing,
+    { iosReceipt =
+        Core.Nothing,
       iosSecret = Core.Nothing,
       phoneNumber = Core.Nothing,
       recaptchaToken = Core.Nothing
@@ -1250,25 +1254,24 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartySendVerificationCodeRequest
             Core.<$> (o Core..:? "iosReceipt")
-              Core.<*> (o Core..:? "iosSecret")
-              Core.<*> (o Core..:? "phoneNumber")
-              Core.<*> (o Core..:? "recaptchaToken")
+            Core.<*> (o Core..:? "iosSecret")
+            Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "recaptchaToken")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySendVerificationCodeRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartySendVerificationCodeRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("iosReceipt" Core..=) Core.<$> iosReceipt,
-              ("iosSecret" Core..=) Core.<$> iosSecret,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber,
-              ("recaptchaToken" Core..=) Core.<$> recaptchaToken
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartySendVerificationCodeRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("iosReceipt" Core..=) Core.<$> iosReceipt,
+            ("iosSecret" Core..=) Core.<$> iosSecret,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber,
+            ("recaptchaToken" Core..=) Core.<$> recaptchaToken
+          ]
+      )
 
 -- | Response for Identitytoolkit-SendVerificationCode
 --
@@ -1284,7 +1287,8 @@ newIdentitytoolkitRelyingpartySendVerificationCodeResponse ::
   IdentitytoolkitRelyingpartySendVerificationCodeResponse
 newIdentitytoolkitRelyingpartySendVerificationCodeResponse =
   IdentitytoolkitRelyingpartySendVerificationCodeResponse
-    { sessionInfo = Core.Nothing
+    { sessionInfo =
+        Core.Nothing
     }
 
 instance
@@ -1303,12 +1307,9 @@ instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySendVerificationCodeResponse
   where
-  toJSON
-    IdentitytoolkitRelyingpartySendVerificationCodeResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("sessionInfo" Core..=) Core.<$> sessionInfo]
-        )
+  toJSON IdentitytoolkitRelyingpartySendVerificationCodeResponse {..} =
+    Core.object
+      (Core.catMaybes [("sessionInfo" Core..=) Core.<$> sessionInfo])
 
 -- | Request to set the account information.
 --
@@ -1368,7 +1369,8 @@ newIdentitytoolkitRelyingpartySetAccountInfoRequest ::
   IdentitytoolkitRelyingpartySetAccountInfoRequest
 newIdentitytoolkitRelyingpartySetAccountInfoRequest =
   IdentitytoolkitRelyingpartySetAccountInfoRequest
-    { captchaChallenge = Core.Nothing,
+    { captchaChallenge =
+        Core.Nothing,
       captchaResponse = Core.Nothing,
       createdAt = Core.Nothing,
       customAttributes = Core.Nothing,
@@ -1403,79 +1405,68 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartySetAccountInfoRequest
             Core.<$> (o Core..:? "captchaChallenge")
-              Core.<*> (o Core..:? "captchaResponse")
-              Core.<*> ( o Core..:? "createdAt"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "customAttributes")
-              Core.<*> ( o Core..:? "delegatedProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "deleteAttribute")
-              Core.<*> (o Core..:? "deleteProvider")
-              Core.<*> (o Core..:? "disableUser")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "email")
-              Core.<*> (o Core..:? "emailVerified")
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> ( o Core..:? "lastLoginAt"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "localId")
-              Core.<*> (o Core..:? "oobCode")
-              Core.<*> (o Core..:? "password")
-              Core.<*> (o Core..:? "phoneNumber")
-              Core.<*> (o Core..:? "photoUrl")
-              Core.<*> (o Core..:? "provider")
-              Core.<*> (o Core..:? "returnSecureToken")
-              Core.<*> (o Core..:? "upgradeToFederatedLogin")
-              Core.<*> ( o Core..:? "validSince"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "captchaResponse")
+            Core.<*> (o Core..:? "createdAt" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "customAttributes")
+            Core.<*> ( o
+                         Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "deleteAttribute")
+            Core.<*> (o Core..:? "deleteProvider")
+            Core.<*> (o Core..:? "disableUser")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "email")
+            Core.<*> (o Core..:? "emailVerified")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "lastLoginAt" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "oobCode")
+            Core.<*> (o Core..:? "password")
+            Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "photoUrl")
+            Core.<*> (o Core..:? "provider")
+            Core.<*> (o Core..:? "returnSecureToken")
+            Core.<*> (o Core..:? "upgradeToFederatedLogin")
+            Core.<*> (o Core..:? "validSince" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySetAccountInfoRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartySetAccountInfoRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("captchaChallenge" Core..=)
-                Core.<$> captchaChallenge,
-              ("captchaResponse" Core..=) Core.<$> captchaResponse,
-              ("createdAt" Core..=) Core.. Core.AsText
-                Core.<$> createdAt,
-              ("customAttributes" Core..=)
-                Core.<$> customAttributes,
-              ("delegatedProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("deleteAttribute" Core..=) Core.<$> deleteAttribute,
-              ("deleteProvider" Core..=) Core.<$> deleteProvider,
-              ("disableUser" Core..=) Core.<$> disableUser,
-              ("displayName" Core..=) Core.<$> displayName,
-              ("email" Core..=) Core.<$> email,
-              ("emailVerified" Core..=) Core.<$> emailVerified,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("instanceId" Core..=) Core.<$> instanceId,
-              ("lastLoginAt" Core..=) Core.. Core.AsText
-                Core.<$> lastLoginAt,
-              ("localId" Core..=) Core.<$> localId,
-              ("oobCode" Core..=) Core.<$> oobCode,
-              ("password" Core..=) Core.<$> password,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber,
-              ("photoUrl" Core..=) Core.<$> photoUrl,
-              ("provider" Core..=) Core.<$> provider,
-              ("returnSecureToken" Core..=)
-                Core.<$> returnSecureToken,
-              ("upgradeToFederatedLogin" Core..=)
-                Core.<$> upgradeToFederatedLogin,
-              ("validSince" Core..=) Core.. Core.AsText
-                Core.<$> validSince
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartySetAccountInfoRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("captchaChallenge" Core..=) Core.<$> captchaChallenge,
+            ("captchaResponse" Core..=) Core.<$> captchaResponse,
+            ("createdAt" Core..=) Core.. Core.AsText Core.<$> createdAt,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
+            ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("deleteAttribute" Core..=) Core.<$> deleteAttribute,
+            ("deleteProvider" Core..=) Core.<$> deleteProvider,
+            ("disableUser" Core..=) Core.<$> disableUser,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("email" Core..=) Core.<$> email,
+            ("emailVerified" Core..=) Core.<$> emailVerified,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("instanceId" Core..=) Core.<$> instanceId,
+            ("lastLoginAt" Core..=) Core.. Core.AsText Core.<$> lastLoginAt,
+            ("localId" Core..=) Core.<$> localId,
+            ("oobCode" Core..=) Core.<$> oobCode,
+            ("password" Core..=) Core.<$> password,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber,
+            ("photoUrl" Core..=) Core.<$> photoUrl,
+            ("provider" Core..=) Core.<$> provider,
+            ("returnSecureToken" Core..=) Core.<$> returnSecureToken,
+            ("upgradeToFederatedLogin" Core..=)
+              Core.<$> upgradeToFederatedLogin,
+            ("validSince" Core..=) Core.. Core.AsText Core.<$> validSince
+          ]
+      )
 
 -- | Request to set the project configuration.
 --
@@ -1511,7 +1502,8 @@ newIdentitytoolkitRelyingpartySetProjectConfigRequest ::
   IdentitytoolkitRelyingpartySetProjectConfigRequest
 newIdentitytoolkitRelyingpartySetProjectConfigRequest =
   IdentitytoolkitRelyingpartySetProjectConfigRequest
-    { allowPasswordUser = Core.Nothing,
+    { allowPasswordUser =
+        Core.Nothing,
       apiKey = Core.Nothing,
       authorizedDomains = Core.Nothing,
       changeEmailTemplate = Core.Nothing,
@@ -1534,49 +1526,44 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartySetProjectConfigRequest
             Core.<$> (o Core..:? "allowPasswordUser")
-              Core.<*> (o Core..:? "apiKey")
-              Core.<*> (o Core..:? "authorizedDomains")
-              Core.<*> (o Core..:? "changeEmailTemplate")
-              Core.<*> ( o Core..:? "delegatedProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "enableAnonymousUser")
-              Core.<*> (o Core..:? "idpConfig")
-              Core.<*> (o Core..:? "legacyResetPasswordTemplate")
-              Core.<*> (o Core..:? "resetPasswordTemplate")
-              Core.<*> (o Core..:? "useEmailSending")
-              Core.<*> (o Core..:? "verifyEmailTemplate")
+            Core.<*> (o Core..:? "apiKey")
+            Core.<*> (o Core..:? "authorizedDomains")
+            Core.<*> (o Core..:? "changeEmailTemplate")
+            Core.<*> ( o
+                         Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "enableAnonymousUser")
+            Core.<*> (o Core..:? "idpConfig")
+            Core.<*> (o Core..:? "legacyResetPasswordTemplate")
+            Core.<*> (o Core..:? "resetPasswordTemplate")
+            Core.<*> (o Core..:? "useEmailSending")
+            Core.<*> (o Core..:? "verifyEmailTemplate")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySetProjectConfigRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartySetProjectConfigRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("allowPasswordUser" Core..=)
-                Core.<$> allowPasswordUser,
-              ("apiKey" Core..=) Core.<$> apiKey,
-              ("authorizedDomains" Core..=)
-                Core.<$> authorizedDomains,
-              ("changeEmailTemplate" Core..=)
-                Core.<$> changeEmailTemplate,
-              ("delegatedProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("enableAnonymousUser" Core..=)
-                Core.<$> enableAnonymousUser,
-              ("idpConfig" Core..=) Core.<$> idpConfig,
-              ("legacyResetPasswordTemplate" Core..=)
-                Core.<$> legacyResetPasswordTemplate,
-              ("resetPasswordTemplate" Core..=)
-                Core.<$> resetPasswordTemplate,
-              ("useEmailSending" Core..=) Core.<$> useEmailSending,
-              ("verifyEmailTemplate" Core..=)
-                Core.<$> verifyEmailTemplate
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartySetProjectConfigRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowPasswordUser" Core..=) Core.<$> allowPasswordUser,
+            ("apiKey" Core..=) Core.<$> apiKey,
+            ("authorizedDomains" Core..=) Core.<$> authorizedDomains,
+            ("changeEmailTemplate" Core..=) Core.<$> changeEmailTemplate,
+            ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("enableAnonymousUser" Core..=) Core.<$> enableAnonymousUser,
+            ("idpConfig" Core..=) Core.<$> idpConfig,
+            ("legacyResetPasswordTemplate" Core..=)
+              Core.<$> legacyResetPasswordTemplate,
+            ("resetPasswordTemplate" Core..=) Core.<$> resetPasswordTemplate,
+            ("useEmailSending" Core..=) Core.<$> useEmailSending,
+            ("verifyEmailTemplate" Core..=) Core.<$> verifyEmailTemplate
+          ]
+      )
 
 -- | Response of setting the project configuration.
 --
@@ -1591,7 +1578,10 @@ newtype IdentitytoolkitRelyingpartySetProjectConfigResponse = IdentitytoolkitRel
 newIdentitytoolkitRelyingpartySetProjectConfigResponse ::
   IdentitytoolkitRelyingpartySetProjectConfigResponse
 newIdentitytoolkitRelyingpartySetProjectConfigResponse =
-  IdentitytoolkitRelyingpartySetProjectConfigResponse {projectId = Core.Nothing}
+  IdentitytoolkitRelyingpartySetProjectConfigResponse
+    { projectId =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -1609,12 +1599,9 @@ instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySetProjectConfigResponse
   where
-  toJSON
-    IdentitytoolkitRelyingpartySetProjectConfigResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("projectId" Core..=) Core.<$> projectId]
-        )
+  toJSON IdentitytoolkitRelyingpartySetProjectConfigResponse {..} =
+    Core.object
+      (Core.catMaybes [("projectId" Core..=) Core.<$> projectId])
 
 -- | Request to sign out user.
 --
@@ -1632,7 +1619,8 @@ newIdentitytoolkitRelyingpartySignOutUserRequest ::
   IdentitytoolkitRelyingpartySignOutUserRequest
 newIdentitytoolkitRelyingpartySignOutUserRequest =
   IdentitytoolkitRelyingpartySignOutUserRequest
-    { instanceId = Core.Nothing,
+    { instanceId =
+        Core.Nothing,
       localId = Core.Nothing
     }
 
@@ -1646,21 +1634,17 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartySignOutUserRequest
             Core.<$> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "localId")
       )
 
-instance
-  Core.ToJSON
-    IdentitytoolkitRelyingpartySignOutUserRequest
-  where
-  toJSON
-    IdentitytoolkitRelyingpartySignOutUserRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("instanceId" Core..=) Core.<$> instanceId,
-              ("localId" Core..=) Core.<$> localId
-            ]
-        )
+instance Core.ToJSON IdentitytoolkitRelyingpartySignOutUserRequest where
+  toJSON IdentitytoolkitRelyingpartySignOutUserRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("instanceId" Core..=) Core.<$> instanceId,
+            ("localId" Core..=) Core.<$> localId
+          ]
+      )
 
 -- | Response of signing out user.
 --
@@ -1675,7 +1659,10 @@ newtype IdentitytoolkitRelyingpartySignOutUserResponse = IdentitytoolkitRelyingp
 newIdentitytoolkitRelyingpartySignOutUserResponse ::
   IdentitytoolkitRelyingpartySignOutUserResponse
 newIdentitytoolkitRelyingpartySignOutUserResponse =
-  IdentitytoolkitRelyingpartySignOutUserResponse {localId = Core.Nothing}
+  IdentitytoolkitRelyingpartySignOutUserResponse
+    { localId =
+        Core.Nothing
+    }
 
 instance
   Core.FromJSON
@@ -1689,16 +1676,10 @@ instance
             Core.<$> (o Core..:? "localId")
       )
 
-instance
-  Core.ToJSON
-    IdentitytoolkitRelyingpartySignOutUserResponse
-  where
-  toJSON
-    IdentitytoolkitRelyingpartySignOutUserResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [("localId" Core..=) Core.<$> localId]
-        )
+instance Core.ToJSON IdentitytoolkitRelyingpartySignOutUserResponse where
+  toJSON IdentitytoolkitRelyingpartySignOutUserResponse {..} =
+    Core.object
+      (Core.catMaybes [("localId" Core..=) Core.<$> localId])
 
 -- | Request to signup new user, create anonymous user or anonymous user reauth.
 --
@@ -1740,7 +1721,8 @@ newIdentitytoolkitRelyingpartySignupNewUserRequest ::
   IdentitytoolkitRelyingpartySignupNewUserRequest
 newIdentitytoolkitRelyingpartySignupNewUserRequest =
   IdentitytoolkitRelyingpartySignupNewUserRequest
-    { captchaChallenge = Core.Nothing,
+    { captchaChallenge =
+        Core.Nothing,
       captchaResponse = Core.Nothing,
       disabled = Core.Nothing,
       displayName = Core.Nothing,
@@ -1766,49 +1748,49 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartySignupNewUserRequest
             Core.<$> (o Core..:? "captchaChallenge")
-              Core.<*> (o Core..:? "captchaResponse")
-              Core.<*> (o Core..:? "disabled")
-              Core.<*> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "email")
-              Core.<*> (o Core..:? "emailVerified")
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "localId")
-              Core.<*> (o Core..:? "password")
-              Core.<*> (o Core..:? "phoneNumber")
-              Core.<*> (o Core..:? "photoUrl")
-              Core.<*> (o Core..:? "tenantId")
-              Core.<*> ( o Core..:? "tenantProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "captchaResponse")
+            Core.<*> (o Core..:? "disabled")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "email")
+            Core.<*> (o Core..:? "emailVerified")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "password")
+            Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "photoUrl")
+            Core.<*> (o Core..:? "tenantId")
+            Core.<*> ( o
+                         Core..:? "tenantProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartySignupNewUserRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartySignupNewUserRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("captchaChallenge" Core..=)
-                Core.<$> captchaChallenge,
-              ("captchaResponse" Core..=) Core.<$> captchaResponse,
-              ("disabled" Core..=) Core.<$> disabled,
-              ("displayName" Core..=) Core.<$> displayName,
-              ("email" Core..=) Core.<$> email,
-              ("emailVerified" Core..=) Core.<$> emailVerified,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("instanceId" Core..=) Core.<$> instanceId,
-              ("localId" Core..=) Core.<$> localId,
-              ("password" Core..=) Core.<$> password,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber,
-              ("photoUrl" Core..=) Core.<$> photoUrl,
-              ("tenantId" Core..=) Core.<$> tenantId,
-              ("tenantProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> tenantProjectNumber
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartySignupNewUserRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("captchaChallenge" Core..=) Core.<$> captchaChallenge,
+            ("captchaResponse" Core..=) Core.<$> captchaResponse,
+            ("disabled" Core..=) Core.<$> disabled,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("email" Core..=) Core.<$> email,
+            ("emailVerified" Core..=) Core.<$> emailVerified,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("instanceId" Core..=) Core.<$> instanceId,
+            ("localId" Core..=) Core.<$> localId,
+            ("password" Core..=) Core.<$> password,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber,
+            ("photoUrl" Core..=) Core.<$> photoUrl,
+            ("tenantId" Core..=) Core.<$> tenantId,
+            ("tenantProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> tenantProjectNumber
+          ]
+      )
 
 -- | Request to upload user account in batch.
 --
@@ -1816,19 +1798,16 @@ instance
 data IdentitytoolkitRelyingpartyUploadAccountRequest = IdentitytoolkitRelyingpartyUploadAccountRequest
   { -- | Whether allow overwrite existing account when user local_id exists.
     allowOverwrite :: (Core.Maybe Core.Bool),
-    -- |
     blockSize :: (Core.Maybe Core.Int32),
     -- | The following 4 fields are for standard scrypt algorithm.
     cpuMemCost :: (Core.Maybe Core.Int32),
     -- | GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
     delegatedProjectNumber :: (Core.Maybe Core.Int64),
-    -- |
     dkLen :: (Core.Maybe Core.Int32),
     -- | The password hash algorithm.
     hashAlgorithm :: (Core.Maybe Core.Text),
     -- | Memory cost for hash calculation. Used by scrypt similar algorithms.
     memoryCost :: (Core.Maybe Core.Int32),
-    -- |
     parallelization :: (Core.Maybe Core.Int32),
     -- | Rounds for hash calculation. Used by scrypt and similar algorithms.
     rounds :: (Core.Maybe Core.Int32),
@@ -1850,7 +1829,8 @@ newIdentitytoolkitRelyingpartyUploadAccountRequest ::
   IdentitytoolkitRelyingpartyUploadAccountRequest
 newIdentitytoolkitRelyingpartyUploadAccountRequest =
   IdentitytoolkitRelyingpartyUploadAccountRequest
-    { allowOverwrite = Core.Nothing,
+    { allowOverwrite =
+        Core.Nothing,
       blockSize = Core.Nothing,
       cpuMemCost = Core.Nothing,
       delegatedProjectNumber = Core.Nothing,
@@ -1876,48 +1856,49 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyUploadAccountRequest
             Core.<$> (o Core..:? "allowOverwrite")
-              Core.<*> (o Core..:? "blockSize")
-              Core.<*> (o Core..:? "cpuMemCost")
-              Core.<*> ( o Core..:? "delegatedProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "dkLen")
-              Core.<*> (o Core..:? "hashAlgorithm")
-              Core.<*> (o Core..:? "memoryCost")
-              Core.<*> (o Core..:? "parallelization")
-              Core.<*> (o Core..:? "rounds")
-              Core.<*> (o Core..:? "saltSeparator")
-              Core.<*> (o Core..:? "sanityCheck")
-              Core.<*> (o Core..:? "signerKey")
-              Core.<*> (o Core..:? "targetProjectId")
-              Core.<*> (o Core..:? "users")
+            Core.<*> (o Core..:? "blockSize")
+            Core.<*> (o Core..:? "cpuMemCost")
+            Core.<*> ( o
+                         Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "dkLen")
+            Core.<*> (o Core..:? "hashAlgorithm")
+            Core.<*> (o Core..:? "memoryCost")
+            Core.<*> (o Core..:? "parallelization")
+            Core.<*> (o Core..:? "rounds")
+            Core.<*> (o Core..:? "saltSeparator")
+            Core.<*> (o Core..:? "sanityCheck")
+            Core.<*> (o Core..:? "signerKey")
+            Core.<*> (o Core..:? "targetProjectId")
+            Core.<*> (o Core..:? "users")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyUploadAccountRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyUploadAccountRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("allowOverwrite" Core..=) Core.<$> allowOverwrite,
-              ("blockSize" Core..=) Core.<$> blockSize,
-              ("cpuMemCost" Core..=) Core.<$> cpuMemCost,
-              ("delegatedProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("dkLen" Core..=) Core.<$> dkLen,
-              ("hashAlgorithm" Core..=) Core.<$> hashAlgorithm,
-              ("memoryCost" Core..=) Core.<$> memoryCost,
-              ("parallelization" Core..=) Core.<$> parallelization,
-              ("rounds" Core..=) Core.<$> rounds,
-              ("saltSeparator" Core..=) Core.<$> saltSeparator,
-              ("sanityCheck" Core..=) Core.<$> sanityCheck,
-              ("signerKey" Core..=) Core.<$> signerKey,
-              ("targetProjectId" Core..=) Core.<$> targetProjectId,
-              ("users" Core..=) Core.<$> users
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyUploadAccountRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("allowOverwrite" Core..=) Core.<$> allowOverwrite,
+            ("blockSize" Core..=) Core.<$> blockSize,
+            ("cpuMemCost" Core..=) Core.<$> cpuMemCost,
+            ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("dkLen" Core..=) Core.<$> dkLen,
+            ("hashAlgorithm" Core..=) Core.<$> hashAlgorithm,
+            ("memoryCost" Core..=) Core.<$> memoryCost,
+            ("parallelization" Core..=) Core.<$> parallelization,
+            ("rounds" Core..=) Core.<$> rounds,
+            ("saltSeparator" Core..=) Core.<$> saltSeparator,
+            ("sanityCheck" Core..=) Core.<$> sanityCheck,
+            ("signerKey" Core..=) Core.<$> signerKey,
+            ("targetProjectId" Core..=) Core.<$> targetProjectId,
+            ("users" Core..=) Core.<$> users
+          ]
+      )
 
 -- | Request to verify the IDP assertion.
 --
@@ -1957,7 +1938,8 @@ newIdentitytoolkitRelyingpartyVerifyAssertionRequest ::
   IdentitytoolkitRelyingpartyVerifyAssertionRequest
 newIdentitytoolkitRelyingpartyVerifyAssertionRequest =
   IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    { autoCreate = Core.Nothing,
+    { autoCreate =
+        Core.Nothing,
       delegatedProjectNumber = Core.Nothing,
       idToken = Core.Nothing,
       instanceId = Core.Nothing,
@@ -1982,52 +1964,52 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyAssertionRequest
             Core.<$> (o Core..:? "autoCreate")
-              Core.<*> ( o Core..:? "delegatedProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "pendingIdToken")
-              Core.<*> (o Core..:? "postBody")
-              Core.<*> (o Core..:? "requestUri")
-              Core.<*> (o Core..:? "returnIdpCredential")
-              Core.<*> (o Core..:? "returnRefreshToken")
-              Core.<*> (o Core..:? "returnSecureToken")
-              Core.<*> (o Core..:? "sessionId")
-              Core.<*> (o Core..:? "tenantId")
-              Core.<*> ( o Core..:? "tenantProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> ( o
+                         Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "pendingIdToken")
+            Core.<*> (o Core..:? "postBody")
+            Core.<*> (o Core..:? "requestUri")
+            Core.<*> (o Core..:? "returnIdpCredential")
+            Core.<*> (o Core..:? "returnRefreshToken")
+            Core.<*> (o Core..:? "returnSecureToken")
+            Core.<*> (o Core..:? "sessionId")
+            Core.<*> (o Core..:? "tenantId")
+            Core.<*> ( o
+                         Core..:? "tenantProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyVerifyAssertionRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyVerifyAssertionRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("autoCreate" Core..=) Core.<$> autoCreate,
-              ("delegatedProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("instanceId" Core..=) Core.<$> instanceId,
-              ("pendingIdToken" Core..=) Core.<$> pendingIdToken,
-              ("postBody" Core..=) Core.<$> postBody,
-              ("requestUri" Core..=) Core.<$> requestUri,
-              ("returnIdpCredential" Core..=)
-                Core.<$> returnIdpCredential,
-              ("returnRefreshToken" Core..=)
-                Core.<$> returnRefreshToken,
-              ("returnSecureToken" Core..=)
-                Core.<$> returnSecureToken,
-              ("sessionId" Core..=) Core.<$> sessionId,
-              ("tenantId" Core..=) Core.<$> tenantId,
-              ("tenantProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> tenantProjectNumber
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyVerifyAssertionRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("autoCreate" Core..=) Core.<$> autoCreate,
+            ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("instanceId" Core..=) Core.<$> instanceId,
+            ("pendingIdToken" Core..=) Core.<$> pendingIdToken,
+            ("postBody" Core..=) Core.<$> postBody,
+            ("requestUri" Core..=) Core.<$> requestUri,
+            ("returnIdpCredential" Core..=) Core.<$> returnIdpCredential,
+            ("returnRefreshToken" Core..=) Core.<$> returnRefreshToken,
+            ("returnSecureToken" Core..=) Core.<$> returnSecureToken,
+            ("sessionId" Core..=) Core.<$> sessionId,
+            ("tenantId" Core..=) Core.<$> tenantId,
+            ("tenantProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> tenantProjectNumber
+          ]
+      )
 
 -- | Request to verify a custom token
 --
@@ -2049,7 +2031,8 @@ newIdentitytoolkitRelyingpartyVerifyCustomTokenRequest ::
   IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
 newIdentitytoolkitRelyingpartyVerifyCustomTokenRequest =
   IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-    { delegatedProjectNumber = Core.Nothing,
+    { delegatedProjectNumber =
+        Core.Nothing,
       instanceId = Core.Nothing,
       returnSecureToken = Core.Nothing,
       token = Core.Nothing
@@ -2064,31 +2047,30 @@ instance
       "IdentitytoolkitRelyingpartyVerifyCustomTokenRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
-            Core.<$> ( o Core..:? "delegatedProjectNumber"
+            Core.<$> ( o
+                         Core..:? "delegatedProjectNumber"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "returnSecureToken")
-              Core.<*> (o Core..:? "token")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "returnSecureToken")
+            Core.<*> (o Core..:? "token")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyVerifyCustomTokenRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyVerifyCustomTokenRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("delegatedProjectNumber" Core..=)
-                Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("instanceId" Core..=) Core.<$> instanceId,
-              ("returnSecureToken" Core..=)
-                Core.<$> returnSecureToken,
-              ("token" Core..=) Core.<$> token
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyVerifyCustomTokenRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("instanceId" Core..=) Core.<$> instanceId,
+            ("returnSecureToken" Core..=) Core.<$> returnSecureToken,
+            ("token" Core..=) Core.<$> token
+          ]
+      )
 
 -- | Request to verify the password.
 --
@@ -2124,7 +2106,8 @@ newIdentitytoolkitRelyingpartyVerifyPasswordRequest ::
   IdentitytoolkitRelyingpartyVerifyPasswordRequest
 newIdentitytoolkitRelyingpartyVerifyPasswordRequest =
   IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    { captchaChallenge = Core.Nothing,
+    { captchaChallenge =
+        Core.Nothing,
       captchaResponse = Core.Nothing,
       delegatedProjectNumber = Core.Nothing,
       email = Core.Nothing,
@@ -2147,65 +2130,60 @@ instance
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyPasswordRequest
             Core.<$> (o Core..:? "captchaChallenge")
-              Core.<*> (o Core..:? "captchaResponse")
-              Core.<*> ( o Core..:? "delegatedProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "email")
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "instanceId")
-              Core.<*> (o Core..:? "password")
-              Core.<*> (o Core..:? "pendingIdToken")
-              Core.<*> (o Core..:? "returnSecureToken")
-              Core.<*> (o Core..:? "tenantId")
-              Core.<*> ( o Core..:? "tenantProjectNumber"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "captchaResponse")
+            Core.<*> ( o
+                         Core..:? "delegatedProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "email")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "instanceId")
+            Core.<*> (o Core..:? "password")
+            Core.<*> (o Core..:? "pendingIdToken")
+            Core.<*> (o Core..:? "returnSecureToken")
+            Core.<*> (o Core..:? "tenantId")
+            Core.<*> ( o
+                         Core..:? "tenantProjectNumber"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyVerifyPasswordRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyVerifyPasswordRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("captchaChallenge" Core..=)
-                Core.<$> captchaChallenge,
-              ("captchaResponse" Core..=) Core.<$> captchaResponse,
-              ("delegatedProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> delegatedProjectNumber,
-              ("email" Core..=) Core.<$> email,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("instanceId" Core..=) Core.<$> instanceId,
-              ("password" Core..=) Core.<$> password,
-              ("pendingIdToken" Core..=) Core.<$> pendingIdToken,
-              ("returnSecureToken" Core..=)
-                Core.<$> returnSecureToken,
-              ("tenantId" Core..=) Core.<$> tenantId,
-              ("tenantProjectNumber" Core..=) Core.. Core.AsText
-                Core.<$> tenantProjectNumber
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyVerifyPasswordRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("captchaChallenge" Core..=) Core.<$> captchaChallenge,
+            ("captchaResponse" Core..=) Core.<$> captchaResponse,
+            ("delegatedProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> delegatedProjectNumber,
+            ("email" Core..=) Core.<$> email,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("instanceId" Core..=) Core.<$> instanceId,
+            ("password" Core..=) Core.<$> password,
+            ("pendingIdToken" Core..=) Core.<$> pendingIdToken,
+            ("returnSecureToken" Core..=) Core.<$> returnSecureToken,
+            ("tenantId" Core..=) Core.<$> tenantId,
+            ("tenantProjectNumber" Core..=)
+              Core.. Core.AsText
+              Core.<$> tenantProjectNumber
+          ]
+      )
 
 -- | Request for Identitytoolkit-VerifyPhoneNumber
 --
 -- /See:/ 'newIdentitytoolkitRelyingpartyVerifyPhoneNumberRequest' smart constructor.
 data IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest = IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
-  { -- |
-    code :: (Core.Maybe Core.Text),
-    -- |
+  { code :: (Core.Maybe Core.Text),
     idToken :: (Core.Maybe Core.Text),
-    -- |
     operation :: (Core.Maybe Core.Text),
-    -- |
     phoneNumber :: (Core.Maybe Core.Text),
     -- | The session info previously returned by IdentityToolkit-SendVerificationCode.
     sessionInfo :: (Core.Maybe Core.Text),
-    -- |
     temporaryProof :: (Core.Maybe Core.Text),
-    -- |
     verificationProof :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2215,7 +2193,8 @@ newIdentitytoolkitRelyingpartyVerifyPhoneNumberRequest ::
   IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
 newIdentitytoolkitRelyingpartyVerifyPhoneNumberRequest =
   IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
-    { code = Core.Nothing,
+    { code =
+        Core.Nothing,
       idToken = Core.Nothing,
       operation = Core.Nothing,
       phoneNumber = Core.Nothing,
@@ -2233,56 +2212,45 @@ instance
       "IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest"
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
-            Core.<$> (o Core..:? "code") Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "operation")
-              Core.<*> (o Core..:? "phoneNumber")
-              Core.<*> (o Core..:? "sessionInfo")
-              Core.<*> (o Core..:? "temporaryProof")
-              Core.<*> (o Core..:? "verificationProof")
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "operation")
+            Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "sessionInfo")
+            Core.<*> (o Core..:? "temporaryProof")
+            Core.<*> (o Core..:? "verificationProof")
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest
   where
-  toJSON
-    IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("code" Core..=) Core.<$> code,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("operation" Core..=) Core.<$> operation,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber,
-              ("sessionInfo" Core..=) Core.<$> sessionInfo,
-              ("temporaryProof" Core..=) Core.<$> temporaryProof,
-              ("verificationProof" Core..=)
-                Core.<$> verificationProof
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyVerifyPhoneNumberRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("operation" Core..=) Core.<$> operation,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber,
+            ("sessionInfo" Core..=) Core.<$> sessionInfo,
+            ("temporaryProof" Core..=) Core.<$> temporaryProof,
+            ("verificationProof" Core..=) Core.<$> verificationProof
+          ]
+      )
 
 -- | Response for Identitytoolkit-VerifyPhoneNumber
 --
 -- /See:/ 'newIdentitytoolkitRelyingpartyVerifyPhoneNumberResponse' smart constructor.
 data IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse = IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
-  { -- |
-    expiresIn :: (Core.Maybe Core.Int64),
-    -- |
+  { expiresIn :: (Core.Maybe Core.Int64),
     idToken :: (Core.Maybe Core.Text),
-    -- |
     isNewUser :: (Core.Maybe Core.Bool),
-    -- |
     localId :: (Core.Maybe Core.Text),
-    -- |
     phoneNumber :: (Core.Maybe Core.Text),
-    -- |
     refreshToken :: (Core.Maybe Core.Text),
-    -- |
     temporaryProof :: (Core.Maybe Core.Text),
-    -- |
     temporaryProofExpiresIn :: (Core.Maybe Core.Int64),
-    -- |
     verificationProof :: (Core.Maybe Core.Text),
-    -- |
     verificationProofExpiresIn :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2292,7 +2260,8 @@ newIdentitytoolkitRelyingpartyVerifyPhoneNumberResponse ::
   IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
 newIdentitytoolkitRelyingpartyVerifyPhoneNumberResponse =
   IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
-    { expiresIn = Core.Nothing,
+    { expiresIn =
+        Core.Nothing,
       idToken = Core.Nothing,
       isNewUser = Core.Nothing,
       localId = Core.Nothing,
@@ -2313,50 +2282,47 @@ instance
       "IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse"
       ( \o ->
           IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
-            Core.<$> ( o Core..:? "expiresIn"
+            Core.<$> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "idToken")
+            Core.<*> (o Core..:? "isNewUser")
+            Core.<*> (o Core..:? "localId")
+            Core.<*> (o Core..:? "phoneNumber")
+            Core.<*> (o Core..:? "refreshToken")
+            Core.<*> (o Core..:? "temporaryProof")
+            Core.<*> ( o
+                         Core..:? "temporaryProofExpiresIn"
                          Core.<&> Core.fmap Core.fromAsText
                      )
-              Core.<*> (o Core..:? "idToken")
-              Core.<*> (o Core..:? "isNewUser")
-              Core.<*> (o Core..:? "localId")
-              Core.<*> (o Core..:? "phoneNumber")
-              Core.<*> (o Core..:? "refreshToken")
-              Core.<*> (o Core..:? "temporaryProof")
-              Core.<*> ( o Core..:? "temporaryProofExpiresIn"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "verificationProof")
-              Core.<*> ( o Core..:? "verificationProofExpiresIn"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
+            Core.<*> (o Core..:? "verificationProof")
+            Core.<*> ( o
+                         Core..:? "verificationProofExpiresIn"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
       )
 
 instance
   Core.ToJSON
     IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse
   where
-  toJSON
-    IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("expiresIn" Core..=) Core.. Core.AsText
-                Core.<$> expiresIn,
-              ("idToken" Core..=) Core.<$> idToken,
-              ("isNewUser" Core..=) Core.<$> isNewUser,
-              ("localId" Core..=) Core.<$> localId,
-              ("phoneNumber" Core..=) Core.<$> phoneNumber,
-              ("refreshToken" Core..=) Core.<$> refreshToken,
-              ("temporaryProof" Core..=) Core.<$> temporaryProof,
-              ("temporaryProofExpiresIn" Core..=)
-                Core.. Core.AsText
-                Core.<$> temporaryProofExpiresIn,
-              ("verificationProof" Core..=)
-                Core.<$> verificationProof,
-              ("verificationProofExpiresIn" Core..=)
-                Core.. Core.AsText
-                Core.<$> verificationProofExpiresIn
-            ]
-        )
+  toJSON IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
+            ("idToken" Core..=) Core.<$> idToken,
+            ("isNewUser" Core..=) Core.<$> isNewUser,
+            ("localId" Core..=) Core.<$> localId,
+            ("phoneNumber" Core..=) Core.<$> phoneNumber,
+            ("refreshToken" Core..=) Core.<$> refreshToken,
+            ("temporaryProof" Core..=) Core.<$> temporaryProof,
+            ("temporaryProofExpiresIn" Core..=)
+              Core.. Core.AsText
+              Core.<$> temporaryProofExpiresIn,
+            ("verificationProof" Core..=) Core.<$> verificationProof,
+            ("verificationProofExpiresIn" Core..=)
+              Core.. Core.AsText
+              Core.<$> verificationProofExpiresIn
+          ]
+      )
 
 -- | Template for a single idp configuration.
 --
@@ -2410,12 +2376,10 @@ instance Core.ToJSON IdpConfig where
       ( Core.catMaybes
           [ ("clientId" Core..=) Core.<$> clientId,
             ("enabled" Core..=) Core.<$> enabled,
-            ("experimentPercent" Core..=)
-              Core.<$> experimentPercent,
+            ("experimentPercent" Core..=) Core.<$> experimentPercent,
             ("provider" Core..=) Core.<$> provider,
             ("secret" Core..=) Core.<$> secret,
-            ("whitelistedAudiences" Core..=)
-              Core.<$> whitelistedAudiences
+            ("whitelistedAudiences" Core..=) Core.<$> whitelistedAudiences
           ]
       )
 
@@ -2495,9 +2459,7 @@ instance Core.FromJSON Relyingparty where
             Core.<*> (o Core..:? "iOSAppStoreId")
             Core.<*> (o Core..:? "iOSBundleId")
             Core.<*> (o Core..:? "idToken")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "identitytoolkit#relyingparty"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "identitytoolkit#relyingparty")
             Core.<*> (o Core..:? "newEmail")
             Core.<*> (o Core..:? "requestType")
             Core.<*> (o Core..:? "userIp")
@@ -2507,14 +2469,10 @@ instance Core.ToJSON Relyingparty where
   toJSON Relyingparty {..} =
     Core.object
       ( Core.catMaybes
-          [ ("androidInstallApp" Core..=)
-              Core.<$> androidInstallApp,
-            ("androidMinimumVersion" Core..=)
-              Core.<$> androidMinimumVersion,
-            ("androidPackageName" Core..=)
-              Core.<$> androidPackageName,
-            ("canHandleCodeInApp" Core..=)
-              Core.<$> canHandleCodeInApp,
+          [ ("androidInstallApp" Core..=) Core.<$> androidInstallApp,
+            ("androidMinimumVersion" Core..=) Core.<$> androidMinimumVersion,
+            ("androidPackageName" Core..=) Core.<$> androidPackageName,
+            ("canHandleCodeInApp" Core..=) Core.<$> canHandleCodeInApp,
             ("captchaResp" Core..=) Core.<$> captchaResp,
             ("challenge" Core..=) Core.<$> challenge,
             ("continueUrl" Core..=) Core.<$> continueUrl,
@@ -2562,7 +2520,8 @@ instance Core.FromJSON ResetPasswordResponse where
       ( \o ->
           ResetPasswordResponse
             Core.<$> (o Core..:? "email")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#ResetPasswordResponse"
                      )
             Core.<*> (o Core..:? "newEmail")
@@ -2639,11 +2598,10 @@ instance Core.FromJSON SetAccountInfoResponse where
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "emailVerified")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idToken")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#SetAccountInfoResponse"
                      )
             Core.<*> (o Core..:? "localId")
@@ -2661,16 +2619,14 @@ instance Core.ToJSON SetAccountInfoResponse where
           [ ("displayName" Core..=) Core.<$> displayName,
             ("email" Core..=) Core.<$> email,
             ("emailVerified" Core..=) Core.<$> emailVerified,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("idToken" Core..=) Core.<$> idToken,
             Core.Just ("kind" Core..= kind),
             ("localId" Core..=) Core.<$> localId,
             ("newEmail" Core..=) Core.<$> newEmail',
             ("passwordHash" Core..=) Core.<$> passwordHash,
             ("photoUrl" Core..=) Core.<$> photoUrl,
-            ("providerUserInfo" Core..=)
-              Core.<$> providerUserInfo,
+            ("providerUserInfo" Core..=) Core.<$> providerUserInfo,
             ("refreshToken" Core..=) Core.<$> refreshToken
           ]
       )
@@ -2694,16 +2650,14 @@ newSetAccountInfoResponse_ProviderUserInfoItem ::
   SetAccountInfoResponse_ProviderUserInfoItem
 newSetAccountInfoResponse_ProviderUserInfoItem =
   SetAccountInfoResponse_ProviderUserInfoItem
-    { displayName = Core.Nothing,
+    { displayName =
+        Core.Nothing,
       federatedId = Core.Nothing,
       photoUrl = Core.Nothing,
       providerId = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SetAccountInfoResponse_ProviderUserInfoItem
-  where
+instance Core.FromJSON SetAccountInfoResponse_ProviderUserInfoItem where
   parseJSON =
     Core.withObject
       "SetAccountInfoResponse_ProviderUserInfoItem"
@@ -2715,20 +2669,16 @@ instance
             Core.<*> (o Core..:? "providerId")
       )
 
-instance
-  Core.ToJSON
-    SetAccountInfoResponse_ProviderUserInfoItem
-  where
-  toJSON
-    SetAccountInfoResponse_ProviderUserInfoItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("displayName" Core..=) Core.<$> displayName,
-              ("federatedId" Core..=) Core.<$> federatedId,
-              ("photoUrl" Core..=) Core.<$> photoUrl,
-              ("providerId" Core..=) Core.<$> providerId
-            ]
-        )
+instance Core.ToJSON SetAccountInfoResponse_ProviderUserInfoItem where
+  toJSON SetAccountInfoResponse_ProviderUserInfoItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("federatedId" Core..=) Core.<$> federatedId,
+            ("photoUrl" Core..=) Core.<$> photoUrl,
+            ("providerId" Core..=) Core.<$> providerId
+          ]
+      )
 
 -- | Response of signing up new user, creating anonymous user or anonymous user reauth.
 --
@@ -2773,11 +2723,10 @@ instance Core.FromJSON SignupNewUserResponse where
           SignupNewUserResponse
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idToken")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#SignupNewUserResponse"
                      )
             Core.<*> (o Core..:? "localId")
@@ -2790,8 +2739,7 @@ instance Core.ToJSON SignupNewUserResponse where
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
             ("email" Core..=) Core.<$> email,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("idToken" Core..=) Core.<$> idToken,
             Core.Just ("kind" Core..= kind),
             ("localId" Core..=) Core.<$> localId,
@@ -2826,7 +2774,8 @@ instance Core.FromJSON UploadAccountResponse where
       ( \o ->
           UploadAccountResponse
             Core.<$> (o Core..:? "error")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#UploadAccountResponse"
                      )
       )
@@ -2854,18 +2803,19 @@ data UploadAccountResponse_ErrorItem = UploadAccountResponse_ErrorItem
 newUploadAccountResponse_ErrorItem ::
   UploadAccountResponse_ErrorItem
 newUploadAccountResponse_ErrorItem =
-  UploadAccountResponse_ErrorItem {index = Core.Nothing, message = Core.Nothing}
+  UploadAccountResponse_ErrorItem
+    { index = Core.Nothing,
+      message = Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    UploadAccountResponse_ErrorItem
-  where
+instance Core.FromJSON UploadAccountResponse_ErrorItem where
   parseJSON =
     Core.withObject
       "UploadAccountResponse_ErrorItem"
       ( \o ->
           UploadAccountResponse_ErrorItem
-            Core.<$> (o Core..:? "index") Core.<*> (o Core..:? "message")
+            Core.<$> (o Core..:? "index")
+            Core.<*> (o Core..:? "message")
       )
 
 instance Core.ToJSON UploadAccountResponse_ErrorItem where
@@ -2954,18 +2904,14 @@ instance Core.FromJSON UserInfo where
       "UserInfo"
       ( \o ->
           UserInfo
-            Core.<$> ( o Core..:? "createdAt"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "createdAt" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "customAttributes")
             Core.<*> (o Core..:? "customAuth")
             Core.<*> (o Core..:? "disabled")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
             Core.<*> (o Core..:? "emailVerified")
-            Core.<*> ( o Core..:? "lastLoginAt"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastLoginAt" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "localId")
             Core.<*> (o Core..:? "passwordHash")
             Core.<*> (o Core..:? "passwordUpdatedAt")
@@ -2975,9 +2921,7 @@ instance Core.FromJSON UserInfo where
             Core.<*> (o Core..:? "rawPassword")
             Core.<*> (o Core..:? "salt")
             Core.<*> (o Core..:? "screenName")
-            Core.<*> ( o Core..:? "validSince"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "validSince" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "version")
       )
 
@@ -2985,30 +2929,24 @@ instance Core.ToJSON UserInfo where
   toJSON UserInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createdAt" Core..=) Core.. Core.AsText
-              Core.<$> createdAt,
-            ("customAttributes" Core..=)
-              Core.<$> customAttributes,
+          [ ("createdAt" Core..=) Core.. Core.AsText Core.<$> createdAt,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
             ("customAuth" Core..=) Core.<$> customAuth,
             ("disabled" Core..=) Core.<$> disabled,
             ("displayName" Core..=) Core.<$> displayName,
             ("email" Core..=) Core.<$> email,
             ("emailVerified" Core..=) Core.<$> emailVerified,
-            ("lastLoginAt" Core..=) Core.. Core.AsText
-              Core.<$> lastLoginAt,
+            ("lastLoginAt" Core..=) Core.. Core.AsText Core.<$> lastLoginAt,
             ("localId" Core..=) Core.<$> localId,
             ("passwordHash" Core..=) Core.<$> passwordHash,
-            ("passwordUpdatedAt" Core..=)
-              Core.<$> passwordUpdatedAt,
+            ("passwordUpdatedAt" Core..=) Core.<$> passwordUpdatedAt,
             ("phoneNumber" Core..=) Core.<$> phoneNumber,
             ("photoUrl" Core..=) Core.<$> photoUrl,
-            ("providerUserInfo" Core..=)
-              Core.<$> providerUserInfo,
+            ("providerUserInfo" Core..=) Core.<$> providerUserInfo,
             ("rawPassword" Core..=) Core.<$> rawPassword,
             ("salt" Core..=) Core.<$> salt,
             ("screenName" Core..=) Core.<$> screenName,
-            ("validSince" Core..=) Core.. Core.AsText
-              Core.<$> validSince,
+            ("validSince" Core..=) Core.. Core.AsText Core.<$> validSince,
             ("version" Core..=) Core.<$> version
           ]
       )
@@ -3228,16 +3166,15 @@ instance Core.FromJSON VerifyAssertionResponse where
             Core.<*> (o Core..:? "emailRecycled")
             Core.<*> (o Core..:? "emailVerified")
             Core.<*> (o Core..:? "errorMessage")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "federatedId")
             Core.<*> (o Core..:? "firstName")
             Core.<*> (o Core..:? "fullName")
             Core.<*> (o Core..:? "idToken")
             Core.<*> (o Core..:? "inputEmail")
             Core.<*> (o Core..:? "isNewUser")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#VerifyAssertionResponse"
                      )
             Core.<*> (o Core..:? "language")
@@ -3268,8 +3205,7 @@ instance Core.ToJSON VerifyAssertionResponse where
     Core.object
       ( Core.catMaybes
           [ ("action" Core..=) Core.<$> action,
-            ("appInstallationUrl" Core..=)
-              Core.<$> appInstallationUrl,
+            ("appInstallationUrl" Core..=) Core.<$> appInstallationUrl,
             ("appScheme" Core..=) Core.<$> appScheme,
             ("context" Core..=) Core.<$> context,
             ("dateOfBirth" Core..=) Core.<$> dateOfBirth,
@@ -3278,8 +3214,7 @@ instance Core.ToJSON VerifyAssertionResponse where
             ("emailRecycled" Core..=) Core.<$> emailRecycled,
             ("emailVerified" Core..=) Core.<$> emailVerified,
             ("errorMessage" Core..=) Core.<$> errorMessage,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("federatedId" Core..=) Core.<$> federatedId,
             ("firstName" Core..=) Core.<$> firstName,
             ("fullName" Core..=) Core.<$> fullName,
@@ -3290,21 +3225,16 @@ instance Core.ToJSON VerifyAssertionResponse where
             ("language" Core..=) Core.<$> language,
             ("lastName" Core..=) Core.<$> lastName,
             ("localId" Core..=) Core.<$> localId,
-            ("needConfirmation" Core..=)
-              Core.<$> needConfirmation,
+            ("needConfirmation" Core..=) Core.<$> needConfirmation,
             ("needEmail" Core..=) Core.<$> needEmail,
             ("nickName" Core..=) Core.<$> nickName,
-            ("oauthAccessToken" Core..=)
-              Core.<$> oauthAccessToken,
-            ("oauthAuthorizationCode" Core..=)
-              Core.<$> oauthAuthorizationCode,
+            ("oauthAccessToken" Core..=) Core.<$> oauthAccessToken,
+            ("oauthAuthorizationCode" Core..=) Core.<$> oauthAuthorizationCode,
             ("oauthExpireIn" Core..=) Core.<$> oauthExpireIn,
             ("oauthIdToken" Core..=) Core.<$> oauthIdToken,
-            ("oauthRequestToken" Core..=)
-              Core.<$> oauthRequestToken,
+            ("oauthRequestToken" Core..=) Core.<$> oauthRequestToken,
             ("oauthScope" Core..=) Core.<$> oauthScope,
-            ("oauthTokenSecret" Core..=)
-              Core.<$> oauthTokenSecret,
+            ("oauthTokenSecret" Core..=) Core.<$> oauthTokenSecret,
             ("originalEmail" Core..=) Core.<$> originalEmail,
             ("photoUrl" Core..=) Core.<$> photoUrl,
             ("providerId" Core..=) Core.<$> providerId,
@@ -3312,8 +3242,7 @@ instance Core.ToJSON VerifyAssertionResponse where
             ("refreshToken" Core..=) Core.<$> refreshToken,
             ("screenName" Core..=) Core.<$> screenName,
             ("timeZone" Core..=) Core.<$> timeZone,
-            ("verifiedProvider" Core..=)
-              Core.<$> verifiedProvider
+            ("verifiedProvider" Core..=) Core.<$> verifiedProvider
           ]
       )
 
@@ -3352,12 +3281,11 @@ instance Core.FromJSON VerifyCustomTokenResponse where
       "VerifyCustomTokenResponse"
       ( \o ->
           VerifyCustomTokenResponse
-            Core.<$> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idToken")
             Core.<*> (o Core..:? "isNewUser")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#VerifyCustomTokenResponse"
                      )
             Core.<*> (o Core..:? "refreshToken")
@@ -3367,8 +3295,7 @@ instance Core.ToJSON VerifyCustomTokenResponse where
   toJSON VerifyCustomTokenResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+          [ ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("idToken" Core..=) Core.<$> idToken,
             ("isNewUser" Core..=) Core.<$> isNewUser,
             Core.Just ("kind" Core..= kind),
@@ -3434,11 +3361,10 @@ instance Core.FromJSON VerifyPasswordResponse where
           VerifyPasswordResponse
             Core.<$> (o Core..:? "displayName")
             Core.<*> (o Core..:? "email")
-            Core.<*> ( o Core..:? "expiresIn"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiresIn" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "idToken")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "identitytoolkit#VerifyPasswordResponse"
                      )
             Core.<*> (o Core..:? "localId")
@@ -3456,15 +3382,12 @@ instance Core.ToJSON VerifyPasswordResponse where
       ( Core.catMaybes
           [ ("displayName" Core..=) Core.<$> displayName,
             ("email" Core..=) Core.<$> email,
-            ("expiresIn" Core..=) Core.. Core.AsText
-              Core.<$> expiresIn,
+            ("expiresIn" Core..=) Core.. Core.AsText Core.<$> expiresIn,
             ("idToken" Core..=) Core.<$> idToken,
             Core.Just ("kind" Core..= kind),
             ("localId" Core..=) Core.<$> localId,
-            ("oauthAccessToken" Core..=)
-              Core.<$> oauthAccessToken,
-            ("oauthAuthorizationCode" Core..=)
-              Core.<$> oauthAuthorizationCode,
+            ("oauthAccessToken" Core..=) Core.<$> oauthAccessToken,
+            ("oauthAuthorizationCode" Core..=) Core.<$> oauthAuthorizationCode,
             ("oauthExpireIn" Core..=) Core.<$> oauthExpireIn,
             ("photoUrl" Core..=) Core.<$> photoUrl,
             ("refreshToken" Core..=) Core.<$> refreshToken,

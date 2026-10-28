@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.SetIamPolicy
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.setIamPolicy@ method which the
@@ -67,7 +65,7 @@ data StorageObjectsSetIamPolicy = StorageObjectsSetIamPolicy
     bucket :: Core.Text,
     -- | If present, selects a specific revision of this object (as opposed to the latest version, the default).
     generation :: (Core.Maybe Core.Int64),
-    -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     object :: Core.Text,
     -- | Multipart request metadata.
     payload :: Policy,
@@ -82,7 +80,7 @@ data StorageObjectsSetIamPolicy = StorageObjectsSetIamPolicy
 newStorageObjectsSetIamPolicy ::
   -- |  Name of the bucket in which the object resides. See 'bucket'.
   Core.Text ->
-  -- |  Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'object'.
+  -- |  Name of the object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>. See 'object'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Policy ->
@@ -97,10 +95,7 @@ newStorageObjectsSetIamPolicy bucket object payload =
       userProject = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    StorageObjectsSetIamPolicy
-  where
+instance Core.GoogleRequest StorageObjectsSetIamPolicy where
   type Rs StorageObjectsSetIamPolicy = Policy
   type
     Scopes StorageObjectsSetIamPolicy =
@@ -121,7 +116,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsSetIamPolicyResource
-          )
+          (Core.Proxy :: Core.Proxy StorageObjectsSetIamPolicyResource)
           Core.mempty

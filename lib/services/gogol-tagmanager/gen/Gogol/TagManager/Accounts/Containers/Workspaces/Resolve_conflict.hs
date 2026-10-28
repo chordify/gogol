@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Workspaces.Resolve_conflict
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.workspaces.resolve_conflict@ method which the
@@ -88,29 +86,28 @@ newTagManagerAccountsContainersWorkspacesResolve_conflict ::
   -- |  Multipart request metadata. See 'payload'.
   Entity ->
   TagManagerAccountsContainersWorkspacesResolve_conflict
-newTagManagerAccountsContainersWorkspacesResolve_conflict path payload =
-  TagManagerAccountsContainersWorkspacesResolve_conflict
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      fingerprint = Core.Nothing,
-      path = path,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newTagManagerAccountsContainersWorkspacesResolve_conflict
+  path
+  payload =
+    TagManagerAccountsContainersWorkspacesResolve_conflict
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        fingerprint = Core.Nothing,
+        path = path,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     TagManagerAccountsContainersWorkspacesResolve_conflict
   where
+  type Rs TagManagerAccountsContainersWorkspacesResolve_conflict = ()
   type
-    Rs
-      TagManagerAccountsContainersWorkspacesResolve_conflict =
-      ()
-  type
-    Scopes
-      TagManagerAccountsContainersWorkspacesResolve_conflict =
+    Scopes TagManagerAccountsContainersWorkspacesResolve_conflict =
       '[Tagmanager'Edit'Containers]
   requestClient
     TagManagerAccountsContainersWorkspacesResolve_conflict {..} =

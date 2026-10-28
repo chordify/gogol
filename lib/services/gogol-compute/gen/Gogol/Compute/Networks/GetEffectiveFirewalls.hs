@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.Networks.GetEffectiveFirewalls
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.Networks.GetEffectiveFirewalls
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.networks.getEffectiveFirewalls@ method which the
 -- 'ComputeNetworksGetEffectiveFirewalls' request conforms to.
@@ -59,9 +57,7 @@ type ComputeNetworksGetEffectiveFirewallsResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              NetworksGetEffectiveFirewallsResponse
+    Core.:> Core.Get '[Core.JSON] NetworksGetEffectiveFirewallsResponse
 
 -- | Returns the effective firewalls on a given network.
 --
@@ -102,36 +98,28 @@ newComputeNetworksGetEffectiveFirewalls network project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ComputeNetworksGetEffectiveFirewalls
-  where
+instance Core.GoogleRequest ComputeNetworksGetEffectiveFirewalls where
   type
     Rs ComputeNetworksGetEffectiveFirewalls =
       NetworksGetEffectiveFirewallsResponse
   type
     Scopes ComputeNetworksGetEffectiveFirewalls =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient
-    ComputeNetworksGetEffectiveFirewalls {..} =
-      go
-        project
-        network
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeNetworksGetEffectiveFirewallsResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
+  requestClient ComputeNetworksGetEffectiveFirewalls {..} =
+    go
+      project
+      network
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeNetworksGetEffectiveFirewallsResource
+          )
+          Core.mempty

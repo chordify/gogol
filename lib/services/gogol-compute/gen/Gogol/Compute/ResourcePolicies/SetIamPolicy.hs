@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.ResourcePolicies.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.ResourcePolicies.SetIamPolicy
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.resourcePolicies.setIamPolicy@ method which the
 -- 'ComputeResourcePoliciesSetIamPolicy' request conforms to.
@@ -60,9 +58,7 @@ type ComputeResourcePoliciesSetIamPolicyResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RegionSetPolicyRequest
+    Core.:> Core.ReqBody '[Core.JSON] RegionSetPolicyRequest
     Core.:> Core.Post '[Core.JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any existing policy.
@@ -101,23 +97,24 @@ newComputeResourcePoliciesSetIamPolicy ::
   -- |  Name or id of the resource for this request. See 'resource'.
   Core.Text ->
   ComputeResourcePoliciesSetIamPolicy
-newComputeResourcePoliciesSetIamPolicy payload project region resource =
-  ComputeResourcePoliciesSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeResourcePoliciesSetIamPolicy
+  payload
+  project
+  region
+  resource =
     ComputeResourcePoliciesSetIamPolicy
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeResourcePoliciesSetIamPolicy where
   type Rs ComputeResourcePoliciesSetIamPolicy = Policy
   type
     Scopes ComputeResourcePoliciesSetIamPolicy =
@@ -139,7 +136,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeResourcePoliciesSetIamPolicyResource
+              Core.Proxy ComputeResourcePoliciesSetIamPolicyResource
           )
           Core.mempty

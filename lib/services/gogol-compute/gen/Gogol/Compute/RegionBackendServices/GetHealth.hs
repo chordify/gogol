@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.RegionBackendServices.GetHealth
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.RegionBackendServices.GetHealth
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.regionBackendServices.getHealth@ method which the
 -- 'ComputeRegionBackendServicesGetHealth' request conforms to.
@@ -60,12 +58,8 @@ type ComputeRegionBackendServicesGetHealthResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ResourceGroupReference
-    Core.:> Core.Post
-              '[Core.JSON]
-              BackendServiceGroupHealth
+    Core.:> Core.ReqBody '[Core.JSON] ResourceGroupReference
+    Core.:> Core.Post '[Core.JSON] BackendServiceGroupHealth
 
 -- | Gets the most recent health check results for this regional BackendService.
 --
@@ -81,7 +75,6 @@ data ComputeRegionBackendServicesGetHealth = ComputeRegionBackendServicesGetHeal
     callback :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: ResourceGroupReference,
-    -- |
     project :: Core.Text,
     -- | Name of the region scoping this request.
     region :: Core.Text,
@@ -103,51 +96,47 @@ newComputeRegionBackendServicesGetHealth ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeRegionBackendServicesGetHealth
-newComputeRegionBackendServicesGetHealth backendService payload project region =
-  ComputeRegionBackendServicesGetHealth
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      backendService = backendService,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeRegionBackendServicesGetHealth
+  backendService
+  payload
+  project
+  region =
     ComputeRegionBackendServicesGetHealth
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        backendService = backendService,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeRegionBackendServicesGetHealth where
   type
     Rs ComputeRegionBackendServicesGetHealth =
       BackendServiceGroupHealth
   type
     Scopes ComputeRegionBackendServicesGetHealth =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly
-       ]
-  requestClient
-    ComputeRegionBackendServicesGetHealth {..} =
-      go
-        project
-        region
-        backendService
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeRegionBackendServicesGetHealthResource
-            )
-            Core.mempty
+      '[CloudPlatform'FullControl, Compute'FullControl, Compute'Readonly]
+  requestClient ComputeRegionBackendServicesGetHealth {..} =
+    go
+      project
+      region
+      backendService
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeRegionBackendServicesGetHealthResource
+          )
+          Core.mempty

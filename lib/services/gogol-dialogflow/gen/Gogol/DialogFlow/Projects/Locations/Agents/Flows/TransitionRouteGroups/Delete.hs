@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.TransitionRouteGroups.De
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.transitionRouteGroups.delete@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete' request conforms to.
@@ -68,7 +66,7 @@ data DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete = DialogF
     callback :: (Core.Maybe Core.Text),
     -- | This field has no effect for transition route group that no page is using. If the transition route group is referenced by any page: * If @force@ is set to false, an error will be returned with message indicating pages that reference the transition route group. * If @force@ is set to true, Dialogflow will remove the transition route group, as well as any reference to it.
     force :: (Core.Maybe Core.Bool),
-    -- | Required. The name of the TransitionRouteGroup to delete. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@.
+    -- | Required. The name of the TransitionRouteGroup to delete. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@ or @projects\/\/locations\/\/agents\/\/transitionRouteGroups\/@.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -79,19 +77,21 @@ data DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete = DialogF
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete ::
-  -- |  Required. The name of the TransitionRouteGroup to delete. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@. See 'name'.
+  -- |  Required. The name of the TransitionRouteGroup to delete. Format: @projects\/\/locations\/\/agents\/\/flows\/\/transitionRouteGroups\/@ or @projects\/\/locations\/\/agents\/\/transitionRouteGroups\/@. See 'name'.
   Core.Text ->
   DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete
-newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete name =
-  DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      force = Core.Nothing,
-      name = name,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete
+  name =
+    DialogFlowProjectsLocationsAgentsFlowsTransitionRouteGroupsDelete
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        force = Core.Nothing,
+        name = name,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Channels.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Channels.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.channels.list@ method which the
@@ -53,6 +51,7 @@ type YouTubeChannelsListResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "categoryId" Core.Text
+    Core.:> Core.QueryParam "forHandle" Core.Text
     Core.:> Core.QueryParam "forUsername" Core.Text
     Core.:> Core.QueryParam "hl" Core.Text
     Core.:> Core.QueryParams "id" Core.Text
@@ -60,18 +59,12 @@ type YouTubeChannelsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "mine" Core.Bool
     Core.:> Core.QueryParam "mySubscribers" Core.Bool
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwner"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ChannelListResponse
+    Core.:> Core.Get '[Core.JSON] ChannelListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -85,6 +78,8 @@ data YouTubeChannelsList = YouTubeChannelsList
     callback :: (Core.Maybe Core.Text),
     -- | Return the channels within the specified guide category ID.
     categoryId :: (Core.Maybe Core.Text),
+    -- | Return the channel associated with a YouTube handle.
+    forHandle :: (Core.Maybe Core.Text),
     -- | Return the channel associated with a YouTube username.
     forUsername :: (Core.Maybe Core.Text),
     -- | Stands for \"host language\". Specifies the localization language of the metadata to be filled into snippet.localized. The field is filled with the default metadata if there is no localization in the specified language. The parameter value must be a language code included in the list returned by the i18nLanguages.list method (e.g. en/US, es/MX).
@@ -123,6 +118,7 @@ newYouTubeChannelsList part =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       categoryId = Core.Nothing,
+      forHandle = Core.Nothing,
       forUsername = Core.Nothing,
       hl = Core.Nothing,
       id = Core.Nothing,
@@ -154,6 +150,7 @@ instance Core.GoogleRequest YouTubeChannelsList where
       accessToken
       callback
       categoryId
+      forHandle
       forUsername
       hl
       (id Core.^. Core._Default)
@@ -170,7 +167,5 @@ instance Core.GoogleRequest YouTubeChannelsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeChannelsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeChannelsListResource)
           Core.mempty

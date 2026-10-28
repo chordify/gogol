@@ -1,14 +1,16 @@
 cabal-version:      2.2
 name:               gogol-sqladmin
-version:            1.0.0.0
+version:            1.0.0
 synopsis:           Google Cloud SQL Admin SDK.
 homepage:           https://github.com/brendanhay/gogol
 bug-reports:        https://github.com/brendanhay/gogol/issues
 license:            MPL-2.0
 license-file:       LICENSE
 author:             Brendan Hay
-maintainer:         Brendan Hay <brendan.g.hay+gogol@gmail.com>
-copyright:          Copyright (c) 2015-2022 Brendan Hay
+maintainer:
+  Brendan Hay <brendan.g.hay+gogol@gmail.com>, Toni Cebrián <toni@tonicebrian.com>
+
+copyright:          Copyright (c) 2015-2025 Brendan Hay
 category:           Google
 build-type:         Simple
 extra-source-files:
@@ -37,7 +39,7 @@ flag field-selectors
   manual:      True
 
 library
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src gen
   ghc-options:
     -Wall -fwarn-incomplete-uni-patterns
@@ -53,6 +55,11 @@ library
     Gogol.SQLAdmin.Sql.BackupRuns.Get
     Gogol.SQLAdmin.Sql.BackupRuns.Insert
     Gogol.SQLAdmin.Sql.BackupRuns.List
+    Gogol.SQLAdmin.Sql.Backups.CreateBackup
+    Gogol.SQLAdmin.Sql.Backups.DeleteBackup
+    Gogol.SQLAdmin.Sql.Backups.GetBackup
+    Gogol.SQLAdmin.Sql.Backups.ListBackups
+    Gogol.SQLAdmin.Sql.Backups.UpdateBackup
     Gogol.SQLAdmin.Sql.Connect.GenerateEphemeral
     Gogol.SQLAdmin.Sql.Connect.Get
     Gogol.SQLAdmin.Sql.Databases.Delete
@@ -62,9 +69,12 @@ library
     Gogol.SQLAdmin.Sql.Databases.Patch
     Gogol.SQLAdmin.Sql.Databases.Update
     Gogol.SQLAdmin.Sql.Flags.List
+    Gogol.SQLAdmin.Sql.Instances.AcquireSsrsLease
     Gogol.SQLAdmin.Sql.Instances.AddServerCa
+    Gogol.SQLAdmin.Sql.Instances.AddServerCertificate
     Gogol.SQLAdmin.Sql.Instances.Clone
     Gogol.SQLAdmin.Sql.Instances.Delete
+    Gogol.SQLAdmin.Sql.Instances.Demote
     Gogol.SQLAdmin.Sql.Instances.DemoteMaster
     Gogol.SQLAdmin.Sql.Instances.Export
     Gogol.SQLAdmin.Sql.Instances.Failover
@@ -73,19 +83,26 @@ library
     Gogol.SQLAdmin.Sql.Instances.Insert
     Gogol.SQLAdmin.Sql.Instances.List
     Gogol.SQLAdmin.Sql.Instances.ListServerCas
+    Gogol.SQLAdmin.Sql.Instances.ListServerCertificates
     Gogol.SQLAdmin.Sql.Instances.Patch
     Gogol.SQLAdmin.Sql.Instances.PromoteReplica
+    Gogol.SQLAdmin.Sql.Instances.Reencrypt
+    Gogol.SQLAdmin.Sql.Instances.ReleaseSsrsLease
     Gogol.SQLAdmin.Sql.Instances.ResetSslConfig
     Gogol.SQLAdmin.Sql.Instances.Restart
     Gogol.SQLAdmin.Sql.Instances.RestoreBackup
     Gogol.SQLAdmin.Sql.Instances.RotateServerCa
+    Gogol.SQLAdmin.Sql.Instances.RotateServerCertificate
     Gogol.SQLAdmin.Sql.Instances.StartReplica
     Gogol.SQLAdmin.Sql.Instances.StopReplica
+    Gogol.SQLAdmin.Sql.Instances.Switchover
     Gogol.SQLAdmin.Sql.Instances.TruncateLog
     Gogol.SQLAdmin.Sql.Instances.Update
+    Gogol.SQLAdmin.Sql.Operations.Cancel
     Gogol.SQLAdmin.Sql.Operations.Get
     Gogol.SQLAdmin.Sql.Operations.List
     Gogol.SQLAdmin.Sql.Projects.Instances.GetDiskShrinkConfig
+    Gogol.SQLAdmin.Sql.Projects.Instances.GetLatestRecoveryTime
     Gogol.SQLAdmin.Sql.Projects.Instances.PerformDiskShrink
     Gogol.SQLAdmin.Sql.Projects.Instances.RescheduleMaintenance
     Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
@@ -108,6 +125,4 @@ library
     Gogol.SQLAdmin.Internal.Product
     Gogol.SQLAdmin.Internal.Sum
 
-  build-depends:
-    , base        >=4.12   && <5
-    , gogol-core  ^>=1.0.0
+  build-depends:    gogol-core ^>=1.0.0

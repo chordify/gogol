@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Gmail.Internal.Product
@@ -81,6 +79,10 @@ module Gogol.Gmail.Internal.Product
     -- * ForwardingAddress
     ForwardingAddress (..),
     newForwardingAddress,
+
+    -- * HardwareKeyMetadata
+    HardwareKeyMetadata (..),
+    newHardwareKeyMetadata,
 
     -- * History
     History (..),
@@ -210,6 +212,10 @@ module Gogol.Gmail.Internal.Product
     SendAs (..),
     newSendAs,
 
+    -- * SignAndEncryptKeyPairs
+    SignAndEncryptKeyPairs (..),
+    newSignAndEncryptKeyPairs,
+
     -- * SmimeInfo
     SmimeInfo (..),
     newSmimeInfo,
@@ -237,7 +243,7 @@ module Gogol.Gmail.Internal.Product
 where
 
 import Gogol.Gmail.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Auto-forwarding settings for an account.
 --
@@ -294,21 +300,18 @@ newtype BatchDeleteMessagesRequest = BatchDeleteMessagesRequest
 -- | Creates a value of 'BatchDeleteMessagesRequest' with the minimum fields required to make a request.
 newBatchDeleteMessagesRequest ::
   BatchDeleteMessagesRequest
-newBatchDeleteMessagesRequest = BatchDeleteMessagesRequest {ids = Core.Nothing}
+newBatchDeleteMessagesRequest =
+  BatchDeleteMessagesRequest {ids = Core.Nothing}
 
 instance Core.FromJSON BatchDeleteMessagesRequest where
   parseJSON =
     Core.withObject
       "BatchDeleteMessagesRequest"
-      ( \o ->
-          BatchDeleteMessagesRequest
-            Core.<$> (o Core..:? "ids")
-      )
+      (\o -> BatchDeleteMessagesRequest Core.<$> (o Core..:? "ids"))
 
 instance Core.ToJSON BatchDeleteMessagesRequest where
   toJSON BatchDeleteMessagesRequest {..} =
-    Core.object
-      (Core.catMaybes [("ids" Core..=) Core.<$> ids])
+    Core.object (Core.catMaybes [("ids" Core..=) Core.<$> ids])
 
 --
 -- /See:/ 'newBatchModifyMessagesRequest' smart constructor.
@@ -359,8 +362,10 @@ instance Core.ToJSON BatchModifyMessagesRequest where
 data CseIdentity = CseIdentity
   { -- | The email address for the sending identity. The email address must be the primary email address of the authenticated user.
     emailAddress :: (Core.Maybe Core.Text),
-    -- | If a key pair is associated, the identifier of the key pair, CseKeyPair.
-    primaryKeyPairId :: (Core.Maybe Core.Text)
+    -- | If a key pair is associated, the ID of the key pair, CseKeyPair.
+    primaryKeyPairId :: (Core.Maybe Core.Text),
+    -- | The configuration of a CSE identity that uses different key pairs for signing and encryption.
+    signAndEncryptKeyPairs :: (Core.Maybe SignAndEncryptKeyPairs)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -368,7 +373,11 @@ data CseIdentity = CseIdentity
 newCseIdentity ::
   CseIdentity
 newCseIdentity =
-  CseIdentity {emailAddress = Core.Nothing, primaryKeyPairId = Core.Nothing}
+  CseIdentity
+    { emailAddress = Core.Nothing,
+      primaryKeyPairId = Core.Nothing,
+      signAndEncryptKeyPairs = Core.Nothing
+    }
 
 instance Core.FromJSON CseIdentity where
   parseJSON =
@@ -378,6 +387,7 @@ instance Core.FromJSON CseIdentity where
           CseIdentity
             Core.<$> (o Core..:? "emailAddress")
             Core.<*> (o Core..:? "primaryKeyPairId")
+            Core.<*> (o Core..:? "signAndEncryptKeyPairs")
       )
 
 instance Core.ToJSON CseIdentity where
@@ -385,8 +395,9 @@ instance Core.ToJSON CseIdentity where
     Core.object
       ( Core.catMaybes
           [ ("emailAddress" Core..=) Core.<$> emailAddress,
-            ("primaryKeyPairId" Core..=)
-              Core.<$> primaryKeyPairId
+            ("primaryKeyPairId" Core..=) Core.<$> primaryKeyPairId,
+            ("signAndEncryptKeyPairs" Core..=)
+              Core.<$> signAndEncryptKeyPairs
           ]
       )
 
@@ -449,10 +460,8 @@ instance Core.ToJSON CseKeyPair where
             ("keyPairId" Core..=) Core.<$> keyPairId,
             ("pem" Core..=) Core.<$> pem,
             ("pkcs7" Core..=) Core.<$> pkcs7,
-            ("privateKeyMetadata" Core..=)
-              Core.<$> privateKeyMetadata,
-            ("subjectEmailAddresses" Core..=)
-              Core.<$> subjectEmailAddresses
+            ("privateKeyMetadata" Core..=) Core.<$> privateKeyMetadata,
+            ("subjectEmailAddresses" Core..=) Core.<$> subjectEmailAddresses
           ]
       )
 
@@ -460,7 +469,9 @@ instance Core.ToJSON CseKeyPair where
 --
 -- /See:/ 'newCsePrivateKeyMetadata' smart constructor.
 data CsePrivateKeyMetadata = CsePrivateKeyMetadata
-  { -- | Metadata for a private key instance managed by an external key access control list service.
+  { -- | Metadata for hardware keys.
+    hardwareKeyMetadata :: (Core.Maybe HardwareKeyMetadata),
+    -- | Metadata for a private key instance managed by an external key access control list service.
     kaclsKeyMetadata :: (Core.Maybe KaclsKeyMetadata),
     -- | Output only. The immutable ID for the private key metadata instance.
     privateKeyMetadataId :: (Core.Maybe Core.Text)
@@ -472,7 +483,8 @@ newCsePrivateKeyMetadata ::
   CsePrivateKeyMetadata
 newCsePrivateKeyMetadata =
   CsePrivateKeyMetadata
-    { kaclsKeyMetadata = Core.Nothing,
+    { hardwareKeyMetadata = Core.Nothing,
+      kaclsKeyMetadata = Core.Nothing,
       privateKeyMetadataId = Core.Nothing
     }
 
@@ -482,7 +494,8 @@ instance Core.FromJSON CsePrivateKeyMetadata where
       "CsePrivateKeyMetadata"
       ( \o ->
           CsePrivateKeyMetadata
-            Core.<$> (o Core..:? "kaclsKeyMetadata")
+            Core.<$> (o Core..:? "hardwareKeyMetadata")
+            Core.<*> (o Core..:? "kaclsKeyMetadata")
             Core.<*> (o Core..:? "privateKeyMetadataId")
       )
 
@@ -490,10 +503,9 @@ instance Core.ToJSON CsePrivateKeyMetadata where
   toJSON CsePrivateKeyMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("kaclsKeyMetadata" Core..=)
-              Core.<$> kaclsKeyMetadata,
-            ("privateKeyMetadataId" Core..=)
-              Core.<$> privateKeyMetadataId
+          [ ("hardwareKeyMetadata" Core..=) Core.<$> hardwareKeyMetadata,
+            ("kaclsKeyMetadata" Core..=) Core.<$> kaclsKeyMetadata,
+            ("privateKeyMetadataId" Core..=) Core.<$> privateKeyMetadataId
           ]
       )
 
@@ -512,7 +524,10 @@ data Delegate = Delegate
 newDelegate ::
   Delegate
 newDelegate =
-  Delegate {delegateEmail = Core.Nothing, verificationStatus = Core.Nothing}
+  Delegate
+    { delegateEmail = Core.Nothing,
+      verificationStatus = Core.Nothing
+    }
 
 instance Core.FromJSON Delegate where
   parseJSON =
@@ -529,8 +544,7 @@ instance Core.ToJSON Delegate where
     Core.object
       ( Core.catMaybes
           [ ("delegateEmail" Core..=) Core.<$> delegateEmail,
-            ("verificationStatus" Core..=)
-              Core.<$> verificationStatus
+            ("verificationStatus" Core..=) Core.<$> verificationStatus
           ]
       )
 
@@ -575,17 +589,14 @@ instance Core.FromJSON Draft where
     Core.withObject
       "Draft"
       ( \o ->
-          Draft
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "message")
+          Draft Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "message")
       )
 
 instance Core.ToJSON Draft where
   toJSON Draft {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("message" Core..=) Core.<$> message
-          ]
+          [("id" Core..=) Core.<$> id, ("message" Core..=) Core.<$> message]
       )
 
 -- | Requests to turn on a client-side encryption key pair.
@@ -625,7 +636,11 @@ data Filter = Filter
 newFilter ::
   Filter
 newFilter =
-  Filter {action = Core.Nothing, criteria = Core.Nothing, id = Core.Nothing}
+  Filter
+    { action = Core.Nothing,
+      criteria = Core.Nothing,
+      id = Core.Nothing
+    }
 
 instance Core.FromJSON Filter where
   parseJSON =
@@ -800,12 +815,36 @@ instance Core.ToJSON ForwardingAddress where
   toJSON ForwardingAddress {..} =
     Core.object
       ( Core.catMaybes
-          [ ("forwardingEmail" Core..=)
-              Core.<$> forwardingEmail,
-            ("verificationStatus" Core..=)
-              Core.<$> verificationStatus
+          [ ("forwardingEmail" Core..=) Core.<$> forwardingEmail,
+            ("verificationStatus" Core..=) Core.<$> verificationStatus
           ]
       )
+
+-- | Metadata for hardware keys.
+--
+-- /See:/ 'newHardwareKeyMetadata' smart constructor.
+newtype HardwareKeyMetadata = HardwareKeyMetadata
+  { -- | Description about the hardware key.
+    description :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HardwareKeyMetadata' with the minimum fields required to make a request.
+newHardwareKeyMetadata ::
+  HardwareKeyMetadata
+newHardwareKeyMetadata =
+  HardwareKeyMetadata {description = Core.Nothing}
+
+instance Core.FromJSON HardwareKeyMetadata where
+  parseJSON =
+    Core.withObject
+      "HardwareKeyMetadata"
+      (\o -> HardwareKeyMetadata Core.<$> (o Core..:? "description"))
+
+instance Core.ToJSON HardwareKeyMetadata where
+  toJSON HardwareKeyMetadata {..} =
+    Core.object
+      (Core.catMaybes [("description" Core..=) Core.<$> description])
 
 -- | A record of a change to the user\'s mailbox. Each history change may affect multiple messages in multiple ways.
 --
@@ -862,8 +901,7 @@ instance Core.ToJSON History where
             ("labelsRemoved" Core..=) Core.<$> labelsRemoved,
             ("messages" Core..=) Core.<$> messages,
             ("messagesAdded" Core..=) Core.<$> messagesAdded,
-            ("messagesDeleted" Core..=)
-              Core.<$> messagesDeleted
+            ("messagesDeleted" Core..=) Core.<$> messagesDeleted
           ]
       )
 
@@ -872,7 +910,6 @@ instance Core.ToJSON History where
 data HistoryLabelAdded = HistoryLabelAdded
   { -- | Label IDs added to the message.
     labelIds :: (Core.Maybe [Core.Text]),
-    -- |
     message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -881,7 +918,10 @@ data HistoryLabelAdded = HistoryLabelAdded
 newHistoryLabelAdded ::
   HistoryLabelAdded
 newHistoryLabelAdded =
-  HistoryLabelAdded {labelIds = Core.Nothing, message = Core.Nothing}
+  HistoryLabelAdded
+    { labelIds = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON HistoryLabelAdded where
   parseJSON =
@@ -907,7 +947,6 @@ instance Core.ToJSON HistoryLabelAdded where
 data HistoryLabelRemoved = HistoryLabelRemoved
   { -- | Label IDs removed from the message.
     labelIds :: (Core.Maybe [Core.Text]),
-    -- |
     message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -916,7 +955,10 @@ data HistoryLabelRemoved = HistoryLabelRemoved
 newHistoryLabelRemoved ::
   HistoryLabelRemoved
 newHistoryLabelRemoved =
-  HistoryLabelRemoved {labelIds = Core.Nothing, message = Core.Nothing}
+  HistoryLabelRemoved
+    { labelIds = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON HistoryLabelRemoved where
   parseJSON =
@@ -940,59 +982,50 @@ instance Core.ToJSON HistoryLabelRemoved where
 --
 -- /See:/ 'newHistoryMessageAdded' smart constructor.
 newtype HistoryMessageAdded = HistoryMessageAdded
-  { -- |
-    message :: (Core.Maybe Message)
+  { message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
 newHistoryMessageAdded ::
   HistoryMessageAdded
-newHistoryMessageAdded = HistoryMessageAdded {message = Core.Nothing}
+newHistoryMessageAdded =
+  HistoryMessageAdded {message = Core.Nothing}
 
 instance Core.FromJSON HistoryMessageAdded where
   parseJSON =
     Core.withObject
       "HistoryMessageAdded"
-      ( \o ->
-          HistoryMessageAdded Core.<$> (o Core..:? "message")
-      )
+      (\o -> HistoryMessageAdded Core.<$> (o Core..:? "message"))
 
 instance Core.ToJSON HistoryMessageAdded where
   toJSON HistoryMessageAdded {..} =
     Core.object
-      ( Core.catMaybes
-          [("message" Core..=) Core.<$> message]
-      )
+      (Core.catMaybes [("message" Core..=) Core.<$> message])
 
 --
 -- /See:/ 'newHistoryMessageDeleted' smart constructor.
 newtype HistoryMessageDeleted = HistoryMessageDeleted
-  { -- |
-    message :: (Core.Maybe Message)
+  { message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
 newHistoryMessageDeleted ::
   HistoryMessageDeleted
-newHistoryMessageDeleted = HistoryMessageDeleted {message = Core.Nothing}
+newHistoryMessageDeleted =
+  HistoryMessageDeleted {message = Core.Nothing}
 
 instance Core.FromJSON HistoryMessageDeleted where
   parseJSON =
     Core.withObject
       "HistoryMessageDeleted"
-      ( \o ->
-          HistoryMessageDeleted
-            Core.<$> (o Core..:? "message")
-      )
+      (\o -> HistoryMessageDeleted Core.<$> (o Core..:? "message"))
 
 instance Core.ToJSON HistoryMessageDeleted where
   toJSON HistoryMessageDeleted {..} =
     Core.object
-      ( Core.catMaybes
-          [("message" Core..=) Core.<$> message]
-      )
+      (Core.catMaybes [("message" Core..=) Core.<$> message])
 
 -- | IMAP settings for an account.
 --
@@ -1058,7 +1091,10 @@ data KaclsKeyMetadata = KaclsKeyMetadata
 newKaclsKeyMetadata ::
   KaclsKeyMetadata
 newKaclsKeyMetadata =
-  KaclsKeyMetadata {kaclsData = Core.Nothing, kaclsUri = Core.Nothing}
+  KaclsKeyMetadata
+    { kaclsData = Core.Nothing,
+      kaclsUri = Core.Nothing
+    }
 
 instance Core.FromJSON KaclsKeyMetadata where
   parseJSON =
@@ -1147,10 +1183,8 @@ instance Core.ToJSON Label where
       ( Core.catMaybes
           [ ("color" Core..=) Core.<$> color,
             ("id" Core..=) Core.<$> id,
-            ("labelListVisibility" Core..=)
-              Core.<$> labelListVisibility,
-            ("messageListVisibility" Core..=)
-              Core.<$> messageListVisibility,
+            ("labelListVisibility" Core..=) Core.<$> labelListVisibility,
+            ("messageListVisibility" Core..=) Core.<$> messageListVisibility,
             ("messagesTotal" Core..=) Core.<$> messagesTotal,
             ("messagesUnread" Core..=) Core.<$> messagesUnread,
             ("name" Core..=) Core.<$> name,
@@ -1176,7 +1210,10 @@ data LabelColor = LabelColor
 newLabelColor ::
   LabelColor
 newLabelColor =
-  LabelColor {backgroundColor = Core.Nothing, textColor = Core.Nothing}
+  LabelColor
+    { backgroundColor = Core.Nothing,
+      textColor = Core.Nothing
+    }
 
 instance Core.FromJSON LabelColor where
   parseJSON =
@@ -1192,8 +1229,7 @@ instance Core.ToJSON LabelColor where
   toJSON LabelColor {..} =
     Core.object
       ( Core.catMaybes
-          [ ("backgroundColor" Core..=)
-              Core.<$> backgroundColor,
+          [ ("backgroundColor" Core..=) Core.<$> backgroundColor,
             ("textColor" Core..=) Core.<$> textColor
           ]
       )
@@ -1210,24 +1246,20 @@ newtype LanguageSettings = LanguageSettings
 -- | Creates a value of 'LanguageSettings' with the minimum fields required to make a request.
 newLanguageSettings ::
   LanguageSettings
-newLanguageSettings = LanguageSettings {displayLanguage = Core.Nothing}
+newLanguageSettings =
+  LanguageSettings {displayLanguage = Core.Nothing}
 
 instance Core.FromJSON LanguageSettings where
   parseJSON =
     Core.withObject
       "LanguageSettings"
-      ( \o ->
-          LanguageSettings
-            Core.<$> (o Core..:? "displayLanguage")
-      )
+      (\o -> LanguageSettings Core.<$> (o Core..:? "displayLanguage"))
 
 instance Core.ToJSON LanguageSettings where
   toJSON LanguageSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("displayLanguage" Core..=)
-              Core.<$> displayLanguage
-          ]
+          [("displayLanguage" Core..=) Core.<$> displayLanguage]
       )
 
 --
@@ -1318,23 +1350,19 @@ newtype ListDelegatesResponse = ListDelegatesResponse
 -- | Creates a value of 'ListDelegatesResponse' with the minimum fields required to make a request.
 newListDelegatesResponse ::
   ListDelegatesResponse
-newListDelegatesResponse = ListDelegatesResponse {delegates = Core.Nothing}
+newListDelegatesResponse =
+  ListDelegatesResponse {delegates = Core.Nothing}
 
 instance Core.FromJSON ListDelegatesResponse where
   parseJSON =
     Core.withObject
       "ListDelegatesResponse"
-      ( \o ->
-          ListDelegatesResponse
-            Core.<$> (o Core..:? "delegates")
-      )
+      (\o -> ListDelegatesResponse Core.<$> (o Core..:? "delegates"))
 
 instance Core.ToJSON ListDelegatesResponse where
   toJSON ListDelegatesResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("delegates" Core..=) Core.<$> delegates]
-      )
+      (Core.catMaybes [("delegates" Core..=) Core.<$> delegates])
 
 --
 -- /See:/ 'newListDraftsResponse' smart constructor.
@@ -1375,8 +1403,7 @@ instance Core.ToJSON ListDraftsResponse where
       ( Core.catMaybes
           [ ("drafts" Core..=) Core.<$> drafts,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resultSizeEstimate" Core..=)
-              Core.<$> resultSizeEstimate
+            ("resultSizeEstimate" Core..=) Core.<$> resultSizeEstimate
           ]
       )
 
@@ -1398,14 +1425,11 @@ instance Core.FromJSON ListFiltersResponse where
   parseJSON =
     Core.withObject
       "ListFiltersResponse"
-      ( \o ->
-          ListFiltersResponse Core.<$> (o Core..:? "filter")
-      )
+      (\o -> ListFiltersResponse Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON ListFiltersResponse where
   toJSON ListFiltersResponse {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | Response for the ListForwardingAddresses method.
 --
@@ -1420,12 +1444,12 @@ newtype ListForwardingAddressesResponse = ListForwardingAddressesResponse
 newListForwardingAddressesResponse ::
   ListForwardingAddressesResponse
 newListForwardingAddressesResponse =
-  ListForwardingAddressesResponse {forwardingAddresses = Core.Nothing}
+  ListForwardingAddressesResponse
+    { forwardingAddresses =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    ListForwardingAddressesResponse
-  where
+instance Core.FromJSON ListForwardingAddressesResponse where
   parseJSON =
     Core.withObject
       "ListForwardingAddressesResponse"
@@ -1438,9 +1462,7 @@ instance Core.ToJSON ListForwardingAddressesResponse where
   toJSON ListForwardingAddressesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("forwardingAddresses" Core..=)
-              Core.<$> forwardingAddresses
-          ]
+          [("forwardingAddresses" Core..=) Core.<$> forwardingAddresses]
       )
 
 --
@@ -1472,9 +1494,7 @@ instance Core.FromJSON ListHistoryResponse where
       ( \o ->
           ListHistoryResponse
             Core.<$> (o Core..:? "history")
-            Core.<*> ( o Core..:? "historyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "historyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -1483,8 +1503,7 @@ instance Core.ToJSON ListHistoryResponse where
     Core.object
       ( Core.catMaybes
           [ ("history" Core..=) Core.<$> history,
-            ("historyId" Core..=) Core.. Core.AsText
-              Core.<$> historyId,
+            ("historyId" Core..=) Core.. Core.AsText Core.<$> historyId,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1506,14 +1525,11 @@ instance Core.FromJSON ListLabelsResponse where
   parseJSON =
     Core.withObject
       "ListLabelsResponse"
-      ( \o ->
-          ListLabelsResponse Core.<$> (o Core..:? "labels")
-      )
+      (\o -> ListLabelsResponse Core.<$> (o Core..:? "labels"))
 
 instance Core.ToJSON ListLabelsResponse where
   toJSON ListLabelsResponse {..} =
-    Core.object
-      (Core.catMaybes [("labels" Core..=) Core.<$> labels])
+    Core.object (Core.catMaybes [("labels" Core..=) Core.<$> labels])
 
 --
 -- /See:/ 'newListMessagesResponse' smart constructor.
@@ -1554,8 +1570,7 @@ instance Core.ToJSON ListMessagesResponse where
       ( Core.catMaybes
           [ ("messages" Core..=) Core.<$> messages,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resultSizeEstimate" Core..=)
-              Core.<$> resultSizeEstimate
+            ("resultSizeEstimate" Core..=) Core.<$> resultSizeEstimate
           ]
       )
 
@@ -1577,14 +1592,11 @@ instance Core.FromJSON ListSendAsResponse where
   parseJSON =
     Core.withObject
       "ListSendAsResponse"
-      ( \o ->
-          ListSendAsResponse Core.<$> (o Core..:? "sendAs")
-      )
+      (\o -> ListSendAsResponse Core.<$> (o Core..:? "sendAs"))
 
 instance Core.ToJSON ListSendAsResponse where
   toJSON ListSendAsResponse {..} =
-    Core.object
-      (Core.catMaybes [("sendAs" Core..=) Core.<$> sendAs])
+    Core.object (Core.catMaybes [("sendAs" Core..=) Core.<$> sendAs])
 
 --
 -- /See:/ 'newListSmimeInfoResponse' smart constructor.
@@ -1597,23 +1609,19 @@ newtype ListSmimeInfoResponse = ListSmimeInfoResponse
 -- | Creates a value of 'ListSmimeInfoResponse' with the minimum fields required to make a request.
 newListSmimeInfoResponse ::
   ListSmimeInfoResponse
-newListSmimeInfoResponse = ListSmimeInfoResponse {smimeInfo = Core.Nothing}
+newListSmimeInfoResponse =
+  ListSmimeInfoResponse {smimeInfo = Core.Nothing}
 
 instance Core.FromJSON ListSmimeInfoResponse where
   parseJSON =
     Core.withObject
       "ListSmimeInfoResponse"
-      ( \o ->
-          ListSmimeInfoResponse
-            Core.<$> (o Core..:? "smimeInfo")
-      )
+      (\o -> ListSmimeInfoResponse Core.<$> (o Core..:? "smimeInfo"))
 
 instance Core.ToJSON ListSmimeInfoResponse where
   toJSON ListSmimeInfoResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("smimeInfo" Core..=) Core.<$> smimeInfo]
-      )
+      (Core.catMaybes [("smimeInfo" Core..=) Core.<$> smimeInfo])
 
 --
 -- /See:/ 'newListThreadsResponse' smart constructor.
@@ -1653,8 +1661,7 @@ instance Core.ToJSON ListThreadsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("resultSizeEstimate" Core..=)
-              Core.<$> resultSizeEstimate,
+            ("resultSizeEstimate" Core..=) Core.<$> resultSizeEstimate,
             ("threads" Core..=) Core.<$> threads
           ]
       )
@@ -1706,13 +1713,9 @@ instance Core.FromJSON Message where
       "Message"
       ( \o ->
           Message
-            Core.<$> ( o Core..:? "historyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "historyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "internalDate"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "internalDate" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "payload")
             Core.<*> (o Core..:? "raw")
@@ -1725,11 +1728,9 @@ instance Core.ToJSON Message where
   toJSON Message {..} =
     Core.object
       ( Core.catMaybes
-          [ ("historyId" Core..=) Core.. Core.AsText
-              Core.<$> historyId,
+          [ ("historyId" Core..=) Core.. Core.AsText Core.<$> historyId,
             ("id" Core..=) Core.<$> id,
-            ("internalDate" Core..=) Core.. Core.AsText
-              Core.<$> internalDate,
+            ("internalDate" Core..=) Core.. Core.AsText Core.<$> internalDate,
             ("labelIds" Core..=) Core.<$> labelIds,
             ("payload" Core..=) Core.<$> payload,
             ("raw" Core..=) Core.<$> raw,
@@ -1864,16 +1865,15 @@ instance Core.FromJSON MessagePartHeader where
       "MessagePartHeader"
       ( \o ->
           MessagePartHeader
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON MessagePartHeader where
   toJSON MessagePartHeader {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 --
@@ -1987,7 +1987,10 @@ data PopSettings = PopSettings
 newPopSettings ::
   PopSettings
 newPopSettings =
-  PopSettings {accessWindow = Core.Nothing, disposition = Core.Nothing}
+  PopSettings
+    { accessWindow = Core.Nothing,
+      disposition = Core.Nothing
+    }
 
 instance Core.FromJSON PopSettings where
   parseJSON =
@@ -2041,9 +2044,7 @@ instance Core.FromJSON Profile where
       ( \o ->
           Profile
             Core.<$> (o Core..:? "emailAddress")
-            Core.<*> ( o Core..:? "historyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "historyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "messagesTotal")
             Core.<*> (o Core..:? "threadsTotal")
       )
@@ -2053,8 +2054,7 @@ instance Core.ToJSON Profile where
     Core.object
       ( Core.catMaybes
           [ ("emailAddress" Core..=) Core.<$> emailAddress,
-            ("historyId" Core..=) Core.. Core.AsText
-              Core.<$> historyId,
+            ("historyId" Core..=) Core.. Core.AsText Core.<$> historyId,
             ("messagesTotal" Core..=) Core.<$> messagesTotal,
             ("threadsTotal" Core..=) Core.<$> threadsTotal
           ]
@@ -2130,8 +2130,46 @@ instance Core.ToJSON SendAs where
             ("signature" Core..=) Core.<$> signature,
             ("smtpMsa" Core..=) Core.<$> smtpMsa,
             ("treatAsAlias" Core..=) Core.<$> treatAsAlias,
-            ("verificationStatus" Core..=)
-              Core.<$> verificationStatus
+            ("verificationStatus" Core..=) Core.<$> verificationStatus
+          ]
+      )
+
+-- | The configuration of a CSE identity that uses different key pairs for signing and encryption.
+--
+-- /See:/ 'newSignAndEncryptKeyPairs' smart constructor.
+data SignAndEncryptKeyPairs = SignAndEncryptKeyPairs
+  { -- | The ID of the CseKeyPair that encrypts signed outgoing mail.
+    encryptionKeyPairId :: (Core.Maybe Core.Text),
+    -- | The ID of the CseKeyPair that signs outgoing mail.
+    signingKeyPairId :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SignAndEncryptKeyPairs' with the minimum fields required to make a request.
+newSignAndEncryptKeyPairs ::
+  SignAndEncryptKeyPairs
+newSignAndEncryptKeyPairs =
+  SignAndEncryptKeyPairs
+    { encryptionKeyPairId = Core.Nothing,
+      signingKeyPairId = Core.Nothing
+    }
+
+instance Core.FromJSON SignAndEncryptKeyPairs where
+  parseJSON =
+    Core.withObject
+      "SignAndEncryptKeyPairs"
+      ( \o ->
+          SignAndEncryptKeyPairs
+            Core.<$> (o Core..:? "encryptionKeyPairId")
+            Core.<*> (o Core..:? "signingKeyPairId")
+      )
+
+instance Core.ToJSON SignAndEncryptKeyPairs where
+  toJSON SignAndEncryptKeyPairs {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("encryptionKeyPairId" Core..=) Core.<$> encryptionKeyPairId,
+            ("signingKeyPairId" Core..=) Core.<$> signingKeyPairId
           ]
       )
 
@@ -2177,9 +2215,7 @@ instance Core.FromJSON SmimeInfo where
       ( \o ->
           SmimeInfo
             Core.<$> (o Core..:? "encryptedKeyPassword")
-            Core.<*> ( o Core..:? "expiration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "isDefault")
             Core.<*> (o Core..:? "issuerCn")
@@ -2191,10 +2227,8 @@ instance Core.ToJSON SmimeInfo where
   toJSON SmimeInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("encryptedKeyPassword" Core..=)
-              Core.<$> encryptedKeyPassword,
-            ("expiration" Core..=) Core.. Core.AsText
-              Core.<$> expiration,
+          [ ("encryptedKeyPassword" Core..=) Core.<$> encryptedKeyPassword,
+            ("expiration" Core..=) Core.. Core.AsText Core.<$> expiration,
             ("id" Core..=) Core.<$> id,
             ("isDefault" Core..=) Core.<$> isDefault,
             ("issuerCn" Core..=) Core.<$> issuerCn,
@@ -2289,9 +2323,7 @@ instance Core.FromJSON Thread where
       "Thread"
       ( \o ->
           Thread
-            Core.<$> ( o Core..:? "historyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "historyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "messages")
             Core.<*> (o Core..:? "snippet")
@@ -2301,8 +2333,7 @@ instance Core.ToJSON Thread where
   toJSON Thread {..} =
     Core.object
       ( Core.catMaybes
-          [ ("historyId" Core..=) Core.. Core.AsText
-              Core.<$> historyId,
+          [ ("historyId" Core..=) Core.. Core.AsText Core.<$> historyId,
             ("id" Core..=) Core.<$> id,
             ("messages" Core..=) Core.<$> messages,
             ("snippet" Core..=) Core.<$> snippet
@@ -2354,38 +2385,27 @@ instance Core.FromJSON VacationSettings where
       ( \o ->
           VacationSettings
             Core.<$> (o Core..:? "enableAutoReply")
-            Core.<*> ( o Core..:? "endTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "endTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "responseBodyHtml")
             Core.<*> (o Core..:? "responseBodyPlainText")
             Core.<*> (o Core..:? "responseSubject")
             Core.<*> (o Core..:? "restrictToContacts")
             Core.<*> (o Core..:? "restrictToDomain")
-            Core.<*> ( o Core..:? "startTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "startTime" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON VacationSettings where
   toJSON VacationSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enableAutoReply" Core..=)
-              Core.<$> enableAutoReply,
-            ("endTime" Core..=) Core.. Core.AsText
-              Core.<$> endTime,
-            ("responseBodyHtml" Core..=)
-              Core.<$> responseBodyHtml,
-            ("responseBodyPlainText" Core..=)
-              Core.<$> responseBodyPlainText,
+          [ ("enableAutoReply" Core..=) Core.<$> enableAutoReply,
+            ("endTime" Core..=) Core.. Core.AsText Core.<$> endTime,
+            ("responseBodyHtml" Core..=) Core.<$> responseBodyHtml,
+            ("responseBodyPlainText" Core..=) Core.<$> responseBodyPlainText,
             ("responseSubject" Core..=) Core.<$> responseSubject,
-            ("restrictToContacts" Core..=)
-              Core.<$> restrictToContacts,
-            ("restrictToDomain" Core..=)
-              Core.<$> restrictToDomain,
-            ("startTime" Core..=) Core.. Core.AsText
-              Core.<$> startTime
+            ("restrictToContacts" Core..=) Core.<$> restrictToContacts,
+            ("restrictToDomain" Core..=) Core.<$> restrictToDomain,
+            ("startTime" Core..=) Core.. Core.AsText Core.<$> startTime
           ]
       )
 
@@ -2393,8 +2413,10 @@ instance Core.ToJSON VacationSettings where
 --
 -- /See:/ 'newWatchRequest' smart constructor.
 data WatchRequest = WatchRequest
-  { -- | Filtering behavior of labelIds list specified.
+  { -- | Filtering behavior of @labelIds list@ specified. This field is deprecated because it caused incorrect behavior in some cases; use @label_filter_behavior@ instead.
     labelFilterAction :: (Core.Maybe WatchRequest_LabelFilterAction),
+    -- | Filtering behavior of @labelIds list@ specified. This field replaces @label_filter_action@; if set, @label_filter_action@ is ignored.
+    labelFilterBehavior :: (Core.Maybe WatchRequest_LabelFilterBehavior),
     -- | List of label_ids to restrict notifications about. By default, if unspecified, all changes are pushed out. If specified then dictates which labels are required for a push notification to be generated.
     labelIds :: (Core.Maybe [Core.Text]),
     -- | A fully qualified Google Cloud Pub\/Sub API topic name to publish the events to. This topic name __must__ already exist in Cloud Pub\/Sub and you __must__ have already granted gmail \"publish\" permission on it. For example, \"projects\/my-project-identifier\/topics\/my-topic-name\" (using the Cloud Pub\/Sub \"v1\" topic naming format). Note that the \"my-project-identifier\" portion must exactly match your Google developer project id (the one executing this watch request).
@@ -2408,6 +2430,7 @@ newWatchRequest ::
 newWatchRequest =
   WatchRequest
     { labelFilterAction = Core.Nothing,
+      labelFilterBehavior = Core.Nothing,
       labelIds = Core.Nothing,
       topicName = Core.Nothing
     }
@@ -2419,6 +2442,7 @@ instance Core.FromJSON WatchRequest where
       ( \o ->
           WatchRequest
             Core.<$> (o Core..:? "labelFilterAction")
+            Core.<*> (o Core..:? "labelFilterBehavior")
             Core.<*> (o Core..:? "labelIds")
             Core.<*> (o Core..:? "topicName")
       )
@@ -2427,8 +2451,8 @@ instance Core.ToJSON WatchRequest where
   toJSON WatchRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("labelFilterAction" Core..=)
-              Core.<$> labelFilterAction,
+          [ ("labelFilterAction" Core..=) Core.<$> labelFilterAction,
+            ("labelFilterBehavior" Core..=) Core.<$> labelFilterBehavior,
             ("labelIds" Core..=) Core.<$> labelIds,
             ("topicName" Core..=) Core.<$> topicName
           ]
@@ -2449,7 +2473,10 @@ data WatchResponse = WatchResponse
 newWatchResponse ::
   WatchResponse
 newWatchResponse =
-  WatchResponse {expiration = Core.Nothing, historyId = Core.Nothing}
+  WatchResponse
+    { expiration = Core.Nothing,
+      historyId = Core.Nothing
+    }
 
 instance Core.FromJSON WatchResponse where
   parseJSON =
@@ -2457,21 +2484,15 @@ instance Core.FromJSON WatchResponse where
       "WatchResponse"
       ( \o ->
           WatchResponse
-            Core.<$> ( o Core..:? "expiration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "historyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "expiration" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "historyId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON WatchResponse where
   toJSON WatchResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expiration" Core..=) Core.. Core.AsText
-              Core.<$> expiration,
-            ("historyId" Core..=) Core.. Core.AsText
-              Core.<$> historyId
+          [ ("expiration" Core..=) Core.. Core.AsText Core.<$> expiration,
+            ("historyId" Core..=) Core.. Core.AsText Core.<$> historyId
           ]
       )

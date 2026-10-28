@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudTasks.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudTasks.Internal.Product
@@ -46,6 +44,18 @@ module Gogol.CloudTasks.Internal.Product
     Binding (..),
     newBinding,
 
+    -- * BufferTaskRequest
+    BufferTaskRequest (..),
+    newBufferTaskRequest,
+
+    -- * BufferTaskResponse
+    BufferTaskResponse (..),
+    newBufferTaskResponse,
+
+    -- * CmekConfig
+    CmekConfig (..),
+    newCmekConfig,
+
     -- * CreateTaskRequest
     CreateTaskRequest (..),
     newCreateTaskRequest,
@@ -66,6 +76,22 @@ module Gogol.CloudTasks.Internal.Product
     GetPolicyOptions (..),
     newGetPolicyOptions,
 
+    -- * Header
+    Header (..),
+    newHeader,
+
+    -- * HeaderOverride
+    HeaderOverride (..),
+    newHeaderOverride,
+
+    -- * HttpBody
+    HttpBody (..),
+    newHttpBody,
+
+    -- * HttpBody_ExtensionsItem
+    HttpBody_ExtensionsItem (..),
+    newHttpBody_ExtensionsItem,
+
     -- * HttpRequest
     HttpRequest (..),
     newHttpRequest,
@@ -73,6 +99,10 @@ module Gogol.CloudTasks.Internal.Product
     -- * HttpRequest_Headers
     HttpRequest_Headers (..),
     newHttpRequest_Headers,
+
+    -- * HttpTarget
+    HttpTarget (..),
+    newHttpTarget,
 
     -- * ListLocationsResponse
     ListLocationsResponse (..),
@@ -106,6 +136,10 @@ module Gogol.CloudTasks.Internal.Product
     OidcToken (..),
     newOidcToken,
 
+    -- * PathOverride
+    PathOverride (..),
+    newPathOverride,
+
     -- * PauseQueueRequest
     PauseQueueRequest (..),
     newPauseQueueRequest,
@@ -117,6 +151,10 @@ module Gogol.CloudTasks.Internal.Product
     -- * PurgeQueueRequest
     PurgeQueueRequest (..),
     newPurgeQueueRequest,
+
+    -- * QueryOverride
+    QueryOverride (..),
+    newQueryOverride,
 
     -- * Queue
     Queue (..),
@@ -165,11 +203,15 @@ module Gogol.CloudTasks.Internal.Product
     -- * TestIamPermissionsResponse
     TestIamPermissionsResponse (..),
     newTestIamPermissionsResponse,
+
+    -- * UriOverride
+    UriOverride (..),
+    newUriOverride,
   )
 where
 
 import Gogol.CloudTasks.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | App Engine HTTP request. The message defines the HTTP request that is sent to an App Engine app when the task is dispatched. Using AppEngineHttpRequest requires <https://cloud.google.com/appengine/docs/admin-api/access-control appengine.applications.get> Google IAM permission for the project and the following scope: @https:\/\/www.googleapis.com\/auth\/cloud-platform@ The task will be delivered to the App Engine app which belongs to the same project as the queue. For more information, see <https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed How Requests are Routed> and how routing is affected by <https://cloud.google.com/appengine/docs/python/config/dispatchref dispatch files>. Traffic is encrypted during transport and never leaves Google datacenters. Because this traffic is carried over a communication mechanism internal to Google, you cannot explicitly set the protocol (for example, HTTP or HTTPS). The request to the handler, however, will appear to have used the HTTP protocol.
 -- The AppEngineRouting used to construct the URL that the task is delivered to can be set at the queue-level or task-level: * If app/engine/routing/override is set on the queue, this value is used for all tasks in the queue, no matter what the setting is for the task-level app/engine/routing. The @url@ that the task will be sent to is: * @url =@ host @+@ relative/uri Tasks can be dispatched to secure app handlers, unsecure app handlers, and URIs restricted with <https://cloud.google.com/appengine/docs/standard/python/config/appref login: admin>. Because tasks are not run as any user, they cannot be dispatched to URIs restricted with <https://cloud.google.com/appengine/docs/standard/python/config/appref login: required> Task dispatches also do not follow redirects. The task attempt has succeeded if the app\'s request handler returns an HTTP response code in the range [@200@ - @299@]. The task attempt has failed if the app\'s handler returns a non-2xx response code or Cloud Tasks does not receive response before
@@ -220,8 +262,7 @@ instance Core.ToJSON AppEngineHttpRequest where
   toJSON AppEngineHttpRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appEngineRouting" Core..=)
-              Core.<$> appEngineRouting,
+          [ ("appEngineRouting" Core..=) Core.<$> appEngineRouting,
             ("body" Core..=) Core.<$> body,
             ("headers" Core..=) Core.<$> headers,
             ("httpMethod" Core..=) Core.<$> httpMethod,
@@ -234,8 +275,7 @@ instance Core.ToJSON AppEngineHttpRequest where
 --
 -- /See:/ 'newAppEngineHttpRequest_Headers' smart constructor.
 newtype AppEngineHttpRequest_Headers = AppEngineHttpRequest_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -252,13 +292,11 @@ instance Core.FromJSON AppEngineHttpRequest_Headers where
     Core.withObject
       "AppEngineHttpRequest_Headers"
       ( \o ->
-          AppEngineHttpRequest_Headers
-            Core.<$> (Core.parseJSONObject o)
+          AppEngineHttpRequest_Headers Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON AppEngineHttpRequest_Headers where
-  toJSON AppEngineHttpRequest_Headers {..} =
-    Core.toJSON additional
+  toJSON AppEngineHttpRequest_Headers {..} = Core.toJSON additional
 
 -- | App Engine Routing. Defines routing characteristics specific to App Engine - service, version, and instance. For more information about services, versions, and instances see <https://cloud.google.com/appengine/docs/python/an-overview-of-app-engine An Overview of App Engine>, <https://cloud.google.com/appengine/docs/python/microservices-on-app-engine Microservices Architecture on Google App Engine>, <https://cloud.google.com/appengine/docs/standard/python/how-requests-are-routed App Engine Standard request routing>, and <https://cloud.google.com/appengine/docs/flexible/python/how-requests-are-routed App Engine Flex request routing>. Using AppEngineRouting requires <https://cloud.google.com/appengine/docs/admin-api/access-control appengine.applications.get> Google IAM permission for the project and the following scope: @https:\/\/www.googleapis.com\/auth\/cloud-platform@
 --
@@ -365,10 +403,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -404,14 +444,98 @@ instance Core.ToJSON Binding where
           ]
       )
 
+-- | Request message for BufferTask.
+--
+-- /See:/ 'newBufferTaskRequest' smart constructor.
+newtype BufferTaskRequest = BufferTaskRequest
+  { -- | Optional. Body of the HTTP request. The body can take any generic value. The value is written to the HttpRequest of the [Task].
+    body :: (Core.Maybe HttpBody)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BufferTaskRequest' with the minimum fields required to make a request.
+newBufferTaskRequest ::
+  BufferTaskRequest
+newBufferTaskRequest = BufferTaskRequest {body = Core.Nothing}
+
+instance Core.FromJSON BufferTaskRequest where
+  parseJSON =
+    Core.withObject
+      "BufferTaskRequest"
+      (\o -> BufferTaskRequest Core.<$> (o Core..:? "body"))
+
+instance Core.ToJSON BufferTaskRequest where
+  toJSON BufferTaskRequest {..} =
+    Core.object (Core.catMaybes [("body" Core..=) Core.<$> body])
+
+-- | Response message for BufferTask.
+--
+-- /See:/ 'newBufferTaskResponse' smart constructor.
+newtype BufferTaskResponse = BufferTaskResponse
+  { -- | The created task.
+    task :: (Core.Maybe Task)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BufferTaskResponse' with the minimum fields required to make a request.
+newBufferTaskResponse ::
+  BufferTaskResponse
+newBufferTaskResponse = BufferTaskResponse {task = Core.Nothing}
+
+instance Core.FromJSON BufferTaskResponse where
+  parseJSON =
+    Core.withObject
+      "BufferTaskResponse"
+      (\o -> BufferTaskResponse Core.<$> (o Core..:? "task"))
+
+instance Core.ToJSON BufferTaskResponse where
+  toJSON BufferTaskResponse {..} =
+    Core.object (Core.catMaybes [("task" Core..=) Core.<$> task])
+
+-- | Describes the customer-managed encryption key (CMEK) configuration associated with a project and location.
+--
+-- /See:/ 'newCmekConfig' smart constructor.
+data CmekConfig = CmekConfig
+  { -- | Resource name of the Cloud KMS key, of the form @projects\/PROJECT_ID\/locations\/LOCATION_ID\/keyRings\/KEY_RING_ID\/cryptoKeys\/KEY_ID@, that will be used to encrypt the Queues & Tasks in the region. Setting this as blank will turn off CMEK encryption.
+    kmsKey :: (Core.Maybe Core.Text),
+    -- | Output only. The config resource name which includes the project and location and must end in \'cmekConfig\', in the format projects\/PROJECT/ID\/locations\/LOCATION/ID\/cmekConfig\`
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CmekConfig' with the minimum fields required to make a request.
+newCmekConfig ::
+  CmekConfig
+newCmekConfig =
+  CmekConfig {kmsKey = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON CmekConfig where
+  parseJSON =
+    Core.withObject
+      "CmekConfig"
+      ( \o ->
+          CmekConfig
+            Core.<$> (o Core..:? "kmsKey")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON CmekConfig where
+  toJSON CmekConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("kmsKey" Core..=) Core.<$> kmsKey,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
+
 -- | Request message for CreateTask.
 --
 -- /See:/ 'newCreateTaskRequest' smart constructor.
 data CreateTaskRequest = CreateTaskRequest
   { -- | The response/view specifies which subset of the Task will be returned. By default response/view is BASIC; not all information is retrieved by default because some data, such as payloads, might be desirable to return only when needed because of its large size or because of the sensitivity of data that it contains. Authorization for FULL requires @cloudtasks.tasks.fullView@ <https://cloud.google.com/iam/ Google IAM> permission on the Task resource.
     responseView :: (Core.Maybe CreateTaskRequest_ResponseView),
-    -- | Required. The task to add. Task names have the following format: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID\/tasks\/TASK_ID@. The user can optionally specify a task name. If a name is not specified then the system will generate a random unique task id, which will be set in the task returned in the response. If schedule/time is not set or is in the past then Cloud Tasks will set it to the current time. Task De-duplication: Explicitly specifying a task ID enables task de-duplication. If a task\'s ID is identical to that of an existing task or a task that was deleted or executed recently then the call will fail with ALREADY/EXISTS. If the task\'s queue was created using Cloud Tasks, then another task with the same name can\'t be created for ~1hour after the original task was deleted or executed. If the task\'s queue was created using queue.yaml or queue.xml, then another task with the same name can\'t be created for ~9days after the original task was deleted or executed. Because there is an
-    -- extra lookup cost to identify duplicate task names, these CreateTask calls have significantly increased latency. Using hashed strings for the task id or for the prefix of the task id is recommended. Choosing task ids that are sequential or have sequential prefixes, for example using a timestamp, causes an increase in latency and error rates in all task commands. The infrastructure relies on an approximately uniform distribution of task ids to store and serve tasks efficiently.
+    -- | Required. The task to add. Task names have the following format: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID\/tasks\/TASK_ID@. The user can optionally specify a task name. If a name is not specified then the system will generate a random unique task id, which will be set in the task returned in the response. If schedule/time is not set or is in the past then Cloud Tasks will set it to the current time. Task De-duplication: Explicitly specifying a task ID enables task de-duplication. If a task\'s ID is identical to that of an existing task or a task that was deleted or executed recently then the call will fail with ALREADY/EXISTS. The IDs of deleted tasks are not immediately available for reuse. It can take up to 4 hours (or 9 days if the task\'s queue was created using a queue.yaml or queue.xml) for the task ID to be released and made available again. Because there is an extra lookup cost to identify duplicate task names, these CreateTask calls have significantly increased latency. Using
+    -- hashed strings for the task id or for the prefix of the task id is recommended. Choosing task ids that are sequential or have sequential prefixes, for example using a timestamp, causes an increase in latency and error rates in all task commands. The infrastructure relies on an approximately uniform distribution of task ids to store and serve tasks efficiently.
     task :: (Core.Maybe Task)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -420,7 +544,10 @@ data CreateTaskRequest = CreateTaskRequest
 newCreateTaskRequest ::
   CreateTaskRequest
 newCreateTaskRequest =
-  CreateTaskRequest {responseView = Core.Nothing, task = Core.Nothing}
+  CreateTaskRequest
+    { responseView = Core.Nothing,
+      task = Core.Nothing
+    }
 
 instance Core.FromJSON CreateTaskRequest where
   parseJSON =
@@ -453,8 +580,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -521,22 +647,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -550,15 +673,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -569,6 +692,131 @@ instance Core.ToJSON GetPolicyOptions where
               Core.<$> requestedPolicyVersion
           ]
       )
+
+-- | Defines a header message. A header can have a key and a value.
+--
+-- /See:/ 'newHeader' smart constructor.
+data Header = Header
+  { -- | The Key of the header.
+    key :: (Core.Maybe Core.Text),
+    -- | The Value of the header.
+    value :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Header' with the minimum fields required to make a request.
+newHeader ::
+  Header
+newHeader = Header {key = Core.Nothing, value = Core.Nothing}
+
+instance Core.FromJSON Header where
+  parseJSON =
+    Core.withObject
+      "Header"
+      ( \o ->
+          Header Core.<$> (o Core..:? "key") Core.<*> (o Core..:? "value")
+      )
+
+instance Core.ToJSON Header where
+  toJSON Header {..} =
+    Core.object
+      ( Core.catMaybes
+          [("key" Core..=) Core.<$> key, ("value" Core..=) Core.<$> value]
+      )
+
+-- | Wraps the Header object.
+--
+-- /See:/ 'newHeaderOverride' smart constructor.
+newtype HeaderOverride = HeaderOverride
+  { -- | Header embodying a key and a value. Do not put business sensitive or personally identifying data in the HTTP Header Override Configuration or other similar fields in accordance with Section 12 (Resource Fields) of the <https://cloud.google.com/terms/service-terms Service Specific Terms>.
+    header :: (Core.Maybe Header)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HeaderOverride' with the minimum fields required to make a request.
+newHeaderOverride ::
+  HeaderOverride
+newHeaderOverride = HeaderOverride {header = Core.Nothing}
+
+instance Core.FromJSON HeaderOverride where
+  parseJSON =
+    Core.withObject
+      "HeaderOverride"
+      (\o -> HeaderOverride Core.<$> (o Core..:? "header"))
+
+instance Core.ToJSON HeaderOverride where
+  toJSON HeaderOverride {..} =
+    Core.object (Core.catMaybes [("header" Core..=) Core.<$> header])
+
+-- | Message that represents an arbitrary HTTP body. It should only be used for payload formats that can\'t be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { \/\/ A unique request id. string request/id = 1; \/\/ The raw HTTP body is bound to this field. google.api.HttpBody http/body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream
+-- google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged.
+--
+-- /See:/ 'newHttpBody' smart constructor.
+data HttpBody = HttpBody
+  { -- | The HTTP Content-Type header value specifying the content type of the body.
+    contentType :: (Core.Maybe Core.Text),
+    -- | The HTTP request\/response body as raw binary.
+    data' :: (Core.Maybe Core.Base64),
+    -- | Application specific response metadata. Must be set in the first response for streaming APIs.
+    extensions :: (Core.Maybe [HttpBody_ExtensionsItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HttpBody' with the minimum fields required to make a request.
+newHttpBody ::
+  HttpBody
+newHttpBody =
+  HttpBody
+    { contentType = Core.Nothing,
+      data' = Core.Nothing,
+      extensions = Core.Nothing
+    }
+
+instance Core.FromJSON HttpBody where
+  parseJSON =
+    Core.withObject
+      "HttpBody"
+      ( \o ->
+          HttpBody
+            Core.<$> (o Core..:? "contentType")
+            Core.<*> (o Core..:? "data")
+            Core.<*> (o Core..:? "extensions")
+      )
+
+instance Core.ToJSON HttpBody where
+  toJSON HttpBody {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contentType" Core..=) Core.<$> contentType,
+            ("data" Core..=) Core.<$> data',
+            ("extensions" Core..=) Core.<$> extensions
+          ]
+      )
+
+--
+-- /See:/ 'newHttpBody_ExtensionsItem' smart constructor.
+newtype HttpBody_ExtensionsItem = HttpBody_ExtensionsItem
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HttpBody_ExtensionsItem' with the minimum fields required to make a request.
+newHttpBody_ExtensionsItem ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  HttpBody_ExtensionsItem
+newHttpBody_ExtensionsItem additional =
+  HttpBody_ExtensionsItem {additional = additional}
+
+instance Core.FromJSON HttpBody_ExtensionsItem where
+  parseJSON =
+    Core.withObject
+      "HttpBody_ExtensionsItem"
+      (\o -> HttpBody_ExtensionsItem Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON HttpBody_ExtensionsItem where
+  toJSON HttpBody_ExtensionsItem {..} = Core.toJSON additional
 
 -- | HTTP request. The task will be pushed to the worker as an HTTP request. If the worker or the redirected worker acknowledges the task by returning a successful HTTP response code ([@200@ - @299@]), the task will be removed from the queue. If any other HTTP response code is returned or no response is received, the task will be retried according to the following: * User-specified throttling: retry configuration, rate limits, and the queue\'s state. * System throttling: To prevent the worker from overloading, Cloud Tasks may temporarily reduce the queue\'s effective rate. User-specified settings will not be changed. System throttling happens because: * Cloud Tasks backs off on all errors. Normally the backoff specified in rate limits will be used. But if the worker returns @429@ (Too Many Requests), @503@ (Service Unavailable), or the rate of errors is high, Cloud Tasks will use a higher backoff rate. The retry specified in the @Retry-After@ HTTP response header is considered. * To prevent traffic spikes and to
 -- smooth sudden increases in traffic, dispatches ramp up slowly when the queue is newly created or idle and if large numbers of tasks suddenly become available to dispatch (due to spikes in create task rates, the queue being unpaused, or many tasks that are scheduled at the same time).
@@ -634,8 +882,7 @@ instance Core.ToJSON HttpRequest where
 --
 -- /See:/ 'newHttpRequest_Headers' smart constructor.
 newtype HttpRequest_Headers = HttpRequest_Headers
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -651,14 +898,65 @@ instance Core.FromJSON HttpRequest_Headers where
   parseJSON =
     Core.withObject
       "HttpRequest_Headers"
-      ( \o ->
-          HttpRequest_Headers
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> HttpRequest_Headers Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON HttpRequest_Headers where
-  toJSON HttpRequest_Headers {..} =
-    Core.toJSON additional
+  toJSON HttpRequest_Headers {..} = Core.toJSON additional
+
+-- | HTTP target. When specified as a Queue, all the tasks with [HttpRequest] will be overridden according to the target.
+--
+-- /See:/ 'newHttpTarget' smart constructor.
+data HttpTarget = HttpTarget
+  { -- | HTTP target headers. This map contains the header field names and values. Headers will be set when running the CreateTask and\/or BufferTask. These headers represent a subset of the headers that will be configured for the task\'s HTTP request. Some HTTP request headers will be ignored or replaced. A partial list of headers that will be ignored or replaced is: * Several predefined headers, prefixed with \"X-CloudTasks-\", can be used to define properties of the task. * Host: This will be computed by Cloud Tasks and derived from HttpRequest.url. * Content-Length: This will be computed by Cloud Tasks. @Content-Type@ won\'t be set by Cloud Tasks. You can explicitly set @Content-Type@ to a media type when the task is created. For example,@Content-Type@ can be set to @\"application\/octet-stream\"@ or @\"application\/json\"@. The default value is set to \"application\/json\"@. * User-Agent: This will be set to@\"Google-Cloud-Tasks\"\`. Headers which can have multiple values (according to RFC2616) can be specified
+    -- using comma-separated values. The size of the headers must be less than 80KB. Queue-level headers to override headers of all the tasks in the queue. Do not put business sensitive or personally identifying data in the HTTP Header Override Configuration or other similar fields in accordance with Section 12 (Resource Fields) of the <https://cloud.google.com/terms/service-terms Service Specific Terms>.
+    headerOverrides :: (Core.Maybe [HeaderOverride]),
+    -- | The HTTP method to use for the request. When specified, it overrides HttpRequest for the task. Note that if the value is set to HttpMethod the HttpRequest of the task will be ignored at execution time.
+    httpMethod :: (Core.Maybe HttpTarget_HttpMethod),
+    -- | If specified, an <https://developers.google.com/identity/protocols/OAuth2 OAuth token> is generated and attached as the @Authorization@ header in the HTTP request. This type of authorization should generally be used only when calling Google APIs hosted on *.googleapis.com. Note that both the service account email and the scope MUST be specified when using the queue-level authorization override.
+    oauthToken :: (Core.Maybe OAuthToken),
+    -- | If specified, an <https://developers.google.com/identity/protocols/OpenIDConnect OIDC> token is generated and attached as an @Authorization@ header in the HTTP request. This type of authorization can be used for many scenarios, including calling Cloud Run, or endpoints where you intend to validate the token yourself. Note that both the service account email and the audience MUST be specified when using the queue-level authorization override.
+    oidcToken :: (Core.Maybe OidcToken),
+    -- | URI override. When specified, overrides the execution URI for all the tasks in the queue.
+    uriOverride :: (Core.Maybe UriOverride)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'HttpTarget' with the minimum fields required to make a request.
+newHttpTarget ::
+  HttpTarget
+newHttpTarget =
+  HttpTarget
+    { headerOverrides = Core.Nothing,
+      httpMethod = Core.Nothing,
+      oauthToken = Core.Nothing,
+      oidcToken = Core.Nothing,
+      uriOverride = Core.Nothing
+    }
+
+instance Core.FromJSON HttpTarget where
+  parseJSON =
+    Core.withObject
+      "HttpTarget"
+      ( \o ->
+          HttpTarget
+            Core.<$> (o Core..:? "headerOverrides")
+            Core.<*> (o Core..:? "httpMethod")
+            Core.<*> (o Core..:? "oauthToken")
+            Core.<*> (o Core..:? "oidcToken")
+            Core.<*> (o Core..:? "uriOverride")
+      )
+
+instance Core.ToJSON HttpTarget where
+  toJSON HttpTarget {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("headerOverrides" Core..=) Core.<$> headerOverrides,
+            ("httpMethod" Core..=) Core.<$> httpMethod,
+            ("oauthToken" Core..=) Core.<$> oauthToken,
+            ("oidcToken" Core..=) Core.<$> oidcToken,
+            ("uriOverride" Core..=) Core.<$> uriOverride
+          ]
+      )
 
 -- | The response message for Locations.ListLocations.
 --
@@ -675,7 +973,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -711,7 +1012,10 @@ data ListQueuesResponse = ListQueuesResponse
 newListQueuesResponse ::
   ListQueuesResponse
 newListQueuesResponse =
-  ListQueuesResponse {nextPageToken = Core.Nothing, queues = Core.Nothing}
+  ListQueuesResponse
+    { nextPageToken = Core.Nothing,
+      queues = Core.Nothing
+    }
 
 instance Core.FromJSON ListQueuesResponse where
   parseJSON =
@@ -747,7 +1051,10 @@ data ListTasksResponse = ListTasksResponse
 newListTasksResponse ::
   ListTasksResponse
 newListTasksResponse =
-  ListTasksResponse {nextPageToken = Core.Nothing, tasks = Core.Nothing}
+  ListTasksResponse
+    { nextPageToken = Core.Nothing,
+      tasks = Core.Nothing
+    }
 
 instance Core.FromJSON ListTasksResponse where
   parseJSON =
@@ -768,7 +1075,7 @@ instance Core.ToJSON ListTasksResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -826,8 +1133,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -836,15 +1142,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -863,15 +1168,14 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
@@ -891,7 +1195,10 @@ data OAuthToken = OAuthToken
 newOAuthToken ::
   OAuthToken
 newOAuthToken =
-  OAuthToken {scope = Core.Nothing, serviceAccountEmail = Core.Nothing}
+  OAuthToken
+    { scope = Core.Nothing,
+      serviceAccountEmail = Core.Nothing
+    }
 
 instance Core.FromJSON OAuthToken where
   parseJSON =
@@ -908,8 +1215,7 @@ instance Core.ToJSON OAuthToken where
     Core.object
       ( Core.catMaybes
           [ ("scope" Core..=) Core.<$> scope,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail
           ]
       )
 
@@ -928,7 +1234,10 @@ data OidcToken = OidcToken
 newOidcToken ::
   OidcToken
 newOidcToken =
-  OidcToken {audience = Core.Nothing, serviceAccountEmail = Core.Nothing}
+  OidcToken
+    { audience = Core.Nothing,
+      serviceAccountEmail = Core.Nothing
+    }
 
 instance Core.FromJSON OidcToken where
   parseJSON =
@@ -945,10 +1254,33 @@ instance Core.ToJSON OidcToken where
     Core.object
       ( Core.catMaybes
           [ ("audience" Core..=) Core.<$> audience,
-            ("serviceAccountEmail" Core..=)
-              Core.<$> serviceAccountEmail
+            ("serviceAccountEmail" Core..=) Core.<$> serviceAccountEmail
           ]
       )
+
+-- | PathOverride. Path message defines path override for HTTP targets.
+--
+-- /See:/ 'newPathOverride' smart constructor.
+newtype PathOverride = PathOverride
+  { -- | The URI path (e.g., \/users\/1234). Default is an empty string.
+    path :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PathOverride' with the minimum fields required to make a request.
+newPathOverride ::
+  PathOverride
+newPathOverride = PathOverride {path = Core.Nothing}
+
+instance Core.FromJSON PathOverride where
+  parseJSON =
+    Core.withObject
+      "PathOverride"
+      (\o -> PathOverride Core.<$> (o Core..:? "path"))
+
+instance Core.ToJSON PathOverride where
+  toJSON PathOverride {..} =
+    Core.object (Core.catMaybes [("path" Core..=) Core.<$> path])
 
 -- | Request message for PauseQueue.
 --
@@ -970,9 +1302,9 @@ instance Core.FromJSON PauseQueueRequest where
 instance Core.ToJSON PauseQueueRequest where
   toJSON = Core.const Core.emptyObject
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -990,7 +1322,11 @@ data Policy = Policy
 newPolicy ::
   Policy
 newPolicy =
-  Policy {bindings = Core.Nothing, etag = Core.Nothing, version = Core.Nothing}
+  Policy
+    { bindings = Core.Nothing,
+      etag = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON Policy where
   parseJSON =
@@ -1033,12 +1369,39 @@ instance Core.FromJSON PurgeQueueRequest where
 instance Core.ToJSON PurgeQueueRequest where
   toJSON = Core.const Core.emptyObject
 
+-- | QueryOverride. Query message defines query override for HTTP targets.
+--
+-- /See:/ 'newQueryOverride' smart constructor.
+newtype QueryOverride = QueryOverride
+  { -- | The query parameters (e.g., qparam1=123&qparam2=456). Default is an empty string.
+    queryParams :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'QueryOverride' with the minimum fields required to make a request.
+newQueryOverride ::
+  QueryOverride
+newQueryOverride = QueryOverride {queryParams = Core.Nothing}
+
+instance Core.FromJSON QueryOverride where
+  parseJSON =
+    Core.withObject
+      "QueryOverride"
+      (\o -> QueryOverride Core.<$> (o Core..:? "queryParams"))
+
+instance Core.ToJSON QueryOverride where
+  toJSON QueryOverride {..} =
+    Core.object
+      (Core.catMaybes [("queryParams" Core..=) Core.<$> queryParams])
+
 -- | A queue is a container of related tasks. Queues are configured to manage how those tasks are dispatched. Configurable properties include rate limits, retry options, queue types, and others.
 --
 -- /See:/ 'newQueue' smart constructor.
 data Queue = Queue
   { -- | Overrides for task-level app/engine/routing. These settings apply only to App Engine tasks in this queue. Http tasks are not affected. If set, @app_engine_routing_override@ is used for all App Engine tasks in the queue, no matter what the setting is for the task-level app/engine/routing.
     appEngineRoutingOverride :: (Core.Maybe AppEngineRouting),
+    -- | Modifies HTTP target for HTTP tasks.
+    httpTarget :: (Core.Maybe HttpTarget),
     -- | Caller-specified and required in CreateQueue, after which it becomes output only. The queue name. The queue name must have the following format: @projects\/PROJECT_ID\/locations\/LOCATION_ID\/queues\/QUEUE_ID@ * @PROJECT_ID@ can contain letters ([A-Za-z]), numbers ([0-9]), hyphens (-), colons (:), or periods (.). For more information, see <https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects Identifying projects> * @LOCATION_ID@ is the canonical ID for the queue\'s location. The list of available locations can be obtained by calling ListLocations. For more information, see https:\/\/cloud.google.com\/about\/locations\/. * @QUEUE_ID@ can contain letters ([A-Za-z]), numbers ([0-9]), or hyphens (-). The maximum length is 100 characters.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The last time this queue was purged. All tasks that were created before this time were purged. A queue can be purged using PurgeQueue, the <https://cloud.google.com/appengine/docs/standard/python/taskqueue/push/deleting-tasks-and-queues#purging_all_tasks_from_a_queue App Engine Task Queue SDK, or the Cloud Console>. Purge time will be truncated to the nearest microsecond. Purge time will be unset if the queue has never been purged.
@@ -1060,6 +1423,7 @@ newQueue ::
 newQueue =
   Queue
     { appEngineRoutingOverride = Core.Nothing,
+      httpTarget = Core.Nothing,
       name = Core.Nothing,
       purgeTime = Core.Nothing,
       rateLimits = Core.Nothing,
@@ -1075,6 +1439,7 @@ instance Core.FromJSON Queue where
       ( \o ->
           Queue
             Core.<$> (o Core..:? "appEngineRoutingOverride")
+            Core.<*> (o Core..:? "httpTarget")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "purgeTime")
             Core.<*> (o Core..:? "rateLimits")
@@ -1089,6 +1454,7 @@ instance Core.ToJSON Queue where
       ( Core.catMaybes
           [ ("appEngineRoutingOverride" Core..=)
               Core.<$> appEngineRoutingOverride,
+            ("httpTarget" Core..=) Core.<$> httpTarget,
             ("name" Core..=) Core.<$> name,
             ("purgeTime" Core..=) Core.<$> purgeTime,
             ("rateLimits" Core..=) Core.<$> rateLimits,
@@ -1170,15 +1536,15 @@ instance Core.ToJSON ResumeQueueRequest where
 --
 -- /See:/ 'newRetryConfig' smart constructor.
 data RetryConfig = RetryConfig
-  { -- | Number of attempts per task. Cloud Tasks will attempt the task @max_attempts@ times (that is, if the first attempt fails, then there will be @max_attempts - 1@ retries). Must be >= -1. If unspecified when the queue is created, Cloud Tasks will pick the default. -1 indicates unlimited attempts. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskretrylimit in queue.yaml\/xml>.
+  { -- | Number of attempts per task. Cloud Tasks will attempt the task @max_attempts@ times (that is, if the first attempt fails, then there will be @max_attempts - 1@ retries). Must be >= -1. If unspecified when the queue is created, Cloud Tasks will pick the default. -1 indicates unlimited attempts. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskretrylimit in queue.yaml\/xml>. Note: Cloud Tasks stops retrying only when @max_attempts@ and @max_retry_duration@ are both satisfied. When the task has been attempted @max_attempts@ times and when the @max_retry_duration@ time has passed, no further attempts are made, and the task is deleted. If you want your task to retry infinitely, you must set @max_attempts@ to -1 and @max_retry_duration@ to 0.
     maxAttempts :: (Core.Maybe Core.Int32),
-    -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. @max_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters maxbackoffseconds in queue.yaml\/xml>.
+    -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. The value must be given as a string that indicates the length of time (in seconds) followed by @s@ (for \"seconds\"). For more information on the format, see the documentation for <https://protobuf.dev/reference/protobuf/google.protobuf/#duration Duration>. @max_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters maxbackoffseconds in queue.yaml\/xml>.
     maxBackoff :: (Core.Maybe Core.Duration),
     -- | The time between retries will double @max_doublings@ times. A task\'s retry interval starts at min/backoff, then doubles @max_doublings@ times, then increases linearly, and finally retries at intervals of max/backoff up to max/attempts times. For example, if min/backoff is 10s, max/backoff is 300s, and @max_doublings@ is 3, then the a task will first be retried in 10s. The retry interval will double three times, and then increase linearly by 2^3 * 10s. Finally, the task will retry at intervals of max/backoff until the task has been attempted max_attempts times. Thus, the requests will retry at 10s, 20s, 40s, 80s, 160s, 240s, 300s, 300s, .... If unspecified when the queue is created, Cloud Tasks will pick the default. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters max_doublings in queue.yaml\/xml>.
     maxDoublings :: (Core.Maybe Core.Int32),
-    -- | If positive, @max_retry_duration@ specifies the time limit for retrying a failed task, measured from when the task was first attempted. Once @max_retry_duration@ time has passed /and/ the task has been attempted max_attempts times, no further attempts will be made and the task will be deleted. If zero, then the task age is unlimited. If unspecified when the queue is created, Cloud Tasks will pick the default. @max_retry_duration@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskagelimit in queue.yaml\/xml>.
+    -- | If positive, @max_retry_duration@ specifies the time limit for retrying a failed task, measured from when the task was first attempted. Once @max_retry_duration@ time has passed /and/ the task has been attempted max_attempts times, no further attempts will be made and the task will be deleted. If zero, then the task age is unlimited. If unspecified when the queue is created, Cloud Tasks will pick the default. The value must be given as a string that indicates the length of time (in seconds) followed by @s@ (for \"seconds\"). For the maximum possible value or the format, see the documentation for <https://protobuf.dev/reference/protobuf/google.protobuf/#duration Duration>. @max_retry_duration@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters taskagelimit in queue.yaml\/xml>.
     maxRetryDuration :: (Core.Maybe Core.Duration),
-    -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. @min_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters minbackoffseconds in queue.yaml\/xml>.
+    -- | A task will be scheduled for retry between min/backoff and max/backoff duration after it fails, if the queue\'s RetryConfig specifies that the task should be retried. If unspecified when the queue is created, Cloud Tasks will pick the default. The value must be given as a string that indicates the length of time (in seconds) followed by @s@ (for \"seconds\"). For more information on the format, see the documentation for <https://protobuf.dev/reference/protobuf/google.protobuf/#duration Duration>. @min_backoff@ will be truncated to the nearest second. This field has the same meaning as <https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters minbackoffseconds in queue.yaml\/xml>.
     minBackoff :: (Core.Maybe Core.Duration)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1215,8 +1581,7 @@ instance Core.ToJSON RetryConfig where
           [ ("maxAttempts" Core..=) Core.<$> maxAttempts,
             ("maxBackoff" Core..=) Core.<$> maxBackoff,
             ("maxDoublings" Core..=) Core.<$> maxDoublings,
-            ("maxRetryDuration" Core..=)
-              Core.<$> maxRetryDuration,
+            ("maxRetryDuration" Core..=) Core.<$> maxRetryDuration,
             ("minBackoff" Core..=) Core.<$> minBackoff
           ]
       )
@@ -1239,16 +1604,12 @@ instance Core.FromJSON RunTaskRequest where
   parseJSON =
     Core.withObject
       "RunTaskRequest"
-      ( \o ->
-          RunTaskRequest Core.<$> (o Core..:? "responseView")
-      )
+      (\o -> RunTaskRequest Core.<$> (o Core..:? "responseView"))
 
 instance Core.ToJSON RunTaskRequest where
   toJSON RunTaskRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("responseView" Core..=) Core.<$> responseView]
-      )
+      (Core.catMaybes [("responseView" Core..=) Core.<$> responseView])
 
 -- | Request message for @SetIamPolicy@ method.
 --
@@ -1268,14 +1629,11 @@ instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "SetIamPolicyRequest"
-      ( \o ->
-          SetIamPolicyRequest Core.<$> (o Core..:? "policy")
-      )
+      (\o -> SetIamPolicyRequest Core.<$> (o Core..:? "policy"))
 
 instance Core.ToJSON SetIamPolicyRequest where
   toJSON SetIamPolicyRequest {..} =
-    Core.object
-      (Core.catMaybes [("policy" Core..=) Core.<$> policy])
+    Core.object (Core.catMaybes [("policy" Core..=) Core.<$> policy])
 
 -- | Configuration options for writing logs to <https://cloud.google.com/logging/docs/ Stackdriver Logging>.
 --
@@ -1297,16 +1655,13 @@ instance Core.FromJSON StackdriverLoggingConfig where
     Core.withObject
       "StackdriverLoggingConfig"
       ( \o ->
-          StackdriverLoggingConfig
-            Core.<$> (o Core..:? "samplingRatio")
+          StackdriverLoggingConfig Core.<$> (o Core..:? "samplingRatio")
       )
 
 instance Core.ToJSON StackdriverLoggingConfig where
   toJSON StackdriverLoggingConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("samplingRatio" Core..=) Core.<$> samplingRatio]
-      )
+      (Core.catMaybes [("samplingRatio" Core..=) Core.<$> samplingRatio])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -1325,7 +1680,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1361,19 +1720,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A unit of scheduled work.
 --
@@ -1386,7 +1743,7 @@ data Task = Task
     -- | Output only. The number of attempts dispatched. This count includes attempts which have been dispatched but haven\'t received a response.
     dispatchCount :: (Core.Maybe Core.Int32),
     -- | The deadline for requests sent to the worker. If the worker does not respond by this deadline then the request is cancelled and the attempt is marked as a @DEADLINE_EXCEEDED@ failure. Cloud Tasks will retry the task according to the RetryConfig. Note that when the request is cancelled, Cloud Tasks will stop listening for the response, but whether the worker stops processing depends on the worker. For example, if the worker is stuck, it may not react to cancelled requests. The default and maximum values depend on the type of request: * For HTTP tasks, the default is 10 minutes. The deadline must be in the interval [15 seconds, 30 minutes]. * For App Engine tasks, 0 indicates that the request has the default deadline. The default deadline depends on the <https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling scaling type> of the service: 10 minutes for standard apps with automatic scaling, 24 hours for standard apps with manual and basic scaling, and 60 minutes for flex
-    -- apps. If the request deadline is set, it must be in the interval [15 seconds, 24 hours 15 seconds]. Regardless of the task\'s @dispatch_deadline@, the app handler will not run for longer than than the service\'s timeout. We recommend setting the @dispatch_deadline@ to at most a few seconds more than the app handler\'s timeout. For more information see <https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts Timeouts>. @dispatch_deadline@ will be truncated to the nearest millisecond. The deadline is an approximate deadline.
+    -- apps. If the request deadline is set, it must be in the interval [15 seconds, 24 hours 15 seconds]. Regardless of the task\'s @dispatch_deadline@, the app handler will not run for longer than than the service\'s timeout. We recommend setting the @dispatch_deadline@ to at most a few seconds more than the app handler\'s timeout. For more information see <https://cloud.google.com/tasks/docs/creating-appengine-handlers#timeouts Timeouts>. The value must be given as a string that indicates the length of time (in seconds) followed by @s@ (for \"seconds\"). For more information on the format, see the documentation for <https://protobuf.dev/reference/protobuf/google.protobuf/#duration Duration>. @dispatch_deadline@ will be truncated to the nearest millisecond. The deadline is an approximate deadline.
     dispatchDeadline :: (Core.Maybe Core.Duration),
     -- | Output only. The status of the task\'s first attempt. Only dispatch_time will be set. The other Attempt information is not retained by Cloud Tasks.
     firstAttempt :: (Core.Maybe Attempt),
@@ -1446,12 +1803,10 @@ instance Core.ToJSON Task where
   toJSON Task {..} =
     Core.object
       ( Core.catMaybes
-          [ ("appEngineHttpRequest" Core..=)
-              Core.<$> appEngineHttpRequest,
+          [ ("appEngineHttpRequest" Core..=) Core.<$> appEngineHttpRequest,
             ("createTime" Core..=) Core.<$> createTime,
             ("dispatchCount" Core..=) Core.<$> dispatchCount,
-            ("dispatchDeadline" Core..=)
-              Core.<$> dispatchDeadline,
+            ("dispatchDeadline" Core..=) Core.<$> dispatchDeadline,
             ("firstAttempt" Core..=) Core.<$> firstAttempt,
             ("httpRequest" Core..=) Core.<$> httpRequest,
             ("lastAttempt" Core..=) Core.<$> lastAttempt,
@@ -1482,16 +1837,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -1513,13 +1865,70 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
+
+-- | URI Override. When specified, all the HTTP tasks inside the queue will be partially or fully overridden depending on the configured values.
+--
+-- /See:/ 'newUriOverride' smart constructor.
+data UriOverride = UriOverride
+  { -- | Host override. When specified, replaces the host part of the task URL. For example, if the task URL is \"https:\/\/www.google.com,\" and host value is set to \"example.net\", the overridden URI will be changed to \"https:\/\/example.net.\" Host value cannot be an empty string (INVALID_ARGUMENT).
+    host :: (Core.Maybe Core.Text),
+    -- | URI path. When specified, replaces the existing path of the task URL. Setting the path value to an empty string clears the URI path segment.
+    pathOverride :: (Core.Maybe PathOverride),
+    -- | Port override. When specified, replaces the port part of the task URI. For instance, for a URI http:\/\/www.google.com\/foo and port=123, the overridden URI becomes http:\/\/www.google.com:123\/foo. Note that the port value must be a positive integer. Setting the port to 0 (Zero) clears the URI port.
+    port :: (Core.Maybe Core.Int64),
+    -- | URI query. When specified, replaces the query part of the task URI. Setting the query value to an empty string clears the URI query segment.
+    queryOverride :: (Core.Maybe QueryOverride),
+    -- | Scheme override. When specified, the task URI scheme is replaced by the provided value (HTTP or HTTPS).
+    scheme :: (Core.Maybe UriOverride_Scheme),
+    -- | URI Override Enforce Mode When specified, determines the Target UriOverride mode. If not specified, it defaults to ALWAYS.
+    uriOverrideEnforceMode :: (Core.Maybe UriOverride_UriOverrideEnforceMode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UriOverride' with the minimum fields required to make a request.
+newUriOverride ::
+  UriOverride
+newUriOverride =
+  UriOverride
+    { host = Core.Nothing,
+      pathOverride = Core.Nothing,
+      port = Core.Nothing,
+      queryOverride = Core.Nothing,
+      scheme = Core.Nothing,
+      uriOverrideEnforceMode = Core.Nothing
+    }
+
+instance Core.FromJSON UriOverride where
+  parseJSON =
+    Core.withObject
+      "UriOverride"
+      ( \o ->
+          UriOverride
+            Core.<$> (o Core..:? "host")
+            Core.<*> (o Core..:? "pathOverride")
+            Core.<*> (o Core..:? "port" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "queryOverride")
+            Core.<*> (o Core..:? "scheme")
+            Core.<*> (o Core..:? "uriOverrideEnforceMode")
+      )
+
+instance Core.ToJSON UriOverride where
+  toJSON UriOverride {..} =
+    Core.object
       ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
+          [ ("host" Core..=) Core.<$> host,
+            ("pathOverride" Core..=) Core.<$> pathOverride,
+            ("port" Core..=) Core.. Core.AsText Core.<$> port,
+            ("queryOverride" Core..=) Core.<$> queryOverride,
+            ("scheme" Core..=) Core.<$> scheme,
+            ("uriOverrideEnforceMode" Core..=)
+              Core.<$> uriOverrideEnforceMode
+          ]
       )

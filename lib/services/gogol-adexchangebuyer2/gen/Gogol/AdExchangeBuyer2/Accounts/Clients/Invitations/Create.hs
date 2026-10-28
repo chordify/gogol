@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Clients.Invitations.Create
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.clients.invitations.create@ method which the
 -- 'AdExchangeBuyer2AccountsClientsInvitationsCreate' request conforms to.
@@ -92,48 +90,49 @@ newAdExchangeBuyer2AccountsClientsInvitationsCreate ::
   -- |  Multipart request metadata. See 'payload'.
   ClientUserInvitation ->
   AdExchangeBuyer2AccountsClientsInvitationsCreate
-newAdExchangeBuyer2AccountsClientsInvitationsCreate accountId clientAccountId payload =
-  AdExchangeBuyer2AccountsClientsInvitationsCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      clientAccountId = clientAccountId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsClientsInvitationsCreate
+  accountId
+  clientAccountId
+  payload =
+    AdExchangeBuyer2AccountsClientsInvitationsCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        clientAccountId = clientAccountId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsClientsInvitationsCreate
   where
   type
-    Rs
-      AdExchangeBuyer2AccountsClientsInvitationsCreate =
+    Rs AdExchangeBuyer2AccountsClientsInvitationsCreate =
       ClientUserInvitation
   type
-    Scopes
-      AdExchangeBuyer2AccountsClientsInvitationsCreate =
+    Scopes AdExchangeBuyer2AccountsClientsInvitationsCreate =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsClientsInvitationsCreate {..} =
-      go
-        accountId
-        clientAccountId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsClientsInvitationsCreateResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsClientsInvitationsCreate {..} =
+    go
+      accountId
+      clientAccountId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                AdExchangeBuyer2AccountsClientsInvitationsCreateResource
+          )
+          Core.mempty

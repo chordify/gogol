@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.UserProfiles.GuardianInvitations.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.UserProfiles.GuardianInvitations.Get
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.get@ method which the
 -- 'ClassroomUserProfilesGuardianInvitationsGet' request conforms to.
@@ -86,16 +84,18 @@ newClassroomUserProfilesGuardianInvitationsGet ::
   -- |  The ID of the student whose guardian invitation is being requested. See 'studentId'.
   Core.Text ->
   ClassroomUserProfilesGuardianInvitationsGet
-newClassroomUserProfilesGuardianInvitationsGet invitationId studentId =
-  ClassroomUserProfilesGuardianInvitationsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      invitationId = invitationId,
-      studentId = studentId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClassroomUserProfilesGuardianInvitationsGet
+  invitationId
+  studentId =
+    ClassroomUserProfilesGuardianInvitationsGet
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        invitationId = invitationId,
+        studentId = studentId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -105,28 +105,25 @@ instance
     Rs ClassroomUserProfilesGuardianInvitationsGet =
       GuardianInvitation
   type
-    Scopes
-      ClassroomUserProfilesGuardianInvitationsGet =
+    Scopes ClassroomUserProfilesGuardianInvitationsGet =
       '[ Classroom'Guardianlinks'Students,
          Classroom'Guardianlinks'Students'Readonly
        ]
-  requestClient
-    ClassroomUserProfilesGuardianInvitationsGet {..} =
-      go
-        studentId
-        invitationId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomUserProfilesGuardianInvitationsGetResource
-            )
-            Core.mempty
+  requestClient ClassroomUserProfilesGuardianInvitationsGet {..} =
+    go
+      studentId
+      invitationId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomUserProfilesGuardianInvitationsGetResource
+          )
+          Core.mempty

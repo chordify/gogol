@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -695,16 +693,6 @@ module Gogol.DFAReporting
     DFAReportingOperatingSystemsList (..),
     newDFAReportingOperatingSystemsList,
 
-    -- ** dfareporting.orderDocuments.get
-    DFAReportingOrderDocumentsGetResource,
-    DFAReportingOrderDocumentsGet (..),
-    newDFAReportingOrderDocumentsGet,
-
-    -- ** dfareporting.orderDocuments.list
-    DFAReportingOrderDocumentsListResource,
-    DFAReportingOrderDocumentsList (..),
-    newDFAReportingOrderDocumentsList,
-
     -- ** dfareporting.orders.get
     DFAReportingOrdersGetResource,
     DFAReportingOrdersGet (..),
@@ -1025,6 +1013,16 @@ module Gogol.DFAReporting
     DFAReportingTargetingTemplatesUpdate (..),
     newDFAReportingTargetingTemplatesUpdate,
 
+    -- ** dfareporting.tvCampaignDetails.get
+    DFAReportingTvCampaignDetailsGetResource,
+    DFAReportingTvCampaignDetailsGet (..),
+    newDFAReportingTvCampaignDetailsGet,
+
+    -- ** dfareporting.tvCampaignSummaries.list
+    DFAReportingTvCampaignSummariesListResource,
+    DFAReportingTvCampaignSummariesList (..),
+    newDFAReportingTvCampaignSummariesList,
+
     -- ** dfareporting.userProfiles.get
     DFAReportingUserProfilesGetResource,
     DFAReportingUserProfilesGet (..),
@@ -1292,6 +1290,14 @@ module Gogol.DFAReporting
     CampaignsListResponse (..),
     newCampaignsListResponse,
 
+    -- ** CartData
+    CartData (..),
+    newCartData,
+
+    -- ** CartDataItem
+    CartDataItem (..),
+    newCartDataItem,
+
     -- ** ChangeLog
     ChangeLog (..),
     newChangeLog,
@@ -1299,14 +1305,6 @@ module Gogol.DFAReporting
     -- ** ChangeLogsListResponse
     ChangeLogsListResponse (..),
     newChangeLogsListResponse,
-
-    -- ** ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
-
-    -- ** ChannelGroupingRule
-    ChannelGroupingRule (..),
-    newChannelGroupingRule,
 
     -- ** CitiesListResponse
     CitiesListResponse (..),
@@ -1359,6 +1357,9 @@ module Gogol.DFAReporting
     -- ** Conversion
     Conversion (..),
     newConversion,
+
+    -- ** Conversion_AdUserDataConsent
+    Conversion_AdUserDataConsent (..),
 
     -- ** ConversionError
     ConversionError (..),
@@ -1559,6 +1560,10 @@ module Gogol.DFAReporting
     CrossDimensionReachReportCompatibleFields (..),
     newCrossDimensionReachReportCompatibleFields,
 
+    -- ** CrossMediaReachReportCompatibleFields
+    CrossMediaReachReportCompatibleFields (..),
+    newCrossMediaReachReportCompatibleFields,
+
     -- ** CustomFloodlightVariable
     CustomFloodlightVariable (..),
     newCustomFloodlightVariable,
@@ -1652,10 +1657,6 @@ module Gogol.DFAReporting
     DirectorySitesListResponse (..),
     newDirectorySitesListResponse,
 
-    -- ** DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
     -- ** DynamicTargetingKey
     DynamicTargetingKey (..),
     newDynamicTargetingKey,
@@ -1676,10 +1677,6 @@ module Gogol.DFAReporting
 
     -- ** EncryptionInfo_EncryptionSource
     EncryptionInfo_EncryptionSource (..),
-
-    -- ** EventFilter
-    EventFilter (..),
-    newEventFilter,
 
     -- ** EventTag
     EventTag (..),
@@ -1952,6 +1949,10 @@ module Gogol.DFAReporting
     -- ** ObjectFilter_Status
     ObjectFilter_Status (..),
 
+    -- ** OfflineUserAddressInfo
+    OfflineUserAddressInfo (..),
+    newOfflineUserAddressInfo,
+
     -- ** OffsetPosition
     OffsetPosition (..),
     newOffsetPosition,
@@ -1991,38 +1992,9 @@ module Gogol.DFAReporting
     -- ** OrderContact_ContactType
     OrderContact_ContactType (..),
 
-    -- ** OrderDocument
-    OrderDocument (..),
-    newOrderDocument,
-
-    -- ** OrderDocument_Type
-    OrderDocument_Type (..),
-
-    -- ** OrderDocumentsListResponse
-    OrderDocumentsListResponse (..),
-    newOrderDocumentsListResponse,
-
     -- ** OrdersListResponse
     OrdersListResponse (..),
     newOrdersListResponse,
-
-    -- ** PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- ** PathFilter_PathMatchPosition
-    PathFilter_PathMatchPosition (..),
-
-    -- ** PathReportCompatibleFields
-    PathReportCompatibleFields (..),
-    newPathReportCompatibleFields,
-
-    -- ** PathReportDimensionValue
-    PathReportDimensionValue (..),
-    newPathReportDimensionValue,
-
-    -- ** PathReportDimensionValue_MatchType
-    PathReportDimensionValue_MatchType (..),
 
     -- ** PathToConversionReportCompatibleFields
     PathToConversionReportCompatibleFields (..),
@@ -2054,6 +2026,10 @@ module Gogol.DFAReporting
     PlacementAssignment (..),
     newPlacementAssignment,
 
+    -- ** PlacementConversionDomainOverride
+    PlacementConversionDomainOverride (..),
+    newPlacementConversionDomainOverride,
+
     -- ** PlacementGroup
     PlacementGroup (..),
     newPlacementGroup,
@@ -2067,6 +2043,10 @@ module Gogol.DFAReporting
     -- ** PlacementGroupsListResponse
     PlacementGroupsListResponse (..),
     newPlacementGroupsListResponse,
+
+    -- ** PlacementSingleConversionDomain
+    PlacementSingleConversionDomain (..),
+    newPlacementSingleConversionDomain,
 
     -- ** PlacementStrategiesListResponse
     PlacementStrategiesListResponse (..),
@@ -2201,6 +2181,10 @@ module Gogol.DFAReporting
     -- ** Report_CrossDimensionReachCriteria_Dimension
     Report_CrossDimensionReachCriteria_Dimension (..),
 
+    -- ** Report_CrossMediaReachCriteria
+    Report_CrossMediaReachCriteria (..),
+    newReport_CrossMediaReachCriteria,
+
     -- ** Report_Delivery
     Report_Delivery (..),
     newReport_Delivery,
@@ -2218,14 +2202,6 @@ module Gogol.DFAReporting
 
     -- ** Report_Format
     Report_Format (..),
-
-    -- ** Report_PathAttributionCriteria
-    Report_PathAttributionCriteria (..),
-    newReport_PathAttributionCriteria,
-
-    -- ** Report_PathCriteria
-    Report_PathCriteria (..),
-    newReport_PathCriteria,
 
     -- ** Report_PathToConversionCriteria
     Report_PathToConversionCriteria (..),
@@ -2403,6 +2379,28 @@ module Gogol.DFAReporting
     TranscodeSetting (..),
     newTranscodeSetting,
 
+    -- ** TvCampaignDetail
+    TvCampaignDetail (..),
+    newTvCampaignDetail,
+
+    -- ** TvCampaignSummariesListResponse
+    TvCampaignSummariesListResponse (..),
+    newTvCampaignSummariesListResponse,
+
+    -- ** TvCampaignSummary
+    TvCampaignSummary (..),
+    newTvCampaignSummary,
+
+    -- ** TvCampaignSummary_Type
+    TvCampaignSummary_Type (..),
+
+    -- ** TvCampaignTimepoint
+    TvCampaignTimepoint (..),
+    newTvCampaignTimepoint,
+
+    -- ** TvCampaignTimepoint_DateWindow
+    TvCampaignTimepoint_DateWindow (..),
+
     -- ** UniversalAdId
     UniversalAdId (..),
     newUniversalAdId,
@@ -2419,6 +2417,10 @@ module Gogol.DFAReporting
 
     -- ** UserDefinedVariableConfiguration_VariableType
     UserDefinedVariableConfiguration_VariableType (..),
+
+    -- ** UserIdentifier
+    UserIdentifier (..),
+    newUserIdentifier,
 
     -- ** UserProfile
     UserProfile (..),
@@ -2454,13 +2456,6 @@ module Gogol.DFAReporting
     -- ** UserRolesListResponse
     UserRolesListResponse (..),
     newUserRolesListResponse,
-
-    -- ** UvarFilter
-    UvarFilter (..),
-    newUvarFilter,
-
-    -- ** UvarFilter_Match
-    UvarFilter_Match (..),
 
     -- ** VideoFormat
     VideoFormat (..),
@@ -2645,12 +2640,6 @@ module Gogol.DFAReporting
 
     -- ** MobileAppsListDirectories
     MobileAppsListDirectories (..),
-
-    -- ** OrderDocumentsListSortField
-    OrderDocumentsListSortField (..),
-
-    -- ** OrderDocumentsListSortOrder
-    OrderDocumentsListSortOrder (..),
 
     -- ** OrdersListSortField
     OrdersListSortField (..),
@@ -2890,8 +2879,6 @@ import Gogol.DFAReporting.OperatingSystemVersions.Get
 import Gogol.DFAReporting.OperatingSystemVersions.List
 import Gogol.DFAReporting.OperatingSystems.Get
 import Gogol.DFAReporting.OperatingSystems.List
-import Gogol.DFAReporting.OrderDocuments.Get
-import Gogol.DFAReporting.OrderDocuments.List
 import Gogol.DFAReporting.Orders.Get
 import Gogol.DFAReporting.Orders.List
 import Gogol.DFAReporting.PlacementGroups.Get
@@ -2956,6 +2943,8 @@ import Gogol.DFAReporting.TargetingTemplates.Insert
 import Gogol.DFAReporting.TargetingTemplates.List
 import Gogol.DFAReporting.TargetingTemplates.Patch
 import Gogol.DFAReporting.TargetingTemplates.Update
+import Gogol.DFAReporting.TvCampaignDetails.Get
+import Gogol.DFAReporting.TvCampaignSummaries.List
 import Gogol.DFAReporting.Types
 import Gogol.DFAReporting.UserProfiles.Get
 import Gogol.DFAReporting.UserProfiles.List

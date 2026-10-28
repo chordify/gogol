@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudPrivateCatalogProducer.Catalogs.Products.Patch
 where
 
 import Gogol.CloudPrivateCatalogProducer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudprivatecatalogproducer.catalogs.products.patch@ method which the
 -- 'CloudPrivateCatalogProducerCatalogsProductsPatch' request conforms to.
@@ -97,7 +95,8 @@ newCloudPrivateCatalogProducerCatalogsProductsPatch ::
   CloudPrivateCatalogProducerCatalogsProductsPatch
 newCloudPrivateCatalogProducerCatalogsProductsPatch name payload =
   CloudPrivateCatalogProducerCatalogsProductsPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -112,31 +111,28 @@ instance
     CloudPrivateCatalogProducerCatalogsProductsPatch
   where
   type
-    Rs
-      CloudPrivateCatalogProducerCatalogsProductsPatch =
+    Rs CloudPrivateCatalogProducerCatalogsProductsPatch =
       GoogleCloudPrivatecatalogproducerV1beta1Product
   type
-    Scopes
-      CloudPrivateCatalogProducerCatalogsProductsPatch =
+    Scopes CloudPrivateCatalogProducerCatalogsProductsPatch =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudPrivateCatalogProducerCatalogsProductsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudPrivateCatalogProducerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudPrivateCatalogProducerCatalogsProductsPatchResource
-            )
-            Core.mempty
+  requestClient CloudPrivateCatalogProducerCatalogsProductsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudPrivateCatalogProducerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                CloudPrivateCatalogProducerCatalogsProductsPatchResource
+          )
+          Core.mempty

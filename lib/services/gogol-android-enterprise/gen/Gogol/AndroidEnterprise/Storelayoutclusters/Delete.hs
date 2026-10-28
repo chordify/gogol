@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Storelayoutclusters.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Storelayoutclusters.Delete
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.storelayoutclusters.delete@ method which the
 -- 'AndroidEnterpriseStorelayoutclustersDelete' request conforms to.
@@ -94,47 +92,45 @@ newAndroidEnterpriseStorelayoutclustersDelete ::
   -- |  The ID of the page. See 'pageId'.
   Core.Text ->
   AndroidEnterpriseStorelayoutclustersDelete
-newAndroidEnterpriseStorelayoutclustersDelete clusterId enterpriseId pageId =
-  AndroidEnterpriseStorelayoutclustersDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      enterpriseId = enterpriseId,
-      pageId = pageId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidEnterpriseStorelayoutclustersDelete
+  clusterId
+  enterpriseId
+  pageId =
+    AndroidEnterpriseStorelayoutclustersDelete
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        enterpriseId = enterpriseId,
+        pageId = pageId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AndroidEnterpriseStorelayoutclustersDelete
   where
+  type Rs AndroidEnterpriseStorelayoutclustersDelete = ()
   type
-    Rs AndroidEnterpriseStorelayoutclustersDelete =
-      ()
-  type
-    Scopes
-      AndroidEnterpriseStorelayoutclustersDelete =
+    Scopes AndroidEnterpriseStorelayoutclustersDelete =
       '[Androidenterprise'FullControl]
-  requestClient
-    AndroidEnterpriseStorelayoutclustersDelete {..} =
-      go
-        enterpriseId
-        pageId
-        clusterId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidEnterpriseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidEnterpriseStorelayoutclustersDeleteResource
-            )
-            Core.mempty
+  requestClient AndroidEnterpriseStorelayoutclustersDelete {..} =
+    go
+      enterpriseId
+      pageId
+      clusterId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidEnterpriseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidEnterpriseStorelayoutclustersDeleteResource
+          )
+          Core.mempty

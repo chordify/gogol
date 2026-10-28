@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Testing.Projects.TestMatrices.Cancel
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Cancels unfinished test executions in a test matrix. This call returns immediately and cancellation proceeds asynchronously. If the matrix is already final, this operation will have no effect. May return any of the following canonical error codes: - PERMISSION/DENIED - if the user is not authorized to read project - INVALID/ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist
 --
--- /See:/ <https://developers.google.com/cloud-test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.cancel@.
+-- /See:/ <https://firebase.google.com/docs/test-lab/ Cloud Testing API Reference> for @testing.projects.testMatrices.cancel@.
 module Gogol.Testing.Projects.TestMatrices.Cancel
   ( -- * Resource
     TestingProjectsTestMatricesCancelResource,
@@ -39,7 +37,7 @@ module Gogol.Testing.Projects.TestMatrices.Cancel
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Testing.Types
 
 -- | A resource alias for @testing.projects.testMatrices.cancel@ method which the
@@ -97,10 +95,7 @@ newTestingProjectsTestMatricesCancel projectId testMatrixId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TestingProjectsTestMatricesCancel
-  where
+instance Core.GoogleRequest TestingProjectsTestMatricesCancel where
   type
     Rs TestingProjectsTestMatricesCancel =
       CancelTestMatrixResponse

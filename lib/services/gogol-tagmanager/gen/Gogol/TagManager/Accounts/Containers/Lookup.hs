@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Lookup
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Looks up a Container by destination ID.
+-- Looks up a Container by destination ID or tag ID.
 --
 -- /See:/ <https://developers.google.com/tag-manager Tag Manager API Reference> for @tagmanager.accounts.containers.lookup@.
 module Gogol.TagManager.Accounts.Containers.Lookup
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Lookup
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.lookup@ method which the
@@ -53,12 +51,13 @@ type TagManagerAccountsContainersLookupResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "destinationId" Core.Text
+    Core.:> Core.QueryParam "tagId" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Container
 
--- | Looks up a Container by destination ID.
+-- | Looks up a Container by destination ID or tag ID.
 --
 -- /See:/ 'newTagManagerAccountsContainersLookup' smart constructor.
 data TagManagerAccountsContainersLookup = TagManagerAccountsContainersLookup
@@ -68,8 +67,10 @@ data TagManagerAccountsContainersLookup = TagManagerAccountsContainersLookup
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Destination ID linked to a GTM Container, e.g. AW-123456789. Example: accounts\/containers:lookup?destination/id={destination/id}.
+    -- | Destination ID linked to a GTM Container, e.g. AW-123456789. Example: accounts\/containers:lookup?destination/id={destination/id}. Only one of destination/id or tag/id should be set.
     destinationId :: (Core.Maybe Core.Text),
+    -- | Tag ID for a GTM Container, e.g. GTM-123456789. Example: accounts\/containers:lookup?tag/id={tag/id}. Only one of destination/id or tag/id should be set.
+    tagId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -86,17 +87,13 @@ newTagManagerAccountsContainersLookup =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       destinationId = Core.Nothing,
+      tagId = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TagManagerAccountsContainersLookup
-  where
-  type
-    Rs TagManagerAccountsContainersLookup =
-      Container
+instance Core.GoogleRequest TagManagerAccountsContainersLookup where
+  type Rs TagManagerAccountsContainersLookup = Container
   type
     Scopes TagManagerAccountsContainersLookup =
       '[Tagmanager'Edit'Containers, Tagmanager'Readonly]
@@ -106,6 +103,7 @@ instance
       accessToken
       callback
       destinationId
+      tagId
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -114,7 +112,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                TagManagerAccountsContainersLookupResource
+              Core.Proxy TagManagerAccountsContainersLookupResource
           )
           Core.mempty

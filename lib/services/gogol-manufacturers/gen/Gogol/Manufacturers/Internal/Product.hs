@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Manufacturers.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Manufacturers.Internal.Product
@@ -57,6 +55,10 @@ module Gogol.Manufacturers.Internal.Product
     -- * FloatUnit
     FloatUnit (..),
     newFloatUnit,
+
+    -- * GoogleShoppingManufacturersV1ProductCertification
+    GoogleShoppingManufacturersV1ProductCertification (..),
+    newGoogleShoppingManufacturersV1ProductCertification,
 
     -- * Grocery
     Grocery (..),
@@ -105,7 +107,7 @@ module Gogol.Manufacturers.Internal.Product
 where
 
 import Gogol.Manufacturers.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Attributes of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116.
 --
@@ -119,6 +121,8 @@ data Attributes = Attributes
     brand :: (Core.Maybe Core.Text),
     -- | The capacity of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#capacity.
     capacity :: (Core.Maybe Capacity),
+    -- | Optional. List of certifications claimed by this product.
+    certification :: (Core.Maybe [GoogleShoppingManufacturersV1ProductCertification]),
     -- | The color of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#color.
     color :: (Core.Maybe Core.Text),
     -- | The count of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#count.
@@ -145,6 +149,8 @@ data Attributes = Attributes
     imageLink :: (Core.Maybe Image),
     -- | A list of included destinations such as \"ClientExport\", \"ClientShoppingCatalog\" or \"PartnerShoppingCatalog\". For more information, see https:\/\/support.google.com\/manufacturers\/answer\/7443550
     includedDestination :: (Core.Maybe [Core.Text]),
+    -- | Optional. List of countries to show this product in. Countries provided in this attribute will override any of the countries configured at feed level. The values should be: the <http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml CLDR territory code> of the countries in which this item will be shown.
+    intendedCountry :: (Core.Maybe [Core.Text]),
     -- | The item group id of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#itemgroupid.
     itemGroupId :: (Core.Maybe Core.Text),
     -- | The material of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#material.
@@ -188,7 +194,9 @@ data Attributes = Attributes
     -- | The title of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#title.
     title :: (Core.Maybe Core.Text),
     -- | The videos of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#video.
-    videoLink :: (Core.Maybe [Core.Text])
+    videoLink :: (Core.Maybe [Core.Text]),
+    -- | Virtual Model (3d) asset link.
+    virtualModelLink :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -201,6 +209,7 @@ newAttributes =
       ageGroup = Core.Nothing,
       brand = Core.Nothing,
       capacity = Core.Nothing,
+      certification = Core.Nothing,
       color = Core.Nothing,
       count = Core.Nothing,
       description = Core.Nothing,
@@ -214,6 +223,7 @@ newAttributes =
       gtin = Core.Nothing,
       imageLink = Core.Nothing,
       includedDestination = Core.Nothing,
+      intendedCountry = Core.Nothing,
       itemGroupId = Core.Nothing,
       material = Core.Nothing,
       mpn = Core.Nothing,
@@ -235,7 +245,8 @@ newAttributes =
       targetClientId = Core.Nothing,
       theme = Core.Nothing,
       title = Core.Nothing,
-      videoLink = Core.Nothing
+      videoLink = Core.Nothing,
+      virtualModelLink = Core.Nothing
     }
 
 instance Core.FromJSON Attributes where
@@ -248,6 +259,7 @@ instance Core.FromJSON Attributes where
             Core.<*> (o Core..:? "ageGroup")
             Core.<*> (o Core..:? "brand")
             Core.<*> (o Core..:? "capacity")
+            Core.<*> (o Core..:? "certification")
             Core.<*> (o Core..:? "color")
             Core.<*> (o Core..:? "count")
             Core.<*> (o Core..:? "description")
@@ -261,6 +273,7 @@ instance Core.FromJSON Attributes where
             Core.<*> (o Core..:? "gtin")
             Core.<*> (o Core..:? "imageLink")
             Core.<*> (o Core..:? "includedDestination")
+            Core.<*> (o Core..:? "intendedCountry")
             Core.<*> (o Core..:? "itemGroupId")
             Core.<*> (o Core..:? "material")
             Core.<*> (o Core..:? "mpn")
@@ -283,58 +296,55 @@ instance Core.FromJSON Attributes where
             Core.<*> (o Core..:? "theme")
             Core.<*> (o Core..:? "title")
             Core.<*> (o Core..:? "videoLink")
+            Core.<*> (o Core..:? "virtualModelLink")
       )
 
 instance Core.ToJSON Attributes where
   toJSON Attributes {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalImageLink" Core..=)
-              Core.<$> additionalImageLink,
+          [ ("additionalImageLink" Core..=) Core.<$> additionalImageLink,
             ("ageGroup" Core..=) Core.<$> ageGroup,
             ("brand" Core..=) Core.<$> brand,
             ("capacity" Core..=) Core.<$> capacity,
+            ("certification" Core..=) Core.<$> certification,
             ("color" Core..=) Core.<$> color,
             ("count" Core..=) Core.<$> count,
             ("description" Core..=) Core.<$> description,
             ("disclosureDate" Core..=) Core.<$> disclosureDate,
-            ("excludedDestination" Core..=)
-              Core.<$> excludedDestination,
-            ("featureDescription" Core..=)
-              Core.<$> featureDescription,
+            ("excludedDestination" Core..=) Core.<$> excludedDestination,
+            ("featureDescription" Core..=) Core.<$> featureDescription,
             ("flavor" Core..=) Core.<$> flavor,
             ("format" Core..=) Core.<$> format,
             ("gender" Core..=) Core.<$> gender,
             ("grocery" Core..=) Core.<$> grocery,
             ("gtin" Core..=) Core.<$> gtin,
             ("imageLink" Core..=) Core.<$> imageLink,
-            ("includedDestination" Core..=)
-              Core.<$> includedDestination,
+            ("includedDestination" Core..=) Core.<$> includedDestination,
+            ("intendedCountry" Core..=) Core.<$> intendedCountry,
             ("itemGroupId" Core..=) Core.<$> itemGroupId,
             ("material" Core..=) Core.<$> material,
             ("mpn" Core..=) Core.<$> mpn,
             ("nutrition" Core..=) Core.<$> nutrition,
             ("pattern" Core..=) Core.<$> pattern',
             ("productDetail" Core..=) Core.<$> productDetail,
-            ("productHighlight" Core..=)
-              Core.<$> productHighlight,
+            ("productHighlight" Core..=) Core.<$> productHighlight,
             ("productLine" Core..=) Core.<$> productLine,
             ("productName" Core..=) Core.<$> productName,
             ("productPageUrl" Core..=) Core.<$> productPageUrl,
             ("productType" Core..=) Core.<$> productType,
             ("releaseDate" Core..=) Core.<$> releaseDate,
-            ("richProductContent" Core..=)
-              Core.<$> richProductContent,
+            ("richProductContent" Core..=) Core.<$> richProductContent,
             ("scent" Core..=) Core.<$> scent,
             ("size" Core..=) Core.<$> size,
             ("sizeSystem" Core..=) Core.<$> sizeSystem,
             ("sizeType" Core..=) Core.<$> sizeType,
-            ("suggestedRetailPrice" Core..=)
-              Core.<$> suggestedRetailPrice,
+            ("suggestedRetailPrice" Core..=) Core.<$> suggestedRetailPrice,
             ("targetClientId" Core..=) Core.<$> targetClientId,
             ("theme" Core..=) Core.<$> theme,
             ("title" Core..=) Core.<$> title,
-            ("videoLink" Core..=) Core.<$> videoLink
+            ("videoLink" Core..=) Core.<$> videoLink,
+            ("virtualModelLink" Core..=) Core.<$> virtualModelLink
           ]
       )
 
@@ -361,9 +371,7 @@ instance Core.FromJSON Capacity where
       ( \o ->
           Capacity
             Core.<$> (o Core..:? "unit")
-            Core.<*> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Capacity where
@@ -381,6 +389,8 @@ instance Core.ToJSON Capacity where
 data Certification = Certification
   { -- | Required. Name of the certification body.
     authority :: (Core.Maybe Core.Text),
+    -- | Required. A unique code to identify the certification.
+    code :: (Core.Maybe Core.Text),
     -- | Optional. A URL link to the certification.
     link :: (Core.Maybe Core.Text),
     -- | Optional. A URL link to the certification logo.
@@ -389,7 +399,7 @@ data Certification = Certification
     name :: (Core.Maybe Core.Text),
     -- | Optional. The expiration date (UTC).
     validUntil :: (Core.Maybe Core.Text),
-    -- | Required. A custom value of the certification.
+    -- | Optional. A custom value of the certification.
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -400,6 +410,7 @@ newCertification ::
 newCertification =
   Certification
     { authority = Core.Nothing,
+      code = Core.Nothing,
       link = Core.Nothing,
       logo = Core.Nothing,
       name = Core.Nothing,
@@ -414,6 +425,7 @@ instance Core.FromJSON Certification where
       ( \o ->
           Certification
             Core.<$> (o Core..:? "authority")
+            Core.<*> (o Core..:? "code")
             Core.<*> (o Core..:? "link")
             Core.<*> (o Core..:? "logo")
             Core.<*> (o Core..:? "name")
@@ -426,6 +438,7 @@ instance Core.ToJSON Certification where
     Core.object
       ( Core.catMaybes
           [ ("authority" Core..=) Core.<$> authority,
+            ("code" Core..=) Core.<$> code,
             ("link" Core..=) Core.<$> link,
             ("logo" Core..=) Core.<$> logo,
             ("name" Core..=) Core.<$> name,
@@ -457,9 +470,7 @@ instance Core.FromJSON Count where
       ( \o ->
           Count
             Core.<$> (o Core..:? "unit")
-            Core.<*> ( o Core..:? "value"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "value" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Count where
@@ -475,8 +486,14 @@ instance Core.ToJSON Count where
 --
 -- /See:/ 'newDestinationStatus' smart constructor.
 data DestinationStatus = DestinationStatus
-  { -- | The name of the destination.
+  { -- | Output only. List of country codes (ISO 3166-1 alpha-2) where the offer is approved.
+    approvedCountries :: (Core.Maybe [Core.Text]),
+    -- | The name of the destination.
     destination :: (Core.Maybe Core.Text),
+    -- | Output only. List of country codes (ISO 3166-1 alpha-2) where the offer is disapproved.
+    disapprovedCountries :: (Core.Maybe [Core.Text]),
+    -- | Output only. List of country codes (ISO 3166-1 alpha-2) where the offer is pending approval.
+    pendingCountries :: (Core.Maybe [Core.Text]),
     -- | The status of the destination.
     status :: (Core.Maybe DestinationStatus_Status)
   }
@@ -486,7 +503,13 @@ data DestinationStatus = DestinationStatus
 newDestinationStatus ::
   DestinationStatus
 newDestinationStatus =
-  DestinationStatus {destination = Core.Nothing, status = Core.Nothing}
+  DestinationStatus
+    { approvedCountries = Core.Nothing,
+      destination = Core.Nothing,
+      disapprovedCountries = Core.Nothing,
+      pendingCountries = Core.Nothing,
+      status = Core.Nothing
+    }
 
 instance Core.FromJSON DestinationStatus where
   parseJSON =
@@ -494,7 +517,10 @@ instance Core.FromJSON DestinationStatus where
       "DestinationStatus"
       ( \o ->
           DestinationStatus
-            Core.<$> (o Core..:? "destination")
+            Core.<$> (o Core..:? "approvedCountries")
+            Core.<*> (o Core..:? "destination")
+            Core.<*> (o Core..:? "disapprovedCountries")
+            Core.<*> (o Core..:? "pendingCountries")
             Core.<*> (o Core..:? "status")
       )
 
@@ -502,7 +528,10 @@ instance Core.ToJSON DestinationStatus where
   toJSON DestinationStatus {..} =
     Core.object
       ( Core.catMaybes
-          [ ("destination" Core..=) Core.<$> destination,
+          [ ("approvedCountries" Core..=) Core.<$> approvedCountries,
+            ("destination" Core..=) Core.<$> destination,
+            ("disapprovedCountries" Core..=) Core.<$> disapprovedCountries,
+            ("pendingCountries" Core..=) Core.<$> pendingCountries,
             ("status" Core..=) Core.<$> status
           ]
       )
@@ -519,8 +548,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -583,7 +611,8 @@ data FloatUnit = FloatUnit
 -- | Creates a value of 'FloatUnit' with the minimum fields required to make a request.
 newFloatUnit ::
   FloatUnit
-newFloatUnit = FloatUnit {amount = Core.Nothing, unit = Core.Nothing}
+newFloatUnit =
+  FloatUnit {amount = Core.Nothing, unit = Core.Nothing}
 
 instance Core.FromJSON FloatUnit where
   parseJSON =
@@ -591,7 +620,8 @@ instance Core.FromJSON FloatUnit where
       "FloatUnit"
       ( \o ->
           FloatUnit
-            Core.<$> (o Core..:? "amount") Core.<*> (o Core..:? "unit")
+            Core.<$> (o Core..:? "amount")
+            Core.<*> (o Core..:? "unit")
       )
 
 instance Core.ToJSON FloatUnit where
@@ -600,6 +630,57 @@ instance Core.ToJSON FloatUnit where
       ( Core.catMaybes
           [ ("amount" Core..=) Core.<$> amount,
             ("unit" Core..=) Core.<$> unit
+          ]
+      )
+
+-- | Description of a certification.
+--
+-- /See:/ 'newGoogleShoppingManufacturersV1ProductCertification' smart constructor.
+data GoogleShoppingManufacturersV1ProductCertification = GoogleShoppingManufacturersV1ProductCertification
+  { -- | Required. Name of the certification body.
+    authority :: (Core.Maybe Core.Text),
+    -- | Required. A unique code to identify the certification.
+    code :: (Core.Maybe Core.Text),
+    -- | Required. Name of the certification.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleShoppingManufacturersV1ProductCertification' with the minimum fields required to make a request.
+newGoogleShoppingManufacturersV1ProductCertification ::
+  GoogleShoppingManufacturersV1ProductCertification
+newGoogleShoppingManufacturersV1ProductCertification =
+  GoogleShoppingManufacturersV1ProductCertification
+    { authority =
+        Core.Nothing,
+      code = Core.Nothing,
+      name = Core.Nothing
+    }
+
+instance
+  Core.FromJSON
+    GoogleShoppingManufacturersV1ProductCertification
+  where
+  parseJSON =
+    Core.withObject
+      "GoogleShoppingManufacturersV1ProductCertification"
+      ( \o ->
+          GoogleShoppingManufacturersV1ProductCertification
+            Core.<$> (o Core..:? "authority")
+            Core.<*> (o Core..:? "code")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance
+  Core.ToJSON
+    GoogleShoppingManufacturersV1ProductCertification
+  where
+  toJSON GoogleShoppingManufacturersV1ProductCertification {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("authority" Core..=) Core.<$> authority,
+            ("code" Core..=) Core.<$> code,
+            ("name" Core..=) Core.<$> name
           ]
       )
 
@@ -664,18 +745,15 @@ instance Core.ToJSON Grocery where
   toJSON Grocery {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeIngredients" Core..=)
-              Core.<$> activeIngredients,
+          [ ("activeIngredients" Core..=) Core.<$> activeIngredients,
             ("alcoholByVolume" Core..=) Core.<$> alcoholByVolume,
             ("allergens" Core..=) Core.<$> allergens,
-            ("derivedNutritionClaim" Core..=)
-              Core.<$> derivedNutritionClaim,
+            ("derivedNutritionClaim" Core..=) Core.<$> derivedNutritionClaim,
             ("directions" Core..=) Core.<$> directions,
             ("indications" Core..=) Core.<$> indications,
             ("ingredients" Core..=) Core.<$> ingredients,
             ("nutritionClaim" Core..=) Core.<$> nutritionClaim,
-            ("storageInstructions" Core..=)
-              Core.<$> storageInstructions
+            ("storageInstructions" Core..=) Core.<$> storageInstructions
           ]
       )
 
@@ -696,7 +774,11 @@ data Image = Image
 newImage ::
   Image
 newImage =
-  Image {imageUrl = Core.Nothing, status = Core.Nothing, type' = Core.Nothing}
+  Image
+    { imageUrl = Core.Nothing,
+      status = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON Image where
   parseJSON =
@@ -723,7 +805,9 @@ instance Core.ToJSON Image where
 --
 -- /See:/ 'newIssue' smart constructor.
 data Issue = Issue
-  { -- | If present, the attribute that triggered the issue. For more information about attributes, see https:\/\/support.google.com\/manufacturers\/answer\/6124116.
+  { -- | Output only. List of country codes (ISO 3166-1 alpha-2) where issue applies to the manufacturer product.
+    applicableCountries :: (Core.Maybe [Core.Text]),
+    -- | If present, the attribute that triggered the issue. For more information about attributes, see https:\/\/support.google.com\/manufacturers\/answer\/6124116.
     attribute :: (Core.Maybe Core.Text),
     -- | Longer description of the issue focused on how to resolve it.
     description :: (Core.Maybe Core.Text),
@@ -747,7 +831,8 @@ newIssue ::
   Issue
 newIssue =
   Issue
-    { attribute = Core.Nothing,
+    { applicableCountries = Core.Nothing,
+      attribute = Core.Nothing,
       description = Core.Nothing,
       destination = Core.Nothing,
       resolution = Core.Nothing,
@@ -763,7 +848,8 @@ instance Core.FromJSON Issue where
       "Issue"
       ( \o ->
           Issue
-            Core.<$> (o Core..:? "attribute")
+            Core.<$> (o Core..:? "applicableCountries")
+            Core.<*> (o Core..:? "attribute")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "destination")
             Core.<*> (o Core..:? "resolution")
@@ -777,7 +863,8 @@ instance Core.ToJSON Issue where
   toJSON Issue {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attribute" Core..=) Core.<$> attribute,
+          [ ("applicableCountries" Core..=) Core.<$> applicableCountries,
+            ("attribute" Core..=) Core.<$> attribute,
             ("description" Core..=) Core.<$> description,
             ("destination" Core..=) Core.<$> destination,
             ("resolution" Core..=) Core.<$> resolution,
@@ -808,10 +895,7 @@ newListProductCertificationsResponse =
       productCertifications = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListProductCertificationsResponse
-  where
+instance Core.FromJSON ListProductCertificationsResponse where
   parseJSON =
     Core.withObject
       "ListProductCertificationsResponse"
@@ -821,16 +905,12 @@ instance
             Core.<*> (o Core..:? "productCertifications")
       )
 
-instance
-  Core.ToJSON
-    ListProductCertificationsResponse
-  where
+instance Core.ToJSON ListProductCertificationsResponse where
   toJSON ListProductCertificationsResponse {..} =
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("productCertifications" Core..=)
-              Core.<$> productCertifications
+            ("productCertifications" Core..=) Core.<$> productCertifications
           ]
       )
 
@@ -848,7 +928,10 @@ data ListProductsResponse = ListProductsResponse
 newListProductsResponse ::
   ListProductsResponse
 newListProductsResponse =
-  ListProductsResponse {nextPageToken = Core.Nothing, products = Core.Nothing}
+  ListProductsResponse
+    { nextPageToken = Core.Nothing,
+      products = Core.Nothing
+    }
 
 instance Core.FromJSON ListProductsResponse where
   parseJSON =
@@ -1070,8 +1153,7 @@ instance Core.ToJSON Nutrition where
             ("addedSugarsDailyPercentage" Core..=)
               Core.<$> addedSugarsDailyPercentage,
             ("calcium" Core..=) Core.<$> calcium,
-            ("calciumDailyPercentage" Core..=)
-              Core.<$> calciumDailyPercentage,
+            ("calciumDailyPercentage" Core..=) Core.<$> calciumDailyPercentage,
             ("cholesterol" Core..=) Core.<$> cholesterol,
             ("cholesterolDailyPercentage" Core..=)
               Core.<$> cholesterolDailyPercentage,
@@ -1080,43 +1162,32 @@ instance Core.ToJSON Nutrition where
               Core.<$> dietaryFiberDailyPercentage,
             ("energy" Core..=) Core.<$> energy,
             ("energyFromFat" Core..=) Core.<$> energyFromFat,
-            ("folateDailyPercentage" Core..=)
-              Core.<$> folateDailyPercentage,
+            ("folateDailyPercentage" Core..=) Core.<$> folateDailyPercentage,
             ("folateFolicAcid" Core..=) Core.<$> folateFolicAcid,
             ("folateMcgDfe" Core..=) Core.<$> folateMcgDfe,
             ("iron" Core..=) Core.<$> iron,
-            ("ironDailyPercentage" Core..=)
-              Core.<$> ironDailyPercentage,
-            ("monounsaturatedFat" Core..=)
-              Core.<$> monounsaturatedFat,
-            ("nutritionFactMeasure" Core..=)
-              Core.<$> nutritionFactMeasure,
+            ("ironDailyPercentage" Core..=) Core.<$> ironDailyPercentage,
+            ("monounsaturatedFat" Core..=) Core.<$> monounsaturatedFat,
+            ("nutritionFactMeasure" Core..=) Core.<$> nutritionFactMeasure,
             ("polyols" Core..=) Core.<$> polyols,
-            ("polyunsaturatedFat" Core..=)
-              Core.<$> polyunsaturatedFat,
+            ("polyunsaturatedFat" Core..=) Core.<$> polyunsaturatedFat,
             ("potassium" Core..=) Core.<$> potassium,
             ("potassiumDailyPercentage" Core..=)
               Core.<$> potassiumDailyPercentage,
             ("preparedSizeDescription" Core..=)
               Core.<$> preparedSizeDescription,
             ("protein" Core..=) Core.<$> protein,
-            ("proteinDailyPercentage" Core..=)
-              Core.<$> proteinDailyPercentage,
+            ("proteinDailyPercentage" Core..=) Core.<$> proteinDailyPercentage,
             ("saturatedFat" Core..=) Core.<$> saturatedFat,
             ("saturatedFatDailyPercentage" Core..=)
               Core.<$> saturatedFatDailyPercentage,
-            ("servingSizeDescription" Core..=)
-              Core.<$> servingSizeDescription,
-            ("servingSizeMeasure" Core..=)
-              Core.<$> servingSizeMeasure,
-            ("servingsPerContainer" Core..=)
-              Core.<$> servingsPerContainer,
+            ("servingSizeDescription" Core..=) Core.<$> servingSizeDescription,
+            ("servingSizeMeasure" Core..=) Core.<$> servingSizeMeasure,
+            ("servingsPerContainer" Core..=) Core.<$> servingsPerContainer,
             ("sodium" Core..=) Core.<$> sodium,
-            ("sodiumDailyPercentage" Core..=)
-              Core.<$> sodiumDailyPercentage,
+            ("sodiumDailyPercentage" Core..=) Core.<$> sodiumDailyPercentage,
             ("starch" Core..=) Core.<$> starch,
-            ("totalCarbohydrate" Core..=)
-              Core.<$> totalCarbohydrate,
+            ("totalCarbohydrate" Core..=) Core.<$> totalCarbohydrate,
             ("totalCarbohydrateDailyPercentage" Core..=)
               Core.<$> totalCarbohydrateDailyPercentage,
             ("totalFat" Core..=) Core.<$> totalFat,
@@ -1181,6 +1252,8 @@ data Product = Product
     contentLanguage :: (Core.Maybe Core.Text),
     -- | The status of the destinations.
     destinationStatuses :: (Core.Maybe [DestinationStatus]),
+    -- | Optional. The feed label for the product.
+    feedLabel :: (Core.Maybe Core.Text),
     -- | A server-generated list of issues associated with the product.
     issues :: (Core.Maybe [Issue]),
     -- | Name in the format @{target_country}:{content_language}:{product_id}@. @target_country@ - The target country of the product as a CLDR territory code (for example, US). @content_language@ - The content language of the product as a two-letter ISO 639-1 language code (for example, en). @product_id@ - The ID of the product. For more information, see https:\/\/support.google.com\/manufacturers\/answer\/6124116#id.
@@ -1202,6 +1275,7 @@ newProduct =
     { attributes = Core.Nothing,
       contentLanguage = Core.Nothing,
       destinationStatuses = Core.Nothing,
+      feedLabel = Core.Nothing,
       issues = Core.Nothing,
       name = Core.Nothing,
       parent = Core.Nothing,
@@ -1218,6 +1292,7 @@ instance Core.FromJSON Product where
             Core.<$> (o Core..:? "attributes")
             Core.<*> (o Core..:? "contentLanguage")
             Core.<*> (o Core..:? "destinationStatuses")
+            Core.<*> (o Core..:? "feedLabel")
             Core.<*> (o Core..:? "issues")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "parent")
@@ -1231,8 +1306,8 @@ instance Core.ToJSON Product where
       ( Core.catMaybes
           [ ("attributes" Core..=) Core.<$> attributes,
             ("contentLanguage" Core..=) Core.<$> contentLanguage,
-            ("destinationStatuses" Core..=)
-              Core.<$> destinationStatuses,
+            ("destinationStatuses" Core..=) Core.<$> destinationStatuses,
+            ("feedLabel" Core..=) Core.<$> feedLabel,
             ("issues" Core..=) Core.<$> issues,
             ("name" Core..=) Core.<$> name,
             ("parent" Core..=) Core.<$> parent,
@@ -1310,8 +1385,7 @@ instance Core.ToJSON ProductCertification where
           [ ("brand" Core..=) Core.<$> brand,
             ("certification" Core..=) Core.<$> certification,
             ("countryCode" Core..=) Core.<$> countryCode,
-            ("destinationStatuses" Core..=)
-              Core.<$> destinationStatuses,
+            ("destinationStatuses" Core..=) Core.<$> destinationStatuses,
             ("issues" Core..=) Core.<$> issues,
             ("mpn" Core..=) Core.<$> mpn,
             ("name" Core..=) Core.<$> name,
@@ -1403,8 +1477,7 @@ instance Core.ToJSON VoluntaryNutritionFact where
   toJSON VoluntaryNutritionFact {..} =
     Core.object
       ( Core.catMaybes
-          [ ("dailyPercentage" Core..=)
-              Core.<$> dailyPercentage,
+          [ ("dailyPercentage" Core..=) Core.<$> dailyPercentage,
             ("name" Core..=) Core.<$> name,
             ("value" Core..=) Core.<$> value
           ]

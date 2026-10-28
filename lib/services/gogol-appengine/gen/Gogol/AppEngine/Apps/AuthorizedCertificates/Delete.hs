@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.AuthorizedCertificates.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.AuthorizedCertificates.Delete
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.authorizedCertificates.delete@ method which the
 -- 'AppEngineAppsAuthorizedCertificatesDelete' request conforms to.
@@ -86,44 +84,42 @@ newAppEngineAppsAuthorizedCertificatesDelete ::
   -- |  Part of @name@. See documentation of @appsId@. See 'authorizedCertificatesId'.
   Core.Text ->
   AppEngineAppsAuthorizedCertificatesDelete
-newAppEngineAppsAuthorizedCertificatesDelete appsId authorizedCertificatesId =
-  AppEngineAppsAuthorizedCertificatesDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      appsId = appsId,
-      authorizedCertificatesId = authorizedCertificatesId,
-      callback = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAppEngineAppsAuthorizedCertificatesDelete
+  appsId
+  authorizedCertificatesId =
+    AppEngineAppsAuthorizedCertificatesDelete
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        appsId = appsId,
+        authorizedCertificatesId = authorizedCertificatesId,
+        callback = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AppEngineAppsAuthorizedCertificatesDelete
   where
-  type
-    Rs AppEngineAppsAuthorizedCertificatesDelete =
-      Empty
+  type Rs AppEngineAppsAuthorizedCertificatesDelete = Empty
   type
     Scopes AppEngineAppsAuthorizedCertificatesDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    AppEngineAppsAuthorizedCertificatesDelete {..} =
-      go
-        appsId
-        authorizedCertificatesId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsAuthorizedCertificatesDeleteResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsAuthorizedCertificatesDelete {..} =
+    go
+      appsId
+      authorizedCertificatesId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsAuthorizedCertificatesDeleteResource
+          )
+          Core.mempty

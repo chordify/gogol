@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidDeviceProvisioning.Internal.Product
@@ -134,6 +132,14 @@ module Gogol.AndroidDeviceProvisioning.Internal.Product
     FindDevicesByOwnerResponse (..),
     newFindDevicesByOwnerResponse,
 
+    -- * GetDeviceSimLockStateRequest
+    GetDeviceSimLockStateRequest (..),
+    newGetDeviceSimLockStateRequest,
+
+    -- * GetDeviceSimLockStateResponse
+    GetDeviceSimLockStateResponse (..),
+    newGetDeviceSimLockStateResponse,
+
     -- * GoogleWorkspaceAccount
     GoogleWorkspaceAccount (..),
     newGoogleWorkspaceAccount,
@@ -209,13 +215,15 @@ module Gogol.AndroidDeviceProvisioning.Internal.Product
 where
 
 import Gogol.AndroidDeviceProvisioning.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Request message to claim a device on behalf of a customer.
 --
 -- /See:/ 'newClaimDeviceRequest' smart constructor.
 data ClaimDeviceRequest = ClaimDeviceRequest
-  { -- | The ID of the customer for whom the device is being claimed.
+  { -- | Optional. The ID of the configuration applied to the device section.
+    configurationId :: (Core.Maybe Core.Int64),
+    -- | The ID of the customer for whom the device is being claimed.
     customerId :: (Core.Maybe Core.Int64),
     -- | Required. Required. The device identifier of the device to claim.
     deviceIdentifier :: (Core.Maybe DeviceIdentifier),
@@ -237,7 +245,8 @@ newClaimDeviceRequest ::
   ClaimDeviceRequest
 newClaimDeviceRequest =
   ClaimDeviceRequest
-    { customerId = Core.Nothing,
+    { configurationId = Core.Nothing,
+      customerId = Core.Nothing,
       deviceIdentifier = Core.Nothing,
       deviceMetadata = Core.Nothing,
       googleWorkspaceCustomerId = Core.Nothing,
@@ -252,34 +261,32 @@ instance Core.FromJSON ClaimDeviceRequest where
       "ClaimDeviceRequest"
       ( \o ->
           ClaimDeviceRequest
-            Core.<$> ( o Core..:? "customerId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "configurationId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "customerId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "googleWorkspaceCustomerId")
             Core.<*> (o Core..:? "preProvisioningToken")
             Core.<*> (o Core..:? "sectionType")
-            Core.<*> ( o Core..:? "simlockProfileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "simlockProfileId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ClaimDeviceRequest where
   toJSON ClaimDeviceRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerId" Core..=) Core.. Core.AsText
-              Core.<$> customerId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("configurationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> configurationId,
+            ("customerId" Core..=) Core.. Core.AsText Core.<$> customerId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata,
             ("googleWorkspaceCustomerId" Core..=)
               Core.<$> googleWorkspaceCustomerId,
-            ("preProvisioningToken" Core..=)
-              Core.<$> preProvisioningToken,
+            ("preProvisioningToken" Core..=) Core.<$> preProvisioningToken,
             ("sectionType" Core..=) Core.<$> sectionType,
-            ("simlockProfileId" Core..=) Core.. Core.AsText
+            ("simlockProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> simlockProfileId
           ]
       )
@@ -299,7 +306,10 @@ data ClaimDeviceResponse = ClaimDeviceResponse
 newClaimDeviceResponse ::
   ClaimDeviceResponse
 newClaimDeviceResponse =
-  ClaimDeviceResponse {deviceId = Core.Nothing, deviceName = Core.Nothing}
+  ClaimDeviceResponse
+    { deviceId = Core.Nothing,
+      deviceName = Core.Nothing
+    }
 
 instance Core.FromJSON ClaimDeviceResponse where
   parseJSON =
@@ -307,9 +317,7 @@ instance Core.FromJSON ClaimDeviceResponse where
       "ClaimDeviceResponse"
       ( \o ->
           ClaimDeviceResponse
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceName")
       )
 
@@ -317,8 +325,7 @@ instance Core.ToJSON ClaimDeviceResponse where
   toJSON ClaimDeviceResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
             ("deviceName" Core..=) Core.<$> deviceName
           ]
       )
@@ -341,14 +348,11 @@ instance Core.FromJSON ClaimDevicesRequest where
   parseJSON =
     Core.withObject
       "ClaimDevicesRequest"
-      ( \o ->
-          ClaimDevicesRequest Core.<$> (o Core..:? "claims")
-      )
+      (\o -> ClaimDevicesRequest Core.<$> (o Core..:? "claims"))
 
 instance Core.ToJSON ClaimDevicesRequest where
   toJSON ClaimDevicesRequest {..} =
-    Core.object
-      (Core.catMaybes [("claims" Core..=) Core.<$> claims])
+    Core.object (Core.catMaybes [("claims" Core..=) Core.<$> claims])
 
 -- | A reseller, vendor, or customer in the zero-touch reseller and customer APIs.
 --
@@ -398,9 +402,7 @@ instance Core.FromJSON Company where
       ( \o ->
           Company
             Core.<$> (o Core..:? "adminEmails")
-            Core.<*> ( o Core..:? "companyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "companyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "companyName")
             Core.<*> (o Core..:? "googleWorkspaceAccount")
             Core.<*> (o Core..:? "languageCode")
@@ -415,16 +417,13 @@ instance Core.ToJSON Company where
     Core.object
       ( Core.catMaybes
           [ ("adminEmails" Core..=) Core.<$> adminEmails,
-            ("companyId" Core..=) Core.. Core.AsText
-              Core.<$> companyId,
+            ("companyId" Core..=) Core.. Core.AsText Core.<$> companyId,
             ("companyName" Core..=) Core.<$> companyName,
-            ("googleWorkspaceAccount" Core..=)
-              Core.<$> googleWorkspaceAccount,
+            ("googleWorkspaceAccount" Core..=) Core.<$> googleWorkspaceAccount,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("name" Core..=) Core.<$> name,
             ("ownerEmails" Core..=) Core.<$> ownerEmails,
-            ("skipWelcomeEmail" Core..=)
-              Core.<$> skipWelcomeEmail,
+            ("skipWelcomeEmail" Core..=) Core.<$> skipWelcomeEmail,
             ("termsStatus" Core..=) Core.<$> termsStatus
           ]
       )
@@ -449,6 +448,8 @@ data Configuration = Configuration
     dpcExtras :: (Core.Maybe Core.Text),
     -- | Required. The resource name of the selected DPC (device policy controller) in the format @customers\/[CUSTOMER_ID]\/dpcs\/*@. To list the supported DPCs, call @customers.dpcs.list@.
     dpcResourcePath :: (Core.Maybe Core.Text),
+    -- | Optional. The timeout before forcing factory reset the device if the device doesn\'t go through provisioning in the setup wizard, usually due to lack of network connectivity during setup wizard. Ranges from 0-6 hours, with 2 hours being the default if unset.
+    forcedResetTime :: (Core.Maybe Core.Duration),
     -- | Required. Whether this is the default configuration that zero-touch enrollment applies to any new devices the organization purchases in the future. Only one customer configuration can be the default. Setting this value to @true@, changes the previous default configuration\'s @isDefault@ value to @false@.
     isDefault :: (Core.Maybe Core.Bool),
     -- | Output only. The API resource name in the format @customers\/[CUSTOMER_ID]\/configurations\/[CONFIGURATION_ID]@. Assigned by the server.
@@ -469,6 +470,7 @@ newConfiguration =
       customMessage = Core.Nothing,
       dpcExtras = Core.Nothing,
       dpcResourcePath = Core.Nothing,
+      forcedResetTime = Core.Nothing,
       isDefault = Core.Nothing,
       name = Core.Nothing
     }
@@ -480,15 +482,14 @@ instance Core.FromJSON Configuration where
       ( \o ->
           Configuration
             Core.<$> (o Core..:? "companyName")
-            Core.<*> ( o Core..:? "configurationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "configurationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "configurationName")
             Core.<*> (o Core..:? "contactEmail")
             Core.<*> (o Core..:? "contactPhone")
             Core.<*> (o Core..:? "customMessage")
             Core.<*> (o Core..:? "dpcExtras")
             Core.<*> (o Core..:? "dpcResourcePath")
+            Core.<*> (o Core..:? "forcedResetTime")
             Core.<*> (o Core..:? "isDefault")
             Core.<*> (o Core..:? "name")
       )
@@ -498,15 +499,16 @@ instance Core.ToJSON Configuration where
     Core.object
       ( Core.catMaybes
           [ ("companyName" Core..=) Core.<$> companyName,
-            ("configurationId" Core..=) Core.. Core.AsText
+            ("configurationId" Core..=)
+              Core.. Core.AsText
               Core.<$> configurationId,
-            ("configurationName" Core..=)
-              Core.<$> configurationName,
+            ("configurationName" Core..=) Core.<$> configurationName,
             ("contactEmail" Core..=) Core.<$> contactEmail,
             ("contactPhone" Core..=) Core.<$> contactPhone,
             ("customMessage" Core..=) Core.<$> customMessage,
             ("dpcExtras" Core..=) Core.<$> dpcExtras,
             ("dpcResourcePath" Core..=) Core.<$> dpcResourcePath,
+            ("forcedResetTime" Core..=) Core.<$> forcedResetTime,
             ("isDefault" Core..=) Core.<$> isDefault,
             ("name" Core..=) Core.<$> name
           ]
@@ -524,23 +526,19 @@ newtype CreateCustomerRequest = CreateCustomerRequest
 -- | Creates a value of 'CreateCustomerRequest' with the minimum fields required to make a request.
 newCreateCustomerRequest ::
   CreateCustomerRequest
-newCreateCustomerRequest = CreateCustomerRequest {customer = Core.Nothing}
+newCreateCustomerRequest =
+  CreateCustomerRequest {customer = Core.Nothing}
 
 instance Core.FromJSON CreateCustomerRequest where
   parseJSON =
     Core.withObject
       "CreateCustomerRequest"
-      ( \o ->
-          CreateCustomerRequest
-            Core.<$> (o Core..:? "customer")
-      )
+      (\o -> CreateCustomerRequest Core.<$> (o Core..:? "customer"))
 
 instance Core.ToJSON CreateCustomerRequest where
   toJSON CreateCustomerRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("customer" Core..=) Core.<$> customer]
-      )
+      (Core.catMaybes [("customer" Core..=) Core.<$> customer])
 
 -- | Request message for customer to assign a configuration to device.
 --
@@ -562,10 +560,7 @@ newCustomerApplyConfigurationRequest =
       device = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    CustomerApplyConfigurationRequest
-  where
+instance Core.FromJSON CustomerApplyConfigurationRequest where
   parseJSON =
     Core.withObject
       "CustomerApplyConfigurationRequest"
@@ -575,10 +570,7 @@ instance
             Core.<*> (o Core..:? "device")
       )
 
-instance
-  Core.ToJSON
-    CustomerApplyConfigurationRequest
-  where
+instance Core.ToJSON CustomerApplyConfigurationRequest where
   toJSON CustomerApplyConfigurationRequest {..} =
     Core.object
       ( Core.catMaybes
@@ -602,10 +594,7 @@ newCustomerListConfigurationsResponse ::
 newCustomerListConfigurationsResponse =
   CustomerListConfigurationsResponse {configurations = Core.Nothing}
 
-instance
-  Core.FromJSON
-    CustomerListConfigurationsResponse
-  where
+instance Core.FromJSON CustomerListConfigurationsResponse where
   parseJSON =
     Core.withObject
       "CustomerListConfigurationsResponse"
@@ -614,10 +603,7 @@ instance
             Core.<$> (o Core..:? "configurations")
       )
 
-instance
-  Core.ToJSON
-    CustomerListConfigurationsResponse
-  where
+instance Core.ToJSON CustomerListConfigurationsResponse where
   toJSON CustomerListConfigurationsResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -714,21 +700,18 @@ newtype CustomerListDpcsResponse = CustomerListDpcsResponse
 -- | Creates a value of 'CustomerListDpcsResponse' with the minimum fields required to make a request.
 newCustomerListDpcsResponse ::
   CustomerListDpcsResponse
-newCustomerListDpcsResponse = CustomerListDpcsResponse {dpcs = Core.Nothing}
+newCustomerListDpcsResponse =
+  CustomerListDpcsResponse {dpcs = Core.Nothing}
 
 instance Core.FromJSON CustomerListDpcsResponse where
   parseJSON =
     Core.withObject
       "CustomerListDpcsResponse"
-      ( \o ->
-          CustomerListDpcsResponse
-            Core.<$> (o Core..:? "dpcs")
-      )
+      (\o -> CustomerListDpcsResponse Core.<$> (o Core..:? "dpcs"))
 
 instance Core.ToJSON CustomerListDpcsResponse where
   toJSON CustomerListDpcsResponse {..} =
-    Core.object
-      (Core.catMaybes [("dpcs" Core..=) Core.<$> dpcs])
+    Core.object (Core.catMaybes [("dpcs" Core..=) Core.<$> dpcs])
 
 -- | Request message for customer to remove the configuration from device.
 --
@@ -745,25 +728,17 @@ newCustomerRemoveConfigurationRequest ::
 newCustomerRemoveConfigurationRequest =
   CustomerRemoveConfigurationRequest {device = Core.Nothing}
 
-instance
-  Core.FromJSON
-    CustomerRemoveConfigurationRequest
-  where
+instance Core.FromJSON CustomerRemoveConfigurationRequest where
   parseJSON =
     Core.withObject
       "CustomerRemoveConfigurationRequest"
       ( \o ->
-          CustomerRemoveConfigurationRequest
-            Core.<$> (o Core..:? "device")
+          CustomerRemoveConfigurationRequest Core.<$> (o Core..:? "device")
       )
 
-instance
-  Core.ToJSON
-    CustomerRemoveConfigurationRequest
-  where
+instance Core.ToJSON CustomerRemoveConfigurationRequest where
   toJSON CustomerRemoveConfigurationRequest {..} =
-    Core.object
-      (Core.catMaybes [("device" Core..=) Core.<$> device])
+    Core.object (Core.catMaybes [("device" Core..=) Core.<$> device])
 
 -- | Request message for customer to unclaim a device.
 --
@@ -785,14 +760,12 @@ instance Core.FromJSON CustomerUnclaimDeviceRequest where
     Core.withObject
       "CustomerUnclaimDeviceRequest"
       ( \o ->
-          CustomerUnclaimDeviceRequest
-            Core.<$> (o Core..:? "device")
+          CustomerUnclaimDeviceRequest Core.<$> (o Core..:? "device")
       )
 
 instance Core.ToJSON CustomerUnclaimDeviceRequest where
   toJSON CustomerUnclaimDeviceRequest {..} =
-    Core.object
-      (Core.catMaybes [("device" Core..=) Core.<$> device])
+    Core.object (Core.catMaybes [("device" Core..=) Core.<$> device])
 
 -- | An Android or Chrome OS device registered for zero-touch enrollment.
 --
@@ -834,9 +807,7 @@ instance Core.FromJSON Device where
           Device
             Core.<$> (o Core..:? "claims")
             Core.<*> (o Core..:? "configuration")
-            Core.<*> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "name")
@@ -848,10 +819,8 @@ instance Core.ToJSON Device where
       ( Core.catMaybes
           [ ("claims" Core..=) Core.<$> claims,
             ("configuration" Core..=) Core.<$> configuration,
-            ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+            ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata,
             ("name" Core..=) Core.<$> name
           ]
@@ -900,12 +869,8 @@ instance Core.FromJSON DeviceClaim where
           DeviceClaim
             Core.<$> (o Core..:? "additionalService")
             Core.<*> (o Core..:? "googleWorkspaceCustomerId")
-            Core.<*> ( o Core..:? "ownerCompanyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "resellerId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "ownerCompanyId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "resellerId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeExpireTime")
             Core.<*> (o Core..:? "vacationModeStartTime")
@@ -915,19 +880,16 @@ instance Core.ToJSON DeviceClaim where
   toJSON DeviceClaim {..} =
     Core.object
       ( Core.catMaybes
-          [ ("additionalService" Core..=)
-              Core.<$> additionalService,
+          [ ("additionalService" Core..=) Core.<$> additionalService,
             ("googleWorkspaceCustomerId" Core..=)
               Core.<$> googleWorkspaceCustomerId,
-            ("ownerCompanyId" Core..=) Core.. Core.AsText
+            ("ownerCompanyId" Core..=)
+              Core.. Core.AsText
               Core.<$> ownerCompanyId,
-            ("resellerId" Core..=) Core.. Core.AsText
-              Core.<$> resellerId,
+            ("resellerId" Core..=) Core.. Core.AsText Core.<$> resellerId,
             ("sectionType" Core..=) Core.<$> sectionType,
-            ("vacationModeExpireTime" Core..=)
-              Core.<$> vacationModeExpireTime,
-            ("vacationModeStartTime" Core..=)
-              Core.<$> vacationModeStartTime
+            ("vacationModeExpireTime" Core..=) Core.<$> vacationModeExpireTime,
+            ("vacationModeStartTime" Core..=) Core.<$> vacationModeStartTime
           ]
       )
 
@@ -941,10 +903,14 @@ data DeviceIdentifier = DeviceIdentifier
     deviceType :: (Core.Maybe DeviceIdentifier_DeviceType),
     -- | The device’s IMEI number. Validated on input.
     imei :: (Core.Maybe Core.Text),
+    -- | The device’s second IMEI number.
+    imei2 :: (Core.Maybe Core.Text),
     -- | The device manufacturer’s name. Matches the device\'s built-in value returned from @android.os.Build.MANUFACTURER@. Allowed values are listed in </zero-touch/resources/manufacturer-names#manufacturers-names Android manufacturers>.
     manufacturer :: (Core.Maybe Core.Text),
     -- | The device’s MEID number.
     meid :: (Core.Maybe Core.Text),
+    -- | The device’s second MEID number.
+    meid2 :: (Core.Maybe Core.Text),
     -- | The device model\'s name. Allowed values are listed in </zero-touch/resources/manufacturer-names#model-names Android models> and <https://support.google.com/chrome/a/answer/10130175#identify_compatible Chrome OS models>.
     model :: (Core.Maybe Core.Text),
     -- | The manufacturer\'s serial number for the device. This value might not be unique across different device models.
@@ -960,8 +926,10 @@ newDeviceIdentifier =
     { chromeOsAttestedDeviceId = Core.Nothing,
       deviceType = Core.Nothing,
       imei = Core.Nothing,
+      imei2 = Core.Nothing,
       manufacturer = Core.Nothing,
       meid = Core.Nothing,
+      meid2 = Core.Nothing,
       model = Core.Nothing,
       serialNumber = Core.Nothing
     }
@@ -975,8 +943,10 @@ instance Core.FromJSON DeviceIdentifier where
             Core.<$> (o Core..:? "chromeOsAttestedDeviceId")
             Core.<*> (o Core..:? "deviceType")
             Core.<*> (o Core..:? "imei")
+            Core.<*> (o Core..:? "imei2")
             Core.<*> (o Core..:? "manufacturer")
             Core.<*> (o Core..:? "meid")
+            Core.<*> (o Core..:? "meid2")
             Core.<*> (o Core..:? "model")
             Core.<*> (o Core..:? "serialNumber")
       )
@@ -989,8 +959,10 @@ instance Core.ToJSON DeviceIdentifier where
               Core.<$> chromeOsAttestedDeviceId,
             ("deviceType" Core..=) Core.<$> deviceType,
             ("imei" Core..=) Core.<$> imei,
+            ("imei2" Core..=) Core.<$> imei2,
             ("manufacturer" Core..=) Core.<$> manufacturer,
             ("meid" Core..=) Core.<$> meid,
+            ("meid2" Core..=) Core.<$> meid2,
             ("model" Core..=) Core.<$> model,
             ("serialNumber" Core..=) Core.<$> serialNumber
           ]
@@ -1014,23 +986,18 @@ instance Core.FromJSON DeviceMetadata where
   parseJSON =
     Core.withObject
       "DeviceMetadata"
-      ( \o ->
-          DeviceMetadata Core.<$> (o Core..:? "entries")
-      )
+      (\o -> DeviceMetadata Core.<$> (o Core..:? "entries"))
 
 instance Core.ToJSON DeviceMetadata where
   toJSON DeviceMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("entries" Core..=) Core.<$> entries]
-      )
+      (Core.catMaybes [("entries" Core..=) Core.<$> entries])
 
 -- | Metadata entries recorded as key-value pairs.
 --
 -- /See:/ 'newDeviceMetadata_Entries' smart constructor.
 newtype DeviceMetadata_Entries = DeviceMetadata_Entries
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1046,14 +1013,10 @@ instance Core.FromJSON DeviceMetadata_Entries where
   parseJSON =
     Core.withObject
       "DeviceMetadata_Entries"
-      ( \o ->
-          DeviceMetadata_Entries
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> DeviceMetadata_Entries Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON DeviceMetadata_Entries where
-  toJSON DeviceMetadata_Entries {..} =
-    Core.toJSON additional
+  toJSON DeviceMetadata_Entries {..} = Core.toJSON additional
 
 -- | A @DeviceReference@ is an API abstraction that lets you supply a /device/ argument to a method using one of the following identifier types: * A numeric API resource ID. * Real-world hardware IDs, such as IMEI number, belonging to the manufactured device. Methods that operate on devices take a @DeviceReference@ as a parameter type because it\'s more flexible for the caller. To learn more about device identifiers, read <https://developers.google.com/zero-touch/guides/identifiers Identifiers>.
 --
@@ -1070,7 +1033,10 @@ data DeviceReference = DeviceReference
 newDeviceReference ::
   DeviceReference
 newDeviceReference =
-  DeviceReference {deviceId = Core.Nothing, deviceIdentifier = Core.Nothing}
+  DeviceReference
+    { deviceId = Core.Nothing,
+      deviceIdentifier = Core.Nothing
+    }
 
 instance Core.FromJSON DeviceReference where
   parseJSON =
@@ -1078,9 +1044,7 @@ instance Core.FromJSON DeviceReference where
       "DeviceReference"
       ( \o ->
           DeviceReference
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
       )
 
@@ -1088,10 +1052,8 @@ instance Core.ToJSON DeviceReference where
   toJSON DeviceReference {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier
           ]
       )
 
@@ -1118,10 +1080,7 @@ newDevicesLongRunningOperationMetadata =
       progress = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DevicesLongRunningOperationMetadata
-  where
+instance Core.FromJSON DevicesLongRunningOperationMetadata where
   parseJSON =
     Core.withObject
       "DevicesLongRunningOperationMetadata"
@@ -1132,16 +1091,12 @@ instance
             Core.<*> (o Core..:? "progress")
       )
 
-instance
-  Core.ToJSON
-    DevicesLongRunningOperationMetadata
-  where
+instance Core.ToJSON DevicesLongRunningOperationMetadata where
   toJSON DevicesLongRunningOperationMetadata {..} =
     Core.object
       ( Core.catMaybes
           [ ("devicesCount" Core..=) Core.<$> devicesCount,
-            ("processingStatus" Core..=)
-              Core.<$> processingStatus,
+            ("processingStatus" Core..=) Core.<$> processingStatus,
             ("progress" Core..=) Core.<$> progress
           ]
       )
@@ -1162,14 +1117,12 @@ newDevicesLongRunningOperationResponse ::
   DevicesLongRunningOperationResponse
 newDevicesLongRunningOperationResponse =
   DevicesLongRunningOperationResponse
-    { perDeviceStatus = Core.Nothing,
+    { perDeviceStatus =
+        Core.Nothing,
       successCount = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DevicesLongRunningOperationResponse
-  where
+instance Core.FromJSON DevicesLongRunningOperationResponse where
   parseJSON =
     Core.withObject
       "DevicesLongRunningOperationResponse"
@@ -1179,15 +1132,11 @@ instance
             Core.<*> (o Core..:? "successCount")
       )
 
-instance
-  Core.ToJSON
-    DevicesLongRunningOperationResponse
-  where
+instance Core.ToJSON DevicesLongRunningOperationResponse where
   toJSON DevicesLongRunningOperationResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("perDeviceStatus" Core..=)
-              Core.<$> perDeviceStatus,
+          [ ("perDeviceStatus" Core..=) Core.<$> perDeviceStatus,
             ("successCount" Core..=) Core.<$> successCount
           ]
       )
@@ -1209,7 +1158,11 @@ data Dpc = Dpc
 newDpc ::
   Dpc
 newDpc =
-  Dpc {dpcName = Core.Nothing, name = Core.Nothing, packageName = Core.Nothing}
+  Dpc
+    { dpcName = Core.Nothing,
+      name = Core.Nothing,
+      packageName = Core.Nothing
+    }
 
 instance Core.FromJSON Dpc where
   parseJSON =
@@ -1244,8 +1197,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1268,36 +1220,28 @@ newFindDevicesByDeviceIdentifierRequest ::
   FindDevicesByDeviceIdentifierRequest
 newFindDevicesByDeviceIdentifierRequest =
   FindDevicesByDeviceIdentifierRequest
-    { deviceIdentifier = Core.Nothing,
+    { deviceIdentifier =
+        Core.Nothing,
       limit = Core.Nothing,
       pageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FindDevicesByDeviceIdentifierRequest
-  where
+instance Core.FromJSON FindDevicesByDeviceIdentifierRequest where
   parseJSON =
     Core.withObject
       "FindDevicesByDeviceIdentifierRequest"
       ( \o ->
           FindDevicesByDeviceIdentifierRequest
             Core.<$> (o Core..:? "deviceIdentifier")
-            Core.<*> ( o Core..:? "limit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "limit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "pageToken")
       )
 
-instance
-  Core.ToJSON
-    FindDevicesByDeviceIdentifierRequest
-  where
+instance Core.ToJSON FindDevicesByDeviceIdentifierRequest where
   toJSON FindDevicesByDeviceIdentifierRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("limit" Core..=) Core.. Core.AsText Core.<$> limit,
             ("pageToken" Core..=) Core.<$> pageToken
           ]
@@ -1326,10 +1270,7 @@ newFindDevicesByDeviceIdentifierResponse =
       totalSize = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    FindDevicesByDeviceIdentifierResponse
-  where
+instance Core.FromJSON FindDevicesByDeviceIdentifierResponse where
   parseJSON =
     Core.withObject
       "FindDevicesByDeviceIdentifierResponse"
@@ -1340,10 +1281,7 @@ instance
             Core.<*> (o Core..:? "totalSize")
       )
 
-instance
-  Core.ToJSON
-    FindDevicesByDeviceIdentifierResponse
-  where
+instance Core.ToJSON FindDevicesByDeviceIdentifierResponse where
   toJSON FindDevicesByDeviceIdentifierResponse {..} =
     Core.object
       ( Core.catMaybes
@@ -1388,13 +1326,12 @@ instance Core.FromJSON FindDevicesByOwnerRequest where
       "FindDevicesByOwnerRequest"
       ( \o ->
           FindDevicesByOwnerRequest
-            Core.<$> ( o Core..:? "customerId"
+            Core.<$> ( o
+                         Core..:? "customerId"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "googleWorkspaceCustomerId")
-            Core.<*> ( o Core..:? "limit"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "limit" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "pageToken")
             Core.<*> (o Core..:? "sectionType")
       )
@@ -1403,7 +1340,8 @@ instance Core.ToJSON FindDevicesByOwnerRequest where
   toJSON FindDevicesByOwnerRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerId" Core..=) Core.. Core.fmap Core.AsText
+          [ ("customerId" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> customerId,
             ("googleWorkspaceCustomerId" Core..=)
               Core.<$> googleWorkspaceCustomerId,
@@ -1457,6 +1395,64 @@ instance Core.ToJSON FindDevicesByOwnerResponse where
           ]
       )
 
+-- | Request to get a device\'s SIM lock status.
+--
+-- /See:/ 'newGetDeviceSimLockStateRequest' smart constructor.
+newtype GetDeviceSimLockStateRequest = GetDeviceSimLockStateRequest
+  { -- | Required. Required. The device identifier to search for.
+    deviceIdentifier :: (Core.Maybe DeviceIdentifier)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GetDeviceSimLockStateRequest' with the minimum fields required to make a request.
+newGetDeviceSimLockStateRequest ::
+  GetDeviceSimLockStateRequest
+newGetDeviceSimLockStateRequest =
+  GetDeviceSimLockStateRequest {deviceIdentifier = Core.Nothing}
+
+instance Core.FromJSON GetDeviceSimLockStateRequest where
+  parseJSON =
+    Core.withObject
+      "GetDeviceSimLockStateRequest"
+      ( \o ->
+          GetDeviceSimLockStateRequest
+            Core.<$> (o Core..:? "deviceIdentifier")
+      )
+
+instance Core.ToJSON GetDeviceSimLockStateRequest where
+  toJSON GetDeviceSimLockStateRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [("deviceIdentifier" Core..=) Core.<$> deviceIdentifier]
+      )
+
+-- | Response containing a device\'s SimLock state.
+--
+-- /See:/ 'newGetDeviceSimLockStateResponse' smart constructor.
+newtype GetDeviceSimLockStateResponse = GetDeviceSimLockStateResponse
+  { simLockState :: (Core.Maybe GetDeviceSimLockStateResponse_SimLockState)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GetDeviceSimLockStateResponse' with the minimum fields required to make a request.
+newGetDeviceSimLockStateResponse ::
+  GetDeviceSimLockStateResponse
+newGetDeviceSimLockStateResponse =
+  GetDeviceSimLockStateResponse {simLockState = Core.Nothing}
+
+instance Core.FromJSON GetDeviceSimLockStateResponse where
+  parseJSON =
+    Core.withObject
+      "GetDeviceSimLockStateResponse"
+      ( \o ->
+          GetDeviceSimLockStateResponse Core.<$> (o Core..:? "simLockState")
+      )
+
+instance Core.ToJSON GetDeviceSimLockStateResponse where
+  toJSON GetDeviceSimLockStateResponse {..} =
+    Core.object
+      (Core.catMaybes [("simLockState" Core..=) Core.<$> simLockState])
+
 -- | A Google Workspace customer.
 --
 -- /See:/ 'newGoogleWorkspaceAccount' smart constructor.
@@ -1492,8 +1488,7 @@ instance Core.ToJSON GoogleWorkspaceAccount where
     Core.object
       ( Core.catMaybes
           [ ("customerId" Core..=) Core.<$> customerId,
-            ("preProvisioningTokens" Core..=)
-              Core.<$> preProvisioningTokens
+            ("preProvisioningTokens" Core..=) Core.<$> preProvisioningTokens
           ]
       )
 
@@ -1697,19 +1692,17 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
 -- | This field will contain a @DevicesLongRunningOperationResponse@ object if the operation is created by @claimAsync@, @unclaimAsync@, or @updateMetadataAsync@.
 --
@@ -1725,19 +1718,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | A task for each device in the operation. Corresponds to each device change in the request.
 --
@@ -1792,7 +1783,9 @@ instance Core.ToJSON OperationPerDevice where
 --
 -- /See:/ 'newPartnerClaim' smart constructor.
 data PartnerClaim = PartnerClaim
-  { -- | The ID of the customer for whom the device is being claimed.
+  { -- | Optional. The ID of the configuration applied to the device section.
+    configurationId :: (Core.Maybe Core.Int64),
+    -- | The ID of the customer for whom the device is being claimed.
     customerId :: (Core.Maybe Core.Int64),
     -- | Required. Required. Device identifier of the device.
     deviceIdentifier :: (Core.Maybe DeviceIdentifier),
@@ -1814,7 +1807,8 @@ newPartnerClaim ::
   PartnerClaim
 newPartnerClaim =
   PartnerClaim
-    { customerId = Core.Nothing,
+    { configurationId = Core.Nothing,
+      customerId = Core.Nothing,
       deviceIdentifier = Core.Nothing,
       deviceMetadata = Core.Nothing,
       googleWorkspaceCustomerId = Core.Nothing,
@@ -1829,34 +1823,32 @@ instance Core.FromJSON PartnerClaim where
       "PartnerClaim"
       ( \o ->
           PartnerClaim
-            Core.<$> ( o Core..:? "customerId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "configurationId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "customerId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
             Core.<*> (o Core..:? "googleWorkspaceCustomerId")
             Core.<*> (o Core..:? "preProvisioningToken")
             Core.<*> (o Core..:? "sectionType")
-            Core.<*> ( o Core..:? "simlockProfileId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "simlockProfileId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON PartnerClaim where
   toJSON PartnerClaim {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customerId" Core..=) Core.. Core.AsText
-              Core.<$> customerId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("configurationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> configurationId,
+            ("customerId" Core..=) Core.. Core.AsText Core.<$> customerId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata,
             ("googleWorkspaceCustomerId" Core..=)
               Core.<$> googleWorkspaceCustomerId,
-            ("preProvisioningToken" Core..=)
-              Core.<$> preProvisioningToken,
+            ("preProvisioningToken" Core..=) Core.<$> preProvisioningToken,
             ("sectionType" Core..=) Core.<$> sectionType,
-            ("simlockProfileId" Core..=) Core.. Core.AsText
+            ("simlockProfileId" Core..=)
+              Core.. Core.AsText
               Core.<$> simlockProfileId
           ]
       )
@@ -1896,9 +1888,7 @@ instance Core.FromJSON PartnerUnclaim where
       "PartnerUnclaim"
       ( \o ->
           PartnerUnclaim
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeDays")
@@ -1909,13 +1899,10 @@ instance Core.ToJSON PartnerUnclaim where
   toJSON PartnerUnclaim {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("sectionType" Core..=) Core.<$> sectionType,
-            ("vacationModeDays" Core..=)
-              Core.<$> vacationModeDays,
+            ("vacationModeDays" Core..=) Core.<$> vacationModeDays,
             ("vacationModeExpireTime" Core..=)
               Core.<$> vacationModeExpireTime
           ]
@@ -1953,9 +1940,7 @@ instance Core.FromJSON PerDeviceStatusInBatch where
       "PerDeviceStatusInBatch"
       ( \o ->
           PerDeviceStatusInBatch
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "errorIdentifier")
             Core.<*> (o Core..:? "errorMessage")
             Core.<*> (o Core..:? "status")
@@ -1965,8 +1950,7 @@ instance Core.ToJSON PerDeviceStatusInBatch where
   toJSON PerDeviceStatusInBatch {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
             ("errorIdentifier" Core..=) Core.<$> errorIdentifier,
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("status" Core..=) Core.<$> status
@@ -1990,7 +1974,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2026,19 +2014,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | Request message to unclaim a device.
 --
@@ -2075,9 +2061,7 @@ instance Core.FromJSON UnclaimDeviceRequest where
       "UnclaimDeviceRequest"
       ( \o ->
           UnclaimDeviceRequest
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "sectionType")
             Core.<*> (o Core..:? "vacationModeDays")
@@ -2088,13 +2072,10 @@ instance Core.ToJSON UnclaimDeviceRequest where
   toJSON UnclaimDeviceRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("sectionType" Core..=) Core.<$> sectionType,
-            ("vacationModeDays" Core..=)
-              Core.<$> vacationModeDays,
+            ("vacationModeDays" Core..=) Core.<$> vacationModeDays,
             ("vacationModeExpireTime" Core..=)
               Core.<$> vacationModeExpireTime
           ]
@@ -2112,23 +2093,19 @@ newtype UnclaimDevicesRequest = UnclaimDevicesRequest
 -- | Creates a value of 'UnclaimDevicesRequest' with the minimum fields required to make a request.
 newUnclaimDevicesRequest ::
   UnclaimDevicesRequest
-newUnclaimDevicesRequest = UnclaimDevicesRequest {unclaims = Core.Nothing}
+newUnclaimDevicesRequest =
+  UnclaimDevicesRequest {unclaims = Core.Nothing}
 
 instance Core.FromJSON UnclaimDevicesRequest where
   parseJSON =
     Core.withObject
       "UnclaimDevicesRequest"
-      ( \o ->
-          UnclaimDevicesRequest
-            Core.<$> (o Core..:? "unclaims")
-      )
+      (\o -> UnclaimDevicesRequest Core.<$> (o Core..:? "unclaims"))
 
 instance Core.ToJSON UnclaimDevicesRequest where
   toJSON UnclaimDevicesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("unclaims" Core..=) Core.<$> unclaims]
-      )
+      (Core.catMaybes [("unclaims" Core..=) Core.<$> unclaims])
 
 -- | Request to update device metadata in batch.
 --
@@ -2145,27 +2122,18 @@ newUpdateDeviceMetadataInBatchRequest ::
 newUpdateDeviceMetadataInBatchRequest =
   UpdateDeviceMetadataInBatchRequest {updates = Core.Nothing}
 
-instance
-  Core.FromJSON
-    UpdateDeviceMetadataInBatchRequest
-  where
+instance Core.FromJSON UpdateDeviceMetadataInBatchRequest where
   parseJSON =
     Core.withObject
       "UpdateDeviceMetadataInBatchRequest"
       ( \o ->
-          UpdateDeviceMetadataInBatchRequest
-            Core.<$> (o Core..:? "updates")
+          UpdateDeviceMetadataInBatchRequest Core.<$> (o Core..:? "updates")
       )
 
-instance
-  Core.ToJSON
-    UpdateDeviceMetadataInBatchRequest
-  where
+instance Core.ToJSON UpdateDeviceMetadataInBatchRequest where
   toJSON UpdateDeviceMetadataInBatchRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("updates" Core..=) Core.<$> updates]
-      )
+      (Core.catMaybes [("updates" Core..=) Core.<$> updates])
 
 -- | Request to set metadata for a device.
 --
@@ -2187,8 +2155,7 @@ instance Core.FromJSON UpdateDeviceMetadataRequest where
     Core.withObject
       "UpdateDeviceMetadataRequest"
       ( \o ->
-          UpdateDeviceMetadataRequest
-            Core.<$> (o Core..:? "deviceMetadata")
+          UpdateDeviceMetadataRequest Core.<$> (o Core..:? "deviceMetadata")
       )
 
 instance Core.ToJSON UpdateDeviceMetadataRequest where
@@ -2227,9 +2194,7 @@ instance Core.FromJSON UpdateMetadataArguments where
       "UpdateMetadataArguments"
       ( \o ->
           UpdateMetadataArguments
-            Core.<$> ( o Core..:? "deviceId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "deviceId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "deviceIdentifier")
             Core.<*> (o Core..:? "deviceMetadata")
       )
@@ -2238,10 +2203,8 @@ instance Core.ToJSON UpdateMetadataArguments where
   toJSON UpdateMetadataArguments {..} =
     Core.object
       ( Core.catMaybes
-          [ ("deviceId" Core..=) Core.. Core.AsText
-              Core.<$> deviceId,
-            ("deviceIdentifier" Core..=)
-              Core.<$> deviceIdentifier,
+          [ ("deviceId" Core..=) Core.. Core.AsText Core.<$> deviceId,
+            ("deviceIdentifier" Core..=) Core.<$> deviceIdentifier,
             ("deviceMetadata" Core..=) Core.<$> deviceMetadata
           ]
       )

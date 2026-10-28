@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Scores.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Scores.Get
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.scores.get@ method which the
 -- 'GamesScoresGet' request conforms to.
@@ -56,18 +54,14 @@ type GamesScoresGetResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "includeRankType"
-              ScoresGetIncludeRankType
+    Core.:> Core.QueryParam "includeRankType" ScoresGetIncludeRankType
     Core.:> Core.QueryParam "language" Core.Text
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              PlayerLeaderboardScoreListResponse
+    Core.:> Core.Get '[Core.JSON] PlayerLeaderboardScoreListResponse
 
 -- | Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, @leaderboardId@ can be set to @ALL@ to retrieve data for all leaderboards in a given time span. \`NOTE: You cannot ask for \'ALL\' leaderboards and \'ALL\' timeSpans in the same request; only one parameter may be set to \'ALL\'.
 --
@@ -126,9 +120,7 @@ newGamesScoresGet leaderboardId playerId timeSpan =
     }
 
 instance Core.GoogleRequest GamesScoresGet where
-  type
-    Rs GamesScoresGet =
-      PlayerLeaderboardScoreListResponse
+  type Rs GamesScoresGet = PlayerLeaderboardScoreListResponse
   type Scopes GamesScoresGet = '[Games'FullControl]
   requestClient GamesScoresGet {..} =
     go

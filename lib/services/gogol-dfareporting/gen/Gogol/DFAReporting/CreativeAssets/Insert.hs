@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.CreativeAssets.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.CreativeAssets.Insert
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.creativeAssets.insert@ method which the
 -- 'DFAReportingCreativeAssetsInsert' request conforms to.
@@ -61,26 +59,22 @@ type DFAReportingCreativeAssetsInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] CreativeAssetMetadata
     Core.:> Core.Post '[Core.JSON] CreativeAssetMetadata
     Core.:<|> "upload"
-      Core.:> "dfareporting"
-      Core.:> "v4"
-      Core.:> "userprofiles"
-      Core.:> Core.Capture "profileId" Core.Int64
-      Core.:> "creativeAssets"
-      Core.:> Core.Capture "advertiserId" Core.Int64
-      Core.:> "creativeAssets"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated
-                '[Core.JSON]
-                CreativeAssetMetadata
-      Core.:> Core.Post
-                '[Core.JSON]
-                CreativeAssetMetadata
+    Core.:> "dfareporting"
+    Core.:> "v4"
+    Core.:> "userprofiles"
+    Core.:> Core.Capture "profileId" Core.Int64
+    Core.:> "creativeAssets"
+    Core.:> Core.Capture "advertiserId" Core.Int64
+    Core.:> "creativeAssets"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] CreativeAssetMetadata
+    Core.:> Core.Post '[Core.JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
@@ -126,13 +120,8 @@ newDFAReportingCreativeAssetsInsert advertiserId payload profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingCreativeAssetsInsert
-  where
-  type
-    Rs DFAReportingCreativeAssetsInsert =
-      CreativeAssetMetadata
+instance Core.GoogleRequest DFAReportingCreativeAssetsInsert where
+  type Rs DFAReportingCreativeAssetsInsert = CreativeAssetMetadata
   type
     Scopes DFAReportingCreativeAssetsInsert =
       '[Dfatrafficking'FullControl]
@@ -151,9 +140,7 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingCreativeAssetsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingCreativeAssetsInsertResource)
           Core.mempty
 
 instance
@@ -161,18 +148,13 @@ instance
     (Core.MediaUpload DFAReportingCreativeAssetsInsert)
   where
   type
-    Rs
-      (Core.MediaUpload DFAReportingCreativeAssetsInsert) =
+    Rs (Core.MediaUpload DFAReportingCreativeAssetsInsert) =
       CreativeAssetMetadata
   type
-    Scopes
-      (Core.MediaUpload DFAReportingCreativeAssetsInsert) =
+    Scopes (Core.MediaUpload DFAReportingCreativeAssetsInsert) =
       Core.Scopes DFAReportingCreativeAssetsInsert
   requestClient
-    ( Core.MediaUpload
-        DFAReportingCreativeAssetsInsert {..}
-        body
-      ) =
+    (Core.MediaUpload DFAReportingCreativeAssetsInsert {..} body) =
       go
         profileId
         advertiserId
@@ -189,7 +171,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy DFAReportingCreativeAssetsInsertResource
-            )
+            (Core.Proxy :: Core.Proxy DFAReportingCreativeAssetsInsertResource)
             Core.mempty

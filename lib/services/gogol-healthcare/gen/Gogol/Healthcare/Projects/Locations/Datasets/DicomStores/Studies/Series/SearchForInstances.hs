@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.SearchForInstances
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- SearchForInstances returns a list of matching instances. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForInstances, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#searching_for_studies_series_instances_and_frames Searching for studies, series, instances, and frames>.
+-- SearchForInstances returns a list of matching instances. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForInstances, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#search-dicom Search for DICOM data>.
 --
 -- /See:/ <https://cloud.google.com/healthcare Cloud Healthcare API Reference> for @healthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances@.
 module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.SearchForInstances
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Studies.Series.S
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.studies.series.searchForInstances@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances' request conforms to.
@@ -57,7 +55,7 @@ type HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstanc
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] HttpBody
 
--- | SearchForInstances returns a list of matching instances. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForInstances, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#searching_for_studies_series_instances_and_frames Searching for studies, series, instances, and frames>.
+-- | SearchForInstances returns a list of matching instances. See [Search Transaction] (http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part18.html#sect_10.6). For details on the implementation of SearchForInstances, see <https://cloud.google.com/healthcare/docs/dicom#search_transaction Search transaction> in the Cloud Healthcare API conformance statement. For samples that show how to call SearchForInstances, see <https://cloud.google.com/healthcare/docs/how-tos/dicomweb#search-dicom Search for DICOM data>.
 --
 -- /See:/ 'newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances' smart constructor.
 data HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances = HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances
@@ -67,9 +65,9 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstanc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The path of the SearchForInstancesRequest DICOMweb request. For example, @instances@, @series\/{series_uid}\/instances@, or @studies\/{study_uid}\/instances@.
+    -- | Required. The path of the SearchForInstancesRequest DICOMweb request. For example, @instances@, @series\/{series_uid}\/instances@, or @studies\/{study_uid}\/instances@.
     dicomWebPath :: Core.Text,
-    -- | The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     parent :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -80,21 +78,29 @@ data HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstanc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances ::
-  -- |  The path of the SearchForInstancesRequest DICOMweb request. For example, @instances@, @series\/{series_uid}\/instances@, or @studies\/{study_uid}\/instances@. See 'dicomWebPath'.
+  -- |  Required. The path of the SearchForInstancesRequest DICOMweb request. For example, @instances@, @series\/{series_uid}\/instances@, or @studies\/{study_uid}\/instances@. See 'dicomWebPath'.
   Core.Text ->
-  -- |  The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
+  -- |  Required. The name of the DICOM store that is being accessed. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'parent'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances
-newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances dicomWebPath parent =
-  HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomWebPath = dicomWebPath,
-      parent = parent,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances
+  dicomWebPath
+  parent =
+    HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances
+      { xgafv =
+          Core.Nothing,
+        accessToken =
+          Core.Nothing,
+        callback =
+          Core.Nothing,
+        dicomWebPath =
+          dicomWebPath,
+        parent = parent,
+        uploadType =
+          Core.Nothing,
+        uploadProtocol =
+          Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -107,7 +113,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesSearchForInstances {..} =
       go

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FusionTables.Types
@@ -135,7 +133,7 @@ where
 
 import Gogol.FusionTables.Internal.Product
 import Gogol.FusionTables.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v2@ of the Fusion Tables API. This contains the host and root path used as a starting point for constructing service requests.
 fusionTablesService :: Core.ServiceConfig
@@ -145,7 +143,9 @@ fusionTablesService =
     "www.googleapis.com"
 
 -- | Manage your Fusion Tables
-type Fusiontables'FullControl = "https://www.googleapis.com/auth/fusiontables"
+type Fusiontables'FullControl =
+  "https://www.googleapis.com/auth/fusiontables"
 
 -- | View your Fusion Tables
-type Fusiontables'Readonly = "https://www.googleapis.com/auth/fusiontables.readonly"
+type Fusiontables'Readonly =
+  "https://www.googleapis.com/auth/fusiontables.readonly"

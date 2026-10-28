@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.Topics.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course, create a topic in the requested course, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course does not exist.
+-- Creates a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course, create a topic in the requested course, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @ALREADY_EXISTS@ if there exists a topic in the course with the same name. * @FAILED_PRECONDITION@ for the following request error: * CourseTopicLimitReached * @NOT_FOUND@ if the requested course does not exist.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference> for @classroom.courses.topics.create@.
 module Gogol.Classroom.Courses.Topics.Create
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.Topics.Create
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.topics.create@ method which the
 -- 'ClassroomCoursesTopicsCreate' request conforms to.
@@ -58,7 +56,7 @@ type ClassroomCoursesTopicsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Topic
     Core.:> Core.Post '[Core.JSON] Topic
 
--- | Creates a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course, create a topic in the requested course, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course does not exist.
+-- | Creates a topic. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course, create a topic in the requested course, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @ALREADY_EXISTS@ if there exists a topic in the course with the same name. * @FAILED_PRECONDITION@ for the following request error: * CourseTopicLimitReached * @NOT_FOUND@ if the requested course does not exist.
 --
 -- /See:/ 'newClassroomCoursesTopicsCreate' smart constructor.
 data ClassroomCoursesTopicsCreate = ClassroomCoursesTopicsCreate
@@ -97,14 +95,9 @@ newClassroomCoursesTopicsCreate courseId payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ClassroomCoursesTopicsCreate
-  where
+instance Core.GoogleRequest ClassroomCoursesTopicsCreate where
   type Rs ClassroomCoursesTopicsCreate = Topic
-  type
-    Scopes ClassroomCoursesTopicsCreate =
-      '[Classroom'Topics]
+  type Scopes ClassroomCoursesTopicsCreate = '[Classroom'Topics]
   requestClient ClassroomCoursesTopicsCreate {..} =
     go
       courseId
@@ -119,7 +112,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ClassroomCoursesTopicsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy ClassroomCoursesTopicsCreateResource)
           Core.mempty

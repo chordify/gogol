@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Uploads.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Uploads.List
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.uploads.list@ method which the
 -- 'AnalyticsManagementUploadsList' request conforms to.
@@ -86,26 +84,23 @@ newAnalyticsManagementUploadsList ::
   -- |  Web property Id for the uploads to retrieve. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementUploadsList
-newAnalyticsManagementUploadsList accountId customDataSourceId webPropertyId =
-  AnalyticsManagementUploadsList
-    { accountId = accountId,
-      customDataSourceId = customDataSourceId,
-      maxResults = Core.Nothing,
-      startIndex = Core.Nothing,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementUploadsList
+  accountId
+  customDataSourceId
+  webPropertyId =
     AnalyticsManagementUploadsList
-  where
+      { accountId = accountId,
+        customDataSourceId = customDataSourceId,
+        maxResults = Core.Nothing,
+        startIndex = Core.Nothing,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementUploadsList where
   type Rs AnalyticsManagementUploadsList = Uploads
   type
     Scopes AnalyticsManagementUploadsList =
-      '[ Analytics'FullControl,
-         Analytics'Edit,
-         Analytics'Readonly
-       ]
+      '[Analytics'FullControl, Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementUploadsList {..} =
     go
       accountId
@@ -118,7 +113,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AnalyticsManagementUploadsListResource
-          )
+          (Core.Proxy :: Core.Proxy AnalyticsManagementUploadsListResource)
           Core.mempty

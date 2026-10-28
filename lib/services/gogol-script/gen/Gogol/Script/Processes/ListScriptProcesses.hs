@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Script.Processes.ListScriptProcesses
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Script.Processes.ListScriptProcesses
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Script.Types
 
 -- | A resource alias for @script.processes.listScriptProcesses@ method which the
@@ -53,18 +51,10 @@ type ScriptProcessesListScriptProcessesResource =
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "scriptId" Core.Text
-    Core.:> Core.QueryParam
-              "scriptProcessFilter.deploymentId"
-              Core.Text
-    Core.:> Core.QueryParam
-              "scriptProcessFilter.endTime"
-              Core.DateTime
-    Core.:> Core.QueryParam
-              "scriptProcessFilter.functionName"
-              Core.Text
-    Core.:> Core.QueryParam
-              "scriptProcessFilter.startTime"
-              Core.DateTime
+    Core.:> Core.QueryParam "scriptProcessFilter.deploymentId" Core.Text
+    Core.:> Core.QueryParam "scriptProcessFilter.endTime" Core.DateTime
+    Core.:> Core.QueryParam "scriptProcessFilter.functionName" Core.Text
+    Core.:> Core.QueryParam "scriptProcessFilter.startTime" Core.DateTime
     Core.:> Core.QueryParams
               "scriptProcessFilter.statuses"
               ProcessesListScriptProcessesScriptProcessFilterStatuses
@@ -77,9 +67,7 @@ type ScriptProcessesListScriptProcessesResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListScriptProcessesResponse
+    Core.:> Core.Get '[Core.JSON] ListScriptProcessesResponse
 
 -- | List information about a script\'s executed processes, such as process type and current status.
 --
@@ -146,10 +134,7 @@ newScriptProcessesListScriptProcesses =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ScriptProcessesListScriptProcesses
-  where
+instance Core.GoogleRequest ScriptProcessesListScriptProcesses where
   type
     Rs ScriptProcessesListScriptProcesses =
       ListScriptProcessesResponse
@@ -170,9 +155,7 @@ instance
       scriptProcessFilterStartTime
       (scriptProcessFilterStatuses Core.^. Core._Default)
       (scriptProcessFilterTypes Core.^. Core._Default)
-      ( scriptProcessFilterUserAccessLevels
-          Core.^. Core._Default
-      )
+      (scriptProcessFilterUserAccessLevels Core.^. Core._Default)
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -181,7 +164,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ScriptProcessesListScriptProcessesResource
+              Core.Proxy ScriptProcessesListScriptProcessesResource
           )
           Core.mempty

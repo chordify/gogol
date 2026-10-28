@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Return
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Classroom.Courses.CourseWork.StudentSubmissions.Return
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.courses.courseWork.studentSubmissions.return@ method which the
 -- 'ClassroomCoursesCourseWorkStudentSubmissionsReturn' request conforms to.
@@ -58,9 +56,7 @@ type ClassroomCoursesCourseWorkStudentSubmissionsReturnResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ReturnStudentSubmissionRequest
+    Core.:> Core.ReqBody '[Core.JSON] ReturnStudentSubmissionRequest
     Core.:> Core.Post '[Core.JSON] Empty
 
 -- | Returns a student submission. Returning a student submission transfers ownership of attached Drive files to the student and may also update the submission state. Unlike the Classroom application, returning a student submission does not set assignedGrade to the draftGrade value. Only a teacher of the course that contains the requested student submission may call this method. This request must be made by the Developer Console project of the <https://support.google.com/cloud/answer/6158849 OAuth client ID> used to create the corresponding course work item. This method returns the following error codes: * @PERMISSION_DENIED@ if the requesting user is not permitted to access the requested course or course work, return the requested student submission, or for access errors. * @INVALID_ARGUMENT@ if the request is malformed. * @NOT_FOUND@ if the requested course, course work, or student submission does not exist.
@@ -99,30 +95,31 @@ newClassroomCoursesCourseWorkStudentSubmissionsReturn ::
   -- |  Multipart request metadata. See 'payload'.
   ReturnStudentSubmissionRequest ->
   ClassroomCoursesCourseWorkStudentSubmissionsReturn
-newClassroomCoursesCourseWorkStudentSubmissionsReturn courseId courseWorkId id payload =
-  ClassroomCoursesCourseWorkStudentSubmissionsReturn
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      courseId = courseId,
-      courseWorkId = courseWorkId,
-      id = id,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClassroomCoursesCourseWorkStudentSubmissionsReturn
+  courseId
+  courseWorkId
+  id
+  payload =
+    ClassroomCoursesCourseWorkStudentSubmissionsReturn
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        courseId = courseId,
+        courseWorkId = courseWorkId,
+        id = id,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ClassroomCoursesCourseWorkStudentSubmissionsReturn
   where
+  type Rs ClassroomCoursesCourseWorkStudentSubmissionsReturn = Empty
   type
-    Rs
-      ClassroomCoursesCourseWorkStudentSubmissionsReturn =
-      Empty
-  type
-    Scopes
-      ClassroomCoursesCourseWorkStudentSubmissionsReturn =
+    Scopes ClassroomCoursesCourseWorkStudentSubmissionsReturn =
       '[Classroom'Coursework'Students]
   requestClient
     ClassroomCoursesCourseWorkStudentSubmissionsReturn {..} =

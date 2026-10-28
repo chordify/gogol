@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ConsumerSurveys.Surveys.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ConsumerSurveys.Surveys.Update
 where
 
 import Gogol.ConsumerSurveys.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @consumersurveys.surveys.update@ method which the
 -- 'ConsumerSurveysSurveysUpdate' request conforms to.
@@ -72,12 +70,12 @@ newConsumerSurveysSurveysUpdate ::
   Core.Text ->
   ConsumerSurveysSurveysUpdate
 newConsumerSurveysSurveysUpdate payload surveyUrlId =
-  ConsumerSurveysSurveysUpdate {payload = payload, surveyUrlId = surveyUrlId}
+  ConsumerSurveysSurveysUpdate
+    { payload = payload,
+      surveyUrlId = surveyUrlId
+    }
 
-instance
-  Core.GoogleRequest
-    ConsumerSurveysSurveysUpdate
-  where
+instance Core.GoogleRequest ConsumerSurveysSurveysUpdate where
   type Rs ConsumerSurveysSurveysUpdate = Survey
   type
     Scopes ConsumerSurveysSurveysUpdate =
@@ -91,7 +89,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ConsumerSurveysSurveysUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy ConsumerSurveysSurveysUpdateResource)
           Core.mempty

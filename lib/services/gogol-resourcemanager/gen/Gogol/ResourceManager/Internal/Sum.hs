@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ResourceManager.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ResourceManager.Internal.Sum
@@ -109,12 +107,13 @@ module Gogol.ResourceManager.Internal.Sum
     TagKey_Purpose
       ( TagKey_Purpose_PURPOSEUNSPECIFIED,
         TagKey_Purpose_GCEFIREWALL,
+        TagKey_Purpose_DATAGOVERNANCE,
         ..
       ),
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -456,12 +455,17 @@ newtype TagKey_Purpose = TagKey_Purpose {fromTagKey_Purpose :: Core.Text}
 pattern TagKey_Purpose_PURPOSEUNSPECIFIED :: TagKey_Purpose
 pattern TagKey_Purpose_PURPOSEUNSPECIFIED = TagKey_Purpose "PURPOSE_UNSPECIFIED"
 
--- | Purpose for Compute Engine firewalls. A corresponding purpose/data should be set for the network the tag is intended for. The key should be \'network\' and the value should be in either of these two formats: -https:\/\/www.googleapis.com\/compute\/{compute/version}\/projects\/{project/id}\/global\/networks\/{network/id} -{project/id}\/{network/name} Examples: -https:\/\/www.googleapis.com\/compute\/staging_v1\/projects\/fail-closed-load-testing\/global\/networks\/6992953698831725600 -fail-closed-load-testing\/load-testing-network
+-- | Purpose for Compute Engine firewalls. A corresponding @purpose_data@ should be set for the network the tag is intended for. The key should be @network@ and the value should be in ## either of these two formats: @https:\/\/www.googleapis.com\/compute\/{compute_version}\/projects\/{project_id}\/global\/networks\/{network_id}@ - @{project_id}\/{network_name}@ ## Examples: @https:\/\/www.googleapis.com\/compute\/staging_v1\/projects\/fail-closed-load-testing\/global\/networks\/6992953698831725600@ - @fail-closed-load-testing\/load-testing-network@
 pattern TagKey_Purpose_GCEFIREWALL :: TagKey_Purpose
 pattern TagKey_Purpose_GCEFIREWALL = TagKey_Purpose "GCE_FIREWALL"
+
+-- | Purpose for data governance. Tag Values created under a key with this purpose may have Tag Value children. No @purpose_data@ should be set.
+pattern TagKey_Purpose_DATAGOVERNANCE :: TagKey_Purpose
+pattern TagKey_Purpose_DATAGOVERNANCE = TagKey_Purpose "DATA_GOVERNANCE"
 
 {-# COMPLETE
   TagKey_Purpose_PURPOSEUNSPECIFIED,
   TagKey_Purpose_GCEFIREWALL,
+  TagKey_Purpose_DATAGOVERNANCE,
   TagKey_Purpose
   #-}

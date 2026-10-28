@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Get
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.get@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresGet' request conforms to.
@@ -65,7 +63,7 @@ data HealthcareProjectsLocationsDatasetsDicomStoresGet = HealthcareProjectsLocat
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the DICOM store to get.
+    -- | Required. The resource name of the DICOM store to get.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,12 +74,13 @@ data HealthcareProjectsLocationsDatasetsDicomStoresGet = HealthcareProjectsLocat
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresGet' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresGet ::
-  -- |  The resource name of the DICOM store to get. See 'name'.
+  -- |  Required. The resource name of the DICOM store to get. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsDicomStoresGet
 newHealthcareProjectsLocationsDatasetsDicomStoresGet name =
   HealthcareProjectsLocationsDatasetsDicomStoresGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,29 +93,26 @@ instance
     HealthcareProjectsLocationsDatasetsDicomStoresGet
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresGet =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresGet =
       DicomStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresGet =
-      '[CloudPlatform'FullControl]
-  requestClient
-    HealthcareProjectsLocationsDatasetsDicomStoresGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        healthcareService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  HealthcareProjectsLocationsDatasetsDicomStoresGetResource
-            )
-            Core.mempty
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresGet =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
+  requestClient HealthcareProjectsLocationsDatasetsDicomStoresGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      healthcareService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                HealthcareProjectsLocationsDatasetsDicomStoresGetResource
+          )
+          Core.mempty

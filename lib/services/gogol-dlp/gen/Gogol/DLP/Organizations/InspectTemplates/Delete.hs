@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.InspectTemplates.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes an InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- Deletes an InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.inspectTemplates.delete@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.inspectTemplates.delete@.
 module Gogol.DLP.Organizations.InspectTemplates.Delete
   ( -- * Resource
     DLPOrganizationsInspectTemplatesDeleteResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.InspectTemplates.Delete
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.inspectTemplates.delete@ method which the
 -- 'DLPOrganizationsInspectTemplatesDelete' request conforms to.
@@ -55,7 +53,7 @@ type DLPOrganizationsInspectTemplatesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
--- | Deletes an InspectTemplate. See https:\/\/cloud.google.com\/dlp\/docs\/creating-templates to learn more.
+-- | Deletes an InspectTemplate. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-templates to learn more.
 --
 -- /See:/ 'newDLPOrganizationsInspectTemplatesDelete' smart constructor.
 data DLPOrganizationsInspectTemplatesDelete = DLPOrganizationsInspectTemplatesDelete
@@ -89,32 +87,27 @@ newDLPOrganizationsInspectTemplatesDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsInspectTemplatesDelete
-  where
+instance Core.GoogleRequest DLPOrganizationsInspectTemplatesDelete where
   type
     Rs DLPOrganizationsInspectTemplatesDelete =
       GoogleProtobufEmpty
   type
     Scopes DLPOrganizationsInspectTemplatesDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsInspectTemplatesDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsInspectTemplatesDeleteResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsInspectTemplatesDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsInspectTemplatesDeleteResource
+          )
+          Core.mempty

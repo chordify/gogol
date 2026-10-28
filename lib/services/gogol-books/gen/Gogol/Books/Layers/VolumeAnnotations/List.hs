@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Layers.VolumeAnnotations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Layers.VolumeAnnotations.List
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.layers.volumeAnnotations.list@ method which the
 -- 'BooksLayersVolumeAnnotationsList' request conforms to.
@@ -63,30 +61,16 @@ type BooksLayersVolumeAnnotationsListResource =
     Core.:> Core.QueryParam "showDeleted" Core.Bool
     Core.:> Core.QueryParam "source" Core.Text
     Core.:> Core.QueryParam "startOffset" Core.Text
-    Core.:> Core.QueryParam
-              "startPosition"
-              Core.Text
-    Core.:> Core.QueryParam
-              "updatedMax"
-              Core.Text
-    Core.:> Core.QueryParam
-              "updatedMin"
-              Core.Text
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "startPosition" Core.Text
+    Core.:> Core.QueryParam "updatedMax" Core.Text
+    Core.:> Core.QueryParam "updatedMin" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam
               "volumeAnnotationsVersion"
               Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              Volumeannotations
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] Volumeannotations
 
 -- | Gets the volume annotations for a volume and layer.
 --
@@ -168,16 +152,9 @@ newBooksLayersVolumeAnnotationsList contentVersion layerId volumeId =
       volumeId = volumeId
     }
 
-instance
-  Core.GoogleRequest
-    BooksLayersVolumeAnnotationsList
-  where
-  type
-    Rs BooksLayersVolumeAnnotationsList =
-      Volumeannotations
-  type
-    Scopes BooksLayersVolumeAnnotationsList =
-      '[Books'FullControl]
+instance Core.GoogleRequest BooksLayersVolumeAnnotationsList where
+  type Rs BooksLayersVolumeAnnotationsList = Volumeannotations
+  type Scopes BooksLayersVolumeAnnotationsList = '[Books'FullControl]
   requestClient BooksLayersVolumeAnnotationsList {..} =
     go
       volumeId
@@ -205,7 +182,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksLayersVolumeAnnotationsListResource
-          )
+          (Core.Proxy :: Core.Proxy BooksLayersVolumeAnnotationsListResource)
           Core.mempty

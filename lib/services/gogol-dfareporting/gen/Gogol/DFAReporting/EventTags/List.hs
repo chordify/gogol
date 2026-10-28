@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.EventTags.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.EventTags.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.eventTags.list@ method which the
 -- 'DFAReportingEventTagsList' request conforms to.
@@ -58,25 +56,15 @@ type DFAReportingEventTagsListResource =
     Core.:> Core.QueryParam "campaignId" Core.Int64
     Core.:> Core.QueryParam "definitionsOnly" Core.Bool
     Core.:> Core.QueryParam "enabled" Core.Bool
-    Core.:> Core.QueryParams
-              "eventTagTypes"
-              EventTagsListEventTagTypes
+    Core.:> Core.QueryParams "eventTagTypes" EventTagsListEventTagTypes
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "searchString" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              EventTagsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              EventTagsListSortOrder
+    Core.:> Core.QueryParam "sortField" EventTagsListSortField
+    Core.:> Core.QueryParam "sortOrder" EventTagsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              EventTagsListResponse
+    Core.:> Core.Get '[Core.JSON] EventTagsListResponse
 
 -- | Retrieves a list of event tags, possibly filtered.
 --
@@ -143,9 +131,7 @@ newDFAReportingEventTagsList profileId =
     }
 
 instance Core.GoogleRequest DFAReportingEventTagsList where
-  type
-    Rs DFAReportingEventTagsList =
-      EventTagsListResponse
+  type Rs DFAReportingEventTagsList = EventTagsListResponse
   type
     Scopes DFAReportingEventTagsList =
       '[Dfatrafficking'FullControl]
@@ -172,7 +158,5 @@ instance Core.GoogleRequest DFAReportingEventTagsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingEventTagsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingEventTagsListResource)
           Core.mempty

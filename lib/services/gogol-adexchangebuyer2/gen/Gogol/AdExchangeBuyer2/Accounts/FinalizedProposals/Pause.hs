@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Pause
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.FinalizedProposals.Pause
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.finalizedProposals.pause@ method which the
 -- 'AdExchangeBuyer2AccountsFinalizedProposalsPause' request conforms to.
@@ -91,48 +89,46 @@ newAdExchangeBuyer2AccountsFinalizedProposalsPause ::
   -- |  The proposal_id of the proposal containing the deals. See 'proposalId'.
   Core.Text ->
   AdExchangeBuyer2AccountsFinalizedProposalsPause
-newAdExchangeBuyer2AccountsFinalizedProposalsPause accountId payload proposalId =
-  AdExchangeBuyer2AccountsFinalizedProposalsPause
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      payload = payload,
-      proposalId = proposalId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsFinalizedProposalsPause
+  accountId
+  payload
+  proposalId =
+    AdExchangeBuyer2AccountsFinalizedProposalsPause
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        payload = payload,
+        proposalId = proposalId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsFinalizedProposalsPause
   where
+  type Rs AdExchangeBuyer2AccountsFinalizedProposalsPause = Proposal
   type
-    Rs
-      AdExchangeBuyer2AccountsFinalizedProposalsPause =
-      Proposal
-  type
-    Scopes
-      AdExchangeBuyer2AccountsFinalizedProposalsPause =
+    Scopes AdExchangeBuyer2AccountsFinalizedProposalsPause =
       '[Adexchange'Buyer]
-  requestClient
-    AdExchangeBuyer2AccountsFinalizedProposalsPause {..} =
-      go
-        accountId
-        proposalId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        adExchangeBuyer2Service
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdExchangeBuyer2AccountsFinalizedProposalsPauseResource
-            )
-            Core.mempty
+  requestClient AdExchangeBuyer2AccountsFinalizedProposalsPause {..} =
+    go
+      accountId
+      proposalId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      adExchangeBuyer2Service
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdExchangeBuyer2AccountsFinalizedProposalsPauseResource
+          )
+          Core.mempty

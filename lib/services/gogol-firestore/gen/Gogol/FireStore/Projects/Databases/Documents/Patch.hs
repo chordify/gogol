@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.Patch
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.patch@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsPatch' request conforms to.
@@ -51,9 +49,7 @@ type FireStoreProjectsDatabasesDocumentsPatchResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "currentDocument.exists" Core.Bool
-    Core.:> Core.QueryParam
-              "currentDocument.updateTime"
-              Core.DateTime
+    Core.:> Core.QueryParam "currentDocument.updateTime" Core.DateTime
     Core.:> Core.QueryParams "mask.fieldPaths" Core.Text
     Core.:> Core.QueryParams "updateMask.fieldPaths" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
@@ -117,33 +113,29 @@ instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesDocumentsPatch
   where
-  type
-    Rs FireStoreProjectsDatabasesDocumentsPatch =
-      Document
+  type Rs FireStoreProjectsDatabasesDocumentsPatch = Document
   type
     Scopes FireStoreProjectsDatabasesDocumentsPatch =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        currentDocumentExists
-        currentDocumentUpdateTime
-        (maskFieldPaths Core.^. Core._Default)
-        (updateMaskFieldPaths Core.^. Core._Default)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsPatchResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      currentDocumentExists
+      currentDocumentUpdateTime
+      (maskFieldPaths Core.^. Core._Default)
+      (updateMaskFieldPaths Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FireStoreProjectsDatabasesDocumentsPatchResource
+          )
+          Core.mempty

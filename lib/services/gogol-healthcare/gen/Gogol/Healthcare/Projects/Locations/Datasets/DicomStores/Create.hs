@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Create
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.create@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresCreate' request conforms to.
@@ -68,9 +66,9 @@ data HealthcareProjectsLocationsDatasetsDicomStoresCreate = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The ID of the DICOM store that is being created. Any string value up to 256 characters in length.
+    -- | Required. The ID of the DICOM store that is being created. Any string value up to 256 characters in length.
     dicomStoreId :: (Core.Maybe Core.Text),
-    -- | The name of the dataset this DICOM store belongs to.
+    -- | Required. The name of the dataset this DICOM store belongs to.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: DicomStore,
@@ -83,35 +81,36 @@ data HealthcareProjectsLocationsDatasetsDicomStoresCreate = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresCreate' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresCreate ::
-  -- |  The name of the dataset this DICOM store belongs to. See 'parent'.
+  -- |  Required. The name of the dataset this DICOM store belongs to. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   DicomStore ->
   HealthcareProjectsLocationsDatasetsDicomStoresCreate
-newHealthcareProjectsLocationsDatasetsDicomStoresCreate parent payload =
-  HealthcareProjectsLocationsDatasetsDicomStoresCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      dicomStoreId = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsDicomStoresCreate
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsDicomStoresCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        dicomStoreId = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     HealthcareProjectsLocationsDatasetsDicomStoresCreate
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresCreate =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresCreate =
       DicomStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresCreate =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresCreate =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresCreate {..} =
       go

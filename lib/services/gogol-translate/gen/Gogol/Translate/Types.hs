@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Translate.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Translate.Types
@@ -37,6 +35,30 @@ module Gogol.Translate.Types
 
     -- ** Xgafv
     Xgafv (..),
+
+    -- ** AdaptiveMtDataset
+    AdaptiveMtDataset (..),
+    newAdaptiveMtDataset,
+
+    -- ** AdaptiveMtFile
+    AdaptiveMtFile (..),
+    newAdaptiveMtFile,
+
+    -- ** AdaptiveMtSentence
+    AdaptiveMtSentence (..),
+    newAdaptiveMtSentence,
+
+    -- ** AdaptiveMtTranslateRequest
+    AdaptiveMtTranslateRequest (..),
+    newAdaptiveMtTranslateRequest,
+
+    -- ** AdaptiveMtTranslateResponse
+    AdaptiveMtTranslateResponse (..),
+    newAdaptiveMtTranslateResponse,
+
+    -- ** AdaptiveMtTranslation
+    AdaptiveMtTranslation (..),
+    newAdaptiveMtTranslation,
 
     -- ** BatchDocumentInputConfig
     BatchDocumentInputConfig (..),
@@ -134,6 +156,10 @@ module Gogol.Translate.Types
     ExportDataRequest (..),
     newExportDataRequest,
 
+    -- ** FileInputSource
+    FileInputSource (..),
+    newFileInputSource,
+
     -- ** GcsDestination
     GcsDestination (..),
     newGcsDestination,
@@ -153,6 +179,10 @@ module Gogol.Translate.Types
     -- ** Glossary
     Glossary (..),
     newGlossary,
+
+    -- ** GlossaryConfig
+    GlossaryConfig (..),
+    newGlossaryConfig,
 
     -- ** GlossaryEntry
     GlossaryEntry (..),
@@ -174,6 +204,14 @@ module Gogol.Translate.Types
     GlossaryTermsSet (..),
     newGlossaryTermsSet,
 
+    -- ** ImportAdaptiveMtFileRequest
+    ImportAdaptiveMtFileRequest (..),
+    newImportAdaptiveMtFileRequest,
+
+    -- ** ImportAdaptiveMtFileResponse
+    ImportAdaptiveMtFileResponse (..),
+    newImportAdaptiveMtFileResponse,
+
     -- ** ImportDataRequest
     ImportDataRequest (..),
     newImportDataRequest,
@@ -193,6 +231,18 @@ module Gogol.Translate.Types
     -- ** LanguageCodesSet
     LanguageCodesSet (..),
     newLanguageCodesSet,
+
+    -- ** ListAdaptiveMtDatasetsResponse
+    ListAdaptiveMtDatasetsResponse (..),
+    newListAdaptiveMtDatasetsResponse,
+
+    -- ** ListAdaptiveMtFilesResponse
+    ListAdaptiveMtFilesResponse (..),
+    newListAdaptiveMtFilesResponse,
+
+    -- ** ListAdaptiveMtSentencesResponse
+    ListAdaptiveMtSentencesResponse (..),
+    newListAdaptiveMtSentencesResponse,
 
     -- ** ListDatasetsResponse
     ListDatasetsResponse (..),
@@ -254,6 +304,30 @@ module Gogol.Translate.Types
     OutputConfig (..),
     newOutputConfig,
 
+    -- ** ReferenceSentenceConfig
+    ReferenceSentenceConfig (..),
+    newReferenceSentenceConfig,
+
+    -- ** ReferenceSentencePair
+    ReferenceSentencePair (..),
+    newReferenceSentencePair,
+
+    -- ** ReferenceSentencePairList
+    ReferenceSentencePairList (..),
+    newReferenceSentencePairList,
+
+    -- ** Romanization
+    Romanization (..),
+    newRomanization,
+
+    -- ** RomanizeTextRequest
+    RomanizeTextRequest (..),
+    newRomanizeTextRequest,
+
+    -- ** RomanizeTextResponse
+    RomanizeTextResponse (..),
+    newRomanizeTextResponse,
+
     -- ** Status
     Status (..),
     newStatus,
@@ -302,13 +376,17 @@ module Gogol.Translate.Types
     Translation (..),
     newTranslation,
 
+    -- ** TransliterationConfig
+    TransliterationConfig (..),
+    newTransliterationConfig,
+
     -- ** WaitOperationRequest
     WaitOperationRequest (..),
     newWaitOperationRequest,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Translate.Internal.Product
 import Gogol.Translate.Internal.Sum
 
@@ -320,7 +398,9 @@ translateService =
     "translation.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Translate text from one language to another using Google Translate
-type CloudTranslation'FullControl = "https://www.googleapis.com/auth/cloud-translation"
+type CloudTranslation'FullControl =
+  "https://www.googleapis.com/auth/cloud-translation"

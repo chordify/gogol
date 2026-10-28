@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fonts.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Fonts.Internal.Sum
@@ -30,6 +28,14 @@ module Gogol.Fonts.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * WebfontsListCapability
+    WebfontsListCapability
+      ( WebfontsListCapability_CAPABILITYUNSPECIFIED,
+        WebfontsListCapability_WOFF2,
+        WebfontsListCapability_VF,
         ..
       ),
 
@@ -46,7 +52,7 @@ module Gogol.Fonts.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -73,6 +79,38 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Controls the font urls in @Webfont.files@, by default, static ttf fonts are sent.
+newtype WebfontsListCapability = WebfontsListCapability {fromWebfontsListCapability :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Default means static ttf fonts.
+pattern WebfontsListCapability_CAPABILITYUNSPECIFIED :: WebfontsListCapability
+pattern WebfontsListCapability_CAPABILITYUNSPECIFIED = WebfontsListCapability "CAPABILITY_UNSPECIFIED"
+
+-- | Use WOFF2(Compressed)instead of ttf.
+pattern WebfontsListCapability_WOFF2 :: WebfontsListCapability
+pattern WebfontsListCapability_WOFF2 = WebfontsListCapability "WOFF2"
+
+-- | Prefer variable font files instead of static fonts instantiated at standard weights.
+pattern WebfontsListCapability_VF :: WebfontsListCapability
+pattern WebfontsListCapability_VF = WebfontsListCapability "VF"
+
+{-# COMPLETE
+  WebfontsListCapability_CAPABILITYUNSPECIFIED,
+  WebfontsListCapability_WOFF2,
+  WebfontsListCapability_VF,
+  WebfontsListCapability
   #-}
 
 -- | Enables sorting of the list.

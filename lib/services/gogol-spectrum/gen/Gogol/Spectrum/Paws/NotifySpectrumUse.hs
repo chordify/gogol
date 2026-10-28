@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Spectrum.Paws.NotifySpectrumUse
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Spectrum.Paws.NotifySpectrumUse
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Spectrum.Types
 
 -- | A resource alias for @spectrum.paws.notifySpectrumUse@ method which the
@@ -50,9 +48,7 @@ type SpectrumPawsNotifySpectrumUseResource =
     Core.:> "paws"
     Core.:> "notifySpectrumUse"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              PawsNotifySpectrumUseRequest
+    Core.:> Core.ReqBody '[Core.JSON] PawsNotifySpectrumUseRequest
     Core.:> Core.Post '[Core.JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.
@@ -72,10 +68,7 @@ newSpectrumPawsNotifySpectrumUse ::
 newSpectrumPawsNotifySpectrumUse payload =
   SpectrumPawsNotifySpectrumUse {payload = payload}
 
-instance
-  Core.GoogleRequest
-    SpectrumPawsNotifySpectrumUse
-  where
+instance Core.GoogleRequest SpectrumPawsNotifySpectrumUse where
   type
     Rs SpectrumPawsNotifySpectrumUse =
       PawsNotifySpectrumUseResponse
@@ -85,7 +78,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SpectrumPawsNotifySpectrumUseResource
-          )
+          (Core.Proxy :: Core.Proxy SpectrumPawsNotifySpectrumUseResource)
           Core.mempty

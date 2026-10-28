@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -522,6 +520,10 @@ module Gogol.Gmail
     -- ** ForwardingAddress_VerificationStatus
     ForwardingAddress_VerificationStatus (..),
 
+    -- ** HardwareKeyMetadata
+    HardwareKeyMetadata (..),
+    newHardwareKeyMetadata,
+
     -- ** History
     History (..),
     newHistory,
@@ -671,6 +673,10 @@ module Gogol.Gmail
     -- ** SendAs_VerificationStatus
     SendAs_VerificationStatus (..),
 
+    -- ** SignAndEncryptKeyPairs
+    SignAndEncryptKeyPairs (..),
+    newSignAndEncryptKeyPairs,
+
     -- ** SmimeInfo
     SmimeInfo (..),
     newSmimeInfo,
@@ -696,6 +702,9 @@ module Gogol.Gmail
 
     -- ** WatchRequest_LabelFilterAction
     WatchRequest_LabelFilterAction (..),
+
+    -- ** WatchRequest_LabelFilterBehavior
+    WatchRequest_LabelFilterBehavior (..),
 
     -- ** WatchResponse
     WatchResponse (..),

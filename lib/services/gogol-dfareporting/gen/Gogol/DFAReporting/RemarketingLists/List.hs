@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.RemarketingLists.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.RemarketingLists.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.remarketingLists.list@ method which the
 -- 'DFAReportingRemarketingListsList' request conforms to.
@@ -59,20 +57,12 @@ type DFAReportingRemarketingListsListResource =
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "name" Core.Text
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              RemarketingListsListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              RemarketingListsListSortOrder
+    Core.:> Core.QueryParam "sortField" RemarketingListsListSortField
+    Core.:> Core.QueryParam "sortOrder" RemarketingListsListSortOrder
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              RemarketingListsListResponse
+    Core.:> Core.Get '[Core.JSON] RemarketingListsListResponse
 
 -- | Retrieves a list of remarketing lists, possibly filtered. This method supports paging.
 --
@@ -84,7 +74,7 @@ data DFAReportingRemarketingListsList = DFAReportingRemarketingListsList
     accessToken :: (Core.Maybe Core.Text),
     -- | Select only active or only inactive remarketing lists.
     active :: (Core.Maybe Core.Bool),
-    -- | Select only remarketing lists owned by this advertiser.
+    -- | Required. Select only remarketing lists owned by this advertiser.
     advertiserId :: Core.Int64,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -111,7 +101,7 @@ data DFAReportingRemarketingListsList = DFAReportingRemarketingListsList
 
 -- | Creates a value of 'DFAReportingRemarketingListsList' with the minimum fields required to make a request.
 newDFAReportingRemarketingListsList ::
-  -- |  Select only remarketing lists owned by this advertiser. See 'advertiserId'.
+  -- |  Required. Select only remarketing lists owned by this advertiser. See 'advertiserId'.
   Core.Int64 ->
   -- |  User profile ID associated with this request. See 'profileId'.
   Core.Int64 ->
@@ -134,10 +124,7 @@ newDFAReportingRemarketingListsList advertiserId profileId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DFAReportingRemarketingListsList
-  where
+instance Core.GoogleRequest DFAReportingRemarketingListsList where
   type
     Rs DFAReportingRemarketingListsList =
       RemarketingListsListResponse
@@ -165,7 +152,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingRemarketingListsListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingRemarketingListsListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Orgunits.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Orgunits.Patch
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @directory.orgunits.patch@ method which the
 -- 'DirectoryOrgunitsPatch' request conforms to.
@@ -107,9 +105,7 @@ newDirectoryOrgunitsPatch customerId orgUnitPath payload =
 
 instance Core.GoogleRequest DirectoryOrgunitsPatch where
   type Rs DirectoryOrgunitsPatch = OrgUnit
-  type
-    Scopes DirectoryOrgunitsPatch =
-      '[Admin'Directory'Orgunit]
+  type Scopes DirectoryOrgunitsPatch = '[Admin'Directory'Orgunit]
   requestClient DirectoryOrgunitsPatch {..} =
     go
       customerId
@@ -125,7 +121,5 @@ instance Core.GoogleRequest DirectoryOrgunitsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DirectoryOrgunitsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DirectoryOrgunitsPatchResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Experiments.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Experiments.List
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.experiments.list@ method which the
 -- 'AnalyticsManagementExperimentsList' request conforms to.
@@ -86,28 +84,23 @@ newAnalyticsManagementExperimentsList ::
   -- |  Web property ID to retrieve experiments for. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementExperimentsList
-newAnalyticsManagementExperimentsList accountId profileId webPropertyId =
-  AnalyticsManagementExperimentsList
-    { accountId = accountId,
-      maxResults = Core.Nothing,
-      profileId = profileId,
-      startIndex = Core.Nothing,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementExperimentsList
+  accountId
+  profileId
+  webPropertyId =
     AnalyticsManagementExperimentsList
-  where
-  type
-    Rs AnalyticsManagementExperimentsList =
-      Experiments
+      { accountId = accountId,
+        maxResults = Core.Nothing,
+        profileId = profileId,
+        startIndex = Core.Nothing,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementExperimentsList where
+  type Rs AnalyticsManagementExperimentsList = Experiments
   type
     Scopes AnalyticsManagementExperimentsList =
-      '[ Analytics'FullControl,
-         Analytics'Edit,
-         Analytics'Readonly
-       ]
+      '[Analytics'FullControl, Analytics'Edit, Analytics'Readonly]
   requestClient AnalyticsManagementExperimentsList {..} =
     go
       accountId
@@ -121,7 +114,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                AnalyticsManagementExperimentsListResource
+              Core.Proxy AnalyticsManagementExperimentsListResource
           )
           Core.mempty

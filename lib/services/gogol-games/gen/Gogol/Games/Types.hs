@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Games.Types
@@ -30,6 +28,7 @@ module Gogol.Games.Types
     gamesService,
 
     -- * OAuth Scopes
+    Androidpublisher'FullControl,
     Drive'Appdata,
     Games'FullControl,
 
@@ -173,6 +172,10 @@ module Gogol.Games.Types
     EventUpdateResponse (..),
     newEventUpdateResponse,
 
+    -- ** GamePlayerToken
+    GamePlayerToken (..),
+    newGamePlayerToken,
+
     -- ** GamesAchievementIncrement
     GamesAchievementIncrement (..),
     newGamesAchievementIncrement,
@@ -180,6 +183,14 @@ module Gogol.Games.Types
     -- ** GamesAchievementSetStepsAtLeast
     GamesAchievementSetStepsAtLeast (..),
     newGamesAchievementSetStepsAtLeast,
+
+    -- ** GeneratePlayGroupingApiTokenResponse
+    GeneratePlayGroupingApiTokenResponse (..),
+    newGeneratePlayGroupingApiTokenResponse,
+
+    -- ** GenerateRecallPlayGroupingApiTokenResponse
+    GenerateRecallPlayGroupingApiTokenResponse (..),
+    newGenerateRecallPlayGroupingApiTokenResponse,
 
     -- ** GetMultipleApplicationPlayerIdsResponse
     GetMultipleApplicationPlayerIdsResponse (..),
@@ -234,9 +245,30 @@ module Gogol.Games.Types
     LeaderboardScores (..),
     newLeaderboardScores,
 
+    -- ** LinkPersonaRequest
+    LinkPersonaRequest (..),
+    newLinkPersonaRequest,
+
+    -- ** LinkPersonaRequest_CardinalityConstraint
+    LinkPersonaRequest_CardinalityConstraint (..),
+
+    -- ** LinkPersonaRequest_ConflictingLinksResolutionPolicy
+    LinkPersonaRequest_ConflictingLinksResolutionPolicy (..),
+
+    -- ** LinkPersonaResponse
+    LinkPersonaResponse (..),
+    newLinkPersonaResponse,
+
+    -- ** LinkPersonaResponse_State
+    LinkPersonaResponse_State (..),
+
     -- ** MetagameConfig
     MetagameConfig (..),
     newMetagameConfig,
+
+    -- ** PlayGroupingApiToken
+    PlayGroupingApiToken (..),
+    newPlayGroupingApiToken,
 
     -- ** Player
     Player (..),
@@ -320,6 +352,30 @@ module Gogol.Games.Types
     -- ** ProfileSettings_FriendsListVisibility
     ProfileSettings_FriendsListVisibility (..),
 
+    -- ** RecallToken
+    RecallToken (..),
+    newRecallToken,
+
+    -- ** ResetPersonaRequest
+    ResetPersonaRequest (..),
+    newResetPersonaRequest,
+
+    -- ** ResetPersonaResponse
+    ResetPersonaResponse (..),
+    newResetPersonaResponse,
+
+    -- ** RetrieveDeveloperGamesLastPlayerTokenResponse
+    RetrieveDeveloperGamesLastPlayerTokenResponse (..),
+    newRetrieveDeveloperGamesLastPlayerTokenResponse,
+
+    -- ** RetrieveGamesPlayerTokensResponse
+    RetrieveGamesPlayerTokensResponse (..),
+    newRetrieveGamesPlayerTokensResponse,
+
+    -- ** RetrievePlayerTokensResponse
+    RetrievePlayerTokensResponse (..),
+    newRetrievePlayerTokensResponse,
+
     -- ** RevisionCheckResponse
     RevisionCheckResponse (..),
     newRevisionCheckResponse,
@@ -353,6 +409,14 @@ module Gogol.Games.Types
     -- ** StatsResponse
     StatsResponse (..),
     newStatsResponse,
+
+    -- ** UnlinkPersonaRequest
+    UnlinkPersonaRequest (..),
+    newUnlinkPersonaRequest,
+
+    -- ** UnlinkPersonaResponse
+    UnlinkPersonaResponse (..),
+    newUnlinkPersonaResponse,
 
     -- ** AchievementsListState
     AchievementsListState (..),
@@ -391,7 +455,7 @@ where
 
 import Gogol.Games.Internal.Product
 import Gogol.Games.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1@ of the Google Play Game Services. This contains the host and root path used as a starting point for constructing service requests.
 gamesService :: Core.ServiceConfig
@@ -400,8 +464,13 @@ gamesService =
     (Core.ServiceId "games:v1")
     "games.googleapis.com"
 
+-- | View and manage your Google Play Developer account
+type Androidpublisher'FullControl =
+  "https://www.googleapis.com/auth/androidpublisher"
+
 -- | See, create, and delete its own configuration data in your Google Drive
-type Drive'Appdata = "https://www.googleapis.com/auth/drive.appdata"
+type Drive'Appdata =
+  "https://www.googleapis.com/auth/drive.appdata"
 
 -- | Create, edit, and delete your Google Play Games activity
 type Games'FullControl = "https://www.googleapis.com/auth/games"

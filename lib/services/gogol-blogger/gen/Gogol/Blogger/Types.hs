@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Blogger.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Blogger.Types
@@ -272,7 +270,7 @@ where
 
 import Gogol.Blogger.Internal.Product
 import Gogol.Blogger.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Blogger API. This contains the host and root path used as a starting point for constructing service requests.
 bloggerService :: Core.ServiceConfig
@@ -282,7 +280,9 @@ bloggerService =
     "blogger.googleapis.com"
 
 -- | Manage your Blogger account
-type Blogger'FullControl = "https://www.googleapis.com/auth/blogger"
+type Blogger'FullControl =
+  "https://www.googleapis.com/auth/blogger"
 
 -- | View your Blogger account
-type Blogger'Readonly = "https://www.googleapis.com/auth/blogger.readonly"
+type Blogger'Readonly =
+  "https://www.googleapis.com/auth/blogger.readonly"

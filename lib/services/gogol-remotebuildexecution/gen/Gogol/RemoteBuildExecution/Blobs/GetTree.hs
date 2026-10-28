@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.RemoteBuildExecution.Blobs.GetTree
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.RemoteBuildExecution.Blobs.GetTree
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.RemoteBuildExecution.Types
 
 -- | A resource alias for @remotebuildexecution.blobs.getTree@ method which the
@@ -58,9 +56,7 @@ type RemoteBuildExecutionBlobsGetTreeResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              BuildBazelRemoteExecutionV2GetTreeResponse
+    Core.:> Core.Get '[Core.JSON] BuildBazelRemoteExecutionV2GetTreeResponse
 
 -- | Fetch the entire directory tree rooted at a node. This request must be targeted at a Directory stored in the ContentAddressableStorage (CAS). The server will enumerate the @Directory@ tree recursively and return every node descended from the root. The GetTreeRequest.page/token parameter can be used to skip ahead in the stream (e.g. when retrying a partially completed and aborted request), by setting it to a value taken from GetTreeResponse.next/page_token of the last successfully processed GetTreeResponse). The exact traversal order is unspecified and, unless retrieving subsequent pages from an earlier request, is not guaranteed to be stable across multiple invocations of @GetTree@. If part of the tree is missing from the CAS, the server will return the portion present and omit the rest. Errors: * @NOT_FOUND@: The requested tree root is not present in the CAS.
 --
@@ -112,10 +108,7 @@ newRemoteBuildExecutionBlobsGetTree hash instanceName sizeBytes =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RemoteBuildExecutionBlobsGetTree
-  where
+instance Core.GoogleRequest RemoteBuildExecutionBlobsGetTree where
   type
     Rs RemoteBuildExecutionBlobsGetTree =
       BuildBazelRemoteExecutionV2GetTreeResponse
@@ -139,7 +132,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy RemoteBuildExecutionBlobsGetTreeResource
-          )
+          (Core.Proxy :: Core.Proxy RemoteBuildExecutionBlobsGetTreeResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeReporting.Media.Download
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTubeReporting.Media.Download
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeReporting.Types
 
 -- | A resource alias for @youtubereporting.media.download@ method which the
@@ -56,15 +54,15 @@ type YouTubeReportingMediaDownloadResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] GdataMedia
     Core.:<|> "v1"
-      Core.:> "media"
-      Core.:> Core.Capture "resourceName" Core.Text
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltMedia
-      Core.:> Core.Get '[Core.OctetStream] Core.Stream
+    Core.:> "media"
+    Core.:> Core.Capture "resourceName" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltMedia
+    Core.:> Core.Get '[Core.OctetStream] Core.Stream
 
 -- | Method for media download. Download is supported on the URI @\/v1\/media\/{+name}?alt=media@.
 --
@@ -100,10 +98,7 @@ newYouTubeReportingMediaDownload resourceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeReportingMediaDownload
-  where
+instance Core.GoogleRequest YouTubeReportingMediaDownload where
   type Rs YouTubeReportingMediaDownload = GdataMedia
   type
     Scopes YouTubeReportingMediaDownload =
@@ -121,9 +116,7 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeReportingMediaDownloadResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeReportingMediaDownloadResource)
           Core.mempty
 
 instance
@@ -131,17 +124,13 @@ instance
     (Core.MediaDownload YouTubeReportingMediaDownload)
   where
   type
-    Rs
-      (Core.MediaDownload YouTubeReportingMediaDownload) =
+    Rs (Core.MediaDownload YouTubeReportingMediaDownload) =
       Core.Stream
   type
-    Scopes
-      (Core.MediaDownload YouTubeReportingMediaDownload) =
+    Scopes (Core.MediaDownload YouTubeReportingMediaDownload) =
       Core.Scopes YouTubeReportingMediaDownload
   requestClient
-    ( Core.MediaDownload
-        YouTubeReportingMediaDownload {..}
-      ) =
+    (Core.MediaDownload YouTubeReportingMediaDownload {..}) =
       go
         resourceName
         xgafv
@@ -154,7 +143,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy YouTubeReportingMediaDownloadResource
-            )
+            (Core.Proxy :: Core.Proxy YouTubeReportingMediaDownloadResource)
             Core.mempty

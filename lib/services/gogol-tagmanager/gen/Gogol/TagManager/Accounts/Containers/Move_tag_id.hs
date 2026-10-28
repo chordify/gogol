@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager.Accounts.Containers.Move_tag_id
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.TagManager.Accounts.Containers.Move_tag_id
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TagManager.Types
 
 -- | A resource alias for @tagmanager.accounts.containers.move_tag_id@ method which the
@@ -50,9 +48,7 @@ type TagManagerAccountsContainersMove_tag_idResource =
     Core.:> Core.CaptureMode "path" "move_tag_id" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
-    Core.:> Core.QueryParam
-              "allowUserPermissionFeatureUpdate"
-              Core.Bool
+    Core.:> Core.QueryParam "allowUserPermissionFeatureUpdate" Core.Bool
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "copySettings" Core.Bool
     Core.:> Core.QueryParam "copyTermsOfService" Core.Bool
@@ -116,38 +112,31 @@ newTagManagerAccountsContainersMove_tag_id path =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    TagManagerAccountsContainersMove_tag_id
-  where
-  type
-    Rs TagManagerAccountsContainersMove_tag_id =
-      Container
+instance Core.GoogleRequest TagManagerAccountsContainersMove_tag_id where
+  type Rs TagManagerAccountsContainersMove_tag_id = Container
   type
     Scopes TagManagerAccountsContainersMove_tag_id =
       '[Tagmanager'Edit'Containers]
-  requestClient
-    TagManagerAccountsContainersMove_tag_id {..} =
-      go
-        path
-        xgafv
-        accessToken
-        allowUserPermissionFeatureUpdate
-        callback
-        copySettings
-        copyTermsOfService
-        copyUsers
-        tagId
-        tagName
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        tagManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TagManagerAccountsContainersMove_tag_idResource
-            )
-            Core.mempty
+  requestClient TagManagerAccountsContainersMove_tag_id {..} =
+    go
+      path
+      xgafv
+      accessToken
+      allowUserPermissionFeatureUpdate
+      callback
+      copySettings
+      copyTermsOfService
+      copyUsers
+      tagId
+      tagName
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      tagManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy TagManagerAccountsContainersMove_tag_idResource
+          )
+          Core.mempty

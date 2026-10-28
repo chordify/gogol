@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.Compose
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.Compose
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.compose@ method which the
@@ -70,7 +68,7 @@ type StorageObjectsComposeResource =
 data StorageObjectsCompose = StorageObjectsCompose
   { -- | Name of the bucket containing the source objects. The destination object is stored in this bucket.
     destinationBucket :: Core.Text,
-    -- | Name of the new object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the new object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     destinationObject :: Core.Text,
     -- | Apply a predefined set of access controls to the destination object.
     destinationPredefinedAcl :: (Core.Maybe ObjectsComposeDestinationPredefinedAcl),
@@ -93,23 +91,26 @@ data StorageObjectsCompose = StorageObjectsCompose
 newStorageObjectsCompose ::
   -- |  Name of the bucket containing the source objects. The destination object is stored in this bucket. See 'destinationBucket'.
   Core.Text ->
-  -- |  Name of the new object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'destinationObject'.
+  -- |  Name of the new object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>. See 'destinationObject'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   ComposeRequest ->
   StorageObjectsCompose
-newStorageObjectsCompose destinationBucket destinationObject payload =
-  StorageObjectsCompose
-    { destinationBucket = destinationBucket,
-      destinationObject = destinationObject,
-      destinationPredefinedAcl = Core.Nothing,
-      ifGenerationMatch = Core.Nothing,
-      ifMetagenerationMatch = Core.Nothing,
-      kmsKeyName = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      userProject = Core.Nothing
-    }
+newStorageObjectsCompose
+  destinationBucket
+  destinationObject
+  payload =
+    StorageObjectsCompose
+      { destinationBucket = destinationBucket,
+        destinationObject = destinationObject,
+        destinationPredefinedAcl = Core.Nothing,
+        ifGenerationMatch = Core.Nothing,
+        ifMetagenerationMatch = Core.Nothing,
+        kmsKeyName = Core.Nothing,
+        payload = payload,
+        uploadType = Core.Nothing,
+        userProject = Core.Nothing
+      }
 
 instance Core.GoogleRequest StorageObjectsCompose where
   type Rs StorageObjectsCompose = Object
@@ -135,7 +136,5 @@ instance Core.GoogleRequest StorageObjectsCompose where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsComposeResource
-          )
+          (Core.Proxy :: Core.Proxy StorageObjectsComposeResource)
           Core.mempty

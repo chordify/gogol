@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TextToSpeech.Projects.Locations.SynthesizeLongAudio
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,17 +37,14 @@ module Gogol.TextToSpeech.Projects.Locations.SynthesizeLongAudio
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.TextToSpeech.Types
 
 -- | A resource alias for @texttospeech.projects.locations.synthesizeLongAudio@ method which the
 -- 'TextToSpeechProjectsLocationsSynthesizeLongAudio' request conforms to.
 type TextToSpeechProjectsLocationsSynthesizeLongAudioResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "parent"
-              "synthesizeLongAudio"
-              Core.Text
+    Core.:> Core.CaptureMode "parent" "synthesizeLongAudio" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -69,7 +64,7 @@ data TextToSpeechProjectsLocationsSynthesizeLongAudio = TextToSpeechProjectsLoca
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource states of the request in the form of @projects\/*\/locations\/*\/voices\/*@.
+    -- | The resource states of the request in the form of @projects\/*\/locations\/*@.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: SynthesizeLongAudioRequest,
@@ -82,14 +77,15 @@ data TextToSpeechProjectsLocationsSynthesizeLongAudio = TextToSpeechProjectsLoca
 
 -- | Creates a value of 'TextToSpeechProjectsLocationsSynthesizeLongAudio' with the minimum fields required to make a request.
 newTextToSpeechProjectsLocationsSynthesizeLongAudio ::
-  -- |  The resource states of the request in the form of @projects\/*\/locations\/*\/voices\/*@. See 'parent'.
+  -- |  The resource states of the request in the form of @projects\/*\/locations\/*@. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   SynthesizeLongAudioRequest ->
   TextToSpeechProjectsLocationsSynthesizeLongAudio
 newTextToSpeechProjectsLocationsSynthesizeLongAudio parent payload =
   TextToSpeechProjectsLocationsSynthesizeLongAudio
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -103,30 +99,27 @@ instance
     TextToSpeechProjectsLocationsSynthesizeLongAudio
   where
   type
-    Rs
-      TextToSpeechProjectsLocationsSynthesizeLongAudio =
+    Rs TextToSpeechProjectsLocationsSynthesizeLongAudio =
       Operation
   type
-    Scopes
-      TextToSpeechProjectsLocationsSynthesizeLongAudio =
+    Scopes TextToSpeechProjectsLocationsSynthesizeLongAudio =
       '[CloudPlatform'FullControl]
-  requestClient
-    TextToSpeechProjectsLocationsSynthesizeLongAudio {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        textToSpeechService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  TextToSpeechProjectsLocationsSynthesizeLongAudioResource
-            )
-            Core.mempty
+  requestClient TextToSpeechProjectsLocationsSynthesizeLongAudio {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      textToSpeechService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                TextToSpeechProjectsLocationsSynthesizeLongAudioResource
+          )
+          Core.mempty

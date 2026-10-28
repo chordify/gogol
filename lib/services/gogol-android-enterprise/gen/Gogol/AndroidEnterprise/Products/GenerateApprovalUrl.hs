@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Products.GenerateApprovalUrl
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Products.GenerateApprovalUrl
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.products.generateApprovalUrl@ method which the
 -- 'AndroidEnterpriseProductsGenerateApprovalUrl' request conforms to.
@@ -59,9 +57,7 @@ type AndroidEnterpriseProductsGenerateApprovalUrlResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              ProductsGenerateApprovalUrlResponse
+    Core.:> Core.Post '[Core.JSON] ProductsGenerateApprovalUrlResponse
 
 -- | Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product. Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day. __Note:__ This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
 --
@@ -93,17 +89,20 @@ newAndroidEnterpriseProductsGenerateApprovalUrl ::
   -- |  The ID of the product. See 'productId'.
   Core.Text ->
   AndroidEnterpriseProductsGenerateApprovalUrl
-newAndroidEnterpriseProductsGenerateApprovalUrl enterpriseId productId =
-  AndroidEnterpriseProductsGenerateApprovalUrl
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      enterpriseId = enterpriseId,
-      languageCode = Core.Nothing,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidEnterpriseProductsGenerateApprovalUrl
+  enterpriseId
+  productId =
+    AndroidEnterpriseProductsGenerateApprovalUrl
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        enterpriseId = enterpriseId,
+        languageCode = Core.Nothing,
+        productId = productId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -113,27 +112,24 @@ instance
     Rs AndroidEnterpriseProductsGenerateApprovalUrl =
       ProductsGenerateApprovalUrlResponse
   type
-    Scopes
-      AndroidEnterpriseProductsGenerateApprovalUrl =
+    Scopes AndroidEnterpriseProductsGenerateApprovalUrl =
       '[Androidenterprise'FullControl]
-  requestClient
-    AndroidEnterpriseProductsGenerateApprovalUrl {..} =
-      go
-        enterpriseId
-        productId
-        xgafv
-        accessToken
-        callback
-        languageCode
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidEnterpriseService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidEnterpriseProductsGenerateApprovalUrlResource
-            )
-            Core.mempty
+  requestClient AndroidEnterpriseProductsGenerateApprovalUrl {..} =
+    go
+      enterpriseId
+      productId
+      xgafv
+      accessToken
+      callback
+      languageCode
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidEnterpriseService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidEnterpriseProductsGenerateApprovalUrlResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.WebmasterTools.Webmasters.Sites.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.WebmasterTools.Webmasters.Sites.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.WebmasterTools.Types
 
 -- | A resource alias for @webmasters.sites.delete@ method which the
@@ -66,22 +64,16 @@ newWebmastersSitesDelete ::
   -- |  The URI of the property as defined in Search Console. Examples: http:\/\/www.example.com\/ or android-app:\/\/com.example\/ Note: for property-sets, use the URI that starts with sc-set: which is used in Search Console URLs. See 'siteUrl'.
   Core.Text ->
   WebmastersSitesDelete
-newWebmastersSitesDelete siteUrl = WebmastersSitesDelete {siteUrl = siteUrl}
+newWebmastersSitesDelete siteUrl =
+  WebmastersSitesDelete {siteUrl = siteUrl}
 
 instance Core.GoogleRequest WebmastersSitesDelete where
   type Rs WebmastersSitesDelete = ()
-  type
-    Scopes WebmastersSitesDelete =
-      '[Webmasters'FullControl]
+  type Scopes WebmastersSitesDelete = '[Webmasters'FullControl]
   requestClient WebmastersSitesDelete {..} =
-    go
-      siteUrl
-      (Core.Just Core.AltJSON)
-      webmasterToolsService
+    go siteUrl (Core.Just Core.AltJSON) webmasterToolsService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy WebmastersSitesDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy WebmastersSitesDeleteResource)
           Core.mempty

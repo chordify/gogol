@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudProfiler.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudProfiler.Internal.Product
@@ -38,6 +36,10 @@ module Gogol.CloudProfiler.Internal.Product
     Deployment_Labels (..),
     newDeployment_Labels,
 
+    -- * ListProfilesResponse
+    ListProfilesResponse (..),
+    newListProfilesResponse,
+
     -- * Profile
     Profile (..),
     newProfile,
@@ -49,7 +51,7 @@ module Gogol.CloudProfiler.Internal.Product
 where
 
 import Gogol.CloudProfiler.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | CreateProfileRequest describes a profile resource online creation request. The deployment field must be populated. The profile_type specifies the list of profile types supported by the agent. The creation call will hang until a profile of one of these types needs to be collected.
 --
@@ -66,7 +68,10 @@ data CreateProfileRequest = CreateProfileRequest
 newCreateProfileRequest ::
   CreateProfileRequest
 newCreateProfileRequest =
-  CreateProfileRequest {deployment = Core.Nothing, profileType = Core.Nothing}
+  CreateProfileRequest
+    { deployment = Core.Nothing,
+      profileType = Core.Nothing
+    }
 
 instance Core.FromJSON CreateProfileRequest where
   parseJSON =
@@ -135,8 +140,7 @@ instance Core.ToJSON Deployment where
 --
 -- /See:/ 'newDeployment_Labels' smart constructor.
 newtype Deployment_Labels = Deployment_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -145,18 +149,61 @@ newDeployment_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Deployment_Labels
-newDeployment_Labels additional = Deployment_Labels {additional = additional}
+newDeployment_Labels additional =
+  Deployment_Labels {additional = additional}
 
 instance Core.FromJSON Deployment_Labels where
   parseJSON =
     Core.withObject
       "Deployment_Labels"
-      ( \o ->
-          Deployment_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Deployment_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Deployment_Labels where
   toJSON Deployment_Labels {..} = Core.toJSON additional
+
+-- | ListProfileResponse contains the list of collected profiles for deployments in projects which the user has permissions to view.
+--
+-- /See:/ 'newListProfilesResponse' smart constructor.
+data ListProfilesResponse = ListProfilesResponse
+  { -- | Token to receive the next page of results. This field maybe empty if there are no more profiles to fetch.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | List of profiles fetched.
+    profiles :: (Core.Maybe [Profile]),
+    -- | Number of profiles that were skipped in the current page since they were not able to be fetched successfully. This should typically be zero. A non-zero value may indicate a transient failure, in which case if the number is too high for your use case, the call may be retried.
+    skippedProfiles :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListProfilesResponse' with the minimum fields required to make a request.
+newListProfilesResponse ::
+  ListProfilesResponse
+newListProfilesResponse =
+  ListProfilesResponse
+    { nextPageToken = Core.Nothing,
+      profiles = Core.Nothing,
+      skippedProfiles = Core.Nothing
+    }
+
+instance Core.FromJSON ListProfilesResponse where
+  parseJSON =
+    Core.withObject
+      "ListProfilesResponse"
+      ( \o ->
+          ListProfilesResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "profiles")
+            Core.<*> (o Core..:? "skippedProfiles")
+      )
+
+instance Core.ToJSON ListProfilesResponse where
+  toJSON ListProfilesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("profiles" Core..=) Core.<$> profiles,
+            ("skippedProfiles" Core..=) Core.<$> skippedProfiles
+          ]
+      )
 
 -- | Profile resource.
 --
@@ -173,7 +220,9 @@ data Profile = Profile
     -- | Input only. Profile bytes, as a gzip compressed serialized proto, the format is https:\/\/github.com\/google\/pprof\/blob\/master\/proto\/profile.proto.
     profileBytes :: (Core.Maybe Core.Base64),
     -- | Type of profile. For offline mode, this must be specified when creating the profile. For online mode it is assigned and returned by the server.
-    profileType :: (Core.Maybe Profile_ProfileType)
+    profileType :: (Core.Maybe Profile_ProfileType),
+    -- | Output only. Start time for the profile. This output is only present in response from the ListProfiles method.
+    startTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -187,7 +236,8 @@ newProfile =
       labels = Core.Nothing,
       name = Core.Nothing,
       profileBytes = Core.Nothing,
-      profileType = Core.Nothing
+      profileType = Core.Nothing,
+      startTime = Core.Nothing
     }
 
 instance Core.FromJSON Profile where
@@ -202,6 +252,7 @@ instance Core.FromJSON Profile where
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "profileBytes")
             Core.<*> (o Core..:? "profileType")
+            Core.<*> (o Core..:? "startTime")
       )
 
 instance Core.ToJSON Profile where
@@ -213,7 +264,8 @@ instance Core.ToJSON Profile where
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
             ("profileBytes" Core..=) Core.<$> profileBytes,
-            ("profileType" Core..=) Core.<$> profileType
+            ("profileType" Core..=) Core.<$> profileType,
+            ("startTime" Core..=) Core.<$> startTime
           ]
       )
 
@@ -221,8 +273,7 @@ instance Core.ToJSON Profile where
 --
 -- /See:/ 'newProfile_Labels' smart constructor.
 newtype Profile_Labels = Profile_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -231,15 +282,14 @@ newProfile_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Profile_Labels
-newProfile_Labels additional = Profile_Labels {additional = additional}
+newProfile_Labels additional =
+  Profile_Labels {additional = additional}
 
 instance Core.FromJSON Profile_Labels where
   parseJSON =
     Core.withObject
       "Profile_Labels"
-      ( \o ->
-          Profile_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Profile_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Profile_Labels where
   toJSON Profile_Labels {..} = Core.toJSON additional

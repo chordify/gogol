@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsCalendar.Calendar.Channels.Stop
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsCalendar.Calendar.Channels.Stop
 where
 
 import Gogol.AppsCalendar.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @calendar.channels.stop@ method which the
 -- 'CalendarChannelsStop' request conforms to.
@@ -67,27 +65,32 @@ newCalendarChannelsStop ::
   -- |  Multipart request metadata. See 'payload'.
   Channel ->
   CalendarChannelsStop
-newCalendarChannelsStop payload = CalendarChannelsStop {payload = payload}
+newCalendarChannelsStop payload =
+  CalendarChannelsStop {payload = payload}
 
 instance Core.GoogleRequest CalendarChannelsStop where
   type Rs CalendarChannelsStop = ()
   type
     Scopes CalendarChannelsStop =
       '[ Calendar'FullControl,
+         Calendar'Acls,
+         Calendar'Acls'Readonly,
+         Calendar'App'Created,
+         Calendar'Calendarlist,
+         Calendar'Calendarlist'Readonly,
          Calendar'Events,
+         Calendar'Events'Freebusy,
+         Calendar'Events'Owned,
+         Calendar'Events'Owned'Readonly,
+         Calendar'Events'Public'Readonly,
          Calendar'Events'Readonly,
          Calendar'Readonly,
          Calendar'Settings'Readonly
        ]
   requestClient CalendarChannelsStop {..} =
-    go
-      (Core.Just Core.AltJSON)
-      payload
-      appsCalendarService
+    go (Core.Just Core.AltJSON) payload appsCalendarService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy CalendarChannelsStopResource
-          )
+          (Core.Proxy :: Core.Proxy CalendarChannelsStopResource)
           Core.mempty

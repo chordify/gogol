@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Reseller.Subscriptions.Activate
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsReseller.Reseller.Subscriptions.Activate
 where
 
 import Gogol.AppsReseller.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reseller.subscriptions.activate@ method which the
 -- 'ResellerSubscriptionsActivate' request conforms to.
@@ -100,14 +98,9 @@ newResellerSubscriptionsActivate customerId subscriptionId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ResellerSubscriptionsActivate
-  where
+instance Core.GoogleRequest ResellerSubscriptionsActivate where
   type Rs ResellerSubscriptionsActivate = Subscription
-  type
-    Scopes ResellerSubscriptionsActivate =
-      '[Apps'Order]
+  type Scopes ResellerSubscriptionsActivate = '[Apps'Order]
   requestClient ResellerSubscriptionsActivate {..} =
     go
       customerId
@@ -122,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ResellerSubscriptionsActivateResource
-          )
+          (Core.Proxy :: Core.Proxy ResellerSubscriptionsActivateResource)
           Core.mempty

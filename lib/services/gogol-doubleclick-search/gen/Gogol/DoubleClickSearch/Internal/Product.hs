@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickSearch.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DoubleClickSearch.Internal.Product
@@ -105,7 +103,7 @@ module Gogol.DoubleClickSearch.Internal.Product
 where
 
 import Gogol.DoubleClickSearch.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A message containing availability data relevant to DoubleClick Search.
 --
@@ -148,19 +146,14 @@ instance Core.FromJSON Availability where
       "Availability"
       ( \o ->
           Availability
-            Core.<$> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "agencyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "availabilityTimestamp"
+            Core.<$> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "agencyId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "availabilityTimestamp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "customerId")
-            Core.<*> ( o Core..:? "segmentationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "segmentationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "segmentationName")
             Core.<*> (o Core..:? "segmentationType")
       )
@@ -169,19 +162,17 @@ instance Core.ToJSON Availability where
   toJSON Availability {..} =
     Core.object
       ( Core.catMaybes
-          [ ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("agencyId" Core..=) Core.. Core.AsText
-              Core.<$> agencyId,
-            ("availabilityTimestamp" Core..=) Core.. Core.AsText
+          [ ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("agencyId" Core..=) Core.. Core.AsText Core.<$> agencyId,
+            ("availabilityTimestamp" Core..=)
+              Core.. Core.AsText
               Core.<$> availabilityTimestamp,
             ("customerId" Core..=) Core.<$> customerId,
-            ("segmentationId" Core..=) Core.. Core.AsText
+            ("segmentationId" Core..=)
+              Core.. Core.AsText
               Core.<$> segmentationId,
-            ("segmentationName" Core..=)
-              Core.<$> segmentationName,
-            ("segmentationType" Core..=)
-              Core.<$> segmentationType
+            ("segmentationName" Core..=) Core.<$> segmentationName,
+            ("segmentationType" Core..=) Core.<$> segmentationType
           ]
       )
 
@@ -193,6 +184,8 @@ data Conversion = Conversion
     adGroupId :: (Core.Maybe Core.Int64),
     -- | DS ad ID.
     adId :: (Core.Maybe Core.Int64),
+    -- | Represents consent for core platform services (CPS) preferences in settings. No default value. Acceptable values are: GRANTED: The desired consent status is to grant. Read the CPS preferences from GTE settings. DENIED: The desired consent status is to deny; CPS list is empty.
+    adUserDataConsent :: (Core.Maybe Conversion_AdUserDataConsent),
     -- | DS advertiser ID.
     advertiserId :: (Core.Maybe Core.Int64),
     -- | DS agency ID.
@@ -267,6 +260,7 @@ newConversion =
   Conversion
     { adGroupId = Core.Nothing,
       adId = Core.Nothing,
+      adUserDataConsent = Core.Nothing,
       advertiserId = Core.Nothing,
       agencyId = Core.Nothing,
       attributionModel = Core.Nothing,
@@ -307,63 +301,42 @@ instance Core.FromJSON Conversion where
       "Conversion"
       ( \o ->
           Conversion
-            Core.<$> ( o Core..:? "adGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "adId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "agencyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "adGroupId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "adId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "adUserDataConsent")
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "agencyId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "attributionModel")
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "channel")
             Core.<*> (o Core..:? "clickId")
             Core.<*> (o Core..:? "conversionId")
-            Core.<*> ( o Core..:? "conversionModifiedTimestamp"
+            Core.<*> ( o
+                         Core..:? "conversionModifiedTimestamp"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "conversionTimestamp")
-            Core.<*> ( o Core..:? "countMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "criterionId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "countMillis" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "criterionId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "customDimension")
             Core.<*> (o Core..:? "customMetric")
             Core.<*> (o Core..:? "customerId")
             Core.<*> (o Core..:? "deviceType")
-            Core.<*> ( o Core..:? "dsConversionId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "engineAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "dsConversionId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "engineAccountId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "floodlightOrderId")
-            Core.<*> ( o Core..:? "inventoryAccountId"
+            Core.<*> ( o
+                         Core..:? "inventoryAccountId"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "productCountry")
-            Core.<*> ( o Core..:? "productGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "productGroupId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "productId")
             Core.<*> (o Core..:? "productLanguage")
-            Core.<*> ( o Core..:? "quantityMillis"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "quantityMillis" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "revenueMicros")
-            Core.<*> ( o Core..:? "segmentationId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "segmentationId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "segmentationName")
             Core.<*> (o Core..:? "segmentationType")
             Core.<*> (o Core..:? "state")
@@ -375,56 +348,52 @@ instance Core.ToJSON Conversion where
   toJSON Conversion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adGroupId" Core..=) Core.. Core.AsText
-              Core.<$> adGroupId,
+          [ ("adGroupId" Core..=) Core.. Core.AsText Core.<$> adGroupId,
             ("adId" Core..=) Core.. Core.AsText Core.<$> adId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("agencyId" Core..=) Core.. Core.AsText
-              Core.<$> agencyId,
-            ("attributionModel" Core..=)
-              Core.<$> attributionModel,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
+            ("adUserDataConsent" Core..=) Core.<$> adUserDataConsent,
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("agencyId" Core..=) Core.. Core.AsText Core.<$> agencyId,
+            ("attributionModel" Core..=) Core.<$> attributionModel,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
             ("channel" Core..=) Core.<$> channel,
             ("clickId" Core..=) Core.<$> clickId,
             ("conversionId" Core..=) Core.<$> conversionId,
             ("conversionModifiedTimestamp" Core..=)
               Core.. Core.AsText
               Core.<$> conversionModifiedTimestamp,
-            ("conversionTimestamp" Core..=)
-              Core.<$> conversionTimestamp,
-            ("countMillis" Core..=) Core.. Core.AsText
-              Core.<$> countMillis,
-            ("criterionId" Core..=) Core.. Core.AsText
-              Core.<$> criterionId,
+            ("conversionTimestamp" Core..=) Core.<$> conversionTimestamp,
+            ("countMillis" Core..=) Core.. Core.AsText Core.<$> countMillis,
+            ("criterionId" Core..=) Core.. Core.AsText Core.<$> criterionId,
             ("currencyCode" Core..=) Core.<$> currencyCode,
             ("customDimension" Core..=) Core.<$> customDimension,
             ("customMetric" Core..=) Core.<$> customMetric,
             ("customerId" Core..=) Core.<$> customerId,
             ("deviceType" Core..=) Core.<$> deviceType,
-            ("dsConversionId" Core..=) Core.. Core.AsText
+            ("dsConversionId" Core..=)
+              Core.. Core.AsText
               Core.<$> dsConversionId,
-            ("engineAccountId" Core..=) Core.. Core.AsText
+            ("engineAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> engineAccountId,
-            ("floodlightOrderId" Core..=)
-              Core.<$> floodlightOrderId,
-            ("inventoryAccountId" Core..=) Core.. Core.AsText
+            ("floodlightOrderId" Core..=) Core.<$> floodlightOrderId,
+            ("inventoryAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> inventoryAccountId,
             ("productCountry" Core..=) Core.<$> productCountry,
-            ("productGroupId" Core..=) Core.. Core.AsText
+            ("productGroupId" Core..=)
+              Core.. Core.AsText
               Core.<$> productGroupId,
             ("productId" Core..=) Core.<$> productId,
             ("productLanguage" Core..=) Core.<$> productLanguage,
-            ("quantityMillis" Core..=) Core.. Core.AsText
+            ("quantityMillis" Core..=)
+              Core.. Core.AsText
               Core.<$> quantityMillis,
             ("revenueMicros" Core..=) Core.<$> revenueMicros,
-            ("segmentationId" Core..=) Core.. Core.AsText
+            ("segmentationId" Core..=)
+              Core.. Core.AsText
               Core.<$> segmentationId,
-            ("segmentationName" Core..=)
-              Core.<$> segmentationName,
-            ("segmentationType" Core..=)
-              Core.<$> segmentationType,
+            ("segmentationName" Core..=) Core.<$> segmentationName,
+            ("segmentationType" Core..=) Core.<$> segmentationType,
             ("state" Core..=) Core.<$> state,
             ("storeId" Core..=) Core.<$> storeId,
             ("type" Core..=) Core.<$> type'
@@ -481,7 +450,8 @@ data CustomDimension = CustomDimension
 -- | Creates a value of 'CustomDimension' with the minimum fields required to make a request.
 newCustomDimension ::
   CustomDimension
-newCustomDimension = CustomDimension {name = Core.Nothing, value = Core.Nothing}
+newCustomDimension =
+  CustomDimension {name = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON CustomDimension where
   parseJSON =
@@ -489,16 +459,15 @@ instance Core.FromJSON CustomDimension where
       "CustomDimension"
       ( \o ->
           CustomDimension
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON CustomDimension where
   toJSON CustomDimension {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | A message containing the custom metric.
@@ -515,7 +484,8 @@ data CustomMetric = CustomMetric
 -- | Creates a value of 'CustomMetric' with the minimum fields required to make a request.
 newCustomMetric ::
   CustomMetric
-newCustomMetric = CustomMetric {name = Core.Nothing, value = Core.Nothing}
+newCustomMetric =
+  CustomMetric {name = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON CustomMetric where
   parseJSON =
@@ -523,16 +493,15 @@ instance Core.FromJSON CustomMetric where
       "CustomMetric"
       ( \o ->
           CustomMetric
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON CustomMetric where
   toJSON CustomMetric {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
-            ("value" Core..=) Core.<$> value
-          ]
+          [("name" Core..=) Core.<$> name, ("value" Core..=) Core.<$> value]
       )
 
 -- | File returned to https:\/\/developers.google.com\/search-ads\/v2\/reference\/reports\/getIdMappingFile.
@@ -548,9 +517,7 @@ newIdMappingFile = IdMappingFile
 
 instance Core.FromJSON IdMappingFile where
   parseJSON =
-    Core.withObject
-      "IdMappingFile"
-      (\o -> Core.pure IdMappingFile)
+    Core.withObject "IdMappingFile" (\o -> Core.pure IdMappingFile)
 
 instance Core.ToJSON IdMappingFile where
   toJSON = Core.const Core.emptyObject
@@ -624,10 +591,8 @@ instance Core.ToJSON Report where
             ("request" Core..=) Core.<$> request',
             ("rowCount" Core..=) Core.<$> rowCount,
             ("rows" Core..=) Core.<$> rows,
-            ("statisticsCurrencyCode" Core..=)
-              Core.<$> statisticsCurrencyCode,
-            ("statisticsTimeZone" Core..=)
-              Core.<$> statisticsTimeZone
+            ("statisticsCurrencyCode" Core..=) Core.<$> statisticsCurrencyCode,
+            ("statisticsTimeZone" Core..=) Core.<$> statisticsTimeZone
           ]
       )
 
@@ -653,9 +618,7 @@ instance Core.FromJSON Report_FilesItem where
       "Report_FilesItem"
       ( \o ->
           Report_FilesItem
-            Core.<$> ( o Core..:? "byteCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "byteCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "url")
       )
 
@@ -663,8 +626,7 @@ instance Core.ToJSON Report_FilesItem where
   toJSON Report_FilesItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("byteCount" Core..=) Core.. Core.AsText
-              Core.<$> byteCount,
+          [ ("byteCount" Core..=) Core.. Core.AsText Core.<$> byteCount,
             ("url" Core..=) Core.<$> url
           ]
       )
@@ -736,10 +698,8 @@ instance Core.ToJSON ReportApiColumnSpec where
     Core.object
       ( Core.catMaybes
           [ ("columnName" Core..=) Core.<$> columnName,
-            ("customDimensionName" Core..=)
-              Core.<$> customDimensionName,
-            ("customMetricName" Core..=)
-              Core.<$> customMetricName,
+            ("customDimensionName" Core..=) Core.<$> customDimensionName,
+            ("customMetricName" Core..=) Core.<$> customMetricName,
             ("endDate" Core..=) Core.<$> endDate,
             ("groupByColumn" Core..=) Core.<$> groupByColumn,
             ("headerText" Core..=) Core.<$> headerText,
@@ -836,21 +796,17 @@ instance Core.ToJSON ReportRequest where
           [ ("columns" Core..=) Core.<$> columns,
             ("downloadFormat" Core..=) Core.<$> downloadFormat,
             ("filters" Core..=) Core.<$> filters,
-            ("includeDeletedEntities" Core..=)
-              Core.<$> includeDeletedEntities,
-            ("includeRemovedEntities" Core..=)
-              Core.<$> includeRemovedEntities,
+            ("includeDeletedEntities" Core..=) Core.<$> includeDeletedEntities,
+            ("includeRemovedEntities" Core..=) Core.<$> includeRemovedEntities,
             ("maxRowsPerFile" Core..=) Core.<$> maxRowsPerFile,
             ("orderBy" Core..=) Core.<$> orderBy,
             ("reportScope" Core..=) Core.<$> reportScope,
             ("reportType" Core..=) Core.<$> reportType,
             ("rowCount" Core..=) Core.<$> rowCount,
             ("startRow" Core..=) Core.<$> startRow,
-            ("statisticsCurrency" Core..=)
-              Core.<$> statisticsCurrency,
+            ("statisticsCurrency" Core..=) Core.<$> statisticsCurrency,
             ("timeRange" Core..=) Core.<$> timeRange,
-            ("verifySingleTimeZone" Core..=)
-              Core.<$> verifySingleTimeZone
+            ("verifySingleTimeZone" Core..=) Core.<$> verifySingleTimeZone
           ]
       )
 
@@ -911,7 +867,10 @@ data ReportRequest_OrderByItem = ReportRequest_OrderByItem
 newReportRequest_OrderByItem ::
   ReportRequest_OrderByItem
 newReportRequest_OrderByItem =
-  ReportRequest_OrderByItem {column = Core.Nothing, sortOrder = Core.Nothing}
+  ReportRequest_OrderByItem
+    { column = Core.Nothing,
+      sortOrder = Core.Nothing
+    }
 
 instance Core.FromJSON ReportRequest_OrderByItem where
   parseJSON =
@@ -973,46 +932,28 @@ instance Core.FromJSON ReportRequest_ReportScope where
       "ReportRequest_ReportScope"
       ( \o ->
           ReportRequest_ReportScope
-            Core.<$> ( o Core..:? "adGroupId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "adId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "advertiserId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "agencyId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "campaignId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "engineAccountId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "keywordId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "adGroupId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "adId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "advertiserId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "agencyId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "campaignId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "engineAccountId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "keywordId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ReportRequest_ReportScope where
   toJSON ReportRequest_ReportScope {..} =
     Core.object
       ( Core.catMaybes
-          [ ("adGroupId" Core..=) Core.. Core.AsText
-              Core.<$> adGroupId,
+          [ ("adGroupId" Core..=) Core.. Core.AsText Core.<$> adGroupId,
             ("adId" Core..=) Core.. Core.AsText Core.<$> adId,
-            ("advertiserId" Core..=) Core.. Core.AsText
-              Core.<$> advertiserId,
-            ("agencyId" Core..=) Core.. Core.AsText
-              Core.<$> agencyId,
-            ("campaignId" Core..=) Core.. Core.AsText
-              Core.<$> campaignId,
-            ("engineAccountId" Core..=) Core.. Core.AsText
+            ("advertiserId" Core..=) Core.. Core.AsText Core.<$> advertiserId,
+            ("agencyId" Core..=) Core.. Core.AsText Core.<$> agencyId,
+            ("campaignId" Core..=) Core.. Core.AsText Core.<$> campaignId,
+            ("engineAccountId" Core..=)
+              Core.. Core.AsText
               Core.<$> engineAccountId,
-            ("keywordId" Core..=) Core.. Core.AsText
-              Core.<$> keywordId
+            ("keywordId" Core..=) Core.. Core.AsText Core.<$> keywordId
           ]
       )
 
@@ -1036,7 +977,8 @@ newReportRequest_TimeRange ::
   ReportRequest_TimeRange
 newReportRequest_TimeRange =
   ReportRequest_TimeRange
-    { changedAttributesSinceTimestamp = Core.Nothing,
+    { changedAttributesSinceTimestamp =
+        Core.Nothing,
       changedMetricsSinceTimestamp = Core.Nothing,
       endDate = Core.Nothing,
       startDate = Core.Nothing
@@ -1150,7 +1092,8 @@ data SavedColumnList = SavedColumnList
 -- | Creates a value of 'SavedColumnList' with the minimum fields required to make a request.
 newSavedColumnList ::
   SavedColumnList
-newSavedColumnList = SavedColumnList {items = Core.Nothing, kind = Core.Nothing}
+newSavedColumnList =
+  SavedColumnList {items = Core.Nothing, kind = Core.Nothing}
 
 instance Core.FromJSON SavedColumnList where
   parseJSON =
@@ -1158,16 +1101,15 @@ instance Core.FromJSON SavedColumnList where
       "SavedColumnList"
       ( \o ->
           SavedColumnList
-            Core.<$> (o Core..:? "items") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "items")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON SavedColumnList where
   toJSON SavedColumnList {..} =
     Core.object
       ( Core.catMaybes
-          [ ("items" Core..=) Core.<$> items,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("items" Core..=) Core.<$> items, ("kind" Core..=) Core.<$> kind]
       )
 
 -- | The request to update availability.
@@ -1190,8 +1132,7 @@ instance Core.FromJSON UpdateAvailabilityRequest where
     Core.withObject
       "UpdateAvailabilityRequest"
       ( \o ->
-          UpdateAvailabilityRequest
-            Core.<$> (o Core..:? "availabilities")
+          UpdateAvailabilityRequest Core.<$> (o Core..:? "availabilities")
       )
 
 instance Core.ToJSON UpdateAvailabilityRequest where
@@ -1221,8 +1162,7 @@ instance Core.FromJSON UpdateAvailabilityResponse where
     Core.withObject
       "UpdateAvailabilityResponse"
       ( \o ->
-          UpdateAvailabilityResponse
-            Core.<$> (o Core..:? "availabilities")
+          UpdateAvailabilityResponse Core.<$> (o Core..:? "availabilities")
       )
 
 instance Core.ToJSON UpdateAvailabilityResponse where

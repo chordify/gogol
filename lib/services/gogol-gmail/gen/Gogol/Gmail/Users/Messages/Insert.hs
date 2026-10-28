@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Messages.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Messages.Insert
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.messages.insert@ method which the
 -- 'GmailUsersMessagesInsert' request conforms to.
@@ -63,24 +61,24 @@ type GmailUsersMessagesInsertResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Post '[Core.JSON] Message
     Core.:<|> "upload"
-      Core.:> "gmail"
-      Core.:> "v1"
-      Core.:> "users"
-      Core.:> Core.Capture "userId" Core.Text
-      Core.:> "messages"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "deleted" Core.Bool
-      Core.:> Core.QueryParam
-                "internalDateSource"
-                UsersMessagesInsertInternalDateSource
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Message
-      Core.:> Core.Post '[Core.JSON] Message
+    Core.:> "gmail"
+    Core.:> "v1"
+    Core.:> "users"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "messages"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "deleted" Core.Bool
+    Core.:> Core.QueryParam
+              "internalDateSource"
+              UsersMessagesInsertInternalDateSource
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Message
+    Core.:> Core.Post '[Core.JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to @IMAP APPEND@, bypassing most scanning and classification. Does not send a message.
 --
@@ -118,7 +116,8 @@ newGmailUsersMessagesInsert payload =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       deleted = Core.False,
-      internalDateSource = UsersMessagesInsertInternalDateSource_ReceivedTime,
+      internalDateSource =
+        UsersMessagesInsertInternalDateSource_ReceivedTime,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing,
@@ -146,42 +145,34 @@ instance Core.GoogleRequest GmailUsersMessagesInsert where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersMessagesInsertResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesInsertResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload GmailUsersMessagesInsert)
   where
+  type Rs (Core.MediaUpload GmailUsersMessagesInsert) = Message
   type
-    Rs (Core.MediaUpload GmailUsersMessagesInsert) =
-      Message
-  type
-    Scopes
-      (Core.MediaUpload GmailUsersMessagesInsert) =
+    Scopes (Core.MediaUpload GmailUsersMessagesInsert) =
       Core.Scopes GmailUsersMessagesInsert
-  requestClient
-    (Core.MediaUpload GmailUsersMessagesInsert {..} body) =
-      go
-        userId
-        xgafv
-        accessToken
-        callback
-        (Core.Just deleted)
-        (Core.Just internalDateSource)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        gmailService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy GmailUsersMessagesInsertResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload GmailUsersMessagesInsert {..} body) =
+    go
+      userId
+      xgafv
+      accessToken
+      callback
+      (Core.Just deleted)
+      (Core.Just internalDateSource)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      gmailService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy GmailUsersMessagesInsertResource)
+          Core.mempty

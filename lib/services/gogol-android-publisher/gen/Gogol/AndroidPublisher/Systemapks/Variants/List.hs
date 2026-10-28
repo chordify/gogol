@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Systemapks.Variants.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Systemapks.Variants.List
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.systemapks.variants.list@ method which the
 -- 'AndroidPublisherSystemapksVariantsList' request conforms to.
@@ -99,33 +97,28 @@ newAndroidPublisherSystemapksVariantsList packageName versionCode =
       versionCode = versionCode
     }
 
-instance
-  Core.GoogleRequest
-    AndroidPublisherSystemapksVariantsList
-  where
+instance Core.GoogleRequest AndroidPublisherSystemapksVariantsList where
   type
     Rs AndroidPublisherSystemapksVariantsList =
       SystemApksListResponse
   type
     Scopes AndroidPublisherSystemapksVariantsList =
       '[Androidpublisher'FullControl]
-  requestClient
-    AndroidPublisherSystemapksVariantsList {..} =
-      go
-        packageName
-        versionCode
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        androidPublisherService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AndroidPublisherSystemapksVariantsListResource
-            )
-            Core.mempty
+  requestClient AndroidPublisherSystemapksVariantsList {..} =
+    go
+      packageName
+      versionCode
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      androidPublisherService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AndroidPublisherSystemapksVariantsListResource
+          )
+          Core.mempty

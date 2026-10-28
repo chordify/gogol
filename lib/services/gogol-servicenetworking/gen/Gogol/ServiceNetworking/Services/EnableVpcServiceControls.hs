@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceNetworking.Services.EnableVpcServiceControls
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,26 +37,21 @@ module Gogol.ServiceNetworking.Services.EnableVpcServiceControls
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ServiceNetworking.Types
 
 -- | A resource alias for @servicenetworking.services.enableVpcServiceControls@ method which the
 -- 'ServiceNetworkingServicesEnableVpcServiceControls' request conforms to.
 type ServiceNetworkingServicesEnableVpcServiceControlsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "parent"
-              "enableVpcServiceControls"
-              Core.Text
+    Core.:> Core.CaptureMode "parent" "enableVpcServiceControls" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              EnableVpcServiceControlsRequest
+    Core.:> Core.ReqBody '[Core.JSON] EnableVpcServiceControlsRequest
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Enables VPC service controls for a connection.
@@ -91,7 +84,8 @@ newServiceNetworkingServicesEnableVpcServiceControls ::
   ServiceNetworkingServicesEnableVpcServiceControls
 newServiceNetworkingServicesEnableVpcServiceControls parent payload =
   ServiceNetworkingServicesEnableVpcServiceControls
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -105,30 +99,27 @@ instance
     ServiceNetworkingServicesEnableVpcServiceControls
   where
   type
-    Rs
-      ServiceNetworkingServicesEnableVpcServiceControls =
+    Rs ServiceNetworkingServicesEnableVpcServiceControls =
       Operation
   type
-    Scopes
-      ServiceNetworkingServicesEnableVpcServiceControls =
+    Scopes ServiceNetworkingServicesEnableVpcServiceControls =
       '[CloudPlatform'FullControl, Service'Management]
-  requestClient
-    ServiceNetworkingServicesEnableVpcServiceControls {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        serviceNetworkingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ServiceNetworkingServicesEnableVpcServiceControlsResource
-            )
-            Core.mempty
+  requestClient ServiceNetworkingServicesEnableVpcServiceControls {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      serviceNetworkingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ServiceNetworkingServicesEnableVpcServiceControlsResource
+          )
+          Core.mempty

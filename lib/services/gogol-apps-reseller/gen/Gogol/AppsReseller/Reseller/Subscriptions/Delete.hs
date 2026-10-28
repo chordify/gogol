@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppsReseller.Reseller.Subscriptions.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppsReseller.Reseller.Subscriptions.Delete
 where
 
 import Gogol.AppsReseller.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @reseller.subscriptions.delete@ method which the
 -- 'ResellerSubscriptionsDelete' request conforms to.
@@ -52,9 +50,7 @@ type ResellerSubscriptionsDeleteResource =
     Core.:> Core.Capture "customerId" Core.Text
     Core.:> "subscriptions"
     Core.:> Core.Capture "subscriptionId" Core.Text
-    Core.:> Core.QueryParam
-              "deletionType"
-              SubscriptionsDeleteDeletionType
+    Core.:> Core.QueryParam "deletionType" SubscriptionsDeleteDeletionType
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -95,26 +91,24 @@ newResellerSubscriptionsDelete ::
   -- |  This is a required property. The @subscriptionId@ is the subscription identifier and is unique for each customer. Since a @subscriptionId@ changes when a subscription is updated, we recommend to not use this ID as a key for persistent data. And the @subscriptionId@ can be found using the retrieve all reseller subscriptions method. See 'subscriptionId'.
   Core.Text ->
   ResellerSubscriptionsDelete
-newResellerSubscriptionsDelete customerId deletionType subscriptionId =
-  ResellerSubscriptionsDelete
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      customerId = customerId,
-      deletionType = deletionType,
-      subscriptionId = subscriptionId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newResellerSubscriptionsDelete
+  customerId
+  deletionType
+  subscriptionId =
     ResellerSubscriptionsDelete
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        customerId = customerId,
+        deletionType = deletionType,
+        subscriptionId = subscriptionId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ResellerSubscriptionsDelete where
   type Rs ResellerSubscriptionsDelete = ()
-  type
-    Scopes ResellerSubscriptionsDelete =
-      '[Apps'Order]
+  type Scopes ResellerSubscriptionsDelete = '[Apps'Order]
   requestClient ResellerSubscriptionsDelete {..} =
     go
       customerId
@@ -130,7 +124,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ResellerSubscriptionsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ResellerSubscriptionsDeleteResource)
           Core.mempty

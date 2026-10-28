@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BinaryAuthorization.Projects.Attestors.GetIamPolicy
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.attestors.getIamPolicy@ method which the
 -- 'BinaryAuthorizationProjectsAttestorsGetIamPolicy' request conforms to.
@@ -50,9 +48,7 @@ type BinaryAuthorizationProjectsAttestorsGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "options.requestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "options.requestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -86,7 +82,8 @@ newBinaryAuthorizationProjectsAttestorsGetIamPolicy ::
   BinaryAuthorizationProjectsAttestorsGetIamPolicy
 newBinaryAuthorizationProjectsAttestorsGetIamPolicy resource =
   BinaryAuthorizationProjectsAttestorsGetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       optionsRequestedPolicyVersion = Core.Nothing,
@@ -100,30 +97,27 @@ instance
     BinaryAuthorizationProjectsAttestorsGetIamPolicy
   where
   type
-    Rs
-      BinaryAuthorizationProjectsAttestorsGetIamPolicy =
+    Rs BinaryAuthorizationProjectsAttestorsGetIamPolicy =
       IamPolicy
   type
-    Scopes
-      BinaryAuthorizationProjectsAttestorsGetIamPolicy =
+    Scopes BinaryAuthorizationProjectsAttestorsGetIamPolicy =
       '[CloudPlatform'FullControl]
-  requestClient
-    BinaryAuthorizationProjectsAttestorsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        optionsRequestedPolicyVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        binaryAuthorizationService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BinaryAuthorizationProjectsAttestorsGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient BinaryAuthorizationProjectsAttestorsGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      optionsRequestedPolicyVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      binaryAuthorizationService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                BinaryAuthorizationProjectsAttestorsGetIamPolicyResource
+          )
+          Core.mempty

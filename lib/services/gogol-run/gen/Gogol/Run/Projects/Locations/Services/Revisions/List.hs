@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Services.Revisions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists Revisions from a given Service, or from a given location.
+-- Lists Revisions from a given Service, or from a given location. Results are sorted by creation time, descending.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.revisions.list@.
 module Gogol.Run.Projects.Locations.Services.Revisions.List
@@ -39,7 +37,7 @@ module Gogol.Run.Projects.Locations.Services.Revisions.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.services.revisions.list@ method which the
@@ -57,11 +55,9 @@ type RunProjectsLocationsServicesRevisionsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudRunV2ListRevisionsResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudRunV2ListRevisionsResponse
 
--- | Lists Revisions from a given Service, or from a given location.
+-- | Lists Revisions from a given Service, or from a given location. Results are sorted by creation time, descending.
 --
 -- /See:/ 'newRunProjectsLocationsServicesRevisionsList' smart constructor.
 data RunProjectsLocationsServicesRevisionsList = RunProjectsLocationsServicesRevisionsList
@@ -114,25 +110,23 @@ instance
   type
     Scopes RunProjectsLocationsServicesRevisionsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    RunProjectsLocationsServicesRevisionsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        showDeleted
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        runService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RunProjectsLocationsServicesRevisionsListResource
-            )
-            Core.mempty
+  requestClient RunProjectsLocationsServicesRevisionsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      showDeleted
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      runService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RunProjectsLocationsServicesRevisionsListResource
+          )
+          Core.mempty

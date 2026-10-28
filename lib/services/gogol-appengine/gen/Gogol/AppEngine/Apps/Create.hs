@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Create
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.create@ method which the
 -- 'AppEngineAppsCreate' request conforms to.
@@ -50,7 +48,6 @@ type AppEngineAppsCreateResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam "parent" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -67,8 +64,6 @@ data AppEngineAppsCreate = AppEngineAppsCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The project and location in which the application should be created, specified in the format projects\//\/locations\//
-    parent :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Application,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
@@ -88,7 +83,6 @@ newAppEngineAppsCreate payload =
     { xgafv = Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
-      parent = Core.Nothing,
       payload = payload,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
@@ -96,15 +90,12 @@ newAppEngineAppsCreate payload =
 
 instance Core.GoogleRequest AppEngineAppsCreate where
   type Rs AppEngineAppsCreate = Operation
-  type
-    Scopes AppEngineAppsCreate =
-      '[CloudPlatform'FullControl]
+  type Scopes AppEngineAppsCreate = '[CloudPlatform'FullControl]
   requestClient AppEngineAppsCreate {..} =
     go
       xgafv
       accessToken
       callback
-      parent
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -113,7 +104,5 @@ instance Core.GoogleRequest AppEngineAppsCreate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AppEngineAppsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy AppEngineAppsCreateResource)
           Core.mempty

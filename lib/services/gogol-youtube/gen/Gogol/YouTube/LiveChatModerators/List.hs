@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.LiveChatModerators.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.LiveChatModerators.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.liveChatModerators.list@ method which the
@@ -59,9 +57,7 @@ type YouTubeLiveChatModeratorsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              LiveChatModeratorListResponse
+    Core.:> Core.Get '[Core.JSON] LiveChatModeratorListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -108,19 +104,13 @@ newYouTubeLiveChatModeratorsList liveChatId part =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeLiveChatModeratorsList
-  where
+instance Core.GoogleRequest YouTubeLiveChatModeratorsList where
   type
     Rs YouTubeLiveChatModeratorsList =
       LiveChatModeratorListResponse
   type
     Scopes YouTubeLiveChatModeratorsList =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Readonly
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Readonly]
   requestClient YouTubeLiveChatModeratorsList {..} =
     go
       (Core.Just liveChatId)
@@ -137,7 +127,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeLiveChatModeratorsListResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeLiveChatModeratorsListResource)
           Core.mempty

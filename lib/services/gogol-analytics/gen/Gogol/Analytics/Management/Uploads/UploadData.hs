@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Analytics.Management.Uploads.UploadData
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Analytics.Management.Uploads.UploadData
 where
 
 import Gogol.Analytics.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @analytics.management.uploads.uploadData@ method which the
 -- 'AnalyticsManagementUploadsUploadData' request conforms to.
@@ -58,20 +56,20 @@ type AnalyticsManagementUploadsUploadDataResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Upload
     Core.:<|> "upload"
-      Core.:> "analytics"
-      Core.:> "v3"
-      Core.:> "management"
-      Core.:> "accounts"
-      Core.:> Core.Capture "accountId" Core.Text
-      Core.:> "webproperties"
-      Core.:> Core.Capture "webPropertyId" Core.Text
-      Core.:> "customDataSources"
-      Core.:> Core.Capture "customDataSourceId" Core.Text
-      Core.:> "uploads"
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Upload
+    Core.:> "analytics"
+    Core.:> "v3"
+    Core.:> "management"
+    Core.:> "accounts"
+    Core.:> Core.Capture "accountId" Core.Text
+    Core.:> "webproperties"
+    Core.:> Core.Capture "webPropertyId" Core.Text
+    Core.:> "customDataSources"
+    Core.:> Core.Capture "customDataSourceId" Core.Text
+    Core.:> "uploads"
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Upload
 
 -- | Upload data for a custom data source.
 --
@@ -95,61 +93,48 @@ newAnalyticsManagementUploadsUploadData ::
   -- |  Web property UA-string associated with the upload. See 'webPropertyId'.
   Core.Text ->
   AnalyticsManagementUploadsUploadData
-newAnalyticsManagementUploadsUploadData accountId customDataSourceId webPropertyId =
-  AnalyticsManagementUploadsUploadData
-    { accountId = accountId,
-      customDataSourceId = customDataSourceId,
-      webPropertyId = webPropertyId
-    }
-
-instance
-  Core.GoogleRequest
+newAnalyticsManagementUploadsUploadData
+  accountId
+  customDataSourceId
+  webPropertyId =
     AnalyticsManagementUploadsUploadData
-  where
+      { accountId = accountId,
+        customDataSourceId = customDataSourceId,
+        webPropertyId = webPropertyId
+      }
+
+instance Core.GoogleRequest AnalyticsManagementUploadsUploadData where
   type Rs AnalyticsManagementUploadsUploadData = Upload
   type
     Scopes AnalyticsManagementUploadsUploadData =
       '[Analytics'FullControl, Analytics'Edit]
-  requestClient
-    AnalyticsManagementUploadsUploadData {..} =
-      go
-        accountId
-        webPropertyId
-        customDataSourceId
-        (Core.Just Core.AltJSON)
-        analyticsService
-      where
-        go Core.:<|> _ =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementUploadsUploadDataResource
-            )
-            Core.mempty
+  requestClient AnalyticsManagementUploadsUploadData {..} =
+    go
+      accountId
+      webPropertyId
+      customDataSourceId
+      (Core.Just Core.AltJSON)
+      analyticsService
+    where
+      go Core.:<|> _ =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AnalyticsManagementUploadsUploadDataResource
+          )
+          Core.mempty
 
 instance
   Core.GoogleRequest
-    ( Core.MediaUpload
-        AnalyticsManagementUploadsUploadData
-    )
+    (Core.MediaUpload AnalyticsManagementUploadsUploadData)
   where
   type
-    Rs
-      ( Core.MediaUpload
-          AnalyticsManagementUploadsUploadData
-      ) =
+    Rs (Core.MediaUpload AnalyticsManagementUploadsUploadData) =
       Upload
   type
-    Scopes
-      ( Core.MediaUpload
-          AnalyticsManagementUploadsUploadData
-      ) =
+    Scopes (Core.MediaUpload AnalyticsManagementUploadsUploadData) =
       Core.Scopes AnalyticsManagementUploadsUploadData
   requestClient
-    ( Core.MediaUpload
-        AnalyticsManagementUploadsUploadData {..}
-        body
-      ) =
+    (Core.MediaUpload AnalyticsManagementUploadsUploadData {..} body) =
       go
         accountId
         webPropertyId
@@ -162,7 +147,6 @@ instance
         _ Core.:<|> go =
           Core.buildClient
             ( Core.Proxy ::
-                Core.Proxy
-                  AnalyticsManagementUploadsUploadDataResource
+                Core.Proxy AnalyticsManagementUploadsUploadDataResource
             )
             Core.mempty

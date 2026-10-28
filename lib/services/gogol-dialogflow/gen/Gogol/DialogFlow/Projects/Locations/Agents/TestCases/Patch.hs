@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.TestCases.Patch
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.testCases.patch@ method which the
 -- 'DialogFlowProjectsLocationsAgentsTestCasesPatch' request conforms to.
@@ -54,12 +52,8 @@ type DialogFlowProjectsLocationsAgentsTestCasesPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3TestCase
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3TestCase
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3TestCase
+    Core.:> Core.Patch '[Core.JSON] GoogleCloudDialogflowCxV3TestCase
 
 -- | Updates the specified test case.
 --
@@ -71,7 +65,7 @@ data DialogFlowProjectsLocationsAgentsTestCasesPatch = DialogFlowProjectsLocatio
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: @projects\/\/locations\/\/agents\/ \/testCases\/@.
+    -- | The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: @projects\/\/locations\/\/agents\/\/testCases\/@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudDialogflowCxV3TestCase,
@@ -86,14 +80,15 @@ data DialogFlowProjectsLocationsAgentsTestCasesPatch = DialogFlowProjectsLocatio
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsTestCasesPatch' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsTestCasesPatch ::
-  -- |  The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: @projects\/\/locations\/\/agents\/ \/testCases\/@. See 'name'.
+  -- |  The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: @projects\/\/locations\/\/agents\/\/testCases\/@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3TestCase ->
   DialogFlowProjectsLocationsAgentsTestCasesPatch
 newDialogFlowProjectsLocationsAgentsTestCasesPatch name payload =
   DialogFlowProjectsLocationsAgentsTestCasesPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -108,31 +103,27 @@ instance
     DialogFlowProjectsLocationsAgentsTestCasesPatch
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsTestCasesPatch =
+    Rs DialogFlowProjectsLocationsAgentsTestCasesPatch =
       GoogleCloudDialogflowCxV3TestCase
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsTestCasesPatch =
+    Scopes DialogFlowProjectsLocationsAgentsTestCasesPatch =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsTestCasesPatch {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        updateMask
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsTestCasesPatchResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsTestCasesPatch {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      updateMask
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsTestCasesPatchResource
+          )
+          Core.mempty

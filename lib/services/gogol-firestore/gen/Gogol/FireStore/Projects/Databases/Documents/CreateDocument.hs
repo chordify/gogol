@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.CreateDocument
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.CreateDocument
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.createDocument@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsCreateDocument' request conforms to.
@@ -95,52 +93,53 @@ newFireStoreProjectsDatabasesDocumentsCreateDocument ::
   -- |  Multipart request metadata. See 'payload'.
   Document ->
   FireStoreProjectsDatabasesDocumentsCreateDocument
-newFireStoreProjectsDatabasesDocumentsCreateDocument collectionId parent payload =
-  FireStoreProjectsDatabasesDocumentsCreateDocument
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      collectionId = collectionId,
-      documentId = Core.Nothing,
-      maskFieldPaths = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newFireStoreProjectsDatabasesDocumentsCreateDocument
+  collectionId
+  parent
+  payload =
+    FireStoreProjectsDatabasesDocumentsCreateDocument
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        collectionId = collectionId,
+        documentId = Core.Nothing,
+        maskFieldPaths = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesDocumentsCreateDocument
   where
   type
-    Rs
-      FireStoreProjectsDatabasesDocumentsCreateDocument =
+    Rs FireStoreProjectsDatabasesDocumentsCreateDocument =
       Document
   type
-    Scopes
-      FireStoreProjectsDatabasesDocumentsCreateDocument =
+    Scopes FireStoreProjectsDatabasesDocumentsCreateDocument =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsCreateDocument {..} =
-      go
-        parent
-        collectionId
-        xgafv
-        accessToken
-        callback
-        documentId
-        (maskFieldPaths Core.^. Core._Default)
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsCreateDocumentResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsCreateDocument {..} =
+    go
+      parent
+      collectionId
+      xgafv
+      accessToken
+      callback
+      documentId
+      (maskFieldPaths Core.^. Core._Default)
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                FireStoreProjectsDatabasesDocumentsCreateDocumentResource
+          )
+          Core.mempty

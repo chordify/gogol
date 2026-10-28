@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIOT.Projects.Locations.Registries.Devices.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIOT.Projects.Locations.Registries.Devices.List
 where
 
 import Gogol.CloudIOT.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudiot.projects.locations.registries.devices.list@ method which the
 -- 'CloudIOTProjectsLocationsRegistriesDevicesList' request conforms to.
@@ -54,9 +52,7 @@ type CloudIOTProjectsLocationsRegistriesDevicesListResource =
     Core.:> Core.QueryParams "deviceIds" Core.Text
     Core.:> Core.QueryParams "deviceNumIds" Core.Word64
     Core.:> Core.QueryParam "fieldMask" Core.FieldMask
-    Core.:> Core.QueryParam
-              "gatewayListOptions.associationsDeviceId"
-              Core.Text
+    Core.:> Core.QueryParam "gatewayListOptions.associationsDeviceId" Core.Text
     Core.:> Core.QueryParam
               "gatewayListOptions.associationsGatewayId"
               Core.Text
@@ -115,14 +111,17 @@ newCloudIOTProjectsLocationsRegistriesDevicesList ::
   CloudIOTProjectsLocationsRegistriesDevicesList
 newCloudIOTProjectsLocationsRegistriesDevicesList parent =
   CloudIOTProjectsLocationsRegistriesDevicesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       deviceIds = Core.Nothing,
       deviceNumIds = Core.Nothing,
       fieldMask = Core.Nothing,
-      gatewayListOptionsAssociationsDeviceId = Core.Nothing,
-      gatewayListOptionsAssociationsGatewayId = Core.Nothing,
+      gatewayListOptionsAssociationsDeviceId =
+        Core.Nothing,
+      gatewayListOptionsAssociationsGatewayId =
+        Core.Nothing,
       gatewayListOptionsGatewayType = Core.Nothing,
       pageSize = Core.Nothing,
       pageToken = Core.Nothing,
@@ -136,37 +135,33 @@ instance
     CloudIOTProjectsLocationsRegistriesDevicesList
   where
   type
-    Rs
-      CloudIOTProjectsLocationsRegistriesDevicesList =
+    Rs CloudIOTProjectsLocationsRegistriesDevicesList =
       ListDevicesResponse
   type
-    Scopes
-      CloudIOTProjectsLocationsRegistriesDevicesList =
+    Scopes CloudIOTProjectsLocationsRegistriesDevicesList =
       '[CloudPlatform'FullControl, Cloudiot'FullControl]
-  requestClient
-    CloudIOTProjectsLocationsRegistriesDevicesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        (deviceIds Core.^. Core._Default)
-        (deviceNumIds Core.^. Core._Default)
-        fieldMask
-        gatewayListOptionsAssociationsDeviceId
-        gatewayListOptionsAssociationsGatewayId
-        gatewayListOptionsGatewayType
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudIOTService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIOTProjectsLocationsRegistriesDevicesListResource
-            )
-            Core.mempty
+  requestClient CloudIOTProjectsLocationsRegistriesDevicesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      (deviceIds Core.^. Core._Default)
+      (deviceNumIds Core.^. Core._Default)
+      fieldMask
+      gatewayListOptionsAssociationsDeviceId
+      gatewayListOptionsAssociationsGatewayId
+      gatewayListOptionsGatewayType
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudIOTService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudIOTProjectsLocationsRegistriesDevicesListResource
+          )
+          Core.mempty

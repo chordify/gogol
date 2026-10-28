@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DNS.ResourceRecordSets.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DNS.ResourceRecordSets.Patch
 where
 
 import Gogol.DNS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dns.resourceRecordSets.patch@ method which the
 -- 'DNSResourceRecordSetsPatch' request conforms to.
@@ -63,12 +61,8 @@ type DNSResourceRecordSetsPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              ResourceRecordSet
-    Core.:> Core.Patch
-              '[Core.JSON]
-              ResourceRecordSet
+    Core.:> Core.ReqBody '[Core.JSON] ResourceRecordSet
+    Core.:> Core.Patch '[Core.JSON] ResourceRecordSet
 
 -- | Applies a partial update to an existing ResourceRecordSet.
 --
@@ -114,29 +108,29 @@ newDNSResourceRecordSetsPatch ::
   -- |  RRSet type. See 'type''.
   Core.Text ->
   DNSResourceRecordSetsPatch
-newDNSResourceRecordSetsPatch managedZone name payload project type' =
-  DNSResourceRecordSetsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clientOperationId = Core.Nothing,
-      location = "global",
-      managedZone = managedZone,
-      name = name,
-      payload = payload,
-      project = project,
-      type' = type',
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newDNSResourceRecordSetsPatch
+  managedZone
+  name
+  payload
+  project
+  type' =
     DNSResourceRecordSetsPatch
-  where
-  type
-    Rs DNSResourceRecordSetsPatch =
-      ResourceRecordSet
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clientOperationId = Core.Nothing,
+        location = "global",
+        managedZone = managedZone,
+        name = name,
+        payload = payload,
+        project = project,
+        type' = type',
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest DNSResourceRecordSetsPatch where
+  type Rs DNSResourceRecordSetsPatch = ResourceRecordSet
   type
     Scopes DNSResourceRecordSetsPatch =
       '[CloudPlatform'FullControl, Ndev'Clouddns'Readwrite]
@@ -159,7 +153,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DNSResourceRecordSetsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy DNSResourceRecordSetsPatchResource)
           Core.mempty

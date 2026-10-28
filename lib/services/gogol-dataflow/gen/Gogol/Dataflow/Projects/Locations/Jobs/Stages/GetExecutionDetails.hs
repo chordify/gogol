@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Locations.Jobs.Stages.GetExecutionDetails
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.locations.jobs.stages.getExecutionDetails@ method which the
 -- 'DataflowProjectsLocationsJobsStagesGetExecutionDetails' request conforms to.
@@ -63,13 +61,9 @@ type DataflowProjectsLocationsJobsStagesGetExecutionDetailsResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "startTime" Core.DateTime
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              StageExecutionDetails
+    Core.:> Core.Get '[Core.JSON] StageExecutionDetails
 
 -- | Request detailed information about the execution status of a stage of the job. EXPERIMENTAL. This API is subject to change or removal without notice.
 --
@@ -115,39 +109,38 @@ newDataflowProjectsLocationsJobsStagesGetExecutionDetails ::
   -- |  The stage for which to fetch information. See 'stageId'.
   Core.Text ->
   DataflowProjectsLocationsJobsStagesGetExecutionDetails
-newDataflowProjectsLocationsJobsStagesGetExecutionDetails jobId location projectId stageId =
-  DataflowProjectsLocationsJobsStagesGetExecutionDetails
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      endTime = Core.Nothing,
-      jobId = jobId,
-      location = location,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      projectId = projectId,
-      stageId = stageId,
-      startTime = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDataflowProjectsLocationsJobsStagesGetExecutionDetails
+  jobId
+  location
+  projectId
+  stageId =
+    DataflowProjectsLocationsJobsStagesGetExecutionDetails
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        endTime = Core.Nothing,
+        jobId = jobId,
+        location = location,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        projectId = projectId,
+        stageId = stageId,
+        startTime = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DataflowProjectsLocationsJobsStagesGetExecutionDetails
   where
   type
-    Rs
-      DataflowProjectsLocationsJobsStagesGetExecutionDetails =
+    Rs DataflowProjectsLocationsJobsStagesGetExecutionDetails =
       StageExecutionDetails
   type
-    Scopes
-      DataflowProjectsLocationsJobsStagesGetExecutionDetails =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+    Scopes DataflowProjectsLocationsJobsStagesGetExecutionDetails =
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient
     DataflowProjectsLocationsJobsStagesGetExecutionDetails {..} =
       go

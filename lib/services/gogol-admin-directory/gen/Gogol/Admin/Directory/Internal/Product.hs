@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Admin.Directory.Internal.Product
@@ -45,6 +43,18 @@ module Gogol.Admin.Directory.Internal.Product
     -- * AuxiliaryMessage
     AuxiliaryMessage (..),
     newAuxiliaryMessage,
+
+    -- * BacklightInfo
+    BacklightInfo (..),
+    newBacklightInfo,
+
+    -- * BatchChangeChromeOsDeviceStatusRequest
+    BatchChangeChromeOsDeviceStatusRequest (..),
+    newBatchChangeChromeOsDeviceStatusRequest,
+
+    -- * BatchChangeChromeOsDeviceStatusResponse
+    BatchChangeChromeOsDeviceStatusResponse (..),
+    newBatchChangeChromeOsDeviceStatusResponse,
 
     -- * BatchCreatePrintServersRequest
     BatchCreatePrintServersRequest (..),
@@ -94,6 +104,10 @@ module Gogol.Admin.Directory.Internal.Product
     Buildings (..),
     newBuildings,
 
+    -- * ByteUsage
+    ByteUsage (..),
+    newByteUsage,
+
     -- * CalendarResource
     CalendarResource (..),
     newCalendarResource,
@@ -101,6 +115,14 @@ module Gogol.Admin.Directory.Internal.Product
     -- * CalendarResources
     CalendarResources (..),
     newCalendarResources,
+
+    -- * ChangeChromeOsDeviceStatusResult
+    ChangeChromeOsDeviceStatusResult (..),
+    newChangeChromeOsDeviceStatusResult,
+
+    -- * ChangeChromeOsDeviceStatusSucceeded
+    ChangeChromeOsDeviceStatusSucceeded (..),
+    newChangeChromeOsDeviceStatusSucceeded,
 
     -- * Channel
     Channel (..),
@@ -237,6 +259,10 @@ module Gogol.Admin.Directory.Internal.Product
     -- * FailureInfo
     FailureInfo (..),
     newFailureInfo,
+
+    -- * FanInfo
+    FanInfo (..),
+    newFanInfo,
 
     -- * Feature
     Feature (..),
@@ -378,6 +404,14 @@ module Gogol.Admin.Directory.Internal.Product
     Schemas (..),
     newSchemas,
 
+    -- * Status
+    Status (..),
+    newStatus,
+
+    -- * Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
     -- * Token
     Token (..),
     newToken,
@@ -413,6 +447,10 @@ module Gogol.Admin.Directory.Internal.Product
     -- * UserEmail
     UserEmail (..),
     newUserEmail,
+
+    -- * UserEmail_Public_key_encryption_certificates
+    UserEmail_Public_key_encryption_certificates (..),
+    newUserEmail_Public_key_encryption_certificates,
 
     -- * UserExternalId
     UserExternalId (..),
@@ -493,21 +531,16 @@ module Gogol.Admin.Directory.Internal.Product
 where
 
 import Gogol.Admin.Directory.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | JSON template for Alias object in Directory API.
 --
 -- /See:/ 'newAlias' smart constructor.
 data Alias = Alias
-  { -- |
-    alias :: (Core.Maybe Core.Text),
-    -- |
+  { alias :: (Core.Maybe Core.Text),
     etag :: (Core.Maybe Core.Text),
-    -- |
     id :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text,
-    -- |
     primaryEmail :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -553,11 +586,8 @@ instance Core.ToJSON Alias where
 --
 -- /See:/ 'newAliases' smart constructor.
 data Aliases = Aliases
-  { -- |
-    aliases :: (Core.Maybe [Core.Value]),
-    -- |
+  { aliases :: (Core.Maybe [Core.Value]),
     etag :: (Core.Maybe Core.Text),
-    -- |
     kind :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -580,9 +610,7 @@ instance Core.FromJSON Aliases where
           Aliases
             Core.<$> (o Core..:? "aliases")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#aliases"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#aliases")
       )
 
 instance Core.ToJSON Aliases where
@@ -637,14 +665,10 @@ instance Core.FromJSON Asp where
       ( \o ->
           Asp
             Core.<$> (o Core..:? "codeId")
-            Core.<*> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#asp")
-            Core.<*> ( o Core..:? "lastTimeUsed"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lastTimeUsed" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "userKey")
       )
@@ -654,12 +678,10 @@ instance Core.ToJSON Asp where
     Core.object
       ( Core.catMaybes
           [ ("codeId" Core..=) Core.<$> codeId,
-            ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
+            ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
-            ("lastTimeUsed" Core..=) Core.. Core.AsText
-              Core.<$> lastTimeUsed,
+            ("lastTimeUsed" Core..=) Core.. Core.AsText Core.<$> lastTimeUsed,
             ("name" Core..=) Core.<$> name,
             ("userKey" Core..=) Core.<$> userKey
           ]
@@ -695,9 +717,7 @@ instance Core.FromJSON Asps where
           Asps
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#aspList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#aspList")
       )
 
 instance Core.ToJSON Asps where
@@ -748,10 +768,141 @@ instance Core.ToJSON AuxiliaryMessage where
   toJSON AuxiliaryMessage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auxiliaryMessage" Core..=)
-              Core.<$> auxiliaryMessage,
+          [ ("auxiliaryMessage" Core..=) Core.<$> auxiliaryMessage,
             ("fieldMask" Core..=) Core.<$> fieldMask,
             ("severity" Core..=) Core.<$> severity
+          ]
+      )
+
+-- | Information about the device\'s backlights.
+--
+-- /See:/ 'newBacklightInfo' smart constructor.
+data BacklightInfo = BacklightInfo
+  { -- | Output only. Current brightness of the backlight, between 0 and max_brightness.
+    brightness :: (Core.Maybe Core.Int32),
+    -- | Output only. Maximum brightness for the backlight.
+    maxBrightness :: (Core.Maybe Core.Int32),
+    -- | Output only. Path to this backlight on the system. Useful if the caller needs to correlate with other information.
+    path :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BacklightInfo' with the minimum fields required to make a request.
+newBacklightInfo ::
+  BacklightInfo
+newBacklightInfo =
+  BacklightInfo
+    { brightness = Core.Nothing,
+      maxBrightness = Core.Nothing,
+      path = Core.Nothing
+    }
+
+instance Core.FromJSON BacklightInfo where
+  parseJSON =
+    Core.withObject
+      "BacklightInfo"
+      ( \o ->
+          BacklightInfo
+            Core.<$> (o Core..:? "brightness")
+            Core.<*> (o Core..:? "maxBrightness")
+            Core.<*> (o Core..:? "path")
+      )
+
+instance Core.ToJSON BacklightInfo where
+  toJSON BacklightInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("brightness" Core..=) Core.<$> brightness,
+            ("maxBrightness" Core..=) Core.<$> maxBrightness,
+            ("path" Core..=) Core.<$> path
+          ]
+      )
+
+-- | A request for changing the status of a batch of ChromeOS devices.
+--
+-- /See:/ 'newBatchChangeChromeOsDeviceStatusRequest' smart constructor.
+data BatchChangeChromeOsDeviceStatusRequest = BatchChangeChromeOsDeviceStatusRequest
+  { -- | Required. The action to take on the ChromeOS device in order to change its status.
+    changeChromeOsDeviceStatusAction ::
+      ( Core.Maybe
+          BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+      ),
+    -- | Optional. The reason behind a device deprovision. Must be provided if \'changeChromeOsDeviceStatusAction\' is set to \'CHANGE/CHROME/OS/DEVICE/STATUS/ACTION/DEPROVISION\'. Otherwise, omit this field.
+    deprovisionReason ::
+      ( Core.Maybe
+          BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+      ),
+    -- | Required. List of the IDs of the ChromeOS devices to change. Maximum 50.
+    deviceIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchChangeChromeOsDeviceStatusRequest' with the minimum fields required to make a request.
+newBatchChangeChromeOsDeviceStatusRequest ::
+  BatchChangeChromeOsDeviceStatusRequest
+newBatchChangeChromeOsDeviceStatusRequest =
+  BatchChangeChromeOsDeviceStatusRequest
+    { changeChromeOsDeviceStatusAction =
+        Core.Nothing,
+      deprovisionReason = Core.Nothing,
+      deviceIds = Core.Nothing
+    }
+
+instance Core.FromJSON BatchChangeChromeOsDeviceStatusRequest where
+  parseJSON =
+    Core.withObject
+      "BatchChangeChromeOsDeviceStatusRequest"
+      ( \o ->
+          BatchChangeChromeOsDeviceStatusRequest
+            Core.<$> (o Core..:? "changeChromeOsDeviceStatusAction")
+            Core.<*> (o Core..:? "deprovisionReason")
+            Core.<*> (o Core..:? "deviceIds")
+      )
+
+instance Core.ToJSON BatchChangeChromeOsDeviceStatusRequest where
+  toJSON BatchChangeChromeOsDeviceStatusRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("changeChromeOsDeviceStatusAction" Core..=)
+              Core.<$> changeChromeOsDeviceStatusAction,
+            ("deprovisionReason" Core..=) Core.<$> deprovisionReason,
+            ("deviceIds" Core..=) Core.<$> deviceIds
+          ]
+      )
+
+-- | The response of changing the status of a batch of ChromeOS devices.
+--
+-- /See:/ 'newBatchChangeChromeOsDeviceStatusResponse' smart constructor.
+newtype BatchChangeChromeOsDeviceStatusResponse = BatchChangeChromeOsDeviceStatusResponse
+  { -- | The results for each of the ChromeOS devices provided in the request.
+    changeChromeOsDeviceStatusResults :: (Core.Maybe [ChangeChromeOsDeviceStatusResult])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BatchChangeChromeOsDeviceStatusResponse' with the minimum fields required to make a request.
+newBatchChangeChromeOsDeviceStatusResponse ::
+  BatchChangeChromeOsDeviceStatusResponse
+newBatchChangeChromeOsDeviceStatusResponse =
+  BatchChangeChromeOsDeviceStatusResponse
+    { changeChromeOsDeviceStatusResults =
+        Core.Nothing
+    }
+
+instance Core.FromJSON BatchChangeChromeOsDeviceStatusResponse where
+  parseJSON =
+    Core.withObject
+      "BatchChangeChromeOsDeviceStatusResponse"
+      ( \o ->
+          BatchChangeChromeOsDeviceStatusResponse
+            Core.<$> (o Core..:? "changeChromeOsDeviceStatusResults")
+      )
+
+instance Core.ToJSON BatchChangeChromeOsDeviceStatusResponse where
+  toJSON BatchChangeChromeOsDeviceStatusResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("changeChromeOsDeviceStatusResults" Core..=)
+              Core.<$> changeChromeOsDeviceStatusResults
           ]
       )
 
@@ -775,16 +926,13 @@ instance Core.FromJSON BatchCreatePrintServersRequest where
     Core.withObject
       "BatchCreatePrintServersRequest"
       ( \o ->
-          BatchCreatePrintServersRequest
-            Core.<$> (o Core..:? "requests")
+          BatchCreatePrintServersRequest Core.<$> (o Core..:? "requests")
       )
 
 instance Core.ToJSON BatchCreatePrintServersRequest where
   toJSON BatchCreatePrintServersRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("requests" Core..=) Core.<$> requests]
-      )
+      (Core.catMaybes [("requests" Core..=) Core.<$> requests])
 
 --
 -- /See:/ 'newBatchCreatePrintServersResponse' smart constructor.
@@ -805,10 +953,7 @@ newBatchCreatePrintServersResponse =
       printServers = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchCreatePrintServersResponse
-  where
+instance Core.FromJSON BatchCreatePrintServersResponse where
   parseJSON =
     Core.withObject
       "BatchCreatePrintServersResponse"
@@ -847,16 +992,13 @@ instance Core.FromJSON BatchCreatePrintersRequest where
     Core.withObject
       "BatchCreatePrintersRequest"
       ( \o ->
-          BatchCreatePrintersRequest
-            Core.<$> (o Core..:? "requests")
+          BatchCreatePrintersRequest Core.<$> (o Core..:? "requests")
       )
 
 instance Core.ToJSON BatchCreatePrintersRequest where
   toJSON BatchCreatePrintersRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("requests" Core..=) Core.<$> requests]
-      )
+      (Core.catMaybes [("requests" Core..=) Core.<$> requests])
 
 -- | Response for adding new printers in batch.
 --
@@ -873,7 +1015,10 @@ data BatchCreatePrintersResponse = BatchCreatePrintersResponse
 newBatchCreatePrintersResponse ::
   BatchCreatePrintersResponse
 newBatchCreatePrintersResponse =
-  BatchCreatePrintersResponse {failures = Core.Nothing, printers = Core.Nothing}
+  BatchCreatePrintersResponse
+    { failures = Core.Nothing,
+      printers = Core.Nothing
+    }
 
 instance Core.FromJSON BatchCreatePrintersResponse where
   parseJSON =
@@ -940,14 +1085,12 @@ newBatchDeletePrintServersResponse ::
   BatchDeletePrintServersResponse
 newBatchDeletePrintServersResponse =
   BatchDeletePrintServersResponse
-    { failedPrintServers = Core.Nothing,
+    { failedPrintServers =
+        Core.Nothing,
       printServerIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    BatchDeletePrintServersResponse
-  where
+instance Core.FromJSON BatchDeletePrintServersResponse where
   parseJSON =
     Core.withObject
       "BatchDeletePrintServersResponse"
@@ -961,8 +1104,7 @@ instance Core.ToJSON BatchDeletePrintServersResponse where
   toJSON BatchDeletePrintServersResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failedPrintServers" Core..=)
-              Core.<$> failedPrintServers,
+          [ ("failedPrintServers" Core..=) Core.<$> failedPrintServers,
             ("printServerIds" Core..=) Core.<$> printServerIds
           ]
       )
@@ -987,16 +1129,13 @@ instance Core.FromJSON BatchDeletePrintersRequest where
     Core.withObject
       "BatchDeletePrintersRequest"
       ( \o ->
-          BatchDeletePrintersRequest
-            Core.<$> (o Core..:? "printerIds")
+          BatchDeletePrintersRequest Core.<$> (o Core..:? "printerIds")
       )
 
 instance Core.ToJSON BatchDeletePrintersRequest where
   toJSON BatchDeletePrintersRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("printerIds" Core..=) Core.<$> printerIds]
-      )
+      (Core.catMaybes [("printerIds" Core..=) Core.<$> printerIds])
 
 -- | Response for deleting existing printers in batch.
 --
@@ -1088,7 +1227,8 @@ instance Core.FromJSON Building where
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etags")
             Core.<*> (o Core..:? "floorNames")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#buildings#Building"
                      )
       )
@@ -1163,8 +1303,7 @@ instance Core.ToJSON BuildingAddress where
     Core.object
       ( Core.catMaybes
           [ ("addressLines" Core..=) Core.<$> addressLines,
-            ("administrativeArea" Core..=)
-              Core.<$> administrativeArea,
+            ("administrativeArea" Core..=) Core.<$> administrativeArea,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("locality" Core..=) Core.<$> locality,
             ("postalCode" Core..=) Core.<$> postalCode,
@@ -1188,7 +1327,10 @@ data BuildingCoordinates = BuildingCoordinates
 newBuildingCoordinates ::
   BuildingCoordinates
 newBuildingCoordinates =
-  BuildingCoordinates {latitude = Core.Nothing, longitude = Core.Nothing}
+  BuildingCoordinates
+    { latitude = Core.Nothing,
+      longitude = Core.Nothing
+    }
 
 instance Core.FromJSON BuildingCoordinates where
   parseJSON =
@@ -1243,7 +1385,8 @@ instance Core.FromJSON Buildings where
           Buildings
             Core.<$> (o Core..:? "buildings")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#buildings#buildingsList"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -1257,6 +1400,44 @@ instance Core.ToJSON Buildings where
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
             ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | Represents a data capacity with some amount of current usage in bytes.
+--
+-- /See:/ 'newByteUsage' smart constructor.
+data ByteUsage = ByteUsage
+  { -- | Output only. The total capacity value, in bytes.
+    capacityBytes :: (Core.Maybe Core.Int64),
+    -- | Output only. The current usage value, in bytes.
+    usedBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ByteUsage' with the minimum fields required to make a request.
+newByteUsage ::
+  ByteUsage
+newByteUsage =
+  ByteUsage {capacityBytes = Core.Nothing, usedBytes = Core.Nothing}
+
+instance Core.FromJSON ByteUsage where
+  parseJSON =
+    Core.withObject
+      "ByteUsage"
+      ( \o ->
+          ByteUsage
+            Core.<$> (o Core..:? "capacityBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "usedBytes" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ByteUsage where
+  toJSON ByteUsage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("capacityBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> capacityBytes,
+            ("usedBytes" Core..=) Core.. Core.AsText Core.<$> usedBytes
           ]
       )
 
@@ -1332,7 +1513,8 @@ instance Core.FromJSON CalendarResource where
             Core.<*> (o Core..:? "floorName")
             Core.<*> (o Core..:? "floorSection")
             Core.<*> (o Core..:? "generatedResourceName")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#calendars#CalendarResource"
                      )
             Core.<*> (o Core..:? "resourceCategory")
@@ -1351,17 +1533,13 @@ instance Core.ToJSON CalendarResource where
           [ ("buildingId" Core..=) Core.<$> buildingId,
             ("capacity" Core..=) Core.<$> capacity,
             ("etags" Core..=) Core.<$> etags,
-            ("featureInstances" Core..=)
-              Core.<$> featureInstances,
+            ("featureInstances" Core..=) Core.<$> featureInstances,
             ("floorName" Core..=) Core.<$> floorName,
             ("floorSection" Core..=) Core.<$> floorSection,
-            ("generatedResourceName" Core..=)
-              Core.<$> generatedResourceName,
+            ("generatedResourceName" Core..=) Core.<$> generatedResourceName,
             Core.Just ("kind" Core..= kind),
-            ("resourceCategory" Core..=)
-              Core.<$> resourceCategory,
-            ("resourceDescription" Core..=)
-              Core.<$> resourceDescription,
+            ("resourceCategory" Core..=) Core.<$> resourceCategory,
+            ("resourceDescription" Core..=) Core.<$> resourceDescription,
             ("resourceEmail" Core..=) Core.<$> resourceEmail,
             ("resourceId" Core..=) Core.<$> resourceId,
             ("resourceName" Core..=) Core.<$> resourceName,
@@ -1405,7 +1583,8 @@ instance Core.FromJSON CalendarResources where
           CalendarResources
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#calendars#calendarResourcesList"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -1421,6 +1600,71 @@ instance Core.ToJSON CalendarResources where
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
+
+-- | The result of a single ChromeOS device for a Change state operation.
+--
+-- /See:/ 'newChangeChromeOsDeviceStatusResult' smart constructor.
+data ChangeChromeOsDeviceStatusResult = ChangeChromeOsDeviceStatusResult
+  { -- | The unique ID of the ChromeOS device.
+    deviceId :: (Core.Maybe Core.Text),
+    -- | The error result of the operation in case of failure.
+    error :: (Core.Maybe Status),
+    -- | The device could change its status successfully.
+    response :: (Core.Maybe ChangeChromeOsDeviceStatusSucceeded)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChangeChromeOsDeviceStatusResult' with the minimum fields required to make a request.
+newChangeChromeOsDeviceStatusResult ::
+  ChangeChromeOsDeviceStatusResult
+newChangeChromeOsDeviceStatusResult =
+  ChangeChromeOsDeviceStatusResult
+    { deviceId = Core.Nothing,
+      error = Core.Nothing,
+      response = Core.Nothing
+    }
+
+instance Core.FromJSON ChangeChromeOsDeviceStatusResult where
+  parseJSON =
+    Core.withObject
+      "ChangeChromeOsDeviceStatusResult"
+      ( \o ->
+          ChangeChromeOsDeviceStatusResult
+            Core.<$> (o Core..:? "deviceId")
+            Core.<*> (o Core..:? "error")
+            Core.<*> (o Core..:? "response")
+      )
+
+instance Core.ToJSON ChangeChromeOsDeviceStatusResult where
+  toJSON ChangeChromeOsDeviceStatusResult {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("deviceId" Core..=) Core.<$> deviceId,
+            ("error" Core..=) Core.<$> error,
+            ("response" Core..=) Core.<$> response
+          ]
+      )
+
+-- | Response for a successful ChromeOS device status change.
+--
+-- /See:/ 'newChangeChromeOsDeviceStatusSucceeded' smart constructor.
+data ChangeChromeOsDeviceStatusSucceeded = ChangeChromeOsDeviceStatusSucceeded
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ChangeChromeOsDeviceStatusSucceeded' with the minimum fields required to make a request.
+newChangeChromeOsDeviceStatusSucceeded ::
+  ChangeChromeOsDeviceStatusSucceeded
+newChangeChromeOsDeviceStatusSucceeded =
+  ChangeChromeOsDeviceStatusSucceeded
+
+instance Core.FromJSON ChangeChromeOsDeviceStatusSucceeded where
+  parseJSON =
+    Core.withObject
+      "ChangeChromeOsDeviceStatusSucceeded"
+      (\o -> Core.pure ChangeChromeOsDeviceStatusSucceeded)
+
+instance Core.ToJSON ChangeChromeOsDeviceStatusSucceeded where
+  toJSON = Core.const Core.emptyObject
 
 -- | An notification channel used to watch for resource changes.
 --
@@ -1473,9 +1717,7 @@ instance Core.FromJSON Channel where
       ( \o ->
           Channel
             Core.<$> (o Core..:? "address")
-            Core.<*> ( o Core..:? "expiration"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "expiration" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "id")
             Core.<*> (o Core..:? "kind" Core..!= "api#channel")
             Core.<*> (o Core..:? "params")
@@ -1491,8 +1733,7 @@ instance Core.ToJSON Channel where
     Core.object
       ( Core.catMaybes
           [ ("address" Core..=) Core.<$> address,
-            ("expiration" Core..=) Core.. Core.AsText
-              Core.<$> expiration,
+            ("expiration" Core..=) Core.. Core.AsText Core.<$> expiration,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("params" Core..=) Core.<$> params,
@@ -1508,8 +1749,7 @@ instance Core.ToJSON Channel where
 --
 -- /See:/ 'newChannel_Params' smart constructor.
 newtype Channel_Params = Channel_Params
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1518,15 +1758,14 @@ newChannel_Params ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Channel_Params
-newChannel_Params additional = Channel_Params {additional = additional}
+newChannel_Params additional =
+  Channel_Params {additional = additional}
 
 instance Core.FromJSON Channel_Params where
   parseJSON =
     Core.withObject
       "Channel_Params"
-      ( \o ->
-          Channel_Params Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Channel_Params Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Channel_Params where
   toJSON Channel_Params {..} = Core.toJSON additional
@@ -1543,10 +1782,16 @@ data ChromeOsDevice = ChromeOsDevice
     annotatedLocation :: (Core.Maybe Core.Text),
     -- | The user of the device as noted by the administrator. Maximum length is 100 characters. Empty values are allowed.
     annotatedUser :: (Core.Maybe Core.Text),
-    -- | (Read-only) The timestamp after which the device will stop receiving Chrome updates or support
+    -- | (Read-only) The timestamp after which the device will stop receiving Chrome updates or support. Please use \"autoUpdateThrough\" instead.
     autoUpdateExpiration :: (Core.Maybe Core.Int64),
+    -- | Output only. The timestamp after which the device will stop receiving Chrome updates or support.
+    autoUpdateThrough :: (Core.Maybe Core.Text),
+    -- | Output only. Contains backlight information for the device.
+    backlightInfo :: (Core.Maybe [BacklightInfo]),
     -- | The boot mode for the device. The possible values are: * @Verified@: The device is running a valid version of the Chrome OS. * @Dev@: The devices\'s developer hardware switch is enabled. When booted, the device has a command line shell. For an example of a developer switch, see the <https://www.chromium.org/chromium-os/developer-information-for-chrome-os-devices/samsung-series-5-chromebook#TOC-Developer-switch Chromebook developer information>.
     bootMode :: (Core.Maybe Core.Text),
+    -- | Output only. Chrome OS type of the device.
+    chromeOsType :: (Core.Maybe ChromeOsDevice_ChromeOsType),
     -- | Information regarding CPU specs in the device.
     cpuInfo :: (Core.Maybe [ChromeOsDevice_CpuInfoItem]),
     -- | Reports of CPU utilization and temperature (Read-only)
@@ -1557,6 +1802,10 @@ data ChromeOsDevice = ChromeOsDevice
     deviceFiles :: (Core.Maybe [ChromeOsDevice_DeviceFilesItem]),
     -- | The unique ID of the Chrome device.
     deviceId :: (Core.Maybe Core.Text),
+    -- | Output only. Device license type.
+    deviceLicenseType :: (Core.Maybe ChromeOsDevice_DeviceLicenseType),
+    -- | Output only. How much disk space the device has available and is currently using.
+    diskSpaceUsage :: (Core.Maybe ByteUsage),
     -- | Reports of disk space and other info about mounted\/connected volumes.
     diskVolumeReports :: (Core.Maybe [ChromeOsDevice_DiskVolumeReportsItem]),
     -- | (Read-only) Built-in MAC address for the docking station that the device connected to. Factory sets Media access control address (MAC address) assigned for use by a dock. It is reserved specifically for MAC pass through device policy. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for some devices.
@@ -1567,6 +1816,14 @@ data ChromeOsDevice = ChromeOsDevice
     ethernetMacAddress :: (Core.Maybe Core.Text),
     -- | (Read-only) MAC address used by the Chromebook’s internal ethernet port, and for onboard network (ethernet) interface. The format is twelve (12) hexadecimal digits without any delimiter (uppercase letters). This is only relevant for some devices.
     ethernetMacAddress0 :: (Core.Maybe Core.Text),
+    -- | Output only. Whether or not the device requires the extended support opt in.
+    extendedSupportEligible :: (Core.Maybe Core.Bool),
+    -- | Output only. Whether extended support policy is enabled on the device.
+    extendedSupportEnabled :: (Core.Maybe Core.Bool),
+    -- | Output only. Date of the device when extended support policy for automatic updates starts.
+    extendedSupportStart :: (Core.Maybe Core.Text),
+    -- | Output only. Fan information for the device.
+    fanInfo :: (Core.Maybe [FanInfo]),
     -- | The Chrome device\'s firmware version.
     firmwareVersion :: (Core.Maybe Core.Text),
     -- | Date and time for the first time the device was enrolled.
@@ -1634,17 +1891,26 @@ newChromeOsDevice =
       annotatedLocation = Core.Nothing,
       annotatedUser = Core.Nothing,
       autoUpdateExpiration = Core.Nothing,
+      autoUpdateThrough = Core.Nothing,
+      backlightInfo = Core.Nothing,
       bootMode = Core.Nothing,
+      chromeOsType = Core.Nothing,
       cpuInfo = Core.Nothing,
       cpuStatusReports = Core.Nothing,
       deprovisionReason = Core.Nothing,
       deviceFiles = Core.Nothing,
       deviceId = Core.Nothing,
+      deviceLicenseType = Core.Nothing,
+      diskSpaceUsage = Core.Nothing,
       diskVolumeReports = Core.Nothing,
       dockMacAddress = Core.Nothing,
       etag = Core.Nothing,
       ethernetMacAddress = Core.Nothing,
       ethernetMacAddress0 = Core.Nothing,
+      extendedSupportEligible = Core.Nothing,
+      extendedSupportEnabled = Core.Nothing,
+      extendedSupportStart = Core.Nothing,
+      fanInfo = Core.Nothing,
       firmwareVersion = Core.Nothing,
       firstEnrollmentTime = Core.Nothing,
       kind = "admin#directory#chromeosdevice",
@@ -1684,25 +1950,33 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "annotatedAssetId")
             Core.<*> (o Core..:? "annotatedLocation")
             Core.<*> (o Core..:? "annotatedUser")
-            Core.<*> ( o Core..:? "autoUpdateExpiration"
+            Core.<*> ( o
+                         Core..:? "autoUpdateExpiration"
                          Core.<&> Core.fmap Core.fromAsText
                      )
+            Core.<*> (o Core..:? "autoUpdateThrough")
+            Core.<*> (o Core..:? "backlightInfo")
             Core.<*> (o Core..:? "bootMode")
+            Core.<*> (o Core..:? "chromeOsType")
             Core.<*> (o Core..:? "cpuInfo")
             Core.<*> (o Core..:? "cpuStatusReports")
             Core.<*> (o Core..:? "deprovisionReason")
             Core.<*> (o Core..:? "deviceFiles")
             Core.<*> (o Core..:? "deviceId")
+            Core.<*> (o Core..:? "deviceLicenseType")
+            Core.<*> (o Core..:? "diskSpaceUsage")
             Core.<*> (o Core..:? "diskVolumeReports")
             Core.<*> (o Core..:? "dockMacAddress")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "ethernetMacAddress")
             Core.<*> (o Core..:? "ethernetMacAddress0")
+            Core.<*> (o Core..:? "extendedSupportEligible")
+            Core.<*> (o Core..:? "extendedSupportEnabled")
+            Core.<*> (o Core..:? "extendedSupportStart")
+            Core.<*> (o Core..:? "fanInfo")
             Core.<*> (o Core..:? "firmwareVersion")
             Core.<*> (o Core..:? "firstEnrollmentTime")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#chromeosdevice"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#chromeosdevice")
             Core.<*> (o Core..:? "lastDeprovisionTimestamp")
             Core.<*> (o Core..:? "lastEnrollmentTime")
             Core.<*> (o Core..:? "lastKnownNetwork")
@@ -1724,9 +1998,7 @@ instance Core.FromJSON ChromeOsDevice where
             Core.<*> (o Core..:? "status")
             Core.<*> (o Core..:? "supportEndDate")
             Core.<*> (o Core..:? "systemRamFreeReports")
-            Core.<*> ( o Core..:? "systemRamTotal"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "systemRamTotal" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "tpmVersionInfo")
             Core.<*> (o Core..:? "willAutoRenew")
       )
@@ -1735,41 +2007,41 @@ instance Core.ToJSON ChromeOsDevice where
   toJSON ChromeOsDevice {..} =
     Core.object
       ( Core.catMaybes
-          [ ("activeTimeRanges" Core..=)
-              Core.<$> activeTimeRanges,
-            ("annotatedAssetId" Core..=)
-              Core.<$> annotatedAssetId,
-            ("annotatedLocation" Core..=)
-              Core.<$> annotatedLocation,
+          [ ("activeTimeRanges" Core..=) Core.<$> activeTimeRanges,
+            ("annotatedAssetId" Core..=) Core.<$> annotatedAssetId,
+            ("annotatedLocation" Core..=) Core.<$> annotatedLocation,
             ("annotatedUser" Core..=) Core.<$> annotatedUser,
-            ("autoUpdateExpiration" Core..=) Core.. Core.AsText
+            ("autoUpdateExpiration" Core..=)
+              Core.. Core.AsText
               Core.<$> autoUpdateExpiration,
+            ("autoUpdateThrough" Core..=) Core.<$> autoUpdateThrough,
+            ("backlightInfo" Core..=) Core.<$> backlightInfo,
             ("bootMode" Core..=) Core.<$> bootMode,
+            ("chromeOsType" Core..=) Core.<$> chromeOsType,
             ("cpuInfo" Core..=) Core.<$> cpuInfo,
-            ("cpuStatusReports" Core..=)
-              Core.<$> cpuStatusReports,
-            ("deprovisionReason" Core..=)
-              Core.<$> deprovisionReason,
+            ("cpuStatusReports" Core..=) Core.<$> cpuStatusReports,
+            ("deprovisionReason" Core..=) Core.<$> deprovisionReason,
             ("deviceFiles" Core..=) Core.<$> deviceFiles,
             ("deviceId" Core..=) Core.<$> deviceId,
-            ("diskVolumeReports" Core..=)
-              Core.<$> diskVolumeReports,
+            ("deviceLicenseType" Core..=) Core.<$> deviceLicenseType,
+            ("diskSpaceUsage" Core..=) Core.<$> diskSpaceUsage,
+            ("diskVolumeReports" Core..=) Core.<$> diskVolumeReports,
             ("dockMacAddress" Core..=) Core.<$> dockMacAddress,
             ("etag" Core..=) Core.<$> etag,
-            ("ethernetMacAddress" Core..=)
-              Core.<$> ethernetMacAddress,
-            ("ethernetMacAddress0" Core..=)
-              Core.<$> ethernetMacAddress0,
+            ("ethernetMacAddress" Core..=) Core.<$> ethernetMacAddress,
+            ("ethernetMacAddress0" Core..=) Core.<$> ethernetMacAddress0,
+            ("extendedSupportEligible" Core..=)
+              Core.<$> extendedSupportEligible,
+            ("extendedSupportEnabled" Core..=) Core.<$> extendedSupportEnabled,
+            ("extendedSupportStart" Core..=) Core.<$> extendedSupportStart,
+            ("fanInfo" Core..=) Core.<$> fanInfo,
             ("firmwareVersion" Core..=) Core.<$> firmwareVersion,
-            ("firstEnrollmentTime" Core..=)
-              Core.<$> firstEnrollmentTime,
+            ("firstEnrollmentTime" Core..=) Core.<$> firstEnrollmentTime,
             Core.Just ("kind" Core..= kind),
             ("lastDeprovisionTimestamp" Core..=)
               Core.<$> lastDeprovisionTimestamp,
-            ("lastEnrollmentTime" Core..=)
-              Core.<$> lastEnrollmentTime,
-            ("lastKnownNetwork" Core..=)
-              Core.<$> lastKnownNetwork,
+            ("lastEnrollmentTime" Core..=) Core.<$> lastEnrollmentTime,
+            ("lastKnownNetwork" Core..=) Core.<$> lastKnownNetwork,
             ("lastSync" Core..=) Core.<$> lastSync,
             ("macAddress" Core..=) Core.<$> macAddress,
             ("manufactureDate" Core..=) Core.<$> manufactureDate,
@@ -1787,9 +2059,9 @@ instance Core.ToJSON ChromeOsDevice where
             ("serialNumber" Core..=) Core.<$> serialNumber,
             ("status" Core..=) Core.<$> status,
             ("supportEndDate" Core..=) Core.<$> supportEndDate,
-            ("systemRamFreeReports" Core..=)
-              Core.<$> systemRamFreeReports,
-            ("systemRamTotal" Core..=) Core.. Core.AsText
+            ("systemRamFreeReports" Core..=) Core.<$> systemRamFreeReports,
+            ("systemRamTotal" Core..=)
+              Core.. Core.AsText
               Core.<$> systemRamTotal,
             ("tpmVersionInfo" Core..=) Core.<$> tpmVersionInfo,
             ("willAutoRenew" Core..=) Core.<$> willAutoRenew
@@ -1815,10 +2087,7 @@ newChromeOsDevice_ActiveTimeRangesItem =
       date = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_ActiveTimeRangesItem
-  where
+instance Core.FromJSON ChromeOsDevice_ActiveTimeRangesItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_ActiveTimeRangesItem"
@@ -1828,10 +2097,7 @@ instance
             Core.<*> (o Core..:? "date")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_ActiveTimeRangesItem
-  where
+instance Core.ToJSON ChromeOsDevice_ActiveTimeRangesItem where
   toJSON ChromeOsDevice_ActiveTimeRangesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -1884,8 +2150,7 @@ instance Core.ToJSON ChromeOsDevice_CpuInfoItem where
       ( Core.catMaybes
           [ ("architecture" Core..=) Core.<$> architecture,
             ("logicalCpus" Core..=) Core.<$> logicalCpus,
-            ("maxClockSpeedKhz" Core..=)
-              Core.<$> maxClockSpeedKhz,
+            ("maxClockSpeedKhz" Core..=) Core.<$> maxClockSpeedKhz,
             ("model" Core..=) Core.<$> model
           ]
       )
@@ -1913,16 +2178,14 @@ newChromeOsDevice_CpuInfoItem_LogicalCpusItem ::
   ChromeOsDevice_CpuInfoItem_LogicalCpusItem
 newChromeOsDevice_CpuInfoItem_LogicalCpusItem =
   ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-    { cStates = Core.Nothing,
+    { cStates =
+        Core.Nothing,
       currentScalingFrequencyKhz = Core.Nothing,
       idleDuration = Core.Nothing,
       maxScalingFrequencyKhz = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-  where
+instance Core.FromJSON ChromeOsDevice_CpuInfoItem_LogicalCpusItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_CpuInfoItem_LogicalCpusItem"
@@ -1934,10 +2197,7 @@ instance
             Core.<*> (o Core..:? "maxScalingFrequencyKhz")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_CpuInfoItem_LogicalCpusItem
-  where
+instance Core.ToJSON ChromeOsDevice_CpuInfoItem_LogicalCpusItem where
   toJSON ChromeOsDevice_CpuInfoItem_LogicalCpusItem {..} =
     Core.object
       ( Core.catMaybes
@@ -1966,7 +2226,8 @@ newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem ::
   ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
 newChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem =
   ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
-    { displayName = Core.Nothing,
+    { displayName =
+        Core.Nothing,
       sessionDuration = Core.Nothing
     }
 
@@ -1980,22 +2241,20 @@ instance
       ( \o ->
           ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
             Core.<$> (o Core..:? "displayName")
-              Core.<*> (o Core..:? "sessionDuration")
+            Core.<*> (o Core..:? "sessionDuration")
       )
 
 instance
   Core.ToJSON
     ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem
   where
-  toJSON
-    ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("displayName" Core..=) Core.<$> displayName,
-              ("sessionDuration" Core..=)
-                Core.<$> sessionDuration
-            ]
-        )
+  toJSON ChromeOsDevice_CpuInfoItem_LogicalCpusItem_CStatesItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("displayName" Core..=) Core.<$> displayName,
+            ("sessionDuration" Core..=) Core.<$> sessionDuration
+          ]
+      )
 
 --
 -- /See:/ 'newChromeOsDevice_CpuStatusReportsItem' smart constructor.
@@ -2005,7 +2264,6 @@ data ChromeOsDevice_CpuStatusReportsItem = ChromeOsDevice_CpuStatusReportsItem
       ( Core.Maybe
           [ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem]
       ),
-    -- |
     cpuUtilizationPercentageInfo :: (Core.Maybe [Core.Int32]),
     -- | Date and time the report was received.
     reportTime :: (Core.Maybe Core.DateTime)
@@ -2017,15 +2275,13 @@ newChromeOsDevice_CpuStatusReportsItem ::
   ChromeOsDevice_CpuStatusReportsItem
 newChromeOsDevice_CpuStatusReportsItem =
   ChromeOsDevice_CpuStatusReportsItem
-    { cpuTemperatureInfo = Core.Nothing,
+    { cpuTemperatureInfo =
+        Core.Nothing,
       cpuUtilizationPercentageInfo = Core.Nothing,
       reportTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_CpuStatusReportsItem
-  where
+instance Core.FromJSON ChromeOsDevice_CpuStatusReportsItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_CpuStatusReportsItem"
@@ -2036,15 +2292,11 @@ instance
             Core.<*> (o Core..:? "reportTime")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_CpuStatusReportsItem
-  where
+instance Core.ToJSON ChromeOsDevice_CpuStatusReportsItem where
   toJSON ChromeOsDevice_CpuStatusReportsItem {..} =
     Core.object
       ( Core.catMaybes
-          [ ("cpuTemperatureInfo" Core..=)
-              Core.<$> cpuTemperatureInfo,
+          [ ("cpuTemperatureInfo" Core..=) Core.<$> cpuTemperatureInfo,
             ("cpuUtilizationPercentageInfo" Core..=)
               Core.<$> cpuUtilizationPercentageInfo,
             ("reportTime" Core..=) Core.<$> reportTime
@@ -2066,7 +2318,8 @@ newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem ::
   ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
 newChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem =
   ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
-    { label = Core.Nothing,
+    { label =
+        Core.Nothing,
       temperature = Core.Nothing
     }
 
@@ -2080,7 +2333,7 @@ instance
       ( \o ->
           ChromeOsDevice_CpuStatusReportsItem_CpuTemperatureInfoItem
             Core.<$> (o Core..:? "label")
-              Core.<*> (o Core..:? "temperature")
+            Core.<*> (o Core..:? "temperature")
       )
 
 instance
@@ -2158,10 +2411,7 @@ newChromeOsDevice_DiskVolumeReportsItem ::
 newChromeOsDevice_DiskVolumeReportsItem =
   ChromeOsDevice_DiskVolumeReportsItem {volumeInfo = Core.Nothing}
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_DiskVolumeReportsItem
-  where
+instance Core.FromJSON ChromeOsDevice_DiskVolumeReportsItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_DiskVolumeReportsItem"
@@ -2170,15 +2420,10 @@ instance
             Core.<$> (o Core..:? "volumeInfo")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_DiskVolumeReportsItem
-  where
+instance Core.ToJSON ChromeOsDevice_DiskVolumeReportsItem where
   toJSON ChromeOsDevice_DiskVolumeReportsItem {..} =
     Core.object
-      ( Core.catMaybes
-          [("volumeInfo" Core..=) Core.<$> volumeInfo]
-      )
+      (Core.catMaybes [("volumeInfo" Core..=) Core.<$> volumeInfo])
 
 --
 -- /See:/ 'newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem' smart constructor.
@@ -2197,7 +2442,8 @@ newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem ::
   ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
 newChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem =
   ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
-    { storageFree = Core.Nothing,
+    { storageFree =
+        Core.Nothing,
       storageTotal = Core.Nothing,
       volumeId = Core.Nothing
     }
@@ -2211,30 +2457,23 @@ instance
       "ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem"
       ( \o ->
           ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
-            Core.<$> ( o Core..:? "storageFree"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-              Core.<*> ( o Core..:? "storageTotal"
-                           Core.<&> Core.fmap Core.fromAsText
-                       )
-              Core.<*> (o Core..:? "volumeId")
+            Core.<$> (o Core..:? "storageFree" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "storageTotal" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "volumeId")
       )
 
 instance
   Core.ToJSON
     ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem
   where
-  toJSON
-    ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("storageFree" Core..=) Core.. Core.AsText
-                Core.<$> storageFree,
-              ("storageTotal" Core..=) Core.. Core.AsText
-                Core.<$> storageTotal,
-              ("volumeId" Core..=) Core.<$> volumeId
-            ]
-        )
+  toJSON ChromeOsDevice_DiskVolumeReportsItem_VolumeInfoItem {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("storageFree" Core..=) Core.. Core.AsText Core.<$> storageFree,
+            ("storageTotal" Core..=) Core.. Core.AsText Core.<$> storageTotal,
+            ("volumeId" Core..=) Core.<$> volumeId
+          ]
+      )
 
 -- | Information for an ip address.
 --
@@ -2256,10 +2495,7 @@ newChromeOsDevice_LastKnownNetworkItem =
       wanIpAddress = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_LastKnownNetworkItem
-  where
+instance Core.FromJSON ChromeOsDevice_LastKnownNetworkItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_LastKnownNetworkItem"
@@ -2269,10 +2505,7 @@ instance
             Core.<*> (o Core..:? "wanIpAddress")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_LastKnownNetworkItem
-  where
+instance Core.ToJSON ChromeOsDevice_LastKnownNetworkItem where
   toJSON ChromeOsDevice_LastKnownNetworkItem {..} =
     Core.object
       ( Core.catMaybes
@@ -2296,7 +2529,10 @@ data ChromeOsDevice_RecentUsersItem = ChromeOsDevice_RecentUsersItem
 newChromeOsDevice_RecentUsersItem ::
   ChromeOsDevice_RecentUsersItem
 newChromeOsDevice_RecentUsersItem =
-  ChromeOsDevice_RecentUsersItem {email = Core.Nothing, type' = Core.Nothing}
+  ChromeOsDevice_RecentUsersItem
+    { email = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON ChromeOsDevice_RecentUsersItem where
   parseJSON =
@@ -2304,7 +2540,8 @@ instance Core.FromJSON ChromeOsDevice_RecentUsersItem where
       "ChromeOsDevice_RecentUsersItem"
       ( \o ->
           ChromeOsDevice_RecentUsersItem
-            Core.<$> (o Core..:? "email") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "email")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON ChromeOsDevice_RecentUsersItem where
@@ -2341,10 +2578,7 @@ newChromeOsDevice_ScreenshotFilesItem =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_ScreenshotFilesItem
-  where
+instance Core.FromJSON ChromeOsDevice_ScreenshotFilesItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_ScreenshotFilesItem"
@@ -2356,10 +2590,7 @@ instance
             Core.<*> (o Core..:? "type")
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_ScreenshotFilesItem
-  where
+instance Core.ToJSON ChromeOsDevice_ScreenshotFilesItem where
   toJSON ChromeOsDevice_ScreenshotFilesItem {..} =
     Core.object
       ( Core.catMaybes
@@ -2375,7 +2606,6 @@ instance
 data ChromeOsDevice_SystemRamFreeReportsItem = ChromeOsDevice_SystemRamFreeReportsItem
   { -- | Date and time the report was received.
     reportTime :: (Core.Maybe Core.DateTime),
-    -- |
     systemRamFreeInfo :: (Core.Maybe [Core.Int64])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2385,29 +2615,25 @@ newChromeOsDevice_SystemRamFreeReportsItem ::
   ChromeOsDevice_SystemRamFreeReportsItem
 newChromeOsDevice_SystemRamFreeReportsItem =
   ChromeOsDevice_SystemRamFreeReportsItem
-    { reportTime = Core.Nothing,
+    { reportTime =
+        Core.Nothing,
       systemRamFreeInfo = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ChromeOsDevice_SystemRamFreeReportsItem
-  where
+instance Core.FromJSON ChromeOsDevice_SystemRamFreeReportsItem where
   parseJSON =
     Core.withObject
       "ChromeOsDevice_SystemRamFreeReportsItem"
       ( \o ->
           ChromeOsDevice_SystemRamFreeReportsItem
             Core.<$> (o Core..:? "reportTime")
-            Core.<*> ( o Core..:? "systemRamFreeInfo"
+            Core.<*> ( o
+                         Core..:? "systemRamFreeInfo"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
       )
 
-instance
-  Core.ToJSON
-    ChromeOsDevice_SystemRamFreeReportsItem
-  where
+instance Core.ToJSON ChromeOsDevice_SystemRamFreeReportsItem where
   toJSON ChromeOsDevice_SystemRamFreeReportsItem {..} =
     Core.object
       ( Core.catMaybes
@@ -2492,7 +2718,10 @@ data ChromeOsDeviceAction = ChromeOsDeviceAction
 newChromeOsDeviceAction ::
   ChromeOsDeviceAction
 newChromeOsDeviceAction =
-  ChromeOsDeviceAction {action = Core.Nothing, deprovisionReason = Core.Nothing}
+  ChromeOsDeviceAction
+    { action = Core.Nothing,
+      deprovisionReason = Core.Nothing
+    }
 
 instance Core.FromJSON ChromeOsDeviceAction where
   parseJSON =
@@ -2509,8 +2738,7 @@ instance Core.ToJSON ChromeOsDeviceAction where
     Core.object
       ( Core.catMaybes
           [ ("action" Core..=) Core.<$> action,
-            ("deprovisionReason" Core..=)
-              Core.<$> deprovisionReason
+            ("deprovisionReason" Core..=) Core.<$> deprovisionReason
           ]
       )
 
@@ -2547,9 +2775,7 @@ instance Core.FromJSON ChromeOsDevices where
           ChromeOsDevices
             Core.<$> (o Core..:? "chromeosdevices")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#chromeosdevices"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#chromeosdevices")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -2557,8 +2783,7 @@ instance Core.ToJSON ChromeOsDevices where
   toJSON ChromeOsDevices {..} =
     Core.object
       ( Core.catMaybes
-          [ ("chromeosdevices" Core..=)
-              Core.<$> chromeosdevices,
+          [ ("chromeosdevices" Core..=) Core.<$> chromeosdevices,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
             ("nextPageToken" Core..=) Core.<$> nextPageToken
@@ -2576,23 +2801,19 @@ newtype ChromeOsMoveDevicesToOu = ChromeOsMoveDevicesToOu
 -- | Creates a value of 'ChromeOsMoveDevicesToOu' with the minimum fields required to make a request.
 newChromeOsMoveDevicesToOu ::
   ChromeOsMoveDevicesToOu
-newChromeOsMoveDevicesToOu = ChromeOsMoveDevicesToOu {deviceIds = Core.Nothing}
+newChromeOsMoveDevicesToOu =
+  ChromeOsMoveDevicesToOu {deviceIds = Core.Nothing}
 
 instance Core.FromJSON ChromeOsMoveDevicesToOu where
   parseJSON =
     Core.withObject
       "ChromeOsMoveDevicesToOu"
-      ( \o ->
-          ChromeOsMoveDevicesToOu
-            Core.<$> (o Core..:? "deviceIds")
-      )
+      (\o -> ChromeOsMoveDevicesToOu Core.<$> (o Core..:? "deviceIds"))
 
 instance Core.ToJSON ChromeOsMoveDevicesToOu where
   toJSON ChromeOsMoveDevicesToOu {..} =
     Core.object
-      ( Core.catMaybes
-          [("deviceIds" Core..=) Core.<$> deviceIds]
-      )
+      (Core.catMaybes [("deviceIds" Core..=) Core.<$> deviceIds])
 
 -- | Request for adding a new print server.
 --
@@ -2609,7 +2830,10 @@ data CreatePrintServerRequest = CreatePrintServerRequest
 newCreatePrintServerRequest ::
   CreatePrintServerRequest
 newCreatePrintServerRequest =
-  CreatePrintServerRequest {parent = Core.Nothing, printServer = Core.Nothing}
+  CreatePrintServerRequest
+    { parent = Core.Nothing,
+      printServer = Core.Nothing
+    }
 
 instance Core.FromJSON CreatePrintServerRequest where
   parseJSON =
@@ -2645,7 +2869,10 @@ data CreatePrinterRequest = CreatePrinterRequest
 newCreatePrinterRequest ::
   CreatePrinterRequest
 newCreatePrinterRequest =
-  CreatePrinterRequest {parent = Core.Nothing, printer = Core.Nothing}
+  CreatePrinterRequest
+    { parent = Core.Nothing,
+      printer = Core.Nothing
+    }
 
 instance Core.FromJSON CreatePrinterRequest where
   parseJSON =
@@ -2717,9 +2944,7 @@ instance Core.FromJSON Customer where
             Core.<*> (o Core..:? "customerDomain")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#customer"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#customer")
             Core.<*> (o Core..:? "language")
             Core.<*> (o Core..:? "phoneNumber")
             Core.<*> (o Core..:? "postalAddress")
@@ -2730,8 +2955,7 @@ instance Core.ToJSON Customer where
     Core.object
       ( Core.catMaybes
           [ ("alternateEmail" Core..=) Core.<$> alternateEmail,
-            ("customerCreationTime" Core..=)
-              Core.<$> customerCreationTime,
+            ("customerCreationTime" Core..=) Core.<$> customerCreationTime,
             ("customerDomain" Core..=) Core.<$> customerDomain,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
@@ -2809,8 +3033,7 @@ instance Core.ToJSON CustomerPostalAddress where
             ("contactName" Core..=) Core.<$> contactName,
             ("countryCode" Core..=) Core.<$> countryCode,
             ("locality" Core..=) Core.<$> locality,
-            ("organizationName" Core..=)
-              Core.<$> organizationName,
+            ("organizationName" Core..=) Core.<$> organizationName,
             ("postalCode" Core..=) Core.<$> postalCode,
             ("region" Core..=) Core.<$> region
           ]
@@ -2851,19 +3074,14 @@ newDirectoryChromeosdevicesCommand =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DirectoryChromeosdevicesCommand
-  where
+instance Core.FromJSON DirectoryChromeosdevicesCommand where
   parseJSON =
     Core.withObject
       "DirectoryChromeosdevicesCommand"
       ( \o ->
           DirectoryChromeosdevicesCommand
             Core.<$> (o Core..:? "commandExpireTime")
-            Core.<*> ( o Core..:? "commandId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "commandId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "commandResult")
             Core.<*> (o Core..:? "issueTime")
             Core.<*> (o Core..:? "payload")
@@ -2875,10 +3093,8 @@ instance Core.ToJSON DirectoryChromeosdevicesCommand where
   toJSON DirectoryChromeosdevicesCommand {..} =
     Core.object
       ( Core.catMaybes
-          [ ("commandExpireTime" Core..=)
-              Core.<$> commandExpireTime,
-            ("commandId" Core..=) Core.. Core.AsText
-              Core.<$> commandId,
+          [ ("commandExpireTime" Core..=) Core.<$> commandExpireTime,
+            ("commandId" Core..=) Core.. Core.AsText Core.<$> commandId,
             ("commandResult" Core..=) Core.<$> commandResult,
             ("issueTime" Core..=) Core.<$> issueTime,
             ("payload" Core..=) Core.<$> payload,
@@ -2907,16 +3123,14 @@ newDirectoryChromeosdevicesCommandResult ::
   DirectoryChromeosdevicesCommandResult
 newDirectoryChromeosdevicesCommandResult =
   DirectoryChromeosdevicesCommandResult
-    { commandResultPayload = Core.Nothing,
+    { commandResultPayload =
+        Core.Nothing,
       errorMessage = Core.Nothing,
       executeTime = Core.Nothing,
       result = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DirectoryChromeosdevicesCommandResult
-  where
+instance Core.FromJSON DirectoryChromeosdevicesCommandResult where
   parseJSON =
     Core.withObject
       "DirectoryChromeosdevicesCommandResult"
@@ -2928,15 +3142,11 @@ instance
             Core.<*> (o Core..:? "result")
       )
 
-instance
-  Core.ToJSON
-    DirectoryChromeosdevicesCommandResult
-  where
+instance Core.ToJSON DirectoryChromeosdevicesCommandResult where
   toJSON DirectoryChromeosdevicesCommandResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("commandResultPayload" Core..=)
-              Core.<$> commandResultPayload,
+          [ ("commandResultPayload" Core..=) Core.<$> commandResultPayload,
             ("errorMessage" Core..=) Core.<$> errorMessage,
             ("executeTime" Core..=) Core.<$> executeTime,
             ("result" Core..=) Core.<$> result
@@ -2952,7 +3162,9 @@ data DirectoryChromeosdevicesIssueCommandRequest = DirectoryChromeosdevicesIssue
       ( Core.Maybe
           DirectoryChromeosdevicesIssueCommandRequest_CommandType
       ),
-    -- | The payload for the command, provide it only if command supports it. The following commands support adding payload: * @SET_VOLUME@: Payload is a stringified JSON object in the form: { \"volume\": 50 }. The volume has to be an integer in the range [0,100]. * @DEVICE_START_CRD_SESSION@: Payload is optionally a stringified JSON object in the form: { \"ackedUserPresence\": true }. @ackedUserPresence@ is a boolean. By default, @ackedUserPresence@ is set to @false@. To start a Chrome Remote Desktop session for an active device, set @ackedUserPresence@ to @true@.
+    -- | The payload for the command, provide it only if command supports it. The following commands support adding payload: * @SET_VOLUME@: Payload is a stringified JSON object in the form: { \"volume\": 50 }. The volume has to be an integer in the range [0,100]. * @DEVICE_START_CRD_SESSION@: Payload is optionally a stringified JSON object in the form: { \"ackedUserPresence\": true, \"crdSessionType\": string }. @ackedUserPresence@ is a boolean. By default, @ackedUserPresence@ is set to @false@. To start a Chrome Remote Desktop session for an active device, set @ackedUserPresence@ to @true@. @crdSessionType@ can only select from values @private@ (which grants the remote admin exclusive control of the ChromeOS device) or @shared@ (which allows the admin and the local user to share control of the ChromeOS device). If not set, @crdSessionType@ defaults to @shared@. * @REBOOT@: Payload is a stringified JSON object in the form: { \"user/session/delay/seconds\": 300 }. The @user_session_delay_seconds@ is the amount of
+    -- seconds to wait before rebooting the device if a user is logged in. It has to be an integer in the range [0,300]. When payload is not present for reboot, 0 delay is the default. Note: This only applies if an actual user is logged in, including a Guest. If the device is in the login screen or in Kiosk mode the value is not respected and the device immediately reboots. * @FETCH_SUPPORT_PACKET@: Payload is optionally a stringified JSON object in the form: {\"supportPacketDetails\":{ \"issueCaseId\": optional/support/case/id/string, \"issueDescription\": optional/issue/description/string, \"requestedDataCollectors\": []}} The list of available @data_collector_enums@ are as following: Chrome System Information (1), Crash IDs (2), Memory Details (3), UI Hierarchy (4), Additional ChromeOS Platform Logs (5), Device Event (6), Intel WiFi NICs Debug Dump (7), Touch Events (8), Lacros (9), Lacros System Information (10), ChromeOS Flex Logs (11), DBus Details (12), ChromeOS Network Routes (13), ChromeOS Shill (Connection
+    -- Manager) Logs (14), Policies (15), ChromeOS System State and Logs (16), ChromeOS System Logs (17), ChromeOS Chrome User Logs (18), ChromeOS Bluetooth (19), ChromeOS Connected Input Devices (20), ChromeOS Traffic Counters (21), ChromeOS Virtual Keyboard (22), ChromeOS Network Health (23). See more details in <https://support.google.com/chrome/a?p=remote-log help article>.
     payload :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2962,14 +3174,12 @@ newDirectoryChromeosdevicesIssueCommandRequest ::
   DirectoryChromeosdevicesIssueCommandRequest
 newDirectoryChromeosdevicesIssueCommandRequest =
   DirectoryChromeosdevicesIssueCommandRequest
-    { commandType = Core.Nothing,
+    { commandType =
+        Core.Nothing,
       payload = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    DirectoryChromeosdevicesIssueCommandRequest
-  where
+instance Core.FromJSON DirectoryChromeosdevicesIssueCommandRequest where
   parseJSON =
     Core.withObject
       "DirectoryChromeosdevicesIssueCommandRequest"
@@ -2979,18 +3189,14 @@ instance
             Core.<*> (o Core..:? "payload")
       )
 
-instance
-  Core.ToJSON
-    DirectoryChromeosdevicesIssueCommandRequest
-  where
-  toJSON
-    DirectoryChromeosdevicesIssueCommandRequest {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("commandType" Core..=) Core.<$> commandType,
-              ("payload" Core..=) Core.<$> payload
-            ]
-        )
+instance Core.ToJSON DirectoryChromeosdevicesIssueCommandRequest where
+  toJSON DirectoryChromeosdevicesIssueCommandRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("commandType" Core..=) Core.<$> commandType,
+            ("payload" Core..=) Core.<$> payload
+          ]
+      )
 
 -- | A response for issuing a command.
 --
@@ -3005,34 +3211,26 @@ newtype DirectoryChromeosdevicesIssueCommandResponse = DirectoryChromeosdevicesI
 newDirectoryChromeosdevicesIssueCommandResponse ::
   DirectoryChromeosdevicesIssueCommandResponse
 newDirectoryChromeosdevicesIssueCommandResponse =
-  DirectoryChromeosdevicesIssueCommandResponse {commandId = Core.Nothing}
+  DirectoryChromeosdevicesIssueCommandResponse
+    { commandId =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    DirectoryChromeosdevicesIssueCommandResponse
-  where
+instance Core.FromJSON DirectoryChromeosdevicesIssueCommandResponse where
   parseJSON =
     Core.withObject
       "DirectoryChromeosdevicesIssueCommandResponse"
       ( \o ->
           DirectoryChromeosdevicesIssueCommandResponse
-            Core.<$> ( o Core..:? "commandId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "commandId" Core.<&> Core.fmap Core.fromAsText)
       )
 
-instance
-  Core.ToJSON
-    DirectoryChromeosdevicesIssueCommandResponse
-  where
-  toJSON
-    DirectoryChromeosdevicesIssueCommandResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("commandId" Core..=) Core.. Core.AsText
-                Core.<$> commandId
-            ]
-        )
+instance Core.ToJSON DirectoryChromeosdevicesIssueCommandResponse where
+  toJSON DirectoryChromeosdevicesIssueCommandResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("commandId" Core..=) Core.. Core.AsText Core.<$> commandId]
+      )
 
 --
 -- /See:/ 'newDomainAlias' smart constructor.
@@ -3071,14 +3269,10 @@ instance Core.FromJSON DomainAlias where
       "DomainAlias"
       ( \o ->
           DomainAlias
-            Core.<$> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "domainAliasName")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#domainAlias"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#domainAlias")
             Core.<*> (o Core..:? "parentDomainName")
             Core.<*> (o Core..:? "verified")
       )
@@ -3087,13 +3281,11 @@ instance Core.ToJSON DomainAlias where
   toJSON DomainAlias {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
+          [ ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("domainAliasName" Core..=) Core.<$> domainAliasName,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
-            ("parentDomainName" Core..=)
-              Core.<$> parentDomainName,
+            ("parentDomainName" Core..=) Core.<$> parentDomainName,
             ("verified" Core..=) Core.<$> verified
           ]
       )
@@ -3128,9 +3320,7 @@ instance Core.FromJSON DomainAliases where
           DomainAliases
             Core.<$> (o Core..:? "domainAliases")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#domainAliases"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#domainAliases")
       )
 
 instance Core.ToJSON DomainAliases where
@@ -3183,9 +3373,7 @@ instance Core.FromJSON Domains where
       "Domains"
       ( \o ->
           Domains
-            Core.<$> ( o Core..:? "creationTime"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "creationTime" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "domainAliases")
             Core.<*> (o Core..:? "domainName")
             Core.<*> (o Core..:? "etag")
@@ -3198,8 +3386,7 @@ instance Core.ToJSON Domains where
   toJSON Domains {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creationTime" Core..=) Core.. Core.AsText
-              Core.<$> creationTime,
+          [ ("creationTime" Core..=) Core.. Core.AsText Core.<$> creationTime,
             ("domainAliases" Core..=) Core.<$> domainAliases,
             ("domainName" Core..=) Core.<$> domainName,
             ("etag" Core..=) Core.<$> etag,
@@ -3239,9 +3426,7 @@ instance Core.FromJSON Domains2 where
           Domains2
             Core.<$> (o Core..:? "domains")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#domains"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#domains")
       )
 
 instance Core.ToJSON Domains2 where
@@ -3266,8 +3451,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -3321,6 +3505,31 @@ instance Core.ToJSON FailureInfo where
           ]
       )
 
+-- | Information about the device\'s fan.
+--
+-- /See:/ 'newFanInfo' smart constructor.
+newtype FanInfo = FanInfo
+  { -- | Output only. Fan speed in RPM.
+    speedRpm :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FanInfo' with the minimum fields required to make a request.
+newFanInfo ::
+  FanInfo
+newFanInfo = FanInfo {speedRpm = Core.Nothing}
+
+instance Core.FromJSON FanInfo where
+  parseJSON =
+    Core.withObject
+      "FanInfo"
+      (\o -> FanInfo Core.<$> (o Core..:? "speedRpm"))
+
+instance Core.ToJSON FanInfo where
+  toJSON FanInfo {..} =
+    Core.object
+      (Core.catMaybes [("speedRpm" Core..=) Core.<$> speedRpm])
+
 -- | JSON template for Feature object in Directory API.
 --
 -- /See:/ 'newFeature' smart constructor.
@@ -3351,7 +3560,8 @@ instance Core.FromJSON Feature where
       ( \o ->
           Feature
             Core.<$> (o Core..:? "etags")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#features#Feature"
                      )
             Core.<*> (o Core..:? "name")
@@ -3385,16 +3595,12 @@ instance Core.FromJSON FeatureInstance where
   parseJSON =
     Core.withObject
       "FeatureInstance"
-      ( \o ->
-          FeatureInstance Core.<$> (o Core..:? "feature")
-      )
+      (\o -> FeatureInstance Core.<$> (o Core..:? "feature"))
 
 instance Core.ToJSON FeatureInstance where
   toJSON FeatureInstance {..} =
     Core.object
-      ( Core.catMaybes
-          [("feature" Core..=) Core.<$> feature]
-      )
+      (Core.catMaybes [("feature" Core..=) Core.<$> feature])
 
 --
 -- /See:/ 'newFeatureRename' smart constructor.
@@ -3413,16 +3619,12 @@ instance Core.FromJSON FeatureRename where
   parseJSON =
     Core.withObject
       "FeatureRename"
-      ( \o ->
-          FeatureRename Core.<$> (o Core..:? "newName")
-      )
+      (\o -> FeatureRename Core.<$> (o Core..:? "newName"))
 
 instance Core.ToJSON FeatureRename where
   toJSON FeatureRename {..} =
     Core.object
-      ( Core.catMaybes
-          [("newName" Core..=) Core.<$> newName']
-      )
+      (Core.catMaybes [("newName" Core..=) Core.<$> newName'])
 
 -- | Public API: Resources.features
 --
@@ -3458,7 +3660,8 @@ instance Core.FromJSON Features where
           Features
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "features")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#resources#features#featuresList"
                      )
             Core.<*> (o Core..:? "nextPageToken")
@@ -3528,7 +3731,8 @@ instance Core.FromJSON Group where
             Core.<$> (o Core..:? "adminCreated")
             Core.<*> (o Core..:? "aliases")
             Core.<*> (o Core..:? "description")
-            Core.<*> ( o Core..:? "directMembersCount"
+            Core.<*> ( o
+                         Core..:? "directMembersCount"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "email")
@@ -3546,15 +3750,15 @@ instance Core.ToJSON Group where
           [ ("adminCreated" Core..=) Core.<$> adminCreated,
             ("aliases" Core..=) Core.<$> aliases,
             ("description" Core..=) Core.<$> description,
-            ("directMembersCount" Core..=) Core.. Core.AsText
+            ("directMembersCount" Core..=)
+              Core.. Core.AsText
               Core.<$> directMembersCount,
             ("email" Core..=) Core.<$> email,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("name" Core..=) Core.<$> name,
-            ("nonEditableAliases" Core..=)
-              Core.<$> nonEditableAliases
+            ("nonEditableAliases" Core..=) Core.<$> nonEditableAliases
           ]
       )
 
@@ -3752,7 +3956,10 @@ data ListPrintersResponse = ListPrintersResponse
 newListPrintersResponse ::
   ListPrintersResponse
 newListPrintersResponse =
-  ListPrintersResponse {nextPageToken = Core.Nothing, printers = Core.Nothing}
+  ListPrintersResponse
+    { nextPageToken = Core.Nothing,
+      printers = Core.Nothing
+    }
 
 instance Core.FromJSON ListPrintersResponse where
   parseJSON =
@@ -3777,7 +3984,7 @@ instance Core.ToJSON ListPrintersResponse where
 --
 -- /See:/ 'newMember' smart constructor.
 data Member = Member
-  { -- | Defines mail delivery preferences of member. This is only supported by create\/update\/get.
+  { -- | Defines mail delivery preferences of member. This field is only supported by @insert@, @update@, and @get@ methods.
     deliverySettings :: (Core.Maybe Core.Text),
     -- | The member\'s email address. A member can be a user or another group. This property is required when adding a member to a group. The @email@ must be unique and cannot be an alias of another group. If the email address is changed, the API automatically reflects the email address changes.
     email :: (Core.Maybe Core.Text),
@@ -3831,8 +4038,7 @@ instance Core.ToJSON Member where
   toJSON Member {..} =
     Core.object
       ( Core.catMaybes
-          [ ("delivery_settings" Core..=)
-              Core.<$> deliverySettings,
+          [ ("delivery_settings" Core..=) Core.<$> deliverySettings,
             ("email" Core..=) Core.<$> email,
             ("etag" Core..=) Core.<$> etag,
             ("id" Core..=) Core.<$> id,
@@ -3875,9 +4081,7 @@ instance Core.FromJSON Members where
       ( \o ->
           Members
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#members"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#members")
             Core.<*> (o Core..:? "members")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -3911,16 +4115,12 @@ instance Core.FromJSON MembersHasMember where
   parseJSON =
     Core.withObject
       "MembersHasMember"
-      ( \o ->
-          MembersHasMember Core.<$> (o Core..:? "isMember")
-      )
+      (\o -> MembersHasMember Core.<$> (o Core..:? "isMember"))
 
 instance Core.ToJSON MembersHasMember where
   toJSON MembersHasMember {..} =
     Core.object
-      ( Core.catMaybes
-          [("isMember" Core..=) Core.<$> isMember]
-      )
+      (Core.catMaybes [("isMember" Core..=) Core.<$> isMember])
 
 -- | Google Workspace Mobile Management includes Android, <https://support.google.com/a/answer/135937 Google Sync>, and iOS devices. For more information about common group mobile device API tasks, see the </admin-sdk/directory/v1/guides/manage-mobile-devices.html Developer\'s Guide>.
 --
@@ -4081,9 +4281,7 @@ instance Core.FromJSON MobileDevice where
             Core.<*> (o Core..:? "hardwareId")
             Core.<*> (o Core..:? "imei")
             Core.<*> (o Core..:? "kernelVersion")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#mobiledevice"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#mobiledevice")
             Core.<*> (o Core..:? "lastSync")
             Core.<*> (o Core..:? "managedAccountIsOnOwnerProfile")
             Core.<*> (o Core..:? "manufacturer")
@@ -4096,7 +4294,8 @@ instance Core.FromJSON MobileDevice where
             Core.<*> (o Core..:? "privilege")
             Core.<*> (o Core..:? "releaseVersion")
             Core.<*> (o Core..:? "resourceId")
-            Core.<*> ( o Core..:? "securityPatchLevel"
+            Core.<*> ( o
+                         Core..:? "securityPatchLevel"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "serialNumber")
@@ -4115,21 +4314,17 @@ instance Core.ToJSON MobileDevice where
           [ ("adbStatus" Core..=) Core.<$> adbStatus,
             ("applications" Core..=) Core.<$> applications,
             ("basebandVersion" Core..=) Core.<$> basebandVersion,
-            ("bootloaderVersion" Core..=)
-              Core.<$> bootloaderVersion,
+            ("bootloaderVersion" Core..=) Core.<$> bootloaderVersion,
             ("brand" Core..=) Core.<$> brand,
             ("buildNumber" Core..=) Core.<$> buildNumber,
             ("defaultLanguage" Core..=) Core.<$> defaultLanguage,
-            ("developerOptionsStatus" Core..=)
-              Core.<$> developerOptionsStatus,
+            ("developerOptionsStatus" Core..=) Core.<$> developerOptionsStatus,
             ("deviceCompromisedStatus" Core..=)
               Core.<$> deviceCompromisedStatus,
             ("deviceId" Core..=) Core.<$> deviceId,
-            ("devicePasswordStatus" Core..=)
-              Core.<$> devicePasswordStatus,
+            ("devicePasswordStatus" Core..=) Core.<$> devicePasswordStatus,
             ("email" Core..=) Core.<$> email,
-            ("encryptionStatus" Core..=)
-              Core.<$> encryptionStatus,
+            ("encryptionStatus" Core..=) Core.<$> encryptionStatus,
             ("etag" Core..=) Core.<$> etag,
             ("firstSync" Core..=) Core.<$> firstSync,
             ("hardware" Core..=) Core.<$> hardware,
@@ -4146,20 +4341,18 @@ instance Core.ToJSON MobileDevice where
             ("name" Core..=) Core.<$> name,
             ("networkOperator" Core..=) Core.<$> networkOperator,
             ("os" Core..=) Core.<$> os,
-            ("otherAccountsInfo" Core..=)
-              Core.<$> otherAccountsInfo,
+            ("otherAccountsInfo" Core..=) Core.<$> otherAccountsInfo,
             ("privilege" Core..=) Core.<$> privilege,
             ("releaseVersion" Core..=) Core.<$> releaseVersion,
             ("resourceId" Core..=) Core.<$> resourceId,
-            ("securityPatchLevel" Core..=) Core.. Core.AsText
+            ("securityPatchLevel" Core..=)
+              Core.. Core.AsText
               Core.<$> securityPatchLevel,
             ("serialNumber" Core..=) Core.<$> serialNumber,
             ("status" Core..=) Core.<$> status,
-            ("supportsWorkProfile" Core..=)
-              Core.<$> supportsWorkProfile,
+            ("supportsWorkProfile" Core..=) Core.<$> supportsWorkProfile,
             ("type" Core..=) Core.<$> type',
-            ("unknownSourcesStatus" Core..=)
-              Core.<$> unknownSourcesStatus,
+            ("unknownSourcesStatus" Core..=) Core.<$> unknownSourcesStatus,
             ("userAgent" Core..=) Core.<$> userAgent,
             ("wifiMacAddress" Core..=) Core.<$> wifiMacAddress
           ]
@@ -4235,14 +4428,11 @@ instance Core.FromJSON MobileDeviceAction where
   parseJSON =
     Core.withObject
       "MobileDeviceAction"
-      ( \o ->
-          MobileDeviceAction Core.<$> (o Core..:? "action")
-      )
+      (\o -> MobileDeviceAction Core.<$> (o Core..:? "action"))
 
 instance Core.ToJSON MobileDeviceAction where
   toJSON MobileDeviceAction {..} =
-    Core.object
-      (Core.catMaybes [("action" Core..=) Core.<$> action])
+    Core.object (Core.catMaybes [("action" Core..=) Core.<$> action])
 
 --
 -- /See:/ 'newMobileDevices' smart constructor.
@@ -4276,9 +4466,7 @@ instance Core.FromJSON MobileDevices where
       ( \o ->
           MobileDevices
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#mobiledevices"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#mobiledevices")
             Core.<*> (o Core..:? "mobiledevices")
             Core.<*> (o Core..:? "nextPageToken")
       )
@@ -4298,7 +4486,7 @@ instance Core.ToJSON MobileDevices where
 --
 -- /See:/ 'newOrgUnit' smart constructor.
 data OrgUnit = OrgUnit
-  { -- | Determines if a sub-organizational unit can inherit the settings of the parent organization. The default value is @false@, meaning a sub-organizational unit inherits the settings of the nearest parent organizational unit. For more information on inheritance and users in an organization structure, see the <https://support.google.com/a/answer/4352075 administration help center>.
+  { -- | This field is deprecated and setting its value has no effect.
     blockInheritance :: (Core.Maybe Core.Bool),
     -- | Description of the organizational unit.
     description :: (Core.Maybe Core.Text),
@@ -4344,9 +4532,7 @@ instance Core.FromJSON OrgUnit where
             Core.<$> (o Core..:? "blockInheritance")
             Core.<*> (o Core..:? "description")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#orgUnit"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#orgUnit")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "orgUnitId")
             Core.<*> (o Core..:? "orgUnitPath")
@@ -4358,8 +4544,7 @@ instance Core.ToJSON OrgUnit where
   toJSON OrgUnit {..} =
     Core.object
       ( Core.catMaybes
-          [ ("blockInheritance" Core..=)
-              Core.<$> blockInheritance,
+          [ ("blockInheritance" Core..=) Core.<$> blockInheritance,
             ("description" Core..=) Core.<$> description,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
@@ -4367,8 +4552,7 @@ instance Core.ToJSON OrgUnit where
             ("orgUnitId" Core..=) Core.<$> orgUnitId,
             ("orgUnitPath" Core..=) Core.<$> orgUnitPath,
             ("parentOrgUnitId" Core..=) Core.<$> parentOrgUnitId,
-            ("parentOrgUnitPath" Core..=)
-              Core.<$> parentOrgUnitPath
+            ("parentOrgUnitPath" Core..=) Core.<$> parentOrgUnitPath
           ]
       )
 
@@ -4401,9 +4585,7 @@ instance Core.FromJSON OrgUnits where
       ( \o ->
           OrgUnits
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#orgUnits"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#orgUnits")
             Core.<*> (o Core..:? "organizationUnits")
       )
 
@@ -4413,8 +4595,7 @@ instance Core.ToJSON OrgUnits where
       ( Core.catMaybes
           [ ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
-            ("organizationUnits" Core..=)
-              Core.<$> organizationUnits
+            ("organizationUnits" Core..=) Core.<$> organizationUnits
           ]
       )
 
@@ -4470,8 +4651,7 @@ instance Core.ToJSON OsUpdateStatus where
       ( Core.catMaybes
           [ ("rebootTime" Core..=) Core.<$> rebootTime,
             ("state" Core..=) Core.<$> state,
-            ("targetKioskAppVersion" Core..=)
-              Core.<$> targetKioskAppVersion,
+            ("targetKioskAppVersion" Core..=) Core.<$> targetKioskAppVersion,
             ("targetOsVersion" Core..=) Core.<$> targetOsVersion,
             ("updateCheckTime" Core..=) Core.<$> updateCheckTime,
             ("updateTime" Core..=) Core.<$> updateTime
@@ -4657,8 +4837,7 @@ instance Core.ToJSON Printer where
   toJSON Printer {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auxiliaryMessages" Core..=)
-              Core.<$> auxiliaryMessages,
+          [ ("auxiliaryMessages" Core..=) Core.<$> auxiliaryMessages,
             ("createTime" Core..=) Core.<$> createTime,
             ("description" Core..=) Core.<$> description,
             ("displayName" Core..=) Core.<$> displayName,
@@ -4667,8 +4846,7 @@ instance Core.ToJSON Printer where
             ("name" Core..=) Core.<$> name,
             ("orgUnitId" Core..=) Core.<$> orgUnitId,
             ("uri" Core..=) Core.<$> uri,
-            ("useDriverlessConfig" Core..=)
-              Core.<$> useDriverlessConfig
+            ("useDriverlessConfig" Core..=) Core.<$> useDriverlessConfig
           ]
       )
 
@@ -4759,9 +4937,7 @@ instance Core.FromJSON Privilege where
             Core.<$> (o Core..:? "childPrivileges")
             Core.<*> (o Core..:? "etag")
             Core.<*> (o Core..:? "isOuScopable")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#privilege"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#privilege")
             Core.<*> (o Core..:? "privilegeName")
             Core.<*> (o Core..:? "serviceId")
             Core.<*> (o Core..:? "serviceName")
@@ -4771,8 +4947,7 @@ instance Core.ToJSON Privilege where
   toJSON Privilege {..} =
     Core.object
       ( Core.catMaybes
-          [ ("childPrivileges" Core..=)
-              Core.<$> childPrivileges,
+          [ ("childPrivileges" Core..=) Core.<$> childPrivileges,
             ("etag" Core..=) Core.<$> etag,
             ("isOuScopable" Core..=) Core.<$> isOuScopable,
             Core.Just ("kind" Core..= kind),
@@ -4812,9 +4987,7 @@ instance Core.FromJSON Privileges where
           Privileges
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#privileges"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#privileges")
       )
 
 instance Core.ToJSON Privileges where
@@ -4875,9 +5048,7 @@ instance Core.FromJSON Role where
             Core.<*> (o Core..:? "isSystemRole")
             Core.<*> (o Core..:? "kind" Core..!= "admin#directory#role")
             Core.<*> (o Core..:? "roleDescription")
-            Core.<*> ( o Core..:? "roleId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "roleId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "roleName")
             Core.<*> (o Core..:? "rolePrivileges")
       )
@@ -4887,13 +5058,11 @@ instance Core.ToJSON Role where
     Core.object
       ( Core.catMaybes
           [ ("etag" Core..=) Core.<$> etag,
-            ("isSuperAdminRole" Core..=)
-              Core.<$> isSuperAdminRole,
+            ("isSuperAdminRole" Core..=) Core.<$> isSuperAdminRole,
             ("isSystemRole" Core..=) Core.<$> isSystemRole,
             Core.Just ("kind" Core..= kind),
             ("roleDescription" Core..=) Core.<$> roleDescription,
-            ("roleId" Core..=) Core.. Core.AsText
-              Core.<$> roleId,
+            ("roleId" Core..=) Core.. Core.AsText Core.<$> roleId,
             ("roleName" Core..=) Core.<$> roleName,
             ("rolePrivileges" Core..=) Core.<$> rolePrivileges
           ]
@@ -4941,10 +5110,13 @@ instance Core.ToJSON Role_RolePrivilegesItem where
 --
 -- /See:/ 'newRoleAssignment' smart constructor.
 data RoleAssignment = RoleAssignment
-  { -- | The unique ID of the entity this role is assigned to—either the @user_id@ of a user or the @uniqueId@ of a service account, as defined in <https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts Identity and Access Management (IAM)>.
+  { -- | The unique ID of the entity this role is assigned to—either the @user_id@ of a user, the @group_id@ of a group, or the @uniqueId@ of a service account as defined in <https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts Identity and Access Management (IAM)>.
     assignedTo :: (Core.Maybe Core.Text),
     -- | Output only. The type of the assignee (@USER@ or @GROUP@).
     assigneeType :: (Core.Maybe RoleAssignment_AssigneeType),
+    -- | Optional. The condition associated with this role assignment. Note: Feature is available to Enterprise Standard, Enterprise Plus, Google Workspace for Education Plus and Cloud Identity Premium customers. A @RoleAssignment@ with the @condition@ field set will only take effect when the resource being accessed meets the condition. If @condition@ is empty, the role (@role_id@) is applied to the actor (@assigned_to@) at the scope (@scope_type@) unconditionally. Currently, the following conditions are supported: - To make the @RoleAssignment@ only applicable to <https://cloud.google.com/identity/docs/groups#group_types Security Groups>: @api.getAttribute(\'cloudidentity.googleapis.com\/groups.labels\', []).hasAny([\'groups.security\']) && resource.type == \'cloudidentity.googleapis.com\/Group\'@ - To make the @RoleAssignment@ not applicable to <https://cloud.google.com/identity/docs/groups#group_types Security Groups>:
+    -- @!api.getAttribute(\'cloudidentity.googleapis.com\/groups.labels\', []).hasAny([\'groups.security\']) && resource.type == \'cloudidentity.googleapis.com\/Group\'@ Currently, the condition strings have to be verbatim and they only work with the following <https://support.google.com/a/answer/2405986 pre-built administrator roles>: - Groups Editor - Groups Reader The condition follows <https://cloud.google.com/iam/docs/conditions-overview Cloud IAM condition syntax>. Additional conditions related to Locked Groups are available under Open Beta. - To make the @RoleAssignment@ not applicable to <https://cloud.google.com/identity/docs/groups#group_types Locked Groups>: @!api.getAttribute(\'cloudidentity.googleapis.com\/groups.labels\', []).hasAny([\'groups.locked\']) && resource.type == \'cloudidentity.googleapis.com\/Group\'@ This condition can also be used in conjunction with a Security-related condition.
+    condition :: (Core.Maybe Core.Text),
     -- | ETag of the resource.
     etag :: (Core.Maybe Core.Text),
     -- | The type of the API resource. This is always @admin#directory#roleAssignment@.
@@ -4967,6 +5139,7 @@ newRoleAssignment =
   RoleAssignment
     { assignedTo = Core.Nothing,
       assigneeType = Core.Nothing,
+      condition = Core.Nothing,
       etag = Core.Nothing,
       kind = "admin#directory#roleAssignment",
       orgUnitId = Core.Nothing,
@@ -4983,17 +5156,12 @@ instance Core.FromJSON RoleAssignment where
           RoleAssignment
             Core.<$> (o Core..:? "assignedTo")
             Core.<*> (o Core..:? "assigneeType")
+            Core.<*> (o Core..:? "condition")
             Core.<*> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#roleAssignment"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#roleAssignment")
             Core.<*> (o Core..:? "orgUnitId")
-            Core.<*> ( o Core..:? "roleAssignmentId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "roleId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "roleAssignmentId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "roleId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "scopeType")
       )
 
@@ -5003,13 +5171,14 @@ instance Core.ToJSON RoleAssignment where
       ( Core.catMaybes
           [ ("assignedTo" Core..=) Core.<$> assignedTo,
             ("assigneeType" Core..=) Core.<$> assigneeType,
+            ("condition" Core..=) Core.<$> condition,
             ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
             ("orgUnitId" Core..=) Core.<$> orgUnitId,
-            ("roleAssignmentId" Core..=) Core.. Core.AsText
+            ("roleAssignmentId" Core..=)
+              Core.. Core.AsText
               Core.<$> roleAssignmentId,
-            ("roleId" Core..=) Core.. Core.AsText
-              Core.<$> roleId,
+            ("roleId" Core..=) Core.. Core.AsText Core.<$> roleId,
             ("scopeType" Core..=) Core.<$> scopeType
           ]
       )
@@ -5023,7 +5192,6 @@ data RoleAssignments = RoleAssignments
     items :: (Core.Maybe [RoleAssignment]),
     -- | The type of the API resource. This is always @admin#directory#roleAssignments@.
     kind :: Core.Text,
-    -- |
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5047,9 +5215,7 @@ instance Core.FromJSON RoleAssignments where
           RoleAssignments
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#roleAssignments"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#roleAssignments")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -5073,7 +5239,6 @@ data Roles = Roles
     items :: (Core.Maybe [Role]),
     -- | The type of the API resource. This is always @admin#directory#roles@.
     kind :: Core.Text,
-    -- |
     nextPageToken :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5227,14 +5392,10 @@ instance Core.FromJSON SchemaFieldSpec where
             Core.<*> (o Core..:? "fieldName")
             Core.<*> (o Core..:? "fieldType")
             Core.<*> (o Core..:? "indexed" Core..!= Core.True)
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#schema#fieldspec"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#schema#fieldspec")
             Core.<*> (o Core..:? "multiValued")
             Core.<*> (o Core..:? "numericIndexingSpec")
-            Core.<*> ( o Core..:? "readAccessType"
-                         Core..!= "ALL_DOMAIN_USERS"
-                     )
+            Core.<*> (o Core..:? "readAccessType" Core..!= "ALL_DOMAIN_USERS")
       )
 
 instance Core.ToJSON SchemaFieldSpec where
@@ -5249,8 +5410,7 @@ instance Core.ToJSON SchemaFieldSpec where
             Core.Just ("indexed" Core..= indexed),
             Core.Just ("kind" Core..= kind),
             ("multiValued" Core..=) Core.<$> multiValued,
-            ("numericIndexingSpec" Core..=)
-              Core.<$> numericIndexingSpec,
+            ("numericIndexingSpec" Core..=) Core.<$> numericIndexingSpec,
             Core.Just ("readAccessType" Core..= readAccessType)
           ]
       )
@@ -5275,10 +5435,7 @@ newSchemaFieldSpec_NumericIndexingSpec =
       minValue = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    SchemaFieldSpec_NumericIndexingSpec
-  where
+instance Core.FromJSON SchemaFieldSpec_NumericIndexingSpec where
   parseJSON =
     Core.withObject
       "SchemaFieldSpec_NumericIndexingSpec"
@@ -5288,10 +5445,7 @@ instance
             Core.<*> (o Core..:? "minValue")
       )
 
-instance
-  Core.ToJSON
-    SchemaFieldSpec_NumericIndexingSpec
-  where
+instance Core.ToJSON SchemaFieldSpec_NumericIndexingSpec where
   toJSON SchemaFieldSpec_NumericIndexingSpec {..} =
     Core.object
       ( Core.catMaybes
@@ -5330,9 +5484,7 @@ instance Core.FromJSON Schemas where
       ( \o ->
           Schemas
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#schemas"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#schemas")
             Core.<*> (o Core..:? "schemas")
       )
 
@@ -5345,6 +5497,75 @@ instance Core.ToJSON Schemas where
             ("schemas" Core..=) Core.<$> schemas
           ]
       )
+
+-- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
+--
+-- /See:/ 'newStatus' smart constructor.
+data Status = Status
+  { -- | The status code, which should be an enum value of google.rpc.Code.
+    code :: (Core.Maybe Core.Int32),
+    -- | A list of messages that carry the error details. There is a common set of message types for APIs to use.
+    details :: (Core.Maybe [Status_DetailsItem]),
+    -- | A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+    message :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Status' with the minimum fields required to make a request.
+newStatus ::
+  Status
+newStatus =
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
+
+instance Core.FromJSON Status where
+  parseJSON =
+    Core.withObject
+      "Status"
+      ( \o ->
+          Status
+            Core.<$> (o Core..:? "code")
+            Core.<*> (o Core..:? "details")
+            Core.<*> (o Core..:? "message")
+      )
+
+instance Core.ToJSON Status where
+  toJSON Status {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("code" Core..=) Core.<$> code,
+            ("details" Core..=) Core.<$> details,
+            ("message" Core..=) Core.<$> message
+          ]
+      )
+
+--
+-- /See:/ 'newStatus_DetailsItem' smart constructor.
+newtype Status_DetailsItem = Status_DetailsItem
+  { -- | Properties of the object. Contains field \@type with type URL.
+    additional :: (Core.HashMap Core.Text Core.Value)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Status_DetailsItem' with the minimum fields required to make a request.
+newStatus_DetailsItem ::
+  -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
+  Core.HashMap Core.Text Core.Value ->
+  Status_DetailsItem
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
+
+instance Core.FromJSON Status_DetailsItem where
+  parseJSON =
+    Core.withObject
+      "Status_DetailsItem"
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON Status_DetailsItem where
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | JSON template for token resource in Directory API.
 --
@@ -5446,9 +5667,7 @@ instance Core.FromJSON Tokens where
           Tokens
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#tokenList"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#tokenList")
       )
 
 instance Core.ToJSON Tokens where
@@ -5461,7 +5680,7 @@ instance Core.ToJSON Tokens where
           ]
       )
 
--- | The Directory API allows you to create and manage your account\'s users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the </admin-sdk/directory/v1/guides/manage-users.html User Accounts Developer\'s Guide> and the </admin-sdk/directory/v1/guides/manage-user-aliases.html User Aliases Developer\'s Guide>.
+-- | The Directory API allows you to create and manage your account\'s users, user aliases, and user Google profile photos. For more information about common tasks, see the </admin-sdk/directory/v1/guides/manage-users.html User Accounts Developer\'s Guide> and the </admin-sdk/directory/v1/guides/manage-user-aliases.html User Aliases Developer\'s Guide>.
 --
 -- /See:/ 'newUser' smart constructor.
 data User = User
@@ -5481,9 +5700,8 @@ data User = User
     customSchemas :: (Core.Maybe User_CustomSchemas),
     -- | Output only. The customer ID to </admin-sdk/directory/v1/guides/manage-users.html#get_all_users retrieve all account users>. You can use the alias @my_customer@ to represent your account\'s @customerId@. As a reseller administrator, you can use the resold customer account\'s @customerId@. To get a @customerId@, use the account\'s primary domain in the @domain@ parameter of a </admin-sdk/directory/v1/reference/users/list users.list> request.
     customerId :: (Core.Maybe Core.Text),
-    -- |
     deletionTime :: (Core.Maybe Core.DateTime),
-    -- | The list of the user\'s email addresses. The maximum allowed data size for this field is 10KB.
+    -- | The list of the user\'s email addresses. The maximum allowed data size for this field is 10KB. This excludes @publicKeyEncryptionCertificates@.
     emails :: (Core.Maybe Core.Value),
     -- | Output only. ETag of the resource.
     etag :: (Core.Maybe Core.Text),
@@ -5692,8 +5910,7 @@ instance Core.ToJSON User where
               Core.<$> includeInGlobalAddressList,
             ("ipWhitelisted" Core..=) Core.<$> ipWhitelisted,
             ("isAdmin" Core..=) Core.<$> isAdmin,
-            ("isDelegatedAdmin" Core..=)
-              Core.<$> isDelegatedAdmin,
+            ("isDelegatedAdmin" Core..=) Core.<$> isDelegatedAdmin,
             ("isEnforcedIn2Sv" Core..=) Core.<$> isEnforcedIn2Sv,
             ("isEnrolledIn2Sv" Core..=) Core.<$> isEnrolledIn2Sv,
             ("isMailboxSetup" Core..=) Core.<$> isMailboxSetup,
@@ -5703,8 +5920,7 @@ instance Core.ToJSON User where
             ("lastLoginTime" Core..=) Core.<$> lastLoginTime,
             ("locations" Core..=) Core.<$> locations,
             ("name" Core..=) Core.<$> name,
-            ("nonEditableAliases" Core..=)
-              Core.<$> nonEditableAliases,
+            ("nonEditableAliases" Core..=) Core.<$> nonEditableAliases,
             ("notes" Core..=) Core.<$> notes,
             ("orgUnitPath" Core..=) Core.<$> orgUnitPath,
             ("organizations" Core..=) Core.<$> organizations,
@@ -5717,12 +5933,9 @@ instance Core.ToJSON User where
             ("relations" Core..=) Core.<$> relations,
             ("sshPublicKeys" Core..=) Core.<$> sshPublicKeys,
             ("suspended" Core..=) Core.<$> suspended,
-            ("suspensionReason" Core..=)
-              Core.<$> suspensionReason,
-            ("thumbnailPhotoEtag" Core..=)
-              Core.<$> thumbnailPhotoEtag,
-            ("thumbnailPhotoUrl" Core..=)
-              Core.<$> thumbnailPhotoUrl,
+            ("suspensionReason" Core..=) Core.<$> suspensionReason,
+            ("thumbnailPhotoEtag" Core..=) Core.<$> thumbnailPhotoEtag,
+            ("thumbnailPhotoUrl" Core..=) Core.<$> thumbnailPhotoUrl,
             ("websites" Core..=) Core.<$> websites
           ]
       )
@@ -5731,8 +5944,7 @@ instance Core.ToJSON User where
 --
 -- /See:/ 'newUser_CustomSchemas' smart constructor.
 newtype User_CustomSchemas = User_CustomSchemas
-  { -- |
-    additional :: (Core.HashMap Core.Text UserCustomProperties)
+  { additional :: (Core.HashMap Core.Text UserCustomProperties)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5741,19 +5953,17 @@ newUser_CustomSchemas ::
   -- |  See 'additional'.
   Core.HashMap Core.Text UserCustomProperties ->
   User_CustomSchemas
-newUser_CustomSchemas additional = User_CustomSchemas {additional = additional}
+newUser_CustomSchemas additional =
+  User_CustomSchemas {additional = additional}
 
 instance Core.FromJSON User_CustomSchemas where
   parseJSON =
     Core.withObject
       "User_CustomSchemas"
-      ( \o ->
-          User_CustomSchemas Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> User_CustomSchemas Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON User_CustomSchemas where
-  toJSON User_CustomSchemas {..} =
-    Core.toJSON additional
+  toJSON User_CustomSchemas {..} = Core.toJSON additional
 
 -- | JSON template for About (notes) of a user in Directory API.
 --
@@ -5769,7 +5979,8 @@ data UserAbout = UserAbout
 -- | Creates a value of 'UserAbout' with the minimum fields required to make a request.
 newUserAbout ::
   UserAbout
-newUserAbout = UserAbout {contentType = Core.Nothing, value = Core.Nothing}
+newUserAbout =
+  UserAbout {contentType = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON UserAbout where
   parseJSON =
@@ -5878,8 +6089,7 @@ instance Core.ToJSON UserAddress where
             ("postalCode" Core..=) Core.<$> postalCode,
             ("primary" Core..=) Core.<$> primary,
             ("region" Core..=) Core.<$> region,
-            ("sourceIsStructured" Core..=)
-              Core.<$> sourceIsStructured,
+            ("sourceIsStructured" Core..=) Core.<$> sourceIsStructured,
             ("streetAddress" Core..=) Core.<$> streetAddress,
             ("type" Core..=) Core.<$> type'
           ]
@@ -5943,8 +6153,7 @@ instance Core.ToJSON UserAlias where
 --
 -- /See:/ 'newUserCustomProperties' smart constructor.
 newtype UserCustomProperties = UserCustomProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5960,14 +6169,10 @@ instance Core.FromJSON UserCustomProperties where
   parseJSON =
     Core.withObject
       "UserCustomProperties"
-      ( \o ->
-          UserCustomProperties
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> UserCustomProperties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON UserCustomProperties where
-  toJSON UserCustomProperties {..} =
-    Core.toJSON additional
+  toJSON UserCustomProperties {..} = Core.toJSON additional
 
 -- | JSON template for an email.
 --
@@ -5979,6 +6184,8 @@ data UserEmail = UserEmail
     customType :: (Core.Maybe Core.Text),
     -- | If this is user\'s primary email. Only one entry could be marked as primary.
     primary :: (Core.Maybe Core.Bool),
+    -- | Public Key Encryption Certificates. Current limit: 1 per email address, and 5 per user.
+    publicKeyEncryptionCertificates :: (Core.Maybe UserEmail_Public_key_encryption_certificates),
     -- | Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.
     type' :: (Core.Maybe Core.Text)
   }
@@ -5992,6 +6199,7 @@ newUserEmail =
     { address = Core.Nothing,
       customType = Core.Nothing,
       primary = Core.Nothing,
+      publicKeyEncryptionCertificates = Core.Nothing,
       type' = Core.Nothing
     }
 
@@ -6004,6 +6212,7 @@ instance Core.FromJSON UserEmail where
             Core.<$> (o Core..:? "address")
             Core.<*> (o Core..:? "customType")
             Core.<*> (o Core..:? "primary")
+            Core.<*> (o Core..:? "public_key_encryption_certificates")
             Core.<*> (o Core..:? "type")
       )
 
@@ -6014,7 +6223,54 @@ instance Core.ToJSON UserEmail where
           [ ("address" Core..=) Core.<$> address,
             ("customType" Core..=) Core.<$> customType,
             ("primary" Core..=) Core.<$> primary,
+            ("public_key_encryption_certificates" Core..=)
+              Core.<$> publicKeyEncryptionCertificates,
             ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Public Key Encryption Certificates. Current limit: 1 per email address, and 5 per user.
+--
+-- /See:/ 'newUserEmail_Public_key_encryption_certificates' smart constructor.
+data UserEmail_Public_key_encryption_certificates = UserEmail_Public_key_encryption_certificates
+  { -- | X.509 encryption certificate in @PEM@ format. Must only be an end-entity (leaf) certificate.
+    certificate :: (Core.Maybe Core.Text),
+    -- | Whether this is the default certificate for the given email address.
+    isDefault :: (Core.Maybe Core.Bool),
+    -- | Denotes the certificate\'s state in its lifecycle. Possible values are @not_yet_validated@, @valid@, @invalid@, @expired@, and @revoked@.
+    state :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserEmail_Public_key_encryption_certificates' with the minimum fields required to make a request.
+newUserEmail_Public_key_encryption_certificates ::
+  UserEmail_Public_key_encryption_certificates
+newUserEmail_Public_key_encryption_certificates =
+  UserEmail_Public_key_encryption_certificates
+    { certificate =
+        Core.Nothing,
+      isDefault = Core.Nothing,
+      state = Core.Nothing
+    }
+
+instance Core.FromJSON UserEmail_Public_key_encryption_certificates where
+  parseJSON =
+    Core.withObject
+      "UserEmail_Public_key_encryption_certificates"
+      ( \o ->
+          UserEmail_Public_key_encryption_certificates
+            Core.<$> (o Core..:? "certificate")
+            Core.<*> (o Core..:? "is_default")
+            Core.<*> (o Core..:? "state")
+      )
+
+instance Core.ToJSON UserEmail_Public_key_encryption_certificates where
+  toJSON UserEmail_Public_key_encryption_certificates {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("certificate" Core..=) Core.<$> certificate,
+            ("is_default" Core..=) Core.<$> isDefault,
+            ("state" Core..=) Core.<$> state
           ]
       )
 
@@ -6337,8 +6593,7 @@ instance Core.FromJSON UserMakeAdmin where
 
 instance Core.ToJSON UserMakeAdmin where
   toJSON UserMakeAdmin {..} =
-    Core.object
-      (Core.catMaybes [("status" Core..=) Core.<$> status])
+    Core.object (Core.catMaybes [("status" Core..=) Core.<$> status])
 
 --
 -- /See:/ 'newUserName' smart constructor.
@@ -6467,8 +6722,7 @@ instance Core.ToJSON UserOrganization where
             ("department" Core..=) Core.<$> department,
             ("description" Core..=) Core.<$> description,
             ("domain" Core..=) Core.<$> domain,
-            ("fullTimeEquivalent" Core..=)
-              Core.<$> fullTimeEquivalent,
+            ("fullTimeEquivalent" Core..=) Core.<$> fullTimeEquivalent,
             ("location" Core..=) Core.<$> location,
             ("name" Core..=) Core.<$> name,
             ("primary" Core..=) Core.<$> primary,
@@ -6573,9 +6827,7 @@ instance Core.FromJSON UserPhoto where
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "height")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#user#photo"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#user#photo")
             Core.<*> (o Core..:? "mimeType")
             Core.<*> (o Core..:? "photoData")
             Core.<*> (o Core..:? "primaryEmail")
@@ -6667,8 +6919,7 @@ instance Core.ToJSON UserPosixAccount where
             ("gecos" Core..=) Core.<$> gecos,
             ("gid" Core..=) Core.. Core.AsText Core.<$> gid,
             ("homeDirectory" Core..=) Core.<$> homeDirectory,
-            ("operatingSystemType" Core..=)
-              Core.<$> operatingSystemType,
+            ("operatingSystemType" Core..=) Core.<$> operatingSystemType,
             ("primary" Core..=) Core.<$> primary,
             ("shell" Core..=) Core.<$> shell,
             ("systemId" Core..=) Core.<$> systemId,
@@ -6750,7 +7001,8 @@ instance Core.FromJSON UserSshPublicKey where
       "UserSshPublicKey"
       ( \o ->
           UserSshPublicKey
-            Core.<$> ( o Core..:? "expirationTimeUsec"
+            Core.<$> ( o
+                         Core..:? "expirationTimeUsec"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "fingerprint")
@@ -6761,7 +7013,8 @@ instance Core.ToJSON UserSshPublicKey where
   toJSON UserSshPublicKey {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expirationTimeUsec" Core..=) Core.. Core.AsText
+          [ ("expirationTimeUsec" Core..=)
+              Core.. Core.AsText
               Core.<$> expirationTimeUsec,
             ("fingerprint" Core..=) Core.<$> fingerprint,
             ("key" Core..=) Core.<$> key
@@ -6785,16 +7038,12 @@ instance Core.FromJSON UserUndelete where
   parseJSON =
     Core.withObject
       "UserUndelete"
-      ( \o ->
-          UserUndelete Core.<$> (o Core..:? "orgUnitPath")
-      )
+      (\o -> UserUndelete Core.<$> (o Core..:? "orgUnitPath"))
 
 instance Core.ToJSON UserUndelete where
   toJSON UserUndelete {..} =
     Core.object
-      ( Core.catMaybes
-          [("orgUnitPath" Core..=) Core.<$> orgUnitPath]
-      )
+      (Core.catMaybes [("orgUnitPath" Core..=) Core.<$> orgUnitPath])
 
 -- | JSON template for a website entry.
 --
@@ -6852,7 +7101,7 @@ data Users = Users
     etag :: (Core.Maybe Core.Text),
     -- | Kind of resource this is.
     kind :: Core.Text,
-    -- | Token used to access next page of this result.
+    -- | Token used to access next page of this result. The page token is only valid for three days.
     nextPageToken :: (Core.Maybe Core.Text),
     -- | Event that triggered this response (only used in case of Push Response)
     triggerEvent :: (Core.Maybe Core.Text),
@@ -6931,9 +7180,7 @@ instance Core.FromJSON VerificationCode where
       ( \o ->
           VerificationCode
             Core.<$> (o Core..:? "etag")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "admin#directory#verificationCode"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "admin#directory#verificationCode")
             Core.<*> (o Core..:? "userId")
             Core.<*> (o Core..:? "verificationCode")
       )
@@ -6945,8 +7192,7 @@ instance Core.ToJSON VerificationCode where
           [ ("etag" Core..=) Core.<$> etag,
             Core.Just ("kind" Core..= kind),
             ("userId" Core..=) Core.<$> userId,
-            ("verificationCode" Core..=)
-              Core.<$> verificationCode
+            ("verificationCode" Core..=) Core.<$> verificationCode
           ]
       )
 
@@ -6981,7 +7227,8 @@ instance Core.FromJSON VerificationCodes where
           VerificationCodes
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
+            Core.<*> ( o
+                         Core..:? "kind"
                          Core..!= "admin#directory#verificationCodesList"
                      )
       )

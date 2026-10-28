@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Table.ImportTable
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Table.ImportTable
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.table.importTable@ method which the
 -- 'FusionTablesTableImportTable' request conforms to.
@@ -55,17 +53,17 @@ type FusionTablesTableImportTableResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Post '[Core.JSON] Table
     Core.:<|> "upload"
-      Core.:> "fusiontables"
-      Core.:> "v2"
-      Core.:> "tables"
-      Core.:> "import"
-      Core.:> Core.QueryParam "name" Core.Text
-      Core.:> Core.QueryParam "delimiter" Core.Text
-      Core.:> Core.QueryParam "encoding" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.AltMedia
-      Core.:> Core.AltMedia
-      Core.:> Core.Post '[Core.JSON] Table
+    Core.:> "fusiontables"
+    Core.:> "v2"
+    Core.:> "tables"
+    Core.:> "import"
+    Core.:> Core.QueryParam "name" Core.Text
+    Core.:> Core.QueryParam "delimiter" Core.Text
+    Core.:> Core.QueryParam "encoding" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.AltMedia
+    Core.:> Core.AltMedia
+    Core.:> Core.Post '[Core.JSON] Table
 
 -- | Imports a new table.
 --
@@ -92,10 +90,7 @@ newFusionTablesTableImportTable name =
       name = name
     }
 
-instance
-  Core.GoogleRequest
-    FusionTablesTableImportTable
-  where
+instance Core.GoogleRequest FusionTablesTableImportTable where
   type Rs FusionTablesTableImportTable = Table
   type
     Scopes FusionTablesTableImportTable =
@@ -110,28 +105,19 @@ instance
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesTableImportTableResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesTableImportTableResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload FusionTablesTableImportTable)
   where
+  type Rs (Core.MediaUpload FusionTablesTableImportTable) = Table
   type
-    Rs
-      (Core.MediaUpload FusionTablesTableImportTable) =
-      Table
-  type
-    Scopes
-      (Core.MediaUpload FusionTablesTableImportTable) =
+    Scopes (Core.MediaUpload FusionTablesTableImportTable) =
       Core.Scopes FusionTablesTableImportTable
   requestClient
-    ( Core.MediaUpload
-        FusionTablesTableImportTable {..}
-        body
-      ) =
+    (Core.MediaUpload FusionTablesTableImportTable {..} body) =
       go
         (Core.Just name)
         delimiter
@@ -143,7 +129,5 @@ instance
       where
         _ Core.:<|> go =
           Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy FusionTablesTableImportTableResource
-            )
+            (Core.Proxy :: Core.Proxy FusionTablesTableImportTableResource)
             Core.mempty

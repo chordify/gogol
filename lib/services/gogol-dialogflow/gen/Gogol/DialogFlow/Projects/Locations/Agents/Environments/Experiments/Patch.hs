@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Patch
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.environments.experiments.patch@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch' request conforms to.
@@ -54,12 +52,8 @@ type DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Experiment
-    Core.:> Core.Patch
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Experiment
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3Experiment
+    Core.:> Core.Patch '[Core.JSON] GoogleCloudDialogflowCxV3Experiment
 
 -- | Updates the specified Experiment.
 --
@@ -71,7 +65,7 @@ data DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch = DialogFlowP
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the experiment. Format: projects\/\/locations\/\/agents\/\/environments\/\/experiments\/..
+    -- | The name of the experiment. Format: projects\/\/locations\/\/agents\/\/environments\/\/experiments\/.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: GoogleCloudDialogflowCxV3Experiment,
@@ -86,22 +80,25 @@ data DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch = DialogFlowP
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch ::
-  -- |  The name of the experiment. Format: projects\/\/locations\/\/agents\/\/environments\/\/experiments\/.. See 'name'.
+  -- |  The name of the experiment. Format: projects\/\/locations\/\/agents\/\/environments\/\/experiments\/. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3Experiment ->
   DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch
-newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch name payload =
-  DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      updateMask = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch
+  name
+  payload =
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsPatch
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        updateMask = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

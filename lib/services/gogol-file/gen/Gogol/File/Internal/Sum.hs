@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.File.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.File.Internal.Sum
@@ -30,6 +28,14 @@ module Gogol.File.Internal.Sum
     Xgafv
       ( Xgafv_1,
         Xgafv_2,
+        ..
+      ),
+
+    -- * Backup_FileSystemProtocol
+    Backup_FileSystemProtocol
+      ( Backup_FileSystemProtocol_FILEPROTOCOLUNSPECIFIED,
+        Backup_FileSystemProtocol_NFS_V3,
+        Backup_FileSystemProtocol_NFS_V4_1,
         ..
       ),
 
@@ -42,6 +48,8 @@ module Gogol.File.Internal.Sum
         Backup_SourceInstanceTier_BASICSSD,
         Backup_SourceInstanceTier_HIGHSCALESSD,
         Backup_SourceInstanceTier_Enterprise,
+        Backup_SourceInstanceTier_Zonal,
+        Backup_SourceInstanceTier_Regional,
         ..
       ),
 
@@ -52,6 +60,7 @@ module Gogol.File.Internal.Sum
         Backup_State_Finalizing,
         Backup_State_Ready,
         Backup_State_Deleting,
+        Backup_State_Invalid,
         ..
       ),
 
@@ -67,6 +76,14 @@ module Gogol.File.Internal.Sum
         ..
       ),
 
+    -- * Instance_Protocol
+    Instance_Protocol
+      ( Instance_Protocol_FILEPROTOCOLUNSPECIFIED,
+        Instance_Protocol_NFS_V3,
+        Instance_Protocol_NFS_V4_1,
+        ..
+      ),
+
     -- * Instance_State
     Instance_State
       ( Instance_State_STATEUNSPECIFIED,
@@ -79,6 +96,8 @@ module Gogol.File.Internal.Sum
         Instance_State_Suspended,
         Instance_State_Suspending,
         Instance_State_Resuming,
+        Instance_State_Reverting,
+        Instance_State_Promoting,
         ..
       ),
 
@@ -98,6 +117,8 @@ module Gogol.File.Internal.Sum
         Instance_Tier_BASICSSD,
         Instance_Tier_HIGHSCALESSD,
         Instance_Tier_Enterprise,
+        Instance_Tier_Zonal,
+        Instance_Tier_Regional,
         ..
       ),
 
@@ -140,6 +161,32 @@ module Gogol.File.Internal.Sum
         ..
       ),
 
+    -- * ReplicaConfig_State
+    ReplicaConfig_State
+      ( ReplicaConfig_State_STATEUNSPECIFIED,
+        ReplicaConfig_State_Creating,
+        ReplicaConfig_State_Ready,
+        ReplicaConfig_State_Removing,
+        ReplicaConfig_State_Failed,
+        ..
+      ),
+
+    -- * ReplicaConfig_StateReasonsItem
+    ReplicaConfig_StateReasonsItem
+      ( ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED,
+        ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE,
+        ReplicaConfig_StateReasonsItem_REMOVEFAILED,
+        ..
+      ),
+
+    -- * Replication_Role
+    Replication_Role
+      ( Replication_Role_ROLEUNSPECIFIED,
+        Replication_Role_Active,
+        Replication_Role_Standby,
+        ..
+      ),
+
     -- * Schedule_Day
     Schedule_Day
       ( Schedule_Day_DAYOFWEEKUNSPECIFIED,
@@ -175,7 +222,7 @@ module Gogol.File.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -202,6 +249,38 @@ pattern Xgafv_2 = Xgafv "2"
   Xgafv_1,
   Xgafv_2,
   Xgafv
+  #-}
+
+-- | Output only. The file system protocol of the source Filestore instance that this backup is created from.
+newtype Backup_FileSystemProtocol = Backup_FileSystemProtocol {fromBackup_FileSystemProtocol :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | FILE/PROTOCOL/UNSPECIFIED serves a \"not set\" default value when a FileProtocol is a separate field in a message.
+pattern Backup_FileSystemProtocol_FILEPROTOCOLUNSPECIFIED :: Backup_FileSystemProtocol
+pattern Backup_FileSystemProtocol_FILEPROTOCOLUNSPECIFIED = Backup_FileSystemProtocol "FILE_PROTOCOL_UNSPECIFIED"
+
+-- | NFS 3.0.
+pattern Backup_FileSystemProtocol_NFS_V3 :: Backup_FileSystemProtocol
+pattern Backup_FileSystemProtocol_NFS_V3 = Backup_FileSystemProtocol "NFS_V3"
+
+-- | NFS 4.1.
+pattern Backup_FileSystemProtocol_NFS_V4_1 :: Backup_FileSystemProtocol
+pattern Backup_FileSystemProtocol_NFS_V4_1 = Backup_FileSystemProtocol "NFS_V4_1"
+
+{-# COMPLETE
+  Backup_FileSystemProtocol_FILEPROTOCOLUNSPECIFIED,
+  Backup_FileSystemProtocol_NFS_V3,
+  Backup_FileSystemProtocol_NFS_V4_1,
+  Backup_FileSystemProtocol
   #-}
 
 -- | Output only. The service tier of the source Filestore instance that this backup is created from.
@@ -245,6 +324,14 @@ pattern Backup_SourceInstanceTier_HIGHSCALESSD = Backup_SourceInstanceTier "HIGH
 pattern Backup_SourceInstanceTier_Enterprise :: Backup_SourceInstanceTier
 pattern Backup_SourceInstanceTier_Enterprise = Backup_SourceInstanceTier "ENTERPRISE"
 
+-- | ZONAL instances offer expanded capacity and performance scaling capabilities.
+pattern Backup_SourceInstanceTier_Zonal :: Backup_SourceInstanceTier
+pattern Backup_SourceInstanceTier_Zonal = Backup_SourceInstanceTier "ZONAL"
+
+-- | REGIONAL instances offer the features and availability needed for mission-critical workloads.
+pattern Backup_SourceInstanceTier_Regional :: Backup_SourceInstanceTier
+pattern Backup_SourceInstanceTier_Regional = Backup_SourceInstanceTier "REGIONAL"
+
 {-# COMPLETE
   Backup_SourceInstanceTier_TIERUNSPECIFIED,
   Backup_SourceInstanceTier_Standard,
@@ -253,6 +340,8 @@ pattern Backup_SourceInstanceTier_Enterprise = Backup_SourceInstanceTier "ENTERP
   Backup_SourceInstanceTier_BASICSSD,
   Backup_SourceInstanceTier_HIGHSCALESSD,
   Backup_SourceInstanceTier_Enterprise,
+  Backup_SourceInstanceTier_Zonal,
+  Backup_SourceInstanceTier_Regional,
   Backup_SourceInstanceTier
   #-}
 
@@ -289,12 +378,17 @@ pattern Backup_State_Ready = Backup_State "READY"
 pattern Backup_State_Deleting :: Backup_State
 pattern Backup_State_Deleting = Backup_State "DELETING"
 
+-- | Backup is not valid and cannot be used for creating new instances or restoring existing instances.
+pattern Backup_State_Invalid :: Backup_State
+pattern Backup_State_Invalid = Backup_State "INVALID"
+
 {-# COMPLETE
   Backup_State_STATEUNSPECIFIED,
   Backup_State_Creating,
   Backup_State_Finalizing,
   Backup_State_Ready,
   Backup_State_Deleting,
+  Backup_State_Invalid,
   Backup_State
   #-}
 
@@ -350,6 +444,38 @@ pattern GoogleCloudSaasacceleratorManagementProvidersV1Instance_State_Error' = G
   GoogleCloudSaasacceleratorManagementProvidersV1Instance_State
   #-}
 
+-- | Immutable. The protocol indicates the access protocol for all shares in the instance. This field is immutable and it cannot be changed after the instance has been created. Default value: @NFS_V3@.
+newtype Instance_Protocol = Instance_Protocol {fromInstance_Protocol :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | FILE/PROTOCOL/UNSPECIFIED serves a \"not set\" default value when a FileProtocol is a separate field in a message.
+pattern Instance_Protocol_FILEPROTOCOLUNSPECIFIED :: Instance_Protocol
+pattern Instance_Protocol_FILEPROTOCOLUNSPECIFIED = Instance_Protocol "FILE_PROTOCOL_UNSPECIFIED"
+
+-- | NFS 3.0.
+pattern Instance_Protocol_NFS_V3 :: Instance_Protocol
+pattern Instance_Protocol_NFS_V3 = Instance_Protocol "NFS_V3"
+
+-- | NFS 4.1.
+pattern Instance_Protocol_NFS_V4_1 :: Instance_Protocol
+pattern Instance_Protocol_NFS_V4_1 = Instance_Protocol "NFS_V4_1"
+
+{-# COMPLETE
+  Instance_Protocol_FILEPROTOCOLUNSPECIFIED,
+  Instance_Protocol_NFS_V3,
+  Instance_Protocol_NFS_V4_1,
+  Instance_Protocol
+  #-}
+
 -- | Output only. The instance state.
 newtype Instance_State = Instance_State {fromInstance_State :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -403,6 +529,14 @@ pattern Instance_State_Suspending = Instance_State "SUSPENDING"
 pattern Instance_State_Resuming :: Instance_State
 pattern Instance_State_Resuming = Instance_State "RESUMING"
 
+-- | The instance is reverting to a snapshot.
+pattern Instance_State_Reverting :: Instance_State
+pattern Instance_State_Reverting = Instance_State "REVERTING"
+
+-- | The replica instance is being promoted.
+pattern Instance_State_Promoting :: Instance_State
+pattern Instance_State_Promoting = Instance_State "PROMOTING"
+
 {-# COMPLETE
   Instance_State_STATEUNSPECIFIED,
   Instance_State_Creating,
@@ -414,6 +548,8 @@ pattern Instance_State_Resuming = Instance_State "RESUMING"
   Instance_State_Suspended,
   Instance_State_Suspending,
   Instance_State_Resuming,
+  Instance_State_Reverting,
+  Instance_State_Promoting,
   Instance_State
   #-}
 
@@ -484,6 +620,14 @@ pattern Instance_Tier_HIGHSCALESSD = Instance_Tier "HIGH_SCALE_SSD"
 pattern Instance_Tier_Enterprise :: Instance_Tier
 pattern Instance_Tier_Enterprise = Instance_Tier "ENTERPRISE"
 
+-- | ZONAL instances offer expanded capacity and performance scaling capabilities.
+pattern Instance_Tier_Zonal :: Instance_Tier
+pattern Instance_Tier_Zonal = Instance_Tier "ZONAL"
+
+-- | REGIONAL instances offer the features and availability needed for mission-critical workloads.
+pattern Instance_Tier_Regional :: Instance_Tier
+pattern Instance_Tier_Regional = Instance_Tier "REGIONAL"
+
 {-# COMPLETE
   Instance_Tier_TIERUNSPECIFIED,
   Instance_Tier_Standard,
@@ -492,6 +636,8 @@ pattern Instance_Tier_Enterprise = Instance_Tier "ENTERPRISE"
   Instance_Tier_BASICSSD,
   Instance_Tier_HIGHSCALESSD,
   Instance_Tier_Enterprise,
+  Instance_Tier_Zonal,
+  Instance_Tier_Regional,
   Instance_Tier
   #-}
 
@@ -647,6 +793,111 @@ pattern NfsExportOptions_SquashMode_ROOTSQUASH = NfsExportOptions_SquashMode "RO
   NfsExportOptions_SquashMode_NOROOTSQUASH,
   NfsExportOptions_SquashMode_ROOTSQUASH,
   NfsExportOptions_SquashMode
+  #-}
+
+-- | Output only. The replica state.
+newtype ReplicaConfig_State = ReplicaConfig_State {fromReplicaConfig_State :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | State not set.
+pattern ReplicaConfig_State_STATEUNSPECIFIED :: ReplicaConfig_State
+pattern ReplicaConfig_State_STATEUNSPECIFIED = ReplicaConfig_State "STATE_UNSPECIFIED"
+
+-- | The replica is being created.
+pattern ReplicaConfig_State_Creating :: ReplicaConfig_State
+pattern ReplicaConfig_State_Creating = ReplicaConfig_State "CREATING"
+
+-- | The replica is ready.
+pattern ReplicaConfig_State_Ready :: ReplicaConfig_State
+pattern ReplicaConfig_State_Ready = ReplicaConfig_State "READY"
+
+-- | The replica is being removed.
+pattern ReplicaConfig_State_Removing :: ReplicaConfig_State
+pattern ReplicaConfig_State_Removing = ReplicaConfig_State "REMOVING"
+
+-- | The replica is experiencing an issue and might be unusable. You can get further details from the @stateReasons@ field of the @ReplicaConfig@ object.
+pattern ReplicaConfig_State_Failed :: ReplicaConfig_State
+pattern ReplicaConfig_State_Failed = ReplicaConfig_State "FAILED"
+
+{-# COMPLETE
+  ReplicaConfig_State_STATEUNSPECIFIED,
+  ReplicaConfig_State_Creating,
+  ReplicaConfig_State_Ready,
+  ReplicaConfig_State_Removing,
+  ReplicaConfig_State_Failed,
+  ReplicaConfig_State
+  #-}
+
+newtype ReplicaConfig_StateReasonsItem = ReplicaConfig_StateReasonsItem {fromReplicaConfig_StateReasonsItem :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Reason not specified.
+pattern ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED :: ReplicaConfig_StateReasonsItem
+pattern ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED = ReplicaConfig_StateReasonsItem "STATE_REASON_UNSPECIFIED"
+
+-- | The peer instance is unreachable.
+pattern ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE :: ReplicaConfig_StateReasonsItem
+pattern ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE = ReplicaConfig_StateReasonsItem "PEER_INSTANCE_UNREACHABLE"
+
+-- | The remove replica peer instance operation failed.
+pattern ReplicaConfig_StateReasonsItem_REMOVEFAILED :: ReplicaConfig_StateReasonsItem
+pattern ReplicaConfig_StateReasonsItem_REMOVEFAILED = ReplicaConfig_StateReasonsItem "REMOVE_FAILED"
+
+{-# COMPLETE
+  ReplicaConfig_StateReasonsItem_STATEREASONUNSPECIFIED,
+  ReplicaConfig_StateReasonsItem_PEERINSTANCEUNREACHABLE,
+  ReplicaConfig_StateReasonsItem_REMOVEFAILED,
+  ReplicaConfig_StateReasonsItem
+  #-}
+
+-- | Optional. The replication role.
+newtype Replication_Role = Replication_Role {fromReplication_Role :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Role not set.
+pattern Replication_Role_ROLEUNSPECIFIED :: Replication_Role
+pattern Replication_Role_ROLEUNSPECIFIED = Replication_Role "ROLE_UNSPECIFIED"
+
+-- | The instance is the @ACTIVE@ replication member, functions as the replication source instance.
+pattern Replication_Role_Active :: Replication_Role
+pattern Replication_Role_Active = Replication_Role "ACTIVE"
+
+-- | The instance is the @STANDBY@ replication member, functions as the replication destination instance.
+pattern Replication_Role_Standby :: Replication_Role
+pattern Replication_Role_Standby = Replication_Role "STANDBY"
+
+{-# COMPLETE
+  Replication_Role_ROLEUNSPECIFIED,
+  Replication_Role_Active,
+  Replication_Role_Standby,
+  Replication_Role
   #-}
 
 -- | Allows to define schedule that runs specified day of the week.

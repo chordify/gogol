@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Redis.Projects.Locations.Instances.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Redis.Projects.Locations.Instances.Create
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.create@ method which the
@@ -100,34 +98,27 @@ newRedisProjectsLocationsInstancesCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RedisProjectsLocationsInstancesCreate
-  where
-  type
-    Rs RedisProjectsLocationsInstancesCreate =
-      Operation
+instance Core.GoogleRequest RedisProjectsLocationsInstancesCreate where
+  type Rs RedisProjectsLocationsInstancesCreate = Operation
   type
     Scopes RedisProjectsLocationsInstancesCreate =
       '[CloudPlatform'FullControl]
-  requestClient
-    RedisProjectsLocationsInstancesCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        instanceId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        redisService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  RedisProjectsLocationsInstancesCreateResource
-            )
-            Core.mempty
+  requestClient RedisProjectsLocationsInstancesCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      instanceId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      redisService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy RedisProjectsLocationsInstancesCreateResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Organizations.GetServiceAccount
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves the service account that is used by Access Approval to access KMS keys for signing approved approval requests.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.getServiceAccount@.
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.getServiceAccount@.
 module Gogol.AccessApproval.Organizations.GetServiceAccount
   ( -- * Resource
     AccessApprovalOrganizationsGetServiceAccountResource,
@@ -40,7 +38,7 @@ module Gogol.AccessApproval.Organizations.GetServiceAccount
 where
 
 import Gogol.AccessApproval.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accessapproval.organizations.getServiceAccount@ method which the
 -- 'AccessApprovalOrganizationsGetServiceAccount' request conforms to.
@@ -81,7 +79,8 @@ newAccessApprovalOrganizationsGetServiceAccount ::
   AccessApprovalOrganizationsGetServiceAccount
 newAccessApprovalOrganizationsGetServiceAccount name =
   AccessApprovalOrganizationsGetServiceAccount
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -97,25 +96,22 @@ instance
     Rs AccessApprovalOrganizationsGetServiceAccount =
       AccessApprovalServiceAccount
   type
-    Scopes
-      AccessApprovalOrganizationsGetServiceAccount =
+    Scopes AccessApprovalOrganizationsGetServiceAccount =
       '[CloudPlatform'FullControl]
-  requestClient
-    AccessApprovalOrganizationsGetServiceAccount {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        accessApprovalService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AccessApprovalOrganizationsGetServiceAccountResource
-            )
-            Core.mempty
+  requestClient AccessApprovalOrganizationsGetServiceAccount {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      accessApprovalService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AccessApprovalOrganizationsGetServiceAccountResource
+          )
+          Core.mempty

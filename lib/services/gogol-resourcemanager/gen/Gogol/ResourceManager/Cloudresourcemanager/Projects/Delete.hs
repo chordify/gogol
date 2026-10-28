@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ResourceManager.Cloudresourcemanager.Projects.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Marks the project identified by the specified @name@ (for example, @projects\/415104041262@) for deletion. This method will only affect the project if it has a lifecycle state of ACTIVE. This method changes the Project\'s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the Project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with GetProject, and the project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the project is not retrievable by the GetProject, ListProjects, and SearchProjects methods. This method behaves idempotently, such that deleting a @DELETE_REQUESTED@ project will not cause an error, but also won\'t do anything. The caller must have @resourcemanager.projects.delete@ permissions for this project.
+-- Marks the project identified by the specified @name@ (for example, @projects\/415104041262@) for deletion. This method will only affect the project if it has a lifecycle state of ACTIVE. This method changes the Project\'s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the Project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with GetProject, and the project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the project is not retrievable by the GetProject, ListProjects, and SearchProjects methods. The caller must have @resourcemanager.projects.delete@ permissions for this project.
 --
 -- /See:/ <https://cloud.google.com/resource-manager Cloud Resource Manager API Reference> for @cloudresourcemanager.projects.delete@.
 module Gogol.ResourceManager.Cloudresourcemanager.Projects.Delete
@@ -39,7 +37,7 @@ module Gogol.ResourceManager.Cloudresourcemanager.Projects.Delete
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ResourceManager.Types
 
 -- | A resource alias for @cloudresourcemanager.projects.delete@ method which the
@@ -55,7 +53,7 @@ type CloudresourcemanagerProjectsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] Operation
 
--- | Marks the project identified by the specified @name@ (for example, @projects\/415104041262@) for deletion. This method will only affect the project if it has a lifecycle state of ACTIVE. This method changes the Project\'s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the Project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with GetProject, and the project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the project is not retrievable by the GetProject, ListProjects, and SearchProjects methods. This method behaves idempotently, such that deleting a @DELETE_REQUESTED@ project will not cause an error, but also won\'t do anything. The caller must have @resourcemanager.projects.delete@ permissions for this project.
+-- | Marks the project identified by the specified @name@ (for example, @projects\/415104041262@) for deletion. This method will only affect the project if it has a lifecycle state of ACTIVE. This method changes the Project\'s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the Project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with GetProject, and the project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the project is not retrievable by the GetProject, ListProjects, and SearchProjects methods. The caller must have @resourcemanager.projects.delete@ permissions for this project.
 --
 -- /See:/ 'newCloudresourcemanagerProjectsDelete' smart constructor.
 data CloudresourcemanagerProjectsDelete = CloudresourcemanagerProjectsDelete
@@ -89,13 +87,8 @@ newCloudresourcemanagerProjectsDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudresourcemanagerProjectsDelete
-  where
-  type
-    Rs CloudresourcemanagerProjectsDelete =
-      Operation
+instance Core.GoogleRequest CloudresourcemanagerProjectsDelete where
+  type Rs CloudresourcemanagerProjectsDelete = Operation
   type
     Scopes CloudresourcemanagerProjectsDelete =
       '[CloudPlatform'FullControl]
@@ -113,7 +106,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                CloudresourcemanagerProjectsDeleteResource
+              Core.Proxy CloudresourcemanagerProjectsDeleteResource
           )
           Core.mempty

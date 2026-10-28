@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Projects.Locations.Buckets.Links.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Asynchronously creates linked dataset in BigQuery which makes it possible to use BugQuery to read the logs stored in the bucket. A bucket may currently only contain one link.
+-- Asynchronously creates a linked dataset in BigQuery which makes it possible to use BigQuery to read the logs stored in the log bucket. A log bucket may currently only contain one link.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.projects.locations.buckets.links.create@.
 module Gogol.Logging.Projects.Locations.Buckets.Links.Create
@@ -40,7 +38,7 @@ module Gogol.Logging.Projects.Locations.Buckets.Links.Create
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.projects.locations.buckets.links.create@ method which the
 -- 'LoggingProjectsLocationsBucketsLinksCreate' request conforms to.
@@ -58,7 +56,7 @@ type LoggingProjectsLocationsBucketsLinksCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Link
     Core.:> Core.Post '[Core.JSON] Operation
 
--- | Asynchronously creates linked dataset in BigQuery which makes it possible to use BugQuery to read the logs stored in the bucket. A bucket may currently only contain one link.
+-- | Asynchronously creates a linked dataset in BigQuery which makes it possible to use BigQuery to read the logs stored in the log bucket. A log bucket may currently only contain one link.
 --
 -- /See:/ 'newLoggingProjectsLocationsBucketsLinksCreate' smart constructor.
 data LoggingProjectsLocationsBucketsLinksCreate = LoggingProjectsLocationsBucketsLinksCreate
@@ -104,31 +102,26 @@ instance
   Core.GoogleRequest
     LoggingProjectsLocationsBucketsLinksCreate
   where
+  type Rs LoggingProjectsLocationsBucketsLinksCreate = Operation
   type
-    Rs LoggingProjectsLocationsBucketsLinksCreate =
-      Operation
-  type
-    Scopes
-      LoggingProjectsLocationsBucketsLinksCreate =
+    Scopes LoggingProjectsLocationsBucketsLinksCreate =
       '[CloudPlatform'FullControl, Logging'Admin]
-  requestClient
-    LoggingProjectsLocationsBucketsLinksCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        linkId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        loggingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  LoggingProjectsLocationsBucketsLinksCreateResource
-            )
-            Core.mempty
+  requestClient LoggingProjectsLocationsBucketsLinksCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      linkId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      loggingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy LoggingProjectsLocationsBucketsLinksCreateResource
+          )
+          Core.mempty

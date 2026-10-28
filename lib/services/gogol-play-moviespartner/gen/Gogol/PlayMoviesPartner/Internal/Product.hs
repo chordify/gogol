@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.PlayMoviesPartner.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.PlayMoviesPartner.Internal.Product
@@ -53,7 +51,7 @@ module Gogol.PlayMoviesPartner.Internal.Product
 where
 
 import Gogol.PlayMoviesPartner.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | An Avail describes the Availability Window of a specific Edit in a given country, which means the period Google is allowed to sell or rent the Edit.
 --
@@ -219,8 +217,7 @@ instance Core.ToJSON Avail where
       ( Core.catMaybes
           [ ("altId" Core..=) Core.<$> altId,
             ("availId" Core..=) Core.<$> availId,
-            ("captionExemption" Core..=)
-              Core.<$> captionExemption,
+            ("captionExemption" Core..=) Core.<$> captionExemption,
             ("captionIncluded" Core..=) Core.<$> captionIncluded,
             ("contentId" Core..=) Core.<$> contentId,
             ("displayName" Core..=) Core.<$> displayName,
@@ -249,11 +246,9 @@ instance Core.ToJSON Avail where
               Core.<$> seriesTitleInternalAlias,
             ("start" Core..=) Core.<$> start,
             ("storeLanguage" Core..=) Core.<$> storeLanguage,
-            ("suppressionLiftDate" Core..=)
-              Core.<$> suppressionLiftDate,
+            ("suppressionLiftDate" Core..=) Core.<$> suppressionLiftDate,
             ("territory" Core..=) Core.<$> territory,
-            ("titleInternalAlias" Core..=)
-              Core.<$> titleInternalAlias,
+            ("titleInternalAlias" Core..=) Core.<$> titleInternalAlias,
             ("videoId" Core..=) Core.<$> videoId,
             ("workType" Core..=) Core.<$> workType
           ]
@@ -518,13 +513,11 @@ instance Core.ToJSON Order where
             ("channelName" Core..=) Core.<$> channelName,
             ("countries" Core..=) Core.<$> countries,
             ("customId" Core..=) Core.<$> customId,
-            ("earliestAvailStartTime" Core..=)
-              Core.<$> earliestAvailStartTime,
+            ("earliestAvailStartTime" Core..=) Core.<$> earliestAvailStartTime,
             ("episodeName" Core..=) Core.<$> episodeName,
             ("legacyPriority" Core..=) Core.<$> legacyPriority,
             ("name" Core..=) Core.<$> name,
-            ("normalizedPriority" Core..=)
-              Core.<$> normalizedPriority,
+            ("normalizedPriority" Core..=) Core.<$> normalizedPriority,
             ("orderId" Core..=) Core.<$> orderId,
             ("orderedTime" Core..=) Core.<$> orderedTime,
             ("pphName" Core..=) Core.<$> pphName,

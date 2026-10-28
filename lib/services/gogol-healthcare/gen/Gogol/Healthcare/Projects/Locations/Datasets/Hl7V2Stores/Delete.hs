@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Delete
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.delete@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresDelete' request conforms to.
@@ -65,7 +63,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresDelete = HealthcareProjectsLo
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The resource name of the HL7v2 store to delete.
+    -- | Required. The resource name of the HL7v2 store to delete.
     name :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -76,12 +74,13 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresDelete = HealthcareProjectsLo
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresDelete' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresDelete ::
-  -- |  The resource name of the HL7v2 store to delete. See 'name'.
+  -- |  Required. The resource name of the HL7v2 store to delete. See 'name'.
   Core.Text ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresDelete
 newHealthcareProjectsLocationsDatasetsHl7V2StoresDelete name =
   HealthcareProjectsLocationsDatasetsHl7V2StoresDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -94,13 +93,11 @@ instance
     HealthcareProjectsLocationsDatasetsHl7V2StoresDelete
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsHl7V2StoresDelete =
+    Rs HealthcareProjectsLocationsDatasetsHl7V2StoresDelete =
       Empty
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsHl7V2StoresDelete =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsHl7V2StoresDelete =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresDelete {..} =
       go

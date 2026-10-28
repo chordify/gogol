@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Pubprofiles.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Pubprofiles.List
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.pubprofiles.list@ method which the
 -- 'AdExchangeBuyerPubprofilesList' request conforms to.
@@ -51,9 +49,7 @@ type AdExchangeBuyerPubprofilesListResource =
     Core.:> Core.Capture "accountId" Core.Int32
     Core.:> "profiles"
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GetPublisherProfilesByAccountIdResponse
+    Core.:> Core.Get '[Core.JSON] GetPublisherProfilesByAccountIdResponse
 
 -- | Gets the requested publisher profile(s) by publisher accountId.
 --
@@ -72,25 +68,15 @@ newAdExchangeBuyerPubprofilesList ::
 newAdExchangeBuyerPubprofilesList accountId =
   AdExchangeBuyerPubprofilesList {accountId = accountId}
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerPubprofilesList
-  where
+instance Core.GoogleRequest AdExchangeBuyerPubprofilesList where
   type
     Rs AdExchangeBuyerPubprofilesList =
       GetPublisherProfilesByAccountIdResponse
-  type
-    Scopes AdExchangeBuyerPubprofilesList =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerPubprofilesList = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerPubprofilesList {..} =
-    go
-      accountId
-      (Core.Just Core.AltJSON)
-      adExchangeBuyerService
+    go accountId (Core.Just Core.AltJSON) adExchangeBuyerService
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerPubprofilesListResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerPubprofilesListResource)
           Core.mempty

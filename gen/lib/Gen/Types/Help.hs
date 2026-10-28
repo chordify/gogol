@@ -8,14 +8,15 @@ module Gen.Types.Help
 where
 
 import Data.Aeson
-import qualified Data.Char as Char
+import Data.Char qualified as Char
 import Data.Int (Int64)
 import Data.String
 import Data.Text (Text)
-import qualified Data.Text.Lazy as Text.Lazy
-import qualified System.IO.Unsafe as Unsafe
+import Data.Text qualified as Text
+import Data.Text.Lazy qualified as Text.Lazy
+import System.IO.Unsafe qualified as Unsafe
 import Text.Pandoc (Pandoc, PandocError)
-import qualified Text.Pandoc as Pandoc
+import Text.Pandoc qualified as Pandoc
 
 type TextLazy = Text.Lazy.Text
 
@@ -67,12 +68,21 @@ data Nest = Nest !Int64 Help
 instance ToJSON Nest where
   toJSON = toJSON . renderHelp
 
+isNullHelp :: Help -> Bool
+isNullHelp = \case
+  Help [] -> True
+  Help _ -> False
+  Pan _ t -> Text.null t
+  Raw t -> Text.null t
+
 renderHelp :: Nest -> TextLazy
-renderHelp (Nest n h) =
-  mappend (sep <> "| ")
-    . Text.Lazy.drop (Text.Lazy.length sep)
-    . wrapHelp sep
-    $ h
+renderHelp (Nest n h)
+  | isNullHelp h = mempty
+  | otherwise =
+      mappend (sep <> "| ")
+        . Text.Lazy.drop (Text.Lazy.length sep)
+        . wrapHelp sep
+        $ h
   where
     sep = Text.Lazy.replicate n " " <> "-- "
 

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Classroom.UserProfiles.GuardianInvitations.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.Classroom.UserProfiles.GuardianInvitations.Create
 where
 
 import Gogol.Classroom.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @classroom.userProfiles.guardianInvitations.create@ method which the
 -- 'ClassroomUserProfilesGuardianInvitationsCreate' request conforms to.
@@ -90,7 +88,8 @@ newClassroomUserProfilesGuardianInvitationsCreate ::
   ClassroomUserProfilesGuardianInvitationsCreate
 newClassroomUserProfilesGuardianInvitationsCreate payload studentId =
   ClassroomUserProfilesGuardianInvitationsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       payload = payload,
@@ -104,30 +103,26 @@ instance
     ClassroomUserProfilesGuardianInvitationsCreate
   where
   type
-    Rs
-      ClassroomUserProfilesGuardianInvitationsCreate =
+    Rs ClassroomUserProfilesGuardianInvitationsCreate =
       GuardianInvitation
   type
-    Scopes
-      ClassroomUserProfilesGuardianInvitationsCreate =
+    Scopes ClassroomUserProfilesGuardianInvitationsCreate =
       '[Classroom'Guardianlinks'Students]
-  requestClient
-    ClassroomUserProfilesGuardianInvitationsCreate {..} =
-      go
-        studentId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        classroomService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClassroomUserProfilesGuardianInvitationsCreateResource
-            )
-            Core.mempty
+  requestClient ClassroomUserProfilesGuardianInvitationsCreate {..} =
+    go
+      studentId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      classroomService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClassroomUserProfilesGuardianInvitationsCreateResource
+          )
+          Core.mempty

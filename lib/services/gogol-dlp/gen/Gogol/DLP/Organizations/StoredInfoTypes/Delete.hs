@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.DLP.Organizations.StoredInfoTypes.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- Deletes a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
--- /See:/ <https://cloud.google.com/dlp/docs/ Cloud Data Loss Prevention (DLP) API Reference> for @dlp.organizations.storedInfoTypes.delete@.
+-- /See:/ <https://cloud.google.com/sensitive-data-protection/docs/ Sensitive Data Protection (DLP) Reference> for @dlp.organizations.storedInfoTypes.delete@.
 module Gogol.DLP.Organizations.StoredInfoTypes.Delete
   ( -- * Resource
     DLPOrganizationsStoredInfoTypesDeleteResource,
@@ -40,7 +38,7 @@ module Gogol.DLP.Organizations.StoredInfoTypes.Delete
 where
 
 import Gogol.DLP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dlp.organizations.storedInfoTypes.delete@ method which the
 -- 'DLPOrganizationsStoredInfoTypesDelete' request conforms to.
@@ -55,7 +53,7 @@ type DLPOrganizationsStoredInfoTypesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] GoogleProtobufEmpty
 
--- | Deletes a stored infoType. See https:\/\/cloud.google.com\/dlp\/docs\/creating-stored-infotypes to learn more.
+-- | Deletes a stored infoType. See https:\/\/cloud.google.com\/sensitive-data-protection\/docs\/creating-stored-infotypes to learn more.
 --
 -- /See:/ 'newDLPOrganizationsStoredInfoTypesDelete' smart constructor.
 data DLPOrganizationsStoredInfoTypesDelete = DLPOrganizationsStoredInfoTypesDelete
@@ -89,32 +87,25 @@ newDLPOrganizationsStoredInfoTypesDelete name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DLPOrganizationsStoredInfoTypesDelete
-  where
-  type
-    Rs DLPOrganizationsStoredInfoTypesDelete =
-      GoogleProtobufEmpty
+instance Core.GoogleRequest DLPOrganizationsStoredInfoTypesDelete where
+  type Rs DLPOrganizationsStoredInfoTypesDelete = GoogleProtobufEmpty
   type
     Scopes DLPOrganizationsStoredInfoTypesDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    DLPOrganizationsStoredInfoTypesDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dLPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DLPOrganizationsStoredInfoTypesDeleteResource
-            )
-            Core.mempty
+  requestClient DLPOrganizationsStoredInfoTypesDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dLPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DLPOrganizationsStoredInfoTypesDeleteResource
+          )
+          Core.mempty

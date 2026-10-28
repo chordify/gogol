@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Container.Projects.Zones.Clusters.LegacyAbac
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Enables or disables the ABAC authorization mechanism on a cluster.
 --
--- /See:/ <https://cloud.google.com/container-engine/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.legacyAbac@.
+-- /See:/ <https://cloud.google.com/kubernetes-engine/docs/ Kubernetes Engine API Reference> for @container.projects.zones.clusters.legacyAbac@.
 module Gogol.Container.Projects.Zones.Clusters.LegacyAbac
   ( -- * Resource
     ContainerProjectsZonesClustersLegacyAbacResource,
@@ -40,7 +38,7 @@ module Gogol.Container.Projects.Zones.Clusters.LegacyAbac
 where
 
 import Gogol.Container.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @container.projects.zones.clusters.legacyAbac@ method which the
 -- 'ContainerProjectsZonesClustersLegacyAbac' request conforms to.
@@ -98,48 +96,48 @@ newContainerProjectsZonesClustersLegacyAbac ::
   -- |  Deprecated. The name of the Google Compute Engine <https://cloud.google.com/compute/docs/zones#available zone> in which the cluster resides. This field has been deprecated and replaced by the name field. See 'zone'.
   Core.Text ->
   ContainerProjectsZonesClustersLegacyAbac
-newContainerProjectsZonesClustersLegacyAbac clusterId payload projectId zone =
-  ContainerProjectsZonesClustersLegacyAbac
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      clusterId = clusterId,
-      payload = payload,
-      projectId = projectId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      zone = zone
-    }
+newContainerProjectsZonesClustersLegacyAbac
+  clusterId
+  payload
+  projectId
+  zone =
+    ContainerProjectsZonesClustersLegacyAbac
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        clusterId = clusterId,
+        payload = payload,
+        projectId = projectId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        zone = zone
+      }
 
 instance
   Core.GoogleRequest
     ContainerProjectsZonesClustersLegacyAbac
   where
-  type
-    Rs ContainerProjectsZonesClustersLegacyAbac =
-      Operation
+  type Rs ContainerProjectsZonesClustersLegacyAbac = Operation
   type
     Scopes ContainerProjectsZonesClustersLegacyAbac =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerProjectsZonesClustersLegacyAbac {..} =
-      go
-        projectId
-        zone
-        clusterId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerProjectsZonesClustersLegacyAbacResource
-            )
-            Core.mempty
+  requestClient ContainerProjectsZonesClustersLegacyAbac {..} =
+    go
+      projectId
+      zone
+      clusterId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContainerProjectsZonesClustersLegacyAbacResource
+          )
+          Core.mempty

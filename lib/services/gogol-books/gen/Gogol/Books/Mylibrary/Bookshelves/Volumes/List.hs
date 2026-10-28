@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Mylibrary.Bookshelves.Volumes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Mylibrary.Bookshelves.Volumes.List
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.mylibrary.bookshelves.volumes.list@ method which the
 -- 'BooksMylibraryBookshelvesVolumesList' request conforms to.
@@ -64,9 +62,7 @@ type BooksMylibraryBookshelvesVolumesListResource =
     Core.:> Core.QueryParam "source" Core.Text
     Core.:> Core.QueryParam "startIndex" Core.Word32
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Volumes
 
@@ -125,39 +121,32 @@ newBooksMylibraryBookshelvesVolumesList shelf =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    BooksMylibraryBookshelvesVolumesList
-  where
-  type
-    Rs BooksMylibraryBookshelvesVolumesList =
-      Volumes
+instance Core.GoogleRequest BooksMylibraryBookshelvesVolumesList where
+  type Rs BooksMylibraryBookshelvesVolumesList = Volumes
   type
     Scopes BooksMylibraryBookshelvesVolumesList =
       '[Books'FullControl]
-  requestClient
-    BooksMylibraryBookshelvesVolumesList {..} =
-      go
-        shelf
-        xgafv
-        accessToken
-        callback
-        country
-        maxResults
-        projection
-        q
-        showPreorders
-        source
-        startIndex
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        booksService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  BooksMylibraryBookshelvesVolumesListResource
-            )
-            Core.mempty
+  requestClient BooksMylibraryBookshelvesVolumesList {..} =
+    go
+      shelf
+      xgafv
+      accessToken
+      callback
+      country
+      maxResults
+      projection
+      q
+      showPreorders
+      source
+      startIndex
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      booksService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy BooksMylibraryBookshelvesVolumesListResource
+          )
+          Core.mempty

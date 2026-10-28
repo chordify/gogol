@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DeploymentManager.Deployments.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DeploymentManager.Deployments.TestIamPermissions
 where
 
 import Gogol.DeploymentManager.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @deploymentmanager.deployments.testIamPermissions@ method which the
 -- 'DeploymentManagerDeploymentsTestIamPermissions' request conforms to.
@@ -56,15 +54,12 @@ type DeploymentManagerDeploymentsTestIamPermissionsResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "header.bypassBillingFilter" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TestPermissionsRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              TestPermissionsResponse
+    Core.:> Core.ReqBody '[Core.JSON] TestPermissionsRequest
+    Core.:> Core.Post '[Core.JSON] TestPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
@@ -76,6 +71,7 @@ data DeploymentManagerDeploymentsTestIamPermissions = DeploymentManagerDeploymen
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
+    headerBypassBillingFilter :: (Core.Maybe Core.Bool),
     -- | Multipart request metadata.
     payload :: TestPermissionsRequest,
     -- | Project ID for this request.
@@ -98,48 +94,50 @@ newDeploymentManagerDeploymentsTestIamPermissions ::
   -- |  Name or id of the resource for this request. See 'resource'.
   Core.Text ->
   DeploymentManagerDeploymentsTestIamPermissions
-newDeploymentManagerDeploymentsTestIamPermissions payload project resource =
-  DeploymentManagerDeploymentsTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDeploymentManagerDeploymentsTestIamPermissions
+  payload
+  project
+  resource =
+    DeploymentManagerDeploymentsTestIamPermissions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        headerBypassBillingFilter = Core.Nothing,
+        payload = payload,
+        project = project,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     DeploymentManagerDeploymentsTestIamPermissions
   where
   type
-    Rs
-      DeploymentManagerDeploymentsTestIamPermissions =
+    Rs DeploymentManagerDeploymentsTestIamPermissions =
       TestPermissionsResponse
   type
-    Scopes
-      DeploymentManagerDeploymentsTestIamPermissions =
+    Scopes DeploymentManagerDeploymentsTestIamPermissions =
       '[CloudPlatform'FullControl, Ndev'Cloudman]
-  requestClient
-    DeploymentManagerDeploymentsTestIamPermissions {..} =
-      go
-        project
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        deploymentManagerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DeploymentManagerDeploymentsTestIamPermissionsResource
-            )
-            Core.mempty
+  requestClient DeploymentManagerDeploymentsTestIamPermissions {..} =
+    go
+      project
+      resource
+      xgafv
+      accessToken
+      callback
+      headerBypassBillingFilter
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      deploymentManagerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DeploymentManagerDeploymentsTestIamPermissionsResource
+          )
+          Core.mempty

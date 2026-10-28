@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.ZoneOperations.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.ZoneOperations.Delete
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.zoneOperations.delete@ method which the
 -- 'ComputeZoneOperationsDelete' request conforms to.
@@ -71,7 +69,7 @@ data ComputeZoneOperationsDelete = ComputeZoneOperationsDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of the Operations resource to delete.
+    -- | Name of the Operations resource to delete, or its unique numeric identifier.
     operation :: Core.Text,
     -- | Project ID for this request.
     project :: Core.Text,
@@ -86,7 +84,7 @@ data ComputeZoneOperationsDelete = ComputeZoneOperationsDelete
 
 -- | Creates a value of 'ComputeZoneOperationsDelete' with the minimum fields required to make a request.
 newComputeZoneOperationsDelete ::
-  -- |  Name of the Operations resource to delete. See 'operation'.
+  -- |  Name of the Operations resource to delete, or its unique numeric identifier. See 'operation'.
   Core.Text ->
   -- |  Project ID for this request. See 'project'.
   Core.Text ->
@@ -105,10 +103,7 @@ newComputeZoneOperationsDelete operation project zone =
       zone = zone
     }
 
-instance
-  Core.GoogleRequest
-    ComputeZoneOperationsDelete
-  where
+instance Core.GoogleRequest ComputeZoneOperationsDelete where
   type Rs ComputeZoneOperationsDelete = ()
   type
     Scopes ComputeZoneOperationsDelete =
@@ -128,7 +123,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ComputeZoneOperationsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy ComputeZoneOperationsDeleteResource)
           Core.mempty

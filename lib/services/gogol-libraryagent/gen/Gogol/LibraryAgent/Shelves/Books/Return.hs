@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.LibraryAgent.Shelves.Books.Return
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.LibraryAgent.Shelves.Books.Return
 where
 
 import Gogol.LibraryAgent.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @libraryagent.shelves.books.return@ method which the
 -- 'LibraryAgentShelvesBooksReturn' request conforms to.
@@ -53,9 +51,7 @@ type LibraryAgentShelvesBooksReturnResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleExampleLibraryagentV1Book
+    Core.:> Core.Post '[Core.JSON] GoogleExampleLibraryagentV1Book
 
 -- | Return a book to the library. Returns the book if it is returned to the library successfully. Returns error if the book does not belong to the library or the users didn\'t borrow before.
 --
@@ -91,10 +87,7 @@ newLibraryAgentShelvesBooksReturn name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LibraryAgentShelvesBooksReturn
-  where
+instance Core.GoogleRequest LibraryAgentShelvesBooksReturn where
   type
     Rs LibraryAgentShelvesBooksReturn =
       GoogleExampleLibraryagentV1Book
@@ -114,7 +107,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LibraryAgentShelvesBooksReturnResource
-          )
+          (Core.Proxy :: Core.Proxy LibraryAgentShelvesBooksReturnResource)
           Core.mempty

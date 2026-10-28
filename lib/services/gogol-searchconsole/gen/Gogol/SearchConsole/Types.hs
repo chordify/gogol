@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SearchConsole.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SearchConsole.Types
@@ -249,7 +247,7 @@ module Gogol.SearchConsole.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SearchConsole.Internal.Product
 import Gogol.SearchConsole.Internal.Sum
 
@@ -261,7 +259,9 @@ searchConsoleService =
     "searchconsole.googleapis.com"
 
 -- | View and manage Search Console data for your verified sites
-type Webmasters'FullControl = "https://www.googleapis.com/auth/webmasters"
+type Webmasters'FullControl =
+  "https://www.googleapis.com/auth/webmasters"
 
 -- | View Search Console data for your verified sites
-type Webmasters'Readonly = "https://www.googleapis.com/auth/webmasters.readonly"
+type Webmasters'Readonly =
+  "https://www.googleapis.com/auth/webmasters.readonly"

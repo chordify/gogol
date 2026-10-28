@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Gmail.Users.Drafts.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Gmail.Users.Drafts.Create
 where
 
 import Gogol.Gmail.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @gmail.users.drafts.create@ method which the
 -- 'GmailUsersDraftsCreate' request conforms to.
@@ -59,20 +57,20 @@ type GmailUsersDraftsCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Draft
     Core.:> Core.Post '[Core.JSON] Draft
     Core.:<|> "upload"
-      Core.:> "gmail"
-      Core.:> "v1"
-      Core.:> "users"
-      Core.:> Core.Capture "userId" Core.Text
-      Core.:> "drafts"
-      Core.:> Core.QueryParam "$.xgafv" Xgafv
-      Core.:> Core.QueryParam "access_token" Core.Text
-      Core.:> Core.QueryParam "callback" Core.Text
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "upload_protocol" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam "uploadType" Core.Multipart
-      Core.:> Core.MultipartRelated '[Core.JSON] Draft
-      Core.:> Core.Post '[Core.JSON] Draft
+    Core.:> "gmail"
+    Core.:> "v1"
+    Core.:> "users"
+    Core.:> Core.Capture "userId" Core.Text
+    Core.:> "drafts"
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Draft
+    Core.:> Core.Post '[Core.JSON] Draft
 
 -- | Creates a new draft with the @DRAFT@ label.
 --
@@ -134,39 +132,32 @@ instance Core.GoogleRequest GmailUsersDraftsCreate where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GmailUsersDraftsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy GmailUsersDraftsCreateResource)
           Core.mempty
 
 instance
   Core.GoogleRequest
     (Core.MediaUpload GmailUsersDraftsCreate)
   where
-  type
-    Rs (Core.MediaUpload GmailUsersDraftsCreate) =
-      Draft
+  type Rs (Core.MediaUpload GmailUsersDraftsCreate) = Draft
   type
     Scopes (Core.MediaUpload GmailUsersDraftsCreate) =
       Core.Scopes GmailUsersDraftsCreate
-  requestClient
-    (Core.MediaUpload GmailUsersDraftsCreate {..} body) =
-      go
-        userId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        gmailService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy GmailUsersDraftsCreateResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload GmailUsersDraftsCreate {..} body) =
+    go
+      userId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      gmailService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy GmailUsersDraftsCreateResource)
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudFunctions.Projects.Locations.Functions.SetIamPolicy
 where
 
 import Gogol.CloudFunctions.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudfunctions.projects.locations.functions.setIamPolicy@ method which the
 -- 'CloudFunctionsProjectsLocationsFunctionsSetIamPolicy' request conforms to.
@@ -84,28 +82,29 @@ newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being specified. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   CloudFunctionsProjectsLocationsFunctionsSetIamPolicy
-newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy payload resource =
-  CloudFunctionsProjectsLocationsFunctionsSetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newCloudFunctionsProjectsLocationsFunctionsSetIamPolicy
+  payload
+  resource =
+    CloudFunctionsProjectsLocationsFunctionsSetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicy
   where
   type
-    Rs
-      CloudFunctionsProjectsLocationsFunctionsSetIamPolicy =
+    Rs CloudFunctionsProjectsLocationsFunctionsSetIamPolicy =
       Policy
   type
-    Scopes
-      CloudFunctionsProjectsLocationsFunctionsSetIamPolicy =
+    Scopes CloudFunctionsProjectsLocationsFunctionsSetIamPolicy =
       '[CloudPlatform'FullControl]
   requestClient
     CloudFunctionsProjectsLocationsFunctionsSetIamPolicy {..} =

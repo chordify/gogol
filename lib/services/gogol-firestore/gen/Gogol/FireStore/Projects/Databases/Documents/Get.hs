@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.Documents.Get
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.get@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsGet' request conforms to.
@@ -72,7 +70,7 @@ data FireStoreProjectsDatabasesDocumentsGet = FireStoreProjectsDatabasesDocument
     maskFieldPaths :: (Core.Maybe [Core.Text]),
     -- | Required. The resource name of the Document to get. In the format: @projects\/{project_id}\/databases\/{database_id}\/documents\/{document_path}@.
     name :: Core.Text,
-    -- | Reads the version of the document at the given time. This may not be older than 270 seconds.
+    -- | Reads the version of the document at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
     readTime :: (Core.Maybe Core.DateTime),
     -- | Reads the document in a transaction.
     transaction :: (Core.Maybe Core.Base64),
@@ -101,35 +99,28 @@ newFireStoreProjectsDatabasesDocumentsGet name =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FireStoreProjectsDatabasesDocumentsGet
-  where
-  type
-    Rs FireStoreProjectsDatabasesDocumentsGet =
-      Document
+instance Core.GoogleRequest FireStoreProjectsDatabasesDocumentsGet where
+  type Rs FireStoreProjectsDatabasesDocumentsGet = Document
   type
     Scopes FireStoreProjectsDatabasesDocumentsGet =
       '[CloudPlatform'FullControl, Datastore'FullControl]
-  requestClient
-    FireStoreProjectsDatabasesDocumentsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        (maskFieldPaths Core.^. Core._Default)
-        readTime
-        transaction
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        fireStoreService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  FireStoreProjectsDatabasesDocumentsGetResource
-            )
-            Core.mempty
+  requestClient FireStoreProjectsDatabasesDocumentsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      (maskFieldPaths Core.^. Core._Default)
+      readTime
+      transaction
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      fireStoreService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy FireStoreProjectsDatabasesDocumentsGetResource
+          )
+          Core.mempty

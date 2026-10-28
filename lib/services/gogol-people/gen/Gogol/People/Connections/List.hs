@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.Connections.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -41,7 +39,7 @@ module Gogol.People.Connections.List
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.connections.list@ method which the
 -- 'PeoplePeopleConnectionsList' request conforms to.
@@ -55,23 +53,15 @@ type PeoplePeopleConnectionsListResource =
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "personFields" Core.FieldMask
-    Core.:> Core.QueryParam
-              "requestMask.includeField"
-              Core.FieldMask
+    Core.:> Core.QueryParam "requestMask.includeField" Core.FieldMask
     Core.:> Core.QueryParam "requestSyncToken" Core.Bool
-    Core.:> Core.QueryParam
-              "sortOrder"
-              PeopleConnectionsListSortOrder
-    Core.:> Core.QueryParams
-              "sources"
-              PeopleConnectionsListSources
+    Core.:> Core.QueryParam "sortOrder" PeopleConnectionsListSortOrder
+    Core.:> Core.QueryParams "sources" PeopleConnectionsListSources
     Core.:> Core.QueryParam "syncToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListConnectionsResponse
+    Core.:> Core.Get '[Core.JSON] ListConnectionsResponse
 
 -- | Provides a list of the authenticated user\'s contacts. Sync tokens expire 7 days after the full sync. A request with an expired sync token will get an error with an <https://cloud.google.com/apis/design/errors#error_info google.rpc.ErrorInfo> with reason \"EXPIRED/SYNC/TOKEN\". In the case of such an error clients should make a full sync request without a @sync_token@. The first page of a full sync request has an additional quota. If the quota is exceeded, a 429 error will be returned. This quota is fixed and can not be increased. When the @sync_token@ is specified, resources deleted since the last sync will be returned as a person with @PersonMetadata.deleted@ set to true. When the @page_token@ or @sync_token@ is specified, all other request parameters must match the first call. Writes may have a propagation delay of several minutes for sync requests. Incremental syncs are not intended for read-after-write use cases. See example usage at
 -- </people/v1/contacts#list_the_users_contacts_that_have_changed List the user\'s contacts that have changed>.
@@ -132,13 +122,8 @@ newPeoplePeopleConnectionsList resourceName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeoplePeopleConnectionsList
-  where
-  type
-    Rs PeoplePeopleConnectionsList =
-      ListConnectionsResponse
+instance Core.GoogleRequest PeoplePeopleConnectionsList where
+  type Rs PeoplePeopleConnectionsList = ListConnectionsResponse
   type
     Scopes PeoplePeopleConnectionsList =
       '[Contacts'FullControl, Contacts'Readonly]
@@ -163,7 +148,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleConnectionsListResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleConnectionsListResource)
           Core.mempty

@@ -30,10 +30,10 @@ import Data.Aeson.Types (Pair)
 import Data.ByteArray (ByteArray)
 import Data.ByteArray.Encoding
 import Data.ByteString.Builder ()
-import qualified Data.ByteString.Lazy as LBS
+import Data.ByteString.Lazy qualified as LBS
 import Data.String (IsString)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import Data.Time
 import Data.X509 (PrivKey (..))
 import Data.X509.Memory (readKeyFileFromMemory)
@@ -41,7 +41,7 @@ import GHC.TypeLits (Symbol)
 import Gogol.Internal.Logger
 import Gogol.Prelude
 import Network.HTTP.Conduit (HttpException, Manager)
-import qualified Network.HTTP.Conduit as Client
+import Network.HTTP.Conduit qualified as Client
 import Network.HTTP.Types (Status, hContentType)
 
 -- | The supported credential mechanisms.
@@ -295,7 +295,7 @@ tokenRequest =
     }
 
 refreshRequest ::
-  MonadIO m =>
+  (MonadIO m) =>
   Client.Request ->
   Logger ->
   Manager ->
@@ -333,19 +333,19 @@ refreshRequest rq l m = do
             "[Parse Error] Failure parsing token refresh " <> build e
           refreshErr s e Nothing
 
-    refreshErr :: MonadIO m => Status -> Text -> Maybe Text -> m a
+    refreshErr :: (MonadIO m) => Status -> Text -> Maybe Text -> m a
     refreshErr s e = liftIO . throwIO . TokenRefreshError s e
 
     host = Text.decodeUtf8 (Client.host rq)
     path = Text.decodeUtf8 (Client.path rq)
 
-parseLBS :: FromJSON a => LBS.ByteString -> Either Text a
+parseLBS :: (FromJSON a) => LBS.ByteString -> Either Text a
 parseLBS = either (Left . Text.pack) Right . eitherDecode'
 
 base64Encode :: [Pair] -> ByteString
 base64Encode = base64 . LBS.toStrict . encode . object
 
-base64 :: ByteArray a => a -> ByteString
+base64 :: (ByteArray a) => a -> ByteString
 base64 = convertToBase Base64URLUnpadded
 
 textBody :: Text -> RequestBody

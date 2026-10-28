@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Environments.Experiments.Start
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.environments.experiments.start@ method which the
 -- 'DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart' request conforms to.
@@ -56,9 +54,7 @@ type DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStartResource =
     Core.:> Core.ReqBody
               '[Core.JSON]
               GoogleCloudDialogflowCxV3StartExperimentRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Experiment
+    Core.:> Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3Experiment
 
 -- | Starts the specified Experiment. This rpc only changes the state of experiment from PENDING to RUNNING.
 --
@@ -88,16 +84,19 @@ newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3StartExperimentRequest ->
   DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart
-newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart name payload =
-  DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart
+  name
+  payload =
+    DialogFlowProjectsLocationsAgentsEnvironmentsExperimentsStart
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Logging.Projects.Metrics.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Logging.Projects.Metrics.Create
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.projects.metrics.create@ method which the
 -- 'LoggingProjectsMetricsCreate' request conforms to.
@@ -96,17 +94,11 @@ newLoggingProjectsMetricsCreate parent payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingProjectsMetricsCreate
-  where
+instance Core.GoogleRequest LoggingProjectsMetricsCreate where
   type Rs LoggingProjectsMetricsCreate = LogMetric
   type
     Scopes LoggingProjectsMetricsCreate =
-      '[ CloudPlatform'FullControl,
-         Logging'Admin,
-         Logging'Write
-       ]
+      '[CloudPlatform'FullControl, Logging'Admin, Logging'Write]
   requestClient LoggingProjectsMetricsCreate {..} =
     go
       parent
@@ -121,7 +113,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LoggingProjectsMetricsCreateResource
-          )
+          (Core.Proxy :: Core.Proxy LoggingProjectsMetricsCreateResource)
           Core.mempty

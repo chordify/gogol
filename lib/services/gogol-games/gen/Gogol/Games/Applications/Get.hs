@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Applications.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Applications.Get
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.applications.get@ method which the
 -- 'GamesApplicationsGet' request conforms to.
@@ -53,9 +51,7 @@ type GamesApplicationsGetResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "language" Core.Text
-    Core.:> Core.QueryParam
-              "platformType"
-              ApplicationsGetPlatformType
+    Core.:> Core.QueryParam "platformType" ApplicationsGetPlatformType
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -103,9 +99,7 @@ newGamesApplicationsGet applicationId =
 
 instance Core.GoogleRequest GamesApplicationsGet where
   type Rs GamesApplicationsGet = Application
-  type
-    Scopes GamesApplicationsGet =
-      '[Games'FullControl]
+  type Scopes GamesApplicationsGet = '[Games'FullControl]
   requestClient GamesApplicationsGet {..} =
     go
       applicationId
@@ -121,7 +115,5 @@ instance Core.GoogleRequest GamesApplicationsGet where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesApplicationsGetResource
-          )
+          (Core.Proxy :: Core.Proxy GamesApplicationsGetResource)
           Core.mempty

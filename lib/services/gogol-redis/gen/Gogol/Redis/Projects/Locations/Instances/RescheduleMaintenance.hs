@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Redis.Projects.Locations.Instances.RescheduleMaintenance
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,26 +37,21 @@ module Gogol.Redis.Projects.Locations.Instances.RescheduleMaintenance
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Redis.Types
 
 -- | A resource alias for @redis.projects.locations.instances.rescheduleMaintenance@ method which the
 -- 'RedisProjectsLocationsInstancesRescheduleMaintenance' request conforms to.
 type RedisProjectsLocationsInstancesRescheduleMaintenanceResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "name"
-              "rescheduleMaintenance"
-              Core.Text
+    Core.:> Core.CaptureMode "name" "rescheduleMaintenance" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RescheduleMaintenanceRequest
+    Core.:> Core.ReqBody '[Core.JSON] RescheduleMaintenanceRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Reschedule maintenance for a given instance in a given project and location.
@@ -89,28 +82,29 @@ newRedisProjectsLocationsInstancesRescheduleMaintenance ::
   -- |  Multipart request metadata. See 'payload'.
   RescheduleMaintenanceRequest ->
   RedisProjectsLocationsInstancesRescheduleMaintenance
-newRedisProjectsLocationsInstancesRescheduleMaintenance name payload =
-  RedisProjectsLocationsInstancesRescheduleMaintenance
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      name = name,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newRedisProjectsLocationsInstancesRescheduleMaintenance
+  name
+  payload =
+    RedisProjectsLocationsInstancesRescheduleMaintenance
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        name = name,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     RedisProjectsLocationsInstancesRescheduleMaintenance
   where
   type
-    Rs
-      RedisProjectsLocationsInstancesRescheduleMaintenance =
+    Rs RedisProjectsLocationsInstancesRescheduleMaintenance =
       Operation
   type
-    Scopes
-      RedisProjectsLocationsInstancesRescheduleMaintenance =
+    Scopes RedisProjectsLocationsInstancesRescheduleMaintenance =
       '[CloudPlatform'FullControl]
   requestClient
     RedisProjectsLocationsInstancesRescheduleMaintenance {..} =

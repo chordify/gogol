@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DFAReporting.Sites.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DFAReporting.Sites.List
 where
 
 import Gogol.DFAReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dfareporting.sites.list@ method which the
 -- 'DFAReportingSitesList' request conforms to.
@@ -51,15 +49,9 @@ type DFAReportingSitesListResource =
     Core.:> Core.Capture "profileId" Core.Int64
     Core.:> "sites"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
-    Core.:> Core.QueryParam
-              "acceptsInStreamVideoPlacements"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "acceptsInterstitialPlacements"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "acceptsPublisherPaidPlacements"
-              Core.Bool
+    Core.:> Core.QueryParam "acceptsInStreamVideoPlacements" Core.Bool
+    Core.:> Core.QueryParam "acceptsInterstitialPlacements" Core.Bool
+    Core.:> Core.QueryParam "acceptsPublisherPaidPlacements" Core.Bool
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "adWordsSite" Core.Bool
     Core.:> Core.QueryParam "approved" Core.Bool
@@ -69,33 +61,15 @@ type DFAReportingSitesListResource =
     Core.:> Core.QueryParams "ids" Core.Int64
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "pageToken" Core.Text
-    Core.:> Core.QueryParam
-              "searchString"
-              Core.Text
-    Core.:> Core.QueryParam
-              "sortField"
-              SitesListSortField
-    Core.:> Core.QueryParam
-              "sortOrder"
-              SitesListSortOrder
-    Core.:> Core.QueryParam
-              "subaccountId"
-              Core.Int64
-    Core.:> Core.QueryParam
-              "unmappedSite"
-              Core.Bool
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              SitesListResponse
+    Core.:> Core.QueryParam "searchString" Core.Text
+    Core.:> Core.QueryParam "sortField" SitesListSortField
+    Core.:> Core.QueryParam "sortOrder" SitesListSortOrder
+    Core.:> Core.QueryParam "subaccountId" Core.Int64
+    Core.:> Core.QueryParam "unmappedSite" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.Get '[Core.JSON] SitesListResponse
 
 -- | Retrieves a list of sites, possibly filtered. This method supports paging.
 --
@@ -178,9 +152,7 @@ newDFAReportingSitesList profileId =
 
 instance Core.GoogleRequest DFAReportingSitesList where
   type Rs DFAReportingSitesList = SitesListResponse
-  type
-    Scopes DFAReportingSitesList =
-      '[Dfatrafficking'FullControl]
+  type Scopes DFAReportingSitesList = '[Dfatrafficking'FullControl]
   requestClient DFAReportingSitesList {..} =
     go
       profileId
@@ -209,7 +181,5 @@ instance Core.GoogleRequest DFAReportingSitesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DFAReportingSitesListResource
-          )
+          (Core.Proxy :: Core.Proxy DFAReportingSitesListResource)
           Core.mempty

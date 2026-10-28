@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Tracing.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Tracing.Internal.Product
@@ -116,7 +114,7 @@ module Gogol.Tracing.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Tracing.Internal.Sum
 
 -- | Text annotation with a set of attributes. A maximum of 32 annotations are allowed per Span.
@@ -185,9 +183,7 @@ instance Core.FromJSON AttributeValue where
       ( \o ->
           AttributeValue
             Core.<$> (o Core..:? "boolValue")
-            Core.<*> ( o Core..:? "intValue"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "intValue" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "stringValue")
       )
 
@@ -196,8 +192,7 @@ instance Core.ToJSON AttributeValue where
     Core.object
       ( Core.catMaybes
           [ ("boolValue" Core..=) Core.<$> boolValue,
-            ("intValue" Core..=) Core.. Core.AsText
-              Core.<$> intValue,
+            ("intValue" Core..=) Core.. Core.AsText Core.<$> intValue,
             ("stringValue" Core..=) Core.<$> stringValue
           ]
       )
@@ -266,8 +261,7 @@ instance Core.ToJSON Attributes where
 --
 -- /See:/ 'newAttributes_AttributeMap' smart constructor.
 newtype Attributes_AttributeMap = Attributes_AttributeMap
-  { -- |
-    additional :: (Core.HashMap Core.Text AttributeValue)
+  { additional :: (Core.HashMap Core.Text AttributeValue)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -283,14 +277,10 @@ instance Core.FromJSON Attributes_AttributeMap where
   parseJSON =
     Core.withObject
       "Attributes_AttributeMap"
-      ( \o ->
-          Attributes_AttributeMap
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Attributes_AttributeMap Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Attributes_AttributeMap where
-  toJSON Attributes_AttributeMap {..} =
-    Core.toJSON additional
+  toJSON Attributes_AttributeMap {..} = Core.toJSON additional
 
 -- | The request message for the @BatchWriteSpans@ method.
 --
@@ -304,20 +294,18 @@ newtype BatchWriteSpansRequest = BatchWriteSpansRequest
 -- | Creates a value of 'BatchWriteSpansRequest' with the minimum fields required to make a request.
 newBatchWriteSpansRequest ::
   BatchWriteSpansRequest
-newBatchWriteSpansRequest = BatchWriteSpansRequest {spans = Core.Nothing}
+newBatchWriteSpansRequest =
+  BatchWriteSpansRequest {spans = Core.Nothing}
 
 instance Core.FromJSON BatchWriteSpansRequest where
   parseJSON =
     Core.withObject
       "BatchWriteSpansRequest"
-      ( \o ->
-          BatchWriteSpansRequest Core.<$> (o Core..:? "spans")
-      )
+      (\o -> BatchWriteSpansRequest Core.<$> (o Core..:? "spans"))
 
 instance Core.ToJSON BatchWriteSpansRequest where
   toJSON BatchWriteSpansRequest {..} =
-    Core.object
-      (Core.catMaybes [("spans" Core..=) Core.<$> spans])
+    Core.object (Core.catMaybes [("spans" Core..=) Core.<$> spans])
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance:
 --
@@ -337,8 +325,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -360,7 +347,11 @@ data Link = Link
 newLink ::
   Link
 newLink =
-  Link {spanId = Core.Nothing, traceId = Core.Nothing, type' = Core.Nothing}
+  Link
+    { spanId = Core.Nothing,
+      traceId = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON Link where
   parseJSON =
@@ -397,7 +388,8 @@ data Links = Links
 -- | Creates a value of 'Links' with the minimum fields required to make a request.
 newLinks ::
   Links
-newLinks = Links {droppedLinksCount = Core.Nothing, link = Core.Nothing}
+newLinks =
+  Links {droppedLinksCount = Core.Nothing, link = Core.Nothing}
 
 instance Core.FromJSON Links where
   parseJSON =
@@ -413,8 +405,7 @@ instance Core.ToJSON Links where
   toJSON Links {..} =
     Core.object
       ( Core.catMaybes
-          [ ("droppedLinksCount" Core..=)
-              Core.<$> droppedLinksCount,
+          [ ("droppedLinksCount" Core..=) Core.<$> droppedLinksCount,
             ("link" Core..=) Core.<$> link
           ]
       )
@@ -434,7 +425,10 @@ data ListSpansResponse = ListSpansResponse
 newListSpansResponse ::
   ListSpansResponse
 newListSpansResponse =
-  ListSpansResponse {nextPageToken = Core.Nothing, spans = Core.Nothing}
+  ListSpansResponse
+    { nextPageToken = Core.Nothing,
+      spans = Core.Nothing
+    }
 
 instance Core.FromJSON ListSpansResponse where
   parseJSON =
@@ -470,7 +464,10 @@ data ListTracesResponse = ListTracesResponse
 newListTracesResponse ::
   ListTracesResponse
 newListTracesResponse =
-  ListTracesResponse {nextPageToken = Core.Nothing, traces = Core.Nothing}
+  ListTracesResponse
+    { nextPageToken = Core.Nothing,
+      traces = Core.Nothing
+    }
 
 instance Core.FromJSON ListTracesResponse where
   parseJSON =
@@ -561,12 +558,8 @@ instance Core.FromJSON NetworkEvent where
       "NetworkEvent"
       ( \o ->
           NetworkEvent
-            Core.<$> ( o Core..:? "messageId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "messageSize"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "messageId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "messageSize" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "time")
             Core.<*> (o Core..:? "type")
       )
@@ -575,10 +568,8 @@ instance Core.ToJSON NetworkEvent where
   toJSON NetworkEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("messageId" Core..=) Core.. Core.AsText
-              Core.<$> messageId,
-            ("messageSize" Core..=) Core.. Core.AsText
-              Core.<$> messageSize,
+          [ ("messageId" Core..=) Core.. Core.AsText Core.<$> messageId,
+            ("messageSize" Core..=) Core.. Core.AsText Core.<$> messageSize,
             ("time" Core..=) Core.<$> time,
             ("type" Core..=) Core.<$> type'
           ]
@@ -709,14 +700,10 @@ instance Core.FromJSON StackFrame where
       "StackFrame"
       ( \o ->
           StackFrame
-            Core.<$> ( o Core..:? "columnNumber"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "columnNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "fileName")
             Core.<*> (o Core..:? "functionName")
-            Core.<*> ( o Core..:? "lineNumber"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "lineNumber" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "loadModule")
             Core.<*> (o Core..:? "originalFunctionName")
             Core.<*> (o Core..:? "sourceVersion")
@@ -726,15 +713,12 @@ instance Core.ToJSON StackFrame where
   toJSON StackFrame {..} =
     Core.object
       ( Core.catMaybes
-          [ ("columnNumber" Core..=) Core.. Core.AsText
-              Core.<$> columnNumber,
+          [ ("columnNumber" Core..=) Core.. Core.AsText Core.<$> columnNumber,
             ("fileName" Core..=) Core.<$> fileName,
             ("functionName" Core..=) Core.<$> functionName,
-            ("lineNumber" Core..=) Core.. Core.AsText
-              Core.<$> lineNumber,
+            ("lineNumber" Core..=) Core.. Core.AsText Core.<$> lineNumber,
             ("loadModule" Core..=) Core.<$> loadModule,
-            ("originalFunctionName" Core..=)
-              Core.<$> originalFunctionName,
+            ("originalFunctionName" Core..=) Core.<$> originalFunctionName,
             ("sourceVersion" Core..=) Core.<$> sourceVersion
           ]
       )
@@ -754,7 +738,10 @@ data StackFrames = StackFrames
 newStackFrames ::
   StackFrames
 newStackFrames =
-  StackFrames {droppedFramesCount = Core.Nothing, frame = Core.Nothing}
+  StackFrames
+    { droppedFramesCount = Core.Nothing,
+      frame = Core.Nothing
+    }
 
 instance Core.FromJSON StackFrames where
   parseJSON =
@@ -770,8 +757,7 @@ instance Core.ToJSON StackFrames where
   toJSON StackFrames {..} =
     Core.object
       ( Core.catMaybes
-          [ ("droppedFramesCount" Core..=)
-              Core.<$> droppedFramesCount,
+          [ ("droppedFramesCount" Core..=) Core.<$> droppedFramesCount,
             ("frame" Core..=) Core.<$> frame
           ]
       )
@@ -795,7 +781,10 @@ data StackTrace = StackTrace
 newStackTrace ::
   StackTrace
 newStackTrace =
-  StackTrace {stackFrames = Core.Nothing, stackTraceHashId = Core.Nothing}
+  StackTrace
+    { stackFrames = Core.Nothing,
+      stackTraceHashId = Core.Nothing
+    }
 
 instance Core.FromJSON StackTrace where
   parseJSON =
@@ -804,9 +793,7 @@ instance Core.FromJSON StackTrace where
       ( \o ->
           StackTrace
             Core.<$> (o Core..:? "stackFrames")
-            Core.<*> ( o Core..:? "stackTraceHashId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "stackTraceHashId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON StackTrace where
@@ -814,7 +801,8 @@ instance Core.ToJSON StackTrace where
     Core.object
       ( Core.catMaybes
           [ ("stackFrames" Core..=) Core.<$> stackFrames,
-            ("stackTraceHashId" Core..=) Core.. Core.AsText
+            ("stackTraceHashId" Core..=)
+              Core.. Core.AsText
               Core.<$> stackTraceHashId
           ]
       )
@@ -863,7 +851,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -899,19 +891,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A time-stamped annotation in the Span.
 --
@@ -1025,8 +1015,7 @@ instance Core.FromJSON Trace where
 
 instance Core.ToJSON Trace where
   toJSON Trace {..} =
-    Core.object
-      (Core.catMaybes [("name" Core..=) Core.<$> name])
+    Core.object (Core.catMaybes [("name" Core..=) Core.<$> name])
 
 -- | Represents a string value that might be truncated.
 --

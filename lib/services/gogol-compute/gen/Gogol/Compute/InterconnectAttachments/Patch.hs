@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.InterconnectAttachments.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.InterconnectAttachments.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.interconnectAttachments.patch@ method which the
 -- 'ComputeInterconnectAttachmentsPatch' request conforms to.
@@ -60,9 +58,7 @@ type ComputeInterconnectAttachmentsPatchResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              InterconnectAttachment
+    Core.:> Core.ReqBody '[Core.JSON] InterconnectAttachment
     Core.:> Core.Patch '[Core.JSON] Operation
 
 -- | Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
@@ -103,27 +99,26 @@ newComputeInterconnectAttachmentsPatch ::
   -- |  Name of the region scoping this request. See 'region'.
   Core.Text ->
   ComputeInterconnectAttachmentsPatch
-newComputeInterconnectAttachmentsPatch interconnectAttachment payload project region =
-  ComputeInterconnectAttachmentsPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      interconnectAttachment = interconnectAttachment,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeInterconnectAttachmentsPatch
+  interconnectAttachment
+  payload
+  project
+  region =
     ComputeInterconnectAttachmentsPatch
-  where
-  type
-    Rs ComputeInterconnectAttachmentsPatch =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        interconnectAttachment = interconnectAttachment,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeInterconnectAttachmentsPatch where
+  type Rs ComputeInterconnectAttachmentsPatch = Operation
   type
     Scopes ComputeInterconnectAttachmentsPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -145,7 +140,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeInterconnectAttachmentsPatchResource
+              Core.Proxy ComputeInterconnectAttachmentsPatchResource
           )
           Core.mempty

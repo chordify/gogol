@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.GlobalPublicDelegatedPrefixes.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.GlobalPublicDelegatedPrefixes.Patch
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.globalPublicDelegatedPrefixes.patch@ method which the
 -- 'ComputeGlobalPublicDelegatedPrefixesPatch' request conforms to.
@@ -96,48 +94,47 @@ newComputeGlobalPublicDelegatedPrefixesPatch ::
   -- |  Name of the PublicDelegatedPrefix resource to patch. See 'publicDelegatedPrefix'.
   Core.Text ->
   ComputeGlobalPublicDelegatedPrefixesPatch
-newComputeGlobalPublicDelegatedPrefixesPatch payload project publicDelegatedPrefix =
-  ComputeGlobalPublicDelegatedPrefixesPatch
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      publicDelegatedPrefix = publicDelegatedPrefix,
-      requestId = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newComputeGlobalPublicDelegatedPrefixesPatch
+  payload
+  project
+  publicDelegatedPrefix =
+    ComputeGlobalPublicDelegatedPrefixesPatch
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        publicDelegatedPrefix = publicDelegatedPrefix,
+        requestId = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ComputeGlobalPublicDelegatedPrefixesPatch
   where
-  type
-    Rs ComputeGlobalPublicDelegatedPrefixesPatch =
-      Operation
+  type Rs ComputeGlobalPublicDelegatedPrefixesPatch = Operation
   type
     Scopes ComputeGlobalPublicDelegatedPrefixesPatch =
       '[CloudPlatform'FullControl, Compute'FullControl]
-  requestClient
-    ComputeGlobalPublicDelegatedPrefixesPatch {..} =
-      go
-        project
-        publicDelegatedPrefix
-        xgafv
-        accessToken
-        callback
-        requestId
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        computeService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ComputeGlobalPublicDelegatedPrefixesPatchResource
-            )
-            Core.mempty
+  requestClient ComputeGlobalPublicDelegatedPrefixesPatch {..} =
+    go
+      project
+      publicDelegatedPrefix
+      xgafv
+      accessToken
+      callback
+      requestId
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      computeService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ComputeGlobalPublicDelegatedPrefixesPatchResource
+          )
+          Core.mempty

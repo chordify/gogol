@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudAsset.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CloudAsset.Types
@@ -177,9 +175,16 @@ module Gogol.CloudAsset.Types
     -- ** GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType
     GoogleIdentityAccesscontextmanagerV1EgressFrom_IdentityType (..),
 
+    -- ** GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction
+    GoogleIdentityAccesscontextmanagerV1EgressFrom_SourceRestriction (..),
+
     -- ** GoogleIdentityAccesscontextmanagerV1EgressPolicy
     GoogleIdentityAccesscontextmanagerV1EgressPolicy (..),
     newGoogleIdentityAccesscontextmanagerV1EgressPolicy,
+
+    -- ** GoogleIdentityAccesscontextmanagerV1EgressSource
+    GoogleIdentityAccesscontextmanagerV1EgressSource (..),
+    newGoogleIdentityAccesscontextmanagerV1EgressSource,
 
     -- ** GoogleIdentityAccesscontextmanagerV1EgressTo
     GoogleIdentityAccesscontextmanagerV1EgressTo (..),
@@ -230,6 +235,14 @@ module Gogol.CloudAsset.Types
     GoogleIdentityAccesscontextmanagerV1VpcAccessibleServices (..),
     newGoogleIdentityAccesscontextmanagerV1VpcAccessibleServices,
 
+    -- ** GoogleIdentityAccesscontextmanagerV1VpcNetworkSource
+    GoogleIdentityAccesscontextmanagerV1VpcNetworkSource (..),
+    newGoogleIdentityAccesscontextmanagerV1VpcNetworkSource,
+
+    -- ** GoogleIdentityAccesscontextmanagerV1VpcSubNetwork
+    GoogleIdentityAccesscontextmanagerV1VpcSubNetwork (..),
+    newGoogleIdentityAccesscontextmanagerV1VpcSubNetwork,
+
     -- ** Operation
     Operation (..),
     newOperation,
@@ -258,7 +271,7 @@ where
 
 import Gogol.CloudAsset.Internal.Product
 import Gogol.CloudAsset.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v1p7beta1@ of the Cloud Asset API. This contains the host and root path used as a starting point for constructing service requests.
 cloudAssetService :: Core.ServiceConfig
@@ -268,4 +281,5 @@ cloudAssetService =
     "cloudasset.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"

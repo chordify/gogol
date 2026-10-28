@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Run.Projects.Locations.Services.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists Services.
+-- Lists Services. Results are sorted by creation time, descending.
 --
 -- /See:/ <https://cloud.google.com/run/ Cloud Run Admin API Reference> for @run.projects.locations.services.list@.
 module Gogol.Run.Projects.Locations.Services.List
@@ -39,7 +37,7 @@ module Gogol.Run.Projects.Locations.Services.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Run.Types
 
 -- | A resource alias for @run.projects.locations.services.list@ method which the
@@ -57,11 +55,9 @@ type RunProjectsLocationsServicesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudRunV2ListServicesResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudRunV2ListServicesResponse
 
--- | Lists Services.
+-- | Lists Services. Results are sorted by creation time, descending.
 --
 -- /See:/ 'newRunProjectsLocationsServicesList' smart constructor.
 data RunProjectsLocationsServicesList = RunProjectsLocationsServicesList
@@ -104,10 +100,7 @@ newRunProjectsLocationsServicesList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    RunProjectsLocationsServicesList
-  where
+instance Core.GoogleRequest RunProjectsLocationsServicesList where
   type
     Rs RunProjectsLocationsServicesList =
       GoogleCloudRunV2ListServicesResponse
@@ -130,7 +123,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy RunProjectsLocationsServicesListResource
-          )
+          (Core.Proxy :: Core.Proxy RunProjectsLocationsServicesListResource)
           Core.mempty

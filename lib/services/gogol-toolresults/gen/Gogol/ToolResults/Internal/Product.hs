@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ToolResults.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.ToolResults.Internal.Product
@@ -148,7 +146,7 @@ module Gogol.ToolResults.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ToolResults.Internal.Sum
 
 -- | Additional details for an ANR crash.
@@ -174,9 +172,7 @@ instance Core.FromJSON ANR where
 instance Core.ToJSON ANR where
   toJSON ANR {..} =
     Core.object
-      ( Core.catMaybes
-          [("stackTrace" Core..=) Core.<$> stackTrace]
-      )
+      (Core.catMaybes [("stackTrace" Core..=) Core.<$> stackTrace])
 
 -- | A suggestion to use deep links for a Robo run.
 --
@@ -221,9 +217,7 @@ instance Core.FromJSON BlankScreen where
 instance Core.ToJSON BlankScreen where
   toJSON BlankScreen {..} =
     Core.object
-      ( Core.catMaybes
-          [("screenId" Core..=) Core.<$> screenId]
-      )
+      (Core.catMaybes [("screenId" Core..=) Core.<$> screenId])
 
 -- | Crash dialog was detected during the test execution
 --
@@ -243,17 +237,12 @@ instance Core.FromJSON CrashDialogError where
   parseJSON =
     Core.withObject
       "CrashDialogError"
-      ( \o ->
-          CrashDialogError
-            Core.<$> (o Core..:? "crashPackage")
-      )
+      (\o -> CrashDialogError Core.<$> (o Core..:? "crashPackage"))
 
 instance Core.ToJSON CrashDialogError where
   toJSON CrashDialogError {..} =
     Core.object
-      ( Core.catMaybes
-          [("crashPackage" Core..=) Core.<$> crashPackage]
-      )
+      (Core.catMaybes [("crashPackage" Core..=) Core.<$> crashPackage])
 
 -- | Additional details about encountered login screens.
 --
@@ -289,8 +278,7 @@ instance Core.ToJSON EncounteredLoginScreen where
   toJSON EncounteredLoginScreen {..} =
     Core.object
       ( Core.catMaybes
-          [ ("distinctScreens" Core..=)
-              Core.<$> distinctScreens,
+          [ ("distinctScreens" Core..=) Core.<$> distinctScreens,
             ("screenIds" Core..=) Core.<$> screenIds
           ]
       )
@@ -311,14 +299,12 @@ newEncounteredNonAndroidUiWidgetScreen ::
   EncounteredNonAndroidUiWidgetScreen
 newEncounteredNonAndroidUiWidgetScreen =
   EncounteredNonAndroidUiWidgetScreen
-    { distinctScreens = Core.Nothing,
+    { distinctScreens =
+        Core.Nothing,
       screenIds = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    EncounteredNonAndroidUiWidgetScreen
-  where
+instance Core.FromJSON EncounteredNonAndroidUiWidgetScreen where
   parseJSON =
     Core.withObject
       "EncounteredNonAndroidUiWidgetScreen"
@@ -328,15 +314,11 @@ instance
             Core.<*> (o Core..:? "screenIds")
       )
 
-instance
-  Core.ToJSON
-    EncounteredNonAndroidUiWidgetScreen
-  where
+instance Core.ToJSON EncounteredNonAndroidUiWidgetScreen where
   toJSON EncounteredNonAndroidUiWidgetScreen {..} =
     Core.object
       ( Core.catMaybes
-          [ ("distinctScreens" Core..=)
-              Core.<$> distinctScreens,
+          [ ("distinctScreens" Core..=) Core.<$> distinctScreens,
             ("screenIds" Core..=) Core.<$> screenIds
           ]
       )
@@ -379,16 +361,12 @@ instance Core.FromJSON FatalException where
   parseJSON =
     Core.withObject
       "FatalException"
-      ( \o ->
-          FatalException Core.<$> (o Core..:? "stackTrace")
-      )
+      (\o -> FatalException Core.<$> (o Core..:? "stackTrace"))
 
 instance Core.ToJSON FatalException where
   toJSON FatalException {..} =
     Core.object
-      ( Core.catMaybes
-          [("stackTrace" Core..=) Core.<$> stackTrace]
-      )
+      (Core.catMaybes [("stackTrace" Core..=) Core.<$> stackTrace])
 
 -- | Additional details of in-app purchases encountered during the crawl.
 --
@@ -469,16 +447,12 @@ instance Core.FromJSON IosAppCrashed where
   parseJSON =
     Core.withObject
       "IosAppCrashed"
-      ( \o ->
-          IosAppCrashed Core.<$> (o Core..:? "stackTrace")
-      )
+      (\o -> IosAppCrashed Core.<$> (o Core..:? "stackTrace"))
 
 instance Core.ToJSON IosAppCrashed where
   toJSON IosAppCrashed {..} =
     Core.object
-      ( Core.catMaybes
-          [("stackTrace" Core..=) Core.<$> stackTrace]
-      )
+      (Core.catMaybes [("stackTrace" Core..=) Core.<$> stackTrace])
 
 -- | Failed to find the launcher activity of an app.
 --
@@ -518,16 +492,12 @@ instance Core.FromJSON NativeCrash where
   parseJSON =
     Core.withObject
       "NativeCrash"
-      ( \o ->
-          NativeCrash Core.<$> (o Core..:? "stackTrace")
-      )
+      (\o -> NativeCrash Core.<$> (o Core..:? "stackTrace"))
 
 instance Core.ToJSON NativeCrash where
   toJSON NativeCrash {..} =
     Core.object
-      ( Core.catMaybes
-          [("stackTrace" Core..=) Core.<$> stackTrace]
-      )
+      (Core.catMaybes [("stackTrace" Core..=) Core.<$> stackTrace])
 
 -- | A non-sdk API and examples of it being called along with other metadata See https:\/\/developer.android.com\/distribute\/best-practices\/develop\/restrictions-non-sdk-interfaces
 --
@@ -576,8 +546,7 @@ instance Core.ToJSON NonSdkApi where
     Core.object
       ( Core.catMaybes
           [ ("apiSignature" Core..=) Core.<$> apiSignature,
-            ("exampleStackTraces" Core..=)
-              Core.<$> exampleStackTraces,
+            ("exampleStackTraces" Core..=) Core.<$> exampleStackTraces,
             ("insights" Core..=) Core.<$> insights,
             ("invocationCount" Core..=) Core.<$> invocationCount,
             ("list" Core..=) Core.<$> list
@@ -626,8 +595,7 @@ instance Core.ToJSON NonSdkApiInsight where
   toJSON NonSdkApiInsight {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exampleTraceMessages" Core..=)
-              Core.<$> exampleTraceMessages,
+          [ ("exampleTraceMessages" Core..=) Core.<$> exampleTraceMessages,
             ("matcherId" Core..=) Core.<$> matcherId,
             ("pendingGoogleUpdateInsight" Core..=)
               Core.<$> pendingGoogleUpdateInsight,
@@ -718,8 +686,7 @@ instance Core.ToJSON NonSdkApiUsageViolationReport where
       ( Core.catMaybes
           [ ("exampleApis" Core..=) Core.<$> exampleApis,
             ("minSdkVersion" Core..=) Core.<$> minSdkVersion,
-            ("targetSdkVersion" Core..=)
-              Core.<$> targetSdkVersion,
+            ("targetSdkVersion" Core..=) Core.<$> targetSdkVersion,
             ("uniqueApis" Core..=) Core.<$> uniqueApis
           ]
       )
@@ -739,7 +706,10 @@ data OverlappingUIElements = OverlappingUIElements
 newOverlappingUIElements ::
   OverlappingUIElements
 newOverlappingUIElements =
-  OverlappingUIElements {resourceName = Core.Nothing, screenId = Core.Nothing}
+  OverlappingUIElements
+    { resourceName = Core.Nothing,
+      screenId = Core.Nothing
+    }
 
 instance Core.FromJSON OverlappingUIElements where
   parseJSON =
@@ -788,9 +758,7 @@ instance Core.ToJSON PendingGoogleUpdateInsight where
   toJSON PendingGoogleUpdateInsight {..} =
     Core.object
       ( Core.catMaybes
-          [ ("nameOfGoogleLibrary" Core..=)
-              Core.<$> nameOfGoogleLibrary
-          ]
+          [("nameOfGoogleLibrary" Core..=) Core.<$> nameOfGoogleLibrary]
       )
 
 -- | A notification that Robo signed in with Google.
@@ -825,23 +793,21 @@ newtype PerformedMonkeyActions = PerformedMonkeyActions
 -- | Creates a value of 'PerformedMonkeyActions' with the minimum fields required to make a request.
 newPerformedMonkeyActions ::
   PerformedMonkeyActions
-newPerformedMonkeyActions = PerformedMonkeyActions {totalActions = Core.Nothing}
+newPerformedMonkeyActions =
+  PerformedMonkeyActions {totalActions = Core.Nothing}
 
 instance Core.FromJSON PerformedMonkeyActions where
   parseJSON =
     Core.withObject
       "PerformedMonkeyActions"
       ( \o ->
-          PerformedMonkeyActions
-            Core.<$> (o Core..:? "totalActions")
+          PerformedMonkeyActions Core.<$> (o Core..:? "totalActions")
       )
 
 instance Core.ToJSON PerformedMonkeyActions where
   toJSON PerformedMonkeyActions {..} =
     Core.object
-      ( Core.catMaybes
-          [("totalActions" Core..=) Core.<$> totalActions]
-      )
+      (Core.catMaybes [("totalActions" Core..=) Core.<$> totalActions])
 
 -- | Execution stats for a user-provided Robo script.
 --
@@ -877,8 +843,7 @@ instance Core.ToJSON RoboScriptExecution where
   toJSON RoboScriptExecution {..} =
     Core.object
       ( Core.catMaybes
-          [ ("successfulActions" Core..=)
-              Core.<$> successfulActions,
+          [ ("successfulActions" Core..=) Core.<$> successfulActions,
             ("totalActions" Core..=) Core.<$> totalActions
           ]
       )
@@ -908,17 +873,13 @@ instance Core.FromJSON StackTrace where
 instance Core.ToJSON StackTrace where
   toJSON StackTrace {..} =
     Core.object
-      ( Core.catMaybes
-          [("exception" Core..=) Core.<$> exception]
-      )
+      (Core.catMaybes [("exception" Core..=) Core.<$> exception])
 
 -- | User provided intent failed to resolve to an activity.
 --
 -- /See:/ 'newStartActivityNotFound' smart constructor.
 data StartActivityNotFound = StartActivityNotFound
-  { -- |
-    action :: (Core.Maybe Core.Text),
-    -- |
+  { action :: (Core.Maybe Core.Text),
     uri :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -935,16 +896,15 @@ instance Core.FromJSON StartActivityNotFound where
       "StartActivityNotFound"
       ( \o ->
           StartActivityNotFound
-            Core.<$> (o Core..:? "action") Core.<*> (o Core..:? "uri")
+            Core.<$> (o Core..:? "action")
+            Core.<*> (o Core..:? "uri")
       )
 
 instance Core.ToJSON StartActivityNotFound where
   toJSON StartActivityNotFound {..} =
     Core.object
       ( Core.catMaybes
-          [ ("action" Core..=) Core.<$> action,
-            ("uri" Core..=) Core.<$> uri
-          ]
+          [("action" Core..=) Core.<$> action, ("uri" Core..=) Core.<$> uri]
       )
 
 -- | A warning that the screen hierarchy is deeper than the recommended threshold.
@@ -1023,23 +983,19 @@ newtype UnusedRoboDirective = UnusedRoboDirective
 -- | Creates a value of 'UnusedRoboDirective' with the minimum fields required to make a request.
 newUnusedRoboDirective ::
   UnusedRoboDirective
-newUnusedRoboDirective = UnusedRoboDirective {resourceName = Core.Nothing}
+newUnusedRoboDirective =
+  UnusedRoboDirective {resourceName = Core.Nothing}
 
 instance Core.FromJSON UnusedRoboDirective where
   parseJSON =
     Core.withObject
       "UnusedRoboDirective"
-      ( \o ->
-          UnusedRoboDirective
-            Core.<$> (o Core..:? "resourceName")
-      )
+      (\o -> UnusedRoboDirective Core.<$> (o Core..:? "resourceName"))
 
 instance Core.ToJSON UnusedRoboDirective where
   toJSON UnusedRoboDirective {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceName" Core..=) Core.<$> resourceName]
-      )
+      (Core.catMaybes [("resourceName" Core..=) Core.<$> resourceName])
 
 -- | This insight is a recommendation to upgrade a given library to the specified version, in order to avoid dependencies on non-SDK APIs.
 --
@@ -1056,7 +1012,10 @@ data UpgradeInsight = UpgradeInsight
 newUpgradeInsight ::
   UpgradeInsight
 newUpgradeInsight =
-  UpgradeInsight {packageName = Core.Nothing, upgradeToVersion = Core.Nothing}
+  UpgradeInsight
+    { packageName = Core.Nothing,
+      upgradeToVersion = Core.Nothing
+    }
 
 instance Core.FromJSON UpgradeInsight where
   parseJSON =
@@ -1073,8 +1032,7 @@ instance Core.ToJSON UpgradeInsight where
     Core.object
       ( Core.catMaybes
           [ ("packageName" Core..=) Core.<$> packageName,
-            ("upgradeToVersion" Core..=)
-              Core.<$> upgradeToVersion
+            ("upgradeToVersion" Core..=) Core.<$> upgradeToVersion
           ]
       )
 
@@ -1090,23 +1048,19 @@ newtype UsedRoboDirective = UsedRoboDirective
 -- | Creates a value of 'UsedRoboDirective' with the minimum fields required to make a request.
 newUsedRoboDirective ::
   UsedRoboDirective
-newUsedRoboDirective = UsedRoboDirective {resourceName = Core.Nothing}
+newUsedRoboDirective =
+  UsedRoboDirective {resourceName = Core.Nothing}
 
 instance Core.FromJSON UsedRoboDirective where
   parseJSON =
     Core.withObject
       "UsedRoboDirective"
-      ( \o ->
-          UsedRoboDirective
-            Core.<$> (o Core..:? "resourceName")
-      )
+      (\o -> UsedRoboDirective Core.<$> (o Core..:? "resourceName"))
 
 instance Core.ToJSON UsedRoboDirective where
   toJSON UsedRoboDirective {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceName" Core..=) Core.<$> resourceName]
-      )
+      (Core.catMaybes [("resourceName" Core..=) Core.<$> resourceName])
 
 -- | Additional details of a used Robo directive with an ignore action. Note: This is a different scenario than unused directive.
 --
@@ -1128,13 +1082,10 @@ instance Core.FromJSON UsedRoboIgnoreDirective where
     Core.withObject
       "UsedRoboIgnoreDirective"
       ( \o ->
-          UsedRoboIgnoreDirective
-            Core.<$> (o Core..:? "resourceName")
+          UsedRoboIgnoreDirective Core.<$> (o Core..:? "resourceName")
       )
 
 instance Core.ToJSON UsedRoboIgnoreDirective where
   toJSON UsedRoboIgnoreDirective {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceName" Core..=) Core.<$> resourceName]
-      )
+      (Core.catMaybes [("resourceName" Core..=) Core.<$> resourceName])

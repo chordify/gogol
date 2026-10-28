@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetHttpsProxies.SetUrlMap
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetHttpsProxies.SetUrlMap
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetHttpsProxies.setUrlMap@ method which the
 -- 'ComputeTargetHttpsProxiesSetUrlMap' request conforms to.
@@ -96,26 +94,24 @@ newComputeTargetHttpsProxiesSetUrlMap ::
   -- |  Name of the TargetHttpsProxy resource whose URL map is to be set. See 'targetHttpsProxy'.
   Core.Text ->
   ComputeTargetHttpsProxiesSetUrlMap
-newComputeTargetHttpsProxiesSetUrlMap payload project targetHttpsProxy =
-  ComputeTargetHttpsProxiesSetUrlMap
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      requestId = Core.Nothing,
-      targetHttpsProxy = targetHttpsProxy,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeTargetHttpsProxiesSetUrlMap
+  payload
+  project
+  targetHttpsProxy =
     ComputeTargetHttpsProxiesSetUrlMap
-  where
-  type
-    Rs ComputeTargetHttpsProxiesSetUrlMap =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        requestId = Core.Nothing,
+        targetHttpsProxy = targetHttpsProxy,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeTargetHttpsProxiesSetUrlMap where
+  type Rs ComputeTargetHttpsProxiesSetUrlMap = Operation
   type
     Scopes ComputeTargetHttpsProxiesSetUrlMap =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -136,7 +132,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeTargetHttpsProxiesSetUrlMapResource
+              Core.Proxy ComputeTargetHttpsProxiesSetUrlMapResource
           )
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AppEngine.Apps.Firewall.IngressRules.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AppEngine.Apps.Firewall.IngressRules.List
 where
 
 import Gogol.AppEngine.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @appengine.apps.firewall.ingressRules.list@ method which the
 -- 'AppEngineAppsFirewallIngressRulesList' request conforms to.
@@ -104,10 +102,7 @@ newAppEngineAppsFirewallIngressRulesList appsId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AppEngineAppsFirewallIngressRulesList
-  where
+instance Core.GoogleRequest AppEngineAppsFirewallIngressRulesList where
   type
     Rs AppEngineAppsFirewallIngressRulesList =
       ListIngressRulesResponse
@@ -117,25 +112,23 @@ instance
          CloudPlatform'FullControl,
          CloudPlatform'ReadOnly
        ]
-  requestClient
-    AppEngineAppsFirewallIngressRulesList {..} =
-      go
-        appsId
-        xgafv
-        accessToken
-        callback
-        matchingAddress
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        appEngineService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AppEngineAppsFirewallIngressRulesListResource
-            )
-            Core.mempty
+  requestClient AppEngineAppsFirewallIngressRulesList {..} =
+    go
+      appsId
+      xgafv
+      accessToken
+      callback
+      matchingAddress
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      appEngineService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AppEngineAppsFirewallIngressRulesListResource
+          )
+          Core.mempty

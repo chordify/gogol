@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IAP.Projects.Iap_tunnel.Locations.DestGroups.Delete
 where
 
 import Gogol.IAP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @iap.projects.iap_tunnel.locations.destGroups.delete@ method which the
 -- 'IAPProjectsIap_tunnelLocationsDestGroupsDelete' request conforms to.
@@ -81,7 +79,8 @@ newIAPProjectsIap_tunnelLocationsDestGroupsDelete ::
   IAPProjectsIap_tunnelLocationsDestGroupsDelete
 newIAPProjectsIap_tunnelLocationsDestGroupsDelete name =
   IAPProjectsIap_tunnelLocationsDestGroupsDelete
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -93,30 +92,24 @@ instance
   Core.GoogleRequest
     IAPProjectsIap_tunnelLocationsDestGroupsDelete
   where
+  type Rs IAPProjectsIap_tunnelLocationsDestGroupsDelete = Empty
   type
-    Rs
-      IAPProjectsIap_tunnelLocationsDestGroupsDelete =
-      Empty
-  type
-    Scopes
-      IAPProjectsIap_tunnelLocationsDestGroupsDelete =
+    Scopes IAPProjectsIap_tunnelLocationsDestGroupsDelete =
       '[CloudPlatform'FullControl]
-  requestClient
-    IAPProjectsIap_tunnelLocationsDestGroupsDelete {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        iAPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAPProjectsIap_tunnelLocationsDestGroupsDeleteResource
-            )
-            Core.mempty
+  requestClient IAPProjectsIap_tunnelLocationsDestGroupsDelete {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAPProjectsIap_tunnelLocationsDestGroupsDeleteResource
+          )
+          Core.mempty

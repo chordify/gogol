@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for setting attribute based access control to requests to Google Cloud services.
+-- An API for setting attribute based access control to requests to Google Cloud services. /Warning:/ Do not mix /v1alpha/ and /v1/ API usage in the same access policy. The v1alpha API supports new Access Context Manager features, which may have different attributes or behaviors that are not supported by v1. The practice of mixed API usage within a policy may result in the inability to update that policy, including any access levels or service perimeters belonging to it. It is not recommended to use both v1 and v1alpha for modifying policies with critical service perimeters. Modifications using v1alpha should be limited to policies with non-production\/non-critical service perimeters.
 --
 -- /See:/ <https://cloud.google.com/access-context-manager/docs/reference/rest/ Access Context Manager API Reference>
 module Gogol.AccessContextManager
@@ -223,6 +221,16 @@ module Gogol.AccessContextManager
     AccessContextManagerOrganizationsGcpUserAccessBindingsPatch (..),
     newAccessContextManagerOrganizationsGcpUserAccessBindingsPatch,
 
+    -- ** accesscontextmanager.services.get
+    AccessContextManagerServicesGetResource,
+    AccessContextManagerServicesGet (..),
+    newAccessContextManagerServicesGet,
+
+    -- ** accesscontextmanager.services.list
+    AccessContextManagerServicesListResource,
+    AccessContextManagerServicesList (..),
+    newAccessContextManagerServicesList,
+
     -- * Types
 
     -- ** Xgafv
@@ -240,9 +248,21 @@ module Gogol.AccessContextManager
     AccessPolicy (..),
     newAccessPolicy,
 
+    -- ** AccessScope
+    AccessScope (..),
+    newAccessScope,
+
+    -- ** AccessSettings
+    AccessSettings (..),
+    newAccessSettings,
+
     -- ** ApiOperation
     ApiOperation (..),
     newApiOperation,
+
+    -- ** Application
+    Application (..),
+    newApplication,
 
     -- ** AuditConfig
     AuditConfig (..),
@@ -283,6 +303,10 @@ module Gogol.AccessContextManager
     CancelOperationRequest (..),
     newCancelOperationRequest,
 
+    -- ** ClientScope
+    ClientScope (..),
+    newClientScope,
+
     -- ** CommitServicePerimetersRequest
     CommitServicePerimetersRequest (..),
     newCommitServicePerimetersRequest,
@@ -316,9 +340,16 @@ module Gogol.AccessContextManager
     -- ** EgressFrom_IdentityType
     EgressFrom_IdentityType (..),
 
+    -- ** EgressFrom_SourceRestriction
+    EgressFrom_SourceRestriction (..),
+
     -- ** EgressPolicy
     EgressPolicy (..),
     newEgressPolicy,
+
+    -- ** EgressSource
+    EgressSource (..),
+    newEgressSource,
 
     -- ** EgressTo
     EgressTo (..),
@@ -391,6 +422,10 @@ module Gogol.AccessContextManager
     ListServicePerimetersResponse (..),
     newListServicePerimetersResponse,
 
+    -- ** ListSupportedServicesResponse
+    ListSupportedServicesResponse (..),
+    newListSupportedServicesResponse,
+
     -- ** MethodSelector
     MethodSelector (..),
     newMethodSelector,
@@ -434,6 +469,10 @@ module Gogol.AccessContextManager
     ReplaceServicePerimetersResponse (..),
     newReplaceServicePerimetersResponse,
 
+    -- ** ScopedAccessSettings
+    ScopedAccessSettings (..),
+    newScopedAccessSettings,
+
     -- ** ServicePerimeter
     ServicePerimeter (..),
     newServicePerimeter,
@@ -444,6 +483,13 @@ module Gogol.AccessContextManager
     -- ** ServicePerimeterConfig
     ServicePerimeterConfig (..),
     newServicePerimeterConfig,
+
+    -- ** SessionSettings
+    SessionSettings (..),
+    newSessionSettings,
+
+    -- ** SessionSettings_SessionReauthMethod
+    SessionSettings_SessionReauthMethod (..),
 
     -- ** SetIamPolicyRequest
     SetIamPolicyRequest (..),
@@ -457,6 +503,16 @@ module Gogol.AccessContextManager
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- ** SupportedService
+    SupportedService (..),
+    newSupportedService,
+
+    -- ** SupportedService_ServiceSupportStage
+    SupportedService_ServiceSupportStage (..),
+
+    -- ** SupportedService_SupportStage
+    SupportedService_SupportStage (..),
+
     -- ** TestIamPermissionsRequest
     TestIamPermissionsRequest (..),
     newTestIamPermissionsRequest,
@@ -468,6 +524,14 @@ module Gogol.AccessContextManager
     -- ** VpcAccessibleServices
     VpcAccessibleServices (..),
     newVpcAccessibleServices,
+
+    -- ** VpcNetworkSource
+    VpcNetworkSource (..),
+    newVpcNetworkSource,
+
+    -- ** VpcSubNetwork
+    VpcSubNetwork (..),
+    newVpcSubNetwork,
 
     -- ** AccessPoliciesAccessLevelsGetAccessLevelFormat
     AccessPoliciesAccessLevelsGetAccessLevelFormat (..),
@@ -514,4 +578,6 @@ import Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Delete
 import Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Get
 import Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.List
 import Gogol.AccessContextManager.Organizations.GcpUserAccessBindings.Patch
+import Gogol.AccessContextManager.Services.Get
+import Gogol.AccessContextManager.Services.List
 import Gogol.AccessContextManager.Types

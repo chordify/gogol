@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.Comments.SetModerationStatus
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.Comments.SetModerationStatus
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.comments.setModerationStatus@ method which the
@@ -76,7 +74,7 @@ data YouTubeCommentsSetModerationStatus = YouTubeCommentsSetModerationStatus
     callback :: (Core.Maybe Core.Text),
     -- | Modifies the moderation status of the comments with the given IDs
     id :: [Core.Text],
-    -- | Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as \'likely spam\'. Valid values: MODERATION/STATUS/PUBLISHED, MODERATION/STATUS/HELD/FOR/REVIEW, MODERATION/STATUS/REJECTED.
+    -- | Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as \'likely spam\'. Valid values: \'heldForReview\', \'published\' or \'rejected\'.
     moderationStatus :: CommentsSetModerationStatusModerationStatus,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -89,7 +87,7 @@ data YouTubeCommentsSetModerationStatus = YouTubeCommentsSetModerationStatus
 newYouTubeCommentsSetModerationStatus ::
   -- |  Modifies the moderation status of the comments with the given IDs See 'id'.
   [Core.Text] ->
-  -- |  Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as \'likely spam\'. Valid values: MODERATION/STATUS/PUBLISHED, MODERATION/STATUS/HELD/FOR/REVIEW, MODERATION/STATUS/REJECTED. See 'moderationStatus'.
+  -- |  Specifies the requested moderation status. Note, comments can be in statuses, which are not available through this call. For example, this call does not allow to mark a comment as \'likely spam\'. Valid values: \'heldForReview\', \'published\' or \'rejected\'. See 'moderationStatus'.
   CommentsSetModerationStatusModerationStatus ->
   YouTubeCommentsSetModerationStatus
 newYouTubeCommentsSetModerationStatus id moderationStatus =
@@ -104,10 +102,7 @@ newYouTubeCommentsSetModerationStatus id moderationStatus =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeCommentsSetModerationStatus
-  where
+instance Core.GoogleRequest YouTubeCommentsSetModerationStatus where
   type Rs YouTubeCommentsSetModerationStatus = ()
   type
     Scopes YouTubeCommentsSetModerationStatus =
@@ -128,7 +123,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                YouTubeCommentsSetModerationStatusResource
+              Core.Proxy YouTubeCommentsSetModerationStatusResource
           )
           Core.mempty

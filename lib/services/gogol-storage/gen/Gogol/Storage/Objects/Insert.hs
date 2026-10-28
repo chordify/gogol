@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.Insert
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.Insert
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.insert@ method which the
@@ -57,46 +55,34 @@ type StorageObjectsInsertResource =
     Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
     Core.:> Core.QueryParam "kmsKeyName" Core.Text
     Core.:> Core.QueryParam "name" Core.Text
-    Core.:> Core.QueryParam
-              "predefinedAcl"
-              ObjectsInsertPredefinedAcl
-    Core.:> Core.QueryParam
-              "projection"
-              ObjectsInsertProjection
+    Core.:> Core.QueryParam "predefinedAcl" ObjectsInsertPredefinedAcl
+    Core.:> Core.QueryParam "projection" ObjectsInsertProjection
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Object
     Core.:> Core.Post '[Core.JSON] Object
     Core.:<|> "upload"
-      Core.:> "storage"
-      Core.:> "v1"
-      Core.:> "b"
-      Core.:> Core.Capture "bucket" Core.Text
-      Core.:> "o"
-      Core.:> Core.QueryParam "contentEncoding" Core.Text
-      Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
-      Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
-      Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
-      Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-      Core.:> Core.QueryParam "kmsKeyName" Core.Text
-      Core.:> Core.QueryParam "name" Core.Text
-      Core.:> Core.QueryParam
-                "predefinedAcl"
-                ObjectsInsertPredefinedAcl
-      Core.:> Core.QueryParam
-                "projection"
-                ObjectsInsertProjection
-      Core.:> Core.QueryParam "uploadType" Core.Text
-      Core.:> Core.QueryParam "userProject" Core.Text
-      Core.:> Core.QueryParam "alt" Core.AltJSON
-      Core.:> Core.QueryParam
-                "uploadType"
-                Core.Multipart
-      Core.:> Core.MultipartRelated
-                '[Core.JSON]
-                Object
-      Core.:> Core.Post '[Core.JSON] Object
+    Core.:> "storage"
+    Core.:> "v1"
+    Core.:> "b"
+    Core.:> Core.Capture "bucket" Core.Text
+    Core.:> "o"
+    Core.:> Core.QueryParam "contentEncoding" Core.Text
+    Core.:> Core.QueryParam "ifGenerationMatch" Core.Int64
+    Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
+    Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
+    Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
+    Core.:> Core.QueryParam "kmsKeyName" Core.Text
+    Core.:> Core.QueryParam "name" Core.Text
+    Core.:> Core.QueryParam "predefinedAcl" ObjectsInsertPredefinedAcl
+    Core.:> Core.QueryParam "projection" ObjectsInsertProjection
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "userProject" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
+    Core.:> Core.QueryParam "uploadType" Core.Multipart
+    Core.:> Core.MultipartRelated '[Core.JSON] Object
+    Core.:> Core.Post '[Core.JSON] Object
 
 -- | Stores a new object and metadata.
 --
@@ -116,7 +102,7 @@ data StorageObjectsInsert = StorageObjectsInsert
     ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
     -- | Resource name of the Cloud KMS key, of the form projects\/my-project\/locations\/global\/keyRings\/my-kr\/cryptoKeys\/my-key, that will be used to encrypt the object. Overrides the object metadata\'s kms/key/name value, if any.
     kmsKeyName :: (Core.Maybe Core.Text),
-    -- | Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata\'s name value, if any. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     name :: (Core.Maybe Core.Text),
     -- | Multipart request metadata.
     payload :: Object,
@@ -183,45 +169,35 @@ instance Core.GoogleRequest StorageObjectsInsert where
     where
       go Core.:<|> _ =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsInsertResource
-          )
+          (Core.Proxy :: Core.Proxy StorageObjectsInsertResource)
           Core.mempty
 
-instance
-  Core.GoogleRequest
-    (Core.MediaUpload StorageObjectsInsert)
-  where
-  type
-    Rs (Core.MediaUpload StorageObjectsInsert) =
-      Object
+instance Core.GoogleRequest (Core.MediaUpload StorageObjectsInsert) where
+  type Rs (Core.MediaUpload StorageObjectsInsert) = Object
   type
     Scopes (Core.MediaUpload StorageObjectsInsert) =
       Core.Scopes StorageObjectsInsert
-  requestClient
-    (Core.MediaUpload StorageObjectsInsert {..} body) =
-      go
-        bucket
-        contentEncoding
-        ifGenerationMatch
-        ifGenerationNotMatch
-        ifMetagenerationMatch
-        ifMetagenerationNotMatch
-        kmsKeyName
-        name
-        predefinedAcl
-        projection
-        uploadType
-        userProject
-        (Core.Just Core.AltJSON)
-        (Core.Just Core.Multipart)
-        payload
-        body
-        storageService
-      where
-        _ Core.:<|> go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy StorageObjectsInsertResource
-            )
-            Core.mempty
+  requestClient (Core.MediaUpload StorageObjectsInsert {..} body) =
+    go
+      bucket
+      contentEncoding
+      ifGenerationMatch
+      ifGenerationNotMatch
+      ifMetagenerationMatch
+      ifMetagenerationNotMatch
+      kmsKeyName
+      name
+      predefinedAcl
+      projection
+      uploadType
+      userProject
+      (Core.Just Core.AltJSON)
+      (Core.Just Core.Multipart)
+      payload
+      body
+      storageService
+    where
+      _ Core.:<|> go =
+        Core.buildClient
+          (Core.Proxy :: Core.Proxy StorageObjectsInsertResource)
+          Core.mempty

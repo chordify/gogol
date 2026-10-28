@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,38 @@
 
 -- |
 -- Module      : Gogol.Translate.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Translate.Internal.Product
-  ( -- * BatchDocumentInputConfig
+  ( -- * AdaptiveMtDataset
+    AdaptiveMtDataset (..),
+    newAdaptiveMtDataset,
+
+    -- * AdaptiveMtFile
+    AdaptiveMtFile (..),
+    newAdaptiveMtFile,
+
+    -- * AdaptiveMtSentence
+    AdaptiveMtSentence (..),
+    newAdaptiveMtSentence,
+
+    -- * AdaptiveMtTranslateRequest
+    AdaptiveMtTranslateRequest (..),
+    newAdaptiveMtTranslateRequest,
+
+    -- * AdaptiveMtTranslateResponse
+    AdaptiveMtTranslateResponse (..),
+    newAdaptiveMtTranslateResponse,
+
+    -- * AdaptiveMtTranslation
+    AdaptiveMtTranslation (..),
+    newAdaptiveMtTranslation,
+
+    -- * BatchDocumentInputConfig
     BatchDocumentInputConfig (..),
     newBatchDocumentInputConfig,
 
@@ -122,6 +144,10 @@ module Gogol.Translate.Internal.Product
     ExportDataRequest (..),
     newExportDataRequest,
 
+    -- * FileInputSource
+    FileInputSource (..),
+    newFileInputSource,
+
     -- * GcsDestination
     GcsDestination (..),
     newGcsDestination,
@@ -141,6 +167,10 @@ module Gogol.Translate.Internal.Product
     -- * Glossary
     Glossary (..),
     newGlossary,
+
+    -- * GlossaryConfig
+    GlossaryConfig (..),
+    newGlossaryConfig,
 
     -- * GlossaryEntry
     GlossaryEntry (..),
@@ -162,6 +192,14 @@ module Gogol.Translate.Internal.Product
     GlossaryTermsSet (..),
     newGlossaryTermsSet,
 
+    -- * ImportAdaptiveMtFileRequest
+    ImportAdaptiveMtFileRequest (..),
+    newImportAdaptiveMtFileRequest,
+
+    -- * ImportAdaptiveMtFileResponse
+    ImportAdaptiveMtFileResponse (..),
+    newImportAdaptiveMtFileResponse,
+
     -- * ImportDataRequest
     ImportDataRequest (..),
     newImportDataRequest,
@@ -181,6 +219,18 @@ module Gogol.Translate.Internal.Product
     -- * LanguageCodesSet
     LanguageCodesSet (..),
     newLanguageCodesSet,
+
+    -- * ListAdaptiveMtDatasetsResponse
+    ListAdaptiveMtDatasetsResponse (..),
+    newListAdaptiveMtDatasetsResponse,
+
+    -- * ListAdaptiveMtFilesResponse
+    ListAdaptiveMtFilesResponse (..),
+    newListAdaptiveMtFilesResponse,
+
+    -- * ListAdaptiveMtSentencesResponse
+    ListAdaptiveMtSentencesResponse (..),
+    newListAdaptiveMtSentencesResponse,
 
     -- * ListDatasetsResponse
     ListDatasetsResponse (..),
@@ -242,6 +292,30 @@ module Gogol.Translate.Internal.Product
     OutputConfig (..),
     newOutputConfig,
 
+    -- * ReferenceSentenceConfig
+    ReferenceSentenceConfig (..),
+    newReferenceSentenceConfig,
+
+    -- * ReferenceSentencePair
+    ReferenceSentencePair (..),
+    newReferenceSentencePair,
+
+    -- * ReferenceSentencePairList
+    ReferenceSentencePairList (..),
+    newReferenceSentencePairList,
+
+    -- * Romanization
+    Romanization (..),
+    newRomanization,
+
+    -- * RomanizeTextRequest
+    RomanizeTextRequest (..),
+    newRomanizeTextRequest,
+
+    -- * RomanizeTextResponse
+    RomanizeTextResponse (..),
+    newRomanizeTextResponse,
+
     -- * Status
     Status (..),
     newStatus,
@@ -290,14 +364,314 @@ module Gogol.Translate.Internal.Product
     Translation (..),
     newTranslation,
 
+    -- * TransliterationConfig
+    TransliterationConfig (..),
+    newTransliterationConfig,
+
     -- * WaitOperationRequest
     WaitOperationRequest (..),
     newWaitOperationRequest,
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Translate.Internal.Sum
+
+-- | An Adaptive MT Dataset.
+--
+-- /See:/ 'newAdaptiveMtDataset' smart constructor.
+data AdaptiveMtDataset = AdaptiveMtDataset
+  { -- | Output only. Timestamp when this dataset was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | The name of the dataset to show in the interface. The name can be up to 32 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The number of examples in the dataset.
+    exampleCount :: (Core.Maybe Core.Int32),
+    -- | Required. The resource name of the dataset, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/adaptiveMtDatasets\/{dataset_id}@
+    name :: (Core.Maybe Core.Text),
+    -- | The BCP-47 language code of the source language.
+    sourceLanguageCode :: (Core.Maybe Core.Text),
+    -- | The BCP-47 language code of the target language.
+    targetLanguageCode :: (Core.Maybe Core.Text),
+    -- | Output only. Timestamp when this dataset was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtDataset' with the minimum fields required to make a request.
+newAdaptiveMtDataset ::
+  AdaptiveMtDataset
+newAdaptiveMtDataset =
+  AdaptiveMtDataset
+    { createTime = Core.Nothing,
+      displayName = Core.Nothing,
+      exampleCount = Core.Nothing,
+      name = Core.Nothing,
+      sourceLanguageCode = Core.Nothing,
+      targetLanguageCode = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptiveMtDataset where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtDataset"
+      ( \o ->
+          AdaptiveMtDataset
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "exampleCount")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "sourceLanguageCode")
+            Core.<*> (o Core..:? "targetLanguageCode")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON AdaptiveMtDataset where
+  toJSON AdaptiveMtDataset {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("exampleCount" Core..=) Core.<$> exampleCount,
+            ("name" Core..=) Core.<$> name,
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | An AdaptiveMtFile.
+--
+-- /See:/ 'newAdaptiveMtFile' smart constructor.
+data AdaptiveMtFile = AdaptiveMtFile
+  { -- | Output only. Timestamp when this file was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | The file\'s display name.
+    displayName :: (Core.Maybe Core.Text),
+    -- | The number of entries that the file contains.
+    entryCount :: (Core.Maybe Core.Int32),
+    -- | Required. The resource name of the file, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/adaptiveMtDatasets\/{dataset}\/adaptiveMtFiles\/{file}@
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. Timestamp when this file was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtFile' with the minimum fields required to make a request.
+newAdaptiveMtFile ::
+  AdaptiveMtFile
+newAdaptiveMtFile =
+  AdaptiveMtFile
+    { createTime = Core.Nothing,
+      displayName = Core.Nothing,
+      entryCount = Core.Nothing,
+      name = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptiveMtFile where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtFile"
+      ( \o ->
+          AdaptiveMtFile
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "entryCount")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON AdaptiveMtFile where
+  toJSON AdaptiveMtFile {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("entryCount" Core..=) Core.<$> entryCount,
+            ("name" Core..=) Core.<$> name,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | An AdaptiveMt sentence entry.
+--
+-- /See:/ 'newAdaptiveMtSentence' smart constructor.
+data AdaptiveMtSentence = AdaptiveMtSentence
+  { -- | Output only. Timestamp when this sentence was created.
+    createTime :: (Core.Maybe Core.DateTime),
+    -- | Required. The resource name of the file, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/adaptiveMtDatasets\/{dataset}\/adaptiveMtFiles\/{file}\/adaptiveMtSentences\/{sentence}@
+    name :: (Core.Maybe Core.Text),
+    -- | Required. The source sentence.
+    sourceSentence :: (Core.Maybe Core.Text),
+    -- | Required. The target sentence.
+    targetSentence :: (Core.Maybe Core.Text),
+    -- | Output only. Timestamp when this sentence was last updated.
+    updateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtSentence' with the minimum fields required to make a request.
+newAdaptiveMtSentence ::
+  AdaptiveMtSentence
+newAdaptiveMtSentence =
+  AdaptiveMtSentence
+    { createTime = Core.Nothing,
+      name = Core.Nothing,
+      sourceSentence = Core.Nothing,
+      targetSentence = Core.Nothing,
+      updateTime = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptiveMtSentence where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtSentence"
+      ( \o ->
+          AdaptiveMtSentence
+            Core.<$> (o Core..:? "createTime")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "sourceSentence")
+            Core.<*> (o Core..:? "targetSentence")
+            Core.<*> (o Core..:? "updateTime")
+      )
+
+instance Core.ToJSON AdaptiveMtSentence where
+  toJSON AdaptiveMtSentence {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("createTime" Core..=) Core.<$> createTime,
+            ("name" Core..=) Core.<$> name,
+            ("sourceSentence" Core..=) Core.<$> sourceSentence,
+            ("targetSentence" Core..=) Core.<$> targetSentence,
+            ("updateTime" Core..=) Core.<$> updateTime
+          ]
+      )
+
+-- | The request for sending an AdaptiveMt translation query.
+--
+-- /See:/ 'newAdaptiveMtTranslateRequest' smart constructor.
+data AdaptiveMtTranslateRequest = AdaptiveMtTranslateRequest
+  { -- | Required. The content of the input in string format.
+    content :: (Core.Maybe [Core.Text]),
+    -- | Required. The resource name for the dataset to use for adaptive MT. @projects\/{project}\/locations\/{location-id}\/adaptiveMtDatasets\/{dataset}@
+    dataset :: (Core.Maybe Core.Text),
+    -- | Optional. Glossary to be applied. The glossary must be within the same region (have the same location-id) as the model, otherwise an INVALID_ARGUMENT (400) error is returned.
+    glossaryConfig :: (Core.Maybe GlossaryConfig),
+    -- | Configuration for caller provided reference sentences.
+    referenceSentenceConfig :: (Core.Maybe ReferenceSentenceConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtTranslateRequest' with the minimum fields required to make a request.
+newAdaptiveMtTranslateRequest ::
+  AdaptiveMtTranslateRequest
+newAdaptiveMtTranslateRequest =
+  AdaptiveMtTranslateRequest
+    { content = Core.Nothing,
+      dataset = Core.Nothing,
+      glossaryConfig = Core.Nothing,
+      referenceSentenceConfig = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptiveMtTranslateRequest where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtTranslateRequest"
+      ( \o ->
+          AdaptiveMtTranslateRequest
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "dataset")
+            Core.<*> (o Core..:? "glossaryConfig")
+            Core.<*> (o Core..:? "referenceSentenceConfig")
+      )
+
+instance Core.ToJSON AdaptiveMtTranslateRequest where
+  toJSON AdaptiveMtTranslateRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("content" Core..=) Core.<$> content,
+            ("dataset" Core..=) Core.<$> dataset,
+            ("glossaryConfig" Core..=) Core.<$> glossaryConfig,
+            ("referenceSentenceConfig" Core..=)
+              Core.<$> referenceSentenceConfig
+          ]
+      )
+
+-- | An AdaptiveMtTranslate response.
+--
+-- /See:/ 'newAdaptiveMtTranslateResponse' smart constructor.
+data AdaptiveMtTranslateResponse = AdaptiveMtTranslateResponse
+  { -- | Text translation response if a glossary is provided in the request. This could be the same as \'translation\' above if no terms apply.
+    glossaryTranslations :: (Core.Maybe [AdaptiveMtTranslation]),
+    -- | Output only. The translation\'s language code.
+    languageCode :: (Core.Maybe Core.Text),
+    -- | Output only. The translation.
+    translations :: (Core.Maybe [AdaptiveMtTranslation])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtTranslateResponse' with the minimum fields required to make a request.
+newAdaptiveMtTranslateResponse ::
+  AdaptiveMtTranslateResponse
+newAdaptiveMtTranslateResponse =
+  AdaptiveMtTranslateResponse
+    { glossaryTranslations = Core.Nothing,
+      languageCode = Core.Nothing,
+      translations = Core.Nothing
+    }
+
+instance Core.FromJSON AdaptiveMtTranslateResponse where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtTranslateResponse"
+      ( \o ->
+          AdaptiveMtTranslateResponse
+            Core.<$> (o Core..:? "glossaryTranslations")
+            Core.<*> (o Core..:? "languageCode")
+            Core.<*> (o Core..:? "translations")
+      )
+
+instance Core.ToJSON AdaptiveMtTranslateResponse where
+  toJSON AdaptiveMtTranslateResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("glossaryTranslations" Core..=) Core.<$> glossaryTranslations,
+            ("languageCode" Core..=) Core.<$> languageCode,
+            ("translations" Core..=) Core.<$> translations
+          ]
+      )
+
+-- | An AdaptiveMt translation.
+--
+-- /See:/ 'newAdaptiveMtTranslation' smart constructor.
+newtype AdaptiveMtTranslation = AdaptiveMtTranslation
+  { -- | Output only. The translated text.
+    translatedText :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdaptiveMtTranslation' with the minimum fields required to make a request.
+newAdaptiveMtTranslation ::
+  AdaptiveMtTranslation
+newAdaptiveMtTranslation =
+  AdaptiveMtTranslation {translatedText = Core.Nothing}
+
+instance Core.FromJSON AdaptiveMtTranslation where
+  parseJSON =
+    Core.withObject
+      "AdaptiveMtTranslation"
+      ( \o ->
+          AdaptiveMtTranslation Core.<$> (o Core..:? "translatedText")
+      )
+
+instance Core.ToJSON AdaptiveMtTranslation where
+  toJSON AdaptiveMtTranslation {..} =
+    Core.object
+      ( Core.catMaybes
+          [("translatedText" Core..=) Core.<$> translatedText]
+      )
 
 -- | Input configuration for BatchTranslateDocument request.
 --
@@ -318,25 +692,20 @@ instance Core.FromJSON BatchDocumentInputConfig where
   parseJSON =
     Core.withObject
       "BatchDocumentInputConfig"
-      ( \o ->
-          BatchDocumentInputConfig
-            Core.<$> (o Core..:? "gcsSource")
-      )
+      (\o -> BatchDocumentInputConfig Core.<$> (o Core..:? "gcsSource"))
 
 instance Core.ToJSON BatchDocumentInputConfig where
   toJSON BatchDocumentInputConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsSource" Core..=) Core.<$> gcsSource]
-      )
+      (Core.catMaybes [("gcsSource" Core..=) Core.<$> gcsSource])
 
 -- | Output configuration for BatchTranslateDocument request.
 --
 -- /See:/ 'newBatchDocumentOutputConfig' smart constructor.
 newtype BatchDocumentOutputConfig = BatchDocumentOutputConfig
   { -- | Google Cloud Storage destination for output content. For every single input document (for example, gs:\/\/a\/b\/c.[extension]), we generate at most 2 * n output files. (n is the # of target/language/codes in the BatchTranslateDocumentRequest). While the input documents are being processed, we write\/update an index file @index.csv@ under @gcs_destination.output_uri_prefix@ (for example, gs:\/\/translation/output\/index.csv) The index file is generated\/updated as new files are being translated. The format is: input/document,target/language/code,translation/output,error/output, glossary/translation/output,glossary/error/output @input_document@ is one file we matched using gcs/source.input/uri. @target_language_code@ is provided in the request. @translation_output@ contains the translations. (details provided below) @error_output@ contains the error message during processing of the file. Both translations/file and errors/file could be empty strings if we have no content to output. @glossary_translation_output@
-    -- and @glossary_error_output@ are the translated output\/error when we apply glossaries. They could also be empty if we have no content to output. Once a row is present in index.csv, the input\/output matching never changes. Callers should also expect all the content in input/file are processed and ready to be consumed (that is, no partial output file is written). Since index.csv will be keeping updated during the process, please make sure there is no custom retention policy applied on the output bucket that may avoid file updating. (https:\/\/cloud.google.com\/storage\/docs\/bucket-lock#retention-policy) The naming format of translation output files follows (for target language code [trg]): @translation_output@: gs:\/\/translation/output\/a/b/c/[trg]/translation.[extension] @glossary_translation_output@: gs:\/\/translation/test\/a/b/c/[trg]/glossary/translation.[extension] The output document will maintain the same file format as the input document. The naming format of error output files follows (for target
-    -- language code [trg]): @error_output@: gs:\/\/translation/test\/a/b/c/[trg]/errors.txt @glossary_error_output@: gs:\/\/translation/test\/a/b/c/[trg]/glossary_translation.txt The error output is a txt file containing error details.
+    -- and @glossary_error_output@ are the translated output\/error when we apply glossaries. They could also be empty if we have no content to output. Once a row is present in index.csv, the input\/output matching never changes. Callers should also expect all the content in input_file are processed and ready to be consumed (that is, no partial output file is written). Since index.csv will be keeping updated during the process, please make sure there is no custom retention policy applied on the output bucket that may avoid file updating. (https:\/\/cloud.google.com\/storage\/docs\/bucket-lock#retention-policy) The naming format of translation output files follows (for target language code [trg]): @translation_output@: @gs:\/\/translation_output\/a_b_c_[trg]_translation.[extension]@ @glossary_translation_output@: @gs:\/\/translation_test\/a_b_c_[trg]_glossary_translation.[extension]@. The output document will maintain the same file format as the input document. The naming format of error output files follows (for
+    -- target language code [trg]): @error_output@: @gs:\/\/translation_test\/a_b_c_[trg]_errors.txt@ @glossary_error_output@: @gs:\/\/translation_test\/a_b_c_[trg]_glossary_translation.txt@. The error output is a txt file containing error details.
     gcsDestination :: (Core.Maybe GcsDestination)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -352,8 +721,7 @@ instance Core.FromJSON BatchDocumentOutputConfig where
     Core.withObject
       "BatchDocumentOutputConfig"
       ( \o ->
-          BatchDocumentOutputConfig
-            Core.<$> (o Core..:? "gcsDestination")
+          BatchDocumentOutputConfig Core.<$> (o Core..:? "gcsDestination")
       )
 
 instance Core.ToJSON BatchDocumentOutputConfig where
@@ -369,9 +737,11 @@ instance Core.ToJSON BatchDocumentOutputConfig where
 data BatchTranslateDocumentRequest = BatchTranslateDocumentRequest
   { -- | Optional. This flag is to support user customized attribution. If not provided, the default is @Machine Translated by Google@. Customized attribution should follow rules in https:\/\/cloud.google.com\/translate\/attribution#attribution/and/logos
     customizedAttribution :: (Core.Maybe Core.Text),
+    -- | Optional. If true, enable auto rotation correction in DVS.
+    enableRotationCorrection :: (Core.Maybe Core.Bool),
     -- | Optional. If true, use the text removal server to remove the shadow text on background image for native pdf translation. Shadow removal feature can only be enabled when is/translate/native/pdf/only: false && pdf/native/only: false
     enableShadowRemovalNativePdf :: (Core.Maybe Core.Bool),
-    -- | Optional.
+    -- | Optional. The file format conversion map that is applied to all input files. The map key is the original mime/type. The map value is the target mime/type of translated documents. Supported file format conversion includes: - @application\/pdf@ to @application\/vnd.openxmlformats-officedocument.wordprocessingml.document@ If nothing specified, output files will be in the same format as the original file.
     formatConversions :: (Core.Maybe BatchTranslateDocumentRequest_FormatConversions),
     -- | Optional. Glossaries to be applied. It\'s keyed by target language code.
     glossaries :: (Core.Maybe BatchTranslateDocumentRequest_Glossaries),
@@ -393,7 +763,9 @@ newBatchTranslateDocumentRequest ::
   BatchTranslateDocumentRequest
 newBatchTranslateDocumentRequest =
   BatchTranslateDocumentRequest
-    { customizedAttribution = Core.Nothing,
+    { customizedAttribution =
+        Core.Nothing,
+      enableRotationCorrection = Core.Nothing,
       enableShadowRemovalNativePdf = Core.Nothing,
       formatConversions = Core.Nothing,
       glossaries = Core.Nothing,
@@ -411,6 +783,7 @@ instance Core.FromJSON BatchTranslateDocumentRequest where
       ( \o ->
           BatchTranslateDocumentRequest
             Core.<$> (o Core..:? "customizedAttribution")
+            Core.<*> (o Core..:? "enableRotationCorrection")
             Core.<*> (o Core..:? "enableShadowRemovalNativePdf")
             Core.<*> (o Core..:? "formatConversions")
             Core.<*> (o Core..:? "glossaries")
@@ -425,29 +798,26 @@ instance Core.ToJSON BatchTranslateDocumentRequest where
   toJSON BatchTranslateDocumentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customizedAttribution" Core..=)
-              Core.<$> customizedAttribution,
+          [ ("customizedAttribution" Core..=) Core.<$> customizedAttribution,
+            ("enableRotationCorrection" Core..=)
+              Core.<$> enableRotationCorrection,
             ("enableShadowRemovalNativePdf" Core..=)
               Core.<$> enableShadowRemovalNativePdf,
-            ("formatConversions" Core..=)
-              Core.<$> formatConversions,
+            ("formatConversions" Core..=) Core.<$> formatConversions,
             ("glossaries" Core..=) Core.<$> glossaries,
             ("inputConfigs" Core..=) Core.<$> inputConfigs,
             ("models" Core..=) Core.<$> models,
             ("outputConfig" Core..=) Core.<$> outputConfig,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCodes" Core..=)
-              Core.<$> targetLanguageCodes
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCodes" Core..=) Core.<$> targetLanguageCodes
           ]
       )
 
--- | Optional.
+-- | Optional. The file format conversion map that is applied to all input files. The map key is the original mime/type. The map value is the target mime/type of translated documents. Supported file format conversion includes: - @application\/pdf@ to @application\/vnd.openxmlformats-officedocument.wordprocessingml.document@ If nothing specified, output files will be in the same format as the original file.
 --
 -- /See:/ 'newBatchTranslateDocumentRequest_FormatConversions' smart constructor.
 newtype BatchTranslateDocumentRequest_FormatConversions = BatchTranslateDocumentRequest_FormatConversions
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -457,7 +827,10 @@ newBatchTranslateDocumentRequest_FormatConversions ::
   Core.HashMap Core.Text Core.Text ->
   BatchTranslateDocumentRequest_FormatConversions
 newBatchTranslateDocumentRequest_FormatConversions additional =
-  BatchTranslateDocumentRequest_FormatConversions {additional = additional}
+  BatchTranslateDocumentRequest_FormatConversions
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -475,16 +848,14 @@ instance
   Core.ToJSON
     BatchTranslateDocumentRequest_FormatConversions
   where
-  toJSON
-    BatchTranslateDocumentRequest_FormatConversions {..} =
-      Core.toJSON additional
+  toJSON BatchTranslateDocumentRequest_FormatConversions {..} =
+    Core.toJSON additional
 
 -- | Optional. Glossaries to be applied. It\'s keyed by target language code.
 --
 -- /See:/ 'newBatchTranslateDocumentRequest_Glossaries' smart constructor.
 newtype BatchTranslateDocumentRequest_Glossaries = BatchTranslateDocumentRequest_Glossaries
-  { -- |
-    additional :: (Core.HashMap Core.Text TranslateTextGlossaryConfig)
+  { additional :: (Core.HashMap Core.Text TranslateTextGlossaryConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -496,10 +867,7 @@ newBatchTranslateDocumentRequest_Glossaries ::
 newBatchTranslateDocumentRequest_Glossaries additional =
   BatchTranslateDocumentRequest_Glossaries {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchTranslateDocumentRequest_Glossaries
-  where
+instance Core.FromJSON BatchTranslateDocumentRequest_Glossaries where
   parseJSON =
     Core.withObject
       "BatchTranslateDocumentRequest_Glossaries"
@@ -508,10 +876,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchTranslateDocumentRequest_Glossaries
-  where
+instance Core.ToJSON BatchTranslateDocumentRequest_Glossaries where
   toJSON BatchTranslateDocumentRequest_Glossaries {..} =
     Core.toJSON additional
 
@@ -519,8 +884,7 @@ instance
 --
 -- /See:/ 'newBatchTranslateDocumentRequest_Models' smart constructor.
 newtype BatchTranslateDocumentRequest_Models = BatchTranslateDocumentRequest_Models
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -532,10 +896,7 @@ newBatchTranslateDocumentRequest_Models ::
 newBatchTranslateDocumentRequest_Models additional =
   BatchTranslateDocumentRequest_Models {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchTranslateDocumentRequest_Models
-  where
+instance Core.FromJSON BatchTranslateDocumentRequest_Models where
   parseJSON =
     Core.withObject
       "BatchTranslateDocumentRequest_Models"
@@ -544,10 +905,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchTranslateDocumentRequest_Models
-  where
+instance Core.ToJSON BatchTranslateDocumentRequest_Models where
   toJSON BatchTranslateDocumentRequest_Models {..} =
     Core.toJSON additional
 
@@ -610,10 +968,8 @@ instance Core.ToJSON BatchTranslateTextRequest where
             ("labels" Core..=) Core.<$> labels,
             ("models" Core..=) Core.<$> models,
             ("outputConfig" Core..=) Core.<$> outputConfig,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCodes" Core..=)
-              Core.<$> targetLanguageCodes
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCodes" Core..=) Core.<$> targetLanguageCodes
           ]
       )
 
@@ -621,8 +977,7 @@ instance Core.ToJSON BatchTranslateTextRequest where
 --
 -- /See:/ 'newBatchTranslateTextRequest_Glossaries' smart constructor.
 newtype BatchTranslateTextRequest_Glossaries = BatchTranslateTextRequest_Glossaries
-  { -- |
-    additional :: (Core.HashMap Core.Text TranslateTextGlossaryConfig)
+  { additional :: (Core.HashMap Core.Text TranslateTextGlossaryConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -634,10 +989,7 @@ newBatchTranslateTextRequest_Glossaries ::
 newBatchTranslateTextRequest_Glossaries additional =
   BatchTranslateTextRequest_Glossaries {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchTranslateTextRequest_Glossaries
-  where
+instance Core.FromJSON BatchTranslateTextRequest_Glossaries where
   parseJSON =
     Core.withObject
       "BatchTranslateTextRequest_Glossaries"
@@ -646,10 +998,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    BatchTranslateTextRequest_Glossaries
-  where
+instance Core.ToJSON BatchTranslateTextRequest_Glossaries where
   toJSON BatchTranslateTextRequest_Glossaries {..} =
     Core.toJSON additional
 
@@ -657,8 +1006,7 @@ instance
 --
 -- /See:/ 'newBatchTranslateTextRequest_Labels' smart constructor.
 newtype BatchTranslateTextRequest_Labels = BatchTranslateTextRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -670,16 +1018,12 @@ newBatchTranslateTextRequest_Labels ::
 newBatchTranslateTextRequest_Labels additional =
   BatchTranslateTextRequest_Labels {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchTranslateTextRequest_Labels
-  where
+instance Core.FromJSON BatchTranslateTextRequest_Labels where
   parseJSON =
     Core.withObject
       "BatchTranslateTextRequest_Labels"
       ( \o ->
-          BatchTranslateTextRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
+          BatchTranslateTextRequest_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON BatchTranslateTextRequest_Labels where
@@ -690,8 +1034,7 @@ instance Core.ToJSON BatchTranslateTextRequest_Labels where
 --
 -- /See:/ 'newBatchTranslateTextRequest_Models' smart constructor.
 newtype BatchTranslateTextRequest_Models = BatchTranslateTextRequest_Models
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -703,16 +1046,12 @@ newBatchTranslateTextRequest_Models ::
 newBatchTranslateTextRequest_Models additional =
   BatchTranslateTextRequest_Models {additional = additional}
 
-instance
-  Core.FromJSON
-    BatchTranslateTextRequest_Models
-  where
+instance Core.FromJSON BatchTranslateTextRequest_Models where
   parseJSON =
     Core.withObject
       "BatchTranslateTextRequest_Models"
       ( \o ->
-          BatchTranslateTextRequest_Models
-            Core.<$> (Core.parseJSONObject o)
+          BatchTranslateTextRequest_Models Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON BatchTranslateTextRequest_Models where
@@ -809,17 +1148,12 @@ instance Core.ToJSON Dataset where
             ("displayName" Core..=) Core.<$> displayName,
             ("exampleCount" Core..=) Core.<$> exampleCount,
             ("name" Core..=) Core.<$> name,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCode" Core..=)
-              Core.<$> targetLanguageCode,
-            ("testExampleCount" Core..=)
-              Core.<$> testExampleCount,
-            ("trainExampleCount" Core..=)
-              Core.<$> trainExampleCount,
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode,
+            ("testExampleCount" Core..=) Core.<$> testExampleCount,
+            ("trainExampleCount" Core..=) Core.<$> trainExampleCount,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("validateExampleCount" Core..=)
-              Core.<$> validateExampleCount
+            ("validateExampleCount" Core..=) Core.<$> validateExampleCount
           ]
       )
 
@@ -835,23 +1169,19 @@ newtype DatasetInputConfig = DatasetInputConfig
 -- | Creates a value of 'DatasetInputConfig' with the minimum fields required to make a request.
 newDatasetInputConfig ::
   DatasetInputConfig
-newDatasetInputConfig = DatasetInputConfig {inputFiles = Core.Nothing}
+newDatasetInputConfig =
+  DatasetInputConfig {inputFiles = Core.Nothing}
 
 instance Core.FromJSON DatasetInputConfig where
   parseJSON =
     Core.withObject
       "DatasetInputConfig"
-      ( \o ->
-          DatasetInputConfig
-            Core.<$> (o Core..:? "inputFiles")
-      )
+      (\o -> DatasetInputConfig Core.<$> (o Core..:? "inputFiles"))
 
 instance Core.ToJSON DatasetInputConfig where
   toJSON DatasetInputConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("inputFiles" Core..=) Core.<$> inputFiles]
-      )
+      (Core.catMaybes [("inputFiles" Core..=) Core.<$> inputFiles])
 
 -- | Output configuration for datasets.
 --
@@ -865,16 +1195,14 @@ newtype DatasetOutputConfig = DatasetOutputConfig
 -- | Creates a value of 'DatasetOutputConfig' with the minimum fields required to make a request.
 newDatasetOutputConfig ::
   DatasetOutputConfig
-newDatasetOutputConfig = DatasetOutputConfig {gcsDestination = Core.Nothing}
+newDatasetOutputConfig =
+  DatasetOutputConfig {gcsDestination = Core.Nothing}
 
 instance Core.FromJSON DatasetOutputConfig where
   parseJSON =
     Core.withObject
       "DatasetOutputConfig"
-      ( \o ->
-          DatasetOutputConfig
-            Core.<$> (o Core..:? "gcsDestination")
-      )
+      (\o -> DatasetOutputConfig Core.<$> (o Core..:? "gcsDestination"))
 
 instance Core.ToJSON DatasetOutputConfig where
   toJSON DatasetOutputConfig {..} =
@@ -936,8 +1264,7 @@ instance Core.ToJSON DetectLanguageRequest where
 --
 -- /See:/ 'newDetectLanguageRequest_Labels' smart constructor.
 newtype DetectLanguageRequest_Labels = DetectLanguageRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -954,13 +1281,11 @@ instance Core.FromJSON DetectLanguageRequest_Labels where
     Core.withObject
       "DetectLanguageRequest_Labels"
       ( \o ->
-          DetectLanguageRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
+          DetectLanguageRequest_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON DetectLanguageRequest_Labels where
-  toJSON DetectLanguageRequest_Labels {..} =
-    Core.toJSON additional
+  toJSON DetectLanguageRequest_Labels {..} = Core.toJSON additional
 
 -- | The response message for language detection.
 --
@@ -974,23 +1299,19 @@ newtype DetectLanguageResponse = DetectLanguageResponse
 -- | Creates a value of 'DetectLanguageResponse' with the minimum fields required to make a request.
 newDetectLanguageResponse ::
   DetectLanguageResponse
-newDetectLanguageResponse = DetectLanguageResponse {languages = Core.Nothing}
+newDetectLanguageResponse =
+  DetectLanguageResponse {languages = Core.Nothing}
 
 instance Core.FromJSON DetectLanguageResponse where
   parseJSON =
     Core.withObject
       "DetectLanguageResponse"
-      ( \o ->
-          DetectLanguageResponse
-            Core.<$> (o Core..:? "languages")
-      )
+      (\o -> DetectLanguageResponse Core.<$> (o Core..:? "languages"))
 
 instance Core.ToJSON DetectLanguageResponse where
   toJSON DetectLanguageResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("languages" Core..=) Core.<$> languages]
-      )
+      (Core.catMaybes [("languages" Core..=) Core.<$> languages])
 
 -- | The response message for language detection.
 --
@@ -1007,7 +1328,10 @@ data DetectedLanguage = DetectedLanguage
 newDetectedLanguage ::
   DetectedLanguage
 newDetectedLanguage =
-  DetectedLanguage {confidence = Core.Nothing, languageCode = Core.Nothing}
+  DetectedLanguage
+    { confidence = Core.Nothing,
+      languageCode = Core.Nothing
+    }
 
 instance Core.FromJSON DetectedLanguage where
   parseJSON =
@@ -1076,8 +1400,8 @@ instance Core.ToJSON DocumentInputConfig where
 --
 -- /See:/ 'newDocumentOutputConfig' smart constructor.
 data DocumentOutputConfig = DocumentOutputConfig
-  { -- | Optional. Google Cloud Storage destination for the translation output, e.g., @gs:\/\/my_bucket\/my_directory\/@. The destination directory provided does not have to be empty, but the bucket must exist. If a file with the same name as the output file already exists in the destination an error will be returned. For a DocumentInputConfig.contents provided document, the output file will have the name \"output/[trg]/translations.[ext]\", where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension according to its mime type. For a DocumentInputConfig.gcs/uri provided document, the output file will have a name according to its URI. For example: an input file with URI: \"gs:\/\/a\/b\/c.[extension]\" stored in a gcs/destination bucket with name \"my/bucket\" will have an output URI: \"gs:\/\/my/bucket\/a/b/c/[trg]/translations.[ext]\", where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension
-    -- according to its mime type. If the document was directly provided through the request, then the output document will have the format: \"gs:\/\/my/bucket\/translated/document/[trg]/translations.[ext], where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension according to its mime type. If a glossary was provided, then the output URI for the glossary translation will be equal to the default output URI but have @glossary_translations@ instead of @translations@. For the previous example, its glossary URI would be: \"gs:\/\/my/bucket\/a/b/c/[trg]/glossary/translations.[ext]\". Thus the max number of output files will be 2 (Translated document, Glossary translated document). Callers should expect no partial outputs. If there is any error during document translation, no output will be stored in the Cloud Storage bucket.
+  { -- | Optional. Google Cloud Storage destination for the translation output, e.g., @gs:\/\/my_bucket\/my_directory\/@. The destination directory provided does not have to be empty, but the bucket must exist. If a file with the same name as the output file already exists in the destination an error will be returned. For a DocumentInputConfig.contents provided document, the output file will have the name \"output/[trg]/translations.[ext]\", where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension according to its mime type. For a DocumentInputConfig.gcs/uri provided document, the output file will have a name according to its URI. For example: an input file with URI: @gs:\/\/a\/b\/c.[extension]@ stored in a gcs/destination bucket with name \"my_bucket\" will have an output URI: @gs:\/\/my_bucket\/a_b_c_[trg]_translations.[ext]@, where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension
+    -- according to its mime type. If the document was directly provided through the request, then the output document will have the format: @gs:\/\/my_bucket\/translated_document_[trg]_translations.[ext]@, where - [trg] corresponds to the translated file\'s language code, - [ext] corresponds to the translated file\'s extension according to its mime type. If a glossary was provided, then the output URI for the glossary translation will be equal to the default output URI but have @glossary_translations@ instead of @translations@. For the previous example, its glossary URI would be: @gs:\/\/my_bucket\/a_b_c_[trg]_glossary_translations.[ext]@. Thus the max number of output files will be 2 (Translated document, Glossary translated document). Callers should expect no partial outputs. If there is any error during document translation, no output will be stored in the Cloud Storage bucket.
     gcsDestination :: (Core.Maybe GcsDestination),
     -- | Optional. Specifies the translated document\'s mime_type. If not specified, the translated file\'s mime type will be the same as the input file\'s mime type. Currently only support the output mime type to be the same as input mime type. - application\/pdf - application\/vnd.openxmlformats-officedocument.wordprocessingml.document - application\/vnd.openxmlformats-officedocument.presentationml.presentation - application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet
     mimeType :: (Core.Maybe Core.Text)
@@ -1088,7 +1412,10 @@ data DocumentOutputConfig = DocumentOutputConfig
 newDocumentOutputConfig ::
   DocumentOutputConfig
 newDocumentOutputConfig =
-  DocumentOutputConfig {gcsDestination = Core.Nothing, mimeType = Core.Nothing}
+  DocumentOutputConfig
+    { gcsDestination = Core.Nothing,
+      mimeType = Core.Nothing
+    }
 
 instance Core.FromJSON DocumentOutputConfig where
   parseJSON =
@@ -1147,10 +1474,8 @@ instance Core.ToJSON DocumentTranslation where
   toJSON DocumentTranslation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("byteStreamOutputs" Core..=)
-              Core.<$> byteStreamOutputs,
-            ("detectedLanguageCode" Core..=)
-              Core.<$> detectedLanguageCode,
+          [ ("byteStreamOutputs" Core..=) Core.<$> byteStreamOutputs,
+            ("detectedLanguageCode" Core..=) Core.<$> detectedLanguageCode,
             ("mimeType" Core..=) Core.<$> mimeType
           ]
       )
@@ -1167,8 +1492,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1177,7 +1501,7 @@ instance Core.ToJSON Empty where
 --
 -- /See:/ 'newExample' smart constructor.
 data Example = Example
-  { -- | Output only. The resource name of the example, in form of \`projects\/{project-number-or-id}\/locations\/{location/id}\/datasets\/{dataset/id}\/examples\/{example_id}\'
+  { -- | Output only. The resource name of the example, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/datasets\/{dataset_id}\/examples\/{example_id}@
     name :: (Core.Maybe Core.Text),
     -- | Sentence in source language.
     sourceText :: (Core.Maybe Core.Text),
@@ -1234,22 +1558,62 @@ newtype ExportDataRequest = ExportDataRequest
 -- | Creates a value of 'ExportDataRequest' with the minimum fields required to make a request.
 newExportDataRequest ::
   ExportDataRequest
-newExportDataRequest = ExportDataRequest {outputConfig = Core.Nothing}
+newExportDataRequest =
+  ExportDataRequest {outputConfig = Core.Nothing}
 
 instance Core.FromJSON ExportDataRequest where
   parseJSON =
     Core.withObject
       "ExportDataRequest"
-      ( \o ->
-          ExportDataRequest
-            Core.<$> (o Core..:? "outputConfig")
-      )
+      (\o -> ExportDataRequest Core.<$> (o Core..:? "outputConfig"))
 
 instance Core.ToJSON ExportDataRequest where
   toJSON ExportDataRequest {..} =
     Core.object
+      (Core.catMaybes [("outputConfig" Core..=) Core.<$> outputConfig])
+
+-- | An inlined file.
+--
+-- /See:/ 'newFileInputSource' smart constructor.
+data FileInputSource = FileInputSource
+  { -- | Required. The file\'s byte contents.
+    content :: (Core.Maybe Core.Base64),
+    -- | Required. The file\'s display name.
+    displayName :: (Core.Maybe Core.Text),
+    -- | Required. The file\'s mime type.
+    mimeType :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FileInputSource' with the minimum fields required to make a request.
+newFileInputSource ::
+  FileInputSource
+newFileInputSource =
+  FileInputSource
+    { content = Core.Nothing,
+      displayName = Core.Nothing,
+      mimeType = Core.Nothing
+    }
+
+instance Core.FromJSON FileInputSource where
+  parseJSON =
+    Core.withObject
+      "FileInputSource"
+      ( \o ->
+          FileInputSource
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "displayName")
+            Core.<*> (o Core..:? "mimeType")
+      )
+
+instance Core.ToJSON FileInputSource where
+  toJSON FileInputSource {..} =
+    Core.object
       ( Core.catMaybes
-          [("outputConfig" Core..=) Core.<$> outputConfig]
+          [ ("content" Core..=) Core.<$> content,
+            ("displayName" Core..=) Core.<$> displayName,
+            ("mimeType" Core..=) Core.<$> mimeType
+          ]
       )
 
 -- | The Google Cloud Storage location for the output content.
@@ -1270,18 +1634,13 @@ instance Core.FromJSON GcsDestination where
   parseJSON =
     Core.withObject
       "GcsDestination"
-      ( \o ->
-          GcsDestination
-            Core.<$> (o Core..:? "outputUriPrefix")
-      )
+      (\o -> GcsDestination Core.<$> (o Core..:? "outputUriPrefix"))
 
 instance Core.ToJSON GcsDestination where
   toJSON GcsDestination {..} =
     Core.object
       ( Core.catMaybes
-          [ ("outputUriPrefix" Core..=)
-              Core.<$> outputUriPrefix
-          ]
+          [("outputUriPrefix" Core..=) Core.<$> outputUriPrefix]
       )
 
 -- | The Google Cloud Storage location for the input content.
@@ -1302,16 +1661,12 @@ instance Core.FromJSON GcsInputSource where
   parseJSON =
     Core.withObject
       "GcsInputSource"
-      ( \o ->
-          GcsInputSource Core.<$> (o Core..:? "inputUri")
-      )
+      (\o -> GcsInputSource Core.<$> (o Core..:? "inputUri"))
 
 instance Core.ToJSON GcsInputSource where
   toJSON GcsInputSource {..} =
     Core.object
-      ( Core.catMaybes
-          [("inputUri" Core..=) Core.<$> inputUri]
-      )
+      (Core.catMaybes [("inputUri" Core..=) Core.<$> inputUri])
 
 -- | The Google Cloud Storage location for the output content.
 --
@@ -1325,24 +1680,22 @@ newtype GcsOutputDestination = GcsOutputDestination
 -- | Creates a value of 'GcsOutputDestination' with the minimum fields required to make a request.
 newGcsOutputDestination ::
   GcsOutputDestination
-newGcsOutputDestination = GcsOutputDestination {outputUriPrefix = Core.Nothing}
+newGcsOutputDestination =
+  GcsOutputDestination {outputUriPrefix = Core.Nothing}
 
 instance Core.FromJSON GcsOutputDestination where
   parseJSON =
     Core.withObject
       "GcsOutputDestination"
       ( \o ->
-          GcsOutputDestination
-            Core.<$> (o Core..:? "outputUriPrefix")
+          GcsOutputDestination Core.<$> (o Core..:? "outputUriPrefix")
       )
 
 instance Core.ToJSON GcsOutputDestination where
   toJSON GcsOutputDestination {..} =
     Core.object
       ( Core.catMaybes
-          [ ("outputUriPrefix" Core..=)
-              Core.<$> outputUriPrefix
-          ]
+          [("outputUriPrefix" Core..=) Core.<$> outputUriPrefix]
       )
 
 -- | The Google Cloud Storage location for the input content.
@@ -1368,9 +1721,7 @@ instance Core.FromJSON GcsSource where
 instance Core.ToJSON GcsSource where
   toJSON GcsSource {..} =
     Core.object
-      ( Core.catMaybes
-          [("inputUri" Core..=) Core.<$> inputUri]
-      )
+      (Core.catMaybes [("inputUri" Core..=) Core.<$> inputUri])
 
 -- | Represents a glossary built from user-provided data.
 --
@@ -1434,11 +1785,55 @@ instance Core.ToJSON Glossary where
             ("endTime" Core..=) Core.<$> endTime,
             ("entryCount" Core..=) Core.<$> entryCount,
             ("inputConfig" Core..=) Core.<$> inputConfig,
-            ("languageCodesSet" Core..=)
-              Core.<$> languageCodesSet,
+            ("languageCodesSet" Core..=) Core.<$> languageCodesSet,
             ("languagePair" Core..=) Core.<$> languagePair,
             ("name" Core..=) Core.<$> name,
             ("submitTime" Core..=) Core.<$> submitTime
+          ]
+      )
+
+-- | Configures which glossary is used for a specific target language and defines options for applying that glossary.
+--
+-- /See:/ 'newGlossaryConfig' smart constructor.
+data GlossaryConfig = GlossaryConfig
+  { -- | Optional. If set to true, the glossary will be used for contextual translation.
+    contextualTranslationEnabled :: (Core.Maybe Core.Bool),
+    -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
+    glossary :: (Core.Maybe Core.Text),
+    -- | Optional. Indicates match is case insensitive. The default value is @false@ if missing.
+    ignoreCase :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GlossaryConfig' with the minimum fields required to make a request.
+newGlossaryConfig ::
+  GlossaryConfig
+newGlossaryConfig =
+  GlossaryConfig
+    { contextualTranslationEnabled = Core.Nothing,
+      glossary = Core.Nothing,
+      ignoreCase = Core.Nothing
+    }
+
+instance Core.FromJSON GlossaryConfig where
+  parseJSON =
+    Core.withObject
+      "GlossaryConfig"
+      ( \o ->
+          GlossaryConfig
+            Core.<$> (o Core..:? "contextualTranslationEnabled")
+            Core.<*> (o Core..:? "glossary")
+            Core.<*> (o Core..:? "ignoreCase")
+      )
+
+instance Core.ToJSON GlossaryConfig where
+  toJSON GlossaryConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contextualTranslationEnabled" Core..=)
+              Core.<$> contextualTranslationEnabled,
+            ("glossary" Core..=) Core.<$> glossary,
+            ("ignoreCase" Core..=) Core.<$> ignoreCase
           ]
       )
 
@@ -1448,7 +1843,7 @@ instance Core.ToJSON Glossary where
 data GlossaryEntry = GlossaryEntry
   { -- | Describes the glossary entry.
     description :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the entry. Format: \"projects\//\/locations\//\/glossaries\//\/glossaryEntries\//\"
+    -- | Identifier. The resource name of the entry. Format: @projects\/*\/locations\/*\/glossaries\/*\/glossaryEntries\/*@
     name :: (Core.Maybe Core.Text),
     -- | Used for an unidirectional glossary.
     termsPair :: (Core.Maybe GlossaryTermsPair),
@@ -1503,23 +1898,19 @@ newtype GlossaryInputConfig = GlossaryInputConfig
 -- | Creates a value of 'GlossaryInputConfig' with the minimum fields required to make a request.
 newGlossaryInputConfig ::
   GlossaryInputConfig
-newGlossaryInputConfig = GlossaryInputConfig {gcsSource = Core.Nothing}
+newGlossaryInputConfig =
+  GlossaryInputConfig {gcsSource = Core.Nothing}
 
 instance Core.FromJSON GlossaryInputConfig where
   parseJSON =
     Core.withObject
       "GlossaryInputConfig"
-      ( \o ->
-          GlossaryInputConfig
-            Core.<$> (o Core..:? "gcsSource")
-      )
+      (\o -> GlossaryInputConfig Core.<$> (o Core..:? "gcsSource"))
 
 instance Core.ToJSON GlossaryInputConfig where
   toJSON GlossaryInputConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsSource" Core..=) Core.<$> gcsSource]
-      )
+      (Core.catMaybes [("gcsSource" Core..=) Core.<$> gcsSource])
 
 -- | Represents a single glossary term
 --
@@ -1572,7 +1963,10 @@ data GlossaryTermsPair = GlossaryTermsPair
 newGlossaryTermsPair ::
   GlossaryTermsPair
 newGlossaryTermsPair =
-  GlossaryTermsPair {sourceTerm = Core.Nothing, targetTerm = Core.Nothing}
+  GlossaryTermsPair
+    { sourceTerm = Core.Nothing,
+      targetTerm = Core.Nothing
+    }
 
 instance Core.FromJSON GlossaryTermsPair where
   parseJSON =
@@ -1611,14 +2005,81 @@ instance Core.FromJSON GlossaryTermsSet where
   parseJSON =
     Core.withObject
       "GlossaryTermsSet"
-      ( \o ->
-          GlossaryTermsSet Core.<$> (o Core..:? "terms")
-      )
+      (\o -> GlossaryTermsSet Core.<$> (o Core..:? "terms"))
 
 instance Core.ToJSON GlossaryTermsSet where
   toJSON GlossaryTermsSet {..} =
+    Core.object (Core.catMaybes [("terms" Core..=) Core.<$> terms])
+
+-- | The request for importing an AdaptiveMt file along with its sentences.
+--
+-- /See:/ 'newImportAdaptiveMtFileRequest' smart constructor.
+data ImportAdaptiveMtFileRequest = ImportAdaptiveMtFileRequest
+  { -- | Inline file source.
+    fileInputSource :: (Core.Maybe FileInputSource),
+    -- | Google Cloud Storage file source.
+    gcsInputSource :: (Core.Maybe GcsInputSource)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImportAdaptiveMtFileRequest' with the minimum fields required to make a request.
+newImportAdaptiveMtFileRequest ::
+  ImportAdaptiveMtFileRequest
+newImportAdaptiveMtFileRequest =
+  ImportAdaptiveMtFileRequest
+    { fileInputSource = Core.Nothing,
+      gcsInputSource = Core.Nothing
+    }
+
+instance Core.FromJSON ImportAdaptiveMtFileRequest where
+  parseJSON =
+    Core.withObject
+      "ImportAdaptiveMtFileRequest"
+      ( \o ->
+          ImportAdaptiveMtFileRequest
+            Core.<$> (o Core..:? "fileInputSource")
+            Core.<*> (o Core..:? "gcsInputSource")
+      )
+
+instance Core.ToJSON ImportAdaptiveMtFileRequest where
+  toJSON ImportAdaptiveMtFileRequest {..} =
     Core.object
-      (Core.catMaybes [("terms" Core..=) Core.<$> terms])
+      ( Core.catMaybes
+          [ ("fileInputSource" Core..=) Core.<$> fileInputSource,
+            ("gcsInputSource" Core..=) Core.<$> gcsInputSource
+          ]
+      )
+
+-- | The response for importing an AdaptiveMtFile
+--
+-- /See:/ 'newImportAdaptiveMtFileResponse' smart constructor.
+newtype ImportAdaptiveMtFileResponse = ImportAdaptiveMtFileResponse
+  { -- | Output only. The Adaptive MT file that was imported.
+    adaptiveMtFile :: (Core.Maybe AdaptiveMtFile)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ImportAdaptiveMtFileResponse' with the minimum fields required to make a request.
+newImportAdaptiveMtFileResponse ::
+  ImportAdaptiveMtFileResponse
+newImportAdaptiveMtFileResponse =
+  ImportAdaptiveMtFileResponse {adaptiveMtFile = Core.Nothing}
+
+instance Core.FromJSON ImportAdaptiveMtFileResponse where
+  parseJSON =
+    Core.withObject
+      "ImportAdaptiveMtFileResponse"
+      ( \o ->
+          ImportAdaptiveMtFileResponse
+            Core.<$> (o Core..:? "adaptiveMtFile")
+      )
+
+instance Core.ToJSON ImportAdaptiveMtFileResponse where
+  toJSON ImportAdaptiveMtFileResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [("adaptiveMtFile" Core..=) Core.<$> adaptiveMtFile]
+      )
 
 -- | Request message for ImportData.
 --
@@ -1632,23 +2093,19 @@ newtype ImportDataRequest = ImportDataRequest
 -- | Creates a value of 'ImportDataRequest' with the minimum fields required to make a request.
 newImportDataRequest ::
   ImportDataRequest
-newImportDataRequest = ImportDataRequest {inputConfig = Core.Nothing}
+newImportDataRequest =
+  ImportDataRequest {inputConfig = Core.Nothing}
 
 instance Core.FromJSON ImportDataRequest where
   parseJSON =
     Core.withObject
       "ImportDataRequest"
-      ( \o ->
-          ImportDataRequest
-            Core.<$> (o Core..:? "inputConfig")
-      )
+      (\o -> ImportDataRequest Core.<$> (o Core..:? "inputConfig"))
 
 instance Core.ToJSON ImportDataRequest where
   toJSON ImportDataRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("inputConfig" Core..=) Core.<$> inputConfig]
-      )
+      (Core.catMaybes [("inputConfig" Core..=) Core.<$> inputConfig])
 
 -- | Input configuration for BatchTranslateText request.
 --
@@ -1664,7 +2121,8 @@ data InputConfig = InputConfig
 -- | Creates a value of 'InputConfig' with the minimum fields required to make a request.
 newInputConfig ::
   InputConfig
-newInputConfig = InputConfig {gcsSource = Core.Nothing, mimeType = Core.Nothing}
+newInputConfig =
+  InputConfig {gcsSource = Core.Nothing, mimeType = Core.Nothing}
 
 instance Core.FromJSON InputConfig where
   parseJSON =
@@ -1699,7 +2157,8 @@ data InputFile = InputFile
 -- | Creates a value of 'InputFile' with the minimum fields required to make a request.
 newInputFile ::
   InputFile
-newInputFile = InputFile {gcsSource = Core.Nothing, usage = Core.Nothing}
+newInputFile =
+  InputFile {gcsSource = Core.Nothing, usage = Core.Nothing}
 
 instance Core.FromJSON InputFile where
   parseJSON =
@@ -1754,10 +2213,8 @@ instance Core.ToJSON LanguageCodePair where
   toJSON LanguageCodePair {..} =
     Core.object
       ( Core.catMaybes
-          [ ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCode" Core..=)
-              Core.<$> targetLanguageCode
+          [ ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode
           ]
       )
 
@@ -1773,22 +2230,136 @@ newtype LanguageCodesSet = LanguageCodesSet
 -- | Creates a value of 'LanguageCodesSet' with the minimum fields required to make a request.
 newLanguageCodesSet ::
   LanguageCodesSet
-newLanguageCodesSet = LanguageCodesSet {languageCodes = Core.Nothing}
+newLanguageCodesSet =
+  LanguageCodesSet {languageCodes = Core.Nothing}
 
 instance Core.FromJSON LanguageCodesSet where
   parseJSON =
     Core.withObject
       "LanguageCodesSet"
-      ( \o ->
-          LanguageCodesSet
-            Core.<$> (o Core..:? "languageCodes")
-      )
+      (\o -> LanguageCodesSet Core.<$> (o Core..:? "languageCodes"))
 
 instance Core.ToJSON LanguageCodesSet where
   toJSON LanguageCodesSet {..} =
     Core.object
+      (Core.catMaybes [("languageCodes" Core..=) Core.<$> languageCodes])
+
+-- | A list of AdaptiveMtDatasets.
+--
+-- /See:/ 'newListAdaptiveMtDatasetsResponse' smart constructor.
+data ListAdaptiveMtDatasetsResponse = ListAdaptiveMtDatasetsResponse
+  { -- | Output only. A list of Adaptive MT datasets.
+    adaptiveMtDatasets :: (Core.Maybe [AdaptiveMtDataset]),
+    -- | Optional. A token to retrieve a page of results. Pass this value in the [ListAdaptiveMtDatasetsRequest.page_token] field in the subsequent call to @ListAdaptiveMtDatasets@ method to retrieve the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListAdaptiveMtDatasetsResponse' with the minimum fields required to make a request.
+newListAdaptiveMtDatasetsResponse ::
+  ListAdaptiveMtDatasetsResponse
+newListAdaptiveMtDatasetsResponse =
+  ListAdaptiveMtDatasetsResponse
+    { adaptiveMtDatasets = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListAdaptiveMtDatasetsResponse where
+  parseJSON =
+    Core.withObject
+      "ListAdaptiveMtDatasetsResponse"
+      ( \o ->
+          ListAdaptiveMtDatasetsResponse
+            Core.<$> (o Core..:? "adaptiveMtDatasets")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListAdaptiveMtDatasetsResponse where
+  toJSON ListAdaptiveMtDatasetsResponse {..} =
+    Core.object
       ( Core.catMaybes
-          [("languageCodes" Core..=) Core.<$> languageCodes]
+          [ ("adaptiveMtDatasets" Core..=) Core.<$> adaptiveMtDatasets,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | The response for listing all AdaptiveMt files under a given dataset.
+--
+-- /See:/ 'newListAdaptiveMtFilesResponse' smart constructor.
+data ListAdaptiveMtFilesResponse = ListAdaptiveMtFilesResponse
+  { -- | Output only. The Adaptive MT files.
+    adaptiveMtFiles :: (Core.Maybe [AdaptiveMtFile]),
+    -- | Optional. A token to retrieve a page of results. Pass this value in the ListAdaptiveMtFilesRequest.page_token field in the subsequent call to @ListAdaptiveMtFiles@ method to retrieve the next page of results.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListAdaptiveMtFilesResponse' with the minimum fields required to make a request.
+newListAdaptiveMtFilesResponse ::
+  ListAdaptiveMtFilesResponse
+newListAdaptiveMtFilesResponse =
+  ListAdaptiveMtFilesResponse
+    { adaptiveMtFiles = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListAdaptiveMtFilesResponse where
+  parseJSON =
+    Core.withObject
+      "ListAdaptiveMtFilesResponse"
+      ( \o ->
+          ListAdaptiveMtFilesResponse
+            Core.<$> (o Core..:? "adaptiveMtFiles")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListAdaptiveMtFilesResponse where
+  toJSON ListAdaptiveMtFilesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adaptiveMtFiles" Core..=) Core.<$> adaptiveMtFiles,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
+      )
+
+-- | List AdaptiveMt sentences response.
+--
+-- /See:/ 'newListAdaptiveMtSentencesResponse' smart constructor.
+data ListAdaptiveMtSentencesResponse = ListAdaptiveMtSentencesResponse
+  { -- | Output only. The list of AdaptiveMtSentences.
+    adaptiveMtSentences :: (Core.Maybe [AdaptiveMtSentence]),
+    -- | Optional.
+    nextPageToken :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListAdaptiveMtSentencesResponse' with the minimum fields required to make a request.
+newListAdaptiveMtSentencesResponse ::
+  ListAdaptiveMtSentencesResponse
+newListAdaptiveMtSentencesResponse =
+  ListAdaptiveMtSentencesResponse
+    { adaptiveMtSentences =
+        Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
+
+instance Core.FromJSON ListAdaptiveMtSentencesResponse where
+  parseJSON =
+    Core.withObject
+      "ListAdaptiveMtSentencesResponse"
+      ( \o ->
+          ListAdaptiveMtSentencesResponse
+            Core.<$> (o Core..:? "adaptiveMtSentences")
+            Core.<*> (o Core..:? "nextPageToken")
+      )
+
+instance Core.ToJSON ListAdaptiveMtSentencesResponse where
+  toJSON ListAdaptiveMtSentencesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("adaptiveMtSentences" Core..=) Core.<$> adaptiveMtSentences,
+            ("nextPageToken" Core..=) Core.<$> nextPageToken
+          ]
       )
 
 -- | Response message for ListDatasets.
@@ -1806,7 +2377,10 @@ data ListDatasetsResponse = ListDatasetsResponse
 newListDatasetsResponse ::
   ListDatasetsResponse
 newListDatasetsResponse =
-  ListDatasetsResponse {datasets = Core.Nothing, nextPageToken = Core.Nothing}
+  ListDatasetsResponse
+    { datasets = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListDatasetsResponse where
   parseJSON =
@@ -1842,7 +2416,10 @@ data ListExamplesResponse = ListExamplesResponse
 newListExamplesResponse ::
   ListExamplesResponse
 newListExamplesResponse =
-  ListExamplesResponse {examples = Core.Nothing, nextPageToken = Core.Nothing}
+  ListExamplesResponse
+    { examples = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListExamplesResponse where
   parseJSON =
@@ -1936,8 +2513,7 @@ instance Core.ToJSON ListGlossaryEntriesResponse where
   toJSON ListGlossaryEntriesResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("glossaryEntries" Core..=)
-              Core.<$> glossaryEntries,
+          [ ("glossaryEntries" Core..=) Core.<$> glossaryEntries,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -1957,7 +2533,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -1993,7 +2572,10 @@ data ListModelsResponse = ListModelsResponse
 newListModelsResponse ::
   ListModelsResponse
 newListModelsResponse =
-  ListModelsResponse {models = Core.Nothing, nextPageToken = Core.Nothing}
+  ListModelsResponse
+    { models = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListModelsResponse where
   parseJSON =
@@ -2053,7 +2635,7 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -2111,8 +2693,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2121,15 +2702,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -2148,15 +2728,14 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
@@ -2169,8 +2748,6 @@ data Model = Model
     createTime :: (Core.Maybe Core.DateTime),
     -- | The dataset from which the model is trained, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/datasets\/{dataset_id}@
     dataset :: (Core.Maybe Core.Text),
-    -- | Output only. Timestamp when the model training finished and ready to be used for translation.
-    deployTime :: (Core.Maybe Core.DateTime),
     -- | The name of the model to show in the interface. The name can be up to 32 characters long and can consist only of ASCII Latin letters A-Z and a-z, underscores (_), and ASCII digits 0-9.
     displayName :: (Core.Maybe Core.Text),
     -- | The resource name of the model, in form of @projects\/{project-number-or-id}\/locations\/{location_id}\/models\/{model_id}@
@@ -2197,7 +2774,6 @@ newModel =
   Model
     { createTime = Core.Nothing,
       dataset = Core.Nothing,
-      deployTime = Core.Nothing,
       displayName = Core.Nothing,
       name = Core.Nothing,
       sourceLanguageCode = Core.Nothing,
@@ -2216,7 +2792,6 @@ instance Core.FromJSON Model where
           Model
             Core.<$> (o Core..:? "createTime")
             Core.<*> (o Core..:? "dataset")
-            Core.<*> (o Core..:? "deployTime")
             Core.<*> (o Core..:? "displayName")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "sourceLanguageCode")
@@ -2233,20 +2808,14 @@ instance Core.ToJSON Model where
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
             ("dataset" Core..=) Core.<$> dataset,
-            ("deployTime" Core..=) Core.<$> deployTime,
             ("displayName" Core..=) Core.<$> displayName,
             ("name" Core..=) Core.<$> name,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCode" Core..=)
-              Core.<$> targetLanguageCode,
-            ("testExampleCount" Core..=)
-              Core.<$> testExampleCount,
-            ("trainExampleCount" Core..=)
-              Core.<$> trainExampleCount,
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode,
+            ("testExampleCount" Core..=) Core.<$> testExampleCount,
+            ("trainExampleCount" Core..=) Core.<$> trainExampleCount,
             ("updateTime" Core..=) Core.<$> updateTime,
-            ("validateExampleCount" Core..=)
-              Core.<$> validateExampleCount
+            ("validateExampleCount" Core..=) Core.<$> validateExampleCount
           ]
       )
 
@@ -2262,7 +2831,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2318,21 +2887,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -2346,19 +2913,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Output configuration for BatchTranslateText request.
 --
@@ -2366,8 +2931,8 @@ instance Core.ToJSON Operation_Response where
 newtype OutputConfig = OutputConfig
   { -- | Google Cloud Storage destination for output content. For every single input file (for example, gs:\/\/a\/b\/c.[extension]), we generate at most 2 * n output files. (n is the # of target/language/codes in the BatchTranslateTextRequest). Output files (tsv) generated are compliant with RFC 4180 except that record delimiters are \'\\n\' instead of \'\\r\\n\'. We don\'t provide any way to change record delimiters. While the input files are being processed, we write\/update an index file \'index.csv\' under \'output/uri/prefix\' (for example, gs:\/\/translation-test\/index.csv) The index file is generated\/updated as new files are being translated. The format is: input/file,target/language/code,translations/file,errors/file, glossary/translations/file,glossary/errors/file input/file is one file we matched using gcs/source.input/uri. target/language/code is provided in the request. translations/file contains the translations. (details provided below) errors/file contains the errors during processing of the file.
     -- (details below). Both translations/file and errors/file could be empty strings if we have no content to output. glossary/translations/file and glossary/errors/file are always empty strings if the input/file is tsv. They could also be empty if we have no content to output. Once a row is present in index.csv, the input\/output matching never changes. Callers should also expect all the content in input/file are processed and ready to be consumed (that is, no partial output file is written). Since index.csv will be keeping updated during the process, please make sure there is no custom retention policy applied on the output bucket that may avoid file updating. (https:\/\/cloud.google.com\/storage\/docs\/bucket-lock#retention-policy) The format of translations/file (for target language code \'trg\') is: @gs:\/\/translation_test\/a_b_c_\'trg\'_translations.[extension]@ If the input file extension is tsv, the output has the following columns: Column 1: ID of the request provided in the input, if it\'s not provided
-    -- in the input, then the input row number is used (0-based). Column 2: source sentence. Column 3: translation without applying a glossary. Empty string if there is an error. Column 4 (only present if a glossary is provided in the request): translation after applying the glossary. Empty string if there is an error applying the glossary. Could be same string as column 3 if there is no glossary applied. If input file extension is a txt or html, the translation is directly written to the output file. If glossary is requested, a separate glossary/translations/file has format of gs:\/\/translation/test\/a/b/c/\'trg\'/glossary/translations.[extension] The format of errors file (for target language code \'trg\') is: gs:\/\/translation/test\/a/b/c/\'trg\'/errors.[extension] If the input file extension is tsv, errors/file contains the following: Column 1: ID of the request provided in the input, if it\'s not provided in the input, then the input row number is used (0-based). Column 2: source sentence. Column 3: Error
-    -- detail for the translation. Could be empty. Column 4 (only present if a glossary is provided in the request): Error when applying the glossary. If the input file extension is txt or html, glossary/error/file will be generated that contains error details. glossary/error/file has format of gs:\/\/translation/test\/a/b/c/\'trg\'/glossary_errors.[extension]
+    -- in the input, then the input row number is used (0-based). Column 2: source sentence. Column 3: translation without applying a glossary. Empty string if there is an error. Column 4 (only present if a glossary is provided in the request): translation after applying the glossary. Empty string if there is an error applying the glossary. Could be same string as column 3 if there is no glossary applied. If input file extension is a txt or html, the translation is directly written to the output file. If glossary is requested, a separate glossary/translations/file has format of @gs:\/\/translation_test\/a_b_c_\'trg\'_glossary_translations.[extension]@ The format of errors file (for target language code \'trg\') is: @gs:\/\/translation_test\/a_b_c_\'trg\'_errors.[extension]@ If the input file extension is tsv, errors/file contains the following: Column 1: ID of the request provided in the input, if it\'s not provided in the input, then the input row number is used (0-based). Column 2: source sentence. Column 3: Error
+    -- detail for the translation. Could be empty. Column 4 (only present if a glossary is provided in the request): Error when applying the glossary. If the input file extension is txt or html, glossary/error/file will be generated that contains error details. glossary/error/file has format of @gs:\/\/translation_test\/a_b_c_\'trg\'_glossary_errors.[extension]@
     gcsDestination :: (Core.Maybe GcsDestination)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2381,9 +2946,7 @@ instance Core.FromJSON OutputConfig where
   parseJSON =
     Core.withObject
       "OutputConfig"
-      ( \o ->
-          OutputConfig Core.<$> (o Core..:? "gcsDestination")
-      )
+      (\o -> OutputConfig Core.<$> (o Core..:? "gcsDestination"))
 
 instance Core.ToJSON OutputConfig where
   toJSON OutputConfig {..} =
@@ -2391,6 +2954,228 @@ instance Core.ToJSON OutputConfig where
       ( Core.catMaybes
           [("gcsDestination" Core..=) Core.<$> gcsDestination]
       )
+
+-- | Message of caller-provided reference configuration.
+--
+-- /See:/ 'newReferenceSentenceConfig' smart constructor.
+data ReferenceSentenceConfig = ReferenceSentenceConfig
+  { -- | Reference sentences pair lists. Each list will be used as the references to translate the sentence under \"content\" field at the corresponding index. Length of the list is required to be equal to the length of \"content\" field.
+    referenceSentencePairLists :: (Core.Maybe [ReferenceSentencePairList]),
+    -- | Source language code.
+    sourceLanguageCode :: (Core.Maybe Core.Text),
+    -- | Target language code.
+    targetLanguageCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReferenceSentenceConfig' with the minimum fields required to make a request.
+newReferenceSentenceConfig ::
+  ReferenceSentenceConfig
+newReferenceSentenceConfig =
+  ReferenceSentenceConfig
+    { referenceSentencePairLists =
+        Core.Nothing,
+      sourceLanguageCode = Core.Nothing,
+      targetLanguageCode = Core.Nothing
+    }
+
+instance Core.FromJSON ReferenceSentenceConfig where
+  parseJSON =
+    Core.withObject
+      "ReferenceSentenceConfig"
+      ( \o ->
+          ReferenceSentenceConfig
+            Core.<$> (o Core..:? "referenceSentencePairLists")
+            Core.<*> (o Core..:? "sourceLanguageCode")
+            Core.<*> (o Core..:? "targetLanguageCode")
+      )
+
+instance Core.ToJSON ReferenceSentenceConfig where
+  toJSON ReferenceSentenceConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("referenceSentencePairLists" Core..=)
+              Core.<$> referenceSentencePairLists,
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode
+          ]
+      )
+
+-- | A pair of sentences used as reference in source and target languages.
+--
+-- /See:/ 'newReferenceSentencePair' smart constructor.
+data ReferenceSentencePair = ReferenceSentencePair
+  { -- | Source sentence in the sentence pair.
+    sourceSentence :: (Core.Maybe Core.Text),
+    -- | Target sentence in the sentence pair.
+    targetSentence :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReferenceSentencePair' with the minimum fields required to make a request.
+newReferenceSentencePair ::
+  ReferenceSentencePair
+newReferenceSentencePair =
+  ReferenceSentencePair
+    { sourceSentence = Core.Nothing,
+      targetSentence = Core.Nothing
+    }
+
+instance Core.FromJSON ReferenceSentencePair where
+  parseJSON =
+    Core.withObject
+      "ReferenceSentencePair"
+      ( \o ->
+          ReferenceSentencePair
+            Core.<$> (o Core..:? "sourceSentence")
+            Core.<*> (o Core..:? "targetSentence")
+      )
+
+instance Core.ToJSON ReferenceSentencePair where
+  toJSON ReferenceSentencePair {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("sourceSentence" Core..=) Core.<$> sourceSentence,
+            ("targetSentence" Core..=) Core.<$> targetSentence
+          ]
+      )
+
+-- | A list of reference sentence pairs.
+--
+-- /See:/ 'newReferenceSentencePairList' smart constructor.
+newtype ReferenceSentencePairList = ReferenceSentencePairList
+  { -- | Reference sentence pairs.
+    referenceSentencePairs :: (Core.Maybe [ReferenceSentencePair])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ReferenceSentencePairList' with the minimum fields required to make a request.
+newReferenceSentencePairList ::
+  ReferenceSentencePairList
+newReferenceSentencePairList =
+  ReferenceSentencePairList {referenceSentencePairs = Core.Nothing}
+
+instance Core.FromJSON ReferenceSentencePairList where
+  parseJSON =
+    Core.withObject
+      "ReferenceSentencePairList"
+      ( \o ->
+          ReferenceSentencePairList
+            Core.<$> (o Core..:? "referenceSentencePairs")
+      )
+
+instance Core.ToJSON ReferenceSentencePairList where
+  toJSON ReferenceSentencePairList {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("referenceSentencePairs" Core..=)
+              Core.<$> referenceSentencePairs
+          ]
+      )
+
+-- | A single romanization response.
+--
+-- /See:/ 'newRomanization' smart constructor.
+data Romanization = Romanization
+  { -- | The ISO-639 language code of source text in the initial request, detected automatically, if no source language was passed within the initial request. If the source language was passed, auto-detection of the language does not occur and this field is empty.
+    detectedLanguageCode :: (Core.Maybe Core.Text),
+    -- | Romanized text. If an error occurs during romanization, this field might be excluded from the response.
+    romanizedText :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Romanization' with the minimum fields required to make a request.
+newRomanization ::
+  Romanization
+newRomanization =
+  Romanization
+    { detectedLanguageCode = Core.Nothing,
+      romanizedText = Core.Nothing
+    }
+
+instance Core.FromJSON Romanization where
+  parseJSON =
+    Core.withObject
+      "Romanization"
+      ( \o ->
+          Romanization
+            Core.<$> (o Core..:? "detectedLanguageCode")
+            Core.<*> (o Core..:? "romanizedText")
+      )
+
+instance Core.ToJSON Romanization where
+  toJSON Romanization {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detectedLanguageCode" Core..=) Core.<$> detectedLanguageCode,
+            ("romanizedText" Core..=) Core.<$> romanizedText
+          ]
+      )
+
+-- | The request message for synchronous romanization.
+--
+-- /See:/ 'newRomanizeTextRequest' smart constructor.
+data RomanizeTextRequest = RomanizeTextRequest
+  { -- | Required. The content of the input in string format.
+    contents :: (Core.Maybe [Core.Text]),
+    -- | Optional. The ISO-639 language code of the input text if known, for example, \"hi\" or \"zh\". If the source language isn\'t specified, the API attempts to identify the source language automatically and returns the source language for each content in the response.
+    sourceLanguageCode :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RomanizeTextRequest' with the minimum fields required to make a request.
+newRomanizeTextRequest ::
+  RomanizeTextRequest
+newRomanizeTextRequest =
+  RomanizeTextRequest
+    { contents = Core.Nothing,
+      sourceLanguageCode = Core.Nothing
+    }
+
+instance Core.FromJSON RomanizeTextRequest where
+  parseJSON =
+    Core.withObject
+      "RomanizeTextRequest"
+      ( \o ->
+          RomanizeTextRequest
+            Core.<$> (o Core..:? "contents")
+            Core.<*> (o Core..:? "sourceLanguageCode")
+      )
+
+instance Core.ToJSON RomanizeTextRequest where
+  toJSON RomanizeTextRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("contents" Core..=) Core.<$> contents,
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode
+          ]
+      )
+
+-- | The response message for synchronous romanization.
+--
+-- /See:/ 'newRomanizeTextResponse' smart constructor.
+newtype RomanizeTextResponse = RomanizeTextResponse
+  { -- | Text romanization responses. This field has the same length as @contents@.
+    romanizations :: (Core.Maybe [Romanization])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RomanizeTextResponse' with the minimum fields required to make a request.
+newRomanizeTextResponse ::
+  RomanizeTextResponse
+newRomanizeTextResponse =
+  RomanizeTextResponse {romanizations = Core.Nothing}
+
+instance Core.FromJSON RomanizeTextResponse where
+  parseJSON =
+    Core.withObject
+      "RomanizeTextResponse"
+      (\o -> RomanizeTextResponse Core.<$> (o Core..:? "romanizations"))
+
+instance Core.ToJSON RomanizeTextResponse where
+  toJSON RomanizeTextResponse {..} =
+    Core.object
+      (Core.catMaybes [("romanizations" Core..=) Core.<$> romanizations])
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -2409,7 +3194,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2445,19 +3234,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A single supported language response corresponds to information related to one supported language.
 --
@@ -2520,22 +3307,19 @@ newtype SupportedLanguages = SupportedLanguages
 -- | Creates a value of 'SupportedLanguages' with the minimum fields required to make a request.
 newSupportedLanguages ::
   SupportedLanguages
-newSupportedLanguages = SupportedLanguages {languages = Core.Nothing}
+newSupportedLanguages =
+  SupportedLanguages {languages = Core.Nothing}
 
 instance Core.FromJSON SupportedLanguages where
   parseJSON =
     Core.withObject
       "SupportedLanguages"
-      ( \o ->
-          SupportedLanguages Core.<$> (o Core..:? "languages")
-      )
+      (\o -> SupportedLanguages Core.<$> (o Core..:? "languages"))
 
 instance Core.ToJSON SupportedLanguages where
   toJSON SupportedLanguages {..} =
     Core.object
-      ( Core.catMaybes
-          [("languages" Core..=) Core.<$> languages]
-      )
+      (Core.catMaybes [("languages" Core..=) Core.<$> languages])
 
 -- | A document translation request.
 --
@@ -2607,12 +3391,9 @@ instance Core.ToJSON TranslateDocumentRequest where
   toJSON TranslateDocumentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customizedAttribution" Core..=)
-              Core.<$> customizedAttribution,
-            ("documentInputConfig" Core..=)
-              Core.<$> documentInputConfig,
-            ("documentOutputConfig" Core..=)
-              Core.<$> documentOutputConfig,
+          [ ("customizedAttribution" Core..=) Core.<$> customizedAttribution,
+            ("documentInputConfig" Core..=) Core.<$> documentInputConfig,
+            ("documentOutputConfig" Core..=) Core.<$> documentOutputConfig,
             ("enableRotationCorrection" Core..=)
               Core.<$> enableRotationCorrection,
             ("enableShadowRemovalNativePdf" Core..=)
@@ -2622,10 +3403,8 @@ instance Core.ToJSON TranslateDocumentRequest where
               Core.<$> isTranslateNativePdfOnly,
             ("labels" Core..=) Core.<$> labels,
             ("model" Core..=) Core.<$> model,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCode" Core..=)
-              Core.<$> targetLanguageCode
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode
           ]
       )
 
@@ -2633,8 +3412,7 @@ instance Core.ToJSON TranslateDocumentRequest where
 --
 -- /See:/ 'newTranslateDocumentRequest_Labels' smart constructor.
 newtype TranslateDocumentRequest_Labels = TranslateDocumentRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2646,21 +3424,16 @@ newTranslateDocumentRequest_Labels ::
 newTranslateDocumentRequest_Labels additional =
   TranslateDocumentRequest_Labels {additional = additional}
 
-instance
-  Core.FromJSON
-    TranslateDocumentRequest_Labels
-  where
+instance Core.FromJSON TranslateDocumentRequest_Labels where
   parseJSON =
     Core.withObject
       "TranslateDocumentRequest_Labels"
       ( \o ->
-          TranslateDocumentRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
+          TranslateDocumentRequest_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON TranslateDocumentRequest_Labels where
-  toJSON TranslateDocumentRequest_Labels {..} =
-    Core.toJSON additional
+  toJSON TranslateDocumentRequest_Labels {..} = Core.toJSON additional
 
 -- | A translated document response message.
 --
@@ -2704,8 +3477,7 @@ instance Core.ToJSON TranslateDocumentResponse where
   toJSON TranslateDocumentResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentTranslation" Core..=)
-              Core.<$> documentTranslation,
+          [ ("documentTranslation" Core..=) Core.<$> documentTranslation,
             ("glossaryConfig" Core..=) Core.<$> glossaryConfig,
             ("glossaryDocumentTranslation" Core..=)
               Core.<$> glossaryDocumentTranslation,
@@ -2717,7 +3489,9 @@ instance Core.ToJSON TranslateDocumentResponse where
 --
 -- /See:/ 'newTranslateTextGlossaryConfig' smart constructor.
 data TranslateTextGlossaryConfig = TranslateTextGlossaryConfig
-  { -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
+  { -- | Optional. If set to true, the glossary will be used for contextual translation.
+    contextualTranslationEnabled :: (Core.Maybe Core.Bool),
+    -- | Required. The @glossary@ to be applied for this translation. The format depends on the glossary: - User-provided custom glossary: @projects\/{project-number-or-id}\/locations\/{location-id}\/glossaries\/{glossary-id}@
     glossary :: (Core.Maybe Core.Text),
     -- | Optional. Indicates match is case insensitive. The default value is @false@ if missing.
     ignoreCase :: (Core.Maybe Core.Bool)
@@ -2729,7 +3503,9 @@ newTranslateTextGlossaryConfig ::
   TranslateTextGlossaryConfig
 newTranslateTextGlossaryConfig =
   TranslateTextGlossaryConfig
-    { glossary = Core.Nothing,
+    { contextualTranslationEnabled =
+        Core.Nothing,
+      glossary = Core.Nothing,
       ignoreCase = Core.Nothing
     }
 
@@ -2739,7 +3515,8 @@ instance Core.FromJSON TranslateTextGlossaryConfig where
       "TranslateTextGlossaryConfig"
       ( \o ->
           TranslateTextGlossaryConfig
-            Core.<$> (o Core..:? "glossary")
+            Core.<$> (o Core..:? "contextualTranslationEnabled")
+            Core.<*> (o Core..:? "glossary")
             Core.<*> (o Core..:? "ignoreCase")
       )
 
@@ -2747,7 +3524,9 @@ instance Core.ToJSON TranslateTextGlossaryConfig where
   toJSON TranslateTextGlossaryConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("glossary" Core..=) Core.<$> glossary,
+          [ ("contextualTranslationEnabled" Core..=)
+              Core.<$> contextualTranslationEnabled,
+            ("glossary" Core..=) Core.<$> glossary,
             ("ignoreCase" Core..=) Core.<$> ignoreCase
           ]
       )
@@ -2764,12 +3543,14 @@ data TranslateTextRequest = TranslateTextRequest
     labels :: (Core.Maybe TranslateTextRequest_Labels),
     -- | Optional. The format of the source text, for example, \"text\/html\", \"text\/plain\". If left blank, the MIME type defaults to \"text\/html\".
     mimeType :: (Core.Maybe Core.Text),
-    -- | Optional. The @model@ type requested for this translation. The format depends on model type: - AutoML Translation models: @projects\/{project-number-or-id}\/locations\/{location-id}\/models\/{model-id}@ - General (built-in) models: @projects\/{project-number-or-id}\/locations\/{location-id}\/models\/general\/nmt@, For global (non-regionalized) requests, use @location-id@ @global@. For example, @projects\/{project-number-or-id}\/locations\/global\/models\/general\/nmt@. If not provided, the default Google model (NMT) will be used
+    -- | Optional. The @model@ type requested for this translation. The format depends on model type: - AutoML Translation models: @projects\/{project-number-or-id}\/locations\/{location-id}\/models\/{model-id}@ - General (built-in) models: @projects\/{project-number-or-id}\/locations\/{location-id}\/models\/general\/nmt@, - Translation LLM models: @projects\/{project-number-or-id}\/locations\/{location-id}\/models\/general\/translation-llm@, For global (non-regionalized) requests, use @location-id@ @global@. For example, @projects\/{project-number-or-id}\/locations\/global\/models\/general\/nmt@. If not provided, the default Google model (NMT) will be used
     model :: (Core.Maybe Core.Text),
     -- | Optional. The ISO-639 language code of the input text if known, for example, \"en-US\" or \"sr-Latn\". Supported language codes are listed in Language Support. If the source language isn\'t specified, the API attempts to identify the source language automatically and returns the source language within the response.
     sourceLanguageCode :: (Core.Maybe Core.Text),
     -- | Required. The ISO-639 language code to use for translation of the input text, set to one of the language codes listed in Language Support.
-    targetLanguageCode :: (Core.Maybe Core.Text)
+    targetLanguageCode :: (Core.Maybe Core.Text),
+    -- | Optional. Transliteration to be applied.
+    transliterationConfig :: (Core.Maybe TransliterationConfig)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2784,7 +3565,8 @@ newTranslateTextRequest =
       mimeType = Core.Nothing,
       model = Core.Nothing,
       sourceLanguageCode = Core.Nothing,
-      targetLanguageCode = Core.Nothing
+      targetLanguageCode = Core.Nothing,
+      transliterationConfig = Core.Nothing
     }
 
 instance Core.FromJSON TranslateTextRequest where
@@ -2800,6 +3582,7 @@ instance Core.FromJSON TranslateTextRequest where
             Core.<*> (o Core..:? "model")
             Core.<*> (o Core..:? "sourceLanguageCode")
             Core.<*> (o Core..:? "targetLanguageCode")
+            Core.<*> (o Core..:? "transliterationConfig")
       )
 
 instance Core.ToJSON TranslateTextRequest where
@@ -2811,10 +3594,9 @@ instance Core.ToJSON TranslateTextRequest where
             ("labels" Core..=) Core.<$> labels,
             ("mimeType" Core..=) Core.<$> mimeType,
             ("model" Core..=) Core.<$> model,
-            ("sourceLanguageCode" Core..=)
-              Core.<$> sourceLanguageCode,
-            ("targetLanguageCode" Core..=)
-              Core.<$> targetLanguageCode
+            ("sourceLanguageCode" Core..=) Core.<$> sourceLanguageCode,
+            ("targetLanguageCode" Core..=) Core.<$> targetLanguageCode,
+            ("transliterationConfig" Core..=) Core.<$> transliterationConfig
           ]
       )
 
@@ -2822,8 +3604,7 @@ instance Core.ToJSON TranslateTextRequest where
 --
 -- /See:/ 'newTranslateTextRequest_Labels' smart constructor.
 newtype TranslateTextRequest_Labels = TranslateTextRequest_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2840,13 +3621,11 @@ instance Core.FromJSON TranslateTextRequest_Labels where
     Core.withObject
       "TranslateTextRequest_Labels"
       ( \o ->
-          TranslateTextRequest_Labels
-            Core.<$> (Core.parseJSONObject o)
+          TranslateTextRequest_Labels Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON TranslateTextRequest_Labels where
-  toJSON TranslateTextRequest_Labels {..} =
-    Core.toJSON additional
+  toJSON TranslateTextRequest_Labels {..} = Core.toJSON additional
 
 --
 -- /See:/ 'newTranslateTextResponse' smart constructor.
@@ -2881,8 +3660,7 @@ instance Core.ToJSON TranslateTextResponse where
   toJSON TranslateTextResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("glossaryTranslations" Core..=)
-              Core.<$> glossaryTranslations,
+          [ ("glossaryTranslations" Core..=) Core.<$> glossaryTranslations,
             ("translations" Core..=) Core.<$> translations
           ]
       )
@@ -2929,12 +3707,42 @@ instance Core.ToJSON Translation where
   toJSON Translation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("detectedLanguageCode" Core..=)
-              Core.<$> detectedLanguageCode,
+          [ ("detectedLanguageCode" Core..=) Core.<$> detectedLanguageCode,
             ("glossaryConfig" Core..=) Core.<$> glossaryConfig,
             ("model" Core..=) Core.<$> model,
             ("translatedText" Core..=) Core.<$> translatedText
           ]
+      )
+
+-- | Configures transliteration feature on top of translation.
+--
+-- /See:/ 'newTransliterationConfig' smart constructor.
+newtype TransliterationConfig = TransliterationConfig
+  { -- | If true, source text in romanized form can be translated to the target language.
+    enableTransliteration :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TransliterationConfig' with the minimum fields required to make a request.
+newTransliterationConfig ::
+  TransliterationConfig
+newTransliterationConfig =
+  TransliterationConfig {enableTransliteration = Core.Nothing}
+
+instance Core.FromJSON TransliterationConfig where
+  parseJSON =
+    Core.withObject
+      "TransliterationConfig"
+      ( \o ->
+          TransliterationConfig
+            Core.<$> (o Core..:? "enableTransliteration")
+      )
+
+instance Core.ToJSON TransliterationConfig where
+  toJSON TransliterationConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [("enableTransliteration" Core..=) Core.<$> enableTransliteration]
       )
 
 -- | The request message for Operations.WaitOperation.
@@ -2949,19 +3757,16 @@ newtype WaitOperationRequest = WaitOperationRequest
 -- | Creates a value of 'WaitOperationRequest' with the minimum fields required to make a request.
 newWaitOperationRequest ::
   WaitOperationRequest
-newWaitOperationRequest = WaitOperationRequest {timeout = Core.Nothing}
+newWaitOperationRequest =
+  WaitOperationRequest {timeout = Core.Nothing}
 
 instance Core.FromJSON WaitOperationRequest where
   parseJSON =
     Core.withObject
       "WaitOperationRequest"
-      ( \o ->
-          WaitOperationRequest Core.<$> (o Core..:? "timeout")
-      )
+      (\o -> WaitOperationRequest Core.<$> (o Core..:? "timeout"))
 
 instance Core.ToJSON WaitOperationRequest where
   toJSON WaitOperationRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("timeout" Core..=) Core.<$> timeout]
-      )
+      (Core.catMaybes [("timeout" Core..=) Core.<$> timeout])

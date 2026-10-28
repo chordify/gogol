@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidDeviceProvisioning
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -134,6 +132,11 @@ module Gogol.AndroidDeviceProvisioning
     AndroidDeviceProvisioningPartnersDevicesGetResource,
     AndroidDeviceProvisioningPartnersDevicesGet (..),
     newAndroidDeviceProvisioningPartnersDevicesGet,
+
+    -- ** androiddeviceprovisioning.partners.devices.getSimLockState
+    AndroidDeviceProvisioningPartnersDevicesGetSimLockStateResource,
+    AndroidDeviceProvisioningPartnersDevicesGetSimLockState (..),
+    newAndroidDeviceProvisioningPartnersDevicesGetSimLockState,
 
     -- ** androiddeviceprovisioning.partners.devices.metadata
     AndroidDeviceProvisioningPartnersDevicesMetadataResource,
@@ -299,6 +302,17 @@ module Gogol.AndroidDeviceProvisioning
     FindDevicesByOwnerResponse (..),
     newFindDevicesByOwnerResponse,
 
+    -- ** GetDeviceSimLockStateRequest
+    GetDeviceSimLockStateRequest (..),
+    newGetDeviceSimLockStateRequest,
+
+    -- ** GetDeviceSimLockStateResponse
+    GetDeviceSimLockStateResponse (..),
+    newGetDeviceSimLockStateResponse,
+
+    -- ** GetDeviceSimLockStateResponse_SimLockState
+    GetDeviceSimLockStateResponse_SimLockState (..),
+
     -- ** GoogleWorkspaceAccount
     GoogleWorkspaceAccount (..),
     newGoogleWorkspaceAccount,
@@ -405,6 +419,7 @@ import Gogol.AndroidDeviceProvisioning.Partners.Devices.ClaimAsync
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.FindByIdentifier
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.FindByOwner
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.Get
+import Gogol.AndroidDeviceProvisioning.Partners.Devices.GetSimLockState
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.Metadata
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.Unclaim
 import Gogol.AndroidDeviceProvisioning.Partners.Devices.UnclaimAsync

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FirebaseRules.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.FirebaseRules.Internal.Product
@@ -125,7 +123,7 @@ module Gogol.FirebaseRules.Internal.Product
 where
 
 import Gogol.FirebaseRules.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Arg matchers for the mock function.
 --
@@ -174,8 +172,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -241,7 +238,11 @@ data File = File
 newFile ::
   File
 newFile =
-  File {content = Core.Nothing, fingerprint = Core.Nothing, name = Core.Nothing}
+  File
+    { content = Core.Nothing,
+      fingerprint = Core.Nothing,
+      name = Core.Nothing
+    }
 
 instance Core.FromJSON File where
   parseJSON =
@@ -278,7 +279,8 @@ data FunctionCall = FunctionCall
 -- | Creates a value of 'FunctionCall' with the minimum fields required to make a request.
 newFunctionCall ::
   FunctionCall
-newFunctionCall = FunctionCall {args = Core.Nothing, function = Core.Nothing}
+newFunctionCall =
+  FunctionCall {args = Core.Nothing, function = Core.Nothing}
 
 instance Core.FromJSON FunctionCall where
   parseJSON =
@@ -286,7 +288,8 @@ instance Core.FromJSON FunctionCall where
       "FunctionCall"
       ( \o ->
           FunctionCall
-            Core.<$> (o Core..:? "args") Core.<*> (o Core..:? "function")
+            Core.<$> (o Core..:? "args")
+            Core.<*> (o Core..:? "function")
       )
 
 instance Core.ToJSON FunctionCall where
@@ -393,8 +396,7 @@ instance Core.ToJSON GetReleaseExecutableResponse where
     Core.object
       ( Core.catMaybes
           [ ("executable" Core..=) Core.<$> executable,
-            ("executableVersion" Core..=)
-              Core.<$> executableVersion,
+            ("executableVersion" Core..=) Core.<$> executableVersion,
             ("language" Core..=) Core.<$> language,
             ("rulesetName" Core..=) Core.<$> rulesetName,
             ("syncTime" Core..=) Core.<$> syncTime,
@@ -461,7 +463,10 @@ data ListReleasesResponse = ListReleasesResponse
 newListReleasesResponse ::
   ListReleasesResponse
 newListReleasesResponse =
-  ListReleasesResponse {nextPageToken = Core.Nothing, releases = Core.Nothing}
+  ListReleasesResponse
+    { nextPageToken = Core.Nothing,
+      releases = Core.Nothing
+    }
 
 instance Core.FromJSON ListReleasesResponse where
   parseJSON =
@@ -497,7 +502,10 @@ data ListRulesetsResponse = ListRulesetsResponse
 newListRulesetsResponse ::
   ListRulesetsResponse
 newListRulesetsResponse =
-  ListRulesetsResponse {nextPageToken = Core.Nothing, rulesets = Core.Nothing}
+  ListRulesetsResponse
+    { nextPageToken = Core.Nothing,
+      rulesets = Core.Nothing
+    }
 
 instance Core.FromJSON ListRulesetsResponse where
   parseJSON =
@@ -541,9 +549,7 @@ instance Core.FromJSON Metadata where
 instance Core.ToJSON Metadata where
   toJSON Metadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("services" Core..=) Core.<$> services]
-      )
+      (Core.catMaybes [("services" Core..=) Core.<$> services])
 
 -- | @Release@ is a named reference to a @Ruleset@. Once a @Release@ refers to a @Ruleset@, rules-enabled services will be able to enforce the @Ruleset@.
 --
@@ -633,7 +639,9 @@ instance Core.ToJSON Result where
 --
 -- /See:/ 'newRuleset' smart constructor.
 data Ruleset = Ruleset
-  { -- | Output only. Time the @Ruleset@ was created.
+  { -- | Immutable. Intended resource to which this Ruleset should be released. May be left blank to signify the resource associated with the default release. Expected format: firestore.googleapis.com\/projects\/\/databases\/
+    attachmentPoint :: (Core.Maybe Core.Text),
+    -- | Output only. Time the @Ruleset@ was created.
     createTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The metadata for this ruleset.
     metadata :: (Core.Maybe Metadata),
@@ -649,7 +657,8 @@ newRuleset ::
   Ruleset
 newRuleset =
   Ruleset
-    { createTime = Core.Nothing,
+    { attachmentPoint = Core.Nothing,
+      createTime = Core.Nothing,
       metadata = Core.Nothing,
       name = Core.Nothing,
       source = Core.Nothing
@@ -661,7 +670,8 @@ instance Core.FromJSON Ruleset where
       "Ruleset"
       ( \o ->
           Ruleset
-            Core.<$> (o Core..:? "createTime")
+            Core.<$> (o Core..:? "attachmentPoint")
+            Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "metadata")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "source")
@@ -671,7 +681,8 @@ instance Core.ToJSON Ruleset where
   toJSON Ruleset {..} =
     Core.object
       ( Core.catMaybes
-          [ ("createTime" Core..=) Core.<$> createTime,
+          [ ("attachmentPoint" Core..=) Core.<$> attachmentPoint,
+            ("createTime" Core..=) Core.<$> createTime,
             ("metadata" Core..=) Core.<$> metadata,
             ("name" Core..=) Core.<$> name,
             ("source" Core..=) Core.<$> source
@@ -700,8 +711,7 @@ instance Core.FromJSON Source where
 
 instance Core.ToJSON Source where
   toJSON Source {..} =
-    Core.object
-      (Core.catMaybes [("files" Core..=) Core.<$> files])
+    Core.object (Core.catMaybes [("files" Core..=) Core.<$> files])
 
 -- | Position in the @Source@ content including its line, column number, and an index of the @File@ in the @Source@ message. Used for debug purposes.
 --
@@ -808,8 +818,7 @@ instance Core.ToJSON TestCase where
     Core.object
       ( Core.catMaybes
           [ ("expectation" Core..=) Core.<$> expectation,
-            ("expressionReportLevel" Core..=)
-              Core.<$> expressionReportLevel,
+            ("expressionReportLevel" Core..=) Core.<$> expressionReportLevel,
             ("functionMocks" Core..=) Core.<$> functionMocks,
             ("pathEncoding" Core..=) Core.<$> pathEncoding,
             ("request" Core..=) Core.<$> request',
@@ -869,12 +878,10 @@ instance Core.ToJSON TestResult where
       ( Core.catMaybes
           [ ("debugMessages" Core..=) Core.<$> debugMessages,
             ("errorPosition" Core..=) Core.<$> errorPosition,
-            ("expressionReports" Core..=)
-              Core.<$> expressionReports,
+            ("expressionReports" Core..=) Core.<$> expressionReports,
             ("functionCalls" Core..=) Core.<$> functionCalls,
             ("state" Core..=) Core.<$> state,
-            ("visitedExpressions" Core..=)
-              Core.<$> visitedExpressions
+            ("visitedExpressions" Core..=) Core.<$> visitedExpressions
           ]
       )
 
@@ -882,9 +889,9 @@ instance Core.ToJSON TestResult where
 --
 -- /See:/ 'newTestRulesetRequest' smart constructor.
 data TestRulesetRequest = TestRulesetRequest
-  { -- | Optional @Source@ to be checked for correctness. This field must not be set when the resource name refers to a @Ruleset@.
+  { -- | Optional. Optional @Source@ to be checked for correctness. This field must not be set when the resource name refers to a @Ruleset@.
     source :: (Core.Maybe Source),
-    -- | The tests to execute against the @Source@. When @Source@ is provided inline, the test cases will only be run if the @Source@ is syntactically and semantically valid. Inline @TestSuite@ to run.
+    -- | Required. The tests to execute against the @Source@. When @Source@ is provided inline, the test cases will only be run if the @Source@ is syntactically and semantically valid. Inline @TestSuite@ to run.
     testSuite :: (Core.Maybe TestSuite)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -893,7 +900,10 @@ data TestRulesetRequest = TestRulesetRequest
 newTestRulesetRequest ::
   TestRulesetRequest
 newTestRulesetRequest =
-  TestRulesetRequest {source = Core.Nothing, testSuite = Core.Nothing}
+  TestRulesetRequest
+    { source = Core.Nothing,
+      testSuite = Core.Nothing
+    }
 
 instance Core.FromJSON TestRulesetRequest where
   parseJSON =
@@ -929,7 +939,10 @@ data TestRulesetResponse = TestRulesetResponse
 newTestRulesetResponse ::
   TestRulesetResponse
 newTestRulesetResponse =
-  TestRulesetResponse {issues = Core.Nothing, testResults = Core.Nothing}
+  TestRulesetResponse
+    { issues = Core.Nothing,
+      testResults = Core.Nothing
+    }
 
 instance Core.FromJSON TestRulesetResponse where
   parseJSON =
@@ -973,9 +986,7 @@ instance Core.FromJSON TestSuite where
 instance Core.ToJSON TestSuite where
   toJSON TestSuite {..} =
     Core.object
-      ( Core.catMaybes
-          [("testCases" Core..=) Core.<$> testCases]
-      )
+      (Core.catMaybes [("testCases" Core..=) Core.<$> testCases])
 
 -- | The request for FirebaseRulesService.UpdateRelease.
 --
@@ -983,7 +994,7 @@ instance Core.ToJSON TestSuite where
 data UpdateReleaseRequest = UpdateReleaseRequest
   { -- | Required. @Release@ to update.
     release :: (Core.Maybe Release),
-    -- | Specifies which fields to update.
+    -- | Optional. Specifies which fields to update.
     updateMask :: (Core.Maybe Core.FieldMask)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -992,7 +1003,10 @@ data UpdateReleaseRequest = UpdateReleaseRequest
 newUpdateReleaseRequest ::
   UpdateReleaseRequest
 newUpdateReleaseRequest =
-  UpdateReleaseRequest {release = Core.Nothing, updateMask = Core.Nothing}
+  UpdateReleaseRequest
+    { release = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON UpdateReleaseRequest where
   parseJSON =
@@ -1027,7 +1041,8 @@ data ValueCount = ValueCount
 -- | Creates a value of 'ValueCount' with the minimum fields required to make a request.
 newValueCount ::
   ValueCount
-newValueCount = ValueCount {count = Core.Nothing, value = Core.Nothing}
+newValueCount =
+  ValueCount {count = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON ValueCount where
   parseJSON =
@@ -1035,7 +1050,8 @@ instance Core.FromJSON ValueCount where
       "ValueCount"
       ( \o ->
           ValueCount
-            Core.<$> (o Core..:? "count") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON ValueCount where
@@ -1062,7 +1078,10 @@ data VisitedExpression = VisitedExpression
 newVisitedExpression ::
   VisitedExpression
 newVisitedExpression =
-  VisitedExpression {sourcePosition = Core.Nothing, value = Core.Nothing}
+  VisitedExpression
+    { sourcePosition = Core.Nothing,
+      value = Core.Nothing
+    }
 
 instance Core.FromJSON VisitedExpression where
   parseJSON =

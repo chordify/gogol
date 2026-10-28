@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AccessContextManager.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AccessContextManager.Internal.Sum
@@ -99,6 +97,14 @@ module Gogol.AccessContextManager.Internal.Sum
         ..
       ),
 
+    -- * EgressFrom_SourceRestriction
+    EgressFrom_SourceRestriction
+      ( EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+        EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
+        EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
+        ..
+      ),
+
     -- * IngressFrom_IdentityType
     IngressFrom_IdentityType
       ( IngressFrom_IdentityType_IDENTITYTYPEUNSPECIFIED,
@@ -127,6 +133,37 @@ module Gogol.AccessContextManager.Internal.Sum
         ..
       ),
 
+    -- * SessionSettings_SessionReauthMethod
+    SessionSettings_SessionReauthMethod
+      ( SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED,
+        SessionSettings_SessionReauthMethod_Login,
+        SessionSettings_SessionReauthMethod_SECURITYKEY,
+        SessionSettings_SessionReauthMethod_Password,
+        ..
+      ),
+
+    -- * SupportedService_ServiceSupportStage
+    SupportedService_ServiceSupportStage
+      ( SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED,
+        SupportedService_ServiceSupportStage_GA,
+        SupportedService_ServiceSupportStage_Preview,
+        SupportedService_ServiceSupportStage_Deprecated,
+        ..
+      ),
+
+    -- * SupportedService_SupportStage
+    SupportedService_SupportStage
+      ( SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED,
+        SupportedService_SupportStage_Unimplemented,
+        SupportedService_SupportStage_Prelaunch,
+        SupportedService_SupportStage_EARLYACCESS,
+        SupportedService_SupportStage_Alpha,
+        SupportedService_SupportStage_Beta,
+        SupportedService_SupportStage_GA,
+        SupportedService_SupportStage_Deprecated,
+        ..
+      ),
+
     -- * AccessPoliciesAccessLevelsGetAccessLevelFormat
     AccessPoliciesAccessLevelsGetAccessLevelFormat
       ( AccessPoliciesAccessLevelsGetAccessLevelFormat_LEVELFORMATUNSPECIFIED,
@@ -145,7 +182,7 @@ module Gogol.AccessContextManager.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -438,6 +475,38 @@ pattern EgressFrom_IdentityType_ANYSERVICEACCOUNT = EgressFrom_IdentityType "ANY
   EgressFrom_IdentityType
   #-}
 
+-- | Whether to enforce traffic restrictions based on @sources@ field. If the @sources@ fields is non-empty, then this field must be set to @SOURCE_RESTRICTION_ENABLED@.
+newtype EgressFrom_SourceRestriction = EgressFrom_SourceRestriction {fromEgressFrom_SourceRestriction :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Enforcement preference unspecified, will not enforce traffic restrictions based on @sources@ in EgressFrom.
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED :: EgressFrom_SourceRestriction
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED = EgressFrom_SourceRestriction "SOURCE_RESTRICTION_UNSPECIFIED"
+
+-- | Enforcement preference enabled, traffic restrictions will be enforced based on @sources@ in EgressFrom.
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED :: EgressFrom_SourceRestriction
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED = EgressFrom_SourceRestriction "SOURCE_RESTRICTION_ENABLED"
+
+-- | Enforcement preference disabled, will not enforce traffic restrictions based on @sources@ in EgressFrom.
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED :: EgressFrom_SourceRestriction
+pattern EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED = EgressFrom_SourceRestriction "SOURCE_RESTRICTION_DISABLED"
+
+{-# COMPLETE
+  EgressFrom_SourceRestriction_SOURCERESTRICTIONUNSPECIFIED,
+  EgressFrom_SourceRestriction_SOURCERESTRICTIONENABLED,
+  EgressFrom_SourceRestriction_SOURCERESTRICTIONDISABLED,
+  EgressFrom_SourceRestriction
+  #-}
+
 -- | Specifies the type of identities that are allowed access from outside the perimeter. If left unspecified, then members of @identities@ field will be allowed access.
 newtype IngressFrom_IdentityType = IngressFrom_IdentityType {fromIngressFrom_IdentityType :: Core.Text}
   deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
@@ -552,6 +621,137 @@ pattern ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE = ServicePerimeter_Pe
   ServicePerimeter_PerimeterType_PERIMETERTYPEREGULAR,
   ServicePerimeter_PerimeterType_PERIMETERTYPEBRIDGE,
   ServicePerimeter_PerimeterType
+  #-}
+
+-- | Optional. Session method when user\'s Google Cloud session is up.
+newtype SessionSettings_SessionReauthMethod = SessionSettings_SessionReauthMethod {fromSessionSettings_SessionReauthMethod :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | If method is undefined in the API, LOGIN will be used by default.
+pattern SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED :: SessionSettings_SessionReauthMethod
+pattern SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED = SessionSettings_SessionReauthMethod "SESSION_REAUTH_METHOD_UNSPECIFIED"
+
+-- | The user will be prompted to perform regular login. Users who are enrolled for two-step verification and haven\'t chosen \"Remember this computer\" will be prompted for their second factor.
+pattern SessionSettings_SessionReauthMethod_Login :: SessionSettings_SessionReauthMethod
+pattern SessionSettings_SessionReauthMethod_Login = SessionSettings_SessionReauthMethod "LOGIN"
+
+-- | The user will be prompted to authenticate using their security key. If no security key has been configured, then authentication will fallback to LOGIN.
+pattern SessionSettings_SessionReauthMethod_SECURITYKEY :: SessionSettings_SessionReauthMethod
+pattern SessionSettings_SessionReauthMethod_SECURITYKEY = SessionSettings_SessionReauthMethod "SECURITY_KEY"
+
+-- | The user will be prompted for their password.
+pattern SessionSettings_SessionReauthMethod_Password :: SessionSettings_SessionReauthMethod
+pattern SessionSettings_SessionReauthMethod_Password = SessionSettings_SessionReauthMethod "PASSWORD"
+
+{-# COMPLETE
+  SessionSettings_SessionReauthMethod_SESSIONREAUTHMETHODUNSPECIFIED,
+  SessionSettings_SessionReauthMethod_Login,
+  SessionSettings_SessionReauthMethod_SECURITYKEY,
+  SessionSettings_SessionReauthMethod_Password,
+  SessionSettings_SessionReauthMethod
+  #-}
+
+-- | The support stage of the service.
+newtype SupportedService_ServiceSupportStage = SupportedService_ServiceSupportStage {fromSupportedService_ServiceSupportStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED :: SupportedService_ServiceSupportStage
+pattern SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED = SupportedService_ServiceSupportStage "SERVICE_SUPPORT_STAGE_UNSPECIFIED"
+
+-- | GA features are open to all developers and are considered stable and fully qualified for production use.
+pattern SupportedService_ServiceSupportStage_GA :: SupportedService_ServiceSupportStage
+pattern SupportedService_ServiceSupportStage_GA = SupportedService_ServiceSupportStage "GA"
+
+-- | PREVIEW indicates a pre-release stage where the product is functionally complete but undergoing real-world testing.
+pattern SupportedService_ServiceSupportStage_Preview :: SupportedService_ServiceSupportStage
+pattern SupportedService_ServiceSupportStage_Preview = SupportedService_ServiceSupportStage "PREVIEW"
+
+-- | Deprecated features are scheduled to be shut down and removed.
+pattern SupportedService_ServiceSupportStage_Deprecated :: SupportedService_ServiceSupportStage
+pattern SupportedService_ServiceSupportStage_Deprecated = SupportedService_ServiceSupportStage "DEPRECATED"
+
+{-# COMPLETE
+  SupportedService_ServiceSupportStage_SERVICESUPPORTSTAGEUNSPECIFIED,
+  SupportedService_ServiceSupportStage_GA,
+  SupportedService_ServiceSupportStage_Preview,
+  SupportedService_ServiceSupportStage_Deprecated,
+  SupportedService_ServiceSupportStage
+  #-}
+
+-- | The support stage of the service.
+newtype SupportedService_SupportStage = SupportedService_SupportStage {fromSupportedService_SupportStage :: Core.Text}
+  deriving stock (Core.Show, Core.Read, Core.Eq, Core.Ord, Core.Generic)
+  deriving newtype
+    ( Core.Hashable,
+      Core.ToHttpApiData,
+      Core.FromHttpApiData,
+      Core.ToJSON,
+      Core.ToJSONKey,
+      Core.FromJSON,
+      Core.FromJSONKey
+    )
+
+-- | Do not use this default value.
+pattern SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED = SupportedService_SupportStage "LAUNCH_STAGE_UNSPECIFIED"
+
+-- | The feature is not yet implemented. Users can not use it.
+pattern SupportedService_SupportStage_Unimplemented :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_Unimplemented = SupportedService_SupportStage "UNIMPLEMENTED"
+
+-- | Prelaunch features are hidden from users and are only visible internally.
+pattern SupportedService_SupportStage_Prelaunch :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_Prelaunch = SupportedService_SupportStage "PRELAUNCH"
+
+-- | Early Access features are limited to a closed group of testers. To use these features, you must sign up in advance and sign a Trusted Tester agreement (which includes confidentiality provisions). These features may be unstable, changed in backward-incompatible ways, and are not guaranteed to be released.
+pattern SupportedService_SupportStage_EARLYACCESS :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_EARLYACCESS = SupportedService_SupportStage "EARLY_ACCESS"
+
+-- | Alpha is a limited availability test for releases before they are cleared for widespread use. By Alpha, all significant design issues are resolved and we are in the process of verifying functionality. Alpha customers need to apply for access, agree to applicable terms, and have their projects allowlisted. Alpha releases don\'t have to be feature complete, no SLAs are provided, and there are no technical support obligations, but they will be far enough along that customers can actually use them in test environments or for limited-use tests -- just like they would in normal production cases.
+pattern SupportedService_SupportStage_Alpha :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_Alpha = SupportedService_SupportStage "ALPHA"
+
+-- | Beta is the point at which we are ready to open a release for any customer to use. There are no SLA or technical support obligations in a Beta release. Products will be complete from a feature perspective, but may have some open outstanding issues. Beta releases are suitable for limited production use cases.
+pattern SupportedService_SupportStage_Beta :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_Beta = SupportedService_SupportStage "BETA"
+
+-- | GA features are open to all developers and are considered stable and fully qualified for production use.
+pattern SupportedService_SupportStage_GA :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_GA = SupportedService_SupportStage "GA"
+
+-- | Deprecated features are scheduled to be shut down and removed. For more information, see the \"Deprecation Policy\" section of our <https://cloud.google.com/terms/ Terms of Service> and the <https://cloud.google.com/terms/deprecation Google Cloud Platform Subject to the Deprecation Policy> documentation.
+pattern SupportedService_SupportStage_Deprecated :: SupportedService_SupportStage
+pattern SupportedService_SupportStage_Deprecated = SupportedService_SupportStage "DEPRECATED"
+
+{-# COMPLETE
+  SupportedService_SupportStage_LAUNCHSTAGEUNSPECIFIED,
+  SupportedService_SupportStage_Unimplemented,
+  SupportedService_SupportStage_Prelaunch,
+  SupportedService_SupportStage_EARLYACCESS,
+  SupportedService_SupportStage_Alpha,
+  SupportedService_SupportStage_Beta,
+  SupportedService_SupportStage_GA,
+  SupportedService_SupportStage_Deprecated,
+  SupportedService_SupportStage
   #-}
 
 -- | Whether to return @BasicLevels@ in the Cloud Common Expression Language rather than as @BasicLevels@. Defaults to AS_DEFINED, where Access Levels are returned as @BasicLevels@ or @CustomLevels@ based on how they were created. If set to CEL, all Access Levels are returned as @CustomLevels@. In the CEL case, @BasicLevels@ are translated to equivalent @CustomLevels@.

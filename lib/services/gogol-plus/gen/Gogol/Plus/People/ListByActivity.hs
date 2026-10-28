@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Plus.People.ListByActivity
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Plus.People.ListByActivity
 where
 
 import Gogol.Plus.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @plus.people.listByActivity@ method which the
 -- 'PlusPeopleListByActivity' request conforms to.
@@ -50,9 +48,7 @@ type PlusPeopleListByActivityResource =
     Core.:> "activities"
     Core.:> Core.Capture "activityId" Core.Text
     Core.:> "people"
-    Core.:> Core.Capture
-              "collection"
-              PeopleListByActivityCollection
+    Core.:> Core.Capture "collection" PeopleListByActivityCollection
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -90,9 +86,7 @@ newPlusPeopleListByActivity activityId collection =
 
 instance Core.GoogleRequest PlusPeopleListByActivity where
   type Rs PlusPeopleListByActivity = PeopleFeed
-  type
-    Scopes PlusPeopleListByActivity =
-      '[Plus'Login, Plus'Me]
+  type Scopes PlusPeopleListByActivity = '[Plus'Login, Plus'Me]
   requestClient PlusPeopleListByActivity {..} =
     go
       activityId
@@ -104,7 +98,5 @@ instance Core.GoogleRequest PlusPeopleListByActivity where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PlusPeopleListByActivityResource
-          )
+          (Core.Proxy :: Core.Proxy PlusPeopleListByActivityResource)
           Core.mempty

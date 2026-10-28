@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.OtherContacts.Search
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.People.OtherContacts.Search
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.otherContacts.search@ method which the
 -- 'PeopleOtherContactsSearch' request conforms to.
@@ -98,9 +96,7 @@ newPeopleOtherContactsSearch =
 
 instance Core.GoogleRequest PeopleOtherContactsSearch where
   type Rs PeopleOtherContactsSearch = SearchResponse
-  type
-    Scopes PeopleOtherContactsSearch =
-      '[Contacts'Other'Readonly]
+  type Scopes PeopleOtherContactsSearch = '[Contacts'Other'Readonly]
   requestClient PeopleOtherContactsSearch {..} =
     go
       xgafv
@@ -116,7 +112,5 @@ instance Core.GoogleRequest PeopleOtherContactsSearch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeopleOtherContactsSearchResource
-          )
+          (Core.Proxy :: Core.Proxy PeopleOtherContactsSearchResource)
           Core.mempty

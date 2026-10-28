@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.VideoAbuseReportReasons.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.VideoAbuseReportReasons.List
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.videoAbuseReportReasons.list@ method which the
@@ -56,9 +54,7 @@ type YouTubeVideoAbuseReportReasonsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              VideoAbuseReportReasonListResponse
+    Core.:> Core.Get '[Core.JSON] VideoAbuseReportReasonListResponse
 
 -- | Retrieves a list of resources, possibly filtered.
 --
@@ -70,7 +66,6 @@ data YouTubeVideoAbuseReportReasonsList = YouTubeVideoAbuseReportReasonsList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- |
     hl :: Core.Text,
     -- | The /part/ parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.
     part :: [Core.Text],
@@ -97,19 +92,13 @@ newYouTubeVideoAbuseReportReasonsList part =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeVideoAbuseReportReasonsList
-  where
+instance Core.GoogleRequest YouTubeVideoAbuseReportReasonsList where
   type
     Rs YouTubeVideoAbuseReportReasonsList =
       VideoAbuseReportReasonListResponse
   type
     Scopes YouTubeVideoAbuseReportReasonsList =
-      '[ Youtube'FullControl,
-         Youtube'ForceSsl,
-         Youtube'Readonly
-       ]
+      '[Youtube'FullControl, Youtube'ForceSsl, Youtube'Readonly]
   requestClient YouTubeVideoAbuseReportReasonsList {..} =
     go
       part
@@ -125,7 +114,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                YouTubeVideoAbuseReportReasonsListResource
+              Core.Proxy YouTubeVideoAbuseReportReasonsListResource
           )
           Core.mempty

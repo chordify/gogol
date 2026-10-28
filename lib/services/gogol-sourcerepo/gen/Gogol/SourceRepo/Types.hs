@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SourceRepo.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SourceRepo.Types
@@ -148,7 +146,7 @@ module Gogol.SourceRepo.Types
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SourceRepo.Internal.Product
 import Gogol.SourceRepo.Internal.Sum
 
@@ -160,13 +158,17 @@ sourceRepoService =
     "sourcerepo.googleapis.com"
 
 -- | See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-type CloudPlatform'FullControl = "https://www.googleapis.com/auth/cloud-platform"
+type CloudPlatform'FullControl =
+  "https://www.googleapis.com/auth/cloud-platform"
 
 -- | Manage your source code repositories
-type Source'FullControl = "https://www.googleapis.com/auth/source.full_control"
+type Source'FullControl =
+  "https://www.googleapis.com/auth/source.full_control"
 
 -- | View the contents of your source code repositories
-type Source'ReadOnly = "https://www.googleapis.com/auth/source.read_only"
+type Source'ReadOnly =
+  "https://www.googleapis.com/auth/source.read_only"
 
 -- | Manage the contents of your source code repositories
-type Source'ReadWrite = "https://www.googleapis.com/auth/source.read_write"
+type Source'ReadWrite =
+  "https://www.googleapis.com/auth/source.read_write"

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudIdentity.Devices.DeviceUsers.Lookup
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudIdentity.Devices.DeviceUsers.Lookup
 where
 
 import Gogol.CloudIdentity.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudidentity.devices.deviceUsers.lookup@ method which the
 -- 'CloudIdentityDevicesDeviceUsersLookup' request conforms to.
@@ -80,7 +78,7 @@ data CloudIdentityDevicesDeviceUsersLookup = CloudIdentityDevicesDeviceUsersLook
     pageToken :: (Core.Maybe Core.Text),
     -- | Must be set to \"devices\/-\/deviceUsers\" to search across all DeviceUser belonging to the user.
     parent :: Core.Text,
-    -- | Raw Resource Id used by Google Endpoint Verification. If the user is enrolled into Google Endpoint Verification, this id will be saved as the \'device/resource/id\' field in the following platform dependent files. Mac: ~\/.secureConnect\/context/aware/config.json Windows: C:\\Users\\%USERPROFILE%.secureConnect\\context/aware/config.json Linux: ~\/.secureConnect\/context/aware/config.json
+    -- | Raw Resource Id used by Google Endpoint Verification. If the user is enrolled into Google Endpoint Verification, this id will be saved as the \'device/resource/id\' field in the following platform dependent files. * macOS: ~\/.secureConnect\/context/aware/config.json * Windows: %USERPROFILE%\\AppData\\Local\\Google\\Endpoint Verification\\accounts.json * Linux: ~\/.secureConnect\/context/aware/config.json
     rawResourceId :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -111,37 +109,32 @@ newCloudIdentityDevicesDeviceUsersLookup parent =
       userId = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudIdentityDevicesDeviceUsersLookup
-  where
+instance Core.GoogleRequest CloudIdentityDevicesDeviceUsersLookup where
   type
     Rs CloudIdentityDevicesDeviceUsersLookup =
       GoogleAppsCloudidentityDevicesV1LookupSelfDeviceUsersResponse
   type
     Scopes CloudIdentityDevicesDeviceUsersLookup =
       '[CloudIdentity'Devices'Lookup]
-  requestClient
-    CloudIdentityDevicesDeviceUsersLookup {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        androidId
-        callback
-        pageSize
-        pageToken
-        rawResourceId
-        uploadType
-        uploadProtocol
-        userId
-        (Core.Just Core.AltJSON)
-        cloudIdentityService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudIdentityDevicesDeviceUsersLookupResource
-            )
-            Core.mempty
+  requestClient CloudIdentityDevicesDeviceUsersLookup {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      androidId
+      callback
+      pageSize
+      pageToken
+      rawResourceId
+      uploadType
+      uploadProtocol
+      userId
+      (Core.Just Core.AltJSON)
+      cloudIdentityService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudIdentityDevicesDeviceUsersLookupResource
+          )
+          Core.mempty

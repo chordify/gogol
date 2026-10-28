@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Promooffer.Accept
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Promooffer.Accept
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.promooffer.accept@ method which the
 -- 'BooksPromoofferAccept' request conforms to.
@@ -83,7 +81,6 @@ data BooksPromoofferAccept = BooksPromoofferAccept
     manufacturer :: (Core.Maybe Core.Text),
     -- | device model
     model :: (Core.Maybe Core.Text),
-    -- |
     offerId :: (Core.Maybe Core.Text),
     -- | device product
     product :: (Core.Maybe Core.Text),
@@ -120,9 +117,7 @@ newBooksPromoofferAccept =
 
 instance Core.GoogleRequest BooksPromoofferAccept where
   type Rs BooksPromoofferAccept = Empty
-  type
-    Scopes BooksPromoofferAccept =
-      '[Books'FullControl]
+  type Scopes BooksPromoofferAccept = '[Books'FullControl]
   requestClient BooksPromoofferAccept {..} =
     go
       xgafv
@@ -143,7 +138,5 @@ instance Core.GoogleRequest BooksPromoofferAccept where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy BooksPromoofferAcceptResource
-          )
+          (Core.Proxy :: Core.Proxy BooksPromoofferAcceptResource)
           Core.mempty

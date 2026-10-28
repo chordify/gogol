@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.SQLAdmin.Sql.Projects.Instances.ResetReplicaSize
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SQLAdmin.Types
 
 -- | A resource alias for @sql.projects.instances.resetReplicaSize@ method which the
@@ -57,9 +55,7 @@ type SqlProjectsInstancesResetReplicaSizeResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              SqlInstancesResetReplicaSizeRequest
+    Core.:> Core.ReqBody '[Core.JSON] SqlInstancesResetReplicaSizeRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Reset Replica Size to primary instance disk size.
@@ -106,34 +102,27 @@ newSqlProjectsInstancesResetReplicaSize instance' payload project =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SqlProjectsInstancesResetReplicaSize
-  where
-  type
-    Rs SqlProjectsInstancesResetReplicaSize =
-      Operation
+instance Core.GoogleRequest SqlProjectsInstancesResetReplicaSize where
+  type Rs SqlProjectsInstancesResetReplicaSize = Operation
   type
     Scopes SqlProjectsInstancesResetReplicaSize =
       '[CloudPlatform'FullControl, Sqlservice'Admin]
-  requestClient
-    SqlProjectsInstancesResetReplicaSize {..} =
-      go
-        project
-        instance'
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        sQLAdminService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  SqlProjectsInstancesResetReplicaSizeResource
-            )
-            Core.mempty
+  requestClient SqlProjectsInstancesResetReplicaSize {..} =
+    go
+      project
+      instance'
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      sQLAdminService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy SqlProjectsInstancesResetReplicaSizeResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Types
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AndroidPublisher.Types
@@ -37,6 +35,17 @@ module Gogol.AndroidPublisher.Types
     -- ** Xgafv
     Xgafv (..),
 
+    -- ** Abi
+    Abi (..),
+    newAbi,
+
+    -- ** Abi_Alias
+    Abi_Alias (..),
+
+    -- ** AbiTargeting
+    AbiTargeting (..),
+    newAbiTargeting,
+
     -- ** AcquisitionTargetingRule
     AcquisitionTargetingRule (..),
     newAcquisitionTargetingRule,
@@ -45,9 +54,31 @@ module Gogol.AndroidPublisher.Types
     ActivateBasePlanRequest (..),
     newActivateBasePlanRequest,
 
+    -- ** ActivateBasePlanRequest_LatencyTolerance
+    ActivateBasePlanRequest_LatencyTolerance (..),
+
     -- ** ActivateSubscriptionOfferRequest
     ActivateSubscriptionOfferRequest (..),
     newActivateSubscriptionOfferRequest,
+
+    -- ** ActivateSubscriptionOfferRequest_LatencyTolerance
+    ActivateSubscriptionOfferRequest_LatencyTolerance (..),
+
+    -- ** AddTargetingRequest
+    AddTargetingRequest (..),
+    newAddTargetingRequest,
+
+    -- ** AddTargetingResponse
+    AddTargetingResponse (..),
+    newAddTargetingResponse,
+
+    -- ** AllUsers
+    AllUsers (..),
+    newAllUsers,
+
+    -- ** AndroidSdks
+    AndroidSdks (..),
+    newAndroidSdks,
 
     -- ** Apk
     Apk (..),
@@ -56,6 +87,18 @@ module Gogol.AndroidPublisher.Types
     -- ** ApkBinary
     ApkBinary (..),
     newApkBinary,
+
+    -- ** ApkDescription
+    ApkDescription (..),
+    newApkDescription,
+
+    -- ** ApkSet
+    ApkSet (..),
+    newApkSet,
+
+    -- ** ApkTargeting
+    ApkTargeting (..),
+    newApkTargeting,
 
     -- ** ApksAddExternallyHostedRequest
     ApksAddExternallyHostedRequest (..),
@@ -77,9 +120,35 @@ module Gogol.AndroidPublisher.Types
     AppEdit (..),
     newAppEdit,
 
+    -- ** AppRecoveryAction
+    AppRecoveryAction (..),
+    newAppRecoveryAction,
+
+    -- ** AppRecoveryAction_Status
+    AppRecoveryAction_Status (..),
+
+    -- ** AppVersionList
+    AppVersionList (..),
+    newAppVersionList,
+
+    -- ** AppVersionRange
+    AppVersionRange (..),
+    newAppVersionRange,
+
     -- ** ArchiveSubscriptionRequest
     ArchiveSubscriptionRequest (..),
     newArchiveSubscriptionRequest,
+
+    -- ** AssetModuleMetadata
+    AssetModuleMetadata (..),
+    newAssetModuleMetadata,
+
+    -- ** AssetModuleMetadata_DeliveryType
+    AssetModuleMetadata_DeliveryType (..),
+
+    -- ** AssetSliceSet
+    AssetSliceSet (..),
+    newAssetSliceSet,
 
     -- ** AutoRenewingBasePlanType
     AutoRenewingBasePlanType (..),
@@ -102,6 +171,58 @@ module Gogol.AndroidPublisher.Types
     -- ** BasePlan_State
     BasePlan_State (..),
 
+    -- ** BatchGetSubscriptionOffersRequest
+    BatchGetSubscriptionOffersRequest (..),
+    newBatchGetSubscriptionOffersRequest,
+
+    -- ** BatchGetSubscriptionOffersResponse
+    BatchGetSubscriptionOffersResponse (..),
+    newBatchGetSubscriptionOffersResponse,
+
+    -- ** BatchGetSubscriptionsResponse
+    BatchGetSubscriptionsResponse (..),
+    newBatchGetSubscriptionsResponse,
+
+    -- ** BatchMigrateBasePlanPricesRequest
+    BatchMigrateBasePlanPricesRequest (..),
+    newBatchMigrateBasePlanPricesRequest,
+
+    -- ** BatchMigrateBasePlanPricesResponse
+    BatchMigrateBasePlanPricesResponse (..),
+    newBatchMigrateBasePlanPricesResponse,
+
+    -- ** BatchUpdateBasePlanStatesRequest
+    BatchUpdateBasePlanStatesRequest (..),
+    newBatchUpdateBasePlanStatesRequest,
+
+    -- ** BatchUpdateBasePlanStatesResponse
+    BatchUpdateBasePlanStatesResponse (..),
+    newBatchUpdateBasePlanStatesResponse,
+
+    -- ** BatchUpdateSubscriptionOfferStatesRequest
+    BatchUpdateSubscriptionOfferStatesRequest (..),
+    newBatchUpdateSubscriptionOfferStatesRequest,
+
+    -- ** BatchUpdateSubscriptionOfferStatesResponse
+    BatchUpdateSubscriptionOfferStatesResponse (..),
+    newBatchUpdateSubscriptionOfferStatesResponse,
+
+    -- ** BatchUpdateSubscriptionOffersRequest
+    BatchUpdateSubscriptionOffersRequest (..),
+    newBatchUpdateSubscriptionOffersRequest,
+
+    -- ** BatchUpdateSubscriptionOffersResponse
+    BatchUpdateSubscriptionOffersResponse (..),
+    newBatchUpdateSubscriptionOffersResponse,
+
+    -- ** BatchUpdateSubscriptionsRequest
+    BatchUpdateSubscriptionsRequest (..),
+    newBatchUpdateSubscriptionsRequest,
+
+    -- ** BatchUpdateSubscriptionsResponse
+    BatchUpdateSubscriptionsResponse (..),
+    newBatchUpdateSubscriptionsResponse,
+
     -- ** Bundle
     Bundle (..),
     newBundle,
@@ -109,6 +230,14 @@ module Gogol.AndroidPublisher.Types
     -- ** BundlesListResponse
     BundlesListResponse (..),
     newBundlesListResponse,
+
+    -- ** CancelAppRecoveryRequest
+    CancelAppRecoveryRequest (..),
+    newCancelAppRecoveryRequest,
+
+    -- ** CancelAppRecoveryResponse
+    CancelAppRecoveryResponse (..),
+    newCancelAppRecoveryResponse,
 
     -- ** CancelSurveyResult
     CancelSurveyResult (..),
@@ -149,13 +278,27 @@ module Gogol.AndroidPublisher.Types
     CountryTargeting (..),
     newCountryTargeting,
 
+    -- ** CreateDraftAppRecoveryRequest
+    CreateDraftAppRecoveryRequest (..),
+    newCreateDraftAppRecoveryRequest,
+
     -- ** DeactivateBasePlanRequest
     DeactivateBasePlanRequest (..),
     newDeactivateBasePlanRequest,
 
+    -- ** DeactivateBasePlanRequest_LatencyTolerance
+    DeactivateBasePlanRequest_LatencyTolerance (..),
+
     -- ** DeactivateSubscriptionOfferRequest
     DeactivateSubscriptionOfferRequest (..),
     newDeactivateSubscriptionOfferRequest,
+
+    -- ** DeactivateSubscriptionOfferRequest_LatencyTolerance
+    DeactivateSubscriptionOfferRequest_LatencyTolerance (..),
+
+    -- ** DeferredItemReplacement
+    DeferredItemReplacement (..),
+    newDeferredItemReplacement,
 
     -- ** DeobfuscationFile
     DeobfuscationFile (..),
@@ -168,6 +311,14 @@ module Gogol.AndroidPublisher.Types
     DeobfuscationFilesUploadResponse (..),
     newDeobfuscationFilesUploadResponse,
 
+    -- ** DeployAppRecoveryRequest
+    DeployAppRecoveryRequest (..),
+    newDeployAppRecoveryRequest,
+
+    -- ** DeployAppRecoveryResponse
+    DeployAppRecoveryResponse (..),
+    newDeployAppRecoveryResponse,
+
     -- ** DeveloperComment
     DeveloperComment (..),
     newDeveloperComment,
@@ -175,6 +326,14 @@ module Gogol.AndroidPublisher.Types
     -- ** DeveloperInitiatedCancellation
     DeveloperInitiatedCancellation (..),
     newDeveloperInitiatedCancellation,
+
+    -- ** DeviceFeature
+    DeviceFeature (..),
+    newDeviceFeature,
+
+    -- ** DeviceFeatureTargeting
+    DeviceFeatureTargeting (..),
+    newDeviceFeatureTargeting,
 
     -- ** DeviceGroup
     DeviceGroup (..),
@@ -224,9 +383,35 @@ module Gogol.AndroidPublisher.Types
     ExternalAccountIdentifiers (..),
     newExternalAccountIdentifiers,
 
+    -- ** ExternalSubscription
+    ExternalSubscription (..),
+    newExternalSubscription,
+
+    -- ** ExternalSubscription_SubscriptionType
+    ExternalSubscription_SubscriptionType (..),
+
+    -- ** ExternalTransaction
+    ExternalTransaction (..),
+    newExternalTransaction,
+
+    -- ** ExternalTransaction_TransactionState
+    ExternalTransaction_TransactionState (..),
+
+    -- ** ExternalTransactionAddress
+    ExternalTransactionAddress (..),
+    newExternalTransactionAddress,
+
+    -- ** ExternalTransactionTestPurchase
+    ExternalTransactionTestPurchase (..),
+    newExternalTransactionTestPurchase,
+
     -- ** ExternallyHostedApk
     ExternallyHostedApk (..),
     newExternallyHostedApk,
+
+    -- ** FullRefund
+    FullRefund (..),
+    newFullRefund,
 
     -- ** GeneratedApksListResponse
     GeneratedApksListResponse (..),
@@ -240,6 +425,13 @@ module Gogol.AndroidPublisher.Types
     GeneratedAssetPackSlice (..),
     newGeneratedAssetPackSlice,
 
+    -- ** GeneratedRecoveryApk
+    GeneratedRecoveryApk (..),
+    newGeneratedRecoveryApk,
+
+    -- ** GeneratedRecoveryApk_RecoveryStatus
+    GeneratedRecoveryApk_RecoveryStatus (..),
+
     -- ** GeneratedSplitApk
     GeneratedSplitApk (..),
     newGeneratedSplitApk,
@@ -251,6 +443,10 @@ module Gogol.AndroidPublisher.Types
     -- ** GeneratedUniversalApk
     GeneratedUniversalApk (..),
     newGeneratedUniversalApk,
+
+    -- ** GetSubscriptionOfferRequest
+    GetSubscriptionOfferRequest (..),
+    newGetSubscriptionOfferRequest,
 
     -- ** Grant
     Grant (..),
@@ -297,9 +493,56 @@ module Gogol.AndroidPublisher.Types
     InAppProductListing (..),
     newInAppProductListing,
 
+    -- ** InappproductsBatchDeleteRequest
+    InappproductsBatchDeleteRequest (..),
+    newInappproductsBatchDeleteRequest,
+
+    -- ** InappproductsBatchGetResponse
+    InappproductsBatchGetResponse (..),
+    newInappproductsBatchGetResponse,
+
+    -- ** InappproductsBatchUpdateRequest
+    InappproductsBatchUpdateRequest (..),
+    newInappproductsBatchUpdateRequest,
+
+    -- ** InappproductsBatchUpdateResponse
+    InappproductsBatchUpdateResponse (..),
+    newInappproductsBatchUpdateResponse,
+
+    -- ** InappproductsDeleteRequest
+    InappproductsDeleteRequest (..),
+    newInappproductsDeleteRequest,
+
+    -- ** InappproductsDeleteRequest_LatencyTolerance
+    InappproductsDeleteRequest_LatencyTolerance (..),
+
     -- ** InappproductsListResponse
     InappproductsListResponse (..),
     newInappproductsListResponse,
+
+    -- ** InappproductsUpdateRequest
+    InappproductsUpdateRequest (..),
+    newInappproductsUpdateRequest,
+
+    -- ** InappproductsUpdateRequest_LatencyTolerance
+    InappproductsUpdateRequest_LatencyTolerance (..),
+
+    -- ** InstallmentPlan
+    InstallmentPlan (..),
+    newInstallmentPlan,
+
+    -- ** InstallmentsBasePlanType
+    InstallmentsBasePlanType (..),
+    newInstallmentsBasePlanType,
+
+    -- ** InstallmentsBasePlanType_ProrationMode
+    InstallmentsBasePlanType_ProrationMode (..),
+
+    -- ** InstallmentsBasePlanType_RenewalType
+    InstallmentsBasePlanType_RenewalType (..),
+
+    -- ** InstallmentsBasePlanType_ResubscribeState
+    InstallmentsBasePlanType_ResubscribeState (..),
 
     -- ** InternalAppSharingArtifact
     InternalAppSharingArtifact (..),
@@ -308,6 +551,14 @@ module Gogol.AndroidPublisher.Types
     -- ** IntroductoryPriceInfo
     IntroductoryPriceInfo (..),
     newIntroductoryPriceInfo,
+
+    -- ** LanguageTargeting
+    LanguageTargeting (..),
+    newLanguageTargeting,
+
+    -- ** ListAppRecoveriesResponse
+    ListAppRecoveriesResponse (..),
+    newListAppRecoveriesResponse,
 
     -- ** ListDeviceTierConfigsResponse
     ListDeviceTierConfigsResponse (..),
@@ -352,13 +603,38 @@ module Gogol.AndroidPublisher.Types
     MigrateBasePlanPricesRequest (..),
     newMigrateBasePlanPricesRequest,
 
+    -- ** MigrateBasePlanPricesRequest_LatencyTolerance
+    MigrateBasePlanPricesRequest_LatencyTolerance (..),
+
     -- ** MigrateBasePlanPricesResponse
     MigrateBasePlanPricesResponse (..),
     newMigrateBasePlanPricesResponse,
 
+    -- ** ModuleMetadata
+    ModuleMetadata (..),
+    newModuleMetadata,
+
+    -- ** ModuleMetadata_DeliveryType
+    ModuleMetadata_DeliveryType (..),
+
+    -- ** ModuleMetadata_ModuleType
+    ModuleMetadata_ModuleType (..),
+
+    -- ** ModuleTargeting
+    ModuleTargeting (..),
+    newModuleTargeting,
+
     -- ** Money
     Money (..),
     newMoney,
+
+    -- ** MultiAbi
+    MultiAbi (..),
+    newMultiAbi,
+
+    -- ** MultiAbiTargeting
+    MultiAbiTargeting (..),
+    newMultiAbiTargeting,
 
     -- ** OfferDetails
     OfferDetails (..),
@@ -367,6 +643,18 @@ module Gogol.AndroidPublisher.Types
     -- ** OfferTag
     OfferTag (..),
     newOfferTag,
+
+    -- ** OneTimeCode
+    OneTimeCode (..),
+    newOneTimeCode,
+
+    -- ** OneTimeExternalTransaction
+    OneTimeExternalTransaction (..),
+    newOneTimeExternalTransaction,
+
+    -- ** OtherRecurringProduct
+    OtherRecurringProduct (..),
+    newOtherRecurringProduct,
 
     -- ** OtherRegionsBasePlanConfig
     OtherRegionsBasePlanConfig (..),
@@ -380,6 +668,10 @@ module Gogol.AndroidPublisher.Types
     OtherRegionsSubscriptionOfferPhaseConfig (..),
     newOtherRegionsSubscriptionOfferPhaseConfig,
 
+    -- ** OtherRegionsSubscriptionOfferPhaseFreePriceOverride
+    OtherRegionsSubscriptionOfferPhaseFreePriceOverride (..),
+    newOtherRegionsSubscriptionOfferPhaseFreePriceOverride,
+
     -- ** OtherRegionsSubscriptionOfferPhasePrices
     OtherRegionsSubscriptionOfferPhasePrices (..),
     newOtherRegionsSubscriptionOfferPhasePrices,
@@ -388,9 +680,17 @@ module Gogol.AndroidPublisher.Types
     PageInfo (..),
     newPageInfo,
 
+    -- ** PartialRefund
+    PartialRefund (..),
+    newPartialRefund,
+
     -- ** PausedStateContext
     PausedStateContext (..),
     newPausedStateContext,
+
+    -- ** PendingCancellation
+    PendingCancellation (..),
+    newPendingCancellation,
 
     -- ** PrepaidBasePlanType
     PrepaidBasePlanType (..),
@@ -415,6 +715,17 @@ module Gogol.AndroidPublisher.Types
     ProductPurchasesAcknowledgeRequest (..),
     newProductPurchasesAcknowledgeRequest,
 
+    -- ** RecurringExternalTransaction
+    RecurringExternalTransaction (..),
+    newRecurringExternalTransaction,
+
+    -- ** RecurringExternalTransaction_MigratedTransactionProgram
+    RecurringExternalTransaction_MigratedTransactionProgram (..),
+
+    -- ** RefundExternalTransactionRequest
+    RefundExternalTransactionRequest (..),
+    newRefundExternalTransactionRequest,
+
     -- ** RegionalBasePlanConfig
     RegionalBasePlanConfig (..),
     newRegionalBasePlanConfig,
@@ -423,6 +734,9 @@ module Gogol.AndroidPublisher.Types
     RegionalPriceMigrationConfig (..),
     newRegionalPriceMigrationConfig,
 
+    -- ** RegionalPriceMigrationConfig_PriceIncreaseType
+    RegionalPriceMigrationConfig_PriceIncreaseType (..),
+
     -- ** RegionalSubscriptionOfferConfig
     RegionalSubscriptionOfferConfig (..),
     newRegionalSubscriptionOfferConfig,
@@ -430,6 +744,10 @@ module Gogol.AndroidPublisher.Types
     -- ** RegionalSubscriptionOfferPhaseConfig
     RegionalSubscriptionOfferPhaseConfig (..),
     newRegionalSubscriptionOfferPhaseConfig,
+
+    -- ** RegionalSubscriptionOfferPhaseFreePriceOverride
+    RegionalSubscriptionOfferPhaseFreePriceOverride (..),
+    newRegionalSubscriptionOfferPhaseFreePriceOverride,
 
     -- ** RegionalTaxRateInfo
     RegionalTaxRateInfo (..),
@@ -441,13 +759,33 @@ module Gogol.AndroidPublisher.Types
     -- ** RegionalTaxRateInfo_TaxTier
     RegionalTaxRateInfo_TaxTier (..),
 
+    -- ** Regions
+    Regions (..),
+    newRegions,
+
     -- ** RegionsVersion
     RegionsVersion (..),
     newRegionsVersion,
 
+    -- ** RemoteInAppUpdate
+    RemoteInAppUpdate (..),
+    newRemoteInAppUpdate,
+
+    -- ** RemoteInAppUpdateData
+    RemoteInAppUpdateData (..),
+    newRemoteInAppUpdateData,
+
+    -- ** RemoteInAppUpdateDataPerBundle
+    RemoteInAppUpdateDataPerBundle (..),
+    newRemoteInAppUpdateDataPerBundle,
+
     -- ** ReplacementCancellation
     ReplacementCancellation (..),
     newReplacementCancellation,
+
+    -- ** RestrictedPaymentCountries
+    RestrictedPaymentCountries (..),
+    newRestrictedPaymentCountries,
 
     -- ** Review
     Review (..),
@@ -468,6 +806,69 @@ module Gogol.AndroidPublisher.Types
     -- ** ReviewsReplyResponse
     ReviewsReplyResponse (..),
     newReviewsReplyResponse,
+
+    -- ** RevocationContext
+    RevocationContext (..),
+    newRevocationContext,
+
+    -- ** RevocationContextFullRefund
+    RevocationContextFullRefund (..),
+    newRevocationContextFullRefund,
+
+    -- ** RevocationContextProratedRefund
+    RevocationContextProratedRefund (..),
+    newRevocationContextProratedRefund,
+
+    -- ** RevokeSubscriptionPurchaseRequest
+    RevokeSubscriptionPurchaseRequest (..),
+    newRevokeSubscriptionPurchaseRequest,
+
+    -- ** RevokeSubscriptionPurchaseResponse
+    RevokeSubscriptionPurchaseResponse (..),
+    newRevokeSubscriptionPurchaseResponse,
+
+    -- ** SafetyLabelsUpdateRequest
+    SafetyLabelsUpdateRequest (..),
+    newSafetyLabelsUpdateRequest,
+
+    -- ** SafetyLabelsUpdateResponse
+    SafetyLabelsUpdateResponse (..),
+    newSafetyLabelsUpdateResponse,
+
+    -- ** ScreenDensity
+    ScreenDensity (..),
+    newScreenDensity,
+
+    -- ** ScreenDensity_DensityAlias
+    ScreenDensity_DensityAlias (..),
+
+    -- ** ScreenDensityTargeting
+    ScreenDensityTargeting (..),
+    newScreenDensityTargeting,
+
+    -- ** SdkVersion
+    SdkVersion (..),
+    newSdkVersion,
+
+    -- ** SdkVersionTargeting
+    SdkVersionTargeting (..),
+    newSdkVersionTargeting,
+
+    -- ** SignupPromotion
+    SignupPromotion (..),
+    newSignupPromotion,
+
+    -- ** SplitApkMetadata
+    SplitApkMetadata (..),
+    newSplitApkMetadata,
+
+    -- ** SplitApkVariant
+    SplitApkVariant (..),
+    newSplitApkVariant,
+
+    -- ** StandaloneApkMetadata
+    StandaloneApkMetadata (..),
+    newStandaloneApkMetadata,
 
     -- ** SubscribeWithGoogleInfo
     SubscribeWithGoogleInfo (..),
@@ -559,6 +960,10 @@ module Gogol.AndroidPublisher.Types
     SubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode (..),
     newSubscriptionTaxAndComplianceSettings_TaxRateInfoByRegionCode,
 
+    -- ** SystemApkOptions
+    SystemApkOptions (..),
+    newSystemApkOptions,
+
     -- ** SystemApksListResponse
     SystemApksListResponse (..),
     newSystemApksListResponse,
@@ -571,9 +976,33 @@ module Gogol.AndroidPublisher.Types
     SystemInitiatedCancellation (..),
     newSystemInitiatedCancellation,
 
+    -- ** SystemOnChip
+    SystemOnChip (..),
+    newSystemOnChip,
+
+    -- ** Targeting
+    Targeting (..),
+    newTargeting,
+
+    -- ** TargetingInfo
+    TargetingInfo (..),
+    newTargetingInfo,
+
     -- ** TargetingRuleScope
     TargetingRuleScope (..),
     newTargetingRuleScope,
+
+    -- ** TargetingRuleScopeAnySubscriptionInApp
+    TargetingRuleScopeAnySubscriptionInApp (..),
+    newTargetingRuleScopeAnySubscriptionInApp,
+
+    -- ** TargetingRuleScopeThisSubscription
+    TargetingRuleScopeThisSubscription (..),
+    newTargetingRuleScopeThisSubscription,
+
+    -- ** TargetingUpdate
+    TargetingUpdate (..),
+    newTargetingUpdate,
 
     -- ** TestPurchase
     TestPurchase (..),
@@ -582,6 +1011,17 @@ module Gogol.AndroidPublisher.Types
     -- ** Testers
     Testers (..),
     newTesters,
+
+    -- ** TextureCompressionFormat
+    TextureCompressionFormat (..),
+    newTextureCompressionFormat,
+
+    -- ** TextureCompressionFormat_Alias
+    TextureCompressionFormat_Alias (..),
+
+    -- ** TextureCompressionFormatTargeting
+    TextureCompressionFormatTargeting (..),
+    newTextureCompressionFormatTargeting,
 
     -- ** Timestamp
     Timestamp (..),
@@ -594,6 +1034,16 @@ module Gogol.AndroidPublisher.Types
     -- ** Track
     Track (..),
     newTrack,
+
+    -- ** TrackConfig
+    TrackConfig (..),
+    newTrackConfig,
+
+    -- ** TrackConfig_FormFactor
+    TrackConfig_FormFactor (..),
+
+    -- ** TrackConfig_Type
+    TrackConfig_Type (..),
 
     -- ** TrackCountryAvailability
     TrackCountryAvailability (..),
@@ -614,6 +1064,28 @@ module Gogol.AndroidPublisher.Types
     TracksListResponse (..),
     newTracksListResponse,
 
+    -- ** UpdateBasePlanStateRequest
+    UpdateBasePlanStateRequest (..),
+    newUpdateBasePlanStateRequest,
+
+    -- ** UpdateSubscriptionOfferRequest
+    UpdateSubscriptionOfferRequest (..),
+    newUpdateSubscriptionOfferRequest,
+
+    -- ** UpdateSubscriptionOfferRequest_LatencyTolerance
+    UpdateSubscriptionOfferRequest_LatencyTolerance (..),
+
+    -- ** UpdateSubscriptionOfferStateRequest
+    UpdateSubscriptionOfferStateRequest (..),
+    newUpdateSubscriptionOfferStateRequest,
+
+    -- ** UpdateSubscriptionRequest
+    UpdateSubscriptionRequest (..),
+    newUpdateSubscriptionRequest,
+
+    -- ** UpdateSubscriptionRequest_LatencyTolerance
+    UpdateSubscriptionRequest_LatencyTolerance (..),
+
     -- ** UpgradeTargetingRule
     UpgradeTargetingRule (..),
     newUpgradeTargetingRule,
@@ -632,6 +1104,10 @@ module Gogol.AndroidPublisher.Types
     UserComment (..),
     newUserComment,
 
+    -- ** UserCountriesTargeting
+    UserCountriesTargeting (..),
+    newUserCountriesTargeting,
+
     -- ** UserCountrySet
     UserCountrySet (..),
     newUserCountrySet,
@@ -644,9 +1120,17 @@ module Gogol.AndroidPublisher.Types
     UsesPermission (..),
     newUsesPermission,
 
+    -- ** VanityCode
+    VanityCode (..),
+    newVanityCode,
+
     -- ** Variant
     Variant (..),
     newVariant,
+
+    -- ** VariantTargeting
+    VariantTargeting (..),
+    newVariantTargeting,
 
     -- ** VoidedPurchase
     VoidedPurchase (..),
@@ -682,12 +1166,27 @@ module Gogol.AndroidPublisher.Types
 
     -- ** EditsImagesUploadImageType
     EditsImagesUploadImageType (..),
+
+    -- ** InappproductsDeleteLatencyTolerance
+    InappproductsDeleteLatencyTolerance (..),
+
+    -- ** InappproductsPatchLatencyTolerance
+    InappproductsPatchLatencyTolerance (..),
+
+    -- ** InappproductsUpdateLatencyTolerance
+    InappproductsUpdateLatencyTolerance (..),
+
+    -- ** MonetizationSubscriptionsBasePlansOffersPatchLatencyTolerance
+    MonetizationSubscriptionsBasePlansOffersPatchLatencyTolerance (..),
+
+    -- ** MonetizationSubscriptionsPatchLatencyTolerance
+    MonetizationSubscriptionsPatchLatencyTolerance (..),
   )
 where
 
 import Gogol.AndroidPublisher.Internal.Product
 import Gogol.AndroidPublisher.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Default request referring to version @v3@ of the Google Play Android Developer API. This contains the host and root path used as a starting point for constructing service requests.
 androidPublisherService :: Core.ServiceConfig
@@ -697,4 +1196,5 @@ androidPublisherService =
     "androidpublisher.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-type Androidpublisher'FullControl = "https://www.googleapis.com/auth/androidpublisher"
+type Androidpublisher'FullControl =
+  "https://www.googleapis.com/auth/androidpublisher"

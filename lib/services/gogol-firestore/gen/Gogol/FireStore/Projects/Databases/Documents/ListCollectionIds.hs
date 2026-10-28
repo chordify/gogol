@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.Documents.ListCollectionIds
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.FireStore.Projects.Databases.Documents.ListCollectionIds
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.documents.listCollectionIds@ method which the
 -- 'FireStoreProjectsDatabasesDocumentsListCollectionIds' request conforms to.
 type FireStoreProjectsDatabasesDocumentsListCollectionIdsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "parent"
-              "listCollectionIds"
-              Core.Text
+    Core.:> Core.CaptureMode "parent" "listCollectionIds" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -87,28 +82,29 @@ newFireStoreProjectsDatabasesDocumentsListCollectionIds ::
   -- |  Multipart request metadata. See 'payload'.
   ListCollectionIdsRequest ->
   FireStoreProjectsDatabasesDocumentsListCollectionIds
-newFireStoreProjectsDatabasesDocumentsListCollectionIds parent payload =
-  FireStoreProjectsDatabasesDocumentsListCollectionIds
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newFireStoreProjectsDatabasesDocumentsListCollectionIds
+  parent
+  payload =
+    FireStoreProjectsDatabasesDocumentsListCollectionIds
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesDocumentsListCollectionIds
   where
   type
-    Rs
-      FireStoreProjectsDatabasesDocumentsListCollectionIds =
+    Rs FireStoreProjectsDatabasesDocumentsListCollectionIds =
       ListCollectionIdsResponse
   type
-    Scopes
-      FireStoreProjectsDatabasesDocumentsListCollectionIds =
+    Scopes FireStoreProjectsDatabasesDocumentsListCollectionIds =
       '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesDocumentsListCollectionIds {..} =

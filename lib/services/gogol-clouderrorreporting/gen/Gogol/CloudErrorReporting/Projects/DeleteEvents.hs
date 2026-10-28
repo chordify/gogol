@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudErrorReporting.Projects.DeleteEvents
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudErrorReporting.Projects.DeleteEvents
 where
 
 import Gogol.CloudErrorReporting.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouderrorreporting.projects.deleteEvents@ method which the
 -- 'CloudErrorReportingProjectsDeleteEvents' request conforms to.
@@ -66,7 +64,7 @@ data CloudErrorReportingProjectsDeleteEvents = CloudErrorReportingProjectsDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID>. Example: @projects\/my-project-123@.
+    -- | Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectID}\/locations\/{location}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID> and @{location}@ is a Cloud region. Examples: @projects\/my-project-123@, @projects\/my-project-123\/locations\/global@. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified.
     projectName :: Core.Text,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -77,7 +75,7 @@ data CloudErrorReportingProjectsDeleteEvents = CloudErrorReportingProjectsDelete
 
 -- | Creates a value of 'CloudErrorReportingProjectsDeleteEvents' with the minimum fields required to make a request.
 newCloudErrorReportingProjectsDeleteEvents ::
-  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID>. Example: @projects\/my-project-123@. See 'projectName'.
+  -- |  Required. The resource name of the Google Cloud Platform project. Written as @projects\/{projectID}@ or @projects\/{projectID}\/locations\/{location}@, where @{projectID}@ is the <https://support.google.com/cloud/answer/6158840 Google Cloud Platform project ID> and @{location}@ is a Cloud region. Examples: @projects\/my-project-123@, @projects\/my-project-123\/locations\/global@. For a list of supported locations, see <https://cloud.google.com/logging/docs/region-support Supported Regions>. @global@ is the default when unspecified. See 'projectName'.
   Core.Text ->
   CloudErrorReportingProjectsDeleteEvents
 newCloudErrorReportingProjectsDeleteEvents projectName =
@@ -90,32 +88,27 @@ newCloudErrorReportingProjectsDeleteEvents projectName =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    CloudErrorReportingProjectsDeleteEvents
-  where
+instance Core.GoogleRequest CloudErrorReportingProjectsDeleteEvents where
   type
     Rs CloudErrorReportingProjectsDeleteEvents =
       DeleteEventsResponse
   type
     Scopes CloudErrorReportingProjectsDeleteEvents =
       '[CloudPlatform'FullControl]
-  requestClient
-    CloudErrorReportingProjectsDeleteEvents {..} =
-      go
-        projectName
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudErrorReportingService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudErrorReportingProjectsDeleteEventsResource
-            )
-            Core.mempty
+  requestClient CloudErrorReportingProjectsDeleteEvents {..} =
+    go
+      projectName
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudErrorReportingService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudErrorReportingProjectsDeleteEventsResource
+          )
+          Core.mempty

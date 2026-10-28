@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Language.Documents.AnalyzeEntities
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.
+-- Finds named entities (currently proper names and common nouns) in the text along with entity types, probability, mentions for each entity, and other properties.
 --
 -- /See:/ <https://cloud.google.com/natural-language/ Cloud Natural Language API Reference> for @language.documents.analyzeEntities@.
 module Gogol.Language.Documents.AnalyzeEntities
@@ -40,12 +38,12 @@ module Gogol.Language.Documents.AnalyzeEntities
 where
 
 import Gogol.Language.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @language.documents.analyzeEntities@ method which the
 -- 'LanguageDocumentsAnalyzeEntities' request conforms to.
 type LanguageDocumentsAnalyzeEntitiesResource =
-  "v1"
+  "v2"
     Core.:> "documents:analyzeEntities"
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
@@ -56,7 +54,7 @@ type LanguageDocumentsAnalyzeEntitiesResource =
     Core.:> Core.ReqBody '[Core.JSON] AnalyzeEntitiesRequest
     Core.:> Core.Post '[Core.JSON] AnalyzeEntitiesResponse
 
--- | Finds named entities (currently proper names and common nouns) in the text along with entity types, salience, mentions for each entity, and other properties.
+-- | Finds named entities (currently proper names and common nouns) in the text along with entity types, probability, mentions for each entity, and other properties.
 --
 -- /See:/ 'newLanguageDocumentsAnalyzeEntities' smart constructor.
 data LanguageDocumentsAnalyzeEntities = LanguageDocumentsAnalyzeEntities
@@ -90,18 +88,11 @@ newLanguageDocumentsAnalyzeEntities payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LanguageDocumentsAnalyzeEntities
-  where
-  type
-    Rs LanguageDocumentsAnalyzeEntities =
-      AnalyzeEntitiesResponse
+instance Core.GoogleRequest LanguageDocumentsAnalyzeEntities where
+  type Rs LanguageDocumentsAnalyzeEntities = AnalyzeEntitiesResponse
   type
     Scopes LanguageDocumentsAnalyzeEntities =
-      '[ CloudLanguage'FullControl,
-         CloudPlatform'FullControl
-       ]
+      '[CloudLanguage'FullControl, CloudPlatform'FullControl]
   requestClient LanguageDocumentsAnalyzeEntities {..} =
     go
       xgafv
@@ -115,7 +106,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy LanguageDocumentsAnalyzeEntitiesResource
-          )
+          (Core.Proxy :: Core.Proxy LanguageDocumentsAnalyzeEntitiesResource)
           Core.mempty

@@ -34,11 +34,11 @@ module Gogol.Auth.Scope
 where
 
 import Data.ByteString (ByteString)
-import qualified Data.ByteString.Char8 as BS8
+import Data.ByteString.Char8 qualified as BS8
 import Data.Coerce (coerce)
 import Data.Text (Text)
-import qualified Data.Text as Text
-import qualified Data.Text.Encoding as Text
+import Data.Text qualified as Text
+import Data.Text.Encoding qualified as Text
 import Data.Type.Bool (type If, type (||))
 import Data.Typeable (Proxy (..))
 import GHC.Exts (Constraint)
@@ -156,7 +156,7 @@ instance (KnownSymbol x, KnownScopes xs) => KnownScopes (x ': xs) where
     where
       scope = OAuthScope . Text.pack . symbolVal
 
-instance KnownScopes s => KnownScopes (Credentials s) where
+instance (KnownScopes s) => KnownScopes (Credentials s) where
   scopeVals _ = scopeVals (Proxy :: Proxy s)
 
 -- | Concatenate a list of scopes using spaces.

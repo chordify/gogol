@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Gets breakpoint information.
 --
--- /See:/ <https://cloud.google.com/debugger Cloud Debugger API Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
+-- /See:/ <https://cloud.google.com/debugger Cloud Debugger API (Deprecated) Reference> for @clouddebugger.debugger.debuggees.breakpoints.get@.
 module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
   ( -- * Resource
     ClouddebuggerDebuggerDebuggeesBreakpointsGetResource,
@@ -40,7 +38,7 @@ module Gogol.Debugger.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
 where
 
 import Gogol.Debugger.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @clouddebugger.debugger.debuggees.breakpoints.get@ method which the
 -- 'ClouddebuggerDebuggerDebuggeesBreakpointsGet' request conforms to.
@@ -90,17 +88,20 @@ newClouddebuggerDebuggerDebuggeesBreakpointsGet ::
   -- |  Required. ID of the debuggee whose breakpoint to get. See 'debuggeeId'.
   Core.Text ->
   ClouddebuggerDebuggerDebuggeesBreakpointsGet
-newClouddebuggerDebuggerDebuggeesBreakpointsGet breakpointId debuggeeId =
-  ClouddebuggerDebuggerDebuggeesBreakpointsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      breakpointId = breakpointId,
-      callback = Core.Nothing,
-      clientVersion = Core.Nothing,
-      debuggeeId = debuggeeId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newClouddebuggerDebuggerDebuggeesBreakpointsGet
+  breakpointId
+  debuggeeId =
+    ClouddebuggerDebuggerDebuggeesBreakpointsGet
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        breakpointId = breakpointId,
+        callback = Core.Nothing,
+        clientVersion = Core.Nothing,
+        debuggeeId = debuggeeId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -110,29 +111,24 @@ instance
     Rs ClouddebuggerDebuggerDebuggeesBreakpointsGet =
       GetBreakpointResponse
   type
-    Scopes
-      ClouddebuggerDebuggerDebuggeesBreakpointsGet =
-      '[ CloudPlatform'FullControl,
-         CloudDebugger'FullControl
-       ]
-  requestClient
-    ClouddebuggerDebuggerDebuggeesBreakpointsGet {..} =
-      go
-        debuggeeId
-        breakpointId
-        xgafv
-        accessToken
-        callback
-        clientVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        debuggerService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ClouddebuggerDebuggerDebuggeesBreakpointsGetResource
-            )
-            Core.mempty
+    Scopes ClouddebuggerDebuggerDebuggeesBreakpointsGet =
+      '[CloudPlatform'FullControl, CloudDebugger'FullControl]
+  requestClient ClouddebuggerDebuggerDebuggeesBreakpointsGet {..} =
+    go
+      debuggeeId
+      breakpointId
+      xgafv
+      accessToken
+      callback
+      clientVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      debuggerService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ClouddebuggerDebuggerDebuggeesBreakpointsGetResource
+          )
+          Core.mempty

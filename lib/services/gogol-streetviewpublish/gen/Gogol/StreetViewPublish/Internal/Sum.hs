@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.StreetViewPublish.Internal.Sum
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.StreetViewPublish.Internal.Sum
@@ -79,6 +77,8 @@ module Gogol.StreetViewPublish.Internal.Sum
         PhotoSequence_FailureReason_NOTOUTDOORS,
         PhotoSequence_FailureReason_INSUFFICIENTVIDEOFRAMES,
         PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT,
+        PhotoSequence_FailureReason_MASTDOWN,
+        PhotoSequence_FailureReason_CAMERACOVERED,
         ..
       ),
 
@@ -137,7 +137,7 @@ module Gogol.StreetViewPublish.Internal.Sum
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | V1 error format.
 newtype Xgafv = Xgafv {fromXgafv :: Core.Text}
@@ -360,6 +360,14 @@ pattern PhotoSequence_FailureReason_INSUFFICIENTVIDEOFRAMES = PhotoSequence_Fail
 pattern PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT :: PhotoSequence_FailureReason
 pattern PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT = PhotoSequence_FailureReason "INSUFFICIENT_MOVEMENT"
 
+-- | Mast is down.
+pattern PhotoSequence_FailureReason_MASTDOWN :: PhotoSequence_FailureReason
+pattern PhotoSequence_FailureReason_MASTDOWN = PhotoSequence_FailureReason "MAST_DOWN"
+
+-- | Camera is covered.
+pattern PhotoSequence_FailureReason_CAMERACOVERED :: PhotoSequence_FailureReason
+pattern PhotoSequence_FailureReason_CAMERACOVERED = PhotoSequence_FailureReason "CAMERA_COVERED"
+
 {-# COMPLETE
   PhotoSequence_FailureReason_PROCESSINGFAILUREREASONUNSPECIFIED,
   PhotoSequence_FailureReason_LOWRESOLUTION,
@@ -384,6 +392,8 @@ pattern PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT = PhotoSequence_Failure
   PhotoSequence_FailureReason_NOTOUTDOORS,
   PhotoSequence_FailureReason_INSUFFICIENTVIDEOFRAMES,
   PhotoSequence_FailureReason_INSUFFICIENTMOVEMENT,
+  PhotoSequence_FailureReason_MASTDOWN,
+  PhotoSequence_FailureReason_CAMERACOVERED,
   PhotoSequence_FailureReason
   #-}
 

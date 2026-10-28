@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Versions.CompareVersions
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.versions.compareVersions@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions' request conforms to.
 type DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersionsResource =
   "v3"
-    Core.:> Core.CaptureMode
-              "baseVersion"
-              "compareVersions"
-              Core.Text
+    Core.:> Core.CaptureMode "baseVersion" "compareVersions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -71,7 +66,7 @@ data DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions = DialogFlowP
     xgafv :: (Core.Maybe Xgafv),
     -- | OAuth access token.
     accessToken :: (Core.Maybe Core.Text),
-    -- | Required. Name of the base flow version to compare with the target version. Use version ID @0@ to indicate the draft version of the specified flow. Format: @projects\/\/locations\/\/agents\/ \/flows\/\/versions\/@.
+    -- | Required. Name of the base flow version to compare with the target version. Use version ID @0@ to indicate the draft version of the specified flow. Format: @projects\/\/locations\/\/agents\/\/flows\/\/versions\/@.
     baseVersion :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
@@ -86,21 +81,24 @@ data DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions = DialogFlowP
 
 -- | Creates a value of 'DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions' with the minimum fields required to make a request.
 newDialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions ::
-  -- |  Required. Name of the base flow version to compare with the target version. Use version ID @0@ to indicate the draft version of the specified flow. Format: @projects\/\/locations\/\/agents\/ \/flows\/\/versions\/@. See 'baseVersion'.
+  -- |  Required. Name of the base flow version to compare with the target version. Use version ID @0@ to indicate the draft version of the specified flow. Format: @projects\/\/locations\/\/agents\/\/flows\/\/versions\/@. See 'baseVersion'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   GoogleCloudDialogflowCxV3CompareVersionsRequest ->
   DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions
-newDialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions baseVersion payload =
-  DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      baseVersion = baseVersion,
-      callback = Core.Nothing,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newDialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions
+  baseVersion
+  payload =
+    DialogFlowProjectsLocationsAgentsFlowsVersionsCompareVersions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        baseVersion = baseVersion,
+        callback = Core.Nothing,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

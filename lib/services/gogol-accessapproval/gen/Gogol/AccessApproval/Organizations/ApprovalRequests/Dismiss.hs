@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- Dismisses a request. Returns the updated ApprovalRequest. NOTE: This does not deny access to the resource if another request has been made and approved. It is equivalent in effect to ignoring the request altogether. Returns NOT/FOUND if the request does not exist. Returns FAILED/PRECONDITION if the request exists but is not in a pending state.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.approvalRequests.dismiss@.
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference> for @accessapproval.organizations.approvalRequests.dismiss@.
 module Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
   ( -- * Resource
     AccessApprovalOrganizationsApprovalRequestsDismissResource,
@@ -40,7 +38,7 @@ module Gogol.AccessApproval.Organizations.ApprovalRequests.Dismiss
 where
 
 import Gogol.AccessApproval.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @accessapproval.organizations.approvalRequests.dismiss@ method which the
 -- 'AccessApprovalOrganizationsApprovalRequestsDismiss' request conforms to.
@@ -53,9 +51,7 @@ type AccessApprovalOrganizationsApprovalRequestsDismissResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              DismissApprovalRequestMessage
+    Core.:> Core.ReqBody '[Core.JSON] DismissApprovalRequestMessage
     Core.:> Core.Post '[Core.JSON] ApprovalRequest
 
 -- | Dismisses a request. Returns the updated ApprovalRequest. NOTE: This does not deny access to the resource if another request has been made and approved. It is equivalent in effect to ignoring the request altogether. Returns NOT/FOUND if the request does not exist. Returns FAILED/PRECONDITION if the request exists but is not in a pending state.
@@ -88,7 +84,8 @@ newAccessApprovalOrganizationsApprovalRequestsDismiss ::
   AccessApprovalOrganizationsApprovalRequestsDismiss
 newAccessApprovalOrganizationsApprovalRequestsDismiss name payload =
   AccessApprovalOrganizationsApprovalRequestsDismiss
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -102,12 +99,10 @@ instance
     AccessApprovalOrganizationsApprovalRequestsDismiss
   where
   type
-    Rs
-      AccessApprovalOrganizationsApprovalRequestsDismiss =
+    Rs AccessApprovalOrganizationsApprovalRequestsDismiss =
       ApprovalRequest
   type
-    Scopes
-      AccessApprovalOrganizationsApprovalRequestsDismiss =
+    Scopes AccessApprovalOrganizationsApprovalRequestsDismiss =
       '[CloudPlatform'FullControl]
   requestClient
     AccessApprovalOrganizationsApprovalRequestsDismiss {..} =

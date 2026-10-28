@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.DicomStores.Patch
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.dicomStores.patch@ method which the
 -- 'HealthcareProjectsLocationsDatasetsDicomStoresPatch' request conforms to.
@@ -67,11 +65,11 @@ data HealthcareProjectsLocationsDatasetsDicomStoresPatch = HealthcareProjectsLoc
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Identifier. Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: DicomStore,
-    -- | The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
+    -- | Required. The update mask applies to the resource. For the @FieldMask@ definition, see https:\/\/developers.google.com\/protocol-buffers\/docs\/reference\/google.protobuf#fieldmask
     updateMask :: (Core.Maybe Core.FieldMask),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -82,14 +80,15 @@ data HealthcareProjectsLocationsDatasetsDicomStoresPatch = HealthcareProjectsLoc
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsDicomStoresPatch' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsDicomStoresPatch ::
-  -- |  Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'name'.
+  -- |  Identifier. Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   DicomStore ->
   HealthcareProjectsLocationsDatasetsDicomStoresPatch
 newHealthcareProjectsLocationsDatasetsDicomStoresPatch name payload =
   HealthcareProjectsLocationsDatasetsDicomStoresPatch
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -104,13 +103,11 @@ instance
     HealthcareProjectsLocationsDatasetsDicomStoresPatch
   where
   type
-    Rs
-      HealthcareProjectsLocationsDatasetsDicomStoresPatch =
+    Rs HealthcareProjectsLocationsDatasetsDicomStoresPatch =
       DicomStore
   type
-    Scopes
-      HealthcareProjectsLocationsDatasetsDicomStoresPatch =
-      '[CloudPlatform'FullControl]
+    Scopes HealthcareProjectsLocationsDatasetsDicomStoresPatch =
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsDicomStoresPatch {..} =
       go

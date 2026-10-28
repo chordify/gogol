@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.List
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.list@ method which the
 -- 'FireStoreProjectsDatabasesList' request conforms to.
@@ -51,12 +49,11 @@ type FireStoreProjectsDatabasesListResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "showDeleted" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleFirestoreAdminV1ListDatabasesResponse
+    Core.:> Core.Get '[Core.JSON] GoogleFirestoreAdminV1ListDatabasesResponse
 
 -- | List all the databases in the project.
 --
@@ -70,6 +67,8 @@ data FireStoreProjectsDatabasesList = FireStoreProjectsDatabasesList
     callback :: (Core.Maybe Core.Text),
     -- | Required. A parent name of the form @projects\/{project_id}@
     parent :: Core.Text,
+    -- | If true, also returns deleted resources.
+    showDeleted :: (Core.Maybe Core.Bool),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
     -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -88,14 +87,12 @@ newFireStoreProjectsDatabasesList parent =
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
+      showDeleted = Core.Nothing,
       uploadType = Core.Nothing,
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    FireStoreProjectsDatabasesList
-  where
+instance Core.GoogleRequest FireStoreProjectsDatabasesList where
   type
     Rs FireStoreProjectsDatabasesList =
       GoogleFirestoreAdminV1ListDatabasesResponse
@@ -108,6 +105,7 @@ instance
       xgafv
       accessToken
       callback
+      showDeleted
       uploadType
       uploadProtocol
       (Core.Just Core.AltJSON)
@@ -115,7 +113,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FireStoreProjectsDatabasesListResource
-          )
+          (Core.Proxy :: Core.Proxy FireStoreProjectsDatabasesListResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.GetValidationResult
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.getValidationResult@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsGetValidationResult' request conforms to.
@@ -54,9 +52,7 @@ type DialogFlowProjectsLocationsAgentsFlowsGetValidationResultResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3FlowValidationResult
+    Core.:> Core.Get '[Core.JSON] GoogleCloudDialogflowCxV3FlowValidationResult
 
 -- | Gets the latest flow validation result. Flow validation is performed when ValidateFlow is called.
 --
@@ -86,7 +82,8 @@ newDialogFlowProjectsLocationsAgentsFlowsGetValidationResult ::
   DialogFlowProjectsLocationsAgentsFlowsGetValidationResult
 newDialogFlowProjectsLocationsAgentsFlowsGetValidationResult name =
   DialogFlowProjectsLocationsAgentsFlowsGetValidationResult
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       languageCode = Core.Nothing,
@@ -100,8 +97,7 @@ instance
     DialogFlowProjectsLocationsAgentsFlowsGetValidationResult
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsFlowsGetValidationResult =
+    Rs DialogFlowProjectsLocationsAgentsFlowsGetValidationResult =
       GoogleCloudDialogflowCxV3FlowValidationResult
   type
     Scopes

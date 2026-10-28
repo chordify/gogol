@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.List
 where
 
 import Gogol.DoubleClickBids.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclickbidmanager.queries.list@ method which the
 -- 'DoubleclickbidmanagerQueriesList' request conforms to.
@@ -68,11 +66,11 @@ data DoubleclickbidmanagerQueriesList = DoubleclickbidmanagerQueriesList
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Name of a field used to order results. The default sorting order is ascending. To specify descending order for a field, append a \" desc\" suffix. For example \"metadata.title desc\". Sorting is only supported for the following fields: * @queryId@ * @metadata.title@
+    -- | Field to sort the list by. Accepts the following values: * @queryId@ (default) * @metadata.title@ The default sorting order is ascending. To specify descending order for a field, add the suffix @desc@ to the field name. For example, @queryId desc@.
     orderBy :: (Core.Maybe Core.Text),
     -- | Maximum number of results per page. Must be between @1@ and @100@. Defaults to @100@ if unspecified.
     pageSize :: (Core.Maybe Core.Int32),
-    -- | A page token, received from a previous list call. Provide this to retrieve the subsequent page of queries.
+    -- | A token identifying which page of results the server should return. Typically, this is the value of nextPageToken, returned from the previous call to the @queries.list@ method. If unspecified, the first page of results is returned.
     pageToken :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -96,13 +94,8 @@ newDoubleclickbidmanagerQueriesList =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DoubleclickbidmanagerQueriesList
-  where
-  type
-    Rs DoubleclickbidmanagerQueriesList =
-      ListQueriesResponse
+instance Core.GoogleRequest DoubleclickbidmanagerQueriesList where
+  type Rs DoubleclickbidmanagerQueriesList = ListQueriesResponse
   type
     Scopes DoubleclickbidmanagerQueriesList =
       '[Doubleclickbidmanager'FullControl]
@@ -121,7 +114,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DoubleclickbidmanagerQueriesListResource
-          )
+          (Core.Proxy :: Core.Proxy DoubleclickbidmanagerQueriesListResource)
           Core.mempty

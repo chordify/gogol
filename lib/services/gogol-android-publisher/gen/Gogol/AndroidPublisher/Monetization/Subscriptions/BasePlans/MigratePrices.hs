@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Migrates subscribers who are receiving an historical subscription price to the currently-offered price for the specified region. Requests will cause price change notifications to be sent to users who are currently receiving an historical price older than the supplied timestamp. Subscribers who do not agree to the new price will have their subscription ended at the next renewal.
+-- Migrates subscribers from one or more legacy price cohorts to the current price. Requests result in Google Play notifying affected subscribers. Only up to 250 simultaneous legacy price cohorts are supported.
 --
 -- /See:/ <https://developers.google.com/android-publisher Google Play Android Developer API Reference> for @androidpublisher.monetization.subscriptions.basePlans.migratePrices@.
 module Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
@@ -40,7 +38,7 @@ module Gogol.AndroidPublisher.Monetization.Subscriptions.BasePlans.MigratePrices
 where
 
 import Gogol.AndroidPublisher.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidpublisher.monetization.subscriptions.basePlans.migratePrices@ method which the
 -- 'AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices' request conforms to.
@@ -52,24 +50,17 @@ type AndroidPublisherMonetizationSubscriptionsBasePlansMigratePricesResource =
     Core.:> "subscriptions"
     Core.:> Core.Capture "productId" Core.Text
     Core.:> "basePlans"
-    Core.:> Core.CaptureMode
-              "basePlanId"
-              "migratePrices"
-              Core.Text
+    Core.:> Core.CaptureMode "basePlanId" "migratePrices" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              MigrateBasePlanPricesRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              MigrateBasePlanPricesResponse
+    Core.:> Core.ReqBody '[Core.JSON] MigrateBasePlanPricesRequest
+    Core.:> Core.Post '[Core.JSON] MigrateBasePlanPricesResponse
 
--- | Migrates subscribers who are receiving an historical subscription price to the currently-offered price for the specified region. Requests will cause price change notifications to be sent to users who are currently receiving an historical price older than the supplied timestamp. Subscribers who do not agree to the new price will have their subscription ended at the next renewal.
+-- | Migrates subscribers from one or more legacy price cohorts to the current price. Requests result in Google Play notifying affected subscribers. Only up to 250 simultaneous legacy price cohorts are supported.
 --
 -- /See:/ 'newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices' smart constructor.
 data AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices = AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
@@ -105,18 +96,23 @@ newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices ::
   -- |  Required. The ID of the subscription to update. Must be equal to the product_id field on the Subscription resource. See 'productId'.
   Core.Text ->
   AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
-newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices basePlanId packageName payload productId =
-  AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      basePlanId = basePlanId,
-      callback = Core.Nothing,
-      packageName = packageName,
-      payload = payload,
-      productId = productId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
+  basePlanId
+  packageName
+  payload
+  productId =
+    AndroidPublisherMonetizationSubscriptionsBasePlansMigratePrices
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        basePlanId = basePlanId,
+        callback = Core.Nothing,
+        packageName = packageName,
+        payload = payload,
+        productId = productId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest

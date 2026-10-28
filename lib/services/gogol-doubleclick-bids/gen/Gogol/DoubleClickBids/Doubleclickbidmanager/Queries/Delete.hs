@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a query as well as the associated reports.
+-- Deletes an existing query as well as its generated reports.
 --
 -- /See:/ <https://developers.google.com/bid-manager/ DoubleClick Bid Manager API Reference> for @doubleclickbidmanager.queries.delete@.
 module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
@@ -40,7 +38,7 @@ module Gogol.DoubleClickBids.Doubleclickbidmanager.Queries.Delete
 where
 
 import Gogol.DoubleClickBids.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @doubleclickbidmanager.queries.delete@ method which the
 -- 'DoubleclickbidmanagerQueriesDelete' request conforms to.
@@ -56,7 +54,7 @@ type DoubleclickbidmanagerQueriesDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
--- | Deletes a query as well as the associated reports.
+-- | Deletes an existing query as well as its generated reports.
 --
 -- /See:/ 'newDoubleclickbidmanagerQueriesDelete' smart constructor.
 data DoubleclickbidmanagerQueriesDelete = DoubleclickbidmanagerQueriesDelete
@@ -66,7 +64,7 @@ data DoubleclickbidmanagerQueriesDelete = DoubleclickbidmanagerQueriesDelete
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. ID of query to delete.
+    -- | Required. The ID of the query to delete.
     queryId :: Core.Int64,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -77,7 +75,7 @@ data DoubleclickbidmanagerQueriesDelete = DoubleclickbidmanagerQueriesDelete
 
 -- | Creates a value of 'DoubleclickbidmanagerQueriesDelete' with the minimum fields required to make a request.
 newDoubleclickbidmanagerQueriesDelete ::
-  -- |  Required. ID of query to delete. See 'queryId'.
+  -- |  Required. The ID of the query to delete. See 'queryId'.
   Core.Int64 ->
   DoubleclickbidmanagerQueriesDelete
 newDoubleclickbidmanagerQueriesDelete queryId =
@@ -90,10 +88,7 @@ newDoubleclickbidmanagerQueriesDelete queryId =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DoubleclickbidmanagerQueriesDelete
-  where
+instance Core.GoogleRequest DoubleclickbidmanagerQueriesDelete where
   type Rs DoubleclickbidmanagerQueriesDelete = ()
   type
     Scopes DoubleclickbidmanagerQueriesDelete =
@@ -112,7 +107,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                DoubleclickbidmanagerQueriesDeleteResource
+              Core.Proxy DoubleclickbidmanagerQueriesDeleteResource
           )
           Core.mempty

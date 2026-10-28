@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.People.SearchContacts
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.People.SearchContacts
 where
 
 import Gogol.People.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @people.people.searchContacts@ method which the
 -- 'PeoplePeopleSearchContacts' request conforms to.
@@ -53,9 +51,7 @@ type PeoplePeopleSearchContactsResource =
     Core.:> Core.QueryParam "pageSize" Core.Int32
     Core.:> Core.QueryParam "query" Core.Text
     Core.:> Core.QueryParam "readMask" Core.FieldMask
-    Core.:> Core.QueryParams
-              "sources"
-              PeopleSearchContactsSources
+    Core.:> Core.QueryParams "sources" PeopleSearchContactsSources
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -102,10 +98,7 @@ newPeoplePeopleSearchContacts =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    PeoplePeopleSearchContacts
-  where
+instance Core.GoogleRequest PeoplePeopleSearchContacts where
   type Rs PeoplePeopleSearchContacts = SearchResponse
   type
     Scopes PeoplePeopleSearchContacts =
@@ -126,7 +119,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy PeoplePeopleSearchContactsResource
-          )
+          (Core.Proxy :: Core.Proxy PeoplePeopleSearchContactsResource)
           Core.mempty

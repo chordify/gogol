@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Flows.Pages.List
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.flows.pages.list@ method which the
 -- 'DialogFlowProjectsLocationsAgentsFlowsPagesList' request conforms to.
@@ -57,9 +55,7 @@ type DialogFlowProjectsLocationsAgentsFlowsPagesListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3ListPagesResponse
+    Core.:> Core.Get '[Core.JSON] GoogleCloudDialogflowCxV3ListPagesResponse
 
 -- | Returns the list of all pages in the specified flow.
 --
@@ -93,7 +89,8 @@ newDialogFlowProjectsLocationsAgentsFlowsPagesList ::
   DialogFlowProjectsLocationsAgentsFlowsPagesList
 newDialogFlowProjectsLocationsAgentsFlowsPagesList parent =
   DialogFlowProjectsLocationsAgentsFlowsPagesList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       languageCode = Core.Nothing,
@@ -109,32 +106,28 @@ instance
     DialogFlowProjectsLocationsAgentsFlowsPagesList
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsFlowsPagesList =
+    Rs DialogFlowProjectsLocationsAgentsFlowsPagesList =
       GoogleCloudDialogflowCxV3ListPagesResponse
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsFlowsPagesList =
+    Scopes DialogFlowProjectsLocationsAgentsFlowsPagesList =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsFlowsPagesList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        languageCode
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsFlowsPagesListResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsFlowsPagesList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      languageCode
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsFlowsPagesListResource
+          )
+          Core.mempty

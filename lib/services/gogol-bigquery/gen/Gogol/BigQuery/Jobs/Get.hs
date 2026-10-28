@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BigQuery.Jobs.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.BigQuery.Jobs.Get
 where
 
 import Gogol.BigQuery.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @bigquery.jobs.get@ method which the
 -- 'BigQueryJobsGet' request conforms to.
@@ -51,7 +49,12 @@ type BigQueryJobsGetResource =
     Core.:> Core.Capture "projectId" Core.Text
     Core.:> "jobs"
     Core.:> Core.Capture "jobId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "location" Core.Text
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Job
 
@@ -59,27 +62,42 @@ type BigQueryJobsGetResource =
 --
 -- /See:/ 'newBigQueryJobsGet' smart constructor.
 data BigQueryJobsGet = BigQueryJobsGet
-  { -- | [Required] Job ID of the requested job
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Required. Job ID of the requested job.
     jobId :: Core.Text,
-    -- | The geographic location of the job. Required except for US and EU. See details at https:\/\/cloud.google.com\/bigquery\/docs\/locations#specifying/your/location.
+    -- | The geographic location of the job. You must specify the location to run the job for the following scenarios: * If the location to run a job is not in the @us@ or the @eu@ multi-regional location * If the job\'s location is in a single region (for example, @us-central1@) For more information, see how to <https://cloud.google.com/bigquery/docs/locations#specify_locations specify locations>.
     location :: (Core.Maybe Core.Text),
-    -- | [Required] Project ID of the requested job
-    projectId :: Core.Text
+    -- | Required. Project ID of the requested job.
+    projectId :: Core.Text,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'BigQueryJobsGet' with the minimum fields required to make a request.
 newBigQueryJobsGet ::
-  -- |  [Required] Job ID of the requested job See 'jobId'.
+  -- |  Required. Job ID of the requested job. See 'jobId'.
   Core.Text ->
-  -- |  [Required] Project ID of the requested job See 'projectId'.
+  -- |  Required. Project ID of the requested job. See 'projectId'.
   Core.Text ->
   BigQueryJobsGet
 newBigQueryJobsGet jobId projectId =
   BigQueryJobsGet
-    { jobId = jobId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      jobId = jobId,
       location = Core.Nothing,
-      projectId = projectId
+      projectId = projectId,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing
     }
 
 instance Core.GoogleRequest BigQueryJobsGet where
@@ -94,7 +112,12 @@ instance Core.GoogleRequest BigQueryJobsGet where
     go
       projectId
       jobId
+      xgafv
+      accessToken
+      callback
       location
+      uploadType
+      uploadProtocol
       (Core.Just Core.AltJSON)
       bigQueryService
     where

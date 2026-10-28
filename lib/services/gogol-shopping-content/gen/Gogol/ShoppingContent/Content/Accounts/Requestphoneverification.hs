@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Accounts.Requestphoneverification
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Accounts.Requestphoneverification
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.accounts.requestphoneverification@ method which the
@@ -57,12 +55,8 @@ type ContentAccountsRequestphoneverificationResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RequestPhoneVerificationRequest
-    Core.:> Core.Post
-              '[Core.JSON]
-              RequestPhoneVerificationResponse
+    Core.:> Core.ReqBody '[Core.JSON] RequestPhoneVerificationRequest
+    Core.:> Core.Post '[Core.JSON] RequestPhoneVerificationResponse
 
 -- | Request verification code to start phone verification.
 --
@@ -96,46 +90,44 @@ newContentAccountsRequestphoneverification ::
   -- |  Multipart request metadata. See 'payload'.
   RequestPhoneVerificationRequest ->
   ContentAccountsRequestphoneverification
-newContentAccountsRequestphoneverification accountId merchantId payload =
-  ContentAccountsRequestphoneverification
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      merchantId = merchantId,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newContentAccountsRequestphoneverification
+  accountId
+  merchantId
+  payload =
     ContentAccountsRequestphoneverification
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        merchantId = merchantId,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ContentAccountsRequestphoneverification where
   type
     Rs ContentAccountsRequestphoneverification =
       RequestPhoneVerificationResponse
   type
     Scopes ContentAccountsRequestphoneverification =
       '[Content'FullControl]
-  requestClient
-    ContentAccountsRequestphoneverification {..} =
-      go
-        merchantId
-        accountId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        shoppingContentService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContentAccountsRequestphoneverificationResource
-            )
-            Core.mempty
+  requestClient ContentAccountsRequestphoneverification {..} =
+    go
+      merchantId
+      accountId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      shoppingContentService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContentAccountsRequestphoneverificationResource
+          )
+          Core.mempty

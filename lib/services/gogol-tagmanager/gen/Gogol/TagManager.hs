@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.TagManager
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -399,6 +397,36 @@ module Gogol.TagManager
     TagManagerAccountsContainersWorkspacesTemplatesUpdate (..),
     newTagManagerAccountsContainersWorkspacesTemplatesUpdate,
 
+    -- ** tagmanager.accounts.containers.workspaces.transformations.create
+    TagManagerAccountsContainersWorkspacesTransformationsCreateResource,
+    TagManagerAccountsContainersWorkspacesTransformationsCreate (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsCreate,
+
+    -- ** tagmanager.accounts.containers.workspaces.transformations.delete
+    TagManagerAccountsContainersWorkspacesTransformationsDeleteResource,
+    TagManagerAccountsContainersWorkspacesTransformationsDelete (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsDelete,
+
+    -- ** tagmanager.accounts.containers.workspaces.transformations.get
+    TagManagerAccountsContainersWorkspacesTransformationsGetResource,
+    TagManagerAccountsContainersWorkspacesTransformationsGet (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsGet,
+
+    -- ** tagmanager.accounts.containers.workspaces.transformations.list
+    TagManagerAccountsContainersWorkspacesTransformationsListResource,
+    TagManagerAccountsContainersWorkspacesTransformationsList (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsList,
+
+    -- ** tagmanager.accounts.containers.workspaces.transformations.revert
+    TagManagerAccountsContainersWorkspacesTransformationsRevertResource,
+    TagManagerAccountsContainersWorkspacesTransformationsRevert (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsRevert,
+
+    -- ** tagmanager.accounts.containers.workspaces.transformations.update
+    TagManagerAccountsContainersWorkspacesTransformationsUpdateResource,
+    TagManagerAccountsContainersWorkspacesTransformationsUpdate (..),
+    newTagManagerAccountsContainersWorkspacesTransformationsUpdate,
+
     -- ** tagmanager.accounts.containers.workspaces.triggers.create
     TagManagerAccountsContainersWorkspacesTriggersCreateResource,
     TagManagerAccountsContainersWorkspacesTriggersCreate (..),
@@ -700,6 +728,10 @@ module Gogol.TagManager
     ListTemplatesResponse (..),
     newListTemplatesResponse,
 
+    -- ** ListTransformationsResponse
+    ListTransformationsResponse (..),
+    newListTransformationsResponse,
+
     -- ** ListTriggersResponse
     ListTriggersResponse (..),
     newListTriggersResponse,
@@ -759,6 +791,10 @@ module Gogol.TagManager
     RevertTemplateResponse (..),
     newRevertTemplateResponse,
 
+    -- ** RevertTransformationResponse
+    RevertTransformationResponse (..),
+    newRevertTransformationResponse,
+
     -- ** RevertTriggerResponse
     RevertTriggerResponse (..),
     newRevertTriggerResponse,
@@ -800,6 +836,10 @@ module Gogol.TagManager
     -- ** TeardownTag
     TeardownTag (..),
     newTeardownTag,
+
+    -- ** Transformation
+    Transformation (..),
+    newTransformation,
 
     -- ** Trigger
     Trigger (..),
@@ -928,6 +968,12 @@ import Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Get
 import Gogol.TagManager.Accounts.Containers.Workspaces.Templates.List
 import Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Revert
 import Gogol.TagManager.Accounts.Containers.Workspaces.Templates.Update
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.Create
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.Delete
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.Get
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.List
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.Revert
+import Gogol.TagManager.Accounts.Containers.Workspaces.Transformations.Update
 import Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Create
 import Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Delete
 import Gogol.TagManager.Accounts.Containers.Workspaces.Triggers.Get

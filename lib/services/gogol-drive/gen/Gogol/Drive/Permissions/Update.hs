@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.Drive.Permissions.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates a permission with patch semantics.
+-- Updates a permission with patch semantics. __Warning:__ Concurrent permissions operations on the same file are not supported; only the last update is applied.
 --
--- /See:/ <https://developers.google.com/drive/ Drive API Reference> for @drive.permissions.update@.
+-- /See:/ <https://developers.google.com/drive/ Google Drive API Reference> for @drive.permissions.update@.
 module Gogol.Drive.Permissions.Update
   ( -- * Resource
     DrivePermissionsUpdateResource,
@@ -40,7 +38,7 @@ module Gogol.Drive.Permissions.Update
 where
 
 import Gogol.Drive.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @drive.permissions.update@ method which the
 -- 'DrivePermissionsUpdate' request conforms to.
@@ -51,20 +49,34 @@ type DrivePermissionsUpdateResource =
     Core.:> Core.Capture "fileId" Core.Text
     Core.:> "permissions"
     Core.:> Core.Capture "permissionId" Core.Text
+    Core.:> Core.QueryParam "$.xgafv" Xgafv
+    Core.:> Core.QueryParam "access_token" Core.Text
+    Core.:> Core.QueryParam "callback" Core.Text
+    Core.:> Core.QueryParam "enforceExpansiveAccess" Core.Bool
     Core.:> Core.QueryParam "removeExpiration" Core.Bool
     Core.:> Core.QueryParam "supportsAllDrives" Core.Bool
     Core.:> Core.QueryParam "supportsTeamDrives" Core.Bool
     Core.:> Core.QueryParam "transferOwnership" Core.Bool
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "useDomainAdminAccess" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Permission
     Core.:> Core.Patch '[Core.JSON] Permission
 
--- | Updates a permission with patch semantics.
+-- | Updates a permission with patch semantics. __Warning:__ Concurrent permissions operations on the same file are not supported; only the last update is applied.
 --
 -- /See:/ 'newDrivePermissionsUpdate' smart constructor.
 data DrivePermissionsUpdate = DrivePermissionsUpdate
-  { -- | The ID of the file or shared drive.
+  { -- | V1 error format.
+    xgafv :: (Core.Maybe Xgafv),
+    -- | OAuth access token.
+    accessToken :: (Core.Maybe Core.Text),
+    -- | JSONP
+    callback :: (Core.Maybe Core.Text),
+    -- | Whether the request should enforce expansive access rules.
+    enforceExpansiveAccess :: Core.Bool,
+    -- | The ID of the file or shared drive.
     fileId :: Core.Text,
     -- | Multipart request metadata.
     payload :: Permission,
@@ -74,10 +86,14 @@ data DrivePermissionsUpdate = DrivePermissionsUpdate
     removeExpiration :: Core.Bool,
     -- | Whether the requesting application supports both My Drives and shared drives.
     supportsAllDrives :: Core.Bool,
-    -- | Deprecated use supportsAllDrives instead.
+    -- | Deprecated: Use @supportsAllDrives@ instead.
     supportsTeamDrives :: Core.Bool,
-    -- | Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
+    -- | Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.
     transferOwnership :: Core.Bool,
+    -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
+    uploadType :: (Core.Maybe Core.Text),
+    -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
+    uploadProtocol :: (Core.Maybe Core.Text),
     -- | Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
     useDomainAdminAccess :: Core.Bool
   }
@@ -94,13 +110,19 @@ newDrivePermissionsUpdate ::
   DrivePermissionsUpdate
 newDrivePermissionsUpdate fileId payload permissionId =
   DrivePermissionsUpdate
-    { fileId = fileId,
+    { xgafv = Core.Nothing,
+      accessToken = Core.Nothing,
+      callback = Core.Nothing,
+      enforceExpansiveAccess = Core.False,
+      fileId = fileId,
       payload = payload,
       permissionId = permissionId,
       removeExpiration = Core.False,
       supportsAllDrives = Core.False,
       supportsTeamDrives = Core.False,
       transferOwnership = Core.False,
+      uploadType = Core.Nothing,
+      uploadProtocol = Core.Nothing,
       useDomainAdminAccess = Core.False
     }
 
@@ -113,10 +135,16 @@ instance Core.GoogleRequest DrivePermissionsUpdate where
     go
       fileId
       permissionId
+      xgafv
+      accessToken
+      callback
+      (Core.Just enforceExpansiveAccess)
       (Core.Just removeExpiration)
       (Core.Just supportsAllDrives)
       (Core.Just supportsTeamDrives)
       (Core.Just transferOwnership)
+      uploadType
+      uploadProtocol
       (Core.Just useDomainAdminAccess)
       (Core.Just Core.AltJSON)
       payload
@@ -124,7 +152,5 @@ instance Core.GoogleRequest DrivePermissionsUpdate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DrivePermissionsUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy DrivePermissionsUpdateResource)
           Core.mempty

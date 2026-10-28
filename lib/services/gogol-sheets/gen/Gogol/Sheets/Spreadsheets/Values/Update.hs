@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Sheets.Spreadsheets.Values.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Sheets.Spreadsheets.Values.Update
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Sheets.Types
 
 -- | A resource alias for @sheets.spreadsheets.values.update@ method which the
@@ -125,19 +123,11 @@ newSheetsSpreadsheetsValuesUpdate payload range spreadsheetId =
       valueInputOption = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    SheetsSpreadsheetsValuesUpdate
-  where
-  type
-    Rs SheetsSpreadsheetsValuesUpdate =
-      UpdateValuesResponse
+instance Core.GoogleRequest SheetsSpreadsheetsValuesUpdate where
+  type Rs SheetsSpreadsheetsValuesUpdate = UpdateValuesResponse
   type
     Scopes SheetsSpreadsheetsValuesUpdate =
-      '[ Drive'FullControl,
-         Drive'File,
-         Spreadsheets'FullControl
-       ]
+      '[Drive'FullControl, Drive'File, Spreadsheets'FullControl]
   requestClient SheetsSpreadsheetsValuesUpdate {..} =
     go
       spreadsheetId
@@ -157,7 +147,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy SheetsSpreadsheetsValuesUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy SheetsSpreadsheetsValuesUpdateResource)
           Core.mempty

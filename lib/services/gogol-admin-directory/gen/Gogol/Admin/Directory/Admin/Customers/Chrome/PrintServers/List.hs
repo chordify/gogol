@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.List
 where
 
 import Gogol.Admin.Directory.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @admin.customers.chrome.printServers.list@ method which the
 -- 'AdminCustomersChromePrintServersList' request conforms to.
@@ -62,9 +60,7 @@ type AdminCustomersChromePrintServersListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListPrintServersResponse
+    Core.:> Core.Get '[Core.JSON] ListPrintServersResponse
 
 -- | Lists print server configurations.
 --
@@ -115,39 +111,32 @@ newAdminCustomersChromePrintServersList parent =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    AdminCustomersChromePrintServersList
-  where
+instance Core.GoogleRequest AdminCustomersChromePrintServersList where
   type
     Rs AdminCustomersChromePrintServersList =
       ListPrintServersResponse
   type
     Scopes AdminCustomersChromePrintServersList =
-      '[ Admin'Chrome'Printers,
-         Admin'Chrome'Printers'Readonly
-       ]
-  requestClient
-    AdminCustomersChromePrintServersList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        filter
-        orderBy
-        orgUnitId
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        adminDirectoryService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  AdminCustomersChromePrintServersListResource
-            )
-            Core.mempty
+      '[Admin'Chrome'Printers, Admin'Chrome'Printers'Readonly]
+  requestClient AdminCustomersChromePrintServersList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      filter
+      orderBy
+      orgUnitId
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      adminDirectoryService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy AdminCustomersChromePrintServersListResource
+          )
+          Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,24 @@
 
 -- |
 -- Module      : Gogol.Composer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Composer.Internal.Product
-  ( -- * AllowedIpRange
+  ( -- * AirflowMetadataRetentionPolicyConfig
+    AirflowMetadataRetentionPolicyConfig (..),
+    newAirflowMetadataRetentionPolicyConfig,
+
+    -- * AllowedIpRange
     AllowedIpRange (..),
     newAllowedIpRange,
+
+    -- * CheckUpgradeRequest
+    CheckUpgradeRequest (..),
+    newCheckUpgradeRequest,
 
     -- * CheckUpgradeResponse
     CheckUpgradeResponse (..),
@@ -42,9 +48,37 @@ module Gogol.Composer.Internal.Product
     CidrBlock (..),
     newCidrBlock,
 
+    -- * CloudDataLineageIntegration
+    CloudDataLineageIntegration (..),
+    newCloudDataLineageIntegration,
+
+    -- * ComposerWorkload
+    ComposerWorkload (..),
+    newComposerWorkload,
+
+    -- * ComposerWorkloadStatus
+    ComposerWorkloadStatus (..),
+    newComposerWorkloadStatus,
+
+    -- * DagProcessorResource
+    DagProcessorResource (..),
+    newDagProcessorResource,
+
+    -- * DataRetentionConfig
+    DataRetentionConfig (..),
+    newDataRetentionConfig,
+
     -- * DatabaseConfig
     DatabaseConfig (..),
     newDatabaseConfig,
+
+    -- * DatabaseFailoverRequest
+    DatabaseFailoverRequest (..),
+    newDatabaseFailoverRequest,
+
+    -- * DatabaseFailoverResponse
+    DatabaseFailoverResponse (..),
+    newDatabaseFailoverResponse,
 
     -- * Date
     Date (..),
@@ -70,6 +104,22 @@ module Gogol.Composer.Internal.Product
     EnvironmentConfig (..),
     newEnvironmentConfig,
 
+    -- * ExecuteAirflowCommandRequest
+    ExecuteAirflowCommandRequest (..),
+    newExecuteAirflowCommandRequest,
+
+    -- * ExecuteAirflowCommandResponse
+    ExecuteAirflowCommandResponse (..),
+    newExecuteAirflowCommandResponse,
+
+    -- * ExitInfo
+    ExitInfo (..),
+    newExitInfo,
+
+    -- * FetchDatabasePropertiesResponse
+    FetchDatabasePropertiesResponse (..),
+    newFetchDatabasePropertiesResponse,
+
     -- * IPAllocationPolicy
     IPAllocationPolicy (..),
     newIPAllocationPolicy,
@@ -77,6 +127,10 @@ module Gogol.Composer.Internal.Product
     -- * ImageVersion
     ImageVersion (..),
     newImageVersion,
+
+    -- * Line
+    Line (..),
+    newLine,
 
     -- * ListEnvironmentsResponse
     ListEnvironmentsResponse (..),
@@ -89,6 +143,18 @@ module Gogol.Composer.Internal.Product
     -- * ListOperationsResponse
     ListOperationsResponse (..),
     newListOperationsResponse,
+
+    -- * ListUserWorkloadsConfigMapsResponse
+    ListUserWorkloadsConfigMapsResponse (..),
+    newListUserWorkloadsConfigMapsResponse,
+
+    -- * ListUserWorkloadsSecretsResponse
+    ListUserWorkloadsSecretsResponse (..),
+    newListUserWorkloadsSecretsResponse,
+
+    -- * ListWorkloadsResponse
+    ListWorkloadsResponse (..),
+    newListWorkloadsResponse,
 
     -- * LoadSnapshotRequest
     LoadSnapshotRequest (..),
@@ -129,6 +195,14 @@ module Gogol.Composer.Internal.Product
     -- * OperationMetadata
     OperationMetadata (..),
     newOperationMetadata,
+
+    -- * PollAirflowCommandRequest
+    PollAirflowCommandRequest (..),
+    newPollAirflowCommandRequest,
+
+    -- * PollAirflowCommandResponse
+    PollAirflowCommandResponse (..),
+    newPollAirflowCommandResponse,
 
     -- * PrivateClusterConfig
     PrivateClusterConfig (..),
@@ -182,6 +256,42 @@ module Gogol.Composer.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * StopAirflowCommandRequest
+    StopAirflowCommandRequest (..),
+    newStopAirflowCommandRequest,
+
+    -- * StopAirflowCommandResponse
+    StopAirflowCommandResponse (..),
+    newStopAirflowCommandResponse,
+
+    -- * StorageConfig
+    StorageConfig (..),
+    newStorageConfig,
+
+    -- * TaskLogsRetentionConfig
+    TaskLogsRetentionConfig (..),
+    newTaskLogsRetentionConfig,
+
+    -- * TriggererResource
+    TriggererResource (..),
+    newTriggererResource,
+
+    -- * UserWorkloadsConfigMap
+    UserWorkloadsConfigMap (..),
+    newUserWorkloadsConfigMap,
+
+    -- * UserWorkloadsConfigMap_Data
+    UserWorkloadsConfigMap_Data (..),
+    newUserWorkloadsConfigMap_Data,
+
+    -- * UserWorkloadsSecret
+    UserWorkloadsSecret (..),
+    newUserWorkloadsSecret,
+
+    -- * UserWorkloadsSecret_Data
+    UserWorkloadsSecret_Data (..),
+    newUserWorkloadsSecret_Data,
+
     -- * WebServerConfig
     WebServerConfig (..),
     newWebServerConfig,
@@ -205,7 +315,47 @@ module Gogol.Composer.Internal.Product
 where
 
 import Gogol.Composer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | The policy for airflow metadata database retention.
+--
+-- /See:/ 'newAirflowMetadataRetentionPolicyConfig' smart constructor.
+data AirflowMetadataRetentionPolicyConfig = AirflowMetadataRetentionPolicyConfig
+  { -- | Optional. How many days data should be retained for.
+    retentionDays :: (Core.Maybe Core.Int32),
+    -- | Optional. Retention can be either enabled or disabled.
+    retentionMode :: (Core.Maybe AirflowMetadataRetentionPolicyConfig_RetentionMode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AirflowMetadataRetentionPolicyConfig' with the minimum fields required to make a request.
+newAirflowMetadataRetentionPolicyConfig ::
+  AirflowMetadataRetentionPolicyConfig
+newAirflowMetadataRetentionPolicyConfig =
+  AirflowMetadataRetentionPolicyConfig
+    { retentionDays =
+        Core.Nothing,
+      retentionMode = Core.Nothing
+    }
+
+instance Core.FromJSON AirflowMetadataRetentionPolicyConfig where
+  parseJSON =
+    Core.withObject
+      "AirflowMetadataRetentionPolicyConfig"
+      ( \o ->
+          AirflowMetadataRetentionPolicyConfig
+            Core.<$> (o Core..:? "retentionDays")
+            Core.<*> (o Core..:? "retentionMode")
+      )
+
+instance Core.ToJSON AirflowMetadataRetentionPolicyConfig where
+  toJSON AirflowMetadataRetentionPolicyConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("retentionDays" Core..=) Core.<$> retentionDays,
+            ("retentionMode" Core..=) Core.<$> retentionMode
+          ]
+      )
 
 -- | Allowed IP range with user-provided description.
 --
@@ -242,6 +392,33 @@ instance Core.ToJSON AllowedIpRange where
             ("value" Core..=) Core.<$> value
           ]
       )
+
+-- | Request to check whether image upgrade will succeed.
+--
+-- /See:/ 'newCheckUpgradeRequest' smart constructor.
+newtype CheckUpgradeRequest = CheckUpgradeRequest
+  { -- | Optional. The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression @composer-([0-9]+(\\.[0-9]+\\.[0-9]+(-preview\\.[0-9]+)?)?|latest)-airflow-([0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)@. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the image version is a full <https://semver.org semantic version>, or an alias in the form of major version number or @latest@. When an alias is provided, the server replaces it with the current Cloud Composer version that satisfies the alias. The Apache Airflow portion of the image version is a full semantic version that points to one of the supported Apache Airflow versions, or an alias in the form of only major or major.minor versions specified. When an alias is provided, the server replaces it with the latest Apache Airflow version that
+    -- satisfies the alias and is supported in the given Cloud Composer version. In all cases, the resolved image version is stored in the same field. See also </composer/docs/concepts/versioning/composer-versions version list> and </composer/docs/concepts/versioning/composer-versioning-overview versioning overview>.
+    imageVersion :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CheckUpgradeRequest' with the minimum fields required to make a request.
+newCheckUpgradeRequest ::
+  CheckUpgradeRequest
+newCheckUpgradeRequest =
+  CheckUpgradeRequest {imageVersion = Core.Nothing}
+
+instance Core.FromJSON CheckUpgradeRequest where
+  parseJSON =
+    Core.withObject
+      "CheckUpgradeRequest"
+      (\o -> CheckUpgradeRequest Core.<$> (o Core..:? "imageVersion"))
+
+instance Core.ToJSON CheckUpgradeRequest where
+  toJSON CheckUpgradeRequest {..} =
+    Core.object
+      (Core.catMaybes [("imageVersion" Core..=) Core.<$> imageVersion])
 
 -- | Message containing information about the result of an upgrade check operation.
 --
@@ -295,8 +472,7 @@ instance Core.ToJSON CheckUpgradeResponse where
             ("imageVersion" Core..=) Core.<$> imageVersion,
             ("pypiConflictBuildLogExtract" Core..=)
               Core.<$> pypiConflictBuildLogExtract,
-            ("pypiDependencies" Core..=)
-              Core.<$> pypiDependencies
+            ("pypiDependencies" Core..=) Core.<$> pypiDependencies
           ]
       )
 
@@ -304,8 +480,7 @@ instance Core.ToJSON CheckUpgradeResponse where
 --
 -- /See:/ 'newCheckUpgradeResponse_PypiDependencies' smart constructor.
 newtype CheckUpgradeResponse_PypiDependencies = CheckUpgradeResponse_PypiDependencies
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -317,10 +492,7 @@ newCheckUpgradeResponse_PypiDependencies ::
 newCheckUpgradeResponse_PypiDependencies additional =
   CheckUpgradeResponse_PypiDependencies {additional = additional}
 
-instance
-  Core.FromJSON
-    CheckUpgradeResponse_PypiDependencies
-  where
+instance Core.FromJSON CheckUpgradeResponse_PypiDependencies where
   parseJSON =
     Core.withObject
       "CheckUpgradeResponse_PypiDependencies"
@@ -329,10 +501,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    CheckUpgradeResponse_PypiDependencies
-  where
+instance Core.ToJSON CheckUpgradeResponse_PypiDependencies where
   toJSON CheckUpgradeResponse_PypiDependencies {..} =
     Core.toJSON additional
 
@@ -350,7 +519,8 @@ data CidrBlock = CidrBlock
 -- | Creates a value of 'CidrBlock' with the minimum fields required to make a request.
 newCidrBlock ::
   CidrBlock
-newCidrBlock = CidrBlock {cidrBlock = Core.Nothing, displayName = Core.Nothing}
+newCidrBlock =
+  CidrBlock {cidrBlock = Core.Nothing, displayName = Core.Nothing}
 
 instance Core.FromJSON CidrBlock where
   parseJSON =
@@ -371,34 +541,288 @@ instance Core.ToJSON CidrBlock where
           ]
       )
 
+-- | Configuration for Cloud Data Lineage integration.
+--
+-- /See:/ 'newCloudDataLineageIntegration' smart constructor.
+newtype CloudDataLineageIntegration = CloudDataLineageIntegration
+  { -- | Optional. Whether or not Cloud Data Lineage integration is enabled.
+    enabled :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'CloudDataLineageIntegration' with the minimum fields required to make a request.
+newCloudDataLineageIntegration ::
+  CloudDataLineageIntegration
+newCloudDataLineageIntegration =
+  CloudDataLineageIntegration {enabled = Core.Nothing}
+
+instance Core.FromJSON CloudDataLineageIntegration where
+  parseJSON =
+    Core.withObject
+      "CloudDataLineageIntegration"
+      ( \o ->
+          CloudDataLineageIntegration Core.<$> (o Core..:? "enabled")
+      )
+
+instance Core.ToJSON CloudDataLineageIntegration where
+  toJSON CloudDataLineageIntegration {..} =
+    Core.object
+      (Core.catMaybes [("enabled" Core..=) Core.<$> enabled])
+
+-- | Information about a single workload.
+--
+-- /See:/ 'newComposerWorkload' smart constructor.
+data ComposerWorkload = ComposerWorkload
+  { -- | Name of a workload.
+    name :: (Core.Maybe Core.Text),
+    -- | Output only. Status of a workload.
+    status :: (Core.Maybe ComposerWorkloadStatus),
+    -- | Type of a workload.
+    type' :: (Core.Maybe ComposerWorkload_Type)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ComposerWorkload' with the minimum fields required to make a request.
+newComposerWorkload ::
+  ComposerWorkload
+newComposerWorkload =
+  ComposerWorkload
+    { name = Core.Nothing,
+      status = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON ComposerWorkload where
+  parseJSON =
+    Core.withObject
+      "ComposerWorkload"
+      ( \o ->
+          ComposerWorkload
+            Core.<$> (o Core..:? "name")
+            Core.<*> (o Core..:? "status")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON ComposerWorkload where
+  toJSON ComposerWorkload {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("name" Core..=) Core.<$> name,
+            ("status" Core..=) Core.<$> status,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Workload status.
+--
+-- /See:/ 'newComposerWorkloadStatus' smart constructor.
+data ComposerWorkloadStatus = ComposerWorkloadStatus
+  { -- | Output only. Detailed message of the status.
+    detailedStatusMessage :: (Core.Maybe Core.Text),
+    -- | Output only. Workload state.
+    state :: (Core.Maybe ComposerWorkloadStatus_State),
+    -- | Output only. Text to provide more descriptive status.
+    statusMessage :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ComposerWorkloadStatus' with the minimum fields required to make a request.
+newComposerWorkloadStatus ::
+  ComposerWorkloadStatus
+newComposerWorkloadStatus =
+  ComposerWorkloadStatus
+    { detailedStatusMessage = Core.Nothing,
+      state = Core.Nothing,
+      statusMessage = Core.Nothing
+    }
+
+instance Core.FromJSON ComposerWorkloadStatus where
+  parseJSON =
+    Core.withObject
+      "ComposerWorkloadStatus"
+      ( \o ->
+          ComposerWorkloadStatus
+            Core.<$> (o Core..:? "detailedStatusMessage")
+            Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "statusMessage")
+      )
+
+instance Core.ToJSON ComposerWorkloadStatus where
+  toJSON ComposerWorkloadStatus {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("detailedStatusMessage" Core..=) Core.<$> detailedStatusMessage,
+            ("state" Core..=) Core.<$> state,
+            ("statusMessage" Core..=) Core.<$> statusMessage
+          ]
+      )
+
+-- | Configuration for resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+--
+-- /See:/ 'newDagProcessorResource' smart constructor.
+data DagProcessorResource = DagProcessorResource
+  { -- | Optional. The number of DAG processors. If not provided or set to 0, a single DAG processor instance will be created.
+    count :: (Core.Maybe Core.Int32),
+    -- | Optional. CPU request and limit for a single Airflow DAG processor replica.
+    cpu :: (Core.Maybe Core.Double),
+    -- | Optional. Memory (GB) request and limit for a single Airflow DAG processor replica.
+    memoryGb :: (Core.Maybe Core.Double),
+    -- | Optional. Storage (GB) request and limit for a single Airflow DAG processor replica.
+    storageGb :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DagProcessorResource' with the minimum fields required to make a request.
+newDagProcessorResource ::
+  DagProcessorResource
+newDagProcessorResource =
+  DagProcessorResource
+    { count = Core.Nothing,
+      cpu = Core.Nothing,
+      memoryGb = Core.Nothing,
+      storageGb = Core.Nothing
+    }
+
+instance Core.FromJSON DagProcessorResource where
+  parseJSON =
+    Core.withObject
+      "DagProcessorResource"
+      ( \o ->
+          DagProcessorResource
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "cpu")
+            Core.<*> (o Core..:? "memoryGb")
+            Core.<*> (o Core..:? "storageGb")
+      )
+
+instance Core.ToJSON DagProcessorResource where
+  toJSON DagProcessorResource {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("count" Core..=) Core.<$> count,
+            ("cpu" Core..=) Core.<$> cpu,
+            ("memoryGb" Core..=) Core.<$> memoryGb,
+            ("storageGb" Core..=) Core.<$> storageGb
+          ]
+      )
+
+-- | The configuration setting for Airflow database data retention mechanism.
+--
+-- /See:/ 'newDataRetentionConfig' smart constructor.
+data DataRetentionConfig = DataRetentionConfig
+  { -- | Optional. The retention policy for airflow metadata database.
+    airflowMetadataRetentionConfig :: (Core.Maybe AirflowMetadataRetentionPolicyConfig),
+    -- | Optional. The configuration settings for task logs retention
+    taskLogsRetentionConfig :: (Core.Maybe TaskLogsRetentionConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DataRetentionConfig' with the minimum fields required to make a request.
+newDataRetentionConfig ::
+  DataRetentionConfig
+newDataRetentionConfig =
+  DataRetentionConfig
+    { airflowMetadataRetentionConfig =
+        Core.Nothing,
+      taskLogsRetentionConfig = Core.Nothing
+    }
+
+instance Core.FromJSON DataRetentionConfig where
+  parseJSON =
+    Core.withObject
+      "DataRetentionConfig"
+      ( \o ->
+          DataRetentionConfig
+            Core.<$> (o Core..:? "airflowMetadataRetentionConfig")
+            Core.<*> (o Core..:? "taskLogsRetentionConfig")
+      )
+
+instance Core.ToJSON DataRetentionConfig where
+  toJSON DataRetentionConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("airflowMetadataRetentionConfig" Core..=)
+              Core.<$> airflowMetadataRetentionConfig,
+            ("taskLogsRetentionConfig" Core..=)
+              Core.<$> taskLogsRetentionConfig
+          ]
+      )
+
 -- | The configuration of Cloud SQL instance that is used by the Apache Airflow software.
 --
 -- /See:/ 'newDatabaseConfig' smart constructor.
-newtype DatabaseConfig = DatabaseConfig
+data DatabaseConfig = DatabaseConfig
   { -- | Optional. Cloud SQL machine type used by Airflow database. It has to be one of: db-n1-standard-2, db-n1-standard-4, db-n1-standard-8 or db-n1-standard-16. If not specified, db-n1-standard-2 will be used. Supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
-    machineType :: (Core.Maybe Core.Text)
+    machineType :: (Core.Maybe Core.Text),
+    -- | Optional. The Compute Engine zone where the Airflow database is created. If zone is provided, it must be in the region selected for the environment. If zone is not provided, a zone is automatically selected. The zone can only be set during environment creation. Supported for Cloud Composer environments in versions composer-2././-airflow-/./.*.
+    zone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'DatabaseConfig' with the minimum fields required to make a request.
 newDatabaseConfig ::
   DatabaseConfig
-newDatabaseConfig = DatabaseConfig {machineType = Core.Nothing}
+newDatabaseConfig =
+  DatabaseConfig {machineType = Core.Nothing, zone = Core.Nothing}
 
 instance Core.FromJSON DatabaseConfig where
   parseJSON =
     Core.withObject
       "DatabaseConfig"
       ( \o ->
-          DatabaseConfig Core.<$> (o Core..:? "machineType")
+          DatabaseConfig
+            Core.<$> (o Core..:? "machineType")
+            Core.<*> (o Core..:? "zone")
       )
 
 instance Core.ToJSON DatabaseConfig where
   toJSON DatabaseConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("machineType" Core..=) Core.<$> machineType]
+          [ ("machineType" Core..=) Core.<$> machineType,
+            ("zone" Core..=) Core.<$> zone
+          ]
       )
+
+-- | Request to trigger database failover (only for highly resilient environments).
+--
+-- /See:/ 'newDatabaseFailoverRequest' smart constructor.
+data DatabaseFailoverRequest = DatabaseFailoverRequest
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DatabaseFailoverRequest' with the minimum fields required to make a request.
+newDatabaseFailoverRequest ::
+  DatabaseFailoverRequest
+newDatabaseFailoverRequest = DatabaseFailoverRequest
+
+instance Core.FromJSON DatabaseFailoverRequest where
+  parseJSON =
+    Core.withObject
+      "DatabaseFailoverRequest"
+      (\o -> Core.pure DatabaseFailoverRequest)
+
+instance Core.ToJSON DatabaseFailoverRequest where
+  toJSON = Core.const Core.emptyObject
+
+-- | Response for DatabaseFailoverRequest.
+--
+-- /See:/ 'newDatabaseFailoverResponse' smart constructor.
+data DatabaseFailoverResponse = DatabaseFailoverResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DatabaseFailoverResponse' with the minimum fields required to make a request.
+newDatabaseFailoverResponse ::
+  DatabaseFailoverResponse
+newDatabaseFailoverResponse = DatabaseFailoverResponse
+
+instance Core.FromJSON DatabaseFailoverResponse where
+  parseJSON =
+    Core.withObject
+      "DatabaseFailoverResponse"
+      (\o -> Core.pure DatabaseFailoverResponse)
+
+instance Core.ToJSON DatabaseFailoverResponse where
+  toJSON = Core.const Core.emptyObject
 
 -- | Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp
 --
@@ -416,7 +840,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -451,8 +880,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -475,31 +903,33 @@ instance Core.FromJSON EncryptionConfig where
   parseJSON =
     Core.withObject
       "EncryptionConfig"
-      ( \o ->
-          EncryptionConfig Core.<$> (o Core..:? "kmsKeyName")
-      )
+      (\o -> EncryptionConfig Core.<$> (o Core..:? "kmsKeyName"))
 
 instance Core.ToJSON EncryptionConfig where
   toJSON EncryptionConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("kmsKeyName" Core..=) Core.<$> kmsKeyName]
-      )
+      (Core.catMaybes [("kmsKeyName" Core..=) Core.<$> kmsKeyName])
 
 -- | An environment for running orchestration tasks.
 --
 -- /See:/ 'newEnvironment' smart constructor.
 data Environment = Environment
-  { -- | Configuration parameters for this environment.
+  { -- | Optional. Configuration parameters for this environment.
     config :: (Core.Maybe EnvironmentConfig),
     -- | Output only. The time at which this environment was created.
     createTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-defined labels for this environment. The labels map can contain no more than 64 entries. Entries of the labels map are UTF8 strings that comply with the following restrictions: * Keys must conform to regexp: \\p{Ll}\\p{Lo}{0,62} * Values must conform to regexp: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} * Both keys and values are additionally constrained to be \<= 128 bytes in size.
     labels :: (Core.Maybe Environment_Labels),
-    -- | The resource name of the environment, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" EnvironmentId must start with a lowercase letter followed by up to 63 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+    -- | Identifier. The resource name of the environment, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\" EnvironmentId must start with a lowercase letter followed by up to 63 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
     name :: (Core.Maybe Core.Text),
+    -- | Output only. Reserved for future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. Reserved for future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
     -- | The current state of the environment.
     state :: (Core.Maybe Environment_State),
+    -- | Optional. Storage configuration for this environment.
+    storageConfig :: (Core.Maybe StorageConfig),
     -- | Output only. The time at which this environment was last modified.
     updateTime :: (Core.Maybe Core.DateTime),
     -- | Output only. The UUID (Universally Unique IDentifier) associated with this environment. This value is generated when the environment is created.
@@ -516,7 +946,10 @@ newEnvironment =
       createTime = Core.Nothing,
       labels = Core.Nothing,
       name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
       state = Core.Nothing,
+      storageConfig = Core.Nothing,
       updateTime = Core.Nothing,
       uuid = Core.Nothing
     }
@@ -531,7 +964,10 @@ instance Core.FromJSON Environment where
             Core.<*> (o Core..:? "createTime")
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
             Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "storageConfig")
             Core.<*> (o Core..:? "updateTime")
             Core.<*> (o Core..:? "uuid")
       )
@@ -544,7 +980,10 @@ instance Core.ToJSON Environment where
             ("createTime" Core..=) Core.<$> createTime,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("state" Core..=) Core.<$> state,
+            ("storageConfig" Core..=) Core.<$> storageConfig,
             ("updateTime" Core..=) Core.<$> updateTime,
             ("uuid" Core..=) Core.<$> uuid
           ]
@@ -554,8 +993,7 @@ instance Core.ToJSON Environment where
 --
 -- /See:/ 'newEnvironment_Labels' smart constructor.
 newtype Environment_Labels = Environment_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -564,19 +1002,17 @@ newEnvironment_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Environment_Labels
-newEnvironment_Labels additional = Environment_Labels {additional = additional}
+newEnvironment_Labels additional =
+  Environment_Labels {additional = additional}
 
 instance Core.FromJSON Environment_Labels where
   parseJSON =
     Core.withObject
       "Environment_Labels"
-      ( \o ->
-          Environment_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Environment_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Environment_Labels where
-  toJSON Environment_Labels {..} =
-    Core.toJSON additional
+  toJSON Environment_Labels {..} = Core.toJSON additional
 
 -- | Configuration information for an environment.
 --
@@ -588,6 +1024,8 @@ data EnvironmentConfig = EnvironmentConfig
     airflowUri :: (Core.Maybe Core.Text),
     -- | Output only. The Cloud Storage prefix of the DAGs for this environment. Although Cloud Storage objects reside in a flat namespace, a hierarchical file tree can be simulated using \"\/\"-delimited object name prefixes. DAG objects for this environment reside in a simulated directory with the given prefix.
     dagGcsPrefix :: (Core.Maybe Core.Text),
+    -- | Optional. The configuration setting for Airflow database data retention mechanism.
+    dataRetentionConfig :: (Core.Maybe DataRetentionConfig),
     -- | Optional. The configuration settings for Cloud SQL instance used internally by Apache Airflow software.
     databaseConfig :: (Core.Maybe DatabaseConfig),
     -- | Optional. The encryption options for the Cloud Composer environment and its dependencies. Cannot be updated.
@@ -596,19 +1034,21 @@ data EnvironmentConfig = EnvironmentConfig
     environmentSize :: (Core.Maybe EnvironmentConfig_EnvironmentSize),
     -- | Output only. The Kubernetes Engine cluster used to run this environment.
     gkeCluster :: (Core.Maybe Core.Text),
-    -- | Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, the default value for maintenance window will be applied. The default value is Saturday and Sunday 00-06 GMT.
+    -- | Optional. The maintenance window is the period when Cloud Composer components may undergo maintenance. It is defined so that maintenance is not executed during peak hours or critical time periods. The system will not be under maintenance for every occurrence of this window, but when maintenance is planned, it will be scheduled during the window. The maintenance window period must encompass at least 12 hours per week. This may be split into multiple chunks, each with a size of at least 4 hours. If this value is omitted, the default value for maintenance window is applied. By default, maintenance windows are from 00:00:00 to 04:00:00 (GMT) on Friday, Saturday, and Sunday every week.
     maintenanceWindow :: (Core.Maybe MaintenanceWindow),
     -- | Optional. The configuration options for GKE cluster master authorized networks. By default master authorized networks feature is: - in case of private environment: enabled with no external networks allowlisted. - in case of public environment: disabled.
     masterAuthorizedNetworksConfig :: (Core.Maybe MasterAuthorizedNetworksConfig),
-    -- | The configuration used for the Kubernetes Engine cluster.
+    -- | Optional. The configuration used for the Kubernetes Engine cluster.
     nodeConfig :: (Core.Maybe NodeConfig),
     -- | The number of nodes in the Kubernetes Engine cluster that will be used to run this environment. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     nodeCount :: (Core.Maybe Core.Int32),
-    -- | The configuration used for the Private IP Cloud Composer environment.
+    -- | Optional. The configuration used for the Private IP Cloud Composer environment.
     privateEnvironmentConfig :: (Core.Maybe PrivateEnvironmentConfig),
     -- | Optional. The Recovery settings configuration of an environment. This field is supported for Cloud Composer environments in versions composer-2././-airflow-/./.* and newer.
     recoveryConfig :: (Core.Maybe RecoveryConfig),
-    -- | The configuration settings for software inside the environment.
+    -- | Optional. Resilience mode of the Cloud Composer Environment. This field is supported for Cloud Composer environments in versions composer-2.2.0-airflow-/./.* and newer.
+    resilienceMode :: (Core.Maybe EnvironmentConfig_ResilienceMode),
+    -- | Optional. The configuration settings for software inside the environment.
     softwareConfig :: (Core.Maybe SoftwareConfig),
     -- | Optional. The configuration settings for the Airflow web server App Engine instance.
     webServerConfig :: (Core.Maybe WebServerConfig),
@@ -627,6 +1067,7 @@ newEnvironmentConfig =
     { airflowByoidUri = Core.Nothing,
       airflowUri = Core.Nothing,
       dagGcsPrefix = Core.Nothing,
+      dataRetentionConfig = Core.Nothing,
       databaseConfig = Core.Nothing,
       encryptionConfig = Core.Nothing,
       environmentSize = Core.Nothing,
@@ -637,6 +1078,7 @@ newEnvironmentConfig =
       nodeCount = Core.Nothing,
       privateEnvironmentConfig = Core.Nothing,
       recoveryConfig = Core.Nothing,
+      resilienceMode = Core.Nothing,
       softwareConfig = Core.Nothing,
       webServerConfig = Core.Nothing,
       webServerNetworkAccessControl = Core.Nothing,
@@ -652,6 +1094,7 @@ instance Core.FromJSON EnvironmentConfig where
             Core.<$> (o Core..:? "airflowByoidUri")
             Core.<*> (o Core..:? "airflowUri")
             Core.<*> (o Core..:? "dagGcsPrefix")
+            Core.<*> (o Core..:? "dataRetentionConfig")
             Core.<*> (o Core..:? "databaseConfig")
             Core.<*> (o Core..:? "encryptionConfig")
             Core.<*> (o Core..:? "environmentSize")
@@ -662,6 +1105,7 @@ instance Core.FromJSON EnvironmentConfig where
             Core.<*> (o Core..:? "nodeCount")
             Core.<*> (o Core..:? "privateEnvironmentConfig")
             Core.<*> (o Core..:? "recoveryConfig")
+            Core.<*> (o Core..:? "resilienceMode")
             Core.<*> (o Core..:? "softwareConfig")
             Core.<*> (o Core..:? "webServerConfig")
             Core.<*> (o Core..:? "webServerNetworkAccessControl")
@@ -672,17 +1116,15 @@ instance Core.ToJSON EnvironmentConfig where
   toJSON EnvironmentConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("airflowByoidUri" Core..=)
-              Core.<$> airflowByoidUri,
+          [ ("airflowByoidUri" Core..=) Core.<$> airflowByoidUri,
             ("airflowUri" Core..=) Core.<$> airflowUri,
             ("dagGcsPrefix" Core..=) Core.<$> dagGcsPrefix,
+            ("dataRetentionConfig" Core..=) Core.<$> dataRetentionConfig,
             ("databaseConfig" Core..=) Core.<$> databaseConfig,
-            ("encryptionConfig" Core..=)
-              Core.<$> encryptionConfig,
+            ("encryptionConfig" Core..=) Core.<$> encryptionConfig,
             ("environmentSize" Core..=) Core.<$> environmentSize,
             ("gkeCluster" Core..=) Core.<$> gkeCluster,
-            ("maintenanceWindow" Core..=)
-              Core.<$> maintenanceWindow,
+            ("maintenanceWindow" Core..=) Core.<$> maintenanceWindow,
             ("masterAuthorizedNetworksConfig" Core..=)
               Core.<$> masterAuthorizedNetworksConfig,
             ("nodeConfig" Core..=) Core.<$> nodeConfig,
@@ -690,12 +1132,187 @@ instance Core.ToJSON EnvironmentConfig where
             ("privateEnvironmentConfig" Core..=)
               Core.<$> privateEnvironmentConfig,
             ("recoveryConfig" Core..=) Core.<$> recoveryConfig,
+            ("resilienceMode" Core..=) Core.<$> resilienceMode,
             ("softwareConfig" Core..=) Core.<$> softwareConfig,
             ("webServerConfig" Core..=) Core.<$> webServerConfig,
             ("webServerNetworkAccessControl" Core..=)
               Core.<$> webServerNetworkAccessControl,
-            ("workloadsConfig" Core..=)
-              Core.<$> workloadsConfig
+            ("workloadsConfig" Core..=) Core.<$> workloadsConfig
+          ]
+      )
+
+-- | Execute Airflow Command request.
+--
+-- /See:/ 'newExecuteAirflowCommandRequest' smart constructor.
+data ExecuteAirflowCommandRequest = ExecuteAirflowCommandRequest
+  { -- | Airflow command.
+    command :: (Core.Maybe Core.Text),
+    -- | Parameters for the Airflow command\/subcommand as an array of arguments. It may contain positional arguments like @[\"my-dag-id\"]@, key-value parameters like @[\"--foo=bar\"]@ or @[\"--foo\",\"bar\"]@, or other flags like @[\"-f\"]@.
+    parameters :: (Core.Maybe [Core.Text]),
+    -- | Airflow subcommand.
+    subcommand :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExecuteAirflowCommandRequest' with the minimum fields required to make a request.
+newExecuteAirflowCommandRequest ::
+  ExecuteAirflowCommandRequest
+newExecuteAirflowCommandRequest =
+  ExecuteAirflowCommandRequest
+    { command = Core.Nothing,
+      parameters = Core.Nothing,
+      subcommand = Core.Nothing
+    }
+
+instance Core.FromJSON ExecuteAirflowCommandRequest where
+  parseJSON =
+    Core.withObject
+      "ExecuteAirflowCommandRequest"
+      ( \o ->
+          ExecuteAirflowCommandRequest
+            Core.<$> (o Core..:? "command")
+            Core.<*> (o Core..:? "parameters")
+            Core.<*> (o Core..:? "subcommand")
+      )
+
+instance Core.ToJSON ExecuteAirflowCommandRequest where
+  toJSON ExecuteAirflowCommandRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("command" Core..=) Core.<$> command,
+            ("parameters" Core..=) Core.<$> parameters,
+            ("subcommand" Core..=) Core.<$> subcommand
+          ]
+      )
+
+-- | Response to ExecuteAirflowCommandRequest.
+--
+-- /See:/ 'newExecuteAirflowCommandResponse' smart constructor.
+data ExecuteAirflowCommandResponse = ExecuteAirflowCommandResponse
+  { -- | Error message. Empty if there was no error.
+    error :: (Core.Maybe Core.Text),
+    -- | The unique ID of the command execution for polling.
+    executionId :: (Core.Maybe Core.Text),
+    -- | The name of the pod where the command is executed.
+    pod :: (Core.Maybe Core.Text),
+    -- | The namespace of the pod where the command is executed.
+    podNamespace :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExecuteAirflowCommandResponse' with the minimum fields required to make a request.
+newExecuteAirflowCommandResponse ::
+  ExecuteAirflowCommandResponse
+newExecuteAirflowCommandResponse =
+  ExecuteAirflowCommandResponse
+    { error = Core.Nothing,
+      executionId = Core.Nothing,
+      pod = Core.Nothing,
+      podNamespace = Core.Nothing
+    }
+
+instance Core.FromJSON ExecuteAirflowCommandResponse where
+  parseJSON =
+    Core.withObject
+      "ExecuteAirflowCommandResponse"
+      ( \o ->
+          ExecuteAirflowCommandResponse
+            Core.<$> (o Core..:? "error")
+            Core.<*> (o Core..:? "executionId")
+            Core.<*> (o Core..:? "pod")
+            Core.<*> (o Core..:? "podNamespace")
+      )
+
+instance Core.ToJSON ExecuteAirflowCommandResponse where
+  toJSON ExecuteAirflowCommandResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("executionId" Core..=) Core.<$> executionId,
+            ("pod" Core..=) Core.<$> pod,
+            ("podNamespace" Core..=) Core.<$> podNamespace
+          ]
+      )
+
+-- | Information about how a command ended.
+--
+-- /See:/ 'newExitInfo' smart constructor.
+data ExitInfo = ExitInfo
+  { -- | Error message. Empty if there was no error.
+    error :: (Core.Maybe Core.Text),
+    -- | The exit code from the command execution.
+    exitCode :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExitInfo' with the minimum fields required to make a request.
+newExitInfo ::
+  ExitInfo
+newExitInfo =
+  ExitInfo {error = Core.Nothing, exitCode = Core.Nothing}
+
+instance Core.FromJSON ExitInfo where
+  parseJSON =
+    Core.withObject
+      "ExitInfo"
+      ( \o ->
+          ExitInfo
+            Core.<$> (o Core..:? "error")
+            Core.<*> (o Core..:? "exitCode")
+      )
+
+instance Core.ToJSON ExitInfo where
+  toJSON ExitInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("error" Core..=) Core.<$> error,
+            ("exitCode" Core..=) Core.<$> exitCode
+          ]
+      )
+
+-- | Response for FetchDatabasePropertiesRequest.
+--
+-- /See:/ 'newFetchDatabasePropertiesResponse' smart constructor.
+data FetchDatabasePropertiesResponse = FetchDatabasePropertiesResponse
+  { -- | The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only fail over to the failover replica when the status is true.
+    isFailoverReplicaAvailable :: (Core.Maybe Core.Bool),
+    -- | The Compute Engine zone that the instance is currently serving from.
+    primaryGceZone :: (Core.Maybe Core.Text),
+    -- | The Compute Engine zone that the failover instance is currently serving from for a regional Cloud SQL instance.
+    secondaryGceZone :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FetchDatabasePropertiesResponse' with the minimum fields required to make a request.
+newFetchDatabasePropertiesResponse ::
+  FetchDatabasePropertiesResponse
+newFetchDatabasePropertiesResponse =
+  FetchDatabasePropertiesResponse
+    { isFailoverReplicaAvailable =
+        Core.Nothing,
+      primaryGceZone = Core.Nothing,
+      secondaryGceZone = Core.Nothing
+    }
+
+instance Core.FromJSON FetchDatabasePropertiesResponse where
+  parseJSON =
+    Core.withObject
+      "FetchDatabasePropertiesResponse"
+      ( \o ->
+          FetchDatabasePropertiesResponse
+            Core.<$> (o Core..:? "isFailoverReplicaAvailable")
+            Core.<*> (o Core..:? "primaryGceZone")
+            Core.<*> (o Core..:? "secondaryGceZone")
+      )
+
+instance Core.ToJSON FetchDatabasePropertiesResponse where
+  toJSON FetchDatabasePropertiesResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isFailoverReplicaAvailable" Core..=)
+              Core.<$> isFailoverReplicaAvailable,
+            ("primaryGceZone" Core..=) Core.<$> primaryGceZone,
+            ("secondaryGceZone" Core..=) Core.<$> secondaryGceZone
           ]
       )
 
@@ -745,12 +1362,10 @@ instance Core.ToJSON IPAllocationPolicy where
   toJSON IPAllocationPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("clusterIpv4CidrBlock" Core..=)
-              Core.<$> clusterIpv4CidrBlock,
+          [ ("clusterIpv4CidrBlock" Core..=) Core.<$> clusterIpv4CidrBlock,
             ("clusterSecondaryRangeName" Core..=)
               Core.<$> clusterSecondaryRangeName,
-            ("servicesIpv4CidrBlock" Core..=)
-              Core.<$> servicesIpv4CidrBlock,
+            ("servicesIpv4CidrBlock" Core..=) Core.<$> servicesIpv4CidrBlock,
             ("servicesSecondaryRangeName" Core..=)
               Core.<$> servicesSecondaryRangeName,
             ("useIpAliases" Core..=) Core.<$> useIpAliases
@@ -807,15 +1422,48 @@ instance Core.ToJSON ImageVersion where
   toJSON ImageVersion {..} =
     Core.object
       ( Core.catMaybes
-          [ ("creationDisabled" Core..=)
-              Core.<$> creationDisabled,
+          [ ("creationDisabled" Core..=) Core.<$> creationDisabled,
             ("imageVersionId" Core..=) Core.<$> imageVersionId,
             ("isDefault" Core..=) Core.<$> isDefault,
             ("releaseDate" Core..=) Core.<$> releaseDate,
             ("supportedPythonVersions" Core..=)
               Core.<$> supportedPythonVersions,
-            ("upgradeDisabled" Core..=)
-              Core.<$> upgradeDisabled
+            ("upgradeDisabled" Core..=) Core.<$> upgradeDisabled
+          ]
+      )
+
+-- | Contains information about a single line from logs.
+--
+-- /See:/ 'newLine' smart constructor.
+data Line = Line
+  { -- | Text content of the log line.
+    content :: (Core.Maybe Core.Text),
+    -- | Number of the line.
+    lineNumber :: (Core.Maybe Core.Int32)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Line' with the minimum fields required to make a request.
+newLine ::
+  Line
+newLine = Line {content = Core.Nothing, lineNumber = Core.Nothing}
+
+instance Core.FromJSON Line where
+  parseJSON =
+    Core.withObject
+      "Line"
+      ( \o ->
+          Line
+            Core.<$> (o Core..:? "content")
+            Core.<*> (o Core..:? "lineNumber")
+      )
+
+instance Core.ToJSON Line where
+  toJSON Line {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("content" Core..=) Core.<$> content,
+            ("lineNumber" Core..=) Core.<$> lineNumber
           ]
       )
 
@@ -936,6 +1584,124 @@ instance Core.ToJSON ListOperationsResponse where
           ]
       )
 
+-- | The user workloads ConfigMaps for a given environment.
+--
+-- /See:/ 'newListUserWorkloadsConfigMapsResponse' smart constructor.
+data ListUserWorkloadsConfigMapsResponse = ListUserWorkloadsConfigMapsResponse
+  { -- | The page token used to query for the next page if one exists.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of ConfigMaps returned by a ListUserWorkloadsConfigMapsRequest.
+    userWorkloadsConfigMaps :: (Core.Maybe [UserWorkloadsConfigMap])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListUserWorkloadsConfigMapsResponse' with the minimum fields required to make a request.
+newListUserWorkloadsConfigMapsResponse ::
+  ListUserWorkloadsConfigMapsResponse
+newListUserWorkloadsConfigMapsResponse =
+  ListUserWorkloadsConfigMapsResponse
+    { nextPageToken = Core.Nothing,
+      userWorkloadsConfigMaps = Core.Nothing
+    }
+
+instance Core.FromJSON ListUserWorkloadsConfigMapsResponse where
+  parseJSON =
+    Core.withObject
+      "ListUserWorkloadsConfigMapsResponse"
+      ( \o ->
+          ListUserWorkloadsConfigMapsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "userWorkloadsConfigMaps")
+      )
+
+instance Core.ToJSON ListUserWorkloadsConfigMapsResponse where
+  toJSON ListUserWorkloadsConfigMapsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("userWorkloadsConfigMaps" Core..=)
+              Core.<$> userWorkloadsConfigMaps
+          ]
+      )
+
+-- | The user workloads Secrets for a given environment.
+--
+-- /See:/ 'newListUserWorkloadsSecretsResponse' smart constructor.
+data ListUserWorkloadsSecretsResponse = ListUserWorkloadsSecretsResponse
+  { -- | The page token used to query for the next page if one exists.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of Secrets returned by a ListUserWorkloadsSecretsRequest.
+    userWorkloadsSecrets :: (Core.Maybe [UserWorkloadsSecret])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListUserWorkloadsSecretsResponse' with the minimum fields required to make a request.
+newListUserWorkloadsSecretsResponse ::
+  ListUserWorkloadsSecretsResponse
+newListUserWorkloadsSecretsResponse =
+  ListUserWorkloadsSecretsResponse
+    { nextPageToken = Core.Nothing,
+      userWorkloadsSecrets = Core.Nothing
+    }
+
+instance Core.FromJSON ListUserWorkloadsSecretsResponse where
+  parseJSON =
+    Core.withObject
+      "ListUserWorkloadsSecretsResponse"
+      ( \o ->
+          ListUserWorkloadsSecretsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "userWorkloadsSecrets")
+      )
+
+instance Core.ToJSON ListUserWorkloadsSecretsResponse where
+  toJSON ListUserWorkloadsSecretsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("userWorkloadsSecrets" Core..=) Core.<$> userWorkloadsSecrets
+          ]
+      )
+
+-- | Response to ListWorkloadsRequest.
+--
+-- /See:/ 'newListWorkloadsResponse' smart constructor.
+data ListWorkloadsResponse = ListWorkloadsResponse
+  { -- | The page token used to query for the next page if one exists.
+    nextPageToken :: (Core.Maybe Core.Text),
+    -- | The list of environment workloads.
+    workloads :: (Core.Maybe [ComposerWorkload])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ListWorkloadsResponse' with the minimum fields required to make a request.
+newListWorkloadsResponse ::
+  ListWorkloadsResponse
+newListWorkloadsResponse =
+  ListWorkloadsResponse
+    { nextPageToken = Core.Nothing,
+      workloads = Core.Nothing
+    }
+
+instance Core.FromJSON ListWorkloadsResponse where
+  parseJSON =
+    Core.withObject
+      "ListWorkloadsResponse"
+      ( \o ->
+          ListWorkloadsResponse
+            Core.<$> (o Core..:? "nextPageToken")
+            Core.<*> (o Core..:? "workloads")
+      )
+
+instance Core.ToJSON ListWorkloadsResponse where
+  toJSON ListWorkloadsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
+            ("workloads" Core..=) Core.<$> workloads
+          ]
+      )
+
 -- | Request to load a snapshot into a Cloud Composer environment.
 --
 -- /See:/ 'newLoadSnapshotRequest' smart constructor.
@@ -986,8 +1752,7 @@ instance Core.ToJSON LoadSnapshotRequest where
               Core.<$> skipAirflowOverridesSetting,
             ("skipEnvironmentVariablesSetting" Core..=)
               Core.<$> skipEnvironmentVariablesSetting,
-            ("skipGcsDataCopying" Core..=)
-              Core.<$> skipGcsDataCopying,
+            ("skipGcsDataCopying" Core..=) Core.<$> skipGcsDataCopying,
             ("skipPypiPackagesInstallation" Core..=)
               Core.<$> skipPypiPackagesInstallation,
             ("snapshotPath" Core..=) Core.<$> snapshotPath
@@ -1101,7 +1866,7 @@ instance Core.ToJSON MasterAuthorizedNetworksConfig where
 --
 -- /See:/ 'newNetworkingConfig' smart constructor.
 newtype NetworkingConfig = NetworkingConfig
-  { -- | Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+  { -- | Optional. Indicates the user requested specific connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
     connectionType :: (Core.Maybe NetworkingConfig_ConnectionType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1109,16 +1874,14 @@ newtype NetworkingConfig = NetworkingConfig
 -- | Creates a value of 'NetworkingConfig' with the minimum fields required to make a request.
 newNetworkingConfig ::
   NetworkingConfig
-newNetworkingConfig = NetworkingConfig {connectionType = Core.Nothing}
+newNetworkingConfig =
+  NetworkingConfig {connectionType = Core.Nothing}
 
 instance Core.FromJSON NetworkingConfig where
   parseJSON =
     Core.withObject
       "NetworkingConfig"
-      ( \o ->
-          NetworkingConfig
-            Core.<$> (o Core..:? "connectionType")
-      )
+      (\o -> NetworkingConfig Core.<$> (o Core..:? "connectionType"))
 
 instance Core.ToJSON NetworkingConfig where
   toJSON NetworkingConfig {..} =
@@ -1131,7 +1894,11 @@ instance Core.ToJSON NetworkingConfig where
 --
 -- /See:/ 'newNodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-  { -- | Optional. The disk size in GB used for node VMs. Minimum size is 30GB. If unspecified, defaults to 100GB. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
+  { -- | Optional. The IP range in CIDR notation to use internally by Cloud Composer. IP addresses are not reserved - and the same range can be used by multiple Cloud Composer environments. In case of overlap, IPs from this range will not be accessible in the user\'s VPC network. Cannot be updated. If not specified, the default value of \'100.64.128.0\/20\' is used. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+    composerInternalIpv4CidrBlock :: (Core.Maybe Core.Text),
+    -- | Optional. Network Attachment that Cloud Composer environment is connected to, which provides connectivity with a user\'s VPC network. Takes precedence over network and subnetwork settings. If not provided, but network and subnetwork are defined during environment, it will be provisioned. If not provided and network and subnetwork are also empty, then connectivity to user\'s VPC network is disabled. Network attachment must be provided in format projects\/{project}\/regions\/{region}\/networkAttachments\/{networkAttachment}. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+    composerNetworkAttachment :: (Core.Maybe Core.Text),
+    -- | Optional. The disk size in GB used for node VMs. Minimum size is 30GB. If unspecified, defaults to 100GB. Cannot be updated. This field is supported for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     diskSizeGb :: (Core.Maybe Core.Int32),
     -- | Optional. Deploys \'ip-masq-agent\' daemon set in the GKE cluster and defines nonMasqueradeCIDRs equals to pod IP range so IP masquerading is used for all destination addresses, except between pods traffic. See: https:\/\/cloud.google.com\/kubernetes-engine\/docs\/how-to\/ip-masquerade-agent
     enableIpMasqAgent :: (Core.Maybe Core.Bool),
@@ -1160,7 +1927,9 @@ newNodeConfig ::
   NodeConfig
 newNodeConfig =
   NodeConfig
-    { diskSizeGb = Core.Nothing,
+    { composerInternalIpv4CidrBlock = Core.Nothing,
+      composerNetworkAttachment = Core.Nothing,
+      diskSizeGb = Core.Nothing,
       enableIpMasqAgent = Core.Nothing,
       ipAllocationPolicy = Core.Nothing,
       location = Core.Nothing,
@@ -1178,7 +1947,9 @@ instance Core.FromJSON NodeConfig where
       "NodeConfig"
       ( \o ->
           NodeConfig
-            Core.<$> (o Core..:? "diskSizeGb")
+            Core.<$> (o Core..:? "composerInternalIpv4CidrBlock")
+            Core.<*> (o Core..:? "composerNetworkAttachment")
+            Core.<*> (o Core..:? "diskSizeGb")
             Core.<*> (o Core..:? "enableIpMasqAgent")
             Core.<*> (o Core..:? "ipAllocationPolicy")
             Core.<*> (o Core..:? "location")
@@ -1194,11 +1965,13 @@ instance Core.ToJSON NodeConfig where
   toJSON NodeConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
-            ("enableIpMasqAgent" Core..=)
-              Core.<$> enableIpMasqAgent,
-            ("ipAllocationPolicy" Core..=)
-              Core.<$> ipAllocationPolicy,
+          [ ("composerInternalIpv4CidrBlock" Core..=)
+              Core.<$> composerInternalIpv4CidrBlock,
+            ("composerNetworkAttachment" Core..=)
+              Core.<$> composerNetworkAttachment,
+            ("diskSizeGb" Core..=) Core.<$> diskSizeGb,
+            ("enableIpMasqAgent" Core..=) Core.<$> enableIpMasqAgent,
+            ("ipAllocationPolicy" Core..=) Core.<$> ipAllocationPolicy,
             ("location" Core..=) Core.<$> location,
             ("machineType" Core..=) Core.<$> machineType,
             ("network" Core..=) Core.<$> network,
@@ -1221,7 +1994,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1277,21 +2050,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -1305,19 +2076,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | Metadata describing an operation.
 --
@@ -1378,6 +2147,99 @@ instance Core.ToJSON OperationMetadata where
           ]
       )
 
+-- | Poll Airflow Command request.
+--
+-- /See:/ 'newPollAirflowCommandRequest' smart constructor.
+data PollAirflowCommandRequest = PollAirflowCommandRequest
+  { -- | The unique ID of the command execution.
+    executionId :: (Core.Maybe Core.Text),
+    -- | Line number from which new logs should be fetched.
+    nextLineNumber :: (Core.Maybe Core.Int32),
+    -- | The name of the pod where the command is executed.
+    pod :: (Core.Maybe Core.Text),
+    -- | The namespace of the pod where the command is executed.
+    podNamespace :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PollAirflowCommandRequest' with the minimum fields required to make a request.
+newPollAirflowCommandRequest ::
+  PollAirflowCommandRequest
+newPollAirflowCommandRequest =
+  PollAirflowCommandRequest
+    { executionId = Core.Nothing,
+      nextLineNumber = Core.Nothing,
+      pod = Core.Nothing,
+      podNamespace = Core.Nothing
+    }
+
+instance Core.FromJSON PollAirflowCommandRequest where
+  parseJSON =
+    Core.withObject
+      "PollAirflowCommandRequest"
+      ( \o ->
+          PollAirflowCommandRequest
+            Core.<$> (o Core..:? "executionId")
+            Core.<*> (o Core..:? "nextLineNumber")
+            Core.<*> (o Core..:? "pod")
+            Core.<*> (o Core..:? "podNamespace")
+      )
+
+instance Core.ToJSON PollAirflowCommandRequest where
+  toJSON PollAirflowCommandRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("executionId" Core..=) Core.<$> executionId,
+            ("nextLineNumber" Core..=) Core.<$> nextLineNumber,
+            ("pod" Core..=) Core.<$> pod,
+            ("podNamespace" Core..=) Core.<$> podNamespace
+          ]
+      )
+
+-- | Response to PollAirflowCommandRequest.
+--
+-- /See:/ 'newPollAirflowCommandResponse' smart constructor.
+data PollAirflowCommandResponse = PollAirflowCommandResponse
+  { -- | The result exit status of the command.
+    exitInfo :: (Core.Maybe ExitInfo),
+    -- | Output from the command execution. It may not contain the full output and the caller may need to poll for more lines.
+    output :: (Core.Maybe [Line]),
+    -- | Whether the command execution has finished and there is no more output.
+    outputEnd :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PollAirflowCommandResponse' with the minimum fields required to make a request.
+newPollAirflowCommandResponse ::
+  PollAirflowCommandResponse
+newPollAirflowCommandResponse =
+  PollAirflowCommandResponse
+    { exitInfo = Core.Nothing,
+      output = Core.Nothing,
+      outputEnd = Core.Nothing
+    }
+
+instance Core.FromJSON PollAirflowCommandResponse where
+  parseJSON =
+    Core.withObject
+      "PollAirflowCommandResponse"
+      ( \o ->
+          PollAirflowCommandResponse
+            Core.<$> (o Core..:? "exitInfo")
+            Core.<*> (o Core..:? "output")
+            Core.<*> (o Core..:? "outputEnd")
+      )
+
+instance Core.ToJSON PollAirflowCommandResponse where
+  toJSON PollAirflowCommandResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("exitInfo" Core..=) Core.<$> exitInfo,
+            ("output" Core..=) Core.<$> output,
+            ("outputEnd" Core..=) Core.<$> outputEnd
+          ]
+      )
+
 -- | Configuration options for the private GKE cluster in a Cloud Composer environment.
 --
 -- /See:/ 'newPrivateClusterConfig' smart constructor.
@@ -1416,10 +2278,8 @@ instance Core.ToJSON PrivateClusterConfig where
   toJSON PrivateClusterConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("enablePrivateEndpoint" Core..=)
-              Core.<$> enablePrivateEndpoint,
-            ("masterIpv4CidrBlock" Core..=)
-              Core.<$> masterIpv4CidrBlock,
+          [ ("enablePrivateEndpoint" Core..=) Core.<$> enablePrivateEndpoint,
+            ("masterIpv4CidrBlock" Core..=) Core.<$> masterIpv4CidrBlock,
             ("masterIpv4ReservedRange" Core..=)
               Core.<$> masterIpv4ReservedRange
           ]
@@ -1437,6 +2297,8 @@ data PrivateEnvironmentConfig = PrivateEnvironmentConfig
     cloudComposerNetworkIpv4ReservedRange :: (Core.Maybe Core.Text),
     -- | Optional. The CIDR block from which IP range in tenant project will be reserved for Cloud SQL. Needs to be disjoint from @web_server_ipv4_cidr_block@.
     cloudSqlIpv4CidrBlock :: (Core.Maybe Core.Text),
+    -- | Optional. If @true@, builds performed during operations that install Python packages have only private connectivity to Google services (including Artifact Registry) and VPC network (if either @NodeConfig.network@ and @NodeConfig.subnetwork@ fields or @NodeConfig.composer_network_attachment@ field are specified). If @false@, the builds also have access to the internet. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+    enablePrivateBuildsOnly :: (Core.Maybe Core.Bool),
     -- | Optional. If @true@, a Private IP Cloud Composer environment is created. If this field is set to true, @IPAllocationPolicy.use_ip_aliases@ must be set to true for Cloud Composer environments in versions composer-1././-airflow-/./.*.
     enablePrivateEnvironment :: (Core.Maybe Core.Bool),
     -- | Optional. When enabled, IPs from public (non-RFC1918) ranges can be used for @IPAllocationPolicy.cluster_ipv4_cidr_block@ and @IPAllocationPolicy.service_ipv4_cidr_block@.
@@ -1457,10 +2319,12 @@ newPrivateEnvironmentConfig ::
   PrivateEnvironmentConfig
 newPrivateEnvironmentConfig =
   PrivateEnvironmentConfig
-    { cloudComposerConnectionSubnetwork = Core.Nothing,
+    { cloudComposerConnectionSubnetwork =
+        Core.Nothing,
       cloudComposerNetworkIpv4CidrBlock = Core.Nothing,
       cloudComposerNetworkIpv4ReservedRange = Core.Nothing,
       cloudSqlIpv4CidrBlock = Core.Nothing,
+      enablePrivateBuildsOnly = Core.Nothing,
       enablePrivateEnvironment = Core.Nothing,
       enablePrivatelyUsedPublicIps = Core.Nothing,
       networkingConfig = Core.Nothing,
@@ -1479,6 +2343,7 @@ instance Core.FromJSON PrivateEnvironmentConfig where
             Core.<*> (o Core..:? "cloudComposerNetworkIpv4CidrBlock")
             Core.<*> (o Core..:? "cloudComposerNetworkIpv4ReservedRange")
             Core.<*> (o Core..:? "cloudSqlIpv4CidrBlock")
+            Core.<*> (o Core..:? "enablePrivateBuildsOnly")
             Core.<*> (o Core..:? "enablePrivateEnvironment")
             Core.<*> (o Core..:? "enablePrivatelyUsedPublicIps")
             Core.<*> (o Core..:? "networkingConfig")
@@ -1497,18 +2362,16 @@ instance Core.ToJSON PrivateEnvironmentConfig where
               Core.<$> cloudComposerNetworkIpv4CidrBlock,
             ("cloudComposerNetworkIpv4ReservedRange" Core..=)
               Core.<$> cloudComposerNetworkIpv4ReservedRange,
-            ("cloudSqlIpv4CidrBlock" Core..=)
-              Core.<$> cloudSqlIpv4CidrBlock,
+            ("cloudSqlIpv4CidrBlock" Core..=) Core.<$> cloudSqlIpv4CidrBlock,
+            ("enablePrivateBuildsOnly" Core..=)
+              Core.<$> enablePrivateBuildsOnly,
             ("enablePrivateEnvironment" Core..=)
               Core.<$> enablePrivateEnvironment,
             ("enablePrivatelyUsedPublicIps" Core..=)
               Core.<$> enablePrivatelyUsedPublicIps,
-            ("networkingConfig" Core..=)
-              Core.<$> networkingConfig,
-            ("privateClusterConfig" Core..=)
-              Core.<$> privateClusterConfig,
-            ("webServerIpv4CidrBlock" Core..=)
-              Core.<$> webServerIpv4CidrBlock,
+            ("networkingConfig" Core..=) Core.<$> networkingConfig,
+            ("privateClusterConfig" Core..=) Core.<$> privateClusterConfig,
+            ("webServerIpv4CidrBlock" Core..=) Core.<$> webServerIpv4CidrBlock,
             ("webServerIpv4ReservedRange" Core..=)
               Core.<$> webServerIpv4ReservedRange
           ]
@@ -1526,15 +2389,15 @@ newtype RecoveryConfig = RecoveryConfig
 -- | Creates a value of 'RecoveryConfig' with the minimum fields required to make a request.
 newRecoveryConfig ::
   RecoveryConfig
-newRecoveryConfig = RecoveryConfig {scheduledSnapshotsConfig = Core.Nothing}
+newRecoveryConfig =
+  RecoveryConfig {scheduledSnapshotsConfig = Core.Nothing}
 
 instance Core.FromJSON RecoveryConfig where
   parseJSON =
     Core.withObject
       "RecoveryConfig"
       ( \o ->
-          RecoveryConfig
-            Core.<$> (o Core..:? "scheduledSnapshotsConfig")
+          RecoveryConfig Core.<$> (o Core..:? "scheduledSnapshotsConfig")
       )
 
 instance Core.ToJSON RecoveryConfig where
@@ -1558,24 +2421,22 @@ newtype SaveSnapshotRequest = SaveSnapshotRequest
 -- | Creates a value of 'SaveSnapshotRequest' with the minimum fields required to make a request.
 newSaveSnapshotRequest ::
   SaveSnapshotRequest
-newSaveSnapshotRequest = SaveSnapshotRequest {snapshotLocation = Core.Nothing}
+newSaveSnapshotRequest =
+  SaveSnapshotRequest {snapshotLocation = Core.Nothing}
 
 instance Core.FromJSON SaveSnapshotRequest where
   parseJSON =
     Core.withObject
       "SaveSnapshotRequest"
       ( \o ->
-          SaveSnapshotRequest
-            Core.<$> (o Core..:? "snapshotLocation")
+          SaveSnapshotRequest Core.<$> (o Core..:? "snapshotLocation")
       )
 
 instance Core.ToJSON SaveSnapshotRequest where
   toJSON SaveSnapshotRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("snapshotLocation" Core..=)
-              Core.<$> snapshotLocation
-          ]
+          [("snapshotLocation" Core..=) Core.<$> snapshotLocation]
       )
 
 -- | Response to SaveSnapshotRequest.
@@ -1590,23 +2451,19 @@ newtype SaveSnapshotResponse = SaveSnapshotResponse
 -- | Creates a value of 'SaveSnapshotResponse' with the minimum fields required to make a request.
 newSaveSnapshotResponse ::
   SaveSnapshotResponse
-newSaveSnapshotResponse = SaveSnapshotResponse {snapshotPath = Core.Nothing}
+newSaveSnapshotResponse =
+  SaveSnapshotResponse {snapshotPath = Core.Nothing}
 
 instance Core.FromJSON SaveSnapshotResponse where
   parseJSON =
     Core.withObject
       "SaveSnapshotResponse"
-      ( \o ->
-          SaveSnapshotResponse
-            Core.<$> (o Core..:? "snapshotPath")
-      )
+      (\o -> SaveSnapshotResponse Core.<$> (o Core..:? "snapshotPath"))
 
 instance Core.ToJSON SaveSnapshotResponse where
   toJSON SaveSnapshotResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("snapshotPath" Core..=) Core.<$> snapshotPath]
-      )
+      (Core.catMaybes [("snapshotPath" Core..=) Core.<$> snapshotPath])
 
 -- | The configuration for scheduled snapshot creation mechanism.
 --
@@ -1653,8 +2510,7 @@ instance Core.ToJSON ScheduledSnapshotsConfig where
           [ ("enabled" Core..=) Core.<$> enabled,
             ("snapshotCreationSchedule" Core..=)
               Core.<$> snapshotCreationSchedule,
-            ("snapshotLocation" Core..=)
-              Core.<$> snapshotLocation,
+            ("snapshotLocation" Core..=) Core.<$> snapshotLocation,
             ("timeZone" Core..=) Core.<$> timeZone
           ]
       )
@@ -1714,17 +2570,21 @@ instance Core.ToJSON SchedulerResource where
 data SoftwareConfig = SoftwareConfig
   { -- | Optional. Apache Airflow configuration properties to override. Property keys contain the section and property names, separated by a hyphen, for example \"core-dags/are/paused/at/creation\". Section names must not contain hyphens (\"-\"), opening square brackets (\"[\"), or closing square brackets (\"]\"). The property name must not be empty and must not contain an equals sign (\"=\") or semicolon (\";\"). Section and property names must not contain a period (\".\"). Apache Airflow configuration property names must be written in <https://en.wikipedia.org/wiki/Snake_case snake_case>. Property values can contain any character, and can be written in any lower\/upper case format. Certain Apache Airflow configuration property values are </composer/docs/concepts/airflow-configurations blocked>, and cannot be overridden.
     airflowConfigOverrides :: (Core.Maybe SoftwareConfig_AirflowConfigOverrides),
+    -- | Optional. The configuration for Cloud Data Lineage integration.
+    cloudDataLineageIntegration :: (Core.Maybe CloudDataLineageIntegration),
     -- | Optional. Additional environment variables to provide to the Apache Airflow scheduler, worker, and webserver processes. Environment variable names must match the regular expression @a-zA-Z_*@. They cannot specify Apache Airflow software configuration overrides (they cannot match the regular expression @AIRFLOW__[A-Z0-9_]+__[A-Z0-9_]+@), and they cannot match any of the following reserved names: * @AIRFLOW_HOME@ * @C_FORCE_ROOT@ * @CONTAINER_NAME@ * @DAGS_FOLDER@ * @GCP_PROJECT@ * @GCS_BUCKET@ * @GKE_CLUSTER_NAME@ * @SQL_DATABASE@ * @SQL_INSTANCE@ * @SQL_PASSWORD@ * @SQL_PROJECT@ * @SQL_REGION@ * @SQL_USER@
     envVariables :: (Core.Maybe SoftwareConfig_EnvVariables),
-    -- | The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression @composer-([0-9]+(\\.[0-9]+\\.[0-9]+(-preview\\.[0-9]+)?)?|latest)-airflow-([0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)@. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the image version is a full <https://semver.org semantic version>, or an alias in the form of major version number or @latest@. When an alias is provided, the server replaces it with the current Cloud Composer version that satisfies the alias. The Apache Airflow portion of the image version is a full semantic version that points to one of the supported Apache Airflow versions, or an alias in the form of only major or major.minor versions specified. When an alias is provided, the server replaces it with the latest Apache Airflow version that satisfies
-    -- the alias and is supported in the given Cloud Composer version. In all cases, the resolved image version is stored in the same field. See also </composer/docs/concepts/versioning/composer-versions version list> and </composer/docs/concepts/versioning/composer-versioning-overview versioning overview>.
+    -- | Optional. The version of the software running in the environment. This encapsulates both the version of Cloud Composer functionality and the version of Apache Airflow. It must match the regular expression @composer-([0-9]+(\\.[0-9]+\\.[0-9]+(-preview\\.[0-9]+)?)?|latest)-airflow-([0-9]+(\\.[0-9]+(\\.[0-9]+)?)?)@. When used as input, the server also checks if the provided version is supported and denies the request for an unsupported version. The Cloud Composer portion of the image version is a full <https://semver.org semantic version>, or an alias in the form of major version number or @latest@. When an alias is provided, the server replaces it with the current Cloud Composer version that satisfies the alias. The Apache Airflow portion of the image version is a full semantic version that points to one of the supported Apache Airflow versions, or an alias in the form of only major or major.minor versions specified. When an alias is provided, the server replaces it with the latest Apache Airflow version that
+    -- satisfies the alias and is supported in the given Cloud Composer version. In all cases, the resolved image version is stored in the same field. See also </composer/docs/concepts/versioning/composer-versions version list> and </composer/docs/concepts/versioning/composer-versioning-overview versioning overview>.
     imageVersion :: (Core.Maybe Core.Text),
     -- | Optional. Custom Python Package Index (PyPI) packages to be installed in the environment. Keys refer to the lowercase package name such as \"numpy\" and values are the lowercase extras and version specifier such as \"==1.12.0\", \"[devel,gcp_api]\", or \"[devel]>=1.8.2, \<1.9.2\". To specify a package without pinning it to a version specifier, use the empty string as the value.
     pypiPackages :: (Core.Maybe SoftwareConfig_PypiPackages),
     -- | Optional. The major version of Python used to run the Apache Airflow scheduler, worker, and webserver processes. Can be set to \'2\' or \'3\'. If not specified, the default is \'3\'. Cannot be updated. This field is only supported for Cloud Composer environments in versions composer-1././-airflow-/./.*. Environments in newer versions always use Python major version 3.
     pythonVersion :: (Core.Maybe Core.Text),
     -- | Optional. The number of schedulers for Airflow. This field is supported for Cloud Composer environments in versions composer-1././-airflow-2././.
-    schedulerCount :: (Core.Maybe Core.Int32)
+    schedulerCount :: (Core.Maybe Core.Int32),
+    -- | Optional. Whether or not the web server uses custom plugins. If unspecified, the field defaults to @PLUGINS_ENABLED@. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+    webServerPluginsMode :: (Core.Maybe SoftwareConfig_WebServerPluginsMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1734,11 +2594,13 @@ newSoftwareConfig ::
 newSoftwareConfig =
   SoftwareConfig
     { airflowConfigOverrides = Core.Nothing,
+      cloudDataLineageIntegration = Core.Nothing,
       envVariables = Core.Nothing,
       imageVersion = Core.Nothing,
       pypiPackages = Core.Nothing,
       pythonVersion = Core.Nothing,
-      schedulerCount = Core.Nothing
+      schedulerCount = Core.Nothing,
+      webServerPluginsMode = Core.Nothing
     }
 
 instance Core.FromJSON SoftwareConfig where
@@ -1748,11 +2610,13 @@ instance Core.FromJSON SoftwareConfig where
       ( \o ->
           SoftwareConfig
             Core.<$> (o Core..:? "airflowConfigOverrides")
+            Core.<*> (o Core..:? "cloudDataLineageIntegration")
             Core.<*> (o Core..:? "envVariables")
             Core.<*> (o Core..:? "imageVersion")
             Core.<*> (o Core..:? "pypiPackages")
             Core.<*> (o Core..:? "pythonVersion")
             Core.<*> (o Core..:? "schedulerCount")
+            Core.<*> (o Core..:? "webServerPluginsMode")
       )
 
 instance Core.ToJSON SoftwareConfig where
@@ -1761,11 +2625,14 @@ instance Core.ToJSON SoftwareConfig where
       ( Core.catMaybes
           [ ("airflowConfigOverrides" Core..=)
               Core.<$> airflowConfigOverrides,
+            ("cloudDataLineageIntegration" Core..=)
+              Core.<$> cloudDataLineageIntegration,
             ("envVariables" Core..=) Core.<$> envVariables,
             ("imageVersion" Core..=) Core.<$> imageVersion,
             ("pypiPackages" Core..=) Core.<$> pypiPackages,
             ("pythonVersion" Core..=) Core.<$> pythonVersion,
-            ("schedulerCount" Core..=) Core.<$> schedulerCount
+            ("schedulerCount" Core..=) Core.<$> schedulerCount,
+            ("webServerPluginsMode" Core..=) Core.<$> webServerPluginsMode
           ]
       )
 
@@ -1773,8 +2640,7 @@ instance Core.ToJSON SoftwareConfig where
 --
 -- /See:/ 'newSoftwareConfig_AirflowConfigOverrides' smart constructor.
 newtype SoftwareConfig_AirflowConfigOverrides = SoftwareConfig_AirflowConfigOverrides
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1786,10 +2652,7 @@ newSoftwareConfig_AirflowConfigOverrides ::
 newSoftwareConfig_AirflowConfigOverrides additional =
   SoftwareConfig_AirflowConfigOverrides {additional = additional}
 
-instance
-  Core.FromJSON
-    SoftwareConfig_AirflowConfigOverrides
-  where
+instance Core.FromJSON SoftwareConfig_AirflowConfigOverrides where
   parseJSON =
     Core.withObject
       "SoftwareConfig_AirflowConfigOverrides"
@@ -1798,10 +2661,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    SoftwareConfig_AirflowConfigOverrides
-  where
+instance Core.ToJSON SoftwareConfig_AirflowConfigOverrides where
   toJSON SoftwareConfig_AirflowConfigOverrides {..} =
     Core.toJSON additional
 
@@ -1809,8 +2669,7 @@ instance
 --
 -- /See:/ 'newSoftwareConfig_EnvVariables' smart constructor.
 newtype SoftwareConfig_EnvVariables = SoftwareConfig_EnvVariables
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1827,20 +2686,17 @@ instance Core.FromJSON SoftwareConfig_EnvVariables where
     Core.withObject
       "SoftwareConfig_EnvVariables"
       ( \o ->
-          SoftwareConfig_EnvVariables
-            Core.<$> (Core.parseJSONObject o)
+          SoftwareConfig_EnvVariables Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SoftwareConfig_EnvVariables where
-  toJSON SoftwareConfig_EnvVariables {..} =
-    Core.toJSON additional
+  toJSON SoftwareConfig_EnvVariables {..} = Core.toJSON additional
 
 -- | Optional. Custom Python Package Index (PyPI) packages to be installed in the environment. Keys refer to the lowercase package name such as \"numpy\" and values are the lowercase extras and version specifier such as \"==1.12.0\", \"[devel,gcp_api]\", or \"[devel]>=1.8.2, \<1.9.2\". To specify a package without pinning it to a version specifier, use the empty string as the value.
 --
 -- /See:/ 'newSoftwareConfig_PypiPackages' smart constructor.
 newtype SoftwareConfig_PypiPackages = SoftwareConfig_PypiPackages
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1857,13 +2713,11 @@ instance Core.FromJSON SoftwareConfig_PypiPackages where
     Core.withObject
       "SoftwareConfig_PypiPackages"
       ( \o ->
-          SoftwareConfig_PypiPackages
-            Core.<$> (Core.parseJSONObject o)
+          SoftwareConfig_PypiPackages Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON SoftwareConfig_PypiPackages where
-  toJSON SoftwareConfig_PypiPackages {..} =
-    Core.toJSON additional
+  toJSON SoftwareConfig_PypiPackages {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -1882,7 +2736,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -1918,19 +2776,321 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | Stop Airflow Command request.
+--
+-- /See:/ 'newStopAirflowCommandRequest' smart constructor.
+data StopAirflowCommandRequest = StopAirflowCommandRequest
+  { -- | The unique ID of the command execution.
+    executionId :: (Core.Maybe Core.Text),
+    -- | If true, the execution is terminated forcefully (SIGKILL). If false, the execution is stopped gracefully, giving it time for cleanup.
+    force :: (Core.Maybe Core.Bool),
+    -- | The name of the pod where the command is executed.
+    pod :: (Core.Maybe Core.Text),
+    -- | The namespace of the pod where the command is executed.
+    podNamespace :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StopAirflowCommandRequest' with the minimum fields required to make a request.
+newStopAirflowCommandRequest ::
+  StopAirflowCommandRequest
+newStopAirflowCommandRequest =
+  StopAirflowCommandRequest
+    { executionId = Core.Nothing,
+      force = Core.Nothing,
+      pod = Core.Nothing,
+      podNamespace = Core.Nothing
+    }
+
+instance Core.FromJSON StopAirflowCommandRequest where
+  parseJSON =
+    Core.withObject
+      "StopAirflowCommandRequest"
+      ( \o ->
+          StopAirflowCommandRequest
+            Core.<$> (o Core..:? "executionId")
+            Core.<*> (o Core..:? "force")
+            Core.<*> (o Core..:? "pod")
+            Core.<*> (o Core..:? "podNamespace")
+      )
+
+instance Core.ToJSON StopAirflowCommandRequest where
+  toJSON StopAirflowCommandRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("executionId" Core..=) Core.<$> executionId,
+            ("force" Core..=) Core.<$> force,
+            ("pod" Core..=) Core.<$> pod,
+            ("podNamespace" Core..=) Core.<$> podNamespace
+          ]
+      )
+
+-- | Response to StopAirflowCommandRequest.
+--
+-- /See:/ 'newStopAirflowCommandResponse' smart constructor.
+data StopAirflowCommandResponse = StopAirflowCommandResponse
+  { -- | Whether the execution is still running.
+    isDone :: (Core.Maybe Core.Bool),
+    -- | Output message from stopping execution request.
+    output :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StopAirflowCommandResponse' with the minimum fields required to make a request.
+newStopAirflowCommandResponse ::
+  StopAirflowCommandResponse
+newStopAirflowCommandResponse =
+  StopAirflowCommandResponse
+    { isDone = Core.Nothing,
+      output = Core.Nothing
+    }
+
+instance Core.FromJSON StopAirflowCommandResponse where
+  parseJSON =
+    Core.withObject
+      "StopAirflowCommandResponse"
+      ( \o ->
+          StopAirflowCommandResponse
+            Core.<$> (o Core..:? "isDone")
+            Core.<*> (o Core..:? "output")
+      )
+
+instance Core.ToJSON StopAirflowCommandResponse where
+  toJSON StopAirflowCommandResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("isDone" Core..=) Core.<$> isDone,
+            ("output" Core..=) Core.<$> output
+          ]
+      )
+
+-- | The configuration for data storage in the environment.
+--
+-- /See:/ 'newStorageConfig' smart constructor.
+newtype StorageConfig = StorageConfig
+  { -- | Optional. The name of the Cloud Storage bucket used by the environment. No @gs:\/\/@ prefix.
+    bucket :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StorageConfig' with the minimum fields required to make a request.
+newStorageConfig ::
+  StorageConfig
+newStorageConfig = StorageConfig {bucket = Core.Nothing}
+
+instance Core.FromJSON StorageConfig where
+  parseJSON =
+    Core.withObject
+      "StorageConfig"
+      (\o -> StorageConfig Core.<$> (o Core..:? "bucket"))
+
+instance Core.ToJSON StorageConfig where
+  toJSON StorageConfig {..} =
+    Core.object (Core.catMaybes [("bucket" Core..=) Core.<$> bucket])
+
+-- | The configuration setting for Task Logs.
+--
+-- /See:/ 'newTaskLogsRetentionConfig' smart constructor.
+newtype TaskLogsRetentionConfig = TaskLogsRetentionConfig
+  { -- | Optional. The mode of storage for Airflow workers task logs.
+    storageMode :: (Core.Maybe TaskLogsRetentionConfig_StorageMode)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TaskLogsRetentionConfig' with the minimum fields required to make a request.
+newTaskLogsRetentionConfig ::
+  TaskLogsRetentionConfig
+newTaskLogsRetentionConfig =
+  TaskLogsRetentionConfig {storageMode = Core.Nothing}
+
+instance Core.FromJSON TaskLogsRetentionConfig where
+  parseJSON =
+    Core.withObject
+      "TaskLogsRetentionConfig"
+      ( \o ->
+          TaskLogsRetentionConfig Core.<$> (o Core..:? "storageMode")
+      )
+
+instance Core.ToJSON TaskLogsRetentionConfig where
+  toJSON TaskLogsRetentionConfig {..} =
+    Core.object
+      (Core.catMaybes [("storageMode" Core..=) Core.<$> storageMode])
+
+-- | Configuration for resources used by Airflow triggerers.
+--
+-- /See:/ 'newTriggererResource' smart constructor.
+data TriggererResource = TriggererResource
+  { -- | Optional. The number of triggerers.
+    count :: (Core.Maybe Core.Int32),
+    -- | Optional. CPU request and limit for a single Airflow triggerer replica.
+    cpu :: (Core.Maybe Core.Double),
+    -- | Optional. Memory (GB) request and limit for a single Airflow triggerer replica.
+    memoryGb :: (Core.Maybe Core.Double)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TriggererResource' with the minimum fields required to make a request.
+newTriggererResource ::
+  TriggererResource
+newTriggererResource =
+  TriggererResource
+    { count = Core.Nothing,
+      cpu = Core.Nothing,
+      memoryGb = Core.Nothing
+    }
+
+instance Core.FromJSON TriggererResource where
+  parseJSON =
+    Core.withObject
+      "TriggererResource"
+      ( \o ->
+          TriggererResource
+            Core.<$> (o Core..:? "count")
+            Core.<*> (o Core..:? "cpu")
+            Core.<*> (o Core..:? "memoryGb")
+      )
+
+instance Core.ToJSON TriggererResource where
+  toJSON TriggererResource {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("count" Core..=) Core.<$> count,
+            ("cpu" Core..=) Core.<$> cpu,
+            ("memoryGb" Core..=) Core.<$> memoryGb
+          ]
+      )
+
+-- | User workloads ConfigMap used by Airflow tasks that run with Kubernetes executor or KubernetesPodOperator.
+--
+-- /See:/ 'newUserWorkloadsConfigMap' smart constructor.
+data UserWorkloadsConfigMap = UserWorkloadsConfigMap
+  { -- | Optional. The \"data\" field of Kubernetes ConfigMap, organized in key-value pairs. For details see: https:\/\/kubernetes.io\/docs\/concepts\/configuration\/configmap\/ Example: { \"example/key\": \"example/value\", \"another/key\": \"another/value\" }
+    data' :: (Core.Maybe UserWorkloadsConfigMap_Data),
+    -- | Identifier. The resource name of the ConfigMap, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\/userWorkloadsConfigMaps\/{userWorkloadsConfigMapId}\"
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserWorkloadsConfigMap' with the minimum fields required to make a request.
+newUserWorkloadsConfigMap ::
+  UserWorkloadsConfigMap
+newUserWorkloadsConfigMap =
+  UserWorkloadsConfigMap {data' = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON UserWorkloadsConfigMap where
+  parseJSON =
+    Core.withObject
+      "UserWorkloadsConfigMap"
+      ( \o ->
+          UserWorkloadsConfigMap
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON UserWorkloadsConfigMap where
+  toJSON UserWorkloadsConfigMap {..} =
+    Core.object
+      ( Core.catMaybes
+          [("data" Core..=) Core.<$> data', ("name" Core..=) Core.<$> name]
+      )
+
+-- | Optional. The \"data\" field of Kubernetes ConfigMap, organized in key-value pairs. For details see: https:\/\/kubernetes.io\/docs\/concepts\/configuration\/configmap\/ Example: { \"example/key\": \"example/value\", \"another/key\": \"another/value\" }
+--
+-- /See:/ 'newUserWorkloadsConfigMap_Data' smart constructor.
+newtype UserWorkloadsConfigMap_Data = UserWorkloadsConfigMap_Data
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserWorkloadsConfigMap_Data' with the minimum fields required to make a request.
+newUserWorkloadsConfigMap_Data ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  UserWorkloadsConfigMap_Data
+newUserWorkloadsConfigMap_Data additional =
+  UserWorkloadsConfigMap_Data {additional = additional}
+
+instance Core.FromJSON UserWorkloadsConfigMap_Data where
+  parseJSON =
+    Core.withObject
+      "UserWorkloadsConfigMap_Data"
+      ( \o ->
+          UserWorkloadsConfigMap_Data Core.<$> (Core.parseJSONObject o)
+      )
+
+instance Core.ToJSON UserWorkloadsConfigMap_Data where
+  toJSON UserWorkloadsConfigMap_Data {..} = Core.toJSON additional
+
+-- | User workloads Secret used by Airflow tasks that run with Kubernetes executor or KubernetesPodOperator.
+--
+-- /See:/ 'newUserWorkloadsSecret' smart constructor.
+data UserWorkloadsSecret = UserWorkloadsSecret
+  { -- | Optional. The \"data\" field of Kubernetes Secret, organized in key-value pairs, which can contain sensitive values such as a password, a token, or a key. The values for all keys have to be base64-encoded strings. For details see: https:\/\/kubernetes.io\/docs\/concepts\/configuration\/secret\/ Example: { \"example\": \"ZXhhbXBsZV92YWx1ZQ==\", \"another-example\": \"YW5vdGhlcl9leGFtcGxlX3ZhbHVl\" }
+    data' :: (Core.Maybe UserWorkloadsSecret_Data),
+    -- | Identifier. The resource name of the Secret, in the form: \"projects\/{projectId}\/locations\/{locationId}\/environments\/{environmentId}\/userWorkloadsSecrets\/{userWorkloadsSecretId}\"
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserWorkloadsSecret' with the minimum fields required to make a request.
+newUserWorkloadsSecret ::
+  UserWorkloadsSecret
+newUserWorkloadsSecret =
+  UserWorkloadsSecret {data' = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON UserWorkloadsSecret where
+  parseJSON =
+    Core.withObject
+      "UserWorkloadsSecret"
+      ( \o ->
+          UserWorkloadsSecret
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON UserWorkloadsSecret where
+  toJSON UserWorkloadsSecret {..} =
+    Core.object
+      ( Core.catMaybes
+          [("data" Core..=) Core.<$> data', ("name" Core..=) Core.<$> name]
+      )
+
+-- | Optional. The \"data\" field of Kubernetes Secret, organized in key-value pairs, which can contain sensitive values such as a password, a token, or a key. The values for all keys have to be base64-encoded strings. For details see: https:\/\/kubernetes.io\/docs\/concepts\/configuration\/secret\/ Example: { \"example\": \"ZXhhbXBsZV92YWx1ZQ==\", \"another-example\": \"YW5vdGhlcl9leGFtcGxlX3ZhbHVl\" }
+--
+-- /See:/ 'newUserWorkloadsSecret_Data' smart constructor.
+newtype UserWorkloadsSecret_Data = UserWorkloadsSecret_Data
+  { additional :: (Core.HashMap Core.Text Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'UserWorkloadsSecret_Data' with the minimum fields required to make a request.
+newUserWorkloadsSecret_Data ::
+  -- |  See 'additional'.
+  Core.HashMap Core.Text Core.Text ->
+  UserWorkloadsSecret_Data
+newUserWorkloadsSecret_Data additional =
+  UserWorkloadsSecret_Data {additional = additional}
+
+instance Core.FromJSON UserWorkloadsSecret_Data where
+  parseJSON =
+    Core.withObject
+      "UserWorkloadsSecret_Data"
+      (\o -> UserWorkloadsSecret_Data Core.<$> (Core.parseJSONObject o))
+
+instance Core.ToJSON UserWorkloadsSecret_Data where
+  toJSON UserWorkloadsSecret_Data {..} = Core.toJSON additional
 
 -- | The configuration settings for the Airflow web server App Engine instance. Supported for Cloud Composer environments in versions composer-1././-airflow-/./.*
 --
@@ -1950,16 +3110,12 @@ instance Core.FromJSON WebServerConfig where
   parseJSON =
     Core.withObject
       "WebServerConfig"
-      ( \o ->
-          WebServerConfig Core.<$> (o Core..:? "machineType")
-      )
+      (\o -> WebServerConfig Core.<$> (o Core..:? "machineType"))
 
 instance Core.ToJSON WebServerConfig where
   toJSON WebServerConfig {..} =
     Core.object
-      ( Core.catMaybes
-          [("machineType" Core..=) Core.<$> machineType]
-      )
+      (Core.catMaybes [("machineType" Core..=) Core.<$> machineType])
 
 -- | Network-level access control policy for the Airflow web server.
 --
@@ -1989,9 +3145,7 @@ instance Core.ToJSON WebServerNetworkAccessControl where
   toJSON WebServerNetworkAccessControl {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowedIpRanges" Core..=)
-              Core.<$> allowedIpRanges
-          ]
+          [("allowedIpRanges" Core..=) Core.<$> allowedIpRanges]
       )
 
 -- | Configuration for resources used by Airflow web server.
@@ -2096,8 +3250,12 @@ instance Core.ToJSON WorkerResource where
 --
 -- /See:/ 'newWorkloadsConfig' smart constructor.
 data WorkloadsConfig = WorkloadsConfig
-  { -- | Optional. Resources used by Airflow schedulers.
+  { -- | Optional. Resources used by Airflow DAG processors. This field is supported for Cloud Composer environments in versions composer-3-airflow-/././-build./ and newer.
+    dagProcessor :: (Core.Maybe DagProcessorResource),
+    -- | Optional. Resources used by Airflow schedulers.
     scheduler :: (Core.Maybe SchedulerResource),
+    -- | Optional. Resources used by Airflow triggerers.
+    triggerer :: (Core.Maybe TriggererResource),
     -- | Optional. Resources used by Airflow web server.
     webServer :: (Core.Maybe WebServerResource),
     -- | Optional. Resources used by Airflow workers.
@@ -2110,7 +3268,9 @@ newWorkloadsConfig ::
   WorkloadsConfig
 newWorkloadsConfig =
   WorkloadsConfig
-    { scheduler = Core.Nothing,
+    { dagProcessor = Core.Nothing,
+      scheduler = Core.Nothing,
+      triggerer = Core.Nothing,
       webServer = Core.Nothing,
       worker = Core.Nothing
     }
@@ -2121,7 +3281,9 @@ instance Core.FromJSON WorkloadsConfig where
       "WorkloadsConfig"
       ( \o ->
           WorkloadsConfig
-            Core.<$> (o Core..:? "scheduler")
+            Core.<$> (o Core..:? "dagProcessor")
+            Core.<*> (o Core..:? "scheduler")
+            Core.<*> (o Core..:? "triggerer")
             Core.<*> (o Core..:? "webServer")
             Core.<*> (o Core..:? "worker")
       )
@@ -2130,7 +3292,9 @@ instance Core.ToJSON WorkloadsConfig where
   toJSON WorkloadsConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("scheduler" Core..=) Core.<$> scheduler,
+          [ ("dagProcessor" Core..=) Core.<$> dagProcessor,
+            ("scheduler" Core..=) Core.<$> scheduler,
+            ("triggerer" Core..=) Core.<$> triggerer,
             ("webServer" Core..=) Core.<$> webServer,
             ("worker" Core..=) Core.<$> worker
           ]

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FusionTables.Style.Update
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FusionTables.Style.Update
 where
 
 import Gogol.FusionTables.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fusiontables.style.update@ method which the
 -- 'FusionTablesStyleUpdate' request conforms to.
@@ -86,9 +84,7 @@ newFusionTablesStyleUpdate payload styleId tableId =
 
 instance Core.GoogleRequest FusionTablesStyleUpdate where
   type Rs FusionTablesStyleUpdate = StyleSetting
-  type
-    Scopes FusionTablesStyleUpdate =
-      '[Fusiontables'FullControl]
+  type Scopes FusionTablesStyleUpdate = '[Fusiontables'FullControl]
   requestClient FusionTablesStyleUpdate {..} =
     go
       tableId
@@ -99,7 +95,5 @@ instance Core.GoogleRequest FusionTablesStyleUpdate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FusionTablesStyleUpdateResource
-          )
+          (Core.Proxy :: Core.Proxy FusionTablesStyleUpdateResource)
           Core.mempty

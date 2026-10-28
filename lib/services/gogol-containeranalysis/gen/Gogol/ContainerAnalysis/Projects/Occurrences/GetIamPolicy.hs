@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.ContainerAnalysis.Projects.Occurrences.GetIamPolicy
 where
 
 import Gogol.ContainerAnalysis.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @containeranalysis.projects.occurrences.getIamPolicy@ method which the
 -- 'ContainerAnalysisProjectsOccurrencesGetIamPolicy' request conforms to.
@@ -84,46 +82,44 @@ newContainerAnalysisProjectsOccurrencesGetIamPolicy ::
   -- |  REQUIRED: The resource for which the policy is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   ContainerAnalysisProjectsOccurrencesGetIamPolicy
-newContainerAnalysisProjectsOccurrencesGetIamPolicy payload resource =
-  ContainerAnalysisProjectsOccurrencesGetIamPolicy
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newContainerAnalysisProjectsOccurrencesGetIamPolicy
+  payload
+  resource =
+    ContainerAnalysisProjectsOccurrencesGetIamPolicy
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     ContainerAnalysisProjectsOccurrencesGetIamPolicy
   where
+  type Rs ContainerAnalysisProjectsOccurrencesGetIamPolicy = Policy
   type
-    Rs
-      ContainerAnalysisProjectsOccurrencesGetIamPolicy =
-      Policy
-  type
-    Scopes
-      ContainerAnalysisProjectsOccurrencesGetIamPolicy =
+    Scopes ContainerAnalysisProjectsOccurrencesGetIamPolicy =
       '[CloudPlatform'FullControl]
-  requestClient
-    ContainerAnalysisProjectsOccurrencesGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        containerAnalysisService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContainerAnalysisProjectsOccurrencesGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient ContainerAnalysisProjectsOccurrencesGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      containerAnalysisService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                ContainerAnalysisProjectsOccurrencesGetIamPolicyResource
+          )
+          Core.mempty

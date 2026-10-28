@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Requests a review of Shopping ads in a specific region. This method is only available to selected merchants.
+-- Requests a review of Shopping ads in a specific region. This method deprecated. Use the @MerchantSupportService@ to view product and account issues and request a review.
 --
 -- /See:/ <https://developers.google.com/shopping-content/v2/ Content API for Shopping Reference> for @content.shoppingadsprogram.requestreview@.
 module Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
@@ -39,7 +37,7 @@ module Gogol.ShoppingContent.Content.Shoppingadsprogram.Requestreview
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.ShoppingContent.Types
 
 -- | A resource alias for @content.shoppingadsprogram.requestreview@ method which the
@@ -56,12 +54,10 @@ type ContentShoppingadsprogramRequestreviewResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              RequestReviewShoppingAdsRequest
+    Core.:> Core.ReqBody '[Core.JSON] RequestReviewShoppingAdsRequest
     Core.:> Core.Post '[Core.JSON] ()
 
--- | Requests a review of Shopping ads in a specific region. This method is only available to selected merchants.
+-- | Requests a review of Shopping ads in a specific region. This method deprecated. Use the @MerchantSupportService@ to view product and account issues and request a review.
 --
 -- /See:/ 'newContentShoppingadsprogramRequestreview' smart constructor.
 data ContentShoppingadsprogramRequestreview = ContentShoppingadsprogramRequestreview
@@ -100,31 +96,26 @@ newContentShoppingadsprogramRequestreview merchantId payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    ContentShoppingadsprogramRequestreview
-  where
+instance Core.GoogleRequest ContentShoppingadsprogramRequestreview where
   type Rs ContentShoppingadsprogramRequestreview = ()
   type
     Scopes ContentShoppingadsprogramRequestreview =
       '[Content'FullControl]
-  requestClient
-    ContentShoppingadsprogramRequestreview {..} =
-      go
-        merchantId
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        shoppingContentService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  ContentShoppingadsprogramRequestreviewResource
-            )
-            Core.mempty
+  requestClient ContentShoppingadsprogramRequestreview {..} =
+    go
+      merchantId
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      shoppingContentService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy ContentShoppingadsprogramRequestreviewResource
+          )
+          Core.mempty

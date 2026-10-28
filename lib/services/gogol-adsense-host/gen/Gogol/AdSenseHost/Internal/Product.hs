@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.AdSenseHost.Internal.Product
@@ -109,7 +107,7 @@ module Gogol.AdSenseHost.Internal.Product
 where
 
 import Gogol.AdSenseHost.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 --
 -- /See:/ 'newAccount' smart constructor.
@@ -251,8 +249,7 @@ instance Core.ToJSON AdClient where
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
             ("productCode" Core..=) Core.<$> productCode,
-            ("supportsReporting" Core..=)
-              Core.<$> supportsReporting
+            ("supportsReporting" Core..=) Core.<$> supportsReporting
           ]
       )
 
@@ -317,7 +314,8 @@ data AdCode = AdCode
 -- | Creates a value of 'AdCode' with the minimum fields required to make a request.
 newAdCode ::
   AdCode
-newAdCode = AdCode {adCode = Core.Nothing, kind = "adsensehost#adCode"}
+newAdCode =
+  AdCode {adCode = Core.Nothing, kind = "adsensehost#adCode"}
 
 instance Core.FromJSON AdCode where
   parseJSON =
@@ -454,7 +452,8 @@ data AdStyle_Font = AdStyle_Font
 -- | Creates a value of 'AdStyle_Font' with the minimum fields required to make a request.
 newAdStyle_Font ::
   AdStyle_Font
-newAdStyle_Font = AdStyle_Font {family = Core.Nothing, size = Core.Nothing}
+newAdStyle_Font =
+  AdStyle_Font {family = Core.Nothing, size = Core.Nothing}
 
 instance Core.FromJSON AdStyle_Font where
   parseJSON =
@@ -462,7 +461,8 @@ instance Core.FromJSON AdStyle_Font where
       "AdStyle_Font"
       ( \o ->
           AdStyle_Font
-            Core.<$> (o Core..:? "family") Core.<*> (o Core..:? "size")
+            Core.<$> (o Core..:? "family")
+            Core.<*> (o Core..:? "size")
       )
 
 instance Core.ToJSON AdStyle_Font where
@@ -536,8 +536,7 @@ instance Core.ToJSON AdUnit where
     Core.object
       ( Core.catMaybes
           [ ("code" Core..=) Core.<$> code,
-            ("contentAdsSettings" Core..=)
-              Core.<$> contentAdsSettings,
+            ("contentAdsSettings" Core..=) Core.<$> contentAdsSettings,
             ("customStyle" Core..=) Core.<$> customStyle,
             ("id" Core..=) Core.<$> id,
             Core.Just ("kind" Core..= kind),
@@ -615,10 +614,7 @@ newAdUnit_ContentAdsSettings_BackupOption =
       url = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AdUnit_ContentAdsSettings_BackupOption
-  where
+instance Core.FromJSON AdUnit_ContentAdsSettings_BackupOption where
   parseJSON =
     Core.withObject
       "AdUnit_ContentAdsSettings_BackupOption"
@@ -629,10 +625,7 @@ instance
             Core.<*> (o Core..:? "url")
       )
 
-instance
-  Core.ToJSON
-    AdUnit_ContentAdsSettings_BackupOption
-  where
+instance Core.ToJSON AdUnit_ContentAdsSettings_BackupOption where
   toJSON AdUnit_ContentAdsSettings_BackupOption {..} =
     Core.object
       ( Core.catMaybes
@@ -668,10 +661,7 @@ newAdUnit_MobileContentAdsSettings =
       type' = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    AdUnit_MobileContentAdsSettings
-  where
+instance Core.FromJSON AdUnit_MobileContentAdsSettings where
   parseJSON =
     Core.withObject
       "AdUnit_MobileContentAdsSettings"
@@ -688,8 +678,7 @@ instance Core.ToJSON AdUnit_MobileContentAdsSettings where
     Core.object
       ( Core.catMaybes
           [ ("markupLanguage" Core..=) Core.<$> markupLanguage,
-            ("scriptingLanguage" Core..=)
-              Core.<$> scriptingLanguage,
+            ("scriptingLanguage" Core..=) Core.<$> scriptingLanguage,
             ("size" Core..=) Core.<$> size,
             ("type" Core..=) Core.<$> type'
           ]
@@ -791,9 +780,7 @@ instance Core.FromJSON AssociationSession where
           AssociationSession
             Core.<$> (o Core..:? "accountId")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "adsensehost#associationSession"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "adsensehost#associationSession")
             Core.<*> (o Core..:? "productCodes")
             Core.<*> (o Core..:? "redirectUrl")
             Core.<*> (o Core..:? "status")
@@ -851,9 +838,7 @@ instance Core.FromJSON CustomChannel where
           CustomChannel
             Core.<$> (o Core..:? "code")
             Core.<*> (o Core..:? "id")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "adsensehost#customChannel"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "adsensehost#customChannel")
             Core.<*> (o Core..:? "name")
       )
 
@@ -901,9 +886,7 @@ instance Core.FromJSON CustomChannels where
           CustomChannels
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "adsensehost#customChannels"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "adsensehost#customChannels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 
@@ -962,9 +945,7 @@ instance Core.FromJSON Report where
             Core.<*> (o Core..:? "headers")
             Core.<*> (o Core..:? "kind" Core..!= "adsensehost#report")
             Core.<*> (o Core..:? "rows")
-            Core.<*> ( o Core..:? "totalMatchedRows"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "totalMatchedRows" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "totals")
             Core.<*> (o Core..:? "warnings")
       )
@@ -977,7 +958,8 @@ instance Core.ToJSON Report where
             ("headers" Core..=) Core.<$> headers,
             Core.Just ("kind" Core..= kind),
             ("rows" Core..=) Core.<$> rows,
-            ("totalMatchedRows" Core..=) Core.. Core.AsText
+            ("totalMatchedRows" Core..=)
+              Core.. Core.AsText
               Core.<$> totalMatchedRows,
             ("totals" Core..=) Core.<$> totals,
             ("warnings" Core..=) Core.<$> warnings
@@ -1103,9 +1085,7 @@ instance Core.FromJSON UrlChannels where
           UrlChannels
             Core.<$> (o Core..:? "etag")
             Core.<*> (o Core..:? "items")
-            Core.<*> ( o Core..:? "kind"
-                         Core..!= "adsensehost#urlChannels"
-                     )
+            Core.<*> (o Core..:? "kind" Core..!= "adsensehost#urlChannels")
             Core.<*> (o Core..:? "nextPageToken")
       )
 

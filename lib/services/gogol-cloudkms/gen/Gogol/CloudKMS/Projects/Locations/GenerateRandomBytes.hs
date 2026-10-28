@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.CloudKMS.Projects.Locations.GenerateRandomBytes
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.generateRandomBytes@ method which the
 -- 'CloudKMSProjectsLocationsGenerateRandomBytes' request conforms to.
 type CloudKMSProjectsLocationsGenerateRandomBytesResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "location"
-              "generateRandomBytes"
-              Core.Text
+    Core.:> Core.CaptureMode "location" "generateRandomBytes" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -89,7 +84,8 @@ newCloudKMSProjectsLocationsGenerateRandomBytes ::
   CloudKMSProjectsLocationsGenerateRandomBytes
 newCloudKMSProjectsLocationsGenerateRandomBytes location payload =
   CloudKMSProjectsLocationsGenerateRandomBytes
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       location = location,
@@ -106,26 +102,23 @@ instance
     Rs CloudKMSProjectsLocationsGenerateRandomBytes =
       GenerateRandomBytesResponse
   type
-    Scopes
-      CloudKMSProjectsLocationsGenerateRandomBytes =
+    Scopes CloudKMSProjectsLocationsGenerateRandomBytes =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsGenerateRandomBytes {..} =
-      go
-        location
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsGenerateRandomBytesResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsGenerateRandomBytes {..} =
+    go
+      location
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudKMSProjectsLocationsGenerateRandomBytesResource
+          )
+          Core.mempty

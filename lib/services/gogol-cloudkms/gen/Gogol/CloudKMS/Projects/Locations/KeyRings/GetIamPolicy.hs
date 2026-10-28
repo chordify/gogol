@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.CloudKMS.Projects.Locations.KeyRings.GetIamPolicy
 where
 
 import Gogol.CloudKMS.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @cloudkms.projects.locations.keyRings.getIamPolicy@ method which the
 -- 'CloudKMSProjectsLocationsKeyRingsGetIamPolicy' request conforms to.
@@ -50,9 +48,7 @@ type CloudKMSProjectsLocationsKeyRingsGetIamPolicyResource =
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
-    Core.:> Core.QueryParam
-              "options.requestedPolicyVersion"
-              Core.Int32
+    Core.:> Core.QueryParam "options.requestedPolicyVersion" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -86,7 +82,8 @@ newCloudKMSProjectsLocationsKeyRingsGetIamPolicy ::
   CloudKMSProjectsLocationsKeyRingsGetIamPolicy
 newCloudKMSProjectsLocationsKeyRingsGetIamPolicy resource =
   CloudKMSProjectsLocationsKeyRingsGetIamPolicy
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       optionsRequestedPolicyVersion = Core.Nothing,
@@ -99,30 +96,25 @@ instance
   Core.GoogleRequest
     CloudKMSProjectsLocationsKeyRingsGetIamPolicy
   where
+  type Rs CloudKMSProjectsLocationsKeyRingsGetIamPolicy = Policy
   type
-    Rs CloudKMSProjectsLocationsKeyRingsGetIamPolicy =
-      Policy
-  type
-    Scopes
-      CloudKMSProjectsLocationsKeyRingsGetIamPolicy =
+    Scopes CloudKMSProjectsLocationsKeyRingsGetIamPolicy =
       '[CloudPlatform'FullControl, Cloudkms'FullControl]
-  requestClient
-    CloudKMSProjectsLocationsKeyRingsGetIamPolicy {..} =
-      go
-        resource
-        xgafv
-        accessToken
-        callback
-        optionsRequestedPolicyVersion
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        cloudKMSService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  CloudKMSProjectsLocationsKeyRingsGetIamPolicyResource
-            )
-            Core.mempty
+  requestClient CloudKMSProjectsLocationsKeyRingsGetIamPolicy {..} =
+    go
+      resource
+      xgafv
+      accessToken
+      callback
+      optionsRequestedPolicyVersion
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      cloudKMSService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy CloudKMSProjectsLocationsKeyRingsGetIamPolicyResource
+          )
+          Core.mempty

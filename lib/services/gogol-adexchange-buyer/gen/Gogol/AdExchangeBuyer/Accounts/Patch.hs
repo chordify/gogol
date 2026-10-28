@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer.Accounts.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer.Accounts.Patch
 where
 
 import Gogol.AdExchangeBuyer.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer.accounts.patch@ method which the
 -- 'AdExchangeBuyerAccountsPatch' request conforms to.
@@ -49,9 +47,7 @@ type AdExchangeBuyerAccountsPatchResource =
     Core.:> "v1.4"
     Core.:> "accounts"
     Core.:> Core.Capture "id" Core.Int32
-    Core.:> Core.QueryParam
-              "confirmUnsafeAccountChange"
-              Core.Bool
+    Core.:> Core.QueryParam "confirmUnsafeAccountChange" Core.Bool
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.ReqBody '[Core.JSON] Account
     Core.:> Core.Patch '[Core.JSON] Account
@@ -78,19 +74,15 @@ newAdExchangeBuyerAccountsPatch ::
   AdExchangeBuyerAccountsPatch
 newAdExchangeBuyerAccountsPatch id payload =
   AdExchangeBuyerAccountsPatch
-    { confirmUnsafeAccountChange = Core.Nothing,
+    { confirmUnsafeAccountChange =
+        Core.Nothing,
       id = id,
       payload = payload
     }
 
-instance
-  Core.GoogleRequest
-    AdExchangeBuyerAccountsPatch
-  where
+instance Core.GoogleRequest AdExchangeBuyerAccountsPatch where
   type Rs AdExchangeBuyerAccountsPatch = Account
-  type
-    Scopes AdExchangeBuyerAccountsPatch =
-      '[Adexchange'Buyer]
+  type Scopes AdExchangeBuyerAccountsPatch = '[Adexchange'Buyer]
   requestClient AdExchangeBuyerAccountsPatch {..} =
     go
       id
@@ -101,7 +93,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdExchangeBuyerAccountsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy AdExchangeBuyerAccountsPatchResource)
           Core.mempty

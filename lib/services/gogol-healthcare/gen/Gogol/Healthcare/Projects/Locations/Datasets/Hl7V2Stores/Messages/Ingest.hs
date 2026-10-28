@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Ingest
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Healthcare.Projects.Locations.Datasets.Hl7V2Stores.Messages.Ingest
 where
 
 import Gogol.Healthcare.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @healthcare.projects.locations.datasets.hl7V2Stores.messages.ingest@ method which the
 -- 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest' request conforms to.
@@ -67,7 +65,7 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest = HealthcarePr
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The name of the HL7v2 store this message belongs to.
+    -- | Required. The name of the HL7v2 store this message belongs to.
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: IngestMessageRequest,
@@ -80,21 +78,24 @@ data HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest = HealthcarePr
 
 -- | Creates a value of 'HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest' with the minimum fields required to make a request.
 newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest ::
-  -- |  The name of the HL7v2 store this message belongs to. See 'parent'.
+  -- |  Required. The name of the HL7v2 store this message belongs to. See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   IngestMessageRequest ->
   HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest
-newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest parent payload =
-  HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newHealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest
+  parent
+  payload =
+    HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
@@ -107,7 +108,7 @@ instance
   type
     Scopes
       HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest =
-      '[CloudPlatform'FullControl]
+      '[CloudHealthcare'FullControl, CloudPlatform'FullControl]
   requestClient
     HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest {..} =
       go

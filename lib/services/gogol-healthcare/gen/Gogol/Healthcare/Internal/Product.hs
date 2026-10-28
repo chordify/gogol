@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,24 @@
 
 -- |
 -- Module      : Gogol.Healthcare.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Healthcare.Internal.Product
-  ( -- * ActivateConsentRequest
+  ( -- * AccessDeterminationLogConfig
+    AccessDeterminationLogConfig (..),
+    newAccessDeterminationLogConfig,
+
+    -- * ActivateConsentRequest
     ActivateConsentRequest (..),
     newActivateConsentRequest,
+
+    -- * AdminConsents
+    AdminConsents (..),
+    newAdminConsents,
 
     -- * AnalyzeEntitiesRequest
     AnalyzeEntitiesRequest (..),
@@ -37,6 +43,26 @@ module Gogol.Healthcare.Internal.Product
     -- * AnalyzeEntitiesResponse
     AnalyzeEntitiesResponse (..),
     newAnalyzeEntitiesResponse,
+
+    -- * ApplyAdminConsentsErrorDetail
+    ApplyAdminConsentsErrorDetail (..),
+    newApplyAdminConsentsErrorDetail,
+
+    -- * ApplyAdminConsentsRequest
+    ApplyAdminConsentsRequest (..),
+    newApplyAdminConsentsRequest,
+
+    -- * ApplyAdminConsentsResponse
+    ApplyAdminConsentsResponse (..),
+    newApplyAdminConsentsResponse,
+
+    -- * ApplyConsentsRequest
+    ApplyConsentsRequest (..),
+    newApplyConsentsRequest,
+
+    -- * ApplyConsentsResponse
+    ApplyConsentsResponse (..),
+    newApplyConsentsResponse,
 
     -- * ArchiveUserDataMappingRequest
     ArchiveUserDataMappingRequest (..),
@@ -65,6 +91,18 @@ module Gogol.Healthcare.Internal.Product
     -- * Binding
     Binding (..),
     newBinding,
+
+    -- * BlobStorageInfo
+    BlobStorageInfo (..),
+    newBlobStorageInfo,
+
+    -- * BlobStorageSettings
+    BlobStorageSettings (..),
+    newBlobStorageSettings,
+
+    -- * BulkExportGcsDestination
+    BulkExportGcsDestination (..),
+    newBulkExportGcsDestination,
 
     -- * CancelOperationRequest
     CancelOperationRequest (..),
@@ -98,6 +136,10 @@ module Gogol.Healthcare.Internal.Product
     Consent_Metadata (..),
     newConsent_Metadata,
 
+    -- * ConsentAccessorScope
+    ConsentAccessorScope (..),
+    newConsentAccessorScope,
+
     -- * ConsentArtifact
     ConsentArtifact (..),
     newConsentArtifact,
@@ -106,9 +148,21 @@ module Gogol.Healthcare.Internal.Product
     ConsentArtifact_Metadata (..),
     newConsentArtifact_Metadata,
 
+    -- * ConsentConfig
+    ConsentConfig (..),
+    newConsentConfig,
+
+    -- * ConsentErrors
+    ConsentErrors (..),
+    newConsentErrors,
+
     -- * ConsentEvaluation
     ConsentEvaluation (..),
     newConsentEvaluation,
+
+    -- * ConsentHeaderHandling
+    ConsentHeaderHandling (..),
+    newConsentHeaderHandling,
 
     -- * ConsentList
     ConsentList (..),
@@ -178,9 +232,17 @@ module Gogol.Healthcare.Internal.Product
     DicomStore_Labels (..),
     newDicomStore_Labels,
 
+    -- * DicomStoreMetrics
+    DicomStoreMetrics (..),
+    newDicomStoreMetrics,
+
     -- * Empty
     Empty (..),
     newEmpty,
+
+    -- * EncryptionSpec
+    EncryptionSpec (..),
+    newEncryptionSpec,
 
     -- * Entity
     Entity (..),
@@ -209,6 +271,18 @@ module Gogol.Healthcare.Internal.Product
     -- * EvaluateUserConsentsResponse
     EvaluateUserConsentsResponse (..),
     newEvaluateUserConsentsResponse,
+
+    -- * ExplainDataAccessConsentInfo
+    ExplainDataAccessConsentInfo (..),
+    newExplainDataAccessConsentInfo,
+
+    -- * ExplainDataAccessConsentScope
+    ExplainDataAccessConsentScope (..),
+    newExplainDataAccessConsentScope,
+
+    -- * ExplainDataAccessResponse
+    ExplainDataAccessResponse (..),
+    newExplainDataAccessResponse,
 
     -- * ExportDicomDataRequest
     ExportDicomDataRequest (..),
@@ -249,6 +323,10 @@ module Gogol.Healthcare.Internal.Product
     -- * FhirFilter
     FhirFilter (..),
     newFhirFilter,
+
+    -- * FhirNotificationConfig
+    FhirNotificationConfig (..),
+    newFhirNotificationConfig,
 
     -- * FhirStore
     FhirStore (..),
@@ -310,6 +388,10 @@ module Gogol.Healthcare.Internal.Product
     GoogleCloudHealthcareV1DicomGcsSource (..),
     newGoogleCloudHealthcareV1DicomGcsSource,
 
+    -- * GoogleCloudHealthcareV1DicomStreamConfig
+    GoogleCloudHealthcareV1DicomStreamConfig (..),
+    newGoogleCloudHealthcareV1DicomStreamConfig,
+
     -- * GoogleCloudHealthcareV1FhirBigQueryDestination
     GoogleCloudHealthcareV1FhirBigQueryDestination (..),
     newGoogleCloudHealthcareV1FhirBigQueryDestination,
@@ -349,6 +431,14 @@ module Gogol.Healthcare.Internal.Product
     -- * Hl7V2Store_Labels
     Hl7V2Store_Labels (..),
     newHl7V2Store_Labels,
+
+    -- * Hl7V2StoreMetric
+    Hl7V2StoreMetric (..),
+    newHl7V2StoreMetric,
+
+    -- * Hl7V2StoreMetrics
+    Hl7V2StoreMetrics (..),
+    newHl7V2StoreMetrics,
 
     -- * HttpBody
     HttpBody (..),
@@ -514,6 +604,10 @@ module Gogol.Healthcare.Internal.Product
     PatientId (..),
     newPatientId,
 
+    -- * PatientScope
+    PatientScope (..),
+    newPatientScope,
+
     -- * Policy
     Policy (..),
     newPolicy,
@@ -521,6 +615,10 @@ module Gogol.Healthcare.Internal.Product
     -- * ProgressCounter
     ProgressCounter (..),
     newProgressCounter,
+
+    -- * PubsubDestination
+    PubsubDestination (..),
+    newPubsubDestination,
 
     -- * QueryAccessibleDataRequest
     QueryAccessibleDataRequest (..),
@@ -566,6 +664,30 @@ module Gogol.Healthcare.Internal.Product
     RevokeConsentRequest (..),
     newRevokeConsentRequest,
 
+    -- * RollbackFhirResourceFilteringFields
+    RollbackFhirResourceFilteringFields (..),
+    newRollbackFhirResourceFilteringFields,
+
+    -- * RollbackFhirResourcesRequest
+    RollbackFhirResourcesRequest (..),
+    newRollbackFhirResourcesRequest,
+
+    -- * RollbackFhirResourcesResponse
+    RollbackFhirResourcesResponse (..),
+    newRollbackFhirResourcesResponse,
+
+    -- * RollbackHL7MessagesFilteringFields
+    RollbackHL7MessagesFilteringFields (..),
+    newRollbackHL7MessagesFilteringFields,
+
+    -- * RollbackHl7V2MessagesRequest
+    RollbackHl7V2MessagesRequest (..),
+    newRollbackHl7V2MessagesRequest,
+
+    -- * RollbackHl7V2MessagesResponse
+    RollbackHl7V2MessagesResponse (..),
+    newRollbackHl7V2MessagesResponse,
+
     -- * SchemaConfig
     SchemaConfig (..),
     newSchemaConfig,
@@ -598,6 +720,18 @@ module Gogol.Healthcare.Internal.Product
     Segment_Fields (..),
     newSegment_Fields,
 
+    -- * SeriesMetrics
+    SeriesMetrics (..),
+    newSeriesMetrics,
+
+    -- * SetBlobStorageSettingsRequest
+    SetBlobStorageSettingsRequest (..),
+    newSetBlobStorageSettingsRequest,
+
+    -- * SetBlobStorageSettingsResponse
+    SetBlobStorageSettingsResponse (..),
+    newSetBlobStorageSettingsResponse,
+
     -- * SetIamPolicyRequest
     SetIamPolicyRequest (..),
     newSetIamPolicyRequest,
@@ -618,9 +752,21 @@ module Gogol.Healthcare.Internal.Product
     Status_DetailsItem (..),
     newStatus_DetailsItem,
 
+    -- * StorageInfo
+    StorageInfo (..),
+    newStorageInfo,
+
     -- * StreamConfig
     StreamConfig (..),
     newStreamConfig,
+
+    -- * StructuredStorageInfo
+    StructuredStorageInfo (..),
+    newStructuredStorageInfo,
+
+    -- * StudyMetrics
+    StudyMetrics (..),
+    newStudyMetrics,
 
     -- * TagFilterList
     TagFilterList (..),
@@ -646,6 +792,10 @@ module Gogol.Healthcare.Internal.Product
     TimePartitioning (..),
     newTimePartitioning,
 
+    -- * TimeRange
+    TimeRange (..),
+    newTimeRange,
+
     -- * Type
     Type (..),
     newType,
@@ -665,7 +815,35 @@ module Gogol.Healthcare.Internal.Product
 where
 
 import Gogol.Healthcare.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
+
+-- | Configures consent audit log config for FHIR create, read, update, and delete (CRUD) operations. Cloud audit log for healthcare API must be <https://cloud.google.com/logging/docs/audit/configure-data-access#config-console-enable enabled>. The consent-related logs are included as part of @protoPayload.metadata@.
+--
+-- /See:/ 'newAccessDeterminationLogConfig' smart constructor.
+newtype AccessDeterminationLogConfig = AccessDeterminationLogConfig
+  { -- | Optional. Controls the amount of detail to include as part of the audit logs.
+    logLevel :: (Core.Maybe AccessDeterminationLogConfig_LogLevel)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AccessDeterminationLogConfig' with the minimum fields required to make a request.
+newAccessDeterminationLogConfig ::
+  AccessDeterminationLogConfig
+newAccessDeterminationLogConfig =
+  AccessDeterminationLogConfig {logLevel = Core.Nothing}
+
+instance Core.FromJSON AccessDeterminationLogConfig where
+  parseJSON =
+    Core.withObject
+      "AccessDeterminationLogConfig"
+      ( \o ->
+          AccessDeterminationLogConfig Core.<$> (o Core..:? "logLevel")
+      )
+
+instance Core.ToJSON AccessDeterminationLogConfig where
+  toJSON AccessDeterminationLogConfig {..} =
+    Core.object
+      (Core.catMaybes [("logLevel" Core..=) Core.<$> logLevel])
 
 -- | Activates the latest revision of the specified Consent by committing a new revision with @state@ updated to @ACTIVE@. If the latest revision of the given Consent is in the @ACTIVE@ state, no new revision is committed. A FAILED_PRECONDITION error occurs if the latest revision of the given consent is in the @REJECTED@ or @REVOKED@ state.
 --
@@ -705,18 +883,43 @@ instance Core.ToJSON ActivateConsentRequest where
   toJSON ActivateConsentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consentArtifact" Core..=)
-              Core.<$> consentArtifact,
+          [ ("consentArtifact" Core..=) Core.<$> consentArtifact,
             ("expireTime" Core..=) Core.<$> expireTime,
             ("ttl" Core..=) Core.<$> ttl
           ]
       )
 
+-- | List of admin Consent resources to be applied.
+--
+-- /See:/ 'newAdminConsents' smart constructor.
+newtype AdminConsents = AdminConsents
+  { -- | Optional. The versioned names of the admin Consent resource(s), in the format @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}\/_history\/{version_id}@. For FHIR stores with @disable_resource_versioning=true@, the format is @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}@.
+    names :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'AdminConsents' with the minimum fields required to make a request.
+newAdminConsents ::
+  AdminConsents
+newAdminConsents = AdminConsents {names = Core.Nothing}
+
+instance Core.FromJSON AdminConsents where
+  parseJSON =
+    Core.withObject
+      "AdminConsents"
+      (\o -> AdminConsents Core.<$> (o Core..:? "names"))
+
+instance Core.ToJSON AdminConsents where
+  toJSON AdminConsents {..} =
+    Core.object (Core.catMaybes [("names" Core..=) Core.<$> names])
+
 -- | The request to analyze healthcare entities in a document.
 --
 -- /See:/ 'newAnalyzeEntitiesRequest' smart constructor.
 data AnalyzeEntitiesRequest = AnalyzeEntitiesRequest
-  { -- | document_content is a document to be annotated.
+  { -- | Optional. Alternative output format to be generated based on the results of analysis.
+    alternativeOutputFormat :: (Core.Maybe AnalyzeEntitiesRequest_AlternativeOutputFormat),
+    -- | document_content is a document to be annotated.
     documentContent :: (Core.Maybe Core.Text),
     -- | A list of licensed vocabularies to use in the request, in addition to the default unlicensed vocabularies.
     licensedVocabularies :: (Core.Maybe [AnalyzeEntitiesRequest_LicensedVocabulariesItem])
@@ -728,7 +931,8 @@ newAnalyzeEntitiesRequest ::
   AnalyzeEntitiesRequest
 newAnalyzeEntitiesRequest =
   AnalyzeEntitiesRequest
-    { documentContent = Core.Nothing,
+    { alternativeOutputFormat = Core.Nothing,
+      documentContent = Core.Nothing,
       licensedVocabularies = Core.Nothing
     }
 
@@ -738,7 +942,8 @@ instance Core.FromJSON AnalyzeEntitiesRequest where
       "AnalyzeEntitiesRequest"
       ( \o ->
           AnalyzeEntitiesRequest
-            Core.<$> (o Core..:? "documentContent")
+            Core.<$> (o Core..:? "alternativeOutputFormat")
+            Core.<*> (o Core..:? "documentContent")
             Core.<*> (o Core..:? "licensedVocabularies")
       )
 
@@ -746,10 +951,10 @@ instance Core.ToJSON AnalyzeEntitiesRequest where
   toJSON AnalyzeEntitiesRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("documentContent" Core..=)
-              Core.<$> documentContent,
-            ("licensedVocabularies" Core..=)
-              Core.<$> licensedVocabularies
+          [ ("alternativeOutputFormat" Core..=)
+              Core.<$> alternativeOutputFormat,
+            ("documentContent" Core..=) Core.<$> documentContent,
+            ("licensedVocabularies" Core..=) Core.<$> licensedVocabularies
           ]
       )
 
@@ -759,8 +964,10 @@ instance Core.ToJSON AnalyzeEntitiesRequest where
 data AnalyzeEntitiesResponse = AnalyzeEntitiesResponse
   { -- | The union of all the candidate entities that the entity_mentions in this response could link to. These are UMLS concepts or normalized mention content.
     entities :: (Core.Maybe [Entity]),
-    -- | entity_mentions contains all the annotated medical entities that were mentioned in the provided document.
+    -- | The @entity_mentions@ field contains all the annotated medical entities that were mentioned in the provided document.
     entityMentions :: (Core.Maybe [EntityMention]),
+    -- | The FHIR bundle (<http://hl7.org/fhir/R4/bundle.html R4>) that includes all the entities, the entity mentions, and the relationships in JSON format.
+    fhirBundle :: (Core.Maybe Core.Text),
     -- | relationships contains all the binary relationships that were identified between entity mentions within the provided document.
     relationships :: (Core.Maybe [EntityMentionRelationship])
   }
@@ -773,6 +980,7 @@ newAnalyzeEntitiesResponse =
   AnalyzeEntitiesResponse
     { entities = Core.Nothing,
       entityMentions = Core.Nothing,
+      fhirBundle = Core.Nothing,
       relationships = Core.Nothing
     }
 
@@ -784,6 +992,7 @@ instance Core.FromJSON AnalyzeEntitiesResponse where
           AnalyzeEntitiesResponse
             Core.<$> (o Core..:? "entities")
             Core.<*> (o Core..:? "entityMentions")
+            Core.<*> (o Core..:? "fhirBundle")
             Core.<*> (o Core..:? "relationships")
       )
 
@@ -793,7 +1002,252 @@ instance Core.ToJSON AnalyzeEntitiesResponse where
       ( Core.catMaybes
           [ ("entities" Core..=) Core.<$> entities,
             ("entityMentions" Core..=) Core.<$> entityMentions,
+            ("fhirBundle" Core..=) Core.<$> fhirBundle,
             ("relationships" Core..=) Core.<$> relationships
+          ]
+      )
+
+-- | Contains the error details of the unsupported admin Consent resources for when the ApplyAdminConsents method fails to apply one or more Consent resources.
+--
+-- /See:/ 'newApplyAdminConsentsErrorDetail' smart constructor.
+data ApplyAdminConsentsErrorDetail = ApplyAdminConsentsErrorDetail
+  { -- | The list of Consent resources that are unsupported or cannot be applied and the error associated with each of them.
+    consentErrors :: (Core.Maybe [ConsentErrors]),
+    -- | The currently in progress non-validate-only ApplyAdminConsents operation ID if exist.
+    existingOperationId :: (Core.Maybe Core.Word64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplyAdminConsentsErrorDetail' with the minimum fields required to make a request.
+newApplyAdminConsentsErrorDetail ::
+  ApplyAdminConsentsErrorDetail
+newApplyAdminConsentsErrorDetail =
+  ApplyAdminConsentsErrorDetail
+    { consentErrors = Core.Nothing,
+      existingOperationId = Core.Nothing
+    }
+
+instance Core.FromJSON ApplyAdminConsentsErrorDetail where
+  parseJSON =
+    Core.withObject
+      "ApplyAdminConsentsErrorDetail"
+      ( \o ->
+          ApplyAdminConsentsErrorDetail
+            Core.<$> (o Core..:? "consentErrors")
+            Core.<*> ( o
+                         Core..:? "existingOperationId"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON ApplyAdminConsentsErrorDetail where
+  toJSON ApplyAdminConsentsErrorDetail {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consentErrors" Core..=) Core.<$> consentErrors,
+            ("existingOperationId" Core..=)
+              Core.. Core.AsText
+              Core.<$> existingOperationId
+          ]
+      )
+
+-- | Request to apply the admin Consent resources for the specified FHIR store.
+--
+-- /See:/ 'newApplyAdminConsentsRequest' smart constructor.
+data ApplyAdminConsentsRequest = ApplyAdminConsentsRequest
+  { -- | A new list of admin Consent resources to be applied. Any existing enforced Consents, which are specified in @consent_config.enforced_admin_consents@ of the FhirStore, that are not part of this list will be disabled. An empty list is equivalent to clearing or disabling all Consents enforced on the FHIR store. When a FHIR store has @disable_resource_versioning=true@ and this list contains a Consent resource that exists in @consent_config.enforced_admin_consents@, the method enforces any updates to the existing resource since the last enforcement. If the existing resource hasn\'t been updated since the last enforcement, the resource is unaffected. After the method finishes, the resulting consent enforcement model is determined by the contents of the Consent resource(s) when the method was called: * When @disable_resource_versioning=true@, the result is identical to the current resource(s) in the FHIR store. * When @disable_resource_versioning=false@, the result is based on the historical version(s) of the
+    -- Consent resource(s) at the point in time when the method was called. At most 200 Consents can be specified.
+    newConsentsList' :: (Core.Maybe AdminConsents),
+    -- | Optional. If true, the method only validates Consent resources to make sure they are supported. Otherwise, the method applies the aggregate consent information to update the enforcement model and reindex the FHIR resources. If all Consent resources can be applied successfully, the ApplyAdminConsentsResponse is returned containing the following fields: * @consent_apply_success@ to indicate the number of Consent resources applied. * @affected_resources@ to indicate the number of resources that might have had their consent access changed. If, however, one or more Consent resources are unsupported or cannot be applied, the method fails and ApplyAdminConsentsErrorDetail is is returned with details about the unsupported Consent resources.
+    validateOnly :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplyAdminConsentsRequest' with the minimum fields required to make a request.
+newApplyAdminConsentsRequest ::
+  ApplyAdminConsentsRequest
+newApplyAdminConsentsRequest =
+  ApplyAdminConsentsRequest
+    { newConsentsList' = Core.Nothing,
+      validateOnly = Core.Nothing
+    }
+
+instance Core.FromJSON ApplyAdminConsentsRequest where
+  parseJSON =
+    Core.withObject
+      "ApplyAdminConsentsRequest"
+      ( \o ->
+          ApplyAdminConsentsRequest
+            Core.<$> (o Core..:? "newConsentsList")
+            Core.<*> (o Core..:? "validateOnly")
+      )
+
+instance Core.ToJSON ApplyAdminConsentsRequest where
+  toJSON ApplyAdminConsentsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("newConsentsList" Core..=) Core.<$> newConsentsList',
+            ("validateOnly" Core..=) Core.<$> validateOnly
+          ]
+      )
+
+-- | Response when all admin Consent resources in scope were processed and all affected resources were reindexed successfully. This structure will be included in the response when the operation finishes successfully.
+--
+-- /See:/ 'newApplyAdminConsentsResponse' smart constructor.
+data ApplyAdminConsentsResponse = ApplyAdminConsentsResponse
+  { -- | The number of resources (including the Consent resources) that may have consent access change.
+    affectedResources :: (Core.Maybe Core.Int64),
+    -- | If @validate_only=false@ in ApplyAdminConsentsRequest, this counter contains the number of Consent resources that were successfully applied. Otherwise, it is the number of Consent resources that are supported.
+    consentApplySuccess :: (Core.Maybe Core.Int64),
+    -- | The number of resources (including the Consent resources) that ApplyAdminConsents failed to re-index.
+    failedResources :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplyAdminConsentsResponse' with the minimum fields required to make a request.
+newApplyAdminConsentsResponse ::
+  ApplyAdminConsentsResponse
+newApplyAdminConsentsResponse =
+  ApplyAdminConsentsResponse
+    { affectedResources = Core.Nothing,
+      consentApplySuccess = Core.Nothing,
+      failedResources = Core.Nothing
+    }
+
+instance Core.FromJSON ApplyAdminConsentsResponse where
+  parseJSON =
+    Core.withObject
+      "ApplyAdminConsentsResponse"
+      ( \o ->
+          ApplyAdminConsentsResponse
+            Core.<$> (o Core..:? "affectedResources" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "consentApplySuccess"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "failedResources" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ApplyAdminConsentsResponse where
+  toJSON ApplyAdminConsentsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("affectedResources" Core..=)
+              Core.. Core.AsText
+              Core.<$> affectedResources,
+            ("consentApplySuccess" Core..=)
+              Core.. Core.AsText
+              Core.<$> consentApplySuccess,
+            ("failedResources" Core..=)
+              Core.. Core.AsText
+              Core.<$> failedResources
+          ]
+      )
+
+-- | Request to apply the Consent resources for the specified FHIR store.
+--
+-- /See:/ 'newApplyConsentsRequest' smart constructor.
+data ApplyConsentsRequest = ApplyConsentsRequest
+  { -- | Optional. Scope down to a list of patients.
+    patientScope :: (Core.Maybe PatientScope),
+    -- | Optional. Scope down to patients whose most recent consent changes are in the time range. Can only be used with a versioning store (i.e. when disable/resource/versioning is set to false).
+    timeRange :: (Core.Maybe TimeRange),
+    -- | Optional. If true, the method only validates Consent resources to make sure they are supported. When the operation completes, ApplyConsentsResponse is returned where @consent_apply_success@ and @consent_apply_failure@ indicate supported and unsupported (or invalid) Consent resources, respectively. Otherwise, the method propagates the aggregate consensual information to the patient\'s resources. Upon success, @affected_resources@ in the ApplyConsentsResponse indicates the number of resources that may have consensual access changed.
+    validateOnly :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplyConsentsRequest' with the minimum fields required to make a request.
+newApplyConsentsRequest ::
+  ApplyConsentsRequest
+newApplyConsentsRequest =
+  ApplyConsentsRequest
+    { patientScope = Core.Nothing,
+      timeRange = Core.Nothing,
+      validateOnly = Core.Nothing
+    }
+
+instance Core.FromJSON ApplyConsentsRequest where
+  parseJSON =
+    Core.withObject
+      "ApplyConsentsRequest"
+      ( \o ->
+          ApplyConsentsRequest
+            Core.<$> (o Core..:? "patientScope")
+            Core.<*> (o Core..:? "timeRange")
+            Core.<*> (o Core..:? "validateOnly")
+      )
+
+instance Core.ToJSON ApplyConsentsRequest where
+  toJSON ApplyConsentsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("patientScope" Core..=) Core.<$> patientScope,
+            ("timeRange" Core..=) Core.<$> timeRange,
+            ("validateOnly" Core..=) Core.<$> validateOnly
+          ]
+      )
+
+-- | Response when all Consent resources in scope were processed and all affected resources were reindexed successfully. This structure is included in the response when the operation finishes successfully.
+--
+-- /See:/ 'newApplyConsentsResponse' smart constructor.
+data ApplyConsentsResponse = ApplyConsentsResponse
+  { -- | The number of resources (including the Consent resources) that may have consensual access change.
+    affectedResources :: (Core.Maybe Core.Int64),
+    -- | If @validate_only = false@ in ApplyConsentsRequest, this counter is the number of Consent resources that were failed to apply. Otherwise, it is the number of Consent resources that are not supported or invalid.
+    consentApplyFailure :: (Core.Maybe Core.Int64),
+    -- | If @validate_only = false@ in ApplyConsentsRequest, this counter is the number of Consent resources that were successfully applied. Otherwise, it is the number of Consent resources that are supported.
+    consentApplySuccess :: (Core.Maybe Core.Int64),
+    -- | The number of resources (including the Consent resources) that ApplyConsents failed to re-index.
+    failedResources :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ApplyConsentsResponse' with the minimum fields required to make a request.
+newApplyConsentsResponse ::
+  ApplyConsentsResponse
+newApplyConsentsResponse =
+  ApplyConsentsResponse
+    { affectedResources = Core.Nothing,
+      consentApplyFailure = Core.Nothing,
+      consentApplySuccess = Core.Nothing,
+      failedResources = Core.Nothing
+    }
+
+instance Core.FromJSON ApplyConsentsResponse where
+  parseJSON =
+    Core.withObject
+      "ApplyConsentsResponse"
+      ( \o ->
+          ApplyConsentsResponse
+            Core.<$> (o Core..:? "affectedResources" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "consentApplyFailure"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> ( o
+                         Core..:? "consentApplySuccess"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "failedResources" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON ApplyConsentsResponse where
+  toJSON ApplyConsentsResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("affectedResources" Core..=)
+              Core.. Core.AsText
+              Core.<$> affectedResources,
+            ("consentApplyFailure" Core..=)
+              Core.. Core.AsText
+              Core.<$> consentApplyFailure,
+            ("consentApplySuccess" Core..=)
+              Core.. Core.AsText
+              Core.<$> consentApplySuccess,
+            ("failedResources" Core..=)
+              Core.. Core.AsText
+              Core.<$> failedResources
           ]
       )
 
@@ -852,7 +1306,10 @@ data Attribute = Attribute
 newAttribute ::
   Attribute
 newAttribute =
-  Attribute {attributeDefinitionId = Core.Nothing, values = Core.Nothing}
+  Attribute
+    { attributeDefinitionId = Core.Nothing,
+      values = Core.Nothing
+    }
 
 instance Core.FromJSON Attribute where
   parseJSON =
@@ -868,8 +1325,7 @@ instance Core.ToJSON Attribute where
   toJSON Attribute {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributeDefinitionId" Core..=)
-              Core.<$> attributeDefinitionId,
+          [ ("attributeDefinitionId" Core..=) Core.<$> attributeDefinitionId,
             ("values" Core..=) Core.<$> values
           ]
       )
@@ -888,7 +1344,7 @@ data AttributeDefinition = AttributeDefinition
     dataMappingDefaultValue :: (Core.Maybe Core.Text),
     -- | Optional. A description of the attribute.
     description :: (Core.Maybe Core.Text),
-    -- | Resource name of the Attribute definition, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/attributeDefinitions\/{attribute_definition_id}@. Cannot be changed after creation.
+    -- | Identifier. Resource name of the Attribute definition, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/attributeDefinitions\/{attribute_definition_id}@. Cannot be changed after creation.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -926,8 +1382,7 @@ instance Core.ToJSON AttributeDefinition where
       ( Core.catMaybes
           [ ("allowedValues" Core..=) Core.<$> allowedValues,
             ("category" Core..=) Core.<$> category,
-            ("consentDefaultValues" Core..=)
-              Core.<$> consentDefaultValues,
+            ("consentDefaultValues" Core..=) Core.<$> consentDefaultValues,
             ("dataMappingDefaultValue" Core..=)
               Core.<$> dataMappingDefaultValue,
             ("description" Core..=) Core.<$> description,
@@ -951,7 +1406,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -967,8 +1425,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -988,7 +1445,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -1004,8 +1464,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -1017,10 +1476,12 @@ data Binding = Binding
   { -- | The condition that is associated with this binding. If the condition evaluates to @true@, then this binding applies to the current request. If the condition evaluates to @false@, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>.
     condition :: (Core.Maybe Expr),
     -- | Specifies the principals requesting access for a Google Cloud resource. @members@ can have the following values: * @allUsers@: A special identifier that represents anyone who is on the internet; with or without a Google account. * @allAuthenticatedUsers@: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * @user:{emailid}@: An email address that represents a specific Google account. For example, @alice\@example.com@ . * @serviceAccount:{emailid}@: An email address that represents a Google service account. For example, @my-other-app\@appspot.gserviceaccount.com@. * @serviceAccount:{projectid}.svc.id.goog[{namespace}\/{kubernetes-sa}]@: An identifier for a <https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts Kubernetes service account>. For example, @my-project.svc.id.goog[my-namespace\/my-kubernetes-sa]@. *
-    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus
-    -- unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding.
+    -- @group:{emailid}@: An email address that represents a Google group. For example, @admins\@example.com@. * @domain:{domain}@: The G Suite domain (primary) that represents all the users of that domain. For example, @google.com@ or @example.com@. * @principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workforce identity pool. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/group\/{group_id}@: All workforce identities in a group. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All workforce identities with a specific attribute value. * @principalSet:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/*@: All identities in a workforce identity pool. *
+    -- @principal:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/subject\/{subject_attribute_value}@: A single identity in a workload identity pool. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/group\/{group_id}@: A workload identity pool group. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/attribute.{attribute_name}\/{attribute_value}@: All identities in a workload identity pool with a certain attribute. * @principalSet:\/\/iam.googleapis.com\/projects\/{project_number}\/locations\/global\/workloadIdentityPools\/{pool_id}\/*@: All identities in a workload identity pool. * @deleted:user:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a user that has been recently deleted. For example, @alice\@example.com?uid=123456789012345678901@. If the user is recovered, this value reverts
+    -- to @user:{emailid}@ and the recovered user retains the role in the binding. * @deleted:serviceAccount:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, @my-other-app\@appspot.gserviceaccount.com?uid=123456789012345678901@. If the service account is undeleted, this value reverts to @serviceAccount:{emailid}@ and the undeleted service account retains the role in the binding. * @deleted:group:{emailid}?uid={uniqueid}@: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, @admins\@example.com?uid=123456789012345678901@. If the group is recovered, this value reverts to @group:{emailid}@ and the recovered group retains the role in the binding. * @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/{pool_id}\/subject\/{subject_attribute_value}@: Deleted single identity in a workforce identity pool. For example,
+    -- @deleted:principal:\/\/iam.googleapis.com\/locations\/global\/workforcePools\/my-pool-id\/subject\/my-subject-attribute-value@.
     members :: (Core.Maybe [Core.Text]),
-    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@.
+    -- | Role that is assigned to the list of @members@, or principals. For example, @roles\/viewer@, @roles\/editor@, or @roles\/owner@. For an overview of the IAM roles and permissions, see the <https://cloud.google.com/iam/docs/roles-overview IAM documentation>. For a list of the available pre-defined roles, see <https://cloud.google.com/iam/docs/understanding-roles here>.
     role' :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1056,6 +1517,107 @@ instance Core.ToJSON Binding where
           ]
       )
 
+-- | BlobStorageInfo contains details about the data stored in Blob Storage for the referenced resource. Note: Storage class is only valid for DICOM and hence will only be populated for DICOM resources.
+--
+-- /See:/ 'newBlobStorageInfo' smart constructor.
+data BlobStorageInfo = BlobStorageInfo
+  { -- | Size in bytes of data stored in Blob Storage.
+    sizeBytes :: (Core.Maybe Core.Int64),
+    -- | The storage class in which the Blob data is stored.
+    storageClass :: (Core.Maybe BlobStorageInfo_StorageClass),
+    -- | The time at which the storage class was updated. This is used to compute early deletion fees of the resource.
+    storageClassUpdateTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BlobStorageInfo' with the minimum fields required to make a request.
+newBlobStorageInfo ::
+  BlobStorageInfo
+newBlobStorageInfo =
+  BlobStorageInfo
+    { sizeBytes = Core.Nothing,
+      storageClass = Core.Nothing,
+      storageClassUpdateTime = Core.Nothing
+    }
+
+instance Core.FromJSON BlobStorageInfo where
+  parseJSON =
+    Core.withObject
+      "BlobStorageInfo"
+      ( \o ->
+          BlobStorageInfo
+            Core.<$> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "storageClass")
+            Core.<*> (o Core..:? "storageClassUpdateTime")
+      )
+
+instance Core.ToJSON BlobStorageInfo where
+  toJSON BlobStorageInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes,
+            ("storageClass" Core..=) Core.<$> storageClass,
+            ("storageClassUpdateTime" Core..=)
+              Core.<$> storageClassUpdateTime
+          ]
+      )
+
+-- | Settings for data stored in Blob storage.
+--
+-- /See:/ 'newBlobStorageSettings' smart constructor.
+newtype BlobStorageSettings = BlobStorageSettings
+  { -- | The Storage class in which the Blob data is stored.
+    blobStorageClass :: (Core.Maybe BlobStorageSettings_BlobStorageClass)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BlobStorageSettings' with the minimum fields required to make a request.
+newBlobStorageSettings ::
+  BlobStorageSettings
+newBlobStorageSettings =
+  BlobStorageSettings {blobStorageClass = Core.Nothing}
+
+instance Core.FromJSON BlobStorageSettings where
+  parseJSON =
+    Core.withObject
+      "BlobStorageSettings"
+      ( \o ->
+          BlobStorageSettings Core.<$> (o Core..:? "blobStorageClass")
+      )
+
+instance Core.ToJSON BlobStorageSettings where
+  toJSON BlobStorageSettings {..} =
+    Core.object
+      ( Core.catMaybes
+          [("blobStorageClass" Core..=) Core.<$> blobStorageClass]
+      )
+
+-- | The configuration for exporting to Cloud Storage using the bulk export API.
+--
+-- /See:/ 'newBulkExportGcsDestination' smart constructor.
+newtype BulkExportGcsDestination = BulkExportGcsDestination
+  { -- | Optional. URI for a Cloud Storage directory where the server writes result files, in the format @gs:\/\/{bucket-id}\/{path\/to\/destination\/dir}@. If there is no trailing slash, the service appends one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in @uri_prefix@.
+    uriPrefix :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'BulkExportGcsDestination' with the minimum fields required to make a request.
+newBulkExportGcsDestination ::
+  BulkExportGcsDestination
+newBulkExportGcsDestination =
+  BulkExportGcsDestination {uriPrefix = Core.Nothing}
+
+instance Core.FromJSON BulkExportGcsDestination where
+  parseJSON =
+    Core.withObject
+      "BulkExportGcsDestination"
+      (\o -> BulkExportGcsDestination Core.<$> (o Core..:? "uriPrefix"))
+
+instance Core.ToJSON BulkExportGcsDestination where
+  toJSON BulkExportGcsDestination {..} =
+    Core.object
+      (Core.catMaybes [("uriPrefix" Core..=) Core.<$> uriPrefix])
+
 -- | The request message for Operations.CancelOperation.
 --
 -- /See:/ 'newCancelOperationRequest' smart constructor.
@@ -1080,7 +1642,7 @@ instance Core.ToJSON CancelOperationRequest where
 --
 -- /See:/ 'newCharacterMaskConfig' smart constructor.
 newtype CharacterMaskConfig = CharacterMaskConfig
-  { -- | Character to mask the sensitive values. If not supplied, defaults to \"*\".
+  { -- | Optional. Character to mask the sensitive values. If not supplied, defaults to \"*\".
     maskingCharacter :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1088,24 +1650,22 @@ newtype CharacterMaskConfig = CharacterMaskConfig
 -- | Creates a value of 'CharacterMaskConfig' with the minimum fields required to make a request.
 newCharacterMaskConfig ::
   CharacterMaskConfig
-newCharacterMaskConfig = CharacterMaskConfig {maskingCharacter = Core.Nothing}
+newCharacterMaskConfig =
+  CharacterMaskConfig {maskingCharacter = Core.Nothing}
 
 instance Core.FromJSON CharacterMaskConfig where
   parseJSON =
     Core.withObject
       "CharacterMaskConfig"
       ( \o ->
-          CharacterMaskConfig
-            Core.<$> (o Core..:? "maskingCharacter")
+          CharacterMaskConfig Core.<$> (o Core..:? "maskingCharacter")
       )
 
 instance Core.ToJSON CharacterMaskConfig where
   toJSON CharacterMaskConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("maskingCharacter" Core..=)
-              Core.<$> maskingCharacter
-          ]
+          [("maskingCharacter" Core..=) Core.<$> maskingCharacter]
       )
 
 -- | Checks if a particular data_id of a User data mapping in the given consent store is consented for a given use.
@@ -1152,8 +1712,7 @@ instance Core.ToJSON CheckDataAccessRequest where
       ( Core.catMaybes
           [ ("consentList" Core..=) Core.<$> consentList,
             ("dataId" Core..=) Core.<$> dataId,
-            ("requestAttributes" Core..=)
-              Core.<$> requestAttributes,
+            ("requestAttributes" Core..=) Core.<$> requestAttributes,
             ("responseView" Core..=) Core.<$> responseView
           ]
       )
@@ -1162,8 +1721,7 @@ instance Core.ToJSON CheckDataAccessRequest where
 --
 -- /See:/ 'newCheckDataAccessRequest_RequestAttributes' smart constructor.
 newtype CheckDataAccessRequest_RequestAttributes = CheckDataAccessRequest_RequestAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1175,10 +1733,7 @@ newCheckDataAccessRequest_RequestAttributes ::
 newCheckDataAccessRequest_RequestAttributes additional =
   CheckDataAccessRequest_RequestAttributes {additional = additional}
 
-instance
-  Core.FromJSON
-    CheckDataAccessRequest_RequestAttributes
-  where
+instance Core.FromJSON CheckDataAccessRequest_RequestAttributes where
   parseJSON =
     Core.withObject
       "CheckDataAccessRequest_RequestAttributes"
@@ -1187,10 +1742,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    CheckDataAccessRequest_RequestAttributes
-  where
+instance Core.ToJSON CheckDataAccessRequest_RequestAttributes where
   toJSON CheckDataAccessRequest_RequestAttributes {..} =
     Core.toJSON additional
 
@@ -1237,8 +1789,7 @@ instance Core.ToJSON CheckDataAccessResponse where
 --
 -- /See:/ 'newCheckDataAccessResponse_ConsentDetails' smart constructor.
 newtype CheckDataAccessResponse_ConsentDetails = CheckDataAccessResponse_ConsentDetails
-  { -- |
-    additional :: (Core.HashMap Core.Text ConsentEvaluation)
+  { additional :: (Core.HashMap Core.Text ConsentEvaluation)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1250,10 +1801,7 @@ newCheckDataAccessResponse_ConsentDetails ::
 newCheckDataAccessResponse_ConsentDetails additional =
   CheckDataAccessResponse_ConsentDetails {additional = additional}
 
-instance
-  Core.FromJSON
-    CheckDataAccessResponse_ConsentDetails
-  where
+instance Core.FromJSON CheckDataAccessResponse_ConsentDetails where
   parseJSON =
     Core.withObject
       "CheckDataAccessResponse_ConsentDetails"
@@ -1262,10 +1810,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    CheckDataAccessResponse_ConsentDetails
-  where
+instance Core.ToJSON CheckDataAccessResponse_ConsentDetails where
   toJSON CheckDataAccessResponse_ConsentDetails {..} =
     Core.toJSON additional
 
@@ -1279,7 +1824,7 @@ data Consent = Consent
     expireTime :: (Core.Maybe Core.DateTime),
     -- | Optional. User-supplied key-value pairs used to organize Consent resources. Metadata keys must: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - begin with a letter - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes Metadata values must be: - be between 1 and 63 characters long - have a UTF-8 encoding of maximum 128 bytes - consist of up to 63 characters including lowercase letters, numeric characters, underscores, and dashes No more than 64 metadata entries can be associated with a given consent.
     metadata :: (Core.Maybe Consent_Metadata),
-    -- | Resource name of the Consent, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consents\/{consent_id}@. Cannot be changed after creation.
+    -- | Identifier. Resource name of the Consent, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consents\/{consent_id}@. Cannot be changed after creation.
     name :: (Core.Maybe Core.Text),
     -- | Optional. Represents a user\'s consent in terms of the resources that can be accessed and under what conditions.
     policies :: (Core.Maybe [GoogleCloudHealthcareV1ConsentPolicy]),
@@ -1335,14 +1880,12 @@ instance Core.ToJSON Consent where
   toJSON Consent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consentArtifact" Core..=)
-              Core.<$> consentArtifact,
+          [ ("consentArtifact" Core..=) Core.<$> consentArtifact,
             ("expireTime" Core..=) Core.<$> expireTime,
             ("metadata" Core..=) Core.<$> metadata,
             ("name" Core..=) Core.<$> name,
             ("policies" Core..=) Core.<$> policies,
-            ("revisionCreateTime" Core..=)
-              Core.<$> revisionCreateTime,
+            ("revisionCreateTime" Core..=) Core.<$> revisionCreateTime,
             ("revisionId" Core..=) Core.<$> revisionId,
             ("state" Core..=) Core.<$> state,
             ("ttl" Core..=) Core.<$> ttl,
@@ -1354,8 +1897,7 @@ instance Core.ToJSON Consent where
 --
 -- /See:/ 'newConsent_Metadata' smart constructor.
 newtype Consent_Metadata = Consent_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1364,18 +1906,61 @@ newConsent_Metadata ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Consent_Metadata
-newConsent_Metadata additional = Consent_Metadata {additional = additional}
+newConsent_Metadata additional =
+  Consent_Metadata {additional = additional}
 
 instance Core.FromJSON Consent_Metadata where
   parseJSON =
     Core.withObject
       "Consent_Metadata"
-      ( \o ->
-          Consent_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Consent_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Consent_Metadata where
   toJSON Consent_Metadata {..} = Core.toJSON additional
+
+-- | The accessor scope that describes who can access, for what purpose, in which environment.
+--
+-- /See:/ 'newConsentAccessorScope' smart constructor.
+data ConsentAccessorScope = ConsentAccessorScope
+  { -- | An individual, group, or access role that identifies the accessor or a characteristic of the accessor. This can be a resource ID (such as @{resourceType}\/{id}@) or an external URI. This value must be present.
+    actor :: (Core.Maybe Core.Text),
+    -- | An abstract identifier that describes the environment or conditions under which the accessor is acting. If it\'s not specified, it applies to all environments.
+    environment :: (Core.Maybe Core.Text),
+    -- | The intent of data use. If it\'s not specified, it applies to all purposes.
+    purpose :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsentAccessorScope' with the minimum fields required to make a request.
+newConsentAccessorScope ::
+  ConsentAccessorScope
+newConsentAccessorScope =
+  ConsentAccessorScope
+    { actor = Core.Nothing,
+      environment = Core.Nothing,
+      purpose = Core.Nothing
+    }
+
+instance Core.FromJSON ConsentAccessorScope where
+  parseJSON =
+    Core.withObject
+      "ConsentAccessorScope"
+      ( \o ->
+          ConsentAccessorScope
+            Core.<$> (o Core..:? "actor")
+            Core.<*> (o Core..:? "environment")
+            Core.<*> (o Core..:? "purpose")
+      )
+
+instance Core.ToJSON ConsentAccessorScope where
+  toJSON ConsentAccessorScope {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("actor" Core..=) Core.<$> actor,
+            ("environment" Core..=) Core.<$> environment,
+            ("purpose" Core..=) Core.<$> purpose
+          ]
+      )
 
 -- | Documentation of a user\'s consent.
 --
@@ -1389,7 +1974,7 @@ data ConsentArtifact = ConsentArtifact
     guardianSignature :: (Core.Maybe Signature),
     -- | Optional. Metadata associated with the Consent artifact. For example, the consent locale or user agent version.
     metadata :: (Core.Maybe ConsentArtifact_Metadata),
-    -- | Resource name of the Consent artifact, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consentArtifacts\/{consent_artifact_id}@. Cannot be changed after creation.
+    -- | Identifier. Resource name of the Consent artifact, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}\/consentArtifacts\/{consent_artifact_id}@. Cannot be changed after creation.
     name :: (Core.Maybe Core.Text),
     -- | Required. User\'s UUID provided by the client.
     userId :: (Core.Maybe Core.Text),
@@ -1437,16 +2022,13 @@ instance Core.ToJSON ConsentArtifact where
       ( Core.catMaybes
           [ ("consentContentScreenshots" Core..=)
               Core.<$> consentContentScreenshots,
-            ("consentContentVersion" Core..=)
-              Core.<$> consentContentVersion,
-            ("guardianSignature" Core..=)
-              Core.<$> guardianSignature,
+            ("consentContentVersion" Core..=) Core.<$> consentContentVersion,
+            ("guardianSignature" Core..=) Core.<$> guardianSignature,
             ("metadata" Core..=) Core.<$> metadata,
             ("name" Core..=) Core.<$> name,
             ("userId" Core..=) Core.<$> userId,
             ("userSignature" Core..=) Core.<$> userSignature,
-            ("witnessSignature" Core..=)
-              Core.<$> witnessSignature
+            ("witnessSignature" Core..=) Core.<$> witnessSignature
           ]
       )
 
@@ -1454,8 +2036,7 @@ instance Core.ToJSON ConsentArtifact where
 --
 -- /See:/ 'newConsentArtifact_Metadata' smart constructor.
 newtype ConsentArtifact_Metadata = ConsentArtifact_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1471,14 +2052,99 @@ instance Core.FromJSON ConsentArtifact_Metadata where
   parseJSON =
     Core.withObject
       "ConsentArtifact_Metadata"
-      ( \o ->
-          ConsentArtifact_Metadata
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> ConsentArtifact_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON ConsentArtifact_Metadata where
-  toJSON ConsentArtifact_Metadata {..} =
-    Core.toJSON additional
+  toJSON ConsentArtifact_Metadata {..} = Core.toJSON additional
+
+-- | Configures whether to enforce consent for the FHIR store and which consent enforcement version is being used.
+--
+-- /See:/ 'newConsentConfig' smart constructor.
+data ConsentConfig = ConsentConfig
+  { -- | Optional. Specifies how the server logs the consent-aware requests. If not specified, the @AccessDeterminationLogConfig.LogLevel.MINIMUM@ option is used.
+    accessDeterminationLogConfig :: (Core.Maybe AccessDeterminationLogConfig),
+    -- | Optional. The default value is false. If set to true, when accessing FHIR resources, the consent headers will be verified against consents given by patients. See the ConsentEnforcementVersion for the supported consent headers.
+    accessEnforced :: (Core.Maybe Core.Bool),
+    -- | Optional. Different options to configure the behaviour of the server when handling the @X-Consent-Scope@ header.
+    consentHeaderHandling :: (Core.Maybe ConsentHeaderHandling),
+    -- | Output only. The versioned names of the enforced admin Consent resource(s), in the format @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}\/_history\/{version_id}@. For FHIR stores with @disable_resource_versioning=true@, the format is @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}@. This field can only be updated using ApplyAdminConsents.
+    enforcedAdminConsents :: (Core.Maybe [Core.Text]),
+    -- | Required. Specifies which consent enforcement version is being used for this FHIR store. This field can only be set once by either CreateFhirStore or UpdateFhirStore. After that, you must call ApplyConsents to change the version.
+    version :: (Core.Maybe ConsentConfig_Version)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsentConfig' with the minimum fields required to make a request.
+newConsentConfig ::
+  ConsentConfig
+newConsentConfig =
+  ConsentConfig
+    { accessDeterminationLogConfig = Core.Nothing,
+      accessEnforced = Core.Nothing,
+      consentHeaderHandling = Core.Nothing,
+      enforcedAdminConsents = Core.Nothing,
+      version = Core.Nothing
+    }
+
+instance Core.FromJSON ConsentConfig where
+  parseJSON =
+    Core.withObject
+      "ConsentConfig"
+      ( \o ->
+          ConsentConfig
+            Core.<$> (o Core..:? "accessDeterminationLogConfig")
+            Core.<*> (o Core..:? "accessEnforced")
+            Core.<*> (o Core..:? "consentHeaderHandling")
+            Core.<*> (o Core..:? "enforcedAdminConsents")
+            Core.<*> (o Core..:? "version")
+      )
+
+instance Core.ToJSON ConsentConfig where
+  toJSON ConsentConfig {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accessDeterminationLogConfig" Core..=)
+              Core.<$> accessDeterminationLogConfig,
+            ("accessEnforced" Core..=) Core.<$> accessEnforced,
+            ("consentHeaderHandling" Core..=) Core.<$> consentHeaderHandling,
+            ("enforcedAdminConsents" Core..=) Core.<$> enforcedAdminConsents,
+            ("version" Core..=) Core.<$> version
+          ]
+      )
+
+-- | The Consent resource name and error.
+--
+-- /See:/ 'newConsentErrors' smart constructor.
+data ConsentErrors = ConsentErrors
+  { -- | The error code and message.
+    error :: (Core.Maybe Status),
+    -- | The versioned name of the admin Consent resource, in the format @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}\/_history\/{version_id}@. For FHIR stores with @disable_resource_versioning=true@, the format is @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}@.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsentErrors' with the minimum fields required to make a request.
+newConsentErrors ::
+  ConsentErrors
+newConsentErrors =
+  ConsentErrors {error = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON ConsentErrors where
+  parseJSON =
+    Core.withObject
+      "ConsentErrors"
+      ( \o ->
+          ConsentErrors
+            Core.<$> (o Core..:? "error")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON ConsentErrors where
+  toJSON ConsentErrors {..} =
+    Core.object
+      ( Core.catMaybes
+          [("error" Core..=) Core.<$> error, ("name" Core..=) Core.<$> name]
+      )
 
 -- | The detailed evaluation of a particular Consent.
 --
@@ -1492,25 +2158,47 @@ newtype ConsentEvaluation = ConsentEvaluation
 -- | Creates a value of 'ConsentEvaluation' with the minimum fields required to make a request.
 newConsentEvaluation ::
   ConsentEvaluation
-newConsentEvaluation = ConsentEvaluation {evaluationResult = Core.Nothing}
+newConsentEvaluation =
+  ConsentEvaluation {evaluationResult = Core.Nothing}
 
 instance Core.FromJSON ConsentEvaluation where
   parseJSON =
     Core.withObject
       "ConsentEvaluation"
-      ( \o ->
-          ConsentEvaluation
-            Core.<$> (o Core..:? "evaluationResult")
-      )
+      (\o -> ConsentEvaluation Core.<$> (o Core..:? "evaluationResult"))
 
 instance Core.ToJSON ConsentEvaluation where
   toJSON ConsentEvaluation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("evaluationResult" Core..=)
-              Core.<$> evaluationResult
-          ]
+          [("evaluationResult" Core..=) Core.<$> evaluationResult]
       )
+
+-- | How the server handles the consent header.
+--
+-- /See:/ 'newConsentHeaderHandling' smart constructor.
+newtype ConsentHeaderHandling = ConsentHeaderHandling
+  { -- | Optional. Specifies the default server behavior when the header is empty. If not specified, the @ScopeProfile.PERMIT_EMPTY_SCOPE@ option is used.
+    profile :: (Core.Maybe ConsentHeaderHandling_Profile)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ConsentHeaderHandling' with the minimum fields required to make a request.
+newConsentHeaderHandling ::
+  ConsentHeaderHandling
+newConsentHeaderHandling =
+  ConsentHeaderHandling {profile = Core.Nothing}
+
+instance Core.FromJSON ConsentHeaderHandling where
+  parseJSON =
+    Core.withObject
+      "ConsentHeaderHandling"
+      (\o -> ConsentHeaderHandling Core.<$> (o Core..:? "profile"))
+
+instance Core.ToJSON ConsentHeaderHandling where
+  toJSON ConsentHeaderHandling {..} =
+    Core.object
+      (Core.catMaybes [("profile" Core..=) Core.<$> profile])
 
 -- | List of resource names of Consent resources.
 --
@@ -1535,9 +2223,7 @@ instance Core.FromJSON ConsentList where
 instance Core.ToJSON ConsentList where
   toJSON ConsentList {..} =
     Core.object
-      ( Core.catMaybes
-          [("consents" Core..=) Core.<$> consents]
-      )
+      (Core.catMaybes [("consents" Core..=) Core.<$> consents])
 
 -- | Represents a consent store.
 --
@@ -1549,7 +2235,7 @@ data ConsentStore = ConsentStore
     enableConsentCreateOnUpdate :: (Core.Maybe Core.Bool),
     -- | Optional. User-supplied key-value pairs used to organize consent stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62}. Label values must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63}. No more than 64 labels can be associated with a given store. For more information: https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/labeling-resources
     labels :: (Core.Maybe ConsentStore_Labels),
-    -- | Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation.
+    -- | Identifier. Resource name of the consent store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/consentStores\/{consent_store_id}@. Cannot be changed after creation.
     name :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1581,8 +2267,7 @@ instance Core.ToJSON ConsentStore where
   toJSON ConsentStore {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultConsentTtl" Core..=)
-              Core.<$> defaultConsentTtl,
+          [ ("defaultConsentTtl" Core..=) Core.<$> defaultConsentTtl,
             ("enableConsentCreateOnUpdate" Core..=)
               Core.<$> enableConsentCreateOnUpdate,
             ("labels" Core..=) Core.<$> labels,
@@ -1594,8 +2279,7 @@ instance Core.ToJSON ConsentStore where
 --
 -- /See:/ 'newConsentStore_Labels' smart constructor.
 newtype ConsentStore_Labels = ConsentStore_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1611,20 +2295,16 @@ instance Core.FromJSON ConsentStore_Labels where
   parseJSON =
     Core.withObject
       "ConsentStore_Labels"
-      ( \o ->
-          ConsentStore_Labels
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> ConsentStore_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON ConsentStore_Labels where
-  toJSON ConsentStore_Labels {..} =
-    Core.toJSON additional
+  toJSON ConsentStore_Labels {..} = Core.toJSON additional
 
 -- | Creates a new message.
 --
 -- /See:/ 'newCreateMessageRequest' smart constructor.
 newtype CreateMessageRequest = CreateMessageRequest
-  { -- | HL7v2 message.
+  { -- | Required. HL7v2 message.
     message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1632,22 +2312,19 @@ newtype CreateMessageRequest = CreateMessageRequest
 -- | Creates a value of 'CreateMessageRequest' with the minimum fields required to make a request.
 newCreateMessageRequest ::
   CreateMessageRequest
-newCreateMessageRequest = CreateMessageRequest {message = Core.Nothing}
+newCreateMessageRequest =
+  CreateMessageRequest {message = Core.Nothing}
 
 instance Core.FromJSON CreateMessageRequest where
   parseJSON =
     Core.withObject
       "CreateMessageRequest"
-      ( \o ->
-          CreateMessageRequest Core.<$> (o Core..:? "message")
-      )
+      (\o -> CreateMessageRequest Core.<$> (o Core..:? "message"))
 
 instance Core.ToJSON CreateMessageRequest where
   toJSON CreateMessageRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("message" Core..=) Core.<$> message]
-      )
+      (Core.catMaybes [("message" Core..=) Core.<$> message])
 
 -- | Pseudonymization method that generates surrogates via cryptographic hashing. Uses SHA-256. Outputs a base64-encoded representation of the hashed output (for example, @L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=@).
 --
@@ -1664,7 +2341,10 @@ data CryptoHashConfig = CryptoHashConfig
 newCryptoHashConfig ::
   CryptoHashConfig
 newCryptoHashConfig =
-  CryptoHashConfig {cryptoKey = Core.Nothing, kmsWrapped = Core.Nothing}
+  CryptoHashConfig
+    { cryptoKey = Core.Nothing,
+      kmsWrapped = Core.Nothing
+    }
 
 instance Core.FromJSON CryptoHashConfig where
   parseJSON =
@@ -1689,9 +2369,15 @@ instance Core.ToJSON CryptoHashConfig where
 --
 -- /See:/ 'newDataset' smart constructor.
 data Dataset = Dataset
-  { -- | Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
+  { -- | Optional. Customer-managed encryption key spec for a Dataset. If set, this Dataset and all of its sub-resources will be secured by this key. If empty, the Dataset is secured by the default Google encryption key.
+    encryptionSpec :: (Core.Maybe EncryptionSpec),
+    -- | Identifier. Resource name of the dataset, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The default timezone used by this dataset. Must be a either a valid IANA time zone name such as \"America\/New_York\" or empty, which defaults to UTC. This is used for parsing times in resources, such as HL7 messages, where no explicit timezone is specified.
+    -- | Output only. For future use.
+    satisfiesPzi :: (Core.Maybe Core.Bool),
+    -- | Output only. For future use.
+    satisfiesPzs :: (Core.Maybe Core.Bool),
+    -- | Optional. The default timezone used by this dataset. Must be a either a valid IANA time zone name such as \"America\/New_York\" or empty, which defaults to UTC. This is used for parsing times in resources, such as HL7 messages, where no explicit timezone is specified.
     timeZone :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1699,7 +2385,14 @@ data Dataset = Dataset
 -- | Creates a value of 'Dataset' with the minimum fields required to make a request.
 newDataset ::
   Dataset
-newDataset = Dataset {name = Core.Nothing, timeZone = Core.Nothing}
+newDataset =
+  Dataset
+    { encryptionSpec = Core.Nothing,
+      name = Core.Nothing,
+      satisfiesPzi = Core.Nothing,
+      satisfiesPzs = Core.Nothing,
+      timeZone = Core.Nothing
+    }
 
 instance Core.FromJSON Dataset where
   parseJSON =
@@ -1707,14 +2400,21 @@ instance Core.FromJSON Dataset where
       "Dataset"
       ( \o ->
           Dataset
-            Core.<$> (o Core..:? "name") Core.<*> (o Core..:? "timeZone")
+            Core.<$> (o Core..:? "encryptionSpec")
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "satisfiesPzi")
+            Core.<*> (o Core..:? "satisfiesPzs")
+            Core.<*> (o Core..:? "timeZone")
       )
 
 instance Core.ToJSON Dataset where
   toJSON Dataset {..} =
     Core.object
       ( Core.catMaybes
-          [ ("name" Core..=) Core.<$> name,
+          [ ("encryptionSpec" Core..=) Core.<$> encryptionSpec,
+            ("name" Core..=) Core.<$> name,
+            ("satisfiesPzi" Core..=) Core.<$> satisfiesPzi,
+            ("satisfiesPzs" Core..=) Core.<$> satisfiesPzs,
             ("timeZone" Core..=) Core.<$> timeZone
           ]
       )
@@ -1734,7 +2434,10 @@ data DateShiftConfig = DateShiftConfig
 newDateShiftConfig ::
   DateShiftConfig
 newDateShiftConfig =
-  DateShiftConfig {cryptoKey = Core.Nothing, kmsWrapped = Core.Nothing}
+  DateShiftConfig
+    { cryptoKey = Core.Nothing,
+      kmsWrapped = Core.Nothing
+    }
 
 instance Core.FromJSON DateShiftConfig where
   parseJSON =
@@ -1759,9 +2462,9 @@ instance Core.ToJSON DateShiftConfig where
 --
 -- /See:/ 'newDeidentifiedStoreDestination' smart constructor.
 data DeidentifiedStoreDestination = DeidentifiedStoreDestination
-  { -- | The configuration to use when de-identifying resources that are added to this store.
+  { -- | Optional. The configuration to use when de-identifying resources that are added to this store.
     config :: (Core.Maybe DeidentifyConfig),
-    -- | The full resource name of a Cloud Healthcare FHIR store, for example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    -- | Optional. The full resource name of a Cloud Healthcare FHIR store, for example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
     store :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1770,7 +2473,10 @@ data DeidentifiedStoreDestination = DeidentifiedStoreDestination
 newDeidentifiedStoreDestination ::
   DeidentifiedStoreDestination
 newDeidentifiedStoreDestination =
-  DeidentifiedStoreDestination {config = Core.Nothing, store = Core.Nothing}
+  DeidentifiedStoreDestination
+    { config = Core.Nothing,
+      store = Core.Nothing
+    }
 
 instance Core.FromJSON DeidentifiedStoreDestination where
   parseJSON =
@@ -1778,7 +2484,8 @@ instance Core.FromJSON DeidentifiedStoreDestination where
       "DeidentifiedStoreDestination"
       ( \o ->
           DeidentifiedStoreDestination
-            Core.<$> (o Core..:? "config") Core.<*> (o Core..:? "store")
+            Core.<$> (o Core..:? "config")
+            Core.<*> (o Core..:? "store")
       )
 
 instance Core.ToJSON DeidentifiedStoreDestination where
@@ -1794,14 +2501,16 @@ instance Core.ToJSON DeidentifiedStoreDestination where
 --
 -- /See:/ 'newDeidentifyConfig' smart constructor.
 data DeidentifyConfig = DeidentifyConfig
-  { -- | Configures de-id of application\/DICOM content.
+  { -- | Optional. Configures de-id of application\/DICOM content.
     dicom :: (Core.Maybe DicomConfig),
-    -- | Configures de-id of application\/FHIR content.
+    -- | Optional. Configures de-id of application\/FHIR content.
     fhir :: (Core.Maybe FhirConfig),
-    -- | Configures de-identification of image pixels wherever they are found in the source_dataset.
+    -- | Optional. Configures de-identification of image pixels wherever they are found in the source_dataset.
     image :: (Core.Maybe ImageConfig),
-    -- | Configures de-identification of text wherever it is found in the source_dataset.
-    text :: (Core.Maybe TextConfig)
+    -- | Optional. Configures de-identification of text wherever it is found in the source_dataset.
+    text :: (Core.Maybe TextConfig),
+    -- | Optional. Ensures in-flight data remains in the region of origin during de-identification. The default value is false. Using this option results in a significant reduction of throughput, and is not compatible with @LOCATION@ or @ORGANIZATION_NAME@ infoTypes. @LOCATION@ must be excluded within TextConfig, and must also be excluded within ImageConfig if image redaction is required.
+    useRegionalDataProcessing :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1813,7 +2522,8 @@ newDeidentifyConfig =
     { dicom = Core.Nothing,
       fhir = Core.Nothing,
       image = Core.Nothing,
-      text = Core.Nothing
+      text = Core.Nothing,
+      useRegionalDataProcessing = Core.Nothing
     }
 
 instance Core.FromJSON DeidentifyConfig where
@@ -1826,6 +2536,7 @@ instance Core.FromJSON DeidentifyConfig where
             Core.<*> (o Core..:? "fhir")
             Core.<*> (o Core..:? "image")
             Core.<*> (o Core..:? "text")
+            Core.<*> (o Core..:? "useRegionalDataProcessing")
       )
 
 instance Core.ToJSON DeidentifyConfig where
@@ -1835,7 +2546,9 @@ instance Core.ToJSON DeidentifyConfig where
           [ ("dicom" Core..=) Core.<$> dicom,
             ("fhir" Core..=) Core.<$> fhir,
             ("image" Core..=) Core.<$> image,
-            ("text" Core..=) Core.<$> text
+            ("text" Core..=) Core.<$> text,
+            ("useRegionalDataProcessing" Core..=)
+              Core.<$> useRegionalDataProcessing
           ]
       )
 
@@ -1845,7 +2558,7 @@ instance Core.ToJSON DeidentifyConfig where
 data DeidentifyDatasetRequest = DeidentifyDatasetRequest
   { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
-    -- | The name of the dataset resource to create and write the redacted data to. * The destination dataset must not exist. * The destination dataset must be in the same location as the source dataset. De-identifying data across multiple locations is not supported.
+    -- | Required. The name of the dataset resource to create and write the redacted data to. * The destination dataset must not exist. * The destination dataset must be in the same location as the source dataset. De-identifying data across multiple locations is not supported.
     destinationDataset :: (Core.Maybe Core.Text),
     -- | Cloud Storage location to read the JSON cloud.healthcare.deidentify.DeidentifyConfig from, overriding the default config. Must be of the form @gs:\/\/{bucket_id}\/path\/to\/object@. The Cloud Storage location must grant the Cloud IAM role @roles\/storage.objectViewer@ to the project\'s Cloud Healthcare Service Agent service account. Only one of @config@ and @gcs_config_uri@ can be specified.
     gcsConfigUri :: (Core.Maybe Core.Text)
@@ -1878,8 +2591,7 @@ instance Core.ToJSON DeidentifyDatasetRequest where
     Core.object
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
-            ("destinationDataset" Core..=)
-              Core.<$> destinationDataset,
+            ("destinationDataset" Core..=) Core.<$> destinationDataset,
             ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri
           ]
       )
@@ -1890,7 +2602,7 @@ instance Core.ToJSON DeidentifyDatasetRequest where
 data DeidentifyDicomStoreRequest = DeidentifyDicomStoreRequest
   { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
-    -- | The name of the DICOM store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination DICOM store must not exist. * The caller must have the necessary permissions to create the destination DICOM store.
+    -- | Required. The name of the DICOM store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination DICOM store must not exist. * The caller must have the necessary permissions to create the destination DICOM store.
     destinationStore :: (Core.Maybe Core.Text),
     -- | Filter configuration.
     filterConfig :: (Core.Maybe DicomFilterConfig),
@@ -1927,8 +2639,7 @@ instance Core.ToJSON DeidentifyDicomStoreRequest where
     Core.object
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
-            ("destinationStore" Core..=)
-              Core.<$> destinationStore,
+            ("destinationStore" Core..=) Core.<$> destinationStore,
             ("filterConfig" Core..=) Core.<$> filterConfig,
             ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri
           ]
@@ -1940,7 +2651,7 @@ instance Core.ToJSON DeidentifyDicomStoreRequest where
 data DeidentifyFhirStoreRequest = DeidentifyFhirStoreRequest
   { -- | Deidentify configuration. Only one of @config@ and @gcs_config_uri@ can be specified.
     config :: (Core.Maybe DeidentifyConfig),
-    -- | The name of the FHIR store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination FHIR store must exist. * The caller must have the healthcare.fhirResources.update permission to write to the destination FHIR store.
+    -- | Required. The name of the FHIR store to create and write the redacted data to. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@. * The destination dataset must exist. * The source dataset and destination dataset must both reside in the same location. De-identifying data across multiple locations is not supported. * The destination FHIR store must exist. * The caller must have the healthcare.fhirResources.update permission to write to the destination FHIR store.
     destinationStore :: (Core.Maybe Core.Text),
     -- | Cloud Storage location to read the JSON cloud.healthcare.deidentify.DeidentifyConfig from, overriding the default config. Must be of the form @gs:\/\/{bucket_id}\/path\/to\/object@. The Cloud Storage location must grant the Cloud IAM role @roles\/storage.objectViewer@ to the project\'s Cloud Healthcare Service Agent service account. Only one of @config@ and @gcs_config_uri@ can be specified.
     gcsConfigUri :: (Core.Maybe Core.Text),
@@ -1981,12 +2692,10 @@ instance Core.ToJSON DeidentifyFhirStoreRequest where
     Core.object
       ( Core.catMaybes
           [ ("config" Core..=) Core.<$> config,
-            ("destinationStore" Core..=)
-              Core.<$> destinationStore,
+            ("destinationStore" Core..=) Core.<$> destinationStore,
             ("gcsConfigUri" Core..=) Core.<$> gcsConfigUri,
             ("resourceFilter" Core..=) Core.<$> resourceFilter,
-            ("skipModifiedResources" Core..=)
-              Core.<$> skipModifiedResources
+            ("skipModifiedResources" Core..=) Core.<$> skipModifiedResources
           ]
       )
 
@@ -2020,7 +2729,7 @@ data DicomConfig = DicomConfig
     keepList :: (Core.Maybe TagFilterList),
     -- | List of tags to remove. Keep all other tags.
     removeList :: (Core.Maybe TagFilterList),
-    -- | If true, skip replacing StudyInstanceUID, SeriesInstanceUID, SOPInstanceUID, and MediaStorageSOPInstanceUID and leave them untouched. The Cloud Healthcare API regenerates these UIDs by default based on the DICOM Standard\'s reasoning: \"Whilst these UIDs cannot be mapped directly to an individual out of context, given access to the original images, or to a database of the original images containing the UIDs, it would be possible to recover the individual\'s identity.\" http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/chtml\/part15\/sect_E.3.9.html
+    -- | Optional. If true, skip replacing StudyInstanceUID, SeriesInstanceUID, SOPInstanceUID, and MediaStorageSOPInstanceUID and leave them untouched. The Cloud Healthcare API regenerates these UIDs by default based on the DICOM Standard\'s reasoning: \"Whilst these UIDs cannot be mapped directly to an individual out of context, given access to the original images, or to a database of the original images containing the UIDs, it would be possible to recover the individual\'s identity.\" http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/chtml\/part15\/sect_E.3.9.html
     skipIdRedaction :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2055,8 +2764,7 @@ instance Core.ToJSON DicomConfig where
           [ ("filterProfile" Core..=) Core.<$> filterProfile,
             ("keepList" Core..=) Core.<$> keepList,
             ("removeList" Core..=) Core.<$> removeList,
-            ("skipIdRedaction" Core..=)
-              Core.<$> skipIdRedaction
+            ("skipIdRedaction" Core..=) Core.<$> skipIdRedaction
           ]
       )
 
@@ -2072,24 +2780,22 @@ newtype DicomFilterConfig = DicomFilterConfig
 -- | Creates a value of 'DicomFilterConfig' with the minimum fields required to make a request.
 newDicomFilterConfig ::
   DicomFilterConfig
-newDicomFilterConfig = DicomFilterConfig {resourcePathsGcsUri = Core.Nothing}
+newDicomFilterConfig =
+  DicomFilterConfig {resourcePathsGcsUri = Core.Nothing}
 
 instance Core.FromJSON DicomFilterConfig where
   parseJSON =
     Core.withObject
       "DicomFilterConfig"
       ( \o ->
-          DicomFilterConfig
-            Core.<$> (o Core..:? "resourcePathsGcsUri")
+          DicomFilterConfig Core.<$> (o Core..:? "resourcePathsGcsUri")
       )
 
 instance Core.ToJSON DicomFilterConfig where
   toJSON DicomFilterConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("resourcePathsGcsUri" Core..=)
-              Core.<$> resourcePathsGcsUri
-          ]
+          [("resourcePathsGcsUri" Core..=) Core.<$> resourcePathsGcsUri]
       )
 
 -- | Represents a DICOM store.
@@ -2098,10 +2804,12 @@ instance Core.ToJSON DicomFilterConfig where
 data DicomStore = DicomStore
   { -- | User-supplied key-value pairs used to organize DICOM stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
     labels :: (Core.Maybe DicomStore_Labels),
-    -- | Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    -- | Identifier. Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | Notification destination for new DICOM instances. Supplied by the client.
-    notificationConfig :: (Core.Maybe NotificationConfig)
+    -- | Optional. Notification destination for new DICOM instances. Supplied by the client.
+    notificationConfig :: (Core.Maybe NotificationConfig),
+    -- | Optional. A list of streaming configs used to configure the destination of streaming exports for every DICOM instance insertion in this DICOM store. After a new config is added to @stream_configs@, DICOM instance insertions are streamed to the new destination. When a config is removed from @stream_configs@, the server stops streaming to that destination. Each config must contain a unique destination.
+    streamConfigs :: (Core.Maybe [GoogleCloudHealthcareV1DicomStreamConfig])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2112,7 +2820,8 @@ newDicomStore =
   DicomStore
     { labels = Core.Nothing,
       name = Core.Nothing,
-      notificationConfig = Core.Nothing
+      notificationConfig = Core.Nothing,
+      streamConfigs = Core.Nothing
     }
 
 instance Core.FromJSON DicomStore where
@@ -2124,6 +2833,7 @@ instance Core.FromJSON DicomStore where
             Core.<$> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
+            Core.<*> (o Core..:? "streamConfigs")
       )
 
 instance Core.ToJSON DicomStore where
@@ -2132,8 +2842,8 @@ instance Core.ToJSON DicomStore where
       ( Core.catMaybes
           [ ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
-            ("notificationConfig" Core..=)
-              Core.<$> notificationConfig
+            ("notificationConfig" Core..=) Core.<$> notificationConfig,
+            ("streamConfigs" Core..=) Core.<$> streamConfigs
           ]
       )
 
@@ -2141,8 +2851,7 @@ instance Core.ToJSON DicomStore where
 --
 -- /See:/ 'newDicomStore_Labels' smart constructor.
 newtype DicomStore_Labels = DicomStore_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2151,18 +2860,88 @@ newDicomStore_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   DicomStore_Labels
-newDicomStore_Labels additional = DicomStore_Labels {additional = additional}
+newDicomStore_Labels additional =
+  DicomStore_Labels {additional = additional}
 
 instance Core.FromJSON DicomStore_Labels where
   parseJSON =
     Core.withObject
       "DicomStore_Labels"
-      ( \o ->
-          DicomStore_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> DicomStore_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON DicomStore_Labels where
   toJSON DicomStore_Labels {..} = Core.toJSON additional
+
+-- | DicomStoreMetrics contains metrics describing a DICOM store.
+--
+-- /See:/ 'newDicomStoreMetrics' smart constructor.
+data DicomStoreMetrics = DicomStoreMetrics
+  { -- | Total blob storage bytes for all instances in the store.
+    blobStorageSizeBytes :: (Core.Maybe Core.Int64),
+    -- | Number of instances in the store.
+    instanceCount :: (Core.Maybe Core.Int64),
+    -- | Resource name of the DICOM store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}@.
+    name :: (Core.Maybe Core.Text),
+    -- | Number of series in the store.
+    seriesCount :: (Core.Maybe Core.Int64),
+    -- | Total structured storage bytes for all instances in the store.
+    structuredStorageSizeBytes :: (Core.Maybe Core.Int64),
+    -- | Number of studies in the store.
+    studyCount :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'DicomStoreMetrics' with the minimum fields required to make a request.
+newDicomStoreMetrics ::
+  DicomStoreMetrics
+newDicomStoreMetrics =
+  DicomStoreMetrics
+    { blobStorageSizeBytes = Core.Nothing,
+      instanceCount = Core.Nothing,
+      name = Core.Nothing,
+      seriesCount = Core.Nothing,
+      structuredStorageSizeBytes = Core.Nothing,
+      studyCount = Core.Nothing
+    }
+
+instance Core.FromJSON DicomStoreMetrics where
+  parseJSON =
+    Core.withObject
+      "DicomStoreMetrics"
+      ( \o ->
+          DicomStoreMetrics
+            Core.<$> ( o
+                         Core..:? "blobStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "instanceCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "name")
+            Core.<*> (o Core..:? "seriesCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "structuredStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "studyCount" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON DicomStoreMetrics where
+  toJSON DicomStoreMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blobStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> blobStorageSizeBytes,
+            ("instanceCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> instanceCount,
+            ("name" Core..=) Core.<$> name,
+            ("seriesCount" Core..=) Core.. Core.AsText Core.<$> seriesCount,
+            ("structuredStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> structuredStorageSizeBytes,
+            ("studyCount" Core..=) Core.. Core.AsText Core.<$> studyCount
+          ]
+      )
 
 -- | A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }
 --
@@ -2176,11 +2955,35 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
+
+-- | Represents a customer-managed encryption key spec that can be applied to a resource.
+--
+-- /See:/ 'newEncryptionSpec' smart constructor.
+newtype EncryptionSpec = EncryptionSpec
+  { -- | Required. The resource name of customer-managed encryption key that is used to secure a resource and its sub-resources. Only the key in the same location as this Dataset is allowed to be used for encryption. Format is: @projects\/{project}\/locations\/{location}\/keyRings\/{keyRing}\/cryptoKeys\/{key}@
+    kmsKeyName :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'EncryptionSpec' with the minimum fields required to make a request.
+newEncryptionSpec ::
+  EncryptionSpec
+newEncryptionSpec = EncryptionSpec {kmsKeyName = Core.Nothing}
+
+instance Core.FromJSON EncryptionSpec where
+  parseJSON =
+    Core.withObject
+      "EncryptionSpec"
+      (\o -> EncryptionSpec Core.<$> (o Core..:? "kmsKeyName"))
+
+instance Core.ToJSON EncryptionSpec where
+  toJSON EncryptionSpec {..} =
+    Core.object
+      (Core.catMaybes [("kmsKeyName" Core..=) Core.<$> kmsKeyName])
 
 -- | The candidate entities that an entity mention could link to.
 --
@@ -2222,8 +3025,7 @@ instance Core.ToJSON Entity where
       ( Core.catMaybes
           [ ("entityId" Core..=) Core.<$> entityId,
             ("preferredTerm" Core..=) Core.<$> preferredTerm,
-            ("vocabularyCodes" Core..=)
-              Core.<$> vocabularyCodes
+            ("vocabularyCodes" Core..=) Core.<$> vocabularyCodes
           ]
       )
 
@@ -2285,14 +3087,12 @@ instance Core.ToJSON EntityMention where
   toJSON EntityMention {..} =
     Core.object
       ( Core.catMaybes
-          [ ("certaintyAssessment" Core..=)
-              Core.<$> certaintyAssessment,
+          [ ("certaintyAssessment" Core..=) Core.<$> certaintyAssessment,
             ("confidence" Core..=) Core.<$> confidence,
             ("linkedEntities" Core..=) Core.<$> linkedEntities,
             ("mentionId" Core..=) Core.<$> mentionId,
             ("subject" Core..=) Core.<$> subject,
-            ("temporalAssessment" Core..=)
-              Core.<$> temporalAssessment,
+            ("temporalAssessment" Core..=) Core.<$> temporalAssessment,
             ("text" Core..=) Core.<$> text,
             ("type" Core..=) Core.<$> type'
           ]
@@ -2399,10 +3199,8 @@ instance Core.ToJSON EvaluateUserConsentsRequest where
           [ ("consentList" Core..=) Core.<$> consentList,
             ("pageSize" Core..=) Core.<$> pageSize,
             ("pageToken" Core..=) Core.<$> pageToken,
-            ("requestAttributes" Core..=)
-              Core.<$> requestAttributes,
-            ("resourceAttributes" Core..=)
-              Core.<$> resourceAttributes,
+            ("requestAttributes" Core..=) Core.<$> requestAttributes,
+            ("resourceAttributes" Core..=) Core.<$> resourceAttributes,
             ("responseView" Core..=) Core.<$> responseView,
             ("userId" Core..=) Core.<$> userId
           ]
@@ -2412,8 +3210,7 @@ instance Core.ToJSON EvaluateUserConsentsRequest where
 --
 -- /See:/ 'newEvaluateUserConsentsRequest_RequestAttributes' smart constructor.
 newtype EvaluateUserConsentsRequest_RequestAttributes = EvaluateUserConsentsRequest_RequestAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2423,7 +3220,10 @@ newEvaluateUserConsentsRequest_RequestAttributes ::
   Core.HashMap Core.Text Core.Text ->
   EvaluateUserConsentsRequest_RequestAttributes
 newEvaluateUserConsentsRequest_RequestAttributes additional =
-  EvaluateUserConsentsRequest_RequestAttributes {additional = additional}
+  EvaluateUserConsentsRequest_RequestAttributes
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -2437,20 +3237,15 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    EvaluateUserConsentsRequest_RequestAttributes
-  where
-  toJSON
-    EvaluateUserConsentsRequest_RequestAttributes {..} =
-      Core.toJSON additional
+instance Core.ToJSON EvaluateUserConsentsRequest_RequestAttributes where
+  toJSON EvaluateUserConsentsRequest_RequestAttributes {..} =
+    Core.toJSON additional
 
 -- | Optional. The values of resource attributes associated with the resources being requested. If no values are specified, then all resources are queried.
 --
 -- /See:/ 'newEvaluateUserConsentsRequest_ResourceAttributes' smart constructor.
 newtype EvaluateUserConsentsRequest_ResourceAttributes = EvaluateUserConsentsRequest_ResourceAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2460,7 +3255,10 @@ newEvaluateUserConsentsRequest_ResourceAttributes ::
   Core.HashMap Core.Text Core.Text ->
   EvaluateUserConsentsRequest_ResourceAttributes
 newEvaluateUserConsentsRequest_ResourceAttributes additional =
-  EvaluateUserConsentsRequest_ResourceAttributes {additional = additional}
+  EvaluateUserConsentsRequest_ResourceAttributes
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -2474,13 +3272,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    EvaluateUserConsentsRequest_ResourceAttributes
-  where
-  toJSON
-    EvaluateUserConsentsRequest_ResourceAttributes {..} =
-      Core.toJSON additional
+instance Core.ToJSON EvaluateUserConsentsRequest_ResourceAttributes where
+  toJSON EvaluateUserConsentsRequest_ResourceAttributes {..} =
+    Core.toJSON additional
 
 --
 -- /See:/ 'newEvaluateUserConsentsResponse' smart constructor.
@@ -2520,6 +3314,158 @@ instance Core.ToJSON EvaluateUserConsentsResponse where
           ]
       )
 
+-- | The enforcing consent\'s metadata.
+--
+-- /See:/ 'newExplainDataAccessConsentInfo' smart constructor.
+data ExplainDataAccessConsentInfo = ExplainDataAccessConsentInfo
+  { -- | The compartment base resources that matched a cascading policy. Each resource has the following format: @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/{resource_type}\/{resource_id}@
+    cascadeOrigins :: (Core.Maybe [Core.Text]),
+    -- | The resource name of this consent resource, in the format: @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Consent\/{resource_id}@.
+    consentResource :: (Core.Maybe Core.Text),
+    -- | Last enforcement timestamp of this consent resource.
+    enforcementTime :: (Core.Maybe Core.DateTime),
+    -- | A list of all the matching accessor scopes of this consent policy that enforced ExplainDataAccessConsentScope.accessor_scope.
+    matchingAccessorScopes :: (Core.Maybe [ConsentAccessorScope]),
+    -- | The patient owning the consent (only applicable for patient consents), in the format: @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}\/fhir\/Patient\/{patient_id}@
+    patientConsentOwner :: (Core.Maybe Core.Text),
+    -- | The policy type of consent resource (e.g. PATIENT, ADMIN).
+    type' :: (Core.Maybe ExplainDataAccessConsentInfo_Type),
+    -- | The consent\'s variant combinations. A single consent may have multiple variants.
+    variants :: (Core.Maybe [ExplainDataAccessConsentInfo_VariantsItem])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExplainDataAccessConsentInfo' with the minimum fields required to make a request.
+newExplainDataAccessConsentInfo ::
+  ExplainDataAccessConsentInfo
+newExplainDataAccessConsentInfo =
+  ExplainDataAccessConsentInfo
+    { cascadeOrigins = Core.Nothing,
+      consentResource = Core.Nothing,
+      enforcementTime = Core.Nothing,
+      matchingAccessorScopes = Core.Nothing,
+      patientConsentOwner = Core.Nothing,
+      type' = Core.Nothing,
+      variants = Core.Nothing
+    }
+
+instance Core.FromJSON ExplainDataAccessConsentInfo where
+  parseJSON =
+    Core.withObject
+      "ExplainDataAccessConsentInfo"
+      ( \o ->
+          ExplainDataAccessConsentInfo
+            Core.<$> (o Core..:? "cascadeOrigins")
+            Core.<*> (o Core..:? "consentResource")
+            Core.<*> (o Core..:? "enforcementTime")
+            Core.<*> (o Core..:? "matchingAccessorScopes")
+            Core.<*> (o Core..:? "patientConsentOwner")
+            Core.<*> (o Core..:? "type")
+            Core.<*> (o Core..:? "variants")
+      )
+
+instance Core.ToJSON ExplainDataAccessConsentInfo where
+  toJSON ExplainDataAccessConsentInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("cascadeOrigins" Core..=) Core.<$> cascadeOrigins,
+            ("consentResource" Core..=) Core.<$> consentResource,
+            ("enforcementTime" Core..=) Core.<$> enforcementTime,
+            ("matchingAccessorScopes" Core..=) Core.<$> matchingAccessorScopes,
+            ("patientConsentOwner" Core..=) Core.<$> patientConsentOwner,
+            ("type" Core..=) Core.<$> type',
+            ("variants" Core..=) Core.<$> variants
+          ]
+      )
+
+-- | A single consent scope that provides info on who has access to the requested resource scope for a particular purpose and environment, enforced by which consent.
+--
+-- /See:/ 'newExplainDataAccessConsentScope' smart constructor.
+data ExplainDataAccessConsentScope = ExplainDataAccessConsentScope
+  { -- | The accessor scope that describes who can access, for what purpose, and in which environment.
+    accessorScope :: (Core.Maybe ConsentAccessorScope),
+    -- | Whether the current consent scope is permitted or denied access on the requested resource.
+    decision :: (Core.Maybe ExplainDataAccessConsentScope_Decision),
+    -- | Metadata of the consent resources that enforce the consent scope\'s access.
+    enforcingConsents :: (Core.Maybe [ExplainDataAccessConsentInfo]),
+    -- | Other consent scopes that created exceptions within this scope.
+    exceptions :: (Core.Maybe [ExplainDataAccessConsentScope])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExplainDataAccessConsentScope' with the minimum fields required to make a request.
+newExplainDataAccessConsentScope ::
+  ExplainDataAccessConsentScope
+newExplainDataAccessConsentScope =
+  ExplainDataAccessConsentScope
+    { accessorScope = Core.Nothing,
+      decision = Core.Nothing,
+      enforcingConsents = Core.Nothing,
+      exceptions = Core.Nothing
+    }
+
+instance Core.FromJSON ExplainDataAccessConsentScope where
+  parseJSON =
+    Core.withObject
+      "ExplainDataAccessConsentScope"
+      ( \o ->
+          ExplainDataAccessConsentScope
+            Core.<$> (o Core..:? "accessorScope")
+            Core.<*> (o Core..:? "decision")
+            Core.<*> (o Core..:? "enforcingConsents")
+            Core.<*> (o Core..:? "exceptions")
+      )
+
+instance Core.ToJSON ExplainDataAccessConsentScope where
+  toJSON ExplainDataAccessConsentScope {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("accessorScope" Core..=) Core.<$> accessorScope,
+            ("decision" Core..=) Core.<$> decision,
+            ("enforcingConsents" Core..=) Core.<$> enforcingConsents,
+            ("exceptions" Core..=) Core.<$> exceptions
+          ]
+      )
+
+-- | List of consent scopes that are applicable to the explained access on a given resource.
+--
+-- /See:/ 'newExplainDataAccessResponse' smart constructor.
+data ExplainDataAccessResponse = ExplainDataAccessResponse
+  { -- | List of applicable consent scopes. Sorted in order of actor such that scopes belonging to the same actor will be adjacent to each other in the list.
+    consentScopes :: (Core.Maybe [ExplainDataAccessConsentScope]),
+    -- | Warnings associated with this response. It inform user with exceeded scope limit errors.
+    warning :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'ExplainDataAccessResponse' with the minimum fields required to make a request.
+newExplainDataAccessResponse ::
+  ExplainDataAccessResponse
+newExplainDataAccessResponse =
+  ExplainDataAccessResponse
+    { consentScopes = Core.Nothing,
+      warning = Core.Nothing
+    }
+
+instance Core.FromJSON ExplainDataAccessResponse where
+  parseJSON =
+    Core.withObject
+      "ExplainDataAccessResponse"
+      ( \o ->
+          ExplainDataAccessResponse
+            Core.<$> (o Core..:? "consentScopes")
+            Core.<*> (o Core..:? "warning")
+      )
+
+instance Core.ToJSON ExplainDataAccessResponse where
+  toJSON ExplainDataAccessResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("consentScopes" Core..=) Core.<$> consentScopes,
+            ("warning" Core..=) Core.<$> warning
+          ]
+      )
+
 -- | Exports data from the specified DICOM store. If a given resource, such as a DICOM object with the same SOPInstance UID, already exists in the output, it is overwritten with the version in the source dataset. Exported DICOM data persists when the DICOM store from which it was exported is deleted.
 --
 -- /See:/ 'newExportDicomDataRequest' smart constructor.
@@ -2554,8 +3500,7 @@ instance Core.ToJSON ExportDicomDataRequest where
   toJSON ExportDicomDataRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bigqueryDestination" Core..=)
-              Core.<$> bigqueryDestination,
+          [ ("bigqueryDestination" Core..=) Core.<$> bigqueryDestination,
             ("gcsDestination" Core..=) Core.<$> gcsDestination
           ]
       )
@@ -2586,8 +3531,14 @@ instance Core.ToJSON ExportDicomDataResponse where
 data ExportMessagesRequest = ExportMessagesRequest
   { -- | The end of the range in @send_time@ (MSH.7, https:\/\/www.hl7.org\/documentcenter\/public/temp/2E58C1F9-1C23-BA17-0C6126475344DA9D\/wg\/conf\/HL7MSH.htm) to process. If not specified, the time when the export is scheduled is used. This value has to come after the @start_time@ defined below. Only messages whose @send_time@ lies in the range @start_time@ (inclusive) to @end_time@ (exclusive) are exported.
     endTime :: (Core.Maybe Core.DateTime),
+    -- | Restricts messages exported to those matching a filter, only applicable to PubsubDestination and GcsDestination. The following syntax is available: * A string field value can be written as text inside quotation marks, for example @\"query text\"@. The only valid relational operation for text fields is equality (@=@), where text is searched within the field, rather than having the field be equal to the text. For example, @\"Comment = great\"@ returns messages with @great@ in the comment field. * A number field value can be written as an integer, a decimal, or an exponential. The valid relational operators for number fields are the equality operator (@=@), along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * A date field value must be written in the @yyyy-mm-dd@ format. Fields with date and time use the RFC3339 time format. Leading zeros are required for one-digit months
+    -- and days. The valid relational operators for date fields are the equality operator (@=@) , along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * Multiple field query expressions can be combined in one query by adding @AND@ or @OR@ operators between the expressions. If a boolean operator appears within a quoted string, it is not treated as special, and is just another part of the character string to be matched. You can prepend the @NOT@ operator to an expression to negate it. The following fields and functions are available for filtering: * @message_type@, from the MSH-9.1 field. For example, @NOT message_type = \"ADT\"@. * @send_date@ or @sendDate@, the @yyyy-mm-dd@ date the message was sent in the dataset\'s time_zone, from the MSH-7 segment. For example, @send_date \< \"2017-01-02\"@. * @send_time@, the timestamp when the message was sent, using the RFC3339 time format
+    -- for comparisons, from the MSH-7 segment. For example, @send_time \< \"2017-01-02T00:00:00-05:00\"@. * @create_time@, the timestamp when the message was created in the HL7v2 store. Use the RFC3339 time format for comparisons. For example, @create_time \< \"2017-01-02T00:00:00-05:00\"@. * @send_facility@, the care center that the message came from, from the MSH-4 segment. For example, @send_facility = \"ABC\"@. Note: The filter will be applied to every message in the HL7v2 store whose @send_time@ lies in the range defined by the @start_time@ and the @end_time@. Even if the filter only matches a small set of messages, the export operation can still take a long time to finish when a lot of messages are between the specified @start_time@ and @end_time@ range.
+    filter :: (Core.Maybe Core.Text),
     -- | Export to a Cloud Storage destination.
     gcsDestination :: (Core.Maybe GcsDestination),
+    -- | Export messages to a Pub\/Sub topic.
+    pubsubDestination :: (Core.Maybe PubsubDestination),
     -- | The start of the range in @send_time@ (MSH.7, https:\/\/www.hl7.org\/documentcenter\/public/temp/2E58C1F9-1C23-BA17-0C6126475344DA9D\/wg\/conf\/HL7MSH.htm) to process. If not specified, the UNIX epoch (1970-01-01T00:00:00Z) is used. This value has to come before the @end_time@ defined below. Only messages whose @send_time@ lies in the range @start_time@ (inclusive) to @end_time@ (exclusive) are exported.
     startTime :: (Core.Maybe Core.DateTime)
   }
@@ -2599,7 +3550,9 @@ newExportMessagesRequest ::
 newExportMessagesRequest =
   ExportMessagesRequest
     { endTime = Core.Nothing,
+      filter = Core.Nothing,
       gcsDestination = Core.Nothing,
+      pubsubDestination = Core.Nothing,
       startTime = Core.Nothing
     }
 
@@ -2610,7 +3563,9 @@ instance Core.FromJSON ExportMessagesRequest where
       ( \o ->
           ExportMessagesRequest
             Core.<$> (o Core..:? "endTime")
+            Core.<*> (o Core..:? "filter")
             Core.<*> (o Core..:? "gcsDestination")
+            Core.<*> (o Core..:? "pubsubDestination")
             Core.<*> (o Core..:? "startTime")
       )
 
@@ -2619,7 +3574,9 @@ instance Core.ToJSON ExportMessagesRequest where
     Core.object
       ( Core.catMaybes
           [ ("endTime" Core..=) Core.<$> endTime,
+            ("filter" Core..=) Core.<$> filter,
             ("gcsDestination" Core..=) Core.<$> gcsDestination,
+            ("pubsubDestination" Core..=) Core.<$> pubsubDestination,
             ("startTime" Core..=) Core.<$> startTime
           ]
       )
@@ -2688,8 +3645,7 @@ instance Core.ToJSON ExportResourcesRequest where
       ( Core.catMaybes
           [ ("_since" Core..=) Core.<$> since,
             ("_type" Core..=) Core.<$> type',
-            ("bigqueryDestination" Core..=)
-              Core.<$> bigqueryDestination,
+            ("bigqueryDestination" Core..=) Core.<$> bigqueryDestination,
             ("gcsDestination" Core..=) Core.<$> gcsDestination
           ]
       )
@@ -2778,7 +3734,8 @@ data Feature = Feature
 -- | Creates a value of 'Feature' with the minimum fields required to make a request.
 newFeature ::
   Feature
-newFeature = Feature {confidence = Core.Nothing, value = Core.Nothing}
+newFeature =
+  Feature {confidence = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON Feature where
   parseJSON =
@@ -2803,9 +3760,9 @@ instance Core.ToJSON Feature where
 --
 -- /See:/ 'newFhirConfig' smart constructor.
 data FhirConfig = FhirConfig
-  { -- | The behaviour for handling FHIR extensions that aren\'t otherwise specified for de-identification. If true, all extensions are preserved during de-identification by default. If false or unspecified, all extensions are removed during de-identification by default.
+  { -- | Optional. The behaviour for handling FHIR extensions that aren\'t otherwise specified for de-identification. If true, all extensions are preserved during de-identification by default. If false or unspecified, all extensions are removed during de-identification by default.
     defaultKeepExtensions :: (Core.Maybe Core.Bool),
-    -- | Specifies FHIR paths to match and how to transform them. Any field that is not matched by a FieldMetadata is passed through to the output dataset unmodified. All extensions will be processed according to @default_keep_extensions@.
+    -- | Optional. Specifies FHIR paths to match and how to transform them. Any field that is not matched by a FieldMetadata is passed through to the output dataset unmodified. All extensions will be processed according to @default_keep_extensions@.
     fieldMetadataList :: (Core.Maybe [FieldMetadata])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2833,10 +3790,8 @@ instance Core.ToJSON FhirConfig where
   toJSON FhirConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("defaultKeepExtensions" Core..=)
-              Core.<$> defaultKeepExtensions,
-            ("fieldMetadataList" Core..=)
-              Core.<$> fieldMetadataList
+          [ ("defaultKeepExtensions" Core..=) Core.<$> defaultKeepExtensions,
+            ("fieldMetadataList" Core..=) Core.<$> fieldMetadataList
           ]
       )
 
@@ -2863,35 +3818,85 @@ instance Core.FromJSON FhirFilter where
 instance Core.ToJSON FhirFilter where
   toJSON FhirFilter {..} =
     Core.object
+      (Core.catMaybes [("resources" Core..=) Core.<$> resources])
+
+-- | Contains the configuration for FHIR notifications.
+--
+-- /See:/ 'newFhirNotificationConfig' smart constructor.
+data FhirNotificationConfig = FhirNotificationConfig
+  { -- | Optional. The <https://cloud.google.com/pubsub/docs/ Pub\/Sub> topic that notifications of changes are published on. Supplied by the client. The notification is a @PubsubMessage@ with the following fields: * @PubsubMessage.Data@ contains the resource name. * @PubsubMessage.MessageId@ is the ID of this notification. It is guaranteed to be unique within the topic. * @PubsubMessage.PublishTime@ is the time when the message was published. Note that notifications are only sent if the topic is non-empty. <https://cloud.google.com/pubsub/docs/overview#names Topic names> must be scoped to a project. The Cloud Healthcare API service account, service-\@gcp-sa-healthcare.iam.gserviceaccount.com, must have publisher permissions on the given Pub\/Sub topic. Not having adequate permissions causes the calls that send notifications to fail (https:\/\/cloud.google.com\/healthcare-api\/docs\/permissions-healthcare-api-gcp-products#dicom/fhir/and/hl7v2/store/cloud/pubsub_permissions). If a notification can\'t be published to
+    -- Pub\/Sub, errors are logged to Cloud Logging. For more information, see <https://cloud.google.com/healthcare-api/docs/how-tos/logging Viewing error logs in Cloud Logging>.
+    pubsubTopic :: (Core.Maybe Core.Text),
+    -- | Optional. Whether to send full FHIR resource to this Pub\/Sub topic. The default value is false.
+    sendFullResource :: (Core.Maybe Core.Bool),
+    -- | Optional. Whether to send full FHIR resource to this Pub\/Sub topic for deleting FHIR resource. The default value is false. Note that setting this to true does not guarantee that all previous resources will be sent in the format of full FHIR resource. When a resource change is too large or during heavy traffic, only the resource name will be sent. Clients should always check the \"payloadType\" label from a Pub\/Sub message to determine whether it needs to fetch the full previous resource as a separate operation.
+    sendPreviousResourceOnDelete :: (Core.Maybe Core.Bool)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'FhirNotificationConfig' with the minimum fields required to make a request.
+newFhirNotificationConfig ::
+  FhirNotificationConfig
+newFhirNotificationConfig =
+  FhirNotificationConfig
+    { pubsubTopic = Core.Nothing,
+      sendFullResource = Core.Nothing,
+      sendPreviousResourceOnDelete = Core.Nothing
+    }
+
+instance Core.FromJSON FhirNotificationConfig where
+  parseJSON =
+    Core.withObject
+      "FhirNotificationConfig"
+      ( \o ->
+          FhirNotificationConfig
+            Core.<$> (o Core..:? "pubsubTopic")
+            Core.<*> (o Core..:? "sendFullResource")
+            Core.<*> (o Core..:? "sendPreviousResourceOnDelete")
+      )
+
+instance Core.ToJSON FhirNotificationConfig where
+  toJSON FhirNotificationConfig {..} =
+    Core.object
       ( Core.catMaybes
-          [("resources" Core..=) Core.<$> resources]
+          [ ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
+            ("sendFullResource" Core..=) Core.<$> sendFullResource,
+            ("sendPreviousResourceOnDelete" Core..=)
+              Core.<$> sendPreviousResourceOnDelete
+          ]
       )
 
 -- | Represents a FHIR store.
 --
 -- /See:/ 'newFhirStore' smart constructor.
 data FhirStore = FhirStore
-  { -- | Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
+  { -- | Optional. FHIR bulk export exports resources to the specified Cloud Storage destination. A Cloud Storage destination is a URI for a Cloud Storage directory where result files will be written. Only used in the spec-defined bulk $export methods. The Cloud Healthcare Service Agent requires the @roles\/storage.objectAdmin@ Cloud IAM role on the destination.
+    bulkExportGcsDestination :: (Core.Maybe BulkExportGcsDestination),
+    -- | Optional. Enable parsing of references within complex FHIR data types such as Extensions. If this value is set to ENABLED, then features like referential integrity and Bundle reference rewriting apply to all references. If this flag has not been specified the behavior of the FHIR store will not change, references in complex data types will not be parsed. New stores will have this value set to ENABLED after a notification period. Warning: turning on this flag causes processing existing resources to fail if they contain references to non-existent resources.
     complexDataTypeReferenceParsing :: (Core.Maybe FhirStore_ComplexDataTypeReferenceParsing),
-    -- | If true, overrides the default search behavior for this FHIR store to @handling=strict@ which returns an error for unrecognized search parameters. If false, uses the FHIR specification default @handling=lenient@ which ignores unrecognized search parameters. The handling can always be changed from the default on an individual API call by setting the HTTP header @Prefer: handling=strict@ or @Prefer: handling=lenient@.
+    -- | Optional. Specifies whether this store has consent enforcement. Not available for DSTU2 FHIR version due to absence of Consent resources.
+    consentConfig :: (Core.Maybe ConsentConfig),
+    -- | Optional. If true, overrides the default search behavior for this FHIR store to @handling=strict@ which returns an error for unrecognized search parameters. If false, uses the FHIR specification default @handling=lenient@ which ignores unrecognized search parameters. The handling can always be changed from the default on an individual API call by setting the HTTP header @Prefer: handling=strict@ or @Prefer: handling=lenient@. Defaults to false.
     defaultSearchHandlingStrict :: (Core.Maybe Core.Bool),
     -- | Immutable. Whether to disable referential integrity in this FHIR store. This field is immutable after FHIR store creation. The default value is false, meaning that the API enforces referential integrity and fails the requests that result in inconsistent state in the FHIR store. When this field is set to true, the API skips referential integrity checks. Consequently, operations that rely on references, such as GetPatientEverything, do not return all the results if broken references exist.
     disableReferentialIntegrity :: (Core.Maybe Core.Bool),
-    -- | Immutable. Whether to disable resource versioning for this FHIR store. This field can not be changed after the creation of FHIR store. If set to false, which is the default behavior, all write operations cause historical versions to be recorded automatically. The historical versions can be fetched through the history APIs, but cannot be updated. If set to true, no historical versions are kept. The server sends errors for attempts to read the historical versions.
+    -- | Immutable. Whether to disable resource versioning for this FHIR store. This field can not be changed after the creation of FHIR store. If set to false, all write operations cause historical versions to be recorded automatically. The historical versions can be fetched through the history APIs, but cannot be updated. If set to true, no historical versions are kept. The server sends errors for attempts to read the historical versions. Defaults to false.
     disableResourceVersioning :: (Core.Maybe Core.Bool),
-    -- | Whether this FHIR store has the <https://www.hl7.org/fhir/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate updateCreate capability>. This determines if the client can use an Update operation to create a new resource with a client-specified ID. If false, all IDs are server-assigned through the Create operation and attempts to update a non-existent resource return errors. It is strongly advised not to include or encode any sensitive data such as patient identifiers in client-specified resource IDs. Those IDs are part of the FHIR resource path recorded in Cloud audit logs and Pub\/Sub notifications. Those IDs can also be contained in reference fields within other resources.
+    -- | Optional. Whether this FHIR store has the <https://www.hl7.org/fhir/capabilitystatement-definitions.html#CapabilityStatement.rest.resource.updateCreate updateCreate capability>. This determines if the client can use an Update operation to create a new resource with a client-specified ID. If false, all IDs are server-assigned through the Create operation and attempts to update a non-existent resource return errors. It is strongly advised not to include or encode any sensitive data such as patient identifiers in client-specified resource IDs. Those IDs are part of the FHIR resource path recorded in Cloud audit logs and Pub\/Sub notifications. Those IDs can also be contained in reference fields within other resources. Defaults to false.
     enableUpdateCreate :: (Core.Maybe Core.Bool),
     -- | User-supplied key-value pairs used to organize FHIR stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
     labels :: (Core.Maybe FhirStore_Labels),
-    -- | Output only. Resource name of the FHIR store, of the form @projects\/{project_id}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
+    -- | Output only. Identifier. Resource name of the FHIR store, of the form @projects\/{project_id}\/locations\/{location}\/datasets\/{dataset_id}\/fhirStores\/{fhir_store_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | If non-empty, publish all resource modifications of this FHIR store to this destination. The Pub\/Sub message attributes contain a map with a string describing the action that has triggered the notification. For example, \"action\":\"CreateResource\".
+    -- | Deprecated. Use @notification_configs@ instead. If non-empty, publish all resource modifications of this FHIR store to this destination. The Pub\/Sub message attributes contain a map with a string describing the action that has triggered the notification. For example, \"action\":\"CreateResource\".
     notificationConfig :: (Core.Maybe NotificationConfig),
-    -- | A list of streaming configs that configure the destinations of streaming export for every resource mutation in this FHIR store. Each store is allowed to have up to 10 streaming configs. After a new config is added, the next resource mutation is streamed to the new location in addition to the existing ones. When a location is removed from the list, the server stops streaming to that location. Before adding a new config, you must add the required <https://cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor bigquery.dataEditor> role to your project\'s __Cloud Healthcare Service Agent__ <https://cloud.google.com/iam/docs/service-accounts service account>. Some lag (typically on the order of dozens of seconds) is expected before the results show up in the streaming destination.
+    -- | Optional. Specifies where and whether to send notifications upon changes to a FHIR store.
+    notificationConfigs :: (Core.Maybe [FhirNotificationConfig]),
+    -- | Optional. A list of streaming configs that configure the destinations of streaming export for every resource mutation in this FHIR store. Each store is allowed to have up to 10 streaming configs. After a new config is added, the next resource mutation is streamed to the new location in addition to the existing ones. When a location is removed from the list, the server stops streaming to that location. Before adding a new config, you must add the required <https://cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor bigquery.dataEditor> role to your project\'s __Cloud Healthcare Service Agent__ <https://cloud.google.com/iam/docs/service-accounts service account>. Some lag (typically on the order of dozens of seconds) is expected before the results show up in the streaming destination.
     streamConfigs :: (Core.Maybe [StreamConfig]),
-    -- | Configuration for how to validate incoming FHIR resources against configured profiles.
+    -- | Optional. Configuration for how to validate incoming FHIR resources against configured profiles.
     validationConfig :: (Core.Maybe ValidationConfig),
-    -- | Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
+    -- | Required. Immutable. The FHIR specification version that this FHIR store supports natively. This field is immutable after store creation. Requests are rejected if they contain FHIR resources of a different version. Version is required for every FHIR store.
     version :: (Core.Maybe FhirStore_Version)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2901,7 +3906,9 @@ newFhirStore ::
   FhirStore
 newFhirStore =
   FhirStore
-    { complexDataTypeReferenceParsing = Core.Nothing,
+    { bulkExportGcsDestination = Core.Nothing,
+      complexDataTypeReferenceParsing = Core.Nothing,
+      consentConfig = Core.Nothing,
       defaultSearchHandlingStrict = Core.Nothing,
       disableReferentialIntegrity = Core.Nothing,
       disableResourceVersioning = Core.Nothing,
@@ -2909,6 +3916,7 @@ newFhirStore =
       labels = Core.Nothing,
       name = Core.Nothing,
       notificationConfig = Core.Nothing,
+      notificationConfigs = Core.Nothing,
       streamConfigs = Core.Nothing,
       validationConfig = Core.Nothing,
       version = Core.Nothing
@@ -2920,7 +3928,9 @@ instance Core.FromJSON FhirStore where
       "FhirStore"
       ( \o ->
           FhirStore
-            Core.<$> (o Core..:? "complexDataTypeReferenceParsing")
+            Core.<$> (o Core..:? "bulkExportGcsDestination")
+            Core.<*> (o Core..:? "complexDataTypeReferenceParsing")
+            Core.<*> (o Core..:? "consentConfig")
             Core.<*> (o Core..:? "defaultSearchHandlingStrict")
             Core.<*> (o Core..:? "disableReferentialIntegrity")
             Core.<*> (o Core..:? "disableResourceVersioning")
@@ -2928,6 +3938,7 @@ instance Core.FromJSON FhirStore where
             Core.<*> (o Core..:? "labels")
             Core.<*> (o Core..:? "name")
             Core.<*> (o Core..:? "notificationConfig")
+            Core.<*> (o Core..:? "notificationConfigs")
             Core.<*> (o Core..:? "streamConfigs")
             Core.<*> (o Core..:? "validationConfig")
             Core.<*> (o Core..:? "version")
@@ -2937,23 +3948,24 @@ instance Core.ToJSON FhirStore where
   toJSON FhirStore {..} =
     Core.object
       ( Core.catMaybes
-          [ ("complexDataTypeReferenceParsing" Core..=)
+          [ ("bulkExportGcsDestination" Core..=)
+              Core.<$> bulkExportGcsDestination,
+            ("complexDataTypeReferenceParsing" Core..=)
               Core.<$> complexDataTypeReferenceParsing,
+            ("consentConfig" Core..=) Core.<$> consentConfig,
             ("defaultSearchHandlingStrict" Core..=)
               Core.<$> defaultSearchHandlingStrict,
             ("disableReferentialIntegrity" Core..=)
               Core.<$> disableReferentialIntegrity,
             ("disableResourceVersioning" Core..=)
               Core.<$> disableResourceVersioning,
-            ("enableUpdateCreate" Core..=)
-              Core.<$> enableUpdateCreate,
+            ("enableUpdateCreate" Core..=) Core.<$> enableUpdateCreate,
             ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
-            ("notificationConfig" Core..=)
-              Core.<$> notificationConfig,
+            ("notificationConfig" Core..=) Core.<$> notificationConfig,
+            ("notificationConfigs" Core..=) Core.<$> notificationConfigs,
             ("streamConfigs" Core..=) Core.<$> streamConfigs,
-            ("validationConfig" Core..=)
-              Core.<$> validationConfig,
+            ("validationConfig" Core..=) Core.<$> validationConfig,
             ("version" Core..=) Core.<$> version
           ]
       )
@@ -2962,8 +3974,7 @@ instance Core.ToJSON FhirStore where
 --
 -- /See:/ 'newFhirStore_Labels' smart constructor.
 newtype FhirStore_Labels = FhirStore_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2972,15 +3983,14 @@ newFhirStore_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   FhirStore_Labels
-newFhirStore_Labels additional = FhirStore_Labels {additional = additional}
+newFhirStore_Labels additional =
+  FhirStore_Labels {additional = additional}
 
 instance Core.FromJSON FhirStore_Labels where
   parseJSON =
     Core.withObject
       "FhirStore_Labels"
-      ( \o ->
-          FhirStore_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> FhirStore_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON FhirStore_Labels where
   toJSON FhirStore_Labels {..} = Core.toJSON additional
@@ -3014,11 +4024,10 @@ instance Core.FromJSON FhirStoreMetric where
       "FhirStoreMetric"
       ( \o ->
           FhirStoreMetric
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "resourceType")
-            Core.<*> ( o Core..:? "structuredStorageSizeBytes"
+            Core.<*> ( o
+                         Core..:? "structuredStorageSizeBytes"
                          Core.<&> Core.fmap Core.fromAsText
                      )
       )
@@ -3058,7 +4067,8 @@ instance Core.FromJSON FhirStoreMetrics where
       "FhirStoreMetrics"
       ( \o ->
           FhirStoreMetrics
-            Core.<$> (o Core..:? "metrics") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON FhirStoreMetrics where
@@ -3128,9 +4138,9 @@ instance Core.ToJSON Field where
 --
 -- /See:/ 'newFieldMetadata' smart constructor.
 data FieldMetadata = FieldMetadata
-  { -- | Deidentify action for one field.
+  { -- | Optional. Deidentify action for one field.
     action :: (Core.Maybe FieldMetadata_Action),
-    -- | List of paths to FHIR fields to be redacted. Each path is a period-separated list where each component is either a field name or FHIR type name, for example: Patient, HumanName. For \"choice\" types (those defined in the FHIR spec with the form: field[x]) we use two separate components. For example, \"deceasedAge.unit\" is matched by \"Deceased.Age.unit\". Supported types are: AdministrativeGenderCode, Base64Binary, Boolean, Code, Date, DateTime, Decimal, HumanName, Id, Instant, Integer, LanguageCode, Markdown, Oid, PositiveInt, String, UnsignedInt, Uri, Uuid, Xhtml.
+    -- | Optional. List of paths to FHIR fields to be redacted. Each path is a period-separated list where each component is either a field name or FHIR type name, for example: Patient, HumanName. For \"choice\" types (those defined in the FHIR spec with the form: field[x]) we use two separate components. For example, \"deceasedAge.unit\" is matched by \"Deceased.Age.unit\". Supported types are: AdministrativeGenderCode, Base64Binary, Boolean, Code, Date, DateTime, Decimal, HumanName, Id, Instant, Integer, LanguageCode, Markdown, Oid, PositiveInt, String, UnsignedInt, Uri, Uuid, Xhtml.
     paths :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3138,7 +4148,8 @@ data FieldMetadata = FieldMetadata
 -- | Creates a value of 'FieldMetadata' with the minimum fields required to make a request.
 newFieldMetadata ::
   FieldMetadata
-newFieldMetadata = FieldMetadata {action = Core.Nothing, paths = Core.Nothing}
+newFieldMetadata =
+  FieldMetadata {action = Core.Nothing, paths = Core.Nothing}
 
 instance Core.FromJSON FieldMetadata where
   parseJSON =
@@ -3146,7 +4157,8 @@ instance Core.FromJSON FieldMetadata where
       "FieldMetadata"
       ( \o ->
           FieldMetadata
-            Core.<$> (o Core..:? "action") Core.<*> (o Core..:? "paths")
+            Core.<$> (o Core..:? "action")
+            Core.<*> (o Core..:? "paths")
       )
 
 instance Core.ToJSON FieldMetadata where
@@ -3196,8 +4208,7 @@ instance Core.ToJSON GcsDestination where
   toJSON GcsDestination {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentStructure" Core..=)
-              Core.<$> contentStructure,
+          [ ("contentStructure" Core..=) Core.<$> contentStructure,
             ("messageView" Core..=) Core.<$> messageView,
             ("uriPrefix" Core..=) Core.<$> uriPrefix
           ]
@@ -3225,8 +4236,7 @@ instance Core.FromJSON GcsSource where
 
 instance Core.ToJSON GcsSource where
   toJSON GcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | The Cloud Storage location for export.
 --
@@ -3241,12 +4251,12 @@ newtype GoogleCloudHealthcareV1ConsentGcsDestination = GoogleCloudHealthcareV1Co
 newGoogleCloudHealthcareV1ConsentGcsDestination ::
   GoogleCloudHealthcareV1ConsentGcsDestination
 newGoogleCloudHealthcareV1ConsentGcsDestination =
-  GoogleCloudHealthcareV1ConsentGcsDestination {uriPrefix = Core.Nothing}
+  GoogleCloudHealthcareV1ConsentGcsDestination
+    { uriPrefix =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1ConsentGcsDestination
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1ConsentGcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1ConsentGcsDestination"
@@ -3255,16 +4265,10 @@ instance
             Core.<$> (o Core..:? "uriPrefix")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1ConsentGcsDestination
-  where
-  toJSON
-    GoogleCloudHealthcareV1ConsentGcsDestination {..} =
-      Core.object
-        ( Core.catMaybes
-            [("uriPrefix" Core..=) Core.<$> uriPrefix]
-        )
+instance Core.ToJSON GoogleCloudHealthcareV1ConsentGcsDestination where
+  toJSON GoogleCloudHealthcareV1ConsentGcsDestination {..} =
+    Core.object
+      (Core.catMaybes [("uriPrefix" Core..=) Core.<$> uriPrefix])
 
 -- | Represents a user\'s consent in terms of the resources that can be accessed and under what conditions.
 --
@@ -3282,14 +4286,12 @@ newGoogleCloudHealthcareV1ConsentPolicy ::
   GoogleCloudHealthcareV1ConsentPolicy
 newGoogleCloudHealthcareV1ConsentPolicy =
   GoogleCloudHealthcareV1ConsentPolicy
-    { authorizationRule = Core.Nothing,
+    { authorizationRule =
+        Core.Nothing,
       resourceAttributes = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1ConsentPolicy
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1ConsentPolicy where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1ConsentPolicy"
@@ -3299,17 +4301,12 @@ instance
             Core.<*> (o Core..:? "resourceAttributes")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1ConsentPolicy
-  where
+instance Core.ToJSON GoogleCloudHealthcareV1ConsentPolicy where
   toJSON GoogleCloudHealthcareV1ConsentPolicy {..} =
     Core.object
       ( Core.catMaybes
-          [ ("authorizationRule" Core..=)
-              Core.<$> authorizationRule,
-            ("resourceAttributes" Core..=)
-              Core.<$> resourceAttributes
+          [ ("authorizationRule" Core..=) Core.<$> authorizationRule,
+            ("resourceAttributes" Core..=) Core.<$> resourceAttributes
           ]
       )
 
@@ -3377,11 +4374,11 @@ instance
 --
 -- /See:/ 'newGoogleCloudHealthcareV1DicomBigQueryDestination' smart constructor.
 data GoogleCloudHealthcareV1DicomBigQueryDestination = GoogleCloudHealthcareV1DicomBigQueryDestination
-  { -- | Use @write_disposition@ instead. If @write_disposition@ is specified, this parameter is ignored. force=false is equivalent to write/disposition=WRITE/EMPTY and force=true is equivalent to write/disposition=WRITE/TRUNCATE.
+  { -- | Optional. Use @write_disposition@ instead. If @write_disposition@ is specified, this parameter is ignored. force=false is equivalent to write/disposition=WRITE/EMPTY and force=true is equivalent to write/disposition=WRITE/TRUNCATE.
     force :: (Core.Maybe Core.Bool),
-    -- | BigQuery URI to a table, up to 2000 characters long, in the format @bq:\/\/projectId.bqDatasetId.tableId@
+    -- | Optional. BigQuery URI to a table, up to 2000 characters long, in the format @bq:\/\/projectId.bqDatasetId.tableId@
     tableUri :: (Core.Maybe Core.Text),
-    -- | Determines whether the existing table in the destination is to be overwritten or appended to. If a write_disposition is specified, the @force@ parameter is ignored.
+    -- | Optional. Determines whether the existing table in the destination is to be overwritten or appended to. If a write_disposition is specified, the @force@ parameter is ignored.
     writeDisposition ::
       ( Core.Maybe
           GoogleCloudHealthcareV1DicomBigQueryDestination_WriteDisposition
@@ -3394,7 +4391,8 @@ newGoogleCloudHealthcareV1DicomBigQueryDestination ::
   GoogleCloudHealthcareV1DicomBigQueryDestination
 newGoogleCloudHealthcareV1DicomBigQueryDestination =
   GoogleCloudHealthcareV1DicomBigQueryDestination
-    { force = Core.Nothing,
+    { force =
+        Core.Nothing,
       tableUri = Core.Nothing,
       writeDisposition = Core.Nothing
     }
@@ -3408,24 +4406,23 @@ instance
       "GoogleCloudHealthcareV1DicomBigQueryDestination"
       ( \o ->
           GoogleCloudHealthcareV1DicomBigQueryDestination
-            Core.<$> (o Core..:? "force") Core.<*> (o Core..:? "tableUri")
-              Core.<*> (o Core..:? "writeDisposition")
+            Core.<$> (o Core..:? "force")
+            Core.<*> (o Core..:? "tableUri")
+            Core.<*> (o Core..:? "writeDisposition")
       )
 
 instance
   Core.ToJSON
     GoogleCloudHealthcareV1DicomBigQueryDestination
   where
-  toJSON
-    GoogleCloudHealthcareV1DicomBigQueryDestination {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("force" Core..=) Core.<$> force,
-              ("tableUri" Core..=) Core.<$> tableUri,
-              ("writeDisposition" Core..=)
-                Core.<$> writeDisposition
-            ]
-        )
+  toJSON GoogleCloudHealthcareV1DicomBigQueryDestination {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("force" Core..=) Core.<$> force,
+            ("tableUri" Core..=) Core.<$> tableUri,
+            ("writeDisposition" Core..=) Core.<$> writeDisposition
+          ]
+      )
 
 -- | The Cloud Storage location where the server writes the output and the export configuration.
 --
@@ -3444,14 +4441,12 @@ newGoogleCloudHealthcareV1DicomGcsDestination ::
   GoogleCloudHealthcareV1DicomGcsDestination
 newGoogleCloudHealthcareV1DicomGcsDestination =
   GoogleCloudHealthcareV1DicomGcsDestination
-    { mimeType = Core.Nothing,
+    { mimeType =
+        Core.Nothing,
       uriPrefix = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1DicomGcsDestination
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1DicomGcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1DicomGcsDestination"
@@ -3461,10 +4456,7 @@ instance
             Core.<*> (o Core..:? "uriPrefix")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1DicomGcsDestination
-  where
+instance Core.ToJSON GoogleCloudHealthcareV1DicomGcsDestination where
   toJSON GoogleCloudHealthcareV1DicomGcsDestination {..} =
     Core.object
       ( Core.catMaybes
@@ -3488,37 +4480,64 @@ newGoogleCloudHealthcareV1DicomGcsSource ::
 newGoogleCloudHealthcareV1DicomGcsSource =
   GoogleCloudHealthcareV1DicomGcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1DicomGcsSource
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1DicomGcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1DicomGcsSource"
       ( \o ->
-          GoogleCloudHealthcareV1DicomGcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudHealthcareV1DicomGcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1DicomGcsSource
-  where
+instance Core.ToJSON GoogleCloudHealthcareV1DicomGcsSource where
   toJSON GoogleCloudHealthcareV1DicomGcsSource {..} =
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+
+-- | StreamConfig specifies configuration for a streaming DICOM export.
+--
+-- /See:/ 'newGoogleCloudHealthcareV1DicomStreamConfig' smart constructor.
+newtype GoogleCloudHealthcareV1DicomStreamConfig = GoogleCloudHealthcareV1DicomStreamConfig
+  { -- | Results are appended to this table. The server creates a new table in the given BigQuery dataset if the specified table does not exist. To enable the Cloud Healthcare API to write to your BigQuery table, you must give the Cloud Healthcare API service account the bigquery.dataEditor role. The service account is: @service-{PROJECT_NUMBER}\@gcp-sa-healthcare.iam.gserviceaccount.com@. The PROJECT_NUMBER identifies the project that the DICOM store resides in. To get the project number, go to the Cloud Console Dashboard. It is recommended to not have a custom schema in the destination table which could conflict with the schema created by the Cloud Healthcare API. Instance deletions are not applied to the destination table. The destination\'s table schema will be automatically updated in case a new instance\'s data is incompatible with the current schema. The schema should not be updated manually as this can cause incompatibilies that cannot be resolved automatically. One resolution in this case is to delete the
+    -- incompatible table and let the server recreate one, though the newly created table only contains data after the table recreation. BigQuery imposes a 1 MB limit on streaming insert row size, therefore any instance that generates more than 1 MB of BigQuery data will not be streamed. If an instance cannot be streamed to BigQuery, errors will be logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
+    bigqueryDestination :: (Core.Maybe GoogleCloudHealthcareV1DicomBigQueryDestination)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'GoogleCloudHealthcareV1DicomStreamConfig' with the minimum fields required to make a request.
+newGoogleCloudHealthcareV1DicomStreamConfig ::
+  GoogleCloudHealthcareV1DicomStreamConfig
+newGoogleCloudHealthcareV1DicomStreamConfig =
+  GoogleCloudHealthcareV1DicomStreamConfig
+    { bigqueryDestination =
+        Core.Nothing
+    }
+
+instance Core.FromJSON GoogleCloudHealthcareV1DicomStreamConfig where
+  parseJSON =
+    Core.withObject
+      "GoogleCloudHealthcareV1DicomStreamConfig"
+      ( \o ->
+          GoogleCloudHealthcareV1DicomStreamConfig
+            Core.<$> (o Core..:? "bigqueryDestination")
+      )
+
+instance Core.ToJSON GoogleCloudHealthcareV1DicomStreamConfig where
+  toJSON GoogleCloudHealthcareV1DicomStreamConfig {..} =
     Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+      ( Core.catMaybes
+          [("bigqueryDestination" Core..=) Core.<$> bigqueryDestination]
+      )
 
 -- | The configuration for exporting to BigQuery.
 --
 -- /See:/ 'newGoogleCloudHealthcareV1FhirBigQueryDestination' smart constructor.
 data GoogleCloudHealthcareV1FhirBigQueryDestination = GoogleCloudHealthcareV1FhirBigQueryDestination
-  { -- | BigQuery URI to an existing dataset, up to 2000 characters long, in the format @bq:\/\/projectId.bqDatasetId@.
+  { -- | Optional. BigQuery URI to an existing dataset, up to 2000 characters long, in the format @bq:\/\/projectId.bqDatasetId@.
     datasetUri :: (Core.Maybe Core.Text),
-    -- | If this flag is @TRUE@, all tables are deleted from the dataset before the new exported tables are written. If the flag is not set and the destination dataset contains tables, the export call returns an error. If @write_disposition@ is specified, this parameter is ignored. force=false is equivalent to write/disposition=WRITE/EMPTY and force=true is equivalent to write/disposition=WRITE/TRUNCATE.
+    -- | Optional. The default value is false. If this flag is @TRUE@, all tables are deleted from the dataset before the new exported tables are written. If the flag is not set and the destination dataset contains tables, the export call returns an error. If @write_disposition@ is specified, this parameter is ignored. force=false is equivalent to write/disposition=WRITE/EMPTY and force=true is equivalent to write/disposition=WRITE/TRUNCATE.
     force :: (Core.Maybe Core.Bool),
-    -- | The configuration for the exported BigQuery schema.
+    -- | Optional. The configuration for the exported BigQuery schema.
     schemaConfig :: (Core.Maybe SchemaConfig),
-    -- | Determines if existing data in the destination dataset is overwritten, appended to, or not written if the tables contain data. If a write_disposition is specified, the @force@ parameter is ignored.
+    -- | Optional. Determines if existing data in the destination dataset is overwritten, appended to, or not written if the tables contain data. If a write_disposition is specified, the @force@ parameter is ignored.
     writeDisposition ::
       ( Core.Maybe
           GoogleCloudHealthcareV1FhirBigQueryDestination_WriteDisposition
@@ -3531,7 +4550,8 @@ newGoogleCloudHealthcareV1FhirBigQueryDestination ::
   GoogleCloudHealthcareV1FhirBigQueryDestination
 newGoogleCloudHealthcareV1FhirBigQueryDestination =
   GoogleCloudHealthcareV1FhirBigQueryDestination
-    { datasetUri = Core.Nothing,
+    { datasetUri =
+        Core.Nothing,
       force = Core.Nothing,
       schemaConfig = Core.Nothing,
       writeDisposition = Core.Nothing
@@ -3547,26 +4567,21 @@ instance
       ( \o ->
           GoogleCloudHealthcareV1FhirBigQueryDestination
             Core.<$> (o Core..:? "datasetUri")
-              Core.<*> (o Core..:? "force")
-              Core.<*> (o Core..:? "schemaConfig")
-              Core.<*> (o Core..:? "writeDisposition")
+            Core.<*> (o Core..:? "force")
+            Core.<*> (o Core..:? "schemaConfig")
+            Core.<*> (o Core..:? "writeDisposition")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1FhirBigQueryDestination
-  where
-  toJSON
-    GoogleCloudHealthcareV1FhirBigQueryDestination {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("datasetUri" Core..=) Core.<$> datasetUri,
-              ("force" Core..=) Core.<$> force,
-              ("schemaConfig" Core..=) Core.<$> schemaConfig,
-              ("writeDisposition" Core..=)
-                Core.<$> writeDisposition
-            ]
-        )
+instance Core.ToJSON GoogleCloudHealthcareV1FhirBigQueryDestination where
+  toJSON GoogleCloudHealthcareV1FhirBigQueryDestination {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("datasetUri" Core..=) Core.<$> datasetUri,
+            ("force" Core..=) Core.<$> force,
+            ("schemaConfig" Core..=) Core.<$> schemaConfig,
+            ("writeDisposition" Core..=) Core.<$> writeDisposition
+          ]
+      )
 
 -- | The configuration for exporting to Cloud Storage.
 --
@@ -3581,12 +4596,12 @@ newtype GoogleCloudHealthcareV1FhirGcsDestination = GoogleCloudHealthcareV1FhirG
 newGoogleCloudHealthcareV1FhirGcsDestination ::
   GoogleCloudHealthcareV1FhirGcsDestination
 newGoogleCloudHealthcareV1FhirGcsDestination =
-  GoogleCloudHealthcareV1FhirGcsDestination {uriPrefix = Core.Nothing}
+  GoogleCloudHealthcareV1FhirGcsDestination
+    { uriPrefix =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1FhirGcsDestination
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1FhirGcsDestination where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1FhirGcsDestination"
@@ -3595,15 +4610,10 @@ instance
             Core.<$> (o Core..:? "uriPrefix")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1FhirGcsDestination
-  where
+instance Core.ToJSON GoogleCloudHealthcareV1FhirGcsDestination where
   toJSON GoogleCloudHealthcareV1FhirGcsDestination {..} =
     Core.object
-      ( Core.catMaybes
-          [("uriPrefix" Core..=) Core.<$> uriPrefix]
-      )
+      (Core.catMaybes [("uriPrefix" Core..=) Core.<$> uriPrefix])
 
 -- | Specifies the configuration for importing data from Cloud Storage.
 --
@@ -3620,33 +4630,23 @@ newGoogleCloudHealthcareV1FhirGcsSource ::
 newGoogleCloudHealthcareV1FhirGcsSource =
   GoogleCloudHealthcareV1FhirGcsSource {uri = Core.Nothing}
 
-instance
-  Core.FromJSON
-    GoogleCloudHealthcareV1FhirGcsSource
-  where
+instance Core.FromJSON GoogleCloudHealthcareV1FhirGcsSource where
   parseJSON =
     Core.withObject
       "GoogleCloudHealthcareV1FhirGcsSource"
       ( \o ->
-          GoogleCloudHealthcareV1FhirGcsSource
-            Core.<$> (o Core..:? "uri")
+          GoogleCloudHealthcareV1FhirGcsSource Core.<$> (o Core..:? "uri")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudHealthcareV1FhirGcsSource
-  where
+instance Core.ToJSON GoogleCloudHealthcareV1FhirGcsSource where
   toJSON GoogleCloudHealthcareV1FhirGcsSource {..} =
-    Core.object
-      (Core.catMaybes [("uri" Core..=) Core.<$> uri])
+    Core.object (Core.catMaybes [("uri" Core..=) Core.<$> uri])
 
 -- | Construct representing a logical group or a segment.
 --
 -- /See:/ 'newGroupOrSegment' smart constructor.
 data GroupOrSegment = GroupOrSegment
-  { -- |
-    group' :: (Core.Maybe SchemaGroup),
-    -- |
+  { group' :: (Core.Maybe SchemaGroup),
     segment :: (Core.Maybe SchemaSegment)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3663,7 +4663,8 @@ instance Core.FromJSON GroupOrSegment where
       "GroupOrSegment"
       ( \o ->
           GroupOrSegment
-            Core.<$> (o Core..:? "group") Core.<*> (o Core..:? "segment")
+            Core.<$> (o Core..:? "group")
+            Core.<*> (o Core..:? "segment")
       )
 
 instance Core.ToJSON GroupOrSegment where
@@ -3690,7 +4691,10 @@ data Hl7SchemaConfig = Hl7SchemaConfig
 newHl7SchemaConfig ::
   Hl7SchemaConfig
 newHl7SchemaConfig =
-  Hl7SchemaConfig {messageSchemaConfigs = Core.Nothing, version = Core.Nothing}
+  Hl7SchemaConfig
+    { messageSchemaConfigs = Core.Nothing,
+      version = Core.Nothing
+    }
 
 instance Core.FromJSON Hl7SchemaConfig where
   parseJSON =
@@ -3706,8 +4710,7 @@ instance Core.ToJSON Hl7SchemaConfig where
   toJSON Hl7SchemaConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("messageSchemaConfigs" Core..=)
-              Core.<$> messageSchemaConfigs,
+          [ ("messageSchemaConfigs" Core..=) Core.<$> messageSchemaConfigs,
             ("version" Core..=) Core.<$> version
           ]
       )
@@ -3716,8 +4719,7 @@ instance Core.ToJSON Hl7SchemaConfig where
 --
 -- /See:/ 'newHl7SchemaConfig_MessageSchemaConfigs' smart constructor.
 newtype Hl7SchemaConfig_MessageSchemaConfigs = Hl7SchemaConfig_MessageSchemaConfigs
-  { -- |
-    additional :: (Core.HashMap Core.Text SchemaGroup)
+  { additional :: (Core.HashMap Core.Text SchemaGroup)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3729,10 +4731,7 @@ newHl7SchemaConfig_MessageSchemaConfigs ::
 newHl7SchemaConfig_MessageSchemaConfigs additional =
   Hl7SchemaConfig_MessageSchemaConfigs {additional = additional}
 
-instance
-  Core.FromJSON
-    Hl7SchemaConfig_MessageSchemaConfigs
-  where
+instance Core.FromJSON Hl7SchemaConfig_MessageSchemaConfigs where
   parseJSON =
     Core.withObject
       "Hl7SchemaConfig_MessageSchemaConfigs"
@@ -3741,10 +4740,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    Hl7SchemaConfig_MessageSchemaConfigs
-  where
+instance Core.ToJSON Hl7SchemaConfig_MessageSchemaConfigs where
   toJSON Hl7SchemaConfig_MessageSchemaConfigs {..} =
     Core.toJSON additional
 
@@ -3771,7 +4767,8 @@ instance Core.FromJSON Hl7TypesConfig where
       "Hl7TypesConfig"
       ( \o ->
           Hl7TypesConfig
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "version")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "version")
       )
 
 instance Core.ToJSON Hl7TypesConfig where
@@ -3787,9 +4784,9 @@ instance Core.ToJSON Hl7TypesConfig where
 --
 -- /See:/ 'newHl7V2NotificationConfig' smart constructor.
 data Hl7V2NotificationConfig = Hl7V2NotificationConfig
-  { -- | Restricts notifications sent for messages matching a filter. If this is empty, all messages are matched. The following syntax is available: * A string field value can be written as text inside quotation marks, for example @\"query text\"@. The only valid relational operation for text fields is equality (@=@), where text is searched within the field, rather than having the field be equal to the text. For example, @\"Comment = great\"@ returns messages with @great@ in the comment field. * A number field value can be written as an integer, a decimal, or an exponential. The valid relational operators for number fields are the equality operator (@=@), along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * A date field value must be written in @yyyy-mm-dd@ form. Fields with date and time use the RFC3339 time format. Leading zeros are required for one-digit months and days. The
-    -- valid relational operators for date fields are the equality operator (@=@) , along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * Multiple field query expressions can be combined in one query by adding @AND@ or @OR@ operators between the expressions. If a boolean operator appears within a quoted string, it is not treated as special, it\'s just another part of the character string to be matched. You can prepend the @NOT@ operator to an expression to negate it. The following fields and functions are available for filtering: * @message_type@, from the MSH-9.1 field. For example, @NOT message_type = \"ADT\"@. * @send_date@ or @sendDate@, the YYYY-MM-DD date the message was sent in the dataset\'s time_zone, from the MSH-7 segment. For example, @send_date \< \"2017-01-02\"@. * @send_time@, the timestamp when the message was sent, using the RFC3339 time format for comparisons,
-    -- from the MSH-7 segment. For example, @send_time \< \"2017-01-02T00:00:00-05:00\"@. * @create_time@, the timestamp when the message was created in the HL7v2 store. Use the RFC3339 time format for comparisons. For example, @create_time \< \"2017-01-02T00:00:00-05:00\"@. * @send_facility@, the care center that the message came from, from the MSH-4 segment. For example, @send_facility = \"ABC\"@. * @PatientId(value, type)@, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments. For example, @PatientId(\"123456\", \"MRN\")@. * @labels.x@, a string value of the label with key @x@ as set using the Message.labels map. For example, @labels.\"priority\"=\"high\"@. The operator @:*@ can be used to assert the existence of a label. For example, @labels.\"priority\":*@.
+  { -- | Optional. Restricts notifications sent for messages matching a filter. If this is empty, all messages are matched. The following syntax is available: * A string field value can be written as text inside quotation marks, for example @\"query text\"@. The only valid relational operation for text fields is equality (@=@), where text is searched within the field, rather than having the field be equal to the text. For example, @\"Comment = great\"@ returns messages with @great@ in the comment field. * A number field value can be written as an integer, a decimal, or an exponential. The valid relational operators for number fields are the equality operator (@=@), along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * A date field value must be written in @yyyy-mm-dd@ form. Fields with date and time use the RFC3339 time format. Leading zeros are required for one-digit months and
+    -- days. The valid relational operators for date fields are the equality operator (@=@) , along with the less than\/greater than operators (@\<@, @\<=@, @>@, @>=@). Note that there is no inequality (@!=@) operator. You can prepend the @NOT@ operator to an expression to negate it. * Multiple field query expressions can be combined in one query by adding @AND@ or @OR@ operators between the expressions. If a boolean operator appears within a quoted string, it is not treated as special, it\'s just another part of the character string to be matched. You can prepend the @NOT@ operator to an expression to negate it. The following fields and functions are available for filtering: * @message_type@, from the MSH-9.1 field. For example, @NOT message_type = \"ADT\"@. * @send_date@ or @sendDate@, the YYYY-MM-DD date the message was sent in the dataset\'s time_zone, from the MSH-7 segment. For example, @send_date \< \"2017-01-02\"@. * @send_time@, the timestamp when the message was sent, using the RFC3339 time format for
+    -- comparisons, from the MSH-7 segment. For example, @send_time \< \"2017-01-02T00:00:00-05:00\"@. * @create_time@, the timestamp when the message was created in the HL7v2 store. Use the RFC3339 time format for comparisons. For example, @create_time \< \"2017-01-02T00:00:00-05:00\"@. * @send_facility@, the care center that the message came from, from the MSH-4 segment. For example, @send_facility = \"ABC\"@. * @PatientId(value, type)@, which matches if the message lists a patient having an ID of the given value and type in the PID-2, PID-3, or PID-4 segments. For example, @PatientId(\"123456\", \"MRN\")@. * @labels.x@, a string value of the label with key @x@ as set using the Message.labels map. For example, @labels.\"priority\"=\"high\"@. The operator @:*@ can be used to assert the existence of a label. For example, @labels.\"priority\":*@.
     filter :: (Core.Maybe Core.Text),
     -- | The <https://cloud.google.com/pubsub/docs/ Pub\/Sub> topic that notifications of changes are published on. Supplied by the client. The notification is a @PubsubMessage@ with the following fields: * @PubsubMessage.Data@ contains the resource name. * @PubsubMessage.MessageId@ is the ID of this notification. It\'s guaranteed to be unique within the topic. * @PubsubMessage.PublishTime@ is the time when the message was published. Note that notifications are only sent if the topic is non-empty. <https://cloud.google.com/pubsub/docs/overview#names Topic names> must be scoped to a project. The Cloud Healthcare API service account, service-PROJECT_NUMBER\@gcp-sa-healthcare.iam.gserviceaccount.com, must have publisher permissions on the given Pub\/Sub topic. Not having adequate permissions causes the calls that send notifications to fail. If a notification cannot be published to Pub\/Sub, errors are logged to Cloud Logging. For more information, see
     -- <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
@@ -3801,7 +4798,10 @@ data Hl7V2NotificationConfig = Hl7V2NotificationConfig
 newHl7V2NotificationConfig ::
   Hl7V2NotificationConfig
 newHl7V2NotificationConfig =
-  Hl7V2NotificationConfig {filter = Core.Nothing, pubsubTopic = Core.Nothing}
+  Hl7V2NotificationConfig
+    { filter = Core.Nothing,
+      pubsubTopic = Core.Nothing
+    }
 
 instance Core.FromJSON Hl7V2NotificationConfig where
   parseJSON =
@@ -3828,13 +4828,13 @@ instance Core.ToJSON Hl7V2NotificationConfig where
 data Hl7V2Store = Hl7V2Store
   { -- | User-supplied key-value pairs used to organize HL7v2 stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
     labels :: (Core.Maybe Hl7V2Store_Labels),
-    -- | Resource name of the HL7v2 store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
+    -- | Identifier. Resource name of the HL7v2 store, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | A list of notification configs. Each configuration uses a filter to determine whether to publish a message (both Ingest & Create) on the corresponding notification destination. Only the message name is sent as part of the notification. Supplied by the client.
+    -- | Optional. A list of notification configs. Each configuration uses a filter to determine whether to publish a message (both Ingest & Create) on the corresponding notification destination. Only the message name is sent as part of the notification. Supplied by the client.
     notificationConfigs :: (Core.Maybe [Hl7V2NotificationConfig]),
-    -- | The configuration for the parser. It determines how the server parses the messages.
+    -- | Optional. The configuration for the parser. It determines how the server parses the messages.
     parserConfig :: (Core.Maybe ParserConfig),
-    -- | Determines whether to reject duplicate messages. A duplicate message is a message with the same raw bytes as a message that has already been ingested\/created in this HL7v2 store. The default value is false, meaning that the store accepts the duplicate messages and it also returns the same ACK message in the IngestMessageResponse as has been returned previously. Note that only one resource is created in the store. When this field is set to true, CreateMessage\/IngestMessage requests with a duplicate message will be rejected by the store, and IngestMessageErrorDetail returns a NACK message upon rejection.
+    -- | Optional. Determines whether to reject duplicate messages. A duplicate message is a message with the same raw bytes as a message that has already been ingested\/created in this HL7v2 store. The default value is false, meaning that the store accepts the duplicate messages and it also returns the same ACK message in the IngestMessageResponse as has been returned previously. Note that only one resource is created in the store. When this field is set to true, CreateMessage\/IngestMessage requests with a duplicate message will be rejected by the store, and IngestMessageErrorDetail returns a NACK message upon rejection.
     rejectDuplicateMessage :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -3870,8 +4870,7 @@ instance Core.ToJSON Hl7V2Store where
       ( Core.catMaybes
           [ ("labels" Core..=) Core.<$> labels,
             ("name" Core..=) Core.<$> name,
-            ("notificationConfigs" Core..=)
-              Core.<$> notificationConfigs,
+            ("notificationConfigs" Core..=) Core.<$> notificationConfigs,
             ("parserConfig" Core..=) Core.<$> parserConfig,
             ("rejectDuplicateMessage" Core..=)
               Core.<$> rejectDuplicateMessage
@@ -3882,8 +4881,7 @@ instance Core.ToJSON Hl7V2Store where
 --
 -- /See:/ 'newHl7V2Store_Labels' smart constructor.
 newtype Hl7V2Store_Labels = Hl7V2Store_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -3892,18 +4890,102 @@ newHl7V2Store_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Hl7V2Store_Labels
-newHl7V2Store_Labels additional = Hl7V2Store_Labels {additional = additional}
+newHl7V2Store_Labels additional =
+  Hl7V2Store_Labels {additional = additional}
 
 instance Core.FromJSON Hl7V2Store_Labels where
   parseJSON =
     Core.withObject
       "Hl7V2Store_Labels"
-      ( \o ->
-          Hl7V2Store_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Hl7V2Store_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Hl7V2Store_Labels where
   toJSON Hl7V2Store_Labels {..} = Core.toJSON additional
+
+-- | Count of messages and total storage size by type for a given HL7 store.
+--
+-- /See:/ 'newHl7V2StoreMetric' smart constructor.
+data Hl7V2StoreMetric = Hl7V2StoreMetric
+  { -- | The total count of HL7v2 messages in the store for the given message type.
+    count :: (Core.Maybe Core.Int64),
+    -- | The Hl7v2 message type this metric applies to, such as @ADT@ or @ORU@.
+    messageType :: (Core.Maybe Core.Text),
+    -- | The total amount of structured storage used by HL7v2 messages of this message type in the store.
+    structuredStorageSizeBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Hl7V2StoreMetric' with the minimum fields required to make a request.
+newHl7V2StoreMetric ::
+  Hl7V2StoreMetric
+newHl7V2StoreMetric =
+  Hl7V2StoreMetric
+    { count = Core.Nothing,
+      messageType = Core.Nothing,
+      structuredStorageSizeBytes = Core.Nothing
+    }
+
+instance Core.FromJSON Hl7V2StoreMetric where
+  parseJSON =
+    Core.withObject
+      "Hl7V2StoreMetric"
+      ( \o ->
+          Hl7V2StoreMetric
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "messageType")
+            Core.<*> ( o
+                         Core..:? "structuredStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON Hl7V2StoreMetric where
+  toJSON Hl7V2StoreMetric {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("count" Core..=) Core.. Core.AsText Core.<$> count,
+            ("messageType" Core..=) Core.<$> messageType,
+            ("structuredStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> structuredStorageSizeBytes
+          ]
+      )
+
+-- | List of metrics for a given HL7v2 store.
+--
+-- /See:/ 'newHl7V2StoreMetrics' smart constructor.
+data Hl7V2StoreMetrics = Hl7V2StoreMetrics
+  { -- | List of HL7v2 store metrics by message type.
+    metrics :: (Core.Maybe [Hl7V2StoreMetric]),
+    -- | The resource name of the HL7v2 store to get metrics for, in the format @projects\/{project_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7v2_store_id}@.
+    name :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'Hl7V2StoreMetrics' with the minimum fields required to make a request.
+newHl7V2StoreMetrics ::
+  Hl7V2StoreMetrics
+newHl7V2StoreMetrics =
+  Hl7V2StoreMetrics {metrics = Core.Nothing, name = Core.Nothing}
+
+instance Core.FromJSON Hl7V2StoreMetrics where
+  parseJSON =
+    Core.withObject
+      "Hl7V2StoreMetrics"
+      ( \o ->
+          Hl7V2StoreMetrics
+            Core.<$> (o Core..:? "metrics")
+            Core.<*> (o Core..:? "name")
+      )
+
+instance Core.ToJSON Hl7V2StoreMetrics where
+  toJSON Hl7V2StoreMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metrics" Core..=) Core.<$> metrics,
+            ("name" Core..=) Core.<$> name
+          ]
+      )
 
 -- | Message that represents an arbitrary HTTP body. It should only be used for payload formats that can\'t be represented as JSON, such as raw binary or an HTML page. This message can be used both in streaming and non-streaming API methods in the request as well as the response. It can be used as a top-level request field, which is convenient if one wants to extract parameters from either the URL or HTTP template into the request fields and also want access to the raw HTTP body. Example: message GetResourceRequest { \/\/ A unique request id. string request/id = 1; \/\/ The raw HTTP body is bound to this field. google.api.HttpBody http/body = 2; } service ResourceService { rpc GetResource(GetResourceRequest) returns (google.api.HttpBody); rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty); } Example with streaming methods: service CaldavService { rpc GetCalendar(stream google.api.HttpBody) returns (stream google.api.HttpBody); rpc UpdateCalendar(stream google.api.HttpBody) returns (stream
 -- google.api.HttpBody); } Use of this type only changes how the request and response bodies are handled, all other features will continue to work unchanged.
@@ -3970,14 +5052,10 @@ instance Core.FromJSON HttpBody_ExtensionsItem where
   parseJSON =
     Core.withObject
       "HttpBody_ExtensionsItem"
-      ( \o ->
-          HttpBody_ExtensionsItem
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> HttpBody_ExtensionsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON HttpBody_ExtensionsItem where
-  toJSON HttpBody_ExtensionsItem {..} =
-    Core.toJSON additional
+  toJSON HttpBody_ExtensionsItem {..} = Core.toJSON additional
 
 -- | Raw bytes representing consent artifact content.
 --
@@ -4018,7 +5096,7 @@ instance Core.ToJSON Image where
 --
 -- /See:/ 'newImageConfig' smart constructor.
 newtype ImageConfig = ImageConfig
-  { -- | Determines how to redact text from image.
+  { -- | Optional. Determines how to redact text from image.
     textRedactionMode :: (Core.Maybe ImageConfig_TextRedactionMode)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4032,25 +5110,22 @@ instance Core.FromJSON ImageConfig where
   parseJSON =
     Core.withObject
       "ImageConfig"
-      ( \o ->
-          ImageConfig
-            Core.<$> (o Core..:? "textRedactionMode")
-      )
+      (\o -> ImageConfig Core.<$> (o Core..:? "textRedactionMode"))
 
 instance Core.ToJSON ImageConfig where
   toJSON ImageConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("textRedactionMode" Core..=)
-              Core.<$> textRedactionMode
-          ]
+          [("textRedactionMode" Core..=) Core.<$> textRedactionMode]
       )
 
 -- | Imports data into the specified DICOM store. Returns an error if any of the files to import are not DICOM files. This API accepts duplicate DICOM instances by ignoring the newly-pushed instance. It does not overwrite.
 --
 -- /See:/ 'newImportDicomDataRequest' smart constructor.
-newtype ImportDicomDataRequest = ImportDicomDataRequest
-  { -- | Cloud Storage source data location and import configuration. The Cloud Healthcare Service Agent requires the @roles\/storage.objectViewer@ Cloud IAM roles on the Cloud Storage location.
+data ImportDicomDataRequest = ImportDicomDataRequest
+  { -- | Optional. The blob storage settings for the data imported by this operation.
+    blobStorageSettings :: (Core.Maybe BlobStorageSettings),
+    -- | Cloud Storage source data location and import configuration. The Cloud Healthcare Service Agent requires the @roles\/storage.objectViewer@ Cloud IAM roles on the Cloud Storage location.
     gcsSource :: (Core.Maybe GoogleCloudHealthcareV1DicomGcsSource)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4058,7 +5133,11 @@ newtype ImportDicomDataRequest = ImportDicomDataRequest
 -- | Creates a value of 'ImportDicomDataRequest' with the minimum fields required to make a request.
 newImportDicomDataRequest ::
   ImportDicomDataRequest
-newImportDicomDataRequest = ImportDicomDataRequest {gcsSource = Core.Nothing}
+newImportDicomDataRequest =
+  ImportDicomDataRequest
+    { blobStorageSettings = Core.Nothing,
+      gcsSource = Core.Nothing
+    }
 
 instance Core.FromJSON ImportDicomDataRequest where
   parseJSON =
@@ -4066,14 +5145,17 @@ instance Core.FromJSON ImportDicomDataRequest where
       "ImportDicomDataRequest"
       ( \o ->
           ImportDicomDataRequest
-            Core.<$> (o Core..:? "gcsSource")
+            Core.<$> (o Core..:? "blobStorageSettings")
+            Core.<*> (o Core..:? "gcsSource")
       )
 
 instance Core.ToJSON ImportDicomDataRequest where
   toJSON ImportDicomDataRequest {..} =
     Core.object
       ( Core.catMaybes
-          [("gcsSource" Core..=) Core.<$> gcsSource]
+          [ ("blobStorageSettings" Core..=) Core.<$> blobStorageSettings,
+            ("gcsSource" Core..=) Core.<$> gcsSource
+          ]
       )
 
 -- | Returns additional information in regards to a completed DICOM store import.
@@ -4108,23 +5190,19 @@ newtype ImportMessagesRequest = ImportMessagesRequest
 -- | Creates a value of 'ImportMessagesRequest' with the minimum fields required to make a request.
 newImportMessagesRequest ::
   ImportMessagesRequest
-newImportMessagesRequest = ImportMessagesRequest {gcsSource = Core.Nothing}
+newImportMessagesRequest =
+  ImportMessagesRequest {gcsSource = Core.Nothing}
 
 instance Core.FromJSON ImportMessagesRequest where
   parseJSON =
     Core.withObject
       "ImportMessagesRequest"
-      ( \o ->
-          ImportMessagesRequest
-            Core.<$> (o Core..:? "gcsSource")
-      )
+      (\o -> ImportMessagesRequest Core.<$> (o Core..:? "gcsSource"))
 
 instance Core.ToJSON ImportMessagesRequest where
   toJSON ImportMessagesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsSource" Core..=) Core.<$> gcsSource]
-      )
+      (Core.catMaybes [("gcsSource" Core..=) Core.<$> gcsSource])
 
 -- | Final response of importing messages. This structure is included in the response to describe the detailed outcome. It is only included when the operation finishes successfully.
 --
@@ -4180,8 +5258,7 @@ instance Core.ToJSON ImportResourcesRequest where
   toJSON ImportResourcesRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("contentStructure" Core..=)
-              Core.<$> contentStructure,
+          [ ("contentStructure" Core..=) Core.<$> contentStructure,
             ("gcsSource" Core..=) Core.<$> gcsSource
           ]
       )
@@ -4216,7 +5293,7 @@ data InfoTypeTransformation = InfoTypeTransformation
     cryptoHashConfig :: (Core.Maybe CryptoHashConfig),
     -- | Config for date shift.
     dateShiftConfig :: (Core.Maybe DateShiftConfig),
-    -- | InfoTypes to apply this transformation to. If this is not specified, the transformation applies to any info_type.
+    -- | Optional. InfoTypes to apply this transformation to. If this is not specified, the transformation applies to any info_type.
     infoTypes :: (Core.Maybe [Core.Text]),
     -- | Config for text redaction.
     redactConfig :: (Core.Maybe RedactConfig),
@@ -4256,10 +5333,8 @@ instance Core.ToJSON InfoTypeTransformation where
   toJSON InfoTypeTransformation {..} =
     Core.object
       ( Core.catMaybes
-          [ ("characterMaskConfig" Core..=)
-              Core.<$> characterMaskConfig,
-            ("cryptoHashConfig" Core..=)
-              Core.<$> cryptoHashConfig,
+          [ ("characterMaskConfig" Core..=) Core.<$> characterMaskConfig,
+            ("cryptoHashConfig" Core..=) Core.<$> cryptoHashConfig,
             ("dateShiftConfig" Core..=) Core.<$> dateShiftConfig,
             ("infoTypes" Core..=) Core.<$> infoTypes,
             ("redactConfig" Core..=) Core.<$> redactConfig,
@@ -4272,7 +5347,7 @@ instance Core.ToJSON InfoTypeTransformation where
 --
 -- /See:/ 'newIngestMessageRequest' smart constructor.
 newtype IngestMessageRequest = IngestMessageRequest
-  { -- | HL7v2 message to ingest.
+  { -- | Required. HL7v2 message to ingest.
     message :: (Core.Maybe Message)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -4280,22 +5355,19 @@ newtype IngestMessageRequest = IngestMessageRequest
 -- | Creates a value of 'IngestMessageRequest' with the minimum fields required to make a request.
 newIngestMessageRequest ::
   IngestMessageRequest
-newIngestMessageRequest = IngestMessageRequest {message = Core.Nothing}
+newIngestMessageRequest =
+  IngestMessageRequest {message = Core.Nothing}
 
 instance Core.FromJSON IngestMessageRequest where
   parseJSON =
     Core.withObject
       "IngestMessageRequest"
-      ( \o ->
-          IngestMessageRequest Core.<$> (o Core..:? "message")
-      )
+      (\o -> IngestMessageRequest Core.<$> (o Core..:? "message"))
 
 instance Core.ToJSON IngestMessageRequest where
   toJSON IngestMessageRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("message" Core..=) Core.<$> message]
-      )
+      (Core.catMaybes [("message" Core..=) Core.<$> message])
 
 -- | Acknowledges that a message has been ingested into the specified HL7v2 store.
 --
@@ -4312,7 +5384,10 @@ data IngestMessageResponse = IngestMessageResponse
 newIngestMessageResponse ::
   IngestMessageResponse
 newIngestMessageResponse =
-  IngestMessageResponse {hl7Ack = Core.Nothing, message = Core.Nothing}
+  IngestMessageResponse
+    { hl7Ack = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON IngestMessageResponse where
   parseJSON =
@@ -4348,7 +5423,10 @@ data KmsWrappedCryptoKey = KmsWrappedCryptoKey
 newKmsWrappedCryptoKey ::
   KmsWrappedCryptoKey
 newKmsWrappedCryptoKey =
-  KmsWrappedCryptoKey {cryptoKey = Core.Nothing, wrappedKey = Core.Nothing}
+  KmsWrappedCryptoKey
+    { cryptoKey = Core.Nothing,
+      wrappedKey = Core.Nothing
+    }
 
 instance Core.FromJSON KmsWrappedCryptoKey where
   parseJSON =
@@ -4387,16 +5465,12 @@ instance Core.FromJSON LinkedEntity where
   parseJSON =
     Core.withObject
       "LinkedEntity"
-      ( \o ->
-          LinkedEntity Core.<$> (o Core..:? "entityId")
-      )
+      (\o -> LinkedEntity Core.<$> (o Core..:? "entityId"))
 
 instance Core.ToJSON LinkedEntity where
   toJSON LinkedEntity {..} =
     Core.object
-      ( Core.catMaybes
-          [("entityId" Core..=) Core.<$> entityId]
-      )
+      (Core.catMaybes [("entityId" Core..=) Core.<$> entityId])
 
 --
 -- /See:/ 'newListAttributeDefinitionsResponse' smart constructor.
@@ -4413,14 +5487,12 @@ newListAttributeDefinitionsResponse ::
   ListAttributeDefinitionsResponse
 newListAttributeDefinitionsResponse =
   ListAttributeDefinitionsResponse
-    { attributeDefinitions = Core.Nothing,
+    { attributeDefinitions =
+        Core.Nothing,
       nextPageToken = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListAttributeDefinitionsResponse
-  where
+instance Core.FromJSON ListAttributeDefinitionsResponse where
   parseJSON =
     Core.withObject
       "ListAttributeDefinitionsResponse"
@@ -4434,8 +5506,7 @@ instance Core.ToJSON ListAttributeDefinitionsResponse where
   toJSON ListAttributeDefinitionsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributeDefinitions" Core..=)
-              Core.<$> attributeDefinitions,
+          [ ("attributeDefinitions" Core..=) Core.<$> attributeDefinitions,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -4473,8 +5544,7 @@ instance Core.ToJSON ListConsentArtifactsResponse where
   toJSON ListConsentArtifactsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consentArtifacts" Core..=)
-              Core.<$> consentArtifacts,
+          [ ("consentArtifacts" Core..=) Core.<$> consentArtifacts,
             ("nextPageToken" Core..=) Core.<$> nextPageToken
           ]
       )
@@ -4569,7 +5639,10 @@ data ListConsentsResponse = ListConsentsResponse
 newListConsentsResponse ::
   ListConsentsResponse
 newListConsentsResponse =
-  ListConsentsResponse {consents = Core.Nothing, nextPageToken = Core.Nothing}
+  ListConsentsResponse
+    { consents = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListConsentsResponse where
   parseJSON =
@@ -4605,7 +5678,10 @@ data ListDatasetsResponse = ListDatasetsResponse
 newListDatasetsResponse ::
   ListDatasetsResponse
 newListDatasetsResponse =
-  ListDatasetsResponse {datasets = Core.Nothing, nextPageToken = Core.Nothing}
+  ListDatasetsResponse
+    { datasets = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListDatasetsResponse where
   parseJSON =
@@ -4758,7 +5834,10 @@ data ListLocationsResponse = ListLocationsResponse
 newListLocationsResponse ::
   ListLocationsResponse
 newListLocationsResponse =
-  ListLocationsResponse {locations = Core.Nothing, nextPageToken = Core.Nothing}
+  ListLocationsResponse
+    { locations = Core.Nothing,
+      nextPageToken = Core.Nothing
+    }
 
 instance Core.FromJSON ListLocationsResponse where
   parseJSON =
@@ -4891,12 +5970,11 @@ instance Core.ToJSON ListUserDataMappingsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("userDataMappings" Core..=)
-              Core.<$> userDataMappings
+            ("userDataMappings" Core..=) Core.<$> userDataMappings
           ]
       )
 
--- | A resource that represents Google Cloud Platform location.
+-- | A resource that represents a Google Cloud location.
 --
 -- /See:/ 'newLocation' smart constructor.
 data Location = Location
@@ -4954,8 +6032,7 @@ instance Core.ToJSON Location where
 --
 -- /See:/ 'newLocation_Labels' smart constructor.
 newtype Location_Labels = Location_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -4964,15 +6041,14 @@ newLocation_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Location_Labels
-newLocation_Labels additional = Location_Labels {additional = additional}
+newLocation_Labels additional =
+  Location_Labels {additional = additional}
 
 instance Core.FromJSON Location_Labels where
   parseJSON =
     Core.withObject
       "Location_Labels"
-      ( \o ->
-          Location_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Labels where
   toJSON Location_Labels {..} = Core.toJSON additional
@@ -4991,15 +6067,14 @@ newLocation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Location_Metadata
-newLocation_Metadata additional = Location_Metadata {additional = additional}
+newLocation_Metadata additional =
+  Location_Metadata {additional = additional}
 
 instance Core.FromJSON Location_Metadata where
   parseJSON =
     Core.withObject
       "Location_Metadata"
-      ( \o ->
-          Location_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Location_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Location_Metadata where
   toJSON Location_Metadata {..} = Core.toJSON additional
@@ -5010,23 +6085,23 @@ instance Core.ToJSON Location_Metadata where
 data Message = Message
   { -- | Output only. The datetime when the message was created. Set by the server.
     createTime :: (Core.Maybe Core.DateTime),
-    -- | Raw message bytes.
+    -- | Required. Raw message bytes.
     data' :: (Core.Maybe Core.Base64),
     -- | User-supplied key-value pairs used to organize HL7v2 stores. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values are optional, must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store.
     labels :: (Core.Maybe Message_Labels),
-    -- | The message type for this message. MSH-9.1.
+    -- | Output only. The message type for this message. MSH-9.1.
     messageType :: (Core.Maybe Core.Text),
-    -- | Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@. Assigned by the server.
+    -- | Output only. Resource name of the Message, of the form @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/hl7V2Stores\/{hl7_v2_store_id}\/messages\/{message_id}@.
     name :: (Core.Maybe Core.Text),
     -- | Output only. The parsed version of the raw message data.
     parsedData :: (Core.Maybe ParsedData),
-    -- | All patient IDs listed in the PID-2, PID-3, and PID-4 segments of this message.
+    -- | Output only. All patient IDs listed in the PID-2, PID-3, and PID-4 segments of this message.
     patientIds :: (Core.Maybe [PatientId]),
-    -- | The parsed version of the raw message data schematized according to this store\'s schemas and type definitions.
+    -- | Output only. The parsed version of the raw message data schematized according to this store\'s schemas and type definitions.
     schematizedData :: (Core.Maybe SchematizedData),
-    -- | The hospital that this message came from. MSH-4.
+    -- | Output only. The hospital that this message came from. MSH-4.
     sendFacility :: (Core.Maybe Core.Text),
-    -- | The datetime the sending application sent this message. MSH-7.
+    -- | Output only. The datetime the sending application sent this message. MSH-7.
     sendTime :: (Core.Maybe Core.DateTime)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5087,8 +6162,7 @@ instance Core.ToJSON Message where
 --
 -- /See:/ 'newMessage_Labels' smart constructor.
 newtype Message_Labels = Message_Labels
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5097,15 +6171,14 @@ newMessage_Labels ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Message_Labels
-newMessage_Labels additional = Message_Labels {additional = additional}
+newMessage_Labels additional =
+  Message_Labels {additional = additional}
 
 instance Core.FromJSON Message_Labels where
   parseJSON =
     Core.withObject
       "Message_Labels"
-      ( \o ->
-          Message_Labels Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Message_Labels Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Message_Labels where
   toJSON Message_Labels {..} = Core.toJSON additional
@@ -5113,17 +6186,23 @@ instance Core.ToJSON Message_Labels where
 -- | Specifies where to send notifications upon changes to a data store.
 --
 -- /See:/ 'newNotificationConfig' smart constructor.
-newtype NotificationConfig = NotificationConfig
+data NotificationConfig = NotificationConfig
   { -- | The <https://cloud.google.com/pubsub/docs/ Pub\/Sub> topic that notifications of changes are published on. Supplied by the client. PubsubMessage.Data contains the resource name. PubsubMessage.MessageId is the ID of this message. It is guaranteed to be unique within the topic. PubsubMessage.PublishTime is the time at which the message was published. Notifications are only sent if the topic is non-empty. <https://cloud.google.com/pubsub/docs/overview#names Topic names> must be scoped to a project. Cloud Healthcare API service account must have publisher permissions on the given Pub\/Sub topic. Not having adequate permissions causes the calls that send notifications to fail. If a notification can\'t be published to Pub\/Sub, errors are logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>). If the number of errors exceeds a certain rate, some aren\'t submitted. Note that not all operations trigger notifications, see
     -- <https://cloud.google.com/healthcare/docs/how-tos/pubsub Configuring Pub\/Sub notifications> for specific details.
-    pubsubTopic :: (Core.Maybe Core.Text)
+    pubsubTopic :: (Core.Maybe Core.Text),
+    -- | Indicates whether or not to send Pub\/Sub notifications on bulk import. Only supported for DICOM imports.
+    sendForBulkImport :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'NotificationConfig' with the minimum fields required to make a request.
 newNotificationConfig ::
   NotificationConfig
-newNotificationConfig = NotificationConfig {pubsubTopic = Core.Nothing}
+newNotificationConfig =
+  NotificationConfig
+    { pubsubTopic = Core.Nothing,
+      sendForBulkImport = Core.Nothing
+    }
 
 instance Core.FromJSON NotificationConfig where
   parseJSON =
@@ -5132,13 +6211,16 @@ instance Core.FromJSON NotificationConfig where
       ( \o ->
           NotificationConfig
             Core.<$> (o Core..:? "pubsubTopic")
+            Core.<*> (o Core..:? "sendForBulkImport")
       )
 
 instance Core.ToJSON NotificationConfig where
   toJSON NotificationConfig {..} =
     Core.object
       ( Core.catMaybes
-          [("pubsubTopic" Core..=) Core.<$> pubsubTopic]
+          [ ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
+            ("sendForBulkImport" Core..=) Core.<$> sendForBulkImport
+          ]
       )
 
 -- | This resource represents a long-running operation that is the result of a network API call.
@@ -5153,7 +6235,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -5209,21 +6291,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -5237,19 +6317,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | OperationMetadata provides information about the operation execution. Returned in the long-running operation\'s metadata field.
 --
@@ -5259,7 +6337,6 @@ data OperationMetadata = OperationMetadata
     apiMethodName :: (Core.Maybe Core.Text),
     -- | Specifies if cancellation was requested for the operation.
     cancelRequested :: (Core.Maybe Core.Bool),
-    -- |
     counter :: (Core.Maybe ProgressCounter),
     -- | The time at which the operation was created by the API.
     createTime :: (Core.Maybe Core.DateTime),
@@ -5314,8 +6391,7 @@ instance Core.ToJSON OperationMetadata where
 --
 -- /See:/ 'newParsedData' smart constructor.
 newtype ParsedData = ParsedData
-  { -- |
-    segments :: (Core.Maybe [Segment])
+  { segments :: (Core.Maybe [Segment])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5333,19 +6409,17 @@ instance Core.FromJSON ParsedData where
 instance Core.ToJSON ParsedData where
   toJSON ParsedData {..} =
     Core.object
-      ( Core.catMaybes
-          [("segments" Core..=) Core.<$> segments]
-      )
+      (Core.catMaybes [("segments" Core..=) Core.<$> segments])
 
 -- | The configuration for the parser. It determines how the server parses the messages.
 --
 -- /See:/ 'newParserConfig' smart constructor.
 data ParserConfig = ParserConfig
-  { -- | Determines whether messages with no header are allowed.
+  { -- | Optional. Determines whether messages with no header are allowed.
     allowNullHeader :: (Core.Maybe Core.Bool),
-    -- | Schemas used to parse messages in this store, if schematized parsing is desired.
+    -- | Optional. Schemas used to parse messages in this store, if schematized parsing is desired.
     schema :: (Core.Maybe SchemaPackage),
-    -- | Byte(s) to use as the segment terminator. If this is unset, \'\\r\' is used as segment terminator, matching the HL7 version 2 specification.
+    -- | Optional. Byte(s) to use as the segment terminator. If this is unset, \'\\r\' is used as segment terminator, matching the HL7 version 2 specification.
     segmentTerminator :: (Core.Maybe Core.Base64),
     -- | Immutable. Determines the version of both the default parser to be used when @schema@ is not given, as well as the schematized parser used when @schema@ is specified. This field is immutable after HL7v2 store creation.
     version :: (Core.Maybe ParserConfig_Version)
@@ -5379,11 +6453,9 @@ instance Core.ToJSON ParserConfig where
   toJSON ParserConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowNullHeader" Core..=)
-              Core.<$> allowNullHeader,
+          [ ("allowNullHeader" Core..=) Core.<$> allowNullHeader,
             ("schema" Core..=) Core.<$> schema,
-            ("segmentTerminator" Core..=)
-              Core.<$> segmentTerminator,
+            ("segmentTerminator" Core..=) Core.<$> segmentTerminator,
             ("version" Core..=) Core.<$> version
           ]
       )
@@ -5402,7 +6474,8 @@ data PatientId = PatientId
 -- | Creates a value of 'PatientId' with the minimum fields required to make a request.
 newPatientId ::
   PatientId
-newPatientId = PatientId {type' = Core.Nothing, value = Core.Nothing}
+newPatientId =
+  PatientId {type' = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON PatientId where
   parseJSON =
@@ -5410,7 +6483,8 @@ instance Core.FromJSON PatientId where
       "PatientId"
       ( \o ->
           PatientId
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON PatientId where
@@ -5422,9 +6496,34 @@ instance Core.ToJSON PatientId where
           ]
       )
 
--- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__ { \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\",
--- \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } __YAML example:__ bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the
--- <https://cloud.google.com/iam/docs/ IAM documentation>.
+-- | Apply consents given by a list of patients.
+--
+-- /See:/ 'newPatientScope' smart constructor.
+newtype PatientScope = PatientScope
+  { -- | Optional. The list of patient IDs whose Consent resources will be enforced. At most 10,000 patients can be specified. An empty list is equivalent to all patients (meaning the entire FHIR store).
+    patientIds :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PatientScope' with the minimum fields required to make a request.
+newPatientScope ::
+  PatientScope
+newPatientScope = PatientScope {patientIds = Core.Nothing}
+
+instance Core.FromJSON PatientScope where
+  parseJSON =
+    Core.withObject
+      "PatientScope"
+      (\o -> PatientScope Core.<$> (o Core..:? "patientIds"))
+
+instance Core.ToJSON PatientScope where
+  toJSON PatientScope {..} =
+    Core.object
+      (Core.catMaybes [("patientIds" Core..=) Core.<$> patientIds])
+
+-- | An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A @Policy@ is a collection of @bindings@. A @binding@ binds one or more @members@, or principals, to a single @role@. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A @role@ is a named list of permissions; each @role@ can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a @binding@ can also specify a @condition@, which is a logical expression that allows access to a resource only if the expression evaluates to @true@. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the <https://cloud.google.com/iam/help/conditions/resource-policies IAM documentation>. __JSON example:__
+-- @{ \"bindings\": [ { \"role\": \"roles\/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike\@example.com\", \"group:admins\@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id\@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles\/resourcemanager.organizationViewer\", \"members\": [ \"user:eve\@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time \< timestamp(\'2020-10-01T00:00:00.000Z\')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 }@ __YAML example:__
+-- @bindings: - members: - user:mike\@example.com - group:admins\@example.com - domain:google.com - serviceAccount:my-project-id\@appspot.gserviceaccount.com role: roles\/resourcemanager.organizationAdmin - members: - user:eve\@example.com role: roles\/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time \< timestamp(\'2020-10-01T00:00:00.000Z\') etag: BwWWja0YfJA= version: 3@ For a description of IAM and its features, see the <https://cloud.google.com/iam/docs/ IAM documentation>.
 --
 -- /See:/ 'newPolicy' smart constructor.
 data Policy = Policy
@@ -5503,29 +6602,46 @@ instance Core.FromJSON ProgressCounter where
       "ProgressCounter"
       ( \o ->
           ProgressCounter
-            Core.<$> ( o Core..:? "failure"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "pending"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "success"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "failure" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "pending" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "success" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ProgressCounter where
   toJSON ProgressCounter {..} =
     Core.object
       ( Core.catMaybes
-          [ ("failure" Core..=) Core.. Core.AsText
-              Core.<$> failure,
-            ("pending" Core..=) Core.. Core.AsText
-              Core.<$> pending,
-            ("success" Core..=) Core.. Core.AsText
-              Core.<$> success
+          [ ("failure" Core..=) Core.. Core.AsText Core.<$> failure,
+            ("pending" Core..=) Core.. Core.AsText Core.<$> pending,
+            ("success" Core..=) Core.. Core.AsText Core.<$> success
           ]
       )
+
+-- | The Pub\/Sub output destination. The Cloud Healthcare Service Agent requires the @roles\/pubsub.publisher@ Cloud IAM role on the Pub\/Sub topic.
+--
+-- /See:/ 'newPubsubDestination' smart constructor.
+newtype PubsubDestination = PubsubDestination
+  { -- | The <https://cloud.google.com/pubsub/docs/ Pub\/Sub> topic that Pub\/Sub messages are published on. Supplied by the client. The @PubsubMessage@ contains the following fields: * @PubsubMessage.Data@ contains the resource name. * @PubsubMessage.MessageId@ is the ID of this notification. It is guaranteed to be unique within the topic. * @PubsubMessage.PublishTime@ is the time when the message was published. <https://cloud.google.com/pubsub/docs/overview#names Topic names> must be scoped to a project. The Cloud Healthcare API service account, service-PROJECT_NUMBER\@gcp-sa-healthcare.iam.gserviceaccount.com, must have publisher permissions on the given Pub\/Sub topic. Not having adequate permissions causes the calls that send notifications to fail.
+    pubsubTopic :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'PubsubDestination' with the minimum fields required to make a request.
+newPubsubDestination ::
+  PubsubDestination
+newPubsubDestination =
+  PubsubDestination {pubsubTopic = Core.Nothing}
+
+instance Core.FromJSON PubsubDestination where
+  parseJSON =
+    Core.withObject
+      "PubsubDestination"
+      (\o -> PubsubDestination Core.<$> (o Core..:? "pubsubTopic"))
+
+instance Core.ToJSON PubsubDestination where
+  toJSON PubsubDestination {..} =
+    Core.object
+      (Core.catMaybes [("pubsubTopic" Core..=) Core.<$> pubsubTopic])
 
 -- | Queries all data_ids that are consented for a given use in the given consent store and writes them to a specified destination. The returned Operation includes a progress counter for the number of User data mappings processed. Errors are logged to Cloud Logging (see [Viewing error logs in Cloud Logging] (https:\/\/cloud.google.com\/healthcare\/docs\/how-tos\/logging) and [QueryAccessibleData] for a sample log entry).
 --
@@ -5566,10 +6682,8 @@ instance Core.ToJSON QueryAccessibleDataRequest where
     Core.object
       ( Core.catMaybes
           [ ("gcsDestination" Core..=) Core.<$> gcsDestination,
-            ("requestAttributes" Core..=)
-              Core.<$> requestAttributes,
-            ("resourceAttributes" Core..=)
-              Core.<$> resourceAttributes
+            ("requestAttributes" Core..=) Core.<$> requestAttributes,
+            ("resourceAttributes" Core..=) Core.<$> resourceAttributes
           ]
       )
 
@@ -5577,8 +6691,7 @@ instance Core.ToJSON QueryAccessibleDataRequest where
 --
 -- /See:/ 'newQueryAccessibleDataRequest_RequestAttributes' smart constructor.
 newtype QueryAccessibleDataRequest_RequestAttributes = QueryAccessibleDataRequest_RequestAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5588,12 +6701,12 @@ newQueryAccessibleDataRequest_RequestAttributes ::
   Core.HashMap Core.Text Core.Text ->
   QueryAccessibleDataRequest_RequestAttributes
 newQueryAccessibleDataRequest_RequestAttributes additional =
-  QueryAccessibleDataRequest_RequestAttributes {additional = additional}
+  QueryAccessibleDataRequest_RequestAttributes
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    QueryAccessibleDataRequest_RequestAttributes
-  where
+instance Core.FromJSON QueryAccessibleDataRequest_RequestAttributes where
   parseJSON =
     Core.withObject
       "QueryAccessibleDataRequest_RequestAttributes"
@@ -5602,20 +6715,15 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    QueryAccessibleDataRequest_RequestAttributes
-  where
-  toJSON
-    QueryAccessibleDataRequest_RequestAttributes {..} =
-      Core.toJSON additional
+instance Core.ToJSON QueryAccessibleDataRequest_RequestAttributes where
+  toJSON QueryAccessibleDataRequest_RequestAttributes {..} =
+    Core.toJSON additional
 
 -- | Optional. The values of resource attributes associated with the type of resources being requested. If no values are specified, then all resource types are included in the output.
 --
 -- /See:/ 'newQueryAccessibleDataRequest_ResourceAttributes' smart constructor.
 newtype QueryAccessibleDataRequest_ResourceAttributes = QueryAccessibleDataRequest_ResourceAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5625,7 +6733,10 @@ newQueryAccessibleDataRequest_ResourceAttributes ::
   Core.HashMap Core.Text Core.Text ->
   QueryAccessibleDataRequest_ResourceAttributes
 newQueryAccessibleDataRequest_ResourceAttributes additional =
-  QueryAccessibleDataRequest_ResourceAttributes {additional = additional}
+  QueryAccessibleDataRequest_ResourceAttributes
+    { additional =
+        additional
+    }
 
 instance
   Core.FromJSON
@@ -5639,13 +6750,9 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    QueryAccessibleDataRequest_ResourceAttributes
-  where
-  toJSON
-    QueryAccessibleDataRequest_ResourceAttributes {..} =
-      Core.toJSON additional
+instance Core.ToJSON QueryAccessibleDataRequest_ResourceAttributes where
+  toJSON QueryAccessibleDataRequest_ResourceAttributes {..} =
+    Core.toJSON additional
 
 -- | Response for successful QueryAccessibleData operations. This structure is included in the response upon operation completion.
 --
@@ -5667,16 +6774,13 @@ instance Core.FromJSON QueryAccessibleDataResponse where
     Core.withObject
       "QueryAccessibleDataResponse"
       ( \o ->
-          QueryAccessibleDataResponse
-            Core.<$> (o Core..:? "gcsUris")
+          QueryAccessibleDataResponse Core.<$> (o Core..:? "gcsUris")
       )
 
 instance Core.ToJSON QueryAccessibleDataResponse where
   toJSON QueryAccessibleDataResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("gcsUris" Core..=) Core.<$> gcsUris]
-      )
+      (Core.catMaybes [("gcsUris" Core..=) Core.<$> gcsUris])
 
 -- | Define how to redact sensitive values. Default behaviour is erase. For example, \"My name is Jane.\" becomes \"My name is .\"
 --
@@ -5691,9 +6795,7 @@ newRedactConfig = RedactConfig
 
 instance Core.FromJSON RedactConfig where
   parseJSON =
-    Core.withObject
-      "RedactConfig"
-      (\o -> Core.pure RedactConfig)
+    Core.withObject "RedactConfig" (\o -> Core.pure RedactConfig)
 
 instance Core.ToJSON RedactConfig where
   toJSON = Core.const Core.emptyObject
@@ -5710,24 +6812,22 @@ newtype RejectConsentRequest = RejectConsentRequest
 -- | Creates a value of 'RejectConsentRequest' with the minimum fields required to make a request.
 newRejectConsentRequest ::
   RejectConsentRequest
-newRejectConsentRequest = RejectConsentRequest {consentArtifact = Core.Nothing}
+newRejectConsentRequest =
+  RejectConsentRequest {consentArtifact = Core.Nothing}
 
 instance Core.FromJSON RejectConsentRequest where
   parseJSON =
     Core.withObject
       "RejectConsentRequest"
       ( \o ->
-          RejectConsentRequest
-            Core.<$> (o Core..:? "consentArtifact")
+          RejectConsentRequest Core.<$> (o Core..:? "consentArtifact")
       )
 
 instance Core.ToJSON RejectConsentRequest where
   toJSON RejectConsentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consentArtifact" Core..=)
-              Core.<$> consentArtifact
-          ]
+          [("consentArtifact" Core..=) Core.<$> consentArtifact]
       )
 
 -- | When using the INSPECT/AND/TRANSFORM action, each match is replaced with the name of the info/type. For example, \"My name is Jane\" becomes \"My name is [PERSON/NAME].\" The TRANSFORM action is equivalent to redacting.
@@ -5773,9 +6873,7 @@ instance Core.FromJSON Resources where
 instance Core.ToJSON Resources where
   toJSON Resources {..} =
     Core.object
-      ( Core.catMaybes
-          [("resources" Core..=) Core.<$> resources]
-      )
+      (Core.catMaybes [("resources" Core..=) Core.<$> resources])
 
 -- | The consent evaluation result for a single @data_id@.
 --
@@ -5825,8 +6923,7 @@ instance Core.ToJSON Result where
 --
 -- /See:/ 'newResult_ConsentDetails' smart constructor.
 newtype Result_ConsentDetails = Result_ConsentDetails
-  { -- |
-    additional :: (Core.HashMap Core.Text ConsentEvaluation)
+  { additional :: (Core.HashMap Core.Text ConsentEvaluation)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -5842,14 +6939,10 @@ instance Core.FromJSON Result_ConsentDetails where
   parseJSON =
     Core.withObject
       "Result_ConsentDetails"
-      ( \o ->
-          Result_ConsentDetails
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Result_ConsentDetails Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Result_ConsentDetails where
-  toJSON Result_ConsentDetails {..} =
-    Core.toJSON additional
+  toJSON Result_ConsentDetails {..} = Core.toJSON additional
 
 -- | Revokes the latest revision of the specified Consent by committing a new revision with @state@ updated to @REVOKED@. If the latest revision of the given Consent is in the @REVOKED@ state, no new revision is committed.
 --
@@ -5863,25 +6956,292 @@ newtype RevokeConsentRequest = RevokeConsentRequest
 -- | Creates a value of 'RevokeConsentRequest' with the minimum fields required to make a request.
 newRevokeConsentRequest ::
   RevokeConsentRequest
-newRevokeConsentRequest = RevokeConsentRequest {consentArtifact = Core.Nothing}
+newRevokeConsentRequest =
+  RevokeConsentRequest {consentArtifact = Core.Nothing}
 
 instance Core.FromJSON RevokeConsentRequest where
   parseJSON =
     Core.withObject
       "RevokeConsentRequest"
       ( \o ->
-          RevokeConsentRequest
-            Core.<$> (o Core..:? "consentArtifact")
+          RevokeConsentRequest Core.<$> (o Core..:? "consentArtifact")
       )
 
 instance Core.ToJSON RevokeConsentRequest where
   toJSON RevokeConsentRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("consentArtifact" Core..=)
-              Core.<$> consentArtifact
+          [("consentArtifact" Core..=) Core.<$> consentArtifact]
+      )
+
+--
+-- /See:/ 'newRollbackFhirResourceFilteringFields' smart constructor.
+data RollbackFhirResourceFilteringFields = RollbackFhirResourceFilteringFields
+  { -- | Optional. A filter expression that matches data in the @Resource.meta@ element. Supports all filters in <https://google.aip.dev/160 AIP-160> except the \"has\" (@:@) operator. Supports the following custom functions: * @tag(\"\") = \"\"@ for tag filtering. * @extension_value_ts(\"\") =@ for filtering extensions with a timestamp, where \`@is a Unix timestamp. Supports the@>@,@\<@,@\<=@,@>=@, and@!=\` comparison operators.
+    metadataFilter :: (Core.Maybe Core.Text),
+    -- | Optional. A list of operation IDs to roll back.
+    operationIds :: (Core.Maybe [Core.Word64])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackFhirResourceFilteringFields' with the minimum fields required to make a request.
+newRollbackFhirResourceFilteringFields ::
+  RollbackFhirResourceFilteringFields
+newRollbackFhirResourceFilteringFields =
+  RollbackFhirResourceFilteringFields
+    { metadataFilter =
+        Core.Nothing,
+      operationIds = Core.Nothing
+    }
+
+instance Core.FromJSON RollbackFhirResourceFilteringFields where
+  parseJSON =
+    Core.withObject
+      "RollbackFhirResourceFilteringFields"
+      ( \o ->
+          RollbackFhirResourceFilteringFields
+            Core.<$> (o Core..:? "metadataFilter")
+            Core.<*> ( o
+                         Core..:? "operationIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+      )
+
+instance Core.ToJSON RollbackFhirResourceFilteringFields where
+  toJSON RollbackFhirResourceFilteringFields {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("metadataFilter" Core..=) Core.<$> metadataFilter,
+            ("operationIds" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> operationIds
           ]
       )
+
+--
+-- /See:/ 'newRollbackFhirResourcesRequest' smart constructor.
+data RollbackFhirResourcesRequest = RollbackFhirResourcesRequest
+  { -- | Optional. CREATE\/UPDATE\/DELETE\/ALL for reverting all txns of a certain type.
+    changeType :: (Core.Maybe RollbackFhirResourcesRequest_ChangeType),
+    -- | Optional. Specifies whether to exclude earlier rollbacks.
+    excludeRollbacks :: (Core.Maybe Core.Bool),
+    -- | Optional. Parameters for filtering resources
+    filteringFields :: (Core.Maybe RollbackFhirResourceFilteringFields),
+    -- | Optional. When enabled, changes will be reverted without explicit confirmation
+    force :: (Core.Maybe Core.Bool),
+    -- | Optional. Cloud Storage object containing list of {resourceType}\/{resourceId} lines, identifying resources to be reverted
+    inputGcsObject :: (Core.Maybe Core.Text),
+    -- | Required. Bucket to deposit result
+    resultGcsBucket :: (Core.Maybe Core.Text),
+    -- | Required. Time point to rollback to.
+    rollbackTime :: (Core.Maybe Core.DateTime),
+    -- | Optional. If specified, revert only resources of these types
+    type' :: (Core.Maybe [Core.Text])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackFhirResourcesRequest' with the minimum fields required to make a request.
+newRollbackFhirResourcesRequest ::
+  RollbackFhirResourcesRequest
+newRollbackFhirResourcesRequest =
+  RollbackFhirResourcesRequest
+    { changeType = Core.Nothing,
+      excludeRollbacks = Core.Nothing,
+      filteringFields = Core.Nothing,
+      force = Core.Nothing,
+      inputGcsObject = Core.Nothing,
+      resultGcsBucket = Core.Nothing,
+      rollbackTime = Core.Nothing,
+      type' = Core.Nothing
+    }
+
+instance Core.FromJSON RollbackFhirResourcesRequest where
+  parseJSON =
+    Core.withObject
+      "RollbackFhirResourcesRequest"
+      ( \o ->
+          RollbackFhirResourcesRequest
+            Core.<$> (o Core..:? "changeType")
+            Core.<*> (o Core..:? "excludeRollbacks")
+            Core.<*> (o Core..:? "filteringFields")
+            Core.<*> (o Core..:? "force")
+            Core.<*> (o Core..:? "inputGcsObject")
+            Core.<*> (o Core..:? "resultGcsBucket")
+            Core.<*> (o Core..:? "rollbackTime")
+            Core.<*> (o Core..:? "type")
+      )
+
+instance Core.ToJSON RollbackFhirResourcesRequest where
+  toJSON RollbackFhirResourcesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("changeType" Core..=) Core.<$> changeType,
+            ("excludeRollbacks" Core..=) Core.<$> excludeRollbacks,
+            ("filteringFields" Core..=) Core.<$> filteringFields,
+            ("force" Core..=) Core.<$> force,
+            ("inputGcsObject" Core..=) Core.<$> inputGcsObject,
+            ("resultGcsBucket" Core..=) Core.<$> resultGcsBucket,
+            ("rollbackTime" Core..=) Core.<$> rollbackTime,
+            ("type" Core..=) Core.<$> type'
+          ]
+      )
+
+-- | Final response of rollback FIHR resources request.
+--
+-- /See:/ 'newRollbackFhirResourcesResponse' smart constructor.
+newtype RollbackFhirResourcesResponse = RollbackFhirResourcesResponse
+  { -- | The name of the FHIR store to rollback, in the format of \"projects\/{project/id}\/locations\/{location/id}\/datasets\/{dataset/id} \/fhirStores\/{fhir/store_id}\".
+    fhirStore :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackFhirResourcesResponse' with the minimum fields required to make a request.
+newRollbackFhirResourcesResponse ::
+  RollbackFhirResourcesResponse
+newRollbackFhirResourcesResponse =
+  RollbackFhirResourcesResponse {fhirStore = Core.Nothing}
+
+instance Core.FromJSON RollbackFhirResourcesResponse where
+  parseJSON =
+    Core.withObject
+      "RollbackFhirResourcesResponse"
+      ( \o ->
+          RollbackFhirResourcesResponse Core.<$> (o Core..:? "fhirStore")
+      )
+
+instance Core.ToJSON RollbackFhirResourcesResponse where
+  toJSON RollbackFhirResourcesResponse {..} =
+    Core.object
+      (Core.catMaybes [("fhirStore" Core..=) Core.<$> fhirStore])
+
+-- | Filtering fields for an HL7v2 rollback. Currently only supports a list of operation ids to roll back.
+--
+-- /See:/ 'newRollbackHL7MessagesFilteringFields' smart constructor.
+newtype RollbackHL7MessagesFilteringFields = RollbackHL7MessagesFilteringFields
+  { -- | Optional. A list of operation IDs to roll back.
+    operationIds :: (Core.Maybe [Core.Word64])
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackHL7MessagesFilteringFields' with the minimum fields required to make a request.
+newRollbackHL7MessagesFilteringFields ::
+  RollbackHL7MessagesFilteringFields
+newRollbackHL7MessagesFilteringFields =
+  RollbackHL7MessagesFilteringFields {operationIds = Core.Nothing}
+
+instance Core.FromJSON RollbackHL7MessagesFilteringFields where
+  parseJSON =
+    Core.withObject
+      "RollbackHL7MessagesFilteringFields"
+      ( \o ->
+          RollbackHL7MessagesFilteringFields
+            Core.<$> ( o
+                         Core..:? "operationIds"
+                         Core.<&> Core.fmap (Core.fmap Core.fromAsText)
+                     )
+      )
+
+instance Core.ToJSON RollbackHL7MessagesFilteringFields where
+  toJSON RollbackHL7MessagesFilteringFields {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("operationIds" Core..=)
+              Core.. Core.fmap Core.AsText
+              Core.<$> operationIds
+          ]
+      )
+
+-- | Point in time recovery rollback request.
+--
+-- /See:/ 'newRollbackHl7V2MessagesRequest' smart constructor.
+data RollbackHl7V2MessagesRequest = RollbackHl7V2MessagesRequest
+  { -- | Optional. CREATE\/UPDATE\/DELETE\/ALL for reverting all txns of a certain type.
+    changeType :: (Core.Maybe RollbackHl7V2MessagesRequest_ChangeType),
+    -- | Optional. Specifies whether to exclude earlier rollbacks.
+    excludeRollbacks :: (Core.Maybe Core.Bool),
+    -- | Optional. Parameters for filtering.
+    filteringFields :: (Core.Maybe RollbackHL7MessagesFilteringFields),
+    -- | Optional. When enabled, changes will be reverted without explicit confirmation.
+    force :: (Core.Maybe Core.Bool),
+    -- | Optional. Cloud storage object containing list of {resourceId} lines, identifying resources to be reverted
+    inputGcsObject :: (Core.Maybe Core.Text),
+    -- | Required. Bucket to deposit result
+    resultGcsBucket :: (Core.Maybe Core.Text),
+    -- | Required. Times point to rollback to.
+    rollbackTime :: (Core.Maybe Core.DateTime)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackHl7V2MessagesRequest' with the minimum fields required to make a request.
+newRollbackHl7V2MessagesRequest ::
+  RollbackHl7V2MessagesRequest
+newRollbackHl7V2MessagesRequest =
+  RollbackHl7V2MessagesRequest
+    { changeType = Core.Nothing,
+      excludeRollbacks = Core.Nothing,
+      filteringFields = Core.Nothing,
+      force = Core.Nothing,
+      inputGcsObject = Core.Nothing,
+      resultGcsBucket = Core.Nothing,
+      rollbackTime = Core.Nothing
+    }
+
+instance Core.FromJSON RollbackHl7V2MessagesRequest where
+  parseJSON =
+    Core.withObject
+      "RollbackHl7V2MessagesRequest"
+      ( \o ->
+          RollbackHl7V2MessagesRequest
+            Core.<$> (o Core..:? "changeType")
+            Core.<*> (o Core..:? "excludeRollbacks")
+            Core.<*> (o Core..:? "filteringFields")
+            Core.<*> (o Core..:? "force")
+            Core.<*> (o Core..:? "inputGcsObject")
+            Core.<*> (o Core..:? "resultGcsBucket")
+            Core.<*> (o Core..:? "rollbackTime")
+      )
+
+instance Core.ToJSON RollbackHl7V2MessagesRequest where
+  toJSON RollbackHl7V2MessagesRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("changeType" Core..=) Core.<$> changeType,
+            ("excludeRollbacks" Core..=) Core.<$> excludeRollbacks,
+            ("filteringFields" Core..=) Core.<$> filteringFields,
+            ("force" Core..=) Core.<$> force,
+            ("inputGcsObject" Core..=) Core.<$> inputGcsObject,
+            ("resultGcsBucket" Core..=) Core.<$> resultGcsBucket,
+            ("rollbackTime" Core..=) Core.<$> rollbackTime
+          ]
+      )
+
+-- | Final response of rollback HL7v2 messages request.
+--
+-- /See:/ 'newRollbackHl7V2MessagesResponse' smart constructor.
+newtype RollbackHl7V2MessagesResponse = RollbackHl7V2MessagesResponse
+  { -- | The name of the HL7v2 store to rollback, in the format of \"projects\/{project/id}\/locations\/{location/id}\/datasets\/{dataset/id} \/hl7v2Stores\/{hl7v2/store_id}\".
+    hl7v2Store :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'RollbackHl7V2MessagesResponse' with the minimum fields required to make a request.
+newRollbackHl7V2MessagesResponse ::
+  RollbackHl7V2MessagesResponse
+newRollbackHl7V2MessagesResponse =
+  RollbackHl7V2MessagesResponse {hl7v2Store = Core.Nothing}
+
+instance Core.FromJSON RollbackHl7V2MessagesResponse where
+  parseJSON =
+    Core.withObject
+      "RollbackHl7V2MessagesResponse"
+      ( \o ->
+          RollbackHl7V2MessagesResponse Core.<$> (o Core..:? "hl7v2Store")
+      )
+
+instance Core.ToJSON RollbackHl7V2MessagesResponse where
+  toJSON RollbackHl7V2MessagesResponse {..} =
+    Core.object
+      (Core.catMaybes [("hl7v2Store" Core..=) Core.<$> hl7v2Store])
 
 -- | Configuration for the FHIR BigQuery schema. Determines how the server generates the schema.
 --
@@ -5913,7 +7273,8 @@ instance Core.FromJSON SchemaConfig where
       ( \o ->
           SchemaConfig
             Core.<$> (o Core..:? "lastUpdatedPartitionConfig")
-            Core.<*> ( o Core..:? "recursiveStructureDepth"
+            Core.<*> ( o
+                         Core..:? "recursiveStructureDepth"
                          Core.<&> Core.fmap Core.fromAsText
                      )
             Core.<*> (o Core..:? "schemaType")
@@ -5990,15 +7351,15 @@ instance Core.ToJSON SchemaGroup where
 --
 -- /See:/ 'newSchemaPackage' smart constructor.
 data SchemaPackage = SchemaPackage
-  { -- | Flag to ignore all min_occurs restrictions in the schema. This means that incoming messages can omit any group, segment, field, component, or subcomponent.
+  { -- | Optional. Flag to ignore all min_occurs restrictions in the schema. This means that incoming messages can omit any group, segment, field, component, or subcomponent.
     ignoreMinOccurs :: (Core.Maybe Core.Bool),
-    -- | Schema configs that are layered based on their VersionSources that match the incoming message. Schema configs present in higher indices override those in lower indices with the same message type and trigger event if their VersionSources all match an incoming message.
+    -- | Optional. Schema configs that are layered based on their VersionSources that match the incoming message. Schema configs present in higher indices override those in lower indices with the same message type and trigger event if their VersionSources all match an incoming message.
     schemas :: (Core.Maybe [Hl7SchemaConfig]),
-    -- | Determines how messages that fail to parse are handled.
+    -- | Optional. Determines how messages that fail to parse are handled.
     schematizedParsingType :: (Core.Maybe SchemaPackage_SchematizedParsingType),
-    -- | Schema type definitions that are layered based on their VersionSources that match the incoming message. Type definitions present in higher indices override those in lower indices with the same type name if their VersionSources all match an incoming message.
+    -- | Optional. Schema type definitions that are layered based on their VersionSources that match the incoming message. Type definitions present in higher indices override those in lower indices with the same type name if their VersionSources all match an incoming message.
     types :: (Core.Maybe [Hl7TypesConfig]),
-    -- | Determines how unexpected segments (segments not matched to the schema) are handled.
+    -- | Optional. Determines how unexpected segments (segments not matched to the schema) are handled.
     unexpectedSegmentHandling :: (Core.Maybe SchemaPackage_UnexpectedSegmentHandling)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6032,11 +7393,9 @@ instance Core.ToJSON SchemaPackage where
   toJSON SchemaPackage {..} =
     Core.object
       ( Core.catMaybes
-          [ ("ignoreMinOccurs" Core..=)
-              Core.<$> ignoreMinOccurs,
+          [ ("ignoreMinOccurs" Core..=) Core.<$> ignoreMinOccurs,
             ("schemas" Core..=) Core.<$> schemas,
-            ("schematizedParsingType" Core..=)
-              Core.<$> schematizedParsingType,
+            ("schematizedParsingType" Core..=) Core.<$> schematizedParsingType,
             ("types" Core..=) Core.<$> types,
             ("unexpectedSegmentHandling" Core..=)
               Core.<$> unexpectedSegmentHandling
@@ -6110,7 +7469,8 @@ instance Core.FromJSON SchematizedData where
       "SchematizedData"
       ( \o ->
           SchematizedData
-            Core.<$> (o Core..:? "data") Core.<*> (o Core..:? "error")
+            Core.<$> (o Core..:? "data")
+            Core.<*> (o Core..:? "error")
       )
 
 instance Core.ToJSON SchematizedData where
@@ -6126,7 +7486,7 @@ instance Core.ToJSON SchematizedData where
 --
 -- /See:/ 'newSearchResourcesRequest' smart constructor.
 newtype SearchResourcesRequest = SearchResourcesRequest
-  { -- | The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>).
+  { -- | Optional. The FHIR resource type to search, such as Patient or Observation. For a complete list, see the FHIR Resource Index (<http://hl7.org/implement/standards/fhir/DSTU2/resourcelist.html DSTU2>, <http://hl7.org/implement/standards/fhir/STU3/resourcelist.html STU3>, <http://hl7.org/implement/standards/fhir/R4/resourcelist.html R4>).
     resourceType :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6134,23 +7494,21 @@ newtype SearchResourcesRequest = SearchResourcesRequest
 -- | Creates a value of 'SearchResourcesRequest' with the minimum fields required to make a request.
 newSearchResourcesRequest ::
   SearchResourcesRequest
-newSearchResourcesRequest = SearchResourcesRequest {resourceType = Core.Nothing}
+newSearchResourcesRequest =
+  SearchResourcesRequest {resourceType = Core.Nothing}
 
 instance Core.FromJSON SearchResourcesRequest where
   parseJSON =
     Core.withObject
       "SearchResourcesRequest"
       ( \o ->
-          SearchResourcesRequest
-            Core.<$> (o Core..:? "resourceType")
+          SearchResourcesRequest Core.<$> (o Core..:? "resourceType")
       )
 
 instance Core.ToJSON SearchResourcesRequest where
   toJSON SearchResourcesRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("resourceType" Core..=) Core.<$> resourceType]
-      )
+      (Core.catMaybes [("resourceType" Core..=) Core.<$> resourceType])
 
 -- | A segment in a structured format.
 --
@@ -6200,8 +7558,7 @@ instance Core.ToJSON Segment where
 --
 -- /See:/ 'newSegment_Fields' smart constructor.
 newtype Segment_Fields = Segment_Fields
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6210,18 +7567,137 @@ newSegment_Fields ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Segment_Fields
-newSegment_Fields additional = Segment_Fields {additional = additional}
+newSegment_Fields additional =
+  Segment_Fields {additional = additional}
 
 instance Core.FromJSON Segment_Fields where
   parseJSON =
     Core.withObject
       "Segment_Fields"
-      ( \o ->
-          Segment_Fields Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Segment_Fields Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Segment_Fields where
   toJSON Segment_Fields {..} = Core.toJSON additional
+
+-- | SeriesMetrics contains metrics describing a DICOM series.
+--
+-- /See:/ 'newSeriesMetrics' smart constructor.
+data SeriesMetrics = SeriesMetrics
+  { -- | Total blob storage bytes for all instances in the series.
+    blobStorageSizeBytes :: (Core.Maybe Core.Int64),
+    -- | Number of instances in the series.
+    instanceCount :: (Core.Maybe Core.Int64),
+    -- | The series resource path. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\/dicomWeb\/studies\/{study_uid}\/series\/{series_uid}@.
+    series :: (Core.Maybe Core.Text),
+    -- | Total structured storage bytes for all instances in the series.
+    structuredStorageSizeBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SeriesMetrics' with the minimum fields required to make a request.
+newSeriesMetrics ::
+  SeriesMetrics
+newSeriesMetrics =
+  SeriesMetrics
+    { blobStorageSizeBytes = Core.Nothing,
+      instanceCount = Core.Nothing,
+      series = Core.Nothing,
+      structuredStorageSizeBytes = Core.Nothing
+    }
+
+instance Core.FromJSON SeriesMetrics where
+  parseJSON =
+    Core.withObject
+      "SeriesMetrics"
+      ( \o ->
+          SeriesMetrics
+            Core.<$> ( o
+                         Core..:? "blobStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "instanceCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "series")
+            Core.<*> ( o
+                         Core..:? "structuredStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+      )
+
+instance Core.ToJSON SeriesMetrics where
+  toJSON SeriesMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blobStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> blobStorageSizeBytes,
+            ("instanceCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> instanceCount,
+            ("series" Core..=) Core.<$> series,
+            ("structuredStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> structuredStorageSizeBytes
+          ]
+      )
+
+-- | Request message for @SetBlobStorageSettings@ method.
+--
+-- /See:/ 'newSetBlobStorageSettingsRequest' smart constructor.
+data SetBlobStorageSettingsRequest = SetBlobStorageSettingsRequest
+  { -- | The blob storage settings to update for the specified resources. Only fields listed in @update_mask@ are applied.
+    blobStorageSettings :: (Core.Maybe BlobStorageSettings),
+    -- | Optional. A filter configuration. If @filter_config@ is specified, set the value of @resource@ to the resource name of a DICOM store in the format @projects\/{projectID}\/locations\/{locationID}\/datasets\/{datasetID}\/dicomStores\/{dicomStoreID}@.
+    filterConfig :: (Core.Maybe DicomFilterConfig)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SetBlobStorageSettingsRequest' with the minimum fields required to make a request.
+newSetBlobStorageSettingsRequest ::
+  SetBlobStorageSettingsRequest
+newSetBlobStorageSettingsRequest =
+  SetBlobStorageSettingsRequest
+    { blobStorageSettings = Core.Nothing,
+      filterConfig = Core.Nothing
+    }
+
+instance Core.FromJSON SetBlobStorageSettingsRequest where
+  parseJSON =
+    Core.withObject
+      "SetBlobStorageSettingsRequest"
+      ( \o ->
+          SetBlobStorageSettingsRequest
+            Core.<$> (o Core..:? "blobStorageSettings")
+            Core.<*> (o Core..:? "filterConfig")
+      )
+
+instance Core.ToJSON SetBlobStorageSettingsRequest where
+  toJSON SetBlobStorageSettingsRequest {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blobStorageSettings" Core..=) Core.<$> blobStorageSettings,
+            ("filterConfig" Core..=) Core.<$> filterConfig
+          ]
+      )
+
+-- | Returns additional info in regards to a completed set blob storage settings API.
+--
+-- /See:/ 'newSetBlobStorageSettingsResponse' smart constructor.
+data SetBlobStorageSettingsResponse = SetBlobStorageSettingsResponse
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'SetBlobStorageSettingsResponse' with the minimum fields required to make a request.
+newSetBlobStorageSettingsResponse ::
+  SetBlobStorageSettingsResponse
+newSetBlobStorageSettingsResponse = SetBlobStorageSettingsResponse
+
+instance Core.FromJSON SetBlobStorageSettingsResponse where
+  parseJSON =
+    Core.withObject
+      "SetBlobStorageSettingsResponse"
+      (\o -> Core.pure SetBlobStorageSettingsResponse)
+
+instance Core.ToJSON SetBlobStorageSettingsResponse where
+  toJSON = Core.const Core.emptyObject
 
 -- | Request message for @SetIamPolicy@ method.
 --
@@ -6238,7 +7714,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -6312,8 +7791,7 @@ instance Core.ToJSON Signature where
 --
 -- /See:/ 'newSignature_Metadata' smart constructor.
 newtype Signature_Metadata = Signature_Metadata
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -6322,19 +7800,17 @@ newSignature_Metadata ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Text ->
   Signature_Metadata
-newSignature_Metadata additional = Signature_Metadata {additional = additional}
+newSignature_Metadata additional =
+  Signature_Metadata {additional = additional}
 
 instance Core.FromJSON Signature_Metadata where
   parseJSON =
     Core.withObject
       "Signature_Metadata"
-      ( \o ->
-          Signature_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Signature_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Signature_Metadata where
-  toJSON Signature_Metadata {..} =
-    Core.toJSON additional
+  toJSON Signature_Metadata {..} = Core.toJSON additional
 
 -- | The @Status@ type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by <https://github.com/grpc gRPC>. Each @Status@ message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the <https://cloud.google.com/apis/design/errors API Design Guide>.
 --
@@ -6353,7 +7829,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -6389,32 +7869,74 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
+
+-- | StorageInfo encapsulates all the storage info of a resource.
+--
+-- /See:/ 'newStorageInfo' smart constructor.
+data StorageInfo = StorageInfo
+  { -- | Info about the data stored in blob storage for the resource.
+    blobStorageInfo :: (Core.Maybe BlobStorageInfo),
+    -- | The resource whose storage info is returned. For example: @projects\/{projectID}\/locations\/{locationID}\/datasets\/{datasetID}\/dicomStores\/{dicomStoreID}\/dicomWeb\/studies\/{studyUID}\/series\/{seriesUID}\/instances\/{instanceUID}@
+    referencedResource :: (Core.Maybe Core.Text),
+    -- | Info about the data stored in structured storage for the resource.
+    structuredStorageInfo :: (Core.Maybe StructuredStorageInfo)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StorageInfo' with the minimum fields required to make a request.
+newStorageInfo ::
+  StorageInfo
+newStorageInfo =
+  StorageInfo
+    { blobStorageInfo = Core.Nothing,
+      referencedResource = Core.Nothing,
+      structuredStorageInfo = Core.Nothing
+    }
+
+instance Core.FromJSON StorageInfo where
+  parseJSON =
+    Core.withObject
+      "StorageInfo"
+      ( \o ->
+          StorageInfo
+            Core.<$> (o Core..:? "blobStorageInfo")
+            Core.<*> (o Core..:? "referencedResource")
+            Core.<*> (o Core..:? "structuredStorageInfo")
+      )
+
+instance Core.ToJSON StorageInfo where
+  toJSON StorageInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blobStorageInfo" Core..=) Core.<$> blobStorageInfo,
+            ("referencedResource" Core..=) Core.<$> referencedResource,
+            ("structuredStorageInfo" Core..=) Core.<$> structuredStorageInfo
+          ]
+      )
 
 -- | Contains configuration for streaming FHIR export.
 --
 -- /See:/ 'newStreamConfig' smart constructor.
 data StreamConfig = StreamConfig
-  { -- | The destination BigQuery structure that contains both the dataset location and corresponding schema config. The output is organized in one table per resource type. The server reuses the existing tables (if any) that are named after the resource types. For example, \"Patient\", \"Observation\". When there is no existing table for a given resource type, the server attempts to create one. When a table schema doesn\'t align with the schema config, either because of existing incompatible schema or out of band incompatible modification, the server does not stream in new data. BigQuery imposes a 1 MB limit on streaming insert row size, therefore any resource mutation that generates more than 1 MB of BigQuery data is not streamed. One resolution in this case is to delete the incompatible table and let the server recreate one, though the newly created table only contains data after the table recreation. Results are written to BigQuery tables according to the parameters in BigQueryDestination.WriteDisposition.
-    -- Different versions of the same resource are distinguishable by the meta.versionId and meta.lastUpdated columns. The operation (CREATE\/UPDATE\/DELETE) that results in the new version is recorded in the meta.tag. The tables contain all historical resource versions since streaming was enabled. For query convenience, the server also creates one view per table of the same name containing only the current resource version. The streamed data in the BigQuery dataset is not guaranteed to be completely unique. The combination of the id and meta.versionId columns should ideally identify a single unique row. But in rare cases, duplicates may exist. At query time, users may use the SQL select statement to keep only one of the duplicate rows given an id and meta.versionId pair. Alternatively, the server created view mentioned above also filters out duplicates. If a resource mutation cannot be streamed to BigQuery, errors are logged to Cloud Logging. For more information, see
+  { -- | Optional. The destination BigQuery structure that contains both the dataset location and corresponding schema config. The output is organized in one table per resource type. The server reuses the existing tables (if any) that are named after the resource types. For example, \"Patient\", \"Observation\". When there is no existing table for a given resource type, the server attempts to create one. When a table schema doesn\'t align with the schema config, either because of existing incompatible schema or out of band incompatible modification, the server does not stream in new data. BigQuery imposes a 1 MB limit on streaming insert row size, therefore any resource mutation that generates more than 1 MB of BigQuery data is not streamed. One resolution in this case is to delete the incompatible table and let the server recreate one, though the newly created table only contains data after the table recreation. Results are written to BigQuery tables according to the parameters in
+    -- BigQueryDestination.WriteDisposition. Different versions of the same resource are distinguishable by the meta.versionId and meta.lastUpdated columns. The operation (CREATE\/UPDATE\/DELETE) that results in the new version is recorded in the meta.tag. The tables contain all historical resource versions since streaming was enabled. For query convenience, the server also creates one view per table of the same name containing only the current resource version. The streamed data in the BigQuery dataset is not guaranteed to be completely unique. The combination of the id and meta.versionId columns should ideally identify a single unique row. But in rare cases, duplicates may exist. At query time, users may use the SQL select statement to keep only one of the duplicate rows given an id and meta.versionId pair. Alternatively, the server created view mentioned above also filters out duplicates. If a resource mutation cannot be streamed to BigQuery, errors are logged to Cloud Logging. For more information, see
     -- <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
     bigqueryDestination :: (Core.Maybe GoogleCloudHealthcareV1FhirBigQueryDestination),
-    -- | The destination FHIR store for de-identified resources. After this field is added, all subsequent creates\/updates\/patches to the source store will be de-identified using the provided configuration and applied to the destination store. Importing resources to the source store will not trigger the streaming. If the source store already contains resources when this option is enabled, those resources will not be copied to the destination store unless they are subsequently updated. This may result in invalid references in the destination store. Before adding this config, you must grant the healthcare.fhirResources.update permission on the destination store to your project\'s __Cloud Healthcare Service Agent__ <https://cloud.google.com/healthcare/docs/how-tos/permissions-healthcare-api-gcp-products#the_cloud_healthcare_service_agent service account>. The destination store must set enable/update/create to true. The destination store must have disable/referential/integrity set to true. If a resource cannot be
-    -- de-identified, errors will be logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
+    -- | The destination FHIR store for de-identified resources. After this field is added, all subsequent creates\/updates\/patches to the source store will be de-identified using the provided configuration and applied to the destination store. Resources deleted from the source store will be deleted from the destination store. Importing resources to the source store will not trigger the streaming. If the source store already contains resources when this option is enabled, those resources will not be copied to the destination store unless they are subsequently updated. This may result in invalid references in the destination store. Before adding this config, you must grant the healthcare.fhirResources.update permission on the destination store to your project\'s __Cloud Healthcare Service Agent__ <https://cloud.google.com/healthcare/docs/how-tos/permissions-healthcare-api-gcp-products#the_cloud_healthcare_service_agent service account>. The destination store must set enable/update/create to true. The destination store
+    -- must have disable/referential/integrity set to true. If a resource cannot be de-identified, errors will be logged to Cloud Logging (see <https://cloud.google.com/healthcare/docs/how-tos/logging Viewing error logs in Cloud Logging>).
     deidentifiedStoreDestination :: (Core.Maybe DeidentifiedStoreDestination),
-    -- | Supply a FHIR resource type (such as \"Patient\" or \"Observation\"). See https:\/\/www.hl7.org\/fhir\/valueset-resource-types.html for a list of all FHIR resource types. The server treats an empty list as an intent to stream all the supported resource types in this FHIR store.
+    -- | Optional. Supply a FHIR resource type (such as \"Patient\" or \"Observation\"). See https:\/\/www.hl7.org\/fhir\/valueset-resource-types.html for a list of all FHIR resource types. The server treats an empty list as an intent to stream all the supported resource types in this FHIR store.
     resourceTypes :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6444,11 +7966,107 @@ instance Core.ToJSON StreamConfig where
   toJSON StreamConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("bigqueryDestination" Core..=)
-              Core.<$> bigqueryDestination,
+          [ ("bigqueryDestination" Core..=) Core.<$> bigqueryDestination,
             ("deidentifiedStoreDestination" Core..=)
               Core.<$> deidentifiedStoreDestination,
             ("resourceTypes" Core..=) Core.<$> resourceTypes
+          ]
+      )
+
+-- | StructuredStorageInfo contains details about the data stored in Structured Storage for the referenced resource.
+--
+-- /See:/ 'newStructuredStorageInfo' smart constructor.
+newtype StructuredStorageInfo = StructuredStorageInfo
+  { -- | Size in bytes of data stored in structured storage.
+    sizeBytes :: (Core.Maybe Core.Int64)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StructuredStorageInfo' with the minimum fields required to make a request.
+newStructuredStorageInfo ::
+  StructuredStorageInfo
+newStructuredStorageInfo =
+  StructuredStorageInfo {sizeBytes = Core.Nothing}
+
+instance Core.FromJSON StructuredStorageInfo where
+  parseJSON =
+    Core.withObject
+      "StructuredStorageInfo"
+      ( \o ->
+          StructuredStorageInfo
+            Core.<$> (o Core..:? "sizeBytes" Core.<&> Core.fmap Core.fromAsText)
+      )
+
+instance Core.ToJSON StructuredStorageInfo where
+  toJSON StructuredStorageInfo {..} =
+    Core.object
+      ( Core.catMaybes
+          [("sizeBytes" Core..=) Core.. Core.AsText Core.<$> sizeBytes]
+      )
+
+-- | StudyMetrics contains metrics describing a DICOM study.
+--
+-- /See:/ 'newStudyMetrics' smart constructor.
+data StudyMetrics = StudyMetrics
+  { -- | Total blob storage bytes for all instances in the study.
+    blobStorageSizeBytes :: (Core.Maybe Core.Int64),
+    -- | Number of instances in the study.
+    instanceCount :: (Core.Maybe Core.Int64),
+    -- | Number of series in the study.
+    seriesCount :: (Core.Maybe Core.Int64),
+    -- | Total structured storage bytes for all instances in the study.
+    structuredStorageSizeBytes :: (Core.Maybe Core.Int64),
+    -- | The study resource path. For example, @projects\/{project_id}\/locations\/{location_id}\/datasets\/{dataset_id}\/dicomStores\/{dicom_store_id}\/dicomWeb\/studies\/{study_uid}@.
+    study :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'StudyMetrics' with the minimum fields required to make a request.
+newStudyMetrics ::
+  StudyMetrics
+newStudyMetrics =
+  StudyMetrics
+    { blobStorageSizeBytes = Core.Nothing,
+      instanceCount = Core.Nothing,
+      seriesCount = Core.Nothing,
+      structuredStorageSizeBytes = Core.Nothing,
+      study = Core.Nothing
+    }
+
+instance Core.FromJSON StudyMetrics where
+  parseJSON =
+    Core.withObject
+      "StudyMetrics"
+      ( \o ->
+          StudyMetrics
+            Core.<$> ( o
+                         Core..:? "blobStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "instanceCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "seriesCount" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> ( o
+                         Core..:? "structuredStorageSizeBytes"
+                         Core.<&> Core.fmap Core.fromAsText
+                     )
+            Core.<*> (o Core..:? "study")
+      )
+
+instance Core.ToJSON StudyMetrics where
+  toJSON StudyMetrics {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("blobStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> blobStorageSizeBytes,
+            ("instanceCount" Core..=)
+              Core.. Core.AsText
+              Core.<$> instanceCount,
+            ("seriesCount" Core..=) Core.. Core.AsText Core.<$> seriesCount,
+            ("structuredStorageSizeBytes" Core..=)
+              Core.. Core.AsText
+              Core.<$> structuredStorageSizeBytes,
+            ("study" Core..=) Core.<$> study
           ]
       )
 
@@ -6456,7 +8074,7 @@ instance Core.ToJSON StreamConfig where
 --
 -- /See:/ 'newTagFilterList' smart constructor.
 newtype TagFilterList = TagFilterList
-  { -- | Tags to be filtered. Tags must be DICOM Data Elements, File Meta Elements, or Directory Structuring Elements, as defined at: http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part06.html#table_6-1,. They may be provided by \"Keyword\" or \"Tag\". For example \"PatientID\", \"00100010\".
+  { -- | Optional. Tags to be filtered. Tags must be DICOM Data Elements, File Meta Elements, or Directory Structuring Elements, as defined at: http:\/\/dicom.nema.org\/medical\/dicom\/current\/output\/html\/part06.html#table_6-1,. They may be provided by \"Keyword\" or \"Tag\". For example \"PatientID\", \"00100010\".
     tags :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6474,8 +8092,7 @@ instance Core.FromJSON TagFilterList where
 
 instance Core.ToJSON TagFilterList where
   toJSON TagFilterList {..} =
-    Core.object
-      (Core.catMaybes [("tags" Core..=) Core.<$> tags])
+    Core.object (Core.catMaybes [("tags" Core..=) Core.<$> tags])
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -6497,16 +8114,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -6528,21 +8142,22 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 --
 -- /See:/ 'newTextConfig' smart constructor.
-newtype TextConfig = TextConfig
-  { -- | The transformations to apply to the detected data. Deprecated. Use @additional_transformations@ instead.
+data TextConfig = TextConfig
+  { -- | Optional. Transformations to apply to the detected data, overridden by @exclude_info_types@.
+    additionalTransformations :: (Core.Maybe [InfoTypeTransformation]),
+    -- | Optional. InfoTypes to skip transforming, overriding @additional_transformations@.
+    excludeInfoTypes :: (Core.Maybe [Core.Text]),
+    -- | Optional. The transformations to apply to the detected data. Deprecated. Use @additional_transformations@ instead.
     transformations :: (Core.Maybe [InfoTypeTransformation])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6550,22 +8165,32 @@ newtype TextConfig = TextConfig
 -- | Creates a value of 'TextConfig' with the minimum fields required to make a request.
 newTextConfig ::
   TextConfig
-newTextConfig = TextConfig {transformations = Core.Nothing}
+newTextConfig =
+  TextConfig
+    { additionalTransformations = Core.Nothing,
+      excludeInfoTypes = Core.Nothing,
+      transformations = Core.Nothing
+    }
 
 instance Core.FromJSON TextConfig where
   parseJSON =
     Core.withObject
       "TextConfig"
       ( \o ->
-          TextConfig Core.<$> (o Core..:? "transformations")
+          TextConfig
+            Core.<$> (o Core..:? "additionalTransformations")
+            Core.<*> (o Core..:? "excludeInfoTypes")
+            Core.<*> (o Core..:? "transformations")
       )
 
 instance Core.ToJSON TextConfig where
   toJSON TextConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("transformations" Core..=)
-              Core.<$> transformations
+          [ ("additionalTransformations" Core..=)
+              Core.<$> additionalTransformations,
+            ("excludeInfoTypes" Core..=) Core.<$> excludeInfoTypes,
+            ("transformations" Core..=) Core.<$> transformations
           ]
       )
 
@@ -6583,7 +8208,8 @@ data TextSpan = TextSpan
 -- | Creates a value of 'TextSpan' with the minimum fields required to make a request.
 newTextSpan ::
   TextSpan
-newTextSpan = TextSpan {beginOffset = Core.Nothing, content = Core.Nothing}
+newTextSpan =
+  TextSpan {beginOffset = Core.Nothing, content = Core.Nothing}
 
 instance Core.FromJSON TextSpan where
   parseJSON =
@@ -6619,7 +8245,10 @@ data TimePartitioning = TimePartitioning
 newTimePartitioning ::
   TimePartitioning
 newTimePartitioning =
-  TimePartitioning {expirationMs = Core.Nothing, type' = Core.Nothing}
+  TimePartitioning
+    { expirationMs = Core.Nothing,
+      type' = Core.Nothing
+    }
 
 instance Core.FromJSON TimePartitioning where
   parseJSON =
@@ -6627,9 +8256,7 @@ instance Core.FromJSON TimePartitioning where
       "TimePartitioning"
       ( \o ->
           TimePartitioning
-            Core.<$> ( o Core..:? "expirationMs"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "expirationMs" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "type")
       )
 
@@ -6637,10 +8264,42 @@ instance Core.ToJSON TimePartitioning where
   toJSON TimePartitioning {..} =
     Core.object
       ( Core.catMaybes
-          [ ("expirationMs" Core..=) Core.. Core.AsText
-              Core.<$> expirationMs,
+          [ ("expirationMs" Core..=) Core.. Core.AsText Core.<$> expirationMs,
             ("type" Core..=) Core.<$> type'
           ]
+      )
+
+-- | Apply consents given by patients whose most recent consent changes are in the time range. Note that after identifying these patients, the server applies all Consent resources given by those patients, not just the Consent resources within the timestamp in the range.
+--
+-- /See:/ 'newTimeRange' smart constructor.
+data TimeRange = TimeRange
+  { -- | Optional. The latest consent change time, in format YYYY-MM-DDThh:mm:ss.sss+zz:zz If not specified, the system uses the time when ApplyConsents was called.
+    end :: (Core.Maybe Core.Text),
+    -- | Optional. The earliest consent change time, in format YYYY-MM-DDThh:mm:ss.sss+zz:zz If not specified, the system uses the FHIR store creation time.
+    start :: (Core.Maybe Core.Text)
+  }
+  deriving (Core.Eq, Core.Show, Core.Generic)
+
+-- | Creates a value of 'TimeRange' with the minimum fields required to make a request.
+newTimeRange ::
+  TimeRange
+newTimeRange = TimeRange {end = Core.Nothing, start = Core.Nothing}
+
+instance Core.FromJSON TimeRange where
+  parseJSON =
+    Core.withObject
+      "TimeRange"
+      ( \o ->
+          TimeRange
+            Core.<$> (o Core..:? "end")
+            Core.<*> (o Core..:? "start")
+      )
+
+instance Core.ToJSON TimeRange where
+  toJSON TimeRange {..} =
+    Core.object
+      ( Core.catMaybes
+          [("end" Core..=) Core.<$> end, ("start" Core..=) Core.<$> start]
       )
 
 -- | A type definition for some HL7v2 type (incl. Segments and Datatypes).
@@ -6660,7 +8319,11 @@ data Type = Type
 newType ::
   Type
 newType =
-  Type {fields = Core.Nothing, name = Core.Nothing, primitive' = Core.Nothing}
+  Type
+    { fields = Core.Nothing,
+      name = Core.Nothing,
+      primitive' = Core.Nothing
+    }
 
 instance Core.FromJSON Type where
   parseJSON =
@@ -6737,8 +8400,7 @@ instance Core.ToJSON UserDataMapping where
             ("archived" Core..=) Core.<$> archived,
             ("dataId" Core..=) Core.<$> dataId,
             ("name" Core..=) Core.<$> name,
-            ("resourceAttributes" Core..=)
-              Core.<$> resourceAttributes,
+            ("resourceAttributes" Core..=) Core.<$> resourceAttributes,
             ("userId" Core..=) Core.<$> userId
           ]
       )
@@ -6747,15 +8409,15 @@ instance Core.ToJSON UserDataMapping where
 --
 -- /See:/ 'newValidationConfig' smart constructor.
 data ValidationConfig = ValidationConfig
-  { -- | Whether to disable FHIRPath validation for incoming resources. Set this to true to disable checking incoming resources for conformance against FHIRPath requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+  { -- | Optional. Whether to disable FHIRPath validation for incoming resources. The default value is false. Set this to true to disable checking incoming resources for conformance against FHIRPath requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
     disableFhirpathValidation :: (Core.Maybe Core.Bool),
-    -- | Whether to disable profile validation for this FHIR store. Set this to true to disable checking incoming resources for conformance against structure definitions in this FHIR store.
+    -- | Optional. Whether to disable profile validation for this FHIR store. The default value is false. Set this to true to disable checking incoming resources for conformance against structure definitions in this FHIR store.
     disableProfileValidation :: (Core.Maybe Core.Bool),
-    -- | Whether to disable reference type validation for incoming resources. Set this to true to disable checking incoming resources for conformance against reference type requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+    -- | Optional. Whether to disable reference type validation for incoming resources. The default value is false. Set this to true to disable checking incoming resources for conformance against reference type requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
     disableReferenceTypeValidation :: (Core.Maybe Core.Bool),
-    -- | Whether to disable required fields validation for incoming resources. Set this to true to disable checking incoming resources for conformance against required fields requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
+    -- | Optional. Whether to disable required fields validation for incoming resources. The default value is false. Set this to true to disable checking incoming resources for conformance against required fields requirement defined in the FHIR specification. This property only affects resource types that do not have profiles configured for them, any rules in enabled implementation guides will still be enforced.
     disableRequiredFieldValidation :: (Core.Maybe Core.Bool),
-    -- | A list of implementation guide URLs in this FHIR store that are used to configure the profiles to use for validation. For example, to use the US Core profiles for validation, set @enabled_implementation_guides@ to @[\"http:\/\/hl7.org\/fhir\/us\/core\/ImplementationGuide\/ig\"]@. If @enabled_implementation_guides@ is empty or omitted, then incoming resources are only required to conform to the base FHIR profiles. Otherwise, a resource must conform to at least one profile listed in the @global@ property of one of the enabled ImplementationGuides. The Cloud Healthcare API does not currently enforce all of the rules in a StructureDefinition. The following rules are supported: - min\/max - minValue\/maxValue - maxLength - type - fixed[x] - pattern[x] on simple types - slicing, when using \"value\" as the discriminator type When a URL cannot be resolved (for example, in a type assertion), the server does not return an error.
+    -- | Optional. A list of implementation guide URLs in this FHIR store that are used to configure the profiles to use for validation. For example, to use the US Core profiles for validation, set @enabled_implementation_guides@ to @[\"http:\/\/hl7.org\/fhir\/us\/core\/ImplementationGuide\/ig\"]@. If @enabled_implementation_guides@ is empty or omitted, then incoming resources are only required to conform to the base FHIR profiles. Otherwise, a resource must conform to at least one profile listed in the @global@ property of one of the enabled ImplementationGuides. The Cloud Healthcare API does not currently enforce all of the rules in a StructureDefinition. The following rules are supported: - min\/max - minValue\/maxValue - maxLength - type - fixed[x] - pattern[x] on simple types - slicing, when using \"value\" as the discriminator type When a URL cannot be resolved (for example, in a type assertion), the server does not return an error.
     enabledImplementationGuides :: (Core.Maybe [Core.Text])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -6816,7 +8478,8 @@ data VersionSource = VersionSource
 -- | Creates a value of 'VersionSource' with the minimum fields required to make a request.
 newVersionSource ::
   VersionSource
-newVersionSource = VersionSource {mshField = Core.Nothing, value = Core.Nothing}
+newVersionSource =
+  VersionSource {mshField = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON VersionSource where
   parseJSON =

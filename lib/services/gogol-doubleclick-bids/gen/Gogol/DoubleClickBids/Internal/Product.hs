@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,31 +17,20 @@
 
 -- |
 -- Module      : Gogol.DoubleClickBids.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.DoubleClickBids.Internal.Product
-  ( -- * ChannelGrouping
-    ChannelGrouping (..),
-    newChannelGrouping,
-
-    -- * DataRange
+  ( -- * DataRange
     DataRange (..),
     newDataRange,
 
     -- * Date
     Date (..),
     newDate,
-
-    -- * DisjunctiveMatchStatement
-    DisjunctiveMatchStatement (..),
-    newDisjunctiveMatchStatement,
-
-    -- * EventFilter
-    EventFilter (..),
-    newEventFilter,
 
     -- * FilterPair
     FilterPair (..),
@@ -65,18 +51,6 @@ module Gogol.DoubleClickBids.Internal.Product
     -- * Parameters
     Parameters (..),
     newParameters,
-
-    -- * PathFilter
-    PathFilter (..),
-    newPathFilter,
-
-    -- * PathQueryOptions
-    PathQueryOptions (..),
-    newPathQueryOptions,
-
-    -- * PathQueryOptionsFilter
-    PathQueryOptionsFilter (..),
-    newPathQueryOptionsFilter,
 
     -- * Query
     Query (..),
@@ -106,10 +80,6 @@ module Gogol.DoubleClickBids.Internal.Product
     ReportStatus (..),
     newReportStatus,
 
-    -- * Rule
-    Rule (..),
-    newRule,
-
     -- * RunQueryRequest
     RunQueryRequest (..),
     newRunQueryRequest,
@@ -117,61 +87,17 @@ module Gogol.DoubleClickBids.Internal.Product
 where
 
 import Gogol.DoubleClickBids.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
--- | A channel grouping defines a set of rules that can be used to categorize events in a path report.
---
--- /See:/ 'newChannelGrouping' smart constructor.
-data ChannelGrouping = ChannelGrouping
-  { -- | The name to apply to an event that does not match any of the rules in the channel grouping.
-    fallbackName :: (Core.Maybe Core.Text),
-    -- | Channel Grouping name.
-    name :: (Core.Maybe Core.Text),
-    -- | Rules within Channel Grouping. There is a limit of 100 rules that can be set per channel grouping.
-    rules :: (Core.Maybe [Rule])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'ChannelGrouping' with the minimum fields required to make a request.
-newChannelGrouping ::
-  ChannelGrouping
-newChannelGrouping =
-  ChannelGrouping
-    { fallbackName = Core.Nothing,
-      name = Core.Nothing,
-      rules = Core.Nothing
-    }
-
-instance Core.FromJSON ChannelGrouping where
-  parseJSON =
-    Core.withObject
-      "ChannelGrouping"
-      ( \o ->
-          ChannelGrouping
-            Core.<$> (o Core..:? "fallbackName")
-            Core.<*> (o Core..:? "name")
-            Core.<*> (o Core..:? "rules")
-      )
-
-instance Core.ToJSON ChannelGrouping where
-  toJSON ChannelGrouping {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("fallbackName" Core..=) Core.<$> fallbackName,
-            ("name" Core..=) Core.<$> name,
-            ("rules" Core..=) Core.<$> rules
-          ]
-      )
-
--- | Report data range.
+-- | The date range to be reported on.
 --
 -- /See:/ 'newDataRange' smart constructor.
 data DataRange = DataRange
-  { -- | The ending date for the data that is shown in the report. Note, @customEndDate@ is required if @range@ is @CUSTOM_DATES@ and ignored otherwise.
+  { -- | If @CUSTOM_DATES@ is assigned to range, this field specifies the end date for the date range that is reported on. This field is required if using @CUSTOM_DATES@ range and will be ignored otherwise.
     customEndDate :: (Core.Maybe Date),
-    -- | The starting data for the data that is shown in the report. Note, @customStartDate@ is required if @range@ is @CUSTOM_DATES@ and ignored otherwise.
+    -- | If @CUSTOM_DATES@ is assigned to range, this field specifies the starting date for the date range that is reported on. This field is required if using @CUSTOM_DATES@ range and will be ignored otherwise.
     customStartDate :: (Core.Maybe Date),
-    -- | Report data range used to generate the report.
+    -- | The preset date range to be reported on. If @CUSTOM_DATES@ is assigned to this field, fields custom/start/date and custom/end/date must be set to specify the custom date range.
     range :: (Core.Maybe DataRange_Range)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -223,7 +149,12 @@ data Date = Date
 -- | Creates a value of 'Date' with the minimum fields required to make a request.
 newDate ::
   Date
-newDate = Date {day = Core.Nothing, month = Core.Nothing, year = Core.Nothing}
+newDate =
+  Date
+    { day = Core.Nothing,
+      month = Core.Nothing,
+      year = Core.Nothing
+    }
 
 instance Core.FromJSON Date where
   parseJSON =
@@ -246,75 +177,13 @@ instance Core.ToJSON Date where
           ]
       )
 
--- | DisjunctiveMatchStatement that OR\'s all contained filters.
---
--- /See:/ 'newDisjunctiveMatchStatement' smart constructor.
-newtype DisjunctiveMatchStatement = DisjunctiveMatchStatement
-  { -- | Filters. There is a limit of 100 filters that can be set per disjunctive match statement.
-    eventFilters :: (Core.Maybe [EventFilter])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'DisjunctiveMatchStatement' with the minimum fields required to make a request.
-newDisjunctiveMatchStatement ::
-  DisjunctiveMatchStatement
-newDisjunctiveMatchStatement =
-  DisjunctiveMatchStatement {eventFilters = Core.Nothing}
-
-instance Core.FromJSON DisjunctiveMatchStatement where
-  parseJSON =
-    Core.withObject
-      "DisjunctiveMatchStatement"
-      ( \o ->
-          DisjunctiveMatchStatement
-            Core.<$> (o Core..:? "eventFilters")
-      )
-
-instance Core.ToJSON DisjunctiveMatchStatement where
-  toJSON DisjunctiveMatchStatement {..} =
-    Core.object
-      ( Core.catMaybes
-          [("eventFilters" Core..=) Core.<$> eventFilters]
-      )
-
--- | Defines the type of filter to be applied to the path, a DV360 event dimension filter.
---
--- /See:/ 'newEventFilter' smart constructor.
-newtype EventFilter = EventFilter
-  { -- | Filter on a dimension.
-    dimensionFilter :: (Core.Maybe PathQueryOptionsFilter)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'EventFilter' with the minimum fields required to make a request.
-newEventFilter ::
-  EventFilter
-newEventFilter = EventFilter {dimensionFilter = Core.Nothing}
-
-instance Core.FromJSON EventFilter where
-  parseJSON =
-    Core.withObject
-      "EventFilter"
-      ( \o ->
-          EventFilter Core.<$> (o Core..:? "dimensionFilter")
-      )
-
-instance Core.ToJSON EventFilter where
-  toJSON EventFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("dimensionFilter" Core..=)
-              Core.<$> dimensionFilter
-          ]
-      )
-
--- | Filter used to match traffic data in your report.
+-- | Represents a single filter rule.
 --
 -- /See:/ 'newFilterPair' smart constructor.
 data FilterPair = FilterPair
-  { -- | Filter type.
+  { -- | The type of value to filter by. Defined by a </bid-manager/reference/rest/v2/filters-metrics#filters Filter> value.
     type' :: (Core.Maybe Core.Text),
-    -- | Filter value.
+    -- | The identifying value to filter by, such as a relevant resource ID.
     value :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -322,7 +191,8 @@ data FilterPair = FilterPair
 -- | Creates a value of 'FilterPair' with the minimum fields required to make a request.
 newFilterPair ::
   FilterPair
-newFilterPair = FilterPair {type' = Core.Nothing, value = Core.Nothing}
+newFilterPair =
+  FilterPair {type' = Core.Nothing, value = Core.Nothing}
 
 instance Core.FromJSON FilterPair where
   parseJSON =
@@ -330,7 +200,8 @@ instance Core.FromJSON FilterPair where
       "FilterPair"
       ( \o ->
           FilterPair
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+            Core.<$> (o Core..:? "type")
+            Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON FilterPair where
@@ -345,9 +216,9 @@ instance Core.ToJSON FilterPair where
 --
 -- /See:/ 'newListQueriesResponse' smart constructor.
 data ListQueriesResponse = ListQueriesResponse
-  { -- | A token, which can be sent as page_token to retrieve the next page of queries. If this field is omitted, there are no subsequent pages.
+  { -- | A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to @queries.list@ method to retrieve the next page of results.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | The list of queries.
+    -- | The list of queries. This field will be absent if empty.
     queries :: (Core.Maybe [Query])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -356,7 +227,10 @@ data ListQueriesResponse = ListQueriesResponse
 newListQueriesResponse ::
   ListQueriesResponse
 newListQueriesResponse =
-  ListQueriesResponse {nextPageToken = Core.Nothing, queries = Core.Nothing}
+  ListQueriesResponse
+    { nextPageToken = Core.Nothing,
+      queries = Core.Nothing
+    }
 
 instance Core.FromJSON ListQueriesResponse where
   parseJSON =
@@ -380,9 +254,9 @@ instance Core.ToJSON ListQueriesResponse where
 --
 -- /See:/ 'newListReportsResponse' smart constructor.
 data ListReportsResponse = ListReportsResponse
-  { -- | A token, which can be sent as page_token to retrieve the next page of reports. If this field is omitted, there are no subsequent pages.
+  { -- | A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to @queries.reports.list@ method to retrieve the next page of results.
     nextPageToken :: (Core.Maybe Core.Text),
-    -- | Retrieved reports.
+    -- | The list of reports. This field will be absent if empty.
     reports :: (Core.Maybe [Report])
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -391,7 +265,10 @@ data ListReportsResponse = ListReportsResponse
 newListReportsResponse ::
   ListReportsResponse
 newListReportsResponse =
-  ListReportsResponse {nextPageToken = Core.Nothing, reports = Core.Nothing}
+  ListReportsResponse
+    { nextPageToken = Core.Nothing,
+      reports = Core.Nothing
+    }
 
 instance Core.FromJSON ListReportsResponse where
   parseJSON =
@@ -412,34 +289,26 @@ instance Core.ToJSON ListReportsResponse where
           ]
       )
 
--- | Additional query options.
+-- | Report parameter options.
 --
 -- /See:/ 'newOptions' smart constructor.
-data Options = Options
-  { -- | Set to true and filter your report by @FILTER_INSERTION_ORDER@ or @FILTER_LINE_ITEM@ to include data for audience lists specifically targeted by those items.
-    includeOnlyTargetedUserLists :: (Core.Maybe Core.Bool),
-    -- | Options that contain Path Filters and Custom Channel Groupings.
-    pathQueryOptions :: (Core.Maybe PathQueryOptions)
+newtype Options = Options
+  { -- | Whether to include data for audience lists specifically targeted by filtered line items or insertion orders. Requires the use of @FILTER_INSERTION_ORDER@ or @FILTER_LINE_ITEM@ filters.
+    includeOnlyTargetedUserLists :: (Core.Maybe Core.Bool)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
 -- | Creates a value of 'Options' with the minimum fields required to make a request.
 newOptions ::
   Options
-newOptions =
-  Options
-    { includeOnlyTargetedUserLists = Core.Nothing,
-      pathQueryOptions = Core.Nothing
-    }
+newOptions = Options {includeOnlyTargetedUserLists = Core.Nothing}
 
 instance Core.FromJSON Options where
   parseJSON =
     Core.withObject
       "Options"
       ( \o ->
-          Options
-            Core.<$> (o Core..:? "includeOnlyTargetedUserLists")
-            Core.<*> (o Core..:? "pathQueryOptions")
+          Options Core.<$> (o Core..:? "includeOnlyTargetedUserLists")
       )
 
 instance Core.ToJSON Options where
@@ -447,25 +316,23 @@ instance Core.ToJSON Options where
     Core.object
       ( Core.catMaybes
           [ ("includeOnlyTargetedUserLists" Core..=)
-              Core.<$> includeOnlyTargetedUserLists,
-            ("pathQueryOptions" Core..=)
-              Core.<$> pathQueryOptions
+              Core.<$> includeOnlyTargetedUserLists
           ]
       )
 
--- | Parameters of a query or report.
+-- | Parameters of a generated report.
 --
 -- /See:/ 'newParameters' smart constructor.
 data Parameters = Parameters
-  { -- | Filters used to match traffic data in your report.
+  { -- | Filters to limit the scope of reported data.
     filters :: (Core.Maybe [FilterPair]),
-    -- | Data is grouped by the filters listed in this field.
+    -- | Dimensions by which to segment and group the data. Defined by </bid-manager/reference/rest/v2/filters-metrics#filters Filter> values.
     groupBys :: (Core.Maybe [Core.Text]),
-    -- | Metrics to include as columns in your report.
+    -- | Metrics to define the data populating the report. Defined by </bid-manager/reference/rest/v2/filters-metrics#metrics Metric> values.
     metrics :: (Core.Maybe [Core.Text]),
-    -- | Additional query options.
+    -- | Additional report parameter options.
     options :: (Core.Maybe Options),
-    -- | The type of the report. The type of the report will dictate what dimesions, filters, and metrics can be used.
+    -- | The type of the report. The type of the report determines the dimesions, filters, and metrics that can be used.
     type' :: (Core.Maybe Parameters_Type)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -507,135 +374,17 @@ instance Core.ToJSON Parameters where
           ]
       )
 
--- | Path filters specify which paths to include in a report. A path is the result of combining DV360 events based on User ID to create a workflow of users\' actions. When a path filter is set, the resulting report will only include paths that match the specified event at the specified position. All other paths will be excluded.
---
--- /See:/ 'newPathFilter' smart constructor.
-data PathFilter = PathFilter
-  { -- | Filter on an event to be applied to some part of the path.
-    eventFilters :: (Core.Maybe [EventFilter]),
-    -- | The position of the path the filter should match to (first, last, or any event in path).
-    pathMatchPosition :: (Core.Maybe PathFilter_PathMatchPosition)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathFilter' with the minimum fields required to make a request.
-newPathFilter ::
-  PathFilter
-newPathFilter =
-  PathFilter {eventFilters = Core.Nothing, pathMatchPosition = Core.Nothing}
-
-instance Core.FromJSON PathFilter where
-  parseJSON =
-    Core.withObject
-      "PathFilter"
-      ( \o ->
-          PathFilter
-            Core.<$> (o Core..:? "eventFilters")
-            Core.<*> (o Core..:? "pathMatchPosition")
-      )
-
-instance Core.ToJSON PathFilter where
-  toJSON PathFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("eventFilters" Core..=) Core.<$> eventFilters,
-            ("pathMatchPosition" Core..=)
-              Core.<$> pathMatchPosition
-          ]
-      )
-
--- | Path Query Options for Report Options.
---
--- /See:/ 'newPathQueryOptions' smart constructor.
-data PathQueryOptions = PathQueryOptions
-  { -- | Custom Channel Groupings.
-    channelGrouping :: (Core.Maybe ChannelGrouping),
-    -- | Path Filters. There is a limit of 100 path filters that can be set per report.
-    pathFilters :: (Core.Maybe [PathFilter])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathQueryOptions' with the minimum fields required to make a request.
-newPathQueryOptions ::
-  PathQueryOptions
-newPathQueryOptions =
-  PathQueryOptions {channelGrouping = Core.Nothing, pathFilters = Core.Nothing}
-
-instance Core.FromJSON PathQueryOptions where
-  parseJSON =
-    Core.withObject
-      "PathQueryOptions"
-      ( \o ->
-          PathQueryOptions
-            Core.<$> (o Core..:? "channelGrouping")
-            Core.<*> (o Core..:? "pathFilters")
-      )
-
-instance Core.ToJSON PathQueryOptions where
-  toJSON PathQueryOptions {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("channelGrouping" Core..=)
-              Core.<$> channelGrouping,
-            ("pathFilters" Core..=) Core.<$> pathFilters
-          ]
-      )
-
--- | Dimension filter on path events.
---
--- /See:/ 'newPathQueryOptionsFilter' smart constructor.
-data PathQueryOptionsFilter = PathQueryOptionsFilter
-  { -- | Dimension the filter is applied to.
-    filter :: (Core.Maybe Core.Text),
-    -- | Match logic of the filter.
-    match :: (Core.Maybe PathQueryOptionsFilter_Match),
-    -- | Values to filter on.
-    values :: (Core.Maybe [Core.Text])
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'PathQueryOptionsFilter' with the minimum fields required to make a request.
-newPathQueryOptionsFilter ::
-  PathQueryOptionsFilter
-newPathQueryOptionsFilter =
-  PathQueryOptionsFilter
-    { filter = Core.Nothing,
-      match = Core.Nothing,
-      values = Core.Nothing
-    }
-
-instance Core.FromJSON PathQueryOptionsFilter where
-  parseJSON =
-    Core.withObject
-      "PathQueryOptionsFilter"
-      ( \o ->
-          PathQueryOptionsFilter
-            Core.<$> (o Core..:? "filter")
-            Core.<*> (o Core..:? "match")
-            Core.<*> (o Core..:? "values")
-      )
-
-instance Core.ToJSON PathQueryOptionsFilter where
-  toJSON PathQueryOptionsFilter {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("filter" Core..=) Core.<$> filter,
-            ("match" Core..=) Core.<$> match,
-            ("values" Core..=) Core.<$> values
-          ]
-      )
-
--- | Represents a query.
+-- | A single query used to generate a report.
 --
 -- /See:/ 'newQuery' smart constructor.
 data Query = Query
-  { -- | Query metadata.
+  { -- | The metadata of the query.
     metadata :: (Core.Maybe QueryMetadata),
-    -- | Query parameters.
+    -- | The parameters of the report generated by the query.
     params :: (Core.Maybe Parameters),
-    -- | Output only. Query ID.
+    -- | Output only. The unique ID of the query.
     queryId :: (Core.Maybe Core.Int64),
-    -- | Information on how often and when to run a query. If @ONE_TIME@ is set to the frequency field, the query will only be run at the time of creation.
+    -- | When and how often the query is scheduled to run. If the frequency field is set to @ONE_TIME@, the query will only run when queries.run is called.
     schedule :: (Core.Maybe QuerySchedule)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -659,9 +408,7 @@ instance Core.FromJSON Query where
           Query
             Core.<$> (o Core..:? "metadata")
             Core.<*> (o Core..:? "params")
-            Core.<*> ( o Core..:? "queryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "queryId" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "schedule")
       )
 
@@ -671,25 +418,24 @@ instance Core.ToJSON Query where
       ( Core.catMaybes
           [ ("metadata" Core..=) Core.<$> metadata,
             ("params" Core..=) Core.<$> params,
-            ("queryId" Core..=) Core.. Core.AsText
-              Core.<$> queryId,
+            ("queryId" Core..=) Core.. Core.AsText Core.<$> queryId,
             ("schedule" Core..=) Core.<$> schedule
           ]
       )
 
--- | Query metadata.
+-- | The metadata of the query.
 --
 -- /See:/ 'newQueryMetadata' smart constructor.
 data QueryMetadata = QueryMetadata
-  { -- | Range of report data. All reports will be based on the same time zone as used by the advertiser.
+  { -- | The date range the report generated by the query will report on. This date range will be defined by the time zone as used by the advertiser.
     dataRange :: (Core.Maybe DataRange),
-    -- | Format of the generated report.
+    -- | The format of the report generated by the query.
     format :: (Core.Maybe QueryMetadata_Format),
-    -- | Whether to send an email notification when a report is ready. Defaults to false.
+    -- | Whether an email notification is sent to the query creator when a report generated by the query is ready. This value is @false@ by default.
     sendNotification :: (Core.Maybe Core.Bool),
-    -- | List of email addresses which are sent email notifications when the report is finished. Separate from send_notification.
+    -- | List of additional email addresses with which to share the query. If send_notification is @true@, these email addresses will receive a notification when a report generated by the query is ready. If these email addresses are connected to Display & Video 360 users, the query will be available to them in the Display & Video 360 interface.
     shareEmailAddress :: (Core.Maybe [Core.Text]),
-    -- | Query title. It is used to name the reports generated from this query.
+    -- | The display name of the query. This value will be used in the file name of reports generated by the query.
     title :: (Core.Maybe Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -725,25 +471,23 @@ instance Core.ToJSON QueryMetadata where
       ( Core.catMaybes
           [ ("dataRange" Core..=) Core.<$> dataRange,
             ("format" Core..=) Core.<$> format,
-            ("sendNotification" Core..=)
-              Core.<$> sendNotification,
-            ("shareEmailAddress" Core..=)
-              Core.<$> shareEmailAddress,
+            ("sendNotification" Core..=) Core.<$> sendNotification,
+            ("shareEmailAddress" Core..=) Core.<$> shareEmailAddress,
             ("title" Core..=) Core.<$> title
           ]
       )
 
--- | Information on when and how frequently to run a query.
+-- | Settings on when and how frequently to run a query.
 --
 -- /See:/ 'newQuerySchedule' smart constructor.
 data QuerySchedule = QuerySchedule
-  { -- | Date to periodically run the query until. Not applicable to @ONE_TIME@ frequency.
+  { -- | The date on which to end the scheduled runs. This field is required if frequency is not set to @ONE_TIME@. Otherwise, it will be ignored.
     endDate :: (Core.Maybe Date),
-    -- | How often the query is run.
+    -- | How frequently to run the query. If set to @ONE_TIME@, the query will only be run when queries.run is called.
     frequency :: (Core.Maybe QuerySchedule_Frequency),
-    -- | Canonical timezone code for report generation time. Defaults to @America\/New_York@.
+    -- | The canonical code for the timezone the query schedule is based on. Scheduled runs are usually conducted in the morning of a given day. Defaults to @America\/New_York@.
     nextRunTimezoneCode :: (Core.Maybe Core.Text),
-    -- | When to start running the query. Not applicable to @ONE_TIME@ frequency.
+    -- | The date on which to begin the scheduled runs. This field is required if frequency is not set to @ONE_TIME@. Otherwise, it will be ignored.
     startDate :: (Core.Maybe Date)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -777,21 +521,20 @@ instance Core.ToJSON QuerySchedule where
       ( Core.catMaybes
           [ ("endDate" Core..=) Core.<$> endDate,
             ("frequency" Core..=) Core.<$> frequency,
-            ("nextRunTimezoneCode" Core..=)
-              Core.<$> nextRunTimezoneCode,
+            ("nextRunTimezoneCode" Core..=) Core.<$> nextRunTimezoneCode,
             ("startDate" Core..=) Core.<$> startDate
           ]
       )
 
--- | Represents a report.
+-- | A single report generated by its parent report.
 --
 -- /See:/ 'newReport' smart constructor.
 data Report = Report
-  { -- | Key used to identify a report.
+  { -- | The key information identifying the report.
     key :: (Core.Maybe ReportKey),
-    -- | Report metadata.
+    -- | The metadata of the report.
     metadata :: (Core.Maybe ReportMetadata),
-    -- | Report parameters.
+    -- | The parameters of the report.
     params :: (Core.Maybe Parameters)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -800,7 +543,11 @@ data Report = Report
 newReport ::
   Report
 newReport =
-  Report {key = Core.Nothing, metadata = Core.Nothing, params = Core.Nothing}
+  Report
+    { key = Core.Nothing,
+      metadata = Core.Nothing,
+      params = Core.Nothing
+    }
 
 instance Core.FromJSON Report where
   parseJSON =
@@ -823,13 +570,13 @@ instance Core.ToJSON Report where
           ]
       )
 
--- | Key used to identify a report.
+-- | Identifying information of a report.
 --
 -- /See:/ 'newReportKey' smart constructor.
 data ReportKey = ReportKey
-  { -- | Output only. Query ID.
+  { -- | Output only. The unique ID of the query that generated the report.
     queryId :: (Core.Maybe Core.Int64),
-    -- | Output only. Report ID.
+    -- | Output only. The unique ID of the report.
     reportId :: (Core.Maybe Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -837,7 +584,8 @@ data ReportKey = ReportKey
 -- | Creates a value of 'ReportKey' with the minimum fields required to make a request.
 newReportKey ::
   ReportKey
-newReportKey = ReportKey {queryId = Core.Nothing, reportId = Core.Nothing}
+newReportKey =
+  ReportKey {queryId = Core.Nothing, reportId = Core.Nothing}
 
 instance Core.FromJSON ReportKey where
   parseJSON =
@@ -845,36 +593,30 @@ instance Core.FromJSON ReportKey where
       "ReportKey"
       ( \o ->
           ReportKey
-            Core.<$> ( o Core..:? "queryId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
-            Core.<*> ( o Core..:? "reportId"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "queryId" Core.<&> Core.fmap Core.fromAsText)
+            Core.<*> (o Core..:? "reportId" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON ReportKey where
   toJSON ReportKey {..} =
     Core.object
       ( Core.catMaybes
-          [ ("queryId" Core..=) Core.. Core.AsText
-              Core.<$> queryId,
-            ("reportId" Core..=) Core.. Core.AsText
-              Core.<$> reportId
+          [ ("queryId" Core..=) Core.. Core.AsText Core.<$> queryId,
+            ("reportId" Core..=) Core.. Core.AsText Core.<$> reportId
           ]
       )
 
--- | Report metadata.
+-- | The metadata of a report.
 --
 -- /See:/ 'newReportMetadata' smart constructor.
 data ReportMetadata = ReportMetadata
-  { -- | Output only. The path to the location in Google Cloud Storage where the report is stored.
+  { -- | Output only. The location of the generated report file in Google Cloud Storage. This field will be absent if status.state is not @DONE@.
     googleCloudStoragePath :: (Core.Maybe Core.Text),
-    -- | The ending time for the data that is shown in the report.
+    -- | The end date of the report data date range.
     reportDataEndDate :: (Core.Maybe Date),
-    -- | The starting time for the data that is shown in the report.
+    -- | The start date of the report data date range.
     reportDataStartDate :: (Core.Maybe Date),
-    -- | Report status.
+    -- | The status of the report.
     status :: (Core.Maybe ReportStatus)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -908,23 +650,21 @@ instance Core.ToJSON ReportMetadata where
       ( Core.catMaybes
           [ ("googleCloudStoragePath" Core..=)
               Core.<$> googleCloudStoragePath,
-            ("reportDataEndDate" Core..=)
-              Core.<$> reportDataEndDate,
-            ("reportDataStartDate" Core..=)
-              Core.<$> reportDataStartDate,
+            ("reportDataEndDate" Core..=) Core.<$> reportDataEndDate,
+            ("reportDataStartDate" Core..=) Core.<$> reportDataStartDate,
             ("status" Core..=) Core.<$> status
           ]
       )
 
--- | Report status.
+-- | The status of a report.
 --
 -- /See:/ 'newReportStatus' smart constructor.
 data ReportStatus = ReportStatus
-  { -- | Output only. The time when this report either completed successfully or failed.
+  { -- | Output only. The timestamp of when report generation finished successfully or in failure. This field will not be set unless state is @DONE@ or @FAILED@.
     finishTime :: (Core.Maybe Core.DateTime),
-    -- | The file type of the report.
+    -- | The format of the generated report file.
     format :: (Core.Maybe ReportStatus_Format),
-    -- | Output only. The state of the report.
+    -- | Output only. The state of the report generation.
     state :: (Core.Maybe ReportStatus_State)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -960,47 +700,11 @@ instance Core.ToJSON ReportStatus where
           ]
       )
 
--- | A Rule defines a name, and a boolean expression in [conjunctive normal form] (http:\/\/mathworld.wolfram.com\/ConjunctiveNormalForm.html){.external} that can be applied to a path event to determine if that name should be applied.
---
--- /See:/ 'newRule' smart constructor.
-data Rule = Rule
-  { -- | DisjunctiveMatchStatements within a Rule. DisjunctiveMatchStatement OR\'s all contained filters.
-    disjunctiveMatchStatements :: (Core.Maybe [DisjunctiveMatchStatement]),
-    -- | Rule name.
-    name :: (Core.Maybe Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'Rule' with the minimum fields required to make a request.
-newRule ::
-  Rule
-newRule = Rule {disjunctiveMatchStatements = Core.Nothing, name = Core.Nothing}
-
-instance Core.FromJSON Rule where
-  parseJSON =
-    Core.withObject
-      "Rule"
-      ( \o ->
-          Rule
-            Core.<$> (o Core..:? "disjunctiveMatchStatements")
-            Core.<*> (o Core..:? "name")
-      )
-
-instance Core.ToJSON Rule where
-  toJSON Rule {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("disjunctiveMatchStatements" Core..=)
-              Core.<$> disjunctiveMatchStatements,
-            ("name" Core..=) Core.<$> name
-          ]
-      )
-
--- | Request to run a stored query to generate a report.
+-- | Details specifying how to run a query.
 --
 -- /See:/ 'newRunQueryRequest' smart constructor.
 newtype RunQueryRequest = RunQueryRequest
-  { -- | Report data range used to generate the report. If unspecified, the original parent query\'s data range is used.
+  { -- | The date range used by the query to generate the report. If unspecified, the query\'s original data_range is used.
     dataRange :: (Core.Maybe DataRange)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -1014,13 +718,9 @@ instance Core.FromJSON RunQueryRequest where
   parseJSON =
     Core.withObject
       "RunQueryRequest"
-      ( \o ->
-          RunQueryRequest Core.<$> (o Core..:? "dataRange")
-      )
+      (\o -> RunQueryRequest Core.<$> (o Core..:? "dataRange"))
 
 instance Core.ToJSON RunQueryRequest where
   toJSON RunQueryRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("dataRange" Core..=) Core.<$> dataRange]
-      )
+      (Core.catMaybes [("dataRange" Core..=) Core.<$> dataRange])

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,15 @@
 
 -- |
 -- Module      : Gogol.Chat.Spaces.Messages.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#create_a_message Create a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.create@ authorization scope. Because Chat provides authentication for <https://developers.google.com/chat/how-tos/webhooks webhooks> as part of the URL that\'s generated when a webhook is registered, webhooks can create messages without a service account or user authentication.
+-- Creates a message in a Google Chat space. For an example, see <https://developers.google.com/workspace/chat/create-messages Send a message>. The @create()@ method requires either <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication> or <https://developers.google.com/workspace/chat/authorize-import app authentication>. Chat attributes the message sender differently depending on the type of authentication that you use in your request. The following image shows how Chat attributes a message when you use app authentication. Chat displays the Chat app as the message sender. The content of the message can contain text (@text@), cards (@cardsV2@), and accessory widgets (@accessoryWidgets@). <<https://developers.google.com/workspace/chat/images/message-app-auth.svg Message sent with app authentication>> The following image shows how Chat attributes a message when you use user authentication. Chat displays the user as the message sender and attributes the Chat app to the
+-- message by displaying its name. The content of message can only contain text (@text@). <<https://developers.google.com/workspace/chat/images/message-user-auth.svg Message sent with user authentication>> The maximum message size, including the message contents, is 32,000 bytes. For <https://developers.google.com/workspace/chat/quickstart/webhooks webhook> requests, the response doesn\'t contain the full message. The response only populates the @name@ and @thread.name@ fields in addition to the information that was in the request.
 --
 -- /See:/ <https://developers.google.com/hangouts/chat Google Chat API Reference> for @chat.spaces.messages.create@.
 module Gogol.Chat.Spaces.Messages.Create
@@ -40,7 +39,7 @@ module Gogol.Chat.Spaces.Messages.Create
 where
 
 import Gogol.Chat.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @chat.spaces.messages.create@ method which the
 -- 'ChatSpacesMessagesCreate' request conforms to.
@@ -63,7 +62,8 @@ type ChatSpacesMessagesCreateResource =
     Core.:> Core.ReqBody '[Core.JSON] Message
     Core.:> Core.Post '[Core.JSON] Message
 
--- | Creates a message. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#create_a_message Create a message>. Requires <https://developers.google.com/chat/api/guides/auth authentication>. Fully supports <https://developers.google.com/chat/api/guides/auth/service-accounts service account authentication>. Supports <https://developers.google.com/chat/api/guides/auth/users user authentication> as part of the <https://developers.google.com/workspace/preview Google Workspace Developer Preview Program>, which grants early access to certain features. <https://developers.google.com/chat/api/guides/auth/users User authentication> requires the @chat.messages@ or @chat.messages.create@ authorization scope. Because Chat provides authentication for <https://developers.google.com/chat/how-tos/webhooks webhooks> as part of the URL that\'s generated when a webhook is registered, webhooks can create messages without a service account or user authentication.
+-- | Creates a message in a Google Chat space. For an example, see <https://developers.google.com/workspace/chat/create-messages Send a message>. The @create()@ method requires either <https://developers.google.com/workspace/chat/authenticate-authorize-chat-user user authentication> or <https://developers.google.com/workspace/chat/authorize-import app authentication>. Chat attributes the message sender differently depending on the type of authentication that you use in your request. The following image shows how Chat attributes a message when you use app authentication. Chat displays the Chat app as the message sender. The content of the message can contain text (@text@), cards (@cardsV2@), and accessory widgets (@accessoryWidgets@). <<https://developers.google.com/workspace/chat/images/message-app-auth.svg Message sent with app authentication>> The following image shows how Chat attributes a message when you use user authentication. Chat displays the user as the message sender and attributes the Chat app to the
+-- message by displaying its name. The content of message can only contain text (@text@). <<https://developers.google.com/workspace/chat/images/message-user-auth.svg Message sent with user authentication>> The maximum message size, including the message contents, is 32,000 bytes. For <https://developers.google.com/workspace/chat/quickstart/webhooks webhook> requests, the response doesn\'t contain the full message. The response only populates the @name@ and @thread.name@ fields in addition to the information that was in the request.
 --
 -- /See:/ 'newChatSpacesMessagesCreate' smart constructor.
 data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
@@ -73,17 +73,17 @@ data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Optional. A custom name for a Chat message assigned at creation. Must start with @client-@ and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message Name a created message>.
+    -- | Optional. A custom ID for a message. Lets Chat apps get, update, or delete a message without needing to store the system-assigned ID in the message\'s resource name (represented in the message @name@ field). The value for this field must meet the following requirements: * Begins with @client-@. For example, @client-custom-name@ is a valid custom ID, but @custom-name@ is not. * Contains up to 63 characters and only lowercase letters, numbers, and hyphens. * Is unique within a space. A Chat app can\'t use the same custom ID for different messages. For details, see <https://developers.google.com/workspace/chat/create-messages#name_a_created_message Name a message>.
     messageId :: (Core.Maybe Core.Text),
-    -- | Optional. Specifies whether a message starts a thread or replies to one. Only supported in named spaces.
+    -- | Optional. Specifies whether a message starts a thread or replies to one. Only supported in named spaces. When <https://developers.google.com/workspace/chat/receive-respond-interactions responding to user interactions>, this field is ignored. For interactions within a thread, the reply is created in the same thread. Otherwise, the reply is created as a new thread.
     messageReplyOption :: (Core.Maybe SpacesMessagesCreateMessageReplyOption),
-    -- | Required. The resource name of the space in which to create a message. Format: spaces\/{space}
+    -- | Required. The resource name of the space in which to create a message. Format: @spaces\/{space}@
     parent :: Core.Text,
     -- | Multipart request metadata.
     payload :: Message,
     -- | Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
     requestId :: (Core.Maybe Core.Text),
-    -- | Optional. Deprecated: Use thread.thread_key instead. Opaque thread identifier. To start or add to a thread, create a message and specify a @threadKey@ or the thread.name. For example usage, see <https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread Start or reply to a message thread>.
+    -- | Optional. Deprecated: Use thread.thread_key instead. ID for the thread. Supports up to 4000 characters. To start or add to a thread, create a message and specify a @threadKey@ or the thread.name. For example usage, see <https://developers.google.com/workspace/chat/create-messages#create-message-thread Start or reply to a message thread>.
     threadKey :: (Core.Maybe Core.Text),
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -94,7 +94,7 @@ data ChatSpacesMessagesCreate = ChatSpacesMessagesCreate
 
 -- | Creates a value of 'ChatSpacesMessagesCreate' with the minimum fields required to make a request.
 newChatSpacesMessagesCreate ::
-  -- |  Required. The resource name of the space in which to create a message. Format: spaces\/{space} See 'parent'.
+  -- |  Required. The resource name of the space in which to create a message. Format: @spaces\/{space}@ See 'parent'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Message ->
@@ -118,7 +118,7 @@ instance Core.GoogleRequest ChatSpacesMessagesCreate where
   type Rs ChatSpacesMessagesCreate = Message
   type
     Scopes ChatSpacesMessagesCreate =
-      '[Chat'Bot, Chat'Messages, Chat'Messages'Create]
+      '[Chat'Bot, Chat'Import, Chat'Messages, Chat'Messages'Create]
   requestClient ChatSpacesMessagesCreate {..} =
     go
       parent
@@ -137,7 +137,5 @@ instance Core.GoogleRequest ChatSpacesMessagesCreate where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy ChatSpacesMessagesCreateResource
-          )
+          (Core.Proxy :: Core.Proxy ChatSpacesMessagesCreateResource)
           Core.mempty

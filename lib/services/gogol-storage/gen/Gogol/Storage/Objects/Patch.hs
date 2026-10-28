@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Objects.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Objects.Patch
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.objects.patch@ method which the
@@ -56,9 +54,8 @@ type StorageObjectsPatchResource =
     Core.:> Core.QueryParam "ifGenerationNotMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
-    Core.:> Core.QueryParam
-              "predefinedAcl"
-              ObjectsPatchPredefinedAcl
+    Core.:> Core.QueryParam "overrideUnlockedRetention" Core.Bool
+    Core.:> Core.QueryParam "predefinedAcl" ObjectsPatchPredefinedAcl
     Core.:> Core.QueryParam "projection" ObjectsPatchProjection
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
@@ -82,8 +79,10 @@ data StorageObjectsPatch = StorageObjectsPatch
     ifMetagenerationMatch :: (Core.Maybe Core.Int64),
     -- | Makes the operation conditional on whether the object\'s current metageneration does not match the given value.
     ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
-    -- | Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+    -- | Name of the object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>.
     object :: Core.Text,
+    -- | Must be true to remove the retention configuration, reduce its unlocked retention period, or change its mode from unlocked to locked.
+    overrideUnlockedRetention :: (Core.Maybe Core.Bool),
     -- | Multipart request metadata.
     payload :: Object,
     -- | Apply a predefined set of access controls to this object.
@@ -101,7 +100,7 @@ data StorageObjectsPatch = StorageObjectsPatch
 newStorageObjectsPatch ::
   -- |  Name of the bucket in which the object resides. See 'bucket'.
   Core.Text ->
-  -- |  Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts. See 'object'.
+  -- |  Name of the object. For information about how to URL encode object names to be path safe, see <https://cloud.google.com/storage/docs/request-endpoints#encoding Encoding URI Path Parts>. See 'object'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Object ->
@@ -115,6 +114,7 @@ newStorageObjectsPatch bucket object payload =
       ifMetagenerationMatch = Core.Nothing,
       ifMetagenerationNotMatch = Core.Nothing,
       object = object,
+      overrideUnlockedRetention = Core.Nothing,
       payload = payload,
       predefinedAcl = Core.Nothing,
       projection = Core.Nothing,
@@ -136,6 +136,7 @@ instance Core.GoogleRequest StorageObjectsPatch where
       ifGenerationNotMatch
       ifMetagenerationMatch
       ifMetagenerationNotMatch
+      overrideUnlockedRetention
       predefinedAcl
       projection
       uploadType
@@ -146,7 +147,5 @@ instance Core.GoogleRequest StorageObjectsPatch where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy StorageObjectsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy StorageObjectsPatchResource)
           Core.mempty

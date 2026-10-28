@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Dataflow.Projects.Jobs.Aggregated
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- List the jobs of a project across all regions.
+-- List the jobs of a project across all regions. __Note:__ This method doesn\'t support filtering the list of jobs by name.
 --
 -- /See:/ <https://cloud.google.com/dataflow Dataflow API Reference> for @dataflow.projects.jobs.aggregated@.
 module Gogol.Dataflow.Projects.Jobs.Aggregated
@@ -40,7 +38,7 @@ module Gogol.Dataflow.Projects.Jobs.Aggregated
 where
 
 import Gogol.Dataflow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dataflow.projects.jobs.aggregated@ method which the
 -- 'DataflowProjectsJobsAggregated' request conforms to.
@@ -59,13 +57,11 @@ type DataflowProjectsJobsAggregatedResource =
     Core.:> Core.QueryParam "pageToken" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
-    Core.:> Core.QueryParam
-              "view"
-              ProjectsJobsAggregatedView
+    Core.:> Core.QueryParam "view" ProjectsJobsAggregatedView
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] ListJobsResponse
 
--- | List the jobs of a project across all regions.
+-- | List the jobs of a project across all regions. __Note:__ This method doesn\'t support filtering the list of jobs by name.
 --
 -- /See:/ 'newDataflowProjectsJobsAggregated' smart constructor.
 data DataflowProjectsJobsAggregated = DataflowProjectsJobsAggregated
@@ -79,7 +75,7 @@ data DataflowProjectsJobsAggregated = DataflowProjectsJobsAggregated
     filter :: (Core.Maybe ProjectsJobsAggregatedFilter),
     -- | The [regional endpoint] (https:\/\/cloud.google.com\/dataflow\/docs\/concepts\/regional-endpoints) that contains this job.
     location :: (Core.Maybe Core.Text),
-    -- | Optional. The job name. Optional.
+    -- | Optional. The job name.
     name :: (Core.Maybe Core.Text),
     -- | If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.
     pageSize :: (Core.Maybe Core.Int32),
@@ -117,20 +113,11 @@ newDataflowProjectsJobsAggregated projectId =
       view = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    DataflowProjectsJobsAggregated
-  where
-  type
-    Rs DataflowProjectsJobsAggregated =
-      ListJobsResponse
+instance Core.GoogleRequest DataflowProjectsJobsAggregated where
+  type Rs DataflowProjectsJobsAggregated = ListJobsResponse
   type
     Scopes DataflowProjectsJobsAggregated =
-      '[ CloudPlatform'FullControl,
-         Compute'FullControl,
-         Compute'Readonly,
-         Userinfo'Email
-       ]
+      '[CloudPlatform'FullControl, Compute'FullControl]
   requestClient DataflowProjectsJobsAggregated {..} =
     go
       projectId
@@ -150,7 +137,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy DataflowProjectsJobsAggregatedResource
-          )
+          (Core.Proxy :: Core.Proxy DataflowProjectsJobsAggregatedResource)
           Core.mempty

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Jobs.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.Jobs.Internal.Product
@@ -182,29 +180,9 @@ module Gogol.Jobs.Internal.Product
     MatchingJob (..),
     newMatchingJob,
 
-    -- * MendelDebugInput
-    MendelDebugInput (..),
-    newMendelDebugInput,
-
-    -- * MendelDebugInput_NamespacedDebugInput
-    MendelDebugInput_NamespacedDebugInput (..),
-    newMendelDebugInput_NamespacedDebugInput,
-
     -- * Money
     Money (..),
     newMoney,
-
-    -- * NamespacedDebugInput
-    NamespacedDebugInput (..),
-    newNamespacedDebugInput,
-
-    -- * NamespacedDebugInput_ForcedFlags
-    NamespacedDebugInput_ForcedFlags (..),
-    newNamespacedDebugInput_ForcedFlags,
-
-    -- * NamespacedDebugInput_ForcedRollouts
-    NamespacedDebugInput_ForcedRollouts (..),
-    newNamespacedDebugInput_ForcedRollouts,
 
     -- * Operation
     Operation (..),
@@ -269,7 +247,7 @@ module Gogol.Jobs.Internal.Product
 where
 
 import Gogol.Jobs.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | Application related details of a job posting.
 --
@@ -327,20 +305,18 @@ newtype BatchCreateJobsRequest = BatchCreateJobsRequest
 -- | Creates a value of 'BatchCreateJobsRequest' with the minimum fields required to make a request.
 newBatchCreateJobsRequest ::
   BatchCreateJobsRequest
-newBatchCreateJobsRequest = BatchCreateJobsRequest {jobs = Core.Nothing}
+newBatchCreateJobsRequest =
+  BatchCreateJobsRequest {jobs = Core.Nothing}
 
 instance Core.FromJSON BatchCreateJobsRequest where
   parseJSON =
     Core.withObject
       "BatchCreateJobsRequest"
-      ( \o ->
-          BatchCreateJobsRequest Core.<$> (o Core..:? "jobs")
-      )
+      (\o -> BatchCreateJobsRequest Core.<$> (o Core..:? "jobs"))
 
 instance Core.ToJSON BatchCreateJobsRequest where
   toJSON BatchCreateJobsRequest {..} =
-    Core.object
-      (Core.catMaybes [("jobs" Core..=) Core.<$> jobs])
+    Core.object (Core.catMaybes [("jobs" Core..=) Core.<$> jobs])
 
 -- | The result of JobService.BatchCreateJobs. It\'s used to replace google.longrunning.Operation.response in case of success.
 --
@@ -354,23 +330,19 @@ newtype BatchCreateJobsResponse = BatchCreateJobsResponse
 -- | Creates a value of 'BatchCreateJobsResponse' with the minimum fields required to make a request.
 newBatchCreateJobsResponse ::
   BatchCreateJobsResponse
-newBatchCreateJobsResponse = BatchCreateJobsResponse {jobResults = Core.Nothing}
+newBatchCreateJobsResponse =
+  BatchCreateJobsResponse {jobResults = Core.Nothing}
 
 instance Core.FromJSON BatchCreateJobsResponse where
   parseJSON =
     Core.withObject
       "BatchCreateJobsResponse"
-      ( \o ->
-          BatchCreateJobsResponse
-            Core.<$> (o Core..:? "jobResults")
-      )
+      (\o -> BatchCreateJobsResponse Core.<$> (o Core..:? "jobResults"))
 
 instance Core.ToJSON BatchCreateJobsResponse where
   toJSON BatchCreateJobsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("jobResults" Core..=) Core.<$> jobResults]
-      )
+      (Core.catMaybes [("jobResults" Core..=) Core.<$> jobResults])
 
 -- | Request to delete a batch of jobs.
 --
@@ -384,20 +356,18 @@ newtype BatchDeleteJobsRequest = BatchDeleteJobsRequest
 -- | Creates a value of 'BatchDeleteJobsRequest' with the minimum fields required to make a request.
 newBatchDeleteJobsRequest ::
   BatchDeleteJobsRequest
-newBatchDeleteJobsRequest = BatchDeleteJobsRequest {names = Core.Nothing}
+newBatchDeleteJobsRequest =
+  BatchDeleteJobsRequest {names = Core.Nothing}
 
 instance Core.FromJSON BatchDeleteJobsRequest where
   parseJSON =
     Core.withObject
       "BatchDeleteJobsRequest"
-      ( \o ->
-          BatchDeleteJobsRequest Core.<$> (o Core..:? "names")
-      )
+      (\o -> BatchDeleteJobsRequest Core.<$> (o Core..:? "names"))
 
 instance Core.ToJSON BatchDeleteJobsRequest where
   toJSON BatchDeleteJobsRequest {..} =
-    Core.object
-      (Core.catMaybes [("names" Core..=) Core.<$> names])
+    Core.object (Core.catMaybes [("names" Core..=) Core.<$> names])
 
 -- | The result of JobService.BatchDeleteJobs. It\'s used to replace google.longrunning.Operation.response in case of success.
 --
@@ -411,23 +381,19 @@ newtype BatchDeleteJobsResponse = BatchDeleteJobsResponse
 -- | Creates a value of 'BatchDeleteJobsResponse' with the minimum fields required to make a request.
 newBatchDeleteJobsResponse ::
   BatchDeleteJobsResponse
-newBatchDeleteJobsResponse = BatchDeleteJobsResponse {jobResults = Core.Nothing}
+newBatchDeleteJobsResponse =
+  BatchDeleteJobsResponse {jobResults = Core.Nothing}
 
 instance Core.FromJSON BatchDeleteJobsResponse where
   parseJSON =
     Core.withObject
       "BatchDeleteJobsResponse"
-      ( \o ->
-          BatchDeleteJobsResponse
-            Core.<$> (o Core..:? "jobResults")
-      )
+      (\o -> BatchDeleteJobsResponse Core.<$> (o Core..:? "jobResults"))
 
 instance Core.ToJSON BatchDeleteJobsResponse where
   toJSON BatchDeleteJobsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("jobResults" Core..=) Core.<$> jobResults]
-      )
+      (Core.catMaybes [("jobResults" Core..=) Core.<$> jobResults])
 
 -- | Metadata used for long running operations returned by CTS batch APIs. It\'s used to replace google.longrunning.Operation.metadata.
 --
@@ -491,8 +457,7 @@ instance Core.ToJSON BatchOperationMetadata where
             ("endTime" Core..=) Core.<$> endTime,
             ("failureCount" Core..=) Core.<$> failureCount,
             ("state" Core..=) Core.<$> state,
-            ("stateDescription" Core..=)
-              Core.<$> stateDescription,
+            ("stateDescription" Core..=) Core.<$> stateDescription,
             ("successCount" Core..=) Core.<$> successCount,
             ("totalCount" Core..=) Core.<$> totalCount,
             ("updateTime" Core..=) Core.<$> updateTime
@@ -514,7 +479,10 @@ data BatchUpdateJobsRequest = BatchUpdateJobsRequest
 newBatchUpdateJobsRequest ::
   BatchUpdateJobsRequest
 newBatchUpdateJobsRequest =
-  BatchUpdateJobsRequest {jobs = Core.Nothing, updateMask = Core.Nothing}
+  BatchUpdateJobsRequest
+    { jobs = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON BatchUpdateJobsRequest where
   parseJSON =
@@ -547,23 +515,19 @@ newtype BatchUpdateJobsResponse = BatchUpdateJobsResponse
 -- | Creates a value of 'BatchUpdateJobsResponse' with the minimum fields required to make a request.
 newBatchUpdateJobsResponse ::
   BatchUpdateJobsResponse
-newBatchUpdateJobsResponse = BatchUpdateJobsResponse {jobResults = Core.Nothing}
+newBatchUpdateJobsResponse =
+  BatchUpdateJobsResponse {jobResults = Core.Nothing}
 
 instance Core.FromJSON BatchUpdateJobsResponse where
   parseJSON =
     Core.withObject
       "BatchUpdateJobsResponse"
-      ( \o ->
-          BatchUpdateJobsResponse
-            Core.<$> (o Core..:? "jobResults")
-      )
+      (\o -> BatchUpdateJobsResponse Core.<$> (o Core..:? "jobResults"))
 
 instance Core.ToJSON BatchUpdateJobsResponse where
   toJSON BatchUpdateJobsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("jobResults" Core..=) Core.<$> jobResults]
-      )
+      (Core.catMaybes [("jobResults" Core..=) Core.<$> jobResults])
 
 -- | An event issued when an end user interacts with the application that implements Cloud Talent Solution. Providing this information improves the quality of results for the API clients, enabling the service to perform optimally. The number of events sent must be consistent with other calls, such as job searches, issued to the service by the client.
 --
@@ -674,8 +638,7 @@ instance Core.ToJSON CommuteFilter where
             ("commuteMethod" Core..=) Core.<$> commuteMethod,
             ("departureTime" Core..=) Core.<$> departureTime,
             ("roadTraffic" Core..=) Core.<$> roadTraffic,
-            ("startCoordinates" Core..=)
-              Core.<$> startCoordinates,
+            ("startCoordinates" Core..=) Core.<$> startCoordinates,
             ("travelDuration" Core..=) Core.<$> travelDuration
           ]
       )
@@ -695,7 +658,10 @@ data CommuteInfo = CommuteInfo
 newCommuteInfo ::
   CommuteInfo
 newCommuteInfo =
-  CommuteInfo {jobLocation = Core.Nothing, travelDuration = Core.Nothing}
+  CommuteInfo
+    { jobLocation = Core.Nothing,
+      travelDuration = Core.Nothing
+    }
 
 instance Core.FromJSON CommuteInfo where
   parseJSON =
@@ -799,8 +765,7 @@ instance Core.ToJSON Company where
             ("displayName" Core..=) Core.<$> displayName,
             ("eeoText" Core..=) Core.<$> eeoText,
             ("externalId" Core..=) Core.<$> externalId,
-            ("headquartersAddress" Core..=)
-              Core.<$> headquartersAddress,
+            ("headquartersAddress" Core..=) Core.<$> headquartersAddress,
             ("hiringAgency" Core..=) Core.<$> hiringAgency,
             ("imageUri" Core..=) Core.<$> imageUri,
             ("keywordSearchableJobCustomAttributes" Core..=)
@@ -824,24 +789,22 @@ newtype CompanyDerivedInfo = CompanyDerivedInfo
 -- | Creates a value of 'CompanyDerivedInfo' with the minimum fields required to make a request.
 newCompanyDerivedInfo ::
   CompanyDerivedInfo
-newCompanyDerivedInfo = CompanyDerivedInfo {headquartersLocation = Core.Nothing}
+newCompanyDerivedInfo =
+  CompanyDerivedInfo {headquartersLocation = Core.Nothing}
 
 instance Core.FromJSON CompanyDerivedInfo where
   parseJSON =
     Core.withObject
       "CompanyDerivedInfo"
       ( \o ->
-          CompanyDerivedInfo
-            Core.<$> (o Core..:? "headquartersLocation")
+          CompanyDerivedInfo Core.<$> (o Core..:? "headquartersLocation")
       )
 
 instance Core.ToJSON CompanyDerivedInfo where
   toJSON CompanyDerivedInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("headquartersLocation" Core..=)
-              Core.<$> headquartersLocation
-          ]
+          [("headquartersLocation" Core..=) Core.<$> headquartersLocation]
       )
 
 -- | A compensation entry that represents one component of compensation, such as base pay, bonus, or other compensation type. Annualization: One compensation entry can be annualized if - it contains valid amount or range. - and its expected/units/per/year is set or can be derived. Its annualized range is determined as (amount or range) times expected/units/per/year.
@@ -896,8 +859,7 @@ instance Core.ToJSON CompensationEntry where
       ( Core.catMaybes
           [ ("amount" Core..=) Core.<$> amount,
             ("description" Core..=) Core.<$> description,
-            ("expectedUnitsPerYear" Core..=)
-              Core.<$> expectedUnitsPerYear,
+            ("expectedUnitsPerYear" Core..=) Core.<$> expectedUnitsPerYear,
             ("range" Core..=) Core.<$> range,
             ("type" Core..=) Core.<$> type',
             ("unit" Core..=) Core.<$> unit
@@ -924,7 +886,8 @@ newCompensationFilter ::
   CompensationFilter
 newCompensationFilter =
   CompensationFilter
-    { includeJobsWithUnspecifiedCompensationRange = Core.Nothing,
+    { includeJobsWithUnspecifiedCompensationRange =
+        Core.Nothing,
       range = Core.Nothing,
       type' = Core.Nothing,
       units = Core.Nothing
@@ -936,9 +899,7 @@ instance Core.FromJSON CompensationFilter where
       "CompensationFilter"
       ( \o ->
           CompensationFilter
-            Core.<$> ( o
-                         Core..:? "includeJobsWithUnspecifiedCompensationRange"
-                     )
+            Core.<$> (o Core..:? "includeJobsWithUnspecifiedCompensationRange")
             Core.<*> (o Core..:? "range")
             Core.<*> (o Core..:? "type")
             Core.<*> (o Core..:? "units")
@@ -948,9 +909,7 @@ instance Core.ToJSON CompensationFilter where
   toJSON CompensationFilter {..} =
     Core.object
       ( Core.catMaybes
-          [ ( "includeJobsWithUnspecifiedCompensationRange"
-                Core..=
-            )
+          [ ("includeJobsWithUnspecifiedCompensationRange" Core..=)
               Core.<$> includeJobsWithUnspecifiedCompensationRange,
             ("range" Core..=) Core.<$> range,
             ("type" Core..=) Core.<$> type',
@@ -1038,10 +997,8 @@ instance Core.ToJSON CompensationRange where
   toJSON CompensationRange {..} =
     Core.object
       ( Core.catMaybes
-          [ ("maxCompensation" Core..=)
-              Core.<$> maxCompensation,
-            ("minCompensation" Core..=)
-              Core.<$> minCompensation
+          [ ("maxCompensation" Core..=) Core.<$> maxCompensation,
+            ("minCompensation" Core..=) Core.<$> minCompensation
           ]
       )
 
@@ -1079,8 +1036,7 @@ instance Core.ToJSON CompleteQueryResponse where
   toJSON CompleteQueryResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("completionResults" Core..=)
-              Core.<$> completionResults,
+          [ ("completionResults" Core..=) Core.<$> completionResults,
             ("metadata" Core..=) Core.<$> metadata
           ]
       )
@@ -1163,7 +1119,8 @@ instance Core.FromJSON CustomAttribute where
           CustomAttribute
             Core.<$> (o Core..:? "filterable")
             Core.<*> (o Core..:? "keywordSearchable")
-            Core.<*> ( o Core..:? "longValues"
+            Core.<*> ( o
+                         Core..:? "longValues"
                          Core.<&> Core.fmap (Core.fmap Core.fromAsText)
                      )
             Core.<*> (o Core..:? "stringValues")
@@ -1174,9 +1131,9 @@ instance Core.ToJSON CustomAttribute where
     Core.object
       ( Core.catMaybes
           [ ("filterable" Core..=) Core.<$> filterable,
-            ("keywordSearchable" Core..=)
-              Core.<$> keywordSearchable,
-            ("longValues" Core..=) Core.. Core.fmap Core.AsText
+            ("keywordSearchable" Core..=) Core.<$> keywordSearchable,
+            ("longValues" Core..=)
+              Core.. Core.fmap Core.AsText
               Core.<$> longValues,
             ("stringValues" Core..=) Core.<$> stringValues
           ]
@@ -1216,10 +1173,8 @@ instance Core.ToJSON CustomRankingInfo where
   toJSON CustomRankingInfo {..} =
     Core.object
       ( Core.catMaybes
-          [ ("importanceLevel" Core..=)
-              Core.<$> importanceLevel,
-            ("rankingExpression" Core..=)
-              Core.<$> rankingExpression
+          [ ("importanceLevel" Core..=) Core.<$> importanceLevel,
+            ("rankingExpression" Core..=) Core.<$> rankingExpression
           ]
       )
 
@@ -1237,7 +1192,8 @@ data DeviceInfo = DeviceInfo
 -- | Creates a value of 'DeviceInfo' with the minimum fields required to make a request.
 newDeviceInfo ::
   DeviceInfo
-newDeviceInfo = DeviceInfo {deviceType = Core.Nothing, id = Core.Nothing}
+newDeviceInfo =
+  DeviceInfo {deviceType = Core.Nothing, id = Core.Nothing}
 
 instance Core.FromJSON DeviceInfo where
   parseJSON =
@@ -1245,7 +1201,8 @@ instance Core.FromJSON DeviceInfo where
       "DeviceInfo"
       ( \o ->
           DeviceInfo
-            Core.<$> (o Core..:? "deviceType") Core.<*> (o Core..:? "id")
+            Core.<$> (o Core..:? "deviceType")
+            Core.<*> (o Core..:? "id")
       )
 
 instance Core.ToJSON DeviceInfo where
@@ -1269,8 +1226,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -1293,10 +1249,7 @@ instance Core.FromJSON HistogramQuery where
   parseJSON =
     Core.withObject
       "HistogramQuery"
-      ( \o ->
-          HistogramQuery
-            Core.<$> (o Core..:? "histogramQuery")
-      )
+      (\o -> HistogramQuery Core.<$> (o Core..:? "histogramQuery"))
 
 instance Core.ToJSON HistogramQuery where
   toJSON HistogramQuery {..} =
@@ -1320,7 +1273,10 @@ data HistogramQueryResult = HistogramQueryResult
 newHistogramQueryResult ::
   HistogramQueryResult
 newHistogramQueryResult =
-  HistogramQueryResult {histogram = Core.Nothing, histogramQuery = Core.Nothing}
+  HistogramQueryResult
+    { histogram = Core.Nothing,
+      histogramQuery = Core.Nothing
+    }
 
 instance Core.FromJSON HistogramQueryResult where
   parseJSON =
@@ -1345,8 +1301,7 @@ instance Core.ToJSON HistogramQueryResult where
 --
 -- /See:/ 'newHistogramQueryResult_Histogram' smart constructor.
 newtype HistogramQueryResult_Histogram = HistogramQueryResult_Histogram
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Int64)
+  { additional :: (Core.HashMap Core.Text Core.Int64)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1363,13 +1318,11 @@ instance Core.FromJSON HistogramQueryResult_Histogram where
     Core.withObject
       "HistogramQueryResult_Histogram"
       ( \o ->
-          HistogramQueryResult_Histogram
-            Core.<$> (Core.parseJSONObject o)
+          HistogramQueryResult_Histogram Core.<$> (Core.parseJSONObject o)
       )
 
 instance Core.ToJSON HistogramQueryResult_Histogram where
-  toJSON HistogramQueryResult_Histogram {..} =
-    Core.toJSON additional
+  toJSON HistogramQueryResult_Histogram {..} = Core.toJSON additional
 
 -- | A Job resource represents a job posting (also referred to as a \"job listing\" or \"job requisition\"). A job belongs to a Company, which is the hiring entity responsible for the job.
 --
@@ -1415,7 +1368,7 @@ data Job = Job
     -- | Output only. The timestamp when this job posting was created.
     postingCreateTime :: (Core.Maybe Core.DateTime),
     -- | Strongly recommended for the best service experience. The expiration timestamp of the job. After this timestamp, the job is marked as expired, and it no longer appears in search results. The expired job can\'t be listed by the ListJobs API, but it can be retrieved with the GetJob API or updated with the UpdateJob API or deleted with the DeleteJob API. An expired job can be updated and opened again by using a future expiration timestamp. Updating an expired job fails if there is another existing open job with same company, language/code and requisition/id. The expired jobs are retained in our system for 90 days. However, the overall expired job count cannot exceed 3 times the maximum number of open jobs over previous 7 days. If this threshold is exceeded, expired jobs are cleaned out in order of earliest expire time. Expired jobs are no longer accessible after they are cleaned out. Invalid timestamps are ignored, and treated as expire time not provided. If the timestamp is before the instant request is made,
-    -- the job is treated as expired immediately on creation. This kind of job can not be updated. And when creating a job with past timestamp, the posting/publish/time must be set before posting/expire/time. The purpose of this feature is to allow other objects, such as Application, to refer a job that didn\'t exist in the system prior to becoming expired. If you want to modify a job that was expired on creation, delete it and create a new one. If this value isn\'t provided at the time of job creation or is invalid, the job posting expires after 30 days from the job\'s creation time. For example, if the job was created on 2017\/01\/01 13:00AM UTC with an unspecified expiration date, the job expires after 2017\/01\/31 13:00AM UTC. If this value isn\'t provided on job update, it depends on the field masks set by UpdateJobRequest.update/mask. If the field masks include job/end_time, or the masks are empty meaning that every field is updated, the job posting expires after 30 days from the job\'s last update time.
+    -- the job is treated as expired immediately on creation. This kind of job can not be updated. And when creating a job with past timestamp, the posting/publish/time must be set before posting/expire/time. The purpose of this feature is to allow other objects, such as ApplicationInfo, to refer a job that didn\'t exist in the system prior to becoming expired. If you want to modify a job that was expired on creation, delete it and create a new one. If this value isn\'t provided at the time of job creation or is invalid, the job posting expires after 30 days from the job\'s creation time. For example, if the job was created on 2017\/01\/01 13:00AM UTC with an unspecified expiration date, the job expires after 2017\/01\/31 13:00AM UTC. If this value isn\'t provided on job update, it depends on the field masks set by UpdateJobRequest.update/mask. If the field masks include job/end_time, or the masks are empty meaning that every field is updated, the job posting expires after 30 days from the job\'s last update time.
     -- Otherwise the expiration date isn\'t updated.
     postingExpireTime :: (Core.Maybe Core.DateTime),
     -- | The timestamp this job posting was most recently published. The default value is the time the request arrives at the server. Invalid timestamps are ignored.
@@ -1523,12 +1476,9 @@ instance Core.ToJSON Job where
           [ ("addresses" Core..=) Core.<$> addresses,
             ("applicationInfo" Core..=) Core.<$> applicationInfo,
             ("company" Core..=) Core.<$> company,
-            ("companyDisplayName" Core..=)
-              Core.<$> companyDisplayName,
-            ("compensationInfo" Core..=)
-              Core.<$> compensationInfo,
-            ("customAttributes" Core..=)
-              Core.<$> customAttributes,
+            ("companyDisplayName" Core..=) Core.<$> companyDisplayName,
+            ("compensationInfo" Core..=) Core.<$> compensationInfo,
+            ("customAttributes" Core..=) Core.<$> customAttributes,
             ("degreeTypes" Core..=) Core.<$> degreeTypes,
             ("department" Core..=) Core.<$> department,
             ("derivedInfo" Core..=) Core.<$> derivedInfo,
@@ -1541,22 +1491,16 @@ instance Core.ToJSON Job where
             ("jobStartTime" Core..=) Core.<$> jobStartTime,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("name" Core..=) Core.<$> name,
-            ("postingCreateTime" Core..=)
-              Core.<$> postingCreateTime,
-            ("postingExpireTime" Core..=)
-              Core.<$> postingExpireTime,
-            ("postingPublishTime" Core..=)
-              Core.<$> postingPublishTime,
+            ("postingCreateTime" Core..=) Core.<$> postingCreateTime,
+            ("postingExpireTime" Core..=) Core.<$> postingExpireTime,
+            ("postingPublishTime" Core..=) Core.<$> postingPublishTime,
             ("postingRegion" Core..=) Core.<$> postingRegion,
-            ("postingUpdateTime" Core..=)
-              Core.<$> postingUpdateTime,
-            ("processingOptions" Core..=)
-              Core.<$> processingOptions,
+            ("postingUpdateTime" Core..=) Core.<$> postingUpdateTime,
+            ("processingOptions" Core..=) Core.<$> processingOptions,
             ("promotionValue" Core..=) Core.<$> promotionValue,
             ("qualifications" Core..=) Core.<$> qualifications,
             ("requisitionId" Core..=) Core.<$> requisitionId,
-            ("responsibilities" Core..=)
-              Core.<$> responsibilities,
+            ("responsibilities" Core..=) Core.<$> responsibilities,
             ("title" Core..=) Core.<$> title,
             ("visibility" Core..=) Core.<$> visibility
           ]
@@ -1566,8 +1510,7 @@ instance Core.ToJSON Job where
 --
 -- /See:/ 'newJob_CustomAttributes' smart constructor.
 newtype Job_CustomAttributes = Job_CustomAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text CustomAttribute)
+  { additional :: (Core.HashMap Core.Text CustomAttribute)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1583,14 +1526,10 @@ instance Core.FromJSON Job_CustomAttributes where
   parseJSON =
     Core.withObject
       "Job_CustomAttributes"
-      ( \o ->
-          Job_CustomAttributes
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Job_CustomAttributes Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Job_CustomAttributes where
-  toJSON Job_CustomAttributes {..} =
-    Core.toJSON additional
+  toJSON Job_CustomAttributes {..} = Core.toJSON additional
 
 -- | Derived details about the job posting.
 --
@@ -1607,7 +1546,10 @@ data JobDerivedInfo = JobDerivedInfo
 newJobDerivedInfo ::
   JobDerivedInfo
 newJobDerivedInfo =
-  JobDerivedInfo {jobCategories = Core.Nothing, locations = Core.Nothing}
+  JobDerivedInfo
+    { jobCategories = Core.Nothing,
+      locations = Core.Nothing
+    }
 
 instance Core.FromJSON JobDerivedInfo where
   parseJSON =
@@ -1649,17 +1591,14 @@ instance Core.FromJSON JobEvent where
     Core.withObject
       "JobEvent"
       ( \o ->
-          JobEvent
-            Core.<$> (o Core..:? "jobs") Core.<*> (o Core..:? "type")
+          JobEvent Core.<$> (o Core..:? "jobs") Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON JobEvent where
   toJSON JobEvent {..} =
     Core.object
       ( Core.catMaybes
-          [ ("jobs" Core..=) Core.<$> jobs,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("jobs" Core..=) Core.<$> jobs, ("type" Core..=) Core.<$> type']
       )
 
 -- | The query required to perform a search query.
@@ -1674,7 +1613,7 @@ data JobQuery = JobQuery
     companyDisplayNames :: (Core.Maybe [Core.Text]),
     -- | This search filter is applied only to Job.compensation_info. For example, if the filter is specified as \"Hourly job with per-hour compensation > $15\", only jobs meeting these criteria are searched. If a filter isn\'t defined, all open jobs are searched.
     compensationFilter :: (Core.Maybe CompensationFilter),
-    -- | This filter specifies a structured syntax to match against the Job.custom_attributes marked as @filterable@. The syntax for this expression is a subset of SQL syntax. Supported operators are: @=@, @!=@, @\<@, @\<=@, @>@, and @>=@ where the left of the operator is a custom field key and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\") characters. Supported functions are @LOWER([field_name])@ to perform a case insensitive match and @EMPTY([field_name])@ to filter on the existence of a key. Boolean expressions (AND\/OR\/NOT) are supported up to 3 levels of nesting (for example, \"((A AND B AND C) OR NOT D) AND E\"), a maximum of 100 comparisons or functions are allowed in the expression. The expression must be \< 10000 bytes in length. Sample Query: @(LOWER(driving_license)=\"class \\\"a\\\"\" OR EMPTY(driving_license)) AND driving_years > 10@
+    -- | This filter specifies a structured syntax to match against the Job.custom_attributes marked as @filterable@. The syntax for this expression is a subset of SQL syntax. Supported operators are: @=@, @!=@, @\<@, @\<=@, @>@, and @>=@ where the left of the operator is a custom field key and the right of the operator is a number or a quoted string. You must escape backslash (\\) and quote (\\\") characters. Supported functions are @LOWER([field_name])@ to perform a case insensitive match and @EMPTY([field_name])@ to filter on the existence of a key. Boolean expressions (AND\/OR\/NOT) are supported up to 3 levels of nesting (for example, \"((A AND B AND C) OR NOT D) AND E\"), a maximum of 100 comparisons or functions are allowed in the expression. The expression must be \< 10000 bytes in length. Sample Query: @(LOWER(driving_license)=\"class \\\"a\\\"\" OR EMPTY(driving_license)) AND driving_years > 10@
     customAttributeFilter :: (Core.Maybe Core.Text),
     -- | This flag controls the spell-check feature. If false, the service attempts to correct a misspelled query, for example, \"enginee\" is corrected to \"engineer\". Defaults to false: a spell check is performed.
     disableSpellCheck :: (Core.Maybe Core.Bool),
@@ -1746,24 +1685,18 @@ instance Core.ToJSON JobQuery where
       ( Core.catMaybes
           [ ("commuteFilter" Core..=) Core.<$> commuteFilter,
             ("companies" Core..=) Core.<$> companies,
-            ("companyDisplayNames" Core..=)
-              Core.<$> companyDisplayNames,
-            ("compensationFilter" Core..=)
-              Core.<$> compensationFilter,
-            ("customAttributeFilter" Core..=)
-              Core.<$> customAttributeFilter,
-            ("disableSpellCheck" Core..=)
-              Core.<$> disableSpellCheck,
+            ("companyDisplayNames" Core..=) Core.<$> companyDisplayNames,
+            ("compensationFilter" Core..=) Core.<$> compensationFilter,
+            ("customAttributeFilter" Core..=) Core.<$> customAttributeFilter,
+            ("disableSpellCheck" Core..=) Core.<$> disableSpellCheck,
             ("employmentTypes" Core..=) Core.<$> employmentTypes,
             ("excludedJobs" Core..=) Core.<$> excludedJobs,
             ("jobCategories" Core..=) Core.<$> jobCategories,
             ("languageCodes" Core..=) Core.<$> languageCodes,
             ("locationFilters" Core..=) Core.<$> locationFilters,
-            ("publishTimeRange" Core..=)
-              Core.<$> publishTimeRange,
+            ("publishTimeRange" Core..=) Core.<$> publishTimeRange,
             ("query" Core..=) Core.<$> query,
-            ("queryLanguageCode" Core..=)
-              Core.<$> queryLanguageCode
+            ("queryLanguageCode" Core..=) Core.<$> queryLanguageCode
           ]
       )
 
@@ -1789,16 +1722,15 @@ instance Core.FromJSON JobResult where
       "JobResult"
       ( \o ->
           JobResult
-            Core.<$> (o Core..:? "job") Core.<*> (o Core..:? "status")
+            Core.<$> (o Core..:? "job")
+            Core.<*> (o Core..:? "status")
       )
 
 instance Core.ToJSON JobResult where
   toJSON JobResult {..} =
     Core.object
       ( Core.catMaybes
-          [ ("job" Core..=) Core.<$> job,
-            ("status" Core..=) Core.<$> status
-          ]
+          [("job" Core..=) Core.<$> job, ("status" Core..=) Core.<$> status]
       )
 
 -- | An object that represents a latitude\/longitude pair. This is expressed as a pair of doubles to represent degrees latitude and degrees longitude. Unless specified otherwise, this object must conform to the WGS84 standard. Values must be within normalized ranges.
@@ -1815,7 +1747,8 @@ data LatLng = LatLng
 -- | Creates a value of 'LatLng' with the minimum fields required to make a request.
 newLatLng ::
   LatLng
-newLatLng = LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
+newLatLng =
+  LatLng {latitude = Core.Nothing, longitude = Core.Nothing}
 
 instance Core.FromJSON LatLng where
   parseJSON =
@@ -2029,7 +1962,7 @@ data LocationFilter = LocationFilter
     latLng :: (Core.Maybe LatLng),
     -- | CLDR region code of the country\/region. This field may be used in two ways: 1) If telecommute preference is not set, this field is used address ambiguity of the user-input address. For example, \"Liverpool\" may refer to \"Liverpool, NY, US\" or \"Liverpool, UK\". This region code biases the address resolution toward a specific country or territory. If this field is not set, address resolution is biased toward the United States by default. 2) If telecommute preference is set to TELECOMMUTE/ALLOWED, the telecommute location filter will be limited to the region specified in this field. If this field is not set, the telecommute job locations will not be See https:\/\/unicode-org.github.io\/cldr-staging\/charts\/latest\/supplemental\/territory/information.html for details. Example: \"CH\" for Switzerland.
     regionCode :: (Core.Maybe Core.Text),
-    -- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or latlng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
+    -- | Allows the client to return jobs without a set location, specifically, telecommuting jobs (telecommuting is considered by the service as a special location). Job.posting/region indicates if a job permits telecommuting. If this field is set to TelecommutePreference.TELECOMMUTE/ALLOWED, telecommuting jobs are searched, and address and lat/lng are ignored. If not set or set to TelecommutePreference.TELECOMMUTE/EXCLUDED, the telecommute status of the jobs is ignored. Jobs that have PostingRegion.TELECOMMUTE and have additional Job.addresses may still be matched based on other location filters using address or lat_lng. This filter can be used by itself to search exclusively for telecommuting jobs, or it can be combined with another location filter to search for a combination of job locations, such as \"Mountain View\" or \"telecommuting\" jobs. However, when used in combination with other location filters, telecommuting jobs can be treated as less relevant than other jobs in the search response. This field is only
     -- used for job search requests.
     telecommutePreference :: (Core.Maybe LocationFilter_TelecommutePreference)
   }
@@ -2068,8 +2001,7 @@ instance Core.ToJSON LocationFilter where
             ("distanceInMiles" Core..=) Core.<$> distanceInMiles,
             ("latLng" Core..=) Core.<$> latLng,
             ("regionCode" Core..=) Core.<$> regionCode,
-            ("telecommutePreference" Core..=)
-              Core.<$> telecommutePreference
+            ("telecommutePreference" Core..=) Core.<$> telecommutePreference
           ]
       )
 
@@ -2123,78 +2055,9 @@ instance Core.ToJSON MatchingJob where
             ("job" Core..=) Core.<$> job,
             ("jobSummary" Core..=) Core.<$> jobSummary,
             ("jobTitleSnippet" Core..=) Core.<$> jobTitleSnippet,
-            ("searchTextSnippet" Core..=)
-              Core.<$> searchTextSnippet
+            ("searchTextSnippet" Core..=) Core.<$> searchTextSnippet
           ]
       )
-
--- | Message representing input to a Mendel server for debug forcing. See go\/mendel-debug-forcing for more details. Next ID: 2
---
--- /See:/ 'newMendelDebugInput' smart constructor.
-newtype MendelDebugInput = MendelDebugInput
-  { -- | When a request spans multiple servers, a MendelDebugInput may travel with the request and take effect in all the servers. This field is a map of namespaces to NamespacedMendelDebugInput protos. In a single server, up to two NamespacedMendelDebugInput protos are applied: 1. NamespacedMendelDebugInput with the global namespace (key == \"\"). 2. NamespacedMendelDebugInput with the server\'s namespace. When both NamespacedMendelDebugInput protos are present, they are merged. See go\/mendel-debug-forcing for more details.
-    namespacedDebugInput :: (Core.Maybe MendelDebugInput_NamespacedDebugInput)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MendelDebugInput' with the minimum fields required to make a request.
-newMendelDebugInput ::
-  MendelDebugInput
-newMendelDebugInput = MendelDebugInput {namespacedDebugInput = Core.Nothing}
-
-instance Core.FromJSON MendelDebugInput where
-  parseJSON =
-    Core.withObject
-      "MendelDebugInput"
-      ( \o ->
-          MendelDebugInput
-            Core.<$> (o Core..:? "namespacedDebugInput")
-      )
-
-instance Core.ToJSON MendelDebugInput where
-  toJSON MendelDebugInput {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("namespacedDebugInput" Core..=)
-              Core.<$> namespacedDebugInput
-          ]
-      )
-
--- | When a request spans multiple servers, a MendelDebugInput may travel with the request and take effect in all the servers. This field is a map of namespaces to NamespacedMendelDebugInput protos. In a single server, up to two NamespacedMendelDebugInput protos are applied: 1. NamespacedMendelDebugInput with the global namespace (key == \"\"). 2. NamespacedMendelDebugInput with the server\'s namespace. When both NamespacedMendelDebugInput protos are present, they are merged. See go\/mendel-debug-forcing for more details.
---
--- /See:/ 'newMendelDebugInput_NamespacedDebugInput' smart constructor.
-newtype MendelDebugInput_NamespacedDebugInput = MendelDebugInput_NamespacedDebugInput
-  { -- |
-    additional :: (Core.HashMap Core.Text NamespacedDebugInput)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'MendelDebugInput_NamespacedDebugInput' with the minimum fields required to make a request.
-newMendelDebugInput_NamespacedDebugInput ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text NamespacedDebugInput ->
-  MendelDebugInput_NamespacedDebugInput
-newMendelDebugInput_NamespacedDebugInput additional =
-  MendelDebugInput_NamespacedDebugInput {additional = additional}
-
-instance
-  Core.FromJSON
-    MendelDebugInput_NamespacedDebugInput
-  where
-  parseJSON =
-    Core.withObject
-      "MendelDebugInput_NamespacedDebugInput"
-      ( \o ->
-          MendelDebugInput_NamespacedDebugInput
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance
-  Core.ToJSON
-    MendelDebugInput_NamespacedDebugInput
-  where
-  toJSON MendelDebugInput_NamespacedDebugInput {..} =
-    Core.toJSON additional
 
 -- | Represents an amount of money with its currency type.
 --
@@ -2227,9 +2090,7 @@ instance Core.FromJSON Money where
           Money
             Core.<$> (o Core..:? "currencyCode")
             Core.<*> (o Core..:? "nanos")
-            Core.<*> ( o Core..:? "units"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<*> (o Core..:? "units" Core.<&> Core.fmap Core.fromAsText)
       )
 
 instance Core.ToJSON Money where
@@ -2241,188 +2102,6 @@ instance Core.ToJSON Money where
             ("units" Core..=) Core.. Core.AsText Core.<$> units
           ]
       )
-
--- | Next ID: 16
---
--- /See:/ 'newNamespacedDebugInput' smart constructor.
-data NamespacedDebugInput = NamespacedDebugInput
-  { -- | Set of experiment names to be absolutely forced. These experiments will be forced without evaluating the conditions.
-    absolutelyForcedExpNames :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment tags to be absolutely forced. The experiments with these tags will be forced without evaluating the conditions.
-    absolutelyForcedExpTags :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment ids to be absolutely forced. These ids will be forced without evaluating the conditions.
-    absolutelyForcedExps :: (Core.Maybe [Core.Int32]),
-    -- | Set of experiment names to be conditionally forced. These experiments will be forced only if their conditions and their parent domain\'s conditions are true.
-    conditionallyForcedExpNames :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment tags to be conditionally forced. The experiments with these tags will be forced only if their conditions and their parent domain\'s conditions are true.
-    conditionallyForcedExpTags :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment ids to be conditionally forced. These ids will be forced only if their conditions and their parent domain\'s conditions are true.
-    conditionallyForcedExps :: (Core.Maybe [Core.Int32]),
-    -- | If true, disable automatic enrollment selection (at all diversion points). Automatic enrollment selection means experiment selection process based on the experiment\'s automatic enrollment condition. This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.
-    disableAutomaticEnrollmentSelection :: (Core.Maybe Core.Bool),
-    -- | Set of experiment names to be disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together. If a name corresponds to a domain, the domain itself and all descendant experiments and domains are disabled together.
-    disableExpNames :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment tags to be disabled. All experiments that are tagged with one or more of these tags are disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together.
-    disableExpTags :: (Core.Maybe [Core.Text]),
-    -- | Set of experiment ids to be disabled. If an experiment is disabled, it is never selected nor forced. If an aggregate experiment is disabled, its partitions are disabled together. If an experiment with an enrollment is disabled, the enrollment is disabled together. If an ID corresponds to a domain, the domain itself and all descendant experiments and domains are disabled together.
-    disableExps :: (Core.Maybe [Core.Int32]),
-    -- | If true, disable manual enrollment selection (at all diversion points). Manual enrollment selection means experiment selection process based on the request\'s manual enrollment states (a.k.a. opt-in experiments). This does not disable selection of forced experiments. Setting this field to false does not change anything in the experiment selection process.
-    disableManualEnrollmentSelection :: (Core.Maybe Core.Bool),
-    -- | If true, disable organic experiment selection (at all diversion points). Organic selection means experiment selection process based on traffic allocation and diversion condition evaluation. This does not disable selection of forced experiments. This is useful in cases when it is not known whether experiment selection behavior is responsible for a error or breakage. Disabling organic selection may help to isolate the cause of a given problem. Setting this field to false does not change anything in the experiment selection process.
-    disableOrganicSelection :: (Core.Maybe Core.Bool),
-    -- | Flags to force in a particular experiment state. Map from flag name to flag value.
-    forcedFlags :: (Core.Maybe NamespacedDebugInput_ForcedFlags),
-    -- | Rollouts to force in a particular experiment state. Map from rollout name to rollout value.
-    forcedRollouts :: (Core.Maybe NamespacedDebugInput_ForcedRollouts),
-    -- | Sets different testing modes. See the documentation in the TestingMode message for more information.
-    testingMode :: (Core.Maybe NamespacedDebugInput_TestingMode)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NamespacedDebugInput' with the minimum fields required to make a request.
-newNamespacedDebugInput ::
-  NamespacedDebugInput
-newNamespacedDebugInput =
-  NamespacedDebugInput
-    { absolutelyForcedExpNames = Core.Nothing,
-      absolutelyForcedExpTags = Core.Nothing,
-      absolutelyForcedExps = Core.Nothing,
-      conditionallyForcedExpNames = Core.Nothing,
-      conditionallyForcedExpTags = Core.Nothing,
-      conditionallyForcedExps = Core.Nothing,
-      disableAutomaticEnrollmentSelection = Core.Nothing,
-      disableExpNames = Core.Nothing,
-      disableExpTags = Core.Nothing,
-      disableExps = Core.Nothing,
-      disableManualEnrollmentSelection = Core.Nothing,
-      disableOrganicSelection = Core.Nothing,
-      forcedFlags = Core.Nothing,
-      forcedRollouts = Core.Nothing,
-      testingMode = Core.Nothing
-    }
-
-instance Core.FromJSON NamespacedDebugInput where
-  parseJSON =
-    Core.withObject
-      "NamespacedDebugInput"
-      ( \o ->
-          NamespacedDebugInput
-            Core.<$> (o Core..:? "absolutelyForcedExpNames")
-            Core.<*> (o Core..:? "absolutelyForcedExpTags")
-            Core.<*> (o Core..:? "absolutelyForcedExps")
-            Core.<*> (o Core..:? "conditionallyForcedExpNames")
-            Core.<*> (o Core..:? "conditionallyForcedExpTags")
-            Core.<*> (o Core..:? "conditionallyForcedExps")
-            Core.<*> (o Core..:? "disableAutomaticEnrollmentSelection")
-            Core.<*> (o Core..:? "disableExpNames")
-            Core.<*> (o Core..:? "disableExpTags")
-            Core.<*> (o Core..:? "disableExps")
-            Core.<*> (o Core..:? "disableManualEnrollmentSelection")
-            Core.<*> (o Core..:? "disableOrganicSelection")
-            Core.<*> (o Core..:? "forcedFlags")
-            Core.<*> (o Core..:? "forcedRollouts")
-            Core.<*> (o Core..:? "testingMode")
-      )
-
-instance Core.ToJSON NamespacedDebugInput where
-  toJSON NamespacedDebugInput {..} =
-    Core.object
-      ( Core.catMaybes
-          [ ("absolutelyForcedExpNames" Core..=)
-              Core.<$> absolutelyForcedExpNames,
-            ("absolutelyForcedExpTags" Core..=)
-              Core.<$> absolutelyForcedExpTags,
-            ("absolutelyForcedExps" Core..=)
-              Core.<$> absolutelyForcedExps,
-            ("conditionallyForcedExpNames" Core..=)
-              Core.<$> conditionallyForcedExpNames,
-            ("conditionallyForcedExpTags" Core..=)
-              Core.<$> conditionallyForcedExpTags,
-            ("conditionallyForcedExps" Core..=)
-              Core.<$> conditionallyForcedExps,
-            ("disableAutomaticEnrollmentSelection" Core..=)
-              Core.<$> disableAutomaticEnrollmentSelection,
-            ("disableExpNames" Core..=) Core.<$> disableExpNames,
-            ("disableExpTags" Core..=) Core.<$> disableExpTags,
-            ("disableExps" Core..=) Core.<$> disableExps,
-            ("disableManualEnrollmentSelection" Core..=)
-              Core.<$> disableManualEnrollmentSelection,
-            ("disableOrganicSelection" Core..=)
-              Core.<$> disableOrganicSelection,
-            ("forcedFlags" Core..=) Core.<$> forcedFlags,
-            ("forcedRollouts" Core..=) Core.<$> forcedRollouts,
-            ("testingMode" Core..=) Core.<$> testingMode
-          ]
-      )
-
--- | Flags to force in a particular experiment state. Map from flag name to flag value.
---
--- /See:/ 'newNamespacedDebugInput_ForcedFlags' smart constructor.
-newtype NamespacedDebugInput_ForcedFlags = NamespacedDebugInput_ForcedFlags
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NamespacedDebugInput_ForcedFlags' with the minimum fields required to make a request.
-newNamespacedDebugInput_ForcedFlags ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Text ->
-  NamespacedDebugInput_ForcedFlags
-newNamespacedDebugInput_ForcedFlags additional =
-  NamespacedDebugInput_ForcedFlags {additional = additional}
-
-instance
-  Core.FromJSON
-    NamespacedDebugInput_ForcedFlags
-  where
-  parseJSON =
-    Core.withObject
-      "NamespacedDebugInput_ForcedFlags"
-      ( \o ->
-          NamespacedDebugInput_ForcedFlags
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance Core.ToJSON NamespacedDebugInput_ForcedFlags where
-  toJSON NamespacedDebugInput_ForcedFlags {..} =
-    Core.toJSON additional
-
--- | Rollouts to force in a particular experiment state. Map from rollout name to rollout value.
---
--- /See:/ 'newNamespacedDebugInput_ForcedRollouts' smart constructor.
-newtype NamespacedDebugInput_ForcedRollouts = NamespacedDebugInput_ForcedRollouts
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Bool)
-  }
-  deriving (Core.Eq, Core.Show, Core.Generic)
-
--- | Creates a value of 'NamespacedDebugInput_ForcedRollouts' with the minimum fields required to make a request.
-newNamespacedDebugInput_ForcedRollouts ::
-  -- |  See 'additional'.
-  Core.HashMap Core.Text Core.Bool ->
-  NamespacedDebugInput_ForcedRollouts
-newNamespacedDebugInput_ForcedRollouts additional =
-  NamespacedDebugInput_ForcedRollouts {additional = additional}
-
-instance
-  Core.FromJSON
-    NamespacedDebugInput_ForcedRollouts
-  where
-  parseJSON =
-    Core.withObject
-      "NamespacedDebugInput_ForcedRollouts"
-      ( \o ->
-          NamespacedDebugInput_ForcedRollouts
-            Core.<$> (Core.parseJSONObject o)
-      )
-
-instance
-  Core.ToJSON
-    NamespacedDebugInput_ForcedRollouts
-  where
-  toJSON NamespacedDebugInput_ForcedRollouts {..} =
-    Core.toJSON additional
 
 -- | This resource represents a long-running operation that is the result of a network API call.
 --
@@ -2436,7 +2115,7 @@ data Operation = Operation
     metadata :: (Core.Maybe Operation_Metadata),
     -- | The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the @name@ should be a resource name ending with @operations\/{unique_id}@.
     name :: (Core.Maybe Core.Text),
-    -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+    -- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
     response :: (Core.Maybe Operation_Response)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -2492,21 +2171,19 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
--- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
+-- | The normal, successful response of the operation. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
 -- /See:/ 'newOperation_Response' smart constructor.
 newtype Operation_Response = Operation_Response
@@ -2520,28 +2197,26 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
--- | Represents a postal address, e.g. for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created via user input or from importing existing data, depending on the type of process. Advice on address input \/ editing: - Use an internationalization-ready address widget such as https:\/\/github.com\/google\/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, please see: https:\/\/support.google.com\/business\/answer\/6397478
+-- | Represents a postal address. For example for postal delivery or payments addresses. Given a postal address, a postal service can deliver items to a premise, P.O. Box or similar. It is not intended to model geographical locations (roads, towns, mountains). In typical usage an address would be created by user input or from importing existing data, depending on the type of process. Advice on address input \/ editing: - Use an internationalization-ready address widget such as https:\/\/github.com\/google\/libaddressinput) - Users should not be presented with UI elements for input or editing of fields outside countries where that field is used. For more guidance on how to use this schema, see: https:\/\/support.google.com\/business\/answer\/6397478
 --
 -- /See:/ 'newPostalAddress' smart constructor.
 data PostalAddress = PostalAddress
-  { -- | Unstructured address lines describing the lower levels of an address. Because values in address/lines do not have type information and may sometimes contain multiple values in a single field (e.g. \"Austin, TX\"), it is important that the line order is clear. The order of address lines should be \"envelope order\" for the country\/region of the address. In places where this can vary (e.g. Japan), address/language is used to make it explicit (e.g. \"ja\" for large-to-small ordering and \"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of an address can be selected based on the language. The minimum permitted structural representation of an address consists of a region/code with all remaining information placed in the address/lines. It would be possible to format such an address very approximately without geocoding, but no semantic reasoning could be made about any of the address components until it was at least partially resolved. Creating an address only containing a region/code and
-    -- address/lines, and then geocoding is the recommended way to handle completely unstructured addresses (as opposed to guessing which parts of the address should be localities or administrative areas).
+  { -- | Unstructured address lines describing the lower levels of an address. Because values in address/lines do not have type information and may sometimes contain multiple values in a single field (For example \"Austin, TX\"), it is important that the line order is clear. The order of address lines should be \"envelope order\" for the country\/region of the address. In places where this can vary (For example Japan), address/language is used to make it explicit (For example \"ja\" for large-to-small ordering and \"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of an address can be selected based on the language. The minimum permitted structural representation of an address consists of a region/code with all remaining information placed in the address/lines. It would be possible to format such an address very approximately without geocoding, but no semantic reasoning could be made about any of the address components until it was at least partially resolved. Creating an address only
+    -- containing a region/code and address/lines, and then geocoding is the recommended way to handle completely unstructured addresses (as opposed to guessing which parts of the address should be localities or administrative areas).
     addressLines :: (Core.Maybe [Core.Text]),
-    -- | Optional. Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, an oblast, or a prefecture. Specifically, for Spain this is the province and not the autonomous community (e.g. \"Barcelona\" and not \"Catalonia\"). Many countries don\'t use an administrative area in postal addresses. E.g. in Switzerland this should be left unpopulated.
+    -- | Optional. Highest administrative subdivision which is used for postal addresses of a country or region. For example, this can be a state, a province, an oblast, or a prefecture. Specifically, for Spain this is the province and not the autonomous community (For example \"Barcelona\" and not \"Catalonia\"). Many countries don\'t use an administrative area in postal addresses. For example in Switzerland this should be left unpopulated.
     administrativeArea :: (Core.Maybe Core.Text),
     -- | Optional. BCP-47 language code of the contents of this address (if known). This is often the UI language of the input form or is expected to match one of the languages used in the address\' country\/region, or their transliterated equivalents. This can affect formatting in certain countries, but is not critical to the correctness of the data and will never affect any validation or other non-formatting related operations. If this value is not known, it should be omitted (rather than specifying a possibly incorrect default). Examples: \"zh-Hant\", \"ja\", \"ja-Latn\", \"en\".
     languageCode :: (Core.Maybe Core.Text),
@@ -2549,7 +2224,7 @@ data PostalAddress = PostalAddress
     locality :: (Core.Maybe Core.Text),
     -- | Optional. The name of the organization at the address.
     organization :: (Core.Maybe Core.Text),
-    -- | Optional. Postal code of the address. Not all countries use or require postal codes to be present, but where they are used, they may trigger additional validation with other parts of the address (e.g. state\/zip validation in the U.S.A.).
+    -- | Optional. Postal code of the address. Not all countries use or require postal codes to be present, but where they are used, they may trigger additional validation with other parts of the address (For example state\/zip validation in the U.S.A.).
     postalCode :: (Core.Maybe Core.Text),
     -- | Optional. The recipient at the address. This field may, under certain circumstances, contain multiline information. For example, it might contain \"care of\" information.
     recipients :: (Core.Maybe [Core.Text]),
@@ -2557,7 +2232,7 @@ data PostalAddress = PostalAddress
     regionCode :: (Core.Maybe Core.Text),
     -- | The schema revision of the @PostalAddress@. This must be set to 0, which is the latest revision. All new revisions __must__ be backward compatible with old revisions.
     revision :: (Core.Maybe Core.Int32),
-    -- | Optional. Additional, country-specific, sorting code. This is not used in most regions. Where it is used, the value is either a string like \"CEDEX\", optionally followed by a number (e.g. \"CEDEX 7\"), or just a number alone, representing the \"sector code\" (Jamaica), \"delivery area indicator\" (Malawi) or \"post office indicator\" (e.g. Côte d\'Ivoire).
+    -- | Optional. Additional, country-specific, sorting code. This is not used in most regions. Where it is used, the value is either a string like \"CEDEX\", optionally followed by a number (For example \"CEDEX 7\"), or just a number alone, representing the \"sector code\" (Jamaica), \"delivery area indicator\" (Malawi) or \"post office indicator\" (For example Côte d\'Ivoire).
     sortingCode :: (Core.Maybe Core.Text),
     -- | Optional. Sublocality of the address. For example, this can be neighborhoods, boroughs, districts.
     sublocality :: (Core.Maybe Core.Text)
@@ -2606,8 +2281,7 @@ instance Core.ToJSON PostalAddress where
     Core.object
       ( Core.catMaybes
           [ ("addressLines" Core..=) Core.<$> addressLines,
-            ("administrativeArea" Core..=)
-              Core.<$> administrativeArea,
+            ("administrativeArea" Core..=) Core.<$> administrativeArea,
             ("languageCode" Core..=) Core.<$> languageCode,
             ("locality" Core..=) Core.<$> locality,
             ("organization" Core..=) Core.<$> organization,
@@ -2656,8 +2330,7 @@ instance Core.ToJSON ProcessingOptions where
       ( Core.catMaybes
           [ ("disableStreetAddressResolution" Core..=)
               Core.<$> disableStreetAddressResolution,
-            ("htmlSanitization" Core..=)
-              Core.<$> htmlSanitization
+            ("htmlSanitization" Core..=) Core.<$> htmlSanitization
           ]
       )
 
@@ -2707,8 +2380,7 @@ instance Core.ToJSON RequestMetadata where
   toJSON RequestMetadata {..} =
     Core.object
       ( Core.catMaybes
-          [ ("allowMissingIds" Core..=)
-              Core.<$> allowMissingIds,
+          [ ("allowMissingIds" Core..=) Core.<$> allowMissingIds,
             ("deviceInfo" Core..=) Core.<$> deviceInfo,
             ("domain" Core..=) Core.<$> domain,
             ("sessionId" Core..=) Core.<$> sessionId,
@@ -2734,16 +2406,12 @@ instance Core.FromJSON ResponseMetadata where
   parseJSON =
     Core.withObject
       "ResponseMetadata"
-      ( \o ->
-          ResponseMetadata Core.<$> (o Core..:? "requestId")
-      )
+      (\o -> ResponseMetadata Core.<$> (o Core..:? "requestId"))
 
 instance Core.ToJSON ResponseMetadata where
   toJSON ResponseMetadata {..} =
     Core.object
-      ( Core.catMaybes
-          [("requestId" Core..=) Core.<$> requestId]
-      )
+      (Core.catMaybes [("requestId" Core..=) Core.<$> requestId])
 
 -- | The Request body of the @SearchJobs@ call.
 --
@@ -2758,7 +2426,7 @@ data SearchJobsRequest = SearchJobsRequest
     diversificationLevel :: (Core.Maybe SearchJobsRequest_DiversificationLevel),
     -- | Controls whether to broaden the search when it produces sparse results. Broadened queries append results to the end of the matching results list. Defaults to false.
     enableBroadening :: (Core.Maybe Core.Bool),
-    -- | An expression specifies a histogram request against matching jobs. Expression syntax is an aggregation function call with histogram facets and other options. Available aggregation function calls are: * @count(string_histogram_facet)@: Count the number of matching entities, for each distinct attribute value. * @count(numeric_histogram_facet, list of buckets)@: Count the number of matching entities within each bucket. A maximum of 200 histogram buckets are supported. Data types: * Histogram facet: facet names with format @a-zA-Z+@. * String: string like \"any string with backslash escape for quote(\").\" * Number: whole number and floating point number like 10, -1 and -0.01. * List: list of elements with comma(,) separator surrounded by square brackets, for example, [1, 2, 3] and [\"one\", \"two\", \"three\"]. Built-in constants: * MIN (minimum number similar to java Double.MIN/VALUE) * MAX (maximum number similar to java Double.MAX/VALUE) Built-in functions: * bucket(start, end[, label]): bucket built-in
+    -- | An expression specifies a histogram request against matching jobs. Expression syntax is an aggregation function call with histogram facets and other options. Available aggregation function calls are: * @count(string_histogram_facet)@: Count the number of matching entities, for each distinct attribute value. * @count(numeric_histogram_facet, list of buckets)@: Count the number of matching entities within each bucket. A maximum of 200 histogram buckets are supported. Data types: * Histogram facet: facet names with format @a-zA-Z+@. * String: string like \"any string with backslash escape for quote(\\\").\" * Number: whole number and floating point number like 10, -1 and -0.01. * List: list of elements with comma(,) separator surrounded by square brackets, for example, [1, 2, 3] and [\"one\", \"two\", \"three\"]. Built-in constants: * MIN (minimum number similar to java Double.MIN/VALUE) * MAX (maximum number similar to java Double.MAX/VALUE) Built-in functions: * bucket(start, end[, label]): bucket built-in
     -- function creates a bucket with range of start, end). Note that the end is exclusive, for example, bucket(1, MAX, \"positive number\") or bucket(1, 10). Job histogram facets: * company/display/name: histogram by [Job.company/display/name. * employment/type: histogram by Job.employment/types, for example, \"FULL/TIME\", \"PART/TIME\". * company/size (DEPRECATED): histogram by CompanySize, for example, \"SMALL\", \"MEDIUM\", \"BIG\". * publish/time/in/day: histogram by the Job.posting/publish/time in days. Must specify list of numeric buckets in spec. * publish/time/in/month: histogram by the Job.posting/publish/time in months. Must specify list of numeric buckets in spec. * publish/time/in/year: histogram by the Job.posting/publish/time in years. Must specify list of numeric buckets in spec. * degree/types: histogram by the Job.degree/types, for example, \"Bachelors\", \"Masters\". * job/level: histogram by the Job.job/level, for example, \"Entry Level\". * country: histogram by the country code of jobs, for
     -- example, \"US\", \"FR\". * admin1: histogram by the admin1 code of jobs, which is a global placeholder referring to the state, province, or the particular term a country uses to define the geographic structure below the country level, for example, \"CA\", \"IL\". * city: histogram by a combination of the \"city name, admin1 code\". For example, \"Mountain View, CA\", \"New York, NY\". * admin1/country: histogram by a combination of the \"admin1 code, country\", for example, \"CA, US\", \"IL, US\". * city/coordinate: histogram by the city center\'s GPS coordinates (latitude and longitude), for example, 37.4038522,-122.0987765. Since the coordinates of a city center can change, customers may need to refresh them periodically. * locale: histogram by the Job.language/code, for example, \"en-US\", \"fr-FR\". * language: histogram by the language subtag of the Job.language/code, for example, \"en\", \"fr\". * category: histogram by the JobCategory, for example, \"COMPUTER/AND/IT\", \"HEALTHCARE\". *
     -- base/compensation/unit: histogram by the CompensationInfo.CompensationUnit of base salary, for example, \"WEEKLY\", \"MONTHLY\". * base/compensation: histogram by the base salary. Must specify list of numeric buckets to group results by. * annualized/base/compensation: histogram by the base annualized salary. Must specify list of numeric buckets to group results by. * annualized/total/compensation: histogram by the total annualized salary. Must specify list of numeric buckets to group results by. * string/custom/attribute: histogram by string Job.custom/attributes. Values can be accessed via square bracket notations like string/custom/attribute[\"key1\"]. * numeric/custom/attribute: histogram by numeric Job.custom/attributes. Values can be accessed via square bracket notations like numeric/custom_attribute[\"key1\"]. Must specify list of numeric buckets to group results by. Example expressions: * @count(admin1)@ * @count(base_compensation, [bucket(1000, 10000), bucket(10000, 100000), bucket(100000, MAX)])@ *
@@ -2780,6 +2448,8 @@ data SearchJobsRequest = SearchJobsRequest
     orderBy :: (Core.Maybe Core.Text),
     -- | The token specifying the current offset within search results. See SearchJobsResponse.next/page/token for an explanation of how to obtain the next set of query results.
     pageToken :: (Core.Maybe Core.Text),
+    -- | Optional. The relevance threshold of the search results. Default to Google defined threshold, leveraging a balance of precision and recall to deliver both highly accurate results and comprehensive coverage of relevant information.
+    relevanceThreshold :: (Core.Maybe SearchJobsRequest_RelevanceThreshold),
     -- | Required. The meta information collected about the job searcher, used to improve the search quality of the service. The identifiers (such as @user_id@) are provided by users, and must be unique and consistent.
     requestMetadata :: (Core.Maybe RequestMetadata),
     -- | Mode of a search. Defaults to SearchMode.JOB_SEARCH.
@@ -2804,6 +2474,7 @@ newSearchJobsRequest =
       offset = Core.Nothing,
       orderBy = Core.Nothing,
       pageToken = Core.Nothing,
+      relevanceThreshold = Core.Nothing,
       requestMetadata = Core.Nothing,
       searchMode = Core.Nothing
     }
@@ -2826,6 +2497,7 @@ instance Core.FromJSON SearchJobsRequest where
             Core.<*> (o Core..:? "offset")
             Core.<*> (o Core..:? "orderBy")
             Core.<*> (o Core..:? "pageToken")
+            Core.<*> (o Core..:? "relevanceThreshold")
             Core.<*> (o Core..:? "requestMetadata")
             Core.<*> (o Core..:? "searchMode")
       )
@@ -2834,24 +2506,19 @@ instance Core.ToJSON SearchJobsRequest where
   toJSON SearchJobsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("customRankingInfo" Core..=)
-              Core.<$> customRankingInfo,
-            ("disableKeywordMatch" Core..=)
-              Core.<$> disableKeywordMatch,
-            ("diversificationLevel" Core..=)
-              Core.<$> diversificationLevel,
-            ("enableBroadening" Core..=)
-              Core.<$> enableBroadening,
-            ("histogramQueries" Core..=)
-              Core.<$> histogramQueries,
+          [ ("customRankingInfo" Core..=) Core.<$> customRankingInfo,
+            ("disableKeywordMatch" Core..=) Core.<$> disableKeywordMatch,
+            ("diversificationLevel" Core..=) Core.<$> diversificationLevel,
+            ("enableBroadening" Core..=) Core.<$> enableBroadening,
+            ("histogramQueries" Core..=) Core.<$> histogramQueries,
             ("jobQuery" Core..=) Core.<$> jobQuery,
             ("jobView" Core..=) Core.<$> jobView,
-            ("keywordMatchMode" Core..=)
-              Core.<$> keywordMatchMode,
+            ("keywordMatchMode" Core..=) Core.<$> keywordMatchMode,
             ("maxPageSize" Core..=) Core.<$> maxPageSize,
             ("offset" Core..=) Core.<$> offset,
             ("orderBy" Core..=) Core.<$> orderBy,
             ("pageToken" Core..=) Core.<$> pageToken,
+            ("relevanceThreshold" Core..=) Core.<$> relevanceThreshold,
             ("requestMetadata" Core..=) Core.<$> requestMetadata,
             ("searchMode" Core..=) Core.<$> searchMode
           ]
@@ -2917,8 +2584,7 @@ instance Core.ToJSON SearchJobsResponse where
       ( Core.catMaybes
           [ ("broadenedQueryJobsCount" Core..=)
               Core.<$> broadenedQueryJobsCount,
-            ("histogramQueryResults" Core..=)
-              Core.<$> histogramQueryResults,
+            ("histogramQueryResults" Core..=) Core.<$> histogramQueryResults,
             ("locationFilters" Core..=) Core.<$> locationFilters,
             ("matchingJobs" Core..=) Core.<$> matchingJobs,
             ("metadata" Core..=) Core.<$> metadata,
@@ -2989,7 +2655,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -3025,19 +2695,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | A Tenant resource represents a tenant in the service. A tenant is a group or entity that shares common access with specific privileges for resources like jobs. Customer may create multiple tenants to provide data isolation for different groups.
 --
@@ -3078,13 +2746,13 @@ instance Core.ToJSON Tenant where
 --
 -- /See:/ 'newTimeOfDay' smart constructor.
 data TimeOfDay' = TimeOfDay'
-  { -- | Hours of day in 24 hour format. Should be from 0 to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
+  { -- | Hours of a day in 24 hour format. Must be greater than or equal to 0 and typically must be less than or equal to 23. An API may choose to allow the value \"24:00:00\" for scenarios like business closing time.
     hours :: (Core.Maybe Core.Int32),
-    -- | Minutes of hour of day. Must be from 0 to 59.
+    -- | Minutes of an hour. Must be greater than or equal to 0 and less than or equal to 59.
     minutes :: (Core.Maybe Core.Int32),
-    -- | Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    -- | Fractions of seconds, in nanoseconds. Must be greater than or equal to 0 and less than or equal to 999,999,999.
     nanos :: (Core.Maybe Core.Int32),
-    -- | Seconds of minutes of the time. Must normally be from 0 to 59. An API may allow the value 60 if it allows leap-seconds.
+    -- | Seconds of a minute. Must be greater than or equal to 0 and typically must be less than or equal to 59. An API may allow the value 60 if it allows leap-seconds.
     seconds :: (Core.Maybe Core.Int32)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)

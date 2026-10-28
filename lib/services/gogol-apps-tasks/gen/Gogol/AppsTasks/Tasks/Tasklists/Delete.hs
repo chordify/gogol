@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.AppsTasks.Tasks.Tasklists.Delete
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the authenticated user\'s specified task list.
+-- Deletes the authenticated user\'s specified task list. If the list contains assigned tasks, both the assigned tasks and the original tasks in the assignment surface (Docs, Chat Spaces) are deleted.
 --
 -- /See:/ <https://developers.google.com/tasks/ Google Tasks API Reference> for @tasks.tasklists.delete@.
 module Gogol.AppsTasks.Tasks.Tasklists.Delete
@@ -40,7 +38,7 @@ module Gogol.AppsTasks.Tasks.Tasklists.Delete
 where
 
 import Gogol.AppsTasks.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @tasks.tasklists.delete@ method which the
 -- 'TasksTasklistsDelete' request conforms to.
@@ -59,7 +57,7 @@ type TasksTasklistsDeleteResource =
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Delete '[Core.JSON] ()
 
--- | Deletes the authenticated user\'s specified task list.
+-- | Deletes the authenticated user\'s specified task list. If the list contains assigned tasks, both the assigned tasks and the original tasks in the assignment surface (Docs, Chat Spaces) are deleted.
 --
 -- /See:/ 'newTasksTasklistsDelete' smart constructor.
 data TasksTasklistsDelete = TasksTasklistsDelete
@@ -95,9 +93,7 @@ newTasksTasklistsDelete tasklist =
 
 instance Core.GoogleRequest TasksTasklistsDelete where
   type Rs TasksTasklistsDelete = ()
-  type
-    Scopes TasksTasklistsDelete =
-      '[Tasks'FullControl]
+  type Scopes TasksTasklistsDelete = '[Tasks'FullControl]
   requestClient TasksTasklistsDelete {..} =
     go
       tasklist
@@ -111,7 +107,5 @@ instance Core.GoogleRequest TasksTasklistsDelete where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy TasksTasklistsDeleteResource
-          )
+          (Core.Proxy :: Core.Proxy TasksTasklistsDeleteResource)
           Core.mempty

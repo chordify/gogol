@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.IAP.Projects.Brands.IdentityAwareProxyClients.List
 where
 
 import Gogol.IAP.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @iap.projects.brands.identityAwareProxyClients.list@ method which the
 -- 'IAPProjectsBrandsIdentityAwareProxyClientsList' request conforms to.
@@ -56,9 +54,7 @@ type IAPProjectsBrandsIdentityAwareProxyClientsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListIdentityAwareProxyClientsResponse
+    Core.:> Core.Get '[Core.JSON] ListIdentityAwareProxyClientsResponse
 
 -- | Lists the existing clients for the brand.
 --
@@ -90,7 +86,8 @@ newIAPProjectsBrandsIdentityAwareProxyClientsList ::
   IAPProjectsBrandsIdentityAwareProxyClientsList
 newIAPProjectsBrandsIdentityAwareProxyClientsList parent =
   IAPProjectsBrandsIdentityAwareProxyClientsList
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       pageSize = Core.Nothing,
@@ -105,31 +102,27 @@ instance
     IAPProjectsBrandsIdentityAwareProxyClientsList
   where
   type
-    Rs
-      IAPProjectsBrandsIdentityAwareProxyClientsList =
+    Rs IAPProjectsBrandsIdentityAwareProxyClientsList =
       ListIdentityAwareProxyClientsResponse
   type
-    Scopes
-      IAPProjectsBrandsIdentityAwareProxyClientsList =
+    Scopes IAPProjectsBrandsIdentityAwareProxyClientsList =
       '[CloudPlatform'FullControl]
-  requestClient
-    IAPProjectsBrandsIdentityAwareProxyClientsList {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        pageSize
-        pageToken
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        iAPService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  IAPProjectsBrandsIdentityAwareProxyClientsListResource
-            )
-            Core.mempty
+  requestClient IAPProjectsBrandsIdentityAwareProxyClientsList {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      pageSize
+      pageToken
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      iAPService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy IAPProjectsBrandsIdentityAwareProxyClientsListResource
+          )
+          Core.mempty

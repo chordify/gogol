@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Admin.Directory
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -70,6 +68,11 @@ module Gogol.Admin.Directory
     AdminChannelsStopResource,
     AdminChannelsStop (..),
     newAdminChannelsStop,
+
+    -- ** admin.customer.devices.chromeos.batchChangeStatus
+    AdminCustomerDevicesChromeosBatchChangeStatusResource,
+    AdminCustomerDevicesChromeosBatchChangeStatus (..),
+    newAdminCustomerDevicesChromeosBatchChangeStatus,
 
     -- ** admin.customer.devices.chromeos.commands.get
     AdminCustomerDevicesChromeosCommandsGetResource,
@@ -719,6 +722,24 @@ module Gogol.Admin.Directory
     -- ** AuxiliaryMessage_Severity
     AuxiliaryMessage_Severity (..),
 
+    -- ** BacklightInfo
+    BacklightInfo (..),
+    newBacklightInfo,
+
+    -- ** BatchChangeChromeOsDeviceStatusRequest
+    BatchChangeChromeOsDeviceStatusRequest (..),
+    newBatchChangeChromeOsDeviceStatusRequest,
+
+    -- ** BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction
+    BatchChangeChromeOsDeviceStatusRequest_ChangeChromeOsDeviceStatusAction (..),
+
+    -- ** BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason
+    BatchChangeChromeOsDeviceStatusRequest_DeprovisionReason (..),
+
+    -- ** BatchChangeChromeOsDeviceStatusResponse
+    BatchChangeChromeOsDeviceStatusResponse (..),
+    newBatchChangeChromeOsDeviceStatusResponse,
+
     -- ** BatchCreatePrintServersRequest
     BatchCreatePrintServersRequest (..),
     newBatchCreatePrintServersRequest,
@@ -767,6 +788,10 @@ module Gogol.Admin.Directory
     Buildings (..),
     newBuildings,
 
+    -- ** ByteUsage
+    ByteUsage (..),
+    newByteUsage,
+
     -- ** CalendarResource
     CalendarResource (..),
     newCalendarResource,
@@ -774,6 +799,14 @@ module Gogol.Admin.Directory
     -- ** CalendarResources
     CalendarResources (..),
     newCalendarResources,
+
+    -- ** ChangeChromeOsDeviceStatusResult
+    ChangeChromeOsDeviceStatusResult (..),
+    newChangeChromeOsDeviceStatusResult,
+
+    -- ** ChangeChromeOsDeviceStatusSucceeded
+    ChangeChromeOsDeviceStatusSucceeded (..),
+    newChangeChromeOsDeviceStatusSucceeded,
 
     -- ** Channel
     Channel (..),
@@ -790,6 +823,9 @@ module Gogol.Admin.Directory
     -- ** ChromeOsDevice_ActiveTimeRangesItem
     ChromeOsDevice_ActiveTimeRangesItem (..),
     newChromeOsDevice_ActiveTimeRangesItem,
+
+    -- ** ChromeOsDevice_ChromeOsType
+    ChromeOsDevice_ChromeOsType (..),
 
     -- ** ChromeOsDevice_CpuInfoItem
     ChromeOsDevice_CpuInfoItem (..),
@@ -817,6 +853,9 @@ module Gogol.Admin.Directory
     -- ** ChromeOsDevice_DeviceFilesItem
     ChromeOsDevice_DeviceFilesItem (..),
     newChromeOsDevice_DeviceFilesItem,
+
+    -- ** ChromeOsDevice_DeviceLicenseType
+    ChromeOsDevice_DeviceLicenseType (..),
 
     -- ** ChromeOsDevice_DiskVolumeReportsItem
     ChromeOsDevice_DiskVolumeReportsItem (..),
@@ -928,6 +967,10 @@ module Gogol.Admin.Directory
 
     -- ** FailureInfo_ErrorCode
     FailureInfo_ErrorCode (..),
+
+    -- ** FanInfo
+    FanInfo (..),
+    newFanInfo,
 
     -- ** Feature
     Feature (..),
@@ -1078,6 +1121,14 @@ module Gogol.Admin.Directory
     Schemas (..),
     newSchemas,
 
+    -- ** Status
+    Status (..),
+    newStatus,
+
+    -- ** Status_DetailsItem
+    Status_DetailsItem (..),
+    newStatus_DetailsItem,
+
     -- ** Token
     Token (..),
     newToken,
@@ -1113,6 +1164,10 @@ module Gogol.Admin.Directory
     -- ** UserEmail
     UserEmail (..),
     newUserEmail,
+
+    -- ** UserEmail_Public_key_encryption_certificates
+    UserEmail_Public_key_encryption_certificates (..),
+    newUserEmail_Public_key_encryption_certificates,
 
     -- ** UserExternalId
     UserExternalId (..),
@@ -1283,6 +1338,7 @@ module Gogol.Admin.Directory
 where
 
 import Gogol.Admin.Directory.Admin.Channels.Stop
+import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.BatchChangeStatus
 import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.Commands.Get
 import Gogol.Admin.Directory.Admin.Customer.Devices.Chromeos.IssueCommand
 import Gogol.Admin.Directory.Admin.Customers.Chrome.PrintServers.BatchCreatePrintServers

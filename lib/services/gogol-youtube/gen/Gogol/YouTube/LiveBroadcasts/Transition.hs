@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTube.LiveBroadcasts.Transition
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTube.LiveBroadcasts.Transition
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTube.Types
 
 -- | A resource alias for @youtube.liveBroadcasts.transition@ method which the
@@ -58,9 +56,7 @@ type YouTubeLiveBroadcastsTransitionResource =
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
     Core.:> Core.QueryParam "onBehalfOfContentOwner" Core.Text
-    Core.:> Core.QueryParam
-              "onBehalfOfContentOwnerChannel"
-              Core.Text
+    Core.:> Core.QueryParam "onBehalfOfContentOwnerChannel" Core.Text
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -117,13 +113,8 @@ newYouTubeLiveBroadcastsTransition broadcastStatus id part =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeLiveBroadcastsTransition
-  where
-  type
-    Rs YouTubeLiveBroadcastsTransition =
-      LiveBroadcast
+instance Core.GoogleRequest YouTubeLiveBroadcastsTransition where
+  type Rs YouTubeLiveBroadcastsTransition = LiveBroadcast
   type
     Scopes YouTubeLiveBroadcastsTransition =
       '[Youtube'FullControl, Youtube'ForceSsl]
@@ -144,7 +135,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeLiveBroadcastsTransitionResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeLiveBroadcastsTransitionResource)
           Core.mempty

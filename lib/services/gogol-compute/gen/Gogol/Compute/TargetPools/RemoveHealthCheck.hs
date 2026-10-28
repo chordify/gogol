@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Compute.TargetPools.RemoveHealthCheck
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Compute.TargetPools.RemoveHealthCheck
 where
 
 import Gogol.Compute.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @compute.targetPools.removeHealthCheck@ method which the
 -- 'ComputeTargetPoolsRemoveHealthCheck' request conforms to.
@@ -61,9 +59,7 @@ type ComputeTargetPoolsRemoveHealthCheckResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              TargetPoolsRemoveHealthCheckRequest
+    Core.:> Core.ReqBody '[Core.JSON] TargetPoolsRemoveHealthCheckRequest
     Core.:> Core.Post '[Core.JSON] Operation
 
 -- | Removes health check URL from a target pool.
@@ -104,27 +100,26 @@ newComputeTargetPoolsRemoveHealthCheck ::
   -- |  Name of the target pool to remove health checks from. See 'targetPool'.
   Core.Text ->
   ComputeTargetPoolsRemoveHealthCheck
-newComputeTargetPoolsRemoveHealthCheck payload project region targetPool =
-  ComputeTargetPoolsRemoveHealthCheck
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      project = project,
-      region = region,
-      requestId = Core.Nothing,
-      targetPool = targetPool,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
-
-instance
-  Core.GoogleRequest
+newComputeTargetPoolsRemoveHealthCheck
+  payload
+  project
+  region
+  targetPool =
     ComputeTargetPoolsRemoveHealthCheck
-  where
-  type
-    Rs ComputeTargetPoolsRemoveHealthCheck =
-      Operation
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        project = project,
+        region = region,
+        requestId = Core.Nothing,
+        targetPool = targetPool,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
+
+instance Core.GoogleRequest ComputeTargetPoolsRemoveHealthCheck where
+  type Rs ComputeTargetPoolsRemoveHealthCheck = Operation
   type
     Scopes ComputeTargetPoolsRemoveHealthCheck =
       '[CloudPlatform'FullControl, Compute'FullControl]
@@ -146,7 +141,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                ComputeTargetPoolsRemoveHealthCheckResource
+              Core.Proxy ComputeTargetPoolsRemoveHealthCheckResource
           )
           Core.mempty

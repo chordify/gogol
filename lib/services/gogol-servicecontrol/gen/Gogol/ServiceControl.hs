@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.ServiceControl
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -110,6 +108,9 @@ module Gogol.ServiceControl
     AuthorizationInfo (..),
     newAuthorizationInfo,
 
+    -- ** AuthorizationInfo_PermissionType
+    AuthorizationInfo_PermissionType (..),
+
     -- ** CheckRequest
     CheckRequest (..),
     newCheckRequest,
@@ -117,6 +118,10 @@ module Gogol.ServiceControl
     -- ** CheckResponse
     CheckResponse (..),
     newCheckResponse,
+
+    -- ** CheckResponse_DynamicMetadata
+    CheckResponse_DynamicMetadata (..),
+    newCheckResponse_DynamicMetadata,
 
     -- ** CheckResponse_Headers
     CheckResponse_Headers (..),
@@ -162,6 +167,10 @@ module Gogol.ServiceControl
     ReportResponse (..),
     newReportResponse,
 
+    -- ** ReportResponse_Extensions
+    ReportResponse_Extensions (..),
+    newReportResponse_Extensions,
+
     -- ** Request'
     Request' (..),
     newRequest,
@@ -205,6 +214,18 @@ module Gogol.ServiceControl
     -- ** ServiceAccountDelegationInfo
     ServiceAccountDelegationInfo (..),
     newServiceAccountDelegationInfo,
+
+    -- ** ServiceDelegationHistory
+    ServiceDelegationHistory (..),
+    newServiceDelegationHistory,
+
+    -- ** ServiceMetadata
+    ServiceMetadata (..),
+    newServiceMetadata,
+
+    -- ** ServiceMetadata_JobMetadata
+    ServiceMetadata_JobMetadata (..),
+    newServiceMetadata_JobMetadata,
 
     -- ** SpanContext
     SpanContext (..),
@@ -260,6 +281,20 @@ module Gogol.ServiceControl
     -- ** V2LogEntrySourceLocation
     V2LogEntrySourceLocation (..),
     newV2LogEntrySourceLocation,
+
+    -- ** V2ResourceEvent
+    V2ResourceEvent (..),
+    newV2ResourceEvent,
+
+    -- ** V2ResourceEvent_Path
+    V2ResourceEvent_Path (..),
+
+    -- ** V2ResourceEvent_Payload
+    V2ResourceEvent_Payload (..),
+    newV2ResourceEvent_Payload,
+
+    -- ** V2ResourceEvent_Type
+    V2ResourceEvent_Type (..),
 
     -- ** ViolationInfo
     ViolationInfo (..),

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,16 +38,13 @@ module Gogol.BinaryAuthorization.Projects.Policy.TestIamPermissions
 where
 
 import Gogol.BinaryAuthorization.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @binaryauthorization.projects.policy.testIamPermissions@ method which the
 -- 'BinaryAuthorizationProjectsPolicyTestIamPermissions' request conforms to.
 type BinaryAuthorizationProjectsPolicyTestIamPermissionsResource =
   "v1"
-    Core.:> Core.CaptureMode
-              "resource"
-              "testIamPermissions"
-              Core.Text
+    Core.:> Core.CaptureMode "resource" "testIamPermissions" Core.Text
     Core.:> Core.QueryParam "$.xgafv" Xgafv
     Core.:> Core.QueryParam "access_token" Core.Text
     Core.:> Core.QueryParam "callback" Core.Text
@@ -87,28 +82,29 @@ newBinaryAuthorizationProjectsPolicyTestIamPermissions ::
   -- |  REQUIRED: The resource for which the policy detail is being requested. See <https://cloud.google.com/apis/design/resource_names Resource names> for the appropriate value for this field. See 'resource'.
   Core.Text ->
   BinaryAuthorizationProjectsPolicyTestIamPermissions
-newBinaryAuthorizationProjectsPolicyTestIamPermissions payload resource =
-  BinaryAuthorizationProjectsPolicyTestIamPermissions
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      payload = payload,
-      resource = resource,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newBinaryAuthorizationProjectsPolicyTestIamPermissions
+  payload
+  resource =
+    BinaryAuthorizationProjectsPolicyTestIamPermissions
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        payload = payload,
+        resource = resource,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     BinaryAuthorizationProjectsPolicyTestIamPermissions
   where
   type
-    Rs
-      BinaryAuthorizationProjectsPolicyTestIamPermissions =
+    Rs BinaryAuthorizationProjectsPolicyTestIamPermissions =
       TestIamPermissionsResponse
   type
-    Scopes
-      BinaryAuthorizationProjectsPolicyTestIamPermissions =
+    Scopes BinaryAuthorizationProjectsPolicyTestIamPermissions =
       '[CloudPlatform'FullControl]
   requestClient
     BinaryAuthorizationProjectsPolicyTestIamPermissions {..} =

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.SecurityCenter.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.SecurityCenter.Internal.Product
@@ -256,7 +254,7 @@ module Gogol.SecurityCenter.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.SecurityCenter.Internal.Sum
 
 -- | The configuration used for Asset Discovery runs.
@@ -274,7 +272,10 @@ data AssetDiscoveryConfig = AssetDiscoveryConfig
 newAssetDiscoveryConfig ::
   AssetDiscoveryConfig
 newAssetDiscoveryConfig =
-  AssetDiscoveryConfig {inclusionMode = Core.Nothing, projectIds = Core.Nothing}
+  AssetDiscoveryConfig
+    { inclusionMode = Core.Nothing,
+      projectIds = Core.Nothing
+    }
 
 instance Core.FromJSON AssetDiscoveryConfig where
   parseJSON =
@@ -311,7 +312,10 @@ data AuditConfig = AuditConfig
 newAuditConfig ::
   AuditConfig
 newAuditConfig =
-  AuditConfig {auditLogConfigs = Core.Nothing, service = Core.Nothing}
+  AuditConfig
+    { auditLogConfigs = Core.Nothing,
+      service = Core.Nothing
+    }
 
 instance Core.FromJSON AuditConfig where
   parseJSON =
@@ -327,8 +331,7 @@ instance Core.ToJSON AuditConfig where
   toJSON AuditConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("auditLogConfigs" Core..=)
-              Core.<$> auditLogConfigs,
+          [ ("auditLogConfigs" Core..=) Core.<$> auditLogConfigs,
             ("service" Core..=) Core.<$> service
           ]
       )
@@ -348,7 +351,10 @@ data AuditLogConfig = AuditLogConfig
 newAuditLogConfig ::
   AuditLogConfig
 newAuditLogConfig =
-  AuditLogConfig {exemptedMembers = Core.Nothing, logType = Core.Nothing}
+  AuditLogConfig
+    { exemptedMembers = Core.Nothing,
+      logType = Core.Nothing
+    }
 
 instance Core.FromJSON AuditLogConfig where
   parseJSON =
@@ -364,8 +370,7 @@ instance Core.ToJSON AuditLogConfig where
   toJSON AuditLogConfig {..} =
     Core.object
       ( Core.catMaybes
-          [ ("exemptedMembers" Core..=)
-              Core.<$> exemptedMembers,
+          [ ("exemptedMembers" Core..=) Core.<$> exemptedMembers,
             ("logType" Core..=) Core.<$> logType
           ]
       )
@@ -427,8 +432,7 @@ newEmpty ::
 newEmpty = Empty
 
 instance Core.FromJSON Empty where
-  parseJSON =
-    Core.withObject "Empty" (\o -> Core.pure Empty)
+  parseJSON = Core.withObject "Empty" (\o -> Core.pure Empty)
 
 instance Core.ToJSON Empty where
   toJSON = Core.const Core.emptyObject
@@ -557,8 +561,7 @@ instance Core.ToJSON Finding where
             ("parent" Core..=) Core.<$> parent,
             ("resourceName" Core..=) Core.<$> resourceName,
             ("securityMarks" Core..=) Core.<$> securityMarks,
-            ("sourceProperties" Core..=)
-              Core.<$> sourceProperties,
+            ("sourceProperties" Core..=) Core.<$> sourceProperties,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -567,8 +570,7 @@ instance Core.ToJSON Finding where
 --
 -- /See:/ 'newFinding_SourceProperties' smart constructor.
 newtype Finding_SourceProperties = Finding_SourceProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -584,14 +586,10 @@ instance Core.FromJSON Finding_SourceProperties where
   parseJSON =
     Core.withObject
       "Finding_SourceProperties"
-      ( \o ->
-          Finding_SourceProperties
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Finding_SourceProperties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Finding_SourceProperties where
-  toJSON Finding_SourceProperties {..} =
-    Core.toJSON additional
+  toJSON Finding_SourceProperties {..} = Core.toJSON additional
 
 -- | Request message for @GetIamPolicy@ method.
 --
@@ -605,22 +603,19 @@ newtype GetIamPolicyRequest = GetIamPolicyRequest
 -- | Creates a value of 'GetIamPolicyRequest' with the minimum fields required to make a request.
 newGetIamPolicyRequest ::
   GetIamPolicyRequest
-newGetIamPolicyRequest = GetIamPolicyRequest {options = Core.Nothing}
+newGetIamPolicyRequest =
+  GetIamPolicyRequest {options = Core.Nothing}
 
 instance Core.FromJSON GetIamPolicyRequest where
   parseJSON =
     Core.withObject
       "GetIamPolicyRequest"
-      ( \o ->
-          GetIamPolicyRequest Core.<$> (o Core..:? "options")
-      )
+      (\o -> GetIamPolicyRequest Core.<$> (o Core..:? "options"))
 
 instance Core.ToJSON GetIamPolicyRequest where
   toJSON GetIamPolicyRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("options" Core..=) Core.<$> options]
-      )
+      (Core.catMaybes [("options" Core..=) Core.<$> options])
 
 -- | Encapsulates settings provided to GetIamPolicy.
 --
@@ -634,15 +629,15 @@ newtype GetPolicyOptions = GetPolicyOptions
 -- | Creates a value of 'GetPolicyOptions' with the minimum fields required to make a request.
 newGetPolicyOptions ::
   GetPolicyOptions
-newGetPolicyOptions = GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
+newGetPolicyOptions =
+  GetPolicyOptions {requestedPolicyVersion = Core.Nothing}
 
 instance Core.FromJSON GetPolicyOptions where
   parseJSON =
     Core.withObject
       "GetPolicyOptions"
       ( \o ->
-          GetPolicyOptions
-            Core.<$> (o Core..:? "requestedPolicyVersion")
+          GetPolicyOptions Core.<$> (o Core..:? "requestedPolicyVersion")
       )
 
 instance Core.ToJSON GetPolicyOptions where
@@ -672,7 +667,8 @@ newGoogleCloudSecuritycenterV1NotificationMessage ::
   GoogleCloudSecuritycenterV1NotificationMessage
 newGoogleCloudSecuritycenterV1NotificationMessage =
   GoogleCloudSecuritycenterV1NotificationMessage
-    { finding = Core.Nothing,
+    { finding =
+        Core.Nothing,
       notificationConfigName = Core.Nothing,
       resource = Core.Nothing
     }
@@ -687,24 +683,19 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1NotificationMessage
             Core.<$> (o Core..:? "finding")
-              Core.<*> (o Core..:? "notificationConfigName")
-              Core.<*> (o Core..:? "resource")
+            Core.<*> (o Core..:? "notificationConfigName")
+            Core.<*> (o Core..:? "resource")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1NotificationMessage
-  where
-  toJSON
-    GoogleCloudSecuritycenterV1NotificationMessage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("finding" Core..=) Core.<$> finding,
-              ("notificationConfigName" Core..=)
-                Core.<$> notificationConfigName,
-              ("resource" Core..=) Core.<$> resource
-            ]
-        )
+instance Core.ToJSON GoogleCloudSecuritycenterV1NotificationMessage where
+  toJSON GoogleCloudSecuritycenterV1NotificationMessage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("finding" Core..=) Core.<$> finding,
+            ("notificationConfigName" Core..=) Core.<$> notificationConfigName,
+            ("resource" Core..=) Core.<$> resource
+          ]
+      )
 
 -- | Information related to the Google Cloud resource.
 --
@@ -735,10 +726,7 @@ newGoogleCloudSecuritycenterV1Resource =
       projectDisplayName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudSecuritycenterV1Resource
-  where
+instance Core.FromJSON GoogleCloudSecuritycenterV1Resource where
   parseJSON =
     Core.withObject
       "GoogleCloudSecuritycenterV1Resource"
@@ -751,20 +739,15 @@ instance
             Core.<*> (o Core..:? "projectDisplayName")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1Resource
-  where
+instance Core.ToJSON GoogleCloudSecuritycenterV1Resource where
   toJSON GoogleCloudSecuritycenterV1Resource {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("parent" Core..=) Core.<$> parent,
-            ("parentDisplayName" Core..=)
-              Core.<$> parentDisplayName,
+            ("parentDisplayName" Core..=) Core.<$> parentDisplayName,
             ("project" Core..=) Core.<$> project,
-            ("projectDisplayName" Core..=)
-              Core.<$> projectDisplayName
+            ("projectDisplayName" Core..=) Core.<$> projectDisplayName
           ]
       )
 
@@ -787,7 +770,8 @@ newGoogleCloudSecuritycenterV1RunAssetDiscoveryResponse ::
   GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
 newGoogleCloudSecuritycenterV1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
-    { duration = Core.Nothing,
+    { duration =
+        Core.Nothing,
       state = Core.Nothing
     }
 
@@ -801,21 +785,20 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
             Core.<$> (o Core..:? "duration")
-              Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "state")
       )
 
 instance
   Core.ToJSON
     GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse
   where
-  toJSON
-    GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("duration" Core..=) Core.<$> duration,
-              ("state" Core..=) Core.<$> state
-            ]
-        )
+  toJSON GoogleCloudSecuritycenterV1RunAssetDiscoveryResponse {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("duration" Core..=) Core.<$> duration,
+            ("state" Core..=) Core.<$> state
+          ]
+      )
 
 -- | Response of asset discovery run
 --
@@ -836,7 +819,8 @@ newGoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse ::
   GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
 newGoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
-    { duration = Core.Nothing,
+    { duration =
+        Core.Nothing,
       state = Core.Nothing
     }
 
@@ -850,7 +834,7 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1beta1RunAssetDiscoveryResponse
             Core.<$> (o Core..:? "duration")
-              Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "state")
       )
 
 instance
@@ -898,7 +882,8 @@ newGoogleCloudSecuritycenterV1p1beta1Asset ::
   GoogleCloudSecuritycenterV1p1beta1Asset
 newGoogleCloudSecuritycenterV1p1beta1Asset =
   GoogleCloudSecuritycenterV1p1beta1Asset
-    { createTime = Core.Nothing,
+    { createTime =
+        Core.Nothing,
       iamPolicy = Core.Nothing,
       name = Core.Nothing,
       resourceProperties = Core.Nothing,
@@ -907,10 +892,7 @@ newGoogleCloudSecuritycenterV1p1beta1Asset =
       updateTime = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudSecuritycenterV1p1beta1Asset
-  where
+instance Core.FromJSON GoogleCloudSecuritycenterV1p1beta1Asset where
   parseJSON =
     Core.withObject
       "GoogleCloudSecuritycenterV1p1beta1Asset"
@@ -925,18 +907,14 @@ instance
             Core.<*> (o Core..:? "updateTime")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1p1beta1Asset
-  where
+instance Core.ToJSON GoogleCloudSecuritycenterV1p1beta1Asset where
   toJSON GoogleCloudSecuritycenterV1p1beta1Asset {..} =
     Core.object
       ( Core.catMaybes
           [ ("createTime" Core..=) Core.<$> createTime,
             ("iamPolicy" Core..=) Core.<$> iamPolicy,
             ("name" Core..=) Core.<$> name,
-            ("resourceProperties" Core..=)
-              Core.<$> resourceProperties,
+            ("resourceProperties" Core..=) Core.<$> resourceProperties,
             ("securityCenterProperties" Core..=)
               Core.<$> securityCenterProperties,
             ("securityMarks" Core..=) Core.<$> securityMarks,
@@ -948,8 +926,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties' smart constructor.
 newtype GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties = GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -958,10 +935,12 @@ newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
-newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties additional =
-  GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
-    { additional = additional
-    }
+newGoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
+  additional =
+    GoogleCloudSecuritycenterV1p1beta1Asset_ResourceProperties
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1020,7 +999,8 @@ newGoogleCloudSecuritycenterV1p1beta1Finding ::
   GoogleCloudSecuritycenterV1p1beta1Finding
 newGoogleCloudSecuritycenterV1p1beta1Finding =
   GoogleCloudSecuritycenterV1p1beta1Finding
-    { category = Core.Nothing,
+    { category =
+        Core.Nothing,
       createTime = Core.Nothing,
       eventTime = Core.Nothing,
       externalUri = Core.Nothing,
@@ -1033,10 +1013,7 @@ newGoogleCloudSecuritycenterV1p1beta1Finding =
       state = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudSecuritycenterV1p1beta1Finding
-  where
+instance Core.FromJSON GoogleCloudSecuritycenterV1p1beta1Finding where
   parseJSON =
     Core.withObject
       "GoogleCloudSecuritycenterV1p1beta1Finding"
@@ -1055,10 +1032,7 @@ instance
             Core.<*> (o Core..:? "state")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1p1beta1Finding
-  where
+instance Core.ToJSON GoogleCloudSecuritycenterV1p1beta1Finding where
   toJSON GoogleCloudSecuritycenterV1p1beta1Finding {..} =
     Core.object
       ( Core.catMaybes
@@ -1071,8 +1045,7 @@ instance
             ("resourceName" Core..=) Core.<$> resourceName,
             ("securityMarks" Core..=) Core.<$> securityMarks,
             ("severity" Core..=) Core.<$> severity,
-            ("sourceProperties" Core..=)
-              Core.<$> sourceProperties,
+            ("sourceProperties" Core..=) Core.<$> sourceProperties,
             ("state" Core..=) Core.<$> state
           ]
       )
@@ -1081,8 +1054,7 @@ instance
 --
 -- /See:/ 'newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties' smart constructor.
 newtype GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties = GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1091,10 +1063,12 @@ newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties ::
   -- |  See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
-newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties additional =
-  GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
-    { additional = additional
-    }
+newGoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
+  additional =
+    GoogleCloudSecuritycenterV1p1beta1Finding_SourceProperties
+      { additional =
+          additional
+      }
 
 instance
   Core.FromJSON
@@ -1129,12 +1103,12 @@ newtype GoogleCloudSecuritycenterV1p1beta1IamPolicy = GoogleCloudSecuritycenterV
 newGoogleCloudSecuritycenterV1p1beta1IamPolicy ::
   GoogleCloudSecuritycenterV1p1beta1IamPolicy
 newGoogleCloudSecuritycenterV1p1beta1IamPolicy =
-  GoogleCloudSecuritycenterV1p1beta1IamPolicy {policyBlob = Core.Nothing}
+  GoogleCloudSecuritycenterV1p1beta1IamPolicy
+    { policyBlob =
+        Core.Nothing
+    }
 
-instance
-  Core.FromJSON
-    GoogleCloudSecuritycenterV1p1beta1IamPolicy
-  where
+instance Core.FromJSON GoogleCloudSecuritycenterV1p1beta1IamPolicy where
   parseJSON =
     Core.withObject
       "GoogleCloudSecuritycenterV1p1beta1IamPolicy"
@@ -1143,16 +1117,10 @@ instance
             Core.<$> (o Core..:? "policyBlob")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1p1beta1IamPolicy
-  where
-  toJSON
-    GoogleCloudSecuritycenterV1p1beta1IamPolicy {..} =
-      Core.object
-        ( Core.catMaybes
-            [("policyBlob" Core..=) Core.<$> policyBlob]
-        )
+instance Core.ToJSON GoogleCloudSecuritycenterV1p1beta1IamPolicy where
+  toJSON GoogleCloudSecuritycenterV1p1beta1IamPolicy {..} =
+    Core.object
+      (Core.catMaybes [("policyBlob" Core..=) Core.<$> policyBlob])
 
 -- | Security Command Center\'s Notification
 --
@@ -1174,7 +1142,8 @@ newGoogleCloudSecuritycenterV1p1beta1NotificationMessage ::
   GoogleCloudSecuritycenterV1p1beta1NotificationMessage
 newGoogleCloudSecuritycenterV1p1beta1NotificationMessage =
   GoogleCloudSecuritycenterV1p1beta1NotificationMessage
-    { finding = Core.Nothing,
+    { finding =
+        Core.Nothing,
       notificationConfigName = Core.Nothing,
       resource = Core.Nothing,
       temporalAsset = Core.Nothing
@@ -1190,26 +1159,24 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1p1beta1NotificationMessage
             Core.<$> (o Core..:? "finding")
-              Core.<*> (o Core..:? "notificationConfigName")
-              Core.<*> (o Core..:? "resource")
-              Core.<*> (o Core..:? "temporalAsset")
+            Core.<*> (o Core..:? "notificationConfigName")
+            Core.<*> (o Core..:? "resource")
+            Core.<*> (o Core..:? "temporalAsset")
       )
 
 instance
   Core.ToJSON
     GoogleCloudSecuritycenterV1p1beta1NotificationMessage
   where
-  toJSON
-    GoogleCloudSecuritycenterV1p1beta1NotificationMessage {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("finding" Core..=) Core.<$> finding,
-              ("notificationConfigName" Core..=)
-                Core.<$> notificationConfigName,
-              ("resource" Core..=) Core.<$> resource,
-              ("temporalAsset" Core..=) Core.<$> temporalAsset
-            ]
-        )
+  toJSON GoogleCloudSecuritycenterV1p1beta1NotificationMessage {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("finding" Core..=) Core.<$> finding,
+            ("notificationConfigName" Core..=) Core.<$> notificationConfigName,
+            ("resource" Core..=) Core.<$> resource,
+            ("temporalAsset" Core..=) Core.<$> temporalAsset
+          ]
+      )
 
 -- | Information related to the Google Cloud resource.
 --
@@ -1240,10 +1207,7 @@ newGoogleCloudSecuritycenterV1p1beta1Resource =
       projectDisplayName = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    GoogleCloudSecuritycenterV1p1beta1Resource
-  where
+instance Core.FromJSON GoogleCloudSecuritycenterV1p1beta1Resource where
   parseJSON =
     Core.withObject
       "GoogleCloudSecuritycenterV1p1beta1Resource"
@@ -1256,20 +1220,15 @@ instance
             Core.<*> (o Core..:? "projectDisplayName")
       )
 
-instance
-  Core.ToJSON
-    GoogleCloudSecuritycenterV1p1beta1Resource
-  where
+instance Core.ToJSON GoogleCloudSecuritycenterV1p1beta1Resource where
   toJSON GoogleCloudSecuritycenterV1p1beta1Resource {..} =
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
             ("parent" Core..=) Core.<$> parent,
-            ("parentDisplayName" Core..=)
-              Core.<$> parentDisplayName,
+            ("parentDisplayName" Core..=) Core.<$> parentDisplayName,
             ("project" Core..=) Core.<$> project,
-            ("projectDisplayName" Core..=)
-              Core.<$> projectDisplayName
+            ("projectDisplayName" Core..=) Core.<$> projectDisplayName
           ]
       )
 
@@ -1292,7 +1251,8 @@ newGoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse ::
   GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
 newGoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse =
   GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
-    { duration = Core.Nothing,
+    { duration =
+        Core.Nothing,
       state = Core.Nothing
     }
 
@@ -1306,7 +1266,7 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1p1beta1RunAssetDiscoveryResponse
             Core.<$> (o Core..:? "duration")
-              Core.<*> (o Core..:? "state")
+            Core.<*> (o Core..:? "state")
       )
 
 instance
@@ -1350,13 +1310,16 @@ newGoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties ::
   GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
 newGoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties =
   GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
-    { resourceDisplayName = Core.Nothing,
+    { resourceDisplayName =
+        Core.Nothing,
       resourceName = Core.Nothing,
       resourceOwners = Core.Nothing,
       resourceParent = Core.Nothing,
-      resourceParentDisplayName = Core.Nothing,
+      resourceParentDisplayName =
+        Core.Nothing,
       resourceProject = Core.Nothing,
-      resourceProjectDisplayName = Core.Nothing,
+      resourceProjectDisplayName =
+        Core.Nothing,
       resourceType = Core.Nothing
     }
 
@@ -1370,13 +1333,13 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties
             Core.<$> (o Core..:? "resourceDisplayName")
-              Core.<*> (o Core..:? "resourceName")
-              Core.<*> (o Core..:? "resourceOwners")
-              Core.<*> (o Core..:? "resourceParent")
-              Core.<*> (o Core..:? "resourceParentDisplayName")
-              Core.<*> (o Core..:? "resourceProject")
-              Core.<*> (o Core..:? "resourceProjectDisplayName")
-              Core.<*> (o Core..:? "resourceType")
+            Core.<*> (o Core..:? "resourceName")
+            Core.<*> (o Core..:? "resourceOwners")
+            Core.<*> (o Core..:? "resourceParent")
+            Core.<*> (o Core..:? "resourceParentDisplayName")
+            Core.<*> (o Core..:? "resourceProject")
+            Core.<*> (o Core..:? "resourceProjectDisplayName")
+            Core.<*> (o Core..:? "resourceType")
       )
 
 instance
@@ -1387,8 +1350,7 @@ instance
     GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties {..} =
       Core.object
         ( Core.catMaybes
-            [ ("resourceDisplayName" Core..=)
-                Core.<$> resourceDisplayName,
+            [ ("resourceDisplayName" Core..=) Core.<$> resourceDisplayName,
               ("resourceName" Core..=) Core.<$> resourceName,
               ("resourceOwners" Core..=) Core.<$> resourceOwners,
               ("resourceParent" Core..=) Core.<$> resourceParent,
@@ -1417,7 +1379,8 @@ newGoogleCloudSecuritycenterV1p1beta1SecurityMarks ::
   GoogleCloudSecuritycenterV1p1beta1SecurityMarks
 newGoogleCloudSecuritycenterV1p1beta1SecurityMarks =
   GoogleCloudSecuritycenterV1p1beta1SecurityMarks
-    { marks = Core.Nothing,
+    { marks =
+        Core.Nothing,
       name = Core.Nothing
     }
 
@@ -1430,28 +1393,25 @@ instance
       "GoogleCloudSecuritycenterV1p1beta1SecurityMarks"
       ( \o ->
           GoogleCloudSecuritycenterV1p1beta1SecurityMarks
-            Core.<$> (o Core..:? "marks") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "marks")
+            Core.<*> (o Core..:? "name")
       )
 
 instance
   Core.ToJSON
     GoogleCloudSecuritycenterV1p1beta1SecurityMarks
   where
-  toJSON
-    GoogleCloudSecuritycenterV1p1beta1SecurityMarks {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("marks" Core..=) Core.<$> marks,
-              ("name" Core..=) Core.<$> name
-            ]
-        )
+  toJSON GoogleCloudSecuritycenterV1p1beta1SecurityMarks {..} =
+    Core.object
+      ( Core.catMaybes
+          [("marks" Core..=) Core.<$> marks, ("name" Core..=) Core.<$> name]
+      )
 
 -- | Mutable user specified security marks belonging to the parent resource. Constraints are as follows: * Keys and values are treated as case insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys must be letters, numbers, underscores, or dashes * Values have leading and trailing whitespace trimmed, remaining characters must be between 1 - 4096 characters (inclusive)
 --
 -- /See:/ 'newGoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks' smart constructor.
 newtype GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks = GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1462,7 +1422,8 @@ newGoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks ::
   GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
 newGoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks additional =
   GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
-    { additional = additional
+    { additional =
+        additional
     }
 
 instance
@@ -1481,9 +1442,8 @@ instance
   Core.ToJSON
     GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks
   where
-  toJSON
-    GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks {..} =
-      Core.toJSON additional
+  toJSON GoogleCloudSecuritycenterV1p1beta1SecurityMarks_Marks {..} =
+    Core.toJSON additional
 
 -- | Wrapper over asset object that also captures the state change for the asset e.g. if it was a newly created asset vs updated or deleted asset.
 --
@@ -1504,7 +1464,8 @@ newGoogleCloudSecuritycenterV1p1beta1TemporalAsset ::
   GoogleCloudSecuritycenterV1p1beta1TemporalAsset
 newGoogleCloudSecuritycenterV1p1beta1TemporalAsset =
   GoogleCloudSecuritycenterV1p1beta1TemporalAsset
-    { asset = Core.Nothing,
+    { asset =
+        Core.Nothing,
       changeType = Core.Nothing
     }
 
@@ -1518,21 +1479,20 @@ instance
       ( \o ->
           GoogleCloudSecuritycenterV1p1beta1TemporalAsset
             Core.<$> (o Core..:? "asset")
-              Core.<*> (o Core..:? "changeType")
+            Core.<*> (o Core..:? "changeType")
       )
 
 instance
   Core.ToJSON
     GoogleCloudSecuritycenterV1p1beta1TemporalAsset
   where
-  toJSON
-    GoogleCloudSecuritycenterV1p1beta1TemporalAsset {..} =
-      Core.object
-        ( Core.catMaybes
-            [ ("asset" Core..=) Core.<$> asset,
-              ("changeType" Core..=) Core.<$> changeType
-            ]
-        )
+  toJSON GoogleCloudSecuritycenterV1p1beta1TemporalAsset {..} =
+    Core.object
+      ( Core.catMaybes
+          [ ("asset" Core..=) Core.<$> asset,
+            ("changeType" Core..=) Core.<$> changeType
+          ]
+      )
 
 -- | Request message for grouping by assets.
 --
@@ -1587,8 +1547,7 @@ instance Core.ToJSON GroupAssetsRequest where
   toJSON GroupAssetsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("compareDuration" Core..=)
-              Core.<$> compareDuration,
+          [ ("compareDuration" Core..=) Core.<$> compareDuration,
             ("filter" Core..=) Core.<$> filter,
             ("groupBy" Core..=) Core.<$> groupBy,
             ("pageSize" Core..=) Core.<$> pageSize,
@@ -1698,8 +1657,7 @@ instance Core.ToJSON GroupFindingsRequest where
   toJSON GroupFindingsRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("compareDuration" Core..=)
-              Core.<$> compareDuration,
+          [ ("compareDuration" Core..=) Core.<$> compareDuration,
             ("filter" Core..=) Core.<$> filter,
             ("groupBy" Core..=) Core.<$> groupBy,
             ("pageSize" Core..=) Core.<$> pageSize,
@@ -1771,7 +1729,8 @@ data GroupResult = GroupResult
 -- | Creates a value of 'GroupResult' with the minimum fields required to make a request.
 newGroupResult ::
   GroupResult
-newGroupResult = GroupResult {count = Core.Nothing, properties = Core.Nothing}
+newGroupResult =
+  GroupResult {count = Core.Nothing, properties = Core.Nothing}
 
 instance Core.FromJSON GroupResult where
   parseJSON =
@@ -1779,9 +1738,7 @@ instance Core.FromJSON GroupResult where
       "GroupResult"
       ( \o ->
           GroupResult
-            Core.<$> ( o Core..:? "count"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "count" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "properties")
       )
 
@@ -1798,8 +1755,7 @@ instance Core.ToJSON GroupResult where
 --
 -- /See:/ 'newGroupResult_Properties' smart constructor.
 newtype GroupResult_Properties = GroupResult_Properties
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Value)
+  { additional :: (Core.HashMap Core.Text Core.Value)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -1815,14 +1771,10 @@ instance Core.FromJSON GroupResult_Properties where
   parseJSON =
     Core.withObject
       "GroupResult_Properties"
-      ( \o ->
-          GroupResult_Properties
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> GroupResult_Properties Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON GroupResult_Properties where
-  toJSON GroupResult_Properties {..} =
-    Core.toJSON additional
+  toJSON GroupResult_Properties {..} = Core.toJSON additional
 
 -- | Response message for listing assets.
 --
@@ -1866,8 +1818,7 @@ instance Core.ToJSON ListAssetsResponse where
   toJSON ListAssetsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("listAssetsResults" Core..=)
-              Core.<$> listAssetsResults,
+          [ ("listAssetsResults" Core..=) Core.<$> listAssetsResults,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("readTime" Core..=) Core.<$> readTime,
             ("totalSize" Core..=) Core.<$> totalSize
@@ -1889,7 +1840,10 @@ data ListAssetsResult = ListAssetsResult
 newListAssetsResult ::
   ListAssetsResult
 newListAssetsResult =
-  ListAssetsResult {asset = Core.Nothing, stateChange = Core.Nothing}
+  ListAssetsResult
+    { asset = Core.Nothing,
+      stateChange = Core.Nothing
+    }
 
 instance Core.FromJSON ListAssetsResult where
   parseJSON =
@@ -1952,8 +1906,7 @@ instance Core.ToJSON ListFindingsResponse where
   toJSON ListFindingsResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("listFindingsResults" Core..=)
-              Core.<$> listFindingsResults,
+          [ ("listFindingsResults" Core..=) Core.<$> listFindingsResults,
             ("nextPageToken" Core..=) Core.<$> nextPageToken,
             ("readTime" Core..=) Core.<$> readTime,
             ("totalSize" Core..=) Core.<$> totalSize
@@ -2024,10 +1977,7 @@ newListNotificationConfigsResponse =
       notificationConfigs = Core.Nothing
     }
 
-instance
-  Core.FromJSON
-    ListNotificationConfigsResponse
-  where
+instance Core.FromJSON ListNotificationConfigsResponse where
   parseJSON =
     Core.withObject
       "ListNotificationConfigsResponse"
@@ -2042,8 +1992,7 @@ instance Core.ToJSON ListNotificationConfigsResponse where
     Core.object
       ( Core.catMaybes
           [ ("nextPageToken" Core..=) Core.<$> nextPageToken,
-            ("notificationConfigs" Core..=)
-              Core.<$> notificationConfigs
+            ("notificationConfigs" Core..=) Core.<$> notificationConfigs
           ]
       )
 
@@ -2101,7 +2050,10 @@ data ListSourcesResponse = ListSourcesResponse
 newListSourcesResponse ::
   ListSourcesResponse
 newListSourcesResponse =
-  ListSourcesResponse {nextPageToken = Core.Nothing, sources = Core.Nothing}
+  ListSourcesResponse
+    { nextPageToken = Core.Nothing,
+      sources = Core.Nothing
+    }
 
 instance Core.FromJSON ListSourcesResponse where
   parseJSON =
@@ -2177,8 +2129,7 @@ instance Core.ToJSON NotificationConfig where
             ("name" Core..=) Core.<$> name,
             ("pubsubTopic" Core..=) Core.<$> pubsubTopic,
             ("serviceAccount" Core..=) Core.<$> serviceAccount,
-            ("streamingConfig" Core..=)
-              Core.<$> streamingConfig
+            ("streamingConfig" Core..=) Core.<$> streamingConfig
           ]
       )
 
@@ -2250,19 +2201,17 @@ newOperation_Metadata ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Metadata
-newOperation_Metadata additional = Operation_Metadata {additional = additional}
+newOperation_Metadata additional =
+  Operation_Metadata {additional = additional}
 
 instance Core.FromJSON Operation_Metadata where
   parseJSON =
     Core.withObject
       "Operation_Metadata"
-      ( \o ->
-          Operation_Metadata Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Metadata Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Metadata where
-  toJSON Operation_Metadata {..} =
-    Core.toJSON additional
+  toJSON Operation_Metadata {..} = Core.toJSON additional
 
 -- | The normal response of the operation in case of success. If the original method returns no data on success, such as @Delete@, the response is @google.protobuf.Empty@. If the original method is standard @Get@\/@Create@\/@Update@, the response should be the resource. For other methods, the response should have the type @XxxResponse@, where @Xxx@ is the original method name. For example, if the original method name is @TakeSnapshot()@, the inferred response type is @TakeSnapshotResponse@.
 --
@@ -2278,19 +2227,17 @@ newOperation_Response ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Operation_Response
-newOperation_Response additional = Operation_Response {additional = additional}
+newOperation_Response additional =
+  Operation_Response {additional = additional}
 
 instance Core.FromJSON Operation_Response where
   parseJSON =
     Core.withObject
       "Operation_Response"
-      ( \o ->
-          Operation_Response Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Operation_Response Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Operation_Response where
-  toJSON Operation_Response {..} =
-    Core.toJSON additional
+  toJSON Operation_Response {..} = Core.toJSON additional
 
 -- | User specified settings that are attached to the Security Command Center organization.
 --
@@ -2330,10 +2277,8 @@ instance Core.ToJSON OrganizationSettings where
   toJSON OrganizationSettings {..} =
     Core.object
       ( Core.catMaybes
-          [ ("assetDiscoveryConfig" Core..=)
-              Core.<$> assetDiscoveryConfig,
-            ("enableAssetDiscovery" Core..=)
-              Core.<$> enableAssetDiscovery,
+          [ ("assetDiscoveryConfig" Core..=) Core.<$> assetDiscoveryConfig,
+            ("enableAssetDiscovery" Core..=) Core.<$> enableAssetDiscovery,
             ("name" Core..=) Core.<$> name
           ]
       )
@@ -2437,11 +2382,9 @@ instance Core.ToJSON Resource where
     Core.object
       ( Core.catMaybes
           [ ("name" Core..=) Core.<$> name,
-            ("parentDisplayName" Core..=)
-              Core.<$> parentDisplayName,
+            ("parentDisplayName" Core..=) Core.<$> parentDisplayName,
             ("parentName" Core..=) Core.<$> parentName,
-            ("projectDisplayName" Core..=)
-              Core.<$> projectDisplayName,
+            ("projectDisplayName" Core..=) Core.<$> projectDisplayName,
             ("projectName" Core..=) Core.<$> projectName
           ]
       )
@@ -2480,7 +2423,8 @@ data SecurityMarks = SecurityMarks
 -- | Creates a value of 'SecurityMarks' with the minimum fields required to make a request.
 newSecurityMarks ::
   SecurityMarks
-newSecurityMarks = SecurityMarks {marks = Core.Nothing, name = Core.Nothing}
+newSecurityMarks =
+  SecurityMarks {marks = Core.Nothing, name = Core.Nothing}
 
 instance Core.FromJSON SecurityMarks where
   parseJSON =
@@ -2488,24 +2432,22 @@ instance Core.FromJSON SecurityMarks where
       "SecurityMarks"
       ( \o ->
           SecurityMarks
-            Core.<$> (o Core..:? "marks") Core.<*> (o Core..:? "name")
+            Core.<$> (o Core..:? "marks")
+            Core.<*> (o Core..:? "name")
       )
 
 instance Core.ToJSON SecurityMarks where
   toJSON SecurityMarks {..} =
     Core.object
       ( Core.catMaybes
-          [ ("marks" Core..=) Core.<$> marks,
-            ("name" Core..=) Core.<$> name
-          ]
+          [("marks" Core..=) Core.<$> marks, ("name" Core..=) Core.<$> name]
       )
 
 -- | Mutable user specified security marks belonging to the parent resource. Constraints are as follows: * Keys and values are treated as case insensitive * Keys must be between 1 - 256 characters (inclusive) * Keys must be letters, numbers, underscores, or dashes * Values have leading and trailing whitespace trimmed, remaining characters must be between 1 - 4096 characters (inclusive)
 --
 -- /See:/ 'newSecurityMarks_Marks' smart constructor.
 newtype SecurityMarks_Marks = SecurityMarks_Marks
-  { -- |
-    additional :: (Core.HashMap Core.Text Core.Text)
+  { additional :: (Core.HashMap Core.Text Core.Text)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -2521,14 +2463,10 @@ instance Core.FromJSON SecurityMarks_Marks where
   parseJSON =
     Core.withObject
       "SecurityMarks_Marks"
-      ( \o ->
-          SecurityMarks_Marks
-            Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> SecurityMarks_Marks Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON SecurityMarks_Marks where
-  toJSON SecurityMarks_Marks {..} =
-    Core.toJSON additional
+  toJSON SecurityMarks_Marks {..} = Core.toJSON additional
 
 -- | Request message for updating a finding\'s state.
 --
@@ -2545,7 +2483,10 @@ data SetFindingStateRequest = SetFindingStateRequest
 newSetFindingStateRequest ::
   SetFindingStateRequest
 newSetFindingStateRequest =
-  SetFindingStateRequest {startTime = Core.Nothing, state = Core.Nothing}
+  SetFindingStateRequest
+    { startTime = Core.Nothing,
+      state = Core.Nothing
+    }
 
 instance Core.FromJSON SetFindingStateRequest where
   parseJSON =
@@ -2581,7 +2522,10 @@ data SetIamPolicyRequest = SetIamPolicyRequest
 newSetIamPolicyRequest ::
   SetIamPolicyRequest
 newSetIamPolicyRequest =
-  SetIamPolicyRequest {policy = Core.Nothing, updateMask = Core.Nothing}
+  SetIamPolicyRequest
+    { policy = Core.Nothing,
+      updateMask = Core.Nothing
+    }
 
 instance Core.FromJSON SetIamPolicyRequest where
   parseJSON =
@@ -2663,7 +2607,11 @@ data Status = Status
 newStatus ::
   Status
 newStatus =
-  Status {code = Core.Nothing, details = Core.Nothing, message = Core.Nothing}
+  Status
+    { code = Core.Nothing,
+      details = Core.Nothing,
+      message = Core.Nothing
+    }
 
 instance Core.FromJSON Status where
   parseJSON =
@@ -2699,19 +2647,17 @@ newStatus_DetailsItem ::
   -- |  Properties of the object. Contains field \@type with type URL. See 'additional'.
   Core.HashMap Core.Text Core.Value ->
   Status_DetailsItem
-newStatus_DetailsItem additional = Status_DetailsItem {additional = additional}
+newStatus_DetailsItem additional =
+  Status_DetailsItem {additional = additional}
 
 instance Core.FromJSON Status_DetailsItem where
   parseJSON =
     Core.withObject
       "Status_DetailsItem"
-      ( \o ->
-          Status_DetailsItem Core.<$> (Core.parseJSONObject o)
-      )
+      (\o -> Status_DetailsItem Core.<$> (Core.parseJSONObject o))
 
 instance Core.ToJSON Status_DetailsItem where
-  toJSON Status_DetailsItem {..} =
-    Core.toJSON additional
+  toJSON Status_DetailsItem {..} = Core.toJSON additional
 
 -- | The config for streaming-based notifications, which send each event as soon as it is detected.
 --
@@ -2731,14 +2677,11 @@ instance Core.FromJSON StreamingConfig where
   parseJSON =
     Core.withObject
       "StreamingConfig"
-      ( \o ->
-          StreamingConfig Core.<$> (o Core..:? "filter")
-      )
+      (\o -> StreamingConfig Core.<$> (o Core..:? "filter"))
 
 instance Core.ToJSON StreamingConfig where
   toJSON StreamingConfig {..} =
-    Core.object
-      (Core.catMaybes [("filter" Core..=) Core.<$> filter])
+    Core.object (Core.catMaybes [("filter" Core..=) Core.<$> filter])
 
 -- | Request message for @TestIamPermissions@ method.
 --
@@ -2760,16 +2703,13 @@ instance Core.FromJSON TestIamPermissionsRequest where
     Core.withObject
       "TestIamPermissionsRequest"
       ( \o ->
-          TestIamPermissionsRequest
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsRequest Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsRequest where
   toJSON TestIamPermissionsRequest {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])
 
 -- | Response message for @TestIamPermissions@ method.
 --
@@ -2791,13 +2731,10 @@ instance Core.FromJSON TestIamPermissionsResponse where
     Core.withObject
       "TestIamPermissionsResponse"
       ( \o ->
-          TestIamPermissionsResponse
-            Core.<$> (o Core..:? "permissions")
+          TestIamPermissionsResponse Core.<$> (o Core..:? "permissions")
       )
 
 instance Core.ToJSON TestIamPermissionsResponse where
   toJSON TestIamPermissionsResponse {..} =
     Core.object
-      ( Core.catMaybes
-          [("permissions" Core..=) Core.<$> permissions]
-      )
+      (Core.catMaybes [("permissions" Core..=) Core.<$> permissions])

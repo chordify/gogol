@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FireStore.Projects.Databases.CollectionGroups.Indexes.Create
 where
 
 import Gogol.FireStore.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @firestore.projects.databases.collectionGroups.indexes.create@ method which the
 -- 'FireStoreProjectsDatabasesCollectionGroupsIndexesCreate' request conforms to.
@@ -85,28 +83,29 @@ newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate ::
   -- |  Multipart request metadata. See 'payload'.
   GoogleFirestoreAdminV1Index ->
   FireStoreProjectsDatabasesCollectionGroupsIndexesCreate
-newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate parent payload =
-  FireStoreProjectsDatabasesCollectionGroupsIndexesCreate
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      parent = parent,
-      payload = payload,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newFireStoreProjectsDatabasesCollectionGroupsIndexesCreate
+  parent
+  payload =
+    FireStoreProjectsDatabasesCollectionGroupsIndexesCreate
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        parent = parent,
+        payload = payload,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     FireStoreProjectsDatabasesCollectionGroupsIndexesCreate
   where
   type
-    Rs
-      FireStoreProjectsDatabasesCollectionGroupsIndexesCreate =
+    Rs FireStoreProjectsDatabasesCollectionGroupsIndexesCreate =
       GoogleLongrunningOperation
   type
-    Scopes
-      FireStoreProjectsDatabasesCollectionGroupsIndexesCreate =
+    Scopes FireStoreProjectsDatabasesCollectionGroupsIndexesCreate =
       '[CloudPlatform'FullControl, Datastore'FullControl]
   requestClient
     FireStoreProjectsDatabasesCollectionGroupsIndexesCreate {..} =

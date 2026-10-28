@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Games.Achievements.SetStepsAtLeast
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Games.Achievements.SetStepsAtLeast
 where
 
 import Gogol.Games.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @games.achievements.setStepsAtLeast@ method which the
 -- 'GamesAchievementsSetStepsAtLeast' request conforms to.
@@ -57,9 +55,7 @@ type GamesAchievementsSetStepsAtLeastResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Post
-              '[Core.JSON]
-              AchievementSetStepsAtLeastResponse
+    Core.:> Core.Post '[Core.JSON] AchievementSetStepsAtLeastResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.
 --
@@ -73,7 +69,7 @@ data GamesAchievementsSetStepsAtLeast = GamesAchievementsSetStepsAtLeast
     achievementId :: Core.Text,
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | The minimum value to set the steps to.
+    -- | Required. The minimum value to set the steps to.
     steps :: Core.Int32,
     -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
     uploadType :: (Core.Maybe Core.Text),
@@ -86,7 +82,7 @@ data GamesAchievementsSetStepsAtLeast = GamesAchievementsSetStepsAtLeast
 newGamesAchievementsSetStepsAtLeast ::
   -- |  The ID of the achievement used by this method. See 'achievementId'.
   Core.Text ->
-  -- |  The minimum value to set the steps to. See 'steps'.
+  -- |  Required. The minimum value to set the steps to. See 'steps'.
   Core.Int32 ->
   GamesAchievementsSetStepsAtLeast
 newGamesAchievementsSetStepsAtLeast achievementId steps =
@@ -100,16 +96,11 @@ newGamesAchievementsSetStepsAtLeast achievementId steps =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    GamesAchievementsSetStepsAtLeast
-  where
+instance Core.GoogleRequest GamesAchievementsSetStepsAtLeast where
   type
     Rs GamesAchievementsSetStepsAtLeast =
       AchievementSetStepsAtLeastResponse
-  type
-    Scopes GamesAchievementsSetStepsAtLeast =
-      '[Games'FullControl]
+  type Scopes GamesAchievementsSetStepsAtLeast = '[Games'FullControl]
   requestClient GamesAchievementsSetStepsAtLeast {..} =
     go
       achievementId
@@ -124,7 +115,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy GamesAchievementsSetStepsAtLeastResource
-          )
+          (Core.Proxy :: Core.Proxy GamesAchievementsSetStepsAtLeastResource)
           Core.mempty

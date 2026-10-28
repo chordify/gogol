@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.Agents.Changelogs.Get
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.agents.changelogs.get@ method which the
 -- 'DialogFlowProjectsLocationsAgentsChangelogsGet' request conforms to.
@@ -53,9 +51,7 @@ type DialogFlowProjectsLocationsAgentsChangelogsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3Changelog
+    Core.:> Core.Get '[Core.JSON] GoogleCloudDialogflowCxV3Changelog
 
 -- | Retrieves the specified Changelog.
 --
@@ -83,7 +79,8 @@ newDialogFlowProjectsLocationsAgentsChangelogsGet ::
   DialogFlowProjectsLocationsAgentsChangelogsGet
 newDialogFlowProjectsLocationsAgentsChangelogsGet name =
   DialogFlowProjectsLocationsAgentsChangelogsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -96,29 +93,25 @@ instance
     DialogFlowProjectsLocationsAgentsChangelogsGet
   where
   type
-    Rs
-      DialogFlowProjectsLocationsAgentsChangelogsGet =
+    Rs DialogFlowProjectsLocationsAgentsChangelogsGet =
       GoogleCloudDialogflowCxV3Changelog
   type
-    Scopes
-      DialogFlowProjectsLocationsAgentsChangelogsGet =
+    Scopes DialogFlowProjectsLocationsAgentsChangelogsGet =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsAgentsChangelogsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsAgentsChangelogsGetResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsAgentsChangelogsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsAgentsChangelogsGetResource
+          )
+          Core.mempty

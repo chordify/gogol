@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.SecuritySettings.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.SecuritySettings.Get
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.securitySettings.get@ method which the
 -- 'DialogFlowProjectsLocationsSecuritySettingsGet' request conforms to.
@@ -53,9 +51,7 @@ type DialogFlowProjectsLocationsSecuritySettingsGetResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3SecuritySettings
+    Core.:> Core.Get '[Core.JSON] GoogleCloudDialogflowCxV3SecuritySettings
 
 -- | Retrieves the specified SecuritySettings. The returned settings may be stale by up to 1 minute.
 --
@@ -83,7 +79,8 @@ newDialogFlowProjectsLocationsSecuritySettingsGet ::
   DialogFlowProjectsLocationsSecuritySettingsGet
 newDialogFlowProjectsLocationsSecuritySettingsGet name =
   DialogFlowProjectsLocationsSecuritySettingsGet
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       name = name,
@@ -96,29 +93,25 @@ instance
     DialogFlowProjectsLocationsSecuritySettingsGet
   where
   type
-    Rs
-      DialogFlowProjectsLocationsSecuritySettingsGet =
+    Rs DialogFlowProjectsLocationsSecuritySettingsGet =
       GoogleCloudDialogflowCxV3SecuritySettings
   type
-    Scopes
-      DialogFlowProjectsLocationsSecuritySettingsGet =
+    Scopes DialogFlowProjectsLocationsSecuritySettingsGet =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsSecuritySettingsGet {..} =
-      go
-        name
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsSecuritySettingsGetResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsSecuritySettingsGet {..} =
+    go
+      name
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy DialogFlowProjectsLocationsSecuritySettingsGetResource
+          )
+          Core.mempty

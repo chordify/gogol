@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Storage.Buckets.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Storage.Buckets.Get
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Storage.Types
 
 -- | A resource alias for @storage.buckets.get@ method which the
@@ -49,9 +47,11 @@ type StorageBucketsGetResource =
     Core.:> "v1"
     Core.:> "b"
     Core.:> Core.Capture "bucket" Core.Text
+    Core.:> Core.QueryParam "generation" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationMatch" Core.Int64
     Core.:> Core.QueryParam "ifMetagenerationNotMatch" Core.Int64
     Core.:> Core.QueryParam "projection" BucketsGetProjection
+    Core.:> Core.QueryParam "softDeleted" Core.Bool
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "userProject" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
@@ -63,12 +63,16 @@ type StorageBucketsGetResource =
 data StorageBucketsGet = StorageBucketsGet
   { -- | Name of a bucket.
     bucket :: Core.Text,
+    -- | If present, specifies the generation of the bucket. This is required if softDeleted is true.
+    generation :: (Core.Maybe Core.Int64),
     -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration matches the given value.
     ifMetagenerationMatch :: (Core.Maybe Core.Int64),
     -- | Makes the return of the bucket metadata conditional on whether the bucket\'s current metageneration does not match the given value.
     ifMetagenerationNotMatch :: (Core.Maybe Core.Int64),
     -- | Set of properties to return. Defaults to noAcl.
     projection :: (Core.Maybe BucketsGetProjection),
+    -- | If true, return the soft-deleted version of this bucket. The default is false. For more information, see <https://cloud.google.com/storage/docs/soft-delete Soft Delete>.
+    softDeleted :: (Core.Maybe Core.Bool),
     -- | Upload protocol for media (e.g. \"media\", \"multipart\", \"resumable\").
     uploadType :: (Core.Maybe Core.Text),
     -- | The project to be billed for this request. Required for Requester Pays buckets.
@@ -84,9 +88,11 @@ newStorageBucketsGet ::
 newStorageBucketsGet bucket =
   StorageBucketsGet
     { bucket = bucket,
+      generation = Core.Nothing,
       ifMetagenerationMatch = Core.Nothing,
       ifMetagenerationNotMatch = Core.Nothing,
       projection = Core.Nothing,
+      softDeleted = Core.Nothing,
       uploadType = Core.Nothing,
       userProject = Core.Nothing
     }
@@ -104,9 +110,11 @@ instance Core.GoogleRequest StorageBucketsGet where
   requestClient StorageBucketsGet {..} =
     go
       bucket
+      generation
       ifMetagenerationMatch
       ifMetagenerationNotMatch
       projection
+      softDeleted
       uploadType
       userProject
       (Core.Just Core.AltJSON)

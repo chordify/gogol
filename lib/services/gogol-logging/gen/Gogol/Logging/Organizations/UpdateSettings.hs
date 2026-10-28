@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,13 +17,14 @@
 
 -- |
 -- Module      : Gogol.Logging.Organizations.UpdateSettings
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Updates the Log Router settings for the given resource.Note: Settings for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization.UpdateSettings will fail if 1) kms/key/name is invalid, or 2) the associated service account does not have the required roles\/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key, or 3) access to the key is disabled. 4) location/id is not supported by Logging. 5) location/id violate OrgPolicy.See Enabling CMEK for Log Router (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption) for more information.
+-- Updates the settings for the given resource. This method applies to all feature configurations for organization and folders.UpdateSettings fails when any of the following are true: The value of storage/location either isn\'t supported by Logging or violates the location OrgPolicy. The default/sink/config field is set, but it has an unspecified filter write mode. The value of kms/key_name is invalid. The associated service account doesn\'t have the required roles\/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key. Access to the key is disabled.See Configure default settings for organizations and folders (https:\/\/cloud.google.com\/logging\/docs\/default-settings) for more information.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Cloud Logging API Reference> for @logging.organizations.updateSettings@.
 module Gogol.Logging.Organizations.UpdateSettings
@@ -40,7 +38,7 @@ module Gogol.Logging.Organizations.UpdateSettings
 where
 
 import Gogol.Logging.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @logging.organizations.updateSettings@ method which the
 -- 'LoggingOrganizationsUpdateSettings' request conforms to.
@@ -58,7 +56,7 @@ type LoggingOrganizationsUpdateSettingsResource =
     Core.:> Core.ReqBody '[Core.JSON] Settings
     Core.:> Core.Patch '[Core.JSON] Settings
 
--- | Updates the Log Router settings for the given resource.Note: Settings for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization.UpdateSettings will fail if 1) kms/key/name is invalid, or 2) the associated service account does not have the required roles\/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key, or 3) access to the key is disabled. 4) location/id is not supported by Logging. 5) location/id violate OrgPolicy.See Enabling CMEK for Log Router (https:\/\/cloud.google.com\/logging\/docs\/routing\/managed-encryption) for more information.
+-- | Updates the settings for the given resource. This method applies to all feature configurations for organization and folders.UpdateSettings fails when any of the following are true: The value of storage/location either isn\'t supported by Logging or violates the location OrgPolicy. The default/sink/config field is set, but it has an unspecified filter write mode. The value of kms/key_name is invalid. The associated service account doesn\'t have the required roles\/cloudkms.cryptoKeyEncrypterDecrypter role assigned for the key. Access to the key is disabled.See Configure default settings for organizations and folders (https:\/\/cloud.google.com\/logging\/docs\/default-settings) for more information.
 --
 -- /See:/ 'newLoggingOrganizationsUpdateSettings' smart constructor.
 data LoggingOrganizationsUpdateSettings = LoggingOrganizationsUpdateSettings
@@ -68,7 +66,7 @@ data LoggingOrganizationsUpdateSettings = LoggingOrganizationsUpdateSettings
     accessToken :: (Core.Maybe Core.Text),
     -- | JSONP
     callback :: (Core.Maybe Core.Text),
-    -- | Required. The resource name for the settings to update. \"organizations\/[ORGANIZATION_ID]\/settings\" For example:\"organizations\/12345\/settings\"Note: Settings for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization.
+    -- | Required. The resource name for the settings to update. \"organizations\/[ORGANIZATION/ID]\/settings\" \"folders\/[FOLDER/ID]\/settings\" For example:\"organizations\/12345\/settings\"
     name :: Core.Text,
     -- | Multipart request metadata.
     payload :: Settings,
@@ -83,7 +81,7 @@ data LoggingOrganizationsUpdateSettings = LoggingOrganizationsUpdateSettings
 
 -- | Creates a value of 'LoggingOrganizationsUpdateSettings' with the minimum fields required to make a request.
 newLoggingOrganizationsUpdateSettings ::
-  -- |  Required. The resource name for the settings to update. \"organizations\/[ORGANIZATION_ID]\/settings\" For example:\"organizations\/12345\/settings\"Note: Settings for the Log Router can currently only be configured for Google Cloud organizations. Once configured, it applies to all projects and folders in the Google Cloud organization. See 'name'.
+  -- |  Required. The resource name for the settings to update. \"organizations\/[ORGANIZATION/ID]\/settings\" \"folders\/[FOLDER/ID]\/settings\" For example:\"organizations\/12345\/settings\" See 'name'.
   Core.Text ->
   -- |  Multipart request metadata. See 'payload'.
   Settings ->
@@ -100,10 +98,7 @@ newLoggingOrganizationsUpdateSettings name payload =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    LoggingOrganizationsUpdateSettings
-  where
+instance Core.GoogleRequest LoggingOrganizationsUpdateSettings where
   type Rs LoggingOrganizationsUpdateSettings = Settings
   type
     Scopes LoggingOrganizationsUpdateSettings =
@@ -124,7 +119,6 @@ instance
       go =
         Core.buildClient
           ( Core.Proxy ::
-              Core.Proxy
-                LoggingOrganizationsUpdateSettingsResource
+              Core.Proxy LoggingOrganizationsUpdateSettingsResource
           )
           Core.mempty

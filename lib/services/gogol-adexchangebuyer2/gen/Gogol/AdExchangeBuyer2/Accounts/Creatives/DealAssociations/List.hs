@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdExchangeBuyer2.Accounts.Creatives.DealAssociations.List
 where
 
 import Gogol.AdExchangeBuyer2.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adexchangebuyer2.accounts.creatives.dealAssociations.list@ method which the
 -- 'AdExchangeBuyer2AccountsCreativesDealAssociationsList' request conforms to.
@@ -60,9 +58,7 @@ type AdExchangeBuyer2AccountsCreativesDealAssociationsListResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.Get
-              '[Core.JSON]
-              ListDealAssociationsResponse
+    Core.:> Core.Get '[Core.JSON] ListDealAssociationsResponse
 
 -- | List all creative-deal associations.
 --
@@ -98,31 +94,32 @@ newAdExchangeBuyer2AccountsCreativesDealAssociationsList ::
   -- |  The creative ID to list the associations from. Specify \"-\" to list all creatives under the above account. See 'creativeId'.
   Core.Text ->
   AdExchangeBuyer2AccountsCreativesDealAssociationsList
-newAdExchangeBuyer2AccountsCreativesDealAssociationsList accountId creativeId =
-  AdExchangeBuyer2AccountsCreativesDealAssociationsList
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      accountId = accountId,
-      callback = Core.Nothing,
-      creativeId = creativeId,
-      pageSize = Core.Nothing,
-      pageToken = Core.Nothing,
-      query = Core.Nothing,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing
-    }
+newAdExchangeBuyer2AccountsCreativesDealAssociationsList
+  accountId
+  creativeId =
+    AdExchangeBuyer2AccountsCreativesDealAssociationsList
+      { xgafv =
+          Core.Nothing,
+        accessToken = Core.Nothing,
+        accountId = accountId,
+        callback = Core.Nothing,
+        creativeId = creativeId,
+        pageSize = Core.Nothing,
+        pageToken = Core.Nothing,
+        query = Core.Nothing,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing
+      }
 
 instance
   Core.GoogleRequest
     AdExchangeBuyer2AccountsCreativesDealAssociationsList
   where
   type
-    Rs
-      AdExchangeBuyer2AccountsCreativesDealAssociationsList =
+    Rs AdExchangeBuyer2AccountsCreativesDealAssociationsList =
       ListDealAssociationsResponse
   type
-    Scopes
-      AdExchangeBuyer2AccountsCreativesDealAssociationsList =
+    Scopes AdExchangeBuyer2AccountsCreativesDealAssociationsList =
       '[Adexchange'Buyer]
   requestClient
     AdExchangeBuyer2AccountsCreativesDealAssociationsList {..} =

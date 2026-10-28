@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AndroidEnterprise.Installs.Get
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AndroidEnterprise.Installs.Get
 where
 
 import Gogol.AndroidEnterprise.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @androidenterprise.installs.get@ method which the
 -- 'AndroidEnterpriseInstallsGet' request conforms to.
@@ -99,23 +97,24 @@ newAndroidEnterpriseInstallsGet ::
   -- |  The ID of the user. See 'userId'.
   Core.Text ->
   AndroidEnterpriseInstallsGet
-newAndroidEnterpriseInstallsGet deviceId enterpriseId installId userId =
-  AndroidEnterpriseInstallsGet
-    { xgafv = Core.Nothing,
-      accessToken = Core.Nothing,
-      callback = Core.Nothing,
-      deviceId = deviceId,
-      enterpriseId = enterpriseId,
-      installId = installId,
-      uploadType = Core.Nothing,
-      uploadProtocol = Core.Nothing,
-      userId = userId
-    }
-
-instance
-  Core.GoogleRequest
+newAndroidEnterpriseInstallsGet
+  deviceId
+  enterpriseId
+  installId
+  userId =
     AndroidEnterpriseInstallsGet
-  where
+      { xgafv = Core.Nothing,
+        accessToken = Core.Nothing,
+        callback = Core.Nothing,
+        deviceId = deviceId,
+        enterpriseId = enterpriseId,
+        installId = installId,
+        uploadType = Core.Nothing,
+        uploadProtocol = Core.Nothing,
+        userId = userId
+      }
+
+instance Core.GoogleRequest AndroidEnterpriseInstallsGet where
   type Rs AndroidEnterpriseInstallsGet = Install
   type
     Scopes AndroidEnterpriseInstallsGet =
@@ -136,7 +135,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AndroidEnterpriseInstallsGetResource
-          )
+          (Core.Proxy :: Core.Proxy AndroidEnterpriseInstallsGetResource)
           Core.mempty

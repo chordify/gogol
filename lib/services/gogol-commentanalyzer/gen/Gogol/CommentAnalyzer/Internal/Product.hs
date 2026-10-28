@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.CommentAnalyzer.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.CommentAnalyzer.Internal.Product
@@ -85,7 +83,7 @@ module Gogol.CommentAnalyzer.Internal.Product
 where
 
 import Gogol.CommentAnalyzer.Internal.Sum
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | The comment analysis request message. LINT.IfChange
 --
@@ -157,11 +155,9 @@ instance Core.ToJSON AnalyzeCommentRequest where
             ("context" Core..=) Core.<$> context,
             ("doNotStore" Core..=) Core.<$> doNotStore,
             ("languages" Core..=) Core.<$> languages,
-            ("requestedAttributes" Core..=)
-              Core.<$> requestedAttributes,
+            ("requestedAttributes" Core..=) Core.<$> requestedAttributes,
             ("sessionId" Core..=) Core.<$> sessionId,
-            ("spanAnnotations" Core..=)
-              Core.<$> spanAnnotations
+            ("spanAnnotations" Core..=) Core.<$> spanAnnotations
           ]
       )
 
@@ -169,8 +165,7 @@ instance Core.ToJSON AnalyzeCommentRequest where
 --
 -- /See:/ 'newAnalyzeCommentRequest_RequestedAttributes' smart constructor.
 newtype AnalyzeCommentRequest_RequestedAttributes = AnalyzeCommentRequest_RequestedAttributes
-  { -- |
-    additional :: (Core.HashMap Core.Text AttributeParameters)
+  { additional :: (Core.HashMap Core.Text AttributeParameters)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -180,12 +175,12 @@ newAnalyzeCommentRequest_RequestedAttributes ::
   Core.HashMap Core.Text AttributeParameters ->
   AnalyzeCommentRequest_RequestedAttributes
 newAnalyzeCommentRequest_RequestedAttributes additional =
-  AnalyzeCommentRequest_RequestedAttributes {additional = additional}
+  AnalyzeCommentRequest_RequestedAttributes
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    AnalyzeCommentRequest_RequestedAttributes
-  where
+instance Core.FromJSON AnalyzeCommentRequest_RequestedAttributes where
   parseJSON =
     Core.withObject
       "AnalyzeCommentRequest_RequestedAttributes"
@@ -194,10 +189,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    AnalyzeCommentRequest_RequestedAttributes
-  where
+instance Core.ToJSON AnalyzeCommentRequest_RequestedAttributes where
   toJSON AnalyzeCommentRequest_RequestedAttributes {..} =
     Core.toJSON additional
 
@@ -243,11 +235,9 @@ instance Core.ToJSON AnalyzeCommentResponse where
   toJSON AnalyzeCommentResponse {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributeScores" Core..=)
-              Core.<$> attributeScores,
+          [ ("attributeScores" Core..=) Core.<$> attributeScores,
             ("clientToken" Core..=) Core.<$> clientToken,
-            ("detectedLanguages" Core..=)
-              Core.<$> detectedLanguages,
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages,
             ("languages" Core..=) Core.<$> languages
           ]
       )
@@ -256,8 +246,7 @@ instance Core.ToJSON AnalyzeCommentResponse where
 --
 -- /See:/ 'newAnalyzeCommentResponse_AttributeScores' smart constructor.
 newtype AnalyzeCommentResponse_AttributeScores = AnalyzeCommentResponse_AttributeScores
-  { -- |
-    additional :: (Core.HashMap Core.Text AttributeScores)
+  { additional :: (Core.HashMap Core.Text AttributeScores)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -269,10 +258,7 @@ newAnalyzeCommentResponse_AttributeScores ::
 newAnalyzeCommentResponse_AttributeScores additional =
   AnalyzeCommentResponse_AttributeScores {additional = additional}
 
-instance
-  Core.FromJSON
-    AnalyzeCommentResponse_AttributeScores
-  where
+instance Core.FromJSON AnalyzeCommentResponse_AttributeScores where
   parseJSON =
     Core.withObject
       "AnalyzeCommentResponse_AttributeScores"
@@ -281,10 +267,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    AnalyzeCommentResponse_AttributeScores
-  where
+instance Core.ToJSON AnalyzeCommentResponse_AttributeScores where
   toJSON AnalyzeCommentResponse_AttributeScores {..} =
     Core.toJSON additional
 
@@ -303,7 +286,10 @@ data ArticleAndParentComment = ArticleAndParentComment
 newArticleAndParentComment ::
   ArticleAndParentComment
 newArticleAndParentComment =
-  ArticleAndParentComment {article = Core.Nothing, parentComment = Core.Nothing}
+  ArticleAndParentComment
+    { article = Core.Nothing,
+      parentComment = Core.Nothing
+    }
 
 instance Core.FromJSON ArticleAndParentComment where
   parseJSON =
@@ -339,7 +325,10 @@ data AttributeParameters = AttributeParameters
 newAttributeParameters ::
   AttributeParameters
 newAttributeParameters =
-  AttributeParameters {scoreThreshold = Core.Nothing, scoreType = Core.Nothing}
+  AttributeParameters
+    { scoreThreshold = Core.Nothing,
+      scoreType = Core.Nothing
+    }
 
 instance Core.FromJSON AttributeParameters where
   parseJSON =
@@ -375,7 +364,10 @@ data AttributeScores = AttributeScores
 newAttributeScores ::
   AttributeScores
 newAttributeScores =
-  AttributeScores {spanScores = Core.Nothing, summaryScore = Core.Nothing}
+  AttributeScores
+    { spanScores = Core.Nothing,
+      summaryScore = Core.Nothing
+    }
 
 instance Core.FromJSON AttributeScores where
   parseJSON =
@@ -411,7 +403,10 @@ data Context = Context
 newContext ::
   Context
 newContext =
-  Context {articleAndParentComment = Core.Nothing, entries = Core.Nothing}
+  Context
+    { articleAndParentComment = Core.Nothing,
+      entries = Core.Nothing
+    }
 
 instance Core.FromJSON Context where
   parseJSON =
@@ -454,8 +449,7 @@ instance Core.FromJSON Score where
     Core.withObject
       "Score"
       ( \o ->
-          Score
-            Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
+          Score Core.<$> (o Core..:? "type") Core.<*> (o Core..:? "value")
       )
 
 instance Core.ToJSON Score where
@@ -475,7 +469,6 @@ data SpanScore = SpanScore
     --
     -- If \"begin\" and \"end\" are unset, the score applies to the full text.
     begin :: (Core.Maybe Core.Int32),
-    -- |
     end :: (Core.Maybe Core.Int32),
     -- | The score value.
     score :: (Core.Maybe Score)
@@ -486,7 +479,11 @@ data SpanScore = SpanScore
 newSpanScore ::
   SpanScore
 newSpanScore =
-  SpanScore {begin = Core.Nothing, end = Core.Nothing, score = Core.Nothing}
+  SpanScore
+    { begin = Core.Nothing,
+      end = Core.Nothing,
+      score = Core.Nothing
+    }
 
 instance Core.FromJSON SpanScore where
   parseJSON =
@@ -569,8 +566,7 @@ instance Core.ToJSON SuggestCommentScoreRequest where
   toJSON SuggestCommentScoreRequest {..} =
     Core.object
       ( Core.catMaybes
-          [ ("attributeScores" Core..=)
-              Core.<$> attributeScores,
+          [ ("attributeScores" Core..=) Core.<$> attributeScores,
             ("clientToken" Core..=) Core.<$> clientToken,
             ("comment" Core..=) Core.<$> comment,
             ("communityId" Core..=) Core.<$> communityId,
@@ -590,8 +586,7 @@ instance Core.ToJSON SuggestCommentScoreRequest where
 --
 -- /See:/ 'newSuggestCommentScoreRequest_AttributeScores' smart constructor.
 newtype SuggestCommentScoreRequest_AttributeScores = SuggestCommentScoreRequest_AttributeScores
-  { -- |
-    additional :: (Core.HashMap Core.Text AttributeScores)
+  { additional :: (Core.HashMap Core.Text AttributeScores)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -601,12 +596,12 @@ newSuggestCommentScoreRequest_AttributeScores ::
   Core.HashMap Core.Text AttributeScores ->
   SuggestCommentScoreRequest_AttributeScores
 newSuggestCommentScoreRequest_AttributeScores additional =
-  SuggestCommentScoreRequest_AttributeScores {additional = additional}
+  SuggestCommentScoreRequest_AttributeScores
+    { additional =
+        additional
+    }
 
-instance
-  Core.FromJSON
-    SuggestCommentScoreRequest_AttributeScores
-  where
+instance Core.FromJSON SuggestCommentScoreRequest_AttributeScores where
   parseJSON =
     Core.withObject
       "SuggestCommentScoreRequest_AttributeScores"
@@ -615,10 +610,7 @@ instance
             Core.<$> (Core.parseJSONObject o)
       )
 
-instance
-  Core.ToJSON
-    SuggestCommentScoreRequest_AttributeScores
-  where
+instance Core.ToJSON SuggestCommentScoreRequest_AttributeScores where
   toJSON SuggestCommentScoreRequest_AttributeScores {..} =
     Core.toJSON additional
 
@@ -661,10 +653,8 @@ instance Core.ToJSON SuggestCommentScoreResponse where
     Core.object
       ( Core.catMaybes
           [ ("clientToken" Core..=) Core.<$> clientToken,
-            ("detectedLanguages" Core..=)
-              Core.<$> detectedLanguages,
-            ("requestedLanguages" Core..=)
-              Core.<$> requestedLanguages
+            ("detectedLanguages" Core..=) Core.<$> detectedLanguages,
+            ("requestedLanguages" Core..=) Core.<$> requestedLanguages
           ]
       )
 
@@ -690,14 +680,13 @@ instance Core.FromJSON TextEntry where
       "TextEntry"
       ( \o ->
           TextEntry
-            Core.<$> (o Core..:? "text") Core.<*> (o Core..:? "type")
+            Core.<$> (o Core..:? "text")
+            Core.<*> (o Core..:? "type")
       )
 
 instance Core.ToJSON TextEntry where
   toJSON TextEntry {..} =
     Core.object
       ( Core.catMaybes
-          [ ("text" Core..=) Core.<$> text,
-            ("type" Core..=) Core.<$> type'
-          ]
+          [("text" Core..=) Core.<$> text, ("type" Core..=) Core.<$> type']
       )

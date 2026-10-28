@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.FactCheckTools.Pages.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.FactCheckTools.Pages.List
 where
 
 import Gogol.FactCheckTools.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @factchecktools.pages.list@ method which the
 -- 'FactCheckToolsPagesList' request conforms to.
@@ -110,9 +108,7 @@ instance Core.GoogleRequest FactCheckToolsPagesList where
   type
     Rs FactCheckToolsPagesList =
       GoogleFactcheckingFactchecktoolsV1alpha1ListClaimReviewMarkupPagesResponse
-  type
-    Scopes FactCheckToolsPagesList =
-      '[Userinfo'Email]
+  type Scopes FactCheckToolsPagesList = '[Factchecktools'FullControl]
   requestClient FactCheckToolsPagesList {..} =
     go
       xgafv
@@ -130,7 +126,5 @@ instance Core.GoogleRequest FactCheckToolsPagesList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FactCheckToolsPagesListResource
-          )
+          (Core.Proxy :: Core.Proxy FactCheckToolsPagesListResource)
           Core.mempty

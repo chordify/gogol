@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,15 +17,16 @@
 
 -- |
 -- Module      : Gogol.AccessApproval
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
 -- An API for controlling access to data by Google personnel.
 --
--- /See:/ <https://cloud.google.com/cloud-provider-access-management/access-approval/docs Access Approval API Reference>
+-- /See:/ <https://cloud.google.com/assured-workloads/access-approval/docs Access Approval API Reference>
 module Gogol.AccessApproval
   ( -- * Configuration
     accessApprovalService,
@@ -186,6 +184,9 @@ module Gogol.AccessApproval
     AccessApprovalSettings (..),
     newAccessApprovalSettings,
 
+    -- ** AccessApprovalSettings_RequestScopeMaxWidthPreference
+    AccessApprovalSettings_RequestScopeMaxWidthPreference (..),
+
     -- ** AccessLocations
     AccessLocations (..),
     newAccessLocations,
@@ -208,6 +209,10 @@ module Gogol.AccessApproval
     -- ** ApproveDecision
     ApproveDecision (..),
     newApproveDecision,
+
+    -- ** AugmentedInfo
+    AugmentedInfo (..),
+    newAugmentedInfo,
 
     -- ** DismissApprovalRequestMessage
     DismissApprovalRequestMessage (..),
@@ -243,6 +248,9 @@ module Gogol.AccessApproval
     -- ** SignatureInfo
     SignatureInfo (..),
     newSignatureInfo,
+
+    -- ** SignatureInfo_GoogleKeyAlgorithm
+    SignatureInfo_GoogleKeyAlgorithm (..),
   )
 where
 

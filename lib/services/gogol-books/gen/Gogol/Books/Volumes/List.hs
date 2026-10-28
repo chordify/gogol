@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Books.Volumes.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Books.Volumes.List
 where
 
 import Gogol.Books.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @books.volumes.list@ method which the
 -- 'BooksVolumesList' request conforms to.
@@ -55,35 +53,21 @@ type BooksVolumesListResource =
     Core.:> Core.QueryParam "download" VolumesListDownload
     Core.:> Core.QueryParam "filter" VolumesListFilter
     Core.:> Core.QueryParam "langRestrict" Core.Text
-    Core.:> Core.QueryParam
-              "libraryRestrict"
-              VolumesListLibraryRestrict
+    Core.:> Core.QueryParam "libraryRestrict" VolumesListLibraryRestrict
     Core.:> Core.QueryParam
               "maxAllowedMaturityRating"
               VolumesListMaxAllowedMaturityRating
     Core.:> Core.QueryParam "maxResults" Core.Word32
     Core.:> Core.QueryParam "orderBy" VolumesListOrderBy
     Core.:> Core.QueryParam "partner" Core.Text
-    Core.:> Core.QueryParam
-              "printType"
-              VolumesListPrintType
-    Core.:> Core.QueryParam
-              "projection"
-              VolumesListProjection
+    Core.:> Core.QueryParam "printType" VolumesListPrintType
+    Core.:> Core.QueryParam "projection" VolumesListProjection
     Core.:> Core.QueryParam "showPreorders" Core.Bool
     Core.:> Core.QueryParam "source" Core.Text
-    Core.:> Core.QueryParam
-              "startIndex"
-              Core.Word32
-    Core.:> Core.QueryParam
-              "uploadType"
-              Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
-    Core.:> Core.QueryParam
-              "alt"
-              Core.AltJSON
+    Core.:> Core.QueryParam "startIndex" Core.Word32
+    Core.:> Core.QueryParam "uploadType" Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
+    Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] Volumes
 
 -- | Performs a book search.

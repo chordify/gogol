@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.DialogFlow.Projects.Locations.SecuritySettings.Create
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.DialogFlow.Projects.Locations.SecuritySettings.Create
 where
 
 import Gogol.DialogFlow.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @dialogflow.projects.locations.securitySettings.create@ method which the
 -- 'DialogFlowProjectsLocationsSecuritySettingsCreate' request conforms to.
@@ -54,12 +52,8 @@ type DialogFlowProjectsLocationsSecuritySettingsCreateResource =
     Core.:> Core.QueryParam "uploadType" Core.Text
     Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
-    Core.:> Core.ReqBody
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3SecuritySettings
-    Core.:> Core.Post
-              '[Core.JSON]
-              GoogleCloudDialogflowCxV3SecuritySettings
+    Core.:> Core.ReqBody '[Core.JSON] GoogleCloudDialogflowCxV3SecuritySettings
+    Core.:> Core.Post '[Core.JSON] GoogleCloudDialogflowCxV3SecuritySettings
 
 -- | Create security settings in the specified location.
 --
@@ -91,7 +85,8 @@ newDialogFlowProjectsLocationsSecuritySettingsCreate ::
   DialogFlowProjectsLocationsSecuritySettingsCreate
 newDialogFlowProjectsLocationsSecuritySettingsCreate parent payload =
   DialogFlowProjectsLocationsSecuritySettingsCreate
-    { xgafv = Core.Nothing,
+    { xgafv =
+        Core.Nothing,
       accessToken = Core.Nothing,
       callback = Core.Nothing,
       parent = parent,
@@ -105,30 +100,27 @@ instance
     DialogFlowProjectsLocationsSecuritySettingsCreate
   where
   type
-    Rs
-      DialogFlowProjectsLocationsSecuritySettingsCreate =
+    Rs DialogFlowProjectsLocationsSecuritySettingsCreate =
       GoogleCloudDialogflowCxV3SecuritySettings
   type
-    Scopes
-      DialogFlowProjectsLocationsSecuritySettingsCreate =
+    Scopes DialogFlowProjectsLocationsSecuritySettingsCreate =
       '[CloudPlatform'FullControl, Dialogflow'FullControl]
-  requestClient
-    DialogFlowProjectsLocationsSecuritySettingsCreate {..} =
-      go
-        parent
-        xgafv
-        accessToken
-        callback
-        uploadType
-        uploadProtocol
-        (Core.Just Core.AltJSON)
-        payload
-        dialogFlowService
-      where
-        go =
-          Core.buildClient
-            ( Core.Proxy ::
-                Core.Proxy
-                  DialogFlowProjectsLocationsSecuritySettingsCreateResource
-            )
-            Core.mempty
+  requestClient DialogFlowProjectsLocationsSecuritySettingsCreate {..} =
+    go
+      parent
+      xgafv
+      accessToken
+      callback
+      uploadType
+      uploadProtocol
+      (Core.Just Core.AltJSON)
+      payload
+      dialogFlowService
+    where
+      go =
+        Core.buildClient
+          ( Core.Proxy ::
+              Core.Proxy
+                DialogFlowProjectsLocationsSecuritySettingsCreateResource
+          )
+          Core.mempty

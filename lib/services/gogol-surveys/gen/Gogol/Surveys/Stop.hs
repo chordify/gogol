@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Surveys.Stop
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.Surveys.Stop
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.Surveys.Types
 
 -- | A resource alias for @surveys.surveys.stop@ method which the
@@ -57,8 +55,7 @@ type SurveysSurveysStopResource =
 --
 -- /See:/ 'newSurveysSurveysStop' smart constructor.
 newtype SurveysSurveysStop = SurveysSurveysStop
-  { -- |
-    resourceId :: Core.Text
+  { resourceId :: Core.Text
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
 
@@ -67,7 +64,8 @@ newSurveysSurveysStop ::
   -- |  See 'resourceId'.
   Core.Text ->
   SurveysSurveysStop
-newSurveysSurveysStop resourceId = SurveysSurveysStop {resourceId = resourceId}
+newSurveysSurveysStop resourceId =
+  SurveysSurveysStop {resourceId = resourceId}
 
 instance Core.GoogleRequest SurveysSurveysStop where
   type Rs SurveysSurveysStop = SurveysStopResponse
@@ -75,10 +73,7 @@ instance Core.GoogleRequest SurveysSurveysStop where
     Scopes SurveysSurveysStop =
       '[Surveys'FullControl, Userinfo'Email]
   requestClient SurveysSurveysStop {..} =
-    go
-      resourceId
-      (Core.Just Core.AltJSON)
-      surveysService
+    go resourceId (Core.Just Core.AltJSON) surveysService
     where
       go =
         Core.buildClient

@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeAnalytics.Internal.Product
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 module Gogol.YouTubeAnalytics.Internal.Product
@@ -76,7 +74,7 @@ module Gogol.YouTubeAnalytics.Internal.Product
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeAnalytics.Internal.Sum
 
 -- | Empty response.
@@ -101,8 +99,7 @@ instance Core.FromJSON EmptyResponse where
 
 instance Core.ToJSON EmptyResponse where
   toJSON EmptyResponse {..} =
-    Core.object
-      (Core.catMaybes [("errors" Core..=) Core.<$> errors])
+    Core.object (Core.catMaybes [("errors" Core..=) Core.<$> errors])
 
 -- | Describes one specific error.
 --
@@ -120,7 +117,6 @@ data ErrorProto = ErrorProto
     externalErrorMessage :: (Core.Maybe Core.Text),
     -- | Location of the error, as specified by the location type. If location/type is PATH, this should be a path to a field that\'s relative to the request, using FieldPath notation (net\/proto2\/util\/public\/field/path.h). Examples: authenticated/user.gaia/id resource.address[2].country
     location :: (Core.Maybe Core.Text),
-    -- |
     locationType :: (Core.Maybe ErrorProto_LocationType)
   }
   deriving (Core.Eq, Core.Show, Core.Generic)
@@ -162,8 +158,7 @@ instance Core.ToJSON ErrorProto where
             ("code" Core..=) Core.<$> code,
             ("debugInfo" Core..=) Core.<$> debugInfo,
             ("domain" Core..=) Core.<$> domain,
-            ("externalErrorMessage" Core..=)
-              Core.<$> externalErrorMessage,
+            ("externalErrorMessage" Core..=) Core.<$> externalErrorMessage,
             ("location" Core..=) Core.<$> location,
             ("locationType" Core..=) Core.<$> locationType
           ]
@@ -186,7 +181,11 @@ data Errors = Errors
 newErrors ::
   Errors
 newErrors =
-  Errors {code = Core.Nothing, error = Core.Nothing, requestId = Core.Nothing}
+  Errors
+    { code = Core.Nothing,
+      error = Core.Nothing,
+      requestId = Core.Nothing
+    }
 
 instance Core.FromJSON Errors where
   parseJSON =
@@ -283,7 +282,10 @@ data GroupContentDetails = GroupContentDetails
 newGroupContentDetails ::
   GroupContentDetails
 newGroupContentDetails =
-  GroupContentDetails {itemCount = Core.Nothing, itemType = Core.Nothing}
+  GroupContentDetails
+    { itemCount = Core.Nothing,
+      itemType = Core.Nothing
+    }
 
 instance Core.FromJSON GroupContentDetails where
   parseJSON =
@@ -291,9 +293,7 @@ instance Core.FromJSON GroupContentDetails where
       "GroupContentDetails"
       ( \o ->
           GroupContentDetails
-            Core.<$> ( o Core..:? "itemCount"
-                         Core.<&> Core.fmap Core.fromAsText
-                     )
+            Core.<$> (o Core..:? "itemCount" Core.<&> Core.fmap Core.fromAsText)
             Core.<*> (o Core..:? "itemType")
       )
 
@@ -301,8 +301,7 @@ instance Core.ToJSON GroupContentDetails where
   toJSON GroupContentDetails {..} =
     Core.object
       ( Core.catMaybes
-          [ ("itemCount" Core..=) Core.. Core.AsText
-              Core.<$> itemCount,
+          [ ("itemCount" Core..=) Core.. Core.AsText Core.<$> itemCount,
             ("itemType" Core..=) Core.<$> itemType
           ]
       )
@@ -388,16 +387,15 @@ instance Core.FromJSON GroupItemResource where
       "GroupItemResource"
       ( \o ->
           GroupItemResource
-            Core.<$> (o Core..:? "id") Core.<*> (o Core..:? "kind")
+            Core.<$> (o Core..:? "id")
+            Core.<*> (o Core..:? "kind")
       )
 
 instance Core.ToJSON GroupItemResource where
   toJSON GroupItemResource {..} =
     Core.object
       ( Core.catMaybes
-          [ ("id" Core..=) Core.<$> id,
-            ("kind" Core..=) Core.<$> kind
-          ]
+          [("id" Core..=) Core.<$> id, ("kind" Core..=) Core.<$> kind]
       )
 
 -- | A group snippet.

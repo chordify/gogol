@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.YouTubeAnalytics.Reports.Query
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -39,7 +37,7 @@ module Gogol.YouTubeAnalytics.Reports.Query
   )
 where
 
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 import Gogol.YouTubeAnalytics.Types
 
 -- | A resource alias for @youtubeAnalytics.reports.query@ method which the
@@ -55,18 +53,14 @@ type YouTubeAnalyticsReportsQueryResource =
     Core.:> Core.QueryParam "endDate" Core.Text
     Core.:> Core.QueryParam "filters" Core.Text
     Core.:> Core.QueryParam "ids" Core.Text
-    Core.:> Core.QueryParam
-              "includeHistoricalChannelData"
-              Core.Bool
+    Core.:> Core.QueryParam "includeHistoricalChannelData" Core.Bool
     Core.:> Core.QueryParam "maxResults" Core.Int32
     Core.:> Core.QueryParam "metrics" Core.Text
     Core.:> Core.QueryParam "sort" Core.Text
     Core.:> Core.QueryParam "startDate" Core.Text
     Core.:> Core.QueryParam "startIndex" Core.Int32
     Core.:> Core.QueryParam "uploadType" Core.Text
-    Core.:> Core.QueryParam
-              "upload_protocol"
-              Core.Text
+    Core.:> Core.QueryParam "upload_protocol" Core.Text
     Core.:> Core.QueryParam "alt" Core.AltJSON
     Core.:> Core.Get '[Core.JSON] QueryResponse
 
@@ -132,10 +126,7 @@ newYouTubeAnalyticsReportsQuery =
       uploadProtocol = Core.Nothing
     }
 
-instance
-  Core.GoogleRequest
-    YouTubeAnalyticsReportsQuery
-  where
+instance Core.GoogleRequest YouTubeAnalyticsReportsQuery where
   type Rs YouTubeAnalyticsReportsQuery = QueryResponse
   type
     Scopes YouTubeAnalyticsReportsQuery =
@@ -168,7 +159,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy YouTubeAnalyticsReportsQueryResource
-          )
+          (Core.Proxy :: Core.Proxy YouTubeAnalyticsReportsQueryResource)
           Core.mempty

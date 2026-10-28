@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.Fitness.Users.Sessions.List
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.Fitness.Users.Sessions.List
 where
 
 import Gogol.Fitness.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @fitness.users.sessions.list@ method which the
 -- 'FitnessUsersSessionsList' request conforms to.
@@ -113,9 +111,7 @@ newFitnessUsersSessionsList userId =
     }
 
 instance Core.GoogleRequest FitnessUsersSessionsList where
-  type
-    Rs FitnessUsersSessionsList =
-      ListSessionsResponse
+  type Rs FitnessUsersSessionsList = ListSessionsResponse
   type
     Scopes FitnessUsersSessionsList =
       '[ Fitness'Activity'Read,
@@ -159,7 +155,5 @@ instance Core.GoogleRequest FitnessUsersSessionsList where
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy FitnessUsersSessionsListResource
-          )
+          (Core.Proxy :: Core.Proxy FitnessUsersSessionsListResource)
           Core.mempty

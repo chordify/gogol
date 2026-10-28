@@ -1,16 +1,13 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PatternSynonyms #-}
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE StrictData #-}
 {-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing #-}
@@ -20,9 +17,10 @@
 
 -- |
 -- Module      : Gogol.AdSenseHost.Accounts.Adunits.Patch
--- Copyright   : (c) 2015-2022 Brendan Hay
+-- Copyright   : (c) 2015-2025 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
+--               Toni Cebrián <toni@tonicebrian.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
@@ -40,7 +38,7 @@ module Gogol.AdSenseHost.Accounts.Adunits.Patch
 where
 
 import Gogol.AdSenseHost.Types
-import qualified Gogol.Prelude as Core
+import Gogol.Prelude qualified as Core
 
 -- | A resource alias for @adsensehost.accounts.adunits.patch@ method which the
 -- 'AdSenseHostAccountsAdunitsPatch' request conforms to.
@@ -83,18 +81,19 @@ newAdSenseHostAccountsAdunitsPatch ::
   -- |  Multipart request metadata. See 'payload'.
   AdUnit ->
   AdSenseHostAccountsAdunitsPatch
-newAdSenseHostAccountsAdunitsPatch accountId adClientId adUnitId payload =
-  AdSenseHostAccountsAdunitsPatch
-    { accountId = accountId,
-      adClientId = adClientId,
-      adUnitId = adUnitId,
-      payload = payload
-    }
-
-instance
-  Core.GoogleRequest
+newAdSenseHostAccountsAdunitsPatch
+  accountId
+  adClientId
+  adUnitId
+  payload =
     AdSenseHostAccountsAdunitsPatch
-  where
+      { accountId = accountId,
+        adClientId = adClientId,
+        adUnitId = adUnitId,
+        payload = payload
+      }
+
+instance Core.GoogleRequest AdSenseHostAccountsAdunitsPatch where
   type Rs AdSenseHostAccountsAdunitsPatch = AdUnit
   type
     Scopes AdSenseHostAccountsAdunitsPatch =
@@ -110,7 +109,5 @@ instance
     where
       go =
         Core.buildClient
-          ( Core.Proxy ::
-              Core.Proxy AdSenseHostAccountsAdunitsPatchResource
-          )
+          (Core.Proxy :: Core.Proxy AdSenseHostAccountsAdunitsPatchResource)
           Core.mempty
